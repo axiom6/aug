@@ -1,0 +1,42 @@
+{
+  "name": "aug",
+  "version": "0.0.0",
+  "description": "Aug",
+  "author": "Tom Flaherty",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/axiom6/aug/issues"
+  },
+  "scripts": {
+    "muse": "rollup --config app/muse/rollup.config.js"
+  },
+  "dependencies": {
+    "vue": "^2.5.22"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "eslint-config-jwalker": "^5.2.0",
+    "eslint-plugin-vue": "^5.1.0",
+    "node-sass": "^4.11.0",
+    "rollup": "^1.7.3",
+    "rollup-plugin-buble": "^0.19.6",
+    "rollup-plugin-commonjs": "^9.3.0",
+    "rollup-plugin-eslint": "^5.0.0",
+    "rollup-plugin-filesize": "^6.0.0",
+    "rollup-plugin-less": "^1.1.2",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-vue": "^4.6.1",
+    "vue-template-compiler": "^2.5.22"
+  },
+  "devDependenciesGlobal": {
+    "coffee-script": ">=1.10.x",
+    "less": ">=2.7.x"
+  },
+  "engines": {
+    "node": ">=10.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/axiom6/cue.git"
+  }
+}
