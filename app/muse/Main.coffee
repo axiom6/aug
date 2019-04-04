@@ -5,7 +5,7 @@ import Stream from '../../pub/util/Stream.js'
 
 class Main
 
-  Data.local  = "http://localhost:63342/aug/pub/muse/"
+  Data.local  = "http://localhost:63342/aug/app/muse/"
   Data.hosted = "https://ui-48413.firebaseapp.com/"
 
   Main.begin  =  ( onReady ) ->

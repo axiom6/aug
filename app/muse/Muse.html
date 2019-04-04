@@ -9,15 +9,17 @@
   <body>
     <dash></dash>
     <script type="module">
-      import Vue  from 'lib/vue/vue.esm.browser.js';
-      import Main from './Main.js';
-      import Dash from './Dash.js';
+      import Vue    from '../../lib/vue/vue.esm.browser.js';
+      import Main   from './Main.js';
+      import Dash   from './Dash.js';
+      import Router from './Router.js'
 
       Vue['config'].productionTip = false;
       Vue['mixin']( Main.vueMixin );
       
       let onReady = () => {
         const app = new Vue( {
+          router:  Router,
           render:  h => h(Dash),
           mounted: function () {
             console.log( 'Dash', 'mounted' ); }
