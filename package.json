@@ -8,7 +8,10 @@
     "url": "https://github.com/axiom6/aug/issues"
   },
   "scripts": {
-    "muse": "rollup --config app/muse/rollup.config.js"
+    "dash": "rollup --config app/build/rollup.dash.js",
+    "info": "rollup --config app/build/rollup.info.js",
+    "know": "rollup --config app/build/rollup.know.js",
+    "wise": "rollup --config app/build/rollup.wise.js"
   },
   "dependencies": {
     "vue": "^2.5.22"
