@@ -8,5 +8,5 @@
 </script>
 
 <style type="module">
-     .trak { background-color:black; }
+     .trak { background-color:#333; }
 </style>

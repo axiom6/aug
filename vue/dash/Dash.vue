@@ -50,7 +50,7 @@
     #logo { grid-area:logo; justify-self:stretch; align-self:stretch; display:grid; }
     #navb { grid-area:navb; justify-self:stretch; align-self:stretch; display:grid; }
     #find { grid-area:find; justify-self:stretch; align-self:stretch; display:grid; }
-    #tocs { grid-area:tocs; justify-self:stretch; align-self:start;   display:grid; background-color:gray;  }
+    #tocs { grid-area:tocs; justify-self:stretch; align-self:stretch; display:grid; }
     #view { grid-area:view; justify-self:stretch; align-self:stretch; display:grid; }
     #side { grid-area:side; justify-self:stretch; align-self:stretch; display:grid; }
     #pref { grid-area:pref; justify-self:stretch; align-self:stretch; display:grid; }
@@ -58,13 +58,3 @@
     #trak { grid-area:trak; justify-self:stretch; align-self:stretch; display:grid; } }
   
 </style>
-
-/* Static Imports
-  import Info from '../muse/Info.vue';
-  import Know from '../muse/Know.vue';
-  import Wise from '../muse/Wise.vue';
-  
-  Dash.Info = Info;
-  Dash.Know = Know;
-  Dash.Wise = Wise;
-*/

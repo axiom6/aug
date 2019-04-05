@@ -22,6 +22,24 @@
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var script = {
   data() { return { prac:"None", all:true } },
@@ -243,7 +261,13 @@ var __vue_staticRenderFns__ = [
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c("div", { staticClass: "pane" }, [
-      _c("div", { staticClass: "name" }, [_vm._v("Collab")])
+      _c("div", { staticClass: "cen" }, [_c("div", [_vm._v("Collab")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "west" }, [_c("div", [_vm._v("Respond")])]),
+      _c("div", { staticClass: "north" }, [_c("div", [_vm._v("Charter")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "east" }, [_c("div", [_vm._v("Team")])]),
+      _c("div", { staticClass: "south" }, [_c("div", [_vm._v("Activity")])])
     ])
   },
   function() {
@@ -251,7 +275,13 @@ var __vue_staticRenderFns__ = [
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c("div", { staticClass: "pane" }, [
-      _c("div", { staticClass: "name" }, [_vm._v("Domain")])
+      _c("div", { staticClass: "cen" }, [_c("div", [_vm._v("Domain")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "west" }, [_c("div", [_vm._v("Entitle")])]),
+      _c("div", { staticClass: "north" }, [_c("div", [_vm._v("Propose")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "east" }, [_c("div", [_vm._v("Acquire")])]),
+      _c("div", { staticClass: "south" }, [_c("div", [_vm._v("Portfolio")])])
     ])
   },
   function() {
@@ -259,7 +289,13 @@ var __vue_staticRenderFns__ = [
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c("div", { staticClass: "pane" }, [
-      _c("div", { staticClass: "name" }, [_vm._v("Discover")])
+      _c("div", { staticClass: "cen" }, [_c("div", [_vm._v("Discover")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "west" }, [_c("div", [_vm._v("Insight")])]),
+      _c("div", { staticClass: "north" }, [_c("div", [_vm._v("Strategy")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "east" }, [_c("div", [_vm._v("Vision")])]),
+      _c("div", { staticClass: "south" }, [_c("div", [_vm._v("Market")])])
     ])
   },
   function() {
@@ -267,7 +303,13 @@ var __vue_staticRenderFns__ = [
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c("div", { staticClass: "pane" }, [
-      _c("div", { staticClass: "name" }, [_vm._v("Adapt")])
+      _c("div", { staticClass: "cen" }, [_c("div", [_vm._v("Adapt")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "west" }, [_c("div", [_vm._v("Feature")])]),
+      _c("div", { staticClass: "north" }, [_c("div", [_vm._v("Status")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "east" }, [_c("div", [_vm._v("Guide")])]),
+      _c("div", { staticClass: "south" }, [_c("div", [_vm._v("Module")])])
     ])
   },
   function() {
@@ -275,7 +317,13 @@ var __vue_staticRenderFns__ = [
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c("div", { staticClass: "pane" }, [
-      _c("div", { staticClass: "name" }, [_vm._v("Make")])
+      _c("div", { staticClass: "cen" }, [_c("div", [_vm._v("Make")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "west" }, [_c("div", [_vm._v("UX")])]),
+      _c("div", { staticClass: "north" }, [_c("div", [_vm._v("Service")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "east" }, [_c("div", [_vm._v("Model")])]),
+      _c("div", { staticClass: "south" }, [_c("div", [_vm._v("Cloud")])])
     ])
   },
   function() {
@@ -283,7 +331,13 @@ var __vue_staticRenderFns__ = [
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c("div", { staticClass: "pane" }, [
-      _c("div", { staticClass: "name" }, [_vm._v("Benefit")])
+      _c("div", { staticClass: "cen" }, [_c("div", [_vm._v("Benefit")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "west" }, [_c("div", [_vm._v("Interpret")])]),
+      _c("div", { staticClass: "north" }, [_c("div", [_vm._v("Design")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "east" }, [_c("div", [_vm._v("Realize")])]),
+      _c("div", { staticClass: "south" }, [_c("div", [_vm._v("Review")])])
     ])
   },
   function() {
@@ -291,7 +345,13 @@ var __vue_staticRenderFns__ = [
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c("div", { staticClass: "pane" }, [
-      _c("div", { staticClass: "name" }, [_vm._v("Change")])
+      _c("div", { staticClass: "cen" }, [_c("div", [_vm._v("Change")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "west" }, [_c("div", [_vm._v("Transition")])]),
+      _c("div", { staticClass: "north" }, [_c("div", [_vm._v("Proof")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "east" }, [_c("div", [_vm._v("Deploy")])]),
+      _c("div", { staticClass: "south" }, [_c("div", [_vm._v("Sight")])])
     ])
   },
   function() {
@@ -299,7 +359,14 @@ var __vue_staticRenderFns__ = [
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c("div", { staticClass: "pane" }, [
-      _c("div", { staticClass: "name" }, [_vm._v("Deliver")])
+      _c("div", { staticClass: "cen" }, [_c("div", [_vm._v("Deliver")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "west" }, [_c("div", [_vm._v("Support")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "north" }, [_c("div", [_vm._v("Network")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "east" }, [_c("div", [_vm._v("Simulate")])]),
+      _c("div", { staticClass: "south" }, [_c("div", [_vm._v("Secure")])])
     ])
   },
   function() {
@@ -307,7 +374,13 @@ var __vue_staticRenderFns__ = [
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
     return _c("div", { staticClass: "pane" }, [
-      _c("div", { staticClass: "name" }, [_vm._v("Govern")])
+      _c("div", { staticClass: "cen" }, [_c("div", [_vm._v("Govern")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "west" }, [_c("div", [_vm._v("Advise")])]),
+      _c("div", { staticClass: "north" }, [_c("div", [_vm._v("Maturity")])]),
+      _vm._v(" "),
+      _c("div", { staticClass: "east" }, [_c("div", [_vm._v("Impact")])]),
+      _c("div", { staticClass: "south" }, [_c("div", [_vm._v("What")])])
     ])
   }
 ];
@@ -316,7 +389,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-4ac7ca64_0", { source: ".view {\n  background-color: grey;\n  display: grid;\n  position: relative;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n  justify-items: center;\n  align-items: center;\n}\n.view .nw {\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .ne {\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .sw {\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .se {\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .pane {\n  font-size: 1.5em;\n  width: 90%;\n  height: 80%;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.view .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.view .all {\n  position: absolute;\n  left: 3%;\n  top: 3%;\n  right: 3%;\n  bottom: 3%;\n  display: grid;\n}\n.view .all .pane {\n  font-size: 1.5em;\n  width: 100%;\n  height: 100%;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.view .all .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Info.vue","/Users/ax/Documents/prj/aug/vue/muse/Info.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,aAAa;EACb,kBAAkB;EAClB,mCAAmC;EACnC,gCAAgC;EAChC,sEAAsE;EACtE,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;ECCjB,qBAAA;EDCE,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,WAAW;EACX,qBAAqB;EACrB,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;AACtB;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,WAAW;EACX,YAAY;EACZ,qBAAqB;EACrB,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;AACtB;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB","file":"Info.vue","sourcesContent":[".view {\n  background-color: grey;\n  display: grid;\n  position: relative;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n  justify-items: center;\n  align-items: center;\n}\n.view .nw {\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .ne {\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .sw {\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .se {\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .pane {\n  font-size: 1.5em;\n  width: 90%;\n  height: 80%;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.view .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.view .all {\n  position: absolute;\n  left: 3%;\n  top: 3%;\n  right: 3%;\n  bottom: 3%;\n  display: grid;\n}\n.view .all .pane {\n  font-size: 1.5em;\n  width: 100%;\n  height: 100%;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.view .all .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n","\n<template>\n  <div class=\"view\">\n    <div id=\"Collab\"   v-if=\"isPrac('Collab')\" :class=\"klass('nw')\"    >\n      <div class=\"pane\"><div class=\"name\">Collab</div></div></div>\n    <div id=\"Domain\"   v-if=\"isPrac('Domain')\" :class=\"klass('north')\"    >\n      <div class=\"pane\"><div class=\"name\">Domain</div></div></div>\n    <div id=\"Discover\" v-if=\"isPrac('Discover')\" :class=\"klass('ne')\"    >\n      <div class=\"pane\"><div class=\"name\">Discover</div></div></div>\n    <div id=\"Adapt\"    v-if=\"isPrac('Adapt')\" :class=\"klass('west')\"    >\n      <div class=\"pane\"><div class=\"name\">Adapt</div></div></div>\n    <div id=\"Make\"     v-if=\"isPrac('Make')\" :class=\"klass('cen')\"    >\n      <div class=\"pane\"><div class=\"name\">Make</div></div></div>\n    <div id=\"Benefit\"  v-if=\"isPrac('Benefit')\" :class=\"klass('east')\"    >\n      <div class=\"pane\"><div class=\"name\">Benefit</div></div></div>\n    <div id=\"Change\"   v-if=\"isPrac('Change')\" :class=\"klass('sw')\"    >\n      <div class=\"pane\"><div class=\"name\">Change</div></div></div>\n    <div id=\"Deliver\"   v-if=\"isPrac('Deliver')\" :class=\"klass('south')\"    >\n      <div class=\"pane\"><div class=\"name\">Deliver</div></div></div>\n    <div id=\"Govern\"   v-if=\"isPrac('Govern')\" :class=\"klass('se')\"    >\n      <div class=\"pane\"><div class=\"name\">Govern</div></div></div>\n  </div>\n</template>\n\n<script type=\"module\">\n  export default {\n    data() { return { prac:\"None\", all:true } },\n    methods: {\n      isPrac: function (prac) {\n        return this.prac===prac || this.all; },\n      onPrac: function (prac) {\n        // console.log( 'Info.onPrac', { all:this.all, prac:this.prac } );\n        if( prac==='Info' ) { this.all=true; } else { this.all=false; this.prac=prac; } },\n      klass: function(klas) {\n        return !this.all ? 'all' : klas; } },\n    mounted: function () {\n      // console.log( 'Info.vue', 'mounted' );\n      this.subscribe( 'Info', 'Info.vue', (prac) => this.onPrac(prac) ); }\n  }\n</script>\n\n<style lang=\"less\">\n @import \"View.less\";\n</style>\n\n"]}, media: undefined });
+    inject("data-v-49ff7941_0", { source: ".view {\n  background-color: black;\n  display: grid;\n  position: relative;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n  justify-items: center;\n  align-items: center;\n}\n.view .nw {\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .ne {\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .sw {\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .se {\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .pane {\n  width: 90%;\n  height: 80%;\n  background-color: #603;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n  font-size: 3vh;\n  font-weight: bold;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n}\n.view .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n}\n.view .pane .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: coral;\n  border-radius: 36px;\n  font-size: 4vh;\n}\n.view .pane .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: springgreen;\n  border-radius: 36px;\n}\n.view .pane .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: gold;\n  border-radius: 36px;\n}\n.view .pane .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: salmon;\n  border-radius: 36px;\n}\n.view .pane .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: peru;\n  border-radius: 36px;\n}\n.view .pane div div {\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n}\n.view .all {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.view .all .pane {\n  font-size: 1.5em;\n  width: 100%;\n  height: 100%;\n  background-color: #603;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.view .all .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Info.vue","/Users/ax/Documents/prj/aug/vue/muse/Info.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,aAAa;EACb,kBAAkB;EAClB,mCAAmC;EACnC,gCAAgC;EAChC,sEAAsE;EACtE,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,aAAa;ECCf,qBAAA;EDCE,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,UAAU;EACV,WAAW;EACX,sBAAsB;EACtB,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;EACpB,cAAc;EACd,iBAAiB;EACjB,mCAAmC;EACnC,gCAAgC;EAChC,sEAAsE;AACxE;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,kBAAkB;EAClB,oBAAoB;EACpB,kBAAkB;AACpB;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,iBAAiB;EACjB,mBAAmB;EACnB,cAAc;AAChB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,mBAAmB;AACrB;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,gBAAgB;EAChB,mBAAmB;AACrB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,kBAAkB;EAClB,mBAAmB;AACrB;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,gBAAgB;EAChB,mBAAmB;AACrB;AACA;EACE,kBAAkB;EAClB,oBAAoB;EACpB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,WAAW;EACX,YAAY;EACZ,sBAAsB;EACtB,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;AACtB;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB","file":"Info.vue","sourcesContent":[".view {\n  background-color: black;\n  display: grid;\n  position: relative;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n  justify-items: center;\n  align-items: center;\n}\n.view .nw {\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .ne {\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .sw {\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .se {\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .pane {\n  width: 90%;\n  height: 80%;\n  background-color: #603;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n  font-size: 3vh;\n  font-weight: bold;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n}\n.view .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n}\n.view .pane .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: coral;\n  border-radius: 36px;\n  font-size: 4vh;\n}\n.view .pane .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: springgreen;\n  border-radius: 36px;\n}\n.view .pane .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: gold;\n  border-radius: 36px;\n}\n.view .pane .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: salmon;\n  border-radius: 36px;\n}\n.view .pane .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: peru;\n  border-radius: 36px;\n}\n.view .pane div div {\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n}\n.view .all {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.view .all .pane {\n  font-size: 1.5em;\n  width: 100%;\n  height: 100%;\n  background-color: #603;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.view .all .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n","\n<template>\n  <div class=\"view\">\n    <div id=\"Collab\"   v-if=\"isPrac('Collab')\" :class=\"klass('nw')\"    >\n      <div class=\"pane\"><div class=\"cen\"><div>Collab</div></div>\n        <div class=\"west\"><div>Respond</div></div><div class=\"north\"><div>Charter</div></div>\n        <div class=\"east\"><div>Team</div>   </div><div class=\"south\"><div>Activity</div></div></div></div>\n    <div id=\"Domain\"   v-if=\"isPrac('Domain')\" :class=\"klass('north')\"    >\n      <div class=\"pane\"><div class=\"cen\"><div>Domain</div></div>\n        <div class=\"west\"><div>Entitle</div></div><div class=\"north\"><div>Propose</div></div>\n        <div class=\"east\"><div>Acquire</div>   </div><div class=\"south\"><div>Portfolio</div></div></div></div>\n    <div id=\"Discover\" v-if=\"isPrac('Discover')\" :class=\"klass('ne')\"    >\n      <div class=\"pane\"><div class=\"cen\"><div>Discover</div></div>\n        <div class=\"west\"><div>Insight</div></div><div class=\"north\"><div>Strategy</div></div>\n        <div class=\"east\"><div>Vision</div>   </div><div class=\"south\"><div>Market</div></div></div></div>\n    <div id=\"Adapt\"    v-if=\"isPrac('Adapt')\" :class=\"klass('west')\"    >\n      <div class=\"pane\"><div class=\"cen\"><div>Adapt</div></div>\n        <div class=\"west\"><div>Feature</div></div><div class=\"north\"><div>Status</div></div>\n        <div class=\"east\"><div>Guide</div>   </div><div class=\"south\"><div>Module</div></div></div></div>\n    <div id=\"Make\"     v-if=\"isPrac('Make')\" :class=\"klass('cen')\"    >\n      <div class=\"pane\"><div class=\"cen\"><div>Make</div></div>\n        <div class=\"west\"><div>UX</div></div><div class=\"north\"><div>Service</div></div>\n        <div class=\"east\"><div>Model</div>   </div><div class=\"south\"><div>Cloud</div></div></div></div>\n    <div id=\"Benefit\"  v-if=\"isPrac('Benefit')\" :class=\"klass('east')\"    >\n      <div class=\"pane\"><div class=\"cen\"><div>Benefit</div></div>\n        <div class=\"west\"><div>Interpret</div></div><div class=\"north\"><div>Design</div></div>\n        <div class=\"east\"><div>Realize</div>   </div><div class=\"south\"><div>Review</div></div></div></div>\n    <div id=\"Change\"   v-if=\"isPrac('Change')\" :class=\"klass('sw')\"    >\n      <div class=\"pane\"><div class=\"cen\"><div>Change</div></div>\n        <div class=\"west\"><div>Transition</div></div><div class=\"north\"><div>Proof</div></div>\n        <div class=\"east\"><div>Deploy</div>   </div><div class=\"south\"><div>Sight</div></div></div></div>\n    <div id=\"Deliver\"   v-if=\"isPrac('Deliver')\" :class=\"klass('south')\"    >\n      <div class=\"pane\"><div class=\"cen\"><div>Deliver</div></div>\n        <div class=\"west\"><div>Support</div></div> <div class=\"north\"><div>Network</div></div>\n        <div class=\"east\"><div>Simulate</div></div><div class=\"south\"><div>Secure</div></div></div></div>\n    <div id=\"Govern\"   v-if=\"isPrac('Govern')\" :class=\"klass('se')\"    >\n      <div class=\"pane\"><div class=\"cen\"><div>Govern</div></div>\n        <div class=\"west\"><div>Advise</div></div><div class=\"north\"><div>Maturity</div></div>\n        <div class=\"east\"><div>Impact</div>   </div><div class=\"south\"><div>What</div></div></div></div>\n  </div>\n</template>\n\n<script type=\"module\">\n  export default {\n    data() { return { prac:\"None\", all:true } },\n    methods: {\n      isPrac: function (prac) {\n        return this.prac===prac || this.all; },\n      onPrac: function (prac) {\n        // console.log( 'Info.onPrac', { all:this.all, prac:this.prac } );\n        if( prac==='Info' ) { this.all=true; } else { this.all=false; this.prac=prac; } },\n      klass: function(klas) {\n        return !this.all ? 'all' : klas; } },\n    mounted: function () {\n      // console.log( 'Info.vue', 'mounted' );\n      this.subscribe( 'Info', 'Info.vue', (prac) => this.onPrac(prac) ); }\n  }\n</script>\n\n<style lang=\"less\">\n @import \"View.less\";\n</style>\n\n"]}, media: undefined });
 
   };
   /* scoped */

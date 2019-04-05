@@ -63,27 +63,13 @@
 </script>
 
 <style lang="less">
-.tocs { background-color:darkgrey;
-  ul    { margin:0; padding:0; list-style: none;
-    li    { margin:0; background-color:black; color:white; border:white solid 1px; padding-left:0.25em;
-       a    { color:white; text-decoration:none; }
-       ul { margin-left:1em; } }
-    li:hover { margin:0; background-color:white; color:black; border:white solid 1px;
-       a       { color:black; text-decoration:none; } } } }
+.tocs { background-color:black;
+  ul { padding:0; list-style: none; align-self:start; font-size:3vh; display:grid;
+    li  { background-color:#333; padding-left:0.25em; align-self:start;
+          border-radius:0 24px 24px 0; margin:0.2em 0.2em 0.2em 0.2em;
+       a  { color:white; text-decoration:none; }
+       ul { font-size:2vh;
+         li {  border-radius:0 12px 12px 0; color:white;   margin:0.2em 0.2em 0.2em 0.2em; border:none;
+                    background-color:#666; }
+         li:hover { background-color:white; color:black; } } } } }
 </style>
-
-/*
-  <!--ul>
-  path:'/info', path:'/know', path:'/wise',
-    <li @click="doSelect('Collaborate')">Collaborate</li>
-    <li @click="doSelect('Domain')"     >Domain</li>
-    <li @click="doSelect('Discover')"   >Discover</li>
-    <li @click="doSelect('Adapt')"      >Adapt</li>
-    <li @click="doSelect('Technology')" >Technology</li>
-    <li @click="doSelect('Benefit')"    >Benefit</li>
-    <li @click="doSelect('Change')"     >Change</li>
-    <li @click="doSelect('Deliver')"    >Deliver</li>
-    <li @click="doSelect('Govern')"     >Govern</li>
-    <li @click="doSelect('View')"       >View</li>
-  </ul-->
-*/
