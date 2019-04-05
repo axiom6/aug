@@ -31,14 +31,6 @@
         'd-logo':Logo, 'd-navb':Navb, 'd-find':Find,
         'd-tocs':Tocs, 'd-view':View, 'd-side':Side,
         'd-pref':Pref, 'd-foot':Foot, 'd-trak':Trak } };
-
-  import Info from '../muse/Info.vue';
-  import Know from '../muse/Know.vue';
-  import Wise from '../muse/Wise.vue';
-
-  Dash.Info = Info;
-  Dash.Know = Know;
-  Dash.Wise = Wise;
   
   export default Dash;
   
@@ -66,3 +58,13 @@
     #trak { grid-area:trak; justify-self:stretch; align-self:stretch; display:grid; } }
   
 </style>
+
+/* Static Imports
+  import Info from '../muse/Info.vue';
+  import Know from '../muse/Know.vue';
+  import Wise from '../muse/Wise.vue';
+  
+  Dash.Info = Info;
+  Dash.Know = Know;
+  Dash.Wise = Wise;
+*/

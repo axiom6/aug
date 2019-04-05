@@ -15,16 +15,16 @@ class Main
 
   Main.init = ( data ) ->
     Main.Spec   = data;
-    subjects = ["Ready","Select","Choice","Test"]
+    subjects = ["Info","Know","Wise"]
     subjects = subjects.concat( Main.NavbSubjects )
-    infoSpec = { subscribe:false, publish:false, subjects:["Select","Choice","Test"]}
+    infoSpec = { subscribe:false, publish:false, subjects:subjects}
     Main.stream = new Stream( subjects, infoSpec )
     Main.onReady()
     return
 
   Main.vueMixin = {
     created:() ->
-       console.log( 'Main.vueMixin.created() globally' )
+       # console.log( 'Main.vueMixin.created() globally' )
        return
     methods: {
       subscribe:( subject, source, onMethod ) ->

@@ -1,55 +1,47 @@
 
 <template>
-  <div class="view">
-    <div id="Humanity"    class="nw"     ><div class="pane"><div class="name">Humanity</div></div></div>
-    <div id="Science"     class="north"  ><div class="pane"><div class="name">Science</div></div></div>
-    <div id="Understand"  class="ne"     ><div class="pane"><div class="name">Understand</div></div></div>
-    <div id="Orchestrate" class="west"   ><div class="pane"><div class="name">Orchestrate</div></div></div>
-    <div id="Cognition"   class="cen"    ><div class="pane"><div class="name">Cognition</div></div></div>
-    <div id="Reason"      class="east"   ><div class="pane"><div class="name">Reason</div></div></div>
-    <div id="Evolve"      class="sw"     ><div class="pane"><div class="name">Evolve</div></div></div>
-    <div id="Educate"     class="south"  ><div class="pane"><div class="name">Educate</div></div></div>
-    <div id="Culture"     class="se"     ><div class="pane"><div class="name">Culture</div></div></div>
-  </div>
+<div class="view">
+  <div id="Human"   v-if="isPrac('Human')"   :class="klass('nw')">
+    <div class="pane"><div class="name">Human</div></div></div>
+  <div id="Science" v-if="isPrac('Science')" :class="klass('north')" >
+    <div class="pane"><div class="name">Science</div></div></div>
+  <div id="Grasp"   v-if="isPrac('Grasp')"   :class="klass('ne')"    >
+    <div class="pane"><div class="name">Grasp</div></div></div>
+  <div id="Conduct" v-if="isPrac('Conduct')" :class="klass('west')"  >
+    <div class="pane"><div class="name">Conduct</div></div></div>
+  <div id="Think"   v-if="isPrac('Think')"   :class="klass('cen')"   >
+    <div class="pane"><div class="name">Think</div></div></div>
+  <div id="Reason"  v-if="isPrac('Reason')"  :class="klass('east')"  >
+    <div class="pane"><div class="name">Reason</div></div></div>
+  <div id="Evolve"  v-if="isPrac('Evolve')"  :class="klass('sw')"    >
+    <div class="pane"><div class="name">Evolve</div></div></div>
+  <div id="Educate" v-if="isPrac('Educate')" :class="klass('south')" >
+    <div class="pane"><div class="name">Educate</div></div></div>
+  <div id="Culture" v-if="isPrac('Culture')" :class="klass('se')"    >
+    <div class="pane"><div class="name">Culture</div></div></div>
+</div>
 </template>
 
 <script type="module">
   export default {
-    data() { return { sel:"Info" } },
+    data() { return { prac:"None", all:true } },
     methods: {
-      onSelect: function (select) {
-        this.sel =  select;
-        console.log( 'view.vue', select ); } },
+      isPrac: function (prac) {
+        return this.prac===prac || this.all; },
+      onPrac: function (prac) {
+        // console.log( 'Know.onPrac', { all:this.all, prac:this.prac } );
+        if( prac==='Know' ) { this.all=true; } else { this.all=false; this.prac=prac; } },
+      klass: function(klas) {
+        return !this.all ? 'all' : klas;
+      } },
     mounted: function () {
-      console.log( 'Know.vue', 'mounted' );
-      this.subscribe( 'Select', 'view.vue', (select) => this.onSelect(select) ); }
+      this.prac = 'Know';
+      // console.log( 'Know.vue', 'mounted' );
+      this.subscribe( 'Know', 'Know.vue', (prac) => this.onPrac(prac) ); }
   }
 </script>
 
 <style lang="less">
-  .view { background-color:grey;
-    display:grid;
-    grid-template-columns: 33%  33% 34%;
-    grid-template-rows:    33%  33% 34%;
-    grid-template-areas:
-      "nw   north ne"
-      "west cen   east"
-      "sw   south se";
-    justify-items:center; align-items:center;
-    .nw     { grid-area:nw;    justify-self:stretch; align-self:stretch; display:grid; }
-    .north  { grid-area:north; justify-self:stretch; align-self:stretch; display:grid; }
-    .ne     { grid-area:ne;    justify-self:stretch; align-self:stretch; display:grid; }
-    .west   { grid-area:west;  justify-self:stretch; align-self:stretch; display:grid; }
-    .cen    { grid-area:cen;   justify-self:stretch; align-self:stretch; display:grid; }
-    .east   { grid-area:east;  justify-self:stretch; align-self:stretch; display:grid; }
-    .sw     { grid-area:sw;    justify-self:stretch; align-self:stretch; display:grid; }
-    .south  { grid-area:south; justify-self:stretch; align-self:stretch; display:grid; }
-    .se     { grid-area:se;    justify-self:stretch; align-self:stretch; display:grid; }
-    .pane { font-size:1.5em; width:90%; height:80%; background-color:tan;
-      justify-self:center; align-self:center; display:grid; border-radius:0.5em; }
-    .pane .name  { font-size:2em; background-color:tan;
-      justify-self:center; align-self:center; text-align:center; }
-  }
-
+  @import "View.less";
 </style>
 

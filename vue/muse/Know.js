@@ -13,16 +13,31 @@
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var script = {
-  data() { return { sel:"Info" } },
+  data() { return { prac:"None", all:true } },
   methods: {
-    onSelect: function (select) {
-      this.sel =  select;
-      console.log( 'view.vue', select ); } },
+    isPrac: function (prac) {
+      return this.prac===prac || this.all; },
+    onPrac: function (prac) {
+      // console.log( 'Know.onPrac', { all:this.all, prac:this.prac } );
+      if( prac==='Know' ) { this.all=true; } else { this.all=false; this.prac=prac; } },
+    klass: function(klas) {
+      return !this.all ? 'all' : klas;
+    } },
   mounted: function () {
-    console.log( 'Know.vue', 'mounted' );
-    this.subscribe( 'Select', 'view.vue', (select) => this.onSelect(select) ); }
+    this.prac = 'Know';
+    // console.log( 'Know.vue', 'mounted' );
+    this.subscribe( 'Know', 'Know.vue', (prac) => this.onPrac(prac) ); }
 };
 
 function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
@@ -168,67 +183,133 @@ var __vue_render__ = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _vm._m(0)
+  return _c("div", { staticClass: "view" }, [
+    _vm.isPrac("Human")
+      ? _c("div", { class: _vm.klass("nw"), attrs: { id: "Human" } }, [
+          _vm._m(0)
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.isPrac("Science")
+      ? _c("div", { class: _vm.klass("north"), attrs: { id: "Science" } }, [
+          _vm._m(1)
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.isPrac("Grasp")
+      ? _c("div", { class: _vm.klass("ne"), attrs: { id: "Grasp" } }, [
+          _vm._m(2)
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.isPrac("Conduct")
+      ? _c("div", { class: _vm.klass("west"), attrs: { id: "Conduct" } }, [
+          _vm._m(3)
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.isPrac("Think")
+      ? _c("div", { class: _vm.klass("cen"), attrs: { id: "Think" } }, [
+          _vm._m(4)
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.isPrac("Reason")
+      ? _c("div", { class: _vm.klass("east"), attrs: { id: "Reason" } }, [
+          _vm._m(5)
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.isPrac("Evolve")
+      ? _c("div", { class: _vm.klass("sw"), attrs: { id: "Evolve" } }, [
+          _vm._m(6)
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.isPrac("Educate")
+      ? _c("div", { class: _vm.klass("south"), attrs: { id: "Educate" } }, [
+          _vm._m(7)
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.isPrac("Culture")
+      ? _c("div", { class: _vm.klass("se"), attrs: { id: "Culture" } }, [
+          _vm._m(8)
+        ])
+      : _vm._e()
+  ])
 };
 var __vue_staticRenderFns__ = [
   function() {
     var _vm = this;
     var _h = _vm.$createElement;
     var _c = _vm._self._c || _h;
-    return _c("div", { staticClass: "view" }, [
-      _c("div", { staticClass: "nw", attrs: { id: "Humanity" } }, [
-        _c("div", { staticClass: "pane" }, [
-          _c("div", { staticClass: "name" }, [_vm._v("Humanity")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "north", attrs: { id: "Science" } }, [
-        _c("div", { staticClass: "pane" }, [
-          _c("div", { staticClass: "name" }, [_vm._v("Science")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "ne", attrs: { id: "Understand" } }, [
-        _c("div", { staticClass: "pane" }, [
-          _c("div", { staticClass: "name" }, [_vm._v("Understand")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "west", attrs: { id: "Orchestrate" } }, [
-        _c("div", { staticClass: "pane" }, [
-          _c("div", { staticClass: "name" }, [_vm._v("Orchestrate")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "cen", attrs: { id: "Cognition" } }, [
-        _c("div", { staticClass: "pane" }, [
-          _c("div", { staticClass: "name" }, [_vm._v("Cognition")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "east", attrs: { id: "Reason" } }, [
-        _c("div", { staticClass: "pane" }, [
-          _c("div", { staticClass: "name" }, [_vm._v("Reason")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "sw", attrs: { id: "Evolve" } }, [
-        _c("div", { staticClass: "pane" }, [
-          _c("div", { staticClass: "name" }, [_vm._v("Evolve")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "south", attrs: { id: "Educate" } }, [
-        _c("div", { staticClass: "pane" }, [
-          _c("div", { staticClass: "name" }, [_vm._v("Educate")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "se", attrs: { id: "Culture" } }, [
-        _c("div", { staticClass: "pane" }, [
-          _c("div", { staticClass: "name" }, [_vm._v("Culture")])
-        ])
-      ])
+    return _c("div", { staticClass: "pane" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("Human")])
+    ])
+  },
+  function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "pane" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("Science")])
+    ])
+  },
+  function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "pane" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("Grasp")])
+    ])
+  },
+  function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "pane" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("Conduct")])
+    ])
+  },
+  function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "pane" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("Think")])
+    ])
+  },
+  function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "pane" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("Reason")])
+    ])
+  },
+  function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "pane" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("Evolve")])
+    ])
+  },
+  function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "pane" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("Educate")])
+    ])
+  },
+  function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "pane" }, [
+      _c("div", { staticClass: "name" }, [_vm._v("Culture")])
     ])
   }
 ];
@@ -237,7 +318,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-3e9427d0_0", { source: ".view {\n  background-color: grey;\n  display: grid;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n  justify-items: center;\n  align-items: center;\n}\n.view .nw {\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .ne {\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .sw {\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .se {\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .pane {\n  font-size: 1.5em;\n  width: 90%;\n  height: 80%;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.view .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Know.vue","/Users/ax/Documents/prj/aug/vue/muse/Know.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,aAAa;EACb,mCAAmC;EACnC,gCAAgC;EAChC,sEAAsE;EACtE,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;ECCjB,qBAAA;EACA,mBAAA;EACA,aAAA;AACA;AACA;EACA,cAAA;EACA,qBAAA;EACA,mBAAA;EACA,aAAA;AACA;AACA;EACA,eAAA;EACA,qBAAA;EACA,mBAAA;EACA,aAAA;AACA;AACA;EACA,aAAA;EACA,qBAAA;EACA,mBAAA;EACA,aAAA;AACA;AACA;EDCE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,WAAW;EACX,qBAAqB;EACrB,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;AACtB;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB","file":"Know.vue","sourcesContent":[".view {\n  background-color: grey;\n  display: grid;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n  justify-items: center;\n  align-items: center;\n}\n.view .nw {\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .ne {\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .sw {\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .se {\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .pane {\n  font-size: 1.5em;\n  width: 90%;\n  height: 80%;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.view .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n","\n<template>\n  <div class=\"view\">\n    <div id=\"Humanity\"    class=\"nw\"     ><div class=\"pane\"><div class=\"name\">Humanity</div></div></div>\n    <div id=\"Science\"     class=\"north\"  ><div class=\"pane\"><div class=\"name\">Science</div></div></div>\n    <div id=\"Understand\"  class=\"ne\"     ><div class=\"pane\"><div class=\"name\">Understand</div></div></div>\n    <div id=\"Orchestrate\" class=\"west\"   ><div class=\"pane\"><div class=\"name\">Orchestrate</div></div></div>\n    <div id=\"Cognition\"   class=\"cen\"    ><div class=\"pane\"><div class=\"name\">Cognition</div></div></div>\n    <div id=\"Reason\"      class=\"east\"   ><div class=\"pane\"><div class=\"name\">Reason</div></div></div>\n    <div id=\"Evolve\"      class=\"sw\"     ><div class=\"pane\"><div class=\"name\">Evolve</div></div></div>\n    <div id=\"Educate\"     class=\"south\"  ><div class=\"pane\"><div class=\"name\">Educate</div></div></div>\n    <div id=\"Culture\"     class=\"se\"     ><div class=\"pane\"><div class=\"name\">Culture</div></div></div>\n  </div>\n</template>\n\n<script type=\"module\">\n  export default {\n    data() { return { sel:\"Info\" } },\n    methods: {\n      onSelect: function (select) {\n        this.sel =  select;\n        console.log( 'view.vue', select ); } },\n    mounted: function () {\n      console.log( 'Know.vue', 'mounted' );\n      this.subscribe( 'Select', 'view.vue', (select) => this.onSelect(select) ); }\n  }\n</script>\n\n<style lang=\"less\">\n  .view { background-color:grey;\n    display:grid;\n    grid-template-columns: 33%  33% 34%;\n    grid-template-rows:    33%  33% 34%;\n    grid-template-areas:\n      \"nw   north ne\"\n      \"west cen   east\"\n      \"sw   south se\";\n    justify-items:center; align-items:center;\n    .nw     { grid-area:nw;    justify-self:stretch; align-self:stretch; display:grid; }\n    .north  { grid-area:north; justify-self:stretch; align-self:stretch; display:grid; }\n    .ne     { grid-area:ne;    justify-self:stretch; align-self:stretch; display:grid; }\n    .west   { grid-area:west;  justify-self:stretch; align-self:stretch; display:grid; }\n    .cen    { grid-area:cen;   justify-self:stretch; align-self:stretch; display:grid; }\n    .east   { grid-area:east;  justify-self:stretch; align-self:stretch; display:grid; }\n    .sw     { grid-area:sw;    justify-self:stretch; align-self:stretch; display:grid; }\n    .south  { grid-area:south; justify-self:stretch; align-self:stretch; display:grid; }\n    .se     { grid-area:se;    justify-self:stretch; align-self:stretch; display:grid; }\n    .pane { font-size:1.5em; width:90%; height:80%; background-color:tan;\n      justify-self:center; align-self:center; display:grid; border-radius:0.5em; }\n    .pane .name  { font-size:2em; background-color:tan;\n      justify-self:center; align-self:center; text-align:center; }\n  }\n\n</style>\n\n"]}, media: undefined });
+    inject("data-v-9dbf9f8c_0", { source: ".view {\n  background-color: grey;\n  display: grid;\n  position: relative;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n  justify-items: center;\n  align-items: center;\n}\n.view .nw {\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .ne {\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .sw {\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .se {\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .pane {\n  font-size: 1.5em;\n  width: 90%;\n  height: 80%;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.view .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.view .all {\n  position: absolute;\n  left: 3%;\n  top: 3%;\n  right: 3%;\n  bottom: 3%;\n  display: grid;\n}\n.view .all .pane {\n  font-size: 1.5em;\n  width: 100%;\n  height: 100%;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.view .all .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Know.vue","/Users/ax/Documents/prj/aug/vue/muse/Know.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,aAAa;EACb,kBAAkB;EAClB,mCAAmC;EACnC,gCAAgC;EAChC,sEAAsE;EACtE,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;ECCrB,aAAA;ADCA;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,WAAW;EACX,qBAAqB;EACrB,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;AACtB;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,WAAW;EACX,YAAY;EACZ,qBAAqB;EACrB,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;AACtB;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB","file":"Know.vue","sourcesContent":[".view {\n  background-color: grey;\n  display: grid;\n  position: relative;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n  justify-items: center;\n  align-items: center;\n}\n.view .nw {\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .ne {\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .sw {\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .se {\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .pane {\n  font-size: 1.5em;\n  width: 90%;\n  height: 80%;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.view .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.view .all {\n  position: absolute;\n  left: 3%;\n  top: 3%;\n  right: 3%;\n  bottom: 3%;\n  display: grid;\n}\n.view .all .pane {\n  font-size: 1.5em;\n  width: 100%;\n  height: 100%;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.view .all .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n","\n<template>\n<div class=\"view\">\n  <div id=\"Human\"   v-if=\"isPrac('Human')\"   :class=\"klass('nw')\">\n    <div class=\"pane\"><div class=\"name\">Human</div></div></div>\n  <div id=\"Science\" v-if=\"isPrac('Science')\" :class=\"klass('north')\" >\n    <div class=\"pane\"><div class=\"name\">Science</div></div></div>\n  <div id=\"Grasp\"   v-if=\"isPrac('Grasp')\"   :class=\"klass('ne')\"    >\n    <div class=\"pane\"><div class=\"name\">Grasp</div></div></div>\n  <div id=\"Conduct\" v-if=\"isPrac('Conduct')\" :class=\"klass('west')\"  >\n    <div class=\"pane\"><div class=\"name\">Conduct</div></div></div>\n  <div id=\"Think\"   v-if=\"isPrac('Think')\"   :class=\"klass('cen')\"   >\n    <div class=\"pane\"><div class=\"name\">Think</div></div></div>\n  <div id=\"Reason\"  v-if=\"isPrac('Reason')\"  :class=\"klass('east')\"  >\n    <div class=\"pane\"><div class=\"name\">Reason</div></div></div>\n  <div id=\"Evolve\"  v-if=\"isPrac('Evolve')\"  :class=\"klass('sw')\"    >\n    <div class=\"pane\"><div class=\"name\">Evolve</div></div></div>\n  <div id=\"Educate\" v-if=\"isPrac('Educate')\" :class=\"klass('south')\" >\n    <div class=\"pane\"><div class=\"name\">Educate</div></div></div>\n  <div id=\"Culture\" v-if=\"isPrac('Culture')\" :class=\"klass('se')\"    >\n    <div class=\"pane\"><div class=\"name\">Culture</div></div></div>\n</div>\n</template>\n\n<script type=\"module\">\n  export default {\n    data() { return { prac:\"None\", all:true } },\n    methods: {\n      isPrac: function (prac) {\n        return this.prac===prac || this.all; },\n      onPrac: function (prac) {\n        // console.log( 'Know.onPrac', { all:this.all, prac:this.prac } );\n        if( prac==='Know' ) { this.all=true; } else { this.all=false; this.prac=prac; } },\n      klass: function(klas) {\n        return !this.all ? 'all' : klas;\n      } },\n    mounted: function () {\n      this.prac = 'Know';\n      // console.log( 'Know.vue', 'mounted' );\n      this.subscribe( 'Know', 'Know.vue', (prac) => this.onPrac(prac) ); }\n  }\n</script>\n\n<style lang=\"less\">\n  @import \"View.less\";\n</style>\n\n"]}, media: undefined });
 
   };
   /* scoped */

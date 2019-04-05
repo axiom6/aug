@@ -15,6 +15,50 @@
 		"oAP": "/build/.idea",
 		"oF": 0
 		},
+	"/app/build/rollup.dash.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/app/build/rollup.dash-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/build/rollup.info.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/app/build/rollup.info-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/build/rollup.know.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/app/build/rollup.know-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/build/rollup.wise.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/app/build/rollup.wise-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/app/muse/Dash.js": {
 		"bF": 0,
 		"ft": 64,
@@ -39,9 +83,9 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/app/muse/Lazy-min.js",
-		"oF": 0,
+		"oF": 1,
 		"sC": 0,
 		"tS": 0
 		},
@@ -61,7 +105,7 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/app/muse/Main-min.js",
 		"oF": 0,
 		"sC": 0,
@@ -75,14 +119,14 @@
 		"oAP": "/pub/muse/Muse.html",
 		"oF": 3
 		},
-	"/app/muse/rollup.config.js": {
+	"/app/muse/Muse.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 0,
-		"oAP": "/app/muse/rollup.config-min.js",
-		"oF": 0,
+		"oA": 1,
+		"oAP": "/app/muse/Muse-min.js",
+		"oF": 1,
 		"sC": 0,
 		"tS": 0
 		},
@@ -91,7 +135,7 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/app/muse/Router-min.js",
 		"oF": 2,
 		"sC": 0,
@@ -239,7 +283,7 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 2,
+		"oA": 1,
 		"oAP": "/node_modules/rollup-plugin-commonjs/dist/rollup-plugin-commonjs.es.js",
 		"oF": 0,
 		"sC": 0,
@@ -250,7 +294,7 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 2,
+		"oA": 1,
 		"oAP": "/node_modules/rollup-plugin-less/dist/rollup-plugin-less.js",
 		"oF": 0,
 		"sC": 0,
@@ -413,7 +457,7 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/dash/Dash.vue",
 		"oF": 0
 		},
@@ -421,7 +465,7 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/dash/Find.vue",
 		"oF": 0
 		},
@@ -429,7 +473,7 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/dash/Foot.vue",
 		"oF": 0
 		},
@@ -448,7 +492,7 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/dash/Logo.vue",
 		"oF": 0
 		},
@@ -456,7 +500,7 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/dash/Navb.vue",
 		"oF": 0
 		},
@@ -464,7 +508,7 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/dash/Pref.vue",
 		"oF": 0
 		},
@@ -472,7 +516,7 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/dash/Side.vue",
 		"oF": 0
 		},
@@ -480,15 +524,23 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/dash/Tocs.vue",
+		"oF": 0
+		},
+	"/vue/dash/Toct.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/dash/Toct.vue",
 		"oF": 0
 		},
 	"/vue/dash/Trak.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/dash/Trak.vue",
 		"oF": 0
 		},
@@ -496,7 +548,7 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/dash/View.vue",
 		"oF": 0
 		},
@@ -696,39 +748,89 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/form/FormElements.vue",
 		"oF": 0
+		},
+	"/vue/muse/Info.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/muse/Info-min.js",
+		"oF": 1,
+		"sC": 0,
+		"tS": 0
 		},
 	"/vue/muse/Info.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/muse/Info.vue",
 		"oF": 0
+		},
+	"/vue/muse/Know.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/muse/Know-min.js",
+		"oF": 1,
+		"sC": 0,
+		"tS": 0
 		},
 	"/vue/muse/Know.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/muse/Know.vue",
 		"oF": 0
+		},
+	"/vue/muse/View.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/vue/muse/View.css",
+		"oF": 1,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
 		},
 	"/vue/muse/View.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/muse/View.vue",
 		"oF": 0
+		},
+	"/vue/muse/Wise.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/muse/Wise-min.js",
+		"oF": 1,
+		"sC": 0,
+		"tS": 0
 		},
 	"/vue/muse/Wise.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/muse/Wise.vue",
 		"oF": 0
 		},
@@ -2936,6 +3038,17 @@
 		"targetECMAVersion": 0
 		},
 	"languageDefaultsUserDefined": [
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.vue",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "",
+			"autoOutputPathReplace2": "",
+			"autoOutputPathStyle": 0,
+			"fileExtension": "vue",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			}
 		],
 	"overrideExternalServerCSS": 0,
 	"previewPathAddition": "",

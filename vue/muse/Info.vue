@@ -1,55 +1,45 @@
 
 <template>
   <div class="view">
-    <div id="Collab"   class="nw"     ><div class="pane"><div class="name">Collab</div></div></div>
-    <div id="Domain"   class="north"  ><div class="pane"><div class="name">Domain</div></div></div>
-    <div id="Discover" class="ne"     ><div class="pane"><div class="name">Discover</div></div></div>
-    <div id="Adapt"    class="west"   ><div class="pane"><div class="name">Adapt</div></div></div>
-    <div id="Tech"     class="cen"    ><div class="pane"><div class="name">Tech</div></div></div>
-    <div id="Benefit"  class="east"   ><div class="pane"><div class="name">Benefit</div></div></div>
-    <div id="Change"   class="sw"     ><div class="pane"><div class="name">Change</div></div></div>
-    <div id="Deliver"   class="south" ><div class="pane"><div class="name">Deliver</div></div></div>
-    <div id="Govern"   class="se"     ><div class="pane"><div class="name">Govern</div></div></div>
+    <div id="Collab"   v-if="isPrac('Collab')" :class="klass('nw')"    >
+      <div class="pane"><div class="name">Collab</div></div></div>
+    <div id="Domain"   v-if="isPrac('Domain')" :class="klass('north')"    >
+      <div class="pane"><div class="name">Domain</div></div></div>
+    <div id="Discover" v-if="isPrac('Discover')" :class="klass('ne')"    >
+      <div class="pane"><div class="name">Discover</div></div></div>
+    <div id="Adapt"    v-if="isPrac('Adapt')" :class="klass('west')"    >
+      <div class="pane"><div class="name">Adapt</div></div></div>
+    <div id="Make"     v-if="isPrac('Make')" :class="klass('cen')"    >
+      <div class="pane"><div class="name">Make</div></div></div>
+    <div id="Benefit"  v-if="isPrac('Benefit')" :class="klass('east')"    >
+      <div class="pane"><div class="name">Benefit</div></div></div>
+    <div id="Change"   v-if="isPrac('Change')" :class="klass('sw')"    >
+      <div class="pane"><div class="name">Change</div></div></div>
+    <div id="Deliver"   v-if="isPrac('Deliver')" :class="klass('south')"    >
+      <div class="pane"><div class="name">Deliver</div></div></div>
+    <div id="Govern"   v-if="isPrac('Govern')" :class="klass('se')"    >
+      <div class="pane"><div class="name">Govern</div></div></div>
   </div>
 </template>
 
 <script type="module">
   export default {
-    data() { return { sel:"Wise" } },
+    data() { return { prac:"None", all:true } },
     methods: {
-      onSelect: function (select) {
-        this.sel =  select;
-        console.log( 'Wise.vue', select ); } },
+      isPrac: function (prac) {
+        return this.prac===prac || this.all; },
+      onPrac: function (prac) {
+        // console.log( 'Info.onPrac', { all:this.all, prac:this.prac } );
+        if( prac==='Info' ) { this.all=true; } else { this.all=false; this.prac=prac; } },
+      klass: function(klas) {
+        return !this.all ? 'all' : klas; } },
     mounted: function () {
-      console.log( 'view.vue', 'mounted' );
-      this.subscribe( 'Select', 'view.vue', (select) => this.onSelect(select) ); }
+      // console.log( 'Info.vue', 'mounted' );
+      this.subscribe( 'Info', 'Info.vue', (prac) => this.onPrac(prac) ); }
   }
 </script>
 
 <style lang="less">
-  .view { background-color:grey;
-    display:grid;
-    grid-template-columns: 33%  33% 34%;
-    grid-template-rows:    33%  33% 34%;
-    grid-template-areas:
-      "nw   north ne"
-      "west cen   east"
-      "sw   south se";
-    justify-items:center; align-items:center;
-    .nw     { grid-area:nw;    justify-self:stretch; align-self:stretch; display:grid; }
-    .north  { grid-area:north; justify-self:stretch; align-self:stretch; display:grid; }
-    .ne     { grid-area:ne;    justify-self:stretch; align-self:stretch; display:grid; }
-    .west   { grid-area:west;  justify-self:stretch; align-self:stretch; display:grid; }
-    .cen    { grid-area:cen;   justify-self:stretch; align-self:stretch; display:grid; }
-    .east   { grid-area:east;  justify-self:stretch; align-self:stretch; display:grid; }
-    .sw     { grid-area:sw;    justify-self:stretch; align-self:stretch; display:grid; }
-    .south  { grid-area:south; justify-self:stretch; align-self:stretch; display:grid; }
-    .se     { grid-area:se;    justify-self:stretch; align-self:stretch; display:grid; }
-    .pane { font-size:1.5em; width:90%; height:80%; background-color:tan;
-      justify-self:center; align-self:center; display:grid; border-radius:0.5em; }
-    .pane .name  { font-size:2em; background-color:tan;
-      justify-self:center; align-self:center; text-align:center; }
-  }
-
+ @import "View.less";
 </style>
 

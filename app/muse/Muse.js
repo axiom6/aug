@@ -12,7 +12,7 @@ let Muse = {}
 Muse.onReady = () => {
     const app = new Vue( { router: Router, render: h => h(Dash),
       mounted: function () {
-        console.log('Dash', 'mounted'); }
+        /* console.log('Dash.vue', 'mounted'); */ }
     } );
     app.$mount('dash'); }
 

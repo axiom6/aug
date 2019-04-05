@@ -16,12 +16,12 @@ Main = (function() {
     static init(data) {
       var infoSpec, subjects;
       Main.Spec = data;
-      subjects = ["Ready", "Select", "Choice", "Test"];
+      subjects = ["Info", "Know", "Wise"];
       subjects = subjects.concat(Main.NavbSubjects);
       infoSpec = {
         subscribe: false,
         publish: false,
-        subjects: ["Select", "Choice", "Test"]
+        subjects: subjects
       };
       Main.stream = new Stream(subjects, infoSpec);
       Main.onReady();
@@ -34,9 +34,8 @@ Main = (function() {
   Data.hosted = "https://ui-48413.firebaseapp.com/";
 
   Main.vueMixin = {
-    created: function() {
-      console.log('Main.vueMixin.created() globally');
-    },
+    created: function() {},
+    // console.log( 'Main.vueMixin.created() globally' )
     methods: {
       subscribe: function(subject, source, onMethod) {
         Main['stream'].subscribe(subject, source, onMethod);
