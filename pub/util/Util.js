@@ -56,9 +56,10 @@ Util = (function() {
     }
 
     static isChild(key) {
-      var a;
+      var a, b;
       a = key.charAt(0);
-      return a === a.toUpperCase() && a !== '$';
+      b = key.charAt(key.length - 1);
+      return a === a.toUpperCase() && a !== '$' && b !== '_';
     }
 
     // ---- Inquiry ----

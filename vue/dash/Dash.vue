@@ -24,14 +24,23 @@
   import Pref from './Pref.vue';
   import Foot from './Foot.vue';
   import Trak from './Trak.vue';
-
+  
   let Dash = {
       name: 'dash',
       components: {
         'd-logo':Logo, 'd-navb':Navb, 'd-find':Find,
         'd-tocs':Tocs, 'd-view':View, 'd-side':Side,
         'd-pref':Pref, 'd-foot':Foot, 'd-trak':Trak } };
-  
+
+  // Static imports for minimizing build steps in dev.
+  // Dash.....vue components exported to Router
+  import Info from '../muse/Info.vue';
+  import Know from '../muse/Know.vue';
+  import Wise from '../muse/Wise.vue';
+  Dash.Info = Info;
+  Dash.Know = Know;
+  Dash.Wise = Wise;
+ 
   export default Dash;
   
 </script>

@@ -71,7 +71,8 @@ class Util
 
   @isChild:( key ) ->
     a = key.charAt(0)
-    a is a.toUpperCase() and a isnt '$'
+    b = key.charAt(key.length-1)
+    a is a.toUpperCase() and a isnt '$' and b isnt '_'
 
   # ---- Inquiry ----
 

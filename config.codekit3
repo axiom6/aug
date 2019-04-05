@@ -59,6 +59,78 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/app/data/muse/Cols.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/app/data/muse/Cols-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/app/data/muse/Cols.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/app/data/muse/Cols.txt",
+		"oF": 0
+		},
+	"/app/data/muse/Cube.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/app/data/muse/Cube-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/app/data/muse/Info.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/app/data/muse/Info-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/app/data/muse/Info.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/app/data/muse/Info.txt",
+		"oF": 0
+		},
+	"/app/data/muse/Know.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/app/data/muse/Know-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/app/data/muse/Muse.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/app/data/muse/Muse-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/app/data/muse/Rows.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/app/data/muse/Rows-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/app/data/muse/Wise.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/app/data/muse/Wise-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
 	"/app/muse/Dash.js": {
 		"bF": 0,
 		"ft": 64,
@@ -239,7 +311,7 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 2,
+		"oA": 1,
 		"oAP": "/node_modules/estree-walker/src/estree-walker.js",
 		"oF": 0,
 		"sC": 0,
@@ -480,9 +552,9 @@
 	"/vue/dash/logo.png": {
 		"ft": 32768,
 		"iS": 3451,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/dash/logo.png",
-		"oF": 0,
+		"oF": 1,
 		"oIPL": 0,
 		"opt": 0,
 		"oT": 1,
@@ -806,14 +878,6 @@
 		"rwU": 0,
 		"sI": 0,
 		"sU": 0
-		},
-	"/vue/muse/View.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/View.vue",
-		"oF": 0
 		},
 	"/vue/muse/Wise.js": {
 		"bF": 0,

@@ -8,7 +8,37 @@ class Data
   Data.local     = "http://localhost:63342/muse/public/"
   Data.localJSON = "http://localhost:63342/muse/public/json"
 
-  Util.noop( Data.hosted, Data.expandStudys )
+  Util.noop( Data.hosted, Data.planeData, Data.refine, Data.asyncJSON )
+
+  @refine:( data, type ) ->
+    return  data if type is 'None'
+    data.comps = {}
+    for ckey, comp of data when Util.isChild(ckey)
+      # console.log( 'Data.refine comp', comp )
+      data.comps[ckey] = comp
+      comp['name']     = ckey if not comp['name']?
+      comp.pracs = {}
+      for pkey, prac of comp when Util.isChild(pkey)
+        # console.log( '  Data.refine prac', prac )
+        comp.pracs[pkey] = prac
+        prac['name']     = pkey if not prac['name']?
+        prac.disps = {}
+        for dkey, disp of prac  when Util.isChild(dkey)
+          prac.disps[dkey] = disp
+          disp['name']     = dkey if not disp['name']?
+          disp.areas = {}
+          for akey, area of disp  when Util.isChild(akey)
+            disp.areas[akey] = area
+            area['name']     = akey if not area['name']?
+            area.items = {}
+            for ikey, item of area when Util.isChild(ikey)
+              area.items[ikey] = item
+              item['name']   = ikey if not item['name']?
+              item.bases = {}
+              for bkey, base of item when Util.isChild(bkey)
+                item.bases[bkey] = base
+                base['name'] = bkey if not base['name']?
+    data
 
   # ---- Read JSON with batch async
 
@@ -22,13 +52,13 @@ class Data
       return false if not obj['data']
     true
 
-  @batchJSON:( obj, batch, callback, create=null ) ->
+  @batchJSON:( obj, batch, callback, refine=null ) ->
     url = Data.baseUrl() + obj.url
     fetch( url )
       .then( (response) =>
         return response.json() )
       .then( (data) =>
-        obj['data'] = if Util.isFunc(create) then create( data, obj.type ) else data
+        obj['data'] = if Util.isFunc(refine) then refine( data, obj.type ) else data
         callback( batch ) if Data.batchComplete( batch ) )
       .catch( (error) =>
         console.error( "Data.batchJSON()", { url:url, error:error } ) )

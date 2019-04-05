@@ -5,6 +5,82 @@ import Util from '../util/Util.js';
 
 Data = (function() {
   class Data {
+    static refine(data, type) {
+      var akey, area, base, bkey, ckey, comp, disp, dkey, ikey, item, pkey, prac;
+      if (type === 'None') {
+        return data;
+      }
+      data.comps = {};
+      for (ckey in data) {
+        comp = data[ckey];
+        if (!(Util.isChild(ckey))) {
+          continue;
+        }
+        // console.log( 'Data.refine comp', comp )
+        data.comps[ckey] = comp;
+        if (comp['name'] == null) {
+          comp['name'] = ckey;
+        }
+        comp.pracs = {};
+        for (pkey in comp) {
+          prac = comp[pkey];
+          if (!(Util.isChild(pkey))) {
+            continue;
+          }
+          // console.log( '  Data.refine prac', prac )
+          comp.pracs[pkey] = prac;
+          if (prac['name'] == null) {
+            prac['name'] = pkey;
+          }
+          prac.disps = {};
+          for (dkey in prac) {
+            disp = prac[dkey];
+            if (!(Util.isChild(dkey))) {
+              continue;
+            }
+            prac.disps[dkey] = disp;
+            if (disp['name'] == null) {
+              disp['name'] = dkey;
+            }
+            disp.areas = {};
+            for (akey in disp) {
+              area = disp[akey];
+              if (!(Util.isChild(akey))) {
+                continue;
+              }
+              disp.areas[akey] = area;
+              if (area['name'] == null) {
+                area['name'] = akey;
+              }
+              area.items = {};
+              for (ikey in area) {
+                item = area[ikey];
+                if (!(Util.isChild(ikey))) {
+                  continue;
+                }
+                area.items[ikey] = item;
+                if (item['name'] == null) {
+                  item['name'] = ikey;
+                }
+                item.bases = {};
+                for (bkey in item) {
+                  base = item[bkey];
+                  if (!(Util.isChild(bkey))) {
+                    continue;
+                  }
+                  item.bases[bkey] = base;
+                  if (base['name'] == null) {
+                    base['name'] = bkey;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      return data;
+    }
+
     // ---- Read JSON with batch async
     static batchRead(batch, callback, create = null) {
       var key, obj;
@@ -27,13 +103,13 @@ Data = (function() {
       return true;
     }
 
-    static batchJSON(obj, batch, callback, create = null) {
+    static batchJSON(obj, batch, callback, refine = null) {
       var url;
       url = Data.baseUrl() + obj.url;
       fetch(url).then((response) => {
         return response.json();
       }).then((data) => {
-        obj['data'] = Util.isFunc(create) ? create(data, obj.type) : data;
+        obj['data'] = Util.isFunc(refine) ? refine(data, obj.type) : data;
         if (Data.batchComplete(batch)) {
           return callback(batch);
         }
@@ -114,7 +190,7 @@ Data = (function() {
 
   Data.localJSON = "http://localhost:63342/muse/public/json";
 
-  Util.noop(Data.hosted, Data.expandStudys);
+  Util.noop(Data.hosted, Data.planeData, Data.refine, Data.asyncJSON);
 
   Data.Databases = {
     color: {

@@ -1,44 +1,32 @@
 
 <template>
-<div class="view">
-  <div id="Human"   v-if="isPrac('Human')"   :class="klass('nw')">
-    <div class="pane"><div class="cen"><div>Human</div></div></div></div>
-  <div id="Science" v-if="isPrac('Science')" :class="klass('north')" >
-    <div class="pane"><div class="cen"><div>Science</div></div></div></div>
-  <div id="Grasp"   v-if="isPrac('Grasp')"   :class="klass('ne')"    >
-    <div class="pane"><div class="cen"><div>Grasp</div></div></div></div>
-  <div id="Conduct" v-if="isPrac('Conduct')" :class="klass('west')"  >
-    <div class="pane"><div class="cen"><div>Conduct</div></div></div></div>
-  <div id="Think"   v-if="isPrac('Think')"   :class="klass('cen')"   >
-    <div class="pane"><div class="cen"><div>Think</div></div></div></div>
-  <div id="Reason"  v-if="isPrac('Reason')"  :class="klass('east')"  >
-    <div class="pane"><div class="cen"><div>Reason</div></div></div></div>
-  <div id="Evolve"  v-if="isPrac('Evolve')"  :class="klass('sw')"    >
-    <div class="pane"><div class="cen"><div>Evolve</div></div></div></div>
-  <div id="Educate" v-if="isPrac('Educate')" :class="klass('south')" >
-    <div class="pane"><div class="cen"><div>Educate</div></div></div></div>
-  <div id="Culture" v-if="isPrac('Culture')" :class="klass('se')"    >
-    <div class="pane"><div class="cen"><div>Culture</div></div></div></div>
-</div>
+  <div class="view">
+    <template v-for="prac in knows">
+      <div :id="prac.name"  v-if="isPrac(prac.name)" :class="klass(prac.dir)" :key="prac.name">
+        <div class="pane"><div class="cen"><div>{{prac.name}}</div></div>
+          <template  v-for="disp in prac.disps">
+            <div :class="disp.dir"><div>{{disp.name}}</div></div>
+          </template>
+        </div>
+      </div>
+    </template>
+  </div>
 </template>
 
 <script type="module">
   export default {
-    data() { return { prac:"None", all:true } },
+    data() {
+      return { prac:"None", all:true, knows:{} } },
     methods: {
       isPrac: function (prac) {
         return this.prac===prac || this.all; },
       onPrac: function (prac) {
-        // console.log( 'Know.onPrac', { all:this.all, prac:this.prac } );
         if( prac==='Know' ) { this.all=true; } else { this.all=false; this.prac=prac; } },
       klass: function(klas) {
-        return !this.all ? 'all' : klas;
-      } },
+        return !this.all ? 'all' : klas; } },
     mounted: function () {
-      this.prac = 'Know';
-      // console.log( 'Know.vue', 'mounted' );
-      this.subscribe( 'Know', 'Know.vue', (prac) => this.onPrac(prac) ); }
-  }
+      this.knows = this.pracs('Know');
+      this.subscribe( 'Know', 'Know.vue', (prac) => this.onPrac(prac) ); } }
 </script>
 
 <style lang="less">

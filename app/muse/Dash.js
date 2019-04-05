@@ -296,49 +296,25 @@ __vue_render__$2._withStripped = true;
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 let Tocs = {
-  data() { return { plane:"None" } },
+  
+  data() {
+    return { plane:"None",
+      komps:{Info:{name:'Info',pracs:{}},Know:{name:'Know',pracs:{}},Wise:{name:'Wise',pracs:{}}} } },
   methods: {
     showPlane: function(plane) {
       this.plane =  plane;
       this.showPrac(plane); },
     showPrac: function(prac) {
-      //console.log( 'Tocs.showPrac', { plane:this.plane, 'prac':prac } );
       this.publish( this.plane, prac ); },
     doSelect: function(select) {
-      this.publish( 'Select',   select ); }
-  } };
+      this.publish( 'Select',   select ); } },
+  mounted: function () {
+    for( let key in this.komps ) {
+      if( this.komps.hasOwnProperty(key) ) {
+        this.komps[key].pracs = this.pracs(key); } } } };
 
 /* script */
 const __vue_script__$3 = Tocs;
@@ -349,400 +325,59 @@ var __vue_render__$3 = function() {
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
   return _c("div", { staticClass: "tocs" }, [
-    _c("ul", [
-      _c("li", [
-        _c(
-          "span",
-          {
-            on: {
-              click: function($event) {
-                return _vm.showPlane("Info")
-              }
-            }
-          },
-          [
-            _c("router-link", { attrs: { to: { name: "Info" } } }, [
-              _vm._v("Info")
+    _c(
+      "ul",
+      [
+        _vm._l(_vm.komps, function(komp) {
+          return [
+            _c("li", { key: komp.name }, [
+              _c(
+                "span",
+                {
+                  on: {
+                    click: function($event) {
+                      return _vm.showPlane(komp.name)
+                    }
+                  }
+                },
+                [
+                  _c("router-link", { attrs: { to: { name: komp.name } } }, [
+                    _vm._v(_vm._s(komp.name))
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm.plane === komp.name
+                ? _c(
+                    "ul",
+                    [
+                      _vm._l(_vm.komps[komp.name].pracs, function(prac) {
+                        return [
+                          _c(
+                            "li",
+                            {
+                              key: prac.name,
+                              on: {
+                                click: function($event) {
+                                  return _vm.showPrac(prac.name)
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(prac.name))]
+                          )
+                        ]
+                      })
+                    ],
+                    2
+                  )
+                : _vm._e()
             ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _vm.plane === "Info"
-          ? _c("ul", [
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Collab")
-                    }
-                  }
-                },
-                [_vm._v("Collab")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Domain")
-                    }
-                  }
-                },
-                [_vm._v("Domain")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Discover")
-                    }
-                  }
-                },
-                [_vm._v("Discover")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Adapt")
-                    }
-                  }
-                },
-                [_vm._v("Adapt")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Make")
-                    }
-                  }
-                },
-                [_vm._v("Make")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Benefit")
-                    }
-                  }
-                },
-                [_vm._v("Benefit")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Change")
-                    }
-                  }
-                },
-                [_vm._v("Change")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Deliver")
-                    }
-                  }
-                },
-                [_vm._v("Deliver")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Govern")
-                    }
-                  }
-                },
-                [_vm._v("Govern")]
-              )
-            ])
-          : _vm._e()
-      ]),
-      _vm._v(" "),
-      _c("li", [
-        _c(
-          "span",
-          {
-            on: {
-              click: function($event) {
-                return _vm.showPlane("Know")
-              }
-            }
-          },
-          [
-            _c("router-link", { attrs: { to: { name: "Know" } } }, [
-              _vm._v("Know")
-            ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _vm.plane === "Know"
-          ? _c("ul", [
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Human")
-                    }
-                  }
-                },
-                [_vm._v("Human")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Science")
-                    }
-                  }
-                },
-                [_vm._v("Science")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Grasp")
-                    }
-                  }
-                },
-                [_vm._v("Grasp")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Conduct")
-                    }
-                  }
-                },
-                [_vm._v("Conduct")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Think")
-                    }
-                  }
-                },
-                [_vm._v("Think")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Reason")
-                    }
-                  }
-                },
-                [_vm._v("Reason")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Evolve")
-                    }
-                  }
-                },
-                [_vm._v("Evolve")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Educate")
-                    }
-                  }
-                },
-                [_vm._v("Educate")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Culture")
-                    }
-                  }
-                },
-                [_vm._v("Culture")]
-              )
-            ])
-          : _vm._e()
-      ]),
-      _vm._v(" "),
-      _c("li", [
-        _c(
-          "span",
-          {
-            on: {
-              click: function($event) {
-                return _vm.showPlane("Wise")
-              }
-            }
-          },
-          [
-            _c("router-link", { attrs: { to: { name: "Wise" } } }, [
-              _vm._v("Wise")
-            ])
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _vm.plane === "Wise"
-          ? _c("ul", [
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Trust")
-                    }
-                  }
-                },
-                [_vm._v("Trust")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Nature")
-                    }
-                  }
-                },
-                [_vm._v("Nature")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Truth")
-                    }
-                  }
-                },
-                [_vm._v("Truth")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Explore")
-                    }
-                  }
-                },
-                [_vm._v("Explore")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Create")
-                    }
-                  }
-                },
-                [_vm._v("Create")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Mind")
-                    }
-                  }
-                },
-                [_vm._v("Mind")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Emerge")
-                    }
-                  }
-                },
-                [_vm._v("Emerge")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Inspire")
-                    }
-                  }
-                },
-                [_vm._v("Inspire")]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  on: {
-                    click: function($event) {
-                      return _vm.showPrac("Actual")
-                    }
-                  }
-                },
-                [_vm._v("Actual")]
-              )
-            ])
-          : _vm._e()
-      ])
-    ])
+          ]
+        })
+      ],
+      2
+    )
   ])
 };
 var __vue_staticRenderFns__$3 = [];
@@ -751,7 +386,7 @@ __vue_render__$3._withStripped = true;
   /* style */
   const __vue_inject_styles__$3 = function (inject) {
     if (!inject) return
-    inject("data-v-1ff99d58_0", { source: ".tocs {\n  background-color: black;\n}\n.tocs ul {\n  padding: 0;\n  list-style: none;\n  align-self: start;\n  font-size: 3vh;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25em;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li a {\n  color: white;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 2vh;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: white;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n  border: none;\n  background-color: #666;\n}\n.tocs ul li ul li:hover {\n  background-color: white;\n  color: black;\n}\n", map: {"version":3,"sources":["Tocs.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;AACzB;AACA;EACE,UAAU;EACV,gBAAgB;EAChB,iBAAiB;EACjB,cAAc;EACd,aAAa;AACf;AACA;EACE,sBAAsB;EACtB,oBAAoB;EACpB,iBAAiB;EACjB,4BAA4B;EAC5B,+BAA+B;AACjC;AACA;EACE,YAAY;EACZ,qBAAqB;AACvB;AACA;EACE,cAAc;AAChB;AACA;EACE,4BAA4B;EAC5B,YAAY;EACZ,+BAA+B;EAC/B,YAAY;EACZ,sBAAsB;AACxB;AACA;EACE,uBAAuB;EACvB,YAAY;AACd","file":"Tocs.vue","sourcesContent":[".tocs {\n  background-color: black;\n}\n.tocs ul {\n  padding: 0;\n  list-style: none;\n  align-self: start;\n  font-size: 3vh;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25em;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li a {\n  color: white;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 2vh;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: white;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n  border: none;\n  background-color: #666;\n}\n.tocs ul li ul li:hover {\n  background-color: white;\n  color: black;\n}\n"]}, media: undefined });
+    inject("data-v-6f1a5ec4_0", { source: ".tocs {\n  background-color: black;\n}\n.tocs ul {\n  padding: 0;\n  list-style: none;\n  align-self: start;\n  font-size: 3vh;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25em;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li a {\n  color: white;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 2vh;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: white;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n  border: none;\n  background-color: #666;\n}\n.tocs ul li ul li:hover {\n  background-color: white;\n  color: black;\n}\n", map: {"version":3,"sources":["Tocs.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;AACzB;AACA;EACE,UAAU;EACV,gBAAgB;EAChB,iBAAiB;EACjB,cAAc;EACd,aAAa;AACf;AACA;EACE,sBAAsB;EACtB,oBAAoB;EACpB,iBAAiB;EACjB,4BAA4B;EAC5B,+BAA+B;AACjC;AACA;EACE,YAAY;EACZ,qBAAqB;AACvB;AACA;EACE,cAAc;AAChB;AACA;EACE,4BAA4B;EAC5B,YAAY;EACZ,+BAA+B;EAC/B,YAAY;EACZ,sBAAsB;AACxB;AACA;EACE,uBAAuB;EACvB,YAAY;AACd","file":"Tocs.vue","sourcesContent":[".tocs {\n  background-color: black;\n}\n.tocs ul {\n  padding: 0;\n  list-style: none;\n  align-self: start;\n  font-size: 3vh;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25em;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li a {\n  color: white;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 2vh;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: white;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n  border: none;\n  background-color: #666;\n}\n.tocs ul li ul li:hover {\n  background-color: white;\n  color: black;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -1029,6 +664,336 @@ __vue_render__$8._withStripped = true;
   );
 
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var script$8 = {
+  data() {
+    return { prac:"None", all:true, infos:{} } },
+  methods: {
+    isPrac: function (prac) {
+      return this.prac===prac || this.all; },
+    onPrac: function (prac) {
+      if( prac==='Info' ) { this.all=true; } else { this.all=false; this.prac=prac; } },
+    klass: function(klas) {
+      return !this.all ? 'all' : klas; } },
+  mounted: function () {
+    this.infos = this.pracs('Info');
+    this.subscribe( 'Info', 'Info.vue', (prac) => this.onPrac(prac) ); } };
+
+/* script */
+const __vue_script__$9 = script$8;
+
+/* template */
+var __vue_render__$9 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { staticClass: "view" },
+    [
+      _vm._l(_vm.infos, function(prac) {
+        return [
+          _vm.isPrac(prac.name)
+            ? _c(
+                "div",
+                {
+                  key: prac.name,
+                  class: _vm.klass(prac.dir),
+                  attrs: { id: prac.name }
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "pane" },
+                    [
+                      _c("div", { staticClass: "cen" }, [
+                        _c("div", [_vm._v(_vm._s(prac.name))])
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(prac.disps, function(disp) {
+                        return [
+                          _c("div", { class: disp.dir }, [
+                            _c("div", [_vm._v(_vm._s(disp.name))])
+                          ])
+                        ]
+                      })
+                    ],
+                    2
+                  )
+                ]
+              )
+            : _vm._e()
+        ]
+      })
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$9 = [];
+__vue_render__$9._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$9 = function (inject) {
+    if (!inject) return
+    inject("data-v-6058a4ce_0", { source: ".view {\n  background-color: black;\n  display: grid;\n  position: relative;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n  justify-items: center;\n  align-items: center;\n}\n.view .nw {\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .ne {\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .sw {\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .se {\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .pane {\n  width: 90%;\n  height: 80%;\n  background-color: #603;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n  font-size: 3vh;\n  font-weight: bold;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n}\n.view .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n}\n.view .pane .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: coral;\n  border-radius: 36px;\n  font-size: 4vh;\n}\n.view .pane .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: springgreen;\n  border-radius: 36px;\n}\n.view .pane .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: gold;\n  border-radius: 36px;\n}\n.view .pane .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: salmon;\n  border-radius: 36px;\n}\n.view .pane .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: peru;\n  border-radius: 36px;\n}\n.view .pane div div {\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n}\n.view .all {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.view .all .pane {\n  font-size: 1.5em;\n  width: 100%;\n  height: 100%;\n  background-color: #603;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.view .all .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Info.vue","/Users/ax/Documents/prj/aug/vue/muse/Info.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,aAAa;EACb,kBAAkB;EAClB,mCAAmC;EACnC,gCAAgC;EAChC,sEAAsE;EACtE,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;ECCrB,aAAA;ADCA;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,UAAU;EACV,WAAW;EACX,sBAAsB;EACtB,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;EACpB,cAAc;EACd,iBAAiB;EACjB,mCAAmC;EACnC,gCAAgC;EAChC,sEAAsE;AACxE;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,kBAAkB;EAClB,oBAAoB;EACpB,kBAAkB;AACpB;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,iBAAiB;EACjB,mBAAmB;EACnB,cAAc;AAChB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,mBAAmB;AACrB;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,gBAAgB;EAChB,mBAAmB;AACrB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,kBAAkB;EAClB,mBAAmB;AACrB;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,gBAAgB;EAChB,mBAAmB;AACrB;AACA;EACE,kBAAkB;EAClB,oBAAoB;EACpB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,WAAW;EACX,YAAY;EACZ,sBAAsB;EACtB,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;AACtB;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB","file":"Info.vue","sourcesContent":[".view {\n  background-color: black;\n  display: grid;\n  position: relative;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n  justify-items: center;\n  align-items: center;\n}\n.view .nw {\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .ne {\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .sw {\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .se {\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .pane {\n  width: 90%;\n  height: 80%;\n  background-color: #603;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n  font-size: 3vh;\n  font-weight: bold;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n}\n.view .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n}\n.view .pane .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: coral;\n  border-radius: 36px;\n  font-size: 4vh;\n}\n.view .pane .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: springgreen;\n  border-radius: 36px;\n}\n.view .pane .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: gold;\n  border-radius: 36px;\n}\n.view .pane .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: salmon;\n  border-radius: 36px;\n}\n.view .pane .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: peru;\n  border-radius: 36px;\n}\n.view .pane div div {\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n}\n.view .all {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.view .all .pane {\n  font-size: 1.5em;\n  width: 100%;\n  height: 100%;\n  background-color: #603;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.view .all .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n","\n<template>\n  <div class=\"view\">\n    <template v-for=\"prac in infos\">\n      <div :id=\"prac.name\"  v-if=\"isPrac(prac.name)\" :class=\"klass(prac.dir)\" :key=\"prac.name\">\n        <div class=\"pane\"><div class=\"cen\"><div>{{prac.name}}</div></div>\n          <template  v-for=\"disp in prac.disps\">\n            <div :class=\"disp.dir\"><div>{{disp.name}}</div></div>\n          </template>\n        </div>\n      </div>\n    </template>\n  </div>  \n</template>\n\n<script type=\"module\">\n  export default {\n    data() {\n      return { prac:\"None\", all:true, infos:{} } },\n    methods: {\n      isPrac: function (prac) {\n        return this.prac===prac || this.all; },\n      onPrac: function (prac) {\n        if( prac==='Info' ) { this.all=true; } else { this.all=false; this.prac=prac; } },\n      klass: function(klas) {\n        return !this.all ? 'all' : klas; } },\n    mounted: function () {\n      this.infos = this.pracs('Info');\n      this.subscribe( 'Info', 'Info.vue', (prac) => this.onPrac(prac) ); } }\n</script>\n\n<style lang=\"less\">\n @import \"View.less\";\n</style>\n\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$9 = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$9 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$9 = false;
+  /* style inject SSR */
+  
+
+  
+  var Info = normalizeComponent_1(
+    { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
+    __vue_inject_styles__$9,
+    __vue_script__$9,
+    __vue_scope_id__$9,
+    __vue_is_functional_template__$9,
+    __vue_module_identifier__$9,
+    browser,
+    undefined
+  );
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var script$9 = {
+  data() {
+    return { prac:"None", all:true, knows:{} } },
+  methods: {
+    isPrac: function (prac) {
+      return this.prac===prac || this.all; },
+    onPrac: function (prac) {
+      if( prac==='Know' ) { this.all=true; } else { this.all=false; this.prac=prac; } },
+    klass: function(klas) {
+      return !this.all ? 'all' : klas; } },
+  mounted: function () {
+    this.knows = this.pracs('Know');
+    this.subscribe( 'Know', 'Know.vue', (prac) => this.onPrac(prac) ); } };
+
+/* script */
+const __vue_script__$a = script$9;
+
+/* template */
+var __vue_render__$a = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { staticClass: "view" },
+    [
+      _vm._l(_vm.knows, function(prac) {
+        return [
+          _vm.isPrac(prac.name)
+            ? _c(
+                "div",
+                {
+                  key: prac.name,
+                  class: _vm.klass(prac.dir),
+                  attrs: { id: prac.name }
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "pane" },
+                    [
+                      _c("div", { staticClass: "cen" }, [
+                        _c("div", [_vm._v(_vm._s(prac.name))])
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(prac.disps, function(disp) {
+                        return [
+                          _c("div", { class: disp.dir }, [
+                            _c("div", [_vm._v(_vm._s(disp.name))])
+                          ])
+                        ]
+                      })
+                    ],
+                    2
+                  )
+                ]
+              )
+            : _vm._e()
+        ]
+      })
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$a = [];
+__vue_render__$a._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$a = function (inject) {
+    if (!inject) return
+    inject("data-v-43f33064_0", { source: ".view {\n  background-color: black;\n  display: grid;\n  position: relative;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n  justify-items: center;\n  align-items: center;\n}\n.view .nw {\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .ne {\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .sw {\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .se {\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .pane {\n  width: 90%;\n  height: 80%;\n  background-color: #603;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n  font-size: 3vh;\n  font-weight: bold;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n}\n.view .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n}\n.view .pane .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: coral;\n  border-radius: 36px;\n  font-size: 4vh;\n}\n.view .pane .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: springgreen;\n  border-radius: 36px;\n}\n.view .pane .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: gold;\n  border-radius: 36px;\n}\n.view .pane .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: salmon;\n  border-radius: 36px;\n}\n.view .pane .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: peru;\n  border-radius: 36px;\n}\n.view .pane div div {\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n}\n.view .all {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.view .all .pane {\n  font-size: 1.5em;\n  width: 100%;\n  height: 100%;\n  background-color: #603;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.view .all .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Know.vue","/Users/ax/Documents/prj/aug/vue/muse/Know.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,aAAa;EACb,kBAAkB;EAClB,mCAAmC;EACnC,gCAAgC;EAChC,sEAAsE;EACtE,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;ECCrB,aAAA;ADCA;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,UAAU;EACV,WAAW;EACX,sBAAsB;EACtB,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;EACpB,cAAc;EACd,iBAAiB;EACjB,mCAAmC;EACnC,gCAAgC;EAChC,sEAAsE;AACxE;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,kBAAkB;EAClB,oBAAoB;EACpB,kBAAkB;AACpB;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,iBAAiB;EACjB,mBAAmB;EACnB,cAAc;AAChB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,mBAAmB;AACrB;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,gBAAgB;EAChB,mBAAmB;AACrB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,kBAAkB;EAClB,mBAAmB;AACrB;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,gBAAgB;EAChB,mBAAmB;AACrB;AACA;EACE,kBAAkB;EAClB,oBAAoB;EACpB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,WAAW;EACX,YAAY;EACZ,sBAAsB;EACtB,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;AACtB;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB","file":"Know.vue","sourcesContent":[".view {\n  background-color: black;\n  display: grid;\n  position: relative;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n  justify-items: center;\n  align-items: center;\n}\n.view .nw {\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .ne {\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .sw {\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .se {\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .pane {\n  width: 90%;\n  height: 80%;\n  background-color: #603;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n  font-size: 3vh;\n  font-weight: bold;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n}\n.view .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n}\n.view .pane .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: coral;\n  border-radius: 36px;\n  font-size: 4vh;\n}\n.view .pane .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: springgreen;\n  border-radius: 36px;\n}\n.view .pane .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: gold;\n  border-radius: 36px;\n}\n.view .pane .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: salmon;\n  border-radius: 36px;\n}\n.view .pane .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: peru;\n  border-radius: 36px;\n}\n.view .pane div div {\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n}\n.view .all {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.view .all .pane {\n  font-size: 1.5em;\n  width: 100%;\n  height: 100%;\n  background-color: #603;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.view .all .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n","\n<template>\n  <div class=\"view\">\n    <template v-for=\"prac in knows\">\n      <div :id=\"prac.name\"  v-if=\"isPrac(prac.name)\" :class=\"klass(prac.dir)\" :key=\"prac.name\">\n        <div class=\"pane\"><div class=\"cen\"><div>{{prac.name}}</div></div>\n          <template  v-for=\"disp in prac.disps\">\n            <div :class=\"disp.dir\"><div>{{disp.name}}</div></div>\n          </template>\n        </div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n  export default {\n    data() {\n      return { prac:\"None\", all:true, knows:{} } },\n    methods: {\n      isPrac: function (prac) {\n        return this.prac===prac || this.all; },\n      onPrac: function (prac) {\n        if( prac==='Know' ) { this.all=true; } else { this.all=false; this.prac=prac; } },\n      klass: function(klas) {\n        return !this.all ? 'all' : klas; } },\n    mounted: function () {\n      this.knows = this.pracs('Know');\n      this.subscribe( 'Know', 'Know.vue', (prac) => this.onPrac(prac) ); } }\n</script>\n\n<style lang=\"less\">\n  @import \"View.less\";\n</style>\n\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$a = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$a = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$a = false;
+  /* style inject SSR */
+  
+
+  
+  var Know = normalizeComponent_1(
+    { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
+    __vue_inject_styles__$a,
+    __vue_script__$a,
+    __vue_scope_id__$a,
+    __vue_is_functional_template__$a,
+    __vue_module_identifier__$a,
+    browser,
+    undefined
+  );
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var script$a = {
+  data() {
+    return { prac:"None", all:true, wises:{} } },
+  methods: {
+    isPrac: function (prac) {
+      return this.prac===prac || this.all },
+    onPrac: function (prac) {
+      if( prac==='Wise' ) { this.all=true; } else { this.all=false; this.prac=prac; } },
+    klass: function(klas) {
+      return !this.all ? 'all' : klas; } },
+  mounted: function () {
+    this.wises = this.pracs('Wise');
+    this.subscribe( 'Wise', 'Wise.vue', (prac) => this.onPrac(prac) ); } };
+
+/* script */
+const __vue_script__$b = script$a;
+
+/* template */
+var __vue_render__$b = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { staticClass: "view" },
+    [
+      _vm._l(_vm.wises, function(prac) {
+        return [
+          _vm.isPrac(prac.name)
+            ? _c(
+                "div",
+                {
+                  key: prac.name,
+                  class: _vm.klass(prac.dir),
+                  attrs: { id: prac.name }
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "pane" },
+                    [
+                      _c("div", { staticClass: "cen" }, [
+                        _c("div", [_vm._v(_vm._s(prac.name))])
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(prac.disps, function(disp) {
+                        return [
+                          _c("div", { class: disp.dir }, [
+                            _c("div", [_vm._v(_vm._s(disp.name))])
+                          ])
+                        ]
+                      })
+                    ],
+                    2
+                  )
+                ]
+              )
+            : _vm._e()
+        ]
+      })
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$b = [];
+__vue_render__$b._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$b = function (inject) {
+    if (!inject) return
+    inject("data-v-bcc5d122_0", { source: ".view {\n  background-color: black;\n  display: grid;\n  position: relative;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n  justify-items: center;\n  align-items: center;\n}\n.view .nw {\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .ne {\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .sw {\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .se {\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .pane {\n  width: 90%;\n  height: 80%;\n  background-color: #603;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n  font-size: 3vh;\n  font-weight: bold;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n}\n.view .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n}\n.view .pane .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: coral;\n  border-radius: 36px;\n  font-size: 4vh;\n}\n.view .pane .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: springgreen;\n  border-radius: 36px;\n}\n.view .pane .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: gold;\n  border-radius: 36px;\n}\n.view .pane .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: salmon;\n  border-radius: 36px;\n}\n.view .pane .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: peru;\n  border-radius: 36px;\n}\n.view .pane div div {\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n}\n.view .all {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.view .all .pane {\n  font-size: 1.5em;\n  width: 100%;\n  height: 100%;\n  background-color: #603;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.view .all .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Wise.vue","/Users/ax/Documents/prj/aug/vue/muse/Wise.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,aAAa;EACb,kBAAkB;EAClB,mCAAmC;EACnC,gCAAgC;EAChC,sEAAsE;EACtE,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;ECCrB,aAAA;ADCA;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,UAAU;EACV,WAAW;EACX,sBAAsB;EACtB,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;EACpB,cAAc;EACd,iBAAiB;EACjB,mCAAmC;EACnC,gCAAgC;EAChC,sEAAsE;AACxE;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,kBAAkB;EAClB,oBAAoB;EACpB,kBAAkB;AACpB;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,iBAAiB;EACjB,mBAAmB;EACnB,cAAc;AAChB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,mBAAmB;AACrB;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,gBAAgB;EAChB,mBAAmB;AACrB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,kBAAkB;EAClB,mBAAmB;AACrB;AACA;EACE,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,gBAAgB;EAChB,mBAAmB;AACrB;AACA;EACE,kBAAkB;EAClB,oBAAoB;EACpB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;AACf;AACA;EACE,gBAAgB;EAChB,WAAW;EACX,YAAY;EACZ,sBAAsB;EACtB,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;AACtB;AACA;EACE,cAAc;EACd,qBAAqB;EACrB,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB","file":"Wise.vue","sourcesContent":[".view {\n  background-color: black;\n  display: grid;\n  position: relative;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n  justify-items: center;\n  align-items: center;\n}\n.view .nw {\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .ne {\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .sw {\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .se {\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.view .pane {\n  width: 90%;\n  height: 80%;\n  background-color: #603;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n  font-size: 3vh;\n  font-weight: bold;\n  grid-template-columns: 33%  33% 34%;\n  grid-template-rows: 33%  33% 34%;\n  grid-template-areas: \"nw   north ne\" \"west cen   east\" \"sw   south se\";\n}\n.view .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n}\n.view .pane .cen {\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: coral;\n  border-radius: 36px;\n  font-size: 4vh;\n}\n.view .pane .west {\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: springgreen;\n  border-radius: 36px;\n}\n.view .pane .north {\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: gold;\n  border-radius: 36px;\n}\n.view .pane .east {\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: salmon;\n  border-radius: 36px;\n}\n.view .pane .south {\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background: peru;\n  border-radius: 36px;\n}\n.view .pane div div {\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n}\n.view .all {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.view .all .pane {\n  font-size: 1.5em;\n  width: 100%;\n  height: 100%;\n  background-color: #603;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.view .all .pane .name {\n  font-size: 2em;\n  background-color: tan;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n","\n<template>\n  <div class=\"view\">\n    <template v-for=\"prac in wises\">\n      <div :id=\"prac.name\"  v-if=\"isPrac(prac.name)\" :class=\"klass(prac.dir)\" :key=\"prac.name\">\n        <div class=\"pane\"><div class=\"cen\"><div>{{prac.name}}</div></div>\n          <template  v-for=\"disp in prac.disps\">\n            <div :class=\"disp.dir\"><div>{{disp.name}}</div></div>\n          </template>\n        </div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n  export default {\n    data() {\n      return { prac:\"None\", all:true, wises:{} } },\n    methods: {\n      isPrac: function (prac) {\n        return this.prac===prac || this.all },\n      onPrac: function (prac) {\n        if( prac==='Wise' ) { this.all=true; } else { this.all=false; this.prac=prac; } },\n      klass: function(klas) {\n        return !this.all ? 'all' : klas; } },\n    mounted: function () {\n      this.wises = this.pracs('Wise');\n      this.subscribe( 'Wise', 'Wise.vue', (prac) => this.onPrac(prac) ); } }\n</script>\n\n<style lang=\"less\">\n  @import \"View.less\";\n</style>\n\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$b = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$b = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$b = false;
+  /* style inject SSR */
+  
+
+  
+  var Wise = normalizeComponent_1(
+    { render: __vue_render__$b, staticRenderFns: __vue_staticRenderFns__$b },
+    __vue_inject_styles__$b,
+    __vue_script__$b,
+    __vue_scope_id__$b,
+    __vue_is_functional_template__$b,
+    __vue_module_identifier__$b,
+    browser,
+    undefined
+  );
+
+//
 
 let Dash = {
     name: 'dash',
@@ -1036,12 +1001,15 @@ let Dash = {
       'd-logo':Logo, 'd-navb':Navb, 'd-find':Find,
       'd-tocs':Tocs$1, 'd-view':View, 'd-side':Side,
       'd-pref':Pref, 'd-foot':Foot, 'd-trak':Trak } };
+Dash.Info = Info;
+Dash.Know = Know;
+Dash.Wise = Wise;
 
 /* script */
-const __vue_script__$9 = Dash;
+const __vue_script__$c = Dash;
 
 /* template */
-var __vue_render__$9 = function() {
+var __vue_render__$c = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -1070,32 +1038,32 @@ var __vue_render__$9 = function() {
     1
   )
 };
-var __vue_staticRenderFns__$9 = [];
-__vue_render__$9._withStripped = true;
+var __vue_staticRenderFns__$c = [];
+__vue_render__$c._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$9 = function (inject) {
+  const __vue_inject_styles__$c = function (inject) {
     if (!inject) return
-    inject("data-v-0970a996_0", { source: ".dash {\n  font-family: Roboto, sans-serif;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 140px 1fr 50px;\n  grid-template-rows: 50px 1fr 50px;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n", map: {"version":3,"sources":["Dash.vue","/Users/ax/Documents/prj/aug/vue/dash/Dash.vue"],"names":[],"mappings":"AAAA;EACE,+BAA+B;EAC/B,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,qCAAqC;EACrC,iCAAiC;EACjC,uEAAuE;AACzE;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;ECCrB,aAAA;AACA;AACA;EACA,eAAA;EACA,qBAAA;EACA,mBAAA;EACA,aAAA;AACA;ADCA;ECCA,eAAA;EACA,qBAAA;EACA,mBAAA;EACA,aAAA;AACA;AACA;EACA,eAAA;EACA,qBAAA;EACA,mBAAA;EDCE,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf","file":"Dash.vue","sourcesContent":[".dash {\n  font-family: Roboto, sans-serif;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 140px 1fr 50px;\n  grid-template-rows: 50px 1fr 50px;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n","\n<template>\n  <div class=\"dash\">\n    <d-logo id=\"logo\"></d-logo>\n    <d-navb id=\"navb\"></d-navb>\n    <d-find id=\"find\"></d-find>\n    <d-tocs id=\"tocs\"></d-tocs>\n    <d-view id=\"view\"></d-view>\n    <d-side id=\"side\"></d-side>\n    <d-pref id=\"pref\"></d-pref>\n    <d-foot id=\"foot\"></d-foot>\n    <d-trak id=\"trak\"></d-trak>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Logo from './Logo.vue';\n  import Navb from './Navb.vue';\n  import Find from './Find.vue';\n  import Tocs from './Tocs.vue';\n  import View from './View.vue';\n  import Side from './Side.vue';\n  import Pref from './Pref.vue';\n  import Foot from './Foot.vue';\n  import Trak from './Trak.vue';\n\n  let Dash = {\n      name: 'dash',\n      components: {\n        'd-logo':Logo, 'd-navb':Navb, 'd-find':Find,\n        'd-tocs':Tocs, 'd-view':View, 'd-side':Side,\n        'd-pref':Pref, 'd-foot':Foot, 'd-trak':Trak } };\n  \n  export default Dash;\n  \n</script>\n\n<style lang=\"less\">\n\n   .dash { font-family:Roboto, sans-serif;\n     position:absolute; left:0; top:0; right:0; bottom:0; display:grid;\n     grid-template-columns: 140px 1fr 50px;\n     grid-template-rows:     50px 1fr 50px;\n     grid-template-areas:\n       \"logo navb find\"\n       \"tocs view side\"\n       \"pref foot trak\";\n\n    #logo { grid-area:logo; justify-self:stretch; align-self:stretch; display:grid; }\n    #navb { grid-area:navb; justify-self:stretch; align-self:stretch; display:grid; }\n    #find { grid-area:find; justify-self:stretch; align-self:stretch; display:grid; }\n    #tocs { grid-area:tocs; justify-self:stretch; align-self:stretch; display:grid; }\n    #view { grid-area:view; justify-self:stretch; align-self:stretch; display:grid; }\n    #side { grid-area:side; justify-self:stretch; align-self:stretch; display:grid; }\n    #pref { grid-area:pref; justify-self:stretch; align-self:stretch; display:grid; }\n    #foot { grid-area:foot; justify-self:stretch; align-self:stretch; display:grid; }\n    #trak { grid-area:trak; justify-self:stretch; align-self:stretch; display:grid; } }\n  \n</style>\n"]}, media: undefined });
+    inject("data-v-a1ff6b70_0", { source: ".dash {\n  font-family: Roboto, sans-serif;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 140px 1fr 50px;\n  grid-template-rows: 50px 1fr 50px;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n", map: {"version":3,"sources":["Dash.vue","/Users/ax/Documents/prj/aug/vue/dash/Dash.vue"],"names":[],"mappings":"AAAA;EACE,+BAA+B;EAC/B,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,qCAAqC;EACrC,iCAAiC;EACjC,uEAAuE;AACzE;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;ECCA,eAAA;EACA,qBAAA;EACA,mBAAA;EACA,aAAA;AACA;AACA;EACA,eAAA;EACA,qBAAA;EDCE,mBAAmB;ECCrB,aAAA;AACA;AACA;EACA,eAAA;EACA,qBAAA;EACA,mBAAA;EACA,aAAA;AACA","file":"Dash.vue","sourcesContent":[".dash {\n  font-family: Roboto, sans-serif;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 140px 1fr 50px;\n  grid-template-rows: 50px 1fr 50px;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n","\n<template>\n  <div class=\"dash\">\n    <d-logo id=\"logo\"></d-logo>\n    <d-navb id=\"navb\"></d-navb>\n    <d-find id=\"find\"></d-find>\n    <d-tocs id=\"tocs\"></d-tocs>\n    <d-view id=\"view\"></d-view>\n    <d-side id=\"side\"></d-side>\n    <d-pref id=\"pref\"></d-pref>\n    <d-foot id=\"foot\"></d-foot>\n    <d-trak id=\"trak\"></d-trak>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Logo from './Logo.vue';\n  import Navb from './Navb.vue';\n  import Find from './Find.vue';\n  import Tocs from './Tocs.vue';\n  import View from './View.vue';\n  import Side from './Side.vue';\n  import Pref from './Pref.vue';\n  import Foot from './Foot.vue';\n  import Trak from './Trak.vue';\n  \n  let Dash = {\n      name: 'dash',\n      components: {\n        'd-logo':Logo, 'd-navb':Navb, 'd-find':Find,\n        'd-tocs':Tocs, 'd-view':View, 'd-side':Side,\n        'd-pref':Pref, 'd-foot':Foot, 'd-trak':Trak } };\n\n  // Static imports for minimizing build steps in dev.\n  // Dash.....vue components exported to Router\n  import Info from '../muse/Info.vue';\n  import Know from '../muse/Know.vue';\n  import Wise from '../muse/Wise.vue';\n  Dash.Info = Info;\n  Dash.Know = Know;\n  Dash.Wise = Wise;\n \n  export default Dash;\n  \n</script>\n\n<style lang=\"less\">\n\n   .dash { font-family:Roboto, sans-serif;\n     position:absolute; left:0; top:0; right:0; bottom:0; display:grid;\n     grid-template-columns: 140px 1fr 50px;\n     grid-template-rows:     50px 1fr 50px;\n     grid-template-areas:\n       \"logo navb find\"\n       \"tocs view side\"\n       \"pref foot trak\";\n\n    #logo { grid-area:logo; justify-self:stretch; align-self:stretch; display:grid; }\n    #navb { grid-area:navb; justify-self:stretch; align-self:stretch; display:grid; }\n    #find { grid-area:find; justify-self:stretch; align-self:stretch; display:grid; }\n    #tocs { grid-area:tocs; justify-self:stretch; align-self:stretch; display:grid; }\n    #view { grid-area:view; justify-self:stretch; align-self:stretch; display:grid; }\n    #side { grid-area:side; justify-self:stretch; align-self:stretch; display:grid; }\n    #pref { grid-area:pref; justify-self:stretch; align-self:stretch; display:grid; }\n    #foot { grid-area:foot; justify-self:stretch; align-self:stretch; display:grid; }\n    #trak { grid-area:trak; justify-self:stretch; align-self:stretch; display:grid; } }\n  \n</style>\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$9 = undefined;
+  const __vue_scope_id__$c = undefined;
   /* module identifier */
-  const __vue_module_identifier__$9 = undefined;
+  const __vue_module_identifier__$c = undefined;
   /* functional template */
-  const __vue_is_functional_template__$9 = false;
+  const __vue_is_functional_template__$c = false;
   /* style inject SSR */
   
 
   
   var Dash$1 = normalizeComponent_1(
-    { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
-    __vue_inject_styles__$9,
-    __vue_script__$9,
-    __vue_scope_id__$9,
-    __vue_is_functional_template__$9,
-    __vue_module_identifier__$9,
+    { render: __vue_render__$c, staticRenderFns: __vue_staticRenderFns__$c },
+    __vue_inject_styles__$c,
+    __vue_script__$c,
+    __vue_scope_id__$c,
+    __vue_is_functional_template__$c,
+    __vue_module_identifier__$c,
     browser,
     undefined
   );
