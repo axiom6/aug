@@ -16,17 +16,20 @@
 <script type="module">
   export default {
     data() {
-      return { prac:"None", all:true, infos:{} } },
+      return { prac:'None', disp:'None', all:true, infos:{} } },
     methods: {
       isPrac: function (prac) {
         return this.prac===prac || this.all; },
       onPrac: function (prac) {
         if( prac==='Info' ) { this.all=true; } else { this.all=false; this.prac=prac; } },
+      onDisp: function (disp) {
+        this.disp=disp; },
       klass: function(klas) {
         return !this.all ? 'all' : klas; } },
     mounted: function () {
       this.infos = this.pracs('Info');
-      this.subscribe( 'Info', 'Info.vue', (prac) => this.onPrac(prac) ); } }
+      this.subscribe( 'Info', 'Info.vue',
+        (obj) => { this.onPrac(obj.prac); this.onDisp(obj.disp); } ); } }
 </script>
 
 <style lang="less">
