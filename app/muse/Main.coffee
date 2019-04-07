@@ -2,6 +2,7 @@
 import Util   from '../../pub/util/Util.js'
 import Data   from '../../pub/util/Data.js'
 import Stream from '../../pub/util/Stream.js'
+import Vis    from '../../pub/util/Vis.js'
 
 class Main
 
@@ -60,6 +61,8 @@ class Main
         Main.Batch[compk].data[compk][prack][dispk][areak].items
       bases:( compk, prack, dispk, areak, itemk  ) ->
         Main.Batch[compk].data[compk][prack][dispk][areak][itemk].bases
+      toRgbaHsv:( hsv ) ->
+         Vis.toRgbaHsv(hsv)
     }
   }
 

@@ -142,14 +142,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/app/muse/Info.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/app/muse/Info-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
 	"/app/muse/Lazy.js": {
 		"bF": 0,
 		"ft": 64,
@@ -419,21 +411,39 @@
 		"oAP": "/css/font/vuestic-icons.woff",
 		"oF": 0
 		},
-	"/data/muse/Info.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/data/muse/Info-min.json",
+	"/css/muse/Info.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/css/muse/Info.css",
 		"oF": 0,
-		"oO": 0,
-		"oS": 1
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
 		},
-	"/data/muse/Lay.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/data/muse/Lay-min.json",
+	"/css/muse/View.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/css/muse/View.css",
 		"oF": 0,
-		"oO": 0,
-		"oS": 1
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
 		},
 	"/lib/vue/vee-validate.esm.js": {
 		"bF": 0,
@@ -509,7 +519,7 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 2,
+		"oA": 1,
 		"oAP": "/node_modules/estree-walker/src/estree-walker.js",
 		"oF": 0,
 		"sC": 0,
@@ -660,6 +670,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/util/Vis.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/util/Vis-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/README.md": {
 		"cB": 0,
 		"cS": 0,
@@ -718,6 +739,17 @@
 		"mi": 0,
 		"oA": 0,
 		"oAP": "/pub/util/Util.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/util/Vis.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/util/Vis.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
@@ -841,6 +873,14 @@
 		"oAP": "/vue/muse/Base.vue",
 		"oF": 0
 		},
+	"/vue/muse/Dash.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/muse/Dash.vue",
+		"oF": 0
+		},
 	"/vue/muse/Info.js": {
 		"bF": 0,
 		"ft": 64,
@@ -851,23 +891,6 @@
 		"oF": 1,
 		"sC": 0,
 		"tS": 0
-		},
-	"/vue/muse/Info.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 0,
-		"oAP": "/vue/muse/Info.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
 		},
 	"/vue/muse/Info.vue": {
 		"cB": 0,
@@ -896,22 +919,21 @@
 		"oAP": "/vue/muse/Know.vue",
 		"oF": 0
 		},
-	"/vue/muse/View.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
+	"/vue/muse/Tocs.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/muse/View.css",
-		"oF": 1,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
+		"oAP": "/vue/muse/Tocs.vue",
+		"oF": 0
+		},
+	"/vue/muse/View.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/muse/View.vue",
+		"oF": 0
 		},
 	"/vue/muse/Wise.js": {
 		"bF": 0,
@@ -931,6 +953,17 @@
 		"oA": 1,
 		"oAP": "/vue/muse/Wise.vue",
 		"oF": 0
+		},
+	"/vue/muse/Zzzz.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/vue/muse/Zzzz-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
 		},
 	"/vue/navb/icon/menu-collapsed.svg": {
 		"ft": 2097152,

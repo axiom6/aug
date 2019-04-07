@@ -29,6 +29,7 @@ Data = (function() {
           }
           // console.log( '  Data.refine prac', prac )
           comp.pracs[pkey] = prac;
+          prac.comp = comp;
           if (prac['name'] == null) {
             prac['name'] = pkey;
           }
@@ -39,6 +40,7 @@ Data = (function() {
               continue;
             }
             prac.disps[dkey] = disp;
+            disp.prac = prac;
             if (disp['name'] == null) {
               disp['name'] = dkey;
             }
@@ -49,6 +51,7 @@ Data = (function() {
                 continue;
               }
               disp.areas[akey] = area;
+              area.disp = disp;
               if (area['name'] == null) {
                 area['name'] = akey;
               }
@@ -59,6 +62,7 @@ Data = (function() {
                   continue;
                 }
                 area.items[ikey] = item;
+                item.area = area;
                 if (item['name'] == null) {
                   item['name'] = ikey;
                 }
@@ -69,6 +73,7 @@ Data = (function() {
                     continue;
                   }
                   item.bases[bkey] = base;
+                  base.item = item;
                   if (base['name'] == null) {
                     base['name'] = bkey;
                   }

@@ -6,6 +6,8 @@ import Data from '../../pub/util/Data.js';
 
 import Stream from '../../pub/util/Stream.js';
 
+import Vis from '../../pub/util/Vis.js';
+
 Main = (function() {
   class Main {
     static begin(onReady) {
@@ -106,6 +108,9 @@ Main = (function() {
       },
       bases: function(compk, prack, dispk, areak, itemk) {
         return Main.Batch[compk].data[compk][prack][dispk][areak][itemk].bases;
+      },
+      toRgbaHsv: function(hsv) {
+        return Vis.toRgbaHsv(hsv);
       }
     }
   };
