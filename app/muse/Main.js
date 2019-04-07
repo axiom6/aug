@@ -80,6 +80,9 @@ Main = (function() {
     created: function() {},
     // console.log( 'Main.vueMixin.created() globally' )
     methods: {
+      isDef: function(d) {
+        return d !== null && typeof d !== 'undefined';
+      },
       subscribe: function(subject, source, onMethod) {
         Main['stream'].subscribe(subject, source, onMethod);
       },

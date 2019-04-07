@@ -40,6 +40,8 @@ class Main
        # console.log( 'Main.vueMixin.created() globally' )
        return
     methods: {
+      isDef:(d) ->
+        d isnt null and typeof(d) isnt 'undefined'
       subscribe:( subject, source, onMethod ) ->
         Main['stream'].subscribe( subject, source, onMethod )
         return

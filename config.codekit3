@@ -221,6 +221,204 @@
 		"oAP": "/aug.iml",
 		"oF": 0
 		},
+	"/css/base/mixin.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/css/base/mixin.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/css/font/fontawesome-webfont.eot": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/css/font/fontawesome-webfont.eot",
+		"oF": 0
+		},
+	"/css/font/fontawesome-webfont.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/css/font/fontawesome-webfont.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/css/font/fontawesome-webfont.ttf": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/css/font/fontawesome-webfont.ttf",
+		"oF": 0
+		},
+	"/css/font/fontawesome-webfont.woff": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/css/font/fontawesome-webfont.woff",
+		"oF": 0
+		},
+	"/css/font/fontawesome-webfont.woff2": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/css/font/fontawesome-webfont.woff2",
+		"oF": 0
+		},
+	"/css/font/FontAwesome.otf": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/css/font/FontAwesome.otf",
+		"oF": 0
+		},
+	"/css/font/glyphicons-halflings-regular.eot": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/css/font/glyphicons-halflings-regular.eot",
+		"oF": 0
+		},
+	"/css/font/glyphicons-halflings-regular.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/css/font/glyphicons-halflings-regular.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/css/font/glyphicons-halflings-regular.ttf": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/css/font/glyphicons-halflings-regular.ttf",
+		"oF": 0
+		},
+	"/css/font/glyphicons-halflings-regular.woff": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/css/font/glyphicons-halflings-regular.woff",
+		"oF": 0
+		},
+	"/css/font/glyphicons-halflings-regular.woff2": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/css/font/glyphicons-halflings-regular.woff2",
+		"oF": 0
+		},
+	"/css/font/ionicons.eot": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/css/font/ionicons.eot",
+		"oF": 0
+		},
+	"/css/font/ionicons.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/css/font/ionicons.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/css/font/ionicons.ttf": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/css/font/ionicons.ttf",
+		"oF": 0
+		},
+	"/css/font/ionicons.woff": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/css/font/ionicons.woff",
+		"oF": 0
+		},
+	"/css/font/ionicons.woff2": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/css/font/ionicons.woff2",
+		"oF": 0
+		},
+	"/css/font/vuestic-icons.eot": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/css/font/vuestic-icons.eot",
+		"oF": 0
+		},
+	"/css/font/vuestic-icons.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "/css/font/vuestic-icons.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/css/font/vuestic-icons.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/css/font/vuestic-icons.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/css/font/vuestic-icons.ttf": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/css/font/vuestic-icons.ttf",
+		"oF": 0
+		},
+	"/css/font/vuestic-icons.woff": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/css/font/vuestic-icons.woff",
+		"oF": 0
+		},
 	"/data/muse/Info.json": {
 		"ft": 524288,
 		"oA": 1,
@@ -311,7 +509,7 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 1,
+		"oA": 2,
 		"oAP": "/node_modules/estree-walker/src/estree-walker.js",
 		"oF": 0,
 		"sC": 0,
@@ -600,14 +798,6 @@
 		"oAP": "/vue/dash/Tocs.vue",
 		"oF": 0
 		},
-	"/vue/dash/Toct.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/dash/Toct.vue",
-		"oF": 0
-		},
 	"/vue/dash/Trak.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -635,193 +825,20 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/vue/font/fontawesome-webfont.eot": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/vue/font/fontawesome-webfont.eot",
-		"oF": 0
-		},
-	"/vue/font/fontawesome-webfont.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/vue/font/fontawesome-webfont.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/vue/font/fontawesome-webfont.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/vue/font/fontawesome-webfont.ttf",
-		"oF": 0
-		},
-	"/vue/font/fontawesome-webfont.woff": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/vue/font/fontawesome-webfont.woff",
-		"oF": 0
-		},
-	"/vue/font/fontawesome-webfont.woff2": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/vue/font/fontawesome-webfont.woff2",
-		"oF": 0
-		},
-	"/vue/font/FontAwesome.otf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/vue/font/FontAwesome.otf",
-		"oF": 0
-		},
-	"/vue/font/glyphicons-halflings-regular.eot": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/vue/font/glyphicons-halflings-regular.eot",
-		"oF": 0
-		},
-	"/vue/font/glyphicons-halflings-regular.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/vue/font/glyphicons-halflings-regular.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/vue/font/glyphicons-halflings-regular.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/vue/font/glyphicons-halflings-regular.ttf",
-		"oF": 0
-		},
-	"/vue/font/glyphicons-halflings-regular.woff": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/vue/font/glyphicons-halflings-regular.woff",
-		"oF": 0
-		},
-	"/vue/font/glyphicons-halflings-regular.woff2": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/vue/font/glyphicons-halflings-regular.woff2",
-		"oF": 0
-		},
-	"/vue/font/ionicons.eot": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/vue/font/ionicons.eot",
-		"oF": 0
-		},
-	"/vue/font/ionicons.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/vue/font/ionicons.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/vue/font/ionicons.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/vue/font/ionicons.ttf",
-		"oF": 0
-		},
-	"/vue/font/ionicons.woff": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/vue/font/ionicons.woff",
-		"oF": 0
-		},
-	"/vue/font/ionicons.woff2": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/vue/font/ionicons.woff2",
-		"oF": 0
-		},
-	"/vue/font/vuestic-icons.eot": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/vue/font/vuestic-icons.eot",
-		"oF": 0
-		},
-	"/vue/font/vuestic-icons.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "/vue/font/vuestic-icons.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"/vue/font/vuestic-icons.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/vue/font/vuestic-icons.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/vue/font/vuestic-icons.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/vue/font/vuestic-icons.ttf",
-		"oF": 0
-		},
-	"/vue/font/vuestic-icons.woff": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/vue/font/vuestic-icons.woff",
-		"oF": 0
-		},
 	"/vue/form/FormElements.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/vue/form/FormElements.vue",
+		"oF": 0
+		},
+	"/vue/muse/Base.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/muse/Base.vue",
 		"oF": 0
 		},
 	"/vue/muse/Info.js": {
@@ -834,6 +851,23 @@
 		"oF": 1,
 		"sC": 0,
 		"tS": 0
+		},
+	"/vue/muse/Info.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/vue/muse/Info.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
 		},
 	"/vue/muse/Info.vue": {
 		"cB": 0,

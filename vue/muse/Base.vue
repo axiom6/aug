@@ -1,4 +1,50 @@
 
+<template>
+  <div class="comp">
+    <template v-for="prac in practices">
+      <div v-show="isPrac(prac.name)" :class="pracClass(prac.dir)" :key="prac.name">
+        <div class="prac">
+          <div     v-show="isDisp(prac.name)" :class="dispClass('cen')"    data-dir="cen">
+            <div class="disp">{{prac.name}}</div></div>
+          <template v-for="disp in prac.disps">
+              <div v-show="isDisp(disp.name)" :class="dispClass(disp.dir)" :data-dir="disp.dir">
+                <div class="disp">{{disp.name}}</div></div>
+          </template>
+        </div>
+      </div>
+    </template>
+  </div>  
+</template>
+
+<script type="module">
+
+  export default {
+    
+    data() {
+      return { comp:'None', prac:'All', disp:'All', practices:{} } },
+    methods: {
+      isPrac: function (prac) {
+        return this.prac===prac || this.prac==='All' },
+      isDisp: function (disp) {
+        return this.disp===disp || this.disp==='All' },
+      onPrac: function (prac) {
+        this.prac = prac; this.disp = 'All'; },
+      onDisp: function (disp) {
+        this.disp= disp; },
+      pracClass: function(dir) {
+        return this.prac==='All' ? dir : 'fullPrac'; },
+      dispClass: function(dir) {
+        return this.disp==='All' ? dir : 'fullDisp'; } },
+
+    mounted: function () {
+      this.practices = this.pracs(this.comp);
+      this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
+         if( obj.disp==='All' ) { this.onPrac(obj.prac); }
+         else                   { this.onDisp(obj.disp); } } ); } }
+</script>
+
+<style lang="less">
+
 .grid3x3() { display:grid; grid-template-columns:33% 33% 34%; grid-template-rows:33% 33% 34%;
              grid-template-areas: "nw north ne" "west cen east" "sw south se"; }
 
@@ -45,4 +91,6 @@
   [data-dir="south"] { .bgc(peru);   }
 
 }
+
+</style>
 
