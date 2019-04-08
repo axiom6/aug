@@ -56,6 +56,8 @@ Main = (function() {
 
   Data.hosted = "https://ui-48413.firebaseapp.com/";
 
+  Main.FontUrl = "../../css/font/helvetiker_regular.typeface.json";
+
   Main.Batch = {
     Cols: {
       url: 'muse/Cols.json',
@@ -92,6 +94,12 @@ Main = (function() {
       data: null,
       type: 'Pack',
       plane: 'Cube'
+    },
+    Font: {
+      url: Main.FontUrl,
+      data: null,
+      type: 'Spec',
+      plane: 'Cube'
     }
   };
 
@@ -107,6 +115,9 @@ Main = (function() {
       },
       publish: function(subject, object) {
         Main['stream'].publish(subject, object);
+      },
+      batch: function() {
+        return Main.Batch;
       },
       cols: function() {
         console.log('Cols', Main.Batch['Cols'].data['Cols'].pracs);

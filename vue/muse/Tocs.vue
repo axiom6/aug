@@ -20,9 +20,11 @@
   let Tocs = {
     
     data() { return { plane:'None', prac:'None',
-        komps:{ Info:{ name:'Info', pracs:{} },
+        komps:{ Cube:{ name:'Cube', pracs:{} },
+                Info:{ name:'Info', pracs:{} },
                 Know:{ name:'Know', pracs:{} },
-                Wise:{ name:'Wise', pracs:{} } } } },
+                Wise:{ name:'Wise', pracs:{} },
+                Svga:{ name:'Svga', pracs:{} } } } },
     
     methods: {
       showPlane: function(plane) {
@@ -40,7 +42,7 @@
     
     mounted: function () {
       for( let key in this.komps ) {
-        if( this.komps.hasOwnProperty(key) ) {
+        if( this.komps.hasOwnProperty(key) && key !== 'Cube' && key !== 'Svga' ) {
           this.komps[key].pracs = this.pracs(key); } } } };
   
    export default Tocs;

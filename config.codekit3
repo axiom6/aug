@@ -15,12 +15,23 @@
 		"oAP": "/build/.idea",
 		"oF": 0
 		},
+	"/app/build/rollup.cube.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/build/rollup.cube-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/app/build/rollup.dash.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/app/build/rollup.dash-min.js",
 		"oF": 0,
 		"sC": 0,
@@ -31,7 +42,7 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/app/build/rollup.info-min.js",
 		"oF": 0,
 		"sC": 0,
@@ -42,8 +53,19 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/app/build/rollup.know-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/build/rollup.svga.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/build/rollup.svga-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -53,7 +75,7 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/app/build/rollup.wise-min.js",
 		"oF": 0,
 		"sC": 0,
@@ -131,6 +153,45 @@
 		"oO": 0,
 		"oS": 1
 		},
+	"/app/demo/svga.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "/app/demo/svga-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/app/demo/svga.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/app/demo/svga.html",
+		"oF": 0
+		},
+	"/app/demo/svga.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "/app/demo/svga.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/app/demo/Svga.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/app/demo/Svga.vue",
+		"oF": 0
+		},
 	"/app/muse/Dash.js": {
 		"bF": 0,
 		"ft": 64,
@@ -149,7 +210,7 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/app/muse/Lazy-min.js",
-		"oF": 1,
+		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
@@ -190,7 +251,7 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/app/muse/Muse-min.js",
-		"oF": 1,
+		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
@@ -322,6 +383,22 @@
 		"oAP": "/css/font/glyphicons-halflings-regular.woff2",
 		"oF": 0
 		},
+	"/css/font/helvetiker_bold.typeface.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/css/font/helvetiker_bold.typeface-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/css/font/helvetiker_regular.typeface.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/css/font/helvetiker_regular.typeface-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
 	"/css/font/ionicons.eot": {
 		"cB": 0,
 		"ft": 8192,
@@ -445,12 +522,34 @@
 		"sI": 0,
 		"sU": 0
 		},
+	"/lib/three/OrbitControls.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/lib/three/OrbitControls-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/lib/three/three.module.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/lib/three/three.module-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/lib/vue/vee-validate.esm.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/lib/vue/vee-validate.esm-min.js",
 		"oF": 0,
 		"sC": 0,
@@ -483,7 +582,7 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/lib/vue/vuex-i18n.esm-min.js",
 		"oF": 0,
 		"sC": 0,
@@ -494,7 +593,7 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/lib/vue/vuex.esm-min.js",
 		"oF": 0,
 		"sC": 0,
@@ -519,7 +618,7 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 1,
+		"oA": 2,
 		"oAP": "/node_modules/estree-walker/src/estree-walker.js",
 		"oF": 0,
 		"sC": 0,
@@ -580,6 +679,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/node_modules/rollup-plugin-scss/index.es.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/node_modules/rollup-plugin-scss/index.es-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/node_modules/rollup-plugin-vue/dist/rollup-plugin-vue.mjs": {
 		"cB": 0,
 		"ft": 8192,
@@ -626,6 +736,17 @@
 		"oO": 0,
 		"oS": 1
 		},
+	"/pub/cube/Build.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/cube/Build-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/util/Data.js": {
 		"bF": 0,
 		"ft": 64,
@@ -642,7 +763,7 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/pub/util/Match-min.js",
 		"oF": 0,
 		"sC": 0,
@@ -675,7 +796,7 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/pub/util/Vis-min.js",
 		"oF": 0,
 		"sC": 0,
@@ -700,6 +821,61 @@
 		"rFN": 0,
 		"uCM": 0
 		},
+	"/src/cube/Build.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/cube/Build.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/cube/Cube3D.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/cube/Cube3D.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/cube/CubeTh.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/cube/CubeTh.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/cube/Gui.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/cube/Gui.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/cube/Rect.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/cube/Rect.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
 	"/src/util/Data.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -716,7 +892,7 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/src/util/Match-min.js",
 		"oF": 2,
 		"sC": 0,
@@ -851,7 +1027,7 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/dash/Zzzz-min.js",
 		"oF": 0,
 		"sC": 0,
@@ -873,6 +1049,14 @@
 		"oAP": "/vue/muse/Base.vue",
 		"oF": 0
 		},
+	"/vue/muse/Cube.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/muse/Cube.vue",
+		"oF": 0
+		},
 	"/vue/muse/Dash.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -888,7 +1072,7 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/vue/muse/Info-min.js",
-		"oF": 1,
+		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
@@ -907,7 +1091,7 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/vue/muse/Know-min.js",
-		"oF": 1,
+		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
@@ -942,7 +1126,7 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/vue/muse/Wise-min.js",
-		"oF": 1,
+		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
@@ -959,7 +1143,7 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/muse/Zzzz-min.js",
 		"oF": 0,
 		"sC": 0,
@@ -1069,7 +1253,7 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/vuex/i18n/I18n-min.js",
 		"oF": 0,
 		"sC": 0,
@@ -1113,7 +1297,7 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/vue/zzzz/Imports-min.js",
 		"oF": 0,
 		"sC": 0,
@@ -2995,7 +3179,7 @@
 		"quality": 100
 		},
 	"languageDefaultsJS": {
-		"autoOutputAction": 0,
+		"autoOutputAction": 1,
 		"autoOutputPathFilenamePattern": "*-min.js",
 		"autoOutputPathRelativePath": "/min",
 		"autoOutputPathReplace1": "",

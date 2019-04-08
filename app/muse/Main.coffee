@@ -6,8 +6,9 @@ import Vis    from '../../pub/util/Vis.js'
 
 class Main
 
-  Data.local  = "http://localhost:63342/aug/app/data/"
-  Data.hosted = "https://ui-48413.firebaseapp.com/"
+  Data.local   = "http://localhost:63342/aug/app/data/"
+  Data.hosted  = "https://ui-48413.firebaseapp.com/"
+  Main.FontUrl = "../../css/font/helvetiker_regular.typeface.json"
 
   Main.Batch =
     Cols: { url:'muse/Cols.json', data:null, type:'Pack', plane:'Cols' }
@@ -16,6 +17,7 @@ class Main
     Know: { url:'muse/Know.json', data:null, type:'Pack', plane:'Know' }
     Wise: { url:'muse/Wise.json', data:null, type:'Pack', plane:'Wise' }
     Cube: { url:'muse/Cube.json', data:null, type:'Pack', plane:'Cube' }
+    Font: { url:Main.FontUrl,     data:null, type:'Spec', plane:'Cube' }
 
   Main.begin  =  ( onReady ) ->
     Main.onReady = onReady
@@ -59,7 +61,9 @@ class Main
       publish:( subject, object ) ->
         Main['stream'].publish( subject, object )
         return
-      cols:() ->
+      batch:() ->
+        Main.Batch
+      cols:()  ->
         console.log( 'Cols', Main.Batch['Cols'].data['Cols'].pracs )
         Main.Batch['Cols'].data['Cols'].pracs
       comps:( compk ) ->

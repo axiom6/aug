@@ -11,9 +11,11 @@
     "dash": "rollup --config app/build/rollup.dash.js",
     "info": "rollup --config app/build/rollup.info.js",
     "know": "rollup --config app/build/rollup.know.js",
-    "wise": "rollup --config app/build/rollup.wise.js"
+    "wise": "rollup --config app/build/rollup.wise.js",
+    "svga": "rollup --config app/build/rollup.svga.js"
   },
   "dependencies": {
+    "rollup-plugin-scss": "^1.0.1",
     "vue": "^2.5.22"
   },
   "devDependencies": {
