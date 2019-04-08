@@ -10,12 +10,10 @@
 
 <script type="module">
   export default {
-    data() { return { isVisible:true }; },
-    updated:function() {
-      this.isVisible = false; },
+    
     methods:{
       show:function() {
-        return this.isVisible; } } }
+        return this.$route.name===null } } }
 
 </script>
 

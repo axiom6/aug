@@ -1,4 +1,5 @@
-var Main;
+var Main,
+  hasProp = {}.hasOwnProperty;
 
 import Util from '../../pub/util/Util.js';
 
@@ -26,7 +27,23 @@ Main = (function() {
         subjects: subjects
       };
       Main.stream = new Stream(subjects, infoSpec);
+      Main.mergePracsCols();
       Main.onReady();
+    }
+
+    static mergePracsCols() {
+      var col, cols, comp, i, key, len, prcs, ref;
+      cols = Main.Batch['Cols'].data['Cols'].pracs;
+      ref = ['Info', 'Know', 'Wise'];
+      for (i = 0, len = ref.length; i < len; i++) {
+        comp = ref[i];
+        prcs = Main.Batch[comp].data[comp].pracs;
+        for (key in cols) {
+          if (!hasProp.call(cols, key)) continue;
+          col = cols[key];
+          prcs[key] = col;
+        }
+      }
     }
 
     static logPracs(compk) {
@@ -90,6 +107,10 @@ Main = (function() {
       },
       publish: function(subject, object) {
         Main['stream'].publish(subject, object);
+      },
+      cols: function() {
+        console.log('Cols', Main.Batch['Cols'].data['Cols'].pracs);
+        return Main.Batch['Cols'].data['Cols'].pracs;
       },
       comps: function(compk) {
         return Main.Batch[compk].data.comps;

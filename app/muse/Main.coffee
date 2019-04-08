@@ -28,8 +28,18 @@ class Main
     subjects = subjects.concat( Main.NavbSubjects )
     infoSpec = { subscribe:false, publish:false, subjects:subjects}
     Main.stream = new Stream( subjects, infoSpec )
+    Main.mergePracsCols()
     Main.onReady()
     # Main.logPracs( 'Info' )
+    return
+
+  Main.mergePracsCols = () ->
+    cols = Main.Batch['Cols'].data['Cols'].pracs
+    for comp in ['Info','Know','Wise']
+      prcs = Main.Batch[comp].data[comp].pracs
+      for own  key, col of cols
+        prcs[key] = col
+      # console.log( 'Main.mergePracsCols', prcs )
     return
 
   Main.logPracs = ( compk ) ->
@@ -49,6 +59,9 @@ class Main
       publish:( subject, object ) ->
         Main['stream'].publish( subject, object )
         return
+      cols:() ->
+        console.log( 'Cols', Main.Batch['Cols'].data['Cols'].pracs )
+        Main.Batch['Cols'].data['Cols'].pracs
       comps:( compk ) ->
         Main.Batch[compk].data.comps
       pracs:( compk ) ->

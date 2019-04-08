@@ -1,27 +1,19 @@
 
-<template>
-  <div class="tocs">
-    <ul>
-      <template v-for="komp in komps">
-        <li :key="komp.name"><span v-on:click="showPlane(komp.name)">
-          <router-link :to="{ name:komp.name }">{{komp.name}}</router-link></span>
-          <ul  v-if="plane===komp.name">
-            <template v-for="prac in komps[komp.name].pracs" >
-              <li v-on:click="showPrac(prac.name)" :style="style(prac.hsv)" :key="prac.name">{{prac.name}}
-                <ul>
-                  <template v-for="disp in prac.disps">
-                    <li v-on:click.stop="showDisp(prac.name,disp.name)" :style="style(disp.hsv)" :key="disp.name"
-                        :data-dir="disp.dir">{{disp.name}}</li>
-                  </template>
-                </ul>
-              </li>
-            </template>
-          </ul>
+<template><div class="tocs">
+  <ul><template v-for="komp in komps">
+    <li :key="komp.name"><span v-on:click="showPlane(komp.name)">
+      <router-link :to="{ name:komp.name }">{{komp.name}}</router-link></span>
+      <ul  v-if="plane===komp.name"><template v-for="prac in komps[komp.name].pracs" >
+        <li v-on:click="showPrac(prac.name)" :style="style(prac.hsv)" :key="prac.name">{{prac.name}}
+          <ul><template v-for="disp in prac.disps">
+            <li v-on:click.stop="showDisp(prac.name,disp.name)" :style="style(disp.hsv)" :key="disp.name"
+              :data-dir="disp.dir">{{disp.name}}</li>
+          </template></ul>
         </li>
-      </template>
-    </ul>
-  </div>
-</template>
+      </template></ul>
+    </li>
+  </template></ul>
+</div></template>
 
 <script type="module">
   
@@ -73,5 +65,3 @@
   }
   
 </style>
-
-
