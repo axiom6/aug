@@ -34,13 +34,14 @@
         'd-pref':Pref, 'd-foot':Foot, 'd-trak':Trak } };
 
   // Static imports for minimizing build steps in dev.
-  
+  import Home from './Home.vue';
   import Info from './Info.vue';
   import Know from './Know.vue';
   import Wise from './Wise.vue';
 //import Cube from './Cube.vue';
   import Svga from '../../app/demo/Svga.vue';
-  
+
+  Dash.Home = Home;
   Dash.Info = Info;
   Dash.Know = Know;
   Dash.Wise = Wise;

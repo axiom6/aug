@@ -920,6 +920,28 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/src/dash/Navb.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/dash/Navb.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/dash/Navb.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/dash/Navb-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/src/util/Data.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -1017,17 +1039,6 @@
 		"oA": 1,
 		"oAP": "/vue/dash/Logo.vue",
 		"oF": 0
-		},
-	"/vue/dash/Navb.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/vue/dash/Navb.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
 		},
 	"/vue/dash/Navb.vue": {
 		"cB": 0,
@@ -1145,6 +1156,14 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/vue/muse/Dash.vue",
+		"oF": 0
+		},
+	"/vue/muse/Home.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/muse/Home.vue",
 		"oF": 0
 		},
 	"/vue/muse/Info.js": {

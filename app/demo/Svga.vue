@@ -1,8 +1,10 @@
 
 <template>
-  <div class="ocean">
-    <div class="wave"></div>
-    <div class="wave"></div>
+  <div class="svga">
+    <div class="ocean">
+      <div class="wave"></div>
+      <div class="wave"></div>
+    </div>
   </div>
 </template>
 
@@ -14,21 +16,19 @@
 
 <style lang="scss">
   // best seen at 1500px or less
-  
-  html, body { height: 100%; }
-  body {
+  .svga {
     background:radial-gradient(ellipse at center, rgba(255,254,234,1) 0%, rgba(255,254,234,1) 35%, #B7E8EB 100%);
-    overflow: hidden;
+    overflow: hidden; height: 100%; background:black;
   }
   
-  .ocean { position:absolute; left:0; bottom:0; width:100%; background: #015871; }
+  .ocean { position:absolute; left:0; bottom:0; width:100%; }
   
   .wave {
     background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x;
     position: absolute;
-    top:-198px; // bottom:   0;
-    width:  6400px; // 6400px
-    height: 198px;
+    top:-198px;
+    width:  6400px;
+    height:  210px; // 198px
     animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;
     transform: translate3d(0, 0, 0);
   }

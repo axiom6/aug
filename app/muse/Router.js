@@ -12,6 +12,7 @@ if( lazyLoading===false){}
 
 export default new Router( { // Static Import for quich dev cycles
   routes:[
+    { path:'/',     name:'Home', components:{ Home:Dash.Home } },
     { path:'/cube', name:'Cube', components:{ Cube:lazyLoading('muse/Cube') } },
     { path:'/info', name:'Info', components:{ Info:Dash.Info } },
     { path:'/know', name:'Know', components:{ Know:Dash.Know } },
@@ -22,13 +23,5 @@ export default new Router( { // Static Import for quich dev cycles
 /*
   const Parent = {
     template:'<router-view></router-view>' };
-
-
-export default new Router( { // Dynamic Importing
-  routes:[
-    { path:'/info', name:'Info', components:{ Info:lazyLoading('muse/Info')  } },
-    { path:'/know', name:'Know', components:{ Know:lazyLoading('muse/Know')  } },
-    { path:'/wise', name:'Wise', components:{ Wise:lazyLoading('muse/Wise')  } }
-    ] } )
  */
 

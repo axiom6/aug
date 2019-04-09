@@ -2,6 +2,8 @@
 <template>
   <div>
     <div class="view" v-if="show()"><h1>Welcome to Augmentation<br/>Choose a Component on the Left</h1></div>
+    <router-view name="Home"></router-view>
+    <router-view name="Cube"></router-view>
     <router-view name="Info"></router-view>
     <router-view name="Know"></router-view>
     <router-view name="Wise"></router-view>

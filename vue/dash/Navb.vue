@@ -1,7 +1,7 @@
 
 <template>
-  <div class="navb">
-    <div class="home"     @click="click('Home')"    ><i class="fas fa-home"   ></i>Home</div>
+  <div class="navb">    <!-- <i class="fas fa-home"></i> -->
+    <div class="home"><router-link :to="{ name:'Home'}">Home</router-link></div>
     <div class="search"   @click="click('Search')"  >
       <label><input class="input" placeholder="  Search"  type="text" size="16"></label><!-- &#xF002; -->
     </div>
@@ -36,14 +36,13 @@
   
   // top | right | bottom | left
   
-  @navb-height:48px; @navb-hover-left:0.10*@navb-height;  @navb-hover-top:0.40*@navb-height;
-  
   .grid1x5() { display:grid; grid-template-columns:5% 45% 20% 10% 10% 10%;
     grid-template-areas: "gleft ghome gsearch gcontact gsettings gsignon"; }
   
   .navb {  .grid1x5(); background-color:black; color:wheat; display:grid;
       font-family:Roboto, sans-serif; font-size:3vh; font-weight:bold;
-    .home     { grid-area:ghome;     justify-self:start; align-self:center; }
+    .home     { grid-area:ghome;     justify-self:start; align-self:center;
+      a { color:wheat; text-decoration:none; }}
     .search   { grid-area:gsearch;   justify-self:start; align-self:center; // font-family:FontAwesome, sans-serif;
       label .input{ font-family:Roboto, sans-serif; font-size:3vh; font-weight:bold;
         border-radius:0 12px 12px 0; background:black; color:wheat; } }
