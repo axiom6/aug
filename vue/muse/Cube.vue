@@ -6,6 +6,11 @@
 
 <script type="module">
   
+  // These imports from CoffeeScipt source files outputs insignificant
+  // warning messages for Util Data Cube3D and Rect when this file Cube.vue
+  // is compiled by rollup.config.cube.js However the dynamic import of
+  // this Cube.vue ends the warning messages. CoffeeScript import of original
+  // CoffeeScript does not produce warning messages.
   import Build  from '../../pub/cube/Build.js'
   import CubeTh from '../../pub/cube/CubeTh.js'
   

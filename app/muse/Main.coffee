@@ -1,5 +1,4 @@
 
-import Util   from '../../pub/util/Util.js'
 import Data   from '../../pub/util/Data.js'
 import Stream from '../../pub/util/Stream.js'
 import Vis    from '../../pub/util/Vis.js'
@@ -26,8 +25,7 @@ class Main
 
   Main.init =  ( batch ) ->
     Main.Batch = batch # Not necessary here, but assigned for compatibilitry
-    subjects = ["Info","Know","Wise"]
-    subjects = subjects.concat( Main.NavbSubjects )
+    subjects = ["Info","Know","Wise","Cube","Navb"]
     infoSpec = { subscribe:false, publish:false, subjects:subjects}
     Main.stream = new Stream( subjects, infoSpec )
     Main.mergePracsCols()
@@ -80,26 +78,13 @@ class Main
         Main.Batch[compk].data[compk][prack][dispk][areak][itemk].bases
       toRgbaHsv:( hsv ) ->
          Vis.toRgbaHsv(hsv)
+      #navbSpecs:() ->
+      #  Main.NavbSpecs
     }
   }
 
 
-  Main.NavbSubjects = ["Search","Contact","Settings","SignOn"]
-  Main.NavbSpecs    = [
-    { type:"NavBarLeft" }
-    { type:"Item",      name:"Home",   icon:"fa-home", topic:'SelectView', subject:"Select" }
-    { type:"NavBarEnd" }
-    { type:"NavBarRight"}
-    { type:"Search",    name:"Search",    icon:"fa-search", size:"10", topic:'Search', subject:"Search" }
-    { type:"Contact",   name:"Contact",   icon:"fa-user", topic:"http://twitter.com/TheTomFlaherty", subject:"Contact" }
-    { type:"Dropdown",  name:"Settings",  icon:"fa-cog", items: [
-      { type:"Item",    name:"Preferences", topic:"Preferences", subject:"Settings" }
-      { type:"Item",    name:"Connection",  topic:"Connection",  subject:"Settings" }
-      { type:"Item",    name:"Privacy",     topic:"Privacy",     subject:"Settings" } ] }
-    { type:"SignOn",    name:"SignOn", icon:"fa-sign-in", size:"10", topic:'SignOn', subject:"SignOn" }
-    { type:"NavBarEnd"  } ]
 
-  Util.noop( Main.NavbSpecs )
 
 `export default Main`
 

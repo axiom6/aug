@@ -12,6 +12,7 @@
     "info": "rollup --config app/build/rollup.info.js",
     "know": "rollup --config app/build/rollup.know.js",
     "wise": "rollup --config app/build/rollup.wise.js",
+    "cube": "rollup --config app/build/rollup.cube.js",
     "svga": "rollup --config app/build/rollup.svga.js"
   },
   "dependencies": {
@@ -19,12 +20,14 @@
     "vue": "^2.5.22"
   },
   "devDependencies": {
+    "coffeescript": "^2.4.1",
     "eslint": "^5.12.0",
     "eslint-config-jwalker": "^5.2.0",
     "eslint-plugin-vue": "^5.1.0",
     "node-sass": "^4.11.0",
     "rollup": "^1.7.3",
     "rollup-plugin-buble": "^0.19.6",
+    "rollup-plugin-coffee-script": "^2.0.0",
     "rollup-plugin-commonjs": "^9.3.0",
     "rollup-plugin-eslint": "^5.0.0",
     "rollup-plugin-filesize": "^6.0.0",
@@ -34,7 +37,7 @@
     "vue-template-compiler": "^2.5.22"
   },
   "devDependenciesGlobal": {
-    "coffee-script": ">=1.10.x",
+    "coffeescript": "^2.4.1",
     "less": ">=2.7.x"
   },
   "engines": {

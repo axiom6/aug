@@ -747,6 +747,50 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/cube/Cube3D.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/cube/Cube3D-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/cube/CubeTh.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/cube/CubeTh-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/cube/Gui.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/cube/Gui-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/cube/Rect.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/cube/Rect-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/util/Data.js": {
 		"bF": 0,
 		"ft": 64,
@@ -974,6 +1018,17 @@
 		"oAP": "/vue/dash/Logo.vue",
 		"oF": 0
 		},
+	"/vue/dash/Navb.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/vue/dash/Navb.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
 	"/vue/dash/Navb.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -1041,6 +1096,22 @@
 		"oAP": "/vue/form/FormElements.vue",
 		"oF": 0
 		},
+	"/vue/maps/google/Goog.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/maps/google/Goog.vue",
+		"oF": 0
+		},
+	"/vue/maps/leaflet/Leaf.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/maps/leaflet/Leaf.vue",
+		"oF": 0
+		},
 	"/vue/muse/Base.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -1048,6 +1119,17 @@
 		"oA": 1,
 		"oAP": "/vue/muse/Base.vue",
 		"oF": 0
+		},
+	"/vue/muse/Cube.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/muse/Cube-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
 		},
 	"/vue/muse/Cube.vue": {
 		"cB": 0,

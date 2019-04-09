@@ -51,10 +51,10 @@
 
 <style lang="less">
   .tocs { background-color:black;
-    ul { padding:0; list-style: none; align-self:start; font-size:3vh; display:grid;
+    ul { padding:0; list-style:none; align-self:start; font-size:3vh; display:grid;
       li  { background-color:#333; padding-left:0.25em; align-self:start;                            // Comp
             border-radius:0 24px 24px 0; margin:0.2em 0.2em 0.2em 0.2em;
-         a  { color:white; text-decoration:none; }
+         a  { color:wheat; text-decoration:none; }
          ul { font-size:2vh;
            li { border-radius:0 12px 12px 0; color:black; margin:0.2em 0.2em 0.2em 0.2em;            // Prac
              ul { font-size:1.5vh; margin-left:1em; display:none;

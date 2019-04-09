@@ -38,13 +38,13 @@
   import Info from './Info.vue';
   import Know from './Know.vue';
   import Wise from './Wise.vue';
-  import Cube from './Cube.vue';
+//import Cube from './Cube.vue';
   import Svga from '../../app/demo/Svga.vue';
   
   Dash.Info = Info;
   Dash.Know = Know;
   Dash.Wise = Wise;
-  Dash.Cube = Cube;
+//Dash.Cube = Cube;
   Dash.Svga = Svga;
  
   export default Dash;
@@ -73,3 +73,41 @@
     #trak { grid-area:trak; justify-self:stretch; align-self:stretch; display:grid; } }
   
 </style>
+
+<!--script type="module">
+
+  import Logo from '../dash/Logo.vue';
+  import Navb from '../dash/Navb.vue';
+  import Find from '../dash/Find.vue';
+  import Tocs from './Tocs.vue';
+  import View from './View.vue';
+  import Side from '../dash/Side.vue';
+  import Pref from '../dash/Pref.vue';
+  import Foot from '../dash/Foot.vue';
+  import Trak from '../dash/Trak.vue';
+
+
+  let Dash = {
+    name: 'dash',
+    components: {
+      'd-logo':Logo, 'd-navb':Navb, 'd-find':Find,
+      'd-tocs':Tocs, 'd-view':View, 'd-side':Side,
+      'd-pref':Pref, 'd-foot':Foot, 'd-trak':Trak } };
+
+  // Static imports for minimizing build steps in dev.
+
+  import Info from './Info.vue';
+  import Know from './Know.vue';
+  import Wise from './Wise.vue';
+  //import Cube from './Cube.vue';
+  import Svga from '../../app/demo/Svga.vue';
+
+  Dash.Info = Info;
+  Dash.Know = Know;
+  Dash.Wise = Wise;
+  //Dash.Cube = Cube;
+  Dash.Svga = Svga;
+
+  export default Dash;
+
+</script-->

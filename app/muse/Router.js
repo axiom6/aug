@@ -12,7 +12,7 @@ if( lazyLoading===false){}
 
 export default new Router( { // Static Import for quich dev cycles
   routes:[
-    { path:'/cube', name:'Cube', components:{ Cube:Dash.Cube } },
+    { path:'/cube', name:'Cube', components:{ Cube:lazyLoading('muse/Cube') } },
     { path:'/info', name:'Info', components:{ Info:Dash.Info } },
     { path:'/know', name:'Know', components:{ Know:Dash.Know } },
     { path:'/wise', name:'Wise', components:{ Wise:Dash.Wise } },

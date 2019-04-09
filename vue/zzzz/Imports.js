@@ -11,8 +11,11 @@ import Info             from 'vue/muse/Info.vue'
 import Know             from 'vue/muse/Know.vue'
 import Wise             from 'vue/muse/Wise.vue'
 import Svga             from 'app/demo/Svga.vue'
+import Goog             from 'vue/maps/google/Goog.vue'
+import Leaf             from 'vue/maps/leaflet/Leaf.vue'
 
 if( MuseRollupConfig===false && Router===false && Muse===false && Svga===false ) {}
 if( MuseRollupInfo===false   && MuseRollupKnow===false && MuseRollupWise===false ) {}
 if( MuseRollupCube===false   && MuseRollupSvga===false ) {}
 if( Info===false             && Know===false           && Wise===false ) {}
+if( Goog===false             && Leaf===false                           ) {}
