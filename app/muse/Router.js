@@ -5,7 +5,6 @@ import  Router  from '../../lib/vue/vue-router.esm.js';
 Vue.use(Router);
 
 let lazyLoading = (name) => () => {
-  //console.log( 'Router', name )
   return import( `../../vue/${name}.js` ); }
 
 if( lazyLoading===false){}
@@ -17,7 +16,7 @@ export default new Router( { // Static Import for quich dev cycles
     { path:'/info', name:'Info', components:{ Info:Dash.Info } },
     { path:'/know', name:'Know', components:{ Know:Dash.Know } },
     { path:'/wise', name:'Wise', components:{ Wise:Dash.Wise } },
-    { path:'/svga', name:'Svga', components:{ Svga:Dash.Svga } }
+    { path:'/wood', name:'Wood', components:{ Wood:Dash.Wood } }
     ] } )
 
 /*

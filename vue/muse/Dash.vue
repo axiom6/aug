@@ -39,14 +39,14 @@
   import Know from './Know.vue';
   import Wise from './Wise.vue';
 //import Cube from './Cube.vue';
-  import Svga from '../../app/demo/Svga.vue';
+  import Wood from '../../app/anim/wood/Wood.vue';
 
   Dash.Home = Home;
   Dash.Info = Info;
   Dash.Know = Know;
   Dash.Wise = Wise;
 //Dash.Cube = Cube;
-  Dash.Svga = Svga;
+  Dash.Wood = Wood;
  
   export default Dash;
   

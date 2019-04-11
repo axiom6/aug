@@ -7,7 +7,7 @@ class Main
 
   Data.local   = "http://localhost:63342/aug/app/data/"
   Data.hosted  = "https://ui-48413.firebaseapp.com/"
-  Main.FontUrl = "../../css/font/helvetiker_regular.typeface.json"
+  Main.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json"
 
   Main.Batch =
     Cols: { url:'muse/Cols.json', data:null, type:'Pack', plane:'Cols' }

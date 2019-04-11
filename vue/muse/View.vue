@@ -6,7 +6,7 @@
     <router-view name="Info"></router-view>
     <router-view name="Know"></router-view>
     <router-view name="Wise"></router-view>
-    <router-view name="Svga"></router-view>
+    <router-view name="Wood"></router-view>
   </div>
 </template>
 

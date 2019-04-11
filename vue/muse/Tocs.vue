@@ -24,7 +24,7 @@
                 Info:{ name:'Info', pracs:{} },
                 Know:{ name:'Know', pracs:{} },
                 Wise:{ name:'Wise', pracs:{} },
-                Svga:{ name:'Svga', pracs:{} } } } },
+                Wood:{ name:'Wood', pracs:{} } } } },
     
     methods: {
       showPlane: function(plane) {
@@ -42,7 +42,7 @@
     
     mounted: function () {
       for( let key in this.komps ) {
-        if( this.komps.hasOwnProperty(key) && key !== 'Cube' && key !== 'Svga' ) {
+        if( this.komps.hasOwnProperty(key) && key !== 'Cube' && key !== 'Svga' && key !== 'Wood' ) {
           this.komps[key].pracs = this.pracs(key); } } } };
   
    export default Tocs;

@@ -53,7 +53,7 @@ Main = (function() {
 
   Data.hosted = "https://ui-48413.firebaseapp.com/";
 
-  Main.FontUrl = "../../css/font/helvetiker_regular.typeface.json";
+  Main.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json";
 
   Main.Batch = {
     Cols: {

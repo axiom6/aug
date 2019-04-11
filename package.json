@@ -13,9 +13,11 @@
     "know": "rollup --config app/build/rollup.know.js",
     "wise": "rollup --config app/build/rollup.wise.js",
     "cube": "rollup --config app/build/rollup.cube.js",
-    "svga": "rollup --config app/build/rollup.svga.js"
+    "svga": "rollup --config app/build/rollup.svga.js",
+    "wood": "rollup --config app/build/rollup.wood.js"
   },
   "dependencies": {
+    "@vue/dev-server": "^0.1.1",
     "rollup-plugin-scss": "^1.0.1",
     "vue": "^2.5.22"
   },
