@@ -5,17 +5,17 @@
       <div v-show="isPrac(prac.name)" :class="pracClass(prac.dir)" :key="prac.name">
         <div class="prac">
           <div     v-show="isDisp(prac.name)" :class="dispClass('cen')"    :style="style(prac.hsv)" data-dir="cen">
-            <div class="disp">{{prac.name}}</div></div>
+            <div class="disp"><i :class="prac.icon"></i>{{prac.name}}</div></div>
           <template v-for="disp in prac.disps">
               <div v-show="isDisp(disp.name)" :class="dispClass(disp.dir)" :style="style(disp.hsv)" :data-dir="disp.dir">
-                <div class="disp">{{disp.name}}</div></div>
+                <div class="disp"><i :class="disp.icon"></i>{{disp.name}}</div></div>
           </template>
         </div>
       </div>
     </template>
     <template v-for="row in rows">
       <div v-show="isRows()" :class="row.dir" :key="row.name"><div class="row">
-        <div>{{row.name}}</div></div></div>
+        <div><i :class="row.icon"></i>{{row.name}}</div></div></div>
     </template>
   </div>  
 </template>
@@ -26,9 +26,9 @@
     
     data() {
       return { comp:'None', prac:'All', disp:'All', practices:{}, baseCols:{},
-        rows:{ Learn:{ name:'Learn', dir:'le' },
-               Do:{    name:'Do',    dir:'do' },
-               Share:{ name:'Share', dir:'sh' } } } },
+        rows:{ Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap" },
+               Do:{    name:'Do',    dir:'do', icon:"fas fas fa-cogs" },
+               Share:{ name:'Share', dir:'sh', icon:"fas fa-share-alt-square" } } } },
     
     methods: {
       isPrac: function (prac) {
@@ -57,6 +57,8 @@
 </script>
 
 <style lang="less">
+  
+  @import '../../css/fontawesome/init.css';
 
 .grid3x3() { display:grid; grid-template-columns:33% 33% 34%; grid-template-rows:33% 33% 34%;
              grid-template-areas: "nw north ne" "west cen east" "sw south se"; }
@@ -94,7 +96,8 @@
     .west { .ddir(west); } .cen   { .ddir(cen);   } .east { .ddir(east); }
                            .south { .ddir(south); }
     .cen   { font-size:3vh; }
-     div .disp { text-align:center; justify-self:center;  align-self:center; } }
+     div .disp { text-align:center; justify-self:center;  align-self:center;
+           i { margin-right: 0.4em; } } }
   
   .em, .in, .en { .prac .cen { font-size:2.1vh; } }
 
@@ -102,15 +105,18 @@
   .fullPrac { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;
     .prac { font-size:1.5em; width:100%; height:100%; background-color:#603;
             justify-self:center; align-self:center; display:grid; border-radius:0.5em; }
-     div .disp { text-align:center; justify-self:center;  align-self:center; font-size:2em; } }
+     div .disp { text-align:center; justify-self:center;  align-self:center; font-size:2em; }
+       i { margin-right: 0.5em; } }
 
   // Placed one level below .prac at the 4 Disipline plus Practice name Grid
   .fullDisp { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid; border-radius:72px;
-     .disp  { text-align:center; justify-self:center;  align-self:center; font-size:2em; } }
+     .disp  { text-align:center; justify-self:center;  align-self:center; font-size:2em; }
+       i { margin-right: 0.5em; } }
   
   .row { background-color:#603; border-radius:36px; margin-left:10%; width:80%; height:80%; font-size:1.5vh;
          font-weight:bold; display:grid;
-    div { text-align:center; justify-self:center;  align-self:center; font-size:2em; color:wheat; } }
+    div { text-align:center; justify-self:center;  align-self:center; font-size:2em; color:wheat; }
+      i { margin-bottom: 0.2em; display:block; } }
 }
 
 </style>
