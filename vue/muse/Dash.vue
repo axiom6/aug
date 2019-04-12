@@ -39,14 +39,14 @@
   import Know from './Know.vue';
   import Wise from './Wise.vue';
 //import Cube from './Cube.vue';
-  import Wood from '../../app/anim/wood/Wood.vue';
+//import Wood from '../../app/anim/wood/Wood.vue';
 
   Dash.Home = Home;
   Dash.Info = Info;
   Dash.Know = Know;
   Dash.Wise = Wise;
 //Dash.Cube = Cube;
-  Dash.Wood = Wood;
+//Dash.Wood = Wood;
  
   export default Dash;
   
@@ -56,7 +56,7 @@
 
    .dash { font-family:Roboto, sans-serif;
      position:absolute; left:0; top:0; right:0; bottom:0; display:grid;
-     grid-template-columns: 140px 1fr 50px;
+     grid-template-columns: 200px 1fr 50px;
      grid-template-rows:     50px 1fr 50px;
      grid-template-areas:
        "logo navb find"

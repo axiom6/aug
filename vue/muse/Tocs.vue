@@ -51,21 +51,22 @@
 </script>
 
 <style lang="less">
+  // top | right | bottom | left
   @import '../../css/fontawesome/init.css';
   .tocs { background-color:black;
-    ul { padding:0; list-style:none; align-self:start; font-size:3vh; display:grid;
+    ul { padding:0; margin:0; list-style:none; align-self:start; font-size:3vh; display:grid;
       li  { background-color:#333; padding-left:0.25em; align-self:start;                            // Comp
             border-radius:0 24px 24px 0; margin:0.2em 0.2em 0.2em 0.2em;
          i  { margin-right: 0.4em; }
          a  { color:wheat; text-decoration:none; }
-         ul { font-size:2vh;
+         ul { font-size:2vh; padding:0; margin:0;
            li { border-radius:0 12px 12px 0; color:black; margin:0.2em 0.2em 0.2em 0.2em;            // Prac
              i { margin-right: 0.3em; }
-             ul { font-size:1.5vh; margin-left:1em; display:none;
+             ul { font-size:1.5vh; padding:0; margin:0 0 0 0.2em; display:none;
                li { border-radius:0 12px 12px 0; color:white; margin:0.2em 0.2em 0.2em 0.2em;
                  i { margin-right: 0.25em; } } } }  // Disp
            li:hover { background-color:coral; color:black;                                           // Prac :hover
-             ul { font-size:1.5vh; margin-left:1em; display:block;
+             ul { font-size:1.5vh; margin:0 0 0 0.2em; padding:0; display:block;
                li { border-radius:0 12px 12px 0;  color:black; margin:0.2em 0.2em 0.2em 0.2em; }     // Disp :hover
                li:hover { background-color:black!important; color:white; }
            } } } } }

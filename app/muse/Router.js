@@ -15,11 +15,13 @@ export default new Router( { // Static Import for quich dev cycles
     { path:'/cube', name:'Cube', components:{ Cube:lazyLoading('muse/Cube') } },
     { path:'/info', name:'Info', components:{ Info:Dash.Info } },
     { path:'/know', name:'Know', components:{ Know:Dash.Know } },
-    { path:'/wise', name:'Wise', components:{ Wise:Dash.Wise } },
-    { path:'/wood', name:'Wood', components:{ Wood:Dash.Wood } }
+    { path:'/wise', name:'Wise', components:{ Wise:Dash.Wise } }
     ] } )
 
 /*
+
+    { path:'/wood', name:'Wood', components:{ Wood:lazyLoading('muse/Cube')  } }
+
   const Parent = {
     template:'<router-view></router-view>' };
  */

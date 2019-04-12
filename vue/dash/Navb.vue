@@ -10,9 +10,9 @@
     <div class="signon"   @click="click('Signon')"  ><i class="fas fa-sign-in-alt"></i>Sign On</div>
     <div class="settings"><i class="fas fa-cog"></i><span>Settings</span>
       <ul>
-        <li @click="click('Preferences')"><i class="fas fa-cog"></i>Preferences</li>
-        <li @click="click('Connection')" ><i class="fas fa-cog"></i>Connection</li>
-        <li @click="click('Privacy')"    ><i class="fas fa-cog"></i>Privacy</li>
+        <li @click="click('Preferences')"><i class="fas fa-cog"></i><span>Preferences</span></li>
+        <li @click="click('Connection')" ><i class="fas fa-cog"></i><span>Connection</span></li>
+        <li @click="click('Privacy')"    ><i class="fas fa-cog"></i><span>Privacy</span></li>
       </ul>
     </div>
   </div>
@@ -52,11 +52,12 @@
     .signon   { grid-area:gsignon;   justify-self:start; align-self:center; }
     .settings { grid-area:gsettings; justify-self:start; align-self:center; position:relative;
       ul { display:none; align-self:start; list-style:none; font-size:2.2vh; z-index:3; background:#222;
-        position:absolute; left:10px; top:12px; width:auto; height:auto;
+        position:absolute; left:10px; top:12px; width:200px; height:auto;
         padding:0.2em 0.2em 0.2em 0.6em; border-radius:0 24px 24px 0;
-        li { border-radius:0 18px 18px 0;  background:black; color:wheat;
+        li { display:inline; border-radius:0 18px 18px 0;  background:black; color:wheat;
              margin:0.3em 0.3em 0.3em 0.3em; padding:0.2em 0.4em 0.2em 0.4em;
-          i { margin-right:0.25em; } } } }
+          i {    display:inline-block; margin-right:0.25em; }
+          span { display:inline-block; } } } }
     .settings:hover {
       ul { display:grid; align-self:start; background:#444;
         li:hover { background:#777; color:black; } } }
