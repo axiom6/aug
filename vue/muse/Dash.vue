@@ -56,8 +56,8 @@
 
    .dash { font-family:Roboto, sans-serif; font-size:1rem;
      position:absolute; left:0; top:0; right:0; bottom:0; display:grid;
-     grid-template-columns: 200px 1fr 50px;
-     grid-template-rows:     50px 1fr 50px;
+     grid-template-columns: 11vw 85vw 4vw;
+     grid-template-rows:     6vh 88vh 6vh;
      grid-template-areas:
        "logo navb find"
        "tocs view side"

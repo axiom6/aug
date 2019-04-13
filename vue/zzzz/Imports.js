@@ -14,7 +14,7 @@ import Wise             from 'vue/muse/Wise.vue'
 import Svga             from 'app/demo/Svga.vue'
 import Goog             from 'vue/maps/google/Goog.vue'
 import Leaf             from 'vue/maps/leaflet/Leaf.vue'
-import Wood             from 'app/anim/wood/Wood.vue'
+import Wood             from 'vue/wood/Wood.vue'
 
 if( MuseRollupConfig===false && Router===false && Muse===false && Svga===false ) {}
 if( MuseRollupInfo===false   && MuseRollupKnow===false && MuseRollupWise===false ) {}

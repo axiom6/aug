@@ -2,24 +2,24 @@
 <template>
   <div class="comp">
     <template v-for="prac in practices">
-      <div v-show="isPrac(prac.name)" :class="pracClass(prac.dir)" :key="prac.name">
+      <div v-show="isPrac(prac.name)" :class="pracDir(prac.dir)" :key="prac.name">
         <div class="prac">
-          <div v-show="isDisp(prac.name)" :class="dispClass('cen')" :style="style(prac.hsv)">
-            <div class="disp">
+          <div v-show="isDisp(prac.name)" :class="dispDir('cen')" :style="style(prac.hsv)">
+            <div class="disp" v-on:click="pubPrac(prac.name)">
               <i   :class="prac.icon"></i>
               <span class="name">{{prac.name}}</span>
               <span class="desc">{{prac.desc}}</span>
             </div>
           </div>
           <template v-for="disp in prac.disps">
-            <div v-show="isDisp(disp.name)" :class="dispClass(disp.dir)" :style="style(disp.hsv)">
-              <div class="disp">
+            <div v-show="isDisp(disp.name)" :class="dispDir(disp.dir)" :style="style(disp.hsv)">
+              <div class="disp" v-on:click="pubDisp(prac.name,disp.name)">
                   <i   :class="disp.icon"></i>
                   <span class="name">{{disp.name}}</span>
                   <span class="desc">{{disp.desc}}</span>
               </div>
               <template v-for="area in disp.areas">
-                <div :class="areaClass()">
+                <div :class="areaDir()">
                   <i :class="area.icon"></i>
                   <span class="name">{{area.name}}</span>
                   <span class="desc">{{area.desc}}</span>
@@ -36,8 +36,6 @@
     </template>
   </div>  
 </template>
-
-
 
 <script type="module">
 
@@ -58,17 +56,21 @@
         return this.area===area || this.area==='All' },
       isRows: function () {
         return this.prac==='All' },
+      pubPrac: function (prac) {
+        this.publish( this.comp, { prac:prac, disp:'All' } ); },
+      pubDisp: function (prac,disp) {
+        this.publish( this.comp, { prac:prac, disp:disp  } ); },
       onPrac: function (prac) {
         this.prac = prac; this.disp='All'; },
       onDisp: function (prac,disp) {
         this.prac = prac; this.disp=disp; },
       onArea: function (prac,disp,area) {
         this.prac = prac; this.disp = disp; this.area = area; },
-      pracClass: function(dir) {
-        return this.prac==='All' ? dir : 'fullPrac'; },
-      dispClass: function(dir) {
-        return this.disp==='All' ? dir : 'fullDisp'; },
-      areaClass: function() {
+      pracDir: function(dir) {
+        return this.prac==='All' ? dir : 'fullPracDir'; },
+      dispDir: function(dir) {
+        return this.disp==='All' ? dir : 'fullDispDir'; },
+      areaDir: function() {
         return this.prac!=='All' ? 'area' : 'none' }, // this.area!=='All' ? 'area' : 'fullArea'; },
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; } },
@@ -92,7 +94,7 @@
   .grid4x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:13% 29% 29% 29%;
     grid-template-areas: "cm em in en" "le nw north ne" "do west cen east" "sh sw south se"; }
 
-  .grid1x3() { display:grid; grid-template-columns:10% 25% 65%; grid-template-areas: "icon name desc"; }
+  .grid1x3() { display:grid; grid-template-columns:6% 22% 72%; grid-template-areas: "icon name desc"; }
   
   .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;
                   justify-items:center; align-items:center; }
@@ -116,45 +118,44 @@
                              .north { .ddir(north); }
       .west { .ddir(west); } .cen   { .ddir(cen);   } .east { .ddir(east); }
                              .south { .ddir(south); }
-      .cen  { font-size:1.5em; }
-      div   { font-size:1.2em; } }
+      .cen  { font-size:1.3em; }
+      div   { font-size:1.1em; } }
   
     .disp {   display:inline; justify-self:center; align-self:center; text-align:center; font-size:1.2em;
-      i     { display:inline-block;  margin-right: 0.3em; }
+      i     { display:inline-block;  margin-right: 0.25em; }
       .name { display:inline-block; }
       .desc { display:none; margin:0.5em 0.5em 0.5em 0.5em; text-align:left; } }
     
     .area { .grid1x3(); justify-self:start; align-self:center; text-align:left; margin-left:1.5em;
-            width:100%; height:0.8em; font-size:1em;
+            width:90%; height:auto; font-size:1.3em;
       i     { grid-area:icon; }
       .name { grid-area:name; font-weight:900; }
       .desc { grid-area:desc; } }
   
     .none { display:none; }
     
-    // Placed one level above .prac at the 9 Practices Grid level
-    .fullPrac { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;
+    // Placed one level above .prac at the 9 Practices Grid Direction
+    .fullPracDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;
       .prac { font-size:1em; width:100%; height:100%;
               justify-self:center; align-self:center; display:grid; border-radius:0.5em;
         div {     padding-bottom:2em;
           .disp { padding-bottom:0;
-            i     { font-size:1.4em; }
-            .name { font-size:1.4em; }
+            i     { font-size:1.6em; }
+            .name { font-size:1.6em; }
             .desc { font-size:1.0em; display:block; } } }  // Turns on .disp .desc
           .area { padding-bottom:0; } } }
   
-    // Placed one level below .prac at the 4 Disipline plus Practice name Grid
-    .fullDisp { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid; border-radius:72px;
-       .disp    { text-align:center; justify-self:start;  align-self:center; font-size:2em; margin:0; } }
-  
-    // Placed one level below .disp
-    .fullArea { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid; border-radius:72px;
-      .area  { text-align:center; justify-self:center;  align-self:center; font-size:2em; }
-      i      { margin-right:0.5em; } }
+    // Placed one level above .dir at the 4 Disipline plus Practice name Grid Direction
+    .fullDispDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid; border-radius:72px;
+       .disp { justify-self:center; margin:0;
+         i     { font-size:4.8em !important; }
+         .name { font-size:4.8em !important; }
+         .desc { font-size:2.4em !important; display:block; } }  // Turns on .disp .desc
+       .area {   font-size:3.0em !important; padding-bottom:0; } }
     
     .row { background-color:#603; border-radius:36px; margin-left:10%; width:80%; height:80%; font-size:1em;
            font-weight:bold; display:grid;
-      div { text-align:center; justify-self:center;  align-self:center; font-size:2em; color:wheat; }
+      div { text-align:center; justify-self:center;  align-self:center; font-size:1.8em; color:wheat; }
         i { margin-bottom: 0.2em; display:block; } }
   
     .em, .in, .en { .prac .cen { font-size:1em; } } // Font size columns

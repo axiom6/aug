@@ -37,21 +37,21 @@
   
   // top | right | bottom | left
   
-  .grid1x5() { display:grid; grid-template-columns:5% 45% 20% 10% 10% 10%;
+  .grid1x5() { display:grid; grid-template-columns:5% 40% 25% 10% 10% 10%;
     grid-template-areas: "gleft ghome gsearch gcontact gsettings gsignon"; }
   
   .navb {  .grid1x5(); background-color:black; color:wheat; display:grid;
-      font-family:Roboto, sans-serif; font-size:3vh; font-weight:bold;
+      font-family:Roboto, sans-serif; font-size:1.4vw; font-weight:bold;    // Using because Navb sensistive to width
     .home     { grid-area:ghome;     justify-self:start; align-self:center;
       i { margin-right:0.3em; }
       a { color:wheat; text-decoration:none; }}
     .search   { grid-area:gsearch;   justify-self:start; align-self:center; // font-family:FontAwesome, sans-serif;
-      label .input{ font-family:Roboto, sans-serif; font-size:3vh; font-weight:bold;
+      label .input{ font-family:Roboto, sans-serif; font-weight:bold;  font-size:0.9em;
         border-radius:0 12px 12px 0; background:black; color:wheat; } }
     .contact  { grid-area:gcontact;  justify-self:start; align-self:center; }
     .signon   { grid-area:gsignon;   justify-self:start; align-self:center; }
     .settings { grid-area:gsettings; justify-self:start; align-self:center; position:relative;
-      ul { display:none; align-self:start; list-style:none; font-size:2.2vh; z-index:3; background:#222;
+      ul { display:none; align-self:start; list-style:none; font-size:0.7em; z-index:3; background:#222;
         position:absolute; left:10px; top:12px; width:200px; height:auto;
         padding:0.2em 0.2em 0.2em 0.6em; border-radius:0 24px 24px 0;
         li { display:inline; border-radius:0 18px 18px 0;  background:black; color:wheat;
