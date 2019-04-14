@@ -15,33 +15,33 @@
 		"oAP": "/build/.idea",
 		"oF": 0
 		},
-	"/app/anim/bird/bird-opt.gif": {
+	"/ani/bird/Bird.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/ani/bird/Bird-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/ani/bird/Bird.gif": {
 		"ft": 4194304,
 		"iS": 81001,
 		"oA": 0,
-		"oAP": "/app/anim/bird/bird-opt.gif",
+		"oAP": "/ani/bird/Bird.gif",
 		"oF": 0,
 		"opt": 0
 		},
-	"/app/anim/bird/index.html": {
+	"/ani/bird/Bird.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/app/anim/bird/index.html",
+		"oAP": "/ani/bird/Bird.html",
 		"oF": 0
 		},
-	"/app/anim/bird/style.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "/app/anim/bird/style-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"/app/anim/bird/style.scss": {
+	"/ani/bird/Bird.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -49,70 +49,70 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "/app/anim/bird/style.css",
+		"oAP": "/ani/bird/Bird.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"/app/anim/lava/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/anim/lava/index.html",
-		"oF": 0
-		},
-	"/app/anim/lava/index.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/anim/lava/index-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/anim/lava/style.css": {
+	"/ani/lava/Lava.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "/app/anim/lava/style-min.css",
+		"oAP": "/ani/lava/Lava-min.css",
 		"oF": 0,
 		"oS": 3
 		},
-	"/app/anim/london/index.html": {
+	"/ani/lava/Lava.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/app/anim/london/index.html",
+		"oAP": "/ani/lava/Lava.html",
 		"oF": 0
 		},
-	"/app/anim/london/index.js": {
+	"/ani/lava/Lava.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/app/anim/london/index-min.js",
+		"oAP": "/ani/lava/Lava-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/app/anim/london/style.css": {
+	"/ani/london/London.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "/app/anim/london/style-min.css",
+		"oAP": "/ani/london/London-min.css",
 		"oF": 0,
 		"oS": 3
 		},
-	"/app/anim/london/style.scss": {
+	"/ani/london/London.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/ani/london/London.html",
+		"oF": 0
+		},
+	"/ani/london/London.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/ani/london/London-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/ani/london/London.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -120,88 +120,99 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "/app/anim/london/style.css",
+		"oAP": "/ani/london/London.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"/app/anim/mtns/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/anim/mtns/index.html",
-		"oF": 0
-		},
-	"/app/anim/mtns/style.css": {
+	"/ani/mtns/Mtns.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "/app/anim/mtns/style-min.css",
+		"oAP": "/ani/mtns/Mtns-min.css",
 		"oF": 0,
 		"oS": 3
 		},
-	"/app/anim/poly/index.html": {
+	"/ani/mtns/Mtns.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/app/anim/poly/index.html",
+		"oAP": "/ani/mtns/Mtns.html",
 		"oF": 0
 		},
-	"/app/anim/poly/index.js": {
+	"/ani/poly/Poly.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/ani/poly/Poly-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/ani/poly/Poly.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/ani/poly/Poly.html",
+		"oF": 0
+		},
+	"/ani/poly/Poly.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/app/anim/poly/index-min.js",
+		"oAP": "/ani/poly/Poly-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/app/anim/poly/style.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "/app/anim/poly/style-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"/app/anim/space/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/anim/space/index.html",
-		"oF": 0
-		},
-	"/app/anim/space/index.js": {
+	"/ani/space/particles.min.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/app/anim/space/index-min.js",
+		"oAP": "/ani/space/particles.min-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/app/anim/space/style.css": {
+	"/ani/space/Space.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "/app/anim/space/style-min.css",
+		"oAP": "/ani/space/Space-min.css",
 		"oF": 0,
 		"oS": 3
 		},
-	"/app/anim/space/style.scss": {
+	"/ani/space/Space.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/ani/space/Space.html",
+		"oF": 0
+		},
+	"/ani/space/Space.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/ani/space/Space-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/ani/space/Space.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -209,74 +220,30 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "/app/anim/space/style.css",
+		"oAP": "/ani/space/Space.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"/app/anim/sprite/bkwalk2.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/app/anim/sprite/bkwalk2.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/app/anim/sprite/fore.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/app/anim/sprite/fore.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/app/anim/sprite/index.haml": {
-		"cB": 0,
-		"cDA": 0,
-		"eHT": 0,
-		"ft": 256,
-		"hM": 0,
-		"nEA": 0,
-		"oA": 0,
-		"oAP": "/app/anim/sprite/index.html",
-		"oF": 0,
-		"oFM": 2,
-		"uDQ": 0,
-		"uUN": 0
-		},
-	"/app/anim/sprite/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/anim/sprite/index.html",
-		"oF": 0
-		},
-	"/app/anim/sprite/mid.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/app/anim/sprite/mid.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/app/anim/sprite/style.css": {
+	"/ani/sprite/Sprite.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "/app/anim/sprite/style-min.css",
+		"oAP": "/ani/sprite/Sprite-min.css",
 		"oF": 0,
 		"oS": 3
 		},
-	"/app/anim/sprite/style.scss": {
+	"/ani/sprite/Sprite.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/ani/sprite/Sprite.html",
+		"oF": 0
+		},
+	"/ani/sprite/Sprite.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -284,67 +251,30 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "/app/anim/sprite/style.css",
+		"oAP": "/ani/sprite/Sprite.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"/app/anim/sprite/walk-ing4.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/app/anim/sprite/walk-ing4.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/app/anim/stag/index.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/anim/stag/index-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/anim/stag/land.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/anim/stag/land.html",
-		"oF": 0
-		},
-	"/app/anim/stag/stag.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/anim/stag/stag.html",
-		"oF": 0
-		},
-	"/app/anim/stag/stag.orig..html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/anim/stag/stag.orig..html",
-		"oF": 0
-		},
-	"/app/anim/stag/style.css": {
+	"/ani/wave/Wave.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "/app/anim/stag/style-min.css",
+		"oAP": "/ani/wave/Wave-min.css",
 		"oF": 0,
 		"oS": 3
 		},
-	"/app/anim/stag/style.scss": {
+	"/ani/wave/wave.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/ani/wave/Wave.html",
+		"oF": 0
+		},
+	"/ani/wave/Wave.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -352,179 +282,68 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "/app/anim/stag/style.css",
+		"oAP": "/ani/wave/Wave.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"/app/anim/stag/svg/clouds.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/app/anim/stag/svg/clouds.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/app/anim/stag/svg/landscape.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/app/anim/stag/svg/landscape.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/app/anim/stag/svg/lensFlare.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/app/anim/stag/svg/lensFlare.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/app/anim/stag/svg/lighting.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/app/anim/stag/svg/lighting.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/app/anim/stag/svg/reflection.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/app/anim/stag/svg/reflection.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/app/anim/stag/svg/sky.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/app/anim/stag/svg/sky.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/app/anim/stag/svg/stag1.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/app/anim/stag/svg/stag1.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/app/anim/stag/svg/stag2.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/app/anim/stag/svg/stag2.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/app/anim/stag/svg/stag3.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/app/anim/stag/svg/stag3.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/app/anim/stag/svg/stars-reflect.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/app/anim/stag/svg/stars-reflect.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/app/anim/stag/svg/stars.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/app/anim/stag/svg/stars.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/app/anim/stag/svg/twinkles1.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/app/anim/stag/svg/twinkles1.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/app/anim/stag/svg/twinkles2.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/app/anim/stag/svg/twinkles2.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/app/anim/stag/svg/twinkles3.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/app/anim/stag/svg/twinkles3.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/app/anim/sunset/index.html": {
+	"/ani/wave/Wave.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/app/anim/sunset/index.html",
+		"oAP": "/ani/wave/Wave.vue",
 		"oF": 0
 		},
-	"/app/anim/sunset/index.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/anim/sunset/index-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/anim/sunset/style.css": {
+	"/ani/wood/wood.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "/app/anim/sunset/style-min.css",
+		"oAP": "/ani/wood/wood-min.css",
 		"oF": 0,
 		"oS": 3
+		},
+	"/ani/wood/wood.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/ani/wood/Wood.html",
+		"oF": 0
+		},
+	"/ani/wood/Wood.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/ani/wood/Wood-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/ani/wood/wood.scss": {
+		"aP": 0,
+		"bl": 0,
+		"dP": 10,
+		"dS": 0,
+		"ft": 4,
+		"ma": 0,
+		"oA": 0,
+		"oAP": "/ani/wood/wood.css",
+		"oF": 0,
+		"oS": 0,
+		"uL": 1
+		},
+	"/ani/wood/Wood.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/ani/wood/Wood.vue",
+		"oF": 0
 		},
 	"/app/build/rollup.cube.js": {
 		"bF": 0,
@@ -603,6 +422,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/app/build/zzzz.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/build/zzzz-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/app/data/muse/Cols.json": {
 		"ft": 524288,
 		"oA": 1,
@@ -674,45 +504,6 @@
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
-		},
-	"/app/demo/svga.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "/app/demo/svga-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"/app/demo/svga.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/demo/svga.html",
-		"oF": 0
-		},
-	"/app/demo/svga.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "/app/demo/svga.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"/app/demo/Svga.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/demo/Svga.vue",
-		"oF": 0
 		},
 	"/app/muse/Dash.js": {
 		"bF": 0,
@@ -1727,6 +1518,28 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/lib/store/Firebase.esm.stub.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/lib/store/Firebase.esm.stub-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/lib/store/PouchDB.esm.stub.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/lib/store/PouchDB.esm.stub-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/lib/three/OrbitControls.js": {
 		"bF": 0,
 		"ft": 64,
@@ -1816,6 +1629,14 @@
 		"ft": 65536,
 		"oA": 2,
 		"oAP": "/build/node_modules",
+		"oF": 0
+		},
+	"/node_modules/../ani/wave/Wave.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/node_modules/../ani/wave/Wave.vue",
 		"oF": 0
 		},
 	"/node_modules/estree-walker/src/estree-walker.js": {
@@ -1941,6 +1762,17 @@
 		"oO": 0,
 		"oS": 1
 		},
+	"/pub/conn/Connect.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/conn/Connect-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/cube/Build.js": {
 		"bF": 0,
 		"ft": 64,
@@ -1995,6 +1827,106 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"/pub/svg/bkwalk2.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/pub/svg/bkwalk2.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/pub/svg/fore.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/pub/svg/fore.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/pub/svg/hallowback2.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/pub/svg/hallowback2.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/pub/svg/hallowfront4.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/pub/svg/hallowfront4.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/pub/svg/hallowmid2.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/pub/svg/hallowmid2.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/pub/svg/hallowmidfront2.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/pub/svg/hallowmidfront2.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/pub/svg/horse-hallow5.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/pub/svg/horse-hallow5.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/pub/svg/landscape.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/pub/svg/landscape.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/pub/svg/mid.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/pub/svg/mid.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/pub/svg/walk-ing4.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/pub/svg/walk-ing4.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
 		},
 	"/pub/util/Data.js": {
 		"bF": 0,
@@ -2070,6 +2002,138 @@
 		"rFN": 0,
 		"uCM": 0
 		},
+	"/src/conn/Basic.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/conn/Basic.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/conn/Chord.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/conn/Chord.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/conn/Connect.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/conn/Connect.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/conn/Connected.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/conn/Connected.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/conn/Convey.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/conn/Convey.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/conn/Embrace.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/conn/Embrace.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/conn/Encourage.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/conn/Encourage.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/conn/Graph.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/conn/Graph.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/conn/Innovate.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/conn/Innovate.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/conn/Pres.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/conn/Pres.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/conn/Shapes.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/conn/Shapes.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/conn/zzzz.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/conn/zzzz-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/src/cube/Build.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -2144,6 +2208,72 @@
 		"oA": 1,
 		"oAP": "/src/dash/Navb-min.js",
 		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/store/Fire.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/store/Fire.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/store/IndexedDB.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/store/IndexedDB.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/store/Memory.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/store/Memory.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/store/PouchDB.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/store/PouchDB.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/store/Rest.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/store/Rest.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/store/Store.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/store/Store.js",
+		"oF": 0,
+		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
@@ -2328,47 +2458,20 @@
 		"oAP": "/vue/maps/leaflet/Leaf.vue",
 		"oF": 0
 		},
-	"/vue/muse/Base.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Base-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"/vue/muse/Base.css.map": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/vue/muse/Base.css.map",
-		"oF": 0
-		},
-	"/vue/muse/Base.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 0,
-		"oAP": "/vue/muse/Base.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
 	"/vue/muse/Base.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/vue/muse/Base.vue",
+		"oF": 0
+		},
+	"/vue/muse/Conn.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/muse/Conn.vue",
 		"oF": 0
 		},
 	"/vue/muse/Cube.js": {
@@ -2486,6 +2589,76 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/vue/muse/Zzzz-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/vue/mute/Base.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/vue/mute/Base-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/vue/mute/Base.css.map": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/vue/mute/Base.css.map",
+		"oF": 0
+		},
+	"/vue/mute/Base.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/vue/mute/Base.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/vue/mute/Base.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/mute/Base.vue",
+		"oF": 0
+		},
+	"/vue/mute/Disp.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/mute/Disp.vue",
+		"oF": 0
+		},
+	"/vue/mute/Prac.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/mute/Prac.vue",
+		"oF": 0
+		},
+	"/vue/mute/Zzzz.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/mute/Zzzz-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2633,132 +2806,13 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/vue/wood/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/wood/index.html",
-		"oF": 0
-		},
-	"/vue/wood/index.js": {
+	"/vue/zzzz.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/vue/wood/index-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/wood/style.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "/vue/wood/style-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"/vue/wood/style.scss": {
-		"aP": 0,
-		"bl": 0,
-		"dP": 10,
-		"dS": 0,
-		"ft": 4,
-		"ma": 0,
-		"oA": 0,
-		"oAP": "/vue/wood/style.css",
-		"oF": 0,
-		"oS": 0,
-		"uL": 1
-		},
-	"/vue/wood/svg/hallowback2.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/vue/wood/svg/hallowback2.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/vue/wood/svg/hallowfront4.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/vue/wood/svg/hallowfront4.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/vue/wood/svg/hallowmid2.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/vue/wood/svg/hallowmid2.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/vue/wood/svg/hallowmidfront2.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/vue/wood/svg/hallowmidfront2.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/vue/wood/svg/horse-hallow5.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/vue/wood/svg/horse-hallow5.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/vue/wood/Wood.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/wood/Wood-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/wood/Wood.scss.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/wood/Wood.scss.vue",
-		"oF": 0
-		},
-	"/vue/wood/Wood.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/wood/Wood.vue",
-		"oF": 0
-		},
-	"/vue/zzzz/Imports.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/zzzz/Imports-min.js",
+		"oAP": "/vue/zzzz-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0

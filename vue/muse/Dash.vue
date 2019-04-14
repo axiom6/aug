@@ -38,6 +38,7 @@
   import Info from './Info.vue';
   import Know from './Know.vue';
   import Wise from './Wise.vue';
+  import Conn from './Conn.vue';
 //import Cube from './Cube.vue';
 //import Wood from '../wood/Wood.vue';
 
@@ -45,6 +46,7 @@
   Dash.Info = Info;
   Dash.Know = Know;
   Dash.Wise = Wise;
+  Dash.Conn = Conn;
 //Dash.Cube = Cube;
 //Dash.Wood = Wood;
  

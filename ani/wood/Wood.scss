@@ -1,0 +1,108 @@
+//*------------------------------
+
+//looks best full screen
+//https://codepen.io/sdras/pen/rMEdjB/
+
+//*------------------------------
+
+body, html {
+  width: 100%;
+  height: 100%;
+  min-height: 700px;
+  background: rgb(4,30,43); /* Old browsers */
+background: linear-gradient(to bottom, rgba(4,30,43,1) 0%,rgba(64,120,134,1) 41%,rgba(212,219,219,1) 69%,rgba(0,0,0,1) 69%,rgba(0,0,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  font-family: 'Freckle Face', cursive;
+}
+
+#foreground {
+  height: 600px;
+  position: absolute;
+  margin-top: -200px;
+  overflow-y: hidden;
+}
+
+h1 {
+  position: absolute;
+  top: 550px;
+  width: 100%;
+  text-align: center;
+  font-size: 45px;
+  color: orange;
+  white-space: pre;
+  margin-left: 20px;
+}
+
+span {
+  letter-spacing: 200px;
+}
+
+.moon {
+  left: 25%;
+  position: absolute;
+  top: 100px;
+}
+
+.horseman {
+  width: 184px;
+  height: 123px;
+  background: url('../../pub/svg/horse-hallow5.svg');
+  animation: horsemove 0.7s steps(15) infinite;
+  position: absolute;
+  left: 50%;
+  margin-left: -100px;
+  top: 300px;
+}
+
+.pumpkin {
+  position: absolute;
+  left: 50%;
+  margin-left: -100px;
+  top: 300px;
+}
+
+.ground {
+  width: 151%;
+  height: 697px;
+  position: absolute;
+  background-size: 800px 716px;
+  left: 0;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.front {
+  background: url('../../pub/svg/hallowfront4.svg') repeat-x;
+  background-size: 1000px 871px;
+  top: -100px;
+  animation: bk 20s -5s linear infinite;
+}
+
+.frontmid {
+  background: url('../../pub/svg/hallowmidfront2.svg') repeat-x;
+  background-size: 1000px 871px;
+  top: -100px;
+  animation: bk 50s -5s linear infinite;
+}
+
+.mid {
+  background: url('../../pub/svg/hallowmid2.svg') repeat-x;
+  background-size: 1000px 871px;
+  top: -100px;
+  animation: bk 100s -5s linear infinite;
+}
+
+.back {
+  background: url('../../pub/svg/hallowback2.svg') repeat-x;
+  background-size: 1000px 871px;
+  top: -100px;
+  animation: bk 100s -5s linear infinite;
+}
+
+@keyframes horsemove {
+  100% { background-position: 0 -1848px; }
+}
+
+@keyframes bk {
+  100% { background-position: -200% 0; }
+}

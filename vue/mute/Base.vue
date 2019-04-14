@@ -6,7 +6,8 @@
       <div :class="classTab('Connections')">
         <router-link :to="{ name:'Conn' }">Connections</router-link></div>
       <div :class="classTab('Enlight')"      @click="pubTab('Enlight')"     >Enlight</div>
-      <div :class="classTab('Data Science')" @click="pubTab('Data Science')">Data Science</div></div>
+      <div :class="classTab('Data Science')" @click="pubTab('Data Science')">Data Science</div>
+    </div>
     <template v-for="prac in practices">
       <div v-show="isPrac(prac.name)" :class="pracDir(prac.dir)" :key="prac.name">
         <div class="prac">
