@@ -25,12 +25,5 @@
     background-color:black; color:wheat; }
 </style>
 
-<!-- Banner startup page that disappears once a Route is chosen -->
-<!--div class="banner" v-if="show()">
-  <div>
-    <h1>Welcome to Augmentation</h1>
-    <h2>Choose a Component on the Left</h2>
-  </div>
-</div-->
 
 

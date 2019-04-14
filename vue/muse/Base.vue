@@ -1,11 +1,16 @@
 
 <template>
   <div class="comp">
+    <div class="tabs">
+      <div :class="classTab('Practices')"    @click="pubTab('Practices')"   >Practices</div>
+      <div :class="classTab('Connections')"  @click="pubTab('Connections')" >Connections</div>
+      <div :class="classTab('Enlight')"      @click="pubTab('Enlight')"     >Enlight</div>
+      <div :class="classTab('Data Science')" @click="pubTab('Data Science')">Data Science</div></div>
     <template v-for="prac in practices">
       <div v-show="isPrac(prac.name)" :class="pracDir(prac.dir)" :key="prac.name">
         <div class="prac">
           <div v-show="isDisp(prac.name)" :class="dispDir('cen')" :style="style(prac.hsv)">
-            <div class="disp" v-on:click="pubPrac(prac.name)">
+            <div class="disp" @click="pubPrac(prac.name)">
               <i   :class="prac.icon"></i>
               <span class="name">{{prac.name}}</span>
               <span class="desc">{{prac.desc}}</span>
@@ -13,7 +18,7 @@
           </div>
           <template v-for="disp in prac.disps">
             <div v-show="isDisp(disp.name)" :class="dispDir(disp.dir)" :style="style(disp.hsv)">
-              <div class="disp" v-on:click="pubDisp(prac.name,disp.name)">
+              <div class="disp" @click="pubDisp(prac.name,disp.name)">
                   <i   :class="disp.icon"></i>
                   <span class="name">{{disp.name}}</span>
                   <span class="desc">{{disp.desc}}</span>
@@ -42,7 +47,7 @@
   export default {
     
     data() {
-      return { comp:'None', prac:'All', disp:'All', area:'All', practices:{}, baseCols:{},
+      return { comp:'None', prac:'All', disp:'All', area:'All', tab:'Practices', practices:{}, baseCols:{},
         rows:{ Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap" },
                Do:{    name:'Do',    dir:'do', icon:"fas fas fa-cogs" },
                Share:{ name:'Share', dir:'sh', icon:"fas fa-share-alt-square" } } } },
@@ -56,6 +61,10 @@
         return this.area===area || this.area==='All' },
       isRows: function () {
         return this.prac==='All' },
+      pubTab: function (tab) {
+        this.tab = tab },
+      classTab: function (tab) {
+        return this.tab===tab ? 'tab-active' : 'tab' },
       pubPrac: function (prac) {
         this.publish( this.comp, { prac:prac, disp:'All' } ); },
       pubDisp: function (prac,disp) {
@@ -94,6 +103,9 @@
   .grid4x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:13% 29% 29% 29%;
     grid-template-areas: "cm em in en" "le nw north ne" "do west cen east" "sh sw south se"; }
 
+  .grid5x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:6% 13% 27% 27% 27%;
+    grid-template-areas: "tabs tabs tabs tabs" "cm em in en" "le nw north ne" "do west cen east" "sh sw south se"; }
+
   .grid1x3() { display:grid; grid-template-columns:6% 22% 72%; grid-template-areas: "icon name desc"; }
   
   .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;
@@ -102,17 +114,26 @@
   .ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }
   
   .bgc( @bg )
-    { background-color:@bg; }
+    { background-color:@bg; } // top | right | bottom | left
   
   .comp { background-color:black; position:relative; font-size:1.75vmin;
     
-    .grid4x4(); justify-items:center; align-items:center; // The 4x4 Dim + Per + 9 Practices Grid
+    .grid5x4(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid
+      .tabs{ grid-area:tabs; display:inline; color:wheat; font-size:1.2em;
+             justify-self:start; align-self:center; text-align:left; }
       .cm { .pdir(cm); } .em   { .pdir(em);   } .in    { .pdir(in); }    .en   { .pdir(en);   }
       .le { .pdir(le); } .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }
       .do { .pdir(do); } .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }
       .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }
-  
-    // Placed one level below the 9 Practices Grid
+    
+    .tabs {
+      .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;
+        border-radius:12px 12px 0 0; border-left: wheat solid thin;
+        border-top:wheat solid thin; border-right:wheat solid thin; }
+      .tab:hover  { background-color:wheat; color:black; }
+      .tab-active { background-color:wheat; color:black; .tab(); } }
+    
+      // Placed one level below the 9 Practices Grid
     .prac { background-color:#603; border-radius:36px; width:90%; height:80%; font-size:1em; font-weight:bold;
       .grid3x3(); // The 4 Displine plus Practiice name Grid
                              .north { .ddir(north); }
