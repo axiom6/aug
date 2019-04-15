@@ -3395,13 +3395,1408 @@ return
  */
 var Build$1 = Build;
 
+var Vis$1;
+
+//mport FaLookup from '../util/FaLookup.js'
+Vis$1 = class Vis {
+  static translate(x0, y0) {
+    Util$1.checkTypes('number', {
+      x0: x0,
+      y0: y0
+    });
+    return ` translate( ${x0}, ${y0} )`;
+  }
+
+  static scale(sx, sy) {
+    Util$1.checkTypes('number', {
+      sx: sx,
+      sy: sy
+    });
+    return ` scale( ${sx}, ${sy} )`;
+  }
+
+  static rotate(a, x, y) {
+    Util$1.checkTypes('number', {
+      a: a,
+      x: x,
+      y: y
+    });
+    return ` rotate(${a} ${x} ${y} )`;
+  }
+
+  static rad(deg) {
+    return deg * Math.PI / 180;
+  }
+
+  static deg(rad) {
+    return rad * 180 / Math.PI;
+  }
+
+  static sin(deg) {
+    return Math.sin(Vis.rad(deg));
+  }
+
+  static cos(deg) {
+    return Math.cos(Vis.rad(deg));
+  }
+
+  static rot(deg, ang) {
+    var a;
+    a = deg + ang;
+    if (a < 0) {
+      a = a + 360;
+    }
+    return a;
+  }
+
+  static toRadian(h, hueIsRygb = false) {
+    var hue, radian;
+    hue = hueIsRygb ? Vis.toHueRygb(h) : h;
+    radian = 2 * Math.PI * (90 - hue) / 360; // Correction for MathBox polar coordinate system
+    if (radian < 0) {
+      radian = 2 * Math.PI + radian;
+    }
+    return radian;
+  }
+
+  static svgDeg(deg) {
+    return 360 - deg;
+  }
+
+  static svgRad(rad) {
+    return 2 * Math.PI - rad;
+  }
+
+  static radSvg(deg) {
+    return Vis.rad(360 - deg);
+  }
+
+  static degSvg(rad) {
+    return Vis.deg(2 * Math.PI - rad);
+  }
+
+  static sinSvg(deg) {
+    return Math.sin(Vis.radSvg(deg));
+  }
+
+  static cosSvg(deg) {
+    return Math.cos(Vis.radSvg(deg));
+  }
+
+  static hexCss(hex) {
+    return `#${hex.toString(16) // For orthogonality
+}`;
+  }
+
+  static rgbCss(rgb) {
+    return `rgb(${rgb.r},${rgb.g},${rgb.b})`;
+  }
+
+  static hslCss(hsl) {
+    return `hsl(${hsl.h},${hsl.s * 100}%,${hsl.l * 100}%)`;
+  }
+
+  static cssHex(str) {
+    return parseInt(str.substr(1), 16);
+  }
+
+  static rndRgb(rgb) {
+    return {
+      r: Math.round(rgb.r),
+      g: Math.round(rgb.g),
+      b: Math.round(rgb.b)
+    };
+  }
+
+  static hexRgb(hex) {
+    return Vis.rndRgb({
+      r: (hex & 0xFF0000) >> 16,
+      g: (hex & 0x00FF00) >> 8,
+      b: hex & 0x0000FF
+    });
+  }
+
+  static rgbHex(rgb) {
+    return rgb.r * 4096 + rgb.g * 256 + rgb.b;
+  }
+
+  static interpolateHexRgb(hex1, r1, hex2, r2) {
+    return Vis.interpolateRgb(Vis.hexRgb(hex1), r1, Vis.hexRgb(hex2), r2);
+  }
+
+  static interpolateRgb(rgb1, r1, rgb2, r2) {
+    return {
+      r: rgb1.r * r1 + rgb2.r * r2,
+      g: rgb1.g * r1 + rgb2.g * r2,
+      b: rgb1.b * r1 + rgb2.b * r2
+    };
+  }
+
+  static toRgbHsvStr(hsv) {
+    var a, b, g, i, j, r, rgba, str;
+    rgba = Vis.toRgbHsvSigmoidal(hsv[0], hsv[1], hsv[2] * 255, true);
+    for (i = j = 0; j < 3; i = ++j) {
+      rgba[i] = Math.round(rgba[i]);
+    }
+    [r, g, b, a] = rgba;
+    str = `rgba(${r},${g},${b},${a})`;
+    //console.log( "Vis.toRgbHsvStr()", {h:hsv[0],s:hsv[1],v:hsv[2]}, str )
+    return str;
+  }
+
+  static toRgbaHsv(hsv) {
+    var a, b, g, i, j, r, rgba, str;
+    rgba = Vis.toRgbHsvSigmoidal(hsv[0], hsv[1], hsv[2] * 255, true);
+    for (i = j = 0; j < 3; i = ++j) {
+      rgba[i] = Math.round(rgba[i]);
+    }
+    [r, g, b, a] = rgba;
+    str = `rgba(${r},${g},${b},${a})`;
+    //console.log( "Vis.toRgbaHsv()", {h:hsv[0],s:hsv[1],v:hsv[2]}, str )
+    return str;
+  }
+
+  static toRgbHsv(H, C, V, toRygb = true) {
+    return Vis.toRgbHsvSigmoidal(H, C, V, toRygb);
+  }
+
+  static toRgbHsvSigmoidal(H, C, V, toRygb = true) {
+    var b, c, d, f, g, h, i, r, v, x, y, z;
+    h = toRygb ? Vis.toHueRgb(H) : H;
+    d = C * 0.01;
+    c = Vis.sigmoidal(d, 2, 0.25);
+    v = V * 0.01;
+    i = Math.floor(h / 60);
+    f = h / 60 - i;
+    x = 1 - c;
+    y = 1 - f * c;
+    z = 1 - (1 - f) * c;
+    [r, g, b] = (function() {
+      switch (i % 6) {
+        case 0:
+          return [1, z, x, 1];
+        case 1:
+          return [y, 1, x, 1];
+        case 2:
+          return [x, 1, z, 1];
+        case 3:
+          return [x, y, 1, 1];
+        case 4:
+          return [z, x, 1, 1];
+        case 5:
+          return [1, x, y, 1];
+      }
+    })();
+    return [r * v, g * v, b * v, 1];
+  }
+
+  static hsvToRgb(hsv) {
+    var f, i, p, q, rgb, t, v;
+    i = Math.floor(hsv.h / 60);
+    f = hsv.h / 60 - i;
+    p = hsv.v * (1 - hsv.s);
+    q = hsv.v * (1 - f * hsv.s);
+    t = hsv.v * (1 - (1 - f) * hsv.s);
+    v = hsv.v;
+    rgb = (function() {
+      switch (i % 6) {
+        case 0:
+          return {
+            r: v,
+            g: t,
+            b: p
+          };
+        case 1:
+          return {
+            r: q,
+            g: v,
+            b: p
+          };
+        case 2:
+          return {
+            r: p,
+            g: v,
+            b: t
+          };
+        case 3:
+          return {
+            r: p,
+            g: q,
+            b: v
+          };
+        case 4:
+          return {
+            r: t,
+            g: p,
+            b: v
+          };
+        case 5:
+          return {
+            r: v,
+            g: p,
+            b: q
+          };
+        default:
+          console.error('Vis.hsvToRgb()');
+          return {
+            r: v,
+            g: t,
+            b: p // Should never happend
+          };
+      }
+    })();
+    return Vis.roundRgb(rgb, 255);
+  }
+
+  static roundRgb(rgb, f = 1.0) {
+    return {
+      r: Math.round(rgb.r * f),
+      g: Math.round(rgb.g * f),
+      b: Math.round(rgb.b * f)
+    };
+  }
+
+  static sigmoidal(x, k, x0 = 0.5, L = 1) {
+    return L / (1 + Math.exp(-k * (x - x0)));
+  }
+
+  // ransform RyGB to RGB hueT
+  static toHueRgb(hue) {
+    var hRgb;
+    hRgb = 0;
+    if (0 <= hue && hue < 90) {
+      hRgb = hue * 60 / 90;
+    } else if (90 <= hue && hue < 180) {
+      hRgb = 60 + (hue - 90) * 60 / 90;
+    } else if (180 <= hue && hue < 270) {
+      hRgb = 120 + (hue - 180) * 120 / 90;
+    } else if (270 <= hue && hue < 360) {
+      hRgb = 240 + (hue - 270) * 120 / 90;
+    }
+    return hRgb;
+  }
+
+  static toRgba(study) {
+    var hsv;
+    hsv = study.hsv != null ? study.hsv : [90, 90, 90];
+    return Vis.toRgbHsv(hsv[0], hsv[1], hsv[2]);
+  }
+
+  static toRgbSphere(hue, phi, rad) {
+    return Vis.toRgbHsv(Vis.rot(hue, 90), 100 * Vis.sin(phi), 100 * rad);
+  }
+
+  // Key algorithm from HCI for converting RGB to HCS  h 360 c 100 s 100
+  static toHcsRgb(R, G, B, toRygb = true) {
+    var H, a, b, c, g, h, r, s, sum;
+    sum = R + G + B;
+    r = R / sum;
+    g = G / sum;
+    b = B / sum;
+    s = sum / 3;
+    c = R === G && G === B ? 0 : 1 - 3 * Math.min(r, g, b); // Center Grayscale
+    a = Vis.deg(Math.acos((r - 0.5 * (g + b)) / Math.sqrt((r - g) * (r - g) + (r - b) * (g - b))));
+    h = b <= g ? a : 360 - a;
+    if (c === 0) {
+      h = 0;
+    }
+    H = toRygb ? Vis.toHueRgb(h) : h;
+    return [H, c * 100, s / 2.55];
+  }
+
+  static sScale(hue, c, s) {
+    var ch, m120, m60, s60, ss;
+    ss = 1.0;
+    m60 = hue % 60;
+    m120 = hue % 120;
+    s60 = m60 / 60;
+    ch = c / 100;
+    ss = m120 < 60 ? 3.0 - 1.5 * s60 : 1.5 + 1.5 * s60;
+    return s * (1 - ch) + s * ch * ss;
+  }
+
+  static sScaleCf(hue, c, s) {
+    var cf, cosd, cosu, m120, m60, ss;
+    ss = sScale(hue, c, s);
+    m60 = hue % 60;
+    m120 = hue % 120;
+    cosu = (1 - Vis.cos(m60)) * 100.00;
+    cosd = (1 - Vis.cos(60 - m60)) * 100.00;
+    cf = m120 < 60 ? cosu : cosd;
+    return ss - cf;
+  }
+
+  static floor(x, dx) {
+    var dr;
+    dr = Math.round(dx);
+    return Math.floor(x / dr) * dr;
+  }
+
+  static ceil(x, dx) {
+    var dr;
+    dr = Math.round(dx);
+    return Math.ceil(x / dr) * dr;
+  }
+
+  static within(beg, deg, end) {
+    return beg <= deg && deg <= end; // Closed interval with <=
+  }
+
+  static isZero(v) {
+    return -0.01 < v && v < 0.01;
+  }
+
+};
+
+/*
+@unicode:( icon ) ->
+ uc    = FaLookup.icons[icon]
+ if not uc?
+   console.error( 'Vis.unicode() missing icon in Vis.FontAwesomeUnicodes for', icon )
+   uc = "\uf111" # Circle
+ uc
+
+@uniawe:( icon ) ->
+ temp = document.createElement("i")
+ temp.className = icon
+ document.body.appendChild(temp)
+ uni = window.getComputedStyle( document.querySelector('.' + icon), ':before' ).getPropertyValue('content')
+ console.log( 'uniawe', icon, uni )
+ temp.remove()
+ uni
+*/
+var Vis$2 = Vis$1;
+
+var Convey;
+
+Convey = class Convey {
+  constructor(shapes, defs, g, x, y, w, h) {
+    this.doData = this.doData.bind(this);
+    this.sankeyLink = this.sankeyLink.bind(this);
+    this.shapes = shapes;
+    this.defs = defs;
+    this.g = g;
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.d3 = Util$1.getGlobal('d3');
+    this.nw = 24;
+    this.np = 0;
+    this.showLabel = false;
+    this.shapes.gradientDef(this.defs, 'WhiteBlack', 'white', 'black');
+    this.gc = this.g.append("g");
+  }
+
+  doData(graph) {
+    this.sankey = this.createSankey();
+    this.graph = this.sankey(graph);
+    [this.linkSvg, this.nodeSvg] = this.doSankey(this.sankey, this.graph);
+  }
+
+  createSankey() {
+    var sankey;
+    sankey = this.d3.sankey().nodeWidth(this.nw).nodePadding(this.np).extent([[this.x, this.y], [this.x + this.w, this.y + this.h]]);
+    sankey.link = this.sankeyLink;
+    return sankey;
+  }
+
+  sankeyLink(d) {
+    var curvature, x0, x1, x2, x3, xi, y0, y1;
+    curvature = .5;
+    x0 = d.source.x1;
+    x1 = d.target.x0;
+    xi = this.d3.interpolateNumber(x0, x1);
+    x2 = xi(curvature);
+    x3 = xi(1 - curvature);
+    y0 = d.y0;
+    y1 = d.y1 + 0.1; // 0.1 prevents a pure horizontal line that did not respond to color gradients
+    return 'M' + x0 + ',' + y0 + 'C' + x2 + ',' + y0 + ' ' + x3 + ',' + y1 + ' ' + x1 + ',' + y1;
+  }
+
+  doSankey(sankey, graph) {
+    var linkSvg, nodeSvg;
+    sankey.nodes(graph.nodes).links(graph.links);
+    //console.log( 'Node', node ) for node in graph.nodes
+    linkSvg = this.doLinks(graph);
+    nodeSvg = this.doNodes(graph);
+    return [linkSvg, nodeSvg];
+  }
+
+  // .attr( "stroke", "url(#WhiteBlack)" ).attr( "fill","none")#
+  doLinks(graph) {
+    var d, gLink, gLinks, i, id, len, ref;
+    gLinks = this.gc.append("svg:g");
+    ref = graph.links;
+    for (i = 0, len = ref.length; i < len; i++) {
+      d = ref[i];
+      //console.log( 'Convey.doLinks() d', d )
+      id = d.source.name + d.target.name;
+      this.shapes.gradientDef(this.defs, id, d.source.color, d.target.color);
+      gLink = gLinks.append("svg:g").attr("stroke", `url(#${id})`).attr("fill", "none");
+      //sort( (a, b) -> (b.y1-b.y0) - (a.y1-a.y0) )
+      gLink.append("svg:path").attr("d", this.sankey.link(d)).style("stroke-width", 1).append("title").text(d.source.name + " → " + d.target.name); //.attr("class", "link")
+    }
+    return gLinks;
+  }
+
+  doNodes(graph) {
+    var node;
+    node = this.gc.append("g").selectAll(".node").data(graph.nodes).enter().append("g").attr("class", "node").attr("transform", function(d) {
+      return Vis$2.translate(d.x0, d.y0);
+    });
+    node.append("rect").attr("height", function(d) {
+      return d.y1 - d.y0;
+    }).attr("width", this.sankey.nodeWidth()).attr("fill", (d) => {
+      return d.color;
+    }).append("title").text((d) => {
+      return d.name; //  + "\n" + d.value
+    });
+    if (this.showLabel) {
+      node.append("text").attr("x", -6).attr("y", function(d) {
+        return (d.y1 - d.y0) / 2;
+      }).attr("dy", ".35em").attr("text-anchor", "end").text(function(d) {
+        return d.name;
+      }).filter((d) => {
+        return d['x'] < this.w / 2;
+      }).attr("x", 6 + this.sankey.nodeWidth()).attr("text-anchor", "start");
+    }
+    return node;
+  }
+
+};
+
+var Convey$1 = Convey;
+
+var Shapes,
+  hasProp$3 = {}.hasOwnProperty;
+
+Shapes = class Shapes {
+  constructor(stream) {
+    this.createSvg = this.createSvg.bind(this);
+    this.layoutSvg = this.layoutSvg.bind(this);
+    this.stream = stream;
+    this.d3 = Util$1.getGlobal('d3');
+    this.cos30 = 0.86602540378;
+    //@cos15 = Vis.cos(15)
+    this.fontText = "Roboto";
+    Util$1.noop(this.ellipse, this.pathPlot, this.textFill, this.rectGrad, this.saveSvg, this.createSvg, this.layoutSvg);
+  }
+
+  createSvg(name, htmlId, w, h) {
+    var defs, g, gId, svg, svgId;
+    svgId = Util$1.htmlId(name, 'Svg', '', false); // Turn off duplicate id error message
+    gId = Util$1.htmlId(name, 'SvgG', '', false); // Turn off duplicate id error message
+    svg = this.d3.select('#' + htmlId).append("svg:svg").attr("id", svgId).attr("width", w).attr("height", h).attr("xmlns", "http://www.w3.org/2000/svg");
+    defs = svg.append("svg:defs");
+    g = svg.append("svg:g").attr("id", gId); // All transforms are applied to g
+    return [svg, g, svgId, gId, defs];
+  }
+
+  layoutSvg(svg, g, w, h, sx, sy) {
+    svg.attr("width", w).attr("height", h);
+    g.attr('transform', Vis$2.scale(sx, sy));
+  }
+
+  rectGrad(g, defs, xc, yc, w, h, fill, stroke, text) {
+    this.rectCenter(g, xc, yc, w * 1.5, h * 1.5, fill, stroke, 0.1);
+    this.rectCenter(g, xc, yc, w * 1.4, h * 1.4, fill, stroke, 0.2);
+    this.rectCenter(g, xc, yc, w * 1.3, h * 1.3, fill, stroke, 0.3);
+    this.rectCenter(g, xc, yc, w * 1.2, h * 1.2, fill, stroke, 0.4);
+    this.rectCenter(g, xc, yc, w * 1.1, h * 1.1, fill, stroke, 0.5);
+    this.rectCenter(g, xc, yc, w, h, fill, stroke, 0.6, text);
+  }
+
+  rectCenter(g, xc, yc, w, h, fill, stroke, opacity, text = '') {
+    this.rect(g, xc - w * 0.5, yc - h * 0.5, w, h, fill, stroke, opacity, text);
+  }
+
+  toFill(studyPrac) {
+    if ((studyPrac.hsv != null) && studyPrac.hsv.length === 3) {
+      return Vis$2.toRgbHsvStr(studyPrac.hsv);
+    } else {
+      console.error('Shapes.toFill() unknown fill code', {
+        name: studyPrac.name,
+        fill: studyPrac.fill,
+        spec: studyPrac
+      });
+      return '#888888';
+    }
+  }
+
+  arrange(prac) {
+    var dir, i, len, ref, studies;
+    studies = {};
+    ref = ['north', 'west', 'east', 'south'];
+    for (i = 0, len = ref.length; i < len; i++) {
+      dir = ref[i];
+      studies[this.key(prac, dir)] = this.obj(prac, dir);
+    }
+    return studies;
+  }
+
+  key(prac, dir) {
+    var key, study;
+    for (key in prac) {
+      study = prac[key];
+      if (Util$1.isChild(key) && study.dir === dir) {
+        return key;
+      }
+    }
+    return '???';
+  }
+
+  obj(prac, dir) {
+    var key, study;
+    for (key in prac) {
+      study = prac[key];
+      if (Util$1.isChild(key) && study.dir === dir) {
+        return study;
+      }
+    }
+    return {};
+  }
+
+  htmlId(pracName, contentName) {
+    return Util$1.getHtmlId(pracName, 'Info', contentName); // @ui.plane.id
+  }
+
+  size(obj) {
+    if (obj != null) {
+      return Object.keys(obj).length;
+    } else {
+      return 0;
+    }
+  }
+
+  isWest(column) {
+    return column === 'Embrace';
+  }
+
+  layout(geom, column, ns, ni) {
+    var lay;
+    lay = {}; // Layout ob
+    lay.dir = (this.isWest(column)) ? 1 : -1; // convey direction
+    lay.xc = geom.x0; // x center
+    lay.yc = geom.y0; // y center
+    lay.w = geom.w; // pane width
+    lay.h = geom.h; // pane height
+    lay.hk = lay.h / 8; // height keyhole rect
+    lay.xk = (this.isWest(column)) ? lay.w : 0; // x keyhole rect
+    lay.yk = lay.yc - lay.hk; // y keyhole rect
+    lay.rs = lay.yc * 0.85; // Outer  study section radius
+    lay.ro = lay.rs - lay.hk; // Inner  study section radius
+    lay.ri = lay.ro - lay.hk / 4; // Icon   intersction radiu
+    lay.yt = lay.yc + lay.ro + lay.rs * 0.65; // y for practice text
+    lay.a1 = (this.isWest(column)) ? 60 : 120; // Begin  study section angle
+    lay.a2 = (this.isWest(column)) ? 300 : -120; // Ending study section angle
+    lay.ns = ns; // Number of studies
+    lay.da = (lay.a1 - lay.a2) / lay.ns; // Angle of each section
+    lay.ds = lay.da / 12; // Link angle dif
+    lay.li = lay.ds / 2; // Link begin inset
+    lay.wr = 8; // Width  study rect  24
+    lay.hr = lay.ri / lay.ns; // Height study rect
+    lay.xr = lay.xc + lay.dir * (lay.rs / 2 + lay.wr); // x orgin study rect
+    lay.yr = lay.yc - lay.ri / 2; // r orgin study rect
+    lay.dl = lay.hr / 12; // link dif on study rect
+    lay.xl = lay.xr + lay.wr; // x link   on study rect
+    lay.yl = lay.yr + lay.dl / 2; // y link   on study rect
+    lay.ni = ni; // Number of innovative studies
+    lay.xi = 0; // x innovative study rects
+    lay.yi = lay.yc - lay.ri / 2; // y innovative study rects
+    lay.wi = lay.wr; // w innovative study rects
+    lay.hi = lay.ri / lay.ni; // h innovative study rects
+    lay.thick = 1; // line thickness
+    lay.stroke = 'none'; // line stroke
+    //console.log( 'Shapes.layout()', lay )
+    return lay;
+  }
+
+  click(path, text) {
+    path.style('z-index', '4'); //.style("pointer-events","all").style("visibility", "visible" )
+    path.on("click", () => {
+      var select;
+      //console.log( 'Shape.click',  text )
+      select = {}; // UI.toTopic(  text, 'Shapes', UI.SelectStudy )
+      return this.stream.publish('Select', select);
+    });
+  }
+
+  wedge(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId) {
+    var arc;
+    arc = this.d3.arc().innerRadius(r1).outerRadius(r2).startAngle(this.radD3(a1)).endAngle(this.radD3(a2));
+    //console.log( 'Shape.wedge()', { x0:x0, y0:y0 } )
+    g.append("svg:path").attr("d", arc).attr("fill", fill).attr("stroke", "none").attr("transform", Vis$2.translate(x0, y0));
+    this.wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId);
+  }
+
+  wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId) {
+    var as, at, path, rt, th, x, y;
+    Util$1.noop(wedgeId);
+    th = 14;
+    at = (a1 + a2) / 2;
+    if ((210 <= at && at <= 330) || (-150 <= at && at <= -30)) {
+      rt = (r1 + r2) / 2 + th * 0.25;
+      as = 270 - at;
+    } else {
+      rt = (r1 + r2) / 2 - th * 0.5;
+      as = 90 - at;
+    }
+    x = x0 + rt * this.cos(at);
+    y = y0 + rt * this.sin(at);
+    path = g.append("svg:text").text(text).attr("x", x).attr("y", y).attr("transform", Vis$2.rotate(as, x, y)).attr("text-anchor", "middle").attr("font-size", `${th}px`).attr("font-family", this.fontText).attr("font-weight", "bold").attr('fill', '#000000'); // @textFill(fill))
+    this.click(path, text);
+  }
+
+  icon(g, x0, y0, name, iconId, uc) {
+    var path;
+    path = g.append("svg:text").text(uc).attr("x", x0).attr("y", y0 + 12).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", "4vh").attr("font-family", "FontAwesome");
+    this.click(path, name);
+  }
+
+  text(g, x0, y0, name, textId, color) {
+    var path;
+    path = g.append("svg:text").text(name).attr("x", x0).attr("y", y0).attr("id", textId).attr("fill", color).attr("text-anchor", "middle").attr("font-size", "1.4vh").attr("font-family", this.fontText).attr("font-weight", "bold");
+    this.click(path, name);
+  }
+
+  link(g, a, ra, rb, xc, yc, xd, yd, xe, ye, stroke, thick) {
+    var data, xa, xb, ya, yb;
+    xa = xc + ra * this.cos(a);
+    ya = yc + ra * this.sin(a);
+    xb = xc + rb * this.cos(a);
+    yb = yc + rb * this.sin(a);
+    data = `M${xa},${ya} C${xb},${yb} ${xd},${yd} ${xe},${ye}`;
+    this.curve(g, data, stroke, thick);
+  }
+
+  curve(g, data, stroke, thick) {
+    g.append("svg:path").attr("d", data).attr("stroke-linejoin", "round").attr("fill", "none").attr("stroke", stroke).attr("stroke-width", thick);
+  }
+
+  keyHole(g, xc, yc, xs, ys, ro, ri, fill, stroke = 'none', thick = 0) {
+    var a, data, h, isweep, osweep, rh, rx;
+    h = yc - ys;
+    a = Math.asin(h / ro);
+    rx = Math.cos(a) * ro;
+    rh = ri;
+    osweep = 0; // Negative
+    isweep = 1; // Positive
+    if (xs < xc) {
+      rx = -rx;
+      rh = -ri;
+      osweep = 1; // Positive
+      isweep = 0; // Negative
+    }
+    data = `M${xs},   ${ys}`;
+    data += `L${xc + rx},${ys} A${ro},${ro} 0, 1,${osweep} ${xc + rx},${yc + h}`;
+    data += `L${xs},   ${yc + h} L${xs},${ys}`;
+    data += `M${xc + rh},${yc} A${ri},${ri} 0, 1,${isweep} ${xc + rh},${yc - 0.001 // Donut hole
+}`;
+    //console.log( 'Shapes.keyhole()', { xc:xc, yc:yc, xs:xs, ys:ys, ro:ro, ri:ri, h:h, a:a, rx:rx } )
+    this.poly(g, data, fill, stroke, thick);
+  }
+
+  poly(g, data, fill) {
+    g.append("svg:path").attr("d", data).attr("stroke-linejoin", "round").attr("fill", fill);
+  }
+
+  // svg:rect x="0" y="0" width="0" height="0" rx="0" ry="0"
+  rect(g, x0, y0, w, h, fill, stroke, opacity = 1.0, text = '') {
+    g.append("svg:rect").attr("x", x0).attr("y", y0).attr("width", w).attr("height", h).attr("fill", fill).attr("stroke", stroke).style("opacity", opacity);
+    if (opacity < 1.0) {
+      g.style('background', '#000000');
+    }
+    if (text !== '') {
+      g.append("svg:text").text(text).attr("x", x0 + w / 2).attr("y", y0 + h / 2 + 14).attr('fill', 'black').attr("text-anchor", "middle").attr("font-size", "2.5vh").attr("font-family", this.fontText).attr("font-weight", "bold");
+    }
+  }
+
+  round(g, x0, y0, w, h, rx, ry, fill, stroke) {
+    g.append("svg:rect").attr("x", x0).attr("y", y0).attr("width", w).attr("height", h).attr("rx", rx).attr("ry", ry).attr("fill", fill).attr("stroke", stroke);
+  }
+
+  // svg:ellipse cx="0" cy="0" rx="0" ry="0"
+  ellipse(g, cx, cy, rx, ry, fill, stroke) {
+    g.append("svg:ellipse").attr("cx", cx).attr("cy", cy).attr("rx", rx).attr("ry", ry).attr("fill", fill).attr("stroke", stroke);
+  }
+
+  // svg:ellipse cx="0" cy="0" rx="0" ry="0"
+  circle(g, cx, cy, r, fill, stroke) {
+    g.append("svg:ellipse").attr("cx", cx).attr("cy", cy).attr("r", r).attr("fill", fill).attr("stroke", stroke);
+  }
+
+  nodesLinks(studies, innovs) {
+    var iK, iKey, innov, key, links, nodes, sK, sKey, study;
+    nodes = [];
+    for (key in studies) {
+      if (!hasProp$3.call(studies, key)) continue;
+      study = studies[key];
+      nodes.push({
+        name: key,
+        color: this.toFill(study)
+      });
+    }
+    for (key in innovs) {
+      if (!hasProp$3.call(innovs, key)) continue;
+      innov = innovs[key];
+      nodes.push({
+        name: key,
+        color: this.toFill(innov)
+      });
+    }
+    links = [];
+    sK = 0;
+    for (sKey in studies) {
+      if (!hasProp$3.call(studies, sKey)) continue;
+      study = studies[sKey];
+      iK = 4;
+      for (iKey in innovs) {
+        if (!hasProp$3.call(innovs, iKey)) continue;
+        innov = innovs[iKey];
+        links.push({
+          source: sK,
+          target: iK,
+          value: 1 // sourceName:sKey, targetName:iKey,
+        });
+        iK++;
+      }
+      sK++;
+    }
+    return {
+      //console.log( 'Shape.nodesLinks', nodes, links )
+      nodes: nodes,
+      links: links
+    };
+  }
+
+  conveySankey(column, defs, g, studies, innovs, x, y, w, h) {
+    var convey, nodesLinks;
+    //console.log( { column:column, studies:studies, innovs:innovs, x:x, y:y, w:w, h:h } )
+    convey = new Convey$1(this, defs, g, x, y, w, h);
+    nodesLinks = {};
+    if (column === "Embrace") {
+      nodesLinks = this.nodesLinks(studies, innovs);
+    } else if (column === "Encourage") {
+      nodesLinks = this.nodesLinks(innovs, studies);
+    }
+    convey.doData(nodesLinks);
+  }
+
+  practiceFlow(g, geom, spec) {
+    if (spec.row == null) {
+      return;
+    }
+    switch (spec.row) {
+      case 'Learn':
+        this.flow(g, geom, [90, 90, 90], 'South', 12);
+        break;
+      case 'Do':
+        this.flow(g, geom, [90, 90, 90], 'North', 12);
+        this.flow(g, geom, [60, 90, 90], 'South', 12);
+        break;
+      case 'Share':
+        this.flow(g, geom, [60, 90, 90], 'North', 12);
+        break;
+      default:
+        console.error(' unknown spec row ', spec.name, spec.row);
+        this.flow(g, geom, [90, 90, 90], 'South', 12);
+    }
+  }
+
+  flow(g, geom, hsv, dir, h) {
+    var fill, w, x0, y0;
+    w = 18;
+    x0 = geom.x0 - w / 2;
+    y0 = dir === 'South' ? geom.h - h : 0;
+    fill = Vis$2.toRgbHsvStr(hsv);
+    this.rect(g, x0, y0, w, h, fill, 'none');
+  }
+
+  // Convert degress to radians and make angle counter clockwise
+  rad(deg) {
+    return (360 - deg) * Math.PI / 180.0;
+  }
+
+  //degSVG:( deg ) -> 360-deg
+  radD3(deg) {
+    return (450 - deg) * Math.PI / 180.0;
+  }
+
+  //degD3:( rad )  -> -rad * 180.0 / Math.PI
+  cos(deg) {
+    return Vis$2.cosSvg(deg);
+  }
+
+  sin(deg) {
+    return Vis$2.sinSvg(deg);
+  }
+
+  gradientDef(defs, id, color1, color2, x1 = '0%', x2 = '100%', y1 = '0%', y2 = '100%') {
+    var grad;
+    grad = defs.append("svg:linearGradient");
+    grad.attr("id", id).attr("x1", x1).attr("y1", y1).attr("x2", x2).attr("y2", y2);
+    grad.append("svg:stop").attr("offset", "10%").attr("stop-color", color1);
+    grad.append("svg:stop").attr("offset", "90%").attr("stop-color", color2);
+  }
+
+  pathPlot(g, stroke, thick, d) {
+    g.append('svg:path').attr('d', d).attr('stroke', stroke).attr('stroke-width', thick).attr('fill', 'none').attr("stroke-linejoin", 'round');
+  }
+
+  textFill(hex, dark = '#000000', light = '#FFFFFF') {
+    if (hex > 0x888888) {
+      return dark;
+    } else {
+      return light;
+    }
+  }
+
+  saveSvg(name, id) {
+    var downloadLink, fileName, svgBlob, svgData, svgUrl;
+    fileName = name + '.svg';
+    svgData = $('#' + id)[0].outerHTML;
+    svgBlob = new Blob([svgData], {
+      type: "image/svg+xml;charset=utf-8"
+    });
+    svgUrl = window['URL'].createObjectURL(svgBlob);
+    downloadLink = document.createElement("a");
+    downloadLink.href = svgUrl;
+    downloadLink.download = fileName;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  }
+
+};
+
+var Shapes$1 = Shapes;
+
+var Embrace,
+  hasProp$4 = {}.hasOwnProperty;
+
+Embrace = class Embrace {
+  constructor(spec, shapes, build) {
+    this.drawSvg = this.drawSvg.bind(this);
+    this.spec = spec;
+    this.shapes = shapes;
+    this.build = build;
+    this.studies = this.shapes.arrange(this.spec);
+    this.innovs = this.build.adjacentStudies(this.spec, 'east');
+  }
+
+  drawSvg(g, geom, defs) {
+    var a, a1, fill, h, i, key, lay, ref, ref1, ref2, ref3, study, w, wedgeId, x, xr, y, yl, yr, yt;
+    //$g.hide()
+    lay = this.shapes.layout(geom, this.spec.column, this.shapes.size(this.studies), this.shapes.size(this.innovs));
+    fill = this.shapes.toFill(this.spec);
+    this.shapes.keyHole(g, lay.xc, lay.yc, lay.xk, lay.yk, lay.ro, lay.hk, fill, lay.stroke);
+    yl = lay.yl;
+    a1 = lay.a1;
+    xr = lay.xr + lay.wr;
+    yr = lay.yr;
+    ref = this.studies;
+    for (key in ref) {
+      if (!hasProp$4.call(ref, key)) continue;
+      study = ref[key];
+      fill = this.shapes.toFill(study);
+      wedgeId = this.shapes.htmlId(study.name, 'Wedge');
+      this.shapes.wedge(g, lay.ro, lay.rs, a1, a1 - lay.da, lay.xc, lay.yc, fill, study.name, wedgeId);
+      for (a = i = ref1 = a1 - lay.li, ref2 = a1 - lay.da, ref3 = -lay.ds; ref3 !== 0 && (ref3 > 0 ? i < ref2 : i > ref2); a = i += ref3) {
+        this.shapes.link(g, a, lay.ro, lay.ri, lay.xc, lay.yc, lay.xc, yl, xr, yl, fill, lay.thick);
+        yl += lay.dl;
+      }
+      a1 -= lay.da;
+      yr += lay.hr;
+    }
+    x = lay.xr + lay.wr;
+    y = lay.yr;
+    w = lay.w - x;
+    h = lay.ri;
+    yt = geom.y0 + geom.h * 0.49;
+    this.shapes.conveySankey("Embrace", defs, g, this.studies, this.innovs, x, y, w, h);
+    this.shapes.icon(g, geom.x0, geom.y0, this.spec.name, this.shapes.htmlId(this.spec.name, 'IconSvg'), Vis$2.unicode(this.spec.icon));
+    this.shapes.text(g, w - 12, yt, this.spec.name, this.shapes.htmlId(this.spec.name, 'TextSvg'), 'black');
+    this.shapes.practiceFlow(g, geom, this.spec);
+  }
+
+  // Not called but matches innovation
+  //$g.show()
+  innovateStudies(g, geom) {
+    var fill, h, innov, key, r0, ref, w, x0, y0;
+    r0 = geom.x0 / 2 - 36;
+    w = 24;
+    h = r0 / this.shapes.size(this.innovs);
+    x0 = geom.w - w;
+    y0 = geom.y0 - r0 / 2;
+    ref = this.innovs;
+    for (key in ref) {
+      if (!hasProp$4.call(ref, key)) continue;
+      innov = ref[key];
+      fill = this.shapes.toFill(innov);
+      this.shapes.rect(g, x0, y0, w, h, fill, 'none');
+      y0 += h;
+    }
+  }
+
+};
+
+var Embrace$1 = Embrace;
+
+var Innovate;
+
+Innovate = class Innovate {
+  constructor(spec, shapes, build) {
+    this.hexStudy = this.hexStudy.bind(this);
+    this.line = this.line.bind(this);
+    this.spec = spec;
+    this.shapes = shapes;
+    this.build = build;
+    this.d3 = Util$1.getGlobal('d3');
+    this.studies = this.shapes.arrange(this.spec);
+    this.cos30 = this.shapes.cos30;
+    this.t = 24;
+    this.xh = 0;
+    this.yh = 0;
+    this.r = 0;
+    this.thick = 1;
+    this.stroke = 'black';
+  }
+
+  drawSvg(g, geom, defs) {
+    var key, ref, study, xt, yt;
+    Util$1.noop(defs);
+    this.lay = this.shapes.layout(geom, this.spec.column, this.shapes.size(this.studies), this.shapes.size(this.studies));
+    this.colorRing = Vis$2.toRgbHsvStr([90, 55, 90]);
+    this.colorBack = 'rgba(97, 56, 77, 1.0 )';
+    //$g.hide()
+    switch (this.spec.row) {
+      case 'Learn':
+        this.concept(g, geom);
+        break;
+      case 'Do':
+        this.technology(g, geom);
+        break;
+      case 'Share':
+        this.facilitate(g, geom);
+        break;
+      default:
+        this.technology(g, geom); // Default for group spec
+    }
+    ref = this.studies;
+    for (key in ref) {
+      study = ref[key];
+      this.hexStudy(g, geom, study);
+    }
+    xt = geom.x0 - 75;
+    yt = geom.y0 + geom.h * 0.30;
+    this.shapes.rect(g, xt, yt, 150, this.t, 'none', 'none', 0.865, this.spec.name);
+  }
+
+  //$g.show()
+  concept(g, geom) {
+    var t, t1, t2, t3, t4;
+    t = 0;
+    t1 = 0;
+    t2 = 0;
+    t3 = 0;
+    t4 = 0;
+    [t, t1, t2, t3, t4] = [this.t, this.t, this.t * 2, this.t * 4, this.t * 2];
+    this.shapes.round(g, t, t1, geom.w - t * 2, geom.h - t4, t, t, this.colorRing, 'none');
+    this.shapes.round(g, t * 2, t2, geom.w - t * 4, geom.h - t3, t, t, this.colorBack, 'none');
+    this.eastInovate(g, geom);
+    this.westInovate(g, geom);
+    this.southInovate(g, geom, function(study) {
+      return study.dir !== 'north';
+    });
+  }
+
+  // "ArchitectEngineerConstruct":{"dir":"pradd","icon":"fa-university","hsv":[ 30,60,90]}
+  technology(g, geom) {
+    var t, t1, t2, t3, t4, xt, yt;
+    t = 0;
+    t1 = 0;
+    t2 = 0;
+    t3 = 0;
+    t4 = 0;
+    [t, t1, t2, t3, t4] = [this.t, this.t, this.t * 2, this.t * 4, this.t * 2];
+    this.shapes.round(g, t, t1, geom.w - t * 2, geom.h - t4, t, t, this.colorRing, 'none');
+    this.shapes.round(g, t * 2, t2, geom.w - t * 4, geom.h - t3, t, t, this.colorBack, 'none');
+    this.eastInovate(g, geom);
+    this.westInovate(g, geom);
+    this.northInovate(g, geom, function(study) {
+      return study.dir !== 'south';
+    });
+    this.southInovate(g, geom, function(study) {
+      return study.dir !== 'north';
+    });
+    if (this.spec.name === 'OpenSource') {
+      xt = geom.x0 - 65;
+      yt = geom.y0 - geom.h * 0.455;
+      this.shapes.rect(g, xt, yt, 150, this.t, 'none', 'none', "Architect Engineer Construct", 0.75);
+    }
+  }
+
+  facilitate(g, geom) {
+    var t, t1, t2, t3, t4;
+    t = 0;
+    t1 = 0;
+    t2 = 0;
+    t3 = 0;
+    t4 = 0;
+    [t, t1, t2, t3, t4] = [this.t, this.t, this.t * 2, this.t * 4, this.t * 2];
+    this.shapes.round(g, t, t1, geom.w - t * 2, geom.h - t4, t, t, this.colorRing, 'none');
+    this.shapes.round(g, t * 2, t2, geom.w - t * 4, geom.h - t3, t, t, this.colorBack, 'none');
+    this.eastInovate(g, geom);
+    this.westInovate(g, geom);
+    this.northInovate(g, geom, function(study) {
+      return study.dir !== 'south';
+    });
+  }
+
+  westInovate(g, geom) {
+    var fill, h, key, r0, ref, study, w, x0, y0;
+    r0 = this.lay.ri; // geom.x0/2 - 36
+    w = 24;
+    h = r0 / this.shapes.size(this.studies);
+    x0 = geom.w - w;
+    y0 = geom.y0 - r0 / 2;
+    ref = this.studies;
+    for (key in ref) {
+      study = ref[key];
+      fill = this.shapes.toFill(study);
+      this.shapes.rect(g, x0, y0, w, h, fill, 'none');
+      y0 += h;
+    }
+  }
+
+  eastInovate(g, geom) {
+    var fill, h, key, r0, ref, study, w, x0, y0;
+    r0 = this.lay.ri; // geom.x0/2 - 36
+    w = 24;
+    h = r0 / this.shapes.size(this.studies);
+    x0 = 0;
+    y0 = geom.y0 - r0 / 2;
+    ref = this.studies;
+    for (key in ref) {
+      study = ref[key];
+      fill = this.shapes.toFill(study);
+      this.shapes.rect(g, x0, y0, w, h, fill, 'none');
+      y0 += h;
+    }
+  }
+
+  northInovate(g, geom, filter) {
+    var dx, fill, h, key, ref, study, w, x0, y0;
+    w = 18;
+    h = 24;
+    dx = geom.r * 1.5;
+    x0 = geom.x0 - dx - w / 2;
+    y0 = 0;
+    ref = this.studies;
+    for (key in ref) {
+      study = ref[key];
+      if (!(filter(study))) {
+        continue;
+      }
+      fill = this.shapes.toFill(study);
+      this.shapes.rect(g, x0, y0, w, h, fill, 'none');
+      x0 += dx;
+    }
+  }
+
+  southInovate(g, geom, filter) {
+    var dx, fill, h, key, ref, study, w, x0, y0;
+    w = 18;
+    h = 24;
+    dx = geom.r * 1.5;
+    x0 = geom.x0 - dx - w / 2;
+    y0 = geom.h - h;
+    ref = this.studies;
+    for (key in ref) {
+      study = ref[key];
+      if (!(filter(study))) {
+        continue;
+      }
+      fill = this.shapes.toFill(study);
+      this.shapes.rect(g, x0, y0, w, h, fill, 'none');
+      x0 += dx;
+    }
+  }
+
+  hexStudy(g, geom, study) {
+    var dx, dy, fill, i, j, uc, x, x0, y, y0, yh;
+    this.r = geom.r;
+    dx = this.r * 1.5;
+    dy = this.r * 2.0 * this.cos30;
+    x0 = geom.x0;
+    y0 = geom.y0; // - 26
+    j = 0;
+    i = 0;
+    [j, i] = this.hexPosTier(study.dir);
+    yh = j % 2 === 0 ? 0 : this.r * this.cos30;
+    x = j * dx + x0;
+    y = -i * dy + y0 + yh;
+    fill = this.shapes.toFill(study);
+    uc = Vis$2.unicode(study.icon);
+    // console.log( 'Innovate.hexStudy()', study.icon, uc )
+    this.hexPath(fill, g, x, y, this.shapes.htmlId(study.name, 'HexPath'));
+    this.hexText(study.name, g, x, y, this.shapes.htmlId(study.name, 'HexText'));
+    this.hexIcon(uc, g, x, y, this.shapes.htmlId(study.name, 'HexIcon'));
+  }
+
+  hexPosTier(dir) {
+    switch (dir) {
+      case 'west':
+      case 'westd':
+        return [-1, 0.5];
+      case 'north':
+      case 'northd':
+        return [0, 0.5];
+      case 'east':
+      case 'eastd':
+        return [1, 0.5];
+      case 'south':
+      case 'southd':
+        return [0, -0.5];
+      case 'nw':
+      case 'nwd':
+        return [-1, 1.5];
+      case 'ne':
+      case 'ned':
+        return [1, 1.5];
+      case 'sw':
+      case 'swd':
+        return [-1, -0.5];
+      case 'se':
+      case 'sed':
+        return [1, -0.5];
+      default:
+        console.error('Innovate.hexPos() unknown dir', dir, 'returning [0, 0.5] for Service');
+        return [0, 0.5];
+    }
+  }
+
+  line() {
+    return this.d3.line().x((ang) => {
+      return this.r * Vis$2.cosSvg(ang) + this.xh;
+    }).y((ang) => {
+      return this.r * Vis$2.sinSvg(ang) + this.yh;
+    });
+  }
+
+  hexPath(fill, g, x0, y0, pathId) {
+    var ang, k, len, path, ref, xp, yp;
+    xp = (ang) => {
+      return this.r * Vis$2.cosSvg(ang) + x0;
+    };
+    yp = (ang) => {
+      return this.r * Vis$2.sinSvg(ang) + y0;
+    };
+    path = this.d3.path();
+    path.moveTo(xp(0), yp(0));
+    ref = [60, 120, 180, 240, 300, 360];
+    for (k = 0, len = ref.length; k < len; k++) {
+      ang = ref[k];
+      path.lineTo(xp(ang), yp(ang));
+    }
+    path.closePath();
+    // console.log( 'hexPathV4 path', path )
+    g.append("svg:path").attr("d", path).attr("id", pathId).attr("stroke-width", this.thick).attr("stroke", this.stroke).attr("fill", fill);
+  }
+
+  hexText(text, g, x0, y0, textId) {
+    var path;
+    path = g.append("svg:text").text(text).attr("id", textId).attr("x", x0).attr("y", y0 + 16).attr("text-anchor", "middle").attr("font-size", "2.0vh").attr("font-family", this.shapes.fontText).attr("font-weight", "bold");
+    this.shapes.click(path, text);
+  }
+
+  hexIcon(icon, g, x0, y0, iconId) {
+    g.append("svg:text").text(icon).attr("x", x0).attr("y", y0 - 2).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", "3.0vh").attr("font-family", "FontAwesome");
+  }
+
+};
+
+/*
+
+x0y0:( j, i, r, x0, y0 ) ->
+dx = @r * 1.5
+dy = @r * 2.0 * @cos30
+yh = if j % 2 is 0 then 0 else  @r*@cos30
+x  =  j*dx + x0
+y  = -i*dy + y0 + yh
+[x,y]
+
+ * Not used but good example
+hexLoc:( g, id, j,i, r, fill, text="", icon="" ) ->
+[x0,y0] = @x0y0( j, i, @r, @x0, @y0 )
+@hexPath( fill, g, x0, y0, id )
+@hexText( text, g, x0, y0, id ) if Util.isStr(text)
+@hexIcon( icon, g, x0, y0, id ) if Util.isStr(icon)
+{ x0, y0, r }
+
+hexPos:( dir ) ->
+@hexPosTier(dir) # if @spec.svg? and @spec.svg is 'Data' then @hexPosData(dir) else @hexPosTier(dir)
+return
+
+hexPosData:( dir ) ->
+switch dir
+when 'west'           then [-1,   0.0]
+when 'westd'          then [-2,   0.0]
+when 'north','northd' then [ 0,   0.0]
+when 'east'           then [ 1,   0.0]
+when 'eastd'          then [ 2,   0.0]
+when 'south','southd' then [ 0,   0.0]
+when 'nw',   'nwd'    then [-1,   1.0]
+when 'ne',   'ned'    then [ 1,   1.0]
+when 'sw'             then [-1,   0.0]
+when 'swd'            then [-1,   0.0]
+when 'se'             then [ 1,   0.0]
+when 'sed'            then [ 1,   0.0]
+else
+  console.error( 'Innovate.hexPos() unknown dir', dir, 'returning [0, 0.5] for Service' )
+  [0, 0.5]
+
+ * Not working in v4
+hexPathV3:( fill, g, x0, y0, pathId ) ->
+@xh = x0
+@yh = y0
+g.append("svg:path").data(@angs).attr("id", pathId ).attr( "d", @line(@angs) )
+.attr("stroke-width", @thick ).attr("stroke", @stroke ).attr("fill", fill )
+return
+ */
+var Innovate$1 = Innovate;
+
+var Encourage;
+
+Encourage = class Encourage {
+  constructor(spec, shapes, build) {
+    this.spec = spec;
+    this.shapes = shapes;
+    this.build = build;
+    this.studies = this.shapes.arrange(this.spec);
+    this.innovs = this.build.adjacentStudies(this.spec, 'west');
+  }
+
+  drawSvg(g, geom, defs) {
+    var a, a1, fill, h, i, key, lay, r0, ref, ref1, ref2, ref3, study, w, wedgeId, x, xr, y, yl, yr, yt;
+    lay = this.shapes.layout(geom, this.spec.column, this.shapes.size(this.studies), this.shapes.size(this.innovs));
+    // $g.hide()
+    fill = this.shapes.toFill(this.spec);
+    this.shapes.keyHole(g, lay.xc, lay.yc, lay.xk, lay.yk, lay.ro, lay.hk, fill, lay.stroke);
+    yl = lay.yl;
+    a1 = lay.a1;
+    xr = lay.xr + lay.wr;
+    yr = lay.yr;
+    ref = this.studies;
+    for (key in ref) {
+      study = ref[key];
+      fill = this.shapes.toFill(study);
+      wedgeId = this.shapes.htmlId(study.name, 'Wedge');
+      this.shapes.wedge(g, lay.ro, lay.rs, a1, a1 - lay.da, lay.xc, lay.yc, fill, study.name, wedgeId);
+      for (a = i = ref1 = a1 - lay.li, ref2 = a1 - lay.da, ref3 = -lay.ds; ref3 !== 0 && (ref3 > 0 ? i < ref2 : i > ref2); a = i += ref3) {
+        this.shapes.link(g, a, lay.ro, lay.ri, lay.xc, lay.yc, lay.xc, yl, xr, yl, fill, lay.thick);
+        yl += lay.dl;
+      }
+      a1 -= lay.da;
+      yr += lay.hr;
+    }
+    //@innovateStudies( g, lay )
+    x = 0; // lay.xr+lay.wr
+    r0 = lay.ri; // geom.x0/2 - 36
+    y = geom.y0 - r0 / 2; // lay.yr
+    w = lay.xr + lay.wr;
+    h = r0; // lay.ri
+    yt = geom.y0 + geom.h * 0.5;
+    this.shapes.conveySankey("Encourage", defs, g, this.studies, this.innovs, x, y, w, h);
+    this.shapes.icon(g, geom.x0, geom.y0, this.spec.name, this.shapes.htmlId(this.spec.name, 'IconSvg'), Vis$2.unicode(this.spec.icon));
+    this.shapes.text(g, w - 12, yt, this.spec.name, this.shapes.htmlId(this.spec.name, 'TextSvg'), 'black');
+    this.shapes.practiceFlow(g, geom, this.spec);
+  }
+
+  // Not called but matches Sankey
+  // $g.show()
+  innovateStudies(g, lay) {
+    var fill, innov, key, ref, yi;
+    yi = lay.yi;
+    ref = this.innovs;
+    for (key in ref) {
+      innov = ref[key];
+      fill = this.shapes.toFill(innov);
+      this.shapes.rect(g, lay.xi, yi, lay.wi, lay.hi, fill, lay.stroke);
+      yi += lay.hi;
+    }
+  }
+
+};
+
+var Encourage$1 = Encourage;
+
 var Connect;
 
-Connect = (function() {
-  class Connect {}
-  return Connect;
+Connect = class Connect {
+  constructor(stream, build, prac, size) {
+    this.stream = stream;
+    this.build = build;
+    this.prac = prac;
+    this.size = size;
+    this.shapes = new Shapes$1(this.stream);
+  }
 
-}).call(undefined);
+  createDraw() {
+    switch (this.prac.column) {
+      case 'Embrace':
+        return new Embrace$1(this.prac, this.shapes, this.build);
+      case 'Innovate':
+        return new Innovate$1(this.prac, this.shapes, this.build);
+      case 'Encourage':
+        return new Encourage$1(this.prac, this.shapes, this.build);
+      default:
+        return new Innovate$1(this.prac, this.shapes, this.build);
+    }
+  }
+
+  ready() {
+    var gId, svgId;
+    this.geom = this.geom(this.size.width, this.size.height, this.size.width, this.size.height);
+    this.graph = null;
+    this.g = null;
+    svgId = '';
+    gId = '';
+    this.defs = null;
+    [this.graph, this.g, svgId, gId, this.defs] = this.shapes.createSvg(this.prac.name, this.htmlId, this.width, this.height);
+    this.draw = this.createDraw();
+    this.draw.drawSvg(this.g, this.geom, this.defs);
+    return this.htmlId = svgId;
+  }
+
+  layout() {
+    var geom;
+    geom = this.geom(this.size.fullWidth, this.size.fullHeight, this.size.width, this.size.height);
+    this.shapes.layout(this.graph, this.g, geom.w, geom.h, geom.sx, geom.sy);
+  }
+
+  geom(width, height, wgpx, hgpx) {
+    var g;
+    g = {};
+    [g.w, g.h] = [width, height];
+    g.r = Math.min(g.w, g.h) * 0.2; // Use for hexagons
+    g.x0 = g.w * 0.5;
+    g.y0 = g.h * 0.5;
+    g.sx = g.w / wgpx;
+    g.sy = g.h / hgpx;
+    g.s = Math.min(g.sx, g.sy);
+    g.fontSize = this.toVh(5) + 'vh';
+    g.iconSize = this.toVh(5) + 'vh';
+    // console.log( "Connect.geom()", { wgpx:wgpx, hgpx:hgpx }, g )
+    return g;
+  }
+
+  toFill(hsv) {
+    return Vis.toRgbHsvStr(hsv);
+  }
+
+};
 
 var Connect$1 = Connect;
 
@@ -3410,7 +4805,8 @@ var Connect$1 = Connect;
 var script$d = {
 
   data() {
-    return { build:{}, connect:{}, comp:'Info', prac:'All', disp:'All', tab:'Connections',  practices:{} }; },
+    return { comp:'Info', prac:'All', disp:'All', tab:'Connections',
+             build:{}, connects:{}, practices:{} }; },
 
   methods: {
     isPrac: function (prac) {
@@ -3426,16 +4822,30 @@ var script$d = {
     classTab: function (tab) {
       return this.tab===tab ? 'tab-active' : 'tab' },
     style: function( hsv ) {
-      return { backgroundColor:this.toRgbaHsv(hsv) }; } },
+      return { backgroundColor:this.toRgbaHsv(hsv) }; },
+    createConnects: function( stream, build ) {
+      console.log( 'Conn.createConnects() refs', this.$refs );
+      let fullWidth  = this.$refs['FullPrac'][0]['clientWidth' ];
+      let fullHeight = this.$refs['FullPrac'][0]['clientHeight'];
+      let size = { fullWidth:fullWidth, fullHeight:fullHeight, width:0, height:0 };
+      for( let key in this.practices ) {
+        if( this.practices.hasOwnProperty(key) ) {
+          let prac    = this.practices[key];
+          size.width  = this.$refs[prac.name][0]['clientWidth' ];
+          size.height = this.$refs[prac.name][0]['clientHeight'];
+          console.log( 'Conn.createConnects() size', size );
+          this.connects[prac.name] = new Connect$1( stream, build, prac.name, prac['column'], size ); } }
+      return this.connects; } },
 
   mounted: function () {
-    
-    this.build     = new Build$1(   this.batch() );
-    this.connect   = new Connect$1( this.build   );
+    this.build     = new Build$1( this.batch() );
     this.practices = this.pracs(  this.comp, 'Cols' );
-    this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
+    this.subscribe(  this.comp, this.comp+'.vue', function(obj) {
       if( obj.disp==='All' ) { this.onPrac(obj.prac); }
-      else                   { this.onDisp(obj.prac,obj.disp); } } ); } };
+      else                   { this.onDisp(obj.prac,obj.disp); } } );
+    this.$nextTick( function() {
+      this.connects  = this.createConnects( this.stream(), this.build ); } ); }
+  };
 
 /* script */
 const __vue_script__$e = script$d;
@@ -3522,12 +4932,26 @@ var __vue_render__$b = function() {
                 }
               ],
               key: prac.name,
+              ref: "FullPrac",
+              refInFor: true,
               class: _vm.pracDir(prac.dir)
             },
             [
-              _c("div", { staticClass: "prac", style: _vm.style(prac.hsv) }, [
-                _c("div", { staticClass: "name" }, [_vm._v(_vm._s(prac.name))])
-              ])
+              _c(
+                "div",
+                {
+                  ref: prac.name,
+                  refInFor: true,
+                  staticClass: "prac",
+                  style: _vm.style(prac.hsv),
+                  attrs: { id: prac.name }
+                },
+                [
+                  _c("div", { staticClass: "name" }, [
+                    _vm._v(_vm._s(prac.name))
+                  ])
+                ]
+              )
             ]
           )
         ]
@@ -3542,7 +4966,7 @@ __vue_render__$b._withStripped = true;
   /* style */
   const __vue_inject_styles__$e = function (inject) {
     if (!inject) return
-    inject("data-v-446e0a50_0", { source: ".conn {\n  background-color: black;\n  position: relative;\n  font-size: 1.75vmin;\n  display: grid;\n  grid-template-columns: 7% 31% 31% 31%;\n  grid-template-rows: 6% 13% 27% 27% 27%;\n  grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.conn .tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.conn .tabs .tab-active {\n  background-color: wheat;\n  color: black;\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 90%;\n  height: 80%;\n  font-size: 1em;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n", map: {"version":3,"sources":["Conn.vue","/Users/ax/Documents/prj/aug/vue/muse/Conn.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,kBAAkB;EAClB,mBAAmB;EACnB,aAAa;EACb,qCAAqC;EACrC,sCAAsC;EACtC,6GAA6G;EAC7G,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,eAAe;EACf,eAAe;EACf,YAAY;EACZ,gBAAgB;EAChB,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;ECCrB,qBAAA;EACA,mBAAA;ADCA;ACCA;EACA,aAAA;EDCE,aAAa;ECCf,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,mBAAA;AACA;AACA;EACA,aAAA;EACA,gBAAA;EDCE,qBAAqB;ECCvB,mBAAA;EACA,qBAAA;EACA,mBAAA;AACA;AACA;EACA,aAAA;EDCE,aAAa;ECCf,qBAAA;EACA,mBAAA;EDCE,qBAAqB;ECCvB,mBAAA;AACA;AACA;EACA,aAAA;EACA,aAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,mBAAA;AACA;AACA;EDCE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;AAChC;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;EACZ,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;AAChC;AACA;EACE,aAAa;EACb,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,cAAc;EACd,iBAAiB;AACnB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;AACf;AACA;EACE,cAAc;EACd,WAAW;EACX,YAAY;EACZ,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;AACtB;AACA;EACE,mBAAmB;AACrB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,cAAc;EACd,cAAc;AAChB;AACA;EACE,iBAAiB;AACnB","file":"Conn.vue","sourcesContent":[".conn {\n  background-color: black;\n  position: relative;\n  font-size: 1.75vmin;\n  display: grid;\n  grid-template-columns: 7% 31% 31% 31%;\n  grid-template-rows: 6% 13% 27% 27% 27%;\n  grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.conn .tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.conn .tabs .tab-active {\n  background-color: wheat;\n  color: black;\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 90%;\n  height: 80%;\n  font-size: 1em;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n","\n\n<template>\n  <div id=\"Conn\" class=\"conn\">\n    <div class=\"tabs\">\n      <div :class=\"classTab('Practices')\"    @click=\"pubTab('Practices')\"   >Practices</div>\n      <div :class=\"classTab('Connections')\"  @click=\"pubTab('Connections')\" >\n        <router-link :to=\"{ name:'Conn' }\">Connections</router-link></div>\n      <div :class=\"classTab('Enlight')\"      @click=\"pubTab('Enlight')\"     >Enlight</div>\n      <div :class=\"classTab('Data Science')\" @click=\"pubTab('Data Science')\">Data Science</div>\n    </div>\n    <template v-for=\"prac in practices\">\n      <div v-show=\"isPrac(prac.name)\" :class=\"pracDir(prac.dir)\" :key=\"prac.name\">\n        <div class=\"prac\" :style=\"style(prac.hsv)\"><div class=\"name\">{{prac.name}}</div></div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Build   from '../../pub/cube/Build.js'\n  import Connect from '../../pub/conn/Connect.js'\n\n  export default {\n\n    data() {\n      return { build:{}, connect:{}, comp:'Info', prac:'All', disp:'All', tab:'Connections',  practices:{} }; },\n\n    methods: {\n      isPrac: function (prac) {\n        return this.prac===prac || this.prac==='All' },\n      onPrac: function (prac) {\n        this.prac = prac; this.disp='All'; },\n      onDisp: function (prac,disp) {\n        this.prac = prac; this.disp=disp; },\n      pracDir: function(dir) {\n        return this.prac==='All' ? dir : 'fullPracDir'; },\n      pubTab: function (tab) {\n        this.tab = tab },\n      classTab: function (tab) {\n        return this.tab===tab ? 'tab-active' : 'tab' },\n      style: function( hsv ) {\n        return { backgroundColor:this.toRgbaHsv(hsv) }; } },\n\n    mounted: function () {\n      \n      this.build     = new Build(   this.batch() );\n      this.connect   = new Connect( this.build   );\n      this.practices = this.pracs(  this.comp, 'Cols' );\n      this.subscribe(  this.comp, this.comp+'.vue', (obj) => {\n        if( obj.disp==='All' ) { this.onPrac(obj.prac); }\n        else                   { this.onDisp(obj.prac,obj.disp); } } ); } }\n\n</script>\n\n<style lang=\"less\">\n  .grid5x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:6% 13% 27% 27% 27%;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n  \n  .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n    justify-items:center; align-items:center; }\n  \n  .conn { background-color:black; position:relative; font-size:1.75vmin;\n    .grid5x4(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid\n    .tabs{ grid-area:tabs; display:inline; color:wheat; font-size:1.2em;\n      justify-self:start; align-self:center; text-align:left; }\n    .cm { .pdir(cm); } .em   { .pdir(em);   } .in    { .pdir(in); }    .en   { .pdir(en);   }\n    .le { .pdir(le); } .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }\n    .do { .pdir(do); } .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }\n    .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }\n  \n    .tabs {\n      .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;\n        border-radius:12px 12px 0 0; border-left: wheat solid thin;\n        border-top:wheat solid thin; border-right:wheat solid thin; }\n      .tab:hover  { background-color:wheat; color:black; }\n      .tab-active { background-color:wheat; color:black; .tab(); } }\n  \n    .prac { display:grid; border-radius:36px; width:90%; height:80%; font-size:1em; font-weight:bold;\n      .name { justify-self:center; align-self:center; text-align:center; } }\n  \n    // Placed one level above .prac at the 9 Practices Grid Direction\n    .fullPracDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;\n      .prac { font-size:1em; width:100%; height:100%;\n        justify-self:center; align-self:center; display:grid; border-radius:0.5em;\n        div {     padding-bottom:2em;\n          .disp { padding-bottom:0;\n            i     { font-size:1.6em; }\n            .name { font-size:1.6em; }\n            .desc { font-size:1.0em; display:block; } } }  // Turns on .disp .desc\n        .area { padding-bottom:0; } } }\n  }\n</style>"]}, media: undefined });
+    inject("data-v-6f42a243_0", { source: ".conn {\n  background-color: black;\n  position: relative;\n  font-size: 1.75vmin;\n  display: grid;\n  grid-template-columns: 7% 31% 31% 31%;\n  grid-template-rows: 6% 13% 27% 27% 27%;\n  grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.conn .tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.conn .tabs .tab-active {\n  background-color: wheat;\n  color: black;\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 90%;\n  height: 80%;\n  font-size: 1em;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n", map: {"version":3,"sources":["Conn.vue","/Users/ax/Documents/prj/aug/vue/muse/Conn.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,kBAAkB;EAClB,mBAAmB;EACnB,aAAa;EACb,qCAAqC;EACrC,sCAAsC;EACtC,6GAA6G;EAC7G,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,eAAe;EACf,eAAe;EACf,YAAY;EACZ,gBAAgB;EAChB,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;ECCrB,qBAAA;EACA,mBAAA;ADCA;ACCA;EACA,aAAA;EDCE,aAAa;ECCf,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,mBAAA;AACA;AACA;EACA,aAAA;EACA,aAAA;EDCE,qBAAqB;ECCvB,mBAAA;EACA,qBAAA;EACA,mBAAA;AACA;AACA;EACA,aAAA;EDCE,eAAe;ECCjB,qBAAA;EACA,mBAAA;EDCE,qBAAqB;ECCvB,mBAAA;AACA;AACA;EACA,aAAA;EACA,cAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,mBAAA;AACA;AACA;EDCE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;AAChC;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;EACZ,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;AAChC;AACA;EACE,aAAa;EACb,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,cAAc;EACd,iBAAiB;AACnB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;AACf;AACA;EACE,cAAc;EACd,WAAW;EACX,YAAY;EACZ,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;AACtB;AACA;EACE,mBAAmB;AACrB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,cAAc;EACd,cAAc;AAChB;AACA;EACE,iBAAiB;AACnB","file":"Conn.vue","sourcesContent":[".conn {\n  background-color: black;\n  position: relative;\n  font-size: 1.75vmin;\n  display: grid;\n  grid-template-columns: 7% 31% 31% 31%;\n  grid-template-rows: 6% 13% 27% 27% 27%;\n  grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.conn .tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.conn .tabs .tab-active {\n  background-color: wheat;\n  color: black;\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 90%;\n  height: 80%;\n  font-size: 1em;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n","\n\n<template>\n  <div id=\"Conn\" class=\"conn\">\n    <div class=\"tabs\">\n      <div :class=\"classTab('Practices')\"    @click=\"pubTab('Practices')\"   >Practices</div>\n      <div :class=\"classTab('Connections')\"  @click=\"pubTab('Connections')\" >\n        <router-link :to=\"{ name:'Conn' }\">Connections</router-link></div>\n      <div :class=\"classTab('Enlight')\"      @click=\"pubTab('Enlight')\"     >Enlight</div>\n      <div :class=\"classTab('Data Science')\" @click=\"pubTab('Data Science')\">Data Science</div>\n    </div>\n    <template v-for=\"prac in practices\">\n      <div v-show=\"isPrac(prac.name)\" ref=\"FullPrac\" :class=\"pracDir(prac.dir)\" :key=\"prac.name\">\n        <div :id=\"prac.name\" :ref=\"prac.name\" class=\"prac\" :style=\"style(prac.hsv)\">\n          <div class=\"name\">{{prac.name}}</div></div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Build   from '../../pub/cube/Build.js'\n  import Connect from '../../pub/conn/Connect.js'\n\n  export default {\n\n    data() {\n      return { comp:'Info', prac:'All', disp:'All', tab:'Connections',\n               build:{}, connects:{}, practices:{} }; },\n\n    methods: {\n      isPrac: function (prac) {\n        return this.prac===prac || this.prac==='All' },\n      onPrac: function (prac) {\n        this.prac = prac; this.disp='All'; },\n      onDisp: function (prac,disp) {\n        this.prac = prac; this.disp=disp; },\n      pracDir: function(dir) {\n        return this.prac==='All' ? dir : 'fullPracDir'; },\n      pubTab: function (tab) {\n        this.tab = tab },\n      classTab: function (tab) {\n        return this.tab===tab ? 'tab-active' : 'tab' },\n      style: function( hsv ) {\n        return { backgroundColor:this.toRgbaHsv(hsv) }; },\n      createConnects: function( stream, build ) {\n        console.log( 'Conn.createConnects() refs', this.$refs );\n        let fullWidth  = this.$refs['FullPrac'][0]['clientWidth' ];\n        let fullHeight = this.$refs['FullPrac'][0]['clientHeight'];\n        let size = { fullWidth:fullWidth, fullHeight:fullHeight, width:0, height:0 };\n        for( let key in this.practices ) {\n          if( this.practices.hasOwnProperty(key) ) {\n            let prac    = this.practices[key]\n            size.width  = this.$refs[prac.name][0]['clientWidth' ];\n            size.height = this.$refs[prac.name][0]['clientHeight'];\n            console.log( 'Conn.createConnects() size', size );\n            this.connects[prac.name] = new Connect( stream, build, prac.name, prac['column'], size ); } }\n        return this.connects; } },\n\n    mounted: function () {\n      this.build     = new Build( this.batch() );\n      this.practices = this.pracs(  this.comp, 'Cols' );\n      this.subscribe(  this.comp, this.comp+'.vue', function(obj) {\n        if( obj.disp==='All' ) { this.onPrac(obj.prac); }\n        else                   { this.onDisp(obj.prac,obj.disp); } } );\n      this.$nextTick( function() {\n        this.connects  = this.createConnects( this.stream(), this.build ); } ) }\n    }\n\n</script>\n\n<style lang=\"less\">\n  .grid5x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:6% 13% 27% 27% 27%;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n  \n  .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n    justify-items:center; align-items:center; }\n  \n  .conn { background-color:black; position:relative; font-size:1.75vmin;\n    .grid5x4(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid\n    .tabs{ grid-area:tabs; display:inline; color:wheat; font-size:1.2em;\n      justify-self:start; align-self:center; text-align:left; }\n    .cm { .pdir(cm); } .em   { .pdir(em);   } .in    { .pdir(in); }    .en   { .pdir(en);   }\n    .le { .pdir(le); } .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }\n    .do { .pdir(do); } .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }\n    .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }\n  \n    .tabs {\n      .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;\n        border-radius:12px 12px 0 0; border-left: wheat solid thin;\n        border-top:wheat solid thin; border-right:wheat solid thin; }\n      .tab:hover  { background-color:wheat; color:black; }\n      .tab-active { background-color:wheat; color:black; .tab(); } }\n  \n    .prac { display:grid; border-radius:36px; width:90%; height:80%; font-size:1em; font-weight:bold;\n      .name { justify-self:center; align-self:center; text-align:center; } }\n  \n    // Placed one level above .prac at the 9 Practices Grid Direction\n    .fullPracDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;\n      .prac { font-size:1em; width:100%; height:100%;\n        justify-self:center; align-self:center; display:grid; border-radius:0.5em;\n        div {     padding-bottom:2em;\n          .disp { padding-bottom:0;\n            i     { font-size:1.6em; }\n            .name { font-size:1.6em; }\n            .desc { font-size:1.0em; display:block; } } }  // Turns on .disp .desc\n        .area { padding-bottom:0; } } }\n  }\n</style>"]}, media: undefined });
 
   };
   /* scoped */

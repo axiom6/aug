@@ -4,13 +4,9 @@ import Vis  from '../util/Vis.js'
 
 class Innovate
 
-  constructor:( @ui, @spec, @pres ) ->
+  constructor:( @spec, @shapes, @build ) ->
     @d3      = Util.getGlobal('d3')
-    #@hasSvg = true
-    @shapes  = @pres.shapes
     @studies = @shapes.arrange( @spec )
-    #@angs   = [0,60,120,180,240,300,360]
-    #@angs30 = [30,90,150,210,270,330,30]
     @cos30   = @shapes.cos30
     @t  = 24
     @xh =  0
@@ -19,12 +15,12 @@ class Innovate
     @thick  = 1
     @stroke = 'black'
 
-  drawSvg:( g, $g, geom, defs ) ->
+  drawSvg:( g, geom, defs ) ->
     Util.noop( defs )
     @lay       = @shapes.layout( geom, @spec.column, @shapes.size(@studies), @shapes.size(@studies) )
     @colorRing = Vis.toRgbHsvStr( [90, 55, 90 ] )
     @colorBack = 'rgba(97, 56, 77, 1.0 )'
-    $g.hide()
+    #$g.hide()
     switch @spec.row
       when 'Learn' then @concept(    g, geom )
       when 'Do'    then @technology( g, geom )
@@ -35,7 +31,7 @@ class Innovate
     xt = geom.x0 - 75
     yt = geom.y0 + geom.h * 0.30
     @shapes.rect( g, xt, yt, 150, @t, 'none', 'none', 0.865, @spec.name )
-    $g.show()
+    #$g.show()
     return
 
   concept:( g, geom ) ->

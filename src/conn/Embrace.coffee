@@ -3,14 +3,12 @@ import Vis from "../util/Vis.js"
 
 class Embrace
 
-  constructor:( @ui, @spec, @pres ) ->
-    @shapes  = @pres.shapes
+  constructor:( @spec, @shapes, @build ) ->
     @studies = @shapes.arrange( @spec )
-    @innovs  = @pres.build.adjacentStudies( @spec, 'east' )
-    #console.log( "Embrace studies", @spec.studies, @studies, @innovs )
+    @innovs  = @build.adjacentStudies( @spec, 'east' )
 
-  drawSvg:( g, $g, geom, defs ) =>
-    $g.hide()
+  drawSvg:( g, geom, defs ) =>
+    #$g.hide()
     lay  = @shapes.layout( geom, @spec.column, @shapes.size(@studies), @shapes.size(@innovs) )
     fill = @shapes.toFill(@spec)
     @shapes.keyHole( g, lay.xc, lay.yc, lay.xk, lay.yk, lay.ro, lay.hk, fill, lay.stroke )
@@ -36,7 +34,7 @@ class Embrace
     @shapes.icon( g, geom.x0, geom.y0, @spec.name, @shapes.htmlId(@spec.name,'IconSvg'), Vis.unicode(@spec.icon) )
     @shapes.text( g, w-12,         yt, @spec.name, @shapes.htmlId(@spec.name,'TextSvg'), 'black' )
     @shapes.practiceFlow( g, geom, @spec )
-    $g.show()
+    #$g.show()
     return
 
   # Not called but matches innovation

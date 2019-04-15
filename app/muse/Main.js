@@ -113,6 +113,9 @@ Main = (function() {
       publish: function(subject, object) {
         Main['stream'].publish(subject, object);
       },
+      stream: function() {
+        return Main.stream;
+      },
       batch: function() {
         return Main.Batch;
       },

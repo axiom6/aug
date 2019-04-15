@@ -59,6 +59,8 @@ class Main
       publish:( subject, object ) ->
         Main['stream'].publish( subject, object )
         return
+      stream:() ->
+        Main.stream
       batch:() ->
         Main.Batch
       cols:()  ->

@@ -10,8 +10,9 @@
       <div :class="classTab('Data Science')" @click="pubTab('Data Science')">Data Science</div>
     </div>
     <template v-for="prac in practices">
-      <div v-show="isPrac(prac.name)" :class="pracDir(prac.dir)" :key="prac.name">
-        <div class="prac" :style="style(prac.hsv)"><div class="name">{{prac.name}}</div></div>
+      <div v-show="isPrac(prac.name)" ref="FullPrac" :class="pracDir(prac.dir)" :key="prac.name">
+        <div :id="prac.name" :ref="prac.name" class="prac" :style="style(prac.hsv)">
+          <div class="name">{{prac.name}}</div></div>
       </div>
     </template>
   </div>
@@ -25,7 +26,8 @@
   export default {
 
     data() {
-      return { build:{}, connect:{}, comp:'Info', prac:'All', disp:'All', tab:'Connections',  practices:{} }; },
+      return { comp:'Info', prac:'All', disp:'All', tab:'Connections',
+               build:{}, connects:{}, practices:{} }; },
 
     methods: {
       isPrac: function (prac) {
@@ -41,16 +43,30 @@
       classTab: function (tab) {
         return this.tab===tab ? 'tab-active' : 'tab' },
       style: function( hsv ) {
-        return { backgroundColor:this.toRgbaHsv(hsv) }; } },
+        return { backgroundColor:this.toRgbaHsv(hsv) }; },
+      createConnects: function( stream, build ) {
+        console.log( 'Conn.createConnects() refs', this.$refs );
+        let fullWidth  = this.$refs['FullPrac'][0]['clientWidth' ];
+        let fullHeight = this.$refs['FullPrac'][0]['clientHeight'];
+        let size = { fullWidth:fullWidth, fullHeight:fullHeight, width:0, height:0 };
+        for( let key in this.practices ) {
+          if( this.practices.hasOwnProperty(key) ) {
+            let prac    = this.practices[key]
+            size.width  = this.$refs[prac.name][0]['clientWidth' ];
+            size.height = this.$refs[prac.name][0]['clientHeight'];
+            console.log( 'Conn.createConnects() size', size );
+            this.connects[prac.name] = new Connect( stream, build, prac.name, prac['column'], size ); } }
+        return this.connects; } },
 
     mounted: function () {
-      
-      this.build     = new Build(   this.batch() );
-      this.connect   = new Connect( this.build   );
+      this.build     = new Build( this.batch() );
       this.practices = this.pracs(  this.comp, 'Cols' );
-      this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
+      this.subscribe(  this.comp, this.comp+'.vue', function(obj) {
         if( obj.disp==='All' ) { this.onPrac(obj.prac); }
-        else                   { this.onDisp(obj.prac,obj.disp); } } ); } }
+        else                   { this.onDisp(obj.prac,obj.disp); } } );
+      this.$nextTick( function() {
+        this.connects  = this.createConnects( this.stream(), this.build ); } ) }
+    }
 
 </script>
 

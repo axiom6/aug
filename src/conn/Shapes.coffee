@@ -1,12 +1,11 @@
 
-import Util   from '../util/Util.js'
-import Vis    from '../util/Vis.js'
-import UI     from '../uI/UI.js'
-import Convey from '../pres/Convey.js'
+import Util   from '../util/Util'
+import Vis    from '../util/Vis'
+import Convey from '../conn/Convey'
 
 class Shapes
 
-  constructor: ( @stream, @pres ) ->
+  constructor: ( @stream ) ->
     @d3     = Util.getGlobal('d3')
     @cos30  = 0.86602540378
     #@cos15 = Vis.cos(15)
@@ -110,10 +109,11 @@ class Shapes
     lay
 
   click:( path, text) ->
+    if text is false then {}
     path.style( 'z-index','4') #.style("pointer-events","all").style("visibility", "visible" )
     path.on("click", () =>
       #console.log( 'Shape.click',  text )
-      select = UI.toTopic(  text, 'Shapes', UI.SelectStudy )
+      select = {} # UI.toTopic(  text, 'Shapes', UI.SelectStudy )
       @stream.publish( 'Select', select ) )
     return
 

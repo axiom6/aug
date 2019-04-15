@@ -3,16 +3,13 @@ import Vis from "../util/Vis.js"
 
 class Encourage
 
-  constructor:( @ui, @spec, @pres ) ->
-    #@hasSvg = true
-    @shapes  = @pres.shapes
+  constructor:( @spec, @shapes, @build ) ->
     @studies = @shapes.arrange( @spec )
-    @innovs  = @pres.build.adjacentStudies( @spec, 'west' )
+    @innovs  = @build.adjacentStudies( @spec, 'west' )
 
-
-  drawSvg:( g, $g, geom, defs ) ->
+  drawSvg:( g, geom, defs ) ->
     lay  = @shapes.layout( geom, @spec.column, @shapes.size(@studies), @shapes.size(@innovs) )
-    $g.hide()
+    # $g.hide()
     fill = @shapes.toFill(@spec)
     @shapes.keyHole( g, lay.xc, lay.yc, lay.xk, lay.yk, lay.ro, lay.hk, fill, lay.stroke )
     yl = lay.yl
@@ -39,7 +36,7 @@ class Encourage
     @shapes.icon( g, geom.x0, geom.y0, @spec.name, @shapes.htmlId(@spec.name,'IconSvg'), Vis.unicode(@spec.icon) )
     @shapes.text( g, w-12,         yt, @spec.name, @shapes.htmlId(@spec.name,'TextSvg'), 'black' )
     @shapes.practiceFlow( g, geom, @spec )
-    $g.show()
+    # $g.show()
     return
 
   # Not called but matches Sankey

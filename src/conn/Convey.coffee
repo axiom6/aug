@@ -74,6 +74,4 @@ class Convey
         .attr( "text-anchor", "start" )
     node
 
-
-
 `export default Convey`
