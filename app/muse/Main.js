@@ -129,6 +129,24 @@ Main = (function() {
       pracs: function(compk) {
         return Main.Batch[compk].data[compk].pracs;
       },
+      subset: function(compk, filter) {
+        var filts, key, prac, ref;
+        filts = {};
+        ref = Main.Batch[compk].data[compk].pracs;
+        for (key in ref) {
+          if (!hasProp.call(ref, key)) continue;
+          prac = ref[key];
+          if (filter(prac)) {
+            filts[key] = prac;
+          }
+        }
+        return filts;
+      },
+      conns: function(compk) {
+        return this.subset(compk, function(prac) {
+          return prac.row !== 'Dim';
+        });
+      },
       disps: function(compk, prack) {
         return Main.Batch[compk].data[compk][prack].disps;
       },

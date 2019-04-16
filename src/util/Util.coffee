@@ -11,30 +11,6 @@ class Util
     Util.noop( Util.padStr, Util.isoDateTime, Util.toHMS, Util.toInt, Util.hex32 )
     Util.noop( Util.toFloat, Util.toCap, Util.match_test, Util.svgId, Util.saveFile )
 
-  Util.myVar      =  'myVar'
-  Util.skipReady  =  false
-  Util.isCommonJS =  false
-  Util.isWebPack  =  false
-
-  Util.Load          = null
-  Util.ModuleGlobals = []
-  Util.app           = {}
-  Util.testTrue      = true
-  Util.debug         = false
-  Util.message       = false
-  Util.count         = 0
-  Util.modules       = []
-  Util.instances     = []
-  Util.globalPaths   = []
-  Util.root          = '../../' # Used internally
-  Util.rootJS        =  Util.root + 'js/'
-  Util.databases     = {}
-  Util.htmlIds       = {} # Object of unique Html Ids
-  Util.logStackNum   = 0
-  Util.logStackMax   = 100
-  Util.fills         = {}
-  Util.uniqueIdExt   = ''
-
   @element:( $elem ) ->
     # console.log( 'Dom.element()', $elem, Dom.isJQueryElem( $elem ) )
     if Util.isJQueryElem( $elem )
@@ -583,6 +559,17 @@ class Util
     downloadLink.click()
     document.body.removeChild(downloadLink)
     return
+
+# Static class variables have to be declared outside of class declarion to avoid function wrapper
+Util.htmlIds = {}  # Object of unique Html Ids
+Util.myVar      =  'myVar'
+Util.skipReady  =  false
+Util.modules       = []
+Util.instances     = []
+Util.logStackNum   = 0
+Util.logStackMax   = 100
+Util.fills         = {}
+Util.uniqueIdExt   = ''
 
 export default Util
 

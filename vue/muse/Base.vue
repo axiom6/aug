@@ -104,7 +104,7 @@
   .grid4x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:13% 29% 29% 29%;
     grid-template-areas: "cm em in en" "le nw north ne" "do west cen east" "sh sw south se"; }
 
-  .grid5x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:6% 13% 27% 27% 27%;
+  .grid5x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:7% 12% 27% 27% 27%;
     grid-template-areas: "tabs tabs tabs tabs" "cm em in en" "le nw north ne" "do west cen east" "sh sw south se"; }
 
   .grid1x3() { display:grid; grid-template-columns:6% 22% 72%; grid-template-areas: "icon name desc"; }

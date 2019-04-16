@@ -1,6 +1,6 @@
 
 import Util     from '../util/Util.js'
-#mport FaLookup from '../util/FaLookup.js'
+import FaLookup from '../util/FaLookup.js'
 
 class Vis
 
@@ -40,7 +40,7 @@ class Vis
   @sinSvg:( deg ) -> Math.sin(Vis.radSvg(deg))
   @cosSvg:( deg ) -> Math.cos(Vis.radSvg(deg))
 
-  @hexCss:( hex ) -> """##{hex.toString(16)}""" # For orthogonality
+  #hexCss:( hex ) -> """##{hex.toString(16)}""" # For orthogonality
   @rgbCss:( rgb ) -> """rgb(#{rgb.r},#{rgb.g},#{rgb.b})"""
   @hslCss:( hsl ) -> """hsl(#{hsl.h},#{hsl.s*100}%,#{hsl.l*100}%)"""
 
@@ -59,16 +59,14 @@ class Vis
   @toRgbHsvStr:( hsv ) ->
     rgba      = Vis.toRgbHsvSigmoidal( hsv[0], hsv[1], hsv[2]*255, true )
     rgba[i]   = Math.round(rgba[i]) for i in [0...3]
-    [r,g,b,a] = rgba
-    str = """rgba(#{r},#{g},#{b},#{a})"""
+    str = """rgba(#{rgba[0]},#{rgba[1]},#{rgba[2]},#{rgba[3]})"""
     #console.log( "Vis.toRgbHsvStr()", {h:hsv[0],s:hsv[1],v:hsv[2]}, str )
     str
 
   @toRgbaHsv:( hsv ) ->
     rgba      = Vis.toRgbHsvSigmoidal( hsv[0], hsv[1], hsv[2]*255, true )
     rgba[i]   = Math.round(rgba[i]) for i in [0...3]
-    [r,g,b,a] = rgba
-    str = """rgba(#{r},#{g},#{b},#{a})"""
+    str = """rgba(#{rgba[0]},#{rgba[1]},#{rgba[2]},#{rgba[3]})"""
     #console.log( "Vis.toRgbaHsv()", {h:hsv[0],s:hsv[1],v:hsv[2]}, str )
     str
 
@@ -85,6 +83,7 @@ class Vis
     x = 1 - c
     y = 1 - f * c
     z = 1 - (1 - f) * c
+    r = 1; g = 1; b = 1
     [r,g,b] = switch i % 6
       when 0 then [ 1, z, x, 1 ]
       when 1 then [ y, 1, x, 1 ]
@@ -167,7 +166,7 @@ class Vis
   @within:( beg, deg, end ) -> beg   <= deg and deg <= end # Closed interval with <=
   @isZero:( v )             -> -0.01 <  v   and v   <  0.01
 
-  ###
+
   @unicode:( icon ) ->
     uc    = FaLookup.icons[icon]
     if not uc?
@@ -175,6 +174,7 @@ class Vis
       uc = "\uf111" # Circle
     uc
 
+  ###
   @uniawe:( icon ) ->
     temp = document.createElement("i")
     temp.className = icon

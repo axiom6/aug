@@ -11,8 +11,8 @@
     </div>
     <template v-for="prac in practices">
       <div v-show="isPrac(prac.name)" ref="FullPrac" :class="pracDir(prac.dir)" :key="prac.name">
-        <div :id="prac.name" :ref="prac.name" class="prac" :style="style(prac.hsv)">
-          <div class="name">{{prac.name}}</div></div>
+        <div :id="prac.name" :ref="prac.name" class="prac" style="background-color:rgba(97,56,77,1.0)">
+          <!--div class="name">{{prac.name}}</div--></div>
       </div>
     </template>
   </div>
@@ -45,22 +45,27 @@
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; },
       createConnects: function( stream, build ) {
-        console.log( 'Conn.createConnects() refs', this.$refs );
+        //console.log( 'Conn.createConnects() refs', this.$refs );
         let fullWidth  = this.$refs['FullPrac'][0]['clientWidth' ];
         let fullHeight = this.$refs['FullPrac'][0]['clientHeight'];
-        let size = { fullWidth:fullWidth, fullHeight:fullHeight, width:0, height:0 };
+        
         for( let key in this.practices ) {
+          
           if( this.practices.hasOwnProperty(key) ) {
-            let prac    = this.practices[key]
-            size.width  = this.$refs[prac.name][0]['clientWidth' ];
-            size.height = this.$refs[prac.name][0]['clientHeight'];
-            console.log( 'Conn.createConnects() size', size );
-            this.connects[prac.name] = new Connect( stream, build, prac.name, prac['column'], size ); } }
+            let prac = this.practices[key];
+            if( prac.row !== 'Dim' ) {
+              let elem = this.$refs[prac.name][0]
+              // console.log( 'Conn.createConnects() elem', elem );
+              let size = { fullWidth:fullWidth, fullHeight:fullHeight,
+                width:elem['clientWidth' ], height:elem['clientHeight'] };
+              // console.log( 'Conn.createConnects() size', size );
+              this.connects[prac.name] = new Connect( stream, build, prac, size, elem ); } } }
+        
         return this.connects; } },
 
     mounted: function () {
       this.build     = new Build( this.batch() );
-      this.practices = this.pracs(  this.comp, 'Cols' );
+      this.practices = this.conns(  this.comp );
       this.subscribe(  this.comp, this.comp+'.vue', function(obj) {
         if( obj.disp==='All' ) { this.onPrac(obj.prac); }
         else                   { this.onDisp(obj.prac,obj.disp); } } );
@@ -71,20 +76,25 @@
 </script>
 
 <style lang="less">
-  .grid5x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:6% 13% 27% 27% 27%;
+  .grid5x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:7% 12% 27% 27% 27%;
     grid-template-areas: "tabs tabs tabs tabs" "cm em in en" "le nw north ne" "do west cen east" "sh sw south se"; }
+
+  .grid4x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:7% 31% 31% 31%;
+    grid-template-areas: "tabs tabs tabs tabs" "le nw north ne" "do west cen east" "sh sw south se"; }
+
+  .grid4x3() { display:grid; grid-template-columns:33.3% 33.3% 33.4%; grid-template-rows:7% 31% 31% 31%;
+    grid-template-areas: "tabs tabs tabs" "nw north ne" "west cen east" "sw south se"; }
   
   .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;
     justify-items:center; align-items:center; }
   
   .conn { background-color:black; position:relative; font-size:1.75vmin;
-    .grid5x4(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid
+    .grid4x3(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid
     .tabs{ grid-area:tabs; display:inline; color:wheat; font-size:1.2em;
       justify-self:start; align-self:center; text-align:left; }
-    .cm { .pdir(cm); } .em   { .pdir(em);   } .in    { .pdir(in); }    .en   { .pdir(en);   }
-    .le { .pdir(le); } .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }
-    .do { .pdir(do); } .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }
-    .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }
+    .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }
+    .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }
+    .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }
   
     .tabs {
       .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;
@@ -93,7 +103,7 @@
       .tab:hover  { background-color:wheat; color:black; }
       .tab-active { background-color:wheat; color:black; .tab(); } }
   
-    .prac { display:grid; border-radius:36px; width:90%; height:80%; font-size:1em; font-weight:bold;
+    .prac { display:grid; border-radius:36px; width:99%; height:98%; font-size:1em; font-weight:bold;
       .name { justify-self:center; align-self:center; text-align:center; } }
   
     // Placed one level above .prac at the 9 Practices Grid Direction

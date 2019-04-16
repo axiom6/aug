@@ -7,8 +7,10 @@ import Encourage from '../conn/Encourage'
 
 class Connect
 
-  constructor:( @stream, @build, @prac, @size ) ->
+  constructor:( @stream, @build, @prac, @size, @elem ) ->
     @shapes = new Shapes( @stream )
+    @ready()
+
 
   createDraw:() ->
     switch @prac.column
@@ -18,16 +20,16 @@ class Connect
       else                  new Innovate(  @prac, @shapes, @build )
 
   ready:() ->
-    @geom = @geom( @size.width, @size.height, @size.width, @size.height )
+    geo = @geom( @size.width, @size.height, @size.width, @size.height )
     @graph=null; @g=null; svgId=''; gId=''; @defs=null
-    [@graph,@g,svgId,gId,@defs] = @shapes.createSvg( @prac.name, @htmlId, @width, @height )
+    [@graph,@g,svgId,gId,@defs] = @shapes.createSvg( @elem, @prac.name, @size.width, @size.height )
     @draw   = @createDraw()
-    @draw.drawSvg( @g, @geom, @defs )
+    @draw.drawSvg( @g, geo, @defs )
     @htmlId = svgId
 
   layout:() ->
-    geom  = @geom( @size.fullWidth, @size.fullHeight, @size.width, @size.height )
-    @shapes.layout( @graph, @g, geom.w, geom.h, geom.sx, geom.sy )
+    geo  = @geom( @size.fullWidth, @size.fullHeight, @size.width, @size.height )
+    @shapes.layout( @graph, @g, geo.w, geo.h, geo.sx, geo.sy )
     return
 
   geom:( width, height, wgpx, hgpx ) ->
@@ -39,8 +41,8 @@ class Connect
     g.sx = g.w/wgpx
     g.sy = g.h/hgpx
     g.s  = Math.min( g.sx, g.sy )
-    g.fontSize  = @toVh( 5 )+'vh'
-    g.iconSize  = @toVh( 5 )+'vh'
+    g.fontSize  = '2em' # @toVh( 5 )+'vh'
+    g.iconSize  = '2em' # @toVh( 5 )+'vh'
     # console.log( "Connect.geom()", { wgpx:wgpx, hgpx:hgpx }, g )
     g
 

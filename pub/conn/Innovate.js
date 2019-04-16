@@ -23,12 +23,11 @@ Innovate = class Innovate {
   }
 
   drawSvg(g, geom, defs) {
-    var key, ref, study, xt, yt;
+    var key, ref, study;
     Util.noop(defs);
     this.lay = this.shapes.layout(geom, this.spec.column, this.shapes.size(this.studies), this.shapes.size(this.studies));
     this.colorRing = Vis.toRgbHsvStr([90, 55, 90]);
     this.colorBack = 'rgba(97, 56, 77, 1.0 )';
-    //$g.hide()
     switch (this.spec.row) {
       case 'Learn':
         this.concept(g, geom);
@@ -47,12 +46,9 @@ Innovate = class Innovate {
       study = ref[key];
       this.hexStudy(g, geom, study);
     }
-    xt = geom.x0 - 75;
-    yt = geom.y0 + geom.h * 0.30;
-    this.shapes.rect(g, xt, yt, 150, this.t, 'none', 'none', 0.865, this.spec.name);
+    this.shapes.rect(g, 20, 24, 120, 44, this.colorBack, 'none', 1.0, this.spec.name, '2em');
   }
 
-  //$g.show()
   concept(g, geom) {
     var t, t1, t2, t3, t4;
     t = 0;
@@ -108,9 +104,7 @@ Innovate = class Innovate {
     this.shapes.round(g, t * 2, t2, geom.w - t * 4, geom.h - t3, t, t, this.colorBack, 'none');
     this.eastInovate(g, geom);
     this.westInovate(g, geom);
-    this.northInovate(g, geom, function(study) {
-      return study.dir !== 'south';
-    });
+    this.northInovate(g, geom);
   }
 
   westInovate(g, geom) {
@@ -145,38 +139,32 @@ Innovate = class Innovate {
     }
   }
 
-  northInovate(g, geom, filter) {
-    var dx, fill, h, key, ref, study, w, x0, y0;
+  northInovate(g, geom) {
+    var dx, fill, h, key, ordered, study, w, x0, y0;
     w = 18;
     h = 24;
     dx = geom.r * 1.5;
     x0 = geom.x0 - dx - w / 2;
     y0 = 0;
-    ref = this.studies;
-    for (key in ref) {
-      study = ref[key];
-      if (!(filter(study))) {
-        continue;
-      }
+    ordered = this.build.toOrder(this.studies, ['west', 'north', 'east']);
+    for (key in ordered) {
+      study = ordered[key];
       fill = this.shapes.toFill(study);
       this.shapes.rect(g, x0, y0, w, h, fill, 'none');
       x0 += dx;
     }
   }
 
-  southInovate(g, geom, filter) {
-    var dx, fill, h, key, ref, study, w, x0, y0;
+  southInovate(g, geom) {
+    var dx, fill, h, key, ordered, study, w, x0, y0;
     w = 18;
     h = 24;
     dx = geom.r * 1.5;
     x0 = geom.x0 - dx - w / 2;
     y0 = geom.h - h;
-    ref = this.studies;
-    for (key in ref) {
-      study = ref[key];
-      if (!(filter(study))) {
-        continue;
-      }
+    ordered = this.build.toOrder(this.studies, ['west', 'north', 'east']);
+    for (key in ordered) {
+      study = ordered[key];
       fill = this.shapes.toFill(study);
       this.shapes.rect(g, x0, y0, w, h, fill, 'none');
       x0 += dx;

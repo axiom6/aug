@@ -19,11 +19,12 @@ Shapes = class Shapes {
     Util.noop(this.ellipse, this.pathPlot, this.textFill, this.rectGrad, this.saveSvg, this.createSvg, this.layoutSvg);
   }
 
-  createSvg(name, htmlId, w, h) {
+  createSvg(elem, name, w, h) {
     var defs, g, gId, svg, svgId;
     svgId = Util.htmlId(name, 'Svg', '', false); // Turn off duplicate id error message
     gId = Util.htmlId(name, 'SvgG', '', false); // Turn off duplicate id error message
-    svg = this.d3.select('#' + htmlId).append("svg:svg").attr("id", svgId).attr("width", w).attr("height", h).attr("xmlns", "http://www.w3.org/2000/svg");
+    svg = this.d3.select(elem).append("svg:svg");
+    svg.attr("id", svgId).attr("width", w).attr("height", h).attr("xmlns", "http://www.w3.org/2000/svg");
     defs = svg.append("svg:defs");
     g = svg.append("svg:g").attr("id", gId); // All transforms are applied to g
     return [svg, g, svgId, gId, defs];
@@ -47,9 +48,13 @@ Shapes = class Shapes {
     this.rect(g, xc - w * 0.5, yc - h * 0.5, w, h, fill, stroke, opacity, text);
   }
 
-  toFill(studyPrac) {
+  toFill(studyPrac, darken = false) {
+    var hsv;
+    hsv = (studyPrac.hsv != null) && studyPrac.hsv.length === 3 ? studyPrac.hsv : [50, 50, 50];
+    hsv = darken ? [hsv[0], hsv[1], hsv[2] * 0.75] : hsv; // [hsv[0],60,30]
+    // console.log( 'Shapes.toFill()', studyPrac.hsv, hsv ) if darken
     if ((studyPrac.hsv != null) && studyPrac.hsv.length === 3) {
-      return Vis.toRgbHsvStr(studyPrac.hsv);
+      return Vis.toRgbHsvStr(hsv);
     } else {
       console.error('Shapes.toFill() unknown fill code', {
         name: studyPrac.name,
@@ -105,27 +110,27 @@ Shapes = class Shapes {
     }
   }
 
-  isWest(column) {
-    return column === 'Embrace';
+  isWest(col) {
+    return col === 'Embrace';
   }
 
-  layout(geom, column, ns, ni) {
+  layout(geom, col, ns, ni) {
     var lay;
     lay = {}; // Layout ob
-    lay.dir = (this.isWest(column)) ? 1 : -1; // convey direction
+    lay.dir = (this.isWest(col)) ? 1 : -1; // convey direction
     lay.xc = geom.x0; // x center
     lay.yc = geom.y0; // y center
     lay.w = geom.w; // pane width
     lay.h = geom.h; // pane height
     lay.hk = lay.h / 8; // height keyhole rect
-    lay.xk = (this.isWest(column)) ? lay.w : 0; // x keyhole rect
+    lay.xk = (this.isWest(col)) ? lay.w : 0; // x keyhole rect
     lay.yk = lay.yc - lay.hk; // y keyhole rect
     lay.rs = lay.yc * 0.85; // Outer  study section radius
     lay.ro = lay.rs - lay.hk; // Inner  study section radius
-    lay.ri = lay.ro - lay.hk / 4; // Icon   intersction radiu
+    lay.ri = lay.ro - lay.hk / 4; // Icon   intersction   radius
     lay.yt = lay.yc + lay.ro + lay.rs * 0.65; // y for practice text
-    lay.a1 = (this.isWest(column)) ? 60 : 120; // Begin  study section angle
-    lay.a2 = (this.isWest(column)) ? 300 : -120; // Ending study section angle
+    lay.a1 = (this.isWest(col)) ? 60 : 120; // Begin  study section angle
+    lay.a2 = (this.isWest(col)) ? 300 : -120; // Ending study section angle
     lay.ns = ns; // Number of studies
     lay.da = (lay.a1 - lay.a2) / lay.ns; // Angle of each section
     lay.ds = lay.da / 12; // Link angle dif
@@ -144,7 +149,7 @@ Shapes = class Shapes {
     lay.hi = lay.ri / lay.ni; // h innovative study rects
     lay.thick = 1; // line thickness
     lay.stroke = 'none'; // line stroke
-    //console.log( 'Shapes.layout()', lay )
+    // console.log( 'Shapes.layout()', col, geom, lay )
     return lay;
   }
 
@@ -193,9 +198,9 @@ Shapes = class Shapes {
     this.click(path, name);
   }
 
-  text(g, x0, y0, name, textId, color) {
+  text(g, x0, y0, name, textId, color, size) {
     var path;
-    path = g.append("svg:text").text(name).attr("x", x0).attr("y", y0).attr("id", textId).attr("fill", color).attr("text-anchor", "middle").attr("font-size", "1.4vh").attr("font-family", this.fontText).attr("font-weight", "bold");
+    path = g.append("svg:text").text(name).attr("x", x0).attr("y", y0).attr("id", textId).attr("fill", color).attr("text-anchor", "middle").attr("font-size", size).attr("font-family", this.fontText).attr("font-weight", "bold");
     this.click(path, name);
   }
 
@@ -241,13 +246,13 @@ Shapes = class Shapes {
   }
 
   // svg:rect x="0" y="0" width="0" height="0" rx="0" ry="0"
-  rect(g, x0, y0, w, h, fill, stroke, opacity = 1.0, text = '') {
+  rect(g, x0, y0, w, h, fill, stroke, opacity = 1.0, text = '', size = '2em') {
     g.append("svg:rect").attr("x", x0).attr("y", y0).attr("width", w).attr("height", h).attr("fill", fill).attr("stroke", stroke).style("opacity", opacity);
     if (opacity < 1.0) {
       g.style('background', '#000000');
     }
     if (text !== '') {
-      g.append("svg:text").text(text).attr("x", x0 + w / 2).attr("y", y0 + h / 2 + 14).attr('fill', 'black').attr("text-anchor", "middle").attr("font-size", "2.5vh").attr("font-family", this.fontText).attr("font-weight", "bold");
+      g.append("svg:text").text(text).attr("x", x0 + w / 2).attr("y", y0 + h / 2 + 14).attr('fill', 'wheat').attr("text-anchor", "middle").attr("font-size", size).attr("font-family", this.fontText).attr("font-weight", "bold");
     }
   }
 
@@ -309,37 +314,38 @@ Shapes = class Shapes {
     };
   }
 
-  conveySankey(column, defs, g, studies, innovs, x, y, w, h) {
+  conveySankey(col, defs, g, studies, innovs, x, y, w, h) {
     var convey, nodesLinks;
-    //console.log( { column:column, studies:studies, innovs:innovs, x:x, y:y, w:w, h:h } )
+    //console.log( { col:col, studies:studies, innovs:innovs, x:x, y:y, w:w, h:h } )
     convey = new Convey(this, defs, g, x, y, w, h);
     nodesLinks = {};
-    if (column === "Embrace") {
+    if (col === "Embrace") {
       nodesLinks = this.nodesLinks(studies, innovs);
-    } else if (column === "Encourage") {
+    } else if (col === "Encourage") {
       nodesLinks = this.nodesLinks(innovs, studies);
     }
     convey.doData(nodesLinks);
   }
 
+  // All flows are colored the north color of yellow [[90,90.90]
   practiceFlow(g, geom, spec) {
     if (spec.row == null) {
       return;
     }
     switch (spec.row) {
       case 'Learn':
-        this.flow(g, geom, [90, 90, 90], 'South', 12);
+        this.flow(g, geom, [90, 90, 90], 'south', 12);
         break;
       case 'Do':
-        this.flow(g, geom, [90, 90, 90], 'North', 12);
-        this.flow(g, geom, [60, 90, 90], 'South', 12);
+        this.flow(g, geom, [90, 90, 90], 'north', 12);
+        this.flow(g, geom, [90, 90, 90], 'south', 12);
         break;
       case 'Share':
-        this.flow(g, geom, [60, 90, 90], 'North', 12);
+        this.flow(g, geom, [90, 90, 90], 'sorth', 12);
         break;
       default:
         console.error(' unknown spec row ', spec.name, spec.row);
-        this.flow(g, geom, [90, 90, 90], 'South', 12);
+        this.flow(g, geom, [90, 90, 90], 'south', 12);
     }
   }
 
@@ -347,7 +353,7 @@ Shapes = class Shapes {
     var fill, w, x0, y0;
     w = 18;
     x0 = geom.x0 - w / 2;
-    y0 = dir === 'South' ? geom.h - h : 0;
+    y0 = dir === 'south' ? geom.h - h : 0;
     fill = Vis.toRgbHsvStr(hsv);
     this.rect(g, x0, y0, w, h, fill, 'none');
   }

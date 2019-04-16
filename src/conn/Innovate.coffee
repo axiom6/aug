@@ -20,7 +20,6 @@ class Innovate
     @lay       = @shapes.layout( geom, @spec.column, @shapes.size(@studies), @shapes.size(@studies) )
     @colorRing = Vis.toRgbHsvStr( [90, 55, 90 ] )
     @colorBack = 'rgba(97, 56, 77, 1.0 )'
-    #$g.hide()
     switch @spec.row
       when 'Learn' then @concept(    g, geom )
       when 'Do'    then @technology( g, geom )
@@ -28,10 +27,7 @@ class Innovate
       else              @technology( g, geom ) # Default for group spec
     for key, study of @studies
       @hexStudy( g, geom, study )
-    xt = geom.x0 - 75
-    yt = geom.y0 + geom.h * 0.30
-    @shapes.rect( g, xt, yt, 150, @t, 'none', 'none', 0.865, @spec.name )
-    #$g.show()
+    @shapes.rect( g, 20, 24, 120, 44, @colorBack, 'none', 1.0, @spec.name, '2em' )
     return
 
   concept:( g, geom ) ->
@@ -78,8 +74,8 @@ class Innovate
     @shapes.round( g, t,   t1, geom.w-t*2, geom.h-t4, t, t, @colorRing, 'none' )
     @shapes.round( g, t*2, t2, geom.w-t*4, geom.h-t3, t, t, @colorBack, 'none' )
     @eastInovate(  g, geom )
-    @westInovate(  g, geom)
-    @northInovate( g, geom, (study) -> study.dir isnt 'south' )
+    @westInovate(  g, geom )
+    @northInovate( g, geom )
     return
 
   westInovate:( g, geom ) ->
@@ -106,25 +102,27 @@ class Innovate
       y0 += h
     return
 
-  northInovate:( g, geom, filter ) ->
+  northInovate:( g, geom ) ->
     w    = 18
     h    = 24
     dx   = geom.r * 1.5
     x0   = geom.x0 - dx - w / 2
     y0   = 0
-    for key, study of @studies when filter(study)
+    ordered = @build.toOrder( @studies, ['west','north','east'] )
+    for key, study of ordered
       fill = @shapes.toFill(study)
       @shapes.rect( g, x0, y0, w, h, fill, 'none' )
       x0 += dx
     return
 
-  southInovate:( g, geom, filter ) ->
+  southInovate:( g, geom ) ->
     w    = 18
     h    = 24
     dx   = geom.r * 1.5
     x0   = geom.x0 - dx - w / 2
     y0   = geom.h  - h
-    for key, study of @studies when filter(study)
+    ordered = @build.toOrder( @studies, ['west','north','east'] )
+    for key, study of ordered
       fill = @shapes.toFill(study)
       @shapes.rect( g, x0, y0, w, h, fill, 'none' )
       x0 += dx

@@ -9,12 +9,14 @@ import Innovate from '../conn/Innovate';
 import Encourage from '../conn/Encourage';
 
 Connect = class Connect {
-  constructor(stream, build, prac, size) {
+  constructor(stream, build, prac, size, elem) {
     this.stream = stream;
     this.build = build;
     this.prac = prac;
     this.size = size;
+    this.elem = elem;
     this.shapes = new Shapes(this.stream);
+    this.ready();
   }
 
   createDraw() {
@@ -31,23 +33,23 @@ Connect = class Connect {
   }
 
   ready() {
-    var gId, svgId;
-    this.geom = this.geom(this.size.width, this.size.height, this.size.width, this.size.height);
+    var gId, geo, svgId;
+    geo = this.geom(this.size.width, this.size.height, this.size.width, this.size.height);
     this.graph = null;
     this.g = null;
     svgId = '';
     gId = '';
     this.defs = null;
-    [this.graph, this.g, svgId, gId, this.defs] = this.shapes.createSvg(this.prac.name, this.htmlId, this.width, this.height);
+    [this.graph, this.g, svgId, gId, this.defs] = this.shapes.createSvg(this.elem, this.prac.name, this.size.width, this.size.height);
     this.draw = this.createDraw();
-    this.draw.drawSvg(this.g, this.geom, this.defs);
+    this.draw.drawSvg(this.g, geo, this.defs);
     return this.htmlId = svgId;
   }
 
   layout() {
-    var geom;
-    geom = this.geom(this.size.fullWidth, this.size.fullHeight, this.size.width, this.size.height);
-    this.shapes.layout(this.graph, this.g, geom.w, geom.h, geom.sx, geom.sy);
+    var geo;
+    geo = this.geom(this.size.fullWidth, this.size.fullHeight, this.size.width, this.size.height);
+    this.shapes.layout(this.graph, this.g, geo.w, geo.h, geo.sx, geo.sy);
   }
 
   geom(width, height, wgpx, hgpx) {
@@ -60,8 +62,8 @@ Connect = class Connect {
     g.sx = g.w / wgpx;
     g.sy = g.h / hgpx;
     g.s = Math.min(g.sx, g.sy);
-    g.fontSize = this.toVh(5) + 'vh';
-    g.iconSize = this.toVh(5) + 'vh';
+    g.fontSize = '2em'; // @toVh( 5 )+'vh'
+    g.iconSize = '2em'; // @toVh( 5 )+'vh'
     // console.log( "Connect.geom()", { wgpx:wgpx, hgpx:hgpx }, g )
     return g;
   }

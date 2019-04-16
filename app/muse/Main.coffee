@@ -70,6 +70,13 @@ class Main
         Main.Batch[compk].data.comps
       pracs:( compk ) ->
         Main.Batch[compk].data[compk].pracs
+      subset:( compk, filter ) ->
+        filts = {}
+        for own key, prac of Main.Batch[compk].data[compk].pracs when filter(prac)
+          filts[key] = prac
+        filts
+      conns:( compk ) ->
+        this.subset( compk, (prac) -> prac.row isnt 'Dim' )
       disps:( compk, prack ) ->
         Main.Batch[compk].data[compk][prack].disps
       areas:( compk, prack, dispk ) ->

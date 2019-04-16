@@ -14,10 +14,9 @@ Embrace = class Embrace {
   }
 
   drawSvg(g, geom, defs) {
-    var a, a1, fill, h, i, key, lay, ref, ref1, ref2, ref3, study, w, wedgeId, x, xr, y, yl, yr, yt;
-    //$g.hide()
+    var a, a1, fill, h, i, key, lay, ref, ref1, ref2, ref3, study, w, wedgeId, x, xr, xt, y, yl, yr, yt;
     lay = this.shapes.layout(geom, this.spec.column, this.shapes.size(this.studies), this.shapes.size(this.innovs));
-    fill = this.shapes.toFill(this.spec);
+    fill = this.shapes.toFill(this.spec, true);
     this.shapes.keyHole(g, lay.xc, lay.yc, lay.xk, lay.yk, lay.ro, lay.hk, fill, lay.stroke);
     yl = lay.yl;
     a1 = lay.a1;
@@ -41,15 +40,15 @@ Embrace = class Embrace {
     y = lay.yr;
     w = lay.w - x;
     h = lay.ri;
-    yt = geom.y0 + geom.h * 0.49;
+    xt = x + w * 0.5;
+    yt = geom.y0 * 0.5;
     this.shapes.conveySankey("Embrace", defs, g, this.studies, this.innovs, x, y, w, h);
     this.shapes.icon(g, geom.x0, geom.y0, this.spec.name, this.shapes.htmlId(this.spec.name, 'IconSvg'), Vis.unicode(this.spec.icon));
-    this.shapes.text(g, w - 12, yt, this.spec.name, this.shapes.htmlId(this.spec.name, 'TextSvg'), 'black');
+    this.shapes.text(g, xt, yt, this.spec.name, this.shapes.htmlId(this.spec.name, 'TextSvg'), 'wheat', '2em');
     this.shapes.practiceFlow(g, geom, this.spec);
   }
 
   // Not called but matches innovation
-  //$g.show()
   innovateStudies(g, geom) {
     var fill, h, innov, key, r0, ref, w, x0, y0;
     r0 = geom.x0 / 2 - 36;

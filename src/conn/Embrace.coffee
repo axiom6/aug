@@ -4,13 +4,12 @@ import Vis from "../util/Vis.js"
 class Embrace
 
   constructor:( @spec, @shapes, @build ) ->
-    @studies = @shapes.arrange( @spec )
+    @studies = @shapes.arrange( @spec )         
     @innovs  = @build.adjacentStudies( @spec, 'east' )
 
   drawSvg:( g, geom, defs ) =>
-    #$g.hide()
     lay  = @shapes.layout( geom, @spec.column, @shapes.size(@studies), @shapes.size(@innovs) )
-    fill = @shapes.toFill(@spec)
+    fill = @shapes.toFill(@spec,true)
     @shapes.keyHole( g, lay.xc, lay.yc, lay.xk, lay.yk, lay.ro, lay.hk, fill, lay.stroke )
     yl = lay.yl
     a1 = lay.a1
@@ -25,16 +24,16 @@ class Embrace
         yl += lay.dl
       a1 -= lay.da
       yr += lay.hr
-    x = lay.xr+lay.wr
-    y = lay.yr
-    w = lay.w  - x
-    h = lay.ri
-    yt = geom.y0 + geom.h * 0.49
+    x  = lay.xr+lay.wr
+    y  = lay.yr
+    w  = lay.w  - x
+    h  = lay.ri
+    xt = x +  w  * 0.5
+    yt = geom.y0 * 0.5
     @shapes.conveySankey( "Embrace", defs, g, @studies, @innovs, x, y, w, h  )
     @shapes.icon( g, geom.x0, geom.y0, @spec.name, @shapes.htmlId(@spec.name,'IconSvg'), Vis.unicode(@spec.icon) )
-    @shapes.text( g, w-12,         yt, @spec.name, @shapes.htmlId(@spec.name,'TextSvg'), 'black' )
+    @shapes.text( g, xt,           yt, @spec.name, @shapes.htmlId(@spec.name,'TextSvg'), 'wheat', '2em' )
     @shapes.practiceFlow( g, geom, @spec )
-    #$g.show()
     return
 
   # Not called but matches innovation

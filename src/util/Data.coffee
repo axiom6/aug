@@ -2,13 +2,10 @@
 
 import Util from '../util/Util.js'
 
+
 class Data
 
-  Data.hosted    = "https://ui-48413.firebaseapp.com/"
-  Data.local     = "http://localhost:63342/muse/public/"
-  Data.localJSON = "http://localhost:63342/muse/public/json"
-
-  Util.noop( Data.hosted, Data.planeData, Data.refine, Data.asyncJSON )
+  # Util.noop( Data.hosted, Data.planeData, Data.refine, Data.asyncJSON )
 
   @refine:( data, type ) ->
     return  data if type is 'None'
@@ -113,51 +110,7 @@ class Data
     document.body.removeChild(downloadLink)
     return
 
-  Data.Databases = {
-    color: {
-      id:"color"
-      key:"id"
-      uriLoc:Data.localJSON+'/color'
-      uriWeb:'https://github.com/axiom6/ui/data/color'
-      tables:['master','ncs','gray'] }
-    exit: {
-      id:"exit"
-      key:"_id"
-      uriLoc:Data.localJSON+'/exit'
-      uriWeb:'https://github.com/axiom6/ui/data/exit'
-      tables:['ConditionsEast','ConditionsWest','Deals','Forecasts','I70Mileposts','SegmentsEast','SegmentsWest'] }
-    radar:{
-      id:"radar"
-      key:"name"
-      uriLoc:Data.localJSON+'/radar'
-      uriWeb:'https://github.com/axiom6/ui/data/radar'
-      tables:['axiom-techs','axiom-quads','axiom-techs-schema','axiom-quads-schema','polyglot-principles'] }
-    sankey:{
-      id:"radar"
-      uriLoc:Data.localJSON+'/sankey'
-      uriWeb:'https://github.com/axiom6/ui/data/sankey'
-      tables:['energy','flare','noob','plot'] }
-    muse:{
-      id:"muse"
-      uriLoc:Data.localJSON+'/muse'
-      uriWeb:'https://github.com/axiom6/ui/data/muse'
-      tables:['Columns','Rows','Practices'] }
-    pivot:{
-      id:"pivot"
-      uriLoc:Data.localJSON+'/pivot'
-      uriWeb:'https://github.com/axiom6/ui/data/pivot'
-      tables:['mps'] }
-    geo:{
-      id:"geo"
-      uriLoc:Data.localJSON+'/geo'
-      uriWeb:'https://github.com/axiom6/ui/data/geo'
-      tables:['upperLarimerGeo']
-      schemas:['GeoJSON'] }
-    f6s:{
-      id:"f6s"
-      uriLoc:Data.localJSON+'/f6s'
-      uriWeb:'https://github.com/axiom6/ui/data/fs6'
-      tables:['applications','followers','mentors','profile','teams'] }
-  }
+Data.local   = "http://localhost:63342/aug/app/data/"
+Data.hosted  = "https://ui-48413.firebaseapp.com/"
 
 export default Data

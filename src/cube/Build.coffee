@@ -100,7 +100,14 @@ class Build
     studies = {}
     for skey, study of prac when Util.isChild(skey)
       studies[skey] = study
-    studies
+    @toOrder( studies )
+
+  toOrder:( studies, dirs=['north','west','east','south'] ) ->
+    ordered = {}
+    for dir in dirs
+      for skey, study of studies
+        ordered[skey] = study if study.dir is dir
+    ordered
 
   combine:() ->
     obj = {}
@@ -223,7 +230,7 @@ class Build
 
   getDim:( cname, dir ) ->
     col = @getCol(cname)
-    for key, dim of col  when Util.isChild(skey)
+    for key, dim of col  when Util.isChild(key)
       return key if dim.dir is dir
     @None
 

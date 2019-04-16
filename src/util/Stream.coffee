@@ -11,7 +11,7 @@ class Stream
     @subjects = {}
     for subjectName in @subjectNames
       @addSubject( subjectName )
-    Util.noop( @allInfo )
+    Util.noop( @allInfo, @unsubscribeAll() )
 
   subscribe:( subjectName, subscriberName, onCallback ) ->
     subject  = @getSubject( subjectName, false )

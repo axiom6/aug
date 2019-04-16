@@ -8,8 +8,9 @@ import Wise   from 'muse/Wise.vue'
 import Wave   from '../ani/wave/Wave.vue'
 import Goog   from 'vue/maps/google/Goog.vue'
 import Leaf   from 'vue/maps/leaflet/Leaf.vue'
+import Wood   from '../ani/wood/Wood.vue'
 
 
 if( Router===false && Muse===false && Wave===false ) {}
-if( Info===false   && Know===false           && Wise===false ) {}
-if( Goog===false   && Leaf===false      ) {}
+if( Info===false   && Know===false && Wise===false ) {}
+if( Goog===false   && Leaf===false && Wood===false ) {}

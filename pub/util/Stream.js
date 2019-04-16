@@ -17,7 +17,7 @@ Stream = class Stream {
       subjectName = ref[i];
       this.addSubject(subjectName);
     }
-    Util.noop(this.allInfo);
+    Util.noop(this.allInfo, this.unsubscribeAll());
   }
 
   subscribe(subjectName, subscriberName, onCallback) {

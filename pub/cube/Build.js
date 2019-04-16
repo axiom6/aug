@@ -229,7 +229,22 @@ Build = class Build {
         studies[skey] = study;
       }
     }
-    return studies;
+    return this.toOrder(studies);
+  }
+
+  toOrder(studies, dirs = ['north', 'west', 'east', 'south']) {
+    var dir, i, len, ordered, skey, study;
+    ordered = {};
+    for (i = 0, len = dirs.length; i < len; i++) {
+      dir = dirs[i];
+      for (skey in studies) {
+        study = studies[skey];
+        if (study.dir === dir) {
+          ordered[skey] = study;
+        }
+      }
+    }
+    return ordered;
   }
 
   combine() {
@@ -466,7 +481,7 @@ Build = class Build {
     col = this.getCol(cname);
     for (key in col) {
       dim = col[key];
-      if (Util.isChild(skey)) {
+      if (Util.isChild(key)) {
         if (dim.dir === dir) {
           return key;
         }

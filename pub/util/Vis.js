@@ -2,7 +2,8 @@ var Vis;
 
 import Util from '../util/Util.js';
 
-//mport FaLookup from '../util/FaLookup.js'
+import FaLookup from '../util/FaLookup.js';
+
 Vis = class Vis {
   static translate(x0, y0) {
     Util.checkTypes('number', {
@@ -88,11 +89,7 @@ Vis = class Vis {
     return Math.cos(Vis.radSvg(deg));
   }
 
-  static hexCss(hex) {
-    return `#${hex.toString(16) // For orthogonality
-}`;
-  }
-
+  //hexCss:( hex ) -> """##{hex.toString(16)}""" # For orthogonality
   static rgbCss(rgb) {
     return `rgb(${rgb.r},${rgb.g},${rgb.b})`;
   }
@@ -138,25 +135,23 @@ Vis = class Vis {
   }
 
   static toRgbHsvStr(hsv) {
-    var a, b, g, i, j, r, rgba, str;
+    var i, j, rgba, str;
     rgba = Vis.toRgbHsvSigmoidal(hsv[0], hsv[1], hsv[2] * 255, true);
     for (i = j = 0; j < 3; i = ++j) {
       rgba[i] = Math.round(rgba[i]);
     }
-    [r, g, b, a] = rgba;
-    str = `rgba(${r},${g},${b},${a})`;
+    str = `rgba(${rgba[0]},${rgba[1]},${rgba[2]},${rgba[3]})`;
     //console.log( "Vis.toRgbHsvStr()", {h:hsv[0],s:hsv[1],v:hsv[2]}, str )
     return str;
   }
 
   static toRgbaHsv(hsv) {
-    var a, b, g, i, j, r, rgba, str;
+    var i, j, rgba, str;
     rgba = Vis.toRgbHsvSigmoidal(hsv[0], hsv[1], hsv[2] * 255, true);
     for (i = j = 0; j < 3; i = ++j) {
       rgba[i] = Math.round(rgba[i]);
     }
-    [r, g, b, a] = rgba;
-    str = `rgba(${r},${g},${b},${a})`;
+    str = `rgba(${rgba[0]},${rgba[1]},${rgba[2]},${rgba[3]})`;
     //console.log( "Vis.toRgbaHsv()", {h:hsv[0],s:hsv[1],v:hsv[2]}, str )
     return str;
   }
@@ -176,6 +171,9 @@ Vis = class Vis {
     x = 1 - c;
     y = 1 - f * c;
     z = 1 - (1 - f) * c;
+    r = 1;
+    g = 1;
+    b = 1;
     [r, g, b] = (function() {
       switch (i % 6) {
         case 0:
@@ -351,23 +349,26 @@ Vis = class Vis {
     return -0.01 < v && v < 0.01;
   }
 
+  static unicode(icon) {
+    var uc;
+    uc = FaLookup.icons[icon];
+    if (uc == null) {
+      console.error('Vis.unicode() missing icon in Vis.FontAwesomeUnicodes for', icon);
+      uc = "\uf111"; // Circle
+    }
+    return uc;
+  }
+
 };
 
 /*
-@unicode:( icon ) ->
- uc    = FaLookup.icons[icon]
- if not uc?
-   console.error( 'Vis.unicode() missing icon in Vis.FontAwesomeUnicodes for', icon )
-   uc = "\uf111" # Circle
- uc
-
-@uniawe:( icon ) ->
- temp = document.createElement("i")
- temp.className = icon
- document.body.appendChild(temp)
- uni = window.getComputedStyle( document.querySelector('.' + icon), ':before' ).getPropertyValue('content')
- console.log( 'uniawe', icon, uni )
- temp.remove()
- uni
+  @uniawe:( icon ) ->
+temp = document.createElement("i")
+temp.className = icon
+document.body.appendChild(temp)
+uni = window.getComputedStyle( document.querySelector('.' + icon), ':before' ).getPropertyValue('content')
+console.log( 'uniawe', icon, uni )
+temp.remove()
+uni
 */
 export default Vis;
