@@ -38,7 +38,8 @@
       onDisp: function(prac,disp) {
         this.prac = prac; this.disp = disp; },
       pubComp: function(comp) {
-        this.comp =  comp;
+        this.setComp( comp )
+        this.comp =   comp;
         this.pubPrac('All'); },
       pubPrac: function(prac) {
         this.prac = prac;

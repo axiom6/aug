@@ -1,12 +1,7 @@
 
 <template>
   <div class="comp">
-    <div class="tabs">
-      <div :class="classTab('Practices')"    @click="pubTab('Practices')"   >Practices</div>
-      <div :class="classTab('Connections')">
-        <router-link :to="{ name:'Conn' }">Connections</router-link></div>
-      <div :class="classTab('Enlight')"      @click="pubTab('Enlight')"     >Enlight</div>
-      <div :class="classTab('Data Science')" @click="pubTab('Data Science')">Data Science</div></div>
+    <b-tabs></b-tabs>
     <template v-for="prac in practices">
       <div v-show="isPrac(prac.name)" :class="pracDir(prac.dir)" :key="prac.name">
         <div class="prac">
@@ -17,21 +12,21 @@
               <span class="desc">{{prac.desc}}</span>
             </div>
           </div>
-          <template v-for="disp in prac.disps">
+          <template  v-for="disp in prac.disps">
             <div v-show="isDisp(disp.name)" :class="dispDir(disp.dir)" :style="style(disp.hsv)">
-              <div class="disp" @click="pubDisp(prac.name,disp.name)">
-                  <i   :class="disp.icon"></i>
-                  <span class="name">{{disp.name}}</span>
-                  <span class="desc">{{disp.desc}}</span>
-              </div>
-              <template v-for="area in disp.areas">
-                <div :class="areaDir()">
-                  <i :class="area.icon"></i>
-                  <span class="name">{{area.name}}</span>
-                  <span class="desc">{{area.desc}}</span>
-                </div>
-              </template>
+            <div class="disp" @click="pubDisp(prac.name,disp.name)">
+              <i   :class="disp.icon"></i>
+              <span class="name">{{disp.name}}</span>
+              <span class="desc">{{disp.desc}}</span>
             </div>
+            <template v-for="area in disp.areas">
+              <div :class="areaDir()">
+                <i :class="area.icon"></i>
+                <span class="name">{{area.name}}</span>
+                <span class="desc">{{area.desc}}</span>
+              </div>
+            </template>
+          </div>
           </template>
         </div>
       </div>
@@ -45,21 +40,24 @@
 
 <script type="module">
 
+  import Tabs from './Tabs.vue';
+
   export default {
     
-    data() {
-      return { comp:'None', prac:'All', disp:'All', area:'All', tab:'Practices', practices:{},
-        rows:{ Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap" },
-               Do:{    name:'Do',    dir:'do', icon:"fas fas fa-cogs" },
-               Share:{ name:'Share', dir:'sh', icon:"fas fa-share-alt-square" } } } },
+    components:{ 'b-tabs':Tabs },
+    
+    data() { return {
+      comp:'None', prac:'All', disp:'All', tab:'Practices', practices:{},
+      rows: {
+        Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap" },
+        Do:{    name:'Do',    dir:'do', icon:"fas fas fa-cogs" },
+        Share:{ name:'Share', dir:'sh', icon:"fas fa-share-alt-square" } } } },
     
     methods: {
       isPrac: function (prac) {
         return this.prac===prac || this.prac==='All' },
       isDisp: function (disp) {
         return this.disp===disp || this.disp==='All' },
-      isArea: function (area) {
-        return this.area===area || this.area==='All' },
       isRows: function () {
         return this.prac==='All' },
       pubTab: function (tab) {
@@ -74,23 +72,29 @@
         this.prac = prac; this.disp='All'; },
       onDisp: function (prac,disp) {
         this.prac = prac; this.disp=disp; },
-      onArea: function (prac,disp,area) {
-        this.prac = prac; this.disp = disp; this.area = area; },
+      onTabs: function (tab) {
+        this.tab = tab; },
       pracDir: function(dir) {
         return this.prac==='All' ? dir : 'fullPracDir'; },
       dispDir: function(dir) {
         return this.disp==='All' ? dir : 'fullDispDir'; },
       areaDir: function() {
-        return this.prac!=='All' ? 'area' : 'none' }, // this.area!=='All' ? 'area' : 'fullArea'; },
+        return this.prac==='All' ? 'none' : 'area' },
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; } },
 
+    beforeMount: function() {
+      console.log( 'Base.beforeMount()', this.$route.name );
+      this.comp = this.$route.name; },
+
     mounted: function () {
-      if( this.onArea===false ) {}
       this.practices = this.pracs(this.comp,'Cols');
       this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
          if( obj.disp==='All' ) { this.onPrac(obj.prac); }
-         else                   { this.onDisp(obj.prac,obj.disp); } } ); } }
+         else                   { this.onDisp(obj.prac,obj.disp); } } );
+      this.subscribe(  "Tabs",    this.comp+'.vue', (obj) => {
+        this.onTabs(obj); } ); }
+  }
          
 </script>
 
@@ -127,13 +131,6 @@
       .do { .pdir(do); } .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }
       .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }
     
-    .tabs {
-      .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;
-        border-radius:12px 12px 0 0; border-left: wheat solid thin;
-        border-top:wheat solid thin; border-right:wheat solid thin; }
-      .tab:hover  { background-color:wheat; color:black; }
-      .tab-active { background-color:wheat; color:black; .tab(); } }
-    
       // Placed one level below the 9 Practices Grid
     .prac { background-color:#603; border-radius:36px; width:90%; height:80%; font-size:1em; font-weight:bold;
       .grid3x3(); // The 4 Displine plus Practiice name Grid
@@ -147,12 +144,22 @@
       i     { display:inline-block;  margin-right: 0.25em; }
       .name { display:inline-block; }
       .desc { display:none; margin:0.5em 0.5em 0.5em 0.5em; text-align:left; } }
-    
+  
     .area { .grid1x3(); justify-self:start; align-self:center; text-align:left; margin-left:1.5em;
-            width:90%; height:auto; font-size:1.3em;
+      width:90%; height:auto; font-size:1.3em;
       i     { grid-area:icon; }
       .name { grid-area:name; font-weight:900; }
       .desc { grid-area:desc; } }
+  
+    .none { display:none; }
+  
+    // Placed one level above .dir at the 4 Disipline plus Practice name Grid Direction
+    .fullDispDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid; border-radius:72px;
+      .disp { justify-self:center; margin:0;
+        i     { font-size:4.8em !important; }
+        .name { font-size:4.8em !important; }
+        .desc { font-size:2.4em !important; display:block; } }  // Turns on .disp .desc
+      .area {   font-size:3.0em !important; padding-bottom:0; } }
   
     .none { display:none; }
     
@@ -175,12 +182,14 @@
          .desc { font-size:2.4em !important; display:block; } }  // Turns on .disp .desc
        .area {   font-size:3.0em !important; padding-bottom:0; } }
     
-    .row { background-color:#603; border-radius:36px; margin-left:10%; width:80%; height:80%; font-size:1em;
-           font-weight:bold; display:grid;
-      div { text-align:center; justify-self:center;  align-self:center; font-size:1.8em; color:wheat; }
-        i { margin-bottom: 0.2em; display:block; } }
-  
     .em, .in, .en { .prac .cen { font-size:1em; } } // Font size columns
+  
+    .row { background-color:#603; border-radius:36px; margin-left:10%; width:80%; height:80%; font-size:1em;
+      font-weight:bold; display:grid;
+      div { text-align:center; justify-self:center;  align-self:center; font-size:1.8em; color:wheat; }
+      i { margin-bottom: 0.2em; display:block; } }
+    
+    
   }
   
 </style>

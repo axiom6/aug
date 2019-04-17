@@ -25,10 +25,11 @@ class Main
 
   Main.init =  ( batch ) ->
     Main.Batch = batch # Not necessary here, but assigned for compatibilitry
-    subjects = ["Info","Know","Wise","Cube","Navb"]
+    subjects = ["Info","Know","Wise","Cube","Navb","Tabs"]
     infoSpec = { subscribe:false, publish:false, subjects:subjects}
     Main.stream = new Stream( subjects, infoSpec )
     Main.mergePracsCols()
+    Main.component = "Info"
     Main.onReady()
     # Main.logPracs( 'Info' )
     return
@@ -64,8 +65,11 @@ class Main
       batch:() ->
         Main.Batch
       cols:()  ->
-        console.log( 'Cols', Main.Batch['Cols'].data['Cols'].pracs )
         Main.Batch['Cols'].data['Cols'].pracs
+      getComp:() ->
+        Main.component
+      setComp:( comp ) ->
+        Main.component = comp
       comps:( compk ) ->
         Main.Batch[compk].data.comps
       pracs:( compk ) ->

@@ -17,7 +17,7 @@ Main = (function() {
     static init(batch) {
       var infoSpec, subjects;
       Main.Batch = batch; // Not necessary here, but assigned for compatibilitry
-      subjects = ["Info", "Know", "Wise", "Cube", "Navb"];
+      subjects = ["Info", "Know", "Wise", "Cube", "Navb", "Tabs"];
       infoSpec = {
         subscribe: false,
         publish: false,
@@ -25,6 +25,7 @@ Main = (function() {
       };
       Main.stream = new Stream(subjects, infoSpec);
       Main.mergePracsCols();
+      Main.component = "Info";
       Main.onReady();
     }
 
@@ -120,8 +121,13 @@ Main = (function() {
         return Main.Batch;
       },
       cols: function() {
-        console.log('Cols', Main.Batch['Cols'].data['Cols'].pracs);
         return Main.Batch['Cols'].data['Cols'].pracs;
+      },
+      getComp: function() {
+        return Main.component;
+      },
+      setComp: function(comp) {
+        return Main.component = comp;
       },
       comps: function(compk) {
         return Main.Batch[compk].data.comps;

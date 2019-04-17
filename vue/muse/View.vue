@@ -1,12 +1,12 @@
 
 <template>
-  <div>
+  <div>              <!--  :key="$route.fullPath" reloads Base  -->
     <router-view name="Home"></router-view>
-    <router-view name="Cube"></router-view>
-    <router-view name="Info"></router-view>
-    <router-view name="Know"></router-view>
-    <router-view name="Wise"></router-view>
+    <router-view name="Info" :key="$route.fullPath"></router-view>
+    <router-view name="Know" :key="$route.fullPath"></router-view>
+    <router-view name="Wise" :key="$route.fullPath"></router-view>
     <router-view name="Conn"></router-view>
+    <router-view name="Cube"></router-view>
     <router-view name="Wood"></router-view>
   </div>
 </template>

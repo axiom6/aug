@@ -2,13 +2,7 @@
 
 <template>
   <div id="Conn" class="conn">
-    <div class="tabs">
-      <div :class="classTab('Practices')"    @click="pubTab('Practices')"   >Practices</div>
-      <div :class="classTab('Connections')"  @click="pubTab('Connections')" >
-        <router-link :to="{ name:'Conn' }">Connections</router-link></div>
-      <div :class="classTab('Enlight')"      @click="pubTab('Enlight')"     >Enlight</div>
-      <div :class="classTab('Data Science')" @click="pubTab('Data Science')">Data Science</div>
-    </div>
+    <b-tabs></b-tabs>
     <template v-for="prac in practices">
       <div v-show="isPrac(prac.name)" ref="FullPrac" :class="pracDir(prac.dir)" :key="prac.name">
         <div :id="prac.name" :ref="prac.name" class="prac" style="background-color:rgba(97,56,77,1.0)">
@@ -22,8 +16,11 @@
   
   import Build   from '../../pub/cube/Build.js'
   import Connect from '../../pub/conn/Connect.js'
+  import Tabs    from './Tabs.vue';
 
   export default {
+
+    components:{ 'b-tabs':Tabs },
 
     data() {
       return { comp:'Info', prac:'All', disp:'All', tab:'Connections',
@@ -95,14 +92,7 @@
     .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }
     .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }
     .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }
-  
-    .tabs {
-      .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;
-        border-radius:12px 12px 0 0; border-left: wheat solid thin;
-        border-top:wheat solid thin; border-right:wheat solid thin; }
-      .tab:hover  { background-color:wheat; color:black; }
-      .tab-active { background-color:wheat; color:black; .tab(); } }
-  
+    
     .prac { display:grid; border-radius:36px; width:99%; height:98%; font-size:1em; font-weight:bold;
       .name { justify-self:center; align-self:center; text-align:center; } }
   

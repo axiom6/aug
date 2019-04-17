@@ -1,16 +1,16 @@
 
 <template>
-  <div v-show="isDisp(disp.name)" :class="dispDir(disp.dir)" :style="style(disp.hsv)">
-    <div class="disp" @click="pubDisp(prac.name,disp.name)">
-      <i   :class="disp.icon"></i>
-      <span class="name">{{disp.name}}</span>
-      <span class="desc">{{disp.desc}}</span>
+  <div v-show="isDisp(dispp.name)" :class="dispDir(dispp.dir)" :style="style(dispp.hsv)">
+    <div class="disp" @click="pubDisp(pracp.name,dispp.name)">
+      <i   :class="dispp.icon"></i>
+      <span class="name">{{dispp.name}}</span>
+      <span class="desc">{{dispp.desc}}</span>
     </div>
-    <template v-for="area in disp.areas">
+    <template v-for="areap in dispp.areas">
       <div :class="areaDir()">
-        <i :class="area.icon"></i>
-        <span class="name">{{area.name}}</span>
-        <span class="desc">{{area.desc}}</span>
+        <i :class="areap.icon"></i>
+        <span class="name">{{areap.name}}</span>
+        <span class="desc">{{areap.desc}}</span>
       </div>
     </template>
   </div>
@@ -19,34 +19,39 @@
 <script type="module">
 
   export default {
+    
+    props:{ pracp:Object, dispp:Object, areap:Object },
 
     data() {
-      return { comp:'None', prac:'All', disp:'All', area:'All', tab:'Practices', practices:{}, baseCols:{} } },
+      return { pracd:'All', dispd:'All' } },
 
     methods: {
-      isDisp: function (disp) {
-        return this.disp===disp || this.disp==='All' },
-      isArea: function (area) {
-        return this.area===area || this.area==='All' },
-      pubDisp: function (prac,disp) {
-        this.publish( this.comp, { prac:prac, disp:disp  } ); },
-      onDisp: function (prac,disp) {
-        this.prac = prac; this.disp=disp; },
-      onArea: function (prac,disp,area) {
-        this.prac = prac; this.disp = disp; this.area = area; },
+      comp:   function() {
+        return this.pracp.plane; },
+      isDisp: function (dispd) {
+        return this.dispd===dispd || this.dispd==='All'  },
+      onPrac: function (pracd) {
+        this.pracd = pracd; this.disp='All'; },
+      onDisp: function (pracd,dispd) {
+        this.pracd = pracd; this.dispd=dispd; },
+      pubDisp: function (pracn,dispn) {
+        this.publish( this.comp(), { prac:pracn, disp:dispn } ); },
       dispDir: function(dir) {
-        return this.disp==='All' ? dir : 'fullDispDir'; },
+        return this.dispd==='All' ? dir : 'fullDispDir'; },
       areaDir: function() {
-        return this.prac!=='All' ? 'area' : 'none' },
+        return this.pracd==='All' ? 'none' : 'area' },
       style: function( hsv ) {
-        return { backgroundColor:this.toRgbaHsv(hsv) }; } },
+        return { backgroundColor:this.toRgbaHsv(hsv) };  } },
 
     mounted: function () {
-      if( this.onArea===false ) {}
-      this.practices = this.pracs(this.comp,'Cols');
-      this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
+      this.subscribe(  this.comp(), 'Disp.vue', (obj) => {
         if( obj.disp==='All' ) { this.onPrac(obj.prac); }
-        else                   { this.onDisp(obj.prac,obj.disp); } } ); } }
+        else                   { this.onDisp(obj.prac,obj.disp); }
+        console.log( 'Disp.subscribe()', { name:this.dispp.name, obj:obj, pracd:this.pracd, dispd:this.dispd } ); } );
+    }
+
+  }
+
 
 </script>
 
@@ -60,11 +65,19 @@
     .desc { display:none; margin:0.5em 0.5em 0.5em 0.5em; text-align:left; } }
   
   .area { .grid1x3(); justify-self:start; align-self:center; text-align:left; margin-left:1.5em;
-      width:90%; height:auto; font-size:1.3em;
+    width:90%; height:auto; font-size:1.3em;
     i     { grid-area:icon; }
     .name { grid-area:name; font-weight:900; }
     .desc { grid-area:desc; } }
-  
+
   .none { display:none; }
+
+  // Placed one level above .dir at the 4 Disipline plus Practice name Grid Direction
+  .fullDispDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid; border-radius:72px;
+    .disp { justify-self:center; margin:0;
+      i     { font-size:4.8em !important; }
+      .name { font-size:4.8em !important; }
+      .desc { font-size:2.4em !important; display:block; } }  // Turns on .disp .desc
+    .area {   font-size:3.0em !important; padding-bottom:0; } }
   
 </style>
