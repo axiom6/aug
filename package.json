@@ -9,11 +9,9 @@
   },
   "scripts": {
     "dash": "rollup --config app/build/rollup.dash.js",
-    "info": "rollup --config app/build/rollup.info.js",
-    "know": "rollup --config app/build/rollup.know.js",
-    "wise": "rollup --config app/build/rollup.wise.js",
+    "prac": "rollup --config app/build/rollup.prac.js",
+    "conn": "rollup --config app/build/rollup.conn.js",
     "cube": "rollup --config app/build/rollup.cube.js",
-    "svga": "rollup --config app/build/rollup.svga.js",
     "wood": "rollup --config app/build/rollup.wood.js"
   },
   "dependencies": {

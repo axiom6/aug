@@ -35,19 +35,13 @@
 
   // Static imports for minimizing build steps in dev.
   import Home from './Home.vue';
-  import Base from './Base.vue';
-  import Info from './Info.vue';
-  import Know from './Know.vue';
-  import Wise from './Wise.vue';
+  import Prac from './Prac.vue';
   import Conn from './Conn.vue';
 //import Cube from './Cube.vue';
 //import Wood from '../wood/Wood.vue';
 
   Dash.Home = Home;
-  Dash.Base = Base;
-  Dash.Info = Info;
-  Dash.Know = Know;
-  Dash.Wise = Wise;
+  Dash.Prac = Prac;
   Dash.Conn = Conn;
 //Dash.Cube = Cube;
 //Dash.Wood = Wood;

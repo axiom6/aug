@@ -2,11 +2,11 @@
 
 <template>
   <div id="Conn" class="conn">
-    <b-tabs></b-tabs>
+    <b-tabs :comp="comp"></b-tabs>
     <template v-for="prac in practices">
       <div v-show="isPrac(prac.name)" ref="FullPrac" :class="pracDir(prac.dir)" :key="prac.name">
         <div :id="prac.name" :ref="prac.name" class="prac" style="background-color:rgba(97,56,77,1.0)">
-          <!--div class="name">{{prac.name}}</div--></div>
+      </div>
       </div>
     </template>
   </div>
@@ -22,8 +22,10 @@
 
     components:{ 'b-tabs':Tabs },
 
+    // props: { comp:String },
+
     data() {
-      return { comp:'Info', prac:'All', disp:'All', tab:'Connections',
+      return { comp:'None', prac:'All', disp:'All', tab:'Connections',
                build:{}, connects:{}, practices:{} }; },
 
     methods: {
@@ -60,10 +62,14 @@
         
         return this.connects; } },
 
+    beforeMount: function() {
+      this.comp = this.$route.name.substring(0,4);
+      console.log( 'Conn.beforeMount()', this.$route.name, this.comp ); },
+
     mounted: function () {
       this.build     = new Build( this.batch() );
       this.practices = this.conns(  this.comp );
-      this.subscribe(  this.comp, this.comp+'.vue', function(obj) {
+      this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
         if( obj.disp==='All' ) { this.onPrac(obj.prac); }
         else                   { this.onDisp(obj.prac,obj.disp); } } );
       this.$nextTick( function() {

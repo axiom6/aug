@@ -2,7 +2,7 @@
 <template><div class="tocs">
   <ul><template v-for="komp in komps">
     <li :key="komp.name"><span v-on:click="pubComp(komp.name)">
-      <router-link :to="{ name:komp.name }"><i :class="komp.icon"></i>{{komp.name}}</router-link></span>
+      <router-link :to="{ name:komp.comp }"><i :class="komp.icon"></i>{{komp.name}}</router-link></span>
       <ul  v-if="comp===komp.name"><template v-for="prac in komps[komp.name].pracs" >
         <li v-on:click="pubPrac(prac.name)" :style="stylePrac(prac.name,prac.hsv)" :key="prac.name">
           <i :class="prac.icon"></i>{{prac.name}}
@@ -21,11 +21,11 @@
   let Tocs = {
     
     data() { return {  comp:'None', prac:'None', disp:'None',
-        komps:{ Info:{ name:'Info', pracs:{}, icon:"fas fa-th"          },
-                Know:{ name:'Know', pracs:{}, icon:"fas fa-university"  },
-                Wise:{ name:'Wise', pracs:{}, icon:"fab fa-tripadvisor" },
-                Cube:{ name:'Cube', pracs:{}, icon:"fas fa-cubes"       },
-                Wood:{ name:'Wood', pracs:{}, icon:"fas fa-tree"        } } } },
+        komps:{ Info:{ name:'Info', comp:'Info', pracs:{}, icon:"fas fa-th"          },
+                Know:{ name:'Know', comp:'Know', pracs:{}, icon:"fas fa-university"  },
+                Wise:{ name:'Wise', comp:'Wise', pracs:{}, icon:"fab fa-tripadvisor" },
+                Cube:{ name:'Cube', comp:'Cube', pracs:{}, icon:"fas fa-cubes"       },
+                Wood:{ name:'Wood', comp:'Wood', pracs:{}, icon:"fas fa-tree"        } } } },
     
     methods: {
       

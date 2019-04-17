@@ -345,6 +345,17 @@
 		"oAP": "/ani/wood/Wood.vue",
 		"oF": 0
 		},
+	"/app/build/rollup.conn.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/build/rollup.conn-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/app/build/rollup.cube.js": {
 		"bF": 0,
 		"ft": 64,
@@ -367,46 +378,13 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/app/build/rollup.info.js": {
+	"/app/build/rollup.prac.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/app/build/rollup.info-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/build/rollup.know.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/build/rollup.know-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/build/rollup.svga.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/build/rollup.svga-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/build/rollup.wise.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/build/rollup.wise-min.js",
+		"oAP": "/app/build/rollup.prac-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -1735,17 +1713,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/node_modules/rollup-plugin-scss/index.es.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/node_modules/rollup-plugin-scss/index.es-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/node_modules/rollup-plugin-vue/dist/rollup-plugin-vue.mjs": {
 		"cB": 0,
 		"ft": 8192,
@@ -2554,14 +2521,6 @@
 		"oAP": "/vue/maps/leaflet/Leaf.vue",
 		"oF": 0
 		},
-	"/vue/muse/Base.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Base.vue",
-		"oF": 0
-		},
 	"/vue/muse/Conn.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -2605,42 +2564,12 @@
 		"oAP": "/vue/muse/Home.vue",
 		"oF": 0
 		},
-	"/vue/muse/Info.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Info-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/muse/Info.vue": {
+	"/vue/muse/Prac.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/muse/Info.vue",
-		"oF": 0
-		},
-	"/vue/muse/Know.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Know-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/muse/Know.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Know.vue",
+		"oAP": "/vue/muse/Prac.vue",
 		"oF": 0
 		},
 	"/vue/muse/Tabs.vue": {
@@ -2665,25 +2594,6 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/vue/muse/View.vue",
-		"oF": 0
-		},
-	"/vue/muse/Wise.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Wise-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/muse/Wise.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Wise.vue",
 		"oF": 0
 		},
 	"/vue/muse/Zzzz.js": {
@@ -2746,6 +2656,44 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/vue/mute/Disp.vue",
+		"oF": 0
+		},
+	"/vue/mute/Info.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/mute/Info-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/vue/mute/Info.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/mute/Info.vue",
+		"oF": 0
+		},
+	"/vue/mute/Know.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/mute/Know-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/vue/mute/Know.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/mute/Know.vue",
 		"oF": 0
 		},
 	"/vue/mute/Prac.vue": {
@@ -2816,6 +2764,25 @@
 		"opt": 0,
 		"oT": 1,
 		"q": 100
+		},
+	"/vue/navb/Wise.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/navb/Wise-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/vue/navb/Wise.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/navb/Wise.vue",
+		"oF": 0
 		},
 	"/vue/vuex/i18n/br.js": {
 		"bF": 0,

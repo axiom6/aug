@@ -1,7 +1,7 @@
 
 <template>
   <div class="comp">
-    <b-tabs></b-tabs>
+    <b-tabs :comp="comp"></b-tabs>
     <template v-for="prac in practices">
       <div v-show="isPrac(prac.name)" :class="pracDir(prac.dir)" :key="prac.name">
         <div class="prac">
@@ -46,6 +46,8 @@
     
     components:{ 'b-tabs':Tabs },
     
+    //props: { comp:String },
+    
     data() { return {
       comp:'None', prac:'All', disp:'All', tab:'Practices', practices:{},
       rows: {
@@ -84,8 +86,8 @@
         return { backgroundColor:this.toRgbaHsv(hsv) }; } },
 
     beforeMount: function() {
-      console.log( 'Base.beforeMount()', this.$route.name );
-      this.comp = this.$route.name; },
+      this.comp = this.$route.name;
+      console.log( 'Prac.beforeMount()', this.$route.name ); },
 
     mounted: function () {
       this.practices = this.pracs(this.comp,'Cols');

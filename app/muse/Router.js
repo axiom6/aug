@@ -15,14 +15,16 @@ const Parent = { template:'<router-view></router-view>' };
 if( lazyLoading===false && Parent===false ){}
 
 export default new Router( { // Static Import for quich dev cycles
-  routes:[
-    { path:'/',     name:'Home', components:{ Home:Dash.Home } },
-    { path:'/info', name:'Info', components:{ Info:Dash.Base }, props:{ comp:'Info'} }, // Not really using props
-    { path:'/know', name:'Know', components:{ Know:Dash.Base }, props:{ comp:'Know'} },
-    { path:'/wise', name:'Wise', components:{ Wise:Dash.Base }, props:{ comp:'Wise'} },
-    { path:'/conn', name:'Conn', components:{ Conn:Dash.Conn } },
-    { path:'/cube', name:'Cube', components:{ Cube:lazyLoading('muse/Cube') } },
-    { path:'/wood', name:'Wood', components:{ Wood:animLoading('wood/Wood') } }
+  routes:[                   // Not really using props
+    { path:'/',         name:'Home',     components:{ Home:Dash.Home } },
+    { path:'/info',     name:'Info',     components:{ Info:Dash.Prac } },
+    { path:'/know',     name:'Know',     components:{ Know:Dash.Prac } },
+    { path:'/wise',     name:'Wise',     components:{ Wise:Dash.Prac } },
+    { path:'/infoconn', name:'InfoConn', components:{ InfoConn:Dash.Conn } },
+    { path:'/knowconn', name:'KnowConn', components:{ KnowConn:Dash.Conn } },
+    { path:'/wiseconn', name:'WiseConn', components:{ WiseConn:Dash.Conn } },
+    { path:'/cube',     name:'Cube',     components:{ Cube:lazyLoading('muse/Cube')   } },
+    { path:'/wood',     name:'Wood',     components:{ Wood:animLoading('wood/Wood')   } }
     ] } )
 
 

@@ -4,6 +4,6 @@ import LessRollup from 'rollup-plugin-less'
 import commonjs   from 'rollup-plugin-commonjs';
 
 export default
-{ input:          'vue/muse/Info.vue',
-  output: { file: 'vue/muse/Info.js', format:'esm' },
+{ input:          'vue/muse/Conn.vue',
+  output: { file: 'vue/muse/Conn.js', format:'esm' },
   plugins: [ VueRollup(), LessRollup(), commonjs() ] }
