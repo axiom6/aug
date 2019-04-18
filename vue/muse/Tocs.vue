@@ -1,7 +1,6 @@
 
 <template><div class="tocs">
   <ul>
-    <router-link :to="{ name:'Info' }"><i class="fas fa-circle"></i>Info</router-link>
     <template v-for="komp in komps">
     <li :key="komp.name">
       <div   v-on:click="pubComp(komp.name)">

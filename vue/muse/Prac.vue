@@ -46,7 +46,7 @@
     
     components:{ 'b-tabs':Tabs },
     
-    //props: { comp:{ type:String, default:'None' } },
+    props: { pcomp:{ type:String, default:'None' } },
     
     data() { return {
       comp:'None', prac:'All', disp:'All', tab:'Practices', practices:{},
@@ -86,8 +86,8 @@
         return { backgroundColor:this.toRgbaHsv(hsv) }; } },
 
     beforeMount: function() {
-      this.comp = this.$route.name.substring(0,4);
-      console.log( 'Prac.beforeMount()', this.$route.name, this.comp ); },
+      this.comp = this.$route.name.substring(0,4);  },
+      // console.log( 'Prac.beforeMount()', this.$route.name, this.comp, this.pcomp  );
 
     mounted: function () {
       this.practices = this.pracs(this.comp,'Cols');
@@ -123,7 +123,7 @@
   .bgc( @bg )
     { background-color:@bg; } // top | right | bottom | left
   
-  .comp { background-color:black; position:relative; left:0; top:0; right:0; bottom:0; font-size:1.75vmin;
+  .comp { background-color:black; position:absolute; left:0; top:0; right:0; bottom:0; font-size:1.75vmin;
     
     .grid5x4(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid
       .tabs{ grid-area:tabs; display:inline; color:wheat; font-size:1.2em;

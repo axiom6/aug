@@ -1,14 +1,18 @@
 
 <template>
   <div class="tabs">
-    <div :class="classTab('Practices')"   >
-      <router-link :to="{ name:comp }">Practices</router-link>
+    <div :class="classTab('Practices')"    @click="pubTab('Practices')">
+      <router-link :to="{ name:comp+'Prac' }">Practices</router-link>
     </div>
-    <div :class="classTab('Connections')">
+    <div :class="classTab('Connections')"  @click="pubTab('Connections')">
       <router-link :to="{ name:comp+'Conn'}">Connections</router-link>
     </div>
-    <div :class="classTab('Enlight')"      @click="pubTab('Enlight')"     >Enlight</div>
-    <div :class="classTab('Data Science')" @click="pubTab('Data Science')">Data Science</div>
+    <div :class="classTab('Enlight')"      @click="pubTab('Enlight')"     >
+      <router-link :to="{ name:comp+'Enli'}">Enlight</router-link>
+    </div>
+    <div :class="classTab('Data Science')" @click="pubTab('Data Science')">
+      <router-link :to="{ name:comp+'Data'}">Data Science</router-link>
+    </div>
   </div>
 </template>
 
