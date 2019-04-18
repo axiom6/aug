@@ -2567,12 +2567,52 @@
 		"oAP": "/vue/muse/Dash.vue",
 		"oF": 0
 		},
+	"/vue/muse/Data.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/muse/Data.vue",
+		"oF": 0
+		},
+	"/vue/muse/Enli.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/muse/Enli.vue",
+		"oF": 0
+		},
 	"/vue/muse/Home.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/vue/muse/Home.vue",
+		"oF": 0
+		},
+	"/vue/muse/Ikws.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/muse/Ikws.vue",
+		"oF": 0
+		},
+	"/vue/muse/Info.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/muse/Info.vue",
+		"oF": 0
+		},
+	"/vue/muse/Know.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/muse/Know.vue",
 		"oF": 0
 		},
 	"/vue/muse/Prac.vue": {
@@ -2605,6 +2645,14 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/vue/muse/View.vue",
+		"oF": 0
+		},
+	"/vue/muse/Wise.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/muse/Wise.vue",
 		"oF": 0
 		},
 	"/vue/muse/Zzzz.js": {
@@ -2667,44 +2715,6 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/vue/mute/Disp.vue",
-		"oF": 0
-		},
-	"/vue/mute/Info.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/mute/Info-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/mute/Info.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/mute/Info.vue",
-		"oF": 0
-		},
-	"/vue/mute/Know.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/mute/Know-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/mute/Know.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/mute/Know.vue",
 		"oF": 0
 		},
 	"/vue/mute/Prac.vue": {
@@ -4959,23 +4969,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.vue",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "",
-			"autoOutputPathReplace2": "",
-			"autoOutputPathStyle": 0,
-			"fileExtension": "vue",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.html",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "",
 			"autoOutputPathReplace2": "",
 			"autoOutputPathStyle": 0,
 			"fileExtension": "html",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.vue",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "",
+			"autoOutputPathReplace2": "",
+			"autoOutputPathStyle": 0,
+			"fileExtension": "vue",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

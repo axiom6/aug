@@ -14,6 +14,33 @@ const Parent = { template:'<router-view></router-view>' };
 
 if( lazyLoading===false && Parent===false ){}
 
+const Info = { template:`
+  <div class="ikw" id="Info">
+    <router-view name="InfoPrac"></router-view>
+    <router-view name="InfoConn"></router-view>
+    <router-view name="InfoEnli"></router-view>
+    <router-view name="InfoData"></router-view>
+  </div>` }
+
+const Know = { template:`
+  <div class="ikw" id="Know">
+    <router-view name="KnowPrac"></router-view>
+    <router-view name="KnowConn"></router-view>
+    <router-view name="KnowEnli"></router-view>
+    <router-view name="KnowData"></router-view>
+  </div>` }
+
+const Wise = { template:`
+  <div class="ikw" id="Wise">
+    <router-view name="WisePrac"></router-view>
+    <router-view name="WiseConn"></router-view>
+    <router-view name="WiseEnli"></router-view>
+    <router-view name="WiseData"></router-view>
+  </div>` }
+
+const Enli = { template:`<h1 class="enli">Enlight</h1>` }
+const Data = { template:`<h1 class="data">Data Science</h1>` }
+
 export default new Router( { // Static Import for quich dev cycles
   routes:[                   // Not really using props
     { path:'/',         name:'Home',     components:{ Home:Dash.Home } },

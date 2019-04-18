@@ -1,12 +1,12 @@
 
 <script type="module">
 
-  import Base from './Base.vue'
+  import Ikws from './Ikws.vue'
 
   export default {
-    extends: Base,
+    extends: Ikws,
     beforeMount: function() {
       this.comp = 'Know'; } }
-  
+
 </script>
 

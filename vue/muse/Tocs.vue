@@ -25,11 +25,11 @@
   let Tocs = {
     
     data() { return {  comp:'None', prac:'None', disp:'None',
-        komps:{ Info:{ name:'Info', comp:'InfoPrac', pracs:{}, ikw:true,  icon:"fas fa-th"          },
-                Know:{ name:'Know', comp:'KnowPrac', pracs:{}, ikw:true,  icon:"fas fa-university"  },
-                Wise:{ name:'Wise', comp:'WisePrac', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor" },
-                Cube:{ name:'Cube', comp:'Cube',     pracs:{}, ikw:false, icon:"fas fa-cubes"       },
-                Wood:{ name:'Wood', comp:'Wood',     pracs:{}, ikw:false, icon:"fas fa-tree"        } } } },
+        komps:{ Info:{ name:'Info', comp:'Info', pracs:{}, ikw:true,  icon:"fas fa-th"          },
+                Know:{ name:'Know', comp:'Know', pracs:{}, ikw:true,  icon:"fas fa-university"  },
+                Wise:{ name:'Wise', comp:'Wise', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor" },
+                Cube:{ name:'Cube', comp:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes"       },
+                Wood:{ name:'Wood', comp:'Wood', pracs:{}, ikw:false, icon:"fas fa-tree"        } } } },
     
     methods: {
       

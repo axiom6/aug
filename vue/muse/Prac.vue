@@ -1,7 +1,6 @@
 
 <template>
   <div class="comp">
-    <b-tabs :comp="comp"></b-tabs>
     <template v-for="prac in practices">
       <div v-show="isPrac(prac.name)" :class="pracDir(prac.dir)" :key="prac.name">
         <div class="prac">
@@ -123,7 +122,7 @@
   .bgc( @bg )
     { background-color:@bg; } // top | right | bottom | left
   
-  .comp { background-color:black; position:absolute; left:0; top:0; right:0; bottom:0; font-size:1.75vmin;
+  .comp { background-color:black; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;
     
     .grid5x4(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid
       .tabs{ grid-area:tabs; display:inline; color:wheat; font-size:1.2em;

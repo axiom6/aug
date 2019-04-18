@@ -2,7 +2,6 @@
 
 <template>
   <div id="Conn" class="conn">
-    <b-tabs :comp="comp"></b-tabs>
     <template v-for="prac in practices">
       <div v-show="isPrac(prac.name)" ref="FullPrac" :class="pracDir(prac.dir)" :key="prac.name">
         <div :id="prac.name" :ref="prac.name" class="prac" style="background-color:rgba(97,56,77,1.0)">
@@ -16,11 +15,8 @@
   
   import Build   from '../../pub/cube/Build.js'
   import Connect from '../../pub/conn/Connect.js'
-  import Tabs    from './Tabs.vue';
 
   export default {
-
-    components:{ 'b-tabs':Tabs },
 
     // props: { comp:{ type:String, default:'None' } },
 
@@ -91,7 +87,7 @@
   .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;
     justify-items:center; align-items:center; }
   
-  .conn { background-color:black; position:absolute; left:0; top:0; right:0; bottom:0; font-size:1.75vmin;
+  .conn { background-color:black; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;
     .grid4x3(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid
     .tabs{ grid-area:tabs; display:inline; color:wheat; font-size:1.2em;
       justify-self:start; align-self:center; text-align:left; }

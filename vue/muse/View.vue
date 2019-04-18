@@ -21,11 +21,8 @@
 </script>
 
 <style lang="less">
-  .ikw { position:relative; left:0; top:0; right:0; bottom:0; }
-  .enli, .data { background-color:black; color:wheat;
-                 display:grid; justify-self:center;  align-self:center;  text-align:center; }
-  .banner {      display:grid; justify-items:center; align-items:center; text-align:center;
-    background-color:black; color:wheat; }
+
+
 </style>
 
 
