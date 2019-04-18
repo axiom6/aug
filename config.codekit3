@@ -592,6 +592,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/app/muse/Routes.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/muse/Routes-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/aug.iml": {
 		"cB": 0,
 		"ft": 8192,

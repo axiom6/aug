@@ -22,10 +22,10 @@
 
     components:{ 'b-tabs':Tabs },
 
-    // props: { comp:String },
+    // props: { comp:{ type:String, default:'None' } },
 
     data() {
-      return { comp:'None', prac:'All', disp:'All', tab:'Connections',
+      return { prac:'All', disp:'All', tab:'Connections',
                build:{}, connects:{}, practices:{} }; },
 
     methods: {

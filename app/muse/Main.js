@@ -25,7 +25,6 @@ Main = (function() {
       };
       Main.stream = new Stream(subjects, infoSpec);
       Main.mergePracsCols();
-      Main.component = "Info";
       Main.onReady();
     }
 
@@ -122,12 +121,6 @@ Main = (function() {
       },
       cols: function() {
         return Main.Batch['Cols'].data['Cols'].pracs;
-      },
-      getComp: function() {
-        return Main.component;
-      },
-      setComp: function(comp) {
-        return Main.component = comp;
       },
       comps: function(compk) {
         return Main.Batch[compk].data.comps;

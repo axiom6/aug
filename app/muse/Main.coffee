@@ -29,7 +29,6 @@ class Main
     infoSpec = { subscribe:false, publish:false, subjects:subjects}
     Main.stream = new Stream( subjects, infoSpec )
     Main.mergePracsCols()
-    Main.component = "Info"
     Main.onReady()
     # Main.logPracs( 'Info' )
     return
@@ -66,10 +65,6 @@ class Main
         Main.Batch
       cols:()  ->
         Main.Batch['Cols'].data['Cols'].pracs
-      getComp:() ->
-        Main.component
-      setComp:( comp ) ->
-        Main.component = comp
       comps:( compk ) ->
         Main.Batch[compk].data.comps
       pracs:( compk ) ->
@@ -95,9 +90,6 @@ class Main
       #  Main.NavbSpecs
     }
   }
-
-
-
 
 `export default Main`
 
