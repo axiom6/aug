@@ -1,9 +1,9 @@
 
 
 <template>
-  <div id="Conn" class="conn">
+  <div id="Conn" class="conn" ref="Conn">
     <template v-for="prac in practices">
-      <div v-show="isPrac(prac.name)" ref="FullPrac" :class="pracDir(prac.dir)" :key="prac.name">
+      <div v-show="isPrac(prac.name)" ref="Prac" :class="pracDir(prac.dir)" :key="prac.name">
         <div :id="prac.name" :ref="prac.name" class="prac" style="background-color:rgba(97,56,77,1.0)">
       </div>
       </div>
@@ -28,7 +28,9 @@
       isPrac: function (prac) {
         return this.prac===prac || this.prac==='All' },
       onPrac: function (prac) {
-        this.prac = prac; this.disp='All'; },
+        this.prac = prac; this.disp='All';
+        if( this.isConnect(prac) ) {
+            this.connects[prac].layout(); } },
       onDisp: function (prac,disp) {
         this.prac = prac; this.disp=disp; },
       pracDir: function(dir) {
@@ -39,21 +41,18 @@
         return this.tab===tab ? 'tab-active' : 'tab' },
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; },
+      isConnect: function ( prac ) {
+        return prac !== 'All' && this.practices[prac].row !== 'Dim'; },
       createConnects: function( stream, build ) {
-        //console.log( 'Conn.createConnects() refs', this.$refs );
-        let fullWidth  = this.$refs['FullPrac'][0]['clientWidth' ];
-        let fullHeight = this.$refs['FullPrac'][0]['clientHeight'];
-        
+        let compWidth  = this.$refs['Conn']['clientWidth' ];
+        let compHeight = this.$refs['Conn']['clientHeight'];
         for( let key in this.practices ) {
-          
           if( this.practices.hasOwnProperty(key) ) {
             let prac = this.practices[key];
             if( prac.row !== 'Dim' ) {
               let elem = this.$refs[prac.name][0]
-              // console.log( 'Conn.createConnects() elem', elem );
-              let size = { fullWidth:fullWidth, fullHeight:fullHeight,
-                width:elem['clientWidth' ], height:elem['clientHeight'] };
-              // console.log( 'Conn.createConnects() size', size );
+              let size = { compWidth:compWidth, compHeight:compHeight,
+                elemWidth:elem['clientWidth' ], elemHeight:elem['clientHeight'] };
               this.connects[prac.name] = new Connect( stream, build, prac, size, elem ); } } }
         
         return this.connects; } },
@@ -64,8 +63,8 @@
 
     mounted: function () {
       this.build     = new Build( this.batch() );
-      this.practices = this.conns(  this.comp );
-      this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
+      this.practices = this.conns( this.comp );
+      this.subscribe(  this.comp,  this.comp+'.vue', (obj) => {
         if( obj.disp==='All' ) { this.onPrac(obj.prac); }
         else                   { this.onDisp(obj.prac,obj.disp); } } );
       this.$nextTick( function() {

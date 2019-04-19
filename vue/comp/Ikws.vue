@@ -10,7 +10,7 @@
 
 <script type="module">
   
-  import Tabs from './Tabs.vue';
+  import Tabs from '../page/Tabs.vue';
   
   export default {
     components:{ 'b-tabs':Tabs },

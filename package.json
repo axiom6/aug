@@ -9,8 +9,6 @@
   },
   "scripts": {
     "dash": "rollup --config app/build/rollup.dash.js",
-    "prac": "rollup --config app/build/rollup.prac.js",
-    "conn": "rollup --config app/build/rollup.conn.js",
     "cube": "rollup --config app/build/rollup.cube.js",
     "wood": "rollup --config app/build/rollup.wood.js"
   },

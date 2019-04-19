@@ -30,8 +30,9 @@ Shapes = class Shapes {
     return [svg, g, svgId, gId, defs];
   }
 
-  layoutSvg(svg, g, w, h, sx, sy) {
-    svg.attr("width", w).attr("height", h);
+  layoutSvg(svg, g, svgWidth, svgHeight, sx, sy) {
+    // console.log( 'Shapes.layoutSvg()', svgWidth, svgHeight, sx, sy )
+    svg.attr("width", svgWidth).attr("height", svgHeight);
     g.attr('transform', Vis.scale(sx, sy));
   }
 

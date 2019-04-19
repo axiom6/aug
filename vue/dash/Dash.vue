@@ -15,15 +15,15 @@
 
 <script type="module">
   
-  import Logo from './Logo.vue';
-  import Navb from './Navb.vue';
-  import Find from './Find.vue';
-  import Tocs from './Tocs.vue';
-  import View from './View.vue';
-  import Side from './Side.vue';
-  import Pref from './Pref.vue';
-  import Foot from './Foot.vue';
-  import Trak from './Trak.vue';
+  import Logo from '../dash/Logo.vue';
+  import Navb from '../dash/Navb.vue';
+  import Find from '../dash/Find.vue';
+  import Tocs from '../dash/Tocs.vue';
+  import View from '../dash/View.vue';
+  import Side from '../dash/Side.vue';
+  import Pref from '../dash/Pref.vue';
+  import Foot from '../dash/Foot.vue';
+  import Trak from '../dash/Trak.vue';
 
   
   let Dash = {
@@ -34,14 +34,27 @@
         'd-pref':Pref, 'd-foot':Foot, 'd-trak':Trak } };
 
   // Static imports for minimizing build steps in dev.
-  
-  import Info from '../muse/Info.vue';
-  import Know from '../muse/Know.vue';
-  import Wise from '../muse/Wise.vue';
-  
+  import Home from '../comp/Home.vue';
+  import Info from '../comp/Info.vue';
+  import Know from '../comp/Know.vue';
+  import Wise from '../comp/Wise.vue';
+  import Prac from '../page/Prac.vue';
+  import Conn from '../page/Conn.vue';
+  import Enli from '../page/Enli.vue';
+  import Data from '../page/Data.vue';
+//import Cube from '../comp/Cube.vue';
+//import Wood from '../wood/Wood.vue';
+
+  Dash.Home = Home;
   Dash.Info = Info;
   Dash.Know = Know;
   Dash.Wise = Wise;
+  Dash.Prac = Prac;
+  Dash.Conn = Conn;
+  Dash.Enli = Enli;
+  Dash.Data = Data;
+//Dash.Cube = Cube;
+//Dash.Wood = Wood;
  
   export default Dash;
   
@@ -49,10 +62,10 @@
 
 <style lang="less">
 
-   .dash { font-family:Roboto, sans-serif;
+   .dash { font-family:Roboto, sans-serif; font-size:1rem;
      position:absolute; left:0; top:0; right:0; bottom:0; display:grid;
-     grid-template-columns: 200px 1fr 50px;
-     grid-template-rows:     50px 1fr 50px;
+     grid-template-columns: 11vw 85vw 4vw;
+     grid-template-rows:     6vh 88vh 6vh;
      grid-template-areas:
        "logo navb find"
        "tocs view side"
@@ -69,3 +82,4 @@
     #trak { grid-area:trak; justify-self:stretch; align-self:stretch; display:grid; } }
   
 </style>
+

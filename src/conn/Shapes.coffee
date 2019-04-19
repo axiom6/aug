@@ -16,13 +16,15 @@ class Shapes
     svgId = Util.htmlId( name, 'Svg',  '', false ) # Turn off duplicate id error message
     gId   = Util.htmlId( name, 'SvgG', '', false ) # Turn off duplicate id error message
     svg   = @d3.select(elem).append("svg:svg")
-    svg.attr("id",svgId).attr("width",w).attr("height",h).attr("xmlns","http://www.w3.org/2000/svg")
+    svg.attr("id",svgId).attr("width",w).attr("height",h)
+       .attr("xmlns","http://www.w3.org/2000/svg")
     defs   = svg.append("svg:defs")
     g      = svg.append("svg:g").attr("id",gId) # All transforms are applied to g
     [svg,g,svgId,gId,defs]
 
-  layoutSvg:( svg, g, w, h, sx, sy ) =>
-    svg.attr("width",w).attr("height",h)
+  layoutSvg:( svg, g, svgWidth, svgHeight, sx, sy ) =>
+    # console.log( 'Shapes.layoutSvg()', svgWidth, svgHeight, sx, sy )
+    svg.attr( "width", svgWidth ).attr("height", svgHeight )
     g  .attr( 'transform', Vis.scale( sx, sy ) )
     return
 

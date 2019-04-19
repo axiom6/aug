@@ -345,17 +345,6 @@
 		"oAP": "/ani/wood/Wood.vue",
 		"oF": 0
 		},
-	"/app/build/rollup.conn.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/build/rollup.conn-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/app/build/rollup.cube.js": {
 		"bF": 0,
 		"ft": 64,
@@ -374,17 +363,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/app/build/rollup.dash-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/build/rollup.prac.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/build/rollup.prac-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -1396,6 +1374,48 @@
 		"sI": 0,
 		"sU": 0
 		},
+	"/css/icon/menu-collapsed.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/css/icon/menu-collapsed.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/css/icon/menu-expanded.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/css/icon/menu-expanded.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/css/icon/nav-messages.png": {
+		"ft": 32768,
+		"iS": 426,
+		"oA": 0,
+		"oAP": "/css/icon/nav-messages.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/icon/nav-notification.png": {
+		"ft": 32768,
+		"iS": 572,
+		"oA": 0,
+		"oAP": "/css/icon/nav-notification.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
 	"/css/img/firewatch_02.jpg": {
 		"ft": 16384,
 		"iS": 329830,
@@ -2109,17 +2129,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/conn/Connected.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/conn/Connected.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
 	"/src/conn/Convey.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -2238,28 +2247,6 @@
 		"oAP": "/pub/cube/Rect.js",
 		"oF": 0,
 		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/dash/Navb.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/dash/Navb.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/dash/Navb.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/src/dash/Navb-min.js",
-		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
@@ -2406,6 +2393,65 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/vue/comp/Cube.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/comp/Cube-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/vue/comp/Cube.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/comp/Cube.vue",
+		"oF": 0
+		},
+	"/vue/comp/Home.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/comp/Home.vue",
+		"oF": 0
+		},
+	"/vue/comp/Ikws.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/comp/Ikws.vue",
+		"oF": 0
+		},
+	"/vue/comp/Info.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/comp/Info.vue",
+		"oF": 0
+		},
+	"/vue/comp/Know.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/comp/Know.vue",
+		"oF": 0
+		},
+	"/vue/comp/Wise.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/comp/Wise.vue",
+		"oF": 0
+		},
 	"/vue/dash/Dash.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -2508,14 +2554,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/vue/form/FormElements.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/form/FormElements.vue",
-		"oF": 0
-		},
 	"/vue/maps/google/Goog.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -2532,376 +2570,53 @@
 		"oAP": "/vue/maps/leaflet/Leaf.vue",
 		"oF": 0
 		},
-	"/vue/muse/Conn.vue": {
+	"/vue/page/Conn.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/muse/Conn.vue",
+		"oAP": "/vue/page/Conn.vue",
 		"oF": 0
 		},
-	"/vue/muse/Cube.js": {
+	"/vue/page/Data.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/page/Data.vue",
+		"oF": 0
+		},
+	"/vue/page/Enli.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/page/Enli.vue",
+		"oF": 0
+		},
+	"/vue/page/Prac.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/page/Prac.vue",
+		"oF": 0
+		},
+	"/vue/page/Tabs.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/page/Tabs.vue",
+		"oF": 0
+		},
+	"/vue/page/Zzzz.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/vue/muse/Cube-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/muse/Cube.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Cube.vue",
-		"oF": 0
-		},
-	"/vue/muse/Dash.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Dash.vue",
-		"oF": 0
-		},
-	"/vue/muse/Data.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Data.vue",
-		"oF": 0
-		},
-	"/vue/muse/Enli.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Enli.vue",
-		"oF": 0
-		},
-	"/vue/muse/Home.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Home.vue",
-		"oF": 0
-		},
-	"/vue/muse/Ikws.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Ikws.vue",
-		"oF": 0
-		},
-	"/vue/muse/Info.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Info.vue",
-		"oF": 0
-		},
-	"/vue/muse/Know.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Know.vue",
-		"oF": 0
-		},
-	"/vue/muse/Prac.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Prac.vue",
-		"oF": 0
-		},
-	"/vue/muse/Tabs.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Tabs.vue",
-		"oF": 0
-		},
-	"/vue/muse/Tocs.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Tocs.vue",
-		"oF": 0
-		},
-	"/vue/muse/View.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/View.vue",
-		"oF": 0
-		},
-	"/vue/muse/Wise.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Wise.vue",
-		"oF": 0
-		},
-	"/vue/muse/Zzzz.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/muse/Zzzz-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/mute/Base.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "/vue/mute/Base-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"/vue/mute/Base.css.map": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/vue/mute/Base.css.map",
-		"oF": 0
-		},
-	"/vue/mute/Base.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 0,
-		"oAP": "/vue/mute/Base.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/vue/mute/Base.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/mute/Base.vue",
-		"oF": 0
-		},
-	"/vue/mute/Disp.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/mute/Disp.vue",
-		"oF": 0
-		},
-	"/vue/mute/Prac.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/mute/Prac.vue",
-		"oF": 0
-		},
-	"/vue/mute/Rows.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/mute/Rows.vue",
-		"oF": 0
-		},
-	"/vue/mute/Zzzz.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/mute/Zzzz-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/navb/icon/menu-collapsed.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/vue/navb/icon/menu-collapsed.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/vue/navb/icon/menu-expanded.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/vue/navb/icon/menu-expanded.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/vue/navb/icon/nav-messages.png": {
-		"ft": 32768,
-		"iS": 426,
-		"oA": 0,
-		"oAP": "/vue/navb/icon/nav-messages.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/vue/navb/icon/nav-notification.png": {
-		"ft": 32768,
-		"iS": 572,
-		"oA": 0,
-		"oAP": "/vue/navb/icon/nav-notification.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/vue/navb/Wise.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/navb/Wise-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/navb/Wise.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/navb/Wise.vue",
-		"oF": 0
-		},
-	"/vue/vuex/i18n/br.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/vuex/i18n/br-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/vuex/i18n/br.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/vue/vuex/i18n/br-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/vue/vuex/i18n/en.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/vuex/i18n/en-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/vuex/i18n/en.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/vue/vuex/i18n/en-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/vue/vuex/i18n/es.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/vuex/i18n/es-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/vuex/i18n/es.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/vue/vuex/i18n/es-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/vue/vuex/i18n/I18n.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/vuex/i18n/I18n-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/vuex/store/app.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/vuex/store/app-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/vuex/store/getters.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/vuex/store/getters-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/vuex/store/Store.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/vuex/store/Store-min.js",
+		"oAP": "/vue/page/Zzzz-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2913,6 +2628,183 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/vue/zzzz-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/conn/Connected.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/conn/Connected.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/dash/Navb.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/dash/Navb.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/dash/Navb.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/dash/Navb-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/form/FormElements.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/form/FormElements.vue",
+		"oF": 0
+		},
+	"/zzz/mute/Disp.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/mute/Disp.vue",
+		"oF": 0
+		},
+	"/zzz/mute/Prac.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/mute/Prac.vue",
+		"oF": 0
+		},
+	"/zzz/mute/Rows.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/mute/Rows.vue",
+		"oF": 0
+		},
+	"/zzz/mute/Zzzz.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/mute/Zzzz-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/vuex/i18n/br.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/vuex/i18n/br-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/vuex/i18n/br.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/vuex/i18n/br-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/vuex/i18n/en.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/vuex/i18n/en-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/vuex/i18n/en.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/vuex/i18n/en-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/vuex/i18n/es.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/vuex/i18n/es-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/vuex/i18n/es.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/vuex/i18n/es-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/vuex/i18n/I18n.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/vuex/i18n/I18n-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/vuex/store/app.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/vuex/store/app-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/vuex/store/getters.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/vuex/store/getters-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/vuex/store/Store.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/vuex/store/Store-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -4969,23 +4861,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.html",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "",
-			"autoOutputPathReplace2": "",
-			"autoOutputPathStyle": 0,
-			"fileExtension": "html",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.vue",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "",
 			"autoOutputPathReplace2": "",
 			"autoOutputPathStyle": 0,
 			"fileExtension": "vue",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.html",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "",
+			"autoOutputPathReplace2": "",
+			"autoOutputPathStyle": 0,
+			"fileExtension": "html",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

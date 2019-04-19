@@ -4,12 +4,8 @@ import  Dash    from './Dash.js';
 import  Router  from '../../lib/vue/vue-router.esm.js';
 Vue.use(Router);
 
-let lazyLoading = (name) => () => {
-  return import( `../../vue/${name}.js` ); }
-
-let animLoading = (name) => () => {
-  return import( `../../ani/${name}.js` ); }
-
+let lazy = (name) => () => {
+  return import( `../../${name}.js` ); }
 
 export default new Router( { // Static Import for quich dev cycles
   routes:[                   // Not really using props
@@ -29,6 +25,6 @@ export default new Router( { // Static Import for quich dev cycles
       { path:'conn', name:'WiseConn', components:{ WiseConn:Dash.Conn } },
       { path:'enli', name:'WiseEnli', components:{ WiseEnli:Dash.Enli } },
       { path:'data', name:'WiseData', components:{ WiseData:Dash.Data } } ] },
-    { path:'/cube',  name:'Cube',     components:{ Cube:lazyLoading('muse/Cube') } },
-    { path:'/wood',  name:'Wood',     components:{ Wood:animLoading('wood/Wood') } }
+    { path:'/cube',  name:'Cube',     components:{ Cube:lazy('vue/comp/Cube') } },
+    { path:'/wood',  name:'Wood',     components:{ Wood:lazy('ani/wood/Wood') } }
     ] } )
