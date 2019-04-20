@@ -46,11 +46,15 @@ Connect = class Connect {
     return this.htmlId = svgId;
   }
 
-  layout() {
+  layout(level = 'Comp') {
     var geo;
     // console.log( 'Connect.layout()', @prac, @size );
-    geo = this.geom(this.size.compWidth, this.size.compHeight, this.size.elemWidth, this.size.elemHeight);
-    this.shapes.layoutSvg(this.graph, this.g, this.size.compWidth, this.size.compHeight, geo.sx, geo.sy);
+    if (level === 'Comp') { // Zoom to the entire Comp size
+      geo = this.geom(this.size.compWidth, this.size.compHeight, this.size.elemWidth, this.size.elemHeight);
+      this.shapes.layoutSvg(this.graph, this.g, this.size.compWidth, this.size.compHeight, geo.sx, geo.sy); // Restore to original size
+    } else {
+      this.shapes.layoutSvg(this.graph, this.g, this.size.elemWidth, this.size.elemHeight, 1.0, 1.0);
+    }
   }
 
   geom(compWidth, compHeight, elemWidth, elemHeight) {

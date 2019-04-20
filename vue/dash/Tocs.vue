@@ -10,7 +10,8 @@
         <li v-on:click="pubPrac(prac.name)" :style="stylePrac(prac.name,prac.hsv)" :key="prac.name">
           <i :class="prac.icon"></i>{{prac.name}}
           <ul v-show="isPrac(prac.name)"><template v-for="disp in prac.disps">
-            <li v-on:click.stop="pubDisp(prac.name,disp.name)" :style="styleDisp(disp.name,disp.hsv)" :key="disp.name">
+            <li v-on:click.stop="pubDisp(prac.name,disp.name)" :style="styleDisp(disp.name,disp.hsv)"
+              :key="disp.name">
               <i :class="disp.icon"></i>{{disp.name}}</li>
           </template></ul>
         </li>

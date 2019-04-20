@@ -1790,6 +1790,17 @@
 		"oO": 0,
 		"oS": 1
 		},
+	"/pub/conn/Chord.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/conn/Chord-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/conn/Connect.js": {
 		"bF": 0,
 		"ft": 64,
@@ -4861,23 +4872,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.vue",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "",
-			"autoOutputPathReplace2": "",
-			"autoOutputPathStyle": 0,
-			"fileExtension": "vue",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.html",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "",
 			"autoOutputPathReplace2": "",
 			"autoOutputPathStyle": 0,
 			"fileExtension": "html",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.vue",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "",
+			"autoOutputPathReplace2": "",
+			"autoOutputPathStyle": 0,
+			"fileExtension": "vue",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

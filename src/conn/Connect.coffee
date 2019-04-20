@@ -27,10 +27,13 @@ class Connect
     @draw.drawSvg( @g, geo, @defs )
     @htmlId = svgId
 
-  layout:() ->
+  layout:( level='Comp') ->
     # console.log( 'Connect.layout()', @prac, @size );
-    geo  = @geom( @size.compWidth, @size.compHeight, @size.elemWidth, @size.elemHeight )
-    @shapes.layoutSvg( @graph, @g, @size.compWidth, @size.compHeight, geo.sx, geo.sy )
+    if level is 'Comp'  # Zoom to the entire Comp size
+      geo  = @geom( @size.compWidth, @size.compHeight, @size.elemWidth, @size.elemHeight )
+      @shapes.layoutSvg( @graph, @g, @size.compWidth, @size.compHeight, geo.sx, geo.sy   )
+    else                # Restore to original size
+      @shapes.layoutSvg( @graph, @g, @size.elemWidth, @size.elemHeight, 1.0,    1.0      )
     return
 
   geom:( compWidth, compHeight, elemWidth, elemHeight ) ->

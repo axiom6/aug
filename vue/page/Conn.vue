@@ -1,11 +1,11 @@
 
-
 <template>
   <div id="Conn" class="conn" ref="Conn">
     <template v-for="prac in practices">
       <div v-show="isPrac(prac.name)" ref="Prac" :class="pracDir(prac.dir)" :key="prac.name">
-        <div :id="prac.name" :ref="prac.name" class="prac" style="background-color:rgba(97,56,77,1.0)">
-      </div>
+        <div :id="prac.name" :ref="prac.name" class="prac"
+          @click="pubPrac(prac.name)" style="background-color:rgba(97,56,77,1.0)">
+        </div>
       </div>
     </template>
   </div>
@@ -28,21 +28,28 @@
       isPrac: function (prac) {
         return this.prac===prac || this.prac==='All' },
       onPrac: function (prac) {
-        this.prac = prac; this.disp='All';
+        if( this.isConnect(this.prac) ) {  // Restore any previous expanded prac layout
+            this.connects[ this.prac].layout('Elem'); }
         if( this.isConnect(prac) ) {
-            this.connects[prac].layout(); } },
+            this.connects[prac].layout('Comp'); } // Expand prac to Comp size
+        this.prac = prac; this.disp='All';  },
       onDisp: function (prac,disp) {
         this.prac = prac; this.disp=disp; },
+      onTabs: function (tab) {
+        if( tab==='Connections' && this.tab==='Connections' && this.prac!=='All' ) {
+          this.connects[this.prac].layout('Elem');
+          this.onPrac('All'); }
+        this.tab = tab; },
       pracDir: function(dir) {
         return this.prac==='All' ? dir : 'fullPracDir'; },
-      pubTab: function (tab) {
-        this.tab = tab },
-      classTab: function (tab) {
-        return this.tab===tab ? 'tab-active' : 'tab' },
+      pubPrac: function (prac) {
+        this.publish( this.comp, { prac:prac, disp:'All' } ); },
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; },
       isConnect: function ( prac ) {
-        return prac !== 'All' && this.practices[prac].row !== 'Dim'; },
+        return prac !== 'All' && typeof(this.practices[prac])==='object'
+          && this.practices[prac].row !== 'Dim'; },
+      
       createConnects: function( stream, build ) {
         let compWidth  = this.$refs['Conn']['clientWidth' ];
         let compHeight = this.$refs['Conn']['clientHeight'];
@@ -54,8 +61,17 @@
               let size = { compWidth:compWidth, compHeight:compHeight,
                 elemWidth:elem['clientWidth' ], elemHeight:elem['clientHeight'] };
               this.connects[prac.name] = new Connect( stream, build, prac, size, elem ); } } }
-        
-        return this.connects; } },
+        return this.connects; },
+      
+      resize: function() {
+        //console.log( 'Conn.resize() Connects', this.connects );
+        for( let prac in this.practices ) {
+          if( this.practices.hasOwnProperty(prac) && this.isConnect(prac) ) {
+            console.log( 'Conn.resize() prac', prac );
+            this.connects[prac].layout('Elem'); } }
+        if( this.isConnect(this.prac) ) {
+            this.connects[ this.prac].layout('Comp'); } }
+    },
 
     beforeMount: function() {
       this.comp = this.$route.name.substring(0,4); },
@@ -67,9 +83,16 @@
       this.subscribe(  this.comp,  this.comp+'.vue', (obj) => {
         if( obj.disp==='All' ) { this.onPrac(obj.prac); }
         else                   { this.onDisp(obj.prac,obj.disp); } } );
+      this.subscribe(  "Tabs",    this.comp+'.vue', (obj) => {
+        this.onTabs(obj); } );
       this.$nextTick( function() {
-        this.connects  = this.createConnects( this.stream(), this.build ); } ) }
-    }
+        this.connects  = this.createConnects( this.stream(), this.build ); } ) },
+    
+    created: function () {
+      window.addEventListener(   'resize', this.resize ) },
+    destroyed: function () {
+      window.removeEventListener('resize', this.resize ) }
+   }
 
 </script>
 

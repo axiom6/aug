@@ -74,6 +74,8 @@
       onDisp: function (prac,disp) {
         this.prac = prac; this.disp=disp; },
       onTabs: function (tab) {
+        if( tab==='Practices' && this.tab==='Practices' && this.prac!=='All' ) {
+          this.onPrac('All'); }
         this.tab = tab; },
       pracDir: function(dir) {
         return this.prac==='All' ? dir : 'fullPracDir'; },
