@@ -119,6 +119,9 @@ Main = (function() {
       batch: function() {
         return Main.Batch;
       },
+      keys: function(obj) {
+        return Object.keys(obj);
+      },
       cols: function() {
         return Main.Batch['Cols'].data['Cols'].pracs;
       },

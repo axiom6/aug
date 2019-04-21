@@ -7,7 +7,7 @@ import Encourage from '../conn/Encourage'
 
 class Connect
 
-  constructor:( @stream, @build, @prac, @size, @elem ) ->
+  constructor:( @stream, @build, @prac, @elem, @size ) ->
     @shapes = new Shapes( @stream )
     @ready()
 
@@ -23,17 +23,28 @@ class Connect
     @graph=null; @g=null; svgId=''; gId=''; @defs=null
     [@graph,@g,svgId,gId,@defs] = @shapes.createSvg( @elem, @prac.name,
       @size.elemWidth, @size.elemHeight )
+    @size.lastWidth  = @size.elemWidth
+    @size.lastHeight = @size.elemHeight
     @draw   = @createDraw()
     @draw.drawSvg( @g, geo, @defs )
     @htmlId = svgId
+    return
 
-  layout:( level='Comp') ->
-    # console.log( 'Connect.layout()', @prac, @size );
-    if level is 'Comp'  # Zoom to the entire Comp size
-      geo  = @geom( @size.compWidth, @size.compHeight, @size.elemWidth, @size.elemHeight )
-      @shapes.layoutSvg( @graph, @g, @size.compWidth, @size.compHeight, geo.sx, geo.sy   )
-    else                # Restore to original size
-      @shapes.layoutSvg( @graph, @g, @size.elemWidth, @size.elemHeight, 1.0,    1.0      )
+  lastSize:( size ) ->
+    @size.lastWidth  = size.elemWidth
+    @size.lastHeight = size.elemHeight
+
+  layout:( size, op ) ->
+    # console.log( 'Connect.layout()', @prac.name, op, size );
+    if op is 'Expand'  # Zoom to the entire Comp size
+      geo  = @geom( size.compWidth, size.compHeight, @size.elemWidth,    @size.elemHeight )
+      @shapes.layoutSvg( @graph, @g, size.compWidth, size.compHeight,    geo.sx, geo.sy   )
+    if op is 'Restore'  # @size is original while size is a reszize
+      geo  = @geom( @size.lastWidth, @size.lastHeight, @size.elemWidth,  @size.elemHeight )
+      @shapes.layoutSvg( @graph, @g, @size.lastWidth, @size.lastHeight,  geo.sx, geo.sy   )
+    if op is 'Resize'  # @size is original while size is a reszize
+      geo  = @geom(  size.elemWidth,  size.elemHeight, @size.elemWidth,  @size.elemHeight )
+      @shapes.layoutSvg( @graph, @g, @size.elemWidth,  @size.elemHeight, geo.sx, geo.sy   )
     return
 
   geom:( compWidth, compHeight, elemWidth, elemHeight ) ->
@@ -51,6 +62,5 @@ class Connect
 
   toFill:( hsv ) ->
       Vis.toRgbHsvStr( hsv )
-
 
 export default Connect

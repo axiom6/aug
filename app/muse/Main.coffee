@@ -63,6 +63,8 @@ class Main
         Main.stream
       batch:() ->
         Main.Batch
+      keys:(obj) ->
+        Object.keys(obj)
       cols:()  ->
         Main.Batch['Cols'].data['Cols'].pracs
       comps:( compk ) ->

@@ -9,12 +9,12 @@ import Innovate from '../conn/Innovate';
 import Encourage from '../conn/Encourage';
 
 Connect = class Connect {
-  constructor(stream, build, prac, size, elem) {
+  constructor(stream, build, prac, elem, size1) {
     this.stream = stream;
     this.build = build;
     this.prac = prac;
-    this.size = size;
     this.elem = elem;
+    this.size = size1;
     this.shapes = new Shapes(this.stream);
     this.ready();
   }
@@ -41,19 +41,32 @@ Connect = class Connect {
     gId = '';
     this.defs = null;
     [this.graph, this.g, svgId, gId, this.defs] = this.shapes.createSvg(this.elem, this.prac.name, this.size.elemWidth, this.size.elemHeight);
+    this.size.lastWidth = this.size.elemWidth;
+    this.size.lastHeight = this.size.elemHeight;
     this.draw = this.createDraw();
     this.draw.drawSvg(this.g, geo, this.defs);
-    return this.htmlId = svgId;
+    this.htmlId = svgId;
   }
 
-  layout(level = 'Comp') {
+  lastSize(size) {
+    this.size.lastWidth = size.elemWidth;
+    return this.size.lastHeight = size.elemHeight;
+  }
+
+  layout(size, op) {
     var geo;
-    // console.log( 'Connect.layout()', @prac, @size );
-    if (level === 'Comp') { // Zoom to the entire Comp size
-      geo = this.geom(this.size.compWidth, this.size.compHeight, this.size.elemWidth, this.size.elemHeight);
-      this.shapes.layoutSvg(this.graph, this.g, this.size.compWidth, this.size.compHeight, geo.sx, geo.sy); // Restore to original size
-    } else {
-      this.shapes.layoutSvg(this.graph, this.g, this.size.elemWidth, this.size.elemHeight, 1.0, 1.0);
+    // console.log( 'Connect.layout()', @prac.name, op, size );
+    if (op === 'Expand') { // Zoom to the entire Comp size
+      geo = this.geom(size.compWidth, size.compHeight, this.size.elemWidth, this.size.elemHeight);
+      this.shapes.layoutSvg(this.graph, this.g, size.compWidth, size.compHeight, geo.sx, geo.sy);
+    }
+    if (op === 'Restore') { // @size is original while size is a reszize
+      geo = this.geom(this.size.lastWidth, this.size.lastHeight, this.size.elemWidth, this.size.elemHeight);
+      this.shapes.layoutSvg(this.graph, this.g, this.size.lastWidth, this.size.lastHeight, geo.sx, geo.sy);
+    }
+    if (op === 'Resize') { // @size is original while size is a reszize
+      geo = this.geom(size.elemWidth, size.elemHeight, this.size.elemWidth, this.size.elemHeight);
+      this.shapes.layoutSvg(this.graph, this.g, this.size.elemWidth, this.size.elemHeight, geo.sx, geo.sy);
     }
   }
 

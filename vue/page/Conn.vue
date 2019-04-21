@@ -28,16 +28,15 @@
       isPrac: function (prac) {
         return this.prac===prac || this.prac==='All' },
       onPrac: function (prac) {
-        if( this.isConnect(this.prac) ) {  // Restore any previous expanded prac layout
-            this.connects[ this.prac].layout('Elem'); }
-        if( this.isConnect(prac) ) {
-            this.connects[prac].layout('Comp'); } // Expand prac to Comp size
+        if( prac==='All' && this.prac!=='All' ) {
+          this.connects[this.prac].layout( this.size(this.prac), 'Restore'); }
+        if( prac!=='All' && typeof(this.connects[prac])==='object' ) { // Expand prac to Comp size
+          this.connects[prac].layout( this.size(prac), 'Expand'); }
         this.prac = prac; this.disp='All';  },
       onDisp: function (prac,disp) {
         this.prac = prac; this.disp=disp; },
       onTabs: function (tab) {
-        if( tab==='Connections' && this.tab==='Connections' && this.prac!=='All' ) {
-          this.connects[this.prac].layout('Elem');
+        if( tab==='Connections' && this.tab==='Connections'  ) {
           this.onPrac('All'); }
         this.tab = tab; },
       pracDir: function(dir) {
@@ -46,31 +45,32 @@
         this.publish( this.comp, { prac:prac, disp:'All' } ); },
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; },
-      isConnect: function ( prac ) {
-        return prac !== 'All' && typeof(this.practices[prac])==='object'
-          && this.practices[prac].row !== 'Dim'; },
+      
+      size: function(prac) {
+        let elem = this.$refs[prac][0]
+        let sz   = {}
+        sz.compWidth  = this.$refs['Conn']['clientWidth' ];
+        sz.compHeight = this.$refs['Conn']['clientHeight'];
+        sz.elemWidth  = elem['clientWidth' ];
+        sz.elemHeight = elem['clientHeight'];
+        // console.log( 'Conn.size()', prac, sz );
+        return sz;
+      },
       
       createConnects: function( stream, build ) {
-        let compWidth  = this.$refs['Conn']['clientWidth' ];
-        let compHeight = this.$refs['Conn']['clientHeight'];
-        for( let key in this.practices ) {
-          if( this.practices.hasOwnProperty(key) ) {
+        for( let key of this.pkeys ) {
             let prac = this.practices[key];
             if( prac.row !== 'Dim' ) {
-              let elem = this.$refs[prac.name][0]
-              let size = { compWidth:compWidth, compHeight:compHeight,
-                elemWidth:elem['clientWidth' ], elemHeight:elem['clientHeight'] };
-              this.connects[prac.name] = new Connect( stream, build, prac, size, elem ); } } }
+              let elem = this.$refs[key][0]
+              this.connects[prac.name] = new Connect( stream, build, prac, elem, this.size(key) ); } }
         return this.connects; },
       
       resize: function() {
-        //console.log( 'Conn.resize() Connects', this.connects );
-        for( let prac in this.practices ) {
-          if( this.practices.hasOwnProperty(prac) && this.isConnect(prac) ) {
-            console.log( 'Conn.resize() prac', prac );
-            this.connects[prac].layout('Elem'); } }
-        if( this.isConnect(this.prac) ) {
-            this.connects[ this.prac].layout('Comp'); } }
+        for( let key of this.pkeys ) {
+          let size  = this.size(key);
+          let level = key!==this.prac ? 'Resize' : 'Expand';
+          if( level==='Expand') { this.connects[key].lastSize(size) }
+          this.connects[key].layout( size, level ); } }
     },
 
     beforeMount: function() {
@@ -78,12 +78,13 @@
       //console.log( 'Conn.beforeMount()', this.$route.name, this.comp );
 
     mounted: function () {
-      this.build     = new Build( this.batch() );
+      this.build     = new Build(  this.batch() );
       this.practices = this.conns( this.comp );
+      this.pkeys     = this.keys(  this.practices )
       this.subscribe(  this.comp,  this.comp+'.vue', (obj) => {
-        if( obj.disp==='All' ) { this.onPrac(obj.prac); }
-        else                   { this.onDisp(obj.prac,obj.disp); } } );
-      this.subscribe(  "Tabs",    this.comp+'.vue', (obj) => {
+        if( obj.disp==='All' ) {   this.onPrac(obj.prac); }
+        else                   {   this.onDisp(obj.prac,obj.disp); } } );
+      this.subscribe(  "Tabs",     this.comp+'.vue', (obj) => {
         this.onTabs(obj); } );
       this.$nextTick( function() {
         this.connects  = this.createConnects( this.stream(), this.build ); } ) },
