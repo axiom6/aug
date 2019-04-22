@@ -12,10 +12,10 @@
 <script type="module">
 
   import Tabs  from '../note/Tabs.vue';
-  import Stand from '../note/Stand.vue';
+/*import Stand from '../note/Stand.vue';
   import Embed from '../note/Embed.vue';
   import Maths from '../note/Maths.vue';
-  import Ganja from '../note/Ganja.vue';
+  import Ganja from '../note/Ganja.vue';*/
   
   let Note = {
     
@@ -30,15 +30,16 @@
         ] } },
     
     methods: {
+      
       name: function(page) {
-        return this.comp+page.short; } }
+        return this.comp+page.short; } },
+    
   }
-
   
-  Note.Stand = Stand;
+/*Note.Stand = Stand;
   Note.Embed = Embed;
   Note.Maths = Maths;
-  Note.Ganja = Ganja;
+  Note.Ganja = Ganja;*/
   
   export default Note;
 </script>

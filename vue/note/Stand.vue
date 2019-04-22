@@ -1,18 +1,31 @@
 
 <template>
-  <div class="stand">
-    <div>
-      <h1>Standard Notebook</h1>
-    </div>
-  </div>
+  <div class="stand" ref="Stand"></div>
 </template>
 
 <script type="module">
-  export default {}
+
+  import { Inspector, Runtime } from 'https://unpkg.com/@observablehq/notebook-runtime@1?module';
+  import Notebook from '../../src/notes/standard.js';
+  
+  export default {
+
+    methods: {
+      run: function( ref, notebook ){
+        let elem = this.$refs[ref];
+        Runtime.load( notebook, Inspector['into']( elem ) ); } },
+
+    mounted: function () {
+      //console.log( 'Stand.mounted()', this.$refs );
+      this.run( 'Stand', Notebook ) }
+      
+  }
 </script>
 
 <style lang="less">
+  
   .stand { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;
     display:grid; justify-items:center; align-items:center; text-align:center;
-    background-color:black; color:wheat; }
+    background-color:black; color:wheat; overflow:scroll; }
+  
 </style>

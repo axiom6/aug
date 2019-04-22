@@ -6153,279 +6153,35 @@ __vue_render__$g._withStripped = true;
   );
 
 //
-//
-//
-//
-//
-//
-//
-//
-//
+/*import Stand from '../note/Stand.vue';
+  import Embed from '../note/Embed.vue';
+  import Maths from '../note/Maths.vue';
+  import Ganja from '../note/Ganja.vue';*/
+  
+  let Note = {
+    
+    components:{ 'n-tabs':Tabs$1 },
 
-var script$j = {};
+    data() {
+      return { comp:'Note', tab:'Standard', pages:[
+          { title:'Standard', short:'Stand' },
+          { title:'Embed',    short:'Embed' },
+          { title:'Maths',    short:'Maths' },
+          { title:'Ganja',    short:'Ganja' },
+        ] } },
+    
+    methods: {
+      
+      name: function(page) {
+        return this.comp+page.short; } },
+    
+  };
 
 /* script */
-const __vue_script__$k = script$j;
+const __vue_script__$k = Note;
 
 /* template */
 var __vue_render__$h = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _vm._m(0)
-};
-var __vue_staticRenderFns__$h = [
-  function() {
-    var _vm = this;
-    var _h = _vm.$createElement;
-    var _c = _vm._self._c || _h;
-    return _c("div", { staticClass: "stand" }, [
-      _c("div", [_c("h1", [_vm._v("Standard Notebook")])])
-    ])
-  }
-];
-__vue_render__$h._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$k = function (inject) {
-    if (!inject) return
-    inject("data-v-56b92a7a_0", { source: ".stand {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n", map: {"version":3,"sources":["Stand.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,uBAAuB;EACvB,YAAY;AACd","file":"Stand.vue","sourcesContent":[".stand {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$k = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$k = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$k = false;
-  /* style inject SSR */
-  
-
-  
-  var Stand = normalizeComponent_1(
-    { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
-    __vue_inject_styles__$k,
-    __vue_script__$k,
-    __vue_scope_id__$k,
-    __vue_is_functional_template__$k,
-    __vue_module_identifier__$k,
-    browser,
-    undefined
-  );
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var script$k = {};
-
-/* script */
-const __vue_script__$l = script$k;
-
-/* template */
-var __vue_render__$i = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _vm._m(0)
-};
-var __vue_staticRenderFns__$i = [
-  function() {
-    var _vm = this;
-    var _h = _vm.$createElement;
-    var _c = _vm._self._c || _h;
-    return _c("div", { staticClass: "embed" }, [
-      _c("div", [_c("h1", [_vm._v("Embed Notebook")])])
-    ])
-  }
-];
-__vue_render__$i._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$l = function (inject) {
-    if (!inject) return
-    inject("data-v-4b2e606b_0", { source: ".embed {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n", map: {"version":3,"sources":["Embed.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,uBAAuB;EACvB,YAAY;AACd","file":"Embed.vue","sourcesContent":[".embed {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$l = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$l = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$l = false;
-  /* style inject SSR */
-  
-
-  
-  var Embed = normalizeComponent_1(
-    { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
-    __vue_inject_styles__$l,
-    __vue_script__$l,
-    __vue_scope_id__$l,
-    __vue_is_functional_template__$l,
-    __vue_module_identifier__$l,
-    browser,
-    undefined
-  );
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var script$l = {};
-
-/* script */
-const __vue_script__$m = script$l;
-
-/* template */
-var __vue_render__$j = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _vm._m(0)
-};
-var __vue_staticRenderFns__$j = [
-  function() {
-    var _vm = this;
-    var _h = _vm.$createElement;
-    var _c = _vm._self._c || _h;
-    return _c("div", { staticClass: "maths" }, [
-      _c("div", [_c("h1", [_vm._v("Maths Notebook")])])
-    ])
-  }
-];
-__vue_render__$j._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$m = function (inject) {
-    if (!inject) return
-    inject("data-v-6b0afa87_0", { source: ".maths {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n", map: {"version":3,"sources":["Maths.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,uBAAuB;EACvB,YAAY;AACd","file":"Maths.vue","sourcesContent":[".maths {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$m = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$m = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$m = false;
-  /* style inject SSR */
-  
-
-  
-  var Maths = normalizeComponent_1(
-    { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
-    __vue_inject_styles__$m,
-    __vue_script__$m,
-    __vue_scope_id__$m,
-    __vue_is_functional_template__$m,
-    __vue_module_identifier__$m,
-    browser,
-    undefined
-  );
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-var script$m = {};
-
-/* script */
-const __vue_script__$n = script$m;
-
-/* template */
-var __vue_render__$k = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _vm._m(0)
-};
-var __vue_staticRenderFns__$k = [
-  function() {
-    var _vm = this;
-    var _h = _vm.$createElement;
-    var _c = _vm._self._c || _h;
-    return _c("div", { staticClass: "ganja" }, [
-      _c("div", [_c("h1", [_vm._v("Ganja Notebook")])])
-    ])
-  }
-];
-__vue_render__$k._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$n = function (inject) {
-    if (!inject) return
-    inject("data-v-2f100547_0", { source: ".ganja {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n", map: {"version":3,"sources":["Ganja.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,uBAAuB;EACvB,YAAY;AACd","file":"Ganja.vue","sourcesContent":[".ganja {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$n = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$n = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$n = false;
-  /* style inject SSR */
-  
-
-  
-  var Ganja = normalizeComponent_1(
-    { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
-    __vue_inject_styles__$n,
-    __vue_script__$n,
-    __vue_scope_id__$n,
-    __vue_is_functional_template__$n,
-    __vue_module_identifier__$n,
-    browser,
-    undefined
-  );
-
-//
-
-let Note = {
-  
-  components:{ 'n-tabs':Tabs$1 },
-
-  data() {
-    return { comp:'Note', tab:'Standard', pages:[
-        { title:'Standard', short:'Stand' },
-        { title:'Embed',    short:'Embed' },
-        { title:'Maths',    short:'Maths' },
-        { title:'Ganja',    short:'Ganja' },
-      ] } },
-  
-  methods: {
-    name: function(page) {
-      return this.comp+page.short; } }
-};
-
-
-Note.Stand = Stand;
-Note.Embed = Embed;
-Note.Maths = Maths;
-Note.Ganja = Ganja;
-
-/* script */
-const __vue_script__$o = Note;
-
-/* template */
-var __vue_render__$l = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -6444,32 +6200,32 @@ var __vue_render__$l = function() {
     2
   )
 };
-var __vue_staticRenderFns__$l = [];
-__vue_render__$l._withStripped = true;
+var __vue_staticRenderFns__$h = [];
+__vue_render__$h._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$o = function (inject) {
+  const __vue_inject_styles__$k = function (inject) {
     if (!inject) return
-    inject("data-v-587a3c8e_0", { source: ".note {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n", map: {"version":3,"sources":["Note.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX","file":"Note.vue","sourcesContent":[".note {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n"]}, media: undefined });
+    inject("data-v-84ae88ac_0", { source: ".note {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n", map: {"version":3,"sources":["Note.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX","file":"Note.vue","sourcesContent":[".note {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$o = undefined;
+  const __vue_scope_id__$k = undefined;
   /* module identifier */
-  const __vue_module_identifier__$o = undefined;
+  const __vue_module_identifier__$k = undefined;
   /* functional template */
-  const __vue_is_functional_template__$o = false;
+  const __vue_is_functional_template__$k = false;
   /* style inject SSR */
   
 
   
   var Note$1 = normalizeComponent_1(
-    { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
-    __vue_inject_styles__$o,
-    __vue_script__$o,
-    __vue_scope_id__$o,
-    __vue_is_functional_template__$o,
-    __vue_module_identifier__$o,
+    { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
+    __vue_inject_styles__$k,
+    __vue_script__$k,
+    __vue_scope_id__$k,
+    __vue_is_functional_template__$k,
+    __vue_module_identifier__$k,
     browser,
     undefined
   );
@@ -6497,10 +6253,10 @@ __vue_render__$l._withStripped = true;
   Dash.Note = Note$1;
 
 /* script */
-const __vue_script__$p = Dash;
+const __vue_script__$l = Dash;
 
 /* template */
-var __vue_render__$m = function() {
+var __vue_render__$i = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -6529,32 +6285,32 @@ var __vue_render__$m = function() {
     1
   )
 };
-var __vue_staticRenderFns__$m = [];
-__vue_render__$m._withStripped = true;
+var __vue_staticRenderFns__$i = [];
+__vue_render__$i._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$p = function (inject) {
+  const __vue_inject_styles__$l = function (inject) {
     if (!inject) return
     inject("data-v-5e9909ef_0", { source: ".dash {\n  font-family: Roboto, sans-serif;\n  font-size: 1rem;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11vw 85vw 4vw;\n  grid-template-rows: 6vh 88vh 6vh;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n", map: {"version":3,"sources":["Dash.vue","/Users/ax/Documents/prj/aug/vue/dash/Dash.vue"],"names":[],"mappings":"AAAA;EACE,+BAA+B;EAC/B,eAAe;EACf,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,oCAAoC;EACpC,gCAAgC;EAChC,uEAAuE;AACzE;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;ACCf","file":"Dash.vue","sourcesContent":[".dash {\n  font-family: Roboto, sans-serif;\n  font-size: 1rem;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11vw 85vw 4vw;\n  grid-template-rows: 6vh 88vh 6vh;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n","\n<template>\n  <div class=\"dash\">\n    <d-logo id=\"logo\"></d-logo>\n    <d-navb id=\"navb\"></d-navb>\n    <d-find id=\"find\"></d-find>\n    <d-tocs id=\"tocs\"></d-tocs>\n    <d-view id=\"view\"></d-view>\n    <d-side id=\"side\"></d-side>\n    <d-pref id=\"pref\"></d-pref>\n    <d-foot id=\"foot\"></d-foot>\n    <d-trak id=\"trak\"></d-trak>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Logo from '../dash/Logo.vue';\n  import Navb from '../dash/Navb.vue';\n  import Find from '../dash/Find.vue';\n  import Tocs from '../dash/Tocs.vue';\n  import View from '../dash/View.vue';\n  import Side from '../dash/Side.vue';\n  import Pref from '../dash/Pref.vue';\n  import Foot from '../dash/Foot.vue';\n  import Trak from '../dash/Trak.vue';\n\n  \n  let Dash = {\n      name: 'dash',\n      components: {\n        'd-logo':Logo, 'd-navb':Navb, 'd-find':Find,\n        'd-tocs':Tocs, 'd-view':View, 'd-side':Side,\n        'd-pref':Pref, 'd-foot':Foot, 'd-trak':Trak } };\n\n  // Static imports for minimizing build steps in dev.\n  import Home from '../comp/Home.vue';\n  import Info from '../comp/Info.vue';\n  import Know from '../comp/Know.vue';\n  import Wise from '../comp/Wise.vue';\n  import Prac from '../page/Prac.vue';\n  import Conn from '../page/Conn.vue';\n  import Enli from '../page/Enli.vue';\n  import Data from '../page/Data.vue';\n  import Note from '../note/Note.vue';\n//import Cube from '../comp/Cube.vue';\n//import Wood from '../wood/Wood.vue';\n\n  Dash.Home = Home;\n  Dash.Info = Info;\n  Dash.Know = Know;\n  Dash.Wise = Wise;\n  Dash.Prac = Prac;\n  Dash.Conn = Conn;\n  Dash.Enli = Enli;\n  Dash.Data = Data;\n  Dash.Note = Note;\n//Dash.Cube = Cube;\n//Dash.Wood = Wood;\n \n  export default Dash;\n  \n</script>\n\n<style lang=\"less\">\n\n   .dash { font-family:Roboto, sans-serif; font-size:1rem;\n     position:absolute; left:0; top:0; right:0; bottom:0; display:grid;\n     grid-template-columns: 11vw 85vw 4vw;\n     grid-template-rows:     6vh 88vh 6vh;\n     grid-template-areas:\n       \"logo navb find\"\n       \"tocs view side\"\n       \"pref foot trak\";\n\n    #logo { grid-area:logo; justify-self:stretch; align-self:stretch; display:grid; }\n    #navb { grid-area:navb; justify-self:stretch; align-self:stretch; display:grid; }\n    #find { grid-area:find; justify-self:stretch; align-self:stretch; display:grid; }\n    #tocs { grid-area:tocs; justify-self:stretch; align-self:stretch; display:grid; }\n    #view { grid-area:view; justify-self:stretch; align-self:stretch; display:grid; }\n    #side { grid-area:side; justify-self:stretch; align-self:stretch; display:grid; }\n    #pref { grid-area:pref; justify-self:stretch; align-self:stretch; display:grid; }\n    #foot { grid-area:foot; justify-self:stretch; align-self:stretch; display:grid; }\n    #trak { grid-area:trak; justify-self:stretch; align-self:stretch; display:grid; } }\n  \n</style>\n\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$p = undefined;
+  const __vue_scope_id__$l = undefined;
   /* module identifier */
-  const __vue_module_identifier__$p = undefined;
+  const __vue_module_identifier__$l = undefined;
   /* functional template */
-  const __vue_is_functional_template__$p = false;
+  const __vue_is_functional_template__$l = false;
   /* style inject SSR */
   
 
   
   var Dash$1 = normalizeComponent_1(
-    { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
-    __vue_inject_styles__$p,
-    __vue_script__$p,
-    __vue_scope_id__$p,
-    __vue_is_functional_template__$p,
-    __vue_module_identifier__$p,
+    { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
+    __vue_inject_styles__$l,
+    __vue_script__$l,
+    __vue_scope_id__$l,
+    __vue_is_functional_template__$l,
+    __vue_module_identifier__$l,
     browser,
     undefined
   );
