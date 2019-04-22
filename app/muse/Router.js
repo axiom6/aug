@@ -26,10 +26,10 @@ export default new Router( { // Static Import for quich dev cycles
       { path:'enli',  name:'WiseEnli',  components:{ WiseEnli: Dash.Enli  } },
       { path:'data',  name:'WiseData',  components:{ WiseData: Dash.Data  } } ] },
     { path: '/note',  name:'Note',      components:{ Note:     Dash.Note  },redirect:{ name:"NoteStand"}, children: [
-      { path:'stand', name:'NoteStand', components:{ NoteStand:lazy('src/note/Stand') } },
-      { path:'embed', name:'NoteEmbed', components:{ NoteEmbed:lazy('src/note/Embed') } },
-      { path:'maths', name:'NoteMaths', components:{ NoteMaths:lazy('src/note/Maths') } },
-      { path:'ganja', name:'NoteGanja', components:{ NoteGanja:lazy('src/note/Ganja') } } ] },
-    { path:'/cube',   name:'Cube',      components:{ Cube:     lazy('vue/comp/Cube' ) } },
+      { path:'stand', name:'NoteStand', components:{ NoteStand:lazy('pub/note/Stand') } },
+      { path:'embed', name:'NoteEmbed', components:{ NoteEmbed:lazy('pub/note/Embed') } },
+      { path:'maths', name:'NoteMaths', components:{ NoteMaths:lazy('pub/note/Maths') } },
+      { path:'ganja', name:'NoteGanja', components:{ NoteGanja:lazy('pub/note/Ganja') } } ] },
+    { path:'/cube',   name:'Cube',      components:{ Cube:     lazy('pub/cube/Cube' ) } },
     { path:'/wood',   name:'Wood',      components:{ Wood:     lazy('ani/wood/Wood' ) } }
     ] } )

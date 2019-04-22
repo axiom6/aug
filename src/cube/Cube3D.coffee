@@ -5,8 +5,6 @@ import * as THREE from '../../lib/three/three.module.js'
 
 class Cube3D
 
-  @matrix   = new THREE.Matrix4()
-
   constructor:( @plane, @row, @col, @title, @xyz, @whd, @hsv, @opacity, @font ) ->
     box = new THREE.BoxBufferGeometry()
     box.name = @title
@@ -50,5 +48,6 @@ class Cube3D
 #mat = new THREE.MeshPhongMaterial( { color:col, opacity:@opacity, transparent:true, side:THREE.BackSide, blemding:THREE.AdditiveBlending } )
 #mat = new THREE.MeshBasicMaterial( { color:col, opacity:@opacity, transparent:true } ) # blemding:THREE.AdditiveBlending
 
+Cube3D.matrix = new THREE.Matrix4()
 
 export default Cube3D

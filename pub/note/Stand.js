@@ -1,4 +1,4 @@
-import { Runtime, Inspector } from 'https://unpkg.com/@observablehq/notebook-runtime@1?module';
+import { Inspector, Runtime } from 'https://unpkg.com/@observablehq/notebook-runtime@1?module';
 
 // URL: https://observablehq.com/@axiom6/standard-library
 // Title: Standard Library
@@ -391,9 +391,9 @@ const notebook = {
 var script = {
 
   methods: {
-    run: function( ref, notebook ){
+    run: function( ref, notebook$$1 ){
       let elem = this.$refs[ref];
-      Runtime.load( notebook, Inspector['into']( elem ) ); } },
+      Runtime.load( notebook$$1, Inspector['into']( elem ) ); } },
 
   mounted: function () {
     //console.log( 'Stand.mounted()', this.$refs );
@@ -552,7 +552,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-6a232839_0", { source: ".stand {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n  overflow: scroll;\n}\n", map: {"version":3,"sources":["Stand.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,uBAAuB;EACvB,YAAY;EACZ,gBAAgB;AAClB","file":"Stand.vue","sourcesContent":[".stand {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n  overflow: scroll;\n}\n"]}, media: undefined });
+    inject("data-v-31927c6d_0", { source: ".stand {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n  overflow: scroll;\n}\n", map: {"version":3,"sources":["Stand.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,uBAAuB;EACvB,YAAY;EACZ,gBAAgB;AAClB","file":"Stand.vue","sourcesContent":[".stand {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n  overflow: scroll;\n}\n"]}, media: undefined });
 
   };
   /* scoped */

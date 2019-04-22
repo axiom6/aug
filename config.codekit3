@@ -367,6 +367,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/app/build/rollup.note.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/build/rollup.note-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/app/build/rollup.wood.js": {
 		"bF": 0,
 		"ft": 64,
@@ -1451,28 +1462,6 @@
 		"oT": 1,
 		"q": 100
 		},
-	"/css/img/firewatch_02.jpg": {
-		"ft": 16384,
-		"iS": 329830,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/css/img/firewatch_02.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/css/img/firewatch_03.jpg": {
-		"ft": 16384,
-		"iS": 162331,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/css/img/firewatch_03.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
 	"/css/muse/Info.less": {
 		"aP": 0,
 		"bl": 0,
@@ -1794,6 +1783,14 @@
 		"oAP": "/LICENSE",
 		"oF": 0
 		},
+	"/muse.sh": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/muse.sh",
+		"oF": 0
+		},
 	"/node_modules": {
 		"ft": 65536,
 		"oA": 2,
@@ -1826,6 +1823,38 @@
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
+		},
+	"/node_modules/../vue/note/Embed.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/node_modules/../vue/note/Embed.vue",
+		"oF": 0
+		},
+	"/node_modules/../vue/note/Ganja.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/node_modules/../vue/note/Ganja.vue",
+		"oF": 0
+		},
+	"/node_modules/../vue/note/Maths.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/node_modules/../vue/note/Maths.vue",
+		"oF": 0
+		},
+	"/node_modules/../vue/note/Stand.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/node_modules/../vue/note/Stand.vue",
+		"oF": 0
 		},
 	"/node_modules/estree-walker/src/estree-walker.js": {
 		"bF": 0,
@@ -2038,6 +2067,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/cube/Cube.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/cube/Cube-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/cube/Cube3D.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2088,18 +2128,40 @@
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/note/embed-min.js",
+		"oAP": "/pub/note/Embed-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/note/standard.js": {
+	"/pub/note/Ganja.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/note/standard-min.js",
+		"oAP": "/pub/note/Ganja-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/note/Maths.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/note/Maths-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/note/Stand.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/note/Stand-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2432,24 +2494,35 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/note/embed.js": {
+	"/src/notebook/embed.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/src/note/embed-min.js",
+		"oAP": "/src/notebook/embed-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/note/standard.js": {
+	"/src/notebook/require.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/src/note/standard-min.js",
+		"oAP": "/src/notebook/require-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/notebook/standard.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/notebook/standard-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2594,17 +2667,6 @@
 		"oAP": "/pub/util/Vis.js",
 		"oF": 0,
 		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/comp/Cube.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/comp/Cube-min.js",
-		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},

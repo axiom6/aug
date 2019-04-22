@@ -1,7 +1,7 @@
 
 
 import {Inspector, Runtime} from 'https://unpkg.com/@observablehq/notebook-runtime@1?module'
-#mport notebook from '../../html/download/standard.js';
+#mport notebook from '../../src/notebook/standard.js';
 
 class Run
 

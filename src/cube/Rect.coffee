@@ -4,8 +4,6 @@ import * as THREE from '../../lib/three/three.module.js'
 
 class Rect
 
-  @matrix   = new THREE.Matrix4()
-
   constructor:( @plane, @row, @col, @title, @xyz, @wh, @hsv, @opacity, @font, @fontColor ) ->
     rec = new THREE.PlaneGeometry( @wh[0], @wh[1] )
     rec.translate(      @xyz[0], @xyz[1], @xyz[2] )
@@ -42,5 +40,7 @@ class Rect
 
   colorRgb:( rgb ) ->
     "rgb(#{Math.round(rgb[0]*255)}, #{Math.round(rgb[1]*255)}, #{Math.round(rgb[2]*255)})"
+
+Rect.matrix = new THREE.Matrix4()
 
 `export default Rect`

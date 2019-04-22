@@ -6,7 +6,7 @@
 <script type="module">
 
   import { Inspector, Runtime } from 'https://unpkg.com/@observablehq/notebook-runtime@1?module';
-  import Notebook from '../../src/notes/standard.js';
+  import Notebook from '../../src/notebook/standard.js';
   
   export default {
 
