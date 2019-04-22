@@ -42,6 +42,7 @@
   import Conn from '../page/Conn.vue';
   import Enli from '../page/Enli.vue';
   import Data from '../page/Data.vue';
+  import Note from '../note/Note.vue';
 //import Cube from '../comp/Cube.vue';
 //import Wood from '../wood/Wood.vue';
 
@@ -53,6 +54,7 @@
   Dash.Conn = Conn;
   Dash.Enli = Enli;
   Dash.Data = Data;
+  Dash.Note = Note;
 //Dash.Cube = Cube;
 //Dash.Wood = Wood;
  

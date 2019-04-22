@@ -21,7 +21,7 @@
     // props: { comp:{ type:String, default:'None' } },
 
     data() {
-      return { prac:'All', disp:'All', tab:'Connections',
+      return { comp:'None', prac:'All', disp:'All', tab:'Connections',
                build:{}, connects:{}, practices:{} }; },
 
     methods: {
@@ -49,6 +49,8 @@
       size: function(prac) {
         let elem = this.$refs[prac][0]
         let sz   = {}
+        if( typeof(this.$refs['Conn'])==='undefined' ) {
+          console.log( 'Conn.size() $refs[Conn] undefined', this.$refs ) }
         sz.compWidth  = this.$refs['Conn']['clientWidth' ];
         sz.compHeight = this.$refs['Conn']['clientHeight'];
         sz.elemWidth  = elem['clientWidth' ];

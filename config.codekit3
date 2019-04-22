@@ -570,16 +570,51 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/app/muse/Routes.js": {
+	"/app/obs/embed.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/app/obs/embed.html",
+		"oF": 0
+		},
+	"/app/obs/Run.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/app/obs/Run.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/obs/run.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/app/obs/run.html",
+		"oF": 0
+		},
+	"/app/obs/Run.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/app/muse/Routes-min.js",
+		"oAP": "/app/obs/Run-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"/app/obs/std.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/app/obs/std.html",
+		"oF": 0
 		},
 	"/aug.iml": {
 		"cB": 0,
@@ -1472,6 +1507,87 @@
 		"sI": 0,
 		"sU": 0
 		},
+	"/css/obs/app.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/css/obs/app-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/css/obs/app.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/css/obs/app.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/css/obs/inspector.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/css/obs/inspector-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/css/obs/inspector.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/css/obs/inspector.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/css/obs/obs.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/css/obs/obs-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/css/obs/obs.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/css/obs/obs.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
 	"/lib/d3/d3-sankey.js": {
 		"bF": 0,
 		"ft": 64,
@@ -1545,6 +1661,28 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/lib/jquery/jquery-3.3.1-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/lib/math/ganja.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/lib/math/ganja-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/lib/math/math.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/lib/math/math-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -1677,6 +1815,17 @@
 		"oA": 1,
 		"oAP": "/node_modules/../ani/wood/Wood.vue",
 		"oF": 0
+		},
+	"/node_modules/../app/obs/Run.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/node_modules/../app/obs/Run.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
 		},
 	"/node_modules/estree-walker/src/estree-walker.js": {
 		"bF": 0,
@@ -1929,6 +2078,28 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/cube/Rect-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/note/embed.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/note/embed-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/note/standard.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/note/standard-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2261,6 +2432,28 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/src/note/embed.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/note/embed-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/note/standard.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/note/standard-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/src/store/Fire.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -2581,6 +2774,54 @@
 		"oAP": "/vue/maps/leaflet/Leaf.vue",
 		"oF": 0
 		},
+	"/vue/note/Embed.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/note/Embed.vue",
+		"oF": 0
+		},
+	"/vue/note/Ganja.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/note/Ganja.vue",
+		"oF": 0
+		},
+	"/vue/note/Maths.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/note/Maths.vue",
+		"oF": 0
+		},
+	"/vue/note/Note.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/note/Note.vue",
+		"oF": 0
+		},
+	"/vue/note/Stand.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/note/Stand.vue",
+		"oF": 0
+		},
+	"/vue/note/Tabs.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/note/Tabs.vue",
+		"oF": 0
+		},
 	"/vue/page/Conn.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -2816,6 +3057,17 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/zzz/vuex/store/Store-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/zzzz.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/zzzz-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0

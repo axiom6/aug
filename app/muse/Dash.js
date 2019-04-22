@@ -449,6 +449,7 @@ let Tocs = {
       komps:{ Info:{ name:'Info', comp:'Info', pracs:{}, ikw:true,  icon:"fas fa-th"          },
               Know:{ name:'Know', comp:'Know', pracs:{}, ikw:true,  icon:"fas fa-university"  },
               Wise:{ name:'Wise', comp:'Wise', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor" },
+              Note:{ name:'Note', comp:'Note', pracs:{}, ikw:false, icon:"fab fa-leanpub"     },
               Cube:{ name:'Cube', comp:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes"       },
               Wood:{ name:'Wood', comp:'Wood', pracs:{}, ikw:false, icon:"fas fa-tree"        } } } },
   
@@ -610,7 +611,7 @@ __vue_render__$3._withStripped = true;
   /* style */
   const __vue_inject_styles__$3 = function (inject) {
     if (!inject) return
-    inject("data-v-091dd926_0", { source: "@import '../../css/fontawesome/init.css';\n.tocs {\n  background-color: black;\n  font-size: 3vh;\n}\n.tocs ul {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  align-self: start;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25em;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li i {\n  margin-right: 0.4em;\n}\n.tocs ul li a {\n  color: wheat;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 0.8em;\n  font-weight: bold;\n  padding: 0;\n  margin: 0;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li i {\n  margin-right: 0.3em;\n}\n.tocs ul li ul li ul {\n  font-size: 0.8em;\n  padding: 0;\n  margin: 0 0 0 0.2em;\n}\n.tocs ul li ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li ul li i {\n  margin-right: 0.25em;\n}\n.tocs ul li ul li ul li:hover {\n  background-color: black!important;\n  color: white!important;\n}\n", map: {"version":3,"sources":["Tocs.vue"],"names":[],"mappings":"AAAA,wCAAwC;AACxC;EACE,uBAAuB;EACvB,cAAc;AAChB;AACA;EACE,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;EACjB,aAAa;AACf;AACA;EACE,sBAAsB;EACtB,oBAAoB;EACpB,iBAAiB;EACjB,4BAA4B;EAC5B,+BAA+B;AACjC;AACA;EACE,mBAAmB;AACrB;AACA;EACE,YAAY;EACZ,qBAAqB;AACvB;AACA;EACE,gBAAgB;EAChB,iBAAiB;EACjB,UAAU;EACV,SAAS;AACX;AACA;EACE,4BAA4B;EAC5B,YAAY;EACZ,+BAA+B;AACjC;AACA;EACE,mBAAmB;AACrB;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,mBAAmB;AACrB;AACA;EACE,4BAA4B;EAC5B,YAAY;EACZ,+BAA+B;AACjC;AACA;EACE,oBAAoB;AACtB;AACA;EACE,iCAAiC;EACjC,sBAAsB;AACxB","file":"Tocs.vue","sourcesContent":["@import '../../css/fontawesome/init.css';\n.tocs {\n  background-color: black;\n  font-size: 3vh;\n}\n.tocs ul {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  align-self: start;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25em;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li i {\n  margin-right: 0.4em;\n}\n.tocs ul li a {\n  color: wheat;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 0.8em;\n  font-weight: bold;\n  padding: 0;\n  margin: 0;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li i {\n  margin-right: 0.3em;\n}\n.tocs ul li ul li ul {\n  font-size: 0.8em;\n  padding: 0;\n  margin: 0 0 0 0.2em;\n}\n.tocs ul li ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li ul li i {\n  margin-right: 0.25em;\n}\n.tocs ul li ul li ul li:hover {\n  background-color: black!important;\n  color: white!important;\n}\n"]}, media: undefined });
+    inject("data-v-28e3dbaa_0", { source: "@import '../../css/fontawesome/init.css';\n.tocs {\n  background-color: black;\n  font-size: 3vh;\n}\n.tocs ul {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  align-self: start;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25em;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li i {\n  margin-right: 0.4em;\n}\n.tocs ul li a {\n  color: wheat;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 0.8em;\n  font-weight: bold;\n  padding: 0;\n  margin: 0;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li i {\n  margin-right: 0.3em;\n}\n.tocs ul li ul li ul {\n  font-size: 0.8em;\n  padding: 0;\n  margin: 0 0 0 0.2em;\n}\n.tocs ul li ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li ul li i {\n  margin-right: 0.25em;\n}\n.tocs ul li ul li ul li:hover {\n  background-color: black!important;\n  color: white!important;\n}\n", map: {"version":3,"sources":["Tocs.vue"],"names":[],"mappings":"AAAA,wCAAwC;AACxC;EACE,uBAAuB;EACvB,cAAc;AAChB;AACA;EACE,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;EACjB,aAAa;AACf;AACA;EACE,sBAAsB;EACtB,oBAAoB;EACpB,iBAAiB;EACjB,4BAA4B;EAC5B,+BAA+B;AACjC;AACA;EACE,mBAAmB;AACrB;AACA;EACE,YAAY;EACZ,qBAAqB;AACvB;AACA;EACE,gBAAgB;EAChB,iBAAiB;EACjB,UAAU;EACV,SAAS;AACX;AACA;EACE,4BAA4B;EAC5B,YAAY;EACZ,+BAA+B;AACjC;AACA;EACE,mBAAmB;AACrB;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,mBAAmB;AACrB;AACA;EACE,4BAA4B;EAC5B,YAAY;EACZ,+BAA+B;AACjC;AACA;EACE,oBAAoB;AACtB;AACA;EACE,iCAAiC;EACjC,sBAAsB;AACxB","file":"Tocs.vue","sourcesContent":["@import '../../css/fontawesome/init.css';\n.tocs {\n  background-color: black;\n  font-size: 3vh;\n}\n.tocs ul {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  align-self: start;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25em;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li i {\n  margin-right: 0.4em;\n}\n.tocs ul li a {\n  color: wheat;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 0.8em;\n  font-weight: bold;\n  padding: 0;\n  margin: 0;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li i {\n  margin-right: 0.3em;\n}\n.tocs ul li ul li ul {\n  font-size: 0.8em;\n  padding: 0;\n  margin: 0 0 0 0.2em;\n}\n.tocs ul li ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li ul li i {\n  margin-right: 0.25em;\n}\n.tocs ul li ul li ul li:hover {\n  background-color: black!important;\n  color: white!important;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -634,6 +635,7 @@ __vue_render__$3._withStripped = true;
     undefined
   );
 
+//
 //
 //
 //
@@ -672,6 +674,8 @@ var __vue_render__$4 = function() {
       _c("router-view", { attrs: { name: "Know" } }),
       _vm._v(" "),
       _c("router-view", { attrs: { name: "Wise" } }),
+      _vm._v(" "),
+      _c("router-view", { attrs: { name: "Note" } }),
       _vm._v(" "),
       _c("router-view", { attrs: { name: "Cube" } }),
       _vm._v(" "),
@@ -5770,7 +5774,7 @@ var script$f = {
   // props: { comp:{ type:String, default:'None' } },
 
   data() {
-    return { prac:'All', disp:'All', tab:'Connections',
+    return { comp:'None', prac:'All', disp:'All', tab:'Connections',
              build:{}, connects:{}, practices:{} }; },
 
   methods: {
@@ -5798,6 +5802,8 @@ var script$f = {
     size: function(prac) {
       let elem = this.$refs[prac][0];
       let sz   = {};
+      if( typeof(this.$refs['Conn'])==='undefined' ) {
+        console.log( 'Conn.size() $refs[Conn] undefined', this.$refs ); }
       sz.compWidth  = this.$refs['Conn']['clientWidth' ];
       sz.compHeight = this.$refs['Conn']['clientHeight'];
       sz.elemWidth  = elem['clientWidth' ];
@@ -5901,7 +5907,7 @@ __vue_render__$d._withStripped = true;
   /* style */
   const __vue_inject_styles__$g = function (inject) {
     if (!inject) return
-    inject("data-v-bb459992_0", { source: ".conn {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  grid-template-columns: 33.3% 33.3% 33.4%;\n  grid-template-rows: 7% 31% 31% 31%;\n  grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 99%;\n  height: 98%;\n  font-size: 1em;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n", map: {"version":3,"sources":["Conn.vue","/Users/ax/Documents/prj/aug/vue/page/Conn.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,wCAAwC;EACxC,kCAAkC;EAClC,iFAAiF;EACjF,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,eAAe;EACf,eAAe;EACf,YAAY;EACZ,gBAAgB;EAChB,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,mBAAmB;EACnB,UAAU;ECCZ,WAAA;EACA,cAAA;EDCE,iBAAiB;ACCnB;AACA;EDCE,oBAAoB;ECCtB,kBAAA;EACA,kBAAA;ADCA;ACCA;EACA,kBAAA;EDCE,QAAQ;ECCV,OAAA;EACA,SAAA;EACA,UAAA;EACA,aAAA;AACA;AACA;EACA,cAAA;EDCE,WAAW;ECCb,YAAA;EACA,oBAAA;EDCE,kBAAkB;ECCpB,aAAA;EACA,oBAAA;AACA;AACA;EACA,mBAAA;AACA;AACA;EACA,iBAAA;AACA;AACA;EACA,gBAAA;ADCA;AACA;EACE,gBAAgB;AAClB;AACA;EACE,cAAc;EACd,cAAc;AAChB;AACA;EACE,iBAAiB;AACnB","file":"Conn.vue","sourcesContent":[".conn {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  grid-template-columns: 33.3% 33.3% 33.4%;\n  grid-template-rows: 7% 31% 31% 31%;\n  grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 99%;\n  height: 98%;\n  font-size: 1em;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n","\n<template>\n  <div id=\"Conn\" class=\"conn\" ref=\"Conn\">\n    <template v-for=\"prac in practices\">\n      <div v-show=\"isPrac(prac.name)\" ref=\"Prac\" :class=\"pracDir(prac.dir)\" :key=\"prac.name\">\n        <div :id=\"prac.name\" :ref=\"prac.name\" class=\"prac\"\n          @click=\"pubPrac(prac.name)\" style=\"background-color:rgba(97,56,77,1.0)\">\n        </div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Build   from '../../pub/cube/Build.js'\n  import Connect from '../../pub/conn/Connect.js'\n\n  export default {\n\n    // props: { comp:{ type:String, default:'None' } },\n\n    data() {\n      return { prac:'All', disp:'All', tab:'Connections',\n               build:{}, connects:{}, practices:{} }; },\n\n    methods: {\n      isPrac: function (prac) {\n        return this.prac===prac || this.prac==='All' },\n      onPrac: function (prac) {\n        if( prac==='All' && this.prac!=='All' ) {\n          this.connects[this.prac].layout( this.size(this.prac), 'Restore'); }\n        if( prac!=='All' && typeof(this.connects[prac])==='object' ) { // Expand prac to Comp size\n          this.connects[prac].layout( this.size(prac), 'Expand'); }\n        this.prac = prac; this.disp='All';  },\n      onDisp: function (prac,disp) {\n        this.prac = prac; this.disp=disp; },\n      onTabs: function (tab) {\n        if( tab==='Connections' && this.tab==='Connections'  ) {\n          this.onPrac('All'); }\n        this.tab = tab; },\n      pracDir: function(dir) {\n        return this.prac==='All' ? dir : 'fullPracDir'; },\n      pubPrac: function (prac) {\n        this.publish( this.comp, { prac:prac, disp:'All' } ); },\n      style: function( hsv ) {\n        return { backgroundColor:this.toRgbaHsv(hsv) }; },\n      \n      size: function(prac) {\n        let elem = this.$refs[prac][0]\n        let sz   = {}\n        sz.compWidth  = this.$refs['Conn']['clientWidth' ];\n        sz.compHeight = this.$refs['Conn']['clientHeight'];\n        sz.elemWidth  = elem['clientWidth' ];\n        sz.elemHeight = elem['clientHeight'];\n        // console.log( 'Conn.size()', prac, sz );\n        return sz;\n      },\n      \n      createConnects: function( stream, build ) {\n        for( let key of this.pkeys ) {\n            let prac = this.practices[key];\n            if( prac.row !== 'Dim' ) {\n              let elem = this.$refs[key][0]\n              this.connects[prac.name] = new Connect( stream, build, prac, elem, this.size(key) ); } }\n        return this.connects; },\n      \n      resize: function() {\n        for( let key of this.pkeys ) {\n          let size  = this.size(key);\n          let level = key!==this.prac ? 'Resize' : 'Expand';\n          if( level==='Expand') { this.connects[key].lastSize(size) }\n          this.connects[key].layout( size, level ); } }\n    },\n\n    beforeMount: function() {\n      this.comp = this.$route.name.substring(0,4); },\n      //console.log( 'Conn.beforeMount()', this.$route.name, this.comp );\n\n    mounted: function () {\n      this.build     = new Build(  this.batch() );\n      this.practices = this.conns( this.comp );\n      this.pkeys     = this.keys(  this.practices )\n      this.subscribe(  this.comp,  this.comp+'.vue', (obj) => {\n        if( obj.disp==='All' ) {   this.onPrac(obj.prac); }\n        else                   {   this.onDisp(obj.prac,obj.disp); } } );\n      this.subscribe(  \"Tabs\",     this.comp+'.vue', (obj) => {\n        this.onTabs(obj); } );\n      this.$nextTick( function() {\n        this.connects  = this.createConnects( this.stream(), this.build ); } ) },\n    \n    created: function () {\n      window.addEventListener(   'resize', this.resize ) },\n    destroyed: function () {\n      window.removeEventListener('resize', this.resize ) }\n   }\n\n</script>\n\n<style lang=\"less\">\n  .grid5x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:7% 12% 27% 27% 27%;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid4x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:7% 31% 31% 31%;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid4x3() { display:grid; grid-template-columns:33.3% 33.3% 33.4%; grid-template-rows:7% 31% 31% 31%;\n    grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\"; }\n  \n  .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n    justify-items:center; align-items:center; }\n  \n  .conn { background-color:black; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;\n    .grid4x3(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid\n    .tabs{ grid-area:tabs; display:inline; color:wheat; font-size:1.2em;\n      justify-self:start; align-self:center; text-align:left; }\n    .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }\n    .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }\n    .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }\n    \n    .prac { display:grid; border-radius:36px; width:99%; height:98%; font-size:1em; font-weight:bold;\n      .name { justify-self:center; align-self:center; text-align:center; } }\n  \n    // Placed one level above .prac at the 9 Practices Grid Direction\n    .fullPracDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;\n      .prac { font-size:1em; width:100%; height:100%;\n        justify-self:center; align-self:center; display:grid; border-radius:0.5em;\n        div {     padding-bottom:2em;\n          .disp { padding-bottom:0;\n            i     { font-size:1.6em; }\n            .name { font-size:1.6em; }\n            .desc { font-size:1.0em; display:block; } } }  // Turns on .disp .desc\n        .area { padding-bottom:0; } } }\n  }\n</style>"]}, media: undefined });
+    inject("data-v-5e1d50d9_0", { source: ".conn {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  grid-template-columns: 33.3% 33.3% 33.4%;\n  grid-template-rows: 7% 31% 31% 31%;\n  grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 99%;\n  height: 98%;\n  font-size: 1em;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n", map: {"version":3,"sources":["Conn.vue","/Users/ax/Documents/prj/aug/vue/page/Conn.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,wCAAwC;EACxC,kCAAkC;EAClC,iFAAiF;EACjF,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,eAAe;EACf,eAAe;EACf,YAAY;EACZ,gBAAgB;EAChB,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,cAAc;ECChB,iBAAA;AACA;ADCA;ECCA,oBAAA;EACA,kBAAA;EDCE,kBAAkB;ACCpB;AACA;EDCE,kBAAkB;ECCpB,QAAA;EACA,OAAA;EDCE,SAAS;ECCX,UAAA;EACA,aAAA;AACA;AACA;EACA,cAAA;EACA,WAAA;EACA,YAAA;EDCE,oBAAoB;ECCtB,kBAAA;EACA,aAAA;EDCE,oBAAoB;ACCtB;AACA;EACA,mBAAA;AACA;AACA;EACA,iBAAA;AACA;AACA;EACA,gBAAA;AACA;AACA;EDCE,gBAAgB;AAClB;AACA;EACE,cAAc;EACd,cAAc;AAChB;AACA;EACE,iBAAiB;AACnB","file":"Conn.vue","sourcesContent":[".conn {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  grid-template-columns: 33.3% 33.3% 33.4%;\n  grid-template-rows: 7% 31% 31% 31%;\n  grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 99%;\n  height: 98%;\n  font-size: 1em;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n","\n<template>\n  <div id=\"Conn\" class=\"conn\" ref=\"Conn\">\n    <template v-for=\"prac in practices\">\n      <div v-show=\"isPrac(prac.name)\" ref=\"Prac\" :class=\"pracDir(prac.dir)\" :key=\"prac.name\">\n        <div :id=\"prac.name\" :ref=\"prac.name\" class=\"prac\"\n          @click=\"pubPrac(prac.name)\" style=\"background-color:rgba(97,56,77,1.0)\">\n        </div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Build   from '../../pub/cube/Build.js'\n  import Connect from '../../pub/conn/Connect.js'\n\n  export default {\n\n    // props: { comp:{ type:String, default:'None' } },\n\n    data() {\n      return { comp:'None', prac:'All', disp:'All', tab:'Connections',\n               build:{}, connects:{}, practices:{} }; },\n\n    methods: {\n      isPrac: function (prac) {\n        return this.prac===prac || this.prac==='All' },\n      onPrac: function (prac) {\n        if( prac==='All' && this.prac!=='All' ) {\n          this.connects[this.prac].layout( this.size(this.prac), 'Restore'); }\n        if( prac!=='All' && typeof(this.connects[prac])==='object' ) { // Expand prac to Comp size\n          this.connects[prac].layout( this.size(prac), 'Expand'); }\n        this.prac = prac; this.disp='All';  },\n      onDisp: function (prac,disp) {\n        this.prac = prac; this.disp=disp; },\n      onTabs: function (tab) {\n        if( tab==='Connections' && this.tab==='Connections'  ) {\n          this.onPrac('All'); }\n        this.tab = tab; },\n      pracDir: function(dir) {\n        return this.prac==='All' ? dir : 'fullPracDir'; },\n      pubPrac: function (prac) {\n        this.publish( this.comp, { prac:prac, disp:'All' } ); },\n      style: function( hsv ) {\n        return { backgroundColor:this.toRgbaHsv(hsv) }; },\n      \n      size: function(prac) {\n        let elem = this.$refs[prac][0]\n        let sz   = {}\n        if( typeof(this.$refs['Conn'])==='undefined' ) {\n          console.log( 'Conn.size() $refs[Conn] undefined', this.$refs ) }\n        sz.compWidth  = this.$refs['Conn']['clientWidth' ];\n        sz.compHeight = this.$refs['Conn']['clientHeight'];\n        sz.elemWidth  = elem['clientWidth' ];\n        sz.elemHeight = elem['clientHeight'];\n        // console.log( 'Conn.size()', prac, sz );\n        return sz;\n      },\n      \n      createConnects: function( stream, build ) {\n        for( let key of this.pkeys ) {\n            let prac = this.practices[key];\n            if( prac.row !== 'Dim' ) {\n              let elem = this.$refs[key][0]\n              this.connects[prac.name] = new Connect( stream, build, prac, elem, this.size(key) ); } }\n        return this.connects; },\n      \n      resize: function() {\n        for( let key of this.pkeys ) {\n          let size  = this.size(key);\n          let level = key!==this.prac ? 'Resize' : 'Expand';\n          if( level==='Expand') { this.connects[key].lastSize(size) }\n          this.connects[key].layout( size, level ); } }\n    },\n\n    beforeMount: function() {\n      this.comp = this.$route.name.substring(0,4); },\n      //console.log( 'Conn.beforeMount()', this.$route.name, this.comp );\n\n    mounted: function () {\n      this.build     = new Build(  this.batch() );\n      this.practices = this.conns( this.comp );\n      this.pkeys     = this.keys(  this.practices )\n      this.subscribe(  this.comp,  this.comp+'.vue', (obj) => {\n        if( obj.disp==='All' ) {   this.onPrac(obj.prac); }\n        else                   {   this.onDisp(obj.prac,obj.disp); } } );\n      this.subscribe(  \"Tabs\",     this.comp+'.vue', (obj) => {\n        this.onTabs(obj); } );\n      this.$nextTick( function() {\n        this.connects  = this.createConnects( this.stream(), this.build ); } ) },\n    \n    created: function () {\n      window.addEventListener(   'resize', this.resize ) },\n    destroyed: function () {\n      window.removeEventListener('resize', this.resize ) }\n   }\n\n</script>\n\n<style lang=\"less\">\n  .grid5x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:7% 12% 27% 27% 27%;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid4x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:7% 31% 31% 31%;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid4x3() { display:grid; grid-template-columns:33.3% 33.3% 33.4%; grid-template-rows:7% 31% 31% 31%;\n    grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\"; }\n  \n  .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n    justify-items:center; align-items:center; }\n  \n  .conn { background-color:black; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;\n    .grid4x3(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid\n    .tabs{ grid-area:tabs; display:inline; color:wheat; font-size:1.2em;\n      justify-self:start; align-self:center; text-align:left; }\n    .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }\n    .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }\n    .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }\n    \n    .prac { display:grid; border-radius:36px; width:99%; height:98%; font-size:1em; font-weight:bold;\n      .name { justify-self:center; align-self:center; text-align:center; } }\n  \n    // Placed one level above .prac at the 9 Practices Grid Direction\n    .fullPracDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;\n      .prac { font-size:1em; width:100%; height:100%;\n        justify-self:center; align-self:center; display:grid; border-radius:0.5em;\n        div {     padding-bottom:2em;\n          .disp { padding-bottom:0;\n            i     { font-size:1.6em; }\n            .name { font-size:1.6em; }\n            .desc { font-size:1.0em; display:block; } } }  // Turns on .disp .desc\n        .area { padding-bottom:0; } } }\n  }\n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -6048,6 +6054,427 @@ __vue_render__$f._withStripped = true;
   );
 
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+var script$i = {
+  
+  data() { return { tab:'Stand' } },
+
+  props: { comp:String, pages:Array },
+
+  methods: {
+    pubTab: function (tab) {
+      this.tab = tab;
+      this.publish( 'Tabs', tab ); },
+    classTab: function (tab) {
+      return this.tab===tab ? 'tab-active' : 'tab'; },
+    name: function(page) {
+      return this.comp+page.short; } },
+
+  mounted: function () {}
+  
+  };
+
+/* script */
+const __vue_script__$j = script$i;
+
+/* template */
+var __vue_render__$g = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { staticClass: "tabs" },
+    [
+      _vm._l(_vm.pages, function(page) {
+        return [
+          _c(
+            "div",
+            {
+              class: _vm.classTab(page.short),
+              on: {
+                click: function($event) {
+                  return _vm.pubTab(page.short)
+                }
+              }
+            },
+            [
+              _c("router-link", { attrs: { to: { name: _vm.name(page) } } }, [
+                _vm._v(_vm._s(page.title))
+              ])
+            ],
+            1
+          )
+        ]
+      })
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$g = [];
+__vue_render__$g._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$j = function (inject) {
+    if (!inject) return
+    inject("data-v-74870236_0", { source: ".tabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.tabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.tabs .tab a {\n  background-color: black;\n  color: wheat;\n  text-decoration: none;\n}\n.tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab:hover a {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab-active {\n  background-color: wheat;\n  color: black;\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.tabs .tab-active a {\n  background-color: black;\n  color: wheat;\n  text-decoration: none;\n}\n.tabs .tab-active a {\n  background-color: wheat;\n  color: black !important;\n  text-decoration: none;\n}\n", map: {"version":3,"sources":["Tabs.vue","/Users/ax/Documents/prj/aug/vue/note/Tabs.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,UAAU;EACV,uBAAuB;EACvB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;AAChC;AACA;EACE,uBAAuB;EACvB,YAAY;EACZ,qBAAqB;AACvB;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;EACZ,qBAAqB;EACrB,gBAAgB;ECClB,gCAAA;EACA,4BAAA;EACA,6BAAA;EACA,4BAAA;EACA,8BAAA;AACA;AACA;EACA,uBAAA;EACA,YAAA;EDCE,qBAAqB;AACvB;AACA;EACE,uBAAuB;EACvB,uBAAuB;EACvB,qBAAqB;AACvB","file":"Tabs.vue","sourcesContent":[".tabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.tabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.tabs .tab a {\n  background-color: black;\n  color: wheat;\n  text-decoration: none;\n}\n.tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab:hover a {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab-active {\n  background-color: wheat;\n  color: black;\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.tabs .tab-active a {\n  background-color: black;\n  color: wheat;\n  text-decoration: none;\n}\n.tabs .tab-active a {\n  background-color: wheat;\n  color: black !important;\n  text-decoration: none;\n}\n","\n<template>\n  <div class=\"tabs\">\n    <template v-for=\"page in pages\">\n      <div :class=\"classTab(page.short)\" @click=\"pubTab(page.short)\">\n        <router-link :to=\"{ name:name(page) }\">{{page.title}}</router-link>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n    \n    data() { return { tab:'Stand' } },\n\n    props: { comp:String, pages:Array },\n\n    methods: {\n      pubTab: function (tab) {\n        this.tab = tab;\n        this.publish( 'Tabs', tab ); },\n      classTab: function (tab) {\n        return this.tab===tab ? 'tab-active' : 'tab'; },\n      name: function(page) {\n        return this.comp+page.short; } },\n\n    mounted: function () {}\n    \n    }\n  \n</script>\n\n<style lang=\"less\">\n  \n  .tabs { position:absolute; left:0; top:0; width:100%; height:5%; background-color:black; font-size:1.5em;\n    .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;\n      border-radius:12px 12px 0 0; border-left: wheat solid thin;\n      border-top:wheat solid thin; border-right:wheat solid thin;\n      a         { background-color:black; color:wheat; text-decoration:none; } }\n    .tab:hover  { background-color:wheat; color:black;\n      a         { background-color:wheat; color:black } }\n    .tab-active { background-color:wheat; color:black; .tab();\n      a         { background-color:wheat; color:black !important; text-decoration:none; } } }\n  \n</style>"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$j = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$j = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$j = false;
+  /* style inject SSR */
+  
+
+  
+  var Tabs$1 = normalizeComponent_1(
+    { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
+    __vue_inject_styles__$j,
+    __vue_script__$j,
+    __vue_scope_id__$j,
+    __vue_is_functional_template__$j,
+    __vue_module_identifier__$j,
+    browser,
+    undefined
+  );
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var script$j = {};
+
+/* script */
+const __vue_script__$k = script$j;
+
+/* template */
+var __vue_render__$h = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _vm._m(0)
+};
+var __vue_staticRenderFns__$h = [
+  function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "stand" }, [
+      _c("div", [_c("h1", [_vm._v("Standard Notebook")])])
+    ])
+  }
+];
+__vue_render__$h._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$k = function (inject) {
+    if (!inject) return
+    inject("data-v-56b92a7a_0", { source: ".stand {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n", map: {"version":3,"sources":["Stand.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,uBAAuB;EACvB,YAAY;AACd","file":"Stand.vue","sourcesContent":[".stand {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$k = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$k = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$k = false;
+  /* style inject SSR */
+  
+
+  
+  var Stand = normalizeComponent_1(
+    { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
+    __vue_inject_styles__$k,
+    __vue_script__$k,
+    __vue_scope_id__$k,
+    __vue_is_functional_template__$k,
+    __vue_module_identifier__$k,
+    browser,
+    undefined
+  );
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var script$k = {};
+
+/* script */
+const __vue_script__$l = script$k;
+
+/* template */
+var __vue_render__$i = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _vm._m(0)
+};
+var __vue_staticRenderFns__$i = [
+  function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "embed" }, [
+      _c("div", [_c("h1", [_vm._v("Embed Notebook")])])
+    ])
+  }
+];
+__vue_render__$i._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$l = function (inject) {
+    if (!inject) return
+    inject("data-v-4b2e606b_0", { source: ".embed {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n", map: {"version":3,"sources":["Embed.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,uBAAuB;EACvB,YAAY;AACd","file":"Embed.vue","sourcesContent":[".embed {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$l = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$l = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$l = false;
+  /* style inject SSR */
+  
+
+  
+  var Embed = normalizeComponent_1(
+    { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
+    __vue_inject_styles__$l,
+    __vue_script__$l,
+    __vue_scope_id__$l,
+    __vue_is_functional_template__$l,
+    __vue_module_identifier__$l,
+    browser,
+    undefined
+  );
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var script$l = {};
+
+/* script */
+const __vue_script__$m = script$l;
+
+/* template */
+var __vue_render__$j = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _vm._m(0)
+};
+var __vue_staticRenderFns__$j = [
+  function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "maths" }, [
+      _c("div", [_c("h1", [_vm._v("Maths Notebook")])])
+    ])
+  }
+];
+__vue_render__$j._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$m = function (inject) {
+    if (!inject) return
+    inject("data-v-6b0afa87_0", { source: ".maths {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n", map: {"version":3,"sources":["Maths.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,uBAAuB;EACvB,YAAY;AACd","file":"Maths.vue","sourcesContent":[".maths {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$m = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$m = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$m = false;
+  /* style inject SSR */
+  
+
+  
+  var Maths = normalizeComponent_1(
+    { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
+    __vue_inject_styles__$m,
+    __vue_script__$m,
+    __vue_scope_id__$m,
+    __vue_is_functional_template__$m,
+    __vue_module_identifier__$m,
+    browser,
+    undefined
+  );
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var script$m = {};
+
+/* script */
+const __vue_script__$n = script$m;
+
+/* template */
+var __vue_render__$k = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _vm._m(0)
+};
+var __vue_staticRenderFns__$k = [
+  function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "ganja" }, [
+      _c("div", [_c("h1", [_vm._v("Ganja Notebook")])])
+    ])
+  }
+];
+__vue_render__$k._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$n = function (inject) {
+    if (!inject) return
+    inject("data-v-2f100547_0", { source: ".ganja {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n", map: {"version":3,"sources":["Ganja.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,uBAAuB;EACvB,YAAY;AACd","file":"Ganja.vue","sourcesContent":[".ganja {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$n = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$n = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$n = false;
+  /* style inject SSR */
+  
+
+  
+  var Ganja = normalizeComponent_1(
+    { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
+    __vue_inject_styles__$n,
+    __vue_script__$n,
+    __vue_scope_id__$n,
+    __vue_is_functional_template__$n,
+    __vue_module_identifier__$n,
+    browser,
+    undefined
+  );
+
+//
+
+let Note = {
+  
+  components:{ 'n-tabs':Tabs$1 },
+
+  data() {
+    return { comp:'Note', tab:'Standard', pages:[
+        { title:'Standard', short:'Stand' },
+        { title:'Embed',    short:'Embed' },
+        { title:'Maths',    short:'Maths' },
+        { title:'Ganja',    short:'Ganja' },
+      ] } },
+  
+  methods: {
+    name: function(page) {
+      return this.comp+page.short; } }
+};
+
+
+Note.Stand = Stand;
+Note.Embed = Embed;
+Note.Maths = Maths;
+Note.Ganja = Ganja;
+
+/* script */
+const __vue_script__$o = Note;
+
+/* template */
+var __vue_render__$l = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { staticClass: "note" },
+    [
+      _c("n-tabs", { attrs: { comp: _vm.comp, pages: _vm.pages } }),
+      _vm._v(" "),
+      _vm._l(_vm.pages, function(page) {
+        return [
+          _c("router-view", { attrs: { name: _vm.name(page), id: page.short } })
+        ]
+      })
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$l = [];
+__vue_render__$l._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$o = function (inject) {
+    if (!inject) return
+    inject("data-v-587a3c8e_0", { source: ".note {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n", map: {"version":3,"sources":["Note.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX","file":"Note.vue","sourcesContent":[".note {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$o = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$o = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$o = false;
+  /* style inject SSR */
+  
+
+  
+  var Note$1 = normalizeComponent_1(
+    { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
+    __vue_inject_styles__$o,
+    __vue_script__$o,
+    __vue_scope_id__$o,
+    __vue_is_functional_template__$o,
+    __vue_module_identifier__$o,
+    browser,
+    undefined
+  );
+
+//
 
   
   let Dash = {
@@ -6067,12 +6494,13 @@ __vue_render__$f._withStripped = true;
   Dash.Conn = Conn;
   Dash.Enli = Enli;
   Dash.Data = Data$2;
+  Dash.Note = Note$1;
 
 /* script */
-const __vue_script__$j = Dash;
+const __vue_script__$p = Dash;
 
 /* template */
-var __vue_render__$g = function() {
+var __vue_render__$m = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -6101,32 +6529,32 @@ var __vue_render__$g = function() {
     1
   )
 };
-var __vue_staticRenderFns__$g = [];
-__vue_render__$g._withStripped = true;
+var __vue_staticRenderFns__$m = [];
+__vue_render__$m._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$j = function (inject) {
+  const __vue_inject_styles__$p = function (inject) {
     if (!inject) return
-    inject("data-v-1beef7e5_0", { source: ".dash {\n  font-family: Roboto, sans-serif;\n  font-size: 1rem;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11vw 85vw 4vw;\n  grid-template-rows: 6vh 88vh 6vh;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n", map: {"version":3,"sources":["Dash.vue","/Users/ax/Documents/prj/aug/vue/dash/Dash.vue"],"names":[],"mappings":"AAAA;EACE,+BAA+B;EAC/B,eAAe;EACf,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,oCAAoC;EACpC,gCAAgC;EAChC,uEAAuE;AACzE;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;ECCvB,mBAAA;EACA,aAAA;AACA","file":"Dash.vue","sourcesContent":[".dash {\n  font-family: Roboto, sans-serif;\n  font-size: 1rem;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11vw 85vw 4vw;\n  grid-template-rows: 6vh 88vh 6vh;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n","\n<template>\n  <div class=\"dash\">\n    <d-logo id=\"logo\"></d-logo>\n    <d-navb id=\"navb\"></d-navb>\n    <d-find id=\"find\"></d-find>\n    <d-tocs id=\"tocs\"></d-tocs>\n    <d-view id=\"view\"></d-view>\n    <d-side id=\"side\"></d-side>\n    <d-pref id=\"pref\"></d-pref>\n    <d-foot id=\"foot\"></d-foot>\n    <d-trak id=\"trak\"></d-trak>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Logo from '../dash/Logo.vue';\n  import Navb from '../dash/Navb.vue';\n  import Find from '../dash/Find.vue';\n  import Tocs from '../dash/Tocs.vue';\n  import View from '../dash/View.vue';\n  import Side from '../dash/Side.vue';\n  import Pref from '../dash/Pref.vue';\n  import Foot from '../dash/Foot.vue';\n  import Trak from '../dash/Trak.vue';\n\n  \n  let Dash = {\n      name: 'dash',\n      components: {\n        'd-logo':Logo, 'd-navb':Navb, 'd-find':Find,\n        'd-tocs':Tocs, 'd-view':View, 'd-side':Side,\n        'd-pref':Pref, 'd-foot':Foot, 'd-trak':Trak } };\n\n  // Static imports for minimizing build steps in dev.\n  import Home from '../comp/Home.vue';\n  import Info from '../comp/Info.vue';\n  import Know from '../comp/Know.vue';\n  import Wise from '../comp/Wise.vue';\n  import Prac from '../page/Prac.vue';\n  import Conn from '../page/Conn.vue';\n  import Enli from '../page/Enli.vue';\n  import Data from '../page/Data.vue';\n//import Cube from '../comp/Cube.vue';\n//import Wood from '../wood/Wood.vue';\n\n  Dash.Home = Home;\n  Dash.Info = Info;\n  Dash.Know = Know;\n  Dash.Wise = Wise;\n  Dash.Prac = Prac;\n  Dash.Conn = Conn;\n  Dash.Enli = Enli;\n  Dash.Data = Data;\n//Dash.Cube = Cube;\n//Dash.Wood = Wood;\n \n  export default Dash;\n  \n</script>\n\n<style lang=\"less\">\n\n   .dash { font-family:Roboto, sans-serif; font-size:1rem;\n     position:absolute; left:0; top:0; right:0; bottom:0; display:grid;\n     grid-template-columns: 11vw 85vw 4vw;\n     grid-template-rows:     6vh 88vh 6vh;\n     grid-template-areas:\n       \"logo navb find\"\n       \"tocs view side\"\n       \"pref foot trak\";\n\n    #logo { grid-area:logo; justify-self:stretch; align-self:stretch; display:grid; }\n    #navb { grid-area:navb; justify-self:stretch; align-self:stretch; display:grid; }\n    #find { grid-area:find; justify-self:stretch; align-self:stretch; display:grid; }\n    #tocs { grid-area:tocs; justify-self:stretch; align-self:stretch; display:grid; }\n    #view { grid-area:view; justify-self:stretch; align-self:stretch; display:grid; }\n    #side { grid-area:side; justify-self:stretch; align-self:stretch; display:grid; }\n    #pref { grid-area:pref; justify-self:stretch; align-self:stretch; display:grid; }\n    #foot { grid-area:foot; justify-self:stretch; align-self:stretch; display:grid; }\n    #trak { grid-area:trak; justify-self:stretch; align-self:stretch; display:grid; } }\n  \n</style>\n\n"]}, media: undefined });
+    inject("data-v-5e9909ef_0", { source: ".dash {\n  font-family: Roboto, sans-serif;\n  font-size: 1rem;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11vw 85vw 4vw;\n  grid-template-rows: 6vh 88vh 6vh;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n", map: {"version":3,"sources":["Dash.vue","/Users/ax/Documents/prj/aug/vue/dash/Dash.vue"],"names":[],"mappings":"AAAA;EACE,+BAA+B;EAC/B,eAAe;EACf,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,oCAAoC;EACpC,gCAAgC;EAChC,uEAAuE;AACzE;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;ACCf","file":"Dash.vue","sourcesContent":[".dash {\n  font-family: Roboto, sans-serif;\n  font-size: 1rem;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11vw 85vw 4vw;\n  grid-template-rows: 6vh 88vh 6vh;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n","\n<template>\n  <div class=\"dash\">\n    <d-logo id=\"logo\"></d-logo>\n    <d-navb id=\"navb\"></d-navb>\n    <d-find id=\"find\"></d-find>\n    <d-tocs id=\"tocs\"></d-tocs>\n    <d-view id=\"view\"></d-view>\n    <d-side id=\"side\"></d-side>\n    <d-pref id=\"pref\"></d-pref>\n    <d-foot id=\"foot\"></d-foot>\n    <d-trak id=\"trak\"></d-trak>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Logo from '../dash/Logo.vue';\n  import Navb from '../dash/Navb.vue';\n  import Find from '../dash/Find.vue';\n  import Tocs from '../dash/Tocs.vue';\n  import View from '../dash/View.vue';\n  import Side from '../dash/Side.vue';\n  import Pref from '../dash/Pref.vue';\n  import Foot from '../dash/Foot.vue';\n  import Trak from '../dash/Trak.vue';\n\n  \n  let Dash = {\n      name: 'dash',\n      components: {\n        'd-logo':Logo, 'd-navb':Navb, 'd-find':Find,\n        'd-tocs':Tocs, 'd-view':View, 'd-side':Side,\n        'd-pref':Pref, 'd-foot':Foot, 'd-trak':Trak } };\n\n  // Static imports for minimizing build steps in dev.\n  import Home from '../comp/Home.vue';\n  import Info from '../comp/Info.vue';\n  import Know from '../comp/Know.vue';\n  import Wise from '../comp/Wise.vue';\n  import Prac from '../page/Prac.vue';\n  import Conn from '../page/Conn.vue';\n  import Enli from '../page/Enli.vue';\n  import Data from '../page/Data.vue';\n  import Note from '../note/Note.vue';\n//import Cube from '../comp/Cube.vue';\n//import Wood from '../wood/Wood.vue';\n\n  Dash.Home = Home;\n  Dash.Info = Info;\n  Dash.Know = Know;\n  Dash.Wise = Wise;\n  Dash.Prac = Prac;\n  Dash.Conn = Conn;\n  Dash.Enli = Enli;\n  Dash.Data = Data;\n  Dash.Note = Note;\n//Dash.Cube = Cube;\n//Dash.Wood = Wood;\n \n  export default Dash;\n  \n</script>\n\n<style lang=\"less\">\n\n   .dash { font-family:Roboto, sans-serif; font-size:1rem;\n     position:absolute; left:0; top:0; right:0; bottom:0; display:grid;\n     grid-template-columns: 11vw 85vw 4vw;\n     grid-template-rows:     6vh 88vh 6vh;\n     grid-template-areas:\n       \"logo navb find\"\n       \"tocs view side\"\n       \"pref foot trak\";\n\n    #logo { grid-area:logo; justify-self:stretch; align-self:stretch; display:grid; }\n    #navb { grid-area:navb; justify-self:stretch; align-self:stretch; display:grid; }\n    #find { grid-area:find; justify-self:stretch; align-self:stretch; display:grid; }\n    #tocs { grid-area:tocs; justify-self:stretch; align-self:stretch; display:grid; }\n    #view { grid-area:view; justify-self:stretch; align-self:stretch; display:grid; }\n    #side { grid-area:side; justify-self:stretch; align-self:stretch; display:grid; }\n    #pref { grid-area:pref; justify-self:stretch; align-self:stretch; display:grid; }\n    #foot { grid-area:foot; justify-self:stretch; align-self:stretch; display:grid; }\n    #trak { grid-area:trak; justify-self:stretch; align-self:stretch; display:grid; } }\n  \n</style>\n\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$j = undefined;
+  const __vue_scope_id__$p = undefined;
   /* module identifier */
-  const __vue_module_identifier__$j = undefined;
+  const __vue_module_identifier__$p = undefined;
   /* functional template */
-  const __vue_is_functional_template__$j = false;
+  const __vue_is_functional_template__$p = false;
   /* style inject SSR */
   
 
   
   var Dash$1 = normalizeComponent_1(
-    { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
-    __vue_inject_styles__$j,
-    __vue_script__$j,
-    __vue_scope_id__$j,
-    __vue_is_functional_template__$j,
-    __vue_module_identifier__$j,
+    { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
+    __vue_inject_styles__$p,
+    __vue_script__$p,
+    __vue_scope_id__$p,
+    __vue_is_functional_template__$p,
+    __vue_module_identifier__$p,
     browser,
     undefined
   );

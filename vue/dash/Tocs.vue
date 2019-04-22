@@ -29,6 +29,7 @@
         komps:{ Info:{ name:'Info', comp:'Info', pracs:{}, ikw:true,  icon:"fas fa-th"          },
                 Know:{ name:'Know', comp:'Know', pracs:{}, ikw:true,  icon:"fas fa-university"  },
                 Wise:{ name:'Wise', comp:'Wise', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor" },
+                Note:{ name:'Note', comp:'Note', pracs:{}, ikw:false, icon:"fab fa-leanpub"     },
                 Cube:{ name:'Cube', comp:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes"       },
                 Wood:{ name:'Wood', comp:'Wood', pracs:{}, ikw:false, icon:"fas fa-tree"        } } } },
     
