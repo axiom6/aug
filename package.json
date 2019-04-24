@@ -8,13 +8,18 @@
     "url": "https://github.com/axiom6/aug/issues"
   },
   "scripts": {
-    "dash":  "rollup --config app/build/rollup.dash.js",
-    "cube":  "rollup --config app/build/rollup.cube.js",
-    "wood":  "rollup --config app/build/rollup.wood.js",
-    "note":  "rollup --config app/build/rollup.note.js"
+    "dash": "rollup --config app/build/rollup.dash.js",
+    "cube": "rollup --config app/build/rollup.cube.js",
+    "wood": "rollup --config app/build/rollup.wood.js",
+    "note": "rollup --config app/build/rollup.note.js",
+    "dend": "rollup --config app/build/rollup.dend.js",
+    "d3": "rollup --config app/build/rollup.d3.esm.js"
   },
   "dependencies": {
     "@vue/dev-server": "^0.1.1",
+    "d3": "^5.9.2",
+    "ganja.js": "^1.0.139",
+    "rollup-plugin-ascii": "0.0.3",
     "rollup-plugin-scss": "^1.0.1",
     "vue": "^2.5.22"
   },
@@ -31,7 +36,7 @@
     "rollup-plugin-eslint": "^5.0.0",
     "rollup-plugin-filesize": "^6.0.0",
     "rollup-plugin-less": "^1.1.2",
-    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-node-resolve": "^4.2.3",
     "rollup-plugin-vue": "^4.6.1",
     "vue-template-compiler": "^2.5.22"
   },

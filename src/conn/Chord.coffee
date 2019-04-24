@@ -1,10 +1,9 @@
 
-import Util    from '../util/Util.js'
+import * as d3 from '../../lib/d3/d3.5.9.0.esm.js';
 
 class Chord
 
   constructor:() ->
-    @d3 = Util.getGlobal('d3')
 
   ready:() =>
 
@@ -16,16 +15,16 @@ class Chord
 
     @range  = ["#000000", "#FFDD89", "#957244", "#F26223"]
 
-    @svg    = @d3.select("svg")
+    @svg    = d3.select("svg")
     @width  = @svg.attr("width")
     @height = @svg.attr("height")
     @outer  = Math.min( @width, @height) * 0.5 - 40
     @inner  = @outer - 30
-    @format = @d3.formatPrefix(",.0", 1e3)
-    @chord  = @d3.chord().padAngle(0.05).sortSubgroups(@d3.descending)
-    @arc    = @d3.arc().innerRadius(@inner).outerRadius(@outer)
-    @ribbon = @d3.ribbon().radius(@inner)
-    @color  = @d3.scaleOrdinal().domain( @d3.range(4) ).range(@range)
+    @format = d3.formatPrefix(",.0", 1e3)
+    @chord  = d3.chord().padAngle(0.05).sortSubgroups(@d3.descending)
+    @arc    = d3.arc().innerRadius(@inner).outerRadius(@outer)
+    @ribbon = d3.ribbon().radius(@inner)
+    @color  = d3.scaleOrdinal().domain( d3.range(4) ).range(@range)
     @g      = @svg.append("g").attr("transform", "translate(" + @width / 2 + "," + @height / 2 + ")").datum(@chord(@matrix))
 
     @group  = @g.append("g")
@@ -36,7 +35,7 @@ class Chord
 
     @group.append("path")
       .style("fill",   (d) => @color(d.index) )
-      .style("stroke", (d) => @d3.rgb( @color(d.index)).darker() )
+      .style("stroke", (d) => d3.rgb( @color(d.index)).darker() )
       .attr("d", @arc )
 
     @groupTick = @group.selectAll(".group-tick")
@@ -60,12 +59,12 @@ class Chord
       .enter().append("path")
       .attr("d", @ribbon )
       .style("fill",   (d) => @color(d.target.index) )
-      .style("stroke", (d) => @d3.rgb( @color(d.target.index)).darker() )
+      .style("stroke", (d) => d3.rgb( @color(d.target.index)).darker() )
 
   # Returns an array of tick angles and values for a given group and step.
   groupTicks:( d, step) ->
     k = ( d.endAngle - d.startAngle) / d.value
-    @d3.range( 0, d.value, step).map( (value) -> { value: value, angle: value * k + d.startAngle } )
+    d3.range( 0, d.value, step).map( (value) -> { value: value, angle: value * k + d.startAngle } )
 
 `export default Chord`
 

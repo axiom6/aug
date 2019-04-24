@@ -1,5 +1,7 @@
 var Innovate;
 
+import * as d3 from '../../lib/d3/d3.5.9.0.esm.js';
+
 import Util from '../util/Util.js';
 
 import Vis from '../util/Vis.js';
@@ -11,7 +13,6 @@ Innovate = class Innovate {
     this.spec = spec;
     this.shapes = shapes;
     this.build = build;
-    this.d3 = Util.getGlobal('d3');
     this.studies = this.shapes.arrange(this.spec);
     this.cos30 = this.shapes.cos30;
     this.t = 24;
@@ -225,7 +226,7 @@ Innovate = class Innovate {
   }
 
   line() {
-    return this.d3.line().x((ang) => {
+    return d3.line().x((ang) => {
       return this.r * Vis.cosSvg(ang) + this.xh;
     }).y((ang) => {
       return this.r * Vis.sinSvg(ang) + this.yh;
@@ -240,7 +241,7 @@ Innovate = class Innovate {
     yp = (ang) => {
       return this.r * Vis.sinSvg(ang) + y0;
     };
-    path = this.d3.path();
+    path = d3.path();
     path.moveTo(xp(0), yp(0));
     ref = [60, 120, 180, 240, 300, 360];
     for (k = 0, len = ref.length; k < len; k++) {

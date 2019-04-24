@@ -7,12 +7,13 @@ import Vis from '../util/Vis';
 
 import Convey from '../conn/Convey';
 
+import * as d3 from '../../lib/d3/d3.5.9.0.esm.js';
+
 Shapes = class Shapes {
   constructor(stream) {
     this.createSvg = this.createSvg.bind(this);
     this.layoutSvg = this.layoutSvg.bind(this);
     this.stream = stream;
-    this.d3 = Util.getGlobal('d3');
     this.cos30 = 0.86602540378;
     //@cos15 = Vis.cos(15)
     this.fontText = "Roboto";
@@ -23,7 +24,7 @@ Shapes = class Shapes {
     var defs, g, gId, svg, svgId;
     svgId = Util.htmlId(name, 'Svg', '', false); // Turn off duplicate id error message
     gId = Util.htmlId(name, 'SvgG', '', false); // Turn off duplicate id error message
-    svg = this.d3.select(elem).append("svg:svg");
+    svg = d3.select(elem).append("svg:svg");
     svg.attr("id", svgId).attr("width", w).attr("height", h).attr("xmlns", "http://www.w3.org/2000/svg");
     defs = svg.append("svg:defs");
     g = svg.append("svg:g").attr("id", gId); // All transforms are applied to g
@@ -169,7 +170,7 @@ Shapes = class Shapes {
 
   wedge(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId) {
     var arc;
-    arc = this.d3.arc().innerRadius(r1).outerRadius(r2).startAngle(this.radD3(a1)).endAngle(this.radD3(a2));
+    arc = d3.arc().innerRadius(r1).outerRadius(r2).startAngle(this.radD3(a1)).endAngle(this.radD3(a2));
     //console.log( 'Shape.wedge()', { x0:x0, y0:y0 } )
     g.append("svg:path").attr("d", arc).attr("fill", fill).attr("stroke", "none").attr("transform", Vis.translate(x0, y0));
     this.wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId);

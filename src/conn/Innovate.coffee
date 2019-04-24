@@ -1,11 +1,11 @@
 
-import Util from '../util/Util.js'
-import Vis  from '../util/Vis.js'
+import * as d3 from '../../lib/d3/d3.5.9.0.esm.js';
+import Util    from '../util/Util.js'
+import Vis     from '../util/Vis.js'
 
 class Innovate
 
   constructor:( @spec, @shapes, @build ) ->
-    @d3      = Util.getGlobal('d3')
     @studies = @shapes.arrange( @spec )
     @cos30   = @shapes.cos30
     @t  = 24
@@ -163,14 +163,14 @@ class Innovate
         [0, 0.5]
 
   line:() =>
-    @d3.line()
+    d3.line()
       .x( (ang) => @r * Vis.cosSvg(ang) + @xh )
       .y( (ang) => @r * Vis.sinSvg(ang) + @yh )
 
   hexPath:( fill, g, x0, y0, pathId ) ->
     xp = (ang) => @r * Vis.cosSvg(ang) + x0
     yp = (ang) => @r * Vis.sinSvg(ang) + y0
-    path = @d3.path()
+    path = d3.path()
     path.moveTo( xp(0),   yp(0) )
     path.lineTo( xp(ang), yp(ang) ) for ang in [60,120,180,240,300,360]
     path.closePath()

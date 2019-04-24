@@ -1,11 +1,11 @@
 
-import Util    from '../util/Util.js'
+import * as d3 from '../../lib/d3/d3.5.9.0.esm.js';
+import Sankey  from '../../lib/d3/d3-sankey.esm.js';
 import Vis     from '../util/Vis.js'
 
 class Convey
 
   constructor:( @shapes, @defs, @g, @x, @y, @w, @h ) ->
-    @d3 = Util.getGlobal('d3')
     @nw = 24
     @np =  0
     @showLabel  = false
@@ -13,21 +13,21 @@ class Convey
     @gc = @g.append("g")
 
   doData:( graph ) =>
-    @sankey             = @createSankey()
-    @graph              = @sankey( graph )
-    [@linkSvg,@nodeSvg] = @doSankey( @sankey, @graph  )
+    @sankeyc             = @createSankeyc()
+    @graph              = @sankeyc( graph )
+    [@linkSvg,@nodeSvg] = @doSankey( @sankeyc, @graph  )
     return
 
-  createSankey:() ->
-    sankey = @d3.sankey().nodeWidth(@nw).nodePadding(@np).extent([[@x,@y],[@x+@w,@y+@h]])
-    sankey.link  = @sankeyLink
-    sankey
+  createSankeyc:() ->
+    sankeyc = Sankey().nodeWidth(@nw).nodePadding(@np).extent([[@x,@y],[@x+@w,@y+@h]])
+    sankeyc.link  = @sankeyLink
+    sankeyc
 
   sankeyLink:(d) =>
     curvature = .5
     x0 = d.source.x1
     x1 = d.target.x0
-    xi = @d3.interpolateNumber( x0, x1 )
+    xi = d3.interpolateNumber( x0, x1 )
     x2 = xi(curvature)
     x3 = xi(1 - curvature)
     y0 = d.y0
@@ -50,7 +50,7 @@ class Convey
       @shapes.gradientDef( @defs, id, d.source.color, d.target.color )
       gLink = gLinks.append("svg:g").attr( "stroke", "url(##{id})" ).attr( "fill","none")
       gLink.append("svg:path") #.attr("class", "link")
-       .attr("d", @sankey.link(d) )
+       .attr("d", @sankeyc.link(d) )
        .style("stroke-width", 1 )
        #sort( (a, b) -> (b.y1-b.y0) - (a.y1-a.y0) )
        .append("title").text( d.source.name + " → " + d.target.name )
@@ -62,7 +62,7 @@ class Convey
       .append("g").attr("class", "node")
       .attr("transform", (d) -> Vis.translate( d.x0,  d.y0 ) )
     node.append("rect").attr("height", (d) ->  d.y1 - d.y0 )
-      .attr("width", @sankey.nodeWidth())
+      .attr("width", @sankeyc.nodeWidth())
       .attr("fill",   (d) => d.color )
       .append("title").text( (d) => d.name )  #  + "\n" + d.value
     if @showLabel
@@ -70,7 +70,7 @@ class Convey
         .attr("dy", ".35em").attr("text-anchor", "end")
         .text( (d) -> d.name )
         .filter((d) => d['x'] < @w / 2 )
-        .attr("x", 6 + @sankey.nodeWidth())
+        .attr("x", 6 + @sankeyc.nodeWidth())
         .attr( "text-anchor", "start" )
     node
 

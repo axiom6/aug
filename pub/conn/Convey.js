@@ -1,6 +1,8 @@
 var Convey;
 
-import Util from '../util/Util.js';
+import * as d3 from '../../lib/d3/d3.5.9.0.esm.js';
+
+import Sankey from '../../lib/d3/d3-sankey.esm.js';
 
 import Vis from '../util/Vis.js';
 
@@ -15,7 +17,6 @@ Convey = class Convey {
     this.y = y;
     this.w = w;
     this.h = h;
-    this.d3 = Util.getGlobal('d3');
     this.nw = 24;
     this.np = 0;
     this.showLabel = false;
@@ -24,16 +25,16 @@ Convey = class Convey {
   }
 
   doData(graph) {
-    this.sankey = this.createSankey();
-    this.graph = this.sankey(graph);
-    [this.linkSvg, this.nodeSvg] = this.doSankey(this.sankey, this.graph);
+    this.sankeyc = this.createSankeyc();
+    this.graph = this.sankeyc(graph);
+    [this.linkSvg, this.nodeSvg] = this.doSankey(this.sankeyc, this.graph);
   }
 
-  createSankey() {
-    var sankey;
-    sankey = this.d3.sankey().nodeWidth(this.nw).nodePadding(this.np).extent([[this.x, this.y], [this.x + this.w, this.y + this.h]]);
-    sankey.link = this.sankeyLink;
-    return sankey;
+  createSankeyc() {
+    var sankeyc;
+    sankeyc = Sankey().nodeWidth(this.nw).nodePadding(this.np).extent([[this.x, this.y], [this.x + this.w, this.y + this.h]]);
+    sankeyc.link = this.sankeyLink;
+    return sankeyc;
   }
 
   sankeyLink(d) {
@@ -41,7 +42,7 @@ Convey = class Convey {
     curvature = .5;
     x0 = d.source.x1;
     x1 = d.target.x0;
-    xi = this.d3.interpolateNumber(x0, x1);
+    xi = d3.interpolateNumber(x0, x1);
     x2 = xi(curvature);
     x3 = xi(1 - curvature);
     y0 = d.y0;
@@ -70,7 +71,7 @@ Convey = class Convey {
       this.shapes.gradientDef(this.defs, id, d.source.color, d.target.color);
       gLink = gLinks.append("svg:g").attr("stroke", `url(#${id})`).attr("fill", "none");
       //sort( (a, b) -> (b.y1-b.y0) - (a.y1-a.y0) )
-      gLink.append("svg:path").attr("d", this.sankey.link(d)).style("stroke-width", 1).append("title").text(d.source.name + " → " + d.target.name); //.attr("class", "link")
+      gLink.append("svg:path").attr("d", this.sankeyc.link(d)).style("stroke-width", 1).append("title").text(d.source.name + " → " + d.target.name); //.attr("class", "link")
     }
     return gLinks;
   }
@@ -82,7 +83,7 @@ Convey = class Convey {
     });
     node.append("rect").attr("height", function(d) {
       return d.y1 - d.y0;
-    }).attr("width", this.sankey.nodeWidth()).attr("fill", (d) => {
+    }).attr("width", this.sankeyc.nodeWidth()).attr("fill", (d) => {
       return d.color;
     }).append("title").text((d) => {
       return d.name; //  + "\n" + d.value
@@ -94,7 +95,7 @@ Convey = class Convey {
         return d.name;
       }).filter((d) => {
         return d['x'] < this.w / 2;
-      }).attr("x", 6 + this.sankey.nodeWidth()).attr("text-anchor", "start");
+      }).attr("x", 6 + this.sankeyc.nodeWidth()).attr("text-anchor", "start");
     }
     return node;
   }

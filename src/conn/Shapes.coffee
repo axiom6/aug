@@ -1,12 +1,12 @@
 
-import Util   from '../util/Util'
-import Vis    from '../util/Vis'
-import Convey from '../conn/Convey'
+import Util    from '../util/Util'
+import Vis     from '../util/Vis'
+import Convey  from '../conn/Convey'
+import * as d3 from '../../lib/d3/d3.5.9.0.esm.js';
 
 class Shapes
 
   constructor: ( @stream ) ->
-    @d3     = Util.getGlobal('d3')
     @cos30  = 0.86602540378
     #@cos15 = Vis.cos(15)
     @fontText = "Roboto"
@@ -15,7 +15,7 @@ class Shapes
   createSvg:( elem, name, w, h ) =>
     svgId = Util.htmlId( name, 'Svg',  '', false ) # Turn off duplicate id error message
     gId   = Util.htmlId( name, 'SvgG', '', false ) # Turn off duplicate id error message
-    svg   = @d3.select(elem).append("svg:svg")
+    svg   = d3.select(elem).append("svg:svg")
     svg.attr("id",svgId).attr("width",w).attr("height",h)
        .attr("xmlns","http://www.w3.org/2000/svg")
     defs   = svg.append("svg:defs")
@@ -123,7 +123,7 @@ class Shapes
     return
 
   wedge:( g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId ) ->
-    arc  = @d3.arc().innerRadius(r1).outerRadius(r2).startAngle(@radD3(a1)).endAngle(@radD3(a2))
+    arc  = d3.arc().innerRadius(r1).outerRadius(r2).startAngle(@radD3(a1)).endAngle(@radD3(a2))
     #console.log( 'Shape.wedge()', { x0:x0, y0:y0 } )
     g.append("svg:path").attr("d",arc).attr("fill",fill).attr("stroke","none")
       .attr("transform", Vis.translate(x0,y0) )
