@@ -11,9 +11,7 @@
     "dash": "rollup --config app/build/rollup.dash.js",
     "cube": "rollup --config app/build/rollup.cube.js",
     "wood": "rollup --config app/build/rollup.wood.js",
-    "note": "rollup --config app/build/rollup.note.js",
-    "dend": "rollup --config app/build/rollup.dend.js",
-    "d3": "rollup --config app/build/rollup.d3.esm.js"
+    "note": "rollup --config app/build/rollup.note.js"
   },
   "dependencies": {
     "@vue/dev-server": "^0.1.1",

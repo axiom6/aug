@@ -345,28 +345,6 @@
 		"oAP": "/ani/wood/Wood.vue",
 		"oF": 0
 		},
-	"/app/build/d3.esm.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/build/d3.esm-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/build/d3.index.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/build/d3.index-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/app/build/rollup.cube.js": {
 		"bF": 0,
 		"ft": 64,
@@ -378,17 +356,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/app/build/rollup.d3.esm.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/build/rollup.d3.esm-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/app/build/rollup.dash.js": {
 		"bF": 0,
 		"ft": 64,
@@ -396,17 +363,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/app/build/rollup.dash-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/build/rollup.dend.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/build/rollup.dend-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -443,49 +399,6 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
-		},
-	"/app/d3/dend/Dend.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/d3/dend/Dend.html",
-		"oF": 0
-		},
-	"/app/d3/dend/Dend.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/d3/dend/Dend-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/d3/dend/Dend.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/d3/dend/Dend.vue",
-		"oF": 0
-		},
-	"/app/d3/dend/flare.csv": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/app/d3/dend/flare.csv",
-		"oF": 0
-		},
-	"/app/d3/dend/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/d3/dend/index.html",
-		"oF": 0
 		},
 	"/app/data/muse/Cols.json": {
 		"ft": 524288,
@@ -713,134 +626,6 @@
 		"oA": 1,
 		"oAP": "/app/obs/std.html",
 		"oF": 0
-		},
-	"/app/plotly/3dscat/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/plotly/3dscat/index.html",
-		"oF": 0
-		},
-	"/app/plotly/3dscat/scat.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/plotly/3dscat/scat-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/plotly/3dsurf/chord/figure.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/plotly/3dsurf/chord/figure-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/plotly/3dsurf/chord/Flow-visitors.png": {
-		"ft": 32768,
-		"iS": 215613,
-		"oA": 0,
-		"oAP": "/app/plotly/3dsurf/chord/Flow-visitors.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/app/plotly/3dsurf/chord/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/plotly/3dsurf/chord/index.html",
-		"oF": 0
-		},
-	"/app/plotly/3dsurf/figure.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/plotly/3dsurf/figure-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/plotly/3dsurf/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/plotly/3dsurf/index.html",
-		"oF": 0
-		},
-	"/app/plotly/cube/cube.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/plotly/cube/cube-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/plotly/cube/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/plotly/cube/index.html",
-		"oF": 0
-		},
-	"/app/plotly/mtn/mtn.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/plotly/mtn/mtn-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/plotly/ribbon/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/plotly/ribbon/index.html",
-		"oF": 0
-		},
-	"/app/plotly/ribbon/ribbon.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/plotly/ribbon/ribbon-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/plotly/Surf3d.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/app/plotly/Surf3d.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
 		},
 	"/aug.iml": {
 		"cB": 0,
@@ -1957,50 +1742,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/lib/plotly/MathJax.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/lib/plotly/MathJax-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/lib/plotly/plotly-basic.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/lib/plotly/plotly-basic-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/lib/plotly/plotly.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/lib/plotly/plotly-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/lib/plotly/plotlyjs-bundle.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/lib/plotly/plotlyjs-bundle-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/lib/store/Firebase.esm.stub.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2138,14 +1879,6 @@
 		"oAP": "/node_modules/../ani/wood/Wood.vue",
 		"oF": 0
 		},
-	"/node_modules/../app/d3/dend/Dend.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/node_modules/../app/d3/dend/Dend.vue",
-		"oF": 0
-		},
 	"/node_modules/../app/obs/Run.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -2200,17 +1933,6 @@
 		"oAP": "/node_modules/../vue/note/Stand.vue",
 		"oF": 0
 		},
-	"/node_modules/d3-array/src/index.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/node_modules/d3-array/src/index-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/node_modules/estree-walker/src/estree-walker.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2255,17 +1977,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/node_modules/rollup-plugin-ascii/index.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/node_modules/rollup-plugin-ascii/index-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/node_modules/rollup-plugin-commonjs/dist/rollup-plugin-commonjs.es.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2284,17 +1995,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/node_modules/rollup-plugin-less/dist/rollup-plugin-less.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/node_modules/rollup-plugin-node-resolve/dist/rollup-plugin-node-resolve.es.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/node_modules/rollup-plugin-node-resolve/dist/rollup-plugin-node-resolve.es-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -3521,6 +3221,60 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/zzz/dend/Dend.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/dend/Dend.html",
+		"oF": 0
+		},
+	"/zzz/dend/Dend.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/dend/Dend-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/dend/Dend.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/dend/Dend.vue",
+		"oF": 0
+		},
+	"/zzz/dend/flare.csv": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/dend/flare.csv",
+		"oF": 0
+		},
+	"/zzz/dend/index.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/dend/index.html",
+		"oF": 0
+		},
+	"/zzz/dend/rollup.dend.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/dend/rollup.dend-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/zzz/form/FormElements.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -3561,6 +3315,178 @@
 		"oA": 1,
 		"oAP": "/zzz/mute/Zzzz-min.js",
 		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/plotly/3dscat/index.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/plotly/3dscat/index.html",
+		"oF": 0
+		},
+	"/zzz/plotly/3dscat/scat.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/plotly/3dscat/scat-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/plotly/3dsurf/chord/figure.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/plotly/3dsurf/chord/figure-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/plotly/3dsurf/chord/Flow-visitors.png": {
+		"ft": 32768,
+		"iS": 215613,
+		"oA": 0,
+		"oAP": "/zzz/plotly/3dsurf/chord/Flow-visitors.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/zzz/plotly/3dsurf/chord/index.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/plotly/3dsurf/chord/index.html",
+		"oF": 0
+		},
+	"/zzz/plotly/3dsurf/figure.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/plotly/3dsurf/figure-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/plotly/3dsurf/index.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/plotly/3dsurf/index.html",
+		"oF": 0
+		},
+	"/zzz/plotly/cube/cube.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/plotly/cube/cube-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/plotly/cube/index.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/plotly/cube/index.html",
+		"oF": 0
+		},
+	"/zzz/plotly/lib/MathJax.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/plotly/lib/MathJax-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/plotly/lib/plotly-basic.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/plotly/lib/plotly-basic-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/plotly/lib/plotly.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/plotly/lib/plotly-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/plotly/lib/plotlyjs-bundle.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/plotly/lib/plotlyjs-bundle-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/plotly/mtn/mtn.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/plotly/mtn/mtn-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/plotly/ribbon/index.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/plotly/ribbon/index.html",
+		"oF": 0
+		},
+	"/zzz/plotly/ribbon/ribbon.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/plotly/ribbon/ribbon-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/plotly/Surf3d.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/plotly/Surf3d.js",
+		"oF": 0,
+		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
@@ -5728,23 +5654,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.html",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "",
-			"autoOutputPathReplace2": "",
-			"autoOutputPathStyle": 0,
-			"fileExtension": "html",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.vue",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "",
 			"autoOutputPathReplace2": "",
 			"autoOutputPathStyle": 0,
 			"fileExtension": "vue",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.html",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "",
+			"autoOutputPathReplace2": "",
+			"autoOutputPathStyle": 0,
+			"fileExtension": "html",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}
