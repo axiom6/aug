@@ -25,7 +25,7 @@ class Main
 
   Main.init =  ( batch ) ->
     Main.Batch = batch # Not necessary here, but assigned for compatibilitry
-    subjects = ["Info","Know","Wise","Cube","Navb","Tabs"]
+    subjects = ["Info","Know","Wise","Draw","Note","Cube","Navb","Tabs"]
     infoSpec = { subscribe:false, publish:false, subjects:subjects}
     Main.stream = new Stream( subjects, infoSpec )
     Main.mergePracsCols()

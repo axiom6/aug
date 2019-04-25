@@ -61,6 +61,6 @@ class Connect
     g
 
   toFill:( hsv ) ->
-      Vis.toRgbHsvStr( hsv )
+    Vis.toRgbHsvStr( hsv )
 
 export default Connect

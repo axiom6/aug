@@ -7,8 +7,8 @@ Vue.use(Router);
 let lazy = (name) => () => {
   return import( `../../${name}.js` ); }
 
-export default new Router( { // Static Import for quich dev cycles
-  routes:[                   // Not really using props
+export default new Router( {
+  routes:[
     { path: '/',      name:'Home',      components:{ Home:     Dash.Home  } },
     { path: '/info',  name:'Info',      components:{ Info:     Dash.Info  }, redirect:{ name:"InfoPrac"}, children: [
       { path:'prac',  name:'InfoPrac',  components:{ InfoPrac: Dash.Prac  } },
@@ -25,11 +25,12 @@ export default new Router( { // Static Import for quich dev cycles
       { path:'conn',  name:'WiseConn',  components:{ WiseConn: Dash.Conn  } },
       { path:'enli',  name:'WiseEnli',  components:{ WiseEnli: Dash.Enli  } },
       { path:'data',  name:'WiseData',  components:{ WiseData: Dash.Data  } } ] },
+    { path: '/draw',  name:'Draw',      components:{ Draw:     Dash.Draw  } },
     { path: '/note',  name:'Note',      components:{ Note:     Dash.Note  },redirect:{ name:"NoteStand"}, children: [
       { path:'stand', name:'NoteStand', components:{ NoteStand:lazy('pub/note/Stand') } },
       { path:'embed', name:'NoteEmbed', components:{ NoteEmbed:lazy('pub/note/Embed') } },
       { path:'maths', name:'NoteMaths', components:{ NoteMaths:lazy('pub/note/Maths') } },
       { path:'ganja', name:'NoteGanja', components:{ NoteGanja:lazy('pub/note/Ganja') } } ] },
-    { path:'/cube',   name:'Cube',      components:{ Cube:     lazy('pub/cube/Cube' ) } },
-    { path:'/wood',   name:'Wood',      components:{ Wood:     lazy('ani/wood/Wood' ) } }
+    { path: '/cube',  name:'Cube',      components:{ Cube:     lazy('pub/cube/Cube' ) } },
+    { path: '/wood',  name:'Wood',      components:{ Wood:     lazy('ani/wood/Wood' ) } }
     ] } )

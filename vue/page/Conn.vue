@@ -18,8 +18,6 @@
 
   export default {
 
-    // props: { comp:{ type:String, default:'None' } },
-
     data() {
       return { comp:'None', prac:'All', disp:'All', tab:'Connections',
                build:{}, connects:{}, practices:{} }; },

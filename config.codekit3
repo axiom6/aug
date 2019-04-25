@@ -400,6 +400,78 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/app/data/draw/Augm.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/app/data/draw/Augm-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/app/data/draw/D3ds.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/app/data/draw/D3ds-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/app/data/draw/Data.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/app/data/draw/Data-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/app/data/draw/Hues.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/app/data/draw/Hues-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/app/data/draw/Prac.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/app/data/draw/Prac-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/app/data/draw/Prin.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/app/data/draw/Prin-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/app/data/draw/Quad.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/app/data/draw/Quad-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/app/data/draw/Tech.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/app/data/draw/Tech-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/app/data/draw/Tops.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/app/data/draw/Tops-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
 	"/app/data/muse/Cols.json": {
 		"ft": 524288,
 		"oA": 1,
@@ -1879,60 +1951,6 @@
 		"oAP": "/node_modules/../ani/wood/Wood.vue",
 		"oF": 0
 		},
-	"/node_modules/../app/obs/Run.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/node_modules/../app/obs/Run.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/node_modules/../src/d3d/d3d.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/node_modules/../pub/d3d/d3d.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/node_modules/../vue/note/Embed.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/node_modules/../vue/note/Embed.vue",
-		"oF": 0
-		},
-	"/node_modules/../vue/note/Ganja.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/node_modules/../vue/note/Ganja.vue",
-		"oF": 0
-		},
-	"/node_modules/../vue/note/Maths.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/node_modules/../vue/note/Maths.vue",
-		"oF": 0
-		},
-	"/node_modules/../vue/note/Stand.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/node_modules/../vue/note/Stand.vue",
-		"oF": 0
-		},
 	"/node_modules/estree-walker/src/estree-walker.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2199,24 +2217,112 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/d3d/Axes.js": {
+	"/pub/drew/Axes.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/d3d/Axes-min.js",
+		"oAP": "/pub/drew/Axes-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/d3d/D3d.js": {
+	"/pub/drew/Chord.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/d3d/D3d-min.js",
+		"oAP": "/pub/drew/Chord-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/drew/Cluster.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/drew/Cluster-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/drew/Drew.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/drew/Drew-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/drew/Link.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/drew/Link-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/drew/Palettes.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/drew/Palettes-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/drew/Radar.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/drew/Radar-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/drew/Radial.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/drew/Radial-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/drew/Tree.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/drew/Tree-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/drew/Wheel.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/drew/Wheel-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2593,144 +2699,111 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/d3d/Axes.coffee": {
+	"/src/drew/Axes.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/d3d/Axes.js",
+		"oAP": "/pub/drew/Axes.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/d3d/Chord.coffee": {
+	"/src/drew/Chord.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/d3d/Chord.js",
+		"oAP": "/pub/drew/Chord.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/d3d/Cluster.coffee": {
+	"/src/drew/Cluster.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/d3d/Cluster.js",
+		"oAP": "/pub/drew/Cluster.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/d3d/Color.coffee": {
+	"/src/drew/Drew.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/d3d/Color.js",
+		"oAP": "/pub/drew/Drew.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/d3d/D3d.coffee": {
+	"/src/drew/Link.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/d3d/D3d.js",
+		"oAP": "/pub/drew/Link.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/d3d/Link.coffee": {
+	"/src/drew/Palettes.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/d3d/Link.js",
+		"oAP": "/pub/drew/Palettes.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/d3d/Palettes.coffee": {
+	"/src/drew/Radar.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/d3d/Palettes.js",
+		"oAP": "/pub/drew/Radar.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/d3d/Pres.coffee": {
+	"/src/drew/Radial.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/d3d/Pres.js",
+		"oAP": "/pub/drew/Radial.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/d3d/Radar.coffee": {
+	"/src/drew/Tree.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/d3d/Radar.js",
+		"oAP": "/pub/drew/Tree.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/d3d/Radial.coffee": {
+	"/src/drew/Wheel.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/d3d/Radial.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/d3d/Tree.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/d3d/Tree.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/d3d/UI.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/d3d/UI.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/d3d/Wheelc.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/d3d/Wheelc.js",
+		"oAP": "/pub/drew/Wheel.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
@@ -2920,6 +2993,22 @@
 		"oAP": "/vue/comp/Cube.vue",
 		"oF": 0
 		},
+	"/vue/comp/Dabs.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/comp/Dabs.vue",
+		"oF": 0
+		},
+	"/vue/comp/Draw.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/comp/Draw.vue",
+		"oF": 0
+		},
 	"/vue/comp/Home.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -2950,6 +3039,14 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/vue/comp/Know.vue",
+		"oF": 0
+		},
+	"/vue/comp/Tabs.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/comp/Tabs.vue",
 		"oF": 0
 		},
 	"/vue/comp/Wise.vue": {
@@ -3118,14 +3215,6 @@
 		"oAP": "/vue/note/Stand.vue",
 		"oF": 0
 		},
-	"/vue/note/Tabs.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/note/Tabs.vue",
-		"oF": 0
-		},
 	"/vue/page/Conn.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -3158,14 +3247,6 @@
 		"oAP": "/vue/page/Prac.vue",
 		"oF": 0
 		},
-	"/vue/page/Tabs.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/page/Tabs.vue",
-		"oF": 0
-		},
 	"/vue/page/Zzzz.js": {
 		"bF": 0,
 		"ft": 64,
@@ -3188,419 +3269,13 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/conn/Connected.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/zzz/conn/Connected.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/dash/Navb.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/zzz/dash/Navb.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/dash/Navb.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/dash/Navb-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/dend/Dend.html": {
+	"/zzz/Tabs.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/dend/Dend.html",
+		"oAP": "/zzz/Tabs.vue",
 		"oF": 0
-		},
-	"/zzz/dend/Dend.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/dend/Dend-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/dend/Dend.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/dend/Dend.vue",
-		"oF": 0
-		},
-	"/zzz/dend/flare.csv": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/zzz/dend/flare.csv",
-		"oF": 0
-		},
-	"/zzz/dend/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/dend/index.html",
-		"oF": 0
-		},
-	"/zzz/dend/rollup.dend.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/dend/rollup.dend-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/form/FormElements.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/form/FormElements.vue",
-		"oF": 0
-		},
-	"/zzz/mute/Disp.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/mute/Disp.vue",
-		"oF": 0
-		},
-	"/zzz/mute/Prac.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/mute/Prac.vue",
-		"oF": 0
-		},
-	"/zzz/mute/Rows.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/mute/Rows.vue",
-		"oF": 0
-		},
-	"/zzz/mute/Zzzz.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/mute/Zzzz-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/plotly/3dscat/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/plotly/3dscat/index.html",
-		"oF": 0
-		},
-	"/zzz/plotly/3dscat/scat.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/plotly/3dscat/scat-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/plotly/3dsurf/chord/figure.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/plotly/3dsurf/chord/figure-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/plotly/3dsurf/chord/Flow-visitors.png": {
-		"ft": 32768,
-		"iS": 215613,
-		"oA": 0,
-		"oAP": "/zzz/plotly/3dsurf/chord/Flow-visitors.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/zzz/plotly/3dsurf/chord/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/plotly/3dsurf/chord/index.html",
-		"oF": 0
-		},
-	"/zzz/plotly/3dsurf/figure.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/plotly/3dsurf/figure-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/plotly/3dsurf/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/plotly/3dsurf/index.html",
-		"oF": 0
-		},
-	"/zzz/plotly/cube/cube.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/plotly/cube/cube-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/plotly/cube/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/plotly/cube/index.html",
-		"oF": 0
-		},
-	"/zzz/plotly/lib/MathJax.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/plotly/lib/MathJax-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/plotly/lib/plotly-basic.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/plotly/lib/plotly-basic-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/plotly/lib/plotly.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/plotly/lib/plotly-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/plotly/lib/plotlyjs-bundle.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/plotly/lib/plotlyjs-bundle-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/plotly/mtn/mtn.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/plotly/mtn/mtn-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/plotly/ribbon/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/plotly/ribbon/index.html",
-		"oF": 0
-		},
-	"/zzz/plotly/ribbon/ribbon.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/plotly/ribbon/ribbon-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/plotly/Surf3d.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/zzz/plotly/Surf3d.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/vuex/i18n/br.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/vuex/i18n/br-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/vuex/i18n/br.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/vuex/i18n/br-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/vuex/i18n/en.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/vuex/i18n/en-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/vuex/i18n/en.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/vuex/i18n/en-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/vuex/i18n/es.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/vuex/i18n/es-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/vuex/i18n/es.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/vuex/i18n/es-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/vuex/i18n/I18n.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/vuex/i18n/I18n-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/vuex/store/app.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/vuex/store/app-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/vuex/store/getters.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/vuex/store/getters-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/vuex/store/Store.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/vuex/store/Store-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/zzzz.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/zzzz-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
 		}
 	},
 "hooks": [
@@ -5654,23 +5329,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.vue",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "",
-			"autoOutputPathReplace2": "",
-			"autoOutputPathStyle": 0,
-			"fileExtension": "vue",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.html",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "",
 			"autoOutputPathReplace2": "",
 			"autoOutputPathStyle": 0,
 			"fileExtension": "html",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.vue",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "",
+			"autoOutputPathReplace2": "",
+			"autoOutputPathStyle": 0,
+			"fileExtension": "vue",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

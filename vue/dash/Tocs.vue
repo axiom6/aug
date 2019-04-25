@@ -29,6 +29,7 @@
         komps:{ Info:{ name:'Info', comp:'Info', pracs:{}, ikw:true,  icon:"fas fa-th"          },
                 Know:{ name:'Know', comp:'Know', pracs:{}, ikw:true,  icon:"fas fa-university"  },
                 Wise:{ name:'Wise', comp:'Wise', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor" },
+                Draw:{ name:'Draw', comp:'Draw', pracs:{}, ikw:false, icon:"fas fa-shapes"      },
                 Note:{ name:'Note', comp:'Note', pracs:{}, ikw:false, icon:"fab fa-leanpub"     },
                 Cube:{ name:'Cube', comp:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes"       },
                 Wood:{ name:'Wood', comp:'Wood', pracs:{}, ikw:false, icon:"fas fa-tree"        } } } },
@@ -45,12 +46,13 @@
         this.prac = prac; this.disp = disp; },
       pubComp: function(comp) {
         this.comp =   comp;
-        this.pubPrac('All'); },
+        if( this.komps[this.comp].ikw ) {
+            this.pubPrac('All'); } },
       pubPrac: function(prac) {
         this.prac = prac;
         this.publish( this.comp, { prac:this.prac, disp:'All' } ); },
       pubDisp: function(prac,disp) {
-        this.publish( this.comp, { prac:prac,      disp:disp  } ); },
+        this.publish( this.comp, { prac:prac, disp:disp  } ); },
       doSelect: function(select) {
         this.publish( 'Select',   select ); },
       stylePrac: function( prac, hsv ) {

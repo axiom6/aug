@@ -11,7 +11,7 @@
 
 <script type="module">
 
-  import Tabs  from '../note/Tabs.vue';
+  import Tabs  from '../comp/Tabs.vue';
 /*import Stand from '../note/Stand.vue';
   import Embed from '../note/Embed.vue';
   import Maths from '../note/Maths.vue';

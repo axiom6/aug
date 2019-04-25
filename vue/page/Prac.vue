@@ -39,11 +39,7 @@
 
 <script type="module">
 
-  import Tabs from './Tabs.vue';
-
   export default {
-    
-    components:{ 'b-tabs':Tabs },
     
     props: { pcomp:{ type:String, default:'None' } },
     

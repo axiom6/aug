@@ -3,19 +3,24 @@
   <div class="ikws">
     <b-tabs :comp="comp" :pages="pages"></b-tabs>
     <template v-for="page in pages">
-      <router-view :name="comp+page"></router-view>
+      <router-view :name="comp+page.short"></router-view>
     </template>
   </div>
 </template>
 
 <script type="module">
   
-  import Tabs from '../page/Tabs.vue';
+  import Tabs from '../comp/Tabs.vue';
   
   export default {
     components:{ 'b-tabs':Tabs },
 
-    data() { return { comp:'None', pages:['Prac','Conn','Enli','Data'] } },
+    data() { return { comp:'None', pages:[
+        { title:'Practices',    short:'Prac' },
+        { title:'Connections',  short:'Conn' },
+        { title:'Enlight',      short:'Enli' },
+        { title:'Data Science', short:'Data' },
+      ] } },
 
     beforeMount: function() {
       this.comp = this.$route.name },
