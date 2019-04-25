@@ -12,11 +12,11 @@
 <script type="module">
 
   export default {
+
+    props: { comp:String, pages:Array, init:String },
     
-    data() { return { tab:'Stand' } },
-
-    props: { comp:String, pages:Array },
-
+    data() { return { tab:this.init } },
+    
     methods: {
       pubTab: function (tab) {
         this.tab = tab;

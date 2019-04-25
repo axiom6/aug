@@ -1,7 +1,7 @@
 
 <template>
   <div class="ikws">
-    <b-tabs :comp="comp" :pages="pages"></b-tabs>
+    <b-tabs :comp="comp" :pages="pages" init="Prac"></b-tabs>
     <template v-for="page in pages">
       <router-view :name="comp+page.short"></router-view>
     </template>

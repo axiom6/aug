@@ -2,7 +2,7 @@
 
 <template>
   <div class="draw" ref="Draw">
-    <d-tabs :comp="comp" :pages="pages"></d-tabs>
+    <d-tabs :comp="comp" :pages="pages" init="Axes"></d-tabs>
     <template v-for="page in pages">
       <div :ref="page.short" v-if="isPage(page.short)" class="page" :key="page.short">
         <h1>{{page.title}}</h1>

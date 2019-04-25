@@ -2,7 +2,7 @@
 
 <template>
   <div class="note">
-    <n-tabs :comp="comp" :pages="pages"></n-tabs>
+    <n-tabs :comp="comp" :pages="pages" init="Stand"></n-tabs>
     <template v-for="page in pages">
       <router-view :name="name(page)" :id="page.short"></router-view>
     </template>

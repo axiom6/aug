@@ -31,10 +31,10 @@ class Encourage
     w  = lay.xr + lay.wr
     h  = r0 # lay.ri
     xt = x +  w  * 0.5
-    yt = geom.y0 * 0.5
+    yt = geom.y0 * 0.5 - 6
     @shapes.conveySankey( "Encourage", defs, g, @studies, @innovs, x, y, w, h )
     @shapes.icon( g, geom.x0, geom.y0, @spec.name, @shapes.htmlId(@spec.name,'IconSvg'), Vis.unicode(@spec.icon) )
-    @shapes.text( g, xt,           yt, @spec.name, @shapes.htmlId(@spec.name,'TextSvg'), 'wheat', '2em' )
+    @shapes.text( g, xt,           yt, @spec.name, @shapes.htmlId(@spec.name,'TextSvg'), 'black', '1.8em' )
     @shapes.practiceFlow( g, geom, @spec )
     return
 

@@ -7,7 +7,7 @@
     "cells":[5,36,7,36], "pub":false, "show":true,
     "Know_":{ "type":"pane", "hsv":[ 50,70,70],"column":"Row",    "row":"Dim","plane":"Info","icon":"fas fa-university",
       "cells":[ 1,4,1,6], "toc":false,  "css":"ui-plane" },
-    "Human":{ "type":"pane", "hsv":[195,90,60],"column":"Embrace","row":"Learn","plane":"Know","icon":"fas fa-users",
+    "Humanity":{ "type":"pane", "hsv":[195,90,60],"column":"Embrace","row":"Learn","plane":"Know","icon":"fas fa-users",
       "cells":[5,12,7,12], "dir":"nw", "neg":"Greed",
       "desc":"",
       "Art":       { "dir":"west", "icon":"fas fa-palette","hsv":[195,90,70],
@@ -121,11 +121,11 @@
         "Pattern":     { "icon":"fas fa-puzzle-piece", "desc":"" },
         "Depend":      { "icon":"fas fa-sitemap", "desc":"" },
         "Type":        { "icon":"fas fa-shapes", "desc":"" } },
-      "Profess": { "dir":"south","icon":"fas fa-rss",        "hsv":[60,90,90],
+      "Preserve": { "dir":"south","icon":"fas fa-lock", "hsv":[60,90,90],
         "desc":"",
         "Transparent": { "icon":"fas fa-search-plus", "desc":"" },
         "Steady":      { "icon":"fas fa-ship", "desc":"" },
-        "Preserve":    { "icon":"fas fa-shield-alt", "desc":"" } }
+        "Profess":     { "icon":"fas fa-rss", "desc":"" } }
     },
     "Reason":{ "type":"pane", "hsv":[20,50,90],"column":"Encourage","row":"Do","plane":"Know","icon":"fas fa-balance-scale",
       "cells":[29,12,19,12],  "dir":"east", "neg":"Irrational",

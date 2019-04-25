@@ -11,9 +11,9 @@
 
   export default {
 
-    data() { return { tab:'Stand' } },
+    props: { comp:String, pages:Array, init:String },
 
-    props: { comp:String, pages:Array },
+    data() { return { tab:this.init } },
 
     methods: {
       pubTab: function (tab) {
@@ -37,7 +37,7 @@
       border-radius:12px 12px 0 0; border-left: wheat solid thin;
       border-top:wheat solid thin; border-right:wheat solid thin;
       background-color:black; color:wheat; }
-    .tab:hover  { background-color:wheat; color:black; }
-    .tab-active { background-color:wheat; color:black; .tab(); } }
+    .tab:hover  {         background-color:wheat; color:black; }
+    .tab-active { .tab(); background-color:wheat; color:black; } }
 
 </style>

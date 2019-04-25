@@ -40,10 +40,10 @@ Encourage = class Encourage {
     w = lay.xr + lay.wr;
     h = r0; // lay.ri
     xt = x + w * 0.5;
-    yt = geom.y0 * 0.5;
+    yt = geom.y0 * 0.5 - 6;
     this.shapes.conveySankey("Encourage", defs, g, this.studies, this.innovs, x, y, w, h);
     this.shapes.icon(g, geom.x0, geom.y0, this.spec.name, this.shapes.htmlId(this.spec.name, 'IconSvg'), Vis.unicode(this.spec.icon));
-    this.shapes.text(g, xt, yt, this.spec.name, this.shapes.htmlId(this.spec.name, 'TextSvg'), 'wheat', '2em');
+    this.shapes.text(g, xt, yt, this.spec.name, this.shapes.htmlId(this.spec.name, 'TextSvg'), 'black', '1.8em');
     this.shapes.practiceFlow(g, geom, this.spec);
   }
 
