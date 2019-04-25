@@ -22,6 +22,7 @@ Drew = class Drew {
   constructor(stream) {
     this.createSvg = this.createSvg.bind(this);
     this.stream = stream;
+    this.size = {};
   }
 
   create(name, elem, size) {
@@ -50,6 +51,7 @@ Drew = class Drew {
 
   ready(name, elem, size) {
     var gId, svgId;
+    this.size = size;
     //geo = @geom( size.elemWidth, size.elemHeight, size.elemWidth, size.elemHeight )
     this.svg = null;
     this.g = null;
@@ -60,13 +62,14 @@ Drew = class Drew {
     this.size.lastWidth = size.elemWidth;
     this.size.lastHeight = size.elemHeight;
     this.htmlId = svgId;
-    return this.svg;
+    return [this.svg, this.g];
   }
 
   createSvg(elem, name, w, h) {
     var defs, g, gId, svg, svgId;
     svgId = this.htmlId(name, 'Svg', '');
     gId = this.htmlId(name, 'SvgG', '');
+    console.log('Drew.createSvg()', name, elem);
     svg = d3.select(elem).append("svg:svg");
     svg.attr("id", svgId).attr("width", w).attr("height", h).attr("xmlns", "http://www.w3.org/2000/svg");
     defs = svg.append("svg:defs");

@@ -11,7 +11,7 @@
 
   export default {
 
-    props: { comp:String, pages:Array, init:String },
+    props: { comp:String, pages:Object, init:String },
 
     data() { return { tab:this.init } },
 

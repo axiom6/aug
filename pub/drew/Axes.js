@@ -9,7 +9,7 @@ Axes = class Axes {
     this.name = name;
     this.elem = elem1;
     this.size = size;
-    this.graph = this.drew.ready(this.name, this.elem, this.size);
+    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
     this.ready();
   }
 
@@ -24,7 +24,6 @@ Axes = class Axes {
     };
     this.width = geo.w - this.margin.left - this.margin.right;
     this.height = geo.h - this.margin.top - this.margin.bottom;
-    this.g = this.graph.g;
     this.xObj = {
       x1: 0,
       x2: 100,
@@ -53,7 +52,7 @@ Axes = class Axes {
   }
 
   //$('path.domain').hide()
-  //@d3d.transform( @graph.$s, @g, geo.w/2, geo.h/2, geo.s )
+  //@d3d.transform( @svg.$s, @g, geo.w/2, geo.h/2, geo.s )
   createXScale(xObj, width) {
     return this.d3.scaleLinear().domain([xObj.x1, xObj.x2]).range([0, width]).clamp(true);
   }
@@ -113,11 +112,11 @@ Axes = class Axes {
     elem = g.append("g:g");
     this.xLines(elem, xObj.x1, xObj.x2, xObj.xtick2, yObj.y1, yObj.y2, '#000000', 1);
     this.yLines(elem, yObj.y1, yObj.y2, yObj.ytick2, xObj.x1, xObj.x2, '#000000', 1);
-    this.xLines(elem, xObj.x1, xObj.x2, xObj.xtick1, yObj.y1, yObj.y2, '#FFFFFF', 1);
-    return this.yLines(elem, yObj.y1, yObj.y2, yObj.ytick1, xObj.x1, xObj.x2, '#FFFFFF', 1);
+    this.xLines(elem, xObj.x1, xObj.x2, xObj.xtick1, yObj.y1, yObj.y2, '#888888', 1);
+    return this.yLines(elem, yObj.y1, yObj.y2, yObj.ytick1, xObj.x1, xObj.x2, '#888888', 1);
   }
 
-  line(elem, x1, y1, x2, y2, stroke = "black", thick = 1, xScale = this.xScale, yScale = this.yScale) {
+  line(elem, x1, y1, x2, y2, stroke = "white", thick = 1, xScale = this.xScale, yScale = this.yScale) {
     return elem.append("svg:line").attr("x1", xScale(x1)).attr("y1", yScale(y1)).attr("x2", xScale(x2)).attr("y2", yScale(y2)).attr("stroke", stroke).attr("stroke-width", thick);
   }
 

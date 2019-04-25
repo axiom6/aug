@@ -4,8 +4,8 @@
   <div class="draw" ref="Draw">
     <d-tabs :comp="comp" :pages="pages" init="Axes"></d-tabs>
     <template v-for="page in pages">
-      <div :ref="page.short" v-if="isPage(page.short)" class="page" :key="page.short">
-        <h1>{{page.title}}</h1>
+      <div :ref="page.short" v-show="isPage(page.short)" class="page" :key="page.short">
+        <!--h1>{{page.title}}</h1-->
       </div>
     </template>
   </div>
@@ -21,16 +21,16 @@
     components:{ 'd-tabs':Dabs, drew:{} },
 
     data() {
-      return { comp:'Draw', tab:'Axes', pages:[
-          { title:'Axes',    short:'Axes',    obj:null },
-          { title:'Chord',   short:'Chord',   obj:null },
-          { title:'Cluster', short:'Cluster', obj:null },
-          { title:'Link',    short:'Link',    obj:null },
-          { title:'Radar',   short:'Radar',   obj:null },
-          { title:'Radial',  short:'Radial',  obj:null },
-          { title:'Tree',    short:'Tree',    obj:null },
-          { title:'Wheel',   short:'Wheel',   obj:null }
-        ] } },
+      return { comp:'Draw', tab:'Axes', pages:{
+          Axes:    { title:'Axes',    short:'Axes',    obj:null },
+          Chord:   { title:'Chord',   short:'Chord',   obj:null },
+          Cluster: { title:'Cluster', short:'Cluster', obj:null },
+          Link:    { title:'Link',    short:'Link',    obj:null },
+          Radar:   { title:'Radar',   short:'Radar',   obj:null },
+          Radial:  { title:'Radial',  short:'Radial',  obj:null },
+          Tree:    { title:'Tree',    short:'Tree',    obj:null },
+          Wheel:   { title:'Wheel',   short:'Wheel',   obj:null }
+        } } },
 
     methods: {
       isPage: function(short) {
@@ -38,22 +38,26 @@
       onTabs: function(tab) {
         this.tab =  tab;
         this.create(tab); },
-      create: function( tab ) {
-        if( this.pages.obj===null ) {
-            let elem = this.$refs[tab][0]
-            this.pages.obj = this.drew.create( tab, elem, this.size() ); } },
+
       size: function() {
         let sz   = {}
         sz.compWidth  = this.$refs['Draw']['clientWidth' ];
         sz.compHeight = this.$refs['Draw']['clientHeight'];
         sz.elemWidth  = this.$refs['Draw']['clientWidth' ];
         sz.elemHeight = this.$refs['Draw']['clientHeight'];
-        return sz;
-      }
+        return sz; },
+      
+      create: function( tab ) {
+        console.log( 'Draw.create(tab)', tab )
+        console.log( 'Draw.create(tab)', this.$refs[tab][0] )
+        if( this.pages[tab].obj===null ) {
+            let elem = this.$refs[tab][0]
+            this.pages[tab].obj = this.drew.create( tab, elem, this.size() ); } }
     },
 
     mounted: function () {
-      this.drew = new Drew( this.stream(), this.$refs['Draw'], this.size() )
+      this.drew = new Drew( this.stream(), this.$refs['Draw'], this.size() );
+      this.onTabs('Axes');
       this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
         this.onTabs(obj); } );
     }
@@ -66,6 +70,6 @@
 
 <style lang="less">
   .draw {   position:relative; left:0; top:0;  right:0; bottom:0;
-    .page { position:absolute; left:0; top:5%; right:0; bottom:0; display:grid; background-color:black;
+    .page { position:absolute; left:0; top:5%; right:0; bottom:0; display:grid; background-color:gray;
       h1    { justify-self:center; align-self:center; text-align:center; color:wheat; font-size:3em; } } }
 </style>

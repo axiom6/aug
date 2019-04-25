@@ -5,7 +5,7 @@ import Vis  from '../util/Vis.js'
 class Axes
 
   constructor:( @drew, @d3, @name, @elem, @size ) ->
-    @graph = @drew.ready(   @name, @elem, @size )
+    [@svg,@g] = @drew.ready(   @name, @elem, @size )
     @ready()
 
   ready:() ->
@@ -13,7 +13,6 @@ class Axes
     @margin = { left:40, top:40, right:40, bottom:40 }
     @width  = geo.w - @margin.left - @margin.right
     @height = geo.h - @margin.top  - @margin.bottom
-    @g      = @graph.g
     @xObj   = { x1:0, x2:100, xtick1:10, xtick2:1 }
     @yObj   = { y1:0, y2:100, ytick1:10, ytick2:1 }
     @xScale = @createXScale( @xObj, @width  )
@@ -28,7 +27,7 @@ class Axes
     if @bAxis is false and @tAxis is false and @lAxis is false and @rAxis is false then {}
     @grid( @g, @xObj, @yObj )
     #$('path.domain').hide()
-    #@d3d.transform( @graph.$s, @g, geo.w/2, geo.h/2, geo.s )
+    #@d3d.transform( @svg.$s, @g, geo.w/2, geo.h/2, geo.s )
 
   createXScale:( xObj, width ) ->
     @d3.scaleLinear().domain([xObj.x1,xObj.x2]).range([0,width]).clamp(true)
@@ -85,12 +84,13 @@ class Axes
     elem = g.append("g:g")
     @xLines( elem, xObj.x1, xObj.x2, xObj.xtick2, yObj.y1, yObj.y2, '#000000', 1 )
     @yLines( elem, yObj.y1, yObj.y2, yObj.ytick2, xObj.x1, xObj.x2, '#000000', 1 )
-    @xLines( elem, xObj.x1, xObj.x2, xObj.xtick1, yObj.y1, yObj.y2, '#FFFFFF', 1 )
-    @yLines( elem, yObj.y1, yObj.y2, yObj.ytick1, xObj.x1, xObj.x2, '#FFFFFF', 1 )
+    @xLines( elem, xObj.x1, xObj.x2, xObj.xtick1, yObj.y1, yObj.y2, '#888888', 1 )
+    @yLines( elem, yObj.y1, yObj.y2, yObj.ytick1, xObj.x1, xObj.x2, '#888888', 1 )
 
-  line:( elem, x1, y1, x2, y2, stroke="black", thick=1, xScale=@xScale, yScale=@yScale ) ->
+  line:( elem, x1, y1, x2, y2, stroke="white", thick=1, xScale=@xScale, yScale=@yScale ) ->
    elem.append("svg:line")
-    .attr("x1",xScale(x1)).attr("y1",yScale(y1)).attr("x2",xScale(x2)).attr("y2",yScale(y2)).attr("stroke",stroke).attr("stroke-width",thick)
+    .attr("x1",xScale(x1)).attr("y1",yScale(y1)).attr("x2",xScale(x2)).attr("y2",yScale(y2))
+    .attr("stroke",stroke).attr("stroke-width",thick)
 
   xLines:( elem, xb, xe, dx, y1, y2, stroke, thick ) ->
     i  = 1
@@ -110,4 +110,4 @@ class Axes
       @line( elem, x1, y, x2, y, stroke, thick )
       y = y1 + dy * i++
 
-`export default Axes`
+export default Axes

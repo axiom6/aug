@@ -12,8 +12,10 @@ import Wheel    from '../drew/Wheel.js'
 class Drew
 
   constructor:( @stream ) ->
+    @size = {}
 
   create:( name, elem, size ) ->
+
     switch name
       when 'Axes'    then new Axes(    @, d3, name, elem, size )
       when 'Chord'   then new Chord(   @, d3, name, elem, size )
@@ -27,19 +29,20 @@ class Drew
         console.error( 'Draw.create(name) unknown name', name )
         new Axes(    @ )
 
-
   ready:( name, elem, size ) ->
+    @size = size
     #geo = @geom( size.elemWidth, size.elemHeight, size.elemWidth, size.elemHeight )
     @svg=null; @g=null; svgId=''; gId=''; @defs=null
     [@svg,@g,svgId,gId,@defs] = @createSvg( elem, name, size.elemWidth, size.elemHeight )
     @size.lastWidth  = size.elemWidth
     @size.lastHeight = size.elemHeight
     @htmlId = svgId
-    return @svg
+    return [@svg,@g]
 
-  createSvg:( elem, name, w, h ) =>
+  createSvg:( elem,  name, w, h ) =>
     svgId = @htmlId( name, 'Svg',  '' )
     gId   = @htmlId( name, 'SvgG', '' )
+    console.log( 'Drew.createSvg()', name, elem );
     svg   = d3.select(elem).append("svg:svg")
     svg.attr("id",svgId).attr("width",w).attr("height",h)
        .attr("xmlns","http://www.w3.org/2000/svg")
