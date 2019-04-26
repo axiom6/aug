@@ -1792,6 +1792,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/lib/math/ganja.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/lib/math/ganja.esm-min.js",
+		"oF": 1,
+		"sC": 1,
+		"tS": 1
+		},
 	"/lib/math/ganja.js": {
 		"bF": 0,
 		"ft": 64,
@@ -3706,7 +3717,7 @@
 		},
 	"esLintConfigFileHandlingType": 0,
 	"esLintECMAVersion": 7,
-	"esLintEnvironmentsMask": 1,
+	"esLintEnvironmentsMask": 17,
 	"esLintRules": {
 		"accessor-pairs": {
 			"active": 0,
@@ -4729,7 +4740,7 @@
 			"optionString": "'never', {'exceptRange': false, 'onlyEquality': false}"
 			}
 		},
-	"esLintSourceType": 0,
+	"esLintSourceType": 1,
 	"externalServerAddress": "http://localhost:8888",
 	"gitIgnoreBuildFolder": 1,
 	"hideConfigFile": 0,
@@ -4796,7 +4807,7 @@
 			"flagValue": -1
 			},
 		"esnext": {
-			"active": 0,
+			"active": 1,
 			"flagValue": -1
 			},
 		"evil": {
@@ -4896,7 +4907,7 @@
 			"flagValue": -1
 			},
 		"moz": {
-			"active": 0,
+			"active": 1,
 			"flagValue": -1
 			},
 		"multistr": {
@@ -5054,7 +5065,7 @@
 			"flagValue": -1
 			},
 		"es6": {
-			"active": 0,
+			"active": 1,
 			"flagValue": -1
 			},
 		"eval": {
@@ -5318,23 +5329,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.vue",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "",
-			"autoOutputPathReplace2": "",
-			"autoOutputPathStyle": 0,
-			"fileExtension": "vue",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.html",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "",
 			"autoOutputPathReplace2": "",
 			"autoOutputPathStyle": 0,
 			"fileExtension": "html",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.vue",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "",
+			"autoOutputPathReplace2": "",
+			"autoOutputPathStyle": 0,
+			"fileExtension": "vue",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

@@ -4,17 +4,17 @@ import Vis  from '../util/Vis.js'
 
 class Axes
 
-  constructor:( @drew, @d3, @name, @elem, @size ) ->
-    [@svg,@g] = @drew.ready(   @name, @elem, @size )
+  constructor:( @drew, @d3,  @name, @elem, @size ) ->
+    [@svg,@g] = @drew.ready( @name, @elem, @size )
     @ready()
 
   ready:() ->
     geo     = @drew.geomElem()
     @margin = { left:40, top:40, right:40, bottom:40 }
-    @width  = geo.w - @margin.left - @margin.right
-    @height = geo.h - @margin.top  - @margin.bottom
-    @xObj   = { x1:0, x2:100, xtick1:10, xtick2:1 }
-    @yObj   = { y1:0, y2:100, ytick1:10, ytick2:1 }
+    @width  = Math.min(geo.w,geo.h) - @margin.left - @margin.right
+    @height = Math.min(geo.w,geo.h) - @margin.top  - @margin.bottom
+    @xObj   = { x1:0, x2:100, xtick1:10, xtick2:1, stroke1:'#AAAAAA', stroke2:'#666666' }
+    @yObj   = { y1:0, y2:100, ytick1:10, ytick2:1, stroke1:'#AAAAAA', stroke2:'#666666' }
     @xScale = @createXScale( @xObj, @width  )
     @yScale = @createYScale( @yObj, @height )
     @xAxis  = @createXAxis(  @xObj, @width,  @xScale )
@@ -24,6 +24,7 @@ class Axes
     @tAxis  = @createTAxis( @g, @xAxis )
     @lAxis  = @createLAxis( @g, @yAxis )
     @rAxis  = @createRAxis( @g, @yAxis )
+    #bAxis.call(@xAxis.orient("bottom")) ???
     if @bAxis is false and @tAxis is false and @lAxis is false and @rAxis is false then {}
     @grid( @g, @xObj, @yObj )
     #$('path.domain').hide()
@@ -59,7 +60,7 @@ class Axes
     .attr("class", "axis-bottom axis")
     .attr("stroke", '#FFFFFF')
     .attr("transform", "translate(0,#{@height})" )
-    #call(xAxis.orient("bottom"))
+
 
   createTAxis:( g ) ->
    g.append("svg:g")
@@ -82,10 +83,10 @@ class Axes
 
   grid:( g, xObj, yObj ) ->
     elem = g.append("g:g")
-    @xLines( elem, xObj.x1, xObj.x2, xObj.xtick2, yObj.y1, yObj.y2, '#000000', 1 )
-    @yLines( elem, yObj.y1, yObj.y2, yObj.ytick2, xObj.x1, xObj.x2, '#000000', 1 )
-    @xLines( elem, xObj.x1, xObj.x2, xObj.xtick1, yObj.y1, yObj.y2, '#888888', 1 )
-    @yLines( elem, yObj.y1, yObj.y2, yObj.ytick1, xObj.x1, xObj.x2, '#888888', 1 )
+    @xLines( elem, xObj.x1, xObj.x2, xObj.xtick2, yObj.y1, yObj.y2, xObj.stroke2, 1 )
+    @yLines( elem, yObj.y1, yObj.y2, yObj.ytick2, xObj.x1, xObj.x2, yObj.stroke2, 1 )
+    @xLines( elem, xObj.x1, xObj.x2, xObj.xtick1, yObj.y1, yObj.y2, xObj.stroke1, 1 )
+    @yLines( elem, yObj.y1, yObj.y2, yObj.ytick1, xObj.x1, xObj.x2, yObj.stroke1, 1 )
 
   line:( elem, x1, y1, x2, y2, stroke="white", thick=1, xScale=@xScale, yScale=@yScale ) ->
    elem.append("svg:line")

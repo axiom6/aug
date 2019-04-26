@@ -22,19 +22,23 @@ Axes = class Axes {
       right: 40,
       bottom: 40
     };
-    this.width = geo.w - this.margin.left - this.margin.right;
-    this.height = geo.h - this.margin.top - this.margin.bottom;
+    this.width = Math.min(geo.w, geo.h) - this.margin.left - this.margin.right;
+    this.height = Math.min(geo.w, geo.h) - this.margin.top - this.margin.bottom;
     this.xObj = {
       x1: 0,
       x2: 100,
       xtick1: 10,
-      xtick2: 1
+      xtick2: 1,
+      stroke1: '#AAAAAA',
+      stroke2: '#666666'
     };
     this.yObj = {
       y1: 0,
       y2: 100,
       ytick1: 10,
-      ytick2: 1
+      ytick2: 1,
+      stroke1: '#AAAAAA',
+      stroke2: '#666666'
     };
     this.xScale = this.createXScale(this.xObj, this.width);
     this.yScale = this.createYScale(this.yObj, this.height);
@@ -45,6 +49,7 @@ Axes = class Axes {
     this.tAxis = this.createTAxis(this.g, this.xAxis);
     this.lAxis = this.createLAxis(this.g, this.yAxis);
     this.rAxis = this.createRAxis(this.g, this.yAxis);
+    //bAxis.call(@xAxis.orient("bottom")) ???
     if (this.bAxis === false && this.tAxis === false && this.lAxis === false && this.rAxis === false) {
       ({});
     }
@@ -91,7 +96,6 @@ Axes = class Axes {
     return s.append("svg:g").attr("class", "axis-bottom axis").attr("stroke", '#FFFFFF').attr("transform", `translate(0,${this.height})`);
   }
 
-  //call(xAxis.orient("bottom"))
   createTAxis(g) {
     return g.append("svg:g").attr("class", "axis-top axis").attr("stroke", '#FFFFFF');
   }
@@ -110,10 +114,10 @@ Axes = class Axes {
   grid(g, xObj, yObj) {
     var elem;
     elem = g.append("g:g");
-    this.xLines(elem, xObj.x1, xObj.x2, xObj.xtick2, yObj.y1, yObj.y2, '#000000', 1);
-    this.yLines(elem, yObj.y1, yObj.y2, yObj.ytick2, xObj.x1, xObj.x2, '#000000', 1);
-    this.xLines(elem, xObj.x1, xObj.x2, xObj.xtick1, yObj.y1, yObj.y2, '#888888', 1);
-    return this.yLines(elem, yObj.y1, yObj.y2, yObj.ytick1, xObj.x1, xObj.x2, '#888888', 1);
+    this.xLines(elem, xObj.x1, xObj.x2, xObj.xtick2, yObj.y1, yObj.y2, xObj.stroke2, 1);
+    this.yLines(elem, yObj.y1, yObj.y2, yObj.ytick2, xObj.x1, xObj.x2, yObj.stroke2, 1);
+    this.xLines(elem, xObj.x1, xObj.x2, xObj.xtick1, yObj.y1, yObj.y2, xObj.stroke1, 1);
+    return this.yLines(elem, yObj.y1, yObj.y2, yObj.ytick1, xObj.x1, xObj.x2, yObj.stroke1, 1);
   }
 
   line(elem, x1, y1, x2, y2, stroke = "white", thick = 1, xScale = this.xScale, yScale = this.yScale) {

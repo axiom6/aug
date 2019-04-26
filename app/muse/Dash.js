@@ -21917,19 +21917,23 @@ Axes = class Axes {
       right: 40,
       bottom: 40
     };
-    this.width = geo.w - this.margin.left - this.margin.right;
-    this.height = geo.h - this.margin.top - this.margin.bottom;
+    this.width = Math.min(geo.w, geo.h) - this.margin.left - this.margin.right;
+    this.height = Math.min(geo.w, geo.h) - this.margin.top - this.margin.bottom;
     this.xObj = {
       x1: 0,
       x2: 100,
       xtick1: 10,
-      xtick2: 1
+      xtick2: 1,
+      stroke1: '#AAAAAA',
+      stroke2: '#666666'
     };
     this.yObj = {
       y1: 0,
       y2: 100,
       ytick1: 10,
-      ytick2: 1
+      ytick2: 1,
+      stroke1: '#AAAAAA',
+      stroke2: '#666666'
     };
     this.xScale = this.createXScale(this.xObj, this.width);
     this.yScale = this.createYScale(this.yObj, this.height);
@@ -21940,6 +21944,7 @@ Axes = class Axes {
     this.tAxis = this.createTAxis(this.g, this.xAxis);
     this.lAxis = this.createLAxis(this.g, this.yAxis);
     this.rAxis = this.createRAxis(this.g, this.yAxis);
+    //bAxis.call(@xAxis.orient("bottom")) ???
     if (this.bAxis === false && this.tAxis === false && this.lAxis === false && this.rAxis === false) ;
     return this.grid(this.g, this.xObj, this.yObj);
   }
@@ -21978,7 +21983,6 @@ Axes = class Axes {
     return s.append("svg:g").attr("class", "axis-bottom axis").attr("stroke", '#FFFFFF').attr("transform", `translate(0,${this.height})`);
   }
 
-  //call(xAxis.orient("bottom"))
   createTAxis(g) {
     return g.append("svg:g").attr("class", "axis-top axis").attr("stroke", '#FFFFFF');
   }
@@ -21997,10 +22001,10 @@ Axes = class Axes {
   grid(g, xObj, yObj) {
     var elem;
     elem = g.append("g:g");
-    this.xLines(elem, xObj.x1, xObj.x2, xObj.xtick2, yObj.y1, yObj.y2, '#000000', 1);
-    this.yLines(elem, yObj.y1, yObj.y2, yObj.ytick2, xObj.x1, xObj.x2, '#000000', 1);
-    this.xLines(elem, xObj.x1, xObj.x2, xObj.xtick1, yObj.y1, yObj.y2, '#888888', 1);
-    return this.yLines(elem, yObj.y1, yObj.y2, yObj.ytick1, xObj.x1, xObj.x2, '#888888', 1);
+    this.xLines(elem, xObj.x1, xObj.x2, xObj.xtick2, yObj.y1, yObj.y2, xObj.stroke2, 1);
+    this.yLines(elem, yObj.y1, yObj.y2, yObj.ytick2, xObj.x1, xObj.x2, yObj.stroke2, 1);
+    this.xLines(elem, xObj.x1, xObj.x2, xObj.xtick1, yObj.y1, yObj.y2, xObj.stroke1, 1);
+    return this.yLines(elem, yObj.y1, yObj.y2, yObj.ytick1, xObj.x1, xObj.x2, yObj.stroke1, 1);
   }
 
   line(elem, x1, y1, x2, y2, stroke = "white", thick = 1, xScale = this.xScale, yScale = this.yScale) {
@@ -26357,7 +26361,7 @@ __vue_render__$d._withStripped = true;
   /* style */
   const __vue_inject_styles__$g = function (inject) {
     if (!inject) return
-    inject("data-v-292465e6_0", { source: ".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: gray;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,sBAAsB;AACxB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Draw.vue","sourcesContent":[".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: gray;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
+    inject("data-v-573d6866_0", { source: ".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
