@@ -17,18 +17,17 @@ class Axes
     @yObj   = { y1:0, y2:100, ytick1:10, ytick2:1, stroke1:'#AAAAAA', stroke2:'#666666' }
     @xScale = @createXScale( @xObj, @width  )
     @yScale = @createYScale( @yObj, @height )
-    @xAxis  = @createXAxis(  @xObj, @width,  @xScale )
-    @yAxis  = @createYAxis(  @yObj, @height, @yScale )
-    @attrG( @g )
-    @bAxis  = @createBAxis( @g, @xAxis )
-    @tAxis  = @createTAxis( @g, @xAxis )
-    @lAxis  = @createLAxis( @g, @yAxis )
-    @rAxis  = @createRAxis( @g, @yAxis )
-    #bAxis.call(@xAxis.orient("bottom")) ???
-    if @bAxis is false and @tAxis is false and @lAxis is false and @rAxis is false then {}
+    @axes( @g, @xObj, @yObj )
     @grid( @g, @xObj, @yObj )
-    #$('path.domain').hide()
     #@d3d.transform( @svg.$s, @g, geo.w/2, geo.h/2, geo.s )
+
+  axes:( g, xObj, yObj ) ->
+    @attrG( g )
+    @bAxis  = @createBAxis( g, xObj )
+    @tAxis  = @createTAxis( g, xObj )
+    @lAxis  = @createLAxis( g, yObj )
+    @rAxis  = @createRAxis( g, yObj )
+    if @bAxis is false and @tAxis is false and @lAxis is false and @rAxis is false then {}
 
   createXScale:( xObj, width ) ->
     @d3.scaleLinear().domain([xObj.x1,xObj.x2]).range([0,width]).clamp(true)
@@ -36,50 +35,52 @@ class Axes
   createYScale:( yObj, height ) ->
     @d3.scaleLinear().domain([yObj.y1,yObj.y2]).range([height,0] ).clamp(true)
 
-  createXAxis:( xObj, width, xScale ) ->
-    xtick1 = if xObj.xtick1?  then xObj.xtick1 else (@x2-@x1) / 10
-    ntick1 = (xObj.x2-xObj.x1) / xObj.xtick1
-    ntick2 = if xObj.xtick2? then xtick1/xObj.xtick2 else 0
-    if ntick2 is false then {}
-    @d3.axisLeft().scale(xScale).ticks(ntick1).tickSize(12) # tickSubdivide(ntick2) .tickPadding(1)
-
-  createYAxis:( yObj, height, yScale ) ->
-    ytick1 = if yObj.ytick1? then yObj.ytick1 else (@y2-@y1) / 10
-    ntick1 = (yObj.y2-yObj.y1) / yObj.ytick1
-    ntick2 = if yObj.ytick2? then ytick1/yObj.ytick2 else 0
-    if ntick2 is false then {}
-    @d3.axisTop().scale(yScale).ticks(ntick1).tickSize(12)
-
   attrG:( g ) ->
     g.attr("style","overflow:visible;")
      .attr("transform", "translate(#{@margin.left},#{@margin.top})" )
      .attr("style","overflow:visible;")
 
-  createBAxis:( s ) ->
-   s.append("svg:g")
-    .attr("class", "axis-bottom axis")
-    .attr("stroke", '#FFFFFF')
-    .attr("transform", "translate(0,#{@height})" )
+  createBAxis:( g, xObj ) ->
+    ntick1 = (xObj.x2-xObj.x1) / xObj.xtick1 # ntick2 = xObj.xtick1/xObj.xtick2
+    axisBottom = @d3.axisBottom().scale(@xScale).ticks(ntick1).tickSize(12).tickPadding(1)
+    g.append("svg:g")
+     .attr("class", "axis-bottom axis")
+     .attr("stroke", '#FFFFFF')
+     .attr("transform", "translate(0,#{@height})" )
+     .call( axisBottom )
+     .selectAll('.tick line').attr("stroke", '#FFFFFF')
+    axisBottom
 
+  createTAxis:( g, xObj ) ->
+    ntick1 = (xObj.x2-xObj.x1) / xObj.xtick1 #ntick2 = xObj.xtick1/xObj.xtick2
+    axisTop = @d3.axisTop().scale(@xScale).ticks(ntick1).tickSize(12).tickPadding(1)
+    g.append("svg:g")
+     .attr("class", "axis-top axis")
+     .attr("stroke", '#FFFFFF')
+     .call( axisTop )
+     .selectAll('.tick line').attr("stroke", '#FFFFFF')
+    axisTop
 
-  createTAxis:( g ) ->
-   g.append("svg:g")
-    .attr("class", "axis-top axis")
-    .attr("stroke", '#FFFFFF')
-    #call(xAxis.orient("top"))
+  createLAxis:( g, yObj ) ->
+    ntick1 = (yObj.y2-yObj.y1) / yObj.ytick1 # ntick2 = ytick1/yObj.ytick2
+    axisLeft  = @d3.axisLeft().scale(@yScale).ticks(ntick1).tickSize(12).tickPadding(1)
+    g.append("svg:g")
+     .attr("class", "axis-left axis")
+     .attr("stroke", '#FFFFFF')
+     .call( axisLeft )
+     .selectAll('.tick line').attr("stroke", '#FFFFFF')
+    axisLeft
 
-  createLAxis:( g ) ->
-   g.append("svg:g")
-    .attr("class", "axis-left axis")
-    .attr("stroke", '#FFFFFF')
-    #call(yAxis.orient("left"))
-
-  createRAxis:( g ) ->
-   g.append("svg:g")
-    .attr("class", "axis-right axis")
-    .attr("stroke", '#FFFFFF')
-    .attr("transform", "translate(#{@width},0)" )
-    #call(yAxis.orient("right"))
+  createRAxis:( g, yObj ) ->
+    ntick1 = (yObj.y2-yObj.y1) / yObj.ytick1 #ntick2 = ytick1/yObj.ytick2
+    axisRight  = @d3.axisRight().scale(@yScale).ticks(ntick1).tickSize(12).tickPadding(1)
+    g.append("svg:g")
+     .attr("class", "axis-right axis")
+     .attr("stroke", '#FFFFFF')
+     .attr("transform", "translate(#{@width},0)" )
+     .call( axisRight )
+     .selectAll('.tick line').attr("stroke", '#FFFFFF')
+    axisRight
 
   grid:( g, xObj, yObj ) ->
     elem = g.append("g:g")
@@ -89,7 +90,7 @@ class Axes
     @yLines( elem, yObj.y1, yObj.y2, yObj.ytick1, xObj.x1, xObj.x2, yObj.stroke1, 1 )
 
   line:( elem, x1, y1, x2, y2, stroke="white", thick=1, xScale=@xScale, yScale=@yScale ) ->
-   elem.append("svg:line")
+   elem.append("svg:line")   #attr("x1",x1).attr("y1",y1).attr("x2",x2).attr("y2",y2)
     .attr("x1",xScale(x1)).attr("y1",yScale(y1)).attr("x2",xScale(x2)).attr("y2",yScale(y2))
     .attr("stroke",stroke).attr("stroke-width",thick)
 

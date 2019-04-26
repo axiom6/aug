@@ -1,5 +1,6 @@
 
 import * as d3  from '../../lib/d3/d3.5.9.0.esm.js';
+import Vis      from '../util/Vis.js'
 import Axes     from '../drew/Axes.js'
 import Chord    from '../drew/Chord.js'
 import Cluster  from '../drew/Cluster.js'
@@ -42,7 +43,6 @@ class Drew
   createSvg:( elem,  name, w, h ) =>
     svgId = @htmlId( name, 'Svg',  '' )
     gId   = @htmlId( name, 'SvgG', '' )
-    console.log( 'Drew.createSvg()', name, elem );
     svg   = d3.select(elem).append("svg:svg")
     svg.attr("id",svgId).attr("width",w).attr("height",h)
        .attr("xmlns","http://www.w3.org/2000/svg")
@@ -60,18 +60,23 @@ class Drew
   layout:( size, op ) ->
     if op is 'Expand'  # Zoom to the entire Comp size
       geo  = @geom( size.compWidth, size.compHeight, @size.elemWidth,    @size.elemHeight )
-      @shapes.layoutSvg( @svg, @g, size.compWidth, size.compHeight,    geo.sx, geo.sy   )
+      @transform( @svg, @g, size.compWidth, size.compHeight,    geo.sx, geo.sy   )
     if op is 'Restore'  # @size is original while size is a reszize
       geo  = @geom( @size.lastWidth, @size.lastHeight, @size.elemWidth,  @size.elemHeight )
-      @shapes.layoutSvg( @svg, @g, @size.lastWidth, @size.lastHeight,  geo.sx, geo.sy   )
+      @transform( @svg, @g, @size.lastWidth, @size.lastHeight,  geo.sx, geo.sy   )
     if op is 'Resize'  # @size is original while size is a reszize
       geo  = @geom(  size.elemWidth,  size.elemHeight, @size.elemWidth,  @size.elemHeight )
-      @shapes.layoutSvg( @svg, @g, @size.elemWidth,  @size.elemHeight, geo.sx, geo.sy   )
+      @transform( @svg, @g, @size.elemWidth,  @size.elemHeight, geo.sx, geo.sy   )
+    return
+
+  transform:( svg, g, svgWidth, svgHeight, sx, sy ) =>
+    # console.log( 'Drew.transform()', svgWidth, svgHeight, sx, sy )
+    svg.attr( "width", svgWidth ).attr("height", svgHeight )
+    g  .attr( 'transform', Vis.scale( sx, sy ) )
     return
     
   geomElem:() ->
     @geom( @size.elemWidth, @size.elemHeight, @size.elemWidth,  @size.elemHeight )
-    
 
   geom:( compWidth, compHeight, elemWidth, elemHeight ) ->
     g = {}

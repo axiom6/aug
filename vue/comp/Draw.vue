@@ -48,8 +48,6 @@
         return sz; },
       
       create: function( tab ) {
-        console.log( 'Draw.create(tab)', tab )
-        console.log( 'Draw.create(tab)', this.$refs[tab][0] )
         if( this.pages[tab].obj===null ) {
             let elem = this.$refs[tab][0]
             this.pages[tab].obj = this.drew.create( tab, elem, this.size() ); } }

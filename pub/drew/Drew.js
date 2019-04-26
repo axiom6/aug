@@ -2,6 +2,8 @@ var Drew;
 
 import * as d3 from '../../lib/d3/d3.5.9.0.esm.js';
 
+import Vis from '../util/Vis.js';
+
 import Axes from '../drew/Axes.js';
 
 import Chord from '../drew/Chord.js';
@@ -21,6 +23,7 @@ import Wheel from '../drew/Wheel.js';
 Drew = class Drew {
   constructor(stream) {
     this.createSvg = this.createSvg.bind(this);
+    this.transform = this.transform.bind(this);
     this.stream = stream;
     this.size = {};
   }
@@ -69,7 +72,6 @@ Drew = class Drew {
     var defs, g, gId, svg, svgId;
     svgId = this.htmlId(name, 'Svg', '');
     gId = this.htmlId(name, 'SvgG', '');
-    console.log('Drew.createSvg()', name, elem);
     svg = d3.select(elem).append("svg:svg");
     svg.attr("id", svgId).attr("width", w).attr("height", h).attr("xmlns", "http://www.w3.org/2000/svg");
     defs = svg.append("svg:defs");
@@ -90,16 +92,22 @@ Drew = class Drew {
     var geo;
     if (op === 'Expand') { // Zoom to the entire Comp size
       geo = this.geom(size.compWidth, size.compHeight, this.size.elemWidth, this.size.elemHeight);
-      this.shapes.layoutSvg(this.svg, this.g, size.compWidth, size.compHeight, geo.sx, geo.sy);
+      this.transform(this.svg, this.g, size.compWidth, size.compHeight, geo.sx, geo.sy);
     }
     if (op === 'Restore') { // @size is original while size is a reszize
       geo = this.geom(this.size.lastWidth, this.size.lastHeight, this.size.elemWidth, this.size.elemHeight);
-      this.shapes.layoutSvg(this.svg, this.g, this.size.lastWidth, this.size.lastHeight, geo.sx, geo.sy);
+      this.transform(this.svg, this.g, this.size.lastWidth, this.size.lastHeight, geo.sx, geo.sy);
     }
     if (op === 'Resize') { // @size is original while size is a reszize
       geo = this.geom(size.elemWidth, size.elemHeight, this.size.elemWidth, this.size.elemHeight);
-      this.shapes.layoutSvg(this.svg, this.g, this.size.elemWidth, this.size.elemHeight, geo.sx, geo.sy);
+      this.transform(this.svg, this.g, this.size.elemWidth, this.size.elemHeight, geo.sx, geo.sy);
     }
+  }
+
+  transform(svg, g, svgWidth, svgHeight, sx, sy) {
+    // console.log( 'Drew.transform()', svgWidth, svgHeight, sx, sy )
+    svg.attr("width", svgWidth).attr("height", svgHeight);
+    g.attr('transform', Vis.scale(sx, sy));
   }
 
   geomElem() {

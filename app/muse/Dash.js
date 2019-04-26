@@ -21937,20 +21937,22 @@ Axes = class Axes {
     };
     this.xScale = this.createXScale(this.xObj, this.width);
     this.yScale = this.createYScale(this.yObj, this.height);
-    this.xAxis = this.createXAxis(this.xObj, this.width, this.xScale);
-    this.yAxis = this.createYAxis(this.yObj, this.height, this.yScale);
-    this.attrG(this.g);
-    this.bAxis = this.createBAxis(this.g, this.xAxis);
-    this.tAxis = this.createTAxis(this.g, this.xAxis);
-    this.lAxis = this.createLAxis(this.g, this.yAxis);
-    this.rAxis = this.createRAxis(this.g, this.yAxis);
-    //bAxis.call(@xAxis.orient("bottom")) ???
-    if (this.bAxis === false && this.tAxis === false && this.lAxis === false && this.rAxis === false) ;
+    this.axes(this.g, this.xObj, this.yObj);
     return this.grid(this.g, this.xObj, this.yObj);
   }
 
-  //$('path.domain').hide()
   //@d3d.transform( @svg.$s, @g, geo.w/2, geo.h/2, geo.s )
+  axes(g, xObj, yObj) {
+    this.attrG(g);
+    this.bAxis = this.createBAxis(g, xObj);
+    this.tAxis = this.createTAxis(g, xObj);
+    this.lAxis = this.createLAxis(g, yObj);
+    this.rAxis = this.createRAxis(g, yObj);
+    if (this.bAxis === false && this.tAxis === false && this.lAxis === false && this.rAxis === false) {
+      return {};
+    }
+  }
+
   createXScale(xObj, width) {
     return this.d3.scaleLinear().domain([xObj.x1, xObj.x2]).range([0, width]).clamp(true);
   }
@@ -21959,45 +21961,42 @@ Axes = class Axes {
     return this.d3.scaleLinear().domain([yObj.y1, yObj.y2]).range([height, 0]).clamp(true);
   }
 
-  createXAxis(xObj, width, xScale) {
-    var ntick1, ntick2, xtick1;
-    xtick1 = xObj.xtick1 != null ? xObj.xtick1 : (this.x2 - this.x1) / 10;
-    ntick1 = (xObj.x2 - xObj.x1) / xObj.xtick1;
-    ntick2 = xObj.xtick2 != null ? xtick1 / xObj.xtick2 : 0;
-    return this.d3.axisLeft().scale(xScale).ticks(ntick1).tickSize(12); // tickSubdivide(ntick2) .tickPadding(1)
-  }
-
-  createYAxis(yObj, height, yScale) {
-    var ntick1, ntick2, ytick1;
-    ytick1 = yObj.ytick1 != null ? yObj.ytick1 : (this.y2 - this.y1) / 10;
-    ntick1 = (yObj.y2 - yObj.y1) / yObj.ytick1;
-    ntick2 = yObj.ytick2 != null ? ytick1 / yObj.ytick2 : 0;
-    return this.d3.axisTop().scale(yScale).ticks(ntick1).tickSize(12);
-  }
-
   attrG(g) {
     return g.attr("style", "overflow:visible;").attr("transform", `translate(${this.margin.left},${this.margin.top})`).attr("style", "overflow:visible;");
   }
 
-  createBAxis(s) {
-    return s.append("svg:g").attr("class", "axis-bottom axis").attr("stroke", '#FFFFFF').attr("transform", `translate(0,${this.height})`);
+  createBAxis(g, xObj) {
+    var axisBottom, ntick1;
+    ntick1 = (xObj.x2 - xObj.x1) / xObj.xtick1; // ntick2 = xObj.xtick1/xObj.xtick2
+    axisBottom = this.d3.axisBottom().scale(this.xScale).ticks(ntick1).tickSize(12).tickPadding(1);
+    g.append("svg:g").attr("class", "axis-bottom axis").attr("stroke", '#FFFFFF').attr("transform", `translate(0,${this.height})`).call(axisBottom).selectAll('.tick line').attr("stroke", '#FFFFFF');
+    return axisBottom;
   }
 
-  createTAxis(g) {
-    return g.append("svg:g").attr("class", "axis-top axis").attr("stroke", '#FFFFFF');
+  createTAxis(g, xObj) {
+    var axisTop, ntick1;
+    ntick1 = (xObj.x2 - xObj.x1) / xObj.xtick1; //ntick2 = xObj.xtick1/xObj.xtick2
+    axisTop = this.d3.axisTop().scale(this.xScale).ticks(ntick1).tickSize(12).tickPadding(1);
+    g.append("svg:g").attr("class", "axis-top axis").attr("stroke", '#FFFFFF').call(axisTop).selectAll('.tick line').attr("stroke", '#FFFFFF');
+    return axisTop;
   }
 
-  //call(xAxis.orient("top"))
-  createLAxis(g) {
-    return g.append("svg:g").attr("class", "axis-left axis").attr("stroke", '#FFFFFF');
+  createLAxis(g, yObj) {
+    var axisLeft, ntick1;
+    ntick1 = (yObj.y2 - yObj.y1) / yObj.ytick1; // ntick2 = ytick1/yObj.ytick2
+    axisLeft = this.d3.axisLeft().scale(this.yScale).ticks(ntick1).tickSize(12).tickPadding(1);
+    g.append("svg:g").attr("class", "axis-left axis").attr("stroke", '#FFFFFF').call(axisLeft).selectAll('.tick line').attr("stroke", '#FFFFFF');
+    return axisLeft;
   }
 
-  //call(yAxis.orient("left"))
-  createRAxis(g) {
-    return g.append("svg:g").attr("class", "axis-right axis").attr("stroke", '#FFFFFF').attr("transform", `translate(${this.width},0)`);
+  createRAxis(g, yObj) {
+    var axisRight, ntick1;
+    ntick1 = (yObj.y2 - yObj.y1) / yObj.ytick1; //ntick2 = ytick1/yObj.ytick2
+    axisRight = this.d3.axisRight().scale(this.yScale).ticks(ntick1).tickSize(12).tickPadding(1);
+    g.append("svg:g").attr("class", "axis-right axis").attr("stroke", '#FFFFFF').attr("transform", `translate(${this.width},0)`).call(axisRight).selectAll('.tick line').attr("stroke", '#FFFFFF');
+    return axisRight;
   }
 
-  //call(yAxis.orient("right"))
   grid(g, xObj, yObj) {
     var elem;
     elem = g.append("g:g");
@@ -22008,7 +22007,7 @@ Axes = class Axes {
   }
 
   line(elem, x1, y1, x2, y2, stroke = "white", thick = 1, xScale = this.xScale, yScale = this.yScale) {
-    return elem.append("svg:line").attr("x1", xScale(x1)).attr("y1", yScale(y1)).attr("x2", xScale(x2)).attr("y2", yScale(y2)).attr("stroke", stroke).attr("stroke-width", thick);
+    return elem.append("svg:line").attr("x1", xScale(x1)).attr("y1", yScale(y1)).attr("x2", xScale(x2)).attr("y2", yScale(y2)).attr("stroke", stroke).attr("stroke-width", thick); //attr("x1",x1).attr("y1",y1).attr("x2",x2).attr("y2",y2)
   }
 
   xLines(elem, xb, xe, dx, y1, y2, stroke, thick) {
@@ -26159,6 +26158,7 @@ var Drew;
 Drew = class Drew {
   constructor(stream) {
     this.createSvg = this.createSvg.bind(this);
+    this.transform = this.transform.bind(this);
     this.stream = stream;
     this.size = {};
   }
@@ -26207,7 +26207,6 @@ Drew = class Drew {
     var defs, g, gId, svg, svgId;
     svgId = this.htmlId(name, 'Svg', '');
     gId = this.htmlId(name, 'SvgG', '');
-    console.log('Drew.createSvg()', name, elem);
     svg = select(elem).append("svg:svg");
     svg.attr("id", svgId).attr("width", w).attr("height", h).attr("xmlns", "http://www.w3.org/2000/svg");
     defs = svg.append("svg:defs");
@@ -26228,16 +26227,22 @@ Drew = class Drew {
     var geo;
     if (op === 'Expand') { // Zoom to the entire Comp size
       geo = this.geom(size.compWidth, size.compHeight, this.size.elemWidth, this.size.elemHeight);
-      this.shapes.layoutSvg(this.svg, this.g, size.compWidth, size.compHeight, geo.sx, geo.sy);
+      this.transform(this.svg, this.g, size.compWidth, size.compHeight, geo.sx, geo.sy);
     }
     if (op === 'Restore') { // @size is original while size is a reszize
       geo = this.geom(this.size.lastWidth, this.size.lastHeight, this.size.elemWidth, this.size.elemHeight);
-      this.shapes.layoutSvg(this.svg, this.g, this.size.lastWidth, this.size.lastHeight, geo.sx, geo.sy);
+      this.transform(this.svg, this.g, this.size.lastWidth, this.size.lastHeight, geo.sx, geo.sy);
     }
     if (op === 'Resize') { // @size is original while size is a reszize
       geo = this.geom(size.elemWidth, size.elemHeight, this.size.elemWidth, this.size.elemHeight);
-      this.shapes.layoutSvg(this.svg, this.g, this.size.elemWidth, this.size.elemHeight, geo.sx, geo.sy);
+      this.transform(this.svg, this.g, this.size.elemWidth, this.size.elemHeight, geo.sx, geo.sy);
     }
+  }
+
+  transform(svg, g, svgWidth, svgHeight, sx, sy) {
+    // console.log( 'Drew.transform()', svgWidth, svgHeight, sx, sy )
+    svg.attr("width", svgWidth).attr("height", svgHeight);
+    g.attr('transform', Vis$2.scale(sx, sy));
   }
 
   geomElem() {
@@ -26260,7 +26265,7 @@ Drew = class Drew {
   }
 
   toFill(hsv) {
-    return Vis.toRgbHsvStr(hsv);
+    return Vis$2.toRgbHsvStr(hsv);
   }
 
 };
@@ -26301,8 +26306,6 @@ let Draw = {
       return sz; },
     
     create: function( tab ) {
-      console.log( 'Draw.create(tab)', tab );
-      console.log( 'Draw.create(tab)', this.$refs[tab][0] );
       if( this.pages[tab].obj===null ) {
           let elem = this.$refs[tab][0];
           this.pages[tab].obj = this.drew.create( tab, elem, this.size() ); } }
@@ -26361,7 +26364,7 @@ __vue_render__$d._withStripped = true;
   /* style */
   const __vue_inject_styles__$g = function (inject) {
     if (!inject) return
-    inject("data-v-573d6866_0", { source: ".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n"]}, media: undefined });
+    inject("data-v-c915b8b4_0", { source: ".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
