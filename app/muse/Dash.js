@@ -1050,7 +1050,7 @@ __vue_render__$a._withStripped = true;
   /* style */
   const __vue_inject_styles__$a = function (inject) {
     if (!inject) return
-    inject("data-v-53fc60c2_0", { source: ".tabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.tabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.tabs .tab a {\n  background-color: black;\n  color: wheat;\n  text-decoration: none;\n}\n.tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab:hover a {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab-active {\n  background-color: wheat;\n  color: black;\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.tabs .tab-active a {\n  background-color: black;\n  color: wheat;\n  text-decoration: none;\n}\n.tabs .tab-active a {\n  background-color: wheat;\n  color: black !important;\n  text-decoration: none;\n}\n", map: {"version":3,"sources":["Tabs.vue","/Users/ax/Documents/prj/aug/vue/comp/Tabs.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,UAAU;EACV,uBAAuB;EACvB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;AAChC;AACA;EACE,uBAAuB;EACvB,YAAY;EACZ,qBAAqB;AACvB;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;EACZ,qBAAqB;EACrB,gBAAgB;ECClB,gCAAA;EACA,4BAAA;EACA,6BAAA;EACA,4BAAA;EACA,8BAAA;AACA;AACA;EACA,uBAAA;EACA,YAAA;EDCE,qBAAqB;AACvB;AACA;EACE,uBAAuB;EACvB,uBAAuB;EACvB,qBAAqB;AACvB","file":"Tabs.vue","sourcesContent":[".tabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.tabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.tabs .tab a {\n  background-color: black;\n  color: wheat;\n  text-decoration: none;\n}\n.tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab:hover a {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab-active {\n  background-color: wheat;\n  color: black;\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.tabs .tab-active a {\n  background-color: black;\n  color: wheat;\n  text-decoration: none;\n}\n.tabs .tab-active a {\n  background-color: wheat;\n  color: black !important;\n  text-decoration: none;\n}\n","\n<template>\n  <div class=\"tabs\">\n    <template v-for=\"page in pages\">\n      <div :class=\"classTab(page.short)\" @click=\"pubTab(page.short)\">\n        <router-link :to=\"{ name:name(page) }\">{{page.title}}</router-link>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Array, init:String },\n    \n    data() { return { tab:this.init } },\n    \n    methods: {\n      pubTab: function (tab) {\n        this.tab = tab;\n        this.publish( 'Tabs', tab ); },\n      classTab: function (tab) {\n        return this.tab===tab ? 'tab-active' : 'tab'; },\n      name: function(page) {\n        return this.comp+page.short; } },\n\n    mounted: function () {}\n    \n    }\n  \n</script>\n\n<style lang=\"less\">\n  \n  .tabs { position:absolute; left:0; top:0; width:100%; height:5%; background-color:black; font-size:1.5em;\n    .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;\n      border-radius:12px 12px 0 0; border-left: wheat solid thin;\n      border-top:wheat solid thin; border-right:wheat solid thin;\n      a         { background-color:black; color:wheat; text-decoration:none; } }\n    .tab:hover  { background-color:wheat; color:black;\n      a         { background-color:wheat; color:black } }\n    .tab-active { background-color:wheat; color:black; .tab();\n      a         { background-color:wheat; color:black !important; text-decoration:none; } } }\n  \n</style>"]}, media: undefined });
+    inject("data-v-626527c2_0", { source: ".tabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.tabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.tabs .tab a {\n  background-color: black;\n  color: wheat;\n  text-decoration: none;\n}\n.tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab:hover a {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab-active {\n  background-color: wheat;\n  color: black;\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.tabs .tab-active a {\n  background-color: black;\n  color: wheat;\n  text-decoration: none;\n}\n.tabs .tab-active a {\n  background-color: wheat;\n  color: black !important;\n  text-decoration: none;\n}\n", map: {"version":3,"sources":["Tabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Tabs.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,UAAU;EACV,uBAAuB;EACvB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;AAChC;AACA;EACE,uBAAuB;EACvB,YAAY;EACZ,qBAAqB;AACvB;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;EACZ,qBAAqB;EACrB,gBAAgB;ECClB,gCAAA;EACA,4BAAA;EACA,6BAAA;EACA,4BAAA;EACA,8BAAA;AACA;AACA;EACA,uBAAA;EACA,YAAA;EDCE,qBAAqB;AACvB;AACA;EACE,uBAAuB;EACvB,uBAAuB;EACvB,qBAAqB;AACvB","file":"Tabs.vue","sourcesContent":[".tabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.tabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.tabs .tab a {\n  background-color: black;\n  color: wheat;\n  text-decoration: none;\n}\n.tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab:hover a {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab-active {\n  background-color: wheat;\n  color: black;\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.tabs .tab-active a {\n  background-color: black;\n  color: wheat;\n  text-decoration: none;\n}\n.tabs .tab-active a {\n  background-color: wheat;\n  color: black !important;\n  text-decoration: none;\n}\n","\n<template>\n  <div class=\"tabs\">\n    <template v-for=\"page in pages\">\n      <div :class=\"classTab(page.short)\" @click=\"pubTab(page.short)\">\n        <router-link :to=\"{ name:name(page) }\">{{page.title}}</router-link>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Array, init:String },\n    \n    data() { return { tab:this.init } },\n    \n    methods: {\n      pubTab: function (tab) {\n        this.tab = tab;\n        this.publish( 'Tabs', tab ); },\n      classTab: function (tab) {\n        return this.tab===tab ? 'tab-active' : 'tab'; },\n      name: function(page) {\n        return this.comp+page.short; } },\n\n    mounted: function () {}\n    \n    }\n  \n</script>\n\n<style lang=\"less\">\n  \n  .tabs { position:absolute; left:0; top:0; width:100%; height:5%; background-color:black; font-size:1.5em;\n    .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;\n      border-radius:12px 12px 0 0; border-left: wheat solid thin;\n      border-top:wheat solid thin; border-right:wheat solid thin;\n      a         { background-color:black; color:wheat; text-decoration:none; } }\n    .tab:hover  { background-color:wheat; color:black;\n      a         { background-color:wheat; color:black } }\n    .tab-active { background-color:wheat; color:black; .tab();\n      a         { background-color:wheat; color:black !important; text-decoration:none; } } }\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -1119,7 +1119,7 @@ __vue_render__$b._withStripped = true;
   /* style */
   const __vue_inject_styles__$b = function (inject) {
     if (!inject) return
-    inject("data-v-0910c9cc_0", { source: ".ikws {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n", map: {"version":3,"sources":["Ikws.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX","file":"Ikws.vue","sourcesContent":[".ikws {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n"]}, media: undefined });
+    inject("data-v-5322d0cc_0", { source: ".ikws {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n", map: {"version":3,"sources":["Ikws.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX","file":"Ikws.vue","sourcesContent":[".ikws {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -1263,22 +1263,30 @@ const __vue_script__$e = script$d;
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 var script$e = {
 
-  props: { comp:String, pages:Object, init:String },
+  props: { comp:String, pages:Object, klass:String, init:String },
 
-  data() { return { tab:this.init } },
+  data() { return { key:this.init } },
 
   methods: {
-    pubTab: function (tab) {
-      this.tab = tab;
-      this.publish( this.comp, tab ); },
-    classTab: function (tab) {
-      return this.tab===tab ? 'tab-active' : 'tab'; },
-    name: function(page) {
-      return this.comp+page.short; } },
+    pubBtn: function (btn) {
+      this.key = btn.key;
+      this.publish( this.comp, btn.key ); },
+    classBtn: function (btn) {
+      return this.btn===btn.key ? 'btn-active' : 'btn'; },
+    classIco: function (btn) {
+      return 'icons ' + btn.icon },
+    src: function (btn) {
+      return '../../css/' + btn.src } },
 
   mounted: function () {}
 
@@ -1294,22 +1302,39 @@ var __vue_render__$c = function() {
   var _c = _vm._self._c || _h;
   return _c(
     "div",
-    { staticClass: "dabs" },
+    { staticClass: "btns-horz" },
     [
-      _vm._l(_vm.pages, function(page) {
+      _vm._l(_vm.pages, function(btn) {
         return [
-          _c(
-            "div",
-            {
-              class: _vm.classTab(page.short),
-              on: {
-                click: function($event) {
-                  return _vm.pubTab(page.short)
+          _c("div", { staticClass: "block-horz" }, [
+            _c(
+              "button",
+              {
+                class: _vm.classBtn(btn),
+                on: {
+                  click: function($event) {
+                    return _vm.pubBtn(btn)
+                  }
                 }
-              }
-            },
-            [_vm._v(_vm._s(page.title))]
-          )
+              },
+              [
+                btn.icon ? _c("i", { class: _vm.classIco(btn) }) : _vm._e(),
+                _vm._v(" "),
+                btn.src
+                  ? _c("img", {
+                      staticClass: "image",
+                      attrs: { src: _vm.src(btn), alt: "" }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                btn.title
+                  ? _c("span", { staticClass: "title" }, [
+                      _vm._v(_vm._s(btn.title))
+                    ])
+                  : _vm._e()
+              ]
+            )
+          ])
         ]
       })
     ],
@@ -1322,7 +1347,7 @@ __vue_render__$c._withStripped = true;
   /* style */
   const __vue_inject_styles__$f = function (inject) {
     if (!inject) return
-    inject("data-v-5b452f44_0", { source: ".dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Dabs.vue","/Users/ax/Documents/prj/aug/vue/comp/Dabs.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,UAAU;EACV,uBAAuB;EACvB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;ECCd,uBAAA;EACA,YAAA;AACA","file":"Dabs.vue","sourcesContent":[".dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"dabs\">\n    <template v-for=\"page in pages\">\n      <div :class=\"classTab(page.short)\" @click=\"pubTab(page.short)\">{{page.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Object, init:String },\n\n    data() { return { tab:this.init } },\n\n    methods: {\n      pubTab: function (tab) {\n        this.tab = tab;\n        this.publish( this.comp, tab ); },\n      classTab: function (tab) {\n        return this.tab===tab ? 'tab-active' : 'tab'; },\n      name: function(page) {\n        return this.comp+page.short; } },\n\n    mounted: function () {}\n\n  }\n\n</script>\n\n<style lang=\"less\">\n  \n  .dabs { position:absolute; left:0; top:0; width:100%; height:5%; background-color:black; font-size:1.5em;\n    .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;\n      border-radius:12px 12px 0 0; border-left: wheat solid thin;\n      border-top:wheat solid thin; border-right:wheat solid thin;\n      background-color:black; color:wheat; }\n    .tab:hover  {         background-color:wheat; color:black; }\n    .tab-active { .tab(); background-color:wheat; color:black; } }\n\n</style>"]}, media: undefined });
+    inject("data-v-7718da1b_0", { source: ".btns-horz {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n}\n.btns-vert {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 5%;\n  height: 100%;\n  background-color: black;\n}\n.btn-font {\n  font-family: Roboto, sans-serif;\n}\n.btn-font {\n  font-family: Roboto, sans-serif;\n}\n.block-horz {\n  position: relative;\n  top: 0;\n  width: 10%;\n  height: 100%;\n  display: inline-block;\n}\n.block-vert {\n  position: relative;\n  left: 0;\n  width: 100%;\n  height: 10%;\n  display: block;\n}\n.btn {\n  transition: all 0s ease-out;\n  font-family: Roboto, sans-serif;\n  font-size: 1.9vmin;\n  color: #000;\n  text-decoration: none;\n  text-align: center;\n  text-shadow: 0 -0.2vmin 0 rgba(0, 0, 0, 0.4);\n  padding-left: 3vmin;\n  padding-top: 1vmin;\n  padding-bottom: 1vmin;\n  cursor: pointer;\n  border: solid black 1px;\n  border-radius: 1.7vmin;\n  border-left: solid 0.2vmin #2E4476;\n  background: #3B5999;\n  box-shadow: 1vmin 1vmin 0 0 #2E4476;\n  width: 100%;\n  height: 90%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.btn:active,\n.btn-active {\n  top: 0.6vmin;\n  left: 0.6vmin;\n  box-shadow: 0.2vmin 0.2vmin 0 0 #2E4476;\n}\n.btn::before {\n  position: absolute;\n  left: 2vmin;\n  content: \" \";\n}\n.btn-tall::before {\n  padding-top: 2vmin;\n}\n.btn:active::before,\n.btn-nice-active::before {\n  content: \"\\2713\";\n}\n.image-radius {\n  border-radius: 1vmin;\n  border: solid black 1px;\n}\n.btn .image {\n  float: left;\n  align-self: center;\n  margin-right: 2vmin;\n  border-radius: 1vmin;\n  border: solid black 1px;\n}\n.btn .icons {\n  float: left;\n  align-self: center;\n  padding-right: 2vmin;\n}\n.btn .label {\n  float: left;\n  align-self: center;\n  padding-right: 2vmin;\n}\n", map: {"version":3,"sources":["Btns.vue","/Users/ax/Documents/prj/aug/vue/elem/Btns.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,UAAU;EACV,uBAAuB;AACzB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,SAAS;EACT,YAAY;EACZ,uBAAuB;AACzB;AACA;EACE,+BAA+B;AACjC;AACA;EACE,+BAA+B;AACjC;AACA;EACE,kBAAkB;EAClB,MAAM;EACN,UAAU;EACV,YAAY;EACZ,qBAAqB;AACvB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,WAAW;EACX,WAAW;EACX,cAAc;AAChB;AACA;EACE,2BAA2B;EAC3B,+BAA+B;EAC/B,kBAAkB;EAClB,WAAW;EACX,qBAAqB;ECCvB,kBAAA;EDCE,4CAA4C;ECC9C,mBAAA;EDCE,kBAAkB;EAClB,qBAAqB;EACrB,eAAe;EACf,uBAAuB;ECCzB,sBAAA;EDCE,kCAAkC;ECCpC,mBAAA;EDCE,mCAAmC;EACnC,WAAW;ECCb,WAAA;EACA,aAAA;EACA,mBAAA;EACA,uBAAA;AACA;AACA;;EAEA,YAAA;EACA,aAAA;EACA,uCAAA;ADCA;ACCA;EACA,kBAAA;EACA,WAAA;EACA,YAAA;AACA;AACA;EACA,kBAAA;AACA;AACA;;EAEA,gBAAA;AACA;AACA;EACA,oBAAA;EACA,uBAAA;AACA;AACA;EDCE,WAAW;ECCb,kBAAA;EDCE,mBAAmB;ECCrB,oBAAA;EACA,uBAAA;ADCA;ACCA;EACA,WAAA;EACA,kBAAA;EACA,oBAAA;AACA;AACA;EACA,WAAA;EACA,kBAAA;EACA,oBAAA;AACA","file":"Btns.vue","sourcesContent":[".btns-horz {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n}\n.btns-vert {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 5%;\n  height: 100%;\n  background-color: black;\n}\n.btn-font {\n  font-family: Roboto, sans-serif;\n}\n.btn-font {\n  font-family: Roboto, sans-serif;\n}\n.block-horz {\n  position: relative;\n  top: 0;\n  width: 10%;\n  height: 100%;\n  display: inline-block;\n}\n.block-vert {\n  position: relative;\n  left: 0;\n  width: 100%;\n  height: 10%;\n  display: block;\n}\n.btn {\n  transition: all 0s ease-out;\n  font-family: Roboto, sans-serif;\n  font-size: 1.9vmin;\n  color: #000;\n  text-decoration: none;\n  text-align: center;\n  text-shadow: 0 -0.2vmin 0 rgba(0, 0, 0, 0.4);\n  padding-left: 3vmin;\n  padding-top: 1vmin;\n  padding-bottom: 1vmin;\n  cursor: pointer;\n  border: solid black 1px;\n  border-radius: 1.7vmin;\n  border-left: solid 0.2vmin #2E4476;\n  background: #3B5999;\n  box-shadow: 1vmin 1vmin 0 0 #2E4476;\n  width: 100%;\n  height: 90%;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.btn:active,\n.btn-active {\n  top: 0.6vmin;\n  left: 0.6vmin;\n  box-shadow: 0.2vmin 0.2vmin 0 0 #2E4476;\n}\n.btn::before {\n  position: absolute;\n  left: 2vmin;\n  content: \" \";\n}\n.btn-tall::before {\n  padding-top: 2vmin;\n}\n.btn:active::before,\n.btn-nice-active::before {\n  content: \"\\2713\";\n}\n.image-radius {\n  border-radius: 1vmin;\n  border: solid black 1px;\n}\n.btn .image {\n  float: left;\n  align-self: center;\n  margin-right: 2vmin;\n  border-radius: 1vmin;\n  border: solid black 1px;\n}\n.btn .icons {\n  float: left;\n  align-self: center;\n  padding-right: 2vmin;\n}\n.btn .label {\n  float: left;\n  align-self: center;\n  padding-right: 2vmin;\n}\n","\n<template>\n  <div class=\"btns-horz\">\n    <template v-for=\"btn in pages\">\n      <div                       class=\"block-horz\">\n        <button                 :class=\"classBtn(btn)\" @click=\"pubBtn(btn)\">\n          <i    v-if=\"btn.icon\" :class=\"classIco(btn)\"></i>\n          <img  v-if=\"btn.src\"   class=\"image\" :src=\"src(btn)\" alt=\"\"/>\n          <span v-if=\"btn.title\" class=\"title\">{{btn.title}}</span>\n        </button>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Object, klass:String, init:String },\n\n    data() { return { key:this.init } },\n\n    methods: {\n      pubBtn: function (btn) {\n        this.key = btn.key;\n        this.publish( this.comp, btn.key ); },\n      classBtn: function (btn) {\n        return this.btn===btn.key ? 'btn-active' : 'btn'; },\n      classIco: function (btn) {\n        return 'icons ' + btn.icon },\n      src: function (btn) {\n        return '../../css/' + btn.src } },\n\n    mounted: function () {}\n\n  }\n\n</script>\n\n<style lang=\"less\">\n  \n  .btns-horz { position:absolute; left:0; top:0; width:100%; height:5%; background-color:black; }\n\n  .btns-vert { position:absolute; left:0; top:0; width:5%; height:100%; background-color:black; }\n  \n\n  \n  \n  .btn-font{ font-family:Roboto, sans-serif;}\n\n  @hue:330; @sat:40%; @lit:40%; @inc:12%;\n\n\n  // Hue Saturation background palette in 5% lightness increments\n  @back00:hsl(@hue,@sat,00%); @back05:hsl(@hue,@sat, 5%); @back10:hsl(@hue,@sat,10%); @back15:hsl(@hue,@sat,15%);\n  @back20:hsl(@hue,@sat,20%); @back25:hsl(@hue,@sat,25%); @back30:hsl(@hue,@sat,30%); @back35:hsl(@hue,@sat,35%);\n  @back40:hsl(@hue,@sat,40%); @back45:hsl(@hue,@sat,45%); @back50:hsl(@hue,@sat,50%); @back55:hsl(@hue,@sat,55%);\n  @back60:hsl(@hue,@sat,60%); @back65:hsl(@hue,@sat,65%); @back70:hsl(@hue,@sat,70%); @back75:hsl(@hue,@sat,75%);\n  @back80:hsl(@hue,@sat,80%); @back85:hsl(@hue,@sat,85%); @back90:hsl(@hue,@sat,90%); @back95:hsl(@hue,@sat,95%);\n\n  @btn-top:    @back70; @btn-bot:    @back80; @btn-color:    black;\n  @btn-hov-top:@back60; @btn-hov-bot:@back70; @btn-hov-color:black;\n  @btn-bord:@back50;\n\n  @btn-unit:1vmin;\n  @btn-size:              @btn-unit*6;\n  @btn-size-before:       @btn-unit*4;\n  @btn-font-size:         @btn-unit*1.9;\n  @btn-font-size-before:  @btn-font-size*0.7;\n  @btn-line-height:       @btn-unit*4;\n  @btn-pad:               @btn-unit*2;\n  @btn-pad-two:           @btn-pad*2;\n  @btn-pad-top:           @btn-pad*0.5;\n  @btn-pad-bottom:        @btn-pad*0.5;\n  @btn-margin-left:       @btn-unit*10;\n  @btn-top-active:        @btn-unit*0.6;\n  @btn-border-radius:     @btn-unit*1.7;\n  @btn-border-radius-img: @btn-unit;\n  @btn-border-thin:       @btn-unit*0.2;\n  @btn-shadow:            @btn-unit;\n  @btn-shadow-active:     @btn-shadow*0.2;\n\n  .btn-font{ font-family:Roboto, sans-serif;}\n\n  .block-horz { position:relative; top: 0; width: 10%; height:100%; display:inline-block; }\n  .block-vert { position:relative; left:0; width:100%; height: 10%; display:block;        }\n\n  .btn {\n    transition: all 0s ease-out;\n    .btn-font;\n    font-size: @btn-font-size;\n    color: #000;\n    text-decoration: none;\n    text-align: center;\n    text-shadow: 0 -@btn-border-thin 0 rgba(0,0,0,0.4);\n    padding-left:@btn-pad*1.5;\n    padding-top:@btn-pad-top;\n    padding-bottom:@btn-pad-bottom;\n    cursor: pointer;\n    border: solid black 1px;\n    border-radius:@btn-border-radius;\n    border-left:  solid @btn-border-thin #2E4476;\n    background: #3B5999;\n    box-shadow: @btn-unit @btn-unit 0 0 #2E4476;\n    width: 100%;\n    height: 90%;\n    display: flex;  align-items:center;  justify-content:center;\n  }\n\n  .btn:active, .btn-active { top: @btn-top-active; left:@btn-top-active;\n    box-shadow: @btn-shadow-active @btn-shadow-active 0 0 #2E4476; }\n\n  .btn::before { position:absolute; left:@btn-pad; content: \" \"; }\n\n  .btn-tall::before { padding-top:@btn-pad; }\n\n  .btn:active::before, .btn-nice-active::before {  content: \"\\2713\"; }\n  \n  .image-radius { border-radius:@btn-border-radius-img; border:solid black 1px; }\n\n  .btn .image { float:left; align-self:center; margin-right: @btn-pad; .image-radius; }\n  .btn .icons { float:left; align-self:center; padding-right:@btn-pad; } // font-family: \"font-awesome\" serif;\n  .btn .label { float:left; align-self:center; padding-right:@btn-pad; }\n  \n\n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -26280,19 +26305,19 @@ let Draw = {
 
   data() {
     return { comp:'Draw', tab:'Axes', pages:{
-        Axes:    { title:'Axes',    short:'Axes',    obj:null },
-        Chord:   { title:'Chord',   short:'Chord',   obj:null },
-        Cluster: { title:'Cluster', short:'Cluster', obj:null },
-        Link:    { title:'Link',    short:'Link',    obj:null },
-        Radar:   { title:'Radar',   short:'Radar',   obj:null },
-        Radial:  { title:'Radial',  short:'Radial',  obj:null },
-        Tree:    { title:'Tree',    short:'Tree',    obj:null },
-        Wheel:   { title:'Wheel',   short:'Wheel',   obj:null }
+        Axes:    { title:'Axes',    key:'Axes',    obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
+        Chord:   { title:'Chord',   key:'Chord',   obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
+        Cluster: { title:'Cluster', key:'Cluster', obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
+        Link:    { title:'Link',    key:'Link',    obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
+        Radar:   { title:'Radar',   key:'Radar',   obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
+        Radial:  { title:'Radial',  key:'Radial',  obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
+        Tree:    { title:'Tree',    key:'Tree',    obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
+        Wheel:   { title:'Wheel',   key:'Wheel',   obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' }
       } } },
 
   methods: {
-    isPage: function(short) {
-      return this.tab === short; },
+    isPage: function(key) {
+      return this.tab === key; },
     onTabs: function(tab) {
       this.tab =  tab;
       this.create(tab); },
@@ -26343,12 +26368,12 @@ var __vue_render__$d = function() {
               {
                 name: "show",
                 rawName: "v-show",
-                value: _vm.isPage(page.short),
-                expression: "isPage(page.short)"
+                value: _vm.isPage(page.key),
+                expression: "isPage(page.key)"
               }
             ],
-            key: page.short,
-            ref: page.short,
+            key: page.key,
+            ref: page.key,
             refInFor: true,
             staticClass: "page"
           })
@@ -26364,7 +26389,7 @@ __vue_render__$d._withStripped = true;
   /* style */
   const __vue_inject_styles__$g = function (inject) {
     if (!inject) return
-    inject("data-v-c915b8b4_0", { source: ".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n"]}, media: undefined });
+    inject("data-v-1adebb54_0", { source: ".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -29085,7 +29110,7 @@ __vue_render__$i._withStripped = true;
   /* style */
   const __vue_inject_styles__$l = function (inject) {
     if (!inject) return
-    inject("data-v-67b0a56e_0", { source: ".note {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n", map: {"version":3,"sources":["Note.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX","file":"Note.vue","sourcesContent":[".note {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n"]}, media: undefined });
+    inject("data-v-05cf3c24_0", { source: ".note {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n", map: {"version":3,"sources":["Note.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX","file":"Note.vue","sourcesContent":[".note {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n"]}, media: undefined });
 
   };
   /* scoped */

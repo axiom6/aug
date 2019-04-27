@@ -4,7 +4,7 @@
   <div class="draw" ref="Draw">
     <d-tabs :comp="comp" :pages="pages" init="Axes"></d-tabs>
     <template v-for="page in pages">
-      <div :ref="page.short" v-show="isPage(page.short)" class="page" :key="page.short">
+      <div :ref="page.key" v-show="isPage(page.key)" class="page" :key="page.key">
         <!--h1>{{page.title}}</h1-->
       </div>
     </template>
@@ -13,7 +13,7 @@
 
 <script type="module">
 
-  import Dabs from '../comp/Dabs.vue';
+  import Dabs from '../elem/Btns.vue';
   import Drew from '../../pub/drew/Drew.js'
 
   let Draw = {
@@ -22,19 +22,19 @@
 
     data() {
       return { comp:'Draw', tab:'Axes', pages:{
-          Axes:    { title:'Axes',    short:'Axes',    obj:null },
-          Chord:   { title:'Chord',   short:'Chord',   obj:null },
-          Cluster: { title:'Cluster', short:'Cluster', obj:null },
-          Link:    { title:'Link',    short:'Link',    obj:null },
-          Radar:   { title:'Radar',   short:'Radar',   obj:null },
-          Radial:  { title:'Radial',  short:'Radial',  obj:null },
-          Tree:    { title:'Tree',    short:'Tree',    obj:null },
-          Wheel:   { title:'Wheel',   short:'Wheel',   obj:null }
+          Axes:    { title:'Axes',    key:'Axes',    obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
+          Chord:   { title:'Chord',   key:'Chord',   obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
+          Cluster: { title:'Cluster', key:'Cluster', obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
+          Link:    { title:'Link',    key:'Link',    obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
+          Radar:   { title:'Radar',   key:'Radar',   obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
+          Radial:  { title:'Radial',  key:'Radial',  obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
+          Tree:    { title:'Tree',    key:'Tree',    obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
+          Wheel:   { title:'Wheel',   key:'Wheel',   obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' }
         } } },
 
     methods: {
-      isPage: function(short) {
-        return this.tab === short; },
+      isPage: function(key) {
+        return this.tab === key; },
       onTabs: function(tab) {
         this.tab =  tab;
         this.create(tab); },
