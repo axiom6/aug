@@ -2,7 +2,7 @@
 <template>
   <div class="dabs">
     <template v-for="page in pages">
-      <div :class="classTab(page.short)" @click="pubTab(page.short)">{{page.title}}</div>
+      <div :class="classTab(page.key)" @click="pubTab(page.key)">{{page.title}}</div>
     </template>
   </div>
 </template>
@@ -13,16 +13,14 @@
 
     props: { comp:String, pages:Object, init:String },
 
-    data() { return { tab:this.init } },
+    data() { return { key:this.init } },
 
     methods: {
-      pubTab: function (tab) {
-        this.tab = tab;
-        this.publish( this.comp, tab ); },
-      classTab: function (tab) {
-        return this.tab===tab ? 'tab-active' : 'tab'; },
-      name: function(page) {
-        return this.comp+page.short; } },
+      pubTab: function (key) {
+        this.key = key;
+        this.publish( this.comp, key ); },
+      classTab: function (key) {
+        return this.key===key ? 'tab-active' : 'tab'; } },
 
     mounted: function () {}
 

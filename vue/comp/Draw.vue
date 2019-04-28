@@ -2,7 +2,7 @@
 
 <template>
   <div class="draw" ref="Draw">
-    <d-tabs :comp="comp" :pages="pages" init="Axes"></d-tabs>
+    <d-dabs :comp="comp" :pages="pages" init="Axes"></d-dabs>
     <template v-for="page in pages">
       <div :ref="page.key" v-show="isPage(page.key)" class="page" :key="page.key">
         <!--h1>{{page.title}}</h1-->
@@ -13,15 +13,15 @@
 
 <script type="module">
 
-  import Dabs from '../elem/Btns.vue';
+  import Dabs from '../elem/Dabs.vue';
   import Drew from '../../pub/drew/Drew.js'
 
   let Draw = {
 
-    components:{ 'd-tabs':Dabs, drew:{} },
+    components:{ 'd-dabs':Dabs, drew:{} },
 
     data() {
-      return { comp:'Draw', tab:'Axes', pages:{
+      return { comp:'Draw', key:'Axes', pages:{
           Axes:    { title:'Axes',    key:'Axes',    obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
           Chord:   { title:'Chord',   key:'Chord',   obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
           Cluster: { title:'Cluster', key:'Cluster', obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
@@ -34,10 +34,10 @@
 
     methods: {
       isPage: function(key) {
-        return this.tab === key; },
-      onTabs: function(tab) {
-        this.tab =  tab;
-        this.create(tab); },
+        return this.key === key; },
+      onTabs: function(key) {
+        this.key =  key;
+        this.create(key); },
 
       size: function() {
         let sz   = {}
@@ -47,10 +47,10 @@
         sz.elemHeight = this.$refs['Draw']['clientHeight'];
         return sz; },
       
-      create: function( tab ) {
-        if( this.pages[tab].obj===null ) {
-            let elem = this.$refs[tab][0]
-            this.pages[tab].obj = this.drew.create( tab, elem, this.size() ); } }
+      create: function( key ) {
+        if( this.pages[key].obj===null ) {
+            let elem = this.$refs[key][0]
+            this.pages[key].obj = this.drew.create( key, elem, this.size() ); } }
     },
 
     mounted: function () {
