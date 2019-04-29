@@ -924,26 +924,60 @@ __vue_render__$8._withStripped = true;
 //
 //
 //
+//
+//
+//
 
 
 var script$8 = {
 
-  props: { comp:String, pages:Object, klass:String, init:String },
+  props: { comp:String, btns:Object, klass:String, init:String, back:String, high:String },
 
-  data() { return { key:this.init } },
+  data() { return { key:this.init,
+    colors: { primary:'#007bff', secondary:'#6c757d', success:'#28a745', info:'#17a2b8',
+              warning:'#ffc107', danger:   '#dc3545', light:  '#f8f9fa', dark:'#343a40' } } },
 
   methods: {
     pubBtn: function (btn) {
       this.key = btn.key;
       this.publish( this.comp, btn.key ); },
-    classBtn: function (btn) {
-      return this.key===btn.key ? 'btn' : 'btn'; },
-    classIco: function (btn) {
+    aspect: function() {  // Only call in mounted
+      let w = this.$refs['Btns']['clientWidth' ];
+      let h = this.$refs['Btns']['clientHeight'];
+      return h/w; },
+    styleBlock: function(p) {
+      let p2 = p[2]==0 ? p[3] : p[2];
+      return { position:'absolute', left:p[0]+'%', top:p[1]+'%', width:p2+'%', height:p[3]+'%',
+      fontSize:(p[3]*0.1)+'em' } },
+    styleBtn: function (btn) {
+      let back = this.colors[btn.back] ? this.colors[btn.back] : this.back;
+      return this.key===btn.key ? { color:'black', backgroundColor:this.high }
+                                : { color:'black', backgroundColor:back }; },
+    classCheck: function (btn) {
+      return this.key===btn.key ? 'check far fa-check-square' : 'check far fa-square' },
+    classIcons: function (btn) {
       return 'icons ' + btn.icon },
-    src: function (btn) {
-      return '../../css/' + btn.src } },
+    titleRef: function (btn) {
+      return 'Title' + btn.key },
+    img: function (btn) {
+      return '../../css/' + btn.img },
+    adjustWidths: function() {
+       let keys = Object.keys(this.btns);
+       for( let key of keys ) {
+         let btn = this.btns[key];
+         if( btn.pos[2]===0 ) {
+           let wt     = this.$refs[this.titleRef(btn)][0]['clientWidth'];
+           let el     = this.$refs[btn.key][0];
+           let wb     = el['clientWidth'];
+           btn.pos[2] = btn.pos[3]*2.4*wt/wb;
+           console.log( 'Adj', { wt:wt, wb:wb, w:btn.pos[2], h:btn.pos[3] } ); }
+           this.$refs[btn.key][0].style.width = btn.pos[2]+'%'; } }
+    },
 
-  mounted: function () {}
+  mounted: function () {
+    this.asp = this.aspect();
+    this.adjustWidths();
+  }
 
 };
 
@@ -957,39 +991,58 @@ var __vue_render__$9 = function() {
   var _c = _vm._self._c || _h;
   return _c(
     "div",
-    { staticClass: "btns-horz" },
+    { ref: "Btns", staticClass: "btns" },
     [
-      _vm._l(_vm.pages, function(btn) {
+      _vm._l(_vm.btns, function(btn) {
         return [
-          _c("div", { staticClass: "block-horz" }, [
-            _c(
-              "button",
-              {
-                class: _vm.classBtn(btn),
-                on: {
-                  click: function($event) {
-                    return _vm.pubBtn(btn)
-                  }
-                }
-              },
-              [
-                btn.icon ? _c("i", { class: _vm.classIco(btn) }) : _vm._e(),
-                _vm._v(" "),
-                btn.src
-                  ? _c("img", {
-                      staticClass: "image",
-                      attrs: { src: _vm.src(btn), alt: "" }
-                    })
-                  : _vm._e(),
-                _vm._v(" "),
-                btn.title
-                  ? _c("span", { staticClass: "title" }, [
-                      _vm._v(_vm._s(btn.title))
-                    ])
-                  : _vm._e()
-              ]
-            )
-          ])
+          _c(
+            "div",
+            { ref: btn.key, refInFor: true, style: _vm.styleBlock(btn.pos) },
+            [
+              _c("div", { staticClass: "btn-center" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn",
+                    style: _vm.styleBtn(btn),
+                    on: {
+                      click: function($event) {
+                        return _vm.pubBtn(btn)
+                      }
+                    }
+                  },
+                  [
+                    btn.check
+                      ? _c("span", { class: _vm.classCheck(btn) })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    btn.icon
+                      ? _c("i", { class: _vm.classIcons(btn) })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    btn.img
+                      ? _c("img", {
+                          staticClass: "image",
+                          attrs: { src: _vm.img(btn), alt: "" }
+                        })
+                      : _vm._e(),
+                    _vm._v(" "),
+                    btn.title
+                      ? _c(
+                          "span",
+                          {
+                            ref: _vm.titleRef(btn),
+                            refInFor: true,
+                            staticClass: "title"
+                          },
+                          [_vm._v(_vm._s(btn.title))]
+                        )
+                      : _vm._e()
+                  ]
+                )
+              ])
+            ]
+          )
         ]
       })
     ],
@@ -1002,7 +1055,7 @@ __vue_render__$9._withStripped = true;
   /* style */
   const __vue_inject_styles__$9 = function (inject) {
     if (!inject) return
-    inject("data-v-ab9af7b8_0", { source: ".btns-horz {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n}\n.btns-vert {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 5%;\n  height: 100%;\n  background-color: black;\n}\n.block-horz {\n  position: relative;\n  top: 0;\n  width: 10%;\n  height: 100%;\n  display: inline-block;\n}\n.block-vert {\n  position: relative;\n  left: 0;\n  width: 100%;\n  height: 10%;\n  display: block;\n}\n.btn {\n  display: grid;\n  grid-template-columns: 25% 25% 50%;\n  grid-template-areas: \"icons image label\";\n  justify-self: center;\n  align-self: center;\n  width: 90%;\n  height: 60%;\n  font-size: 1em;\n  font-family: Roboto, sans-serif;\n  background: #3B5999;\n  color: #000;\n  cursor: pointer;\n  border-radius: 0.2em;\n  border: solid black 1px;\n  border-left: solid #2E4476 1px;\n}\n.btn .icons {\n  grid-area: icons;\n  justify-self: center;\n  align-self: center;\n}\n.btn .image {\n  grid-area: image;\n  justify-self: center;\n  align-self: center;\n  border-radius: 0.1em;\n  border: solid black 1px;\n  height: 100%;\n}\n.btn .label {\n  grid-area: label;\n  justify-self: center;\n  align-self: center;\n  text-align: left;\n}\n.image-radius {\n  border-radius: 0.1em;\n  border: solid black 1px;\n}\n", map: {"version":3,"sources":["Btns.vue","/Users/ax/Documents/prj/aug/vue/elem/Btns.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,uBAAuB;AACzB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,SAAS;EACT,YAAY;EACZ,uBAAuB;AACzB;AACA;EACE,kBAAkB;EAClB,MAAM;EACN,UAAU;EACV,YAAY;EACZ,qBAAqB;AACvB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,WAAW;EACX,WAAW;EACX,cAAc;AAChB;AACA;EACE,aAAa;EACb,kCAAkC;EAClC,wCAAwC;EACxC,oBAAoB;EACpB,kBAAkB;EAClB,UAAU;EACV,WAAW;EACX,cAAc;EACd,+BAA+B;EAC/B,mBAAmB;EACnB,WAAW;ECCb,eAAA;EACA,oBAAA;EACA,uBAAA;EACA,8BAAA;ADCA;ACCA;EDCE,gBAAgB;ECClB,oBAAA;EACA,kBAAA;AACA;AACA;EDCE,gBAAgB;ECClB,oBAAA;EDCE,kBAAkB;ECCpB,oBAAA;EACA,uBAAA;EACA,YAAA;ADCA;ACCA;EACA,gBAAA;EACA,oBAAA;EDCE,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,oBAAoB;EACpB,uBAAuB;AACzB","file":"Btns.vue","sourcesContent":[".btns-horz {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n}\n.btns-vert {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 5%;\n  height: 100%;\n  background-color: black;\n}\n.block-horz {\n  position: relative;\n  top: 0;\n  width: 10%;\n  height: 100%;\n  display: inline-block;\n}\n.block-vert {\n  position: relative;\n  left: 0;\n  width: 100%;\n  height: 10%;\n  display: block;\n}\n.btn {\n  display: grid;\n  grid-template-columns: 25% 25% 50%;\n  grid-template-areas: \"icons image label\";\n  justify-self: center;\n  align-self: center;\n  width: 90%;\n  height: 60%;\n  font-size: 1em;\n  font-family: Roboto, sans-serif;\n  background: #3B5999;\n  color: #000;\n  cursor: pointer;\n  border-radius: 0.2em;\n  border: solid black 1px;\n  border-left: solid #2E4476 1px;\n}\n.btn .icons {\n  grid-area: icons;\n  justify-self: center;\n  align-self: center;\n}\n.btn .image {\n  grid-area: image;\n  justify-self: center;\n  align-self: center;\n  border-radius: 0.1em;\n  border: solid black 1px;\n  height: 100%;\n}\n.btn .label {\n  grid-area: label;\n  justify-self: center;\n  align-self: center;\n  text-align: left;\n}\n.image-radius {\n  border-radius: 0.1em;\n  border: solid black 1px;\n}\n","\n<template>\n  <div class=\"btns-horz\">\n    <template v-for=\"btn in pages\">\n      <div                       class=\"block-horz\">\n        <button                 :class=\"classBtn(btn)\" @click=\"pubBtn(btn)\">\n          <i    v-if=\"btn.icon\" :class=\"classIco(btn)\"></i>\n          <img  v-if=\"btn.src\"   class=\"image\" :src=\"src(btn)\" alt=\"\"/>\n          <span v-if=\"btn.title\" class=\"title\">{{btn.title}}</span>\n        </button>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Object, klass:String, init:String },\n\n    data() { return { key:this.init } },\n\n    methods: {\n      pubBtn: function (btn) {\n        this.key = btn.key;\n        this.publish( this.comp, btn.key ); },\n      classBtn: function (btn) {\n        return this.key===btn.key ? 'btn' : 'btn'; },\n      classIco: function (btn) {\n        return 'icons ' + btn.icon },\n      src: function (btn) {\n        return '../../css/' + btn.src } },\n\n    mounted: function () {}\n\n  }\n\n</script>\n\n<style lang=\"less\">\n  \n  .btns-horz  { position:absolute; left:0; top:0; width:100%; height:100%; background-color:black; }\n  .btns-vert  { position:absolute; left:0; top:0; width:5%;   height:100%; background-color:black; }\n  .block-horz { position:relative; top: 0; width: 10%; height:100%; display:inline-block; }\n  .block-vert { position:relative; left:0; width:100%; height: 10%; display:block;        }\n\n  .grid1x3() { display:grid; grid-template-columns:25% 25% 50%; grid-template-areas:\"icons image label\"; }\n\n  .btn { .grid1x3(); justify-self:center; align-self:center;\n    width:90%; height:60%; font-size:1em; font-family:Roboto, sans-serif;\n    background:#3B5999; color:#000; cursor:pointer;\n    border-radius:0.2em; border: solid black 1px; border-left:  solid #2E4476 1px;\n    \n  }\n  \n  .btn .icons { grid-area:icons; justify-self:center; align-self:center; } // font-family: \"font-awesome\" serif;\n  .btn .image { grid-area:image; justify-self:center; align-self:center; .image-radius; height:100%; }\n  .btn .label { grid-area:label; justify-self:center; align-self:center; text-align:left; }\n\n  .image-radius { border-radius:0.1em; border:solid black 1px; }\n//.btn::before { position:absolute; left:0.2em; content:\" \"; }\n//.btn:active::before, .btn-active::before { content:\"\\2713\"; }\n\n</style>"]}, media: undefined });
+    inject("data-v-d722dbc4_0", { source: ".btns {\n  font-size: 3vh;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.btn-center {\n  display: grid;\n  width: 100%;\n  height: 100%;\n}\n.btn {\n  display: grid;\n  grid-template-columns: 35% 65%;\n  grid-template-areas: \"icons label\";\n  justify-self: center;\n  align-self: center;\n  width: 80%;\n  height: 80%;\n  font-size: inherit;\n  font-family: Roboto, sans-serif;\n  cursor: pointer;\n  border-radius: 16px;\n  border: solid black 1px;\n}\n.btn .check {\n  grid-area: icons;\n  justify-self: center;\n  align-self: center;\n}\n.btn .icons {\n  grid-area: icons;\n  justify-self: center;\n  align-self: center;\n}\n.btn .image {\n  grid-area: icons;\n  justify-self: center;\n  align-self: center;\n  border-radius: 8px;\n  border: solid black 1px;\n  max-height: 1em;\n}\n.btn .title {\n  grid-area: label;\n  justify-self: left;\n  align-self: center;\n  text-align: left;\n}\n.image-radius {\n  border-radius: 8px;\n  border: solid black 1px;\n}\n", map: {"version":3,"sources":["Btns.vue"],"names":[],"mappings":"AAAA;EACE,cAAc;EACd,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,aAAa;EACb,WAAW;EACX,YAAY;AACd;AACA;EACE,aAAa;EACb,8BAA8B;EAC9B,kCAAkC;EAClC,oBAAoB;EACpB,kBAAkB;EAClB,UAAU;EACV,WAAW;EACX,kBAAkB;EAClB,+BAA+B;EAC/B,eAAe;EACf,mBAAmB;EACnB,uBAAuB;AACzB;AACA;EACE,gBAAgB;EAChB,oBAAoB;EACpB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,oBAAoB;EACpB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,uBAAuB;EACvB,eAAe;AACjB;AACA;EACE,gBAAgB;EAChB,kBAAkB;EAClB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,uBAAuB;AACzB","file":"Btns.vue","sourcesContent":[".btns {\n  font-size: 3vh;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.btn-center {\n  display: grid;\n  width: 100%;\n  height: 100%;\n}\n.btn {\n  display: grid;\n  grid-template-columns: 35% 65%;\n  grid-template-areas: \"icons label\";\n  justify-self: center;\n  align-self: center;\n  width: 80%;\n  height: 80%;\n  font-size: inherit;\n  font-family: Roboto, sans-serif;\n  cursor: pointer;\n  border-radius: 16px;\n  border: solid black 1px;\n}\n.btn .check {\n  grid-area: icons;\n  justify-self: center;\n  align-self: center;\n}\n.btn .icons {\n  grid-area: icons;\n  justify-self: center;\n  align-self: center;\n}\n.btn .image {\n  grid-area: icons;\n  justify-self: center;\n  align-self: center;\n  border-radius: 8px;\n  border: solid black 1px;\n  max-height: 1em;\n}\n.btn .title {\n  grid-area: label;\n  justify-self: left;\n  align-self: center;\n  text-align: left;\n}\n.image-radius {\n  border-radius: 8px;\n  border: solid black 1px;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -1032,15 +1085,16 @@ var script$9 = {
   
   components:{ 'h-btns':Btns },
 
-  data() { return { comp:'Draw', key:'Axes', pages:{
-    Axes:    { title:'Axes',    key:'Axes',    obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-    Chord:   { title:'Chord',   key:'Chord',   obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-    Cluster: { title:'Cluster', key:'Cluster', obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-    Link:    { title:'Link',    key:'Link',    obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-    Radar:   { title:'Radar',   key:'Radar',   obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-    Radial:  { title:'Radial',  key:'Radial',  obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-    Tree:    { title:'Tree',    key:'Tree',    obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-    Wheel:   { title:'Wheel',   key:'Wheel',   obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' } } } },
+data() { return { comp:'Draw', key:'Axes', btns:{
+  Axes:    { title:'Axes',    key:'Axes',    obj:null, pos:[ 5,10,0,10], back:'primary',   check:true              },
+  Chord:   { title:'Chord',   key:'Chord',   obj:null, pos:[30,10,0,20], back:'secondary', img:'brew/AutoDrip.jpg' },
+  Cluster: { title:'Cluster', key:'Cluster', obj:null, pos:[50,10,0,10], back:'success',   icon:'fas fa-circle'    },
+  Link:    { title:'Link',    key:'Link',    obj:null, pos:[ 5,25,0,20], back:'info',      check:true              },
+  Radar:   { title:'Radar',   key:'Radar',   obj:null, pos:[ 5,40,0,10], back:'warning',   icon:'fas fa-circle'    },
+  Radial:  { title:'Radial',  key:'Radial',  obj:null, pos:[ 5,55,0,20], back:'danger',    img:'brew/AutoDrip.jpg' },
+  Tree:    { title:'Tree',    key:'Tree',    obj:null, pos:[40,40,0,30], back:'light',     icon:'fas fa-circle'    },
+  Wheel:   { title:'Wheel',   key:'Wheel',   obj:null, pos:[60,60,0,30], back:'dark',      img:'brew/AutoDrip.jpg' }
+  } } },
 };
 
 /* script */
@@ -1052,18 +1106,26 @@ var __vue_render__$a = function() {
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
   return _c("div", { staticClass: "home" }, [
+    _vm._m(0),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "elem" },
       [
         _c("h-btns", {
-          attrs: { comp: "Home", pages: _vm.pages, init: "Axes" }
+          attrs: {
+            comp: "Home",
+            btns: _vm.btns,
+            init: "Axes",
+            back: "#3B5999",
+            active: "tan"
+          }
         })
       ],
       1
     ),
     _vm._v(" "),
-    _vm._m(0)
+    _vm._m(1)
   ])
 };
 var __vue_staticRenderFns__$a = [
@@ -1078,6 +1140,14 @@ var __vue_staticRenderFns__$a = [
         _c("h2", [_vm._v("Choose an Application Component on the Left")])
       ])
     ])
+  },
+  function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("div", { staticClass: "foot" }, [
+      _c("div", [_c("h1", [_vm._v("Axiom Architectures")])])
+    ])
   }
 ];
 __vue_render__$a._withStripped = true;
@@ -1085,7 +1155,7 @@ __vue_render__$a._withStripped = true;
   /* style */
   const __vue_inject_styles__$a = function (inject) {
     if (!inject) return
-    inject("data-v-e5a357a4_0", { source: ".elem {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  height: 5%;\n}\n.head {\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  display: grid;\n  justify-self: stretch;\n  align-self: stretch;\n  background-color: black;\n  color: wheat;\n}\n", map: {"version":3,"sources":["Home.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,UAAU;AACZ;AACA;EACE,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;AACd","file":"Home.vue","sourcesContent":[".elem {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  height: 5%;\n}\n.head {\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  display: grid;\n  justify-self: stretch;\n  align-self: stretch;\n  background-color: black;\n  color: wheat;\n}\n"]}, media: undefined });
+    inject("data-v-0f6d62da_0", { source: ".home {\n  display: grid;\n  grid-template-columns: 100%;\n  grid-template-rows: 10% 80% 10%;\n  grid-template-areas: \"head\" \"elem\" \"foot\";\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  color: wheat;\n}\n.head {\n  grid-area: head;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  display: grid;\n  justify-self: stretch;\n  align-self: stretch;\n}\n.elem {\n  grid-area: elem;\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  height: 100%;\n}\n.foot {\n  grid-area: foot;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  display: grid;\n  justify-self: stretch;\n  align-self: stretch;\n}\n", map: {"version":3,"sources":["Home.vue"],"names":[],"mappings":"AAAA;EACE,aAAa;EACb,2BAA2B;EAC3B,+BAA+B;EAC/B,yCAAyC;EACzC,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,eAAe;EACf,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,YAAY;AACd;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;AACrB","file":"Home.vue","sourcesContent":[".home {\n  display: grid;\n  grid-template-columns: 100%;\n  grid-template-rows: 10% 80% 10%;\n  grid-template-areas: \"head\" \"elem\" \"foot\";\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  color: wheat;\n}\n.head {\n  grid-area: head;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  display: grid;\n  justify-self: stretch;\n  align-self: stretch;\n}\n.elem {\n  grid-area: elem;\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  height: 100%;\n}\n.foot {\n  grid-area: foot;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  display: grid;\n  justify-self: stretch;\n  align-self: stretch;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -26412,14 +26482,14 @@ let Draw = {
 
   data() {
     return { comp:'Draw', key:'Axes', pages:{
-        Axes:    { title:'Axes',    key:'Axes',    obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-        Chord:   { title:'Chord',   key:'Chord',   obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-        Cluster: { title:'Cluster', key:'Cluster', obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-        Link:    { title:'Link',    key:'Link',    obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-        Radar:   { title:'Radar',   key:'Radar',   obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-        Radial:  { title:'Radial',  key:'Radial',  obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-        Tree:    { title:'Tree',    key:'Tree',    obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-        Wheel:   { title:'Wheel',   key:'Wheel',   obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' }
+        Axes:    { title:'Axes',    key:'Axes',    obj:null },
+        Chord:   { title:'Chord',   key:'Chord',   obj:null },
+        Cluster: { title:'Cluster', key:'Cluster', obj:null },
+        Link:    { title:'Link',    key:'Link',    obj:null },
+        Radar:   { title:'Radar',   key:'Radar',   obj:null },
+        Radial:  { title:'Radial',  key:'Radial',  obj:null },
+        Tree:    { title:'Tree',    key:'Tree',    obj:null },
+        Wheel:   { title:'Wheel',   key:'Wheel',   obj:null }
       } } },
 
   methods: {
@@ -26496,7 +26566,7 @@ __vue_render__$e._withStripped = true;
   /* style */
   const __vue_inject_styles__$h = function (inject) {
     if (!inject) return
-    inject("data-v-424dafa3_0", { source: ".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n"]}, media: undefined });
+    inject("data-v-c54366a2_0", { source: ".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n"]}, media: undefined });
 
   };
   /* scoped */

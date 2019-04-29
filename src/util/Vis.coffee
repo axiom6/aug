@@ -166,7 +166,6 @@ class Vis
   @within:( beg, deg, end ) -> beg   <= deg and deg <= end # Closed interval with <=
   @isZero:( v )             -> -0.01 <  v   and v   <  0.01
 
-
   @unicode:( icon ) ->
     uc    = FaLookup.icons[icon]
     if not uc?
@@ -174,15 +173,5 @@ class Vis
       uc = "\uf111" # Circle
     uc
 
-  ###
-  @uniawe:( icon ) ->
-    temp = document.createElement("i")
-    temp.className = icon
-    document.body.appendChild(temp)
-    uni = window.getComputedStyle( document.querySelector('.' + icon), ':before' ).getPropertyValue('content')
-    console.log( 'uniawe', icon, uni )
-    temp.remove()
-    uni
-   ###
 
 export default Vis

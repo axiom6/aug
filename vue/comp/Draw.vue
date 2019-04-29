@@ -22,14 +22,14 @@
 
     data() {
       return { comp:'Draw', key:'Axes', pages:{
-          Axes:    { title:'Axes',    key:'Axes',    obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-          Chord:   { title:'Chord',   key:'Chord',   obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-          Cluster: { title:'Cluster', key:'Cluster', obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-          Link:    { title:'Link',    key:'Link',    obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-          Radar:   { title:'Radar',   key:'Radar',   obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-          Radial:  { title:'Radial',  key:'Radial',  obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-          Tree:    { title:'Tree',    key:'Tree',    obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' },
-          Wheel:   { title:'Wheel',   key:'Wheel',   obj:null, icon:'fas fa-circle', src:'brew/AutoDrip.jpg' }
+          Axes:    { title:'Axes',    key:'Axes',    obj:null },
+          Chord:   { title:'Chord',   key:'Chord',   obj:null },
+          Cluster: { title:'Cluster', key:'Cluster', obj:null },
+          Link:    { title:'Link',    key:'Link',    obj:null },
+          Radar:   { title:'Radar',   key:'Radar',   obj:null },
+          Radial:  { title:'Radial',  key:'Radial',  obj:null },
+          Tree:    { title:'Tree',    key:'Tree',    obj:null },
+          Wheel:   { title:'Wheel',   key:'Wheel',   obj:null }
         } } },
 
     methods: {
