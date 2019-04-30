@@ -17,6 +17,8 @@
   import Basics from '../../src/ganja/Basics.js'
   import Planes from '../../src/ganja/Planes.js'
   import Sphere from '../../src/ganja/Sphere.js'
+  import Lines  from '../../src/ganja/Lines.js'
+  import Style  from '../../src/ganja/Style.js'
 
 
   let Geom = {
@@ -27,7 +29,8 @@
       return { comp:'Geom', key:'Basics', pages:{
           Basics:  { title:'Basics', key:'Basics', klass:Basics, created:false },
           Planes:  { title:'Planes', key:'Planes', klass:Planes, created:false },
-          Sphere:  { title:'Sphere', key:'Sphere', klass:Sphere, created:false }
+          Sphere:  { title:'Sphere', key:'Sphere', klass:Sphere, created:false },
+          Lines:   { title:'Lines',  key:'Lines',  klass:Lines,  created:false }
         } } },
 
     methods: {
@@ -49,18 +52,13 @@
 
       create: function( key ) {
         if( !this.pages[key].created ) {
-          let elem = this.$refs[key][0];
-          window.Geom[key] = {}
-          //console.log( 'Geom.create', window.Geom[key] );
+          Style.init( key, this.$refs[key][0] );
           this.pages[key].created = true;
-          this.pages[key].klass.run(elem); } }
+          this.pages[key].klass.ga(); } }
     },
 
     mounted: function () {
-      let elem = this.$refs[this.key][0];
-      window.Geom = {};
-      window.Geom.width  = elem['clientWidth' ];
-      window.Geom.height = elem['clientHeight'];
+      Style.size( this.$refs[this.key][0] ); // mounted is best place to get page elem size
       this.onTabs(this.key);
       this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
         this.onTabs(obj); } ); }

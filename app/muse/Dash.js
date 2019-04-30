@@ -1558,9 +1558,7 @@ let GA = window['Algebra'];
 
 let Basics  = class Basics {
 
-  static run (elem) {
-
-    window.Geom['Basics'].elem = elem;
+  static ga () {
 
     GA(2, 0, 1, () => {
 
@@ -1591,11 +1589,7 @@ let Basics  = class Basics {
       // an array of items that it will render in order. It can render points, lines, labels, colors,
       // line segments and polygons.
 
-
-      let geom   = window.Geom;
-      let basics = geom['Basics'];
-
-      basics.elem.appendChild( Element.graph( [
+      let graph = Element.graph( [
         A, "A",         // Render point A and label it.
         B, "B",         // Render point B and label it.
         C, "C",         // Render point C and label them.
@@ -1605,9 +1599,9 @@ let Basics  = class Basics {
         [B, C],          // Render line segment from B to C.
         0xffcccc,       // Set the color to light red.
         [A, B, C]         // render polygon ABC.
-      ], { grid:true, width:geom.width, height:geom.height }));
+      ], { grid:true });
 
-      // , style:'background:black;'
+      window.Style.process( 'Basics', graph );
 
     });
   }
@@ -1618,9 +1612,8 @@ let GA$1 = window['Algebra'];
 
 let Planes = class Planes {
 
-  static run(elem) {
+  static ga() {
 
-    window.Geom['Planes'].elem = elem;
 
     GA$1(4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
 
@@ -1629,12 +1622,12 @@ let Planes = class Planes {
       let up = (x) => no + x + .5 * x * x * ni;
 
       // Next we'll define some objects.
-      let p = up(0),                          // point
+      let p = up(0),                           // point
         S = () => !(p - .5 * ni),                 // main dual sphere around point (interactive)
-        S2 = !(up(-1.4e1) - 0.125 * ni),         // left dual sphere
-        C = !(up(1.4e1) - .125 * ni) & !(1e3),    // right circle
-        L = up(.9e2) ^ up(.9e2 - 1e1) ^ ni,       // top line
-        P = !(1e2 - .9 * ni),                   // bottom dual plane
+        S2 = !(up(-1.4e1) - 0.125 * ni),       // left dual sphere
+        C = !(up(1.4e1) - .125 * ni) & !(1e3), // right circle
+        L = up(.9e2) ^ up(.9e2 - 1e1) ^ ni,  // top line
+        P = !(1e2 - .9 * ni),                     // bottom dual plane
         P2 = !(1e1 + 1.7 * ni);                   // right dual plane
 
       // The intersections of the big sphere with the other 4 objects.
@@ -1643,27 +1636,21 @@ let Planes = class Planes {
       // For line meet plane its a bit more involved.
       let lp = up(nino << (P2 & L ^ no));
 
-      let geom   = window.Geom;
-      let planes = geom['Planes'];
-
+      // Graph the items. (hex numbers are html5 colors, two extra first bytes = alpha)
       let graph = Element.graph([
-        0x00FF0000, p, "s1",               // point
-        0xFF00FF, lp, "l&p",               // line intersect plane
-        0x0000FF, C1, "s&p",               // sphere meet plane
-        0x888800, C2, "s&l",               // sphere meet line
-        0x0088FF, C3, "s&s",               // sphere meet sphere
-        0x008800, C4, "s&c",               // sphere meet circle
-        0x880000, C5, "c&p",               // circle meet sphere
-        0, L, 0, C,                        // line and circle
+        0x00FF0000, p,  "s1",               // point
+        0xFF00FF,   lp, "l&p",               // line intersect plane
+        0x0000FF,   C1, "s&p",               // sphere meet plane
+        0x888800,   C2, "s&l",               // sphere meet line
+        0x0088FF,   C3, "s&s",               // sphere meet sphere
+        0x008800,   C4, "s&c",               // sphere meet circle
+        0x880000,   C5, "c&p",               // circle meet sphere
+        0, L, 0, C,                         // line and circle
         0xE0008800, P, P2,                 // plane
-        0xE0FFFFFF, S, "s1", S2            // spheres
-      ], { conformal:true, gl:true, grid:true } );
+        0x00000000, S, "s1", S2            // spheres 0xE0FFFFFF
+      ], { conformal:true, gl:true, grid:false } );
 
-     // Graph the items. (hex numbers are html5 colors, two extra first bytes = alpha)
-     graph.width  = geom.width;
-     graph.height = geom.height;
-     //console.log( 'Planes', geom.width, geom.height, graph );
-     planes.elem.appendChild( graph );
+      window.Style.process( 'Planes', graph );
 
   } ); } };
 
@@ -1672,42 +1659,127 @@ let GA$2 = window['Algebra'];
 
 let Sphere = class Sphere {
 
-  static run(elem) {
+  static ga() {
 
-    window.Geom['Sphere'].elem = elem;
 
     GA$2(4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
 
-// We start by defining a null basis, and upcasting for points
+      // We start by defining a null basis, and upcasting for points
       let ni = 1e4 + 1e5, no = .5e5 - .5e4;
       let up = (x) => no + x + .5 * x * x * ni;
 
-// Next we'll define 4 points
+      // Next we'll define 4 points
       let p1 = up(1e1), p2 = up(1e2), p3 = up(-1e3), p4 = up(-1e2);
 
-// The outer product can be used to construct the sphere through
-// any four points. 
+      // The outer product can be used to construct the sphere through
+      // any four points.
       let s = () => p1 ^ p2 ^ p3 ^ p4;
 
-// The outer product between any three points and infinity is a plane.
+      // The outer product between any three points and infinity is a plane.
       let p = () => p1 ^ p2 ^ p3 ^ ni;
 
-      let geom   = window.Geom;
-      let sphere = geom['Sphere'];
-
+      // Graph the items. (hex numbers are html5 colors, two extra first bytes = alpha)
       let graph = Element.graph([
         0x00FF0000, p1, "p1", p2, "p2", p3, "p3", p4, "p4", // points
         0xE0008800, p, "p",                                 // plane
         0xE00000FF, s, "s"                                  // sphere
-      ], { conformal:true, gl:true, grid:true, width:geom.width, height:geom.height });
+      ], { conformal:true, gl:true, grid:true });
 
-      // Graph the items. (hex numbers are html5 colors, two extra first bytes = alpha)
-      graph.width  = geom.width;
-      graph.height = geom.height;
-      //console.log( 'Sphere', geom.width, geom.height, graph );
-      sphere.elem.appendChild( graph );
+
+
+      window.Style.process( 'Sphere', graph );
 
     } ); } };
+
+//import GA from '../../lib/math/ganja.esm.js';
+let GA$3 = window['Algebra'];
+
+let Lines  = class Lines {
+
+  static ga() {
+
+  GA$3( 3, 0, 1, () => {
+
+  // We work in dual space. Our 1-blade's are dual-vectors (aka functionals of the
+  // form ax + by + cz + dw = 0).
+  // The four basis functionals are thus (x=0, y=0, z=0, w=0). In three dimensions
+  // these represent the yz, xz, xy and
+  // ideal plane.
+
+  // Specify a point directly (trivectors specified with overloaded e-notation.)
+  let point = (x,y,z)=>1e123-x*1e012+y*1e013+z*1e023;
+
+  // Lines can be defined using plucker coordinates
+  // let line = (px,py,pz,dx,dy,dz)=>px*1e01+py&1e02+pz*1e03+dx*1e12+dy*1e13+dz*1e23;
+
+  // Planes can be defined directly using e0,e1,e2,e3
+  // let plane = (a,b,c,d)=>d*1e0+a*1e1+b*1e2+c*1e3;
+
+  // Useful joins
+     let line_from_points  = (P1,P2)=>P1.Normalized&P2.Normalized;
+  // let plane_from_points = (P1,P2,P3)=>P1&P2&P3;
+  // let plane_from_point_and_line = (P,L)=>P&L;
+
+  // Usefull meets
+     let line_from_planes  = (p1,p2)=>p1^p2;
+  // let point_from_planes = (p1,p2,p3)=>p1^p2^p3;
+     let point_from_line_and_plane = (L,P)=>L^P;
+
+   // Create 5 points and some joining lines.
+      let A=point(0,-1,0  );
+      let B=point(1,1,-1  );
+      let C=point(-1,1,-1 );
+      let D=point(1,1, 1  );
+      let E=point(-1,1, 1 );
+      let centroid=A+B+C+D+E;
+      let camera=1e0;
+
+  // Graph the 3D items
+  let graph = Element.graph( ()=> {
+    let time=performance.now()/12000;
+    camera['set'](Math.cos(time)+Math.sin(time)*1e13);                      // rotate around Y
+    return [
+      0xddaaff,[A,B,C],                                            // graph on face
+      0xAA88FF,[A,B],[A,C],[A,D],[B,C],[B,D],[C,E],[A,E],[E,D],    // graph all edges
+      0x444444,A,"A",B,"B",C,"C",D,"D",E,"E",                      // graph all vertices
+      0xFF8888,C+E,centroid,"sum of points",
+      0x8888FF,line_from_points(centroid,C+E),"line from points ..",
+      0x44AA44,line_from_planes(A&B&C,B&C&D),"line from planes ..",
+      0x4488FF,point_from_line_and_plane(line_from_points(centroid,C+E),A&D&B),
+        "point from line and plane ..",
+      0xFFAA66,(B&D)+(C&E),"sum of lines"]; }, { animate:true, camera } );
+
+    window.Style.process( 'Lines', graph );
+
+  } ); } };
+
+let Obj = {};  // Static Object key store for Style
+
+let Style = class Style {
+
+  static size( elem ) {
+    Obj.width  = elem['clientWidth' ];
+    Obj.height = elem['clientHeight'];
+  }
+
+  static init( key, elem ) {
+    Obj[key] = {};
+    Obj[key].elem   = elem;
+    Obj[key].width  = elem['clientWidth' ]===0 ? Obj.width  : elem['clientWidth' ];
+    Obj[key].height = elem['clientHeight']===0 ? Obj.height : elem['clientHeight'];
+  }
+
+  static process( key, graph ) {
+    let page  = Obj[key];
+    let style = `width:${page.width}px; height:${page.height}px; background:#000000;`;
+    graph.setAttribute( 'style', style );
+    console.log( key, style, graph );
+    page.elem.appendChild( graph );
+  }
+};
+
+Style.Obj    = Obj;
+window.Style = Style; // Make Style global for access inside ganja.js
 
 //
 
@@ -1720,7 +1792,8 @@ let Geom = {
     return { comp:'Geom', key:'Basics', pages:{
         Basics:  { title:'Basics', key:'Basics', klass:Basics, created:false },
         Planes:  { title:'Planes', key:'Planes', klass:Planes, created:false },
-        Sphere:  { title:'Sphere', key:'Sphere', klass:Sphere, created:false }
+        Sphere:  { title:'Sphere', key:'Sphere', klass:Sphere, created:false },
+        Lines:   { title:'Lines',  key:'Lines',  klass:Lines,  created:false }
       } } },
 
   methods: {
@@ -1742,18 +1815,13 @@ let Geom = {
 
     create: function( key ) {
       if( !this.pages[key].created ) {
-        let elem = this.$refs[key][0];
-        window.Geom[key] = {};
-        //console.log( 'Geom.create', window.Geom[key] );
+        Style.init( key, this.$refs[key][0] );
         this.pages[key].created = true;
-        this.pages[key].klass.run(elem); } }
+        this.pages[key].klass.ga(); } }
   },
 
   mounted: function () {
-    let elem = this.$refs[this.key][0];
-    window.Geom = {};
-    window.Geom.width  = elem['clientWidth' ];
-    window.Geom.height = elem['clientHeight'];
+    Style.size( this.$refs[this.key][0] ); // mounted is best place to get page elem size
     this.onTabs(this.key);
     this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
       this.onTabs(obj); } ); }
@@ -1804,7 +1872,7 @@ __vue_render__$e._withStripped = true;
   /* style */
   const __vue_inject_styles__$h = function (inject) {
     if (!inject) return
-    inject("data-v-5516a43d_0", { source: ".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.geom .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.geom .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Geom.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Geom.vue","sourcesContent":[".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.geom .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.geom .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
+    inject("data-v-2c63f212_0", { source: ".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.geom .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.geom .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Geom.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Geom.vue","sourcesContent":[".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.geom .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.geom .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
 
   };
   /* scoped */

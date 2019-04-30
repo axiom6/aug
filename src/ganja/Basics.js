@@ -4,9 +4,7 @@ let GA = window['Algebra'];
 
 let Basics  = class Basics {
 
-  static run (elem) {
-
-    window.Geom['Basics'].elem = elem;
+  static ga () {
 
     GA(2, 0, 1, () => {
 
@@ -37,11 +35,7 @@ let Basics  = class Basics {
       // an array of items that it will render in order. It can render points, lines, labels, colors,
       // line segments and polygons.
 
-
-      let geom   = window.Geom;
-      let basics = geom['Basics'];
-
-      basics.elem.appendChild( Element.graph( [
+      let graph = Element.graph( [
         A, "A",         // Render point A and label it.
         B, "B",         // Render point B and label it.
         C, "C",         // Render point C and label them.
@@ -51,9 +45,9 @@ let Basics  = class Basics {
         [B, C],          // Render line segment from B to C.
         0xffcccc,       // Set the color to light red.
         [A, B, C]         // render polygon ABC.
-      ], { grid:true, width:geom.width, height:geom.height }));
+      ], { grid:true });
 
-      // , style:'background:black;'
+      window.Style.process( 'Basics', graph );
 
     });
   }
