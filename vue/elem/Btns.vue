@@ -35,7 +35,7 @@
         let h = this.$refs['Btns']['clientHeight'];
         return h/w; },
       styleBlock: function(p) {
-        let p2 = p[2]==0 ? p[3] : p[2];
+        let p2 = p[2]===0 ? p[3] : p[2];
         return { position:'absolute', left:p[0]+'%', top:p[1]+'%', width:p2+'%', height:p[3]+'%',
         fontSize:(p[3]*0.1)+'em' } },
       styleBtn: function (btn) {
@@ -61,7 +61,7 @@
              btn.pos[2] = btn.pos[3]*2.4*wt/wb
              // console.log( 'Adj', { wt:wt, wb:wb, w:btn.pos[2], h:btn.pos[3] } ) }
              this.$refs[btn.key][0].style.width = btn.pos[2]+'%' } }
-      },
+      } },
 
     mounted: function () {
       this.asp = this.aspect();

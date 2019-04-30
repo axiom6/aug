@@ -2,7 +2,7 @@
 
 <template>
   <div class="draw" ref="Draw">
-    <d-dabs :comp="comp" :pages="pages" init="Axes"></d-dabs>
+    <d-dabs :comp="comp" :pages="pages" :init="key"></d-dabs>
     <template v-for="page in pages">
       <div :ref="page.key" v-show="isPage(page.key)" class="page" :key="page.key">
         <!--h1>{{page.title}}</h1-->
@@ -55,7 +55,7 @@
 
     mounted: function () {
       this.drew = new Drew( this.stream(), this.$refs['Draw'], this.size() );
-      this.onTabs('Axes');
+      this.onTabs(this.key);
       this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
         this.onTabs(obj); } );
     }

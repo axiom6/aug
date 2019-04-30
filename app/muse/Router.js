@@ -25,6 +25,7 @@ export default new Router( {
       { path:'conn',  name:'WiseConn',  components:{ WiseConn: Dash.Conn  } },
       { path:'enli',  name:'WiseEnli',  components:{ WiseEnli: Dash.Enli  } },
       { path:'data',  name:'WiseData',  components:{ WiseData: Dash.Data  } } ] },
+    { path: '/geom',  name:'Geom',      components:{ Geom:     Dash.Geom  } },
     { path: '/draw',  name:'Draw',      components:{ Draw:     Dash.Draw  } },
     { path: '/note',  name:'Note',      components:{ Note:     Dash.Note  },redirect:{ name:"NoteStand"}, children: [
       { path:'stand', name:'NoteStand', components:{ NoteStand:lazy('pub/note/Stand') } },

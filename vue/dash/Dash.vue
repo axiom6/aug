@@ -38,6 +38,7 @@
   import Info from '../comp/Info.vue';
   import Know from '../comp/Know.vue';
   import Wise from '../comp/Wise.vue';
+  import Geom from '../comp/Geom.vue';
   import Draw from '../comp/Draw.vue';
   import Prac from '../page/Prac.vue';
   import Conn from '../page/Conn.vue';
@@ -51,6 +52,7 @@
   Dash.Info = Info;
   Dash.Know = Know;
   Dash.Wise = Wise;
+  Dash.Geom = Geom;
   Dash.Draw = Draw;
   Dash.Prac = Prac;
   Dash.Conn = Conn;
