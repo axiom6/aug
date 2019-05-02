@@ -9,6 +9,8 @@ let Sphere = class Sphere {
 
     GA(4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
 
+      // console.log( this.describe() );
+
       // We start by defining a null basis, and upcasting for points
       let ni = 1e4 + 1e5, no = .5e5 - .5e4;
       let up = (x) => no + x + .5 * x * x * ni;

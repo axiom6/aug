@@ -1664,6 +1664,8 @@ let Sphere = class Sphere {
 
     GA$2(4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
 
+      console.log( this.describe() );
+
       // We start by defining a null basis, and upcasting for points
       let ni = 1e4 + 1e5, no = .5e5 - .5e4;
       let up = (x) => no + x + .5 * x * x * ni;
@@ -1753,6 +1755,152 @@ let Lines  = class Lines {
 
   } ); } };
 
+//import GA from '../../lib/math/ganja.esm.js';
+let GA$4 = window['Algebra'];
+
+let Grids  = class Grids {
+
+  static ga() {
+
+  GA$4( 3, 0, 1, () => {  // PGA3D Projective Euclidean 3D space. (dual)
+
+  let items = [];
+  let origin=1e123, EX=-1e012, EY=1e013, EZ=1e012;
+  let point  = (x,y,z)=>origin+x*EX-y*EY+z*EZ;
+
+  let s =  0.20;    // xyz Scale
+  let t = 10.00*s; // Total lengths
+  let c =  8.66*s; // Cos(30)
+  let h =  5.00*s; // Sin(30) or Half
+  let i =  0.50*s; // 10% increment
+
+  let ooo = point(0,0 ,0 );
+  let xoo = point(c,-h, 0 );
+  let oyo = point(0,t, 0 );
+  let ooz = point(0,-h, c );
+  let xyo = point(c,h, 0 );
+  let oyz = point(0,h, c );
+  let xoz = point(c,-t, c );
+
+  items.push( 0xFFFFFF, ooo, 'ooo', xoo, 'xoo', oyo, 'oyo', ooz, 'ooz', 
+                        xyo, 'xyo', oyz, 'oyz', xoz, 'xoz' );
+
+  let xy = [ooo,xoo,xyo,oyo];
+  let yz = [ooo,ooz,oyz,oyo];
+  let zx = [ooo,ooz,xoz,xoo];
+  
+  items.push( 0x888888, xy, 0x666666, yz, 0x444444, zx );
+
+  let xyX = (x) => [ooo*(1-x)+xoo*x, oyo*(1-x)+xyo*x]; // x scales from [0,1]
+  let xyY = (y) => [ooo*(1-y)+oyo*y, xoo*(1-y)+xyo*y]; // y scales from [0,1]
+  let yzY = (y) => [ooo*(1-y)+oyo*y, ooz*(1-y)+oyz*y]; // y scales from [0,1]
+  let yzZ = (z) => [ooo*(1-z)+ooz*z, oyo*(1-z)+oyz*z]; // z scales from [0,1]
+  let zxX = (x) => [ooo*(1-x)+xoo*x, ooz*(1-x)+xoz*x]; // x scales from [0,1]
+  let zxZ = (z) => [ooo*(1-z)+ooz*z, xoo*(1-z)+xoz*z]; // z scales from [0,1]
+
+  let gxy = (t,i, xf, yf ) => {
+    items.push(0xFFFFFF);
+    for( let x=0; x < t; x+=i ) { items.push(xf(x)); }
+    for( let y=0; y < t; y+=i ) { items.push(yf(y)); } };
+
+  gxy( h, i, xyX, xyY ); // Not sure why h
+  gxy( h, i, yzY, yzZ );
+  gxy( h, i, zxX, zxZ );
+
+    let graph = Element.graph( () => { return items; }, {} );
+
+  window.Style.process( 'Grids', graph );
+
+  } ); } };
+
+/*
+  // let ni = 1e4 + 1e5;
+//let planep  = (P,Q,R)=>P&Q&R
+//let plane4 = (a,b,c,d)=>d*1e0+a*1e1+b*1e2+c*1e3;
+  let push = () => {
+    items.push( 0xFFFFFF);
+    items.push( xyX(0.1) ); items.push( xyY(0.1) );
+    items.push( xyX(0.2) ); items.push( xyY(0.2) );
+    items.push( xyX(0.3) ); items.push( xyY(0.3) );
+    items.push( xyX(0.4) ); items.push( xyY(0.4) );
+    items.push( xyX(0.5) ); items.push( xyY(0.5) );
+    items.push( xyX(0.6) ); items.push( xyY(0.6) );
+    items.push( xyX(0.7) ); items.push( xyY(0.7) );
+    items.push( xyX(0.8) ); items.push( xyY(0.8) );
+    items.push( xyX(0.9) ); items.push( xyY(0.9) );
+    return a; }
+
+    let graph = Element.graph(
+      [ 0x888888, xy,  'xy',  0x666666, yz,  'yz',  0x444444, zx,  'zx',
+        0xFFFFFF, ooo, 'ooo',
+        0xFFFFFF, xoo, 'xoo', 0xFFFFFF, oyo, 'oyo', 0xFFFFFF, ooz, 'ooz',
+        0xFFFFFF, xyo, 'xyo', 0xFFFFFF, oyz, 'oyz', 0xFFFFFF, xoz, 'xoz',
+        push(), 'push' ], {} );
+
+ */
+
+let GA$5 = window['Algebra'];
+
+let Play  = class Play {
+
+  static ga() {
+
+  GA$5(3,0,1,()=> {
+
+    console.log( 'PGA3D', this.describe() );
+
+  let graph = Element.graph([1e123,1e23,1e13,1e12],{camera:1+.5e01-.5e02}); // and in 3D PGA
+
+  window.Style.process( 'Play', graph );
+
+  } ); } };
+
+let GA$6 = window['Algebra'];
+
+let Isohed  = class Isohed {
+
+  static ga() {
+
+GA$6(3,0,1,()=>{  // Create a Clifford Algebra with 3,0,1 metric. 
+
+  // Specify a point directly (trivectors specified with overloaded e-notation.)
+  let point = (x,y,z)=>1e123-x*1e012+y*1e013+z*1e023;
+  let rotor = (P,a)=>Math.cos(a/2)+Math.sin(a/2)*P;
+
+  // Our camera position and orientation
+  let  camera=1e0;
+
+  // We construct faces, edges and vertices of an icosahedron.
+  let r = rotor(1e13,Math.PI/2.5);
+  let A = point(0,1,0);
+  let B = point((1-Math.atan(0.5)**2)**0.5,Math.atan(0.5),0);
+  let C = rotor(1e13,Math.PI/5)>>>(1e2>>>B);
+  let items=[A,"A",B,"B",C,"C"];
+
+  // vertices
+  items.push(0x4444FF);
+  for (let i=0;i<5;i++) items.push(A,B=r>>>B,C=r>>>C,1e2>>>A);
+
+  // edges
+  items.push(0x444444);
+  for (let i=0;i<5;i++) items.push([A,B],[B,C],[B,B=r>>>B],[B,C],[C,C=r>>>C],[1e2>>>A,C]);
+
+  // faces
+  items.push(0xFFCCCC);
+  for (let i=0;i<5;i++) items.push([A,B,r>>>B],[B,B=r>>>B,C],[C,B,r>>>C],[C,1e2>>>A,C=r>>>C]);
+
+  // Graph the 3D items
+  let graph = Element.graph( () => {
+    let time=performance.now()/4000;
+    camera['set'](rotor(1e13,time)*rotor(1e12,time*1.23131));                // animate camera
+    return items.slice(0,1+((Math.floor(time*50))%(items.length+20)));    // show more and more elements
+  },{gl:true,animate:true,camera});
+
+
+    window.Style.process( 'Isohed', graph );
+
+  } ); } };
+
 let Obj = {};  // Static Object key store for Style
 
 let Style = class Style {
@@ -1773,7 +1921,7 @@ let Style = class Style {
     let page  = Obj[key];
     let style = `width:${page.width}px; height:${page.height}px; background:#000000;`;
     graph.setAttribute( 'style', style );
-    console.log( key, style, graph );
+    // console.log( key, style, graph );
     page.elem.appendChild( graph );
   }
 };
@@ -1789,11 +1937,14 @@ let Geom = {
   components:{ 'd-dabs':Dabs },
 
   data() {
-    return { comp:'Geom', key:'Basics', pages:{
+    return { comp:'Geom', key:'Grids', pages:{
         Basics:  { title:'Basics', key:'Basics', klass:Basics, created:false },
         Planes:  { title:'Planes', key:'Planes', klass:Planes, created:false },
         Sphere:  { title:'Sphere', key:'Sphere', klass:Sphere, created:false },
-        Lines:   { title:'Lines',  key:'Lines',  klass:Lines,  created:false }
+        Lines:   { title:'Lines',  key:'Lines',  klass:Lines,  created:false },
+        Grids:   { title:'Grids',  key:'Grids',  klass:Grids,  created:false },
+        Play:    { title:'Play',   key:'Play',   klass:Play,   created:false },
+        Isohed:  { title:'Isohed', key:'Isohed', klass:Isohed, created:false }
       } } },
 
   methods: {
@@ -1872,7 +2023,7 @@ __vue_render__$e._withStripped = true;
   /* style */
   const __vue_inject_styles__$h = function (inject) {
     if (!inject) return
-    inject("data-v-2c63f212_0", { source: ".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.geom .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.geom .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Geom.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Geom.vue","sourcesContent":[".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.geom .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.geom .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
+    inject("data-v-a932784a_0", { source: ".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.geom .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.geom .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Geom.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Geom.vue","sourcesContent":[".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.geom .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.geom .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
 
   };
   /* scoped */

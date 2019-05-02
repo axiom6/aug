@@ -19,7 +19,7 @@ let Style = class Style {
     let page  = Obj[key];
     let style = `width:${page.width}px; height:${page.height}px; background:#000000;`;
     graph.setAttribute( 'style', style );
-    console.log( key, style, graph );
+    // console.log( key, style, graph );
     page.elem.appendChild( graph );
   }
 }

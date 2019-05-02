@@ -14,11 +14,14 @@
 <script type="module">
 
   import Dabs   from '../elem/Dabs.vue';
-  import Basics from '../../src/ganja/Basics.js'
-  import Planes from '../../src/ganja/Planes.js'
-  import Sphere from '../../src/ganja/Sphere.js'
-  import Lines  from '../../src/ganja/Lines.js'
-  import Style  from '../../src/ganja/Style.js'
+  import Basics from '../../src/ganja/Basics.js';
+  import Planes from '../../src/ganja/Planes.js';
+  import Sphere from '../../src/ganja/Sphere.js';
+  import Lines  from '../../src/ganja/Lines.js';
+  import Grids  from '../../src/ganja/Grids.js';
+  import Play   from '../../src/ganja/Play.js';
+  import Isohed from '../../src/ganja/Isohed.js';
+  import Style  from '../../src/ganja/Style.js' ;
 
 
   let Geom = {
@@ -26,11 +29,14 @@
     components:{ 'd-dabs':Dabs },
 
     data() {
-      return { comp:'Geom', key:'Basics', pages:{
+      return { comp:'Geom', key:'Grids', pages:{
           Basics:  { title:'Basics', key:'Basics', klass:Basics, created:false },
           Planes:  { title:'Planes', key:'Planes', klass:Planes, created:false },
           Sphere:  { title:'Sphere', key:'Sphere', klass:Sphere, created:false },
-          Lines:   { title:'Lines',  key:'Lines',  klass:Lines,  created:false }
+          Lines:   { title:'Lines',  key:'Lines',  klass:Lines,  created:false },
+          Grids:   { title:'Grids',  key:'Grids',  klass:Grids,  created:false },
+          Play:    { title:'Play',   key:'Play',   klass:Play,   created:false },
+          Isohed:  { title:'Isohed', key:'Isohed', klass:Isohed, created:false }
         } } },
 
     methods: {
