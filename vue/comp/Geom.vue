@@ -29,7 +29,7 @@
     components:{ 'd-dabs':Dabs },
 
     data() {
-      return { comp:'Geom', key:'Grids', pages:{
+      return { comp:'Geom', key:'Planes', pages:{
           Basics:  { title:'Basics', key:'Basics', klass:Basics, created:false },
           Planes:  { title:'Planes', key:'Planes', klass:Planes, created:false },
           Sphere:  { title:'Sphere', key:'Sphere', klass:Sphere, created:false },

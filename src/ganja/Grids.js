@@ -58,29 +58,3 @@ let Grids  = class Grids {
   } ) } }
     
 export default Grids;
-
-/*
-  // let ni = 1e4 + 1e5;
-//let planep  = (P,Q,R)=>P&Q&R
-//let plane4 = (a,b,c,d)=>d*1e0+a*1e1+b*1e2+c*1e3;
-  let push = () => {
-    items.push( 0xFFFFFF);
-    items.push( xyX(0.1) ); items.push( xyY(0.1) );
-    items.push( xyX(0.2) ); items.push( xyY(0.2) );
-    items.push( xyX(0.3) ); items.push( xyY(0.3) );
-    items.push( xyX(0.4) ); items.push( xyY(0.4) );
-    items.push( xyX(0.5) ); items.push( xyY(0.5) );
-    items.push( xyX(0.6) ); items.push( xyY(0.6) );
-    items.push( xyX(0.7) ); items.push( xyY(0.7) );
-    items.push( xyX(0.8) ); items.push( xyY(0.8) );
-    items.push( xyX(0.9) ); items.push( xyY(0.9) );
-    return a; }
-
-    let graph = Element.graph(
-      [ 0x888888, xy,  'xy',  0x666666, yz,  'yz',  0x444444, zx,  'zx',
-        0xFFFFFF, ooo, 'ooo',
-        0xFFFFFF, xoo, 'xoo', 0xFFFFFF, oyo, 'oyo', 0xFFFFFF, ooz, 'ooz',
-        0xFFFFFF, xyo, 'xyo', 0xFFFFFF, oyz, 'oyz', 0xFFFFFF, xoz, 'xoz',
-        push(), 'push' ], {} );
-
- */

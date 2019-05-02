@@ -1623,21 +1623,26 @@ let Planes = class Planes {
 
       // Next we'll define some objects.
       let p = up(0),                           // point
-        S = () => !(p - .5 * ni),                 // main dual sphere around point (interactive)
-        S2 = !(up(-1.4e1) - 0.125 * ni),       // left dual sphere
+        S = () => !(p - .4 * ni),                 // main dual sphere around point (interactive)
+        S2 = !(up(-1.4e1) - 0.15 * ni),       // left dual sphere
         C = !(up(1.4e1) - .125 * ni) & !(1e3), // right circle
-        L = up(.9e2) ^ up(.9e2 - 1e1) ^ ni,  // top line
-        P = !(1e2 - .9 * ni),                     // bottom dual plane
-        P2 = !(1e1 + 1.7 * ni);                   // right dual plane
+        L = up(.9e2) ^ up(.9e2 - 1e1) ^ ni;  // top line
+
+
+      let PD = !(1e3 + 2.0 * ni );  // depth  dual plane - dark
+      let PB = !(1e2 -  .9 * ni );  // bottom dual plane
+      let PR = !(1e1 + 1.7 * ni );  // right  dual plane
+      let PL = !(1e1 - 1.7 * ni );  // left   dual plane
+
 
       // The intersections of the big sphere with the other 4 objects.
-      let C1 = () => S & P, C2 = () => S & L, C3 = () => S & S2, C4 = () => S & C, C5 = () => C & P2;
+      let C1 = () => S & PB, C2 = () => S & L, C3 = () => S & S2, C4 = () => S & C, C5 = () => C & PR;
 
       // For line meet plane its a bit more involved.
-      let lp = up(nino << (P2 & L ^ no));
+      let lp = up(nino << (PR & L ^ no));
 
-      // Graph the items. (hex numbers are html5 colors, two extra first bytes = alpha)
-      let graph = Element.graph([
+      let items = [
+        0xE0008888, PD, 'PD',               // Dark background plane
         0x00FF0000, p,  "s1",               // point
         0xFF00FF,   lp, "l&p",               // line intersect plane
         0x0000FF,   C1, "s&p",               // sphere meet plane
@@ -1646,11 +1651,21 @@ let Planes = class Planes {
         0x008800,   C4, "s&c",               // sphere meet circle
         0x880000,   C5, "c&p",               // circle meet sphere
         0, L, 0, C,                         // line and circle
-        0xE0008800, P, P2,                 // plane
-        0x00000000, S, "s1", S2            // spheres 0xE0FFFFFF
-      ], { conformal:true, gl:true, grid:false } );
+        0xE0008888, PB, PR, PL,             // Bottom and Right plane
+        0x00000088, S, "s1", S2            // spheres 0xE0FFFFFF
+      ];
 
-      window.Style.process( 'Planes', graph );
+      // Graph the items. (hex numbers are html5 colors, two extra first bytes = alpha)
+      let canvas = Element.graph( () => {
+         return items;
+      },
+      { conformal:true, gl:true, grid:false } );
+
+      let context = canvas.getContext('webgl');
+      context.fillStyle = '#000000';
+      console.log( "Planes", context, canvas );
+
+      window.Style.process( 'Planes', canvas );
 
   } ); } };
 
@@ -1664,7 +1679,7 @@ let Sphere = class Sphere {
 
     GA$2(4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
 
-      console.log( this.describe() );
+      // console.log( this.describe() );
 
       // We start by defining a null basis, and upcasting for points
       let ni = 1e4 + 1e5, no = .5e5 - .5e4;
@@ -1681,15 +1696,16 @@ let Sphere = class Sphere {
       let p = () => p1 ^ p2 ^ p3 ^ ni;
 
       // Graph the items. (hex numbers are html5 colors, two extra first bytes = alpha)
-      let graph = Element.graph([
+      let canvas = Element.graph([
         0x00FF0000, p1, "p1", p2, "p2", p3, "p3", p4, "p4", // points
         0xE0008800, p, "p",                                 // plane
         0xE00000FF, s, "s"                                  // sphere
-      ], { conformal:true, gl:true, grid:true });
+      ], { conformal:true, gl:true, grid:false });
 
+      //let context = canvas.getContext('webgl');
+      //context.fillStyle = '#000000';
 
-
-      window.Style.process( 'Sphere', graph );
+      window.Style.process( 'Sphere', canvas );
 
     } ); } };
 
@@ -1813,32 +1829,6 @@ let Grids  = class Grids {
 
   } ); } };
 
-/*
-  // let ni = 1e4 + 1e5;
-//let planep  = (P,Q,R)=>P&Q&R
-//let plane4 = (a,b,c,d)=>d*1e0+a*1e1+b*1e2+c*1e3;
-  let push = () => {
-    items.push( 0xFFFFFF);
-    items.push( xyX(0.1) ); items.push( xyY(0.1) );
-    items.push( xyX(0.2) ); items.push( xyY(0.2) );
-    items.push( xyX(0.3) ); items.push( xyY(0.3) );
-    items.push( xyX(0.4) ); items.push( xyY(0.4) );
-    items.push( xyX(0.5) ); items.push( xyY(0.5) );
-    items.push( xyX(0.6) ); items.push( xyY(0.6) );
-    items.push( xyX(0.7) ); items.push( xyY(0.7) );
-    items.push( xyX(0.8) ); items.push( xyY(0.8) );
-    items.push( xyX(0.9) ); items.push( xyY(0.9) );
-    return a; }
-
-    let graph = Element.graph(
-      [ 0x888888, xy,  'xy',  0x666666, yz,  'yz',  0x444444, zx,  'zx',
-        0xFFFFFF, ooo, 'ooo',
-        0xFFFFFF, xoo, 'xoo', 0xFFFFFF, oyo, 'oyo', 0xFFFFFF, ooz, 'ooz',
-        0xFFFFFF, xyo, 'xyo', 0xFFFFFF, oyz, 'oyz', 0xFFFFFF, xoz, 'xoz',
-        push(), 'push' ], {} );
-
- */
-
 let GA$5 = window['Algebra'];
 
 let Play  = class Play {
@@ -1921,6 +1911,7 @@ let Style = class Style {
     let page  = Obj[key];
     let style = `width:${page.width}px; height:${page.height}px; background:#000000;`;
     graph.setAttribute( 'style', style );
+    if( graph.tagName==='CANVAS' ) ;
     // console.log( key, style, graph );
     page.elem.appendChild( graph );
   }
@@ -1937,7 +1928,7 @@ let Geom = {
   components:{ 'd-dabs':Dabs },
 
   data() {
-    return { comp:'Geom', key:'Grids', pages:{
+    return { comp:'Geom', key:'Planes', pages:{
         Basics:  { title:'Basics', key:'Basics', klass:Basics, created:false },
         Planes:  { title:'Planes', key:'Planes', klass:Planes, created:false },
         Sphere:  { title:'Sphere', key:'Sphere', klass:Sphere, created:false },
@@ -2023,7 +2014,7 @@ __vue_render__$e._withStripped = true;
   /* style */
   const __vue_inject_styles__$h = function (inject) {
     if (!inject) return
-    inject("data-v-a932784a_0", { source: ".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.geom .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.geom .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Geom.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Geom.vue","sourcesContent":[".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.geom .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.geom .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
+    inject("data-v-14fe5bbb_0", { source: ".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.geom .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.geom .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Geom.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Geom.vue","sourcesContent":[".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.geom .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.geom .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
 
   };
   /* scoped */

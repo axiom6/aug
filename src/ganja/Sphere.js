@@ -26,15 +26,16 @@ let Sphere = class Sphere {
       let p = () => p1 ^ p2 ^ p3 ^ ni;
 
       // Graph the items. (hex numbers are html5 colors, two extra first bytes = alpha)
-      let graph = Element.graph([
+      let canvas = Element.graph([
         0x00FF0000, p1, "p1", p2, "p2", p3, "p3", p4, "p4", // points
         0xE0008800, p, "p",                                 // plane
         0xE00000FF, s, "s"                                  // sphere
-      ], { conformal:true, gl:true, grid:true });
+      ], { conformal:true, gl:true, grid:false });
 
+      //let context = canvas.getContext('webgl');
+      //context.fillStyle = '#000000';
 
-
-      window.Style.process( 'Sphere', graph );
+      window.Style.process( 'Sphere', canvas );
 
     } ) } }
 
