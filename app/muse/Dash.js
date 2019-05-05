@@ -1615,7 +1615,7 @@ let Planes = class Planes {
   static ga() {
 
 
-    GA$1(4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
+    GA$1( 4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
 
       // no                  = 1e5 - 1e4  origin
       // ni                  = 0.5(1e4 + 1e5)  inifinity
@@ -1672,40 +1672,20 @@ let Planes = class Planes {
 
       // Next we'll define some objects.
       let p0 = point(0, 0, 0 );                           // point
-   // let p2 = point(-0.7, 0, 0 );
-   // let p3 = point( 0.7, 0, 0 );
-      let sc = () => spherePR( p0,0.5 ); // !(p1 - 0.20 * ni);  // main dual sphere around point (interactive)
-   // let sl = () => spherePR( p2,0.5 );       // left dual sphere
-   // let cr = () => !(p3 - .125 * ni) & !(1e3); // right circle
-   // let lt = point( 2.0, 2.5, 0 ) ^ point( -2.0, 2.5, 0 );// top line up(.9e2 - 1e1) ^ ni
+      let sc = spherePR( p0,0.5 ); // !(p1 - 0.20 * ni);  // main dual sphere around point (interactive)
 
-  // let pd = planeBR( 1e3,  rp ); // !(1e3 + 2.0 * ni );  // depth  dual plane - dark
-  // let pb = planeBR( 1e2, -rp );  // bottom dual plane
-  // let pr = planeBR( 1e1,  rp );  // right  dual plane
-  // let pl = planeBR( 1e1, -rp );  // left   dual plane
-  // let pt = planeBR( 1e2,  rp );  // top    dual plane
-
-  // The intersections of the big sphere with the other 4 objects.
-  // let m1 = () => sc & pb, m2 = () => sc & lt, m3 = () => sc & sl, m4 = () => sc & cr, m5 = () => cr & pr;
-
-  // For line meet plane its a bit more involved.
-  //
-  // let lp = up(nino << (pr & lt ^ no));
 
     let items = [
-      0x000000,   bne, 'bne', bse, 'bse', bnw, 'bnw', bsw, 'bsw',
-      0x000000,   fne, 'fne', fse, 'fse', fnw, 'fnw', fsw, 'fsw',
-      0x444444,   de, dw, ds,
-      0x444444,   p0, "Sc",
-      0xFFFFFF,   sc, "Sc"
-      ];
+      0xFFFFFF,   bne, 'bne', bse, 'bse', bnw, 'bnw', bsw, 'bsw',
+      0xFFFFFF,   fne, 'fne', fse, 'fse', fnw, 'fnw', fsw, 'fsw',
+      0xFFFFFF,   de, dw, ds,
+      0xFFFFFF,   p0, sc, "Sc" ];
 
-      // Graph the items. (hex numbers are html5 colors, two extra first bytes = alpha)
-      let canvas = Element.graph( () => {
-         return items; },
-        { conformal:true, gl:true, grid:false } );
+    let svg = Element.graph( () => {
+       return items; },
+      { conformal:true, camera:1+.5e01-.5e02, gl:false, grid:false } );
 
-      window.Style.process( 'Planes', canvas );
+    window.Style.process( 'Planes', svg );
 
   } ); } };
 
@@ -1941,6 +1921,19 @@ GA$6(3,0,1,()=>{  // Create a Clifford Algebra with 3,0,1 metric.
 
   } ); } };
 
+//import GA from '../../lib/math/ganja.esm.js';
+let GA$7 = window['Algebra'];
+
+/*
+     // 0xFF00FF,   lt, "Pr&Lt",                  // line intersect plane
+     // 0x0000FF,   m1, "Sc&Pb",                  // sphere meet plane
+     // 0x888800,   m2, "Sc&Lt",                  // sphere meet line
+     // 0x0088FF,   m3, "Sc&Sl",                  // sphere meet sphere
+     // 0x008800,   m4, "Sc&Cr",                  // sphere meet circle
+     // 0x880000,   m5, "Cr&Pr",                  // circle meet sphere
+     // 0x888800,   lp,                      // line and circle
+ */
+
 let Obj = {};  // Static Object key store for Style
 
 let Style = class Style {
@@ -2068,7 +2061,7 @@ __vue_render__$e._withStripped = true;
   /* style */
   const __vue_inject_styles__$h = function (inject) {
     if (!inject) return
-    inject("data-v-14fe5bbb_0", { source: ".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.geom .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.geom .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Geom.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Geom.vue","sourcesContent":[".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.geom .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.geom .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
+    inject("data-v-48c73ab6_0", { source: ".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.geom .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.geom .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Geom.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Geom.vue","sourcesContent":[".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.geom .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.geom .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
 
   };
   /* scoped */

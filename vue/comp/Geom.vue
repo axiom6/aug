@@ -13,15 +13,18 @@
 
 <script type="module">
 
-  import Dabs   from '../elem/Dabs.vue';
-  import Basics from '../../src/ganja/Basics.js';
-  import Planes from '../../src/ganja/Planes.js';
-  import Sphere from '../../src/ganja/Sphere.js';
-  import Lines  from '../../src/ganja/Lines.js';
-  import Grids  from '../../src/ganja/Grids.js';
-  import Play   from '../../src/ganja/Play.js';
-  import Isohed from '../../src/ganja/Isohed.js';
+  import Dabs    from '../elem/Dabs.vue';
+  import Basics  from '../../src/ganja/Basics.js';
+  import Planes  from '../../src/ganja/Planes.js';
+  import Sphere  from '../../src/ganja/Sphere.js';
+  import Lines   from '../../src/ganja/Lines.js';
+  import Grids   from '../../src/ganja/Grids.js';
+  import Play    from '../../src/ganja/Play.js';
+  import Isohed  from '../../src/ganja/Isohed.js';
+  import Conform from '../../src/ganja/Conform.js';
   import Style  from '../../src/ganja/Style.js' ;
+  
+  if( Conform===false ) {}
 
 
   let Geom = {

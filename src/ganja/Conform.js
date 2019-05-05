@@ -2,12 +2,12 @@
 //import GA from '../../lib/math/ganja.esm.js';
 let GA = window['Algebra'];
 
-let Planes = class Planes {
+let Conform = class Conform {
 
   static ga() {
 
 
-    GA( 4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
+    GA(4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
 
       // no                  = 1e5 - 1e4  origin
       // ni                  = 0.5(1e4 + 1e5)  inifinity
@@ -68,24 +68,44 @@ let Planes = class Planes {
 
       // Next we'll define some objects.
       let p0 = point(0, 0, 0 );                           // point
-      let sc = spherePR( p0,0.5 ); // !(p1 - 0.20 * ni);  // main dual sphere around point (interactive)
+   // let p2 = point(-0.7, 0, 0 );
+   // let p3 = point( 0.7, 0, 0 );
+      let sc = () => spherePR( p0,0.5 ); // !(p1 - 0.20 * ni);  // main dual sphere around point (interactive)
+   // let sl = () => spherePR( p2,0.5 );       // left dual sphere
+   // let cr = () => !(p3 - .125 * ni) & !(1e3); // right circle
+   // let lt = point( 2.0, 2.5, 0 ) ^ point( -2.0, 2.5, 0 );// top line up(.9e2 - 1e1) ^ ni
 
+  // let pd = planeBR( 1e3,  rp ); // !(1e3 + 2.0 * ni );  // depth  dual plane - dark
+  // let pb = planeBR( 1e2, -rp );  // bottom dual plane
+  // let pr = planeBR( 1e1,  rp );  // right  dual plane
+  // let pl = planeBR( 1e1, -rp );  // left   dual plane
+  // let pt = planeBR( 1e2,  rp );  // top    dual plane
+
+  // The intersections of the big sphere with the other 4 objects.
+  // let m1 = () => sc & pb, m2 = () => sc & lt, m3 = () => sc & sl, m4 = () => sc & cr, m5 = () => cr & pr;
+
+  // For line meet plane its a bit more involved.
+  //
+  // let lp = up(nino << (pr & lt ^ no));
 
     let items = [
-      0xFFFFFF,   bne, 'bne', bse, 'bse', bnw, 'bnw', bsw, 'bsw',
-      0xFFFFFF,   fne, 'fne', fse, 'fse', fnw, 'fnw', fsw, 'fsw',
-      0xFFFFFF,   de, dw, ds,
-      0xFFFFFF,   p0, sc, "Sc" ];
+      0x000000,   bne, 'bne', bse, 'bse', bnw, 'bnw', bsw, 'bsw',
+      0x000000,   fne, 'fne', fse, 'fse', fnw, 'fnw', fsw, 'fsw',
+      0x444444,   de, dw, ds,
+      0x444444,   p0, "Sc",
+      0xFFFFFF,   sc, "Sc"
+      ];
 
-    let svg = Element.graph( () => {
-       return items; },
-      { conformal:true, camera:1+.5e01-.5e02, gl:false, grid:false } );
+      // Graph the items. (hex numbers are html5 colors, two extra first bytes = alpha)
+      let canvas = Element.graph( () => {
+         return items; },
+        { conformal:true, gl:true, grid:false } );
 
-    window.Style.process( 'Planes', svg );
+      window.Style.process( 'Planes', canvas );
 
   } ) } }
 
-export default Planes;
+export default Conform;
 
 /*
      // 0xFF00FF,   lt, "Pr&Lt",                  // line intersect plane
