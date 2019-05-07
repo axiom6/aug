@@ -8,10 +8,11 @@
       </div>
       <ul  v-if="comp===komp.name"><template v-for="prac in komps[komp.name].pracs" >
         <li v-on:click="pubPrac(prac.name)" :style="stylePrac(prac.name,prac.hsv)" :key="prac.name">
-          <i :class="prac.icon"></i>{{prac.name}}
+          <i :class="prac.icon"></i>
+          <router-link v-if="comp==='Geom'" :to="{ name:prac.name }">{{prac.name}}</router-link>
+          <span        v-if="comp!=='Geom'">{{prac.name}}</span>
           <ul v-show="isPrac(prac.name)"><template v-for="disp in prac.disps">
-            <li v-on:click.stop="pubDisp(prac.name,disp.name)" :style="styleDisp(disp.name,disp.hsv)"
-              :key="disp.name">
+            <li v-on:click.stop="pubDisp(prac.name,disp.name)" :style="styleDisp(disp.name,disp.hsv)" :key="disp.name">
               <i :class="disp.icon"></i>{{disp.name}}</li>
           </template></ul>
         </li>
@@ -29,7 +30,7 @@
         komps:{ Info:{ name:'Info', comp:'Info', pracs:{}, ikw:true,  icon:"fas fa-th"           },
                 Know:{ name:'Know', comp:'Know', pracs:{}, ikw:true,  icon:"fas fa-university"   },
                 Wise:{ name:'Wise', comp:'Wise', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor"  },
-                Geom:{ name:'Geom', comp:'Geom', pracs:{}, ikw:false, icon:"fas fa-shapes"       },
+                Geom:{ name:'Geom', comp:'Geom', pracs:{}, ikw:true,  icon:"fas fa-shapes"       },
                 Draw:{ name:'Draw', comp:'Draw', pracs:{}, ikw:false, icon:"fas fa-draw-polygon" },
                 Note:{ name:'Note', comp:'Note', pracs:{}, ikw:false, icon:"fab fa-leanpub"      },
                 Cube:{ name:'Cube', comp:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes"        },
@@ -92,6 +93,7 @@
          ul { font-size:0.8em; font-weight:bold; padding:0; margin:0;
            li { border-radius:0 12px 12px 0; color:black; margin:0.2em 0.2em 0.2em 0.2em;            // Prac
              i { margin-right: 0.3em; }
+             a { color:black; }
              ul { font-size:0.8em; padding:0; margin:0 0 0 0.2em;
                li { border-radius:0 12px 12px 0; color:black; margin:0.2em 0.2em 0.2em 0.2em;       // Disp
                  i { margin-right: 0.25em; } }

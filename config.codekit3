@@ -496,6 +496,14 @@
 		"oO": 0,
 		"oS": 1
 		},
+	"/app/data/muse/Geom.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/app/data/muse/Geom-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
 	"/app/data/muse/Info.json": {
 		"ft": 524288,
 		"oA": 1,
@@ -543,6 +551,68 @@
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
+		},
+	"/app/ganja/basic.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/app/ganja/basic.html",
+		"oF": 0
+		},
+	"/app/ganja/galculator.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/app/ganja/galculator.html",
+		"oF": 0
+		},
+	"/app/ganja/ganja.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/ganja/ganja-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/ganja/Ganja.md": {
+		"cB": 0,
+		"cS": 0,
+		"eF": 1,
+		"eL": 1,
+		"ema": 1,
+		"eSQ": 1,
+		"ft": 4096,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/app/ganja/Ganja.html",
+		"oF": 0,
+		"oFM": 0,
+		"oS": 0,
+		"pHT": 0,
+		"pME": 1,
+		"rFN": 0,
+		"uCM": 0
+		},
+	"/app/ganja/lines.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/app/ganja/lines.html",
+		"oF": 0
+		},
+	"/app/ganja/sphere.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/app/ganja/sphere.html",
+		"oF": 0
 		},
 	"/app/muse/Dash.js": {
 		"bF": 0,
@@ -723,6 +793,83 @@
 		"rwU": 0,
 		"sI": 0,
 		"sU": 0
+		},
+	"/css/brew/AeroPress.jpg": {
+		"ft": 16384,
+		"iS": 6539,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/css/brew/AeroPress.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"/css/brew/AutoDrip.jpg": {
+		"ft": 16384,
+		"iS": 59936,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/css/brew/AutoDrip.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"/css/brew/ColdBrew.jpg": {
+		"ft": 16384,
+		"iS": 5429,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/css/brew/ColdBrew.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"/css/brew/Expresso.jpg": {
+		"ft": 16384,
+		"iS": 62811,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/css/brew/Expresso.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"/css/brew/FrenchPress.jpg": {
+		"ft": 16384,
+		"iS": 5660,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/css/brew/FrenchPress.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"/css/brew/PourOver.jpg": {
+		"ft": 16384,
+		"iS": 4467,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/css/brew/PourOver.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"/css/brew/SyphonPot.jpg": {
+		"ft": 16384,
+		"iS": 5357,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/css/brew/SyphonPot.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
 		},
 	"/css/font/fontawesome/fa-brands-400.eot": {
 		"cB": 0,
@@ -1781,38 +1928,16 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/lib/math/anime.es.js": {
+	"/lib/math/anime.esm.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/lib/math/anime.es-min.js",
+		"oAP": "/lib/math/anime.esm-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
-		},
-	"/lib/math/ganja.esm-min.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/lib/math/ganja.esm-min-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/lib/math/ganja.esm.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/lib/math/ganja.esm-min.js",
-		"oF": 1,
-		"sC": 1,
-		"tS": 1
 		},
 	"/lib/math/ganja.js": {
 		"bF": 0,
@@ -1971,6 +2096,46 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/node_modules/../ani/wood/Wood.vue",
+		"oF": 0
+		},
+	"/node_modules/../vue/comp/Info.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/node_modules/../vue/comp/Info.vue",
+		"oF": 0
+		},
+	"/node_modules/../vue/comp/Know.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/node_modules/../vue/comp/Know.vue",
+		"oF": 0
+		},
+	"/node_modules/../vue/comp/Wise.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/node_modules/../vue/comp/Wise.vue",
+		"oF": 0
+		},
+	"/node_modules/../vue/maps/google/Goog.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/node_modules/../vue/maps/google/Goog.vue",
+		"oF": 0
+		},
+	"/node_modules/../vue/maps/leaflet/Leaf.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/node_modules/../vue/maps/leaflet/Leaf.vue",
 		"oF": 0
 		},
 	"/node_modules/estree-walker/src/estree-walker.js": {
@@ -2831,6 +2996,116 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/src/ganja/2D/Basics.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/ganja/2D/Basics-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ganja/3D/Grids.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/ganja/3D/Grids-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ganja/3D/Isohed.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/ganja/3D/Isohed-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ganja/3D/Lines.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/ganja/3D/Lines-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ganja/3D/Play.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/ganja/3D/Play-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ganja/3D/Start.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/ganja/3D/Start-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ganja/4D/Conform.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/ganja/4D/Conform-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ganja/4D/Planes.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/ganja/4D/Planes-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ganja/4D/Sphere.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/ganja/4D/Sphere-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ganja/lib/Style.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/ganja/lib/Style-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/src/notebook/embed.js": {
 		"bF": 0,
 		"ft": 64,
@@ -3004,14 +3279,6 @@
 		"oAP": "/vue/comp/Cube.vue",
 		"oF": 0
 		},
-	"/vue/comp/Dabs.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/comp/Dabs.vue",
-		"oF": 0
-		},
 	"/vue/comp/Draw.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -3050,14 +3317,6 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/vue/comp/Know.vue",
-		"oF": 0
-		},
-	"/vue/comp/Tabs.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/comp/Tabs.vue",
 		"oF": 0
 		},
 	"/vue/comp/Wise.vue": {
@@ -3170,6 +3429,70 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/vue/elem/Btns.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/elem/Btns.vue",
+		"oF": 0
+		},
+	"/vue/elem/Dabs.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/elem/Dabs.vue",
+		"oF": 0
+		},
+	"/vue/elem/Elem.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/vue/elem/Elem.txt",
+		"oF": 0
+		},
+	"/vue/elem/Tabs.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/elem/Tabs.vue",
+		"oF": 0
+		},
+	"/vue/geom/Geom.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/geom/Geom.vue",
+		"oF": 0
+		},
+	"/vue/geom/Geom2D.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/geom/Geom2D.vue",
+		"oF": 0
+		},
+	"/vue/geom/Geom3D.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/geom/Geom3D.vue",
+		"oF": 0
+		},
+	"/vue/geom/Geom4D.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/geom/Geom4D.vue",
+		"oF": 0
+		},
 	"/vue/maps/google/Goog.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -3280,12 +3603,164 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/Tabs.vue": {
+	"/zzz/ganja/.eslintrc.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/ganja/.eslintrc-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/ganja/ganja.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/ganja/ganja.esm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/ganja/ganja.esn.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/ganja/ganja.esn-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/ganja/ganja.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/ganja/ganja-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/ganja/ganja1.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/ganja/ganja1-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/ganja/ganja2.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/ganja/ganja2.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/ganja/ganja2.fix.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/ganja/ganja2.fix-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/ui/Brew.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/ui/Brew.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/ui/Btn.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/ui/Btn.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/ui/btn.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/zzz/ui/btn.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/zzz/ui/Btns.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/Tabs.vue",
+		"oAP": "/zzz/ui/Btns.vue",
+		"oF": 0
+		},
+	"/zzz/ui/color.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/zzz/ui/color.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/zzz/ui/Dom.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/ui/Dom.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/ui/Tabs.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/ui/Tabs.vue",
 		"oF": 0
 		}
 	},

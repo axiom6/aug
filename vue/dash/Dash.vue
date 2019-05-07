@@ -38,7 +38,7 @@
   import Info from '../comp/Info.vue';
   import Know from '../comp/Know.vue';
   import Wise from '../comp/Wise.vue';
-  import Geom from '../comp/Geom.vue';
+  import Geom from '../geom/Geom.vue';
   import Draw from '../comp/Draw.vue';
   import Prac from '../page/Prac.vue';
   import Conn from '../page/Conn.vue';
@@ -47,6 +47,10 @@
   import Note from '../note/Note.vue';
 //import Cube from '../comp/Cube.vue';
 //import Wood from '../wood/Wood.vue';
+
+  import Geom2D from '../geom/Geom2D.vue';
+  import Geom3D from '../geom/Geom3D.vue';
+  import Geom4D from '../geom/Geom4D.vue';
 
   Dash.Home = Home;
   Dash.Info = Info;
@@ -61,6 +65,10 @@
   Dash.Note = Note;
 //Dash.Cube = Cube;
 //Dash.Wood = Wood;
+  
+  Dash.Geom2D = Geom2D;
+  Dash.Geom3D = Geom3D;
+  Dash.Geom4D = Geom4D;
  
   export default Dash;
   

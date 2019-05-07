@@ -4,9 +4,7 @@
   <div class="draw" ref="Draw">
     <d-dabs :comp="comp" :pages="pages" :init="key"></d-dabs>
     <template v-for="page in pages">
-      <div :ref="page.key" v-show="isPage(page.key)" class="page" :key="page.key">
-        <!--h1>{{page.title}}</h1-->
-      </div>
+      <div :ref="page.key" v-show="isPage(page.key)" class="page" :key="page.key"></div>
     </template>
   </div>
 </template>

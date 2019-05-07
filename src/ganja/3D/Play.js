@@ -7,7 +7,7 @@ let Play  = class Play {
 
   GA(3,0,1,()=> {
 
-    console.log( 'PGA3D', this.describe() );
+    // console.log( 'PGA3D', this.describe() );
 
   let graph = Element.graph([1e123,1e23,1e13,1e12],{camera:1+.5e01-.5e02}); // and in 3D PGA
 

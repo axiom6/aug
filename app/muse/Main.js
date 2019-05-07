@@ -17,7 +17,8 @@ Main = (function() {
     static init(batch) {
       var infoSpec, subjects;
       Main.Batch = batch; // Not necessary here, but assigned for compatibilitry
-      subjects = ["Info", "Know", "Wise", "Draw", "Note", "Cube", "Navb", "Tabs"];
+      // console.log( 'Batch.Geom', batch['Geom'])
+      subjects = ["Info", "Know", "Wise", "Draw", "Note", "Cube", "Navb", "Tabs", "Geom"];
       infoSpec = {
         subscribe: false,
         publish: false,
@@ -85,6 +86,12 @@ Main = (function() {
       data: null,
       type: 'Pack',
       plane: 'Wise'
+    },
+    Geom: {
+      url: 'muse/Geom.json',
+      data: null,
+      type: 'Pack',
+      plane: 'Geom'
     },
     Cube: {
       url: 'muse/Cube.json',

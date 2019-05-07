@@ -441,6 +441,7 @@ __vue_render__$2._withStripped = true;
 //
 //
 //
+//
 
 
 let Tocs = {
@@ -449,7 +450,7 @@ let Tocs = {
       komps:{ Info:{ name:'Info', comp:'Info', pracs:{}, ikw:true,  icon:"fas fa-th"           },
               Know:{ name:'Know', comp:'Know', pracs:{}, ikw:true,  icon:"fas fa-university"   },
               Wise:{ name:'Wise', comp:'Wise', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor"  },
-              Geom:{ name:'Geom', comp:'Geom', pracs:{}, ikw:false, icon:"fas fa-shapes"       },
+              Geom:{ name:'Geom', comp:'Geom', pracs:{}, ikw:true,  icon:"fas fa-shapes"       },
               Draw:{ name:'Draw', comp:'Draw', pracs:{}, ikw:false, icon:"fas fa-draw-polygon" },
               Note:{ name:'Note', comp:'Note', pracs:{}, ikw:false, icon:"fab fa-leanpub"      },
               Cube:{ name:'Cube', comp:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes"        },
@@ -548,7 +549,19 @@ var __vue_render__$3 = function() {
                             },
                             [
                               _c("i", { class: prac.icon }),
-                              _vm._v(_vm._s(prac.name) + "\n          "),
+                              _vm._v(" "),
+                              _vm.comp === "Geom"
+                                ? _c(
+                                    "router-link",
+                                    { attrs: { to: { name: prac.name } } },
+                                    [_vm._v(_vm._s(prac.name))]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.comp !== "Geom"
+                                ? _c("span", [_vm._v(_vm._s(prac.name))])
+                                : _vm._e(),
+                              _vm._v(" "),
                               _c(
                                 "ul",
                                 {
@@ -592,7 +605,8 @@ var __vue_render__$3 = function() {
                                 ],
                                 2
                               )
-                            ]
+                            ],
+                            1
                           )
                         ]
                       })
@@ -614,7 +628,7 @@ __vue_render__$3._withStripped = true;
   /* style */
   const __vue_inject_styles__$3 = function (inject) {
     if (!inject) return
-    inject("data-v-7def45f8_0", { source: "@import '../../css/fontawesome/init.css';\n.tocs {\n  background-color: black;\n  font-size: 3vh;\n}\n.tocs ul {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  align-self: start;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25em;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li i {\n  margin-right: 0.4em;\n}\n.tocs ul li a {\n  color: wheat;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 0.8em;\n  font-weight: bold;\n  padding: 0;\n  margin: 0;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li i {\n  margin-right: 0.3em;\n}\n.tocs ul li ul li ul {\n  font-size: 0.8em;\n  padding: 0;\n  margin: 0 0 0 0.2em;\n}\n.tocs ul li ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li ul li i {\n  margin-right: 0.25em;\n}\n.tocs ul li ul li ul li:hover {\n  background-color: black!important;\n  color: white!important;\n}\n", map: {"version":3,"sources":["Tocs.vue"],"names":[],"mappings":"AAAA,wCAAwC;AACxC;EACE,uBAAuB;EACvB,cAAc;AAChB;AACA;EACE,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;EACjB,aAAa;AACf;AACA;EACE,sBAAsB;EACtB,oBAAoB;EACpB,iBAAiB;EACjB,4BAA4B;EAC5B,+BAA+B;AACjC;AACA;EACE,mBAAmB;AACrB;AACA;EACE,YAAY;EACZ,qBAAqB;AACvB;AACA;EACE,gBAAgB;EAChB,iBAAiB;EACjB,UAAU;EACV,SAAS;AACX;AACA;EACE,4BAA4B;EAC5B,YAAY;EACZ,+BAA+B;AACjC;AACA;EACE,mBAAmB;AACrB;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,mBAAmB;AACrB;AACA;EACE,4BAA4B;EAC5B,YAAY;EACZ,+BAA+B;AACjC;AACA;EACE,oBAAoB;AACtB;AACA;EACE,iCAAiC;EACjC,sBAAsB;AACxB","file":"Tocs.vue","sourcesContent":["@import '../../css/fontawesome/init.css';\n.tocs {\n  background-color: black;\n  font-size: 3vh;\n}\n.tocs ul {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  align-self: start;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25em;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li i {\n  margin-right: 0.4em;\n}\n.tocs ul li a {\n  color: wheat;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 0.8em;\n  font-weight: bold;\n  padding: 0;\n  margin: 0;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li i {\n  margin-right: 0.3em;\n}\n.tocs ul li ul li ul {\n  font-size: 0.8em;\n  padding: 0;\n  margin: 0 0 0 0.2em;\n}\n.tocs ul li ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li ul li i {\n  margin-right: 0.25em;\n}\n.tocs ul li ul li ul li:hover {\n  background-color: black!important;\n  color: white!important;\n}\n"]}, media: undefined });
+    inject("data-v-057ad976_0", { source: "@import '../../css/fontawesome/init.css';\n.tocs {\n  background-color: black;\n  font-size: 3vh;\n}\n.tocs ul {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  align-self: start;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25em;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li i {\n  margin-right: 0.4em;\n}\n.tocs ul li a {\n  color: wheat;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 0.8em;\n  font-weight: bold;\n  padding: 0;\n  margin: 0;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li i {\n  margin-right: 0.3em;\n}\n.tocs ul li ul li a {\n  color: black;\n}\n.tocs ul li ul li ul {\n  font-size: 0.8em;\n  padding: 0;\n  margin: 0 0 0 0.2em;\n}\n.tocs ul li ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li ul li i {\n  margin-right: 0.25em;\n}\n.tocs ul li ul li ul li:hover {\n  background-color: black!important;\n  color: white!important;\n}\n", map: {"version":3,"sources":["Tocs.vue"],"names":[],"mappings":"AAAA,wCAAwC;AACxC;EACE,uBAAuB;EACvB,cAAc;AAChB;AACA;EACE,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;EACjB,aAAa;AACf;AACA;EACE,sBAAsB;EACtB,oBAAoB;EACpB,iBAAiB;EACjB,4BAA4B;EAC5B,+BAA+B;AACjC;AACA;EACE,mBAAmB;AACrB;AACA;EACE,YAAY;EACZ,qBAAqB;AACvB;AACA;EACE,gBAAgB;EAChB,iBAAiB;EACjB,UAAU;EACV,SAAS;AACX;AACA;EACE,4BAA4B;EAC5B,YAAY;EACZ,+BAA+B;AACjC;AACA;EACE,mBAAmB;AACrB;AACA;EACE,YAAY;AACd;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,mBAAmB;AACrB;AACA;EACE,4BAA4B;EAC5B,YAAY;EACZ,+BAA+B;AACjC;AACA;EACE,oBAAoB;AACtB;AACA;EACE,iCAAiC;EACjC,sBAAsB;AACxB","file":"Tocs.vue","sourcesContent":["@import '../../css/fontawesome/init.css';\n.tocs {\n  background-color: black;\n  font-size: 3vh;\n}\n.tocs ul {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  align-self: start;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25em;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li i {\n  margin-right: 0.4em;\n}\n.tocs ul li a {\n  color: wheat;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 0.8em;\n  font-weight: bold;\n  padding: 0;\n  margin: 0;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li i {\n  margin-right: 0.3em;\n}\n.tocs ul li ul li a {\n  color: black;\n}\n.tocs ul li ul li ul {\n  font-size: 0.8em;\n  padding: 0;\n  margin: 0 0 0 0.2em;\n}\n.tocs ul li ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li ul li i {\n  margin-right: 0.25em;\n}\n.tocs ul li ul li ul li:hover {\n  background-color: black!important;\n  color: white!important;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -1288,10 +1302,10 @@ var script$b = {
   components:{ 'b-tabs':Tabs },
 
   data() { return { comp:'None', pages:[
-      { title:'Practices',    short:'Prac' },
-      { title:'Connections',  short:'Conn' },
-      { title:'Enlight',      short:'Enli' },
-      { title:'Data Science', short:'Data' },
+      { title:'Practices',    key:'Prac' },
+      { title:'Connections',  key:'Conn' },
+      { title:'Enlight',      key:'Enli' },
+      { title:'Data Science', key:'Data' },
     ] } },
 
   beforeMount: function() {
@@ -1315,7 +1329,7 @@ var __vue_render__$c = function() {
       }),
       _vm._v(" "),
       _vm._l(_vm.pages, function(page) {
-        return [_c("router-view", { attrs: { name: _vm.comp + page.short } })]
+        return [_c("router-view", { attrs: { name: _vm.comp + page.key } })]
       })
     ],
     2
@@ -1327,7 +1341,7 @@ __vue_render__$c._withStripped = true;
   /* style */
   const __vue_inject_styles__$c = function (inject) {
     if (!inject) return
-    inject("data-v-5322d0cc_0", { source: ".ikws {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n", map: {"version":3,"sources":["Ikws.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX","file":"Ikws.vue","sourcesContent":[".ikws {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n"]}, media: undefined });
+    inject("data-v-c0eaa21e_0", { source: ".ikws {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n", map: {"version":3,"sources":["Ikws.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX","file":"Ikws.vue","sourcesContent":[".ikws {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -1462,478 +1476,6 @@ const __vue_script__$f = script$e;
     undefined
   );
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-var script$f = {
-
-  props: { comp:String, pages:Object, init:String },
-
-  data() { return { key:this.init } },
-
-  methods: {
-    pubTab: function (key) {
-      this.key = key;
-      this.publish( this.comp, key ); },
-    classTab: function (key) {
-      return this.key===key ? 'tab-active' : 'tab'; } },
-
-  mounted: function () {}
-
-};
-
-/* script */
-const __vue_script__$g = script$f;
-
-/* template */
-var __vue_render__$d = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    { staticClass: "dabs" },
-    [
-      _vm._l(_vm.pages, function(page) {
-        return [
-          _c(
-            "div",
-            {
-              class: _vm.classTab(page.key),
-              on: {
-                click: function($event) {
-                  return _vm.pubTab(page.key)
-                }
-              }
-            },
-            [_vm._v(_vm._s(page.title))]
-          )
-        ]
-      })
-    ],
-    2
-  )
-};
-var __vue_staticRenderFns__$d = [];
-__vue_render__$d._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$g = function (inject) {
-    if (!inject) return
-    inject("data-v-47716f7e_0", { source: ".dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Dabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Dabs.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,UAAU;EACV,uBAAuB;EACvB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;ECChC,uBAAA;EACA,YAAA;EACA,uBAAA;EACA,YAAA;AACA","file":"Dabs.vue","sourcesContent":[".dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"dabs\">\n    <template v-for=\"page in pages\">\n      <div :class=\"classTab(page.key)\" @click=\"pubTab(page.key)\">{{page.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Object, init:String },\n\n    data() { return { key:this.init } },\n\n    methods: {\n      pubTab: function (key) {\n        this.key = key;\n        this.publish( this.comp, key ); },\n      classTab: function (key) {\n        return this.key===key ? 'tab-active' : 'tab'; } },\n\n    mounted: function () {}\n\n  }\n\n</script>\n\n<style lang=\"less\">\n  \n  .dabs { position:absolute; left:0; top:0; width:100%; height:5%; background-color:black; font-size:1.5em;\n    .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;\n      border-radius:12px 12px 0 0; border-left: wheat solid thin;\n      border-top:wheat solid thin; border-right:wheat solid thin;\n      background-color:black; color:wheat; }\n    .tab:hover  {         background-color:wheat; color:black; }\n    .tab-active { .tab(); background-color:wheat; color:black; } }\n\n</style>"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$g = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$g = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$g = false;
-  /* style inject SSR */
-  
-
-  
-  var Dabs = normalizeComponent_1(
-    { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
-    __vue_inject_styles__$g,
-    __vue_script__$g,
-    __vue_scope_id__$g,
-    __vue_is_functional_template__$g,
-    __vue_module_identifier__$g,
-    browser,
-    undefined
-  );
-
-// Create a Clifford Algebra with 2,0,1 metric. 
-//import GA from '../../lib/math/ganja.esm.js';
-let GA = window['Algebra'];
-
-let Basics  = class Basics {
-
-  static ga () {
-
-    GA(2, 0, 1, () => {
-
-      // We work in dual space so we define our points to be bivectors. Ganja.js overloads
-      // scientific notation to specify basis blades.
-      // For readability we create a function that converts 2D euclidean coordinates
-      // to their 3D bivector representation.
-      let point = (x, y) => 1e12 - x * 1e02 + y * 1e01;
-
-      // Similarly, we can define lines directly. The euclidean line ax + by + c can be specified so :
-      let line = (a, b, c) => a * 1e1 + b * 1e2 + c * 1e0;
-
-      // Define 3 points.
-      let A = point(-1, 1), B = point(-1, -1), C = point(1, -1);
-
-      // Define the line y=x-0.5
-      let L = line(-1, 1, 0.5);
-
-      // Or by joining two points. We define M as a function so it will update when C or A are dragged.
-      let M = () => C & A;
-
-      // Points can also be found by intersecting two lines. We similarly define D as a function
-      // for interactive updates.
-      let D = () => L ^ M;
-
-      // We now use the graph function to create an SVG object that visualises our algebraic elements.
-      // The graph function accepts
-      // an array of items that it will render in order. It can render points, lines, labels, colors,
-      // line segments and polygons.
-
-      let graph = Element.graph( [
-        A, "A",         // Render point A and label it.
-        B, "B",         // Render point B and label it.
-        C, "C",         // Render point C and label them.
-        L, "L", M, "M", // Render and label lines.
-        D, "D",         // Intersection point of L and M
-        0xff0000,       // Set the color to red.
-        [B, C],          // Render line segment from B to C.
-        0xffcccc,       // Set the color to light red.
-        [A, B, C]         // render polygon ABC.
-      ], { grid:true });
-
-      window.Style.process( 'Basics', graph );
-
-    });
-  }
-};
-
-//import GA from '../../lib/math/ganja.esm.js';
-let GA$1 = window['Algebra'];
-
-let Planes = class Planes {
-
-  static ga() {
-
-
-    GA$1( 4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
-
-      // no                  = 1e5 - 1e4  origin
-      // ni                  = 0.5(1e4 + 1e5)  inifinity
-      // nino                = ni ^ no
-      // points(x,y,z)       = no + x*1e1 + y*1e2 + z*1e3 + 0.5 * ( x*x + y*y + z*z ) * ni;
-      // circle(p1,p2,p3 )   = p1^p2^p3
-      // sphere(p1,p2,p3,p4) = p1^p2^p3^p4
-      // sphere(p,r)         = !(p-r*ni)
-      // sphere(p,r)         = (p,r) => !(p-r*ni)
-      // line(p1,p2)         = p1 ^ p2
-      // lineINF(p1,p2)      = p1 ^ p2 ^ ni
-      // join                = p1 ^ p2
-      // meet                = p1 & p2
-      // rotor(a,b)          = exp((a/2)*b)
-
-      // We start by defining a null basis, and upcasting for points
-   // let total = 5.0;
-      let scale = 0.2;
-      let xs = scale;
-      let ys = scale;
-      let zs = scale;
-   // let range = total * scale;
-      let ni = 1e4   + 1e5;
-      let no = 0.5e5 - 0.5e4;
-      // let nino = ni ^ no;
-   // let up = (x) => no + x + .5 * x * x * ni;
-
-      let point = (xa,ya,za) => {
-        let x = xa*xs, y=ya*ys, z=za*zs;
-        return no + x*1e1 + y*1e2 + z*1e3 + 0.5 * ( x*x + y*y + z*z ) * ni; };
-      let planeDR = (p1,p2,p3,p4) => [p1,p2,p3,p4];
-
-      let r   = 3;
-   // let h   = r * 0.5;
-      let bne = point(  r,  r,  r );
-      let bse = point(  r, -r,  r );
-      let bnw = point( -r,  r,  r );
-      let bsw = point( -r, -r,  r );
-      let fne = point(  r,  r, -r );
-      let fse = point(  r, -r, -r );
-      let fnw = point( -r,  r, -r );
-      let fsw = point( -r, -r, -r );
-
-   // let pb = plane3P(bne,bnw,bsw), db = planeDR(bne,bnw,bsw,bse);
-      let de = planeDR(bne,fne,fse,bse);
-   // let pn = plane3P(bne,bnw,fnw), dn = planeDR(bne,bnw,fnw,fne);
-      let dw = planeDR(bnw,fnw,fsw,bsw);
-      let ds = planeDR(bse,bsw,fsw,fse);
-
-   // let line     = (p1,p2) => [p1,p2];
-   // let planeBR  = (b,r)   => !( b + r * scale * ni );
-      let spherePR = (p,r)   => !( p - r * scale * ni );
-   // let grid     = (b,r,n) => plane(b,r);
-
-      // Next we'll define some objects.
-      let p0 = point(0, 0, 0 );                           // point
-      let sc = spherePR( p0,0.5 ); // !(p1 - 0.20 * ni);  // main dual sphere around point (interactive)
-
-
-    let items = [
-      0xFFFFFF,   bne, 'bne', bse, 'bse', bnw, 'bnw', bsw, 'bsw',
-      0xFFFFFF,   fne, 'fne', fse, 'fse', fnw, 'fnw', fsw, 'fsw',
-      0xFFFFFF,   de, dw, ds,
-      0xFFFFFF,   p0, sc, "Sc" ];
-
-    let svg = Element.graph( () => {
-       return items; },
-      { conformal:true, camera:1+.5e01-.5e02, gl:false, grid:false } );
-
-    window.Style.process( 'Planes', svg );
-
-  } ); } };
-
-/*
-     // 0xFF00FF,   lt, "Pr&Lt",                  // line intersect plane
-     // 0x0000FF,   m1, "Sc&Pb",                  // sphere meet plane
-     // 0x888800,   m2, "Sc&Lt",                  // sphere meet line
-     // 0x0088FF,   m3, "Sc&Sl",                  // sphere meet sphere
-     // 0x008800,   m4, "Sc&Cr",                  // sphere meet circle
-     // 0x880000,   m5, "Cr&Pr",                  // circle meet sphere
-     // 0x888800,   lp,                      // line and circle
- */
-
-//import GA from '../../lib/math/ganja.esm.js';
-let GA$2 = window['Algebra'];
-
-let Sphere = class Sphere {
-
-  static ga() {
-
-
-    GA$2(4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
-
-      // console.log( this.describe() );
-
-      // We start by defining a null basis, and upcasting for points
-      let ni = 1e4 + 1e5, no = .5e5 - .5e4;
-      let up = (x) => no + x + .5 * x * x * ni;
-
-      // Next we'll define 4 points
-      let p1 = up(1e1), p2 = up(1e2), p3 = up(-1e3), p4 = up(-1e2);
-
-      // The outer product can be used to construct the sphere through
-      // any four points.
-      let s = () => p1 ^ p2 ^ p3 ^ p4;
-
-      // The outer product between any three points and infinity is a plane.
-      let p = () => p1 ^ p2 ^ p3 ^ ni;
-
-      // Graph the items. (hex numbers are html5 colors, two extra first bytes = alpha)
-      let canvas = Element.graph([
-        0x00FF0000, p1, "p1", p2, "p2", p3, "p3", p4, "p4", // points
-        0xE0008800, p, "p",                                 // plane
-        0xE00000FF, s, "s"                                  // sphere
-      ], { conformal:true, gl:true, grid:false });
-
-      //let context = canvas.getContext('webgl');
-      //context.fillStyle = '#000000';
-
-      window.Style.process( 'Sphere', canvas );
-
-    } ); } };
-
-//import GA from '../../lib/math/ganja.esm.js';
-let GA$3 = window['Algebra'];
-
-let Lines  = class Lines {
-
-  static ga() {
-
-  GA$3( 3, 0, 1, () => {
-
-  // We work in dual space. Our 1-blade's are dual-vectors (aka functionals of the
-  // form ax + by + cz + dw = 0).
-  // The four basis functionals are thus (x=0, y=0, z=0, w=0). In three dimensions
-  // these represent the yz, xz, xy and
-  // ideal plane.
-
-  // Specify a point directly (trivectors specified with overloaded e-notation.)
-  let point = (x,y,z)=>1e123-x*1e012+y*1e013+z*1e023;
-
-  // Lines can be defined using plucker coordinates
-  // let line = (px,py,pz,dx,dy,dz)=>px*1e01+py&1e02+pz*1e03+dx*1e12+dy*1e13+dz*1e23;
-
-  // Planes can be defined directly using e0,e1,e2,e3
-  // let plane = (a,b,c,d)=>d*1e0+a*1e1+b*1e2+c*1e3;
-
-  // Useful joins
-     let line_from_points  = (P1,P2)=>P1.Normalized&P2.Normalized;
-  // let plane_from_points = (P1,P2,P3)=>P1&P2&P3;
-  // let plane_from_point_and_line = (P,L)=>P&L;
-
-  // Usefull meets
-     let line_from_planes  = (p1,p2)=>p1^p2;
-  // let point_from_planes = (p1,p2,p3)=>p1^p2^p3;
-     let point_from_line_and_plane = (L,P)=>L^P;
-
-   // Create 5 points and some joining lines.
-      let A=point(0,-1,0  );
-      let B=point(1,1,-1  );
-      let C=point(-1,1,-1 );
-      let D=point(1,1, 1  );
-      let E=point(-1,1, 1 );
-      let centroid=A+B+C+D+E;
-      let camera=1e0;
-
-  // Graph the 3D items
-  let graph = Element.graph( ()=> {
-    let time=performance.now()/12000;
-    camera['set'](Math.cos(time)+Math.sin(time)*1e13);                      // rotate around Y
-    return [
-      0xddaaff,[A,B,C],                                            // graph on face
-      0xAA88FF,[A,B],[A,C],[A,D],[B,C],[B,D],[C,E],[A,E],[E,D],    // graph all edges
-      0x444444,A,"A",B,"B",C,"C",D,"D",E,"E",                      // graph all vertices
-      0xFF8888,C+E,centroid,"sum of points",
-      0x8888FF,line_from_points(centroid,C+E),"line from points ..",
-      0x44AA44,line_from_planes(A&B&C,B&C&D),"line from planes ..",
-      0x4488FF,point_from_line_and_plane(line_from_points(centroid,C+E),A&D&B),
-        "point from line and plane ..",
-      0xFFAA66,(B&D)+(C&E),"sum of lines"]; }, { animate:true, camera } );
-
-    window.Style.process( 'Lines', graph );
-
-  } ); } };
-
-//import GA from '../../lib/math/ganja.esm.js';
-let GA$4 = window['Algebra'];
-
-let Grids  = class Grids {
-
-  static ga() {
-
-  GA$4( 3, 0, 1, () => {  // PGA3D Projective Euclidean 3D space. (dual)
-
-  let items = [];
-  let origin=1e123, EX=-1e012, EY=1e013, EZ=1e012;
-  let point  = (x,y,z)=>origin+x*EX-y*EY+z*EZ;
-
-  let s =  0.20;    // xyz Scale
-  let t = 10.00*s; // Total lengths
-  let c =  8.66*s; // Cos(30)
-  let h =  5.00*s; // Sin(30) or Half
-  let i =  0.50*s; // 10% increment
-
-  let ooo = point(0,0 ,0 );
-  let xoo = point(c,-h, 0 );
-  let oyo = point(0,t, 0 );
-  let ooz = point(0,-h, c );
-  let xyo = point(c,h, 0 );
-  let oyz = point(0,h, c );
-  let xoz = point(c,-t, c );
-
-  items.push( 0xFFFFFF, ooo, 'ooo', xoo, 'xoo', oyo, 'oyo', ooz, 'ooz', 
-                        xyo, 'xyo', oyz, 'oyz', xoz, 'xoz' );
-
-  let xy = [ooo,xoo,xyo,oyo];
-  let yz = [ooo,ooz,oyz,oyo];
-  let zx = [ooo,ooz,xoz,xoo];
-  
-  items.push( 0x888888, xy, 0x666666, yz, 0x444444, zx );
-
-  let xyX = (x) => [ooo*(1-x)+xoo*x, oyo*(1-x)+xyo*x]; // x scales from [0,1]
-  let xyY = (y) => [ooo*(1-y)+oyo*y, xoo*(1-y)+xyo*y]; // y scales from [0,1]
-  let yzY = (y) => [ooo*(1-y)+oyo*y, ooz*(1-y)+oyz*y]; // y scales from [0,1]
-  let yzZ = (z) => [ooo*(1-z)+ooz*z, oyo*(1-z)+oyz*z]; // z scales from [0,1]
-  let zxX = (x) => [ooo*(1-x)+xoo*x, ooz*(1-x)+xoz*x]; // x scales from [0,1]
-  let zxZ = (z) => [ooo*(1-z)+ooz*z, xoo*(1-z)+xoz*z]; // z scales from [0,1]
-
-  let gxy = (t,i, xf, yf ) => {
-    items.push(0xFFFFFF);
-    for( let x=0; x < t; x+=i ) { items.push(xf(x)); }
-    for( let y=0; y < t; y+=i ) { items.push(yf(y)); } };
-
-  gxy( h, i, xyX, xyY ); // Not sure why h
-  gxy( h, i, yzY, yzZ );
-  gxy( h, i, zxX, zxZ );
-
-    let graph = Element.graph( () => { return items; }, {} );
-
-  window.Style.process( 'Grids', graph );
-
-  } ); } };
-
-let GA$5 = window['Algebra'];
-
-let Play  = class Play {
-
-  static ga() {
-
-  GA$5(3,0,1,()=> {
-
-    console.log( 'PGA3D', this.describe() );
-
-  let graph = Element.graph([1e123,1e23,1e13,1e12],{camera:1+.5e01-.5e02}); // and in 3D PGA
-
-  window.Style.process( 'Play', graph );
-
-  } ); } };
-
-let GA$6 = window['Algebra'];
-
-let Isohed  = class Isohed {
-
-  static ga() {
-
-GA$6(3,0,1,()=>{  // Create a Clifford Algebra with 3,0,1 metric. 
-
-  // Specify a point directly (trivectors specified with overloaded e-notation.)
-  let point = (x,y,z)=>1e123-x*1e012+y*1e013+z*1e023;
-  let rotor = (P,a)=>Math.cos(a/2)+Math.sin(a/2)*P;
-
-  // Our camera position and orientation
-  let  camera=1e0;
-
-  // We construct faces, edges and vertices of an icosahedron.
-  let r = rotor(1e13,Math.PI/2.5);
-  let A = point(0,1,0);
-  let B = point((1-Math.atan(0.5)**2)**0.5,Math.atan(0.5),0);
-  let C = rotor(1e13,Math.PI/5)>>>(1e2>>>B);
-  let items=[A,"A",B,"B",C,"C"];
-
-  // vertices
-  items.push(0x4444FF);
-  for (let i=0;i<5;i++) items.push(A,B=r>>>B,C=r>>>C,1e2>>>A);
-
-  // edges
-  items.push(0x444444);
-  for (let i=0;i<5;i++) items.push([A,B],[B,C],[B,B=r>>>B],[B,C],[C,C=r>>>C],[1e2>>>A,C]);
-
-  // faces
-  items.push(0xFFCCCC);
-  for (let i=0;i<5;i++) items.push([A,B,r>>>B],[B,B=r>>>B,C],[C,B,r>>>C],[C,1e2>>>A,C=r>>>C]);
-
-  // Graph the 3D items
-  let graph = Element.graph( () => {
-    let time=performance.now()/4000;
-    camera['set'](rotor(1e13,time)*rotor(1e12,time*1.23131));                // animate camera
-    return items.slice(0,1+((Math.floor(time*50))%(items.length+20)));    // show more and more elements
-  },{gl:true,animate:true,camera});
-
-
-    window.Style.process( 'Isohed', graph );
-
-  } ); } };
-
-//import GA from '../../lib/math/ganja.esm.js';
-let GA$7 = window['Algebra'];
-
-/*
-     // 0xFF00FF,   lt, "Pr&Lt",                  // line intersect plane
-     // 0x0000FF,   m1, "Sc&Pb",                  // sphere meet plane
-     // 0x888800,   m2, "Sc&Lt",                  // sphere meet line
-     // 0x0088FF,   m3, "Sc&Sl",                  // sphere meet sphere
-     // 0x008800,   m4, "Sc&Cr",                  // sphere meet circle
-     // 0x880000,   m5, "Cr&Pr",                  // circle meet sphere
-     // 0x888800,   lp,                      // line and circle
- */
-
 let Obj = {};  // Static Object key store for Style
 
 let Style = class Style {
@@ -1969,56 +1511,101 @@ window.Style = Style; // Make Style global for access inside ganja.js
 
 //
 
-
 let Geom = {
 
-  components:{ 'd-dabs':Dabs },
-
-  data() {
-    return { comp:'Geom', key:'Planes', pages:{
-        Basics:  { title:'Basics', key:'Basics', klass:Basics, created:false },
-        Planes:  { title:'Planes', key:'Planes', klass:Planes, created:false },
-        Sphere:  { title:'Sphere', key:'Sphere', klass:Sphere, created:false },
-        Lines:   { title:'Lines',  key:'Lines',  klass:Lines,  created:false },
-        Grids:   { title:'Grids',  key:'Grids',  klass:Grids,  created:false },
-        Play:    { title:'Play',   key:'Play',   klass:Play,   created:false },
-        Isohed:  { title:'Isohed', key:'Isohed', klass:Isohed, created:false }
-      } } },
-
-  methods: {
-    
-    isPage: function(key) {
-      return this.key === key; },
-    
-    onTabs: function(key) {
-      this.key =  key;
-      this.create(key); },
-
-    size: function() {
-      let sz   = {};
-      sz.compWidth  = this.$refs['Geom']['clientWidth' ];
-      sz.compHeight = this.$refs['Geom']['clientHeight'];
-      sz.elemWidth  = this.$refs['Geom']['clientWidth' ];
-      sz.elemHeight = this.$refs['Geom']['clientHeight'];
-      return sz; },
-
-    create: function( key ) {
-      if( !this.pages[key].created ) {
-        Style.init( key, this.$refs[key][0] );
-        this.pages[key].created = true;
-        this.pages[key].klass.ga(); } }
-  },
+  data() { return { comp:'Geom', key:'2D', geoms:[
+      { title:'Graph',      key:'2D' },
+      { title:'Projective', key:'3D' },
+      { title:'Conformal',  key:'4D' } ] } },
 
   mounted: function () {
-    Style.size( this.$refs[this.key][0] ); // mounted is best place to get page elem size
-    this.onTabs(this.key);
-    this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
-      this.onTabs(obj); } ); }
+    // console.log( 'Geom.mounted()' );
+    Style.size( this.$refs['Geom'] ); // mounted is best place to get page elem size
+ // this.subscribe( this.comp, this.comp+'.vue', (obj) => {
+ //     console.log( 'Geom.subscribe()', obj );
+  }
 
 };
 
 /* script */
-const __vue_script__$h = Geom;
+const __vue_script__$g = Geom;
+
+/* template */
+var __vue_render__$d = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { ref: "Geom", staticClass: "geom" },
+    [
+      _vm._l(_vm.geoms, function(geom) {
+        return [_c("router-view", { attrs: { name: _vm.comp + geom.key } })]
+      })
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$d = [];
+__vue_render__$d._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$g = function (inject) {
+    if (!inject) return
+    inject("data-v-44c6322b_0", { source: ".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n}\n.geom h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Geom.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Geom.vue","sourcesContent":[".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n}\n.geom h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$g = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$g = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$g = false;
+  /* style inject SSR */
+  
+
+  
+  var Geom$1 = normalizeComponent_1(
+    { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
+    __vue_inject_styles__$g,
+    __vue_script__$g,
+    __vue_scope_id__$g,
+    __vue_is_functional_template__$g,
+    __vue_module_identifier__$g,
+    browser,
+    undefined
+  );
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+var script$f = {
+
+  props: { comp:String, pages:Object, init:String },
+
+  data() { return { key:this.init } },
+
+  methods: {
+    pubTab: function (key) {
+      this.key = key;
+      this.publish( this.comp, key ); },
+    classTab: function (key) {
+      return this.key===key ? 'tab-active' : 'tab'; } },
+
+  mounted: function () {}
+
+};
+
+/* script */
+const __vue_script__$h = script$f;
 
 /* template */
 var __vue_render__$e = function() {
@@ -2027,28 +1614,22 @@ var __vue_render__$e = function() {
   var _c = _vm._self._c || _h;
   return _c(
     "div",
-    { ref: "Geom", staticClass: "geom" },
+    { staticClass: "dabs" },
     [
-      _c("d-dabs", {
-        attrs: { comp: _vm.comp, pages: _vm.pages, init: _vm.key }
-      }),
-      _vm._v(" "),
       _vm._l(_vm.pages, function(page) {
         return [
-          _c("div", {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.isPage(page.key),
-                expression: "isPage(page.key)"
+          _c(
+            "div",
+            {
+              class: _vm.classTab(page.key),
+              on: {
+                click: function($event) {
+                  return _vm.pubTab(page.key)
+                }
               }
-            ],
-            key: page.key,
-            ref: page.key,
-            refInFor: true,
-            staticClass: "page"
-          })
+            },
+            [_vm._v(_vm._s(page.title))]
+          )
         ]
       })
     ],
@@ -2061,7 +1642,7 @@ __vue_render__$e._withStripped = true;
   /* style */
   const __vue_inject_styles__$h = function (inject) {
     if (!inject) return
-    inject("data-v-48c73ab6_0", { source: ".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.geom .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.geom .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Geom.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Geom.vue","sourcesContent":[".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.geom .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.geom .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
+    inject("data-v-47716f7e_0", { source: ".dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Dabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Dabs.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,UAAU;EACV,uBAAuB;EACvB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;ECChC,uBAAA;EACA,YAAA;EACA,uBAAA;EACA,YAAA;AACA","file":"Dabs.vue","sourcesContent":[".dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"dabs\">\n    <template v-for=\"page in pages\">\n      <div :class=\"classTab(page.key)\" @click=\"pubTab(page.key)\">{{page.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Object, init:String },\n\n    data() { return { key:this.init } },\n\n    methods: {\n      pubTab: function (key) {\n        this.key = key;\n        this.publish( this.comp, key ); },\n      classTab: function (key) {\n        return this.key===key ? 'tab-active' : 'tab'; } },\n\n    mounted: function () {}\n\n  }\n\n</script>\n\n<style lang=\"less\">\n  \n  .dabs { position:absolute; left:0; top:0; width:100%; height:5%; background-color:black; font-size:1.5em;\n    .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;\n      border-radius:12px 12px 0 0; border-left: wheat solid thin;\n      border-top:wheat solid thin; border-right:wheat solid thin;\n      background-color:black; color:wheat; }\n    .tab:hover  {         background-color:wheat; color:black; }\n    .tab-active { .tab(); background-color:wheat; color:black; } }\n\n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -2074,7 +1655,7 @@ __vue_render__$e._withStripped = true;
   
 
   
-  var Geom$1 = normalizeComponent_1(
+  var Dabs = normalizeComponent_1(
     { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
     __vue_inject_styles__$h,
     __vue_script__$h,
@@ -27103,7 +26684,7 @@ __vue_render__$f._withStripped = true;
   /* style */
   const __vue_inject_styles__$i = function (inject) {
     if (!inject) return
-    inject("data-v-b60dbdf6_0", { source: ".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n"]}, media: undefined });
+    inject("data-v-be4bc304_0", { source: ".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -29848,6 +29429,694 @@ __vue_render__$k._withStripped = true;
     undefined
   );
 
+// Create a Clifford Algebra with 2,0,1 metric. 
+//import GA from '../../lib/math/ganja.esm.js';
+let GA = window['Algebra'];
+
+let Basics  = class Basics {
+
+  static ga () {
+
+    GA(2, 0, 1, () => {
+
+      // We work in dual space so we define our points to be bivectors. Ganja.js overloads
+      // scientific notation to specify basis blades.
+      // For readability we create a function that converts 2D euclidean coordinates
+      // to their 3D bivector representation.
+      let point = (x, y) => 1e12 - x * 1e02 + y * 1e01;
+
+      // Similarly, we can define lines directly. The euclidean line ax + by + c can be specified so :
+      let line = (a, b, c) => a * 1e1 + b * 1e2 + c * 1e0;
+
+      // Define 3 points.
+      let A = point(-1, 1), B = point(-1, -1), C = point(1, -1);
+
+      // Define the line y=x-0.5
+      let L = line(-1, 1, 0.5);
+
+      // Or by joining two points. We define M as a function so it will update when C or A are dragged.
+      let M = () => C & A;
+
+      // Points can also be found by intersecting two lines. We similarly define D as a function
+      // for interactive updates.
+      let D = () => L ^ M;
+
+      // We now use the graph function to create an SVG object that visualises our algebraic elements.
+      // The graph function accepts
+      // an array of items that it will render in order. It can render points, lines, labels, colors,
+      // line segments and polygons.
+
+      let graph = Element.graph( [
+        A, "A",         // Render point A and label it.
+        B, "B",         // Render point B and label it.
+        C, "C",         // Render point C and label them.
+        L, "L", M, "M", // Render and label lines.
+        D, "D",         // Intersection point of L and M
+        0xff0000,       // Set the color to red.
+        [B, C],          // Render line segment from B to C.
+        0xffcccc,       // Set the color to light red.
+        [A, B, C]         // render polygon ABC.
+      ], { grid:true });
+
+      window.Style.process( 'Basics', graph );
+
+    });
+  }
+};
+
+//
+
+var script$k = {
+
+  components:{ 'd-dabs':Dabs },
+
+  data() {
+    return { comp:'Geom3D', key:'Basics', pages:{
+      Basics:  { title:'Basics', key:'Basics', klass:Basics, created:false }
+  } } },
+
+  methods: {
+
+    isPage: function(key) {
+      return this.key === key; },
+
+    onTabs: function(key) {
+      if( this.pages[key] ) {
+        this.key = key;
+        this.create(this.key); } },
+
+    create: function( key ) {
+      // console.log( 'Geom3D.created()', { key:key, refs:this.$refs } );
+      if( !this.pages[key].created ) {
+        Style.init( key, this.$refs[key][0] );
+        this.pages[key].created = true;
+        this.pages[key].klass.ga(); } }
+  },
+
+  mounted: function () {
+    // console.log( 'Geom2D.mounted()', { refs:this.$refs } );
+    this.onTabs( this.key );
+    this.subscribe( 'Geom', this.comp+'.vue', (key) => {
+      if( typeof(key)==='string' ) {
+        this.onTabs( key ); } } ); }
+
+};
+
+/* script */
+const __vue_script__$o = script$k;
+
+/* template */
+var __vue_render__$l = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    [
+      _c("d-dabs", {
+        attrs: { comp: "Geom", pages: _vm.pages, init: _vm.key }
+      }),
+      _vm._v(" "),
+      _vm._l(_vm.pages, function(page) {
+        return [
+          _c("div", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isPage(page.key),
+                expression: "isPage(page.key)"
+              }
+            ],
+            key: page.key,
+            ref: page.key,
+            refInFor: true,
+            staticClass: "page"
+          })
+        ]
+      })
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$l = [];
+__vue_render__$l._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$o = function (inject) {
+    if (!inject) return
+    inject("data-v-65666b6c_0", { source: ".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n", map: {"version":3,"sources":["Geom2D.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf","file":"Geom2D.vue","sourcesContent":[".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$o = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$o = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$o = false;
+  /* style inject SSR */
+  
+
+  
+  var Geom2D = normalizeComponent_1(
+    { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
+    __vue_inject_styles__$o,
+    __vue_script__$o,
+    __vue_scope_id__$o,
+    __vue_is_functional_template__$o,
+    __vue_module_identifier__$o,
+    browser,
+    undefined
+  );
+
+//import GA from '../../lib/math/ganja.esm.js';
+let GA$1 = window['Algebra'];
+
+let Lines  = class Lines {
+
+  static ga() {
+
+  GA$1( 3, 0, 1, () => {
+
+  // We work in dual space. Our 1-blade's are dual-vectors (aka functionals of the
+  // form ax + by + cz + dw = 0).
+  // The four basis functionals are thus (x=0, y=0, z=0, w=0). In three dimensions
+  // these represent the yz, xz, xy and
+  // ideal plane.
+
+  // Specify a point directly (trivectors specified with overloaded e-notation.)
+  let point = (x,y,z)=>1e123-x*1e012+y*1e013+z*1e023;
+
+  // Lines can be defined using plucker coordinates
+  // let line = (px,py,pz,dx,dy,dz)=>px*1e01+py&1e02+pz*1e03+dx*1e12+dy*1e13+dz*1e23;
+
+  // Planes can be defined directly using e0,e1,e2,e3
+  // let plane = (a,b,c,d)=>d*1e0+a*1e1+b*1e2+c*1e3;
+
+  // Useful joins
+     let line_from_points  = (P1,P2)=>P1.Normalized&P2.Normalized;
+  // let plane_from_points = (P1,P2,P3)=>P1&P2&P3;
+  // let plane_from_point_and_line = (P,L)=>P&L;
+
+  // Usefull meets
+     let line_from_planes  = (p1,p2)=>p1^p2;
+  // let point_from_planes = (p1,p2,p3)=>p1^p2^p3;
+     let point_from_line_and_plane = (L,P)=>L^P;
+
+   // Create 5 points and some joining lines.
+      let A=point(0,-1,0  );
+      let B=point(1,1,-1  );
+      let C=point(-1,1,-1 );
+      let D=point(1,1, 1  );
+      let E=point(-1,1, 1 );
+      let centroid=A+B+C+D+E;
+      let camera=1e0;
+
+  // Graph the 3D items
+  let graph = Element.graph( ()=> {
+    let time=performance.now()/12000;
+    camera['set'](Math.cos(time)+Math.sin(time)*1e13);                      // rotate around Y
+    return [
+      0xddaaff,[A,B,C],                                            // graph on face
+      0xAA88FF,[A,B],[A,C],[A,D],[B,C],[B,D],[C,E],[A,E],[E,D],    // graph all edges
+      0x444444,A,"A",B,"B",C,"C",D,"D",E,"E",                      // graph all vertices
+      0xFF8888,C+E,centroid,"sum of points",
+      0x8888FF,line_from_points(centroid,C+E),"line from points ..",
+      0x44AA44,line_from_planes(A&B&C,B&C&D),"line from planes ..",
+      0x4488FF,point_from_line_and_plane(line_from_points(centroid,C+E),A&D&B),
+        "point from line and plane ..",
+      0xFFAA66,(B&D)+(C&E),"sum of lines"]; }, { animate:true, camera } );
+
+    window.Style.process( 'Lines', graph );
+
+  } ); } };
+
+//import GA from '../../lib/math/ganja.esm.js';
+let GA$2 = window['Algebra'];
+
+let Grids  = class Grids {
+
+  static ga() {
+
+  GA$2( 3, 0, 1, () => {  // PGA3D Projective Euclidean 3D space. (dual)
+
+  let items = [];
+  let origin=1e123, EX=-1e012, EY=1e013, EZ=1e012;
+  let point  = (x,y,z)=>origin+x*EX-y*EY+z*EZ;
+
+  let s =  0.20;    // xyz Scale
+  let t = 10.00*s; // Total lengths
+  let c =  8.66*s; // Cos(30)
+  let h =  5.00*s; // Sin(30) or Half
+  let i =  0.50*s; // 10% increment
+
+  let ooo = point(0,0 ,0 );
+  let xoo = point(c,-h, 0 );
+  let oyo = point(0,t, 0 );
+  let ooz = point(0,-h, c );
+  let xyo = point(c,h, 0 );
+  let oyz = point(0,h, c );
+  let xoz = point(c,-t, c );
+
+  items.push( 0xFFFFFF, ooo, 'ooo', xoo, 'xoo', oyo, 'oyo', ooz, 'ooz', 
+                        xyo, 'xyo', oyz, 'oyz', xoz, 'xoz' );
+
+  let xy = [ooo,xoo,xyo,oyo];
+  let yz = [ooo,ooz,oyz,oyo];
+  let zx = [ooo,ooz,xoz,xoo];
+  
+  items.push( 0x888888, xy, 0x666666, yz, 0x444444, zx );
+
+  let xyX = (x) => [ooo*(1-x)+xoo*x, oyo*(1-x)+xyo*x]; // x scales from [0,1]
+  let xyY = (y) => [ooo*(1-y)+oyo*y, xoo*(1-y)+xyo*y]; // y scales from [0,1]
+  let yzY = (y) => [ooo*(1-y)+oyo*y, ooz*(1-y)+oyz*y]; // y scales from [0,1]
+  let yzZ = (z) => [ooo*(1-z)+ooz*z, oyo*(1-z)+oyz*z]; // z scales from [0,1]
+  let zxX = (x) => [ooo*(1-x)+xoo*x, ooz*(1-x)+xoz*x]; // x scales from [0,1]
+  let zxZ = (z) => [ooo*(1-z)+ooz*z, xoo*(1-z)+xoz*z]; // z scales from [0,1]
+
+  let gxy = (t,i, xf, yf, items ) => {
+    items.push(0xFFFFFF);
+    for( let x=0; x < t; x+=i ) { items.push(xf(x)); }
+    for( let y=0; y < t; y+=i ) { items.push(yf(y)); } };
+
+  gxy( h, i, xyX, xyY, items ); // Not sure why h
+  gxy( h, i, yzY, yzZ, items );
+  gxy( h, i, zxX, zxZ, items );
+
+    let graph = Element.graph( () => { return items; }, {} );
+
+  window.Style.process( 'Grids', graph );
+
+  } ); } };
+
+let GA$3 = window['Algebra'];
+
+let Play  = class Play {
+
+  static ga() {
+
+  GA$3(3,0,1,()=> {
+
+    // console.log( 'PGA3D', this.describe() );
+
+  let graph = Element.graph([1e123,1e23,1e13,1e12],{camera:1+.5e01-.5e02}); // and in 3D PGA
+
+  window.Style.process( 'Play', graph );
+
+  } ); } };
+
+let GA$4 = window['Algebra'];
+
+let Isohed  = class Isohed {
+
+  static ga() {
+
+GA$4(3,0,1,()=>{  // Create a Clifford Algebra with 3,0,1 metric. 
+
+  // Specify a point directly (trivectors specified with overloaded e-notation.)
+  let point = (x,y,z)=>1e123-x*1e012+y*1e013+z*1e023;
+  let rotor = (P,a)=>Math.cos(a/2)+Math.sin(a/2)*P;
+
+  // Our camera position and orientation
+  let  camera=1e0;
+
+  // We construct faces, edges and vertices of an icosahedron.
+  let r = rotor(1e13,Math.PI/2.5);
+  let A = point(0,1,0);
+  let B = point((1-Math.atan(0.5)**2)**0.5,Math.atan(0.5),0);
+  let C = rotor(1e13,Math.PI/5)>>>(1e2>>>B);
+  let items=[A,"A",B,"B",C,"C"];
+
+  // vertices
+  items.push(0x4444FF);
+  for (let i=0;i<5;i++) items.push(A,B=r>>>B,C=r>>>C,1e2>>>A);
+
+  // edges
+  items.push(0x444444);
+  for (let i=0;i<5;i++) items.push([A,B],[B,C],[B,B=r>>>B],[B,C],[C,C=r>>>C],[1e2>>>A,C]);
+
+  // faces
+  items.push(0xFFCCCC);
+  for (let i=0;i<5;i++) items.push([A,B,r>>>B],[B,B=r>>>B,C],[C,B,r>>>C],[C,1e2>>>A,C=r>>>C]);
+
+  // Graph the 3D items
+  let graph = Element.graph( () => {
+    let time=performance.now()/4000;
+    camera['set'](rotor(1e13,time)*rotor(1e12,time*1.23131));                // animate camera
+    return items.slice(0,1+((Math.floor(time*50))%(items.length+20)));    // show more and more elements
+  },{gl:true,animate:true,camera});
+
+
+    window.Style.process( 'Isohed', graph );
+
+  } ); } };
+
+//
+
+var script$l = {
+
+  components:{ 'd-dabs':Dabs },
+
+  data() {
+    return { comp:'Geom3D', key:'Isohed', pages:{
+      Lines:   { title:'Lines',  key:'Lines',  klass:Lines,  created:false },
+      Grids:   { title:'Grids',  key:'Grids',  klass:Grids,  created:false },
+      Play:    { title:'Play',   key:'Play',   klass:Play,   created:false },
+      Isohed:  { title:'Isohed', key:'Isohed', klass:Isohed, created:false }
+    } } },
+
+  methods: {
+
+    isPage: function(key) {
+      return this.key === key; },
+
+    onTabs: function(key) {
+      if( this.pages[key] ) {
+          this.key = key;
+          this.create(this.key); } },
+
+    create: function( key ) {
+      // console.log( 'Geom3D.created()', { key:key, refs:this.$refs } );
+      if( !this.pages[key].created ) {
+        Style.init( key, this.$refs[key][0] );
+        this.pages[key].created = true;
+        this.pages[key].klass.ga(); } }
+  },
+
+  mounted: function () {
+    // console.log( 'Geom3D.mounted()', { refs:this.$refs } );
+    this.onTabs( this.key );
+    this.subscribe( 'Geom', this.comp+'.vue', (key) => {
+      if( typeof(key)==='string' ) {
+        this.onTabs( key ); } } ); }
+  
+  };
+
+/* script */
+const __vue_script__$p = script$l;
+
+/* template */
+var __vue_render__$m = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    [
+      _c("d-dabs", {
+        attrs: { comp: "Geom", pages: _vm.pages, init: _vm.key }
+      }),
+      _vm._v(" "),
+      _vm._l(_vm.pages, function(page) {
+        return [
+          _c("div", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isPage(page.key),
+                expression: "isPage(page.key)"
+              }
+            ],
+            key: page.key,
+            ref: page.key,
+            refInFor: true,
+            staticClass: "page"
+          })
+        ]
+      })
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$m = [];
+__vue_render__$m._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$p = function (inject) {
+    if (!inject) return
+    inject("data-v-a5d28836_0", { source: ".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n", map: {"version":3,"sources":["Geom3D.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf","file":"Geom3D.vue","sourcesContent":[".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$p = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$p = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$p = false;
+  /* style inject SSR */
+  
+
+  
+  var Geom3D = normalizeComponent_1(
+    { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
+    __vue_inject_styles__$p,
+    __vue_script__$p,
+    __vue_scope_id__$p,
+    __vue_is_functional_template__$p,
+    __vue_module_identifier__$p,
+    browser,
+    undefined
+  );
+
+//import GA from '../../lib/math/ganja.esm.js';
+let GA$5 = window['Algebra'];
+
+let Planes = class Planes {
+
+  static ga() {
+
+
+    GA$5( 4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
+
+      // no                  = 1e5 - 1e4  origin
+      // ni                  = 0.5(1e4 + 1e5)  inifinity
+      // nino                = ni ^ no
+      // points(x,y,z)       = no + x*1e1 + y*1e2 + z*1e3 + 0.5 * ( x*x + y*y + z*z ) * ni;
+      // circle(p1,p2,p3 )   = p1^p2^p3
+      // sphere(p1,p2,p3,p4) = p1^p2^p3^p4
+      // sphere(p,r)         = !(p-r*ni)
+      // sphere(p,r)         = (p,r) => !(p-r*ni)
+      // line(p1,p2)         = p1 ^ p2
+      // lineINF(p1,p2)      = p1 ^ p2 ^ ni
+      // join                = p1 ^ p2
+      // meet                = p1 & p2
+      // rotor(a,b)          = exp((a/2)*b)
+
+      // We start by defining a null basis, and upcasting for points
+   // let total = 5.0;
+      let scale = 0.2;
+      let xs = scale;
+      let ys = scale;
+      let zs = scale;
+   // let range = total * scale;
+      let ni = 1e4   + 1e5;
+      let no = 0.5e5 - 0.5e4;
+      // let nino = ni ^ no;
+   // let up = (x) => no + x + .5 * x * x * ni;
+
+      let point = (xa,ya,za) => {
+        let x = xa*xs, y=ya*ys, z=za*zs;
+        return no + x*1e1 + y*1e2 + z*1e3 + 0.5 * ( x*x + y*y + z*z ) * ni; };
+      let planeDR = (p1,p2,p3,p4) => [p1,p2,p3,p4];
+
+      let r   = 3;
+   // let h   = r * 0.5;
+      let bne = point(  r,  r,  r );
+      let bse = point(  r, -r,  r );
+      let bnw = point( -r,  r,  r );
+      let bsw = point( -r, -r,  r );
+      let fne = point(  r,  r, -r );
+      let fse = point(  r, -r, -r );
+      let fnw = point( -r,  r, -r );
+      let fsw = point( -r, -r, -r );
+
+   // let pb = plane3P(bne,bnw,bsw), db = planeDR(bne,bnw,bsw,bse);
+      let de = planeDR(bne,fne,fse,bse);
+   // let pn = plane3P(bne,bnw,fnw), dn = planeDR(bne,bnw,fnw,fne);
+      let dw = planeDR(bnw,fnw,fsw,bsw);
+      let ds = planeDR(bse,bsw,fsw,fse);
+
+   // let line     = (p1,p2) => [p1,p2];
+   // let planeBR  = (b,r)   => !( b + r * scale * ni );
+      let spherePR = (p,r)   => !( p - r * scale * ni );
+   // let grid     = (b,r,n) => plane(b,r);
+
+      // Next we'll define some objects.
+      let p0 = point(0, 0, 0 );                           // point
+      let sc = spherePR( p0,0.5 ); // !(p1 - 0.20 * ni);  // main dual sphere around point (interactive)
+
+
+    let items = [
+      0xFFFFFF,   bne, 'bne', bse, 'bse', bnw, 'bnw', bsw, 'bsw',
+      0xFFFFFF,   fne, 'fne', fse, 'fse', fnw, 'fnw', fsw, 'fsw',
+      0xFFFFFF,   de, dw, ds,
+      0xFFFFFF,   p0, sc, "Sc" ];
+
+    let svg = Element.graph( () => {
+       return items; },
+      { conformal:true, camera:1+.5e01-.5e02, gl:false, grid:false } );
+
+    window.Style.process( 'Planes', svg );
+
+  } ); } };
+
+/*
+     // 0xFF00FF,   lt, "Pr&Lt",                  // line intersect plane
+     // 0x0000FF,   m1, "Sc&Pb",                  // sphere meet plane
+     // 0x888800,   m2, "Sc&Lt",                  // sphere meet line
+     // 0x0088FF,   m3, "Sc&Sl",                  // sphere meet sphere
+     // 0x008800,   m4, "Sc&Cr",                  // sphere meet circle
+     // 0x880000,   m5, "Cr&Pr",                  // circle meet sphere
+     // 0x888800,   lp,                      // line and circle
+ */
+
+//import GA from '../../lib/math/ganja.esm.js';
+let GA$6 = window['Algebra'];
+
+let Sphere = class Sphere {
+
+  static ga() {
+
+
+    GA$6(4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
+
+      // console.log( this.describe() );
+
+      // We start by defining a null basis, and upcasting for points
+      let ni = 1e4 + 1e5, no = .5e5 - .5e4;
+      let up = (x) => no + x + .5 * x * x * ni;
+
+      // Next we'll define 4 points
+      let p1 = up(1e1), p2 = up(1e2), p3 = up(-1e3), p4 = up(-1e2);
+
+      // The outer product can be used to construct the sphere through
+      // any four points.
+      let s = () => p1 ^ p2 ^ p3 ^ p4;
+
+      // The outer product between any three points and infinity is a plane.
+      let p = () => p1 ^ p2 ^ p3 ^ ni;
+
+      // Graph the items. (hex numbers are html5 colors, two extra first bytes = alpha)
+      let canvas = Element.graph([
+        0x00FF0000, p1, "p1", p2, "p2", p3, "p3", p4, "p4", // points
+        0xE0008800, p, "p",                                 // plane
+        0xE00000FF, s, "s"                                  // sphere
+      ], { conformal:true, gl:true, grid:false });
+
+      //let context = canvas.getContext('webgl');
+      //context.fillStyle = '#000000';
+
+      window.Style.process( 'Sphere', canvas );
+
+    } ); } };
+
+//
+//import Conform from '../../src/ganja/4D/Conform.js';
+
+  var script$m = {
+    
+    components:{ 'd-dabs':Dabs },
+
+    data() {
+      return { comp:'Geom4D', key:'Planes', pages:{
+          Planes:  { title:'Planes',  key:'Planes',  klass:Planes,  created:false },
+          Sphere:  { title:'Sphere',  key:'Sphere',  klass:Sphere,  created:false }
+       // Conform: { title:'Conform', key:'Conform', klass:Conform, created:false }
+        } } },
+    
+    methods: {
+
+      isPage: function(key) {
+        return this.key === key; },
+
+      onTabs: function(key) {
+        if( this.pages[key] ) {
+          this.key = key;
+          this.create(this.key); } },
+
+      create: function( key ) {
+        // console.log( 'Geom4D.created()', { key:key, refs:this.$refs } );
+        if( !this.pages[key].created ) {
+          Style.init( key, this.$refs[key][0] );
+          this.pages[key].created = true;
+          this.pages[key].klass.ga(); } }
+    },
+
+    mounted: function () {
+      // console.log( 'Geom4D.mounted()', { refs:this.$refs } );
+      this.onTabs( this.key );
+      this.subscribe( 'Geom', this.comp+'.vue', (key) => {
+        if( typeof(key)==='string' ) {
+          this.onTabs( key ); } } ); }
+
+  };
+
+/* script */
+const __vue_script__$q = script$m;
+
+/* template */
+var __vue_render__$n = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    [
+      _c("d-dabs", {
+        attrs: { comp: "Geom", pages: _vm.pages, init: _vm.key }
+      }),
+      _vm._v(" "),
+      _vm._l(_vm.pages, function(page) {
+        return [
+          _c("div", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isPage(page.key),
+                expression: "isPage(page.key)"
+              }
+            ],
+            key: page.key,
+            ref: page.key,
+            refInFor: true,
+            staticClass: "page"
+          })
+        ]
+      })
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$n = [];
+__vue_render__$n._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$q = undefined;
+  /* scoped */
+  const __vue_scope_id__$q = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$q = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$q = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var Geom4D = normalizeComponent_1(
+    { render: __vue_render__$n, staticRenderFns: __vue_staticRenderFns__$n },
+    __vue_inject_styles__$q,
+    __vue_script__$q,
+    __vue_scope_id__$q,
+    __vue_is_functional_template__$q,
+    __vue_module_identifier__$q,
+    undefined,
+    undefined
+  );
+
 //
 
   
@@ -29857,8 +30126,6 @@ __vue_render__$k._withStripped = true;
         'd-logo':Logo, 'd-navb':Navb, 'd-find':Find,
         'd-tocs':Tocs$1, 'd-view':View, 'd-side':Side,
         'd-pref':Pref, 'd-foot':Foot, 'd-trak':Trak } };
-//import Cube from '../comp/Cube.vue';
-//import Wood from '../wood/Wood.vue';
 
   Dash.Home = Home;
   Dash.Info = Info;
@@ -29871,12 +30138,18 @@ __vue_render__$k._withStripped = true;
   Dash.Enli = Enli;
   Dash.Data = Data$2;
   Dash.Note = Note$1;
+//Dash.Cube = Cube;
+//Dash.Wood = Wood;
+  
+  Dash.Geom2D = Geom2D;
+  Dash.Geom3D = Geom3D;
+  Dash.Geom4D = Geom4D;
 
 /* script */
-const __vue_script__$o = Dash;
+const __vue_script__$r = Dash;
 
 /* template */
-var __vue_render__$l = function() {
+var __vue_render__$o = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -29905,32 +30178,32 @@ var __vue_render__$l = function() {
     1
   )
 };
-var __vue_staticRenderFns__$l = [];
-__vue_render__$l._withStripped = true;
+var __vue_staticRenderFns__$o = [];
+__vue_render__$o._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$o = function (inject) {
+  const __vue_inject_styles__$r = function (inject) {
     if (!inject) return
-    inject("data-v-d088f30a_0", { source: ".dash {\n  font-family: Roboto, sans-serif;\n  font-size: 1rem;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11vw 85vw 4vw;\n  grid-template-rows: 6vh 88vh 6vh;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n", map: {"version":3,"sources":["Dash.vue"],"names":[],"mappings":"AAAA;EACE,+BAA+B;EAC/B,eAAe;EACf,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,oCAAoC;EACpC,gCAAgC;EAChC,uEAAuE;AACzE;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf","file":"Dash.vue","sourcesContent":[".dash {\n  font-family: Roboto, sans-serif;\n  font-size: 1rem;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11vw 85vw 4vw;\n  grid-template-rows: 6vh 88vh 6vh;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n"]}, media: undefined });
+    inject("data-v-c5259640_0", { source: ".dash {\n  font-family: Roboto, sans-serif;\n  font-size: 1rem;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11vw 85vw 4vw;\n  grid-template-rows: 6vh 88vh 6vh;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n", map: {"version":3,"sources":["Dash.vue"],"names":[],"mappings":"AAAA;EACE,+BAA+B;EAC/B,eAAe;EACf,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,oCAAoC;EACpC,gCAAgC;EAChC,uEAAuE;AACzE;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf","file":"Dash.vue","sourcesContent":[".dash {\n  font-family: Roboto, sans-serif;\n  font-size: 1rem;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11vw 85vw 4vw;\n  grid-template-rows: 6vh 88vh 6vh;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$o = undefined;
+  const __vue_scope_id__$r = undefined;
   /* module identifier */
-  const __vue_module_identifier__$o = undefined;
+  const __vue_module_identifier__$r = undefined;
   /* functional template */
-  const __vue_is_functional_template__$o = false;
+  const __vue_is_functional_template__$r = false;
   /* style inject SSR */
   
 
   
   var Dash$1 = normalizeComponent_1(
-    { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
-    __vue_inject_styles__$o,
-    __vue_script__$o,
-    __vue_scope_id__$o,
-    __vue_is_functional_template__$o,
-    __vue_module_identifier__$o,
+    { render: __vue_render__$o, staticRenderFns: __vue_staticRenderFns__$o },
+    __vue_inject_styles__$r,
+    __vue_script__$r,
+    __vue_scope_id__$r,
+    __vue_is_functional_template__$r,
+    __vue_module_identifier__$r,
     browser,
     undefined
   );

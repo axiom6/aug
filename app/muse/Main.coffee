@@ -15,6 +15,7 @@ class Main
     Info: { url:'muse/Info.json', data:null, type:'Pack', plane:'Info' }
     Know: { url:'muse/Know.json', data:null, type:'Pack', plane:'Know' }
     Wise: { url:'muse/Wise.json', data:null, type:'Pack', plane:'Wise' }
+    Geom: { url:'muse/Geom.json', data:null, type:'Pack', plane:'Geom' }
     Cube: { url:'muse/Cube.json', data:null, type:'Pack', plane:'Cube' }
     Font: { url:Main.FontUrl,     data:null, type:'Spec', plane:'Cube' }
 
@@ -25,7 +26,8 @@ class Main
 
   Main.init =  ( batch ) ->
     Main.Batch = batch # Not necessary here, but assigned for compatibilitry
-    subjects = ["Info","Know","Wise","Draw","Note","Cube","Navb","Tabs"]
+    # console.log( 'Batch.Geom', batch['Geom'])
+    subjects = ["Info","Know","Wise","Draw","Note","Cube","Navb","Tabs","Geom"]
     infoSpec = { subscribe:false, publish:false, subjects:subjects}
     Main.stream = new Stream( subjects, infoSpec )
     Main.mergePracsCols()

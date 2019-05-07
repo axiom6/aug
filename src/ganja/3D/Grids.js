@@ -42,14 +42,14 @@ let Grids  = class Grids {
   let zxX = (x) => [ooo*(1-x)+xoo*x, ooz*(1-x)+xoz*x]; // x scales from [0,1]
   let zxZ = (z) => [ooo*(1-z)+ooz*z, xoo*(1-z)+xoz*z]; // z scales from [0,1]
 
-  let gxy = (t,i, xf, yf ) => {
+  let gxy = (t,i, xf, yf, items ) => {
     items.push(0xFFFFFF);
     for( let x=0; x < t; x+=i ) { items.push(xf(x)); }
     for( let y=0; y < t; y+=i ) { items.push(yf(y)); } }
 
-  gxy( h, i, xyX, xyY ); // Not sure why h
-  gxy( h, i, yzY, yzZ );
-  gxy( h, i, zxX, zxZ );
+  gxy( h, i, xyX, xyY, items ); // Not sure why h
+  gxy( h, i, yzY, yzZ, items );
+  gxy( h, i, zxX, zxZ, items );
 
     let graph = Element.graph( () => { return items; }, {} );
 
