@@ -2,7 +2,7 @@
 <template>
   <div class="tabs">
     <template v-for="page in pages">
-      <div :class="classTab(page.short)" @click="pubTab(page.short)">
+      <div :class="classTab(page.key)" @click="pubTab(page.key)">
         <router-link :to="{ name:name(page) }">{{page.title}}</router-link>
       </div>
     </template>
@@ -24,7 +24,7 @@
       classTab: function (tab) {
         return this.tab===tab ? 'tab-active' : 'tab'; },
       name: function(page) {
-        return this.comp+page.short; } },
+        return this.comp+page.key; } },
 
     mounted: function () {}
     

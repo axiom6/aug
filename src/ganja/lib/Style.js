@@ -6,6 +6,7 @@ let Style = class Style {
   static size( elem ) {
     Obj.width  = elem['clientWidth' ];
     Obj.height = elem['clientHeight'];
+    // console.log( 'Style.size', Obj );
   }
 
   static init( key, elem ) {
@@ -13,10 +14,12 @@ let Style = class Style {
     Obj[key].elem   = elem;
     Obj[key].width  = elem['clientWidth' ]===0 ? Obj.width  : elem['clientWidth' ];
     Obj[key].height = elem['clientHeight']===0 ? Obj.height : elem['clientHeight'];
+    // console.log( 'Style.init', key, Obj );
   }
 
   static process( key, graph ) {
     let page  = Obj[key];
+    // console.log( 'Style.process', key, page );
     let style = `width:${page.width}px; height:${page.height}px; background:#000000;`;
     graph.setAttribute( 'style', style );
     if( graph.tagName==='CANVAS' ) {

@@ -4,7 +4,7 @@
   <div class="note">
     <n-tabs :comp="comp" :pages="pages" init="Stand"></n-tabs>
     <template v-for="page in pages">
-      <router-view :name="name(page)" :id="page.short"></router-view>
+      <router-view :name="name(page)" :id="page.key"></router-view>
     </template>
   </div>
 </template>
@@ -23,16 +23,16 @@
 
     data() {
       return { comp:'Note', tab:'Standard', pages:[
-          { title:'Standard', short:'Stand' },
-          { title:'Embed',    short:'Embed' },
-          { title:'Maths',    short:'Maths' },
-          { title:'Ganja',    short:'Ganja' },
+          { title:'Standard', key:'Stand' },
+          { title:'Embed',    key:'Embed' },
+          { title:'Maths',    key:'Maths' },
+          { title:'Ganja',    key:'Ganja' },
         ] } },
     
     methods: {
       
       name: function(page) {
-        return this.comp+page.short; } },
+        return this.comp+page.key; } },
     
   }
   

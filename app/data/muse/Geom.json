@@ -2,5 +2,5 @@
   "Geom":{ "title":"Geom",   "icon":"fas fa-shapes", "hsv":[90,90,90],
     "Geom2D" : { "title":"Graph",      "icon":"fas fa-chart-area", "hsv":[90,90,90] },
     "Geom3D" : { "title":"Projective", "icon":"fas fa-cubes",      "hsv":[30,60,90] },
-    "Geom4D" : { "title":"Conformal",  "icon":"fas fa-hourglass",  "hsv":[60,90,90] } }
+    "Geom4D" : { "title":"Conformal",  "icon":"fas fa-globe",      "hsv":[60,90,90] } }
   }
