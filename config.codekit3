@@ -3680,6 +3680,22 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/zzz/ganja/Gend.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/ganja/Gend.vue",
+		"oF": 0
+		},
+	"/zzz/ganja/Geom.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/ganja/Geom.vue",
+		"oF": 0
+		},
 	"/zzz/ui/Brew.coffee": {
 		"ft": 32,
 		"ma": 0,

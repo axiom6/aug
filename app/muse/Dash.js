@@ -1513,10 +1513,13 @@ window.Style = Style; // Make Style global for access inside ganja.js
 
 let Geom = {
 
-  data() { return { comp:'Geom', key:'2D', geoms:[
-      { title:'Graph',      key:'2D' },
-      { title:'Projective', key:'3D' },
-      { title:'Conformal',  key:'4D' } ] } },
+  data() { return { comp:'Geom', key:'2D',
+    geoms:[
+      { title:'Graph',      key:'2D', init:'Basics' },
+      { title:'Projective', key:'3D', init:'Lines'  },
+      { title:'Conformal',  key:'4D', init:'Sphere' } ] } },
+  
+  methods: {},
 
   mounted: function () {
     // console.log( 'Geom.mounted()' );
@@ -1540,7 +1543,15 @@ var __vue_render__$d = function() {
     { ref: "Geom", staticClass: "geom" },
     [
       _vm._l(_vm.geoms, function(geom) {
-        return [_c("router-view", { attrs: { name: _vm.comp + geom.key } })]
+        return [
+          _c("router-view", {
+            attrs: {
+              name: _vm.comp + geom.key,
+              comp: _vm.comp + geom.key,
+              init: geom.init
+            }
+          })
+        ]
       })
     ],
     2
@@ -1552,7 +1563,7 @@ __vue_render__$d._withStripped = true;
   /* style */
   const __vue_inject_styles__$g = function (inject) {
     if (!inject) return
-    inject("data-v-44c6322b_0", { source: ".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n}\n.geom h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Geom.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Geom.vue","sourcesContent":[".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n}\n.geom h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
+    inject("data-v-7090a582_0", { source: ".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n}\n.geom h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Geom.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Geom.vue","sourcesContent":[".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n}\n.geom h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -1600,7 +1611,9 @@ var script$f = {
     classTab: function (key) {
       return this.key===key ? 'tab-active' : 'tab'; } },
 
-  mounted: function () {}
+  mounted: function () {
+    this.subscribe( 'Geom', 'Dabs.vue', (key) => {
+      this.classTab(key); } ); }
 
 };
 
@@ -1642,7 +1655,7 @@ __vue_render__$e._withStripped = true;
   /* style */
   const __vue_inject_styles__$h = function (inject) {
     if (!inject) return
-    inject("data-v-47716f7e_0", { source: ".dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Dabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Dabs.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,UAAU;EACV,uBAAuB;EACvB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;ECChC,uBAAA;EACA,YAAA;EACA,uBAAA;EACA,YAAA;AACA","file":"Dabs.vue","sourcesContent":[".dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"dabs\">\n    <template v-for=\"page in pages\">\n      <div :class=\"classTab(page.key)\" @click=\"pubTab(page.key)\">{{page.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Object, init:String },\n\n    data() { return { key:this.init } },\n\n    methods: {\n      pubTab: function (key) {\n        this.key = key;\n        this.publish( this.comp, key ); },\n      classTab: function (key) {\n        return this.key===key ? 'tab-active' : 'tab'; } },\n\n    mounted: function () {}\n\n  }\n\n</script>\n\n<style lang=\"less\">\n  \n  .dabs { position:absolute; left:0; top:0; width:100%; height:5%; background-color:black; font-size:1.5em;\n    .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;\n      border-radius:12px 12px 0 0; border-left: wheat solid thin;\n      border-top:wheat solid thin; border-right:wheat solid thin;\n      background-color:black; color:wheat; }\n    .tab:hover  {         background-color:wheat; color:black; }\n    .tab-active { .tab(); background-color:wheat; color:black; } }\n\n</style>"]}, media: undefined });
+    inject("data-v-9471b91a_0", { source: ".dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Dabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Dabs.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,UAAU;EACV,uBAAuB;EACvB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;ECCd,uBAAA;EACA,YAAA;AACA","file":"Dabs.vue","sourcesContent":[".dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"dabs\">\n    <template v-for=\"page in pages\">\n      <div :class=\"classTab(page.key)\" @click=\"pubTab(page.key)\">{{page.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Object, init:String },\n\n    data() { return { key:this.init } },\n\n    methods: {\n      pubTab: function (key) {\n        this.key = key;\n        this.publish( this.comp, key ); },\n      classTab: function (key) {\n        return this.key===key ? 'tab-active' : 'tab'; } },\n\n    mounted: function () {\n      this.subscribe( 'Geom', 'Dabs.vue', (key) => {\n        this.classTab(key) } ); }\n\n  }\n\n</script>\n\n<style lang=\"less\">\n  \n  .dabs { position:absolute; left:0; top:0; width:100%; height:5%; background-color:black; font-size:1.5em;\n    .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;\n      border-radius:12px 12px 0 0; border-left: wheat solid thin;\n      border-top:wheat solid thin; border-right:wheat solid thin;\n      background-color:black; color:wheat; }\n    .tab:hover  {         background-color:wheat; color:black; }\n    .tab-active { .tab(); background-color:wheat; color:black; } }\n\n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -1663,6 +1676,694 @@ __vue_render__$e._withStripped = true;
     __vue_is_functional_template__$h,
     __vue_module_identifier__$h,
     browser,
+    undefined
+  );
+
+// Create a Clifford Algebra with 2,0,1 metric. 
+//import GA from '../../lib/math/ganja.esm.js';
+let GA = window['Algebra'];
+
+let Basics  = class Basics {
+
+  static ga () {
+
+    GA(2, 0, 1, () => {
+
+      // We work in dual space so we define our points to be bivectors. Ganja.js overloads
+      // scientific notation to specify basis blades.
+      // For readability we create a function that converts 2D euclidean coordinates
+      // to their 3D bivector representation.
+      let point = (x, y) => 1e12 - x * 1e02 + y * 1e01;
+
+      // Similarly, we can define lines directly. The euclidean line ax + by + c can be specified so :
+      let line = (a, b, c) => a * 1e1 + b * 1e2 + c * 1e0;
+
+      // Define 3 points.
+      let A = point(-1, 1), B = point(-1, -1), C = point(1, -1);
+
+      // Define the line y=x-0.5
+      let L = line(-1, 1, 0.5);
+
+      // Or by joining two points. We define M as a function so it will update when C or A are dragged.
+      let M = () => C & A;
+
+      // Points can also be found by intersecting two lines. We similarly define D as a function
+      // for interactive updates.
+      let D = () => L ^ M;
+
+      // We now use the graph function to create an SVG object that visualises our algebraic elements.
+      // The graph function accepts
+      // an array of items that it will render in order. It can render points, lines, labels, colors,
+      // line segments and polygons.
+
+      let graph = Element.graph( [
+        A, "A",         // Render point A and label it.
+        B, "B",         // Render point B and label it.
+        C, "C",         // Render point C and label them.
+        L, "L", M, "M", // Render and label lines.
+        D, "D",         // Intersection point of L and M
+        0xff0000,       // Set the color to red.
+        [B, C],          // Render line segment from B to C.
+        0xffcccc,       // Set the color to light red.
+        [A, B, C]         // render polygon ABC.
+      ], { grid:true });
+
+      window.Style.process( 'Basics', graph );
+
+    });
+  }
+};
+
+//
+
+var script$g = {
+
+  components:{ 'd-dabs':Dabs },
+
+  data() {
+    return { comp:'Geom3D', key:'Basics', pages:{
+      Basics:  { title:'Basics', key:'Basics', klass:Basics, created:false }
+  } } },
+
+  methods: {
+
+    isPage: function(key) {
+      return this.key === key; },
+
+    onTabs: function(key) {
+      if( this.pages[key] ) {
+        this.key = key;
+        this.create(this.key); } },
+
+    create: function( key ) {
+      // console.log( 'Geom3D.created()', { key:key, refs:this.$refs } );
+      if( !this.pages[key].created ) {
+        Style.init( key, this.$refs[key][0] );
+        this.pages[key].created = true;
+        this.pages[key].klass.ga(); } }
+  },
+
+  mounted: function () {
+    // console.log( 'Geom2D.mounted()', { refs:this.$refs } );
+    this.onTabs( this.key );
+    this.subscribe( 'Geom', this.comp+'.vue', (key) => {
+      if( typeof(key)==='string' ) {
+        this.onTabs( key ); } } ); }
+
+};
+
+/* script */
+const __vue_script__$i = script$g;
+
+/* template */
+var __vue_render__$f = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    [
+      _c("d-dabs", {
+        attrs: { comp: "Geom", pages: _vm.pages, init: _vm.key }
+      }),
+      _vm._v(" "),
+      _vm._l(_vm.pages, function(page) {
+        return [
+          _c("div", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isPage(page.key),
+                expression: "isPage(page.key)"
+              }
+            ],
+            key: page.key,
+            ref: page.key,
+            refInFor: true,
+            staticClass: "page"
+          })
+        ]
+      })
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$f = [];
+__vue_render__$f._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$i = function (inject) {
+    if (!inject) return
+    inject("data-v-65666b6c_0", { source: ".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n", map: {"version":3,"sources":["Geom2D.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf","file":"Geom2D.vue","sourcesContent":[".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$i = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$i = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$i = false;
+  /* style inject SSR */
+  
+
+  
+  var Geom2D = normalizeComponent_1(
+    { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
+    __vue_inject_styles__$i,
+    __vue_script__$i,
+    __vue_scope_id__$i,
+    __vue_is_functional_template__$i,
+    __vue_module_identifier__$i,
+    browser,
+    undefined
+  );
+
+//import GA from '../../lib/math/ganja.esm.js';
+let GA$1 = window['Algebra'];
+
+let Lines  = class Lines {
+
+  static ga() {
+
+  GA$1( 3, 0, 1, () => {
+
+  // We work in dual space. Our 1-blade's are dual-vectors (aka functionals of the
+  // form ax + by + cz + dw = 0).
+  // The four basis functionals are thus (x=0, y=0, z=0, w=0). In three dimensions
+  // these represent the yz, xz, xy and
+  // ideal plane.
+
+  // Specify a point directly (trivectors specified with overloaded e-notation.)
+  let point = (x,y,z)=>1e123-x*1e012+y*1e013+z*1e023;
+
+  // Lines can be defined using plucker coordinates
+  // let line = (px,py,pz,dx,dy,dz)=>px*1e01+py&1e02+pz*1e03+dx*1e12+dy*1e13+dz*1e23;
+
+  // Planes can be defined directly using e0,e1,e2,e3
+  // let plane = (a,b,c,d)=>d*1e0+a*1e1+b*1e2+c*1e3;
+
+  // Useful joins
+     let line_from_points  = (P1,P2)=>P1.Normalized&P2.Normalized;
+  // let plane_from_points = (P1,P2,P3)=>P1&P2&P3;
+  // let plane_from_point_and_line = (P,L)=>P&L;
+
+  // Usefull meets
+     let line_from_planes  = (p1,p2)=>p1^p2;
+  // let point_from_planes = (p1,p2,p3)=>p1^p2^p3;
+     let point_from_line_and_plane = (L,P)=>L^P;
+
+   // Create 5 points and some joining lines.
+      let A=point(0,-1,0  );
+      let B=point(1,1,-1  );
+      let C=point(-1,1,-1 );
+      let D=point(1,1, 1  );
+      let E=point(-1,1, 1 );
+      let centroid=A+B+C+D+E;
+      let camera=1e0;
+
+  // Graph the 3D items
+  let graph = Element.graph( ()=> {
+    let time=performance.now()/12000;
+    camera['set'](Math.cos(time)+Math.sin(time)*1e13);                      // rotate around Y
+    return [
+      0xddaaff,[A,B,C],                                            // graph on face
+      0xAA88FF,[A,B],[A,C],[A,D],[B,C],[B,D],[C,E],[A,E],[E,D],    // graph all edges
+      0x444444,A,"A",B,"B",C,"C",D,"D",E,"E",                      // graph all vertices
+      0xFF8888,C+E,centroid,"sum of points",
+      0x8888FF,line_from_points(centroid,C+E),"line from points ..",
+      0x44AA44,line_from_planes(A&B&C,B&C&D),"line from planes ..",
+      0x4488FF,point_from_line_and_plane(line_from_points(centroid,C+E),A&D&B),
+        "point from line and plane ..",
+      0xFFAA66,(B&D)+(C&E),"sum of lines"]; }, { animate:true, camera } );
+
+    window.Style.process( 'Lines', graph );
+
+  } ); } };
+
+//import GA from '../../lib/math/ganja.esm.js';
+let GA$2 = window['Algebra'];
+
+let Grids  = class Grids {
+
+  static ga() {
+
+  GA$2( 3, 0, 1, () => {  // PGA3D Projective Euclidean 3D space. (dual)
+
+  let items = [];
+  let origin=1e123, EX=-1e012, EY=1e013, EZ=1e012;
+  let point  = (x,y,z)=>origin+x*EX-y*EY+z*EZ;
+
+  let s =  0.20;    // xyz Scale
+  let t = 10.00*s; // Total lengths
+  let c =  8.66*s; // Cos(30)
+  let h =  5.00*s; // Sin(30) or Half
+  let i =  0.50*s; // 10% increment
+
+  let ooo = point(0,0 ,0 );
+  let xoo = point(c,-h, 0 );
+  let oyo = point(0,t, 0 );
+  let ooz = point(0,-h, c );
+  let xyo = point(c,h, 0 );
+  let oyz = point(0,h, c );
+  let xoz = point(c,-t, c );
+
+  items.push( 0xFFFFFF, ooo, 'ooo', xoo, 'xoo', oyo, 'oyo', ooz, 'ooz', 
+                        xyo, 'xyo', oyz, 'oyz', xoz, 'xoz' );
+
+  let xy = [ooo,xoo,xyo,oyo];
+  let yz = [ooo,ooz,oyz,oyo];
+  let zx = [ooo,ooz,xoz,xoo];
+  
+  items.push( 0x888888, xy, 0x666666, yz, 0x444444, zx );
+
+  let xyX = (x) => [ooo*(1-x)+xoo*x, oyo*(1-x)+xyo*x]; // x scales from [0,1]
+  let xyY = (y) => [ooo*(1-y)+oyo*y, xoo*(1-y)+xyo*y]; // y scales from [0,1]
+  let yzY = (y) => [ooo*(1-y)+oyo*y, ooz*(1-y)+oyz*y]; // y scales from [0,1]
+  let yzZ = (z) => [ooo*(1-z)+ooz*z, oyo*(1-z)+oyz*z]; // z scales from [0,1]
+  let zxX = (x) => [ooo*(1-x)+xoo*x, ooz*(1-x)+xoz*x]; // x scales from [0,1]
+  let zxZ = (z) => [ooo*(1-z)+ooz*z, xoo*(1-z)+xoz*z]; // z scales from [0,1]
+
+  let gxy = (t,i, xf, yf, items ) => {
+    items.push(0xFFFFFF);
+    for( let x=0; x < t; x+=i ) { items.push(xf(x)); }
+    for( let y=0; y < t; y+=i ) { items.push(yf(y)); } };
+
+  gxy( h, i, xyX, xyY, items ); // Not sure why h
+  gxy( h, i, yzY, yzZ, items );
+  gxy( h, i, zxX, zxZ, items );
+
+    let graph = Element.graph( () => { return items; }, {} );
+
+  window.Style.process( 'Grids', graph );
+
+  } ); } };
+
+let GA$3 = window['Algebra'];
+
+let Play  = class Play {
+
+  static ga() {
+
+  GA$3(3,0,1,()=> {
+
+    // console.log( 'PGA3D', this.describe() );
+
+  let graph = Element.graph([1e123,1e23,1e13,1e12],{camera:1+.5e01-.5e02}); // and in 3D PGA
+
+  window.Style.process( 'Play', graph );
+
+  } ); } };
+
+let GA$4 = window['Algebra'];
+
+let Isohed  = class Isohed {
+
+  static ga() {
+
+GA$4(3,0,1,()=>{  // Create a Clifford Algebra with 3,0,1 metric. 
+
+  // Specify a point directly (trivectors specified with overloaded e-notation.)
+  let point = (x,y,z)=>1e123-x*1e012+y*1e013+z*1e023;
+  let rotor = (P,a)=>Math.cos(a/2)+Math.sin(a/2)*P;
+
+  // Our camera position and orientation
+  let  camera=1e0;
+
+  // We construct faces, edges and vertices of an icosahedron.
+  let r = rotor(1e13,Math.PI/2.5);
+  let A = point(0,1,0);
+  let B = point((1-Math.atan(0.5)**2)**0.5,Math.atan(0.5),0);
+  let C = rotor(1e13,Math.PI/5)>>>(1e2>>>B);
+  let items=[A,"A",B,"B",C,"C"];
+
+  // vertices
+  items.push(0x4444FF);
+  for (let i=0;i<5;i++) items.push(A,B=r>>>B,C=r>>>C,1e2>>>A);
+
+  // edges
+  items.push(0x444444);
+  for (let i=0;i<5;i++) items.push([A,B],[B,C],[B,B=r>>>B],[B,C],[C,C=r>>>C],[1e2>>>A,C]);
+
+  // faces
+  items.push(0xFFCCCC);
+  for (let i=0;i<5;i++) items.push([A,B,r>>>B],[B,B=r>>>B,C],[C,B,r>>>C],[C,1e2>>>A,C=r>>>C]);
+
+  // Graph the 3D items
+  let graph = Element.graph( () => {
+    let time=performance.now()/4000;
+    camera['set'](rotor(1e13,time)*rotor(1e12,time*1.23131));                // animate camera
+    return items.slice(0,1+((Math.floor(time*50))%(items.length+20)));    // show more and more elements
+  },{gl:true,animate:true,camera});
+
+
+    window.Style.process( 'Isohed', graph );
+
+  } ); } };
+
+//
+
+var script$h = {
+
+  components:{ 'd-dabs':Dabs },
+
+  data() {
+    return { comp:'Geom3D', key:'Isohed', pages:{
+      Lines:   { title:'Lines',  key:'Lines',  klass:Lines,  created:false },
+      Grids:   { title:'Grids',  key:'Grids',  klass:Grids,  created:false },
+      Play:    { title:'Play',   key:'Play',   klass:Play,   created:false },
+      Isohed:  { title:'Isohed', key:'Isohed', klass:Isohed, created:false }
+    } } },
+
+  methods: {
+
+    isPage: function(key) {
+      return this.key === key; },
+
+    onTabs: function(key) {
+      if( this.pages[key] ) {
+          this.key = key;
+          this.create(this.key); } },
+
+    create: function( key ) {
+      // console.log( 'Geom3D.created()', { key:key, refs:this.$refs } );
+      if( !this.pages[key].created ) {
+        Style.init( key, this.$refs[key][0] );
+        this.pages[key].created = true;
+        this.pages[key].klass.ga(); } }
+  },
+
+  mounted: function () {
+    // console.log( 'Geom3D.mounted()', { refs:this.$refs } );
+    this.onTabs( this.key );
+    this.subscribe( 'Geom', this.comp+'.vue', (key) => {
+      if( typeof(key)==='string' ) {
+        this.onTabs( key ); } } ); }
+  
+  };
+
+/* script */
+const __vue_script__$j = script$h;
+
+/* template */
+var __vue_render__$g = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    [
+      _c("d-dabs", {
+        attrs: { comp: "Geom", pages: _vm.pages, init: _vm.key }
+      }),
+      _vm._v(" "),
+      _vm._l(_vm.pages, function(page) {
+        return [
+          _c("div", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isPage(page.key),
+                expression: "isPage(page.key)"
+              }
+            ],
+            key: page.key,
+            ref: page.key,
+            refInFor: true,
+            staticClass: "page"
+          })
+        ]
+      })
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$g = [];
+__vue_render__$g._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$j = function (inject) {
+    if (!inject) return
+    inject("data-v-a5d28836_0", { source: ".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n", map: {"version":3,"sources":["Geom3D.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf","file":"Geom3D.vue","sourcesContent":[".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$j = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$j = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$j = false;
+  /* style inject SSR */
+  
+
+  
+  var Geom3D = normalizeComponent_1(
+    { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
+    __vue_inject_styles__$j,
+    __vue_script__$j,
+    __vue_scope_id__$j,
+    __vue_is_functional_template__$j,
+    __vue_module_identifier__$j,
+    browser,
+    undefined
+  );
+
+//import GA from '../../lib/math/ganja.esm.js';
+let GA$5 = window['Algebra'];
+
+let Planes = class Planes {
+
+  static ga() {
+
+
+    GA$5( 4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
+
+      // no                  = 1e5 - 1e4  origin
+      // ni                  = 0.5(1e4 + 1e5)  inifinity
+      // nino                = ni ^ no
+      // points(x,y,z)       = no + x*1e1 + y*1e2 + z*1e3 + 0.5 * ( x*x + y*y + z*z ) * ni;
+      // circle(p1,p2,p3 )   = p1^p2^p3
+      // sphere(p1,p2,p3,p4) = p1^p2^p3^p4
+      // sphere(p,r)         = !(p-r*ni)
+      // sphere(p,r)         = (p,r) => !(p-r*ni)
+      // line(p1,p2)         = p1 ^ p2
+      // lineINF(p1,p2)      = p1 ^ p2 ^ ni
+      // join                = p1 ^ p2
+      // meet                = p1 & p2
+      // rotor(a,b)          = exp((a/2)*b)
+
+      // We start by defining a null basis, and upcasting for points
+   // let total = 5.0;
+      let scale = 0.2;
+      let xs = scale;
+      let ys = scale;
+      let zs = scale;
+   // let range = total * scale;
+      let ni = 1e4   + 1e5;
+      let no = 0.5e5 - 0.5e4;
+      // let nino = ni ^ no;
+   // let up = (x) => no + x + .5 * x * x * ni;
+
+      let point = (xa,ya,za) => {
+        let x = xa*xs, y=ya*ys, z=za*zs;
+        return no + x*1e1 + y*1e2 + z*1e3 + 0.5 * ( x*x + y*y + z*z ) * ni; };
+      let planeDR = (p1,p2,p3,p4) => [p1,p2,p3,p4];
+
+      let r   = 3;
+   // let h   = r * 0.5;
+      let bne = point(  r,  r,  r );
+      let bse = point(  r, -r,  r );
+      let bnw = point( -r,  r,  r );
+      let bsw = point( -r, -r,  r );
+      let fne = point(  r,  r, -r );
+      let fse = point(  r, -r, -r );
+      let fnw = point( -r,  r, -r );
+      let fsw = point( -r, -r, -r );
+
+   // let pb = plane3P(bne,bnw,bsw), db = planeDR(bne,bnw,bsw,bse);
+      let de = planeDR(bne,fne,fse,bse);
+   // let pn = plane3P(bne,bnw,fnw), dn = planeDR(bne,bnw,fnw,fne);
+      let dw = planeDR(bnw,fnw,fsw,bsw);
+      let ds = planeDR(bse,bsw,fsw,fse);
+
+   // let line     = (p1,p2) => [p1,p2];
+   // let planeBR  = (b,r)   => !( b + r * scale * ni );
+      let spherePR = (p,r)   => !( p - r * scale * ni );
+   // let grid     = (b,r,n) => plane(b,r);
+
+      // Next we'll define some objects.
+      let p0 = point(0, 0, 0 );                           // point
+      let sc = spherePR( p0,0.5 ); // !(p1 - 0.20 * ni);  // main dual sphere around point (interactive)
+
+
+    let items = [
+      0xFFFFFF,   bne, 'bne', bse, 'bse', bnw, 'bnw', bsw, 'bsw',
+      0xFFFFFF,   fne, 'fne', fse, 'fse', fnw, 'fnw', fsw, 'fsw',
+      0xFFFFFF,   de, dw, ds,
+      0xFFFFFF,   p0, sc, "Sc" ];
+
+    let svg = Element.graph( () => {
+       return items; },
+      { conformal:true, camera:1+.5e01-.5e02, gl:false, grid:false } );
+
+    window.Style.process( 'Planes', svg );
+
+  } ); } };
+
+/*
+     // 0xFF00FF,   lt, "Pr&Lt",                  // line intersect plane
+     // 0x0000FF,   m1, "Sc&Pb",                  // sphere meet plane
+     // 0x888800,   m2, "Sc&Lt",                  // sphere meet line
+     // 0x0088FF,   m3, "Sc&Sl",                  // sphere meet sphere
+     // 0x008800,   m4, "Sc&Cr",                  // sphere meet circle
+     // 0x880000,   m5, "Cr&Pr",                  // circle meet sphere
+     // 0x888800,   lp,                      // line and circle
+ */
+
+//import GA from '../../lib/math/ganja.esm.js';
+let GA$6 = window['Algebra'];
+
+let Sphere = class Sphere {
+
+  static ga() {
+
+
+    GA$6(4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
+
+      // console.log( this.describe() );
+
+      // We start by defining a null basis, and upcasting for points
+      let ni = 1e4 + 1e5, no = .5e5 - .5e4;
+      let up = (x) => no + x + .5 * x * x * ni;
+
+      // Next we'll define 4 points
+      let p1 = up(1e1), p2 = up(1e2), p3 = up(-1e3), p4 = up(-1e2);
+
+      // The outer product can be used to construct the sphere through
+      // any four points.
+      let s = () => p1 ^ p2 ^ p3 ^ p4;
+
+      // The outer product between any three points and infinity is a plane.
+      let p = () => p1 ^ p2 ^ p3 ^ ni;
+
+      // Graph the items. (hex numbers are html5 colors, two extra first bytes = alpha)
+      let canvas = Element.graph([
+        0x00FF0000, p1, "p1", p2, "p2", p3, "p3", p4, "p4", // points
+        0xE0008800, p, "p",                                 // plane
+        0xE00000FF, s, "s"                                  // sphere
+      ], { conformal:true, gl:true, grid:false });
+
+      //let context = canvas.getContext('webgl');
+      //context.fillStyle = '#000000';
+
+      window.Style.process( 'Sphere', canvas );
+
+    } ); } };
+
+//
+//import Conform from '../../src/ganja/4D/Conform.js';
+
+  var script$i = {
+    
+    components:{ 'd-dabs':Dabs },
+
+    data() {
+      return { comp:'Geom4D', key:'Planes', pages:{
+          Planes:  { title:'Planes',  key:'Planes',  klass:Planes,  created:false },
+          Sphere:  { title:'Sphere',  key:'Sphere',  klass:Sphere,  created:false }
+       // Conform: { title:'Conform', key:'Conform', klass:Conform, created:false }
+        } } },
+    
+    methods: {
+
+      isPage: function(key) {
+        return this.key === key; },
+
+      onTabs: function(key) {
+        if( this.pages[key] ) {
+          this.key = key;
+          this.create(this.key); } },
+
+      create: function( key ) {
+        // console.log( 'Geom4D.created()', { key:key, refs:this.$refs } );
+        if( !this.pages[key].created ) {
+          Style.init( key, this.$refs[key][0] );
+          this.pages[key].created = true;
+          this.pages[key].klass.ga(); } }
+    },
+
+    mounted: function () {
+      // console.log( 'Geom4D.mounted()', { refs:this.$refs } );
+      this.onTabs( this.key );
+      this.subscribe( 'Geom', this.comp+'.vue', (key) => {
+        if( typeof(key)==='string' ) {
+          this.onTabs( key ); } } ); }
+
+  };
+
+/* script */
+const __vue_script__$k = script$i;
+
+/* template */
+var __vue_render__$h = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    [
+      _c("d-dabs", {
+        attrs: { comp: "Geom", pages: _vm.pages, init: _vm.key }
+      }),
+      _vm._v(" "),
+      _vm._l(_vm.pages, function(page) {
+        return [
+          _c("div", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isPage(page.key),
+                expression: "isPage(page.key)"
+              }
+            ],
+            key: page.key,
+            ref: page.key,
+            refInFor: true,
+            staticClass: "page"
+          })
+        ]
+      })
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$h = [];
+__vue_render__$h._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$k = undefined;
+  /* scoped */
+  const __vue_scope_id__$k = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$k = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$k = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var Geom4D = normalizeComponent_1(
+    { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
+    __vue_inject_styles__$k,
+    __vue_script__$k,
+    __vue_scope_id__$k,
+    __vue_is_functional_template__$k,
+    __vue_module_identifier__$k,
+    undefined,
     undefined
   );
 
@@ -26641,10 +27342,10 @@ let Draw = {
 };
 
 /* script */
-const __vue_script__$i = Draw;
+const __vue_script__$l = Draw;
 
 /* template */
-var __vue_render__$f = function() {
+var __vue_render__$i = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -26678,32 +27379,32 @@ var __vue_render__$f = function() {
     2
   )
 };
-var __vue_staticRenderFns__$f = [];
-__vue_render__$f._withStripped = true;
+var __vue_staticRenderFns__$i = [];
+__vue_render__$i._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$i = function (inject) {
+  const __vue_inject_styles__$l = function (inject) {
     if (!inject) return
     inject("data-v-be4bc304_0", { source: ".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$i = undefined;
+  const __vue_scope_id__$l = undefined;
   /* module identifier */
-  const __vue_module_identifier__$i = undefined;
+  const __vue_module_identifier__$l = undefined;
   /* functional template */
-  const __vue_is_functional_template__$i = false;
+  const __vue_is_functional_template__$l = false;
   /* style inject SSR */
   
 
   
   var Draw$1 = normalizeComponent_1(
-    { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
-    __vue_inject_styles__$i,
-    __vue_script__$i,
-    __vue_scope_id__$i,
-    __vue_is_functional_template__$i,
-    __vue_module_identifier__$i,
+    { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
+    __vue_inject_styles__$l,
+    __vue_script__$l,
+    __vue_scope_id__$l,
+    __vue_is_functional_template__$l,
+    __vue_module_identifier__$l,
     browser,
     undefined
   );
@@ -26749,7 +27450,7 @@ __vue_render__$f._withStripped = true;
 //
 
 
-var script$g = {
+var script$j = {
   
   props: { pcomp:{ type:String, default:'None' } },
   
@@ -26806,10 +27507,10 @@ var script$g = {
 };
 
 /* script */
-const __vue_script__$j = script$g;
+const __vue_script__$m = script$j;
 
 /* template */
-var __vue_render__$g = function() {
+var __vue_render__$j = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -26977,32 +27678,32 @@ var __vue_render__$g = function() {
     2
   )
 };
-var __vue_staticRenderFns__$g = [];
-__vue_render__$g._withStripped = true;
+var __vue_staticRenderFns__$j = [];
+__vue_render__$j._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$j = function (inject) {
+  const __vue_inject_styles__$m = function (inject) {
     if (!inject) return
     inject("data-v-7e140819_0", { source: "@import '../../css/fontawesome/init.css';\n.comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  grid-template-columns: 7% 31% 31% 31%;\n  grid-template-rows: 7% 12% 27% 27% 27%;\n  grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.comp .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .prac {\n  background-color: #603;\n  border-radius: 36px;\n  width: 90%;\n  height: 80%;\n  font-size: 1em;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 33% 33% 34%;\n  grid-template-rows: 33% 33% 34%;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.comp .prac .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .cen {\n  font-size: 1.3em;\n}\n.comp .prac div {\n  font-size: 1.1em;\n}\n.comp .disp {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  font-size: 1.2em;\n}\n.comp .disp i {\n  display: inline-block;\n  margin-right: 0.25em;\n}\n.comp .disp .name {\n  display: inline-block;\n}\n.comp .disp .desc {\n  display: none;\n  margin: 0.5em 0.5em 0.5em 0.5em;\n  text-align: left;\n}\n.comp .area {\n  display: grid;\n  grid-template-columns: 6% 22% 72%;\n  grid-template-areas: \"icon name desc\";\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n  margin-left: 1.5em;\n  width: 90%;\n  height: auto;\n  font-size: 1.3em;\n}\n.comp .area i {\n  grid-area: icon;\n}\n.comp .area .name {\n  grid-area: name;\n  font-weight: 900;\n}\n.comp .area .desc {\n  grid-area: desc;\n}\n.comp .none {\n  display: none;\n}\n.comp .fullDispDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n  border-radius: 72px;\n}\n.comp .fullDispDir .disp {\n  justify-self: center;\n  margin: 0;\n}\n.comp .fullDispDir .disp i {\n  font-size: 4.8em !important;\n}\n.comp .fullDispDir .disp .name {\n  font-size: 4.8em !important;\n}\n.comp .fullDispDir .disp .desc {\n  font-size: 2.4em !important;\n  display: block;\n}\n.comp .fullDispDir .area {\n  font-size: 3em !important;\n  padding-bottom: 0;\n}\n.comp .none {\n  display: none;\n}\n.comp .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.comp .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.comp .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.comp .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.comp .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.comp .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.comp .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.comp .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n.comp .fullDispDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n  border-radius: 72px;\n}\n.comp .fullDispDir .disp {\n  justify-self: center;\n  margin: 0;\n}\n.comp .fullDispDir .disp i {\n  font-size: 4.8em !important;\n}\n.comp .fullDispDir .disp .name {\n  font-size: 4.8em !important;\n}\n.comp .fullDispDir .disp .desc {\n  font-size: 2.4em !important;\n  display: block;\n}\n.comp .fullDispDir .area {\n  font-size: 3em !important;\n  padding-bottom: 0;\n}\n.comp .em .prac .cen,\n.comp .in .prac .cen,\n.comp .en .prac .cen {\n  font-size: 1em;\n}\n.comp .row {\n  background-color: #603;\n  border-radius: 36px;\n  margin-left: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 1em;\n  font-weight: bold;\n  display: grid;\n}\n.comp .row div {\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n  font-size: 1.8em;\n  color: wheat;\n}\n.comp .row i {\n  margin-bottom: 0.2em;\n  display: block;\n}\n", map: {"version":3,"sources":["Prac.vue","/Users/ax/Documents/prj/aug/vue/page/Prac.vue"],"names":[],"mappings":"AAAA,wCAAwC;AACxC;EACE,uBAAuB;EACvB,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,qCAAqC;EACrC,sCAAsC;EACtC,6GAA6G;EAC7G,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,eAAe;EACf,eAAe;EACf,YAAY;EACZ,gBAAgB;EAChB,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;ECCvB,mBAAA;EDCE,qBAAqB;ECCvB,mBAAA;AACA;ADCA;ECCA,aAAA;EACA,cAAA;EDCE,qBAAqB;ECCvB,mBAAA;EACA,qBAAA;EDCE,mBAAmB;ACCrB;ADCA;ECCA,aAAA;EACA,eAAA;EDCE,qBAAqB;ECCvB,mBAAA;EDCE,qBAAqB;ECCvB,mBAAA;AACA;ADCA;ECCA,aAAA;EDCE,aAAa;ECCf,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,mBAAA;AACA;AACA;EACA,aAAA;EDCE,aAAa;ECCf,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,mBAAA;AACA;AACA;EACA,aAAA;EACA,gBAAA;EDCE,qBAAqB;ECCvB,mBAAA;EACA,qBAAA;EACA,mBAAA;AACA;ADCA;ECCA,aAAA;EACA,aAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EDCE,mBAAmB;ACCrB;ADCA;ECCA,sBAAA;EACA,mBAAA;EACA,UAAA;EACA,WAAA;EACA,cAAA;EACA,iBAAA;EACA,aAAA;EDCE,kCAAkC;ECCpC,+BAAA;EDCE,gEAAgE;ACClE;AACA;EACA,aAAA;EACA,gBAAA;EACA,qBAAA;EACA,mBAAA;EACA,mBAAA;AACA;AACA;EACA,aAAA;EDCE,eAAe;ECCjB,qBAAA;EACA,mBAAA;EACA,mBAAA;AACA;AACA;EACA,aAAA;EACA,cAAA;EDCE,qBAAqB;ECCvB,mBAAA;EDCE,mBAAmB;ACCrB;AACA;EACA,aAAA;EACA,eAAA;EDCE,qBAAqB;EACrB,mBAAmB;ECCrB,mBAAA;ADCA;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,eAAe;EACf,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,oBAAoB;AACtB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,aAAa;EACb,+BAA+B;EAC/B,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,iCAAiC;EACjC,qCAAqC;EACrC,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;EAChB,kBAAkB;EAClB,UAAU;EACV,YAAY;EACZ,gBAAgB;AAClB;AACA;EACE,eAAe;AACjB;AACA;EACE,eAAe;EACf,gBAAgB;AAClB;AACA;EACE,eAAe;AACjB;AACA;EACE,aAAa;AACf;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;EACb,mBAAmB;AACrB;AACA;EACE,oBAAoB;EACpB,SAAS;AACX;AACA;EACE,2BAA2B;AAC7B;AACA;EACE,2BAA2B;AAC7B;AACA;EACE,2BAA2B;EAC3B,cAAc;AAChB;AACA;EACE,yBAAyB;EACzB,iBAAiB;AACnB;AACA;EACE,aAAa;AACf;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;AACf;AACA;EACE,cAAc;EACd,WAAW;EACX,YAAY;EACZ,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;AACtB;AACA;EACE,mBAAmB;AACrB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,cAAc;EACd,cAAc;AAChB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;EACb,mBAAmB;AACrB;AACA;EACE,oBAAoB;EACpB,SAAS;AACX;AACA;EACE,2BAA2B;AAC7B;AACA;EACE,2BAA2B;AAC7B;AACA;EACE,2BAA2B;EAC3B,cAAc;AAChB;AACA;EACE,yBAAyB;EACzB,iBAAiB;AACnB;AACA;;;EAGE,cAAc;AAChB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,gBAAgB;EAChB,UAAU;EACV,WAAW;EACX,cAAc;EACd,iBAAiB;EACjB,aAAa;AACf;AACA;EACE,kBAAkB;EAClB,oBAAoB;EACpB,kBAAkB;EAClB,gBAAgB;EAChB,YAAY;AACd;AACA;EACE,oBAAoB;EACpB,cAAc;AAChB","file":"Prac.vue","sourcesContent":["@import '../../css/fontawesome/init.css';\n.comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  grid-template-columns: 7% 31% 31% 31%;\n  grid-template-rows: 7% 12% 27% 27% 27%;\n  grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.comp .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .prac {\n  background-color: #603;\n  border-radius: 36px;\n  width: 90%;\n  height: 80%;\n  font-size: 1em;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 33% 33% 34%;\n  grid-template-rows: 33% 33% 34%;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.comp .prac .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .cen {\n  font-size: 1.3em;\n}\n.comp .prac div {\n  font-size: 1.1em;\n}\n.comp .disp {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  font-size: 1.2em;\n}\n.comp .disp i {\n  display: inline-block;\n  margin-right: 0.25em;\n}\n.comp .disp .name {\n  display: inline-block;\n}\n.comp .disp .desc {\n  display: none;\n  margin: 0.5em 0.5em 0.5em 0.5em;\n  text-align: left;\n}\n.comp .area {\n  display: grid;\n  grid-template-columns: 6% 22% 72%;\n  grid-template-areas: \"icon name desc\";\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n  margin-left: 1.5em;\n  width: 90%;\n  height: auto;\n  font-size: 1.3em;\n}\n.comp .area i {\n  grid-area: icon;\n}\n.comp .area .name {\n  grid-area: name;\n  font-weight: 900;\n}\n.comp .area .desc {\n  grid-area: desc;\n}\n.comp .none {\n  display: none;\n}\n.comp .fullDispDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n  border-radius: 72px;\n}\n.comp .fullDispDir .disp {\n  justify-self: center;\n  margin: 0;\n}\n.comp .fullDispDir .disp i {\n  font-size: 4.8em !important;\n}\n.comp .fullDispDir .disp .name {\n  font-size: 4.8em !important;\n}\n.comp .fullDispDir .disp .desc {\n  font-size: 2.4em !important;\n  display: block;\n}\n.comp .fullDispDir .area {\n  font-size: 3em !important;\n  padding-bottom: 0;\n}\n.comp .none {\n  display: none;\n}\n.comp .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.comp .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.comp .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.comp .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.comp .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.comp .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.comp .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.comp .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n.comp .fullDispDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n  border-radius: 72px;\n}\n.comp .fullDispDir .disp {\n  justify-self: center;\n  margin: 0;\n}\n.comp .fullDispDir .disp i {\n  font-size: 4.8em !important;\n}\n.comp .fullDispDir .disp .name {\n  font-size: 4.8em !important;\n}\n.comp .fullDispDir .disp .desc {\n  font-size: 2.4em !important;\n  display: block;\n}\n.comp .fullDispDir .area {\n  font-size: 3em !important;\n  padding-bottom: 0;\n}\n.comp .em .prac .cen,\n.comp .in .prac .cen,\n.comp .en .prac .cen {\n  font-size: 1em;\n}\n.comp .row {\n  background-color: #603;\n  border-radius: 36px;\n  margin-left: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 1em;\n  font-weight: bold;\n  display: grid;\n}\n.comp .row div {\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n  font-size: 1.8em;\n  color: wheat;\n}\n.comp .row i {\n  margin-bottom: 0.2em;\n  display: block;\n}\n","\n<template>\n  <div class=\"comp\">\n    <template v-for=\"prac in practices\">\n      <div v-show=\"isPrac(prac.name)\" :class=\"pracDir(prac.dir)\" :key=\"prac.name\">\n        <div class=\"prac\">\n          <div v-show=\"isDisp(prac.name)\" :class=\"dispDir('cen')\" :style=\"style(prac.hsv)\">\n            <div class=\"disp\" @click=\"pubPrac(prac.name)\">\n              <i   :class=\"prac.icon\"></i>\n              <span class=\"name\">{{prac.name}}</span>\n              <span class=\"desc\">{{prac.desc}}</span>\n            </div>\n          </div>\n          <template  v-for=\"disp in prac.disps\">\n            <div v-show=\"isDisp(disp.name)\" :class=\"dispDir(disp.dir)\" :style=\"style(disp.hsv)\">\n            <div class=\"disp\" @click=\"pubDisp(prac.name,disp.name)\">\n              <i   :class=\"disp.icon\"></i>\n              <span class=\"name\">{{disp.name}}</span>\n              <span class=\"desc\">{{disp.desc}}</span>\n            </div>\n            <template v-for=\"area in disp.areas\">\n              <div :class=\"areaDir()\">\n                <i :class=\"area.icon\"></i>\n                <span class=\"name\">{{area.name}}</span>\n                <span class=\"desc\">{{area.desc}}</span>\n              </div>\n            </template>\n          </div>\n          </template>\n        </div>\n      </div>\n    </template>\n    <template v-for=\"row in rows\">\n      <div v-show=\"isRows()\" :class=\"row.dir\" :key=\"row.name\"><div class=\"row\">\n        <div><i :class=\"row.icon\"></i>{{row.name}}</div></div></div>\n    </template>\n  </div>  \n</template>\n\n<script type=\"module\">\n\n  export default {\n    \n    props: { pcomp:{ type:String, default:'None' } },\n    \n    data() { return {\n      comp:'None', prac:'All', disp:'All', tab:'Practices', practices:{},\n      rows: {\n        Learn:{ name:'Learn', dir:'le', icon:\"fas fa-graduation-cap\" },\n        Do:{    name:'Do',    dir:'do', icon:\"fas fas fa-cogs\" },\n        Share:{ name:'Share', dir:'sh', icon:\"fas fa-share-alt-square\" } } } },\n    \n    methods: {\n      isPrac: function (prac) {\n        return this.prac===prac || this.prac==='All' },\n      isDisp: function (disp) {\n        return this.disp===disp || this.disp==='All' },\n      isRows: function () {\n        return this.prac==='All' },\n      pubTab: function (tab) {\n        this.tab = tab },\n      classTab: function (tab) {\n        return this.tab===tab ? 'tab-active' : 'tab' },\n      pubPrac: function (prac) {\n        this.publish( this.comp, { prac:prac, disp:'All' } ); },\n      pubDisp: function (prac,disp) {\n        this.publish( this.comp, { prac:prac, disp:disp  } ); },\n      onPrac: function (prac) {\n        this.prac = prac; this.disp='All'; },\n      onDisp: function (prac,disp) {\n        this.prac = prac; this.disp=disp; },\n      onTabs: function (tab) {\n        if( tab==='Practices' && this.tab==='Practices' && this.prac!=='All' ) {\n          this.onPrac('All'); }\n        this.tab = tab; },\n      pracDir: function(dir) {\n        return this.prac==='All' ? dir : 'fullPracDir'; },\n      dispDir: function(dir) {\n        return this.disp==='All' ? dir : 'fullDispDir'; },\n      areaDir: function() {\n        return this.prac==='All' ? 'none' : 'area' },\n      style: function( hsv ) {\n        return { backgroundColor:this.toRgbaHsv(hsv) }; } },\n\n    beforeMount: function() {\n      this.comp = this.$route.name.substring(0,4);  },\n      // console.log( 'Prac.beforeMount()', this.$route.name, this.comp, this.pcomp  );\n\n    mounted: function () {\n      this.practices = this.pracs(this.comp,'Cols');\n      this.subscribe(  this.comp, this.comp+'.vue', (obj) => {\n         if( obj.disp==='All' ) { this.onPrac(obj.prac); }\n         else                   { this.onDisp(obj.prac,obj.disp); } } );\n      this.subscribe(  \"Tabs\",    this.comp+'.vue', (obj) => {\n        this.onTabs(obj); } ); }\n  }\n         \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../css/fontawesome/init.css';\n\n  .grid3x3() { display:grid; grid-template-columns:33% 33% 34%; grid-template-rows:33% 33% 34%;\n               grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n  \n  .grid4x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:13% 29% 29% 29%;\n    grid-template-areas: \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid5x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:7% 12% 27% 27% 27%;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid1x3() { display:grid; grid-template-columns:6% 22% 72%; grid-template-areas: \"icon name desc\"; }\n  \n  .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n                  justify-items:center; align-items:center; }\n  \n  .ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }\n  \n  .bgc( @bg )\n    { background-color:@bg; } // top | right | bottom | left\n  \n  .comp { background-color:black; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;\n    \n    .grid5x4(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid\n      .tabs{ grid-area:tabs; display:inline; color:wheat; font-size:1.2em;\n             justify-self:start; align-self:center; text-align:left; }\n      .cm { .pdir(cm); } .em   { .pdir(em);   } .in    { .pdir(in); }    .en   { .pdir(en);   }\n      .le { .pdir(le); } .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }\n      .do { .pdir(do); } .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }\n      .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }\n    \n      // Placed one level below the 9 Practices Grid\n    .prac { background-color:#603; border-radius:36px; width:90%; height:80%; font-size:1em; font-weight:bold;\n      .grid3x3(); // The 4 Displine plus Practiice name Grid\n                             .north { .ddir(north); }\n      .west { .ddir(west); } .cen   { .ddir(cen);   } .east { .ddir(east); }\n                             .south { .ddir(south); }\n      .cen  { font-size:1.3em; }\n      div   { font-size:1.1em; } }\n  \n    .disp {   display:inline; justify-self:center; align-self:center; text-align:center; font-size:1.2em;\n      i     { display:inline-block;  margin-right: 0.25em; }\n      .name { display:inline-block; }\n      .desc { display:none; margin:0.5em 0.5em 0.5em 0.5em; text-align:left; } }\n  \n    .area { .grid1x3(); justify-self:start; align-self:center; text-align:left; margin-left:1.5em;\n      width:90%; height:auto; font-size:1.3em;\n      i     { grid-area:icon; }\n      .name { grid-area:name; font-weight:900; }\n      .desc { grid-area:desc; } }\n  \n    .none { display:none; }\n  \n    // Placed one level above .dir at the 4 Disipline plus Practice name Grid Direction\n    .fullDispDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid; border-radius:72px;\n      .disp { justify-self:center; margin:0;\n        i     { font-size:4.8em !important; }\n        .name { font-size:4.8em !important; }\n        .desc { font-size:2.4em !important; display:block; } }  // Turns on .disp .desc\n      .area {   font-size:3.0em !important; padding-bottom:0; } }\n  \n    .none { display:none; }\n    \n    // Placed one level above .prac at the 9 Practices Grid Direction\n    .fullPracDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;\n      .prac { font-size:1em; width:100%; height:100%;\n              justify-self:center; align-self:center; display:grid; border-radius:0.5em;\n        div {     padding-bottom:2em;\n          .disp { padding-bottom:0;\n            i     { font-size:1.6em; }\n            .name { font-size:1.6em; }\n            .desc { font-size:1.0em; display:block; } } }  // Turns on .disp .desc\n          .area { padding-bottom:0; } } }\n  \n    // Placed one level above .dir at the 4 Disipline plus Practice name Grid Direction\n    .fullDispDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid; border-radius:72px;\n       .disp { justify-self:center; margin:0;\n         i     { font-size:4.8em !important; }\n         .name { font-size:4.8em !important; }\n         .desc { font-size:2.4em !important; display:block; } }  // Turns on .disp .desc\n       .area {   font-size:3.0em !important; padding-bottom:0; } }\n    \n    .em, .in, .en { .prac .cen { font-size:1em; } } // Font size columns\n  \n    .row { background-color:#603; border-radius:36px; margin-left:10%; width:80%; height:80%; font-size:1em;\n      font-weight:bold; display:grid;\n      div { text-align:center; justify-self:center;  align-self:center; font-size:1.8em; color:wheat; }\n      i { margin-bottom: 0.2em; display:block; } }\n    \n    \n  }\n  \n</style>\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$j = undefined;
+  const __vue_scope_id__$m = undefined;
   /* module identifier */
-  const __vue_module_identifier__$j = undefined;
+  const __vue_module_identifier__$m = undefined;
   /* functional template */
-  const __vue_is_functional_template__$j = false;
+  const __vue_is_functional_template__$m = false;
   /* style inject SSR */
   
 
   
   var Prac = normalizeComponent_1(
-    { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
-    __vue_inject_styles__$j,
-    __vue_script__$j,
-    __vue_scope_id__$j,
-    __vue_is_functional_template__$j,
-    __vue_module_identifier__$j,
+    { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
+    __vue_inject_styles__$m,
+    __vue_script__$m,
+    __vue_scope_id__$m,
+    __vue_is_functional_template__$m,
+    __vue_module_identifier__$m,
     browser,
     undefined
   );
@@ -29067,7 +29768,7 @@ var Connect$1 = Connect;
 
 //
 
-var script$h = {
+var script$k = {
 
   data() {
     return { comp:'None', prac:'All', disp:'All', tab:'Connections',
@@ -29147,10 +29848,10 @@ var script$h = {
  };
 
 /* script */
-const __vue_script__$k = script$h;
+const __vue_script__$n = script$k;
 
 /* template */
-var __vue_render__$h = function() {
+var __vue_render__$k = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -29197,32 +29898,32 @@ var __vue_render__$h = function() {
     2
   )
 };
-var __vue_staticRenderFns__$h = [];
-__vue_render__$h._withStripped = true;
+var __vue_staticRenderFns__$k = [];
+__vue_render__$k._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$k = function (inject) {
+  const __vue_inject_styles__$n = function (inject) {
     if (!inject) return
     inject("data-v-4ef39e18_0", { source: ".conn {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  grid-template-columns: 33.3% 33.3% 33.4%;\n  grid-template-rows: 7% 31% 31% 31%;\n  grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 99%;\n  height: 98%;\n  font-size: 1em;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n", map: {"version":3,"sources":["Conn.vue","/Users/ax/Documents/prj/aug/vue/page/Conn.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,wCAAwC;EACxC,kCAAkC;EAClC,iFAAiF;EACjF,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,eAAe;EACf,eAAe;EACf,YAAY;EACZ,gBAAgB;EAChB,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,mBAAmB;EACnB,UAAU;ECCZ,WAAA;EACA,cAAA;EDCE,iBAAiB;ACCnB;AACA;EDCE,oBAAoB;ECCtB,kBAAA;EACA,kBAAA;ADCA;ACCA;EACA,kBAAA;EDCE,QAAQ;ECCV,OAAA;EACA,SAAA;EACA,UAAA;EACA,aAAA;AACA;AACA;EACA,cAAA;EDCE,WAAW;ECCb,YAAA;EACA,oBAAA;EDCE,kBAAkB;ECCpB,aAAA;EACA,oBAAA;AACA;AACA;EACA,mBAAA;AACA;AACA;EACA,iBAAA;AACA;AACA;EACA,gBAAA;ADCA;AACA;EACE,gBAAgB;AAClB;AACA;EACE,cAAc;EACd,cAAc;AAChB;AACA;EACE,iBAAiB;AACnB","file":"Conn.vue","sourcesContent":[".conn {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  grid-template-columns: 33.3% 33.3% 33.4%;\n  grid-template-rows: 7% 31% 31% 31%;\n  grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 99%;\n  height: 98%;\n  font-size: 1em;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n","\n<template>\n  <div id=\"Conn\" class=\"conn\" ref=\"Conn\">\n    <template v-for=\"prac in practices\">\n      <div v-show=\"isPrac(prac.name)\" ref=\"Prac\" :class=\"pracDir(prac.dir)\" :key=\"prac.name\">\n        <div :id=\"prac.name\" :ref=\"prac.name\" class=\"prac\"\n          @click=\"pubPrac(prac.name)\" style=\"background-color:rgba(97,56,77,1.0)\">\n        </div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Build   from '../../pub/cube/Build.js'\n  import Connect from '../../pub/conn/Connect.js'\n\n  export default {\n\n    data() {\n      return { comp:'None', prac:'All', disp:'All', tab:'Connections',\n               build:{}, connects:{}, practices:{} }; },\n\n    methods: {\n      isPrac: function (prac) {\n        return this.prac===prac || this.prac==='All' },\n      onPrac: function (prac) {\n        if( prac==='All' && this.prac!=='All' ) {\n          this.connects[this.prac].layout( this.size(this.prac), 'Restore'); }\n        if( prac!=='All' && typeof(this.connects[prac])==='object' ) { // Expand prac to Comp size\n          this.connects[prac].layout( this.size(prac), 'Expand'); }\n        this.prac = prac; this.disp='All';  },\n      onDisp: function (prac,disp) {\n        this.prac = prac; this.disp=disp; },\n      onTabs: function (tab) {\n        if( tab==='Connections' && this.tab==='Connections'  ) {\n          this.onPrac('All'); }\n        this.tab = tab; },\n      pracDir: function(dir) {\n        return this.prac==='All' ? dir : 'fullPracDir'; },\n      pubPrac: function (prac) {\n        this.publish( this.comp, { prac:prac, disp:'All' } ); },\n      style: function( hsv ) {\n        return { backgroundColor:this.toRgbaHsv(hsv) }; },\n      \n      size: function(prac) {\n        let elem = this.$refs[prac][0]\n        let sz   = {}\n        if( typeof(this.$refs['Conn'])==='undefined' ) {\n          console.log( 'Conn.size() $refs[Conn] undefined', this.$refs ) }\n        sz.compWidth  = this.$refs['Conn']['clientWidth' ];\n        sz.compHeight = this.$refs['Conn']['clientHeight'];\n        sz.elemWidth  = elem['clientWidth' ];\n        sz.elemHeight = elem['clientHeight'];\n        // console.log( 'Conn.size()', prac, sz );\n        return sz;\n      },\n      \n      createConnects: function( stream, build ) {\n        for( let key of this.pkeys ) {\n            let prac = this.practices[key];\n            if( prac.row !== 'Dim' ) {\n              let elem = this.$refs[key][0]\n              this.connects[prac.name] = new Connect( stream, build, prac, elem, this.size(key) ); } }\n        return this.connects; },\n      \n      resize: function() {\n        for( let key of this.pkeys ) {\n          let size  = this.size(key);\n          let level = key!==this.prac ? 'Resize' : 'Expand';\n          if( level==='Expand') { this.connects[key].lastSize(size) }\n          this.connects[key].layout( size, level ); } }\n    },\n\n    beforeMount: function() {\n      this.comp = this.$route.name.substring(0,4); },\n      //console.log( 'Conn.beforeMount()', this.$route.name, this.comp );\n\n    mounted: function () {\n      this.build     = new Build(  this.batch() );\n      this.practices = this.conns( this.comp );\n      this.pkeys     = this.keys(  this.practices )\n      this.subscribe(  this.comp,  this.comp+'.vue', (obj) => {\n        if( obj.disp==='All' ) {   this.onPrac(obj.prac); }\n        else                   {   this.onDisp(obj.prac,obj.disp); } } );\n      this.subscribe(  \"Tabs\",     this.comp+'.vue', (obj) => {\n        this.onTabs(obj); } );\n      this.$nextTick( function() {\n        this.connects  = this.createConnects( this.stream(), this.build ); } ) },\n    \n    created: function () {\n      window.addEventListener(   'resize', this.resize ) },\n    destroyed: function () {\n      window.removeEventListener('resize', this.resize ) }\n   }\n\n</script>\n\n<style lang=\"less\">\n  .grid5x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:7% 12% 27% 27% 27%;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid4x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:7% 31% 31% 31%;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid4x3() { display:grid; grid-template-columns:33.3% 33.3% 33.4%; grid-template-rows:7% 31% 31% 31%;\n    grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\"; }\n  \n  .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n    justify-items:center; align-items:center; }\n  \n  .conn { background-color:black; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;\n    .grid4x3(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid\n    .tabs{ grid-area:tabs; display:inline; color:wheat; font-size:1.2em;\n      justify-self:start; align-self:center; text-align:left; }\n    .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }\n    .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }\n    .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }\n    \n    .prac { display:grid; border-radius:36px; width:99%; height:98%; font-size:1em; font-weight:bold;\n      .name { justify-self:center; align-self:center; text-align:center; } }\n  \n    // Placed one level above .prac at the 9 Practices Grid Direction\n    .fullPracDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;\n      .prac { font-size:1em; width:100%; height:100%;\n        justify-self:center; align-self:center; display:grid; border-radius:0.5em;\n        div {     padding-bottom:2em;\n          .disp { padding-bottom:0;\n            i     { font-size:1.6em; }\n            .name { font-size:1.6em; }\n            .desc { font-size:1.0em; display:block; } } }  // Turns on .disp .desc\n        .area { padding-bottom:0; } } }\n  }\n</style>"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$k = undefined;
+  const __vue_scope_id__$n = undefined;
   /* module identifier */
-  const __vue_module_identifier__$k = undefined;
+  const __vue_module_identifier__$n = undefined;
   /* functional template */
-  const __vue_is_functional_template__$k = false;
+  const __vue_is_functional_template__$n = false;
   /* style inject SSR */
   
 
   
   var Conn = normalizeComponent_1(
-    { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
-    __vue_inject_styles__$k,
-    __vue_script__$k,
-    __vue_scope_id__$k,
-    __vue_is_functional_template__$k,
-    __vue_module_identifier__$k,
+    { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
+    __vue_inject_styles__$n,
+    __vue_script__$n,
+    __vue_scope_id__$n,
+    __vue_is_functional_template__$n,
+    __vue_module_identifier__$n,
     browser,
     undefined
   );
@@ -29237,19 +29938,19 @@ __vue_render__$h._withStripped = true;
 //
 //
 
-var script$i = {};
+var script$l = {};
 
 /* script */
-const __vue_script__$l = script$i;
+const __vue_script__$o = script$l;
 
 /* template */
-var __vue_render__$i = function() {
+var __vue_render__$l = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
   return _vm._m(0)
 };
-var __vue_staticRenderFns__$i = [
+var __vue_staticRenderFns__$l = [
   function() {
     var _vm = this;
     var _h = _vm.$createElement;
@@ -29259,31 +29960,31 @@ var __vue_staticRenderFns__$i = [
     ])
   }
 ];
-__vue_render__$i._withStripped = true;
+__vue_render__$l._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$l = function (inject) {
+  const __vue_inject_styles__$o = function (inject) {
     if (!inject) return
     inject("data-v-3971932b_0", { source: ".enli {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n", map: {"version":3,"sources":["Enli.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,uBAAuB;EACvB,YAAY;AACd","file":"Enli.vue","sourcesContent":[".enli {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$l = undefined;
+  const __vue_scope_id__$o = undefined;
   /* module identifier */
-  const __vue_module_identifier__$l = undefined;
+  const __vue_module_identifier__$o = undefined;
   /* functional template */
-  const __vue_is_functional_template__$l = false;
+  const __vue_is_functional_template__$o = false;
   /* style inject SSR */
   
 
   
   var Enli = normalizeComponent_1(
-    { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
-    __vue_inject_styles__$l,
-    __vue_script__$l,
-    __vue_scope_id__$l,
-    __vue_is_functional_template__$l,
-    __vue_module_identifier__$l,
+    { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
+    __vue_inject_styles__$o,
+    __vue_script__$o,
+    __vue_scope_id__$o,
+    __vue_is_functional_template__$o,
+    __vue_module_identifier__$o,
     browser,
     undefined
   );
@@ -29298,19 +29999,19 @@ __vue_render__$i._withStripped = true;
 //
 //
 
-var script$j = {};
+var script$m = {};
 
 /* script */
-const __vue_script__$m = script$j;
+const __vue_script__$p = script$m;
 
 /* template */
-var __vue_render__$j = function() {
+var __vue_render__$m = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
   return _vm._m(0)
 };
-var __vue_staticRenderFns__$j = [
+var __vue_staticRenderFns__$m = [
   function() {
     var _vm = this;
     var _h = _vm.$createElement;
@@ -29320,31 +30021,31 @@ var __vue_staticRenderFns__$j = [
     ])
   }
 ];
-__vue_render__$j._withStripped = true;
+__vue_render__$m._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$m = function (inject) {
+  const __vue_inject_styles__$p = function (inject) {
     if (!inject) return
     inject("data-v-f8ff832a_0", { source: ".data {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n", map: {"version":3,"sources":["Data.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,uBAAuB;EACvB,YAAY;AACd","file":"Data.vue","sourcesContent":[".data {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$m = undefined;
+  const __vue_scope_id__$p = undefined;
   /* module identifier */
-  const __vue_module_identifier__$m = undefined;
+  const __vue_module_identifier__$p = undefined;
   /* functional template */
-  const __vue_is_functional_template__$m = false;
+  const __vue_is_functional_template__$p = false;
   /* style inject SSR */
   
 
   
   var Data$2 = normalizeComponent_1(
-    { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
-    __vue_inject_styles__$m,
-    __vue_script__$m,
-    __vue_scope_id__$m,
-    __vue_is_functional_template__$m,
-    __vue_module_identifier__$m,
+    { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
+    __vue_inject_styles__$p,
+    __vue_script__$p,
+    __vue_scope_id__$p,
+    __vue_is_functional_template__$p,
+    __vue_module_identifier__$p,
     browser,
     undefined
   );
@@ -29375,10 +30076,10 @@ __vue_render__$j._withStripped = true;
   };
 
 /* script */
-const __vue_script__$n = Note;
+const __vue_script__$q = Note;
 
 /* template */
-var __vue_render__$k = function() {
+var __vue_render__$n = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -29399,721 +30100,33 @@ var __vue_render__$k = function() {
     2
   )
 };
-var __vue_staticRenderFns__$k = [];
-__vue_render__$k._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$n = function (inject) {
-    if (!inject) return
-    inject("data-v-05cf3c24_0", { source: ".note {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n", map: {"version":3,"sources":["Note.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX","file":"Note.vue","sourcesContent":[".note {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$n = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$n = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$n = false;
-  /* style inject SSR */
-  
-
-  
-  var Note$1 = normalizeComponent_1(
-    { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
-    __vue_inject_styles__$n,
-    __vue_script__$n,
-    __vue_scope_id__$n,
-    __vue_is_functional_template__$n,
-    __vue_module_identifier__$n,
-    browser,
-    undefined
-  );
-
-// Create a Clifford Algebra with 2,0,1 metric. 
-//import GA from '../../lib/math/ganja.esm.js';
-let GA = window['Algebra'];
-
-let Basics  = class Basics {
-
-  static ga () {
-
-    GA(2, 0, 1, () => {
-
-      // We work in dual space so we define our points to be bivectors. Ganja.js overloads
-      // scientific notation to specify basis blades.
-      // For readability we create a function that converts 2D euclidean coordinates
-      // to their 3D bivector representation.
-      let point = (x, y) => 1e12 - x * 1e02 + y * 1e01;
-
-      // Similarly, we can define lines directly. The euclidean line ax + by + c can be specified so :
-      let line = (a, b, c) => a * 1e1 + b * 1e2 + c * 1e0;
-
-      // Define 3 points.
-      let A = point(-1, 1), B = point(-1, -1), C = point(1, -1);
-
-      // Define the line y=x-0.5
-      let L = line(-1, 1, 0.5);
-
-      // Or by joining two points. We define M as a function so it will update when C or A are dragged.
-      let M = () => C & A;
-
-      // Points can also be found by intersecting two lines. We similarly define D as a function
-      // for interactive updates.
-      let D = () => L ^ M;
-
-      // We now use the graph function to create an SVG object that visualises our algebraic elements.
-      // The graph function accepts
-      // an array of items that it will render in order. It can render points, lines, labels, colors,
-      // line segments and polygons.
-
-      let graph = Element.graph( [
-        A, "A",         // Render point A and label it.
-        B, "B",         // Render point B and label it.
-        C, "C",         // Render point C and label them.
-        L, "L", M, "M", // Render and label lines.
-        D, "D",         // Intersection point of L and M
-        0xff0000,       // Set the color to red.
-        [B, C],          // Render line segment from B to C.
-        0xffcccc,       // Set the color to light red.
-        [A, B, C]         // render polygon ABC.
-      ], { grid:true });
-
-      window.Style.process( 'Basics', graph );
-
-    });
-  }
-};
-
-//
-
-var script$k = {
-
-  components:{ 'd-dabs':Dabs },
-
-  data() {
-    return { comp:'Geom3D', key:'Basics', pages:{
-      Basics:  { title:'Basics', key:'Basics', klass:Basics, created:false }
-  } } },
-
-  methods: {
-
-    isPage: function(key) {
-      return this.key === key; },
-
-    onTabs: function(key) {
-      if( this.pages[key] ) {
-        this.key = key;
-        this.create(this.key); } },
-
-    create: function( key ) {
-      // console.log( 'Geom3D.created()', { key:key, refs:this.$refs } );
-      if( !this.pages[key].created ) {
-        Style.init( key, this.$refs[key][0] );
-        this.pages[key].created = true;
-        this.pages[key].klass.ga(); } }
-  },
-
-  mounted: function () {
-    // console.log( 'Geom2D.mounted()', { refs:this.$refs } );
-    this.onTabs( this.key );
-    this.subscribe( 'Geom', this.comp+'.vue', (key) => {
-      if( typeof(key)==='string' ) {
-        this.onTabs( key ); } } ); }
-
-};
-
-/* script */
-const __vue_script__$o = script$k;
-
-/* template */
-var __vue_render__$l = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    [
-      _c("d-dabs", {
-        attrs: { comp: "Geom", pages: _vm.pages, init: _vm.key }
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.pages, function(page) {
-        return [
-          _c("div", {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.isPage(page.key),
-                expression: "isPage(page.key)"
-              }
-            ],
-            key: page.key,
-            ref: page.key,
-            refInFor: true,
-            staticClass: "page"
-          })
-        ]
-      })
-    ],
-    2
-  )
-};
-var __vue_staticRenderFns__$l = [];
-__vue_render__$l._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$o = function (inject) {
-    if (!inject) return
-    inject("data-v-65666b6c_0", { source: ".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n", map: {"version":3,"sources":["Geom2D.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf","file":"Geom2D.vue","sourcesContent":[".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$o = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$o = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$o = false;
-  /* style inject SSR */
-  
-
-  
-  var Geom2D = normalizeComponent_1(
-    { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
-    __vue_inject_styles__$o,
-    __vue_script__$o,
-    __vue_scope_id__$o,
-    __vue_is_functional_template__$o,
-    __vue_module_identifier__$o,
-    browser,
-    undefined
-  );
-
-//import GA from '../../lib/math/ganja.esm.js';
-let GA$1 = window['Algebra'];
-
-let Lines  = class Lines {
-
-  static ga() {
-
-  GA$1( 3, 0, 1, () => {
-
-  // We work in dual space. Our 1-blade's are dual-vectors (aka functionals of the
-  // form ax + by + cz + dw = 0).
-  // The four basis functionals are thus (x=0, y=0, z=0, w=0). In three dimensions
-  // these represent the yz, xz, xy and
-  // ideal plane.
-
-  // Specify a point directly (trivectors specified with overloaded e-notation.)
-  let point = (x,y,z)=>1e123-x*1e012+y*1e013+z*1e023;
-
-  // Lines can be defined using plucker coordinates
-  // let line = (px,py,pz,dx,dy,dz)=>px*1e01+py&1e02+pz*1e03+dx*1e12+dy*1e13+dz*1e23;
-
-  // Planes can be defined directly using e0,e1,e2,e3
-  // let plane = (a,b,c,d)=>d*1e0+a*1e1+b*1e2+c*1e3;
-
-  // Useful joins
-     let line_from_points  = (P1,P2)=>P1.Normalized&P2.Normalized;
-  // let plane_from_points = (P1,P2,P3)=>P1&P2&P3;
-  // let plane_from_point_and_line = (P,L)=>P&L;
-
-  // Usefull meets
-     let line_from_planes  = (p1,p2)=>p1^p2;
-  // let point_from_planes = (p1,p2,p3)=>p1^p2^p3;
-     let point_from_line_and_plane = (L,P)=>L^P;
-
-   // Create 5 points and some joining lines.
-      let A=point(0,-1,0  );
-      let B=point(1,1,-1  );
-      let C=point(-1,1,-1 );
-      let D=point(1,1, 1  );
-      let E=point(-1,1, 1 );
-      let centroid=A+B+C+D+E;
-      let camera=1e0;
-
-  // Graph the 3D items
-  let graph = Element.graph( ()=> {
-    let time=performance.now()/12000;
-    camera['set'](Math.cos(time)+Math.sin(time)*1e13);                      // rotate around Y
-    return [
-      0xddaaff,[A,B,C],                                            // graph on face
-      0xAA88FF,[A,B],[A,C],[A,D],[B,C],[B,D],[C,E],[A,E],[E,D],    // graph all edges
-      0x444444,A,"A",B,"B",C,"C",D,"D",E,"E",                      // graph all vertices
-      0xFF8888,C+E,centroid,"sum of points",
-      0x8888FF,line_from_points(centroid,C+E),"line from points ..",
-      0x44AA44,line_from_planes(A&B&C,B&C&D),"line from planes ..",
-      0x4488FF,point_from_line_and_plane(line_from_points(centroid,C+E),A&D&B),
-        "point from line and plane ..",
-      0xFFAA66,(B&D)+(C&E),"sum of lines"]; }, { animate:true, camera } );
-
-    window.Style.process( 'Lines', graph );
-
-  } ); } };
-
-//import GA from '../../lib/math/ganja.esm.js';
-let GA$2 = window['Algebra'];
-
-let Grids  = class Grids {
-
-  static ga() {
-
-  GA$2( 3, 0, 1, () => {  // PGA3D Projective Euclidean 3D space. (dual)
-
-  let items = [];
-  let origin=1e123, EX=-1e012, EY=1e013, EZ=1e012;
-  let point  = (x,y,z)=>origin+x*EX-y*EY+z*EZ;
-
-  let s =  0.20;    // xyz Scale
-  let t = 10.00*s; // Total lengths
-  let c =  8.66*s; // Cos(30)
-  let h =  5.00*s; // Sin(30) or Half
-  let i =  0.50*s; // 10% increment
-
-  let ooo = point(0,0 ,0 );
-  let xoo = point(c,-h, 0 );
-  let oyo = point(0,t, 0 );
-  let ooz = point(0,-h, c );
-  let xyo = point(c,h, 0 );
-  let oyz = point(0,h, c );
-  let xoz = point(c,-t, c );
-
-  items.push( 0xFFFFFF, ooo, 'ooo', xoo, 'xoo', oyo, 'oyo', ooz, 'ooz', 
-                        xyo, 'xyo', oyz, 'oyz', xoz, 'xoz' );
-
-  let xy = [ooo,xoo,xyo,oyo];
-  let yz = [ooo,ooz,oyz,oyo];
-  let zx = [ooo,ooz,xoz,xoo];
-  
-  items.push( 0x888888, xy, 0x666666, yz, 0x444444, zx );
-
-  let xyX = (x) => [ooo*(1-x)+xoo*x, oyo*(1-x)+xyo*x]; // x scales from [0,1]
-  let xyY = (y) => [ooo*(1-y)+oyo*y, xoo*(1-y)+xyo*y]; // y scales from [0,1]
-  let yzY = (y) => [ooo*(1-y)+oyo*y, ooz*(1-y)+oyz*y]; // y scales from [0,1]
-  let yzZ = (z) => [ooo*(1-z)+ooz*z, oyo*(1-z)+oyz*z]; // z scales from [0,1]
-  let zxX = (x) => [ooo*(1-x)+xoo*x, ooz*(1-x)+xoz*x]; // x scales from [0,1]
-  let zxZ = (z) => [ooo*(1-z)+ooz*z, xoo*(1-z)+xoz*z]; // z scales from [0,1]
-
-  let gxy = (t,i, xf, yf, items ) => {
-    items.push(0xFFFFFF);
-    for( let x=0; x < t; x+=i ) { items.push(xf(x)); }
-    for( let y=0; y < t; y+=i ) { items.push(yf(y)); } };
-
-  gxy( h, i, xyX, xyY, items ); // Not sure why h
-  gxy( h, i, yzY, yzZ, items );
-  gxy( h, i, zxX, zxZ, items );
-
-    let graph = Element.graph( () => { return items; }, {} );
-
-  window.Style.process( 'Grids', graph );
-
-  } ); } };
-
-let GA$3 = window['Algebra'];
-
-let Play  = class Play {
-
-  static ga() {
-
-  GA$3(3,0,1,()=> {
-
-    // console.log( 'PGA3D', this.describe() );
-
-  let graph = Element.graph([1e123,1e23,1e13,1e12],{camera:1+.5e01-.5e02}); // and in 3D PGA
-
-  window.Style.process( 'Play', graph );
-
-  } ); } };
-
-let GA$4 = window['Algebra'];
-
-let Isohed  = class Isohed {
-
-  static ga() {
-
-GA$4(3,0,1,()=>{  // Create a Clifford Algebra with 3,0,1 metric. 
-
-  // Specify a point directly (trivectors specified with overloaded e-notation.)
-  let point = (x,y,z)=>1e123-x*1e012+y*1e013+z*1e023;
-  let rotor = (P,a)=>Math.cos(a/2)+Math.sin(a/2)*P;
-
-  // Our camera position and orientation
-  let  camera=1e0;
-
-  // We construct faces, edges and vertices of an icosahedron.
-  let r = rotor(1e13,Math.PI/2.5);
-  let A = point(0,1,0);
-  let B = point((1-Math.atan(0.5)**2)**0.5,Math.atan(0.5),0);
-  let C = rotor(1e13,Math.PI/5)>>>(1e2>>>B);
-  let items=[A,"A",B,"B",C,"C"];
-
-  // vertices
-  items.push(0x4444FF);
-  for (let i=0;i<5;i++) items.push(A,B=r>>>B,C=r>>>C,1e2>>>A);
-
-  // edges
-  items.push(0x444444);
-  for (let i=0;i<5;i++) items.push([A,B],[B,C],[B,B=r>>>B],[B,C],[C,C=r>>>C],[1e2>>>A,C]);
-
-  // faces
-  items.push(0xFFCCCC);
-  for (let i=0;i<5;i++) items.push([A,B,r>>>B],[B,B=r>>>B,C],[C,B,r>>>C],[C,1e2>>>A,C=r>>>C]);
-
-  // Graph the 3D items
-  let graph = Element.graph( () => {
-    let time=performance.now()/4000;
-    camera['set'](rotor(1e13,time)*rotor(1e12,time*1.23131));                // animate camera
-    return items.slice(0,1+((Math.floor(time*50))%(items.length+20)));    // show more and more elements
-  },{gl:true,animate:true,camera});
-
-
-    window.Style.process( 'Isohed', graph );
-
-  } ); } };
-
-//
-
-var script$l = {
-
-  components:{ 'd-dabs':Dabs },
-
-  data() {
-    return { comp:'Geom3D', key:'Isohed', pages:{
-      Lines:   { title:'Lines',  key:'Lines',  klass:Lines,  created:false },
-      Grids:   { title:'Grids',  key:'Grids',  klass:Grids,  created:false },
-      Play:    { title:'Play',   key:'Play',   klass:Play,   created:false },
-      Isohed:  { title:'Isohed', key:'Isohed', klass:Isohed, created:false }
-    } } },
-
-  methods: {
-
-    isPage: function(key) {
-      return this.key === key; },
-
-    onTabs: function(key) {
-      if( this.pages[key] ) {
-          this.key = key;
-          this.create(this.key); } },
-
-    create: function( key ) {
-      // console.log( 'Geom3D.created()', { key:key, refs:this.$refs } );
-      if( !this.pages[key].created ) {
-        Style.init( key, this.$refs[key][0] );
-        this.pages[key].created = true;
-        this.pages[key].klass.ga(); } }
-  },
-
-  mounted: function () {
-    // console.log( 'Geom3D.mounted()', { refs:this.$refs } );
-    this.onTabs( this.key );
-    this.subscribe( 'Geom', this.comp+'.vue', (key) => {
-      if( typeof(key)==='string' ) {
-        this.onTabs( key ); } } ); }
-  
-  };
-
-/* script */
-const __vue_script__$p = script$l;
-
-/* template */
-var __vue_render__$m = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    [
-      _c("d-dabs", {
-        attrs: { comp: "Geom", pages: _vm.pages, init: _vm.key }
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.pages, function(page) {
-        return [
-          _c("div", {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.isPage(page.key),
-                expression: "isPage(page.key)"
-              }
-            ],
-            key: page.key,
-            ref: page.key,
-            refInFor: true,
-            staticClass: "page"
-          })
-        ]
-      })
-    ],
-    2
-  )
-};
-var __vue_staticRenderFns__$m = [];
-__vue_render__$m._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$p = function (inject) {
-    if (!inject) return
-    inject("data-v-a5d28836_0", { source: ".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n", map: {"version":3,"sources":["Geom3D.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf","file":"Geom3D.vue","sourcesContent":[".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$p = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$p = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$p = false;
-  /* style inject SSR */
-  
-
-  
-  var Geom3D = normalizeComponent_1(
-    { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
-    __vue_inject_styles__$p,
-    __vue_script__$p,
-    __vue_scope_id__$p,
-    __vue_is_functional_template__$p,
-    __vue_module_identifier__$p,
-    browser,
-    undefined
-  );
-
-//import GA from '../../lib/math/ganja.esm.js';
-let GA$5 = window['Algebra'];
-
-let Planes = class Planes {
-
-  static ga() {
-
-
-    GA$5( 4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
-
-      // no                  = 1e5 - 1e4  origin
-      // ni                  = 0.5(1e4 + 1e5)  inifinity
-      // nino                = ni ^ no
-      // points(x,y,z)       = no + x*1e1 + y*1e2 + z*1e3 + 0.5 * ( x*x + y*y + z*z ) * ni;
-      // circle(p1,p2,p3 )   = p1^p2^p3
-      // sphere(p1,p2,p3,p4) = p1^p2^p3^p4
-      // sphere(p,r)         = !(p-r*ni)
-      // sphere(p,r)         = (p,r) => !(p-r*ni)
-      // line(p1,p2)         = p1 ^ p2
-      // lineINF(p1,p2)      = p1 ^ p2 ^ ni
-      // join                = p1 ^ p2
-      // meet                = p1 & p2
-      // rotor(a,b)          = exp((a/2)*b)
-
-      // We start by defining a null basis, and upcasting for points
-   // let total = 5.0;
-      let scale = 0.2;
-      let xs = scale;
-      let ys = scale;
-      let zs = scale;
-   // let range = total * scale;
-      let ni = 1e4   + 1e5;
-      let no = 0.5e5 - 0.5e4;
-      // let nino = ni ^ no;
-   // let up = (x) => no + x + .5 * x * x * ni;
-
-      let point = (xa,ya,za) => {
-        let x = xa*xs, y=ya*ys, z=za*zs;
-        return no + x*1e1 + y*1e2 + z*1e3 + 0.5 * ( x*x + y*y + z*z ) * ni; };
-      let planeDR = (p1,p2,p3,p4) => [p1,p2,p3,p4];
-
-      let r   = 3;
-   // let h   = r * 0.5;
-      let bne = point(  r,  r,  r );
-      let bse = point(  r, -r,  r );
-      let bnw = point( -r,  r,  r );
-      let bsw = point( -r, -r,  r );
-      let fne = point(  r,  r, -r );
-      let fse = point(  r, -r, -r );
-      let fnw = point( -r,  r, -r );
-      let fsw = point( -r, -r, -r );
-
-   // let pb = plane3P(bne,bnw,bsw), db = planeDR(bne,bnw,bsw,bse);
-      let de = planeDR(bne,fne,fse,bse);
-   // let pn = plane3P(bne,bnw,fnw), dn = planeDR(bne,bnw,fnw,fne);
-      let dw = planeDR(bnw,fnw,fsw,bsw);
-      let ds = planeDR(bse,bsw,fsw,fse);
-
-   // let line     = (p1,p2) => [p1,p2];
-   // let planeBR  = (b,r)   => !( b + r * scale * ni );
-      let spherePR = (p,r)   => !( p - r * scale * ni );
-   // let grid     = (b,r,n) => plane(b,r);
-
-      // Next we'll define some objects.
-      let p0 = point(0, 0, 0 );                           // point
-      let sc = spherePR( p0,0.5 ); // !(p1 - 0.20 * ni);  // main dual sphere around point (interactive)
-
-
-    let items = [
-      0xFFFFFF,   bne, 'bne', bse, 'bse', bnw, 'bnw', bsw, 'bsw',
-      0xFFFFFF,   fne, 'fne', fse, 'fse', fnw, 'fnw', fsw, 'fsw',
-      0xFFFFFF,   de, dw, ds,
-      0xFFFFFF,   p0, sc, "Sc" ];
-
-    let svg = Element.graph( () => {
-       return items; },
-      { conformal:true, camera:1+.5e01-.5e02, gl:false, grid:false } );
-
-    window.Style.process( 'Planes', svg );
-
-  } ); } };
-
-/*
-     // 0xFF00FF,   lt, "Pr&Lt",                  // line intersect plane
-     // 0x0000FF,   m1, "Sc&Pb",                  // sphere meet plane
-     // 0x888800,   m2, "Sc&Lt",                  // sphere meet line
-     // 0x0088FF,   m3, "Sc&Sl",                  // sphere meet sphere
-     // 0x008800,   m4, "Sc&Cr",                  // sphere meet circle
-     // 0x880000,   m5, "Cr&Pr",                  // circle meet sphere
-     // 0x888800,   lp,                      // line and circle
- */
-
-//import GA from '../../lib/math/ganja.esm.js';
-let GA$6 = window['Algebra'];
-
-let Sphere = class Sphere {
-
-  static ga() {
-
-
-    GA$6(4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
-
-      // console.log( this.describe() );
-
-      // We start by defining a null basis, and upcasting for points
-      let ni = 1e4 + 1e5, no = .5e5 - .5e4;
-      let up = (x) => no + x + .5 * x * x * ni;
-
-      // Next we'll define 4 points
-      let p1 = up(1e1), p2 = up(1e2), p3 = up(-1e3), p4 = up(-1e2);
-
-      // The outer product can be used to construct the sphere through
-      // any four points.
-      let s = () => p1 ^ p2 ^ p3 ^ p4;
-
-      // The outer product between any three points and infinity is a plane.
-      let p = () => p1 ^ p2 ^ p3 ^ ni;
-
-      // Graph the items. (hex numbers are html5 colors, two extra first bytes = alpha)
-      let canvas = Element.graph([
-        0x00FF0000, p1, "p1", p2, "p2", p3, "p3", p4, "p4", // points
-        0xE0008800, p, "p",                                 // plane
-        0xE00000FF, s, "s"                                  // sphere
-      ], { conformal:true, gl:true, grid:false });
-
-      //let context = canvas.getContext('webgl');
-      //context.fillStyle = '#000000';
-
-      window.Style.process( 'Sphere', canvas );
-
-    } ); } };
-
-//
-//import Conform from '../../src/ganja/4D/Conform.js';
-
-  var script$m = {
-    
-    components:{ 'd-dabs':Dabs },
-
-    data() {
-      return { comp:'Geom4D', key:'Planes', pages:{
-          Planes:  { title:'Planes',  key:'Planes',  klass:Planes,  created:false },
-          Sphere:  { title:'Sphere',  key:'Sphere',  klass:Sphere,  created:false }
-       // Conform: { title:'Conform', key:'Conform', klass:Conform, created:false }
-        } } },
-    
-    methods: {
-
-      isPage: function(key) {
-        return this.key === key; },
-
-      onTabs: function(key) {
-        if( this.pages[key] ) {
-          this.key = key;
-          this.create(this.key); } },
-
-      create: function( key ) {
-        // console.log( 'Geom4D.created()', { key:key, refs:this.$refs } );
-        if( !this.pages[key].created ) {
-          Style.init( key, this.$refs[key][0] );
-          this.pages[key].created = true;
-          this.pages[key].klass.ga(); } }
-    },
-
-    mounted: function () {
-      // console.log( 'Geom4D.mounted()', { refs:this.$refs } );
-      this.onTabs( this.key );
-      this.subscribe( 'Geom', this.comp+'.vue', (key) => {
-        if( typeof(key)==='string' ) {
-          this.onTabs( key ); } } ); }
-
-  };
-
-/* script */
-const __vue_script__$q = script$m;
-
-/* template */
-var __vue_render__$n = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    [
-      _c("d-dabs", {
-        attrs: { comp: "Geom", pages: _vm.pages, init: _vm.key }
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.pages, function(page) {
-        return [
-          _c("div", {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.isPage(page.key),
-                expression: "isPage(page.key)"
-              }
-            ],
-            key: page.key,
-            ref: page.key,
-            refInFor: true,
-            staticClass: "page"
-          })
-        ]
-      })
-    ],
-    2
-  )
-};
 var __vue_staticRenderFns__$n = [];
 __vue_render__$n._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$q = undefined;
+  const __vue_inject_styles__$q = function (inject) {
+    if (!inject) return
+    inject("data-v-05cf3c24_0", { source: ".note {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n", map: {"version":3,"sources":["Note.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX","file":"Note.vue","sourcesContent":[".note {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n"]}, media: undefined });
+
+  };
   /* scoped */
   const __vue_scope_id__$q = undefined;
   /* module identifier */
   const __vue_module_identifier__$q = undefined;
   /* functional template */
   const __vue_is_functional_template__$q = false;
-  /* style inject */
-  
   /* style inject SSR */
   
 
   
-  var Geom4D = normalizeComponent_1(
+  var Note$1 = normalizeComponent_1(
     { render: __vue_render__$n, staticRenderFns: __vue_staticRenderFns__$n },
     __vue_inject_styles__$q,
     __vue_script__$q,
     __vue_scope_id__$q,
     __vue_is_functional_template__$q,
     __vue_module_identifier__$q,
-    undefined,
+    browser,
     undefined
   );
 
@@ -30126,24 +30139,23 @@ __vue_render__$n._withStripped = true;
         'd-logo':Logo, 'd-navb':Navb, 'd-find':Find,
         'd-tocs':Tocs$1, 'd-view':View, 'd-side':Side,
         'd-pref':Pref, 'd-foot':Foot, 'd-trak':Trak } };
-
-  Dash.Home = Home;
-  Dash.Info = Info;
-  Dash.Know = Know;
-  Dash.Wise = Wise;
-  Dash.Geom = Geom$1;
-  Dash.Draw = Draw$1;
-  Dash.Prac = Prac;
-  Dash.Conn = Conn;
-  Dash.Enli = Enli;
-  Dash.Data = Data$2;
-  Dash.Note = Note$1;
-//Dash.Cube = Cube;
-//Dash.Wood = Wood;
+//import Cube   from '../comp/Cube.vue';
+//import Wood   from '../wood/Wood.vue';
   
+  Dash.Home   = Home;
+  Dash.Info   = Info;
+  Dash.Know   = Know;
+  Dash.Wise   = Wise;
+  Dash.Geom   = Geom$1;
   Dash.Geom2D = Geom2D;
   Dash.Geom3D = Geom3D;
   Dash.Geom4D = Geom4D;
+  Dash.Draw   = Draw$1;
+  Dash.Prac   = Prac;
+  Dash.Conn   = Conn;
+  Dash.Enli   = Enli;
+  Dash.Data   = Data$2;
+  Dash.Note   = Note$1;
 
 /* script */
 const __vue_script__$r = Dash;
@@ -30184,7 +30196,7 @@ __vue_render__$o._withStripped = true;
   /* style */
   const __vue_inject_styles__$r = function (inject) {
     if (!inject) return
-    inject("data-v-c5259640_0", { source: ".dash {\n  font-family: Roboto, sans-serif;\n  font-size: 1rem;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11vw 85vw 4vw;\n  grid-template-rows: 6vh 88vh 6vh;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n", map: {"version":3,"sources":["Dash.vue"],"names":[],"mappings":"AAAA;EACE,+BAA+B;EAC/B,eAAe;EACf,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,oCAAoC;EACpC,gCAAgC;EAChC,uEAAuE;AACzE;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf","file":"Dash.vue","sourcesContent":[".dash {\n  font-family: Roboto, sans-serif;\n  font-size: 1rem;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11vw 85vw 4vw;\n  grid-template-rows: 6vh 88vh 6vh;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n"]}, media: undefined });
+    inject("data-v-2037814c_0", { source: ".dash {\n  font-family: Roboto, sans-serif;\n  font-size: 1rem;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11vw 85vw 4vw;\n  grid-template-rows: 6vh 88vh 6vh;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n", map: {"version":3,"sources":["Dash.vue"],"names":[],"mappings":"AAAA;EACE,+BAA+B;EAC/B,eAAe;EACf,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,oCAAoC;EACpC,gCAAgC;EAChC,uEAAuE;AACzE;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf","file":"Dash.vue","sourcesContent":[".dash {\n  font-family: Roboto, sans-serif;\n  font-size: 1rem;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11vw 85vw 4vw;\n  grid-template-rows: 6vh 88vh 6vh;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n"]}, media: undefined });
 
   };
   /* scoped */

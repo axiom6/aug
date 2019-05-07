@@ -22,7 +22,9 @@
       classTab: function (key) {
         return this.key===key ? 'tab-active' : 'tab'; } },
 
-    mounted: function () {}
+    mounted: function () {
+      this.subscribe( 'Geom', 'Dabs.vue', (key) => {
+        this.classTab(key) } ); }
 
   }
 

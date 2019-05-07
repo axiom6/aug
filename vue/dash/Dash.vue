@@ -34,41 +34,42 @@
         'd-pref':Pref, 'd-foot':Foot, 'd-trak':Trak } };
 
   // Static imports for minimizing build steps in dev.
-  import Home from '../comp/Home.vue';
-  import Info from '../comp/Info.vue';
-  import Know from '../comp/Know.vue';
-  import Wise from '../comp/Wise.vue';
-  import Geom from '../geom/Geom.vue';
-  import Draw from '../comp/Draw.vue';
-  import Prac from '../page/Prac.vue';
-  import Conn from '../page/Conn.vue';
-  import Enli from '../page/Enli.vue';
-  import Data from '../page/Data.vue';
-  import Note from '../note/Note.vue';
-//import Cube from '../comp/Cube.vue';
-//import Wood from '../wood/Wood.vue';
-
+  import Home   from '../comp/Home.vue';
+  import Info   from '../comp/Info.vue';
+  import Know   from '../comp/Know.vue';
+  import Wise   from '../comp/Wise.vue';
+  import Geom   from '../geom/Geom.vue';
   import Geom2D from '../geom/Geom2D.vue';
   import Geom3D from '../geom/Geom3D.vue';
   import Geom4D from '../geom/Geom4D.vue';
-
-  Dash.Home = Home;
-  Dash.Info = Info;
-  Dash.Know = Know;
-  Dash.Wise = Wise;
-  Dash.Geom = Geom;
-  Dash.Draw = Draw;
-  Dash.Prac = Prac;
-  Dash.Conn = Conn;
-  Dash.Enli = Enli;
-  Dash.Data = Data;
-  Dash.Note = Note;
-//Dash.Cube = Cube;
-//Dash.Wood = Wood;
+  import Draw   from '../comp/Draw.vue';
+  import Prac   from '../page/Prac.vue';
+  import Conn   from '../page/Conn.vue';
+  import Enli   from '../page/Enli.vue';
+  import Data   from '../page/Data.vue';
+  import Note   from '../note/Note.vue';
+//import Cube   from '../comp/Cube.vue';
+//import Wood   from '../wood/Wood.vue';
   
+  Dash.Home   = Home;
+  Dash.Info   = Info;
+  Dash.Know   = Know;
+  Dash.Wise   = Wise;
+  Dash.Geom   = Geom;
   Dash.Geom2D = Geom2D;
   Dash.Geom3D = Geom3D;
   Dash.Geom4D = Geom4D;
+  Dash.Draw   = Draw;
+  Dash.Prac   = Prac;
+  Dash.Conn   = Conn;
+  Dash.Enli   = Enli;
+  Dash.Data   = Data;
+  Dash.Note   = Note;
+//Dash.Cube   = Cube;
+//Dash.Wood   = Wood;
+  
+  
+
  
   export default Dash;
   

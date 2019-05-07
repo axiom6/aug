@@ -5,7 +5,7 @@
   <div class="geom" ref="Geom">
     <!--h1>Geometric Algebra</h1-->
     <template v-for="geom in geoms">
-      <router-view :name="comp+geom.key"></router-view>
+      <router-view :name="comp+geom.key" :comp="comp+geom.key" :init="geom.init"></router-view>
     </template>
   </div>
 </template>
@@ -16,10 +16,13 @@
 
   let Geom = {
 
-    data() { return { comp:'Geom', key:'2D', geoms:[
-        { title:'Graph',      key:'2D' },
-        { title:'Projective', key:'3D' },
-        { title:'Conformal',  key:'4D' } ] } },
+    data() { return { comp:'Geom', key:'2D',
+      geoms:[
+        { title:'Graph',      key:'2D', init:'Basics' },
+        { title:'Projective', key:'3D', init:'Lines'  },
+        { title:'Conformal',  key:'4D', init:'Sphere' } ] } },
+    
+    methods: {},
 
     mounted: function () {
       // console.log( 'Geom.mounted()' );
