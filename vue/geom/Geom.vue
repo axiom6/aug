@@ -21,15 +21,9 @@
         { title:'Graph',      key:'2D', init:'Basics' },
         { title:'Projective', key:'3D', init:'Lines'  },
         { title:'Conformal',  key:'4D', init:'Sphere' } ] } },
-    
-    methods: {},
 
     mounted: function () {
-      // console.log( 'Geom.mounted()' );
-      Style.size( this.$refs['Geom'] ); // mounted is best place to get page elem size
-   // this.subscribe( this.comp, this.comp+'.vue', (obj) => {
-   //     console.log( 'Geom.subscribe()', obj );
-    }
+      Style.size( this.$refs['Geom'] ); } // mounted is best place to get page elem size
 
   }
 
