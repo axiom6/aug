@@ -1516,11 +1516,11 @@ window.Style = Style; // Make Style global for access inside ganja.js
 
 let Geom = {
 
-  data() { return { comp:'Geom', key:'2D',
+  data() { return { comp:'Geom',
     geoms:[
-      { title:'Graph',      key:'2D', init:'Basics' },
-      { title:'Projective', key:'3D', init:'Lines'  },
-      { title:'Conformal',  key:'4D', init:'Sphere' } ] } },
+      { title:'Geom2D', key:'2D' },
+      { title:'Geom3D', key:'3D' },
+      { title:'Geom4D', key:'4D' } ] } },
 
   mounted: function () {
     Style.size( this.$refs['Geom'] ); } // mounted is best place to get page elem size
@@ -1539,16 +1539,10 @@ var __vue_render__$d = function() {
     "div",
     { ref: "Geom", staticClass: "geom" },
     [
+      _vm.comp === "Geom" ? _c("h1", [_vm._v("Geometric Algebra")]) : _vm._e(),
+      _vm._v(" "),
       _vm._l(_vm.geoms, function(geom) {
-        return [
-          _c("router-view", {
-            attrs: {
-              name: _vm.comp + geom.key,
-              comp: _vm.comp + geom.key,
-              init: geom.init
-            }
-          })
-        ]
+        return [_c("router-view", { attrs: { name: _vm.comp + geom.key } })]
       })
     ],
     2
@@ -1560,7 +1554,7 @@ __vue_render__$d._withStripped = true;
   /* style */
   const __vue_inject_styles__$g = function (inject) {
     if (!inject) return
-    inject("data-v-9a3c84b0_0", { source: ".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n}\n.geom h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Geom.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Geom.vue","sourcesContent":[".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n}\n.geom h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
+    inject("data-v-731285e2_0", { source: ".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.geom h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Geom.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Geom.vue","sourcesContent":[".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.geom h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -1776,44 +1770,80 @@ __vue_render__$f._withStripped = true;
     undefined
   );
 
-// Create a Clifford Algebra with 2,0,1 metric. 
+let GA = window['Algebra'];  //import GA from '../../lib/math/ganja.esm.js';
+
+let Graph  = class Graph {
+
+  static ga () {
+
+    GA( 2, 0, 1, () => {
+
+      let items = [];
+      let total = 5.0;
+      let scale = 0.35;
+
+      let pointXY = ( x, y )    => 1e12 - x*scale * 1e02 - y*scale * 1e01;
+   // let pointXY = ( x, y )    => 1e12 - x*scale * 1e02 + y*scale * 1e01;
+   // let pointLL = ( l1, l2 )  => () => l1 ^ l2;
+   // let lineABC = ( a, b, c ) => a*scale*1e1 + b*scale*1e2 + c*scale*1e0;
+   // let linePP  = ( p1, p2 )  => () => p1 & p2;
+
+      let lineX = (x,nw,ne,sw,se) => [sw*(1-x)+se*x, nw*(1-x)+ne*x]; // x scales from [0,1]
+      let lineY = (y,nw,ne,sw,se) => [sw*(1-y)+nw*y, se*(1-y)+ne*y]; // y scales from [0,1]
+
+      let oo = pointXY( 0,    0   );
+      let sw = pointXY( -total, -total );
+      let nw = pointXY( -total,  total );
+      let se = pointXY(  total, -total );
+      let ne = pointXY(  total,  total );
+      items.push( 0x0000FF, sw, 'SW', se, 'SE', nw, 'NW', ne, 'NE', oo, 'OO' );
+
+      let stroke = ( i, n2 ) => {
+        return i % n2 === 0 ? 0xFFFFFF : 0x666666; };
+
+      let grid = ( n1, n2, nw, ne, sw, se, array ) => {
+        let d1 = 1.0 / n1;
+        for( let x=0, i=0; i<=n1; i++, x=i*d1 ) { array.push( stroke(i,n2), lineX(x,nw,ne,sw,se) ); }
+        for( let y=0, i=0; i<=n1; i++, y=i*d1 ) { array.push( stroke(i,n2), lineY(y,nw,ne,sw,se) ); } };
+        
+      grid( 100, 10, nw, ne, sw, se, items );
+      
+      let svg = Element.graph( () => { return items; }, { grid:false } );
+
+      window.Style.process( 'Graph', svg );
+
+    } ); } };
+
+// Create a Clifford Algebra with 2,0,1 metric.
 //import GA from '../../lib/math/ganja.esm.js';
-let GA = window['Algebra'];
+let GA$1 = window['Algebra'];
 
 let Basics  = class Basics {
 
   static ga () {
 
-    GA(2, 0, 1, () => {
+    GA$1( 2, 0, 1, () => {
 
-      // We work in dual space so we define our points to be bivectors. Ganja.js overloads
-      // scientific notation to specify basis blades.
-      // For readability we create a function that converts 2D euclidean coordinates
-      // to their 3D bivector representation.
-      let point = (x, y) => 1e12 - x * 1e02 + y * 1e01;
-
-      // Similarly, we can define lines directly. The euclidean line ax + by + c can be specified so :
-      let line = (a, b, c) => a * 1e1 + b * 1e2 + c * 1e0;
+      let pointXY = ( x, y )    => 1e12 - x * 1e02 + y * 1e01;
+      let pointLL = ( l1, l2 )  => () => l1 ^ l2;
+      let lineABC = ( a, b, c ) => a * 1e1 + b * 1e2 + c * 1e0;
+      let linePP  = ( p1, p2 )  => () => p1 & p2;
 
       // Define 3 points.
-      let A = point(-1, 1), B = point(-1, -1), C = point(1, -1);
+      let A = pointXY(-1, 1), B = pointXY(-1, -1), C = pointXY(1, -1);
 
       // Define the line y=x-0.5
-      let L = line(-1, 1, 0.5);
+      let L = lineABC(-1, 1, 0.5);
 
       // Or by joining two points. We define M as a function so it will update when C or A are dragged.
-      let M = () => C & A;
+      let M = linePP( C, A );
 
       // Points can also be found by intersecting two lines. We similarly define D as a function
       // for interactive updates.
-      let D = () => L ^ M;
+      let D = pointLL( L, M );
 
-      // We now use the graph function to create an SVG object that visualises our algebraic elements.
-      // The graph function accepts
-      // an array of items that it will render in order. It can render points, lines, labels, colors,
-      // line segments and polygons.
 
-      let graph = Element.graph( [
+      let svg = Element.graph( [
         A, "A",         // Render point A and label it.
         B, "B",         // Render point B and label it.
         C, "C",         // Render point C and label them.
@@ -1825,7 +1855,7 @@ let Basics  = class Basics {
         [A, B, C]         // render polygon ABC.
       ], { grid:true });
 
-      window.Style.process( 'Basics', graph );
+      window.Style.process( 'Basics', svg );
 
     });
   }
@@ -1840,8 +1870,9 @@ var script$h = {
   components:{ 'd-dabs':Dabs },
 
   data() {
-    return { comp:'Geom2D', key:'Basics', pages:{
-      Basics:  { title:'Basics', key:'Basics', klass:Basics, created:false }
+    return { comp:'Geom2D', key:'Graph', pages:{
+      Graph:  { title:'Graph',  key:'Graph',  klass:Graph,  created:false },
+      Basics: { title:'Basics', key:'Basics', klass:Basics, created:false }
   } } },
   
 };
@@ -1877,13 +1908,13 @@ const __vue_script__$j = script$h;
   );
 
 //import GA from '../../lib/math/ganja.esm.js';
-let GA$1 = window['Algebra'];
+let GA$2 = window['Algebra'];
 
 let Lines  = class Lines {
 
   static ga() {
 
-  GA$1( 3, 0, 1, () => {
+  GA$2( 3, 0, 1, () => {
 
   // We work in dual space. Our 1-blade's are dual-vectors (aka functionals of the
   // form ax + by + cz + dw = 0).
@@ -1939,13 +1970,13 @@ let Lines  = class Lines {
   } ); } };
 
 //import GA from '../../lib/math/ganja.esm.js';
-let GA$2 = window['Algebra'];
+let GA$3 = window['Algebra'];
 
 let Grids  = class Grids {
 
   static ga() {
 
-  GA$2( 3, 0, 1, () => {  // PGA3D Projective Euclidean 3D space. (dual)
+  GA$3( 3, 0, 1, () => {  // PGA3D Projective Euclidean 3D space. (dual)
 
   let items = [];
   let origin=1e123, EX=-1e012, EY=1e013, EZ=1e012;
@@ -1996,13 +2027,13 @@ let Grids  = class Grids {
 
   } ); } };
 
-let GA$3 = window['Algebra'];
+let GA$4 = window['Algebra'];
 
 let Play  = class Play {
 
   static ga() {
 
-  GA$3(3,0,1,()=> {
+  GA$4(3,0,1,()=> {
 
     // console.log( 'PGA3D', this.describe() );
 
@@ -2012,13 +2043,13 @@ let Play  = class Play {
 
   } ); } };
 
-let GA$4 = window['Algebra'];
+let GA$5 = window['Algebra'];
 
 let Isohed  = class Isohed {
 
   static ga() {
 
-GA$4(3,0,1,()=>{  // Create a Clifford Algebra with 3,0,1 metric. 
+GA$5(3,0,1,()=>{  // Create a Clifford Algebra with 3,0,1 metric. 
 
   // Specify a point directly (trivectors specified with overloaded e-notation.)
   let point = (x,y,z)=>1e123-x*1e012+y*1e013+z*1e023;
@@ -2107,14 +2138,14 @@ const __vue_script__$k = script$i;
   );
 
 //import GA from '../../lib/math/ganja.esm.js';
-let GA$5 = window['Algebra'];
+let GA$6 = window['Algebra'];
 
 let Planes = class Planes {
 
   static ga() {
 
 
-    GA$5( 4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
+    GA$6( 4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
 
       // no                  = 1e5 - 1e4  origin
       // ni                  = 0.5(1e4 + 1e5)  inifinity
@@ -2199,14 +2230,14 @@ let Planes = class Planes {
  */
 
 //import GA from '../../lib/math/ganja.esm.js';
-let GA$6 = window['Algebra'];
+let GA$7 = window['Algebra'];
 
 let Sphere = class Sphere {
 
   static ga() {
 
 
-    GA$6(4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
+    GA$7(4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
 
       // console.log( this.describe() );
 

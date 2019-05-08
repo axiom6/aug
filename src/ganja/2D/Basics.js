@@ -1,4 +1,4 @@
-// Create a Clifford Algebra with 2,0,1 metric. 
+// Create a Clifford Algebra with 2,0,1 metric.
 //import GA from '../../lib/math/ganja.esm.js';
 let GA = window['Algebra'];
 
@@ -6,36 +6,28 @@ let Basics  = class Basics {
 
   static ga () {
 
-    GA(2, 0, 1, () => {
+    GA( 2, 0, 1, () => {
 
-      // We work in dual space so we define our points to be bivectors. Ganja.js overloads
-      // scientific notation to specify basis blades.
-      // For readability we create a function that converts 2D euclidean coordinates
-      // to their 3D bivector representation.
-      let point = (x, y) => 1e12 - x * 1e02 + y * 1e01;
-
-      // Similarly, we can define lines directly. The euclidean line ax + by + c can be specified so :
-      let line = (a, b, c) => a * 1e1 + b * 1e2 + c * 1e0;
+      let pointXY = ( x, y )    => 1e12 - x * 1e02 + y * 1e01;
+      let pointLL = ( l1, l2 )  => () => l1 ^ l2;
+      let lineABC = ( a, b, c ) => a * 1e1 + b * 1e2 + c * 1e0;
+      let linePP  = ( p1, p2 )  => () => p1 & p2;
 
       // Define 3 points.
-      let A = point(-1, 1), B = point(-1, -1), C = point(1, -1);
+      let A = pointXY(-1, 1), B = pointXY(-1, -1), C = pointXY(1, -1);
 
       // Define the line y=x-0.5
-      let L = line(-1, 1, 0.5)
+      let L = lineABC(-1, 1, 0.5);
 
       // Or by joining two points. We define M as a function so it will update when C or A are dragged.
-      let M = () => C & A;
+      let M = linePP( C, A );
 
       // Points can also be found by intersecting two lines. We similarly define D as a function
       // for interactive updates.
-      let D = () => L ^ M;
+      let D = pointLL( L, M );
 
-      // We now use the graph function to create an SVG object that visualises our algebraic elements.
-      // The graph function accepts
-      // an array of items that it will render in order. It can render points, lines, labels, colors,
-      // line segments and polygons.
 
-      let graph = Element.graph( [
+      let svg = Element.graph( [
         A, "A",         // Render point A and label it.
         B, "B",         // Render point B and label it.
         C, "C",         // Render point C and label them.
@@ -47,7 +39,7 @@ let Basics  = class Basics {
         [A, B, C]         // render polygon ABC.
       ], { grid:true });
 
-      window.Style.process( 'Basics', graph );
+      window.Style.process( 'Basics', svg );
 
     });
   }
