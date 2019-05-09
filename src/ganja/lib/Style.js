@@ -19,6 +19,7 @@ let Style = class Style {
 
   static process( key, graph ) {
     let page  = Obj[key];
+        page.width = key==='Objects' ? page.width*0.25 : page.width;
     // console.log( 'Style.process', key, page );
     let style = `width:${page.width}px; height:${page.height}px; background:#000000;`;
     graph.setAttribute( 'style', style );

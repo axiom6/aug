@@ -1496,6 +1496,7 @@ let Style = class Style {
 
   static process( key, graph ) {
     let page  = Obj[key];
+        page.width = key==='Objects' ? page.width*0.25 : page.width;
     // console.log( 'Style.process', key, page );
     let style = `width:${page.width}px; height:${page.height}px; background:#000000;`;
     graph.setAttribute( 'style', style );
@@ -1969,8 +1970,7 @@ let Lines  = class Lines {
 
   } ); } };
 
-//import GA from '../../lib/math/ganja.esm.js';
-let GA$3 = window['Algebra'];
+let GA$3 = window['Algebra']; //import GA from '../../lib/math/ganja.esm.js';
 
 let Grids  = class Grids {
 
@@ -1995,6 +1995,9 @@ let Grids  = class Grids {
   let lineX  = (x,sw,nw,se,ne) => [sw*(1-x)+se*x, nw*(1-x)+ne*x]; // x scales from [0,1]
   let lineY  = (y,sw,se,nw,ne) => [sw*(1-y)+nw*y, se*(1-y)+ne*y]; // y scales from [0,1]
 
+  // Rotations can be specified through exponentiation (angle around line).
+  // let rotor = (line,angle)=>Math.cos(angle/2) + Math.sin(angle/2)*line.Normalized;
+    
   let ooo = point(   0, 0,  0   );
   let pxa = point( widtho, 0,  0   );
   let pya = point( 0, heighto, 0   );
@@ -2164,6 +2167,117 @@ GA$6(3,0,1,()=>{  // Create a Clifford Algebra with 3,0,1 metric.
 
   } ); } };
 
+let GA$7 = window['Algebra']; //import GA from '../../lib/math/ganja.esm.js';
+
+let Objects  = class Objects {
+
+  static ga() {
+
+    GA$7( 3, 0, 1, () => {
+
+    // rotation helper and Lathe function.
+    let rot = (a,P)=>Math.cos(a)+Math.sin(a)*P.Normalized,
+      lathe=(X,n,P,m)=>[...Array(n+1)].map((x,i)=>rot(i/n*Math.PI*(m||1),P)>>>X),
+
+    // wrap takes X, a double array of points, and generates triangles.
+    wrap=(X)=>{
+      let u=X.length-1,v=X[0].length-1; X=[].concat.apply([],X);
+      let P=[],vp=v+1; for(let i=0;i<u*vp;i+=vp)for(let j=0;j<v;j++)P.push([i+j,i+j+1,vp+i+j],[i+j+1,vp+i+j,vp+i+j+1]);
+      return P.map(x=>x.map(x=>X[x]));
+    },
+
+    // Basic primitives constructed by Lathing points, line segments, etc.
+    cylinder = (r=1,h=1,x=32)=>wrap(lathe([!1e0,!(1e0+r*1e3),!(1e0+r*1e3+h*1e1),!(1e0+h*1e1)],x,1e23)),
+    torus    = (r=.3,r2=.25,x=32,y=16)=>wrap(lathe((1+r*.5e03)>>>lathe(!(1e0+r2*(1e1+1e3)/2**.5),y,1e13),x,1e23)),
+    sphere   = (r=1,x=32,y=16)=>wrap(lathe(lathe(!(1e0+r*1e1),y,1e13,.5),x,1e23)),
+    cone     = (r=1,h=1,x=64)=>wrap(lathe([!1e0,!(1e0+r*1e3),!(1e0+h*1e1)],x,1e23)),
+    arrow    = ()=>[...cone(.15,.3),...cone(.15,0),...cylinder(.05,-2)],
+
+    // A selection of these objects.
+    objs=[ arrow(),         torus(0.8,.3),       sphere(.8),        sphere(.8,3,2),
+           cone(1,2**.5,3), cone(1,2**.5,4),     cone(1,2**.5),     torus(.8,.2,5,32),
+           cylinder(),      cylinder(1,2**.5,4), torus(.8,.3,4,4),
+           torus(.8,.3,64,4)].map(x=>( {data:x} ) );
+
+  let canvas = Element.graph( () => {
+    let time = performance.now()/1000;
+    objs.forEach((obj,i) => obj.transform =
+      (1+1e0-3e01-((i%3)-1)*1.5e03-((i/3|0)-1.5)*1.5e02)*rot(time,1e12)*rot(time*0.331,1e13));
+    return [0xFF0088,...objs]; }, { gl:true, animate:false } );
+
+/* let svg = Element.graph( () => {
+    objs.forEach((obj,i) => obj.transform =
+      (1+1e0-3e01-((i%3)-1)*1.5e03-((i/3|0)-1.5)*1.5e02)); // *rot(time,1e12)*rot(time*0.331,1e13));
+      (1+1e0-3e01-((i%3)-1)*1.5e03-((i/3|0)-1.5)*1.5e02)*rot(time,1e12)*rot(time*0.331,1e13));
+    return [0xFF8888,...objs]; }, { } ); */
+
+  window.Style.process( 'Objects', canvas );
+
+} ); } };
+
+let GA$8 = window['Algebra']; //import GA from '../../lib/math/ganja.esm.js';
+
+let Torus  = class Torus {
+
+  static ga() {
+
+    GA$8( 3, 0, 1, () => {  // PGA3D Projective Euclidean 3D space.
+
+  // Ganja.js can graph the orbits of parametrised motor variables :
+  // these are functions that take one parameter 0<x<1 and return a motor.
+  // For a function of 1 parameter, the orbit is rendered as a curve.
+
+  let circle  = (BV,r)=>x=>Math.E**(Math.PI*x*BV)*(1+r*.5e01),
+    segment = (BV)=>x=>1+x*0.5*BV;
+
+  // The product of two such parametrised 1D orbits is a 2D manifold :
+  // In ganja, you can simply multiply the two 1-parameter orbits to
+  // make a 2-parameter manifold. (rendered as a sheet)
+
+  // this allows us to multiply two circles into a torus or sphere,
+  // two segments into a plane, or a segment and a circle to produce
+  // a disk, cone or cylinder.
+
+  let torus    = (r1,r2)=>circle(1e12,r1)*circle(1e13,r2),
+    sphere   = (r)=>circle(1e13,0)*circle(1e12,r),
+    plane    = (x,y)=>segment(x*1e02)*segment(y*1e03),
+    cylinder = (r,l)=>segment(l*1e02)*circle(1e13,r),
+    disk     = (r)=>circle(1e12,0)*segment(r*1e01),
+    cone     = (r,l)=>circle(1e12,0)*segment(r*1e01-l*1e03);
+
+  // we can render these now just as our other primitives ..
+  let elements = [
+    0xff0000, circle(1e12,1),
+    0x0000ff, segment(1e01),
+    0xff0088, torus(.5,.2),
+    0xffff00, sphere(0.1),
+    0x00ffff, plane(0.2,0.2),
+    0x8800ff, cylinder(.05,1),
+    0x00ff00, disk(0.2),
+    0xffffff, cone(0.1,0.2)
+  ];
+
+  // show with rotating camera..
+     let camera=1e1+1; // 0e1+1
+
+
+  let svg = Element.graph( () => {
+    let time = performance.now()/1234;
+    camera['set']( Math.cos(time) + Math.sin(time)*1e13 ); // rotate around Y
+    return elements; }, { gl:true, animate:true, camera } );
+
+  window.Style.process( 'Torus', svg );
+
+} ); } };
+
+/*
+  document.body.appendChild(this.graph(()=>{
+    var t=performance.now()/1234;
+    camera.set( Math.cos(t) + Math.sin(t)*1e13  );
+    return elements;
+  },{camera,gl:1,animate:1}));
+ */
+
 //
 
 var script$i = {
@@ -2173,12 +2287,14 @@ var script$i = {
   components:{ 'd-dabs':Dabs },
 
   data() {
-    return { comp:'Geom3D', key:'Isohed', pages:{
-      Lines:   { title:'Lines',  key:'Lines',  klass:Lines,  created:false },
-      Grids:   { title:'Grids',  key:'Grids',  klass:Grids,  created:false },
-      Isomet:  { title:'Isomet', key:'Isomet', klass:Isomet, created:false },
-      Play:    { title:'Play',   key:'Play',   klass:Play,   created:false },
-      Isohed:  { title:'Isohed', key:'Isohed', klass:Isohed, created:false }
+    return { comp:'Geom3D', key:'Grids', pages:{
+      Lines:   { title:'Lines',   key:'Lines',   klass:Lines,   created:false },
+      Grids:   { title:'Grids',   key:'Grids',   klass:Grids,   created:false },
+      Isomet:  { title:'Isomet',  key:'Isomet',  klass:Isomet,  created:false },
+      Play:    { title:'Play',    key:'Play',    klass:Play,    created:false },
+      Isohed:  { title:'Isohed',  key:'Isohed',  klass:Isohed,  created:false },
+      Objects: { title:'Objects', key:'Objects', klass:Objects, created:false },
+      Torus:   { title:'Torus',   key:'Torus',   klass:Torus,   created:false }
     } } },
   
   };
@@ -2214,14 +2330,14 @@ const __vue_script__$k = script$i;
   );
 
 //import GA from '../../lib/math/ganja.esm.js';
-let GA$7 = window['Algebra'];
+let GA$9 = window['Algebra'];
 
 let Planes = class Planes {
 
   static ga() {
 
 
-    GA$7( 4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
+    GA$9( 4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
 
       // no                  = 1e5 - 1e4  origin
       // ni                  = 0.5(1e4 + 1e5)  inifinity
@@ -2306,14 +2422,14 @@ let Planes = class Planes {
  */
 
 //import GA from '../../lib/math/ganja.esm.js';
-let GA$8 = window['Algebra'];
+let GA$a = window['Algebra'];
 
 let Sphere = class Sphere {
 
   static ga() {
 
 
-    GA$8(4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
+    GA$a(4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
 
       // console.log( this.describe() );
 

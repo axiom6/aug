@@ -10,6 +10,8 @@
   import Isomet  from '../../src/ganja/3D/Isomet.js';
   import Play    from '../../src/ganja/3D/Play.js';
   import Isohed  from '../../src/ganja/3D/Isohed.js';
+  import Objects from '../../src/ganja/3D/Objects.js';
+  import Torus   from '../../src/ganja/3D/Torus.js';
 
   export default {
 
@@ -19,11 +21,13 @@
 
     data() {
       return { comp:'Geom3D', key:'Grids', pages:{
-        Lines:   { title:'Lines',  key:'Lines',  klass:Lines,  created:false },
-        Grids:   { title:'Grids',  key:'Grids',  klass:Grids,  created:false },
-        Isomet:  { title:'Isomet', key:'Isomet', klass:Isomet, created:false },
-        Play:    { title:'Play',   key:'Play',   klass:Play,   created:false },
-        Isohed:  { title:'Isohed', key:'Isohed', klass:Isohed, created:false }
+        Lines:   { title:'Lines',   key:'Lines',   klass:Lines,   created:false },
+        Grids:   { title:'Grids',   key:'Grids',   klass:Grids,   created:false },
+        Isomet:  { title:'Isomet',  key:'Isomet',  klass:Isomet,  created:false },
+        Play:    { title:'Play',    key:'Play',    klass:Play,    created:false },
+        Isohed:  { title:'Isohed',  key:'Isohed',  klass:Isohed,  created:false },
+        Objects: { title:'Objects', key:'Objects', klass:Objects, created:false },
+        Torus:   { title:'Torus',   key:'Torus',   klass:Torus,   created:false }
       } } },
     
     }

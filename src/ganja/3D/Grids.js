@@ -1,6 +1,6 @@
 
-//import GA from '../../lib/math/ganja.esm.js';
-let GA = window['Algebra'];
+
+let GA = window['Algebra']; //import GA from '../../lib/math/ganja.esm.js';
 
 let Grids  = class Grids {
 
@@ -25,6 +25,9 @@ let Grids  = class Grids {
   let lineX  = (x,sw,nw,se,ne) => [sw*(1-x)+se*x, nw*(1-x)+ne*x]; // x scales from [0,1]
   let lineY  = (y,sw,se,nw,ne) => [sw*(1-y)+nw*y, se*(1-y)+ne*y]; // y scales from [0,1]
 
+  // Rotations can be specified through exponentiation (angle around line).
+  // let rotor = (line,angle)=>Math.cos(angle/2) + Math.sin(angle/2)*line.Normalized;
+    
   let ooo = point(   0, 0,  0   );
   let pxa = point( widtho, 0,  0   );
   let pya = point( 0, heighto, 0   );
