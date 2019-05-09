@@ -12,7 +12,7 @@ let Torus  = class Torus {
   // For a function of 1 parameter, the orbit is rendered as a curve.
 
   let circle  = (BV,r)=>x=>Math.E**(Math.PI*x*BV)*(1+r*.5e01),
-    segment = (BV)=>x=>1+x*0.5*BV;
+      segment = (BV)=>x=>1+x*0.5*BV;
 
   // The product of two such parametrised 1D orbits is a 2D manifold :
   // In ganja, you can simply multiply the two 1-parameter orbits to
@@ -23,11 +23,11 @@ let Torus  = class Torus {
   // a disk, cone or cylinder.
 
   let torus    = (r1,r2)=>circle(1e12,r1)*circle(1e13,r2),
-    sphere   = (r)=>circle(1e13,0)*circle(1e12,r),
-    plane    = (x,y)=>segment(x*1e02)*segment(y*1e03),
-    cylinder = (r,l)=>segment(l*1e02)*circle(1e13,r),
-    disk     = (r)=>circle(1e12,0)*segment(r*1e01),
-    cone     = (r,l)=>circle(1e12,0)*segment(r*1e01-l*1e03);
+      sphere   = (r)=>circle(1e13,0)*circle(1e12,r),
+      plane    = (x,y)=>segment(x*1e02)*segment(y*1e03),
+      cylinder = (r,l)=>segment(l*1e02)*circle(1e13,r),
+      disk     = (r)=>circle(1e12,0)*segment(r*1e01),
+      cone     = (r,l)=>circle(1e12,0)*segment(r*1e01-l*1e03);
 
   // we can render these now just as our other primitives ..
   let elements = [
@@ -45,12 +45,12 @@ let Torus  = class Torus {
      let camera=1e1+1; // 0e1+1
 
 
-  let svg = Element.graph( () => {
+  let canvas = Element.graph( () => {
     let time = performance.now()/1234;
     camera['set']( Math.cos(time) + Math.sin(time)*1e13 ); // rotate around Y
-    return elements; }, { gl:true, animate:true, camera } );
+    return elements; }, { gl:true, animate:true, camera } ); // Requires gl canvas
 
-  window.Style.process( 'Torus', svg );
+  window.Style.process( 'Torus', canvas );
 
 } ) } }
 

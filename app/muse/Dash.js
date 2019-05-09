@@ -1784,28 +1784,53 @@ let Graph  = class Graph {
       let scale = 0.35;
 
       let pointXY = ( x, y )    => 1e12 - x*scale * 1e02 - y*scale * 1e01;
-   // let pointXY = ( x, y )    => 1e12 - x*scale * 1e02 + y*scale * 1e01;
-   // let pointLL = ( l1, l2 )  => () => l1 ^ l2;
-   // let lineABC = ( a, b, c ) => a*scale*1e1 + b*scale*1e2 + c*scale*1e0;
-   // let linePP  = ( p1, p2 )  => () => p1 & p2;
 
-      let lineX = (x,nw,ne,sw,se) => [sw*(1-x)+se*x, nw*(1-x)+ne*x]; // x scales from [0,1]
-      let lineY = (y,nw,ne,sw,se) => [sw*(1-y)+nw*y, se*(1-y)+ne*y]; // y scales from [0,1]
+      let linesXL = ( n1, n2, nw, ne, sw, se, array, axis='ns' )  => {
+        let d1 = 1.0 / n1;
+        for( let x=0, i=0; i<=n1; i++, x=i*d1 ) {
+          let ps = sw*(1-x)+se*x;
+          let pn = nw*(1-x)+ne*x;
+          let o2 = i  % n2 === 0;
+          let st = o2 ? 0xFFFFFF : 0x666666;
+          array.push( st, [ps, pn] ); // Push stroke and line onto array
+          if( o2 && i > 0 ) {                  // Lable major tics
+            let dn = 0; // 0.01*1e01;
+            let ds = 0; // 3*dn;
+            let iv = i.toString();
+            if( axis.includes('s') ) { array.push( st, ps-ds, iv ); }
+            if( axis.includes('n') ) { array.push( st, pn+dn, iv ); } } } }; // Push south and north axis labels
 
-      let oo = pointXY( 0,    0   );
+      let linesYL = ( n1, n2, nw, ne, sw, se, array, axis='we' )  => {
+        let d1 = 1.0 / n1;
+        for( let y=0, i=0; i<=n1; i++, y=i*d1 ) {
+          let pw = sw*(1-y)+nw*y;
+          let pe = se*(1-y)+ne*y;
+          let o2 = i  % n2 === 0;
+          let st = o2 ? 0xFFFFFF : 0x666666;
+          array.push( st, [pw, pe] ); // Push stroke and line onto array
+          if( o2 && i > 0 ) {                  // Lable major tics
+            let dw = 0; // 0.01*1e02;
+            let de = 0; // 3*dw;
+            let iv = i.toString();
+            if( axis.includes('w') ) { array.push( st, pw-dw, iv ); }
+            if( axis.includes('e') ) { array.push( st, pe+de, iv ); } } } }; // Push south and north axis
+
+   // let oo = pointXY( 0,    0   );
       let sw = pointXY( -total, -total );
       let nw = pointXY( -total,  total );
       let se = pointXY(  total, -total );
       let ne = pointXY(  total,  total );
-      items.push( 0x0000FF, sw, 'SW', se, 'SE', nw, 'NW', ne, 'NE', oo, 'OO' );
+   // items.push( 0x0000FF, sw, 'SW', se, 'SE', nw, 'NW', ne, 'NE', oo, 'OO' );
 
-      let stroke = ( i, n2 ) => {
-        return i % n2 === 0 ? 0xFFFFFF : 0x666666; };
+   // let stroke = ( i, n2 ) => {
+   //   return i % n2 === 0 ? 0xFFFFFF : 0x666666; }
 
       let grid = ( n1, n2, nw, ne, sw, se, array ) => {
-        let d1 = 1.0 / n1;
-        for( let x=0, i=0; i<=n1; i++, x=i*d1 ) { array.push( stroke(i,n2), lineX(x,nw,ne,sw,se) ); }
-        for( let y=0, i=0; i<=n1; i++, y=i*d1 ) { array.push( stroke(i,n2), lineY(y,nw,ne,sw,se) ); } };
+          linesXL( n1, n2, nw, ne, sw, se, array, 's' );
+          linesYL( n1, n2, nw, ne, sw, se, array, 'w' ); };
+     // let d1 = 1.0 / n1;
+     // for( let x=0, i=0; i<=n1; i++, x=i*d1 ) { array.push( stroke(i,n2), lineX(x,nw,ne,sw,se) ); }
+     // for( let y=0, i=0; i<=n1; i++, y=i*d1 ) { array.push( stroke(i,n2), lineY(y,nw,ne,sw,se) ); } }
         
       grid( 100, 10, nw, ne, sw, se, items );
       
@@ -2228,7 +2253,7 @@ let Torus  = class Torus {
   // For a function of 1 parameter, the orbit is rendered as a curve.
 
   let circle  = (BV,r)=>x=>Math.E**(Math.PI*x*BV)*(1+r*.5e01),
-    segment = (BV)=>x=>1+x*0.5*BV;
+      segment = (BV)=>x=>1+x*0.5*BV;
 
   // The product of two such parametrised 1D orbits is a 2D manifold :
   // In ganja, you can simply multiply the two 1-parameter orbits to
@@ -2239,11 +2264,11 @@ let Torus  = class Torus {
   // a disk, cone or cylinder.
 
   let torus    = (r1,r2)=>circle(1e12,r1)*circle(1e13,r2),
-    sphere   = (r)=>circle(1e13,0)*circle(1e12,r),
-    plane    = (x,y)=>segment(x*1e02)*segment(y*1e03),
-    cylinder = (r,l)=>segment(l*1e02)*circle(1e13,r),
-    disk     = (r)=>circle(1e12,0)*segment(r*1e01),
-    cone     = (r,l)=>circle(1e12,0)*segment(r*1e01-l*1e03);
+      sphere   = (r)=>circle(1e13,0)*circle(1e12,r),
+      plane    = (x,y)=>segment(x*1e02)*segment(y*1e03),
+      cylinder = (r,l)=>segment(l*1e02)*circle(1e13,r),
+      disk     = (r)=>circle(1e12,0)*segment(r*1e01),
+      cone     = (r,l)=>circle(1e12,0)*segment(r*1e01-l*1e03);
 
   // we can render these now just as our other primitives ..
   let elements = [
@@ -2261,12 +2286,12 @@ let Torus  = class Torus {
      let camera=1e1+1; // 0e1+1
 
 
-  let svg = Element.graph( () => {
+  let canvas = Element.graph( () => {
     let time = performance.now()/1234;
     camera['set']( Math.cos(time) + Math.sin(time)*1e13 ); // rotate around Y
-    return elements; }, { gl:true, animate:true, camera } );
+    return elements; }, { gl:true, animate:true, camera } ); // Requires gl canvas
 
-  window.Style.process( 'Torus', svg );
+  window.Style.process( 'Torus', canvas );
 
 } ); } };
 
