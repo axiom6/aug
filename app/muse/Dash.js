@@ -1979,6 +1979,81 @@ let Grids  = class Grids {
   GA$3( 3, 0, 1, () => {  // PGA3D Projective Euclidean 3D space. (dual)
 
   let items = [];
+  let origin=1e123, EX=1e012, EY=1e013, EZ=1e023;
+  
+  let widthf  = 5.0;
+  let heightf = 5.0;
+  let widthb  = 3.0;
+  let heightb = 3.0;
+  let widtho  = 4.0;
+  let heighto = 4.0;
+  let depth   = 2.0;
+  let scale   = 0.35;
+  
+  let point  = (x,y,z)=> origin + x*scale*EX - y*scale*EY + z*scale*EZ;
+  let linePP = (p1,p2)=> p1.Normalized & p2.Normalized;
+  let lineX  = (x,sw,nw,se,ne) => [sw*(1-x)+se*x, nw*(1-x)+ne*x]; // x scales from [0,1]
+  let lineY  = (y,sw,se,nw,ne) => [sw*(1-y)+nw*y, se*(1-y)+ne*y]; // y scales from [0,1]
+
+  let ooo = point(   0, 0,  0   );
+  let pxa = point( widtho, 0,  0   );
+  let pya = point( 0, heighto, 0   );
+  let pza = point( 0, 0,     depth );
+
+  let xaxis = linePP( ooo, pxa );
+  let yaxis = linePP( ooo, pya );
+  let zaxis = linePP( ooo, pza );
+
+  items.push( 0x00FF00, xaxis, yaxis, zaxis );
+  
+  let fsw = point( -widthf, -heightf, -depth );
+  let fse = point(  widthf, -heightf, -depth );
+  let fnw = point( -widthf,  heightf, -depth );
+  let fne = point(  widthf,  heightf, -depth );
+  let bsw = point( -widthb, -heightb,  depth );
+  let bse = point(  widthb, -heightb,  depth );
+  let bnw = point( -widthb,  heightb,  depth );
+  let bne = point(  widthb,  heightb,  depth );
+  
+  items.push( 0xFFFFFF,
+    ooo, 'OOO', pxa, 'PXA', pya, 'PYA', pza, 'PZA',
+    fsw, 'FSW', fse, 'FSE', fnw, 'FNW', fne, 'FNE',
+    bsw, 'BSW', bse, 'BSE', bnw, 'BNW', bne, 'BNE'  );
+
+  let stroke = ( i, n2 ) => {
+    return i % n2 === 0 ? 0xFFFFFF : 0x666666; };
+
+  let grid = ( n1, n2, sw, se, nw, ne, array ) => {
+    let d1 = 1.0 / n1;
+    for( let x=0, i=0; i<=n1; i++, x=i*d1 ) { array.push( stroke(i,n2), lineX(x,sw,nw,se,ne) ); }
+    for( let y=0, i=0; i<=n1; i++, y=i*d1 ) { array.push( stroke(i,n2), lineY(y,sw,se,nw,ne) ); } };
+
+    grid( 100, 10, fsw, fse, bsw, bse, items );  // South Grid
+    grid( 100, 10, fsw, bsw, fnw, bnw, items );  // West  Grid
+    grid( 100, 10, bsw, bse, bnw, bne, items );  // Back  Grid
+    grid( 100, 10, fse, bse, fne, bne, items );  // East  Grid
+
+    let camera = 1e0;
+
+    let svg = Element.graph( () => {
+      let time = performance.now()/12000;
+      camera['set']( Math.cos(time) + Math.sin(time)*1e13 ); // rotate around Y
+      return items; }, { animate:true, camera } );
+
+  window.Style.process( 'Grids', svg );
+
+  } ); } };
+
+//import GA from '../../lib/math/ganja.esm.js';
+let GA$4 = window['Algebra'];
+
+let Isomet  = class Isomet {
+
+  static ga() {
+
+  GA$4( 3, 0, 1, () => {  // PGA3D Projective Euclidean 3D space. (dual)
+
+  let items = [];
   let origin=1e123, EX=-1e012, EY=1e013, EZ=1e012;
   let point  = (x,y,z)=>origin+x*EX-y*EY+z*EZ;
 
@@ -1996,13 +2071,13 @@ let Grids  = class Grids {
   let oyz = point(0,h, c );
   let xoz = point(c,-t, c );
 
-  items.push( 0xFFFFFF, ooo, 'ooo', xoo, 'xoo', oyo, 'oyo', ooz, 'ooz', 
+  items.push( 0xFFFFFF, ooo, 'ooo', xoo, 'xoo', oyo, 'oyo', ooz, 'ooz',
                         xyo, 'xyo', oyz, 'oyz', xoz, 'xoz' );
 
   let xy = [ooo,xoo,xyo,oyo];
   let yz = [ooo,ooz,oyz,oyo];
   let zx = [ooo,ooz,xoz,xoo];
-  
+
   items.push( 0x888888, xy, 0x666666, yz, 0x444444, zx );
 
   let xyX = (x) => [ooo*(1-x)+xoo*x, oyo*(1-x)+xyo*x]; // x scales from [0,1]
@@ -2021,19 +2096,19 @@ let Grids  = class Grids {
   gxy( h, i, yzY, yzZ, items );
   gxy( h, i, zxX, zxZ, items );
 
-    let graph = Element.graph( () => { return items; }, {} );
+  let svg = Element.graph( () => { return items; }, {} );
 
-  window.Style.process( 'Grids', graph );
+  window.Style.process( 'Isomet', svg );
 
   } ); } };
 
-let GA$4 = window['Algebra'];
+let GA$5 = window['Algebra'];
 
 let Play  = class Play {
 
   static ga() {
 
-  GA$4(3,0,1,()=> {
+  GA$5(3,0,1,()=> {
 
     // console.log( 'PGA3D', this.describe() );
 
@@ -2043,13 +2118,13 @@ let Play  = class Play {
 
   } ); } };
 
-let GA$5 = window['Algebra'];
+let GA$6 = window['Algebra'];
 
 let Isohed  = class Isohed {
 
   static ga() {
 
-GA$5(3,0,1,()=>{  // Create a Clifford Algebra with 3,0,1 metric. 
+GA$6(3,0,1,()=>{  // Create a Clifford Algebra with 3,0,1 metric. 
 
   // Specify a point directly (trivectors specified with overloaded e-notation.)
   let point = (x,y,z)=>1e123-x*1e012+y*1e013+z*1e023;
@@ -2101,6 +2176,7 @@ var script$i = {
     return { comp:'Geom3D', key:'Isohed', pages:{
       Lines:   { title:'Lines',  key:'Lines',  klass:Lines,  created:false },
       Grids:   { title:'Grids',  key:'Grids',  klass:Grids,  created:false },
+      Isomet:  { title:'Isomet', key:'Isomet', klass:Isomet, created:false },
       Play:    { title:'Play',   key:'Play',   klass:Play,   created:false },
       Isohed:  { title:'Isohed', key:'Isohed', klass:Isohed, created:false }
     } } },
@@ -2138,14 +2214,14 @@ const __vue_script__$k = script$i;
   );
 
 //import GA from '../../lib/math/ganja.esm.js';
-let GA$6 = window['Algebra'];
+let GA$7 = window['Algebra'];
 
 let Planes = class Planes {
 
   static ga() {
 
 
-    GA$6( 4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
+    GA$7( 4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
 
       // no                  = 1e5 - 1e4  origin
       // ni                  = 0.5(1e4 + 1e5)  inifinity
@@ -2230,14 +2306,14 @@ let Planes = class Planes {
  */
 
 //import GA from '../../lib/math/ganja.esm.js';
-let GA$7 = window['Algebra'];
+let GA$8 = window['Algebra'];
 
 let Sphere = class Sphere {
 
   static ga() {
 
 
-    GA$7(4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
+    GA$8(4, 1, () => {  // Create a Clifford Algebra with 4,1 metric for 3D CGA.
 
       // console.log( this.describe() );
 

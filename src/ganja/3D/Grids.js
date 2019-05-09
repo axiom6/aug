@@ -9,51 +9,68 @@ let Grids  = class Grids {
   GA( 3, 0, 1, () => {  // PGA3D Projective Euclidean 3D space. (dual)
 
   let items = [];
-  let origin=1e123, EX=-1e012, EY=1e013, EZ=1e012;
-  let point  = (x,y,z)=>origin+x*EX-y*EY+z*EZ
-
-  let s =  0.20;    // xyz Scale
-  let t = 10.00*s; // Total lengths
-  let c =  8.66*s; // Cos(30)
-  let h =  5.00*s; // Sin(30) or Half
-  let i =  0.50*s; // 10% increment
-
-  let ooo = point(0,0 ,0 );
-  let xoo = point(c,-h, 0 );
-  let oyo = point(0,t, 0 );
-  let ooz = point(0,-h, c );
-  let xyo = point(c,h, 0 );
-  let oyz = point(0,h, c );
-  let xoz = point(c,-t, c );
-
-  items.push( 0xFFFFFF, ooo, 'ooo', xoo, 'xoo', oyo, 'oyo', ooz, 'ooz', 
-                        xyo, 'xyo', oyz, 'oyz', xoz, 'xoz' );
-
-  let xy = [ooo,xoo,xyo,oyo];
-  let yz = [ooo,ooz,oyz,oyo];
-  let zx = [ooo,ooz,xoz,xoo];
+  let origin=1e123, EX=1e012, EY=1e013, EZ=1e023;
   
-  items.push( 0x888888, xy, 0x666666, yz, 0x444444, zx );
+  let widthf  = 5.0;
+  let heightf = 5.0;
+  let widthb  = 3.0;
+  let heightb = 3.0;
+  let widtho  = 4.0;
+  let heighto = 4.0;
+  let depth   = 2.0
+  let scale   = 0.35;
+  
+  let point  = (x,y,z)=> origin + x*scale*EX - y*scale*EY + z*scale*EZ
+  let linePP = (p1,p2)=> p1.Normalized & p2.Normalized;
+  let lineX  = (x,sw,nw,se,ne) => [sw*(1-x)+se*x, nw*(1-x)+ne*x]; // x scales from [0,1]
+  let lineY  = (y,sw,se,nw,ne) => [sw*(1-y)+nw*y, se*(1-y)+ne*y]; // y scales from [0,1]
 
-  let xyX = (x) => [ooo*(1-x)+xoo*x, oyo*(1-x)+xyo*x]; // x scales from [0,1]
-  let xyY = (y) => [ooo*(1-y)+oyo*y, xoo*(1-y)+xyo*y]; // y scales from [0,1]
-  let yzY = (y) => [ooo*(1-y)+oyo*y, ooz*(1-y)+oyz*y]; // y scales from [0,1]
-  let yzZ = (z) => [ooo*(1-z)+ooz*z, oyo*(1-z)+oyz*z]; // z scales from [0,1]
-  let zxX = (x) => [ooo*(1-x)+xoo*x, ooz*(1-x)+xoz*x]; // x scales from [0,1]
-  let zxZ = (z) => [ooo*(1-z)+ooz*z, xoo*(1-z)+xoz*z]; // z scales from [0,1]
+  let ooo = point(   0, 0,  0   );
+  let pxa = point( widtho, 0,  0   );
+  let pya = point( 0, heighto, 0   );
+  let pza = point( 0, 0,     depth );
 
-  let gxy = (t,i, xf, yf, items ) => {
-    items.push(0xFFFFFF);
-    for( let x=0; x < t; x+=i ) { items.push(xf(x)); }
-    for( let y=0; y < t; y+=i ) { items.push(yf(y)); } }
+  let xaxis = linePP( ooo, pxa );
+  let yaxis = linePP( ooo, pya );
+  let zaxis = linePP( ooo, pza );
 
-  gxy( h, i, xyX, xyY, items ); // Not sure why h
-  gxy( h, i, yzY, yzZ, items );
-  gxy( h, i, zxX, zxZ, items );
+  items.push( 0x00FF00, xaxis, yaxis, zaxis );
+  
+  let fsw = point( -widthf, -heightf, -depth );
+  let fse = point(  widthf, -heightf, -depth );
+  let fnw = point( -widthf,  heightf, -depth );
+  let fne = point(  widthf,  heightf, -depth );
+  let bsw = point( -widthb, -heightb,  depth );
+  let bse = point(  widthb, -heightb,  depth );
+  let bnw = point( -widthb,  heightb,  depth );
+  let bne = point(  widthb,  heightb,  depth );
+  
+  items.push( 0xFFFFFF,
+    ooo, 'OOO', pxa, 'PXA', pya, 'PYA', pza, 'PZA',
+    fsw, 'FSW', fse, 'FSE', fnw, 'FNW', fne, 'FNE',
+    bsw, 'BSW', bse, 'BSE', bnw, 'BNW', bne, 'BNE'  );
 
-    let graph = Element.graph( () => { return items; }, {} );
+  let stroke = ( i, n2 ) => {
+    return i % n2 === 0 ? 0xFFFFFF : 0x666666; }
 
-  window.Style.process( 'Grids', graph );
+  let grid = ( n1, n2, sw, se, nw, ne, array ) => {
+    let d1 = 1.0 / n1;
+    for( let x=0, i=0; i<=n1; i++, x=i*d1 ) { array.push( stroke(i,n2), lineX(x,sw,nw,se,ne) ); }
+    for( let y=0, i=0; i<=n1; i++, y=i*d1 ) { array.push( stroke(i,n2), lineY(y,sw,se,nw,ne) ); } }
+
+    grid( 100, 10, fsw, fse, bsw, bse, items );  // South Grid
+    grid( 100, 10, fsw, bsw, fnw, bnw, items );  // West  Grid
+    grid( 100, 10, bsw, bse, bnw, bne, items );  // Back  Grid
+    grid( 100, 10, fse, bse, fne, bne, items );  // East  Grid
+
+    let camera = 1e0;
+
+    let svg = Element.graph( () => {
+      let time = performance.now()/12000;
+      camera['set']( Math.cos(time) + Math.sin(time)*1e13 ); // rotate around Y
+      return items; }, { animate:true, camera } );
+
+  window.Style.process( 'Grids', svg );
 
   } ) } }
     
