@@ -8,9 +8,11 @@ let Graph  = class Graph {
 
     GA( 2, 0, 1, () => {
 
-      let items = [];
-      let total = 5.0;
-      let scale = 0.35;
+      let items    = [];
+      let texts    = [];
+      let total    = 5.0;
+      let scale    = 0.35;
+   // let fontSize = 16;
 
       let pointXY = ( x, y )    => 1e12 - x*scale * 1e02 - y*scale * 1e01;
    // let pointXY = ( x, y )    => 1e12 - x*scale * 1e02 + y*scale * 1e01;
@@ -29,12 +31,11 @@ let Graph  = class Graph {
           let o2 = i  % n2 === 0;
           let st = o2 ? 0xFFFFFF : 0x666666;
           array.push( st, [ps, pn] ); // Push stroke and line onto array
-          if( o2 && i > 0 ) {                  // Lable major tics
-            let dn = 0; // 0.01*1e01;
-            let ds = 0; // 3*dn;
+          if( o2 ) {                  // Lable major tics
             let iv = i.toString();
-            if( axis.includes('s') ) { array.push( st, ps-ds, iv ); }
-            if( axis.includes('n') ) { array.push( st, pn+dn, iv ); } } } } // Push south and north axis labels
+            let xt = -total*(1-x) +total*x;
+            if( axis.includes('s') ) { text( texts, iv,  xt, -total, 0, '0.1', '#FFFFFF', 's' ); }
+            if( axis.includes('n') ) { text( texts, iv,  xt,  total, 0, '0.1', '#FFFFFF', 'n' ); } } } }
 
       let linesYL = ( n1, n2, nw, ne, sw, se, array, axis='we' )  => {
         let d1 = 1.0 / n1;
@@ -44,15 +45,11 @@ let Graph  = class Graph {
           let o2 = i  % n2 === 0;
           let st = o2 ? 0xFFFFFF : 0x666666;
           array.push( st, [pw, pe] ); // Push stroke and line onto array
-          if( o2 && i > 0 ) {                  // Lable major tics
-            let dw = 0; // 0.01*1e02;
-            let de = 0; // 3*dw;
+          if( o2 ) {                  // Lable major tics
             let iv = i.toString();
-            if( axis.includes('w') ) { array.push( st, pw-dw, iv ); }
-            if( axis.includes('e') ) { array.push( st, pe+de, iv ); } } } } // Push south and north axis
-        // labels
-
-      if( linesXL===false && lineX===false && lineY===false ) {}
+            let yt = -total*(1-y) + total*y;
+            if( axis.includes('w') ) { text( texts, iv, -total, yt, 0, '0.1', '#FFFFFF', 'w' ); }
+            if( axis.includes('e') ) { text( texts, iv,  total, yt, 0, '0.1', '#FFFFFF', 'e' ); } } } }
 
    // let oo = pointXY( 0,    0   );
       let sw = pointXY( -total, -total );
@@ -65,18 +62,61 @@ let Graph  = class Graph {
    //   return i % n2 === 0 ? 0xFFFFFF : 0x666666; }
 
       let grid = ( n1, n2, nw, ne, sw, se, array ) => {
-          linesXL( n1, n2, nw, ne, sw, se, array, 's' );
-          linesYL( n1, n2, nw, ne, sw, se, array, 'w' ); }
-     // let d1 = 1.0 / n1;
-     // for( let x=0, i=0; i<=n1; i++, x=i*d1 ) { array.push( stroke(i,n2), lineX(x,nw,ne,sw,se) ); }
-     // for( let y=0, i=0; i<=n1; i++, y=i*d1 ) { array.push( stroke(i,n2), lineY(y,nw,ne,sw,se) ); } }
+          linesXL( n1, n2, nw, ne, sw, se, array, 'sn' );
+          linesYL( n1, n2, nw, ne, sw, se, array, 'we' ); }
+
+      let justify = ( pos ) => {
+        let ju = 'middle';
+        if(      pos.includes('w') ) { ju = 'end';   }
+        else if( pos.includes('e') ) { ju = 'start'; }
+        return `text-anchor:${ju};`; }
+
+      let dx = ( pos, fs ) => {
+        let d = 0;
+        if(      pos.includes('w') ) { d = -1*fs  }
+        else if( pos.includes('e') ) { d =  1*fs; }
+        return d; }
+
+      let dy = ( pos, fs ) => {
+        let d = 0.25*fs;
+        if(      pos.includes('s') ) { d =  1.70*fs  }
+        else if( pos.includes('n') ) { d = -1.00*fs; }
+        return d; }
+
+      let text = ( texts, str, x, y, r, fontSize, color, pos ) => {
+        let xt   =  x*scale + dx( pos, 0.1 );
+        let yt   = -y*scale + dy( pos, 0.1 );
+        let ju   =  justify( pos );
+        texts.push( `<text x="${xt}" y="${yt}" font-family="Roboto" font-size="${fontSize}" style="pointer-events:none; ${ju}" 
+         fill="${color}">${str}</text>` );  } //  transform="rotate(${r},${x},${y})"
         
       grid( 100, 10, nw, ne, sw, se, items );
       
       let svg = Element.graph( () => { return items; }, { grid:false } );
 
+      text( texts, "OO", 0,    0,   0, '0.1', '#0000FF', 'mc' );
+   // text( texts, "SW", -total, -total, 0, '0.1', '#0000FF', 'sw' );
+   // text( texts, "SE",  total, -total, 0, '0.1', '#0000FF', 'se' );
+   // text( texts, "NW", -total,  total, 0, '0.1', '#0000FF', 'nw' );
+   // text( texts, "NE",  total,  total, 0, '0.1', '#0000FF', 'ne' );
+
+      let inner  = "";
+      for( let tx in texts ) {
+        inner += texts[tx]; }
+
+      let g = document.createElementNS( 'http://www.w3.org/2000/svg', 'g' );
+          g.innerHTML = inner;
+      svg.appendChild( g );
+
       window.Style.process( 'Graph', svg );
+
+      if( linesXL===false && lineX===false && lineY===false && dx===false && dy===false) {}
 
     } ) } }
 
 export default Graph;
+
+/*
+           if( axis.includes('w') ) { array.push( st, pw-dw, iv ); }
+           if( axis.includes('e') ) { array.push( st, pe+de, iv ); } } } } // Push south and north axis
+ */
