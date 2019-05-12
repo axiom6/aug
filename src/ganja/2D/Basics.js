@@ -1,5 +1,5 @@
 // Create a Clifford Algebra with 2,0,1 metric.
-//import GA from '../../lib/math/ganja.esm.js';
+//import GA from '../../lib/ga/ganja.esm.js';
 let GA = window['Algebra'];
 
 let Basics  = class Basics {

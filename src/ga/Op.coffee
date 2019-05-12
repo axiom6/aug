@@ -25,7 +25,7 @@ class Op
 
   add:( u, v ) -> u + v
   sub:( u, v ) -> u - v
-  mul:( u, v ) -> u * v
+  mul:( u, v ) -> u * v     # Scalar and geometric product
   div:( u, v ) -> u / v
   pow:( u, v ) -> u ** v
 

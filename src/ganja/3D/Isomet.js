@@ -1,5 +1,5 @@
 
-//import GA from '../../lib/math/ganja.esm.js';
+//import GA from '../../lib/ga/ganja.esm.js';
 let GA = window['Algebra'];
 
 let Isomet  = class Isomet {

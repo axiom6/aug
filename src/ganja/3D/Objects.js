@@ -1,6 +1,6 @@
 
 
-let GA = window['Algebra']; //import GA from '../../lib/math/ganja.esm.js';
+let GA = window['Algebra']; //import GA from '../../lib/ga/ganja.esm.js';
 
 let Objects  = class Objects {
 

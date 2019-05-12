@@ -36,5 +36,5 @@ export default new Router( {
       { path:'maths', name:'NoteMaths', components:{ NoteMaths:lazy('pub/note/Maths') } },
       { path:'ganja', name:'NoteGanja', components:{ NoteGanja:lazy('pub/note/Ganja') } } ] },
     { path: '/cube',  name:'Cube',      components:{ Cube:     lazy('pub/cube/Cube' ) } },
-    { path: '/wood',  name:'Wood',      components:{ Wood:     lazy('ani/wood/Wood' ) } }
+    { path: '/wood',  name:'Wood',      components:{ Wood:     lazy('vue/wood/Wood' ) } }
     ] } )
