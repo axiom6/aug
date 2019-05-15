@@ -11,8 +11,8 @@
   // is compiled by rollup.config.cube.js However the dynamic import of
   // this Cube.vue ends the warning messages. CoffeeScript import of original
   // CoffeeScript does not produce warning messages.
-  import Build  from '../../pub/cube/Build.js'
-  import CubeTh from '../../pub/cube/CubeTh.js'
+  import Build  from '../../pub/ikw/cube/Build.js'
+  import CubeTh from '../../pub/ikw/cube/CubeTh.js'
   
   export default {
     

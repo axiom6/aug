@@ -5,13 +5,13 @@
   
   import GeomND  from './GeomND.vue'
   import Dabs    from '../elem/Dabs.vue';
-  import Lines   from '../../src/ganja/3D/Lines.js';
-  import Grids   from '../../src/ganja/3D/Grids.js';
-  import Isomet  from '../../src/ganja/3D/Isomet.js';
-  import Play    from '../../src/ganja/3D/Play.js';
-  import Isohed  from '../../src/ganja/3D/Isohed.js';
-  import Objects from '../../src/ganja/3D/Objects.js';
-  import Torus   from '../../src/ganja/3D/Torus.js';
+  import Lines   from '../../src/gan/3D/Lines.js';
+  import Grids   from '../../src/gan/3D/Grids.js';
+  import Isomet  from '../../src/gan/3D/Isomet.js';
+  import Play    from '../../src/gan/3D/Play.js';
+  import Isohed  from '../../src/gan/3D/Isohed.js';
+  import Objects from '../../src/gan/3D/Objects.js';
+  import Torus   from '../../src/gan/3D/Torus.js';
 
   export default {
 

@@ -13,8 +13,8 @@
 
 <script type="module">
   
-  import Build   from '../../pub/cube/Build.js'
-  import Connect from '../../pub/conn/Connect.js'
+  import Build   from '../../pub/ikw/cube/Build.js';
+  import Connect from '../../pub/ikw/conn/Connect.js';
 
   export default {
 

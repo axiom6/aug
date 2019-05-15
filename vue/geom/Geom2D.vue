@@ -3,8 +3,8 @@
 
   import GeomND  from './GeomND.vue';
   import Dabs    from '../elem/Dabs.vue';
-  import Graph   from '../../src/ganja/2D/Graph.js';
-  import Basics  from '../../src/ganja/2D/Basics.js';
+  import Graph   from '../../src/gan/2D/Graph.js';
+  import Basics  from '../../src/gan/2D/Basics.js';
 
   export default {
 

@@ -6,6 +6,6 @@ import commonjs from 'rollup-plugin-commonjs';
 
 export default
   { input:          'vue/dash/Dash.vue',
-    output: { file: 'app/muse/Dash.js', format:'esm' },
+    output: { file: 'app/aug/Dash.js', format:'esm' },
     plugins: [ Vue(), Coffee(), Less(), commonjs() ] }
 

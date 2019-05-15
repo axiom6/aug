@@ -1,12 +1,12 @@
 
 <template>
-  <div class="stand" ref="Stand"></div>
+  <div class="stand" ref="StandNB"></div>
 </template>
 
 <script type="module">
 
   import { Inspector, Runtime } from 'https://unpkg.com/@observablehq/notebook-runtime@1?module';
-  import Notebook from '../../src/notebook/standard.js';
+  import StandNB from './StandNB.js';
   
   export default {
 
@@ -16,8 +16,7 @@
         Runtime.load( notebook, Inspector['into']( elem ) ); } },
 
     mounted: function () {
-      //console.log( 'Stand.mounted()', this.$refs );
-      this.run( 'Stand', Notebook ) }
+      this.run( 'StandNB', StandNB ) }
       
   }
 </script>

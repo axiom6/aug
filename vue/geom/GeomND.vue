@@ -11,7 +11,7 @@
 <script type="module">
   
   import Dabs  from '../elem/Dabs.vue';
-  import Style from '../../src/ganja/lib/Style.js';
+  import Style from '../../src/gan/lib/Style.js';
 
   export default {
 

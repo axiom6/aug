@@ -12,7 +12,7 @@
 <script type="module">
 
   import Dabs from '../elem/Dabs.vue';
-  import Drew from '../../pub/drew/Drew.js'
+  import Drew from '../../pub/bas/d3d/Drew.js'
 
   let Draw = {
 

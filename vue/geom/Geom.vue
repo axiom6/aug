@@ -12,7 +12,7 @@
 
 <script type="module">
   
-  import Style   from '../../src/ganja/lib/Style.js';
+  import Style   from '../../src/gan/lib/Style.js';
 
   let Geom = {
 

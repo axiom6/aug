@@ -3,6 +3,6 @@ import VueRollup  from 'rollup-plugin-vue'
 import commonjs   from 'rollup-plugin-commonjs';
 
 export default
-{ input:          'ani/wood/Wood.vue',
-  output: { file: 'ani/wood/Wood.js', format:'esm' },
+{ input:              'vue/wood/Wood.vue',
+  output: { file: 'pub/vue/comp/Wood.js', format:'esm' },
   plugins: [ VueRollup(), commonjs() ] }

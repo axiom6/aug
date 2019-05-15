@@ -76,25 +76,29 @@
 </script>
 
 <style lang="less">
+  
+  @import '../../css/fontawesome/init.css';
 
-   .dash { font-family:Roboto, sans-serif; font-size:1rem;
-     position:absolute; left:0; top:0; right:0; bottom:0; display:grid;
-     grid-template-columns: 11vw 85vw 4vw;
-     grid-template-rows:     6vh 88vh 6vh;
-     grid-template-areas:
-       "logo navb find"
-       "tocs view side"
-       "pref foot trak";
+  // top | right | bottom | left
 
-    #logo { grid-area:logo; justify-self:stretch; align-self:stretch; display:grid; }
-    #navb { grid-area:navb; justify-self:stretch; align-self:stretch; display:grid; }
-    #find { grid-area:find; justify-self:stretch; align-self:stretch; display:grid; }
-    #tocs { grid-area:tocs; justify-self:stretch; align-self:stretch; display:grid; }
-    #view { grid-area:view; justify-self:stretch; align-self:stretch; display:grid; }
-    #side { grid-area:side; justify-self:stretch; align-self:stretch; display:grid; }
-    #pref { grid-area:pref; justify-self:stretch; align-self:stretch; display:grid; }
-    #foot { grid-area:foot; justify-self:stretch; align-self:stretch; display:grid; }
-    #trak { grid-area:trak; justify-self:stretch; align-self:stretch; display:grid; } }
+  .dash { font-family:Roboto, sans-serif; font-size:1rem;
+   position:absolute; left:0; top:0; right:0; bottom:0; display:grid;
+   grid-template-columns: 11vw 85vw 4vw;
+   grid-template-rows:     6vh 88vh 6vh;
+   grid-template-areas:
+     "logo navb find"
+     "tocs view side"
+     "pref foot trak";
+  
+  #logo { grid-area:logo; justify-self:stretch; align-self:stretch; display:grid; }
+  #navb { grid-area:navb; justify-self:stretch; align-self:stretch; display:grid; }
+  #find { grid-area:find; justify-self:stretch; align-self:stretch; display:grid; }
+  #tocs { grid-area:tocs; justify-self:stretch; align-self:stretch; display:grid; }
+  #view { grid-area:view; justify-self:stretch; align-self:stretch; display:grid; }
+  #side { grid-area:side; justify-self:stretch; align-self:stretch; display:grid; }
+  #pref { grid-area:pref; justify-self:stretch; align-self:stretch; display:grid; }
+  #foot { grid-area:foot; justify-self:stretch; align-self:stretch; display:grid; }
+  #trak { grid-area:trak; justify-self:stretch; align-self:stretch; display:grid; } }
   
 </style>
 

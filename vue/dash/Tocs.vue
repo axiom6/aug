@@ -83,7 +83,7 @@
 </script>
 
 <style lang="less">
-  @import '../../css/fontawesome/init.css'; // top | right | bottom | left
+  //@import '../../css/fontawesome/init.css'; // top | right | bottom | left
   .tocs { background-color:black; font-size:3vh;
     ul { padding:0; margin:0; list-style:none; align-self:start; display:grid;
       li  { background-color:#333; padding-left:0.25em; align-self:start;                            // Comp
