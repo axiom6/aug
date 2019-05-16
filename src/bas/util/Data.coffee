@@ -55,7 +55,7 @@ class Data
     true
 
   @batchJSON:( obj, batch, callback, refine=null ) ->
-    url = Data.baseUrl() + obj.url
+    url = if obj.type is 'Font' then obj.url else Data.toUrl(obj.url)
     fetch( url )
       .then( (response) =>
         return response.json() )
@@ -67,7 +67,7 @@ class Data
     return
 
   @asyncJSON:( url, callback ) ->
-    url = Data.baseUrl() + url
+    url = Data.toUrl(url)
     fetch( url )
       .then( (response) =>
         response.json() )
@@ -80,9 +80,9 @@ class Data
   @planeData:( batch, plane ) ->
     batch[plane].data[plane]
 
-  @baseUrl:() ->
-    if window.location.href.includes('localhost') then Data.local else Data.hosted
-
+  @toUrl:(url) ->
+    if window.location.href.includes('localhost') then Data.local+url else Data.hosted+url
+           
   # ------ Quick JSON read ------
 
   @read:( url, callback ) ->

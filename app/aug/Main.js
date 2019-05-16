@@ -7,6 +7,8 @@ import Stream from '../../pub/bas/util/Stream.js';
 
 import Vis from '../../pub/bas/util/Vis.js';
 
+import Matcher from '../../pub/mga/ptn/Matcher.js';
+
 Main = (function() {
   class Main {
     static begin(onReady) {
@@ -16,8 +18,8 @@ Main = (function() {
 
     static init(batch) {
       var infoSpec, subjects;
+      Main.Matcher.doMatches();
       Main.Batch = batch; // Not necessary here, but assigned for compatibilitry
-      // console.log( 'Batch.Geom', batch['Geom'])
       subjects = ["Info", "Know", "Wise", "Draw", "Note", "Cube", "Navb", "Tabs", "Geom"];
       infoSpec = {
         subscribe: false,
@@ -55,6 +57,8 @@ Main = (function() {
   Data.hosted = "https://ui-48413.firebaseapp.com/";
 
   Main.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json";
+
+  Main.Matcher = Matcher;
 
   Main.Batch = {
     Cols: {
@@ -102,7 +106,7 @@ Main = (function() {
     Font: {
       url: Main.FontUrl,
       data: null,
-      type: 'Spec',
+      type: 'Font',
       plane: 'Cube'
     }
   };

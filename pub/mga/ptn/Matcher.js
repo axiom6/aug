@@ -8,15 +8,22 @@ import {
 
 Matcher = class Matcher {
   static doMatches() {
-    Matcher.doMatch(3);
-    Matcher.doMatch(3.14);
-    Matcher.doMatch(['str', 3.14]);
-    Matcher.doMatch([1, 2, 3]);
-    Matcher.doMatch({
-      x: 'x'
-    });
-    Matcher.doMatch({});
-    return Matcher.doLisp();
+    var e;
+    try {
+      Matcher.doMatch(3);
+      Matcher.doMatch(3.14);
+      Matcher.doMatch(['str', 3.14]);
+      Matcher.doMatch([1, 2, 3]);
+      Matcher.doMatch({
+        x: 'x'
+      });
+      Matcher.doMatch({});
+      Matcher.doLisp();
+      return Matcher.doExp();
+    } catch (error) {
+      e = error;
+      return console.error('Marcher.doMatches()', e);
+    }
   }
 
   static doMatch(x) {
@@ -54,6 +61,38 @@ Matcher = class Matcher {
     console.log('lisp 3', lisp([plus, 1, 2]));
     console.log('lisp 3', lisp([plus, 1, [minus, 4, 2]]));
     console.log('lisp 6', lisp([reduce, plus, [1, 2, 3]]));
+  }
+
+  static doExp() {
+    var Add, Div, Mul, Sub, calc;
+    Add = (u, v) => {
+      return u + v;
+    };
+    Sub = (u, v) => {
+      return u - v;
+    };
+    Mul = (u, v) => {
+      return u * v;
+    };
+    Div = (u, v) => {
+      return u / v;
+    };
+    calc = function(exp) {
+      return match(exp, ['Add', _, _], (u, v) => {
+        return Add(u, v);
+      }, ['Sub', _, _], (u, v) => {
+        return Sub(u, v);
+      }, ['Mul', _, _], (u, v) => {
+        return Mul(u, v);
+      }, ['Div', _, _], (u, v) => {
+        return Div(u, v);
+      }, _, 'Calc Error');
+    };
+    console.log('doExp Add', calc(['Add', 1, 2]));
+    console.log('doExp Sub', calc(['Sub', 3, 2]));
+    console.log('doExp Mul', calc(['Mul', 3, 4]));
+    console.log('doExp Div', calc(['Div', 6, 2]));
+    return console.log('doExp Pow', calc(['Pow', 2, 3]));
   }
 
 };

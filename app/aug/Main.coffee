@@ -1,15 +1,17 @@
 
-import Data   from '../../pub/bas/util/Data.js'
-import Stream from '../../pub/bas/util/Stream.js'
-import Vis    from '../../pub/bas/util/Vis.js'
+import Data    from '../../pub/bas/util/Data.js'
+import Stream  from '../../pub/bas/util/Stream.js'
+import Vis     from '../../pub/bas/util/Vis.js'
+import Matcher from '../../pub/mga/ptn/Matcher.js'
 
 class Main
 
   Data.local   = "http://localhost:63342/aug/app/data/"
   Data.hosted  = "https://ui-48413.firebaseapp.com/"
   Main.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json"
+  Main.Matcher = Matcher
 
-  Main.Batch =
+  Main.Batch = {
     Cols: { url:'muse/Cols.json', data:null, type:'Pack', plane:'Cols' }
     Rows: { url:'muse/Rows.json', data:null, type:'Pack', plane:'Rows' }
     Info: { url:'muse/Info.json', data:null, type:'Pack', plane:'Info' }
@@ -17,7 +19,7 @@ class Main
     Wise: { url:'muse/Wise.json', data:null, type:'Pack', plane:'Wise' }
     Geom: { url:'muse/Geom.json', data:null, type:'Pack', plane:'Geom' }
     Cube: { url:'muse/Cube.json', data:null, type:'Pack', plane:'Cube' }
-    Font: { url:Main.FontUrl,     data:null, type:'Spec', plane:'Cube' }
+    Font: { url:Main.FontUrl,     data:null, type:'Font', plane:'Cube' } }
 
   Main.begin  =  ( onReady ) ->
     Main.onReady = onReady
@@ -25,14 +27,13 @@ class Main
     return
 
   Main.init =  ( batch ) ->
+    Main.Matcher.doMatches()
     Main.Batch = batch # Not necessary here, but assigned for compatibilitry
-    # console.log( 'Batch.Geom', batch['Geom'])
     subjects = ["Info","Know","Wise","Draw","Note","Cube","Navb","Tabs","Geom"]
     infoSpec = { subscribe:false, publish:false, subjects:subjects}
     Main.stream = new Stream( subjects, infoSpec )
     Main.mergePracsCols()
     Main.onReady()
-    # Main.logPracs( 'Info' )
     return
 
   Main.mergePracsCols = () ->
