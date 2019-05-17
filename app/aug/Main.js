@@ -7,7 +7,7 @@ import Stream from '../../pub/bas/util/Stream.js';
 
 import Vis from '../../pub/bas/util/Vis.js';
 
-import Matcher from '../../pub/mga/ptn/Matcher.js';
+import Matcher from '../../pub/math/ptn/Matcher.js';
 
 Main = (function() {
   class Main {

@@ -64,7 +64,7 @@ Matcher = class Matcher {
   }
 
   static doExp() {
-    var Add, Div, Mul, Sub, calc;
+    var Add, Div, Mul, Neg, Sub, calc1, calc2, calc3, f1, f2, fa, toPtns;
     Add = (u, v) => {
       return u + v;
     };
@@ -77,7 +77,80 @@ Matcher = class Matcher {
     Div = (u, v) => {
       return u / v;
     };
-    calc = function(exp) {
+    Neg = (u) => {
+      return -u;
+    };
+    f1 = (f) => {
+      return [f.name, _];
+    };
+    f2 = (f) => {
+      return [f.name, _, _];
+    };
+    fa = (f) => {
+      var a, i, j, ref;
+      a = [f.name];
+      for (i = j = 0, ref = f.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
+        a.push(_);
+      }
+      return a;
+    };
+    console.log('f2 Add', f2(Add));
+    console.log('fa Add', fa(Add));
+    console.log('fa Neg', fa(Neg));
+    toPtns = (adts) => {
+      var i, j, ptns, ref;
+      console.log('adts', adts);
+      ptns = new Array(adts.length);
+      for (i = j = 0, ref = adts.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
+        ptns[i] = i % 2 === 1 ? f2(adts[i]) : adts[i];
+      }
+      return ptns;
+    };
+    calc1 = function(exp) {
+      var ptns;
+      ptns = toPtns([
+        exp,
+        Add,
+        (u,
+        v) => {
+          return Add(u,
+        v);
+        },
+        Sub,
+        (u,
+        v) => {
+          return Sub(u,
+        v);
+        },
+        Mul,
+        (u,
+        v) => {
+          return Mul(u,
+        v);
+        },
+        Div,
+        (u,
+        v) => {
+          return Div(u,
+        v);
+        }
+      ]);
+      console.log('ptns', ptns);
+      return match(...ptns);
+    };
+    calc1(['Add', 1, 2]);
+    calc2 = function(exp) {
+      return match(exp, f2(Add), (u, v) => {
+        return Add(u, v);
+      }, f2(Sub), (u, v) => {
+        return Sub(u, v);
+      }, f2(Mul), (u, v) => {
+        return Mul(u, v);
+      }, f2(Div), (u, v) => {
+        return Div(u, v);
+      }, _, 'Calc2 Error');
+    };
+    calc3 = function(exp) {
       return match(exp, ['Add', _, _], (u, v) => {
         return Add(u, v);
       }, ['Sub', _, _], (u, v) => {
@@ -86,13 +159,15 @@ Matcher = class Matcher {
         return Mul(u, v);
       }, ['Div', _, _], (u, v) => {
         return Div(u, v);
-      }, _, 'Calc Error');
+      }, _, 'Calc3 Error');
     };
-    console.log('doExp Add', calc(['Add', 1, 2]));
-    console.log('doExp Sub', calc(['Sub', 3, 2]));
-    console.log('doExp Mul', calc(['Mul', 3, 4]));
-    console.log('doExp Div', calc(['Div', 6, 2]));
-    return console.log('doExp Pow', calc(['Pow', 2, 3]));
+    console.log('doExp Add', calc2(['Add', 1, 2]));
+    console.log('doExp Sub', calc3(['Sub', 3, 2]));
+    console.log('doExp Mul', calc2(['Mul', 3, 4]));
+    console.log('doExp Div', calc1(['Div', 6, 2]));
+    if (calc1 === false && calc2 === false && calc3 === false && f1 === false && fn === false) {
+      return {};
+    }
   }
 
 };

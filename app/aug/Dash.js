@@ -23531,7 +23531,7 @@ Data = class Data {
 
   static batchJSON(obj, batch, callback, refine = null) {
     var url;
-    url = Data.baseUrl() + obj.url;
+    url = obj.type === 'Font' ? obj.url : Data.toUrl(obj.url);
     fetch(url).then((response) => {
       return response.json();
     }).then((data) => {
@@ -23548,7 +23548,7 @@ Data = class Data {
   }
 
   static asyncJSON(url, callback) {
-    url = Data.baseUrl() + url;
+    url = Data.toUrl(url);
     fetch(url).then((response) => {
       return response.json();
     }).then((data) => {
@@ -23565,14 +23565,15 @@ Data = class Data {
     return batch[plane].data[plane];
   }
 
-  static baseUrl() {
+  static toUrl(url) {
     if (window.location.href.includes('localhost')) {
-      return Data.local;
+      return Data.local + url;
     } else {
-      return Data.hosted;
+      return Data.hosted + url;
     }
   }
 
+  
   // ------ Quick JSON read ------
   static read(url, callback) {
     if (Util$1.isObj(url)) {

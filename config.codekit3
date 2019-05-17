@@ -2073,46 +2073,57 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/mga/ga/Basic.js": {
+	"/pub/math/ga/Basic.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/mga/ga/Basic-min.js",
+		"oAP": "/pub/math/ga/Basic-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/mga/ga/GA.js": {
+	"/pub/math/ga/GA.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/mga/ga/GA-min.js",
+		"oAP": "/pub/math/ga/GA-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/mga/ga/Op.js": {
+	"/pub/math/ga/Op.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/mga/ga/Op-min.js",
+		"oAP": "/pub/math/ga/Op-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/mga/ptn/Matcher.js": {
+	"/pub/math/ptn/Adt.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/mga/ptn/Matcher-min.js",
+		"oAP": "/pub/math/ptn/Adt-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/math/ptn/Matcher.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/ptn/Matcher-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2730,45 +2741,67 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/mga/ga/Basic.coffee": {
+	"/src/math/ga/Basic.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/mga/ga/Basic.js",
+		"oAP": "/pub/math/ga/Basic.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/mga/ga/GA.coffee": {
+	"/src/math/ga/GA.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/mga/ga/GA.js",
+		"oAP": "/pub/math/ga/GA.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/mga/ga/Op.coffee": {
+	"/src/math/ga/Op.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/mga/ga/Op.js",
+		"oAP": "/pub/math/ga/Op.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/mga/ptn/Matcher.coffee": {
+	"/src/math/ptn/Adt.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/mga/ptn/Matcher.js",
+		"oAP": "/pub/math/ptn/Adt.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/math/ptn/Matcher.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/math/ptn/Matcher.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/math/ptn/MathML.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/math/ptn/MathML.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
@@ -6385,23 +6418,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.vue",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "",
-			"autoOutputPathReplace2": "",
-			"autoOutputPathStyle": 0,
-			"fileExtension": "vue",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.html",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "",
 			"autoOutputPathReplace2": "",
 			"autoOutputPathStyle": 0,
 			"fileExtension": "html",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.vue",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "",
+			"autoOutputPathReplace2": "",
+			"autoOutputPathStyle": 0,
+			"fileExtension": "vue",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}
