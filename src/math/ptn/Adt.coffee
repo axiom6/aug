@@ -53,8 +53,8 @@ class Adt
   # Parenthesis Braces Object Array
   @Par = (u)   => ( u   )
   @Brc = (u)   => { u   }
-  @Obj = (k,v) => { k:v } # ???
-  @Arr = (u)   => [ u   ] # ???
+  #Obj = (k,v) => { k:v } # ???
+  #Arr = (u)   => [ u   ] # ???
 
   @ArithAdts = [@Var,@Num,@Dbl,@Rat,@Equ,@Add,@Sub,@Mul,@Div,@Pow,@Neg,@Rec,@Abs,@Par,@Brc]
 

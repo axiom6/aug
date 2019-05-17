@@ -1,6 +1,6 @@
 
 import {match} from '../../bas/util/Match.js'
-import A from './Adt'
+import A       from '../../pub/math/ptn/Adt.js'
 
 class MathML
 
@@ -9,11 +9,19 @@ class MathML
     @math = {}
     @ptns = @toPtns()
 
-  markup:( exp, key ) ->
+  markup:( ex, key ) ->
     @key = key
     @math[@key] = ""
-    @m( exp )
+    @head()
+    @app( "<math>")
+    @exp(  ex )
+    @app( "</math>","</root>")
     return
+
+  head:() ->
+    @math[key] += """<?xml version="1.0" encoding="UTF-8" standalone="yes">
+                     <?xml-stylesheet type="text/css" href="MathML.css">
+                     <root xmlns="http://www.w3.org/1998/Math/MathML">"""
 
   app:( ...args ) ->
     @math[key] += arg for arg in args
@@ -32,11 +40,31 @@ class MathML
     return
 
   bin:( t, u, op, v ) ->
-    @beg(t); @exp(u); @app('+'); @exp(v); @end(t)
+    @beg(t); @exp(u); @beg('mo'); @app(op); @end('mo'); @exp(v); @end(t)
     return
 
-  tuv:( t, u, v, ) ->
+  uni:( op, u ) ->
+    @beg('mo'); @app(op); @end('mo'); @exp(u)
+    return
+
+  sur:( bop, u, eop ) ->
+    @beg('mo'); @app(bop); @end('mo'); @exp(u); @beg('mo'); @app(eop); @end('mo');
+    return
+
+  tuv:( t, u, v ) ->
     @beg(t); @exp(u); @exp(v); @end(t)
+    return
+
+  fun:( f, u ) ->
+    @beg('mrow'); @app(f); @fen(u); @end('mrow')
+    return
+
+  fen:( u ) ->
+    @beg('mfence'); @exp(u); @end('mfence')
+    return
+
+  sum:( t, a, b, sym, u ) ->
+    @beg(t); @tuv(sym,a,b); @end(t); @exp(u)
     return
 
   exp:( e ) ->
@@ -44,89 +72,55 @@ class MathML
     return
 
   toPtns:() -> A.toPtns( [
-    A.Num, (n)   => @tag('mn',n ),
-    A.Dbl, (d)   => @tag('mn',d ),
-    A.Rat, (u,v) => @tuv('mfrac', u,v ),
-    A.Add, (u,v) => @bin('mrow', u, '+', v ),
-    A.Sub, (u,v) => @bin('mrow', u, '-', v ),
-    A.Mul, (u,v) => @bin('mrow', u, '*', v ),
-    A.Div, (u,v) => @tuv('mfrac', u,v ),
-    A.Rec, (v)   => @tuv('mfrac', A.Num(1), v ),
-    A.Pow, (u,v) => @tuv('msup', u,v ),
-    A.Neg, (u,v) => @tuv('msup', u,v ),
+    A.Var,  (s)   => @tag('mi',s ),
+    A.Num,  (n)   => @tag('mn',n ),
+    A.Dbl,  (d)   => @tag('mn',d ),
+    A.Rat,  (u,v) => @tuv('mfrac', u,v ),
+    A.Equ,  (u,v) => @bin('mrow',  u, '=', v ),
+    A.Add,  (u,v) => @bin('mrow',  u, '+', v ),
+    A.Sub,  (u,v) => @bin('mrow',  u, '-', v ),
+    A.Mul,  (u,v) => @bin('mrow',  u, '*', v ),
+    A.Div,  (u,v) => @tuv('mfrac', u,v ),
+    A.Pow,  (u,v) => @tuv('msup',  u, v ),
+    A.Neg,  (u)   => @uni('-', u ),
+    A.Rec,  (v)   => @tuv('mfrac', A.Num(1), v ),
+    A.Abs,  (u)   => @sur( '|', u, '|' ),
+    A.Par,  (u)   => @fen(u),
+    A.Brc,  (u)   => @fen(u),
+    A.Lnn,  (u)   => @fun('ln', u ),
+    A.Log,  (u,v) => u + v,
+    A.Roo,  (u,v) => u + v,
+    A.Sqt,  (u)   => @tag('msqrt', u ),
+    A.Eee,  (u)   => @tuv('msup', A.Var('e'), v ),
+    A.Sin,  (u)   => @fun('sin',    u ),
+    A.Cos,  (u)   => @fun('cot',    u ),
+    A.Tan,  (u)   => @fun('tan',    u ),
+    A.Csc,  (u)   => @fun('csc',    u ),
+    A.Sec,  (u)   => @fun('sec',    u ),
+    A.Cot,  (u)   => @fun('cot',    u ),
+    A.ASin, (u)   => @fun('arcsin', u ),
+    A.ACos, (u)   => @fun('arccot', u ),
+    A.ATan, (u)   => @fun('arctan', u ),
+    A.ACsc, (u)   => @fun('arccsc', u ),
+    A.ASec, (u)   => @fun('arcsec', u ),
+    A.ACot, (u)   => @fun('arccot', u ),
+    A.Fun,  (f,u) => @fun( f,         u ),
+    A.Dif,  (u)   => @uni('d',       u ),
+    A.Itg,  (u)   => @uni('\u222B;', u ),
+    A.Itl,(a,b,u) => @sum('msubsup',   a,b, '\u222B', u ),
+    A.Sum,(a,b,u) => @sum('munderover',a,b, '\u2211', u ),
+    A.Sub,  (u,v) => @tuv('msub',    u, v ),
+    A.Sup,  (u,a) => @tuv('msup',    u, v ),
+    A.Lim,  (u,v) => @tuv('msubsup', u, v ) ] )
 
-  ] )
-
-
-  def funcML( t:Text, func:String, u:Exp )
-  {
-    t.app( '<',  "mrow", '>' )
-  mathML( t, "mi", func )
-  mathML( t, "mfence", u )
-  t.app( "</", "mrow", '>' )
-  }
-
-  def mathML( t:Text, tag:String, u:Exp, v:Exp )
-  {
-    t.app( '<',  tag,  '>' )
-  u.mathML(t)
-  v.mathML(t)
-  t.app( "</", tag, '>' )
-  }
-
-  def mathML( t:Text, tag:String, u:Exp, op:String, v:Exp )
-  {
-    t.app( '<',  tag,  '>' )
-  u.mathML(t)
-  mathML( t, "mo", op )
-  v.mathML(t)
-  t.app( "</", tag, '>' )
-  }
-
-  def operML( t:Text, tag:String, op:String, a:Exp, b:Exp, u:Exp )
-  {
-    t.app( '<',  tag,  '>' )
-  mathML( t, "mo", op )
-  a.mathML(t)
-  b.mathML(t)
-  t.app( "</", tag, '>' )
-  u.mathML(t)
-  }
-
-  def mathMLCex( t:Text, r:Exp, i:Exp )
-    { r.mathML(t); i.mathML(t); t.app("<mi>i</mi>") }
-
-  def mathMLVex( t:Text, a:Array[Exp] )
-  {
-    t.app( "<mfenced open='[' close=']'>" )
-  for( i <- a.indices )
-  a(i).mathML(t)            // MathML takes care of commas
-  t.app( "</mfenced>" )
-  }
-
-  def mathMLMex( t:Text, mat:Array[Vex] )
-  {
-    t.app( "<mfenced open='[' close=']'>", "<mtable>" )
-    for( i <- mat.indices )
-    {
-      t.app( "<mtr>" )
-    for( j <- 0 until mat(i).n )
-    { t.app("<mtd>"); mat(i)(j).mathML(t); t.app("</mtd>") }
-    t.app( "</mtr>" )
-    }
-    t.app( "</mtable>", "</mfenced>" )
-  }
-
-  def headML( t:Text )
-  {
-    t.app( "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>", Text.eol )
-    t.app( "<?xml-stylesheet type=\"text/css\" href=\"MathML.css\" ?>", Text.eol )
-    t.app( "<root xmlns=\"http://www.w3.org/1998/Math/MathML\">", Text.eol )
-    }
-
-    def begML(  t:Text ) { t.app("<math>") }
-    def endML(  t:Text ) { t.app("</math>", Text.eol ) }
-    def footML( t:Text ) { t.app("</root>", Text.eol ) }
-
+  @test:(  key ) ->
+    apb = A.Add(A.Var('a'),A.Var('b'))
+    emc = A.Equ(A.Var'E',A.Mul(A.Var'm',A.Pow(A.Var('C'),A.Num(2))))
+    sum = A.Sum(A.Equ(A.Var('i'),A.Num(1)),A.Var('n'),A.Sub(A.Var('x'),A.Var('i')))
+    switch key
+      when 'emc' then @markup( emc,'emc' )
+      when 'sum' then @markup( sum,'sum' )
+      else            @markup( apb,'apb' )
+    return @math(key)
 
 export default MathML
