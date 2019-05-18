@@ -34,17 +34,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/app/aug/Dash.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/aug/Dash-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/app/aug/Lazy.js": {
 		"bF": 0,
 		"ft": 64,
@@ -78,6 +67,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/app/aug/roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/aug/roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/app/aug/Router.js": {
 		"bF": 0,
 		"ft": 64,
@@ -86,50 +86,6 @@
 		"oA": 1,
 		"oAP": "/app/muse/Router-min.js",
 		"oF": 2,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/build/rollup.cube.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/build/rollup.cube-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/build/rollup.dash.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/build/rollup.dash-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/build/rollup.note.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/build/rollup.note-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/build/rollup.wood.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/build/rollup.wood-min.js",
-		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
@@ -2161,6 +2117,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/vue/dash/Dash.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/dash/Dash-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/vue/note/EmbedVue.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2818,13 +2785,24 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/vue/comp/Cube.roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/comp/Cube.roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/vue/comp/Cube.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/comp/Cube.vue",
-		"oF": 0
+		"oA": 0,
+		"oAP": "/pub/vue/comp/Cube.js",
+		"oF": 3
 		},
 	"/vue/comp/Draw.vue": {
 		"cB": 0,
@@ -2873,6 +2851,17 @@
 		"oA": 1,
 		"oAP": "/vue/comp/Wise.vue",
 		"oF": 0
+		},
+	"/vue/dash/Dash.roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/dash/Dash.roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
 		},
 	"/vue/dash/Dash.vue": {
 		"cB": 0,
@@ -3110,6 +3099,17 @@
 		"oAP": "/vue/note/Maths.vue",
 		"oF": 0
 		},
+	"/vue/note/Note.roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/note/Note.roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/vue/note/Note.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -3247,6 +3247,17 @@
 		"oAP": "/vue/wood/Wood.html",
 		"oF": 0
 		},
+	"/vue/wood/Wood.roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/wood/Wood.roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/vue/wood/wood.scss": {
 		"aP": 0,
 		"bl": 0,
@@ -3264,9 +3275,9 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 1,
-		"oAP": "/vue/wood/Wood.vue",
-		"oF": 0
+		"oA": 0,
+		"oAP": "/vue/wood/Wood.js",
+		"oF": 1
 		},
 	"/zzz/ani/bird/Bird.css": {
 		"aP": 1,
@@ -4376,9 +4387,56 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"/zzz/vue/Btns.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/vue/Btns.vue",
+		"oF": 0
+		},
+	"/zzz/vue/Home.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/vue/Home-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/vue/Home.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/vue/Home.vue",
+		"oF": 0
+		},
+	"/zzz/vue/roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/vue/roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
 		}
 	},
 "hooks": [
+	{
+		"enabled": 1,
+		"name": "Hook #1",
+		"predicateDataBase64Encoded": "YnBsaXN0MDDUAQIDBAUGYmNYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK8QFgcIDxQcJicqMTU6Oz5CRktMT1VZXV9VJG51bGzTCQoLDA0OXxAXTlNDb21wb3VuZFByZWRpY2F0ZVR5cGVfEA9OU1N1YnByZWRpY2F0ZXNWJGNsYXNzEAKAAoAV0hALERNaTlMub2JqZWN0c6ESgAOAFNQLFRYXGBkaG18QEU5TUmlnaHRFeHByZXNzaW9uXxAQTlNMZWZ0RXhwcmVzc2lvbl8QE05TUHJlZGljYXRlT3BlcmF0b3KAE4AOgASAEdUdHh8gCyEiIyQlWU5TT3BlcmFuZF5OU1NlbGVjdG9yTmFtZV8QEE5TRXhwcmVzc2lvblR5cGVbTlNBcmd1bWVudHOABoAFEAOACIANXHZhbHVlRm9yS2V5OtIfCygpEAGAB9IrLC0uWiRjbGFzc25hbWVYJGNsYXNzZXNfEBBOU1NlbGZFeHByZXNzaW9uoy0vMFxOU0V4cHJlc3Npb25YTlNPYmplY3TSEAsyNKEzgAmADNMLHzY3ODlZTlNLZXlQYXRogAsQCoAKXWlucHV0RnVsbFBhdGjSKyw8PV8QHE5TS2V5UGF0aFNwZWNpZmllckV4cHJlc3Npb26jPC8w0issP0BeTlNNdXRhYmxlQXJyYXmjP0EwV05TQXJyYXnSKyxDRF8QE05TS2V5UGF0aEV4cHJlc3Npb26kQ0UvMF8QFE5TRnVuY3Rpb25FeHByZXNzaW9u00cfC0hJSl8QD05TQ29uc3RhbnRWYWx1ZYAPEACAEFQudnVl0issTU5fEBlOU0NvbnN0YW50VmFsdWVFeHByZXNzaW9uo00vMNQLUFFSU0kjVFpOU01vZGlmaWVyV05TRmxhZ3NeTlNPcGVyYXRvclR5cGWAEhBj0issVldfEBVOU0luUHJlZGljYXRlT3BlcmF0b3KjVlgwXxATTlNQcmVkaWNhdGVPcGVyYXRvctIrLFpbXxAVTlNDb21wYXJpc29uUHJlZGljYXRlo1pcMFtOU1ByZWRpY2F0ZdIrLEFeokEw0issYGFfEBNOU0NvbXBvdW5kUHJlZGljYXRlo2BcMF8QD05TS2V5ZWRBcmNoaXZlctFkZVRyb290gAEACAARABoAIwAtADIANwBQAFYAXQB3AIkAkACSAJQAlgCbAKYAqACqAKwAtQDJANwA8gD0APYA+AD6AQUBDwEeATEBPQE/AUEBQwFFAUcBVAFZAVsBXQFiAW0BdgGJAY0BmgGjAagBqgGsAa4BtQG/AcEBwwHFAdMB2AH3AfsCAAIPAhMCGwIgAjYCOwJSAlkCawJtAm8CcQJ2AnsClwKbAqQCrwK3AsYCyALKAs8C5wLrAwEDBgMeAyIDLgMzAzYDOwNRA1UDZwNqA28AAAAAAAACAQAAAAAAAABmAAAAAAAAAAAAAAAAAAADcQ==",
+		"runOrder": 0,
+		"scriptSourceString": "rollup --config vue/wood/Wood.roll.js",
+		"scriptType": 1,
+		"uuidString": "F15CFA70-C7AD-4451-89D3-08E30980CE31"
+		}
 	],
 "manualImportLinks": {
 	},
@@ -6429,23 +6487,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.vue",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "",
-			"autoOutputPathReplace2": "",
-			"autoOutputPathStyle": 0,
-			"fileExtension": "vue",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.html",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "",
 			"autoOutputPathReplace2": "",
 			"autoOutputPathStyle": 0,
 			"fileExtension": "html",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 0,
+			"autoOutputPathFilenamePattern": "*.js",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "vue",
+			"autoOutputPathReplace2": "pub/vue",
+			"autoOutputPathStyle": 3,
+			"fileExtension": "vue",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

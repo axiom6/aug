@@ -4,30 +4,28 @@
   "description": "Aug",
   "author": "Tom Flaherty",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/axiom6/aug/issues"
-  },
   "scripts": {
-    "dash": "rollup --config app/build/rollup.dash.js",
-    "cube": "rollup --config app/build/rollup.cube.js",
-    "wood": "rollup --config app/build/rollup.wood.js",
-    "note": "rollup --config app/build/rollup.note.js"
+    "dash": "rollup --config vue/dash/Dash.roll.js",
+    "cube": "rollup --config vue/comp/Cube.roll.js",
+    "wood": "rollup --config vue/wood/Wood.roll.js",
+    "note": "rollup --config vue/note/Note.roll.js"
   },
   "dependencies": {
-    "@vue/dev-server": "^0.1.1",
     "d3": "^5.9.2",
     "ganja.js": "^1.0.139",
-    "rollup-plugin-ascii": "0.0.3",
-    "rollup-plugin-scss": "^1.0.1",
     "vue": "^2.5.22"
   },
   "devDependencies": {
+    "@vue/dev-server": "^0.1.1",
+    "babel-eslint": "^10.0.1",
     "coffeescript": "^2.4.1",
+    "typescript": "^3.4.5",
     "eslint": "^5.12.0",
     "eslint-config-jwalker": "^5.2.0",
     "eslint-plugin-vue": "^5.1.0",
     "node-sass": "^4.11.0",
     "rollup": "^1.7.3",
+    "rollup-plugin-ascii": "0.0.3",
     "rollup-plugin-buble": "^0.19.6",
     "rollup-plugin-coffee-script": "^2.0.0",
     "rollup-plugin-commonjs": "^9.3.0",
@@ -35,18 +33,14 @@
     "rollup-plugin-filesize": "^6.0.0",
     "rollup-plugin-less": "^1.1.2",
     "rollup-plugin-node-resolve": "^4.2.3",
+    "rollup-plugin-scss": "^1.0.1",
+    "rollup-plugin-typescript2": "^0.21.1",
     "rollup-plugin-vue": "^4.6.1",
     "vue-template-compiler": "^2.5.22"
   },
-  "devDependenciesGlobal": {
-    "coffeescript": "^2.4.1",
-    "less": ">=2.7.x"
-  },
   "engines": {
-    "node": ">=10.10.0"
+    "node": ">=10.15.3"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/axiom6/cue.git"
-  }
+  "bugs": {       "url": "https://github.com/axiom6/aug/issues" },
+  "repository": { "url":   "git://github.com/axiom6/aug.git", "type": "git" }
 }

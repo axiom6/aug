@@ -1,6 +1,6 @@
 
 import  Vue     from '../../lib/vue/vue.esm.browser.js';
-import  Dash    from './Dash.js';
+import  Dash    from '../../pub/vue/dash/Dash.js';
 import  Router  from '../../lib/vue/vue-router.esm.js';
 Vue.use(Router);
 

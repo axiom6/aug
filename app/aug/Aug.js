@@ -1,7 +1,7 @@
 
 import Vue    from '../../lib/vue/vue.esm.browser.js';
 import Main   from './Main.js';
-import Dash   from './Dash.js';
+import Dash   from '../../pub/vue/dash/Dash.js';
 import Router from './Router.js'
 
 Vue['config'].productionTip = false;
