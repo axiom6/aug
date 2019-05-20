@@ -102,8 +102,7 @@ class Adt
   @Sum = (a,b,u) => a + b + u # Summation
 
   # Subscripts Superscripts Limits
-  @Sub = (u,a)   => u + a     # u_a  Subscript
-  @Sus = (u,b)   => u + b     # u^b  Superscript
+  @Sus = (u,a)   => u + a     # u_a  Subscript  u^b  Superscript is Power
   @Lim = (a,b)   => a + b     #_a^b  Limit for Sum and Itg
 
   @CalculusAdts = [@Fun,@Dif,@Itg,@Itl,@Sum,@Sub,@Sus,@Lim]
