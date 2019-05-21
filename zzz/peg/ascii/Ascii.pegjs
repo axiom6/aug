@@ -24,6 +24,8 @@ start
 Exp
   = Equ
 
+// Binary ops from low to high precedence
+
 Equ
   = u:Add "=" ws v:Equ { return `Equ(${u},${v})`; }
   /   Add
@@ -41,8 +43,16 @@ Mul
   /   Div
 
 Div
-  = u:Pow "/" ws v:Div { return `Div(${u},${v})` }
-  /   Pow
+  = u:Itg "/" ws v:Div { return `Div(${u},${v})` }
+  /   Itg
+
+Itg
+  = "int" "~" u:Itg { return `Itg(${u})` }
+  / Sum
+
+Sum
+  = key:Key "_" a:Pow "^" b:Sum "(" u:Sum ")" { return `toCap(key)(${a},${b},${u})` }
+  / Pow
 
 Pow
   = u:Sus "^" v:Pow { return `Pow(${u},${v})` } // $("^" ![^])
@@ -52,42 +62,61 @@ Sus  // Subscript
   = u:Neg "_" v:Sus { return `Sus(${u},${v})` }
   /   Neg
 
+// Unary Ops
+
 Neg
   = "-" u:Neg { return `Neg(${u})` }
-  / Itg
+  / Pri
 
-Itg
-  = "int" "~" u:Itg { return `Itg(${u})` }
-  / Itl
+// Primary - These choices reference Exp and do not have to forward
 
-Itl
-  = "int" "_" a:Itg "^" b:Itl "~" u:Exp { return `Itl(${a},${b},${u})` }
-  / Sum
+Pri
+ = Fun / Par / Brc / Vec / Mat / Dbl / Num / Key / Var
 
-Sum
-  = "sum" "_" a:Itl "^" b:Sum "~" u:Exp { return `Sum(${a},${b},${u})` }
-  / Fun
-
-Fun    // Functions touch left paren with no whitespace
-  = f:str "(" u:Exp ")" ws { return func(f,u) }
-  / Par
+Fun
+  = f:str "(" u:Exp ")" ws { return func(f,u) } // Fun touches left paren with no whitespace
 
 Par
- = Dbl
- / "(" u:Exp ")"  ws { return `Par(${u})`; }
+ = "(" u:Exp ")"  ws { return `Par(${u})`; }
+
+Brc
+ = "{" u:Exp "}"  ws { return `Brc(${u})`; }
+
+Vec
+  = lsb vals:( head:Exp tail:( com v:Exp { return v; } )*
+      { return [head].concat(tail); } )? rsb
+    { return vals !== null ? `Vec(${vals})` : `Vec(${[]})`; }
+
+Mat
+  = lsb vecs:( head:Vec tail:( com v:Vec { return v; } )*
+      { return [head].concat(tail); } )? rsb
+    { return vecs !== null ? `Mat(${vecs})` : `Mat(${[[]]})`; }
+
+// Terminal Dbl Num Var
 
 Dbl
   = float:([0-9]* "." [0-9]+)  ws { let d = parseFloat(float.join("")); return `Dbl(${d})`; }
-  / Num
 
 Num
   = digits:[0-9]+  ws { let n = parseInt(digits.join(""), 10); return `Num(${n})`; }
-  / Var
+
+Key
+  = 'sum' / 'int'
 
 Var
   = string:str ws { return `Var(${string})`; }
 
+
 // Tokens
+
+lsb
+  = ws "[" ws
+
+rsb
+  = ws "]" ws
+
+com
+  = ws "," ws
  
 str
   = string:[a-zA-Z]+  { return string.join("") }
@@ -97,6 +126,12 @@ sp
 
 ws
   = sp?    // Optional whitespace
+
+/*
+Itl
+  = "int" "_" a:Sum "^" b:Itl "~" u:Itl { return `Itl(${a},${b},${u})` }
+  / Sum
+*/
 
 
 
