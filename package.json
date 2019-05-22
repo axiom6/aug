@@ -13,6 +13,8 @@
   "dependencies": {
     "d3": "^5.9.2",
     "ganja.js": "^1.0.139",
+    "pegjs": "^0.10.0",
+    "pegjs-backtrace": "^0.2.0",
     "vue": "^2.5.22"
   },
   "devDependencies": {
@@ -41,6 +43,11 @@
   "engines": {
     "node": ">=10.15.3"
   },
-  "bugs": {       "url": "https://github.com/axiom6/aug/issues" },
-  "repository": { "url":   "git://github.com/axiom6/aug.git", "type": "git" }
+  "bugs": {
+    "url": "https://github.com/axiom6/aug/issues"
+  },
+  "repository": {
+    "url": "git://github.com/axiom6/aug.git",
+    "type": "git"
+  }
 }

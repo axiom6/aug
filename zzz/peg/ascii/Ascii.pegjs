@@ -1,6 +1,7 @@
 
-{                                                                                // "d" is for Dif
-  let tranf = ["sin","cos","tan","sec","csc","cot","arcsin","arccos","arctan","exp","log","ln","d","int"]
+{
+  let tranf = ["sin","cos","tan","sec","csc","cot","arcsin","arccos","arctan","exp","log","ln",
+               "d","int","sum","lim"]                                              // "d" is for Dif
   let hyper = ["sinh","cosh","tanh","sech","csch","coth"];
   let miscf = ["det","dim","mod","gcd","lcm","lub","glb","min","max","f","g"];
   let funcs = tranf;
@@ -16,15 +17,25 @@
 
   function func( f, u ) {
     return funcs.includes(f) ? `${toAdt(f)}(${u})` : `Fun(${f},${u})`; }
+
+  function lim( f, a, b ) {
+    return funcs.includes(f) ? `${toAdt(f)}(${a},${b})` : `Lim(${f},${a},${b})`; }
+
+  function sum( f, a, b, u ) {
+    return funcs.includes(f) ? `${toAdt(f)}(${a},${b},${u})` : `Sum(${f},${a},${b},${u})`; }
 }
 
 start
   = Exp
 
 Exp
-  = Equ
+  = Tilde
 
 // ------ Binary ops from low to high precedence ------
+
+Tilde
+  = tilde u:Tilde  { return `${u}` } // Tilde for Sum Int and Prod expressions
+  / Equ
 
 Equ
   = u:Add "=" ws v:Equ { return `Equ(${u},${v})`; }
@@ -47,35 +58,51 @@ Div
   /   Pow
 
 Pow
-  = u:Sus "^" v:Pow { return `Pow(${u},${v})` }  // $("^" ![^])
+  = u:Sus power v:Pow { return `Pow(${u},${v})` }
   /   Sus
 
 Sus
-  = u:Neg "_" v:Sus { return `Sus(${u},${v})` }  // Subscript  (u:Neg !"sum")
+  = u:Neg under v:Sus { return `Sus(${u},${v})` }  // Subscript
   /   Neg
 
 // ------ Unary Ops ------
 
 Neg
   = "-" u:Neg { return `Neg(${u})` }
+  / Lower
+
+Lower
+  = lower u:Lower { return `${u}` }  // Lower bounds for Sum and Int has no Adt Name
+  / Upper
+
+Upper
+  = upper u:Upper  { return `${u}` } // Upper bounds for Sum and Int has no Adt Name
+  / Sum
+
+Sum
+  = k:Key a:Lower b:Upper u:Tilde { return sum(k,a,b,u) }
   / Pri
+
 
 // ------ Primary - These choices reference Exp and do not have to / forward ------
 
 Pri
- = Fun / Par / Brc / Vec / Mat / Dbl / Num / Key / Var / Sum
+  = Lim / Fun / Par / Brc / Vec / Mat / Dbl / Num / Key / Var
 
-Sum
- = ("sum_" a:Exp) ("^" b:Exp) u:Par { return `Sum(${a},${b},${u})` }
+Lim
+  = k:Key a:Lower b:Upper { return lim(k,a,b) }
+
+//Sum
+//  = k:Key a:Lower b:Upper u:Tilde { return sum(k,a,b,u) }
 
 Fun
   = f:str "(" u:Exp ")" ws { return func(f,u) } // Fun touches left paren with no whitespace
 
 Par
- = "(" u:Exp ")"  ws { return `Par(${u})`; }
+  = "(" u:Exp ")"  ws { return `Par(${u})`; }
 
 Brc
- = "{" u:Exp "}"  ws { return `Brc(${u})`; }
+  = "{" u:Exp "}"  ws { return `Brc(${u})`; }
 
 Vec
   = begVec vals:( head:Exp tail:( comma v:Exp { return v; } )*
@@ -101,12 +128,27 @@ Num
   = digits:[0-9]+  ws { let n = parseInt(digits.join(""), 10); return `Num(${n})`; }
 
 Key
-  = 'sum' / 'int'
+  = 'lim' / 'sum' / 'int' / 'prod'
 
 Var
-  = string:str !Key ws { return `Var(${string})`; }
+  = string:str ws { return `Var(${string})`; }
 
 // ------ Tokens ------
+
+under
+  = "_" ![_~]
+
+power
+  = "^" ![\^~]
+
+lower
+  = "_"
+
+upper
+  = "^"
+
+tilde
+  = "~" // ![_\^] "~"
 
 begVec
   = ws "[" ws !"["
@@ -124,34 +166,12 @@ str
   = string:[a-zA-Z]+  { return string.join("") }
 
 sp
-  = [ ]*  // Space  [ \t\r\n\f]+
+  = [ ]+  // Space  [ \t\r\n\f]+
 
 ws
   = sp?    // Optional whitespace
 
-/*
-Sum
-  = key:Key "_" a:Pow "^" b:Sum "(" u:Sum ")" { return `toCap(key)(${a},${b},${u})` }
-  / Pow
 
-Itl
-  = "int" "_" a:Sum "^" b:Itl "~" u:Itl { return `Itl(${a},${b},${u})` }
-  / Sum
-
-Low
- = "_" u:Exp { return `${u}` }
-
-Up
- = "^" u:Exp { return `${u}` }
-
-Pow
-  = u:Sus ws v:Up  { return `Pow(${u},${v})` }
-  /   Sus
-
-Sus
-  = u:Neg ws v:Low  { return `Sus(${u},${v})` }
-  /   Neg
-*/
 
 
 

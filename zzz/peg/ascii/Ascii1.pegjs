@@ -138,6 +138,43 @@ Itl
 */
 
 
+/*
+Sum
+  = key:Key "_" a:Pow "^" b:Sum "(" u:Sum ")" { return `toCap(key)(${a},${b},${u})` }
+  / Pow
+
+Itl
+  = "int" "_" a:Sum "^" b:Itl "~" u:Itl { return `Itl(${a},${b},${u})` }
+  / Sum
+
+Low
+ = "_" u:Exp { return `${u}` }
+
+Up
+ = "^" u:Exp { return `${u}` }
+
+Pow
+  = u:Sus ws v:Up  { return `Pow(${u},${v})` }
+  /   Sus
+
+Sus
+  = u:Neg ws v:Low  { return `Sus(${u},${v})` }
+  /   Neg
+
+Lower
+  = lower u:Lower { return `${u}` }  // Lower bounds for Sum and Int has no Adt Name
+  / Upper
+
+Upper
+  = upper u:Upper  { return `${u}` } // Upper bounds for Sum and Int has no Adt Name
+  / Tilde
+
+Tilde
+  = tilde u:Tilde  { return `${u}` } // Tilde for Sum Int and Prod expressions
+  / Pri
+
+*/
+
 
 
 
