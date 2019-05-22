@@ -24,7 +24,7 @@ start
 Exp
   = Equ
 
-// ------ Binary ops from low to high precedence ------
+// Binary ops from low to high precedence
 
 Equ
   = u:Add "=" ws v:Equ { return `Equ(${u},${v})`; }
@@ -51,22 +51,19 @@ Pow
   /   Sus
 
 Sus
-  = u:Neg "_" v:Sus { return `Sus(${u},${v})` }  // Subscript  (u:Neg !"sum")
+  = u:Neg "_" v:Sus { return `Sus(${u},${v})` }  // Subscript
   /   Neg
 
-// ------ Unary Ops ------
+// Unary Ops
 
 Neg
   = "-" u:Neg { return `Neg(${u})` }
   / Pri
 
-// ------ Primary - These choices reference Exp and do not have to / forward ------
+// Primary - These choices reference Exp and do not have to forward
 
 Pri
- = Fun / Par / Brc / Vec / Mat / Dbl / Num / Key / Var / Sum
-
-Sum
- = ("sum_" a:Exp) ("^" b:Exp) u:Par { return `Sum(${a},${b},${u})` }
+ = Fun / Par / Brc / Vec / Mat / Dbl / Num / Key / Var
 
 Fun
   = f:str "(" u:Exp ")" ws { return func(f,u) } // Fun touches left paren with no whitespace
@@ -92,7 +89,7 @@ Mat
       { return [head].concat(tail); } )? endVec // Only one ]
     { return vecs !== null ? `Mat(${vecs})` : `Mat(${[[]]})`; }
 
-// ------ Terminal Rules: Dbl Num Key Var ------
+// Terminal Dbl Num Var
 
 Dbl
   = float:([0-9]* "." [0-9]+)  ws { let d = parseFloat(float.join("")); return `Dbl(${d})`; }
@@ -104,9 +101,10 @@ Key
   = 'sum' / 'int'
 
 Var
-  = string:str !Key ws { return `Var(${string})`; }
+  = string:str ws { return `Var(${string})`; }
 
-// ------ Tokens ------
+
+// Tokens
 
 begVec
   = ws "[" ws !"["
@@ -137,20 +135,6 @@ Sum
 Itl
   = "int" "_" a:Sum "^" b:Itl "~" u:Itl { return `Itl(${a},${b},${u})` }
   / Sum
-
-Low
- = "_" u:Exp { return `${u}` }
-
-Up
- = "^" u:Exp { return `${u}` }
-
-Pow
-  = u:Sus ws v:Up  { return `Pow(${u},${v})` }
-  /   Sus
-
-Sus
-  = u:Neg ws v:Low  { return `Sus(${u},${v})` }
-  /   Neg
 */
 
 

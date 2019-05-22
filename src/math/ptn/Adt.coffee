@@ -97,7 +97,7 @@ class Adt
   # Calculus, Sum and Typsetting
   @Fun = (f,u)   => f(u)      # Function
   @Dif = (u)     => u         # d(u) Differentiation
-  @Itg = (u)     => u         # Integration
+  @Int = (u)     => u         # Integration
   @Itl = (a,b,u) => a + b + u # Definite Integral
   @Sum = (a,b,u) => a + b + u # Summation
 
