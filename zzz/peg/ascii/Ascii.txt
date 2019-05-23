@@ -1,0 +1,191 @@
+
+pi
+e
+sqrt(x)
+root(3)(x)
+oint
+del
+grad
+pm +-
+oo infinity
+wedge   ^^
+vee     vv
+text("")
+stackrel ???
+
+lim
+sum
+pro
+biwedge
+bigvee
+
+--- Set Theory ---
+cup
+bigcup
+union
+intersect
+cap
+bigcap
+emptyset
+subset
+supset
+subseteq
+supseteq
+
+--- Logical ---
+and
+or
+not
+implies
+if
+iff
+forall
+exists
+ne
+lt
+gt
+le
+ge
+prec
+preceq
+succ
+succeq
+notin
+in
+equiv
+cong
+approx
+propto
+therefore
+because
+
+--- Math Symbols ---
+ast
+star
+slash
+backslash
+times
+div
+ltimes
+rimes
+bowtie
+circ
+oplus
+otimes
+odot
+
+--- Math Spaces ---
+CC
+NN
+QQ
+RR
+ZZ
+
+--- Symbols ---
+aleph
+ldots
+cdots
+vdots
+ddotx
+twin
+quad
+angle
+frown
+triangle
+diamond
+square
+lfloor
+rfloor
+lceilling
+rceilling
+bot
+top
+vdash
+models
+langle
+rangle
+xparen
+parenx
+
+
+--- Arrows ---
+uparrow
+downarrow
+rightarrow
+to
+rightarrowtail
+twoheadrightarrow
+twoheadrightarrowtail
+mapsto
+leftarrow
+leftrightarrow
+Rightarrow
+Leftarrow
+Leftrightarrow
+
+
+--- Greek Letters ---
+alpha 	α
+beta 	β
+gamma 	γ
+Gamma 	Γ
+delta 	δ
+Delta 	Δ
+epsilon 	ε
+varepsilon 	ɛ
+zeta 	ζ
+eta 	η
+theta 	θ
+Theta 	Θ
+vartheta 	ϑ
+iota 	ι
+kappa 	κ
+lambda 	λ
+Lambda 	Λ
+mu 	μ
+nu 	ν
+xi 	ξ
+Xi 	Ξ
+pi 	π
+Pi 	Π
+rho 	ρ
+sigma 	σ
+Sigma 	Σ
+tau 	τ
+upsilon 	υ
+phi 	ϕ
+Phi 	Φ
+varphi 	φ
+chi 	χ
+psi 	ψ
+Psi 	Ψ
+omega 	ω
+Omega
+
+--- Accent Functions ---
+hat(x)
+bar(x)
+ul(x)
+vec(x)
+dot(x)
+ddot(x)
+overset(x)(=)
+underset(x)(=)
+underbrace(1+2)
+overbrace(1+2)
+color(red)(x)
+cancel(x)
+
+--- Font Functions ---
+bb("AaBbCc")
+bbb("AaBbCc")
+cc("AaBbCc")
+tt("AaBbCc")
+fr("AaBbCc")
+sf("AaBbCc")
+
+--- Functions ---
+abs(x)
+floor(x)
+ceil(x)
+norm(vecx)

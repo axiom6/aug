@@ -1,28 +1,34 @@
 
-{
-  let tranf = ["sin","cos","tan","sec","csc","cot","arcsin","arccos","arctan","exp","log","ln",
-               "d","int","sum","lim"]                                              // "d" is for Dif
-  let hyper = ["sinh","cosh","tanh","sech","csch","coth"];
+{                                            // "d" is for Dif
+  let funcs1 = ["sin","cos","tan","sec","csc","cot","arcsin","arccos","arctan","e","log","ln","int","d"];
+
+  let funcs2 = ["root","lim"]
+
+  let funcs3 = ["sum","prod","defint"]
+
+  let hyper = [   "sinh",   "cosh",   "tanh","   sech","   csch","   coth",
+               "arcsinh","arccosh","arctanh","arcsech","arccsch","arccoth"];
   let miscf = ["det","dim","mod","gcd","lcm","lub","glb","min","max","f","g"];
-  let funcs = tranf;
-
-  function toCap( f ) {
-    return f.charAt(0).toUpperCase() + f.substring(1); }
-
-  function toDif( f ) {
-    return f==="d" ? "Dif" : toCap(f); }
 
   function toAdt( f ) {
-    return f.startsWith('arc') ? 'A'+toCap(f.substring(3)) : toDif(f); }
+    return f.charAt(0).toUpperCase() + f.substring(1); }
 
-  function func( f, u ) {
-    return funcs.includes(f) ? `${toAdt(f)}(${u})` : `Fun(${f},${u})`; }
+  function func1( f, u ) {
+    return funcs1.includes(f) ? `${toAdt(f)}(${u})` :           `Fun(${f},${u})`; }
 
-  function lim( f, a, b ) {
-    return funcs.includes(f) ? `${toAdt(f)}(${a},${b})` : `Lim(${f},${a},${b})`; }
+  function func2( f, u, v ) {
+    return funcs2.includes(f) ? `${toAdt(f)}(${u},${v})` :      `Fun(${f},${u},${v})`; }
 
-  function sum( f, a, b, u ) {
-    return funcs.includes(f) ? `${toAdt(f)}(${a},${b},${u})` : `Sum(${f},${a},${b},${u})`; }
+  function func3( f, u, v, w ) {
+    return funcs3.includes(f) ? `${toAdt(f)}(${u},${v},${w})` : `Fun(${f},${u},${v},${w})`; }
+
+  function funcn( f, ...args ) {
+    ret = `${toAdt(f)}(`
+    for( i = 0; i < args.length; i++ ) {
+      ret += ',' + args[i]; }
+    ret += ')'
+    return ret;
+  }
 }
 
 start
@@ -80,29 +86,31 @@ Upper
   / Sum
 
 Sum
-  = k:Key a:Lower b:Upper u:Tilde { return sum(k,a,b,u) }
+  = k:Key a:Lower b:Upper u:Tilde { return func3(k,a,b,u) }
   / Pri
 
 
 // ------ Primary - These choices reference Exp and do not have to / forward ------
 
 Pri
-  = Lim / Fun / Par / Brc / Vec / Mat / Dbl / Num / Key / Var
+  = Lim / Fun / Par / Brc / FunArgs / Vec / Mat / Dbl / Num / Key / Var
 
 Lim
-  = k:Key a:Lower b:Upper { return lim(k,a,b) }
-
-//Sum
-//  = k:Key a:Lower b:Upper u:Tilde { return sum(k,a,b,u) }
+  = k:Key a:Lower b:Upper { return func2(k,a,b) }
 
 Fun
-  = f:str "(" u:Exp ")" ws { return func(f,u) } // Fun touches left paren with no whitespace
+  = f:str "(" u:Exp ")" ws { return func1(f,u) } // Fun touches left paren with no whitespace
 
 Par
   = "(" u:Exp ")"  ws { return `Par(${u})`; }
 
 Brc
   = "{" u:Exp "}"  ws { return `Brc(${u})`; }
+
+FunArgs
+  = f:str begArgs args:( head:Exp tail:( comma v:Exp { return v; } )*
+    { return [head].concat(tail); } )? endArgs
+    { return funcn(f,args) }
 
 Vec
   = begVec vals:( head:Exp tail:( comma v:Exp { return v; } )*
@@ -155,6 +163,12 @@ begVec
 
 endVec
   = ws "]" ws
+
+begArgs
+  = ws "(" ws
+
+endArgs
+  = ws ")" ws
 
 begMat
   = ws "[["

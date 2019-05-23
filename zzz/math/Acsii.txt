@@ -7,3 +7,17 @@ r ::= ) | ] | } | :) | :} | other right brackets
 S ::= v | lEr | uS | bSS             Simple expression
 I ::= S_S | S^S | S_S^S | S          Intermediate expression
 E ::= IE | I/I                       Expression
+
+`sum_(k=1)^n k = 1+2+ cdots +n=(n(n+1))/2`
+
+`int_0^1 x^2 dx`
+
+sqrt(x)
+root(x)(y)
+
+A general `m xx n` matrix
+`((a_(11), cdots , a_(1n)),(vdots, ddots, vdots),(a_(m1), cdots , a_(mn)))`
+
+d/dxf(x)=lim_(h->0)(f(x+h)-f(x))/h
+
+f(t)=(a_0)/2 + sum_(n=1)^ooa_ncos((npit)/L)+sum_(n=1)^oo b_n\ sin((npit)/L)
