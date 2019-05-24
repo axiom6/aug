@@ -241,6 +241,17 @@
 		"oO": 0,
 		"oS": 1
 		},
+	"/Ascii.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/Ascii-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/aug.iml": {
 		"cB": 0,
 		"ft": 8192,
@@ -2029,35 +2040,57 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/math/ga/Basic.js": {
+	"/pub/math/geo/Basic.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/math/ga/Basic-min.js",
+		"oAP": "/pub/math/geo/Basic-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/math/ga/GA.js": {
+	"/pub/math/geo/GA.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/math/ga/GA-min.js",
+		"oAP": "/pub/math/geo/GA-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/math/ga/Op.js": {
+	"/pub/math/geo/Op.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/math/ga/Op-min.js",
+		"oAP": "/pub/math/geo/Op-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/math/par/arith.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/par/arith-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/math/par/Ascii.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/par/Ascii-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2091,6 +2124,25 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/math/ptn/MathML-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/math/test/add.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/math/test/add.html",
+		"oF": 0
+		},
+	"/pub/math/test/cmd1.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/test/cmd1-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2397,6 +2449,17 @@
 		"oA": 1,
 		"oAP": "/src/util/Match-min.js",
 		"oF": 2,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/bas/util/MathLookup.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/bas/util/MathLookup.js",
+		"oF": 0,
+		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
@@ -2719,38 +2782,57 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/math/ga/Basic.coffee": {
+	"/src/math/geo/Basic.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/math/ga/Basic.js",
+		"oAP": "/pub/math/geo/Basic.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/math/ga/GA.coffee": {
+	"/src/math/geo/GA.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/math/ga/GA.js",
+		"oAP": "/pub/math/geo/GA.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/math/ga/Op.coffee": {
+	"/src/math/geo/Op.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/math/ga/Op.js",
+		"oAP": "/pub/math/geo/Op.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
+		},
+	"/src/math/par/Ascii.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/math/par/Ascii-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/math/par/Ascii.pegjs": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/src/math/par/Ascii.pegjs",
+		"oF": 0
 		},
 	"/src/math/ptn/Adt.coffee": {
 		"ft": 32,
@@ -2782,6 +2864,17 @@
 		"oAP": "/pub/math/ptn/MathML.js",
 		"oF": 0,
 		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/math/test/cmd1.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/math/test/cmd1-min.js",
+		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
@@ -3258,7 +3351,7 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/vue/wood/wood.scss": {
+	"/vue/wood/Wood.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -3662,36 +3755,6 @@
 		"oAP": "/zzz/ani/wave/Wave.vue",
 		"oF": 0
 		},
-	"/zzz/asciimath/bnr.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/zzz/asciimath/bnr.txt",
-		"oF": 0
-		},
-	"/zzz/asciimath/MathJax.esm.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/asciimath/MathJax.esm-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/asciimath/MathJax.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/asciimath/MathJax-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/zzz/ganja/ganja.exa/basic.html": {
 		"cB": 0,
 		"ft": 8192,
@@ -3831,13 +3894,57 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/math/math.js": {
+	"/zzz/libs/ASCIIMathML.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/math/math-min.js",
+		"oAP": "/zzz/libs/ASCIIMathML-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/libs/LaTeXMathML.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/libs/LaTeXMathML-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/libs/math.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/libs/math-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/libs/MathJax.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/libs/MathJax.esm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/libs/MathJax.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/libs/MathJax-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -3897,6 +4004,187 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/zzz/obs/std.html",
+		"oF": 0
+		},
+	"/zzz/peg/arith/add.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/peg/arith/add-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/peg/arith/add.pegjs": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/peg/arith/add.pegjs",
+		"oF": 0
+		},
+	"/zzz/peg/arith/adt.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/peg/arith/adt-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/peg/arith/adt.pegjs": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/peg/arith/adt.pegjs",
+		"oF": 0
+		},
+	"/zzz/peg/arith/arith.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/peg/arith/arith-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/peg/arith/arith.pegjs": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/peg/arith/arith.pegjs",
+		"oF": 0
+		},
+	"/zzz/peg/arith/arith.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/peg/arith/arith.txt",
+		"oF": 0
+		},
+	"/zzz/peg/arith/com.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/peg/arith/com-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/peg/ascii/Ascii.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/peg/ascii/Ascii-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/peg/ascii/Ascii.pegjs": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/peg/ascii/Ascii.pegjs",
+		"oF": 0
+		},
+	"/zzz/peg/ascii/run.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/peg/ascii/run-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/peg/ascii/Trace.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/peg/ascii/Trace-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/peg/pegjs/arith.pegjs": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/peg/pegjs/arith.pegjs",
+		"oF": 0
+		},
+	"/zzz/peg/pegjs/css.pegjs": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/peg/pegjs/css.pegjs",
+		"oF": 0
+		},
+	"/zzz/peg/pegjs/javascript.pegjs": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/peg/pegjs/javascript.pegjs",
+		"oF": 0
+		},
+	"/zzz/peg/pegjs/json.pegjs": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/peg/pegjs/json.pegjs",
+		"oF": 0
+		},
+	"/zzz/peg/ref/AcsiiExa.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/peg/ref/AcsiiExa.txt",
+		"oF": 0
+		},
+	"/zzz/peg/ref/AsciiBnr.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/peg/ref/AsciiBnr.txt",
+		"oF": 0
+		},
+	"/zzz/peg/ref/AsciiKeys.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/peg/ref/AsciiKeys.txt",
+		"oF": 0
+		},
+	"/zzz/peg/ref/LatexKeys.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/peg/ref/LatexKeys.txt",
 		"oF": 0
 		},
 	"/zzz/ui/Brew.coffee": {
@@ -6494,17 +6782,6 @@
 		},
 	"languageDefaultsUserDefined": [
 		{
-			"autoOutputAction": 0,
-			"autoOutputPathFilenamePattern": "*.js",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "vue",
-			"autoOutputPathReplace2": "pub/vue",
-			"autoOutputPathStyle": 3,
-			"fileExtension": "vue",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
 			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.html",
 			"autoOutputPathRelativePath": "",
@@ -6512,6 +6789,17 @@
 			"autoOutputPathReplace2": "",
 			"autoOutputPathStyle": 0,
 			"fileExtension": "html",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 0,
+			"autoOutputPathFilenamePattern": "*.js",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "vue",
+			"autoOutputPathReplace2": "pub/vue",
+			"autoOutputPathStyle": 3,
+			"fileExtension": "vue",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

@@ -1,21 +1,41 @@
 
+let cmds = process.argv.slice(2);
 
 let Ascii  = require('./Ascii.js' );
 let Tracer = require('../../../node_modules/pegjs-backtrace');
 
-let test = ( a, t ) => {  // console.log(tracer.getBacktraceString());
-  let tracer = new Tracer(a);
-  let p = "X";
-  let e = {};
-//let opt = dbg ? { tracer:tracer } : {};
+let runTrace = ( asc) => {
+  let par = "X";
+  let err = {};
+  let tracer = new Tracer(asc);
   try {
-    p = Ascii.parse( a, { tracer:tracer } ); }
+    par = Ascii.parse( asc, { tracer:tracer } ); }
   catch( error ) {
-    console.log(tracer.getBacktraceString()); }
-  //e.found = error.found; e.msg = error.message; e.loc = error.location; }
-  let r = p===t ? "Pass" : "Fail";
-  let q = p===t ? t : p;
-  console.log( r, a, q, e ) }
+    err = tracer.getBacktraceString(); }
+  return { par:par, err:err };
+}
+
+let runParse = ( asc ) => {
+  let par = "X";
+  let err = {};
+  try {         // { trace:false } does not work when --trace flag set for .pegjs to .js
+    par = Ascii.parse( asc, { trace:false } ); }
+  catch( error ) {
+    err.found = error.found; err.msg = error.message; err.loc = error.location; }
+  return { par:par, err:err };
+}
+
+let test = ( asc, expect ) => {
+  let dbg = cmds[0]==='dbg'
+  let obj = {};
+  if( dbg ) {
+    obj = runTrace( asc ); }
+  else {
+    obj = runParse( asc ); }
+  let sta = obj.par===expect ? "Pass" : "Fail";
+//let fun = new Function( par );
+  console.log( sta, asc, obj.par, obj.err );
+}
 
 test("(2.2+3)*(1+2)",      "Mul(Par(Add(Dbl(2.2),Num(3))),Par(Add(Num(1),Num(2))))" );
 test("2.2*3+4*3",          "Add(Mul(Dbl(2.2),Num(3)),Mul(Num(4),Num(3)))" );

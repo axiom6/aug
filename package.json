@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "d3": "^5.9.2",
+    "esm": "^3.2.25",
     "ganja.js": "^1.0.139",
     "pegjs": "^0.10.0",
     "pegjs-backtrace": "^0.2.0",

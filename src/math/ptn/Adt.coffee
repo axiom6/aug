@@ -3,16 +3,30 @@ import {_} from '../../bas/util/Match.js'
 
 class Adt
 
-  @fa = (f) =>
+  @Unk = (u) => 'Unk'
+
+  @toPtn = (f) =>
     a = [f.name]
     a.push(_) for i in [0...f.length]
-    a
+    return a
+
+  @toExp1 = (f,args...) =>
+    a    = [f.name]
+    for i in [0...f.length]
+      a.push(args[i])
+    return a
+
+  @toExp = (args) =>
+    args[0] = args[0].name
+    console.log( 'Adt.toExp()', args )
+    return args
 
   @toPtns = ( adts ) =>
-    # console.log( 'adts', adts )
+    # console.log( 'Adt.toPtns() adts', adts )
     ptns = new Array(adts.length)
     for i in [0...adts.length]
-      ptns[i] = if i%2 is 1 then Adt.fa(adts[i]) else adts[i]
+      ptns[i] = if i%2 is 0 then Adt.toPtn(adts[i]) else adts[i]
+    # console.log( 'Adt.toPtns() ptns', ptns )
     ptns
 
   # Geometric Algerbra
@@ -76,7 +90,7 @@ class Adt
 
   # Inverse Trigometric
   @Arcsin = (u)  =>  Math.asin(u)
-  @Arccos = (u)  =>  Math.scos(u)
+  @Arccos = (u)  =>  Math.acos(u)
   @Arctan = (u)  =>  Math.atan(u)
   @Arccsc = (u)  =>  Math.asin(1/u ) # ???
   @Arcsec = (u)  =>  Math.acos(1/u ) # ???
@@ -97,7 +111,7 @@ class Adt
   @HyperAdts = [@Sinh,@Cosh,@Tanh,@Arccinh,@Arccosh,@Arctanh]
 
   # Calculus, Sum and Typsetting
-  @Fun    = (f,u)   => f(u)      # Function
+  @Fun    = (f,u)   => u         # f(u) Function
   @D      = (u)     => u         # d(u) Differentiation
   @Int    = (u)     => u         # Integration
   @DefInt = (a,b,u) => a + b + u # Definite Integral
@@ -113,6 +127,7 @@ class Adt
   @Sim = (u)     => u         # sim(u) Simplify
   @Not = (u)     => u         # Not an Adt expression
   @Msg = (u)     => u         # Parsing error message
+  @Unk = (u)     => u
 
 
 export default Adt
