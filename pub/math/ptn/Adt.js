@@ -6,32 +6,25 @@ import {
 
 Adt = (function() {
   class Adt {
-    static Unk(u) {
-      return 'Unk';
-    }
-
     static toPtn(f) {
       var a, i, j, ref;
-      a = [f.name];
-      for (i = j = 0, ref = f.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
+      a = [];
+      // console.log( 'Adt.toPtn()', f, typeof(f) )
+      if (typeof f === 'function') {
+        a.push(f.name);
+        for (i = j = 0, ref = f.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
+          a.push(_);
+        }
+      } else if (f === 'String') {
+        a.push(String);
+      } else if (f === 'Number') {
+        a.push(Number);
+      } else if (f === 'Under') {
         a.push(_);
+      } else {
+        console.error('Adt.toPtn() unknown pattern', f);
       }
       return a;
-    }
-
-    static toExp1(f, ...args) {
-      var a, i, j, ref;
-      a = [f.name];
-      for (i = j = 0, ref = f.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
-        a.push(args[i]);
-      }
-      return a;
-    }
-
-    static toExp(args) {
-      args[0] = args[0].name;
-      console.log('Adt.toExp()', args);
-      return args;
     }
 
     static toPtns(adts) {
@@ -41,8 +34,29 @@ Adt = (function() {
       for (i = j = 0, ref = adts.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
         ptns[i] = i % 2 === 0 ? Adt.toPtn(adts[i]) : adts[i];
       }
+      ptns.push(String, (s) => {
+        return Adt.stag(s);
+      });
+      ptns.push(Number, (n) => {
+        return Adt.ntag(n);
+      });
+      ptns.push(_, (q) => {
+        return Adt.unkn(q);
+      });
       // console.log( 'Adt.toPtns() ptns', ptns )
       return ptns;
+    }
+
+    static stag(s) {
+      return Adt.mathML.tag('mi', s);
+    }
+
+    static ntag(n) {
+      return Adt.mathML.tag('mn', n);
+    }
+
+    static unkm(q) {
+      return console.log('unknown match asc', q);
     }
 
     // Geometric Algerbra

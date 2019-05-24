@@ -1,8 +1,7 @@
 var MathML;
 
 import {
-  match,
-  _
+  match
 } from '../../bas/util/Match.js';
 
 import A from '../ptn/Adt.js';
@@ -12,19 +11,20 @@ import Ascii from '../par/Ascii.js';
 MathML = class MathML {
   constructor() {
     // console.log( 'Ascii Import', Ascii )
+    A.mathML = this;
     this.key = "";
     this.math = {};
     this.ptns = this.toPtns();
   }
 
   doParse(asc, key) {
-    var ast, err, error, par;
+    var asa, err, error, par;
     par = "X";
     err = {};
     try {
       par = Ascii.parse(asc);
-      ast = new Function(par);
-      return this.markup(ast, key);
+      asa = eval(par);
+      return this.markup(asa, key);
     } catch (error1) {
       error = error1;
       err.found = error.found;
@@ -40,13 +40,14 @@ MathML = class MathML {
     }
   }
 
-  markup(ast, key) {
+  markup(asa, key) {
     this.key = key;
     this.math[this.key] = "";
-    this.head();
+    //head()
     this.app("<math>");
-    this.exp(ast);
-    this.app("</math>", "</root>");
+    this.exp(asa);
+    this.app("</math>"); // ,"</root>"
+    console.log('MathML.markup()', this.math[this.key]);
   }
 
   head() {
@@ -54,9 +55,9 @@ MathML = class MathML {
   }
 
   app(...args) {
-    var arg, j, len;
-    for (j = 0, len = args.length; j < len; j++) {
-      arg = args[j];
+    var arg, i, len;
+    for (i = 0, len = args.length; i < len; i++) {
+      arg = args[i];
       this.math[this.key] += arg;
     }
   }
@@ -70,7 +71,7 @@ MathML = class MathML {
   }
 
   tag(t, v) {
-    this.math[this.key] += `<${t}>${v.toString()}</${t}>#`;
+    this.math[this.key] += `<${t}>${v.toString()}</${t}>`;
   }
 
   bin(t, u, op, v) {
@@ -131,12 +132,11 @@ MathML = class MathML {
     this.exp(u);
   }
 
-  exp(ast) {
-    var e, ex;
-    ex = A.toExp(ast);
+  exp(asa) {
+    var e;
     try {
-      console.log('MathML.exp(ast)', ast, ex);
-      return match(ex, ...this.ptns);
+      // console.log( 'MathML.exp(asa)', asa )
+      return match(asa, ...this.ptns);
     } catch (error1) {
       e = error1;
       return console.error('MathML.exp()', e);
@@ -147,28 +147,6 @@ MathML = class MathML {
 
   toPtns() {
     return A.toPtns([
-      A.Var,
-      (s) => {
-        return this.tag('mi',
-      s);
-      },
-      A.Num,
-      (n) => {
-        return this.tag('mn',
-      n);
-      },
-      A.Dbl,
-      (d) => {
-        return this.tag('mn',
-      d);
-      },
-      A.Ratio,
-      (u,
-      v) => {
-        return this.tuv('mfrac',
-      u,
-      v);
-      },
       A.Equ,
       (u,
       v) => {
@@ -375,118 +353,40 @@ MathML = class MathML {
         return this.tuv('msubsup',
       a,
       b);
+      },
+      A.Ratio,
+      (u,
+      v) => {
+        return this.tuv('mfrac',
+      u,
+      v);
+      },
+      A.Var,
+      (s) => {
+        return this.tag('mi',
+      s);
+      },
+      A.Num,
+      (n) => {
+        return this.tag('mn',
+      n);
+      },
+      A.Dbl,
+      (d) => {
+        return this.tag('mn',
+      d);
       }
     ]);
   }
 
-  doExp() {
-    var Add, Div, Mul, Neg, Sub, calc1, calc2, calc3, f1, f2, fa, toPtns;
-    Add = (u, v) => {
-      return u + v;
-    };
-    Sub = (u, v) => {
-      return u - v;
-    };
-    Mul = (u, v) => {
-      return u * v;
-    };
-    Div = (u, v) => {
-      return u / v;
-    };
-    Neg = (u) => {
-      return -u;
-    };
-    f1 = (f) => {
-      return [f.name, _];
-    };
-    f2 = (f) => {
-      return [f.name, _, _];
-    };
-    fa = (f) => {
-      var a, i, j, ref;
-      a = [f.name];
-      for (i = j = 0, ref = f.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
-        a.push(_);
-      }
-      return a;
-    };
-    console.log('f2 Add', f2(Add));
-    console.log('fa Add', fa(Add));
-    console.log('fa Neg', fa(Neg));
-    toPtns = (adts) => {
-      var i, j, ptns, ref;
-      // console.log( 'MathML.doExp.toPtns() adts', adts )
-      ptns = new Array(adts.length);
-      for (i = j = 0, ref = adts.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
-        ptns[i] = i % 2 === 0 ? f2(adts[i]) : adts[i];
-      }
-      console.log('MathML.doExp.toPtns() ptns', ptns);
-      return ptns;
-    };
-    calc1 = function(exp) {
-      var ptns;
-      ptns = toPtns([
-        Add,
-        (u,
-        v) => {
-          return Add(u,
-        v);
-        },
-        Sub,
-        (u,
-        v) => {
-          return Sub(u,
-        v);
-        },
-        Mul,
-        (u,
-        v) => {
-          return Mul(u,
-        v);
-        },
-        Div,
-        (u,
-        v) => {
-          return Div(u,
-        v);
-        }
-      ]);
-      return match(exp, ...ptns);
-    };
-    calc1(['Add', 1, 2]);
-    calc2 = function(exp) {
-      return match(exp, f2(Add), (u, v) => {
-        return Add(u, v);
-      }, f2(Sub), (u, v) => {
-        return Sub(u, v);
-      }, f2(Mul), (u, v) => {
-        return Mul(u, v);
-      }, f2(Div), (u, v) => {
-        return Div(u, v);
-      }, _, 'Calc2 Error');
-    };
-    calc3 = function(exp) {
-      return match(exp, ['Add', _, _], (u, v) => {
-        return Add(u, v);
-      }, ['Sub', _, _], (u, v) => {
-        return Sub(u, v);
-      }, ['Mul', _, _], (u, v) => {
-        return Mul(u, v);
-      }, ['Div', _, _], (u, v) => {
-        return Div(u, v);
-      }, _, 'Calc3 Error');
-    };
-    console.log('doExp Add', calc2(['Add', 1, 2]));
-    console.log('doExp Sub', calc3(['Sub', 3, 2]));
-    console.log('doExp Mul', calc2(['Mul', 3, 4]));
-    console.log('doExp Div', calc1(['Div', 6, 2]));
-    if (calc1 === false && calc2 === false && calc3 === false && f1 === false && fn === false) {
-      return {};
-    }
-  }
-
+  //'String',  (s)    => @tag('mi',s ),
+  //'Number',  (n)    => @tag('mn',n ),
+  //'Under',   (x)    => console.log('match unknown asc', x )
   testMarkup(key) {
-    var Add, Equ, Sum, adts;
+    var Add, Equ, Sin, Sum, adts;
+    Sin = (u) => {
+      return A.Sin(A.Num(Math.PI / 6));
+    };
     Add = [A.Add, [A.Var, 'a'], [A.Var, 'b']];
     Equ = (u, v) => {
       return A.Equ(A.Var`E`, A.Mul(A.Var`m`, A.Pow(A.Var('C'), A.Num(2))));
@@ -495,11 +395,19 @@ MathML = class MathML {
       return A.Sum(A.Equ(A.Var('i'), A.Num(1)), A.Var('n'), A.Sub(A.Var('x'), A.Var('i')));
     };
     adts = {
+      Sin: Sin,
       Add: Add,
       Equ: Equ,
       Sum: Sum
     };
+    console.log('Sin', Sin, A.f1(A.Sin(A.Num(Math.PI / 6))));
+    console.log('Equ', Equ, A.f2(A.Equ(A.Var`E`, A.Mul(A.Var`m`, A.Pow(A.Var('C'), A.Num(2))))));
+    console.log('Sum', Sum, A.f3(A.Sum(A.Equ(A.Var('i'), A.Num(1)), A.Var('n'), A.Sub(A.Var('x'), A.Var('i')))));
+    return;
     switch (key) {
+      case 'Sin':
+        this.markup(adts.Sin, key);
+        break;
       case 'Add':
         this.markup(adts.Add, key);
         break;
@@ -542,6 +450,29 @@ MathML = class MathML {
     console.log("---------------------- testParse --------------------------");
   }
 
+  testExp() {
+    var Adda, Adds, Sina, Sins, Suma, Sums;
+    Sina = ['Sin', Math.PI / 6];
+    Adda = [
+      'Add',
+      'a',
+      'b' // ['Add','a',['Mul',['x','y']]]
+    ];
+    Suma = ['Sum', 'i', 'n', 'j'];
+    Sins = eval("['Sin',Math.PI/6]");
+    Adds = eval("['Add','a','b']");
+    Sums = eval("['Sum','i','n','j']");
+    console.log('Sin', Sina, Sins);
+    console.log('Add', Adda, Adds);
+    console.log('Sin', Suma, Sums);
+    //markup( Sina, 'Sina' )
+    //markup( Sins, 'Sins' )
+    this.markup(Adda, 'Adda');
+  }
+
 };
 
+//markup( Adds, 'Adds' )
+//markup( Suma, 'Suma' )
+//markup( Sums, 'Sums' )
 export default MathML;

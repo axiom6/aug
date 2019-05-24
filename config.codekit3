@@ -2878,6 +2878,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/src/math/test/DoExp.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/math/test/DoExp.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
 	"/vue/comp/Cube.roll.js": {
 		"bF": 0,
 		"ft": 64,
@@ -3351,7 +3362,7 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/vue/wood/Wood.scss": {
+	"/vue/wood/wood.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -6782,17 +6793,6 @@
 		},
 	"languageDefaultsUserDefined": [
 		{
-			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.html",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "",
-			"autoOutputPathReplace2": "",
-			"autoOutputPathStyle": 0,
-			"fileExtension": "html",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
 			"autoOutputAction": 0,
 			"autoOutputPathFilenamePattern": "*.js",
 			"autoOutputPathRelativePath": "",
@@ -6800,6 +6800,17 @@
 			"autoOutputPathReplace2": "pub/vue",
 			"autoOutputPathStyle": 3,
 			"fileExtension": "vue",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.html",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "",
+			"autoOutputPathReplace2": "",
+			"autoOutputPathStyle": 0,
+			"fileExtension": "html",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

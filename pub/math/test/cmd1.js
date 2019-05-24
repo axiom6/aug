@@ -7,10 +7,13 @@ import MathML from '../ptn/MathML.js';
 console.log( "------------------------ BEGIN --------------------------" )
 
 let mathML = new MathML();
+if( mathML===false ) {}
+
+mathML.testExp();
 
 //mathML.doExp();
 
-  mathML.testMarkup( 'Add' );
+//mathML.testMarkup( 'Add' );
 //mathML.testMarkup( 'Equ' );
 //mathML.testMarkup( 'Sum' );
 /*

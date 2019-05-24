@@ -1,5 +1,5 @@
 
-import {match,_} from '../../bas/util/Match.js'
+import {match} from '../../bas/util/Match.js'
 import A         from '../ptn/Adt.js'
 import Ascii     from '../par/Ascii.js'
 
@@ -7,6 +7,7 @@ class MathML
 
   constructor:() ->
     # console.log( 'Ascii Import', Ascii )
+    A.mathML = @
     @key  = ""
     @math = {}
     @ptns = @toPtns()
@@ -16,21 +17,22 @@ class MathML
     err = {};
     try
       par = Ascii.parse(  asc )
-      ast = new Function( par )
-      @markup( ast, key )
+      asa = eval( par )
+      @markup( asa, key )
     catch error
       err.found = error.found; err.msg = error.message; err.loc = error.location;
       console.error( 'MathML.doParse()', { key:key, ascii:asc, error:err } )
     finally
       return par
 
-  markup:( ast, key ) ->
+  markup:( asa, key ) ->
     @key = key
     @math[@key] = ""
-    @head()
+    #head()
     @app( "<math>")
-    @exp(  ast )
-    @app( "</math>","</root>")
+    @exp(  asa )
+    @app( "</math>" ) # ,"</root>"
+    console.log( 'MathML.markup()', @math[@key] )
     return
 
   head:() ->
@@ -51,7 +53,7 @@ class MathML
     return
 
   tag:( t, v ) ->
-    @math[@key] += "<#{t}>#{v.toString()}</#{t}>#"
+    @math[@key] += "<#{t}>#{v.toString()}</#{t}>"
     return
 
   bin:( t, u, op, v ) ->
@@ -86,21 +88,16 @@ class MathML
     @beg(t); @tuv(sym,a,b); @end(t); @exp(u)
     return
 
-  exp:( ast ) ->
-    ex = A.toExp(ast)
+  exp:( asa ) ->
     try
-      console.log( 'MathML.exp(ast)', ast, ex )
-      match( ex, ...@ptns )
+      # console.log( 'MathML.exp(asa)', asa )
+      match( asa, ...@ptns )
     catch e
       console.error( 'MathML.exp()', e )
     finally
       return
 
   toPtns:() -> A.toPtns( [
-    A.Var,    (s)     => @tag('mi',s ),
-    A.Num,    (n)     => @tag('mn',n ),
-    A.Dbl,    (d)     => @tag('mn',d ),
-    A.Ratio,  (u,v)   => @tuv('mfrac', u,v ),
     A.Equ,    (u,v)   => @bin('mrow',  u, '=', v ),
     A.Add,    (u,v)   => @bin('mrow',  u, '+', v ),
     A.Sub,    (u,v)   => @bin('mrow',  u, '-', v ),
@@ -135,77 +132,30 @@ class MathML
     A.DefInt, (a,b,u) => @sum('msubsup',   a,b, '\u222B', u ),
     A.Sum,    (a,b,u) => @sum('munderover',a,b, '\u2211', u ),
     A.Sus,    (u,v)   => @tuv('msub',    u, v ),
-    A.Lim,    (a,b)   => @tuv('msubsup', a, b ) 
+    A.Lim,    (a,b)   => @tuv('msubsup', a, b ),
+    A.Ratio,  (u,v)   => @tuv('mfrac', u,v ),
+    A.Var,    (s)     => @tag('mi',s ),
+    A.Num,    (n)     => @tag('mn',n ),
+    A.Dbl,    (d)     => @tag('mn',d )
+    #'String',  (s)    => @tag('mi',s ),
+    #'Number',  (n)    => @tag('mn',n ),
+    #'Under',   (x)    => console.log('match unknown asc', x )
   ] )
 
-  doExp:() ->
-
-    Add = (u,v) =>  u + v
-    Sub = (u,v) =>  u - v
-    Mul = (u,v) =>  u * v
-    Div = (u,v) =>  u / v
-    Neg = (u)   => -u
-
-    f1 = (f) => [f.name,_]
-    f2 = (f) => [f.name,_,_]
-    fa = (f) =>
-      a = [f.name]
-      a.push(_) for i in [0...f.length]
-      a
-
-    console.log( 'f2 Add', f2(Add) )
-    console.log( 'fa Add', fa(Add) )
-    console.log( 'fa Neg', fa(Neg) )
-
-    toPtns = ( adts ) =>
-      # console.log( 'MathML.doExp.toPtns() adts', adts )
-      ptns = new Array(adts.length)
-      for i in [0...adts.length]
-        ptns[i] = if i%2 is 0 then f2(adts[i]) else adts[i]
-      console.log( 'MathML.doExp.toPtns() ptns', ptns )
-      ptns
-
-    calc1 = ( exp ) ->
-      ptns = toPtns([
-        Add, (u,v) => Add(u,v),
-        Sub, (u,v) => Sub(u,v),
-        Mul, (u,v) => Mul(u,v),
-        Div, (u,v) => Div(u,v)  ] )
-      match( exp, ...ptns )
-
-    calc1(['Add',1,2] )
-
-    calc2 = ( exp) ->
-      match( exp,
-        f2(Add), (u,v) => Add(u,v),
-        f2(Sub), (u,v) => Sub(u,v),
-        f2(Mul), (u,v) => Mul(u,v),
-        f2(Div), (u,v) => Div(u,v),
-        _,            'Calc2 Error'
-      )
-
-    calc3 = ( exp) ->
-      match( exp,
-        ['Add',_,_], (u,v) => Add(u,v),
-        ['Sub',_,_], (u,v) => Sub(u,v),
-        ['Mul',_,_], (u,v) => Mul(u,v),
-        ['Div',_,_], (u,v) => Div(u,v),
-        _,            'Calc3 Error'
-      )
-
-    console.log( 'doExp Add', calc2(['Add',1,2] ) )
-    console.log( 'doExp Sub', calc3(['Sub',3,2] ) )
-    console.log( 'doExp Mul', calc2(['Mul',3,4] ) )
-    console.log( 'doExp Div', calc1(['Div',6,2] ) )
-
-    if calc1 is false and calc2 is false  and calc3 is false and f1 is false and fn is false then {}
-
   testMarkup:(  key ) ->
+
+    Sin = (u)     => A.Sin(A.Num(Math.PI/6))
     Add = [A.Add,[A.Var,'a'],[A.Var,'b']]
     Equ = (u,v)   => A.Equ(A.Var'E',A.Mul(A.Var'm',A.Pow(A.Var('C'),A.Num(2))))
     Sum = (a,b,u) => A.Sum(A.Equ(A.Var('i'),A.Num(1)),A.Var('n'),A.Sub(A.Var('x'),A.Var('i')))
-    adts = { Add:Add, Equ:Equ, Sum:Sum }
+    adts = { Sin:Sin, Add:Add, Equ:Equ, Sum:Sum }
+
+    console.log( 'Sin', Sin, A.f1(A.Sin(A.Num(Math.PI/6))) )
+    console.log( 'Equ', Equ, A.f2(A.Equ(A.Var'E',A.Mul(A.Var'm',A.Pow(A.Var('C'),A.Num(2))))) )
+    console.log( 'Sum', Sum, A.f3(A.Sum(A.Equ(A.Var('i'),A.Num(1)),A.Var('n'),A.Sub(A.Var('x'),A.Var('i')))) )
+    return
     switch key
+      when 'Sin' then @markup( adts.Sin, key )
       when 'Add' then @markup( adts.Add, key )
       when 'Equ' then @markup( adts.Equ, key )
       else            @markup( adts.Sum, key )
@@ -226,6 +176,26 @@ class MathML
       else            @doParse( ascs.sus,'sus' )
     console.log( 'MathML.parse', { key:key, asc:ascs[key], mathML:@math[key] } )
     console.log( "---------------------- testParse --------------------------" )
+    return
+
+  testExp:() ->
+    Sina = ['Sin',Math.PI/6]
+    Adda = ['Add','a','b'] # ['Add','a',['Mul',['x','y']]]
+    Suma = ['Sum','i','n','j']
+    Sins = eval("['Sin',Math.PI/6]" )
+    Adds = eval("['Add','a','b']" )
+    Sums = eval("['Sum','i','n','j']" )
+    console.log( 'Sin', Sina, Sins )
+    console.log( 'Add', Adda, Adds )
+    console.log( 'Sin', Suma, Sums )
+
+    #markup( Sina, 'Sina' )
+    #markup( Sins, 'Sins' )
+    @markup( Adda, 'Adda' )
+    #markup( Adds, 'Adds' )
+    #markup( Suma, 'Suma' )
+    #markup( Sums, 'Sums' )
+
     return
 
 export default MathML

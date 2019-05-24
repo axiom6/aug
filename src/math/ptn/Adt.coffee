@@ -1,33 +1,38 @@
 
-import {_} from '../../bas/util/Match.js'
+import {_}    from '../../bas/util/Match.js'
 
 class Adt
 
-  @Unk = (u) => 'Unk'
-
   @toPtn = (f) =>
-    a = [f.name]
-    a.push(_) for i in [0...f.length]
+    a = []
+    # console.log( 'Adt.toPtn()', f, typeof(f) )
+    if typeof(f) is 'function'
+      a.push(f.name)
+      a.push(_) for i in [0...f.length]
+    else if f is 'String'
+      a.push(String)
+    else if f is 'Number'
+      a.push(Number)
+    else if f is 'Under'
+      a.push(_)
+    else
+      console.error( 'Adt.toPtn() unknown pattern', f )
     return a
-
-  @toExp1 = (f,args...) =>
-    a    = [f.name]
-    for i in [0...f.length]
-      a.push(args[i])
-    return a
-
-  @toExp = (args) =>
-    args[0] = args[0].name
-    console.log( 'Adt.toExp()', args )
-    return args
 
   @toPtns = ( adts ) =>
     # console.log( 'Adt.toPtns() adts', adts )
     ptns = new Array(adts.length)
     for i in [0...adts.length]
       ptns[i] = if i%2 is 0 then Adt.toPtn(adts[i]) else adts[i]
+    ptns.push( String, (s) => @stag(s) )
+    ptns.push( Number, (n) => @ntag(n) )
+    ptns.push( _,      (q) => @unkn(q) )
     # console.log( 'Adt.toPtns() ptns', ptns )
     ptns
+
+  @stag:(s) -> Adt.mathML.tag('mi',s )
+  @ntag:(n) -> Adt.mathML.tag('mn',n )
+  @unkm:(q) -> console.log('unknown match asc', q )
 
   # Geometric Algerbra
   @Dot       = (u,v) => u ~ v  # Dot product
