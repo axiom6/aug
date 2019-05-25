@@ -1,53 +1,7 @@
 var Adt;
 
-import {
-  _
-} from '../../bas/util/Match.js';
-
 Adt = (function() {
   class Adt {
-    static toPtn(f) {
-      var a, i, j, ref;
-      a = void 0;
-      if (f === 'String') {
-        a = String;
-      } else if (f === 'Number') {
-        a = Number;
-      } else if (f === '_') {
-        a = _;
-      } else if (typeof f === 'function') {
-        a = [];
-        a.push(f.name);
-        for (i = j = 0, ref = f.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
-          a.push(_);
-        }
-      } else {
-        console.error('Adt.toPtn() unknown pattern', f);
-      }
-      //console.log( 'Adt.toPtn()', { f:f, ft:typeof(f), fa:Array.isArray(f), a:a, at:typeof(a), aa:Array.isArray(a) } )
-      return a;
-    }
-
-    static type(ptn) {
-      if (Array.isArray(ptn)) {
-        return 'array';
-      } else {
-        return typeof ptn;
-      }
-    }
-
-    static toPtns(adts) {
-      var i, j, ptns, ref;
-      // console.log( 'Adt.toPtns() adts', adts )
-      ptns = new Array(adts.length);
-      for (i = j = 0, ref = adts.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
-        ptns[i] = i % 2 === 0 ? Adt.toPtn(adts[i]) : adts[i];
-      }
-      // for i in [0...ptns.length] by 2
-      //  console.log( 'Adt.toPtns()', { ptn:ptns[i], type:Adt.type(ptns[i]) } )
-      return ptns;
-    }
-
     // Geometric Algerbra
     static Dot(u, v) {
       return u(~v); // Dot product
@@ -94,22 +48,18 @@ Adt = (function() {
     }
 
     static Reflect(u, v) {
-      return u * v * Adt.conjugate(u);
+      return u * v * conjugate(u);
     }
 
     static Rotate(u, v) {
-      return u * v * Adt.conjugate(u);
+      return u * v * conjugate(u);
     }
 
     static GP(u, v) {
       return Adt.Dot(u, v) + Adt.Wedge(u, v); // Geometric Product
     }
 
-    
     // Numbers and Variables
-    //Var   = (v)   =>  v
-    //Num   = (n)   =>  n
-    //Dbl   = (d)   =>  d
     static Ratio(u, v) {
       return u / v;
     }
@@ -290,6 +240,7 @@ Adt = (function() {
     }
 
     // Finge
+    //Obj = (k,v)  => { k:v } # ???
     static Sim(u) {
       return u; // sim(u) Simplify
     }
@@ -308,15 +259,25 @@ Adt = (function() {
 
   };
 
-  //Obj = (k,v) => { k:v } # ???
-  //Arr = (u)   => [ u   ] # ???
-  Adt.ArithAdts = [Adt.Ratio, Adt.Equ, Adt.Add, Adt.Sub, Adt.Mul, Adt.Div, Adt.Pow, Adt.Neg, Adt.Recip, Adt.Abs, Adt.Paren, Adt.Brace];
+  Adt.Geom = [Adt.Dot, Adt.Wedge, Adt.Vee, Adt.Dual, Adt.Inverse, Adt.Conjugate, Adt.Reverse, Adt.Involute, Adt.Rotor, Adt.Magnitude, Adt.Grade, Adt.Reflect, Adt.Rotate, Adt.GP];
 
-  Adt.TransAdts = [Adt.Ln, Adt.Log, Adt.Root, Adt.Sqrt, Adt.E, Adt.Sin, Adt.Cos, Adt.Tan, Adt.Csc, Adt.Sec, Adt.Cot, Adt.Arcsin, Adt.Arccos, Adt.Arctan, Adt.Arccsc, Adt.Arcsec, Adt.Arccot];
+  Adt.Arith = [Adt.Ratio, Adt.Equ, Adt.Add, Adt.Sub, Adt.Mul, Adt.Div, Adt.Pow, Adt.Neg, Adt.Recip, Adt.Abs, Adt.Paren, Adt.Brace];
 
-  Adt.HyperAdts = [Adt.Sinh, Adt.Cosh, Adt.Tanh, Adt.Arccinh, Adt.Arccosh, Adt.Arctanh];
+  Adt.Trans = [Adt.Ln, Adt.Log, Adt.Root, Adt.Sqrt, Adt.E, Adt.Sin, Adt.Cos, Adt.Tan, Adt.Csc, Adt.Sec, Adt.Cot, Adt.Arcsin, Adt.Arccos, Adt.Arctan, Adt.Arccsc, Adt.Arcsec, Adt.Arccot];
 
-  Adt.CalculusAdts = [Adt.Fun, Adt.D, Adt.Int, Adt.DefInt, Adt.Sum, Adt.Sub, Adt.Sus, Adt.Lim];
+  Adt.Hyper = [Adt.Sinh, Adt.Cosh, Adt.Tanh, Adt.Arccinh, Adt.Arccosh, Adt.Arctanh];
+
+  Adt.Calculus = [Adt.Fun, Adt.D, Adt.Int, Adt.DefInt, Adt.Sum, Adt.Sub, Adt.Sus, Adt.Lim];
+
+  Adt.Fringe = [Adt.Sim, Adt.Not, Adt.Msg, Adt.Unk];
+
+  if (Adt.Geom === false && Adt.Arith === false && Adt.Trans === false) {
+    ({});
+  }
+
+  if (Adt.Hyper === false && Adt.Calculus === false && Adt.Fringe === false) {
+    ({});
+  }
 
   return Adt;
 

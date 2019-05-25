@@ -2073,17 +2073,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/math/par/arith.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/math/par/arith-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/pub/math/par/Ascii.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2106,17 +2095,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/math/ptn/Matcher.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/math/ptn/Matcher-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/pub/math/ptn/MathML.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2128,32 +2106,46 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/math/test/add.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/math/test/add.html",
-		"oF": 0
-		},
-	"/pub/math/test/cmd1.js": {
+	"/pub/math/test/Run.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/math/test/cmd1-min.js",
+		"oAP": "/pub/math/test/Run-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/math/test/DoExp.js": {
+	"/pub/math/test/TestMatch.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/math/test/DoExp-min.js",
+		"oAP": "/pub/math/test/TestMatch-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/math/test/TestMathML.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/test/TestMathML-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/math/test/TestPeg.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/test/TestPeg-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2856,17 +2848,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/math/ptn/Matcher.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/math/ptn/Matcher.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
 	"/src/math/ptn/MathML.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -2878,23 +2859,34 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/math/test/cmd1.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/src/math/test/cmd1-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/math/test/DoExp.coffee": {
+	"/src/math/ptn/Ptn.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/math/test/DoExp.js",
+		"oAP": "/pub/math/ptn/Ptn.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/math/test/TestMatch.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/math/test/TestMatch.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/math/test/TestMathML.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/math/test/TestMathML.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
@@ -3373,7 +3365,7 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/vue/wood/Wood.scss": {
+	"/vue/wood/wood.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -4026,6 +4018,14 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/zzz/obs/std.html",
+		"oF": 0
+		},
+	"/zzz/peg/arith/add.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/peg/arith/add.html",
 		"oF": 0
 		},
 	"/zzz/peg/arith/add.js": {

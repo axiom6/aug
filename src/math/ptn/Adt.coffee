@@ -1,36 +1,5 @@
 
-import {_}    from '../../bas/util/Match.js'
-
 class Adt
-
-  @toPtn = (f) =>
-    a = undefined
-    if f is 'String'
-      a = String
-    else if f is 'Number'
-      a = Number
-    else if f is '_'
-      a = _
-    else if typeof(f) is 'function'
-      a = []
-      a.push(f.name)
-      a.push(_) for i in [0...f.length]
-    else
-      console.error( 'Adt.toPtn() unknown pattern', f )
-    #console.log( 'Adt.toPtn()', { f:f, ft:typeof(f), fa:Array.isArray(f), a:a, at:typeof(a), aa:Array.isArray(a) } )
-    return a
-
-  @type = (ptn) =>
-    if Array.isArray(ptn) then 'array' else typeof(ptn)
-
-  @toPtns = ( adts ) =>
-    # console.log( 'Adt.toPtns() adts', adts )
-    ptns = new Array(adts.length)
-    for i in [0...adts.length]
-      ptns[i] = if i%2 is 0 then Adt.toPtn(adts[i]) else adts[i]
-    # for i in [0...ptns.length] by 2
-    #  console.log( 'Adt.toPtns()', { ptn:ptns[i], type:Adt.type(ptns[i]) } )
-    ptns
 
   # Geometric Algerbra
   @Dot       = (u,v) => u ~ v  # Dot product
@@ -44,14 +13,13 @@ class Adt
   @Rotor     = (u)   => u      # Rotor
   @Magnitude = (u)   => u      # Magnitude
   @Grade     = (u)   => u      # Grade
-  @Reflect   = (u,v) => u * v * @conjugate(u)
-  @Rotate    = (u,v) => u * v * @conjugate(u)
+  @Reflect   = (u,v) => u * v * conjugate(u)
+  @Rotate    = (u,v) => u * v * conjugate(u)
   @GP        = (u,v) => Adt.Dot(u,v) + Adt.Wedge(u,v) # Geometric Product
 
+  @Geom = [@Dot,@Wedge,@Vee,@Dual,@Inverse,@Conjugate,@Reverse,@Involute,@Rotor,@Magnitude,@Grade,@Reflect,@Rotate,@GP]
+
   # Numbers and Variables
-  #Var   = (v)   =>  v
-  #Num   = (n)   =>  n
-  #Dbl   = (d)   =>  d
   @Ratio = (u,v) =>  u / v
 
   # Arithmetic
@@ -70,10 +38,8 @@ class Adt
   # Parenthesis Braces Object Array
   @Paren = (u)   => ( u )
   @Brace = (u)   => { u }
-  #Obj = (k,v) => { k:v } # ???
-  #Arr = (u)   => [ u   ] # ???
 
-  @ArithAdts = [@Ratio,@Equ,@Add,@Sub,@Mul,@Div,@Pow,@Neg,@Recip,@Abs,@Paren,@Brace]
+  @Arith = [@Ratio,@Equ,@Add,@Sub,@Mul,@Div,@Pow,@Neg,@Recip,@Abs,@Paren,@Brace]
 
   # Natural Log, Log Base, Root, Square Root and e
   @Ln   = (u)   => Math.log(u)                 # ln(u)
@@ -99,7 +65,7 @@ class Adt
   @Arcsec = (u)  =>  Math.acos(1/u ) # ???
   @Arccot = (u)  =>  Math.atan(1/u ) # ???
 
-  @TransAdts = [@Ln,@Log,@Root,@Sqrt,@E,
+  @Trans = [@Ln,@Log,@Root,@Sqrt,@E,
     @Sin,   @Cos,   @Tan,   @Csc,   @Sec,   @Cot,
     @Arcsin,@Arccos,@Arctan,@Arccsc,@Arcsec,@Arccot]
 
@@ -111,7 +77,7 @@ class Adt
   @Arccosh = (u) =>  Math.acosh(u)
   @Arctanh = (u) =>  Math.atanh(u)
 
-  @HyperAdts = [@Sinh,@Cosh,@Tanh,@Arccinh,@Arccosh,@Arctanh]
+  @Hyper = [@Sinh,@Cosh,@Tanh,@Arccinh,@Arccosh,@Arctanh]
 
   # Calculus, Sum and Typsetting
   @Fun    = (f,u)   => u         # f(u) Function
@@ -124,12 +90,18 @@ class Adt
   @Sus = (u,a)   => u + a     # u_a  Subscript  u^b  Superscript is Power
   @Lim = (a,b)   => a + b     #_a^b  Limit for Sum and Itg
 
-  @CalculusAdts = [@Fun,@D,@Int,@DefInt,@Sum,@Sub,@Sus,@Lim]
+  @Calculus = [@Fun,@D,@Int,@DefInt,@Sum,@Sub,@Sus,@Lim]
 
   # Finge
+  #Obj = (k,v)  => { k:v } # ???
   @Sim = (u)     => u         # sim(u) Simplify
   @Not = (u)     => u         # Not an Adt expression
   @Msg = (u)     => u         # Parsing error message
   @Unk = (u)     => u
+
+  @Fringe = [@Sim,@Not,@Msg,@Unk]
+
+  if @Geom  is false and @Arith    is false and @Trans  is false then {}
+  if @Hyper is false and @Calculus is false and @Fringe is false then {}
 
 export default Adt

@@ -1,68 +1,13 @@
-var Matcher;
+// cd   pub/math/test
+// node  node --experimental-modules -r esm TestMatch.js
+var TestMatch;
 
 import {
   match,
-  _,
-  REST
+  _
 } from '../../bas/util/Match.js';
 
-Matcher = class Matcher {
-  static doMatches() {
-    var e;
-    try {
-      Matcher.doMatch(3);
-      Matcher.doMatch(3.14);
-      Matcher.doMatch(['str', 3.14]);
-      Matcher.doMatch([1, 2, 3]);
-      Matcher.doMatch({
-        x: 'x'
-      });
-      Matcher.doMatch({});
-      Matcher.doLisp();
-      return Matcher.doExp();
-    } catch (error) {
-      e = error;
-      return console.error('Marcher.doMatches()', e);
-    }
-  }
-
-  static doMatch(x) {
-    var msg;
-    msg = match(x, 3, "this matches the number 3", Number, "matches any JavaScript number", [String, Number], (a, b) => {
-      return "a typed Array [a, b] that you can use in a function";
-    }, [1, 2, _], "any Array of 3 elements that begins with [1, 2]", {
-      x: _
-    }, "any Object with a key 'x' and any value associated", _, "anything else");
-    console.log('Matcher.doMatch()', msg);
-  }
-
-  static doLisp() {
-    var lisp, minus, plus, reduce;
-    lisp = function(exp) {
-      return match(exp, Function, (x) => {
-        return x;
-      }, [Function, REST], (f, rest) => {
-        return f.apply(null, rest.map(lisp));
-      }, Array, (l) => {
-        return l.map(lisp);
-      }, _, (x) => {
-        return x;
-      });
-    };
-    plus = (a, b) => {
-      return a + b;
-    };
-    minus = (a, b) => {
-      return a - b;
-    };
-    reduce = (f, l) => {
-      return l.reduce(f);
-    };
-    console.log('lisp 3', lisp([plus, 1, 2]));
-    console.log('lisp 3', lisp([plus, 1, [minus, 4, 2]]));
-    console.log('lisp 6', lisp([reduce, plus, [1, 2, 3]]));
-  }
-
+TestMatch = class TestMatch {
   static doExp() {
     var Add, Div, Mul, Neg, Sub, calc1, calc2, calc3, f1, f2, fa, toPtns;
     Add = (u, v) => {
@@ -99,17 +44,17 @@ Matcher = class Matcher {
     console.log('fa Neg', fa(Neg));
     toPtns = (adts) => {
       var i, j, ptns, ref;
-      console.log('adts', adts);
+      // console.log( 'MathML.doExp.toPtns() adts', adts )
       ptns = new Array(adts.length);
       for (i = j = 0, ref = adts.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
-        ptns[i] = i % 2 === 1 ? f2(adts[i]) : adts[i];
+        ptns[i] = i % 2 === 0 ? f2(adts[i]) : adts[i];
       }
+      console.log('MathML.doExp.toPtns() ptns', ptns);
       return ptns;
     };
     calc1 = function(exp) {
       var ptns;
       ptns = toPtns([
-        exp,
         Add,
         (u,
         v) => {
@@ -135,8 +80,7 @@ Matcher = class Matcher {
         v);
         }
       ]);
-      console.log('ptns', ptns);
-      return match(...ptns);
+      return match(exp, ...ptns);
     };
     calc1(['Add', 1, 2]);
     calc2 = function(exp) {
@@ -172,4 +116,6 @@ Matcher = class Matcher {
 
 };
 
-export default Matcher;
+TestMatch.doExp();
+
+export default TestMatch;

@@ -1,6 +1,10 @@
+
+# cd   pub/math/test
+# node  node --experimental-modules -r esm TestMatch.js
+
 import {match,_} from '../../bas/util/Match.js'
 
-class DoExp
+class TestMatch
 
   @doExp:() ->
 
@@ -64,4 +68,6 @@ class DoExp
 
     if calc1 is false and calc2 is false  and calc3 is false and f1 is false and fn is false then {}
 
-export default DoExp
+TestMatch.doExp()
+
+export default TestMatch

@@ -6,17 +6,17 @@ import {
 
 import A from '../ptn/Adt.js';
 
+import Ptn from '../ptn/Ptn.js';
+
 import Ascii from '../par/Ascii.js';
 
 //let Ascii = { parse:peg$parse, error:peg$SyntaxError };
 //export default Ascii;
 MathML = class MathML {
   constructor() {
-    // console.log( 'Ascii Import', Ascii )
-    A.mathML = this;
     this.key = "";
     this.math = {};
-    this.ptns = this.toPtns();
+    this.ptns = this.doPtns();
   }
 
   doParse(asc, key) {
@@ -123,7 +123,7 @@ MathML = class MathML {
   }
 
   unk(q) {
-    console.log('Adt _ Unknown', q);
+    console.log('_ MathML Unknown', q);
   }
 
   sum(t, a, b, sym, u) {
@@ -144,8 +144,8 @@ MathML = class MathML {
     }
   }
 
-  toPtns() {
-    return A.toPtns([
+  doPtns() {
+    return Ptn.toPtns([
       A.Equ,
       (u,
       v) => {
@@ -200,7 +200,7 @@ MathML = class MathML {
       A.Recip,
       (v) => {
         return this.tuv('mfrac',
-      A.Num(1),
+      1,
       v);
       },
       A.Abs,
@@ -240,7 +240,7 @@ MathML = class MathML {
       A.E,
       (u) => {
         return this.tuv('msup',
-      A.Var('e'),
+      'e',
       v);
       },
       A.Sin,
@@ -377,97 +377,6 @@ MathML = class MathML {
     ]);
   }
 
-  testMarkup(key) {
-    var Add, Equ, Sin, Sum, adts;
-    Sin = (u) => {
-      return A.Sin(A.Num(Math.PI / 6));
-    };
-    Add = [A.Add, [A.Var, 'a'], [A.Var, 'b']];
-    Equ = (u, v) => {
-      return A.Equ(A.Var`E`, A.Mul(A.Var`m`, A.Pow(A.Var('C'), A.Num(2))));
-    };
-    Sum = (a, b, u) => {
-      return A.Sum(A.Equ(A.Var('i'), A.Num(1)), A.Var('n'), A.Sub(A.Var('x'), A.Var('i')));
-    };
-    adts = {
-      Sin: Sin,
-      Add: Add,
-      Equ: Equ,
-      Sum: Sum
-    };
-    console.log('Sin', Sin, A.f1(A.Sin(A.Num(Math.PI / 6))));
-    console.log('Equ', Equ, A.f2(A.Equ(A.Var`E`, A.Mul(A.Var`m`, A.Pow(A.Var('C'), A.Num(2))))));
-    console.log('Sum', Sum, A.f3(A.Sum(A.Equ(A.Var('i'), A.Num(1)), A.Var('n'), A.Sub(A.Var('x'), A.Var('i')))));
-    return;
-    switch (key) {
-      case 'Sin':
-        this.markup(adts.Sin, key);
-        break;
-      case 'Add':
-        this.markup(adts.Add, key);
-        break;
-      case 'Equ':
-        this.markup(adts.Equ, key);
-        break;
-      default:
-        this.markup(adts.Sum, key);
-    }
-    console.log("-------------------- testMarkup ----------------------------");
-    console.log('MathML.markup', {
-      key: key,
-      adt: adts[key],
-      mathML: this.math[key]
-    });
-  }
-
-  testParse(key) {
-    var ascs;
-    ascs = {
-      add: "(a+b)*(c^2)",
-      trg: "cos(x)+sin(x)",
-      sus: "x_1 + x_2"
-    };
-    switch (key) {
-      case 'add':
-        this.doParse(ascs.add, 'add');
-        break;
-      case 'trg':
-        this.doParse(ascs.trg, 'trg');
-        break;
-      default:
-        this.doParse(ascs.sus, 'sus');
-    }
-    console.log('MathML.parse', {
-      key: key,
-      asc: ascs[key],
-      mathML: this.math[key]
-    });
-    console.log("---------------------- testParse --------------------------");
-  }
-
-  testExp() {
-    var Adda, Adds, Sina, Sins, Suma, Sums;
-    Sina = ['Sin', Math.PI / 6];
-    Adda = [
-      'Add',
-      'a',
-      'b' // ['Add','a',['Mul',['x','y']]]
-    ];
-    Suma = ['Sum', 'i', 'n', 'j'];
-    Sins = eval("['Sin',Math.PI/6]");
-    Adds = eval("['Add','a','b']");
-    Sums = eval("['Sum','i','n','j']");
-    console.log('Sin', Sina, Sins);
-    console.log('Add', Adda, Adds);
-    console.log('Sin', Suma, Sums);
-    this.markup(Sina, 'Sina');
-    this.markup(Sins, 'Sins');
-    this.markup(Adda, 'Adda');
-  }
-
 };
 
-//markup( Adds, 'Adds' )
-//markup( Suma, 'Suma' )
-//markup( Sums, 'Sums' )
 export default MathML;

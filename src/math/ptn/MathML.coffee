@@ -1,7 +1,8 @@
 
 import {match} from '../../bas/util/Match.js'
-import A         from '../ptn/Adt.js'
-import Ascii     from '../par/Ascii.js'
+import A       from '../ptn/Adt.js'
+import Ptn     from '../ptn/Ptn.js'
+import Ascii   from '../par/Ascii.js'
 
 #let Ascii = { parse:peg$parse, error:peg$SyntaxError };
 #export default Ascii;
@@ -9,11 +10,9 @@ import Ascii     from '../par/Ascii.js'
 class MathML
 
   constructor:() ->
-    # console.log( 'Ascii Import', Ascii )
-    A.mathML = @
     @key  = ""
     @math = {}
-    @ptns = @toPtns()
+    @ptns = @doPtns()
 
   doParse:( asc, key ) ->
     par = "X";
@@ -83,7 +82,7 @@ class MathML
     return
 
   unk:( q ) ->
-    console.log( 'Adt _ Unknown', q )
+    console.log( '_ MathML Unknown', q )
     return
 
   sum:( t, a, b, sym, u ) ->
@@ -98,7 +97,7 @@ class MathML
       console.error( 'MathML.exp()', e )
     return
 
-  toPtns:() -> A.toPtns( [
+  doPtns:() -> Ptn.toPtns( [
     A.Equ,    (u,v)   => @bin('mrow',  u, '=', v ),
     A.Add,    (u,v)   => @bin('mrow',  u, '+', v ),
     A.Sub,    (u,v)   => @bin('mrow',  u, '-', v ),
@@ -106,7 +105,7 @@ class MathML
     A.Div,    (u,v)   => @tuv('mfrac', u,v ),
     A.Pow,    (u,v)   => @tuv('msup',  u, v ),
     A.Neg,    (u)     => @uni('-', u ),
-    A.Recip,  (v)     => @tuv('mfrac', A.Num(1), v ),
+    A.Recip,  (v)     => @tuv('mfrac', 1, v ),
     A.Abs,    (u)     => @sur( '|', u, '|' ),
     A.Paren,  (u)     => @fen(u),
     A.Brace,  (u)     => @fen(u),
@@ -114,7 +113,7 @@ class MathML
     A.Log,    (u,v)   => u + v,
     A.Root,   (u,v)   => u + v,
     A.Sqrt,   (u)     => @tag('msqrt', u ),
-    A.E,      (u)     => @tuv('msup', A.Var('e'), v ),
+    A.E,      (u)     => @tuv('msup', 'e', v ),
     A.Sin,    (u)     => @fun('sin',    u ),
     A.Cos,    (u)     => @fun('cot',    u ),
     A.Tan,    (u)     => @fun('tan',    u ),
@@ -139,61 +138,5 @@ class MathML
     'Number', (n)     => @tag('mn',n ),
     '_',      (q)     => @unk(q)
   ] )
-
-  testMarkup:(  key ) ->
-
-    Sin = (u)     => A.Sin(A.Num(Math.PI/6))
-    Add = [A.Add,[A.Var,'a'],[A.Var,'b']]
-    Equ = (u,v)   => A.Equ(A.Var'E',A.Mul(A.Var'm',A.Pow(A.Var('C'),A.Num(2))))
-    Sum = (a,b,u) => A.Sum(A.Equ(A.Var('i'),A.Num(1)),A.Var('n'),A.Sub(A.Var('x'),A.Var('i')))
-    adts = { Sin:Sin, Add:Add, Equ:Equ, Sum:Sum }
-
-    console.log( 'Sin', Sin, A.f1(A.Sin(A.Num(Math.PI/6))) )
-    console.log( 'Equ', Equ, A.f2(A.Equ(A.Var'E',A.Mul(A.Var'm',A.Pow(A.Var('C'),A.Num(2))))) )
-    console.log( 'Sum', Sum, A.f3(A.Sum(A.Equ(A.Var('i'),A.Num(1)),A.Var('n'),A.Sub(A.Var('x'),A.Var('i')))) )
-    return
-    switch key
-      when 'Sin' then @markup( adts.Sin, key )
-      when 'Add' then @markup( adts.Add, key )
-      when 'Equ' then @markup( adts.Equ, key )
-      else            @markup( adts.Sum, key )
-    console.log( "-------------------- testMarkup ----------------------------" )
-    console.log( 'MathML.markup', { key:key, adt:adts[key], mathML:@math[key] } )
-
-    return
-
-  testParse:( key ) ->
-    ascs = {
-      add:"(a+b)*(c^2)"
-      trg:"cos(x)+sin(x)"
-      sus:"x_1 + x_2"
-    }
-    switch( key )
-      when 'add' then @doParse( ascs.add,'add' )
-      when 'trg' then @doParse( ascs.trg,'trg' )
-      else            @doParse( ascs.sus,'sus' )
-    console.log( 'MathML.parse', { key:key, asc:ascs[key], mathML:@math[key] } )
-    console.log( "---------------------- testParse --------------------------" )
-    return
-
-  testExp:() ->
-    Sina = ['Sin',Math.PI/6]
-    Adda = ['Add','a','b'] # ['Add','a',['Mul',['x','y']]]
-    Suma = ['Sum','i','n','j']
-    Sins = eval("['Sin',Math.PI/6]" )
-    Adds = eval("['Add','a','b']" )
-    Sums = eval("['Sum','i','n','j']" )
-    console.log( 'Sin', Sina, Sins )
-    console.log( 'Add', Adda, Adds )
-    console.log( 'Sin', Suma, Sums )
-
-    @markup( Sina, 'Sina' )
-    @markup( Sins, 'Sins' )
-    @markup( Adda, 'Adda' )
-    #markup( Adds, 'Adds' )
-    #markup( Suma, 'Suma' )
-    #markup( Sums, 'Sums' )
-
-    return
 
 export default MathML
