@@ -3,6 +3,9 @@ import {match} from '../../bas/util/Match.js'
 import A         from '../ptn/Adt.js'
 import Ascii     from '../par/Ascii.js'
 
+#let Ascii = { parse:peg$parse, error:peg$SyntaxError };
+#export default Ascii;
+
 class MathML
 
   constructor:() ->
@@ -22,8 +25,7 @@ class MathML
     catch error
       err.found = error.found; err.msg = error.message; err.loc = error.location;
       console.error( 'MathML.doParse()', { key:key, ascii:asc, error:err } )
-    finally
-      return par
+    return par
 
   markup:( asa, key ) ->
     @key = key
@@ -80,8 +82,8 @@ class MathML
     @beg('mfence'); @exp(u); @end('mfence')
     return
 
-  unk:( u ) ->
-    console.log( 'Adt _ Unknown', u )
+  unk:( q ) ->
+    console.log( 'Adt _ Unknown', q )
     return
 
   sum:( t, a, b, sym, u ) ->
@@ -94,8 +96,7 @@ class MathML
       match( asa, ...@ptns )
     catch e
       console.error( 'MathML.exp()', e )
-    finally
-      return
+    return
 
   toPtns:() -> A.toPtns( [
     A.Equ,    (u,v)   => @bin('mrow',  u, '=', v ),
@@ -134,12 +135,9 @@ class MathML
     A.Sus,    (u,v)   => @tuv('msub',    u, v ),
     A.Lim,    (a,b)   => @tuv('msubsup', a, b ),
     A.Ratio,  (u,v)   => @tuv('mfrac', u,v ),
-    A.Var,    (s)     => @tag('mi',s ),
-    A.Num,    (n)     => @tag('mn',n ),
-    A.Dbl,    (d)     => @tag('mn',d )
-    #'String',  (s)    => @tag('mi',s ),
-    #'Number',  (n)    => @tag('mn',n ),
-    #'Under',   (x)    => console.log('match unknown asc', x )
+    'String', (s)     => @tag('mi',s ),            # Using String identifiers
+    'Number', (n)     => @tag('mn',n ),
+    '_',      (q)     => @unk(q)
   ] )
 
   testMarkup:(  key ) ->
@@ -189,8 +187,8 @@ class MathML
     console.log( 'Add', Adda, Adds )
     console.log( 'Sin', Suma, Sums )
 
-    #markup( Sina, 'Sina' )
-    #markup( Sins, 'Sins' )
+    @markup( Sina, 'Sina' )
+    @markup( Sins, 'Sins' )
     @markup( Adda, 'Adda' )
     #markup( Adds, 'Adds' )
     #markup( Suma, 'Suma' )

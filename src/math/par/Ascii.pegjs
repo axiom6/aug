@@ -1,8 +1,4 @@
 
-// Ascii.js esm export
-// let Ascii = { parse:peg$parse, error:peg$SyntaxError };
-// export default Ascii;
-
 {                                            // "d" is for Dif
   let funcs1 = ["sin","cos","tan","sec","csc","cot","arcsin","arccos","arctan","e","log","ln","int","d"];
 
@@ -18,19 +14,19 @@
     return f.charAt(0).toUpperCase() + f.substring(1); }
 
   function func1( f, u ) {
-    return funcs1.includes(f) ? `${toAdt(f)}(${u})` :           `Fun(${f},${u})`; }
+    return funcs1.includes(f) ? `[${toAdt(f)},${u}]` :           `[Fun,${f},${u}]`; }
 
   function func2( f, u, v ) {
-    return funcs2.includes(f) ? `${toAdt(f)}(${u},${v})` :      `Fun(${f},${u},${v})`; }
+    return funcs2.includes(f) ? `[${toAdt(f)},${u},${v}]` :      `[Fun,${f},${u},${v}]`; }
 
   function func3( f, u, v, w ) {
-    return funcs3.includes(f) ? `${toAdt(f)}(${u},${v},${w})` : `Fun(${f},${u},${v},${w})`; }
+    return funcs3.includes(f) ? `[${toAdt(f)},${u},${v},${w}]` : `[Fun,${f},${u},${v},${w}]`; }
 
   function funcn( f, ...args ) {
-    ret = `${toAdt(f)}(`
+    ret = `[${toAdt(f)}`
     for( i = 0; i < args.length; i++ ) {
       ret += ',' + args[i]; }
-    ret += ')'
+    ret += ']'
     return ret;
   }
 }
@@ -48,37 +44,37 @@ Tilde
   / Equ
 
 Equ
-  = u:Add "=" ws v:Equ { return `Equ(${u},${v})`; }
+  = u:Add "=" ws v:Equ { return `[Equ,${u},${v}]`; }
   /   Add
 
 Add
-  = u:Sub "+" ws v:Add { return `Add(${u},${v})`; }
+  = u:Sub "+" ws v:Add { return `[Add,${u},${v}]`; }
   /   Sub
 
 Sub
-  = u:Mul "-" ws v:Sub { return `Sub(${u},${v})`; }
+  = u:Mul "-" ws v:Sub { return `[Sub,${u},${v}]`; }
   /   Mul
 
 Mul
-  = u:Div "*" ws v:Mul { return `Mul(${u},${v})` }
+  = u:Div "*" ws v:Mul { return `[Mul,${u},${v}]` }
   /   Div
 
 Div
-  = u:Pow "/" ws v:Div { return `Div(${u},${v})` }
+  = u:Pow "/" ws v:Div { return `[Div,${u},${v}]` }
   /   Pow
 
 Pow
-  = u:Sus power v:Pow { return `Pow(${u},${v})` }
+  = u:Sus power v:Pow { return `[Pow,${u},${v}]` }
   /   Sus
 
 Sus
-  = u:Neg under v:Sus { return `Sus(${u},${v})` }  // Subscript
+  = u:Neg under v:Sus { return `[Sus,${u},${v}]` }  // Subscript
   /   Neg
 
 // ------ Unary Ops ------
 
 Neg
-  = "-" u:Neg { return `Neg(${u})` }
+  = "-" u:Neg { return `[Neg,${u}]` }
   / Lower
 
 Lower
@@ -106,10 +102,10 @@ Fun
   = f:str "(" u:Exp ")" ws { return func1(f,u) } // Fun touches left paren with no whitespace
 
 Par
-  = "(" u:Exp ")"  ws { return `Par(${u})`; }
+  = "(" u:Exp ")"  ws { return `[Par,${u}]`; }
 
 Brc
-  = "{" u:Exp "}"  ws { return `Brc(${u})`; }
+  = "{" u:Exp "}"  ws { return `[Brc,${u}]`; }
 
 FunArgs
   = f:str begArgs args:( head:Exp tail:( comma v:Exp { return v; } )*
@@ -119,31 +115,31 @@ FunArgs
 Vec
   = begVec vals:( head:Exp tail:( comma v:Exp { return v; } )*
       { return [head].concat(tail); } )? endVec
-    { return vals !== null ? `Vec(${vals})` : `Vec(${[]})`; }
+    { return vals !== null ? `[Vec,${vals}]` : `[Vec,${[]}]`; }
 
 Mec
   =       vals:( head:Exp tail:( comma v:Exp { return v; } )*
       {  return [head].concat(tail); } )? endVec
-    { return vals !== null ? `Vec(${vals})` : `Vec(${[]})`; }
+    { return vals !== null ? `[Vec,${vals}]` : `[Vec,${[]}]`; }
 
 Mat
   = begMat vecs:( head:Mec tail:( comma v:Vec { return v; } )*
       { return [head].concat(tail); } )? endVec // Only one ]
-    { return vecs !== null ? `Mat(${vecs})` : `Mat(${[[]]})`; }
+    { return vecs !== null ? `[Mat,${vecs}]` : `[Mat,${[[]]}]`; }
 
 // ------ Terminal Rules: Dbl Num Key Var ------
 
 Dbl
-  = float:([0-9]* "." [0-9]+)  ws { let d = parseFloat(float.join("")); return `Dbl(${d})`; }
+  = float:([0-9]* "." [0-9]+)  ws { let d = parseFloat(float.join("")); return `${d}`; }
 
 Num
-  = digits:[0-9]+  ws { let n = parseInt(digits.join(""), 10); return `Num(${n})`; }
+  = digits:[0-9]+  ws { let n = parseInt(digits.join(""), 10); return `${n}`; }
 
 Key
   = 'lim' / 'sum' / 'int' / 'prod'
 
 Var
-  = string:str ws { return `Var(${string})`; }
+  = string:str ws { return `${string}`; }
 
 // ------ Tokens ------
 

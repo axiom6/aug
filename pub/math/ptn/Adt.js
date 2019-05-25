@@ -8,23 +8,32 @@ Adt = (function() {
   class Adt {
     static toPtn(f) {
       var a, i, j, ref;
-      a = [];
-      // console.log( 'Adt.toPtn()', f, typeof(f) )
-      if (typeof f === 'function') {
+      a = void 0;
+      if (f === 'String') {
+        a = String;
+      } else if (f === 'Number') {
+        a = Number;
+      } else if (f === '_') {
+        a = _;
+      } else if (typeof f === 'function') {
+        a = [];
         a.push(f.name);
         for (i = j = 0, ref = f.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
           a.push(_);
         }
-      } else if (f === 'String') {
-        a.push(String);
-      } else if (f === 'Number') {
-        a.push(Number);
-      } else if (f === 'Under') {
-        a.push(_);
       } else {
         console.error('Adt.toPtn() unknown pattern', f);
       }
+      //console.log( 'Adt.toPtn()', { f:f, ft:typeof(f), fa:Array.isArray(f), a:a, at:typeof(a), aa:Array.isArray(a) } )
       return a;
+    }
+
+    static type(ptn) {
+      if (Array.isArray(ptn)) {
+        return 'array';
+      } else {
+        return typeof ptn;
+      }
     }
 
     static toPtns(adts) {
@@ -34,29 +43,9 @@ Adt = (function() {
       for (i = j = 0, ref = adts.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
         ptns[i] = i % 2 === 0 ? Adt.toPtn(adts[i]) : adts[i];
       }
-      ptns.push(String, (s) => {
-        return Adt.stag(s);
-      });
-      ptns.push(Number, (n) => {
-        return Adt.ntag(n);
-      });
-      ptns.push(_, (q) => {
-        return Adt.unkn(q);
-      });
-      // console.log( 'Adt.toPtns() ptns', ptns )
+      // for i in [0...ptns.length] by 2
+      //  console.log( 'Adt.toPtns()', { ptn:ptns[i], type:Adt.type(ptns[i]) } )
       return ptns;
-    }
-
-    static stag(s) {
-      return Adt.mathML.tag('mi', s);
-    }
-
-    static ntag(n) {
-      return Adt.mathML.tag('mn', n);
-    }
-
-    static unkm(q) {
-      return console.log('unknown match asc', q);
     }
 
     // Geometric Algerbra
@@ -118,18 +107,9 @@ Adt = (function() {
 
     
     // Numbers and Variables
-    static Var(v) {
-      return v;
-    }
-
-    static Num(n) {
-      return n;
-    }
-
-    static Dbl(d) {
-      return d;
-    }
-
+    //Var   = (v)   =>  v
+    //Num   = (n)   =>  n
+    //Dbl   = (d)   =>  d
     static Ratio(u, v) {
       return u / v;
     }
@@ -330,7 +310,7 @@ Adt = (function() {
 
   //Obj = (k,v) => { k:v } # ???
   //Arr = (u)   => [ u   ] # ???
-  Adt.ArithAdts = [Adt.Var, Adt.Num, Adt.Dbl, Adt.Ratio, Adt.Equ, Adt.Add, Adt.Sub, Adt.Mul, Adt.Div, Adt.Pow, Adt.Neg, Adt.Recip, Adt.Abs, Adt.Paren, Adt.Brace];
+  Adt.ArithAdts = [Adt.Ratio, Adt.Equ, Adt.Add, Adt.Sub, Adt.Mul, Adt.Div, Adt.Pow, Adt.Neg, Adt.Recip, Adt.Abs, Adt.Paren, Adt.Brace];
 
   Adt.TransAdts = [Adt.Ln, Adt.Log, Adt.Root, Adt.Sqrt, Adt.E, Adt.Sin, Adt.Cos, Adt.Tan, Adt.Csc, Adt.Sec, Adt.Cot, Adt.Arcsin, Adt.Arccos, Adt.Arctan, Adt.Arccsc, Adt.Arcsec, Adt.Arccot];
 

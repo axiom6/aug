@@ -8,6 +8,8 @@ import A from '../ptn/Adt.js';
 
 import Ascii from '../par/Ascii.js';
 
+//let Ascii = { parse:peg$parse, error:peg$SyntaxError };
+//export default Ascii;
 MathML = class MathML {
   constructor() {
     // console.log( 'Ascii Import', Ascii )
@@ -24,20 +26,19 @@ MathML = class MathML {
     try {
       par = Ascii.parse(asc);
       asa = eval(par);
-      return this.markup(asa, key);
+      this.markup(asa, key);
     } catch (error1) {
       error = error1;
       err.found = error.found;
       err.msg = error.message;
       err.loc = error.location;
-      return console.error('MathML.doParse()', {
+      console.error('MathML.doParse()', {
         key: key,
         ascii: asc,
         error: err
       });
-    } finally {
-      return par;
     }
+    return par;
   }
 
   markup(asa, key) {
@@ -121,8 +122,8 @@ MathML = class MathML {
     this.end('mfence');
   }
 
-  unk(u) {
-    console.log('Adt _ Unknown', u);
+  unk(q) {
+    console.log('Adt _ Unknown', q);
   }
 
   sum(t, a, b, sym, u) {
@@ -136,12 +137,10 @@ MathML = class MathML {
     var e;
     try {
       // console.log( 'MathML.exp(asa)', asa )
-      return match(asa, ...this.ptns);
+      match(asa, ...this.ptns);
     } catch (error1) {
       e = error1;
-      return console.error('MathML.exp()', e);
-    } finally {
-      return;
+      console.error('MathML.exp()', e);
     }
   }
 
@@ -361,27 +360,23 @@ MathML = class MathML {
       u,
       v);
       },
-      A.Var,
+      'String',
       (s) => {
         return this.tag('mi',
-      s);
+      s); // Using String identifiers
       },
-      A.Num,
+      'Number',
       (n) => {
         return this.tag('mn',
       n);
       },
-      A.Dbl,
-      (d) => {
-        return this.tag('mn',
-      d);
+      '_',
+      (q) => {
+        return this.unk(q);
       }
     ]);
   }
 
-  //'String',  (s)    => @tag('mi',s ),
-  //'Number',  (n)    => @tag('mn',n ),
-  //'Under',   (x)    => console.log('match unknown asc', x )
   testMarkup(key) {
     var Add, Equ, Sin, Sum, adts;
     Sin = (u) => {
@@ -465,8 +460,8 @@ MathML = class MathML {
     console.log('Sin', Sina, Sins);
     console.log('Add', Adda, Adds);
     console.log('Sin', Suma, Sums);
-    //markup( Sina, 'Sina' )
-    //markup( Sins, 'Sins' )
+    this.markup(Sina, 'Sina');
+    this.markup(Sins, 'Sins');
     this.markup(Adda, 'Adda');
   }
 

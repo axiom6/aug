@@ -144,22 +144,22 @@ function peg$parse(input, options) {
       peg$c0 = function(u) { return `${u}` },
       peg$c1 = "=",
       peg$c2 = peg$literalExpectation("=", false),
-      peg$c3 = function(u, v) { return `Equ(${u},${v})`; },
+      peg$c3 = function(u, v) { return `[Equ,${u},${v}]`; },
       peg$c4 = "+",
       peg$c5 = peg$literalExpectation("+", false),
-      peg$c6 = function(u, v) { return `Add(${u},${v})`; },
+      peg$c6 = function(u, v) { return `[Add,${u},${v}]`; },
       peg$c7 = "-",
       peg$c8 = peg$literalExpectation("-", false),
-      peg$c9 = function(u, v) { return `Sub(${u},${v})`; },
+      peg$c9 = function(u, v) { return `[Sub,${u},${v}]`; },
       peg$c10 = "*",
       peg$c11 = peg$literalExpectation("*", false),
-      peg$c12 = function(u, v) { return `Mul(${u},${v})` },
+      peg$c12 = function(u, v) { return `[Mul,${u},${v}]` },
       peg$c13 = "/",
       peg$c14 = peg$literalExpectation("/", false),
-      peg$c15 = function(u, v) { return `Div(${u},${v})` },
-      peg$c16 = function(u, v) { return `Pow(${u},${v})` },
-      peg$c17 = function(u, v) { return `Sus(${u},${v})` },
-      peg$c18 = function(u) { return `Neg(${u})` },
+      peg$c15 = function(u, v) { return `[Div,${u},${v}]` },
+      peg$c16 = function(u, v) { return `[Pow,${u},${v}]` },
+      peg$c17 = function(u, v) { return `[Sus,${u},${v}]` },
+      peg$c18 = function(u) { return `[Neg,${u}]` },
       peg$c19 = function(k, a, b, u) { return func3(k,a,b,u) },
       peg$c20 = function(k, a, b) { return func2(k,a,b) },
       peg$c21 = "(",
@@ -167,26 +167,26 @@ function peg$parse(input, options) {
       peg$c23 = ")",
       peg$c24 = peg$literalExpectation(")", false),
       peg$c25 = function(f, u) { return func1(f,u) },
-      peg$c26 = function(u) { return `Par(${u})`; },
+      peg$c26 = function(u) { return `[Par,${u}]`; },
       peg$c27 = "{",
       peg$c28 = peg$literalExpectation("{", false),
       peg$c29 = "}",
       peg$c30 = peg$literalExpectation("}", false),
-      peg$c31 = function(u) { return `Brc(${u})`; },
+      peg$c31 = function(u) { return `[Brc,${u}]`; },
       peg$c32 = function(f, head, v) { return v; },
       peg$c33 = function(f, head, tail) { return [head].concat(tail); },
       peg$c34 = function(f, args) { return funcn(f,args) },
       peg$c35 = function(head, v) { return v; },
       peg$c36 = function(head, tail) { return [head].concat(tail); },
-      peg$c37 = function(vals) { return vals !== null ? `Vec(${vals})` : `Vec(${[]})`; },
+      peg$c37 = function(vals) { return vals !== null ? `[Vec,${vals}]` : `[Vec,${[]}]`; },
       peg$c38 = function(head, tail) {  return [head].concat(tail); },
-      peg$c39 = function(vecs) { return vecs !== null ? `Mat(${vecs})` : `Mat(${[[]]})`; },
+      peg$c39 = function(vecs) { return vecs !== null ? `[Mat,${vecs}]` : `[Mat,${[[]]}]`; },
       peg$c40 = /^[0-9]/,
       peg$c41 = peg$classExpectation([["0", "9"]], false, false),
       peg$c42 = ".",
       peg$c43 = peg$literalExpectation(".", false),
-      peg$c44 = function(float) { let d = parseFloat(float.join("")); return `Dbl(${d})`; },
-      peg$c45 = function(digits) { let n = parseInt(digits.join(""), 10); return `Num(${n})`; },
+      peg$c44 = function(float) { let d = parseFloat(float.join("")); return `${d}`; },
+      peg$c45 = function(digits) { let n = parseInt(digits.join(""), 10); return `${n}`; },
       peg$c46 = "lim",
       peg$c47 = peg$literalExpectation("lim", false),
       peg$c48 = "sum",
@@ -195,7 +195,7 @@ function peg$parse(input, options) {
       peg$c51 = peg$literalExpectation("int", false),
       peg$c52 = "prod",
       peg$c53 = peg$literalExpectation("prod", false),
-      peg$c54 = function(string) { return `Var(${string})`; },
+      peg$c54 = function(string) { return `${string}`; },
       peg$c55 = "_",
       peg$c56 = peg$literalExpectation("_", false),
       peg$c57 = /^[_~]/,
@@ -1970,19 +1970,19 @@ function peg$parse(input, options) {
       return f.charAt(0).toUpperCase() + f.substring(1); }
 
     function func1( f, u ) {
-      return funcs1.includes(f) ? `${toAdt(f)}(${u})` :           `Fun(${f},${u})`; }
+      return funcs1.includes(f) ? `[${toAdt(f)},${u}]` :           `[Fun,${f},${u}]`; }
 
     function func2( f, u, v ) {
-      return funcs2.includes(f) ? `${toAdt(f)}(${u},${v})` :      `Fun(${f},${u},${v})`; }
+      return funcs2.includes(f) ? `[${toAdt(f)},${u},${v}]` :      `[Fun,${f},${u},${v}]`; }
 
     function func3( f, u, v, w ) {
-      return funcs3.includes(f) ? `${toAdt(f)}(${u},${v},${w})` : `Fun(${f},${u},${v},${w})`; }
+      return funcs3.includes(f) ? `[${toAdt(f)},${u},${v},${w}]` : `[Fun,${f},${u},${v},${w}]`; }
 
     function funcn( f, ...args ) {
-      ret = `${toAdt(f)}(`
+      ret = `[${toAdt(f)}`
       for( i = 0; i < args.length; i++ ) {
         ret += ',' + args[i]; }
-      ret += ')'
+      ret += ']'
       return ret;
     }
 
@@ -2005,12 +2005,6 @@ function peg$parse(input, options) {
     );
   }
 }
-
-
-/* module.exports = {
-  SyntaxError: peg$SyntaxError,
-  parse:       peg$parse
-}; */
 
 let Ascii = { parse:peg$parse, error:peg$SyntaxError };
 export default Ascii;

@@ -4,35 +4,33 @@ import {_}    from '../../bas/util/Match.js'
 class Adt
 
   @toPtn = (f) =>
-    a = []
-    # console.log( 'Adt.toPtn()', f, typeof(f) )
-    if typeof(f) is 'function'
+    a = undefined
+    if f is 'String'
+      a = String
+    else if f is 'Number'
+      a = Number
+    else if f is '_'
+      a = _
+    else if typeof(f) is 'function'
+      a = []
       a.push(f.name)
       a.push(_) for i in [0...f.length]
-    else if f is 'String'
-      a.push(String)
-    else if f is 'Number'
-      a.push(Number)
-    else if f is 'Under'
-      a.push(_)
     else
       console.error( 'Adt.toPtn() unknown pattern', f )
+    #console.log( 'Adt.toPtn()', { f:f, ft:typeof(f), fa:Array.isArray(f), a:a, at:typeof(a), aa:Array.isArray(a) } )
     return a
+
+  @type = (ptn) =>
+    if Array.isArray(ptn) then 'array' else typeof(ptn)
 
   @toPtns = ( adts ) =>
     # console.log( 'Adt.toPtns() adts', adts )
     ptns = new Array(adts.length)
     for i in [0...adts.length]
       ptns[i] = if i%2 is 0 then Adt.toPtn(adts[i]) else adts[i]
-    ptns.push( String, (s) => @stag(s) )
-    ptns.push( Number, (n) => @ntag(n) )
-    ptns.push( _,      (q) => @unkn(q) )
-    # console.log( 'Adt.toPtns() ptns', ptns )
+    # for i in [0...ptns.length] by 2
+    #  console.log( 'Adt.toPtns()', { ptn:ptns[i], type:Adt.type(ptns[i]) } )
     ptns
-
-  @stag:(s) -> Adt.mathML.tag('mi',s )
-  @ntag:(n) -> Adt.mathML.tag('mn',n )
-  @unkm:(q) -> console.log('unknown match asc', q )
 
   # Geometric Algerbra
   @Dot       = (u,v) => u ~ v  # Dot product
@@ -51,9 +49,9 @@ class Adt
   @GP        = (u,v) => Adt.Dot(u,v) + Adt.Wedge(u,v) # Geometric Product
 
   # Numbers and Variables
-  @Var   = (v)   =>  v
-  @Num   = (n)   =>  n
-  @Dbl   = (d)   =>  d
+  #Var   = (v)   =>  v
+  #Num   = (n)   =>  n
+  #Dbl   = (d)   =>  d
   @Ratio = (u,v) =>  u / v
 
   # Arithmetic
@@ -75,7 +73,7 @@ class Adt
   #Obj = (k,v) => { k:v } # ???
   #Arr = (u)   => [ u   ] # ???
 
-  @ArithAdts = [@Var,@Num,@Dbl,@Ratio,@Equ,@Add,@Sub,@Mul,@Div,@Pow,@Neg,@Recip,@Abs,@Paren,@Brace]
+  @ArithAdts = [@Ratio,@Equ,@Add,@Sub,@Mul,@Div,@Pow,@Neg,@Recip,@Abs,@Paren,@Brace]
 
   # Natural Log, Log Base, Root, Square Root and e
   @Ln   = (u)   => Math.log(u)                 # ln(u)
@@ -133,6 +131,5 @@ class Adt
   @Not = (u)     => u         # Not an Adt expression
   @Msg = (u)     => u         # Parsing error message
   @Unk = (u)     => u
-
 
 export default Adt
