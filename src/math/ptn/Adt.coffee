@@ -19,8 +19,10 @@ class Adt
 
   @Geom = [@Dot,@Wedge,@Vee,@Dual,@Inverse,@Conjugate,@Reverse,@Involute,@Rotor,@Magnitude,@Grade,@Reflect,@Rotate,@GP]
 
-  # Numbers and Variables
-  @Ratio = (u,v) =>  u / v
+  # Vector, Matrix, Numbers and Variables
+  @Vec   = (f,rest) =>  f(rest)
+  @Mat   = (f,rest) =>  f(rest)
+  @Ratio = (u,v)    =>  u / v
 
   # Arithmetic
   @Equ = (u,v) =>  u =  v

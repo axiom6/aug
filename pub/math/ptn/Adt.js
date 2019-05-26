@@ -59,7 +59,15 @@ Adt = (function() {
       return Adt.Dot(u, v) + Adt.Wedge(u, v); // Geometric Product
     }
 
-    // Numbers and Variables
+    // Vector, Matrix, Numbers and Variables
+    static Vec(f, rest) {
+      return f(rest);
+    }
+
+    static Mat(f, rest) {
+      return f(rest);
+    }
+
     static Ratio(u, v) {
       return u / v;
     }

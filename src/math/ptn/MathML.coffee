@@ -17,8 +17,9 @@ class MathML
   doParse:( asc, key ) ->
     par = "X";
     err = {};
+    console.log( 'doParse() asc', asc )
     try
-      par = Ascii.parse(  asc )
+      par = Ascii.parse(  asc, { trace:false } )
       asa = eval( par )
       @markup( asa, key )
     catch error
@@ -33,7 +34,7 @@ class MathML
     @app( "<math>")
     @exp(  asa )
     @app( "</math>" ) # ,"</root>"
-    console.log( 'MathML.markup()', @math[@key] )
+    # console.log( 'MathML.markup()', @math[@key] )
     return
 
   head:() ->
@@ -81,12 +82,22 @@ class MathML
     @beg('mfence'); @exp(u); @end('mfence')
     return
 
+  vec:( rest ) ->
+    @beg("mfenced open='[' close=']'" )
+    @exp(e) for e in rest   # MathML takes care of commans
+    @end("mfenced" )
+    return
+
   unk:( q ) ->
     console.log( '_ MathML Unknown', q )
     return
 
+  noop:( arg ) ->
+    if arg is false then {}
+    return
+
   sum:( t, a, b, sym, u ) ->
-    @beg(t); @tuv(sym,a,b); @end(t); @exp(u)
+    @beg(t); @tag('mo',sym ); @exp(a); @exp(b); @end(t); @exp(u)
     return
 
   exp:( asa ) ->
@@ -98,45 +109,47 @@ class MathML
     return
 
   doPtns:() -> Ptn.toPtns( [
-    A.Equ,    (u,v)   => @bin('mrow',  u, '=', v ),
-    A.Add,    (u,v)   => @bin('mrow',  u, '+', v ),
-    A.Sub,    (u,v)   => @bin('mrow',  u, '-', v ),
-    A.Mul,    (u,v)   => @bin('mrow',  u, '*', v ),
-    A.Div,    (u,v)   => @tuv('mfrac', u,v ),
-    A.Pow,    (u,v)   => @tuv('msup',  u, v ),
-    A.Neg,    (u)     => @uni('-', u ),
-    A.Recip,  (v)     => @tuv('mfrac', 1, v ),
-    A.Abs,    (u)     => @sur( '|', u, '|' ),
-    A.Paren,  (u)     => @fen(u),
-    A.Brace,  (u)     => @fen(u),
-    A.Ln,     (u)     => @fun('ln', u ),
-    A.Log,    (u,v)   => u + v,
-    A.Root,   (u,v)   => u + v,
-    A.Sqrt,   (u)     => @tag('msqrt', u ),
-    A.E,      (u)     => @tuv('msup', 'e', v ),
-    A.Sin,    (u)     => @fun('sin',    u ),
-    A.Cos,    (u)     => @fun('cot',    u ),
-    A.Tan,    (u)     => @fun('tan',    u ),
-    A.Csc,    (u)     => @fun('csc',    u ),
-    A.Sec,    (u)     => @fun('sec',    u ),
-    A.Cot,    (u)     => @fun('cot',    u ),
-    A.Arcsin, (u)     => @fun('arcsin', u ),
-    A.Arccos, (u)     => @fun('arccot', u ),
-    A.Arctan, (u)     => @fun('arctan', u ),
-    A.Arccsc, (u)     => @fun('arccsc', u ),
-    A.Arcsec, (u)     => @fun('arcsec', u ),
-    A.Arccot, (u)     => @fun('arccot', u ),
-    A.Fun,    (f,u)   => @fun( f,         u ),
-    A.D,      (u)     => @uni('d',       u ),
-    A.Int,    (u)     => @uni('\u222B;', u ),
-    A.DefInt, (a,b,u) => @sum('msubsup',   a,b, '\u222B', u ),
-    A.Sum,    (a,b,u) => @sum('munderover',a,b, '\u2211', u ),
-    A.Sus,    (u,v)   => @tuv('msub',    u, v ),
-    A.Lim,    (a,b)   => @tuv('msubsup', a, b ),
-    A.Ratio,  (u,v)   => @tuv('mfrac', u,v ),
-    'String', (s)     => @tag('mi',s ),            # Using String identifiers
-    'Number', (n)     => @tag('mn',n ),
-    '_',      (q)     => @unk(q)
+    A.Equ,    (u,v)    => @bin('mrow',  u, '=', v ),
+    A.Add,    (u,v)    => @bin('mrow',  u, '+', v ),
+    A.Sub,    (u,v)    => @bin('mrow',  u, '-', v ),
+    A.Mul,    (u,v)    => @bin('mrow',  u, '*', v ),
+    A.Div,    (u,v)    => @tuv('mfrac', u,v ),
+    A.Pow,    (u,v)    => @tuv('msup',  u, v ),
+    A.Neg,    (u)      => @uni('-', u ),
+    A.Recip,  (v)      => @tuv('mfrac', 1, v ),
+    A.Abs,    (u)      => @sur( '|', u, '|' ),
+    A.Paren,  (u)      => @fen(u),
+    A.Brace,  (u)      => @fen(u),
+    A.Ln,     (u)      => @fun('ln', u ),
+    A.Log,    (u,v)    => u + v,
+    A.Root,   (u,v)    => u + v,
+    A.Sqrt,   (u)      => @tag('msqrt', u ),
+    A.E,      (u)      => @tuv('msup', 'e', v ),
+    A.Sin,    (u)      => @fun('sin',    u ),
+    A.Cos,    (u)      => @fun('cot',    u ),
+    A.Tan,    (u)      => @fun('tan',    u ),
+    A.Csc,    (u)      => @fun('csc',    u ),
+    A.Sec,    (u)      => @fun('sec',    u ),
+    A.Cot,    (u)      => @fun('cot',    u ),
+    A.Arcsin, (u)      => @fun('arcsin', u ),
+    A.Arccos, (u)      => @fun('arccot', u ),
+    A.Arctan, (u)      => @fun('arctan', u ),
+    A.Arccsc, (u)      => @fun('arccsc', u ),
+    A.Arcsec, (u)      => @fun('arcsec', u ),
+    A.Arccot, (u)      => @fun('arccot', u ),
+    A.Fun,    (f,u)    => @fun( f,         u ),
+    A.D,      (u)      => @uni('d',       u ),
+    A.Int,    (u)      => @uni('\u222B;', u ),
+    A.DefInt, (a,b,u)  => @sum('msubsup',   a,b, '\u222B', u ),
+    A.Sum,    (a,b,u)  => @sum('munderover',a,b, '\u2211', u ),
+    A.Sus,    (u,v)    => @tuv('msub',    u, v ),
+    A.Lim,    (a,b)    => @tuv('msubsup', a, b ),
+    A.Ratio,  (u,v)    => @tuv('mfrac', u,v ),
+    A.Vec,    (rest)   => @vec( rest ),
+    A.Mat,    (rest)   => @vec( rest ),
+    'String', (s)      => @tag('mi',s ),            # Using String identifiers
+    'Number', (n)      => @tag('mn',n ),
+    '_',      (q)      => @unk(q)
   ] )
 
 export default MathML

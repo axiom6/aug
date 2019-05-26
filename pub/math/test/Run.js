@@ -13,11 +13,6 @@ let testMathML = new TestMathML();
 
 // TestMatch.doExp();
 
-testMathML.testMarkup( 'Sin' );
-testMathML.testMarkup( 'Add' );
-testMathML.testMarkup( 'Equ' );
-testMathML.testMarkup( 'Sum' );
+testMathML.testMarkup();
 
-//testMathML.testParse( 'add' );
-//testMathML.testParse( 'trg' );
-//testMathML.testParse( 'sus' );
+//testMathML.testParse();

@@ -23,8 +23,11 @@ MathML = class MathML {
     var asa, err, error, par;
     par = "X";
     err = {};
+    console.log('doParse() asc', asc);
     try {
-      par = Ascii.parse(asc);
+      par = Ascii.parse(asc, {
+        trace: false
+      });
       asa = eval(par);
       this.markup(asa, key);
     } catch (error1) {
@@ -48,9 +51,9 @@ MathML = class MathML {
     this.app("<math>");
     this.exp(asa);
     this.app("</math>"); // ,"</root>"
-    console.log('MathML.markup()', this.math[this.key]);
   }
 
+  // console.log( 'MathML.markup()', @math[@key] )
   head() {
     return this.math[this.key] += "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\">\n<?xml-stylesheet type=\"text/css\" href=\"MathML.css\">\n<root xmlns=\"http://www.w3.org/1998/Math/MathML\">";
   }
@@ -122,13 +125,32 @@ MathML = class MathML {
     this.end('mfence');
   }
 
+  vec(rest) {
+    var e, i, len;
+    this.beg("mfenced open='[' close=']'");
+// MathML takes care of commans
+    for (i = 0, len = rest.length; i < len; i++) {
+      e = rest[i];
+      this.exp(e);
+    }
+    this.end("mfenced");
+  }
+
   unk(q) {
     console.log('_ MathML Unknown', q);
   }
 
+  noop(arg) {
+    if (arg === false) {
+      ({});
+    }
+  }
+
   sum(t, a, b, sym, u) {
     this.beg(t);
-    this.tuv(sym, a, b);
+    this.tag('mo', sym);
+    this.exp(a);
+    this.exp(b);
     this.end(t);
     this.exp(u);
   }
@@ -359,6 +381,14 @@ MathML = class MathML {
         return this.tuv('mfrac',
       u,
       v);
+      },
+      A.Vec,
+      (rest) => {
+        return this.vec(rest);
+      },
+      A.Mat,
+      (rest) => {
+        return this.vec(rest);
       },
       'String',
       (s) => {
