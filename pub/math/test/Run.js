@@ -5,14 +5,17 @@
 // let cmds = process.argv.slice(2);
 
 // import TestMatch  from './TestMatch.js'
-   import TestMathML from './TestMathML.js';
+   import TestAscii  from './TestAscii.js'
+// import TestMathML from './TestMathML.js';
 
 console.log( "---------------------------- Begin ----------------------------")
 
-let testMathML = new TestMathML();
-
 // TestMatch.doExp();
 
-testMathML.testMarkup();
+// let testMathML = new TestMathML();
 
-//testMathML.testParse();
+   TestAscii.run();
+
+// testMathML.testMarkup();
+
+// testMathML.testParse();

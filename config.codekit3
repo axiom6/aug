@@ -241,17 +241,6 @@
 		"oO": 0,
 		"oS": 1
 		},
-	"/Ascii.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/Ascii-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/aug.iml": {
 		"cB": 0,
 		"ft": 8192,
@@ -2073,16 +2062,35 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/math/par/Ascii.js": {
+	"/pub/math/par/Ascii.com.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/math/par/Ascii-min.js",
+		"oAP": "/pub/math/par/Ascii.com-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"/pub/math/par/Ascii.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/par/Ascii.esm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/math/par/Ascii.pegjs": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/math/par/Ascii.pegjs",
+		"oF": 0
 		},
 	"/pub/math/ptn/Adt.js": {
 		"bF": 0,
@@ -2117,6 +2125,22 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/math/test/Ascii.esm": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/math/test/Ascii.esm",
+		"oF": 0
+		},
+	"/pub/math/test/Ascii.sh": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/math/test/Ascii.sh",
+		"oF": 0
+		},
 	"/pub/math/test/Run.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2124,6 +2148,17 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/math/test/Run-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/math/test/TestAscii.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/test/TestAscii-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2157,6 +2192,17 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/math/test/TestPeg-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/math/test/Trace.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/test/Trace-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2829,13 +2875,13 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/math/par/Ascii.js": {
+	"/src/math/par/Ascii.com.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/src/math/par/Ascii-min.js",
+		"oAP": "/src/math/par/Ascii.com-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2878,6 +2924,33 @@
 		"oAP": "/pub/math/ptn/Ptn.js",
 		"oF": 0,
 		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/math/test/Ascii.esm": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/src/math/test/Ascii.esm",
+		"oF": 0
+		},
+	"/src/math/test/Ascii.sh": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/src/math/test/Ascii.sh",
+		"oF": 0
+		},
+	"/src/math/test/TestAscii.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/math/test/TestAscii-min.js",
+		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
@@ -3376,7 +3449,7 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/vue/wood/wood.scss": {
+	"/vue/wood/Wood.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -6815,17 +6888,6 @@
 		},
 	"languageDefaultsUserDefined": [
 		{
-			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.html",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "",
-			"autoOutputPathReplace2": "",
-			"autoOutputPathStyle": 0,
-			"fileExtension": "html",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
 			"autoOutputAction": 0,
 			"autoOutputPathFilenamePattern": "*.js",
 			"autoOutputPathRelativePath": "",
@@ -6833,6 +6895,17 @@
 			"autoOutputPathReplace2": "pub/vue",
 			"autoOutputPathStyle": 3,
 			"fileExtension": "vue",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.html",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "",
+			"autoOutputPathReplace2": "",
+			"autoOutputPathStyle": 0,
+			"fileExtension": "html",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

@@ -8,7 +8,7 @@ import A from '../ptn/Adt.js';
 
 import Ptn from '../ptn/Ptn.js';
 
-import Ascii from '../par/Ascii.js';
+import Ascii from '../par/Ascii.esm.js';
 
 //let Ascii = { parse:peg$parse, error:peg$SyntaxError };
 //export default Ascii;
@@ -20,28 +20,32 @@ MathML = class MathML {
   }
 
   doParse(asc, key) {
-    var asa, err, error, par;
+    var asa, e, err, par;
     par = "X";
+    asa = [];
     err = {};
-    console.log('doParse() asc', asc);
     try {
-      par = Ascii.parse(asc, {
-        trace: false
-      });
-      asa = eval(par);
-      this.markup(asa, key);
-    } catch (error1) {
-      error = error1;
-      err.found = error.found;
-      err.msg = error.message;
-      err.loc = error.location;
-      console.error('MathML.doParse()', {
+      par = Ascii.parse(asc);
+      try {
+        // console.log( 'MathML.doParse() par', par )
+        asa = eval(par);
+        // console.log( 'MathML.doParse() asa', asa )
+        this.markup(asa, key);
+      } catch (error) {
+        e = error;
+        console.error('MathML.doParse() eval  error', key, e);
+      }
+    } catch (error) {
+      e = error;
+      err.found = e.found;
+      err.msg = e.message;
+      err.loc = e.location;
+      console.error('MathML.doParse() parse error', {
         key: key,
         ascii: asc,
         error: err
       });
     }
-    return par;
   }
 
   markup(asa, key) {
@@ -160,8 +164,8 @@ MathML = class MathML {
     try {
       // console.log( 'MathML.exp(asa)', asa )
       match(asa, ...this.ptns);
-    } catch (error1) {
-      e = error1;
+    } catch (error) {
+      e = error;
       console.error('MathML.exp()', e);
     }
   }

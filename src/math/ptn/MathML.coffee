@@ -2,7 +2,7 @@
 import {match} from '../../bas/util/Match.js'
 import A       from '../ptn/Adt.js'
 import Ptn     from '../ptn/Ptn.js'
-import Ascii   from '../par/Ascii.js'
+import Ascii   from '../par/Ascii.esm.js'
 
 #let Ascii = { parse:peg$parse, error:peg$SyntaxError };
 #export default Ascii;
@@ -15,17 +15,27 @@ class MathML
     @ptns = @doPtns()
 
   doParse:( asc, key ) ->
-    par = "X";
+    par = "X"
+    asa = []
     err = {};
-    console.log( 'doParse() asc', asc )
+    # console.log( 'doParse() asc', asc )
+
     try
-      par = Ascii.parse(  asc, { trace:false } )
-      asa = eval( par )
-      @markup( asa, key )
-    catch error
-      err.found = error.found; err.msg = error.message; err.loc = error.location;
-      console.error( 'MathML.doParse()', { key:key, ascii:asc, error:err } )
-    return par
+      par = Ascii.parse(  asc )
+      # console.log( 'MathML.doParse() par', par )
+      try
+        asa = eval( par )
+        # console.log( 'MathML.doParse() asa', asa )
+        @markup( asa, key )
+      catch e
+        console.error( 'MathML.doParse() eval  error', key, e )
+    catch e
+      err.found = e.found; err.msg = e.message; err.loc = e.location
+      console.error( 'MathML.doParse() parse error', { key:key, ascii:asc, error:err } )
+
+
+
+    return
 
   markup:( asa, key ) ->
     @key = key
