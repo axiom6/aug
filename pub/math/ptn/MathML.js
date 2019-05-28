@@ -287,7 +287,7 @@ MathML = class MathML {
       },
       A.Cos,
       (u) => {
-        return this.fun('cot',
+        return this.fun('cos',
       u);
       },
       A.Tan,

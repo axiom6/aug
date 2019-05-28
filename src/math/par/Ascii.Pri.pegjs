@@ -87,36 +87,37 @@ Upper
 
 Sum
   = k:Key a:Lower b:Upper u:Tilde { return func3(k,a,b,u) }
-  / Lim
+  / Pri
+
+
+// ------ Primary - These choices reference Exp and do not have to / forward ------
+
+Pri
+  = Lim / Fun / Paren / Brace / FunArgs / Vec / Mat / Dbl / Num / Key / Var
 
 Lim
   = k:Key a:Lower b:Upper { return func2(k,a,b) }
-  / Pri
-
-// ------ Enclosing Primary Rules: Fun Par Brc Vec Mat ------
-
-Pri
-  = Fun / Dbl / Num / Key / Var
 
 Fun
   = f:str "(" u:Exp ")" ws { return func1(f,u) } // Fun touches left paren with no whitespace
-  / Par
 
-Par
+Paren
   = "(" u:Exp ")"  ws { return `['Paren',${u}]`; }
-  / Brc
 
-Brc
+Brace
   = "{" u:Exp "}"  ws { return `['Brace',${u}]`; }
-  / Vec
+
+FunArgs
+  = f:str begArgs args:( head:Exp tail:( comma v:Exp { return v; } )*
+    { return [head].concat(tail); } )? endArgs
+    { return funcn(f,args) }
 
 Vec
   = begVec vals:( head:Exp tail:( comma v:Exp { return v; } )*
       { return [head].concat(tail); } )? endVec
     { return vals !== null ? `['Vec',${vals}]` : `['Vec',${[]}]`; }
-  / Mat
 
-Mec   // Only called by Mat
+Mec
   =       vals:( head:Exp tail:( comma v:Exp { return v; } )*
       {  return [head].concat(tail); } )? endVec
     { return vals !== null ? `['Vec',${vals}]` : `['Vec',${[]}]`; }
@@ -126,8 +127,8 @@ Mat
       { return [head].concat(tail); } )? endVec // Only one ]
     { return vecs !== null ? `['Mat',${vecs}]` : `['Mat',${[[]]}]`; }
 
-// ------ Terminal Primary Rules: Dbl Num Key Var ------
- 
+// ------ Terminal Rules: Dbl Num Key Var ------
+
 Dbl
   = float:([0-9]* "." [0-9]+)  ws { let d = parseFloat(float.join("")); return `${d}`; }
 

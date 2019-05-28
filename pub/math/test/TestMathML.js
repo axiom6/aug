@@ -209,21 +209,21 @@ TestMathML = (function() {
 
   };
 
-  trg1ML = "<math><mrow><mrow>cot<mfence><mi>x</mi></mfence></mrow><mo>+</mo>";
+  trg1ML = "<math><mrow><mrow>cot<mfenced><mi>x</mi></mfenced></mrow><mo>+</mo>";
 
-  trg1ML += "<mrow>sin<mfence><mi>x</mi></mfence></mrow></mrow></math>";
+  trg1ML += "<mrow>sin<mfenced><mi>x</mi></mfenced></mrow></mrow></math>";
 
-  par1ML = "<math><mrow><mfence><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></mfence>";
+  par1ML = "<math><mrow><mfenced><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></mfenced>";
 
-  par1ML += "<mo>*</mo><mfence><msup><mi>c</mi><mn>2</mn></msup></mfence></mrow></math>";
+  par1ML += "<mo>*</mo><mfenced><msup><mi>c</mi><mn>2</mn></msup></mfenced></mrow></math>";
 
-  trg1ML = "<math><mrow><mrow>cot<mfence><mi>x</mi></mfence></mrow><mo>+</mo>";
+  trg1ML = "<math><mrow><mrow>cot<mfenced><mi>x</mi></mfenced></mrow><mo>+</mo>";
 
-  trg1ML += "<mrow>sin<mfence><mi>x</mi></mfence></mrow></mrow></math>";
+  trg1ML += "<mrow>sin<mfenced><mi>x</mi></mfenced></mrow></mrow></math>";
 
   sus1ML = "<math><mrow><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>x</mi><mn>2</mn></msub></mrow></math>";
 
-  sin1ML = "<math><mrow>sin<mfence><mn>0.5235987755982988</mn></mfence></mrow></math>";
+  sin1ML = "<math><mrow>sin<mfenced><mn>0.5235987755982988</mn></mfenced></mrow></math>";
 
   add1ML = "<math><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></math>";
 
@@ -239,9 +239,9 @@ TestMathML = (function() {
 
   sum1ML += "<mi>n</mi></munderover><mrow><mi>x</mi><mo>-</mo><mi>i</mi></mrow></math>";
 
-  mul1ML = "<math><mrow><mfence><mrow><mn>2.2</mn><mo>+</mo><mn>3</mn></mrow></mfence>";
+  mul1ML = "<math><mrow><mfenced><mrow><mn>2.2</mn><mo>+</mo><mn>3</mn></mrow></mfenced>";
 
-  mul1ML += "<mo>*</mo><mfence><mrow><mn>1</mn><mo>+</mo><mn>2</mn></mrow></mfence></mrow></math>";
+  mul1ML += "<mo>*</mo><mfenced><mrow><mn>1</mn><mo>+</mo><mn>2</mn></mrow></mfenced></mrow></math>";
 
   mul2ML = "<math><mrow><mrow><mn>2.2</mn><mo>*</mo><mn>3</mn></mrow><mo>+</mo>";
 
@@ -249,7 +249,7 @@ TestMathML = (function() {
 
   tan1ML = "<math><mrow><mrow><mn>2.2</mn><mo>*</mo><mn>3</mn></mrow><mo>+</mo>";
 
-  tan1ML += "<mrow><mi>x</mi><mo>*</mo><mrow>arctan<mfence><mi>y</mi></mfence></mrow></mrow></mrow></math>";
+  tan1ML += "<mrow><mi>x</mi><mo>*</mo><mrow><mi>arctan</mi><mfenced><mi>y</mi></mfenced></mrow></mrow></mrow></math>";
 
   sub1ML = "<math><mrow><mrow><mn>2.2</mn><mo>*</mo><mn>3</mn></mrow><mo>-</mo><msup>";
 
@@ -259,23 +259,23 @@ TestMathML = (function() {
 
   equ2ML += "<mfrac><mi>x</mi><mi>y</mi></mfrac></mrow></math>";
 
-  sub2ML = "<math><mrow><mrow><mo>-</mo><mn>2.2</mn><mo>*</mo><mn>3</mn></mrow>";
+  sub2ML = "<math><mrow><mrow><mrow><mo>-</mo><mn>2.2</mn></mrow><mo>*</mo><mn>3</mn></mrow>";
 
   sub2ML += "<mo>-</mo><mfrac><mi>x</mi><mrow><mo>-</mo><mi>y</mi></mrow></mfrac></mrow></math>";
 
-  mul3ML = "<math><mrow><mi>x</mi><mo>*</mo><mrow><mi>x</mi><mo>*</mo><mfence><mrow><mi>a</mi>";
+  mul3ML = "<math><mrow><mi>x</mi><mo>*</mo><mrow><mi>x</mi><mo>*</mo><mfenced><mrow><mi>a</mi>";
 
-  mul3ML += "<mo>+</mo><msub><mi>b</mi><mn>1</mn></msub></mrow></mfence></mrow></mrow></math>";
+  mul3ML += "<mo>+</mo><msub><mi>b</mi><mn>1</mn></msub></mrow></mfenced></mrow></mrow></math>";
 
-  sin2ML = "<math><mrow><mi>a</mi><mo>+</mo><mrow><mi>b</mi><mo>*</mo><mrow>sin";
+  sin2ML = "<math><mrow><mi>a</mi><mo>+</mo><mrow><mi>b</mi><mo>*</mo><mrow><mi>sin</mi>";
 
-  sin2ML += "<mfence><mi>theta</mi></mfence></mrow></mrow></mrow></math>";
+  sin2ML += "<mfenced><mi>theta</mi></mfenced></mrow></mrow></mrow></math>";
 
-  fun1ML = "<math><mrow><mrow>fn<mfence><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow>";
+  fun1ML = "<math><mrow><mrow><mi>fn</mi><mfenced><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></mfenced></mrow>";
 
-  fun1ML += "</mfence></mrow><mo>*</mo><mrow>g<mfence><mi>theta</mi></mfence></mrow></mrow></math>";
+  fun1ML += "<mo>*</mo><mrow><mi>g</mi><mfenced><mi>theta</mi></mfenced></mrow></mrow></math>";
 
-  int1ML = "<math><mo>∫;</mo><mrow><mi>x</mi><mo>*</mo><mn>2</mn></mrow></math>";
+  int1ML = "<math><mrow><mo>∫</mo><mrow><mi>x</mi><mo>*</mo><mn>2</mn></mrow></mrow></math>";
 
   vec1ML = "<math><mfenced open='[' close=']'><mn>1</mn><mn>2</mn><mn>3</mn></mfenced></math>";
 
@@ -285,7 +285,7 @@ TestMathML = (function() {
 
   mat1ML += "<mfenced open='[' close=']'><mn>4</mn><mn>5</mn><mn>6</mn></mfenced></mfenced></math>";
 
-  lim1ML = "<math><msubsup><mi>i</mi><mi>n</mi></msubsup></math>";
+  lim1ML = "<math><msubsup><mi>lim</mi><mi>i</mi><mi>n</mi></msubsup></math>";
 
   sum2ML = "<math><munderover><mo>∑</mo><mi>i</mi><mi>n</mi></munderover><mi>j</mi></math>";
 

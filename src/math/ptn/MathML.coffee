@@ -139,7 +139,7 @@ class MathML
     A.Sqrt,   (u)      => @tag('msqrt', u ),
     A.E,      (u)      => @tuv('msup', 'e', v ),
     A.Sin,    (u)      => @fun('sin',    u ),
-    A.Cos,    (u)      => @fun('cot',    u ),
+    A.Cos,    (u)      => @fun('cos',    u ),
     A.Tan,    (u)      => @fun('tan',    u ),
     A.Csc,    (u)      => @fun('csc',    u ),
     A.Sec,    (u)      => @fun('sec',    u ),
