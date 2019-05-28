@@ -93,10 +93,12 @@ MathML = class MathML {
   }
 
   uni(op, u) {
+    this.beg('mrow');
     this.beg('mo');
     this.app(op);
     this.end('mo');
     this.exp(u);
+    this.end('mrow');
   }
 
   sur(bop, u, eop) {
@@ -118,15 +120,15 @@ MathML = class MathML {
 
   fun(f, u) {
     this.beg('mrow');
-    this.app(f);
+    this.tag('mi', f);
     this.fen(u);
     this.end('mrow');
   }
 
   fen(u) {
-    this.beg('mfence');
+    this.beg('mfenced');
     this.exp(u);
-    this.end('mfence');
+    this.end('mfenced');
   }
 
   vec(rest) {
@@ -157,6 +159,15 @@ MathML = class MathML {
     this.exp(b);
     this.end(t);
     this.exp(u);
+  }
+
+  // A little off for now
+  lim(t, a, b, u) {
+    this.beg(t);
+    this.tag('mi', u);
+    this.exp(a);
+    this.exp(b);
+    this.end(t);
   }
 
   exp(asa) {
@@ -342,7 +353,7 @@ MathML = class MathML {
       },
       A.Int,
       (u) => {
-        return this.uni('\u222B;',
+        return this.uni('\u222B',
       u);
       },
       A.DefInt,
@@ -375,9 +386,10 @@ MathML = class MathML {
       A.Lim,
       (a,
       b) => {
-        return this.tuv('msubsup',
+        return this.lim('msubsup',
       a,
-      b);
+      b,
+      'lim');
       },
       A.Ratio,
       (u,

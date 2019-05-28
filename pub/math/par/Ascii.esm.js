@@ -2006,10 +2006,5 @@ function peg$parse(input, options) {
   }
 }
 
-module.exports = {
-  SyntaxError: peg$SyntaxError,
-  parse:       peg$parse
-};
-
 let Ascii = { parse:peg$parse, error:peg$SyntaxError };
 export default Ascii;

@@ -261,7 +261,7 @@ TestMathML = (function() {
 
   sub2ML = "<math><mrow><mrow><mo>-</mo><mn>2.2</mn><mo>*</mo><mn>3</mn></mrow>";
 
-  sub2ML += "<mo>-</mo><mfrac><mi>x</mi><mo>-</mo><mi>y</mi></mfrac></mrow></math>";
+  sub2ML += "<mo>-</mo><mfrac><mi>x</mi><mrow><mo>-</mo><mi>y</mi></mrow></mfrac></mrow></math>";
 
   mul3ML = "<math><mrow><mi>x</mi><mo>*</mo><mrow><mi>x</mi><mo>*</mo><mfence><mrow><mi>a</mi>";
 

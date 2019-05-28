@@ -33,8 +33,6 @@ class MathML
       err.found = e.found; err.msg = e.message; err.loc = e.location
       console.error( 'MathML.doParse() parse error', { key:key, ascii:asc, error:err } )
 
-
-
     return
 
   markup:( asa, key ) ->
@@ -73,7 +71,7 @@ class MathML
     return
 
   uni:( op, u ) ->
-    @beg('mo'); @app(op); @end('mo'); @exp(u)
+    @beg('mrow'); @beg('mo'); @app(op); @end('mo'); @exp(u); @end('mrow');
     return
 
   sur:( bop, u, eop ) ->
@@ -85,11 +83,11 @@ class MathML
     return
 
   fun:( f, u ) ->
-    @beg('mrow'); @app(f); @fen(u); @end('mrow')
+    @beg('mrow'); @tag('mi', f ); @fen(u); @end('mrow')
     return
 
   fen:( u ) ->
-    @beg('mfence'); @exp(u); @end('mfence')
+    @beg('mfenced'); @exp(u); @end('mfenced')
     return
 
   vec:( rest ) ->
@@ -108,6 +106,11 @@ class MathML
 
   sum:( t, a, b, sym, u ) ->
     @beg(t); @tag('mo',sym ); @exp(a); @exp(b); @end(t); @exp(u)
+    return
+
+  # A little off for now
+  lim:( t, a, b, u ) ->
+    @beg(t); @tag('mi', u ); @exp(a); @exp(b); @end(t)
     return
 
   exp:( asa ) ->
@@ -149,11 +152,11 @@ class MathML
     A.Arccot, (u)      => @fun('arccot', u ),
     A.Fun,    (f,u)    => @fun( f,         u ),
     A.D,      (u)      => @uni('d',       u ),
-    A.Int,    (u)      => @uni('\u222B;', u ),
-    A.DefInt, (a,b,u)  => @sum('msubsup',   a,b, '\u222B', u ),
-    A.Sum,    (a,b,u)  => @sum('munderover',a,b, '\u2211', u ),
-    A.Sus,    (u,v)    => @tuv('msub',    u, v ),
-    A.Lim,    (a,b)    => @tuv('msubsup', a, b ),
+    A.Int,    (u)      => @uni('\u222B', u ),
+    A.DefInt, (a,b,u)  => @sum('msubsup',   a, b, '\u222B', u ),
+    A.Sum,    (a,b,u)  => @sum('munderover',a, b, '\u2211', u ),
+    A.Sus,    (u,v)    => @tuv('msub',      u, v ),
+    A.Lim,    (a,b)    => @lim( 'msubsup',  a,  b, 'lim' ),
     A.Ratio,  (u,v)    => @tuv('mfrac', u,v ),
     A.Vec,    (rest)   => @vec( rest ),
     A.Mat,    (rest)   => @vec( rest ),

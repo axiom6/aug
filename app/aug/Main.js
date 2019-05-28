@@ -7,8 +7,6 @@ import Stream from '../../pub/bas/util/Stream.js';
 
 import Vis from '../../pub/bas/util/Vis.js';
 
-import Matcher from '../../pub/math/ptn/Matcher.js';
-
 Main = (function() {
   class Main {
     static begin(onReady) {
@@ -18,7 +16,6 @@ Main = (function() {
 
     static init(batch) {
       var infoSpec, subjects;
-      Main.Matcher.doMatches();
       Main.Batch = batch; // Not necessary here, but assigned for compatibilitry
       subjects = ["Info", "Know", "Wise", "Draw", "Note", "Cube", "Navb", "Tabs", "Geom"];
       infoSpec = {
@@ -58,8 +55,6 @@ Main = (function() {
 
   Main.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json";
 
-  Main.Matcher = Matcher;
-
   Main.Batch = {
     Cols: {
       url: 'muse/Cols.json',
@@ -90,6 +85,12 @@ Main = (function() {
       data: null,
       type: 'Pack',
       plane: 'Wise'
+    },
+    Math: {
+      url: 'muse/Math.json',
+      data: null,
+      type: 'Pack',
+      plane: 'Math'
     },
     Geom: {
       url: 'muse/Geom.json',

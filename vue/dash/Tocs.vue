@@ -9,8 +9,8 @@
       <ul  v-if="comp===komp.name"><template v-for="prac in komps[komp.name].pracs" >
         <li v-on:click="pubPrac(prac.name)" :style="stylePrac(prac.name,prac.hsv)" :key="prac.name">
           <i :class="prac.icon"></i>
-          <router-link v-if="comp==='Geom'" :to="{ name:prac.name }">{{prac.name}}</router-link>
-          <span        v-if="comp!=='Geom'">{{prac.name}}</span>
+          <router-link v-if=" komp.link" :to="{ name:prac.name }">{{prac.name}}</router-link>
+          <span        v-if="!komp.link">{{prac.name}}</span>
           <ul v-show="isPrac(prac.name)"><template v-for="disp in prac.disps">
             <li v-on:click.stop="pubDisp(prac.name,disp.name)" :style="styleDisp(disp.name,disp.hsv)" :key="disp.name">
               <i :class="disp.icon"></i>{{disp.name}}</li>
@@ -27,16 +27,18 @@
   let Tocs = {
     
     data() { return {  comp:'None', prac:'None', disp:'None',
-        komps:{ Info:{ name:'Info', comp:'Info', pracs:{}, ikw:true,  icon:"fas fa-th"           },
-                Know:{ name:'Know', comp:'Know', pracs:{}, ikw:true,  icon:"fas fa-university"   },
-                Wise:{ name:'Wise', comp:'Wise', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor"  },
-                Geom:{ name:'Geom', comp:'Geom', pracs:{}, ikw:true,  icon:"fas fa-shapes"       },
-                Draw:{ name:'Draw', comp:'Draw', pracs:{}, ikw:false, icon:"fas fa-draw-polygon" },
-                Note:{ name:'Note', comp:'Note', pracs:{}, ikw:false, icon:"fab fa-leanpub"      },
-                Cube:{ name:'Cube', comp:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes"        },
-                Wood:{ name:'Wood', comp:'Wood', pracs:{}, ikw:false, icon:"fas fa-tree"         } } } },
+        komps:{ Math:{ name:'Math', comp:'Math', pracs:{}, ikw:true,  link:true,  icon:"fas fa-bezier-curve" },
+                Geom:{ name:'Geom', comp:'Geom', pracs:{}, ikw:true,  link:true,  icon:"fas fa-shapes"       },
+                Draw:{ name:'Draw', comp:'Draw', pracs:{}, ikw:false, link:false, icon:"fas fa-draw-polygon" },
+                Note:{ name:'Note', comp:'Note', pracs:{}, ikw:false, link:false, icon:"fab fa-leanpub"      },
+                Info:{ name:'Info', comp:'Info', pracs:{}, ikw:true,  link:false, icon:"fas fa-th"           },
+                Know:{ name:'Know', comp:'Know', pracs:{}, ikw:true,  link:false, icon:"fas fa-university"   },
+                Wise:{ name:'Wise', comp:'Wise', pracs:{}, ikw:true,  link:false, icon:"fab fa-tripadvisor"  },
+                Cube:{ name:'Cube', comp:'Cube', pracs:{}, ikw:false, link:false, icon:"fas fa-cubes"        },
+                Wood:{ name:'Wood', comp:'Wood', pracs:{}, ikw:false, link:false, icon:"fas fa-tree"         } } } },
     
     methods: {
+
       
       isPrac: function(prac) {
         return this.prac === prac;  },

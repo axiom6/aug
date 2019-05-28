@@ -38,6 +38,9 @@
   import Info   from '../comp/Info.vue';
   import Know   from '../comp/Know.vue';
   import Wise   from '../comp/Wise.vue';
+  import Math   from '../math/Math.vue';
+  import MathML from '../math/MathML.vue';
+  import MathEQ from '../math/MathEQ.vue';
   import Geom   from '../geom/Geom.vue';
   import Geom2D from '../geom/Geom2D.vue';
   import Geom3D from '../geom/Geom3D.vue';
@@ -55,6 +58,9 @@
   Dash.Info   = Info;
   Dash.Know   = Know;
   Dash.Wise   = Wise;
+  Dash.Math   = Math;
+  Dash.MathML = MathML;
+  Dash.MathEQ = MathEQ;
   Dash.Geom   = Geom;
   Dash.Geom2D = Geom2D;
   Dash.Geom3D = Geom3D;
@@ -68,9 +74,6 @@
 //Dash.Cube   = Cube;
 //Dash.Wood   = Wood;
   
-  
-
- 
   export default Dash;
   
 </script>

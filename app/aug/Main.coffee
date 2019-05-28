@@ -2,14 +2,12 @@
 import Data    from '../../pub/bas/util/Data.js'
 import Stream  from '../../pub/bas/util/Stream.js'
 import Vis     from '../../pub/bas/util/Vis.js'
-import Matcher from '../../pub/math/ptn/Matcher.js'
 
 class Main
 
   Data.local   = "http://localhost:63342/aug/app/data/"
   Data.hosted  = "https://ui-48413.firebaseapp.com/"
   Main.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json"
-  Main.Matcher = Matcher
 
   Main.Batch = {
     Cols: { url:'muse/Cols.json', data:null, type:'Pack', plane:'Cols' }
@@ -17,6 +15,7 @@ class Main
     Info: { url:'muse/Info.json', data:null, type:'Pack', plane:'Info' }
     Know: { url:'muse/Know.json', data:null, type:'Pack', plane:'Know' }
     Wise: { url:'muse/Wise.json', data:null, type:'Pack', plane:'Wise' }
+    Math: { url:'muse/Math.json', data:null, type:'Pack', plane:'Math' }
     Geom: { url:'muse/Geom.json', data:null, type:'Pack', plane:'Geom' }
     Cube: { url:'muse/Cube.json', data:null, type:'Pack', plane:'Cube' }
     Font: { url:Main.FontUrl,     data:null, type:'Font', plane:'Cube' } }
@@ -27,7 +26,6 @@ class Main
     return
 
   Main.init =  ( batch ) ->
-    Main.Matcher.doMatches()
     Main.Batch = batch # Not necessary here, but assigned for compatibilitry
     subjects = ["Info","Know","Wise","Draw","Note","Cube","Navb","Tabs","Geom"]
     infoSpec = { subscribe:false, publish:false, subjects:subjects}

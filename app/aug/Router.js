@@ -25,6 +25,9 @@ export default new Router( {
       { path:'conn',  name:'WiseConn',  components:{ WiseConn: Dash.Conn } },
       { path:'enli',  name:'WiseEnli',  components:{ WiseEnli: Dash.Enli } },
       { path:'data',  name:'WiseData',  components:{ WiseData: Dash.Data } } ] },
+    { path: '/math',  name:'Math',      components:{ Math:     Dash.Math }, children: [
+      { path:'ML',    name:'MathML',    components:{ MathML:   Dash.MathML } },
+      { path:'EQ',    name:'MathEQ',    components:{ MathEQ:   Dash.MathEQ } } ] },
     { path: '/geom',  name:'Geom',      components:{ Geom:     Dash.Geom }, children: [
       { path:'2D',    name:'Geom2D',    components:{ Geom2D:   Dash.Geom2D } },
       { path:'3D',    name:'Geom3D',    components:{ Geom3D:   Dash.Geom3D } },

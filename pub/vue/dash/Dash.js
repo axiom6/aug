@@ -447,16 +447,18 @@ __vue_render__$2._withStripped = true;
 let Tocs = {
   
   data() { return {  comp:'None', prac:'None', disp:'None',
-      komps:{ Info:{ name:'Info', comp:'Info', pracs:{}, ikw:true,  icon:"fas fa-th"           },
-              Know:{ name:'Know', comp:'Know', pracs:{}, ikw:true,  icon:"fas fa-university"   },
-              Wise:{ name:'Wise', comp:'Wise', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor"  },
-              Geom:{ name:'Geom', comp:'Geom', pracs:{}, ikw:true,  icon:"fas fa-shapes"       },
-              Draw:{ name:'Draw', comp:'Draw', pracs:{}, ikw:false, icon:"fas fa-draw-polygon" },
-              Note:{ name:'Note', comp:'Note', pracs:{}, ikw:false, icon:"fab fa-leanpub"      },
-              Cube:{ name:'Cube', comp:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes"        },
-              Wood:{ name:'Wood', comp:'Wood', pracs:{}, ikw:false, icon:"fas fa-tree"         } } } },
+      komps:{ Math:{ name:'Math', comp:'Math', pracs:{}, ikw:true,  link:true,  icon:"fas fa-bezier-curve" },
+              Geom:{ name:'Geom', comp:'Geom', pracs:{}, ikw:true,  link:true,  icon:"fas fa-shapes"       },
+              Draw:{ name:'Draw', comp:'Draw', pracs:{}, ikw:false, link:false, icon:"fas fa-draw-polygon" },
+              Note:{ name:'Note', comp:'Note', pracs:{}, ikw:false, link:false, icon:"fab fa-leanpub"      },
+              Info:{ name:'Info', comp:'Info', pracs:{}, ikw:true,  link:false, icon:"fas fa-th"           },
+              Know:{ name:'Know', comp:'Know', pracs:{}, ikw:true,  link:false, icon:"fas fa-university"   },
+              Wise:{ name:'Wise', comp:'Wise', pracs:{}, ikw:true,  link:false, icon:"fab fa-tripadvisor"  },
+              Cube:{ name:'Cube', comp:'Cube', pracs:{}, ikw:false, link:false, icon:"fas fa-cubes"        },
+              Wood:{ name:'Wood', comp:'Wood', pracs:{}, ikw:false, link:false, icon:"fas fa-tree"         } } } },
   
   methods: {
+
     
     isPrac: function(prac) {
       return this.prac === prac;  },
@@ -550,7 +552,7 @@ var __vue_render__$3 = function() {
                             [
                               _c("i", { class: prac.icon }),
                               _vm._v(" "),
-                              _vm.comp === "Geom"
+                              komp.link
                                 ? _c(
                                     "router-link",
                                     { attrs: { to: { name: prac.name } } },
@@ -558,7 +560,7 @@ var __vue_render__$3 = function() {
                                   )
                                 : _vm._e(),
                               _vm._v(" "),
-                              _vm.comp !== "Geom"
+                              !komp.link
                                 ? _c("span", [_vm._v(_vm._s(prac.name))])
                                 : _vm._e(),
                               _vm._v(" "),
@@ -628,7 +630,7 @@ __vue_render__$3._withStripped = true;
   /* style */
   const __vue_inject_styles__$3 = function (inject) {
     if (!inject) return
-    inject("data-v-73b05c16_0", { source: ".tocs {\n  background-color: black;\n  font-size: 3vh;\n}\n.tocs ul {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  align-self: start;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25em;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li i {\n  margin-right: 0.4em;\n}\n.tocs ul li a {\n  color: wheat;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 0.8em;\n  font-weight: bold;\n  padding: 0;\n  margin: 0;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li i {\n  margin-right: 0.3em;\n}\n.tocs ul li ul li a {\n  color: black;\n}\n.tocs ul li ul li ul {\n  font-size: 0.8em;\n  padding: 0;\n  margin: 0 0 0 0.2em;\n}\n.tocs ul li ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li ul li i {\n  margin-right: 0.25em;\n}\n.tocs ul li ul li ul li:hover {\n  background-color: black!important;\n  color: white!important;\n}\n", map: {"version":3,"sources":["Tocs.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,cAAc;AAChB;AACA;EACE,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;EACjB,aAAa;AACf;AACA;EACE,sBAAsB;EACtB,oBAAoB;EACpB,iBAAiB;EACjB,4BAA4B;EAC5B,+BAA+B;AACjC;AACA;EACE,mBAAmB;AACrB;AACA;EACE,YAAY;EACZ,qBAAqB;AACvB;AACA;EACE,gBAAgB;EAChB,iBAAiB;EACjB,UAAU;EACV,SAAS;AACX;AACA;EACE,4BAA4B;EAC5B,YAAY;EACZ,+BAA+B;AACjC;AACA;EACE,mBAAmB;AACrB;AACA;EACE,YAAY;AACd;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,mBAAmB;AACrB;AACA;EACE,4BAA4B;EAC5B,YAAY;EACZ,+BAA+B;AACjC;AACA;EACE,oBAAoB;AACtB;AACA;EACE,iCAAiC;EACjC,sBAAsB;AACxB","file":"Tocs.vue","sourcesContent":[".tocs {\n  background-color: black;\n  font-size: 3vh;\n}\n.tocs ul {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  align-self: start;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25em;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li i {\n  margin-right: 0.4em;\n}\n.tocs ul li a {\n  color: wheat;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 0.8em;\n  font-weight: bold;\n  padding: 0;\n  margin: 0;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li i {\n  margin-right: 0.3em;\n}\n.tocs ul li ul li a {\n  color: black;\n}\n.tocs ul li ul li ul {\n  font-size: 0.8em;\n  padding: 0;\n  margin: 0 0 0 0.2em;\n}\n.tocs ul li ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li ul li i {\n  margin-right: 0.25em;\n}\n.tocs ul li ul li ul li:hover {\n  background-color: black!important;\n  color: white!important;\n}\n"]}, media: undefined });
+    inject("data-v-0d811cfc_0", { source: ".tocs {\n  background-color: black;\n  font-size: 3vh;\n}\n.tocs ul {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  align-self: start;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25em;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li i {\n  margin-right: 0.4em;\n}\n.tocs ul li a {\n  color: wheat;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 0.8em;\n  font-weight: bold;\n  padding: 0;\n  margin: 0;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li i {\n  margin-right: 0.3em;\n}\n.tocs ul li ul li a {\n  color: black;\n}\n.tocs ul li ul li ul {\n  font-size: 0.8em;\n  padding: 0;\n  margin: 0 0 0 0.2em;\n}\n.tocs ul li ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li ul li i {\n  margin-right: 0.25em;\n}\n.tocs ul li ul li ul li:hover {\n  background-color: black!important;\n  color: white!important;\n}\n", map: {"version":3,"sources":["Tocs.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,cAAc;AAChB;AACA;EACE,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;EACjB,aAAa;AACf;AACA;EACE,sBAAsB;EACtB,oBAAoB;EACpB,iBAAiB;EACjB,4BAA4B;EAC5B,+BAA+B;AACjC;AACA;EACE,mBAAmB;AACrB;AACA;EACE,YAAY;EACZ,qBAAqB;AACvB;AACA;EACE,gBAAgB;EAChB,iBAAiB;EACjB,UAAU;EACV,SAAS;AACX;AACA;EACE,4BAA4B;EAC5B,YAAY;EACZ,+BAA+B;AACjC;AACA;EACE,mBAAmB;AACrB;AACA;EACE,YAAY;AACd;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,mBAAmB;AACrB;AACA;EACE,4BAA4B;EAC5B,YAAY;EACZ,+BAA+B;AACjC;AACA;EACE,oBAAoB;AACtB;AACA;EACE,iCAAiC;EACjC,sBAAsB;AACxB","file":"Tocs.vue","sourcesContent":[".tocs {\n  background-color: black;\n  font-size: 3vh;\n}\n.tocs ul {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  align-self: start;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25em;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li i {\n  margin-right: 0.4em;\n}\n.tocs ul li a {\n  color: wheat;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 0.8em;\n  font-weight: bold;\n  padding: 0;\n  margin: 0;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li i {\n  margin-right: 0.3em;\n}\n.tocs ul li ul li a {\n  color: black;\n}\n.tocs ul li ul li ul {\n  font-size: 0.8em;\n  padding: 0;\n  margin: 0 0 0 0.2em;\n}\n.tocs ul li ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2em 0.2em 0.2em 0.2em;\n}\n.tocs ul li ul li ul li i {\n  margin-right: 0.25em;\n}\n.tocs ul li ul li ul li:hover {\n  background-color: black!important;\n  color: white!important;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -667,6 +669,7 @@ __vue_render__$3._withStripped = true;
 //
 //
 //
+//
 
 
 var script$3 = {
@@ -686,6 +689,14 @@ var __vue_render__$4 = function() {
   return _c(
     "div",
     [
+      _c("router-view", { attrs: { name: "Math" } }),
+      _vm._v(" "),
+      _c("router-view", { attrs: { name: "Geom" } }),
+      _vm._v(" "),
+      _c("router-view", { attrs: { name: "Draw" } }),
+      _vm._v(" "),
+      _c("router-view", { attrs: { name: "Note" } }),
+      _vm._v(" "),
       _c("router-view", { attrs: { name: "Home" } }),
       _vm._v(" "),
       _c("router-view", { attrs: { name: "Info" } }),
@@ -693,12 +704,6 @@ var __vue_render__$4 = function() {
       _c("router-view", { attrs: { name: "Know" } }),
       _vm._v(" "),
       _c("router-view", { attrs: { name: "Wise" } }),
-      _vm._v(" "),
-      _c("router-view", { attrs: { name: "Geom" } }),
-      _vm._v(" "),
-      _c("router-view", { attrs: { name: "Draw" } }),
-      _vm._v(" "),
-      _c("router-view", { attrs: { name: "Note" } }),
       _vm._v(" "),
       _c("router-view", { attrs: { name: "Cube" } }),
       _vm._v(" "),
@@ -1515,21 +1520,20 @@ window.Style = Style; // Make Style global for access inside ganja.js
 
 //
 
-let Geom = {
+let Math$1 = {
 
-  data() { return { comp:'Geom',
-    geoms:[
-      { title:'Geom2D', key:'2D' },
-      { title:'Geom3D', key:'3D' },
-      { title:'Geom4D', key:'4D' } ] } },
+  data() { return { comp:'Math',
+    maths:[
+      { title:'MathML', key:'ML' },
+      { title:'MathEQ', key:'EQ' } ] } },
 
   mounted: function () {
-    Style.size( this.$refs['Geom'] ); } // mounted is best place to get page elem size
+    Style.size( this.$refs['Math'] ); } // mounted is best place to get page elem size
 
 };
 
 /* script */
-const __vue_script__$g = Geom;
+const __vue_script__$g = Math$1;
 
 /* template */
 var __vue_render__$d = function() {
@@ -1538,12 +1542,12 @@ var __vue_render__$d = function() {
   var _c = _vm._self._c || _h;
   return _c(
     "div",
-    { ref: "Geom", staticClass: "geom" },
+    { ref: "Math", staticClass: "math" },
     [
-      _vm.comp === "Geom" ? _c("h1", [_vm._v("Geometric Algebra")]) : _vm._e(),
+      _vm.comp === "Math" ? _c("h1", [_vm._v("Mathematics")]) : _vm._e(),
       _vm._v(" "),
-      _vm._l(_vm.geoms, function(geom) {
-        return [_c("router-view", { attrs: { name: _vm.comp + geom.key } })]
+      _vm._l(_vm.maths, function(math) {
+        return [_c("router-view", { attrs: { name: _vm.comp + math.key } })]
       })
     ],
     2
@@ -1555,7 +1559,7 @@ __vue_render__$d._withStripped = true;
   /* style */
   const __vue_inject_styles__$g = function (inject) {
     if (!inject) return
-    inject("data-v-323ca6aa_0", { source: ".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.geom h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Geom.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Geom.vue","sourcesContent":[".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.geom h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
+    inject("data-v-6b77c6f9_0", { source: ".math {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.math h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Math.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Math.vue","sourcesContent":[".math {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.math h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -1568,7 +1572,7 @@ __vue_render__$d._withStripped = true;
   
 
   
-  var Geom$1 = normalizeComponent_1(
+  var Math$2 = normalizeComponent_1(
     { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
     __vue_inject_styles__$g,
     __vue_script__$g,
@@ -1684,6 +1688,3368 @@ var script$g = {
 
     onTabs: function(key) {
       if( this.pages[key] ) {
+        this.key = key;
+        this.create(this.key); } },
+
+    create: function( key ) {
+      // console.log( this.comp+'.created()', { key:key, refs:this.$refs } );
+      if( !this.pages[key].created ) {
+        Style.init( key, this.$refs[key][0] );
+        this.pages[key].created = true;
+        this.pages[key].klass.ga(); } }
+  },
+
+  mounted: function () {
+    // console.log( this.comp+'.mounted()', { refs:this.$refs } );
+    this.onTabs( this.key );
+    this.subscribe( 'Math', this.comp+'.vue', (key) => {
+      if( typeof(key)==='string' ) {
+        this.onTabs( key ); } } ); }
+
+};
+
+/* script */
+const __vue_script__$i = script$g;
+
+/* template */
+var __vue_render__$f = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    [
+      _c("d-dabs", {
+        attrs: { comp: "Math", pages: _vm.pages, init: _vm.key }
+      }),
+      _vm._v(" "),
+      _vm._l(_vm.pages, function(page) {
+        return [
+          _c("div", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isPage(page.key),
+                expression: "isPage(page.key)"
+              }
+            ],
+            key: page.key,
+            ref: page.key,
+            refInFor: true,
+            staticClass: "page"
+          })
+        ]
+      })
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$f = [];
+__vue_render__$f._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$i = function (inject) {
+    if (!inject) return
+    inject("data-v-43b0f12e_0", { source: ".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n", map: {"version":3,"sources":["MathND.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf","file":"MathND.vue","sourcesContent":[".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$i = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$i = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$i = false;
+  /* style inject SSR */
+  
+
+  
+  var MathND = normalizeComponent_1(
+    { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
+    __vue_inject_styles__$i,
+    __vue_script__$i,
+    __vue_scope_id__$i,
+    __vue_is_functional_template__$i,
+    __vue_module_identifier__$i,
+    browser,
+    undefined
+  );
+
+const PAD_VALUE = Symbol('PadValueType');
+const _ = Symbol('UnderscoreType');
+const TAIL = Symbol('TailType');
+const REST = TAIL;
+
+
+function isValue(x) {
+    if (x === null || x === undefined) return true;
+    const t = typeof(x);
+    return t === 'number' || t === 'string' || t === 'boolean';
+}
+
+
+function isObject(x) {
+    return x instanceof Object && !Array.isArray(x) && !isValue(x);
+}
+
+
+function run(action, x) {
+    if (isValue(action)) {
+        return action;
+    }
+    else if (action instanceof Function) {
+        return action.apply(null, x);
+    }
+    else {
+        throw new MatchError(`Unsupported action type ${typeof(action)} of action ${action}.`)
+    }
+}
+
+
+function matchValue(patt, value) {
+    if (patt === '_') {
+        // Behaves like UnderscoreType
+        return [true, [value]];
+    }
+    else if (patt === PAD_VALUE) {
+        return [false, []];
+    }
+    else if (patt === String) {
+        let bool = typeof(value) === 'string' || value instanceof String;
+        if (bool) return [bool, [value]];
+        else return [false, []];
+    }
+    else if (patt === Number) {
+        let bool = typeof(value) === 'number' || value instanceof Number;
+        if (bool) return [bool, [value]];
+        else return [false, []];
+    }
+    else if (patt === Boolean) {
+        let bool = typeof(value) === 'boolean' || value instanceof Boolean;
+        if (bool) return [bool, [value]];
+        else return [false, []];
+    }
+    else if (patt === Array) {
+        if (value instanceof Array) {
+            return [true, [value]];
+        }
+        else return [false, []];
+    }
+    else if (Array.isArray(patt)) {
+        return matchArray(patt, value)
+    }
+    else if (patt === Function) {
+        // console.log(`[${patt}] === Function`);
+        try {
+            if (value instanceof patt)
+                return [true, [value]];
+            return [false, []];
+        }
+        catch (err) {
+        }
+    }
+    else if (isValue(patt)) {
+        return [patt === value, []]
+    }
+    else if (patt instanceof Function) {
+        // console.log(`[${patt}] instanceof Function`);
+        let ret = patt(value);
+        if (ret === true) return [true, [value]];
+        else return [false, []];
+    }
+    else if (patt === _) {
+        return [true, [value]];
+    }
+    else if (isObject(patt)) {
+        return matchDict(patt, value);
+    }
+    else throw new MatchError(`Pattern ${patt} has unsupported type ${typeof(patt)}.`);
+    return [false, []];
+}
+
+
+function matchArray(patt, value) {
+    if (!(patt instanceof Array) || !(value instanceof Array)) {
+        return [false, []];
+    }
+    let totalExtracted = [];
+    const pairs = zipLongest(patt, value);
+    for (let i = 0; i < pairs.length; i++) {
+        const [pi, vi] = pairs[i];
+
+        if (pi === TAIL) {
+            if (!onlyPadValuesFollow(pairs, i + 1)) {
+                throw new MatchError("TAIL/REST must be the last element of a pattern.");
+            }
+            else {
+                totalExtracted = totalExtracted.concat([value.slice(i)]);
+                break;
+            }
+        }
+        else {
+            let [matched, extracted] = matchValue(pi, vi);
+            if (!matched) {
+                return [false, []];
+            }
+            else totalExtracted = totalExtracted.concat(extracted);
+        }
+
+    }
+    return [true, totalExtracted];
+}
+
+
+function keysSet(x) {
+    let set = {};
+    for (let key in x) {
+      if( x.hasOwnProperty(key) ) {
+      set[key] = true; } }
+    return set;
+}
+
+function matchDict(patt, value) {
+    if (!isObject(patt) || !isObject(value)) {
+        return [false, []];
+    }
+    let totalExtracted = [];
+    let stillUsablePatternKeys = keysSet(patt);
+    let stillUsableValueKeys = keysSet(value);
+    for (let pkey in patt) {
+        if( !patt.hasOwnProperty(pkey) )  continue;
+        if (!(pkey in stillUsablePatternKeys)) continue;
+        let pval = patt[pkey];
+        let matchedLeftAndRight = false;
+        for (let vkey in value) {
+            if( !value.hasOwnProperty(vkey) )  continue;
+            if (!(vkey in stillUsableValueKeys)) continue;
+            if (!(pkey in stillUsablePatternKeys)) continue;
+            let vval = value[vkey];
+            let [keyMatched, keyExtracted] = matchValue(pkey, vkey);
+            if (keyMatched) {
+                let [valMatched, valExtracted] = matchValue(pval, vval);
+                if (valMatched) {
+                    delete stillUsablePatternKeys[pkey];
+                    delete stillUsableValueKeys[vkey];
+                    totalExtracted = totalExtracted.concat(keyExtracted, valExtracted);
+                    matchedLeftAndRight = true;
+                }
+            }
+        }
+        if (!matchedLeftAndRight)
+            return [false, []];
+    }
+    return [true, totalExtracted];
+}
+
+function pairwise(args) {
+    let res = [];
+    for (let i = 0; i < args.length; i += 2) {
+        res.push([args[i], args[i + 1]]);
+    }
+    return res;
+}
+
+function onlyPadValuesFollow(pairs, i) {
+    for (; i < pairs.length; i++) {
+        if (pairs[i][0] !== PAD_VALUE) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
+function matchPairs(x, ...pairs) {
+  if (!pairs.every(p => p.length && p.length === 2)) {
+    throw new MatchError(
+      'Even number of pattern-action pairs. Every pattern should have an action.'
+    )
+  }
+
+  for (let i = 0; i < pairs.length; i++) {
+    let [patt, action] = pairs[i];
+
+    let [matched, extracted] = matchValue(patt, x);
+    if (matched) {
+      return run(action, extracted)
+    }
+  }
+  throw new MatchError(`No _ provided, case ${x} not handled.`)
+}
+
+
+function match(x) {
+    const args = [...arguments].slice(1);
+    if (args.length % 2 !== 0) {
+        throw new MatchError("Even number of pattern-action pairs. Every pattern should have an action.");
+    }
+
+    let pairs = pairwise(args);
+
+    return matchPairs(x, ...pairs)
+}
+
+function matchAll(rows) {
+    let total = [];
+    for (let i = 0; i < rows.length; i++) {
+        let row = rows[i];
+        let pairs = [...arguments].slice(1);
+        let res = match.apply(null, [row].concat(pairs));
+        total.push(res);
+    }
+    return total;
+}
+
+function zipLongest(a, b) {
+    let maxLen = Math.max(a.length, b.length);
+    let res = [];
+    for (let i = 0; i < maxLen; i++) {
+        let ai = a[i] !== undefined ? a[i] : PAD_VALUE;
+        let bi = b[i] !== undefined ? b[i] : PAD_VALUE;
+        res.push([ai, bi]);
+    }
+    return res;
+}
+/*
+class MatchError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'MatchError';
+    }
+}
+*/
+class MatchError extends Error {
+  constructor(message) {
+    super();
+    //console.error(message);
+    this.message = message;
+    this.name = 'MatchError';
+    if( message === false ) console.log( matchAll, REST );
+  }
+}
+
+var Adt;
+
+Adt = (function() {
+  class Adt {
+    // Geometric Algerbra
+    static Dot(u, v) {
+      return u(~v); // Dot product
+    }
+
+    static Wedge(u, v) {
+      return u ^ v; // Wedge outer generalisze cross product
+    }
+
+    static Vee(u, v) {
+      return u & v; // Meet or join
+    }
+
+    static Dual(u) {
+      return u; // Dual
+    }
+
+    static Inverse(u) {
+      return u; // Inverse
+    }
+
+    static Conjugate(u) {
+      return u; // Conjugate
+    }
+
+    static Reverse(u) {
+      return u; // Reverse
+    }
+
+    static Involute(u) {
+      return u; // Involute
+    }
+
+    static Rotor(u) {
+      return u; // Rotor
+    }
+
+    static Magnitude(u) {
+      return u; // Magnitude
+    }
+
+    static Grade(u) {
+      return u; // Grade
+    }
+
+    static Reflect(u, v) {
+      return u * v * conjugate(u);
+    }
+
+    static Rotate(u, v) {
+      return u * v * conjugate(u);
+    }
+
+    static GP(u, v) {
+      return Adt.Dot(u, v) + Adt.Wedge(u, v); // Geometric Product
+    }
+
+    // Vector, Matrix, Numbers and Variables
+    static Vec(f, rest) {
+      return f(rest);
+    }
+
+    static Mat(f, rest) {
+      return f(rest);
+    }
+
+    static Ratio(u, v) {
+      return u / v;
+    }
+
+    // Arithmetic
+    static Equ(u, v) {
+      return u = v;
+    }
+
+    static Add(u, v) {
+      return u + v;
+    }
+
+    static Sub(u, v) {
+      return u - v;
+    }
+
+    static Mul(u, v) {
+      return u * v;
+    }
+
+    static Div(u, v) {
+      return u / v;
+    }
+
+    static Pow(u, v) {
+      return u ** v;
+    }
+
+    // Unary operator high precendence
+    static Neg(u) {
+      return -u;
+    }
+
+    static Recip(u) {
+      return 1 / u;
+    }
+
+    static Abs(u) {
+      return Math.abs(u);
+    }
+
+    // Parenthesis Braces Object Array
+    static Paren(u) {
+      return u;
+    }
+
+    static Brace(u) {
+      return {u};
+    }
+
+    // Natural Log, Log Base, Root, Square Root and e
+    static Ln(u) {
+      return Math.log(u); // ln(u)
+    }
+
+    static Log(u, b) {
+      return Math.log(u) / Math.log(b); // log_b(u)
+    }
+
+    static Root(u, r) {
+      return Math.pow(u, 1 / r); // root_b(u)
+    }
+
+    static Sqrt(u) {
+      return Math.sqrt(u); // sqrt(u)
+    }
+
+    static E(u) {
+      return Math.exp(u); // e**u
+    }
+
+    
+    // Trigometric
+    static Sin(u) {
+      return Math.sin(u);
+    }
+
+    static Cos(u) {
+      return Math.cos(u);
+    }
+
+    static Tan(u) {
+      return Math.tan(u);
+    }
+
+    static Csc(u) {
+      return 1.0 / Math.sin(u);
+    }
+
+    static Sec(u) {
+      return 1.0 / Math.cos(u);
+    }
+
+    static Cot(u) {
+      return 1.0 / Math.tan(u);
+    }
+
+    // Inverse Trigometric
+    static Arcsin(u) {
+      return Math.asin(u);
+    }
+
+    static Arccos(u) {
+      return Math.acos(u);
+    }
+
+    static Arctan(u) {
+      return Math.atan(u);
+    }
+
+    static Arccsc(u) {
+      return Math.asin(1 / u); // ???
+    }
+
+    static Arcsec(u) {
+      return Math.acos(1 / u); // ???
+    }
+
+    static Arccot(u) {
+      return Math.atan(1 / u); // ???
+    }
+
+    // Hyperbolic  with Inverse
+    static Sinh(u) {
+      return Math.sinh(u);
+    }
+
+    static Cosh(u) {
+      return Math.cosh(u);
+    }
+
+    static Tanh(u) {
+      return Math.tanh(u);
+    }
+
+    static Arccinh(u) {
+      return Math.asinh(u);
+    }
+
+    static Arccosh(u) {
+      return Math.acosh(u);
+    }
+
+    static Arctanh(u) {
+      return Math.atanh(u);
+    }
+
+    // Calculus, Sum and Typsetting
+    static Fun(f, u) {
+      return u; // f(u) Function
+    }
+
+    static D(u) {
+      return u; // d(u) Differentiation
+    }
+
+    static Int(u) {
+      return u; // Integration
+    }
+
+    static DefInt(a, b, u) {
+      return a + b + u; // Definite Integral
+    }
+
+    static Sum(a, b, u) {
+      return a + b + u; // Summation
+    }
+
+    
+    // Subscripts Superscripts Limits
+    static Sus(u, a) {
+      return u + a; // u_a  Subscript  u^b  Superscript is Power
+    }
+
+    static Lim(a, b) {
+      return a + b; //_a^b  Limit for Sum and Itg
+    }
+
+    // Finge
+    //Obj = (k,v)  => { k:v } # ???
+    static Sim(u) {
+      return u; // sim(u) Simplify
+    }
+
+    static Not(u) {
+      return u; // Not an Adt expression
+    }
+
+    static Msg(u) {
+      return u; // Parsing error message
+    }
+
+    static Unk(u) {
+      return u;
+    }
+
+  }
+  Adt.Geom = [Adt.Dot, Adt.Wedge, Adt.Vee, Adt.Dual, Adt.Inverse, Adt.Conjugate, Adt.Reverse, Adt.Involute, Adt.Rotor, Adt.Magnitude, Adt.Grade, Adt.Reflect, Adt.Rotate, Adt.GP];
+
+  Adt.Arith = [Adt.Ratio, Adt.Equ, Adt.Add, Adt.Sub, Adt.Mul, Adt.Div, Adt.Pow, Adt.Neg, Adt.Recip, Adt.Abs, Adt.Paren, Adt.Brace];
+
+  Adt.Trans = [Adt.Ln, Adt.Log, Adt.Root, Adt.Sqrt, Adt.E, Adt.Sin, Adt.Cos, Adt.Tan, Adt.Csc, Adt.Sec, Adt.Cot, Adt.Arcsin, Adt.Arccos, Adt.Arctan, Adt.Arccsc, Adt.Arcsec, Adt.Arccot];
+
+  Adt.Hyper = [Adt.Sinh, Adt.Cosh, Adt.Tanh, Adt.Arccinh, Adt.Arccosh, Adt.Arctanh];
+
+  Adt.Calculus = [Adt.Fun, Adt.D, Adt.Int, Adt.DefInt, Adt.Sum, Adt.Sub, Adt.Sus, Adt.Lim];
+
+  Adt.Fringe = [Adt.Sim, Adt.Not, Adt.Msg, Adt.Unk];
+
+  return Adt;
+
+}).call(undefined);
+
+var A = Adt;
+
+var Ptn;
+
+Ptn = class Ptn {
+  static toPtn(f) {
+    var a, i, j, ref;
+    a = void 0;
+    if (f === 'String') {
+      a = String;
+    } else if (f === 'Number') {
+      a = Number;
+    } else if (f === '_') {
+      a = _;
+    } else if (typeof f === 'function') {
+      a = [];
+      if (f.name === 'Vec' || f.name === 'Mat') {
+        a.push(f.name, REST);
+      } else {
+        // console.log( 'Ptn.toPtn() Vec', f.name, REST )
+        a.push(f.name);
+        for (i = j = 0, ref = f.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
+          a.push(_);
+        }
+      }
+    } else {
+      console.error('Ptn.toPtn() unknown pattern', f);
+    }
+    //console.log( 'Ptn.toPtn()', { f:f, ft:typeof(f), fa:Array.isArray(f), a:a, at:typeof(a), aa:Array.isArray(a) } )
+    return a;
+  }
+
+  static type(ptn) {
+    if (Array.isArray(ptn)) {
+      return 'array';
+    } else {
+      return typeof ptn;
+    }
+  }
+
+  static toPtns(adts) {
+    var i, j, ptns, ref;
+    // console.log( 'Ptn.toPtns() adts', adts )
+    ptns = new Array(adts.length);
+    for (i = j = 0, ref = adts.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
+      ptns[i] = i % 2 === 0 ? Ptn.toPtn(adts[i]) : adts[i];
+    }
+    // for i in [0...ptns.length] by 2
+    //   console.log( 'Ptn.toPtns()', { ptn:ptns[i], type:Ptn.type(ptns[i]) } )
+    return ptns;
+  }
+
+};
+
+var Ptn$1 = Ptn;
+
+/*
+ * Generated by PEG.js 0.10.0.
+ *
+ * http://pegjs.org/
+ */
+
+function peg$subclass(child, parent) {
+  function ctor() { this.constructor = child; }
+  ctor.prototype = parent.prototype;
+  child.prototype = new ctor();
+}
+
+function peg$SyntaxError(message, expected, found, location) {
+  this.message  = message;
+  this.expected = expected;
+  this.found    = found;
+  this.location = location;
+  this.name     = "SyntaxError";
+
+  if (typeof Error.captureStackTrace === "function") {
+    Error.captureStackTrace(this, peg$SyntaxError);
+  }
+}
+
+peg$subclass(peg$SyntaxError, Error);
+
+peg$SyntaxError.buildMessage = function(expected, found) {
+  var DESCRIBE_EXPECTATION_FNS = {
+        literal: function(expectation) {
+          return "\"" + literalEscape(expectation.text) + "\"";
+        },
+
+        "class": function(expectation) {
+          var escapedParts = "",
+              i;
+
+          for (i = 0; i < expectation.parts.length; i++) {
+            escapedParts += expectation.parts[i] instanceof Array
+              ? classEscape(expectation.parts[i][0]) + "-" + classEscape(expectation.parts[i][1])
+              : classEscape(expectation.parts[i]);
+          }
+
+          return "[" + (expectation.inverted ? "^" : "") + escapedParts + "]";
+        },
+
+        any: function(expectation) {
+          return "any character";
+        },
+
+        end: function(expectation) {
+          return "end of input";
+        },
+
+        other: function(expectation) {
+          return expectation.description;
+        }
+      };
+
+  function hex(ch) {
+    return ch.charCodeAt(0).toString(16).toUpperCase();
+  }
+
+  function literalEscape(s) {
+    return s
+      .replace(/\\/g, '\\\\')
+      .replace(/"/g,  '\\"')
+      .replace(/\0/g, '\\0')
+      .replace(/\t/g, '\\t')
+      .replace(/\n/g, '\\n')
+      .replace(/\r/g, '\\r')
+      .replace(/[\x00-\x0F]/g,          function(ch) { return '\\x0' + hex(ch); })
+      .replace(/[\x10-\x1F\x7F-\x9F]/g, function(ch) { return '\\x'  + hex(ch); });
+  }
+
+  function classEscape(s) {
+    return s
+      .replace(/\\/g, '\\\\')
+      .replace(/\]/g, '\\]')
+      .replace(/\^/g, '\\^')
+      .replace(/-/g,  '\\-')
+      .replace(/\0/g, '\\0')
+      .replace(/\t/g, '\\t')
+      .replace(/\n/g, '\\n')
+      .replace(/\r/g, '\\r')
+      .replace(/[\x00-\x0F]/g,          function(ch) { return '\\x0' + hex(ch); })
+      .replace(/[\x10-\x1F\x7F-\x9F]/g, function(ch) { return '\\x'  + hex(ch); });
+  }
+
+  function describeExpectation(expectation) {
+    return DESCRIBE_EXPECTATION_FNS[expectation.type](expectation);
+  }
+
+  function describeExpected(expected) {
+    var descriptions = new Array(expected.length),
+        i, j;
+
+    for (i = 0; i < expected.length; i++) {
+      descriptions[i] = describeExpectation(expected[i]);
+    }
+
+    descriptions.sort();
+
+    if (descriptions.length > 0) {
+      for (i = 1, j = 1; i < descriptions.length; i++) {
+        if (descriptions[i - 1] !== descriptions[i]) {
+          descriptions[j] = descriptions[i];
+          j++;
+        }
+      }
+      descriptions.length = j;
+    }
+
+    switch (descriptions.length) {
+      case 1:
+        return descriptions[0];
+
+      case 2:
+        return descriptions[0] + " or " + descriptions[1];
+
+      default:
+        return descriptions.slice(0, -1).join(", ")
+          + ", or "
+          + descriptions[descriptions.length - 1];
+    }
+  }
+
+  function describeFound(found) {
+    return found ? "\"" + literalEscape(found) + "\"" : "end of input";
+  }
+
+  return "Expected " + describeExpected(expected) + " but " + describeFound(found) + " found.";
+};
+
+function peg$parse(input, options) {
+  options = options !== void 0 ? options : {};
+
+  var peg$FAILED = {},
+
+      peg$startRuleFunctions = { start: peg$parsestart },
+      peg$startRuleFunction  = peg$parsestart,
+
+      peg$c0 = function(u) { return `${u}` },
+      peg$c1 = "=",
+      peg$c2 = peg$literalExpectation("=", false),
+      peg$c3 = function(u, v) { return `['Equ',${u},${v}]`; },
+      peg$c4 = "+",
+      peg$c5 = peg$literalExpectation("+", false),
+      peg$c6 = function(u, v) { return `['Add',${u},${v}]`; },
+      peg$c7 = "-",
+      peg$c8 = peg$literalExpectation("-", false),
+      peg$c9 = function(u, v) { return `['Sub',${u},${v}]`; },
+      peg$c10 = "*",
+      peg$c11 = peg$literalExpectation("*", false),
+      peg$c12 = function(u, v) { return `['Mul',${u},${v}]` },
+      peg$c13 = "/",
+      peg$c14 = peg$literalExpectation("/", false),
+      peg$c15 = function(u, v) { return `['Div',${u},${v}]` },
+      peg$c16 = function(u, v) { return `['Pow',${u},${v}]` },
+      peg$c17 = function(u, v) { return `['Sus',${u},${v}]` },
+      peg$c18 = function(u) { return `['Neg',${u}]` },
+      peg$c19 = function(k, a, b, u) { return func3(k,a,b,u) },
+      peg$c20 = function(k, a, b) { return func2(k,a,b) },
+      peg$c21 = "(",
+      peg$c22 = peg$literalExpectation("(", false),
+      peg$c23 = ")",
+      peg$c24 = peg$literalExpectation(")", false),
+      peg$c25 = function(f, u) { return func1(f,u) },
+      peg$c26 = function(u) { return `['Paren',${u}]`; },
+      peg$c27 = "{",
+      peg$c28 = peg$literalExpectation("{", false),
+      peg$c29 = "}",
+      peg$c30 = peg$literalExpectation("}", false),
+      peg$c31 = function(u) { return `['Brace',${u}]`; },
+      peg$c32 = function(f, head, v) { return v; },
+      peg$c33 = function(f, head, tail) { return [head].concat(tail); },
+      peg$c34 = function(f, args) { return funcn(f,args) },
+      peg$c35 = function(head, v) { return v; },
+      peg$c36 = function(head, tail) { return [head].concat(tail); },
+      peg$c37 = function(vals) { return vals !== null ? `['Vec',${vals}]` : `['Vec',${[]}]`; },
+      peg$c38 = function(head, tail) {  return [head].concat(tail); },
+      peg$c39 = function(vecs) { return vecs !== null ? `['Mat',${vecs}]` : `['Mat',${[[]]}]`; },
+      peg$c40 = /^[0-9]/,
+      peg$c41 = peg$classExpectation([["0", "9"]], false, false),
+      peg$c42 = ".",
+      peg$c43 = peg$literalExpectation(".", false),
+      peg$c44 = function(float) { let d = parseFloat(float.join("")); return `${d}`; },
+      peg$c45 = function(digits) { let n = parseInt(digits.join(""), 10); return `${n}`; },
+      peg$c46 = "lim",
+      peg$c47 = peg$literalExpectation("lim", false),
+      peg$c48 = "sum",
+      peg$c49 = peg$literalExpectation("sum", false),
+      peg$c50 = "int",
+      peg$c51 = peg$literalExpectation("int", false),
+      peg$c52 = "prod",
+      peg$c53 = peg$literalExpectation("prod", false),
+      peg$c54 = function(string) { return `'${string}'`; },
+      peg$c55 = "_",
+      peg$c56 = peg$literalExpectation("_", false),
+      peg$c57 = /^[_~]/,
+      peg$c58 = peg$classExpectation(["_", "~"], false, false),
+      peg$c59 = "^",
+      peg$c60 = peg$literalExpectation("^", false),
+      peg$c61 = /^[\^~]/,
+      peg$c62 = peg$classExpectation(["^", "~"], false, false),
+      peg$c63 = "~",
+      peg$c64 = peg$literalExpectation("~", false),
+      peg$c65 = "[",
+      peg$c66 = peg$literalExpectation("[", false),
+      peg$c67 = "]",
+      peg$c68 = peg$literalExpectation("]", false),
+      peg$c69 = "[[",
+      peg$c70 = peg$literalExpectation("[[", false),
+      peg$c71 = ",",
+      peg$c72 = peg$literalExpectation(",", false),
+      peg$c73 = /^[a-zA-Z]/,
+      peg$c74 = peg$classExpectation([["a", "z"], ["A", "Z"]], false, false),
+      peg$c75 = function(string) { return string.join("") },
+      peg$c76 = /^[ ]/,
+      peg$c77 = peg$classExpectation([" "], false, false),
+
+      peg$currPos          = 0,
+      peg$posDetailsCache  = [{ line: 1, column: 1 }],
+      peg$maxFailPos       = 0,
+      peg$maxFailExpected  = [],
+      peg$silentFails      = 0,
+
+      peg$result;
+
+  if ("startRule" in options) {
+    if (!(options.startRule in peg$startRuleFunctions)) {
+      throw new Error("Can't start parsing from rule \"" + options.startRule + "\".");
+    }
+
+    peg$startRuleFunction = peg$startRuleFunctions[options.startRule];
+  }
+
+  function peg$literalExpectation(text, ignoreCase) {
+    return { type: "literal", text: text, ignoreCase: ignoreCase };
+  }
+
+  function peg$classExpectation(parts, inverted, ignoreCase) {
+    return { type: "class", parts: parts, inverted: inverted, ignoreCase: ignoreCase };
+  }
+
+  function peg$endExpectation() {
+    return { type: "end" };
+  }
+
+  function peg$computePosDetails(pos) {
+    var details = peg$posDetailsCache[pos], p;
+
+    if (details) {
+      return details;
+    } else {
+      p = pos - 1;
+      while (!peg$posDetailsCache[p]) {
+        p--;
+      }
+
+      details = peg$posDetailsCache[p];
+      details = {
+        line:   details.line,
+        column: details.column
+      };
+
+      while (p < pos) {
+        if (input.charCodeAt(p) === 10) {
+          details.line++;
+          details.column = 1;
+        } else {
+          details.column++;
+        }
+
+        p++;
+      }
+
+      peg$posDetailsCache[pos] = details;
+      return details;
+    }
+  }
+
+  function peg$computeLocation(startPos, endPos) {
+    var startPosDetails = peg$computePosDetails(startPos),
+        endPosDetails   = peg$computePosDetails(endPos);
+
+    return {
+      start: {
+        offset: startPos,
+        line:   startPosDetails.line,
+        column: startPosDetails.column
+      },
+      end: {
+        offset: endPos,
+        line:   endPosDetails.line,
+        column: endPosDetails.column
+      }
+    };
+  }
+
+  function peg$fail(expected) {
+    if (peg$currPos < peg$maxFailPos) { return; }
+
+    if (peg$currPos > peg$maxFailPos) {
+      peg$maxFailPos = peg$currPos;
+      peg$maxFailExpected = [];
+    }
+
+    peg$maxFailExpected.push(expected);
+  }
+
+  function peg$buildStructuredError(expected, found, location) {
+    return new peg$SyntaxError(
+      peg$SyntaxError.buildMessage(expected, found),
+      expected,
+      found,
+      location
+    );
+  }
+
+  function peg$parsestart() {
+    var s0;
+
+    s0 = peg$parseTilde();
+
+    return s0;
+  }
+
+  function peg$parseTilde() {
+    var s0, s1, s2;
+
+    s0 = peg$currPos;
+    s1 = peg$parsetilde();
+    if (s1 !== peg$FAILED) {
+      s2 = peg$parseTilde();
+      if (s2 !== peg$FAILED) {
+        s1 = peg$c0(s2);
+        s0 = s1;
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+    if (s0 === peg$FAILED) {
+      s0 = peg$parseEqu();
+    }
+
+    return s0;
+  }
+
+  function peg$parseEqu() {
+    var s0, s1, s2, s3, s4;
+
+    s0 = peg$currPos;
+    s1 = peg$parseAdd();
+    if (s1 !== peg$FAILED) {
+      if (input.charCodeAt(peg$currPos) === 61) {
+        s2 = peg$c1;
+        peg$currPos++;
+      } else {
+        s2 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c2); }
+      }
+      if (s2 !== peg$FAILED) {
+        s3 = peg$parsews();
+        if (s3 !== peg$FAILED) {
+          s4 = peg$parseEqu();
+          if (s4 !== peg$FAILED) {
+            s1 = peg$c3(s1, s4);
+            s0 = s1;
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+    if (s0 === peg$FAILED) {
+      s0 = peg$parseAdd();
+    }
+
+    return s0;
+  }
+
+  function peg$parseAdd() {
+    var s0, s1, s2, s3, s4;
+
+    s0 = peg$currPos;
+    s1 = peg$parseSub();
+    if (s1 !== peg$FAILED) {
+      if (input.charCodeAt(peg$currPos) === 43) {
+        s2 = peg$c4;
+        peg$currPos++;
+      } else {
+        s2 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c5); }
+      }
+      if (s2 !== peg$FAILED) {
+        s3 = peg$parsews();
+        if (s3 !== peg$FAILED) {
+          s4 = peg$parseAdd();
+          if (s4 !== peg$FAILED) {
+            s1 = peg$c6(s1, s4);
+            s0 = s1;
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+    if (s0 === peg$FAILED) {
+      s0 = peg$parseSub();
+    }
+
+    return s0;
+  }
+
+  function peg$parseSub() {
+    var s0, s1, s2, s3, s4;
+
+    s0 = peg$currPos;
+    s1 = peg$parseMul();
+    if (s1 !== peg$FAILED) {
+      if (input.charCodeAt(peg$currPos) === 45) {
+        s2 = peg$c7;
+        peg$currPos++;
+      } else {
+        s2 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c8); }
+      }
+      if (s2 !== peg$FAILED) {
+        s3 = peg$parsews();
+        if (s3 !== peg$FAILED) {
+          s4 = peg$parseSub();
+          if (s4 !== peg$FAILED) {
+            s1 = peg$c9(s1, s4);
+            s0 = s1;
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+    if (s0 === peg$FAILED) {
+      s0 = peg$parseMul();
+    }
+
+    return s0;
+  }
+
+  function peg$parseMul() {
+    var s0, s1, s2, s3, s4;
+
+    s0 = peg$currPos;
+    s1 = peg$parseDiv();
+    if (s1 !== peg$FAILED) {
+      if (input.charCodeAt(peg$currPos) === 42) {
+        s2 = peg$c10;
+        peg$currPos++;
+      } else {
+        s2 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c11); }
+      }
+      if (s2 !== peg$FAILED) {
+        s3 = peg$parsews();
+        if (s3 !== peg$FAILED) {
+          s4 = peg$parseMul();
+          if (s4 !== peg$FAILED) {
+            s1 = peg$c12(s1, s4);
+            s0 = s1;
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+    if (s0 === peg$FAILED) {
+      s0 = peg$parseDiv();
+    }
+
+    return s0;
+  }
+
+  function peg$parseDiv() {
+    var s0, s1, s2, s3, s4;
+
+    s0 = peg$currPos;
+    s1 = peg$parsePow();
+    if (s1 !== peg$FAILED) {
+      if (input.charCodeAt(peg$currPos) === 47) {
+        s2 = peg$c13;
+        peg$currPos++;
+      } else {
+        s2 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c14); }
+      }
+      if (s2 !== peg$FAILED) {
+        s3 = peg$parsews();
+        if (s3 !== peg$FAILED) {
+          s4 = peg$parseDiv();
+          if (s4 !== peg$FAILED) {
+            s1 = peg$c15(s1, s4);
+            s0 = s1;
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+    if (s0 === peg$FAILED) {
+      s0 = peg$parsePow();
+    }
+
+    return s0;
+  }
+
+  function peg$parsePow() {
+    var s0, s1, s2, s3;
+
+    s0 = peg$currPos;
+    s1 = peg$parseSus();
+    if (s1 !== peg$FAILED) {
+      s2 = peg$parsepower();
+      if (s2 !== peg$FAILED) {
+        s3 = peg$parsePow();
+        if (s3 !== peg$FAILED) {
+          s1 = peg$c16(s1, s3);
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+    if (s0 === peg$FAILED) {
+      s0 = peg$parseSus();
+    }
+
+    return s0;
+  }
+
+  function peg$parseSus() {
+    var s0, s1, s2, s3;
+
+    s0 = peg$currPos;
+    s1 = peg$parseNeg();
+    if (s1 !== peg$FAILED) {
+      s2 = peg$parseunder();
+      if (s2 !== peg$FAILED) {
+        s3 = peg$parseSus();
+        if (s3 !== peg$FAILED) {
+          s1 = peg$c17(s1, s3);
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+    if (s0 === peg$FAILED) {
+      s0 = peg$parseNeg();
+    }
+
+    return s0;
+  }
+
+  function peg$parseNeg() {
+    var s0, s1, s2;
+
+    s0 = peg$currPos;
+    if (input.charCodeAt(peg$currPos) === 45) {
+      s1 = peg$c7;
+      peg$currPos++;
+    } else {
+      s1 = peg$FAILED;
+      if (peg$silentFails === 0) { peg$fail(peg$c8); }
+    }
+    if (s1 !== peg$FAILED) {
+      s2 = peg$parseNeg();
+      if (s2 !== peg$FAILED) {
+        s1 = peg$c18(s2);
+        s0 = s1;
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+    if (s0 === peg$FAILED) {
+      s0 = peg$parseLower();
+    }
+
+    return s0;
+  }
+
+  function peg$parseLower() {
+    var s0, s1, s2;
+
+    s0 = peg$currPos;
+    s1 = peg$parselower();
+    if (s1 !== peg$FAILED) {
+      s2 = peg$parseLower();
+      if (s2 !== peg$FAILED) {
+        s1 = peg$c0(s2);
+        s0 = s1;
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+    if (s0 === peg$FAILED) {
+      s0 = peg$parseUpper();
+    }
+
+    return s0;
+  }
+
+  function peg$parseUpper() {
+    var s0, s1, s2;
+
+    s0 = peg$currPos;
+    s1 = peg$parseupper();
+    if (s1 !== peg$FAILED) {
+      s2 = peg$parseUpper();
+      if (s2 !== peg$FAILED) {
+        s1 = peg$c0(s2);
+        s0 = s1;
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+    if (s0 === peg$FAILED) {
+      s0 = peg$parseSum();
+    }
+
+    return s0;
+  }
+
+  function peg$parseSum() {
+    var s0, s1, s2, s3, s4;
+
+    s0 = peg$currPos;
+    s1 = peg$parseKey();
+    if (s1 !== peg$FAILED) {
+      s2 = peg$parseLower();
+      if (s2 !== peg$FAILED) {
+        s3 = peg$parseUpper();
+        if (s3 !== peg$FAILED) {
+          s4 = peg$parseTilde();
+          if (s4 !== peg$FAILED) {
+            s1 = peg$c19(s1, s2, s3, s4);
+            s0 = s1;
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+    if (s0 === peg$FAILED) {
+      s0 = peg$parsePri();
+    }
+
+    return s0;
+  }
+
+  function peg$parsePri() {
+    var s0;
+
+    s0 = peg$parseLim();
+    if (s0 === peg$FAILED) {
+      s0 = peg$parseFun();
+      if (s0 === peg$FAILED) {
+        s0 = peg$parseParen();
+        if (s0 === peg$FAILED) {
+          s0 = peg$parseBrace();
+          if (s0 === peg$FAILED) {
+            s0 = peg$parseFunArgs();
+            if (s0 === peg$FAILED) {
+              s0 = peg$parseVec();
+              if (s0 === peg$FAILED) {
+                s0 = peg$parseMat();
+                if (s0 === peg$FAILED) {
+                  s0 = peg$parseDbl();
+                  if (s0 === peg$FAILED) {
+                    s0 = peg$parseNum();
+                    if (s0 === peg$FAILED) {
+                      s0 = peg$parseKey();
+                      if (s0 === peg$FAILED) {
+                        s0 = peg$parseVar();
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    return s0;
+  }
+
+  function peg$parseLim() {
+    var s0, s1, s2, s3;
+
+    s0 = peg$currPos;
+    s1 = peg$parseKey();
+    if (s1 !== peg$FAILED) {
+      s2 = peg$parseLower();
+      if (s2 !== peg$FAILED) {
+        s3 = peg$parseUpper();
+        if (s3 !== peg$FAILED) {
+          s1 = peg$c20(s1, s2, s3);
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parseFun() {
+    var s0, s1, s2, s3, s4, s5;
+
+    s0 = peg$currPos;
+    s1 = peg$parsestr();
+    if (s1 !== peg$FAILED) {
+      if (input.charCodeAt(peg$currPos) === 40) {
+        s2 = peg$c21;
+        peg$currPos++;
+      } else {
+        s2 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c22); }
+      }
+      if (s2 !== peg$FAILED) {
+        s3 = peg$parseTilde();
+        if (s3 !== peg$FAILED) {
+          if (input.charCodeAt(peg$currPos) === 41) {
+            s4 = peg$c23;
+            peg$currPos++;
+          } else {
+            s4 = peg$FAILED;
+            if (peg$silentFails === 0) { peg$fail(peg$c24); }
+          }
+          if (s4 !== peg$FAILED) {
+            s5 = peg$parsews();
+            if (s5 !== peg$FAILED) {
+              s1 = peg$c25(s1, s3);
+              s0 = s1;
+            } else {
+              peg$currPos = s0;
+              s0 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parseParen() {
+    var s0, s1, s2, s3, s4;
+
+    s0 = peg$currPos;
+    if (input.charCodeAt(peg$currPos) === 40) {
+      s1 = peg$c21;
+      peg$currPos++;
+    } else {
+      s1 = peg$FAILED;
+      if (peg$silentFails === 0) { peg$fail(peg$c22); }
+    }
+    if (s1 !== peg$FAILED) {
+      s2 = peg$parseTilde();
+      if (s2 !== peg$FAILED) {
+        if (input.charCodeAt(peg$currPos) === 41) {
+          s3 = peg$c23;
+          peg$currPos++;
+        } else {
+          s3 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$c24); }
+        }
+        if (s3 !== peg$FAILED) {
+          s4 = peg$parsews();
+          if (s4 !== peg$FAILED) {
+            s1 = peg$c26(s2);
+            s0 = s1;
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parseBrace() {
+    var s0, s1, s2, s3, s4;
+
+    s0 = peg$currPos;
+    if (input.charCodeAt(peg$currPos) === 123) {
+      s1 = peg$c27;
+      peg$currPos++;
+    } else {
+      s1 = peg$FAILED;
+      if (peg$silentFails === 0) { peg$fail(peg$c28); }
+    }
+    if (s1 !== peg$FAILED) {
+      s2 = peg$parseTilde();
+      if (s2 !== peg$FAILED) {
+        if (input.charCodeAt(peg$currPos) === 125) {
+          s3 = peg$c29;
+          peg$currPos++;
+        } else {
+          s3 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$c30); }
+        }
+        if (s3 !== peg$FAILED) {
+          s4 = peg$parsews();
+          if (s4 !== peg$FAILED) {
+            s1 = peg$c31(s2);
+            s0 = s1;
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parseFunArgs() {
+    var s0, s1, s2, s3, s4, s5, s6, s7, s8;
+
+    s0 = peg$currPos;
+    s1 = peg$parsestr();
+    if (s1 !== peg$FAILED) {
+      s2 = peg$parsebegArgs();
+      if (s2 !== peg$FAILED) {
+        s3 = peg$currPos;
+        s4 = peg$parseTilde();
+        if (s4 !== peg$FAILED) {
+          s5 = [];
+          s6 = peg$currPos;
+          s7 = peg$parsecomma();
+          if (s7 !== peg$FAILED) {
+            s8 = peg$parseTilde();
+            if (s8 !== peg$FAILED) {
+              s7 = peg$c32(s1, s4, s8);
+              s6 = s7;
+            } else {
+              peg$currPos = s6;
+              s6 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s6;
+            s6 = peg$FAILED;
+          }
+          while (s6 !== peg$FAILED) {
+            s5.push(s6);
+            s6 = peg$currPos;
+            s7 = peg$parsecomma();
+            if (s7 !== peg$FAILED) {
+              s8 = peg$parseTilde();
+              if (s8 !== peg$FAILED) {
+                s7 = peg$c32(s1, s4, s8);
+                s6 = s7;
+              } else {
+                peg$currPos = s6;
+                s6 = peg$FAILED;
+              }
+            } else {
+              peg$currPos = s6;
+              s6 = peg$FAILED;
+            }
+          }
+          if (s5 !== peg$FAILED) {
+            s4 = peg$c33(s1, s4, s5);
+            s3 = s4;
+          } else {
+            peg$currPos = s3;
+            s3 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s3;
+          s3 = peg$FAILED;
+        }
+        if (s3 === peg$FAILED) {
+          s3 = null;
+        }
+        if (s3 !== peg$FAILED) {
+          s4 = peg$parseendArgs();
+          if (s4 !== peg$FAILED) {
+            s1 = peg$c34(s1, s3);
+            s0 = s1;
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parseVec() {
+    var s0, s1, s2, s3, s4, s5, s6, s7;
+
+    s0 = peg$currPos;
+    s1 = peg$parsebegVec();
+    if (s1 !== peg$FAILED) {
+      s2 = peg$currPos;
+      s3 = peg$parseTilde();
+      if (s3 !== peg$FAILED) {
+        s4 = [];
+        s5 = peg$currPos;
+        s6 = peg$parsecomma();
+        if (s6 !== peg$FAILED) {
+          s7 = peg$parseTilde();
+          if (s7 !== peg$FAILED) {
+            s6 = peg$c35(s3, s7);
+            s5 = s6;
+          } else {
+            peg$currPos = s5;
+            s5 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s5;
+          s5 = peg$FAILED;
+        }
+        while (s5 !== peg$FAILED) {
+          s4.push(s5);
+          s5 = peg$currPos;
+          s6 = peg$parsecomma();
+          if (s6 !== peg$FAILED) {
+            s7 = peg$parseTilde();
+            if (s7 !== peg$FAILED) {
+              s6 = peg$c35(s3, s7);
+              s5 = s6;
+            } else {
+              peg$currPos = s5;
+              s5 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s5;
+            s5 = peg$FAILED;
+          }
+        }
+        if (s4 !== peg$FAILED) {
+          s3 = peg$c36(s3, s4);
+          s2 = s3;
+        } else {
+          peg$currPos = s2;
+          s2 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s2;
+        s2 = peg$FAILED;
+      }
+      if (s2 === peg$FAILED) {
+        s2 = null;
+      }
+      if (s2 !== peg$FAILED) {
+        s3 = peg$parseendVec();
+        if (s3 !== peg$FAILED) {
+          s1 = peg$c37(s2);
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parseMec() {
+    var s0, s1, s2, s3, s4, s5, s6;
+
+    s0 = peg$currPos;
+    s1 = peg$currPos;
+    s2 = peg$parseTilde();
+    if (s2 !== peg$FAILED) {
+      s3 = [];
+      s4 = peg$currPos;
+      s5 = peg$parsecomma();
+      if (s5 !== peg$FAILED) {
+        s6 = peg$parseTilde();
+        if (s6 !== peg$FAILED) {
+          s5 = peg$c35(s2, s6);
+          s4 = s5;
+        } else {
+          peg$currPos = s4;
+          s4 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s4;
+        s4 = peg$FAILED;
+      }
+      while (s4 !== peg$FAILED) {
+        s3.push(s4);
+        s4 = peg$currPos;
+        s5 = peg$parsecomma();
+        if (s5 !== peg$FAILED) {
+          s6 = peg$parseTilde();
+          if (s6 !== peg$FAILED) {
+            s5 = peg$c35(s2, s6);
+            s4 = s5;
+          } else {
+            peg$currPos = s4;
+            s4 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s4;
+          s4 = peg$FAILED;
+        }
+      }
+      if (s3 !== peg$FAILED) {
+        s2 = peg$c38(s2, s3);
+        s1 = s2;
+      } else {
+        peg$currPos = s1;
+        s1 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s1;
+      s1 = peg$FAILED;
+    }
+    if (s1 === peg$FAILED) {
+      s1 = null;
+    }
+    if (s1 !== peg$FAILED) {
+      s2 = peg$parseendVec();
+      if (s2 !== peg$FAILED) {
+        s1 = peg$c37(s1);
+        s0 = s1;
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parseMat() {
+    var s0, s1, s2, s3, s4, s5, s6, s7;
+
+    s0 = peg$currPos;
+    s1 = peg$parsebegMat();
+    if (s1 !== peg$FAILED) {
+      s2 = peg$currPos;
+      s3 = peg$parseMec();
+      if (s3 !== peg$FAILED) {
+        s4 = [];
+        s5 = peg$currPos;
+        s6 = peg$parsecomma();
+        if (s6 !== peg$FAILED) {
+          s7 = peg$parseVec();
+          if (s7 !== peg$FAILED) {
+            s6 = peg$c35(s3, s7);
+            s5 = s6;
+          } else {
+            peg$currPos = s5;
+            s5 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s5;
+          s5 = peg$FAILED;
+        }
+        while (s5 !== peg$FAILED) {
+          s4.push(s5);
+          s5 = peg$currPos;
+          s6 = peg$parsecomma();
+          if (s6 !== peg$FAILED) {
+            s7 = peg$parseVec();
+            if (s7 !== peg$FAILED) {
+              s6 = peg$c35(s3, s7);
+              s5 = s6;
+            } else {
+              peg$currPos = s5;
+              s5 = peg$FAILED;
+            }
+          } else {
+            peg$currPos = s5;
+            s5 = peg$FAILED;
+          }
+        }
+        if (s4 !== peg$FAILED) {
+          s3 = peg$c36(s3, s4);
+          s2 = s3;
+        } else {
+          peg$currPos = s2;
+          s2 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s2;
+        s2 = peg$FAILED;
+      }
+      if (s2 === peg$FAILED) {
+        s2 = null;
+      }
+      if (s2 !== peg$FAILED) {
+        s3 = peg$parseendVec();
+        if (s3 !== peg$FAILED) {
+          s1 = peg$c39(s2);
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parseDbl() {
+    var s0, s1, s2, s3, s4, s5;
+
+    s0 = peg$currPos;
+    s1 = peg$currPos;
+    s2 = [];
+    if (peg$c40.test(input.charAt(peg$currPos))) {
+      s3 = input.charAt(peg$currPos);
+      peg$currPos++;
+    } else {
+      s3 = peg$FAILED;
+      if (peg$silentFails === 0) { peg$fail(peg$c41); }
+    }
+    while (s3 !== peg$FAILED) {
+      s2.push(s3);
+      if (peg$c40.test(input.charAt(peg$currPos))) {
+        s3 = input.charAt(peg$currPos);
+        peg$currPos++;
+      } else {
+        s3 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c41); }
+      }
+    }
+    if (s2 !== peg$FAILED) {
+      if (input.charCodeAt(peg$currPos) === 46) {
+        s3 = peg$c42;
+        peg$currPos++;
+      } else {
+        s3 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c43); }
+      }
+      if (s3 !== peg$FAILED) {
+        s4 = [];
+        if (peg$c40.test(input.charAt(peg$currPos))) {
+          s5 = input.charAt(peg$currPos);
+          peg$currPos++;
+        } else {
+          s5 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$c41); }
+        }
+        if (s5 !== peg$FAILED) {
+          while (s5 !== peg$FAILED) {
+            s4.push(s5);
+            if (peg$c40.test(input.charAt(peg$currPos))) {
+              s5 = input.charAt(peg$currPos);
+              peg$currPos++;
+            } else {
+              s5 = peg$FAILED;
+              if (peg$silentFails === 0) { peg$fail(peg$c41); }
+            }
+          }
+        } else {
+          s4 = peg$FAILED;
+        }
+        if (s4 !== peg$FAILED) {
+          s2 = [s2, s3, s4];
+          s1 = s2;
+        } else {
+          peg$currPos = s1;
+          s1 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s1;
+        s1 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s1;
+      s1 = peg$FAILED;
+    }
+    if (s1 !== peg$FAILED) {
+      s2 = peg$parsews();
+      if (s2 !== peg$FAILED) {
+        s1 = peg$c44(s1);
+        s0 = s1;
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parseNum() {
+    var s0, s1, s2;
+
+    s0 = peg$currPos;
+    s1 = [];
+    if (peg$c40.test(input.charAt(peg$currPos))) {
+      s2 = input.charAt(peg$currPos);
+      peg$currPos++;
+    } else {
+      s2 = peg$FAILED;
+      if (peg$silentFails === 0) { peg$fail(peg$c41); }
+    }
+    if (s2 !== peg$FAILED) {
+      while (s2 !== peg$FAILED) {
+        s1.push(s2);
+        if (peg$c40.test(input.charAt(peg$currPos))) {
+          s2 = input.charAt(peg$currPos);
+          peg$currPos++;
+        } else {
+          s2 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$c41); }
+        }
+      }
+    } else {
+      s1 = peg$FAILED;
+    }
+    if (s1 !== peg$FAILED) {
+      s2 = peg$parsews();
+      if (s2 !== peg$FAILED) {
+        s1 = peg$c45(s1);
+        s0 = s1;
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parseKey() {
+    var s0;
+
+    if (input.substr(peg$currPos, 3) === peg$c46) {
+      s0 = peg$c46;
+      peg$currPos += 3;
+    } else {
+      s0 = peg$FAILED;
+      if (peg$silentFails === 0) { peg$fail(peg$c47); }
+    }
+    if (s0 === peg$FAILED) {
+      if (input.substr(peg$currPos, 3) === peg$c48) {
+        s0 = peg$c48;
+        peg$currPos += 3;
+      } else {
+        s0 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c49); }
+      }
+      if (s0 === peg$FAILED) {
+        if (input.substr(peg$currPos, 3) === peg$c50) {
+          s0 = peg$c50;
+          peg$currPos += 3;
+        } else {
+          s0 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$c51); }
+        }
+        if (s0 === peg$FAILED) {
+          if (input.substr(peg$currPos, 4) === peg$c52) {
+            s0 = peg$c52;
+            peg$currPos += 4;
+          } else {
+            s0 = peg$FAILED;
+            if (peg$silentFails === 0) { peg$fail(peg$c53); }
+          }
+        }
+      }
+    }
+
+    return s0;
+  }
+
+  function peg$parseVar() {
+    var s0, s1, s2;
+
+    s0 = peg$currPos;
+    s1 = peg$parsestr();
+    if (s1 !== peg$FAILED) {
+      s2 = peg$parsews();
+      if (s2 !== peg$FAILED) {
+        s1 = peg$c54(s1);
+        s0 = s1;
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parseunder() {
+    var s0, s1, s2, s3;
+
+    s0 = peg$currPos;
+    if (input.charCodeAt(peg$currPos) === 95) {
+      s1 = peg$c55;
+      peg$currPos++;
+    } else {
+      s1 = peg$FAILED;
+      if (peg$silentFails === 0) { peg$fail(peg$c56); }
+    }
+    if (s1 !== peg$FAILED) {
+      s2 = peg$currPos;
+      peg$silentFails++;
+      if (peg$c57.test(input.charAt(peg$currPos))) {
+        s3 = input.charAt(peg$currPos);
+        peg$currPos++;
+      } else {
+        s3 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c58); }
+      }
+      peg$silentFails--;
+      if (s3 === peg$FAILED) {
+        s2 = void 0;
+      } else {
+        peg$currPos = s2;
+        s2 = peg$FAILED;
+      }
+      if (s2 !== peg$FAILED) {
+        s1 = [s1, s2];
+        s0 = s1;
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parsepower() {
+    var s0, s1, s2, s3;
+
+    s0 = peg$currPos;
+    if (input.charCodeAt(peg$currPos) === 94) {
+      s1 = peg$c59;
+      peg$currPos++;
+    } else {
+      s1 = peg$FAILED;
+      if (peg$silentFails === 0) { peg$fail(peg$c60); }
+    }
+    if (s1 !== peg$FAILED) {
+      s2 = peg$currPos;
+      peg$silentFails++;
+      if (peg$c61.test(input.charAt(peg$currPos))) {
+        s3 = input.charAt(peg$currPos);
+        peg$currPos++;
+      } else {
+        s3 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c62); }
+      }
+      peg$silentFails--;
+      if (s3 === peg$FAILED) {
+        s2 = void 0;
+      } else {
+        peg$currPos = s2;
+        s2 = peg$FAILED;
+      }
+      if (s2 !== peg$FAILED) {
+        s1 = [s1, s2];
+        s0 = s1;
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parselower() {
+    var s0;
+
+    if (input.charCodeAt(peg$currPos) === 95) {
+      s0 = peg$c55;
+      peg$currPos++;
+    } else {
+      s0 = peg$FAILED;
+      if (peg$silentFails === 0) { peg$fail(peg$c56); }
+    }
+
+    return s0;
+  }
+
+  function peg$parseupper() {
+    var s0;
+
+    if (input.charCodeAt(peg$currPos) === 94) {
+      s0 = peg$c59;
+      peg$currPos++;
+    } else {
+      s0 = peg$FAILED;
+      if (peg$silentFails === 0) { peg$fail(peg$c60); }
+    }
+
+    return s0;
+  }
+
+  function peg$parsetilde() {
+    var s0;
+
+    if (input.charCodeAt(peg$currPos) === 126) {
+      s0 = peg$c63;
+      peg$currPos++;
+    } else {
+      s0 = peg$FAILED;
+      if (peg$silentFails === 0) { peg$fail(peg$c64); }
+    }
+
+    return s0;
+  }
+
+  function peg$parsebegVec() {
+    var s0, s1, s2, s3, s4, s5;
+
+    s0 = peg$currPos;
+    s1 = peg$parsews();
+    if (s1 !== peg$FAILED) {
+      if (input.charCodeAt(peg$currPos) === 91) {
+        s2 = peg$c65;
+        peg$currPos++;
+      } else {
+        s2 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c66); }
+      }
+      if (s2 !== peg$FAILED) {
+        s3 = peg$parsews();
+        if (s3 !== peg$FAILED) {
+          s4 = peg$currPos;
+          peg$silentFails++;
+          if (input.charCodeAt(peg$currPos) === 91) {
+            s5 = peg$c65;
+            peg$currPos++;
+          } else {
+            s5 = peg$FAILED;
+            if (peg$silentFails === 0) { peg$fail(peg$c66); }
+          }
+          peg$silentFails--;
+          if (s5 === peg$FAILED) {
+            s4 = void 0;
+          } else {
+            peg$currPos = s4;
+            s4 = peg$FAILED;
+          }
+          if (s4 !== peg$FAILED) {
+            s1 = [s1, s2, s3, s4];
+            s0 = s1;
+          } else {
+            peg$currPos = s0;
+            s0 = peg$FAILED;
+          }
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parseendVec() {
+    var s0, s1, s2, s3;
+
+    s0 = peg$currPos;
+    s1 = peg$parsews();
+    if (s1 !== peg$FAILED) {
+      if (input.charCodeAt(peg$currPos) === 93) {
+        s2 = peg$c67;
+        peg$currPos++;
+      } else {
+        s2 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c68); }
+      }
+      if (s2 !== peg$FAILED) {
+        s3 = peg$parsews();
+        if (s3 !== peg$FAILED) {
+          s1 = [s1, s2, s3];
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parsebegArgs() {
+    var s0, s1, s2, s3;
+
+    s0 = peg$currPos;
+    s1 = peg$parsews();
+    if (s1 !== peg$FAILED) {
+      if (input.charCodeAt(peg$currPos) === 40) {
+        s2 = peg$c21;
+        peg$currPos++;
+      } else {
+        s2 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c22); }
+      }
+      if (s2 !== peg$FAILED) {
+        s3 = peg$parsews();
+        if (s3 !== peg$FAILED) {
+          s1 = [s1, s2, s3];
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parseendArgs() {
+    var s0, s1, s2, s3;
+
+    s0 = peg$currPos;
+    s1 = peg$parsews();
+    if (s1 !== peg$FAILED) {
+      if (input.charCodeAt(peg$currPos) === 41) {
+        s2 = peg$c23;
+        peg$currPos++;
+      } else {
+        s2 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c24); }
+      }
+      if (s2 !== peg$FAILED) {
+        s3 = peg$parsews();
+        if (s3 !== peg$FAILED) {
+          s1 = [s1, s2, s3];
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parsebegMat() {
+    var s0, s1, s2;
+
+    s0 = peg$currPos;
+    s1 = peg$parsews();
+    if (s1 !== peg$FAILED) {
+      if (input.substr(peg$currPos, 2) === peg$c69) {
+        s2 = peg$c69;
+        peg$currPos += 2;
+      } else {
+        s2 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c70); }
+      }
+      if (s2 !== peg$FAILED) {
+        s1 = [s1, s2];
+        s0 = s1;
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parsecomma() {
+    var s0, s1, s2, s3;
+
+    s0 = peg$currPos;
+    s1 = peg$parsews();
+    if (s1 !== peg$FAILED) {
+      if (input.charCodeAt(peg$currPos) === 44) {
+        s2 = peg$c71;
+        peg$currPos++;
+      } else {
+        s2 = peg$FAILED;
+        if (peg$silentFails === 0) { peg$fail(peg$c72); }
+      }
+      if (s2 !== peg$FAILED) {
+        s3 = peg$parsews();
+        if (s3 !== peg$FAILED) {
+          s1 = [s1, s2, s3];
+          s0 = s1;
+        } else {
+          peg$currPos = s0;
+          s0 = peg$FAILED;
+        }
+      } else {
+        peg$currPos = s0;
+        s0 = peg$FAILED;
+      }
+    } else {
+      peg$currPos = s0;
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parsestr() {
+    var s0, s1, s2;
+
+    s0 = peg$currPos;
+    s1 = [];
+    if (peg$c73.test(input.charAt(peg$currPos))) {
+      s2 = input.charAt(peg$currPos);
+      peg$currPos++;
+    } else {
+      s2 = peg$FAILED;
+      if (peg$silentFails === 0) { peg$fail(peg$c74); }
+    }
+    if (s2 !== peg$FAILED) {
+      while (s2 !== peg$FAILED) {
+        s1.push(s2);
+        if (peg$c73.test(input.charAt(peg$currPos))) {
+          s2 = input.charAt(peg$currPos);
+          peg$currPos++;
+        } else {
+          s2 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$c74); }
+        }
+      }
+    } else {
+      s1 = peg$FAILED;
+    }
+    if (s1 !== peg$FAILED) {
+      s1 = peg$c75(s1);
+    }
+    s0 = s1;
+
+    return s0;
+  }
+
+  function peg$parsesp() {
+    var s0, s1;
+
+    s0 = [];
+    if (peg$c76.test(input.charAt(peg$currPos))) {
+      s1 = input.charAt(peg$currPos);
+      peg$currPos++;
+    } else {
+      s1 = peg$FAILED;
+      if (peg$silentFails === 0) { peg$fail(peg$c77); }
+    }
+    if (s1 !== peg$FAILED) {
+      while (s1 !== peg$FAILED) {
+        s0.push(s1);
+        if (peg$c76.test(input.charAt(peg$currPos))) {
+          s1 = input.charAt(peg$currPos);
+          peg$currPos++;
+        } else {
+          s1 = peg$FAILED;
+          if (peg$silentFails === 0) { peg$fail(peg$c77); }
+        }
+      }
+    } else {
+      s0 = peg$FAILED;
+    }
+
+    return s0;
+  }
+
+  function peg$parsews() {
+    var s0;
+
+    s0 = peg$parsesp();
+    if (s0 === peg$FAILED) {
+      s0 = null;
+    }
+
+    return s0;
+  }
+
+                                              // "d" is for Dif
+    let funcs1 = ["sin","cos","tan","sec","csc","cot","arcsin","arccos","arctan","e","log","ln","int","d"];
+
+    let funcs2 = ["root","lim"];
+
+    let funcs3 = ["sum","prod","defint"];
+
+    function toAdt( f ) {
+      return "'" + f.charAt(0).toUpperCase() + f.substring(1) + "'"; }
+
+    function func1( f, u ) {
+      return funcs1.includes(f) ? `[${toAdt(f)},${u}]` :           `['Fun','${f}',${u}]`; }
+
+    function func2( f, u, v ) {
+      return funcs2.includes(f) ? `[${toAdt(f)},${u},${v}]` :      `['Fun','${f}',${u},${v}]`; }
+
+    function func3( f, u, v, w ) {
+      return funcs3.includes(f) ? `[${toAdt(f)},${u},${v},${w}]` : `['Fun','${f}',${u},${v},${w}]`; }
+
+    function funcn( f, ...args ) {
+      ret = `[${toAdt(f)}`;
+      for( i = 0; i < args.length; i++ ) {
+        ret += ',' + args[i]; }
+      ret += ']';
+      return ret;
+    }
+
+
+  peg$result = peg$startRuleFunction();
+
+  if (peg$result !== peg$FAILED && peg$currPos === input.length) {
+    return peg$result;
+  } else {
+    if (peg$result !== peg$FAILED && peg$currPos < input.length) {
+      peg$fail(peg$endExpectation());
+    }
+
+    throw peg$buildStructuredError(
+      peg$maxFailExpected,
+      peg$maxFailPos < input.length ? input.charAt(peg$maxFailPos) : null,
+      peg$maxFailPos < input.length
+        ? peg$computeLocation(peg$maxFailPos, peg$maxFailPos + 1)
+        : peg$computeLocation(peg$maxFailPos, peg$maxFailPos)
+    );
+  }
+}
+
+let Ascii = { parse:peg$parse, error:peg$SyntaxError };
+
+var MathML;
+
+//let Ascii = { parse:peg$parse, error:peg$SyntaxError };
+//export default Ascii;
+MathML = class MathML {
+  constructor() {
+    this.key = "";
+    this.math = {};
+    this.ptns = this.doPtns();
+  }
+
+  doParse(asc, key) {
+    var asa, e, err, par;
+    par = "X";
+    asa = [];
+    err = {};
+    try {
+      par = Ascii.parse(asc);
+      try {
+        // console.log( 'MathML.doParse() par', par )
+        asa = eval(par);
+        // console.log( 'MathML.doParse() asa', asa )
+        this.markup(asa, key);
+      } catch (error) {
+        e = error;
+        console.error('MathML.doParse() eval  error', key, e);
+      }
+    } catch (error) {
+      e = error;
+      err.found = e.found;
+      err.msg = e.message;
+      err.loc = e.location;
+      console.error('MathML.doParse() parse error', {
+        key: key,
+        ascii: asc,
+        error: err
+      });
+    }
+  }
+
+  markup(asa, key) {
+    this.key = key;
+    this.math[this.key] = "";
+    //head()
+    this.app("<math>");
+    this.exp(asa);
+    this.app("</math>"); // ,"</root>"
+  }
+
+  // console.log( 'MathML.markup()', @math[@key] )
+  head() {
+    return this.math[this.key] += "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\">\n<?xml-stylesheet type=\"text/css\" href=\"MathML.css\">\n<root xmlns=\"http://www.w3.org/1998/Math/MathML\">";
+  }
+
+  app(...args) {
+    var arg, i, len;
+    for (i = 0, len = args.length; i < len; i++) {
+      arg = args[i];
+      this.math[this.key] += arg;
+    }
+  }
+
+  beg(t) {
+    this.math[this.key] += `<${t}>`;
+  }
+
+  end(t) {
+    this.math[this.key] += `</${t}>`;
+  }
+
+  tag(t, v) {
+    this.math[this.key] += `<${t}>${v.toString()}</${t}>`;
+  }
+
+  bin(t, u, op, v) {
+    this.beg(t);
+    this.exp(u);
+    this.beg('mo');
+    this.app(op);
+    this.end('mo');
+    this.exp(v);
+    this.end(t);
+  }
+
+  uni(op, u) {
+    this.beg('mrow');
+    this.beg('mo');
+    this.app(op);
+    this.end('mo');
+    this.exp(u);
+    this.end('mrow');
+  }
+
+  sur(bop, u, eop) {
+    this.beg('mo');
+    this.app(bop);
+    this.end('mo');
+    this.exp(u);
+    this.beg('mo');
+    this.app(eop);
+    this.end('mo');
+  }
+
+  tuv(t, u, v) {
+    this.beg(t);
+    this.exp(u);
+    this.exp(v);
+    this.end(t);
+  }
+
+  fun(f, u) {
+    this.beg('mrow');
+    this.tag('mi', f);
+    this.fen(u);
+    this.end('mrow');
+  }
+
+  fen(u) {
+    this.beg('mfenced');
+    this.exp(u);
+    this.end('mfenced');
+  }
+
+  vec(rest) {
+    var e, i, len;
+    this.beg("mfenced open='[' close=']'");
+// MathML takes care of commans
+    for (i = 0, len = rest.length; i < len; i++) {
+      e = rest[i];
+      this.exp(e);
+    }
+    this.end("mfenced");
+  }
+
+  unk(q) {
+    console.log('_ MathML Unknown', q);
+  }
+
+  noop(arg) {
+  }
+
+  sum(t, a, b, sym, u) {
+    this.beg(t);
+    this.tag('mo', sym);
+    this.exp(a);
+    this.exp(b);
+    this.end(t);
+    this.exp(u);
+  }
+
+  // A little off for now
+  lim(t, a, b, u) {
+    this.beg(t);
+    this.tag('mi', u);
+    this.exp(a);
+    this.exp(b);
+    this.end(t);
+  }
+
+  exp(asa) {
+    var e;
+    try {
+      // console.log( 'MathML.exp(asa)', asa )
+      match(asa, ...this.ptns);
+    } catch (error) {
+      e = error;
+      console.error('MathML.exp()', e);
+    }
+  }
+
+  doPtns() {
+    return Ptn$1.toPtns([
+      A.Equ,
+      (u,
+      v) => {
+        return this.bin('mrow',
+      u,
+      '=',
+      v);
+      },
+      A.Add,
+      (u,
+      v) => {
+        return this.bin('mrow',
+      u,
+      '+',
+      v);
+      },
+      A.Sub,
+      (u,
+      v) => {
+        return this.bin('mrow',
+      u,
+      '-',
+      v);
+      },
+      A.Mul,
+      (u,
+      v) => {
+        return this.bin('mrow',
+      u,
+      '*',
+      v);
+      },
+      A.Div,
+      (u,
+      v) => {
+        return this.tuv('mfrac',
+      u,
+      v);
+      },
+      A.Pow,
+      (u,
+      v) => {
+        return this.tuv('msup',
+      u,
+      v);
+      },
+      A.Neg,
+      (u) => {
+        return this.uni('-',
+      u);
+      },
+      A.Recip,
+      (v) => {
+        return this.tuv('mfrac',
+      1,
+      v);
+      },
+      A.Abs,
+      (u) => {
+        return this.sur('|',
+      u,
+      '|');
+      },
+      A.Paren,
+      (u) => {
+        return this.fen(u);
+      },
+      A.Brace,
+      (u) => {
+        return this.fen(u);
+      },
+      A.Ln,
+      (u) => {
+        return this.fun('ln',
+      u);
+      },
+      A.Log,
+      (u,
+      v) => {
+        return u + v;
+      },
+      A.Root,
+      (u,
+      v) => {
+        return u + v;
+      },
+      A.Sqrt,
+      (u) => {
+        return this.tag('msqrt',
+      u);
+      },
+      A.E,
+      (u) => {
+        return this.tuv('msup',
+      'e',
+      v);
+      },
+      A.Sin,
+      (u) => {
+        return this.fun('sin',
+      u);
+      },
+      A.Cos,
+      (u) => {
+        return this.fun('cot',
+      u);
+      },
+      A.Tan,
+      (u) => {
+        return this.fun('tan',
+      u);
+      },
+      A.Csc,
+      (u) => {
+        return this.fun('csc',
+      u);
+      },
+      A.Sec,
+      (u) => {
+        return this.fun('sec',
+      u);
+      },
+      A.Cot,
+      (u) => {
+        return this.fun('cot',
+      u);
+      },
+      A.Arcsin,
+      (u) => {
+        return this.fun('arcsin',
+      u);
+      },
+      A.Arccos,
+      (u) => {
+        return this.fun('arccot',
+      u);
+      },
+      A.Arctan,
+      (u) => {
+        return this.fun('arctan',
+      u);
+      },
+      A.Arccsc,
+      (u) => {
+        return this.fun('arccsc',
+      u);
+      },
+      A.Arcsec,
+      (u) => {
+        return this.fun('arcsec',
+      u);
+      },
+      A.Arccot,
+      (u) => {
+        return this.fun('arccot',
+      u);
+      },
+      A.Fun,
+      (f,
+      u) => {
+        return this.fun(f,
+      u);
+      },
+      A.D,
+      (u) => {
+        return this.uni('d',
+      u);
+      },
+      A.Int,
+      (u) => {
+        return this.uni('\u222B',
+      u);
+      },
+      A.DefInt,
+      (a,
+      b,
+      u) => {
+        return this.sum('msubsup',
+      a,
+      b,
+      '\u222B',
+      u);
+      },
+      A.Sum,
+      (a,
+      b,
+      u) => {
+        return this.sum('munderover',
+      a,
+      b,
+      '\u2211',
+      u);
+      },
+      A.Sus,
+      (u,
+      v) => {
+        return this.tuv('msub',
+      u,
+      v);
+      },
+      A.Lim,
+      (a,
+      b) => {
+        return this.lim('msubsup',
+      a,
+      b,
+      'lim');
+      },
+      A.Ratio,
+      (u,
+      v) => {
+        return this.tuv('mfrac',
+      u,
+      v);
+      },
+      A.Vec,
+      (rest) => {
+        return this.vec(rest);
+      },
+      A.Mat,
+      (rest) => {
+        return this.vec(rest);
+      },
+      'String',
+      (s) => {
+        return this.tag('mi',
+      s); // Using String identifiers
+      },
+      'Number',
+      (n) => {
+        return this.tag('mn',
+      n);
+      },
+      '_',
+      (q) => {
+        return this.unk(q);
+      }
+    ]);
+  }
+
+};
+
+var MathML$1 = MathML;
+
+var Basics, Exps,
+  hasProp = {}.hasOwnProperty;
+
+Exps = {
+  Par1: {
+    asc: "(a+b)*(c^2)",
+    klass: "",
+    mathML: ""
+  },
+  Trg1: {
+    asc: "cos(x)+sin(x)",
+    klass: "",
+    mathML: ""
+  },
+  Sus1: {
+    asc: "x_1 + x_2",
+    klass: "",
+    mathML: ""
+  },
+  Mul1: {
+    asc: "(2.2+3)*(1+2)",
+    klass: "",
+    mathML: ""
+  },
+  Add2: {
+    asc: "2.2*3+4*3",
+    klass: "",
+    mathML: ""
+  },
+  Tan1: {
+    asc: "2.2*3+x*arctan(y)",
+    klass: "",
+    mathML: ""
+  },
+  Sub1: {
+    asc: "2.2*3-x^y",
+    klass: "",
+    mathML: ""
+  },
+  Equ2: {
+    asc: "2.2^3 = x/y",
+    klass: "",
+    mathML: ""
+  },
+  Sub2: {
+    asc: "-2.2 * 3-x / -y",
+    klass: "",
+    mathML: ""
+  },
+  Mul3: {
+    asc: "x*x*(a+b_1)",
+    klass: "",
+    mathML: ""
+  },
+  Sin2: {
+    asc: "a+b*sin(theta)",
+    klass: "",
+    mathML: ""
+  },
+  Fun1: {
+    asc: "fn(a+b)*g(theta)",
+    klass: "",
+    mathML: ""
+  },
+  Int1: {
+    asc: "int(x*2)",
+    klass: "",
+    mathML: ""
+  },
+  Vec1: {
+    asc: "[1,2,3]",
+    klass: "",
+    mathML: ""
+  },
+  Mat1: {
+    asc: "[[1,2,3],[4,5,6]]",
+    klass: "",
+    mathML: ""
+  },
+  Lim1: {
+    asc: "lim_i^n",
+    klass: "",
+    mathML: ""
+  },
+  Sum2: {
+    asc: "sum_i^n~j",
+    klass: "",
+    mathML: ""
+  },
+  Sum3: {
+    asc: "sum_i^n~j+1",
+    klass: "",
+    mathML: ""
+  }
+};
+
+Basics = class Basics {
+  constructor() {
+    this.mathML = new MathML$1();
+    this.ncol = 3;
+  }
+
+  doExps(exps = Exps) {
+    var exp, i, key;
+    i = 0;
+    for (key in exps) {
+      if (!hasProp.call(exps, key)) continue;
+      exp = exps[key];
+      this.doExp(key, exp, i);
+      i = i + 1;
+    }
+    return exps;
+  }
+
+  doExp(key, exp, i) {
+    var col, mod, row;
+    this.mathML.doParse(exp.asc, key);
+    exp.mathML = this.mathML.math[key];
+    mod = i % this.ncol;
+    row = (i - mod) / this.ncol + 1;
+    col = mod + 1;
+    exp.klass = `r${row}c${col}`;
+  }
+
+};
+
+// console.log( 'Basics.mathML', exp.mathML )
+var Basics$1 = Basics;
+
+//
+
+let MathML$2 = {
+
+  extends: MathND,
+
+  components:{ 'd-dabs':Dabs },
+
+  data() {
+    return { comp:'MathML', key:'MathML', exps:{}, pages:{
+        Basics: { title:'Basics', key:'Basics', klass:Basics$1, created:false }
+      } } },
+  
+  mounted: function () {
+      this.basics = new  Basics$1();
+      this.exps   = this.basics.doExps(); }
+
+};
+
+/* script */
+const __vue_script__$j = MathML$2;
+
+/* template */
+var __vue_render__$g = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { staticClass: "comp" },
+    [
+      _vm._l(_vm.exps, function(exp) {
+        return [
+          _c("div", {
+            class: exp.klass,
+            domProps: { innerHTML: _vm._s(exp.mathML) }
+          })
+        ]
+      })
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$g = [];
+__vue_render__$g._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$j = function (inject) {
+    if (!inject) return
+    inject("data-v-789286cb_0", { source: ".comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 2.5em;\n  display: grid;\n  grid-template-columns: 33% 33% 34%;\n  grid-template-rows: 11% 11% 11% 11% 11% 11% 11% 11% 12%;\n  grid-template-areas: \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\" \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\" \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .r1c1 {\n  display: grid;\n  grid-area: r1c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c2 {\n  display: grid;\n  grid-area: r1c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c3 {\n  display: grid;\n  grid-area: r1c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c1 {\n  display: grid;\n  grid-area: r2c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c2 {\n  display: grid;\n  grid-area: r2c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c3 {\n  display: grid;\n  grid-area: r2c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c1 {\n  display: grid;\n  grid-area: r3c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c2 {\n  display: grid;\n  grid-area: r3c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c3 {\n  display: grid;\n  grid-area: r3c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c1 {\n  display: grid;\n  grid-area: r4c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c2 {\n  display: grid;\n  grid-area: r4c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c3 {\n  display: grid;\n  grid-area: r4c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c1 {\n  display: grid;\n  grid-area: r5c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c2 {\n  display: grid;\n  grid-area: r5c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c3 {\n  display: grid;\n  grid-area: r5c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c1 {\n  display: grid;\n  grid-area: r6c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c2 {\n  display: grid;\n  grid-area: r6c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c3 {\n  display: grid;\n  grid-area: r6c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c1 {\n  display: grid;\n  grid-area: r7c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c2 {\n  display: grid;\n  grid-area: r7c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c3 {\n  display: grid;\n  grid-area: r7c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c1 {\n  display: grid;\n  grid-area: r8c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c2 {\n  display: grid;\n  grid-area: r8c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c3 {\n  display: grid;\n  grid-area: r8c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c1 {\n  display: grid;\n  grid-area: r9c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c2 {\n  display: grid;\n  grid-area: r9c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c3 {\n  display: grid;\n  grid-area: r9c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n", map: {"version":3,"sources":["MathML.vue","/Users/ax/Documents/prj/aug/vue/math/MathML.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,gBAAgB;EAChB,aAAa;EACb,kCAAkC;EAClC,uDAAuD;EACvD,6KAA6K;EAC7K,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;ECCjB,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,mBAAA;EACA,uBAAA;EDCE,YAAY;ECCd,wBAAA;AACA;ADCA;ECCA,aAAA;EACA,eAAA;EDCE,qBAAqB;ECCvB,mBAAA;EACA,qBAAA;EACA,mBAAA;EACA,uBAAA;EACA,YAAA;EACA,wBAAA;AACA;AACA;EACA,aAAA;EACA,eAAA;EDCE,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,wBAAwB;AAC1B","file":"MathML.vue","sourcesContent":[".comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 2.5em;\n  display: grid;\n  grid-template-columns: 33% 33% 34%;\n  grid-template-rows: 11% 11% 11% 11% 11% 11% 11% 11% 12%;\n  grid-template-areas: \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\" \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\" \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .r1c1 {\n  display: grid;\n  grid-area: r1c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c2 {\n  display: grid;\n  grid-area: r1c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c3 {\n  display: grid;\n  grid-area: r1c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c1 {\n  display: grid;\n  grid-area: r2c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c2 {\n  display: grid;\n  grid-area: r2c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c3 {\n  display: grid;\n  grid-area: r2c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c1 {\n  display: grid;\n  grid-area: r3c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c2 {\n  display: grid;\n  grid-area: r3c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c3 {\n  display: grid;\n  grid-area: r3c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c1 {\n  display: grid;\n  grid-area: r4c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c2 {\n  display: grid;\n  grid-area: r4c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c3 {\n  display: grid;\n  grid-area: r4c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c1 {\n  display: grid;\n  grid-area: r5c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c2 {\n  display: grid;\n  grid-area: r5c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c3 {\n  display: grid;\n  grid-area: r5c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c1 {\n  display: grid;\n  grid-area: r6c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c2 {\n  display: grid;\n  grid-area: r6c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c3 {\n  display: grid;\n  grid-area: r6c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c1 {\n  display: grid;\n  grid-area: r7c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c2 {\n  display: grid;\n  grid-area: r7c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c3 {\n  display: grid;\n  grid-area: r7c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c1 {\n  display: grid;\n  grid-area: r8c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c2 {\n  display: grid;\n  grid-area: r8c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c3 {\n  display: grid;\n  grid-area: r8c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c1 {\n  display: grid;\n  grid-area: r9c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c2 {\n  display: grid;\n  grid-area: r9c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c3 {\n  display: grid;\n  grid-area: r9c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n","\n\n\n<template>\n  <div class=\"comp\">\n    <template v-for=\"exp in exps\">\n      <div :class=\"exp.klass\" v-html=\"exp.mathML\"></div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import MathND  from './MathND.vue';\n  import Dabs    from '../elem/Dabs.vue';\n  import Basics  from '../../pub/math/doc/Basics.js';\n\n  let MathML = {\n\n    extends: MathND,\n\n    components:{ 'd-dabs':Dabs },\n\n    data() {\n      return { comp:'MathML', key:'MathML', exps:{}, pages:{\n          Basics: { title:'Basics', key:'Basics', klass:Basics, created:false }\n        } } },\n    \n    mounted: function () {\n        this.basics = new  Basics();\n        this.exps   = this.basics.doExps(); }\n\n  }\n  \n  export default MathML;\n\n</script>\n\n<style lang=\"less\">\n  \n  .grid9x3() { display:grid; grid-template-columns:33% 33% 34%; grid-template-rows:11% 11% 11% 11% 11% 11% 11% 11% 12%;\n    grid-template-areas:\n      \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\"\n      \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\"\n      \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\"; }\n\n  .c( @rc ) { display:grid; grid-area:@rc; justify-self:stretch; align-self:stretch;\n    justify-items:center; align-items:center; background-color:black; color:wheat; border:solid thin wheat; }\n\n  .comp { background-color:black; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:2.5em;\n    .grid9x3(); justify-items:center; align-items:center;\n\n    .r1c1{.c(r1c1)}; .r1c2{.c(r1c2)}; .r1c3{.c(r1c3)};\n    .r2c1{.c(r2c1)}; .r2c2{.c(r2c2)}; .r2c3{.c(r2c3)};\n    .r3c1{.c(r3c1)}; .r3c2{.c(r3c2)}; .r3c3{.c(r3c3)};\n    .r4c1{.c(r4c1)}; .r4c2{.c(r4c2)}; .r4c3{.c(r4c3)};\n    .r5c1{.c(r5c1)}; .r5c2{.c(r5c2)}; .r5c3{.c(r5c3)};\n    .r6c1{.c(r6c1)}; .r6c2{.c(r6c2)}; .r6c3{.c(r6c3)};\n    .r7c1{.c(r7c1)}; .r7c2{.c(r7c2)}; .r7c3{.c(r7c3)};\n    .r8c1{.c(r8c1)}; .r8c2{.c(r8c2)}; .r8c3{.c(r8c3)};\n    .r9c1{.c(r9c1)}; .r9c2{.c(r9c2)}; .r9c3{.c(r9c3)};\n  }\n  \n</style>"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$j = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$j = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$j = false;
+  /* style inject SSR */
+  
+
+  
+  var MathML$3 = normalizeComponent_1(
+    { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
+    __vue_inject_styles__$j,
+    __vue_script__$j,
+    __vue_scope_id__$j,
+    __vue_is_functional_template__$j,
+    __vue_module_identifier__$j,
+    browser,
+    undefined
+  );
+
+var Solves;
+
+Solves = class Solves {
+  constructor() {}
+
+};
+
+var Solves$1 = Solves;
+
+//
+
+var script$h = {
+
+  extends: MathND,
+
+  components:{ 'd-dabs':Dabs },
+
+  data() {
+    return { comp:'MathEQ', key:'MathEQ', pages:{
+        Solves: { title:'Solves', key:'Solves', klass:Solves$1, created:false }
+      } } },
+
+};
+
+/* script */
+const __vue_script__$k = script$h;
+
+/* template */
+
+  /* style */
+  const __vue_inject_styles__$k = undefined;
+  /* scoped */
+  const __vue_scope_id__$k = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$k = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$k = undefined;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var MathEQ = normalizeComponent_1(
+    {},
+    __vue_inject_styles__$k,
+    __vue_script__$k,
+    __vue_scope_id__$k,
+    __vue_is_functional_template__$k,
+    __vue_module_identifier__$k,
+    undefined,
+    undefined
+  );
+
+//
+
+let Geom = {
+
+  data() { return { comp:'Geom',
+    geoms:[
+      { title:'Geom2D', key:'2D' },
+      { title:'Geom3D', key:'3D' },
+      { title:'Geom4D', key:'4D' } ] } },
+
+  mounted: function () {
+    Style.size( this.$refs['Geom'] ); } // mounted is best place to get page elem size
+
+};
+
+/* script */
+const __vue_script__$l = Geom;
+
+/* template */
+var __vue_render__$h = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { ref: "Geom", staticClass: "geom" },
+    [
+      _vm.comp === "Geom" ? _c("h1", [_vm._v("Geometric Algebra")]) : _vm._e(),
+      _vm._v(" "),
+      _vm._l(_vm.geoms, function(geom) {
+        return [_c("router-view", { attrs: { name: _vm.comp + geom.key } })]
+      })
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$h = [];
+__vue_render__$h._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$l = function (inject) {
+    if (!inject) return
+    inject("data-v-323ca6aa_0", { source: ".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.geom h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Geom.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Geom.vue","sourcesContent":[".geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.geom h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$l = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$l = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$l = false;
+  /* style inject SSR */
+  
+
+  
+  var Geom$1 = normalizeComponent_1(
+    { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
+    __vue_inject_styles__$l,
+    __vue_script__$l,
+    __vue_scope_id__$l,
+    __vue_is_functional_template__$l,
+    __vue_module_identifier__$l,
+    browser,
+    undefined
+  );
+
+//
+
+var script$i = {
+
+  components:{ 'd-dabs':Dabs },
+
+  methods: {
+
+    isPage: function(key) {
+      return this.key === key; },
+
+    onTabs: function(key) {
+      if( this.pages[key] ) {
           this.key = key;
           this.create(this.key); } },
 
@@ -1705,10 +5071,10 @@ var script$g = {
   };
 
 /* script */
-const __vue_script__$i = script$g;
+const __vue_script__$m = script$i;
 
 /* template */
-var __vue_render__$f = function() {
+var __vue_render__$i = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -1741,32 +5107,32 @@ var __vue_render__$f = function() {
     2
   )
 };
-var __vue_staticRenderFns__$f = [];
-__vue_render__$f._withStripped = true;
+var __vue_staticRenderFns__$i = [];
+__vue_render__$i._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$i = function (inject) {
+  const __vue_inject_styles__$m = function (inject) {
     if (!inject) return
     inject("data-v-79174e80_0", { source: ".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n", map: {"version":3,"sources":["GeomND.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf","file":"GeomND.vue","sourcesContent":[".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$i = undefined;
+  const __vue_scope_id__$m = undefined;
   /* module identifier */
-  const __vue_module_identifier__$i = undefined;
+  const __vue_module_identifier__$m = undefined;
   /* functional template */
-  const __vue_is_functional_template__$i = false;
+  const __vue_is_functional_template__$m = false;
   /* style inject SSR */
   
 
   
   var GeomND = normalizeComponent_1(
-    { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
-    __vue_inject_styles__$i,
-    __vue_script__$i,
-    __vue_scope_id__$i,
-    __vue_is_functional_template__$i,
-    __vue_module_identifier__$i,
+    { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
+    __vue_inject_styles__$m,
+    __vue_script__$m,
+    __vue_scope_id__$m,
+    __vue_is_functional_template__$m,
+    __vue_module_identifier__$m,
     browser,
     undefined
   );
@@ -1885,7 +5251,7 @@ let Graph  = class Graph {
 
 let GA$1 = window['Algebra']; //import GA from '../../../lib/ga/ganja.esm.js';
 
-let Basics  = class Basics {
+let Basics$2  = class Basics {
 
   static ga () {
 
@@ -1930,7 +5296,7 @@ let Basics  = class Basics {
 
 //
 
-var script$h = {
+var script$j = {
 
   extends: GeomND,
 
@@ -1939,24 +5305,24 @@ var script$h = {
   data() {
     return { comp:'Geom2D', key:'Graph', pages:{
       Graph:  { title:'Graph',  key:'Graph',  klass:Graph,  created:false },
-      Basics: { title:'Basics', key:'Basics', klass:Basics, created:false }
+      Basics: { title:'Basics', key:'Basics', klass:Basics$2, created:false }
   } } },
   
 };
 
 /* script */
-const __vue_script__$j = script$h;
+const __vue_script__$n = script$j;
 
 /* template */
 
   /* style */
-  const __vue_inject_styles__$j = undefined;
+  const __vue_inject_styles__$n = undefined;
   /* scoped */
-  const __vue_scope_id__$j = undefined;
+  const __vue_scope_id__$n = undefined;
   /* module identifier */
-  const __vue_module_identifier__$j = undefined;
+  const __vue_module_identifier__$n = undefined;
   /* functional template */
-  const __vue_is_functional_template__$j = undefined;
+  const __vue_is_functional_template__$n = undefined;
   /* style inject */
   
   /* style inject SSR */
@@ -1965,11 +5331,11 @@ const __vue_script__$j = script$h;
   
   var Geom2D = normalizeComponent_1(
     {},
-    __vue_inject_styles__$j,
-    __vue_script__$j,
-    __vue_scope_id__$j,
-    __vue_is_functional_template__$j,
-    __vue_module_identifier__$j,
+    __vue_inject_styles__$n,
+    __vue_script__$n,
+    __vue_scope_id__$n,
+    __vue_is_functional_template__$n,
+    __vue_module_identifier__$n,
     undefined,
     undefined
   );
@@ -2344,7 +5710,7 @@ let Torus  = class Torus {
 
 //
 
-var script$i = {
+var script$k = {
 
   extends: GeomND,
   
@@ -2364,18 +5730,18 @@ var script$i = {
   };
 
 /* script */
-const __vue_script__$k = script$i;
+const __vue_script__$o = script$k;
 
 /* template */
 
   /* style */
-  const __vue_inject_styles__$k = undefined;
+  const __vue_inject_styles__$o = undefined;
   /* scoped */
-  const __vue_scope_id__$k = undefined;
+  const __vue_scope_id__$o = undefined;
   /* module identifier */
-  const __vue_module_identifier__$k = undefined;
+  const __vue_module_identifier__$o = undefined;
   /* functional template */
-  const __vue_is_functional_template__$k = undefined;
+  const __vue_is_functional_template__$o = undefined;
   /* style inject */
   
   /* style inject SSR */
@@ -2384,11 +5750,11 @@ const __vue_script__$k = script$i;
   
   var Geom3D = normalizeComponent_1(
     {},
-    __vue_inject_styles__$k,
-    __vue_script__$k,
-    __vue_scope_id__$k,
-    __vue_is_functional_template__$k,
-    __vue_module_identifier__$k,
+    __vue_inject_styles__$o,
+    __vue_script__$o,
+    __vue_scope_id__$o,
+    __vue_is_functional_template__$o,
+    __vue_module_identifier__$o,
     undefined,
     undefined
   );
@@ -2526,7 +5892,7 @@ let Sphere = class Sphere {
 //
 //import Conform from '../../src/gan/4D/Conform.js';
 
-  var script$j = {
+  var script$l = {
 
     extends: GeomND,
     
@@ -2542,18 +5908,18 @@ let Sphere = class Sphere {
   };
 
 /* script */
-const __vue_script__$l = script$j;
+const __vue_script__$p = script$l;
 
 /* template */
 
   /* style */
-  const __vue_inject_styles__$l = undefined;
+  const __vue_inject_styles__$p = undefined;
   /* scoped */
-  const __vue_scope_id__$l = undefined;
+  const __vue_scope_id__$p = undefined;
   /* module identifier */
-  const __vue_module_identifier__$l = undefined;
+  const __vue_module_identifier__$p = undefined;
   /* functional template */
-  const __vue_is_functional_template__$l = undefined;
+  const __vue_is_functional_template__$p = undefined;
   /* style inject */
   
   /* style inject SSR */
@@ -2562,11 +5928,11 @@ const __vue_script__$l = script$j;
   
   var Geom4D = normalizeComponent_1(
     {},
-    __vue_inject_styles__$l,
-    __vue_script__$l,
-    __vue_scope_id__$l,
-    __vue_is_functional_template__$l,
-    __vue_module_identifier__$l,
+    __vue_inject_styles__$p,
+    __vue_script__$p,
+    __vue_scope_id__$p,
+    __vue_is_functional_template__$p,
+    __vue_module_identifier__$p,
     undefined,
     undefined
   );
@@ -5030,14 +8396,14 @@ define(Hcl, hcl, extend(Color, {
   }
 }));
 
-var A = -0.14861,
+var A$1 = -0.14861,
     B = +1.78277,
     C = -0.29227,
     D = -0.90649,
     E = +1.97294,
     ED = E * D,
     EB = E * B,
-    BC_DA = B * C - D * A;
+    BC_DA = B * C - D * A$1;
 
 function cubehelixConvert(o) {
   if (o instanceof Cubehelix) return new Cubehelix(o.h, o.s, o.l, o.opacity);
@@ -5080,7 +8446,7 @@ define(Cubehelix, cubehelix, extend(Color, {
         cosh = Math.cos(h),
         sinh = Math.sin(h);
     return new Rgb(
-      255 * (l + a * (A * cosh + B * sinh)),
+      255 * (l + a * (A$1 * cosh + B * sinh)),
       255 * (l + a * (C * cosh + D * sinh)),
       255 * (l + a * (E * cosh)),
       this.opacity
@@ -20868,7 +24234,7 @@ var d3 = /*#__PURE__*/Object.freeze({
 
 var Util,
   indexOf = [].indexOf,
-  hasProp = {}.hasOwnProperty;
+  hasProp$1 = {}.hasOwnProperty;
 
 Util = class Util {
   constructor() {
@@ -21057,7 +24423,7 @@ Util = class Util {
     } else {
       str += "{ ";
       for (key in arg) {
-        if (!hasProp.call(arg, key)) continue;
+        if (!hasProp$1.call(arg, key)) continue;
         val = arg[key];
         str += key + ":" + Util.toStr(val) + ", ";
       }
@@ -21079,7 +24445,7 @@ Util = class Util {
     ind = Util.indent(level * 2);
     out = "";
     for (key in obj) {
-      if (!hasProp.call(obj, key)) continue;
+      if (!hasProp$1.call(obj, key)) continue;
       val = obj[key];
       if (!(key.charAt(0) === key.charAt(0).toUpperCase())) {
         continue;
@@ -21248,7 +24614,7 @@ Util = class Util {
   static checkTypes(type, args) {
     var arg, key;
     for (key in args) {
-      if (!hasProp.call(args, key)) continue;
+      if (!hasProp$1.call(args, key)) continue;
       arg = args[key];
       // console.log( "Util.checkTypes isNum() argument #{key} is #{type}", arg, Util.isNum(arg) )
       if (!Util.checkType(type, arg)) {
@@ -21280,7 +24646,7 @@ Util = class Util {
   static copyProperties(to, from) {
     var key, val;
     for (key in from) {
-      if (!hasProp.call(from, key)) continue;
+      if (!hasProp$1.call(from, key)) continue;
       val = from[key];
       to[key] = val;
     }
@@ -21368,7 +24734,7 @@ Util = class Util {
   static extend(obj, mixin) {
     var method, name;
     for (name in mixin) {
-      if (!hasProp.call(mixin, name)) continue;
+      if (!hasProp$1.call(mixin, name)) continue;
       method = mixin[name];
       obj[name] = method;
     }
@@ -21650,7 +25016,7 @@ Util = class Util {
       }
     } else {
       for (key in objects) {
-        if (!hasProp.call(objects, key)) continue;
+        if (!hasProp$1.call(objects, key)) continue;
         object = objects[key];
         if (!(where(key, object))) {
           continue;
@@ -21698,7 +25064,7 @@ Util = class Util {
     var key, len, obj;
     len = 0;
     for (key in object) {
-      if (!hasProp.call(object, key)) continue;
+      if (!hasProp$1.call(object, key)) continue;
       obj = object[key];
       if (where(key)) {
         len = len + 1;
@@ -23422,7 +26788,7 @@ xfade: (opacity) =>
 var Chord$1 = Chord;
 
 var Data,
-  hasProp$1 = {}.hasOwnProperty;
+  hasProp$2 = {}.hasOwnProperty;
 
 Data = class Data {
   // Util.noop( Data.hosted, Data.planeData, Data.refine, Data.asyncJSON )
@@ -23511,7 +26877,7 @@ Data = class Data {
   static batchRead(batch, callback, create = null) {
     var key, obj;
     for (key in batch) {
-      if (!hasProp$1.call(batch, key)) continue;
+      if (!hasProp$2.call(batch, key)) continue;
       obj = batch[key];
       this.batchJSON(obj, batch, callback, create);
     }
@@ -23520,7 +26886,7 @@ Data = class Data {
   static batchComplete(batch) {
     var key, obj;
     for (key in batch) {
-      if (!hasProp$1.call(batch, key)) continue;
+      if (!hasProp$2.call(batch, key)) continue;
       obj = batch[key];
       if (!obj['data']) {
         return false;
@@ -27536,10 +30902,10 @@ let Draw = {
 };
 
 /* script */
-const __vue_script__$m = Draw;
+const __vue_script__$q = Draw;
 
 /* template */
-var __vue_render__$g = function() {
+var __vue_render__$j = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -27573,32 +30939,32 @@ var __vue_render__$g = function() {
     2
   )
 };
-var __vue_staticRenderFns__$g = [];
-__vue_render__$g._withStripped = true;
+var __vue_staticRenderFns__$j = [];
+__vue_render__$j._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$m = function (inject) {
+  const __vue_inject_styles__$q = function (inject) {
     if (!inject) return
     inject("data-v-4ed42b90_0", { source: ".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw .page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$m = undefined;
+  const __vue_scope_id__$q = undefined;
   /* module identifier */
-  const __vue_module_identifier__$m = undefined;
+  const __vue_module_identifier__$q = undefined;
   /* functional template */
-  const __vue_is_functional_template__$m = false;
+  const __vue_is_functional_template__$q = false;
   /* style inject SSR */
   
 
   
   var Draw$1 = normalizeComponent_1(
-    { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
-    __vue_inject_styles__$m,
-    __vue_script__$m,
-    __vue_scope_id__$m,
-    __vue_is_functional_template__$m,
-    __vue_module_identifier__$m,
+    { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
+    __vue_inject_styles__$q,
+    __vue_script__$q,
+    __vue_scope_id__$q,
+    __vue_is_functional_template__$q,
+    __vue_module_identifier__$q,
     browser,
     undefined
   );
@@ -27644,7 +31010,7 @@ __vue_render__$g._withStripped = true;
 //
 
 
-var script$k = {
+var script$m = {
   
   props: { pcomp:{ type:String, default:'None' } },
   
@@ -27701,10 +31067,10 @@ var script$k = {
 };
 
 /* script */
-const __vue_script__$n = script$k;
+const __vue_script__$r = script$m;
 
 /* template */
-var __vue_render__$h = function() {
+var __vue_render__$k = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -27872,38 +31238,38 @@ var __vue_render__$h = function() {
     2
   )
 };
-var __vue_staticRenderFns__$h = [];
-__vue_render__$h._withStripped = true;
+var __vue_staticRenderFns__$k = [];
+__vue_render__$k._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$n = function (inject) {
+  const __vue_inject_styles__$r = function (inject) {
     if (!inject) return
     inject("data-v-32a2a30e_0", { source: ".comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  grid-template-columns: 7% 31% 31% 31%;\n  grid-template-rows: 7% 12% 27% 27% 27%;\n  grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.comp .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .prac {\n  background-color: #603;\n  border-radius: 36px;\n  width: 90%;\n  height: 80%;\n  font-size: 1em;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 33% 33% 34%;\n  grid-template-rows: 33% 33% 34%;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.comp .prac .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .cen {\n  font-size: 1.3em;\n}\n.comp .prac div {\n  font-size: 1.1em;\n}\n.comp .disp {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  font-size: 1.2em;\n}\n.comp .disp i {\n  display: inline-block;\n  margin-right: 0.25em;\n}\n.comp .disp .name {\n  display: inline-block;\n}\n.comp .disp .desc {\n  display: none;\n  margin: 0.5em 0.5em 0.5em 0.5em;\n  text-align: left;\n}\n.comp .area {\n  display: grid;\n  grid-template-columns: 6% 22% 72%;\n  grid-template-areas: \"icon name desc\";\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n  margin-left: 1.5em;\n  width: 90%;\n  height: auto;\n  font-size: 1.3em;\n}\n.comp .area i {\n  grid-area: icon;\n}\n.comp .area .name {\n  grid-area: name;\n  font-weight: 900;\n}\n.comp .area .desc {\n  grid-area: desc;\n}\n.comp .none {\n  display: none;\n}\n.comp .fullDispDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n  border-radius: 72px;\n}\n.comp .fullDispDir .disp {\n  justify-self: center;\n  margin: 0;\n}\n.comp .fullDispDir .disp i {\n  font-size: 4.8em !important;\n}\n.comp .fullDispDir .disp .name {\n  font-size: 4.8em !important;\n}\n.comp .fullDispDir .disp .desc {\n  font-size: 2.4em !important;\n  display: block;\n}\n.comp .fullDispDir .area {\n  font-size: 3em !important;\n  padding-bottom: 0;\n}\n.comp .none {\n  display: none;\n}\n.comp .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.comp .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.comp .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.comp .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.comp .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.comp .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.comp .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.comp .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n.comp .fullDispDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n  border-radius: 72px;\n}\n.comp .fullDispDir .disp {\n  justify-self: center;\n  margin: 0;\n}\n.comp .fullDispDir .disp i {\n  font-size: 4.8em !important;\n}\n.comp .fullDispDir .disp .name {\n  font-size: 4.8em !important;\n}\n.comp .fullDispDir .disp .desc {\n  font-size: 2.4em !important;\n  display: block;\n}\n.comp .fullDispDir .area {\n  font-size: 3em !important;\n  padding-bottom: 0;\n}\n.comp .em .prac .cen,\n.comp .in .prac .cen,\n.comp .en .prac .cen {\n  font-size: 1em;\n}\n.comp .row {\n  background-color: #603;\n  border-radius: 36px;\n  margin-left: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 1em;\n  font-weight: bold;\n  display: grid;\n}\n.comp .row div {\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n  font-size: 1.8em;\n  color: wheat;\n}\n.comp .row i {\n  margin-bottom: 0.2em;\n  display: block;\n}\n", map: {"version":3,"sources":["Prac.vue","/Users/ax/Documents/prj/aug/vue/page/Prac.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,qCAAqC;EACrC,sCAAsC;EACtC,6GAA6G;EAC7G,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,eAAe;EACf,eAAe;EACf,YAAY;EACZ,gBAAgB;EAChB,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;ECCrB,qBAAA;EDCE,mBAAmB;ACCrB;AACA;EDCE,aAAa;ECCf,cAAA;EACA,qBAAA;EDCE,mBAAmB;ECCrB,qBAAA;EACA,mBAAA;ADCA;ACCA;EDCE,aAAa;ECCf,eAAA;EACA,qBAAA;EDCE,mBAAmB;ECCrB,qBAAA;EDCE,mBAAmB;ACCrB;AACA;EDCE,aAAa;ECCf,aAAA;EDCE,qBAAqB;ECCvB,mBAAA;EACA,qBAAA;EACA,mBAAA;AACA;AACA;EACA,aAAA;EACA,aAAA;EDCE,qBAAqB;ECCvB,mBAAA;EACA,qBAAA;EACA,mBAAA;AACA;AACA;EACA,aAAA;EACA,gBAAA;EACA,qBAAA;EDCE,mBAAmB;ECCrB,qBAAA;EACA,mBAAA;AACA;AACA;EDCE,aAAa;ECCf,aAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,mBAAA;ADCA;ACCA;EDCE,sBAAsB;ECCxB,mBAAA;EACA,UAAA;EACA,WAAA;EACA,cAAA;EACA,iBAAA;EACA,aAAA;EACA,kCAAA;EDCE,+BAA+B;ECCjC,gEAAA;ADCA;ACCA;EACA,aAAA;EACA,gBAAA;EACA,qBAAA;EACA,mBAAA;EACA,mBAAA;AACA;AACA;EACA,aAAA;EACA,eAAA;EDCE,qBAAqB;ECCvB,mBAAA;EACA,mBAAA;AACA;AACA;EACA,aAAA;EACA,cAAA;EACA,qBAAA;EDCE,mBAAmB;ECCrB,mBAAA;ADCA;ACCA;EACA,aAAA;EACA,eAAA;EACA,qBAAA;EDCE,mBAAmB;EACnB,mBAAmB;ACCrB;ADCA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,eAAe;EACf,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,oBAAoB;AACtB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,aAAa;EACb,+BAA+B;EAC/B,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,iCAAiC;EACjC,qCAAqC;EACrC,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;EAChB,kBAAkB;EAClB,UAAU;EACV,YAAY;EACZ,gBAAgB;AAClB;AACA;EACE,eAAe;AACjB;AACA;EACE,eAAe;EACf,gBAAgB;AAClB;AACA;EACE,eAAe;AACjB;AACA;EACE,aAAa;AACf;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;EACb,mBAAmB;AACrB;AACA;EACE,oBAAoB;EACpB,SAAS;AACX;AACA;EACE,2BAA2B;AAC7B;AACA;EACE,2BAA2B;AAC7B;AACA;EACE,2BAA2B;EAC3B,cAAc;AAChB;AACA;EACE,yBAAyB;EACzB,iBAAiB;AACnB;AACA;EACE,aAAa;AACf;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;AACf;AACA;EACE,cAAc;EACd,WAAW;EACX,YAAY;EACZ,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;AACtB;AACA;EACE,mBAAmB;AACrB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,cAAc;EACd,cAAc;AAChB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;EACb,mBAAmB;AACrB;AACA;EACE,oBAAoB;EACpB,SAAS;AACX;AACA;EACE,2BAA2B;AAC7B;AACA;EACE,2BAA2B;AAC7B;AACA;EACE,2BAA2B;EAC3B,cAAc;AAChB;AACA;EACE,yBAAyB;EACzB,iBAAiB;AACnB;AACA;;;EAGE,cAAc;AAChB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,gBAAgB;EAChB,UAAU;EACV,WAAW;EACX,cAAc;EACd,iBAAiB;EACjB,aAAa;AACf;AACA;EACE,kBAAkB;EAClB,oBAAoB;EACpB,kBAAkB;EAClB,gBAAgB;EAChB,YAAY;AACd;AACA;EACE,oBAAoB;EACpB,cAAc;AAChB","file":"Prac.vue","sourcesContent":[".comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  grid-template-columns: 7% 31% 31% 31%;\n  grid-template-rows: 7% 12% 27% 27% 27%;\n  grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.comp .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .prac {\n  background-color: #603;\n  border-radius: 36px;\n  width: 90%;\n  height: 80%;\n  font-size: 1em;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 33% 33% 34%;\n  grid-template-rows: 33% 33% 34%;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.comp .prac .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .cen {\n  font-size: 1.3em;\n}\n.comp .prac div {\n  font-size: 1.1em;\n}\n.comp .disp {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  font-size: 1.2em;\n}\n.comp .disp i {\n  display: inline-block;\n  margin-right: 0.25em;\n}\n.comp .disp .name {\n  display: inline-block;\n}\n.comp .disp .desc {\n  display: none;\n  margin: 0.5em 0.5em 0.5em 0.5em;\n  text-align: left;\n}\n.comp .area {\n  display: grid;\n  grid-template-columns: 6% 22% 72%;\n  grid-template-areas: \"icon name desc\";\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n  margin-left: 1.5em;\n  width: 90%;\n  height: auto;\n  font-size: 1.3em;\n}\n.comp .area i {\n  grid-area: icon;\n}\n.comp .area .name {\n  grid-area: name;\n  font-weight: 900;\n}\n.comp .area .desc {\n  grid-area: desc;\n}\n.comp .none {\n  display: none;\n}\n.comp .fullDispDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n  border-radius: 72px;\n}\n.comp .fullDispDir .disp {\n  justify-self: center;\n  margin: 0;\n}\n.comp .fullDispDir .disp i {\n  font-size: 4.8em !important;\n}\n.comp .fullDispDir .disp .name {\n  font-size: 4.8em !important;\n}\n.comp .fullDispDir .disp .desc {\n  font-size: 2.4em !important;\n  display: block;\n}\n.comp .fullDispDir .area {\n  font-size: 3em !important;\n  padding-bottom: 0;\n}\n.comp .none {\n  display: none;\n}\n.comp .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.comp .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.comp .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.comp .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.comp .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.comp .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.comp .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.comp .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n.comp .fullDispDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n  border-radius: 72px;\n}\n.comp .fullDispDir .disp {\n  justify-self: center;\n  margin: 0;\n}\n.comp .fullDispDir .disp i {\n  font-size: 4.8em !important;\n}\n.comp .fullDispDir .disp .name {\n  font-size: 4.8em !important;\n}\n.comp .fullDispDir .disp .desc {\n  font-size: 2.4em !important;\n  display: block;\n}\n.comp .fullDispDir .area {\n  font-size: 3em !important;\n  padding-bottom: 0;\n}\n.comp .em .prac .cen,\n.comp .in .prac .cen,\n.comp .en .prac .cen {\n  font-size: 1em;\n}\n.comp .row {\n  background-color: #603;\n  border-radius: 36px;\n  margin-left: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 1em;\n  font-weight: bold;\n  display: grid;\n}\n.comp .row div {\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n  font-size: 1.8em;\n  color: wheat;\n}\n.comp .row i {\n  margin-bottom: 0.2em;\n  display: block;\n}\n","\n<template>\n  <div class=\"comp\">\n    <template v-for=\"prac in practices\">\n      <div v-show=\"isPrac(prac.name)\" :class=\"pracDir(prac.dir)\" :key=\"prac.name\">\n        <div class=\"prac\">\n          <div v-show=\"isDisp(prac.name)\" :class=\"dispDir('cen')\" :style=\"style(prac.hsv)\">\n            <div class=\"disp\" @click=\"pubPrac(prac.name)\">\n              <i   :class=\"prac.icon\"></i>\n              <span class=\"name\">{{prac.name}}</span>\n              <span class=\"desc\">{{prac.desc}}</span>\n            </div>\n          </div>\n          <template  v-for=\"disp in prac.disps\">\n            <div v-show=\"isDisp(disp.name)\" :class=\"dispDir(disp.dir)\" :style=\"style(disp.hsv)\">\n            <div class=\"disp\" @click=\"pubDisp(prac.name,disp.name)\">\n              <i   :class=\"disp.icon\"></i>\n              <span class=\"name\">{{disp.name}}</span>\n              <span class=\"desc\">{{disp.desc}}</span>\n            </div>\n            <template v-for=\"area in disp.areas\">\n              <div :class=\"areaDir()\">\n                <i :class=\"area.icon\"></i>\n                <span class=\"name\">{{area.name}}</span>\n                <span class=\"desc\">{{area.desc}}</span>\n              </div>\n            </template>\n          </div>\n          </template>\n        </div>\n      </div>\n    </template>\n    <template v-for=\"row in rows\">\n      <div v-show=\"isRows()\" :class=\"row.dir\" :key=\"row.name\"><div class=\"row\">\n        <div><i :class=\"row.icon\"></i>{{row.name}}</div></div></div>\n    </template>\n  </div>  \n</template>\n\n<script type=\"module\">\n\n  export default {\n    \n    props: { pcomp:{ type:String, default:'None' } },\n    \n    data() { return {\n      comp:'None', prac:'All', disp:'All', tab:'Practices', practices:{},\n      rows: {\n        Learn:{ name:'Learn', dir:'le', icon:\"fas fa-graduation-cap\" },\n        Do:{    name:'Do',    dir:'do', icon:\"fas fas fa-cogs\" },\n        Share:{ name:'Share', dir:'sh', icon:\"fas fa-share-alt-square\" } } } },\n    \n    methods: {\n      isPrac: function (prac) {\n        return this.prac===prac || this.prac==='All' },\n      isDisp: function (disp) {\n        return this.disp===disp || this.disp==='All' },\n      isRows: function () {\n        return this.prac==='All' },\n      pubTab: function (tab) {\n        this.tab = tab },\n      classTab: function (tab) {\n        return this.tab===tab ? 'tab-active' : 'tab' },\n      pubPrac: function (prac) {\n        this.publish( this.comp, { prac:prac, disp:'All' } ); },\n      pubDisp: function (prac,disp) {\n        this.publish( this.comp, { prac:prac, disp:disp  } ); },\n      onPrac: function (prac) {\n        this.prac = prac; this.disp='All'; },\n      onDisp: function (prac,disp) {\n        this.prac = prac; this.disp=disp; },\n      onTabs: function (tab) {\n        if( tab==='Practices' && this.tab==='Practices' && this.prac!=='All' ) {\n          this.onPrac('All'); }\n        this.tab = tab; },\n      pracDir: function(dir) {\n        return this.prac==='All' ? dir : 'fullPracDir'; },\n      dispDir: function(dir) {\n        return this.disp==='All' ? dir : 'fullDispDir'; },\n      areaDir: function() {\n        return this.prac==='All' ? 'none' : 'area' },\n      style: function( hsv ) {\n        return { backgroundColor:this.toRgbaHsv(hsv) }; } },\n\n    beforeMount: function() {\n      this.comp = this.$route.name.substring(0,4);  },\n      // console.log( 'Prac.beforeMount()', this.$route.name, this.comp, this.pcomp  );\n\n    mounted: function () {\n      this.practices = this.pracs(this.comp,'Cols');\n      this.subscribe(  this.comp, this.comp+'.vue', (obj) => {\n         if( obj.disp==='All' ) { this.onPrac(obj.prac); }\n         else                   { this.onDisp(obj.prac,obj.disp); } } );\n      this.subscribe(  \"Tabs\",    this.comp+'.vue', (obj) => {\n        this.onTabs(obj); } ); }\n  }\n         \n</script>\n\n<style lang=\"less\">\n  \n  //@import '../../css/fontawesome/init.css';\n\n  .grid3x3() { display:grid; grid-template-columns:33% 33% 34%; grid-template-rows:33% 33% 34%;\n               grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n  \n  .grid4x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:13% 29% 29% 29%;\n    grid-template-areas: \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid5x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:7% 12% 27% 27% 27%;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid1x3() { display:grid; grid-template-columns:6% 22% 72%; grid-template-areas: \"icon name desc\"; }\n  \n  .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n                  justify-items:center; align-items:center; }\n  \n  .ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }\n  \n  .bgc( @bg )\n    { background-color:@bg; } // top | right | bottom | left\n  \n  .comp { background-color:black; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;\n    \n    .grid5x4(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid\n      .tabs{ grid-area:tabs; display:inline; color:wheat; font-size:1.2em;\n             justify-self:start; align-self:center; text-align:left; }\n      .cm { .pdir(cm); } .em   { .pdir(em);   } .in    { .pdir(in); }    .en   { .pdir(en);   }\n      .le { .pdir(le); } .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }\n      .do { .pdir(do); } .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }\n      .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }\n    \n      // Placed one level below the 9 Practices Grid\n    .prac { background-color:#603; border-radius:36px; width:90%; height:80%; font-size:1em; font-weight:bold;\n      .grid3x3(); // The 4 Displine plus Practiice name Grid\n                             .north { .ddir(north); }\n      .west { .ddir(west); } .cen   { .ddir(cen);   } .east { .ddir(east); }\n                             .south { .ddir(south); }\n      .cen  { font-size:1.3em; }\n      div   { font-size:1.1em; } }\n  \n    .disp {   display:inline; justify-self:center; align-self:center; text-align:center; font-size:1.2em;\n      i     { display:inline-block;  margin-right: 0.25em; }\n      .name { display:inline-block; }\n      .desc { display:none; margin:0.5em 0.5em 0.5em 0.5em; text-align:left; } }\n  \n    .area { .grid1x3(); justify-self:start; align-self:center; text-align:left; margin-left:1.5em;\n      width:90%; height:auto; font-size:1.3em;\n      i     { grid-area:icon; }\n      .name { grid-area:name; font-weight:900; }\n      .desc { grid-area:desc; } }\n  \n    .none { display:none; }\n  \n    // Placed one level above .dir at the 4 Disipline plus Practice name Grid Direction\n    .fullDispDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid; border-radius:72px;\n      .disp { justify-self:center; margin:0;\n        i     { font-size:4.8em !important; }\n        .name { font-size:4.8em !important; }\n        .desc { font-size:2.4em !important; display:block; } }  // Turns on .disp .desc\n      .area {   font-size:3.0em !important; padding-bottom:0; } }\n  \n    .none { display:none; }\n    \n    // Placed one level above .prac at the 9 Practices Grid Direction\n    .fullPracDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;\n      .prac { font-size:1em; width:100%; height:100%;\n              justify-self:center; align-self:center; display:grid; border-radius:0.5em;\n        div {     padding-bottom:2em;\n          .disp { padding-bottom:0;\n            i     { font-size:1.6em; }\n            .name { font-size:1.6em; }\n            .desc { font-size:1.0em; display:block; } } }  // Turns on .disp .desc\n          .area { padding-bottom:0; } } }\n  \n    // Placed one level above .dir at the 4 Disipline plus Practice name Grid Direction\n    .fullDispDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid; border-radius:72px;\n       .disp { justify-self:center; margin:0;\n         i     { font-size:4.8em !important; }\n         .name { font-size:4.8em !important; }\n         .desc { font-size:2.4em !important; display:block; } }  // Turns on .disp .desc\n       .area {   font-size:3.0em !important; padding-bottom:0; } }\n    \n    .em, .in, .en { .prac .cen { font-size:1em; } } // Font size columns\n  \n    .row { background-color:#603; border-radius:36px; margin-left:10%; width:80%; height:80%; font-size:1em;\n      font-weight:bold; display:grid;\n      div { text-align:center; justify-self:center;  align-self:center; font-size:1.8em; color:wheat; }\n      i { margin-bottom: 0.2em; display:block; } }\n    \n    \n  }\n  \n</style>\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$n = undefined;
+  const __vue_scope_id__$r = undefined;
   /* module identifier */
-  const __vue_module_identifier__$n = undefined;
+  const __vue_module_identifier__$r = undefined;
   /* functional template */
-  const __vue_is_functional_template__$n = false;
+  const __vue_is_functional_template__$r = false;
   /* style inject SSR */
   
 
   
   var Prac = normalizeComponent_1(
-    { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
-    __vue_inject_styles__$n,
-    __vue_script__$n,
-    __vue_scope_id__$n,
-    __vue_is_functional_template__$n,
-    __vue_module_identifier__$n,
+    { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
+    __vue_inject_styles__$r,
+    __vue_script__$r,
+    __vue_scope_id__$r,
+    __vue_is_functional_template__$r,
+    __vue_module_identifier__$r,
     browser,
     undefined
   );
 
 var Build,
-  hasProp$2 = {}.hasOwnProperty;
+  hasProp$3 = {}.hasOwnProperty;
 
 Build = class Build {
   // ---- Class Methods for Practices ----
@@ -28005,7 +31371,7 @@ Build = class Build {
   static copyAtt(src, des) {
     var key, obj;
     for (key in src) {
-      if (!hasProp$2.call(src, key)) continue;
+      if (!hasProp$3.call(src, key)) continue;
       obj = src[key];
       if (!Util$1.isChild(key)) {
         des[key] = obj;
@@ -28153,7 +31519,7 @@ Build = class Build {
     for (i = 0, len = arguments.length; i < len; i++) {
       arg = arguments[i];
       for (key in arg) {
-        if (!hasProp$2.call(arg, key)) continue;
+        if (!hasProp$3.call(arg, key)) continue;
         val = arg[key];
         obj[key] = val;
       }
@@ -28276,7 +31642,7 @@ Build = class Build {
     }
     pracs = this.getPractices(pln);
     for (key in pracs) {
-      if (!hasProp$2.call(pracs, key)) continue;
+      if (!hasProp$3.call(pracs, key)) continue;
       adj = pracs[key];
       if (Util$1.isChild(key)) {
         if (adj.column === col && adj.row === row && adj.plane === pln) {
@@ -28341,7 +31707,7 @@ Build = class Build {
     var pkey, prac, practices;
     practices = this.getPractices(plane);
     for (pkey in practices) {
-      if (!hasProp$2.call(practices, pkey)) continue;
+      if (!hasProp$3.call(practices, pkey)) continue;
       prac = practices[pkey];
       if (Util$1.isChild(pkey) && prac.column === column && prac.row === row) {
         return prac;
@@ -28365,7 +31731,7 @@ Build = class Build {
   getDir(practice, dir) {
     var skey, study;
     for (skey in practice) {
-      if (!hasProp$2.call(practice, skey)) continue;
+      if (!hasProp$3.call(practice, skey)) continue;
       study = practice[skey];
       if (Util$1.isChild(skey)) {
         if (study.dir === dir) {
@@ -28403,35 +31769,35 @@ Build = class Build {
       console.log("Plane: ", keyPlane);
       practices = this.getPractices(keyPlane);
       for (keyPractice in practices) {
-        if (!hasProp$2.call(practices, keyPractice)) continue;
+        if (!hasProp$3.call(practices, keyPractice)) continue;
         objPractice = practices[keyPractice];
         if (!(Util$1.isChild(keyPractice))) {
           continue;
         }
         console.log("  Practice: ", keyPractice);
         for (keyStudy in objPractice) {
-          if (!hasProp$2.call(objPractice, keyStudy)) continue;
+          if (!hasProp$3.call(objPractice, keyStudy)) continue;
           objStudy = objPractice[keyStudy];
           if (!(Util$1.isChild(keyStudy))) {
             continue;
           }
           console.log("    Study: ", keyStudy);
           for (keyTopic in objStudy) {
-            if (!hasProp$2.call(objStudy, keyTopic)) continue;
+            if (!hasProp$3.call(objStudy, keyTopic)) continue;
             objTopic = objStudy[keyTopic];
             if (!(Util$1.isChild(keyTopic))) {
               continue;
             }
             console.log("      Topic: ", keyTopic);
             for (keyItem in objTopic) {
-              if (!hasProp$2.call(objTopic, keyItem)) continue;
+              if (!hasProp$3.call(objTopic, keyItem)) continue;
               objItem = objTopic[keyItem];
               if (!(Util$1.isChild(keyItem))) {
                 continue;
               }
               console.log("        Item: ", keyItem);
               for (keyBase in objItem) {
-                if (!hasProp$2.call(objItem, keyBase)) continue;
+                if (!hasProp$3.call(objItem, keyBase)) continue;
                 objBase = objItem[keyBase];
                 if (Util$1.isChild(keyBase)) {
                   console.log("          Base: ", keyBase);
@@ -28459,14 +31825,14 @@ Build = class Build {
         packObj = batObj[packKey];
         console.log("  Pack: ", packKey, packObj);
         for (keyPractice in packObj) {
-          if (!hasProp$2.call(packObj, keyPractice)) continue;
+          if (!hasProp$3.call(packObj, keyPractice)) continue;
           objPractice = packObj[keyPractice];
           if (!(Util$1.isChild(keyPractice))) {
             continue;
           }
           console.log("    Practice: ", keyPractice);
           for (keyStudy in objPractice) {
-            if (!hasProp$2.call(objPractice, keyStudy)) continue;
+            if (!hasProp$3.call(objPractice, keyStudy)) continue;
             objStudy = objPractice[keyStudy];
             if (Util$1.isChild(keyStudy)) {
               console.log("      Study: ", keyStudy);
@@ -29091,7 +32457,7 @@ Convey = class Convey {
 var Convey$1 = Convey;
 
 var Shapes,
-  hasProp$3 = {}.hasOwnProperty;
+  hasProp$4 = {}.hasOwnProperty;
 
 Shapes = class Shapes {
   constructor(stream) {
@@ -29357,7 +32723,7 @@ Shapes = class Shapes {
     var iK, iKey, innov, key, links, nodes, sK, sKey, study;
     nodes = [];
     for (key in studies) {
-      if (!hasProp$3.call(studies, key)) continue;
+      if (!hasProp$4.call(studies, key)) continue;
       study = studies[key];
       nodes.push({
         name: key,
@@ -29365,7 +32731,7 @@ Shapes = class Shapes {
       });
     }
     for (key in innovs) {
-      if (!hasProp$3.call(innovs, key)) continue;
+      if (!hasProp$4.call(innovs, key)) continue;
       innov = innovs[key];
       nodes.push({
         name: key,
@@ -29375,11 +32741,11 @@ Shapes = class Shapes {
     links = [];
     sK = 0;
     for (sKey in studies) {
-      if (!hasProp$3.call(studies, sKey)) continue;
+      if (!hasProp$4.call(studies, sKey)) continue;
       study = studies[sKey];
       iK = 4;
       for (iKey in innovs) {
-        if (!hasProp$3.call(innovs, iKey)) continue;
+        if (!hasProp$4.call(innovs, iKey)) continue;
         innov = innovs[iKey];
         links.push({
           source: sK,
@@ -29501,7 +32867,7 @@ Shapes = class Shapes {
 var Shapes$1 = Shapes;
 
 var Embrace,
-  hasProp$4 = {}.hasOwnProperty;
+  hasProp$5 = {}.hasOwnProperty;
 
 Embrace = class Embrace {
   constructor(spec, shapes, build) {
@@ -29524,7 +32890,7 @@ Embrace = class Embrace {
     yr = lay.yr;
     ref = this.studies;
     for (key in ref) {
-      if (!hasProp$4.call(ref, key)) continue;
+      if (!hasProp$5.call(ref, key)) continue;
       study = ref[key];
       fill = this.shapes.toFill(study);
       wedgeId = this.shapes.htmlId(study.name, 'Wedge');
@@ -29558,7 +32924,7 @@ Embrace = class Embrace {
     y0 = geom.y0 - r0 / 2;
     ref = this.innovs;
     for (key in ref) {
-      if (!hasProp$4.call(ref, key)) continue;
+      if (!hasProp$5.call(ref, key)) continue;
       innov = ref[key];
       fill = this.shapes.toFill(innov);
       this.shapes.rect(g, x0, y0, w, h, fill, 'none');
@@ -29962,7 +33328,7 @@ var Connect$1 = Connect;
 
 //
 
-var script$l = {
+var script$n = {
 
   data() {
     return { comp:'None', prac:'All', disp:'All', tab:'Connections',
@@ -30042,10 +33408,10 @@ var script$l = {
  };
 
 /* script */
-const __vue_script__$o = script$l;
+const __vue_script__$s = script$n;
 
 /* template */
-var __vue_render__$i = function() {
+var __vue_render__$l = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -30092,32 +33458,32 @@ var __vue_render__$i = function() {
     2
   )
 };
-var __vue_staticRenderFns__$i = [];
-__vue_render__$i._withStripped = true;
+var __vue_staticRenderFns__$l = [];
+__vue_render__$l._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$o = function (inject) {
+  const __vue_inject_styles__$s = function (inject) {
     if (!inject) return
     inject("data-v-3cb0b6b2_0", { source: ".conn {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  grid-template-columns: 33.3% 33.3% 33.4%;\n  grid-template-rows: 7% 31% 31% 31%;\n  grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 99%;\n  height: 98%;\n  font-size: 1em;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n", map: {"version":3,"sources":["Conn.vue","/Users/ax/Documents/prj/aug/vue/page/Conn.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,wCAAwC;EACxC,kCAAkC;EAClC,iFAAiF;EACjF,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,eAAe;EACf,eAAe;EACf,YAAY;EACZ,gBAAgB;EAChB,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,mBAAmB;EACnB,UAAU;ECCZ,WAAA;EACA,cAAA;EDCE,iBAAiB;ACCnB;AACA;EDCE,oBAAoB;ECCtB,kBAAA;EACA,kBAAA;ADCA;ACCA;EACA,kBAAA;EDCE,QAAQ;ECCV,OAAA;EACA,SAAA;EACA,UAAA;EACA,aAAA;AACA;AACA;EACA,cAAA;EDCE,WAAW;ECCb,YAAA;EACA,oBAAA;EDCE,kBAAkB;ECCpB,aAAA;EACA,oBAAA;AACA;AACA;EACA,mBAAA;AACA;AACA;EACA,iBAAA;AACA;AACA;EACA,gBAAA;ADCA;AACA;EACE,gBAAgB;AAClB;AACA;EACE,cAAc;EACd,cAAc;AAChB;AACA;EACE,iBAAiB;AACnB","file":"Conn.vue","sourcesContent":[".conn {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  grid-template-columns: 33.3% 33.3% 33.4%;\n  grid-template-rows: 7% 31% 31% 31%;\n  grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 99%;\n  height: 98%;\n  font-size: 1em;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n","\n<template>\n  <div id=\"Conn\" class=\"conn\" ref=\"Conn\">\n    <template v-for=\"prac in practices\">\n      <div v-show=\"isPrac(prac.name)\" ref=\"Prac\" :class=\"pracDir(prac.dir)\" :key=\"prac.name\">\n        <div :id=\"prac.name\" :ref=\"prac.name\" class=\"prac\"\n          @click=\"pubPrac(prac.name)\" style=\"background-color:rgba(97,56,77,1.0)\">\n        </div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Build   from '../../pub/ikw/cube/Build.js';\n  import Connect from '../../pub/ikw/conn/Connect.js';\n\n  export default {\n\n    data() {\n      return { comp:'None', prac:'All', disp:'All', tab:'Connections',\n               build:{}, connects:{}, practices:{} }; },\n\n    methods: {\n      isPrac: function (prac) {\n        return this.prac===prac || this.prac==='All' },\n      onPrac: function (prac) {\n        if( prac==='All' && this.prac!=='All' ) {\n          this.connects[this.prac].layout( this.size(this.prac), 'Restore'); }\n        if( prac!=='All' && typeof(this.connects[prac])==='object' ) { // Expand prac to Comp size\n          this.connects[prac].layout( this.size(prac), 'Expand'); }\n        this.prac = prac; this.disp='All';  },\n      onDisp: function (prac,disp) {\n        this.prac = prac; this.disp=disp; },\n      onTabs: function (tab) {\n        if( tab==='Connections' && this.tab==='Connections'  ) {\n          this.onPrac('All'); }\n        this.tab = tab; },\n      pracDir: function(dir) {\n        return this.prac==='All' ? dir : 'fullPracDir'; },\n      pubPrac: function (prac) {\n        this.publish( this.comp, { prac:prac, disp:'All' } ); },\n      style: function( hsv ) {\n        return { backgroundColor:this.toRgbaHsv(hsv) }; },\n      \n      size: function(prac) {\n        let elem = this.$refs[prac][0]\n        let sz   = {}\n        if( typeof(this.$refs['Conn'])==='undefined' ) {\n          console.log( 'Conn.size() $refs[Conn] undefined', this.$refs ) }\n        sz.compWidth  = this.$refs['Conn']['clientWidth' ];\n        sz.compHeight = this.$refs['Conn']['clientHeight'];\n        sz.elemWidth  = elem['clientWidth' ];\n        sz.elemHeight = elem['clientHeight'];\n        // console.log( 'Conn.size()', prac, sz );\n        return sz;\n      },\n      \n      createConnects: function( stream, build ) {\n        for( let key of this.pkeys ) {\n            let prac = this.practices[key];\n            if( prac.row !== 'Dim' ) {\n              let elem = this.$refs[key][0]\n              this.connects[prac.name] = new Connect( stream, build, prac, elem, this.size(key) ); } }\n        return this.connects; },\n      \n      resize: function() {\n        for( let key of this.pkeys ) {\n          let size  = this.size(key);\n          let level = key!==this.prac ? 'Resize' : 'Expand';\n          if( level==='Expand') { this.connects[key].lastSize(size) }\n          this.connects[key].layout( size, level ); } }\n    },\n\n    beforeMount: function() {\n      this.comp = this.$route.name.substring(0,4); },\n      //console.log( 'Conn.beforeMount()', this.$route.name, this.comp );\n\n    mounted: function () {\n      this.build     = new Build(  this.batch() );\n      this.practices = this.conns( this.comp );\n      this.pkeys     = this.keys(  this.practices )\n      this.subscribe(  this.comp,  this.comp+'.vue', (obj) => {\n        if( obj.disp==='All' ) {   this.onPrac(obj.prac); }\n        else                   {   this.onDisp(obj.prac,obj.disp); } } );\n      this.subscribe(  \"Tabs\",     this.comp+'.vue', (obj) => {\n        this.onTabs(obj); } );\n      this.$nextTick( function() {\n        this.connects  = this.createConnects( this.stream(), this.build ); } ) },\n    \n    created: function () {\n      window.addEventListener(   'resize', this.resize ) },\n    destroyed: function () {\n      window.removeEventListener('resize', this.resize ) }\n   }\n\n</script>\n\n<style lang=\"less\">\n  .grid5x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:7% 12% 27% 27% 27%;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid4x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:7% 31% 31% 31%;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid4x3() { display:grid; grid-template-columns:33.3% 33.3% 33.4%; grid-template-rows:7% 31% 31% 31%;\n    grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\"; }\n  \n  .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n    justify-items:center; align-items:center; }\n  \n  .conn { background-color:black; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;\n    .grid4x3(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid\n    .tabs{ grid-area:tabs; display:inline; color:wheat; font-size:1.2em;\n      justify-self:start; align-self:center; text-align:left; }\n    .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }\n    .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }\n    .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }\n    \n    .prac { display:grid; border-radius:36px; width:99%; height:98%; font-size:1em; font-weight:bold;\n      .name { justify-self:center; align-self:center; text-align:center; } }\n  \n    // Placed one level above .prac at the 9 Practices Grid Direction\n    .fullPracDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;\n      .prac { font-size:1em; width:100%; height:100%;\n        justify-self:center; align-self:center; display:grid; border-radius:0.5em;\n        div {     padding-bottom:2em;\n          .disp { padding-bottom:0;\n            i     { font-size:1.6em; }\n            .name { font-size:1.6em; }\n            .desc { font-size:1.0em; display:block; } } }  // Turns on .disp .desc\n        .area { padding-bottom:0; } } }\n  }\n</style>"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$o = undefined;
+  const __vue_scope_id__$s = undefined;
   /* module identifier */
-  const __vue_module_identifier__$o = undefined;
+  const __vue_module_identifier__$s = undefined;
   /* functional template */
-  const __vue_is_functional_template__$o = false;
+  const __vue_is_functional_template__$s = false;
   /* style inject SSR */
   
 
   
   var Conn = normalizeComponent_1(
-    { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
-    __vue_inject_styles__$o,
-    __vue_script__$o,
-    __vue_scope_id__$o,
-    __vue_is_functional_template__$o,
-    __vue_module_identifier__$o,
+    { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
+    __vue_inject_styles__$s,
+    __vue_script__$s,
+    __vue_scope_id__$s,
+    __vue_is_functional_template__$s,
+    __vue_module_identifier__$s,
     browser,
     undefined
   );
@@ -30132,19 +33498,19 @@ __vue_render__$i._withStripped = true;
 //
 //
 
-var script$m = {};
+var script$o = {};
 
 /* script */
-const __vue_script__$p = script$m;
+const __vue_script__$t = script$o;
 
 /* template */
-var __vue_render__$j = function() {
+var __vue_render__$m = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
   return _vm._m(0)
 };
-var __vue_staticRenderFns__$j = [
+var __vue_staticRenderFns__$m = [
   function() {
     var _vm = this;
     var _h = _vm.$createElement;
@@ -30154,31 +33520,31 @@ var __vue_staticRenderFns__$j = [
     ])
   }
 ];
-__vue_render__$j._withStripped = true;
+__vue_render__$m._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$p = function (inject) {
+  const __vue_inject_styles__$t = function (inject) {
     if (!inject) return
     inject("data-v-3971932b_0", { source: ".enli {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n", map: {"version":3,"sources":["Enli.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,uBAAuB;EACvB,YAAY;AACd","file":"Enli.vue","sourcesContent":[".enli {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$p = undefined;
+  const __vue_scope_id__$t = undefined;
   /* module identifier */
-  const __vue_module_identifier__$p = undefined;
+  const __vue_module_identifier__$t = undefined;
   /* functional template */
-  const __vue_is_functional_template__$p = false;
+  const __vue_is_functional_template__$t = false;
   /* style inject SSR */
   
 
   
   var Enli = normalizeComponent_1(
-    { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
-    __vue_inject_styles__$p,
-    __vue_script__$p,
-    __vue_scope_id__$p,
-    __vue_is_functional_template__$p,
-    __vue_module_identifier__$p,
+    { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
+    __vue_inject_styles__$t,
+    __vue_script__$t,
+    __vue_scope_id__$t,
+    __vue_is_functional_template__$t,
+    __vue_module_identifier__$t,
     browser,
     undefined
   );
@@ -30193,19 +33559,19 @@ __vue_render__$j._withStripped = true;
 //
 //
 
-var script$n = {};
+var script$p = {};
 
 /* script */
-const __vue_script__$q = script$n;
+const __vue_script__$u = script$p;
 
 /* template */
-var __vue_render__$k = function() {
+var __vue_render__$n = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
   return _vm._m(0)
 };
-var __vue_staticRenderFns__$k = [
+var __vue_staticRenderFns__$n = [
   function() {
     var _vm = this;
     var _h = _vm.$createElement;
@@ -30215,31 +33581,31 @@ var __vue_staticRenderFns__$k = [
     ])
   }
 ];
-__vue_render__$k._withStripped = true;
+__vue_render__$n._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$q = function (inject) {
+  const __vue_inject_styles__$u = function (inject) {
     if (!inject) return
     inject("data-v-f8ff832a_0", { source: ".data {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n", map: {"version":3,"sources":["Data.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,uBAAuB;EACvB,YAAY;AACd","file":"Data.vue","sourcesContent":[".data {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$q = undefined;
+  const __vue_scope_id__$u = undefined;
   /* module identifier */
-  const __vue_module_identifier__$q = undefined;
+  const __vue_module_identifier__$u = undefined;
   /* functional template */
-  const __vue_is_functional_template__$q = false;
+  const __vue_is_functional_template__$u = false;
   /* style inject SSR */
   
 
   
   var Data$2 = normalizeComponent_1(
-    { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
-    __vue_inject_styles__$q,
-    __vue_script__$q,
-    __vue_scope_id__$q,
-    __vue_is_functional_template__$q,
-    __vue_module_identifier__$q,
+    { render: __vue_render__$n, staticRenderFns: __vue_staticRenderFns__$n },
+    __vue_inject_styles__$u,
+    __vue_script__$u,
+    __vue_scope_id__$u,
+    __vue_is_functional_template__$u,
+    __vue_module_identifier__$u,
     browser,
     undefined
   );
@@ -30270,10 +33636,10 @@ __vue_render__$k._withStripped = true;
   };
 
 /* script */
-const __vue_script__$r = Note;
+const __vue_script__$v = Note;
 
 /* template */
-var __vue_render__$l = function() {
+var __vue_render__$o = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -30294,32 +33660,32 @@ var __vue_render__$l = function() {
     2
   )
 };
-var __vue_staticRenderFns__$l = [];
-__vue_render__$l._withStripped = true;
+var __vue_staticRenderFns__$o = [];
+__vue_render__$o._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$r = function (inject) {
+  const __vue_inject_styles__$v = function (inject) {
     if (!inject) return
     inject("data-v-64ec9ce8_0", { source: ".note {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n", map: {"version":3,"sources":["Note.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX","file":"Note.vue","sourcesContent":[".note {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$r = undefined;
+  const __vue_scope_id__$v = undefined;
   /* module identifier */
-  const __vue_module_identifier__$r = undefined;
+  const __vue_module_identifier__$v = undefined;
   /* functional template */
-  const __vue_is_functional_template__$r = false;
+  const __vue_is_functional_template__$v = false;
   /* style inject SSR */
   
 
   
   var Note$1 = normalizeComponent_1(
-    { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
-    __vue_inject_styles__$r,
-    __vue_script__$r,
-    __vue_scope_id__$r,
-    __vue_is_functional_template__$r,
-    __vue_module_identifier__$r,
+    { render: __vue_render__$o, staticRenderFns: __vue_staticRenderFns__$o },
+    __vue_inject_styles__$v,
+    __vue_script__$v,
+    __vue_scope_id__$v,
+    __vue_is_functional_template__$v,
+    __vue_module_identifier__$v,
     browser,
     undefined
   );
@@ -30340,6 +33706,9 @@ __vue_render__$l._withStripped = true;
   Dash.Info   = Info;
   Dash.Know   = Know;
   Dash.Wise   = Wise;
+  Dash.Math   = Math$2;
+  Dash.MathML = MathML$3;
+  Dash.MathEQ = MathEQ;
   Dash.Geom   = Geom$1;
   Dash.Geom2D = Geom2D;
   Dash.Geom3D = Geom3D;
@@ -30352,10 +33721,10 @@ __vue_render__$l._withStripped = true;
   Dash.Note   = Note$1;
 
 /* script */
-const __vue_script__$s = Dash;
+const __vue_script__$w = Dash;
 
 /* template */
-var __vue_render__$m = function() {
+var __vue_render__$p = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -30384,32 +33753,32 @@ var __vue_render__$m = function() {
     1
   )
 };
-var __vue_staticRenderFns__$m = [];
-__vue_render__$m._withStripped = true;
+var __vue_staticRenderFns__$p = [];
+__vue_render__$p._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$s = function (inject) {
+  const __vue_inject_styles__$w = function (inject) {
     if (!inject) return
-    inject("data-v-33d3fdf7_0", { source: "@import '../../css/fontawesome/init.css';\n.dash {\n  font-family: Roboto, sans-serif;\n  font-size: 1rem;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11vw 85vw 4vw;\n  grid-template-rows: 6vh 88vh 6vh;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n", map: {"version":3,"sources":["Dash.vue"],"names":[],"mappings":"AAAA,wCAAwC;AACxC;EACE,+BAA+B;EAC/B,eAAe;EACf,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,oCAAoC;EACpC,gCAAgC;EAChC,uEAAuE;AACzE;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf","file":"Dash.vue","sourcesContent":["@import '../../css/fontawesome/init.css';\n.dash {\n  font-family: Roboto, sans-serif;\n  font-size: 1rem;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11vw 85vw 4vw;\n  grid-template-rows: 6vh 88vh 6vh;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n"]}, media: undefined });
+    inject("data-v-f71c79a6_0", { source: "@import '../../css/fontawesome/init.css';\n.dash {\n  font-family: Roboto, sans-serif;\n  font-size: 1rem;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11vw 85vw 4vw;\n  grid-template-rows: 6vh 88vh 6vh;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n", map: {"version":3,"sources":["Dash.vue"],"names":[],"mappings":"AAAA,wCAAwC;AACxC;EACE,+BAA+B;EAC/B,eAAe;EACf,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,oCAAoC;EACpC,gCAAgC;EAChC,uEAAuE;AACzE;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;AACf","file":"Dash.vue","sourcesContent":["@import '../../css/fontawesome/init.css';\n.dash {\n  font-family: Roboto, sans-serif;\n  font-size: 1rem;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11vw 85vw 4vw;\n  grid-template-rows: 6vh 88vh 6vh;\n  grid-template-areas: \"logo navb find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #navb {\n  grid-area: navb;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$s = undefined;
+  const __vue_scope_id__$w = undefined;
   /* module identifier */
-  const __vue_module_identifier__$s = undefined;
+  const __vue_module_identifier__$w = undefined;
   /* functional template */
-  const __vue_is_functional_template__$s = false;
+  const __vue_is_functional_template__$w = false;
   /* style inject SSR */
   
 
   
   var Dash$1 = normalizeComponent_1(
-    { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
-    __vue_inject_styles__$s,
-    __vue_script__$s,
-    __vue_scope_id__$s,
-    __vue_is_functional_template__$s,
-    __vue_module_identifier__$s,
+    { render: __vue_render__$p, staticRenderFns: __vue_staticRenderFns__$p },
+    __vue_inject_styles__$w,
+    __vue_script__$w,
+    __vue_scope_id__$w,
+    __vue_is_functional_template__$w,
+    __vue_module_identifier__$w,
     browser,
     undefined
   );
