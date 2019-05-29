@@ -8,7 +8,11 @@
     "dash": "rollup --config vue/dash/Dash.roll.js",
     "cube": "rollup --config vue/comp/Cube.roll.js",
     "wood": "rollup --config vue/wood/Wood.roll.js",
-    "note": "rollup --config vue/note/Note.roll.js"
+    "note": "rollup --config vue/note/Note.roll.js",
+    "gcom": "pegjs -o pub/math/par/Ascii.com.js  pub/math/par/Ascii.pegjs",
+    "gnon": "sed -n -e :a -e '1,5!{P;N;D;};N;ba' pub/math/par/Ascii.com.js > pub/math/par/Ascii.non.js",
+    "gesm": "cat      pub/math/par/Ascii.non.js  pub/math/par/Ascii.esm.ex > pub/math/par/Ascii.esm.js",
+    "math": "node --experimental-modules -r esm  pub/math/test/Run.js"
   },
   "dependencies": {
     "d3": "^5.9.2",

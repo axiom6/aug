@@ -107,7 +107,7 @@ Par
   / Brc
 
 Brc
-  = "{" u:Brc "}"  ws { return `['Brace',${u}]`; }
+  = "{" u:Exp "}"  ws { return `['Brace',${u}]`; }
   / Vec
 
 Vec
