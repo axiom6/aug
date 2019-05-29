@@ -1,7 +1,7 @@
 
-FaLookup = {}
+FontAwe = {}
 
-FaLookup.icons = {
+FontAwe.icons = {
     "fas fa-network-wired":"\uf6ff",
     "fas fa-warehouse":"\uf494",
     "fas fa-infinity":"\uf534",
@@ -901,4 +901,4 @@ FaLookup.icons = {
     "fab fa-youtube-square":"\uf431"
   }
   
-export default FaLookup
+export default FontAwe

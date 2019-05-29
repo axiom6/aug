@@ -58,14 +58,15 @@ class TestAscii {
     T.test("2.2^3 = x/y", "['Equ',['Pow',2.2,3],['Div','x','y']]");
     T.test("-2.2 * 3-x / -y", "['Sub',['Mul',['Neg',2.2],3],['Div','x',['Neg','y']]]");
     T.test("x*x*(a+b_1)", "['Mul','x',['Mul','x',['Paren',['Add','a',['Sus','b',1]]]]]");
-    T.test("a+b*sin(theta)", "['Add','a',['Mul','b',['Sin','theta']]]");
-    T.test("fn(a+b)*g(theta)", "['Mul',['Fun','fn',['Add','a','b']],['Fun','g','theta']]");
+    T.test("a+b*sin(\theta)", "['Add','a',['Mul','b',['Sin',['Latex','theta']]]]");
+    T.test("fn(a+b)*g(\theta)", "['Mul',['Fun','fn',['Add','a','b']],['Fun','g',['Latex','theta']]]");
     T.test("int(x*2)", "['Int',['Mul','x',2]]");
     T.test("[1,2,3]", "['Vec',1,2,3]");
     T.test("[[1,2,3],[4,5,6]]", "['Mat',['Vec',1,2,3],['Vec',4,5,6]]");
     T.test("lim_i^n", "['Lim','i','n']");
     T.test("sum_i^n~j", "['Sum','i','n','j']");
     T.test("sum_i^n~j+1", "['Sum','i','n',['Add','j',1]]");
+    T.test("\wedge", "['Latex','wedge']");
   }
 
 }

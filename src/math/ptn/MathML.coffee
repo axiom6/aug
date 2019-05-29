@@ -1,5 +1,6 @@
 
 import {match} from '../../bas/util/Match.js'
+import Latex   from '../../bas/util/Latex.js'
 import A       from '../ptn/Adt.js'
 import Ptn     from '../ptn/Ptn.js'
 import Ascii   from '../par/Ascii.esm.js'
@@ -113,6 +114,13 @@ class MathML
     @beg(t); @tag('mi', u ); @exp(a); @exp(b); @end(t)
     return
 
+  latex:( o ) ->
+    obj = Latex[o]
+    uni = if obj? then obj.uc else '?'
+    @tag('mo', uni )
+    return
+
+
   exp:( asa ) ->
     try
       # console.log( 'MathML.exp(asa)', asa )
@@ -160,6 +168,7 @@ class MathML
     A.Ratio,  (u,v)    => @tuv('mfrac', u,v ),
     A.Vec,    (rest)   => @vec( rest ),
     A.Mat,    (rest)   => @vec( rest ),
+    A.Latex,  (o)      => @latex( o ),
     'String', (s)      => @tag('mi',s ),            # Using String identifiers
     'Number', (n)      => @tag('mn',n ),
     '_',      (q)      => @unk(q)

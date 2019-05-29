@@ -4,6 +4,8 @@ import {
   match
 } from '../../bas/util/Match.js';
 
+import Latex from '../../bas/util/Latex.js';
+
 import A from '../ptn/Adt.js';
 
 import Ptn from '../ptn/Ptn.js';
@@ -168,6 +170,13 @@ MathML = class MathML {
     this.exp(a);
     this.exp(b);
     this.end(t);
+  }
+
+  latex(o) {
+    var obj, uni;
+    obj = Latex[o];
+    uni = obj != null ? obj.uc : '?';
+    this.tag('mo', uni);
   }
 
   exp(asa) {
@@ -405,6 +414,10 @@ MathML = class MathML {
       A.Mat,
       (rest) => {
         return this.vec(rest);
+      },
+      A.Latex,
+      (o) => {
+        return this.latex(o);
       },
       'String',
       (s) => {

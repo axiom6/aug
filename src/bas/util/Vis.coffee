@@ -1,6 +1,6 @@
 
-import Util     from './Util.js'
-import FaLookup from './FaLookup.js'
+import Util    from './Util.js'
+import FontAwe from './FontAwe.js'
 
 class Vis
 
@@ -167,7 +167,7 @@ class Vis
   @isZero:( v )             -> -0.01 <  v   and v   <  0.01
 
   @unicode:( icon ) ->
-    uc    = FaLookup.icons[icon]
+    uc    = FontAwe.icons[icon]
     if not uc?
       console.error( 'Vis.unicode() missing icon in Vis.FontAwesomeUnicodes for', icon )
       uc = "\uf111" # Circle

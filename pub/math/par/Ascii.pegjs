@@ -74,7 +74,10 @@ Sus
 // ------ Unary Ops ------
 
 Neg
-  = "-" u:Neg { return `['Neg',${u}]` }
+  =     "-" u:Neg { return `['Neg',${u}]`   }
+  / Latex
+
+Latex = "|" o:str { return `['Latex','${o}']` }
   / Lower
 
 Lower
@@ -176,7 +179,10 @@ comma
   = ws "," ws
  
 str
-  = string:[a-zA-Z]+  { return string.join("") }
+  = string:[a-zA-Z]+       { return string.join("") }
+
+latex
+  = "|" string:[a-zA-Z]+  { return string.join("") }
 
 sp
   = [ ]+  // Space  [ \t\r\n\f]+

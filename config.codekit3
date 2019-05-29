@@ -2103,6 +2103,14 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/math/par/Ascii.esm.ex": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/math/par/Ascii.esm.ex",
+		"oF": 1
+		},
 	"/pub/math/par/Ascii.esm.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2114,13 +2122,24 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/math/par/Ascii.non.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/par/Ascii.non-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/math/par/Ascii.pegjs": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/pub/math/par/Ascii.pegjs",
-		"oF": 0
+		"oF": 1
 		},
 	"/pub/math/ptn/Adt.js": {
 		"bF": 0,
@@ -2159,17 +2178,17 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/pub/math/test/Ascii.esm",
-		"oF": 0
+		"oF": 1
 		},
 	"/pub/math/test/Ascii.sh": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/pub/math/test/Ascii.sh",
-		"oF": 0
+		"oF": 1
 		},
 	"/pub/math/test/Run.js": {
 		"bF": 0,
@@ -2266,28 +2285,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/vue/dash/Dash-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/vue/math/MathML.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/math/MathML-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/vue/math/MathND.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/math/MathND-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2542,12 +2539,23 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/util/FaLookup.coffee": {
+	"/src/bas/util/FontAwe.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/util/FaLookup.js",
+		"oAP": "/pub/bas/util/FontAwe.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/bas/util/Latex.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/bas/util/Latex.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
@@ -2561,17 +2569,6 @@
 		"oA": 1,
 		"oAP": "/src/util/Match-min.js",
 		"oF": 2,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/bas/util/MathLookup.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/bas/util/MathLookup.js",
-		"oF": 0,
-		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
@@ -2972,9 +2969,17 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/src/math/par/Ascii.Pri.pegjs",
-		"oF": 0
+		"oF": 1
+		},
+	"/src/math/par/Ascii.Sec.pegjs": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/src/math/par/Ascii.Sec.pegjs",
+		"oF": 1
 		},
 	"/src/math/ptn/Adt.coffee": {
 		"ft": 32,
@@ -4236,6 +4241,14 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"/zzz/peg/arith/add.pegged": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/peg/arith/add.pegged",
+		"oF": 0
 		},
 	"/zzz/peg/arith/add.pegjs": {
 		"cB": 0,

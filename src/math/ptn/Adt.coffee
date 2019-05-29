@@ -96,12 +96,13 @@ class Adt
 
   # Finge
   #Obj = (k,v)  => { k:v } # ???
-  @Sim = (u)     => u         # sim(u) Simplify
-  @Not = (u)     => u         # Not an Adt expression
-  @Msg = (u)     => u         # Parsing error message
-  @Unk = (u)     => u
+  @Latex = (o)  => o
+  @Sim   = (u)  => u         # sim(u) Simplify
+  @Not   = (u)  => u         # Not an Adt expression
+  @Msg   = (u)  => u         # Parsing error message
+  @Unk   = (u)  => u
 
-  @Fringe = [@Sim,@Not,@Msg,@Unk]
+  @Fringe = [@Latex,@Sim,@Not,@Msg,@Unk]
 
   if @Geom  is false and @Arith    is false and @Trans  is false then {}
   if @Hyper is false and @Calculus is false and @Fringe is false then {}

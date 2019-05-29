@@ -61,7 +61,7 @@ TestMathML = (function() {
           math: mul3ML
         },
         Sin2: {
-          exp: ['Add', 'a', ['Mul', 'b', ['Sin', 'theta']]],
+          exp: ['Add', 'a', ['Mul', 'b', ['Sin', ['Latex', 'theta']]]],
           math: sin2ML
         },
         Fun1: {
@@ -146,7 +146,7 @@ TestMathML = (function() {
           math: mul3ML
         },
         Sin2: {
-          asc: "a+b*sin(theta)",
+          asc: "a+b*sin(|theta)",
           math: sin2ML
         },
         Fun1: {
@@ -269,7 +269,7 @@ TestMathML = (function() {
 
   sin2ML = "<math><mrow><mi>a</mi><mo>+</mo><mrow><mi>b</mi><mo>*</mo><mrow><mi>sin</mi>";
 
-  sin2ML += "<mfenced><mi>theta</mi></mfenced></mrow></mrow></mrow></math>";
+  sin2ML += "<mfenced><mo>\u03B8</mo></mfenced></mrow></mrow></mrow></math>";
 
   fun1ML = "<math><mrow><mrow><mi>fn</mi><mfenced><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></mfenced></mrow>";
 

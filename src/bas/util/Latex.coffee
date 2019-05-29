@@ -1,5 +1,5 @@
   
-MathLookup = {
+Latex = {
   
   #Greek letters
   alpha:{      tag:"mi", uc:"\u03B1", ttype:"const" },
@@ -348,5 +348,5 @@ MathLookup = {
   
 }
   
-export default MathLookup
+export default Latex
   

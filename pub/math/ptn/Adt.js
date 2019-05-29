@@ -249,6 +249,10 @@ Adt = (function() {
 
     // Finge
     //Obj = (k,v)  => { k:v } # ???
+    static Latex(o) {
+      return o;
+    }
+
     static Sim(u) {
       return u; // sim(u) Simplify
     }
@@ -277,7 +281,7 @@ Adt = (function() {
 
   Adt.Calculus = [Adt.Fun, Adt.D, Adt.Int, Adt.DefInt, Adt.Sum, Adt.Sub, Adt.Sus, Adt.Lim];
 
-  Adt.Fringe = [Adt.Sim, Adt.Not, Adt.Msg, Adt.Unk];
+  Adt.Fringe = [Adt.Latex, Adt.Sim, Adt.Not, Adt.Msg, Adt.Unk];
 
   if (Adt.Geom === false && Adt.Arith === false && Adt.Trans === false) {
     ({});

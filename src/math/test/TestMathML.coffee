@@ -40,7 +40,7 @@ class TestMathML extends MathML
   mul3ML  = "<math><mrow><mi>x</mi><mo>*</mo><mrow><mi>x</mi><mo>*</mo><mfenced><mrow><mi>a</mi>"
   mul3ML += "<mo>+</mo><msub><mi>b</mi><mn>1</mn></msub></mrow></mfenced></mrow></mrow></math>"
   sin2ML  = "<math><mrow><mi>a</mi><mo>+</mo><mrow><mi>b</mi><mo>*</mo><mrow><mi>sin</mi>"
-  sin2ML += "<mfenced><mi>theta</mi></mfenced></mrow></mrow></mrow></math>"
+  sin2ML += "<mfenced><mo>\u03B8</mo></mfenced></mrow></mrow></mrow></math>"
   fun1ML  = "<math><mrow><mrow><mi>fn</mi><mfenced><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></mfenced></mrow>"
   fun1ML += "<mo>*</mo><mrow><mi>g</mi><mfenced><mi>theta</mi></mfenced></mrow></mrow></math>"
   int1ML  = "<math><mrow><mo>∫</mo><mrow><mi>x</mi><mo>*</mo><mn>2</mn></mrow></mrow></math>"
@@ -67,7 +67,7 @@ class TestMathML extends MathML
       Equ2:{ exp:['Equ',['Pow',2.2,3],['Div','x','y']], math:equ2ML }
       Sub2:{ exp:['Sub',['Mul',['Neg',2.2],3],['Div','x',['Neg','y']]], math:sub2ML }
       Mul3:{ exp:['Mul','x',['Mul','x',['Paren',['Add','a',['Sus','b',1]]]]], math:mul3ML }
-      Sin2:{ exp:['Add','a',['Mul','b',['Sin','theta']]], math:sin2ML }
+      Sin2:{ exp:['Add','a',['Mul','b',['Sin',['Latex','theta']]]], math:sin2ML }
       Fun1:{ exp:['Mul',['Fun','fn',['Add','a','b']],['Fun','g','theta']], math:fun1ML }
       Int1:{ exp:['Int',['Mul','x',2]], math:int1ML }
       Vec1:{ exp:['Vec',1,2,3], math:vec1ML }
@@ -98,7 +98,7 @@ class TestMathML extends MathML
       Equ2:{ asc:"2.2^3 = x/y",        math:equ2ML }
       Sub2:{ asc:"-2.2 * 3-x / -y",    math:sub2ML }
       Mul3:{ asc:"x*x*(a+b_1)",        math:mul3ML }
-      Sin2:{ asc:"a+b*sin(theta)",     math:sin2ML }
+      Sin2:{ asc:"a+b*sin(|theta)",   math:sin2ML }
       Fun1:{ asc:"fn(a+b)*g(theta)",   math:fun1ML }
       Int1:{ asc:"int(x*2)",           math:int1ML }
       Vec1:{ asc:"[1,2,3]",            math:vec1ML }
