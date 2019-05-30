@@ -3,6 +3,11 @@
 # Imported and called by Run.js
 # node --experimental-modules -r esm Run.js
 
+# package.js script for compiling grammars
+# "gcom": "pegjs -o pub/math/par/Ascii.com.js  src/math/par/Ascii.pegjs",
+# "gnon": "sed -n -e :a -e '1,5!{P;N;D;};N;ba' pub/math/par/Ascii.com.js > pub/math/par/Ascii.non.js",
+# "gesm": "cat      pub/math/par/Ascii.non.js  src/math/par/Ascii.esm.ex > pub/math/par/Ascii.esm.js",
+
 import MathML from '../ptn/MathML.js'
 
 class TestMathML extends MathML
@@ -98,7 +103,7 @@ class TestMathML extends MathML
       Equ2:{ asc:"2.2^3 = x/y",        math:equ2ML }
       Sub2:{ asc:"-2.2 * 3-x / -y",    math:sub2ML }
       Mul3:{ asc:"x*x*(a+b_1)",        math:mul3ML }
-      Sin2:{ asc:"a+b*sin(|theta)",   math:sin2ML }
+      Sin2:{ asc:"a+b*sin(\\theta)",   math:sin2ML }
       Fun1:{ asc:"fn(a+b)*g(theta)",   math:fun1ML }
       Int1:{ asc:"int(x*2)",           math:int1ML }
       Vec1:{ asc:"[1,2,3]",            math:vec1ML }

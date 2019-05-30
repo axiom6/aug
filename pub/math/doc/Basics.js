@@ -55,7 +55,7 @@ Exps = {
     mathML: ""
   },
   Sin2: {
-    asc: "a+b*sin(|theta)",
+    asc: "a+b*sin(\\theta)",
     klass: "",
     mathML: ""
   },

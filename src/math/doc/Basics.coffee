@@ -12,7 +12,7 @@ Exps =
   Equ2:{ asc:"2.2^3 = x/y",        klass:"", mathML:"" }
   Sub2:{ asc:"-2.2 * 3-x / -y",    klass:"", mathML:"" }
   Mul3:{ asc:"x*x*(a+b_1)",        klass:"", mathML:"" }
-  Sin2:{ asc:"a+b*sin(|theta)",    klass:"", mathML:"" }
+  Sin2:{ asc:"a+b*sin(\\theta)",   klass:"", mathML:"" }
   Fun1:{ asc:"fn(a+b)*g(theta)",   klass:"", mathML:"" }
   Int1:{ asc:"int(x*2)",           klass:"", mathML:"" }
   Vec1:{ asc:"[1,2,3]",            klass:"", mathML:"" }

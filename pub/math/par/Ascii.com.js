@@ -160,8 +160,8 @@ function peg$parse(input, options) {
       peg$c16 = function(u, v) { return `['Pow',${u},${v}]` },
       peg$c17 = function(u, v) { return `['Sus',${u},${v}]` },
       peg$c18 = function(u) { return `['Neg',${u}]`   },
-      peg$c19 = "|",
-      peg$c20 = peg$literalExpectation("|", false),
+      peg$c19 = "\\",
+      peg$c20 = peg$literalExpectation("\\", false),
       peg$c21 = function(o) { return `['Latex','${o}']` },
       peg$c22 = function(k, a, b, u) { return func3(k,a,b,u) },
       peg$c23 = function(k, a, b) { return func2(k,a,b) },
@@ -710,7 +710,7 @@ function peg$parse(input, options) {
     var s0, s1, s2;
 
     s0 = peg$currPos;
-    if (input.charCodeAt(peg$currPos) === 124) {
+    if (input.charCodeAt(peg$currPos) === 92) {
       s1 = peg$c19;
       peg$currPos++;
     } else {
@@ -1852,56 +1852,6 @@ function peg$parse(input, options) {
       s1 = peg$c75(s1);
     }
     s0 = s1;
-
-    return s0;
-  }
-
-  function peg$parselatex() {
-    var s0, s1, s2, s3;
-
-    s0 = peg$currPos;
-    if (input.charCodeAt(peg$currPos) === 124) {
-      s1 = peg$c19;
-      peg$currPos++;
-    } else {
-      s1 = peg$FAILED;
-      if (peg$silentFails === 0) { peg$fail(peg$c20); }
-    }
-    if (s1 !== peg$FAILED) {
-      s2 = [];
-      if (peg$c73.test(input.charAt(peg$currPos))) {
-        s3 = input.charAt(peg$currPos);
-        peg$currPos++;
-      } else {
-        s3 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c74); }
-      }
-      if (s3 !== peg$FAILED) {
-        while (s3 !== peg$FAILED) {
-          s2.push(s3);
-          if (peg$c73.test(input.charAt(peg$currPos))) {
-            s3 = input.charAt(peg$currPos);
-            peg$currPos++;
-          } else {
-            s3 = peg$FAILED;
-            if (peg$silentFails === 0) { peg$fail(peg$c74); }
-          }
-        }
-      } else {
-        s2 = peg$FAILED;
-      }
-      if (s2 !== peg$FAILED) {
-        peg$savedPos = s0;
-        s1 = peg$c75(s2);
-        s0 = s1;
-      } else {
-        peg$currPos = s0;
-        s0 = peg$FAILED;
-      }
-    } else {
-      peg$currPos = s0;
-      s0 = peg$FAILED;
-    }
 
     return s0;
   }

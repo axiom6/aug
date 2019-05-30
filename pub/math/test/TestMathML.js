@@ -1,6 +1,11 @@
 // cd   pub/math/test
 // Imported and called by Run.js
 // node --experimental-modules -r esm Run.js
+
+// package.js script for compiling grammars
+// "gcom": "pegjs -o pub/math/par/Ascii.com.js  src/math/par/Ascii.pegjs",
+// "gnon": "sed -n -e :a -e '1,5!{P;N;D;};N;ba' pub/math/par/Ascii.com.js > pub/math/par/Ascii.non.js",
+// "gesm": "cat      pub/math/par/Ascii.non.js  src/math/par/Ascii.esm.ex > pub/math/par/Ascii.esm.js",
 var TestMathML;
 
 import MathML from '../ptn/MathML.js';
@@ -146,7 +151,7 @@ TestMathML = (function() {
           math: mul3ML
         },
         Sin2: {
-          asc: "a+b*sin(|theta)",
+          asc: "a+b*sin(\\theta)",
           math: sin2ML
         },
         Fun1: {

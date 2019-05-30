@@ -3,7 +3,7 @@
 
 let cmds = process.argv.slice(2);
 
-import Ascii from    '../par/Ascii.js';
+import Ascii from    '../par/Ascii.esm.js';
 let Tracer = require('../../../node_modules/pegjs-backtrace');
 
 let runTrace = ( asc) => {

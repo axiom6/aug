@@ -74,7 +74,10 @@ Sus
 // ------ Unary Ops ------
 
 Neg
-  = "-" u:Neg { return `['Neg',${u}]` }
+  =     "-" u:Neg { return `['Neg',${u}]`   }
+  / Latex
+
+Latex = "\\" o:str { return `['Latex','${o}']` }
   / Lower
 
 Lower
@@ -87,37 +90,36 @@ Upper
 
 Sum
   = k:Key a:Lower b:Upper u:Tilde { return func3(k,a,b,u) }
-  / Pri
-
-
-// ------ Primary - These choices reference Exp and do not have to / forward ------
-
-Pri
-  = Lim / Fun / Paren / Brace / FunArgs / Vec / Mat / Dbl / Num / Key / Var
+  / Lim
 
 Lim
   = k:Key a:Lower b:Upper { return func2(k,a,b) }
+  / Pri
+
+// ------ Enclosing Primary Rules: Fun Par Brc Vec Mat ------
+
+Pri
+  = Fun / Dbl / Num / Key / Var
 
 Fun
   = f:str "(" u:Exp ")" ws { return func1(f,u) } // Fun touches left paren with no whitespace
+  / Par
 
-Paren
+Par
   = "(" u:Exp ")"  ws { return `['Paren',${u}]`; }
+  / Brc
 
-Brace
-  = "{" u:Exp "}"  ws { return `['Brace',${u}]`; }
-
-FunArgs
-  = f:str begArgs args:( head:Exp tail:( comma v:Exp { return v; } )*
-    { return [head].concat(tail); } )? endArgs
-    { return funcn(f,args) }
+Brc
+  = "{" u:Brc "}"  ws { return `['Brace',${u}]`; }
+  / Vec
 
 Vec
   = begVec vals:( head:Exp tail:( comma v:Exp { return v; } )*
       { return [head].concat(tail); } )? endVec
     { return vals !== null ? `['Vec',${vals}]` : `['Vec',${[]}]`; }
+  / Mat
 
-Mec
+Mec   // Only called by Mat
   =       vals:( head:Exp tail:( comma v:Exp { return v; } )*
       {  return [head].concat(tail); } )? endVec
     { return vals !== null ? `['Vec',${vals}]` : `['Vec',${[]}]`; }
@@ -127,8 +129,8 @@ Mat
       { return [head].concat(tail); } )? endVec // Only one ]
     { return vecs !== null ? `['Mat',${vecs}]` : `['Mat',${[[]]}]`; }
 
-// ------ Terminal Rules: Dbl Num Key Var ------
-
+// ------ Terminal Primary Rules: Dbl Num Key Var ------
+ 
 Dbl
   = float:([0-9]* "." [0-9]+)  ws { let d = parseFloat(float.join("")); return `${d}`; }
 
@@ -177,7 +179,7 @@ comma
   = ws "," ws
  
 str
-  = string:[a-zA-Z]+  { return string.join("") }
+  = string:[a-zA-Z]+       { return string.join("") }
 
 sp
   = [ ]+  // Space  [ \t\r\n\f]+

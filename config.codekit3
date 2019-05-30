@@ -1850,6 +1850,28 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/bas/util/FontAwe.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/bas/util/FontAwe-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/bas/util/Latex.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/bas/util/Latex-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/bas/util/Match.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2103,14 +2125,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/math/par/Ascii.esm.ex": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/math/par/Ascii.esm.ex",
-		"oF": 1
-		},
 	"/pub/math/par/Ascii.esm.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2121,25 +2135,6 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
-		},
-	"/pub/math/par/Ascii.non.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/math/par/Ascii.non-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/math/par/Ascii.pegjs": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/math/par/Ascii.pegjs",
-		"oF": 1
 		},
 	"/pub/math/ptn/Adt.js": {
 		"bF": 0,
@@ -2173,22 +2168,6 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
-		},
-	"/pub/math/test/Ascii.esm": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/math/test/Ascii.esm",
-		"oF": 1
-		},
-	"/pub/math/test/Ascii.sh": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/math/test/Ascii.sh",
-		"oF": 1
 		},
 	"/pub/math/test/Run.js": {
 		"bF": 0,
@@ -2946,16 +2925,13 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/math/par/Ascii.com.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/src/math/par/Ascii.com-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
+	"/src/math/par/Ascii.esm.ex": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/src/math/par/Ascii.esm.ex",
+		"oF": 0
 		},
 	"/src/math/par/Ascii.pegjs": {
 		"cB": 0,
@@ -2965,21 +2941,13 @@
 		"oAP": "/src/math/par/Ascii.pegjs",
 		"oF": 0
 		},
-	"/src/math/par/Ascii.Pri.pegjs": {
+	"/src/math/par/gram.sh": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 1,
-		"oAP": "/src/math/par/Ascii.Pri.pegjs",
-		"oF": 1
-		},
-	"/src/math/par/Ascii.Sec.pegjs": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/src/math/par/Ascii.Sec.pegjs",
-		"oF": 1
+		"oA": 0,
+		"oAP": "/src/math/par/gram.sh",
+		"oF": 0
 		},
 	"/src/math/ptn/Adt.coffee": {
 		"ft": 32,
@@ -3013,22 +2981,6 @@
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
-		},
-	"/src/math/test/Ascii.esm": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/src/math/test/Ascii.esm",
-		"oF": 0
-		},
-	"/src/math/test/Ascii.sh": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/src/math/test/Ascii.sh",
-		"oF": 0
 		},
 	"/src/math/test/TestAscii.js": {
 		"bF": 0,
@@ -4340,6 +4292,22 @@
 		"hM": 0,
 		"oA": 0,
 		"oAP": "/zzz/peg/ascii/Ascii.pegjs",
+		"oF": 0
+		},
+	"/zzz/peg/ascii/Ascii.Pri.pegjs": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/peg/ascii/Ascii.Pri.pegjs",
+		"oF": 0
+		},
+	"/zzz/peg/ascii/Ascii.Sec.pegjs": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/peg/ascii/Ascii.Sec.pegjs",
 		"oF": 0
 		},
 	"/zzz/peg/ascii/run.js": {
@@ -7031,17 +6999,6 @@
 		},
 	"languageDefaultsUserDefined": [
 		{
-			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.html",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "",
-			"autoOutputPathReplace2": "",
-			"autoOutputPathStyle": 0,
-			"fileExtension": "html",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
 			"autoOutputAction": 0,
 			"autoOutputPathFilenamePattern": "*.js",
 			"autoOutputPathRelativePath": "",
@@ -7049,6 +7006,17 @@
 			"autoOutputPathReplace2": "pub/vue",
 			"autoOutputPathStyle": 3,
 			"fileExtension": "vue",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.html",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "",
+			"autoOutputPathReplace2": "",
+			"autoOutputPathStyle": 0,
+			"fileExtension": "html",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}
