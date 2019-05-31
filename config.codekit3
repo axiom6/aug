@@ -2059,6 +2059,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/math/adt/Adt.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/adt/Adt-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/math/doc/Basics.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2143,6 +2154,17 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/math/ptn/Adt-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/math/ptn/DiffEQ.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/ptn/DiffEQ-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2870,6 +2892,28 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/src/math/adt/Adt.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/math/adt/Adt.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/math/adt/Ptn.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/math/adt/Ptn.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
 	"/src/math/doc/Basics.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -2949,12 +2993,12 @@
 		"oAP": "/src/math/par/gram.sh",
 		"oF": 0
 		},
-	"/src/math/ptn/Adt.coffee": {
+	"/src/math/ptn/DiffEQ.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/math/ptn/Adt.js",
+		"oAP": "/pub/math/ptn/DiffEQ.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
@@ -2966,17 +3010,6 @@
 		"mi": 0,
 		"oA": 0,
 		"oAP": "/pub/math/ptn/MathML.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/math/ptn/Ptn.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/math/ptn/Ptn.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
@@ -4402,6 +4435,14 @@
 		"hM": 0,
 		"oA": 0,
 		"oAP": "/zzz/peg/ref/LatexKeys.txt",
+		"oF": 0
+		},
+	"/zzz/scala/Diff.scala": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/scala/Diff.scala",
 		"oF": 0
 		},
 	"/zzz/ui/Brew.coffee": {

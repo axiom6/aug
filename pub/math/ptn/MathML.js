@@ -6,48 +6,20 @@ import {
 
 import Latex from '../../bas/util/Latex.js';
 
-import A from '../ptn/Adt.js';
+import A from '../adt/Adt.js';
 
-import Ptn from '../ptn/Ptn.js';
+import Ptn from '../adt/Ptn.js';
 
-import Ascii from '../par/Ascii.esm.js';
-
-//let Ascii = { parse:peg$parse, error:peg$SyntaxError };
-//export default Ascii;
 MathML = class MathML {
   constructor() {
+    this.markup = this.markup.bind(this);
     this.key = "";
     this.math = {};
     this.ptns = this.doPtns();
   }
 
   doParse(asc, key) {
-    var asa, e, err, par;
-    par = "X";
-    asa = [];
-    err = {};
-    try {
-      par = Ascii.parse(asc);
-      try {
-        // console.log( 'MathML.doParse() par', par )
-        asa = eval(par);
-        // console.log( 'MathML.doParse() asa', asa )
-        this.markup(asa, key);
-      } catch (error) {
-        e = error;
-        console.error('MathML.doParse() eval  error', key, e);
-      }
-    } catch (error) {
-      e = error;
-      err.found = e.found;
-      err.msg = e.message;
-      err.loc = e.location;
-      console.error('MathML.doParse() parse error', {
-        key: key,
-        ascii: asc,
-        error: err
-      });
-    }
+    Ptn.parse(asc, key, this.markup);
   }
 
   markup(asa, key) {
@@ -60,10 +32,6 @@ MathML = class MathML {
   }
 
   // console.log( 'MathML.markup()', @math[@key] )
-  head() {
-    return this.math[this.key] += "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\">\n<?xml-stylesheet type=\"text/css\" href=\"MathML.css\">\n<root xmlns=\"http://www.w3.org/1998/Math/MathML\">";
-  }
-
   app(...args) {
     var arg, i, len;
     for (i = 0, len = args.length; i < len; i++) {

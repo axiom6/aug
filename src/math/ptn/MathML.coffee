@@ -1,12 +1,8 @@
 
 import {match} from '../../bas/util/Match.js'
 import Latex   from '../../bas/util/Latex.js'
-import A       from '../ptn/Adt.js'
-import Ptn     from '../ptn/Ptn.js'
-import Ascii   from '../par/Ascii.esm.js'
-
-#let Ascii = { parse:peg$parse, error:peg$SyntaxError };
-#export default Ascii;
+import A       from '../adt/Adt.js'
+import Ptn     from '../adt/Ptn.js'
 
 class MathML
 
@@ -16,27 +12,10 @@ class MathML
     @ptns = @doPtns()
 
   doParse:( asc, key ) ->
-    par = "X"
-    asa = []
-    err = {};
-    # console.log( 'doParse() asc', asc )
-
-    try
-      par = Ascii.parse(  asc )
-      # console.log( 'MathML.doParse() par', par )
-      try
-        asa = eval( par )
-        # console.log( 'MathML.doParse() asa', asa )
-        @markup( asa, key )
-      catch e
-        console.error( 'MathML.doParse() eval  error', key, e )
-    catch e
-      err.found = e.found; err.msg = e.message; err.loc = e.location
-      console.error( 'MathML.doParse() parse error', { key:key, ascii:asc, error:err } )
-
+    Ptn.parse( asc, key, @markup )
     return
 
-  markup:( asa, key ) ->
+  markup:( asa, key ) =>
     @key = key
     @math[@key] = ""
     #head()
@@ -45,11 +24,6 @@ class MathML
     @app( "</math>" ) # ,"</root>"
     # console.log( 'MathML.markup()', @math[@key] )
     return
-
-  head:() ->
-    @math[@key] += """<?xml version="1.0" encoding="UTF-8" standalone="yes">
-                      <?xml-stylesheet type="text/css" href="MathML.css">
-                      <root xmlns="http://www.w3.org/1998/Math/MathML">"""
 
   app:( ...args ) ->
     @math[@key] += arg for arg in args
@@ -119,7 +93,6 @@ class MathML
     uni = if obj? then obj.uc else '?'
     @tag('mo', uni )
     return
-
 
   exp:( asa ) ->
     try

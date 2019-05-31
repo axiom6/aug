@@ -1,5 +1,6 @@
 
-import {_,REST}    from '../../bas/util/Match.js'
+import {_,REST} from '../../bas/util/Match.js'
+import Ascii    from '../par/Ascii.esm.js'
 
 class Ptn
 
@@ -35,5 +36,20 @@ class Ptn
     # for i in [0...ptns.length] by 2
     #   console.log( 'Ptn.toPtns()', { ptn:ptns[i], type:Ptn.type(ptns[i]) } )
     ptns
+
+  @parse:( asc, key, process ) ->
+    par = "X"
+    asa = []
+    err = {};
+    try
+      par = Ascii.parse(  asc )
+      try
+        asa = eval( par )
+        process( asa, key )
+      catch e
+        console.error( 'MathML.doParse() eval  error', key, e )
+    catch e
+      err.found = e.found; err.msg = e.message; err.loc = e.location
+      console.error( 'Ptn.doParse() parse error', { key:key, ascii:asc, error:err } )
 
 export default Ptn
