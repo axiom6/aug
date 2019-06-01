@@ -35,7 +35,7 @@ class Basics
     return exps
 
   doExp:( key, exp, i  ) ->
-    @mathML.doParse( exp.asc, key )
+    @mathML.parse( exp.asc, key )
     exp.mathML = @mathML.math[key]
     mod = i       % @ncol
     row = (i-mod) / @ncol + 1

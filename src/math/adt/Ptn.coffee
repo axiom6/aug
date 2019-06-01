@@ -37,19 +37,27 @@ class Ptn
     #   console.log( 'Ptn.toPtns()', { ptn:ptns[i], type:Ptn.type(ptns[i]) } )
     ptns
 
-  @parse:( asc, key, process ) ->
-    par = "X"
-    asa = []
-    err = {};
+  @parse:( ascii ) ->
+    sst = "X"
+    ast = []
+    err = {}
     try
-      par = Ascii.parse(  asc )
+      sst = Ascii.parse( ascii )
       try
-        asa = eval( par )
-        process( asa, key )
+        ast = eval( sst )
       catch e
-        console.error( 'MathML.doParse() eval  error', key, e )
+        console.error( 'Ptn.parse() eval  error', key, e )
     catch e
       err.found = e.found; err.msg = e.message; err.loc = e.location
-      console.error( 'Ptn.doParse() parse error', { key:key, ascii:asc, error:err } )
+      console.error( 'Ptn.doParse() parse error', { key:key, ascii:ascii, error:err } )
+    ast
+
+  @toSst:( ast ) ->
+    sst = "["
+    for i in [0...ast.length] when ast[i]?
+      sst += if Array.isArray(ast[i]) then Ptn.toSst(ast[i]) else ast[i].toString()
+      sst += ',' if i < ast.length-1
+    sst += "]"
+    sst
 
 export default Ptn

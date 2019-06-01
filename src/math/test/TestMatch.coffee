@@ -33,18 +33,18 @@ class TestMatch
       console.log( 'MathML.doExp.toPtns() ptns', ptns )
       ptns
 
-    calc1 = ( exp ) ->
+    calc1 = ( ast ) ->
       ptns = toPtns([
         Add, (u,v) => Add(u,v),
         Sub, (u,v) => Sub(u,v),
         Mul, (u,v) => Mul(u,v),
         Div, (u,v) => Div(u,v)  ] )
-      match( exp, ...ptns )
+      match( ast, ...ptns )
 
     calc1(['Add',1,2] )
 
-    calc2 = ( exp) ->
-      match( exp,
+    calc2 = ( ast ) ->
+      match(  ast,
         f2(Add), (u,v) => Add(u,v),
         f2(Sub), (u,v) => Sub(u,v),
         f2(Mul), (u,v) => Mul(u,v),
@@ -52,8 +52,8 @@ class TestMatch
         _,            'Calc2 Error'
       )
 
-    calc3 = ( exp) ->
-      match( exp,
+    calc3 = ( ast ) ->
+      match(  ast,
         ['Add',_,_], (u,v) => Add(u,v),
         ['Sub',_,_], (u,v) => Sub(u,v),
         ['Mul',_,_], (u,v) => Mul(u,v),

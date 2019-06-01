@@ -116,7 +116,7 @@ Basics = class Basics {
 
   doExp(key, exp, i) {
     var col, mod, row;
-    this.mathML.doParse(exp.asc, key);
+    this.mathML.parse(exp.asc, key);
     exp.mathML = this.mathML.math[key];
     mod = i % this.ncol;
     row = (i - mod) / this.ncol + 1;

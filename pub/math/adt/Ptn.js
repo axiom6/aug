@@ -5,6 +5,8 @@ import {
   REST
 } from '../../bas/util/Match.js';
 
+import Ascii from '../par/Ascii.esm.js';
+
 Ptn = class Ptn {
   static toPtn(f) {
     var a, i, j, ref;
@@ -51,6 +53,49 @@ Ptn = class Ptn {
     // for i in [0...ptns.length] by 2
     //   console.log( 'Ptn.toPtns()', { ptn:ptns[i], type:Ptn.type(ptns[i]) } )
     return ptns;
+  }
+
+  static parse(ascii) {
+    var ast, e, err, sst;
+    sst = "X";
+    ast = [];
+    err = {};
+    try {
+      sst = Ascii.parse(ascii);
+      try {
+        ast = eval(sst);
+      } catch (error) {
+        e = error;
+        console.error('Ptn.parse() eval  error', key, e);
+      }
+    } catch (error) {
+      e = error;
+      err.found = e.found;
+      err.msg = e.message;
+      err.loc = e.location;
+      console.error('Ptn.doParse() parse error', {
+        key: key,
+        ascii: ascii,
+        error: err
+      });
+    }
+    return ast;
+  }
+
+  static toSst(ast) {
+    var i, j, ref, sst;
+    sst = "[";
+    for (i = j = 0, ref = ast.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
+      if (!(ast[i] != null)) {
+        continue;
+      }
+      sst += Array.isArray(ast[i]) ? Ptn.toSst(ast[i]) : ast[i].toString();
+      if (i < ast.length - 1) {
+        sst += ',';
+      }
+    }
+    sst += "]";
+    return sst;
   }
 
 };

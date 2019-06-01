@@ -52,7 +52,7 @@ TestMatch = class TestMatch {
       console.log('MathML.doExp.toPtns() ptns', ptns);
       return ptns;
     };
-    calc1 = function(exp) {
+    calc1 = function(ast) {
       var ptns;
       ptns = toPtns([
         Add,
@@ -80,11 +80,11 @@ TestMatch = class TestMatch {
         v);
         }
       ]);
-      return match(exp, ...ptns);
+      return match(ast, ...ptns);
     };
     calc1(['Add', 1, 2]);
-    calc2 = function(exp) {
-      return match(exp, f2(Add), (u, v) => {
+    calc2 = function(ast) {
+      return match(ast, f2(Add), (u, v) => {
         return Add(u, v);
       }, f2(Sub), (u, v) => {
         return Sub(u, v);
@@ -94,8 +94,8 @@ TestMatch = class TestMatch {
         return Div(u, v);
       }, _, 'Calc2 Error');
     };
-    calc3 = function(exp) {
-      return match(exp, ['Add', _, _], (u, v) => {
+    calc3 = function(ast) {
+      return match(ast, ['Add', _, _], (u, v) => {
         return Add(u, v);
       }, ['Sub', _, _], (u, v) => {
         return Sub(u, v);

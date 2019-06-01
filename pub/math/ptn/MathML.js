@@ -12,26 +12,28 @@ import Ptn from '../adt/Ptn.js';
 
 MathML = class MathML {
   constructor() {
+    this.parse = this.parse.bind(this);
     this.markup = this.markup.bind(this);
     this.key = "";
     this.math = {};
     this.ptns = this.doPtns();
   }
 
-  doParse(asc, key) {
-    Ptn.parse(asc, key, this.markup);
+  parse(ascii, key) {
+    var ast;
+    ast = Ptn.parse(ascii);
+    return this.markup(ast, key);
   }
 
-  markup(asa, key) {
+  markup(ast, key) {
     this.key = key;
     this.math[this.key] = "";
-    //head()
     this.app("<math>");
-    this.exp(asa);
-    this.app("</math>"); // ,"</root>"
+    this.exp(ast);
+    this.app("</math>");
+    return this.math[this.key];
   }
 
-  // console.log( 'MathML.markup()', @math[@key] )
   app(...args) {
     var arg, i, len;
     for (i = 0, len = args.length; i < len; i++) {
@@ -147,11 +149,11 @@ MathML = class MathML {
     this.tag('mo', uni);
   }
 
-  exp(asa) {
+  exp(ast) {
     var e;
     try {
       // console.log( 'MathML.exp(asa)', asa )
-      match(asa, ...this.ptns);
+      match(ast, ...this.ptns);
     } catch (error) {
       e = error;
       console.error('MathML.exp()', e);

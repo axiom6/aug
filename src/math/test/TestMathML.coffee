@@ -10,10 +10,10 @@
 
 import MathML from '../ptn/MathML.js'
 
-class TestMathML extends MathML
+class TestMathML
 
   constructor:() ->
-    super()
+    @mathML = new MathML()
 
   trg1ML  = "<math><mrow><mrow>cot<mfenced><mi>x</mi></mfenced></mrow><mo>+</mo>"
   trg1ML += "<mrow>sin<mfenced><mi>x</mi></mfenced></mrow></mrow></math>"
@@ -60,64 +60,64 @@ class TestMathML extends MathML
 
   testMarkup:() ->
 
-    exps =
-      Sin1:{ exp:['Sin',Math.PI/6],                         math:sin1ML }
-      Add1:{ exp:['Add','a','b'],                           math:add1ML }
-      Equ1:{ exp:['Equ','E',['Mul','m',['Pow','C',2]]],     math:equ1ML }
-      Sum1:{ exp:['Sum',['Equ','i',1],'n',['Sub','x','i']], math:sum1ML }
-      Mul1:{ exp:['Mul',['Paren',['Add',2.2,3]],['Paren',['Add',1,2]]], math:mul1ML }
-      Mul2:{ exp:['Add',['Mul',2.2,3],['Mul',4,3]], math:mul2ML }
-      Tan1:{ exp:['Add',['Mul',2.2,3],['Mul','x',['Arctan','y']]], math:tan1ML }
-      Sub1:{ exp:['Sub',['Mul',2.2,3],['Pow','x','y']], math:sub1ML }
-      Equ2:{ exp:['Equ',['Pow',2.2,3],['Div','x','y']], math:equ2ML }
-      Sub2:{ exp:['Sub',['Mul',['Neg',2.2],3],['Div','x',['Neg','y']]], math:sub2ML }
-      Mul3:{ exp:['Mul','x',['Mul','x',['Paren',['Add','a',['Sus','b',1]]]]], math:mul3ML }
-      Sin2:{ exp:['Add','a',['Mul','b',['Sin',['Latex','theta']]]], math:sin2ML }
-      Fun1:{ exp:['Mul',['Fun','fn',['Add','a','b']],['Fun','g','theta']], math:fun1ML }
-      Int1:{ exp:['Int',['Mul','x',2]], math:int1ML }
-      Vec1:{ exp:['Vec',1,2,3], math:vec1ML }
-      Mat1:{ exp:['Mat',['Vec',1,2,3],['Vec',4,5,6]], math:mat1ML }
-      Lim1:{ exp:['Lim','i','n'], math:lim1ML }
-      Sum2:{ exp:['Sum','i','n','j'], math:sum2ML }
-      Sum3:{ exp:['Sum','i','n',['Add','j',1]], math:sum3ML }
+    asts =
+      Sin1:{ ast:['Sin',Math.PI/6],                         math:sin1ML }
+      Add1:{ ast:['Add','a','b'],                           math:add1ML }
+      Equ1:{ ast:['Equ','E',['Mul','m',['Pow','C',2]]],     math:equ1ML }
+      Sum1:{ ast:['Sum',['Equ','i',1],'n',['Sub','x','i']], math:sum1ML }
+      Mul1:{ ast:['Mul',['Paren',['Add',2.2,3]],['Paren',['Add',1,2]]], math:mul1ML }
+      Mul2:{ ast:['Add',['Mul',2.2,3],['Mul',4,3]], math:mul2ML }
+      Tan1:{ ast:['Add',['Mul',2.2,3],['Mul','x',['Arctan','y']]], math:tan1ML }
+      Sub1:{ ast:['Sub',['Mul',2.2,3],['Pow','x','y']], math:sub1ML }
+      Equ2:{ ast:['Equ',['Pow',2.2,3],['Div','x','y']], math:equ2ML }
+      Sub2:{ ast:['Sub',['Mul',['Neg',2.2],3],['Div','x',['Neg','y']]], math:sub2ML }
+      Mul3:{ ast:['Mul','x',['Mul','x',['Paren',['Add','a',['Sus','b',1]]]]], math:mul3ML }
+      Sin2:{ ast:['Add','a',['Mul','b',['Sin',['Latex','theta']]]], math:sin2ML }
+      Fun1:{ ast:['Mul',['Fun','fn',['Add','a','b']],['Fun','g','theta']], math:fun1ML }
+      Int1:{ ast:['Int',['Mul','x',2]], math:int1ML }
+      Vec1:{ ast:['Vec',1,2,3], math:vec1ML }
+      Mat1:{ ast:['Mat',['Vec',1,2,3],['Vec',4,5,6]], math:mat1ML }
+      Lim1:{ ast:['Lim','i','n'], math:lim1ML }
+      Sum2:{ ast:['Sum','i','n','j'], math:sum2ML }
+      Sum3:{ ast:['Sum','i','n',['Add','j',1]], math:sum3ML }
 
 
     console.log( "-------------------- testMarkup ----------------------------" )
 
-    for key, obj of exps
-      @markup( obj.exp, key )
-      status = if @math[key] is obj.math then 'Pass' else 'Fail'
-      console.log( status, key, obj.exp, '\n  ', @math[key] )
+    for key, obj of asts
+      @mathML.markup( obj.ast, key )
+      status = if @mathML.math[key] is obj.math then 'Pass' else 'Fail'
+      console.log( status, key, obj.exp, '\n  ', @mathML.math[key] )
     return
 
   testParse:( key ) ->
 
-    exps =
-      Par1:{ asc:"(a+b)*(c^2)",        math:par1ML }
-      Trg1:{ asc:"cos(x)+sin(x)",      math:trg1ML }
-      Sus1:{ asc:"x_1 + x_2",          math:sus1ML }
-      Mul1:{ asc:"(2.2+3)*(1+2)",      math:mul1ML }
-      Add2:{ asc:"2.2*3+4*3",          math:add2ML }
-      Tan1:{ asc:"2.2*3+x*arctan(y)",  math:tan1ML }
-      Sub1:{ asc:"2.2*3-x^y",          math:sub1ML }
-      Equ2:{ asc:"2.2^3 = x/y",        math:equ2ML }
-      Sub2:{ asc:"-2.2 * 3-x / -y",    math:sub2ML }
-      Mul3:{ asc:"x*x*(a+b_1)",        math:mul3ML }
-      Sin2:{ asc:"a+b*sin(\\theta)",   math:sin2ML }
-      Fun1:{ asc:"fn(a+b)*g(theta)",   math:fun1ML }
-      Int1:{ asc:"int(x*2)",           math:int1ML }
-      Vec1:{ asc:"[1,2,3]",            math:vec1ML }
-      Mat1:{ asc:"[[1,2,3],[4,5,6]]",  math:mat1ML }
-      Lim1:{ asc:"lim_i^n",            math:lim1ML }
-      Sum2:{ asc:"sum_i^n~j",          math:sum2ML }
-      Sum3:{ asc:"sum_i^n~j+1",        math:sum3ML }
+    asciis =
+      Par1:{ ascii:"(a+b)*(c^2)",        math:par1ML }
+      Trg1:{ ascii:"cos(x)+sin(x)",      math:trg1ML }
+      Sus1:{ ascii:"x_1 + x_2",          math:sus1ML }
+      Mul1:{ ascii:"(2.2+3)*(1+2)",      math:mul1ML }
+      Add2:{ ascii:"2.2*3+4*3",          math:add2ML }
+      Tan1:{ ascii:"2.2*3+x*arctan(y)",  math:tan1ML }
+      Sub1:{ ascii:"2.2*3-x^y",          math:sub1ML }
+      Equ2:{ ascii:"2.2^3 = x/y",        math:equ2ML }
+      Sub2:{ ascii:"-2.2 * 3-x / -y",    math:sub2ML }
+      Mul3:{ ascii:"x*x*(a+b_1)",        math:mul3ML }
+      Sin2:{ ascii:"a+b*sin(\\theta)",   math:sin2ML }
+      Fun1:{ ascii:"fn(a+b)*g(theta)",   math:fun1ML }
+      Int1:{ ascii:"int(x*2)",           math:int1ML }
+      Vec1:{ ascii:"[1,2,3]",            math:vec1ML }
+      Mat1:{ ascii:"[[1,2,3],[4,5,6]]",  math:mat1ML }
+      Lim1:{ ascii:"lim_i^n",            math:lim1ML }
+      Sum2:{ ascii:"sum_i^n~j",          math:sum2ML }
+      Sum3:{ ascii:"sum_i^n~j+1",        math:sum3ML }
 
     console.log( "---------------------- testParse --------------------------" )
 
-    for key, obj of exps
-      @doParse( obj.asc, key )
-      status = if @math[key] is obj.math then 'Pass' else 'Fail'
-      console.log( status, key, obj.asc, '\n  ', @math[key] )
+    for key, obj of asciis
+      @mathML.parse( obj.ascii, key )
+      status = if @mathML.math[key] is obj.math then 'Pass' else 'Fail'
+      console.log( status, key, obj.ascii, '\n  ', @mathML.math[key] )
 
     return
 
@@ -132,12 +132,12 @@ class TestMathML extends MathML
     console.log( 'Add', Adda, Adds )
     console.log( 'Sin', Suma, Sums )
 
-    @markup( Sina, 'Sina' )
-    @markup( Sins, 'Sins' )
-    @markup( Adda, 'Adda' )
-    #markup( Adds, 'Adds' )
-    #markup( Suma, 'Suma' )
-    #markup( Sums, 'Sums' )
+    @mathML.markup( Sina, 'Sina' )
+    @mathML.markup( Sins, 'Sins' )
+    @mathML.markup( Adda, 'Adda' )
+    #mathML.markup( Adds, 'Adds' )
+    #mathML.markup( Suma, 'Suma' )
+    #mathML.markup( Sums, 'Sums' )
 
     return
 

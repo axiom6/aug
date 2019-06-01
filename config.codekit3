@@ -2070,6 +2070,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/math/adt/Ptn.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/adt/Ptn-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/math/doc/Basics.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2077,6 +2088,17 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/math/doc/Basics-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/math/doc/Differ.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/doc/Differ-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2147,17 +2169,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/math/ptn/Adt.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/math/ptn/Adt-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/pub/math/ptn/DiffEQ.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2180,17 +2191,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/math/ptn/Ptn.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/math/ptn/Ptn-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/pub/math/test/Run.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2209,6 +2209,17 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/math/test/TestAscii-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/math/test/TestDiffEQ.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/test/TestDiffEQ-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2925,6 +2936,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/src/math/doc/Differ.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/math/doc/Differ.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
 	"/src/math/doc/Solves.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -3023,6 +3045,17 @@
 		"oA": 1,
 		"oAP": "/src/math/test/TestAscii-min.js",
 		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/math/test/TestDiffEQ.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/math/test/TestDiffEQ.js",
+		"oF": 0,
+		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
@@ -7040,17 +7073,6 @@
 		},
 	"languageDefaultsUserDefined": [
 		{
-			"autoOutputAction": 0,
-			"autoOutputPathFilenamePattern": "*.js",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "vue",
-			"autoOutputPathReplace2": "pub/vue",
-			"autoOutputPathStyle": 3,
-			"fileExtension": "vue",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
 			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.html",
 			"autoOutputPathRelativePath": "",
@@ -7058,6 +7080,17 @@
 			"autoOutputPathReplace2": "",
 			"autoOutputPathStyle": 0,
 			"fileExtension": "html",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 0,
+			"autoOutputPathFilenamePattern": "*.js",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "vue",
+			"autoOutputPathReplace2": "pub/vue",
+			"autoOutputPathStyle": 3,
+			"fileExtension": "vue",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

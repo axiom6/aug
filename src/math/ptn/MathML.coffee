@@ -11,19 +11,17 @@ class MathML
     @math = {}
     @ptns = @doPtns()
 
-  doParse:( asc, key ) ->
-    Ptn.parse( asc, key, @markup )
-    return
+  parse:( ascii, key ) =>
+    ast  = Ptn.parse( ascii )
+    @markup( ast, key )
 
-  markup:( asa, key ) =>
+  markup:( ast, key ) =>
     @key = key
     @math[@key] = ""
-    #head()
     @app( "<math>")
-    @exp(  asa )
-    @app( "</math>" ) # ,"</root>"
-    # console.log( 'MathML.markup()', @math[@key] )
-    return
+    @exp(  ast )
+    @app( "</math>" )
+    @math[@key]
 
   app:( ...args ) ->
     @math[@key] += arg for arg in args
@@ -94,10 +92,10 @@ class MathML
     @tag('mo', uni )
     return
 
-  exp:( asa ) ->
+  exp:( ast ) ->
     try
       # console.log( 'MathML.exp(asa)', asa )
-      match( asa, ...@ptns )
+      match( ast, ...@ptns )
     catch e
       console.error( 'MathML.exp()', e )
     return
