@@ -130,7 +130,7 @@ class MathML
     A.Arcsec, (u)      => @fun('arcsec', u ),
     A.Arccot, (u)      => @fun('arccot', u ),
     A.Fun,    (f,u)    => @fun( f,         u ),
-    A.D,      (u)      => @uni('d',       u ),
+    A.D,      (u)      => @uni('d',    u ),   # @dd;
     A.Int,    (u)      => @uni('\u222B', u ),
     A.DefInt, (a,b,u)  => @sum('msubsup',   a, b, '\u222B', u ),
     A.Sum,    (a,b,u)  => @sum('munderover',a, b, '\u2211', u ),

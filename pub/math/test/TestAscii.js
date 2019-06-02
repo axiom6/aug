@@ -6,6 +6,15 @@ let Tracer = require('../../../node_modules/pegjs-backtrace');
 
 class TestAscii {
 
+  let Exps = {
+    Sum1:{ ascii:"lim_(N->oo) sum_(i=0)^N" },
+    Add1:{ ascii:"lim_(N->oo) sum_(i=0)^N" },
+    Mul1:{ ascii:"lim_(N->oo) sum_(i=0)^N" },
+    Int1:{ ascii:"int_0^1 f(x)dx" },
+    Xxx1:{ ascii:"lim_(N->oo) sum_(i=0)^N" },
+    Yyy1:{ ascii:"lim_(N->oo) sum_(i=0)^N" }
+  }
+
   static runTrace = (asc) => {
     let par = "X";
     let err = {};

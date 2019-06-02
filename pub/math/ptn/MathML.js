@@ -328,7 +328,7 @@ MathML = class MathML {
       A.D,
       (u) => {
         return this.uni('d',
-      u);
+      u); // @dd;
       },
       A.Int,
       (u) => {
