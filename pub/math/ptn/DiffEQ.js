@@ -10,19 +10,9 @@ import Ptn from '../adt/Ptn.js';
 
 DiffEQ = class DiffEQ {
   constructor() {
-    this.str = this.str.bind(this);
     this.vec = this.vec.bind(this);
     this.pow = this.pow.bind(this);
-    this.pow2 = this.pow2.bind(this);
     this.ptns = this.doPtns();
-  }
-
-  str(s) {
-    if (Number.isNaN(Number(s))) {
-      return ['D', s];
-    } else {
-      return '0';
-    }
   }
 
   vec(...args) {
@@ -36,18 +26,14 @@ DiffEQ = class DiffEQ {
   }
 
   pow(u, v) {
-    return ['Mul', ['Mul', v, ['Pow', u, ['Sub', v, '1']]], ['D', 'u']];
-  }
-
-  pow2(u, v) {
-    var adt1, adt2;
-    adt1 = ['Mul', ['Mul', v, ['Pow', u, ['Sub', v, '1']]], this.d(u)];
-    console.log('DiffEQ pow() adt1', adt1);
-    if (typeof v !== 'nunber') {
-      adt2 = ['Mul', ['Mul', ['Ln', u], ['Pow', u, v]], this.d(v)];
-      console.log('DiffEQ pow() adt2', adt2);
-      adt1 = ['Add', adt1, adt2];
-      console.log('DiffEQ pow() adt3', adt1);
+    var adt1, adt2, adt3;
+    adt1 = [];
+    if (typeof v === 'number') {
+      adt1 = ['Mul', ['Mul', v, ['Pow', u, v - 1]], this.d(u)];
+    } else {
+      adt2 = ['Mul', ['Mul', v, ['Pow', u, ['Sub', v, 1]]], this.d(u)];
+      adt3 = ['Mul', ['Mul', ['Ln', u], ['Pow', u, v]], this.d(v)];
+      adt1 = ['Add', adt2, adt3];
     }
     return adt1;
   }
@@ -111,21 +97,13 @@ DiffEQ = class DiffEQ {
       this.d(v)]],
       ['Pow',
       v,
-      '2']];
+      2]];
       },
       A.Pow,
       (u,
       v) => {
-        return ['Mul',
-      ['Mul',
-      v,
-      ['Pow',
-      u,
-      ['Sub',
-      v,
-      '1']]],
-      ['D',
-      'u']];
+        return this.pow(u,
+      v);
       },
       A.Neg,
       (u) => {
@@ -139,7 +117,7 @@ DiffEQ = class DiffEQ {
       this.d(u)],
       ['Pow',
       u,
-      '2']];
+      2]];
       },
       A.Abs,
       (u) => {
@@ -191,7 +169,7 @@ DiffEQ = class DiffEQ {
       ['Mul',
       ['Sqrt',
       u],
-      '2']];
+      2]];
       },
       A.E,
       (u) => {
@@ -222,7 +200,7 @@ DiffEQ = class DiffEQ {
       ['Pow',
       ['Sec',
       u],
-      '2'],
+      2],
       this.d(u)]];
       },
       A.Csc,
@@ -265,7 +243,7 @@ DiffEQ = class DiffEQ {
       1,
       ['Pow',
       u,
-      '2']]]];
+      2]]]];
       },
       A.Arccos,
       (u) => {
@@ -277,7 +255,7 @@ DiffEQ = class DiffEQ {
       1,
       ['Pow',
       u,
-      '2']]]]];
+      2]]]]];
       },
       A.Arctan,
       (u) => {
@@ -287,7 +265,7 @@ DiffEQ = class DiffEQ {
       1,
       ['Pow',
       u,
-      '2']]];
+      2]]];
       },
       A.Arccot,
       (u) => {
@@ -298,7 +276,7 @@ DiffEQ = class DiffEQ {
       1,
       ['Pow',
       u,
-      '2']]]];
+      2]]]];
       },
       A.Arccsc,
       (u) => {
@@ -311,8 +289,8 @@ DiffEQ = class DiffEQ {
       ['Sub',
       ['Pow',
       u,
-      '2'],
-      '1']]]]];
+      2],
+      1]]]]];
       },
       A.Arcsec,
       (u) => {
@@ -324,8 +302,8 @@ DiffEQ = class DiffEQ {
       ['Sub',
       ['Pow',
       u,
-      '2'],
-      '1']]]];
+      2],
+      1]]]];
       },
       A.Fun,
       (f,
@@ -392,11 +370,12 @@ DiffEQ = class DiffEQ {
       },
       'String',
       (s) => {
-        return this.str(s);
+        return ['D',
+      s];
       },
       'Number',
       (n) => {
-        return '0';
+        return 0;
       },
       '_',
       (q) => {

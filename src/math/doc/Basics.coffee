@@ -35,8 +35,8 @@ class Basics
     return exps
 
   doExp:( key, exp, i  ) ->
-    @mathML.parse( exp.asc, key )
-    exp.mathML = @mathML.math[key]
+    exp.mathML = @mathML.parse( exp.asc, key )
+    # console.log( 'Basics.doExp()', exp.mathML )
     mod = i       % @ncol
     row = (i-mod) / @ncol + 1
     col = mod + 1

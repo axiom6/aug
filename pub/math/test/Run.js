@@ -6,20 +6,20 @@
 
 // import TestMatch  from './TestMatch.js';
 // import TestAscii  from './TestAscii.js';
-   import TestMathML from './TestMathML.js';
+// import TestMathML from './TestMathML.js';
    import TestDiffEQ from './TestDiffEQ.js';
 
 console.log( "---------------------------- Begin ----------------------------")
 
 // TestMatch.doExp();
 
-   let testMathML = new TestMathML();
+// let testMathML = new TestMathML();
    let testDiffEQ = new TestDiffEQ();
 
 // TestAscii.run();
 
 // testMathML.testMarkup();
 
-   testMathML.testParse();
+//  testMathML.testParse();
 
    testDiffEQ.testDiffEQ();

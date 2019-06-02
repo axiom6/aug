@@ -1719,10 +1719,6 @@ var __vue_render__$f = function() {
   return _c(
     "div",
     [
-      _c("d-dabs", {
-        attrs: { comp: "Math", pages: _vm.pages, init: _vm.key }
-      }),
-      _vm._v(" "),
       _vm._l(_vm.pages, function(page) {
         return [
           _c("div", {
@@ -1751,7 +1747,7 @@ __vue_render__$f._withStripped = true;
   /* style */
   const __vue_inject_styles__$i = function (inject) {
     if (!inject) return
-    inject("data-v-43b0f12e_0", { source: ".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n", map: {"version":3,"sources":["MathND.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf","file":"MathND.vue","sourcesContent":[".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n"]}, media: undefined });
+    inject("data-v-749b2662_0", { source: ".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n", map: {"version":3,"sources":["MathND.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf","file":"MathND.vue","sourcesContent":[".page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -5807,31 +5803,47 @@ Ptn = class Ptn {
     return ptns;
   }
 
-  static parse(asc, key, process) {
-    var asa, e, err, par;
-    par = "X";
-    asa = [];
+  static parse(ascii) {
+    var ast, e, err, sst;
+    sst = "X";
+    ast = [];
     err = {};
     try {
-      par = Ascii.parse(asc);
+      sst = Ascii.parse(ascii);
       try {
-        asa = eval(par);
-        return process(asa, key);
+        ast = eval(sst);
       } catch (error) {
         e = error;
-        return console.error('MathML.doParse() eval  error', key, e);
+        console.error('Ptn.parse() eval  error', key, e);
       }
     } catch (error) {
       e = error;
       err.found = e.found;
       err.msg = e.message;
       err.loc = e.location;
-      return console.error('Ptn.doParse() parse error', {
+      console.error('Ptn.doParse() parse error', {
         key: key,
-        ascii: asc,
+        ascii: ascii,
         error: err
       });
     }
+    return ast;
+  }
+
+  static toSst(ast) {
+    var i, j, ref, sst;
+    sst = "[";
+    for (i = j = 0, ref = ast.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
+      if (!(ast[i] != null)) {
+        continue;
+      }
+      sst += Array.isArray(ast[i]) ? Ptn.toSst(ast[i]) : ast[i].toString();
+      if (i < ast.length - 1) {
+        sst += ',';
+      }
+    }
+    sst += "]";
+    return sst;
   }
 
 };
@@ -5842,26 +5854,28 @@ var MathML;
 
 MathML = class MathML {
   constructor() {
+    this.parse = this.parse.bind(this);
     this.markup = this.markup.bind(this);
     this.key = "";
     this.math = {};
     this.ptns = this.doPtns();
   }
 
-  doParse(asc, key) {
-    Ptn$1.parse(asc, key, this.markup);
+  parse(ascii, key) {
+    var ast;
+    ast = Ptn$1.parse(ascii);
+    return this.markup(ast, key);
   }
 
-  markup(asa, key) {
+  markup(ast, key) {
     this.key = key;
     this.math[this.key] = "";
-    //head()
     this.app("<math>");
-    this.exp(asa);
-    this.app("</math>"); // ,"</root>"
+    this.exp(ast);
+    this.app("</math>");
+    return this.math[this.key];
   }
 
-  // console.log( 'MathML.markup()', @math[@key] )
   app(...args) {
     var arg, i, len;
     for (i = 0, len = args.length; i < len; i++) {
@@ -5974,11 +5988,11 @@ MathML = class MathML {
     this.tag('mo', uni);
   }
 
-  exp(asa) {
+  exp(ast) {
     var e;
     try {
       // console.log( 'MathML.exp(asa)', asa )
-      match(asa, ...this.ptns);
+      match(ast, ...this.ptns);
     } catch (error) {
       e = error;
       console.error('MathML.exp()', e);
@@ -6351,8 +6365,8 @@ Basics = class Basics {
 
   doExp(key, exp, i) {
     var col, mod, row;
-    this.mathML.doParse(exp.asc, key);
-    exp.mathML = this.mathML.math[key];
+    exp.mathML = this.mathML.parse(exp.asc, key);
+    // console.log( 'Basics.doExp()', exp.mathML )
     mod = i % this.ncol;
     row = (i - mod) / this.ncol + 1;
     col = mod + 1;
@@ -6377,10 +6391,19 @@ let MathML$2 = {
         Basics: { title:'Basics', key:'Basics', klass:Basics$1, created:false }
       } } },
   
+  methods:{
+    mathMLElems: function ( exps ) {
+      for( let key in exps ){
+        let exp = exps[key];
+        let elem = this.$refs[exp.klass][0];
+        elem.innerHTML = exp.mathML; } }
+    },
+  
   mounted: function () {
-      this.basics = new  Basics$1();
-      this.exps   = this.basics.doExps(); }
-
+    this.basics = new  Basics$1();
+    this.exps   = this.basics.doExps();
+    this.$nextTick( function() {
+      this.mathMLElems( this.exps ); } ); }
 };
 
 /* script */
@@ -6393,18 +6416,25 @@ var __vue_render__$g = function() {
   var _c = _vm._self._c || _h;
   return _c(
     "div",
-    { staticClass: "comp" },
     [
-      _vm._l(_vm.exps, function(exp) {
-        return [
-          _c("div", {
-            class: exp.klass,
-            domProps: { innerHTML: _vm._s(exp.mathML) }
+      _c("d-dabs", {
+        attrs: { comp: "Math", pages: _vm.pages, init: _vm.key }
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "comp" },
+        [
+          _vm._l(_vm.exps, function(exp) {
+            return [
+              _c("div", { ref: exp.klass, refInFor: true, class: exp.klass })
+            ]
           })
-        ]
-      })
+        ],
+        2
+      )
     ],
-    2
+    1
   )
 };
 var __vue_staticRenderFns__$g = [];
@@ -6413,7 +6443,7 @@ __vue_render__$g._withStripped = true;
   /* style */
   const __vue_inject_styles__$j = function (inject) {
     if (!inject) return
-    inject("data-v-789286cb_0", { source: ".comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 2.5em;\n  display: grid;\n  grid-template-columns: 33% 33% 34%;\n  grid-template-rows: 11% 11% 11% 11% 11% 11% 11% 11% 12%;\n  grid-template-areas: \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\" \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\" \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .r1c1 {\n  display: grid;\n  grid-area: r1c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c2 {\n  display: grid;\n  grid-area: r1c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c3 {\n  display: grid;\n  grid-area: r1c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c1 {\n  display: grid;\n  grid-area: r2c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c2 {\n  display: grid;\n  grid-area: r2c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c3 {\n  display: grid;\n  grid-area: r2c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c1 {\n  display: grid;\n  grid-area: r3c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c2 {\n  display: grid;\n  grid-area: r3c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c3 {\n  display: grid;\n  grid-area: r3c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c1 {\n  display: grid;\n  grid-area: r4c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c2 {\n  display: grid;\n  grid-area: r4c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c3 {\n  display: grid;\n  grid-area: r4c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c1 {\n  display: grid;\n  grid-area: r5c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c2 {\n  display: grid;\n  grid-area: r5c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c3 {\n  display: grid;\n  grid-area: r5c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c1 {\n  display: grid;\n  grid-area: r6c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c2 {\n  display: grid;\n  grid-area: r6c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c3 {\n  display: grid;\n  grid-area: r6c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c1 {\n  display: grid;\n  grid-area: r7c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c2 {\n  display: grid;\n  grid-area: r7c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c3 {\n  display: grid;\n  grid-area: r7c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c1 {\n  display: grid;\n  grid-area: r8c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c2 {\n  display: grid;\n  grid-area: r8c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c3 {\n  display: grid;\n  grid-area: r8c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c1 {\n  display: grid;\n  grid-area: r9c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c2 {\n  display: grid;\n  grid-area: r9c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c3 {\n  display: grid;\n  grid-area: r9c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n", map: {"version":3,"sources":["MathML.vue","/Users/ax/Documents/prj/aug/vue/math/MathML.vue"],"names":[],"mappings":"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","file":"MathML.vue","sourcesContent":[".comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 2.5em;\n  display: grid;\n  grid-template-columns: 33% 33% 34%;\n  grid-template-rows: 11% 11% 11% 11% 11% 11% 11% 11% 12%;\n  grid-template-areas: \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\" \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\" \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .r1c1 {\n  display: grid;\n  grid-area: r1c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c2 {\n  display: grid;\n  grid-area: r1c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c3 {\n  display: grid;\n  grid-area: r1c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c1 {\n  display: grid;\n  grid-area: r2c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c2 {\n  display: grid;\n  grid-area: r2c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c3 {\n  display: grid;\n  grid-area: r2c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c1 {\n  display: grid;\n  grid-area: r3c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c2 {\n  display: grid;\n  grid-area: r3c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c3 {\n  display: grid;\n  grid-area: r3c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c1 {\n  display: grid;\n  grid-area: r4c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c2 {\n  display: grid;\n  grid-area: r4c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c3 {\n  display: grid;\n  grid-area: r4c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c1 {\n  display: grid;\n  grid-area: r5c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c2 {\n  display: grid;\n  grid-area: r5c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c3 {\n  display: grid;\n  grid-area: r5c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c1 {\n  display: grid;\n  grid-area: r6c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c2 {\n  display: grid;\n  grid-area: r6c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c3 {\n  display: grid;\n  grid-area: r6c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c1 {\n  display: grid;\n  grid-area: r7c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c2 {\n  display: grid;\n  grid-area: r7c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c3 {\n  display: grid;\n  grid-area: r7c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c1 {\n  display: grid;\n  grid-area: r8c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c2 {\n  display: grid;\n  grid-area: r8c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c3 {\n  display: grid;\n  grid-area: r8c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c1 {\n  display: grid;\n  grid-area: r9c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c2 {\n  display: grid;\n  grid-area: r9c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c3 {\n  display: grid;\n  grid-area: r9c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n","\n\n\n<template>\n  <div class=\"comp\">\n    <template v-for=\"exp in exps\">\n      <div :class=\"exp.klass\" v-html=\"exp.mathML\"></div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import MathND  from './MathND.vue';\n  import Dabs    from '../elem/Dabs.vue';\n  import Basics  from '../../pub/math/doc/Basics.js';\n\n  let MathML = {\n\n    extends: MathND,\n\n    components:{ 'd-dabs':Dabs },\n\n    data() {\n      return { comp:'MathML', key:'MathML', exps:{}, pages:{\n          Basics: { title:'Basics', key:'Basics', klass:Basics, created:false }\n        } } },\n    \n    mounted: function () {\n        this.basics = new  Basics();\n        this.exps   = this.basics.doExps(); }\n\n  }\n  \n  export default MathML;\n\n</script>\n\n<style lang=\"less\">\n  \n  .grid9x3() { display:grid; grid-template-columns:33% 33% 34%; grid-template-rows:11% 11% 11% 11% 11% 11% 11% 11% 12%;\n    grid-template-areas:\n      \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\"\n      \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\"\n      \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\"; }\n\n  .c( @rc ) { display:grid; grid-area:@rc; justify-self:stretch; align-self:stretch;\n    justify-items:center; align-items:center; background-color:black; color:wheat; border:solid thin wheat; }\n\n  .comp { background-color:black; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:2.5em;\n    .grid9x3(); justify-items:center; align-items:center;\n\n    .r1c1{.c(r1c1)}; .r1c2{.c(r1c2)}; .r1c3{.c(r1c3)};\n    .r2c1{.c(r2c1)}; .r2c2{.c(r2c2)}; .r2c3{.c(r2c3)};\n    .r3c1{.c(r3c1)}; .r3c2{.c(r3c2)}; .r3c3{.c(r3c3)};\n    .r4c1{.c(r4c1)}; .r4c2{.c(r4c2)}; .r4c3{.c(r4c3)};\n    .r5c1{.c(r5c1)}; .r5c2{.c(r5c2)}; .r5c3{.c(r5c3)};\n    .r6c1{.c(r6c1)}; .r6c2{.c(r6c2)}; .r6c3{.c(r6c3)};\n    .r7c1{.c(r7c1)}; .r7c2{.c(r7c2)}; .r7c3{.c(r7c3)};\n    .r8c1{.c(r8c1)}; .r8c2{.c(r8c2)}; .r8c3{.c(r8c3)};\n    .r9c1{.c(r9c1)}; .r9c2{.c(r9c2)}; .r9c3{.c(r9c3)};\n  }\n  \n</style>"]}, media: undefined });
+    inject("data-v-009b6886_0", { source: ".comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 2.5em;\n  display: grid;\n  grid-template-columns: 33% 33% 34%;\n  grid-template-rows: 11% 11% 11% 11% 11% 11% 11% 11% 12%;\n  grid-template-areas: \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\" \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\" \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .r1c1 {\n  display: grid;\n  grid-area: r1c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c2 {\n  display: grid;\n  grid-area: r1c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c3 {\n  display: grid;\n  grid-area: r1c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c1 {\n  display: grid;\n  grid-area: r2c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c2 {\n  display: grid;\n  grid-area: r2c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c3 {\n  display: grid;\n  grid-area: r2c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c1 {\n  display: grid;\n  grid-area: r3c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c2 {\n  display: grid;\n  grid-area: r3c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c3 {\n  display: grid;\n  grid-area: r3c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c1 {\n  display: grid;\n  grid-area: r4c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c2 {\n  display: grid;\n  grid-area: r4c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c3 {\n  display: grid;\n  grid-area: r4c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c1 {\n  display: grid;\n  grid-area: r5c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c2 {\n  display: grid;\n  grid-area: r5c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c3 {\n  display: grid;\n  grid-area: r5c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c1 {\n  display: grid;\n  grid-area: r6c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c2 {\n  display: grid;\n  grid-area: r6c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c3 {\n  display: grid;\n  grid-area: r6c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c1 {\n  display: grid;\n  grid-area: r7c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c2 {\n  display: grid;\n  grid-area: r7c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c3 {\n  display: grid;\n  grid-area: r7c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c1 {\n  display: grid;\n  grid-area: r8c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c2 {\n  display: grid;\n  grid-area: r8c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c3 {\n  display: grid;\n  grid-area: r8c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c1 {\n  display: grid;\n  grid-area: r9c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c2 {\n  display: grid;\n  grid-area: r9c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c3 {\n  display: grid;\n  grid-area: r9c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n", map: {"version":3,"sources":["MathML.vue","/Users/ax/Documents/prj/aug/vue/math/MathML.vue"],"names":[],"mappings":"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","file":"MathML.vue","sourcesContent":[".comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 2.5em;\n  display: grid;\n  grid-template-columns: 33% 33% 34%;\n  grid-template-rows: 11% 11% 11% 11% 11% 11% 11% 11% 12%;\n  grid-template-areas: \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\" \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\" \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .r1c1 {\n  display: grid;\n  grid-area: r1c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c2 {\n  display: grid;\n  grid-area: r1c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c3 {\n  display: grid;\n  grid-area: r1c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c1 {\n  display: grid;\n  grid-area: r2c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c2 {\n  display: grid;\n  grid-area: r2c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c3 {\n  display: grid;\n  grid-area: r2c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c1 {\n  display: grid;\n  grid-area: r3c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c2 {\n  display: grid;\n  grid-area: r3c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c3 {\n  display: grid;\n  grid-area: r3c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c1 {\n  display: grid;\n  grid-area: r4c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c2 {\n  display: grid;\n  grid-area: r4c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c3 {\n  display: grid;\n  grid-area: r4c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c1 {\n  display: grid;\n  grid-area: r5c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c2 {\n  display: grid;\n  grid-area: r5c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c3 {\n  display: grid;\n  grid-area: r5c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c1 {\n  display: grid;\n  grid-area: r6c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c2 {\n  display: grid;\n  grid-area: r6c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c3 {\n  display: grid;\n  grid-area: r6c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c1 {\n  display: grid;\n  grid-area: r7c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c2 {\n  display: grid;\n  grid-area: r7c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c3 {\n  display: grid;\n  grid-area: r7c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c1 {\n  display: grid;\n  grid-area: r8c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c2 {\n  display: grid;\n  grid-area: r8c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c3 {\n  display: grid;\n  grid-area: r8c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c1 {\n  display: grid;\n  grid-area: r9c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c2 {\n  display: grid;\n  grid-area: r9c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c3 {\n  display: grid;\n  grid-area: r9c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n","\n<template>\n  <div>\n    <d-dabs comp=\"Math\" :pages=\"pages\" :init=\"key\"></d-dabs>\n    <div class=\"comp\">\n      <template v-for=\"exp in exps\">\n        <div :class=\"exp.klass\" :ref=\"exp.klass\"></div>\n      </template>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import MathND  from './MathND.vue';\n  import Dabs    from '../elem/Dabs.vue';\n  import Basics  from '../../pub/math/doc/Basics.js';\n\n  let MathML = {\n\n    extends: MathND,\n\n    components:{ 'd-dabs':Dabs },\n\n    data() {\n      return { comp:'MathML', key:'MathML', exps:{}, pages:{\n          Basics: { title:'Basics', key:'Basics', klass:Basics, created:false }\n        } } },\n    \n    methods:{\n      mathMLElems: function ( exps ) {\n        for( let key in exps ){\n          let exp = exps[key];\n          let elem = this.$refs[exp.klass][0];\n          elem.innerHTML = exp.mathML; } }\n      },\n    \n    mounted: function () {\n      this.basics = new  Basics();\n      this.exps   = this.basics.doExps();\n      this.$nextTick( function() {\n        this.mathMLElems( this.exps ); } ) }\n  }\n  \n  export default MathML;\n\n</script>\n\n<style lang=\"less\">\n  \n  .grid9x3() { display:grid; grid-template-columns:33% 33% 34%; grid-template-rows:11% 11% 11% 11% 11% 11% 11% 11% 12%;\n    grid-template-areas:\n      \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\"\n      \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\"\n      \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\"; }\n\n  .c( @rc ) { display:grid; grid-area:@rc; justify-self:stretch; align-self:stretch;\n    justify-items:center; align-items:center; background-color:black; color:wheat; border:solid thin wheat; }\n\n  .comp { background-color:black; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:2.5em;\n    .grid9x3(); justify-items:center; align-items:center;\n\n    .r1c1{.c(r1c1)}; .r1c2{.c(r1c2)}; .r1c3{.c(r1c3)};\n    .r2c1{.c(r2c1)}; .r2c2{.c(r2c2)}; .r2c3{.c(r2c3)};\n    .r3c1{.c(r3c1)}; .r3c2{.c(r3c2)}; .r3c3{.c(r3c3)};\n    .r4c1{.c(r4c1)}; .r4c2{.c(r4c2)}; .r4c3{.c(r4c3)};\n    .r5c1{.c(r5c1)}; .r5c2{.c(r5c2)}; .r5c3{.c(r5c3)};\n    .r6c1{.c(r6c1)}; .r6c2{.c(r6c2)}; .r6c3{.c(r6c3)};\n    .r7c1{.c(r7c1)}; .r7c2{.c(r7c2)}; .r7c3{.c(r7c3)};\n    .r8c1{.c(r8c1)}; .r8c2{.c(r8c2)}; .r8c3{.c(r8c3)};\n    .r9c1{.c(r9c1)}; .r9c2{.c(r9c2)}; .r9c3{.c(r9c3)};\n  }\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -6437,57 +6467,604 @@ __vue_render__$g._withStripped = true;
     undefined
   );
 
-var Solves;
+var DiffEQ;
 
-Solves = class Solves {
-  constructor() {}
+DiffEQ = class DiffEQ {
+  constructor() {
+    this.vec = this.vec.bind(this);
+    this.pow = this.pow.bind(this);
+    this.ptns = this.doPtns();
+  }
+
+  vec(...args) {
+    var a, arg, i, len;
+    a = [];
+    for (i = 0, len = args.length; i < len; i++) {
+      arg = args[i];
+      a.push(this.d(arg));
+    }
+    return a;
+  }
+
+  pow(u, v) {
+    var adt1, adt2, adt3;
+    adt1 = [];
+    if (typeof v === 'number') {
+      adt1 = ['Mul', ['Mul', v, ['Pow', u, v - 1]], this.d(u)];
+    } else {
+      adt2 = ['Mul', ['Mul', v, ['Pow', u, ['Sub', v, 1]]], this.d(u)];
+      adt3 = ['Mul', ['Mul', ['Ln', u], ['Pow', u, v]], this.d(v)];
+      adt1 = ['Add', adt2, adt3];
+    }
+    return adt1;
+  }
+
+  d(ast) {
+    var dst, e;
+    dst = [];
+    try {
+      dst = match(ast, ...this.ptns);
+    } catch (error) {
+      e = error;
+      console.error('DiffEQ.d()', e);
+    }
+    return dst;
+  }
+
+  doPtns() {
+    return Ptn$1.toPtns([
+      A.Equ,
+      (u,
+      v) => {
+        return ['Equ',
+      this.d(u),
+      this.d(v)];
+      },
+      A.Add,
+      (u,
+      v) => {
+        return ['Add',
+      this.d(u),
+      this.d(v)];
+      },
+      A.Sub,
+      (u,
+      v) => {
+        return ['Sub',
+      this.d(u),
+      this.d(v)];
+      },
+      A.Mul,
+      (u,
+      v) => {
+        return ['Add',
+      ['Mul',
+      v,
+      this.d(u)],
+      ['Mul',
+      u,
+      this.d(v)]];
+      },
+      A.Div,
+      (u,
+      v) => {
+        return ['Div',
+      ['Sub',
+      ['Mul',
+      v,
+      this.d(u)],
+      ['Mul',
+      u,
+      this.d(v)]],
+      ['Pow',
+      v,
+      2]];
+      },
+      A.Pow,
+      (u,
+      v) => {
+        return this.pow(u,
+      v);
+      },
+      A.Neg,
+      (u) => {
+        return ['Neg',
+      this.d(u)];
+      },
+      A.Recip,
+      (u) => {
+        return ['Div',
+      ['Neg',
+      this.d(u)],
+      ['Pow',
+      u,
+      2]];
+      },
+      A.Abs,
+      (u) => {
+        return ['Abs',
+      this.d(u)];
+      },
+      A.Paren,
+      (u) => {
+        return ['Paren',
+      this.d(u)];
+      },
+      A.Brace,
+      (u) => {
+        return ['Brace',
+      this.d(u)];
+      },
+      A.Ln,
+      (u) => {
+        return ['Div',
+      this.d(u),
+      u];
+      },
+      A.Log,
+      (u,
+      v) => {
+        return ['Mul',
+      ['Log',
+      ['E',
+      r]],
+      ['Div',
+      this.d(u),
+      u]];
+      },
+      A.Root,
+      (u,
+      v) => {
+        return ['Div',
+      this.d(u),
+      ['Mul',
+      u,
+      ['Root',
+      u,
+      v]]];
+      },
+      A.Sqrt,
+      (u) => {
+        return ['Div',
+      this.d(u),
+      ['Mul',
+      ['Sqrt',
+      u],
+      2]];
+      },
+      A.E,
+      (u) => {
+        return ['Mul',
+      ['E',
+      u],
+      this.d(u)];
+      },
+      A.Sin,
+      (u) => {
+        return ['Mul',
+      ['Cos',
+      u],
+      this.d(u)];
+      },
+      A.Cos,
+      (u) => {
+        return ['Neg',
+      ['Mul',
+      ['Sin',
+      u],
+      this.d(u)]];
+      },
+      A.Tan,
+      (u) => {
+        return ['Neg',
+      ['Mul',
+      ['Pow',
+      ['Sec',
+      u],
+      2],
+      this.d(u)]];
+      },
+      A.Csc,
+      (u) => {
+        return ['Neg',
+      ['Mul',
+      ['Mul',
+      ['Csc',
+      u],
+      ['Cot',
+      u]],
+      this.d(u)]];
+      },
+      A.Sec,
+      (u) => {
+        return ['Mul',
+      ['Mul',
+      ['Sec',
+      u],
+      ['Tan',
+      u]],
+      this.d(u)];
+      },
+      A.Cot,
+      (u) => {
+        return ['Neg',
+      ['Mul',
+      ['Pow',
+      ['Csc',
+      u],
+      2],
+      this.d(u)]];
+      },
+      A.Arcsin,
+      (u) => {
+        return ['Div',
+      this.d(u),
+      ['Sub',
+      ['Sqrt',
+      1,
+      ['Pow',
+      u,
+      2]]]];
+      },
+      A.Arccos,
+      (u) => {
+        return ['Neg',
+      ['Div',
+      this.d(u),
+      ['Sub',
+      ['Sqrt',
+      1,
+      ['Pow',
+      u,
+      2]]]]];
+      },
+      A.Arctan,
+      (u) => {
+        return ['Div',
+      this.d(u),
+      ['Add',
+      1,
+      ['Pow',
+      u,
+      2]]];
+      },
+      A.Arccot,
+      (u) => {
+        return ['Neg',
+      ['Div',
+      this.d(u),
+      ['Add',
+      1,
+      ['Pow',
+      u,
+      2]]]];
+      },
+      A.Arccsc,
+      (u) => {
+        return ['Neg',
+      ['Div',
+      this.d(u),
+      ['Mul',
+      u,
+      ['Sqrt',
+      ['Sub',
+      ['Pow',
+      u,
+      2],
+      1]]]]];
+      },
+      A.Arcsec,
+      (u) => {
+        return ['Div',
+      this.d(u),
+      ['Mul',
+      u,
+      ['Sqrt',
+      ['Sub',
+      ['Pow',
+      u,
+      2],
+      1]]]];
+      },
+      A.Fun,
+      (f,
+      u) => {
+        return ['Mul',
+      ['D',
+      f],
+      this.d(u)];
+      },
+      A.D,
+      (u) => {
+        return this.d(u);
+      },
+      A.Int,
+      (u) => {
+        return u;
+      },
+      A.DefInt,
+      (a,
+      b,
+      u) => {
+        return u;
+      },
+      A.Sum,
+      (a,
+      b,
+      u) => {
+        return ['Sum',
+      a,
+      b,
+      this.d(u)];
+      },
+      A.Sus,
+      (u,
+      v) => {
+        return ['Sus',
+      this.d(u),
+      v];
+      },
+      A.Lim,
+      (a,
+      b) => {
+        return ['Lim',
+      a,
+      b,
+      this.d(u)];
+      },
+      A.Ratio,
+      (u,
+      v) => {
+        return 0;
+      },
+      A.Vec,
+      (rest) => {
+        return this.vec(rest);
+      },
+      A.Mat,
+      (rest) => {
+        return this.vec(rest);
+      },
+      A.Latex,
+      (o) => {
+        return this.latex(o);
+      },
+      'String',
+      (s) => {
+        return ['D',
+      s];
+      },
+      'Number',
+      (n) => {
+        return 0;
+      },
+      '_',
+      (q) => {
+        return this.unk(q);
+      }
+    ]);
+  }
 
 };
 
-var Solves$1 = Solves;
+var DiffEQ$1 = DiffEQ;
+
+var Differ, Exps$1,
+  hasProp$1 = {}.hasOwnProperty;
+
+Exps$1 = {
+  Sin1S: {
+    ascii: "sin(u)",
+    klass: "r1c1",
+    ast: [],
+    dst: [],
+    mathML: ""
+  },
+  Add1S: {
+    ascii: "u+v",
+    klass: "r1c2",
+    ast: [],
+    dst: [],
+    mathML: ""
+  },
+  Mul1S: {
+    ascii: "u*v",
+    klass: "r1c2",
+    ast: [],
+    dst: [],
+    mathML: ""
+  },
+  Sin1D: {
+    ascii: "sin(u)",
+    klass: "r2c1",
+    ast: [],
+    dst: [],
+    mathML: ""
+  },
+  Add1D: {
+    ascii: "u+v",
+    klass: "r2c2",
+    ast: [],
+    dst: [],
+    mathML: ""
+  },
+  Mul1D: {
+    ascii: "u*v",
+    klass: "r2c3",
+    ast: [],
+    dst: [],
+    mathML: ""
+  },
+  Div1S: {
+    ascii: "u/v",
+    klass: "r3c1",
+    ast: [],
+    dst: [],
+    mathML: ""
+  },
+  Pow1S: {
+    ascii: "u^3",
+    klass: "r3c2",
+    ast: [],
+    dst: [],
+    mathML: ""
+  },
+  Lnn1S: {
+    ascii: "ln(u)",
+    klass: "r3c3",
+    ast: [],
+    dst: [],
+    mathML: ""
+  },
+  Div1D: {
+    ascii: "u/v",
+    klass: "r4c1",
+    ast: [],
+    dst: [],
+    mathML: ""
+  },
+  Pow1D: {
+    ascii: "u^3",
+    klass: "r4c2",
+    ast: [],
+    dst: [],
+    mathML: ""
+  },
+  Lnn1D: {
+    ascii: "ln(u)",
+    klass: "r4c1",
+    ast: [],
+    dst: [],
+    mathML: ""
+  }
+};
+
+Differ = class Differ {
+  constructor() {
+    this.diffEQ = new DiffEQ$1();
+    this.mathML = new MathML$1();
+    this.ncol = 3;
+  }
+
+  doExps(exps = Exps$1) {
+    var exp, key;
+    for (key in exps) {
+      if (!hasProp$1.call(exps, key)) continue;
+      exp = exps[key];
+      if (key.charAt(4) === 'S') {
+        this.doExp(key, exps, i);
+      }
+    }
+    return exps;
+  }
+
+  doExp(key, exps) {
+    var ked;
+    ked = key.subtring(0, 4) + 'D';
+    exps[key].ast = Ptn$1.parse(exps[key].ascii);
+    exps[ked].ast = this.diffEQ.d(exps[key].ast);
+    exps[key].mathML = this.mathML.markup(exps[key].ast, key);
+    exps[ked].mathML = this.mathML.markup(exps[ked].ast, ked);
+  }
+
+  toKlass(i) {
+    var col, mod, row;
+    mod = i % this.ncol;
+    row = (i - mod) / this.ncol + 1;
+    col = mod + 1;
+    return `r${row}c${col}`;
+  }
+
+};
+
+var Differ$1 = Differ;
 
 //
 
-var script$h = {
+let MathEQ = {
 
   extends: MathND,
 
   components:{ 'd-dabs':Dabs },
 
   data() {
-    return { comp:'MathEQ', key:'MathEQ', pages:{
-        Solves: { title:'Solves', key:'Solves', klass:Solves$1, created:false }
+    return { comp:'MathEQ', key:'MathEQ', exps:{}, pages:{
+        Differ: { title:'Differ', key:'Differ', klass:Differ$1, created:false }
       } } },
-
+  
+  methods:{
+    mathMLElems: function ( exps ) {
+      for( let key in exps ){
+        let exp = exps[key];
+        let elem = this.$refs[exp.klass][0];
+        elem.innerHTML = exp.mathML; } }
+    },
+  
+  mounted: function () {
+    this.differ = new  Differ$1();
+    this.exps   = this.differ.doExps();
+    this.$nextTick( function() {
+      this.mathMLElems( this.exps ); } ); }
 };
 
 /* script */
-const __vue_script__$k = script$h;
+const __vue_script__$k = MathEQ;
 
 /* template */
+var __vue_render__$h = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    [
+      _c("d-dabs", {
+        attrs: { comp: "Math", pages: _vm.pages, init: _vm.key }
+      }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "comp" },
+        [
+          _vm._l(_vm.exps, function(exp) {
+            return [
+              _c("div", { ref: exp.klass, refInFor: true, class: exp.klass })
+            ]
+          })
+        ],
+        2
+      )
+    ],
+    1
+  )
+};
+var __vue_staticRenderFns__$h = [];
+__vue_render__$h._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$k = undefined;
+  const __vue_inject_styles__$k = function (inject) {
+    if (!inject) return
+    inject("data-v-6e8eb872_0", { source: ".comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 2.5em;\n  display: grid;\n  grid-template-columns: 33% 33% 34%;\n  grid-template-rows: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;\n  grid-template-areas: \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\" \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\" \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .r1c1 {\n  display: grid;\n  grid-area: r1c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c2 {\n  display: grid;\n  grid-area: r1c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c3 {\n  display: grid;\n  grid-area: r1c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c1 {\n  display: grid;\n  grid-area: r2c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c2 {\n  display: grid;\n  grid-area: r2c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c3 {\n  display: grid;\n  grid-area: r2c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c1 {\n  display: grid;\n  grid-area: r3c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c2 {\n  display: grid;\n  grid-area: r3c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c3 {\n  display: grid;\n  grid-area: r3c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c1 {\n  display: grid;\n  grid-area: r4c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c2 {\n  display: grid;\n  grid-area: r4c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c3 {\n  display: grid;\n  grid-area: r4c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c1 {\n  display: grid;\n  grid-area: r5c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c2 {\n  display: grid;\n  grid-area: r5c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c3 {\n  display: grid;\n  grid-area: r5c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c1 {\n  display: grid;\n  grid-area: r6c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c2 {\n  display: grid;\n  grid-area: r6c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c3 {\n  display: grid;\n  grid-area: r6c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c1 {\n  display: grid;\n  grid-area: r7c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c2 {\n  display: grid;\n  grid-area: r7c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c3 {\n  display: grid;\n  grid-area: r7c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c1 {\n  display: grid;\n  grid-area: r8c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c2 {\n  display: grid;\n  grid-area: r8c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c3 {\n  display: grid;\n  grid-area: r8c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n", map: {"version":3,"sources":["MathEQ.vue","/Users/ax/Documents/prj/aug/vue/math/MathEQ.vue"],"names":[],"mappings":"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","file":"MathEQ.vue","sourcesContent":[".comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 2.5em;\n  display: grid;\n  grid-template-columns: 33% 33% 34%;\n  grid-template-rows: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;\n  grid-template-areas: \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\" \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\" \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .r1c1 {\n  display: grid;\n  grid-area: r1c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c2 {\n  display: grid;\n  grid-area: r1c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c3 {\n  display: grid;\n  grid-area: r1c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c1 {\n  display: grid;\n  grid-area: r2c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c2 {\n  display: grid;\n  grid-area: r2c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c3 {\n  display: grid;\n  grid-area: r2c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c1 {\n  display: grid;\n  grid-area: r3c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c2 {\n  display: grid;\n  grid-area: r3c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c3 {\n  display: grid;\n  grid-area: r3c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c1 {\n  display: grid;\n  grid-area: r4c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c2 {\n  display: grid;\n  grid-area: r4c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c3 {\n  display: grid;\n  grid-area: r4c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c1 {\n  display: grid;\n  grid-area: r5c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c2 {\n  display: grid;\n  grid-area: r5c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c3 {\n  display: grid;\n  grid-area: r5c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c1 {\n  display: grid;\n  grid-area: r6c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c2 {\n  display: grid;\n  grid-area: r6c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c3 {\n  display: grid;\n  grid-area: r6c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c1 {\n  display: grid;\n  grid-area: r7c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c2 {\n  display: grid;\n  grid-area: r7c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c3 {\n  display: grid;\n  grid-area: r7c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c1 {\n  display: grid;\n  grid-area: r8c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c2 {\n  display: grid;\n  grid-area: r8c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c3 {\n  display: grid;\n  grid-area: r8c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n","\n\n<template>\n  <div>\n    <d-dabs comp=\"Math\" :pages=\"pages\" :init=\"key\"></d-dabs>\n    <div class=\"comp\">\n      <template v-for=\"exp in exps\">\n        <div :class=\"exp.klass\" :ref=\"exp.klass\"></div>\n      </template>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import MathND  from './MathND.vue';\n  import Dabs    from '../elem/Dabs.vue';\n  import Differ  from '../../pub/math/doc/Differ.js';\n\n  let MathEQ = {\n\n    extends: MathND,\n\n    components:{ 'd-dabs':Dabs },\n\n    data() {\n      return { comp:'MathEQ', key:'MathEQ', exps:{}, pages:{\n          Differ: { title:'Differ', key:'Differ', klass:Differ, created:false }\n        } } },\n    \n    methods:{\n      mathMLElems: function ( exps ) {\n        for( let key in exps ){\n          let exp = exps[key];\n          let elem = this.$refs[exp.klass][0];\n          elem.innerHTML = exp.mathML; } }\n      },\n    \n    mounted: function () {\n      this.differ = new  Differ();\n      this.exps   = this.differ.doExps();\n      this.$nextTick( function() {\n        this.mathMLElems( this.exps ); } ) }\n  }\n  \n  export default MathEQ;\n\n</script>\n\n<style lang=\"less\">\n  \n  .grid8x3() { display:grid; grid-template-columns:33% 33% 34%;\n    grid-template-rows:12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;\n    grid-template-areas:\n      \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\" \"r4c1 r4c2 r4c3\"\n      \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\" \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\"; }\n\n  .c( @rc ) { display:grid; grid-area:@rc; justify-self:stretch; align-self:stretch;\n    justify-items:center; align-items:center; background-color:black; color:wheat; border:solid thin wheat; }\n\n  .comp { background-color:black; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:2.5em;\n    .grid8x3(); justify-items:center; align-items:center;\n\n    .r1c1{.c(r1c1)}; .r1c2{.c(r1c2)}; .r1c3{.c(r1c3)};\n    .r2c1{.c(r2c1)}; .r2c2{.c(r2c2)}; .r2c3{.c(r2c3)};\n    .r3c1{.c(r3c1)}; .r3c2{.c(r3c2)}; .r3c3{.c(r3c3)};\n    .r4c1{.c(r4c1)}; .r4c2{.c(r4c2)}; .r4c3{.c(r4c3)};\n    .r5c1{.c(r5c1)}; .r5c2{.c(r5c2)}; .r5c3{.c(r5c3)};\n    .r6c1{.c(r6c1)}; .r6c2{.c(r6c2)}; .r6c3{.c(r6c3)};\n    .r7c1{.c(r7c1)}; .r7c2{.c(r7c2)}; .r7c3{.c(r7c3)};\n    .r8c1{.c(r8c1)}; .r8c2{.c(r8c2)}; .r8c3{.c(r8c3)};\n  }\n  \n</style>"]}, media: undefined });
+
+  };
   /* scoped */
   const __vue_scope_id__$k = undefined;
   /* module identifier */
   const __vue_module_identifier__$k = undefined;
   /* functional template */
-  const __vue_is_functional_template__$k = undefined;
-  /* style inject */
-  
+  const __vue_is_functional_template__$k = false;
   /* style inject SSR */
   
 
   
-  var MathEQ = normalizeComponent_1(
-    {},
+  var MathEQ$1 = normalizeComponent_1(
+    { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
     __vue_inject_styles__$k,
     __vue_script__$k,
     __vue_scope_id__$k,
     __vue_is_functional_template__$k,
     __vue_module_identifier__$k,
-    undefined,
+    browser,
     undefined
   );
 
@@ -6510,7 +7087,7 @@ let Geom = {
 const __vue_script__$l = Geom;
 
 /* template */
-var __vue_render__$h = function() {
+var __vue_render__$i = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -6527,8 +7104,8 @@ var __vue_render__$h = function() {
     2
   )
 };
-var __vue_staticRenderFns__$h = [];
-__vue_render__$h._withStripped = true;
+var __vue_staticRenderFns__$i = [];
+__vue_render__$i._withStripped = true;
 
   /* style */
   const __vue_inject_styles__$l = function (inject) {
@@ -6547,7 +7124,7 @@ __vue_render__$h._withStripped = true;
 
   
   var Geom$1 = normalizeComponent_1(
-    { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
+    { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
     __vue_inject_styles__$l,
     __vue_script__$l,
     __vue_scope_id__$l,
@@ -6559,7 +7136,7 @@ __vue_render__$h._withStripped = true;
 
 //
 
-var script$i = {
+var script$h = {
 
   components:{ 'd-dabs':Dabs },
 
@@ -6591,10 +7168,10 @@ var script$i = {
   };
 
 /* script */
-const __vue_script__$m = script$i;
+const __vue_script__$m = script$h;
 
 /* template */
-var __vue_render__$i = function() {
+var __vue_render__$j = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -6627,8 +7204,8 @@ var __vue_render__$i = function() {
     2
   )
 };
-var __vue_staticRenderFns__$i = [];
-__vue_render__$i._withStripped = true;
+var __vue_staticRenderFns__$j = [];
+__vue_render__$j._withStripped = true;
 
   /* style */
   const __vue_inject_styles__$m = function (inject) {
@@ -6647,7 +7224,7 @@ __vue_render__$i._withStripped = true;
 
   
   var GeomND = normalizeComponent_1(
-    { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
+    { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
     __vue_inject_styles__$m,
     __vue_script__$m,
     __vue_scope_id__$m,
@@ -6816,7 +7393,7 @@ let Basics$2  = class Basics {
 
 //
 
-var script$j = {
+var script$i = {
 
   extends: GeomND,
 
@@ -6831,7 +7408,7 @@ var script$j = {
 };
 
 /* script */
-const __vue_script__$n = script$j;
+const __vue_script__$n = script$i;
 
 /* template */
 
@@ -7230,7 +7807,7 @@ let Torus  = class Torus {
 
 //
 
-var script$k = {
+var script$j = {
 
   extends: GeomND,
   
@@ -7250,7 +7827,7 @@ var script$k = {
   };
 
 /* script */
-const __vue_script__$o = script$k;
+const __vue_script__$o = script$j;
 
 /* template */
 
@@ -7412,7 +7989,7 @@ let Sphere = class Sphere {
 //
 //import Conform from '../../src/gan/4D/Conform.js';
 
-  var script$l = {
+  var script$k = {
 
     extends: GeomND,
     
@@ -7428,7 +8005,7 @@ let Sphere = class Sphere {
   };
 
 /* script */
-const __vue_script__$p = script$l;
+const __vue_script__$p = script$k;
 
 /* template */
 
@@ -25754,7 +26331,7 @@ var d3 = /*#__PURE__*/Object.freeze({
 
 var Util,
   indexOf = [].indexOf,
-  hasProp$1 = {}.hasOwnProperty;
+  hasProp$2 = {}.hasOwnProperty;
 
 Util = class Util {
   constructor() {
@@ -25943,7 +26520,7 @@ Util = class Util {
     } else {
       str += "{ ";
       for (key in arg) {
-        if (!hasProp$1.call(arg, key)) continue;
+        if (!hasProp$2.call(arg, key)) continue;
         val = arg[key];
         str += key + ":" + Util.toStr(val) + ", ";
       }
@@ -25965,7 +26542,7 @@ Util = class Util {
     ind = Util.indent(level * 2);
     out = "";
     for (key in obj) {
-      if (!hasProp$1.call(obj, key)) continue;
+      if (!hasProp$2.call(obj, key)) continue;
       val = obj[key];
       if (!(key.charAt(0) === key.charAt(0).toUpperCase())) {
         continue;
@@ -26134,7 +26711,7 @@ Util = class Util {
   static checkTypes(type, args) {
     var arg, key;
     for (key in args) {
-      if (!hasProp$1.call(args, key)) continue;
+      if (!hasProp$2.call(args, key)) continue;
       arg = args[key];
       // console.log( "Util.checkTypes isNum() argument #{key} is #{type}", arg, Util.isNum(arg) )
       if (!Util.checkType(type, arg)) {
@@ -26166,7 +26743,7 @@ Util = class Util {
   static copyProperties(to, from) {
     var key, val;
     for (key in from) {
-      if (!hasProp$1.call(from, key)) continue;
+      if (!hasProp$2.call(from, key)) continue;
       val = from[key];
       to[key] = val;
     }
@@ -26254,7 +26831,7 @@ Util = class Util {
   static extend(obj, mixin) {
     var method, name;
     for (name in mixin) {
-      if (!hasProp$1.call(mixin, name)) continue;
+      if (!hasProp$2.call(mixin, name)) continue;
       method = mixin[name];
       obj[name] = method;
     }
@@ -26536,7 +27113,7 @@ Util = class Util {
       }
     } else {
       for (key in objects) {
-        if (!hasProp$1.call(objects, key)) continue;
+        if (!hasProp$2.call(objects, key)) continue;
         object = objects[key];
         if (!(where(key, object))) {
           continue;
@@ -26584,7 +27161,7 @@ Util = class Util {
     var key, len, obj;
     len = 0;
     for (key in object) {
-      if (!hasProp$1.call(object, key)) continue;
+      if (!hasProp$2.call(object, key)) continue;
       obj = object[key];
       if (where(key)) {
         len = len + 1;
@@ -28308,7 +28885,7 @@ xfade: (opacity) =>
 var Chord$1 = Chord;
 
 var Data,
-  hasProp$2 = {}.hasOwnProperty;
+  hasProp$3 = {}.hasOwnProperty;
 
 Data = class Data {
   // Util.noop( Data.hosted, Data.planeData, Data.refine, Data.asyncJSON )
@@ -28397,7 +28974,7 @@ Data = class Data {
   static batchRead(batch, callback, create = null) {
     var key, obj;
     for (key in batch) {
-      if (!hasProp$2.call(batch, key)) continue;
+      if (!hasProp$3.call(batch, key)) continue;
       obj = batch[key];
       this.batchJSON(obj, batch, callback, create);
     }
@@ -28406,7 +28983,7 @@ Data = class Data {
   static batchComplete(batch) {
     var key, obj;
     for (key in batch) {
-      if (!hasProp$2.call(batch, key)) continue;
+      if (!hasProp$3.call(batch, key)) continue;
       obj = batch[key];
       if (!obj['data']) {
         return false;
@@ -32425,7 +33002,7 @@ let Draw = {
 const __vue_script__$q = Draw;
 
 /* template */
-var __vue_render__$j = function() {
+var __vue_render__$k = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -32459,8 +33036,8 @@ var __vue_render__$j = function() {
     2
   )
 };
-var __vue_staticRenderFns__$j = [];
-__vue_render__$j._withStripped = true;
+var __vue_staticRenderFns__$k = [];
+__vue_render__$k._withStripped = true;
 
   /* style */
   const __vue_inject_styles__$q = function (inject) {
@@ -32479,7 +33056,7 @@ __vue_render__$j._withStripped = true;
 
   
   var Draw$1 = normalizeComponent_1(
-    { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
+    { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
     __vue_inject_styles__$q,
     __vue_script__$q,
     __vue_scope_id__$q,
@@ -32530,7 +33107,7 @@ __vue_render__$j._withStripped = true;
 //
 
 
-var script$m = {
+var script$l = {
   
   props: { pcomp:{ type:String, default:'None' } },
   
@@ -32587,10 +33164,10 @@ var script$m = {
 };
 
 /* script */
-const __vue_script__$r = script$m;
+const __vue_script__$r = script$l;
 
 /* template */
-var __vue_render__$k = function() {
+var __vue_render__$l = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -32758,8 +33335,8 @@ var __vue_render__$k = function() {
     2
   )
 };
-var __vue_staticRenderFns__$k = [];
-__vue_render__$k._withStripped = true;
+var __vue_staticRenderFns__$l = [];
+__vue_render__$l._withStripped = true;
 
   /* style */
   const __vue_inject_styles__$r = function (inject) {
@@ -32778,7 +33355,7 @@ __vue_render__$k._withStripped = true;
 
   
   var Prac = normalizeComponent_1(
-    { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
+    { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
     __vue_inject_styles__$r,
     __vue_script__$r,
     __vue_scope_id__$r,
@@ -32789,7 +33366,7 @@ __vue_render__$k._withStripped = true;
   );
 
 var Build,
-  hasProp$3 = {}.hasOwnProperty;
+  hasProp$4 = {}.hasOwnProperty;
 
 Build = class Build {
   // ---- Class Methods for Practices ----
@@ -32891,7 +33468,7 @@ Build = class Build {
   static copyAtt(src, des) {
     var key, obj;
     for (key in src) {
-      if (!hasProp$3.call(src, key)) continue;
+      if (!hasProp$4.call(src, key)) continue;
       obj = src[key];
       if (!Util$1.isChild(key)) {
         des[key] = obj;
@@ -33039,7 +33616,7 @@ Build = class Build {
     for (i = 0, len = arguments.length; i < len; i++) {
       arg = arguments[i];
       for (key in arg) {
-        if (!hasProp$3.call(arg, key)) continue;
+        if (!hasProp$4.call(arg, key)) continue;
         val = arg[key];
         obj[key] = val;
       }
@@ -33162,7 +33739,7 @@ Build = class Build {
     }
     pracs = this.getPractices(pln);
     for (key in pracs) {
-      if (!hasProp$3.call(pracs, key)) continue;
+      if (!hasProp$4.call(pracs, key)) continue;
       adj = pracs[key];
       if (Util$1.isChild(key)) {
         if (adj.column === col && adj.row === row && adj.plane === pln) {
@@ -33227,7 +33804,7 @@ Build = class Build {
     var pkey, prac, practices;
     practices = this.getPractices(plane);
     for (pkey in practices) {
-      if (!hasProp$3.call(practices, pkey)) continue;
+      if (!hasProp$4.call(practices, pkey)) continue;
       prac = practices[pkey];
       if (Util$1.isChild(pkey) && prac.column === column && prac.row === row) {
         return prac;
@@ -33251,7 +33828,7 @@ Build = class Build {
   getDir(practice, dir) {
     var skey, study;
     for (skey in practice) {
-      if (!hasProp$3.call(practice, skey)) continue;
+      if (!hasProp$4.call(practice, skey)) continue;
       study = practice[skey];
       if (Util$1.isChild(skey)) {
         if (study.dir === dir) {
@@ -33289,35 +33866,35 @@ Build = class Build {
       console.log("Plane: ", keyPlane);
       practices = this.getPractices(keyPlane);
       for (keyPractice in practices) {
-        if (!hasProp$3.call(practices, keyPractice)) continue;
+        if (!hasProp$4.call(practices, keyPractice)) continue;
         objPractice = practices[keyPractice];
         if (!(Util$1.isChild(keyPractice))) {
           continue;
         }
         console.log("  Practice: ", keyPractice);
         for (keyStudy in objPractice) {
-          if (!hasProp$3.call(objPractice, keyStudy)) continue;
+          if (!hasProp$4.call(objPractice, keyStudy)) continue;
           objStudy = objPractice[keyStudy];
           if (!(Util$1.isChild(keyStudy))) {
             continue;
           }
           console.log("    Study: ", keyStudy);
           for (keyTopic in objStudy) {
-            if (!hasProp$3.call(objStudy, keyTopic)) continue;
+            if (!hasProp$4.call(objStudy, keyTopic)) continue;
             objTopic = objStudy[keyTopic];
             if (!(Util$1.isChild(keyTopic))) {
               continue;
             }
             console.log("      Topic: ", keyTopic);
             for (keyItem in objTopic) {
-              if (!hasProp$3.call(objTopic, keyItem)) continue;
+              if (!hasProp$4.call(objTopic, keyItem)) continue;
               objItem = objTopic[keyItem];
               if (!(Util$1.isChild(keyItem))) {
                 continue;
               }
               console.log("        Item: ", keyItem);
               for (keyBase in objItem) {
-                if (!hasProp$3.call(objItem, keyBase)) continue;
+                if (!hasProp$4.call(objItem, keyBase)) continue;
                 objBase = objItem[keyBase];
                 if (Util$1.isChild(keyBase)) {
                   console.log("          Base: ", keyBase);
@@ -33345,14 +33922,14 @@ Build = class Build {
         packObj = batObj[packKey];
         console.log("  Pack: ", packKey, packObj);
         for (keyPractice in packObj) {
-          if (!hasProp$3.call(packObj, keyPractice)) continue;
+          if (!hasProp$4.call(packObj, keyPractice)) continue;
           objPractice = packObj[keyPractice];
           if (!(Util$1.isChild(keyPractice))) {
             continue;
           }
           console.log("    Practice: ", keyPractice);
           for (keyStudy in objPractice) {
-            if (!hasProp$3.call(objPractice, keyStudy)) continue;
+            if (!hasProp$4.call(objPractice, keyStudy)) continue;
             objStudy = objPractice[keyStudy];
             if (Util$1.isChild(keyStudy)) {
               console.log("      Study: ", keyStudy);
@@ -33977,7 +34554,7 @@ Convey = class Convey {
 var Convey$1 = Convey;
 
 var Shapes,
-  hasProp$4 = {}.hasOwnProperty;
+  hasProp$5 = {}.hasOwnProperty;
 
 Shapes = class Shapes {
   constructor(stream) {
@@ -34243,7 +34820,7 @@ Shapes = class Shapes {
     var iK, iKey, innov, key, links, nodes, sK, sKey, study;
     nodes = [];
     for (key in studies) {
-      if (!hasProp$4.call(studies, key)) continue;
+      if (!hasProp$5.call(studies, key)) continue;
       study = studies[key];
       nodes.push({
         name: key,
@@ -34251,7 +34828,7 @@ Shapes = class Shapes {
       });
     }
     for (key in innovs) {
-      if (!hasProp$4.call(innovs, key)) continue;
+      if (!hasProp$5.call(innovs, key)) continue;
       innov = innovs[key];
       nodes.push({
         name: key,
@@ -34261,11 +34838,11 @@ Shapes = class Shapes {
     links = [];
     sK = 0;
     for (sKey in studies) {
-      if (!hasProp$4.call(studies, sKey)) continue;
+      if (!hasProp$5.call(studies, sKey)) continue;
       study = studies[sKey];
       iK = 4;
       for (iKey in innovs) {
-        if (!hasProp$4.call(innovs, iKey)) continue;
+        if (!hasProp$5.call(innovs, iKey)) continue;
         innov = innovs[iKey];
         links.push({
           source: sK,
@@ -34387,7 +34964,7 @@ Shapes = class Shapes {
 var Shapes$1 = Shapes;
 
 var Embrace,
-  hasProp$5 = {}.hasOwnProperty;
+  hasProp$6 = {}.hasOwnProperty;
 
 Embrace = class Embrace {
   constructor(spec, shapes, build) {
@@ -34410,7 +34987,7 @@ Embrace = class Embrace {
     yr = lay.yr;
     ref = this.studies;
     for (key in ref) {
-      if (!hasProp$5.call(ref, key)) continue;
+      if (!hasProp$6.call(ref, key)) continue;
       study = ref[key];
       fill = this.shapes.toFill(study);
       wedgeId = this.shapes.htmlId(study.name, 'Wedge');
@@ -34444,7 +35021,7 @@ Embrace = class Embrace {
     y0 = geom.y0 - r0 / 2;
     ref = this.innovs;
     for (key in ref) {
-      if (!hasProp$5.call(ref, key)) continue;
+      if (!hasProp$6.call(ref, key)) continue;
       innov = ref[key];
       fill = this.shapes.toFill(innov);
       this.shapes.rect(g, x0, y0, w, h, fill, 'none');
@@ -34848,7 +35425,7 @@ var Connect$1 = Connect;
 
 //
 
-var script$n = {
+var script$m = {
 
   data() {
     return { comp:'None', prac:'All', disp:'All', tab:'Connections',
@@ -34928,10 +35505,10 @@ var script$n = {
  };
 
 /* script */
-const __vue_script__$s = script$n;
+const __vue_script__$s = script$m;
 
 /* template */
-var __vue_render__$l = function() {
+var __vue_render__$m = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -34978,8 +35555,8 @@ var __vue_render__$l = function() {
     2
   )
 };
-var __vue_staticRenderFns__$l = [];
-__vue_render__$l._withStripped = true;
+var __vue_staticRenderFns__$m = [];
+__vue_render__$m._withStripped = true;
 
   /* style */
   const __vue_inject_styles__$s = function (inject) {
@@ -34998,7 +35575,7 @@ __vue_render__$l._withStripped = true;
 
   
   var Conn = normalizeComponent_1(
-    { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
+    { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
     __vue_inject_styles__$s,
     __vue_script__$s,
     __vue_scope_id__$s,
@@ -35018,19 +35595,19 @@ __vue_render__$l._withStripped = true;
 //
 //
 
-var script$o = {};
+var script$n = {};
 
 /* script */
-const __vue_script__$t = script$o;
+const __vue_script__$t = script$n;
 
 /* template */
-var __vue_render__$m = function() {
+var __vue_render__$n = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
   return _vm._m(0)
 };
-var __vue_staticRenderFns__$m = [
+var __vue_staticRenderFns__$n = [
   function() {
     var _vm = this;
     var _h = _vm.$createElement;
@@ -35040,7 +35617,7 @@ var __vue_staticRenderFns__$m = [
     ])
   }
 ];
-__vue_render__$m._withStripped = true;
+__vue_render__$n._withStripped = true;
 
   /* style */
   const __vue_inject_styles__$t = function (inject) {
@@ -35059,7 +35636,7 @@ __vue_render__$m._withStripped = true;
 
   
   var Enli = normalizeComponent_1(
-    { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
+    { render: __vue_render__$n, staticRenderFns: __vue_staticRenderFns__$n },
     __vue_inject_styles__$t,
     __vue_script__$t,
     __vue_scope_id__$t,
@@ -35079,19 +35656,19 @@ __vue_render__$m._withStripped = true;
 //
 //
 
-var script$p = {};
+var script$o = {};
 
 /* script */
-const __vue_script__$u = script$p;
+const __vue_script__$u = script$o;
 
 /* template */
-var __vue_render__$n = function() {
+var __vue_render__$o = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
   return _vm._m(0)
 };
-var __vue_staticRenderFns__$n = [
+var __vue_staticRenderFns__$o = [
   function() {
     var _vm = this;
     var _h = _vm.$createElement;
@@ -35101,7 +35678,7 @@ var __vue_staticRenderFns__$n = [
     ])
   }
 ];
-__vue_render__$n._withStripped = true;
+__vue_render__$o._withStripped = true;
 
   /* style */
   const __vue_inject_styles__$u = function (inject) {
@@ -35120,7 +35697,7 @@ __vue_render__$n._withStripped = true;
 
   
   var Data$2 = normalizeComponent_1(
-    { render: __vue_render__$n, staticRenderFns: __vue_staticRenderFns__$n },
+    { render: __vue_render__$o, staticRenderFns: __vue_staticRenderFns__$o },
     __vue_inject_styles__$u,
     __vue_script__$u,
     __vue_scope_id__$u,
@@ -35159,7 +35736,7 @@ __vue_render__$n._withStripped = true;
 const __vue_script__$v = Note;
 
 /* template */
-var __vue_render__$o = function() {
+var __vue_render__$p = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -35180,8 +35757,8 @@ var __vue_render__$o = function() {
     2
   )
 };
-var __vue_staticRenderFns__$o = [];
-__vue_render__$o._withStripped = true;
+var __vue_staticRenderFns__$p = [];
+__vue_render__$p._withStripped = true;
 
   /* style */
   const __vue_inject_styles__$v = function (inject) {
@@ -35200,7 +35777,7 @@ __vue_render__$o._withStripped = true;
 
   
   var Note$1 = normalizeComponent_1(
-    { render: __vue_render__$o, staticRenderFns: __vue_staticRenderFns__$o },
+    { render: __vue_render__$p, staticRenderFns: __vue_staticRenderFns__$p },
     __vue_inject_styles__$v,
     __vue_script__$v,
     __vue_scope_id__$v,
@@ -35228,7 +35805,7 @@ __vue_render__$o._withStripped = true;
   Dash.Wise   = Wise;
   Dash.Math   = Math$2;
   Dash.MathML = MathML$3;
-  Dash.MathEQ = MathEQ;
+  Dash.MathEQ = MathEQ$1;
   Dash.Geom   = Geom$1;
   Dash.Geom2D = Geom2D;
   Dash.Geom3D = Geom3D;
@@ -35244,7 +35821,7 @@ __vue_render__$o._withStripped = true;
 const __vue_script__$w = Dash;
 
 /* template */
-var __vue_render__$p = function() {
+var __vue_render__$q = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -35273,8 +35850,8 @@ var __vue_render__$p = function() {
     1
   )
 };
-var __vue_staticRenderFns__$p = [];
-__vue_render__$p._withStripped = true;
+var __vue_staticRenderFns__$q = [];
+__vue_render__$q._withStripped = true;
 
   /* style */
   const __vue_inject_styles__$w = function (inject) {
@@ -35293,7 +35870,7 @@ __vue_render__$p._withStripped = true;
 
   
   var Dash$1 = normalizeComponent_1(
-    { render: __vue_render__$p, staticRenderFns: __vue_staticRenderFns__$p },
+    { render: __vue_render__$q, staticRenderFns: __vue_staticRenderFns__$q },
     __vue_inject_styles__$w,
     __vue_script__$w,
     __vue_scope_id__$w,

@@ -1,11 +1,12 @@
 
-
-
 <template>
-  <div class="comp">
-    <template v-for="exp in exps">
-      <div :class="exp.klass" v-html="exp.mathML"></div>
-    </template>
+  <div>
+    <d-dabs comp="Math" :pages="pages" :init="key"></d-dabs>
+    <div class="comp">
+      <template v-for="exp in exps">
+        <div :class="exp.klass" :ref="exp.klass"></div>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -26,10 +27,19 @@
           Basics: { title:'Basics', key:'Basics', klass:Basics, created:false }
         } } },
     
+    methods:{
+      mathMLElems: function ( exps ) {
+        for( let key in exps ){
+          let exp = exps[key];
+          let elem = this.$refs[exp.klass][0];
+          elem.innerHTML = exp.mathML; } }
+      },
+    
     mounted: function () {
-        this.basics = new  Basics();
-        this.exps   = this.basics.doExps(); }
-
+      this.basics = new  Basics();
+      this.exps   = this.basics.doExps();
+      this.$nextTick( function() {
+        this.mathMLElems( this.exps ); } ) }
   }
   
   export default MathML;

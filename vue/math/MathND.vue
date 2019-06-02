@@ -2,7 +2,6 @@
 
 <template>
   <div>
-    <d-dabs comp="Math" :pages="pages" :init="key"></d-dabs>
     <template v-for="page in pages">
       <div :ref="page.key" v-show="isPage(page.key)" class="page" :key="page.key"></div>
     </template>

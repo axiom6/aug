@@ -27,12 +27,12 @@ TestDiffEQ = class TestDiffEQ {
       },
       Div1: {
         ast: ['Div', 'u', 'v'],
-        dst: ['Div', ['Sub', ['Mul', 'v', ['D', 'u']], ['Mul', 'u', ['D', 'v']]], ['Pow', 'v', '2']],
+        dst: ['Div', ['Sub', ['Mul', 'v', ['D', 'u']], ['Mul', 'u', ['D', 'v']]], ['Pow', 'v', 2]],
         dsa: []
       },
       Pow1: {
-        ast: ['Pow', 'u', '3'],
-        dst: ['Mul', ['Mul', '3', ['Pow', 'u', ['Sub', '3', '1']]], ['D', 'u']],
+        ast: ['Pow', 'u', 3],
+        dst: ['Mul', ['Mul', 3, ['Pow', 'u', 2]], ['D', 'u']],
         dsa: []
       }
     };
