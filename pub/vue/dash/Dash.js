@@ -1686,41 +1686,45 @@ __vue_render__$e._withStripped = true;
       isPage: function(key) {
         return this.key === key; },
 
-      onTabs: function(key, ml ) {
+      onTabs: function(key) {
         if( this.pages[key] ) {
           this.key = key;
-          this.create(this.key); }
-        if( ml ){
+          this.create(this.key);
           this.mathML(this.exps); } },
 
       create: function( key ) {
         let page = this.pages[key];
         if( page.obj===null ) {
-            page.obj = new page.klass(); }
-        this.exps = page.obj.math(); },
+            page.obj = new page.create(); }
+        let exps = page.obj.math();
+        let i    = 0;
+        for( let key in exps ) {
+          let exp   = exps[key];
+          exp.klass = this.klass(i);
+          i++; }
+        this.exps = exps; },
 
       mathML: function ( exps ) {
-        for( let key in exps ){
-          let exp = exps[key];
-          if( this.inKlass(exp.klass) ) {
+        this.$nextTick( function() { // Wait for DOM to render
+          for( let key in exps ){
+            let exp  = exps[key];
             let elem = this.$refs[exp.klass][0];
-            elem.innerHTML = exp.mathML; } } },
-      
-      inKlass: function( klass ) {
-        console.log( 'MathMN.inKlass klass', klass );
-        status = typeof(this.$refs[klass][0]) !== 'undefined';
-        if( !status ) {
-          console.log( 'MathMN.inKlass ref undefined for', klass ); }
-        return status; }
+              elem.innerHTML = exp.mathML; } } ); },
+
+    // Generate a row column layout class
+    klass: function( i ) {
+      let ncol = 3;
+      let mod  = i       % ncol;
+      let row  = (i-mod) / ncol + 1;
+      let col  = mod + 1;
+      return `r${row}c${col}`; }
     },
 
     mounted: function () {
-      this.onTabs( this.key, false );
       this.subscribe( 'Math', this.comp+'.vue', (key) => {
         if( typeof(key)==='string' ) {
-          this.onTabs( key, true ); } } );
-      this.$nextTick( function() {
-        this.mathML( this.exps ); } ); }
+          this.onTabs( key ); } } );
+      this.onTabs( this.key ); }
   };
 
 /* script */
@@ -1760,7 +1764,7 @@ __vue_render__$f._withStripped = true;
   /* style */
   const __vue_inject_styles__$i = function (inject) {
     if (!inject) return
-    inject("data-v-09b61680_0", { source: ".comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 2.5em;\n  display: grid;\n  grid-template-columns: 33% 33% 34%;\n  grid-template-rows: 11% 11% 11% 11% 11% 11% 11% 11% 12%;\n  grid-template-areas: \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\" \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\" \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .r1c1 {\n  display: grid;\n  grid-area: r1c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c2 {\n  display: grid;\n  grid-area: r1c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c3 {\n  display: grid;\n  grid-area: r1c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c1 {\n  display: grid;\n  grid-area: r2c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c2 {\n  display: grid;\n  grid-area: r2c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c3 {\n  display: grid;\n  grid-area: r2c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c1 {\n  display: grid;\n  grid-area: r3c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c2 {\n  display: grid;\n  grid-area: r3c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c3 {\n  display: grid;\n  grid-area: r3c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c1 {\n  display: grid;\n  grid-area: r4c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c2 {\n  display: grid;\n  grid-area: r4c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c3 {\n  display: grid;\n  grid-area: r4c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c1 {\n  display: grid;\n  grid-area: r5c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c2 {\n  display: grid;\n  grid-area: r5c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c3 {\n  display: grid;\n  grid-area: r5c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c1 {\n  display: grid;\n  grid-area: r6c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c2 {\n  display: grid;\n  grid-area: r6c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c3 {\n  display: grid;\n  grid-area: r6c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c1 {\n  display: grid;\n  grid-area: r7c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c2 {\n  display: grid;\n  grid-area: r7c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c3 {\n  display: grid;\n  grid-area: r7c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c1 {\n  display: grid;\n  grid-area: r8c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c2 {\n  display: grid;\n  grid-area: r8c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c3 {\n  display: grid;\n  grid-area: r8c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c1 {\n  display: grid;\n  grid-area: r9c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c2 {\n  display: grid;\n  grid-area: r9c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c3 {\n  display: grid;\n  grid-area: r9c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n", map: {"version":3,"sources":["MathND.vue","/Users/ax/Documents/prj/aug/vue/math/MathND.vue"],"names":[],"mappings":"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","file":"MathND.vue","sourcesContent":[".comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 2.5em;\n  display: grid;\n  grid-template-columns: 33% 33% 34%;\n  grid-template-rows: 11% 11% 11% 11% 11% 11% 11% 11% 12%;\n  grid-template-areas: \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\" \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\" \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .r1c1 {\n  display: grid;\n  grid-area: r1c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c2 {\n  display: grid;\n  grid-area: r1c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c3 {\n  display: grid;\n  grid-area: r1c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c1 {\n  display: grid;\n  grid-area: r2c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c2 {\n  display: grid;\n  grid-area: r2c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c3 {\n  display: grid;\n  grid-area: r2c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c1 {\n  display: grid;\n  grid-area: r3c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c2 {\n  display: grid;\n  grid-area: r3c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c3 {\n  display: grid;\n  grid-area: r3c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c1 {\n  display: grid;\n  grid-area: r4c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c2 {\n  display: grid;\n  grid-area: r4c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c3 {\n  display: grid;\n  grid-area: r4c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c1 {\n  display: grid;\n  grid-area: r5c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c2 {\n  display: grid;\n  grid-area: r5c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c3 {\n  display: grid;\n  grid-area: r5c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c1 {\n  display: grid;\n  grid-area: r6c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c2 {\n  display: grid;\n  grid-area: r6c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c3 {\n  display: grid;\n  grid-area: r6c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c1 {\n  display: grid;\n  grid-area: r7c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c2 {\n  display: grid;\n  grid-area: r7c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c3 {\n  display: grid;\n  grid-area: r7c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c1 {\n  display: grid;\n  grid-area: r8c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c2 {\n  display: grid;\n  grid-area: r8c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c3 {\n  display: grid;\n  grid-area: r8c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c1 {\n  display: grid;\n  grid-area: r9c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c2 {\n  display: grid;\n  grid-area: r9c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c3 {\n  display: grid;\n  grid-area: r9c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n","\n\n<template>\n  <div>\n    <d-dabs comp=\"Math\" :pages=\"pages\" :init=\"key\"></d-dabs>\n    <div class=\"comp\">\n      <template v-for=\"exp in exps\">\n        <div :class=\"exp.klass\" :ref=\"exp.klass\"></div>\n      </template>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Dabs  from '../elem/Dabs.vue';\n\n  let MathND = {\n\n    components:{ 'd-dabs':Dabs },\n\n    methods: {\n\n      isPage: function(key) {\n        return this.key === key; },\n\n      onTabs: function(key, ml ) {\n        if( this.pages[key] ) {\n          this.key = key;\n          this.create(this.key); }\n        if( ml ){\n          this.mathML(this.exps); } },\n\n      create: function( key ) {\n        let page = this.pages[key];\n        if( page.obj===null ) {\n            page.obj = new page.klass(); }\n        this.exps = page.obj.math(); },\n\n      mathML: function ( exps ) {\n        for( let key in exps ){\n          let exp = exps[key];\n          if( this.inKlass(exp.klass) ) {\n            let elem = this.$refs[exp.klass][0];\n            elem.innerHTML = exp.mathML; } } },\n      \n      inKlass: function( klass ) {\n        console.log( 'MathMN.inKlass klass', klass );\n        status = typeof(this.$refs[klass][0]) !== 'undefined';\n        if( !status ) {\n          console.log( 'MathMN.inKlass ref undefined for', klass ); }\n        return status; }\n    },\n\n    mounted: function () {\n      this.onTabs( this.key, false );\n      this.subscribe( 'Math', this.comp+'.vue', (key) => {\n        if( typeof(key)==='string' ) {\n          this.onTabs( key, true ); } } );\n      this.$nextTick( function() {\n        this.mathML( this.exps ); } ); }\n  }\n  \nexport default MathND;\n\n</script>\n\n<style lang=\"less\">\n  \n  .grid9x3() { display:grid; grid-template-columns:33% 33% 34%; grid-template-rows:11% 11% 11% 11% 11% 11% 11% 11% 12%;\n    grid-template-areas:\n      \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\"\n      \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\"\n      \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\"; }\n  \n  .c( @rc ) { display:grid; grid-area:@rc; justify-self:stretch; align-self:stretch;\n    justify-items:center; align-items:center; background-color:black; color:wheat; border:solid thin wheat; }\n  \n  .comp { background-color:black; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:2.5em;\n    .grid9x3(); justify-items:center; align-items:center;\n    \n    .r1c1{.c(r1c1)}; .r1c2{.c(r1c2)}; .r1c3{.c(r1c3)};\n    .r2c1{.c(r2c1)}; .r2c2{.c(r2c2)}; .r2c3{.c(r2c3)};\n    .r3c1{.c(r3c1)}; .r3c2{.c(r3c2)}; .r3c3{.c(r3c3)};\n    .r4c1{.c(r4c1)}; .r4c2{.c(r4c2)}; .r4c3{.c(r4c3)};\n    .r5c1{.c(r5c1)}; .r5c2{.c(r5c2)}; .r5c3{.c(r5c3)};\n    .r6c1{.c(r6c1)}; .r6c2{.c(r6c2)}; .r6c3{.c(r6c3)};\n    .r7c1{.c(r7c1)}; .r7c2{.c(r7c2)}; .r7c3{.c(r7c3)};\n    .r8c1{.c(r8c1)}; .r8c2{.c(r8c2)}; .r8c3{.c(r8c3)};\n    .r9c1{.c(r9c1)}; .r9c2{.c(r9c2)}; .r9c3{.c(r9c3)};\n  }\n\n</style>"]}, media: undefined });
+    inject("data-v-52daf283_0", { source: ".comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 2.5em;\n  display: grid;\n  grid-template-columns: 33% 33% 34%;\n  grid-template-rows: 11% 11% 11% 11% 11% 11% 11% 11% 12%;\n  grid-template-areas: \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\" \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\" \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .r1c1 {\n  display: grid;\n  grid-area: r1c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c2 {\n  display: grid;\n  grid-area: r1c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c3 {\n  display: grid;\n  grid-area: r1c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c1 {\n  display: grid;\n  grid-area: r2c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c2 {\n  display: grid;\n  grid-area: r2c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c3 {\n  display: grid;\n  grid-area: r2c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c1 {\n  display: grid;\n  grid-area: r3c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c2 {\n  display: grid;\n  grid-area: r3c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c3 {\n  display: grid;\n  grid-area: r3c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c1 {\n  display: grid;\n  grid-area: r4c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c2 {\n  display: grid;\n  grid-area: r4c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c3 {\n  display: grid;\n  grid-area: r4c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c1 {\n  display: grid;\n  grid-area: r5c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c2 {\n  display: grid;\n  grid-area: r5c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c3 {\n  display: grid;\n  grid-area: r5c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c1 {\n  display: grid;\n  grid-area: r6c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c2 {\n  display: grid;\n  grid-area: r6c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c3 {\n  display: grid;\n  grid-area: r6c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c1 {\n  display: grid;\n  grid-area: r7c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c2 {\n  display: grid;\n  grid-area: r7c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c3 {\n  display: grid;\n  grid-area: r7c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c1 {\n  display: grid;\n  grid-area: r8c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c2 {\n  display: grid;\n  grid-area: r8c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c3 {\n  display: grid;\n  grid-area: r8c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c1 {\n  display: grid;\n  grid-area: r9c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c2 {\n  display: grid;\n  grid-area: r9c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c3 {\n  display: grid;\n  grid-area: r9c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n", map: {"version":3,"sources":["MathND.vue","/Users/ax/Documents/prj/aug/vue/math/MathND.vue"],"names":[],"mappings":"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","file":"MathND.vue","sourcesContent":[".comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 2.5em;\n  display: grid;\n  grid-template-columns: 33% 33% 34%;\n  grid-template-rows: 11% 11% 11% 11% 11% 11% 11% 11% 12%;\n  grid-template-areas: \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\" \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\" \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .r1c1 {\n  display: grid;\n  grid-area: r1c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c2 {\n  display: grid;\n  grid-area: r1c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c3 {\n  display: grid;\n  grid-area: r1c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c1 {\n  display: grid;\n  grid-area: r2c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c2 {\n  display: grid;\n  grid-area: r2c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c3 {\n  display: grid;\n  grid-area: r2c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c1 {\n  display: grid;\n  grid-area: r3c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c2 {\n  display: grid;\n  grid-area: r3c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c3 {\n  display: grid;\n  grid-area: r3c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c1 {\n  display: grid;\n  grid-area: r4c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c2 {\n  display: grid;\n  grid-area: r4c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c3 {\n  display: grid;\n  grid-area: r4c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c1 {\n  display: grid;\n  grid-area: r5c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c2 {\n  display: grid;\n  grid-area: r5c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c3 {\n  display: grid;\n  grid-area: r5c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c1 {\n  display: grid;\n  grid-area: r6c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c2 {\n  display: grid;\n  grid-area: r6c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c3 {\n  display: grid;\n  grid-area: r6c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c1 {\n  display: grid;\n  grid-area: r7c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c2 {\n  display: grid;\n  grid-area: r7c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c3 {\n  display: grid;\n  grid-area: r7c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c1 {\n  display: grid;\n  grid-area: r8c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c2 {\n  display: grid;\n  grid-area: r8c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c3 {\n  display: grid;\n  grid-area: r8c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c1 {\n  display: grid;\n  grid-area: r9c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c2 {\n  display: grid;\n  grid-area: r9c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c3 {\n  display: grid;\n  grid-area: r9c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n","\n\n<template>\n  <div>\n    <d-dabs comp=\"Math\" :pages=\"pages\" :init=\"key\"></d-dabs>\n    <div class=\"comp\">\n      <template v-for=\"exp in exps\">\n        <div :class=\"exp.klass\" :ref=\"exp.klass\"></div>\n      </template>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Dabs  from '../elem/Dabs.vue';\n\n  let MathND = {\n\n    components:{ 'd-dabs':Dabs },\n\n    methods: {\n\n      isPage: function(key) {\n        return this.key === key; },\n\n      onTabs: function(key) {\n        if( this.pages[key] ) {\n          this.key = key;\n          this.create(this.key);\n          this.mathML(this.exps); } },\n\n      create: function( key ) {\n        let page = this.pages[key];\n        if( page.obj===null ) {\n            page.obj = new page.create(); }\n        let exps = page.obj.math();\n        let i    = 0;\n        for( let key in exps ) {\n          let exp   = exps[key];\n          exp.klass = this.klass(i);\n          i++; }\n        this.exps = exps; },\n\n      mathML: function ( exps ) {\n        this.$nextTick( function() { // Wait for DOM to render\n          for( let key in exps ){\n            let exp  = exps[key];\n            let elem = this.$refs[exp.klass][0];\n              elem.innerHTML = exp.mathML; } } ) },\n\n    // Generate a row column layout class\n    klass: function( i ) {\n      let ncol = 3;\n      let mod  = i       % ncol;\n      let row  = (i-mod) / ncol + 1;\n      let col  = mod + 1;\n      return `r${row}c${col}`; }\n    },\n\n    mounted: function () {\n      this.subscribe( 'Math', this.comp+'.vue', (key) => {\n        if( typeof(key)==='string' ) {\n          this.onTabs( key ); } } );\n      this.onTabs( this.key ); }\n  }\n  \nexport default MathND;\n\n</script>\n\n<style lang=\"less\">\n  \n  .grid9x3() { display:grid; grid-template-columns:33% 33% 34%; grid-template-rows:11% 11% 11% 11% 11% 11% 11% 11% 12%;\n    grid-template-areas:\n      \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\"\n      \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\"\n      \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\"; }\n  \n  .c( @rc ) { display:grid; grid-area:@rc; justify-self:stretch; align-self:stretch;\n    justify-items:center; align-items:center; background-color:black; color:wheat; border:solid thin wheat; }\n  \n  .comp { background-color:black; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:2.5em;\n    .grid9x3(); justify-items:center; align-items:center;\n    \n    .r1c1{.c(r1c1)}; .r1c2{.c(r1c2)}; .r1c3{.c(r1c3)};\n    .r2c1{.c(r2c1)}; .r2c2{.c(r2c2)}; .r2c3{.c(r2c3)};\n    .r3c1{.c(r3c1)}; .r3c2{.c(r3c2)}; .r3c3{.c(r3c3)};\n    .r4c1{.c(r4c1)}; .r4c2{.c(r4c2)}; .r4c3{.c(r4c3)};\n    .r5c1{.c(r5c1)}; .r5c2{.c(r5c2)}; .r5c3{.c(r5c3)};\n    .r6c1{.c(r6c1)}; .r6c2{.c(r6c2)}; .r6c3{.c(r6c3)};\n    .r7c1{.c(r7c1)}; .r7c2{.c(r7c2)}; .r7c3{.c(r7c3)};\n    .r8c1{.c(r8c1)}; .r8c2{.c(r8c2)}; .r8c3{.c(r8c3)};\n    .r9c1{.c(r9c1)}; .r9c2{.c(r9c2)}; .r9c3{.c(r9c3)};\n  }\n\n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -5890,9 +5894,9 @@ MathML = class MathML {
   }
 
   app(...args) {
-    var arg, j, len;
-    for (j = 0, len = args.length; j < len; j++) {
-      arg = args[j];
+    var arg, i, len;
+    for (i = 0, len = args.length; i < len; i++) {
+      arg = args[i];
       this.math[this.key] += arg;
     }
   }
@@ -5959,11 +5963,11 @@ MathML = class MathML {
   }
 
   vec(rest) {
-    var e, j, len;
+    var e, i, len;
     this.beg("mfenced open='[' close=']'");
 // MathML takes care of commans
-    for (j = 0, len = rest.length; j < len; j++) {
-      e = rest[j];
+    for (i = 0, len = rest.length; i < len; i++) {
+      e = rest[i];
       this.exp(e);
     }
     this.end("mfenced");
@@ -5999,16 +6003,6 @@ MathML = class MathML {
     obj = Latex$1[o];
     uni = obj != null ? obj.uc : '?';
     this.tag('mo', uni);
-  }
-
-  // Generate a row column layout class
-  // Called by /doc equation modules like Basics, Differ and Solves
-  klass(i, ncol) {
-    var col, mod, row;
-    mod = i % ncol;
-    row = (i - mod) / ncol + 1;
-    col = mod + 1;
-    return `r${row}c${col}`;
   }
 
   exp(ast) {
@@ -6375,20 +6369,17 @@ Basics = class Basics {
   }
 
   math(exps = Exps) {
-    var exp, i, key;
-    i = 0;
+    var exp, key;
     for (key in exps) {
       if (!hasProp.call(exps, key)) continue;
       exp = exps[key];
-      this.mathExp(key, exp, i);
-      i = i + 1;
+      this.mathExp(key, exp);
     }
     return exps;
   }
 
-  mathExp(key, exp, i) {
+  mathExp(key, exp) {
     exp.mathML = this.mathML.parse(exp.asc, key);
-    exp.klass = this.mathML.klass(i, this.ncol);
   }
 
 };
@@ -6405,7 +6396,7 @@ let MathML$2 = {
 
   data() {
     return { comp:'MathML', key:'Basics', exps:{}, pages:{
-        Basics: { title:'Basics', key:'Basics', klass:Basics$1, obj:null }
+        Basics: { title:'Basics', key:'Basics', create:Basics$1, obj:null }
       } } },
   
 };
@@ -6897,42 +6888,6 @@ Exps$1 = {
     klass: "r4c3",
     ast: [],
     mathML: ""
-  },
-  Ain1S: {
-    ascii: "sin(u)",
-    klass: "r5c1",
-    ast: [],
-    mathML: ""
-  },
-  Bdd1S: {
-    ascii: "u+v",
-    klass: "r5c2",
-    ast: [],
-    mathML: ""
-  },
-  Aul1S: {
-    ascii: "u*v",
-    klass: "r5c3",
-    ast: [],
-    mathML: ""
-  },
-  Ain1D: {
-    ascii: "sin(u)",
-    klass: "r6c1",
-    ast: [],
-    mathML: ""
-  },
-  Bdd1D: {
-    ascii: "u+v",
-    klass: "r6c2",
-    ast: [],
-    mathML: ""
-  },
-  Aul1D: {
-    ascii: "u*v",
-    klass: "r6c3",
-    ast: [],
-    mathML: ""
   }
 };
 
@@ -7067,24 +7022,20 @@ Exps$2 = {
 Solves = class Solves {
   constructor() {
     this.mathML = new MathML$1();
-    this.ncol = 3;
   }
 
   math(exps = Exps$2) {
-    var exp, i, key;
-    i = 0;
+    var exp, key;
     for (key in exps) {
       if (!hasProp$2.call(exps, key)) continue;
       exp = exps[key];
-      this.mathExp(key, exp, i);
-      i = i + 1;
+      this.mathExp(key, exp);
     }
     return exps;
   }
 
-  mathExp(key, exp, i) {
+  mathExp(key, exp) {
     exp.mathML = this.mathML.parse(exp.asc, key);
-    exp.klass = this.mathML.klass(i, this.ncol);
   }
 
 };
@@ -7099,8 +7050,8 @@ let MathEQ = {
 
   data() {
     return { comp:'MathEQ', key:'Differ', exps:{}, pages:{
-        Differ: { title:'Differ', key:'Differ', klass:Differ$1, obj:null },
-        Solves: { title:'Solves', key:'Solves', klass:Solves$1, obj:null }
+        Differ: { title:'Differ', key:'Differ', create:Differ$1, obj:null },
+        Solves: { title:'Solves', key:'Solves', create:Solves$1, obj:null }
       } } }
 };
 

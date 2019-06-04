@@ -13,8 +13,8 @@
 
     data() {
       return { comp:'MathEQ', key:'Differ', exps:{}, pages:{
-          Differ: { title:'Differ', key:'Differ', klass:Differ, obj:null },
-          Solves: { title:'Solves', key:'Solves', klass:Solves, obj:null }
+          Differ: { title:'Differ', key:'Differ', create:Differ, obj:null },
+          Solves: { title:'Solves', key:'Solves', create:Solves, obj:null }
         } } }
   }
   

@@ -28,15 +28,12 @@ class Basics
     @ncol   = 3
 
   math:( exps=Exps ) ->
-    i = 0
     for own   key, exp of exps
-      @mathExp( key, exp, i )
-      i = i + 1
+      @mathExp( key, exp )
     return exps
 
-  mathExp:( key, exp, i  ) ->
+  mathExp:( key, exp  ) ->
     exp.mathML = @mathML.parse( exp.asc, key )
-    exp.klass  = @mathML.klass( i, @ncol )
     return
 
 export default Basics

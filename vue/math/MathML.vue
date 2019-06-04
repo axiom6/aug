@@ -13,7 +13,7 @@
 
     data() {
       return { comp:'MathML', key:'Basics', exps:{}, pages:{
-          Basics: { title:'Basics', key:'Basics', klass:Basics, obj:null }
+          Basics: { title:'Basics', key:'Basics', create:Basics, obj:null }
         } } },
     
   }

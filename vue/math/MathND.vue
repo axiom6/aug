@@ -24,41 +24,45 @@
       isPage: function(key) {
         return this.key === key; },
 
-      onTabs: function(key, ml ) {
+      onTabs: function(key) {
         if( this.pages[key] ) {
           this.key = key;
-          this.create(this.key); }
-        if( ml ){
+          this.create(this.key);
           this.mathML(this.exps); } },
 
       create: function( key ) {
         let page = this.pages[key];
         if( page.obj===null ) {
-            page.obj = new page.klass(); }
-        this.exps = page.obj.math(); },
+            page.obj = new page.create(); }
+        let exps = page.obj.math();
+        let i    = 0;
+        for( let key in exps ) {
+          let exp   = exps[key];
+          exp.klass = this.klass(i);
+          i++; }
+        this.exps = exps; },
 
       mathML: function ( exps ) {
-        for( let key in exps ){
-          let exp = exps[key];
-          if( this.inKlass(exp.klass) ) {
+        this.$nextTick( function() { // Wait for DOM to render
+          for( let key in exps ){
+            let exp  = exps[key];
             let elem = this.$refs[exp.klass][0];
-            elem.innerHTML = exp.mathML; } } },
-      
-      inKlass: function( klass ) {
-        console.log( 'MathMN.inKlass klass', klass );
-        status = typeof(this.$refs[klass][0]) !== 'undefined';
-        if( !status ) {
-          console.log( 'MathMN.inKlass ref undefined for', klass ); }
-        return status; }
+              elem.innerHTML = exp.mathML; } } ) },
+
+    // Generate a row column layout class
+    klass: function( i ) {
+      let ncol = 3;
+      let mod  = i       % ncol;
+      let row  = (i-mod) / ncol + 1;
+      let col  = mod + 1;
+      return `r${row}c${col}`; }
     },
 
     mounted: function () {
-      this.onTabs( this.key, false );
       this.subscribe( 'Math', this.comp+'.vue', (key) => {
         if( typeof(key)==='string' ) {
-          this.onTabs( key, true ); } } );
-      this.$nextTick( function() {
-        this.mathML( this.exps ); } ); }
+          this.onTabs( key ); } } );
+      this.onTabs( this.key ); }
   }
   
 export default MathND;

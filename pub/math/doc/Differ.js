@@ -79,42 +79,6 @@ Exps = {
     klass: "r4c3",
     ast: [],
     mathML: ""
-  },
-  Ain1S: {
-    ascii: "sin(u)",
-    klass: "r5c1",
-    ast: [],
-    mathML: ""
-  },
-  Bdd1S: {
-    ascii: "u+v",
-    klass: "r5c2",
-    ast: [],
-    mathML: ""
-  },
-  Aul1S: {
-    ascii: "u*v",
-    klass: "r5c3",
-    ast: [],
-    mathML: ""
-  },
-  Ain1D: {
-    ascii: "sin(u)",
-    klass: "r6c1",
-    ast: [],
-    mathML: ""
-  },
-  Bdd1D: {
-    ascii: "u+v",
-    klass: "r6c2",
-    ast: [],
-    mathML: ""
-  },
-  Aul1D: {
-    ascii: "u*v",
-    klass: "r6c3",
-    ast: [],
-    mathML: ""
   }
 };
 

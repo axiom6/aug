@@ -103,20 +103,17 @@ Basics = class Basics {
   }
 
   math(exps = Exps) {
-    var exp, i, key;
-    i = 0;
+    var exp, key;
     for (key in exps) {
       if (!hasProp.call(exps, key)) continue;
       exp = exps[key];
-      this.mathExp(key, exp, i);
-      i = i + 1;
+      this.mathExp(key, exp);
     }
     return exps;
   }
 
-  mathExp(key, exp, i) {
+  mathExp(key, exp) {
     exp.mathML = this.mathML.parse(exp.asc, key);
-    exp.klass = this.mathML.klass(i, this.ncol);
   }
 
 };
