@@ -92,6 +92,14 @@ class MathML
     @tag('mo', uni )
     return
 
+  # Generate a row column layout class
+  # Called by /doc equation modules like Basics, Differ and Solves
+  klass:( i, ncol ) ->
+    mod = i       % ncol
+    row = (i-mod) / ncol + 1
+    col = mod + 1
+    "r#{row}c#{col}"
+
   exp:( ast ) ->
     try
       # console.log( 'MathML.exp(asa)', asa )

@@ -27,21 +27,16 @@ class Basics
     @mathML = new MathML();
     @ncol   = 3
 
-  doExps:( exps=Exps ) ->
+  math:( exps=Exps ) ->
     i = 0
     for own   key, exp of exps
-      @doExp( key, exp, i )
+      @mathExp( key, exp, i )
       i = i + 1
     return exps
 
-  doExp:( key, exp, i  ) ->
+  mathExp:( key, exp, i  ) ->
     exp.mathML = @mathML.parse( exp.asc, key )
-    # console.log( 'Basics.doExp()', exp.mathML )
-    mod = i       % @ncol
-    row = (i-mod) / @ncol + 1
-    col = mod + 1
-    exp.klass = "r#{row}c#{col}"
-    # console.log( 'Basics.mathML', exp.mathML )
+    exp.klass  = @mathML.klass( i, @ncol )
     return
 
 export default Basics

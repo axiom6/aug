@@ -102,29 +102,23 @@ Basics = class Basics {
     this.ncol = 3;
   }
 
-  doExps(exps = Exps) {
+  math(exps = Exps) {
     var exp, i, key;
     i = 0;
     for (key in exps) {
       if (!hasProp.call(exps, key)) continue;
       exp = exps[key];
-      this.doExp(key, exp, i);
+      this.mathExp(key, exp, i);
       i = i + 1;
     }
     return exps;
   }
 
-  doExp(key, exp, i) {
-    var col, mod, row;
+  mathExp(key, exp, i) {
     exp.mathML = this.mathML.parse(exp.asc, key);
-    // console.log( 'Basics.doExp()', exp.mathML )
-    mod = i % this.ncol;
-    row = (i - mod) / this.ncol + 1;
-    col = mod + 1;
-    exp.klass = `r${row}c${col}`;
+    exp.klass = this.mathML.klass(i, this.ncol);
   }
 
 };
 
-// console.log( 'Basics.mathML', exp.mathML )
 export default Basics;

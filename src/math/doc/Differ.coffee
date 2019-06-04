@@ -16,6 +16,12 @@ Exps =
   Div1D:{ ascii:"u/v",    klass:"r4c1", ast:[], mathML:"" }
   Pow1D:{ ascii:"u^3",    klass:"r4c2", ast:[], mathML:"" }
   Lnn1D:{ ascii:"ln(u)",  klass:"r4c3", ast:[], mathML:"" }
+  Ain1S:{ ascii:"sin(u)", klass:"r5c1", ast:[], mathML:"" }
+  Bdd1S:{ ascii:"u+v",    klass:"r5c2", ast:[], mathML:"" }
+  Aul1S:{ ascii:"u*v",    klass:"r5c3", ast:[], mathML:"" }
+  Ain1D:{ ascii:"sin(u)", klass:"r6c1", ast:[], mathML:"" }
+  Bdd1D:{ ascii:"u+v",    klass:"r6c2", ast:[], mathML:"" }
+  Aul1D:{ ascii:"u*v",    klass:"r6c3", ast:[], mathML:"" }
 
 class Differ
 
@@ -24,23 +30,17 @@ class Differ
     @mathML = new MathML()
     @ncol   = 3
 
-  doExps:( exps=Exps ) ->
+  math:( exps=Exps ) ->
     for own   key, exp of exps when key.charAt(4) is 'S'
-      @doExp( key, exps )
+      @mathExp( key, exps )
     return exps
 
-  doExp:( key, exps ) ->
+  mathExp:( key, exps ) ->
     ked = key.substring(0,4) + 'D'
     exps[key].ast    = Ptn.parse(      exps[key].ascii    )
     exps[ked].ast    = @diffEQ.d(      exps[key].ast      )
     exps[key].mathML = @mathML.markup( exps[key].ast, key )
     exps[ked].mathML = @mathML.markup( exps[ked].ast, ked )
     return
-
-  toKlass:( i ) ->
-    mod = i       % @ncol
-    row = (i-mod) / @ncol + 1
-    col = mod + 1
-    "r#{row}c#{col}"    
 
 export default Differ

@@ -79,6 +79,42 @@ Exps = {
     klass: "r4c3",
     ast: [],
     mathML: ""
+  },
+  Ain1S: {
+    ascii: "sin(u)",
+    klass: "r5c1",
+    ast: [],
+    mathML: ""
+  },
+  Bdd1S: {
+    ascii: "u+v",
+    klass: "r5c2",
+    ast: [],
+    mathML: ""
+  },
+  Aul1S: {
+    ascii: "u*v",
+    klass: "r5c3",
+    ast: [],
+    mathML: ""
+  },
+  Ain1D: {
+    ascii: "sin(u)",
+    klass: "r6c1",
+    ast: [],
+    mathML: ""
+  },
+  Bdd1D: {
+    ascii: "u+v",
+    klass: "r6c2",
+    ast: [],
+    mathML: ""
+  },
+  Aul1D: {
+    ascii: "u*v",
+    klass: "r6c3",
+    ast: [],
+    mathML: ""
   }
 };
 
@@ -89,33 +125,25 @@ Differ = class Differ {
     this.ncol = 3;
   }
 
-  doExps(exps = Exps) {
+  math(exps = Exps) {
     var exp, key;
     for (key in exps) {
       if (!hasProp.call(exps, key)) continue;
       exp = exps[key];
       if (key.charAt(4) === 'S') {
-        this.doExp(key, exps);
+        this.mathExp(key, exps);
       }
     }
     return exps;
   }
 
-  doExp(key, exps) {
+  mathExp(key, exps) {
     var ked;
     ked = key.substring(0, 4) + 'D';
     exps[key].ast = Ptn.parse(exps[key].ascii);
     exps[ked].ast = this.diffEQ.d(exps[key].ast);
     exps[key].mathML = this.mathML.markup(exps[key].ast, key);
     exps[ked].mathML = this.mathML.markup(exps[ked].ast, ked);
-  }
-
-  toKlass(i) {
-    var col, mod, row;
-    mod = i % this.ncol;
-    row = (i - mod) / this.ncol + 1;
-    col = mod + 1;
-    return `r${row}c${col}`;
   }
 
 };

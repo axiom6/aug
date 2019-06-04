@@ -35,9 +35,9 @@ MathML = class MathML {
   }
 
   app(...args) {
-    var arg, i, len;
-    for (i = 0, len = args.length; i < len; i++) {
-      arg = args[i];
+    var arg, j, len;
+    for (j = 0, len = args.length; j < len; j++) {
+      arg = args[j];
       this.math[this.key] += arg;
     }
   }
@@ -104,11 +104,11 @@ MathML = class MathML {
   }
 
   vec(rest) {
-    var e, i, len;
+    var e, j, len;
     this.beg("mfenced open='[' close=']'");
 // MathML takes care of commans
-    for (i = 0, len = rest.length; i < len; i++) {
-      e = rest[i];
+    for (j = 0, len = rest.length; j < len; j++) {
+      e = rest[j];
       this.exp(e);
     }
     this.end("mfenced");
@@ -147,6 +147,16 @@ MathML = class MathML {
     obj = Latex[o];
     uni = obj != null ? obj.uc : '?';
     this.tag('mo', uni);
+  }
+
+  // Generate a row column layout class
+  // Called by /doc equation modules like Basics, Differ and Solves
+  klass(i, ncol) {
+    var col, mod, row;
+    mod = i % ncol;
+    row = (i - mod) / ncol + 1;
+    col = mod + 1;
+    return `r${row}c${col}`;
   }
 
   exp(ast) {
