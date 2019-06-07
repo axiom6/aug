@@ -99,8 +99,6 @@
 
 <style lang="less">
   
-  //@import '../../css/fontawesome/init.css';
-
   .grid3x3() { display:grid; grid-template-columns:33% 33% 34%; grid-template-rows:33% 33% 34%;
                grid-template-areas: "nw north ne" "west cen east" "sw south se"; }
   

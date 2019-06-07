@@ -4,11 +4,15 @@
   
   import Ikws from './Ikws.vue'
 
-  export default {
+  let Info = {
+    
     extends: Ikws,
     beforeMount: function() {
       this.comp = 'Info'; } }
+
+  export default Info;
   
 </script>
+
 
 

@@ -3,8 +3,8 @@
 
   import GeomND  from './GeomND.vue';
   import Dabs    from '../elem/Dabs.vue';
-  import Graph   from '../../src/gan/2D/Graph.js';
-  import Basics  from '../../src/gan/2D/Basics.js';
+  import Graph   from '../../pub/gan/2D/Graph.js';
+  import Basics  from '../../pub/gan/2D/Basics.js';
 
   export default {
 
@@ -14,8 +14,8 @@
 
     data() {
       return { comp:'Geom2D', key:'Graph', pages:{
-        Graph:  { title:'Graph',  key:'Graph',  klass:Graph,  created:false },
-        Basics: { title:'Basics', key:'Basics', klass:Basics, created:false }
+        Graph:  { title:'Graph',  key:'Graph',  obj:Graph,  created:false },
+        Basics: { title:'Basics', key:'Basics', obj:Basics, created:false }
     } } },
     
   }

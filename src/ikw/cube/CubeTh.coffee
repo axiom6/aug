@@ -3,8 +3,8 @@ import Data          from '../../bas/util/Data.js'
 import Build         from './Build.js'
 import Cube3D        from './Cube3D.js'
 import Rect          from './Rect.js'
-import * as THREE    from '../../../lib/three/three.module.js'
-import OrbitControls from '../../../lib/three/OrbitControls.js'
+import * as THREE    from '../../../pub/lib/three/three.module.js'
+import OrbitControls from '../../../pub/lib/three/OrbitControls.js'
 
 class CubeTh
 

@@ -1,7 +1,7 @@
 
 
 import Vis        from '../../bas/util/Vis.js'
-import * as THREE from '../../../lib/three/three.module.js'
+import * as THREE from '../../../pub/lib/three/three.module.js'
 
 class Cube3D
 

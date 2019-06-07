@@ -4,9 +4,8 @@
 
   import GeomND  from './GeomND.vue';
   import Dabs    from '../elem/Dabs.vue';
-  import Planes  from '../../src/gan/4D/Planes.js';
-  import Sphere  from '../../src/gan/4D/Sphere.js';
-//import Conform from '../../src/gan/4D/Conform.js';
+  import Planes  from '../../pub/gan/4D/Planes.js';
+  import Sphere  from '../../pub/gan/4D/Sphere.js';
 
   export default {
 
@@ -16,9 +15,8 @@
 
     data() {
       return { comp:'Geom4D', key:'Sphere', pages:{
-          Planes:  { title:'Planes',  key:'Planes',  klass:Planes,  created:false },
-          Sphere:  { title:'Sphere',  key:'Sphere',  klass:Sphere,  created:false }
-       // Conform: { title:'Conform', key:'Conform', klass:Conform, created:false }
+          Planes:  { title:'Planes',  key:'Planes',  obj:Planes, created:false },
+          Sphere:  { title:'Sphere',  key:'Sphere',  obj:Sphere, created:false }
         } } },
 
   }

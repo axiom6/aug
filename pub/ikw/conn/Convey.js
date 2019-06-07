@@ -1,8 +1,8 @@
 var Convey;
 
-import * as d3 from '../../../lib/d3/d3.5.9.0.esm.js';
+import * as d3 from '../../../pub/lib/d3/d3.5.9.0.esm.js';
 
-import Sankey from '../../../lib/d3/d3-sankey.esm.js';
+import Sankey from '../../../pub/lib/d3/d3-sankey.esm.js';
 
 import Vis from '../../bas/util/Vis.js';
 

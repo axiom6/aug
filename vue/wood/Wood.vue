@@ -27,7 +27,7 @@
 
   .wood .horseman {
     position: absolute; left:50%; top:300px; width:184px; height:123px; margin-left: -100px;
-    background: url("../../vue/wood/svg/horse-hallow5.svg");
+    background: url("css/svg/horse-hallow5.svg");
     animation: horsemove 0.7s steps(15) infinite; }
 
   .wood .ground {
@@ -38,25 +38,25 @@
     perspective: 1000px; }
 
 .wood .front {
-    background: url("../../vue/wood/svg/hallowfront4.svg") repeat-x;
+    background: url("css/svg/hallowfront4.svg") repeat-x;
     background-size: 1000px 871px;
     top: -100px;
     animation: bk 20s -5s linear infinite; }
 
 .wood .frontmid {
-    background: url("../../vue/wood/svg/hallowmidfront2.svg") repeat-x;
+    background: url("css/svg/hallowmidfront2.svg") repeat-x;
     background-size: 1000px 871px;
     top: -100px;
     animation: bk 50s -5s linear infinite; }
 
 .wood .mid {
-    background: url("../../vue/wood/svg/hallowmid2.svg") repeat-x;
+    background: url("css/svg/hallowmid2.svg") repeat-x;
     background-size: 1000px 871px;
     top: -100px;
     animation: bk 100s -5s linear infinite; }
 
 .wood .back {
-    background: url("../../vue/wood/svg/hallowback2.svg") repeat-x;
+    background: url("css/svg/hallowback2.svg") repeat-x;
     background-size: 1000px 871px;
     top: -100px;
     animation: bk 100s -5s linear infinite; }

@@ -2,7 +2,8 @@
 
 <template>
   <div class="note">
-    <n-tabs :comp="comp" :pages="pages" init="Stand"></n-tabs>
+    <n-tabs :comp="comp" :pages="pages"></n-tabs>  <!-- init="Stand" -->
+    <h1 v-if="comp==='Note'">Notebooks</h1>
     <template v-for="page in pages">
       <router-view :name="name(page)" :id="page.key"></router-view>
     </template>
@@ -12,10 +13,6 @@
 <script type="module">
 
   import Tabs  from '../elem/Tabs.vue';
-/*import Stand from '../note/Stand.vue';
-  import Embed from '../note/Embed.vue';
-  import Maths from '../note/Maths.vue';
-  import Ganja from '../note/Ganja.vue';*/
   
   let Note = {
     
@@ -36,14 +33,11 @@
     
   }
   
-/*Note.Stand = Stand;
-  Note.Embed = Embed;
-  Note.Maths = Maths;
-  Note.Ganja = Ganja;*/
-  
   export default Note;
+  
 </script>
 
 <style lang="less">
-  .note { position:relative; left:0; top:0; right:0; bottom:0; }
+  .note { position:relative; left:0; top:0; right:0; bottom:0; background-color:black; display:grid;
+    h1    { justify-self:center; align-self:center; text-align:center; color:wheat; font-size:3em; } }
 </style>

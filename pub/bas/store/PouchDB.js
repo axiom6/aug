@@ -5,7 +5,7 @@ import Util from '../../bas/util/Util';
 
 import Store from './Store';
 
-import Pouch from '../../../lib/store/PouchDB.esm.stub.js';
+import Pouch from '../../../pub/lib/store/PouchDB.esm.stub.js';
 
 PouchDB = (function() {
   class PouchDB extends Store {

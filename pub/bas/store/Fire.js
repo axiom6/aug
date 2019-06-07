@@ -4,7 +4,7 @@ import Util from '../../bas/util/Util.js';
 
 import Store from './Store.js';
 
-import Firebase from '../../../lib/store/Firebase.esm.stub.js';
+import Firebase from '../../../pub/lib/store/Firebase.esm.stub.js';
 
 Fire = (function() {
   class Fire extends Store {

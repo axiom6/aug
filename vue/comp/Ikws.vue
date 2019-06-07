@@ -1,7 +1,10 @@
 
 <template>
   <div class="ikws">
-    <b-tabs :comp="comp" :pages="pages" init="Prac"></b-tabs>
+    <b-tabs :comp="comp" :pages="pages"></b-tabs>
+    <h1 v-if="comp==='Info'">Information</h1>
+    <h1 v-if="comp==='Know'">Knowledge</h1>
+    <h1 v-if="comp==='Wise'">Wisdom</h1>
     <template v-for="page in pages">
       <router-view :name="comp+page.key"></router-view>
     </template>
@@ -28,5 +31,6 @@
 </script>
 
 <style lang="less">
-  .ikws { position:relative; left:0; top:0; right:0; bottom:0; }
+  .ikws { position:relative; left:0; top:0; right:0; bottom:0; background-color:black; display:grid;
+    h1    { justify-self:center; align-self:center; text-align:center; color:wheat; font-size:3em; } }
 </style>

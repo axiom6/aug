@@ -9,3 +9,4 @@
       this.comp = 'Wise'; } }
 
 </script>
+

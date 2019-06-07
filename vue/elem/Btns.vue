@@ -4,12 +4,12 @@
     <template v-for="btn in btns">
       <div        :ref="btn.key"   :style="styleBlock(btn.pos)">
         <div                        class="btn-center">
-          <button      class="btn" :style="styleBtn(btn)" @click="pubBtn(btn)">
+          <div class="btn" :style="styleBtn(btn)" @click="pubBtn(btn)">
             <span v-if="btn.check" :class="classCheck(btn)"></span>
             <i    v-if="btn.icon"  :class="classIcons(btn)"></i>
             <img  v-if="btn.img"    class="image" :src="img(btn)" alt=""/>
             <span v-if="btn.title"  class="title" :ref="titleRef(btn)">{{btn.title}}</span>
-          </button>
+          </div>
         </div>
       </div>
     </template>
@@ -20,7 +20,7 @@
 
   export default {
 
-    props: { comp:String, btns:Object, klass:String, init:String, back:String, high:String },
+    props: { comp:String, btns:Object, klass:String, init:String, back:String, active:String },
 
     data() { return { key:this.init,
       colors: { primary:'#007bff', secondary:'#6c757d', success:'#28a745', info:'#17a2b8',
@@ -40,7 +40,7 @@
         fontSize:(p[3]*0.1)+'em' } },
       styleBtn: function (btn) {
         let back = this.colors[btn.back] ? this.colors[btn.back] : this.back;
-        return this.key===btn.key ? { color:'black', backgroundColor:this.high }
+        return this.key===btn.key ? { color:'black', backgroundColor:this.active }
                                   : { color:'black', backgroundColor:back }; },
       classCheck: function (btn) {
         return this.key===btn.key ? 'check far fa-check-square' : 'check far fa-square' },
@@ -49,7 +49,7 @@
       titleRef: function (btn) {
         return 'Title' + btn.key },
       img: function (btn) {
-        return '../../css/' + btn.img },
+        return 'css/' + btn.img }, // return '../../css/' + btn.img },
       adjustWidths: function() {
          let keys = Object.keys(this.btns)
          for( let key of keys ) {

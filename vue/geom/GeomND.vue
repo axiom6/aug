@@ -11,7 +11,7 @@
 <script type="module">
   
   import Dabs  from '../elem/Dabs.vue';
-  import Style from '../../src/gan/lib/Style.js';
+  import Style from '../../pub/gan/lib/Style.js';
 
   export default {
 
@@ -28,22 +28,18 @@
             this.create(this.key); } },
 
       create: function( key ) {
-        // console.log( this.comp+'.created()', { key:key, refs:this.$refs } );
         if( !this.pages[key].created ) {
-          Style.init( key, this.$refs[key][0] );
-          this.pages[key].created = true;
-          this.pages[key].klass.ga(); } }
+             this.pages[key].created = true;
+             this.$nextTick( function() { // Wait for DOM to render
+               window['Geom'][key] = new Style( this.$refs[key][0] );
+               this.pages[key].obj.ga(); } ) } }
     },
 
     mounted: function () {
-      // console.log( this.comp+'.mounted()', { refs:this.$refs } );
-      this.onTabs( this.key );
       this.subscribe( 'Geom', this.comp+'.vue', (key) => {
         if( typeof(key)==='string' ) {
-          this.onTabs( key ); }
-        else {
-          /* console.log( this.comp+'.subscribe() on subject Geom', key ); */ } } ); }
-    
+          this.onTabs( key ); } } );
+      this.onTabs( this.key ); }
     }
 
 </script>

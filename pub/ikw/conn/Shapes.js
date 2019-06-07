@@ -7,7 +7,7 @@ import Vis from '../../bas/util/Vis';
 
 import Convey from './Convey';
 
-import * as d3 from '../../../lib/d3/d3.5.9.0.esm.js';
+import * as d3 from '../../../pub/lib/d3/d3.5.9.0.esm.js';
 
 Shapes = class Shapes {
   constructor(stream) {

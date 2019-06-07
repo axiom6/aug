@@ -1,6 +1,6 @@
 var Chord;
 
-import * as d3 from '../../../lib/d3/d3.5.9.0.esm.js';
+import * as d3 from '../../../pub/lib/d3/d3.5.9.0.esm.js';
 
 Chord = class Chord {
   constructor() {

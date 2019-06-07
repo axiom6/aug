@@ -10,8 +10,6 @@
 
 <script type="module">
 
-  import Style   from '../../src/gan/lib/Style.js';
-
   let Math = {
 
     data() { return { comp:'Math',
@@ -19,8 +17,7 @@
         { title:'MathML', key:'ML' },
         { title:'MathEQ', key:'EQ' } ] } },
 
-    mounted: function () {
-      Style.size( this.$refs['Math'] ); } // mounted is best place to get page elem size
+    mounted: function () {} 
 
   }
 

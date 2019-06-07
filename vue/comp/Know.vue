@@ -1,4 +1,5 @@
 
+
 <script type="module">
 
   import Ikws from './Ikws.vue'
@@ -9,4 +10,5 @@
       this.comp = 'Know'; } }
 
 </script>
+
 

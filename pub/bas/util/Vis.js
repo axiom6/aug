@@ -2,7 +2,7 @@ var Vis;
 
 import Util from './Util.js';
 
-import FaLookup from './FaLookup.js';
+import FontAwe from './FontAwe.js';
 
 Vis = class Vis {
   static translate(x0, y0) {
@@ -351,7 +351,7 @@ Vis = class Vis {
 
   static unicode(icon) {
     var uc;
-    uc = FaLookup.icons[icon];
+    uc = FontAwe.icons[icon];
     if (uc == null) {
       console.error('Vis.unicode() missing icon in Vis.FontAwesomeUnicodes for', icon);
       uc = "\uf111"; // Circle

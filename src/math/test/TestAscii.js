@@ -1,8 +1,8 @@
 
 let cmds = process.argv.slice(2);
 
-let Ascii  = require('../par/Ascii.com.js' );
-let Tracer = require('../../../node_modules/pegjs-backtrace');
+let Ascii  = require('../../../pub/math/par/Ascii.com.js'    );
+let Tracer = require('../../../node_modules/pegjs-backtrace' );
 
 class TestAscii {
 
