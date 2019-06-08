@@ -3,7 +3,7 @@ import Store from './Store'
 
 class IndexedDB extends Store
 
-  constructor:( stream, uri, @dbVersion=1, @tableNames=[] ) ->
+  constructor:( stream, uri ) ->    # @dbVersion=1, @tableNames=[]
     super( stream, uri, 'IndexedDB' )
     @indexedDB = window.indexedDB # or window.mozIndexedDB or window.webkitIndexedDB or window.msIndexedDB
     console.error( 'Store.IndexedDB.constructor indexedDB not found' ) if not @indexedDB
@@ -76,6 +76,7 @@ class IndexedDB extends Store
     return
 
   show:( t ) ->
+    where  = () -> true
     tableName = @tableName(t)
     @traverse( 'show', tableName, objects, where, false )
     return
@@ -103,13 +104,13 @@ class IndexedDB extends Store
     object[key] = id if not object[key]?
     object
 
-  txnObjectStore:( t, mode, key=@key ) ->
+  txnObjectStore:( t, mode ) -> # , key=@key
     txo = null
     if not @dbs?
       console.trace( 'Store.IndexedDb.txnObjectStore() @dbs null' )
     else if @dbs.objectStoreNames.contains(t)
       txn = @dbs.transaction( t, mode )
-      txo = txn.objectStore(  t, { keyPath:key } )
+      txo = txn.objectStore(  t ) # , { keyPath:key }
     else
       console.error( 'Store.IndexedDb.txnObjectStore() missing objectStore for', t )
     txo
@@ -120,7 +121,7 @@ class IndexedDB extends Store
     req  = txo.openCursor()
     req.onsuccess = ( event ) =>
       objects = {}
-      cursor = event.target.result
+      cursor = event.target['result']
       if cursor?
         objects[cursor.key] = cursor.value if op is 'select' and where(cursor.value)
         cursor.delete()                    if op is 'remove' and where(cursor.value)
@@ -141,11 +142,11 @@ class IndexedDB extends Store
   openDatabase:() ->
     request = @indexedDB.open( @dbName, @dbVersion ) # request = @indexedDB.IDBFactory.open( database, @dbVersion )
     request.onupgradeneeded = ( event ) =>
-      @dbs = event.target.result
+      @dbs = event.target['result']
       @createObjectStores()
       console.log( 'Store.IndexedDB', 'upgrade', @dbName, @dbs.objectStoreNames )
     request.onsuccess = ( event ) =>
-      @dbs = event.target.result
+      @dbs = event.target['result']
       console.log( 'Store.IndexedDB', 'open',    @dbName, @dbs.objectStoreNames )
       @publish( 'none', 'none', 'open', @dbs.objectStoreNames )
     request.onerror   = () =>

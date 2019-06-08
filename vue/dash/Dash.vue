@@ -40,6 +40,7 @@
   import Math   from '../math/Math.vue';
   import Geom   from '../geom/Geom.vue';
   import Note   from '../note/Note.vue';
+  import Data   from '../data/Data.vue';
   
 //import MathML from '../math/MathML.vue';
 //import MathEQ from '../math/MathEQ.vue';
@@ -61,6 +62,7 @@
   Dash.Math   = Math;
   Dash.Geom   = Geom;
   Dash.Note   = Note;
+  Dash.Data   = Data;
   
 //Dash.MathML = MathML;
 //Dash.MathEQ = MathEQ;

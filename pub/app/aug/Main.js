@@ -101,6 +101,12 @@ Main = (function() {
       type: 'Pack',
       plane: 'Geom'
     },
+    Data: {
+      url: 'muse/Data.json',
+      data: null,
+      type: 'Pack',
+      plane: 'Data'
+    },
     Cube: {
       url: 'muse/Cube.json',
       data: null,

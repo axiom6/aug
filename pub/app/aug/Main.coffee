@@ -18,6 +18,7 @@ class Main
     Wise: { url:'muse/Wise.json', data:null, type:'Pack', plane:'Wise' }
     Math: { url:'muse/Math.json', data:null, type:'Pack', plane:'Math' }
     Geom: { url:'muse/Geom.json', data:null, type:'Pack', plane:'Geom' }
+    Data: { url:'muse/Data.json', data:null, type:'Pack', plane:'Data' }
     Cube: { url:'muse/Cube.json', data:null, type:'Pack', plane:'Cube' }
     Font: { url:Main.FontUrl,     data:null, type:'Font', plane:'Cube' } }
 

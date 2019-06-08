@@ -2,15 +2,7 @@
 import Util      from '../util/Util.js'
 import Memory    from '../store/Memory.js'
 
-import Fire      from '../store/Fire'       # Consume Imports
-import IndexedDB from '../store/IndexedDB'
-import PouchDB   from '../store/PouchDB'
-import Rest      from '../store/Rest'
-if Fire is false && IndexedDB is false && PouchDB is false && Rest is false then {}
-
 class Store
-
-
 
   Store.memories  = {} # Store.Memory instances create by getMemory() for in memory dbName
   Store.databases = {} # Set by Store.Memory as Store.databases[dbName].tables for
@@ -45,7 +37,8 @@ class Store
     @F         = Store.format
     @A         = Store.alters
     @R         = Store.resets
-    Util.noop( @getMemoryTables, @toStoreObject, @toSubjectFromParams, @fromStoreObject, @uponTablesComplete, @toObjectsJson, @onError2 )
+    Util.noop( @getMemoryTables, @toStoreObject, @toSubjectFromParams, @fromStoreObject )
+    Util.noop( @uponTablesComplete, @toObjectsJson, @onError2 )
 
   # REST Api  CRUD + Subscribe for objectect records
   add:( table, id, object )  -> Util.noop(  table, id, object )  # Post    Create   an object into table with id

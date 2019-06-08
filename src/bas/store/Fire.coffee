@@ -1,24 +1,26 @@
 
 import Util     from '../../bas/util/Util.js'
 import Store    from './Store.js'
-import Firebase from '../../../pub/lib/store/Firebase.esm.stub.js'
+
+import firebase from '../../../pub/lib/store/firebase.app.esm.js'      # Firebase core (required)
+import               '../../../pub/lib/store/firebase.database.esm.js' # Realtime Database
+import               '../../../pub/lib/store/firebase.auth.esm.js'     # Authentication
 
 class Fire extends Store
 
-  Fire.OnFire  = { get:"value", add:"child_added", put:"child_changed", del:"child_removed" }
+  # Fire.OnFire  = { get:"value", add:"child_added", put:"child_changed", del:"child_removed" }
 
   constructor:( stream, uri, config ) ->
     super( stream, uri, 'Fire' ) # @dbName set by Store in super constructor
-    @fb = @init( @config )
+    @fb = @init( config )
     @keyProp = 'id'
-    @auth() # Anonomous logins have to enabled
-    @fd = Firebase.database()
-    Util.noop( Fire.OnFire, config )
+    @auth() # Anonomous logins have to be enabled
+    @fd = firebase.database()
 
   init:( config ) ->
-    Firebase.initializeApp(config)
+    firebase.initializeApp(config)
     #console.log( 'Fires.init', config )
-    Firebase
+    firebase
 
   add:( t, id, object  ) ->
     table = @tableName(t)
@@ -73,7 +75,7 @@ class Fire extends Store
     return
 
   select:( t, where=@W ) ->
-    Util.noop( where )
+    if where is false then {}
     table = @tableName(t)
     onComplete = (snapshot) =>
       if snapshot? and snapshot.val()?
@@ -183,3 +185,13 @@ class Fire extends Store
    return
 
 export default Fire
+
+#mport firebase from "firebase/app" # Firebase core (required)
+#mport "firebase/database"          # Realtime Database
+#mport firebase from '../../../pub/lib/store/Firebase.esm.stub.js'
+#mport "firebase/auth"              # Authentication
+#mport "firebase/firestore"         # Cloud Firestore
+#mport "firebase/functions"         # Cloud Functions for Firebase Client SDK
+#mport "firebase/messaging"         # Cloud Messaging
+#mport "firebase/storage"           # Cloud Storage
+#mport "firebase/performance"       # Performance Monitoring (beta release)

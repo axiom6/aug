@@ -7,6 +7,7 @@
   "scripts": {
     "dash": "rollup --config vue/dash/Dash.roll.js",
     "page": "rollup --config vue/page/Page.roll.js",
+    "data": "rollup --config vue/data/Data.roll.js",
     "math": "rollup --config vue/math/Math.roll.js",
     "geom": "rollup --config vue/geom/Geom.roll.js",
     "draw": "rollup --config vue/comp/Draw.roll.js",
@@ -19,6 +20,7 @@
   "dependencies": {
     "d3": "^5.9.2",
     "esm": "^3.2.25",
+    "firebase": "^6.1.1",
     "ganja.js": "^1.0.139",
     "pegjs": "^0.10.0",
     "pegjs-backtrace": "^0.2.0",

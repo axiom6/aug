@@ -617,7 +617,7 @@
 		"ma": 1,
 		"mS": 0,
 		"oA": 0,
-		"oAP": "/pub/css/fontawesome/init.css",
+		"oAP": "/pub/vue/dash/init.css",
 		"oF": 2,
 		"oS": 0,
 		"rwU": 0,
@@ -828,6 +828,61 @@
 		"oAP": "/build/node_modules",
 		"oF": 0
 		},
+	"/node_modules/@firebase/app/dist/index.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/node_modules/@firebase/app/dist/index.esm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/node_modules/@firebase/auth/dist/auth.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/node_modules/@firebase/auth/dist/auth.esm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/node_modules/@firebase/database/dist/index.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/node_modules/@firebase/database/dist/index.esm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/node_modules/@firebase/logger/dist/index.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/node_modules/@firebase/logger/dist/index.esm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/node_modules/@firebase/util/dist/index.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/node_modules/@firebase/util/dist/index.esm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/node_modules/estree-walker/src/estree-walker.js": {
 		"bF": 0,
 		"ft": 64,
@@ -920,6 +975,17 @@
 		"mi": 0,
 		"oA": 2,
 		"oAP": "/node_modules/sourcemap-codec/dist/sourcemap-codec.es.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/node_modules/tslib/tslib.es6.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/node_modules/tslib/tslib.es6-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -1106,6 +1172,14 @@
 		"ft": 524288,
 		"oA": 1,
 		"oAP": "/pub/app/data/muse/Cube-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/app/data/muse/Data.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/app/data/muse/Data-min.json",
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
@@ -2326,6 +2400,39 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/lib/store/firebase.app.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/lib/store/firebase.app.esm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/lib/store/firebase.auth.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/lib/store/firebase.auth.esm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/lib/store/firebase.database.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/lib/store/firebase.database.esm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/lib/store/Firebase.esm.stub.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2678,6 +2785,35 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/vue/dash/init.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/dash/init-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/pub/vue/dash/init.css.map": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/vue/dash/init.css.map",
+		"oF": 0
+		},
+	"/pub/vue/data/Pivot.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/data/Pivot-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/vue/geom/Geom2D.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2978,17 +3114,6 @@
 		"mi": 0,
 		"oA": 0,
 		"oAP": "/pub/bas/store/Memory.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/bas/store/PouchDB.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/bas/store/PouchDB.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
@@ -3527,6 +3652,16 @@
 		"oAP": "/vue/dash/Foot.vue",
 		"oF": 0
 		},
+	"/vue/dash/init.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/vue/dash/init-min.css",
+		"oF": 0,
+		"oS": 3
+		},
 	"/vue/dash/logo.png": {
 		"ft": 32768,
 		"iS": 3451,
@@ -3592,6 +3727,49 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/vue/dash/View.vue",
+		"oF": 0
+		},
+	"/vue/Data/Base.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/vue/Data/Base.js",
+		"oF": 0
+		},
+	"/vue/Data/Data.roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/Data/Data.roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/vue/Data/Data.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/vue/Data/Data.js",
+		"oF": 0
+		},
+	"/vue/Data/Pivot.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/vue/Data/Pivot.js",
+		"oF": 0
+		},
+	"/vue/Data/Table.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/vue/Data/Table.js",
 		"oF": 0
 		},
 	"/vue/elem/Btns.vue": {
@@ -4794,6 +4972,28 @@
 		"oA": 0,
 		"oAP": "/zzz/scala/Diff.scala",
 		"oF": 0
+		},
+	"/zzz/store/PouchDB.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/store/PouchDB.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/store/RestJQ.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/store/RestJQ.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
 		},
 	"/zzz/ui/Brew.coffee": {
 		"ft": 32,
@@ -7390,17 +7590,6 @@
 		},
 	"languageDefaultsUserDefined": [
 		{
-			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.html",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "",
-			"autoOutputPathReplace2": "",
-			"autoOutputPathStyle": 0,
-			"fileExtension": "html",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
 			"autoOutputAction": 0,
 			"autoOutputPathFilenamePattern": "*.js",
 			"autoOutputPathRelativePath": "",
@@ -7408,6 +7597,17 @@
 			"autoOutputPathReplace2": "pub/vue",
 			"autoOutputPathStyle": 3,
 			"fileExtension": "vue",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.html",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "",
+			"autoOutputPathReplace2": "",
+			"autoOutputPathStyle": 0,
+			"fileExtension": "html",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}
