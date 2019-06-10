@@ -26,20 +26,9 @@
   
   let Tocs = {
     
-    data() { return {  comp:'None', prac:'None', disp:'None',
-        komps:{ Data:{ name:'Data', comp:'Data', pracs:{}, ikw:true,  link:true,  icon:"fas fa-database"     },
-                Math:{ name:'Math', comp:'Math', pracs:{}, ikw:true,  link:true,  icon:"fas fa-bezier-curve" },
-                Geom:{ name:'Geom', comp:'Geom', pracs:{}, ikw:true,  link:true,  icon:"fas fa-shapes"       },
-                Draw:{ name:'Draw', comp:'Draw', pracs:{}, ikw:false, link:false, icon:"fas fa-draw-polygon" },
-                Note:{ name:'Note', comp:'Note', pracs:{}, ikw:false, link:false, icon:"fab fa-leanpub"      },
-                Info:{ name:'Info', comp:'Info', pracs:{}, ikw:true,  link:false, icon:"fas fa-th"           },
-                Know:{ name:'Know', comp:'Know', pracs:{}, ikw:true,  link:false, icon:"fas fa-university"   },
-                Wise:{ name:'Wise', comp:'Wise', pracs:{}, ikw:true,  link:false, icon:"fab fa-tripadvisor"  },
-                Cube:{ name:'Cube', comp:'Cube', pracs:{}, ikw:false, link:false, icon:"fas fa-cubes"        },
-                Wood:{ name:'Wood', comp:'Wood', pracs:{}, ikw:false, link:false, icon:"fas fa-tree"         } } } },
+    data() { return {  comp:'None', prac:'None', disp:'None', komps:{} } },
     
     methods: {
-
       
       isPrac: function(prac) {
         return this.prac === prac;  },
@@ -70,7 +59,7 @@
           return { color:'white', backgroundColor:'black' }; } } },
     
     mounted: function () {
-      
+      this.komps = this.kompsTocs()
       for( let key in this.komps ) {
         if( this.komps.hasOwnProperty(key) && this.komps[key].ikw ) {
           this.komps[key].pracs = this.pracs(key);

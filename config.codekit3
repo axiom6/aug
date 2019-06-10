@@ -1006,79 +1006,103 @@
 		"oO": 0,
 		"oS": 1
 		},
-	"/pub/404.html": {
+	"/pub/app/augm/Augm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/app/augm/Augm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/app/augm/Augm.roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/app/augm/Augm.roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/app/augm/Home.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/app/augm/Home-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/app/augm/Home.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/pub/404.html",
-		"oF": 0
+		"oAP": "/pub/app/augm/Home.js",
+		"oF": 1
 		},
-	"/pub/app/aug/Aug.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/app/aug/Aug-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/app/aug/Lazy.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/app/aug/Lazy-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/app/aug/Main.coffee": {
+	"/pub/app/augm/Main.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/app/aug/Main.js",
+		"oAP": "/pub/app/augm/Main.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/aug/Main.js": {
+	"/pub/app/augm/Main.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/app/aug/Main-min.js",
+		"oAP": "/pub/app/augm/Main-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/aug/roll.js": {
+	"/pub/app/augm/Router.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/app/aug/roll-min.js",
+		"oAP": "/pub/app/augm/Router-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/aug/Router.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
+	"/pub/app/data/augm/Data.json": {
+		"ft": 524288,
 		"oA": 1,
-		"oAP": "/pub/app/aug/Router-min.js",
+		"oAP": "/pub/app/data/augm/Data-min.json",
 		"oF": 0,
-		"sC": 0,
-		"tS": 0
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/app/data/augm/Geom.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/app/data/augm/Geom-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/app/data/augm/Math.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/app/data/augm/Math-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
 		},
 	"/pub/app/data/draw/Augm.json": {
 		"ft": 524288,
@@ -1160,34 +1184,10 @@
 		"oO": 0,
 		"oS": 1
 		},
-	"/pub/app/data/muse/Cols.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/pub/app/data/muse/Cols.txt",
-		"oF": 0
-		},
 	"/pub/app/data/muse/Cube.json": {
 		"ft": 524288,
 		"oA": 1,
 		"oAP": "/pub/app/data/muse/Cube-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/muse/Data.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/muse/Data-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/muse/Geom.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/muse/Geom-min.json",
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
@@ -1200,26 +1200,10 @@
 		"oO": 0,
 		"oS": 1
 		},
-	"/pub/app/data/muse/Info.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/pub/app/data/muse/Info.txt",
-		"oF": 0
-		},
 	"/pub/app/data/muse/Know.json": {
 		"ft": 524288,
 		"oA": 1,
 		"oAP": "/pub/app/data/muse/Know-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/muse/Math.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/muse/Math-min.json",
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
@@ -1247,6 +1231,88 @@
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
+		},
+	"/pub/app/muse/Home.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/app/muse/Home-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/app/muse/Home.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/app/muse/Home.js",
+		"oF": 1
+		},
+	"/pub/app/muse/Main.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/app/muse/Main.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/app/muse/Main.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/app/muse/Main-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/app/muse/Muse.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/app/muse/Muse-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/app/muse/Muse.roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/app/muse/Muse.roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/app/muse/Router.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/app/muse/Router-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/augm.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/augm.html",
+		"oF": 0
 		},
 	"/pub/bas/d3d/Axes.js": {
 		"bF": 0,
@@ -2249,14 +2315,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/index.html",
-		"oF": 0
-		},
 	"/pub/lib/d3/align.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2741,6 +2799,14 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/muse.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/muse.html",
+		"oF": 0
+		},
 	"/pub/vue/comp/Cube.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2810,6 +2876,17 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/vue/data/Pivot-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/data/Table.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/data/Table-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -3616,17 +3693,6 @@
 		"oA": 1,
 		"oAP": "/vue/comp/Wise.vue",
 		"oF": 0
-		},
-	"/vue/dash/Dash.roll.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/dash/Dash.roll-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
 		},
 	"/vue/dash/Dash.vue": {
 		"cB": 0,
@@ -4679,6 +4745,65 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/zzz/math/mathematics_cheat_sheet.pdf": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/math/mathematics_cheat_sheet.pdf",
+		"oF": 0
+		},
+	"/zzz/math/mathml.pdf": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/math/mathml.pdf",
+		"oF": 0
+		},
+	"/zzz/math/msor.7.3f.pdf": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/math/msor.7.3f.pdf",
+		"oF": 0
+		},
+	"/zzz/muse/404.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/muse/404.html",
+		"oF": 0
+		},
+	"/zzz/muse/Cols.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/muse/Cols.txt",
+		"oF": 0
+		},
+	"/zzz/muse/Info.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/muse/Info.txt",
+		"oF": 0
+		},
+	"/zzz/muse/roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/muse/roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/zzz/obs/embed.html": {
 		"cB": 0,
 		"ft": 8192,
@@ -4686,6 +4811,17 @@
 		"oA": 1,
 		"oAP": "/zzz/obs/embed.html",
 		"oF": 0
+		},
+	"/zzz/obs/Lazy.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/obs/Lazy-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
 		},
 	"/zzz/obs/Op.js": {
 		"bF": 0,
@@ -4964,6 +5100,14 @@
 		"oA": 0,
 		"oAP": "/zzz/peg/ref/LatexKeys.txt",
 		"oF": 0
+		},
+	"/zzz/pwa/audit.0607a.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/pwa/audit.0607a-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
 		},
 	"/zzz/scala/Diff.scala": {
 		"cB": 0,
@@ -7590,17 +7734,6 @@
 		},
 	"languageDefaultsUserDefined": [
 		{
-			"autoOutputAction": 0,
-			"autoOutputPathFilenamePattern": "*.js",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "vue",
-			"autoOutputPathReplace2": "pub/vue",
-			"autoOutputPathStyle": 3,
-			"fileExtension": "vue",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
 			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.html",
 			"autoOutputPathRelativePath": "",
@@ -7608,6 +7741,17 @@
 			"autoOutputPathReplace2": "",
 			"autoOutputPathStyle": 0,
 			"fileExtension": "html",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 0,
+			"autoOutputPathFilenamePattern": "*.js",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "vue",
+			"autoOutputPathReplace2": "pub/vue",
+			"autoOutputPathStyle": 3,
+			"fileExtension": "vue",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

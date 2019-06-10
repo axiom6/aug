@@ -16,11 +16,14 @@ class Main
     Info: { url:'muse/Info.json', data:null, type:'Pack', plane:'Info' }
     Know: { url:'muse/Know.json', data:null, type:'Pack', plane:'Know' }
     Wise: { url:'muse/Wise.json', data:null, type:'Pack', plane:'Wise' }
-    Math: { url:'muse/Math.json', data:null, type:'Pack', plane:'Math' }
-    Geom: { url:'muse/Geom.json', data:null, type:'Pack', plane:'Geom' }
-    Data: { url:'muse/Data.json', data:null, type:'Pack', plane:'Data' }
     Cube: { url:'muse/Cube.json', data:null, type:'Pack', plane:'Cube' }
     Font: { url:Main.FontUrl,     data:null, type:'Font', plane:'Cube' } }
+
+  Main.komps = {
+    Info:{ name:'Info', comp:'Info', pracs:{}, ikw:true,  link:false, icon:"fas fa-th"           }
+    Know:{ name:'Know', comp:'Know', pracs:{}, ikw:true,  link:false, icon:"fas fa-university"   }
+    Wise:{ name:'Wise', comp:'Wise', pracs:{}, ikw:true,  link:false, icon:"fab fa-tripadvisor"  }
+    Cube:{ name:'Cube', comp:'Cube', pracs:{}, ikw:false, link:false, icon:"fas fa-cubes"        } }
 
   Main.begin  =  ( onReady ) ->
     Main.onReady = onReady
@@ -73,6 +76,8 @@ class Main
         Main.Batch['Cols'].data['Cols'].pracs
       comps:( compk ) ->
         Main.Batch[compk].data.comps
+      kompsTocs:() ->   # For Tocs.vue
+        Main.komps
       pracs:( compk ) ->
         Main.Batch[compk].data[compk].pracs
       subset:( compk, filter ) ->

@@ -1,6 +1,6 @@
 
 <template>
-  <div>              <!--  :key="$route.fullPath" reloads Base  -->
+  <div>
     <router-view name="Math"></router-view>
     <router-view name="Geom"></router-view>
     <router-view name="Draw"></router-view>

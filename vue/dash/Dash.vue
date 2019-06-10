@@ -31,51 +31,6 @@
         'd-logo':Logo, 'd-navb':Navb, 'd-find':Find,
         'd-tocs':Tocs, 'd-view':View, 'd-side':Side,
         'd-pref':Pref, 'd-foot':Foot, 'd-trak':Trak } };
-
-  // Static imports for minimizing build steps in dev.
-  import Home   from '../comp/Home.vue';
-  import Info   from '../comp/Info.vue';
-  import Know   from '../comp/Know.vue';
-  import Wise   from '../comp/Wise.vue';
-  import Math   from '../math/Math.vue';
-  import Geom   from '../geom/Geom.vue';
-  import Note   from '../note/Note.vue';
-  import Data   from '../data/Data.vue';
-  
-//import MathML from '../math/MathML.vue';
-//import MathEQ from '../math/MathEQ.vue';
-//import Geom2D from '../geom/Geom2D.vue';
-//import Geom3D from '../geom/Geom3D.vue';
-//import Geom4D from '../geom/Geom4D.vue';
-//import Draw   from '../comp/Draw.vue';
-//import Prac   from '../page/Prac.vue'
-//import Conn   from '../page/Conn.vue';
-//import Enli   from '../page/Enli.vue';
-//import Data   from '../page/Data.vue';
-//import Cube   from '../comp/Cube.vue';
-//import Wood   from '../wood/Wood.vue';
-  
-  Dash.Home   = Home;
-  Dash.Info   = Info;
-  Dash.Know   = Know;
-  Dash.Wise   = Wise;
-  Dash.Math   = Math;
-  Dash.Geom   = Geom;
-  Dash.Note   = Note;
-  Dash.Data   = Data;
-  
-//Dash.MathML = MathML;
-//Dash.MathEQ = MathEQ;
-//Dash.Geom2D = Geom2D;
-//Dash.Geom3D = Geom3D;
-//Dash.Geom4D = Geom4D;
-//Dash.Draw   = Draw;
-//Dash.Prac   = Prac;
-//Dash.Conn   = Conn;
-//Dash.Enli   = Enli;
-//Dash.Data   = Data;
-//Dash.Cube   = Cube;
-//Dash.Wood   = Wood;
   
   export default Dash;
   
@@ -84,8 +39,6 @@
 <style lang="less">
   
   @import 'css/fontawesome/init.css';
-
-  // top | right | bottom | left
 
   .dash { font-family:Roboto, sans-serif; font-size:1rem;
    position:absolute; left:0; top:0; right:0; bottom:0; display:grid;

@@ -5,7 +5,8 @@
   "author": "Tom Flaherty",
   "license": "MIT",
   "scripts": {
-    "dash": "rollup --config vue/dash/Dash.roll.js",
+    "augm": "rollup --config pub/app/augm/Augm.roll.js",
+    "muse": "rollup --config pub/app/muse/Muse.roll.js",
     "page": "rollup --config vue/page/Page.roll.js",
     "data": "rollup --config vue/data/Data.roll.js",
     "math": "rollup --config vue/math/Math.roll.js",
