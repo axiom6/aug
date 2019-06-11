@@ -59,7 +59,7 @@
           return { color:'white', backgroundColor:'black' }; } } },
     
     mounted: function () {
-      this.komps = this.kompsTocs()
+      this.komps = this.kompsTocs();
       for( let key in this.komps ) {
         if( this.komps.hasOwnProperty(key) && this.komps[key].ikw ) {
           this.komps[key].pracs = this.pracs(key);
@@ -67,7 +67,9 @@
             this.onComp(key);
             if( obj.disp==='All' ) { this.onPrac(obj.prac); }
             else                   { this.onDisp(obj.prac,obj.disp); } } ); } }
-      }
+      this.subscribe( 'Tocs', 'Tocs.vue', (obj) => {
+        if( obj==='Close' ) {
+          this.onComp('None'); } } ); }
     }
   
    export default Tocs;

@@ -1,9 +1,8 @@
 
 
-
 <template>
   <div class="data" ref="Data">
-    <h1 v-if="comp==='Data'">Data</h1>
+    <h1 :v-if="isData()">Data</h1>
     <template v-for="data in datas">
       <router-view :name="data.title"></router-view>
     </template>
@@ -16,12 +15,23 @@
 
     data() { return { comp:'Data',
       datas:[
-        { title:'Table' },
-        { title:'Pivot' } ] } },
+        { title:'Table'  },
+        { title:'Pivot'  } ] } },
+
+    methods: {
+      isData: function() {
+        return this.comp === 'Data'; }
+    },
 
     mounted: function () {}
 
   }
+  
+  import Table from './Table.vue';
+  import Pivot from './Pivot.vue';
+  
+  Data.Table = Table;
+  Data.Pivot = Pivot;
 
   export default Data;
 

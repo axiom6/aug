@@ -20,13 +20,7 @@
 
 <script type="module">
 
-  import Btns from '../../../vue/elem/Btns.vue'
-
-  import Dash from '../../../vue/dash/Dash.vue';
-  import Math from '../../../vue/math/Math.vue';
-  import Geom from '../../../vue/geom/Geom.vue';
-  import Note from '../../../vue/note/Note.vue';
-  import Data from '../../../vue/data/Data.vue';
+  import Btns from '../../../vue/elem/Btns.vue';
   
    let Home = {
     
@@ -42,7 +36,17 @@
     Tree:    { title:'Tree',    key:'Tree',    obj:null, pos:[40,40,0,30], back:'light',     icon:'fas fa-circle'    },
     Wheel:   { title:'Wheel',   key:'Wheel',   obj:null, pos:[60,60,0,30], back:'dark',      img:'brew/AutoDrip.jpg' }
     } } },
+
+   mounted: function () {
+       this.publish( 'Tocs', 'Close' ); }
+   
   }
+
+  import Dash from '../../../vue/dash/Dash.vue';
+  import Math from '../../../vue/math/Math.vue';
+  import Geom from '../../../vue/geom/Geom.vue';
+  import Note from '../../../vue/note/Note.vue';
+  import Data from '../../../vue/data/Data.vue';
 
   Home.Dash = Dash;
   Home.Math = Math;

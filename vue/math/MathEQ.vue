@@ -1,6 +1,4 @@
 
-
-
 <script type="module">
 
   import MathND from './MathND.vue';

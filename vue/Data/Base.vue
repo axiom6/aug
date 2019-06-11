@@ -11,7 +11,6 @@
 <script type="module">
   
   import Dabs  from '../elem/Dabs.vue';
-  import Style from '../../pub/gan/lib/Style.js';
 
   export default {
 
@@ -31,8 +30,8 @@
         if( !this.pages[key].created ) {
              this.pages[key].created = true;
              this.$nextTick( function() { // Wait for DOM to render
-               let style = new Style( this.$refs[key][0] );
-               this.pages[key].obj.run(style); } ) } }
+               let elem = this.$refs[key][0];
+               this.pages[key].obj.run(elem); } ) } }
     },
 
     mounted: function () {
