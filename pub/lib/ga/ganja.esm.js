@@ -229,28 +229,45 @@
         r=r||new this.constructor();
         for (var i=0,l=Math.max(this.length,b.length);i<l;i++) 
           if (!this[i] || !b[i]) r[i] = (!this[i]) ? b[i]:this[i];
-          else { if (r[i]==undefined) r[i]=[]; for(var j=0,m=Math.max(this[i].length,b[i].length);j<m;j++) r[i][j]=(this[i][j]||0)+(b[i][j]||0); }
+          else { if (r[i]==undefined) r[i]=[]; for(var j=0,m=Math.max(this[i].length,b[i].length);j<m;j++) 
+          {
+            if (typeof this[i][j]=="string" || typeof r[i][j]=="string" || typeof b[i][j]=="string") {
+             if (!this[i][j]) r[i][j] = ""+b[i][j];
+             else if (!b[i][j]) r[i][j] = ""+this[i][j];
+             else r[i][j]="("+(this[i][j]||"0")+(b[i][j][0]=="-"?"":"+")+(b[i][j]||"0")+")"; 
+            } else r[i][j]=(this[i][j]||0)+(b[i][j]||0); 
+          }}
         return r;
       }
       Sub(b,r) {
         r=r||new this.constructor();
         for (var i=0,l=Math.max(this.length,b.length);i<l;i++) 
-          if (!this[i] || !b[i]) r[i] = (!this[i]) ? (b[i]?b[i].map(x=>-x):undefined):this[i];
-          else { if (r[i]==undefined) r[i]=[]; for(var j=0,m=Math.max(this[i].length,b[i].length);j<m;j++) r[i][j]=(this[i][j]||0)-(b[i][j]||0); }    
+          if (!this[i] || !b[i]) r[i] = (!this[i]) ? (b[i]?b[i].map(x=>(typeof x=="string")?"-"+x:-x):undefined):this[i];
+          else { if (r[i]==undefined) r[i]=[]; for(var j=0,m=Math.max(this[i].length,b[i].length);j<m;j++) 
+            if (typeof this[i][j]=="string" || typeof r[i][j]=="string" || typeof b[i][j]=="string") r[i][j]="("+(this[i][j]||"0")+"-"+(b[i][j]||"0")+")"; 
+            else r[i][j]=(this[i][j]||0)-(b[i][j]||0); 
+          }    
         return r;
       }
-      Scale(s) { return this.map(x=>x&&x.map(y=>y*s)); }      
+      Scale(s) { return this.map(x=>x&&x.map(y=>typeof y=="string"?y+"*"+s:y*s)); }      
       
     // geometric product.
       Mul(b,r) {
-        r=r||new this.constructor();
+        r=r||new this.constructor(); var gotstring=false;
         for (var i=0,x,gsx; gsx=grade_start[i],x=this[i],i<this.length; i++) if (x) for (var j=0,y,gsy;gsy=grade_start[j],y=b[j],j<b.length; j++) if (y) for (var a=0; a<x.length; a++) if (x[a]) for (var bb=0; bb<y.length; bb++) if (y[bb]) {
-          if (i==j && a==bb) { r[0] = r[0]||[0]; r[0][0] += x[a]*y[bb]*metric[i][a]; } 
-          else { 
+          if (i==j && a==bb) { r[0] = r[0]||(typeof x[0]=="string" || typeof y[bb]=="string"?[""]:[0]); 
+            if (typeof x[a]=="string" || typeof r[0][0]=="string" || typeof y[bb]=="string") {
+            r[0][0] = (r[0][0]?(r[0][0]+(x[a][0]=="-"?"":"+")):"")+ x[a]+"*"+y[bb]+(metric[i][a]!=1?"*"+metric[i][a]:"");  gotstring=true;
+            } else r[0][0] += x[a]*y[bb]*metric[i][a]; 
+          } else { 
              var rn=simplify_bits(basis_bits[gsx+a],basis_bits[gsy+bb]), g=bc(rn[1]), e=bits_basis[rn[1]]-grade_start[g]; 
-             if (!r[g])r[g]=[]; r[g][e] = (r[g][e]||0) + rn[0]*x[a]*y[bb];
+             if (!r[g])r[g]=[]; 
+               if (typeof r[g][e]=="string"||typeof x[a]=="string"||typeof y[bb]=="string") { 
+                 r[g][e] = (r[g][e]?r[g][e]+"+":"") + (rn[0]!=1?rn[0]+"*":"")+ x[a]+(y[bb]!=1?"*"+y[bb]:""); gotstring=true;
+               } else r[g][e] = (r[g][e]||0) + rn[0]*x[a]*y[bb];
           }  
         }
+        if (gotstring) return r.map(g=>g.map(e=>e&&'('+e+')'))
         return r;
       }    
     // outer product.     
@@ -277,7 +294,7 @@
         var r2 = 'float sum=0.0; float res=0.0;\n', g=0;
         r.forEach(x=>{
           var cg = x.match(/\d+/)[0]|0;
-          if (cg != g) r2 += "sum "+((metric[curg][g]==-1)?"-=":"+=")+" res*res;\nres = 0.0;\n";
+          if (cg != g) r2 += "sum "+(((metric[curg][g]==-1))?"-=":"+=")+" res*res;\nres = 0.0;\n";
           r2 += x.replace(/\[\d+\]/,'') + '\n';
           g=cg;
         });
@@ -428,6 +445,9 @@
       static LDot(a,b,res)   {  
       // Expressions
         while(a.call)a=a(); while(b.call)b=b(); //if (a.LDot) return a.LDot(b,res);
+      // Map elements in array  
+        if (b instanceof Array && !(a instanceof Array)) return b.map(x=>Element.LDot(a,x)); 
+        if (a instanceof Array && !(b instanceof Array)) return a.map(x=>Element.LDot(x,b)); 
       // js if numbers, else contraction product.  
         if (!(a instanceof Element || b instanceof Element)) return a*b; 
         a=Element.toEl(a);b=Element.toEl(b); return a.LDot(b,res); 
@@ -733,9 +753,37 @@
                         dist(d2[0],d2[1],d2[2]+h,b)-dist(d2[0],d2[1],d2[2]-h,b)
                       ));
                  ${gl2?"gl_FragDepth":"gl_FragDepthEXT"} = dl2/50.0;
-                 ${gl2?"col":"gl_FragColor"} = vec4(max(0.2,abs(dot(n,normalize(L-d2))))*color3 + pow(abs(dot(n,normalize(normalize(L-d2)+dir))),100.0),0.0);
+                 ${gl2?"col":"gl_FragColor"} = vec4(max(0.2,abs(dot(n,normalize(L-d2))))*color3 + pow(abs(dot(n,normalize(normalize(L-d2)+dir))),100.0),1.0);
                } else discard; 
-             }`);
+             }`),genprog2D = grade=>compile(`${gl2?"#version 300 es":""}
+             ${gl2?"in":"attribute"} vec4 position; ${gl2?"out":"varying"} vec4 Pos; uniform mat4 mv; uniform mat4 p;
+             void main() { Pos=mv*position; gl_Position = p*Pos; }`,
+            `${!gl2?"#extension GL_EXT_frag_depth : enable":"#version 300 es"}
+             precision highp float;  
+             uniform vec3 color; uniform vec3 color2; 
+             uniform vec3 color3; uniform float b[${counts[grade]}];
+             uniform float ratio; ${gl2?"out vec4 col;":""}
+             ${gl2?"in":"varying"} vec4 Pos; 
+             float dist (in float z, in float y, in float x, in float[${counts[grade]}] b) {
+                ${this.nVector(1,[]).OPNS_GLSL(this.nVector(grade,[]), options.up)}
+                return ${grade!=tot-1?"sqrt(abs(sum))":"res"};
+             }
+             float trace_depth (in vec3 start, vec3 dir, in float thresh) {
+                vec3 orig=start; float lastd = 1000.0; const int count=${(options.maxSteps||64)};
+                float s = dist(start[0]*5.0,start[1]*5.0,start[2]*5.0,b);
+                s=s*s;
+                return 1.0-s*150.0;
+             }
+             void main() { 
+               vec3 p = -5.0*normalize(color2); 
+               vec3 dir = normalize((-Pos[0]/5.0)*color + color2 + vec3(0.0,Pos[1]/5.0*ratio,0.0));  p += 1.0*dir;
+               vec3 L = 5.0*normalize( -0.5*color + 0.85*color2 + vec3(0.0,-0.5,0.0) );
+               float d2 = trace_depth( p , dir, ${grade!=tot-1?(options.thresh||0.2):"0.0075"} );
+               if (d2>0.0) {
+                 ${gl2?"gl_FragDepth":"gl_FragDepthEXT"} = d2/50.0;
+                 ${gl2?"col":"gl_FragColor"} = vec4(d2*color3,d2);
+               } else discard;  
+             }`)
       // canvas update will (re)render the content.            
         var armed=0;
         canvas.update = (x)=>{
@@ -749,10 +797,12 @@
             var e=x[i]; while (e&&e.call) e=e(); if (e==undefined) continue;
             if (typeof e == "number") { alpha=((e>>>24)&0xff)/255; c[0]=((e>>>16)&0xff)/255; c[1]=((e>>>8)&0xff)/255; c[2]=(e&0xff)/255; }
             if (e instanceof Element){
-              var tt = options.animate?-performance.now()/1000:-options.h||0; tt+=Math.PI/2; var r = canvas.height/canvas.width;
+              var tt = options.spin?-performance.now()*options.spin/1000:-options.h||0; tt+=Math.PI/2; var r = canvas.height/canvas.width;
               var g=tot-1; while(!e[g]&&g>1) g--;
-              if (!programs[tot-1-g]) programs[tot-1-g] = genprog(g);
+              if (!programs[tot-1-g]) programs[tot-1-g] = (options.up.find(x=>x.match&&x.match("z")))?genprog(g):genprog2D(g);
+              gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
               draw(programs[tot-1-g],gl.TRIANGLES,[-2,-2,0,-2,2,0,2,-2,0,-2,2,0,2,-2,0,2,2,0],[Math.cos(tt),0,-Math.sin(tt)],[Math.sin(tt),0,Math.cos(tt)],undefined,undefined,undefined,e,c,r,g);
+              gl.disable(gl.BLEND);
             }
           }
           // if we're no longer in the page .. stop doing the work.
@@ -798,7 +848,7 @@
           return p;
         };
       // Create vertex array and buffers, upload vertices and optionally texture coordinates.  
-        var createVA=function(vtx, texc, idx) {
+        var createVA=function(vtx, texc, idx, clr) {
               var r = gl.va.createVertexArrayOES(); gl.va.bindVertexArrayOES(r);
               var b = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b); 
               gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vtx), gl.STATIC_DRAW);
@@ -808,15 +858,20 @@
                 gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(texc), gl.STATIC_DRAW);
                 gl.vertexAttribPointer(1, 2, gl.FLOAT, false, 0, 0); gl.enableVertexAttribArray(1);
               }
+              if (clr){
+                var b3=gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, b3);
+                gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(clr), gl.STATIC_DRAW);
+                gl.vertexAttribPointer(1, 3, gl.FLOAT, false, 0, 0); gl.enableVertexAttribArray(1);
+              }
               if (idx) {
                 var b4=gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, b4);
                 gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(idx), gl.STATIC_DRAW);
               }
-              return {r,b,b2,b4}
+              return {r,b,b2,b4,b3}
             },
       // Destroy Vertex array and delete buffers.
             destroyVA=function(va) {
-              [va.b,va.b2,va.b4].forEach(x=>{if(x) gl.deleteBuffer(x)}); if (va.r) gl.va.deleteVertexArrayOES(va.r);
+              [va.b,va.b2,va.b4,va.b3].forEach(x=>{if(x) gl.deleteBuffer(x)}); if (va.r) gl.va.deleteVertexArrayOES(va.r);
             }
       // Default modelview matrix, convert camera to matrix (biquaternion->matrix)      
         var M=[1,0,0,0,0,1,0,0,0,0,1,0,0,0,5,1], mtx = x=>{ var t=options.animate?performance.now()/1000:options.h||0, t2=options.p||0;
@@ -850,6 +905,14 @@
                  vec3 normal = normalize(cross(dFdx(Pos.xyz), dFdy(Pos.xyz))); float l=dot(normal,ldir);
                  vec3 E = normalize(-Pos.xyz); vec3 R = normalize(reflect(ldir,normal));  
                  gl_FragColor = vec4(max(0.0,l)*color+vec3(0.5*pow(max(dot(R,E),0.0),20.0))+color2, 1.0);  }`);
+        var programcol = compile(`attribute vec4 position; attribute vec3 col; varying vec3 Col; varying vec4 Pos; uniform mat4 mv; uniform mat4 p; 
+                 void main() { gl_PointSize=6.0; Pos=mv*position; gl_Position = p*Pos; Col=col; }`,
+                `#extension GL_OES_standard_derivatives : enable
+                 precision highp float; uniform vec3 color; uniform vec3 color2; varying vec4 Pos; varying vec3 Col; 
+                 void main() { vec3 ldir = normalize(Pos.xyz - vec3(1.0,1.0,2.0));
+                 vec3 normal = normalize(cross(dFdx(Pos.xyz), dFdy(Pos.xyz))); float l=dot(normal,ldir);
+                 vec3 E = normalize(-Pos.xyz); vec3 R = normalize(reflect(ldir,normal));  
+                 gl_FragColor = vec4(max(0.3,l)*Col+vec3(0.5*pow(max(dot(R,E),0.0),20.0))+color2, 1.0);  }`);
       // Create a font texture, lucida console or otherwise monospaced.
         var fw=22, font = Object.assign(document.createElement('canvas'),{width:94*fw,height:32}), 
             ctx = Object.assign(font.getContext('2d'),{font:'bold 32px lucida console, monospace'}),
@@ -1023,13 +1086,18 @@
               continue;
             }
           // PGA   
+          // Convert planes to polygons.
+            if (e instanceof Element && e.Grade(1).Length) {
+              var m = Element.Add(1, Element.Mul(e.Normalized, Element.Coeff(3,1))).Normalized, e0 = 0;
+              e=Element.sw(m,[[-1,-1],[-1,1],[1,1],[-1,-1],[1,1],[1,-1]].map(([x,z])=>Element.Trivector(x,e0,z,1)));
+            }
           // Convert lines to line segments.  
             if (e instanceof Element && e.Grade(2).Length) 
                e=[e.LDot(e14).Wedge(e).Add(e.Wedge(Element.Coeff(1,1)).Mul(Element.Coeff(0,-500))),e.LDot(e14).Wedge(e).Add(e.Wedge(Element.Coeff(1,1)).Mul(Element.Coeff(0,500)))];
           // If euclidean point, store as point, store line segments and triangles.
             if (e.e123) p.push.apply(p,e.slice(11,14).map((y,i)=>(i==0?1:-1)*y/e[14]).reverse());
             if (e instanceof Array && e.length==2) l=l.concat.apply(l,e.map(x=>[...x.slice(11,14).map((y,i)=>(i==0?1:-1)*y/x[14]).reverse()])); 
-            if (e instanceof Array && e.length==3) t=t.concat.apply(t,e.map(x=>[...x.slice(11,14).map((y,i)=>(i==0?1:-1)*y/x[14]).reverse()]));
+            if (e instanceof Array && e.length%3==0) t=t.concat.apply(t,e.map(x=>[...x.slice(11,14).map((y,i)=>(i==0?1:-1)*y/x[14]).reverse()]));
           // Render orbits of parametrised motors
             if ( e.call && e.length==1) { var count=64;
               for (var xx,o=Element.Coeff(14,1),ii=0; ii<count; ii++) {
@@ -1048,13 +1116,17 @@
             if (e.va || (e instanceof Object && e.data)) {
               // Create the vertex array and store it for re-use.
               if (!e.va) {
-                var et=[]; e.data.forEach(e=>{if (e instanceof Array && e.length==3) et=et.concat.apply(et,e.map(x=>[...x.slice(11,14).map((y,i)=>(i==0?1:-1)*y/x[14]).reverse()]));});
-                e.va = createVA(et,undefined); e.va.tcount = e.data.length*3;
+                if (e.idx) {
+                  var et = e.data.map(x=>[...x.slice(11,14).map((y,i)=>(i==0?1:-1)*y/x[14]).reverse()]).flat();
+                } else {
+                  var et=[]; e.data.forEach(e=>{if (e instanceof Array && e.length==3) et=et.concat.apply(et,e.map(x=>[...x.slice(11,14).map((y,i)=>(i==0?1:-1)*y/x[14]).reverse()]));});
+                }
+                e.va = createVA(et,undefined,e.idx,e.color?new Float32Array(e.color):undefined); e.va.tcount = (e.idx && e.idx.length)?e.idx.length:e.data.length*3;
               }
               // render the vertex array.
               if (e.transform) { M=mtx(options.camera.Mul(e.transform)); }
               if (alpha) { gl.enable(gl.BLEND); gl.blendFunc(gl.CONSTANT_ALPHA, gl.ONE_MINUS_CONSTANT_ALPHA); gl.blendColor(1,1,1,1-alpha); }
-              draw(program,gl.TRIANGLES,t,c,[0,0,0],r,undefined,e.va);
+              draw(e.color?programcol:program,gl.TRIANGLES,t,c,[0,0,0],r,undefined,e.va);
               if (alpha) gl.disable(gl.BLEND);
               if (e.transform) { M=mtx(options.camera); }
             }

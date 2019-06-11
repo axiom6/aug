@@ -4,7 +4,9 @@
     <div class="home"><router-link :to="{ name:'Home'}"><i class="fas fa-home"></i>Home</router-link></div>
     <div class="search"   @click="click('Search')">
       <i class="fas fa-search"></i>
-      <label><input class="input" placeholder=" Search"  type="text" size="16"></label><!-- &#xF002; -->
+      <label for="search"><input class="input" placeholder=" Search" id="search" type="text" size="16"></label><!--
+      &#xF002;
+       -->
     </div>
     <div class="contact"  @click="click('Contact')" ><i class="fas fa-user"       ></i>Contact</div>
     <div class="signon"   @click="click('Signon')"  ><i class="fas fa-sign-in-alt"></i>Sign On</div>

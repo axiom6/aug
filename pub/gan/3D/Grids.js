@@ -1,6 +1,6 @@
 
 
-let GA = window['Algebra']; // import GA from '../../../pub/lib/ga/ganja.esm.js';
+import GA from '../../lib/ga/ganja.esm.js';
 
 let Grids  = class Grids {
 
