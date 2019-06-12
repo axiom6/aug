@@ -3,9 +3,8 @@
 <template>
   <div class="data" ref="Data">
     <h1 :v-if="isData()">Data</h1>
-    <template v-for="data in datas">
-      <router-view :name="data.title"></router-view>
-    </template>
+    <router-view :name="Tables"></router-view>
+    <router-view :name="Pivots"></router-view>
   </div>
 </template>
 
@@ -13,10 +12,7 @@
   
   let Data = {
 
-    data() { return { comp:'Data',
-      datas:[
-        { title:'Table'  },
-        { title:'Pivot'  } ] } },
+    data() { return { comp:'Data' } },
 
     methods: {
       isData: function() {
@@ -26,12 +22,6 @@
     mounted: function () {}
 
   }
-  
-  import Table from './Table.vue';
-  import Pivot from './Pivot.vue';
-  
-  Data.Table = Table;
-  Data.Pivot = Pivot;
 
   export default Data;
 

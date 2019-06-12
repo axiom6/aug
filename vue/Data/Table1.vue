@@ -23,14 +23,10 @@
           r3: { key:"3",   first:"Dave",  last:"Markum",  rank:"Sargent" } }
          } },
 
-    methods: {
-      isTable1: function() {
-       return this.comp === 'Table1'; }
-    },
+    methods: {},
 
     mounted: function () {
-      console.log( 'Table1 mounted comp', this.comp );
-    }
+      console.log( 'Table1 mounted comp', this.comp ); }
   }
   
   export default Table1;

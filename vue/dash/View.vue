@@ -1,6 +1,7 @@
 
 <template>
   <div>
+    <router-view name="Data"></router-view>
     <router-view name="Math"></router-view>
     <router-view name="Geom"></router-view>
     <router-view name="Draw"></router-view>

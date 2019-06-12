@@ -23,10 +23,7 @@ let Table2 = {
         r3: { key:"3",   first:"Dave",  last:"Markum",  rank:"Sargent" } }
        } },
 
-  methods: {
-    isTable1: function() {
-     return this.comp === 'Table1'; }
-  },
+  methods: {},
 
   mounted: function () {
     console.log( 'Table2 mounted comp', this.comp );
@@ -216,7 +213,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-65d553fc_0", { source: ".table {\n  background-color: black;\n  justify-self: center;\n  align-self: center;\n  font-size: 3em;\n}\nth {\n  color: wheat;\n}\ntd {\n  color: wheat;\n}\n", map: {"version":3,"sources":["Table2.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,oBAAoB;EACpB,kBAAkB;EAClB,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,YAAY;AACd","file":"Table2.vue","sourcesContent":[".table {\n  background-color: black;\n  justify-self: center;\n  align-self: center;\n  font-size: 3em;\n}\nth {\n  color: wheat;\n}\ntd {\n  color: wheat;\n}\n"]}, media: undefined });
+    inject("data-v-39a402c4_0", { source: ".table {\n  background-color: black;\n  justify-self: center;\n  align-self: center;\n  font-size: 3em;\n}\nth {\n  color: wheat;\n}\ntd {\n  color: wheat;\n}\n", map: {"version":3,"sources":["Table2.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,oBAAoB;EACpB,kBAAkB;EAClB,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,YAAY;AACd","file":"Table2.vue","sourcesContent":[".table {\n  background-color: black;\n  justify-self: center;\n  align-self: center;\n  font-size: 3em;\n}\nth {\n  color: wheat;\n}\ntd {\n  color: wheat;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
