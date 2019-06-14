@@ -2,7 +2,8 @@
 
 class Chord
 
-  constructor:( @drew, @d3 ) ->
+  constructor:( @drew, @d3,  @name, @elem, @size ) ->
+    [@svg,@g] = @drew.ready( @name, @elem, @size )
     @matrix = [
       [ 0,20,20,20],
       [20, 0,20,80],
@@ -14,7 +15,6 @@ class Chord
   ready:() =>
     geo     = @drew.geomElem()
     @graph  = @drew.svg
-    @g      = @graph.g
     @width  = geo.w
     @height = geo.h
     @outer  = Math.min( @width, @height) * 0.5 - 40
@@ -29,8 +29,7 @@ class Chord
     @group  = @createGroup( @arc   )
     @ticks  = @createTicks( @group, @outer )
     @appendRibbons( @g, @ribbon )
-    @graph.$g.css( { "background-color":"white" } )
-    @graph.$svg
+    return
 
   createChord:() ->
     @d3.chord().padAngle(0.05).sortSubgroups(@d3.descending)

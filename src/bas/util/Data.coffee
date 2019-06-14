@@ -66,8 +66,9 @@ class Data
         console.error( "Data.batchJSON()", { url:url, error:error } ) )
     return
 
-  @asyncJSON:( url, callback ) ->
-    url = Data.toUrl(url)
+  @asyncJSON:( urla, callback ) ->
+    url = Data.toUrl(urla)
+    # console.log( 'Data.asyncJSON', urla, url )
     fetch( url )
       .then( (response) =>
         response.json() )
@@ -110,7 +111,7 @@ class Data
     document.body.removeChild(downloadLink)
     return
 
-Data.local   = "http://localhost:63342/aug/app/data/"
+Data.local   = "app/data/"
 Data.hosted  = "https://ui-48413.firebaseapp.com/"
 
 export default Data

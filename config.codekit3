@@ -1358,6 +1358,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/bas/d3d/Hue.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/bas/d3d/Hue-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/bas/d3d/Link.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2957,6 +2968,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/vue/data/Tables.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/data/Tables-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/vue/geom/Geom2D.js": {
 		"bF": 0,
 		"ft": 64,
@@ -3141,23 +3163,23 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/d3d/Cluster.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/bas/d3d/Cluster.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
 	"/src/bas/d3d/Drew.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
 		"oAP": "/pub/bas/d3d/Drew.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/bas/d3d/Hue.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/bas/d3d/Hue.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
@@ -3196,34 +3218,12 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/d3d/Radial.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/bas/d3d/Radial.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
 	"/src/bas/d3d/Tree.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
 		"oAP": "/pub/bas/d3d/Tree.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/bas/d3d/Wheel.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/bas/d3d/Wheel.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,

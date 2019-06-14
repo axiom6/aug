@@ -5,10 +5,14 @@ import Util from '../../bas/util/Util.js';
 import Vis from '../../bas/util/Vis.js';
 
 Link = class Link {
-  constructor(drew, d3) {
+  constructor(drew, d3, name, elem, size) {
     this.strokeOpp = this.strokeOpp.bind(this);
     this.drew = drew;
     this.d3 = d3;
+    this.name = name;
+    this.elem = elem;
+    this.size = size;
+    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
     this.ready();
     if (this.link2 === false && this.strokeOpp === false) {
       ({});
@@ -19,14 +23,12 @@ Link = class Link {
     var geo;
     geo = this.drew.geomElem();
     this.graph = this.drew.svg;
-    this.g = this.graph.g;
     this.w = geo.w;
     this.h = geo.h;
     this.cssLink = 'link';
     this.thick = 1;
     this.da = 5;
     this.ornament(150);
-    return this.graph.$svg;
   }
 
   link(x1, y1, x2, y2, n, fill) {

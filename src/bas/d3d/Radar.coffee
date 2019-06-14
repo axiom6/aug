@@ -6,18 +6,9 @@ import Vis  from '../../bas/util/Vis.js'
 
 class Radar
 
-  constructor:( @drew, @d3 ) ->
-      
-    @criterias = [                       # Grade  Percentile
-      { name:"Adopt",  radius:@r40 }     #   A     90-100%
-      { name:"Trial",  radius:@r60 }     #   B     80-89%
-      { name:"Access", radius:@r80 }     #   C     70-79%
-      { name:"Hold",   radius:@r100 } ]  #   D     60-69%
-    
+  constructor:( @drew, @d3,  @name, @elem, @size ) ->
+    [@svg,@g] = @drew.ready( @name, @elem, @size )
     @ready()
-    if @degName   is false and @prompt is false  and @symType   is false then {}
-    if @doDragBeg is false and @doDrag is false  and @doDragEnd is false then {}
-    if @degSVG    is false and @degD3  is false  then {}
 
   isRadar:() ->
     @name is 'Radar'
@@ -25,7 +16,6 @@ class Radar
   ready:() ->
     geo     = @drew.geomElem()
     @graph  = @drew.svg
-    @g      = @graph.g
     @width  = geo.w
     @height = geo.h
     @x0     = @width/2
@@ -43,9 +33,15 @@ class Radar
     if @p60 is false and @r04 is false and @r10 is false then {}
     @attrG( @g )
 
+    @criterias = [                       # Grade  Percentile
+      { name:"Adopt",  radius:@r40 }     #   A     90-100%
+      { name:"Trial",  radius:@r60 }     #   B     80-89%
+      { name:"Access", radius:@r80 }     #   C     70-79%
+      { name:"Hold",   radius:@r100 } ]  #   D     60-69%
+
     Data.asyncJSON( 'draw/Quad.json', (quads) => @doQuads(quads) ) if @isRadar()
     Data.asyncJSON( 'draw/Tech.json', (techs) => @doTechs(techs) ) if @isRadar()
-
+    return
 
   doQuads:( quads ) =>
     @quads( Util.toArray(quads), @r08, @r100 )
@@ -102,11 +98,10 @@ class Radar
   quads:( quadrants, r1, r2 ) =>
     @wedges( quadrants, @inner, r2  )
     # @grid((@r100-@r40)/15,5)
-
     n = quadrants.length*2; dif=360/n; ang=0; cos=0; sin=0; name2s=null
     for i in [0...n]
       ang = i*dif; cos = Math.cos(@rad(ang)); sin = Math.sin(@rad(ang))
-      @quadLine( r1*cos, r1*sin, r2*cos, r2*sin, "rgba(180,180,180,1.0)" )
+      @quadLine( r1*cos, r1*sin, r2*cos, r2*sin, "white" )      # "rgba(180,180,180,1.0)"
       # @degName( @r100+12, ang )
       name2s = quadrants[Math.floor(i/2)]['name2s']
       if( name2s? && name2s.length==2  )
@@ -148,7 +143,8 @@ class Radar
 
   wedge:( fill, g, r1, r2, a1, a2 ) =>
     arc = @d3.arc().innerRadius(r1).outerRadius(r2).startAngle(@radD3(a1)).endAngle(@radD3(a2))
-    g.append("svg:path").attr("d",arc).attr("fill",fill).attr("stroke","none").attr("transform", "translate(#{@x0},#{@y0})")
+    g.append("svg:path").attr("d",arc).attr("fill",fill).attr("stroke","none")
+     .attr("transform", "translate(#{@x0},#{@y0})")
     return
 
   # Background wedges to indicate technology quadrants
@@ -176,7 +172,7 @@ class Radar
     g = @g.selectAll("g").data(techs).enter().append("svg:g")
 
     dot = g.append("svg:circle")
-      .attr("id",    (tech) => @techId(tech) )
+      .attr("id",           (tech) => @techId(tech) )
       .attr("class", "dot" )
       .attr("cx",    (tech) => @x(tech) )
       .attr("cy",    (tech) => @y(tech) )
@@ -185,22 +181,15 @@ class Radar
       .attr("stroke","orange").attr("stroke-width",1)
 
     dot.call( (tech) => tech.dot = dot )
-
-    ###
-    dot.call(
-      d3.behavior.drag()
-        .on("dragstart", (tech) => @doDragStart(tech) )
-        .on("drag",      (tech) => @doDrag(tech) )
-        .on("dragend",   (tech) => @doDragEnd(tech)   )  )
-    ###
-      
+    
     g.append("svg:text")
       .text(               (tech) => ( if(tech.i) then tech.i+' ' else '' ) + tech.name )
       .attr("id",          (tech) => @techTx(tech) )
-      .attr("text-anchor", (tech) => if @leftQuads(tech) then "end"       else "start" ) 
+      .attr("text-anchor", (tech) => if @leftQuads(tech) then "end"       else "start" )
       .attr("x",           (tech) => if @leftQuads(tech) then @x(tech)-10 else @x(tech)+10 )
-      .attr("y",           (tech) => @y(tech) )      
-      .attr("dy",".35em").attr("font-family","Arial").attr("font-size","10px")
+      .attr("y",           (tech) => @y(tech) )
+      .attr("dy",".35em").attr("font-family","Roboto")
+      .attr("font-size","10px").attr( "stroke", "wheat")
     return
 
   # Start drag by setting fill yellow
@@ -278,4 +267,19 @@ class Radar
     .attr("stroke",stroke).attr("stroke-width","1")
     return
 
-`export default Radar`
+  noop:() ->
+    if @degName   is false and @prompt is false  and @symType   is false then {}
+    if @doDragBeg is false and @doDrag is false  and @doDragEnd is false then {}
+    if @degSVG    is false and @degD3  is false  then {}
+
+export default Radar
+
+###
+      dot.call(
+      @d3.behavior.drag()
+        .on("dragstart", (tech) => @doDragStart(tech) )
+        .on("drag",      (tech) => @doDrag(tech) )
+        .on("dragend",   (tech) => @doDragEnd(tech)   )  )
+  
+
+###

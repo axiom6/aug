@@ -1,12 +1,30 @@
 var Cluster;
 
+import Util from '../../bas/util/Util.js';
+
 import Data from '../../bas/util/Data.js';
 
+import Vis from '../../bas/util/Vis.js';
+
 Cluster = class Cluster {
-  constructor(drew, d3) {
-    this.doCluster = this.doCluster.bind(this);
+  constructor(drew, d3, name, elem, size) {
+    this.doRadial = this.doRadial.bind(this);
+    this.doLinks = this.doLinks.bind(this);
+    this.doNodes = this.doNodes.bind(this);
+    this.moveTo = this.moveTo.bind(this);
+    this.project = this.project.bind(this);
+    this.nodeClass = this.nodeClass.bind(this);
+    this.iconNode = this.iconNode.bind(this);
+    this.textNode = this.textNode.bind(this);
+    this.isEnd180 = this.isEnd180.bind(this);
+    this.isEnd = this.isEnd.bind(this);
+    this.iconUnicode = this.iconUnicode.bind(this);
     this.drew = drew;
     this.d3 = d3;
+    this.name = name;
+    this.elem = elem;
+    this.size = size;
+    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
     this.ready();
   }
 
@@ -14,80 +32,111 @@ Cluster = class Cluster {
     var geo;
     geo = this.drew.geomElem();
     this.graph = this.drew.svg;
-    this.g = this.graph.g;
     this.w = geo.w;
     this.h = geo.h;
+    this.r = Math.min(this.w / 2, this.h / 2) * 0.9;
     this.tree = this.d3.cluster();
-    this.tree.size([this.h * 0.6, this.w * 0.75]);
-    Data.asynJSON('draw/Prin.json', (data) => {
-      return this.doCluster(data, this.g);
+    this.tree.size([
+      this.r,
+      this.r // size([@w,@h])
+    ]);
+    this.tree.separation((a, b) => {
+      return (a.parent === b.parent ? 5 : 10) / a.depth;
     });
-    return this.graph.$svg;
-  }
-
-  doCluster(data, g) {
-    if (g === false) {
-      ({});
-    }
-    this.root = this.d3.hierarchy(data);
-    this.tree(this.root);
-    //@sort( @root )
-    this.tree(this.root);
-    this.doLink();
-    this.doNode();
-  }
-
-  sort(root) {
-    root.sort(function(a, b) {
-      return (a.height - b.height) || a.id.localeCompare(b.id);
+    this.g.attr("transform", "translate(" + this.w * 0.5 + "," + this.h * 0.5 + ")");
+    return Data.asyncJSON('draw/Prin.json', (data) => {
+      return this.doRadial(data, this.g);
     });
   }
 
-  doLink() {
-    var link;
-    link = this.g.selectAll(".link").data(this.root.descendants().slice(1)).enter().append("path").attr("class", "link").attr("d", (d) => {
+  doRadial(data, g) {
+    var link, node, root;
+    root = this.d3.hierarchy(data);
+    this.tree(root);
+    link = this.doLinks(root, g);
+    node = this.doNodes(root, g);
+    //node.append("svg:circle").attr("r",4.5)
+    //iconNode( node ) # Clutters up overview
+    this.textNode(node);
+    Util.noop(link);
+  }
+
+  doLinks(root, g) {
+    return g.selectAll(".link").data(root.descendants().slice(1)).enter().append("svg:path").attr("class", "link").attr("stroke", 'blue').attr("fill", "none").attr("d", (d) => {
       return this.moveTo(d);
     });
-    if (link === false) {
-      return {};
-    }
+  }
+
+  doNodes(root, g) {
+    return g.selectAll("g.node").data(root.descendants()).enter().append("svg:g").attr("class", (d) => {
+      return this.nodeClass(d);
+    }).attr("transform", (d) => {
+      return "translate(" + this.project(d.x, d.y) + ")";
+    });
   }
 
   moveTo(d) {
     var p;
     p = d.parent;
-    return `M${d.y},${d.x}C${p.y + 100},${d.x} ${p.y + 100},${p.x} ${p.y},${p.x}`;
+    return `M${this.project(d.x, d.y)}C${this.project(d.x, (d.y + p.y) / 2)} ${this.project(p.x, (d.y + p.y) / 2)} ${this.project(p.x, p.y)}`;
   }
 
-  doNode() {
-    var node;
-    node = this.g.selectAll(".node").data(this.root.descendants()).enter().append("g").attr("class", function(d) {
-      var ref;
-      return "node" + ((ref = d.children) != null ? ref : {
-        " node--internal": " node--leaf"
-      });
-    }).attr("transform", function(d) {
-      return "translate(" + d.y + "," + d.x + ")";
+  project(x, y) {
+    var angle, radius;
+    angle = (x - 90) / 180 * Math.PI;
+    radius = y;
+    return [radius * Math.cos(angle), radius * Math.sin(angle)];
+  }
+
+  nodeClass(d) {
+    if (d.children != null) {
+      return "node--internal";
+    } else {
+      return "node--leaf";
+    }
+  }
+
+  iconNode(node) {
+    node.append("svg:text").attr("dy", 4).attr("stroke", 'wheat').attr("font-size", "1.4em").attr("font-family", "FontAwesome").attr("text-anchor", "middle").text((d) => {
+      return this.iconUnicode(d);
     });
-    node.append("circle").attr("r", 5.0);
-    return node.append("svg:text").attr("dy", 3).attr("x", function(d) {
-      if (d.children != null) {
-        return -8;
+  }
+
+  textNode(node) {
+    node.append("svg:text").attr("dy", ".31em").attr("y", 2).attr("x", (d) => {
+      if (this.isEnd180(d)) {
+        return 6;
       } else {
-        return 8;
+        return -6;
       }
-    }).attr("y", 3).text(function(d) {
-      return d.name;
-    }).attr("stroke", "yellow").style("text-anchor", function(d) {
-      if (d.children != null) {
+    }).attr("text-anchor", (d) => {
+      if (this.isEnd180(d)) {
         return "end";
       } else {
         return "start";
       }
+    }).attr("transform", (d) => {
+      return "rotate(" + (d.x < 180 ? d.x - 90 : d.x + 90) + ")";
+    //attr("font-size","1.0em")
+    }).attr("stroke", 'wheat').attr("font-family", "Roboto").text(function(d) {
+      return d.data.name;
     });
+  }
+
+  isEnd180(d) {
+    return d.x > 180;
+  }
+
+  isEnd(d) {
+    return !((d.children != null) && d.children.length > 0);
+  }
+
+  iconUnicode(d) {
+    var icon;
+    icon = d.data.icon != null ? d.data.icon : 'fas fa-circle';
+    return Vis.unicode(icon);
   }
 
 };
 
-//text(                (d) -> d.name.substring(d.name.lastIndexOf(".") + 1) )
 export default Cluster;

@@ -766,7 +766,24 @@ Util = class Util {
     return str.charAt(0).toLowerCase() + str.substring(1);
   }
 
-  static toArray(objects, whereIn = null, keyField = 'id') {
+  static toArray(objs) {
+    var array, key, obj;
+    if (Util.isArray(objs)) {
+      return objs;
+    } else {
+      array = [];
+      for (key in objs) {
+        if (!hasProp.call(objs, key)) continue;
+        obj = objs[key];
+        array.push(obj);
+      }
+      return array;
+    }
+  }
+
+  
+  // Not working
+  static toArray2(objects, whereIn = null, keyField = 'id') {
     var array, j, key, len1, object, where;
     where = whereIn != null ? whereIn : function() {
       return true;

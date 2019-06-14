@@ -126,8 +126,10 @@ Data = class Data {
     });
   }
 
-  static asyncJSON(url, callback) {
-    url = Data.toUrl(url);
+  static asyncJSON(urla, callback) {
+    var url;
+    url = Data.toUrl(urla);
+    // console.log( 'Data.asyncJSON', urla, url )
     fetch(url).then((response) => {
       return response.json();
     }).then((data) => {
@@ -190,7 +192,7 @@ Data = class Data {
 
 };
 
-Data.local = "http://localhost:63342/aug/app/data/";
+Data.local = "app/data/";
 
 Data.hosted = "https://ui-48413.firebaseapp.com/";
 

@@ -4,10 +4,10 @@ import Vis      from '../../bas/util/Vis.js'
 import Radar    from './Radar.js'
 import Palettes from './Palettes'
 
-class Wheel extends Radar
+class Hue extends Radar
 
-  constructor:( drew, d3 ) ->
-    super(      drew, d3 )
+  constructor:(  drew,  d3,   name,  elem,  size ) ->
+    super(       drew,  d3,   name,  elem,  size )
 
     @quadrants = [
       { name1:"Red",        key:  '0', color:"hsl(  0,100%,50%)", beg:-15, end: 15 }
@@ -41,13 +41,15 @@ class Wheel extends Radar
       { palette:Palettes.grays,    name1:"Gray",       key:'345', beg:330, end:345 }  ]
 
     @assoc = @assocQuad(@quadrants)
+    @wheelReady()
 
-  ready:() ->
+  wheelReady:() ->
     @graph  = @drew.svg
     dr = ( @r100 - @r40 ) / 30
     @quads( @hueQuads(10), @r80, @r100 )
     @hsvWedges(     5, dr, @r40, @r100 )
     @paletteWedges( 5, dr, @r40, @r100 )
+    return
 
 
   hueQuads:(inc) ->
@@ -86,17 +88,6 @@ class Wheel extends Radar
         r += dr
     return
 
-  ###
-  paletteLogs:() ->
-    for palette in @palettes
-      for c in palette.palette
-        hex = '"' + c.hex + '"'
-        hsv = '"' + Vis.hsvRgb(Vis.hexRgb(c.hex)) + '"'
-        hsl = '"' + Vis.hslRgb(Vis.hexRgb(c.hex)) + '"'
-        console.log( '    ', { hex:hex, hsv:hsv, hsl:hsl, code:'"HTML"', name:'"'+c.name+'"' } )
-    return
-  ###
-
   name1:(hue) ->
     qa = @assoc[hue.toString()]
     if qa? then qa.name1 else null
@@ -107,4 +98,4 @@ class Wheel extends Radar
       assoc[q.key] = q
     assoc
 
-export default Wheel
+export default Hue

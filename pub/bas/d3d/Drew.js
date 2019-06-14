@@ -18,14 +18,15 @@ import Radial from './Radial.js';
 
 import Tree from './Tree.js';
 
-import Wheel from './Wheel.js';
+import Hue from './Hue.js';
 
 Drew = class Drew {
-  constructor(stream) {
-    this.createSvg = this.createSvg.bind(this);
+  constructor(stream, drewElem, drewSize) {
     this.transform = this.transform.bind(this);
     this.stream = stream;
-    this.size = {};
+    this.drewElem = drewElem;
+    this.drewSize = drewSize;
+    this.size = this.drewSize;
   }
 
   create(name, elem, size) {
@@ -44,11 +45,11 @@ Drew = class Drew {
         return new Radial(this, d3, name, elem, size);
       case 'Tree':
         return new Tree(this, d3, name, elem, size);
-      case 'Wheel':
-        return new Wheel(this, d3, name, elem, size, 'Wheelc');
+      case 'Hue':
+        return new Hue(this, d3, name, elem, size, 'Hue');
       default:
         console.error('Draw.create(name) unknown name', name);
-        return new Axes(this);
+        return new Axes(this, d3, name, elem, size);
     }
   }
 
@@ -64,7 +65,6 @@ Drew = class Drew {
     [this.svg, this.g, svgId, gId, this.defs] = this.createSvg(elem, name, size.elemWidth, size.elemHeight);
     this.size.lastWidth = size.elemWidth;
     this.size.lastHeight = size.elemHeight;
-    this.htmlId = svgId;
     return [this.svg, this.g];
   }
 

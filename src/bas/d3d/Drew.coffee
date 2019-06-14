@@ -8,15 +8,14 @@ import Link     from './Link.js'
 import Radar    from './Radar.js'
 import Radial   from './Radial.js'
 import Tree     from './Tree.js'
-import Wheel    from './Wheel.js'
+import Hue      from './Hue.js'
 
 class Drew
 
-  constructor:( @stream ) ->
-    @size = {}
+  constructor:( @stream, @drewElem, @drewSize ) ->
+    @size = @drewSize
 
   create:( name, elem, size ) ->
-
     switch name
       when 'Axes'    then new Axes(    @, d3, name, elem, size )
       when 'Chord'   then new Chord(   @, d3, name, elem, size )
@@ -25,10 +24,10 @@ class Drew
       when 'Radar'   then new Radar(   @, d3, name, elem, size, 'Radar'  )
       when 'Radial'  then new Radial(  @, d3, name, elem, size )
       when 'Tree'    then new Tree(    @, d3, name, elem, size )
-      when 'Wheel'   then new Wheel(   @, d3, name, elem, size, 'Wheelc' )
+      when 'Hue'     then new Hue(     @, d3, name, elem, size, 'Hue' )
       else
         console.error( 'Draw.create(name) unknown name', name )
-        new Axes(    @ )
+        new Axes( @, d3, name, elem, size )
 
   ready:( name, elem, size ) ->
     @size = size
@@ -37,10 +36,9 @@ class Drew
     [@svg,@g,svgId,gId,@defs] = @createSvg( elem, name, size.elemWidth, size.elemHeight )
     @size.lastWidth  = size.elemWidth
     @size.lastHeight = size.elemHeight
-    @htmlId = svgId
     return [@svg,@g]
 
-  createSvg:( elem,  name, w, h ) =>
+  createSvg:( elem,  name, w, h ) ->
     svgId = @htmlId( name, 'Svg',  '' )
     gId   = @htmlId( name, 'SvgG', '' )
     svg   = d3.select(elem).append("svg:svg")

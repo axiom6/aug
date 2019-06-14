@@ -7,7 +7,7 @@ import Data from '../../bas/util/Data.js';
 import Vis from '../../bas/util/Vis.js';
 
 Radar = class Radar {
-  constructor(drew, d3) {
+  constructor(drew, d3, name2, elem, size) {
     this.doQuads = this.doQuads.bind(this);
     this.doTechs = this.doTechs.bind(this);
     this.attrG = this.attrG.bind(this);
@@ -28,34 +28,11 @@ Radar = class Radar {
     this.pts = this.pts.bind(this);
     this.drew = drew;
     this.d3 = d3;
-    this.criterias = [ // Grade  Percentile
-      {
-        name: "Adopt",
-        radius: this.r40 //   A     90-100%
-      },
-      {
-        name: "Trial",
-        radius: this.r60 //   B     80-89%
-      },
-      {
-        name: "Access",
-        radius: this.r80 //   C     70-79%
-      },
-      {
-        name: "Hold",
-        radius: this.r100 //   D     60-69%
-      }
-    ];
+    this.name = name2;
+    this.elem = elem;
+    this.size = size;
+    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
     this.ready();
-    if (this.degName === false && this.prompt === false && this.symType === false) {
-      ({});
-    }
-    if (this.doDragBeg === false && this.doDrag === false && this.doDragEnd === false) {
-      ({});
-    }
-    if (this.degSVG === false && this.degD3 === false) {
-      ({});
-    }
   }
 
   isRadar() {
@@ -66,7 +43,6 @@ Radar = class Radar {
     var geo;
     geo = this.drew.geomElem();
     this.graph = this.drew.svg;
-    this.g = this.graph.g;
     this.width = geo.w;
     this.height = geo.h;
     this.x0 = this.width / 2;
@@ -95,13 +71,31 @@ Radar = class Radar {
       ({});
     }
     this.attrG(this.g);
+    this.criterias = [ // Grade  Percentile
+      {
+        name: "Adopt",
+        radius: this.r40 //   A     90-100%
+      },
+      {
+        name: "Trial",
+        radius: this.r60 //   B     80-89%
+      },
+      {
+        name: "Access",
+        radius: this.r80 //   C     70-79%
+      },
+      {
+        name: "Hold",
+        radius: this.r100 //   D     60-69%
+      }
+    ];
     if (this.isRadar()) {
       Data.asyncJSON('draw/Quad.json', (quads) => {
         return this.doQuads(quads);
       });
     }
     if (this.isRadar()) {
-      return Data.asyncJSON('draw/Tech.json', (techs) => {
+      Data.asyncJSON('draw/Tech.json', (techs) => {
         return this.doTechs(techs);
       });
     }
@@ -172,7 +166,7 @@ Radar = class Radar {
       ang = i * dif;
       cos = Math.cos(this.rad(ang));
       sin = Math.sin(this.rad(ang));
-      this.quadLine(r1 * cos, r1 * sin, r2 * cos, r2 * sin, "rgba(180,180,180,1.0)");
+      this.quadLine(r1 * cos, r1 * sin, r2 * cos, r2 * sin, "white"); // "rgba(180,180,180,1.0)"
       // @degName( @r100+12, ang )
       name2s = quadrants[Math.floor(i / 2)]['name2s'];
       if ((name2s != null) && name2s.length === 2) {
@@ -248,13 +242,6 @@ Radar = class Radar {
     dot.call((tech) => {
       return tech.dot = dot;
     });
-    /*
-    dot.call(
-      d3.behavior.drag()
-        .on("dragstart", (tech) => @doDragStart(tech) )
-        .on("drag",      (tech) => @doDrag(tech) )
-        .on("dragend",   (tech) => @doDragEnd(tech)   )  )
-    */
     g.append("svg:text").text((tech) => {
       return (tech.i ? tech.i + ' ' : '') + tech.name;
     }).attr("id", (tech) => {
@@ -273,7 +260,7 @@ Radar = class Radar {
       }
     }).attr("y", (tech) => {
       return this.y(tech);
-    }).attr("dy", ".35em").attr("font-family", "Arial").attr("font-size", "10px");
+    }).attr("dy", ".35em").attr("font-family", "Roboto").attr("font-size", "10px").attr("stroke", "wheat");
   }
 
   // Start drag by setting fill yellow
@@ -396,6 +383,27 @@ Radar = class Radar {
     this.g.append("svg:line").attr("x1", x1 + this.x0).attr("y1", y1 + this.y0).attr("x2", x2 + this.x0).attr("y2", y2 + this.y0).attr("stroke", stroke).attr("stroke-width", "1");
   }
 
+  noop() {
+    if (this.degName === false && this.prompt === false && this.symType === false) {
+      ({});
+    }
+    if (this.doDragBeg === false && this.doDrag === false && this.doDragEnd === false) {
+      ({});
+    }
+    if (this.degSVG === false && this.degD3 === false) {
+      return {};
+    }
+  }
+
 };
 
 export default Radar;
+
+/*
+      dot.call(
+      @d3.behavior.drag()
+        .on("dragstart", (tech) => @doDragStart(tech) )
+        .on("drag",      (tech) => @doDrag(tech) )
+        .on("dragend",   (tech) => @doDragEnd(tech)   )  )
+
+*/

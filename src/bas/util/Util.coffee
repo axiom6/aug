@@ -458,7 +458,17 @@ class Util
   @unCap:( str ) ->
     str.charAt(0).toLowerCase() + str.substring(1)
 
-  @toArray:( objects, whereIn=null, keyField='id' ) ->
+  @toArray:( objs ) ->
+    if Util.isArray(objs)
+      objs
+    else
+      array = []
+      for own key, obj of objs
+        array.push( obj )
+      array
+      
+  # Not working
+  @toArray2:( objects, whereIn=null, keyField='id' ) ->
     where = if whereIn? then whereIn else () -> true
     array = []
     if Util.isArray(objects)

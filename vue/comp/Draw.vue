@@ -17,19 +17,16 @@
 
   let Draw = {
 
-    components:{ 'd-dabs':Dabs, drew:{} },
+    components:{ 'd-dabs':Dabs },
 
     data() {
-      return { comp:'Draw', key:'Draw', pages:{
-          Axes:    { title:'Axes',    key:'Axes',    obj:null }
-       // Chord:   { title:'Chord',   key:'Chord',   obj:null },
-       // Cluster: { title:'Cluster', key:'Cluster', obj:null },
-       // Link:    { title:'Link',    key:'Link',    obj:null },
-       // Radar:   { title:'Radar',   key:'Radar',   obj:null },
-       // Radial:  { title:'Radial',  key:'Radial',  obj:null },
-       // Tree:    { title:'Tree',    key:'Tree',    obj:null },
-       // Wheel:   { title:'Wheel',   key:'Wheel',   obj:null }
-        } } },
+      return { comp:'Draw', key:'Draw', drew:null, pages:{
+        Axes:    { title:'Axes',    key:'Axes',    obj:null },
+        Chord:   { title:'Chord',   key:'Chord',   obj:null },
+        Link:    { title:'Link',    key:'Link',    obj:null },
+        Radar:   { title:'Radar',   key:'Radar',   obj:null },
+        Hue:     { title:'Hue',     key:'Hue',     obj:null },
+        Tree:    { title:'Tree',    key:'Tree',    obj:null } } } },
 
     methods: {
       

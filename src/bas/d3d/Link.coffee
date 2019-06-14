@@ -5,21 +5,21 @@ import Vis  from '../../bas/util/Vis.js'
 
 class Link
 
-  constructor:( @drew, @d3 ) ->
+  constructor:( @drew, @d3,  @name, @elem, @size ) ->
+    [@svg,@g] = @drew.ready( @name, @elem, @size )
     @ready()
     if @link2 is false and @strokeOpp is false then {}
 
   ready:() ->
     geo       = @drew.geomElem()
     @graph    = @drew.svg
-    @g        = @graph.g
     @w        = geo.w
     @h        = geo.h
     @cssLink  = 'link'
     @thick    = 1
     @da       = 5
     @ornament( 150 )
-    @graph.$svg
+    return
 
   link:( x1, y1, x2, y2, n, fill ) ->
     r  = Math.sqrt( (y2-y1)*(y2-y1) + (x2-x1)*(x2-x1) ) / 2

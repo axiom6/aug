@@ -19285,7 +19285,24 @@ Util = class Util {
     return str.charAt(0).toLowerCase() + str.substring(1);
   }
 
-  static toArray(objects, whereIn = null, keyField = 'id') {
+  static toArray(objs) {
+    var array, key, obj;
+    if (Util.isArray(objs)) {
+      return objs;
+    } else {
+      array = [];
+      for (key in objs) {
+        if (!hasProp.call(objs, key)) continue;
+        obj = objs[key];
+        array.push(obj);
+      }
+      return array;
+    }
+  }
+
+  
+  // Not working
+  static toArray2(objects, whereIn = null, keyField = 'id') {
     var array, j, key, len1, object, where;
     where = whereIn != null ? whereIn : function() {
       return true;
@@ -20914,10 +20931,14 @@ var Axes$1 = Axes;
 var Chord;
 
 Chord = class Chord {
-  constructor(drew, d3) {
+  constructor(drew, d3, name, elem, size) {
     this.ready = this.ready.bind(this);
     this.drew = drew;
     this.d3 = d3;
+    this.name = name;
+    this.elem = elem;
+    this.size = size;
+    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
     this.matrix = [[0, 20, 20, 20], [20, 0, 20, 80], [20, 20, 0, 20], [20, 80, 20, 0]];
     this.range = ["#FF0000", "#00FF00", "#0000FF", "#888888"];
     this.ready();
@@ -20927,7 +20948,6 @@ Chord = class Chord {
     var geo;
     geo = this.drew.geomElem();
     this.graph = this.drew.svg;
-    this.g = this.graph.g;
     this.width = geo.w;
     this.height = geo.h;
     this.outer = Math.min(this.width, this.height) * 0.5 - 40;
@@ -20942,10 +20962,6 @@ Chord = class Chord {
     this.group = this.createGroup(this.arc);
     this.ticks = this.createTicks(this.group, this.outer);
     this.appendRibbons(this.g, this.ribbon);
-    this.graph.$g.css({
-      "background-color": "white"
-    });
-    return this.graph.$svg;
   }
 
   createChord() {
@@ -21201,8 +21217,10 @@ Data = class Data {
     });
   }
 
-  static asyncJSON(url, callback) {
-    url = Data.toUrl(url);
+  static asyncJSON(urla, callback) {
+    var url;
+    url = Data.toUrl(urla);
+    // console.log( 'Data.asyncJSON', urla, url )
     fetch(url).then((response) => {
       return response.json();
     }).then((data) => {
@@ -21265,7 +21283,7 @@ Data = class Data {
 
 };
 
-Data.local = "http://localhost:63342/aug/app/data/";
+Data.local = "app/data/";
 
 Data.hosted = "https://ui-48413.firebaseapp.com/";
 
@@ -21274,10 +21292,24 @@ var Data$1 = Data;
 var Cluster;
 
 Cluster = class Cluster {
-  constructor(drew, d3) {
-    this.doCluster = this.doCluster.bind(this);
+  constructor(drew, d3, name, elem, size) {
+    this.doRadial = this.doRadial.bind(this);
+    this.doLinks = this.doLinks.bind(this);
+    this.doNodes = this.doNodes.bind(this);
+    this.moveTo = this.moveTo.bind(this);
+    this.project = this.project.bind(this);
+    this.nodeClass = this.nodeClass.bind(this);
+    this.iconNode = this.iconNode.bind(this);
+    this.textNode = this.textNode.bind(this);
+    this.isEnd180 = this.isEnd180.bind(this);
+    this.isEnd = this.isEnd.bind(this);
+    this.iconUnicode = this.iconUnicode.bind(this);
     this.drew = drew;
     this.d3 = d3;
+    this.name = name;
+    this.elem = elem;
+    this.size = size;
+    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
     this.ready();
   }
 
@@ -21285,88 +21317,126 @@ Cluster = class Cluster {
     var geo;
     geo = this.drew.geomElem();
     this.graph = this.drew.svg;
-    this.g = this.graph.g;
     this.w = geo.w;
     this.h = geo.h;
+    this.r = Math.min(this.w / 2, this.h / 2) * 0.9;
     this.tree = this.d3.cluster();
-    this.tree.size([this.h * 0.6, this.w * 0.75]);
-    Data$1.asynJSON('draw/Prin.json', (data) => {
-      return this.doCluster(data, this.g);
+    this.tree.size([
+      this.r,
+      this.r // size([@w,@h])
+    ]);
+    this.tree.separation((a, b) => {
+      return (a.parent === b.parent ? 5 : 10) / a.depth;
     });
-    return this.graph.$svg;
-  }
-
-  doCluster(data, g) {
-    this.root = this.d3.hierarchy(data);
-    this.tree(this.root);
-    //@sort( @root )
-    this.tree(this.root);
-    this.doLink();
-    this.doNode();
-  }
-
-  sort(root) {
-    root.sort(function(a, b) {
-      return (a.height - b.height) || a.id.localeCompare(b.id);
+    this.g.attr("transform", "translate(" + this.w * 0.5 + "," + this.h * 0.5 + ")");
+    return Data$1.asyncJSON('draw/Prin.json', (data) => {
+      return this.doRadial(data, this.g);
     });
   }
 
-  doLink() {
-    var link;
-    link = this.g.selectAll(".link").data(this.root.descendants().slice(1)).enter().append("path").attr("class", "link").attr("d", (d) => {
+  doRadial(data, g) {
+    var link, node, root;
+    root = this.d3.hierarchy(data);
+    this.tree(root);
+    link = this.doLinks(root, g);
+    node = this.doNodes(root, g);
+    //node.append("svg:circle").attr("r",4.5)
+    //iconNode( node ) # Clutters up overview
+    this.textNode(node);
+    Util$1.noop(link);
+  }
+
+  doLinks(root, g) {
+    return g.selectAll(".link").data(root.descendants().slice(1)).enter().append("svg:path").attr("class", "link").attr("stroke", 'blue').attr("fill", "none").attr("d", (d) => {
       return this.moveTo(d);
     });
-    if (link === false) {
-      return {};
-    }
+  }
+
+  doNodes(root, g) {
+    return g.selectAll("g.node").data(root.descendants()).enter().append("svg:g").attr("class", (d) => {
+      return this.nodeClass(d);
+    }).attr("transform", (d) => {
+      return "translate(" + this.project(d.x, d.y) + ")";
+    });
   }
 
   moveTo(d) {
     var p;
     p = d.parent;
-    return `M${d.y},${d.x}C${p.y + 100},${d.x} ${p.y + 100},${p.x} ${p.y},${p.x}`;
+    return `M${this.project(d.x, d.y)}C${this.project(d.x, (d.y + p.y) / 2)} ${this.project(p.x, (d.y + p.y) / 2)} ${this.project(p.x, p.y)}`;
   }
 
-  doNode() {
-    var node;
-    node = this.g.selectAll(".node").data(this.root.descendants()).enter().append("g").attr("class", function(d) {
-      var ref;
-      return "node" + ((ref = d.children) != null ? ref : {
-        " node--internal": " node--leaf"
-      });
-    }).attr("transform", function(d) {
-      return "translate(" + d.y + "," + d.x + ")";
+  project(x, y) {
+    var angle, radius;
+    angle = (x - 90) / 180 * Math.PI;
+    radius = y;
+    return [radius * Math.cos(angle), radius * Math.sin(angle)];
+  }
+
+  nodeClass(d) {
+    if (d.children != null) {
+      return "node--internal";
+    } else {
+      return "node--leaf";
+    }
+  }
+
+  iconNode(node) {
+    node.append("svg:text").attr("dy", 4).attr("stroke", 'wheat').attr("font-size", "1.4em").attr("font-family", "FontAwesome").attr("text-anchor", "middle").text((d) => {
+      return this.iconUnicode(d);
     });
-    node.append("circle").attr("r", 5.0);
-    return node.append("svg:text").attr("dy", 3).attr("x", function(d) {
-      if (d.children != null) {
-        return -8;
+  }
+
+  textNode(node) {
+    node.append("svg:text").attr("dy", ".31em").attr("y", 2).attr("x", (d) => {
+      if (this.isEnd180(d)) {
+        return 6;
       } else {
-        return 8;
+        return -6;
       }
-    }).attr("y", 3).text(function(d) {
-      return d.name;
-    }).attr("stroke", "yellow").style("text-anchor", function(d) {
-      if (d.children != null) {
+    }).attr("text-anchor", (d) => {
+      if (this.isEnd180(d)) {
         return "end";
       } else {
         return "start";
       }
+    }).attr("transform", (d) => {
+      return "rotate(" + (d.x < 180 ? d.x - 90 : d.x + 90) + ")";
+    //attr("font-size","1.0em")
+    }).attr("stroke", 'wheat').attr("font-family", "Roboto").text(function(d) {
+      return d.data.name;
     });
+  }
+
+  isEnd180(d) {
+    return d.x > 180;
+  }
+
+  isEnd(d) {
+    return !((d.children != null) && d.children.length > 0);
+  }
+
+  iconUnicode(d) {
+    var icon;
+    icon = d.data.icon != null ? d.data.icon : 'fas fa-circle';
+    return Vis$1.unicode(icon);
   }
 
 };
 
-//text(                (d) -> d.name.substring(d.name.lastIndexOf(".") + 1) )
 var Cluster$1 = Cluster;
 
 var Link;
 
 Link = class Link {
-  constructor(drew, d3) {
+  constructor(drew, d3, name, elem, size) {
     this.strokeOpp = this.strokeOpp.bind(this);
     this.drew = drew;
     this.d3 = d3;
+    this.name = name;
+    this.elem = elem;
+    this.size = size;
+    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
     this.ready();
     if (this.link2 === false && this.strokeOpp === false) ;
   }
@@ -21375,14 +21445,12 @@ Link = class Link {
     var geo;
     geo = this.drew.geomElem();
     this.graph = this.drew.svg;
-    this.g = this.graph.g;
     this.w = geo.w;
     this.h = geo.h;
     this.cssLink = 'link';
     this.thick = 1;
     this.da = 5;
     this.ornament(150);
-    return this.graph.$svg;
   }
 
   link(x1, y1, x2, y2, n, fill) {
@@ -21628,7 +21696,7 @@ var Link$1 = Link;
 var Radar;
 
 Radar = class Radar {
-  constructor(drew, d3) {
+  constructor(drew, d3, name2, elem, size) {
     this.doQuads = this.doQuads.bind(this);
     this.doTechs = this.doTechs.bind(this);
     this.attrG = this.attrG.bind(this);
@@ -21649,28 +21717,11 @@ Radar = class Radar {
     this.pts = this.pts.bind(this);
     this.drew = drew;
     this.d3 = d3;
-    this.criterias = [ // Grade  Percentile
-      {
-        name: "Adopt",
-        radius: this.r40 //   A     90-100%
-      },
-      {
-        name: "Trial",
-        radius: this.r60 //   B     80-89%
-      },
-      {
-        name: "Access",
-        radius: this.r80 //   C     70-79%
-      },
-      {
-        name: "Hold",
-        radius: this.r100 //   D     60-69%
-      }
-    ];
+    this.name = name2;
+    this.elem = elem;
+    this.size = size;
+    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
     this.ready();
-    if (this.degName === false && this.prompt === false && this.symType === false) ;
-    if (this.doDragBeg === false && this.doDrag === false && this.doDragEnd === false) ;
-    if (this.degSVG === false && this.degD3 === false) ;
   }
 
   isRadar() {
@@ -21681,7 +21732,6 @@ Radar = class Radar {
     var geo;
     geo = this.drew.geomElem();
     this.graph = this.drew.svg;
-    this.g = this.graph.g;
     this.width = geo.w;
     this.height = geo.h;
     this.x0 = this.width / 2;
@@ -21706,13 +21756,31 @@ Radar = class Radar {
     if (this.r20 === false && this.r30 === false && this.r50 === false && this.r90 === false) ;
     if (this.p60 === false && this.r04 === false && this.r10 === false) ;
     this.attrG(this.g);
+    this.criterias = [ // Grade  Percentile
+      {
+        name: "Adopt",
+        radius: this.r40 //   A     90-100%
+      },
+      {
+        name: "Trial",
+        radius: this.r60 //   B     80-89%
+      },
+      {
+        name: "Access",
+        radius: this.r80 //   C     70-79%
+      },
+      {
+        name: "Hold",
+        radius: this.r100 //   D     60-69%
+      }
+    ];
     if (this.isRadar()) {
       Data$1.asyncJSON('draw/Quad.json', (quads) => {
         return this.doQuads(quads);
       });
     }
     if (this.isRadar()) {
-      return Data$1.asyncJSON('draw/Tech.json', (techs) => {
+      Data$1.asyncJSON('draw/Tech.json', (techs) => {
         return this.doTechs(techs);
       });
     }
@@ -21783,7 +21851,7 @@ Radar = class Radar {
       ang = i * dif;
       cos = Math.cos(this.rad(ang));
       sin = Math.sin(this.rad(ang));
-      this.quadLine(r1 * cos, r1 * sin, r2 * cos, r2 * sin, "rgba(180,180,180,1.0)");
+      this.quadLine(r1 * cos, r1 * sin, r2 * cos, r2 * sin, "white"); // "rgba(180,180,180,1.0)"
       // @degName( @r100+12, ang )
       name2s = quadrants[Math.floor(i / 2)]['name2s'];
       if ((name2s != null) && name2s.length === 2) {
@@ -21859,13 +21927,6 @@ Radar = class Radar {
     dot.call((tech) => {
       return tech.dot = dot;
     });
-    /*
-    dot.call(
-      d3.behavior.drag()
-        .on("dragstart", (tech) => @doDragStart(tech) )
-        .on("drag",      (tech) => @doDrag(tech) )
-        .on("dragend",   (tech) => @doDragEnd(tech)   )  )
-    */
     g.append("svg:text").text((tech) => {
       return (tech.i ? tech.i + ' ' : '') + tech.name;
     }).attr("id", (tech) => {
@@ -21884,7 +21945,7 @@ Radar = class Radar {
       }
     }).attr("y", (tech) => {
       return this.y(tech);
-    }).attr("dy", ".35em").attr("font-family", "Arial").attr("font-size", "10px");
+    }).attr("dy", ".35em").attr("font-family", "Roboto").attr("font-size", "10px").attr("stroke", "wheat");
   }
 
   // Start drag by setting fill yellow
@@ -22007,19 +22068,312 @@ Radar = class Radar {
     this.g.append("svg:line").attr("x1", x1 + this.x0).attr("y1", y1 + this.y0).attr("x2", x2 + this.x0).attr("y2", y2 + this.y0).attr("stroke", stroke).attr("stroke-width", "1");
   }
 
+  noop() {
+    if (this.degName === false && this.prompt === false && this.symType === false) ;
+    if (this.doDragBeg === false && this.doDrag === false && this.doDragEnd === false) ;
+    if (this.degSVG === false && this.degD3 === false) {
+      return {};
+    }
+  }
+
 };
 
 var Radar$1 = Radar;
 
+/*
+      dot.call(
+      @d3.behavior.drag()
+        .on("dragstart", (tech) => @doDragStart(tech) )
+        .on("drag",      (tech) => @doDrag(tech) )
+        .on("dragend",   (tech) => @doDragEnd(tech)   )  )
+
+*/
+
 var Radial$1;
 
-Radial$1 = class Radial {};
+Radial$1 = class Radial {
+  constructor(drew, d3, name, elem, size) {
+    this.doRadial = this.doRadial.bind(this);
+    this.doLinks = this.doLinks.bind(this);
+    this.doNodes = this.doNodes.bind(this);
+    this.moveTo = this.moveTo.bind(this);
+    this.project = this.project.bind(this);
+    this.nodeClass = this.nodeClass.bind(this);
+    this.iconNode = this.iconNode.bind(this);
+    this.textNode = this.textNode.bind(this);
+    this.isEnd180 = this.isEnd180.bind(this);
+    this.isEnd = this.isEnd.bind(this);
+    this.iconUnicode = this.iconUnicode.bind(this);
+    this.drew = drew;
+    this.d3 = d3;
+    this.name = name;
+    this.elem = elem;
+    this.size = size;
+    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
+    this.ready();
+  }
+
+  ready() {
+    var geo;
+    geo = this.drew.geomElem();
+    this.graph = this.drew.svg;
+    this.w = geo.w;
+    this.h = geo.h;
+    this.r = Math.min(this.w / 2, this.h / 2) * 0.9;
+    this.tree = this.d3.tree();
+    this.tree.size([
+      this.r,
+      this.r // size([@w,@h])
+    ]);
+    this.tree.separation((a, b) => {
+      return (a.parent === b.parent ? 5 : 10) / a.depth;
+    });
+    this.g.attr("transform", "translate(" + this.w * 0.5 + "," + this.h * 0.5 + ")");
+    return Data$1.asyncJSON('draw/Prin.json', (data) => {
+      return this.doRadial(data, this.g);
+    });
+  }
+
+  doRadial(data, g) {
+    var link, node, root;
+    root = this.d3.hierarchy(data);
+    this.tree(root);
+    link = this.doLinks(root, g);
+    node = this.doNodes(root, g);
+    //node.append("svg:circle").attr("r",4.5)
+    //iconNode( node ) # Clutters up overview
+    this.textNode(node);
+    Util$1.noop(link);
+  }
+
+  doLinks(root, g) {
+    return g.selectAll(".link").data(root.descendants().slice(1)).enter().append("svg:path").attr("class", "link").attr("stroke", 'blue').attr("fill", "none").attr("d", (d) => {
+      return this.moveTo(d);
+    });
+  }
+
+  doNodes(root, g) {
+    return g.selectAll("g.node").data(root.descendants()).enter().append("svg:g").attr("class", (d) => {
+      return this.nodeClass(d);
+    }).attr("transform", (d) => {
+      return "translate(" + this.project(d.x, d.y) + ")";
+    });
+  }
+
+  moveTo(d) {
+    var p;
+    p = d.parent;
+    return `M${this.project(d.x, d.y)}C${this.project(d.x, (d.y + p.y) / 2)} ${this.project(p.x, (d.y + p.y) / 2)} ${this.project(p.x, p.y)}`;
+  }
+
+  project(x, y) {
+    var angle, radius;
+    angle = (x - 90) / 180 * Math.PI;
+    radius = y;
+    return [radius * Math.cos(angle), radius * Math.sin(angle)];
+  }
+
+  nodeClass(d) {
+    if (d.children != null) {
+      return "node--internal";
+    } else {
+      return "node--leaf";
+    }
+  }
+
+  iconNode(node) {
+    node.append("svg:text").attr("dy", 4).attr("stroke", 'wheat').attr("font-size", "1.4em").attr("font-family", "FontAwesome").attr("text-anchor", "middle").text((d) => {
+      return this.iconUnicode(d);
+    });
+  }
+
+  textNode(node) {
+    node.append("svg:text").attr("dy", ".31em").attr("y", 2).attr("x", (d) => {
+      if (this.isEnd180(d)) {
+        return 6;
+      } else {
+        return -6;
+      }
+    }).attr("text-anchor", (d) => {
+      if (this.isEnd180(d)) {
+        return "end";
+      } else {
+        return "start";
+      }
+    }).attr("transform", (d) => {
+      return "rotate(" + (d.x < 180 ? d.x - 90 : d.x + 90) + ")";
+    //attr("font-size","1.0em")
+    }).attr("stroke", 'wheat').attr("font-family", "Roboto").text(function(d) {
+      return d.data.name;
+    });
+  }
+
+  isEnd180(d) {
+    return d.x > 180;
+  }
+
+  isEnd(d) {
+    return !((d.children != null) && d.children.length > 0);
+  }
+
+  iconUnicode(d) {
+    var icon;
+    icon = d.data.icon != null ? d.data.icon : 'fas fa-circle';
+    return Vis$1.unicode(icon);
+  }
+
+};
 
 var Radial$2 = Radial$1;
 
 var Tree;
 
-Tree = class Tree {};
+Tree = class Tree {
+  constructor(drew, d3, name, elem, size, arrange1 = 'Radial') {
+    this.doRadial = this.doRadial.bind(this);
+    this.doLinks = this.doLinks.bind(this);
+    this.doNodes = this.doNodes.bind(this);
+    this.moveTo = this.moveTo.bind(this);
+    this.project = this.project.bind(this);
+    this.nodeClass = this.nodeClass.bind(this);
+    this.iconNode = this.iconNode.bind(this);
+    this.textNode = this.textNode.bind(this);
+    this.isEnd180 = this.isEnd180.bind(this);
+    this.isEnd = this.isEnd.bind(this);
+    this.iconUnicode = this.iconUnicode.bind(this);
+    this.drew = drew;
+    this.d3 = d3;
+    this.name = name;
+    this.elem = elem;
+    this.size = size;
+    this.arrange = arrange1;
+    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
+    this.ready();
+  }
+
+  ready() {
+    var geo;
+    geo = this.drew.geomElem();
+    this.graph = this.drew.svg;
+    this.w = geo.w;
+    this.h = geo.h;
+    this.r = Math.min(this.w / 2, this.h / 2) * 0.9;
+    this.tree = this.treeArrange(this.arrange);
+    this.tree.size([
+      this.r,
+      this.r // size([@w,@h])
+    ]);
+    this.tree.separation((a, b) => {
+      return (a.parent === b.parent ? 5 : 10) / a.depth;
+    });
+    this.g.attr("transform", "translate(" + this.w * 0.5 + "," + this.h * 0.5 + ")");
+    return Data$1.asyncJSON('draw/Prin.json', (data) => {
+      return this.doRadial(data, this.g);
+    });
+  }
+
+  treeArrange(arrange) {
+    switch (arrange) {
+      case 'Tree':
+        return this.d3.tree();
+      case 'Radial':
+        return this.d3.tree();
+      case 'cluster':
+        return this.d3.cluster();
+      default:
+        return this.d3.tree();
+    }
+  }
+
+  doRadial(data, g) {
+    var link, node, root;
+    root = this.d3.hierarchy(data);
+    this.tree(root);
+    link = this.doLinks(root, g);
+    node = this.doNodes(root, g);
+    //node.append("svg:circle").attr("r",4.5)
+    //iconNode( node ) # Clutters up overview
+    this.textNode(node);
+    Util$1.noop(link);
+  }
+
+  doLinks(root, g) {
+    return g.selectAll(".link").data(root.descendants().slice(1)).enter().append("svg:path").attr("class", "link").attr("stroke", 'blue').attr("fill", "none").attr("d", (d) => {
+      return this.moveTo(d);
+    });
+  }
+
+  doNodes(root, g) {
+    return g.selectAll("g.node").data(root.descendants()).enter().append("svg:g").attr("class", (d) => {
+      return this.nodeClass(d);
+    }).attr("transform", (d) => {
+      return "translate(" + this.project(d.x, d.y) + ")";
+    });
+  }
+
+  moveTo(d) {
+    var p;
+    p = d.parent;
+    return `M${this.project(d.x, d.y)}C${this.project(d.x, (d.y + p.y) / 2)} ${this.project(p.x, (d.y + p.y) / 2)} ${this.project(p.x, p.y)}`;
+  }
+
+  project(x, y) {
+    var angle, radius;
+    angle = (x - 90) / 180 * Math.PI;
+    radius = y;
+    return [radius * Math.cos(angle), radius * Math.sin(angle)];
+  }
+
+  nodeClass(d) {
+    if (d.children != null) {
+      return "node--internal";
+    } else {
+      return "node--leaf";
+    }
+  }
+
+  iconNode(node) {
+    node.append("svg:text").attr("dy", 4).attr("stroke", 'wheat').attr("font-size", "1.4em").attr("font-family", "FontAwesome").attr("text-anchor", "middle").text((d) => {
+      return this.iconUnicode(d);
+    });
+  }
+
+  textNode(node) {
+    node.append("svg:text").attr("dy", ".31em").attr("y", 2).attr("x", (d) => {
+      if (this.isEnd180(d)) {
+        return 6;
+      } else {
+        return -6;
+      }
+    }).attr("text-anchor", (d) => {
+      if (this.isEnd180(d)) {
+        return "end";
+      } else {
+        return "start";
+      }
+    }).attr("transform", (d) => {
+      return "rotate(" + (d.x < 180 ? d.x - 90 : d.x + 90) + ")";
+    //attr("font-size","1.0em")
+    }).attr("stroke", 'wheat').attr("font-family", "Roboto").text(function(d) {
+      return d.data.name;
+    });
+  }
+
+  isEnd180(d) {
+    return d.x > 180;
+  }
+
+  isEnd(d) {
+    return !((d.children != null) && d.children.length > 0);
+  }
+
+  iconUnicode(d) {
+    var icon;
+    icon = d.data.icon != null ? d.data.icon : 'fas fa-circle';
+    return Vis$1.unicode(icon);
+  }
+
+};
 
 var Tree$1 = Tree;
 
@@ -24721,11 +25075,11 @@ if (Palettes.Brewer === false && Palettes.toGroup === false) ;
 
 var Palettes$1 = Palettes;
 
-var Wheel;
+var Hue;
 
-Wheel = class Wheel extends Radar$1 {
-  constructor(drew, d3) {
-    super(drew, d3);
+Hue = class Hue extends Radar$1 {
+  constructor(drew, d3, name, elem, size) {
+    super(drew, d3, name, elem, size);
     this.quadrants = [
       {
         name1: "Red",
@@ -24920,15 +25274,16 @@ Wheel = class Wheel extends Radar$1 {
       }
     ];
     this.assoc = this.assocQuad(this.quadrants);
+    this.wheelReady();
   }
 
-  ready() {
+  wheelReady() {
     var dr;
     this.graph = this.drew.svg;
     dr = (this.r100 - this.r40) / 30;
     this.quads(this.hueQuads(10), this.r80, this.r100);
     this.hsvWedges(5, dr, this.r40, this.r100);
-    return this.paletteWedges(5, dr, this.r40, this.r100);
+    this.paletteWedges(5, dr, this.r40, this.r100);
   }
 
   hueQuads(inc) {
@@ -24988,16 +25343,6 @@ Wheel = class Wheel extends Radar$1 {
     }
   }
 
-  /*
-  paletteLogs:() ->
-  for palette in @palettes
-  for c in palette.palette
-    hex = '"' + c.hex + '"'
-    hsv = '"' + Vis.hsvRgb(Vis.hexRgb(c.hex)) + '"'
-    hsl = '"' + Vis.hslRgb(Vis.hexRgb(c.hex)) + '"'
-    console.log( '    ', { hex:hex, hsv:hsv, hsl:hsl, code:'"HTML"', name:'"'+c.name+'"' } )
-  return
-  */
   name1(hue) {
     var qa;
     qa = this.assoc[hue.toString()];
@@ -25020,16 +25365,17 @@ Wheel = class Wheel extends Radar$1 {
 
 };
 
-var Wheel$1 = Wheel;
+var Hue$1 = Hue;
 
 var Drew;
 
 Drew = class Drew {
-  constructor(stream) {
-    this.createSvg = this.createSvg.bind(this);
+  constructor(stream, drewElem, drewSize) {
     this.transform = this.transform.bind(this);
     this.stream = stream;
-    this.size = {};
+    this.drewElem = drewElem;
+    this.drewSize = drewSize;
+    this.size = this.drewSize;
   }
 
   create(name, elem, size) {
@@ -25048,11 +25394,11 @@ Drew = class Drew {
         return new Radial$2(this, d3, name, elem, size);
       case 'Tree':
         return new Tree$1(this, d3, name, elem, size);
-      case 'Wheel':
-        return new Wheel$1(this, d3, name, elem, size, 'Wheelc');
+      case 'Hue':
+        return new Hue$1(this, d3, name, elem, size, 'Hue');
       default:
         console.error('Draw.create(name) unknown name', name);
-        return new Axes$1(this);
+        return new Axes$1(this, d3, name, elem, size);
     }
   }
 
@@ -25068,7 +25414,6 @@ Drew = class Drew {
     [this.svg, this.g, svgId, gId, this.defs] = this.createSvg(elem, name, size.elemWidth, size.elemHeight);
     this.size.lastWidth = size.elemWidth;
     this.size.lastHeight = size.elemHeight;
-    this.htmlId = svgId;
     return [this.svg, this.g];
   }
 
@@ -25145,19 +25490,16 @@ var Drew$1 = Drew;
 
 let Draw = {
 
-  components:{ 'd-dabs':Dabs, drew:{} },
+  components:{ 'd-dabs':Dabs },
 
   data() {
-    return { comp:'Draw', key:'Draw', pages:{
-        Axes:    { title:'Axes',    key:'Axes',    obj:null }
-     // Chord:   { title:'Chord',   key:'Chord',   obj:null },
-     // Cluster: { title:'Cluster', key:'Cluster', obj:null },
-     // Link:    { title:'Link',    key:'Link',    obj:null },
-     // Radar:   { title:'Radar',   key:'Radar',   obj:null },
-     // Radial:  { title:'Radial',  key:'Radial',  obj:null },
-     // Tree:    { title:'Tree',    key:'Tree',    obj:null },
-     // Wheel:   { title:'Wheel',   key:'Wheel',   obj:null }
-      } } },
+    return { comp:'Draw', key:'Draw', drew:null, pages:{
+      Axes:    { title:'Axes',    key:'Axes',    obj:null },
+      Chord:   { title:'Chord',   key:'Chord',   obj:null },
+      Link:    { title:'Link',    key:'Link',    obj:null },
+      Radar:   { title:'Radar',   key:'Radar',   obj:null },
+      Hue:     { title:'Hue',     key:'Hue',     obj:null },
+      Tree:    { title:'Tree',    key:'Tree',    obj:null } } } },
 
   methods: {
     
@@ -25234,7 +25576,7 @@ __vue_render__$1._withStripped = true;
   /* style */
   const __vue_inject_styles__$1 = function (inject) {
     if (!inject) return
-    inject("data-v-e00c9184_0", { source: ".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;AACX;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n"]}, media: undefined });
+    inject("data-v-37b5cf29_0", { source: ".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;AACzB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;AACX;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n"]}, media: undefined });
 
   };
   /* scoped */

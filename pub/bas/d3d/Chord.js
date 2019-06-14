@@ -1,10 +1,14 @@
 var Chord;
 
 Chord = class Chord {
-  constructor(drew, d3) {
+  constructor(drew, d3, name, elem, size) {
     this.ready = this.ready.bind(this);
     this.drew = drew;
     this.d3 = d3;
+    this.name = name;
+    this.elem = elem;
+    this.size = size;
+    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
     this.matrix = [[0, 20, 20, 20], [20, 0, 20, 80], [20, 20, 0, 20], [20, 80, 20, 0]];
     this.range = ["#FF0000", "#00FF00", "#0000FF", "#888888"];
     this.ready();
@@ -14,7 +18,6 @@ Chord = class Chord {
     var geo;
     geo = this.drew.geomElem();
     this.graph = this.drew.svg;
-    this.g = this.graph.g;
     this.width = geo.w;
     this.height = geo.h;
     this.outer = Math.min(this.width, this.height) * 0.5 - 40;
@@ -29,10 +32,6 @@ Chord = class Chord {
     this.group = this.createGroup(this.arc);
     this.ticks = this.createTicks(this.group, this.outer);
     this.appendRibbons(this.g, this.ribbon);
-    this.graph.$g.css({
-      "background-color": "white"
-    });
-    return this.graph.$svg;
   }
 
   createChord() {
