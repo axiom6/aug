@@ -1512,16 +1512,18 @@ __vue_render__$e._withStripped = true;
 //
 //
 //
+//
 
 
 let Data = {
 
-  data() { return { comp:'Data' } },
+  data() { return { comp:'Data', datas:[
+    { title:'Tables', key:'Tables' },
+    { title:'Pivots', key:'Pivots' } ] } },
 
   methods: {
     isData: function() {
-      return this.comp === 'Data'; }
-  },
+      return this.comp === 'Data'; } },
 
   mounted: function () {}
 
@@ -1541,11 +1543,11 @@ var __vue_render__$f = function() {
     [
       _c("h1", { attrs: { "v-if": _vm.isData() } }, [_vm._v("Data")]),
       _vm._v(" "),
-      _c("router-view", { attrs: { name: _vm.Tables } }),
-      _vm._v(" "),
-      _c("router-view", { attrs: { name: _vm.Pivots } })
+      _vm._l(_vm.datas, function(dat) {
+        return [_c("router-view", { attrs: { name: dat.key } })]
+      })
     ],
-    1
+    2
   )
 };
 var __vue_staticRenderFns__$f = [];
@@ -1554,7 +1556,7 @@ __vue_render__$f._withStripped = true;
   /* style */
   const __vue_inject_styles__$f = function (inject) {
     if (!inject) return
-    inject("data-v-907a25f4_0", { source: ".data {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.data h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Data.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Data.vue","sourcesContent":[".data {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.data h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
+    inject("data-v-45adb441_0", { source: ".data {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.data h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Data.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Data.vue","sourcesContent":[".data {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.data h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
 
   };
   /* scoped */

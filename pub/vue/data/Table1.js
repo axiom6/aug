@@ -15,8 +15,7 @@ let Table1 = {
   
   data() {
     return { comp:'Table1', key:'Table1',
-      culs:{
-              key:"Table1", first:"First", last:"Last",    rank:"Rank"    },
+      culs:{  key:"Table1", first:"First", last:"Last",    rank:"Rank"    },
       rows:{
         r1: { key:"1",   first:"Mark",  last:"Felton",  rank:"Colonel" },
         r2: { key:"2",   first:"Brian", last:"Jackson", rank:"Captain" },
@@ -25,8 +24,7 @@ let Table1 = {
 
   methods: {},
 
-  mounted: function () {
-    console.log( 'Table1 mounted comp', this.comp ); }
+  mounted: function () { }
 };
 
 function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
@@ -212,7 +210,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-cce2216c_0", { source: ".table {\n  background-color: black;\n  justify-self: center;\n  align-self: center;\n  font-size: 3em;\n}\nth {\n  color: wheat;\n}\ntd {\n  color: wheat;\n}\n", map: {"version":3,"sources":["Table1.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,oBAAoB;EACpB,kBAAkB;EAClB,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,YAAY;AACd","file":"Table1.vue","sourcesContent":[".table {\n  background-color: black;\n  justify-self: center;\n  align-self: center;\n  font-size: 3em;\n}\nth {\n  color: wheat;\n}\ntd {\n  color: wheat;\n}\n"]}, media: undefined });
+    inject("data-v-f3786104_0", { source: ".table {\n  background-color: black;\n  justify-self: center;\n  align-self: center;\n  font-size: 3em;\n}\nth {\n  color: wheat;\n}\ntd {\n  color: wheat;\n}\n", map: {"version":3,"sources":["Table1.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,oBAAoB;EACpB,kBAAkB;EAClB,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,YAAY;AACd","file":"Table1.vue","sourcesContent":[".table {\n  background-color: black;\n  justify-self: center;\n  align-self: center;\n  font-size: 3em;\n}\nth {\n  color: wheat;\n}\ntd {\n  color: wheat;\n}\n"]}, media: undefined });
 
   };
   /* scoped */

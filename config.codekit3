@@ -1045,7 +1045,7 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/pub/app/augm/Home.js",
-		"oF": 1
+		"oF": 0
 		},
 	"/pub/app/augm/Main.coffee": {
 		"ft": 32,
@@ -1249,7 +1249,7 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/pub/app/muse/Home.js",
-		"oF": 1
+		"oF": 0
 		},
 	"/pub/app/muse/Main.coffee": {
 		"ft": 32,
@@ -2403,13 +2403,13 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/lib/ga/ganja.js": {
+	"/pub/lib/ga/ganja.esm.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/lib/ga/ganja-min.js",
+		"oAP": "/pub/lib/ga/ganja.esm-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2869,6 +2869,17 @@
 		"oAP": "/pub/vue/dash/init.css.map",
 		"oF": 0
 		},
+	"/pub/vue/data/Data.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/data/Data-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/vue/data/Pivot.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2880,6 +2891,39 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/vue/data/Pivot1.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/data/Pivot1-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/data/Pivot2.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/data/Pivot2-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/data/Pivots.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/data/Pivots-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/vue/data/Table.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2887,6 +2931,28 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/vue/data/Table-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/data/Table1.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/data/Table1-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/data/Table2.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/data/Table2-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -3631,9 +3697,9 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/pub/vue/comp/Cube.js",
-		"oF": 3
+		"oF": 2
 		},
 	"/vue/comp/Draw.roll.js": {
 		"bF": 0,
@@ -3651,7 +3717,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/comp/Draw.vue",
+		"oAP": "/pub/vue/comp/Draw.js",
 		"oF": 0
 		},
 	"/vue/comp/Home.vue": {
@@ -3659,7 +3725,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/comp/Home.vue",
+		"oAP": "/pub/vue/comp/Home.js",
 		"oF": 0
 		},
 	"/vue/comp/Ikws.vue": {
@@ -3667,7 +3733,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/comp/Ikws.vue",
+		"oAP": "/pub/vue/comp/Ikws.js",
 		"oF": 0
 		},
 	"/vue/comp/Info.vue": {
@@ -3675,7 +3741,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/comp/Info.vue",
+		"oAP": "/pub/vue/comp/Info.js",
 		"oF": 0
 		},
 	"/vue/comp/Know.vue": {
@@ -3683,7 +3749,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/comp/Know.vue",
+		"oAP": "/pub/vue/comp/Know.js",
 		"oF": 0
 		},
 	"/vue/comp/Wise.vue": {
@@ -3691,7 +3757,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/comp/Wise.vue",
+		"oAP": "/pub/vue/comp/Wise.js",
 		"oF": 0
 		},
 	"/vue/dash/Dash.vue": {
@@ -3699,7 +3765,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/dash/Dash.vue",
+		"oAP": "/pub/vue/dash/Dash.js",
 		"oF": 0
 		},
 	"/vue/dash/Find.vue": {
@@ -3707,7 +3773,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/dash/Find.vue",
+		"oAP": "/pub/vue/dash/Find.js",
 		"oF": 0
 		},
 	"/vue/dash/Foot.vue": {
@@ -3715,7 +3781,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/dash/Foot.vue",
+		"oAP": "/pub/vue/dash/Foot.js",
 		"oF": 0
 		},
 	"/vue/dash/init.css": {
@@ -3744,7 +3810,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/dash/Logo.vue",
+		"oAP": "/pub/vue/dash/Logo.js",
 		"oF": 0
 		},
 	"/vue/dash/Navb.vue": {
@@ -3752,7 +3818,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/dash/Navb.vue",
+		"oAP": "/pub/vue/dash/Navb.js",
 		"oF": 0
 		},
 	"/vue/dash/Pref.vue": {
@@ -3760,7 +3826,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/dash/Pref.vue",
+		"oAP": "/pub/vue/dash/Pref.js",
 		"oF": 0
 		},
 	"/vue/dash/Side.vue": {
@@ -3768,7 +3834,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/dash/Side.vue",
+		"oAP": "/pub/vue/dash/Side.js",
 		"oF": 0
 		},
 	"/vue/dash/Tocs.vue": {
@@ -3776,7 +3842,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/dash/Tocs.vue",
+		"oAP": "/pub/vue/dash/Tocs.js",
 		"oF": 0
 		},
 	"/vue/dash/Trak.vue": {
@@ -3784,7 +3850,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/dash/Trak.vue",
+		"oAP": "/pub/vue/dash/Trak.js",
 		"oF": 0
 		},
 	"/vue/dash/View.vue": {
@@ -3792,15 +3858,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/dash/View.vue",
-		"oF": 0
-		},
-	"/vue/Data/Base.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/pub/vue/Data/Base.js",
+		"oAP": "/pub/vue/dash/View.js",
 		"oF": 0
 		},
 	"/vue/Data/Data.roll.js": {
@@ -3809,33 +3867,65 @@
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/vue/Data/Data.roll-min.js",
+		"oAP": "/vue/data/Data.roll-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/vue/Data/Data.vue": {
+	"/vue/data/Data.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
-		"oAP": "/pub/vue/Data/Data.js",
+		"oA": 1,
+		"oAP": "/pub/vue/data/Data.js",
 		"oF": 0
 		},
-	"/vue/Data/Pivot.vue": {
+	"/vue/data/Pivot1.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
-		"oAP": "/pub/vue/Data/Pivot.js",
+		"oA": 1,
+		"oAP": "/pub/vue/data/Pivot1.js",
 		"oF": 0
 		},
-	"/vue/Data/Table.vue": {
+	"/vue/data/Pivot2.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
-		"oAP": "/pub/vue/Data/Table.js",
+		"oA": 1,
+		"oAP": "/pub/vue/data/Pivot2.js",
+		"oF": 0
+		},
+	"/vue/data/Pivots.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/data/Pivots.js",
+		"oF": 0
+		},
+	"/vue/data/Table1.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/data/Table1.js",
+		"oF": 0
+		},
+	"/vue/data/Table2.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/data/Table2.js",
+		"oF": 0
+		},
+	"/vue/data/Tables.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/data/Tables.js",
 		"oF": 0
 		},
 	"/vue/elem/Btns.vue": {
@@ -3843,7 +3933,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/elem/Btns.vue",
+		"oAP": "/pub/vue/elem/Btns.js",
 		"oF": 0
 		},
 	"/vue/elem/Dabs.vue": {
@@ -3851,7 +3941,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/elem/Dabs.vue",
+		"oAP": "/pub/vue/elem/Dabs.js",
 		"oF": 0
 		},
 	"/vue/elem/Elem.txt": {
@@ -3867,7 +3957,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/elem/Tabs.vue",
+		"oAP": "/pub/vue/elem/Tabs.js",
 		"oF": 0
 		},
 	"/vue/geom/Geom.roll.js": {
@@ -3886,7 +3976,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/geom/Geom.vue",
+		"oAP": "/pub/vue/geom/Geom.js",
 		"oF": 0
 		},
 	"/vue/geom/Geom2D.vue": {
@@ -3894,7 +3984,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/geom/Geom2D.vue",
+		"oAP": "/pub/vue/geom/Geom2D.js",
 		"oF": 0
 		},
 	"/vue/geom/Geom3D.vue": {
@@ -3902,7 +3992,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/geom/Geom3D.vue",
+		"oAP": "/pub/vue/geom/Geom3D.js",
 		"oF": 0
 		},
 	"/vue/geom/Geom4D.vue": {
@@ -3910,7 +4000,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/geom/Geom4D.vue",
+		"oAP": "/pub/vue/geom/Geom4D.js",
 		"oF": 0
 		},
 	"/vue/geom/GeomND.vue": {
@@ -3918,7 +4008,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/geom/GeomND.vue",
+		"oAP": "/pub/vue/geom/GeomND.js",
 		"oF": 0
 		},
 	"/vue/maps/google/Goog.vue": {
@@ -3926,7 +4016,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/maps/google/Goog.vue",
+		"oAP": "/pub/vue/maps/google/Goog.js",
 		"oF": 0
 		},
 	"/vue/maps/leaflet/Leaf.vue": {
@@ -3934,7 +4024,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/maps/leaflet/Leaf.vue",
+		"oAP": "/pub/vue/maps/leaflet/Leaf.js",
 		"oF": 0
 		},
 	"/vue/math/Math.roll.js": {
@@ -3954,7 +4044,7 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/pub/vue/math/Math.js",
-		"oF": 1
+		"oF": 0
 		},
 	"/vue/math/MathEQ.vue": {
 		"cB": 0,
@@ -3962,7 +4052,7 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/pub/vue/math/MathEQ.js",
-		"oF": 1
+		"oF": 0
 		},
 	"/vue/math/MathML.vue": {
 		"cB": 0,
@@ -3970,7 +4060,7 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/pub/vue/math/MathML.js",
-		"oF": 1
+		"oF": 0
 		},
 	"/vue/math/MathND.vue": {
 		"cB": 0,
@@ -3978,7 +4068,7 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/pub/vue/math/MathND.js",
-		"oF": 1
+		"oF": 0
 		},
 	"/vue/note/CheatNB.js": {
 		"bF": 0,
@@ -3996,7 +4086,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/note/Embed.vue",
+		"oAP": "/pub/vue/note/Embed.js",
 		"oF": 0
 		},
 	"/vue/note/EmbedNB.js": {
@@ -4015,7 +4105,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/note/Ganja.vue",
+		"oAP": "/pub/vue/note/Ganja.js",
 		"oF": 0
 		},
 	"/vue/note/GanjaND.js": {
@@ -4034,7 +4124,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/note/Maths.vue",
+		"oAP": "/pub/vue/note/Maths.js",
 		"oF": 0
 		},
 	"/vue/note/Note.roll.js": {
@@ -4053,7 +4143,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/note/Note.vue",
+		"oAP": "/pub/vue/note/Note.js",
 		"oF": 0
 		},
 	"/vue/note/Stand.vue": {
@@ -4061,7 +4151,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/note/Stand.vue",
+		"oAP": "/pub/vue/note/Stand.js",
 		"oF": 0
 		},
 	"/vue/note/StandNB.js": {
@@ -4080,7 +4170,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/page/Conn.vue",
+		"oAP": "/pub/vue/page/Conn.js",
 		"oF": 0
 		},
 	"/vue/page/Data.vue": {
@@ -4088,7 +4178,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/page/Data.vue",
+		"oAP": "/pub/vue/page/Data.js",
 		"oF": 0
 		},
 	"/vue/page/Enli.vue": {
@@ -4096,7 +4186,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/page/Enli.vue",
+		"oAP": "/pub/vue/page/Enli.js",
 		"oF": 0
 		},
 	"/vue/page/Page.roll.js": {
@@ -4115,7 +4205,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/page/Prac.vue",
+		"oAP": "/pub/vue/page/Prac.js",
 		"oF": 0
 		},
 	"/vue/wood/Wood.css": {
@@ -4173,8 +4263,8 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/vue/wood/Wood.js",
-		"oF": 1
+		"oAP": "/pub/vue/wood/Wood.js",
+		"oF": 0
 		},
 	"/zzz/ani/bird/Bird.css": {
 		"aP": 1,
@@ -4548,144 +4638,16 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/wave/Wave.vue",
+		"oAP": "/zzz/ani/wave/Wave.js",
 		"oF": 0
 		},
-	"/zzz/ganja/ganja.exa/basic.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/ganja/ganja.exa/basic.html",
-		"oF": 0
-		},
-	"/zzz/ganja/ganja.exa/desargues.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/ganja/ganja.exa/desargues.html",
-		"oF": 0
-		},
-	"/zzz/ganja/ganja.exa/galculator.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/ganja/ganja.exa/galculator.html",
-		"oF": 0
-		},
-	"/zzz/ganja/ganja.exa/ganja.js": {
+	"/zzz/ganja/ganja.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/ganja/ganja.exa/ganja-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/ganja/ganja.exa/Ganja.md": {
-		"cB": 0,
-		"cS": 0,
-		"eF": 1,
-		"eL": 1,
-		"ema": 1,
-		"eSQ": 1,
-		"ft": 4096,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/zzz/ganja/ganja.exa/Ganja.html",
-		"oF": 0,
-		"oFM": 0,
-		"oS": 0,
-		"pHT": 0,
-		"pME": 1,
-		"rFN": 0,
-		"uCM": 0
-		},
-	"/zzz/ganja/ganja.exa/torus.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/ganja/ganja.exa/torus.html",
-		"oF": 0
-		},
-	"/zzz/ganja/ganja.fix/.eslintrc.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/ganja/ganja.fix/.eslintrc-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/ganja/ganja.fix/ganja.esm.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/ganja/ganja.fix/ganja.esm-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/ganja/ganja.fix/ganja.esn.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/ganja/ganja.fix/ganja.esn-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/ganja/ganja.fix/ganja.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/ganja/ganja.fix/ganja-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/ganja/ganja.fix/ganja1.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/ganja/ganja.fix/ganja1-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/ganja/ganja.fix/ganja2.fix.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/ganja/ganja.fix/ganja2.fix-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/ganja/ganja.fix/svg.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/ganja/ganja.fix/svg-min.js",
+		"oAP": "/zzz/ganja/ganja-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -5183,7 +5145,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/ui/Btns.vue",
+		"oAP": "/zzz/ui/Btns.js",
 		"oF": 0
 		},
 	"/zzz/ui/color.less": {
@@ -5219,7 +5181,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/ui/Tabs.vue",
+		"oAP": "/zzz/ui/Tabs.js",
 		"oF": 0
 		},
 	"/zzz/versor/.gitignore": {
@@ -5641,7 +5603,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/vue/Btns.vue",
+		"oAP": "/zzz/pub/vue/Btns.js",
 		"oF": 0
 		},
 	"/zzz/vue/Home.js": {
@@ -5660,7 +5622,7 @@
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/vue/Home.vue",
+		"oAP": "/zzz/pub/vue/Home.js",
 		"oF": 0
 		},
 	"/zzz/vue/roll.js": {
@@ -5676,15 +5638,6 @@
 		}
 	},
 "hooks": [
-	{
-		"enabled": 0,
-		"name": "Hook #1",
-		"predicateDataBase64Encoded": "YnBsaXN0MDDUAQIDBAUGYmNYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK8QFgcIDxQcJicqMTU6Oz5CRktMT1VZXV9VJG51bGzTCQoLDA0OXxAXTlNDb21wb3VuZFByZWRpY2F0ZVR5cGVfEA9OU1N1YnByZWRpY2F0ZXNWJGNsYXNzEAKAAoAV0hALERNaTlMub2JqZWN0c6ESgAOAFNQLFRYXGBkaG18QEU5TUmlnaHRFeHByZXNzaW9uXxAQTlNMZWZ0RXhwcmVzc2lvbl8QE05TUHJlZGljYXRlT3BlcmF0b3KAE4AOgASAEdUdHh8gCyEiIyQlWU5TT3BlcmFuZF5OU1NlbGVjdG9yTmFtZV8QEE5TRXhwcmVzc2lvblR5cGVbTlNBcmd1bWVudHOABoAFEAOACIANXHZhbHVlRm9yS2V5OtIfCygpEAGAB9IrLC0uWiRjbGFzc25hbWVYJGNsYXNzZXNfEBBOU1NlbGZFeHByZXNzaW9uoy0vMFxOU0V4cHJlc3Npb25YTlNPYmplY3TSEAsyNKEzgAmADNMLHzY3ODlZTlNLZXlQYXRogAsQCoAKXWlucHV0RnVsbFBhdGjSKyw8PV8QHE5TS2V5UGF0aFNwZWNpZmllckV4cHJlc3Npb26jPC8w0issP0BeTlNNdXRhYmxlQXJyYXmjP0EwV05TQXJyYXnSKyxDRF8QE05TS2V5UGF0aEV4cHJlc3Npb26kQ0UvMF8QFE5TRnVuY3Rpb25FeHByZXNzaW9u00cfC0hJSl8QD05TQ29uc3RhbnRWYWx1ZYAPEACAEFQudnVl0issTU5fEBlOU0NvbnN0YW50VmFsdWVFeHByZXNzaW9uo00vMNQLUFFSU0kjVFpOU01vZGlmaWVyV05TRmxhZ3NeTlNPcGVyYXRvclR5cGWAEhBj0issVldfEBVOU0luUHJlZGljYXRlT3BlcmF0b3KjVlgwXxATTlNQcmVkaWNhdGVPcGVyYXRvctIrLFpbXxAVTlNDb21wYXJpc29uUHJlZGljYXRlo1pcMFtOU1ByZWRpY2F0ZdIrLEFeokEw0issYGFfEBNOU0NvbXBvdW5kUHJlZGljYXRlo2BcMF8QD05TS2V5ZWRBcmNoaXZlctFkZVRyb290gAEACAARABoAIwAtADIANwBQAFYAXQB3AIkAkACSAJQAlgCbAKYAqACqAKwAtQDJANwA8gD0APYA+AD6AQUBDwEeATEBPQE/AUEBQwFFAUcBVAFZAVsBXQFiAW0BdgGJAY0BmgGjAagBqgGsAa4BtQG/AcEBwwHFAdMB2AH3AfsCAAIPAhMCGwIgAjYCOwJSAlkCawJtAm8CcQJ2AnsClwKbAqQCrwK3AsYCyALKAs8C5wLrAwEDBgMeAyIDLgMzAzYDOwNRA1UDZwNqA28AAAAAAAACAQAAAAAAAABmAAAAAAAAAAAAAAAAAAADcQ==",
-		"runOrder": 0,
-		"scriptSourceString": "rollup --config vue/wood/Wood.roll.js",
-		"scriptType": 1,
-		"uuidString": "F15CFA70-C7AD-4451-89D3-08E30980CE31"
-		}
 	],
 "manualImportLinks": {
 	},
@@ -7735,23 +7688,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.html",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "",
-			"autoOutputPathReplace2": "",
-			"autoOutputPathStyle": 0,
-			"fileExtension": "html",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 0,
 			"autoOutputPathFilenamePattern": "*.js",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "vue",
 			"autoOutputPathReplace2": "pub/vue",
 			"autoOutputPathStyle": 3,
 			"fileExtension": "vue",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.html",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "",
+			"autoOutputPathReplace2": "",
+			"autoOutputPathStyle": 0,
+			"fileExtension": "html",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

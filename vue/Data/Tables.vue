@@ -1,11 +1,12 @@
 
 <template>
   <div>
-    <d-dabs comp="Data" :pages="pages" :init="key"></d-dabs>
-      <div class="page" :key="page.key">
-        <t_table1 :v-if="isPage('Table1')"></t_table1>
-        <t_table2 :v-if="isPage('Table2')"></t_table2>
-      </div>
+    <d-dabs comp="Data" :pages="pages"></d-dabs>
+    <div class="page">
+      <h1       v-if="isKey('None')">Tables</h1>
+      <t_table1 v-if="isKey('Table1')"></t_table1>
+      <t_table2 v-if="isKey('Table2')"></t_table2>
+    </div>
   </div>
 </template>
 
@@ -20,14 +21,14 @@
     components:{ 'd-dabs':Dabs, 't_table1':Table1, 't_table2':Table2 },
 
     data() {
-      return { comp:'Tables', key:'Table1',
-        pages:[
-          { title:'Table1', key:'Table1' },
-          { title:'Table2', key:'Table2' } ] } },
+      return { comp:'Tables', key:'None',
+        pages:{
+          Table1: { title:'Table1', key:'Table1' },
+          Table2: { title:'Table2', key:'Table2' } } } },
 
     methods: {
 
-      isPage: function(key) {
+      isKey: function(key) {
         return this.key === key; },
 
       onTabs: function(key) {
@@ -57,6 +58,7 @@
 
 <style lang="less">
   
-  .page { position:absolute; left:0; top:5%; right:0; bottom:0; background-color:black; display:grid; }
+  .page { position:absolute; left:0; top:5%; right:0; bottom:0; background-color:black; display:grid;
+    h1    { justify-self:center; align-self:center; text-align:center; color:wheat; font-size:3em; } }
 
 </style>

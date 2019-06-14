@@ -3,8 +3,9 @@
 <template>
   <div class="data" ref="Data">
     <h1 :v-if="isData()">Data</h1>
-    <router-view :name="Tables"></router-view>
-    <router-view :name="Pivots"></router-view>
+    <template v-for="dat in datas">
+      <router-view :name="dat.key"></router-view>
+    </template>
   </div>
 </template>
 
@@ -12,12 +13,13 @@
   
   let Data = {
 
-    data() { return { comp:'Data' } },
+    data() { return { comp:'Data', datas:[
+      { title:'Tables', key:'Tables' },
+      { title:'Pivots', key:'Pivots' } ] } },
 
     methods: {
       isData: function() {
-        return this.comp === 'Data'; }
-    },
+        return this.comp === 'Data'; } },
 
     mounted: function () {}
 

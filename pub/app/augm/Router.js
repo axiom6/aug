@@ -18,8 +18,8 @@ export default new Router( {
       { path:'3D',      name:'Geom3D',    components:{ Geom3D:   lazy( 'vue/geom/Geom3D') } },
       { path:'4D',      name:'Geom4D',    components:{ Geom4D:   lazy( 'vue/geom/Geom4D') } } ] },
     { path: '/data',    name:'Data',      components:{ Data:     Home.Data }, children: [
-      { path:'/tables', name:'Tables',    components:{ Tables:   lazy( 'vue/data/Tables') } },
-      { path:'/pivots', name:'Pivots',    components:{ Pivots:   lazy( 'vue/data/Pivots') } } ] },
+      { path:'tables',  name:'Tables',    components:{ Tables:   lazy( 'vue/data/Tables') } },
+      { path:'pivots',  name:'Pivots',    components:{ Pivots:   lazy( 'vue/data/Pivots') } } ] },
     { path: '/draw',    name:'Draw',      components:{ Draw:     lazy( 'vue/comp/Draw') } },
     { path: '/note',    name:'Note',      components:{ Note:     Home.Note }, children: [
       { path:'stand',   name:'NoteStand', components:{ NoteStand:lazy('vue/note/StandVue' ) } },

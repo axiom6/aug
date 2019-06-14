@@ -11,12 +11,11 @@
 //
 
 
-let Pivot2 = {
+let Table1 = {
   
   data() {
-    return { comp:'Pivot2', key:'Pivot2',
-      culs:{
-              key:"Pivot2", first:"First", last:"Last",    rank:"Rank"    },
+    return { comp:'Table1', key:'Table1',
+      culs:{  key:"Table1", first:"First", last:"Last",    rank:"Rank"    },
       rows:{
         r1: { key:"1",   first:"Mark",  last:"Felton",  rank:"Colonel" },
         r2: { key:"2",   first:"Brian", last:"Jackson", rank:"Captain" },
@@ -25,9 +24,7 @@ let Pivot2 = {
 
   methods: {},
 
-  mounted: function () {
-    console.log( 'Pivot2 mounted comp', this.comp );
-  }
+  mounted: function () { }
 };
 
 function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
@@ -166,7 +163,7 @@ function addStyle(id, css) {
 var browser = createInjector;
 
 /* script */
-const __vue_script__ = Pivot2;
+const __vue_script__ = Table1;
 
 /* template */
 var __vue_render__ = function() {
@@ -213,7 +210,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-3144ccce_0", { source: ".table {\n  background-color: black;\n  justify-self: center;\n  align-self: center;\n  font-size: 3em;\n}\nth {\n  color: wheat;\n}\ntd {\n  color: wheat;\n}\n", map: {"version":3,"sources":["Pivot2.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,oBAAoB;EACpB,kBAAkB;EAClB,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,YAAY;AACd","file":"Pivot2.vue","sourcesContent":[".table {\n  background-color: black;\n  justify-self: center;\n  align-self: center;\n  font-size: 3em;\n}\nth {\n  color: wheat;\n}\ntd {\n  color: wheat;\n}\n"]}, media: undefined });
+    inject("data-v-f3786104_0", { source: ".table {\n  background-color: black;\n  justify-self: center;\n  align-self: center;\n  font-size: 3em;\n}\nth {\n  color: wheat;\n}\ntd {\n  color: wheat;\n}\n", map: {"version":3,"sources":["Table1.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,oBAAoB;EACpB,kBAAkB;EAClB,cAAc;AAChB;AACA;EACE,YAAY;AACd;AACA;EACE,YAAY;AACd","file":"Table1.vue","sourcesContent":[".table {\n  background-color: black;\n  justify-self: center;\n  align-self: center;\n  font-size: 3em;\n}\nth {\n  color: wheat;\n}\ntd {\n  color: wheat;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -226,7 +223,7 @@ __vue_render__._withStripped = true;
   
 
   
-  var Pivot2$1 = normalizeComponent_1(
+  var Table1$1 = normalizeComponent_1(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
@@ -234,6 +231,43 @@ __vue_render__._withStripped = true;
     __vue_is_functional_template__,
     __vue_module_identifier__,
     browser,
+    undefined
+  );
+
+//
+
+let Pivot2 = {
+
+  extends:Table1$1
+};
+
+/* script */
+const __vue_script__$1 = Pivot2;
+
+/* template */
+
+  /* style */
+  const __vue_inject_styles__$1 = undefined;
+  /* scoped */
+  const __vue_scope_id__$1 = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$1 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$1 = undefined;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var Pivot2$1 = normalizeComponent_1(
+    {},
+    __vue_inject_styles__$1,
+    __vue_script__$1,
+    __vue_scope_id__$1,
+    __vue_is_functional_template__$1,
+    __vue_module_identifier__$1,
+    undefined,
     undefined
   );
 
