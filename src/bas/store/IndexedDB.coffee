@@ -1,101 +1,81 @@
 
-import Store from './Store'
 
-class IndexedDB extends Store
+class IndexedDB
 
-  constructor:( stream, uri ) ->    # @dbVersion=1, @tableNames=[]
-    super( stream, uri, 'IndexedDB' )
-    @indexedDB = window.indexedDB # or window.mozIndexedDB or window.webkitIndexedDB or window.msIndexedDB
+  constructor:( @store, @uri ) ->    # @dbVersion=1, @tableNames=[]
+    @indexedDB = window.indexedDB
     console.error( 'Store.IndexedDB.constructor indexedDB not found' ) if not @indexedDB
     @dbs       = null
 
-  add:( t, id, object ) ->
-    tableName = @tableName(t)
-    txo = @txnObjectStore( tableName, "readwrite" )
-    req = txo.add( obj, id )
-    req.onsuccess = () => @publish( tableName, id, 'add', object )
-    req.onerror   = () => @onerror( tableName, id, 'add', object, { error:req.error } )
+  change:( t, id, callback ) ->
+    @get(  t, id, callback )
     return
 
-  get:( t, id ) ->
-    tableName = @tableName(t)
-    txo = @txnObjectStore( tableName, "readonly" )
+  get:( t, id, callback ) ->
+    txo = @txnObjectStore( t, "readonly" )
     req = txo.get(id) # Check to be sre that indexDB understands id
-    req.onsuccess = () => @publish( tableName, id, 'get', req.result )
-    req.onerror   = () => @onerror( tableName, id, 'get', req.result, { error:req.error } )
+    req.onsuccess = () =>
+      callback( req.result ) if callback?
+      @store.results( t, id, 'get', req.result )
+    req.onerror   = () =>
+      @store.onerror( t, id, 'get', req.result, { error:req.error } )
+    return
+
+  add:( t, id, object ) ->
+    txo = @txnObjectStore( t, "readwrite" )
+    req = txo.add( obj, id )
+    req.onerror   = () => @store.onerror( t, id, 'add', object, { error:req.error } )
     return
 
   put:( t, id, object ) ->
-    tableName = @tableName(t)
-    txo = @txnObjectStore( tableName, "readwrite" )
+    txo = @txnObjectStore( t, "readwrite" )
     req = txo.put(object) # Check to be sre that indexDB understands id
-    req.onsuccess = () => @publish( tableName, id, 'put', object )
-    req.onerror   = () => @onerror( tableName, id, 'put', object, { error:req.error } )
+    req.onerror   = () => @store.onerror( tableName, id, 'put', object, { error:req.error } )
     return
 
   del:( t, id ) ->
-    tableName = @tableName(t)
-    txo = @txnObjectStore( tableName, "readwrite" )
+    txo = @txnObjectStore( t, "readwrite" )
     req = txo['delete'](id) # Check to be sre that indexDB understands id
-    req.onsuccess = () => @publish( tableName, id, 'del', req.result )
-    req.onerror   = () => @onerror( tableName, id, 'del', req.result, { error:req.error } )
+    req.onerror   = () => @store.onerror( t, id, 'del', req.result, { error:req.error } )
     return
 
   insert:( t, objects ) ->
-    tableName = @tableName(t)
     txo = @txnObjectStore( t, "readwrite" )
     for own key, object of objects
       object = @idProp( key, object, @key )
       txo.put(object)
-    @publish( tableName, 'none', 'insert', objects )
     return
 
-  select:( t, where=Store.where ) ->
-    tableName = @tableName(t)
-    @traverse( 'select', tableName, where )
+  select:( t, callback=null, where=(obj)->true) ->
+    @traverse( 'select', t, where, callback )
     return
 
   update:( t, objects ) ->
-    tableName = @tableName(t)
     txo = @txnObjectStore( t, "readwrite" )
     for own key, object of objects
       object = @idProp( key, object, @key )
       txo.put(object)
-    @publish( tableName, 'none', 'update', objects )
     return
 
   remove:( t, where=Store.where ) ->
-    tableName = @tableName(t)
-    @traverse( 'remove', tableName, where )
+    @traverse( 'remove', t, where )
     return
 
   open:( t, schema ) ->
-    tableName = @tableName(t)
-    # No real create table in IndexedDB so publish success
-    @publish( tableName, 'none', 'open', {}, { schema:schema } )
+    if schema is false then {}
     return
 
   show:( t ) ->
     where  = () -> true
-    tableName = @tableName(t)
-    @traverse( 'show', tableName, objects, where, false )
+    @traverse( 'show', t, objects, where, callback )
     return
 
   make:( t, alters ) ->
-    tableName = @tableName(t)
-    @publish( tableName, 'none', 'make', {}, { alters:alters } )
+    if t is false and alters is false then {}
     return
 
   drop:( t ) ->
-    tableName = @tableName(t)
     @dbs.deleteObjectStore(t)
-    @publish( tableName, 'none', 'drop' )
-    return
-
-  # Subscribe to  a table or object with id
-  onChange:(  t, id='none'   ) ->
-    tableName = @tableName(t)
-    @onerror( tableName, id, 'onChange', {}, { msg:"onChange() not implemeted by Store.IndexedDb" } )
     return
 
   # IndexedDB Specifics
@@ -115,7 +95,7 @@ class IndexedDB extends Store
       console.error( 'Store.IndexedDb.txnObjectStore() missing objectStore for', t )
     txo
 
-  traverse:( op, t, where ) ->
+  traverse:( op, t, where, callback=null ) ->
     mode = if op is 'select' then 'readonly' else 'readwrite'
     txo  = @txnObjectStore( t, mode )
     req  = txo.openCursor()
@@ -126,9 +106,10 @@ class IndexedDB extends Store
         objects[cursor.key] = cursor.value if op is 'select' and where(cursor.value)
         cursor.delete()                    if op is 'remove' and where(cursor.value)
         cursor.continue()
-      @publish( t, 'none', op, objects,   { where:'all' } )
+      callback( objects ) if callback?
+      @store.results( t, 'none', op, objects,   { where:'all' } )
     req.onerror   = () =>
-      @onerror( t, 'none', op, {}, { where:'all', error:req.error } )
+      @store.onerror( t, 'none', op, {}, { where:'all', error:req.error } )
     return
 
   createObjectStores:() ->

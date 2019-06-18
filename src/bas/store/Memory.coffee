@@ -1,107 +1,99 @@
 
-import Util      from '../../bas/util/Util'
-import Store     from './Store'
 import IndexedDB from './IndexedDB'
 
-class Memory extends Store
+class Memory
 
-  constructor:( stream, uri ) ->
-    super( stream, uri, 'Memory' )
-    Store.databases[@dbName] = @tables
-    Util.noop( @importLocalStorage, @exportLocalStorage, @importIndexedDB, @exportIndexedDB, @logRows )
+  constructor:( @store, dbName, @tables={} ) ->
 
-  add:( t, id, object  )    ->
-    @table(t)[id] = object
-    @publish( t, id, 'add', object )
+  table:(t) ->
+    @tables[t] = if @tables[t]? then @tables[t] else {}
+    @tables[t]
+
+  # This could be tied to put and add
+  change:( t, id, callback=null ) ->
+    object = @table(t)[id]
+    if object?
+      callback( object ) if callback?
+      @store.results( t, id, 'change', object )
+    else
+      @store.onerror( t, id, 'change', object,  { msg:"Id #{id} not found"} )
     return
 
-  get:( t, id ) ->
-    object  = @table(t)[id]
+  add:( t, id, object )    ->
+    @table(t)[id] = object
+    return
+
+  get:( t, id, callback=null ) ->
+    object = @table(t)[id]
     if object?
-      @publish( t, id, 'get', object )
+      callback( object ) if callback?
+      @store.results( t, id, 'get', object )
     else
-      @onerror( t, id, 'get', object,  { msg:"Id #{id} not found"} )
+      @store.onerror( t, id, 'get', object,  { msg:"Id #{id} not found"} )
     return
 
   put:( t, id,  object ) ->
     @table(t)[id] = object
-    @publish( t, id, 'put', object )
     return
 
   del:( t, id ) ->
     object  = @table(t)[id]
     if object?
       delete @table(t)[id]
-      @publish( t, id, 'del', object )
     else
-      @onerror( t, id, 'del', object,  { msg:"Id #{id} not found"} )
+      @store.onerror( t, id, 'del', object,  { msg:"Id #{id} not found"} )
     return
 
   insert:( t, objects ) ->
     table   = @table(t)
     for own key, object of objects
       table[key] = object
-    @publish( t, 'none', 'insert', objects )
     return
 
-  select:( t, where ) ->
+  select:( t, callback,  where=(object)->true ) ->
     objects =  {}
     table   = @table(t)
     for own key, object of table when where(object)
       objects[key] = object
-    @publish( t, 'none', 'select', objects, { where:where.toString() } )
+    callback( objects ) if callback?
+    @store.results( t, id, 'show', objects )
     return
 
   update:( t, objects ) ->
     table = @table(t)
     for own key, object of objects
       table[key] = object
-    @publish( t, id, 'update', objects )
     return
 
-  remove:( t, where=@W ) ->
+  remove:( t, where ) ->
     table = @table(t)
     objects = {}
     for own key, object of table when where(object)
       objects[key] = object
       delete object[key]
-    @publish( t, 'none', 'remove', objects, { where:where.toString() } )
+    return
+
+  show:( t, format, callback ) ->
+    if format is false then {}
+    callback( @table(t) ) if callback?
+    @store.results( t, id, 'show', @table(t) )
     return
 
   open:( t, schema ) ->
-    @createTable(t)
-    @publish( t, 'none', 'open', {}, { schema:schema } )
-    return
-
-  show:( t ) ->
-    if Util.isStr(t)
-      keys = []
-      for own key, val of @tables[t]
-        keys.push(key)
-      @publish( t, 'none', 'show', keys,  { showing:'keys' } )
-    else
-      tables = []
-      for own key, val of @tables
-        tables.push(key)
-      @publish( t, 'none', 'show', tables, { showing:'tables' } )
+    if schema is false then {}
+    @table(t)
     return
 
   make:( t, alters ) ->
-    @publish( t, 'none', 'make', {}, { alters:alters, msg:'alter is a noop' } )
+    if t is false and alters is false then {}
     return
 
   drop:( t ) ->
     hasTable = @tables[t]?
     if hasTable
       delete  @tables[t]
-      @publish( t, 'none', 'drop', {} )
     else
       @onerror( t, 'none', 'drop', {}, { msg:"Table #{t} not found"} )
-    return
-
-  # Subscribe to  a table or object with id
-  onChange:(  t, id='none'   ) ->
-    @onerror( t, id, 'onChange', {}, { msg:"onChange() not implemeted by Store.Memory" } )
     return
 
   dbTableName:( tableName ) ->
@@ -114,8 +106,8 @@ class Memory extends Store
     names
 
   importLocalStorage:( tableNames ) ->
-    for tableName in tableNames
-      @tables[tableName] = JSON.parse(localStorage.getItem(@dbTableName(tableName)))
+    for t in tableNames
+      @tables[t] = JSON.parse(localStorage.getItem(@dbTableName(t)))
     return
 
   exportLocalStorage:() ->
@@ -126,29 +118,23 @@ class Memory extends Store
       # console.log( 'Store.Memory.exportLocalStorage()', dbTableName )
     return
 
-  importIndexedDB:( op ) ->
-    idb = new IndexedDB( @stream, @dbName )
+  importIndexedDB:() ->
+    idb = new IndexedDB( @dbName )
     for tableName in idb.dbs.objectStoreNames
-      onNext = (result) =>
-         @tables[tableName] = result if op is 'select'
-      @subscribe( tableName, onNext )
-      idb.traverse( 'select', tableName, {}, @W, false )
+      where = (obj)->false
+      idb.traverse( 'select', tableName, {}, where, false )
     return
 
   exportIndexedDB:() ->
     dbVersion = 1
-    idb = new IndexedDB( @stream, @dbName, dbVersion, @tables )
+    idb = new IndexedDB( @dbName, dbVersion, @tables )
     onIdxOpen = (dbName) =>
       idb.deleteDatabase( dbName )
       for own name, table of @tables
-        onNext = (result) =>
-          Util.noop( dbName, result )
-        @subscribe( name, 'none', 'insert', onNext )
         idb.insert( name, table  )
-    @subscribe( 'IndexedDB', dbVersion.toString(), 'open', (dbName) => onIdxOpen(dbName) )
+    if onIdxOpen is false then {}
     idb.openDatabase()
     return
-
 
   logRows:( name, table ) ->
     console.log( name )

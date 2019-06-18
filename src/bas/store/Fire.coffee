@@ -10,8 +10,7 @@ class Fire extends Store
 
   # Fire.OnFire  = { get:"value", add:"child_added", put:"child_changed", del:"child_removed" }
 
-  constructor:( stream, uri, config ) ->
-    super( stream, uri, 'Fire' ) # @dbName set by Store in super constructor
+  constructor:( @store, @uri, config ) ->
     @fb = @init( config )
     @keyProp = 'id'
     @auth() # Anonomous logins have to be enabled
@@ -22,73 +21,66 @@ class Fire extends Store
     #console.log( 'Fires.init', config )
     firebase
 
-  add:( t, id, object  ) ->
-    table = @tableName(t)
-    object[@keyProp] = id
-    onComplete = (error) =>
-      if not error?
-        @publish( table, 'add', id, object )
+  # Have too clarify id with snapshot.key
+  change:( table, id='none', callback=null, onEvt='put' ) ->
+    onComplete = (snapshot) =>
+      if snapshot?
+        key = snapshot.key
+        val = snapshot.val() # @toObjects( snapshot.val() )
+        callback( val ) if callback?
+        @store.results( table, 'change', id, val, { key:key, onEvt:onEvt } )
       else
-        @onError( table, 'add', id, object, { error:error } )
-    @fd.ref(table+'/'+id).set( object, onComplete )
-    return
+        @store.onerror( table, onEvt, id, {}, { error:'error' } )
+    path  = if id is 'none' then table else table + '/' + id
+    @fd.ref(path).on( Fire.OnFire[onEvt], onComplete )
+    return    
 
-  get:( t, id ) ->
-    table = @tableName(t)
+  get:( table, id, callback=null ) ->
     onComplete = (snapshot) =>
       if snapshot? and snapshot.val()?
-        @publish( table, 'get', id, snapshot.val() )
+        callback( snapshot.val() ) if callback?
+        @store.results( table, 'get', id, snapshot.val() )
       else
-        @onError( table, 'get', id, { msg:'Fire get error' } )
+        @store.onerror( table, 'get', id, { msg:'Fire get error' } )
     @fd.ref(table+'/'+id).once('value', onComplete )
+    return    
+
+  add:( table, id, object  ) ->
+    object[@keyProp] = id
+    onComplete = (error) =>
+      @store.onerror( table, 'add', id, object, { error:error } ) if error?
+    @fd.ref(table+'/'+id).set( object, onComplete )
     return
 
   # Same as add
-  put:( t, id,  object ) ->
-    table = @tableName(t)
+  put:( table, id,  object ) ->
     onComplete = (error) =>
-      if not error?
-        @publish( table, 'put', id, object )
-      else
-        @onError( table, 'put', id, object, { error:error } )
+      @store.onerror( table, 'put', id, object, { error:error } ) if error?
     @fd.ref(table+'/'+id).set( object, onComplete )
     return
 
-  del:( t, id ) ->
-    table = @tableName(t)
+  del:( table, id ) ->
     onComplete = (error) =>
-      if not error?
-        @publish( table, 'del', id, {} )
-      else
-        @onError( table, 'del', id, {}, { error:error } )
+      @store.onerror( table, 'del', id, {}, { error:error } ) if error?
     @fd.ref(table+'/'+id).remove( onComplete )
     return
 
-  insert:( t, objects ) ->
-    table  = @tableName(t)
-    onComplete = (error) =>
-      if not error?
-        @publish( table, 'insert', 'none', objects )
-      else
-        @onError( table, 'insert', 'none', { error:error } )
-    @fd.ref(table).set( objects, onComplete )
-    return
-
-  select:( t, where=@W ) ->
+  select:( table, callback=null, where=(obj)->true ) ->
     if where is false then {}
-    table = @tableName(t)
     onComplete = (snapshot) =>
       if snapshot? and snapshot.val()?
-        #val = @toObjects( snapshot.val() )
-        @publish( table, 'select', 'none', snapshot.val() )
-      else
-        @publish( table, 'select', 'none', {} ) # Publish empty results
+        callback( snapshot.val() ) if callback?
+        @store.results( table, 'select', id, snapshot.val() )
     @fd.ref(table).once('value', onComplete )
     return
 
-  range:( t, beg, end ) ->
-    table = @tableName(t)
-    #console.log( 'Fire.range  beg', t, beg, end )
+  insert:( table, objects ) ->
+    onComplete = (error) =>
+      @store.onerror( table, 'insert', 'none', { error:error } ) if error?
+    @fd.ref(table).set( objects, onComplete )
+    return
+
+  range:( table, beg, end ) ->
     onComplete = (snapshot) =>
       if snapshot? and snapshot.val()?
         val = @toObjects( snapshot.val() )
@@ -98,68 +90,41 @@ class Fire extends Store
     @fd.ref(table).orderByKey().startAt(beg).endAt(end).once('value', onComplete )
     return
 
-  update:( t, objects ) ->
-    table  = @tableName(t)
+  update:( table, objects ) ->
     onComplete = (error) =>
-      if not error?
-        @publish( table, 'update', 'none', objects )
-      else
-        @onError( table, 'update', 'none', { error:error } )
+      @store.onerror( table, 'update', 'none', { error:error } ) if error?
     @fd.ref(table).update( objects, onComplete )
     return
 
-  remove:( t, keys ) ->
-    table = @tableName(t)
-    ref       = @fd.ref(table)
+  remove:( table, keys ) ->
+    ref = @fd.ref(table)
     ref.child(key).remove() for key in keys
-    @publish( table, 'remove', 'none', keys )
     return
 
-  make:( t ) ->
-    table = @tableName(t)
-    onComplete = (error) =>
-      if not error?
-        @publish( table, 'make', 'none', {}, {} )
-      else
-        @onError(  table, 'make', 'none', {}, { error:error } )
-    @fd.ref().set( table, onComplete )
-    return
-
-  show:( t, where=@W ) ->
-    table  = if t? then @tableName(t) else @dbName
+  show:( table, callback, where=@W ) ->
     onComplete = (snapshot) =>
       if snapshot? and snapshot.val()?
         keys = Util.toKeys( snapshot.val(), where, @keyProp )
-        @publish( table, 'show', 'none', keys, { where:where.toString() } )
+        @store.results( table, 'show', 'none', keys, { where:where.toString() } )
       else
-        @onError( table, 'show', 'none', {},   { where:where.toString() } )
+        @store.onerror( table, 'show', 'none', {},   { where:where.toString() } )
     if t?
       @fd.ref(table).once('value', onComplete )
     else
       @fd.ref(     ).once('value', onComplete )
     return
 
+  make:( t ) ->
+    table = @tableName(t)
+    onComplete = (error) =>
+      @store.onerror(  table, 'make', 'none', {}, { error:error } ) if error?
+    @fd.ref().set( table, onComplete )
+    return
+
   # ref.remove( onComplete ) is Dangerous and has removed all tables in Firebase
   drop:( t ) ->
     table = @tableName(t)
-    @onError( table, 'drop', 'none', {}, { error:'Fire.drop(t) not implemented'  } )
-    return
-
-  # Have too clarify id with snapshot.key
-  on:( t, onEvt, id='none', onFunc=null ) ->
-    table  = @tableName(t)
-    onComplete = (snapshot) =>
-      if snapshot?
-        key = snapshot.key
-        val = snapshot.val() # @toObjects( snapshot.val() )
-        if onFunc?
-           onFunc( key, val )
-        else
-           @publish( table, onEvt, key, val )
-      else
-        @onError( table, onEvt, id, {}, { error:'error' } )
-    path  = if id is 'none' then table else table + '/' + id
-    @fd.ref(path).on( Fire.OnFire[onEvt], onComplete )
+    @store.onerror( table, 'drop', 'none', {}, { error:'Fire.drop(t) not implemented'  } )
     return
 
   # keyProp only needed if rows is array
@@ -180,7 +145,7 @@ class Fire extends Store
   # Sign Anonymously
   auth:( ) ->
    onerror = (error) =>
-     @onError( 'none', 'none', 'anon', {}, { error:error } )
+     @store.onerror( 'none', 'none', 'anon', {}, { error:error } )
    @fb.auth().signInAnonymously().catch( onerror )
    return
 
