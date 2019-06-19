@@ -26,9 +26,7 @@ class Stuff
 
 
 
-  onerror:( table, id, op, result={}, error={} ) ->
-    console.log( 'Stream.onerror', { db:@dbName, table:table, id:id, op:op, result:result, error:error } )
-    return
+
 
   # params=Store provides empty defaults
   toMemory:( op, table, id, data, params ) ->

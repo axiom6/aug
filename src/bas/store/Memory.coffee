@@ -3,119 +3,113 @@ import IndexedDB from './IndexedDB'
 
 class Memory
 
-  constructor:( @store, dbName, @tables={} ) ->
+  constructor:( @store ) ->
+    @dbName    = @store.dbName
+    @tables    = @store.tables
+    @pubChange = true
 
-  table:(t) ->
-    @tables[t] = if @tables[t]? then @tables[t] else {}
-    @tables[t]
+  table:(tn) ->
+    @tables[tn] = if @tables[tn]? then @tables[tn] else {}
+    @tables[tn]
 
   # This could be tied to put and add
-  change:( t, id, callback=null ) ->
-    object = @table(t)[id]
+  change:( tn, id, callback, op='change' ) ->
+    object = @table(tn)[id]
     if object?
       callback( object ) if callback?
-      @store.results( t, id, 'change', object )
+      @store.results( tn, id, op, object, { op:op } )
     else
-      @store.onerror( t, id, 'change', object,  { msg:"Id #{id} not found"} )
+      @store.onerror( tn, id, op, object )
     return
 
-  add:( t, id, object )    ->
-    @table(t)[id] = object
+  add:( tn, id, object )    ->
+    @table(tn)[id] = object
+    @change( tn, id,null,'add' ) if @pubChange
     return
 
-  get:( t, id, callback=null ) ->
-    object = @table(t)[id]
+  get:( tn, id, callback ) ->
+    object = @table(tn)[id]
     if object?
       callback( object ) if callback?
-      @store.results( t, id, 'get', object )
+      @store.results( tn, id, 'get', object )
     else
-      @store.onerror( t, id, 'get', object,  { msg:"Id #{id} not found"} )
+      @store.onerror( tn, id, 'get', object )
     return
 
-  put:( t, id,  object ) ->
-    @table(t)[id] = object
+  put:( tn, id,  object ) ->
+    @table(tn)[id] = object
+    @change( tn, id,null,'put' ) if @pubChange
     return
 
-  del:( t, id ) ->
-    object  = @table(t)[id]
+  del:( tn, id ) ->
+    object  = @table(tn)[id]
     if object?
-      delete @table(t)[id]
+      @change( tn, id,null,'del' ) if @pubChange
+      delete @table(tn)[id]
     else
-      @store.onerror( t, id, 'del', object,  { msg:"Id #{id} not found"} )
+      @store.onerror( tn, id, 'del', object )
     return
 
-  insert:( t, objects ) ->
-    table   = @table(t)
-    for own key, object of objects
-      table[key] = object
+  insert:( tn, objects ) ->
+    table = @table(tn)
+    for own key, obj of objects
+      table[key] = obj
     return
 
-  select:( t, callback,  where=(object)->true ) ->
-    objects =  {}
-    table   = @table(t)
-    for own key, object of table when where(object)
-      objects[key] = object
-    callback( objects ) if callback?
-    @store.results( t, id, 'show', objects )
-    return
-
-  update:( t, objects ) ->
-    table = @table(t)
-    for own key, object of objects
-      table[key] = object
-    return
-
-  remove:( t, where ) ->
-    table = @table(t)
+  select:( tn, callback, where ) ->
     objects = {}
-    for own key, object of table when where(object)
-      objects[key] = object
-      delete object[key]
+    table   = @table(tn)
+    for own key, obj of table when where(obj)
+      objects[key] = obj
+    callback( objects ) if callback?
+    @store.results( tn, id, 'show', objects )
     return
 
-  show:( t, format, callback ) ->
+  update:( tn, objects ) ->
+    table = @table(tn)
+    for own key,   obj of objects
+      table[key] = obj
+    return
+
+  remove:( tn, where ) ->
+    table = @table(tn)
+    for own key, obj of table when where(obj)
+      delete table[key]
+    return
+
+  show:( tn, format, callback ) ->
     if format is false then {}
-    callback( @table(t) ) if callback?
-    @store.results( t, id, 'show', @table(t) )
+    callback( @table(tn) ) if callback?
+    @store.results( tn, id, 'show', @table(tn) )
     return
 
-  open:( t, schema ) ->
+  open:( tn, schema ) ->
     if schema is false then {}
-    @table(t)
+    @table(tn)
     return
 
-  make:( t, alters ) ->
-    if t is false and alters is false then {}
+  make:( tn, alters ) ->
+    if tn is false and alters is false then {}
     return
 
-  drop:( t ) ->
-    hasTable = @tables[t]?
-    if hasTable
-      delete  @tables[t]
+  drop:( tn, resets ) ->
+    if resets is false then {}
+    if       @tables[tn]?
+      delete @tables[tn]
     else
-      @onerror( t, 'none', 'drop', {}, { msg:"Table #{t} not found"} )
+      @store.onerror( tn, id, 'drop' )
     return
 
-  dbTableName:( tableName ) ->
-    @dbName + '/' + tableName
-
-  tableNames:() ->
-    names = []
-    for own key, table of @tables
-      names.push(key)
-    names
-
-  importLocalStorage:( tableNames ) ->
-    for t in tableNames
-      @tables[t] = JSON.parse(localStorage.getItem(@dbTableName(t)))
+  importLocal:( local ) ->
+    for own tn, table of local.tableIds
+      for id in table
+        @add( tn, id, @local.obj(tn,id) )
     return
 
-  exportLocalStorage:() ->
-    for own tableName, table of @tables
-      dbTableName = @dbTableName(tableName)
-      localStorage.removeItem( dbTableName  )
-      localStorage.setItem(    dbTableName, JSON.stringify(table) )
-      # console.log( 'Store.Memory.exportLocalStorage()', dbTableName )
+  exportDB:( db ) ->
+    for own tn, table of @tables
+      for own id, obj of table
+        db.add( tn, id, obj )
     return
 
   importIndexedDB:() ->
@@ -123,17 +117,6 @@ class Memory
     for tableName in idb.dbs.objectStoreNames
       where = (obj)->false
       idb.traverse( 'select', tableName, {}, where, false )
-    return
-
-  exportIndexedDB:() ->
-    dbVersion = 1
-    idb = new IndexedDB( @dbName, dbVersion, @tables )
-    onIdxOpen = (dbName) =>
-      idb.deleteDatabase( dbName )
-      for own name, table of @tables
-        idb.insert( name, table  )
-    if onIdxOpen is false then {}
-    idb.openDatabase()
     return
 
   logRows:( name, table ) ->

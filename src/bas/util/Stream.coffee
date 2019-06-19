@@ -13,7 +13,6 @@ class Stream
     for subjectName in @subjectNames
       @addSubject( subjectName )
 
-
   subscribe:( subjectName, subscriberName, onCallback ) ->
     subject  = @getSubject( subjectName, false )
     subject['subscribers'][subscriberName] = onCallback
@@ -50,7 +49,8 @@ class Stream
         if @isComplete( subject, completeName )
           onComplete( completeObject )
           if @isInfo( subjectName, 'complete' )
-            console.info( 'Stream.complete()', { subject:subjectName, object:object, complete:completeName, completeObject:completeObject } )
+            opts = { subject:subjectName, object:object, complete:completeName, completeObject:completeObject }
+            console.info( 'Stream.complete()', opts )
       onSubscribe( object )
     return
 

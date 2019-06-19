@@ -80,17 +80,19 @@ Stream = class Stream {
       if (!hasProp.call(ref1, subscriberName)) continue;
       onCallback = ref1[subscriberName];
       onSubscribe = (object) => {
+        var opts;
         onCallback(object);
         subject[completeName][subscriberName] = true;
         if (this.isComplete(subject, completeName)) {
           onComplete(completeObject);
           if (this.isInfo(subjectName, 'complete')) {
-            return console.info('Stream.complete()', {
+            opts = {
               subject: subjectName,
               object: object,
               complete: completeName,
               completeObject: completeObject
-            });
+            };
+            return console.info('Stream.complete()', opts);
           }
         }
       };

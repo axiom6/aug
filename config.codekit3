@@ -1446,17 +1446,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/store/IndexedDB.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/bas/store/IndexedDB-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/pub/bas/store/Memory.js": {
 		"bF": 0,
 		"ft": 64,
@@ -1464,17 +1453,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/bas/store/Memory-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/bas/store/PouchDB.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/bas/store/PouchDB-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -3240,12 +3218,12 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/store/IndexedDB.coffee": {
+	"/src/bas/store/Index.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/store/IndexedDB.js",
+		"oAP": "/pub/bas/store/Index.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
@@ -3273,6 +3251,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/src/bas/store/Pipe.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/bas/store/Pipe.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
 	"/src/bas/store/Rest.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -3290,6 +3279,39 @@
 		"mi": 0,
 		"oA": 0,
 		"oAP": "/pub/bas/store/Store.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/bas/store/Stuff.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/bas/store/Stuff.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/bas/test/Run.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/bas/test/Run.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/bas/test/TestStore.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/bas/test/TestStore.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
@@ -7699,23 +7721,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.js",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "vue",
-			"autoOutputPathReplace2": "pub/vue",
-			"autoOutputPathStyle": 3,
-			"fileExtension": "vue",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.html",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "",
 			"autoOutputPathReplace2": "",
 			"autoOutputPathStyle": 0,
 			"fileExtension": "html",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.js",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "vue",
+			"autoOutputPathReplace2": "pub/vue",
+			"autoOutputPathStyle": 3,
+			"fileExtension": "vue",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

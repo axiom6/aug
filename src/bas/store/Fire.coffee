@@ -1,16 +1,17 @@
 
 import Util     from '../../bas/util/Util.js'
-import Store    from './Store.js'
 
 import firebase from '../../../pub/lib/store/firebase.app.esm.js'      # Firebase core (required)
 import               '../../../pub/lib/store/firebase.database.esm.js' # Realtime Database
 import               '../../../pub/lib/store/firebase.auth.esm.js'     # Authentication
 
-class Fire extends Store
+class Fire
 
   # Fire.OnFire  = { get:"value", add:"child_added", put:"child_changed", del:"child_removed" }
 
-  constructor:( @store, @uri, config ) ->
+  constructor:( @store, config ) ->
+    @dbName = @store.dbName
+    @tables = @store.tables
     @fb = @init( config )
     @keyProp = 'id'
     @auth() # Anonomous logins have to be enabled
@@ -35,7 +36,7 @@ class Fire extends Store
     @fd.ref(path).on( Fire.OnFire[onEvt], onComplete )
     return    
 
-  get:( table, id, callback=null ) ->
+  get:( table, id, callback ) ->
     onComplete = (snapshot) =>
       if snapshot? and snapshot.val()?
         callback( snapshot.val() ) if callback?
@@ -65,7 +66,7 @@ class Fire extends Store
     @fd.ref(table+'/'+id).remove( onComplete )
     return
 
-  select:( table, callback=null, where=(obj)->true ) ->
+  select:( table, callback, where ) ->
     if where is false then {}
     onComplete = (snapshot) =>
       if snapshot? and snapshot.val()?
@@ -101,7 +102,7 @@ class Fire extends Store
     ref.child(key).remove() for key in keys
     return
 
-  show:( table, callback, where=@W ) ->
+  show:( table, callback, where ) ->
     onComplete = (snapshot) =>
       if snapshot? and snapshot.val()?
         keys = Util.toKeys( snapshot.val(), where, @keyProp )
@@ -114,17 +115,21 @@ class Fire extends Store
       @fd.ref(     ).once('value', onComplete )
     return
 
-  make:( t ) ->
-    table = @tableName(t)
+  # Need to implement
+  open:( table, schema ) ->
+    if   table is false and schema is false then {}
+    return
+
+  make:( table, alters ) ->
+    if alters is false then {}
     onComplete = (error) =>
       @store.onerror(  table, 'make', 'none', {}, { error:error } ) if error?
     @fd.ref().set( table, onComplete )
     return
 
   # ref.remove( onComplete ) is Dangerous and has removed all tables in Firebase
-  drop:( t ) ->
-    table = @tableName(t)
-    @store.onerror( table, 'drop', 'none', {}, { error:'Fire.drop(t) not implemented'  } )
+  drop:( table, resets ) ->
+    if table is false and resets is false then {}
     return
 
   # keyProp only needed if rows is array

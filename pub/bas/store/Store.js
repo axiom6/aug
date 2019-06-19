@@ -1,153 +1,27 @@
-var Store,
-  hasProp = {}.hasOwnProperty;
-
-import Util from '../util/Util.js';
-
-import Memory from '../store/Memory.js';
-
-import Fire from '../store/Fire';
-
-import IndexedDB from '../store/IndexedDB';
-
-import PouchDB from '../store/PouchDB';
-
-import Rest from '../store/Rest';
-
-if (Fire === false && IndexedDB === false && PouchDB === false && Rest === false) {
-  ({});
-}
+var Store;
 
 Store = (function() {
   class Store {
-    static where() {
-      return true; // Default where clause filter that returns true to access all records
+    constructor(dbName, uri) {
+      this.dbName = dbName;
+      this.uri = uri;
+      this.rest = null;
+      this.fire = null;
+      this.index = null;
+      this.local = null;
+      this.memory = null;
+      this.pipe = null;
     }
 
-    
-    // @uri = REST URI where the file part is the database
-    // @key = The key id property = default is ['id']
-    constructor(stream, uri1, module) {
-      this.stream = stream;
-      this.uri = uri1;
-      this.module = module;
-      this.key = 'id';
-      this.dbName = this.nameDb(this.uri);
-      this.tables = {};
-      this.hasMemory = false;
-      this.W = Store.where;
-      this.S = Store.schema;
-      this.F = Store.format;
-      this.A = Store.alters;
-      this.R = Store.resets;
-      Util.noop(this.getMemoryTables, this.toStoreObject, this.toSubjectFromParams, this.fromStoreObject, this.uponTablesComplete, this.toObjectsJson, this.onError2);
-    }
-
-    // REST Api  CRUD + Subscribe for objectect records
-    add(table, id, object) {
-      return Util.noop(table, id, object); // Post    Create   an object into table with id
-    }
-
-    get(table, id) {
-      return Util.noop(table, id); // Get     Retrieve an object from table with id
-    }
-
-    put(table, id, object) {
-      return Util.noop(table, id, object); // Put     Update   an object into table with id
-    }
-
-    del(table, id) {
-      return Util.noop(table, id); // Delete  Delete   an object from table with id
-    }
-
-    
-    // SQL Table DML (Data Manipulation Language) with multiple objects (rows)
-    insert(table, objects) {
-      return Util.noop(table, objects); // Insert objects into table with unique id
-    }
-
-    select(table, where = this.W) {
-      return Util.noop(table, where); // Select objects from table with where clause
-    }
-
-    update(table, objects) {
-      return Util.noop(table, objects); // Update objects into table mapped by id
-    }
-
-    remove(table, where = this.W) {
-      return Util.noop(table, where); // Delete objects from table with where clause
-    }
-
-    
-    // Table DDL (Data Definition Language)
-    open(table, schema = this.S) {
-      return Util.noop(table, schema); // Create a table with an optional schema
-    }
-
-    show(table, format = this.F) {
-      return Util.noop(table, format); // Show a list tables if table name blank or columns
-    }
-
-    make(table, alters = this.A) {
-      return Util.noop(table, alters); // Alter a table's schema - especially columns
-    }
-
-    drop(table, resets = this.R) {
-      return Util.noop(table, resets); // Drop the entire @table - good for testing
-    }
-
-    
-    // Subscribe to CRUD changes on a table or an object with id
-    onChange(table, id = '') {
-      Util.noop(table, id);
-    }
-
-    createTable(t) {
-      this.tables[t] = {};
-      return this.tables[t];
-    }
-
-    table(t) {
-      if (this.tables[t] != null) {
-        return this.tables[t];
-      } else {
-        return this.createTable(t);
+    results(table, id, op, result, extras = {}) {
+      if (this.pipe != null) {
+        this.pipe.results(table, id, op, result, extras);
       }
-    }
-
-    tableName(t) {
-      var name, table;
-      name = Util.firstTok(t, '.'); // Strips off  .json .js .csv file extensions
-      table = this.table(name);
-      Util.noop(table);
-      return name;
-    }
-
-    memory(table, id, op) {
-      var onNext;
-      // console.log( 'Store.memory()', @toSubject(table,op,id) )
-      onNext = (data) => {
-        return this.toMemory(op, table, id, data);
-      };
-      this.stream.subscribe(this.toSubject(table, op, id), 'Store', onNext);
-    }
-
-    subscribe(table, id, op, onNext) {
-      // console.log( 'Store.subscribe()', @toSubject(table,op,id) )
-      this.stream.subscribe(this.toSubject(table, op, id), 'Store', onNext);
-    }
-
-    publish(table, id, op, data, extras = {}) {
-      var params;
-      params = this.toParams(table, id, op, extras);
-      if (this.hasMemory) {
-        this.toMemory(op, table, id, data, params);
-      }
-      this.stream.publish(this.toSubject(table, op, id), data);
     }
 
     onerror(table, id, op, result = {}, error = {}) {
-      console.log('Stream.onerror', {
-        db: this.dbName,
+      console.error('Store.onerror', {
+        dbName: this.dbName,
         table: table,
         id: id,
         op: op,
@@ -156,243 +30,326 @@ Store = (function() {
       });
     }
 
-    // params=Store provides empty defaults
-    toMemory(op, table, id, data, params = Store) {
-      var memory;
-      memory = this.getMemory(this.dbName);
-      switch (op) {
-        case 'add':
-          memory.add(table, id, data);
+    // REST Api  CRUD + Subscribe for objectect records  
+    change(src, table, id, callback) { // Respond to an changed object 
+      switch (src) {
+        case 'rest':
+          if (this.rest != null) {
+            this.rest.change(table, id, callback);
+          }
           break;
-        case 'get':
-          memory.add(table, id, data);
+        case 'fire':
+          if (this.fire != null) {
+            this.fire.change(table, id, callback);
+          }
           break;
-        case 'put':
-          memory.put(table, id, data);
+        case 'index':
+          if (this.index != null) {
+            this.index.change(table, id, callback);
+          }
           break;
-        case 'del':
-          memory.del(table, id);
+        case 'local':
+          if (this.local != null) {
+            this.local.change(table, id, callback);
+          }
           break;
-        case 'insert':
-          memory.insert(table, data);
+        case 'memory':
+          if (this.memory != null) {
+            this.memory.change(table, id, callback);
+          }
+      }
+    }
+
+    get(src, table, id, callback) { // Get an object from table with id
+      switch (src) {
+        case 'rest':
+          if (this.rest != null) {
+            this.rest.get(table, id, callback);
+          }
           break;
-        case 'select':
-          memory.insert(table, data);
+        case 'fire':
+          if (this.fire != null) {
+            this.fire.get(table, id, callback);
+          }
           break;
-        case 'update':
-          memory.update(table, data);
+        case 'index':
+          if (this.index != null) {
+            this.index.get(table, id, callback);
+          }
           break;
-        case 'remove':
-          memory.remove(table, params.where);
+        case 'local':
+          if (this.local != null) {
+            this.local.get(table, id, callback);
+          }
           break;
-        case 'open':
-          memory.open(table, params.schema);
+        case 'memory':
+          if (this.memory != null) {
+            this.memory.get(table, id, callback);
+          }
+      }
+    }
+
+    add(table, id, object) { // Post an object into table with id
+      if (this.rest != null) {
+        this.rest.add(table, id, object);
+      }
+      if (this.fire != null) {
+        this.fire.add(table, id, object);
+      }
+      if (this.index != null) {
+        this.index.add(table, id, object);
+      }
+      if (this.local != null) {
+        this.local.add(table, id, object);
+      }
+      if (this.memory != null) {
+        this.memory.add(table, id, object);
+      }
+      if (this.pipe != null) {
+        this.pipe.add(table, id, object);
+      }
+    }
+
+    put(table, id, object) { // Put an object into table with id
+      if (this.rest != null) {
+        this.rest.put(table, id, object);
+      }
+      if (this.fire != null) {
+        this.fire.put(table, id, object);
+      }
+      if (this.index != null) {
+        this.index.put(table, id, object);
+      }
+      if (this.local != null) {
+        this.local.put(table, id, object);
+      }
+      if (this.memory != null) {
+        this.memory.put(table, id, object);
+      }
+      if (this.pipe != null) {
+        this.pipe.put(table, id, object);
+      }
+    }
+
+    del(table, id) { // Delete  an object from table with id
+      if (this.rest != null) {
+        this.rest.del(table, id);
+      }
+      if (this.fire != null) {
+        this.fire.del(table, id);
+      }
+      if (this.index != null) {
+        this.index.del(table, id);
+      }
+      if (this.local != null) {
+        this.local.del(table, id);
+      }
+      if (this.memory != null) {
+        this.memory.del(table, id);
+      }
+      if (this.pipe != null) {
+        this.pipe.del(table, id);
+      }
+    }
+
+    // SQL tables with multiple objects (rows)    
+    select(src, table, callback, where = Store.where) { // Get an object from table with id
+      switch (src) {
+        case 'rest':
+          if (this.rest != null) {
+            this.rest.select(table, callback, where);
+          }
           break;
-        case 'show':
-          memory.show(table, params.format);
+        case 'fire':
+          if (this.fire != null) {
+            this.fire.select(table, callback, where);
+          }
           break;
-        case 'make':
-          memory.make(table, params.alters);
+        case 'index':
+          if (this.index != null) {
+            this.index.select(table, callback, where);
+          }
           break;
-        case 'drop':
-          memory.drop(table, params.resets);
+        case 'local':
+          if (this.local != null) {
+            this.local.select(table, callback, where);
+          }
           break;
-        default:
-          console.error('Store.toMemory() unknown op', op);
+        case 'memory':
+          if (this.memory != null) {
+            this.memory.select(table, callback, where);
+          }
       }
     }
 
-    getMemory() {
-      this.hasMemory = true;
-      if ((Memory != null) && (Store.memories[this.dbName] == null)) {
-        Store.memories[this.dbName] = new Memory(this.stream, this.dbName);
+    insert(table, objects) { // Insert objects into table with unique id
+      if (this.rest != null) {
+        this.rest.insert(table, objects);
       }
-      return Store.memories[this.dbName];
-    }
-
-    getMemoryTables() {
-      return this.getMemory().tables;
-    }
-
-    remember() {
-      Util.noop(this.getMemory(this.dbName));
-    }
-
-    toSubject(table = 'none', op = 'none', id = 'none') {
-      var subject;
-      subject = `${this.dbName}`;
-      if (table !== 'none') {
-        subject += `/${table}`;
+      if (this.fire != null) {
+        this.fire.insert(table, objects);
       }
-      if (id !== 'none') {
-        subject += `/${id}`;
+      if (this.index != null) {
+        this.index.insert(table, objects);
       }
-      subject += `?module=${this.module}`;
-      if (op !== 'none') {
-        subject += `&op=${op}`;
+      if (this.local != null) {
+        this.local.insert(table, objects);
       }
-      // console.log( 'Store.toSubject', subject )
-      return subject;
-    }
-
-    toParams(table, id, op, extras) {
-      var params;
-      params = {
-        db: this.dbName,
-        table: table,
-        id: id,
-        op: op,
-        module: this.module
-      };
-      return Util.copyProperties(params, extras);
-    }
-
-    toSubjectFromParams(params) {
-      return this.toSubject(params.table, params.op, params.id);
-    }
-
-    // Combine params and result
-    toStoreObject(params, result) {
-      return {
-        params: params,
-        result: result
-      };
-    }
-
-    fromStoreObject(object) {
-      return [object.params, object.result];
-    }
-
-    // ops can be single value. ids can be an array for single record ops
-    toSubjects(tables, ops, ids) {
-      var array, elem, i, j, ref;
-      array = [];
-      for (i = j = 0, ref = tables.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
-        elem = {};
-        elem.table = tables[i];
-        elem.op = Util.isArray(ops) ? ops[i] : ops;
-        elem.id = Util.isArray(ids) ? ids[i] : 'none';
-        array.push(elem);
+      if (this.memory != null) {
+        this.memory.insert(table, objects);
       }
-      return array;
-    }
-
-    completeSubjects(array, completeOp, onComplete) {
-      var callback, completeSubject, elem, id, j, len, op, sub, subjects;
-      subjects = [];
-      for (j = 0, len = array.length; j < len; j++) {
-        elem = array[j];
-        op = elem.op != null ? elem.op : 'none';
-        id = elem.id != null ? elem.id : 'none';
-        sub = this.toSubject(elem.table, op, id);
-        subjects.push(sub);
-      }
-      completeSubject = `${this.dbName}?module=${this.module}&op=${completeOp}`;
-      callback = typeof onComplete === 'function' ? () => {
-        return onComplete();
-      } : true;
-      return this.stream.complete(completeSubject, subjects, callback);
-    }
-
-    // ops can be single value.  
-    uponTablesComplete(tables, ops, completeOp, onComplete) {
-      var subjects;
-      subjects = this.toSubjects(tables, ops, 'none');
-      this.completeSubjects(subjects, completeOp, onComplete);
-    }
-
-    toKeys(object) {
-      var key, keys, obj;
-      keys = [];
-      for (key in object) {
-        if (!hasProp.call(object, key)) continue;
-        obj = object[key];
-        keys.push(key);
-      }
-      return keys;
-    }
-
-    toJSON(obj) {
-      if (obj != null) {
-        return JSON.stringify(obj);
-      } else {
-        return '';
+      if (this.pipe != null) {
+        this.pipe.insert(table, objects);
       }
     }
 
-    toObject(json) {
-      if (json) {
-        return JSON.parse(json);
-      } else {
-        return {};
+    update(table, objects) { // # Update objects into table mapped by id
+      if (this.rest != null) {
+        this.rest.update(table, objects);
+      }
+      if (this.fire != null) {
+        this.fire.update(table, objects);
+      }
+      if (this.index != null) {
+        this.index.update(table, objects);
+      }
+      if (this.local != null) {
+        this.local.update(table, objects);
+      }
+      if (this.memory != null) {
+        this.memory.update(table, objects);
+      }
+      if (this.pipe != null) {
+        this.pipe.update(table, objects);
       }
     }
 
-    toKeysJson(json) {
-      return this.toKeys(JSON.parse(json));
-    }
-
-    toObjectsJson(json, where) {
-      return Util.toObjects(JSON.parse(json), where, this.key);
-    }
-
-    onError2(error) {
-      return console.error('Store.onError()', error.params, error.result);
-    }
-
-    onComplete() {
-      return console.log('Store.onComplete()', 'Completed');
-    }
-
-    toExtras(status, url, datatype, readyState = null, error = null) {
-      var extras;
-      extras = {
-        status: status,
-        url: url,
-        readyState: readyState,
-        error: error // datatype:datatype,
-      };
-      if (readyState != null) {
-        extras['readyState'] = readyState;
+    remove(table, where = Store.where) { // Delete objects from table with where clause
+      if (this.rest != null) {
+        this.rest.remove(table, where);
       }
-      if (error != null) {
-        extras['error'] = error;
+      if (this.fire != null) {
+        this.fire.remove(table, where);
       }
-      return extras;
-    }
-
-    dataType() {
-      var parse;
-      parse = Util.parseURI(this.uri);
-      if (parse.hostname === 'localhost') {
-        return 'json';
-      } else {
-        return 'jsonp';
+      if (this.index != null) {
+        this.index.remove(table, where);
+      }
+      if (this.local != null) {
+        this.local.remove(table, where);
+      }
+      if (this.memory != null) {
+        this.memory.remove(table, where);
+      }
+      if (this.pipe != null) {
+        this.pipe.remove(table, where);
       }
     }
 
-    nameDb(uri) {
-      return Util.parseURI(uri)['dbName'];
+    // Table DDL (Data Definition Language)  
+    show(src, table, callback, format = Store.format) { // Show a table
+      switch (src) {
+        case 'rest':
+          if (this.rest != null) {
+            this.rest.show(table, format, callback);
+          }
+          break;
+        case 'fire':
+          if (this.fire != null) {
+            this.fire.show(table, format, callback);
+          }
+          break;
+        case 'index':
+          if (this.index != null) {
+            this.index.show(table, format, callback);
+          }
+          break;
+        case 'local':
+          if (this.local != null) {
+            this.local.show(table, format, callback);
+          }
+          break;
+        case 'memory':
+          if (this.memory != null) {
+            this.memory.show(table, format, callback);
+          }
+      }
+    }
+
+    open(table, schema = Store.schema) { // Create a table with an optional schema
+      if (this.rest != null) {
+        this.rest.open(table, schema);
+      }
+      if (this.fire != null) {
+        this.fire.open(table, schema);
+      }
+      if (this.index != null) {
+        this.index.open(table, schema);
+      }
+      if (this.local != null) {
+        this.local.open(table, schema);
+      }
+      if (this.memory != null) {
+        this.memory.open(table, schema);
+      }
+      if (this.pipe != null) {
+        this.pipe.open(table, schema);
+      }
+    }
+
+    make(table, alters = Store.alters) { // Alter a table's schema - especially columns
+      if (this.rest != null) {
+        this.rest.make(table, alters);
+      }
+      if (this.fire != null) {
+        this.fire.make(table, alters);
+      }
+      if (this.index != null) {
+        this.index.make(table, alters);
+      }
+      if (this.local != null) {
+        this.local.make(table, alters);
+      }
+      if (this.memory != null) {
+        this.memory.make(table, alters);
+      }
+      if (this.pipe != null) {
+        this.pipe.make(table, alters);
+      }
+    }
+
+    drop(table, resets = Store.reset) { // Drop the entire @table - good for testing
+      if (this.rest != null) {
+        this.rest.open(table, resets);
+      }
+      if (this.fire != null) {
+        this.fire.open(table, resets);
+      }
+      if (this.index != null) {
+        this.index.open(table, resets);
+      }
+      if (this.local != null) {
+        this.local.open(table, resets);
+      }
+      if (this.memory != null) {
+        this.memory.open(table, resets);
+      }
+      if (this.pipe != null) {
+        this.pipe.open(table, resets);
+      }
+    }
+
+    static where() {
+      return true; // Default where clause filter that returns true to access all records
     }
 
   };
 
-  Store.memories = {}; // Store.Memory instances create by getMemory() for in memory dbName
+  // RDUDC            Retrieve  Create    Update    Delete   Change
+  Store.restOps = ['get', 'add', 'put', 'del', 'change'];
 
-  Store.databases = {}; // Set by Store.Memory as Store.databases[dbName].tables for
+  Store.sqlOps = ['select', 'insert', 'update', 'remove'];
 
-  
-  // CRUD            Create    Retrieve  Update    Delete
-  Store.restOps = ['add', 'get', 'put', 'del'];
-
-  Store.sqlOps = ['insert', 'select', 'update', 'remove'];
-
-  Store.tableOps = ['open', 'show', 'make', 'drop'];
-
-  // @isRestOp:(  op ) -> Store. restOps.indexOf(op) isnt -1
-  // @isSqlOp:(   op ) -> Store.  sqlOps.indexOf(op) isnt -1
-  // @isTableOp:( op ) -> Store.tableOps.indexOf(op) isnt -1
-  Store.methods = Store.restOps.concat(Store.sqlOps).concat(Store.tableOps).concat(['onChange']);
+  Store.tableOps = ['show', 'open', 'make', 'drop'];
 
   Store.schema = {}; // Default schema      for open()
 
@@ -400,7 +357,7 @@ Store = (function() {
 
   Store.alters = {}; // Default alterations for make()
 
-  Store.resets = {}; // Default resets      for drop()
+  Store.resets = {}; // Default resets      for drop()    
 
   return Store;
 

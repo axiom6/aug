@@ -1,236 +1,221 @@
 var Rest;
 
-import Util from '../../bas/util/Util';
+import Util from '../util/Util.js';
 
 import Store from './Store';
 
-Rest = class Rest extends Store {
-  constructor(stream, uri) {
-    super(stream, uri, 'Rest');
+Rest = class Rest {
+  constructor(store) {
+    this.store = store;
+    this.uri = this.store.uri;
+    this.key = "id";
   }
 
   // Rest
-  add(table, id, object, params = "") {
-    return this.ajaxRest('add', table, id, object, params);
+  change(table, id, callback, params = "") {
+    return this.rest('change', table, id, null, params, callback);
   }
 
-  get(table, id, params = "") {
-    return this.ajaxRest('get', table, id, params);
+  get(table, id, callback, params = "") {
+    return this.rest('get', table, id, null, params, callback);
+  }
+
+  add(table, id, object, params = "") {
+    return this.rest('add', table, id, object, params);
   }
 
   put(table, id, object, params = "") {
-    return this.ajaxRest('put', table, id, object, params);
+    return this.rest('put', table, id, object, params);
   }
 
   del(table, id, params = "") {
-    return this.ajaxRest('del', table, id, params);
+    return this.rest('del', table, id, null, params);
   }
 
   // Sql
-  insert(table, objects, params = "") {
-    return this.ajaxSql('insert', table, this.W, objects, params);
+  select(table, where = {}, params = "") {
+    return this.sql('select', table, where, '', null, params, callback);
   }
 
-  select(table, where = this.W, params = "") {
-    return this.ajaxSql('select', table, where, null, params);
+  insert(table, objects, params = "") {
+    return this.sql('insert', table, {}, '', objects, params);
   }
 
   update(table, objects, params = "") {
-    return this.ajaxSql('update', table, this.W, objects, params);
+    return this.sql('update', table, {}, '', objects, params);
   }
 
-  remove(table, where = this.W, params = "") {
-    return this.ajaxSql('remove', table, where, null, params);
+  remove(table, where = {}, params = "") {
+    return this.sql('remove', table, where, '', null, params);
   }
 
   // Table - only partially implemented
-  open(table, schema = this.S) {
-    return this.ajaxTable('open', table, {
+  show(table, format = {}) {
+    return this.opTable('show', table, {
+      format: format
+    }, callback);
+  }
+
+  open(table, schema = {}) {
+    return this.opTable('open', table, {
       schema: schema
     });
   }
 
-  show(table, format = this.F) {
-    return this.ajaxTable('show', table, {
-      format: format
-    });
-  }
-
-  make(table, alters = this.A) {
-    return this.ajaxTable('make', table, {
+  make(table, alters = {}) {
+    return this.opTable('make', table, {
       alters: alters
     });
   }
 
-  drop(table, resets = this.R) {
-    return this.ajaxTable('drop', table, {
+  drop(table, resets = {}) {
+    return this.opTable('drop', table, {
       resets: resets
     });
   }
 
-  // Subscribe to  a table or object with id
-  onChange(t, id = 'none') {
-    this.onerror(t, id, 'onChange', {}, {
-      msg: "onChange() not implemeted by Store.Rest"
-    });
+  config(op) {
+    var obj;
+    obj = {};
+    obj.method = this.restOp(op); // *GET, POST, PUT, DELETE
+    obj.mode = 'cors'; // no-cors, cors, *same-origin
+    obj.cache = 'no-cache'; // *default, no-cache, reload, force-cache, only-if-cached
+    obj.redirect = 'follow'; // manual, *follow, error
+    obj.referrer = 'no-referrer'; // no-referrer, *client
+    obj.headers = {
+      'Content-Type': 'application/json'
+    };
+    return obj;
   }
 
-  asyncJSON(url, callback) {
-    fetch(url).then((response) => {
+  rest(op, table, id, object = null, params = "", callback = null) {
+    var settings, url;
+    url = this.urlRest(op, table, '', params);
+    settings = this.config(op);
+    fetch(url, settings).then((response) => {
       return response.json();
     }).then((data) => {
-      return callback(data);
+      var extras, result;
+      result = this.restResult(object, data);
+      extras = this.restExtras(url);
+      if (callback != null) {
+        callback(result);
+      }
+      return this.store.results(table, id, op, result, extras);
     }).catch((error) => {
-      return console.error("Rest.asyncJSON()", {
-        url: url,
-        error: error
-      });
+      var extras, result;
+      result = this.restResult(object);
+      extras = this.restExtras(url, error);
+      return this.store.onerror(table, id, op, result, extras);
     });
   }
 
-  ajaxRest(op, t, id, object = null, params = "") {
-    var dataType, settings, tableName, url;
-    tableName = this.tableName(t);
-    url = this.urlRest(op, t, '', params);
-    dataType = this.dataType();
-    settings = {
-      url: url,
-      type: this.restOp(op),
-      dataType: dataType,
-      processData: false,
-      contentType: 'application/json',
-      accepts: 'application/json'
-    };
-    if (object != null) {
-      settings.data = this.toJSON(object);
-    }
-    settings.success = (data, status, jqXHR) => {
+  sql(op, table, where, id, objects = null, params = "", callback = null) {
+    var settings, url;
+    url = this.urlRest(op, table, '', params);
+    settings = this.config(op);
+    fetch(url, settings).then((response) => {
+      return response.json();
+    }).then((data) => {
       var extras, result;
-      result = {};
-      if (op === 'get') {
-        result = this.toObject(data);
+      result = this.restResult(objects, data, where);
+      extras = this.restExtras(url);
+      if (callback != null) {
+        callback(result);
       }
-      if (op === 'add' || op === 'put') {
-        result = object;
-      }
-      extras = this.toExtras(status, url, dataType, jqXHR.readyState);
-      return this.publish(tableName, id, op, result, extras);
-    };
-    settings.error = (jqXHR, status, error) => {
+      return this.store.results(table, id, op, result, extras);
+    }).catch((error) => {
       var extras, result;
-      result = {};
-      if (op === 'add' || op === 'put') {
-        result = object;
-      }
-      extras = this.toExtras(status, url, dataType, jqXHR.readyState, error);
-      return this.onerror(tableName, id, op, result, extras);
-    };
-    $.ajax(settings);
+      result = this.restResult(object);
+      extras = this.restExtras(url, error);
+      return this.store.onerror(table, id, op, result, extras);
+    });
   }
 
-  ajaxSql(op, t, where, objects = null, params = "") {
-    var dataType, settings, tableName, url;
-    tableName = this.tableName(t);
+  opTable(op, table, options, callback = null) {
+    var settings, url;
     url = this.urlRest(op, t, '', params);
-    dataType = this.dataType();
-    settings = {
-      url: url,
-      type: this.restOp(op),
-      dataType: dataType,
-      processData: false,
-      contentType: 'application/json',
-      accepts: 'application/json'
-    };
-    if (objects != null) {
-      settings.data = objects;
-    }
-    settings.success = (data, status, jqXHR) => {
+    settings = this.config(op);
+    fetch(url, settings).then((response) => {
+      return response.json();
+    }).then((data) => {
       var extras, result;
-      result = {};
-      if ((data != null) && (op === 'select' || op === 'remove')) { // toArray through
-        result = Util.toObjects(data, where, this.key);
+      result = this.restResult(null, data);
+      extras = this.restExtras(url, null, null, options);
+      if (callback != null) {
+        callback(result);
       }
-      if ((objects != null) && (op === 'insert' || op === 'update')) {
-        result = objects;
-      }
-      extras = this.toExtras(status, url, dataType, jqXHR.readyState);
-      if (op === 'select' || op === 'delete') {
-        extras.where = 'all';
-      }
-      return this.publish(tableName, 'none', op, result, extras);
-    };
-    settings.error = (jqXHR, status, error) => {
-      var extras, result;
-      result = {};
-      if (op === 'open' || op === 'update') {
-        result = objects;
-      }
-      extras = this.toExtras(status, url, dataType, jqXHR.readyState, error);
-      if (op === 'select' || op === 'delete') {
-        extras.where = 'all';
-      }
-      return this.onerror(tableName, 'none', op, result, extras);
-    };
-    $.ajax(settings);
-  }
-
-  ajaxTable(op, t, options) {
-    var dataType, settings, tableName, url;
-    tableName = this.tableName(t);
-    url = this.urlRest(op, t, '');
-    dataType = this.dataType();
-    settings = {
-      url: url,
-      type: this.restOp(op),
-      dataType: dataType,
-      processData: false,
-      contentType: 'application/json',
-      accepts: 'application/json'
-    };
-    settings.success = (data, status, jqXHR) => {
-      var extras, result;
-      result = op === 'show' ? this.toKeysJson(data) : {};
-      extras = this.toExtras(status, url, dataType, jqXHR.readyState);
-      return this.publish(tableName, 'none', op, result, this.copyProperties(extras, options));
-    };
-    settings.error = (jqXHR, status, error) => {
+      return this.store.results(table, id, op, result, extras);
+    }).catch((error) => {
       var extras;
-      extras = this.toExtras(status, url, dataType, jqXHR.readyState, error);
-      return this.onerror(tableName, 'none', op, {}, this.copyProperties(extras, options));
+      extras = this.restExtras(url, error);
+      return this.store.onerror(table, id, op, {}, extras);
+    });
+  }
+
+  restResult(object, data = null, where = function() {
+      return true;
+    }) { // object can also be objects
+    var result;
+    result = {};
+    if ((data != null) && (op === 'get')) {
+      result = this.toObject(data);
+    }
+    if ((data != null) && (op === 'show')) {
+      result = this.toKeysJson(data);
+    }
+    if ((object != null) && (op === 'add' || op === 'put')) {
+      result = object;
+    }
+    if ((data != null) && (op === 'select' || op === 'remove')) {
+      result = Util.toObjects(data, where, this.key);
+    }
+    if ((object != null) && (op === 'insert' || op === 'update')) {
+      result = object;
+    }
+    result = op === 'show' ? this.toKeysJson(data) : {};
+    return result;
+  }
+
+  restExtras(url, error = null, where = null, options = null) {
+    var extras;
+    extras = {
+      url: url
     };
-    $.ajax(settings);
+    if (error != null) {
+      extras.error = error;
+    }
+    if (where != null) {
+      extras.where = where;
+    }
+    if (options != null) {
+      extras.options = options;
+    }
+    return extras;
   }
 
   urlRest(op, table, id = '', params = '') {
-    var tableJson;
     // console.log('Store.Rest.urlRest()', @uri, table,params, @uri + '/' + table + params )
-    tableJson = table + '.json';
     switch (op) {
       case 'add':
       case 'get':
       case 'put':
       case 'del':
-        return this.uri + '/' + tableJson + '/' + id + params;
+      case 'change':
+        return this.uri + '/' + table + '/' + id + params;
       case 'insert':
       case 'select':
       case 'update':
       case 'remove':
-        return this.uri + '/' + tableJson + params;
+        return this.uri + '/' + table + params;
       case 'open':
       case 'show':
       case 'make':
       case 'drop':
-        return this.uri + '/' + tableJson; // No Params
-      case 'onChange':
-        if (id === '') {
-          return this.uri + '/' + table;
-        } else {
-          return this.uri + '/' + tableJson + '/' + id + params;
-        }
-        break;
+        return this.uri + '/' + table; // No Params
       default:
         console.error('Store.Rest.urlRest() Unknown op', op);
-        return this.uri + '/' + tableJson;
+        return this.uri + '/' + table + '/' + id + params;
     }
   }
 
@@ -239,24 +224,24 @@ Rest = class Rest extends Store {
       case 'add':
       case 'insert':
       case 'open':
-        return 'post';
+        return 'POST';
       case 'get':
       case 'select':
       case 'show':
-        return 'get';
+        return 'GET';
       case 'put':
       case 'update':
       case 'make':
-        return 'put';
+        return 'PUT';
       case 'del':
       case 'remove':
       case 'drop':
-        return 'delete';
-      case 'onChange':
-        return 'get';
+        return 'DELETE';
+      case 'change':
+        return 'GET';
       default:
         console.error('Store.Rest.restOp() Unknown op', op);
-        return 'get';
+        return 'GET';
     }
   }
 

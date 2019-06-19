@@ -1,248 +1,198 @@
 var Memory,
   hasProp = {}.hasOwnProperty;
 
-import Util from '../../bas/util/Util';
-
-import Store from './Store';
-
 import IndexedDB from './IndexedDB';
 
-Memory = class Memory extends Store {
-  constructor(stream, uri) {
-    super(stream, uri, 'Memory');
-    Store.databases[this.dbName] = this.tables;
-    Util.noop(this.importLocalStorage, this.exportLocalStorage, this.importIndexedDB, this.exportIndexedDB, this.logRows);
+Memory = class Memory {
+  constructor(store) {
+    this.store = store;
+    this.dbName = this.store.dbName;
+    this.tables = this.store.tables;
+    this.pubChange = true;
   }
 
-  add(t, id, object) {
-    this.table(t)[id] = object;
-    this.publish(t, id, 'add', object);
+  table(tn) {
+    this.tables[tn] = this.tables[tn] != null ? this.tables[tn] : {};
+    return this.tables[tn];
   }
 
-  get(t, id) {
+  // This could be tied to put and add
+  change(tn, id, callback, op = 'change') {
     var object;
-    object = this.table(t)[id];
+    object = this.table(tn)[id];
     if (object != null) {
-      this.publish(t, id, 'get', object);
-    } else {
-      this.onerror(t, id, 'get', object, {
-        msg: `Id ${id} not found`
+      if (callback != null) {
+        callback(object);
+      }
+      this.store.results(tn, id, op, object, {
+        op: op
       });
+    } else {
+      this.store.onerror(tn, id, op, object);
     }
   }
 
-  put(t, id, object) {
-    this.table(t)[id] = object;
-    this.publish(t, id, 'put', object);
-  }
-
-  del(t, id) {
-    var object;
-    object = this.table(t)[id];
-    if (object != null) {
-      delete this.table(t)[id];
-      this.publish(t, id, 'del', object);
-    } else {
-      this.onerror(t, id, 'del', object, {
-        msg: `Id ${id} not found`
-      });
+  add(tn, id, object) {
+    this.table(tn)[id] = object;
+    if (this.pubChange) {
+      this.change(tn, id, null, 'add');
     }
   }
 
-  insert(t, objects) {
-    var key, object, table;
-    table = this.table(t);
+  get(tn, id, callback) {
+    var object;
+    object = this.table(tn)[id];
+    if (object != null) {
+      if (callback != null) {
+        callback(object);
+      }
+      this.store.results(tn, id, 'get', object);
+    } else {
+      this.store.onerror(tn, id, 'get', object);
+    }
+  }
+
+  put(tn, id, object) {
+    this.table(tn)[id] = object;
+    if (this.pubChange) {
+      this.change(tn, id, null, 'put');
+    }
+  }
+
+  del(tn, id) {
+    var object;
+    object = this.table(tn)[id];
+    if (object != null) {
+      if (this.pubChange) {
+        this.change(tn, id, null, 'del');
+      }
+      delete this.table(tn)[id];
+    } else {
+      this.store.onerror(tn, id, 'del', object);
+    }
+  }
+
+  insert(tn, objects) {
+    var key, obj, table;
+    table = this.table(tn);
     for (key in objects) {
       if (!hasProp.call(objects, key)) continue;
-      object = objects[key];
-      table[key] = object;
+      obj = objects[key];
+      table[key] = obj;
     }
-    this.publish(t, 'none', 'insert', objects);
   }
 
-  select(t, where) {
-    var key, object, objects, table;
+  select(tn, callback, where) {
+    var key, obj, objects, table;
     objects = {};
-    table = this.table(t);
+    table = this.table(tn);
     for (key in table) {
       if (!hasProp.call(table, key)) continue;
-      object = table[key];
-      if (where(object)) {
-        objects[key] = object;
+      obj = table[key];
+      if (where(obj)) {
+        objects[key] = obj;
       }
     }
-    this.publish(t, 'none', 'select', objects, {
-      where: where.toString()
-    });
+    if (callback != null) {
+      callback(objects);
+    }
+    this.store.results(tn, id, 'show', objects);
   }
 
-  update(t, objects) {
-    var key, object, table;
-    table = this.table(t);
+  update(tn, objects) {
+    var key, obj, table;
+    table = this.table(tn);
     for (key in objects) {
       if (!hasProp.call(objects, key)) continue;
-      object = objects[key];
-      table[key] = object;
+      obj = objects[key];
+      table[key] = obj;
     }
-    this.publish(t, id, 'update', objects);
   }
 
-  remove(t, where = this.W) {
-    var key, object, objects, table;
-    table = this.table(t);
-    objects = {};
+  remove(tn, where) {
+    var key, obj, table;
+    table = this.table(tn);
     for (key in table) {
       if (!hasProp.call(table, key)) continue;
-      object = table[key];
-      if (!(where(object))) {
-        continue;
+      obj = table[key];
+      if (where(obj)) {
+        delete table[key];
       }
-      objects[key] = object;
-      delete object[key];
     }
-    this.publish(t, 'none', 'remove', objects, {
-      where: where.toString()
-    });
   }
 
-  open(t, schema) {
-    this.createTable(t);
-    this.publish(t, 'none', 'open', {}, {
-      schema: schema
-    });
+  show(tn, format, callback) {
+    if (format === false) {
+      ({});
+    }
+    if (callback != null) {
+      callback(this.table(tn));
+    }
+    this.store.results(tn, id, 'show', this.table(tn));
   }
 
-  show(t) {
-    var key, keys, ref, ref1, tables, val;
-    if (Util.isStr(t)) {
-      keys = [];
-      ref = this.tables[t];
-      for (key in ref) {
-        if (!hasProp.call(ref, key)) continue;
-        val = ref[key];
-        keys.push(key);
-      }
-      this.publish(t, 'none', 'show', keys, {
-        showing: 'keys'
-      });
+  open(tn, schema) {
+    if (schema === false) {
+      ({});
+    }
+    this.table(tn);
+  }
+
+  make(tn, alters) {
+    if (tn === false && alters === false) {
+      ({});
+    }
+  }
+
+  drop(tn, resets) {
+    if (resets === false) {
+      ({});
+    }
+    if (this.tables[tn] != null) {
+      delete this.tables[tn];
     } else {
-      tables = [];
-      ref1 = this.tables;
-      for (key in ref1) {
-        if (!hasProp.call(ref1, key)) continue;
-        val = ref1[key];
-        tables.push(key);
+      this.store.onerror(tn, id, 'drop');
+    }
+  }
+
+  importLocal(local) {
+    var i, id, len, ref, table, tn;
+    ref = local.tableIds;
+    for (tn in ref) {
+      if (!hasProp.call(ref, tn)) continue;
+      table = ref[tn];
+      for (i = 0, len = table.length; i < len; i++) {
+        id = table[i];
+        this.add(tn, id, this.local.obj(tn, id));
       }
-      this.publish(t, 'none', 'show', tables, {
-        showing: 'tables'
-      });
     }
   }
 
-  make(t, alters) {
-    this.publish(t, 'none', 'make', {}, {
-      alters: alters,
-      msg: 'alter is a noop'
-    });
-  }
-
-  drop(t) {
-    var hasTable;
-    hasTable = this.tables[t] != null;
-    if (hasTable) {
-      delete this.tables[t];
-      this.publish(t, 'none', 'drop', {});
-    } else {
-      this.onerror(t, 'none', 'drop', {}, {
-        msg: `Table ${t} not found`
-      });
-    }
-  }
-
-  // Subscribe to  a table or object with id
-  onChange(t, id = 'none') {
-    this.onerror(t, id, 'onChange', {}, {
-      msg: "onChange() not implemeted by Store.Memory"
-    });
-  }
-
-  dbTableName(tableName) {
-    return this.dbName + '/' + tableName;
-  }
-
-  tableNames() {
-    var key, names, ref, table;
-    names = [];
+  exportDB(db) {
+    var id, obj, ref, table, tn;
     ref = this.tables;
-    for (key in ref) {
-      if (!hasProp.call(ref, key)) continue;
-      table = ref[key];
-      names.push(key);
-    }
-    return names;
-  }
-
-  importLocalStorage(tableNames) {
-    var i, len, tableName;
-    for (i = 0, len = tableNames.length; i < len; i++) {
-      tableName = tableNames[i];
-      this.tables[tableName] = JSON.parse(localStorage.getItem(this.dbTableName(tableName)));
+    for (tn in ref) {
+      if (!hasProp.call(ref, tn)) continue;
+      table = ref[tn];
+      for (id in table) {
+        if (!hasProp.call(table, id)) continue;
+        obj = table[id];
+        db.add(tn, id, obj);
+      }
     }
   }
 
-  exportLocalStorage() {
-    var dbTableName, ref, table, tableName;
-    ref = this.tables;
-    for (tableName in ref) {
-      if (!hasProp.call(ref, tableName)) continue;
-      table = ref[tableName];
-      dbTableName = this.dbTableName(tableName);
-      localStorage.removeItem(dbTableName);
-      localStorage.setItem(dbTableName, JSON.stringify(table));
-    }
-  }
-
-  // console.log( 'Store.Memory.exportLocalStorage()', dbTableName )
-  importIndexedDB(op) {
-    var i, idb, len, onNext, ref, tableName;
-    idb = new IndexedDB(this.stream, this.dbName);
+  importIndexedDB() {
+    var i, idb, len, ref, tableName, where;
+    idb = new IndexedDB(this.dbName);
     ref = idb.dbs.objectStoreNames;
     for (i = 0, len = ref.length; i < len; i++) {
       tableName = ref[i];
-      onNext = (result) => {
-        if (op === 'select') {
-          return this.tables[tableName] = result;
-        }
+      where = function(obj) {
+        return false;
       };
-      this.subscribe(tableName, onNext);
-      idb.traverse('select', tableName, {}, this.W, false);
+      idb.traverse('select', tableName, {}, where, false);
     }
-  }
-
-  exportIndexedDB() {
-    var dbVersion, idb, onIdxOpen;
-    dbVersion = 1;
-    idb = new IndexedDB(this.stream, this.dbName, dbVersion, this.tables);
-    onIdxOpen = (dbName) => {
-      var name, onNext, ref, results, table;
-      idb.deleteDatabase(dbName);
-      ref = this.tables;
-      results = [];
-      for (name in ref) {
-        if (!hasProp.call(ref, name)) continue;
-        table = ref[name];
-        onNext = (result) => {
-          return Util.noop(dbName, result);
-        };
-        this.subscribe(name, 'none', 'insert', onNext);
-        results.push(idb.insert(name, table));
-      }
-      return results;
-    };
-    this.subscribe('IndexedDB', dbVersion.toString(), 'open', (dbName) => {
-      return onIdxOpen(dbName);
-    });
-    idb.openDatabase();
   }
 
   logRows(name, table) {

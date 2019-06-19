@@ -1,14 +1,20 @@
 
-class DataRx
+class Pipe
 
-  constructor:( @stream ) ->
+  constructor:( @stream, @dbName ) ->
+
+  toSubject:( table ) ->
+    @dbName + ':' + table
+
+  toSource:( id, op ) ->
+    id + ':' + op
 
   subscribe:( table, id ,op, onSubscribe  ) ->
-    @stream.subscribe( 'Store:'+table, id+':'+op, onSubscribe )
+    @stream.subscribe( @toSubject(table), @toSource(id,op), onSubscribe )
     return
 
   publish:( table, id, op, obj, extras={} ) ->
-    @stream.publish( 'Store:'+table, id+':'+op, obj )
+    @stream.publish(   @toSubject(table), @toSource(id,op), obj )
     if extras is false then {}
     return
 

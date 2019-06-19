@@ -1,117 +1,96 @@
 
-import Store     from './Store'
+class Local
 
-class Local extends Store
+  constructor:( @store ) ->
+    @tableIds = {}
 
-  constructor:( stream, uri ) ->
-    super( stream, uri, 'Local' )
+  key:( table, id ) ->
+    @store.dbName + table + id
 
-  key:( t, id ) ->
-    t + id
+  obj:( table, id ) ->
+    str = localStorage.getItem( @key(table,id) )
+    if str? then JSON.parse(str) else null
 
-  add:( t, id, obj  )    ->
-    localStorage.setItem( @key(t,id), JSON.stringify(obj) )
-    @publish( t, id, 'add', obj )
+  addId:( table, id ) ->
+    @tableIds[table] = [] if not @tableIds[table]?
+    @tableIds[table].push(id)
+
+  delId:( table, id ) ->
+    @tableIds[table] = [] if not @tableIds[table]?
+    @tableIds[table].push(id)
+
+  change:( table, id, callback ) ->
+    @get(  table, id, callback, 'change' )
     return
 
-  get:( t, id ) ->
-    str = localStorage.getItem( @key(t,id) )
-    obj = if str? then JSON.parse(str) else null
+  get:( table, id, callback=null, op='get' ) ->
+    obj = @obj( table, id )
     if obj?
-      @publish( t, id, 'get', obj )
+      callback( obj ) if callback?
+      @store.results( table, id, op, obj )
     else
-      @onerror( t, id, 'get', obj,  { msg:"Id #{id} not found"} )
+      @store.onerror( t, id, op, obj,  { msg:"Id #{id} not found"} )
     return
 
-  put:( t, id, obj ) ->
-    localStorage.setItem( @key(t,id), JSON.stringify(obj) )
-    @publish( t, id, 'put', obj )
+  add:(     table, id, obj  )    ->
+    @addId( table, id )
+    localStorage.setItem( @key(table,id), JSON.stringify(obj) )
     return
 
-  del:( t, id ) ->
-    obj = @get( t, id )
-    localStorage.removeItem( @key(t,id) )
-    if obj?
-      delete @table(t)[id]
-      @publish( t, id, 'del', obj )
-    else
-      @onerror( t, id, 'del', obj,  { msg:"Id #{id} not found"} )
+  put:( table, id, obj ) ->
+    localStorage.setItem( @key(table,id), JSON.stringify(obj) )
     return
 
-  insert:( t, objs ) ->
+  del:(     table, id ) ->
+    @delId( table, id )
+    localStorage.removeItem( @key(table,id) )
+    return
+
+  insert:( table, objs ) ->
     for own key, obj of objs
-      @add( t, key, obj )
-    @publish( t, 'none', 'insert', objs )
+      @add( table, key, obj )
     return
 
-  select:( t, where ) ->
+  select:( table, callback, where, op='select' ) ->
     objs =  {}
-    tab  =  @table(t) # Need to think about this
-    for own k, obj of tab when where(obj)
-      objs[key] = @get( t, k )
-    @publish( t, 'none', 'select', objs, { where:where.toString() } )
+    ids  =  @tableIds[table]
+    for id in ids
+      obj = @obj( table, id )
+      if obj?
+         objs[key] = obj if where(obj)
+    callback( objs ) if callback?
+    @store.results( table, 'none', op, objs )
     return
 
-  update:( t, objs ) ->
-    for own k, obj of objs
-      @put( t, k, obj )
-    @publish( t, id, 'update', objs )
+  update:( table, objs ) ->
+    for own key, obj of objs
+      @put( table, key, obj )
     return
 
-  remove:( t, where=@W ) ->
-    objs = {}
-    tab  = @table(t)
-    for own k, obj of tab when where(obj)
-      @del( t, j )
-    @publish( t, 'none', 'remove', objs, { where:where.toString() } )
+  remove:( table, where ) ->
+    ids  =  @tableIds[table]
+    for id in ids
+      obj = @obj( table, id )
+      if obj?
+        @del( table, id ) if where(obj)
     return
 
-  open:( t, schema ) ->
-    @publish( t, 'none', 'open', {}, { schema:schema } )
+  open:( table, schema ) ->
+    if table is false and schema is false then {}
     return
 
-  show:( t ) ->
-      keys = []
-      for own key, val of @tables[t]
-        keys.push(key)
-      @publish( t, 'none', 'show', keys,  { showing:'keys' } )
+  show:( table, callback, format ) ->
+    if format is false then {}
+    where = (obj)->true
+    @select( table, callback, where, 'show' )
     return
 
-  make:( t, alters ) ->
-    @publish( t, 'none', 'make', {}, { alters:alters, msg:'alter is a noop' } )
+  make:( table, alters ) ->
+    if table is false and alters is false then {}
     return
 
-  drop:( t ) ->
-    delete  @tables[t]
-    @publish( t, 'none', 'drop', {} )
-
-    return
-
-# Subscribe to  a table or obj with id
-  onChange:(  t, id='none'   ) ->
-    @onerror( t, id, 'onChange', {}, { msg:"onChange() not implemeted by Store.Memory" } )
-    return
-
-  dbTableName:( tableName ) ->
-    @dbName + '/' + tableName
-
-  tableNames:() ->
-    names = []
-    for own key, table of @tables
-      names.push(key)
-    names
-
-  importLocalStorage:( tableNames ) ->
-    for tableName in tableNames
-      @tables[tableName] = JSON.parse(localStorage.getItem(@dbTableName(tableName)))
-    return
-
-  exportLocalStorage:() ->
-    for own tableName, table of @tables
-      dbTableName = @dbTableName(tableName)
-      localStorage.removeItem( dbTableName  )
-      localStorage.setItem(    dbTableName, JSON.stringify(table) )
-    # console.log( 'Store.Memory.exportLocalStorage()', dbTableName )
+  drop:( table ) ->
+    @remove( table, (obj)->true )
     return
 
 export default Local

@@ -4,7 +4,8 @@ import Store from './Store'
 
 class Rest
 
-  constructor:( @uri, @store ) ->
+  constructor:( @store ) ->
+    @uri = @store.uri
     @key = "id"
 
   # Rest
@@ -21,7 +22,7 @@ class Rest
   remove:( table, where={},  params="" )  -> @sql( 'remove', table, where,   '',null, params )
 
   # Table - only partially implemented
-  show:( table, format={} )  -> @opTable( 'show', table, { format:format }, , callback  )
+  show:( table, format={} )  -> @opTable( 'show', table, { format:format }, callback )
   open:( table, schema={} )  -> @opTable( 'open', table, { schema:schema } )
   make:( table, alters={} )  -> @opTable( 'make', table, { alters:alters } )
   drop:( table, resets={} )  -> @opTable( 'drop', table, { resets:resets } )
