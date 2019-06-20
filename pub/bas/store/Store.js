@@ -2,9 +2,10 @@ var Store;
 
 Store = (function() {
   class Store {
-    constructor(dbName, uri) {
+    constructor(dbName, tables, url) {
       this.dbName = dbName;
-      this.uri = uri;
+      this.tables = tables;
+      this.url = url;
       this.rest = null;
       this.fire = null;
       this.index = null;
@@ -90,10 +91,8 @@ Store = (function() {
     }
 
     add(table, id, object) { // Post an object into table with id
-      if (this.rest != null) {
-        this.rest.add(table, id, object);
-      }
       if (this.fire != null) {
+        //rest  .add( table, id, object ) if @rest?
         this.fire.add(table, id, object);
       }
       if (this.index != null) {
@@ -111,10 +110,8 @@ Store = (function() {
     }
 
     put(table, id, object) { // Put an object into table with id
-      if (this.rest != null) {
-        this.rest.put(table, id, object);
-      }
       if (this.fire != null) {
+        //rest  .put( table, id, object ) if @rest?
         this.fire.put(table, id, object);
       }
       if (this.index != null) {
@@ -132,10 +129,8 @@ Store = (function() {
     }
 
     del(table, id) { // Delete  an object from table with id
-      if (this.rest != null) {
-        this.rest.del(table, id);
-      }
       if (this.fire != null) {
+        //rest  .del( table, id ) if @rest?
         this.fire.del(table, id);
       }
       if (this.index != null) {
@@ -183,10 +178,8 @@ Store = (function() {
     }
 
     insert(table, objects) { // Insert objects into table with unique id
-      if (this.rest != null) {
-        this.rest.insert(table, objects);
-      }
       if (this.fire != null) {
+        //rest  .insert( table, objects ) if @rest?
         this.fire.insert(table, objects);
       }
       if (this.index != null) {
@@ -204,10 +197,8 @@ Store = (function() {
     }
 
     update(table, objects) { // # Update objects into table mapped by id
-      if (this.rest != null) {
-        this.rest.update(table, objects);
-      }
       if (this.fire != null) {
+        //rest  .update( table, objects ) if @rest?
         this.fire.update(table, objects);
       }
       if (this.index != null) {
@@ -225,10 +216,8 @@ Store = (function() {
     }
 
     remove(table, where = Store.where) { // Delete objects from table with where clause
-      if (this.rest != null) {
-        this.rest.remove(table, where);
-      }
       if (this.fire != null) {
+        //rest  .remove( table, where ) if @rest?
         this.fire.remove(table, where);
       }
       if (this.index != null) {
@@ -276,10 +265,8 @@ Store = (function() {
     }
 
     open(table, schema = Store.schema) { // Create a table with an optional schema
-      if (this.rest != null) {
-        this.rest.open(table, schema);
-      }
       if (this.fire != null) {
+        //rest  .open( table, schema ) if @rest?
         this.fire.open(table, schema);
       }
       if (this.index != null) {
@@ -297,10 +284,8 @@ Store = (function() {
     }
 
     make(table, alters = Store.alters) { // Alter a table's schema - especially columns
-      if (this.rest != null) {
-        this.rest.make(table, alters);
-      }
       if (this.fire != null) {
+        //rest  .make( table, alters ) if @rest?
         this.fire.make(table, alters);
       }
       if (this.index != null) {
@@ -318,10 +303,8 @@ Store = (function() {
     }
 
     drop(table, resets = Store.reset) { // Drop the entire @table - good for testing
-      if (this.rest != null) {
-        this.rest.open(table, resets);
-      }
       if (this.fire != null) {
+        //rest  .open( table, resets ) if @rest?
         this.fire.open(table, resets);
       }
       if (this.index != null) {

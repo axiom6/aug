@@ -1,8 +1,6 @@
 var Memory,
   hasProp = {}.hasOwnProperty;
 
-import IndexedDB from './IndexedDB';
-
 Memory = class Memory {
   constructor(store) {
     this.store = store;
@@ -96,7 +94,7 @@ Memory = class Memory {
     if (callback != null) {
       callback(objects);
     }
-    this.store.results(tn, id, 'show', objects);
+    this.store.results(tn, 'none', 'select', objects);
   }
 
   update(tn, objects) {
@@ -182,19 +180,14 @@ Memory = class Memory {
     }
   }
 
-  importIndexedDB() {
-    var i, idb, len, ref, tableName, where;
-    idb = new IndexedDB(this.dbName);
-    ref = idb.dbs.objectStoreNames;
-    for (i = 0, len = ref.length; i < len; i++) {
-      tableName = ref[i];
-      where = function(obj) {
-        return false;
-      };
-      idb.traverse('select', tableName, {}, where, false);
-    }
-  }
-
+  /*
+  importIndexedDB:() ->
+  idb = new IndexedDB( @dbName )
+  for tableName in idb.dbs.objectStoreNames
+  where = (obj)->false
+  idb.traverse( 'select', tableName, {}, where, false )
+  return
+  */
   logRows(name, table) {
     var key, results, row;
     console.log(name);

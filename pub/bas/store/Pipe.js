@@ -18,11 +18,9 @@ Pipe = class Pipe {
     this.stream.subscribe(this.toSubject(table), this.toSource(id, op), onSubscribe);
   }
 
-  publish(table, id, op, obj, extras = {}) {
-    this.stream.publish(this.toSubject(table), this.toSource(id, op), obj);
-    if (extras === false) {
-      ({});
-    }
+  //ublish:( table, id, op, obj, extras={} ) ->
+  publish(table, obj) {
+    this.stream.publish(this.toSubject(table), obj);
   }
 
   results(table, id, op, result, extras) {
@@ -39,49 +37,43 @@ Pipe = class Pipe {
   }
 
   add(table, id, object) { // Post an object into table with id
-    this.publish(table, id, 'add', object);
+    this.publish(table, object);
   }
 
   put(table, id, object) { // Put an object into table with id
-    this.publish(table, id, 'put', object);
+    this.publish(table, object);
   }
 
   del(table, id) { // Delete  an object from table with id
-    this.publish(table, id, 'del', {});
+    this.publish(table, id);
   }
 
   // SQL tables with multiple objects (rows)
   insert(table, objects) { // Insert objects into table with unique id
-    this.publish(table, 'none', 'insert', objects);
+    this.publish(table, objects);
   }
 
   update(table, objects) { // # Update objects into table mapped by id
-    this.publish(table, 'none', 'update', objects);
+    this.publish(table, objects);
   }
 
-  remove(table, where = this.W) { // Remove objects from table with where clause
-    this.publish(table, 'none', 'remove', {}, {
-      where: where
-    });
+  remove(table, where) { // Remove objects from table with where clause
+    this.publish(table, where);
   }
 
   // Table DDL (Data Definition Language)
-  open(table, schema = this.S) { // Create a table with an optional schema
-    this.publish(table, 'none', 'show', {}, {
-      schema: schema
-    });
+  open(table, schema) { // Create a table with an optional schema
+    this.publish(table, schema);
   }
 
-  make(table, alters = this.A) { // Alter a table's schema - especially columns
-    this.publish(table, 'none', 'show', {}, {
-      alters: alters
-    });
+  make(table, alters) { // Alter a table's schema - especially columns
+    this.publish(table, alters);
   }
 
-  drop(table, resets = this.R) { // Drop the entire @table - good for testing
-    this.publish(table, 'none', 'show', {}, {
-      resets: resets
-    });
+  drop(table, resets) { // Drop the entire @table - good for testing
+    this.publish(table, resets);
   }
 
 };
+
+export default Pipe;

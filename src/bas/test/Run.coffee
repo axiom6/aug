@@ -8,4 +8,4 @@ import TestStore  from './TestStore.js';
 console.log( "---------------------------- Begin ----------------------------")
 
 testStore = new TestStore()
-testStore.testBegin();
+testStore.testRest();

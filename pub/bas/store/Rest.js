@@ -1,13 +1,10 @@
+//mport fetch from '../../lib/fetch/fetch.js' # NodeJS fetch
 var Rest;
-
-import Util from '../util/Util.js';
-
-import Store from './Store';
 
 Rest = class Rest {
   constructor(store) {
     this.store = store;
-    this.uri = this.store.uri;
+    this.url = this.store.url;
     this.key = "id";
   }
 
@@ -90,7 +87,7 @@ Rest = class Rest {
 
   rest(op, table, id, object = null, params = "", callback = null) {
     var settings, url;
-    url = this.urlRest(op, table, '', params);
+    url = this.url; // @urlRest( op, table,'',params )
     settings = this.config(op);
     fetch(url, settings).then((response) => {
       return response.json();
@@ -157,23 +154,19 @@ Rest = class Rest {
       return true;
     }) { // object can also be objects
     var result;
-    result = {};
-    if ((data != null) && (op === 'get')) {
-      result = this.toObject(data);
+    /*
+    result = {}
+    result = @toObject(data)                 if data?   and ( op is 'get'  )
+    result = @toKeysJson(data)               if data?   and ( op is 'show' )
+    result = object                          if object? and ( op is 'add' or op is 'put' )
+    result = Util.toObjects(data,where,@key) if data?   and ( op is 'select' or op is 'remove' )
+    result = object                          if object? and ( op is 'insert' or op is 'update' )
+    result = if op is 'show' then @toKeysJson(data) else {}  
+    */
+    if (where === false) {
+      ({});
     }
-    if ((data != null) && (op === 'show')) {
-      result = this.toKeysJson(data);
-    }
-    if ((object != null) && (op === 'add' || op === 'put')) {
-      result = object;
-    }
-    if ((data != null) && (op === 'select' || op === 'remove')) {
-      result = Util.toObjects(data, where, this.key);
-    }
-    if ((object != null) && (op === 'insert' || op === 'update')) {
-      result = object;
-    }
-    result = op === 'show' ? this.toKeysJson(data) : {};
+    result = data;
     return result;
   }
 
@@ -195,27 +188,27 @@ Rest = class Rest {
   }
 
   urlRest(op, table, id = '', params = '') {
-    // console.log('Store.Rest.urlRest()', @uri, table,params, @uri + '/' + table + params )
+    // console.log('Rest.urlRest()', @url, table,params, @url + '/' + table + params )
     switch (op) {
       case 'add':
       case 'get':
       case 'put':
       case 'del':
       case 'change':
-        return this.uri + '/' + table + '/' + id + params;
+        return this.url + '/' + table + '/' + id + params;
       case 'insert':
       case 'select':
       case 'update':
       case 'remove':
-        return this.uri + '/' + table + params;
+        return this.url + '/' + table + params;
       case 'open':
       case 'show':
       case 'make':
       case 'drop':
-        return this.uri + '/' + table; // No Params
+        return this.url + '/' + table; // No Params
       default:
-        console.error('Store.Rest.urlRest() Unknown op', op);
-        return this.uri + '/' + table + '/' + id + params;
+        console.error('Rest.urlRest() Unknown op', op);
+        return this.url + '/' + table + '/' + id + params;
     }
   }
 
@@ -240,7 +233,7 @@ Rest = class Rest {
       case 'change':
         return 'GET';
       default:
-        console.error('Store.Rest.restOp() Unknown op', op);
+        console.error('Rest.restOp() Unknown op', op);
         return 'GET';
     }
   }

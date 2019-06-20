@@ -24,7 +24,7 @@ class Stream
     subject = @getSubject( subjectName, false )
     for own subscriberName, onCallback of subject['subscribers']
       onCallback( object )
-    if @isInfo( subjectName, 'publish')
+    if true # @isInfo( subjectName, 'publish')
       console.info( 'Stream.publish()', { subject:subjectName, object:object } )
     return
 

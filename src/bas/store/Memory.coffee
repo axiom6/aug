@@ -1,6 +1,4 @@
 
-import IndexedDB from './IndexedDB'
-
 class Memory
 
   constructor:( @store ) ->
@@ -62,7 +60,7 @@ class Memory
     for own key, obj of table when where(obj)
       objects[key] = obj
     callback( objects ) if callback?
-    @store.results( tn, id, 'show', objects )
+    @store.results( tn, 'none', 'select', objects )
     return
 
   update:( tn, objects ) ->
@@ -112,12 +110,14 @@ class Memory
         db.add( tn, id, obj )
     return
 
+  ###
   importIndexedDB:() ->
     idb = new IndexedDB( @dbName )
     for tableName in idb.dbs.objectStoreNames
       where = (obj)->false
       idb.traverse( 'select', tableName, {}, where, false )
     return
+  ###
 
   logRows:( name, table ) ->
     console.log( name )

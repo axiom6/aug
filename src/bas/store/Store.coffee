@@ -1,7 +1,7 @@
 
 class Store
 
-  constructor:( @dbName, @uri ) ->
+  constructor:( @dbName, @tables, @url ) ->
     @rest=null; @fire=null; @index=null; @local=null; @memory=null; @pipe=null
 
   results:       ( table, id, op, result, extras={} ) ->
@@ -33,7 +33,7 @@ class Store
     return    
 
   add:         ( table, id, object ) -> # Post an object into table with id
-    @rest  .add( table, id, object ) if @rest?
+    #rest  .add( table, id, object ) if @rest?
     @fire  .add( table, id, object ) if @fire?
     @index .add( table, id, object ) if @index?
     @local .add( table, id, object ) if @local?
@@ -42,7 +42,7 @@ class Store
     return
       
   put:         ( table, id, object ) -> # Put an object into table with id
-    @rest  .put( table, id, object ) if @rest?
+    #rest  .put( table, id, object ) if @rest?
     @fire  .put( table, id, object ) if @fire?
     @index .put( table, id, object ) if @index?
     @local .put( table, id, object ) if @local?
@@ -51,7 +51,7 @@ class Store
     return
         
   del:         ( table, id ) -> # Delete  an object from table with id
-    @rest  .del( table, id ) if @rest?
+    #rest  .del( table, id ) if @rest?
     @fire  .del( table, id ) if @fire?
     @index .del( table, id ) if @index?
     @local .del( table, id ) if @local?
@@ -70,7 +70,7 @@ class Store
     return
 
   insert:         ( table, objects ) -> # Insert objects into table with unique id
-    @rest  .insert( table, objects ) if @rest?
+    #rest  .insert( table, objects ) if @rest?
     @fire  .insert( table, objects ) if @fire?
     @index .insert( table, objects ) if @index?
     @local .insert( table, objects ) if @local?
@@ -79,7 +79,7 @@ class Store
     return
     
   update:         ( table, objects ) -> # # Update objects into table mapped by id
-    @rest  .update( table, objects ) if @rest?
+    #rest  .update( table, objects ) if @rest?
     @fire  .update( table, objects ) if @fire?
     @index .update( table, objects ) if @index?
     @local .update( table, objects ) if @local?
@@ -88,7 +88,7 @@ class Store
     return
   
   remove:         ( table, where=Store.where ) -> # Delete objects from table with where clause
-    @rest  .remove( table, where ) if @rest?
+    #rest  .remove( table, where ) if @rest?
     @fire  .remove( table, where ) if @fire?
     @index .remove( table, where ) if @index?
     @local .remove( table, where ) if @local?
@@ -107,7 +107,7 @@ class Store
     return   
     
   open:         ( table, schema=Store.schema ) -> # Create a table with an optional schema
-    @rest  .open( table, schema ) if @rest?
+    #rest  .open( table, schema ) if @rest?
     @fire  .open( table, schema ) if @fire?
     @index .open( table, schema ) if @index?
     @local .open( table, schema ) if @local?
@@ -116,7 +116,7 @@ class Store
     return
   
   make:         ( table, alters=Store.alters ) -> # Alter a table's schema - especially columns
-    @rest  .make( table, alters ) if @rest?
+    #rest  .make( table, alters ) if @rest?
     @fire  .make( table, alters ) if @fire?
     @index .make( table, alters ) if @index?
     @local .make( table, alters ) if @local?
@@ -125,7 +125,7 @@ class Store
     return
     
   drop:         ( table, resets=Store.reset ) -> # Drop the entire @table - good for testing
-    @rest  .open( table, resets ) if @rest?
+    #rest  .open( table, resets ) if @rest?
     @fire  .open( table, resets ) if @fire?
     @index .open( table, resets ) if @index?
     @local .open( table, resets ) if @local?

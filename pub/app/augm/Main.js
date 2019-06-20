@@ -7,6 +7,8 @@ import Stream from '../../bas/util/Stream.js';
 
 import Vis from '../../bas/util/Vis.js';
 
+import Test from './Test.js';
+
 Main = (function() {
   class Main {
     static begin(onReady) {
@@ -15,7 +17,7 @@ Main = (function() {
     }
 
     static init(batch) {
-      var streamLog, subjects;
+      var streamLog, subjects, test;
       window['Geom'] = {};
       Main.Batch = batch; // Not necessary here, but assigned for compatibilitry
       subjects = ["Draw", "Note", "Navb", "Tabs", "Geom", "Data"];
@@ -26,6 +28,9 @@ Main = (function() {
       };
       Main.stream = new Stream(subjects, streamLog);
       Main.onReady();
+      test = new Test();
+      //est.testRest()
+      test.testMemory();
     }
 
   };

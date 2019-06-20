@@ -43,7 +43,7 @@ Stream = class Stream {
       onCallback = ref[subscriberName];
       onCallback(object);
     }
-    if (this.isInfo(subjectName, 'publish')) {
+    if (true) { // @isInfo( subjectName, 'publish')
       console.info('Stream.publish()', {
         subject: subjectName,
         object: object

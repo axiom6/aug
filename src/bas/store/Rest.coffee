@@ -1,11 +1,10 @@
 
-import Util  from '../util/Util.js'
-import Store from './Store'
+#mport fetch from '../../lib/fetch/fetch.js' # NodeJS fetch
 
 class Rest
 
   constructor:( @store ) ->
-    @uri = @store.uri
+    @url = @store.url
     @key = "id"
 
   # Rest
@@ -38,7 +37,7 @@ class Rest
     obj
 
   rest:( op, table, id, object=null, params="", callback=null ) ->
-    url       = @urlRest( op, table,'',params )
+    url       = @url # @urlRest( op, table,'',params )
     settings  = @config( op )
     fetch( url, settings )
       .then( (response) =>
@@ -88,13 +87,17 @@ class Rest
     return
 
   restResult:( object, data=null, where=()->true ) ->  # object can also be objects
+    ###
     result = {}
     result = @toObject(data)                 if data?   and ( op is 'get'  )
     result = @toKeysJson(data)               if data?   and ( op is 'show' )
     result = object                          if object? and ( op is 'add' or op is 'put' )
     result = Util.toObjects(data,where,@key) if data?   and ( op is 'select' or op is 'remove' )
     result = object                          if object? and ( op is 'insert' or op is 'update' )
-    result = if op is 'show' then @toKeysJson(data) else {}
+    result = if op is 'show' then @toKeysJson(data) else {}  
+    ###
+    if where is false then {}
+    result = data
     result
 
   restExtras:( url, error=null, where=null, options=null ) ->
@@ -105,14 +108,14 @@ class Rest
     extras
 
   urlRest:( op, table, id='', params='' ) ->
-    # console.log('Store.Rest.urlRest()', @uri, table,params, @uri + '/' + table + params )
+    # console.log('Rest.urlRest()', @url, table,params, @url + '/' + table + params )
     switch op
-      when 'add', 'get', 'put', 'del',  'change' then @uri + '/' + table + '/' + id + params
-      when 'insert','select', 'update', 'remove' then @uri + '/' + table            + params
-      when 'open',  'show',   'make',   'drop'   then @uri + '/' + table  # No Params
+      when 'add', 'get', 'put', 'del',  'change' then @url + '/' + table + '/' + id + params
+      when 'insert','select', 'update', 'remove' then @url + '/' + table            + params
+      when 'open',  'show',   'make',   'drop'   then @url + '/' + table  # No Params
       else
-          console.error( 'Store.Rest.urlRest() Unknown op', op )
-          @uri + '/' + table + '/' + id + params
+          console.error( 'Rest.urlRest() Unknown op', op )
+          @url + '/' + table + '/' + id + params
 
   restOp:( op ) ->
     switch op
@@ -122,7 +125,7 @@ class Rest
       when 'del', 'remove', 'drop' then 'DELETE'
       when 'change'                then 'GET'
       else
-        console.error( 'Store.Rest.restOp() Unknown op', op )
+        console.error( 'Rest.restOp() Unknown op', op )
         'GET'
 
 export default Rest
