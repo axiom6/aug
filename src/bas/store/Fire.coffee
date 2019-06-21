@@ -7,7 +7,7 @@ import               '../../../pub/lib/store/firebase.auth.esm.js'     # Authent
 
 class Fire
 
-  # Fire.OnFire  = { get:"value", add:"child_added", put:"child_changed", del:"child_removed" }
+  Fire.OnFire  = { get:"value", add:"child_added", put:"child_changed", del:"child_removed" }
 
   constructor:( @store, config ) ->
     @dbName = @store.dbName
@@ -22,16 +22,27 @@ class Fire
     #console.log( 'Fires.init', config )
     firebase
 
-  # Have too clarify id with snapshot.key
+  batch:( obj, objs, callback=null ) ->
+    onComplete = (snapshot) =>
+      if snapshot? and snapshot.val()?
+        obj.data = snapshot.val()
+        callback(  snapshot.val() ) if callback? and @store.batchComplete( objs )
+        @store.results( obj.table, 'batch', snapshot.val() )
+      else
+        @store.onerror( obj.table, 'batch', 'Fire batch error' )
+    @fd.ref(table).once('value', onComplete )
+    return
+
+# Have too clarify id with snapshot.key
   change:( table, id='none', callback=null, onEvt='put' ) ->
     onComplete = (snapshot) =>
       if snapshot?
         key = snapshot.key
-        val = snapshot.val() # @toObjects( snapshot.val() )
+        val = snapshot.val()
         callback( val ) if callback?
-        @store.results( table, 'change', id, val, { key:key, onEvt:onEvt } )
+        @store.results( table, 'change', val, key )
       else
-        @store.onerror( table, onEvt, id, {}, { error:'error' } )
+        @store.onerror( table, 'change', 'Fire batch error' )
     path  = if id is 'none' then table else table + '/' + id
     @fd.ref(path).on( Fire.OnFire[onEvt], onComplete )
     return    
@@ -40,29 +51,29 @@ class Fire
     onComplete = (snapshot) =>
       if snapshot? and snapshot.val()?
         callback( snapshot.val() ) if callback?
-        @store.results( table, 'get', id, snapshot.val() )
+        @store.results( table, 'get', snapshot.val(), id )
       else
-        @store.onerror( table, 'get', id, { msg:'Fire get error' } )
+        @store.onerror( table, 'get', 'Fire get error', id )
     @fd.ref(table+'/'+id).once('value', onComplete )
     return    
 
   add:( table, id, object  ) ->
     object[@keyProp] = id
     onComplete = (error) =>
-      @store.onerror( table, 'add', id, object, { error:error } ) if error?
+      @store.onerror( table, 'add', { error:error, object:object }, id ) if error?
     @fd.ref(table+'/'+id).set( object, onComplete )
     return
 
   # Same as add
   put:( table, id,  object ) ->
     onComplete = (error) =>
-      @store.onerror( table, 'put', id, object, { error:error } ) if error?
+      @store.onerror( table, 'put', { error:error, object:object }, id ) if error?
     @fd.ref(table+'/'+id).set( object, onComplete )
     return
 
   del:( table, id ) ->
     onComplete = (error) =>
-      @store.onerror( table, 'del', id, {}, { error:error } ) if error?
+      @store.onerror( table, 'del', { error:error }, id ) if error?
     @fd.ref(table+'/'+id).remove( onComplete )
     return
 
@@ -71,13 +82,13 @@ class Fire
     onComplete = (snapshot) =>
       if snapshot? and snapshot.val()?
         callback( snapshot.val() ) if callback?
-        @store.results( table, 'select', id, snapshot.val() )
+        @store.results( table, 'select', snapshot.val() )
     @fd.ref(table).once('value', onComplete )
     return
 
   insert:( table, objects ) ->
     onComplete = (error) =>
-      @store.onerror( table, 'insert', 'none', { error:error } ) if error?
+      @store.onerror( table, 'insert', { error:error } ) if error?
     @fd.ref(table).set( objects, onComplete )
     return
 
@@ -85,15 +96,13 @@ class Fire
     onComplete = (snapshot) =>
       if snapshot? and snapshot.val()?
         val = @toObjects( snapshot.val() )
-        @publish( table, 'range', 'none', val )
-      else
-        @publish( table, 'range', 'none', {}  )  # Publish empty results
+        @store.results( table, 'range', val )
     @fd.ref(table).orderByKey().startAt(beg).endAt(end).once('value', onComplete )
     return
 
   update:( table, objects ) ->
     onComplete = (error) =>
-      @store.onerror( table, 'update', 'none', { error:error } ) if error?
+      @store.onerror( table, 'update', { error:error } ) if error?
     @fd.ref(table).update( objects, onComplete )
     return
 
@@ -106,9 +115,9 @@ class Fire
     onComplete = (snapshot) =>
       if snapshot? and snapshot.val()?
         keys = Util.toKeys( snapshot.val(), where, @keyProp )
-        @store.results( table, 'show', 'none', keys, { where:where.toString() } )
+        @store.results( table, 'show', keys )
       else
-        @store.onerror( table, 'show', 'none', {},   { where:where.toString() } )
+        @store.onerror( table, 'show', { where:where } )
     if t?
       @fd.ref(table).once('value', onComplete )
     else
@@ -123,7 +132,7 @@ class Fire
   make:( table, alters ) ->
     if alters is false then {}
     onComplete = (error) =>
-      @store.onerror(  table, 'make', 'none', {}, { error:error } ) if error?
+      @store.onerror(  table, 'make', { error:error, alters:alters } ) if error?
     @fd.ref().set( table, onComplete )
     return
 
@@ -150,7 +159,7 @@ class Fire
   # Sign Anonymously
   auth:( ) ->
    onerror = (error) =>
-     @store.onerror( 'none', 'none', 'anon', {}, { error:error } )
+     @store.onerror( 'auth', 'auth', { error:error } )
    @fb.auth().signInAnonymously().catch( onerror )
    return
 

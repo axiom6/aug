@@ -46,11 +46,11 @@ Local = class Local {
       if (callback != null) {
         callback(obj);
       }
-      this.store.results(table, id, op, obj);
+      this.store.results(table, op, obj, id);
     } else {
-      this.store.onerror(t, id, op, obj, {
-        msg: `Id ${id} not found`
-      });
+      this.store.onerror(table, op, {
+        error: "Local get error"
+      }, id);
     }
   }
 
@@ -93,7 +93,7 @@ Local = class Local {
     if (callback != null) {
       callback(objs);
     }
-    this.store.results(table, 'none', op, objs);
+    this.store.results(table, op, objs);
   }
 
   update(table, objs) {

@@ -22,11 +22,9 @@ Memory = class Memory {
       if (callback != null) {
         callback(object);
       }
-      this.store.results(tn, id, op, object, {
-        op: op
-      });
+      this.store.results(tn, op, object, id);
     } else {
-      this.store.onerror(tn, id, op, object);
+      this.store.onerror(tn, op, 'Memory change error', id);
     }
   }
 
@@ -44,9 +42,11 @@ Memory = class Memory {
       if (callback != null) {
         callback(object);
       }
-      this.store.results(tn, id, 'get', object);
+      this.store.results(tn, 'get', object, id);
     } else {
-      this.store.onerror(tn, id, 'get', object);
+      this.store.onerror(tn, 'get', {
+        error: 'Memory object no found'
+      }, id);
     }
   }
 
@@ -66,7 +66,9 @@ Memory = class Memory {
       }
       delete this.table(tn)[id];
     } else {
-      this.store.onerror(tn, id, 'del', object);
+      this.store.onerror(tn, 'get', {
+        error: 'Memory object not found'
+      }, id);
     }
   }
 
@@ -94,7 +96,7 @@ Memory = class Memory {
     if (callback != null) {
       callback(objects);
     }
-    this.store.results(tn, 'none', 'select', objects);
+    this.store.results(tn, 'select', objects);
   }
 
   update(tn, objects) {
@@ -126,7 +128,7 @@ Memory = class Memory {
     if (callback != null) {
       callback(this.table(tn));
     }
-    this.store.results(tn, id, 'show', this.table(tn));
+    this.store.results(tn, 'show', this.table(tn));
   }
 
   open(tn, schema) {
@@ -149,7 +151,9 @@ Memory = class Memory {
     if (this.tables[tn] != null) {
       delete this.tables[tn];
     } else {
-      this.store.onerror(tn, id, 'drop');
+      this.store.onerror(tn, 'drop', {
+        error: 'Memory missing table'
+      });
     }
   }
 

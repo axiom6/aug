@@ -25,12 +25,12 @@ Index = class Index {
       if (callback != null) {
         callback(req.result);
       }
-      return this.store.results(table, id, op, req.result);
+      return this.store.results(table, op, req.result, id);
     };
     req.onerror = () => {
-      return this.store.onerror(table, id, op, req.result, {
+      return this.store.onerror(table, op, {
         error: req.error
-      });
+      }, id);
     };
   }
 
@@ -39,9 +39,10 @@ Index = class Index {
     txo = this.txnObjectStore(table, "readwrite");
     req = txo.add(obj, id);
     req.onerror = () => {
-      return this.store.onerror(table, id, 'add', object, {
-        error: req.error
-      });
+      return this.store.onerror(table, 'add', {
+        error: req.error,
+        object: object
+      }, id);
     };
   }
 
@@ -50,9 +51,10 @@ Index = class Index {
     txo = this.txnObjectStore(table, "readwrite");
     req = txo.put(object); // Check to be sre that indexDB understands id
     req.onerror = () => {
-      return this.store.onerror(table, id, 'put', object, {
-        error: req.error
-      });
+      return this.store.onerror(table, 'put', {
+        error: req.error,
+        object: object
+      }, id);
     };
   }
 
@@ -61,9 +63,9 @@ Index = class Index {
     txo = this.txnObjectStore(table, "readwrite");
     req = txo['delete'](id); // Check to be sre that indexDB understands id
     req.onerror = () => {
-      return this.store.onerror(table, id, 'del', req.result, {
+      return this.store.onerror(table, 'del', {
         error: req.error
-      });
+      }, id);
     };
   }
 
@@ -163,14 +165,12 @@ Index = class Index {
       if (callback != null) {
         callback(objects);
       }
-      return this.store.results(table, 'none', op, objects, {
-        where: 'all'
-      });
+      return this.store.results(table, op, objects);
     };
     req.onerror = () => {
-      return this.store.onerror(table, 'none', op, {}, {
-        where: 'all',
-        error: req.error
+      return this.store.onerror(table, op, {
+        error: req.error,
+        where: where
       });
     };
   }
@@ -205,7 +205,7 @@ Index = class Index {
         database: dbName,
         error: request.error
       });
-      return this.store.onerror('none', 'none', 'open', dbName, {
+      return this.store.onerror(dbName, 'Index.openDatabase', {
         error: request.error
       });
     };

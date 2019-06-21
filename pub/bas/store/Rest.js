@@ -2,48 +2,48 @@
 var Rest;
 
 Rest = class Rest {
-  constructor(store) {
+  constructor(store, baseUrl) {
     this.store = store;
-    this.url = this.store.url;
+    this.baseUrl = baseUrl;
     this.key = "id";
   }
 
   // Rest
-  change(table, id, callback, params = "") {
-    return this.rest('change', table, id, null, params, callback);
+  change(table, id, callback, path) {
+    return this.rest('change', table, id, null, path, callback);
   }
 
-  get(table, id, callback, params = "") {
-    return this.rest('get', table, id, null, params, callback);
+  get(table, id, callback, path) {
+    return this.rest('get', table, id, null, path, callback);
   }
 
-  add(table, id, object, params = "") {
-    return this.rest('add', table, id, object, params);
+  add(table, id, object, path) {
+    return this.rest('add', table, id, object, path);
   }
 
-  put(table, id, object, params = "") {
-    return this.rest('put', table, id, object, params);
+  put(table, id, object, path) {
+    return this.rest('put', table, id, object, path);
   }
 
-  del(table, id, params = "") {
-    return this.rest('del', table, id, null, params);
+  del(table, id, path) {
+    return this.rest('del', table, id, null, path);
   }
 
   // Sql
-  select(table, where = {}, params = "") {
-    return this.sql('select', table, where, '', null, params, callback);
+  select(table, where = {}) {
+    return this.sql('select', table, where, '', null, callback);
   }
 
-  insert(table, objects, params = "") {
-    return this.sql('insert', table, {}, '', objects, params);
+  insert(table, objects) {
+    return this.sql('insert', table, {}, '', objects);
   }
 
-  update(table, objects, params = "") {
-    return this.sql('update', table, {}, '', objects, params);
+  update(table, objects) {
+    return this.sql('update', table, {}, '', objects);
   }
 
-  remove(table, where = {}, params = "") {
-    return this.sql('remove', table, where, '', null, params);
+  remove(table, where = {}) {
+    return this.sql('remove', table, where, '', null);
   }
 
   // Table - only partially implemented
@@ -85,68 +85,74 @@ Rest = class Rest {
     return obj;
   }
 
-  rest(op, table, id, object = null, params = "", callback = null) {
+  batch(obj, objs, callback = null) {
     var settings, url;
-    url = this.url; // @urlRest( op, table,'',params )
-    settings = this.config(op);
+    url = this.baseUrl + obj.url;
+    settings = this.config('get');
     fetch(url, settings).then((response) => {
       return response.json();
     }).then((data) => {
-      var extras, result;
-      result = this.restResult(object, data);
-      extras = this.restExtras(url);
-      if (callback != null) {
-        callback(result);
+      obj.data = data;
+      if ((callback != null) && this.store.batchComplete(objs)) {
+        callback(data);
       }
-      return this.store.results(table, id, op, result, extras);
+      return this.store.results(table, op, result, id);
     }).catch((error) => {
-      var extras, result;
-      result = this.restResult(object);
-      extras = this.restExtras(url, error);
-      return this.store.onerror(table, id, op, result, extras);
+      return this.store.onerror(obj.table, 'batch', this.toError(url, error));
     });
   }
 
-  sql(op, table, where, id, objects = null, params = "", callback = null) {
+  rest(op, table, id, object = null, path, callback = null) {
     var settings, url;
-    url = this.urlRest(op, table, '', params);
+    url = this.baseUrl + path;
     settings = this.config(op);
     fetch(url, settings).then((response) => {
       return response.json();
     }).then((data) => {
-      var extras, result;
-      result = this.restResult(objects, data, where);
-      extras = this.restExtras(url);
+      var result;
+      result = this.restResult(object, data);
       if (callback != null) {
         callback(result);
       }
-      return this.store.results(table, id, op, result, extras);
+      return this.store.results(table, op, result, id);
     }).catch((error) => {
-      var extras, result;
-      result = this.restResult(object);
-      extras = this.restExtras(url, error);
-      return this.store.onerror(table, id, op, result, extras);
+      return this.store.onerror(table, op, this.toError(url, error), id);
+    });
+  }
+
+  sql(op, table, where, id, objects = null, callback = null) {
+    var settings, url;
+    url = this.urlRest(op, table, '');
+    settings = this.config(op);
+    fetch(url, settings).then((response) => {
+      return response.json();
+    }).then((data) => {
+      var result;
+      result = this.restResult(objects, data, where);
+      if (callback != null) {
+        callback(result);
+      }
+      return this.store.results(table, op, result);
+    }).catch((error) => {
+      return this.store.onerror(table, op, this.toError(url, error), id);
     });
   }
 
   opTable(op, table, options, callback = null) {
     var settings, url;
-    url = this.urlRest(op, t, '', params);
+    url = this.urlRest(op, t, '');
     settings = this.config(op);
     fetch(url, settings).then((response) => {
       return response.json();
     }).then((data) => {
-      var extras, result;
+      var result;
       result = this.restResult(null, data);
-      extras = this.restExtras(url, null, null, options);
       if (callback != null) {
         callback(result);
       }
-      return this.store.results(table, id, op, result, extras);
+      return this.store.results(table, op, result);
     }).catch((error) => {
-      var extras;
-      extras = this.restExtras(url, error);
-      return this.store.onerror(table, id, op, {}, extras);
+      return this.store.onerror(table, op, this.toError(url, error), id);
     });
   }
 
@@ -170,45 +176,43 @@ Rest = class Rest {
     return result;
   }
 
-  restExtras(url, error = null, where = null, options = null) {
-    var extras;
-    extras = {
-      url: url
-    };
+  toError(url, error = null, where = null, options = null) {
+    var obj;
+    obj = {};
+    obj.url = url;
     if (error != null) {
-      extras.error = error;
+      obj.error = error;
     }
     if (where != null) {
-      extras.where = where;
+      obj.where = where;
     }
     if (options != null) {
-      extras.options = options;
+      obj.options = options;
     }
-    return extras;
+    return obj;
   }
 
   urlRest(op, table, id = '', params = '') {
-    // console.log('Rest.urlRest()', @url, table,params, @url + '/' + table + params )
     switch (op) {
       case 'add':
       case 'get':
       case 'put':
       case 'del':
       case 'change':
-        return this.url + '/' + table + '/' + id + params;
+        return this.baseUrl + '/' + table + '/' + id + params;
       case 'insert':
       case 'select':
       case 'update':
       case 'remove':
-        return this.url + '/' + table + params;
+        return this.baseUrl + '/' + table + params;
       case 'open':
       case 'show':
       case 'make':
       case 'drop':
-        return this.url + '/' + table; // No Params
+        return this.baseUrl + '/' + table; // No Params
       default:
         console.error('Rest.urlRest() Unknown op', op);
-        return this.url + '/' + table + '/' + id + params;
+        return this.baseUrl + '/' + table + '/' + id + params;
     }
   }
 

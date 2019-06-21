@@ -1,4 +1,5 @@
-var Store;
+var Store,
+  hasProp = {}.hasOwnProperty;
 
 Store = (function() {
   class Store {
@@ -14,24 +15,81 @@ Store = (function() {
       this.pipe = null;
     }
 
-    results(table, id, op, result, extras = {}) {
+    results(table, op, result, id = null) {
       if (this.pipe != null) {
-        this.pipe.results(table, id, op, result, extras);
+        this.pipe.results(table, id, result, id);
       }
     }
 
-    onerror(table, id, op, result = {}, error = {}) {
+    onerror(table, op, error, id = 'none') {
       console.error('Store.onerror', {
         dbName: this.dbName,
         table: table,
-        id: id,
         op: op,
-        result: result,
-        error: error
+        error: error,
+        id: id
       });
     }
 
-    // REST Api  CRUD + Subscribe for objectect records  
+    subscribe(table, op, source, onSubscribe) {
+      if (this.pipe != null) {
+        this.pipe.subscribe(table, op, source, onSubscribe);
+      }
+    }
+
+    publish(table, op, result, id = null) {
+      if (this.pipe != null) {
+        this.pipe.publish(table, op, result, id);
+      }
+    }
+
+    // REST Api  CRUD + Subscribe for objectect records 
+    batch(objs, callback) { // Respond to an changed object
+      var key, obj;
+      for (key in objs) {
+        if (!hasProp.call(objs, key)) continue;
+        obj = objs[key];
+        switch (obj.src) {
+          case 'rest':
+            if (this.rest != null) {
+              this.rest.batch(obj, objs, callback);
+            }
+            break;
+          case 'fire':
+            if (this.fire != null) {
+              this.fire.batch(obj, objs, callback);
+            }
+            break;
+          case 'index':
+            if (this.index != null) {
+              this.index.batch(obj, objs, callback);
+            }
+            break;
+          case 'local':
+            if (this.local != null) {
+              this.local.batch(obj, objs, callback);
+            }
+            break;
+          case 'memory':
+            if (this.memory != null) {
+              this.memory.batch(obj, objs, callback);
+            }
+        }
+      }
+    }
+
+    batchComplete(objs) {
+      var key, obj;
+      for (key in objs) {
+        if (!hasProp.call(objs, key)) continue;
+        obj = objs[key];
+        if (!obj['data']) {
+          return false;
+        }
+      }
+      return true;
+    }
+
     change(src, table, id, callback) { // Respond to an changed object 
       switch (src) {
         case 'rest':

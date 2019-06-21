@@ -12,7 +12,7 @@ class Test
 
   constructor:() ->
     @dbName       = 'Prac'
-    @url          = 'http://localhost:63342/aug/pub/app/data/store/Prac.json'
+    @url          = 'http://localhost:63342/aug/pub/app/data/'
     @tables       = {}
     subjects      = ["Data","Prac"]
     streamLog     = { subscribe:true, publish:true, subjects:subjects}
@@ -25,26 +25,28 @@ class Test
     @store.memory = new Memory( @store )
     @store.pipe   = new Pipe( @stream, @dbName )
 
+  testStore:() ->
+
+    onInsert = (obj) =>
+      console.log( 'testMemory pipe insert', obj )
+    @store.subscribe( "Prac", "insert", 'testMemory', onInsert )
+    @store.insert( 'Prac', @prac() )
+
+    onSelect = (result) =>
+      console.log( 'testMemory select', result )
+    @store.subscribe( "Prac", "insert", 'testMemory', onSelect )
+    where = (obj) -> obj.column is 'Embrace'
+    @store.select( 'memory', 'Prac', callback, where )
+
   testRest:() ->
 
     callback = (result) =>
       # @store.tables['Prac'] = result
       console.log( 'testRest result', result )
-    @store.rest.get( 'table', 'id', callback )
+    @store.rest.get( 'table', 'id', 'store/Prac.json', callback )
     return
 
   testMemory:() ->
-
-    onInsert = (obj) =>
-      console.log( 'testMemory subscribe', obj )
-    @store.pipe.subscribe( "Prac:Prac", "id", "select", onInsert )
-
-    @store.insert( 'Prac', @prac() )
-    callback = (result) =>
-      console.log( 'testMemory result', result )
-
-    where = (obj) -> obj.column is 'Embrace'
-    @store.select( 'memory', 'Prac', callback, where )
 
   testIndex:() ->
 
@@ -85,6 +87,11 @@ class Test
       "Actualize":{"column":"Encourage","row":"Share","plane":"Wisdom","icon":"fa-codepen","id":"Actualize"}
     } """
     JSON.parse(str)
+
+  batchObjs:() -> {
+    Math: { src:'rest', url:'augm/Math.json', table:'Math', data:null }
+    Geom: { src:'rest', url:'augm/Geom.json', table:'Geom', data:null }
+    Data: { src:'rest', url:'augm/Data.json', table:'Data', data:null } }
 
 export default Test
 

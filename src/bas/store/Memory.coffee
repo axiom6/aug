@@ -15,9 +15,9 @@ class Memory
     object = @table(tn)[id]
     if object?
       callback( object ) if callback?
-      @store.results( tn, id, op, object, { op:op } )
+      @store.results( tn, op, object, id )
     else
-      @store.onerror( tn, id, op, object )
+      @store.onerror( tn, op, 'Memory change error', id )
     return
 
   add:( tn, id, object )    ->
@@ -29,9 +29,9 @@ class Memory
     object = @table(tn)[id]
     if object?
       callback( object ) if callback?
-      @store.results( tn, id, 'get', object )
+      @store.results( tn, 'get', object, id )
     else
-      @store.onerror( tn, id, 'get', object )
+      @store.onerror( tn, 'get', { error:'Memory object no found'}, id )
     return
 
   put:( tn, id,  object ) ->
@@ -45,7 +45,7 @@ class Memory
       @change( tn, id,null,'del' ) if @pubChange
       delete @table(tn)[id]
     else
-      @store.onerror( tn, id, 'del', object )
+      @store.onerror( tn, 'get', { error:'Memory object not found'}, id )
     return
 
   insert:( tn, objects ) ->
@@ -60,7 +60,7 @@ class Memory
     for own key, obj of table when where(obj)
       objects[key] = obj
     callback( objects ) if callback?
-    @store.results( tn, 'none', 'select', objects )
+    @store.results( tn, 'select', objects )
     return
 
   update:( tn, objects ) ->
@@ -78,7 +78,7 @@ class Memory
   show:( tn, format, callback ) ->
     if format is false then {}
     callback( @table(tn) ) if callback?
-    @store.results( tn, id, 'show', @table(tn) )
+    @store.results( tn, 'show', @table(tn) )
     return
 
   open:( tn, schema ) ->
@@ -95,7 +95,7 @@ class Memory
     if       @tables[tn]?
       delete @tables[tn]
     else
-      @store.onerror( tn, id, 'drop' )
+      @store.onerror( tn, 'drop', { error:'Memory missing table'} )
     return
 
   importLocal:( local ) ->

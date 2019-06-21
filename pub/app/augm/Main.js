@@ -29,8 +29,7 @@ Main = (function() {
       Main.stream = new Stream(subjects, streamLog);
       Main.onReady();
       test = new Test();
-      //est.testRest()
-      test.testMemory();
+      test.testStore();
     }
 
   };

@@ -4,15 +4,38 @@ class Store
   constructor:( @dbName, @tables, @url ) ->
     @rest=null; @fire=null; @index=null; @local=null; @memory=null; @pipe=null
 
-  results:       ( table, id, op, result, extras={} ) ->
-    @pipe.results( table, id, op, result, extras) if @pipe?
+  results:       ( table, op, result, id=null ) ->
+    @pipe.results( table, id, result, id ) if @pipe?
     return
 
-  onerror:( table, id, op, result={}, error={} ) ->
-    console.error( 'Store.onerror', { dbName:@dbName, table:table, id:id, op:op, result:result, error:error } )
+  onerror:( table, op, error, id='none' ) ->
+    console.error( 'Store.onerror', { dbName:@dbName, table:table, op:op, error:error, id:id } )
     return
 
-  # REST Api  CRUD + Subscribe for objectect records  
+  subscribe:       ( table, op, source, onSubscribe ) ->
+    @pipe.subscribe( table, op, source, onSubscribe ) if @pipe?
+    return
+
+  publish:       ( table, op, result, id=null ) ->
+    @pipe.publish( table, op, result, id ) if @pipe?
+    return
+
+  # REST Api  CRUD + Subscribe for objectect records 
+
+  batch:( objs, callback )  -> # Respond to an changed object
+    for own key, obj of objs
+      switch obj.src
+        when 'rest'   then @rest  .batch( obj, objs, callback ) if @rest?
+        when 'fire'   then @fire  .batch( obj, objs, callback ) if @fire?
+        when 'index'  then @index .batch( obj, objs, callback ) if @index?
+        when 'local'  then @local .batch( obj, objs, callback ) if @local?
+        when 'memory' then @memory.batch( obj, objs, callback ) if @memory?
+    return
+
+  batchComplete:( objs ) ->
+    for own key, obj of objs
+      return false if not obj['data']
+    true
 
   change:(  src, table, id, callback )  -> # Respond to an changed object 
     switch  src

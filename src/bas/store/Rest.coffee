@@ -3,22 +3,21 @@
 
 class Rest
 
-  constructor:( @store ) ->
-    @url = @store.url
-    @key = "id"
+  constructor:( @store, @baseUrl ) ->
+    @key  = "id"
 
   # Rest
-  change:( table, id, callback, params="" )  -> @rest( 'change', table, id,null, params, callback )
-  get:(    table, id, callback, params="" )  -> @rest( 'get',    table, id,null, params, callback )
-  add:(    table, id, object,   params="" )  -> @rest( 'add',    table, id, object,    params )
-  put:(    table, id, object,   params="" )  -> @rest( 'put',    table, id, object,    params )
-  del:(    table, id,           params="" )  -> @rest( 'del',    table, id,null, params )
+  change:( table, id, callback, path )  -> @rest( 'change', table, id,null, path, callback )
+  get:(    table, id, callback, path )  -> @rest( 'get',    table, id,null, path, callback )
+  add:(    table, id, object,   path )  -> @rest( 'add',    table, id, object,    path )
+  put:(    table, id, object,   path )  -> @rest( 'put',    table, id, object,    path )
+  del:(    table, id,           path )  -> @rest( 'del',    table, id,null, path )
 
   # Sql
-  select:( table, where={},  params="" )  -> @sql( 'select', table, where,   '',null, params, callback )
-  insert:( table, objects,   params="" )  -> @sql( 'insert', table,{}, '', objects,    params )
-  update:( table, objects,   params="" )  -> @sql( 'update', table,{}, '', objects,    params )
-  remove:( table, where={},  params="" )  -> @sql( 'remove', table, where,   '',null, params )
+  select:( table, where={} )  -> @sql( 'select', table, where,   '',null, callback )
+  insert:( table, objects  )  -> @sql( 'insert', table,{}, '', objects,    )
+  update:( table, objects  )  -> @sql( 'update', table,{}, '', objects,    )
+  remove:( table, where={} )  -> @sql( 'remove', table, where,   '',null, )
 
   # Table - only partially implemented
   show:( table, format={} )  -> @opTable( 'show', table, { format:format }, callback )
@@ -36,54 +35,60 @@ class Rest
     obj.headers  = { 'Content-Type': 'application/json' }
     obj
 
-  rest:( op, table, id, object=null, params="", callback=null ) ->
-    url       = @url # @urlRest( op, table,'',params )
+  batch:( obj, objs, callback=null ) ->
+    url = @baseUrl + obj.url
+    settings  = @config( 'get' )
+    fetch( url, settings )
+      .then( (response) =>
+        response.json() )
+      .then( (data) =>
+        obj.data = data
+        callback(data) if callback? and @store.batchComplete(objs)
+        @store.results( table, op, result, id ) )
+      .catch( (error) =>
+        @store.onerror( obj.table, 'batch', @toError(url,error) ) )
+    return
+
+  rest:( op, table, id, object=null, path, callback=null ) ->
+    url       = @baseUrl + path
     settings  = @config( op )
     fetch( url, settings )
       .then( (response) =>
         response.json() )
       .then( (data) =>
         result = @restResult( object, data )
-        extras = @restExtras( url )
         callback(result) if callback?
-        @store.results( table, id, op, result, extras ) )
+        @store.results( table, op, result, id ) )
       .catch( (error) =>
-        result = @restResult( object )
-        extras = @restExtras( url, error  )
-        @store.onerror( table, id, op, result, extras ) )
+        @store.onerror( table, op, @toError(url,error), id ) )
     return
 
-  sql:( op, table, where, id, objects=null, params="", callback=null ) ->
-    url       = @urlRest( op, table,'',params )
+  sql:( op, table, where, id, objects=null,  callback=null ) ->
+    url       = @urlRest( op, table,'' )
     settings  = @config( op )
     fetch( url, settings )
       .then( (response) =>
         response.json() )
       .then( (data) =>
         result = @restResult( objects, data, where )
-        extras = @restExtras( url )
         callback( result ) if callback?
-        @store.results( table, id, op, result, extras ) )
+        @store.results( table, op, result ) )
       .catch( (error) =>
-        result = @restResult( object )
-        extras = @restExtras( url, error  )
-        @store.onerror( table, id, op, result, extras ) )
+        @store.onerror( table, op, @toError(url,error), id ) )
     return
 
   opTable:( op, table, options, callback=null ) ->
-    url       = @urlRest( op, t,'',params )
+    url       = @urlRest( op, t,'' )
     settings  = @config( op )
     fetch( url, settings )
       .then( (response) =>
         response.json() )
       .then( (data) =>
         result = @restResult( null, data )
-        extras = @restExtras( url, null, null, options )
         callback( result ) if callback?
-        @store.results( table, id, op, result, extras ) )
+        @store.results( table, op, result ) )
       .catch( (error) =>
-        extras = @restExtras( url, error  )
-        @store.onerror( table, id, op, {}, extras ) )
+        @store.onerror( table, op, @toError(url,error), id ) )
     return
 
   restResult:( object, data=null, where=()->true ) ->  # object can also be objects
@@ -100,22 +105,22 @@ class Rest
     result = data
     result
 
-  restExtras:( url, error=null, where=null, options=null ) ->
-    extras         = { url:url }
-    extras.error   = error   if error?
-    extras.where   = where   if where?
-    extras.options = options if options?
-    extras
+  toError:( url, error=null, where=null, options=null ) ->
+    obj         = { }
+    obj.url     = url
+    obj.error   = error   if error?
+    obj.where   = where   if where?
+    obj.options = options if options?
+    obj
 
   urlRest:( op, table, id='', params='' ) ->
-    # console.log('Rest.urlRest()', @url, table,params, @url + '/' + table + params )
     switch op
-      when 'add', 'get', 'put', 'del',  'change' then @url + '/' + table + '/' + id + params
-      when 'insert','select', 'update', 'remove' then @url + '/' + table            + params
-      when 'open',  'show',   'make',   'drop'   then @url + '/' + table  # No Params
+      when 'add', 'get', 'put', 'del',  'change' then @baseUrl + '/' + table + '/' + id + params
+      when 'insert','select', 'update', 'remove' then @baseUrl + '/' + table            + params
+      when 'open',  'show',   'make',   'drop'   then @baseUrl + '/' + table  # No Params
       else
           console.error( 'Rest.urlRest() Unknown op', op )
-          @url + '/' + table + '/' + id + params
+          @baseUrl + '/' + table + '/' + id + params
 
   restOp:( op ) ->
     switch op

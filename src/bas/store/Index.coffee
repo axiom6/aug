@@ -20,27 +20,27 @@ class Index
     req = txo.get(id) # Check to be sre that indexDB understands id
     req.onsuccess = () =>
       callback( req.result ) if callback?
-      @store.results( table, id, op, req.result )
+      @store.results( table, op, req.result, id )
     req.onerror = () =>
-      @store.onerror( table, id, op, req.result, { error:req.error } )
+      @store.onerror( table, op, { error:req.error }, id )
     return
 
   add:( table, id, object ) ->
     txo = @txnObjectStore( table, "readwrite" )
     req = txo.add( obj, id )
-    req.onerror   = () => @store.onerror( table, id, 'add', object, { error:req.error } )
+    req.onerror   = () => @store.onerror( table, 'add', { error:req.error, object:object }, id )
     return
 
   put:( table, id, object ) ->
     txo = @txnObjectStore( table, "readwrite" )
     req = txo.put(object) # Check to be sre that indexDB understands id
-    req.onerror   = () => @store.onerror( table, id, 'put', object, { error:req.error } )
+    req.onerror   = () => @store.onerror( table, 'put', { error:req.error, object:object }, id )
     return
 
   del:( table, id ) ->
     txo = @txnObjectStore( table, "readwrite" )
     req = txo['delete'](id) # Check to be sre that indexDB understands id
-    req.onerror   = () => @store.onerror( table, id, 'del', req.result, { error:req.error } )
+    req.onerror   = () => @store.onerror( table, 'del', { error:req.error }, id )
     return
 
   insert:( table, objects ) ->
@@ -67,7 +67,6 @@ class Index
 
   open:( table, schema ) ->
     if table is false and schema is false then {}
-
     return
 
   show:( table, callback, where ) ->
@@ -112,9 +111,9 @@ class Index
         cursor.delete()                    if op is 'remove' and where(cursor.value)
         cursor.continue()
       callback( objects ) if callback?
-      @store.results( table, 'none', op, objects,   { where:'all' } )
-    req.onerror   = () =>
-      @store.onerror( table, 'none', op, {}, { where:'all', error:req.error } )
+      @store.results( table, op, objects )
+    req.onerror = () =>
+      @store.onerror( table, op, { error:req.error, where:where } )
     return
 
   createObjectStores:( tables, keyPath ) ->
@@ -133,7 +132,7 @@ class Index
       console.log( 'Store.IndexedDB', 'open',    dbName, @dbs.objectStoreNames )
     request.onerror   = () =>
       console.error( 'Store.IndexedDB.openDatabase() unable to open', { database:dbName, error:request.error } )
-      @store.onerror( 'none', 'none', 'open', dbName, { error:request.error } )
+      @store.onerror( dbName, 'Index.openDatabase', { error:request.error } )
 
   deleteDatabase:( dbName ) ->
     request = @indexedDB.deleteDatabase(dbName)

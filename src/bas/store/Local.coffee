@@ -27,9 +27,9 @@ class Local
     obj = @obj( table, id )
     if obj?
       callback( obj ) if callback?
-      @store.results( table, id, op, obj )
+      @store.results( table, op, obj, id )
     else
-      @store.onerror( t, id, op, obj,  { msg:"Id #{id} not found"} )
+      @store.onerror( table, op, { error:"Local get error"}, id )
     return
 
   add:(     table, id, obj  )    ->
@@ -59,7 +59,7 @@ class Local
       if obj?
          objs[key] = obj if where(obj)
     callback( objs ) if callback?
-    @store.results( table, 'none', op, objs )
+    @store.results( table, op, objs )
     return
 
   update:( table, objs ) ->
