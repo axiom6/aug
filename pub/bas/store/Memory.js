@@ -82,7 +82,7 @@ Memory = class Memory {
     }
   }
 
-  select(tn, callback, where) {
+  select(tn, where, callback = null) {
     var key, obj, objects, table;
     objects = {};
     table = this.table(tn);

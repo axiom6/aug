@@ -54,7 +54,7 @@ class Memory
       table[key] = obj
     return
 
-  select:( tn, callback, where ) ->
+  select:( tn, where, callback=null ) ->
     objects = {}
     table   = @table(tn)
     for own key, obj of table when where(obj)

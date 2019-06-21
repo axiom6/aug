@@ -35,8 +35,7 @@ class Main
     streamLog   = { subscribe:false, publish:false, subjects:subjects}
     Main.stream = new Stream( subjects, streamLog )
     Main.onReady()
-    test = new Test()
-    test.testStore()
+    new Test()
     return
 
   Main.vueMixin = {

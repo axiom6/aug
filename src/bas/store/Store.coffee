@@ -5,7 +5,7 @@ class Store
     @rest=null; @fire=null; @index=null; @local=null; @memory=null; @pipe=null
 
   results:       ( table, op, result, id=null ) ->
-    @pipe.results( table, id, result, id ) if @pipe?
+    @pipe.results( table, op, result, id ) if @pipe?
     return
 
   onerror:( table, op, error, id='none' ) ->
@@ -83,13 +83,13 @@ class Store
     return
 
   # SQL tables with multiple objects (rows)    
-  select:( src, table, callback, where=Store.where ) ->  # Get an object from table with id
+  select:( src, table, where=Store.where, callback=null ) ->  # Get an object from table with id
     switch  src
-      when 'rest'   then @rest.select(   table, callback, where ) if @rest?
-      when 'fire'   then @fire.select(   table, callback, where ) if @fire?
-      when 'index'  then @index.select(  table, callback, where ) if @index?
-      when 'local'  then @local.select(  table, callback, where ) if @local?
-      when 'memory' then @memory.select( table, callback, where ) if @memory?
+      when 'rest'   then @rest.select(   table, where, callback ) if @rest?
+      when 'fire'   then @fire.select(   table, where, callback ) if @fire?
+      when 'index'  then @index.select(  table, where, callback ) if @index?
+      when 'local'  then @local.select(  table, where, callback ) if @local?
+      when 'memory' then @memory.select( table, where, callback ) if @memory?
     return
 
   insert:         ( table, objects ) -> # Insert objects into table with unique id
@@ -120,13 +120,13 @@ class Store
     return
 
   # Table DDL (Data Definition Language)  
-  show:(    src, table, callback, format=Store.format  )  -> # Show a table
+  show:(    src, table, format=Store.format, callback=null )  -> # Show a table
     switch  src
-      when 'rest'   then @rest  .show( table, format, callback ) if @rest?
-      when 'fire'   then @fire  .show( table, format, callback ) if @fire?
-      when 'index'  then @index .show( table, format, callback ) if @index?
-      when 'local'  then @local .show( table, format, callback ) if @local?
-      when 'memory' then @memory.show( table, format, callback ) if @memory?
+      when 'rest'   then @rest  .show( table, callback, format ) if @rest?
+      when 'fire'   then @fire  .show( table, callback, format ) if @fire?
+      when 'index'  then @index .show( table, callback, format ) if @index?
+      when 'local'  then @local .show( table, callback, format ) if @local?
+      when 'memory' then @memory.show( table, callback, format ) if @memory?
     return   
     
   open:         ( table, schema=Store.schema ) -> # Create a table with an optional schema

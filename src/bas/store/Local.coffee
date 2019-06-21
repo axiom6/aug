@@ -51,7 +51,7 @@ class Local
       @add( table, key, obj )
     return
 
-  select:( table, callback, where, op='select' ) ->
+  select:( table, where, callback=null, op='select' ) ->
     objs =  {}
     ids  =  @tableIds[table]
     for id in ids
@@ -79,10 +79,10 @@ class Local
     if table is false and schema is false then {}
     return
 
-  show:( table, callback, format ) ->
+  show:( table, format, callback=null ) ->
     if format is false then {}
     where = (obj)->true
-    @select( table, callback, where, 'show' )
+    @select( table, where, callback, 'show' )
     return
 
   make:( table, alters ) ->

@@ -14,16 +14,16 @@ class Rest
   del:(    table, id,           path )  -> @rest( 'del',    table, id,null, path )
 
   # Sql
-  select:( table, where={} )  -> @sql( 'select', table, where,   '',null, callback )
-  insert:( table, objects  )  -> @sql( 'insert', table,{}, '', objects,    )
-  update:( table, objects  )  -> @sql( 'update', table,{}, '', objects,    )
-  remove:( table, where={} )  -> @sql( 'remove', table, where,   '',null, )
+  select:( table, where, callback ) -> @sql( 'select', table, where,   '',null, callback )
+  insert:( table, objects )         -> @sql( 'insert', table,{}, '', objects,    )
+  update:( table, objects )         -> @sql( 'update', table,{}, '', objects,    )
+  remove:( table, where   )         -> @sql( 'remove', table, where,   '',null, )
 
   # Table - only partially implemented
-  show:( table, format={} )  -> @opTable( 'show', table, { format:format }, callback )
-  open:( table, schema={} )  -> @opTable( 'open', table, { schema:schema } )
-  make:( table, alters={} )  -> @opTable( 'make', table, { alters:alters } )
-  drop:( table, resets={} )  -> @opTable( 'drop', table, { resets:resets } )
+  show:( table, format={}, callback )  -> @opTable( 'show', table, { format:format }, callback )
+  open:( table, schema={} )            -> @opTable( 'open', table, { schema:schema } )
+  make:( table, alters={} )            -> @opTable( 'make', table, { alters:alters } )
+  drop:( table, resets={} )            -> @opTable( 'drop', table, { resets:resets } )
 
   config:( op ) ->
     obj = {}

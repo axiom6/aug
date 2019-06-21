@@ -17,7 +17,7 @@ Store = (function() {
 
     results(table, op, result, id = null) {
       if (this.pipe != null) {
-        this.pipe.results(table, id, result, id);
+        this.pipe.results(table, op, result, id);
       }
     }
 
@@ -206,31 +206,31 @@ Store = (function() {
     }
 
     // SQL tables with multiple objects (rows)    
-    select(src, table, callback, where = Store.where) { // Get an object from table with id
+    select(src, table, where = Store.where, callback = null) { // Get an object from table with id
       switch (src) {
         case 'rest':
           if (this.rest != null) {
-            this.rest.select(table, callback, where);
+            this.rest.select(table, where, callback);
           }
           break;
         case 'fire':
           if (this.fire != null) {
-            this.fire.select(table, callback, where);
+            this.fire.select(table, where, callback);
           }
           break;
         case 'index':
           if (this.index != null) {
-            this.index.select(table, callback, where);
+            this.index.select(table, where, callback);
           }
           break;
         case 'local':
           if (this.local != null) {
-            this.local.select(table, callback, where);
+            this.local.select(table, where, callback);
           }
           break;
         case 'memory':
           if (this.memory != null) {
-            this.memory.select(table, callback, where);
+            this.memory.select(table, where, callback);
           }
       }
     }
@@ -293,31 +293,31 @@ Store = (function() {
     }
 
     // Table DDL (Data Definition Language)  
-    show(src, table, callback, format = Store.format) { // Show a table
+    show(src, table, format = Store.format, callback = null) { // Show a table
       switch (src) {
         case 'rest':
           if (this.rest != null) {
-            this.rest.show(table, format, callback);
+            this.rest.show(table, callback, format);
           }
           break;
         case 'fire':
           if (this.fire != null) {
-            this.fire.show(table, format, callback);
+            this.fire.show(table, callback, format);
           }
           break;
         case 'index':
           if (this.index != null) {
-            this.index.show(table, format, callback);
+            this.index.show(table, callback, format);
           }
           break;
         case 'local':
           if (this.local != null) {
-            this.local.show(table, format, callback);
+            this.local.show(table, callback, format);
           }
           break;
         case 'memory':
           if (this.memory != null) {
-            this.memory.show(table, format, callback);
+            this.memory.show(table, callback, format);
           }
       }
     }

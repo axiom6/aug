@@ -77,7 +77,7 @@ class Fire
     @fd.ref(table+'/'+id).remove( onComplete )
     return
 
-  select:( table, callback, where ) ->
+  select:( table, where, callback=null ) ->
     if where is false then {}
     onComplete = (snapshot) =>
       if snapshot? and snapshot.val()?
@@ -111,13 +111,14 @@ class Fire
     ref.child(key).remove() for key in keys
     return
 
-  show:( table, callback, where ) ->
+  show:( table, where, callback=null ) ->
     onComplete = (snapshot) =>
       if snapshot? and snapshot.val()?
         keys = Util.toKeys( snapshot.val(), where, @keyProp )
+        callback( keys ) if callback?
         @store.results( table, 'show', keys )
       else
-        @store.onerror( table, 'show', { where:where } )
+        @store.onerror( table, 'show', { where:where.toString() } )
     if t?
       @fd.ref(table).once('value', onComplete )
     else

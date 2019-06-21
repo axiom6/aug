@@ -17,7 +17,7 @@ Main = (function() {
     }
 
     static init(batch) {
-      var streamLog, subjects, test;
+      var streamLog, subjects;
       window['Geom'] = {};
       Main.Batch = batch; // Not necessary here, but assigned for compatibilitry
       subjects = ["Draw", "Note", "Navb", "Tabs", "Geom", "Data"];
@@ -28,8 +28,7 @@ Main = (function() {
       };
       Main.stream = new Stream(subjects, streamLog);
       Main.onReady();
-      test = new Test();
-      test.testStore();
+      new Test();
     }
 
   };

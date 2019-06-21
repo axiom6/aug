@@ -30,7 +30,7 @@ Rest = class Rest {
   }
 
   // Sql
-  select(table, where = {}) {
+  select(table, where, callback) {
     return this.sql('select', table, where, '', null, callback);
   }
 
@@ -42,12 +42,12 @@ Rest = class Rest {
     return this.sql('update', table, {}, '', objects);
   }
 
-  remove(table, where = {}) {
+  remove(table, where) {
     return this.sql('remove', table, where, '', null);
   }
 
   // Table - only partially implemented
-  show(table, format = {}) {
+  show(table, format = {}, callback) {
     return this.opTable('show', table, {
       format: format
     }, callback);

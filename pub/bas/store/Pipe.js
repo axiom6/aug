@@ -16,8 +16,8 @@ Pipe = class Pipe {
 
   publish(table, op, result, id = null) {
     var obj;
-    obj = id != null ? {
-      id: result
+    obj = op === 'del' ? id : id != null ? {
+      [`${id}`]: result
     } : result;
     this.stream.publish(this.toSubject(table, op), obj);
   }
@@ -48,7 +48,7 @@ Pipe = class Pipe {
   }
 
   del(table, id) { // Delete  an object from table with id
-    this.publish(table, 'del', object, id);
+    this.publish(table, 'del', {}, id);
   }
 
   // SQL tables with multiple objects (rows)
@@ -61,7 +61,7 @@ Pipe = class Pipe {
   }
 
   remove(table, where) { // Remove objects from table with where clause
-    this.publish(table, 'remove', where);
+    this.publish(table, 'remove', where.toString());
   }
 
   // Table DDL (Data Definition Language)

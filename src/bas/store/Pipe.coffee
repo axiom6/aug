@@ -11,7 +11,7 @@ class Pipe
     return
 
   publish:( table, op, result, id=null ) ->
-    obj = if id? then { id:result } else result
+    obj = if op is 'del' then id else if id? then { "#{id}":result } else result
     @stream.publish( @toSubject(table,op), obj )
     return
 
@@ -33,7 +33,7 @@ class Pipe
     return
 
   del:( table, id ) -> # Delete  an object from table with id
-    @publish( table, 'del', object, id )
+    @publish( table, 'del', {}, id )
     return
 
   # SQL tables with multiple objects (rows)
@@ -47,7 +47,7 @@ class Pipe
     return
 
   remove:   ( table, where ) -> # Remove objects from table with where clause
-    @publish( table, 'remove', where )
+    @publish( table, 'remove', where.toString() )
     return
 
   # Table DDL (Data Definition Language)

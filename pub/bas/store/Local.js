@@ -77,7 +77,7 @@ Local = class Local {
     }
   }
 
-  select(table, callback, where, op = 'select') {
+  select(table, where, callback = null, op = 'select') {
     var i, id, ids, len, obj, objs;
     objs = {};
     ids = this.tableIds[table];
@@ -125,7 +125,7 @@ Local = class Local {
     }
   }
 
-  show(table, callback, format) {
+  show(table, format, callback = null) {
     var where;
     if (format === false) {
       ({});
@@ -133,7 +133,7 @@ Local = class Local {
     where = function(obj) {
       return true;
     };
-    this.select(table, callback, where, 'show');
+    this.select(table, where, callback, 'show');
   }
 
   make(table, alters) {

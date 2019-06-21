@@ -2,7 +2,7 @@
 import Stream from '../../bas/util/Stream.js'
 import Rest   from '../../bas/store/Rest.js'
 #mport Fire   from '../../bas/store/Fire.js'
-#mport Index  from '../../bas/store/Index.js'
+import Index  from '../../bas/store/Index.js'
 #mport Local  from '../../bas/store/Local.js'
 import Memory from '../../bas/store/Memory.js'
 import Pipe   from '../../bas/store/Pipe.js'
@@ -13,30 +13,67 @@ class Test
   constructor:() ->
     @dbName       = 'Prac'
     @url          = 'http://localhost:63342/aug/pub/app/data/'
-    @tables       = {}
-    subjects      = ["Data","Prac"]
-    streamLog     = { subscribe:true, publish:true, subjects:subjects}
+    @tables       = { Prac:{} }
+    subjects      = ["Prac:Prac:select"]
+    streamLog     = { subscribe:false, publish:false, subjects:subjects}
     @stream       = new Stream( subjects, streamLog )
     @store        = new Store( @dbName, @tables, @url )
+
     @store.rest   = new Rest(   @store )
     #store.fire   = new Fire(   @store, {} )
-    #store.index  = new Index(  @store )
     #store.local  = new Local(  @store )
     @store.memory = new Memory( @store )
     @store.pipe   = new Pipe( @stream, @dbName )
+    onOpen = () =>
+      @testIndex()
+    @store.index  = new Index(  @store, onOpen )
 
-  testStore:() ->
+  testIndex:() ->
 
     onInsert = (obj) =>
-      console.log( 'testMemory pipe insert', obj )
-    @store.subscribe( "Prac", "insert", 'testMemory', onInsert )
+      console.log( 'testIndex pipe insert', obj )
+    @store.subscribe( "Prac", "insert", 'testIndex', onInsert )
     @store.insert( 'Prac', @prac() )
 
+    onUpdate = (obj) =>
+      console.log( 'testIndex pipe update', obj )
+    @store.subscribe( "Prac", "update", 'testIndex', onUpdate )
+    @store.update( 'Prac', @pracUpdate() )
+
+    onRemove = (where) =>
+      console.log( 'testIndex pipe remove', where )
+    @store.subscribe( "Prac", "remove", 'testIndex', onRemove )
+    where = (obj) -> obj.row is 'Do'
+    @store.remove( 'Prac', where )
+
     onSelect = (result) =>
-      console.log( 'testMemory select', result )
-    @store.subscribe( "Prac", "insert", 'testMemory', onSelect )
+      console.log( 'testIndex select', result )
+    @store.subscribe( "Prac", "select", 'testIndex', onSelect )
     where = (obj) -> obj.column is 'Embrace'
-    @store.select( 'memory', 'Prac', callback, where )
+    @store.select( 'index', 'Prac', where )
+
+    onAdd = (obj) =>
+      console.log( 'testIndex pipe add', obj )
+    @store.subscribe( "Prac", "add", 'testIndex', onAdd )
+    @store.add( 'Prac', 'Unite', @pracAdd() )
+
+    onPut = (obj) =>
+      console.log( 'testIndex pipe put', obj )
+    @store.subscribe( "Prac", "put", 'testIndex', onPut )
+    @store.put( 'Prac', 'Discover', @pracPut() )
+
+    onDel = (id) =>
+      console.log( 'testIndex pipe del', id )
+    @store.subscribe( "Prac", "del", 'testIndex', onDel )
+    @store.del( 'Prac', 'Change' )
+
+    onGet = (result) =>
+      console.log( 'testIndex get', result )
+    @store.subscribe( "Prac", "get", 'testIndex', onGet )
+    @store.get( 'memory', 'Prac', 'Deliver' )
+
+    where = (obj) -> true
+    @store.select( 'index', 'Prac', where )
 
   testRest:() ->
 
@@ -46,9 +83,9 @@ class Test
     @store.rest.get( 'table', 'id', 'store/Prac.json', callback )
     return
 
-  testMemory:() ->
+  testStore:() ->
 
-  testIndex:() ->
+  testMemory:() ->
 
   testLocal:() ->
 
@@ -86,6 +123,20 @@ class Test
       "Inspire":{"column":"Innovate","row":"Share","plane":"Wisdom","icon":"fa-fire","id":"Inspire"},
       "Actualize":{"column":"Encourage","row":"Share","plane":"Wisdom","icon":"fa-codepen","id":"Actualize"}
     } """
+    JSON.parse(str)
+
+  pracUpdate:() ->
+    str = """ {
+      "Collab":{"column":"Embrace", "row":"Learn","plane":"Knowledge","icon":"fa-group", "id":"Collab"},
+      "Domain":{"column":"Innovate","row":"Learn","plane":"Knowledge","icon":"fa-empire","id":"Domain"} } """
+    JSON.parse(str)
+
+  pracAdd:() ->
+    str = """ { "column":"Embrace", "row":"Learn","plane":"Knowledge","icon":"fa-group", "id":"Unite" } """
+    JSON.parse(str)
+
+  pracPut:() ->
+    str = """ {"column":"Encourage","row":"Learn","plane":"Wisdom","icon":"fa-external-link-square","id":"Discover"} """
     JSON.parse(str)
 
   batchObjs:() -> {

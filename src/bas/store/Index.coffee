@@ -2,14 +2,15 @@
 
 class Index
 
-  constructor:(  @store ) ->
+  constructor:(  @store, onOpen ) ->
     @dbName    = @store.dbName
     @tables    = @store.tables
-    @keyPath   = 'key' # Check
+    @keyPath   = 'id'
     @dbVersion = 1
-    @dbs       = null
     @indexedDB = window.indexedDB
-    @openDatabase( @dbName, @dbVersion )
+    @dbs       = null
+    @openDatabase( @dbName, @dbVersion, onOpen )
+
 
   change:( table, id, callback ) ->
     @get(  table, id, callback, 'change' )
@@ -50,7 +51,7 @@ class Index
       txo.put(object)
     return
 
-  select:( table, callback, where ) ->
+  select:( table, where, callback=null ) ->
     @traverse( 'select', table, where, callback )
     return
 
@@ -69,7 +70,7 @@ class Index
     if table is false and schema is false then {}
     return
 
-  show:( table, callback, where ) ->
+  show:( table, where, callback=null ) ->
     @traverse( 'show', table, where, callback )
     return
 
@@ -117,19 +118,21 @@ class Index
     return
 
   createObjectStores:( tables, keyPath ) ->
-    for own key, obj of tables when not @dbs.objectStoreNames.contains(key)
+    for own key, obj of tables # when not @dbs.objectStoreNames.contains(key)
       @dbs.createObjectStore( key, { keyPath:keyPath } )
     return
 
-  openDatabase:( dbName, dbVersion ) ->
+  openDatabase:( dbName, dbVersion, onOpen=null ) ->
     request = @indexedDB.open( dbName, dbVersion ) # request = @indexedDB.IDBFactory.open( database, @dbVersion )
     request.onupgradeneeded = ( event ) =>
       @dbs = event.target['result']
-      @createObjectStores( @tables, )
+      @createObjectStores( @tables, @keyPath )
       console.log( 'Store.IndexedDB', 'upgrade', dbName, @dbs.objectStoreNames )
+      onOpen() if onOpen?
     request.onsuccess = ( event ) =>
       @dbs = event.target['result']
       console.log( 'Store.IndexedDB', 'open',    dbName, @dbs.objectStoreNames )
+      onOpen() if onOpen?
     request.onerror   = () =>
       console.error( 'Store.IndexedDB.openDatabase() unable to open', { database:dbName, error:request.error } )
       @store.onerror( dbName, 'Index.openDatabase', { error:request.error } )

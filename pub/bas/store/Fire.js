@@ -117,7 +117,7 @@ Fire = (function() {
       this.fd.ref(table + '/' + id).remove(onComplete);
     }
 
-    select(table, callback, where) {
+    select(table, where, callback = null) {
       var onComplete;
       if (where === false) {
         ({});
@@ -178,16 +178,19 @@ Fire = (function() {
       }
     }
 
-    show(table, callback, where) {
+    show(table, where, callback = null) {
       var onComplete;
       onComplete = (snapshot) => {
         var keys;
         if ((snapshot != null) && (snapshot.val() != null)) {
           keys = Util.toKeys(snapshot.val(), where, this.keyProp);
+          if (callback != null) {
+            callback(keys);
+          }
           return this.store.results(table, 'show', keys);
         } else {
           return this.store.onerror(table, 'show', {
-            where: where
+            where: where.toString()
           });
         }
       };

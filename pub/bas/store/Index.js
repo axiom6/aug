@@ -2,15 +2,15 @@ var Index,
   hasProp = {}.hasOwnProperty;
 
 Index = class Index {
-  constructor(store) {
+  constructor(store, onOpen) {
     this.store = store;
     this.dbName = this.store.dbName;
     this.tables = this.store.tables;
-    this.keyPath = 'key'; // Check
+    this.keyPath = 'id';
     this.dbVersion = 1;
-    this.dbs = null;
     this.indexedDB = window.indexedDB;
-    this.openDatabase(this.dbName, this.dbVersion);
+    this.dbs = null;
+    this.openDatabase(this.dbName, this.dbVersion, onOpen);
   }
 
   change(table, id, callback) {
@@ -80,7 +80,7 @@ Index = class Index {
     }
   }
 
-  select(table, callback, where) {
+  select(table, where, callback = null) {
     this.traverse('select', table, where, callback);
   }
 
@@ -105,7 +105,7 @@ Index = class Index {
     }
   }
 
-  show(table, callback, where) {
+  show(table, where, callback = null) {
     this.traverse('show', table, where, callback);
   }
 
@@ -177,28 +177,33 @@ Index = class Index {
 
   createObjectStores(tables, keyPath) {
     var key, obj;
+// when not @dbs.objectStoreNames.contains(key)
     for (key in tables) {
       if (!hasProp.call(tables, key)) continue;
       obj = tables[key];
-      if (!this.dbs.objectStoreNames.contains(key)) {
-        this.dbs.createObjectStore(key, {
-          keyPath: keyPath
-        });
-      }
+      this.dbs.createObjectStore(key, {
+        keyPath: keyPath
+      });
     }
   }
 
-  openDatabase(dbName, dbVersion) {
+  openDatabase(dbName, dbVersion, onOpen = null) {
     var request;
     request = this.indexedDB.open(dbName, dbVersion); // request = @indexedDB.IDBFactory.open( database, @dbVersion )
     request.onupgradeneeded = (event) => {
       this.dbs = event.target['result'];
-      this.createObjectStores(this.tables);
-      return console.log('Store.IndexedDB', 'upgrade', dbName, this.dbs.objectStoreNames);
+      this.createObjectStores(this.tables, this.keyPath);
+      console.log('Store.IndexedDB', 'upgrade', dbName, this.dbs.objectStoreNames);
+      if (onOpen != null) {
+        return onOpen();
+      }
     };
     request.onsuccess = (event) => {
       this.dbs = event.target['result'];
-      return console.log('Store.IndexedDB', 'open', dbName, this.dbs.objectStoreNames);
+      console.log('Store.IndexedDB', 'open', dbName, this.dbs.objectStoreNames);
+      if (onOpen != null) {
+        return onOpen();
+      }
     };
     return request.onerror = () => {
       console.error('Store.IndexedDB.openDatabase() unable to open', {
