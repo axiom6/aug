@@ -3,9 +3,9 @@ var Store,
 
 Store = (function() {
   class Store {
-    constructor(dbName, tables, url) {
+    constructor(dbName, tables1, url) {
       this.dbName = dbName;
-      this.tables = tables;
+      this.tables = tables1;
       this.url = url;
       this.rest = null;
       this.fire = null;
@@ -13,6 +13,15 @@ Store = (function() {
       this.local = null;
       this.memory = null;
       this.pipe = null;
+    }
+
+    table(tn) {
+      if (tables[tn] != null) {
+        return tables[tn];
+      } else {
+        this.open(table);
+        return this.tables[tn];
+      }
     }
 
     results(table, op, result, id = null) {
@@ -149,8 +158,10 @@ Store = (function() {
     }
 
     add(table, id, object) { // Post an object into table with id
+      if (this.rest != null) {
+        this.rest.add(table, id, object);
+      }
       if (this.fire != null) {
-        //rest  .add( table, id, object ) if @rest?
         this.fire.add(table, id, object);
       }
       if (this.index != null) {
@@ -168,8 +179,10 @@ Store = (function() {
     }
 
     put(table, id, object) { // Put an object into table with id
+      if (this.rest != null) {
+        this.rest.put(table, id, object);
+      }
       if (this.fire != null) {
-        //rest  .put( table, id, object ) if @rest?
         this.fire.put(table, id, object);
       }
       if (this.index != null) {
@@ -187,8 +200,10 @@ Store = (function() {
     }
 
     del(table, id) { // Delete  an object from table with id
+      if (this.rest != null) {
+        this.rest.del(table, id);
+      }
       if (this.fire != null) {
-        //rest  .del( table, id ) if @rest?
         this.fire.del(table, id);
       }
       if (this.index != null) {
@@ -236,8 +251,10 @@ Store = (function() {
     }
 
     insert(table, objects) { // Insert objects into table with unique id
+      if (this.rest != null) {
+        this.rest.insert(table, objects);
+      }
       if (this.fire != null) {
-        //rest  .insert( table, objects ) if @rest?
         this.fire.insert(table, objects);
       }
       if (this.index != null) {
@@ -255,8 +272,10 @@ Store = (function() {
     }
 
     update(table, objects) { // # Update objects into table mapped by id
+      if (this.rest != null) {
+        this.rest.update(table, objects);
+      }
       if (this.fire != null) {
-        //rest  .update( table, objects ) if @rest?
         this.fire.update(table, objects);
       }
       if (this.index != null) {
@@ -274,8 +293,10 @@ Store = (function() {
     }
 
     remove(table, where = Store.where) { // Delete objects from table with where clause
+      if (this.rest != null) {
+        this.rest.remove(table, where);
+      }
       if (this.fire != null) {
-        //rest  .remove( table, where ) if @rest?
         this.fire.remove(table, where);
       }
       if (this.index != null) {
@@ -293,89 +314,62 @@ Store = (function() {
     }
 
     // Table DDL (Data Definition Language)  
-    show(src, table, format = Store.format, callback = null) { // Show a table
-      switch (src) {
-        case 'rest':
-          if (this.rest != null) {
-            this.rest.show(table, callback, format);
-          }
-          break;
-        case 'fire':
-          if (this.fire != null) {
-            this.fire.show(table, callback, format);
-          }
-          break;
-        case 'index':
-          if (this.index != null) {
-            this.index.show(table, callback, format);
-          }
-          break;
-        case 'local':
-          if (this.local != null) {
-            this.local.show(table, callback, format);
-          }
-          break;
-        case 'memory':
-          if (this.memory != null) {
-            this.memory.show(table, callback, format);
-          }
+    show(callback = null) { // Show all table names
+      var keys;
+      keys = Object.keys(this.tables);
+      if (callback != null) {
+        callback(keys);
+      }
+      this.pipe.results(null, 'show', keys);
+    }
+
+    open(table) { // Create a table with an optional schema
+      if (this.tables[table] == null) {
+        this.tables[table] = {};
+        if (this.rest != null) {
+          this.rest.open(table);
+        }
+        if (this.fire != null) {
+          this.fire.open(table);
+        }
+        if (this.index != null) {
+          this.index.open(table);
+        }
+        if (this.local != null) {
+          this.local.open(table);
+        }
+        if (this.pipe != null) {
+          this.pipe.open(table);
+        }
+      } else {
+        this.onerror(table, 'open', {
+          error: 'Store table already exists'
+        });
       }
     }
 
-    open(table, schema = Store.schema) { // Create a table with an optional schema
+    drop(table) { // Drop the entire @table - good for testing
+      if (this.rest != null) {
+        this.rest.drop(table);
+      }
       if (this.fire != null) {
-        //rest  .open( table, schema ) if @rest?
-        this.fire.open(table, schema);
+        this.fire.drop(table);
       }
       if (this.index != null) {
-        this.index.open(table, schema);
+        this.index.drop(table);
       }
       if (this.local != null) {
-        this.local.open(table, schema);
-      }
-      if (this.memory != null) {
-        this.memory.open(table, schema);
+        this.local.drop(table);
       }
       if (this.pipe != null) {
-        this.pipe.open(table, schema);
+        this.pipe.drop(table);
       }
-    }
-
-    make(table, alters = Store.alters) { // Alter a table's schema - especially columns
-      if (this.fire != null) {
-        //rest  .make( table, alters ) if @rest?
-        this.fire.make(table, alters);
-      }
-      if (this.index != null) {
-        this.index.make(table, alters);
-      }
-      if (this.local != null) {
-        this.local.make(table, alters);
-      }
-      if (this.memory != null) {
-        this.memory.make(table, alters);
-      }
-      if (this.pipe != null) {
-        this.pipe.make(table, alters);
-      }
-    }
-
-    drop(table, resets = Store.reset) { // Drop the entire @table - good for testing
-      if (this.fire != null) {
-        //rest  .open( table, resets ) if @rest?
-        this.fire.open(table, resets);
-      }
-      if (this.index != null) {
-        this.index.open(table, resets);
-      }
-      if (this.local != null) {
-        this.local.open(table, resets);
-      }
-      if (this.memory != null) {
-        this.memory.open(table, resets);
-      }
-      if (this.pipe != null) {
-        this.pipe.open(table, resets);
+      if (this.tables[table] != null) {
+        delete this.tables[table];
+      } else {
+        this.onerror(table, 'drop', {
+          error: 'Store missing table'
+        });
       }
     }
 
@@ -386,19 +380,11 @@ Store = (function() {
   };
 
   // RDUDC            Retrieve  Create    Update    Delete   Change
-  Store.restOps = ['get', 'add', 'put', 'del', 'change'];
+  Store.restOps = ['get', 'add', 'put', 'del', 'change', 'batch'];
 
   Store.sqlOps = ['select', 'insert', 'update', 'remove'];
 
-  Store.tableOps = ['show', 'open', 'make', 'drop'];
-
-  Store.schema = {}; // Default schema      for open()
-
-  Store.format = {}; // Default format      for show()
-
-  Store.alters = {}; // Default alterations for make()
-
-  Store.resets = {}; // Default resets      for drop()    
+  Store.tableOps = ['show', 'open', 'drop'];
 
   return Store;
 

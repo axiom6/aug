@@ -178,55 +178,16 @@ Fire = (function() {
       }
     }
 
-    show(table, where, callback = null) {
-      var onComplete;
-      onComplete = (snapshot) => {
-        var keys;
-        if ((snapshot != null) && (snapshot.val() != null)) {
-          keys = Util.toKeys(snapshot.val(), where, this.keyProp);
-          if (callback != null) {
-            callback(keys);
-          }
-          return this.store.results(table, 'show', keys);
-        } else {
-          return this.store.onerror(table, 'show', {
-            where: where.toString()
-          });
-        }
-      };
-      if (typeof t !== "undefined" && t !== null) {
-        this.fd.ref(table).once('value', onComplete);
-      } else {
-        this.fd.ref().once('value', onComplete);
-      }
-    }
-
     // Need to implement
-    open(table, schema) {
-      if (table === false && schema === false) {
+    open(table) {
+      if (table === false) {
         ({});
       }
-    }
-
-    make(table, alters) {
-      var onComplete;
-      if (alters === false) {
-        ({});
-      }
-      onComplete = (error) => {
-        if (error != null) {
-          return this.store.onerror(table, 'make', {
-            error: error,
-            alters: alters
-          });
-        }
-      };
-      this.fd.ref().set(table, onComplete);
     }
 
     // ref.remove( onComplete ) is Dangerous and has removed all tables in Firebase
-    drop(table, resets) {
-      if (table === false && resets === false) {
+    drop(table) {
+      if (table === false) {
         ({});
       }
     }

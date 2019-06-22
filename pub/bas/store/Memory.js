@@ -5,13 +5,11 @@ Memory = class Memory {
   constructor(store) {
     this.store = store;
     this.dbName = this.store.dbName;
-    this.tables = this.store.tables;
     this.pubChange = true;
   }
 
   table(tn) {
-    this.tables[tn] = this.tables[tn] != null ? this.tables[tn] : {};
-    return this.tables[tn];
+    return this.store.table(tn);
   }
 
   // This could be tied to put and add
@@ -121,39 +119,15 @@ Memory = class Memory {
     }
   }
 
-  show(tn, format, callback) {
-    if (format === false) {
-      ({});
-    }
-    if (callback != null) {
-      callback(this.table(tn));
-    }
-    this.store.results(tn, 'show', this.table(tn));
-  }
-
-  open(tn, schema) {
-    if (schema === false) {
-      ({});
-    }
-    this.table(tn);
-  }
-
-  make(tn, alters) {
-    if (tn === false && alters === false) {
+  open(tn) {
+    if (tn === false) { // Nothing to do. Handled by store
       ({});
     }
   }
 
-  drop(tn, resets) {
-    if (resets === false) {
+  drop(tn) {
+    if (tn === false) { // Nothing to do. Handled by store
       ({});
-    }
-    if (this.tables[tn] != null) {
-      delete this.tables[tn];
-    } else {
-      this.store.onerror(tn, 'drop', {
-        error: 'Memory missing table'
-      });
     }
   }
 

@@ -47,28 +47,12 @@ Rest = class Rest {
   }
 
   // Table - only partially implemented
-  show(table, format = {}, callback) {
-    return this.opTable('show', table, {
-      format: format
-    }, callback);
+  open(table) {
+    return this.opTable('open', table);
   }
 
-  open(table, schema = {}) {
-    return this.opTable('open', table, {
-      schema: schema
-    });
-  }
-
-  make(table, alters = {}) {
-    return this.opTable('make', table, {
-      alters: alters
-    });
-  }
-
-  drop(table, resets = {}) {
-    return this.opTable('drop', table, {
-      resets: resets
-    });
+  drop(table) {
+    return this.opTable('drop', table);
   }
 
   config(op) {
@@ -138,7 +122,8 @@ Rest = class Rest {
     });
   }
 
-  opTable(op, table, options, callback = null) {
+  // Only for open and drop. Needs to be thought out
+  opTable(op, table) {
     var settings, url;
     url = this.urlRest(op, t, '');
     settings = this.config(op);
@@ -147,9 +132,6 @@ Rest = class Rest {
     }).then((data) => {
       var result;
       result = this.restResult(null, data);
-      if (callback != null) {
-        callback(result);
-      }
       return this.store.results(table, op, result);
     }).catch((error) => {
       return this.store.onerror(table, op, this.toError(url, error), id);

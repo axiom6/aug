@@ -7,7 +7,7 @@ Index = class Index {
     this.dbName = this.store.dbName;
     this.tables = this.store.tables;
     this.keyPath = 'id';
-    this.dbVersion = 1;
+    this.dbVersion = 2;
     this.indexedDB = window.indexedDB;
     this.dbs = null;
     this.openDatabase(this.dbName, this.dbVersion, onOpen);
@@ -99,26 +99,13 @@ Index = class Index {
     this.traverse('remove', table, where);
   }
 
-  open(table, schema) {
-    if (table === false && schema === false) {
-      ({});
-    }
+  open(table) {
+    this.dbs.createObjectStore(table, {
+      keyPath: this.keyPath
+    });
   }
 
-  show(table, where, callback = null) {
-    this.traverse('show', table, where, callback);
-  }
-
-  make(table, alters) {
-    if (table === false && alters === false) {
-      ({});
-    }
-  }
-
-  drop(table, resets) {
-    if (resets === false) {
-      ({});
-    }
+  drop(table) {
     this.dbs.deleteObjectStore(table);
   }
 
@@ -137,7 +124,7 @@ Index = class Index {
       console.trace('Store.IndexedDb.txnObjectStore() @dbs null');
     } else if (this.dbs.objectStoreNames.contains(table)) {
       txn = this.dbs.transaction(table, mode);
-      txo = txn.objectStore(table); // , { keyPath:key }
+      txo = txn.objectStore(table); // { keyPath:@keyPath } )
     } else {
       console.error('Store.IndexedDb.txnObjectStore() missing objectStore for', table);
     }
@@ -175,15 +162,13 @@ Index = class Index {
     };
   }
 
-  createObjectStores(tables, keyPath) {
+  openTables(tables) {
     var key, obj;
 // when not @dbs.objectStoreNames.contains(key)
     for (key in tables) {
       if (!hasProp.call(tables, key)) continue;
       obj = tables[key];
-      this.dbs.createObjectStore(key, {
-        keyPath: keyPath
-      });
+      this.open(key);
     }
   }
 
@@ -192,7 +177,7 @@ Index = class Index {
     request = this.indexedDB.open(dbName, dbVersion); // request = @indexedDB.IDBFactory.open( database, @dbVersion )
     request.onupgradeneeded = (event) => {
       this.dbs = event.target['result'];
-      this.createObjectStores(this.tables, this.keyPath);
+      this.openTables(this.tables);
       console.log('Store.IndexedDB', 'upgrade', dbName, this.dbs.objectStoreNames);
       if (onOpen != null) {
         return onOpen();
@@ -200,6 +185,7 @@ Index = class Index {
     };
     request.onsuccess = (event) => {
       this.dbs = event.target['result'];
+      this.openTables(this.tables);
       console.log('Store.IndexedDB', 'open', dbName, this.dbs.objectStoreNames);
       if (onOpen != null) {
         return onOpen();

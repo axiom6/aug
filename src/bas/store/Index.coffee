@@ -6,7 +6,7 @@ class Index
     @dbName    = @store.dbName
     @tables    = @store.tables
     @keyPath   = 'id'
-    @dbVersion = 1
+    @dbVersion = 2
     @indexedDB = window.indexedDB
     @dbs       = null
     @openDatabase( @dbName, @dbVersion, onOpen )
@@ -66,20 +66,11 @@ class Index
     @traverse( 'remove', table, where )
     return
 
-  open:( table, schema ) ->
-    if table is false and schema is false then {}
+  open:( table ) ->
+    @dbs.createObjectStore( table, { keyPath:@keyPath } )
     return
 
-  show:( table, where, callback=null ) ->
-    @traverse( 'show', table, where, callback )
-    return
-
-  make:( table, alters ) ->
-    if table is false and alters is false then {}
-    return
-
-  drop:( table, resets ) ->
-    if resets is false then {}
+  drop:( table ) ->
     @dbs.deleteObjectStore(table)
     return
 
@@ -95,7 +86,7 @@ class Index
       console.trace( 'Store.IndexedDb.txnObjectStore() @dbs null' )
     else if @dbs.objectStoreNames.contains(table)
       txn = @dbs.transaction( table, mode )
-      txo = txn.objectStore(  table ) # , { keyPath:key }
+      txo = txn.objectStore(  table ) # { keyPath:@keyPath } )
     else
       console.error( 'Store.IndexedDb.txnObjectStore() missing objectStore for', table )
     txo
@@ -117,20 +108,21 @@ class Index
       @store.onerror( table, op, { error:req.error, where:where } )
     return
 
-  createObjectStores:( tables, keyPath ) ->
-    for own key, obj of tables # when not @dbs.objectStoreNames.contains(key)
-      @dbs.createObjectStore( key, { keyPath:keyPath } )
+  openTables:( tables ) ->
+    for  own key, obj of tables # when not @dbs.objectStoreNames.contains(key)
+      @open( key )
     return
 
   openDatabase:( dbName, dbVersion, onOpen=null ) ->
     request = @indexedDB.open( dbName, dbVersion ) # request = @indexedDB.IDBFactory.open( database, @dbVersion )
     request.onupgradeneeded = ( event ) =>
       @dbs = event.target['result']
-      @createObjectStores( @tables, @keyPath )
+      @openTables( @tables )
       console.log( 'Store.IndexedDB', 'upgrade', dbName, @dbs.objectStoreNames )
       onOpen() if onOpen?
     request.onsuccess = ( event ) =>
       @dbs = event.target['result']
+      @openTables( @tables )
       console.log( 'Store.IndexedDB', 'open',    dbName, @dbs.objectStoreNames )
       onOpen() if onOpen?
     request.onerror   = () =>

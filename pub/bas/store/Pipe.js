@@ -7,7 +7,11 @@ Pipe = class Pipe {
   }
 
   toSubject(table, op) {
-    return this.dbName + ':' + table + ':' + op;
+    if (table != null) {
+      return this.dbName + ':' + table + ':' + op;
+    } else {
+      return this.dbName + ':' + op;
+    }
   }
 
   subscribe(table, op, source, onSubscribe) {
@@ -31,7 +35,7 @@ Pipe = class Pipe {
       case 'select':
         return this.publish(table, 'select', result);
       case 'show':
-        return this.publish(table, 'show', result);
+        return this.publish(null, 'show', result);
       case 'batch':
         return this.publish(table, 'batch', result);
       case 'range':
@@ -65,16 +69,12 @@ Pipe = class Pipe {
   }
 
   // Table DDL (Data Definition Language)
-  open(table, schema) { // Create a table with an optional schema
-    this.publish(table, 'open', schema);
+  open(table) { // Create a table with an optional schema
+    this.publish(table, 'open', table);
   }
 
-  make(table, alters) { // Alter a table's schema - especially columns
-    this.publish(table, 'make', alters);
-  }
-
-  drop(table, resets) { // Drop the entire @table - good for testing
-    this.publish(table, 'drop', resets);
+  drop(table) { // Drop the entire @table - good for testing
+    this.publish(table, 'drop', table);
   }
 
 };

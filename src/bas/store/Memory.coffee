@@ -3,12 +3,10 @@ class Memory
 
   constructor:( @store ) ->
     @dbName    = @store.dbName
-    @tables    = @store.tables
     @pubChange = true
 
   table:(tn) ->
-    @tables[tn] = if @tables[tn]? then @tables[tn] else {}
-    @tables[tn]
+    @store.table(tn)
 
   # This could be tied to put and add
   change:( tn, id, callback, op='change' ) ->
@@ -75,27 +73,12 @@ class Memory
       delete table[key]
     return
 
-  show:( tn, format, callback ) ->
-    if format is false then {}
-    callback( @table(tn) ) if callback?
-    @store.results( tn, 'show', @table(tn) )
+  open:( tn ) ->
+    if tn is false then {} # Nothing to do. Handled by store
     return
 
-  open:( tn, schema ) ->
-    if schema is false then {}
-    @table(tn)
-    return
-
-  make:( tn, alters ) ->
-    if tn is false and alters is false then {}
-    return
-
-  drop:( tn, resets ) ->
-    if resets is false then {}
-    if       @tables[tn]?
-      delete @tables[tn]
-    else
-      @store.onerror( tn, 'drop', { error:'Memory missing table'} )
+  drop:( tn ) ->
+    if tn is false then {} # Nothing to do. Handled by store
     return
 
   importLocal:( local ) ->

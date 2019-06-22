@@ -1,6 +1,6 @@
 
 import Stream from '../../bas/util/Stream.js'
-import Rest   from '../../bas/store/Rest.js'
+#mport Rest   from '../../bas/store/Rest.js'
 #mport Fire   from '../../bas/store/Fire.js'
 import Index  from '../../bas/store/Index.js'
 #mport Local  from '../../bas/store/Local.js'
@@ -19,14 +19,23 @@ class Test
     @stream       = new Stream( subjects, streamLog )
     @store        = new Store( @dbName, @tables, @url )
 
-    @store.rest   = new Rest(   @store )
+    #store.rest   = new Rest(   @store )
     #store.fire   = new Fire(   @store, {} )
     #store.local  = new Local(  @store )
     @store.memory = new Memory( @store )
     @store.pipe   = new Pipe( @stream, @dbName )
+    @testShow()
     onOpen = () =>
       @testIndex()
     @store.index  = new Index(  @store, onOpen )
+
+  testShow:() ->
+
+    onShow = (tableNames) =>
+      console.log( 'testIndex pipe show', tableNames )
+    @store.subscribe( "Prac", "show", 'testIndex', onShow )
+    @store.show()
+    return
 
   testIndex:() ->
 
@@ -74,6 +83,7 @@ class Test
 
     where = (obj) -> true
     @store.select( 'index', 'Prac', where )
+    return
 
   testRest:() ->
 

@@ -4,7 +4,7 @@ class Pipe
   constructor:( @stream, @dbName ) ->
 
   toSubject:( table, op ) ->
-    @dbName + ':' + table + ':' + op
+    if table? then @dbName + ':' + table + ':' + op else @dbName + ':' + op
 
   subscribe:( table, op, source, onSubscribe  ) ->
     @stream.subscribe( @toSubject(table,op), source, onSubscribe )
@@ -20,7 +20,7 @@ class Pipe
       when 'change' then @publish( table, 'change', result, id )
       when 'get'    then @publish( table, 'get',    result, id )
       when 'select' then @publish( table, 'select', result )
-      when 'show'   then @publish( table, 'show',   result )
+      when 'show'   then @publish( null, 'show',   result )
       when 'batch'  then @publish( table, 'batch',  result )
       when 'range'  then @publish( table, 'range',  result ) # Range op in Firebase
 
@@ -51,16 +51,12 @@ class Pipe
     return
 
   # Table DDL (Data Definition Language)
-  open:     ( table, schema ) -> # Create a table with an optional schema
-    @publish( table, 'open', schema )
+  open:     ( table ) -> # Create a table with an optional schema
+    @publish( table, 'open', table )
     return
 
-  make:     ( table, alters ) -> # Alter a table's schema - especially columns
-    @publish( table, 'make', alters )
-    return
-
-  drop:     ( table, resets ) -> # Drop the entire @table - good for testing
-    @publish( table, 'drop', resets )
+  drop:     ( table ) -> # Drop the entire @table - good for testing
+    @publish( table, 'drop', table )
     return
 
 export default Pipe

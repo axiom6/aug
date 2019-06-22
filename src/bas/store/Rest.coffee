@@ -20,10 +20,8 @@ class Rest
   remove:( table, where   )         -> @sql( 'remove', table, where,   '',null, )
 
   # Table - only partially implemented
-  show:( table, format={}, callback )  -> @opTable( 'show', table, { format:format }, callback )
-  open:( table, schema={} )            -> @opTable( 'open', table, { schema:schema } )
-  make:( table, alters={} )            -> @opTable( 'make', table, { alters:alters } )
-  drop:( table, resets={} )            -> @opTable( 'drop', table, { resets:resets } )
+  open:( table )  -> @opTable( 'open', table )
+  drop:( table )  -> @opTable( 'drop', table )
 
   config:( op ) ->
     obj = {}
@@ -77,7 +75,8 @@ class Rest
         @store.onerror( table, op, @toError(url,error), id ) )
     return
 
-  opTable:( op, table, options, callback=null ) ->
+  # Only for open and drop. Needs to be thought out
+  opTable:( op, table ) ->
     url       = @urlRest( op, t,'' )
     settings  = @config( op )
     fetch( url, settings )
@@ -85,7 +84,6 @@ class Rest
         response.json() )
       .then( (data) =>
         result = @restResult( null, data )
-        callback( result ) if callback?
         @store.results( table, op, result ) )
       .catch( (error) =>
         @store.onerror( table, op, @toError(url,error), id ) )

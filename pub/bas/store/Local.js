@@ -119,25 +119,9 @@ Local = class Local {
     }
   }
 
-  open(table, schema) {
-    if (table === false && schema === false) {
-      ({});
-    }
-  }
-
-  show(table, format, callback = null) {
-    var where;
-    if (format === false) {
-      ({});
-    }
-    where = function(obj) {
-      return true;
-    };
-    this.select(table, where, callback, 'show');
-  }
-
-  make(table, alters) {
-    if (table === false && alters === false) {
+  // Nothing to do until we get ids
+  open(table) {
+    if (table === false) {
       ({});
     }
   }

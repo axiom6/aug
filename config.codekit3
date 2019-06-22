@@ -3468,17 +3468,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/store/Stuff.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/bas/store/Stuff.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
 	"/src/bas/test/Run.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -5313,6 +5302,17 @@
 		"mi": 0,
 		"oA": 0,
 		"oAP": "/zzz/store/RestJQ.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/store/Stuff.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/store/Stuff.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,

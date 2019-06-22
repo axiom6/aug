@@ -75,18 +75,9 @@ class Local
         @del( table, id ) if where(obj)
     return
 
-  open:( table, schema ) ->
-    if table is false and schema is false then {}
-    return
-
-  show:( table, format, callback=null ) ->
-    if format is false then {}
-    where = (obj)->true
-    @select( table, where, callback, 'show' )
-    return
-
-  make:( table, alters ) ->
-    if table is false and alters is false then {}
+  # Nothing to do until we get ids
+  open:( table ) ->
+    if table is false then {}
     return
 
   drop:( table ) ->

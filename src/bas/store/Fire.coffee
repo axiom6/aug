@@ -111,35 +111,14 @@ class Fire
     ref.child(key).remove() for key in keys
     return
 
-  show:( table, where, callback=null ) ->
-    onComplete = (snapshot) =>
-      if snapshot? and snapshot.val()?
-        keys = Util.toKeys( snapshot.val(), where, @keyProp )
-        callback( keys ) if callback?
-        @store.results( table, 'show', keys )
-      else
-        @store.onerror( table, 'show', { where:where.toString() } )
-    if t?
-      @fd.ref(table).once('value', onComplete )
-    else
-      @fd.ref(     ).once('value', onComplete )
-    return
-
   # Need to implement
-  open:( table, schema ) ->
-    if   table is false and schema is false then {}
-    return
-
-  make:( table, alters ) ->
-    if alters is false then {}
-    onComplete = (error) =>
-      @store.onerror(  table, 'make', { error:error, alters:alters } ) if error?
-    @fd.ref().set( table, onComplete )
+  open:( table ) ->
+    if   table is false then {}
     return
 
   # ref.remove( onComplete ) is Dangerous and has removed all tables in Firebase
-  drop:( table, resets ) ->
-    if table is false and resets is false then {}
+  drop:( table ) ->
+    if table is false then {}
     return
 
   # keyProp only needed if rows is array
