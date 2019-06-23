@@ -25,9 +25,10 @@ class Test
     @store.memory = new Memory( @store )
     @store.pipe   = new Pipe( @stream, @dbName )
     @testShow()
-    onOpen = () =>
+    onOpenDB = () =>
       @testIndex()
-    @store.index  = new Index(  @store, onOpen )
+      
+    @store.index  = new Index(  @store, onOpenDB )
 
   testShow:() ->
 
@@ -55,11 +56,13 @@ class Test
     where = (obj) -> obj.row is 'Do'
     @store.remove( 'Prac', where )
 
+    ###
     onSelect = (result) =>
-      console.log( 'testIndex select', result )
+      console.log( 'testIndex select Embrace', result )
     @store.subscribe( "Prac", "select", 'testIndex', onSelect )
     where = (obj) -> obj.column is 'Embrace'
     @store.select( 'index', 'Prac', where )
+    ###
 
     onAdd = (obj) =>
       console.log( 'testIndex pipe add', obj )
@@ -81,9 +84,11 @@ class Test
     @store.subscribe( "Prac", "get", 'testIndex', onGet )
     @store.get( 'memory', 'Prac', 'Deliver' )
 
+    ###
     where = (obj) -> true
-    @store.select( 'index', 'Prac', where )
+    @store.select( 'testIndex select All', 'Prac', where )
     return
+    ###
 
   testRest:() ->
 

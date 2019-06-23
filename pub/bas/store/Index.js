@@ -2,15 +2,26 @@ var Index,
   hasProp = {}.hasOwnProperty;
 
 Index = class Index {
-  constructor(store, onOpen) {
+  constructor(store, onOpenDB) {
     this.store = store;
     this.dbName = this.store.dbName;
     this.tables = this.store.tables;
     this.keyPath = 'id';
-    this.dbVersion = 2;
     this.indexedDB = window.indexedDB;
-    this.dbs = null;
-    this.openDatabase(this.dbName, this.dbVersion, onOpen);
+    this.db = null;
+    this.txnUp = null;
+    this.dbVersion = this.version();
+    this.openDB(this.dbName, this.dbVersion, onOpenDB);
+  }
+
+  version() {
+    var dbVersionInt, dbVersionStr;
+    dbVersionStr = localStorage.getItem('IndexDbVersion');
+    dbVersionInt = dbVersionStr != null ? parseInt(dbVersionStr) + 1 : 1;
+    dbVersionStr = dbVersionInt.toString();
+    localStorage.setItem('IndexDbVersion', dbVersionStr);
+    console.log('Index() version', dbVersionStr, dbVersionInt);
+    return dbVersionInt;
   }
 
   change(table, id, callback) {
@@ -19,8 +30,8 @@ Index = class Index {
 
   get(table, id, callback, op = 'get') {
     var req, txo;
-    txo = this.txnObjectStore(table, "readonly");
-    req = txo.get(id); // Check to be sre that indexDB understands id
+    txo = this.txnObjectStore(table, "readwrite"); // readonly
+    req = txo.get(id);
     req.onsuccess = () => {
       if (callback != null) {
         callback(req.result);
@@ -36,8 +47,9 @@ Index = class Index {
 
   add(table, id, object) {
     var req, txo;
-    txo = this.txnObjectStore(table, "readwrite");
-    req = txo.add(obj, id);
+    object['id'] = id;
+    txo = this.txnObjectStore(table, "readwrite"); // [table]
+    req = txo.add(object);
     req.onerror = () => {
       return this.store.onerror(table, 'add', {
         error: req.error,
@@ -48,8 +60,9 @@ Index = class Index {
 
   put(table, id, object) {
     var req, txo;
+    object['id'] = id;
     txo = this.txnObjectStore(table, "readwrite");
-    req = txo.put(object); // Check to be sre that indexDB understands id
+    req = txo.put(object);
     req.onerror = () => {
       return this.store.onerror(table, 'put', {
         error: req.error,
@@ -61,7 +74,7 @@ Index = class Index {
   del(table, id) {
     var req, txo;
     txo = this.txnObjectStore(table, "readwrite");
-    req = txo['delete'](id); // Check to be sre that indexDB understands id
+    req = txo['delete'](id);
     req.onerror = () => {
       return this.store.onerror(table, 'del', {
         error: req.error
@@ -100,13 +113,19 @@ Index = class Index {
   }
 
   open(table) {
-    this.dbs.createObjectStore(table, {
-      keyPath: this.keyPath
-    });
+    var objStor;
+    if (!this.db.objectStoreNames.contains(table)) {
+      objStor = this.db.createObjectStore(table, {
+        keyPath: this.keyPath
+      });
+      objStor.createIndex("id", "id", {
+        unique: true
+      });
+    }
   }
 
   drop(table) {
-    this.dbs.deleteObjectStore(table);
+    this.db.deleteObjectStore(table);
   }
 
   // IndexedDB Specifics
@@ -120,10 +139,10 @@ Index = class Index {
   txnObjectStore(table, mode) { // , key=@key
     var txn, txo;
     txo = null;
-    if (this.dbs == null) {
-      console.trace('Store.IndexedDb.txnObjectStore() @dbs null');
-    } else if (this.dbs.objectStoreNames.contains(table)) {
-      txn = this.dbs.transaction(table, mode);
+    if (this.db == null) {
+      console.trace('Store.IndexedDb.txnObjectStore() @db null');
+    } else if (this.db.objectStoreNames.contains(table)) {
+      txn = this.txnUp != null ? this.txnUp : this.db.transaction(table, mode);
       txo = txn.objectStore(table); // { keyPath:@keyPath } )
     } else {
       console.error('Store.IndexedDb.txnObjectStore() missing objectStore for', table);
@@ -163,70 +182,67 @@ Index = class Index {
   }
 
   openTables(tables) {
-    var key, obj;
-// when not @dbs.objectStoreNames.contains(key)
-    for (key in tables) {
-      if (!hasProp.call(tables, key)) continue;
-      obj = tables[key];
-      this.open(key);
+    var name, obj;
+    for (name in tables) {
+      if (!hasProp.call(tables, name)) continue;
+      obj = tables[name];
+      this.open(name);
     }
   }
 
-  openDatabase(dbName, dbVersion, onOpen = null) {
+  openDB(dbName, dbVersion, onOpenDB = null) {
     var request;
     request = this.indexedDB.open(dbName, dbVersion); // request = @indexedDB.IDBFactory.open( database, @dbVersion )
     request.onupgradeneeded = (event) => {
-      this.dbs = event.target['result'];
+      this.db = event.target['result'];
+      this.txnUp = event.target['transaction'];
       this.openTables(this.tables);
-      console.log('Store.IndexedDB', 'upgrade', dbName, this.dbs.objectStoreNames);
-      if (onOpen != null) {
-        return onOpen();
+      console.log('Index.openDB()', 'upgrade', dbName, this.db.objectStoreNames);
+      if (onOpenDB != null) {
+        return onOpenDB();
       }
     };
     request.onsuccess = (event) => {
-      this.dbs = event.target['result'];
+      this.db = event.target['result'];
       this.openTables(this.tables);
-      console.log('Store.IndexedDB', 'open', dbName, this.dbs.objectStoreNames);
-      if (onOpen != null) {
-        return onOpen();
+      console.log('Index.openDB()', 'open', dbName, this.db.objectStoreNames);
+      if (onOpenDB != null) {
+        return onOpenDB();
       }
     };
-    return request.onerror = () => {
-      console.error('Store.IndexedDB.openDatabase() unable to open', {
-        database: dbName,
-        error: request.error
-      });
-      return this.store.onerror(dbName, 'Index.openDatabase', {
+    request.onerror = () => {
+      // console.error( 'Index.openDB() unable to open', { database:dbName, error:request.error } )
+      return this.store.onerror(dbName, 'Index.openDB()', {
         error: request.error
       });
     };
   }
 
-  deleteDatabase(dbName) {
+  deleteDB(dbName) {
     var request;
     request = this.indexedDB.deleteDatabase(dbName);
     request.onsuccess = () => {
-      return console.log('Store.IndexedDB.deleteDatabase() deleted', {
-        database: dbName
+      return console.log('Index.openDB().deleteDB() deleted', {
+        dbName: dbName
       });
     };
     request.onerror = () => {
-      return console.error('Store.IndexedDB.deleteDatabase() unable to delete', {
-        database: dbName,
+      return console.error('Index.openDB().deleteDB() unable to delete', {
+        dbName: dbName,
         error: request.error
       });
     };
-    return request.onblocked = () => {
-      return console.error('Store.IndexedDB.deleteDatabase() database blocked', {
-        database: dbName,
+    request.onblocked = () => {
+      return console.error('Store.IndexedDB.deleteDB() database blocked', {
+        dbName: dbName,
         error: request.error
       });
     };
   }
 
-  close() {
-    if (this.dbs != null) {
-      return this.dbs.close();
+  closeDB() {
+    if (this.db != null) {
+      this.db.close();
     }
   }
 

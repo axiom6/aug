@@ -2,23 +2,32 @@
 
 class Index
 
-  constructor:(  @store, onOpen ) ->
+  constructor:(  @store, onOpenDB ) ->
     @dbName    = @store.dbName
     @tables    = @store.tables
     @keyPath   = 'id'
-    @dbVersion = 2
-    @indexedDB = window.indexedDB
-    @dbs       = null
-    @openDatabase( @dbName, @dbVersion, onOpen )
 
+    @indexedDB = window.indexedDB
+    @db        = null
+    @txnUp     = null
+    @dbVersion = @version()
+    @openDB( @dbName, @dbVersion, onOpenDB )
+
+  version:() ->
+    dbVersionStr = localStorage.getItem('IndexDbVersion')
+    dbVersionInt = if dbVersionStr? then parseInt(dbVersionStr)+1 else 1
+    dbVersionStr = dbVersionInt.toString()
+    localStorage.setItem('IndexDbVersion',dbVersionStr)
+    console.log( 'Index() version', dbVersionStr, dbVersionInt )
+    dbVersionInt
 
   change:( table, id, callback ) ->
     @get(  table, id, callback, 'change' )
     return
 
   get:( table, id, callback, op='get' ) ->
-    txo = @txnObjectStore( table, "readonly" )
-    req = txo.get(id) # Check to be sre that indexDB understands id
+    txo = @txnObjectStore( table, "readwrite" ) # readonly
+    req = txo.get(id)
     req.onsuccess = () =>
       callback( req.result ) if callback?
       @store.results( table, op, req.result, id )
@@ -27,20 +36,22 @@ class Index
     return
 
   add:( table, id, object ) ->
-    txo = @txnObjectStore( table, "readwrite" )
-    req = txo.add( obj, id )
+    object['id'] = id
+    txo = @txnObjectStore( table, "readwrite" ) # [table]
+    req = txo.add( object )
     req.onerror   = () => @store.onerror( table, 'add', { error:req.error, object:object }, id )
     return
 
   put:( table, id, object ) ->
+    object['id'] = id
     txo = @txnObjectStore( table, "readwrite" )
-    req = txo.put(object) # Check to be sre that indexDB understands id
+    req = txo.put(object)
     req.onerror   = () => @store.onerror( table, 'put', { error:req.error, object:object }, id )
     return
 
   del:( table, id ) ->
     txo = @txnObjectStore( table, "readwrite" )
-    req = txo['delete'](id) # Check to be sre that indexDB understands id
+    req = txo['delete'](id)
     req.onerror   = () => @store.onerror( table, 'del', { error:req.error }, id )
     return
 
@@ -67,11 +78,13 @@ class Index
     return
 
   open:( table ) ->
-    @dbs.createObjectStore( table, { keyPath:@keyPath } )
+    if not @db.objectStoreNames.contains(table)
+      objStor = @db.createObjectStore( table, { keyPath:@keyPath } )
+      objStor.createIndex("id", "id", { unique: true })
     return
 
   drop:( table ) ->
-    @dbs.deleteObjectStore(table)
+    @db.deleteObjectStore(table)
     return
 
   # IndexedDB Specifics
@@ -82,10 +95,10 @@ class Index
 
   txnObjectStore:( table, mode ) -> # , key=@key
     txo = null
-    if not @dbs?
-      console.trace( 'Store.IndexedDb.txnObjectStore() @dbs null' )
-    else if @dbs.objectStoreNames.contains(table)
-      txn = @dbs.transaction( table, mode )
+    if not @db?
+      console.trace( 'Store.IndexedDb.txnObjectStore() @db null' )
+    else if @db.objectStoreNames.contains(table)
+      txn = if @txnUp? then @txnUp else @db.transaction( table, mode )
       txo = txn.objectStore(  table ) # { keyPath:@keyPath } )
     else
       console.error( 'Store.IndexedDb.txnObjectStore() missing objectStore for', table )
@@ -109,37 +122,41 @@ class Index
     return
 
   openTables:( tables ) ->
-    for  own key, obj of tables # when not @dbs.objectStoreNames.contains(key)
-      @open( key )
+    for  own name, obj of tables
+      @open( name )
     return
 
-  openDatabase:( dbName, dbVersion, onOpen=null ) ->
+  openDB:( dbName, dbVersion, onOpenDB=null ) ->
     request = @indexedDB.open( dbName, dbVersion ) # request = @indexedDB.IDBFactory.open( database, @dbVersion )
     request.onupgradeneeded = ( event ) =>
-      @dbs = event.target['result']
+      @db    = event.target['result']
+      @txnUp = event.target['transaction']
       @openTables( @tables )
-      console.log( 'Store.IndexedDB', 'upgrade', dbName, @dbs.objectStoreNames )
-      onOpen() if onOpen?
+      console.log( 'Index.openDB()', 'upgrade', dbName, @db.objectStoreNames )
+      onOpenDB() if onOpenDB?
     request.onsuccess = ( event ) =>
-      @dbs = event.target['result']
+      @db = event.target['result']
       @openTables( @tables )
-      console.log( 'Store.IndexedDB', 'open',    dbName, @dbs.objectStoreNames )
-      onOpen() if onOpen?
+      console.log( 'Index.openDB()', 'open',    dbName, @db.objectStoreNames )
+      onOpenDB() if onOpenDB?
     request.onerror   = () =>
-      console.error( 'Store.IndexedDB.openDatabase() unable to open', { database:dbName, error:request.error } )
-      @store.onerror( dbName, 'Index.openDatabase', { error:request.error } )
+      # console.error( 'Index.openDB() unable to open', { database:dbName, error:request.error } )
+      @store.onerror( dbName, 'Index.openDB()', { error:request.error } )
+    return
 
-  deleteDatabase:( dbName ) ->
+  deleteDB:( dbName ) ->
     request = @indexedDB.deleteDatabase(dbName)
     request.onsuccess = () =>
-      console.log(   'Store.IndexedDB.deleteDatabase() deleted',          { database:dbName } )
+      console.log(   'Index.openDB().deleteDB() deleted',           { dbName:dbName } )
     request.onerror   = () =>
-      console.error( 'Store.IndexedDB.deleteDatabase() unable to delete', { database:dbName, error:request.error } )
+      console.error( 'Index.openDB().deleteDB() unable to delete',  { dbName:dbName, error:request.error } )
     request.onblocked = () =>
-      console.error( 'Store.IndexedDB.deleteDatabase() database blocked', { database:dbName, error:request.error } )
+      console.error( 'Store.IndexedDB.deleteDB() database blocked', { dbName:dbName, error:request.error } )
+    return  
 
-  close:() ->
-    @dbs.close() if @dbs?
+  closeDB:() ->
+    @db.close() if @db?
+    return
 
 export default Index
 

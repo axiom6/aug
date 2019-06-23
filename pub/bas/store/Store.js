@@ -3,9 +3,9 @@ var Store,
 
 Store = (function() {
   class Store {
-    constructor(dbName, tables1, url) {
+    constructor(dbName, tables, url) {
       this.dbName = dbName;
-      this.tables = tables1;
+      this.tables = tables;
       this.url = url;
       this.rest = null;
       this.fire = null;
@@ -16,8 +16,8 @@ Store = (function() {
     }
 
     table(tn) {
-      if (tables[tn] != null) {
-        return tables[tn];
+      if (this.tables[tn] != null) {
+        return this.tables[tn];
       } else {
         this.open(table);
         return this.tables[tn];

@@ -5,8 +5,8 @@ class Store
     @rest=null; @fire=null; @index=null; @local=null; @memory=null; @pipe=null
 
   table:(tn) ->
-    if tables[tn]?
-       tables[tn]
+    if @tables[tn]?
+       @tables[tn]
     else
       @open( table )
       @tables[tn]
