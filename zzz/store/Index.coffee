@@ -45,6 +45,8 @@ class Index
     return dbp
 
   openStores:( db, isUpgrade ) ->
+    # console.log( 'Index.openStores() called',
+    #   { dbName:@dbName, version:db.version, isUpgrade:isUpgrade, stores:db.objectStoreNames } )
     for own  table, obj of @tables
       @openStore( db, table, isUpgrade )
     return
@@ -53,6 +55,7 @@ class Index
     db.objectStoreNames.contains(table)
 
   openStore:( db, table, isUpgrade ) ->
+    #console.log( 'Index.openStore()', { table:table,  } )
     if isUpgrade and not @contains( db, table )
       db.createObjectStore( table, { keyPath:@keyPath } )
       # st.createIndex( @keyPath, @keyPath, { unique: true } )
@@ -62,6 +65,21 @@ class Index
     txn = @db.transaction( table, mode )
     sto = txn.objectStore( table )
     sto
+
+  txp:( table, mode="readwrite" ) ->
+    `async function tran(that) {
+      return await that.txp( table, mode ) }`
+    await tran(@)
+
+  txp:( table, mode="readwrite" ) ->
+    txp = new Promise( (resolve,reject) =>
+      txn = @db.transaction( table, mode )
+      txn.oncomplete = () => # event
+        resolve( txn.objectStore(table) )
+      txn.onerror = (error) =>
+        @store.onerror( table, 'sto', error )
+        reject() )
+    txp
 
   version:() ->
     localStorage.setItem('IndexDbVersion','0')
@@ -78,11 +96,11 @@ class Index
 
   get:( table, id, callback, op='get' ) ->
     txo = @txo( table, 'readonly' )
-    req = txo.get( id )
-    req.onsuccess = () =>
-      callback(req.result) if callback?
-      @store.results( table, op, req.result, id )
-    req.onerror = (error) =>
+    request = txo.get( id )
+    request.onsuccess = () =>
+      callback(request.result) if callback?
+      @store.results( table, op, request.result, id )
+    request.onerror = (error) =>
       @store.onerror( table, op, error, id )
     return
 
@@ -108,16 +126,7 @@ class Index
     return
 
   select:( table, where, callback=null ) ->
-    txo = @txo( table, 'readonly' )
-    req =  txo.getAll()
-    req.onsuccess = () =>
-      objs = {}
-      for own key, obj of req.result when where(obj)
-        objs[obj.id] = obj
-      callback(objs) if callback?
-      @store.results( table, 'select', objs  )
-    req.onerror = (error) =>
-      @store.onerror( table, 'select', error )
+    @traverse( 'select', table, where, callback )
     return
 
   update:( table, objects ) ->

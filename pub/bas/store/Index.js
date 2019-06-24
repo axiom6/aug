@@ -8,10 +8,15 @@ Index = class Index {
     this.store = store;
     this.dbName = this.store.dbName;
     this.tables = this.store.tables;
-    this.txos = {};
     this.keyPath = 'id';
-    //window.indexedDB.deleteDatabase( @dbName )
-    this.dbp = this.openDB(this.dbName, this.version());
+    window.indexedDB.deleteDatabase(this.dbName);
+  }
+
+  async initDB() {
+    async function open(that) {
+      return await that.openDB( that.dbName, that.version() ) };
+    this.db = (await open(this));
+    console.log('Index.initDB()', this.db.name, this.db.version);
   }
 
   openDB(dbName, dbVersion) {
@@ -35,8 +40,16 @@ Index = class Index {
         console.log('Index.openDB()', 'open', dbName, db.objectStoreNames);
         resolve(db);
       };
+      request.onblocked = () => { // event
+        this.store.onerror(dbName, 'open', {
+          cause: 'Index.openDB() onblocked',
+          error: request.error
+        });
+        reject();
+      };
       return request.onerror = () => {
-        this.store.onerror(dbName, 'Index.openDB()', {
+        this.store.onerror(dbName, 'open', {
+          cause: 'Index.openDB() onerror',
           error: request.error
         });
         reject();
@@ -47,45 +60,37 @@ Index = class Index {
 
   openStores(db, isUpgrade) {
     var obj, ref, table;
-    console.log('Index.openStores() called', {
-      dbName: this.dbName,
-      version: db.version,
-      isUpgrade: isUpgrade,
-      stores: db.objectStoreNames
-    });
     ref = this.tables;
     for (table in ref) {
       if (!hasProp.call(ref, table)) continue;
       obj = ref[table];
-      this.openStore(table, db, isUpgrade);
+      this.openStore(db, table, isUpgrade);
     }
   }
 
-  contains(table, db) {
+  contains(db, table) {
     return db.objectStoreNames.contains(table);
   }
 
-  openStore(table, db, isUpgrade) {
-    console.log('Index.openStore()', {
-      table: table
-    });
-    this.txos[table] = {};
-    this.txos[table]['id'] = table;
-    if (isUpgrade && !this.contains(table, db)) {
-      this.txos[table]['objectStore'] = db.createObjectStore(table); // { keyPath:@keyPath }
+  openStore(db, table, isUpgrade) {
+    if (isUpgrade && !this.contains(db, table)) {
+      db.createObjectStore(table, {
+        keyPath: this.keyPath
+      });
     }
   }
 
-  //txos[table]['objectStore'].createIndex( @keyPath, @keyPath, { unique: true } )
-  txo(table, db, mode = "readwrite") {
-    var txn;
-    txn = db.transaction(table, mode);
-    return txn.objectStore(table);
+  // st.createIndex( @keyPath, @keyPath, { unique: true } )
+  txo(table, mode = "readwrite") {
+    var sto, txn;
+    txn = this.db.transaction(table, mode);
+    sto = txn.objectStore(table);
+    return sto;
   }
 
   version() {
     var dbVersionInt, dbVersionStr;
-    // localStorage.setItem('IndexDbVersion','0')
+    localStorage.setItem('IndexDbVersion', '0');
     dbVersionStr = localStorage.getItem('IndexDbVersion');
     dbVersionInt = dbVersionStr != null ? parseInt(dbVersionStr) + 1 : 1;
     dbVersionStr = dbVersionInt.toString();
@@ -99,95 +104,111 @@ Index = class Index {
   }
 
   get(table, id, callback, op = 'get') {
-    this.dbp.then((db) => {
-      var txn, txo;
-      txn = db.transaction(table, "readwrite");
-      txo = txn.objectStore(table);
-      return txo.get(id);
-    }).then((result) => {
+    var req, txo;
+    txo = this.txo(table, 'readonly');
+    req = txo.get(id);
+    req.onsuccess = () => {
       if (callback != null) {
-        callback(result);
+        callback(req.result);
       }
-      return this.store.results(table, op, result, id);
-    });
+      return this.store.results(table, op, req.result, id);
+    };
+    req.onerror = (error) => {
+      return this.store.onerror(table, op, error, id);
+    };
   }
 
   add(table, id, object) {
-    this.dbp.then((db) => {
-      var txn, txo;
-      txn = db.transaction(table, "readwrite");
-      txo = txn.objectStore(table);
-      txo.add(object, id); // id
-      return txn.complete;
-    });
+    var txo;
+    txo = this.txo(table);
+    txo.add(object); // txn.complete
   }
 
   put(table, id, object) {
-    this.dbp.then((db) => {
-      var txn, txo;
-      txn = db.transaction(table, "readwrite");
-      txo = txn.objectStore(table);
-      txo.put(object, id); // id
-      return txn.complete;
-    });
+    var txo;
+    txo = this.txo(table);
+    txo.put(object);
   }
 
   del(table, id) {
-    this.dbp.then((db) => {
-      var txn, txo;
-      txn = db.transaction(table, "readwrite");
-      txo = txn.objectStore(table);
-      return txo['delete'](id);
-    });
+    var txo;
+    txo = this.txo(table);
+    txo['delete'](id);
   }
 
   insert(table, objects) {
-    var id, object;
+    var id, object, txo;
+    txo = this.txo(table);
     for (id in objects) {
       if (!hasProp.call(objects, id)) continue;
       object = objects[id];
-      this.add(table, object, id); // txo.add(object)
+      txo.add(object);
     }
   }
 
-  //await txo.done
   select(table, where, callback = null) {
-    this.traverse('select', table, where, callback);
+    var req, txo;
+    txo = this.txo(table, 'readonly');
+    req = txo.getAll();
+    req.onsuccess = () => {
+      var key, obj, objs, ref;
+      objs = {};
+      ref = req.result;
+      for (key in ref) {
+        if (!hasProp.call(ref, key)) continue;
+        obj = ref[key];
+        if (where(obj)) {
+          objs[obj.id] = obj;
+        }
+      }
+      if (callback != null) {
+        callback(objs);
+      }
+      return this.store.results(table, 'select', objs);
+    };
+    req.onerror = (error) => {
+      return this.store.onerror(table, 'select', error);
+    };
   }
 
   update(table, objects) {
-    var id, object;
+    var id, object, txo;
+    txo = this.txo(table);
     for (id in objects) {
       if (!hasProp.call(objects, id)) continue;
       object = objects[id];
-      this.put(table, id, object);
+      txo.put(object);
     }
   }
 
-  //await txo.done
+  // Using @store.table for objects
   remove(table, where) {
-    var id, obj, ref;
+    var id, obj, ref, txo;
+    txo = this.txo(table);
     ref = this.store.table(table);
     for (id in ref) {
       if (!hasProp.call(ref, id)) continue;
       obj = ref[id];
       if (where(obj)) {
-        this.del(table, id); // txo['delete']( table, key )
+        txo['delete'](id);
       }
     }
   }
 
-  //await txo.done
   open(table) {
-    this.dbp.then((db) => {
-      return this.openStore(table, db);
-    });
+    if (this.db != null) {
+      this.openStore(this.db, table);
+    } else {
+      this.store.onerror(table, 'open', '@db null for IndexedDB');
+    }
   }
 
   drop(table) {
-    this.dbp.then((db) => {
-      return db.deleteObjectStore(table);
-    });
+    if (this.db != null) {
+      this.db.deleteObjectStore(table);
+    } else {
+      this.store.onerror(table, 'drop', '@db null for IndexedDB');
+    }
   }
 
 };

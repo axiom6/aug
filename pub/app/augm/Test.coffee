@@ -5,7 +5,7 @@ import Stream from '../../bas/util/Stream.js'
 import Index  from '../../bas/store/Index.js'
 #mport Local  from '../../bas/store/Local.js'
 #mport Memory from '../../bas/store/Memory.js'
-#mport Pipe   from '../../bas/store/Pipe.js'
+import Pipe   from '../../bas/store/Pipe.js'
 import Store  from '../../bas/store/Store.js'
 
 class Test
@@ -23,24 +23,55 @@ class Test
     #store.fire   = new Fire(   @store, {} )
     #store.local  = new Local(  @store )
     #store.memory = new Memory( @store )
-    #store.pipe   = new Pipe( @stream, @dbName )
-    @testShow()
+    @store.pipe   = new Pipe( @stream, @dbName )
+    #@testShow()
+    @testInit()
 
+  testInit:() ->
     try
-      @store.index  = new Index(  @store )
-      @testIndex()
+      @store.index = new Index(  @store )
+      await @store.index.initDB()
+      @testSelect()
     catch error
       console.error( 'Store.Test', error )
 
-  testShow:() ->
+  testSelect:() ->
 
-    onShow = (tableNames) =>
-      console.log( 'testIndex pipe show', tableNames )
-    @store.subscribe( "Prac", "show", 'testIndex', onShow )
-    @store.show( onShow )
-    return
+    # console.log( 'testInsert', @prac() )
+    onInsert = (obj) =>
+      console.log( 'testIndex pipe insert', obj )
+    @store.subscribe( "Prac", "insert", 'testIndex', onInsert )
+    @store.insert( 'Prac', @prac() )
+
+    onSelect = (result) =>
+      console.log( 'testIndex select All', result )
+    @store.subscribe( "Prac", "select", 'testIndex', onSelect )
+    where = (obj) -> true # obj.column is 'Embrace'
+    @store.select( 'index', 'Prac', where )
+
+  testAdd:() ->
+
+    onAdd = (obj) =>
+      console.log( 'testIndex pipe add', obj )
+    @store.subscribe( "Prac", "add", 'testIndex', onAdd )
+    @store.add( 'Prac', 'Unite', @pracAdd() )
+
+    onGet = (result) =>
+      console.log( 'testIndex get', result )
+    @store.subscribe( "Prac", "get", 'testIndex', onGet )
+    @store.get( 'index', 'Prac', 'Unite', onGet )
 
   testIndex:() ->
+
+    onAdd = (obj) =>
+      console.log( 'testIndex pipe add', obj )
+    @store.subscribe( "Prac", "add", 'testIndex', onAdd )
+    @store.add( 'Prac', 'Unite', @pracAdd() )
+
+    onGet = (result) =>
+      console.log( 'testIndex get', result )
+    @store.subscribe( "Prac", "get", 'testIndex', onGet )
+    @store.get( 'index', 'Prac', 'Unite', onGet )
 
     onInsert = (obj) =>
       console.log( 'testIndex pipe insert', obj )
@@ -62,15 +93,8 @@ class Test
       console.log( 'testIndex select All', result )
     @store.subscribe( "Prac", "select", 'testIndex', onSelect )
     where = (obj) -> true # obj.column is 'Embrace'
-    @store.select( 'memory', 'Prac', where )
+    @store.select( 'index', 'Prac', where )
 
-    ###
-    onAdd = (obj) =>
-      console.log( 'testIndex pipe add', obj )
-    @store.subscribe( "Prac", "add", 'testIndex', onAdd )
-    @store.add( 'Prac', 'Unite', @pracAdd() )
-    ###
-  
     onPut = (obj) =>
       console.log( 'testIndex pipe put', obj )
     @store.subscribe( "Prac", "put", 'testIndex', onPut )
@@ -80,17 +104,6 @@ class Test
       console.log( 'testIndex pipe del', id )
     @store.subscribe( "Prac", "del", 'testIndex', onDel )
     @store.del( 'Prac', 'Change' )
-
-    onGet = (result) =>
-      console.log( 'testIndex get', result )
-    @store.subscribe( "Prac", "get", 'testIndex', onGet )
-    @store.get( 'index', 'Prac', 'Deliver', onGet )
-
-    ###
-    where = (obj) -> true
-    @store.select( 'testIndex select All', 'Prac', where )
-    return
-    ###
 
   testRest:() ->
 
