@@ -4,8 +4,8 @@ import Stream from '../../bas/util/Stream.js'
 #mport Fire   from '../../bas/store/Fire.js'
 import Index  from '../../bas/store/Index.js'
 #mport Local  from '../../bas/store/Local.js'
-import Memory from '../../bas/store/Memory.js'
-import Pipe   from '../../bas/store/Pipe.js'
+#mport Memory from '../../bas/store/Memory.js'
+#mport Pipe   from '../../bas/store/Pipe.js'
 import Store  from '../../bas/store/Store.js'
 
 class Test
@@ -22,20 +22,22 @@ class Test
     #store.rest   = new Rest(   @store )
     #store.fire   = new Fire(   @store, {} )
     #store.local  = new Local(  @store )
-    @store.memory = new Memory( @store )
-    @store.pipe   = new Pipe( @stream, @dbName )
+    #store.memory = new Memory( @store )
+    #store.pipe   = new Pipe( @stream, @dbName )
     @testShow()
-    onOpenDB = () =>
+
+    try
+      @store.index  = new Index(  @store )
       @testIndex()
-      
-    @store.index  = new Index(  @store, onOpenDB )
+    catch error
+      console.error( 'Store.Test', error )
 
   testShow:() ->
 
     onShow = (tableNames) =>
       console.log( 'testIndex pipe show', tableNames )
     @store.subscribe( "Prac", "show", 'testIndex', onShow )
-    @store.show()
+    @store.show( onShow )
     return
 
   testIndex:() ->
@@ -56,19 +58,19 @@ class Test
     where = (obj) -> obj.row is 'Do'
     @store.remove( 'Prac', where )
 
-    ###
     onSelect = (result) =>
-      console.log( 'testIndex select Embrace', result )
+      console.log( 'testIndex select All', result )
     @store.subscribe( "Prac", "select", 'testIndex', onSelect )
-    where = (obj) -> obj.column is 'Embrace'
-    @store.select( 'index', 'Prac', where )
-    ###
+    where = (obj) -> true # obj.column is 'Embrace'
+    @store.select( 'memory', 'Prac', where )
 
+    ###
     onAdd = (obj) =>
       console.log( 'testIndex pipe add', obj )
     @store.subscribe( "Prac", "add", 'testIndex', onAdd )
     @store.add( 'Prac', 'Unite', @pracAdd() )
-
+    ###
+  
     onPut = (obj) =>
       console.log( 'testIndex pipe put', obj )
     @store.subscribe( "Prac", "put", 'testIndex', onPut )
@@ -82,7 +84,7 @@ class Test
     onGet = (result) =>
       console.log( 'testIndex get', result )
     @store.subscribe( "Prac", "get", 'testIndex', onGet )
-    @store.get( 'memory', 'Prac', 'Deliver' )
+    @store.get( 'index', 'Prac', 'Deliver', onGet )
 
     ###
     where = (obj) -> true

@@ -4648,7 +4648,7 @@ function factory(type, config, load, typed) {
    *     size, resize, squeeze, index
    *
    * @param {Array | Matrix | string} matrix  An array, matrix, or string
-   * @param {Index} index                     An index containing ranges for each
+   * @param {IndexDB} index                     An index containing ranges for each
    *                                          dimension
    * @param {*} [replacement]                 An array, matrix, or scalar.
    *                                          If provided, the subset is replaced with replacement.
@@ -4695,7 +4695,7 @@ function factory(type, config, load, typed) {
   /**
    * Retrieve a subset of a string
    * @param {string} str            string from which to get a substring
-   * @param {Index} index           An index containing ranges for each dimension
+   * @param {IndexDB} index           An index containing ranges for each dimension
    * @returns {string} substring
    * @private
    */
@@ -4724,7 +4724,7 @@ function factory(type, config, load, typed) {
   /**
    * Replace a substring in a string
    * @param {string} str            string to be replaced
-   * @param {Index} index           An index containing ranges for each dimension
+   * @param {IndexDB} index           An index containing ranges for each dimension
    * @param {string} replacement    Replacement string
    * @param {string} [defaultValue] Default value to be uses when resizing
    *                                the string. is ' ' by default
@@ -4787,7 +4787,7 @@ function factory(type, config, load, typed) {
 /**
  * Retrieve a property from an object
  * @param {Object} object
- * @param {Index} index
+ * @param {IndexDB} index
  * @return {*} Returns the value of the property
  * @private
  */
@@ -4809,7 +4809,7 @@ function _getObjectProperty(object, index) {
 /**
  * Set a property on an object
  * @param {Object} object
- * @param {Index} index
+ * @param {IndexDB} index
  * @param {*} replacement
  * @return {*} Returns the updated object
  * @private
@@ -9141,7 +9141,7 @@ function factory(type, config, load, typed) {
    *     const value = matrix.subset(index, replacement)   // replace subset
    *
    * @memberof DenseMatrix
-   * @param {Index} index
+   * @param {IndexDB} index
    * @param {Array | DenseMatrix | *} [replacement]
    * @param {*} [defaultValue=0]      Default value, filled in on new entries when
    *                                  the matrix is resized. If not provided,
@@ -9243,7 +9243,7 @@ function factory(type, config, load, typed) {
    * Get a submatrix of this matrix
    * @memberof DenseMatrix
    * @param {DenseMatrix} matrix
-   * @param {Index} index   Zero-based index
+   * @param {IndexDB} index   Zero-based index
    * @private
    */
 
@@ -9285,7 +9285,7 @@ function factory(type, config, load, typed) {
    * Index is not checked for correct number or length of dimensions.
    * @memberof DenseMatrix
    * @param {Array} data
-   * @param {Index} index
+   * @param {IndexDB} index
    * @param {number} dims   Total number of dimensions
    * @param {number} dim    Current dimension
    * @return {Array} submatrix
@@ -9315,7 +9315,7 @@ function factory(type, config, load, typed) {
    * Indexes are zero-based.
    * @memberof DenseMatrix
    * @param {DenseMatrix} matrix
-   * @param {Index} index
+   * @param {IndexDB} index
    * @param {DenseMatrix | Array | *} submatrix
    * @param {*} defaultValue          Default value, filled in on new entries when
    *                                  the matrix is resized.
@@ -9400,7 +9400,7 @@ function factory(type, config, load, typed) {
    * Replace a submatrix of a multi dimensional matrix.
    * @memberof DenseMatrix
    * @param {Array} data
-   * @param {Index} index
+   * @param {IndexDB} index
    * @param {Array} submatrix
    * @param {number} dims   Total number of dimensions
    * @param {number} dim
@@ -14908,7 +14908,7 @@ function factory(type, config, load, typed) {
    *     const subset = matrix.subset(index)               // retrieve subset
    *     const value = matrix.subset(index, replacement)   // replace subset
    *
-   * @param {Index} index
+   * @param {IndexDB} index
    * @param {Array | Matrix | *} [replacement]
    * @param {*} [defaultValue=0]      Default value, filled in on new entries when
    *                                  the matrix is resized. If not provided,
@@ -19596,7 +19596,7 @@ function factory(type, config, load, typed) {
    * - Retrieve a matrix subset
    *
    * @param {Object | Array | Matrix | string} object
-   * @param {Index} index
+   * @param {IndexDB} index
    * @return {Object | Array | Matrix | string} Returns the subset
    */
 
@@ -36556,7 +36556,7 @@ function factory(type, config, load, typed) {
    *     const value = matrix.subset(index, replacement)   // replace subset
    *
    * @memberof SparseMatrix
-   * @param {Index} index
+   * @param {IndexDB} index
    * @param {Array | Maytrix | *} [replacement]
    * @param {*} [defaultValue=0]      Default value, filled in on new entries when
    *                                  the matrix is resized. If not provided,
@@ -38467,7 +38467,7 @@ function factory(type, config, load) {
    *     const subset = matrix.subset(index)               // retrieve subset
    *     const value = matrix.subset(index, replacement)   // replace subset
    *
-   * @param {Index} index
+   * @param {IndexDB} index
    * @param {Array | ImmutableDenseMatrix | *} [replacement]
    * @param {*} [defaultValue=0]      Default value, filled in on new entries when
    *                                  the matrix is resized. If not provided,
@@ -38688,7 +38688,7 @@ function factory(type, config, load, typed) {
    *    bignumber, boolean, complex, matrix, number, string, unit
    *
    * @param {...*} ranges   Zero or more ranges or numbers.
-   * @return {Index}        Returns the created index
+   * @return {IndexDB}        Returns the created index
    */
   return typed('index', {
     '...number | string | BigNumber | Range | Array | Matrix': function numberStringBigNumberRangeArrayMatrix(args) {
@@ -43971,7 +43971,7 @@ function factory(type, config, load, typed) {
    * - Replace a matrix subset
    *
    * @param {Object | Array | Matrix | string} object
-   * @param {Index} index
+   * @param {IndexDB} index
    * @param {*} value
    * @return {Object | Array | Matrix | string} Returns the original object
    *                                            except in case of a string

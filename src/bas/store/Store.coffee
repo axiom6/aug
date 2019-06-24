@@ -5,11 +5,9 @@ class Store
     @rest=null; @fire=null; @index=null; @local=null; @memory=null; @pipe=null
 
   table:(tn) ->
-    if @tables[tn]?
-       @tables[tn]
-    else
-      @open( table )
-      @tables[tn]
+    if not @tables[tn]?
+       @open( table )
+    @tables[tn]
 
   results:       ( table, op, result, id=null ) ->
     @pipe.results( table, op, result, id ) if @pipe?
@@ -130,7 +128,7 @@ class Store
   show:( callback=null )  -> # Show all table names
     keys = Object.keys( @tables )
     callback( keys ) if callback?
-    @pipe.results( null, 'show', keys )
+    @pipe.results( null, 'show', keys ) if pipe?
     return
   
   open:         ( table) -> # Create a table with an optional schema

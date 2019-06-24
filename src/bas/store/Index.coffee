@@ -1,19 +1,65 @@
 
 
+#import { openDB } from '../../lib/idb/index.js';
+
 class Index
 
-  constructor:(  @store, onOpenDB ) ->
+  constructor:(  @store ) ->
     @dbName    = @store.dbName
     @tables    = @store.tables
+    @txos      = {}
     @keyPath   = 'id'
+    #window.indexedDB.deleteDatabase( @dbName )
+    @dbp = @openDB(  @dbName, @version() )
 
-    @indexedDB = window.indexedDB
-    @db        = null
-    @txnUp     = null
-    @dbVersion = @version()
-    @openDB( @dbName, @dbVersion, onOpenDB )
+  openDB:( dbName, dbVersion ) ->
+    dbp = new Promise( (resolve,reject) =>
+      request = window.indexedDB.open( dbName, dbVersion )
+      request.onupgradeneeded = ( event ) =>
+        upDb  = event.target['result']
+        upTxn = event.target['transaction']
+        @openStores( upDb, true )
+        console.log( 'Index.openDB()', 'upgrade', dbName, upDb.objectStoreNames )
+        upTxn.complete
+        #resolve(upDb)
+        return
+      request.onsuccess = ( event ) =>
+        db = event.target['result']
+        @openStores( db, false )
+        console.log( 'Index.openDB()', 'open',    dbName, db.objectStoreNames )
+        resolve(db)
+        return
+      request.onerror   = () =>
+        @store.onerror( dbName, 'Index.openDB()', { error:request.error } )
+        reject()
+        return )
+    return dbp
+
+  openStores:( db, isUpgrade ) ->
+    console.log( 'Index.openStores() called',
+      { dbName:@dbName, version:db.version, isUpgrade:isUpgrade, stores:db.objectStoreNames } )
+    for own  table, obj of @tables
+      @openStore( table, db, isUpgrade )
+    return
+
+  contains:( table, db ) ->
+    db.objectStoreNames.contains(table)
+
+  openStore:( table, db, isUpgrade ) ->
+    console.log( 'Index.openStore()', { table:table,  } )
+    @txos[table] = {}
+    @txos[table]['id'] = table
+    if isUpgrade and not @contains( table, db )
+      @txos[table]['objectStore'] = db.createObjectStore( table ) # { keyPath:@keyPath }
+      #txos[table]['objectStore'].createIndex( @keyPath, @keyPath, { unique: true } )
+    return
+
+  txo:( table, db, mode="readwrite" ) ->
+    txn = db.transaction( table, mode )
+    txn.objectStore(      table )
 
   version:() ->
+    # localStorage.setItem('IndexDbVersion','0')
     dbVersionStr = localStorage.getItem('IndexDbVersion')
     dbVersionInt = if dbVersionStr? then parseInt(dbVersionStr)+1 else 1
     dbVersionStr = dbVersionInt.toString()
@@ -26,40 +72,43 @@ class Index
     return
 
   get:( table, id, callback, op='get' ) ->
-    txo = @txnObjectStore( table, "readwrite" ) # readonly
-    req = txo.get(id)
-    req.onsuccess = () =>
-      callback( req.result ) if callback?
-      @store.results( table, op, req.result, id )
-    req.onerror = () =>
-      @store.onerror( table, op, { error:req.error }, id )
+    @dbp.then( (db) =>
+      txn = db.transaction(  table, "readwrite" )
+      txo = txn.objectStore( table )
+      return txo.get( id ) )
+    .then( (result) =>
+      callback(result) if callback?
+      @store.results( table, op, result, id ) )
     return
 
   add:( table, id, object ) ->
-    object['id'] = id
-    txo = @txnObjectStore( table, "readwrite" ) # [table]
-    req = txo.add( object )
-    req.onerror   = () => @store.onerror( table, 'add', { error:req.error, object:object }, id )
+    @dbp.then( (db) =>
+      txn = db.transaction(  table, "readwrite" )
+      txo = txn.objectStore( table )
+      txo.add( object, id ) # id
+      return txn.complete )
     return
 
   put:( table, id, object ) ->
-    object['id'] = id
-    txo = @txnObjectStore( table, "readwrite" )
-    req = txo.put(object)
-    req.onerror   = () => @store.onerror( table, 'put', { error:req.error, object:object }, id )
+    @dbp.then( (db) =>
+      txn = db.transaction(  table, "readwrite" )
+      txo = txn.objectStore( table )
+      txo.put( object, id )  # id
+      return txn.complete )
     return
 
   del:( table, id ) ->
-    txo = @txnObjectStore( table, "readwrite" )
-    req = txo['delete'](id)
-    req.onerror   = () => @store.onerror( table, 'del', { error:req.error }, id )
+    @dbp.then( (db) =>
+      txn = db.transaction(  table, "readwrite" )
+      txo = txn.objectStore( table )
+      txo['delete']( id ) )
     return
 
-  insert:( table, objects ) ->
-    txo = @txnObjectStore( table, "readwrite" )
-    for own key, object of objects
-      object = @idProp( key, object, @key )
-      txo.put(object)
+  insert:( table, objects ) =>
+    #txo = await @txo( table )
+    for own id, object of objects
+      @add( table, object, id ) # txo.add(object)
+    #await txo.done
     return
 
   select:( table, where, callback=null ) ->
@@ -67,97 +116,29 @@ class Index
     return
 
   update:( table, objects ) ->
-    txo = @txnObjectStore( table, "readwrite" )
-    for own key, object of objects
-      object = @idProp( key, object, @key )
-      txo.put(object)
+    #txo = await @txo( table )
+    for own id, object of objects
+      @put( table, id, object )
+    #await txo.done
     return
 
   remove:( table, where ) ->
-    @traverse( 'remove', table, where )
+    #@txo = await @txo( table ) @store.table(table) should not be used
+    for own id, obj of @store.table(table) when where(obj)
+      @del( table, id ) # txo['delete']( table, key )
+    #await txo.done
     return
 
   open:( table ) ->
-    if not @db.objectStoreNames.contains(table)
-      objStor = @db.createObjectStore( table, { keyPath:@keyPath } )
-      objStor.createIndex("id", "id", { unique: true })
+    @dbp.then( (db) =>
+      @openStore( table, db ) )
     return
 
   drop:( table ) ->
-    @db.deleteObjectStore(table)
+    @dbp.then( (db) =>
+      db.deleteObjectStore(table) )
     return
 
-  # IndexedDB Specifics
-
-  idProp:( id, object, key ) ->
-    object[key] = id if not object[key]?
-    object
-
-  txnObjectStore:( table, mode ) -> # , key=@key
-    txo = null
-    if not @db?
-      console.trace( 'Store.IndexedDb.txnObjectStore() @db null' )
-    else if @db.objectStoreNames.contains(table)
-      txn = if @txnUp? then @txnUp else @db.transaction( table, mode )
-      txo = txn.objectStore(  table ) # { keyPath:@keyPath } )
-    else
-      console.error( 'Store.IndexedDb.txnObjectStore() missing objectStore for', table )
-    txo
-
-  traverse:( op, table, where, callback=null ) ->
-    mode = if op is 'select' then 'readonly' else 'readwrite'
-    txo  = @txnObjectStore( table, mode )
-    req  = txo.openCursor()
-    req.onsuccess = ( event ) =>
-      objects = {}
-      cursor = event.target['result']
-      if cursor?
-        objects[cursor.key] = cursor.value if op is 'select' and where(cursor.value)
-        cursor.delete()                    if op is 'remove' and where(cursor.value)
-        cursor.continue()
-      callback( objects ) if callback?
-      @store.results( table, op, objects )
-    req.onerror = () =>
-      @store.onerror( table, op, { error:req.error, where:where } )
-    return
-
-  openTables:( tables ) ->
-    for  own name, obj of tables
-      @open( name )
-    return
-
-  openDB:( dbName, dbVersion, onOpenDB=null ) ->
-    request = @indexedDB.open( dbName, dbVersion ) # request = @indexedDB.IDBFactory.open( database, @dbVersion )
-    request.onupgradeneeded = ( event ) =>
-      @db    = event.target['result']
-      @txnUp = event.target['transaction']
-      @openTables( @tables )
-      console.log( 'Index.openDB()', 'upgrade', dbName, @db.objectStoreNames )
-      onOpenDB() if onOpenDB?
-    request.onsuccess = ( event ) =>
-      @db = event.target['result']
-      @openTables( @tables )
-      console.log( 'Index.openDB()', 'open',    dbName, @db.objectStoreNames )
-      onOpenDB() if onOpenDB?
-    request.onerror   = () =>
-      # console.error( 'Index.openDB() unable to open', { database:dbName, error:request.error } )
-      @store.onerror( dbName, 'Index.openDB()', { error:request.error } )
-    return
-
-  deleteDB:( dbName ) ->
-    request = @indexedDB.deleteDatabase(dbName)
-    request.onsuccess = () =>
-      console.log(   'Index.openDB().deleteDB() deleted',           { dbName:dbName } )
-    request.onerror   = () =>
-      console.error( 'Index.openDB().deleteDB() unable to delete',  { dbName:dbName, error:request.error } )
-    request.onblocked = () =>
-      console.error( 'Store.IndexedDB.deleteDB() database blocked', { dbName:dbName, error:request.error } )
-    return  
-
-  closeDB:() ->
-    @db.close() if @db?
-    return
 
 export default Index
 
-# console.error( 'Store.IndexedDB.constructor indexedDB not found' ) if not @indexedDB

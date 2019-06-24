@@ -16,12 +16,10 @@ Store = (function() {
     }
 
     table(tn) {
-      if (this.tables[tn] != null) {
-        return this.tables[tn];
-      } else {
+      if (this.tables[tn] == null) {
         this.open(table);
-        return this.tables[tn];
       }
+      return this.tables[tn];
     }
 
     results(table, op, result, id = null) {
@@ -320,7 +318,9 @@ Store = (function() {
       if (callback != null) {
         callback(keys);
       }
-      this.pipe.results(null, 'show', keys);
+      if (typeof pipe !== "undefined" && pipe !== null) {
+        this.pipe.results(null, 'show', keys);
+      }
     }
 
     open(table) { // Create a table with an optional schema
