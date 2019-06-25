@@ -1,6 +1,4 @@
 
-import Util     from '../../bas/util/Util.js'
-
 import firebase from '../../../pub/lib/store/firebase.app.esm.js'      # Firebase core (required)
 import               '../../../pub/lib/store/firebase.database.esm.js' # Realtime Database
 import               '../../../pub/lib/store/firebase.auth.esm.js'     # Authentication
@@ -22,25 +20,30 @@ class Fire
     #console.log( 'Fires.init', config )
     firebase
 
-  batch:( obj, objs, callback=null ) ->
-    onComplete = (snapshot) =>
+  batch:( name, obj, objs, callback=null ) ->
+    onBatch = (snapshot) =>
       if snapshot? and snapshot.val()?
-        obj.data = snapshot.val()
-        callback(  snapshot.val() ) if callback? and @store.batchComplete( objs )
-        @store.results( obj.table, 'batch', snapshot.val() )
+        obj.result = snapshot.val()
+        if @store.batchComplete( objs )
+          if callback?
+             callback( objs )
+          else
+             @store.results( name, 'batch', objs )
       else
         @store.onerror( obj.table, 'batch', 'Fire batch error' )
-    @fd.ref(table).once('value', onComplete )
+    @fd.ref(table).once('value', onBatch )
     return
 
-# Have too clarify id with snapshot.key
+  # Have too clarify id with snapshot.key
   change:( table, id='none', callback=null, onEvt='put' ) ->
     onComplete = (snapshot) =>
       if snapshot?
         key = snapshot.key
         val = snapshot.val()
-        callback( val ) if callback?
-        @store.results( table, 'change', val, key )
+        if callback?
+           callback( val )
+        else
+           @store.results( table, 'change', val, key )
       else
         @store.onerror( table, 'change', 'Fire batch error' )
     path  = if id is 'none' then table else table + '/' + id
@@ -50,8 +53,10 @@ class Fire
   get:( table, id, callback ) ->
     onComplete = (snapshot) =>
       if snapshot? and snapshot.val()?
-        callback( snapshot.val() ) if callback?
-        @store.results( table, 'get', snapshot.val(), id )
+        if callback?
+           callback( snapshot.val() )
+        else
+           @store.results( table, 'get', snapshot.val(), id )
       else
         @store.onerror( table, 'get', 'Fire get error', id )
     @fd.ref(table+'/'+id).once('value', onComplete )
@@ -81,8 +86,10 @@ class Fire
     if where is false then {}
     onComplete = (snapshot) =>
       if snapshot? and snapshot.val()?
-        callback( snapshot.val() ) if callback?
-        @store.results( table, 'select', snapshot.val() )
+        if callback?
+           callback( snapshot.val() )
+        else
+           @store.results( table, 'select', snapshot.val() )
     @fd.ref(table).once('value', onComplete )
     return
 
@@ -124,7 +131,7 @@ class Fire
   # keyProp only needed if rows is array
   toObjects:( rows ) ->
     objects = {}
-    if Util.isArray(rows)
+    if @store.isArray(rows)
       for row in rows
         if row? and row['key']?
           ckey = row['key'].split('/')[0]
@@ -142,6 +149,8 @@ class Fire
      @store.onerror( 'auth', 'auth', { error:error } )
    @fb.auth().signInAnonymously().catch( onerror )
    return
+
+
 
 export default Fire
 

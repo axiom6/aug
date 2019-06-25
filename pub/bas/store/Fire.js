@@ -1,7 +1,5 @@
 var Fire;
 
-import Util from '../../bas/util/Util.js';
-
 import firebase from '../../../pub/lib/store/firebase.app.esm.js';
 
 import '../../../pub/lib/store/firebase.database.esm.js';
@@ -26,20 +24,23 @@ Fire = (function() {
       return firebase;
     }
 
-    batch(obj, objs, callback = null) {
-      var onComplete;
-      onComplete = (snapshot) => {
+    batch(name, obj, objs, callback = null) {
+      var onBatch;
+      onBatch = (snapshot) => {
         if ((snapshot != null) && (snapshot.val() != null)) {
-          obj.data = snapshot.val();
-          if ((callback != null) && this.store.batchComplete(objs)) {
-            callback(snapshot.val());
+          obj.result = snapshot.val();
+          if (this.store.batchComplete(objs)) {
+            if (callback != null) {
+              return callback(objs);
+            } else {
+              return this.store.results(name, 'batch', objs);
+            }
           }
-          return this.store.results(obj.table, 'batch', snapshot.val());
         } else {
           return this.store.onerror(obj.table, 'batch', 'Fire batch error');
         }
       };
-      this.fd.ref(table).once('value', onComplete);
+      this.fd.ref(table).once('value', onBatch);
     }
 
     // Have too clarify id with snapshot.key
@@ -51,9 +52,10 @@ Fire = (function() {
           key = snapshot.key;
           val = snapshot.val();
           if (callback != null) {
-            callback(val);
+            return callback(val);
+          } else {
+            return this.store.results(table, 'change', val, key);
           }
-          return this.store.results(table, 'change', val, key);
         } else {
           return this.store.onerror(table, 'change', 'Fire batch error');
         }
@@ -67,9 +69,10 @@ Fire = (function() {
       onComplete = (snapshot) => {
         if ((snapshot != null) && (snapshot.val() != null)) {
           if (callback != null) {
-            callback(snapshot.val());
+            return callback(snapshot.val());
+          } else {
+            return this.store.results(table, 'get', snapshot.val(), id);
           }
-          return this.store.results(table, 'get', snapshot.val(), id);
         } else {
           return this.store.onerror(table, 'get', 'Fire get error', id);
         }
@@ -125,9 +128,10 @@ Fire = (function() {
       onComplete = (snapshot) => {
         if ((snapshot != null) && (snapshot.val() != null)) {
           if (callback != null) {
-            callback(snapshot.val());
+            return callback(snapshot.val());
+          } else {
+            return this.store.results(table, 'select', snapshot.val());
           }
-          return this.store.results(table, 'select', snapshot.val());
         }
       };
       this.fd.ref(table).once('value', onComplete);
@@ -196,7 +200,7 @@ Fire = (function() {
     toObjects(rows) {
       var ckey, i, len, objects, row;
       objects = {};
-      if (Util.isArray(rows)) {
+      if (this.store.isArray(rows)) {
         for (i = 0, len = rows.length; i < len; i++) {
           row = rows[i];
           if ((row != null) && (row['key'] != null)) {

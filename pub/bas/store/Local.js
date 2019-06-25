@@ -35,8 +35,22 @@ Local = class Local {
     return this.tableIds[table].push(id);
   }
 
-  change(table, id, callback) {
-    this.get(table, id, callback, 'change');
+  batch(name, obj, objs, callback = null) {
+    var onBatch, where;
+    onBatch = (result) => {
+      obj.result = result;
+      if (this.store.batchComplete(objs)) {
+        if (callback != null) {
+          return callback(objs);
+        } else {
+          return this.store.results(name, 'batch', objs);
+        }
+      }
+    };
+    where = function() {
+      return true;
+    };
+    this.select(obj.table, where, onBatch);
   }
 
   get(table, id, callback = null, op = 'get') {
@@ -45,8 +59,9 @@ Local = class Local {
     if (obj != null) {
       if (callback != null) {
         callback(obj);
+      } else {
+        this.store.results(table, op, obj, id);
       }
-      this.store.results(table, op, obj, id);
     } else {
       this.store.onerror(table, op, {
         error: "Local get error"
@@ -84,16 +99,15 @@ Local = class Local {
     for (i = 0, len = ids.length; i < len; i++) {
       id = ids[i];
       obj = this.obj(table, id);
-      if (obj != null) {
-        if (where(obj)) {
-          objs[key] = obj;
-        }
+      if ((obj != null) && where(obj)) {
+        objs[key] = obj;
       }
     }
     if (callback != null) {
       callback(objs);
+    } else {
+      this.store.results(table, op, objs);
     }
-    this.store.results(table, op, objs);
   }
 
   update(table, objs) {

@@ -19,15 +19,25 @@ class Local
     @tableIds[table] = [] if not @tableIds[table]?
     @tableIds[table].push(id)
 
-  change:( table, id, callback ) ->
-    @get(  table, id, callback, 'change' )
+  batch:( name, obj, objs, callback=null ) ->
+    onBatch = (result) =>
+      obj.result = result
+      if @store.batchComplete( objs )
+        if callback?
+           callback( objs )
+        else
+           @store.results( name, 'batch', objs )
+    where = () -> true
+    @select( obj.table, where, onBatch )
     return
 
   get:( table, id, callback=null, op='get' ) ->
     obj = @obj( table, id )
     if obj?
-      callback( obj ) if callback?
-      @store.results( table, op, obj, id )
+      if callback?
+         callback( obj )
+      else
+         @store.results( table, op, obj, id )
     else
       @store.onerror( table, op, { error:"Local get error"}, id )
     return
@@ -56,10 +66,11 @@ class Local
     ids  =  @tableIds[table]
     for id in ids
       obj = @obj( table, id )
-      if obj?
-         objs[key] = obj if where(obj)
-    callback( objs ) if callback?
-    @store.results( table, op, objs )
+      objs[key] = obj if obj? and where(obj)
+    if callback?
+      callback( objs )
+    else
+      @store.results( table, op, objs )
     return
 
   update:( table, objs ) ->

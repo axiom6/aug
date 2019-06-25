@@ -148,9 +148,9 @@ class Test
     JSON.parse(str)
 
   batchObjs:() -> {
-    Math: { src:'rest', url:'augm/Math.json', table:'Math', data:null }
-    Geom: { src:'rest', url:'augm/Geom.json', table:'Geom', data:null }
-    Data: { src:'rest', url:'augm/Data.json', table:'Data', data:null } }
+    Math: { src:'rest', url:'augm/Math.json', table:'Math', result:null }
+    Geom: { src:'rest', url:'augm/Geom.json', table:'Geom', result:null }
+    Data: { src:'rest', url:'augm/Data.json', table:'Data', result:null } }
 
 export default Test
 

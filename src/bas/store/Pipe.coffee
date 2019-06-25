@@ -7,11 +7,15 @@ class Pipe
     if table? then @dbName + ':' + table + ':' + op else @dbName + ':' + op
 
   subscribe:( table, op, source, onSubscribe  ) ->
-    @stream.subscribe( @toSubject(table,op), source, onSubscribe )
+    if op isnt 'change'
+      @stream.subscribe( @toSubject(table,op), source, onSubscribe )
+    else
+      for changeOp in Pipe.changeOps
+        @stream.subscribe( @toSubject(table,changeOp), source, onSubscribe )
     return
 
   publish:( table, op, result, id=null ) ->
-    obj = if op is 'del' then id else if id? then { "#{id}":result } else result
+    if id? then { "#{id}":result } else result
     @stream.publish( @toSubject(table,op), obj )
     return
 
@@ -53,5 +57,7 @@ class Pipe
   drop:     ( table ) -> # Drop the entire @table - good for testing
     @publish( table, 'drop', table )
     return
+
+  Pipe.changeOps = ['change','add','put','del','insert','update','remove']
 
 export default Pipe

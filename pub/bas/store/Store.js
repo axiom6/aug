@@ -51,7 +51,7 @@ Store = (function() {
     }
 
     // REST Api  CRUD + Subscribe for objectect records 
-    batch(objs, callback) { // Respond to an changed object
+    batch(name, objs, callback) { // Batch populate a set of objects from various sources
       var key, obj;
       for (key in objs) {
         if (!hasProp.call(objs, key)) continue;
@@ -59,27 +59,27 @@ Store = (function() {
         switch (obj.src) {
           case 'rest':
             if (this.rest != null) {
-              this.rest.batch(obj, objs, callback);
+              this.rest.batch(name, obj, objs, callback);
             }
             break;
           case 'fire':
             if (this.fire != null) {
-              this.fire.batch(obj, objs, callback);
+              this.fire.batch(name, obj, objs, callback);
             }
             break;
           case 'index':
             if (this.index != null) {
-              this.index.batch(obj, objs, callback);
+              this.index.batch(name, obj, objs, callback);
             }
             break;
           case 'local':
             if (this.local != null) {
-              this.local.batch(obj, objs, callback);
+              this.local.batch(name, obj, objs, callback);
             }
             break;
           case 'memory':
             if (this.memory != null) {
-              this.memory.batch(obj, objs, callback);
+              this.memory.batch(name, obj, objs, callback);
             }
         }
       }
@@ -90,40 +90,11 @@ Store = (function() {
       for (key in objs) {
         if (!hasProp.call(objs, key)) continue;
         obj = objs[key];
-        if (!obj['data']) {
+        if (!obj['result']) {
           return false;
         }
       }
       return true;
-    }
-
-    change(src, table, id, callback) { // Respond to an changed object 
-      switch (src) {
-        case 'rest':
-          if (this.rest != null) {
-            this.rest.change(table, id, callback);
-          }
-          break;
-        case 'fire':
-          if (this.fire != null) {
-            this.fire.change(table, id, callback);
-          }
-          break;
-        case 'index':
-          if (this.index != null) {
-            this.index.change(table, id, callback);
-          }
-          break;
-        case 'local':
-          if (this.local != null) {
-            this.local.change(table, id, callback);
-          }
-          break;
-        case 'memory':
-          if (this.memory != null) {
-            this.memory.change(table, id, callback);
-          }
-      }
     }
 
     get(src, table, id, callback) { // Get an object from table with id
@@ -317,8 +288,7 @@ Store = (function() {
       keys = Object.keys(this.tables);
       if (callback != null) {
         callback(keys);
-      }
-      if (typeof pipe !== "undefined" && pipe !== null) {
+      } else if (this.pipe != null) {
         this.pipe.results(this.dbName, 'show', keys);
       }
     }
@@ -373,6 +343,46 @@ Store = (function() {
       }
     }
 
+    copyTable(src, des, table, where = Store.where) {
+      var callback;
+      callback = function(results) {
+        return des.insert(table, results);
+      };
+      src.select(table, where, callback);
+    }
+
+    copyDatabase(src, des) {
+      var data, ref, table;
+      ref = this.tables;
+      for (table in ref) {
+        if (!hasProp.call(ref, table)) continue;
+        data = ref[table];
+        this.copyTable(src, des, table, Store.where);
+      }
+    }
+
+    // Utilities
+    filter(results, where) {
+      var key, obj, objs;
+      if (where({})) { // Checks if where = (obj) -> true
+        return results;
+      } else {
+        objs = {};
+        for (key in results) {
+          if (!hasProp.call(results, key)) continue;
+          obj = results[key];
+          if (where(obj)) {
+            objs[key] = obj;
+          }
+        }
+        return objs;
+      }
+    }
+
+    isArray(a) {
+      return a !== null && typeof a !== "undefined" && typeof a !== "string" && (a.length != null) && a.length > 0;
+    }
+
     static where() {
       return true; // Default where clause filter that returns true to access all records
     }
@@ -380,7 +390,7 @@ Store = (function() {
   };
 
   // RDUDC            Retrieve  Create    Update    Delete   Change
-  Store.restOps = ['get', 'add', 'put', 'del', 'change', 'batch'];
+  Store.restOps = ['get', 'add', 'put', 'del', 'batch'];
 
   Store.sqlOps = ['select', 'insert', 'update', 'remove'];
 

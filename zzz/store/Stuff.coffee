@@ -21,14 +21,31 @@ class Stuff
   memory:( table, id , op ) ->
     # console.log( 'Store.memory()', @toSubject(table,op,id) )
     onNext = (data) => @toMemory(  op, table, id, data )
-    @datarx.subscribe( @toSubject(table,op,id), 'Store', onNext )
+    @pipe.subscribe( @toSubject(table,op,id), 'Store', onNext )
     return
 
+  importLocal:( local ) ->
+    for own tn, table of local.tableIds
+      for id in table
+        @add( tn, id, @local.obj(tn,id) )
+    return
 
+  exportDB:( db ) ->
+    for own tn, table of @tables
+      for own id, obj of table
+        db.add( tn, id, obj )
+    return
 
+  ###
+  importIndexedDB:() ->
+    idb = new IndexedDB( @dbName )
+    for tableName in idb.dbs.objectStoreNames
+      where = (obj)->false
+      idb.traverse( 'select', tableName, {}, where, false )
+    return
+  ###
 
-
-  # params=Store provides empty defaults
+# params=Store provides empty defaults
   toMemory:( op, table, id, data, params ) ->
     memory = @getMemory( @dbName )
     switch op
@@ -50,7 +67,7 @@ class Stuff
 
   getMemory:() ->
     @hasMemory = true
-    Stuff.memories[@dbName] = new Memory( @datarx, @dbName ) if Memory? and not Stuff.memories[@dbName]?
+    Stuff.memories[@dbName] = new Memory( @pipe, @dbName ) if Memory? and not Stuff.memories[@dbName]?
     Stuff.memories[@dbName]
 
   getMemoryTables:() ->
@@ -103,7 +120,7 @@ class Stuff
       subjects.push( sub )
     completeSubject = "#{@dbName}?module=#{@module}&op=#{completeOp}"
     callback = if typeof onComplete is 'function' then () => onComplete() else true
-    @datarx.complete( completeSubject, subjects, callback )
+    @pipe.complete( completeSubject, subjects, callback )
 
   # ops can be single value.
   uponTablesComplete:( tables, ops, completeOp, onComplete ) ->

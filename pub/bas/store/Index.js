@@ -98,8 +98,22 @@ Index = class Index {
     return dbVersionInt;
   }
 
-  change(table, id, callback) {
-    this.get(table, id, callback, 'change');
+  batch(name, obj, objs, callback = null) {
+    var onBatch, where;
+    onBatch = (result) => {
+      obj.result = result;
+      if (this.store.batchComplete(objs)) {
+        if (callback != null) {
+          return callback(objs);
+        } else {
+          return this.store.results(name, 'batch', objs);
+        }
+      }
+    };
+    where = function() {
+      return true;
+    };
+    this.select(obj.table, where, onBatch);
   }
 
   get(table, id, callback, op = 'get') {
@@ -108,11 +122,12 @@ Index = class Index {
     req = txo.get(id);
     req.onsuccess = () => {
       if (callback != null) {
-        callback({
+        return callback({
           [`${id}`]: req.result
         });
+      } else {
+        return this.store.results(table, op, req.result, id);
       }
-      return this.store.results(table, op, req.result, id);
     };
     req.onerror = (error) => {
       return this.store.onerror(table, op, error, id);
@@ -186,9 +201,10 @@ Index = class Index {
         }
       }
       if (callback != null) {
-        callback(objs);
+        return callback(objs);
+      } else {
+        return this.store.results(table, op, objs);
       }
-      return this.store.results(table, op, objs);
     };
     req.onerror = (error) => {
       return this.store.onerror(table, op, error);

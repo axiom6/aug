@@ -71,16 +71,26 @@ class Index
     console.log( 'Index() version', dbVersionStr, dbVersionInt )
     dbVersionInt
 
-  change:( table, id, callback ) ->
-    @get(  table, id, callback, 'change' )
+  batch:( name, obj, objs, callback=null ) ->
+    onBatch = (result) =>
+      obj.result = result
+      if @store.batchComplete( objs )
+        if callback?
+           callback( objs )
+        else
+           @store.results( name, 'batch', objs )
+    where = () -> true
+    @select( obj.table, where, onBatch )
     return
 
   get:( table, id, callback, op='get' ) ->
     txo = @txo( table, 'readonly' )
     req = txo.get( id )
     req.onsuccess = () =>
-      callback( { "#{id}":req.result } ) if callback?
-      @store.results( table, op, req.result, id )
+      if callback?
+         callback( { "#{id}":req.result } )
+      else
+         @store.results( table, op, req.result, id )
     req.onerror = (error) =>
       @store.onerror( table, op, error, id )
     return
@@ -129,8 +139,10 @@ class Index
       for own key, obj of req.result when where(obj)
         objs[obj.id] = obj
         txo['delete'](obj.id) if op is 'remove'
-      callback(objs) if callback?
-      @store.results( table, op, objs  )
+      if callback?
+         callback(objs)
+      else
+         @store.results( table, op, objs  )
     req.onerror = (error) =>
       @store.onerror( table, op, error )
     return

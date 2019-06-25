@@ -5,32 +5,32 @@ Memory = class Memory {
   constructor(store) {
     this.store = store;
     this.dbName = this.store.dbName;
-    this.pubChange = true;
   }
 
   table(tn) {
     return this.store.table(tn);
   }
 
-  // This could be tied to put and add
-  change(tn, id, callback, op = 'change') {
-    var object;
-    object = this.table(tn)[id];
-    if (object != null) {
-      if (callback != null) {
-        callback(object);
+  batch(name, obj, objs, callback = null) {
+    var onBatch, where;
+    onBatch = (result) => {
+      obj.result = result;
+      if (this.store.batchComplete(objs)) {
+        if (callback != null) {
+          return callback(objs);
+        } else {
+          return this.store.results(name, 'batch', objs);
+        }
       }
-      this.store.results(tn, op, object, id);
-    } else {
-      this.store.onerror(tn, op, 'Memory change error', id);
-    }
+    };
+    where = function() {
+      return true;
+    };
+    this.select(obj.table, where, onBatch);
   }
 
   add(tn, id, object) {
     this.table(tn)[id] = object;
-    if (this.pubChange) {
-      this.change(tn, id, null, 'add');
-    }
   }
 
   get(tn, id, callback) {
@@ -39,8 +39,9 @@ Memory = class Memory {
     if (object != null) {
       if (callback != null) {
         callback(object);
+      } else {
+        this.store.results(tn, 'get', object, id);
       }
-      this.store.results(tn, 'get', object, id);
     } else {
       this.store.onerror(tn, 'get', {
         error: 'Memory object no found'
@@ -50,18 +51,12 @@ Memory = class Memory {
 
   put(tn, id, object) {
     this.table(tn)[id] = object;
-    if (this.pubChange) {
-      this.change(tn, id, null, 'put');
-    }
   }
 
   del(tn, id) {
     var object;
     object = this.table(tn)[id];
     if (object != null) {
-      if (this.pubChange) {
-        this.change(tn, id, null, 'del');
-      }
       delete this.table(tn)[id];
     } else {
       this.store.onerror(tn, 'get', {
@@ -81,20 +76,14 @@ Memory = class Memory {
   }
 
   select(tn, where, callback = null) {
-    var key, obj, objects, table;
-    objects = {};
+    var objects, table;
     table = this.table(tn);
-    for (key in table) {
-      if (!hasProp.call(table, key)) continue;
-      obj = table[key];
-      if (where(obj)) {
-        objects[key] = obj;
-      }
-    }
+    objects = this.store.filter(table, where);
     if (callback != null) {
       callback(objects);
+    } else {
+      this.store.results(tn, 'select', objects);
     }
-    this.store.results(tn, 'select', objects);
   }
 
   update(tn, objects) {
@@ -108,15 +97,19 @@ Memory = class Memory {
   }
 
   remove(tn, where) {
-    var key, obj, table;
+    var key, obj, objs, table;
     table = this.table(tn);
+    objs = {};
     for (key in table) {
       if (!hasProp.call(table, key)) continue;
       obj = table[key];
-      if (where(obj)) {
-        delete table[key];
+      if (!(where(obj))) {
+        continue;
       }
+      objs[key] = obj;
+      delete table[key];
     }
+    this.store.results(table, 'remove', objs);
   }
 
   open(tn) {
@@ -129,55 +122,6 @@ Memory = class Memory {
     if (tn === false) { // Nothing to do. Handled by store
       ({});
     }
-  }
-
-  importLocal(local) {
-    var i, id, len, ref, table, tn;
-    ref = local.tableIds;
-    for (tn in ref) {
-      if (!hasProp.call(ref, tn)) continue;
-      table = ref[tn];
-      for (i = 0, len = table.length; i < len; i++) {
-        id = table[i];
-        this.add(tn, id, this.local.obj(tn, id));
-      }
-    }
-  }
-
-  exportDB(db) {
-    var id, obj, ref, table, tn;
-    ref = this.tables;
-    for (tn in ref) {
-      if (!hasProp.call(ref, tn)) continue;
-      table = ref[tn];
-      for (id in table) {
-        if (!hasProp.call(table, id)) continue;
-        obj = table[id];
-        db.add(tn, id, obj);
-      }
-    }
-  }
-
-  /*
-  importIndexedDB:() ->
-  idb = new IndexedDB( @dbName )
-  for tableName in idb.dbs.objectStoreNames
-  where = (obj)->false
-  idb.traverse( 'select', tableName, {}, where, false )
-  return
-  */
-  logRows(name, table) {
-    var key, results, row;
-    console.log(name);
-    results = [];
-    for (key in table) {
-      if (!hasProp.call(table, key)) continue;
-      row = table[key];
-      console.log('  ', key);
-      console.log('  ', row);
-      results.push(console.log('  ', JSON.stringify(row)));
-    }
-    return results;
   }
 
 };

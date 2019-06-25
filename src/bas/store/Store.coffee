@@ -27,29 +27,20 @@ class Store
 
   # REST Api  CRUD + Subscribe for objectect records 
 
-  batch:( objs, callback )  -> # Respond to an changed object
+  batch:( name, objs, callback )  -> # Batch populate a set of objects from various sources
     for own key, obj of objs
       switch obj.src
-        when 'rest'   then @rest  .batch( obj, objs, callback ) if @rest?
-        when 'fire'   then @fire  .batch( obj, objs, callback ) if @fire?
-        when 'index'  then @index .batch( obj, objs, callback ) if @index?
-        when 'local'  then @local .batch( obj, objs, callback ) if @local?
-        when 'memory' then @memory.batch( obj, objs, callback ) if @memory?
+        when 'rest'   then @rest  .batch( name, obj, objs, callback ) if @rest?
+        when 'fire'   then @fire  .batch( name, obj, objs, callback ) if @fire?
+        when 'index'  then @index .batch( name, obj, objs, callback ) if @index?
+        when 'local'  then @local .batch( name, obj, objs, callback ) if @local?
+        when 'memory' then @memory.batch( name, obj, objs, callback ) if @memory?
     return
 
   batchComplete:( objs ) ->
     for own key, obj of objs
-      return false if not obj['data']
+      return false if not obj['result']
     true
-
-  change:(  src, table, id, callback )  -> # Respond to an changed object 
-    switch  src
-      when 'rest'   then @rest  .change( table, id, callback ) if @rest?
-      when 'fire'   then @fire  .change( table, id, callback ) if @fire?
-      when 'index'  then @index .change( table, id, callback ) if @index?
-      when 'local'  then @local .change( table, id, callback ) if @local?
-      when 'memory' then @memory.change( table, id, callback ) if @memory?
-    return
 
   get:( src, table, id, callback ) ->  # Get an object from table with id
     switch  src
@@ -127,8 +118,10 @@ class Store
   # Table DDL (Data Definition Language)  
   show:( callback=null )  -> # Show all table names
     keys = Object.keys( @tables )
-    callback( keys ) if callback?
-    @pipe.results( @dbName, 'show', keys ) if pipe?
+    if callback?
+       callback( keys )
+    else if @pipe?
+       @pipe.results( @dbName, 'show', keys )
     return
   
   open:         ( table) -> # Create a table with an optional schema
@@ -156,9 +149,32 @@ class Store
       @onerror( table, 'drop', { error:'Store missing table'} )
     return
 
+  copyTable:( src, des, table, where=Store.where ) ->
+    callback = (results) ->
+      des.insert( table, results )
+    src.select(   table, where, callback )
+    return
+
+  copyDatabase:( src, des ) ->
+    for own table, data of @tables
+      @copyTable( src, des, table, Store.where )
+    return
+
+  # Utilities
+  filter:( results, where ) ->
+    if where({}) # Checks if where = (obj) -> true
+      results
+    else
+      objs = {}
+      for own key,   obj of results when where(obj)
+         objs[key] = obj
+      objs
+
+  isArray:(a) ->
+    a isnt null and typeof(a)!="undefined" and typeof(a)!="string" and a.length? and a.length > 0
 
   # RDUDC            Retrieve  Create    Update    Delete   Change
-  Store.restOps  = [ 'get',    'add',    'put',    'del', 'change', 'batch' ]
+  Store.restOps  = [ 'get',    'add',    'put',    'del', 'batch' ]
   Store.sqlOps   = [ 'select', 'insert', 'update', 'remove' ]
   Store.tableOps = [ 'show',   'open',             'drop'   ]
 

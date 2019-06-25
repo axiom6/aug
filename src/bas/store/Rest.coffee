@@ -1,5 +1,5 @@
 
-#mport fetch from '../../lib/fetch/fetch.js' # NodeJS fetch
+
 
 class Rest
 
@@ -7,7 +7,6 @@ class Rest
     @key  = "id"
 
   # Rest
-  change:( table, id, callback, path )  -> @rest( 'change', table, id,null, path, callback )
   get:(    table, id, callback, path )  -> @rest( 'get',    table, id,null, path, callback )
   add:(    table, id, object,   path )  -> @rest( 'add',    table, id, object,    path )
   put:(    table, id, object,   path )  -> @rest( 'put',    table, id, object,    path )
@@ -33,16 +32,19 @@ class Rest
     obj.headers  = { 'Content-Type': 'application/json' }
     obj
 
-  batch:( obj, objs, callback=null ) ->
+  batch:( name, obj, objs, callback=null ) ->
     url = @baseUrl + obj.url
     settings  = @config( 'get' )
     fetch( url, settings )
       .then( (response) =>
         response.json() )
       .then( (data) =>
-        obj.data = data
-        callback(data) if callback? and @store.batchComplete(objs)
-        @store.results( table, op, result, id ) )
+        obj['result'] = data
+        if @store.batchComplete(objs)
+          if callback?
+             callback(objs)
+          else
+             @store.results( name, 'batch', objs, id ) )
       .catch( (error) =>
         @store.onerror( obj.table, 'batch', @toError(url,error) ) )
     return
@@ -55,8 +57,10 @@ class Rest
         response.json() )
       .then( (data) =>
         result = @restResult( object, data )
-        callback(result) if callback?
-        @store.results( table, op, result, id ) )
+        if callback?
+           callback(result)
+        else
+           @store.results( table, op, result, id ) )
       .catch( (error) =>
         @store.onerror( table, op, @toError(url,error), id ) )
     return
@@ -69,8 +73,10 @@ class Rest
         response.json() )
       .then( (data) =>
         result = @restResult( objects, data, where )
-        callback( result ) if callback?
-        @store.results( table, op, result ) )
+        if callback?
+           callback(result)
+        else
+           @store.results( table, op, result, id ) )
       .catch( (error) =>
         @store.onerror( table, op, @toError(url,error), id ) )
     return
@@ -113,12 +119,12 @@ class Rest
 
   urlRest:( op, table, id='', params='' ) ->
     switch op
-      when 'add', 'get', 'put', 'del',  'change' then @baseUrl + '/' + table + '/' + id + params
+      when 'add',   'get',    'put',    'del'    then @baseUrl + '/' + table + '/' + id + params
       when 'insert','select', 'update', 'remove' then @baseUrl + '/' + table            + params
       when 'open',  'show',   'make',   'drop'   then @baseUrl + '/' + table  # No Params
       else
-          console.error( 'Rest.urlRest() Unknown op', op )
-          @baseUrl + '/' + table + '/' + id + params
+        console.error( 'Rest.urlRest() Unknown op', op )
+        @baseUrl + '/' + table + '/' + id + params
 
   restOp:( op ) ->
     switch op
@@ -126,7 +132,6 @@ class Rest
       when 'get', 'select', 'show' then 'GET'
       when 'put', 'update', 'make' then 'PUT'
       when 'del', 'remove', 'drop' then 'DELETE'
-      when 'change'                then 'GET'
       else
         console.error( 'Rest.restOp() Unknown op', op )
         'GET'
