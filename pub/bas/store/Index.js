@@ -16,9 +16,9 @@ Index = class Index {
     async function open(that) {
       return await that.openDB( that.dbName, that.version() ) };
     this.db = (await open(this));
-    console.log('Index.initDB()', this.db.name, this.db.version);
   }
 
+  // console.log( 'Index.initDB()', @db.name, @db.version )
   openDB(dbName, dbVersion) {
     var dbp;
     dbp = new Promise((resolve, reject) => {
@@ -29,15 +29,14 @@ Index = class Index {
         upDb = event.target['result'];
         upTxn = event.target['transaction'];
         this.openStores(upDb, true);
-        console.log('Index.openDB()', 'upgrade', dbName, upDb.objectStoreNames);
+        // console.log( 'Index.openDB()', 'upgrade', dbName, upDb.objectStoreNames )
         upTxn.complete;
       };
-      //resolve(upDb)
       request.onsuccess = (event) => {
         var db;
         db = event.target['result'];
         this.openStores(db, false);
-        console.log('Index.openDB()', 'open', dbName, db.objectStoreNames);
+        // console.log( 'Index.openDB()', 'open',    dbName, db.objectStoreNames )
         resolve(db);
       };
       request.onblocked = () => { // event
@@ -109,7 +108,9 @@ Index = class Index {
     req = txo.get(id);
     req.onsuccess = () => {
       if (callback != null) {
-        callback(req.result);
+        callback({
+          [`${id}`]: req.result
+        });
       }
       return this.store.results(table, op, req.result, id);
     };
@@ -147,28 +148,7 @@ Index = class Index {
   }
 
   select(table, where, callback = null) {
-    var req, txo;
-    txo = this.txo(table, 'readonly');
-    req = txo.getAll();
-    req.onsuccess = () => {
-      var key, obj, objs, ref;
-      objs = {};
-      ref = req.result;
-      for (key in ref) {
-        if (!hasProp.call(ref, key)) continue;
-        obj = ref[key];
-        if (where(obj)) {
-          objs[obj.id] = obj;
-        }
-      }
-      if (callback != null) {
-        callback(objs);
-      }
-      return this.store.results(table, 'select', objs);
-    };
-    req.onerror = (error) => {
-      return this.store.onerror(table, 'select', error);
-    };
+    this.traverse(table, where, callback, 'select');
   }
 
   update(table, objects) {
@@ -181,18 +161,38 @@ Index = class Index {
     }
   }
 
-  // Using @store.table for objects
   remove(table, where) {
-    var id, obj, ref, txo;
-    txo = this.txo(table);
-    ref = this.store.table(table);
-    for (id in ref) {
-      if (!hasProp.call(ref, id)) continue;
-      obj = ref[id];
-      if (where(obj)) {
-        txo['delete'](id);
+    this.traverse(table, where, null, 'remove');
+  }
+
+  traverse(table, where, callback = null, op) {
+    var mode, req, txo;
+    mode = op === 'remove' ? 'readwrite' : 'readonly';
+    txo = this.txo(table, mode);
+    req = txo.getAll();
+    req.onsuccess = () => {
+      var key, obj, objs, ref;
+      objs = {};
+      ref = req.result;
+      for (key in ref) {
+        if (!hasProp.call(ref, key)) continue;
+        obj = ref[key];
+        if (!(where(obj))) {
+          continue;
+        }
+        objs[obj.id] = obj;
+        if (op === 'remove') {
+          txo['delete'](obj.id);
+        }
       }
-    }
+      if (callback != null) {
+        callback(objs);
+      }
+      return this.store.results(table, op, objs);
+    };
+    req.onerror = (error) => {
+      return this.store.onerror(table, op, error);
+    };
   }
 
   open(table) {

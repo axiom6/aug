@@ -14,7 +14,7 @@ class Index
     `async function open(that) {
       return await that.openDB( that.dbName, that.version() ) }`
     @db = await open(@)
-    console.log( 'Index.initDB()', @db.name, @db.version )
+    # console.log( 'Index.initDB()', @db.name, @db.version )
     return
 
   openDB:( dbName, dbVersion ) ->
@@ -24,14 +24,13 @@ class Index
         upDb  = event.target['result']
         upTxn = event.target['transaction']
         @openStores( upDb, true )
-        console.log( 'Index.openDB()', 'upgrade', dbName, upDb.objectStoreNames )
+        # console.log( 'Index.openDB()', 'upgrade', dbName, upDb.objectStoreNames )
         upTxn.complete
-        #resolve(upDb)
         return
       request.onsuccess = ( event ) =>
         db = event.target['result']
         @openStores( db, false )
-        console.log( 'Index.openDB()', 'open',    dbName, db.objectStoreNames )
+        # console.log( 'Index.openDB()', 'open',    dbName, db.objectStoreNames )
         resolve(db)
         return
       request.onblocked = (  ) =>  # event
@@ -80,7 +79,7 @@ class Index
     txo = @txo( table, 'readonly' )
     req = txo.get( id )
     req.onsuccess = () =>
-      callback(req.result) if callback?
+      callback( { "#{id}":req.result } ) if callback?
       @store.results( table, op, req.result, id )
     req.onerror = (error) =>
       @store.onerror( table, op, error, id )
@@ -107,17 +106,8 @@ class Index
       txo.add(  object )
     return
 
-  select:( table, where, callback=null ) ->
-    txo = @txo( table, 'readonly' )
-    req =  txo.getAll()
-    req.onsuccess = () =>
-      objs = {}
-      for own key, obj of req.result when where(obj)
-        objs[obj.id] = obj
-      callback(objs) if callback?
-      @store.results( table, 'select', objs  )
-    req.onerror = (error) =>
-      @store.onerror( table, 'select', error )
+  select:    ( table, where, callback=null ) ->
+    @traverse( table, where, callback, 'select' )
     return
 
   update:( table, objects ) ->
@@ -126,11 +116,23 @@ class Index
       txo.put(  object )
     return
 
-  # Using @store.table for objects
-  remove:( table, where ) ->
-    txo = @txo( table )
-    for own id, obj of @store.table(table) when where(obj)
-      txo['delete']( id )
+  remove:    ( table, where ) ->
+    @traverse( table, where, null, 'remove' )
+    return
+
+  traverse:( table, where, callback=null, op ) ->
+    mode = if op is 'remove' then 'readwrite' else 'readonly'
+    txo  = @txo( table, mode )
+    req  =  txo.getAll()
+    req.onsuccess = () =>
+      objs = {}
+      for own key, obj of req.result when where(obj)
+        objs[obj.id] = obj
+        txo['delete'](obj.id) if op is 'remove'
+      callback(objs) if callback?
+      @store.results( table, op, objs  )
+    req.onerror = (error) =>
+      @store.onerror( table, op, error )
     return
 
   open:( table ) ->

@@ -31,69 +31,43 @@ class Test
     try
       @store.index = new Index(  @store )
       await @store.index.initDB()
-      @testSelect()
+      @testIndex()
     catch error
       console.error( 'Store.Test', error )
 
-  testSelect:() ->
-
-    # console.log( 'testInsert', @prac() )
-    onInsert = (obj) =>
-      console.log( 'testIndex pipe insert', obj )
-    @store.subscribe( "Prac", "insert", 'testIndex', onInsert )
-    @store.insert( 'Prac', @prac() )
-
-    onSelect = (result) =>
-      console.log( 'testIndex select All', result )
-    @store.subscribe( "Prac", "select", 'testIndex', onSelect )
-    where = (obj) -> true # obj.column is 'Embrace'
-    @store.select( 'index', 'Prac', where )
-
-  testAdd:() ->
-
-    onAdd = (obj) =>
-      console.log( 'testIndex pipe add', obj )
-    @store.subscribe( "Prac", "add", 'testIndex', onAdd )
-    @store.add( 'Prac', 'Unite', @pracAdd() )
-
-    onGet = (result) =>
-      console.log( 'testIndex get', result )
-    @store.subscribe( "Prac", "get", 'testIndex', onGet )
-    @store.get( 'index', 'Prac', 'Unite', onGet )
-
   testIndex:() ->
 
-    onAdd = (obj) =>
-      console.log( 'testIndex pipe add', obj )
-    @store.subscribe( "Prac", "add", 'testIndex', onAdd )
-    @store.add( 'Prac', 'Unite', @pracAdd() )
-
-    onGet = (result) =>
-      console.log( 'testIndex get', result )
-    @store.subscribe( "Prac", "get", 'testIndex', onGet )
-    @store.get( 'index', 'Prac', 'Unite', onGet )
-
-    onInsert = (obj) =>
-      console.log( 'testIndex pipe insert', obj )
+    onInsert = (results) =>
+      console.log( 'testIndex pipe insert', results )
     @store.subscribe( "Prac", "insert", 'testIndex', onInsert )
     @store.insert( 'Prac', @prac() )
 
-    onUpdate = (obj) =>
-      console.log( 'testIndex pipe update', obj )
+    onUpdate = (results) =>
+      console.log( 'testIndex pipe update', results )
     @store.subscribe( "Prac", "update", 'testIndex', onUpdate )
     @store.update( 'Prac', @pracUpdate() )
 
-    onRemove = (where) =>
-      console.log( 'testIndex pipe remove', where )
+    onRemove = (results) =>
+      console.log( 'testIndex pipe remove', results )
     @store.subscribe( "Prac", "remove", 'testIndex', onRemove )
     where = (obj) -> obj.row is 'Do'
     @store.remove( 'Prac', where )
 
-    onSelect = (result) =>
-      console.log( 'testIndex select All', result )
-    @store.subscribe( "Prac", "select", 'testIndex', onSelect )
-    where = (obj) -> true # obj.column is 'Embrace'
+    onSelect = (results) =>
+      console.log(  'testIndex select', results )
+    @store.subscribe( "Prac", "select1", 'testIndex', onSelect )
+    where = (obj) -> true
     @store.select( 'index', 'Prac', where )
+
+    onAdd = (obj) =>
+      console.log( 'testIndex pipe add', obj )
+    @store.subscribe( "Prac", "add", 'testIndex', onAdd )
+    @store.add( 'Prac', 'Unite', @pracAdd() )
+
+    onGet = (result) =>
+      console.log( 'testIndex get', result )
+    @store.subscribe( "Prac", "get", 'testIndex', onGet )
+    @store.get( 'index', 'Prac', 'Unite' )
 
     onPut = (obj) =>
       console.log( 'testIndex pipe put', obj )
@@ -104,6 +78,10 @@ class Test
       console.log( 'testIndex pipe del', id )
     @store.subscribe( "Prac", "del", 'testIndex', onDel )
     @store.del( 'Prac', 'Change' )
+
+    @store.subscribe( "Prac", "select", 'testIndex', onSelect )
+    where = (obj) -> true
+    @store.select( 'index', 'Prac', where )
 
   testRest:() ->
 

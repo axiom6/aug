@@ -15,14 +15,9 @@ class Pipe
     @stream.publish( @toSubject(table,op), obj )
     return
 
-  results:( table, op, result, id ) ->
-    switch op
-      when 'change' then @publish( table, 'change', result, id )
-      when 'get'    then @publish( table, 'get',    result, id )
-      when 'select' then @publish( table, 'select', result )
-      when 'show'   then @publish( null, 'show',   result )
-      when 'batch'  then @publish( table, 'batch',  result )
-      when 'range'  then @publish( table, 'range',  result ) # Range op in Firebase
+  results:  ( table, op, result, id ) ->
+    @publish( table, op, result, id )
+    return
 
   add:( table, id, object ) -> # Post an object into table with id
     @publish( table, 'add', object, id )

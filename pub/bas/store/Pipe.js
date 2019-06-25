@@ -27,20 +27,7 @@ Pipe = class Pipe {
   }
 
   results(table, op, result, id) {
-    switch (op) {
-      case 'change':
-        return this.publish(table, 'change', result, id);
-      case 'get':
-        return this.publish(table, 'get', result, id);
-      case 'select':
-        return this.publish(table, 'select', result);
-      case 'show':
-        return this.publish(null, 'show', result);
-      case 'batch':
-        return this.publish(table, 'batch', result);
-      case 'range':
-        return this.publish(table, 'range', result); // Range op in Firebase
-    }
+    this.publish(table, op, result, id);
   }
 
   add(table, id, object) { // Post an object into table with id

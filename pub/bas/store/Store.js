@@ -319,7 +319,7 @@ Store = (function() {
         callback(keys);
       }
       if (typeof pipe !== "undefined" && pipe !== null) {
-        this.pipe.results(null, 'show', keys);
+        this.pipe.results(this.dbName, 'show', keys);
       }
     }
 

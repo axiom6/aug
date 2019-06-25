@@ -38,83 +38,51 @@ Test = class Test {
     try {
       this.store.index = new Index(this.store);
       await this.store.index.initDB();
-      return this.testSelect();
+      return this.testIndex();
     } catch (error1) {
       error = error1;
       return console.error('Store.Test', error);
     }
   }
 
-  testSelect() {
-    var onInsert, onSelect, where;
-    // console.log( 'testInsert', @prac() )
-    onInsert = (obj) => {
-      return console.log('testIndex pipe insert', obj);
-    };
-    this.store.subscribe("Prac", "insert", 'testIndex', onInsert);
-    this.store.insert('Prac', this.prac());
-    onSelect = (result) => {
-      return console.log('testIndex select All', result);
-    };
-    this.store.subscribe("Prac", "select", 'testIndex', onSelect);
-    where = function(obj) {
-      return true; // obj.column is 'Embrace'
-    };
-    return this.store.select('index', 'Prac', where);
-  }
-
-  testAdd() {
-    var onAdd, onGet;
-    onAdd = (obj) => {
-      return console.log('testIndex pipe add', obj);
-    };
-    this.store.subscribe("Prac", "add", 'testIndex', onAdd);
-    this.store.add('Prac', 'Unite', this.pracAdd());
-    onGet = (result) => {
-      return console.log('testIndex get', result);
-    };
-    this.store.subscribe("Prac", "get", 'testIndex', onGet);
-    return this.store.get('index', 'Prac', 'Unite', onGet);
-  }
-
   testIndex() {
     var onAdd, onDel, onGet, onInsert, onPut, onRemove, onSelect, onUpdate, where;
-    onAdd = (obj) => {
-      return console.log('testIndex pipe add', obj);
-    };
-    this.store.subscribe("Prac", "add", 'testIndex', onAdd);
-    this.store.add('Prac', 'Unite', this.pracAdd());
-    onGet = (result) => {
-      return console.log('testIndex get', result);
-    };
-    this.store.subscribe("Prac", "get", 'testIndex', onGet);
-    this.store.get('index', 'Prac', 'Unite', onGet);
-    onInsert = (obj) => {
-      return console.log('testIndex pipe insert', obj);
+    onInsert = (results) => {
+      return console.log('testIndex pipe insert', results);
     };
     this.store.subscribe("Prac", "insert", 'testIndex', onInsert);
     this.store.insert('Prac', this.prac());
-    onUpdate = (obj) => {
-      return console.log('testIndex pipe update', obj);
+    onUpdate = (results) => {
+      return console.log('testIndex pipe update', results);
     };
     this.store.subscribe("Prac", "update", 'testIndex', onUpdate);
     this.store.update('Prac', this.pracUpdate());
-    onRemove = (where) => {
-      return console.log('testIndex pipe remove', where);
+    onRemove = (results) => {
+      return console.log('testIndex pipe remove', results);
     };
     this.store.subscribe("Prac", "remove", 'testIndex', onRemove);
     where = function(obj) {
       return obj.row === 'Do';
     };
     this.store.remove('Prac', where);
-    onSelect = (result) => {
-      return console.log('testIndex select All', result);
+    onSelect = (results) => {
+      return console.log('testIndex select', results);
     };
-    this.store.subscribe("Prac", "select", 'testIndex', onSelect);
+    this.store.subscribe("Prac", "select1", 'testIndex', onSelect);
     where = function(obj) {
-      return true; // obj.column is 'Embrace'
+      return true;
     };
     this.store.select('index', 'Prac', where);
+    onAdd = (obj) => {
+      return console.log('testIndex pipe add', obj);
+    };
+    this.store.subscribe("Prac", "add", 'testIndex', onAdd);
+    this.store.add('Prac', 'Unite', this.pracAdd());
+    onGet = (result) => {
+      return console.log('testIndex get', result);
+    };
+    this.store.subscribe("Prac", "get", 'testIndex', onGet);
+    this.store.get('index', 'Prac', 'Unite');
     onPut = (obj) => {
       return console.log('testIndex pipe put', obj);
     };
@@ -124,7 +92,12 @@ Test = class Test {
       return console.log('testIndex pipe del', id);
     };
     this.store.subscribe("Prac", "del", 'testIndex', onDel);
-    return this.store.del('Prac', 'Change');
+    this.store.del('Prac', 'Change');
+    this.store.subscribe("Prac", "select", 'testIndex', onSelect);
+    where = function(obj) {
+      return true;
+    };
+    return this.store.select('index', 'Prac', where);
   }
 
   testRest() {

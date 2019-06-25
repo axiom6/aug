@@ -128,7 +128,7 @@ class Store
   show:( callback=null )  -> # Show all table names
     keys = Object.keys( @tables )
     callback( keys ) if callback?
-    @pipe.results( null, 'show', keys ) if pipe?
+    @pipe.results( @dbName, 'show', keys ) if pipe?
     return
   
   open:         ( table) -> # Create a table with an optional schema
