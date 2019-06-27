@@ -1,16 +1,14 @@
 
-
-
 class Rest
 
   constructor:( @store, @baseUrl ) ->
     @key  = "id"
 
   # Rest
-  get:(    table, id, callback, path )  -> @rest( 'get',    table, id,null, path, callback )
-  add:(    table, id, object,   path )  -> @rest( 'add',    table, id, object,    path )
-  put:(    table, id, object,   path )  -> @rest( 'put',    table, id, object,    path )
-  del:(    table, id,           path )  -> @rest( 'del',    table, id,null, path )
+  get:( table, id, callback, path )  -> @rest( 'get',    table, id,null, path, callback )
+  add:( table, id, object,   path )  -> @rest( 'add',    table, id, object,    path )
+  put:( table, id, object,   path )  -> @rest( 'put',    table, id, object,    path )
+  del:( table, id,           path )  -> @rest( 'del',    table, id,null, path )
 
   # Sql
   select:( table, where, callback ) -> @sql( 'select', table, where,   '',null, callback )
@@ -65,7 +63,7 @@ class Rest
         @store.onerror( table, op, @toError(url,error), id ) )
     return
 
-  sql:( op, table, where, id, objects=null,  callback=null ) ->
+  sql:( op, table, where, objects=null, callback=null ) ->
     url       = @urlRest( op, table,'' )
     settings  = @config( op )
     fetch( url, settings )
@@ -76,9 +74,9 @@ class Rest
         if callback?
            callback(result)
         else
-           @store.results( table, op, result, id ) )
+           @store.results( table, op, result ) )
       .catch( (error) =>
-        @store.onerror( table, op, @toError(url,error), id ) )
+        @store.onerror( table, op, @toError(url,error) ) )
     return
 
   # Only for open and drop. Needs to be thought out
@@ -92,7 +90,7 @@ class Rest
         result = @restResult( null, data )
         @store.results( table, op, result ) )
       .catch( (error) =>
-        @store.onerror( table, op, @toError(url,error), id ) )
+        @store.onerror( table, op, @toError(url,error) ) )
     return
 
   restResult:( object, data=null, where=()->true ) ->  # object can also be objects

@@ -1,4 +1,5 @@
-var Fire;
+var Fire,
+  hasProp = {}.hasOwnProperty;
 
 import firebase from '../../../pub/lib/store/firebase.app.esm.js';
 
@@ -12,10 +13,22 @@ Fire = (function() {
       this.store = store;
       this.dbName = this.store.dbName;
       this.tables = this.store.tables;
-      this.fb = this.init(config);
       this.keyProp = 'id';
-      this.auth(); // Anonomous logins have to be enabled
+      this.fb = this.init(this.config("augm-d4b3c"));
+      //@auth() # Anonomous logins have to be enabled
       this.fd = firebase.database();
+    }
+
+    config(projectId) {
+      return {
+        projectId: projectId,
+        apiKey: "AIzaSyD4Py9oML_Y77ze9bGX0I8s9hqndKkBVjY",
+        authDomain: `${projectId}.firebaseapp.com`,
+        databaseURL: `https://${projectId}.firebaseio.com`,
+        storageBucket: `${projectId}.appspot.com`,
+        messagingSenderId: "sender-id",
+        appID: "app-id"
+      };
     }
 
     init(config) {
@@ -25,8 +38,7 @@ Fire = (function() {
     }
 
     batch(name, obj, objs, callback = null) {
-      var onBatch;
-      onBatch = (snapshot) => {
+      this.fd.ref(table).once('value').then((snapshot) => {
         if ((snapshot != null) && (snapshot.val() != null)) {
           obj.result = snapshot.val();
           if (this.store.batchComplete(objs)) {
@@ -36,17 +48,17 @@ Fire = (function() {
               return this.store.results(name, 'batch', objs);
             }
           }
-        } else {
-          return this.store.onerror(obj.table, 'batch', 'Fire batch error');
         }
-      };
-      this.fd.ref(table).once('value', onBatch);
+      }).catch((error) => {
+        return this.store.onerror(obj.table, 'batch', error);
+      });
     }
 
     // Have too clarify id with snapshot.key
-    change(table, id = 'none', callback = null, onEvt = 'put') {
-      var onComplete, path;
-      onComplete = (snapshot) => {
+    change(table, id = 'none', callback = null, Event = 'put') {
+      var path;
+      path = id === 'none' ? table : table + '/' + id;
+      this.fd.ref(path).on(Fire.EventType[Event], onChange).then((snapshot) => {
         var key, val;
         if (snapshot != null) {
           key = snapshot.key;
@@ -56,185 +68,125 @@ Fire = (function() {
           } else {
             return this.store.results(table, 'change', val, key);
           }
-        } else {
-          return this.store.onerror(table, 'change', 'Fire batch error');
         }
-      };
-      path = id === 'none' ? table : table + '/' + id;
-      this.fd.ref(path).on(Fire.OnFire[onEvt], onComplete);
+      }).catch((error) => {
+        return this.store.onerror(table, 'change', error);
+      });
     }
 
     get(table, id, callback) {
-      var onComplete;
-      onComplete = (snapshot) => {
+      this.fd.ref(table + '/' + id).once('value').then((snapshot) => {
         if ((snapshot != null) && (snapshot.val() != null)) {
           if (callback != null) {
             return callback(snapshot.val());
           } else {
             return this.store.results(table, 'get', snapshot.val(), id);
           }
-        } else {
-          return this.store.onerror(table, 'get', 'Fire get error', id);
         }
-      };
-      this.fd.ref(table + '/' + id).once('value', onComplete);
+      }).catch((error) => {
+        return this.store.onerror(table, 'get', error, id);
+      });
     }
 
     add(table, id, object) {
-      var onComplete;
-      object[this.keyProp] = id;
-      onComplete = (error) => {
-        if (error != null) {
-          return this.store.onerror(table, 'add', {
-            error: error,
-            object: object
-          }, id);
-        }
-      };
-      this.fd.ref(table + '/' + id).set(object, onComplete);
+      this.fd.ref(table + '/' + id).set(object).catch((error) => {
+        return this.store.onerror(table, 'add', error, id);
+      });
     }
 
     // Same as add
     put(table, id, object) {
-      var onComplete;
-      onComplete = (error) => {
-        if (error != null) {
-          return this.store.onerror(table, 'put', {
-            error: error,
-            object: object
-          }, id);
-        }
-      };
-      this.fd.ref(table + '/' + id).set(object, onComplete);
+      this.fd.ref(table + '/' + id).set(object).catch((error) => {
+        return this.store.onerror(table, 'put', error, id);
+      });
     }
 
     del(table, id) {
-      var onComplete;
-      onComplete = (error) => {
-        if (error != null) {
-          return this.store.onerror(table, 'del', {
-            error: error
-          }, id);
-        }
-      };
-      this.fd.ref(table + '/' + id).remove(onComplete);
+      this.fd.ref(table + '/' + id).remove().catch((error) => {
+        return this.store.onerror(table, 'del', error, id);
+      });
     }
 
     select(table, where, callback = null) {
-      var onComplete;
-      if (where === false) {
-        ({});
-      }
-      onComplete = (snapshot) => {
+      this.fd.ref(table).once('value').then((snapshot) => {
+        var objs;
         if ((snapshot != null) && (snapshot.val() != null)) {
+          objs = this.store.toObjs(snapshot.val(), where, this.keyProp);
           if (callback != null) {
-            return callback(snapshot.val());
+            return callback(objs);
           } else {
-            return this.store.results(table, 'select', snapshot.val());
+            return this.store.results(table, 'select', objs);
           }
         }
-      };
-      this.fd.ref(table).once('value', onComplete);
+      });
     }
 
     insert(table, objects) {
-      var onComplete;
-      onComplete = (error) => {
-        if (error != null) {
-          return this.store.onerror(table, 'insert', {
-            error: error
-          });
-        }
-      };
-      this.fd.ref(table).set(objects, onComplete);
-    }
-
-    range(table, beg, end) {
-      var onComplete;
-      onComplete = (snapshot) => {
-        var val;
-        if ((snapshot != null) && (snapshot.val() != null)) {
-          val = this.toObjects(snapshot.val());
-          return this.store.results(table, 'range', val);
-        }
-      };
-      this.fd.ref(table).orderByKey().startAt(beg).endAt(end).once('value', onComplete);
+      this.fd.ref(table).set(objects).catch((error) => {
+        return this.store.onerror(table, 'insert', error);
+      });
     }
 
     update(table, objects) {
-      var onComplete;
-      onComplete = (error) => {
-        if (error != null) {
-          return this.store.onerror(table, 'update', {
-            error: error
-          });
+      this.fd.ref(table).update(objects).catch((error) => {
+        return this.store.onerror(table, 'update', error);
+      });
+    }
+
+    remove(table, where) {
+      var key, obj, objs;
+      this.fd.ref(table).once('value').then((snapshot) => {}, (function() {
+        if ((typeof snapshot !== "undefined" && snapshot !== null) && (snapshot.val() != null)) {
+          objs = this.store.toObjs(snapshot.val(), where, this.keyProp);
+          for (key in objs) {
+            if (!hasProp.call(objs, key)) continue;
+            obj = objs[key];
+            this.del(table, key); // @fd.ref(table+'/'+key).remove()
+          }
+          return this.store.results(table, 'select', objs);
         }
-      };
-      this.fd.ref(table).update(objects, onComplete);
+      }).call(this));
     }
 
-    remove(table, keys) {
-      var i, key, len, ref;
-      ref = this.fd.ref(table);
-      for (i = 0, len = keys.length; i < len; i++) {
-        key = keys[i];
-        ref.child(key).remove();
-      }
+    range(table, beg, end) {
+      this.fd.ref(table).orderByKey().startAt(beg).endAt(end).once('value').then((snapshot) => {
+        var objs;
+        if ((snapshot != null) && (snapshot.val() != null)) {
+          objs = this.toObjects(snapshot.val());
+          return this.store.results(table, 'range', objs);
+        }
+      }).catch((error) => {
+        return this.store.onerror(table, 'range', error);
+      });
     }
 
-    // Need to implement
+    // Need to learn what opening a table means in firebase
     open(table) {
       if (table === false) {
         ({});
       }
     }
 
-    // ref.remove( onComplete ) is Dangerous and has removed all tables in Firebase
+    // ref.remove() is Dangerous and has removed all tables in Firebase
+    // @fd.ref(table).set( {} )
+    //    .catch( (error) =>
+    //      @store.onerror( table, 'open', error ) )
     drop(table) {
-      if (table === false) {
-        ({});
-      }
-    }
-
-    // keyProp only needed if rows is array
-    toObjects(rows) {
-      var ckey, i, len, objects, row;
-      objects = {};
-      if (this.store.isArray(rows)) {
-        for (i = 0, len = rows.length; i < len; i++) {
-          row = rows[i];
-          if ((row != null) && (row['key'] != null)) {
-            ckey = row['key'].split('/')[0];
-            objects[row[ckey]] = this.toObjects(row);
-            console.log('Fire.toObjects', {
-              rkowKey: row['key'],
-              ckey: ckey,
-              row: row
-            });
-          } else {
-            console.error("Fire.toObjects() row array element requires key property", row);
-          }
-        }
-      } else {
-        objects = rows;
-      }
-      return objects;
+      this.fd.ref(table).remove().catch((error) => {
+        return this.store.onerror(table, 'drop', error);
+      });
     }
 
     // Sign Anonymously
     auth() {
-      var onerror;
-      onerror = (error) => {
-        return this.store.onerror('auth', 'auth', {
-          error: error
-        });
-      };
-      this.fb.auth().signInAnonymously().catch(onerror);
+      this.fb.auth().signInAnonymously().catch((error) => {
+        return this.store.onerror('auth', 'auth', error);
+      });
     }
 
   };
 
-  Fire.OnFire = {
+  Fire.EventType = {
     get: "value",
     add: "child_added",
     put: "child_changed",

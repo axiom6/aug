@@ -5,15 +5,24 @@ import               '../../../pub/lib/store/firebase.auth.esm.js'     # Authent
 
 class Fire
 
-  Fire.OnFire  = { get:"value", add:"child_added", put:"child_changed", del:"child_removed" }
+  Fire.EventType  = { get:"value", add:"child_added", put:"child_changed", del:"child_removed" }
 
   constructor:( @store, config ) ->
-    @dbName = @store.dbName
-    @tables = @store.tables
-    @fb = @init( config )
+    @dbName  = @store.dbName
+    @tables  = @store.tables
     @keyProp = 'id'
-    @auth() # Anonomous logins have to be enabled
-    @fd = firebase.database()
+    @fb      = @init( @config("augm-d4b3c") )
+    #@auth() # Anonomous logins have to be enabled
+    @fd      = firebase.database()
+
+  config:( projectId ) -> {
+    projectId:         projectId,
+    apiKey:            "AIzaSyD4Py9oML_Y77ze9bGX0I8s9hqndKkBVjY",
+    authDomain:        "#{projectId}.firebaseapp.com",
+    databaseURL:       "https://#{projectId}.firebaseio.com",
+    storageBucket:     "#{projectId}.appspot.com",
+    messagingSenderId: "sender-id",
+    appID:             "app-id" }
 
   init:( config ) ->
     firebase.initializeApp(config)
@@ -21,136 +30,130 @@ class Fire
     firebase
 
   batch:( name, obj, objs, callback=null ) ->
-    onBatch = (snapshot) =>
-      if snapshot? and snapshot.val()?
-        obj.result = snapshot.val()
-        if @store.batchComplete( objs )
-          if callback?
-             callback( objs )
-          else
-             @store.results( name, 'batch', objs )
-      else
-        @store.onerror( obj.table, 'batch', 'Fire batch error' )
-    @fd.ref(table).once('value', onBatch )
+    @fd.ref(table).once('value' )
+      .then( (snapshot) =>
+        if snapshot? and snapshot.val()?
+          obj.result = snapshot.val()
+          if @store.batchComplete( objs )
+            if callback?
+               callback( objs )
+            else
+               @store.results( name, 'batch', objs ) )
+      .catch( (error) =>
+        @store.onerror( obj.table, 'batch', error ) )
     return
 
   # Have too clarify id with snapshot.key
-  change:( table, id='none', callback=null, onEvt='put' ) ->
-    onComplete = (snapshot) =>
-      if snapshot?
-        key = snapshot.key
-        val = snapshot.val()
-        if callback?
-           callback( val )
-        else
-           @store.results( table, 'change', val, key )
-      else
-        @store.onerror( table, 'change', 'Fire batch error' )
+  change:( table, id='none', callback=null, Event='put' ) ->
     path  = if id is 'none' then table else table + '/' + id
-    @fd.ref(path).on( Fire.OnFire[onEvt], onComplete )
+    @fd.ref(path).on( Fire.EventType[Event], onChange )
+       .then( (snapshot) =>
+          if snapshot?
+            key = snapshot.key
+            val = snapshot.val()
+            if callback?
+               callback( val )
+            else
+               @store.results( table, 'change', val, key ) )
+      .catch( (error) =>
+        @store.onerror( table, 'change', error ) )
     return    
 
   get:( table, id, callback ) ->
-    onComplete = (snapshot) =>
-      if snapshot? and snapshot.val()?
-        if callback?
-           callback( snapshot.val() )
-        else
-           @store.results( table, 'get', snapshot.val(), id )
-      else
-        @store.onerror( table, 'get', 'Fire get error', id )
-    @fd.ref(table+'/'+id).once('value', onComplete )
-    return    
+    @fd.ref(table+'/'+id).once('value' )
+       .then( (snapshot) =>
+          if snapshot? and snapshot.val()?
+            if callback?
+               callback( snapshot.val() )
+            else
+               @store.results( table, 'get', snapshot.val(), id ) )
+      .catch( (error) =>
+        @store.onerror( table, 'get', error, id ) )
+    return
 
   add:( table, id, object  ) ->
-    object[@keyProp] = id
-    onComplete = (error) =>
-      @store.onerror( table, 'add', { error:error, object:object }, id ) if error?
-    @fd.ref(table+'/'+id).set( object, onComplete )
+    @fd.ref(table+'/'+id).set( object )
+       .catch( (error) =>
+         @store.onerror( table, 'add', error, id ) )
     return
 
   # Same as add
   put:( table, id,  object ) ->
-    onComplete = (error) =>
-      @store.onerror( table, 'put', { error:error, object:object }, id ) if error?
-    @fd.ref(table+'/'+id).set( object, onComplete )
+    @fd.ref(table+'/'+id).set( object )
+       .catch( (error) =>
+         @store.onerror( table, 'put', error, id ) )
     return
 
   del:( table, id ) ->
-    onComplete = (error) =>
-      @store.onerror( table, 'del', { error:error }, id ) if error?
-    @fd.ref(table+'/'+id).remove( onComplete )
+    @fd.ref(table+'/'+id).remove()
+       .catch( (error) =>
+         @store.onerror( table, 'del', error, id ) )
     return
 
   select:( table, where, callback=null ) ->
-    if where is false then {}
-    onComplete = (snapshot) =>
-      if snapshot? and snapshot.val()?
-        if callback?
-           callback( snapshot.val() )
-        else
-           @store.results( table, 'select', snapshot.val() )
-    @fd.ref(table).once('value', onComplete )
+    @fd.ref(table).once('value')
+       .then( (snapshot) =>
+        if snapshot? and snapshot.val()?
+          objs = @store.toObjs( snapshot.val(), where, @keyProp )
+          if callback?
+             callback( objs )
+          else
+             @store.results( table, 'select', objs ) )
     return
 
   insert:( table, objects ) ->
-    onComplete = (error) =>
-      @store.onerror( table, 'insert', { error:error } ) if error?
-    @fd.ref(table).set( objects, onComplete )
-    return
-
-  range:( table, beg, end ) ->
-    onComplete = (snapshot) =>
-      if snapshot? and snapshot.val()?
-        val = @toObjects( snapshot.val() )
-        @store.results( table, 'range', val )
-    @fd.ref(table).orderByKey().startAt(beg).endAt(end).once('value', onComplete )
+    @fd.ref(table).set( objects )
+       .catch( (error) =>
+         @store.onerror( table, 'insert', error ) )
     return
 
   update:( table, objects ) ->
-    onComplete = (error) =>
-      @store.onerror( table, 'update', { error:error } ) if error?
-    @fd.ref(table).update( objects, onComplete )
+    @fd.ref(table).update( objects )
+       .catch( (error) =>
+         @store.onerror( table, 'update', error ) )
     return
 
-  remove:( table, keys ) ->
-    ref = @fd.ref(table)
-    ref.child(key).remove() for key in keys
+  remove:( table, where ) ->
+    @fd.ref(table).once('value')
+      .then( (snapshot) =>
+      if snapshot? and snapshot.val()?
+        objs = @store.toObjs( snapshot.val(), where, @keyProp )
+        for own key, obj of objs
+          @del( table, key ) # @fd.ref(table+'/'+key).remove()
+        @store.results( table, 'select', objs ) )
     return
 
-  # Need to implement
+  range:( table, beg, end ) ->
+    @fd.ref(table).orderByKey().startAt(beg).endAt(end).once('value' )
+       .then( (snapshot) =>
+          if snapshot? and snapshot.val()?
+            objs = @toObjects( snapshot.val() )
+            @store.results( table, 'range', objs ) )
+       .catch( (error) =>
+         @store.onerror( table, 'range', error ) )
+    return
+
+  # Need to learn what opening a table means in firebase
   open:( table ) ->
-    if   table is false then {}
-    return
-
-  # ref.remove( onComplete ) is Dangerous and has removed all tables in Firebase
-  drop:( table ) ->
     if table is false then {}
+    # @fd.ref(table).set( {} )
+    #    .catch( (error) =>
+    #      @store.onerror( table, 'open', error ) )
     return
 
-  # keyProp only needed if rows is array
-  toObjects:( rows ) ->
-    objects = {}
-    if @store.isArray(rows)
-      for row in rows
-        if row? and row['key']?
-          ckey = row['key'].split('/')[0]
-          objects[row[ckey]] = @toObjects(row)
-          console.log( 'Fire.toObjects', { rkowKey:row['key'], ckey:ckey, row:row } )
-        else
-          console.error( "Fire.toObjects() row array element requires key property", row )
-    else
-      objects = rows
-    objects
+  # ref.remove() is Dangerous and has removed all tables in Firebase
+  drop:( table ) ->
+    @fd.ref(table).remove()
+      .catch( (error) =>
+        @store.onerror( table, 'drop', error ) )
+    return
 
   # Sign Anonymously
   auth:( ) ->
-   onerror = (error) =>
-     @store.onerror( 'auth', 'auth', { error:error } )
-   @fb.auth().signInAnonymously().catch( onerror )
-   return
-
-
+    @fb.auth().signInAnonymously()
+       .catch( (error) =>
+         @store.onerror( 'auth', 'auth', error ) )
+    return
 
 export default Fire
 

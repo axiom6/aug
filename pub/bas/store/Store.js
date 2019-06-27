@@ -362,9 +362,18 @@ Store = (function() {
     }
 
     // Utilities
-    filter(results, where) {
-      var key, obj, objs;
-      if (where({})) { // Checks if where = (obj) -> true
+    toObjs(results, where, keyProp = 'id') {
+      var i, key, len, obj, objs, row;
+      if (this.isArray(results)) {
+        objs = {};
+        for (i = 0, len = results.length; i < len; i++) {
+          row = results[i];
+          if (where(obj)) {
+            objs[row[keyProp]] = row;
+          }
+        }
+        return objs;
+      } else if (where({})) { // Checks if where = (obj) -> true
         return results;
       } else {
         objs = {};

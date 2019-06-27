@@ -1,4 +1,3 @@
-//mport fetch from '../../lib/fetch/fetch.js' # NodeJS fetch
 var Rest;
 
 Rest = class Rest {
@@ -9,10 +8,6 @@ Rest = class Rest {
   }
 
   // Rest
-  change(table, id, callback, path) {
-    return this.rest('change', table, id, null, path, callback);
-  }
-
   get(table, id, callback, path) {
     return this.rest('get', table, id, null, path, callback);
   }
@@ -69,18 +64,21 @@ Rest = class Rest {
     return obj;
   }
 
-  batch(obj, objs, callback = null) {
+  batch(name, obj, objs, callback = null) {
     var settings, url;
     url = this.baseUrl + obj.url;
     settings = this.config('get');
     fetch(url, settings).then((response) => {
       return response.json();
     }).then((data) => {
-      obj.data = data;
-      if ((callback != null) && this.store.batchComplete(objs)) {
-        callback(data);
+      obj['result'] = data;
+      if (this.store.batchComplete(objs)) {
+        if (callback != null) {
+          return callback(objs);
+        } else {
+          return this.store.results(name, 'batch', objs, id);
+        }
       }
-      return this.store.results(table, op, result, id);
     }).catch((error) => {
       return this.store.onerror(obj.table, 'batch', this.toError(url, error));
     });
@@ -96,15 +94,16 @@ Rest = class Rest {
       var result;
       result = this.restResult(object, data);
       if (callback != null) {
-        callback(result);
+        return callback(result);
+      } else {
+        return this.store.results(table, op, result, id);
       }
-      return this.store.results(table, op, result, id);
     }).catch((error) => {
       return this.store.onerror(table, op, this.toError(url, error), id);
     });
   }
 
-  sql(op, table, where, id, objects = null, callback = null) {
+  sql(op, table, where, objects = null, callback = null) {
     var settings, url;
     url = this.urlRest(op, table, '');
     settings = this.config(op);
@@ -114,11 +113,12 @@ Rest = class Rest {
       var result;
       result = this.restResult(objects, data, where);
       if (callback != null) {
-        callback(result);
+        return callback(result);
+      } else {
+        return this.store.results(table, op, result);
       }
-      return this.store.results(table, op, result);
     }).catch((error) => {
-      return this.store.onerror(table, op, this.toError(url, error), id);
+      return this.store.onerror(table, op, this.toError(url, error));
     });
   }
 
@@ -134,7 +134,7 @@ Rest = class Rest {
       result = this.restResult(null, data);
       return this.store.results(table, op, result);
     }).catch((error) => {
-      return this.store.onerror(table, op, this.toError(url, error), id);
+      return this.store.onerror(table, op, this.toError(url, error));
     });
   }
 
@@ -180,7 +180,6 @@ Rest = class Rest {
       case 'get':
       case 'put':
       case 'del':
-      case 'change':
         return this.baseUrl + '/' + table + '/' + id + params;
       case 'insert':
       case 'select':
@@ -216,8 +215,6 @@ Rest = class Rest {
       case 'remove':
       case 'drop':
         return 'DELETE';
-      case 'change':
-        return 'GET';
       default:
         console.error('Rest.restOp() Unknown op', op);
         return 'GET';

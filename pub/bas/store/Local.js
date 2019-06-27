@@ -120,17 +120,18 @@ Local = class Local {
   }
 
   remove(table, where) {
-    var i, id, ids, len, obj;
+    var i, id, ids, len, obj, objs;
     ids = this.tableIds[table];
+    objs = {};
     for (i = 0, len = ids.length; i < len; i++) {
       id = ids[i];
       obj = this.obj(table, id);
-      if (obj != null) {
-        if (where(obj)) {
-          this.del(table, id);
-        }
+      if ((obj != null) && where(obj)) {
+        this.del(table, id);
+        objs[id] = obj;
       }
     }
+    this.store.results(table, 'remove', objs);
   }
 
   // Nothing to do until we get ids

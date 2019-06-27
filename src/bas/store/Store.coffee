@@ -161,8 +161,13 @@ class Store
     return
 
   # Utilities
-  filter:( results, where ) ->
-    if where({}) # Checks if where = (obj) -> true
+  toObjs:( results, where, keyProp='id' ) ->
+    if @isArray(results)
+      objs = {}
+      for row in results when where(obj)
+        objs[row[keyProp]] = row
+      objs
+    else if where({}) # Checks if where = (obj) -> true
       results
     else
       objs = {}

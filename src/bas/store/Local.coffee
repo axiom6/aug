@@ -80,10 +80,13 @@ class Local
 
   remove:( table, where ) ->
     ids  =  @tableIds[table]
+    objs = {}
     for id in ids
       obj = @obj( table, id )
-      if obj?
-        @del( table, id ) if where(obj)
+      if obj? and where(obj)
+        @del( table, id )
+        objs[id] = obj
+    @store.results( table, 'remove', objs )
     return
 
   # Nothing to do until we get ids
