@@ -26,5 +26,6 @@ export default new Router( {
       { path:'embed',   name:'NoteEmbed', components:{ NoteEmbed:lazy('vue/note/EmbedVue' ) } },
       { path:'maths',   name:'NoteMaths', components:{ NoteMaths:lazy('vue/note/MathsVue' ) } },
       { path:'ganja',   name:'NoteGanja', components:{ NoteGanja:lazy('vue/note/GanjaVue' ) } } ] },
-    { path: '/wood',    name:'Wood',      components:{ Wood:     lazy('vue/comp/Wood'     ) } }
+    { path: '/wood',    name:'Wood',      components:{ Wood:     lazy('vue/comp/Wood'     ) } },
+    { path: '/Prac',    name:'Prac',      components:{ Prac:     lazy('vue/comp/Prac'     ) } }
     ] } )

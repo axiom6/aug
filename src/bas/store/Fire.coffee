@@ -1,16 +1,7 @@
 
-
-#mport firebase from '../../../firebase.esm.js'      # Firebase core (required)
-
-#mport firebase from '@firebase/app'          # Firebase core (required)
-#mport               'firebase/database' # Realtime Database
-#mport               'firebase/auth'     # Authentication
-
-#mport firebase from '/aug/node_modules/firebase/app'          # Firebase core (required)
-#mport firebase from '../../../node_modules/firebase/app'          # Firebase core (required)
-#mport firebase from '../../../pub/lib/store/firebase.app.esm.js'      # Firebase core (required)
-#mport               '../../../pub/lib/store/firebase.database.esm.js' # Realtime Database
-#mport               '../../../pub/lib/store/firebase.auth.esm.js'     # Authentication
+import firebase from '../../../pub/lib/store/firebase-app.esm.js'      # Firebase core (required)
+import               '../../../pub/lib/store/firebase-database.esm.js' # Realtime Database
+import               '../../../pub/lib/store/firebase-auth.esm.js'     # Authentication
 
 class Fire
 
@@ -35,9 +26,8 @@ class Fire
     appID:             "app-id" }
 
   init:( config ) ->
-    firebase = window['firebase']
+    #console.log( 'firebase', firebase )
     firebase.initializeApp(config)
-    #console.log( 'Fires.init', config )
     firebase
 
   batch:( name, obj, objs, callback=null ) ->
@@ -174,12 +164,3 @@ class Fire
 
 export default Fire
 
-#mport firebase from "firebase/app" # Firebase core (required)
-#mport "firebase/database"          # Realtime Database
-#mport firebase from '../../../pub/lib/store/Firebase.esm.stub.js'
-#mport "firebase/auth"              # Authentication
-#mport "firebase/firestore"         # Cloud Firestore
-#mport "firebase/functions"         # Cloud Functions for Firebase Client SDK
-#mport "firebase/messaging"         # Cloud Messaging
-#mport "firebase/storage"           # Cloud Storage
-#mport "firebase/performance"       # Performance Monitoring (beta release)

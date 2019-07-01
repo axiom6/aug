@@ -37,19 +37,22 @@ Test = class Test {
   }
 
   testFire() {
-    var onSelect, where;
+    var onGet;
     // onInsert = (results) =>
     //   console.log( 'Fire pipe insert', results )
     // @store.subscribe( "Prac", "insert", 'testFire', onInsert )
     // @store.insert( 'Prac', @prac() )
-    onSelect = (results) => {
-      return console.log('Fire pipe select', results);
+
+    // onSelect = (results) =>
+    //   console.log(  'Fire pipe select', results )
+    // @store.subscribe( "Prac", "select", 'testFire', onSelect )
+    // where = (obj) -> obj.row is 'Do'
+    // @store.select( 'fire', 'Prac', where )
+    onGet = (results) => {
+      return console.log('Fire pipe get', results);
     };
-    this.store.subscribe("Prac", "select", 'testFire', onSelect);
-    where = function(obj) {
-      return obj.row === 'Do';
-    };
-    this.store.select('fire', 'Prac', where);
+    this.store.subscribe("Prac", "get", 'testFire', onGet);
+    this.store.get('fire', 'Prac', 'Nature');
   }
 
   async testInit() {

@@ -790,25 +790,6 @@
 		"sI": 0,
 		"sU": 0
 		},
-	"/database.rules.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/database.rules-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/firebase.esm.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/firebase.esm-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/firebase.json": {
 		"ft": 524288,
 		"oA": 1,
@@ -816,30 +797,6 @@
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
-		},
-	"/firebase2.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/firebase2-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/firestore.indexes.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/firestore.indexes-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/firestore.rules": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/firestore.rules",
-		"oF": 1
 		},
 	"/functions/.eslintrc.json": {
 		"ft": 524288,
@@ -898,14 +855,6 @@
 		"oAP": "/LICENSE",
 		"oF": 0
 		},
-	"/muse.sh": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/muse.sh",
-		"oF": 1
-		},
 	"/node_modules": {
 		"ft": 65536,
 		"oA": 2,
@@ -945,17 +894,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/node_modules/@firebase/installations/dist/index.esm.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/node_modules/@firebase/installations/dist/index.esm-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/node_modules/@firebase/logger/dist/index.esm.js": {
 		"bF": 0,
 		"ft": 64,
@@ -978,17 +916,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/node_modules/@firebase/webchannel-wrapper/dist/index.esm.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/node_modules/@firebase/webchannel-wrapper/dist/index.esm-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/node_modules/estree-walker/src/estree-walker.js": {
 		"bF": 0,
 		"ft": 64,
@@ -999,25 +926,6 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
-		},
-	"/node_modules/firebase/firebase.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/node_modules/firebase/firebase-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/node_modules/idb/lib/idb.mjs": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/node_modules/idb/lib/idb.mjs",
-		"oF": 0
 		},
 	"/node_modules/magic-string/dist/magic-string.es.js": {
 		"bF": 0,
@@ -1130,6 +1038,14 @@
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
+		},
+	"/pub/404.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/404.html",
+		"oF": 0
 		},
 	"/pub/app/augm/Augm.js": {
 		"bF": 0,
@@ -1589,6 +1505,46 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"/pub/bas/rules/database.rules.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/bas/rules/database.rules-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/bas/rules/firebase2.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/bas/rules/firebase2-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/bas/rules/firestore.indexes.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/bas/rules/firestore.indexes-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/bas/rules/firestore.rules": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/bas/rules/firestore.rules",
+		"oF": 0
+		},
+	"/pub/bas/rules/storage.rules": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/bas/rules/storage.rules",
+		"oF": 0
 		},
 	"/pub/bas/store/Fire.js": {
 		"bF": 0,
@@ -2195,14 +2151,6 @@
 		"plM": 3758088159,
 		"prP": 0
 		},
-	"/pub/fire.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/fire.html",
-		"oF": 0
-		},
 	"/pub/gan/2D/Basics.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2643,57 +2591,35 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/lib/store/firebase.app.esm.js": {
+	"/pub/lib/store/firebase-app.esm.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/lib/store/firebase.app.esm-min.js",
+		"oAP": "/pub/lib/store/firebase-app.esm-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/lib/store/firebase.auth.esm.js": {
+	"/pub/lib/store/firebase-auth.esm.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/lib/store/firebase.auth.esm-min.js",
+		"oAP": "/pub/lib/store/firebase-auth.esm-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/lib/store/firebase.database.esm.js": {
+	"/pub/lib/store/firebase-database.esm.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/lib/store/firebase.database.esm-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/lib/store/firebase.esm.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/lib/store/firebase.esm-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/lib/store/Firebase.esm.stub.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/lib/store/Firebase.esm.stub-min.js",
+		"oAP": "/pub/lib/store/firebase-database.esm-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -3003,6 +2929,14 @@
 		"oAP": "/pub/muse.html",
 		"oF": 0
 		},
+	"/pub/Prac.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/Prac.html",
+		"oF": 0
+		},
 	"/pub/vue/comp/Cube.js": {
 		"bF": 0,
 		"ft": 64,
@@ -3021,6 +2955,17 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/vue/comp/Draw-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/comp/Prac.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/comp/Prac-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -3416,14 +3361,6 @@
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
-		},
-	"/src/bas/store/Fire.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/src/bas/store/Fire.txt",
-		"oF": 0
 		},
 	"/src/bas/store/Index.coffee": {
 		"ft": 32,
@@ -3889,14 +3826,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/storage.rules": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/storage.rules",
-		"oF": 1
-		},
 	"/vue/comp/Cube.roll.js": {
 		"bF": 0,
 		"ft": 64,
@@ -3965,6 +3894,25 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/pub/vue/comp/Know.js",
+		"oF": 0
+		},
+	"/vue/comp/Prac.roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/comp/Prac.roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/vue/comp/Prac.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/comp/Prac.js",
 		"oF": 0
 		},
 	"/vue/comp/Wise.vue": {
@@ -4076,7 +4024,7 @@
 		"oAP": "/pub/vue/dash/View.js",
 		"oF": 0
 		},
-	"/vue/Data/Data.roll.js": {
+	"/vue/data/Data.roll.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
@@ -4452,7 +4400,7 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/vue/wood/wood.scss": {
+	"/vue/wood/Wood.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -5175,6 +5123,14 @@
 		"oAP": "/zzz/muse/Info.txt",
 		"oF": 0
 		},
+	"/zzz/muse/muse.sh": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/muse/muse.sh",
+		"oF": 0
+		},
 	"/zzz/muse/roll.js": {
 		"bF": 0,
 		"ft": 64,
@@ -5498,6 +5454,77 @@
 		"oA": 0,
 		"oAP": "/zzz/scala/Diff.scala",
 		"oF": 0
+		},
+	"/zzz/store/fire.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/store/fire.html",
+		"oF": 0
+		},
+	"/zzz/store/Fire.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/store/Fire.txt",
+		"oF": 0
+		},
+	"/zzz/store/firebase.app.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/store/firebase.app.esm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/store/firebase.auth.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/store/firebase.auth.esm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/store/firebase.database.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/store/firebase.database.esm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/store/firebase.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/store/firebase.esm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/store/Firebase.esm.stub.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/store/Firebase.esm.stub-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
 		},
 	"/zzz/store/Index.coffee": {
 		"ft": 32,

@@ -1,25 +1,18 @@
 {
   "hosting": {
     "public": "pub",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ]
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      { "source": "**", "destination": "/augm.html" } ],
+    "redirects":[
+      { "source": "**", "destination": "/404.html",  "type":404 },
+      { "source": "**", "destination": "/Page.html", "type":301 } ]
   },
   "database": {
-    "rules": "database.rules.json"
-  },
+    "rules":   "pub/bas/rules/database.rules.json" },
   "firestore": {
-    "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
-  },
-  "functions": {
-    "predeploy": [
-      "npm --prefix \"$RESOURCE_DIR\" run lint"
-    ]
-  },
+    "rules":   "pub/bas/rules/firestore.rules",
+    "indexes": "pub/bas/rules/firestore.indexes.json" },
   "storage": {
-    "rules": "storage.rules"
-  }
+    "rules":   "pub/bas/rules/storage.rules" }
 }

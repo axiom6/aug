@@ -1,16 +1,11 @@
-  //mport firebase from '../../../firebase.esm.js'      # Firebase core (required)
-
-  //mport firebase from '@firebase/app'          # Firebase core (required)
-  //mport               'firebase/database' # Realtime Database
-  //mport               'firebase/auth'     # Authentication
-
-  //mport firebase from '/aug/node_modules/firebase/app'          # Firebase core (required)
-  //mport firebase from '../../../node_modules/firebase/app'          # Firebase core (required)
-  //mport firebase from '../../../pub/lib/store/firebase.app.esm.js'      # Firebase core (required)
-  //mport               '../../../pub/lib/store/firebase.database.esm.js' # Realtime Database
-  //mport               '../../../pub/lib/store/firebase.auth.esm.js'     # Authentication
 var Fire,
   hasProp = {}.hasOwnProperty;
+
+import firebase from '../../../pub/lib/store/firebase-app.esm.js';
+
+import '../../../pub/lib/store/firebase-database.esm.js';
+
+import '../../../pub/lib/store/firebase-auth.esm.js';
 
 Fire = (function() {
   class Fire {
@@ -38,10 +33,8 @@ Fire = (function() {
     }
 
     init(config) {
-      var firebase;
-      firebase = window['firebase'];
+      //console.log( 'firebase', firebase )
       firebase.initializeApp(config);
-      //console.log( 'Fires.init', config )
       return firebase;
     }
 
@@ -217,13 +210,3 @@ Fire = (function() {
 }).call(this);
 
 export default Fire;
-
-//mport firebase from "firebase/app" # Firebase core (required)
-//mport "firebase/database"          # Realtime Database
-//mport firebase from '../../../pub/lib/store/Firebase.esm.stub.js'
-//mport "firebase/auth"              # Authentication
-//mport "firebase/firestore"         # Cloud Firestore
-//mport "firebase/functions"         # Cloud Functions for Firebase Client SDK
-//mport "firebase/messaging"         # Cloud Messaging
-//mport "firebase/storage"           # Cloud Storage
-//mport "firebase/performance"       # Performance Monitoring (beta release)

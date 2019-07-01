@@ -12,6 +12,7 @@
     "math": "rollup --config vue/math/Math.roll.js",
     "geom": "rollup --config vue/geom/Geom.roll.js",
     "draw": "rollup --config vue/comp/Draw.roll.js",
+    "prac": "rollup --config vue/comp/Prac.roll.js",
     "cube": "rollup --config vue/comp/Cube.roll.js",
     "wood": "rollup --config vue/wood/Wood.roll.js",
     "note": "rollup --config vue/note/Note.roll.js",

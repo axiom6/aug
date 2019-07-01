@@ -34,11 +34,16 @@ class Test
     # @store.subscribe( "Prac", "insert", 'testFire', onInsert )
     # @store.insert( 'Prac', @prac() )
 
-    onSelect = (results) =>
-      console.log(  'Fire pipe select', results )
-    @store.subscribe( "Prac", "select", 'testFire', onSelect )
-    where = (obj) -> obj.row is 'Do'
-    @store.select( 'fire', 'Prac', where )
+    # onSelect = (results) =>
+    #   console.log(  'Fire pipe select', results )
+    # @store.subscribe( "Prac", "select", 'testFire', onSelect )
+    # where = (obj) -> obj.row is 'Do'
+    # @store.select( 'fire', 'Prac', where )
+
+    onGet = (results) =>
+      console.log(  'Fire pipe get', results )
+    @store.subscribe( "Prac", "get", 'testFire', onGet )
+    @store.get( 'fire', 'Prac', 'Nature' )
     return
 
   testInit:() ->
