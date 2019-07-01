@@ -29,13 +29,10 @@ Pipe = (function() {
     }
 
     publish(table, op, result, id = null) {
-      if (id != null) {
-        ({
-          [`${id}`]: result
-        });
-      } else {
-        result;
-      }
+      var obj;
+      obj = id != null ? {
+        [`${id}`]: result
+      } : result;
       this.stream.publish(this.toSubject(table, op), obj);
     }
 

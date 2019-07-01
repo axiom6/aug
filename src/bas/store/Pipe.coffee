@@ -15,7 +15,7 @@ class Pipe
     return
 
   publish:( table, op, result, id=null ) ->
-    if id? then { "#{id}":result } else result
+    obj = if id? then { "#{id}":result } else result
     @stream.publish( @toSubject(table,op), obj )
     return
 

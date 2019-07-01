@@ -1,7 +1,7 @@
 
 import Stream from '../../bas/util/Stream.js'
 #mport Rest   from '../../bas/store/Rest.js'
-#mport Fire   from '../../bas/store/Fire.js'
+import Fire   from '../../bas/store/Fire.js'
 import Index  from '../../bas/store/Index.js'
 #mport Local  from '../../bas/store/Local.js'
 #mport Memory from '../../bas/store/Memory.js'
@@ -18,14 +18,28 @@ class Test
     streamLog     = { subscribe:false, publish:false, subjects:subjects}
     @stream       = new Stream( subjects, streamLog )
     @store        = new Store( @dbName, @tables, @url )
-
+    @store.fire   = new Fire(   @store )
+    @store.pipe   = new Pipe( @stream, @dbName )
     #store.rest   = new Rest(   @store )
-    #store.fire   = new Fire(   @store, {} )
     #store.local  = new Local(  @store )
     #store.memory = new Memory( @store )
-    @store.pipe   = new Pipe( @stream, @dbName )
     #@testShow()
-    @testInit()
+    #testInit()
+    @testFire()
+
+  testFire:() ->
+
+    # onInsert = (results) =>
+    #   console.log( 'Fire pipe insert', results )
+    # @store.subscribe( "Prac", "insert", 'testFire', onInsert )
+    # @store.insert( 'Prac', @prac() )
+
+    onSelect = (results) =>
+      console.log(  'Fire pipe select', results )
+    @store.subscribe( "Prac", "select", 'testFire', onSelect )
+    where = (obj) -> obj.row is 'Do'
+    @store.select( 'fire', 'Prac', where )
+    return
 
   testInit:() ->
     try
@@ -34,6 +48,7 @@ class Test
       @testIndex()
     catch error
       console.error( 'Store.Test', error )
+    return
 
   testIndex:() ->
 
@@ -55,7 +70,7 @@ class Test
 
     onSelect = (results) =>
       console.log(  'testIndex select', results )
-    @store.subscribe( "Prac", "select1", 'testIndex', onSelect )
+    @store.subscribe( "Prac", "select", 'testIndex', onSelect )
     where = (obj) -> true
     @store.select( 'index', 'Prac', where )
 
@@ -82,6 +97,7 @@ class Test
     @store.subscribe( "Prac", "select", 'testIndex', onSelect )
     where = (obj) -> true
     @store.select( 'index', 'Prac', where )
+    return
 
   testRest:() ->
 
@@ -92,14 +108,18 @@ class Test
     return
 
   testStore:() ->
+    return
 
   testMemory:() ->
+    return
 
   testLocal:() ->
+    return
 
   testPipe:() ->
+    return
 
-  testFire:() ->
+
 
   prac:() ->
     str = """ {

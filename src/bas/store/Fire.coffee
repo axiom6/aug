@@ -1,19 +1,29 @@
 
-import firebase from '../../../pub/lib/store/firebase.app.esm.js'      # Firebase core (required)
-import               '../../../pub/lib/store/firebase.database.esm.js' # Realtime Database
-import               '../../../pub/lib/store/firebase.auth.esm.js'     # Authentication
+
+#mport firebase from '../../../firebase.esm.js'      # Firebase core (required)
+
+#mport firebase from '@firebase/app'          # Firebase core (required)
+#mport               'firebase/database' # Realtime Database
+#mport               'firebase/auth'     # Authentication
+
+#mport firebase from '/aug/node_modules/firebase/app'          # Firebase core (required)
+#mport firebase from '../../../node_modules/firebase/app'          # Firebase core (required)
+#mport firebase from '../../../pub/lib/store/firebase.app.esm.js'      # Firebase core (required)
+#mport               '../../../pub/lib/store/firebase.database.esm.js' # Realtime Database
+#mport               '../../../pub/lib/store/firebase.auth.esm.js'     # Authentication
 
 class Fire
 
   Fire.EventType  = { get:"value", add:"child_added", put:"child_changed", del:"child_removed" }
 
-  constructor:( @store, config ) ->
+  constructor:( @store ) ->
     @dbName  = @store.dbName
     @tables  = @store.tables
     @keyProp = 'id'
     @fb      = @init( @config("augm-d4b3c") )
     #@auth() # Anonomous logins have to be enabled
-    @fd      = firebase.database()
+    @fd      = @fb.database()
+    @openTables( @tables )
 
   config:( projectId ) -> {
     projectId:         projectId,
@@ -25,6 +35,7 @@ class Fire
     appID:             "app-id" }
 
   init:( config ) ->
+    firebase = window['firebase']
     firebase.initializeApp(config)
     #console.log( 'Fires.init', config )
     firebase
@@ -133,9 +144,15 @@ class Fire
          @store.onerror( table, 'range', error ) )
     return
 
+  openTables:( tables ) ->
+    for own table, obj of tables
+      open( table )
+    return
+
   # Need to learn what opening a table means in firebase
   open:( table ) ->
-    if table is false then {}
+    ref = @fd.ref(table)
+    @fd.root().set(table) if not ref
     # @fd.ref(table).set( {} )
     #    .catch( (error) =>
     #      @store.onerror( table, 'open', error ) )

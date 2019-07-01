@@ -1,22 +1,28 @@
+  //mport firebase from '../../../firebase.esm.js'      # Firebase core (required)
+
+  //mport firebase from '@firebase/app'          # Firebase core (required)
+  //mport               'firebase/database' # Realtime Database
+  //mport               'firebase/auth'     # Authentication
+
+  //mport firebase from '/aug/node_modules/firebase/app'          # Firebase core (required)
+  //mport firebase from '../../../node_modules/firebase/app'          # Firebase core (required)
+  //mport firebase from '../../../pub/lib/store/firebase.app.esm.js'      # Firebase core (required)
+  //mport               '../../../pub/lib/store/firebase.database.esm.js' # Realtime Database
+  //mport               '../../../pub/lib/store/firebase.auth.esm.js'     # Authentication
 var Fire,
   hasProp = {}.hasOwnProperty;
 
-import firebase from '../../../pub/lib/store/firebase.app.esm.js';
-
-import '../../../pub/lib/store/firebase.database.esm.js';
-
-import '../../../pub/lib/store/firebase.auth.esm.js';
-
 Fire = (function() {
   class Fire {
-    constructor(store, config) {
+    constructor(store) {
       this.store = store;
       this.dbName = this.store.dbName;
       this.tables = this.store.tables;
       this.keyProp = 'id';
       this.fb = this.init(this.config("augm-d4b3c"));
       //@auth() # Anonomous logins have to be enabled
-      this.fd = firebase.database();
+      this.fd = this.fb.database();
+      this.openTables(this.tables);
     }
 
     config(projectId) {
@@ -32,6 +38,8 @@ Fire = (function() {
     }
 
     init(config) {
+      var firebase;
+      firebase = window['firebase'];
       firebase.initializeApp(config);
       //console.log( 'Fires.init', config )
       return firebase;
@@ -160,10 +168,21 @@ Fire = (function() {
       });
     }
 
+    openTables(tables) {
+      var obj, table;
+      for (table in tables) {
+        if (!hasProp.call(tables, table)) continue;
+        obj = tables[table];
+        open(table);
+      }
+    }
+
     // Need to learn what opening a table means in firebase
     open(table) {
-      if (table === false) {
-        ({});
+      var ref;
+      ref = this.fd.ref(table);
+      if (!ref) {
+        this.fd.root().set(table);
       }
     }
 

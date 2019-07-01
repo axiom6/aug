@@ -2,6 +2,8 @@ var Test;
 
 import Stream from '../../bas/util/Stream.js';
 
+import Fire from '../../bas/store/Fire.js';
+
 import Index from '../../bas/store/Index.js';
 
 import Pipe from '../../bas/store/Pipe.js';
@@ -24,13 +26,30 @@ Test = class Test {
     };
     this.stream = new Stream(subjects, streamLog);
     this.store = new Store(this.dbName, this.tables, this.url);
+    this.store.fire = new Fire(this.store);
+    this.store.pipe = new Pipe(this.stream, this.dbName);
     //store.rest   = new Rest(   @store )
-    //store.fire   = new Fire(   @store, {} )
     //store.local  = new Local(  @store )
     //store.memory = new Memory( @store )
-    this.store.pipe = new Pipe(this.stream, this.dbName);
     //@testShow()
-    this.testInit();
+    //testInit()
+    this.testFire();
+  }
+
+  testFire() {
+    var onSelect, where;
+    // onInsert = (results) =>
+    //   console.log( 'Fire pipe insert', results )
+    // @store.subscribe( "Prac", "insert", 'testFire', onInsert )
+    // @store.insert( 'Prac', @prac() )
+    onSelect = (results) => {
+      return console.log('Fire pipe select', results);
+    };
+    this.store.subscribe("Prac", "select", 'testFire', onSelect);
+    where = function(obj) {
+      return obj.row === 'Do';
+    };
+    this.store.select('fire', 'Prac', where);
   }
 
   async testInit() {
@@ -38,10 +57,10 @@ Test = class Test {
     try {
       this.store.index = new Index(this.store);
       await this.store.index.initDB();
-      return this.testIndex();
+      this.testIndex();
     } catch (error1) {
       error = error1;
-      return console.error('Store.Test', error);
+      console.error('Store.Test', error);
     }
   }
 
@@ -68,7 +87,7 @@ Test = class Test {
     onSelect = (results) => {
       return console.log('testIndex select', results);
     };
-    this.store.subscribe("Prac", "select1", 'testIndex', onSelect);
+    this.store.subscribe("Prac", "select", 'testIndex', onSelect);
     where = function(obj) {
       return true;
     };
@@ -97,7 +116,7 @@ Test = class Test {
     where = function(obj) {
       return true;
     };
-    return this.store.select('index', 'Prac', where);
+    this.store.select('index', 'Prac', where);
   }
 
   testRest() {
@@ -116,8 +135,6 @@ Test = class Test {
   testLocal() {}
 
   testPipe() {}
-
-  testFire() {}
 
   prac() {
     var str;
@@ -149,19 +166,19 @@ Test = class Test {
         src: 'rest',
         url: 'augm/Math.json',
         table: 'Math',
-        data: null
+        result: null
       },
       Geom: {
         src: 'rest',
         url: 'augm/Geom.json',
         table: 'Geom',
-        data: null
+        result: null
       },
       Data: {
         src: 'rest',
         url: 'augm/Data.json',
         table: 'Data',
-        data: null
+        result: null
       }
     };
   }

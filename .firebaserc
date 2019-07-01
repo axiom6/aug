@@ -1,5 +1,6 @@
 {
   "projects": {
-    "dev": "augm-d4b3c"
+    "dev":     "augm-d4b3c",
+    "default": "augm-d4b3c"
   }
 }
