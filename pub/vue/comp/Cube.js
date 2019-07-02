@@ -763,7 +763,24 @@ Util = class Util {
     return str.charAt(0).toLowerCase() + str.substring(1);
   }
 
-  static toArray(objects, whereIn = null, keyField = 'id') {
+  static toArray(objs) {
+    var array, key, obj;
+    if (Util.isArray(objs)) {
+      return objs;
+    } else {
+      array = [];
+      for (key in objs) {
+        if (!hasProp.call(objs, key)) continue;
+        obj = objs[key];
+        array.push(obj);
+      }
+      return array;
+    }
+  }
+
+  
+  // Not working
+  static toArray2(objects, whereIn = null, keyField = 'id') {
     var array, j, key, len1, object, where;
     where = whereIn != null ? whereIn : function() {
       return true;
@@ -1105,8 +1122,10 @@ Data = class Data {
     });
   }
 
-  static asyncJSON(url, callback) {
-    url = Data.toUrl(url);
+  static asyncJSON(urla, callback) {
+    var url;
+    url = Data.toUrl(urla);
+    // console.log( 'Data.asyncJSON', urla, url )
     fetch(url).then((response) => {
       return response.json();
     }).then((data) => {
@@ -1169,7 +1188,7 @@ Data = class Data {
 
 };
 
-Data.local = "http://localhost:63342/aug/app/data/";
+Data.local = "app/data/";
 
 Data.hosted = "https://ui-48413.firebaseapp.com/";
 
@@ -1893,11 +1912,11 @@ return
  */
 var Build$1 = Build;
 
-var FaLookup;
+var FontAwe;
 
-FaLookup = {};
+FontAwe = {};
 
-FaLookup.icons = {
+FontAwe.icons = {
   "fas fa-network-wired": "\uf6ff",
   "fas fa-warehouse": "\uf494",
   "fas fa-infinity": "\uf534",
@@ -2793,7 +2812,7 @@ FaLookup.icons = {
   "fab fa-youtube-square": "\uf431"
 };
 
-var FaLookup$1 = FaLookup;
+var FontAwe$1 = FontAwe;
 
 var Vis;
 
@@ -3144,7 +3163,7 @@ Vis = class Vis {
 
   static unicode(icon) {
     var uc;
-    uc = FaLookup$1.icons[icon];
+    uc = FontAwe$1.icons[icon];
     if (uc == null) {
       console.error('Vis.unicode() missing icon in Vis.FontAwesomeUnicodes for', icon);
       uc = "\uf111"; // Circle

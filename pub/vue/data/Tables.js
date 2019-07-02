@@ -11283,6 +11283,7 @@ Fire = (function() {
     }
 
     // Need to learn what opening a table means in firebase
+    // Problem with Firebase sending a socket.io to url/Prac to Intellij server that becomes a 404
     open(table) {
       var ref;
       ref = this.fd.ref(table);

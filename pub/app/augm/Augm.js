@@ -3,6 +3,7 @@ import Vue    from '../../lib/vue/vue.esm.browser.js';
 import Main   from './Main.js';
 import Home   from './Home.js';
 import Router from './Router.js'
+import             '../../bas/sw/registerServiceWorker.ini.js'
 
 Vue['config'].productionTip = false;
 Vue['mixin']( Main.vueMixin );
