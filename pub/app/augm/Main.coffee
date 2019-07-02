@@ -2,7 +2,7 @@
 import Data    from '../../bas/util/Data.js'
 import Stream  from '../../bas/util/Stream.js'
 import Vis     from '../../bas/util/Vis.js'
-import Test    from './Test.js'
+#mport Test    from './Test.js'
 
 class Main
 
@@ -35,7 +35,7 @@ class Main
     streamLog   = { subscribe:false, publish:false, subjects:subjects}
     Main.stream = new Stream( subjects, streamLog )
     Main.onReady()
-    new Test()
+    # new Test()
     return
 
   Main.vueMixin = {

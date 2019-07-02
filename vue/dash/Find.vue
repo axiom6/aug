@@ -8,5 +8,5 @@
 </script>
 
 <style lang="less">
-     .find { background-color:#333; }
+     .find { background-color:black; }
 </style>

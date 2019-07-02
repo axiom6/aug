@@ -12,6 +12,7 @@
     <router-view name="Wise"></router-view>
     <router-view name="Cube"></router-view>
     <router-view name="Wood"></router-view>
+    <router-view name="Prac"></router-view>
   </div>
 </template>
 

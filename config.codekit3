@@ -798,55 +798,6 @@
 		"oO": 0,
 		"oS": 1
 		},
-	"/functions/.eslintrc.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/functions/.eslintrc-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/functions/.gitignore": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/functions/.gitignore",
-		"oF": 0
-		},
-	"/functions/index.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/functions/index-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/functions/node_modules": {
-		"ft": 65536,
-		"oA": 2,
-		"oAP": "/build/functions/node_modules",
-		"oF": 0
-		},
-	"/functions/package-lock.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/functions/package-lock-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/functions/package.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/functions/package-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
 	"/LICENSE": {
 		"cB": 0,
 		"ft": 8192,
@@ -1619,6 +1570,17 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/bas/store/Store-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/bas/store/Table.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/bas/store/Table-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -3428,6 +3390,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/src/bas/store/Table.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/bas/store/Table.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
 	"/src/bas/util/Data.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -4024,7 +3997,7 @@
 		"oAP": "/pub/vue/dash/View.js",
 		"oF": 0
 		},
-	"/vue/data/Data.roll.js": {
+	"/vue/Data/Data.roll.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
@@ -4400,7 +4373,7 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/vue/wood/Wood.scss": {
+	"/vue/wood/wood.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -8168,23 +8141,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.html",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "",
-			"autoOutputPathReplace2": "",
-			"autoOutputPathStyle": 0,
-			"fileExtension": "html",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.js",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "vue",
 			"autoOutputPathReplace2": "pub/vue",
 			"autoOutputPathStyle": 3,
 			"fileExtension": "vue",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.html",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "",
+			"autoOutputPathReplace2": "",
+			"autoOutputPathStyle": 0,
+			"fileExtension": "html",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

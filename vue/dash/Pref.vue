@@ -8,6 +8,6 @@
 </script>
 
 <style lang="less">
-     .pref { background-color:#333; }
+     .pref { background-color:black; }
 </style>
 

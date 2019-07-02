@@ -14,7 +14,7 @@ class Fire
     @fb      = @init( @config("augm-d4b3c") )
     #@auth() # Anonomous logins have to be enabled
     @fd      = @fb.database()
-    @openTables( @tables )
+    #@openTables( @tables )
 
   config:( projectId ) -> {
     projectId:         projectId,
@@ -140,6 +140,7 @@ class Fire
     return
 
   # Need to learn what opening a table means in firebase
+  # Problem with Firebase sending a socket.io to url/Prac to Intellij server that becomes a 404
   open:( table ) ->
     ref = @fd.ref(table)
     @fd.root().set(table) if not ref

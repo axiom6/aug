@@ -7,9 +7,8 @@ import Stream from '../../bas/util/Stream.js';
 
 import Vis from '../../bas/util/Vis.js';
 
-import Test from './Test.js';
-
 Main = (function() {
+  //mport Test    from './Test.js'
   class Main {
     static begin(onReady) {
       Main.onReady = onReady;
@@ -28,7 +27,6 @@ Main = (function() {
       };
       Main.stream = new Stream(subjects, streamLog);
       Main.onReady();
-      new Test();
     }
 
   };
@@ -111,6 +109,7 @@ Main = (function() {
     }
   };
 
+  // new Test()
   Main.vueMixin = {
     created: function() {},
     // console.log( 'Main.vueMixin.created() globally' )

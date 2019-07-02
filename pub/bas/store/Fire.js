@@ -17,9 +17,9 @@ Fire = (function() {
       this.fb = this.init(this.config("augm-d4b3c"));
       //@auth() # Anonomous logins have to be enabled
       this.fd = this.fb.database();
-      this.openTables(this.tables);
     }
 
+    //@openTables( @tables )
     config(projectId) {
       return {
         projectId: projectId,
@@ -171,6 +171,7 @@ Fire = (function() {
     }
 
     // Need to learn what opening a table means in firebase
+    // Problem with Firebase sending a socket.io to url/Prac to Intellij server that becomes a 404
     open(table) {
       var ref;
       ref = this.fd.ref(table);
