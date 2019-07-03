@@ -1,0 +1,21 @@
+…pub/augm.html?_ijt=oc7qosr8njn9mpkv385ut8an3k (localhost)
+…roboto/Roboto.css?family=Roboto (localhost) - 0 ms, 2.17 KB
+…augm/Augm.js (localhost)
+…vue/vue.esm.browser.js (localhost) - 20 ms, 307.33 KB
+…augm/Main.js (localhost)
+…util/Data.js (localhost)
+…util/Util.js (localhost) - 0 ms, 24.09 KB
+…util/Stream.js (localhost) - 10 ms, 6.52 KB
+…util/Vis.js (localhost)
+…util/FontAwe.js (localhost) - 0 ms, 28.54 KB
+…augm/Home.js (localhost)
+…fontawesome/init.css (localhost) - 0 ms, 64.72 KB
+…roboto/Roboto-Regular.ttf (localhost) - 0 ms, 168.07 KB
+…augm/Router.js (localhost)
+…vue/vue-router.esm.js (localhost) - 10 ms, 64.87 KB
+…sw/registerServiceWorker.ini.js (localhost)
+…sw/registerServiceWorker.lib.js (localhost) - 10 ms, 4.49 KB
+…pub/manifest.json (localhost) - 0 ms, 0.97 KB
+…fontawesome/fa-solid-900.woff2 (localhost) - 10 ms, 73.02 KB
+…fontawesome/fa-regular-400.woff2 (localhost) - 0 ms, 13.69 KB
+…fontawesome/fa-brands-400.woff2 (localhost) - 10 ms, 70.84 KB
