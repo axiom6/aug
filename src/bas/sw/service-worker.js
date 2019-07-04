@@ -135,4 +135,55 @@ self.addEventListener('fetch', event => {
       })
   );
 });
+
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+    caches.open('mysite-dynamic').then(function(cache) {
+      return cache.match(event.request).then(function(response) {
+        var fetchPromise = fetch(event.request).then(function(networkResponse) {
+          cache.put(event.request, networkResponse.clone());
+          return networkResponse;
+        })
+        return response || fetchPromise;
+      })
+    })
+  );
+});
+self.addEventListener('push', function(event) {
+  if (event.data.text() == 'new-email') {
+    event.waitUntil(
+      caches.open('mysite-dynamic').then(function(cache) {
+        return fetch('/inbox.json').then(function(response) {
+          cache.put('/inbox.json', response.clone());
+          return response.json();
+        });
+      }).then(function(emails) {
+        registration.showNotification("New email", {
+          body: "From " + emails[0].from.name
+          tag: "new-email"
+        });
+      })
+    );
+  }
+});
+
+self.addEventListener('notificationclick', function(event) {
+  if (event.notification.tag == 'new-email') {
+    // Assume that all of the resources needed to render
+    // /inbox/ have previously been cached, e.g. as part
+    // of the install handler.
+    new WindowClient('/inbox/');
+  }
+});
+
+self.addEventListener('sync', function(event) {
+  if (event.id == 'update-leaderboard') {
+    event.waitUntil(
+      caches.open('mygame-dynamic').then(function(cache) {
+        return cache.add('/leaderboard.json');
+      })
+    );
+  }
+});
+
  */

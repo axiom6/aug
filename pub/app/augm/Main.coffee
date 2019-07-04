@@ -29,13 +29,25 @@ class Main
     return
 
   Main.init =  ( batch ) ->
-    window['Geom'] = {}
+    window['Geom'] = {} # May still be needed by Ganjs
     Main.Batch  = batch # Not necessary here, but assigned for compatibilitry
-    subjects    = ["Draw","Note","Navb","Tabs","Geom","Data"]
+    subjects    = ["Draw","Note","Navb","Tabs","Geom","Data","Work"]
     streamLog   = { subscribe:false, publish:false, subjects:subjects}
     Main.stream = new Stream( subjects, streamLog )
+    Main.online( Main.stream )
     Main.onReady()
     # new Test()
+    return
+
+  Main.online = ( stream ) ->
+    window.addEventListener("load", () ->
+      handleNetworkChange = (event) ->
+        if event is false then {}
+        status = if navigator.onLine then 'Online' else 'Offline'
+        stream.publish( 'Netw', status )
+        return
+      window.addEventListener("online",  handleNetworkChange )
+      window.addEventListener("offline", handleNetworkChange ) )
     return
 
   Main.vueMixin = {

@@ -2053,6 +2053,167 @@
 		"oAP": "/pub/css/fontawesome/init.css.map",
 		"oF": 0
 		},
+	"/pub/css/icons/android-chrome-192x192.png": {
+		"ft": 32768,
+		"iS": 9416,
+		"oA": 0,
+		"oAP": "/pub/css/icons/android-chrome-192x192.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/icons/android-chrome-512x512.png": {
+		"ft": 32768,
+		"iS": 29808,
+		"oA": 0,
+		"oAP": "/pub/css/icons/android-chrome-512x512.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/icons/apple-touch-icon-120x120.png": {
+		"ft": 32768,
+		"iS": 3369,
+		"oA": 0,
+		"oAP": "/pub/css/icons/apple-touch-icon-120x120.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/icons/apple-touch-icon-152x152.png": {
+		"ft": 32768,
+		"iS": 4046,
+		"oA": 0,
+		"oAP": "/pub/css/icons/apple-touch-icon-152x152.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/icons/apple-touch-icon-180x180.png": {
+		"ft": 32768,
+		"iS": 4678,
+		"oA": 0,
+		"oAP": "/pub/css/icons/apple-touch-icon-180x180.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/icons/apple-touch-icon-60x60.png": {
+		"ft": 32768,
+		"iS": 1491,
+		"oA": 0,
+		"oAP": "/pub/css/icons/apple-touch-icon-60x60.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/icons/apple-touch-icon-76x76.png": {
+		"ft": 32768,
+		"iS": 1823,
+		"oA": 0,
+		"oAP": "/pub/css/icons/apple-touch-icon-76x76.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/icons/apple-touch-icon.png": {
+		"ft": 32768,
+		"iS": 4678,
+		"oA": 0,
+		"oAP": "/pub/css/icons/apple-touch-icon.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/icons/favicon-16x16.png": {
+		"ft": 32768,
+		"iS": 799,
+		"oA": 0,
+		"oAP": "/pub/css/icons/favicon-16x16.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/icons/favicon-32x32.png": {
+		"ft": 32768,
+		"iS": 1271,
+		"oA": 0,
+		"oAP": "/pub/css/icons/favicon-32x32.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/icons/favicon.ico": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/css/icons/favicon.ico",
+		"oF": 0
+		},
+	"/pub/css/icons/msapplication-icon-144x144.png": {
+		"ft": 32768,
+		"iS": 1169,
+		"oA": 0,
+		"oAP": "/pub/css/icons/msapplication-icon-144x144.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/icons/mstile-150x150.png": {
+		"ft": 32768,
+		"iS": 4282,
+		"oA": 0,
+		"oAP": "/pub/css/icons/mstile-150x150.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/icons/safari-pinned-tab.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/pub/css/icons/safari-pinned-tab.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/pub/css/icons/vue-logo.png": {
+		"ft": 32768,
+		"iS": 6849,
+		"oA": 0,
+		"oAP": "/pub/css/icons/vue-logo.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
 	"/pub/css/svg/hallowback2.svg": {
 		"ft": 2097152,
 		"miP": 0,
@@ -2112,6 +2273,72 @@
 		"opt": 0,
 		"plM": 3758088159,
 		"prP": 0
+		},
+	"/pub/css/vis/Clarity.png": {
+		"ft": 32768,
+		"iS": 42299,
+		"oA": 0,
+		"oAP": "/pub/css/vis/Clarity.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/vis/Delight.png": {
+		"ft": 32768,
+		"iS": 44357,
+		"oA": 0,
+		"oAP": "/pub/css/vis/Delight.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/vis/Help.png": {
+		"ft": 32768,
+		"iS": 40779,
+		"oA": 0,
+		"oAP": "/pub/css/vis/Help.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/vis/Honest.png": {
+		"ft": 32768,
+		"iS": 53507,
+		"oA": 0,
+		"oAP": "/pub/css/vis/Honest.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/vis/Scale.png": {
+		"ft": 32768,
+		"iS": 36676,
+		"oA": 0,
+		"oAP": "/pub/css/vis/Scale.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/vis/Structure.png": {
+		"ft": 32768,
+		"iS": 14025,
+		"oA": 0,
+		"oAP": "/pub/css/vis/Structure.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
 		},
 	"/pub/gan/2D/Basics.js": {
 		"bF": 0,
@@ -2674,6 +2901,14 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/manifest.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/manifest-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
 	"/pub/math/adt/Adt.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2899,6 +3134,14 @@
 		"oAP": "/pub/Prac.html",
 		"oF": 0
 		},
+	"/pub/robots.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/robots.txt",
+		"oF": 0
+		},
 	"/pub/vue/comp/Cube.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2917,17 +3160,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/vue/comp/Draw-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/vue/comp/Prac.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/comp/Prac-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -3396,6 +3628,94 @@
 		"mi": 0,
 		"oA": 0,
 		"oAP": "/pub/bas/store/Table.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/bas/sw/Fetch.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/bas/sw/Fetch.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/bas/sw/Register.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/bas/sw/Register.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/bas/sw/registerServiceWorker.ini.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/bas/sw/registerServiceWorker.ini-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/bas/sw/registerServiceWorker.lib.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/bas/sw/registerServiceWorker.lib-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/bas/sw/service-worker.basic.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/bas/sw/service-worker.basic-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/bas/sw/service-worker.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/bas/sw/service-worker-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/bas/sw/Setup.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/bas/sw/Setup.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/bas/sw/Worker.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/bas/sw/Worker.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
@@ -3879,14 +4199,6 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
-		},
-	"/vue/comp/Prac.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/comp/Prac.js",
-		"oF": 0
 		},
 	"/vue/comp/Wise.vue": {
 		"cB": 0,
@@ -4777,6 +5089,22 @@
 		"oAP": "/zzz/ani/wave/Wave.js",
 		"oF": 0
 		},
+	"/zzz/audit/audit.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/audit/audit.txt",
+		"oF": 0
+		},
+	"/zzz/audit/localhost_63342-20190702T134124.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/audit/localhost_63342-20190702T134124-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
 	"/zzz/fetch/abort-error.js": {
 		"bF": 0,
 		"ft": 64,
@@ -5554,6 +5882,105 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/zzz/sw/service-worker.2015.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/sw/service-worker.2015-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/sw/service-worker.coyer.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/sw/service-worker.coyer-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/sw/service-worker.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/sw/service-worker-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/sw/service-worker.offline1.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/sw/service-worker.offline1-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/sw/service-worker1.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/sw/service-worker1-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/sw/service-worker2.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/sw/service-worker2-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/sw/service-worker3.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/sw/service-worker3-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/sw/service-worker4.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/sw/service-worker4-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/sw/service.worker.airhorn.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/sw/service.worker.airhorn-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/zzz/ui/Brew.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -6098,7 +6525,7 @@
 	"creationDate": 576020191.831815,
 	"displayValue": "aug",
 	"displayValueWasSetByUser": 0,
-	"iconImageName": "meme-confession",
+	"iconImageName": "/pub/css/icons/apple-touch-icon-120x120.png",
 	"iconImageWasSetByUser": 0
 	},
 "projectSettings": {
