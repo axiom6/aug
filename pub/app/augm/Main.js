@@ -7,6 +7,8 @@ import Stream from '../../bas/util/Stream.js';
 
 import Vis from '../../bas/util/Vis.js';
 
+import Manage from '../../bas/sw/Manage.js';
+
 Main = (function() {
   //mport Test    from './Test.js'
   class Main {
@@ -19,14 +21,32 @@ Main = (function() {
       var streamLog, subjects;
       window['Geom'] = {};
       Main.Batch = batch; // Not necessary here, but assigned for compatibilitry
-      subjects = ["Draw", "Note", "Navb", "Tabs", "Geom", "Data"];
+      subjects = ["Draw", "Note", "Navb", "Tabs", "Geom", "Data", "Work"];
       streamLog = {
         subscribe: false,
         publish: false,
         subjects: subjects
       };
       Main.stream = new Stream(subjects, streamLog);
+      Main.online(Main.stream);
+      Main.manage = new Manage(Main.stream);
       Main.onReady();
+    }
+
+    static online(stream) {
+      window.addEventListener("load", function() {
+        var handleNetworkChange;
+        handleNetworkChange = function(event) {
+          var status;
+          if (event === false) {
+            ({});
+          }
+          status = navigator.onLine ? 'Online' : 'Offline';
+          stream.publish('Netw', status);
+        };
+        window.addEventListener("online", handleNetworkChange);
+        return window.addEventListener("offline", handleNetworkChange);
+      });
     }
 
   };
@@ -109,7 +129,6 @@ Main = (function() {
     }
   };
 
-  // new Test()
   Main.vueMixin = {
     created: function() {},
     // console.log( 'Main.vueMixin.created() globally' )

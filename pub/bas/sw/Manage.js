@@ -1,11 +1,9 @@
-var Setup,
+  //mport Register from './Register.js'
+  //mport Worker   from '../../Worker.js'
+var Manage,
   hasProp = {}.hasOwnProperty;
 
-import Register from './Register';
-
-import Worker from './Worker';
-
-Setup = class Setup {
+Manage = class Manage {
   constructor(stream) {
     this.publishStatus = this.publishStatus.bind(this);
     this.quota = this.quota.bind(this);
@@ -13,56 +11,87 @@ Setup = class Setup {
     this.stream = stream;
     this.subject = 'Worker';
     this.cacheName = 'Augm';
-    this.cacheUrls = this.toCacheUrls();
+    this.cacheObjs = this.toCacheObjs();
+    this.cacheUrls = this.toCacheUrls(this.cacheObjs);
+    this.offlinePage = this.cacheObjs.Html.url;
     this.subscribe(this.subject);
-    this.worker = new Worker(this);
-    this.register = new Register(this, '/bas/sw/Worker.js');
+    this.register('./Worker.js');
   }
 
-  cacheObjs() {
+  register(swUrl) {
+    if (navigator['serviceWorker'] == null) {
+      console.error("Manage ServiceWorker", "This browser does not suppor service workers");
+      return;
+    }
+    return navigator.serviceWorker.register(swUrl, {
+      scope: './'
+    }).then((registration) => {
+      var serviceWorker;
+      serviceWorker = null;
+      if (registration.installing != null) {
+        serviceWorker = registration.installing;
+      } else if (registration.waiting != null) {
+        serviceWorker = registration.waiting;
+      } else if (registration.active) {
+        serviceWorker = registration.active;
+      }
+      if (serviceWorker != null) {
+        this.worker = new self['Worker'](this);
+        this.publish('Register', 'Success');
+        return serviceWorker.addEventListener('statechange', (event) => {
+          return this.publish('StateChange', event.target.state);
+        });
+      }
+    }).catch((error) => {
+      return this.publish('Register', {
+        swUrl: swUrl
+      }, error);
+    });
+  }
+
+  toCacheObjs() {
     return {
       Html: {
         name: 'Html',
-        url: '/augm.html'
+        url: './augm.html'
       },
       Augm: {
         name: 'Augm',
-        url: '/app/augm/Augm.js'
+        url: './app/augm/Augm.js'
       },
       Vue: {
         name: 'Vue',
-        url: '/lib/vue/vue.esm.browser.js'
+        url: './lib/vue/vue.esm.browser.js'
       },
       Main: {
         name: 'Main',
-        url: '/app/augm/Main.js'
+        url: './app/augm/Main.js'
       },
       Home: {
         name: 'Main',
-        url: '/app/augm/Home.js'
+        url: './app/augm/Home.js'
       },
       Router: {
         name: 'Router',
-        url: '/app/augm/router.js'
+        url: './app/augm/router.js'
       },
       VueRouter: {
         name: 'VueRouter',
-        url: '/lib/vue/vue-router.esm.js'
+        url: './lib/vue/vue-router.esm.js'
       },
       Roboto: {
         name: 'Roboto',
-        url: '/css/font/roboto/Roboto.css'
+        url: './css/font/roboto/Roboto.css'
       },
       Roll: {
         name: 'Roll',
-        url: '/app/augm/Augm.roll.js' // Gets deleted as a test
+        url: './app/augm/Augm.roll.js' // Gets deleted as a test
       }
     };
   }
 
-  toCacheUrls() {
-    var key, obj, objs, urls;
-    objs = this.cacheObjs();
+  toCacheUrls(objs) {
+    var key, obj, urls;
     urls = [];
     for (key in objs) {
       if (!hasProp.call(objs, key)) continue;
@@ -121,12 +150,12 @@ Setup = class Setup {
 
   consoleStatus(message) {
     if (message.error == null) {
-      console.log('Setup Service Worker', {
+      console.log('Manage Service Worker', {
         status: message.status,
         text: message.text
       });
     } else {
-      console.error('Setup Service Worker', {
+      console.error('Manage Service Worker', {
         status: message.status,
         text: message.text,
         error: message.error
@@ -148,4 +177,4 @@ Setup = class Setup {
 
 };
 
-export default Setup;
+export default Manage;

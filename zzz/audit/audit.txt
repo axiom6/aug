@@ -1,3 +1,16 @@
+
+
+// 1. Current page does not respond with a 200 when offline
+// 2. start_url does not respond with a 200 when offline
+// 3. Unable to fetch start URL via service worker.
+// 4. Does not register a service worker that controls page and start_url
+~~ 5. Percentages row tracks in Home.vue
+// 6. Does not redirect HTTP traffic to HTTPS
+// 7. Does not use HTTP/2 for all of its resources
+~~ 8. <input placeholder=" Search" id="search" type="text" size="16" class="input">
+// 9. 88.8% Legible Text
+
+
 …pub/augm.html?_ijt=oc7qosr8njn9mpkv385ut8an3k (localhost)
 …roboto/Roboto.css?family=Roboto (localhost) - 0 ms, 2.17 KB
 …augm/Augm.js (localhost)

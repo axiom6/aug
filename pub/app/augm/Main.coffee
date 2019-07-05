@@ -2,6 +2,7 @@
 import Data    from '../../bas/util/Data.js'
 import Stream  from '../../bas/util/Stream.js'
 import Vis     from '../../bas/util/Vis.js'
+import Manage  from '../../bas/sw/Manage.js'
 #mport Test    from './Test.js'
 
 class Main
@@ -35,6 +36,7 @@ class Main
     streamLog   = { subscribe:false, publish:false, subjects:subjects}
     Main.stream = new Stream( subjects, streamLog )
     Main.online( Main.stream )
+    Main.manage = new Manage( Main.stream )
     Main.onReady()
     # new Test()
     return
