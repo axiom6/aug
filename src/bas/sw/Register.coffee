@@ -7,11 +7,11 @@
 
 class Register
 
-  constructor:( @setup, swUrl, hooks ) ->
+  constructor:( @setup, swUrl, hooks=null ) ->
     hooks = {} if not hooks?
     registrationOptions = if not hooks['registrationOptions']? then {} else hooks['registrationOptions']
     delete hooks['registrationOptions'];
-    if 'serviceWorker' in navigator
+    if  navigator['serviceWorker']?
       window.addEventListener('load', () =>
         if @isLocalhost()
           # This is running on localhost. Lets check if a service worker still exists or not.

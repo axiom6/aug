@@ -1585,6 +1585,39 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/bas/sw/Register.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/bas/sw/Register-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/bas/sw/Setup.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/bas/sw/Setup-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/bas/sw/Worker.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/bas/sw/Worker-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/bas/util/Data.js": {
 		"bF": 0,
 		"ft": 64,
@@ -3633,17 +3666,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/sw/Fetch.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/bas/sw/Fetch.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
 	"/src/bas/sw/Register.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -3652,50 +3674,6 @@
 		"oAP": "/pub/bas/sw/Register.js",
 		"oF": 0,
 		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/bas/sw/registerServiceWorker.ini.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/src/bas/sw/registerServiceWorker.ini-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/bas/sw/registerServiceWorker.lib.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/src/bas/sw/registerServiceWorker.lib-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/bas/sw/service-worker.basic.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/src/bas/sw/service-worker.basic-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/bas/sw/service-worker.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/src/bas/sw/service-worker-min.js",
-		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
@@ -5882,6 +5860,28 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/zzz/sw/registerServiceWorker.ini.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/sw/registerServiceWorker.ini-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/sw/registerServiceWorker.lib.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/sw/registerServiceWorker.lib-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/zzz/sw/service-worker.2015.js": {
 		"bF": 0,
 		"ft": 64,
@@ -5889,6 +5889,17 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/zzz/sw/service-worker.2015-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/sw/service-worker.basic.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/sw/service-worker.basic-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -8568,23 +8579,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.js",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "vue",
-			"autoOutputPathReplace2": "pub/vue",
-			"autoOutputPathStyle": 3,
-			"fileExtension": "vue",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.html",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "",
 			"autoOutputPathReplace2": "",
 			"autoOutputPathStyle": 0,
 			"fileExtension": "html",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.js",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "vue",
+			"autoOutputPathReplace2": "pub/vue",
+			"autoOutputPathStyle": 3,
+			"fileExtension": "vue",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

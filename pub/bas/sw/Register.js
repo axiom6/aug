@@ -8,7 +8,7 @@ var Register,
   indexOf = [].indexOf;
 
 Register = class Register {
-  constructor(setup, swUrl, hooks) {
+  constructor(setup, swUrl, hooks = null) {
     var registrationOptions;
     this.registerValidSW = this.registerValidSW.bind(this);
     this.checkValidServiceWorker = this.checkValidServiceWorker.bind(this);
@@ -19,7 +19,7 @@ Register = class Register {
     }
     registrationOptions = hooks['registrationOptions'] == null ? {} : hooks['registrationOptions'];
     delete hooks['registrationOptions'];
-    if (indexOf.call(navigator, 'serviceWorker') >= 0) {
+    if (navigator['serviceWorker'] != null) {
       window.addEventListener('load', () => {
         if (this.isLocalhost()) {
           // This is running on localhost. Lets check if a service worker still exists or not.

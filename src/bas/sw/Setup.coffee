@@ -4,13 +4,13 @@ import Worker   from './Worker'
 
 class Setup
 
-  constructor:( @stream, swUrl, hooks  ) ->
+  constructor:( @stream  ) ->
     @subject   = 'Worker'
     @cacheName = 'Augm'
     @cacheUrls = @toCacheUrls()
     @subscribe( @subject )
     @worker    = new Worker(   @ )
-    @register  = new Register( @, swUrl, hooks )
+    @register  = new Register( @, '/bas/sw/Worker.js' )
 
   cacheObjs:() -> {
     Html:     { name:'Html',      url:'/augm.html' }
@@ -28,7 +28,6 @@ class Setup
     urls = []
     urls.push( obj.url ) for own key, obj of objs
     urls
-
 
   publish:( status, text, error=null ) ->
     message       = { status:status, text:text }

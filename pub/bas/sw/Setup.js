@@ -6,7 +6,7 @@ import Register from './Register';
 import Worker from './Worker';
 
 Setup = class Setup {
-  constructor(stream, swUrl, hooks) {
+  constructor(stream) {
     this.publishStatus = this.publishStatus.bind(this);
     this.quota = this.quota.bind(this);
     this.quotaGranted = this.quotaGranted.bind(this);
@@ -16,7 +16,7 @@ Setup = class Setup {
     this.cacheUrls = this.toCacheUrls();
     this.subscribe(this.subject);
     this.worker = new Worker(this);
-    this.register = new Register(this, swUrl, hooks);
+    this.register = new Register(this, '/bas/sw/Worker.js');
   }
 
   cacheObjs() {

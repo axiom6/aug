@@ -3,6 +3,10 @@ class Worker
 
   constructor:( @setup ) ->
     @addListeners()
+    @pushTag   = "new-email"
+    @pushJson  = 'Push.json'
+    @syncName  = 'SymcMame'
+    @syncCache = 'SymcCache'
 
   @publish( status, text, error=null ) ->
     @setup.stream.publish( status, text, error )
@@ -12,8 +16,8 @@ class Worker
     self.addEventListener('install',  @onInstall(  event ) )
     self.addEventListener('activate', @onActivate( event ) )
     self.addEventListener('fetch',    @onFetch(    event ) )
-    self.addEventListener('push',     @onPush(     event ) )
-    self.addEventListener('sync',     @onSync(     event ) )
+    #elf.addEventListener('push',     @onPush(     event ) )
+    #elf.addEventListener('sync',     @onSync(     event ) )
     return
 
   onInstall:( event ) =>
@@ -45,6 +49,47 @@ class Worker
     return
 
   onFetch:(event) =>
+    event.respondWith(
+      caches.open( @setup.cacheName )
+        .then( (cache) =>
+          return cache.match(event.request).then( (response) =>
+            return response or fetch(event.request).then( (response) =>
+              cache.put( event.request, response.clone() )
+              return response ) ) )
+        .catch( (error) =>
+          @publish( 'Fetch', 'Error', error  ) ) )
+    return
+
+  # For now this is just an example
+  onPush:(event) =>
+    return if event.data.text() isnt @pushTag
+    event.waitUntil( caches.open( @setup.cacheName ) )
+     .then( (cache) =>
+        return fetch( @pushJson).then( (response) =>
+           cache.put( @pushJson, response.clone() )
+           return response.json() ) )
+     .then( (emails) =>
+        msg = { body: "From " + emails[0].from.name, tag: @pushTag }
+        @publish( 'Push', msg ) )
+    return
+
+  onSync:(event) =>
+    return if event.id isnt @syncName
+    event.waitUntil( caches.open(@syncCache).then( (cache) =>
+      return cache.add(@syncName) ) )
+    return
+
+  cacheUrls:( jsonUrl ) ->
+    caches.open(jsonUrl)
+      .then( (cache) =>
+        fetch(url)
+          .then(  (response) => return response.json() )
+          .then(  (urls)     => cache.addAll(urls) )
+          .catch( (error)   => @publish( 'cacheUrls', 'Fetch', error ) ) )
+      .catch( (error) => @publish( 'cacheUrls', 'Open', error ) )
+    return
+
+  onFetchMany:(event) =>
 
     request    = event.request
     requestURL = new URL(request.url)
@@ -65,27 +110,5 @@ class Worker
       event.respondWith( caches.match(request).then( (response) =>
         return response or fetch(request) ) )
     return
-
-  onPush:(event) =>
-
-  onSync:(event) =>
-
-  onNotificationClick:(event) =>
-
-  cacheUrls:( jsonUrl ) ->
-    caches.open(jsonUrl)
-      .then( (cache) =>
-        fetch(url)
-          .then(  (response) => return response.json() )
-          .then(  (urls)     => cache.addAll(urls) )
-          .catch( (error)   => @publish( 'cacheUrls', 'Fetch', error ) ) )
-      .catch( (error) => @publish( 'cacheUrls', 'Open', error ) )
-    return
-
-
-
-
-
-
 
 export default Worker
