@@ -1,44 +1,44 @@
-  //mport Register from './Register.js'
-  //mport Worker   from '../../Worker.js'
-var Manage,
+var ServiceManager,
   hasProp = {}.hasOwnProperty;
 
-Manage = class Manage {
+ServiceManager = class ServiceManager {
   constructor(stream) {
     this.publishStatus = this.publishStatus.bind(this);
     this.quota = this.quota.bind(this);
     this.quotaGranted = this.quotaGranted.bind(this);
+    this.onlineEvent = this.onlineEvent.bind(this);
     this.stream = stream;
-    this.subject = 'Worker';
+    this.subject = 'ServiceWorker';
+    this.serviceWorker = null;
     this.cacheName = 'Augm';
     this.cacheObjs = this.toCacheObjs();
     this.cacheUrls = this.toCacheUrls(this.cacheObjs);
     this.offlinePage = this.cacheObjs.Html.url;
+    this.onlineEvent();
     this.subscribe(this.subject);
-    this.register('./Worker.js');
+    this.register('./ServiceWorker.js');
   }
 
   register(swUrl) {
     if (navigator['serviceWorker'] == null) {
-      console.error("Manage ServiceWorker", "This browser does not suppor service workers");
+      console.error("ServiceManager", "This browser does not suppor service workers");
       return;
     }
     return navigator.serviceWorker.register(swUrl, {
       scope: './'
     }).then((registration) => {
-      var serviceWorker;
-      serviceWorker = null;
+      var serviceWorkerNav;
+      serviceWorkerNav = null;
       if (registration.installing != null) {
-        serviceWorker = registration.installing;
+        serviceWorkerNav = registration.installing;
       } else if (registration.waiting != null) {
-        serviceWorker = registration.waiting;
+        serviceWorkerNav = registration.waiting;
       } else if (registration.active) {
-        serviceWorker = registration.active;
+        serviceWorkerNav = registration.active;
       }
-      if (serviceWorker != null) {
-        this.worker = new self['Worker'](this);
+      if (serviceWorkerNav != null) {
         this.publish('Register', 'Success');
-        return serviceWorker.addEventListener('statechange', (event) => {
+        return serviceWorkerNav.addEventListener('statechange', (event) => {
           return this.publish('StateChange', event.target.state);
         });
       }
@@ -145,17 +145,17 @@ Manage = class Manage {
   }
 
   subscribe(subject) {
-    return this.stream.subscribe(subject, 'SetupServiceWorker', this.consoleStatus);
+    return this.stream.subscribe(subject, 'ServiceManager', this.consoleStatus);
   }
 
   consoleStatus(message) {
     if (message.error == null) {
-      console.log('Manage Service Worker', {
+      console.log('ServiceManager', {
         status: message.status,
         text: message.text
       });
     } else {
-      console.error('Manage Service Worker', {
+      console.error('ServiceManager', {
         status: message.status,
         text: message.text,
         error: message.error
@@ -175,6 +175,22 @@ Manage = class Manage {
     });
   }
 
+  onlineEvent() {
+    window.addEventListener("load", () => {
+      var handleNetworkChange;
+      handleNetworkChange = (event) => {
+        var status;
+        if (event === false) {
+          ({});
+        }
+        status = navigator.onLine ? 'Online' : 'Offline';
+        this.stream.publish(this.subject, status);
+      };
+      window.addEventListener("online", handleNetworkChange);
+      return window.addEventListener("offline", handleNetworkChange);
+    });
+  }
+
 };
 
-export default Manage;
+export default ServiceManager;

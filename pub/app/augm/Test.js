@@ -1,14 +1,14 @@
 var Test;
 
-import Stream from '../../bas/util/Stream.js';
+import Stream from '../../base/util/Stream.js';
 
-import Fire from '../../bas/store/Fire.js';
+import Fire from '../../base/store/Fire.js';
 
-import Index from '../../bas/store/Index.js';
+import Index from '../../base/store/Index.js';
 
-import Pipe from '../../bas/store/Pipe.js';
+import Pipe from '../../base/store/Pipe.js';
 
-import Store from '../../bas/store/Store.js';
+import Store from '../../base/store/Store.js';
 
 Test = class Test {
   constructor() {

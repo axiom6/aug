@@ -1,38 +1,37 @@
 
-#mport Register from './Register.js'
-#mport Worker   from '../../Worker.js'
 
-class Manage
+class ServiceManager
 
   constructor:( @stream ) ->
-    @subject     = 'Worker'
-    @cacheName   = 'Augm'
-    @cacheObjs   = @toCacheObjs()
-    @cacheUrls   = @toCacheUrls( @cacheObjs )
-    @offlinePage = @cacheObjs.Html.url
+    @subject       = 'ServiceWorker'
+    @serviceWorker = null
+    @cacheName     = 'Augm'
+    @cacheObjs     = @toCacheObjs()
+    @cacheUrls     = @toCacheUrls( @cacheObjs )
+    @offlinePage   = @cacheObjs.Html.url
+    @onlineEvent()
     @subscribe( @subject )
-    @register('./Worker.js' )
+    @register('./ServiceWorker.js' )
 
   register:( swUrl ) ->
 
     if not navigator['serviceWorker']?
-      console.error( "Manage ServiceWorker", "This browser does not suppor service workers")
+      console.error( "ServiceManager", "This browser does not suppor service workers")
       return
 
     navigator.serviceWorker.register( swUrl, { scope: './' } )
       .then( (registration) =>
-        serviceWorker = null
+        serviceWorkerNav = null
         if registration.installing?
-          serviceWorker = registration.installing;
+          serviceWorkerNav = registration.installing;
         else if registration.waiting?
-          serviceWorker = registration.waiting
+          serviceWorkerNav = registration.waiting
         else if registration.active
-          serviceWorker = registration.active
+          serviceWorkerNav = registration.active
 
-        if serviceWorker?
-          @worker = new self['Worker']( @ )
+        if serviceWorkerNav?
           @publish( 'Register', 'Success' )
-          serviceWorker.addEventListener('statechange', (event) =>
+          serviceWorkerNav.addEventListener('statechange', (event) =>
             @publish( 'StateChange', event.target.state ) ) )
 
       .catch( (error) =>
@@ -75,13 +74,13 @@ class Manage
     return
 
   subscribe:( subject ) ->
-    @stream.subscribe( subject, 'SetupServiceWorker', @consoleStatus )
+    @stream.subscribe( subject, 'ServiceManager', @consoleStatus )
 
   consoleStatus:( message ) ->
     if not message.error?
-      console.log(   'Manage Service Worker', { status:message.status, text:message.text } )
+      console.log(   'ServiceManager', { status:message.status, text:message.text } )
     else
-      console.error( 'Manage Service Worker', { status:message.status, text:message.text, error:message.error } )
+      console.error( 'ServiceManager', { status:message.status, text:message.text, error:message.error } )
     return
 
   quota:() =>
@@ -94,4 +93,15 @@ class Manage
       @publish( 'QuotaGranted', granted ) )
     return
 
-export default Manage
+  onlineEvent:() =>
+    window.addEventListener("load", () =>
+      handleNetworkChange = (event) =>
+        if event is false then {}
+        status = if navigator.onLine then 'Online' else 'Offline'
+        @stream.publish( @subject, status )
+        return
+      window.addEventListener("online",  handleNetworkChange )
+      window.addEventListener("offline", handleNetworkChange ) )
+    return
+
+export default ServiceManager

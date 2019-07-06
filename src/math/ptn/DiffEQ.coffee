@@ -1,5 +1,5 @@
 
-import {match} from '../../bas/util/Match.js'
+import {match} from '../../base/util/Match.js'
 import A       from '../adt/Adt.js'
 import Ptn     from '../adt/Ptn.js'
 

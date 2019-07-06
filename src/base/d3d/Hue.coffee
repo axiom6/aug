@@ -1,6 +1,6 @@
 
-import Util     from '../../bas/util/Util.js'
-import Vis      from '../../bas/util/Vis.js'
+import Util     from '../../base/util/Util.js'
+import Vis      from '../../base/util/Vis.js'
 import Radar    from './Radar.js'
 import Palettes from './Palettes'
 

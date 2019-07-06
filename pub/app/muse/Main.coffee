@@ -1,7 +1,7 @@
 
-import Data    from '../../bas/util/Data.js'
-import Stream  from '../../bas/util/Stream.js'
-import Vis     from '../../bas/util/Vis.js'
+import Data    from '../../base/util/Data.js'
+import Stream  from '../../base/util/Stream.js'
+import Vis     from '../../base/util/Vis.js'
 
 class Main
 

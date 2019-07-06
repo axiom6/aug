@@ -1,6 +1,6 @@
 var Axes;
 
-import Vis from '../../bas/util/Vis.js';
+import Vis from '../../base/util/Vis.js';
 
 Axes = class Axes {
   constructor(drew, d3, name, elem1, size) {

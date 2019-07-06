@@ -1,6 +1,6 @@
 var Palettes;
 
-import Vis from '../../bas/util/Vis.js';
+import Vis from '../../base/util/Vis.js';
 
 Palettes = class Palettes {
   static setRgbs() {

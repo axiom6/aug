@@ -1,5 +1,5 @@
 
-import {_,REST} from '../../bas/util/Match.js'
+import {_,REST} from '../../base/util/Match.js'
 import Ascii    from '../par/Ascii.esm.js'
 
 class Ptn

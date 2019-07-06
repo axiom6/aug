@@ -1,12 +1,12 @@
 
-import Stream from '../../bas/util/Stream.js'
-#mport Rest   from '../../bas/store/Rest.js'
-import Fire   from '../../bas/store/Fire.js'
-import Index  from '../../bas/store/Index.js'
-#mport Local  from '../../bas/store/Local.js'
-#mport Memory from '../../bas/store/Memory.js'
-import Pipe   from '../../bas/store/Pipe.js'
-import Store  from '../../bas/store/Store.js'
+import Stream from '../../base/util/Stream.js'
+#mport Rest   from '../../base/store/Rest.js'
+import Fire   from '../../base/store/Fire.js'
+import Index  from '../../base/store/Index.js'
+#mport Local  from '../../base/store/Local.js'
+#mport Memory from '../../base/store/Memory.js'
+import Pipe   from '../../base/store/Pipe.js'
+import Store  from '../../base/store/Store.js'
 
 class Test
 

@@ -2,9 +2,9 @@ var Innovate;
 
 import * as d3 from '../../../pub/lib/d3/d3.5.9.0.esm.js';
 
-import Util from '../../bas/util/Util.js';
+import Util from '../../base/util/Util.js';
 
-import Vis from '../../bas/util/Vis.js';
+import Vis from '../../base/util/Vis.js';
 
 Innovate = class Innovate {
   constructor(spec, shapes, build) {

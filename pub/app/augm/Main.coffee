@@ -1,9 +1,9 @@
 
-import Data    from '../../bas/util/Data.js'
-import Stream  from '../../bas/util/Stream.js'
-import Vis     from '../../bas/util/Vis.js'
-import Manage  from '../../bas/sw/Manage.js'
-#mport Test    from './Test.js'
+import Data           from '../../base/util/Data.js'
+import Stream         from '../../base/util/Stream.js'
+import Vis            from '../../base/util/Vis.js'
+import ServiceManager from '../../base/util/ServiceManager.js'
+#mport Test           from './Test.js'
 
 class Main
 
@@ -31,25 +31,13 @@ class Main
 
   Main.init =  ( batch ) ->
     window['Geom'] = {} # May still be needed by Ganjs
-    Main.Batch  = batch # Not necessary here, but assigned for compatibilitry
-    subjects    = ["Draw","Note","Navb","Tabs","Geom","Data","Work"]
-    streamLog   = { subscribe:false, publish:false, subjects:subjects}
-    Main.stream = new Stream( subjects, streamLog )
-    Main.online( Main.stream )
-    Main.manage = new Manage( Main.stream )
+    Main.Batch   = batch # Not necessary here, but assigned for compatibilitry
+    subjects     = ["Draw","Note","Navb","Tabs","Geom","Data","Work"]
+    streamLog    = { subscribe:false, publish:false, subjects:subjects}
+    Main.stream  = new Stream( subjects, streamLog )
+    Main.serviceManager = new ServiceManager( Main.stream )
     Main.onReady()
     # new Test()
-    return
-
-  Main.online = ( stream ) ->
-    window.addEventListener("load", () ->
-      handleNetworkChange = (event) ->
-        if event is false then {}
-        status = if navigator.onLine then 'Online' else 'Offline'
-        stream.publish( 'Netw', status )
-        return
-      window.addEventListener("online",  handleNetworkChange )
-      window.addEventListener("offline", handleNetworkChange ) )
     return
 
   Main.vueMixin = {

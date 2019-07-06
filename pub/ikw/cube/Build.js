@@ -1,9 +1,9 @@
 var Build,
   hasProp = {}.hasOwnProperty;
 
-import Util from '../../bas/util/Util.js';
+import Util from '../../base/util/Util.js';
 
-import Data from '../../bas/util/Data.js';
+import Data from '../../base/util/Data.js';
 
 Build = class Build {
   // ---- Class Methods for Practices ----

@@ -2,9 +2,9 @@ var MathML;
 
 import {
   match
-} from '../../bas/util/Match.js';
+} from '../../base/util/Match.js';
 
-import Latex from '../../bas/util/Latex.js';
+import Latex from '../../base/util/Latex.js';
 
 import A from '../adt/Adt.js';
 

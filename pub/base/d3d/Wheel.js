@@ -1,14 +1,14 @@
-var Hue;
+var Wheel;
 
-import Util from '../../bas/util/Util.js';
+import Util from '../../base/util/Util.js';
 
-import Vis from '../../bas/util/Vis.js';
+import Vis from '../../base/util/Vis.js';
 
 import Radar from './Radar.js';
 
 import Palettes from './Palettes';
 
-Hue = class Hue extends Radar {
+Wheel = class Wheel extends Radar {
   constructor(drew, d3, name, elem, size) {
     super(drew, d3, name, elem, size);
     this.quadrants = [
@@ -296,4 +296,4 @@ Hue = class Hue extends Radar {
 
 };
 
-export default Hue;
+export default Wheel;

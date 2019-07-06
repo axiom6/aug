@@ -1,5 +1,5 @@
 
-import Vis  from '../../bas/util/Vis.js'
+import Vis  from '../../base/util/Vis.js'
 
 
 class Axes

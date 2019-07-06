@@ -1,30 +1,30 @@
 
-class Worker
+class ServiceWorker
 
-  constructor:( @manage ) ->
+  constructor:( @serviceManager ) ->
     @addListeners()
 
   publish:( status, text, error=null ) ->
-    @manage.stream.publish( status, text, error )
+    @serviceManager.stream.publish( status, text, error )
     return
 
   addListeners:() =>
     self.addEventListener('install',  @onInstall )
     self.addEventListener('activate', @onActivate )
     self.addEventListener('fetch',    @onFetch )
-    self.addEventListener('fetch',    @onGet )
+    #elf.addEventListener('fetch',    @onGet )
     #elf.addEventListener('push',     @onPush(     event ) )
     #elf.addEventListener('sync',     @onSync(     event ) )
     return
 
   onInstall:( event ) =>
     event.waitUntil(
-      caches.open( @manage.cacheName )
+      caches.open( @serviceManager.cacheName )
         .then( (cache) =>
-          @publish( 'Install', 'Open Cache Success' )
-          return cache.addAll(@manage.cacheUrls) )
+          @publish( 'Install', 'Caches Open Success' )
+          return cache.addAll(@serviceManager.cacheUrls) )
         .catch( (error) =>
-          @publish( 'Install', 'Error', error )
+          @publish( 'Install', 'Caches Open Error', error )
           return ) )
     return
 
@@ -47,7 +47,7 @@ class Worker
 
   onFetch:(event) =>
     event.respondWith(
-      caches.open( @manage.cacheName )
+      caches.open( @serviceManager.cacheName )
         .then( (cache) =>
           return cache.match(event.request).then( (response) =>
             return response or fetch(event.request).then( (response) =>
@@ -65,15 +65,13 @@ class Worker
         networked = fetch(event.request)
          .then((response) =>
            cacheCopy = response.clone()
-           caches.open(@manage.cacheName)
+           caches.open(@serviceManager.cacheName)
             .then( (cache) => cache.put( event.request, cacheCopy ) )
            return response )
         .catch(() =>
-           caches.match(@manage.offlinePage) )
+           caches.match(@serviceManager.offlinePage) )
         return cached or networked ) )
     return
-
-
 
   cacheUrls:( jsonUrl ) ->
     caches.open(jsonUrl)
@@ -81,8 +79,9 @@ class Worker
         fetch(url)
           .then(  (response) => return response.json() )
           .then(  (urls)     => cache.addAll(urls) )
-          .catch( (error)   => @publish( 'cacheUrls', 'Fetch', error ) ) )
-      .catch( (error) => @publish( 'cacheUrls', 'Open', error ) )
+          .catch( (error)   => @publish( 'CacheUrls', 'Fetch', error ) ) )
+      .catch( (error) => @publish( 'CacheUrls', 'Open', error ) )
     return
 
-self['Worker'] = Worker
+export default ServiceWorker
+

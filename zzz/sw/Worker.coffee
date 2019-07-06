@@ -16,7 +16,7 @@ class Worker
     self.addEventListener('install',  @onInstall )
     self.addEventListener('activate', @onActivate )
     self.addEventListener('fetch',    @onFetch )
-    self.addEventListener('fetch',    @onGet )
+    #elf.addEventListener('fetch',    @onGet )
     #elf.addEventListener('push',     @onPush(     event ) )
     #elf.addEventListener('sync',     @onSync(     event ) )
     return

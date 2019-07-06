@@ -1,12 +1,12 @@
-var Cluster;
+var Radial;
 
-import Util from '../../bas/util/Util.js';
+import Util from '../../base/util/Util.js';
 
-import Data from '../../bas/util/Data.js';
+import Data from '../../base/util/Data.js';
 
-import Vis from '../../bas/util/Vis.js';
+import Vis from '../../base/util/Vis.js';
 
-Cluster = class Cluster {
+Radial = class Radial {
   constructor(drew, d3, name, elem, size) {
     this.doRadial = this.doRadial.bind(this);
     this.doLinks = this.doLinks.bind(this);
@@ -35,7 +35,7 @@ Cluster = class Cluster {
     this.w = geo.w;
     this.h = geo.h;
     this.r = Math.min(this.w / 2, this.h / 2) * 0.9;
-    this.tree = this.d3.cluster();
+    this.tree = this.d3.tree();
     this.tree.size([
       this.r,
       this.r // size([@w,@h])
@@ -139,4 +139,4 @@ Cluster = class Cluster {
 
 };
 
-export default Cluster;
+export default Radial;

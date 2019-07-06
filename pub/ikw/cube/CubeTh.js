@@ -1,8 +1,8 @@
 var CubeTh;
 
-import Util from '../../bas/util/Util.js';
+import Util from '../../base/util/Util.js';
 
-import Data from '../../bas/util/Data.js';
+import Data from '../../base/util/Data.js';
 
 import Build from './Build.js';
 

@@ -12,7 +12,7 @@
 
 <script type="module">
   
-  import Table from '../../pub/bas/store/Table.js'
+  import Table from '../../pub/base/store/Table.js'
   
   let Table1 = {
     

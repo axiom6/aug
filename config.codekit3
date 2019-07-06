@@ -1336,350 +1336,339 @@
 		"oAP": "/pub/augm.html",
 		"oF": 0
 		},
-	"/pub/bas/d3d/Axes.js": {
+	"/pub/base/d3d/Axes.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/d3d/Axes-min.js",
+		"oAP": "/pub/base/d3d/Axes-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/d3d/Chord.js": {
+	"/pub/base/d3d/Chord.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/d3d/Chord-min.js",
+		"oAP": "/pub/base/d3d/Chord-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/d3d/Cluster.js": {
+	"/pub/base/d3d/Cluster.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/d3d/Cluster-min.js",
+		"oAP": "/pub/base/d3d/Cluster-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/d3d/Drew.js": {
+	"/pub/base/d3d/Drew.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/d3d/Drew-min.js",
+		"oAP": "/pub/base/d3d/Drew-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/d3d/Hue.js": {
+	"/pub/base/d3d/Hue.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/d3d/Hue-min.js",
+		"oAP": "/pub/base/d3d/Hue-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/d3d/Link.js": {
+	"/pub/base/d3d/Link.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/d3d/Link-min.js",
+		"oAP": "/pub/base/d3d/Link-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/d3d/Palettes.js": {
+	"/pub/base/d3d/Palettes.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/d3d/Palettes-min.js",
+		"oAP": "/pub/base/d3d/Palettes-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/d3d/Radar.js": {
+	"/pub/base/d3d/Radar.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/d3d/Radar-min.js",
+		"oAP": "/pub/base/d3d/Radar-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/d3d/Radial.js": {
+	"/pub/base/d3d/Radial.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/d3d/Radial-min.js",
+		"oAP": "/pub/base/d3d/Radial-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/d3d/Tree.js": {
+	"/pub/base/d3d/Tree.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/d3d/Tree-min.js",
+		"oAP": "/pub/base/d3d/Tree-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/d3d/Wheel.js": {
+	"/pub/base/d3d/Wheel.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/d3d/Wheel-min.js",
+		"oAP": "/pub/base/d3d/Wheel-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/rules/database.rules.json": {
+	"/pub/base/rules/database.rules.json": {
 		"ft": 524288,
 		"oA": 1,
-		"oAP": "/pub/bas/rules/database.rules-min.json",
+		"oAP": "/pub/base/rules/database.rules-min.json",
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
 		},
-	"/pub/bas/rules/firebase2.json": {
+	"/pub/base/rules/firebase2.json": {
 		"ft": 524288,
 		"oA": 1,
-		"oAP": "/pub/bas/rules/firebase2-min.json",
+		"oAP": "/pub/base/rules/firebase2-min.json",
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
 		},
-	"/pub/bas/rules/firestore.indexes.json": {
+	"/pub/base/rules/firestore.indexes.json": {
 		"ft": 524288,
 		"oA": 1,
-		"oAP": "/pub/bas/rules/firestore.indexes-min.json",
+		"oAP": "/pub/base/rules/firestore.indexes-min.json",
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
 		},
-	"/pub/bas/rules/firestore.rules": {
+	"/pub/base/rules/firestore.rules": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/rules/firestore.rules",
+		"oAP": "/pub/base/rules/firestore.rules",
 		"oF": 0
 		},
-	"/pub/bas/rules/storage.rules": {
+	"/pub/base/rules/storage.rules": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/rules/storage.rules",
+		"oAP": "/pub/base/rules/storage.rules",
 		"oF": 0
 		},
-	"/pub/bas/store/Fire.js": {
+	"/pub/base/store/Fire.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/store/Fire-min.js",
+		"oAP": "/pub/base/store/Fire-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/store/Index.js": {
+	"/pub/base/store/Index.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/store/Index-min.js",
+		"oAP": "/pub/base/store/Index-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/store/Local.js": {
+	"/pub/base/store/Local.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/store/Local-min.js",
+		"oAP": "/pub/base/store/Local-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/store/Memory.js": {
+	"/pub/base/store/Memory.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/store/Memory-min.js",
+		"oAP": "/pub/base/store/Memory-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/store/Pipe.js": {
+	"/pub/base/store/Pipe.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/store/Pipe-min.js",
+		"oAP": "/pub/base/store/Pipe-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/store/Rest.js": {
+	"/pub/base/store/Rest.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/store/Rest-min.js",
+		"oAP": "/pub/base/store/Rest-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/store/Store.js": {
+	"/pub/base/store/Store.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/store/Store-min.js",
+		"oAP": "/pub/base/store/Store-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/store/Table.js": {
+	"/pub/base/store/Table.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/store/Table-min.js",
+		"oAP": "/pub/base/store/Table-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/sw/Manage.js": {
+	"/pub/base/util/Data.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/sw/Manage-min.js",
+		"oAP": "/pub/base/util/Data-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/sw/Register.js": {
+	"/pub/base/util/FontAwe.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/sw/Register-min.js",
+		"oAP": "/pub/base/util/FontAwe-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/util/Data.js": {
+	"/pub/base/util/Latex.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/util/Data-min.js",
+		"oAP": "/pub/base/util/Latex-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/util/FontAwe.js": {
+	"/pub/base/util/Match.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/util/FontAwe-min.js",
+		"oAP": "/pub/base/util/Match-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/util/Latex.js": {
+	"/pub/base/util/ServiceManager.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/util/Latex-min.js",
+		"oAP": "/pub/base/util/ServiceManager-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/util/Match.js": {
+	"/pub/base/util/Stream.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/util/Match-min.js",
+		"oAP": "/pub/base/util/Stream-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/util/Stream.js": {
+	"/pub/base/util/Util.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/util/Stream-min.js",
+		"oAP": "/pub/base/util/Util-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/bas/util/Util.js": {
+	"/pub/base/util/Vis.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/bas/util/Util-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/bas/util/Vis.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/bas/util/Vis-min.js",
+		"oAP": "/pub/base/util/Vis-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -3164,6 +3153,17 @@
 		"oAP": "/pub/robots.txt",
 		"oF": 0
 		},
+	"/pub/ServiceWorker.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/ServiceWorker-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/vue/comp/Cube.js": {
 		"bF": 0,
 		"ft": 64,
@@ -3460,17 +3460,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/Worker.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/Worker-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/README.md": {
 		"cB": 0,
 		"cS": 0,
@@ -3490,249 +3479,216 @@
 		"rFN": 0,
 		"uCM": 0
 		},
-	"/src/bas/d3d/Axes.coffee": {
+	"/src/base/d3d/Axes.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/d3d/Axes.js",
+		"oAP": "/pub/base/d3d/Axes.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/d3d/Chord.coffee": {
+	"/src/base/d3d/Chord.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/d3d/Chord.js",
+		"oAP": "/pub/base/d3d/Chord.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/d3d/Drew.coffee": {
+	"/src/base/d3d/Drew.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/d3d/Drew.js",
+		"oAP": "/pub/base/d3d/Drew.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/d3d/Hue.coffee": {
+	"/src/base/d3d/Hue.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/d3d/Hue.js",
+		"oAP": "/pub/base/d3d/Hue.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/d3d/Link.coffee": {
+	"/src/base/d3d/Link.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/d3d/Link.js",
+		"oAP": "/pub/base/d3d/Link.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/d3d/Palettes.coffee": {
+	"/src/base/d3d/Palettes.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/d3d/Palettes.js",
+		"oAP": "/pub/base/d3d/Palettes.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/d3d/Radar.coffee": {
+	"/src/base/d3d/Radar.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/d3d/Radar.js",
+		"oAP": "/pub/base/d3d/Radar.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/d3d/Tree.coffee": {
+	"/src/base/d3d/Tree.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/d3d/Tree.js",
+		"oAP": "/pub/base/d3d/Tree.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/store/Fire.coffee": {
+	"/src/base/store/Fire.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/store/Fire.js",
+		"oAP": "/pub/base/store/Fire.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/store/Index.coffee": {
+	"/src/base/store/Index.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/store/Index.js",
+		"oAP": "/pub/base/store/Index.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/store/Local.coffee": {
+	"/src/base/store/Local.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/store/Local.js",
+		"oAP": "/pub/base/store/Local.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/store/Memory.coffee": {
+	"/src/base/store/Memory.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/store/Memory.js",
+		"oAP": "/pub/base/store/Memory.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/store/Pipe.coffee": {
+	"/src/base/store/Pipe.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/store/Pipe.js",
+		"oAP": "/pub/base/store/Pipe.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/store/Rest.coffee": {
+	"/src/base/store/Rest.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/store/Rest.js",
+		"oAP": "/pub/base/store/Rest.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/store/Store.coffee": {
+	"/src/base/store/Store.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/store/Store.js",
+		"oAP": "/pub/base/store/Store.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/store/Table.coffee": {
+	"/src/base/store/Table.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/store/Table.js",
+		"oAP": "/pub/base/store/Table.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/sw/Manage.coffee": {
+	"/src/base/util/Data.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/sw/Manage.js",
+		"oAP": "/pub/base/util/Data.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/sw/Register.coffee": {
+	"/src/base/util/FontAwe.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/sw/Register.js",
+		"oAP": "/pub/base/util/FontAwe.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/sw/Worker.coffee": {
+	"/src/base/util/Latex.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/Worker.js",
-		"oF": 2,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/bas/util/Data.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/bas/util/Data.js",
+		"oAP": "/pub/base/util/Latex.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/util/FontAwe.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/bas/util/FontAwe.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/bas/util/Latex.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/bas/util/Latex.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/bas/util/Match.js": {
+	"/src/base/util/Match.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
@@ -3743,34 +3699,56 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/util/Stream.coffee": {
+	"/src/base/util/ServiceManager.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/util/Stream.js",
+		"oAP": "/pub/base/util/ServiceManager.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/util/Util.coffee": {
+	"/src/base/util/ServiceWorker.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/util/Util.js",
+		"oAP": "/pub/ServiceWorker.js",
+		"oF": 2,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/base/util/Stream.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/base/util/Stream.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/bas/util/Vis.coffee": {
+	"/src/base/util/Util.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/bas/util/Vis.js",
+		"oAP": "/pub/base/util/Util.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/base/util/Vis.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/base/util/Vis.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
@@ -5860,6 +5838,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/zzz/sw/Register.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/sw/Register.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
 	"/zzz/sw/registerServiceWorker.ini.js": {
 		"bF": 0,
 		"ft": 64,
@@ -5992,6 +5981,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/zzz/sw/ServiceWorker.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/sw/ServiceWorker.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
 	"/zzz/sw/Worker.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -6000,6 +6000,17 @@
 		"oAP": "/zzz/sw/Worker.js",
 		"oF": 0,
 		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/sw/Worker.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/sw/Worker-min.js",
+		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
@@ -8590,23 +8601,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.js",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "vue",
-			"autoOutputPathReplace2": "pub/vue",
-			"autoOutputPathStyle": 3,
-			"fileExtension": "vue",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.html",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "",
 			"autoOutputPathReplace2": "",
 			"autoOutputPathStyle": 0,
 			"fileExtension": "html",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.js",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "vue",
+			"autoOutputPathReplace2": "pub/vue",
+			"autoOutputPathStyle": 3,
+			"fileExtension": "vue",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

@@ -1,6 +1,6 @@
 var Gui;
 
-import Util from '../../bas/util/Util.js';
+import Util from '../../base/util/Util.js';
 
 Gui = class Gui {
   constructor(act, elem, fun) {

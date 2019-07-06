@@ -1,7 +1,7 @@
 var Embrace,
   hasProp = {}.hasOwnProperty;
 
-import Vis from "../../bas/util/Vis.js";
+import Vis from "../../base/util/Vis.js";
 
 Embrace = class Embrace {
   constructor(spec, shapes, build) {

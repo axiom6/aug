@@ -1,16 +1,16 @@
 var Main,
   hasProp = {}.hasOwnProperty;
 
-import Data from '../../bas/util/Data.js';
+import Data from '../../base/util/Data.js';
 
-import Stream from '../../bas/util/Stream.js';
+import Stream from '../../base/util/Stream.js';
 
-import Vis from '../../bas/util/Vis.js';
+import Vis from '../../base/util/Vis.js';
 
-import Manage from '../../bas/sw/Manage.js';
+import ServiceManager from '../../base/util/ServiceManager.js';
 
 Main = (function() {
-  //mport Test    from './Test.js'
+  //mport Test           from './Test.js'
   class Main {
     static begin(onReady) {
       Main.onReady = onReady;
@@ -28,25 +28,8 @@ Main = (function() {
         subjects: subjects
       };
       Main.stream = new Stream(subjects, streamLog);
-      Main.online(Main.stream);
-      Main.manage = new Manage(Main.stream);
+      Main.serviceManager = new ServiceManager(Main.stream);
       Main.onReady();
-    }
-
-    static online(stream) {
-      window.addEventListener("load", function() {
-        var handleNetworkChange;
-        handleNetworkChange = function(event) {
-          var status;
-          if (event === false) {
-            ({});
-          }
-          status = navigator.onLine ? 'Online' : 'Offline';
-          stream.publish('Netw', status);
-        };
-        window.addEventListener("online", handleNetworkChange);
-        return window.addEventListener("offline", handleNetworkChange);
-      });
     }
 
   };
@@ -129,6 +112,7 @@ Main = (function() {
     }
   };
 
+  // new Test()
   Main.vueMixin = {
     created: function() {},
     // console.log( 'Main.vueMixin.created() globally' )

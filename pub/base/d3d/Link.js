@@ -1,8 +1,8 @@
 var Link;
 
-import Util from '../../bas/util/Util.js';
+import Util from '../../base/util/Util.js';
 
-import Vis from '../../bas/util/Vis.js';
+import Vis from '../../base/util/Vis.js';
 
 Link = class Link {
   constructor(drew, d3, name, elem, size) {

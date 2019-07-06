@@ -10,6 +10,8 @@
 ~~ 8. <input placeholder=" Search" id="search" type="text" size="16" class="input">
 // 9. 88.8% Legible Text
 
+    { "src": "./css/icons/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" },
+
 
 …pub/augm.html?_ijt=oc7qosr8njn9mpkv385ut8an3k (localhost)
 …roboto/Roboto.css?family=Roboto (localhost) - 0 ms, 2.17 KB

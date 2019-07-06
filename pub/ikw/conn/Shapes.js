@@ -1,9 +1,9 @@
 var Shapes,
   hasProp = {}.hasOwnProperty;
 
-import Util from '../../bas/util/Util';
+import Util from '../../base/util/Util';
 
-import Vis from '../../bas/util/Vis';
+import Vis from '../../base/util/Vis';
 
 import Convey from './Convey';
 

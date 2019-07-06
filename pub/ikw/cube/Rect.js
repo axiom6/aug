@@ -1,8 +1,8 @@
 var Rect;
 
-import Util from '../../bas/util/Util.js';
+import Util from '../../base/util/Util.js';
 
-import Vis from '../../bas/util/Vis.js';
+import Vis from '../../base/util/Vis.js';
 
 import * as THREE from '../../../pub/lib/three/three.module.js';
 
