@@ -3,15 +3,16 @@ cacheName    = 'Augm'
 offlinePage  = './augm.html'
 
 cacheObjs =  {
-  Html:     { name:'Html',      url:'./augm.html' }
-  Augm:     { name:'Augm',      url:'./app/augm/Augm.js' }
-  Vue:      { name:'Vue',       url:'./lib/vue/vue.esm.browser.js' }
-  Main:     { name:'Main',      url:'./app/augm/Main.js'   }
-  Home:     { name:'Main',      url:'./app/augm/Home.js'   }
-  Router:   { name:'Router',    url:'./app/augm/router.js' }
-  VueRouter:{ name:'VueRouter', url:'./lib/vue/vue-router.esm.js' }
-  Roboto:   { name:'Roboto',    url:'./css/font/roboto/Roboto.css' }
-  Roll:     { name:'Roll',      url:'./app/augm/Augm.roll.js' } }  # Gets deleted as a test
+  Root:     { name:'Root',      url:'/' }
+  Html:     { name:'Html',      url:'/augm.html' }
+  Augm:     { name:'Augm',      url:'/app/augm/Augm.js' }
+  Vue:      { name:'Vue',       url:'/lib/vue/vue.esm.browser.js' }
+  Main:     { name:'Main',      url:'/app/augm/Main.js'   }
+  Home:     { name:'Main',      url:'/app/augm/Home.js'   }
+  Router:   { name:'Router',    url:'/app/augm/router.js' }
+  VueRouter:{ name:'VueRouter', url:'/lib/vue/vue-router.esm.js' }
+  Roboto:   { name:'Roboto',    url:'/css/font/roboto/Roboto.css' }
+  Roll:     { name:'Roll',      url:'/app/augm/Augm.roll.js' } }  # Gets deleted as a test
 
 toCacheUrls = ( objs ) ->
   urls = []
@@ -20,11 +21,15 @@ toCacheUrls = ( objs ) ->
 
 cacheUrls = toCacheUrls( cacheObjs )
 
-publish = ( status, text, error=null ) =>
-  if not error?
-    console.log( status, text )
+publish = ( status, text, obj=null ) =>
+  if obj?
+    console.log( status, text, obj )
   else
-    console.error( status, text, error )
+    console.log( status, text )
+  return
+
+oncatch = ( status, text, error ) =>
+  console.error( status, text, error )
   return
 
 onInstall = ( event ) =>
@@ -34,11 +39,11 @@ onInstall = ( event ) =>
         publish( 'Install', 'Success' )
         return cache.addAll(cacheUrls) )
       .catch( (error) =>
-        publish( 'Install', 'Error', error )
+        oncatch( 'Install', 'Error', error )
         return ) )
   return
 
-cacheUrlNotNeeded:( cacheUrl ) =>
+cacheUrlNotNeeded = ( cacheUrl ) =>
   cacheUrl is '/app/augm/Augm.roll.js'
 
 onActivate = ( event ) =>
@@ -53,7 +58,7 @@ onActivate = ( event ) =>
          self.clients.claim()
          publish( 'Activate', 'Success' ) )
       .catch( (error) =>
-        publish( 'Activate', 'Error', error )
+        oncatch( 'Activate', 'Error', error )
         return ) )
   return
 
@@ -61,13 +66,13 @@ onFetch = (event) =>
   event.respondWith(
     caches.open( cacheName )
       .then( (cache) =>
-        return cache.match(event.request).then( (response) =>
+        return cache.match( event.request, {ignoreSearch:true} ).then( (response) =>
           return response or fetch(event.request).then( (response) =>
             cache.put( event.request, response.clone() )
             publish( 'Fetch', 'Success'  )
             return response ) ) )
       .catch( (error) =>
-        publish( 'Fetch', 'Error', error  ) ) )
+        oncatch( 'Fetch', 'Error', error  ) ) )
   return
 
 onGet = (event) =>
@@ -85,7 +90,7 @@ onGet = (event) =>
          return response )
       .catch((error) =>
          caches.match(offlinePage)
-         publish( 'Get', 'Error', error  ) )
+         oncatch( 'Get', 'Error', error  ) )
       return cached or networked ) )
   return
 

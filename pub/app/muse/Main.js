@@ -7,6 +7,8 @@ import Stream from '../../base/util/Stream.js';
 
 import Vis from '../../base/util/Vis.js';
 
+import Cache from '../../base/util/Cache.js';
+
 Main = (function() {
   class Main {
     static begin(onReady) {
@@ -16,15 +18,15 @@ Main = (function() {
 
     static init(batch) {
       var infoSpec, subjects;
-      window['Geom'] = {};
       Main.Batch = batch; // Not necessary here, but assigned for compatibilitry
-      subjects = ["Info", "Know", "Wise", "Draw", "Note", "Cube", "Navb", "Tabs", "Geom"];
+      subjects = ["Info", "Know", "Wise", "Cube", "Navb", "Tabs", "Cache"];
       infoSpec = {
         subscribe: false,
         publish: false,
         subjects: subjects
       };
       Main.stream = new Stream(subjects, infoSpec);
+      Main.cache = new Cache(Main.stream);
       Main.mergePracsCols();
       Main.onReady();
     }

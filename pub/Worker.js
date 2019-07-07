@@ -1,4 +1,4 @@
-var cacheName, cacheObjs, cacheUrls, offlinePage, onActivate, onFetch, onGet, onInstall, publish, toCacheUrls,
+var cacheName, cacheObjs, cacheUrlNotNeeded, cacheUrls, offlinePage, onActivate, onFetch, onGet, onInstall, oncatch, publish, toCacheUrls,
   hasProp = {}.hasOwnProperty;
 
 cacheName = 'Augm';
@@ -6,41 +6,45 @@ cacheName = 'Augm';
 offlinePage = './augm.html';
 
 cacheObjs = {
+  Root: {
+    name: 'Root',
+    url: '/'
+  },
   Html: {
     name: 'Html',
-    url: './augm.html'
+    url: '/augm.html'
   },
   Augm: {
     name: 'Augm',
-    url: './app/augm/Augm.js'
+    url: '/app/augm/Augm.js'
   },
   Vue: {
     name: 'Vue',
-    url: './lib/vue/vue.esm.browser.js'
+    url: '/lib/vue/vue.esm.browser.js'
   },
   Main: {
     name: 'Main',
-    url: './app/augm/Main.js'
+    url: '/app/augm/Main.js'
   },
   Home: {
     name: 'Main',
-    url: './app/augm/Home.js'
+    url: '/app/augm/Home.js'
   },
   Router: {
     name: 'Router',
-    url: './app/augm/router.js'
+    url: '/app/augm/router.js'
   },
   VueRouter: {
     name: 'VueRouter',
-    url: './lib/vue/vue-router.esm.js'
+    url: '/lib/vue/vue-router.esm.js'
   },
   Roboto: {
     name: 'Roboto',
-    url: './css/font/roboto/Roboto.css'
+    url: '/css/font/roboto/Roboto.css'
   },
   Roll: {
     name: 'Roll',
-    url: './app/augm/Augm.roll.js' // Gets deleted as a test
+    url: '/app/augm/Augm.roll.js' // Gets deleted as a test
   }
 };
 
@@ -57,12 +61,16 @@ toCacheUrls = function(objs) {
 
 cacheUrls = toCacheUrls(cacheObjs);
 
-publish = (status, text, error = null) => {
-  if (error == null) {
-    console.log(status, text);
+publish = (status, text, obj = null) => {
+  if (obj != null) {
+    console.log(status, text, obj);
   } else {
-    console.error(status, text, error);
+    console.log(status, text);
   }
+};
+
+oncatch = (status, text, error) => {
+  console.error(status, text, error);
 };
 
 onInstall = (event) => {
@@ -70,15 +78,13 @@ onInstall = (event) => {
     publish('Install', 'Success');
     return cache.addAll(cacheUrls);
   }).catch((error) => {
-    publish('Install', 'Error', error);
+    oncatch('Install', 'Error', error);
   }));
 };
 
-({
-  cacheUrlNotNeeded: (cacheUrl) => {
-    return cacheUrl === '/app/augm/Augm.roll.js';
-  }
-});
+cacheUrlNotNeeded = (cacheUrl) => {
+  return cacheUrl === '/app/augm/Augm.roll.js';
+};
 
 onActivate = (event) => {
   event.waitUntil(caches.keys().then((cacheUrls) => {
@@ -93,13 +99,15 @@ onActivate = (event) => {
     self.clients.claim();
     return publish('Activate', 'Success');
   }).catch((error) => {
-    publish('Activate', 'Error', error);
+    oncatch('Activate', 'Error', error);
   }));
 };
 
 onFetch = (event) => {
   event.respondWith(caches.open(cacheName).then((cache) => {
-    return cache.match(event.request).then((response) => {
+    return cache.match(event.request, {
+      ignoreSearch: true
+    }).then((response) => {
       return response || fetch(event.request).then((response) => {
         cache.put(event.request, response.clone());
         publish('Fetch', 'Success');
@@ -107,7 +115,7 @@ onFetch = (event) => {
       });
     });
   }).catch((error) => {
-    return publish('Fetch', 'Error', error);
+    return oncatch('Fetch', 'Error', error);
   }));
 };
 
@@ -128,7 +136,7 @@ onGet = (event) => {
       return response;
     }).catch((error) => {
       caches.match(offlinePage);
-      return publish('Get', 'Error', error);
+      return oncatch('Get', 'Error', error);
     });
     return cached || networked;
   }));

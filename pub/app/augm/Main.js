@@ -7,10 +7,10 @@ import Stream from '../../base/util/Stream.js';
 
 import Vis from '../../base/util/Vis.js';
 
-import ServiceManager from '../../base/util/ServiceManager.js';
+import Cache from '../../base/util/Cache.js';
 
 Main = (function() {
-  //mport Test           from './Test.js'
+  //mport Test   from './Test.js'
   class Main {
     static begin(onReady) {
       Main.onReady = onReady;
@@ -21,14 +21,14 @@ Main = (function() {
       var streamLog, subjects;
       window['Geom'] = {};
       Main.Batch = batch; // Not necessary here, but assigned for compatibilitry
-      subjects = ["Draw", "Note", "Navb", "Tabs", "Geom", "Data", "Work"];
+      subjects = ["Draw", "Note", "Navb", "Tabs", "Geom", "Data", "Cache"];
       streamLog = {
         subscribe: false,
         publish: false,
         subjects: subjects
       };
       Main.stream = new Stream(subjects, streamLog);
-      Main.serviceManager = new ServiceManager(Main.stream);
+      Main.cache = new Cache(Main.stream);
       Main.onReady();
     }
 

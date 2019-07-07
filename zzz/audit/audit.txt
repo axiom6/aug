@@ -12,6 +12,19 @@
 
     { "src": "./css/icons/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" },
 
+Install Success
+Cache.js:120 Cache Objectstatus: "Register"text: "Success"__proto__: Objectconstructor: ƒ Object()hasOwnProperty: ƒ hasOwnProperty()isPrototypeOf: ƒ isPrototypeOf()propertyIsEnumerable: ƒ propertyIsEnumerable()toLocaleString: ƒ toLocaleString()toString: ƒ toString()valueOf: ƒ valueOf()__defineGetter__: ƒ __defineGetter__()__defineSetter__: ƒ __defineSetter__()__lookupGetter__: ƒ __lookupGetter__()__lookupSetter__: ƒ __lookupSetter__()get __proto__: ƒ __proto__()set __proto__: ƒ __proto__()
+Worker.js:73 Install Error TypeError: Request failed
+oncatch @ Worker.js:73
+Cache.js:120 Cache Object
+Cache.js:120 Cache Object
+Worker.js:68 Activate Success
+Cache.js:120 Cache Object
+Worker.js:73 Fetch Error TypeError: Failed to execute 'fetch' on 'ServiceWorkerGlobalScope': 'only-if-cached' can be set only with 'same-origin' mode
+    at Worker.js:111
+oncatch @ Worker.js:73
+2Worker.js:68 Fetch Success
+
 
 …pub/augm.html?_ijt=oc7qosr8njn9mpkv385ut8an3k (localhost)
 …roboto/Roboto.css?family=Roboto (localhost) - 0 ms, 2.17 KB

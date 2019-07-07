@@ -1585,6 +1585,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/base/util/Cache.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/base/util/Cache-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/base/util/Data.js": {
 		"bF": 0,
 		"ft": 64,
@@ -1625,17 +1636,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/base/util/Match-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/base/util/ServiceManager.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/base/util/ServiceManager-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -3153,17 +3153,6 @@
 		"oAP": "/pub/robots.txt",
 		"oF": 0
 		},
-	"/pub/ServiceWorker.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/ServiceWorker-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/pub/vue/comp/Cube.js": {
 		"bF": 0,
 		"ft": 64,
@@ -3460,6 +3449,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/Worker.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/Worker-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/README.md": {
 		"cB": 0,
 		"cS": 0,
@@ -3655,6 +3655,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/src/base/util/Cache.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/base/util/Cache.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
 	"/src/base/util/Data.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -3699,28 +3710,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/base/util/ServiceManager.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/base/util/ServiceManager.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/base/util/ServiceWorker.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ServiceWorker.js",
-		"oF": 2,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
 	"/src/base/util/Stream.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -3750,6 +3739,17 @@
 		"oA": 0,
 		"oAP": "/pub/base/util/Vis.js",
 		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/base/util/Worker.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/Worker.js",
+		"oF": 2,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
