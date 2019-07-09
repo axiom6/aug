@@ -9,6 +9,14 @@
 	],
 "creatorBuild": "29156",
 "files": {
+	"/.firebase/hosting.cHVi.cache": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/.firebase/hosting.cHVi.cache",
+		"oF": 0
+		},
 	"/.firebaserc": {
 		"cB": 0,
 		"ft": 8192,
@@ -2367,6 +2375,14 @@
 		"oT": 1,
 		"q": 100
 		},
+	"/pub/favicon.ico": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/favicon.ico",
+		"oF": 0
+		},
 	"/pub/gan/2D/Basics.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2663,6 +2679,14 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"/pub/index.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/index.html",
+		"oF": 0
 		},
 	"/pub/lib/d3/align.js": {
 		"bF": 0,
@@ -5067,6 +5091,14 @@
 		"hM": 0,
 		"oA": 0,
 		"oAP": "/zzz/audit/audit.txt",
+		"oF": 0
+		},
+	"/zzz/audit/headers.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/audit/headers.txt",
 		"oF": 0
 		},
 	"/zzz/audit/localhost_63342-20190702T134124.json": {
@@ -8647,23 +8679,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.html",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "",
-			"autoOutputPathReplace2": "",
-			"autoOutputPathStyle": 0,
-			"fileExtension": "html",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.js",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "vue",
 			"autoOutputPathReplace2": "pub/vue",
 			"autoOutputPathStyle": 3,
 			"fileExtension": "vue",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.html",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "",
+			"autoOutputPathReplace2": "",
+			"autoOutputPathStyle": 0,
+			"fileExtension": "html",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

@@ -108,10 +108,17 @@ Data = class Data {
     return true;
   }
 
+  // "Access-Control-Request-Headers": "*", "Access-Control-Request-Method": "*"
   static batchJSON(obj, batch, callback, refine = null) {
-    var url;
+    var opt, url;
     url = obj.type === 'Font' ? obj.url : Data.toUrl(obj.url);
-    fetch(url).then((response) => {
+    opt = {
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(url, opt).then((response) => {
       return response.json();
     }).then((data) => {
       obj['data'] = Util.isFunc(refine) ? refine(data, obj.type) : data;
@@ -194,6 +201,6 @@ Data = class Data {
 
 Data.local = "app/data/";
 
-Data.hosted = "https://ui-48413.firebaseapp.com/";
+Data.hosted = "https://augm-d4b3c.firebaseapp.com/augm/app/data/";
 
 export default Data;

@@ -54,9 +54,12 @@ class Data
       return false if not obj['data']
     true
 
+  # "Access-Control-Request-Headers": "*", "Access-Control-Request-Method": "*"
+
   @batchJSON:( obj, batch, callback, refine=null ) ->
     url = if obj.type is 'Font' then obj.url else Data.toUrl(obj.url)
-    fetch( url )
+    opt = { mode:'no-cors', headers:{ 'Content-Type':'application/json' } }
+    fetch( url, opt )
       .then( (response) =>
         return response.json() )
       .then( (data) =>
@@ -112,6 +115,6 @@ class Data
     return
 
 Data.local   = "app/data/"
-Data.hosted  = "https://ui-48413.firebaseapp.com/"
+Data.hosted  = "https://augm-d4b3c.firebaseapp.com/augm/app/data/"
 
 export default Data

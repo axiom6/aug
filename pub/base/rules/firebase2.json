@@ -2,27 +2,17 @@
 {
   "hosting": {
     "public": "pub",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ],
-    "headers": [
-      {
-        "source": "**/*.js",
-        "headers": [
-          {
-            "key": "Content-Type",
-            "value": "application/javascript"
-          }
-        ]
-      }
-    ]
-  }
+      { "source": "**", "destination": "/index.html" } ],
+    "redirects":[
+      { "source": "**", "destination": "/Page.html", "type":301 } ]
+  },
+  "database": {
+    "rules":   "pub/base/rules/database.rules.json" },
+  "firestore": {
+    "rules":   "pub/base/rules/firestore.rules",
+    "indexes": "pub/base/rules/firestore.indexes.json" },
+  "storage": {
+    "rules":   "pub/base/rules/storage.rules" }
 }

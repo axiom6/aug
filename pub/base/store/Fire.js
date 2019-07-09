@@ -27,11 +27,22 @@ Fire = (function() {
         authDomain: `${projectId}.firebaseapp.com`,
         databaseURL: `https://${projectId}.firebaseio.com`,
         storageBucket: `${projectId}.appspot.com`,
-        messagingSenderId: "sender-id",
-        appID: "app-id"
+        messagingSenderId: "341294405322",
+        appID: "1:341294405322:web:06369c7823ccc079"
       };
     }
 
+    /*
+    firebase.initializeApp({
+      "apiKey": "AIzaSyD4Py9oML_Y77ze9bGX0I8s9hqndKkBVjY",
+      "databaseURL": "https://augm-d4b3c.firebaseio.com",
+      "storageBucket": "augm-d4b3c.appspot.com",
+      "authDomain": "augm-d4b3c.firebaseapp.com",
+      "messagingSenderId": "341294405322",
+      "projectId": "augm-d4b3c",
+      "appId": "1:341294405322:web:06369c7823ccc079"
+    });
+    */
     init(config) {
       //console.log( 'firebase', firebase )
       firebase.initializeApp(config);

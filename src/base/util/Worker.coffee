@@ -10,7 +10,7 @@ offlineUrl   = '/augm.html'
 
 cacheObjs =  {
   Html:     { name:'Html',      status:0, url:'/augm.html' }
-  #Manifest:{ name:'Manifest',  status:0, url:'/manifest.json' }
+  Index:    { name:'Index',     status:0, url:'/index.html' }
   Augm:     { name:'Augm',      status:0, url:'/app/augm/Augm.js' }
   Vue:      { name:'Vue',       status:0, url:'/lib/vue/vue.esm.browser.js' }
   Main:     { name:'Main',      status:0, url:'/app/augm/Main.js'   }

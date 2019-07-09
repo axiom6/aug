@@ -1,4 +1,10 @@
+Configure your server to return the Cache-Control HTTP response header.
+  Cache-Control: max-age=31557600
 
+Ensure text remains visible during webfont load
+  Leverage the font-display CSS feature to ensure text is user-visible while webfonts are loading. Learn more.
+
+ -----------------------------------------------
 
 // 1. Current page does not respond with a 200 when offline
 // 2. start_url does not respond with a 200 when offline

@@ -23,7 +23,11 @@ cacheObjs = {
     status: 0,
     url: '/augm.html'
   },
-  //Manifest:{ name:'Manifest',  status:0, url:'/manifest.json' }
+  Index: {
+    name: 'Index',
+    status: 0,
+    url: '/index.html'
+  },
   Augm: {
     name: 'Augm',
     status: 0,
