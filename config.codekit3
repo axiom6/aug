@@ -1254,6 +1254,22 @@
 		"oO": 0,
 		"oS": 1
 		},
+	"/pub/app/data/store/Push.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/app/data/store/Push-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/app/data/store/Sync.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/app/data/store/Sync-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
 	"/pub/app/muse/Home.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2912,13 +2928,13 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/manifest.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/manifest-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
+	"/pub/manifest.webmanifest": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/manifest.webmanifest",
+		"oF": 0
 		},
 	"/pub/math/adt/Adt.js": {
 		"bF": 0,
@@ -5364,6 +5380,14 @@
 		"oAP": "/zzz/muse/404.html",
 		"oF": 0
 		},
+	"/zzz/muse/BuildingCulture.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/muse/BuildingCulture.txt",
+		"oF": 0
+		},
 	"/zzz/muse/Cols.txt": {
 		"cB": 0,
 		"ft": 8192,
@@ -5838,6 +5862,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/zzz/sw/push.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/sw/push-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/zzz/sw/Register.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -5989,6 +6024,17 @@
 		"oAP": "/zzz/sw/ServiceWorker.js",
 		"oF": 0,
 		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/sw/sync.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/sw/sync-min.js",
+		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},

@@ -25,9 +25,9 @@ class Cache
           serviceWorkerRegistration = registration.active
 
         if serviceWorkerRegistration?
-          @publish( 'Register', 'Success' )
-          serviceWorkerRegistration.addEventListener('statechange', (event) =>
-            @publish( 'StateChange', event.target.state ) ) )
+          @publish( 'Register', 'Success' ) )
+          #serviceWorkerRegistration.addEventListener('statechange', (event) =>
+          #  @publish( 'StateChange', event.target.state ) ) )
 
       .catch( (error) =>
         @publish( 'Register', { swUrl:swUrl }, error ) )

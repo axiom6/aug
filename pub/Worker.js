@@ -1,49 +1,67 @@
-var cacheName, cacheObjs, cacheUrlNotNeeded, cacheUrls, offlinePage, onActivate, onFetch, onGet, onInstall, oncatch, publish, toCacheUrls,
+var cacheName, cacheObjs, cacheSync, cacheUrlNotNeeded, offlinePage, offlineUrl, onActivate, onFetch, onGet, onInstall, onInstall1, onPush, onSync, oncatch, publish, pushTag, pushUrl, syncTag, syncUrl, toCacheUrls, urls,
   hasProp = {}.hasOwnProperty;
 
 cacheName = 'Augm';
 
 offlinePage = './augm.html';
 
+pushTag = 'PushTest';
+
+pushUrl = '/app/data/store/Push.json';
+
+cacheSync = 'Sync';
+
+syncTag = 'SyncTest';
+
+syncUrl = '/app/data/store/Sync.json';
+
+offlineUrl = '/augm.html';
+
 cacheObjs = {
-  Root: {
-    name: 'Root',
-    url: '/'
-  },
   Html: {
     name: 'Html',
+    status: 0,
     url: '/augm.html'
   },
+  //Manifest:{ name:'Manifest',  status:0, url:'/manifest.json' }
   Augm: {
     name: 'Augm',
+    status: 0,
     url: '/app/augm/Augm.js'
   },
   Vue: {
     name: 'Vue',
+    status: 0,
     url: '/lib/vue/vue.esm.browser.js'
   },
   Main: {
     name: 'Main',
+    status: 0,
     url: '/app/augm/Main.js'
   },
   Home: {
     name: 'Main',
+    status: 0,
     url: '/app/augm/Home.js'
   },
   Router: {
     name: 'Router',
+    status: 0,
     url: '/app/augm/router.js'
   },
   VueRouter: {
     name: 'VueRouter',
+    status: 0,
     url: '/lib/vue/vue-router.esm.js'
   },
   Roboto: {
     name: 'Roboto',
+    status: 0,
     url: '/css/font/roboto/Roboto.css'
   },
   Roll: {
     name: 'Roll',
+    status: 0,
     url: '/app/augm/Augm.roll.js' // Gets deleted as a test
   }
 };
@@ -59,7 +77,7 @@ toCacheUrls = function(objs) {
   return urls;
 };
 
-cacheUrls = toCacheUrls(cacheObjs);
+urls = toCacheUrls(cacheObjs);
 
 publish = (status, text, obj = null) => {
   if (obj != null) {
@@ -75,8 +93,27 @@ oncatch = (status, text, error) => {
 
 onInstall = (event) => {
   event.waitUntil(caches.open(cacheName).then((cache) => {
+    var key, obj, prefix;
+    publish('Install', '------ Open ------');
+    prefix = '/aug/pub';
+    for (key in cacheObjs) {
+      if (!hasProp.call(cacheObjs, key)) continue;
+      obj = cacheObjs[key];
+      fetch(prefix + obj.url).then((response) => {
+        obj.status = response.status;
+        publish('Install', response.status + ':' + response.url);
+        return cache.put(url, response);
+      });
+    }
+  }).catch((error) => {
+    oncatch('Install', 'Error', error);
+  }));
+};
+
+onInstall1 = (event) => {
+  event.waitUntil(caches.open(cacheName).then((cache) => {
     publish('Install', 'Success');
-    return cache.addAll(cacheUrls);
+    return cache.addAll(urls);
   }).catch((error) => {
     oncatch('Install', 'Error', error);
   }));
@@ -104,18 +141,19 @@ onActivate = (event) => {
 };
 
 onFetch = (event) => {
+  // publish( 'Fetch URL ', event.request.url )
   event.respondWith(caches.open(cacheName).then((cache) => {
     return cache.match(event.request, {
       ignoreSearch: true
     }).then((response) => {
       return response || fetch(event.request).then((response) => {
         cache.put(event.request, response.clone());
-        publish('Fetch', 'Success');
+        publish('Fetch', 'Success', event.request.url);
         return response;
       });
     });
   }).catch((error) => {
-    return oncatch('Fetch', 'Error', error);
+    return oncatch('Fetch', event.request.url, error);
   }));
 };
 
@@ -139,6 +177,34 @@ onGet = (event) => {
       return oncatch('Get', 'Error', error);
     });
     return cached || networked;
+  }));
+};
+
+// For now this is just an example
+// Needs to be registered
+onPush = (event) => {
+  if (event.data.text() !== pushTag) {
+    return;
+  }
+  event.waitUntil(caches.open(cacheName)).then((cache) => {
+    return fetch(pushUrl).then((response) => {
+      var json;
+      cache.put(pushUrl, response.clone());
+      json = response.json();
+      publish('Push', pushTag, json);
+      return json;
+    });
+  });
+};
+
+// MDN says that sync may not progress to W3C standard
+// Needs to be registered
+onSync = (event) => {
+  if (event.tag !== syncTag) {
+    return;
+  }
+  event.waitUntil(caches.open(cacheSync).then((cache) => {
+    return cache.add(syncUrl);
   }));
 };
 

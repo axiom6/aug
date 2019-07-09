@@ -30,11 +30,10 @@ Cache = class Cache {
         serviceWorkerRegistration = registration.active;
       }
       if (serviceWorkerRegistration != null) {
-        this.publish('Register', 'Success');
-        return serviceWorkerRegistration.addEventListener('statechange', (event) => {
-          return this.publish('StateChange', event.target.state);
-        });
+        return this.publish('Register', 'Success');
       }
+    //serviceWorkerRegistration.addEventListener('statechange', (event) =>
+    //  @publish( 'StateChange', event.target.state ) ) )
     }).catch((error) => {
       return this.publish('Register', {
         swUrl: swUrl

@@ -68,10 +68,10 @@ class Worker
         networked = fetch(event.request)
          .then((response) =>
            cacheCopy = response.clone()
-           caches.open(@manage.cacheName)
+           caches.open(cacheName)
             .then( (cache) => cache.put( event.request, cacheCopy ) )
            return response )
-        .catch(() => caches.match(@manage.offlinePage))
+        .catch(() => caches.match(offlinePage))
         return cached or networked ) )
     return
 

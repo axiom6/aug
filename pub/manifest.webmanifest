@@ -1,11 +1,11 @@
 {
   "name":             "Augment",
   "short_name":       "Augm",
-  "start_url":        "augm.html",
+  "start_url":        "/aug/pub/augm.html",
   "display":          "standalone",
   "theme_color":      "#888888",
   "background_color": "#000000",
   "icons": [
-    { "src": "./css/brew/AutoDrip.jpg",                "sizes": "512x512", "type": "image/jpg" }
+    { "src": "./css/icons/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
   ]
 }

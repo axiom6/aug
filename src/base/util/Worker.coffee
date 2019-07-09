@@ -1,25 +1,31 @@
 
 cacheName    = 'Augm'
 offlinePage  = './augm.html'
+pushTag      = 'PushTest'
+pushUrl      = '/app/data/store/Push.json'
+cacheSync    = 'Sync'
+syncTag      = 'SyncTest'
+syncUrl      = '/app/data/store/Sync.json'
+offlineUrl   = '/augm.html'
 
 cacheObjs =  {
-  Root:     { name:'Root',      url:'/' }
-  Html:     { name:'Html',      url:'/augm.html' }
-  Augm:     { name:'Augm',      url:'/app/augm/Augm.js' }
-  Vue:      { name:'Vue',       url:'/lib/vue/vue.esm.browser.js' }
-  Main:     { name:'Main',      url:'/app/augm/Main.js'   }
-  Home:     { name:'Main',      url:'/app/augm/Home.js'   }
-  Router:   { name:'Router',    url:'/app/augm/router.js' }
-  VueRouter:{ name:'VueRouter', url:'/lib/vue/vue-router.esm.js' }
-  Roboto:   { name:'Roboto',    url:'/css/font/roboto/Roboto.css' }
-  Roll:     { name:'Roll',      url:'/app/augm/Augm.roll.js' } }  # Gets deleted as a test
+  Html:     { name:'Html',      status:0, url:'/augm.html' }
+  #Manifest:{ name:'Manifest',  status:0, url:'/manifest.json' }
+  Augm:     { name:'Augm',      status:0, url:'/app/augm/Augm.js' }
+  Vue:      { name:'Vue',       status:0, url:'/lib/vue/vue.esm.browser.js' }
+  Main:     { name:'Main',      status:0, url:'/app/augm/Main.js'   }
+  Home:     { name:'Main',      status:0, url:'/app/augm/Home.js'   }
+  Router:   { name:'Router',    status:0, url:'/app/augm/router.js' }
+  VueRouter:{ name:'VueRouter', status:0, url:'/lib/vue/vue-router.esm.js' }
+  Roboto:   { name:'Roboto',    status:0, url:'/css/font/roboto/Roboto.css' }
+  Roll:     { name:'Roll',      status:0, url:'/app/augm/Augm.roll.js' } }  # Gets deleted as a test
 
 toCacheUrls = ( objs ) ->
   urls = []
   urls.push( obj.url ) for own key, obj of objs
   urls
 
-cacheUrls = toCacheUrls( cacheObjs )
+urls = toCacheUrls( cacheObjs )
 
 publish = ( status, text, obj=null ) =>
   if obj?
@@ -36,11 +42,27 @@ onInstall = ( event ) =>
   event.waitUntil(
     caches.open( cacheName )
       .then( (cache) =>
-        publish( 'Install', 'Success' )
-        return cache.addAll(cacheUrls) )
+        publish( 'Install', '------ Open ------' )
+        prefix = '/aug/pub'
+        for own key, obj of cacheObjs
+          fetch(prefix+obj.url )
+            .then( (response) =>
+              obj.status = response.status
+              publish( 'Install', response.status+':'+response.url )
+              return cache.put(url, response ) )
+        return )
       .catch( (error) =>
-        oncatch( 'Install', 'Error', error )
-        return ) )
+        oncatch( 'Install', 'Error', error ); return ) )
+  return
+
+onInstall1 = ( event ) =>
+  event.waitUntil(
+    caches.open( cacheName )
+      .then( (cache) =>
+        publish( 'Install', 'Success' )
+        return cache.addAll(urls) )
+      .catch( (error) =>
+        oncatch( 'Install', 'Error', error ); return ) )
   return
 
 cacheUrlNotNeeded = ( cacheUrl ) =>
@@ -63,16 +85,17 @@ onActivate = ( event ) =>
   return
 
 onFetch = (event) =>
+  # publish( 'Fetch URL ', event.request.url )
   event.respondWith(
     caches.open( cacheName )
       .then( (cache) =>
         return cache.match( event.request, {ignoreSearch:true} ).then( (response) =>
           return response or fetch(event.request).then( (response) =>
             cache.put( event.request, response.clone() )
-            publish( 'Fetch', 'Success'  )
+            publish( 'Fetch', 'Success', event.request.url  )
             return response ) ) )
       .catch( (error) =>
-        oncatch( 'Fetch', 'Error', error  ) ) )
+        oncatch( 'Fetch', event.request.url, error  ) ) )
   return
 
 onGet = (event) =>
@@ -92,6 +115,30 @@ onGet = (event) =>
          caches.match(offlinePage)
          oncatch( 'Get', 'Error', error  ) )
       return cached or networked ) )
+  return
+
+# For now this is just an example
+# Needs to be registered
+onPush = (event) =>
+  return if event.data.text() isnt pushTag
+  event.waitUntil( caches.open( cacheName ) )
+    .then( (cache) =>
+      return fetch( pushUrl ).then( (response) =>
+        cache.put(  pushUrl, response.clone() )
+        json = response.json()
+        publish( 'Push', pushTag, json )
+        return json ) )
+  return
+
+
+
+
+# MDN says that sync may not progress to W3C standard
+# Needs to be registered
+onSync = (event) =>
+  return if event.tag isnt syncTag
+  event.waitUntil( caches.open(cacheSync).then( (cache) =>
+    return cache.add(syncUrl) ) )
   return
 
 
