@@ -41,11 +41,13 @@
 
 <style lang="less">
   
+  @import '../dash/theme.less';
+  
   .grid3x1() { display:grid; grid-template-columns:100%; grid-template-rows:10% 80% 10%;
       grid-template-areas:"head" "elem" "foot"; }
   
   .home { .grid3x1(); position:relative; left:0; top:0; right:0; bottom:0;
-    background-color:black; color:wheat; }
+    background-color:@theme-back; color:@theme-color; }
 
   .head { grid-area:head; justify-items:center; align-items:center; text-align:center; display:grid;
     justify-self:stretch; align-self:stretch; }

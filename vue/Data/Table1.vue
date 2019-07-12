@@ -44,19 +44,18 @@
 
 <style lang="less">
   
-  @txColor:wheat;
-  @bdColor:wheat;
+  @import '../dash/theme.less';
   
-  .table { background-color:black; justify-self:center; align-self:center; font-size:1em;
-     table-layout: fixed; border-collapse: collapse; border:1px solid @bdColor; }
+  .table { background-color:@theme-back; justify-self:center; align-self:center; font-size:1em;
+     table-layout: fixed; border-collapse: collapse; border:1px solid @theme-border-color; }
 
-  caption  { color:@txColor; }
-  thead th { color:@txColor; padding:0.1em 0.2em 0.1em 0.2em; border:1px solid @bdColor; }
+  caption  { color:@theme-color; }
+  thead th { color:@theme-color; padding:0.1em 0.2em 0.1em 0.2em; border:1px solid @theme-border-color; }
 
   tbody tr {}
   tbody tr:nth-child(odd)  { background-color: #111111; }
   tbody tr:nth-child(even) { background-color: #222222; }
   
-  tbody tr td { color:@txColor; padding:0.1em 0.2em 0.1em 0.2em; border:1px solid wheat; }
+  tbody tr td { color:@theme-color; padding:0.1em 0.2em 0.1em 0.2em; border:1px solid @theme-border-color; }
 
 </style>

@@ -13,6 +13,7 @@
 
 <script type="module">
   
+  
   import Tabs from '../elem/Tabs.vue';
   
   export default {
@@ -31,6 +32,7 @@
 </script>
 
 <style lang="less">
-  .ikws { position:relative; left:0; top:0; right:0; bottom:0; background-color:black; display:grid;
-    h1    { justify-self:center; align-self:center; text-align:center; color:wheat; font-size:3em; } }
+  @import '../dash/theme.less';
+  .ikws { position:relative; left:0; top:0; right:0; bottom:0; background-color:@theme-back; display:grid;
+    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:3em; } }
 </style>

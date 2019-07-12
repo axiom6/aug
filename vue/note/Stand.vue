@@ -22,9 +22,9 @@
 </script>
 
 <style lang="less">
-  
+  @import '../dash/theme.less';
   .stand { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;
     display:grid; justify-items:center; align-items:center; text-align:center;
-    background-color:black; color:wheat; overflow:scroll; }
+    background-color:@theme-back; color:@theme-color; overflow:scroll; }
   
 </style>

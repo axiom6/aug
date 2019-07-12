@@ -8,5 +8,6 @@
 </script>
 
 <style lang="less">
-  .leaf { background-color:#333; }
+  @import '../../dash/theme.less';
+  .leaf { background-color:@theme-back; }
 </style>

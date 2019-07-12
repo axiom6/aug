@@ -49,7 +49,7 @@ onInstall = ( event ) =>
             .then( (response) =>
               obj.status = response.status
               publish( 'Install', response.status+':'+response.url )
-              return cache.put(url, response ) )
+              return cache.put( response.url, response ) )
         return )
       .catch( (error) =>
         oncatch( 'Install', 'Error', error ); return ) )

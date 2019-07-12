@@ -98,6 +98,9 @@
 </script>
 
 <style lang="less">
+  
+  @import '../dash/theme.less';
+  
   .grid5x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:7% 12% 27% 27% 27%;
     grid-template-areas: "tabs tabs tabs tabs" "cm em in en" "le nw north ne" "do west cen east" "sh sw south se"; }
 
@@ -110,7 +113,8 @@
   .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;
     justify-items:center; align-items:center; }
   
-  .conn { background-color:black; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;
+  .conn { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;
+          background-color:@theme-back; color:@theme-color;
     .grid4x3(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid
     .tabs{ grid-area:tabs; display:inline; color:wheat; font-size:1.2em;
       justify-self:start; align-self:center; text-align:left; }

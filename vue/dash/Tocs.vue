@@ -77,18 +77,21 @@
 </script>
 
 <style lang="less">
-  .tocs { background-color:black; font-size:3vh;
+  
+  @import 'theme.less';
+  
+  .tocs { font-size:3vh; font-family:@theme-font-family;
     ul { padding:0; margin:0; list-style:none; align-self:start; display:grid;
-      li  { background-color:#333; padding-left:0.25em; align-self:start;                            // Comp
+      li  { background-color:@theme-back-tocs-comp; padding-left:0.25em; align-self:start;   // Comp
             border-radius:0 24px 24px 0; margin:0.2em 0.2em 0.2em 0.2em;
          i  { margin-right: 0.4em; }
-         a  { color:wheat; text-decoration:none; }
+         a  { color:@theme-color; text-decoration:none; }
          ul { font-size:0.8em; font-weight:bold; padding:0; margin:0;
            li { border-radius:0 12px 12px 0; color:black; margin:0.2em 0.2em 0.2em 0.2em;            // Prac
              i { margin-right: 0.3em; }
-             a { color:black; }
+             a { color:@theme-high; }
              ul { font-size:0.8em; padding:0; margin:0 0 0 0.2em;
                li { border-radius:0 12px 12px 0; color:black; margin:0.2em 0.2em 0.2em 0.2em;       // Disp
                  i { margin-right: 0.25em; } }
-               li:hover { background-color:black!important; color:white!important; } } } } } } }
+               li:hover { background-color:@theme-back!important; color:@theme-color-tocs-disp!important; } } } } } } }
 </style>

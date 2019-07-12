@@ -615,7 +615,7 @@
 		"sI": 0,
 		"sU": 0
 		},
-	"/css/fontawesome/init.less": {
+	"/css/fontawesome/init-awesome.less": {
 		"aP": 0,
 		"bl": 0,
 		"eJ": 0,
@@ -665,6 +665,24 @@
 		"rwU": 0,
 		"sI": 0,
 		"sU": 0
+		},
+	"/css/fontawesome/v4-shims.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/css/fontawesome/v4-shims-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/css/fontawesome/v4-shims.css.map": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/css/fontawesome/v4-shims.css.map",
+		"oF": 0
 		},
 	"/css/fontawesome/v4-shims.less": {
 		"aP": 0,
@@ -2309,6 +2327,23 @@
 		"plM": 3758088159,
 		"prP": 0
 		},
+	"/pub/css/themes/theme.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/pub/css/themes/theme.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
 	"/pub/css/vis/Clarity.png": {
 		"ft": 32768,
 		"iS": 42299,
@@ -3246,6 +3281,14 @@
 		"oAP": "/pub/vue/dash/init-min.css",
 		"oF": 0,
 		"oS": 3
+		},
+	"/pub/vue/dash/init.css.map": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/vue/dash/init.css.map",
+		"oF": 0
 		},
 	"/pub/vue/data/Data.js": {
 		"bF": 0,
@@ -4228,15 +4271,32 @@
 		"oAP": "/pub/vue/dash/Foot.js",
 		"oF": 0
 		},
-	"/vue/dash/init.css": {
+	"/vue/dash/init-awesome.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "/vue/dash/init-min.css",
+		"oAP": "/vue/dash/init-awesome-min.css",
 		"oF": 0,
 		"oS": 3
+		},
+	"/vue/dash/init-awesome.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 0,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/vue/dash/init-awesome.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
 		},
 	"/vue/dash/logo.png": {
 		"ft": 32768,
@@ -4281,6 +4341,41 @@
 		"oAP": "/pub/vue/dash/Side.js",
 		"oF": 0
 		},
+	"/vue/dash/theme.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/vue/dash/theme-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/vue/dash/theme.css.map": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/vue/dash/theme.css.map",
+		"oF": 0
+		},
+	"/vue/dash/theme.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/vue/dash/theme.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
 	"/vue/dash/Tocs.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -4305,7 +4400,7 @@
 		"oAP": "/pub/vue/dash/View.js",
 		"oF": 0
 		},
-	"/vue/Data/Data.roll.js": {
+	"/vue/data/Data.roll.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
@@ -4681,7 +4776,7 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/vue/wood/wood.scss": {
+	"/vue/wood/Wood.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -5750,6 +5845,14 @@
 		"hM": 0,
 		"oA": 0,
 		"oAP": "/zzz/peg/ref/LatexKeys.txt",
+		"oF": 0
+		},
+	"/zzz/plan/plan.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/plan/plan.txt",
 		"oF": 0
 		},
 	"/zzz/pwa/audit.0607a.json": {

@@ -9,6 +9,6 @@
 </script>
 
 <style lang="less">
-  .logo     { background-color:black; }
+  .logo     { }
   .logo img { width:140px; height:50px; }
 </style>

@@ -106,7 +106,7 @@ onInstall = (event) => {
       fetch(prefix + obj.url).then((response) => {
         obj.status = response.status;
         publish('Install', response.status + ':' + response.url);
-        return cache.put(url, response);
+        return cache.put(response.url, response);
       });
     }
   }).catch((error) => {

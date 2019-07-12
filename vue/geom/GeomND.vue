@@ -46,6 +46,8 @@
 
 <style lang="less">
   
-  .page { position:absolute; left:0; top:5%; right:0; bottom:0; background-color:black; display:grid; }
+  @import '../dash/theme.less';
+  
+  .page { position:absolute; left:0; top:5%; right:0; bottom:0; background-color:@theme-back; display:grid; }
 
 </style>

@@ -8,5 +8,5 @@
 </script>
 
 <style lang="less">
-     .side { background-color:black;  }
+     .side { }
 </style>

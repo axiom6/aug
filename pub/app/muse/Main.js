@@ -7,9 +7,8 @@ import Stream from '../../base/util/Stream.js';
 
 import Vis from '../../base/util/Vis.js';
 
-import Cache from '../../base/util/Cache.js';
-
 Main = (function() {
+  //mport Cache   from '../../base/util/Cache.js'
   class Main {
     static begin(onReady) {
       Main.onReady = onReady;
@@ -26,7 +25,7 @@ Main = (function() {
         subjects: subjects
       };
       Main.stream = new Stream(subjects, infoSpec);
-      Main.cache = new Cache(Main.stream);
+      //ain.cache  = new Cache( Main.stream )
       Main.mergePracsCols();
       Main.onReady();
     }

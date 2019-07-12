@@ -17,7 +17,9 @@
 
 </script>
 
-<style>
+<style lang="less">
+  
+  @import '../dash/theme.less';
   
 .wood {
   position:relative; width: 100%; height: 100%; min-height: 700px; overflow:hidden; background-color: #041e2b;

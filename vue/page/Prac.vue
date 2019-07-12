@@ -99,6 +99,8 @@
 
 <style lang="less">
   
+  @import '../dash/theme.less';
+  
   .grid3x3() { display:grid; grid-template-columns:33% 33% 34%; grid-template-rows:33% 33% 34%;
                grid-template-areas: "nw north ne" "west cen east" "sw south se"; }
   
@@ -118,8 +120,8 @@
   .bgc( @bg )
     { background-color:@bg; } // top | right | bottom | left
   
-  .comp { background-color:black; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;
-    
+  .comp { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;
+          background-color:@theme-back; color:@theme-color;
     .grid5x4(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid
       .tabs{ grid-area:tabs; display:inline; color:wheat; font-size:1.2em;
              justify-self:start; align-self:center; text-align:left; }
@@ -128,7 +130,7 @@
       .do { .pdir(do); } .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }
       .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }
     
-      // Placed one level below the 9 Practices Grid
+      // Placed one level below the 9 Practices Grid   - Check on background-color:#603;
     .prac { background-color:#603; border-radius:36px; width:90%; height:80%; font-size:1em; font-weight:bold;
       .grid3x3(); // The 4 Displine plus Practiice name Grid
                              .north { .ddir(north); }

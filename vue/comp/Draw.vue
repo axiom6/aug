@@ -65,8 +65,11 @@
 
 <style lang="less">
   
-  .draw {   position:relative; left:0; top:0;  right:0; bottom:0; display:grid; background-color:black;
-    h1    { justify-self:center; align-self:center; text-align:center; color:wheat; font-size:3em; }
+  @import '../dash/theme.less';
+  
+  .draw {   position:relative; left:0; top:0;  right:0; bottom:0; display:grid;
+            background-color:@theme-back; font-family:@theme-font-family;
+    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:3em; }
     .page { position:absolute; left:0; top:5%; right:0; bottom:0;  } }
 
   // Chords

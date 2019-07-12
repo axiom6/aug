@@ -8,6 +8,6 @@
 </script>
 
 <style lang="less">
-     .foot { background-color:black; }
+     .foot { }
 </style>
 
