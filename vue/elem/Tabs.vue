@@ -40,10 +40,10 @@
     .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;
       border-radius:12px 12px 0 0; border-left: @theme-color solid thin;
       border-top:@theme-color solid thin; border-right:@theme-color solid thin;
-      a         { background-color:black; color:@theme-color; text-decoration:none; } }
-    .tab:hover  { background-color:@theme-color; color:black;
-      a         { background-color:@theme-color; color:black } }
-    .tab-active { background-color:@theme-color; color:black; .tab();
+      a         { background-color:@theme-back;  color:@theme-color; text-decoration:none; } }
+    .tab:hover  { background-color:@theme-color; color:@theme-back;
+      a         { background-color:@theme-color; color:@theme-back } }
+    .tab-active { background-color:@theme-color; color:@theme-back; .tab();
       a         { background-color:@theme-color; color:@theme-back!important; text-decoration:none; } } }
   
 </style>

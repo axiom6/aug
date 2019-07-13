@@ -50,7 +50,7 @@
       titleRef: function (btn) {
         return 'Title' + btn.key },
       img: function (btn) {
-        return 'css/' + btn.img }, // return '../../css/' + btn.img },
+        return '../../css/' + btn.img }, // return '../../css/' + btn.img },
       adjustWidths: function() {
          let keys = Object.keys(this.btns)
          for( let key of keys ) {
@@ -84,15 +84,15 @@
   .grid1x3() { display:grid; grid-template-columns:35% 65%; grid-template-areas:"icons label"; }
 
   .btn { .grid1x3(); justify-self:center; align-self:center;
-    width:80%; height:80%; font-size:inherit; font-family:Roboto, sans-serif;
-    cursor:pointer; border-radius:16px; border: solid black 1px; }
+    width:80%; height:80%; font-size:inherit; font-family:@theme-font-family;
+    cursor:pointer; border-radius:16px; border: solid @theme-back 1px; }
 
   .btn .check { grid-area:icons; justify-self:center; align-self:center; }
   .btn .icons { grid-area:icons; justify-self:center; align-self:center; } // font-family: "font-awesome" serif;
   .btn .image { grid-area:icons; justify-self:center; align-self:center; .image-radius; max-height:1.0em; }
   .btn .title { grid-area:label; justify-self:left;   align-self:center; text-align:left; }
 
-  .image-radius { border-radius:8px; border:solid black 1px; }
+  .image-radius { border-radius:8px; border:solid @theme-back 1px; }
 
 
 </style>

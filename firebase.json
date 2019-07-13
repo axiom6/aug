@@ -1,8 +1,7 @@
 {
-  "hosting": {
-    "public": "pub",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
-  },
+  "hosting": [
+    { "target":"augm", "public":"pub/app/augm" },
+    { "target":"muse", "public":"pub/app/muse" } ],
   "database": {
     "rules":   "pub/base/rules/database.rules.json" },
   "firestore": {

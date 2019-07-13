@@ -51,13 +51,11 @@ Main = (function() {
 
   };
 
-  Data.localF = "http://localhost:5000/app/data/";
+  Data.local = "../data/";
 
-  Data.local = "app/data/"; // http://localhost:63342/aug/pub/
+  Data.hosted = "https://augm-d4b3c.firebaseapp.com/app/data/";
 
-  Data.hosted = "https://ui-48413.firebaseapp.com/";
-
-  Main.FontUrl = "css/font/three/helvetiker_regular.typeface.json";
+  Main.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json";
 
   Main.Batch = {
     Cols: {

@@ -112,6 +112,7 @@ Data = class Data {
   static batchJSON(obj, batch, callback, refine = null) {
     var opt, url;
     url = obj.type === 'Font' ? obj.url : Data.toUrl(obj.url);
+    console.log('Data.batchJSON', obj.url, url);
     opt = {
       mode: 'no-cors',
       headers: {
@@ -136,7 +137,7 @@ Data = class Data {
   static asyncJSON(urla, callback) {
     var url;
     url = Data.toUrl(urla);
-    // console.log( 'Data.asyncJSON', urla, url )
+    console.log('Data.asyncJSON', urla, url);
     fetch(url).then((response) => {
       return response.json();
     }).then((data) => {

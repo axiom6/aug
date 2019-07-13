@@ -80,8 +80,8 @@ export default MathND;
       "r7c1 r7c2 r7c3" "r8c1 r8c2 r8c3" "r9c1 r9c2 r9c3"; }
   
   .c( @rc ) { display:grid; grid-area:@rc; justify-self:stretch; align-self:stretch;
-    justify-items:center; align-items:center; background-color:@theme-back; color:@theme-color; border:solid thin
-  wheat; }
+    justify-items:center; align-items:center; background-color:@theme-back; color:@theme-color;
+    border:solid thin @theme-color; }
   
   .comp { background-color:@theme-back; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:2.5em;
     .grid9x3(); justify-items:center; align-items:center;

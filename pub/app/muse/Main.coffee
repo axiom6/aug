@@ -6,10 +6,9 @@ import Vis     from '../../base/util/Vis.js'
 
 class Main
 
-  Data.localF  = "http://localhost:5000/app/data/"
-  Data.local   = "app/data/"   # http://localhost:63342/aug/pub/
-  Data.hosted  = "https://ui-48413.firebaseapp.com/"
-  Main.FontUrl = "css/font/three/helvetiker_regular.typeface.json"
+  Data.local   = "../data/"
+  Data.hosted  = "https://augm-d4b3c.firebaseapp.com/app/data/"
+  Main.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json"
 
   Main.Batch = {
     Cols: { url:'muse/Cols.json', data:null, type:'Pack', plane:'Cols' }

@@ -7,9 +7,9 @@ import Vis    from '../../base/util/Vis.js'
 
 class Main
 
-  Data.local   = "app/data/"
+  Data.local   = "../data/"
   Data.hosted  = "https://augm-d4b3c.firebaseapp.com/app/data/"
-  Main.FontUrl = "css/font/three/helvetiker_regular.typeface.json"
+  Main.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json"
 
   Main.Batch = {
     Math: { url:'augm/Math.json', data:null, type:'Pack', plane:'Math' }

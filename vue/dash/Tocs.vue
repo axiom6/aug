@@ -87,11 +87,11 @@
          i  { margin-right: 0.4em; }
          a  { color:@theme-color; text-decoration:none; }
          ul { font-size:0.8em; font-weight:bold; padding:0; margin:0;
-           li { border-radius:0 12px 12px 0; color:black; margin:0.2em 0.2em 0.2em 0.2em;            // Prac
+           li { border-radius:0 12px 12px 0; color:@theme-back; margin:0.2em 0.2em 0.2em 0.2em;            // Prac
              i { margin-right: 0.3em; }
              a { color:@theme-high; }
              ul { font-size:0.8em; padding:0; margin:0 0 0 0.2em;
-               li { border-radius:0 12px 12px 0; color:black; margin:0.2em 0.2em 0.2em 0.2em;       // Disp
+               li { border-radius:0 12px 12px 0; color:@theme-back; margin:0.2em 0.2em 0.2em 0.2em;       // Disp
                  i { margin-right: 0.25em; } }
                li:hover { background-color:@theme-back!important; color:@theme-color-tocs-disp!important; } } } } } } }
 </style>

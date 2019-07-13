@@ -1065,6 +1065,14 @@
 		"oAP": "/pub/app/augm/Home.js",
 		"oF": 0
 		},
+	"/pub/app/augm/index.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/app/augm/index.html",
+		"oF": 0
+		},
 	"/pub/app/augm/Main.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -1086,6 +1094,14 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"/pub/app/augm/manifest.webmanifest": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/app/augm/manifest.webmanifest",
+		"oF": 0
 		},
 	"/pub/app/augm/Router.js": {
 		"bF": 0,
@@ -1315,6 +1331,14 @@
 		"oAP": "/pub/app/muse/Home.js",
 		"oF": 0
 		},
+	"/pub/app/muse/index.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/app/muse/index.html",
+		"oF": 0
+		},
 	"/pub/app/muse/Main.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -1336,6 +1360,14 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"/pub/app/muse/manifest.webmanifest": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/app/muse/manifest.webmanifest",
+		"oF": 0
 		},
 	"/pub/app/muse/Muse.js": {
 		"bF": 0,
@@ -4400,7 +4432,7 @@
 		"oAP": "/pub/vue/dash/View.js",
 		"oF": 0
 		},
-	"/vue/data/Data.roll.js": {
+	"/vue/Data/Data.roll.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
@@ -4776,7 +4808,7 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/vue/wood/Wood.scss": {
+	"/vue/wood/wood.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -8782,23 +8814,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.js",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "vue",
-			"autoOutputPathReplace2": "pub/vue",
-			"autoOutputPathStyle": 3,
-			"fileExtension": "vue",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.html",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "",
 			"autoOutputPathReplace2": "",
 			"autoOutputPathStyle": 0,
 			"fileExtension": "html",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.js",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "vue",
+			"autoOutputPathReplace2": "pub/vue",
+			"autoOutputPathStyle": 3,
+			"fileExtension": "vue",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

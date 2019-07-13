@@ -116,7 +116,7 @@
   .conn { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;
           background-color:@theme-back; color:@theme-color;
     .grid4x3(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid
-    .tabs{ grid-area:tabs; display:inline; color:wheat; font-size:1.2em;
+    .tabs{ grid-area:tabs; display:inline; color:@theme-color; font-size:1.2em;
       justify-self:start; align-self:center; text-align:left; }
     .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }
     .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }

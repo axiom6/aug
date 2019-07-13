@@ -123,7 +123,7 @@
   .comp { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;
           background-color:@theme-back; color:@theme-color;
     .grid5x4(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid
-      .tabs{ grid-area:tabs; display:inline; color:wheat; font-size:1.2em;
+      .tabs{ grid-area:tabs; display:inline; color:@theme-color; font-size:1.2em;
              justify-self:start; align-self:center; text-align:left; }
       .cm { .pdir(cm); } .em   { .pdir(em);   } .in    { .pdir(in); }    .en   { .pdir(en);   }
       .le { .pdir(le); } .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }
@@ -185,7 +185,7 @@
   
     .row { background-color:#603; border-radius:36px; margin-left:10%; width:80%; height:80%; font-size:1em;
       font-weight:bold; display:grid;
-      div { text-align:center; justify-self:center;  align-self:center; font-size:1.8em; color:wheat; }
+      div { text-align:center; justify-self:center;  align-self:center; font-size:1.8em; color:@theme-color; }
       i { margin-bottom: 0.2em; display:block; } }
     
     
