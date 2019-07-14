@@ -1,5 +1,6 @@
 {
   "hosting": [
+    { "target":"main", "public":"pub"          },
     { "target":"augm", "public":"pub/app/augm" },
     { "target":"muse", "public":"pub/app/muse" } ],
   "database": {

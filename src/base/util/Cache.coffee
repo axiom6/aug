@@ -3,7 +3,6 @@
 class Cache
 
   constructor:( @stream ) ->
-    console.trace()
     @subject       = 'Cache'
     @subscribe()
     @onlineEvent()

@@ -101,16 +101,16 @@
   
   @import '../dash/theme.less';
   
-  .grid3x3() { display:grid; grid-template-columns:33% 33% 34%; grid-template-rows:33% 33% 34%;
+  .grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;
                grid-template-areas: "nw north ne" "west cen east" "sw south se"; }
   
-  .grid4x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:13% 29% 29% 29%;
+  .grid4x4() { display:grid; grid-template-columns:7fr 31fr 31fr 31fr; grid-template-rows:13vh 29fr 29fr 29fr;
     grid-template-areas: "cm em in en" "le nw north ne" "do west cen east" "sh sw south se"; }
 
-  .grid5x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:7% 12% 27% 27% 27%;
+  .grid5x4() { display:grid; grid-template-columns:7fr 31fr 31fr 31fr; grid-template-rows:7fr 12fr 27fr 27fr 27fr;
     grid-template-areas: "tabs tabs tabs tabs" "cm em in en" "le nw north ne" "do west cen east" "sh sw south se"; }
 
-  .grid1x3() { display:grid; grid-template-columns:6% 22% 72%; grid-template-areas: "icon name desc"; }
+  .grid1x3() { display:grid; grid-template-columns:6fr 22fr 72fr; grid-template-areas: "icon name desc"; }
   
   .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;
                   justify-items:center; align-items:center; }
@@ -121,7 +121,7 @@
     { background-color:@bg; } // top | right | bottom | left
   
   .comp { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;
-          background-color:@theme-back; color:@theme-color;
+          background-color:@theme-back; color:@theme-color-prac;
     .grid5x4(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid
       .tabs{ grid-area:tabs; display:inline; color:@theme-color; font-size:1.2em;
              justify-self:start; align-self:center; text-align:left; }

@@ -999,205 +999,210 @@ var Util$1 = Util;
 var Data,
   hasProp$1 = {}.hasOwnProperty;
 
-Data = class Data {
-  // Util.noop( Data.hosted, Data.planeData, Data.refine, Data.asyncJSON )
-  static refine(data, type) {
-    var akey, area, base, bkey, ckey, comp, disp, dkey, ikey, item, pkey, prac;
-    if (type === 'None') {
-      return data;
-    }
-    data.comps = {};
-    for (ckey in data) {
-      comp = data[ckey];
-      if (!(Util$1.isChild(ckey))) {
-        continue;
+Data = (function() {
+  class Data {
+    // Util.noop( Data.hosted, Data.planeData, Data.refine, Data.asyncJSON )
+    static refine(data, type) {
+      var akey, area, base, bkey, ckey, comp, disp, dkey, ikey, item, pkey, prac;
+      if (type === 'None') {
+        return data;
       }
-      // console.log( 'Data.refine comp', comp )
-      data.comps[ckey] = comp;
-      if (comp['name'] == null) {
-        comp['name'] = ckey;
-      }
-      comp.pracs = {};
-      for (pkey in comp) {
-        prac = comp[pkey];
-        if (!(Util$1.isChild(pkey))) {
+      data.comps = {};
+      for (ckey in data) {
+        comp = data[ckey];
+        if (!(Util$1.isChild(ckey))) {
           continue;
         }
-        // console.log( '  Data.refine prac', prac )
-        comp.pracs[pkey] = prac;
-        prac.comp = comp;
-        if (prac['name'] == null) {
-          prac['name'] = pkey;
+        // console.log( 'Data.refine comp', comp )
+        data.comps[ckey] = comp;
+        if (comp['name'] == null) {
+          comp['name'] = ckey;
         }
-        prac.disps = {};
-        for (dkey in prac) {
-          disp = prac[dkey];
-          if (!(Util$1.isChild(dkey))) {
+        comp.pracs = {};
+        for (pkey in comp) {
+          prac = comp[pkey];
+          if (!(Util$1.isChild(pkey))) {
             continue;
           }
-          prac.disps[dkey] = disp;
-          disp.prac = prac;
-          if (disp['name'] == null) {
-            disp['name'] = dkey;
+          // console.log( '  Data.refine prac', prac )
+          comp.pracs[pkey] = prac;
+          prac.comp = comp;
+          if (prac['name'] == null) {
+            prac['name'] = pkey;
           }
-          disp.areas = {};
-          for (akey in disp) {
-            area = disp[akey];
-            if (!(Util$1.isChild(akey))) {
+          prac.disps = {};
+          for (dkey in prac) {
+            disp = prac[dkey];
+            if (!(Util$1.isChild(dkey))) {
               continue;
             }
-            disp.areas[akey] = area;
-            area.disp = disp;
-            if (area['name'] == null) {
-              area['name'] = akey;
+            prac.disps[dkey] = disp;
+            disp.prac = prac;
+            if (disp['name'] == null) {
+              disp['name'] = dkey;
             }
-            area.items = {};
-            for (ikey in area) {
-              item = area[ikey];
-              if (!(Util$1.isChild(ikey))) {
+            disp.areas = {};
+            for (akey in disp) {
+              area = disp[akey];
+              if (!(Util$1.isChild(akey))) {
                 continue;
               }
-              area.items[ikey] = item;
-              item.area = area;
-              if (item['name'] == null) {
-                item['name'] = ikey;
+              disp.areas[akey] = area;
+              area.disp = disp;
+              if (area['name'] == null) {
+                area['name'] = akey;
               }
-              item.bases = {};
-              for (bkey in item) {
-                base = item[bkey];
-                if (!(Util$1.isChild(bkey))) {
+              area.items = {};
+              for (ikey in area) {
+                item = area[ikey];
+                if (!(Util$1.isChild(ikey))) {
                   continue;
                 }
-                item.bases[bkey] = base;
-                base.item = item;
-                if (base['name'] == null) {
-                  base['name'] = bkey;
+                area.items[ikey] = item;
+                item.area = area;
+                if (item['name'] == null) {
+                  item['name'] = ikey;
+                }
+                item.bases = {};
+                for (bkey in item) {
+                  base = item[bkey];
+                  if (!(Util$1.isChild(bkey))) {
+                    continue;
+                  }
+                  item.bases[bkey] = base;
+                  base.item = item;
+                  if (base['name'] == null) {
+                    base['name'] = bkey;
+                  }
                 }
               }
             }
           }
         }
       }
+      return data;
     }
-    return data;
-  }
 
-  // ---- Read JSON with batch async
-  static batchRead(batch, callback, create = null) {
-    var key, obj;
-    for (key in batch) {
-      if (!hasProp$1.call(batch, key)) continue;
-      obj = batch[key];
-      this.batchJSON(obj, batch, callback, create);
-    }
-  }
-
-  static batchComplete(batch) {
-    var key, obj;
-    for (key in batch) {
-      if (!hasProp$1.call(batch, key)) continue;
-      obj = batch[key];
-      if (!obj['data']) {
-        return false;
+    // ---- Read JSON with batch async
+    static batchRead(batch, callback, create = null) {
+      var key, obj;
+      for (key in batch) {
+        if (!hasProp$1.call(batch, key)) continue;
+        obj = batch[key];
+        this.batchJSON(obj, batch, callback, create);
       }
     }
-    return true;
-  }
 
-  // "Access-Control-Request-Headers": "*", "Access-Control-Request-Method": "*"
-  static batchJSON(obj, batch, callback, refine = null) {
-    var opt, url;
-    url = obj.type === 'Font' ? obj.url : Data.toUrl(obj.url);
-    opt = {
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'application/json'
+    static batchComplete(batch) {
+      var key, obj;
+      for (key in batch) {
+        if (!hasProp$1.call(batch, key)) continue;
+        obj = batch[key];
+        if (!obj['data']) {
+          return false;
+        }
       }
-    };
-    fetch(url, opt).then((response) => {
-      return response.json();
-    }).then((data) => {
-      obj['data'] = Util$1.isFunc(refine) ? refine(data, obj.type) : data;
-      if (Data.batchComplete(batch)) {
-        return callback(batch);
-      }
-    }).catch((error) => {
-      return console.error("Data.batchJSON()", {
-        url: url,
-        error: error
+      return true;
+    }
+
+    // "Access-Control-Request-Headers": "*", "Access-Control-Request-Method": "*"
+    static batchJSON(obj, batch, callback, refine = null) {
+      var opt, url;
+      url = obj.type === 'Font' ? obj.url : Data.toUrl(obj.url);
+      // console.log( 'Data.batchJSON', obj.url, url )
+      opt = {
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      fetch(url, opt).then((response) => {
+        return response.json();
+      }).then((data) => {
+        obj['data'] = Util$1.isFunc(refine) ? refine(data, obj.type) : data;
+        if (Data.batchComplete(batch)) {
+          return callback(batch);
+        }
+      }).catch((error) => {
+        return console.error("Data.batchJSON()", {
+          url: url,
+          error: error
+        });
       });
-    });
-  }
+    }
 
-  static asyncJSON(urla, callback) {
-    var url;
-    url = Data.toUrl(urla);
-    // console.log( 'Data.asyncJSON', urla, url )
-    fetch(url).then((response) => {
-      return response.json();
-    }).then((data) => {
-      return callback(data);
-    }).catch((error) => {
-      return console.error("Data.asyncJSON()", {
-        url: url,
-        error: error
+    static asyncJSON(urla, callback) {
+      var url;
+      url = Data.toUrl(urla);
+      // console.log( 'Data.asyncJSON', urla, url )
+      fetch(url).then((response) => {
+        return response.json();
+      }).then((data) => {
+        return callback(data);
+      }).catch((error) => {
+        return console.error("Data.asyncJSON()", {
+          url: url,
+          error: error
+        });
       });
-    });
-  }
-
-  static planeData(batch, plane) {
-    return batch[plane].data[plane];
-  }
-
-  static toUrl(url) {
-    if (window.location.href.includes('localhost')) {
-      return Data.local + url;
-    } else {
-      return Data.hosted + url;
     }
-  }
 
-  
-  // ------ Quick JSON read ------
-  static read(url, callback) {
-    if (Util$1.isObj(url)) {
-      Data.readFile(url, callback);
-    } else {
-      Data.asynsJson(url, callback);
+    static planeData(batch, plane) {
+      return batch[plane].data[plane];
     }
+
+    static toUrl(url) {
+      if (window.location.href.includes('localhost')) {
+        return Data.local + url;
+      } else {
+        return Data.hosted + url;
+      }
+    }
+
+    
+    // ------ Quick JSON read ------
+    static read(url, callback) {
+      if (Util$1.isObj(url)) {
+        Data.readFile(url, callback);
+      } else {
+        Data.asynsJson(url, callback);
+      }
+    }
+
+    static readFile(fileObj, doJson) {
+      var fileReader;
+      fileReader = new FileReader();
+      fileReader.onerror = function(e) {
+        return console.error('Store.readFile', fileObj.name, e.target.error);
+      };
+      fileReader.onload = function(e) {
+        return doJson(JSON.parse(e.target.result));
+      };
+      fileReader.readAsText(fileObj);
+    }
+
+    static saveFile(data, fileName) {
+      var downloadLink, htmlBlob, htmlUrl;
+      htmlBlob = new Blob([data], {
+        type: "text/html;charset=utf-8"
+      });
+      htmlUrl = window['URL'].createObjectURL(htmlBlob);
+      downloadLink = document.createElement("a");
+      downloadLink.href = htmlUrl;
+      downloadLink.download = fileName;
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    }
+
   }
+  Data.local = "../data/";
 
-  static readFile(fileObj, doJson) {
-    var fileReader;
-    fileReader = new FileReader();
-    fileReader.onerror = function(e) {
-      return console.error('Store.readFile', fileObj.name, e.target.error);
-    };
-    fileReader.onload = function(e) {
-      return doJson(JSON.parse(e.target.result));
-    };
-    fileReader.readAsText(fileObj);
-  }
+  Data.hosted = "https://main-4a9c7.firebaseapp.com/app/data/";
 
-  static saveFile(data, fileName) {
-    var downloadLink, htmlBlob, htmlUrl;
-    htmlBlob = new Blob([data], {
-      type: "text/html;charset=utf-8"
-    });
-    htmlUrl = window['URL'].createObjectURL(htmlBlob);
-    downloadLink = document.createElement("a");
-    downloadLink.href = htmlUrl;
-    downloadLink.download = fileName;
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-  }
+  return Data;
 
-};
-
-Data.local = "app/data/";
-
-Data.hosted = "https://augm-d4b3c.firebaseapp.com/augm/app/data/";
+}).call(undefined);
 
 var Data$1 = Data;
 

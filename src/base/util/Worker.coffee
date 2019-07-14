@@ -9,6 +9,11 @@ syncUrl      = '/app/data/store/Sync.json'
 offlineUrl   = '/augm.html'
 
 cacheObjs =  {
+  Main: { name: 'Main', status: 0, url: '/index.html' },
+  Augm: { name: 'Augm', status: 0, url: '/app/augm/index.html' },
+  Muse: { name: 'Muse', status: 0, url: '/app/muse/index.html' } }
+
+cacheObjs2 =  {
   Html:     { name:'Html',      status:0, url:'/augm.html' }
   Index:    { name:'Index',     status:0, url:'/index.html' }
   Augm:     { name:'Augm',      status:0, url:'/app/augm/Augm.js' }

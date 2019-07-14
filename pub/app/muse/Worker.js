@@ -1,4 +1,4 @@
-var cacheName, cacheObjs, cacheObjs2, cacheSync, cacheUrlNotNeeded, offlinePage, offlineUrl, onActivate, onFetch, onGet, onInstall, onInstall1, onPush, onSync, oncatch, publish, pushTag, pushUrl, syncTag, syncUrl, toCacheUrls, urls,
+let cacheName, cacheObjs, cacheObjs2, cacheSync, cacheUrlNotNeeded, offlinePage, offlineUrl, onActivate, onFetch, onGet, onInstall, onInstall1, onPush, onSync, oncatch, publish, pushTag, pushUrl, syncTag, syncUrl, toCacheUrls, urls,
   hasProp = {}.hasOwnProperty;
 
 cacheName = 'Augm';
@@ -18,22 +18,9 @@ syncUrl = '/app/data/store/Sync.json';
 offlineUrl = '/augm.html';
 
 cacheObjs = {
-  Main: {
-    name: 'Main',
-    status: 0,
-    url: '/index.html'
-  },
-  Augm: {
-    name: 'Augm',
-    status: 0,
-    url: '/app/augm/index.html'
-  },
-  Muse: {
-    name: 'Muse',
-    status: 0,
-    url: '/app/muse/index.html'
-  }
-};
+  Main: { name: 'Main', status: 0, url: '/index.html' },
+  Augm: { name: 'Augm', status: 0, url: '/app/augm/index.html' },
+  Muse: { name: 'Muse', status: 0, url: '/app/muse/index.html' } };
 
 cacheObjs2 = {
   Html: {
@@ -89,7 +76,7 @@ cacheObjs2 = {
 };
 
 toCacheUrls = function(objs) {
-  var key, obj, urls;
+  let key, obj, urls;
   urls = [];
   for (key in objs) {
     if (!hasProp.call(objs, key)) continue;
@@ -115,7 +102,7 @@ oncatch = (status, text, error) => {
 
 onInstall = (event) => {
   event.waitUntil(caches.open(cacheName).then((cache) => {
-    var key, obj, prefix;
+    let key, obj, prefix;
     publish('Install', '------ Open ------');
     prefix = '/aug/pub';
     for (key in cacheObjs) {
@@ -185,9 +172,9 @@ onGet = (event) => {
   }
   console.log('Worker.onGet()', event.request);
   event.respondWith(caches.match(event.request).then((cached) => {
-    var networked;
+    let networked;
     networked = fetch(event.request).then((response) => {
-      var cacheCopy;
+      let cacheCopy;
       cacheCopy = response.clone();
       caches.open(cacheName).then((cache) => {
         cache.put(event.request, cacheCopy);
@@ -210,7 +197,7 @@ onPush = (event) => {
   }
   event.waitUntil(caches.open(cacheName)).then((cache) => {
     return fetch(pushUrl).then((response) => {
-      var json;
+      let json;
       cache.put(pushUrl, response.clone());
       json = response.json();
       publish('Push', pushTag, json);

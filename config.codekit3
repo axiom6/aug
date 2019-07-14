@@ -17,6 +17,22 @@
 		"oAP": "/.firebase/hosting.cHVi.cache",
 		"oF": 0
 		},
+	"/.firebase/hosting.cHViL2FwcC9hdWdt.cache": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/.firebase/hosting.cHViL2FwcC9hdWdt.cache",
+		"oF": 0
+		},
+	"/.firebase/hosting.cHViL2FwcC9tdXNl.cache": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/.firebase/hosting.cHViL2FwcC9tdXNl.cache",
+		"oF": 0
+		},
 	"/.firebaserc": {
 		"cB": 0,
 		"ft": 8192,
@@ -1136,6 +1152,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/app/augm/Worker.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/app/augm/Worker-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/app/data/augm/Data.json": {
 		"ft": 524288,
 		"oA": 1,
@@ -1402,13 +1429,16 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/augm.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
+	"/pub/app/muse/Worker.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/augm.html",
-		"oF": 0
+		"oAP": "/pub/app/muse/Worker-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
 		},
 	"/pub/base/d3d/Axes.js": {
 		"bF": 0,
@@ -3236,22 +3266,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/muse.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/muse.html",
-		"oF": 0
-		},
-	"/pub/Prac.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/Prac.html",
-		"oF": 0
-		},
 	"/pub/robots.txt": {
 		"cB": 0,
 		"ft": 8192,
@@ -4302,33 +4316,6 @@
 		"oA": 1,
 		"oAP": "/pub/vue/dash/Foot.js",
 		"oF": 0
-		},
-	"/vue/dash/init-awesome.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "/vue/dash/init-awesome-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"/vue/dash/init-awesome.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 0,
-		"mS": 0,
-		"oA": 0,
-		"oAP": "/vue/dash/init-awesome.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
 		},
 	"/vue/dash/logo.png": {
 		"ft": 32768,

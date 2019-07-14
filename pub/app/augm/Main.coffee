@@ -2,13 +2,13 @@
 import Data   from '../../base/util/Data.js'
 import Stream from '../../base/util/Stream.js'
 import Vis    from '../../base/util/Vis.js'
-#mport Cache  from '../../base/util/Cache.js'
+import Cache  from '../../base/util/Cache.js'
 #mport Test   from './Test.js'
 
 class Main
 
   Data.local   = "../data/"
-  Data.hosted  = "https://augm-d4b3c.firebaseapp.com/app/data/"
+  Data.hosted  = "https://main-4a9c7.firebaseapp.com/app/data/"
   Main.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json"
 
   Main.Batch = {
@@ -35,7 +35,7 @@ class Main
     subjects     = ["Draw","Note","Navb","Tabs","Geom","Data","Cache"]
     streamLog    = { subscribe:false, publish:false, subjects:subjects}
     Main.stream  = new Stream( subjects, streamLog )
-    #ain.cache   = new Cache( Main.stream )
+    Main.cache   = new Cache( Main.stream )
     Main.onReady()
     # new Test()
     return

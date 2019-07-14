@@ -1,6 +1,21 @@
 {
   "projects": {
-    "dev":     "augm-d4b3c",
+    "dev": "augm-d4b3c",
     "default": "augm-d4b3c"
+  },
+  "targets": {
+    "augm-d4b3c": {
+      "hosting": {
+        "muse": [
+          "muse-b90e1"
+        ],
+        "augm": [
+          "augm-d4b3c"
+        ],
+        "main": [
+          "main-4a9c7"
+        ]
+      }
+    }
   }
 }

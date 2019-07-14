@@ -58,7 +58,7 @@ class Data
 
   @batchJSON:( obj, batch, callback, refine=null ) ->
     url = if obj.type is 'Font' then obj.url else Data.toUrl(obj.url)
-    console.log( 'Data.batchJSON', obj.url, url )
+    # console.log( 'Data.batchJSON', obj.url, url )
     opt = { mode:'no-cors', headers:{ 'Content-Type':'application/json' } }
     fetch( url, opt )
       .then( (response) =>
@@ -72,7 +72,7 @@ class Data
 
   @asyncJSON:( urla, callback ) ->
     url = Data.toUrl(urla)
-    console.log( 'Data.asyncJSON', urla, url )
+    # console.log( 'Data.asyncJSON', urla, url )
     fetch( url )
       .then( (response) =>
         response.json() )
@@ -115,7 +115,7 @@ class Data
     document.body.removeChild(downloadLink)
     return
 
-Data.local   = "app/data/"
-Data.hosted  = "https://augm-d4b3c.firebaseapp.com/augm/app/data/"
+  Data.local   = "../data/"
+  Data.hosted  = "https://main-4a9c7.firebaseapp.com/app/data/"
 
 export default Data

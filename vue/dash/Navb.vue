@@ -3,8 +3,9 @@
   <div class="navb">    <!-- <i class="fas fa-home"></i> -->
     <div class="navh"><router-link :to="{ name:'Home'}"><i class="fas fa-home"></i>Home</router-link></div>
     <div class="search"   @click="click('Search')">
+      <label for="search">Search</label>
       <i class="fas fa-search"></i>
-      <label for="search"><input class="input" placeholder=" Search" id="search" type="text" size="16"></label>
+      <input class="input" placeholder=" Search" id="search" type="text" size="16">
     </div>
     <div class="contact"  @click="click('Contact')" ><i class="fas fa-user"       ></i>Contact</div>
     <div class="signon"   @click="click('Signon')"  ><i class="fas fa-sign-in-alt"></i>Sign On</div>
@@ -45,8 +46,9 @@
     .navh     { grid-area:ghome;     justify-self:start; align-self:center;
       i { margin-right:0.3em; }
       a { color:@theme-color; text-decoration:none; }}
-    .search   { grid-area:gsearch;   justify-self:start; align-self:center; // font-family:FontAwesome, sans-serif;
-      label .input{ font-family:@theme-font-family; font-weight:bold;  font-size:0.9em;
+    .search   { grid-area:gsearch;   justify-self:start; align-self:center;
+      label { color:@theme-back; }
+      .input{ font-family:@theme-font-family; font-weight:bold;  font-size:0.9em;
         border-radius:0 12px 12px 0; background:@theme-color; color:@theme-back; } }
     .contact  { grid-area:gcontact;  justify-self:start; align-self:center; }
     .signon   { grid-area:gsignon;   justify-self:start; align-self:center; }

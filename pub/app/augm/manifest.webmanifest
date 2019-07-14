@@ -1,7 +1,7 @@
 {
   "name":             "Augment",
   "short_name":       "Augm",
-  "start_url":        "/index.html",
+  "start_url":        "/app/augm/index.html",
   "display":          "standalone",
   "theme_color":      "#888888",
   "background_color": "#000000",

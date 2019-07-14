@@ -6,7 +6,6 @@ Cache = class Cache {
     this.quotaGranted = this.quotaGranted.bind(this);
     this.onlineEvent = this.onlineEvent.bind(this);
     this.stream = stream;
-    console.trace();
     this.subject = 'Cache';
     this.subscribe();
     this.onlineEvent();

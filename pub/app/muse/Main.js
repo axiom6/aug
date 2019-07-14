@@ -7,8 +7,9 @@ import Stream from '../../base/util/Stream.js';
 
 import Vis from '../../base/util/Vis.js';
 
+import Cache from '../../base/util/Cache.js';
+
 Main = (function() {
-  //mport Cache   from '../../base/util/Cache.js'
   class Main {
     static begin(onReady) {
       Main.onReady = onReady;
@@ -25,7 +26,7 @@ Main = (function() {
         subjects: subjects
       };
       Main.stream = new Stream(subjects, infoSpec);
-      //ain.cache  = new Cache( Main.stream )
+      Main.cache = new Cache(Main.stream);
       Main.mergePracsCols();
       Main.onReady();
     }
@@ -53,7 +54,7 @@ Main = (function() {
 
   Data.local = "../data/";
 
-  Data.hosted = "https://augm-d4b3c.firebaseapp.com/app/data/";
+  Data.hosted = "https://main-4a9c7.firebaseapp.com/app/data/";
 
   Main.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json";
 
