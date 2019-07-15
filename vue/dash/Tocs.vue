@@ -78,7 +78,7 @@
 
 <style lang="less">
   
-  @import 'theme.less';
+  @import '../../pub/css/themes/theme.less';
   
   .tocs { font-size:3vh; font-family:@theme-font-family;
     ul { padding:0; margin:0; list-style:none; align-self:start; display:grid;

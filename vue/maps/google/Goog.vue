@@ -8,6 +8,6 @@
 </script>
 
 <style lang="less">
-  @import '../../dash/theme.less';
+  @import '../../../pub/css/themes/theme.less';
   .goog { background-color:@theme-back; }
 </style>

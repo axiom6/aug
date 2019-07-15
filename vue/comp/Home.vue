@@ -41,7 +41,7 @@
 
 <style lang="less">
   
-  @import '../dash/theme.less';
+  @import '../../pub/css/themes/theme.less';
   
   .grid3x1() { display:grid; grid-template-columns:100%; grid-template-rows:10% 80% 10%;
       grid-template-areas:"head" "elem" "foot"; }

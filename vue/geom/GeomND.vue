@@ -46,7 +46,7 @@
 
 <style lang="less">
   
-  @import '../dash/theme.less';
+  @import '../../pub/css/themes/theme.less';
   
   .page { position:absolute; left:0; top:5%; right:0; bottom:0; background-color:@theme-back; display:grid; }
 

@@ -44,7 +44,7 @@
 
 <style lang="less">
   
-  @import '../dash/theme.less';
+  @import '../../pub/css/themes/theme.less';
   
   .table { background-color:@theme-back; justify-self:center; align-self:center; font-size:1em;
      table-layout: fixed; border-collapse: collapse; border:1px solid @theme-border-color; }

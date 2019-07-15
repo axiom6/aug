@@ -6,8 +6,8 @@ import Cache   from '../../base/util/Cache.js'
 
 class Main
 
-  Data.local   = "app/data/"
-  Data.hosted  = "https://muse-b90e1.firebaseapp.com/app/data/"
+  #ata.local   = "app/data/"
+  #ata.hosted  = "https://muse-b90e1.firebaseapp.com/app/data/"
   Main.FontUrl = "css/font/three/helvetiker_regular.typeface.json"
 
   Main.Batch = {

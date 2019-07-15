@@ -17,6 +17,8 @@
 </template>
 
 <script type="module">
+  
+  import Data from '../../pub/base/util/Data.js'
 
   export default {
 
@@ -50,7 +52,7 @@
       titleRef: function (btn) {
         return 'Title' + btn.key },
       img: function (btn) {
-        return 'css/' + btn.img }, // return '../../css/' + btn.img },
+        return Data.cssDir + btn.img },
       adjustWidths: function() {
          let keys = Object.keys(this.btns)
          for( let key of keys ) {
@@ -75,7 +77,7 @@
 
 <style lang="less">
   
-  @import '../dash/theme.less';
+  @import '../../pub/css/themes/theme.less';
   
   .btns { font-size:3vh; position:absolute; left:0; top:0; right:0; bottom:0; }
   

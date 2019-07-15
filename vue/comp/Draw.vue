@@ -65,7 +65,7 @@
 
 <style lang="less">
   
-  @import '../dash/theme.less';
+  @import '../../pub/css/themes/theme.less';
   
   .draw {   position:relative; left:0; top:0;  right:0; bottom:0; display:grid;
             background-color:@theme-back; font-family:@theme-font-family;

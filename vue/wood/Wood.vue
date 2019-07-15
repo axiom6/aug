@@ -19,7 +19,7 @@
 
 <style lang="less">
   
-  @import '../dash/theme.less';
+  @import '../../pub/css/themes/theme.less';
   
 .wood {
   position:relative; width: 100%; height: 100%; min-height: 700px; overflow:hidden; background-color: #041e2b;

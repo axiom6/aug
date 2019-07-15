@@ -36,7 +36,7 @@
 
 <style lang="less">
   
-  @import 'theme.less';
+  @import '../../pub/css/themes/theme.less';
   
   .grid1x5() { display:grid; grid-template-columns:5% 40% 25% 10% 10% 10%; grid-template-rows:@theme-north;
     grid-template-areas: "gleft ghome gsearch gcontact gsettings gsignon"; }

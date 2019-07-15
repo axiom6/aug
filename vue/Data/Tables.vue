@@ -58,7 +58,7 @@
 
 <style lang="less">
   
-  @import '../dash/theme.less';
+  @import '../../pub/css/themes/theme.less';
   
   .page { position:absolute; left:0; top:5%; right:0; bottom:0; background-color:@theme-back; display:grid;
     h1    { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:3em; } }

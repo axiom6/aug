@@ -32,7 +32,7 @@
 </script>
 
 <style lang="less">
-  @import '../dash/theme.less';
+  @import '../../pub/css/themes/theme.less';
   .ikws { position:relative; left:0; top:0; right:0; bottom:0; background-color:@theme-back; display:grid;
     h1    { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:3em; } }
 </style>

@@ -9,13 +9,11 @@ syncUrl      = '/app/data/store/Sync.json'
 offlineUrl   = '/augm.html'
 
 cacheObjs =  {
-  Main: { name: 'Main', status: 0, url: '/index.html' },
-  Augm: { name: 'Augm', status: 0, url: '/app/augm/index.html' },
-  Muse: { name: 'Muse', status: 0, url: '/app/muse/index.html' } }
+  Main: { name: 'Main', status: 0, url: '/main.html' },
+  Augm: { name: 'Augm', status: 0, url: '/augm.html' },
+  Muse: { name: 'Muse', status: 0, url: '/muse.html' } }
 
 cacheObjs2 =  {
-  Html:     { name:'Html',      status:0, url:'/augm.html' }
-  Index:    { name:'Index',     status:0, url:'/index.html' }
   Augm:     { name:'Augm',      status:0, url:'/app/augm/Augm.js' }
   Vue:      { name:'Vue',       status:0, url:'/lib/vue/vue.esm.browser.js' }
   Main:     { name:'Main',      status:0, url:'/app/augm/Main.js'   }
@@ -48,9 +46,9 @@ onInstall = ( event ) =>
     caches.open( cacheName )
       .then( (cache) =>
         publish( 'Install', '------ Open ------' )
-        prefix = '/aug/pub'
+        #prefix = '/aug/pub'
         for own key, obj of cacheObjs
-          fetch(prefix+obj.url )
+          fetch( obj.url ) # prefix+
             .then( (response) =>
               obj.status = response.status
               publish( 'Install', response.status+':'+response.url )
@@ -91,6 +89,7 @@ onActivate = ( event ) =>
 
 onFetch = (event) =>
   # publish( 'Fetch URL ', event.request.url )
+  # opt = { headers:{ 'Cache-Control': 'public, max-age=604800' } }
   event.respondWith(
     caches.open( cacheName )
       .then( (cache) =>

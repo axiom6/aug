@@ -1,6 +1,15 @@
 Configure your server to return the Cache-Control HTTP response header.
   Cache-Control: max-age=31557600
 
+
+One minute: max-age=60
+One hour: max-age=3600
+One day: max-age=86400
+One week: max-age=604800
+One month: max-age=2628000
+One year: max-age=31536000
+
+
 Ensure text remains visible during webfont load
   Leverage the font-display CSS feature to ensure text is user-visible while webfonts are loading. Learn more.
 

@@ -2,10 +2,7 @@
 
 import Util from './Util.js'
 
-
 class Data
-
-  # Util.noop( Data.hosted, Data.planeData, Data.refine, Data.asyncJSON )
 
   @refine:( data, type ) ->
     return  data if type is 'None'
@@ -115,7 +112,10 @@ class Data
     document.body.removeChild(downloadLink)
     return
 
-  Data.local   = "app/data/"
-  Data.hosted  = "https://main-4a9c7.firebaseapp.com/app/data/"
+Data.local  = "app/data/"
+Data.parse  = Util.parseURI( window.location.href )
+Data.hosted = Data.parse.hostname + '/app/data/'
+Data.cssDir = 'css/'  # /css in /pub
+console.log('Data.hosted', Data.hosted, window.location.href )
 
 export default Data

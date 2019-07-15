@@ -999,210 +999,207 @@ var Util$1 = Util;
 var Data,
   hasProp$1 = {}.hasOwnProperty;
 
-Data = (function() {
-  class Data {
-    // Util.noop( Data.hosted, Data.planeData, Data.refine, Data.asyncJSON )
-    static refine(data, type) {
-      var akey, area, base, bkey, ckey, comp, disp, dkey, ikey, item, pkey, prac;
-      if (type === 'None') {
-        return data;
-      }
-      data.comps = {};
-      for (ckey in data) {
-        comp = data[ckey];
-        if (!(Util$1.isChild(ckey))) {
-          continue;
-        }
-        // console.log( 'Data.refine comp', comp )
-        data.comps[ckey] = comp;
-        if (comp['name'] == null) {
-          comp['name'] = ckey;
-        }
-        comp.pracs = {};
-        for (pkey in comp) {
-          prac = comp[pkey];
-          if (!(Util$1.isChild(pkey))) {
-            continue;
-          }
-          // console.log( '  Data.refine prac', prac )
-          comp.pracs[pkey] = prac;
-          prac.comp = comp;
-          if (prac['name'] == null) {
-            prac['name'] = pkey;
-          }
-          prac.disps = {};
-          for (dkey in prac) {
-            disp = prac[dkey];
-            if (!(Util$1.isChild(dkey))) {
-              continue;
-            }
-            prac.disps[dkey] = disp;
-            disp.prac = prac;
-            if (disp['name'] == null) {
-              disp['name'] = dkey;
-            }
-            disp.areas = {};
-            for (akey in disp) {
-              area = disp[akey];
-              if (!(Util$1.isChild(akey))) {
-                continue;
-              }
-              disp.areas[akey] = area;
-              area.disp = disp;
-              if (area['name'] == null) {
-                area['name'] = akey;
-              }
-              area.items = {};
-              for (ikey in area) {
-                item = area[ikey];
-                if (!(Util$1.isChild(ikey))) {
-                  continue;
-                }
-                area.items[ikey] = item;
-                item.area = area;
-                if (item['name'] == null) {
-                  item['name'] = ikey;
-                }
-                item.bases = {};
-                for (bkey in item) {
-                  base = item[bkey];
-                  if (!(Util$1.isChild(bkey))) {
-                    continue;
-                  }
-                  item.bases[bkey] = base;
-                  base.item = item;
-                  if (base['name'] == null) {
-                    base['name'] = bkey;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+Data = class Data {
+  static refine(data, type) {
+    var akey, area, base, bkey, ckey, comp, disp, dkey, ikey, item, pkey, prac;
+    if (type === 'None') {
       return data;
     }
-
-    // ---- Read JSON with batch async
-    static batchRead(batch, callback, create = null) {
-      var key, obj;
-      for (key in batch) {
-        if (!hasProp$1.call(batch, key)) continue;
-        obj = batch[key];
-        this.batchJSON(obj, batch, callback, create);
+    data.comps = {};
+    for (ckey in data) {
+      comp = data[ckey];
+      if (!(Util$1.isChild(ckey))) {
+        continue;
       }
-    }
-
-    static batchComplete(batch) {
-      var key, obj;
-      for (key in batch) {
-        if (!hasProp$1.call(batch, key)) continue;
-        obj = batch[key];
-        if (!obj['data']) {
-          return false;
+      // console.log( 'Data.refine comp', comp )
+      data.comps[ckey] = comp;
+      if (comp['name'] == null) {
+        comp['name'] = ckey;
+      }
+      comp.pracs = {};
+      for (pkey in comp) {
+        prac = comp[pkey];
+        if (!(Util$1.isChild(pkey))) {
+          continue;
+        }
+        // console.log( '  Data.refine prac', prac )
+        comp.pracs[pkey] = prac;
+        prac.comp = comp;
+        if (prac['name'] == null) {
+          prac['name'] = pkey;
+        }
+        prac.disps = {};
+        for (dkey in prac) {
+          disp = prac[dkey];
+          if (!(Util$1.isChild(dkey))) {
+            continue;
+          }
+          prac.disps[dkey] = disp;
+          disp.prac = prac;
+          if (disp['name'] == null) {
+            disp['name'] = dkey;
+          }
+          disp.areas = {};
+          for (akey in disp) {
+            area = disp[akey];
+            if (!(Util$1.isChild(akey))) {
+              continue;
+            }
+            disp.areas[akey] = area;
+            area.disp = disp;
+            if (area['name'] == null) {
+              area['name'] = akey;
+            }
+            area.items = {};
+            for (ikey in area) {
+              item = area[ikey];
+              if (!(Util$1.isChild(ikey))) {
+                continue;
+              }
+              area.items[ikey] = item;
+              item.area = area;
+              if (item['name'] == null) {
+                item['name'] = ikey;
+              }
+              item.bases = {};
+              for (bkey in item) {
+                base = item[bkey];
+                if (!(Util$1.isChild(bkey))) {
+                  continue;
+                }
+                item.bases[bkey] = base;
+                base.item = item;
+                if (base['name'] == null) {
+                  base['name'] = bkey;
+                }
+              }
+            }
+          }
         }
       }
-      return true;
     }
-
-    // "Access-Control-Request-Headers": "*", "Access-Control-Request-Method": "*"
-    static batchJSON(obj, batch, callback, refine = null) {
-      var opt, url;
-      url = obj.type === 'Font' ? obj.url : Data.toUrl(obj.url);
-      // console.log( 'Data.batchJSON', obj.url, url )
-      opt = {
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-      fetch(url, opt).then((response) => {
-        return response.json();
-      }).then((data) => {
-        obj['data'] = Util$1.isFunc(refine) ? refine(data, obj.type) : data;
-        if (Data.batchComplete(batch)) {
-          return callback(batch);
-        }
-      }).catch((error) => {
-        return console.error("Data.batchJSON()", {
-          url: url,
-          error: error
-        });
-      });
-    }
-
-    static asyncJSON(urla, callback) {
-      var url;
-      url = Data.toUrl(urla);
-      // console.log( 'Data.asyncJSON', urla, url )
-      fetch(url).then((response) => {
-        return response.json();
-      }).then((data) => {
-        return callback(data);
-      }).catch((error) => {
-        return console.error("Data.asyncJSON()", {
-          url: url,
-          error: error
-        });
-      });
-    }
-
-    static planeData(batch, plane) {
-      return batch[plane].data[plane];
-    }
-
-    static toUrl(url) {
-      if (window.location.href.includes('localhost')) {
-        return Data.local + url;
-      } else {
-        return Data.hosted + url;
-      }
-    }
-
-    
-    // ------ Quick JSON read ------
-    static read(url, callback) {
-      if (Util$1.isObj(url)) {
-        Data.readFile(url, callback);
-      } else {
-        Data.asynsJson(url, callback);
-      }
-    }
-
-    static readFile(fileObj, doJson) {
-      var fileReader;
-      fileReader = new FileReader();
-      fileReader.onerror = function(e) {
-        return console.error('Store.readFile', fileObj.name, e.target.error);
-      };
-      fileReader.onload = function(e) {
-        return doJson(JSON.parse(e.target.result));
-      };
-      fileReader.readAsText(fileObj);
-    }
-
-    static saveFile(data, fileName) {
-      var downloadLink, htmlBlob, htmlUrl;
-      htmlBlob = new Blob([data], {
-        type: "text/html;charset=utf-8"
-      });
-      htmlUrl = window['URL'].createObjectURL(htmlBlob);
-      downloadLink = document.createElement("a");
-      downloadLink.href = htmlUrl;
-      downloadLink.download = fileName;
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-    }
-
+    return data;
   }
-  Data.local = "app/data/";
 
-  Data.hosted = "https://main-4a9c7.firebaseapp.com/app/data/";
+  // ---- Read JSON with batch async
+  static batchRead(batch, callback, create = null) {
+    var key, obj;
+    for (key in batch) {
+      if (!hasProp$1.call(batch, key)) continue;
+      obj = batch[key];
+      this.batchJSON(obj, batch, callback, create);
+    }
+  }
 
-  return Data;
+  static batchComplete(batch) {
+    var key, obj;
+    for (key in batch) {
+      if (!hasProp$1.call(batch, key)) continue;
+      obj = batch[key];
+      if (!obj['data']) {
+        return false;
+      }
+    }
+    return true;
+  }
 
-}).call(undefined);
+  // "Access-Control-Request-Headers": "*", "Access-Control-Request-Method": "*"
+  static batchJSON(obj, batch, callback, refine = null) {
+    var opt, url;
+    url = obj.type === 'Font' ? obj.url : Data.toUrl(obj.url);
+    // console.log( 'Data.batchJSON', obj.url, url )
+    opt = {
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(url, opt).then((response) => {
+      return response.json();
+    }).then((data) => {
+      obj['data'] = Util$1.isFunc(refine) ? refine(data, obj.type) : data;
+      if (Data.batchComplete(batch)) {
+        return callback(batch);
+      }
+    }).catch((error) => {
+      return console.error("Data.batchJSON()", {
+        url: url,
+        error: error
+      });
+    });
+  }
+
+  static asyncJSON(urla, callback) {
+    var url;
+    url = Data.toUrl(urla);
+    // console.log( 'Data.asyncJSON', urla, url )
+    fetch(url).then((response) => {
+      return response.json();
+    }).then((data) => {
+      return callback(data);
+    }).catch((error) => {
+      return console.error("Data.asyncJSON()", {
+        url: url,
+        error: error
+      });
+    });
+  }
+
+  static planeData(batch, plane) {
+    return batch[plane].data[plane];
+  }
+
+  static toUrl(url) {
+    if (window.location.href.includes('localhost')) {
+      return Data.local + url;
+    } else {
+      return Data.hosted + url;
+    }
+  }
+
+  
+  // ------ Quick JSON read ------
+  static read(url, callback) {
+    if (Util$1.isObj(url)) {
+      Data.readFile(url, callback);
+    } else {
+      Data.asynsJson(url, callback);
+    }
+  }
+
+  static readFile(fileObj, doJson) {
+    var fileReader;
+    fileReader = new FileReader();
+    fileReader.onerror = function(e) {
+      return console.error('Store.readFile', fileObj.name, e.target.error);
+    };
+    fileReader.onload = function(e) {
+      return doJson(JSON.parse(e.target.result));
+    };
+    fileReader.readAsText(fileObj);
+  }
+
+  static saveFile(data, fileName) {
+    var downloadLink, htmlBlob, htmlUrl;
+    htmlBlob = new Blob([data], {
+      type: "text/html;charset=utf-8"
+    });
+    htmlUrl = window['URL'].createObjectURL(htmlBlob);
+    downloadLink = document.createElement("a");
+    downloadLink.href = htmlUrl;
+    downloadLink.download = fileName;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  }
+
+};
+
+Data.local = "app/data/";
+
+Data.hosted = Util$1.parseURI(window.location.href) + '/app/data/';
+
+Data.cssDir = 'css/'; // /css in /pub
 
 var Data$1 = Data;
 
@@ -10633,7 +10630,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-cfbd092e_0", { source: ".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.conn {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  background-color: black;\n  color: wheat;\n  display: grid;\n  grid-template-columns: 33.3% 33.3% 33.4%;\n  grid-template-rows: 7% 31% 31% 31%;\n  grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 99%;\n  height: 98%;\n  font-size: 1em;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n", map: {"version":3,"sources":["Conn.vue","/Users/ax/Documents/prj/aug/vue/page/Conn.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,aAAa;EACb,wCAAwC;EACxC,kCAAkC;EAClC,iFAAiF;EACjF,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,eAAe;EACf,eAAe;EACf,YAAY;EACZ,gBAAgB;EAChB,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;ECCA,aAAA;EDCE,aAAa;ECCf,qBAAA;EACA,mBAAA;EDCE,qBAAqB;ECCvB,mBAAA;AACA;ADCA;ECCA,aAAA;EACA,gBAAA;EDCE,qBAAqB;ECCvB,mBAAA;EACA,qBAAA;EDCE,mBAAmB;ACCrB;AACA;EACA,aAAA;EACA,aAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,mBAAA;ADCA;ACCA;EACA,aAAA;EDCE,mBAAmB;ECCrB,UAAA;EACA,WAAA;EACA,cAAA;EACA,iBAAA;AACA;AACA;EACA,oBAAA;EACA,kBAAA;EACA,kBAAA;AACA;AACA;EDCE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;AACf;AACA;EACE,cAAc;EACd,WAAW;EACX,YAAY;EACZ,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;AACtB;AACA;EACE,mBAAmB;AACrB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,cAAc;EACd,cAAc;AAChB;AACA;EACE,iBAAiB;AACnB","file":"Conn.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.conn {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  background-color: black;\n  color: wheat;\n  display: grid;\n  grid-template-columns: 33.3% 33.3% 33.4%;\n  grid-template-rows: 7% 31% 31% 31%;\n  grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 99%;\n  height: 98%;\n  font-size: 1em;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n","\n<template>\n  <div id=\"Conn\" class=\"conn\" ref=\"Conn\">\n    <template v-for=\"prac in practices\">\n      <div v-show=\"isPrac(prac.name)\" ref=\"Prac\" :class=\"pracDir(prac.dir)\" :key=\"prac.name\">\n        <div :id=\"prac.name\" :ref=\"prac.name\" class=\"prac\"\n          @click=\"pubPrac(prac.name)\" style=\"background-color:rgba(97,56,77,1.0)\">\n        </div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Build   from '../../pub/ikw/cube/Build.js';\n  import Connect from '../../pub/ikw/conn/Connect.js';\n\n  export default {\n\n    data() {\n      return { comp:'None', prac:'All', disp:'All', tab:'Connections',\n               build:{}, connects:{}, practices:{} }; },\n\n    methods: {\n      isPrac: function (prac) {\n        return this.prac===prac || this.prac==='All' },\n      onPrac: function (prac) {\n        if( prac==='All' && this.prac!=='All' ) {\n          this.connects[this.prac].layout( this.size(this.prac), 'Restore'); }\n        if( prac!=='All' && typeof(this.connects[prac])==='object' ) { // Expand prac to Comp size\n          this.connects[prac].layout( this.size(prac), 'Expand'); }\n        this.prac = prac; this.disp='All';  },\n      onDisp: function (prac,disp) {\n        this.prac = prac; this.disp=disp; },\n      onTabs: function (tab) {\n        if( tab==='Connections' && this.tab==='Connections'  ) {\n          this.onPrac('All'); }\n        this.tab = tab; },\n      pracDir: function(dir) {\n        return this.prac==='All' ? dir : 'fullPracDir'; },\n      pubPrac: function (prac) {\n        this.publish( this.comp, { prac:prac, disp:'All' } ); },\n      style: function( hsv ) {\n        return { backgroundColor:this.toRgbaHsv(hsv) }; },\n      \n      size: function(prac) {\n        let elem = this.$refs[prac][0]\n        let sz   = {}\n        if( typeof(this.$refs['Conn'])==='undefined' ) {\n          console.log( 'Conn.size() $refs[Conn] undefined', this.$refs ) }\n        sz.compWidth  = this.$refs['Conn']['clientWidth' ];\n        sz.compHeight = this.$refs['Conn']['clientHeight'];\n        sz.elemWidth  = elem['clientWidth' ];\n        sz.elemHeight = elem['clientHeight'];\n        // console.log( 'Conn.size()', prac, sz );\n        return sz;\n      },\n      \n      createConnects: function( stream, build ) {\n        for( let key of this.pkeys ) {\n            let prac = this.practices[key];\n            if( prac.row !== 'Dim' ) {\n              let elem = this.$refs[key][0]\n              this.connects[prac.name] = new Connect( stream, build, prac, elem, this.size(key) ); } }\n        return this.connects; },\n      \n      resize: function() {\n        for( let key of this.pkeys ) {\n          let size  = this.size(key);\n          let level = key!==this.prac ? 'Resize' : 'Expand';\n          if( level==='Expand') { this.connects[key].lastSize(size) }\n          this.connects[key].layout( size, level ); } }\n    },\n\n    beforeMount: function() {\n      this.comp = this.$route.name.substring(0,4); },\n      //console.log( 'Conn.beforeMount()', this.$route.name, this.comp );\n\n    mounted: function () {\n      this.build     = new Build(  this.batch() );\n      this.practices = this.conns( this.comp );\n      this.pkeys     = this.keys(  this.practices )\n      this.subscribe(  this.comp,  this.comp+'.vue', (obj) => {\n        if( obj.disp==='All' ) {   this.onPrac(obj.prac); }\n        else                   {   this.onDisp(obj.prac,obj.disp); } } );\n      this.subscribe(  \"Tabs\",     this.comp+'.vue', (obj) => {\n        this.onTabs(obj); } );\n      this.$nextTick( function() {\n        this.connects  = this.createConnects( this.stream(), this.build ); } ) },\n    \n    created: function () {\n      window.addEventListener(   'resize', this.resize ) },\n    destroyed: function () {\n      window.removeEventListener('resize', this.resize ) }\n   }\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../dash/theme.less';\n  \n  .grid5x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:7% 12% 27% 27% 27%;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid4x4() { display:grid; grid-template-columns:7% 31% 31% 31%; grid-template-rows:7% 31% 31% 31%;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid4x3() { display:grid; grid-template-columns:33.3% 33.3% 33.4%; grid-template-rows:7% 31% 31% 31%;\n    grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\"; }\n  \n  .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n    justify-items:center; align-items:center; }\n  \n  .conn { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;\n          background-color:@theme-back; color:@theme-color;\n    .grid4x3(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid\n    .tabs{ grid-area:tabs; display:inline; color:@theme-color; font-size:1.2em;\n      justify-self:start; align-self:center; text-align:left; }\n    .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }\n    .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }\n    .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }\n    \n    .prac { display:grid; border-radius:36px; width:99%; height:98%; font-size:1em; font-weight:bold;\n      .name { justify-self:center; align-self:center; text-align:center; } }\n  \n    // Placed one level above .prac at the 9 Practices Grid Direction\n    .fullPracDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;\n      .prac { font-size:1em; width:100%; height:100%;\n        justify-self:center; align-self:center; display:grid; border-radius:0.5em;\n        div {     padding-bottom:2em;\n          .disp { padding-bottom:0;\n            i     { font-size:1.6em; }\n            .name { font-size:1.6em; }\n            .desc { font-size:1.0em; display:block; } } }  // Turns on .disp .desc\n        .area { padding-bottom:0; } } }\n  }\n</style>"]}, media: undefined });
+    inject("data-v-6eb70384_0", { source: ".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.conn {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  background-color: black;\n  color: wheat;\n  display: grid;\n  grid-template-columns: 33.3fr 33.3fr 33.4fr;\n  grid-template-rows: 7fr 31fr 31fr 31fr;\n  grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 99%;\n  height: 98%;\n  font-size: 1em;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n", map: {"version":3,"sources":["Conn.vue","/Users/ax/Documents/prj/aug/vue/page/Conn.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,mBAAmB;EACnB,uBAAuB;EACvB,YAAY;EACZ,aAAa;EACb,2CAA2C;EAC3C,sCAAsC;EACtC,iFAAiF;EACjF,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,eAAe;EACf,eAAe;EACf,YAAY;EACZ,gBAAgB;EAChB,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;ECCA,aAAA;EDCE,aAAa;ECCf,qBAAA;EACA,mBAAA;EDCE,qBAAqB;ECCvB,mBAAA;AACA;ADCA;ECCA,aAAA;EACA,gBAAA;EDCE,qBAAqB;ECCvB,mBAAA;EACA,qBAAA;EDCE,mBAAmB;ACCrB;AACA;EACA,aAAA;EACA,aAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,mBAAA;ADCA;ACCA;EACA,aAAA;EDCE,mBAAmB;ECCrB,UAAA;EACA,WAAA;EACA,cAAA;EACA,iBAAA;AACA;AACA;EACA,oBAAA;EACA,kBAAA;EACA,kBAAA;AACA;AACA;EDCE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;AACf;AACA;EACE,cAAc;EACd,WAAW;EACX,YAAY;EACZ,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;AACtB;AACA;EACE,mBAAmB;AACrB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,cAAc;EACd,cAAc;AAChB;AACA;EACE,iBAAiB;AACnB","file":"Conn.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.conn {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.75vmin;\n  background-color: black;\n  color: wheat;\n  display: grid;\n  grid-template-columns: 33.3fr 33.3fr 33.4fr;\n  grid-template-rows: 7fr 31fr 31fr 31fr;\n  grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.2em;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 99%;\n  height: 98%;\n  font-size: 1em;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 1em;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2em;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 1.6em;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 1em;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n","\n<template>\n  <div id=\"Conn\" class=\"conn\" ref=\"Conn\">\n    <template v-for=\"prac in practices\">\n      <div v-show=\"isPrac(prac.name)\" ref=\"Prac\" :class=\"pracDir(prac.dir)\" :key=\"prac.name\">\n        <div :id=\"prac.name\" :ref=\"prac.name\" class=\"prac\"\n          @click=\"pubPrac(prac.name)\" style=\"background-color:rgba(97,56,77,1.0)\">\n        </div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Build   from '../../pub/ikw/cube/Build.js';\n  import Connect from '../../pub/ikw/conn/Connect.js';\n\n  export default {\n\n    data() {\n      return { comp:'None', prac:'All', disp:'All', tab:'Connections',\n               build:{}, connects:{}, practices:{} }; },\n\n    methods: {\n      isPrac: function (prac) {\n        return this.prac===prac || this.prac==='All' },\n      onPrac: function (prac) {\n        if( prac==='All' && this.prac!=='All' ) {\n          this.connects[this.prac].layout( this.size(this.prac), 'Restore'); }\n        if( prac!=='All' && typeof(this.connects[prac])==='object' ) { // Expand prac to Comp size\n          this.connects[prac].layout( this.size(prac), 'Expand'); }\n        this.prac = prac; this.disp='All';  },\n      onDisp: function (prac,disp) {\n        this.prac = prac; this.disp=disp; },\n      onTabs: function (tab) {\n        if( tab==='Connections' && this.tab==='Connections'  ) {\n          this.onPrac('All'); }\n        this.tab = tab; },\n      pracDir: function(dir) {\n        return this.prac==='All' ? dir : 'fullPracDir'; },\n      pubPrac: function (prac) {\n        this.publish( this.comp, { prac:prac, disp:'All' } ); },\n      style: function( hsv ) {\n        return { backgroundColor:this.toRgbaHsv(hsv) }; },\n      \n      size: function(prac) {\n        let elem = this.$refs[prac][0]\n        let sz   = {}\n        if( typeof(this.$refs['Conn'])==='undefined' ) {\n          console.log( 'Conn.size() $refs[Conn] undefined', this.$refs ) }\n        sz.compWidth  = this.$refs['Conn']['clientWidth' ];\n        sz.compHeight = this.$refs['Conn']['clientHeight'];\n        sz.elemWidth  = elem['clientWidth' ];\n        sz.elemHeight = elem['clientHeight'];\n        // console.log( 'Conn.size()', prac, sz );\n        return sz;\n      },\n      \n      createConnects: function( stream, build ) {\n        for( let key of this.pkeys ) {\n            let prac = this.practices[key];\n            if( prac.row !== 'Dim' ) {\n              let elem = this.$refs[key][0]\n              this.connects[prac.name] = new Connect( stream, build, prac, elem, this.size(key) ); } }\n        return this.connects; },\n      \n      resize: function() {\n        for( let key of this.pkeys ) {\n          let size  = this.size(key);\n          let level = key!==this.prac ? 'Resize' : 'Expand';\n          if( level==='Expand') { this.connects[key].lastSize(size) }\n          this.connects[key].layout( size, level ); } }\n    },\n\n    beforeMount: function() {\n      this.comp = this.$route.name.substring(0,4); },\n      //console.log( 'Conn.beforeMount()', this.$route.name, this.comp );\n\n    mounted: function () {\n      this.build     = new Build(  this.batch() );\n      this.practices = this.conns( this.comp );\n      this.pkeys     = this.keys(  this.practices )\n      this.subscribe(  this.comp,  this.comp+'.vue', (obj) => {\n        if( obj.disp==='All' ) {   this.onPrac(obj.prac); }\n        else                   {   this.onDisp(obj.prac,obj.disp); } } );\n      this.subscribe(  \"Tabs\",     this.comp+'.vue', (obj) => {\n        this.onTabs(obj); } );\n      this.$nextTick( function() {\n        this.connects  = this.createConnects( this.stream(), this.build ); } ) },\n    \n    created: function () {\n      window.addEventListener(   'resize', this.resize ) },\n    destroyed: function () {\n      window.removeEventListener('resize', this.resize ) }\n   }\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .grid5x4() { display:grid; grid-template-columns:7fr 31fr 31fr 31fr; grid-template-rows:7fr 12fr 27fr 27fr 27fr;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid4x4() { display:grid; grid-template-columns:7fr 31fr 31fr 31fr; grid-template-rows:7fr 31fr 31fr 31fr;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid4x3() { display:grid; grid-template-columns:33.3fr 33.3fr 33.4fr; grid-template-rows:7fr 31fr 31fr 31fr;\n    grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\"; }\n  \n  .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n    justify-items:center; align-items:center; }\n  \n  .conn { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;\n          background-color:@theme-back; color:@theme-color;\n    .grid4x3(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid\n    .tabs{ grid-area:tabs; display:inline; color:@theme-color; font-size:1.2em;\n      justify-self:start; align-self:center; text-align:left; }\n    .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }\n    .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }\n    .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }\n    \n    .prac { display:grid; border-radius:36px; width:99%; height:98%; font-size:1em; font-weight:bold;\n      .name { justify-self:center; align-self:center; text-align:center; } }\n  \n    // Placed one level above .prac at the 9 Practices Grid Direction\n    .fullPracDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;\n      .prac { font-size:1em; width:100%; height:100%;\n        justify-self:center; align-self:center; display:grid; border-radius:0.5em;\n        div {     padding-bottom:2em;\n          .disp { padding-bottom:0;\n            i     { font-size:1.6em; }\n            .name { font-size:1.6em; }\n            .desc { font-size:1.0em; display:block; } } }  // Turns on .disp .desc\n        .area { padding-bottom:0; } } }\n  }\n</style>"]}, media: undefined });
 
   };
   /* scoped */

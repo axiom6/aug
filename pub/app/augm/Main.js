@@ -34,12 +34,8 @@ Main = (function() {
 
   };
 
-  Data.local = "app/data/";
-
-  Data.hosted = "https://augm-d4b3c.firebaseapp.com/app/data/";
-
-  Main.FontUrl = "css/font/three/helvetiker_regular.typeface.json";
-
+  //ata.local   = "app/data/"
+  //ata.hosted  = "https://augm-d4b3c.firebaseapp.com/app/data/"
   Main.Batch = {
     Math: {
       url: 'augm/Math.json',

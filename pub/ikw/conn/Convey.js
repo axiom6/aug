@@ -20,7 +20,8 @@ Convey = class Convey {
     this.nw = 24;
     this.np = 0;
     this.showLabel = false;
-    this.shapes.gradientDef(this.defs, 'WhiteBlack', 'white', 'black');
+    Convey.Id++;
+    this.shapes.gradientDef(this.defs, 'WhiteBlack' + Convey.Id, 'white', 'black');
     this.gc = this.g.append("g");
   }
 
@@ -101,5 +102,7 @@ Convey = class Convey {
   }
 
 };
+
+Convey.Id = 0;
 
 export default Convey;

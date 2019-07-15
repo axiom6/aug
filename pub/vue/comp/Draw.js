@@ -201,7 +201,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-8dfd27de_0", { source: ".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Dabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Dabs.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,UAAU;EACV,uBAAuB;ECCzB,gBAAA;ADCA;ACCA;EACA,qBAAA;EACA,gBAAA;EACA,gCAAA;EACA,4BAAA;EACA,6BAAA;EACA,4BAAA;EDCE,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Dabs.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"dabs\">\n    <template v-for=\"page in pages\">\n      <div :class=\"classTab(page.key)\" @click=\"pubTab(page.key)\">{{page.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Object, init:String },\n\n    data() { return { key:this.init } },\n\n    methods: {\n      pubTab: function (key) {\n        this.key = key;\n        this.publish( this.comp, key ); },\n      classTab: function (key) {\n        return this.key===key ? 'tab-active' : 'tab'; } },\n\n    mounted: function () {\n      this.subscribe( 'Geom', 'Dabs.vue', (key) => {\n        this.classTab(key) } ); }\n\n  }\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../dash/theme.less';\n  \n  .dabs { position:absolute; left:0; top:0; width:100%; height:5%; background-color:@theme-back; font-size:1.5em;\n    .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;\n      border-radius:12px 12px 0 0; border-left: @theme-color solid thin;\n      border-top:@theme-color solid thin; border-right:@theme-color solid thin;\n      background-color:@theme-back; color:@theme-color; }\n    .tab:hover  {         background-color:@theme-color; color:@theme-back; }\n    .tab-active { .tab(); background-color:@theme-color; color:@theme-back; } }\n\n</style>"]}, media: undefined });
+    inject("data-v-364b3248_0", { source: ".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Dabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Dabs.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,UAAU;EACV,uBAAuB;ECCzB,gBAAA;ADCA;ACCA;EACA,qBAAA;EACA,gBAAA;EACA,gCAAA;EACA,4BAAA;EACA,6BAAA;EACA,4BAAA;EDCE,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Dabs.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"dabs\">\n    <template v-for=\"page in pages\">\n      <div :class=\"classTab(page.key)\" @click=\"pubTab(page.key)\">{{page.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Object, init:String },\n\n    data() { return { key:this.init } },\n\n    methods: {\n      pubTab: function (key) {\n        this.key = key;\n        this.publish( this.comp, key ); },\n      classTab: function (key) {\n        return this.key===key ? 'tab-active' : 'tab'; } },\n\n    mounted: function () {\n      this.subscribe( 'Geom', 'Dabs.vue', (key) => {\n        this.classTab(key) } ); }\n\n  }\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .dabs { position:absolute; left:0; top:0; width:100%; height:5%; background-color:@theme-back; font-size:1.5em;\n    .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;\n      border-radius:12px 12px 0 0; border-left: @theme-color solid thin;\n      border-top:@theme-color solid thin; border-right:@theme-color solid thin;\n      background-color:@theme-back; color:@theme-color; }\n    .tab:hover  {         background-color:@theme-color; color:@theme-back; }\n    .tab-active { .tab(); background-color:@theme-color; color:@theme-back; } }\n\n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -21094,210 +21094,207 @@ var Chord$1 = Chord;
 var Data,
   hasProp$1 = {}.hasOwnProperty;
 
-Data = (function() {
-  class Data {
-    // Util.noop( Data.hosted, Data.planeData, Data.refine, Data.asyncJSON )
-    static refine(data, type) {
-      var akey, area, base, bkey, ckey, comp, disp, dkey, ikey, item, pkey, prac;
-      if (type === 'None') {
-        return data;
-      }
-      data.comps = {};
-      for (ckey in data) {
-        comp = data[ckey];
-        if (!(Util$1.isChild(ckey))) {
-          continue;
-        }
-        // console.log( 'Data.refine comp', comp )
-        data.comps[ckey] = comp;
-        if (comp['name'] == null) {
-          comp['name'] = ckey;
-        }
-        comp.pracs = {};
-        for (pkey in comp) {
-          prac = comp[pkey];
-          if (!(Util$1.isChild(pkey))) {
-            continue;
-          }
-          // console.log( '  Data.refine prac', prac )
-          comp.pracs[pkey] = prac;
-          prac.comp = comp;
-          if (prac['name'] == null) {
-            prac['name'] = pkey;
-          }
-          prac.disps = {};
-          for (dkey in prac) {
-            disp = prac[dkey];
-            if (!(Util$1.isChild(dkey))) {
-              continue;
-            }
-            prac.disps[dkey] = disp;
-            disp.prac = prac;
-            if (disp['name'] == null) {
-              disp['name'] = dkey;
-            }
-            disp.areas = {};
-            for (akey in disp) {
-              area = disp[akey];
-              if (!(Util$1.isChild(akey))) {
-                continue;
-              }
-              disp.areas[akey] = area;
-              area.disp = disp;
-              if (area['name'] == null) {
-                area['name'] = akey;
-              }
-              area.items = {};
-              for (ikey in area) {
-                item = area[ikey];
-                if (!(Util$1.isChild(ikey))) {
-                  continue;
-                }
-                area.items[ikey] = item;
-                item.area = area;
-                if (item['name'] == null) {
-                  item['name'] = ikey;
-                }
-                item.bases = {};
-                for (bkey in item) {
-                  base = item[bkey];
-                  if (!(Util$1.isChild(bkey))) {
-                    continue;
-                  }
-                  item.bases[bkey] = base;
-                  base.item = item;
-                  if (base['name'] == null) {
-                    base['name'] = bkey;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+Data = class Data {
+  static refine(data, type) {
+    var akey, area, base, bkey, ckey, comp, disp, dkey, ikey, item, pkey, prac;
+    if (type === 'None') {
       return data;
     }
-
-    // ---- Read JSON with batch async
-    static batchRead(batch, callback, create = null) {
-      var key, obj;
-      for (key in batch) {
-        if (!hasProp$1.call(batch, key)) continue;
-        obj = batch[key];
-        this.batchJSON(obj, batch, callback, create);
+    data.comps = {};
+    for (ckey in data) {
+      comp = data[ckey];
+      if (!(Util$1.isChild(ckey))) {
+        continue;
       }
-    }
-
-    static batchComplete(batch) {
-      var key, obj;
-      for (key in batch) {
-        if (!hasProp$1.call(batch, key)) continue;
-        obj = batch[key];
-        if (!obj['data']) {
-          return false;
+      // console.log( 'Data.refine comp', comp )
+      data.comps[ckey] = comp;
+      if (comp['name'] == null) {
+        comp['name'] = ckey;
+      }
+      comp.pracs = {};
+      for (pkey in comp) {
+        prac = comp[pkey];
+        if (!(Util$1.isChild(pkey))) {
+          continue;
+        }
+        // console.log( '  Data.refine prac', prac )
+        comp.pracs[pkey] = prac;
+        prac.comp = comp;
+        if (prac['name'] == null) {
+          prac['name'] = pkey;
+        }
+        prac.disps = {};
+        for (dkey in prac) {
+          disp = prac[dkey];
+          if (!(Util$1.isChild(dkey))) {
+            continue;
+          }
+          prac.disps[dkey] = disp;
+          disp.prac = prac;
+          if (disp['name'] == null) {
+            disp['name'] = dkey;
+          }
+          disp.areas = {};
+          for (akey in disp) {
+            area = disp[akey];
+            if (!(Util$1.isChild(akey))) {
+              continue;
+            }
+            disp.areas[akey] = area;
+            area.disp = disp;
+            if (area['name'] == null) {
+              area['name'] = akey;
+            }
+            area.items = {};
+            for (ikey in area) {
+              item = area[ikey];
+              if (!(Util$1.isChild(ikey))) {
+                continue;
+              }
+              area.items[ikey] = item;
+              item.area = area;
+              if (item['name'] == null) {
+                item['name'] = ikey;
+              }
+              item.bases = {};
+              for (bkey in item) {
+                base = item[bkey];
+                if (!(Util$1.isChild(bkey))) {
+                  continue;
+                }
+                item.bases[bkey] = base;
+                base.item = item;
+                if (base['name'] == null) {
+                  base['name'] = bkey;
+                }
+              }
+            }
+          }
         }
       }
-      return true;
     }
-
-    // "Access-Control-Request-Headers": "*", "Access-Control-Request-Method": "*"
-    static batchJSON(obj, batch, callback, refine = null) {
-      var opt, url;
-      url = obj.type === 'Font' ? obj.url : Data.toUrl(obj.url);
-      // console.log( 'Data.batchJSON', obj.url, url )
-      opt = {
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-      fetch(url, opt).then((response) => {
-        return response.json();
-      }).then((data) => {
-        obj['data'] = Util$1.isFunc(refine) ? refine(data, obj.type) : data;
-        if (Data.batchComplete(batch)) {
-          return callback(batch);
-        }
-      }).catch((error) => {
-        return console.error("Data.batchJSON()", {
-          url: url,
-          error: error
-        });
-      });
-    }
-
-    static asyncJSON(urla, callback) {
-      var url;
-      url = Data.toUrl(urla);
-      // console.log( 'Data.asyncJSON', urla, url )
-      fetch(url).then((response) => {
-        return response.json();
-      }).then((data) => {
-        return callback(data);
-      }).catch((error) => {
-        return console.error("Data.asyncJSON()", {
-          url: url,
-          error: error
-        });
-      });
-    }
-
-    static planeData(batch, plane) {
-      return batch[plane].data[plane];
-    }
-
-    static toUrl(url) {
-      if (window.location.href.includes('localhost')) {
-        return Data.local + url;
-      } else {
-        return Data.hosted + url;
-      }
-    }
-
-    
-    // ------ Quick JSON read ------
-    static read(url, callback) {
-      if (Util$1.isObj(url)) {
-        Data.readFile(url, callback);
-      } else {
-        Data.asynsJson(url, callback);
-      }
-    }
-
-    static readFile(fileObj, doJson) {
-      var fileReader;
-      fileReader = new FileReader();
-      fileReader.onerror = function(e) {
-        return console.error('Store.readFile', fileObj.name, e.target.error);
-      };
-      fileReader.onload = function(e) {
-        return doJson(JSON.parse(e.target.result));
-      };
-      fileReader.readAsText(fileObj);
-    }
-
-    static saveFile(data, fileName) {
-      var downloadLink, htmlBlob, htmlUrl;
-      htmlBlob = new Blob([data], {
-        type: "text/html;charset=utf-8"
-      });
-      htmlUrl = window['URL'].createObjectURL(htmlBlob);
-      downloadLink = document.createElement("a");
-      downloadLink.href = htmlUrl;
-      downloadLink.download = fileName;
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-    }
-
+    return data;
   }
-  Data.local = "app/data/";
 
-  Data.hosted = "https://main-4a9c7.firebaseapp.com/app/data/";
+  // ---- Read JSON with batch async
+  static batchRead(batch, callback, create = null) {
+    var key, obj;
+    for (key in batch) {
+      if (!hasProp$1.call(batch, key)) continue;
+      obj = batch[key];
+      this.batchJSON(obj, batch, callback, create);
+    }
+  }
 
-  return Data;
+  static batchComplete(batch) {
+    var key, obj;
+    for (key in batch) {
+      if (!hasProp$1.call(batch, key)) continue;
+      obj = batch[key];
+      if (!obj['data']) {
+        return false;
+      }
+    }
+    return true;
+  }
 
-}).call(undefined);
+  // "Access-Control-Request-Headers": "*", "Access-Control-Request-Method": "*"
+  static batchJSON(obj, batch, callback, refine = null) {
+    var opt, url;
+    url = obj.type === 'Font' ? obj.url : Data.toUrl(obj.url);
+    // console.log( 'Data.batchJSON', obj.url, url )
+    opt = {
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(url, opt).then((response) => {
+      return response.json();
+    }).then((data) => {
+      obj['data'] = Util$1.isFunc(refine) ? refine(data, obj.type) : data;
+      if (Data.batchComplete(batch)) {
+        return callback(batch);
+      }
+    }).catch((error) => {
+      return console.error("Data.batchJSON()", {
+        url: url,
+        error: error
+      });
+    });
+  }
+
+  static asyncJSON(urla, callback) {
+    var url;
+    url = Data.toUrl(urla);
+    // console.log( 'Data.asyncJSON', urla, url )
+    fetch(url).then((response) => {
+      return response.json();
+    }).then((data) => {
+      return callback(data);
+    }).catch((error) => {
+      return console.error("Data.asyncJSON()", {
+        url: url,
+        error: error
+      });
+    });
+  }
+
+  static planeData(batch, plane) {
+    return batch[plane].data[plane];
+  }
+
+  static toUrl(url) {
+    if (window.location.href.includes('localhost')) {
+      return Data.local + url;
+    } else {
+      return Data.hosted + url;
+    }
+  }
+
+  
+  // ------ Quick JSON read ------
+  static read(url, callback) {
+    if (Util$1.isObj(url)) {
+      Data.readFile(url, callback);
+    } else {
+      Data.asynsJson(url, callback);
+    }
+  }
+
+  static readFile(fileObj, doJson) {
+    var fileReader;
+    fileReader = new FileReader();
+    fileReader.onerror = function(e) {
+      return console.error('Store.readFile', fileObj.name, e.target.error);
+    };
+    fileReader.onload = function(e) {
+      return doJson(JSON.parse(e.target.result));
+    };
+    fileReader.readAsText(fileObj);
+  }
+
+  static saveFile(data, fileName) {
+    var downloadLink, htmlBlob, htmlUrl;
+    htmlBlob = new Blob([data], {
+      type: "text/html;charset=utf-8"
+    });
+    htmlUrl = window['URL'].createObjectURL(htmlBlob);
+    downloadLink = document.createElement("a");
+    downloadLink.href = htmlUrl;
+    downloadLink.download = fileName;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  }
+
+};
+
+Data.local = "app/data/";
+
+Data.hosted = Util$1.parseURI(window.location.href) + '/app/data/';
+
+Data.cssDir = 'css/'; // /css in /pub
 
 var Data$1 = Data;
 
@@ -25588,7 +25585,7 @@ __vue_render__$1._withStripped = true;
   /* style */
   const __vue_inject_styles__$1 = function (inject) {
     if (!inject) return
-    inject("data-v-801e049a_0", { source: ".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;EACvB,+BAA+B;AACjC;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;AACX;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n"]}, media: undefined });
+    inject("data-v-8c492818_0", { source: ".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;EACvB,+BAA+B;AACjC;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;AACX;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n"]}, media: undefined });
 
   };
   /* scoped */

@@ -9,11 +9,12 @@ class Convey
     @nw = 24
     @np =  0
     @showLabel  = false
-    @shapes.gradientDef( @defs, 'WhiteBlack', 'white', 'black' )
+    Convey.Id++
+    @shapes.gradientDef( @defs, 'WhiteBlack'+Convey.Id, 'white', 'black' )
     @gc = @g.append("g")
 
   doData:( graph ) =>
-    @sankeyc             = @createSankeyc()
+    @sankeyc            = @createSankeyc()
     @graph              = @sankeyc( graph )
     [@linkSvg,@nodeSvg] = @doSankey( @sankeyc, @graph  )
     return
@@ -74,4 +75,6 @@ class Convey
         .attr( "text-anchor", "start" )
     node
 
-`export default Convey`
+Convey.Id = 0
+
+export default Convey

@@ -23,7 +23,7 @@
 
 <style lang="less">
   
-  @import '../dash/theme.less';
+  @import '../../pub/css/themes/theme.less';
   
   .embed { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;
     display:grid; justify-items:center; align-items:center; text-align:center;

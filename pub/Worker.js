@@ -17,19 +17,25 @@ syncUrl = '/app/data/store/Sync.json';
 
 offlineUrl = '/augm.html';
 
-cacheObjs = {};
-
-cacheObjs2 = {
-  Html: {
-    name: 'Html',
+cacheObjs = {
+  Main: {
+    name: 'Main',
+    status: 0,
+    url: '/main.html'
+  },
+  Augm: {
+    name: 'Augm',
     status: 0,
     url: '/augm.html'
   },
-  Index: {
-    name: 'Index',
+  Muse: {
+    name: 'Muse',
     status: 0,
-    url: '/index.html'
-  },
+    url: '/muse.html'
+  }
+};
+
+cacheObjs2 = {
   Augm: {
     name: 'Augm',
     status: 0,
@@ -99,13 +105,12 @@ oncatch = (status, text, error) => {
 
 onInstall = (event) => {
   event.waitUntil(caches.open(cacheName).then((cache) => {
-    var key, obj, prefix;
+    var key, obj;
     publish('Install', '------ Open ------');
-    prefix = '/aug/pub';
     for (key in cacheObjs) {
       if (!hasProp.call(cacheObjs, key)) continue;
       obj = cacheObjs[key];
-      fetch(prefix + obj.url).then((response) => {
+      fetch(obj.url).then((response) => { // prefix+
         obj.status = response.status;
         publish('Install', response.status + ':' + response.url);
         return cache.put(response.url, response);
@@ -148,6 +153,7 @@ onActivate = (event) => {
 
 onFetch = (event) => {
   // publish( 'Fetch URL ', event.request.url )
+  // opt = { headers:{ 'Cache-Control': 'public, max-age=604800' } }
   event.respondWith(caches.open(cacheName).then((cache) => {
     return cache.match(event.request, {
       ignoreSearch: true

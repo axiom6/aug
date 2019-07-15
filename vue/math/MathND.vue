@@ -71,7 +71,7 @@ export default MathND;
 
 <style lang="less">
   
-  @import '../dash/theme.less';
+  @import '../../pub/css/themes/theme.less';
   
   .grid9x3() { display:grid; grid-template-columns:33% 33% 34%; grid-template-rows:11% 11% 11% 11% 11% 11% 11% 11% 12%;
     grid-template-areas:

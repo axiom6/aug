@@ -1,7 +1,7 @@
 {
   "name":             "Muse",
   "short_name":       "Muse",
-  "start_url":        "/app/muse/index.html",
+  "start_url":        "/muse.html",
   "display":          "standalone",
   "theme_color":      "#888888",
   "background_color": "#000000",
