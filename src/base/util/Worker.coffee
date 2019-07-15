@@ -31,6 +31,7 @@ toCacheUrls = ( objs ) ->
 urls = toCacheUrls( cacheObjs )
 
 publish = ( status, text, obj=null ) =>
+  return if true
   if obj?
     console.log( status, text, obj )
   else

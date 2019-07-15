@@ -43,7 +43,7 @@
 
 <style lang="less">
   
-  .grid3x1() { display:grid; grid-template-columns:100%; grid-template-rows:30% 40% 30%;
+  .grid3x1() { display:grid; grid-template-columns:1fr; grid-template-rows:30fr 40fr 30fr;
       grid-template-areas:"head" "midd" "foot"; }
   
   .home { .grid3x1(); position:relative; left:0; top:0; right:0; bottom:0;

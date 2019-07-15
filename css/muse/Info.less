@@ -2,8 +2,8 @@
 // Not in production
 
  .view { background-color:black; display:grid; position:relative;
-    grid-template-columns: 33%  33% 34%;
-    grid-template-rows:    33%  33% 34%;
+    grid-template-columns: 33fr  33fr 34fr;
+    grid-template-rows:    33fr  33fr 34fr;
     grid-template-areas:
       "nw   north ne"
       "west cen   east"
@@ -20,8 +20,8 @@
     .se     { grid-area:se;    justify-self:stretch; align-self:stretch; display:grid; }
     .pane { width:90%; height:80%; background-color:#603;
       justify-self:center; align-self:center; display:grid; border-radius:0.5em; font-size:3vh; font-weight:bold;
-      grid-template-columns: 33%  33% 34%;
-      grid-template-rows:    33%  33% 34%;
+      grid-template-columns: 33fr  33fr 34fr;
+      grid-template-rows:    33fr  33fr 34fr;
       grid-template-areas:
         "nw   north ne"
         "west cen   east"

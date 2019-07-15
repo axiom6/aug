@@ -112,10 +112,13 @@ class Data
     document.body.removeChild(downloadLink)
     return
 
-Data.local  = "app/data/"
-Data.parse  = Util.parseURI( window.location.href )
-Data.hosted = Data.parse.hostname + '/app/data/'
-Data.cssDir = 'css/'  # /css in /pub
-console.log('Data.hosted', Data.hosted, window.location.href )
+#ata.parse   = Util.parseURI( window.location.href )
+#ata.hosted1 = Data.parse.hostname + '/app/data/'
+# console.log('Data.hosted', Data.hosted, window.location.href )
+
+Data.local   = "app/data/"
+Data.hosted  = '/app/data/'
+Data.cssDir  = 'css/'  # /css in /pub
+
 
 export default Data

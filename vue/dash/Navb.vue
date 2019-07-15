@@ -38,7 +38,7 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .grid1x5() { display:grid; grid-template-columns:5% 40% 25% 10% 10% 10%; grid-template-rows:@theme-north;
+  .grid1x5() { display:grid; grid-template-columns:5fr 40fr 25fr 10fr 10fr 10fr; grid-template-rows:@theme-north;
     grid-template-areas: "gleft ghome gsearch gcontact gsettings gsignon"; }
   
   .navb {  .grid1x5(); display:grid; background:@theme-back; color:@theme-color;

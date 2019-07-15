@@ -1195,9 +1195,12 @@ Data = class Data {
 
 };
 
+//ata.parse   = Util.parseURI( window.location.href )
+//ata.hosted1 = Data.parse.hostname + '/app/data/'
+// console.log('Data.hosted', Data.hosted, window.location.href )
 Data.local = "app/data/";
 
-Data.hosted = Util$1.parseURI(window.location.href) + '/app/data/';
+Data.hosted = '/app/data/';
 
 Data.cssDir = 'css/'; // /css in /pub
 
@@ -9403,7 +9406,8 @@ Convey = class Convey {
     this.nw = 24;
     this.np = 0;
     this.showLabel = false;
-    this.shapes.gradientDef(this.defs, 'WhiteBlack', 'white', 'black');
+    Convey.Id++;
+    this.shapes.gradientDef(this.defs, 'WhiteBlack' + Convey.Id, 'white', 'black');
     this.gc = this.g.append("g");
   }
 
@@ -9484,6 +9488,8 @@ Convey = class Convey {
   }
 
 };
+
+Convey.Id = 0;
 
 var Convey$1 = Convey;
 

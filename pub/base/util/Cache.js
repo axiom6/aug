@@ -59,10 +59,12 @@ Cache = class Cache {
 
   consoleStatus(object) {
     if (object.error == null) {
-      console.log('Cache', {
-        status: object.status,
-        text: object.text
-      });
+      if (false) {
+        console.log('Cache', {
+          status: object.status,
+          text: object.text
+        });
+      }
     } else {
       console.error('Cache', {
         status: object.status,

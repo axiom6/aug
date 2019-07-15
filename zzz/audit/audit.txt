@@ -1,64 +1,31 @@
 Configure your server to return the Cache-Control HTTP response header.
-  Cache-Control: max-age=31557600
+  Cache-Control: max-age=31557600 year 2628000 month 86400 week 3600 hour 60 minute
 
-
-One minute: max-age=60
-One hour: max-age=3600
-One day: max-age=86400
-One week: max-age=604800
-One month: max-age=2628000
-One year: max-age=31536000
-
+Minimize Critical Requests Depth
 
 Ensure text remains visible during webfont load
   Leverage the font-display CSS feature to ensure text is user-visible while webfonts are loading. Learn more.
 
- -----------------------------------------------
+PWA
+  Site works cross-browser
+  Page transitions don't feel like they block on the network
+  Each page has a URL
 
-// 1. Current page does not respond with a 200 when offline
-// 2. start_url does not respond with a 200 when offline
-// 3. Unable to fetch start URL via service worker.
-// 4. Does not register a service worker that controls page and start_url
-~~ 5. Percentages row tracks in Home.vue
-// 6. Does not redirect HTTP traffic to HTTPS
-// 7. Does not use HTTP/2 for all of its resources
-~~ 8. <input placeholder=" Search" id="search" type="text" size="16" class="input">
-// 9. 88.8% Legible Text
+Accessability Extras
+ 1 The page has a logical tab order
+ 2 Interactive controls are keyboard focusable
+ 3 Interactive elements indicate their purpose and state
+ 4 The user's focus is directed to new content added to the page
+ 5 User focus is not accidentally trapped in a region
+ 6 Custom controls have associated labels
+ 7 Custom controls have ARIA roles
+ 8 Visual order on the page follows DOM order
+ 9 Offscreen content is hidden from assistive technology
+10 Headings don't skip levels
+11 HTML5 landmark elements are used to improve navigation
 
-    { "src": "./css/icons/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" },
-
-Install Success
-Cache.js:120 Cache Objectstatus: "Register"text: "Success"__proto__: Objectconstructor: ƒ Object()hasOwnProperty: ƒ hasOwnProperty()isPrototypeOf: ƒ isPrototypeOf()propertyIsEnumerable: ƒ propertyIsEnumerable()toLocaleString: ƒ toLocaleString()toString: ƒ toString()valueOf: ƒ valueOf()__defineGetter__: ƒ __defineGetter__()__defineSetter__: ƒ __defineSetter__()__lookupGetter__: ƒ __lookupGetter__()__lookupSetter__: ƒ __lookupSetter__()get __proto__: ƒ __proto__()set __proto__: ƒ __proto__()
-Worker.js:73 Install Error TypeError: Request failed
-oncatch @ Worker.js:73
-Cache.js:120 Cache Object
-Cache.js:120 Cache Object
-Worker.js:68 Activate Success
-Cache.js:120 Cache Object
-Worker.js:73 Fetch Error TypeError: Failed to execute 'fetch' on 'ServiceWorkerGlobalScope': 'only-if-cached' can be set only with 'same-origin' mode
-    at Worker.js:111
-oncatch @ Worker.js:73
-2Worker.js:68 Fetch Success
-
-
-…pub/augm.html?_ijt=oc7qosr8njn9mpkv385ut8an3k (localhost)
-…roboto/Roboto.css?family=Roboto (localhost) - 0 ms, 2.17 KB
-…augm/Augm.js (localhost)
-…vue/vue.esm.browser.js (localhost) - 20 ms, 307.33 KB
-…augm/Main.js (localhost)
-…util/Data.js (localhost)
-…util/Util.js (localhost) - 0 ms, 24.09 KB
-…util/Stream.js (localhost) - 10 ms, 6.52 KB
-…util/Vis.js (localhost)
-…util/FontAwe.js (localhost) - 0 ms, 28.54 KB
-…augm/Home.js (localhost)
-…fontawesome/init.css (localhost) - 0 ms, 64.72 KB
-…roboto/Roboto-Regular.ttf (localhost) - 0 ms, 168.07 KB
-…augm/Router.js (localhost)
-…vue/vue-router.esm.js (localhost) - 10 ms, 64.87 KB
-…sw/registerServiceWorker.ini.js (localhost)
-…sw/registerServiceWorker.lib.js (localhost) - 10 ms, 4.49 KB
-…pub/manifest.json (localhost) - 0 ms, 0.97 KB
-…fontawesome/fa-solid-900.woff2 (localhost) - 10 ms, 73.02 KB
-…fontawesome/fa-regular-400.woff2 (localhost) - 0 ms, 13.69 KB
-…fontawesome/fa-brands-400.woff2 (localhost) - 10 ms, 70.84 KB
+Intermittent Error
+  - may be fixed
+  Error while trying to use the following icon from the Manifest:
+    https://muse-b90e1.firebaseapp.com/css/icons/android-chrome-512x512.png
+    (Download error or resource isn't a valid  image)

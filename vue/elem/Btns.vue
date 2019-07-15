@@ -83,7 +83,7 @@
   
   .btn-center { display:grid;  width:100%; height:100%; } // A surrounding div for centering button
 
-  .grid1x3() { display:grid; grid-template-columns:35% 65%; grid-template-areas:"icons label"; }
+  .grid1x3() { display:grid; grid-template-columns:35fr 65fr; grid-template-areas:"icons label"; }
 
   .btn { .grid1x3(); justify-self:center; align-self:center;
     width:80%; height:80%; font-size:inherit; font-family:@theme-font-family;

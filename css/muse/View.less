@@ -1,7 +1,7 @@
 
 // Not in production
 
-.grid3x3() { display:grid; grid-template-columns:33% 33% 34%; grid-template-rows:33% 33% 34%;
+.grid3x3() { display:grid; grid-template-columns:33fr 33fr 34fr; grid-template-rows:33fr 33fr 34fr;
              grid-template-areas: "nw north ne" "west cen east" "sw south se"; }
 
 .pdir( @dir     ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;

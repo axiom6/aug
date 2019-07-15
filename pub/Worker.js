@@ -92,6 +92,9 @@ toCacheUrls = function(objs) {
 urls = toCacheUrls(cacheObjs);
 
 publish = (status, text, obj = null) => {
+  if (true) {
+    return;
+  }
   if (obj != null) {
     console.log(status, text, obj);
   } else {

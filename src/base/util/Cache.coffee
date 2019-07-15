@@ -43,7 +43,7 @@ class Cache
 
   consoleStatus:( object ) ->
     if not object.error?
-      console.log(   'Cache', { status:object.status, text:object.text } )
+      console.log(   'Cache', { status:object.status, text:object.text } ) if false
     else
       console.error( 'Cache', { status:object.status, text:object.text, error:object.error } )
     return

@@ -1195,9 +1195,12 @@ Data = class Data {
 
 };
 
+//ata.parse   = Util.parseURI( window.location.href )
+//ata.hosted1 = Data.parse.hostname + '/app/data/'
+// console.log('Data.hosted', Data.hosted, window.location.href )
 Data.local = "app/data/";
 
-Data.hosted = Util$1.parseURI(window.location.href) + '/app/data/';
+Data.hosted = '/app/data/';
 
 Data.cssDir = 'css/'; // /css in /pub
 

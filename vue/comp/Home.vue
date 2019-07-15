@@ -43,7 +43,7 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .grid3x1() { display:grid; grid-template-columns:100%; grid-template-rows:10% 80% 10%;
+  .grid3x1() { display:grid; grid-template-columns:1fr; grid-template-rows:10fr 80fr 10fr;
       grid-template-areas:"head" "elem" "foot"; }
   
   .home { .grid3x1(); position:relative; left:0; top:0; right:0; bottom:0;
