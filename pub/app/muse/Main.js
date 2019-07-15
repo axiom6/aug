@@ -52,11 +52,11 @@ Main = (function() {
 
   };
 
-  Data.local = "../data/";
+  Data.local = "app/data/";
 
-  Data.hosted = "https://main-4a9c7.firebaseapp.com/app/data/";
+  Data.hosted = "https://muse-b90e1.firebaseapp.com/app/data/";
 
-  Main.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json";
+  Main.FontUrl = "css/font/three/helvetiker_regular.typeface.json";
 
   Main.Batch = {
     Cols: {

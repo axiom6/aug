@@ -32,6 +32,7 @@
     "babel-eslint": "^10.0.1",
     "coffeescript": "^2.4.1",
     "typescript": "^3.4.5",
+    "lodash": ">=4.17.13",
     "eslint": "^5.12.0",
     "eslint-config-jwalker": "^5.2.0",
     "eslint-plugin-vue": "^5.1.0",

@@ -6,9 +6,9 @@ import Cache   from '../../base/util/Cache.js'
 
 class Main
 
-  Data.local   = "../data/"
-  Data.hosted  = "https://main-4a9c7.firebaseapp.com/app/data/"
-  Main.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json"
+  Data.local   = "app/data/"
+  Data.hosted  = "https://muse-b90e1.firebaseapp.com/app/data/"
+  Main.FontUrl = "css/font/three/helvetiker_regular.typeface.json"
 
   Main.Batch = {
     Cols: { url:'muse/Cols.json', data:null, type:'Pack', plane:'Cols' }

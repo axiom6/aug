@@ -50,7 +50,7 @@
       titleRef: function (btn) {
         return 'Title' + btn.key },
       img: function (btn) {
-        return '../../css/' + btn.img }, // return '../../css/' + btn.img },
+        return 'css/' + btn.img }, // return '../../css/' + btn.img },
       adjustWidths: function() {
          let keys = Object.keys(this.btns)
          for( let key of keys ) {

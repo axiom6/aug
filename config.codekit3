@@ -1081,14 +1081,6 @@
 		"oAP": "/pub/app/augm/Home.js",
 		"oF": 0
 		},
-	"/pub/app/augm/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/app/augm/index.html",
-		"oF": 0
-		},
 	"/pub/app/augm/Main.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -1148,17 +1140,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/app/augm/Test-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/app/augm/Worker.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/app/augm/Worker-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -1339,6 +1320,14 @@
 		"oO": 0,
 		"oS": 1
 		},
+	"/pub/app/main/manifest.webmanifest": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/app/main/manifest.webmanifest",
+		"oF": 0
+		},
 	"/pub/app/muse/Home.js": {
 		"bF": 0,
 		"ft": 64,
@@ -1356,14 +1345,6 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/pub/app/muse/Home.js",
-		"oF": 0
-		},
-	"/pub/app/muse/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/app/muse/index.html",
 		"oF": 0
 		},
 	"/pub/app/muse/Main.coffee": {
@@ -1429,16 +1410,13 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/muse/Worker.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
+	"/pub/augm.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
 		"oA": 1,
-		"oAP": "/pub/app/muse/Worker-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
+		"oAP": "/pub/augm.html",
+		"oF": 0
 		},
 	"/pub/base/d3d/Axes.js": {
 		"bF": 0,
@@ -2472,14 +2450,6 @@
 		"oT": 1,
 		"q": 100
 		},
-	"/pub/favicon.ico": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/pub/favicon.ico",
-		"oF": 0
-		},
 	"/pub/gan/2D/Basics.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2777,14 +2747,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/index.html",
-		"oF": 0
-		},
 	"/pub/lib/d3/align.js": {
 		"bF": 0,
 		"ft": 64,
@@ -3049,12 +3011,12 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/manifest.webmanifest": {
+	"/pub/main.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
-		"oAP": "/pub/manifest.webmanifest",
+		"oA": 1,
+		"oAP": "/pub/main.html",
 		"oF": 0
 		},
 	"/pub/math/adt/Adt.js": {
@@ -3265,6 +3227,14 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"/pub/muse.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/muse.html",
+		"oF": 0
 		},
 	"/pub/robots.txt": {
 		"cB": 0,
@@ -8801,23 +8771,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.html",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "",
-			"autoOutputPathReplace2": "",
-			"autoOutputPathStyle": 0,
-			"fileExtension": "html",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.js",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "vue",
 			"autoOutputPathReplace2": "pub/vue",
 			"autoOutputPathStyle": 3,
 			"fileExtension": "vue",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.html",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "",
+			"autoOutputPathReplace2": "",
+			"autoOutputPathStyle": 0,
+			"fileExtension": "html",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

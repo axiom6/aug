@@ -7,9 +7,9 @@ import Cache  from '../../base/util/Cache.js'
 
 class Main
 
-  Data.local   = "../data/"
-  Data.hosted  = "https://main-4a9c7.firebaseapp.com/app/data/"
-  Main.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json"
+  Data.local   = "app/data/"
+  Data.hosted  = "https://augm-d4b3c.firebaseapp.com/app/data/"
+  Main.FontUrl = "css/font/three/helvetiker_regular.typeface.json"
 
   Main.Batch = {
     Math: { url:'augm/Math.json', data:null, type:'Pack', plane:'Math' }

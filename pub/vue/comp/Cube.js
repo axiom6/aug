@@ -1196,7 +1196,7 @@ Data = (function() {
     }
 
   }
-  Data.local = "../data/";
+  Data.local = "app/data/";
 
   Data.hosted = "https://main-4a9c7.firebaseapp.com/app/data/";
 
