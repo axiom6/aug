@@ -1,0 +1,20 @@
+
+augm-d4b3c
+muse-b90e1
+main-4a9c7
+
+https://augm-d4b3c.firebaseapp.com/augm.html
+https://muse-b90e1.firebaseapp.com/muse.html
+https://main-4a9c7.firebaseapp.com/main.html
+
+
+main: Local server: http://localhost:5000
+augm: Local server: http://localhost:5005
+muse: Local server: http://localhost:5006
+
+
+ PWAs are:
+    Fast, quickly responding to user interactions.
+    Reliable, being capable of working with non optimal network conditions or no network at all.
+    Integrated, offering a seamless experience in the OS.
+    Engaging, with a beautiful design and using notifications.

@@ -178,12 +178,12 @@ class Store
   isArray:(a) ->
     a isnt null and typeof(a)!="undefined" and typeof(a)!="string" and a.length? and a.length > 0
 
-  # RDUDC            Retrieve  Create    Update    Delete   Change
-  Store.restOps  = [ 'get',    'add',    'put',    'del', 'batch' ]
-  Store.sqlOps   = [ 'select', 'insert', 'update', 'remove' ]
-  Store.tableOps = [ 'show',   'open',             'drop'   ]
+# RDUDC            Retrieve  Create    Update    Delete   Change
+Store.restOps  = [ 'get',    'add',    'put',    'del', 'batch' ]
+Store.sqlOps   = [ 'select', 'insert', 'update', 'remove' ]
+Store.tableOps = [ 'show',   'open',             'drop'   ]
 
-  # Dafaults for empty arguments
-  Store.where  = () -> true # Default where clause filter that returns true to access all records
+# Dafaults for empty arguments
+Store.where  = () -> true # Default where clause filter that returns true to access all records
  
 export default Store

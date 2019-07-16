@@ -2,6 +2,8 @@ var Cache;
 
 Cache = class Cache {
   constructor(stream) {
+    // else
+    // console.log(   'Cache', { status:object.status, text:object.text } )
     this.quota = this.quota.bind(this);
     this.quotaGranted = this.quotaGranted.bind(this);
     this.onlineEvent = this.onlineEvent.bind(this);
@@ -58,14 +60,7 @@ Cache = class Cache {
   }
 
   consoleStatus(object) {
-    if (object.error == null) {
-      if (false) {
-        console.log('Cache', {
-          status: object.status,
-          text: object.text
-        });
-      }
-    } else {
+    if (object.error != null) {
       console.error('Cache', {
         status: object.status,
         text: object.text,

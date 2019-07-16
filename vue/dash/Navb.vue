@@ -42,7 +42,7 @@
     grid-template-areas: "gleft ghome gsearch gcontact gsettings gsignon"; }
   
   .navb {  .grid1x5(); display:grid; background:@theme-back; color:@theme-color;
-    font-family:@theme-font-family; font-size:1.4vw; font-weight:bold;    // Using because Navb sensistive to width
+    font-family:@theme-font-family; font-weight:bold;    // Using because Navb sensistive to width
     .navh     { grid-area:ghome;     justify-self:start; align-self:center;
       i { margin-right:0.3em; }
       a { color:@theme-color; text-decoration:none; }}
@@ -53,7 +53,8 @@
     .contact  { grid-area:gcontact;  justify-self:start; align-self:center; }
     .signon   { grid-area:gsignon;   justify-self:start; align-self:center; }
     .settings { grid-area:gsettings; justify-self:start; align-self:center; position:relative;
-      ul { display:none; align-self:start; list-style:none; font-size:0.7em; z-index:3; background:@theme-back-navb-menu;
+      ul { display:none; align-self:start; list-style:none; font-size:0.7rem; z-index:3;
+        background:@theme-back-navb-menu;
         position:absolute; left:10px; top:12px; width:200px; height:auto;
         padding:0.2em 0.2em 0.2em 0.6em; border-radius:0 24px 24px 0;
         li { display:inline; border-radius:0 18px 18px 0;  background-color:@theme-back; color:@theme-color;

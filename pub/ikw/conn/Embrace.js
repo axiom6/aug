@@ -44,7 +44,7 @@ Embrace = class Embrace {
     yt = geom.y0 * 0.5 - 6;
     this.shapes.conveySankey("Embrace", defs, g, this.studies, this.innovs, x, y, w, h);
     this.shapes.icon(g, geom.x0, geom.y0, this.spec.name, this.shapes.htmlId(this.spec.name, 'IconSvg'), Vis.unicode(this.spec.icon));
-    this.shapes.text(g, xt, yt, this.spec.name, this.shapes.htmlId(this.spec.name, 'TextSvg'), 'lack', '1.8em');
+    this.shapes.text(g, xt, yt, this.spec.name, this.shapes.htmlId(this.spec.name, 'TextSvg'), 'lack', '1.2em');
     this.shapes.practiceFlow(g, geom, this.spec);
   }
 

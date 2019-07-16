@@ -201,7 +201,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-364b3248_0", { source: ".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Dabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Dabs.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,UAAU;EACV,uBAAuB;ECCzB,gBAAA;ADCA;ACCA;EACA,qBAAA;EACA,gBAAA;EACA,gCAAA;EACA,4BAAA;EACA,6BAAA;EACA,4BAAA;EDCE,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Dabs.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"dabs\">\n    <template v-for=\"page in pages\">\n      <div :class=\"classTab(page.key)\" @click=\"pubTab(page.key)\">{{page.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Object, init:String },\n\n    data() { return { key:this.init } },\n\n    methods: {\n      pubTab: function (key) {\n        this.key = key;\n        this.publish( this.comp, key ); },\n      classTab: function (key) {\n        return this.key===key ? 'tab-active' : 'tab'; } },\n\n    mounted: function () {\n      this.subscribe( 'Geom', 'Dabs.vue', (key) => {\n        this.classTab(key) } ); }\n\n  }\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .dabs { position:absolute; left:0; top:0; width:100%; height:5%; background-color:@theme-back; font-size:1.5em;\n    .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;\n      border-radius:12px 12px 0 0; border-left: @theme-color solid thin;\n      border-top:@theme-color solid thin; border-right:@theme-color solid thin;\n      background-color:@theme-back; color:@theme-color; }\n    .tab:hover  {         background-color:@theme-color; color:@theme-back; }\n    .tab-active { .tab(); background-color:@theme-color; color:@theme-back; } }\n\n</style>"]}, media: undefined });
+    inject("data-v-218b8944_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-navb {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Dabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Dabs.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;ECCzB,iBAAA;ADCA;ACCA;EACA,kBAAA;EACA,OAAA;EACA,MAAA;EACA,WAAA;EACA,UAAA;EACA,uBAAA;ADCA;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Dabs.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-navb {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"dabs\">\n    <template v-for=\"page in pages\">\n      <div :class=\"classTab(page.key)\" @click=\"pubTab(page.key)\">{{page.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Object, init:String },\n\n    data() { return { key:this.init } },\n\n    methods: {\n      pubTab: function (key) {\n        this.key = key;\n        this.publish( this.comp, key ); },\n      classTab: function (key) {\n        return this.key===key ? 'tab-active' : 'tab'; } },\n\n    mounted: function () {\n      this.subscribe( 'Geom', 'Dabs.vue', (key) => {\n        this.classTab(key) } ); }\n\n  }\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .dabs { position:absolute; left:0; top:0; width:100%; height:5%; background-color:@theme-back;\n    .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;\n      border-radius:12px 12px 0 0; border-left: @theme-color solid thin;\n      border-top:@theme-color solid thin; border-right:@theme-color solid thin;\n      background-color:@theme-back; color:@theme-color; }\n    .tab:hover  {         background-color:@theme-color; color:@theme-back; }\n    .tab-active { .tab(); background-color:@theme-color; color:@theme-back; } }\n\n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -314,7 +314,7 @@ __vue_render__$1._withStripped = true;
   /* style */
   const __vue_inject_styles__$1 = function (inject) {
     if (!inject) return
-    inject("data-v-6cfce248_0", { source: ".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 2.5em;\n  display: grid;\n  grid-template-columns: 33fr 33fr 34fr;\n  grid-template-rows: 11fr 11fr 11fr 11fr 11fr 11fr 11fr 11fr 12fr;\n  grid-template-areas: \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\" \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\" \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .r1c1 {\n  display: grid;\n  grid-area: r1c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c2 {\n  display: grid;\n  grid-area: r1c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c3 {\n  display: grid;\n  grid-area: r1c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c1 {\n  display: grid;\n  grid-area: r2c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c2 {\n  display: grid;\n  grid-area: r2c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c3 {\n  display: grid;\n  grid-area: r2c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c1 {\n  display: grid;\n  grid-area: r3c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c2 {\n  display: grid;\n  grid-area: r3c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c3 {\n  display: grid;\n  grid-area: r3c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c1 {\n  display: grid;\n  grid-area: r4c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c2 {\n  display: grid;\n  grid-area: r4c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c3 {\n  display: grid;\n  grid-area: r4c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c1 {\n  display: grid;\n  grid-area: r5c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c2 {\n  display: grid;\n  grid-area: r5c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c3 {\n  display: grid;\n  grid-area: r5c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c1 {\n  display: grid;\n  grid-area: r6c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c2 {\n  display: grid;\n  grid-area: r6c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c3 {\n  display: grid;\n  grid-area: r6c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c1 {\n  display: grid;\n  grid-area: r7c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c2 {\n  display: grid;\n  grid-area: r7c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c3 {\n  display: grid;\n  grid-area: r7c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c1 {\n  display: grid;\n  grid-area: r8c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c2 {\n  display: grid;\n  grid-area: r8c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c3 {\n  display: grid;\n  grid-area: r8c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c1 {\n  display: grid;\n  grid-area: r9c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c2 {\n  display: grid;\n  grid-area: r9c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c3 {\n  display: grid;\n  grid-area: r9c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n", map: {"version":3,"sources":["MathND.vue","/Users/ax/Documents/prj/aug/vue/math/MathND.vue"],"names":[],"mappings":"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","file":"MathND.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 2.5em;\n  display: grid;\n  grid-template-columns: 33fr 33fr 34fr;\n  grid-template-rows: 11fr 11fr 11fr 11fr 11fr 11fr 11fr 11fr 12fr;\n  grid-template-areas: \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\" \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\" \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .r1c1 {\n  display: grid;\n  grid-area: r1c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c2 {\n  display: grid;\n  grid-area: r1c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c3 {\n  display: grid;\n  grid-area: r1c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c1 {\n  display: grid;\n  grid-area: r2c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c2 {\n  display: grid;\n  grid-area: r2c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c3 {\n  display: grid;\n  grid-area: r2c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c1 {\n  display: grid;\n  grid-area: r3c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c2 {\n  display: grid;\n  grid-area: r3c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c3 {\n  display: grid;\n  grid-area: r3c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c1 {\n  display: grid;\n  grid-area: r4c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c2 {\n  display: grid;\n  grid-area: r4c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c3 {\n  display: grid;\n  grid-area: r4c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c1 {\n  display: grid;\n  grid-area: r5c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c2 {\n  display: grid;\n  grid-area: r5c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c3 {\n  display: grid;\n  grid-area: r5c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c1 {\n  display: grid;\n  grid-area: r6c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c2 {\n  display: grid;\n  grid-area: r6c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c3 {\n  display: grid;\n  grid-area: r6c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c1 {\n  display: grid;\n  grid-area: r7c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c2 {\n  display: grid;\n  grid-area: r7c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c3 {\n  display: grid;\n  grid-area: r7c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c1 {\n  display: grid;\n  grid-area: r8c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c2 {\n  display: grid;\n  grid-area: r8c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c3 {\n  display: grid;\n  grid-area: r8c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c1 {\n  display: grid;\n  grid-area: r9c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c2 {\n  display: grid;\n  grid-area: r9c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c3 {\n  display: grid;\n  grid-area: r9c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n","\n\n<template>\n  <div>\n    <d-dabs comp=\"Math\" :pages=\"pages\" :init=\"key\"></d-dabs>\n    <div class=\"comp\">\n      <template v-for=\"exp in exps\">\n        <div :class=\"exp.klass\" :ref=\"exp.klass\"></div>\n      </template>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Dabs  from '../elem/Dabs.vue';\n\n  let MathND = {\n\n    components:{ 'd-dabs':Dabs },\n\n    methods: {\n\n      isPage: function(key) {\n        return this.key === key; },\n\n      onTabs: function(key) {\n        if( this.pages[key] ) {\n          this.key = key;\n          this.create(this.key);\n          this.mathML(this.exps); } },\n\n      create: function( key ) {\n        let page = this.pages[key];\n        if( page.obj===null ) {\n            page.obj = new page.create(); }\n        let exps = page.obj.math();\n        let i    = 0;\n        for( let key in exps ) {\n          let exp   = exps[key];\n          exp.klass = this.klass(i);\n          i++; }\n        this.exps = exps; },\n\n      mathML: function ( exps ) {\n        this.$nextTick( function() { // Wait for DOM to render\n          for( let key in exps ){\n            let exp  = exps[key];\n            let elem = this.$refs[exp.klass][0];\n              elem.innerHTML = exp.mathML; } } ) },\n\n    // Generate a row column layout class\n    klass: function( i ) {\n      let ncol = 3;\n      let mod  = i       % ncol;\n      let row  = (i-mod) / ncol + 1;\n      let col  = mod + 1;\n      return `r${row}c${col}`; }\n    },\n\n    mounted: function () {\n      this.subscribe( 'Math', this.comp+'.vue', (key) => {\n        if( typeof(key)==='string' ) {\n          this.onTabs( key ); } } );\n      this.onTabs( this.key ); }\n  }\n  \nexport default MathND;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .grid9x3() { display:grid; grid-template-columns:33fr 33fr 34fr; grid-template-rows:11fr 11fr 11fr 11fr 11fr 11fr 11fr 11fr 12fr;\n    grid-template-areas:\n      \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\"\n      \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\"\n      \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\"; }\n  \n  .c( @rc ) { display:grid; grid-area:@rc; justify-self:stretch; align-self:stretch;\n    justify-items:center; align-items:center; background-color:@theme-back; color:@theme-color;\n    border:solid thin @theme-color; }\n  \n  .comp { background-color:@theme-back; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:2.5em;\n    .grid9x3(); justify-items:center; align-items:center;\n    \n    .r1c1{.c(r1c1)}; .r1c2{.c(r1c2)}; .r1c3{.c(r1c3)};\n    .r2c1{.c(r2c1)}; .r2c2{.c(r2c2)}; .r2c3{.c(r2c3)};\n    .r3c1{.c(r3c1)}; .r3c2{.c(r3c2)}; .r3c3{.c(r3c3)};\n    .r4c1{.c(r4c1)}; .r4c2{.c(r4c2)}; .r4c3{.c(r4c3)};\n    .r5c1{.c(r5c1)}; .r5c2{.c(r5c2)}; .r5c3{.c(r5c3)};\n    .r6c1{.c(r6c1)}; .r6c2{.c(r6c2)}; .r6c3{.c(r6c3)};\n    .r7c1{.c(r7c1)}; .r7c2{.c(r7c2)}; .r7c3{.c(r7c3)};\n    .r8c1{.c(r8c1)}; .r8c2{.c(r8c2)}; .r8c3{.c(r8c3)};\n    .r9c1{.c(r9c1)}; .r9c2{.c(r9c2)}; .r9c3{.c(r9c3)};\n  }\n\n</style>"]}, media: undefined });
+    inject("data-v-610f9bfd_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-navb {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 2.5rem;\n  display: grid;\n  grid-template-columns: 33fr 33fr 34fr;\n  grid-template-rows: 11fr 11fr 11fr 11fr 11fr 11fr 11fr 11fr 12fr;\n  grid-template-areas: \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\" \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\" \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .r1c1 {\n  display: grid;\n  grid-area: r1c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c2 {\n  display: grid;\n  grid-area: r1c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c3 {\n  display: grid;\n  grid-area: r1c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c1 {\n  display: grid;\n  grid-area: r2c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c2 {\n  display: grid;\n  grid-area: r2c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c3 {\n  display: grid;\n  grid-area: r2c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c1 {\n  display: grid;\n  grid-area: r3c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c2 {\n  display: grid;\n  grid-area: r3c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c3 {\n  display: grid;\n  grid-area: r3c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c1 {\n  display: grid;\n  grid-area: r4c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c2 {\n  display: grid;\n  grid-area: r4c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c3 {\n  display: grid;\n  grid-area: r4c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c1 {\n  display: grid;\n  grid-area: r5c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c2 {\n  display: grid;\n  grid-area: r5c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c3 {\n  display: grid;\n  grid-area: r5c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c1 {\n  display: grid;\n  grid-area: r6c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c2 {\n  display: grid;\n  grid-area: r6c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c3 {\n  display: grid;\n  grid-area: r6c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c1 {\n  display: grid;\n  grid-area: r7c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c2 {\n  display: grid;\n  grid-area: r7c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c3 {\n  display: grid;\n  grid-area: r7c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c1 {\n  display: grid;\n  grid-area: r8c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c2 {\n  display: grid;\n  grid-area: r8c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c3 {\n  display: grid;\n  grid-area: r8c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c1 {\n  display: grid;\n  grid-area: r9c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c2 {\n  display: grid;\n  grid-area: r9c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c3 {\n  display: grid;\n  grid-area: r9c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n", map: {"version":3,"sources":["MathND.vue","/Users/ax/Documents/prj/aug/vue/math/MathND.vue"],"names":[],"mappings":"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","file":"MathND.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-navb {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.comp {\n  background-color: black;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 2.5rem;\n  display: grid;\n  grid-template-columns: 33fr 33fr 34fr;\n  grid-template-rows: 11fr 11fr 11fr 11fr 11fr 11fr 11fr 11fr 12fr;\n  grid-template-areas: \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\" \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\" \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .r1c1 {\n  display: grid;\n  grid-area: r1c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c2 {\n  display: grid;\n  grid-area: r1c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r1c3 {\n  display: grid;\n  grid-area: r1c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c1 {\n  display: grid;\n  grid-area: r2c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c2 {\n  display: grid;\n  grid-area: r2c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r2c3 {\n  display: grid;\n  grid-area: r2c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c1 {\n  display: grid;\n  grid-area: r3c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c2 {\n  display: grid;\n  grid-area: r3c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r3c3 {\n  display: grid;\n  grid-area: r3c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c1 {\n  display: grid;\n  grid-area: r4c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c2 {\n  display: grid;\n  grid-area: r4c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r4c3 {\n  display: grid;\n  grid-area: r4c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c1 {\n  display: grid;\n  grid-area: r5c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c2 {\n  display: grid;\n  grid-area: r5c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r5c3 {\n  display: grid;\n  grid-area: r5c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c1 {\n  display: grid;\n  grid-area: r6c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c2 {\n  display: grid;\n  grid-area: r6c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r6c3 {\n  display: grid;\n  grid-area: r6c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c1 {\n  display: grid;\n  grid-area: r7c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c2 {\n  display: grid;\n  grid-area: r7c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r7c3 {\n  display: grid;\n  grid-area: r7c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c1 {\n  display: grid;\n  grid-area: r8c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c2 {\n  display: grid;\n  grid-area: r8c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r8c3 {\n  display: grid;\n  grid-area: r8c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c1 {\n  display: grid;\n  grid-area: r9c1;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c2 {\n  display: grid;\n  grid-area: r9c2;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n.comp .r9c3 {\n  display: grid;\n  grid-area: r9c3;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n  background-color: black;\n  color: wheat;\n  border: solid thin wheat;\n}\n","\n\n<template>\n  <div>\n    <d-dabs comp=\"Math\" :pages=\"pages\" :init=\"key\"></d-dabs>\n    <div class=\"comp\">\n      <template v-for=\"exp in exps\">\n        <div :class=\"exp.klass\" :ref=\"exp.klass\"></div>\n      </template>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Dabs  from '../elem/Dabs.vue';\n\n  let MathND = {\n\n    components:{ 'd-dabs':Dabs },\n\n    methods: {\n\n      isPage: function(key) {\n        return this.key === key; },\n\n      onTabs: function(key) {\n        if( this.pages[key] ) {\n          this.key = key;\n          this.create(this.key);\n          this.mathML(this.exps); } },\n\n      create: function( key ) {\n        let page = this.pages[key];\n        if( page.obj===null ) {\n            page.obj = new page.create(); }\n        let exps = page.obj.math();\n        let i    = 0;\n        for( let key in exps ) {\n          let exp   = exps[key];\n          exp.klass = this.klass(i);\n          i++; }\n        this.exps = exps; },\n\n      mathML: function ( exps ) {\n        this.$nextTick( function() { // Wait for DOM to render\n          for( let key in exps ){\n            let exp  = exps[key];\n            let elem = this.$refs[exp.klass][0];\n              elem.innerHTML = exp.mathML; } } ) },\n\n    // Generate a row column layout class\n    klass: function( i ) {\n      let ncol = 3;\n      let mod  = i       % ncol;\n      let row  = (i-mod) / ncol + 1;\n      let col  = mod + 1;\n      return `r${row}c${col}`; }\n    },\n\n    mounted: function () {\n      this.subscribe( 'Math', this.comp+'.vue', (key) => {\n        if( typeof(key)==='string' ) {\n          this.onTabs( key ); } } );\n      this.onTabs( this.key ); }\n  }\n  \nexport default MathND;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .grid9x3() { display:grid; grid-template-columns:33fr 33fr 34fr; grid-template-rows:11fr 11fr 11fr 11fr 11fr 11fr 11fr 11fr 12fr;\n    grid-template-areas:\n      \"r1c1 r1c2 r1c3\" \"r2c1 r2c2 r2c3\" \"r3c1 r3c2 r3c3\"\n      \"r4c1 r4c2 r4c3\" \"r5c1 r5c2 r5c3\" \"r6c1 r6c2 r6c3\"\n      \"r7c1 r7c2 r7c3\" \"r8c1 r8c2 r8c3\" \"r9c1 r9c2 r9c3\"; }\n  \n  .c( @rc ) { display:grid; grid-area:@rc; justify-self:stretch; align-self:stretch;\n    justify-items:center; align-items:center; background-color:@theme-back; color:@theme-color;\n    border:solid thin @theme-color; }\n  \n  .comp { background-color:@theme-back; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:@theme-math-size;\n    .grid9x3(); justify-items:center; align-items:center;\n    \n    .r1c1{.c(r1c1)}; .r1c2{.c(r1c2)}; .r1c3{.c(r1c3)};\n    .r2c1{.c(r2c1)}; .r2c2{.c(r2c2)}; .r2c3{.c(r2c3)};\n    .r3c1{.c(r3c1)}; .r3c2{.c(r3c2)}; .r3c3{.c(r3c3)};\n    .r4c1{.c(r4c1)}; .r4c2{.c(r4c2)}; .r4c3{.c(r4c3)};\n    .r5c1{.c(r5c1)}; .r5c2{.c(r5c2)}; .r5c3{.c(r5c3)};\n    .r6c1{.c(r6c1)}; .r6c2{.c(r6c2)}; .r6c3{.c(r6c3)};\n    .r7c1{.c(r7c1)}; .r7c2{.c(r7c2)}; .r7c3{.c(r7c3)};\n    .r8c1{.c(r8c1)}; .r8c2{.c(r8c2)}; .r8c3{.c(r8c3)};\n    .r9c1{.c(r9c1)}; .r9c2{.c(r9c2)}; .r9c3{.c(r9c3)};\n  }\n\n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -2233,291 +2233,290 @@ var Latex$1 = Latex;
 
 var Adt;
 
-Adt = (function() {
-  class Adt {
-    // Geometric Algerbra
-    static Dot(u, v) {
-      return u(~v); // Dot product
-    }
-
-    static Wedge(u, v) {
-      return u ^ v; // Wedge outer generalisze cross product
-    }
-
-    static Vee(u, v) {
-      return u & v; // Meet or join
-    }
-
-    static Dual(u) {
-      return u; // Dual
-    }
-
-    static Inverse(u) {
-      return u; // Inverse
-    }
-
-    static Conjugate(u) {
-      return u; // Conjugate
-    }
-
-    static Reverse(u) {
-      return u; // Reverse
-    }
-
-    static Involute(u) {
-      return u; // Involute
-    }
-
-    static Rotor(u) {
-      return u; // Rotor
-    }
-
-    static Magnitude(u) {
-      return u; // Magnitude
-    }
-
-    static Grade(u) {
-      return u; // Grade
-    }
-
-    static Reflect(u, v) {
-      return u * v * conjugate(u);
-    }
-
-    static Rotate(u, v) {
-      return u * v * conjugate(u);
-    }
-
-    static GP(u, v) {
-      return Adt.Dot(u, v) + Adt.Wedge(u, v); // Geometric Product
-    }
-
-    // Vector, Matrix, Numbers and Variables
-    static Vec(f, rest) {
-      return f(rest);
-    }
-
-    static Mat(f, rest) {
-      return f(rest);
-    }
-
-    static Ratio(u, v) {
-      return u / v;
-    }
-
-    // Arithmetic
-    static Equ(u, v) {
-      return u = v;
-    }
-
-    static Add(u, v) {
-      return u + v;
-    }
-
-    static Sub(u, v) {
-      return u - v;
-    }
-
-    static Mul(u, v) {
-      return u * v;
-    }
-
-    static Div(u, v) {
-      return u / v;
-    }
-
-    static Pow(u, v) {
-      return u ** v;
-    }
-
-    // Unary operator high precendence
-    static Neg(u) {
-      return -u;
-    }
-
-    static Recip(u) {
-      return 1 / u;
-    }
-
-    static Abs(u) {
-      return Math.abs(u);
-    }
-
-    // Parenthesis Braces Object Array
-    static Paren(u) {
-      return u;
-    }
-
-    static Brace(u) {
-      return {u};
-    }
-
-    // Natural Log, Log Base, Root, Square Root and e
-    static Ln(u) {
-      return Math.log(u); // ln(u)
-    }
-
-    static Log(u, b) {
-      return Math.log(u) / Math.log(b); // log_b(u)
-    }
-
-    static Root(u, r) {
-      return Math.pow(u, 1 / r); // root_b(u)
-    }
-
-    static Sqrt(u) {
-      return Math.sqrt(u); // sqrt(u)
-    }
-
-    static E(u) {
-      return Math.exp(u); // e**u
-    }
-
-    
-    // Trigometric
-    static Sin(u) {
-      return Math.sin(u);
-    }
-
-    static Cos(u) {
-      return Math.cos(u);
-    }
-
-    static Tan(u) {
-      return Math.tan(u);
-    }
-
-    static Csc(u) {
-      return 1.0 / Math.sin(u);
-    }
-
-    static Sec(u) {
-      return 1.0 / Math.cos(u);
-    }
-
-    static Cot(u) {
-      return 1.0 / Math.tan(u);
-    }
-
-    // Inverse Trigometric
-    static Arcsin(u) {
-      return Math.asin(u);
-    }
-
-    static Arccos(u) {
-      return Math.acos(u);
-    }
-
-    static Arctan(u) {
-      return Math.atan(u);
-    }
-
-    static Arccsc(u) {
-      return Math.asin(1 / u); // ???
-    }
-
-    static Arcsec(u) {
-      return Math.acos(1 / u); // ???
-    }
-
-    static Arccot(u) {
-      return Math.atan(1 / u); // ???
-    }
-
-    // Hyperbolic  with Inverse
-    static Sinh(u) {
-      return Math.sinh(u);
-    }
-
-    static Cosh(u) {
-      return Math.cosh(u);
-    }
-
-    static Tanh(u) {
-      return Math.tanh(u);
-    }
-
-    static Arccinh(u) {
-      return Math.asinh(u);
-    }
-
-    static Arccosh(u) {
-      return Math.acosh(u);
-    }
-
-    static Arctanh(u) {
-      return Math.atanh(u);
-    }
-
-    // Calculus, Sum and Typsetting
-    static Fun(f, u) {
-      return u; // f(u) Function
-    }
-
-    static D(u) {
-      return u; // d(u) Differentiation
-    }
-
-    static Int(u) {
-      return u; // Integration
-    }
-
-    static DefInt(a, b, u) {
-      return a + b + u; // Definite Integral
-    }
-
-    static Sum(a, b, u) {
-      return a + b + u; // Summation
-    }
-
-    
-    // Subscripts Superscripts Limits
-    static Sus(u, a) {
-      return u + a; // u_a  Subscript  u^b  Superscript is Power
-    }
-
-    static Lim(a, b) {
-      return a + b; //_a^b  Limit for Sum and Itg
-    }
-
-    // Finge
-    //Obj = (k,v)  => { k:v } # ???
-    static Latex(o) {
-      return o;
-    }
-
-    static Sim(u) {
-      return u; // sim(u) Simplify
-    }
-
-    static Not(u) {
-      return u; // Not an Adt expression
-    }
-
-    static Msg(u) {
-      return u; // Parsing error message
-    }
-
-    static Unk(u) {
-      return u;
-    }
-
+Adt = class Adt {
+  // Geometric Algerbra
+  static Dot(u, v) {
+    return u(~v); // Dot product
   }
-  Adt.Geom = [Adt.Dot, Adt.Wedge, Adt.Vee, Adt.Dual, Adt.Inverse, Adt.Conjugate, Adt.Reverse, Adt.Involute, Adt.Rotor, Adt.Magnitude, Adt.Grade, Adt.Reflect, Adt.Rotate, Adt.GP];
 
-  Adt.Arith = [Adt.Ratio, Adt.Equ, Adt.Add, Adt.Sub, Adt.Mul, Adt.Div, Adt.Pow, Adt.Neg, Adt.Recip, Adt.Abs, Adt.Paren, Adt.Brace];
+  static Wedge(u, v) {
+    return u ^ v; // Wedge outer generalisze cross product
+  }
 
-  Adt.Trans = [Adt.Ln, Adt.Log, Adt.Root, Adt.Sqrt, Adt.E, Adt.Sin, Adt.Cos, Adt.Tan, Adt.Csc, Adt.Sec, Adt.Cot, Adt.Arcsin, Adt.Arccos, Adt.Arctan, Adt.Arccsc, Adt.Arcsec, Adt.Arccot];
+  static Vee(u, v) {
+    return u & v; // Meet or join
+  }
 
-  Adt.Hyper = [Adt.Sinh, Adt.Cosh, Adt.Tanh, Adt.Arccinh, Adt.Arccosh, Adt.Arctanh];
+  static Dual(u) {
+    return u; // Dual
+  }
 
-  Adt.Calculus = [Adt.Fun, Adt.D, Adt.Int, Adt.DefInt, Adt.Sum, Adt.Sub, Adt.Sus, Adt.Lim];
+  static Inverse(u) {
+    return u; // Inverse
+  }
 
-  Adt.Fringe = [Adt.Latex, Adt.Sim, Adt.Not, Adt.Msg, Adt.Unk];
+  static Conjugate(u) {
+    return u; // Conjugate
+  }
 
-  return Adt;
+  static Reverse(u) {
+    return u; // Reverse
+  }
 
-}).call(undefined);
+  static Involute(u) {
+    return u; // Involute
+  }
+
+  static Rotor(u) {
+    return u; // Rotor
+  }
+
+  static Magnitude(u) {
+    return u; // Magnitude
+  }
+
+  static Grade(u) {
+    return u; // Grade
+  }
+
+  static Reflect(u, v) {
+    return u * v * conjugate(u);
+  }
+
+  static Rotate(u, v) {
+    return u * v * conjugate(u);
+  }
+
+  static GP(u, v) {
+    return Adt.Dot(u, v) + Adt.Wedge(u, v); // Geometric Product
+  }
+
+  
+  // Vector, Matrix, Numbers and Variables
+  static Vec(f, rest) {
+    return f(rest);
+  }
+
+  static Mat(f, rest) {
+    return f(rest);
+  }
+
+  static Ratio(u, v) {
+    return u / v;
+  }
+
+  // Arithmetic
+  static Equ(u, v) {
+    return u = v;
+  }
+
+  static Add(u, v) {
+    return u + v;
+  }
+
+  static Sub(u, v) {
+    return u - v;
+  }
+
+  static Mul(u, v) {
+    return u * v;
+  }
+
+  static Div(u, v) {
+    return u / v;
+  }
+
+  static Pow(u, v) {
+    return u ** v;
+  }
+
+  // Unary operator high precendence
+  static Neg(u) {
+    return -u;
+  }
+
+  static Recip(u) {
+    return 1 / u;
+  }
+
+  static Abs(u) {
+    return Math.abs(u);
+  }
+
+  // Parenthesis Braces Object Array
+  static Paren(u) {
+    return u;
+  }
+
+  static Brace(u) {
+    return {u};
+  }
+
+  // Natural Log, Log Base, Root, Square Root and e
+  static Ln(u) {
+    return Math.log(u); // ln(u)
+  }
+
+  static Log(u, b) {
+    return Math.log(u) / Math.log(b); // log_b(u)
+  }
+
+  static Root(u, r) {
+    return Math.pow(u, 1 / r); // root_b(u)
+  }
+
+  static Sqrt(u) {
+    return Math.sqrt(u); // sqrt(u)
+  }
+
+  static E(u) {
+    return Math.exp(u); // e**u
+  }
+
+  
+  // Trigometric
+  static Sin(u) {
+    return Math.sin(u);
+  }
+
+  static Cos(u) {
+    return Math.cos(u);
+  }
+
+  static Tan(u) {
+    return Math.tan(u);
+  }
+
+  static Csc(u) {
+    return 1.0 / Math.sin(u);
+  }
+
+  static Sec(u) {
+    return 1.0 / Math.cos(u);
+  }
+
+  static Cot(u) {
+    return 1.0 / Math.tan(u);
+  }
+
+  // Inverse Trigometric
+  static Arcsin(u) {
+    return Math.asin(u);
+  }
+
+  static Arccos(u) {
+    return Math.acos(u);
+  }
+
+  static Arctan(u) {
+    return Math.atan(u);
+  }
+
+  static Arccsc(u) {
+    return Math.asin(1 / u); // ???
+  }
+
+  static Arcsec(u) {
+    return Math.acos(1 / u); // ???
+  }
+
+  static Arccot(u) {
+    return Math.atan(1 / u); // ???
+  }
+
+  
+  // Hyperbolic  with Inverse
+  static Sinh(u) {
+    return Math.sinh(u);
+  }
+
+  static Cosh(u) {
+    return Math.cosh(u);
+  }
+
+  static Tanh(u) {
+    return Math.tanh(u);
+  }
+
+  static Arccinh(u) {
+    return Math.asinh(u);
+  }
+
+  static Arccosh(u) {
+    return Math.acosh(u);
+  }
+
+  static Arctanh(u) {
+    return Math.atanh(u);
+  }
+
+  // Calculus, Sum and Typsetting
+  static Fun(f, u) {
+    return u; // f(u) Function
+  }
+
+  static D(u) {
+    return u; // d(u) Differentiation
+  }
+
+  static Int(u) {
+    return u; // Integration
+  }
+
+  static DefInt(a, b, u) {
+    return a + b + u; // Definite Integral
+  }
+
+  static Sum(a, b, u) {
+    return a + b + u; // Summation
+  }
+
+  
+  // Subscripts Superscripts Limits
+  static Sus(u, a) {
+    return u + a; // u_a  Subscript  u^b  Superscript is Power
+  }
+
+  static Lim(a, b) {
+    return a + b; //_a^b  Limit for Sum and Itg
+  }
+
+  
+  // Finge
+  //Obj = (k,v)  => { k:v } # ???
+  static Latex(o) {
+    return o;
+  }
+
+  static Sim(u) {
+    return u; // sim(u) Simplify
+  }
+
+  static Not(u) {
+    return u; // Not an Adt expression
+  }
+
+  static Msg(u) {
+    return u; // Parsing error message
+  }
+
+  static Unk(u) {
+    return u;
+  }
+
+};
+
+Adt.Geom = [Adt.Dot, Adt.Wedge, Adt.Vee, Adt.Dual, Adt.Inverse, Adt.Conjugate, Adt.Reverse, Adt.Involute, Adt.Rotor, Adt.Magnitude, Adt.Grade, Adt.Reflect, Adt.Rotate, Adt.GP];
+
+Adt.Arith = [Adt.Ratio, Adt.Equ, Adt.Add, Adt.Sub, Adt.Mul, Adt.Div, Adt.Pow, Adt.Neg, Adt.Recip, Adt.Abs, Adt.Paren, Adt.Brace];
+
+Adt.Trans = [Adt.Ln, Adt.Log, Adt.Root, Adt.Sqrt, Adt.E, Adt.Sin, Adt.Cos, Adt.Tan, Adt.Csc, Adt.Sec, Adt.Cot, Adt.Arcsin, Adt.Arccos, Adt.Arctan, Adt.Arccsc, Adt.Arcsec, Adt.Arccot];
+
+Adt.Hyper = [Adt.Sinh, Adt.Cosh, Adt.Tanh, Adt.Arccinh, Adt.Arccosh, Adt.Arctanh];
+
+Adt.Calculus = [Adt.Fun, Adt.D, Adt.Int, Adt.DefInt, Adt.Sum, Adt.Sub, Adt.Sus, Adt.Lim];
+
+Adt.Fringe = [Adt.Latex, Adt.Sim, Adt.Not, Adt.Msg, Adt.Unk];
 
 var A = Adt;
 

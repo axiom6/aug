@@ -1,0 +1,36 @@
+
+Apps
+  - Demo    * Simple
+  - Muse    * Narrative
+  - Tool    * Begin
+  - Jitter  ? Move to Aug
+  - Skyline ? Move to Aug
+
+Host
+  - PWA     * Deploy to phones
+  - Fire    * this pointer in esm lib
+  - Fire    * Setup databases for all apps
+
+Config
+  - Navb    * Implement Search Contact Preferences SignIn
+  - Auth    * Learn
+  - Work    * Importscripts() in Service Worker
+  - Cache   * Management
+  - Touch   * Gestures
+  - Mobile  * Look and Feel
+  - Voice   * Google Assistant
+  - Tabs    * Consolidate
+
+Test
+  - Augm    * NodeJS Stream
+  - Muse    * NodeJS Stream
+
+Skip
+  - Augm    * Consolidate
+  - Skid    ? Consider
+  - Tocs    * Refine
+
+Complete
+  + Less    * Theme variables
+  + Host    * Consolidated augm muse main
+  + Main    * Master build witn Main.roll.sh

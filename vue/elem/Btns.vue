@@ -79,7 +79,7 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .btns { font-size:3vh; position:absolute; left:0; top:0; right:0; bottom:0; }
+  .btns { font-size:@theme-btn-size; position:absolute; left:0; top:0; right:0; bottom:0; }
   
   .btn-center { display:grid;  width:100%; height:100%; } // A surrounding div for centering button
 

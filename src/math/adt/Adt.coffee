@@ -17,8 +17,6 @@ class Adt
   @Rotate    = (u,v) => u * v * conjugate(u)
   @GP        = (u,v) => Adt.Dot(u,v) + Adt.Wedge(u,v) # Geometric Product
 
-  @Geom = [@Dot,@Wedge,@Vee,@Dual,@Inverse,@Conjugate,@Reverse,@Involute,@Rotor,@Magnitude,@Grade,@Reflect,@Rotate,@GP]
-
   # Vector, Matrix, Numbers and Variables
   @Vec   = (f,rest) =>  f(rest)
   @Mat   = (f,rest) =>  f(rest)
@@ -40,8 +38,6 @@ class Adt
   # Parenthesis Braces Object Array
   @Paren = (u)   => ( u )
   @Brace = (u)   => { u }
-
-  @Arith = [@Ratio,@Equ,@Add,@Sub,@Mul,@Div,@Pow,@Neg,@Recip,@Abs,@Paren,@Brace]
 
   # Natural Log, Log Base, Root, Square Root and e
   @Ln   = (u)   => Math.log(u)                 # ln(u)
@@ -67,10 +63,6 @@ class Adt
   @Arcsec = (u)  =>  Math.acos(1/u ) # ???
   @Arccot = (u)  =>  Math.atan(1/u ) # ???
 
-  @Trans = [@Ln,@Log,@Root,@Sqrt,@E,
-    @Sin,   @Cos,   @Tan,   @Csc,   @Sec,   @Cot,
-    @Arcsin,@Arccos,@Arctan,@Arccsc,@Arcsec,@Arccot]
-
   # Hyperbolic  with Inverse
   @Sinh    = (u) =>  Math.sinh(u)
   @Cosh    = (u) =>  Math.cosh(u)
@@ -78,8 +70,6 @@ class Adt
   @Arccinh = (u) =>  Math.asinh(u)
   @Arccosh = (u) =>  Math.acosh(u)
   @Arctanh = (u) =>  Math.atanh(u)
-
-  @Hyper = [@Sinh,@Cosh,@Tanh,@Arccinh,@Arccosh,@Arctanh]
 
   # Calculus, Sum and Typsetting
   @Fun    = (f,u)   => u         # f(u) Function
@@ -92,8 +82,6 @@ class Adt
   @Sus = (u,a)   => u + a     # u_a  Subscript  u^b  Superscript is Power
   @Lim = (a,b)   => a + b     #_a^b  Limit for Sum and Itg
 
-  @Calculus = [@Fun,@D,@Int,@DefInt,@Sum,@Sub,@Sus,@Lim]
-
   # Finge
   #Obj = (k,v)  => { k:v } # ???
   @Latex = (o)  => o
@@ -102,9 +90,15 @@ class Adt
   @Msg   = (u)  => u         # Parsing error message
   @Unk   = (u)  => u
 
-  @Fringe = [@Latex,@Sim,@Not,@Msg,@Unk]
 
-  if @Geom  is false and @Arith    is false and @Trans  is false then {}
-  if @Hyper is false and @Calculus is false and @Fringe is false then {}
+Adt.Geom     = [Adt.Dot,Adt.Wedge,Adt.Vee,Adt.Dual,Adt.Inverse,Adt.Conjugate,Adt.Reverse,Adt.Involute,Adt.Rotor,
+                Adt.Magnitude,Adt.Grade,Adt.Reflect,Adt.Rotate,Adt.GP]
+Adt.Arith    = [Adt.Ratio,Adt.Equ,Adt.Add,Adt.Sub,Adt.Mul,Adt.Div,Adt.Pow,Adt.Neg,Adt.Recip,Adt.Abs,Adt.Paren,Adt.Brace]
+Adt.Trans    = [Adt.Ln,Adt.Log,Adt.Root,Adt.Sqrt,Adt.E,
+                Adt.Sin,   Adt.Cos,   Adt.Tan,   Adt.Csc,   Adt.Sec,   Adt.Cot,
+                Adt.Arcsin,Adt.Arccos,Adt.Arctan,Adt.Arccsc, Adt.Arcsec, Adt.Arccot]
+Adt.Hyper    = [Adt.Sinh,  Adt.Cosh,  Adt.Tanh,  Adt.Arccinh,Adt.Arccosh,Adt.Arctanh]
+Adt.Calculus = [Adt.Fun,Adt.D,Adt.Int,Adt.DefInt,Adt.Sum,Adt.Sub,Adt.Sus,Adt.Lim]
+Adt.Fringe   = [Adt.Latex,Adt.Sim,Adt.Not,Adt.Msg,Adt.Unk]
 
 export default Adt

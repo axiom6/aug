@@ -120,10 +120,10 @@
   .bgc( @bg )
     { background-color:@bg; } // top | right | bottom | left
   
-  .comp { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;
+  .comp { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:@theme-prac-size;
           background-color:@theme-back; color:@theme-color-prac;
     .grid5x4(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid
-      .tabs{ grid-area:tabs; display:inline; color:@theme-color; font-size:1.2em;
+      .tabs{ grid-area:tabs; display:inline; color:@theme-color; font-size:@theme-tab-size;
              justify-self:start; align-self:center; text-align:left; }
       .cm { .pdir(cm); } .em   { .pdir(em);   } .in    { .pdir(in); }    .en   { .pdir(en);   }
       .le { .pdir(le); } .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }
@@ -131,21 +131,22 @@
       .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }
     
       // Placed one level below the 9 Practices Grid   - Check on background-color:#603;
-    .prac { background-color:#603; border-radius:36px; width:90%; height:80%; font-size:1em; font-weight:bold;
+    .prac { background-color:#603; border-radius:36px; width:90%; height:80%; font-size:@theme-prac-size;
+      font-weight:bold;
       .grid3x3(); // The 4 Displine plus Practiice name Grid
                              .north { .ddir(north); }
       .west { .ddir(west); } .cen   { .ddir(cen);   } .east { .ddir(east); }
                              .south { .ddir(south); }
-      .cen  { font-size:1.3em; }
-      div   { font-size:1.1em; } }
+      .cen  { font-size:@theme-cen-size; }
+      div   { font-size:@theme-dir-size; } }
   
-    .disp {   display:inline; justify-self:center; align-self:center; text-align:center; font-size:1.2em;
-      i     { display:inline-block;  margin-right: 0.25em; }
+    .disp {   display:inline; justify-self:center; align-self:center; text-align:center; font-size:@theme-disp-size;
+      i     { display:inline-block;  margin-right: 0.25rem; }
       .name { display:inline-block; }
-      .desc { display:none; margin:0.5em 0.5em 0.5em 0.5em; text-align:left; } }
+      .desc { display:none; margin:0.5rem 0.5rem 0.5rem 0.5rem; text-align:left; } }
   
     .area { .grid1x3(); justify-self:start; align-self:center; text-align:left; margin-left:1.5em;
-      width:90%; height:auto; font-size:1.3em;
+      width:90%; height:auto; font-size:@theme-area-size;
       i     { grid-area:icon; }
       .name { grid-area:name; font-weight:900; }
       .desc { grid-area:desc; } }
@@ -155,38 +156,38 @@
     // Placed one level above .dir at the 4 Disipline plus Practice name Grid Direction
     .fullDispDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid; border-radius:72px;
       .disp { justify-self:center; margin:0;
-        i     { font-size:4.8em !important; }
-        .name { font-size:4.8em !important; }
-        .desc { font-size:2.4em !important; display:block; } }  // Turns on .disp .desc
-      .area {   font-size:3.0em !important; padding-bottom:0; } }
+        i     { font-size:@theme-area-icon-size !important; }
+        .name { font-size:@theme-area-name-size !important; }
+        .desc { font-size:@theme-area-desc-size !important; display:block; } }  // Turns on .disp .desc
+      .area {   font-size:@theme-area-area-size !important; padding-bottom:0; } }
   
     .none { display:none; }
     
     // Placed one level above .prac at the 9 Practices Grid Direction
     .fullPracDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;
-      .prac { font-size:1em; width:100%; height:100%;
-              justify-self:center; align-self:center; display:grid; border-radius:0.5em;
-        div {     padding-bottom:2em;
+      .prac { font-size:@theme-full-size; width:100%; height:100%;
+              justify-self:center; align-self:center; display:grid; border-radius:0.5rem;
+        div {     padding-bottom:2rem;
           .disp { padding-bottom:0;
-            i     { font-size:1.6em; }
-            .name { font-size:1.6em; }
-            .desc { font-size:1.0em; display:block; } } }  // Turns on .disp .desc
+            i     { font-size:@theme-disp-size; }
+            .name { font-size:@theme-disp-size; }
+            .desc { font-size:@theme-disp-size; display:block; } } }  // Turns on .disp .desc
           .area { padding-bottom:0; } } }
   
     // Placed one level above .dir at the 4 Disipline plus Practice name Grid Direction
     .fullDispDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid; border-radius:72px;
        .disp { justify-self:center; margin:0;
-         i     { font-size:4.8em !important; }
-         .name { font-size:4.8em !important; }
-         .desc { font-size:2.4em !important; display:block; } }  // Turns on .disp .desc
-       .area {   font-size:3.0em !important; padding-bottom:0; } }
+         i     { font-size:@theme-area-icon-size !important; }
+         .name { font-size:@theme-area-name-size !important; }
+         .desc { font-size:@theme-area-desc-size !important; display:block; } }  // Turns on .disp .desc
+       .area {   font-size:@theme-area-area-size !important; padding-bottom:0; } }
     
-    .em, .in, .en { .prac .cen { font-size:1em; } } // Font size columns
+    .em, .in, .en { .prac .cen { font-size:@theme-row-size; } } // Font size columns
   
-    .row { background-color:#603; border-radius:36px; margin-left:10%; width:80%; height:80%; font-size:1em;
+    .row { background-color:#603; border-radius:36px; margin-left:10%; width:80%; height:80%; font-size:@theme-row-size;
       font-weight:bold; display:grid;
-      div { text-align:center; justify-self:center;  align-self:center; font-size:1.8em; color:@theme-color; }
-      i { margin-bottom: 0.2em; display:block; } }
+      div { text-align:center; justify-self:center;  align-self:center; font-size:@theme-row-size; color:@theme-color; }
+      i { margin-bottom: 0.2rem; display:block; } }
     
     
   }

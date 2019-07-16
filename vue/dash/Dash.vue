@@ -40,7 +40,7 @@
   
   @import '../../pub/css/themes/theme.less';
 
-  .dash { font-family:@theme-font-family; font-size:1rem;
+  .dash { font-family:@theme-font-family;
    position:absolute; left:0; top:0; right:0; bottom:0; display:grid;
    grid-template-columns: @theme-west  @theme-center @theme-east;
    grid-template-rows:    @theme-north @theme-middle @theme-south;

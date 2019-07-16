@@ -113,27 +113,27 @@
   .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;
     justify-items:center; align-items:center; }
   
-  .conn { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:1.75vmin;
+  .conn { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:@theme-conn-size;
           background-color:@theme-back; color:@theme-color;
     .grid4x3(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid
-    .tabs{ grid-area:tabs; display:inline; color:@theme-color; font-size:1.2em;
+    .tabs{ grid-area:tabs; display:inline; color:@theme-color; font-size:@theme-tab-size;
       justify-self:start; align-self:center; text-align:left; }
     .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }
     .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }
     .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }
     
-    .prac { display:grid; border-radius:36px; width:99%; height:98%; font-size:1em; font-weight:bold;
+    .prac { display:grid; border-radius:36px; width:99%; height:98%; font-size:@theme-prac-size; font-weight:bold;
       .name { justify-self:center; align-self:center; text-align:center; } }
   
     // Placed one level above .prac at the 9 Practices Grid Direction
     .fullPracDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;
-      .prac { font-size:1em; width:100%; height:100%;
+      .prac { font-size:@theme-full-size; width:100%; height:100%;
         justify-self:center; align-self:center; display:grid; border-radius:0.5em;
-        div {     padding-bottom:2em;
+        div {     padding-bottom:2rem;
           .disp { padding-bottom:0;
-            i     { font-size:1.6em; }
-            .name { font-size:1.6em; }
-            .desc { font-size:1.0em; display:block; } } }  // Turns on .disp .desc
+            i     { font-size:@theme-full-size; }
+            .name { font-size:@theme-full-size; }
+            .desc { font-size:@theme-full-size; display:block; } } }  // Turns on .disp .desc
         .area { padding-bottom:0; } } }
   }
 </style>

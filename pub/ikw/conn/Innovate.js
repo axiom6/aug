@@ -54,7 +54,7 @@ Innovate = class Innovate {
     colorBack = 'rgba(97, 56, 77, 1.0 )';
     this.shapes.round(g, t, t, geom.w - t * 2, geom.h - t * 2, t, t, colorRing, 'none');
     this.shapes.round(g, t * 2.5, t * 2.5, geom.w - t * 5.0, geom.h - t * 5.0, t, t, colorBack, 'none');
-    return this.shapes.text(g, t * 4, t * 2 + 2, this.spec.name, this.spec.name + 'Text', 'black', '1.8em');
+    return this.shapes.text(g, t * 4, t * 2 + 2, this.spec.name, this.spec.name + 'Text', 'black', '1.2em');
   }
 
   concept(g, geom) {
@@ -230,13 +230,13 @@ Innovate = class Innovate {
 
   hexText(text, g, x0, y0, textId) {
     var path;
-    path = g.append("svg:text").text(text).attr("id", textId).attr("x", x0).attr("y", y0 + 16).attr("text-anchor", "middle").attr("font-size", "0.9em").attr("font-family", this.shapes.fontText);
+    path = g.append("svg:text").text(text).attr("id", textId).attr("x", x0).attr("y", y0 + 16).attr("text-anchor", "middle").attr("font-size", "0.5em").attr("font-family", this.shapes.fontText);
     //.attr("font-weight","bold")
     this.shapes.click(path, text);
   }
 
   hexIcon(icon, g, x0, y0, iconId) {
-    g.append("svg:text").text(icon).attr("x", x0).attr("y", y0 - 2).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", "1.5em").attr("font-family", "FontAwesome").attr("font-weight", "normal");
+    g.append("svg:text").text(icon).attr("x", x0).attr("y", y0 - 2).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", "1.0em").attr("font-family", "FontAwesome").attr("font-weight", "normal");
   }
 
 };

@@ -31,11 +31,13 @@ toCacheUrls = ( objs ) ->
 urls = toCacheUrls( cacheObjs )
 
 publish = ( status, text, obj=null ) =>
-  return if true
+  if status is false and text is false and obj is false then {}
+  ###
   if obj?
     console.log( status, text, obj )
   else
     console.log( status, text )
+  ###
   return
 
 oncatch = ( status, text, error ) =>

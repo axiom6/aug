@@ -1,3 +1,10 @@
+
+/*
+if obj?
+  console.log( status, text, obj )
+else
+  console.log( status, text )
+*/
 var cacheName, cacheObjs, cacheObjs2, cacheSync, cacheUrlNotNeeded, offlinePage, offlineUrl, onActivate, onFetch, onGet, onInstall, onInstall1, onPush, onSync, oncatch, publish, pushTag, pushUrl, syncTag, syncUrl, toCacheUrls, urls,
   hasProp = {}.hasOwnProperty;
 
@@ -92,13 +99,8 @@ toCacheUrls = function(objs) {
 urls = toCacheUrls(cacheObjs);
 
 publish = (status, text, obj = null) => {
-  if (true) {
-    return;
-  }
-  if (obj != null) {
-    console.log(status, text, obj);
-  } else {
-    console.log(status, text);
+  if (status === false && text === false && obj === false) {
+    ({});
   }
 };
 

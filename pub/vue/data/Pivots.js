@@ -201,7 +201,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-364b3248_0", { source: ".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Dabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Dabs.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,UAAU;EACV,uBAAuB;ECCzB,gBAAA;ADCA;ACCA;EACA,qBAAA;EACA,gBAAA;EACA,gCAAA;EACA,4BAAA;EACA,6BAAA;EACA,4BAAA;EDCE,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Dabs.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5em;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"dabs\">\n    <template v-for=\"page in pages\">\n      <div :class=\"classTab(page.key)\" @click=\"pubTab(page.key)\">{{page.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Object, init:String },\n\n    data() { return { key:this.init } },\n\n    methods: {\n      pubTab: function (key) {\n        this.key = key;\n        this.publish( this.comp, key ); },\n      classTab: function (key) {\n        return this.key===key ? 'tab-active' : 'tab'; } },\n\n    mounted: function () {\n      this.subscribe( 'Geom', 'Dabs.vue', (key) => {\n        this.classTab(key) } ); }\n\n  }\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .dabs { position:absolute; left:0; top:0; width:100%; height:5%; background-color:@theme-back; font-size:1.5em;\n    .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;\n      border-radius:12px 12px 0 0; border-left: @theme-color solid thin;\n      border-top:@theme-color solid thin; border-right:@theme-color solid thin;\n      background-color:@theme-back; color:@theme-color; }\n    .tab:hover  {         background-color:@theme-color; color:@theme-back; }\n    .tab-active { .tab(); background-color:@theme-color; color:@theme-back; } }\n\n</style>"]}, media: undefined });
+    inject("data-v-218b8944_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-navb {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Dabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Dabs.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;ECCzB,iBAAA;ADCA;ACCA;EACA,kBAAA;EACA,OAAA;EACA,MAAA;EACA,WAAA;EACA,UAAA;EACA,uBAAA;ADCA;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Dabs.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-navb {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"dabs\">\n    <template v-for=\"page in pages\">\n      <div :class=\"classTab(page.key)\" @click=\"pubTab(page.key)\">{{page.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Object, init:String },\n\n    data() { return { key:this.init } },\n\n    methods: {\n      pubTab: function (key) {\n        this.key = key;\n        this.publish( this.comp, key ); },\n      classTab: function (key) {\n        return this.key===key ? 'tab-active' : 'tab'; } },\n\n    mounted: function () {\n      this.subscribe( 'Geom', 'Dabs.vue', (key) => {\n        this.classTab(key) } ); }\n\n  }\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .dabs { position:absolute; left:0; top:0; width:100%; height:5%; background-color:@theme-back;\n    .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;\n      border-radius:12px 12px 0 0; border-left: @theme-color solid thin;\n      border-top:@theme-color solid thin; border-right:@theme-color solid thin;\n      background-color:@theme-back; color:@theme-color; }\n    .tab:hover  {         background-color:@theme-color; color:@theme-back; }\n    .tab-active { .tab(); background-color:@theme-color; color:@theme-back; } }\n\n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -11119,715 +11119,704 @@ var firebase$1 = firebase;
 var Fire,
   hasProp = {}.hasOwnProperty;
 
-Fire = (function() {
-  class Fire {
-    constructor(store) {
-      this.store = store;
-      this.dbName = this.store.dbName;
-      this.tables = this.store.tables;
-      this.keyProp = 'id';
-      this.fb = this.init(this.config("augm-d4b3c"));
-      //@auth() # Anonomous logins have to be enabled
-      this.fd = this.fb.database();
-    }
+Fire = class Fire {
+  constructor(store) {
+    this.store = store;
+    this.dbName = this.store.dbName;
+    this.tables = this.store.tables;
+    this.keyProp = 'id';
+    this.fb = this.init(this.config("augm-d4b3c"));
+    //@auth() # Anonomous logins have to be enabled
+    this.fd = this.fb.database();
+  }
 
-    //@openTables( @tables )
-    config(projectId) {
-      return {
-        projectId: projectId,
-        apiKey: "AIzaSyD4Py9oML_Y77ze9bGX0I8s9hqndKkBVjY",
-        authDomain: `${projectId}.firebaseapp.com`,
-        databaseURL: `https://${projectId}.firebaseio.com`,
-        storageBucket: `${projectId}.appspot.com`,
-        messagingSenderId: "341294405322",
-        appID: "1:341294405322:web:06369c7823ccc079"
-      };
-    }
+  //@openTables( @tables )
+  config(projectId) {
+    return {
+      projectId: projectId,
+      apiKey: "AIzaSyD4Py9oML_Y77ze9bGX0I8s9hqndKkBVjY",
+      authDomain: `${projectId}.firebaseapp.com`,
+      databaseURL: `https://${projectId}.firebaseio.com`,
+      storageBucket: `${projectId}.appspot.com`,
+      messagingSenderId: "341294405322",
+      appID: "1:341294405322:web:06369c7823ccc079"
+    };
+  }
 
-    /*
-    firebase.initializeApp({
-      "apiKey": "AIzaSyD4Py9oML_Y77ze9bGX0I8s9hqndKkBVjY",
-      "databaseURL": "https://augm-d4b3c.firebaseio.com",
-      "storageBucket": "augm-d4b3c.appspot.com",
-      "authDomain": "augm-d4b3c.firebaseapp.com",
-      "messagingSenderId": "341294405322",
-      "projectId": "augm-d4b3c",
-      "appId": "1:341294405322:web:06369c7823ccc079"
-    });
-    */
-    init(config) {
-      //console.log( 'firebase', firebase )
-      firebase$1.initializeApp(config);
-      return firebase$1;
-    }
+  /*
+  firebase.initializeApp({
+    "apiKey": "AIzaSyD4Py9oML_Y77ze9bGX0I8s9hqndKkBVjY",
+    "databaseURL": "https://augm-d4b3c.firebaseio.com",
+    "storageBucket": "augm-d4b3c.appspot.com",
+    "authDomain": "augm-d4b3c.firebaseapp.com",
+    "messagingSenderId": "341294405322",
+    "projectId": "augm-d4b3c",
+    "appId": "1:341294405322:web:06369c7823ccc079"
+  });
+  */
+  init(config) {
+    //console.log( 'firebase', firebase )
+    firebase$1.initializeApp(config);
+    return firebase$1;
+  }
 
-    batch(name, obj, objs, callback = null) {
-      this.fd.ref(table).once('value').then((snapshot) => {
-        if ((snapshot != null) && (snapshot.val() != null)) {
-          obj.result = snapshot.val();
-          if (this.store.batchComplete(objs)) {
-            if (callback != null) {
-              return callback(objs);
-            } else {
-              return this.store.results(name, 'batch', objs);
-            }
-          }
-        }
-      }).catch((error) => {
-        return this.store.onerror(obj.table, 'batch', error);
-      });
-    }
-
-    // Have too clarify id with snapshot.key
-    change(table, id = 'none', callback = null, Event = 'put') {
-      var path;
-      path = id === 'none' ? table : table + '/' + id;
-      this.fd.ref(path).on(Fire.EventType[Event], onChange).then((snapshot) => {
-        var key, val;
-        if (snapshot != null) {
-          key = snapshot.key;
-          val = snapshot.val();
-          if (callback != null) {
-            return callback(val);
-          } else {
-            return this.store.results(table, 'change', val, key);
-          }
-        }
-      }).catch((error) => {
-        return this.store.onerror(table, 'change', error);
-      });
-    }
-
-    get(table, id, callback) {
-      this.fd.ref(table + '/' + id).once('value').then((snapshot) => {
-        if ((snapshot != null) && (snapshot.val() != null)) {
-          if (callback != null) {
-            return callback(snapshot.val());
-          } else {
-            return this.store.results(table, 'get', snapshot.val(), id);
-          }
-        }
-      }).catch((error) => {
-        return this.store.onerror(table, 'get', error, id);
-      });
-    }
-
-    add(table, id, object) {
-      this.fd.ref(table + '/' + id).set(object).catch((error) => {
-        return this.store.onerror(table, 'add', error, id);
-      });
-    }
-
-    // Same as add
-    put(table, id, object) {
-      this.fd.ref(table + '/' + id).set(object).catch((error) => {
-        return this.store.onerror(table, 'put', error, id);
-      });
-    }
-
-    del(table, id) {
-      this.fd.ref(table + '/' + id).remove().catch((error) => {
-        return this.store.onerror(table, 'del', error, id);
-      });
-    }
-
-    select(table, where, callback = null) {
-      this.fd.ref(table).once('value').then((snapshot) => {
-        var objs;
-        if ((snapshot != null) && (snapshot.val() != null)) {
-          objs = this.store.toObjs(snapshot.val(), where, this.keyProp);
+  batch(name, obj, objs, callback = null) {
+    this.fd.ref(table).once('value').then((snapshot) => {
+      if ((snapshot != null) && (snapshot.val() != null)) {
+        obj.result = snapshot.val();
+        if (this.store.batchComplete(objs)) {
           if (callback != null) {
             return callback(objs);
           } else {
-            return this.store.results(table, 'select', objs);
+            return this.store.results(name, 'batch', objs);
           }
         }
-      });
-    }
+      }
+    }).catch((error) => {
+      return this.store.onerror(obj.table, 'batch', error);
+    });
+  }
 
-    insert(table, objects) {
-      this.fd.ref(table).set(objects).catch((error) => {
-        return this.store.onerror(table, 'insert', error);
-      });
-    }
+  // Have too clarify id with snapshot.key
+  change(table, id = 'none', callback = null, Event = 'put') {
+    var path;
+    path = id === 'none' ? table : table + '/' + id;
+    this.fd.ref(path).on(Fire.EventType[Event], onChange).then((snapshot) => {
+      var key, val;
+      if (snapshot != null) {
+        key = snapshot.key;
+        val = snapshot.val();
+        if (callback != null) {
+          return callback(val);
+        } else {
+          return this.store.results(table, 'change', val, key);
+        }
+      }
+    }).catch((error) => {
+      return this.store.onerror(table, 'change', error);
+    });
+  }
 
-    update(table, objects) {
-      this.fd.ref(table).update(objects).catch((error) => {
-        return this.store.onerror(table, 'update', error);
-      });
-    }
+  get(table, id, callback) {
+    this.fd.ref(table + '/' + id).once('value').then((snapshot) => {
+      if ((snapshot != null) && (snapshot.val() != null)) {
+        if (callback != null) {
+          return callback(snapshot.val());
+        } else {
+          return this.store.results(table, 'get', snapshot.val(), id);
+        }
+      }
+    }).catch((error) => {
+      return this.store.onerror(table, 'get', error, id);
+    });
+  }
 
-    remove(table, where) {
-      var key, obj, objs;
-      this.fd.ref(table).once('value').then((snapshot) => {}, (function() {
-        if ((typeof snapshot !== "undefined" && snapshot !== null) && (snapshot.val() != null)) {
-          objs = this.store.toObjs(snapshot.val(), where, this.keyProp);
-          for (key in objs) {
-            if (!hasProp.call(objs, key)) continue;
-            obj = objs[key];
-            this.del(table, key); // @fd.ref(table+'/'+key).remove()
-          }
+  add(table, id, object) {
+    this.fd.ref(table + '/' + id).set(object).catch((error) => {
+      return this.store.onerror(table, 'add', error, id);
+    });
+  }
+
+  // Same as add
+  put(table, id, object) {
+    this.fd.ref(table + '/' + id).set(object).catch((error) => {
+      return this.store.onerror(table, 'put', error, id);
+    });
+  }
+
+  del(table, id) {
+    this.fd.ref(table + '/' + id).remove().catch((error) => {
+      return this.store.onerror(table, 'del', error, id);
+    });
+  }
+
+  select(table, where, callback = null) {
+    this.fd.ref(table).once('value').then((snapshot) => {
+      var objs;
+      if ((snapshot != null) && (snapshot.val() != null)) {
+        objs = this.store.toObjs(snapshot.val(), where, this.keyProp);
+        if (callback != null) {
+          return callback(objs);
+        } else {
           return this.store.results(table, 'select', objs);
         }
-      }).call(this));
-    }
-
-    range(table, beg, end) {
-      this.fd.ref(table).orderByKey().startAt(beg).endAt(end).once('value').then((snapshot) => {
-        var objs;
-        if ((snapshot != null) && (snapshot.val() != null)) {
-          objs = this.toObjects(snapshot.val());
-          return this.store.results(table, 'range', objs);
-        }
-      }).catch((error) => {
-        return this.store.onerror(table, 'range', error);
-      });
-    }
-
-    openTables(tables) {
-      var obj, table;
-      for (table in tables) {
-        if (!hasProp.call(tables, table)) continue;
-        obj = tables[table];
-        open(table);
       }
-    }
-
-    // Need to learn what opening a table means in firebase
-    // Problem with Firebase sending a socket.io to url/Prac to Intellij server that becomes a 404
-    open(table) {
-      var ref;
-      ref = this.fd.ref(table);
-      if (!ref) {
-        this.fd.root().set(table);
-      }
-    }
-
-    // ref.remove() is Dangerous and has removed all tables in Firebase
-    // @fd.ref(table).set( {} )
-    //    .catch( (error) =>
-    //      @store.onerror( table, 'open', error ) )
-    drop(table) {
-      this.fd.ref(table).remove().catch((error) => {
-        return this.store.onerror(table, 'drop', error);
-      });
-    }
-
-    // Sign Anonymously
-    auth() {
-      this.fb.auth().signInAnonymously().catch((error) => {
-        return this.store.onerror('auth', 'auth', error);
-      });
-    }
-
+    });
   }
-  Fire.EventType = {
-    get: "value",
-    add: "child_added",
-    put: "child_changed",
-    del: "child_removed"
-  };
 
-  return Fire;
+  insert(table, objects) {
+    this.fd.ref(table).set(objects).catch((error) => {
+      return this.store.onerror(table, 'insert', error);
+    });
+  }
 
-}).call(undefined);
+  update(table, objects) {
+    this.fd.ref(table).update(objects).catch((error) => {
+      return this.store.onerror(table, 'update', error);
+    });
+  }
+
+  remove(table, where) {
+    var key, obj, objs;
+    this.fd.ref(table).once('value').then((snapshot) => {}, (function() {
+      if ((typeof snapshot !== "undefined" && snapshot !== null) && (snapshot.val() != null)) {
+        objs = this.store.toObjs(snapshot.val(), where, this.keyProp);
+        for (key in objs) {
+          if (!hasProp.call(objs, key)) continue;
+          obj = objs[key];
+          this.del(table, key); // @fd.ref(table+'/'+key).remove()
+        }
+        return this.store.results(table, 'select', objs);
+      }
+    }).call(this));
+  }
+
+  range(table, beg, end) {
+    this.fd.ref(table).orderByKey().startAt(beg).endAt(end).once('value').then((snapshot) => {
+      var objs;
+      if ((snapshot != null) && (snapshot.val() != null)) {
+        objs = this.toObjects(snapshot.val());
+        return this.store.results(table, 'range', objs);
+      }
+    }).catch((error) => {
+      return this.store.onerror(table, 'range', error);
+    });
+  }
+
+  openTables(tables) {
+    var obj, table;
+    for (table in tables) {
+      if (!hasProp.call(tables, table)) continue;
+      obj = tables[table];
+      open(table);
+    }
+  }
+
+  // Need to learn what opening a table means in firebase
+  // Problem with Firebase sending a socket.io to url/Prac to Intellij server that becomes a 404
+  open(table) {
+    var ref;
+    ref = this.fd.ref(table);
+    if (!ref) {
+      this.fd.root().set(table);
+    }
+  }
+
+  // ref.remove() is Dangerous and has removed all tables in Firebase
+  // @fd.ref(table).set( {} )
+  //    .catch( (error) =>
+  //      @store.onerror( table, 'open', error ) )
+  drop(table) {
+    this.fd.ref(table).remove().catch((error) => {
+      return this.store.onerror(table, 'drop', error);
+    });
+  }
+
+  // Sign Anonymously
+  auth() {
+    this.fb.auth().signInAnonymously().catch((error) => {
+      return this.store.onerror('auth', 'auth', error);
+    });
+  }
+
+};
+
+Fire.EventType = {
+  get: "value",
+  add: "child_added",
+  put: "child_changed",
+  del: "child_removed"
+};
 
 var Fire$1 = Fire;
 
 var Pipe;
 
-Pipe = (function() {
-  class Pipe {
-    constructor(stream, dbName) {
-      this.stream = stream;
-      this.dbName = dbName;
-    }
-
-    toSubject(table, op) {
-      if (table != null) {
-        return this.dbName + ':' + table + ':' + op;
-      } else {
-        return this.dbName + ':' + op;
-      }
-    }
-
-    subscribe(table, op, source, onSubscribe) {
-      var changeOp, i, len, ref;
-      if (op !== 'change') {
-        this.stream.subscribe(this.toSubject(table, op), source, onSubscribe);
-      } else {
-        ref = Pipe.changeOps;
-        for (i = 0, len = ref.length; i < len; i++) {
-          changeOp = ref[i];
-          this.stream.subscribe(this.toSubject(table, changeOp), source, onSubscribe);
-        }
-      }
-    }
-
-    publish(table, op, result, id = null) {
-      var obj;
-      obj = id != null ? {
-        [`${id}`]: result
-      } : result;
-      this.stream.publish(this.toSubject(table, op), obj);
-    }
-
-    results(table, op, result, id) {
-      this.publish(table, op, result, id);
-    }
-
-    add(table, id, object) { // Post an object into table with id
-      this.publish(table, 'add', object, id);
-    }
-
-    put(table, id, object) { // Put an object into table with id
-      this.publish(table, 'put', object, id);
-    }
-
-    del(table, id) { // Delete  an object from table with id
-      this.publish(table, 'del', {}, id);
-    }
-
-    // SQL tables with multiple objects (rows)
-    insert(table, objects) { // Insert objects into table with unique id
-      this.publish(table, 'insert', objects);
-    }
-
-    update(table, objects) { // # Update objects into table mapped by id
-      this.publish(table, 'update', objects);
-    }
-
-    remove(table, where) { // Remove objects from table with where clause
-      this.publish(table, 'remove', where.toString());
-    }
-
-    // Table DDL (Data Definition Language)
-    open(table) { // Create a table with an optional schema
-      this.publish(table, 'open', table);
-    }
-
-    drop(table) { // Drop the entire @table - good for testing
-      this.publish(table, 'drop', table);
-    }
-
+Pipe = class Pipe {
+  constructor(stream, dbName) {
+    this.stream = stream;
+    this.dbName = dbName;
   }
-  Pipe.changeOps = ['change', 'add', 'put', 'del', 'insert', 'update', 'remove'];
 
-  return Pipe;
+  toSubject(table, op) {
+    if (table != null) {
+      return this.dbName + ':' + table + ':' + op;
+    } else {
+      return this.dbName + ':' + op;
+    }
+  }
 
-}).call(undefined);
+  subscribe(table, op, source, onSubscribe) {
+    var changeOp, i, len, ref;
+    if (op !== 'change') {
+      this.stream.subscribe(this.toSubject(table, op), source, onSubscribe);
+    } else {
+      ref = Pipe.changeOps;
+      for (i = 0, len = ref.length; i < len; i++) {
+        changeOp = ref[i];
+        this.stream.subscribe(this.toSubject(table, changeOp), source, onSubscribe);
+      }
+    }
+  }
+
+  publish(table, op, result, id = null) {
+    var obj;
+    obj = id != null ? {
+      [`${id}`]: result
+    } : result;
+    this.stream.publish(this.toSubject(table, op), obj);
+  }
+
+  results(table, op, result, id) {
+    this.publish(table, op, result, id);
+  }
+
+  add(table, id, object) { // Post an object into table with id
+    this.publish(table, 'add', object, id);
+  }
+
+  put(table, id, object) { // Put an object into table with id
+    this.publish(table, 'put', object, id);
+  }
+
+  del(table, id) { // Delete  an object from table with id
+    this.publish(table, 'del', {}, id);
+  }
+
+  // SQL tables with multiple objects (rows)
+  insert(table, objects) { // Insert objects into table with unique id
+    this.publish(table, 'insert', objects);
+  }
+
+  update(table, objects) { // # Update objects into table mapped by id
+    this.publish(table, 'update', objects);
+  }
+
+  remove(table, where) { // Remove objects from table with where clause
+    this.publish(table, 'remove', where.toString());
+  }
+
+  // Table DDL (Data Definition Language)
+  open(table) { // Create a table with an optional schema
+    this.publish(table, 'open', table);
+  }
+
+  drop(table) { // Drop the entire @table - good for testing
+    this.publish(table, 'drop', table);
+  }
+
+};
+
+Pipe.changeOps = ['change', 'add', 'put', 'del', 'insert', 'update', 'remove'];
 
 var Pipe$1 = Pipe;
 
 var Store,
   hasProp$1 = {}.hasOwnProperty;
 
-Store = (function() {
-  class Store {
-    constructor(dbName, tables, url) {
-      this.dbName = dbName;
-      this.tables = tables;
-      this.url = url;
-      this.rest = null;
-      this.fire = null;
-      this.index = null;
-      this.local = null;
-      this.memory = null;
-      this.pipe = null;
-    }
+Store = class Store {
+  constructor(dbName, tables, url) {
+    this.dbName = dbName;
+    this.tables = tables;
+    this.url = url;
+    this.rest = null;
+    this.fire = null;
+    this.index = null;
+    this.local = null;
+    this.memory = null;
+    this.pipe = null;
+  }
 
-    table(tn) {
-      if (this.tables[tn] == null) {
-        this.open(table);
+  table(tn) {
+    if (this.tables[tn] == null) {
+      this.open(table);
+    }
+    return this.tables[tn];
+  }
+
+  results(table, op, result, id = null) {
+    if (this.pipe != null) {
+      this.pipe.results(table, op, result, id);
+    }
+  }
+
+  onerror(table, op, error, id = 'none') {
+    console.error('Store.onerror', {
+      dbName: this.dbName,
+      table: table,
+      op: op,
+      error: error,
+      id: id
+    });
+  }
+
+  subscribe(table, op, source, onSubscribe) {
+    if (this.pipe != null) {
+      this.pipe.subscribe(table, op, source, onSubscribe);
+    }
+  }
+
+  publish(table, op, result, id = null) {
+    if (this.pipe != null) {
+      this.pipe.publish(table, op, result, id);
+    }
+  }
+
+  // REST Api  CRUD + Subscribe for objectect records 
+  batch(name, objs, callback) { // Batch populate a set of objects from various sources
+    var key, obj;
+    for (key in objs) {
+      if (!hasProp$1.call(objs, key)) continue;
+      obj = objs[key];
+      switch (obj.src) {
+        case 'rest':
+          if (this.rest != null) {
+            this.rest.batch(name, obj, objs, callback);
+          }
+          break;
+        case 'fire':
+          if (this.fire != null) {
+            this.fire.batch(name, obj, objs, callback);
+          }
+          break;
+        case 'index':
+          if (this.index != null) {
+            this.index.batch(name, obj, objs, callback);
+          }
+          break;
+        case 'local':
+          if (this.local != null) {
+            this.local.batch(name, obj, objs, callback);
+          }
+          break;
+        case 'memory':
+          if (this.memory != null) {
+            this.memory.batch(name, obj, objs, callback);
+          }
       }
-      return this.tables[tn];
     }
+  }
 
-    results(table, op, result, id = null) {
+  batchComplete(objs) {
+    var key, obj;
+    for (key in objs) {
+      if (!hasProp$1.call(objs, key)) continue;
+      obj = objs[key];
+      if (!obj['result']) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  get(src, table, id, callback) { // Get an object from table with id
+    switch (src) {
+      case 'rest':
+        if (this.rest != null) {
+          this.rest.get(table, id, callback);
+        }
+        break;
+      case 'fire':
+        if (this.fire != null) {
+          this.fire.get(table, id, callback);
+        }
+        break;
+      case 'index':
+        if (this.index != null) {
+          this.index.get(table, id, callback);
+        }
+        break;
+      case 'local':
+        if (this.local != null) {
+          this.local.get(table, id, callback);
+        }
+        break;
+      case 'memory':
+        if (this.memory != null) {
+          this.memory.get(table, id, callback);
+        }
+    }
+  }
+
+  add(table, id, object) { // Post an object into table with id
+    if (this.rest != null) {
+      this.rest.add(table, id, object);
+    }
+    if (this.fire != null) {
+      this.fire.add(table, id, object);
+    }
+    if (this.index != null) {
+      this.index.add(table, id, object);
+    }
+    if (this.local != null) {
+      this.local.add(table, id, object);
+    }
+    if (this.memory != null) {
+      this.memory.add(table, id, object);
+    }
+    if (this.pipe != null) {
+      this.pipe.add(table, id, object);
+    }
+  }
+
+  put(table, id, object) { // Put an object into table with id
+    if (this.rest != null) {
+      this.rest.put(table, id, object);
+    }
+    if (this.fire != null) {
+      this.fire.put(table, id, object);
+    }
+    if (this.index != null) {
+      this.index.put(table, id, object);
+    }
+    if (this.local != null) {
+      this.local.put(table, id, object);
+    }
+    if (this.memory != null) {
+      this.memory.put(table, id, object);
+    }
+    if (this.pipe != null) {
+      this.pipe.put(table, id, object);
+    }
+  }
+
+  del(table, id) { // Delete  an object from table with id
+    if (this.rest != null) {
+      this.rest.del(table, id);
+    }
+    if (this.fire != null) {
+      this.fire.del(table, id);
+    }
+    if (this.index != null) {
+      this.index.del(table, id);
+    }
+    if (this.local != null) {
+      this.local.del(table, id);
+    }
+    if (this.memory != null) {
+      this.memory.del(table, id);
+    }
+    if (this.pipe != null) {
+      this.pipe.del(table, id);
+    }
+  }
+
+  // SQL tables with multiple objects (rows)    
+  select(src, table, where = Store.where, callback = null) { // Get an object from table with id
+    switch (src) {
+      case 'rest':
+        if (this.rest != null) {
+          this.rest.select(table, where, callback);
+        }
+        break;
+      case 'fire':
+        if (this.fire != null) {
+          this.fire.select(table, where, callback);
+        }
+        break;
+      case 'index':
+        if (this.index != null) {
+          this.index.select(table, where, callback);
+        }
+        break;
+      case 'local':
+        if (this.local != null) {
+          this.local.select(table, where, callback);
+        }
+        break;
+      case 'memory':
+        if (this.memory != null) {
+          this.memory.select(table, where, callback);
+        }
+    }
+  }
+
+  insert(table, objects) { // Insert objects into table with unique id
+    if (this.rest != null) {
+      this.rest.insert(table, objects);
+    }
+    if (this.fire != null) {
+      this.fire.insert(table, objects);
+    }
+    if (this.index != null) {
+      this.index.insert(table, objects);
+    }
+    if (this.local != null) {
+      this.local.insert(table, objects);
+    }
+    if (this.memory != null) {
+      this.memory.insert(table, objects);
+    }
+    if (this.pipe != null) {
+      this.pipe.insert(table, objects);
+    }
+  }
+
+  update(table, objects) { // # Update objects into table mapped by id
+    if (this.rest != null) {
+      this.rest.update(table, objects);
+    }
+    if (this.fire != null) {
+      this.fire.update(table, objects);
+    }
+    if (this.index != null) {
+      this.index.update(table, objects);
+    }
+    if (this.local != null) {
+      this.local.update(table, objects);
+    }
+    if (this.memory != null) {
+      this.memory.update(table, objects);
+    }
+    if (this.pipe != null) {
+      this.pipe.update(table, objects);
+    }
+  }
+
+  remove(table, where = Store.where) { // Delete objects from table with where clause
+    if (this.rest != null) {
+      this.rest.remove(table, where);
+    }
+    if (this.fire != null) {
+      this.fire.remove(table, where);
+    }
+    if (this.index != null) {
+      this.index.remove(table, where);
+    }
+    if (this.local != null) {
+      this.local.remove(table, where);
+    }
+    if (this.memory != null) {
+      this.memory.remove(table, where);
+    }
+    if (this.pipe != null) {
+      this.pipe.remove(table, where);
+    }
+  }
+
+  // Table DDL (Data Definition Language)  
+  show(callback = null) { // Show all table names
+    var keys;
+    keys = Object.keys(this.tables);
+    if (callback != null) {
+      callback(keys);
+    } else if (this.pipe != null) {
+      this.pipe.results(this.dbName, 'show', keys);
+    }
+  }
+
+  open(table) { // Create a table with an optional schema
+    if (this.tables[table] == null) {
+      this.tables[table] = {};
+      if (this.rest != null) {
+        this.rest.open(table);
+      }
+      if (this.fire != null) {
+        this.fire.open(table);
+      }
+      if (this.index != null) {
+        this.index.open(table);
+      }
+      if (this.local != null) {
+        this.local.open(table);
+      }
       if (this.pipe != null) {
-        this.pipe.results(table, op, result, id);
+        this.pipe.open(table);
       }
-    }
-
-    onerror(table, op, error, id = 'none') {
-      console.error('Store.onerror', {
-        dbName: this.dbName,
-        table: table,
-        op: op,
-        error: error,
-        id: id
+    } else {
+      this.onerror(table, 'open', {
+        error: 'Store table already exists'
       });
     }
-
-    subscribe(table, op, source, onSubscribe) {
-      if (this.pipe != null) {
-        this.pipe.subscribe(table, op, source, onSubscribe);
-      }
-    }
-
-    publish(table, op, result, id = null) {
-      if (this.pipe != null) {
-        this.pipe.publish(table, op, result, id);
-      }
-    }
-
-    // REST Api  CRUD + Subscribe for objectect records 
-    batch(name, objs, callback) { // Batch populate a set of objects from various sources
-      var key, obj;
-      for (key in objs) {
-        if (!hasProp$1.call(objs, key)) continue;
-        obj = objs[key];
-        switch (obj.src) {
-          case 'rest':
-            if (this.rest != null) {
-              this.rest.batch(name, obj, objs, callback);
-            }
-            break;
-          case 'fire':
-            if (this.fire != null) {
-              this.fire.batch(name, obj, objs, callback);
-            }
-            break;
-          case 'index':
-            if (this.index != null) {
-              this.index.batch(name, obj, objs, callback);
-            }
-            break;
-          case 'local':
-            if (this.local != null) {
-              this.local.batch(name, obj, objs, callback);
-            }
-            break;
-          case 'memory':
-            if (this.memory != null) {
-              this.memory.batch(name, obj, objs, callback);
-            }
-        }
-      }
-    }
-
-    batchComplete(objs) {
-      var key, obj;
-      for (key in objs) {
-        if (!hasProp$1.call(objs, key)) continue;
-        obj = objs[key];
-        if (!obj['result']) {
-          return false;
-        }
-      }
-      return true;
-    }
-
-    get(src, table, id, callback) { // Get an object from table with id
-      switch (src) {
-        case 'rest':
-          if (this.rest != null) {
-            this.rest.get(table, id, callback);
-          }
-          break;
-        case 'fire':
-          if (this.fire != null) {
-            this.fire.get(table, id, callback);
-          }
-          break;
-        case 'index':
-          if (this.index != null) {
-            this.index.get(table, id, callback);
-          }
-          break;
-        case 'local':
-          if (this.local != null) {
-            this.local.get(table, id, callback);
-          }
-          break;
-        case 'memory':
-          if (this.memory != null) {
-            this.memory.get(table, id, callback);
-          }
-      }
-    }
-
-    add(table, id, object) { // Post an object into table with id
-      if (this.rest != null) {
-        this.rest.add(table, id, object);
-      }
-      if (this.fire != null) {
-        this.fire.add(table, id, object);
-      }
-      if (this.index != null) {
-        this.index.add(table, id, object);
-      }
-      if (this.local != null) {
-        this.local.add(table, id, object);
-      }
-      if (this.memory != null) {
-        this.memory.add(table, id, object);
-      }
-      if (this.pipe != null) {
-        this.pipe.add(table, id, object);
-      }
-    }
-
-    put(table, id, object) { // Put an object into table with id
-      if (this.rest != null) {
-        this.rest.put(table, id, object);
-      }
-      if (this.fire != null) {
-        this.fire.put(table, id, object);
-      }
-      if (this.index != null) {
-        this.index.put(table, id, object);
-      }
-      if (this.local != null) {
-        this.local.put(table, id, object);
-      }
-      if (this.memory != null) {
-        this.memory.put(table, id, object);
-      }
-      if (this.pipe != null) {
-        this.pipe.put(table, id, object);
-      }
-    }
-
-    del(table, id) { // Delete  an object from table with id
-      if (this.rest != null) {
-        this.rest.del(table, id);
-      }
-      if (this.fire != null) {
-        this.fire.del(table, id);
-      }
-      if (this.index != null) {
-        this.index.del(table, id);
-      }
-      if (this.local != null) {
-        this.local.del(table, id);
-      }
-      if (this.memory != null) {
-        this.memory.del(table, id);
-      }
-      if (this.pipe != null) {
-        this.pipe.del(table, id);
-      }
-    }
-
-    // SQL tables with multiple objects (rows)    
-    select(src, table, where = Store.where, callback = null) { // Get an object from table with id
-      switch (src) {
-        case 'rest':
-          if (this.rest != null) {
-            this.rest.select(table, where, callback);
-          }
-          break;
-        case 'fire':
-          if (this.fire != null) {
-            this.fire.select(table, where, callback);
-          }
-          break;
-        case 'index':
-          if (this.index != null) {
-            this.index.select(table, where, callback);
-          }
-          break;
-        case 'local':
-          if (this.local != null) {
-            this.local.select(table, where, callback);
-          }
-          break;
-        case 'memory':
-          if (this.memory != null) {
-            this.memory.select(table, where, callback);
-          }
-      }
-    }
-
-    insert(table, objects) { // Insert objects into table with unique id
-      if (this.rest != null) {
-        this.rest.insert(table, objects);
-      }
-      if (this.fire != null) {
-        this.fire.insert(table, objects);
-      }
-      if (this.index != null) {
-        this.index.insert(table, objects);
-      }
-      if (this.local != null) {
-        this.local.insert(table, objects);
-      }
-      if (this.memory != null) {
-        this.memory.insert(table, objects);
-      }
-      if (this.pipe != null) {
-        this.pipe.insert(table, objects);
-      }
-    }
-
-    update(table, objects) { // # Update objects into table mapped by id
-      if (this.rest != null) {
-        this.rest.update(table, objects);
-      }
-      if (this.fire != null) {
-        this.fire.update(table, objects);
-      }
-      if (this.index != null) {
-        this.index.update(table, objects);
-      }
-      if (this.local != null) {
-        this.local.update(table, objects);
-      }
-      if (this.memory != null) {
-        this.memory.update(table, objects);
-      }
-      if (this.pipe != null) {
-        this.pipe.update(table, objects);
-      }
-    }
-
-    remove(table, where = Store.where) { // Delete objects from table with where clause
-      if (this.rest != null) {
-        this.rest.remove(table, where);
-      }
-      if (this.fire != null) {
-        this.fire.remove(table, where);
-      }
-      if (this.index != null) {
-        this.index.remove(table, where);
-      }
-      if (this.local != null) {
-        this.local.remove(table, where);
-      }
-      if (this.memory != null) {
-        this.memory.remove(table, where);
-      }
-      if (this.pipe != null) {
-        this.pipe.remove(table, where);
-      }
-    }
-
-    // Table DDL (Data Definition Language)  
-    show(callback = null) { // Show all table names
-      var keys;
-      keys = Object.keys(this.tables);
-      if (callback != null) {
-        callback(keys);
-      } else if (this.pipe != null) {
-        this.pipe.results(this.dbName, 'show', keys);
-      }
-    }
-
-    open(table) { // Create a table with an optional schema
-      if (this.tables[table] == null) {
-        this.tables[table] = {};
-        if (this.rest != null) {
-          this.rest.open(table);
-        }
-        if (this.fire != null) {
-          this.fire.open(table);
-        }
-        if (this.index != null) {
-          this.index.open(table);
-        }
-        if (this.local != null) {
-          this.local.open(table);
-        }
-        if (this.pipe != null) {
-          this.pipe.open(table);
-        }
-      } else {
-        this.onerror(table, 'open', {
-          error: 'Store table already exists'
-        });
-      }
-    }
-
-    drop(table) { // Drop the entire @table - good for testing
-      if (this.rest != null) {
-        this.rest.drop(table);
-      }
-      if (this.fire != null) {
-        this.fire.drop(table);
-      }
-      if (this.index != null) {
-        this.index.drop(table);
-      }
-      if (this.local != null) {
-        this.local.drop(table);
-      }
-      if (this.pipe != null) {
-        this.pipe.drop(table);
-      }
-      if (this.tables[table] != null) {
-        delete this.tables[table];
-      } else {
-        this.onerror(table, 'drop', {
-          error: 'Store missing table'
-        });
-      }
-    }
-
-    copyTable(src, des, table, where = Store.where) {
-      var callback;
-      callback = function(results) {
-        return des.insert(table, results);
-      };
-      src.select(table, where, callback);
-    }
-
-    copyDatabase(src, des) {
-      var data, ref, table;
-      ref = this.tables;
-      for (table in ref) {
-        if (!hasProp$1.call(ref, table)) continue;
-        data = ref[table];
-        this.copyTable(src, des, table, Store.where);
-      }
-    }
-
-    // Utilities
-    toObjs(results, where, keyProp = 'id') {
-      var i, key, len, obj, objs, row;
-      if (this.isArray(results)) {
-        objs = {};
-        for (i = 0, len = results.length; i < len; i++) {
-          row = results[i];
-          if (where(obj)) {
-            objs[row[keyProp]] = row;
-          }
-        }
-        return objs;
-      } else if (where({})) { // Checks if where = (obj) -> true
-        return results;
-      } else {
-        objs = {};
-        for (key in results) {
-          if (!hasProp$1.call(results, key)) continue;
-          obj = results[key];
-          if (where(obj)) {
-            objs[key] = obj;
-          }
-        }
-        return objs;
-      }
-    }
-
-    isArray(a) {
-      return a !== null && typeof a !== "undefined" && typeof a !== "string" && (a.length != null) && a.length > 0;
-    }
-
-    static where() {
-      return true; // Default where clause filter that returns true to access all records
-    }
-
   }
-  // RDUDC            Retrieve  Create    Update    Delete   Change
-  Store.restOps = ['get', 'add', 'put', 'del', 'batch'];
 
-  Store.sqlOps = ['select', 'insert', 'update', 'remove'];
+  drop(table) { // Drop the entire @table - good for testing
+    if (this.rest != null) {
+      this.rest.drop(table);
+    }
+    if (this.fire != null) {
+      this.fire.drop(table);
+    }
+    if (this.index != null) {
+      this.index.drop(table);
+    }
+    if (this.local != null) {
+      this.local.drop(table);
+    }
+    if (this.pipe != null) {
+      this.pipe.drop(table);
+    }
+    if (this.tables[table] != null) {
+      delete this.tables[table];
+    } else {
+      this.onerror(table, 'drop', {
+        error: 'Store missing table'
+      });
+    }
+  }
 
-  Store.tableOps = ['show', 'open', 'drop'];
+  copyTable(src, des, table, where = Store.where) {
+    var callback;
+    callback = function(results) {
+      return des.insert(table, results);
+    };
+    src.select(table, where, callback);
+  }
 
-  return Store;
+  copyDatabase(src, des) {
+    var data, ref, table;
+    ref = this.tables;
+    for (table in ref) {
+      if (!hasProp$1.call(ref, table)) continue;
+      data = ref[table];
+      this.copyTable(src, des, table, Store.where);
+    }
+  }
 
-}).call(undefined);
+  // Utilities
+  toObjs(results, where, keyProp = 'id') {
+    var i, key, len, obj, objs, row;
+    if (this.isArray(results)) {
+      objs = {};
+      for (i = 0, len = results.length; i < len; i++) {
+        row = results[i];
+        if (where(obj)) {
+          objs[row[keyProp]] = row;
+        }
+      }
+      return objs;
+    } else if (where({})) { // Checks if where = (obj) -> true
+      return results;
+    } else {
+      objs = {};
+      for (key in results) {
+        if (!hasProp$1.call(results, key)) continue;
+        obj = results[key];
+        if (where(obj)) {
+          objs[key] = obj;
+        }
+      }
+      return objs;
+    }
+  }
+
+  isArray(a) {
+    return a !== null && typeof a !== "undefined" && typeof a !== "string" && (a.length != null) && a.length > 0;
+  }
+
+};
+
+// RDUDC            Retrieve  Create    Update    Delete   Change
+Store.restOps = ['get', 'add', 'put', 'del', 'batch'];
+
+Store.sqlOps = ['select', 'insert', 'update', 'remove'];
+
+Store.tableOps = ['show', 'open', 'drop'];
+
+// Dafaults for empty arguments
+Store.where = function() {
+  return true; // Default where clause filter that returns true to access all records
+};
 
 var Store$1 = Store;
 
@@ -11970,7 +11959,7 @@ __vue_render__$1._withStripped = true;
   /* style */
   const __vue_inject_styles__$1 = function (inject) {
     if (!inject) return
-    inject("data-v-8e1ff606_0", { source: ".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.table {\n  background-color: black;\n  justify-self: center;\n  align-self: center;\n  font-size: 1em;\n  table-layout: fixed;\n  border-collapse: collapse;\n  border: 1px solid wheat;\n}\ncaption {\n  color: wheat;\n}\nthead th {\n  color: wheat;\n  padding: 0.1em 0.2em 0.1em 0.2em;\n  border: 1px solid wheat;\n}\ntbody tr:nth-child(odd) {\n  background-color: #111111;\n}\ntbody tr:nth-child(even) {\n  background-color: #222222;\n}\ntbody tr td {\n  color: wheat;\n  padding: 0.1em 0.2em 0.1em 0.2em;\n  border: 1px solid wheat;\n}\n", map: {"version":3,"sources":["Table1.vue","/Users/ax/Documents/prj/aug/vue/data/Table1.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;EACvB,oBAAoB;EACpB,kBAAkB;EAClB,cAAc;EACd,mBAAmB;EACnB,yBAAyB;EACzB,uBAAuB;AACzB;AACA;EACE,YAAY;AACd;AACA;EACE,YAAY;EACZ,gCAAgC;EAChC,uBAAuB;AACzB;AACA;EACE,yBAAyB;ACC3B;ADCA;ECCA,yBAAA;AACA;ADCA;ECCA,YAAA;EACA,gCAAA;EDCE,uBAAuB;ACCzB","file":"Table1.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.table {\n  background-color: black;\n  justify-self: center;\n  align-self: center;\n  font-size: 1em;\n  table-layout: fixed;\n  border-collapse: collapse;\n  border: 1px solid wheat;\n}\ncaption {\n  color: wheat;\n}\nthead th {\n  color: wheat;\n  padding: 0.1em 0.2em 0.1em 0.2em;\n  border: 1px solid wheat;\n}\ntbody tr:nth-child(odd) {\n  background-color: #111111;\n}\ntbody tr:nth-child(even) {\n  background-color: #222222;\n}\ntbody tr td {\n  color: wheat;\n  padding: 0.1em 0.2em 0.1em 0.2em;\n  border: 1px solid wheat;\n}\n","\n<template>\n  <table class=\"table\">\n    <!--caption>{{caption}}</caption-->\n    <thead><tr><template v-for=\"col  in culs\"><th>{{col}}</th></template></tr></thead>\n    <tbody><template v-for=\"row  in rows\">\n       <tr><template v-for=\"cell in row\"><td>{{cell}}</td></template></tr>\n    </template></tbody>\n    <tfoot></tfoot>\n  </table>\n</template>\n\n<script type=\"module\">\n  \n  import Table from '../../pub/base/store/Table.js'\n  \n  let Table1 = {\n    \n    data() {\n      return { comp:'Table1', key:'Table1', caption:\"Table1\",\n        culs:{},\n        rows:{},\n        culs2:{  key:\"Id\", first:\"First\", last:\"Last\",    rank:\"Rank\"    },\n        rows2:{\n          r1: { key:\"1\",   first:\"Mark\",  last:\"Felton\",  rank:\"Colonel\" },\n          r2: { key:\"2\",   first:\"Brian\", last:\"Jackson\", rank:\"Captain\" },\n          r3: { key:\"3\",   first:\"Dave\",  last:\"Markum\",  rank:\"Sargent\" } }\n     } },\n\n    methods: {},\n\n    mounted: function () {\n      let table = new Table( this.stream() );\n      let onSelect = (results) => {\n        this.rows = results;\n        this.culs = table.columns(results); }\n      table.selectPrac( onSelect );\n    }\n  }\n  \n  export default Table1;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .table { background-color:@theme-back; justify-self:center; align-self:center; font-size:1em;\n     table-layout: fixed; border-collapse: collapse; border:1px solid @theme-border-color; }\n\n  caption  { color:@theme-color; }\n  thead th { color:@theme-color; padding:0.1em 0.2em 0.1em 0.2em; border:1px solid @theme-border-color; }\n\n  tbody tr {}\n  tbody tr:nth-child(odd)  { background-color: #111111; }\n  tbody tr:nth-child(even) { background-color: #222222; }\n  \n  tbody tr td { color:@theme-color; padding:0.1em 0.2em 0.1em 0.2em; border:1px solid @theme-border-color; }\n\n</style>"]}, media: undefined });
+    inject("data-v-7ed4f652_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-navb {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.table {\n  background-color: black;\n  justify-self: center;\n  align-self: center;\n  font-size: 1rem;\n  table-layout: fixed;\n  border-collapse: collapse;\n  border: 1px solid wheat;\n}\ncaption {\n  color: wheat;\n}\nthead th {\n  color: wheat;\n  padding: 0.1em 0.2em 0.1em 0.2em;\n  border: 1px solid wheat;\n}\ntbody tr:nth-child(odd) {\n  background-color: #111111;\n}\ntbody tr:nth-child(even) {\n  background-color: #222222;\n}\ntbody tr td {\n  color: wheat;\n  padding: 0.1em 0.2em 0.1em 0.2em;\n  border: 1px solid wheat;\n}\n", map: {"version":3,"sources":["Table1.vue","/Users/ax/Documents/prj/aug/vue/data/Table1.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,oBAAoB;EACpB,kBAAkB;EAClB,eAAe;EACf,mBAAmB;EACnB,yBAAyB;EACzB,uBAAuB;AACzB;AACA;ECCA,YAAA;ADCA;ACCA;EACA,YAAA;EDCE,gCAAgC;ECClC,uBAAA;AACA;ADCA;ECCA,yBAAA;AACA;AACA;EDCE,yBAAyB;ACC3B;ADCA;EACE,YAAY;EACZ,gCAAgC;EAChC,uBAAuB;AACzB","file":"Table1.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-navb {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.table {\n  background-color: black;\n  justify-self: center;\n  align-self: center;\n  font-size: 1rem;\n  table-layout: fixed;\n  border-collapse: collapse;\n  border: 1px solid wheat;\n}\ncaption {\n  color: wheat;\n}\nthead th {\n  color: wheat;\n  padding: 0.1em 0.2em 0.1em 0.2em;\n  border: 1px solid wheat;\n}\ntbody tr:nth-child(odd) {\n  background-color: #111111;\n}\ntbody tr:nth-child(even) {\n  background-color: #222222;\n}\ntbody tr td {\n  color: wheat;\n  padding: 0.1em 0.2em 0.1em 0.2em;\n  border: 1px solid wheat;\n}\n","\n<template>\n  <table class=\"table\">\n    <!--caption>{{caption}}</caption-->\n    <thead><tr><template v-for=\"col  in culs\"><th>{{col}}</th></template></tr></thead>\n    <tbody><template v-for=\"row  in rows\">\n       <tr><template v-for=\"cell in row\"><td>{{cell}}</td></template></tr>\n    </template></tbody>\n    <tfoot></tfoot>\n  </table>\n</template>\n\n<script type=\"module\">\n  \n  import Table from '../../pub/base/store/Table.js'\n  \n  let Table1 = {\n    \n    data() {\n      return { comp:'Table1', key:'Table1', caption:\"Table1\",\n        culs:{},\n        rows:{},\n        culs2:{  key:\"Id\", first:\"First\", last:\"Last\",    rank:\"Rank\"    },\n        rows2:{\n          r1: { key:\"1\",   first:\"Mark\",  last:\"Felton\",  rank:\"Colonel\" },\n          r2: { key:\"2\",   first:\"Brian\", last:\"Jackson\", rank:\"Captain\" },\n          r3: { key:\"3\",   first:\"Dave\",  last:\"Markum\",  rank:\"Sargent\" } }\n     } },\n\n    methods: {},\n\n    mounted: function () {\n      let table = new Table( this.stream() );\n      let onSelect = (results) => {\n        this.rows = results;\n        this.culs = table.columns(results); }\n      table.selectPrac( onSelect );\n    }\n  }\n  \n  export default Table1;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .table { background-color:@theme-back; justify-self:center; align-self:center; font-size:@theme-table-size;\n     table-layout: fixed; border-collapse: collapse; border:1px solid @theme-border-color; }\n\n  caption  { color:@theme-color; }\n  thead th { color:@theme-color; padding:0.1em 0.2em 0.1em 0.2em; border:1px solid @theme-border-color; }\n\n  tbody tr {}\n  tbody tr:nth-child(odd)  { background-color: #111111; }\n  tbody tr:nth-child(even) { background-color: #222222; }\n  \n  tbody tr td { color:@theme-color; padding:0.1em 0.2em 0.1em 0.2em; border:1px solid @theme-border-color; }\n\n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -12141,7 +12130,7 @@ __vue_render__$2._withStripped = true;
   /* style */
   const __vue_inject_styles__$4 = function (inject) {
     if (!inject) return
-    inject("data-v-beb85386_0", { source: ".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n", map: {"version":3,"sources":["Pivots.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,uBAAuB;AACzB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,cAAc;AAChB","file":"Pivots.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n}\n.theme-navb {\n  background-color: black;\n}\n.theme-find {\n  background-color: black;\n}\n.theme-tocs {\n  background-color: black;\n}\n.theme-view {\n  background-color: black;\n}\n.theme-side {\n  background-color: black;\n}\n.theme-pref {\n  background-color: black;\n}\n.theme-foot {\n  background-color: black;\n}\n.theme-trak {\n  background-color: black;\n}\n.page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 3em;\n}\n"]}, media: undefined });
+    inject("data-v-17221631_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-navb {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n", map: {"version":3,"sources":["Pivots.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,eAAe;AACjB","file":"Pivots.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-navb {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.page h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n"]}, media: undefined });
 
   };
   /* scoped */

@@ -42,10 +42,10 @@ class Cache
     @stream.subscribe( @subject, 'Cache', @consoleStatus )
 
   consoleStatus:( object ) ->
-    if not object.error?
-      console.log(   'Cache', { status:object.status, text:object.text } ) if false
-    else
+    if object.error?
       console.error( 'Cache', { status:object.status, text:object.text, error:object.error } )
+    # else
+      # console.log(   'Cache', { status:object.status, text:object.text } )
     return
 
   quota:() =>

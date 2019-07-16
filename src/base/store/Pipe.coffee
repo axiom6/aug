@@ -58,6 +58,6 @@ class Pipe
     @publish( table, 'drop', table )
     return
 
-  Pipe.changeOps = ['change','add','put','del','insert','update','remove']
+Pipe.changeOps = ['change','add','put','del','insert','update','remove']
 
 export default Pipe

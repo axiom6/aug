@@ -80,18 +80,18 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .tocs { font-size:3vh; font-family:@theme-font-family;
+  .tocs { font-family:@theme-font-family;
     ul { padding:0; margin:0; list-style:none; align-self:start; display:grid;
-      li  { background-color:@theme-back-tocs-comp; padding-left:0.25em; align-self:start;   // Comp
-            border-radius:0 24px 24px 0; margin:0.2em 0.2em 0.2em 0.2em;
-         i  { margin-right: 0.4em; }
+      li  { background-color:@theme-back-tocs-comp; padding-left:0.25rem; align-self:start;   // Comp
+            border-radius:0 24px 24px 0; margin:0.2rem 0.2rem 0.2rem 0.2rem;
+         i  { margin-right: 0.4rem; }
          a  { color:@theme-color; text-decoration:none; }
-         ul { font-size:0.8em; font-weight:bold; padding:0; margin:0;
-           li { border-radius:0 12px 12px 0; color:@theme-back; margin:0.2em 0.2em 0.2em 0.2em;            // Prac
-             i { margin-right: 0.3em; }
+         ul { font-size:@theme-tocs-size*0.75; font-weight:bold; padding:0; margin:0;
+           li { border-radius:0 12px 12px 0; color:@theme-back; margin:0.2rem 0.2rem 0.2rem 0.2rem;            // Prac
+             i { margin-right: 0.3rem; }
              a { color:@theme-high; }
-             ul { font-size:0.8em; padding:0; margin:0 0 0 0.2em;
-               li { border-radius:0 12px 12px 0; color:@theme-back; margin:0.2em 0.2em 0.2em 0.2em;       // Disp
-                 i { margin-right: 0.25em; } }
+             ul { font-size:@theme-tocs-size*0.50; padding:0; margin:0 0 0 0.2rem;
+               li { border-radius:0 12px 12px 0; color:@theme-back; margin:0.2rem 0.2rem 0.2rem 0.2rem;       // Disp
+                 i { margin-right: 0.25rem; } }
                li:hover { background-color:@theme-back!important; color:@theme-color-tocs-disp!important; } } } } } } }
 </style>

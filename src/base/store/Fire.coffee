@@ -5,8 +5,6 @@ import               '../../../pub/lib/store/firebase-auth.esm.js'     # Authent
 
 class Fire
 
-  Fire.EventType  = { get:"value", add:"child_added", put:"child_changed", del:"child_removed" }
-
   constructor:( @store ) ->
     @dbName  = @store.dbName
     @tables  = @store.tables
@@ -174,6 +172,8 @@ class Fire
        .catch( (error) =>
          @store.onerror( 'auth', 'auth', error ) )
     return
+
+Fire.EventType  = { get:"value", add:"child_added", put:"child_changed", del:"child_removed" }
 
 export default Fire
 

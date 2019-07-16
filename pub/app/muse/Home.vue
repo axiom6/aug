@@ -38,16 +38,19 @@
   Home.Know = Know;
   Home.Wise = Wise;
 
-    export default Home;
+  export default Home;
+  
 </script>
 
 <style lang="less">
+  
+  @import '../../../pub/css/themes/theme.less';
   
   .grid3x1() { display:grid; grid-template-columns:1fr; grid-template-rows:30fr 40fr 30fr;
       grid-template-areas:"head" "midd" "foot"; }
   
   .home { .grid3x1(); position:relative; left:0; top:0; right:0; bottom:0;
-    background-color:black; color:wheat; }
+    background-color:@theme-back; color:@theme-color; }
 
   .head { grid-area:head; justify-items:center; align-items:center; text-align:center; display:grid;
     justify-self:stretch; align-self:stretch; }
@@ -58,6 +61,7 @@
   .foot { grid-area:foot; justify-items:center; align-items:center; text-align:center; display:grid;
     justify-self:stretch; align-self:stretch;  }
   
-  h1 { justify-self:center; align-self:center; font-size:3em; }
+  h1 { justify-self:center; align-self:center; font-size:@theme-h1-size; }
+  h2 { justify-self:center; align-self:center; font-size:@theme-h2-size; }
   
 </style>

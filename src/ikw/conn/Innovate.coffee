@@ -33,7 +33,7 @@ class Innovate
     colorBack = 'rgba(97, 56, 77, 1.0 )'
     @shapes.round( g, t,     t,     geom.w-t*2,   geom.h-t*2,   t, t, colorRing, 'none' )
     @shapes.round( g, t*2.5, t*2.5, geom.w-t*5.0, geom.h-t*5.0, t, t, colorBack, 'none' )
-    @shapes.text(  g, t*4,   t*2+2, @spec.name,   @spec.name+'Text', 'black', '1.8em' )
+    @shapes.text(  g, t*4,   t*2+2, @spec.name,   @spec.name+'Text', 'black', '1.2em' )
 
   concept:( g, geom ) ->
     @eastInovate(  g, geom )
@@ -158,7 +158,7 @@ class Innovate
 
   hexText:( text, g, x0, y0, textId ) ->
     path = g.append("svg:text").text(text).attr("id",textId).attr("x",x0).attr("y",y0+16)
-            .attr("text-anchor","middle").attr("font-size","0.9em")
+            .attr("text-anchor","middle").attr("font-size","0.5em")
             .attr("font-family",@shapes.fontText)
            #.attr("font-weight","bold")
     @shapes.click( path, text )
@@ -166,7 +166,7 @@ class Innovate
 
   hexIcon:( icon, g, x0, y0, iconId ) ->
     g.append("svg:text").text(icon).attr("x",x0).attr("y",y0-2).attr("id",iconId)
-     .attr("text-anchor","middle").attr("font-size","1.5em")
+     .attr("text-anchor","middle").attr("font-size","1.0em")
      .attr("font-family","FontAwesome").attr("font-weight","normal")
     return
 

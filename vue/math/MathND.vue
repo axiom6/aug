@@ -83,7 +83,7 @@ export default MathND;
     justify-items:center; align-items:center; background-color:@theme-back; color:@theme-color;
     border:solid thin @theme-color; }
   
-  .comp { background-color:@theme-back; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:2.5em;
+  .comp { background-color:@theme-back; position:absolute; left:0; top:5%; right:0; bottom:0; font-size:@theme-math-size;
     .grid9x3(); justify-items:center; align-items:center;
     
     .r1c1{.c(r1c1)}; .r1c2{.c(r1c2)}; .r1c3{.c(r1c3)};
