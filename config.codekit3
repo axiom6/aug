@@ -1151,9 +1151,9 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/pub/app/augm/manifest.webmanifest",
-		"oF": 0
+		"oF": 1
 		},
 	"/pub/app/augm/Router.js": {
 		"bF": 0,
@@ -1388,21 +1388,92 @@
 		"oAP": "/pub/app/data/text/Info.txt",
 		"oF": 0
 		},
+	"/pub/app/demo/Demo.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/app/demo/Demo-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/app/demo/Demo.roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/app/demo/Demo.roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/app/demo/Home.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/app/demo/Home-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/app/demo/Home.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/app/demo/Home.js",
+		"oF": 0
+		},
+	"/pub/app/demo/Main.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/app/demo/Main.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/app/demo/manifest.webmanifest": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/app/demo/manifest.webmanifest",
+		"oF": 1
+		},
+	"/pub/app/demo/Router.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/app/demo/Router-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/app/main/Main.roll.sh": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/pub/app/main/Main.roll.sh",
-		"oF": 0
+		"oF": 1
 		},
 	"/pub/app/main/manifest.webmanifest": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/pub/app/main/manifest.webmanifest",
-		"oF": 0
+		"oF": 1
 		},
 	"/pub/app/muse/Home.js": {
 		"bF": 0,
@@ -1449,9 +1520,9 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/pub/app/muse/manifest.webmanifest",
-		"oF": 0
+		"oF": 1
 		},
 	"/pub/app/muse/Muse.js": {
 		"bF": 0,
@@ -2443,6 +2514,23 @@
 		"plM": 3758088159,
 		"prP": 0
 		},
+	"/pub/css/themes/mobile.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/pub/css/themes/mobile.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
 	"/pub/css/themes/theme.css": {
 		"aP": 1,
 		"bl": 0,
@@ -2543,6 +2631,14 @@
 		"opt": 0,
 		"oT": 1,
 		"q": 100
+		},
+	"/pub/demo.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/demo.html",
+		"oF": 0
 		},
 	"/pub/gan/2D/Basics.js": {
 		"bF": 0,
@@ -8486,23 +8582,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.html",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "",
-			"autoOutputPathReplace2": "",
-			"autoOutputPathStyle": 0,
-			"fileExtension": "html",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.js",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "vue",
 			"autoOutputPathReplace2": "pub/vue",
 			"autoOutputPathStyle": 3,
 			"fileExtension": "vue",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.html",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "",
+			"autoOutputPathReplace2": "",
+			"autoOutputPathStyle": 0,
+			"fileExtension": "html",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

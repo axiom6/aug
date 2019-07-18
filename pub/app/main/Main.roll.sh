@@ -9,5 +9,6 @@ rollup --config     vue/data/Data.roll.js
 rollup --config     vue/page/Page.roll.js
 rollup --config pub/app/muse/Muse.roll.js
 rollup --config pub/app/augm/Augm.roll.js
+rollup --config pub/app/demo/Demo.roll.js
 
 

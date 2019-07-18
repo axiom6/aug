@@ -1,6 +1,6 @@
 
 Apps
-  - Demo    * Simple
+  - Demo    * Set up in Firebase. Set canonical link in demo.html
   - Muse    * Narrative
   - Tool    * Begin
   - Jitter  ? Move to Aug

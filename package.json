@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "main": "pub/app/main/Main.roll.sh",
+    "demo": "rollup --config pub/app/demo/Demo.roll.js",
     "augm": "rollup --config pub/app/augm/Augm.roll.js",
     "muse": "rollup --config pub/app/muse/Muse.roll.js",
     "page": "rollup --config vue/page/Page.roll.js",
