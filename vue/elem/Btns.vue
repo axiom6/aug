@@ -59,11 +59,11 @@
            let btn = this.btns[key];
            if( btn.pos[2]===0 ) {
              let wt     = this.$refs[this.titleRef(btn)][0]['clientWidth']
-             let el     = this.$refs[btn.key][0]
-             let wb     = el['clientWidth']
+             btn.elem   = this.$refs[btn.key][0]
+             let wb     = btn.elem['clientWidth']
              btn.pos[2] = btn.pos[3]*2.4*wt/wb
              // console.log( 'Adj', { wt:wt, wb:wb, w:btn.pos[2], h:btn.pos[3] } ) }
-             this.$refs[btn.key][0].style.width = btn.pos[2]+'%' } }
+             btn.elem.style.width = btn.pos[2]+'%' } }
       } },
 
     mounted: function () {

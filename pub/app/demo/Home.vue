@@ -14,21 +14,22 @@
 
 <script type="module">
 
-  import Btns from '../../../vue/elem/Btns.vue';
+  import Btns     from '../../../vue/elem/Btns.vue';
+
   
    let Home = {
     
     components:{ 'h-btns':Btns },
 
   data() { return { comp:'Draw', key:'Axes', btns:{
-    Axes:    { title:'Axes',    key:'Axes',    obj:null, pos:[ 5,10,0,10], back:'primary',   check:true              },
-    Chord:   { title:'Chord',   key:'Chord',   obj:null, pos:[30,10,0,20], back:'secondary', img:'brew/AutoDrip.jpg' },
-    Cluster: { title:'Cluster', key:'Cluster', obj:null, pos:[50,10,0,10], back:'success',   icon:'fas fa-circle'    },
-    Link:    { title:'Link',    key:'Link',    obj:null, pos:[ 5,25,0,20], back:'info',      check:true              },
-    Radar:   { title:'Radar',   key:'Radar',   obj:null, pos:[ 5,40,0,10], back:'warning',   icon:'fas fa-circle'    },
-    Radial:  { title:'Radial',  key:'Radial',  obj:null, pos:[ 5,55,0,20], back:'danger',    img:'brew/AutoDrip.jpg' },
-    Tree:    { title:'Tree',    key:'Tree',    obj:null, pos:[40,40,0,30], back:'light',     icon:'fas fa-circle'    },
-    Wheel:   { title:'Wheel',   key:'Wheel',   obj:null, pos:[60,60,0,30], back:'success',   img:'brew/AutoDrip.jpg' }
+    Axes:    { title:'Axes',    key:'Axes',    elem:null, pos:[ 5,10,0,10], back:'primary',   check:true              },
+    Chord:   { title:'Chord',   key:'Chord',   elem:null, pos:[30,10,0,20], back:'secondary', img:'brew/AutoDrip.jpg' },
+    Cluster: { title:'Cluster', key:'Cluster', elem:null, pos:[50,10,0,10], back:'success',   icon:'fas fa-circle'    },
+    Link:    { title:'Link',    key:'Link',    elem:null, pos:[ 5,25,0,20], back:'info',      check:true              },
+    Radar:   { title:'Radar',   key:'Radar',   elem:null, pos:[ 5,40,0,10], back:'warning',   icon:'fas fa-circle'    },
+    Radial:  { title:'Radial',  key:'Radial',  elem:null, pos:[ 5,55,0,20], back:'danger',    img:'brew/AutoDrip.jpg' },
+    Tree:    { title:'Tree',    key:'Tree',    elem:null, pos:[40,40,0,30], back:'light',     icon:'fas fa-circle'    },
+    Wheel:   { title:'Wheel',   key:'Wheel',   elem:null, pos:[60,60,0,30], back:'success',   img:'brew/AutoDrip.jpg' }
     } } },
 
    mounted: function () {
