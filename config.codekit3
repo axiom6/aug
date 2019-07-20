@@ -1440,6 +1440,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/app/demo/Main.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/app/demo/Main-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/app/demo/manifest.webmanifest": {
 		"cB": 0,
 		"ft": 8192,
@@ -1474,6 +1485,14 @@
 		"oA": 1,
 		"oAP": "/pub/app/main/manifest.webmanifest",
 		"oF": 1
+		},
+	"/pub/app/mbox/manifest.webmanifest": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/app/mbox/manifest.webmanifest",
+		"oF": 0
 		},
 	"/pub/app/muse/Home.js": {
 		"bF": 0,
@@ -1682,6 +1701,72 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/base/d3d/Wheel-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/base/mbox/Box.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/base/mbox/Box-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/base/mbox/Color.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/base/mbox/Color-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/base/mbox/Coord.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/base/mbox/Coord-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/base/mbox/Faces.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/base/mbox/Faces-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/base/mbox/MBox.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/base/mbox/MBox-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/base/mbox/Regress.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/base/mbox/Regress-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -3080,6 +3165,59 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/lib/mbox/chroma.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/lib/mbox/chroma-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/lib/mbox/jquery-3.3.1.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/lib/mbox/jquery-3.3.1-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/lib/mbox/mathbox-bundle.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/lib/mbox/mathbox-bundle-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/lib/mbox/mathbox.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/pub/lib/mbox/mathbox-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/pub/lib/mbox/mbox.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/pub/lib/mbox/mbox-min.css",
+		"oF": 0,
+		"oS": 3
+		},
 	"/pub/lib/store/firebase-app.esm.js": {
 		"bF": 0,
 		"ft": 64,
@@ -3417,6 +3555,14 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"/pub/mbox.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/mbox.html",
+		"oF": 0
 		},
 	"/pub/muse.html": {
 		"cB": 0,
@@ -3851,6 +3997,94 @@
 		"mi": 0,
 		"oA": 0,
 		"oAP": "/pub/base/d3d/Tree.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/base/event/swipe.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/src/base/event/swipe-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/base/event/Touch.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/base/event/Touch.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/base/mbox/Box.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/base/mbox/Box.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/base/mbox/Color.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/base/mbox/Color.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/base/mbox/Coord.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/base/mbox/Coord.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/base/mbox/Faces.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/base/mbox/Faces.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/base/mbox/MBox.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/base/mbox/MBox.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/base/mbox/Regress.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/base/mbox/Regress.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,

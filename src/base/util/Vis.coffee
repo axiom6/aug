@@ -131,7 +131,7 @@ class Vis
   @toRgbSphere:( hue, phi, rad ) ->
     Vis.toRgbHsv( Vis.rot(hue,90), 100*Vis.sin(phi), 100*rad )
 
-  # Key algorithm from HCI for converting RGB to HCS  h 360 c 100 s 100
+  # Key algorithm from HCI for converting RGB to HCS  h 360 c 100 s 100 a special color system
   @toHcsRgb:( R, G, B, toRygb=true  ) =>
     sum = R + G + B
     r = R/sum; g = G/sum; b = B/sum
@@ -153,7 +153,7 @@ class Vis
     s * (1-ch) + s * ch * ss
 
   @sScaleCf:( hue, c, s ) ->
-    ss   = sScale( hue, c, s )
+    ss   = Vis.sScale( hue, c, s )
     m60  = hue %  60
     m120 = hue % 120
     cosu = (1-Vis.cos(   m60))*100.00

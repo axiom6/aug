@@ -289,7 +289,7 @@ Vis = class Vis {
     return Vis.toRgbHsv(Vis.rot(hue, 90), 100 * Vis.sin(phi), 100 * rad);
   }
 
-  // Key algorithm from HCI for converting RGB to HCS  h 360 c 100 s 100
+  // Key algorithm from HCI for converting RGB to HCS  h 360 c 100 s 100 a special color system
   static toHcsRgb(R, G, B, toRygb = true) {
     var H, a, b, c, g, h, r, s, sum;
     sum = R + G + B;
@@ -320,7 +320,7 @@ Vis = class Vis {
 
   static sScaleCf(hue, c, s) {
     var cf, cosd, cosu, m120, m60, ss;
-    ss = sScale(hue, c, s);
+    ss = Vis.sScale(hue, c, s);
     m60 = hue % 60;
     m120 = hue % 120;
     cosu = (1 - Vis.cos(m60)) * 100.00;
