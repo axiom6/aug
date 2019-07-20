@@ -23,7 +23,8 @@ class Coord
     view = @mathbox.polar( { range:range, scale:scale } )
     #@tick(  view, 64, 0xFFFFFF, 12, 3, 1 )
     view.transform( {position: [0, 100, 0] } )
-        .grid({ unitX:π/12, baseX:2, zWrite:false, detailX:81, divideX:12, divideY:10,axes:'xz', blending:'add', color:0x00F0B0, width:@width, opacity:1 } )
+        .grid({ unitX:π/12, baseX:2, zWrite:false, detailX:81, divideX:12, divideY:10,axes:'xz',
+        blending:'add', color:0x00F0B0, width:@width, opacity:1 } )
     @radPolar( view )
     view
 
