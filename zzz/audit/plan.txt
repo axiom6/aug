@@ -7,6 +7,7 @@ Apps
   - Skyline ? Move to Aug
 
 Host
+  - Cache   * Cache-Control: max-age=1, stale-while-revalidate=59
   - PWA     * Deploy to phones
   - Fire    * this pointer in esm lib
   - Fire    * Setup databases for all apps

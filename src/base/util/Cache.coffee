@@ -14,6 +14,7 @@ class Cache
       console.error( "Cache", "This browser does not suppor service workers")
       return
 
+
     navigator.serviceWorker.register( swUrl, { scope: './' } )
       .then( (registration) =>
         serviceWorkerRegistration = null

@@ -1,6 +1,9 @@
 Configure your server to return the Cache-Control HTTP response header.
   Cache-Control: max-age=31557600 year 2628000 month 86400 week 3600 hour 60 minute
 
+  Cache-Control: max-age=1, stale-while-revalidate=59
+   opts = { 'Cache-Control':'max-age=1, stale-while-revalidate=59' }
+
 Minimize Critical Requests Depth
 
 Ensure text remains visible during webfont load
