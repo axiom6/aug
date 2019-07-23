@@ -26,7 +26,7 @@ Main = (function() {
         subjects: subjects
       };
       Main.stream = new Stream(subjects, infoSpec);
-      Main.cache = new Cache(Main.stream);
+      //ain.cache  = new Cache( Main.stream )
       Main.mergePracsCols();
       Main.onReady();
     }
@@ -167,13 +167,10 @@ Main = (function() {
       kompsTocs: function() { // For Tocs.vue
         return Main.komps;
       },
-      pracs: function(compk) {
-        return Main.Batch[compk].data[compk].pracs;
-      },
       subset: function(compk, filter) {
         var filts, key, prac, ref;
         filts = {};
-        ref = Main.Batch[compk].data[compk].pracs;
+        ref = this.pracs(compk);
         for (key in ref) {
           if (!hasProp.call(ref, key)) continue;
           prac = ref[key];
@@ -187,6 +184,9 @@ Main = (function() {
         return this.subset(compk, function(prac) {
           return prac.row !== 'Dim';
         });
+      },
+      pracs: function(compk) {
+        return Main.Batch[compk].data[compk].pracs;
       },
       disps: function(compk, prack) {
         return Main.Batch[compk].data[compk][prack].disps;

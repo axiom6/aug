@@ -35,7 +35,7 @@ class Main
     subjects    = ["Info","Know","Wise","Cube","Navb","Tabs","Cache"]
     infoSpec    = { subscribe:false, publish:false, subjects:subjects}
     Main.stream = new Stream( subjects, infoSpec )
-    Main.cache  = new Cache( Main.stream )
+    #ain.cache  = new Cache( Main.stream )
     Main.mergePracsCols()
     Main.onReady()
     return
@@ -78,15 +78,15 @@ class Main
         Main.Batch[compk].data.comps
       kompsTocs:() ->   # For Tocs.vue
         Main.komps
-      pracs:( compk ) ->
-        Main.Batch[compk].data[compk].pracs
       subset:( compk, filter ) ->
         filts = {}
-        for own key, prac of Main.Batch[compk].data[compk].pracs when filter(prac)
+        for own key, prac of this.pracs(compk) when filter(prac)
           filts[key] = prac
         filts
       conns:( compk ) ->
         this.subset( compk, (prac) -> prac.row isnt 'Dim' )
+      pracs:( compk ) ->
+        Main.Batch[compk].data[compk].pracs
       disps:( compk, prack ) ->
         Main.Batch[compk].data[compk][prack].disps
       areas:( compk, prack, dispk ) ->

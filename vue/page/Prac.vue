@@ -2,7 +2,7 @@
 <template>
   <div class="comp">
     <template v-for="prac in practices">
-      <div v-show="isPrac(prac.name)" :class="pracDir(prac.dir)" :key="prac.name">
+      <div v-show="isPrac(prac.name)" :class="pracDir(prac.dir)" :key="prac.name" :ref="prac.name">
         <div class="prac">
           <div v-show="isDisp(prac.name)" :class="dispDir('cen')" :style="style(prac.hsv)">
             <div class="disp" @click="pubPrac(prac.name)">
@@ -12,7 +12,7 @@
             </div>
           </div>
           <template  v-for="disp in prac.disps">
-            <div v-show="isDisp(disp.name)" :class="dispDir(disp.dir)" :style="style(disp.hsv)">
+            <div v-show="isDisp(disp.name)" :class="dispDir(disp.dir)" :style="style(disp.hsv)" :ref="disp.name">
             <div class="disp" @click="pubDisp(prac.name,disp.name)">
               <i   :class="disp.icon"></i>
               <span class="name">{{disp.name}}</span>
@@ -80,19 +80,30 @@
       areaDir: function() {
         return this.prac==='All' ? 'none' : 'area' },
       style: function( hsv ) {
-        return { backgroundColor:this.toRgbaHsv(hsv) }; } },
+        return { backgroundColor:this.toRgbaHsv(hsv) }; },
+      elems: function() { // Add DON elements. Must be called within $nextTick for $refs
+        let pracs = this.conns(this.comp); // We access conns because col practices have been filtered out
+        for( let pkey in pracs ) {
+          let prac = pracs[pkey];
+          prac.elem = this.$refs[prac.name][0];
+          let disps = this.disps(this.comp,prac.name)
+          for( let dkey in disps ) {
+            let disp = disps[dkey];
+            disp.elem = this.$refs[disp.name][0]; } } }
+      },
 
     beforeMount: function() {
       this.comp = this.$route.name.substring(0,4);  },
       // console.log( 'Prac.beforeMount()', this.$route.name, this.comp, this.pcomp  );
 
     mounted: function () {
-      this.practices = this.pracs(this.comp,'Cols');
+      this.practices = this.pracs(this.comp); // 'Cols'
       this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
          if( obj.disp==='All' ) { this.onPrac(obj.prac); }
          else                   { this.onDisp(obj.prac,obj.disp); } } );
       this.subscribe(  "Tabs",    this.comp+'.vue', (obj) => {
-        this.onTabs(obj); } ); }
+        this.onTabs(obj); } );
+      this.$nextTick( function() { this.elems() } ) }
   }
          
 </script>

@@ -11,6 +11,7 @@ class Touch
     @pinchScale   = 1.0
     @resetTimeout = null
     @dirs = ['up', 'down', 'left', 'right']
+    @ptes = ['tap', 'doubletap', 'hold', 'down', 'move', 'up'];
 
   swipe:( swipeElem, onSwipe ) ->
     Interact(swipeElem).draggable(true).on('dragend', (event) =>
