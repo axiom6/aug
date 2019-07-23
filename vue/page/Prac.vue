@@ -1,8 +1,9 @@
 
 <template>
-  <div class="comp">
+  <div class="comp" ref="Info" title="Info" >
     <template v-for="prac in practices">
-      <div v-show="isPrac(prac.name)" :class="pracDir(prac.dir)" :key="prac.name" :ref="prac.name">
+      <div v-show="isPrac(prac.name)" :class="pracDir(prac.dir)" :key="prac.name"
+        :ref="prac.name" :title="prac.name">
         <div class="prac">
           <div v-show="isDisp(prac.name)" :class="dispDir('cen')" :style="style(prac.hsv)">
             <div class="disp" @click="pubPrac(prac.name)">
@@ -12,7 +13,8 @@
             </div>
           </div>
           <template  v-for="disp in prac.disps">
-            <div v-show="isDisp(disp.name)" :class="dispDir(disp.dir)" :style="style(disp.hsv)" :ref="disp.name">
+            <div v-show="isDisp(disp.name)" :class="dispDir(disp.dir)" :style="style(disp.hsv)"
+              :ref="disp.name" :title="disp.name">
             <div class="disp" @click="pubDisp(prac.name,disp.name)">
               <i   :class="disp.icon"></i>
               <span class="name">{{disp.name}}</span>
@@ -38,6 +40,8 @@
 </template>
 
 <script type="module">
+  
+  import Touch from '../../pub/base/util/Touch.js';
 
   export default {
     
@@ -82,14 +86,16 @@
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; },
       elems: function() { // Add DON elements. Must be called within $nextTick for $refs
+        this.infoElem = this.$refs['Info']
         let pracs = this.conns(this.comp); // We access conns because col practices have been filtered out
         for( let pkey in pracs ) {
           let prac = pracs[pkey];
           prac.elem = this.$refs[prac.name][0];
+          this.touch.events( prac.elem );
           let disps = this.disps(this.comp,prac.name)
           for( let dkey in disps ) {
             let disp = disps[dkey];
-            disp.elem = this.$refs[disp.name][0]; } } }
+            disp.elem = this.$refs[disp.name][0]; } } }  // this.touch.events( disp.elem );
       },
 
     beforeMount: function() {
@@ -97,13 +103,15 @@
       // console.log( 'Prac.beforeMount()', this.$route.name, this.comp, this.pcomp  );
 
     mounted: function () {
+      this.touch     = new Touch();
       this.practices = this.pracs(this.comp); // 'Cols'
       this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
          if( obj.disp==='All' ) { this.onPrac(obj.prac); }
          else                   { this.onDisp(obj.prac,obj.disp); } } );
       this.subscribe(  "Tabs",    this.comp+'.vue', (obj) => {
         this.onTabs(obj); } );
-      this.$nextTick( function() { this.elems() } ) }
+      this.$nextTick( function() {
+        this.elems(); } ) }
   }
          
 </script>

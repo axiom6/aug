@@ -1965,6 +1965,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/base/util/Touch.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/base/util/Touch-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/base/util/Util.js": {
 		"bF": 0,
 		"ft": 64,
@@ -3284,6 +3295,39 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/lib/touch/interact.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/lib/touch/interact.esm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/lib/touch/modernizr-touch.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/lib/touch/modernizr-touch-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/lib/touch/modernizr.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/lib/touch/modernizr.esm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/lib/vue/vee-validate.esm.js": {
 		"bF": 0,
 		"ft": 64,
@@ -4002,28 +4046,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/base/event/swipe.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/src/base/event/swipe-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/base/event/Touch.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/base/event/Touch.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
 	"/src/base/mbox/Box.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -4239,6 +4261,17 @@
 		"mi": 0,
 		"oA": 0,
 		"oAP": "/pub/base/util/Stream.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/base/util/Touch.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/base/util/Touch.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
@@ -6264,6 +6297,28 @@
 		"oA": 1,
 		"oAP": "/zzz/sw/Worker-min.js",
 		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/touch/swipe.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/touch/swipe-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/touch/Touch.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/touch/Touch.js",
+		"oF": 0,
+		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
@@ -8816,23 +8871,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.html",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "",
-			"autoOutputPathReplace2": "",
-			"autoOutputPathStyle": 0,
-			"fileExtension": "html",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.js",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "vue",
 			"autoOutputPathReplace2": "pub/vue",
 			"autoOutputPathStyle": 3,
 			"fileExtension": "vue",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.html",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "",
+			"autoOutputPathReplace2": "",
+			"autoOutputPathStyle": 0,
+			"fileExtension": "html",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

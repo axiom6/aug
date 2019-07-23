@@ -1,16 +1,3 @@
-function commonjsRequire () {
-	throw new Error('Dynamic requires are not currently supported by rollup-plugin-commonjs');
-}
-
-function unwrapExports (x) {
-	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
-}
-
-function createCommonjsModule(fn, module) {
-	return module = { exports: {} }, fn(module, module.exports), module.exports;
-}
-
-var interact_esm = createCommonjsModule(function (module, exports) {
 /**
  * interact.js 1.4.0-rc.13
  *
@@ -18,7 +5,8 @@ var interact_esm = createCommonjsModule(function (module, exports) {
  * Released under the MIT License.
  * https://raw.github.com/taye/interact.js/master/LICENSE
  */
-(function(f){{module.exports=f();}})(function(){return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof commonjsRequire&&commonjsRequire;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t);}return n[i].exports}for(var u="function"==typeof commonjsRequire&&commonjsRequire,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.interact = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -182,6 +170,7 @@ var _default = drag;
 exports["default"] = _default;
 
 },{"@interactjs/core/scope":24,"@interactjs/utils/arr":46,"@interactjs/utils/is":56}],2:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -317,6 +306,7 @@ var _default = DropEvent;
 exports["default"] = _default;
 
 },{"@interactjs/core/BaseEvent":13,"@interactjs/utils/arr":46}],3:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -852,6 +842,7 @@ var _default = drop;
 exports["default"] = _default;
 
 },{"../drag":1,"./DropEvent":2,"@interactjs/utils":55}],4:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -1009,6 +1000,7 @@ var _default = gesture;
 exports["default"] = _default;
 
 },{"@interactjs/core/InteractEvent":15,"@interactjs/core/scope":24,"@interactjs/utils":55}],5:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -1061,6 +1053,7 @@ var id = 'actions';
 exports.id = id;
 
 },{"./drag":1,"./drop":3,"./gesture":4,"./resize":6}],6:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -1529,6 +1522,7 @@ var _default = resize;
 exports["default"] = _default;
 
 },{"@interactjs/core/scope":24,"@interactjs/utils":55}],7:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -1775,6 +1769,7 @@ var _default = {
 exports["default"] = _default;
 
 },{"@interactjs/utils/domUtils":50,"@interactjs/utils/is":56,"@interactjs/utils/raf":61,"@interactjs/utils/rect":62,"@interactjs/utils/window":65}],8:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -1972,6 +1967,7 @@ var _default = {
 exports["default"] = _default;
 
 },{"@interactjs/utils":55,"@interactjs/utils/is":56}],9:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -2257,6 +2253,7 @@ var _default = {
 exports["default"] = _default;
 
 },{"./InteractableMethods":8,"@interactjs/utils":55}],10:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -2350,6 +2347,7 @@ var _default = {
 exports["default"] = _default;
 
 },{"./base":9,"@interactjs/core/scope":24,"@interactjs/utils/domUtils":50,"@interactjs/utils/is":56}],11:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -2418,6 +2416,7 @@ var _default = {
 exports["default"] = _default;
 
 },{"./base":9}],12:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -2461,6 +2460,7 @@ var id = 'auto-start';
 exports.id = id;
 
 },{"./base":9,"./dragAxis":10,"./hold":11}],13:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -2530,6 +2530,7 @@ var _default = BaseEvent;
 exports["default"] = _default;
 
 },{}],14:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -2638,6 +2639,7 @@ var _default = Eventable;
 exports["default"] = _default;
 
 },{"@interactjs/utils/arr":46,"@interactjs/utils/extend":52,"@interactjs/utils/normalizeListeners":58}],15:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -2888,6 +2890,7 @@ var _default = InteractEvent;
 exports["default"] = _default;
 
 },{"./BaseEvent":13,"./defaultOptions":20,"@interactjs/utils/extend":52,"@interactjs/utils/getOriginXY":53,"@interactjs/utils/hypot":54}],16:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -3331,6 +3334,7 @@ var _default = Interactable;
 exports["default"] = _default;
 
 },{"./Eventable":14,"@interactjs/utils/arr":46,"@interactjs/utils/browser":47,"@interactjs/utils/clone":48,"@interactjs/utils/domUtils":50,"@interactjs/utils/events":51,"@interactjs/utils/extend":52,"@interactjs/utils/is":56,"@interactjs/utils/normalizeListeners":58,"@interactjs/utils/window":65}],17:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -3466,6 +3470,7 @@ function () {
 exports["default"] = InteractableSet;
 
 },{"@interactjs/utils/Signals":45,"@interactjs/utils/arr":46,"@interactjs/utils/domUtils":50,"@interactjs/utils/extend":52,"@interactjs/utils/is":56}],18:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -4014,6 +4019,7 @@ var _default = Interaction;
 exports["default"] = _default;
 
 },{"./InteractEvent":15,"./PointerInfo":19,"./scope":24,"@interactjs/utils":55}],19:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -4037,6 +4043,7 @@ var _default = PointerInfo;
 exports["default"] = _default;
 
 },{}],20:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -4062,6 +4069,7 @@ var _default = defaults;
 exports["default"] = _default;
 
 },{}],21:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -4194,6 +4202,7 @@ var _default = {
 exports["default"] = _default;
 
 },{"@interactjs/utils/domUtils":50,"@interactjs/utils/events":51,"@interactjs/utils/is":56,"@interactjs/utils/window":65}],22:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -4372,6 +4381,7 @@ var _default = finder;
 exports["default"] = _default;
 
 },{"@interactjs/utils/arr":46,"@interactjs/utils/domUtils":50}],23:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -4643,6 +4653,7 @@ var _default = {
 exports["default"] = _default;
 
 },{"./Interaction":18,"./interactionFinder":22,"@interactjs/utils/Signals":45,"@interactjs/utils/browser":47,"@interactjs/utils/domObjects":49,"@interactjs/utils/events":51,"@interactjs/utils/pointerUtils":60}],24:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -4908,6 +4919,7 @@ function initScope(scope, window) {
 }
 
 },{"./Eventable":14,"./InteractEvent":15,"./Interactable":16,"./InteractableSet":17,"./defaultOptions":20,"./interactions":23,"@interactjs/utils":55,"@interactjs/utils/domObjects":49}],25:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -4937,13 +4949,14 @@ var links = {
   boxSizing: 'https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing'
 };
 exports.links = links;
-var install = function install(scope) {
+var install = undefined === 'production' ? function () {} // eslint-disable-next-line no-restricted-syntax
+: function install(scope) {
   var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
       logger = _ref.logger;
 
   logger = logger || console;
 
-  {
+  if (undefined !== 'production') {
     scope.logger = logger;
     scope.interactions.signals.on('action-start', function (_ref2) {
       var interaction = _ref2.interaction;
@@ -5011,6 +5024,7 @@ var _default = {
 exports["default"] = _default;
 
 },{"@interactjs/utils/domObjects":49,"@interactjs/utils/domUtils":50,"@interactjs/utils/is":56,"@interactjs/utils/window":65}],26:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -5315,6 +5329,7 @@ var _default = {
 exports["default"] = _default;
 
 },{"@interactjs/core/InteractEvent":15,"@interactjs/modifiers/base":30,"@interactjs/utils":55,"@interactjs/utils/raf":61}],27:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -5424,7 +5439,7 @@ function init(window) {
   _interact["default"].use(_reflow["default"]); // eslint-disable-next-line no-undef
 
 
-  {
+  if (undefined !== 'production') {
     _interact["default"].use(_devTools["default"]);
   }
 
@@ -5437,6 +5452,7 @@ var _default = _interact["default"];
 exports["default"] = _default;
 
 },{"./interact":28,"@interactjs/actions":5,"@interactjs/auto-scroll":7,"@interactjs/auto-start":12,"@interactjs/core/interactablePreventDefault":21,"@interactjs/dev-tools":25,"@interactjs/inertia":26,"@interactjs/modifiers":31,"@interactjs/modifiers/base":30,"@interactjs/pointer-events":41,"@interactjs/reflow":43}],28:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -5761,6 +5777,7 @@ var _default = interact;
 exports["default"] = _default;
 
 },{"@interactjs/core/scope":24,"@interactjs/utils":55,"@interactjs/utils/browser":47,"@interactjs/utils/events":51}],29:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -5811,6 +5828,7 @@ if ((typeof module === "undefined" ? "undefined" : _typeof(module)) === 'object'
 }
 
 },{"@interactjs/interact":27,"@interactjs/modifiers":31,"@interactjs/types":44,"@interactjs/utils/extend":52,"@interactjs/utils/snappers":64}],30:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -6277,6 +6295,7 @@ var _default = {
 exports["default"] = _default;
 
 },{"@interactjs/utils/extend":52}],31:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -6314,6 +6333,7 @@ var restrictSize = makeModifier(_size["default"], 'restrictSize');
 exports.restrictSize = restrictSize;
 
 },{"./base":30,"./restrict/edges":32,"./restrict/pointer":33,"./restrict/size":34,"./snap/edges":35,"./snap/pointer":36,"./snap/size":37}],32:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -6438,6 +6458,7 @@ var _default = restrictEdges;
 exports["default"] = _default;
 
 },{"./pointer":33,"@interactjs/utils/extend":52,"@interactjs/utils/rect":62}],33:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -6519,6 +6540,7 @@ var _default = restrict;
 exports["default"] = _default;
 
 },{"@interactjs/utils/is":56,"@interactjs/utils/rect":62}],34:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -6611,6 +6633,7 @@ var _default = restrictSize;
 exports["default"] = _default;
 
 },{"./edges":32,"@interactjs/utils/extend":52,"@interactjs/utils/rect":62}],35:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -6681,6 +6704,7 @@ var _default = snapEdges;
 exports["default"] = _default;
 
 },{"./size":37,"@interactjs/utils/clone":48,"@interactjs/utils/extend":52}],36:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -6859,6 +6883,7 @@ var _default = snap;
 exports["default"] = _default;
 
 },{"@interactjs/utils":55}],37:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -6984,6 +7009,7 @@ var _default = snapSize;
 exports["default"] = _default;
 
 },{"./pointer":36,"@interactjs/utils/extend":52,"@interactjs/utils/is":56}],38:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -7093,6 +7119,7 @@ function (_BaseEvent) {
 exports["default"] = PointerEvent;
 
 },{"@interactjs/core/BaseEvent":13,"@interactjs/utils/pointerUtils":60}],39:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -7395,6 +7422,7 @@ var _default = pointerEvents;
 exports["default"] = _default;
 
 },{"./PointerEvent":38,"@interactjs/utils":55}],40:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -7482,6 +7510,7 @@ var _default = {
 exports["default"] = _default;
 
 },{"./base":39}],41:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -7525,6 +7554,7 @@ var id = 'pointer-events';
 exports.id = id;
 
 },{"./base":39,"./holdRepeat":40,"./interactableTargets":42}],42:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -7606,6 +7636,7 @@ var _default = {
 exports["default"] = _default;
 
 },{"@interactjs/utils/arr":46,"@interactjs/utils/extend":52,"@interactjs/utils/is":56}],43:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -7777,8 +7808,11 @@ var _default = {
 exports["default"] = _default;
 
 },{"@interactjs/core/InteractEvent":15,"@interactjs/utils":55}],44:[function(require,module,exports){
+/// <reference path="./types.d.ts" />
+"use strict";
 
 },{}],45:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -7852,6 +7886,7 @@ var _default = Signals;
 exports["default"] = _default;
 
 },{}],46:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -7907,6 +7942,7 @@ function some(array, func) {
 }
 
 },{}],47:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -7974,6 +8010,7 @@ var _default = browser;
 exports["default"] = _default;
 
 },{"./domObjects":49,"./is":56,"./window":65}],48:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -8005,6 +8042,7 @@ function clone(source) {
 }
 
 },{"./arr":46,"./is":56}],49:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -8045,6 +8083,7 @@ function init(window) {
 }
 
 },{}],50:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -8290,6 +8329,7 @@ function trySelector(value) {
 }
 
 },{"./browser":47,"./domObjects":49,"./is":56,"./window":65}],51:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -8611,6 +8651,7 @@ var _default = events;
 exports["default"] = _default;
 
 },{"./arr":46,"./domUtils":50,"./is":56,"./pointerExtend":59,"./pointerUtils":60}],52:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -8626,6 +8667,7 @@ function extend(dest, source) {
 }
 
 },{}],53:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -8646,6 +8688,7 @@ function _default(target, element, action) {
 }
 
 },{"./rect":62}],54:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -8659,6 +8702,7 @@ var _default = function _default(x, y) {
 exports["default"] = _default;
 
 },{}],55:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -8823,6 +8867,7 @@ function copyAction(dest, src) {
 }
 
 },{"./Signals":45,"./arr":46,"./browser":47,"./clone":48,"./domUtils":50,"./events":51,"./extend":52,"./getOriginXY":53,"./hypot":54,"./is":56,"./normalizeListeners":58,"./pointerUtils":60,"./raf":61,"./rect":62,"./window":65}],56:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -8905,6 +8950,7 @@ var array = function array(thing) {
 exports.array = array;
 
 },{"./isWindow":57,"./window":65}],57:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -8918,6 +8964,7 @@ var _default = function _default(thing) {
 exports["default"] = _default;
 
 },{}],58:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -8979,6 +9026,7 @@ function split(type) {
 }
 
 },{"./extend":52,"./is":56}],59:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -9013,6 +9061,7 @@ var _default = pointerExtend;
 exports["default"] = _default;
 
 },{}],60:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -9282,6 +9331,7 @@ var _default = pointerUtils;
 exports["default"] = _default;
 
 },{"./browser":47,"./domObjects":49,"./domUtils":50,"./hypot":54,"./is":56,"./pointerExtend":59}],61:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -9337,6 +9387,7 @@ var _default = {
 exports["default"] = _default;
 
 },{}],62:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -9429,6 +9480,7 @@ var _default = {
 exports["default"] = _default;
 
 },{"./domUtils":50,"./extend":52,"./is":56}],63:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -9493,6 +9545,7 @@ var _default = createGrid;
 exports["default"] = _default;
 
 },{}],64:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -9509,6 +9562,7 @@ var _grid = _interopRequireDefault(require("./grid"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 },{"./grid":63}],65:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -9564,816 +9618,4 @@ exports["default"] = _default;
 
 },{"./isWindow":57}]},{},[29])(29)
 });
-});
 
-var interact = unwrapExports(interact_esm);
-
-let Modernizr = {};
-
-!function (e, n, t) {
-  function o(e, n) {
-    return typeof e === n
-  }
-
-  function s() {
-    let e, n, t, s, a, i, l;
-    for (let u in f) if (f.hasOwnProperty(u)) {
-      if (e = [], n = f[u], n.name && (e.push(n.name.toLowerCase()), n.options && n.options.aliases && n.options.aliases.length)) for (t = 0; t < n.options.aliases.length; t++) e.push(n.options.aliases[t].toLowerCase());
-      for (s = o(n.fn, "function") ? n.fn() : n.fn, a = 0; a < e.length; a++) i = e[a], l = i.split("."), 1 === l.length ? Modernizr[l[0]] = s : (!Modernizr[l[0]] || Modernizr[l[0]] instanceof Boolean || (Modernizr[l[0]] = new Boolean(Modernizr[l[0]])), Modernizr[l[0]][l[1]] = s), r.push((s ? "" : "no-") + l.join("-"));
-    }
-  }
-
-  function a(e) {
-    let n = u.className, t = Modernizr._config.classPrefix || "";
-    if (c && (n = n.baseVal), Modernizr._config.enableJSClass) {
-      let o = new RegExp("(^|\\s)" + t + "no-js(\\s|$)");
-      n = n.replace(o, "$1" + t + "js$2");
-    }
-    Modernizr._config.enableClasses && (n += " " + t + e.join(" " + t), c ? u.className.baseVal = n : u.className = n);
-  }
-
-  function i() {
-    return "function" != typeof n.createElement ? n.createElement(arguments[0]) : c ? n.createElementNS.call(n, "http://www.w3.org/2000/svg", arguments[0]) : n.createElement.apply(n, arguments)
-  }
-
-  let r = [], f = [], l = {
-    _version: "3.6.0",
-    _config: {classPrefix: "", enableClasses: !0, enableJSClass: !0, usePrefixes: !0},
-    _q: [],
-    on: function (e, n) {
-      let t = this;
-      setTimeout(function () {
-        n(t[e]);
-      }, 0);
-    },
-    addTest: function (e, n, t) {
-      f.push({name: e, fn: n, options: t});
-    },
-    addAsyncTest: function (e) {
-      f.push({name: null, fn: e});
-    }
-  }, Modernizr = function () {
-  };
-  Modernizr.prototype = l, Modernizr = new Modernizr;
-  let u = n.documentElement, c = "svg" === u.nodeName.toLowerCase(), p = function () {
-    function e(e, n) {
-      let s;
-      return e ? (n && "string" != typeof n || (n = i(n || "div")), e = "on" + e, s = e in n, !s && o && (n.setAttribute || (n = i("div")), n.setAttribute(e, ""), s = "function" == typeof n[e], n[e] !== t && (n[e] = t), n.removeAttribute(e)), s) : !1
-    }
-
-    let o = !("onblur" in n.documentElement);
-    return e
-  }();
-  l.hasEvent = p;
-  let d = "Moz O ms Webkit", m = l._config.usePrefixes ? d.toLowerCase().split(" ") : [];
-  l._domPrefixes = m, Modernizr.addTest("pointerevents", function () {
-    let e = !1, n = m.length;
-    for (e = Modernizr.hasEvent("pointerdown"); n-- && !e;) p(m[n] + "pointerdown") && (e = !0);
-    return e
-  }), s(), a(r), delete l.addTest, delete l.addAsyncTest;
-  for (let v = 0; v < Modernizr._q.length; v++) Modernizr._q[v]();
-  e.Modernizr = Modernizr;
-}(window, document);
-
-//mport interact  from '../../../node_modules/interactjs/dist/interact.js'
-//mport interact, { init as initInteract } from '../../pub/lib/touch/interact.esm.js'
-var Touch;
-
-Touch = class Touch {
-  constructor() {
-    // Called by window.dragMoveListener, dropObj(), resizeDragObj, zoom()
-    this.drag = this.drag.bind(this);
-    this.hasTouch = Modernizr['touchevents'] != null;
-    this.hasPointer = Modernizr['pointerevents'] != null;
-    console.log('Touch', {
-      hasTouch: this.hasTouch,
-      hasPointer: this.hasPointer
-    });
-    this.xSnap = 0;
-    this.ySnap = 0;
-    this.angle = 0;
-    this.pinchAngle = 0.0;
-    this.pinchScale = 1.0;
-    this.resetTimeout = null;
-    this.dirs = ['up', 'down', 'left', 'right'];
-    this.ptes = ['tap', 'doubletap', 'hold', 'down', 'move', 'up'];
-  }
-
-  events(elem) {
-    //console.log( 'Touch.events', { title:elem.title, elem:elem } )
-    this.swipe(elem, this.onOpEvent);
-    //snap(      elem, @onOpEvent )
-    //resize(    elem, @opOpEvent )
-    this.rotate(elem, this.onOpEvent);
-    this.zoom(elem, this.onOpEvent);
-    this.tap(elem, this.onOpEvent);
-    this.doubleTap(elem, this.onOpEvent);
-    this.hold(elem, this.onOpEvent);
-  }
-
-  onOpEvent(op, event) {
-    var name, swipe;
-    name = event.target.title != null ? event.target.title : 'None';
-    swipe = event['swipe'] != null ? event['swipe'] : 'None;';
-    console.log({
-      op: op,
-      name: name,
-      event: event,
-      swipe: swipe
-    });
-  }
-
-  swipe(elem, onSwipe = null) {
-    interact(elem).draggable(true).on('dragend', (event) => {
-      if ((onSwipe != null) && (event['swipe'] != null)) {
-        onSwipe('Swipe', event);
-      }
-    });
-  }
-
-  drag(event) {
-    var target, x, y;
-    target = event['target'];
-    if ((target.title == null) || target.title === 'Info') {
-      return;
-    }
-    x = (parseFloat(target.getAttribute('data-x')) || 0) + event['dx'];
-    y = (parseFloat(target.getAttribute('data-y')) || 0) + event['dy'];
-    target.style.transform = `translate(${x}px,${y}px)`;
-    target.setAttribute('data-x', x);
-    target.setAttribute('data-y', y);
-    this.onOpEvent('Drag', event);
-  }
-
-  //window.dragMoveListener = @drag
-  dropObj(elem) {
-    return {
-      allowFrom: elem,
-      //accept: '#yes-drop', # only accept elements matching this CSS selector
-      overlap: 0.75, // Require a 75% element overlap for a drop to be possible
-      ondropactivate: (event) => {
-        event['target']['classList'].add('drop-active');
-      },
-      ondragenter: (event) => {
-        var draggableElement, dropzoneElement;
-        draggableElement = event['relatedTarget'];
-        dropzoneElement = event['target'];
-        dropzoneElement['classList'].add('drop-target'); // // feedback the possibility of a drop
-        draggableElement['classList'].add('can-drop');
-        draggableElement.textContent = 'Dragged in';
-      },
-      ondragleave: (event) => { // remove the drop feedback style
-        event['target']['classlist'].remove('drop-target');
-        event['relatedTarget']['classlist'].remove('can-drop');
-        event['relatedTarget']['textContent'] = 'Dragged out';
-      },
-      ondrop: (event) => {
-        event['relatedTarget'].textContent = 'Dropped';
-        this.onOpEvent('Drop', event);
-      },
-      ondropdeactivate: (event) => { // remove active dropzone feedback
-        event['target']['classlist'].remove('drop-active');
-        event['target']['classlist'].remove('drop-target');
-      }
-    };
-  }
-
-  dragObj(elem) {
-    return {
-      allowFrom: elem,
-      inertia: true,
-      modifiers: [
-        interact['modifiers'].restrictRect({
-          restriction: 'parent',
-          endOnly: true
-        })
-      ],
-      autoScroll: true,
-      onmove: this.drag // // dragMoveListener from the dragging demo above
-    };
-  }
-
-  dragDrop(dragElem, dropElem) {
-    interact(dropElem).dropzone(this.dropObj(dropElem));
-    interact(dragElem).draggable(this.dragObj(dragElem));
-  }
-
-  snapObj(elem) {
-    return {
-      allowFrom: elem,
-      modifiers: [
-        interact['modifiers'].snap({
-          targets: [
-            interact.createSnapGrid({
-              x: 30,
-              y: 30
-            })
-          ],
-          range: 2e308,
-          relativePoints: [
-            {
-              x: 0,
-              y: 0
-            }
-          ]
-        }),
-        interact['modifiers'].restrict({
-          restriction: elem['parentNode'],
-          elementRect: {
-            top: 0,
-            left: 0,
-            bottom: 1,
-            right: 1
-          },
-          endOnly: true
-        })
-      ],
-      inertia: true
-    };
-  }
-
-  snap(elem, onSnap = null) {
-    interact(elem).draggable(this.snapObj(elem)).on('dragmove', (event) => {
-      this.xSnap += event['dx'];
-      this.ySnap += event['dy'];
-      event['target'].style.transform = `translate(${this.xSnap}px,${this.ySnap}px)`;
-      if (onSnap != null) {
-        onSnap('Snap', event);
-      }
-    });
-  }
-
-  resizeDragObj(elem) {
-    return {
-      allowFrom: elem,
-      modifiers: [
-        interact['modifiers'].restrictRect({
-          restriction: 'parent'
-        })
-      ],
-      onmove: this.drag // // dragMoveListener from the dragging demo above
-    };
-  }
-
-  resizeObj(elem) {
-    return {
-      allowFrom: elem,
-      edges: {
-        left: true,
-        right: true,
-        bottom: true,
-        top: true // // resize from all edges and corners
-      },
-      modifiers: [
-        interact['modifiers'].restrictRect({
-          restriction: 'parent',
-          endOnly: true
-        }),
-        interact['modifiers'].restrictSize({
-          min: {
-            width: 100,
-            height: 50
-          }
-        })
-      ],
-      inertia: true
-    };
-  }
-
-  resize(elem, onResize = null) {
-    interact(elem).dragable(this.resizeDragObj(elem)).resizable(this.resizeObj(elem)).on('resizemove', (event) => {
-      var target, x, y;
-      target = event['target'];
-      x = parseFloat(target.getAttribute('data-x')) || 0;
-      y = parseFloat(target.getAttribute('data-y')) || 0;
-      target.style.width = event['rect'].width + 'px';
-      target.style.height = event['rect'].height + 'px';
-      x += event['deltaRect'].left;
-      y += event['deltaRect'].top;
-      event['target'].style.transform = `translate(${this.xSnap}px,${this.ySnap}px)`;
-      target.setAttribute('data-x', x);
-      target.setAttribute('data-y', y);
-      target.textContent = Math.round(event['rect'].width) + '\u00D7' + Math.round(event['rect'].height);
-      if (onResize != null) {
-        onResize('Resize', event);
-      }
-    });
-  }
-
-  rotate(elem, onRotate = null) {
-    interact(elem).gesturable({
-      allowFrom: elem,
-      onMove: (event) => {
-        this.angle += event['da'];
-        elem.style.transform = `rotate(${this.angle}deg)`;
-        if (onRotate != null) {
-          onRotate('Resize', event);
-        }
-      }
-    });
-  }
-
-  rotate2(rotateElem, arrowElem, angleElem = null) {
-    interact(rotateElem).gesturable({
-      allowFrom: elem,
-      onMove: (event) => {
-        this.angle += event['da'];
-        arrowElem.style.transform = `rotate(${this.angle}deg)`;
-        if (angleElem != null) {
-          angleElem.textContent = this.angle.toFixed(2) + '\u00b0';
-        }
-      }
-    });
-  }
-
-  zoom(elem, onZoom = null) {
-    var area;
-    area = elem.parentElement;
-    return interact(area).gesturable({
-      allowFrom: elem,
-      onstart: (event) => {
-        this.pitchAngle -= event['angle'];
-        clearTimeout(this.resetTimeout);
-        elem['classlist'].remove('reset');
-      },
-      onmove: (event) => {
-        var angle, scale;
-        angle = event['angle'] + this.pinchAngle;
-        scale = event['scale'] * this.pinchScale;
-        elem.style.transform = `rotate(${angle}deg) scale(${scale})`;
-        if (onZoom != null) {
-          onZoom('Zoom', event);
-        }
-      },
-      onend: (event) => {
-        this.pitchAngle += event['angle'];
-        this.pitchScale *= event['scale'];
-        this.resetElem = zoomElem;
-        this.resetTimeout = setTimeout(this.resetZoom, 1000);
-        elem['classlist'].add('reset');
-      }
-    }).draggable({
-      onmove: this.drag
-    });
-  }
-
-  resetZoom() {
-    this.resetElem.style.transform = 'scale(1)';
-    this.pinchAngle = 0.0;
-    this.pinchScale = 1.0;
-  }
-
-  tap(elem, onTap = null) {
-    interact(elem).pointerEvents({
-      allowFrom: elem
-    }).on('tap', (event) => {
-      event.preventDefault();
-      if (onTap != null) {
-        onTap('Tap', event);
-      }
-    });
-  }
-
-  doubleTap(elem, onDoubleTap = null) {
-    interact(elem).pointerEvents({
-      allowFrom: elem
-    }).on('doubletap', (event) => {
-      event.preventDefault();
-      if (onDoubleTap != null) {
-        onDoubleTap('DoubleTap', event);
-      }
-    });
-  }
-
-  hold(elem, onHold = null) {
-    interact(elem).pointerEvents({
-      allowFrom: elem
-    }).on('hold', (event) => {
-      event.preventDefault();
-      if (onHold != null) {
-        onHold('Hold', event);
-      }
-    });
-  }
-
-};
-
-var Touch$1 = Touch;
-
-//
-
-var script = {
-  
-  props: { pcomp:{ type:String, default:'None' } },
-  
-  data() { return {
-    comp:'None', prac:'All', disp:'All', tab:'Practices', practices:{},
-    rows: {
-      Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap" },
-      Do:{    name:'Do',    dir:'do', icon:"fas fas fa-cogs" },
-      Share:{ name:'Share', dir:'sh', icon:"fas fa-share-alt-square" } } } },
-  
-  methods: {
-    isPrac: function (prac) {
-      return this.prac===prac || this.prac==='All' },
-    isDisp: function (disp) {
-      return this.disp===disp || this.disp==='All' },
-    isRows: function () {
-      return this.prac==='All' },
-    pubTab: function (tab) {
-      this.tab = tab; },
-    classTab: function (tab) {
-      return this.tab===tab ? 'tab-active' : 'tab' },
-    pubPrac: function (prac) {
-      this.publish( this.comp, { prac:prac, disp:'All' } ); },
-    pubDisp: function (prac,disp) {
-      this.publish( this.comp, { prac:prac, disp:disp  } ); },
-    onPrac: function (prac) {
-      this.prac = prac; this.disp='All'; },
-    onDisp: function (prac,disp) {
-      this.prac = prac; this.disp=disp; },
-    onTabs: function (tab) {
-      if( tab==='Practices' && this.tab==='Practices' && this.prac!=='All' ) {
-        this.onPrac('All'); }
-      this.tab = tab; },
-    pracDir: function(dir) {
-      return this.prac==='All' ? dir : 'fullPracDir'; },
-    dispDir: function(dir) {
-      return this.disp==='All' ? dir : 'fullDispDir'; },
-    areaDir: function() {
-      return this.prac==='All' ? 'none' : 'area' },
-    style: function( hsv ) {
-      return { backgroundColor:this.toRgbaHsv(hsv) }; },
-    elems: function() { // Add DON elements. Must be called within $nextTick for $refs
-      this.infoElem = this.$refs['Info'];
-      let pracs = this.conns(this.comp); // We access conns because col practices have been filtered out
-      for( let pkey in pracs ) {
-        let prac = pracs[pkey];
-        prac.elem = this.$refs[prac.name][0];
-        this.touch.events( prac.elem );
-        let disps = this.disps(this.comp,prac.name);
-        for( let dkey in disps ) {
-          let disp = disps[dkey];
-          disp.elem = this.$refs[disp.name][0]; } } }  // this.touch.events( disp.elem );
-    },
-
-  beforeMount: function() {
-    this.comp = this.$route.name.substring(0,4);  },
-    // console.log( 'Prac.beforeMount()', this.$route.name, this.comp, this.pcomp  );
-
-  mounted: function () {
-    this.touch     = new Touch$1();
-    this.practices = this.pracs(this.comp); // 'Cols'
-    this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
-       if( obj.disp==='All' ) { this.onPrac(obj.prac); }
-       else                   { this.onDisp(obj.prac,obj.disp); } } );
-    this.subscribe(  "Tabs",    this.comp+'.vue', (obj) => {
-      this.onTabs(obj); } );
-    this.$nextTick( function() {
-      this.elems(); } ); }
-};
-
-function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
-/* server only */
-, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
-  if (typeof shadowMode !== 'boolean') {
-    createInjectorSSR = createInjector;
-    createInjector = shadowMode;
-    shadowMode = false;
-  } // Vue.extend constructor export interop.
-
-
-  var options = typeof script === 'function' ? script.options : script; // render functions
-
-  if (template && template.render) {
-    options.render = template.render;
-    options.staticRenderFns = template.staticRenderFns;
-    options._compiled = true; // functional template
-
-    if (isFunctionalTemplate) {
-      options.functional = true;
-    }
-  } // scopedId
-
-
-  if (scopeId) {
-    options._scopeId = scopeId;
-  }
-
-  var hook;
-
-  if (moduleIdentifier) {
-    // server build
-    hook = function hook(context) {
-      // 2.3 injection
-      context = context || // cached call
-      this.$vnode && this.$vnode.ssrContext || // stateful
-      this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext; // functional
-      // 2.2 with runInNewContext: true
-
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__;
-      } // inject component styles
-
-
-      if (style) {
-        style.call(this, createInjectorSSR(context));
-      } // register component module identifier for async chunk inference
-
-
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier);
-      }
-    }; // used by ssr in case component is cached and beforeCreate
-    // never gets called
-
-
-    options._ssrRegister = hook;
-  } else if (style) {
-    hook = shadowMode ? function () {
-      style.call(this, createInjectorShadow(this.$root.$options.shadowRoot));
-    } : function (context) {
-      style.call(this, createInjector(context));
-    };
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // register for functional component in vue file
-      var originalRender = options.render;
-
-      options.render = function renderWithStyleInjection(h, context) {
-        hook.call(context);
-        return originalRender(h, context);
-      };
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate;
-      options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
-    }
-  }
-
-  return script;
-}
-
-var normalizeComponent_1 = normalizeComponent;
-
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
-function createInjector(context) {
-  return function (id, style) {
-    return addStyle(id, style);
-  };
-}
-var HEAD = document.head || document.getElementsByTagName('head')[0];
-var styles = {};
-
-function addStyle(id, css) {
-  var group = isOldIE ? css.media || 'default' : id;
-  var style = styles[group] || (styles[group] = {
-    ids: new Set(),
-    styles: []
-  });
-
-  if (!style.ids.has(id)) {
-    style.ids.add(id);
-    var code = css.source;
-
-    if (css.map) {
-      // https://developer.chrome.com/devtools/docs/javascript-debugging
-      // this makes source maps inside style tags work properly in Chrome
-      code += '\n/*# sourceURL=' + css.map.sources[0] + ' */'; // http://stackoverflow.com/a/26603875
-
-      code += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(css.map)))) + ' */';
-    }
-
-    if (!style.element) {
-      style.element = document.createElement('style');
-      style.element.type = 'text/css';
-      if (css.media) style.element.setAttribute('media', css.media);
-      HEAD.appendChild(style.element);
-    }
-
-    if ('styleSheet' in style.element) {
-      style.styles.push(code);
-      style.element.styleSheet.cssText = style.styles.filter(Boolean).join('\n');
-    } else {
-      var index = style.ids.size - 1;
-      var textNode = document.createTextNode(code);
-      var nodes = style.element.childNodes;
-      if (nodes[index]) style.element.removeChild(nodes[index]);
-      if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
-    }
-  }
-}
-
-var browser = createInjector;
-
-/* script */
-const __vue_script__ = script;
-
-/* template */
-var __vue_render__ = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    { ref: "Info", staticClass: "comp", attrs: { title: "Info" } },
-    [
-      _vm._l(_vm.practices, function(prac) {
-        return [
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.isPrac(prac.name),
-                  expression: "isPrac(prac.name)"
-                }
-              ],
-              key: prac.name,
-              ref: prac.name,
-              refInFor: true,
-              class: _vm.pracDir(prac.dir),
-              attrs: { title: prac.name }
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "prac" },
-                [
-                  _c(
-                    "div",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.isDisp(prac.name),
-                          expression: "isDisp(prac.name)"
-                        }
-                      ],
-                      class: _vm.dispDir("cen"),
-                      style: _vm.style(prac.hsv)
-                    },
-                    [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "disp",
-                          on: {
-                            click: function($event) {
-                              return _vm.pubPrac(prac.name)
-                            }
-                          }
-                        },
-                        [
-                          _c("i", { class: prac.icon }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "name" }, [
-                            _vm._v(_vm._s(prac.name))
-                          ]),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "desc" }, [
-                            _vm._v(_vm._s(prac.desc))
-                          ])
-                        ]
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm._l(prac.disps, function(disp) {
-                    return [
-                      _c(
-                        "div",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.isDisp(disp.name),
-                              expression: "isDisp(disp.name)"
-                            }
-                          ],
-                          ref: disp.name,
-                          refInFor: true,
-                          class: _vm.dispDir(disp.dir),
-                          style: _vm.style(disp.hsv),
-                          attrs: { title: disp.name }
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "disp",
-                              on: {
-                                click: function($event) {
-                                  return _vm.pubDisp(prac.name, disp.name)
-                                }
-                              }
-                            },
-                            [
-                              _c("i", { class: disp.icon }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "name" }, [
-                                _vm._v(_vm._s(disp.name))
-                              ]),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "desc" }, [
-                                _vm._v(_vm._s(disp.desc))
-                              ])
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _vm._l(disp.areas, function(area) {
-                            return [
-                              _c("div", { class: _vm.areaDir() }, [
-                                _c("i", { class: area.icon }),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "name" }, [
-                                  _vm._v(_vm._s(area.name))
-                                ]),
-                                _vm._v(" "),
-                                _c("span", { staticClass: "desc" }, [
-                                  _vm._v(_vm._s(area.desc))
-                                ])
-                              ])
-                            ]
-                          })
-                        ],
-                        2
-                      )
-                    ]
-                  })
-                ],
-                2
-              )
-            ]
-          )
-        ]
-      }),
-      _vm._v(" "),
-      _vm._l(_vm.rows, function(row) {
-        return [
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.isRows(),
-                  expression: "isRows()"
-                }
-              ],
-              key: row.name,
-              class: row.dir
-            },
-            [
-              _c("div", { staticClass: "row" }, [
-                _c("div", [
-                  _c("i", { class: row.icon }),
-                  _vm._v(_vm._s(row.name))
-                ])
-              ])
-            ]
-          )
-        ]
-      })
-    ],
-    2
-  )
-};
-var __vue_staticRenderFns__ = [];
-__vue_render__._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__ = function (inject) {
-    if (!inject) return
-    inject("data-v-019e9f7e_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-navb {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.comp {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 2rem;\n  background-color: black;\n  color: black;\n  display: grid;\n  grid-template-columns: 7fr 31fr 31fr 31fr;\n  grid-template-rows: 7fr 12fr 27fr 27fr 27fr;\n  grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.5rem;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.comp .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .prac {\n  background-color: #603;\n  border-radius: 36px;\n  width: 90%;\n  height: 80%;\n  font-size: 2rem;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.comp .prac .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .cen {\n  font-size: 1.6rem;\n}\n.comp .prac div {\n  font-size: 1.4rem;\n}\n.comp .disp {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  font-size: 2.5rem;\n}\n.comp .disp i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.comp .disp .name {\n  display: inline-block;\n}\n.comp .disp .desc {\n  display: none;\n  margin: 0.5rem 0.5rem 0.5rem 0.5rem;\n  text-align: left;\n}\n.comp .area {\n  display: grid;\n  grid-template-columns: 6fr 22fr 72fr;\n  grid-template-areas: \"icon name desc\";\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n  margin-left: 1.5em;\n  width: 90%;\n  height: auto;\n  font-size: 1.5rem;\n}\n.comp .area i {\n  grid-area: icon;\n}\n.comp .area .name {\n  grid-area: name;\n  font-weight: 900;\n}\n.comp .area .desc {\n  grid-area: desc;\n}\n.comp .none {\n  display: none;\n}\n.comp .fullDispDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n  border-radius: 72px;\n}\n.comp .fullDispDir .disp {\n  justify-self: center;\n  margin: 0;\n}\n.comp .fullDispDir .disp i {\n  font-size: 4.8rem !important;\n}\n.comp .fullDispDir .disp .name {\n  font-size: 4.8rem !important;\n}\n.comp .fullDispDir .disp .desc {\n  font-size: 2.4rem !important;\n  display: block;\n}\n.comp .fullDispDir .area {\n  font-size: 3rem !important;\n  padding-bottom: 0;\n}\n.comp .none {\n  display: none;\n}\n.comp .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.comp .fullPracDir .prac {\n  font-size: 2.5rem;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5rem;\n}\n.comp .fullPracDir .prac div {\n  padding-bottom: 2rem;\n}\n.comp .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.comp .fullPracDir .prac div .disp i {\n  font-size: 2.5rem;\n}\n.comp .fullPracDir .prac div .disp .name {\n  font-size: 2.5rem;\n}\n.comp .fullPracDir .prac div .disp .desc {\n  font-size: 2.5rem;\n  display: block;\n}\n.comp .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n.comp .fullDispDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n  border-radius: 72px;\n}\n.comp .fullDispDir .disp {\n  justify-self: center;\n  margin: 0;\n}\n.comp .fullDispDir .disp i {\n  font-size: 4.8rem !important;\n}\n.comp .fullDispDir .disp .name {\n  font-size: 4.8rem !important;\n}\n.comp .fullDispDir .disp .desc {\n  font-size: 2.4rem !important;\n  display: block;\n}\n.comp .fullDispDir .area {\n  font-size: 3rem !important;\n  padding-bottom: 0;\n}\n.comp .em .prac .cen,\n.comp .in .prac .cen,\n.comp .en .prac .cen {\n  font-size: 1.6rem;\n}\n.comp .row {\n  background-color: #603;\n  border-radius: 36px;\n  margin-left: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 1.6rem;\n  font-weight: bold;\n  display: grid;\n}\n.comp .row div {\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n  font-size: 1.6rem;\n  color: wheat;\n}\n.comp .row i {\n  margin-bottom: 0.2rem;\n  display: block;\n}\n", map: {"version":3,"sources":["Prac.vue","/Users/ax/Documents/prj/aug/vue/page/Prac.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,eAAe;EACf,uBAAuB;EACvB,YAAY;EACZ,aAAa;EACb,yCAAyC;EACzC,2CAA2C;EAC3C,6GAA6G;EAC7G,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,eAAe;EACf,eAAe;EACf,YAAY;EACZ,iBAAiB;EACjB,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;ECCf,qBAAA;EDCE,mBAAmB;ECCrB,qBAAA;EACA,mBAAA;ADCA;ACCA;EACA,aAAA;EDCE,aAAa;ECCf,qBAAA;EACA,mBAAA;EDCE,qBAAqB;ECCvB,mBAAA;ADCA;ACCA;EACA,aAAA;EDCE,eAAe;ECCjB,qBAAA;EDCE,mBAAmB;ECCrB,qBAAA;EACA,mBAAA;ADCA;ACCA;EACA,aAAA;EACA,cAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,mBAAA;AACA;AACA;EDCE,aAAa;ECCf,eAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,mBAAA;AACA;AACA;EACA,aAAA;EACA,aAAA;EDCE,qBAAqB;ECCvB,mBAAA;EACA,qBAAA;EACA,mBAAA;AACA;ADCA;ECCA,aAAA;EACA,aAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EDCE,mBAAmB;ACCrB;ADCA;ECCA,aAAA;EACA,gBAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,mBAAA;AACA;ADCA;ECCA,aAAA;EDCE,aAAa;ECCf,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,mBAAA;AACA;AACA;EACA,sBAAA;EACA,mBAAA;EACA,UAAA;EACA,WAAA;EDCE,eAAe;ECCjB,iBAAA;EACA,aAAA;EACA,kCAAA;EACA,+BAAA;EACA,gEAAA;AACA;AACA;EDCE,aAAa;ECCf,gBAAA;EDCE,qBAAqB;ECCvB,mBAAA;EACA,mBAAA;AACA;AACA;EDCE,aAAa;EACb,eAAe;ECCjB,qBAAA;EDCE,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,eAAe;EACf,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,iBAAiB;AACnB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,aAAa;EACb,mCAAmC;EACnC,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,oCAAoC;EACpC,qCAAqC;EACrC,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;EAChB,kBAAkB;EAClB,UAAU;EACV,YAAY;EACZ,iBAAiB;AACnB;AACA;EACE,eAAe;AACjB;AACA;EACE,eAAe;EACf,gBAAgB;AAClB;AACA;EACE,eAAe;AACjB;AACA;EACE,aAAa;AACf;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;EACb,mBAAmB;AACrB;AACA;EACE,oBAAoB;EACpB,SAAS;AACX;AACA;EACE,4BAA4B;AAC9B;AACA;EACE,4BAA4B;AAC9B;AACA;EACE,4BAA4B;EAC5B,cAAc;AAChB;AACA;EACE,0BAA0B;EAC1B,iBAAiB;AACnB;AACA;EACE,aAAa;AACf;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;AACf;AACA;EACE,iBAAiB;EACjB,WAAW;EACX,YAAY;EACZ,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,qBAAqB;AACvB;AACA;EACE,oBAAoB;AACtB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,iBAAiB;EACjB,cAAc;AAChB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;EACb,mBAAmB;AACrB;AACA;EACE,oBAAoB;EACpB,SAAS;AACX;AACA;EACE,4BAA4B;AAC9B;AACA;EACE,4BAA4B;AAC9B;AACA;EACE,4BAA4B;EAC5B,cAAc;AAChB;AACA;EACE,0BAA0B;EAC1B,iBAAiB;AACnB;AACA;;;EAGE,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,gBAAgB;EAChB,UAAU;EACV,WAAW;EACX,iBAAiB;EACjB,iBAAiB;EACjB,aAAa;AACf;AACA;EACE,kBAAkB;EAClB,oBAAoB;EACpB,kBAAkB;EAClB,iBAAiB;EACjB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,cAAc;AAChB","file":"Prac.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-navb {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.comp {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 2rem;\n  background-color: black;\n  color: black;\n  display: grid;\n  grid-template-columns: 7fr 31fr 31fr 31fr;\n  grid-template-rows: 7fr 12fr 27fr 27fr 27fr;\n  grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.comp .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.5rem;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.comp .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp .prac {\n  background-color: #603;\n  border-radius: 36px;\n  width: 90%;\n  height: 80%;\n  font-size: 2rem;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.comp .prac .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.comp .prac .cen {\n  font-size: 1.6rem;\n}\n.comp .prac div {\n  font-size: 1.4rem;\n}\n.comp .disp {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  font-size: 2.5rem;\n}\n.comp .disp i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.comp .disp .name {\n  display: inline-block;\n}\n.comp .disp .desc {\n  display: none;\n  margin: 0.5rem 0.5rem 0.5rem 0.5rem;\n  text-align: left;\n}\n.comp .area {\n  display: grid;\n  grid-template-columns: 6fr 22fr 72fr;\n  grid-template-areas: \"icon name desc\";\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n  margin-left: 1.5em;\n  width: 90%;\n  height: auto;\n  font-size: 1.5rem;\n}\n.comp .area i {\n  grid-area: icon;\n}\n.comp .area .name {\n  grid-area: name;\n  font-weight: 900;\n}\n.comp .area .desc {\n  grid-area: desc;\n}\n.comp .none {\n  display: none;\n}\n.comp .fullDispDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n  border-radius: 72px;\n}\n.comp .fullDispDir .disp {\n  justify-self: center;\n  margin: 0;\n}\n.comp .fullDispDir .disp i {\n  font-size: 4.8rem !important;\n}\n.comp .fullDispDir .disp .name {\n  font-size: 4.8rem !important;\n}\n.comp .fullDispDir .disp .desc {\n  font-size: 2.4rem !important;\n  display: block;\n}\n.comp .fullDispDir .area {\n  font-size: 3rem !important;\n  padding-bottom: 0;\n}\n.comp .none {\n  display: none;\n}\n.comp .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.comp .fullPracDir .prac {\n  font-size: 2.5rem;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5rem;\n}\n.comp .fullPracDir .prac div {\n  padding-bottom: 2rem;\n}\n.comp .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.comp .fullPracDir .prac div .disp i {\n  font-size: 2.5rem;\n}\n.comp .fullPracDir .prac div .disp .name {\n  font-size: 2.5rem;\n}\n.comp .fullPracDir .prac div .disp .desc {\n  font-size: 2.5rem;\n  display: block;\n}\n.comp .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n.comp .fullDispDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n  border-radius: 72px;\n}\n.comp .fullDispDir .disp {\n  justify-self: center;\n  margin: 0;\n}\n.comp .fullDispDir .disp i {\n  font-size: 4.8rem !important;\n}\n.comp .fullDispDir .disp .name {\n  font-size: 4.8rem !important;\n}\n.comp .fullDispDir .disp .desc {\n  font-size: 2.4rem !important;\n  display: block;\n}\n.comp .fullDispDir .area {\n  font-size: 3rem !important;\n  padding-bottom: 0;\n}\n.comp .em .prac .cen,\n.comp .in .prac .cen,\n.comp .en .prac .cen {\n  font-size: 1.6rem;\n}\n.comp .row {\n  background-color: #603;\n  border-radius: 36px;\n  margin-left: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 1.6rem;\n  font-weight: bold;\n  display: grid;\n}\n.comp .row div {\n  text-align: center;\n  justify-self: center;\n  align-self: center;\n  font-size: 1.6rem;\n  color: wheat;\n}\n.comp .row i {\n  margin-bottom: 0.2rem;\n  display: block;\n}\n","\n<template>\n  <div class=\"comp\" ref=\"Info\" title=\"Info\" >\n    <template v-for=\"prac in practices\">\n      <div v-show=\"isPrac(prac.name)\" :class=\"pracDir(prac.dir)\" :key=\"prac.name\"\n        :ref=\"prac.name\" :title=\"prac.name\">\n        <div class=\"prac\">\n          <div v-show=\"isDisp(prac.name)\" :class=\"dispDir('cen')\" :style=\"style(prac.hsv)\">\n            <div class=\"disp\" @click=\"pubPrac(prac.name)\">\n              <i   :class=\"prac.icon\"></i>\n              <span class=\"name\">{{prac.name}}</span>\n              <span class=\"desc\">{{prac.desc}}</span>\n            </div>\n          </div>\n          <template  v-for=\"disp in prac.disps\">\n            <div v-show=\"isDisp(disp.name)\" :class=\"dispDir(disp.dir)\" :style=\"style(disp.hsv)\"\n              :ref=\"disp.name\" :title=\"disp.name\">\n            <div class=\"disp\" @click=\"pubDisp(prac.name,disp.name)\">\n              <i   :class=\"disp.icon\"></i>\n              <span class=\"name\">{{disp.name}}</span>\n              <span class=\"desc\">{{disp.desc}}</span>\n            </div>\n            <template v-for=\"area in disp.areas\">\n              <div :class=\"areaDir()\">\n                <i :class=\"area.icon\"></i>\n                <span class=\"name\">{{area.name}}</span>\n                <span class=\"desc\">{{area.desc}}</span>\n              </div>\n            </template>\n          </div>\n          </template>\n        </div>\n      </div>\n    </template>\n    <template v-for=\"row in rows\">\n      <div v-show=\"isRows()\" :class=\"row.dir\" :key=\"row.name\"><div class=\"row\">\n        <div><i :class=\"row.icon\"></i>{{row.name}}</div></div></div>\n    </template>\n  </div>  \n</template>\n\n<script type=\"module\">\n  \n  import Touch from '../../pub/base/util/Touch.js';\n\n  export default {\n    \n    props: { pcomp:{ type:String, default:'None' } },\n    \n    data() { return {\n      comp:'None', prac:'All', disp:'All', tab:'Practices', practices:{},\n      rows: {\n        Learn:{ name:'Learn', dir:'le', icon:\"fas fa-graduation-cap\" },\n        Do:{    name:'Do',    dir:'do', icon:\"fas fas fa-cogs\" },\n        Share:{ name:'Share', dir:'sh', icon:\"fas fa-share-alt-square\" } } } },\n    \n    methods: {\n      isPrac: function (prac) {\n        return this.prac===prac || this.prac==='All' },\n      isDisp: function (disp) {\n        return this.disp===disp || this.disp==='All' },\n      isRows: function () {\n        return this.prac==='All' },\n      pubTab: function (tab) {\n        this.tab = tab },\n      classTab: function (tab) {\n        return this.tab===tab ? 'tab-active' : 'tab' },\n      pubPrac: function (prac) {\n        this.publish( this.comp, { prac:prac, disp:'All' } ); },\n      pubDisp: function (prac,disp) {\n        this.publish( this.comp, { prac:prac, disp:disp  } ); },\n      onPrac: function (prac) {\n        this.prac = prac; this.disp='All'; },\n      onDisp: function (prac,disp) {\n        this.prac = prac; this.disp=disp; },\n      onTabs: function (tab) {\n        if( tab==='Practices' && this.tab==='Practices' && this.prac!=='All' ) {\n          this.onPrac('All'); }\n        this.tab = tab; },\n      pracDir: function(dir) {\n        return this.prac==='All' ? dir : 'fullPracDir'; },\n      dispDir: function(dir) {\n        return this.disp==='All' ? dir : 'fullDispDir'; },\n      areaDir: function() {\n        return this.prac==='All' ? 'none' : 'area' },\n      style: function( hsv ) {\n        return { backgroundColor:this.toRgbaHsv(hsv) }; },\n      elems: function() { // Add DON elements. Must be called within $nextTick for $refs\n        this.infoElem = this.$refs['Info']\n        let pracs = this.conns(this.comp); // We access conns because col practices have been filtered out\n        for( let pkey in pracs ) {\n          let prac = pracs[pkey];\n          prac.elem = this.$refs[prac.name][0];\n          this.touch.events( prac.elem );\n          let disps = this.disps(this.comp,prac.name)\n          for( let dkey in disps ) {\n            let disp = disps[dkey];\n            disp.elem = this.$refs[disp.name][0]; } } }  // this.touch.events( disp.elem );\n      },\n\n    beforeMount: function() {\n      this.comp = this.$route.name.substring(0,4);  },\n      // console.log( 'Prac.beforeMount()', this.$route.name, this.comp, this.pcomp  );\n\n    mounted: function () {\n      this.touch     = new Touch();\n      this.practices = this.pracs(this.comp); // 'Cols'\n      this.subscribe(  this.comp, this.comp+'.vue', (obj) => {\n         if( obj.disp==='All' ) { this.onPrac(obj.prac); }\n         else                   { this.onDisp(obj.prac,obj.disp); } } );\n      this.subscribe(  \"Tabs\",    this.comp+'.vue', (obj) => {\n        this.onTabs(obj); } );\n      this.$nextTick( function() {\n        this.elems(); } ) }\n  }\n         \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n               grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n  \n  .grid4x4() { display:grid; grid-template-columns:7fr 31fr 31fr 31fr; grid-template-rows:13vh 29fr 29fr 29fr;\n    grid-template-areas: \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid5x4() { display:grid; grid-template-columns:7fr 31fr 31fr 31fr; grid-template-rows:7fr 12fr 27fr 27fr 27fr;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid1x3() { display:grid; grid-template-columns:6fr 22fr 72fr; grid-template-areas: \"icon name desc\"; }\n  \n  .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n                  justify-items:center; align-items:center; }\n  \n  .ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }\n  \n  .bgc( @bg )\n    { background-color:@bg; } // top | right | bottom | left\n  \n  .comp { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:@theme-prac-size;\n          background-color:@theme-back; color:@theme-color-prac;\n    .grid5x4(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid\n      .tabs{ grid-area:tabs; display:inline; color:@theme-color; font-size:@theme-tab-size;\n             justify-self:start; align-self:center; text-align:left; }\n      .cm { .pdir(cm); } .em   { .pdir(em);   } .in    { .pdir(in); }    .en   { .pdir(en);   }\n      .le { .pdir(le); } .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }\n      .do { .pdir(do); } .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }\n      .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }\n    \n      // Placed one level below the 9 Practices Grid   - Check on background-color:#603;\n    .prac { background-color:#603; border-radius:36px; width:90%; height:80%; font-size:@theme-prac-size;\n      font-weight:bold;\n      .grid3x3(); // The 4 Displine plus Practiice name Grid\n                             .north { .ddir(north); }\n      .west { .ddir(west); } .cen   { .ddir(cen);   } .east { .ddir(east); }\n                             .south { .ddir(south); }\n      .cen  { font-size:@theme-cen-size; }\n      div   { font-size:@theme-dir-size; } }\n  \n    .disp {   display:inline; justify-self:center; align-self:center; text-align:center; font-size:@theme-disp-size;\n      i     { display:inline-block;  margin-right: 0.25rem; }\n      .name { display:inline-block; }\n      .desc { display:none; margin:0.5rem 0.5rem 0.5rem 0.5rem; text-align:left; } }\n  \n    .area { .grid1x3(); justify-self:start; align-self:center; text-align:left; margin-left:1.5em;\n      width:90%; height:auto; font-size:@theme-area-size;\n      i     { grid-area:icon; }\n      .name { grid-area:name; font-weight:900; }\n      .desc { grid-area:desc; } }\n  \n    .none { display:none; }\n  \n    // Placed one level above .dir at the 4 Disipline plus Practice name Grid Direction\n    .fullDispDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid; border-radius:72px;\n      .disp { justify-self:center; margin:0;\n        i     { font-size:@theme-area-icon-size !important; }\n        .name { font-size:@theme-area-name-size !important; }\n        .desc { font-size:@theme-area-desc-size !important; display:block; } }  // Turns on .disp .desc\n      .area {   font-size:@theme-area-area-size !important; padding-bottom:0; } }\n  \n    .none { display:none; }\n    \n    // Placed one level above .prac at the 9 Practices Grid Direction\n    .fullPracDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;\n      .prac { font-size:@theme-full-size; width:100%; height:100%;\n              justify-self:center; align-self:center; display:grid; border-radius:0.5rem;\n        div {     padding-bottom:2rem;\n          .disp { padding-bottom:0;\n            i     { font-size:@theme-disp-size; }\n            .name { font-size:@theme-disp-size; }\n            .desc { font-size:@theme-disp-size; display:block; } } }  // Turns on .disp .desc\n          .area { padding-bottom:0; } } }\n  \n    // Placed one level above .dir at the 4 Disipline plus Practice name Grid Direction\n    .fullDispDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid; border-radius:72px;\n       .disp { justify-self:center; margin:0;\n         i     { font-size:@theme-area-icon-size !important; }\n         .name { font-size:@theme-area-name-size !important; }\n         .desc { font-size:@theme-area-desc-size !important; display:block; } }  // Turns on .disp .desc\n       .area {   font-size:@theme-area-area-size !important; padding-bottom:0; } }\n    \n    .em, .in, .en { .prac .cen { font-size:@theme-row-size; } } // Font size columns\n  \n    .row { background-color:#603; border-radius:36px; margin-left:10%; width:80%; height:80%; font-size:@theme-row-size;\n      font-weight:bold; display:grid;\n      div { text-align:center; justify-self:center;  align-self:center; font-size:@theme-row-size; color:@theme-color; }\n      i { margin-bottom: 0.2rem; display:block; } }\n    \n    \n  }\n  \n</style>\n"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__ = undefined;
-  /* module identifier */
-  const __vue_module_identifier__ = undefined;
-  /* functional template */
-  const __vue_is_functional_template__ = false;
-  /* style inject SSR */
-  
-
-  
-  var Prac = normalizeComponent_1(
-    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-    __vue_inject_styles__,
-    __vue_script__,
-    __vue_scope_id__,
-    __vue_is_functional_template__,
-    __vue_module_identifier__,
-    browser,
-    undefined
-  );
-
-export default Prac;
