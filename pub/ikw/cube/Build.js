@@ -264,7 +264,7 @@ Build = class Build {
   west(col) {
     switch (col) {
       case 'Embrace':
-        return 'None';
+        return 'Encourage';
       case 'Innovate':
         return 'Embrace';
       case 'Encourage':
@@ -281,7 +281,7 @@ Build = class Build {
       case 'Innovate':
         return 'Encourage';
       case 'Encourage':
-        return 'None';
+        return 'Embrace';
       default:
         return 'None';
     }
@@ -290,7 +290,7 @@ Build = class Build {
   north(row) {
     switch (row) {
       case 'Learn':
-        return 'None';
+        return 'Share';
       case 'Do':
         return 'Learn';
       case 'Share':
@@ -307,7 +307,7 @@ Build = class Build {
       case 'Do':
         return 'Share';
       case 'Share':
-        return 'None';
+        return 'Learn';
       default:
         return 'None';
     }
@@ -316,7 +316,7 @@ Build = class Build {
   prev(plane) {
     switch (plane) {
       case 'Info':
-        return 'None';
+        return 'Wise';
       case 'Know':
         return 'Info';
       case 'Wise':
@@ -333,7 +333,7 @@ Build = class Build {
       case 'Know':
         return 'Wise';
       case 'Wise':
-        return 'None';
+        return 'Info';
       default:
         return 'None';
     }
@@ -374,7 +374,8 @@ Build = class Build {
       //console.log( 'adjacentPractice[col,row,pln]', [col,row,pln] )
       return this.None;
     }
-    pracs = this.getPractices(pln);
+    //racs = @getPractices( pln )
+    pracs = this.batch[pln].data[pln].pracs;
     for (key in pracs) {
       if (!hasProp.call(pracs, key)) continue;
       adj = pracs[key];
@@ -429,6 +430,16 @@ Build = class Build {
   }
 
   getPractices(plane) {
+    if ((this.batch[plane] != null) && (this.batch[plane].data[plane] != null)) {
+      return this.batch[plane].data[plane];
+    } else {
+      console.error('Build.getPractices()', plane);
+      return {};
+    }
+  }
+
+  getPractices2(plane) {
+    Main.Batch[compk].data[compk].pracs;
     if ((this.batch[plane] != null) && (this.batch[plane].data[plane] != null)) {
       return this.batch[plane].data[plane];
     } else {

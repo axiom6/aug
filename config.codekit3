@@ -4744,17 +4744,6 @@
 		"oAP": "/pub/vue/dash/Foot.js",
 		"oF": 0
 		},
-	"/vue/dash/Logo.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/dash/Logo-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/vue/dash/logo.png": {
 		"ft": 32768,
 		"iS": 3451,
@@ -4765,17 +4754,6 @@
 		"opt": 0,
 		"oT": 1,
 		"q": 100
-		},
-	"/vue/dash/Logo.roll.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/dash/Logo.roll-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
 		},
 	"/vue/dash/Logo.vue": {
 		"cB": 0,
@@ -4833,7 +4811,7 @@
 		"oAP": "/pub/vue/dash/View.js",
 		"oF": 0
 		},
-	"/vue/data/Data.roll.js": {
+	"/vue/Data/Data.roll.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
@@ -4923,28 +4901,6 @@
 		"oA": 0,
 		"oAP": "/vue/elem/Elem.txt",
 		"oF": 0
-		},
-	"/vue/elem/Navd.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/elem/Navd-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/elem/Navd.roll.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/elem/Navd.roll-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
 		},
 	"/vue/elem/Navd.vue": {
 		"cB": 0,
@@ -8923,23 +8879,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.js",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "vue",
-			"autoOutputPathReplace2": "pub/vue",
-			"autoOutputPathStyle": 3,
-			"fileExtension": "vue",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.html",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "",
 			"autoOutputPathReplace2": "",
 			"autoOutputPathStyle": 0,
 			"fileExtension": "html",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.js",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "vue",
+			"autoOutputPathReplace2": "pub/vue",
+			"autoOutputPathStyle": 3,
+			"fileExtension": "vue",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

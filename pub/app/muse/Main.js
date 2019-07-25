@@ -19,7 +19,7 @@ Main = (function() {
     static init(batch) {
       var infoSpec, subjects;
       Main.Batch = batch; // Not necessary here, but assigned for compatibilitry
-      subjects = ["Info", "Know", "Wise", "Cube", "Menu", "Tabs", "Navd", "Cache"];
+      subjects = ["Info", "Know", "Wise", "Cube", "Menu", "Tabs", "Navd", "Tocs", "Cache"];
       infoSpec = {
         subscribe: false,
         publish: false,

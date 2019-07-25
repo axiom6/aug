@@ -1,6 +1,6 @@
 
 <tenplate>
-  <div class="navd" ref="Navd">
+  <div   class="navd"  ref="Navd">
     <div class="west"  ref="West"  @click="pubNavd('West' )"><i class="fas fa-angle-left"  ></i></div>
     <div class="north" ref="North" @click="pubNavd('North')"><i class="fas fa-angle-up"    ></i></div>
     <div class="fwd"   ref="Fwd"   @click="pubNavd('Fwd')"  ><i class="fas fa-plus-circle" ></i></div>
@@ -13,7 +13,7 @@
 <script type="module">
   
   let Navd = {
-    name: 'navd',
+    name: 'Navd',
     data() { return { hi:"Hi" }; },
     methods:{
       pubNavd: function (dir) {

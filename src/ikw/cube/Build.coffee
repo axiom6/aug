@@ -118,7 +118,7 @@ class Build
 
   west:(   col ) ->
     switch col
-      when 'Embrace'   then 'None'
+      when 'Embrace'   then 'Encourage'
       when 'Innovate'  then 'Embrace'
       when 'Encourage' then 'Innovate'
       else                  'None'
@@ -127,12 +127,12 @@ class Build
     switch col
       when 'Embrace'   then 'Innovate'
       when 'Innovate'  then 'Encourage'
-      when 'Encourage' then 'None'
+      when 'Encourage' then 'Embrace'
       else                  'None'
 
   north:(  row ) ->
     switch row
-      when 'Learn' then 'None'
+      when 'Learn' then 'Share'
       when 'Do'    then 'Learn'
       when 'Share' then 'Do'
       else              'None'
@@ -141,12 +141,12 @@ class Build
     switch row
       when 'Learn' then 'Do'
       when 'Do'    then 'Share'
-      when 'Share' then 'None'
+      when 'Share' then 'Learn'
       else              'None'
 
   prev:(   plane ) ->
     switch plane
-      when 'Info' then 'None'
+      when 'Info' then 'Wise'
       when 'Know' then 'Info'
       when 'Wise' then 'Know'
       else             'None'
@@ -155,7 +155,7 @@ class Build
     switch plane
       when 'Info' then 'Know'
       when 'Know' then 'Wise'
-      when 'Wise' then 'None'
+      when 'Wise' then 'Info'
       else             'None'
 
   adjacentPractice:( prac, dir ) ->
@@ -176,7 +176,8 @@ class Build
 
     #console.log( 'adjacentPractice[col,row,pln]', [col,row,pln] )
     return @None if [col,row,pln] is ["None","None","None"]
-    pracs = @getPractices( pln )
+    #racs = @getPractices( pln )
+    pracs = @batch[pln].data[pln].pracs
     for own key, adj of pracs when Util.isChild(key)
       return adj if adj.column is col and adj.row is row and adj.plane is pln
     @None
@@ -205,11 +206,21 @@ class Build
     return
 
   getPractices:( plane ) ->
+
     if @batch[plane]? and @batch[plane].data[plane]?
        @batch[plane].data[plane]
     else
        console.error( 'Build.getPractices()', plane )
        {}
+
+  getPractices2:( plane ) ->
+    Main.Batch[compk].data[compk].pracs
+    if @batch[plane]? and @batch[plane].data[plane]?
+      @batch[plane].data[plane]
+    else
+      console.error( 'Build.getPractices()', plane )
+      {}
+
 
   getPractice:( row, column, plane=@plane ) ->
     practices = @getPractices(plane)

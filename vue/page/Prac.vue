@@ -41,7 +41,8 @@
 
 <script type="module">
   
-  import Touch from '../../pub/base/util/Touch.js';
+//import Touch from '../../pub/base/util/Touch.js';
+  import Build from '../../pub/ikw/cube/Build.js';
 
   export default {
     
@@ -73,6 +74,17 @@
         this.prac = prac; this.disp='All'; },
       onDisp: function (prac,disp) {
         this.prac = prac; this.disp=disp; },
+      onNavd: function (dir) {
+        console.log( 'Prac.onNavd() Beg', this.prac, dir );
+        if( this.prac !== 'All') {
+          let prc = this.pracs(this.comp)[this.prac]
+          let adj = this.build.adjacentPractice(prc,dir);
+          console.log( 'Prac.onNavd() Adj', adj.name, dir, adj.plane );
+          if( adj.name !== 'None' ) {
+            if( adj.plane !== this.comp ) {
+              this.publish( 'Tocs', adj.plane ) }
+            else {
+              this.onPrac(adj.name) } } } },
       onTabs: function (tab) {
         if( tab==='Practices' && this.tab==='Practices' && this.prac!=='All' ) {
           this.onPrac('All'); }
@@ -103,15 +115,20 @@
       // console.log( 'Prac.beforeMount()', this.$route.name, this.comp, this.pcomp  );
 
     mounted: function () {
-      this.touch     = new Touch();
+    //this.touch     = new Touch();
+    //console.log( 'Prac batch',  this.batch() );
+      this.build     = new Build( this.batch(), this.comp );
       this.practices = this.pracs(this.comp); // 'Cols'
       this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
          if( obj.disp==='All' ) { this.onPrac(obj.prac); }
          else                   { this.onDisp(obj.prac,obj.disp); } } );
+      this.subscribe(  "Navd",    this.comp+'.vue', (obj) => {
+        this.onNavd(obj); } );
       this.subscribe(  "Tabs",    this.comp+'.vue', (obj) => {
         this.onTabs(obj); } );
       this.$nextTick( function() {
-        this.elems(); } ) }
+        this.onTabs('Practices');
+        /*this.elems();*/ } ) }
   }
          
 </script>
