@@ -31,7 +31,7 @@ class Main
   Main.init =  ( batch ) ->
     window['Geom'] = {} # May still be needed by Ganjs
     Main.Batch   = batch # Not necessary here, but assigned for compatibilitry
-    subjects     = ["Draw","Note","Navb","Tabs","Geom","Data","Cache"]
+    subjects     = ["Draw","Note","Menu","Tabs","Geom","Data","Cache","Navd"]
     streamLog    = { subscribe:false, publish:false, subjects:subjects}
     Main.stream  = new Stream( subjects, streamLog )
     Main.cache   = new Cache( Main.stream )

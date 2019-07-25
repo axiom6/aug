@@ -2,7 +2,7 @@
 <template>
   <div class="dash">
     <d-logo id="logo"></d-logo>
-    <d-navb id="navb"></d-navb>
+    <d-menu id="menu"></d-menu>
     <d-find id="find"></d-find>
     <d-tocs id="tocs"></d-tocs>
     <d-view id="view"></d-view>
@@ -16,7 +16,7 @@
 <script type="module">
   
   import Logo from '../dash/Logo.vue';
-  import Navb from '../dash/Navb.vue';
+  import Menu from '../dash/Menu.vue';
   import Find from '../dash/Find.vue';
   import Tocs from '../dash/Tocs.vue';
   import View from '../dash/View.vue';
@@ -28,7 +28,7 @@
   let Dash = {
       name: 'dash',
       components: {
-        'd-logo':Logo, 'd-navb':Navb, 'd-find':Find,
+        'd-logo':Logo, 'd-menu':Menu, 'd-find':Find,
         'd-tocs':Tocs, 'd-view':View, 'd-side':Side,
         'd-pref':Pref, 'd-foot':Foot, 'd-trak':Trak } };
   
@@ -45,12 +45,12 @@
    grid-template-columns: @theme-west  @theme-center @theme-east;
    grid-template-rows:    @theme-north @theme-middle @theme-south;
    grid-template-areas:
-     "logo navb find"
+     "logo menu find"
      "tocs view side"
      "pref foot trak";
   
   #logo { grid-area:logo; justify-self:stretch; align-self:stretch; display:grid; .theme-logo; }
-  #navb { grid-area:navb; justify-self:stretch; align-self:stretch; display:grid; .theme-navb; }
+  #menu { grid-area:menu; justify-self:stretch; align-self:stretch; display:grid; .theme-menu; }
   #find { grid-area:find; justify-self:stretch; align-self:stretch; display:grid; .theme-find; }
   #tocs { grid-area:tocs; justify-self:stretch; align-self:stretch; display:grid; .theme-tocs; }
   #view { grid-area:view; justify-self:stretch; align-self:stretch; display:grid; .theme-view; }

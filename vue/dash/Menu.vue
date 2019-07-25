@@ -1,6 +1,6 @@
 
 <template>
-  <div class="navb">    <!-- <i class="fas fa-home"></i> -->
+  <div class="menu">    <!-- <i class="fas fa-home"></i> -->
     <div class="navh"><router-link :to="{ name:'Home'}"><i class="fas fa-home"></i>Home</router-link></div>
     <div class="search"   @click="click('Search')">
       <label for="search">Search</label>
@@ -26,11 +26,11 @@
       return {} },
     methods: {
       click:  function( obj )  {
-        this.publish(  'Navb', obj    ); },
-      onNavb: function( obj )  {
-        console.log(  'Navb.onNavb()', obj ); } },
+        this.publish(  'Menu', obj    ); },
+      onMenu: function( obj )  {
+        console.log(  'Menu.onMenu()', obj ); } },
     mounted: function () {
-      this.subscribe( 'Navb', 'Navb.vue', this.onNavb ) } };
+      this.subscribe( 'Menu', 'Menu.vue', this.onMenu ) } };
   
 </script>
 
@@ -41,7 +41,7 @@
   .grid1x5() { display:grid; grid-template-columns:5fr 40fr 25fr 10fr 10fr 10fr; grid-template-rows:@theme-north;
     grid-template-areas: "gleft ghome gsearch gcontact gsettings gsignon"; }
   
-  .navb {  .grid1x5(); display:grid; background:@theme-back; color:@theme-color;
+  .menu {  .grid1x5(); display:grid; background:@theme-back; color:@theme-color;
     font-family:@theme-font-family; font-weight:bold;    // Using because Navb sensistive to width
     .navh     { grid-area:ghome;     justify-self:start; align-self:center;
       i { margin-right:0.3em; }
@@ -54,7 +54,7 @@
     .signon   { grid-area:gsignon;   justify-self:start; align-self:center; }
     .settings { grid-area:gsettings; justify-self:start; align-self:center; position:relative;
       ul { display:none; align-self:start; list-style:none; font-size:0.7rem; z-index:3;
-        background:@theme-back-navb-menu;
+        background:@theme-back-menu;
         position:absolute; left:10px; top:12px; width:200px; height:auto;
         padding:0.2em 0.2em 0.2em 0.6em; border-radius:0 24px 24px 0;
         li { display:inline; border-radius:0 18px 18px 0;  background-color:@theme-back; color:@theme-color;
@@ -62,8 +62,8 @@
           i {    display:inline-block; margin-right:0.25em; }
           span { display:inline-block; } } } }
     .settings:hover {
-      ul { display:grid; align-self:start; background:@theme-back-navb-item;
-        li:hover { background:@theme-back-navb-item-hover; color:@theme-color-navb-item-hover; } } }
+      ul { display:grid; align-self:start; background:@theme-back-item;
+        li:hover { background:@theme-back-item-hover; color:@theme-color-item-hover; } } }
      div i { margin-right:0.3em; } }
   
 </style>

@@ -21,7 +21,7 @@ Main = (function() {
       var streamLog, subjects;
       window['Geom'] = {};
       Main.Batch = batch; // Not necessary here, but assigned for compatibilitry
-      subjects = ["Draw", "Note", "Navb", "Tabs", "Geom", "Data", "Cache"];
+      subjects = ["Draw", "Note", "Menu", "Tabs", "Geom", "Data", "Cache", "Navd"];
       streamLog = {
         subscribe: false,
         publish: false,

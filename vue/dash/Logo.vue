@@ -1,14 +1,21 @@
 
 <template>
-  <!-- logo.png is out of bounds so rollup will not process it -->
-  <div class="logo"><!--img src="./logo.png" alt="logo"/--></div>
+  <div class="logo"><d-navd id="navd"></d-navd></div>
 </template>
 
 <script type="module">
-  export default {}
+  
+  import Navd from '../elem/Navd.vue';
+
+  let Logo = {
+    name: 'logo',
+    components: { 'd-navd':Navd }
+  };
+
+  export default Logo;
+  
 </script>
 
 <style lang="less">
   .logo     { }
-  .logo img { width:140px; height:50px; }
 </style>
