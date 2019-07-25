@@ -33,13 +33,14 @@
       isPrac: function(prac) {
         return this.prac === prac;  },
       onComp: function(comp) {
-        this.comp = comp; },
+        this.comp = comp;
+        /*this.$router.push( { name:comp } )*/ },
       onPrac: function(prac) {
         this.prac = prac; },
       onDisp: function(prac,disp) {
         this.prac = prac; this.disp = disp; },
       pubComp: function(comp) {
-        this.comp =   comp;
+        this.comp = comp;
         if( this.komps[this.comp].ikw ) {
             this.pubPrac('All'); } },
       pubPrac: function(prac) {

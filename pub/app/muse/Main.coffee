@@ -1,6 +1,7 @@
 
 import Data    from '../../base/util/Data.js'
 import Stream  from '../../base/util/Stream.js'
+import Nav     from '../../base/util/Nav.js'
 import Vis     from '../../base/util/Vis.js'
 import Cache   from '../../base/util/Cache.js'
 
@@ -35,6 +36,7 @@ class Main
     subjects    = ["Info","Know","Wise","Cube","Menu","Tabs","Navd","Tocs","Cache"]
     infoSpec    = { subscribe:false, publish:false, subjects:subjects}
     Main.stream = new Stream( subjects, infoSpec )
+    Main.nav    = new Nav(   Main.stream, batch, 'Info' )
     #ain.cache  = new Cache( Main.stream )
     Main.mergePracsCols()
     Main.onReady()
@@ -70,6 +72,8 @@ class Main
         Main.stream
       batch:() ->
         Main.Batch
+      nav:() ->
+        Main.nav
       keys:(obj) ->
         Object.keys(obj)
       cols:()  ->
