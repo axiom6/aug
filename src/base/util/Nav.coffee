@@ -6,55 +6,84 @@ class Nav
   constructor:( @stream, @batch, @plane ) ->
     @build = new Build(  @batch, @plane )
     @level = 'Plane' # Plane Prac Disp Tab
-    @comp  = 'None'
     @prac  = 'None'
     @disp  = 'None'
     @tab   = 'None'
     @tabs  = []  # Set by the active view component
 
   subscribe:() ->
-    @stream.subscribe( 'Dir', 'Nav', @onDir )
+    # @stream.subscribe( 'Dir', 'Nav', @dir )
 
   publish:( obj ) ->
     @stream.publish( 'Nav', obj )
 
   publishAll:() ->
-    @stream.publish( 'Nav', { level:@level, comp:@comp, plane:@plane, prac:@prac, disp:@disp, tab:@tab, tabs:@tabs } )
+    @stream.publish( 'Nav', { level:@level, plane:@plane, prac:@prac, disp:@disp, tab:@tab, tabs:@tabs } )
 
   set:( obj ) ->
     for own key,   val of obj
           @[key] = val
     return
 
-  onDir:( dir ) =>
+  dir:( dr ) =>
     switch @level
-      when 'Plane' then @dirPlane( dir )
-      when 'Prac'  then @dirPrac(  dir )
-      when 'Disp'  then @dirDisp(  dir )
-      when 'Tab'   then @dirTab(   dir )
-      else              @dirNone(  dir )
-    return
-
-  dirPlane:( dir ) ->
-    adj = @adjPrac( dir )
-    if adj.name isnt 'None'
-      @level = 'Plane'
-      @plane = adj.plane
-      @prac  = adj.name
-      @publish( { level:@level, plane:@plane prac:@prac } )
+      when 'Plane' then @dirPrac( dr )
+      when 'Prac'  then @dirPrac( dr )
+      when 'Disp'  then @dirDisp( dr )
+      when 'Tab'   then @dirTabs( dr )
+      else              @dirNone( dr )
     return
 
   dirPrac:( dir ) ->
     adj = @adjPrac( dir )
-    if  adj.name isnt 'None'
-      @prac = adj.name
-      @publish( { level:@level, prac:@prac } )
+    if adj.name isnt 'None'
+      obj = {}
+      obj.level = @level
+      if adj.plane isnt @plane
+         obj.plane = adj.plane
+         @plane    = adj.plane
+      if adj.name  isnt @prac
+         obj.prac  = adj.name
+         @prac     = adj.name
+      @publish( obj )
     return
 
   dirDisp:( dir ) ->
-    #dsp = @disps[@disp]
-    #adj = @adjPrac( dir )
-    #if  adj.name isnt 'None'
+    adj = @adjPrac( dir )
+    dsp = @getDisp( dir, adj )
+    if adj.name isnt 'None'
+      obj = {}
+      obj.level = @level
+      if adj.plane isnt @plane
+         obj.plane = adj.plane
+         @plane    = adj.plane
+      if adj.name  isnt @prac
+         obj.prac  = adj.name
+         @prac     = adj.name
+      if dsp.name  isnt @disp
+         obj.disp  = dsp.name
+         @disp     = dsp.name
+      @publish( obj )
+    return
+
+  dirTabs:( dir ) ->
+    if @tabs.length > 0 and @tab isnt 'None'
+      idx = @tabs.indexOf(@tab)
+      tab = @tabs[idx++] if dir is 'east' and idx < @tabs.length-1
+      tab = @tabs[idx--] if dir is 'west' and idx > 1
+      if tab isnt @tab
+         obj = {}
+         obj.level = @level
+         obj.tab   = tab
+         @tab      = tab
+         @publish( obj )
+    else
+      @dirNone(  dr )
+    return
+
+  dirNone:( dir ) ->
+    console.error( 'Nav.dirNone unknown dir', { dir:dir, level:@level } )
+    return
 
   adjPrac:( dir ) ->
     prc = @pracs(@plane)[@prac]
@@ -69,3 +98,15 @@ class Nav
 
   @disps:( plane, prac ) ->
     @batch[plane].data[plane][prac].disps
+
+  ###
+      switch dir
+      when 'west'  then @publish( { level:@level, prac:@prac } )
+      when 'north' then
+      when 'east'  then
+      when 'south' then
+      when 'next'  then
+      when 'prev'  then
+      else               @dirNone( dir )
+    return
+  ###

@@ -70,10 +70,23 @@
         this.publish( this.comp, { prac:prac, disp:'All' } ); },
       pubDisp: function (prac,disp) {
         this.publish( this.comp, { prac:prac, disp:disp  } ); },
+      onComp: function (comp) {
+         },
       onPrac: function (prac) {
         this.prac = prac; this.disp='All'; },
       onDisp: function (prac,disp) {
         this.prac = prac; this.disp=disp; },
+      onNone: function (obj) {
+        console.error( 'Prac Nav Error', { obj:obj } ); },
+      onNav:  function (obj) {
+        if( typeof(obj.plane) !== 'undefined' ) {
+         this.onComp(obj.plane); }
+        switch( obj.level ) {
+          case 'Plane' : this.onPrac(obj.prac);          break;
+          case 'Prac'  : this.onPrac(obj.prac);          break;
+          case 'Disp'  : this.onDisp(obj.prac,obj.disp); break;
+          case 'Tab'   : this.onTabs(obj.tab);           break;
+          default      : this.onNone(obj); } },
       onNavd: function (dir) {
         console.log( 'Prac.onNavd() Beg', this.prac, dir );
         if( this.prac !== 'All') {
@@ -122,8 +135,8 @@
       this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
          if( obj.disp==='All' ) { this.onPrac(obj.prac); }
          else                   { this.onDisp(obj.prac,obj.disp); } } );
-      this.subscribe(  "Navd",    this.comp+'.vue', (obj) => {
-        this.onNavd(obj); } );
+      this.subscribe(  "Nav",     this.comp+'.vue', (obj) => {
+        this.onNav(obj); } );
       this.subscribe(  "Tabs",    this.comp+'.vue', (obj) => {
         this.onTabs(obj); } );
       this.$nextTick( function() {
