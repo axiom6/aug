@@ -3,12 +3,12 @@
   <div class="logo">
     <!--d-navd id="navd"></d-navd-->
     <div   class="navd"  ref="navd">
-      <div class="west"  ref="west"  @click="pubNavd('west' )"><i class="fas fa-angle-left"  ></i></div>
-      <div class="north" ref="north" @click="pubNavd('north')"><i class="fas fa-angle-up"    ></i></div>
-      <div class="next"  ref="next"  @click="pubNavd('next')" ><i class="fas fa-plus-circle" ></i></div>
-      <div class="prev"  ref="prev"  @click="pubNavd('prev')" ><i class="fas fa-minus-circle"></i></div>
-      <div class="east"  ref="east"  @click="pubNavd('east' )"><i class="fas fa-angle-right" ></i></div>
-      <div class="south" ref="south" @click="pubNavd('south')"><i class="fas fa-angle-down"  ></i></div>
+      <div class="west"  ref="west"  @click="pubNav('west' )"><i class="fas fa-angle-left"  ></i></div>
+      <div class="north" ref="north" @click="pubNav('north')"><i class="fas fa-angle-up"    ></i></div>
+      <div class="next"  ref="next"  @click="pubNav('next')" ><i class="fas fa-plus-circle" ></i></div>
+      <div class="prev"  ref="prev"  @click="pubNav('prev')" ><i class="fas fa-minus-circle"></i></div>
+      <div class="east"  ref="east"  @click="pubNav('east' )"><i class="fas fa-angle-right" ></i></div>
+      <div class="south" ref="south" @click="pubNav('south')"><i class="fas fa-angle-down"  ></i></div>
     </div>
   </div>
 </template>
@@ -21,9 +21,8 @@
     name: 'logo',
     //components: { 'd-navd':Navd },
     methods:{
-      pubNavd: function  ( dir ) {
-        this.nav().dir(    dir );
-        console.log('Dir', dir ); }
+      pubNav: function( dir ) {
+        this.nav().dir( dir ); }
     }
   };
 

@@ -33,12 +33,31 @@
       isPrac: function(prac) {
         return this.prac === prac;  },
       onComp: function(comp) {
-        this.comp = comp;
-        /*this.$router.push( { name:comp } )*/ },
+      //this.comp = comp==='Close' ? 'None' : comp;
+        this.nav().set( { level:'Comp', comp:comp } );
+        this.comp = comp
+      //this.$router.push( { name:this.comp } );
+      //this.publish('Toc', { level:'Tabs', tab:'Prac' } );
+        },
       onPrac: function(prac) {
+        this.nav().set( { level:'Prac', prac:prac } );
         this.prac = prac; },
       onDisp: function(prac,disp) {
+        this.nav().set( { level:'Disp', prac:prac, disp:disp } );
         this.prac = prac; this.disp = disp; },
+      onTabs: function (obj) {
+        console.log( 'Tocs.onTabs()', { obj:obj } ); },
+      onNone: function (obj) {
+        console.log( 'Tocs Level  ?', { obj:obj } ); },
+      onNav:  function (obj) {
+        if( typeof(obj.plane) !== 'undefined' && obj.plane !== this.comp ) {
+          this.onComp(obj.plane); }
+        switch( obj.level ) {
+          case 'Comp' : this.onPrac(obj.prac);          break;
+          case 'Prac' : this.onPrac(obj.prac);          break;
+          case 'Disp' : this.onDisp(obj.prac,obj.disp); break;
+          case 'Tabs' : this.onTabs(obj);               break;
+          default     : this.onNone(obj); } },
       pubComp: function(comp) {
         this.comp = comp;
         if( this.komps[this.comp].ikw ) {
@@ -68,11 +87,9 @@
             this.onComp(key);
             if( obj.disp==='All' ) { this.onPrac(obj.prac); }
             else                   { this.onDisp(obj.prac,obj.disp); } } ); } }
-      this.subscribe( 'Tocs', 'Tocs.vue', (obj) => {
-        if( obj==='Close' ) {
-          this.onComp('None'); }
-        else {
-          this.onComp(obj); } } ); }
+      this.subscribe( 'Toc', 'Tocs.vue', (obj) => {
+        if( obj.level !== 'Tabs' ) {
+          this.onNav(obj); } } ); }
     }
   
    export default Tocs;

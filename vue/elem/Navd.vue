@@ -17,7 +17,18 @@
     data() { return { hi:"Hi" }; },
     methods:{
       pubNavd: function (dir) {
-        this.publish( 'Navd', dir ); }
+        this.publish( 'Navd', dir ); },
+      onNavd: function (dir) {
+        console.log( 'Prac.onNavd() Beg', this.prac, dir );
+        if( this.prac !== 'All') {
+          let prc = this.pracs(this.comp)[this.prac]
+          let adj = this.build.adjacentPractice(prc,dir);
+          console.log( 'Prac.onNavd() Adj', adj.name, dir, adj.plane );
+          if( adj.name !== 'None' ) {
+            if( adj.plane !== this.comp ) {
+              this.publish( 'Tocs', adj.plane ) }
+            else {
+              this.onPrac(adj.name) } } } },
     }
   }
   

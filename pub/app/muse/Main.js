@@ -5,6 +5,8 @@ import Data from '../../base/util/Data.js';
 
 import Stream from '../../base/util/Stream.js';
 
+import Nav from '../../base/util/Nav.js';
+
 import Vis from '../../base/util/Vis.js';
 
 import Cache from '../../base/util/Cache.js';
@@ -19,13 +21,14 @@ Main = (function() {
     static init(batch) {
       var infoSpec, subjects;
       Main.Batch = batch; // Not necessary here, but assigned for compatibilitry
-      subjects = ["Info", "Know", "Wise", "Cube", "Menu", "Tabs", "Navd", "Tocs", "Cache"];
+      subjects = ["Info", "Know", "Wise", "Cube", "Menu", "Tabs", "Nav", "Toc", "Cache"];
       infoSpec = {
         subscribe: false,
         publish: false,
         subjects: subjects
       };
       Main.stream = new Stream(subjects, infoSpec);
+      Main.nav = new Nav(Main.stream, batch, 'Info');
       //ain.cache  = new Cache( Main.stream )
       Main.mergePracsCols();
       Main.onReady();
@@ -154,6 +157,9 @@ Main = (function() {
       },
       batch: function() {
         return Main.Batch;
+      },
+      nav: function() {
+        return Main.nav;
       },
       keys: function(obj) {
         return Object.keys(obj);

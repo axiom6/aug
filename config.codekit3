@@ -4255,6 +4255,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/src/base/util/Nav.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/base/util/Nav.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
 	"/src/base/util/Stream.coffee": {
 		"ft": 32,
 		"ma": 0,

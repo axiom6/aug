@@ -10,6 +10,18 @@ class Index
     @keyPath   = 'id'
     window.indexedDB.deleteDatabase( @dbName )
 
+  dirs:() ->
+    switch dir
+      when 'west'  then @publish( { level:@level, prac:@prac } )
+      when 'north' then
+      when 'east'  then
+      when 'south' then
+      when 'next'  then
+      when 'prev'  then
+      else               @dirNone( dir )
+    return
+
+
   initDB:() ->
     `async function open(that) {
       return await that.openDB( that.dbName, that.version() ) }`

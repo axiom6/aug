@@ -18,7 +18,11 @@
     data() { return { tab:this.init } },
     
     methods: {
+      onTab: function (tab) {
+        this.tab = tab;
+        this.$router.push( { name:this.tab } ) },
       pubTab: function (tab) {
+        this.nav().set( { tab:tab } );
         this.tab = tab;
         this.publish( 'Tabs', tab ); },
       classTab: function (tab) {
@@ -26,8 +30,10 @@
       name: function(page) {
         return this.comp+page.key; } },
 
-    mounted: function () {}
-    
+    mounted: function () {
+      this.subscribe( 'Toc', 'Tabs.vue', (obj) => {
+        if( typeof(obj.tab) !== 'undefined' ) {
+          this.onTab(obj.tab); } } ); }
     }
   
 </script>

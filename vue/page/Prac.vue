@@ -42,14 +42,13 @@
 <script type="module">
   
 //import Touch from '../../pub/base/util/Touch.js';
-  import Build from '../../pub/ikw/cube/Build.js';
 
   export default {
     
     props: { pcomp:{ type:String, default:'None' } },
     
     data() { return {
-      comp:'None', prac:'All', disp:'All', tab:'Practices', practices:{},
+      comp:'None', prac:'All', disp:'All', practices:{},
       rows: {
         Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap" },
         Do:{    name:'Do',    dir:'do', icon:"fas fas fa-cogs" },
@@ -62,16 +61,10 @@
         return this.disp===disp || this.disp==='All' },
       isRows: function () {
         return this.prac==='All' },
-      pubTab: function (tab) {
-        this.tab = tab },
-      classTab: function (tab) {
-        return this.tab===tab ? 'tab-active' : 'tab' },
       pubPrac: function (prac) {
         this.publish( this.comp, { prac:prac, disp:'All' } ); },
       pubDisp: function (prac,disp) {
         this.publish( this.comp, { prac:prac, disp:disp  } ); },
-      onComp: function (comp) {
-         },
       onPrac: function (prac) {
         this.prac = prac; this.disp='All'; },
       onDisp: function (prac,disp) {
@@ -79,29 +72,11 @@
       onNone: function (obj) {
         console.error( 'Prac Nav Error', { obj:obj } ); },
       onNav:  function (obj) {
-        if( typeof(obj.plane) !== 'undefined' ) {
-         this.onComp(obj.plane); }
         switch( obj.level ) {
-          case 'Plane' : this.onPrac(obj.prac);          break;
-          case 'Prac'  : this.onPrac(obj.prac);          break;
-          case 'Disp'  : this.onDisp(obj.prac,obj.disp); break;
-          case 'Tab'   : this.onTabs(obj.tab);           break;
-          default      : this.onNone(obj); } },
-      onNavd: function (dir) {
-        console.log( 'Prac.onNavd() Beg', this.prac, dir );
-        if( this.prac !== 'All') {
-          let prc = this.pracs(this.comp)[this.prac]
-          let adj = this.build.adjacentPractice(prc,dir);
-          console.log( 'Prac.onNavd() Adj', adj.name, dir, adj.plane );
-          if( adj.name !== 'None' ) {
-            if( adj.plane !== this.comp ) {
-              this.publish( 'Tocs', adj.plane ) }
-            else {
-              this.onPrac(adj.name) } } } },
-      onTabs: function (tab) {
-        if( tab==='Practices' && this.tab==='Practices' && this.prac!=='All' ) {
-          this.onPrac('All'); }
-        this.tab = tab; },
+          case 'Comp' : this.onPrac(obj.prac);          break;
+          case 'Prac' : this.onPrac(obj.prac);          break;
+          case 'Disp' : this.onDisp(obj.prac,obj.disp); break;
+          default     : this.onNone(obj); } },
       pracDir: function(dir) {
         return this.prac==='All' ? dir : 'fullPracDir'; },
       dispDir: function(dir) {
@@ -129,18 +104,13 @@
 
     mounted: function () {
     //this.touch     = new Touch();
-    //console.log( 'Prac batch',  this.batch() );
-      this.build     = new Build( this.batch(), this.comp );
       this.practices = this.pracs(this.comp); // 'Cols'
       this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
          if( obj.disp==='All' ) { this.onPrac(obj.prac); }
          else                   { this.onDisp(obj.prac,obj.disp); } } );
       this.subscribe(  "Nav",     this.comp+'.vue', (obj) => {
         this.onNav(obj); } );
-      this.subscribe(  "Tabs",    this.comp+'.vue', (obj) => {
-        this.onTabs(obj); } );
       this.$nextTick( function() {
-        this.onTabs('Practices');
         /*this.elems();*/ } ) }
   }
          

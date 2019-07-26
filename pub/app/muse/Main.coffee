@@ -33,7 +33,7 @@ class Main
 
   Main.init =  ( batch ) ->
     Main.Batch  = batch # Not necessary here, but assigned for compatibilitry
-    subjects    = ["Info","Know","Wise","Cube","Menu","Tabs","Navd","Tocs","Cache"]
+    subjects    = ["Info","Know","Wise","Cube","Menu","Tabs","Nav","Toc","Cache"]
     infoSpec    = { subscribe:false, publish:false, subjects:subjects}
     Main.stream = new Stream( subjects, infoSpec )
     Main.nav    = new Nav(   Main.stream, batch, 'Info' )

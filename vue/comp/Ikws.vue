@@ -13,7 +13,6 @@
 
 <script type="module">
   
-  
   import Tabs from '../elem/Tabs.vue';
   
   export default {
