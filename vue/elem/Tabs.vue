@@ -15,25 +15,27 @@
 
     props: { comp:String, pages:Array, init:String },
     
-    data() { return { tab:this.init } },
+    data() { return { tab:this.init } },  // tab is a page.key
     
     methods: {
       onTab: function (tab) {
-        this.tab = tab;
-        this.$router.push( { name:this.tab } ) },
+        this.tab = tab; },
       pubTab: function (tab) {
-        this.nav().set( { tab:tab } );
+      //this.nav().set( { tab:tab } );
         this.tab = tab;
         this.publish( 'Tabs', tab ); },
       classTab: function (tab) {
         return this.tab===tab ? 'tab-active' : 'tab'; },
       name: function(page) {
         return this.comp+page.key; } },
-
-    mounted: function () {
-      this.subscribe( 'Toc', 'Tabs.vue', (obj) => {
-        if( typeof(obj.tab) !== 'undefined' ) {
-          this.onTab(obj.tab); } } ); }
+    
+    mounted: function() {
+      this.subscribe(  "Nav", 'Tabs', (obj) => {
+        this.onTab(obj.tab); } );
+      this.$nextTick( function() {
+        if( this.init && this.init.length > 0 ) {
+          this.$router.push( { name:this.comp+this.init } ); } } ) }
+        
     }
   
 </script>

@@ -33,12 +33,8 @@
       isPrac: function(prac) {
         return this.prac === prac;  },
       onComp: function(comp) {
-      //this.comp = comp==='Close' ? 'None' : comp;
-        this.nav().set( { level:'Comp', comp:comp } );
-        this.comp = comp
-      //this.$router.push( { name:this.comp } );
-      //this.publish('Toc', { level:'Tabs', tab:'Prac' } );
-        },
+        this.nav().set( { level:'Prac', comp:comp } );
+        this.comp = comp },
       onPrac: function(prac) {
         this.nav().set( { level:'Prac', prac:prac } );
         this.prac = prac; },
@@ -50,10 +46,10 @@
       onNone: function (obj) {
         console.log( 'Tocs Level  ?', { obj:obj } ); },
       onNav:  function (obj) {
-        if( typeof(obj.plane) !== 'undefined' && obj.plane !== this.comp ) {
-          this.onComp(obj.plane); }
+        // console.log( 'Tocs.onNav()', { toc:this.comp, nav:obj.comp } );
+        if( this.comp !== obj.comp ) {
+            this.comp  =  obj.comp; } // Just reset the comp since Nav will call router
         switch( obj.level ) {
-          case 'Comp' : this.onPrac(obj.prac);          break;
           case 'Prac' : this.onPrac(obj.prac);          break;
           case 'Disp' : this.onDisp(obj.prac,obj.disp); break;
           case 'Tabs' : this.onTabs(obj);               break;
@@ -87,12 +83,13 @@
             this.onComp(key);
             if( obj.disp==='All' ) { this.onPrac(obj.prac); }
             else                   { this.onDisp(obj.prac,obj.disp); } } ); } }
-      this.subscribe( 'Toc', 'Tocs.vue', (obj) => {
-        if( obj.level !== 'Tabs' ) {
-          this.onNav(obj); } } ); }
+      this.subscribe( 'Nav', 'Tocs.vue', (obj) => {
+          this.onNav(obj); } ); }
     }
   
    export default Tocs;
+
+  //this.comp = comp==='Close' ? 'None' : comp;
    
 </script>
 

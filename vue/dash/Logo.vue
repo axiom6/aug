@@ -15,15 +15,13 @@
 
 <script type="module">
   
-  //import Navd from '../elem/Navd.vue';
-
   let Logo = {
     name: 'logo',
-    //components: { 'd-navd':Navd },
     methods:{
       pubNav: function( dir ) {
-        this.nav().dir( dir ); }
-    }
+        this.nav().dir( dir ); } },
+    mounted: function () {
+      this.nav().set( { $router:this.$router } ); }
   };
 
   export default Logo;

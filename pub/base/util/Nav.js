@@ -5,12 +5,14 @@ import Build from '../../ikw/cube/Build.js';
 
 Nav = class Nav {
   constructor(stream, batch, comp1) {
+    // console.log('Nav.set()', obj, @tab )
     this.dir = this.dir.bind(this);
     this.stream = stream;
     this.batch = batch;
     this.comp = comp1;
     this.build = new Build(this.batch, this.comp);
-    this.level = 'Comp'; // Plane Prac Disp Tab
+    this.$router = null;
+    this.level = 'Prac'; // Prac Disp Tab
     this.prac = 'None';
     this.disp = 'None';
     this.tab = 'Prac';
@@ -20,13 +22,22 @@ Nav = class Nav {
       'Data',
       'Enli' // Set by the active view component
     ];
+    this.queue = null; // Last published obj created before route call request by new component
+    this.queued = false;
+    this.compass = "";
+    this.subscribe();
   }
 
-  
+  subscribe() {
+    return this.stream.subscribe('Tabs', 'Nav', (tab) => {
+      console.log('Nav.sub()', tab);
+      return this.tab = tab;
+    });
+  }
+
   // Publish twice because Tocs needs to update comp before any Nav view updates
   pub(obj) {
-    console.log('Nav.pub()', obj);
-    this.stream.publish('Toc', obj);
+    // console.log('Nav.pub()', obj )
     this.stream.publish('Nav', obj);
   }
 
@@ -40,11 +51,11 @@ Nav = class Nav {
   }
 
   dir(dr) {
-    console.log('Nav.dir()', dr);
+    if (dr !== 'next' && dr !== 'prev') {
+      // console.log('Nav.dir()', dr )
+      this.compass = dr;
+    }
     switch (this.level) {
-      case 'Comp':
-        this.dirPrac(dr);
-        break;
       case 'Prac':
         this.dirPrac(dr);
         break;
@@ -62,17 +73,19 @@ Nav = class Nav {
   dirPrac(dir) {
     var adj, obj;
     adj = this.adjPrac(dir);
-    console.log('Nav.adj()', adj);
+    // console.log('Nav.adj()', adj )
     if (adj.name !== 'None') {
       obj = {};
       obj.level = this.level;
-      if (adj.plane !== this.comp) {
-        obj.comp = adj.plane;
-        this.comp = adj.plane;
-      }
+      obj.comp = this.comp;
       if (adj.name !== this.prac) {
         obj.prac = adj.name;
         this.prac = adj.name;
+      }
+      if (adj.plane !== this.comp) {
+        obj.comp = adj.plane;
+        this.comp = adj.plane;
+        this.route(this.level, this.comp, this.tab, obj);
       }
       this.pub(obj);
     }
@@ -82,24 +95,27 @@ Nav = class Nav {
     var adj, dis, obj, prc;
     prc = this.pracs(this.comp)[this.prac];
     dis = prc[this.disp];
-    if (dis.dir === dir) { // if current prac.dir is dir we will nav to adjacent prac
+    // if current prac.dir is dir or next or prev we will nav to adjacent prac
+    if (dir === dis.dir || (dir === 'next' || dir === 'prev')) {
       adj = this.adjPrac(dir);
-      dis = this.getDisp(this.adjDir(dir), adj);
+      dis = this.getDisp(this.adjDir(this.compass), adj);
     } else {
       adj = prc;
-      dis = this.getDisp(dir, prc);
+      dis = this.getDisp(this.compass, prc);
     }
     if (adj.name !== 'None') {
       obj = {};
       obj.level = this.level;
-      if (adj.plane !== this.comp) {
-        obj.comp = adj.plane;
-        this.comp = adj.plane;
-      }
+      obj.comp = this.comp;
       obj.prac = adj.name;
       this.prac = adj.name;
       obj.disp = dis.name;
       this.disp = dis.name;
+      if (adj.plane !== this.comp) {
+        obj.comp = adj.plane;
+        this.comp = adj.plane;
+        this.route(this.level, this.comp, this.tab, obj);
+      }
       this.pub(obj);
     }
   }
@@ -117,9 +133,10 @@ Nav = class Nav {
       if (tab !== this.tab) {
         obj = {};
         obj.level = this.level;
+        obj.comp = this.comp;
         obj.tab = tab;
         this.tab = tab;
-        this.pub(obj);
+        this.route(this.level, this.comp, this.tab, obj);
       }
     } else {
       this.dirNone(dr);
@@ -133,20 +150,44 @@ Nav = class Nav {
     });
   }
 
+  route(level, comp, tab, obj) {
+    if (this.$router != null) {
+      if (level !== 'Tabs') {
+        this.$router.push({
+          name: comp
+        });
+      }
+      this.$router.push({
+        name: comp + tab
+      });
+    } else {
+      // console.log(   'Nav.router()', { name:comp+tab } )
+      console.error('Nav.router() $router not set');
+    }
+    // Oueue up obj for for component to request when mounted
+    this.queue = obj;
+    this.queued = true;
+  }
+
+  que(source, queued) {
+    // console.log( 'Nav.que()', { source:source, queued:@queued, queue:@queue } )
+    this.queued = queued;
+    return this.queue;
+  }
+
   adjPrac(dir) {
     var adj, prc;
     prc = this.pracs(this.comp)[this.prac];
     adj = this.build.adjacentPractice(prc, dir);
-    console.log('Nav.adjPrac()', {
-      dor: dir,
-      prc: prc,
-      adj: adj
-    });
+    // console.log( 'Nav.adjPrac()', { dor:dir, prc:prc, adj:adj } )
     return adj;
   }
 
   getDisp(dir, practice) {
-    return this.build.getDir(practice, dir);
+    var dis;
+    dis = this.build.getDir(practice, dir);
+    // console.log( 'Nav.getDisp()', { dir:dir, practice:practice, dis:dis } )
+    return dis;
   }
 
   adjDir(dir) {
@@ -159,10 +200,6 @@ Nav = class Nav {
         return 'west';
       case 'south':
         return 'north';
-      case 'next':
-        return 'prev';
-      case 'prev':
-        return 'next';
       default:
         return 'west';
     }

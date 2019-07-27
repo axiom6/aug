@@ -1,7 +1,7 @@
 
 <template>
   <div class="ikws">
-    <b-tabs :comp="comp" :pages="pages"></b-tabs>
+    <b-tabs :comp="comp" :pages="pages"></b-tabs><!--init="Prac"-->
     <h1 v-if="comp==='Info'">Information</h1>
     <h1 v-if="comp==='Know'">Knowledge</h1>
     <h1 v-if="comp==='Wise'">Wisdom</h1>

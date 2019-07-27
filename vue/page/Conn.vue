@@ -25,7 +25,7 @@
     methods: {
       isPrac: function (prac) {
         return this.prac===prac || this.prac==='All' },
-      onPrac: function (prac) {
+      onPrac: function (prac) { // calling size is often a problem here
         if( prac==='All' && this.prac!=='All' ) {
           this.connects[this.prac].layout( this.size(this.prac), 'Restore'); }
         if( prac!=='All' && typeof(this.connects[prac])==='object' ) { // Expand prac to Comp size
@@ -33,6 +33,13 @@
         this.prac = prac; this.disp='All';  },
       onDisp: function (prac,disp) {
         this.prac = prac; this.disp=disp; },
+      onNone: function (obj) {
+        console.error( 'Conn Nav Error', { obj:obj } ); },
+      onNav:  function (obj) {
+        switch( obj.level ) {
+          case 'Prac' : this.onPrac(obj.prac);          break;
+          case 'Disp' : this.onDisp(obj.prac,obj.disp); break;
+          default     : this.onNone(obj); } },
       onTabs: function (tab) {
         if( tab==='Connections' && this.tab==='Connections'  ) {
           this.onPrac('All'); }
@@ -86,8 +93,12 @@
         else                   {   this.onDisp(obj.prac,obj.disp); } } );
       this.subscribe(  "Tabs",     this.comp+'.vue', (obj) => {
         this.onTabs(obj); } );
+      this.subscribe(  "Nav",     this.comp+'.vue', (obj) => {
+        this.onNav(obj); } );
       this.$nextTick( function() {
-        this.connects  = this.createConnects( this.stream(), this.build ); } ) },
+        this.connects  = this.createConnects( this.stream(), this.build );
+        if( this.nav().queued ) {
+          this.onNav( this.nav().que('Conn',false) ); } } ) },
     
     created: function () {
       window.addEventListener(   'resize', this.resize ) },

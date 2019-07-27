@@ -73,7 +73,6 @@
         console.error( 'Prac Nav Error', { obj:obj } ); },
       onNav:  function (obj) {
         switch( obj.level ) {
-          case 'Comp' : this.onPrac(obj.prac);          break;
           case 'Prac' : this.onPrac(obj.prac);          break;
           case 'Disp' : this.onDisp(obj.prac,obj.disp); break;
           default     : this.onNone(obj); } },
@@ -111,7 +110,8 @@
       this.subscribe(  "Nav",     this.comp+'.vue', (obj) => {
         this.onNav(obj); } );
       this.$nextTick( function() {
-        /*this.elems();*/ } ) }
+        if( this.nav().queued ) {
+          this.onNav( this.nav().que('Prac',false) ) } } ); }
   }
          
 </script>

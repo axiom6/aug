@@ -1,12 +1,12 @@
 
 <tenplate>
   <div   class="navd"  ref="Navd">
-    <div class="west"  ref="West"  @click="pubNavd('West' )"><i class="fas fa-angle-left"  ></i></div>
-    <div class="north" ref="North" @click="pubNavd('North')"><i class="fas fa-angle-up"    ></i></div>
-    <div class="fwd"   ref="Fwd"   @click="pubNavd('Fwd')"  ><i class="fas fa-plus-circle" ></i></div>
-    <div class="bak"   ref="Bak"   @click="pubNavd('Bak')"  ><i class="fas fa-minus-circle"></i></div>
-    <div class="east"  ref="East"  @click="pubNavd('East' )"><i class="fas fa-angle-right" ></i></div>
-    <div class="south" ref="South" @click="pubNavd('South')"><i class="fas fa-angle-down"  ></i></div>
+    <div class="west"  ref="West"  @click="pubNav('west' )"><i class="fas fa-angle-left"  ></i></div>
+    <div class="north" ref="North" @click="pubNav('north')"><i class="fas fa-angle-up"    ></i></div>
+    <div class="fwd"   ref="Fwd"   @click="pubNav('next' )"><i class="fas fa-plus-circle" ></i></div>
+    <div class="bak"   ref="Bak"   @click="pubNav('prev' )"><i class="fas fa-minus-circle"></i></div>
+    <div class="east"  ref="East"  @click="pubNav('east' )"><i class="fas fa-angle-right" ></i></div>
+    <div class="south" ref="South" @click="pubNav('south')"><i class="fas fa-angle-down"  ></i></div>
   </div>
 </tenplate>
 
@@ -16,20 +16,8 @@
     name: 'Navd',
     data() { return { hi:"Hi" }; },
     methods:{
-      pubNavd: function (dir) {
-        this.publish( 'Navd', dir ); },
-      onNavd: function (dir) {
-        console.log( 'Prac.onNavd() Beg', this.prac, dir );
-        if( this.prac !== 'All') {
-          let prc = this.pracs(this.comp)[this.prac]
-          let adj = this.build.adjacentPractice(prc,dir);
-          console.log( 'Prac.onNavd() Adj', adj.name, dir, adj.plane );
-          if( adj.name !== 'None' ) {
-            if( adj.plane !== this.comp ) {
-              this.publish( 'Tocs', adj.plane ) }
-            else {
-              this.onPrac(adj.name) } } } },
-    }
+      pubNav: function (dir) {
+         this.nav().dir(dir); } }
   }
   
   export default Navd;
