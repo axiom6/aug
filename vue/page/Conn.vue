@@ -12,38 +12,40 @@
 </template>
 
 <script type="module">
-  
+
+  import Util    from '../../pub/base/util/Util.js';
   import Build   from '../../pub/ikw/cube/Build.js';
   import Connect from '../../pub/ikw/conn/Connect.js';
 
   export default {
 
     data() {
-      return { comp:'None', prac:'All', disp:'All', tab:'Connections',
-               build:{}, connects:{}, practices:{} }; },
+      return { comp:'None', prac:'All', disp:'All',
+               build:{}, connects:{}, practices:{}, size:{} }; },
 
     methods: {
       isPrac: function (prac) {
         return this.prac===prac || this.prac==='All' },
-      onPrac: function (prac) { // calling size is often a problem here
+      onPrac: function (prac) {
         if( prac==='All' && this.prac!=='All' ) {
-          this.connects[this.prac].layout( this.size(this.prac), 'Restore'); }
+          if( Util.isDef(this.connects[this.prac]) ) {
+            this.connects[this.prac].layout( this.size, 'Restore'); }
+          else {
+            console.log( 'Conn.onPrac() connect undefined', { prat:this.prac } ); } }
         if( prac!=='All' && typeof(this.connects[prac])==='object' ) { // Expand prac to Comp size
-          this.connects[prac].layout( this.size(prac), 'Expand'); }
+          this.connects[prac].layout( this.size, 'Expand'); }
         this.prac = prac; this.disp='All';  },
       onDisp: function (prac,disp) {
         this.prac = prac; this.disp=disp; },
+      onTabs: function ()    {}, // Does nothing
       onNone: function (obj) {
         console.error( 'Conn Nav Error', { obj:obj } ); },
       onNav:  function (obj) {
         switch( obj.level ) {
           case 'Prac' : this.onPrac(obj.prac);          break;
           case 'Disp' : this.onDisp(obj.prac,obj.disp); break;
+          case 'Tabs' : this.onTabs();                  break;
           default     : this.onNone(obj); } },
-      onTabs: function (tab) {
-        if( tab==='Connections' && this.tab==='Connections'  ) {
-          this.onPrac('All'); }
-        this.tab = tab; },
       pracDir: function(dir) {
         return this.prac==='All' ? dir : 'fullPracDir'; },
       pubPrac: function (prac) {
@@ -51,33 +53,36 @@
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; },
       
-      size: function(prac) {
-        let elem = this.$refs[prac][0]
+      calcSize: function(prac) {        // Should only be called by $nextTick()
+        let elem = this.$refs[prac][0]  // As in createConnects and resize()
         let sz   = {}
         if( typeof(this.$refs['Conn'])==='undefined' ) {
-          console.log( 'Conn.size() $refs[Conn] undefined', this.$refs ) }
+          console.log( 'Conn.calcSize() $refs[Conn] undefined', this.$refs ) }
         sz.compWidth  = this.$refs['Conn']['clientWidth' ];
         sz.compHeight = this.$refs['Conn']['clientHeight'];
         sz.elemWidth  = elem['clientWidth' ];
         sz.elemHeight = elem['clientHeight'];
-        // console.log( 'Conn.size()', prac, sz );
+        // console.log( 'Conn.calcSize()', prac, sz );
         return sz;
       },
       
       createConnects: function( stream, build ) {
-        for( let key of this.pkeys ) {
-            let prac = this.practices[key];
-            if( prac.row !== 'Dim' ) {
-              let elem = this.$refs[key][0]
-              this.connects[prac.name] = new Connect( stream, build, prac, elem, this.size(key) ); } }
-        return this.connects; },
+        this.$nextTick( function() {
+          for( let key of this.pkeys ) {
+              let prac = this.practices[key];
+              if( prac.row !== 'Dim' ) {
+                let elem  = this.$refs[key][0]
+                this.size = this.calcSize(key)
+                this.connects[prac.name] = new Connect( stream, build, prac, elem, this.size ); } }
+          if( this.nav().queued ) {
+            this.onNav( this.nav().que('Conn',false) ); } } ) },
       
       resize: function() {
-        for( let key of this.pkeys ) {
-          let size  = this.size(key);
-          let level = key!==this.prac ? 'Resize' : 'Expand';
-          if( level==='Expand') { this.connects[key].lastSize(size) }
-          this.connects[key].layout( size, level ); } }
+        this.$nextTick( function() {
+          for( let key of this.pkeys ) {
+            let level = key!==this.prac ? 'Resize' : 'Expand';
+            if( level==='Expand') { this.connects[key].lastSize(this.size) }
+            this.connects[key].layout( this.size, level ); } } ); }
     },
 
     beforeMount: function() {
@@ -91,14 +96,9 @@
       this.subscribe(  this.comp,  this.comp+'.vue', (obj) => {
         if( obj.disp==='All' ) {   this.onPrac(obj.prac); }
         else                   {   this.onDisp(obj.prac,obj.disp); } } );
-      this.subscribe(  "Tabs",     this.comp+'.vue', (obj) => {
-        this.onTabs(obj); } );
       this.subscribe(  "Nav",     this.comp+'.vue', (obj) => {
         this.onNav(obj); } );
-      this.$nextTick( function() {
-        this.connects  = this.createConnects( this.stream(), this.build );
-        if( this.nav().queued ) {
-          this.onNav( this.nav().que('Conn',false) ); } } ) },
+      this.createConnects( this.stream(), this.build ); },
     
     created: function () {
       window.addEventListener(   'resize', this.resize ) },

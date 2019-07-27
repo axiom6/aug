@@ -69,12 +69,14 @@
         this.prac = prac; this.disp='All'; },
       onDisp: function (prac,disp) {
         this.prac = prac; this.disp=disp; },
+      onTabs: function ()    {}, // Does nothing
       onNone: function (obj) {
         console.error( 'Prac Nav Error', { obj:obj } ); },
       onNav:  function (obj) {
         switch( obj.level ) {
           case 'Prac' : this.onPrac(obj.prac);          break;
           case 'Disp' : this.onDisp(obj.prac,obj.disp); break;
+          case 'Tabs' : this.onTabs();                  break;
           default     : this.onNone(obj); } },
       pracDir: function(dir) {
         return this.prac==='All' ? dir : 'fullPracDir'; },

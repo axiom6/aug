@@ -4,16 +4,16 @@ import Build from '../../ikw/cube/Build.js';
 class Nav
 
   constructor:( @stream,  @batch, @comp ) ->
-    @build   = new Build( @batch, @comp )
-    @$router = null
-    @level   = 'Prac' # Prac Disp Tab
-    @prac    = 'None'
-    @disp    = 'None'
-    @tab     = 'Prac'
-    @tabs    = ['Prac','Conn','Data','Enli']  # Set by the active view component
-    @queue   = null # Last published obj created before route call request by new component
-    @queued  = false
-    @compass = ""
+    @build   =  new Build( @batch, @comp )
+    @$router =  null
+    @level   =  'Prac' # Prac Disp Tab
+    @prac    =  'None'
+    @disp    =  'None'
+    @tab     =  'Conn'
+    @tabs    = ['Conn','Prac','Data','Enli']  # Set by the active view component
+    @queue   =   null # Last published obj created before route call request by new component
+    @queued  =   false
+    @compass =   ""
     @subscribe()
 
   subscribe:() ->

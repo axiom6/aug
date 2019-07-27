@@ -1,7 +1,7 @@
 
 <template>
   <div class="ikws">
-    <b-tabs :comp="comp" :pages="pages"></b-tabs><!--init="Prac"-->
+    <b-tabs :comp="comp" :pages="pages"></b-tabs>
     <h1 v-if="comp==='Info'">Information</h1>
     <h1 v-if="comp==='Know'">Knowledge</h1>
     <h1 v-if="comp==='Wise'">Wisdom</h1>
@@ -19,8 +19,8 @@
     components:{ 'b-tabs':Tabs },
 
     data() { return { comp:'None', pages:[
-        { title:'Practices',    key:'Prac' },
         { title:'Connections',  key:'Conn' },
+        { title:'Practices',    key:'Prac' },
         { title:'Enlight',      key:'Enli' },
         { title:'Data Science', key:'Data' },
       ] } },

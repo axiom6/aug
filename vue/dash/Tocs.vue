@@ -33,7 +33,8 @@
       isPrac: function(prac) {
         return this.prac === prac;  },
       onComp: function(comp) {
-        this.nav().set( { level:'Prac', comp:comp } );
+        this.nav().set( { level:'Prac', comp:comp  } );
+        this.nav().pub( { level:'Tabs', tab:this.nav().tab } ); // Init view with Prac tab
         this.comp = comp },
       onPrac: function(prac) {
         this.nav().set( { level:'Prac', prac:prac } );
@@ -41,8 +42,7 @@
       onDisp: function(prac,disp) {
         this.nav().set( { level:'Disp', prac:prac, disp:disp } );
         this.prac = prac; this.disp = disp; },
-      onTabs: function (obj) {
-        console.log( 'Tocs.onTabs()', { obj:obj } ); },
+      onTabs: function () {}, // does nothing
       onNone: function (obj) {
         console.log( 'Tocs Level  ?', { obj:obj } ); },
       onNav:  function (obj) {
@@ -52,7 +52,7 @@
         switch( obj.level ) {
           case 'Prac' : this.onPrac(obj.prac);          break;
           case 'Disp' : this.onDisp(obj.prac,obj.disp); break;
-          case 'Tabs' : this.onTabs(obj);               break;
+          case 'Tabs' : this.onTabs();                  break;
           default     : this.onNone(obj); } },
       pubComp: function(comp) {
         this.comp = comp;
@@ -60,6 +60,7 @@
             this.pubPrac('All'); } },
       pubPrac: function(prac) {
         this.prac = prac;
+     //this.nav().pub( { level:'Tabs', tab:this.nav().tab } ); // Init view with Prac tab
         this.publish( this.comp, { prac:this.prac, disp:'All' } ); },
       pubDisp: function(prac,disp) {
         this.publish( this.comp, { prac:prac, disp:disp  } ); },
@@ -88,6 +89,8 @@
     }
   
    export default Tocs;
+  
+  // this.nav().pub( { level:'Tabs', tab:'Prac' } ); // Init view with Prac tab
 
   //this.comp = comp==='Close' ? 'None' : comp;
    

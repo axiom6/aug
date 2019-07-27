@@ -2,9 +2,7 @@
 <template>
   <div class="tabs">
     <template v-for="page in pages">
-      <div :class="classTab(page.key)" @click="pubTab(page.key)">
-        <router-link :to="{ name:name(page) }">{{page.title}}</router-link>
-      </div>
+      <div :class="classTab(page.key)" @click="pubTab(page.key)">{{page.title}}</div>
     </template>
   </div>
 </template>
@@ -13,29 +11,24 @@
 
   export default {
 
-    props: { comp:String, pages:Array, init:String },
+    props: { comp:String, pages:Array },
     
-    data() { return { tab:this.init } },  // tab is a page.key
+    data() { return { tab:"" } },  // tab is a page.key
     
     methods: {
-      onTab: function (tab) {
-        this.tab = tab; },
+      onTab: function (obj) {
+        if( obj.level === 'Tabs' ) {
+          this.tab = obj.tab;                                   // Tab active with classTab
+          this.$router.push( { name:this.comp+obj.tab } ); } }, // Programmed router
       pubTab: function (tab) {
-      //this.nav().set( { tab:tab } );
-        this.tab = tab;
-        this.publish( 'Tabs', tab ); },
+        this.nav().set( { tab:tab               } );
+        this.nav().pub( { tab:tab, level:"Tabs" } ); },
       classTab: function (tab) {
-        return this.tab===tab ? 'tab-active' : 'tab'; },
-      name: function(page) {
-        return this.comp+page.key; } },
+        return this.tab===tab ? 'tab-active' : 'tab'; } },
     
     mounted: function() {
       this.subscribe(  "Nav", 'Tabs', (obj) => {
-        this.onTab(obj.tab); } );
-      this.$nextTick( function() {
-        if( this.init && this.init.length > 0 ) {
-          this.$router.push( { name:this.comp+this.init } ); } } ) }
-        
+        this.onTab(obj); } ); }
     }
   
 </script>
@@ -49,10 +42,8 @@
     .tab { display:inline-block; margin-left:2.0rem; padding:0.2rem 0.3rem 0.1rem 0.3rem;
       border-radius:12px 12px 0 0; border-left: @theme-color solid thin;
       border-top:@theme-color solid thin; border-right:@theme-color solid thin;
-      a         { background-color:@theme-back;  color:@theme-color; text-decoration:none; } }
-    .tab:hover  { background-color:@theme-color; color:@theme-back;
-      a         { background-color:@theme-color; color:@theme-back } }
-    .tab-active { background-color:@theme-color; color:@theme-back; .tab();
-      a         { background-color:@theme-color; color:@theme-back!important; text-decoration:none; } } }
+                  background-color:@theme-back;  color:@theme-color;}
+    .tab:hover  {         background-color:@theme-color; color:@theme-back; }
+    .tab-active { .tab(); background-color:@theme-color; color:@theme-back; } }
   
 </style>

@@ -15,10 +15,10 @@ Nav = class Nav {
     this.level = 'Prac'; // Prac Disp Tab
     this.prac = 'None';
     this.disp = 'None';
-    this.tab = 'Prac';
+    this.tab = 'Conn';
     this.tabs = [
-      'Prac',
       'Conn',
+      'Prac',
       'Data',
       'Enli' // Set by the active view component
     ];
