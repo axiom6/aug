@@ -55,7 +55,7 @@
         "Process":    { "icon":"fas fa-procedures", "desc":"" },
         "Medical":    { "icon":"fas fa-user-md", "desc":"" } }
     },
-    "Meaning":{ "type":"pane", "hsv":[20,50,90],"column":"Encourage","row":"Learn","plane":"Know","icon":"fab fa-tripadvisor",
+    "Understand":{ "type":"pane", "hsv":[20,50,90],"column":"Encourage","row":"Learn","plane":"Know","icon":"fab fa-tripadvisor",
       "cells":[29,12,7,12], "dir":"ne", "neg":"Disregard",
       "desc":"",
       "Paradigm":    { "dir":"west", "icon":"fas fa-balance-scale",  "hsv":[195,90,70],

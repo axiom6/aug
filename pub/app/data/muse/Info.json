@@ -5,7 +5,7 @@
     "pub":false, "show":true,
     "Info_":{ "type":"pane", "hsv":[ 50,70,70],"column":"Row",    "row":"Dim","plane":"Info","icon":"fas fa-th",
       "cells":[ 1,4,1,6], "toc":false,  "css":"ui-plane" },
-    "Unite":{ "type":"pane", "hsv":[195,90,60], "column":"Embrace","row":"Learn","plane":"Info",
+    "Collab":{ "type":"pane", "hsv":[195,90,60], "column":"Embrace","row":"Learn","plane":"Info",
       "icon":"fas fa-users","cells":[5,12,7,12], "dir":"nw", "neg":"Conspire",  "ref":"Cynefin",
       "desc":"We Charter our project and expert Teams to participate together to reply to all Requests by pulling Activities.",
       "Request":    { "dir":"west", "icon":"fas fa-mail-bulk","hsv":[195,90,70],
@@ -101,7 +101,7 @@
         "Depend":      { "icon":"fas fa-sitemap",   "desc":""  },
         "Accept":      { "icon":"fas fa-thumbs-up", "desc":""  } }
     },
-    "Make": { "type":"pane", "hsv":[ 45,90,90],"column":"Innovate","row":"Do","plane":"Info","icon":"fas fa-cogs",
+    "Tech": { "type":"pane", "hsv":[ 45,90,90],"column":"Innovate","row":"Do","plane":"Info","icon":"fas fa-cogs",
       "cells":[17,12,19,12], "dir":"cen", "neg":"Antiquate",
       "desc":"Components by UX, Service, Data and Cloud tiers. Support Data Science Models that are Interpreted in Benefit",
       "UX":          { "dir":"west", "icon":"fas fa-desktop", "hsv":[195,90,70],

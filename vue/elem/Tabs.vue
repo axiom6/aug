@@ -17,9 +17,9 @@
     
     methods: {
       onTab: function (obj) {
-        if( obj.level === 'Tabs' ) {
-          this.tab = obj.tab;                                   // Tab active with classTab
-          this.$router.push( { name:this.comp+obj.tab } ); } }, // Programmed router
+        if( obj.level === 'Tabs' && this.tab !== obj.tab ) {
+          this.$router.push( { name:this.comp+obj.tab } ); // Programmed router
+          this.tab = obj.tab; } },                         // Tab active with classTab
       pubTab: function (tab) {
         this.nav().set( { tab:tab               } );
         this.nav().pub( { tab:tab, level:"Tabs" } ); },
