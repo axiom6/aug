@@ -6,6 +6,7 @@ import Build from '../../ikw/cube/Build.js';
 Nav = class Nav {
   constructor(stream, batch, comp1) {
     // console.log('Nav.set()', obj, @tab )
+    this.tap = this.tap.bind(this);
     this.dir = this.dir.bind(this);
     this.stream = stream;
     this.batch = batch;
@@ -50,9 +51,16 @@ Nav = class Nav {
     }
   }
 
-  dir(dr) {
+  tap() {
+    console.log('Nav.tap()');
+  }
+
+  dir(dr, event = null) {
+    console.log('Nav.dir()', dr);
+    if (event === null) {
+      ({});
+    }
     if (dr !== 'next' && dr !== 'prev') {
-      // console.log('Nav.dir()', dr )
       this.compass = dr;
     }
     switch (this.level) {

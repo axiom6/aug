@@ -3339,6 +3339,47 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/lib/touch/Tocca.bind.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/lib/touch/Tocca.bind-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/lib/touch/Tocca.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/lib/touch/Tocca.esm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/lib/touch/Tocca.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/lib/touch/Tocca.html",
+		"oF": 0
+		},
+	"/pub/lib/touch/Tocca.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/lib/touch/Tocca-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/lib/vue/vee-validate.esm.js": {
 		"bF": 0,
 		"ft": 64,
@@ -6371,6 +6412,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/zzz/touch/Touch.Interact.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/touch/Touch.Interact.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
 	"/zzz/ui/Brew.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -8920,23 +8972,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.js",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "vue",
-			"autoOutputPathReplace2": "pub/vue",
-			"autoOutputPathStyle": 3,
-			"fileExtension": "vue",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.html",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "",
 			"autoOutputPathReplace2": "",
 			"autoOutputPathStyle": 0,
 			"fileExtension": "html",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.js",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "vue",
+			"autoOutputPathReplace2": "pub/vue",
+			"autoOutputPathStyle": 3,
+			"fileExtension": "vue",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

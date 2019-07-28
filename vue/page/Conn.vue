@@ -96,7 +96,7 @@
       this.subscribe(  this.comp,  this.comp+'.vue', (obj) => {
         if( obj.disp==='All' ) {   this.onPrac(obj.prac); }
         else                   {   this.onDisp(obj.prac,obj.disp); } } );
-      this.subscribe(  "Nav",     this.comp+'.vue', (obj) => {
+      this.subscribe(  "Nav",      this.comp+'.vue', (obj) => {
         this.onNav(obj); } );
       this.createConnects( this.stream(), this.build ); },
     

@@ -31,8 +31,13 @@ class Nav
     # console.log('Nav.set()', obj, @tab )
     return
 
-  dir:( dr ) =>
-    # console.log('Nav.dir()', dr )
+  tap:() =>
+    console.log( 'Nav.tap()' )
+    return
+
+  dir:( dr, event=null ) =>
+    console.log('Nav.dir()', dr )
+    if event is null then {}
     @compass = dr if dr isnt 'next' and dr isnt 'prev'
     switch @level
       when 'Prac'  then @dirPrac( dr )

@@ -1,6 +1,6 @@
 
 <template>
-  <div>
+  <div ref="View">
     <router-view name="Data"></router-view>
     <router-view name="Math"></router-view>
     <router-view name="Geom"></router-view>
@@ -18,11 +18,24 @@
 
 <script type="module">
   
+  import Touch from '../../pub/base/util/Touch.js'
+  
   export default {
+
+    data() { return { touch:null, elem:null }; },
     
     methods:{
       show:function() {
-        return this.$route.name===null } } }
+        return this.$route.name===null } },
+    
+    mounted: function () {
+      this.$nextTick( function() {  // Enable touch events inside all views
+        this.touch = new Touch();
+        this.elem  = this.$refs['View'];
+        this.touch.onNav( this.elem, this.nav() );
+      } ) }
+      
+    }
 
 </script>
 
