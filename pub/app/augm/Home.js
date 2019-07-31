@@ -1506,26 +1506,123 @@ __vue_render__._withStripped = true;
 //
 //
 //
+//
+//
+//
 
 
-let Navd = {
-  name: 'Navd',
-  data() { return { hi:"Hi" }; },
+let Logo = {
+  name: 'logo',
   methods:{
-    pubNavd: function (dir) {
-      this.publish( 'Navd', dir ); }
-  }
+    pubNav: function( dir ) {
+      this.nav().dir( dir ); } },
+  mounted: function () {
+    this.nav().set( { $router:this.$router } ); }
 };
 
 /* script */
-const __vue_script__$1 = Navd;
+const __vue_script__$1 = Logo;
 
 /* template */
+var __vue_render__$1 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { staticClass: "logo" }, [
+    _c("div", { ref: "navd", staticClass: "navd" }, [
+      _c(
+        "div",
+        {
+          ref: "west",
+          staticClass: "west",
+          on: {
+            click: function($event) {
+              return _vm.pubNav("west")
+            }
+          }
+        },
+        [_c("i", { staticClass: "fas fa-angle-left" })]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          ref: "north",
+          staticClass: "north",
+          on: {
+            click: function($event) {
+              return _vm.pubNav("north")
+            }
+          }
+        },
+        [_c("i", { staticClass: "fas fa-angle-up" })]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          ref: "next",
+          staticClass: "next",
+          on: {
+            click: function($event) {
+              return _vm.pubNav("next")
+            }
+          }
+        },
+        [_c("i", { staticClass: "fas fa-plus-circle" })]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          ref: "prev",
+          staticClass: "prev",
+          on: {
+            click: function($event) {
+              return _vm.pubNav("prev")
+            }
+          }
+        },
+        [_c("i", { staticClass: "fas fa-minus-circle" })]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          ref: "east",
+          staticClass: "east",
+          on: {
+            click: function($event) {
+              return _vm.pubNav("east")
+            }
+          }
+        },
+        [_c("i", { staticClass: "fas fa-angle-right" })]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          ref: "south",
+          staticClass: "south",
+          on: {
+            click: function($event) {
+              return _vm.pubNav("south")
+            }
+          }
+        },
+        [_c("i", { staticClass: "fas fa-angle-down" })]
+      )
+    ])
+  ])
+};
+var __vue_staticRenderFns__$1 = [];
+__vue_render__$1._withStripped = true;
 
   /* style */
   const __vue_inject_styles__$1 = function (inject) {
     if (!inject) return
-    inject("data-v-266fd760_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.navd {\n  background-color: black;\n  color: wheat;\n}\n.navd .west {\n  position: absolute;\n  left: 0;\n  top: 33%;\n  width: 33%;\n  height: 33%;\n}\n.navd .north {\n  position: absolute;\n  left: 33%;\n  top: 0;\n  width: 33%;\n  height: 33%;\n}\n.navd .fwd {\n  position: absolute;\n  left: 33%;\n  top: 33%;\n  width: 17%;\n  height: 33%;\n}\n.navd .bak {\n  position: absolute;\n  left: 50%;\n  top: 33%;\n  width: 16%;\n  height: 33%;\n}\n.navd .east {\n  position: absolute;\n  left: 66%;\n  top: 33%;\n  width: 33%;\n  height: 33%;\n}\n.navd .south {\n  position: absolute;\n  left: 33%;\n  top: 66%;\n  width: 33%;\n  height: 33%;\n}\n", map: {"version":3,"sources":["Navd.vue","/Users/ax/Documents/prj/aug/vue/elem/Navd.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;ECCA,uBAAA;EDCE,iBAAiB;ACCnB;AACA;EACA,uBAAA;EACA,iBAAA;AACA;AACA;EACA,uBAAA;EACA,YAAA;ADCA;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,MAAM;EACN,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,WAAW;AACb","file":"Navd.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.navd {\n  background-color: black;\n  color: wheat;\n}\n.navd .west {\n  position: absolute;\n  left: 0;\n  top: 33%;\n  width: 33%;\n  height: 33%;\n}\n.navd .north {\n  position: absolute;\n  left: 33%;\n  top: 0;\n  width: 33%;\n  height: 33%;\n}\n.navd .fwd {\n  position: absolute;\n  left: 33%;\n  top: 33%;\n  width: 17%;\n  height: 33%;\n}\n.navd .bak {\n  position: absolute;\n  left: 50%;\n  top: 33%;\n  width: 16%;\n  height: 33%;\n}\n.navd .east {\n  position: absolute;\n  left: 66%;\n  top: 33%;\n  width: 33%;\n  height: 33%;\n}\n.navd .south {\n  position: absolute;\n  left: 33%;\n  top: 66%;\n  width: 33%;\n  height: 33%;\n}\n","\n<tenplate>\n  <div class=\"navd\" ref=\"Navd\">\n    <div class=\"west\"  ref=\"West\"  @click=\"pubNavd('West' )\"><i class=\"fas fa-angle-left\"  ></i></div>\n    <div class=\"north\" ref=\"North\" @click=\"pubNavd('North')\"><i class=\"fas fa-angle-up\"    ></i></div>\n    <div class=\"fwd\"   ref=\"Fwd\"   @click=\"pubNavd('Fwd')\"  ><i class=\"fas fa-plus-circle\" ></i></div>\n    <div class=\"bak\"   ref=\"Bak\"   @click=\"pubNavd('Bak')\"  ><i class=\"fas fa-minus-circle\"></i></div>\n    <div class=\"east\"  ref=\"East\"  @click=\"pubNavd('East' )\"><i class=\"fas fa-angle-right\" ></i></div>\n    <div class=\"south\" ref=\"South\" @click=\"pubNavd('South')\"><i class=\"fas fa-angle-down\"  ></i></div>\n  </div>\n</tenplate>\n\n<script type=\"module\">\n  \n  let Navd = {\n    name: 'Navd',\n    data() { return { hi:\"Hi\" }; },\n    methods:{\n      pubNavd: function (dir) {\n        this.publish( 'Navd', dir ); }\n    }\n  }\n  \n  export default Navd;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .navd { background-color:@theme-back; color:@theme-color;\n    .west  { position:absolute; left:0;   top:33%; width:33%; height:33%; }\n    .north { position:absolute; left:33%; top:0;   width:33%; height:33%; }\n    .fwd   { position:absolute; left:33%; top:33%; width:17%; height:33%; }\n    .bak   { position:absolute; left:50%; top:33%; width:16%; height:33%; }\n    .east  { position:absolute; left:66%; top:33%; width:33%; height:33%; }\n    .south { position:absolute; left:33%; top:66%; width:33%; height:33%; }\n  }\n</style>"]}, media: undefined });
+    inject("data-v-488112f2_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.logo {\n  background-color: black;\n}\n.navd {\n  background-color: black;\n  color: wheat;\n  position: relative;\n  left: 20%;\n  top: 0;\n  width: 60%;\n  height: 100%;\n}\n.navd .west {\n  position: absolute;\n  left: 0;\n  top: 33%;\n  width: 33%;\n  height: 33%;\n  font-size: 1.8rem;\n}\n.navd .north {\n  position: absolute;\n  left: 33%;\n  top: 0;\n  width: 33%;\n  height: 33%;\n  font-size: 1.8rem;\n}\n.navd .next {\n  position: absolute;\n  left: 33%;\n  top: 33%;\n  width: 17%;\n  height: 33%;\n  font-size: 1.2rem;\n}\n.navd .prev {\n  position: absolute;\n  left: 50%;\n  top: 33%;\n  width: 16%;\n  height: 33%;\n  font-size: 1.2rem;\n}\n.navd .east {\n  position: absolute;\n  left: 66%;\n  top: 33%;\n  width: 33%;\n  height: 33%;\n  font-size: 1.8rem;\n}\n.navd .south {\n  position: absolute;\n  left: 33%;\n  top: 66%;\n  width: 33%;\n  height: 33%;\n  font-size: 1.8rem;\n}\n.navd div {\n  display: grid;\n}\n.navd div i {\n  justify-self: center;\n  align-self: center;\n}\n", map: {"version":3,"sources":["Logo.vue","/Users/ax/Documents/prj/aug/vue/dash/Logo.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;ACCA;EDCE,uBAAuB;ECCzB,iBAAA;ADCA;ACCA;EACA,uBAAA;AACA;AACA;EACA,uBAAA;EACA,YAAA;EACA,kBAAA;EACA,SAAA;EACA,MAAA;EACA,UAAA;EDCE,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,MAAM;EACN,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,aAAa;AACf;AACA;EACE,oBAAoB;EACpB,kBAAkB;AACpB","file":"Logo.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.logo {\n  background-color: black;\n}\n.navd {\n  background-color: black;\n  color: wheat;\n  position: relative;\n  left: 20%;\n  top: 0;\n  width: 60%;\n  height: 100%;\n}\n.navd .west {\n  position: absolute;\n  left: 0;\n  top: 33%;\n  width: 33%;\n  height: 33%;\n  font-size: 1.8rem;\n}\n.navd .north {\n  position: absolute;\n  left: 33%;\n  top: 0;\n  width: 33%;\n  height: 33%;\n  font-size: 1.8rem;\n}\n.navd .next {\n  position: absolute;\n  left: 33%;\n  top: 33%;\n  width: 17%;\n  height: 33%;\n  font-size: 1.2rem;\n}\n.navd .prev {\n  position: absolute;\n  left: 50%;\n  top: 33%;\n  width: 16%;\n  height: 33%;\n  font-size: 1.2rem;\n}\n.navd .east {\n  position: absolute;\n  left: 66%;\n  top: 33%;\n  width: 33%;\n  height: 33%;\n  font-size: 1.8rem;\n}\n.navd .south {\n  position: absolute;\n  left: 33%;\n  top: 66%;\n  width: 33%;\n  height: 33%;\n  font-size: 1.8rem;\n}\n.navd div {\n  display: grid;\n}\n.navd div i {\n  justify-self: center;\n  align-self: center;\n}\n","\n<template>\n  <div class=\"logo\">\n    <!--d-navd id=\"navd\"></d-navd-->\n    <div   class=\"navd\"  ref=\"navd\">\n      <div class=\"west\"  ref=\"west\"  @click=\"pubNav('west' )\"><i class=\"fas fa-angle-left\"  ></i></div>\n      <div class=\"north\" ref=\"north\" @click=\"pubNav('north')\"><i class=\"fas fa-angle-up\"    ></i></div>\n      <div class=\"next\"  ref=\"next\"  @click=\"pubNav('next')\" ><i class=\"fas fa-plus-circle\" ></i></div>\n      <div class=\"prev\"  ref=\"prev\"  @click=\"pubNav('prev')\" ><i class=\"fas fa-minus-circle\"></i></div>\n      <div class=\"east\"  ref=\"east\"  @click=\"pubNav('east' )\"><i class=\"fas fa-angle-right\" ></i></div>\n      <div class=\"south\" ref=\"south\" @click=\"pubNav('south')\"><i class=\"fas fa-angle-down\"  ></i></div>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  let Logo = {\n    name: 'logo',\n    methods:{\n      pubNav: function( dir ) {\n        this.nav().dir( dir ); } },\n    mounted: function () {\n      this.nav().set( { $router:this.$router } ); }\n  };\n\n  export default Logo;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .logo { background-color:@theme-back; }\n  \n  .navd { background-color:@theme-back; color:@theme-color;\n             position:relative; left:20%; top:0;   width:60%; height:100%;\n    .west  { position:absolute; left:0;   top:33%; width:33%; height: 33%; font-size:@theme-dirs-size; }\n    .north { position:absolute; left:33%; top:0;   width:33%; height: 33%; font-size:@theme-dirs-size; }\n    .next  { position:absolute; left:33%; top:33%; width:17%; height: 33%; font-size:@theme-navd-size; }\n    .prev  { position:absolute; left:50%; top:33%; width:16%; height: 33%; font-size:@theme-navd-size; }\n    .east  { position:absolute; left:66%; top:33%; width:33%; height: 33%; font-size:@theme-dirs-size; }\n    .south { position:absolute; left:33%; top:66%; width:33%; height: 33%; font-size:@theme-dirs-size; }\n    div    { display:grid;\n      i    { justify-self:center; align-self:center; } } }\n  \n</style>\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -1533,69 +1630,19 @@ const __vue_script__$1 = Navd;
   /* module identifier */
   const __vue_module_identifier__$1 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$1 = undefined;
-  /* style inject SSR */
-  
-
-  
-  var Navd$1 = normalizeComponent_1(
-    {},
-    __vue_inject_styles__$1,
-    __vue_script__$1,
-    __vue_scope_id__$1,
-    __vue_is_functional_template__$1,
-    __vue_module_identifier__$1,
-    browser,
-    undefined
-  );
-
-//
-
-let Logo = {
-  name: 'logo',
-  components: { 'd-navd':Navd$1 }
-};
-
-/* script */
-const __vue_script__$2 = Logo;
-
-/* template */
-var __vue_render__$1 = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    { staticClass: "logo" },
-    [_c("d-navd", { attrs: { id: "navd" } })],
-    1
-  )
-};
-var __vue_staticRenderFns__$1 = [];
-__vue_render__$1._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$2 = undefined;
-  /* scoped */
-  const __vue_scope_id__$2 = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$2 = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$2 = false;
-  /* style inject */
-  
+  const __vue_is_functional_template__$1 = false;
   /* style inject SSR */
   
 
   
   var Logo$1 = normalizeComponent_1(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
-    __vue_inject_styles__$2,
-    __vue_script__$2,
-    __vue_scope_id__$2,
-    __vue_is_functional_template__$2,
-    __vue_module_identifier__$2,
-    undefined,
+    __vue_inject_styles__$1,
+    __vue_script__$1,
+    __vue_scope_id__$1,
+    __vue_is_functional_template__$1,
+    __vue_module_identifier__$1,
+    browser,
     undefined
   );
 
@@ -1634,7 +1681,7 @@ var script$1 = {
     this.subscribe( 'Menu', 'Menu.vue', this.onMenu ); } };
 
 /* script */
-const __vue_script__$3 = script$1;
+const __vue_script__$2 = script$1;
 
 /* template */
 var __vue_render__$2 = function() {
@@ -1764,28 +1811,28 @@ var __vue_staticRenderFns__$2 = [];
 __vue_render__$2._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$3 = function (inject) {
+  const __vue_inject_styles__$2 = function (inject) {
     if (!inject) return
-    inject("data-v-09f20d87_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.menu {\n  grid-template-columns: 5fr 40fr 25fr 10fr 10fr 10fr;\n  grid-template-rows: 6fr;\n  grid-template-areas: \"gleft ghome gsearch gcontact gsettings gsignon\";\n  display: grid;\n  background: black;\n  color: wheat;\n  font-family: Roboto, sans-serif;\n  font-weight: bold;\n}\n.menu .navh {\n  grid-area: ghome;\n  justify-self: start;\n  align-self: center;\n}\n.menu .navh i {\n  margin-right: 0.3em;\n}\n.menu .navh a {\n  color: wheat;\n  text-decoration: none;\n}\n.menu .search {\n  grid-area: gsearch;\n  justify-self: start;\n  align-self: center;\n}\n.menu .search label {\n  color: black;\n}\n.menu .search .input {\n  font-family: Roboto, sans-serif;\n  font-weight: bold;\n  font-size: 0.9em;\n  border-radius: 0 12px 12px 0;\n  background: wheat;\n  color: black;\n}\n.menu .contact {\n  grid-area: gcontact;\n  justify-self: start;\n  align-self: center;\n}\n.menu .signon {\n  grid-area: gsignon;\n  justify-self: start;\n  align-self: center;\n}\n.menu .settings {\n  grid-area: gsettings;\n  justify-self: start;\n  align-self: center;\n  position: relative;\n}\n.menu .settings ul {\n  display: none;\n  align-self: start;\n  list-style: none;\n  font-size: 0.7rem;\n  z-index: 3;\n  background: #222;\n  position: absolute;\n  left: 10px;\n  top: 12px;\n  width: 200px;\n  height: auto;\n  padding: 0.2em 0.2em 0.2em 0.6em;\n  border-radius: 0 24px 24px 0;\n}\n.menu .settings ul li {\n  display: inline;\n  border-radius: 0 18px 18px 0;\n  background-color: black;\n  color: wheat;\n  margin: 0.3em 0.3em 0.3em 0.3em;\n  padding: 0.2em 0.4em 0.2em 0.4em;\n}\n.menu .settings ul li i {\n  display: inline-block;\n  margin-right: 0.25em;\n}\n.menu .settings ul li span {\n  display: inline-block;\n}\n.menu .settings:hover ul {\n  display: grid;\n  align-self: start;\n  background: #444;\n}\n.menu .settings:hover ul li:hover {\n  background: #777;\n  color: black;\n}\n.menu div i {\n  margin-right: 0.3em;\n}\n", map: {"version":3,"sources":["Menu.vue","/Users/ax/Documents/prj/aug/vue/dash/Menu.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,mDAAmD;ECCrD,uBAAA;EDCE,qEAAqE;ECCvE,aAAA;EACA,iBAAA;EDCE,YAAY;ECCd,+BAAA;EACA,iBAAA;AACA;AACA;EACA,gBAAA;EACA,mBAAA;EACA,kBAAA;AACA;AACA;EACA,mBAAA;AACA;AACA;EACA,YAAA;EACA,qBAAA;AACA;AACA;EACA,kBAAA;EACA,mBAAA;EACA,kBAAA;AACA;AACA;EACA,YAAA;AACA;AACA;EDCE,+BAA+B;EAC/B,iBAAiB;EACjB,gBAAgB;EAChB,4BAA4B;EAC5B,iBAAiB;EACjB,YAAY;AACd;AACA;EACE,mBAAmB;EACnB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,oBAAoB;EACpB,mBAAmB;EACnB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,aAAa;EACb,iBAAiB;EACjB,gBAAgB;EAChB,iBAAiB;EACjB,UAAU;EACV,gBAAgB;EAChB,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,YAAY;EACZ,YAAY;EACZ,gCAAgC;EAChC,4BAA4B;AAC9B;AACA;EACE,eAAe;EACf,4BAA4B;EAC5B,uBAAuB;EACvB,YAAY;EACZ,+BAA+B;EAC/B,gCAAgC;AAClC;AACA;EACE,qBAAqB;EACrB,oBAAoB;AACtB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,aAAa;EACb,iBAAiB;EACjB,gBAAgB;AAClB;AACA;EACE,gBAAgB;EAChB,YAAY;AACd;AACA;EACE,mBAAmB;AACrB","file":"Menu.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.menu {\n  grid-template-columns: 5fr 40fr 25fr 10fr 10fr 10fr;\n  grid-template-rows: 6fr;\n  grid-template-areas: \"gleft ghome gsearch gcontact gsettings gsignon\";\n  display: grid;\n  background: black;\n  color: wheat;\n  font-family: Roboto, sans-serif;\n  font-weight: bold;\n}\n.menu .navh {\n  grid-area: ghome;\n  justify-self: start;\n  align-self: center;\n}\n.menu .navh i {\n  margin-right: 0.3em;\n}\n.menu .navh a {\n  color: wheat;\n  text-decoration: none;\n}\n.menu .search {\n  grid-area: gsearch;\n  justify-self: start;\n  align-self: center;\n}\n.menu .search label {\n  color: black;\n}\n.menu .search .input {\n  font-family: Roboto, sans-serif;\n  font-weight: bold;\n  font-size: 0.9em;\n  border-radius: 0 12px 12px 0;\n  background: wheat;\n  color: black;\n}\n.menu .contact {\n  grid-area: gcontact;\n  justify-self: start;\n  align-self: center;\n}\n.menu .signon {\n  grid-area: gsignon;\n  justify-self: start;\n  align-self: center;\n}\n.menu .settings {\n  grid-area: gsettings;\n  justify-self: start;\n  align-self: center;\n  position: relative;\n}\n.menu .settings ul {\n  display: none;\n  align-self: start;\n  list-style: none;\n  font-size: 0.7rem;\n  z-index: 3;\n  background: #222;\n  position: absolute;\n  left: 10px;\n  top: 12px;\n  width: 200px;\n  height: auto;\n  padding: 0.2em 0.2em 0.2em 0.6em;\n  border-radius: 0 24px 24px 0;\n}\n.menu .settings ul li {\n  display: inline;\n  border-radius: 0 18px 18px 0;\n  background-color: black;\n  color: wheat;\n  margin: 0.3em 0.3em 0.3em 0.3em;\n  padding: 0.2em 0.4em 0.2em 0.4em;\n}\n.menu .settings ul li i {\n  display: inline-block;\n  margin-right: 0.25em;\n}\n.menu .settings ul li span {\n  display: inline-block;\n}\n.menu .settings:hover ul {\n  display: grid;\n  align-self: start;\n  background: #444;\n}\n.menu .settings:hover ul li:hover {\n  background: #777;\n  color: black;\n}\n.menu div i {\n  margin-right: 0.3em;\n}\n","\n<template>\n  <div class=\"menu\">    <!-- <i class=\"fas fa-home\"></i> -->\n    <div class=\"navh\"><router-link :to=\"{ name:'Home'}\"><i class=\"fas fa-home\"></i>Home</router-link></div>\n    <div class=\"search\"   @click=\"click('Search')\">\n      <label for=\"search\">Search</label>\n      <i class=\"fas fa-search\"></i>\n      <input class=\"input\" placeholder=\" Search\" id=\"search\" type=\"text\" size=\"16\">\n    </div>\n    <div class=\"contact\"  @click=\"click('Contact')\" ><i class=\"fas fa-user\"       ></i>Contact</div>\n    <div class=\"signon\"   @click=\"click('Signon')\"  ><i class=\"fas fa-sign-in-alt\"></i>Sign On</div>\n    <div class=\"settings\"><i class=\"fas fa-cog\"></i><span>Settings</span>\n      <ul>\n        <li @click=\"click('Preferences')\"><i class=\"fas fa-cog\"></i><span>Preferences</span></li>\n        <li @click=\"click('Connection')\" ><i class=\"fas fa-cog\"></i><span>Connection</span></li>\n        <li @click=\"click('Privacy')\"    ><i class=\"fas fa-cog\"></i><span>Privacy</span></li>\n      </ul>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  export default {\n    data() {\n      return {} },\n    methods: {\n      click:  function( obj )  {\n        this.publish(  'Menu', obj    ); },\n      onMenu: function( obj )  {\n        console.log(  'Menu.onMenu()', obj ); } },\n    mounted: function () {\n      this.subscribe( 'Menu', 'Menu.vue', this.onMenu ) } };\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .grid1x5() { display:grid; grid-template-columns:5fr 40fr 25fr 10fr 10fr 10fr; grid-template-rows:@theme-north;\n    grid-template-areas: \"gleft ghome gsearch gcontact gsettings gsignon\"; }\n  \n  .menu {  .grid1x5(); display:grid; background:@theme-back; color:@theme-color;\n    font-family:@theme-font-family; font-weight:bold;    // Using because Navb sensistive to width\n    .navh     { grid-area:ghome;     justify-self:start; align-self:center;\n      i { margin-right:0.3em; }\n      a { color:@theme-color; text-decoration:none; }}\n    .search   { grid-area:gsearch;   justify-self:start; align-self:center;\n      label { color:@theme-back; }\n      .input{ font-family:@theme-font-family; font-weight:bold;  font-size:0.9em;\n        border-radius:0 12px 12px 0; background:@theme-color; color:@theme-back; } }\n    .contact  { grid-area:gcontact;  justify-self:start; align-self:center; }\n    .signon   { grid-area:gsignon;   justify-self:start; align-self:center; }\n    .settings { grid-area:gsettings; justify-self:start; align-self:center; position:relative;\n      ul { display:none; align-self:start; list-style:none; font-size:0.7rem; z-index:3;\n        background:@theme-back-menu;\n        position:absolute; left:10px; top:12px; width:200px; height:auto;\n        padding:0.2em 0.2em 0.2em 0.6em; border-radius:0 24px 24px 0;\n        li { display:inline; border-radius:0 18px 18px 0;  background-color:@theme-back; color:@theme-color;\n             margin:0.3em 0.3em 0.3em 0.3em; padding:0.2em 0.4em 0.2em 0.4em;\n          i {    display:inline-block; margin-right:0.25em; }\n          span { display:inline-block; } } } }\n    .settings:hover {\n      ul { display:grid; align-self:start; background:@theme-back-item;\n        li:hover { background:@theme-back-item-hover; color:@theme-color-item-hover; } } }\n     div i { margin-right:0.3em; } }\n  \n</style>\n"]}, media: undefined });
+    inject("data-v-09f20d87_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.menu {\n  grid-template-columns: 5fr 40fr 25fr 10fr 10fr 10fr;\n  grid-template-rows: 10fr;\n  grid-template-areas: \"gleft ghome gsearch gcontact gsettings gsignon\";\n  display: grid;\n  background: black;\n  color: wheat;\n  font-family: Roboto, sans-serif;\n  font-weight: bold;\n}\n.menu .navh {\n  grid-area: ghome;\n  justify-self: start;\n  align-self: center;\n}\n.menu .navh i {\n  margin-right: 0.3em;\n}\n.menu .navh a {\n  color: wheat;\n  text-decoration: none;\n}\n.menu .search {\n  grid-area: gsearch;\n  justify-self: start;\n  align-self: center;\n}\n.menu .search label {\n  color: black;\n}\n.menu .search .input {\n  font-family: Roboto, sans-serif;\n  font-weight: bold;\n  font-size: 0.9em;\n  border-radius: 0 12px 12px 0;\n  background: wheat;\n  color: black;\n}\n.menu .contact {\n  grid-area: gcontact;\n  justify-self: start;\n  align-self: center;\n}\n.menu .signon {\n  grid-area: gsignon;\n  justify-self: start;\n  align-self: center;\n}\n.menu .settings {\n  grid-area: gsettings;\n  justify-self: start;\n  align-self: center;\n  position: relative;\n}\n.menu .settings ul {\n  display: none;\n  align-self: start;\n  list-style: none;\n  font-size: 0.7rem;\n  z-index: 3;\n  background: #222;\n  position: absolute;\n  left: 10px;\n  top: 12px;\n  width: 200px;\n  height: auto;\n  padding: 0.2em 0.2em 0.2em 0.6em;\n  border-radius: 0 24px 24px 0;\n}\n.menu .settings ul li {\n  display: inline;\n  border-radius: 0 18px 18px 0;\n  background-color: black;\n  color: wheat;\n  margin: 0.3em 0.3em 0.3em 0.3em;\n  padding: 0.2em 0.4em 0.2em 0.4em;\n}\n.menu .settings ul li i {\n  display: inline-block;\n  margin-right: 0.25em;\n}\n.menu .settings ul li span {\n  display: inline-block;\n}\n.menu .settings:hover ul {\n  display: grid;\n  align-self: start;\n  background: #444;\n}\n.menu .settings:hover ul li:hover {\n  background: #777;\n  color: black;\n}\n.menu div i {\n  margin-right: 0.3em;\n}\n", map: {"version":3,"sources":["Menu.vue","/Users/ax/Documents/prj/aug/vue/dash/Menu.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,mDAAmD;ECCrD,wBAAA;EDCE,qEAAqE;ECCvE,aAAA;EACA,iBAAA;EDCE,YAAY;ECCd,+BAAA;EACA,iBAAA;AACA;AACA;EACA,gBAAA;EACA,mBAAA;EACA,kBAAA;AACA;AACA;EACA,mBAAA;AACA;AACA;EACA,YAAA;EACA,qBAAA;AACA;AACA;EACA,kBAAA;EACA,mBAAA;EACA,kBAAA;AACA;AACA;EACA,YAAA;AACA;AACA;EDCE,+BAA+B;EAC/B,iBAAiB;EACjB,gBAAgB;EAChB,4BAA4B;EAC5B,iBAAiB;EACjB,YAAY;AACd;AACA;EACE,mBAAmB;EACnB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,oBAAoB;EACpB,mBAAmB;EACnB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,aAAa;EACb,iBAAiB;EACjB,gBAAgB;EAChB,iBAAiB;EACjB,UAAU;EACV,gBAAgB;EAChB,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,YAAY;EACZ,YAAY;EACZ,gCAAgC;EAChC,4BAA4B;AAC9B;AACA;EACE,eAAe;EACf,4BAA4B;EAC5B,uBAAuB;EACvB,YAAY;EACZ,+BAA+B;EAC/B,gCAAgC;AAClC;AACA;EACE,qBAAqB;EACrB,oBAAoB;AACtB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,aAAa;EACb,iBAAiB;EACjB,gBAAgB;AAClB;AACA;EACE,gBAAgB;EAChB,YAAY;AACd;AACA;EACE,mBAAmB;AACrB","file":"Menu.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.menu {\n  grid-template-columns: 5fr 40fr 25fr 10fr 10fr 10fr;\n  grid-template-rows: 10fr;\n  grid-template-areas: \"gleft ghome gsearch gcontact gsettings gsignon\";\n  display: grid;\n  background: black;\n  color: wheat;\n  font-family: Roboto, sans-serif;\n  font-weight: bold;\n}\n.menu .navh {\n  grid-area: ghome;\n  justify-self: start;\n  align-self: center;\n}\n.menu .navh i {\n  margin-right: 0.3em;\n}\n.menu .navh a {\n  color: wheat;\n  text-decoration: none;\n}\n.menu .search {\n  grid-area: gsearch;\n  justify-self: start;\n  align-self: center;\n}\n.menu .search label {\n  color: black;\n}\n.menu .search .input {\n  font-family: Roboto, sans-serif;\n  font-weight: bold;\n  font-size: 0.9em;\n  border-radius: 0 12px 12px 0;\n  background: wheat;\n  color: black;\n}\n.menu .contact {\n  grid-area: gcontact;\n  justify-self: start;\n  align-self: center;\n}\n.menu .signon {\n  grid-area: gsignon;\n  justify-self: start;\n  align-self: center;\n}\n.menu .settings {\n  grid-area: gsettings;\n  justify-self: start;\n  align-self: center;\n  position: relative;\n}\n.menu .settings ul {\n  display: none;\n  align-self: start;\n  list-style: none;\n  font-size: 0.7rem;\n  z-index: 3;\n  background: #222;\n  position: absolute;\n  left: 10px;\n  top: 12px;\n  width: 200px;\n  height: auto;\n  padding: 0.2em 0.2em 0.2em 0.6em;\n  border-radius: 0 24px 24px 0;\n}\n.menu .settings ul li {\n  display: inline;\n  border-radius: 0 18px 18px 0;\n  background-color: black;\n  color: wheat;\n  margin: 0.3em 0.3em 0.3em 0.3em;\n  padding: 0.2em 0.4em 0.2em 0.4em;\n}\n.menu .settings ul li i {\n  display: inline-block;\n  margin-right: 0.25em;\n}\n.menu .settings ul li span {\n  display: inline-block;\n}\n.menu .settings:hover ul {\n  display: grid;\n  align-self: start;\n  background: #444;\n}\n.menu .settings:hover ul li:hover {\n  background: #777;\n  color: black;\n}\n.menu div i {\n  margin-right: 0.3em;\n}\n","\n<template>\n  <div class=\"menu\">    <!-- <i class=\"fas fa-home\"></i> -->\n    <div class=\"navh\"><router-link :to=\"{ name:'Home'}\"><i class=\"fas fa-home\"></i>Home</router-link></div>\n    <div class=\"search\"   @click=\"click('Search')\">\n      <label for=\"search\">Search</label>\n      <i class=\"fas fa-search\"></i>\n      <input class=\"input\" placeholder=\" Search\" id=\"search\" type=\"text\" size=\"16\">\n    </div>\n    <div class=\"contact\"  @click=\"click('Contact')\" ><i class=\"fas fa-user\"       ></i>Contact</div>\n    <div class=\"signon\"   @click=\"click('Signon')\"  ><i class=\"fas fa-sign-in-alt\"></i>Sign On</div>\n    <div class=\"settings\"><i class=\"fas fa-cog\"></i><span>Settings</span>\n      <ul>\n        <li @click=\"click('Preferences')\"><i class=\"fas fa-cog\"></i><span>Preferences</span></li>\n        <li @click=\"click('Connection')\" ><i class=\"fas fa-cog\"></i><span>Connection</span></li>\n        <li @click=\"click('Privacy')\"    ><i class=\"fas fa-cog\"></i><span>Privacy</span></li>\n      </ul>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  export default {\n    data() {\n      return {} },\n    methods: {\n      click:  function( obj )  {\n        this.publish(  'Menu', obj    ); },\n      onMenu: function( obj )  {\n        console.log(  'Menu.onMenu()', obj ); } },\n    mounted: function () {\n      this.subscribe( 'Menu', 'Menu.vue', this.onMenu ) } };\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .grid1x5() { display:grid; grid-template-columns:5fr 40fr 25fr 10fr 10fr 10fr; grid-template-rows:@theme-north;\n    grid-template-areas: \"gleft ghome gsearch gcontact gsettings gsignon\"; }\n  \n  .menu {  .grid1x5(); display:grid; background:@theme-back; color:@theme-color;\n    font-family:@theme-font-family; font-weight:bold;    // Using because Navb sensistive to width\n    .navh     { grid-area:ghome;     justify-self:start; align-self:center;\n      i { margin-right:0.3em; }\n      a { color:@theme-color; text-decoration:none; }}\n    .search   { grid-area:gsearch;   justify-self:start; align-self:center;\n      label { color:@theme-back; }\n      .input{ font-family:@theme-font-family; font-weight:bold;  font-size:0.9em;\n        border-radius:0 12px 12px 0; background:@theme-color; color:@theme-back; } }\n    .contact  { grid-area:gcontact;  justify-self:start; align-self:center; }\n    .signon   { grid-area:gsignon;   justify-self:start; align-self:center; }\n    .settings { grid-area:gsettings; justify-self:start; align-self:center; position:relative;\n      ul { display:none; align-self:start; list-style:none; font-size:0.7rem; z-index:3;\n        background:@theme-back-menu;\n        position:absolute; left:10px; top:12px; width:200px; height:auto;\n        padding:0.2em 0.2em 0.2em 0.6em; border-radius:0 24px 24px 0;\n        li { display:inline; border-radius:0 18px 18px 0;  background-color:@theme-back; color:@theme-color;\n             margin:0.3em 0.3em 0.3em 0.3em; padding:0.2em 0.4em 0.2em 0.4em;\n          i {    display:inline-block; margin-right:0.25em; }\n          span { display:inline-block; } } } }\n    .settings:hover {\n      ul { display:grid; align-self:start; background:@theme-back-item;\n        li:hover { background:@theme-back-item-hover; color:@theme-color-item-hover; } } }\n     div i { margin-right:0.3em; } }\n  \n</style>\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$3 = undefined;
+  const __vue_scope_id__$2 = undefined;
   /* module identifier */
-  const __vue_module_identifier__$3 = undefined;
+  const __vue_module_identifier__$2 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$3 = false;
+  const __vue_is_functional_template__$2 = false;
   /* style inject SSR */
   
 
   
   var Menu = normalizeComponent_1(
     { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 },
-    __vue_inject_styles__$3,
-    __vue_script__$3,
-    __vue_scope_id__$3,
-    __vue_is_functional_template__$3,
-    __vue_module_identifier__$3,
+    __vue_inject_styles__$2,
+    __vue_script__$2,
+    __vue_scope_id__$2,
+    __vue_is_functional_template__$2,
+    __vue_module_identifier__$2,
     browser,
     undefined
   );
@@ -1799,7 +1846,7 @@ __vue_render__$2._withStripped = true;
 var script$2 = {};
 
 /* script */
-const __vue_script__$4 = script$2;
+const __vue_script__$3 = script$2;
 
 /* template */
 var __vue_render__$3 = function() {
@@ -1812,13 +1859,13 @@ var __vue_staticRenderFns__$3 = [];
 __vue_render__$3._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$4 = undefined;
+  const __vue_inject_styles__$3 = undefined;
   /* scoped */
-  const __vue_scope_id__$4 = undefined;
+  const __vue_scope_id__$3 = undefined;
   /* module identifier */
-  const __vue_module_identifier__$4 = undefined;
+  const __vue_module_identifier__$3 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$4 = false;
+  const __vue_is_functional_template__$3 = false;
   /* style inject */
   
   /* style inject SSR */
@@ -1827,11 +1874,11 @@ __vue_render__$3._withStripped = true;
   
   var Find = normalizeComponent_1(
     { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
-    __vue_inject_styles__$4,
-    __vue_script__$4,
-    __vue_scope_id__$4,
-    __vue_is_functional_template__$4,
-    __vue_module_identifier__$4,
+    __vue_inject_styles__$3,
+    __vue_script__$3,
+    __vue_scope_id__$3,
+    __vue_is_functional_template__$3,
+    __vue_module_identifier__$3,
     undefined,
     undefined
   );
@@ -1871,17 +1918,34 @@ let Tocs = {
     isPrac: function(prac) {
       return this.prac === prac;  },
     onComp: function(comp) {
+      this.nav().set( { level:'Prac', comp:comp  } );
+      this.nav().pub( { level:'Tabs', tab:this.nav().tab } ); // Init view with Prac tab
       this.comp = comp; },
     onPrac: function(prac) {
+      this.nav().set( { level:'Prac', prac:prac } );
       this.prac = prac; },
     onDisp: function(prac,disp) {
+      this.nav().set( { level:'Disp', prac:prac, disp:disp } );
       this.prac = prac; this.disp = disp; },
+    onTabs: function () {}, // does nothing
+    onNone: function (obj) {
+      console.log( 'Tocs Level  ?', { obj:obj } ); },
+    onNav:  function (obj) {
+      // console.log( 'Tocs.onNav()', { toc:this.comp, nav:obj.comp } );
+      if( this.comp !== obj.comp ) {
+          this.comp  =  obj.comp; } // Just reset the comp since Nav will call router
+      switch( obj.level ) {
+        case 'Prac' : this.onPrac(obj.prac);          break;
+        case 'Disp' : this.onDisp(obj.prac,obj.disp); break;
+        case 'Tabs' : this.onTabs();                  break;
+        default     : this.onNone(obj); } },
     pubComp: function(comp) {
-      this.comp =   comp;
+      this.comp = comp;
       if( this.komps[this.comp].ikw ) {
           this.pubPrac('All'); } },
     pubPrac: function(prac) {
       this.prac = prac;
+   //this.nav().pub( { level:'Tabs', tab:this.nav().tab } ); // Init view with Prac tab
       this.publish( this.comp, { prac:this.prac, disp:'All' } ); },
     pubDisp: function(prac,disp) {
       this.publish( this.comp, { prac:prac, disp:disp  } ); },
@@ -1904,13 +1968,16 @@ let Tocs = {
           this.onComp(key);
           if( obj.disp==='All' ) { this.onPrac(obj.prac); }
           else                   { this.onDisp(obj.prac,obj.disp); } } ); } }
-    this.subscribe( 'Tocs', 'Tocs.vue', (obj) => {
-      if( obj==='Close' ) {
-        this.onComp('None'); } } ); }
+    this.subscribe( 'Nav', 'Tocs.vue', (obj) => {
+        this.onNav(obj); } ); }
   };
 
+// this.nav().pub( { level:'Tabs', tab:'Prac' } ); // Init view with Prac tab
+
+//this.comp = comp==='Close' ? 'None' : comp;
+
 /* script */
-const __vue_script__$5 = Tocs;
+const __vue_script__$4 = Tocs;
 
 /* template */
 var __vue_render__$4 = function() {
@@ -2038,60 +2105,380 @@ var __vue_staticRenderFns__$4 = [];
 __vue_render__$4._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$5 = function (inject) {
+  const __vue_inject_styles__$4 = function (inject) {
     if (!inject) return
-    inject("data-v-9654e0ac_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tocs {\n  font-family: Roboto, sans-serif;\n}\n.tocs ul {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  align-self: start;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25rem;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2rem 0.2rem 0.2rem 0.2rem;\n}\n.tocs ul li i {\n  margin-right: 0.4rem;\n}\n.tocs ul li a {\n  color: wheat;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 1.875rem;\n  font-weight: bold;\n  padding: 0;\n  margin: 0;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2rem 0.2rem 0.2rem 0.2rem;\n}\n.tocs ul li ul li i {\n  margin-right: 0.3rem;\n}\n.tocs ul li ul li a {\n  color: black;\n}\n.tocs ul li ul li ul {\n  font-size: 1.25rem;\n  padding: 0;\n  margin: 0 0 0 0.2rem;\n}\n.tocs ul li ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2rem 0.2rem 0.2rem 0.2rem;\n}\n.tocs ul li ul li ul li i {\n  margin-right: 0.25rem;\n}\n.tocs ul li ul li ul li:hover {\n  background-color: black !important;\n  color: white !important;\n}\n", map: {"version":3,"sources":["Tocs.vue","/Users/ax/Documents/prj/aug/vue/dash/Tocs.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,+BAA+B;AACjC;AACA;EACE,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;EACjB,aAAa;AACf;AACA;EACE,sBAAsB;EACtB,qBAAqB;EACrB,iBAAiB;EACjB,4BAA4B;EAC5B,mCAAmC;AACrC;AACA;EACE,oBAAoB;AACtB;AACA;EACE,YAAY;EACZ,qBAAqB;AACvB;AACA;EACE,mBAAmB;EACnB,iBAAiB;EACjB,UAAU;EACV,SAAS;AACX;AACA;EACE,4BAA4B;EAC5B,YAAY;EACZ,mCAAmC;AACrC;AACA;EACE,oBAAoB;AACtB;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,UAAU;ECCZ,oBAAA;ADCA;ACCA;EACA,4BAAA;EACA,YAAA;EACA,mCAAA;AACA;AACA;EACA,qBAAA;AACA;AACA;EACA,kCAAA;EACA,uBAAA;AACA","file":"Tocs.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tocs {\n  font-family: Roboto, sans-serif;\n}\n.tocs ul {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  align-self: start;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25rem;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2rem 0.2rem 0.2rem 0.2rem;\n}\n.tocs ul li i {\n  margin-right: 0.4rem;\n}\n.tocs ul li a {\n  color: wheat;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 1.875rem;\n  font-weight: bold;\n  padding: 0;\n  margin: 0;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2rem 0.2rem 0.2rem 0.2rem;\n}\n.tocs ul li ul li i {\n  margin-right: 0.3rem;\n}\n.tocs ul li ul li a {\n  color: black;\n}\n.tocs ul li ul li ul {\n  font-size: 1.25rem;\n  padding: 0;\n  margin: 0 0 0 0.2rem;\n}\n.tocs ul li ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2rem 0.2rem 0.2rem 0.2rem;\n}\n.tocs ul li ul li ul li i {\n  margin-right: 0.25rem;\n}\n.tocs ul li ul li ul li:hover {\n  background-color: black !important;\n  color: white !important;\n}\n","\n<template><div class=\"tocs\">\n  <ul>\n    <template v-for=\"komp in komps\">\n    <li :key=\"komp.name\">\n      <div   v-on:click=\"pubComp(komp.name)\">\n        <router-link :to=\"{ name:komp.comp }\"><i :class=\"komp.icon\"></i>{{komp.name}}</router-link>\n      </div>\n      <ul  v-if=\"comp===komp.name\"><template v-for=\"prac in komps[komp.name].pracs\" >\n        <li v-on:click=\"pubPrac(prac.name)\" :style=\"stylePrac(prac.name,prac.hsv)\" :key=\"prac.name\">\n          <i :class=\"prac.icon\"></i>\n          <router-link v-if=\" komp.link\" :to=\"{ name:prac.name }\">{{prac.name}}</router-link>\n          <span        v-if=\"!komp.link\">{{prac.name}}</span>\n          <ul v-show=\"isPrac(prac.name)\"><template v-for=\"disp in prac.disps\">\n            <li v-on:click.stop=\"pubDisp(prac.name,disp.name)\" :style=\"styleDisp(disp.name,disp.hsv)\" :key=\"disp.name\">\n              <i :class=\"disp.icon\"></i>{{disp.name}}</li>\n          </template></ul>\n        </li>\n      </template></ul>\n    </li>\n  </template>\n  </ul>\n</div></template>\n\n<script type=\"module\">\n  \n  let Tocs = {\n    \n    data() { return {  comp:'None', prac:'None', disp:'None', komps:{} } },\n    \n    methods: {\n      \n      isPrac: function(prac) {\n        return this.prac === prac;  },\n      onComp: function(comp) {\n        this.comp = comp; },\n      onPrac: function(prac) {\n        this.prac = prac; },\n      onDisp: function(prac,disp) {\n        this.prac = prac; this.disp = disp; },\n      pubComp: function(comp) {\n        this.comp =   comp;\n        if( this.komps[this.comp].ikw ) {\n            this.pubPrac('All'); } },\n      pubPrac: function(prac) {\n        this.prac = prac;\n        this.publish( this.comp, { prac:this.prac, disp:'All' } ); },\n      pubDisp: function(prac,disp) {\n        this.publish( this.comp, { prac:prac, disp:disp  } ); },\n      doSelect: function(select) {\n        this.publish( 'Select',   select ); },\n      stylePrac: function( prac, hsv ) {\n        if( prac===false ) {} // Consume arg\n        return { backgroundColor:this.toRgbaHsv(hsv) }; },\n      styleDisp: function( disp, hsv ) {\n        if( this.disp!==disp ) {\n          return { color:'black', backgroundColor:this.toRgbaHsv(hsv) }; }\n        else {\n          return { color:'white', backgroundColor:'black' }; } } },\n    \n    mounted: function () {\n      this.komps = this.kompsTocs();\n      for( let key in this.komps ) {\n        if( this.komps.hasOwnProperty(key) && this.komps[key].ikw ) {\n          this.komps[key].pracs = this.pracs(key);\n          this.subscribe( key, 'Tocs.vue', (obj) => {\n            this.onComp(key);\n            if( obj.disp==='All' ) { this.onPrac(obj.prac); }\n            else                   { this.onDisp(obj.prac,obj.disp); } } ); } }\n      this.subscribe( 'Tocs', 'Tocs.vue', (obj) => {\n        if( obj==='Close' ) {\n          this.onComp('None'); } } ); }\n    }\n  \n   export default Tocs;\n   \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .tocs { font-family:@theme-font-family;\n    ul { padding:0; margin:0; list-style:none; align-self:start; display:grid;\n      li  { background-color:@theme-back-tocs-comp; padding-left:0.25rem; align-self:start;   // Comp\n            border-radius:0 24px 24px 0; margin:0.2rem 0.2rem 0.2rem 0.2rem;\n         i  { margin-right: 0.4rem; }\n         a  { color:@theme-color; text-decoration:none; }\n         ul { font-size:@theme-tocs-size*0.75; font-weight:bold; padding:0; margin:0;\n           li { border-radius:0 12px 12px 0; color:@theme-back; margin:0.2rem 0.2rem 0.2rem 0.2rem;            // Prac\n             i { margin-right: 0.3rem; }\n             a { color:@theme-high; }\n             ul { font-size:@theme-tocs-size*0.50; padding:0; margin:0 0 0 0.2rem;\n               li { border-radius:0 12px 12px 0; color:@theme-back; margin:0.2rem 0.2rem 0.2rem 0.2rem;       // Disp\n                 i { margin-right: 0.25rem; } }\n               li:hover { background-color:@theme-back!important; color:@theme-color-tocs-disp!important; } } } } } } }\n</style>\n"]}, media: undefined });
+    inject("data-v-6b74a12a_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tocs {\n  font-family: Roboto, sans-serif;\n}\n.tocs ul {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  align-self: start;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25rem;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2rem 0.2rem 0.2rem 0.2rem;\n}\n.tocs ul li i {\n  margin-right: 0.4rem;\n}\n.tocs ul li a {\n  color: wheat;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 1.5rem;\n  font-weight: bold;\n  padding: 0;\n  margin: 0;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2rem 0.2rem 0.2rem 0.2rem;\n}\n.tocs ul li ul li i {\n  margin-right: 0.3rem;\n}\n.tocs ul li ul li a {\n  color: black;\n}\n.tocs ul li ul li ul {\n  font-size: 1.25rem;\n  padding: 0;\n  margin: 0 0 0 0.2rem;\n}\n.tocs ul li ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2rem 0.2rem 0.2rem 0.2rem;\n}\n.tocs ul li ul li ul li i {\n  margin-right: 0.25rem;\n}\n.tocs ul li ul li ul li:hover {\n  background-color: black !important;\n  color: white !important;\n}\n", map: {"version":3,"sources":["Tocs.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,+BAA+B;AACjC;AACA;EACE,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;EACjB,aAAa;AACf;AACA;EACE,sBAAsB;EACtB,qBAAqB;EACrB,iBAAiB;EACjB,4BAA4B;EAC5B,mCAAmC;AACrC;AACA;EACE,oBAAoB;AACtB;AACA;EACE,YAAY;EACZ,qBAAqB;AACvB;AACA;EACE,iBAAiB;EACjB,iBAAiB;EACjB,UAAU;EACV,SAAS;AACX;AACA;EACE,4BAA4B;EAC5B,YAAY;EACZ,mCAAmC;AACrC;AACA;EACE,oBAAoB;AACtB;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,oBAAoB;AACtB;AACA;EACE,4BAA4B;EAC5B,YAAY;EACZ,mCAAmC;AACrC;AACA;EACE,qBAAqB;AACvB;AACA;EACE,kCAAkC;EAClC,uBAAuB;AACzB","file":"Tocs.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tocs {\n  font-family: Roboto, sans-serif;\n}\n.tocs ul {\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  align-self: start;\n  display: grid;\n}\n.tocs ul li {\n  background-color: #333;\n  padding-left: 0.25rem;\n  align-self: start;\n  border-radius: 0 24px 24px 0;\n  margin: 0.2rem 0.2rem 0.2rem 0.2rem;\n}\n.tocs ul li i {\n  margin-right: 0.4rem;\n}\n.tocs ul li a {\n  color: wheat;\n  text-decoration: none;\n}\n.tocs ul li ul {\n  font-size: 1.5rem;\n  font-weight: bold;\n  padding: 0;\n  margin: 0;\n}\n.tocs ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2rem 0.2rem 0.2rem 0.2rem;\n}\n.tocs ul li ul li i {\n  margin-right: 0.3rem;\n}\n.tocs ul li ul li a {\n  color: black;\n}\n.tocs ul li ul li ul {\n  font-size: 1.25rem;\n  padding: 0;\n  margin: 0 0 0 0.2rem;\n}\n.tocs ul li ul li ul li {\n  border-radius: 0 12px 12px 0;\n  color: black;\n  margin: 0.2rem 0.2rem 0.2rem 0.2rem;\n}\n.tocs ul li ul li ul li i {\n  margin-right: 0.25rem;\n}\n.tocs ul li ul li ul li:hover {\n  background-color: black !important;\n  color: white !important;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$5 = undefined;
+  const __vue_scope_id__$4 = undefined;
   /* module identifier */
-  const __vue_module_identifier__$5 = undefined;
+  const __vue_module_identifier__$4 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$5 = false;
+  const __vue_is_functional_template__$4 = false;
   /* style inject SSR */
   
 
   
   var Tocs$1 = normalizeComponent_1(
     { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
-    __vue_inject_styles__$5,
-    __vue_script__$5,
-    __vue_scope_id__$5,
-    __vue_is_functional_template__$5,
-    __vue_module_identifier__$5,
+    __vue_inject_styles__$4,
+    __vue_script__$4,
+    __vue_scope_id__$4,
+    __vue_is_functional_template__$4,
+    __vue_module_identifier__$4,
     browser,
     undefined
   );
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/**
+ *
+ * Author: Gianluca Guarini
+ * Contact: gianluca.guarini@gmail.com
+ * Website: http://www.gianlucaguarini.com/
+ * Twitter: @gianlucaguarini
+ *
+ * Copyright (c) Gianluca Guarini
+ *
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ **/
+/* global jQuery */
+let Tocca = function() {
 
+  if (typeof document.createEvent !== 'function') return false // no tap events here
+  // helpers
+  var pointerEvent = function(type) {
+      let lo = type.toLowerCase(),
+        ms = 'MS' + type;
+      return navigator.msPointerEnabled ? ms : window.PointerEvent ? lo : false
+    },
+    touchEvent = function(name) {
+      return 'on' + name in window ? name : false
+    },
+    defaults = {
+      useJquery:      typeof jQuery !== 'undefined',
+      swipeThreshold:    100,
+      tapThreshold:      150, // range of time where a tap event could be detected
+      dbltapThreshold:   300, // delay needed to detect a double tap  originall 200
+      longtapThreshold: 1000, // delay needed to detect a long tap
+      tapPrecision:     60 / 2, // touch events boundaries ( 60px by default )
+      justTouchEvents:  false
+    },
+    // was initially triggered a "touchstart" event?
+    wasTouch = false,
+    touchevents = {
+      touchstart: touchEvent('touchstart') || pointerEvent('PointerDown' ),
+      touchend:   touchEvent('touchend'  ) || pointerEvent('PointerUp'   ),
+      touchmove:  touchEvent('touchmove' ) || pointerEvent('PointerMove' )
+    },
+    isTheSameFingerId = function(e) {
+      return !e.pointerId || typeof pointerId === 'undefined' || e.pointerId === pointerId
+    },
+    setListener = function(elm, events, callback) {
+      let eventsArray = events.split(' '),
+        i = eventsArray.length;
+
+      while (i--) {
+        elm.addEventListener(eventsArray[i], callback, false);
+      }
+    },
+    getPointerEvent = function(event) {
+      return event.targetTouches ? event.targetTouches[0] : event
+    },
+    isMultipleTouches = function(event) {
+      return event.targetTouches && event.targetTouches.length > 1
+    },
+    getTimestamp = function () {
+      return new Date().getTime()
+    },
+    sendEvent = function(elm, eventName, originalEvent, data) {
+      let customEvent = document.createEvent('Event');
+      customEvent.originalEvent = originalEvent;
+      data = data || {};
+      data.x = currX;
+      data.y = currY;
+      //data.distance = data.distance
+
+      // jquery
+      if (defaults.useJquery) {
+        customEvent = jQuery.Event(eventName, {originalEvent: originalEvent});
+        jQuery(elm).trigger(customEvent, data);
+      }
+
+      // addEventListener
+      if (customEvent.initEvent) {
+        for (let key in data) {
+          customEvent[key] = data[key];
+        }
+
+        customEvent.initEvent(eventName, true, true);
+        elm.dispatchEvent(customEvent);
+      }
+
+      // detect all the inline events
+      // also on the parent nodes
+      while (elm) {
+        // inline
+        if (elm['on' + eventName])
+          elm['on' + eventName](customEvent);
+        elm = elm.parentNode;
+      }
+
+    },
+
+    onTouchStart = function(e) {
+      /**
+       * Skip all the mouse events
+       * events order:
+       * Chrome:
+       *   touchstart
+       *   touchmove
+       *   touchend
+       *   mousedown
+       *   mousemove
+       *   mouseup <- this must come always after a "touchstart"
+       *
+       * Safari
+       *   touchstart
+       *   mousedown
+       *   touchmove
+       *   mousemove
+       *   touchend
+       *   mouseup <- this must come always after a "touchstart"
+       */
+
+      if (!isTheSameFingerId(e) || isMultipleTouches(e)) return
+
+      pointerId = e.pointerId;
+
+      // it looks like it was a touch event!
+      if (e.type !== 'mousedown')
+        wasTouch = true;
+
+      // skip this event we don't need to track it now
+      if (e.type === 'mousedown' && wasTouch) return
+
+      let pointer = getPointerEvent(e);
+
+      // caching the current x
+      cachedX = currX = pointer.pageX;
+      // caching the current y
+      cachedY = currY = pointer.pageY;
+
+      longtapTimer = setTimeout(function() {
+        sendEvent(e.target, 'longtap', e);
+        target = e.target;
+      }, defaults.longtapThreshold);
+
+      // we will use these variables on the touchend events
+      timestamp = getTimestamp();
+
+      tapNum++;
+
+    },
+    onTouchEnd = function(e) {
+      if (!isTheSameFingerId(e) || isMultipleTouches(e)) return
+
+      pointerId = undefined;
+
+      // skip the mouse events if previously a touch event was dispatched
+      // and reset the touch flag
+      if (e.type === 'mouseup' && wasTouch) {
+        wasTouch = false;
+        return
+      }
+
+      let eventsArr = [],
+        now = getTimestamp(),
+        deltaY = cachedY - currY,
+        deltaX = cachedX - currX;
+
+      // clear the previous timer if it was set
+      clearTimeout(dblTapTimer);
+      // kill the long tap timer
+      clearTimeout(longtapTimer);
+
+      if (deltaX <= -defaults.swipeThreshold)
+        eventsArr.push('swiperight');
+
+      if (deltaX >= defaults.swipeThreshold)
+        eventsArr.push('swipeleft');
+
+      if (deltaY <= -defaults.swipeThreshold)
+        eventsArr.push('swipedown');
+
+      if (deltaY >= defaults.swipeThreshold)
+        eventsArr.push('swipeup');
+
+      if (eventsArr.length) {
+        for (let i = 0; i < eventsArr.length; i++) {
+          let eventName = eventsArr[i];
+          sendEvent(e.target, eventName, e, {
+            distance: {
+              x: Math.abs(deltaX),
+              y: Math.abs(deltaY)
+            }
+          });
+        }
+        // reset the tap counter
+        tapNum = 0;
+      } else {
+
+        if (
+          cachedX >= currX - defaults.tapPrecision &&
+          cachedX <= currX + defaults.tapPrecision &&
+          cachedY >= currY - defaults.tapPrecision &&
+          cachedY <= currY + defaults.tapPrecision
+        ) {
+          if (timestamp + defaults.tapThreshold - now >= 0)
+          {
+            // Here you get the Tap event
+            sendEvent(e.target, tapNum >= 2 && target === e.target ? 'dbltap' : 'tap', e);
+            target= e.target;
+          }
+        }
+
+        // reset the tap counter
+        dblTapTimer = setTimeout(function() {
+          tapNum = 0;
+        }, defaults.dbltapThreshold);
+
+      }
+    },
+    onTouchMove = function(e) {
+      if (!isTheSameFingerId(e)) return
+      // skip the mouse move events if the touch events were previously detected
+      if (e.type === 'mousemove' && wasTouch) return
+
+      let pointer = getPointerEvent(e);
+      currX = pointer.pageX;
+      currY = pointer.pageY;
+    },
+
+    setOptions = function(options) {   // Configure the tocca default options at any time
+      for (let opt in options) {
+        defaults[opt] = options[opt]; }
+      return defaults
+    },
+
+    tapNum = 0,
+    pointerId, currX, currY, cachedX, cachedY, timestamp, target, dblTapTimer, longtapTimer;
+
+  //setting the events listeners
+  // we need to debounce the callbacks because some devices multiple events are triggered at same time
+  setListener( document, touchevents.touchstart + (defaults.justTouchEvents ? '' : ' mousedown'), onTouchStart );
+  setListener( document, touchevents.touchend   + (defaults.justTouchEvents ? '' : ' mouseup'  ), onTouchEnd   );
+  setListener( document, touchevents.touchmove  + (defaults.justTouchEvents ? '' : ' mousemove'), onTouchMove  );
+
+  setOptions({});
+
+};
+
+var Touch;
+
+Touch = class Touch {
+  constructor() {
+    this.tocca = Tocca();
+    this.dirs = ['up', 'down', 'left', 'right'];
+    this.evts = ['tap', 'dbltap', 'longtap', 'swipeleft', 'swipeup', 'swiperight', 'swipedown'];
+  }
+
+  onNav(elem, nav) {
+    this.tap(elem, function(e) {
+      return nav.dir('next', e);
+    });
+    this.dbl(elem, function(e) {
+      return nav.dir('next', e);
+    });
+    this.hold(elem, function(e) {
+      return nav.dir('prev', e);
+    });
+    this.right(elem, function(e) {
+      return nav.dir('west', e); // All directions reversed
+    });
+    this.down(elem, function(e) {
+      return nav.dir('north', e);
+    });
+    this.left(elem, function(e) {
+      return nav.dir('east', e);
+    });
+    this.up(elem, function(e) {
+      return nav.dir('south', e);
+    });
+  }
+
+  tap(elem, onEvent) {
+    elem.addEventListener('tap', onEvent);
+  }
+
+  dbl(elem, onEvent) {
+    elem.addEventListener('dbltap', onEvent);
+  }
+
+  hold(elem, onEvent) {
+    elem.addEventListener('longtap', onEvent);
+  }
+
+  left(elem, onEvent) {
+    elem.addEventListener('swipeleft', onEvent);
+  }
+
+  up(elem, onEvent) {
+    elem.addEventListener('swipeup', onEvent);
+  }
+
+  right(elem, onEvent) {
+    elem.addEventListener('swiperight', onEvent);
+  }
+
+  down(elem, onEvent) {
+    elem.addEventListener('swipedown', onEvent);
+  }
+
+};
+
+var Touch$1 = Touch;
+
+//
 
 var script$3 = {
+
+  data() { return { touch:null, elem:null }; },
   
   methods:{
     show:function() {
-      return this.$route.name===null } } };
+      return this.$route.name===null } },
+  
+  mounted: function () {
+    this.$nextTick( function() {  // Enable touch events inside all views
+      this.touch = new Touch$1();
+      this.elem  = this.$refs['View'];
+      this.touch.onNav( this.elem, this.nav() );
+    } ); }
+    
+  };
 
 /* script */
-const __vue_script__$6 = script$3;
+const __vue_script__$5 = script$3;
 
 /* template */
 var __vue_render__$5 = function() {
@@ -2100,6 +2487,7 @@ var __vue_render__$5 = function() {
   var _c = _vm._self._c || _h;
   return _c(
     "div",
+    { ref: "View" },
     [
       _c("router-view", { attrs: { name: "Data" } }),
       _vm._v(" "),
@@ -2132,6 +2520,52 @@ var __vue_staticRenderFns__$5 = [];
 __vue_render__$5._withStripped = true;
 
   /* style */
+  const __vue_inject_styles__$5 = undefined;
+  /* scoped */
+  const __vue_scope_id__$5 = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$5 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$5 = false;
+  /* style inject */
+  
+  /* style inject SSR */
+  
+
+  
+  var View = normalizeComponent_1(
+    { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
+    __vue_inject_styles__$5,
+    __vue_script__$5,
+    __vue_scope_id__$5,
+    __vue_is_functional_template__$5,
+    __vue_module_identifier__$5,
+    undefined,
+    undefined
+  );
+
+//
+//
+//
+//
+//
+
+var script$4 = {};
+
+/* script */
+const __vue_script__$6 = script$4;
+
+/* template */
+var __vue_render__$6 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { staticClass: "side" })
+};
+var __vue_staticRenderFns__$6 = [];
+__vue_render__$6._withStripped = true;
+
+  /* style */
   const __vue_inject_styles__$6 = undefined;
   /* scoped */
   const __vue_scope_id__$6 = undefined;
@@ -2145,8 +2579,8 @@ __vue_render__$5._withStripped = true;
   
 
   
-  var View = normalizeComponent_1(
-    { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
+  var Side = normalizeComponent_1(
+    { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
     __vue_inject_styles__$6,
     __vue_script__$6,
     __vue_scope_id__$6,
@@ -2162,20 +2596,20 @@ __vue_render__$5._withStripped = true;
 //
 //
 
-var script$4 = {};
+var script$5 = {};
 
 /* script */
-const __vue_script__$7 = script$4;
+const __vue_script__$7 = script$5;
 
 /* template */
-var __vue_render__$6 = function() {
+var __vue_render__$7 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", { staticClass: "side" })
+  return _c("div", { staticClass: "pref" })
 };
-var __vue_staticRenderFns__$6 = [];
-__vue_render__$6._withStripped = true;
+var __vue_staticRenderFns__$7 = [];
+__vue_render__$7._withStripped = true;
 
   /* style */
   const __vue_inject_styles__$7 = undefined;
@@ -2191,8 +2625,8 @@ __vue_render__$6._withStripped = true;
   
 
   
-  var Side = normalizeComponent_1(
-    { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
+  var Pref = normalizeComponent_1(
+    { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
     __vue_inject_styles__$7,
     __vue_script__$7,
     __vue_scope_id__$7,
@@ -2208,20 +2642,20 @@ __vue_render__$6._withStripped = true;
 //
 //
 
-var script$5 = {};
+var script$6 = {};
 
 /* script */
-const __vue_script__$8 = script$5;
+const __vue_script__$8 = script$6;
 
 /* template */
-var __vue_render__$7 = function() {
+var __vue_render__$8 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", { staticClass: "pref" })
+  return _c("div", { staticClass: "foot" })
 };
-var __vue_staticRenderFns__$7 = [];
-__vue_render__$7._withStripped = true;
+var __vue_staticRenderFns__$8 = [];
+__vue_render__$8._withStripped = true;
 
   /* style */
   const __vue_inject_styles__$8 = undefined;
@@ -2237,8 +2671,8 @@ __vue_render__$7._withStripped = true;
   
 
   
-  var Pref = normalizeComponent_1(
-    { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
+  var Foot = normalizeComponent_1(
+    { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
     __vue_inject_styles__$8,
     __vue_script__$8,
     __vue_scope_id__$8,
@@ -2254,56 +2688,10 @@ __vue_render__$7._withStripped = true;
 //
 //
 
-var script$6 = {};
-
-/* script */
-const __vue_script__$9 = script$6;
-
-/* template */
-var __vue_render__$8 = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c("div", { staticClass: "foot" })
-};
-var __vue_staticRenderFns__$8 = [];
-__vue_render__$8._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$9 = undefined;
-  /* scoped */
-  const __vue_scope_id__$9 = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$9 = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$9 = false;
-  /* style inject */
-  
-  /* style inject SSR */
-  
-
-  
-  var Foot = normalizeComponent_1(
-    { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
-    __vue_inject_styles__$9,
-    __vue_script__$9,
-    __vue_scope_id__$9,
-    __vue_is_functional_template__$9,
-    __vue_module_identifier__$9,
-    undefined,
-    undefined
-  );
-
-//
-//
-//
-//
-//
-
 var script$7 = {};
 
 /* script */
-const __vue_script__$a = script$7;
+const __vue_script__$9 = script$7;
 
 /* template */
 var __vue_render__$9 = function() {
@@ -2316,28 +2704,28 @@ var __vue_staticRenderFns__$9 = [];
 __vue_render__$9._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$a = function (inject) {
+  const __vue_inject_styles__$9 = function (inject) {
     if (!inject) return
     inject("data-v-52d499cd_0", { source: "\n.trak {\n}\n", map: {"version":3,"sources":["/Users/ax/Documents/prj/aug/vue/dash/Trak.vue"],"names":[],"mappings":";AAUA;AAAA","file":"Trak.vue","sourcesContent":["\n<template>\n  <div class=\"trak\"></div>\n</template>\n\n<script>\n  export default {}\n</script>\n\n<style type=\"module\">\n     .trak { }\n</style>\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$a = undefined;
+  const __vue_scope_id__$9 = undefined;
   /* module identifier */
-  const __vue_module_identifier__$a = undefined;
+  const __vue_module_identifier__$9 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$a = false;
+  const __vue_is_functional_template__$9 = false;
   /* style inject SSR */
   
 
   
   var Trak = normalizeComponent_1(
     { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
-    __vue_inject_styles__$a,
-    __vue_script__$a,
-    __vue_scope_id__$a,
-    __vue_is_functional_template__$a,
-    __vue_module_identifier__$a,
+    __vue_inject_styles__$9,
+    __vue_script__$9,
+    __vue_scope_id__$9,
+    __vue_is_functional_template__$9,
+    __vue_module_identifier__$9,
     browser,
     undefined
   );
@@ -2352,7 +2740,7 @@ let Dash = {
       'd-pref':Pref, 'd-foot':Foot, 'd-trak':Trak } };
 
 /* script */
-const __vue_script__$b = Dash;
+const __vue_script__$a = Dash;
 
 /* template */
 var __vue_render__$a = function() {
@@ -2388,28 +2776,28 @@ var __vue_staticRenderFns__$a = [];
 __vue_render__$a._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$b = function (inject) {
+  const __vue_inject_styles__$a = function (inject) {
     if (!inject) return
-    inject("data-v-729eeae4_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash {\n  font-family: Roboto, sans-serif;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11fr 85fr 4fr;\n  grid-template-rows: 6fr 88fr 6fr;\n  grid-template-areas: \"logo menu find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #menu {\n  grid-area: menu;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 2.5rem;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n", map: {"version":3,"sources":["Dash.vue","/Users/ax/Documents/prj/aug/vue/dash/Dash.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,+BAA+B;EAC/B,kBAAkB;EAClB,OAAO;ECCT,MAAA;EDCE,QAAQ;ECCV,SAAA;EACA,aAAA;EACA,oCAAA;EACA,gCAAA;EACA,uEAAA;AACA;AACA;EACA,eAAA;EDCE,qBAAqB;ECCvB,mBAAA;EACA,aAAA;EACA,uBAAA;EACA,iBAAA;AACA;AACA;EACA,eAAA;EACA,qBAAA;EACA,mBAAA;EDCE,aAAa;EACb,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,iBAAiB;AACnB","file":"Dash.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash {\n  font-family: Roboto, sans-serif;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11fr 85fr 4fr;\n  grid-template-rows: 6fr 88fr 6fr;\n  grid-template-areas: \"logo menu find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #menu {\n  grid-area: menu;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 2.5rem;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n","\n<template>\n  <div class=\"dash\">\n    <d-logo id=\"logo\"></d-logo>\n    <d-menu id=\"menu\"></d-menu>\n    <d-find id=\"find\"></d-find>\n    <d-tocs id=\"tocs\"></d-tocs>\n    <d-view id=\"view\"></d-view>\n    <d-side id=\"side\"></d-side>\n    <d-pref id=\"pref\"></d-pref>\n    <d-foot id=\"foot\"></d-foot>\n    <d-trak id=\"trak\"></d-trak>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Logo from '../dash/Logo.vue';\n  import Menu from '../dash/Menu.vue';\n  import Find from '../dash/Find.vue';\n  import Tocs from '../dash/Tocs.vue';\n  import View from '../dash/View.vue';\n  import Side from '../dash/Side.vue';\n  import Pref from '../dash/Pref.vue';\n  import Foot from '../dash/Foot.vue';\n  import Trak from '../dash/Trak.vue';\n  \n  let Dash = {\n      name: 'dash',\n      components: {\n        'd-logo':Logo, 'd-menu':Menu, 'd-find':Find,\n        'd-tocs':Tocs, 'd-view':View, 'd-side':Side,\n        'd-pref':Pref, 'd-foot':Foot, 'd-trak':Trak } };\n  \n  export default Dash;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  .dash { font-family:@theme-font-family;\n   position:absolute; left:0; top:0; right:0; bottom:0; display:grid;\n   grid-template-columns: @theme-west  @theme-center @theme-east;\n   grid-template-rows:    @theme-north @theme-middle @theme-south;\n   grid-template-areas:\n     \"logo menu find\"\n     \"tocs view side\"\n     \"pref foot trak\";\n  \n  #logo { grid-area:logo; justify-self:stretch; align-self:stretch; display:grid; .theme-logo; }\n  #menu { grid-area:menu; justify-self:stretch; align-self:stretch; display:grid; .theme-menu; }\n  #find { grid-area:find; justify-self:stretch; align-self:stretch; display:grid; .theme-find; }\n  #tocs { grid-area:tocs; justify-self:stretch; align-self:stretch; display:grid; .theme-tocs; }\n  #view { grid-area:view; justify-self:stretch; align-self:stretch; display:grid; .theme-view; }\n  #side { grid-area:side; justify-self:stretch; align-self:stretch; display:grid; .theme-side; }\n  #pref { grid-area:pref; justify-self:stretch; align-self:stretch; display:grid; .theme-pref; }\n  #foot { grid-area:foot; justify-self:stretch; align-self:stretch; display:grid; .theme-foot; }\n  #trak { grid-area:trak; justify-self:stretch; align-self:stretch; display:grid; .theme-trak; } }\n  \n</style>\n\n"]}, media: undefined });
+    inject("data-v-729eeae4_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash {\n  font-family: Roboto, sans-serif;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11fr 85fr 4fr;\n  grid-template-rows: 10fr 85fr 5fr;\n  grid-template-areas: \"logo menu find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #menu {\n  grid-area: menu;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 2.5rem;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n", map: {"version":3,"sources":["Dash.vue","/Users/ax/Documents/prj/aug/vue/dash/Dash.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,+BAA+B;EAC/B,kBAAkB;EAClB,OAAO;ECCT,MAAA;EDCE,QAAQ;ECCV,SAAA;EACA,aAAA;EACA,oCAAA;EACA,iCAAA;EACA,uEAAA;AACA;AACA;EACA,eAAA;EDCE,qBAAqB;ECCvB,mBAAA;EACA,aAAA;EACA,uBAAA;EACA,iBAAA;AACA;AACA;EACA,eAAA;EACA,qBAAA;EACA,mBAAA;EDCE,aAAa;EACb,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,aAAa;EACb,uBAAuB;EACvB,iBAAiB;AACnB","file":"Dash.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash {\n  font-family: Roboto, sans-serif;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  grid-template-columns: 11fr 85fr 4fr;\n  grid-template-rows: 10fr 85fr 5fr;\n  grid-template-areas: \"logo menu find\" \"tocs view side\" \"pref foot trak\";\n}\n.dash #logo {\n  grid-area: logo;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #menu {\n  grid-area: menu;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #find {\n  grid-area: find;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #tocs {\n  grid-area: tocs;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 2.5rem;\n}\n.dash #view {\n  grid-area: view;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #side {\n  grid-area: side;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #pref {\n  grid-area: pref;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #foot {\n  grid-area: foot;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dash #trak {\n  grid-area: trak;\n  justify-self: stretch;\n  align-self: stretch;\n  display: grid;\n  background-color: black;\n  font-size: 1.5rem;\n}\n","\n<template>\n  <div class=\"dash\">\n    <d-logo id=\"logo\"></d-logo>\n    <d-menu id=\"menu\"></d-menu>\n    <d-find id=\"find\"></d-find>\n    <d-tocs id=\"tocs\"></d-tocs>\n    <d-view id=\"view\"></d-view>\n    <d-side id=\"side\"></d-side>\n    <d-pref id=\"pref\"></d-pref>\n    <d-foot id=\"foot\"></d-foot>\n    <d-trak id=\"trak\"></d-trak>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Logo from '../dash/Logo.vue';\n  import Menu from '../dash/Menu.vue';\n  import Find from '../dash/Find.vue';\n  import Tocs from '../dash/Tocs.vue';\n  import View from '../dash/View.vue';\n  import Side from '../dash/Side.vue';\n  import Pref from '../dash/Pref.vue';\n  import Foot from '../dash/Foot.vue';\n  import Trak from '../dash/Trak.vue';\n  \n  let Dash = {\n      name: 'dash',\n      components: {\n        'd-logo':Logo, 'd-menu':Menu, 'd-find':Find,\n        'd-tocs':Tocs, 'd-view':View, 'd-side':Side,\n        'd-pref':Pref, 'd-foot':Foot, 'd-trak':Trak } };\n  \n  export default Dash;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  .dash { font-family:@theme-font-family;\n   position:absolute; left:0; top:0; right:0; bottom:0; display:grid;\n   grid-template-columns: @theme-west  @theme-center @theme-east;\n   grid-template-rows:    @theme-north @theme-middle @theme-south;\n   grid-template-areas:\n     \"logo menu find\"\n     \"tocs view side\"\n     \"pref foot trak\";\n  \n  #logo { grid-area:logo; justify-self:stretch; align-self:stretch; display:grid; .theme-logo; }\n  #menu { grid-area:menu; justify-self:stretch; align-self:stretch; display:grid; .theme-menu; }\n  #find { grid-area:find; justify-self:stretch; align-self:stretch; display:grid; .theme-find; }\n  #tocs { grid-area:tocs; justify-self:stretch; align-self:stretch; display:grid; .theme-tocs; }\n  #view { grid-area:view; justify-self:stretch; align-self:stretch; display:grid; .theme-view; }\n  #side { grid-area:side; justify-self:stretch; align-self:stretch; display:grid; .theme-side; }\n  #pref { grid-area:pref; justify-self:stretch; align-self:stretch; display:grid; .theme-pref; }\n  #foot { grid-area:foot; justify-self:stretch; align-self:stretch; display:grid; .theme-foot; }\n  #trak { grid-area:trak; justify-self:stretch; align-self:stretch; display:grid; .theme-trak; } }\n  \n</style>\n\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$b = undefined;
+  const __vue_scope_id__$a = undefined;
   /* module identifier */
-  const __vue_module_identifier__$b = undefined;
+  const __vue_module_identifier__$a = undefined;
   /* functional template */
-  const __vue_is_functional_template__$b = false;
+  const __vue_is_functional_template__$a = false;
   /* style inject SSR */
   
 
   
   var Dash$1 = normalizeComponent_1(
     { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
-    __vue_inject_styles__$b,
-    __vue_script__$b,
-    __vue_scope_id__$b,
-    __vue_is_functional_template__$b,
-    __vue_module_identifier__$b,
+    __vue_inject_styles__$a,
+    __vue_script__$a,
+    __vue_scope_id__$a,
+    __vue_is_functional_template__$a,
+    __vue_module_identifier__$a,
     browser,
     undefined
   );
@@ -2438,7 +2826,7 @@ let Math$1 = {
 };
 
 /* script */
-const __vue_script__$c = Math$1;
+const __vue_script__$b = Math$1;
 
 /* template */
 var __vue_render__$b = function() {
@@ -2462,28 +2850,28 @@ var __vue_staticRenderFns__$b = [];
 __vue_render__$b._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$c = function (inject) {
+  const __vue_inject_styles__$b = function (inject) {
     if (!inject) return
     inject("data-v-1abe94d8_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.math {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.math h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n", map: {"version":3,"sources":["Math.vue","/Users/ax/Documents/prj/aug/vue/math/Math.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;ECCA,uBAAA;EDCE,iBAAiB;ACCnB;AACA;EDCE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,eAAe;AACjB","file":"Math.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.math {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.math h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n","\n<template>\n  <div class=\"math\" ref=\"Math\">\n    <h1 v-if=\"comp==='Math'\">Mathematics</h1>\n    <template v-for=\"math in maths\">\n      <router-view :name=\"comp+math.key\"></router-view>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  let Math = {\n\n    data() { return { comp:'Math',\n      maths:[\n        { title:'MathML', key:'ML' },\n        { title:'MathEQ', key:'EQ' } ] } },\n\n    mounted: function () {} \n\n  }\n\n  export default Math;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .math {   position:relative; left:0; top:0; right:0; bottom:0; background-color:@theme-back; display:grid;\n    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:@theme-h1-size; } }\n\n</style>"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$c = undefined;
+  const __vue_scope_id__$b = undefined;
   /* module identifier */
-  const __vue_module_identifier__$c = undefined;
+  const __vue_module_identifier__$b = undefined;
   /* functional template */
-  const __vue_is_functional_template__$c = false;
+  const __vue_is_functional_template__$b = false;
   /* style inject SSR */
   
 
   
   var Math$2 = normalizeComponent_1(
     { render: __vue_render__$b, staticRenderFns: __vue_staticRenderFns__$b },
-    __vue_inject_styles__$c,
-    __vue_script__$c,
-    __vue_scope_id__$c,
-    __vue_is_functional_template__$c,
-    __vue_module_identifier__$c,
+    __vue_inject_styles__$b,
+    __vue_script__$b,
+    __vue_scope_id__$b,
+    __vue_is_functional_template__$b,
+    __vue_module_identifier__$b,
     browser,
     undefined
   );
@@ -2515,7 +2903,7 @@ let Geom = {
 };
 
 /* script */
-const __vue_script__$d = Geom;
+const __vue_script__$c = Geom;
 
 /* template */
 var __vue_render__$c = function() {
@@ -2539,28 +2927,28 @@ var __vue_staticRenderFns__$c = [];
 __vue_render__$c._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$d = function (inject) {
+  const __vue_inject_styles__$c = function (inject) {
     if (!inject) return
     inject("data-v-1ff515c3_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.geom h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n", map: {"version":3,"sources":["Geom.vue","/Users/ax/Documents/prj/aug/vue/geom/Geom.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;ACCA;EDCE,uBAAuB;ECCzB,iBAAA;AACA;ADCA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,eAAe;AACjB","file":"Geom.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.geom {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.geom h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n","\n\n\n<template>\n  <div class=\"geom\" ref=\"Geom\">\n    <h1 v-if=\"comp==='Geom'\">Geometric Algebra</h1>\n    <template v-for=\"geom in geoms\">\n      <router-view :name=\"comp+geom.key\"></router-view>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  let Geom = {\n\n    data() { return { comp:'Geom',\n      geoms:[\n        { title:'Geom2D', key:'2D' },\n        { title:'Geom3D', key:'3D' },\n        { title:'Geom4D', key:'4D' } ] } },\n\n    mounted: function () {}\n\n  }\n\n  export default Geom;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .geom {   position:relative; left:0; top:0; right:0; bottom:0; background-color:@theme-back; display:grid;\n    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:@theme-h1-size; } }\n  \n</style>;"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$d = undefined;
+  const __vue_scope_id__$c = undefined;
   /* module identifier */
-  const __vue_module_identifier__$d = undefined;
+  const __vue_module_identifier__$c = undefined;
   /* functional template */
-  const __vue_is_functional_template__$d = false;
+  const __vue_is_functional_template__$c = false;
   /* style inject SSR */
   
 
   
   var Geom$1 = normalizeComponent_1(
     { render: __vue_render__$c, staticRenderFns: __vue_staticRenderFns__$c },
-    __vue_inject_styles__$d,
-    __vue_script__$d,
-    __vue_scope_id__$d,
-    __vue_is_functional_template__$d,
-    __vue_module_identifier__$d,
+    __vue_inject_styles__$c,
+    __vue_script__$c,
+    __vue_scope_id__$c,
+    __vue_is_functional_template__$c,
+    __vue_module_identifier__$c,
     browser,
     undefined
   );
@@ -2574,31 +2962,32 @@ __vue_render__$c._withStripped = true;
 //
 //
 //
-//
-//
 
 
 var script$8 = {
 
-  props: { comp:String, pages:Array, init:String },
+  props: { comp:String, pages:Array },
   
-  data() { return { tab:this.init } },
+  data() { return { tab:"" } },  // tab is a page.key
   
   methods: {
+    onTab: function (obj) {
+      if( obj.level === 'Tabs' && this.tab !== obj.tab ) {
+        this.$router.push( { name:this.comp+obj.tab } ); // Programmed router
+        this.tab = obj.tab; } },                         // Tab active with classTab
     pubTab: function (tab) {
-      this.tab = tab;
-      this.publish( 'Tabs', tab ); },
+      this.nav().set( { tab:tab               } );
+      this.nav().pub( { tab:tab, level:"Tabs" } ); },
     classTab: function (tab) {
-      return this.tab===tab ? 'tab-active' : 'tab'; },
-    name: function(page) {
-      return this.comp+page.key; } },
-
-  mounted: function () {}
+      return this.tab===tab ? 'tab-active' : 'tab'; } },
   
+  mounted: function() {
+    this.subscribe(  "Nav", 'Tabs', (obj) => {
+      this.onTab(obj); } ); }
   };
 
 /* script */
-const __vue_script__$e = script$8;
+const __vue_script__$d = script$8;
 
 /* template */
 var __vue_render__$d = function() {
@@ -2621,12 +3010,7 @@ var __vue_render__$d = function() {
                 }
               }
             },
-            [
-              _c("router-link", { attrs: { to: { name: _vm.name(page) } } }, [
-                _vm._v(_vm._s(page.title))
-              ])
-            ],
-            1
+            [_vm._v(_vm._s(page.title))]
           )
         ]
       })
@@ -2638,28 +3022,28 @@ var __vue_staticRenderFns__$d = [];
 __vue_render__$d._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$e = function (inject) {
+  const __vue_inject_styles__$d = function (inject) {
     if (!inject) return
-    inject("data-v-a7a8dca4_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tabs .tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.tabs .tab a {\n  background-color: black;\n  color: wheat;\n  text-decoration: none;\n}\n.tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab:hover a {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab-active {\n  background-color: wheat;\n  color: black;\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.tabs .tab-active a {\n  background-color: black;\n  color: wheat;\n  text-decoration: none;\n}\n.tabs .tab-active a {\n  background-color: wheat;\n  color: black !important;\n  text-decoration: none;\n}\n", map: {"version":3,"sources":["Tabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Tabs.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;ACCA;EDCE,kBAAkB;ECCpB,OAAA;EACA,MAAA;EACA,WAAA;EACA,UAAA;EACA,uBAAA;EACA,iBAAA;AACA;AACA;EACA,qBAAA;EACA,iBAAA;EDCE,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;AAChC;AACA;EACE,uBAAuB;EACvB,YAAY;EACZ,qBAAqB;AACvB;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;EACZ,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;AAChC;AACA;EACE,uBAAuB;EACvB,YAAY;EACZ,qBAAqB;AACvB;AACA;EACE,uBAAuB;EACvB,uBAAuB;EACvB,qBAAqB;AACvB","file":"Tabs.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tabs .tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.tabs .tab a {\n  background-color: black;\n  color: wheat;\n  text-decoration: none;\n}\n.tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab:hover a {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab-active {\n  background-color: wheat;\n  color: black;\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n}\n.tabs .tab-active a {\n  background-color: black;\n  color: wheat;\n  text-decoration: none;\n}\n.tabs .tab-active a {\n  background-color: wheat;\n  color: black !important;\n  text-decoration: none;\n}\n","\n<template>\n  <div class=\"tabs\">\n    <template v-for=\"page in pages\">\n      <div :class=\"classTab(page.key)\" @click=\"pubTab(page.key)\">\n        <router-link :to=\"{ name:name(page) }\">{{page.title}}</router-link>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Array, init:String },\n    \n    data() { return { tab:this.init } },\n    \n    methods: {\n      pubTab: function (tab) {\n        this.tab = tab;\n        this.publish( 'Tabs', tab ); },\n      classTab: function (tab) {\n        return this.tab===tab ? 'tab-active' : 'tab'; },\n      name: function(page) {\n        return this.comp+page.key; } },\n\n    mounted: function () {}\n    \n    }\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .tabs { position:absolute; left:0; top:0; width:100%; height:5%;\n          background-color:@theme-back; font-size:@theme-tab-size;\n    .tab { display:inline-block; margin-left:2.0rem; padding:0.2rem 0.3rem 0.1rem 0.3rem;\n      border-radius:12px 12px 0 0; border-left: @theme-color solid thin;\n      border-top:@theme-color solid thin; border-right:@theme-color solid thin;\n      a         { background-color:@theme-back;  color:@theme-color; text-decoration:none; } }\n    .tab:hover  { background-color:@theme-color; color:@theme-back;\n      a         { background-color:@theme-color; color:@theme-back } }\n    .tab-active { background-color:@theme-color; color:@theme-back; .tab();\n      a         { background-color:@theme-color; color:@theme-back!important; text-decoration:none; } } }\n  \n</style>"]}, media: undefined });
+    inject("data-v-8af85bfe_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tabs .tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Tabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Tabs.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;ECCA,kBAAA;EDCE,OAAO;ECCT,MAAA;EACA,WAAA;EACA,UAAA;EACA,uBAAA;EACA,iBAAA;AACA;AACA;EACA,qBAAA;EDCE,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Tabs.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tabs .tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"tabs\">\n    <template v-for=\"page in pages\">\n      <div :class=\"classTab(page.key)\" @click=\"pubTab(page.key)\">{{page.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Array },\n    \n    data() { return { tab:\"\" } },  // tab is a page.key\n    \n    methods: {\n      onTab: function (obj) {\n        if( obj.level === 'Tabs' && this.tab !== obj.tab ) {\n          this.$router.push( { name:this.comp+obj.tab } ); // Programmed router\n          this.tab = obj.tab; } },                         // Tab active with classTab\n      pubTab: function (tab) {\n        this.nav().set( { tab:tab               } );\n        this.nav().pub( { tab:tab, level:\"Tabs\" } ); },\n      classTab: function (tab) {\n        return this.tab===tab ? 'tab-active' : 'tab'; } },\n    \n    mounted: function() {\n      this.subscribe(  \"Nav\", 'Tabs', (obj) => {\n        this.onTab(obj); } ); }\n    }\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .tabs { position:absolute; left:0; top:0; width:100%; height:5%;\n          background-color:@theme-back; font-size:@theme-tab-size;\n    .tab { display:inline-block; margin-left:2.0rem; padding:0.2rem 0.3rem 0.1rem 0.3rem;\n      border-radius:12px 12px 0 0; border-left: @theme-color solid thin;\n      border-top:@theme-color solid thin; border-right:@theme-color solid thin;\n                  background-color:@theme-back;  color:@theme-color;}\n    .tab:hover  {         background-color:@theme-color; color:@theme-back; }\n    .tab-active { .tab(); background-color:@theme-color; color:@theme-back; } }\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$e = undefined;
+  const __vue_scope_id__$d = undefined;
   /* module identifier */
-  const __vue_module_identifier__$e = undefined;
+  const __vue_module_identifier__$d = undefined;
   /* functional template */
-  const __vue_is_functional_template__$e = false;
+  const __vue_is_functional_template__$d = false;
   /* style inject SSR */
   
 
   
   var Tabs = normalizeComponent_1(
     { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
-    __vue_inject_styles__$e,
-    __vue_script__$e,
-    __vue_scope_id__$e,
-    __vue_is_functional_template__$e,
-    __vue_module_identifier__$e,
+    __vue_inject_styles__$d,
+    __vue_script__$d,
+    __vue_scope_id__$d,
+    __vue_is_functional_template__$d,
+    __vue_module_identifier__$d,
     browser,
     undefined
   );
@@ -2686,7 +3070,7 @@ let Note = {
 };
 
 /* script */
-const __vue_script__$f = Note;
+const __vue_script__$e = Note;
 
 /* template */
 var __vue_render__$e = function() {
@@ -2714,28 +3098,28 @@ var __vue_staticRenderFns__$e = [];
 __vue_render__$e._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$f = function (inject) {
+  const __vue_inject_styles__$e = function (inject) {
     if (!inject) return
     inject("data-v-39ba7dcc_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.note {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.note h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n", map: {"version":3,"sources":["Note.vue","/Users/ax/Documents/prj/aug/vue/note/Note.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;ECCR,QAAA;EACA,SAAA;EACA,uBAAA;EDCE,aAAa;AACf;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,eAAe;AACjB","file":"Note.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.note {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.note h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n","\n\n<template>\n  <div class=\"note\">\n    <n-tabs :comp=\"comp\" :pages=\"pages\"></n-tabs>  <!-- init=\"Stand\" -->\n    <h1 v-if=\"comp==='Note'\">Notebooks</h1>\n    <template v-for=\"page in pages\">\n      <router-view :name=\"name(page)\" :id=\"page.key\"></router-view>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Tabs  from '../elem/Tabs.vue';\n  \n  let Note = {\n    \n    components:{ 'n-tabs':Tabs },\n\n    data() {\n      return { comp:'Note', tab:'Standard', pages:[\n          { title:'Standard', key:'Stand' },\n          { title:'Embed',    key:'Embed' },\n          { title:'Maths',    key:'Maths' },\n          { title:'Ganja',    key:'Ganja' },\n        ] } },\n    \n    methods: {\n      \n      name: function(page) {\n        return this.comp+page.key; } },\n    \n  }\n  \n  export default Note;\n  \n</script>\n\n<style lang=\"less\">\n  @import '../../pub/css/themes/theme.less';\n  .note { position:relative; left:0; top:0; right:0; bottom:0; background-color:@theme-back; display:grid;\n    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:@theme-h1-size; } }\n</style>"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$f = undefined;
+  const __vue_scope_id__$e = undefined;
   /* module identifier */
-  const __vue_module_identifier__$f = undefined;
+  const __vue_module_identifier__$e = undefined;
   /* functional template */
-  const __vue_is_functional_template__$f = false;
+  const __vue_is_functional_template__$e = false;
   /* style inject SSR */
   
 
   
   var Note$1 = normalizeComponent_1(
     { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
-    __vue_inject_styles__$f,
-    __vue_script__$f,
-    __vue_scope_id__$f,
-    __vue_is_functional_template__$f,
-    __vue_module_identifier__$f,
+    __vue_inject_styles__$e,
+    __vue_script__$e,
+    __vue_scope_id__$e,
+    __vue_is_functional_template__$e,
+    __vue_module_identifier__$e,
     browser,
     undefined
   );
@@ -2768,7 +3152,7 @@ let Data$2 = {
 };
 
 /* script */
-const __vue_script__$g = Data$2;
+const __vue_script__$f = Data$2;
 
 /* template */
 var __vue_render__$f = function() {
@@ -2792,28 +3176,28 @@ var __vue_staticRenderFns__$f = [];
 __vue_render__$f._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$g = function (inject) {
+  const __vue_inject_styles__$f = function (inject) {
     if (!inject) return
     inject("data-v-2441a2ee_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.data {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.data h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n", map: {"version":3,"sources":["Data.vue","/Users/ax/Documents/prj/aug/vue/data/Data.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;ECCA,uBAAA;EDCE,iBAAiB;ACCnB;AACA;EDCE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,aAAa;AACf;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,eAAe;AACjB","file":"Data.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.data {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  display: grid;\n}\n.data h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n","\n\n<template>\n  <div class=\"data\" ref=\"Data\">\n    <h1 :v-if=\"isData()\">Data</h1>\n    <template v-for=\"dat in datas\">\n      <router-view :name=\"dat.key\"></router-view>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  let Data = {\n\n    data() { return { comp:'Data', datas:[\n      { title:'Tables', key:'Tables' },\n      { title:'Pivots', key:'Pivots' } ] } },\n\n    methods: {\n      isData: function() {\n        return this.comp === 'Data'; } },\n\n    mounted: function () {}\n\n  }\n\n  export default Data;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .data {   position:relative; left:0; top:0; right:0; bottom:0; background-color:@theme-back; display:grid;\n    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:@theme-h1-size; } }\n  \n</style>;"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$g = undefined;
+  const __vue_scope_id__$f = undefined;
   /* module identifier */
-  const __vue_module_identifier__$g = undefined;
+  const __vue_module_identifier__$f = undefined;
   /* functional template */
-  const __vue_is_functional_template__$g = false;
+  const __vue_is_functional_template__$f = false;
   /* style inject SSR */
   
 
   
   var Data$3 = normalizeComponent_1(
     { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
-    __vue_inject_styles__$g,
-    __vue_script__$g,
-    __vue_scope_id__$g,
-    __vue_is_functional_template__$g,
-    __vue_module_identifier__$g,
+    __vue_inject_styles__$f,
+    __vue_script__$f,
+    __vue_scope_id__$f,
+    __vue_is_functional_template__$f,
+    __vue_module_identifier__$f,
     browser,
     undefined
   );
@@ -2847,7 +3231,7 @@ Home.Note = Note$1;
 Home.Data = Data$3;
 
 /* script */
-const __vue_script__$h = Home;
+const __vue_script__$g = Home;
 
 /* template */
 var __vue_render__$g = function() {
@@ -2902,28 +3286,28 @@ var __vue_staticRenderFns__$g = [
 __vue_render__$g._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$h = function (inject) {
+  const __vue_inject_styles__$g = function (inject) {
     if (!inject) return
     inject("data-v-46715143_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.home {\n  display: grid;\n  grid-template-columns: 1fr;\n  grid-template-rows: 10fr 80fr 10fr;\n  grid-template-areas: \"head\" \"elem\" \"foot\";\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  color: wheat;\n}\n.head {\n  grid-area: head;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  display: grid;\n  justify-self: stretch;\n  align-self: stretch;\n}\n.head h1 {\n  font-size: 2rem;\n}\n.elem {\n  grid-area: elem;\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  height: 100%;\n}\n.elem h1 {\n  font-size: 2rem;\n}\n.foot {\n  grid-area: foot;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  display: grid;\n  justify-self: stretch;\n  align-self: stretch;\n}\n.foot h1 {\n  font-size: 2rem;\n}\n", map: {"version":3,"sources":["Home.vue","/Users/ax/Documents/prj/aug/pub/app/augm/Home.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,aAAa;EACb,0BAA0B;EAC1B,kCAAkC;EAClC,yCAAyC;EACzC,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,eAAe;AACjB;AACA;ECCA,eAAA;EDCE,kBAAkB;ECCpB,OAAA;EACA,MAAA;EDCE,QAAQ;ECCV,YAAA;AACA;ADCA;ECCA,eAAA;AACA;AACA;EDCE,eAAe;ECCjB,qBAAA;EACA,mBAAA;EDCE,kBAAkB;ECCpB,aAAA;EACA,qBAAA;EACA,mBAAA;ADCA;AACA;EACE,eAAe;AACjB","file":"Home.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.home {\n  display: grid;\n  grid-template-columns: 1fr;\n  grid-template-rows: 10fr 80fr 10fr;\n  grid-template-areas: \"head\" \"elem\" \"foot\";\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  color: wheat;\n}\n.head {\n  grid-area: head;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  display: grid;\n  justify-self: stretch;\n  align-self: stretch;\n}\n.head h1 {\n  font-size: 2rem;\n}\n.elem {\n  grid-area: elem;\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  height: 100%;\n}\n.elem h1 {\n  font-size: 2rem;\n}\n.foot {\n  grid-area: foot;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  display: grid;\n  justify-self: stretch;\n  align-self: stretch;\n}\n.foot h1 {\n  font-size: 2rem;\n}\n","\n<template>\n  <div class=\"home\">\n    <div class=\"head\">\n      <div>\n        <h1>Welcome to Augmentation Home Page</h1>\n        <h2>Choose an Application Component on the Left</h2>\n      </div>\n    </div>\n    <div class=\"elem\">\n      <h-btns comp=\"Home\" :btns=\"btns\" init=\"Axes\" back=\"#3B5999\" active=\"tan\"></h-btns>\n    </div>\n    <div class=\"foot\">\n      <div>\n        <h1>Axiom Architectures</h1>\n      </div>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Btns from '../../../vue/elem/Btns.vue';\n  \n   let Home = {\n    \n    components:{ 'h-btns':Btns },\n\n  data() { return { comp:'Draw', key:'Axes', btns:{\n    Axes:    { title:'Axes',    key:'Axes',    obj:null, pos:[ 5,10,0,10], back:'primary',   check:true              },\n    Chord:   { title:'Chord',   key:'Chord',   obj:null, pos:[30,10,0,20], back:'secondary', img:'brew/AutoDrip.jpg' },\n    Cluster: { title:'Cluster', key:'Cluster', obj:null, pos:[50,10,0,10], back:'success',   icon:'fas fa-circle'    },\n    Link:    { title:'Link',    key:'Link',    obj:null, pos:[ 5,25,0,20], back:'info',      check:true              },\n    Radar:   { title:'Radar',   key:'Radar',   obj:null, pos:[ 5,40,0,10], back:'warning',   icon:'fas fa-circle'    },\n    Radial:  { title:'Radial',  key:'Radial',  obj:null, pos:[ 5,55,0,20], back:'danger',    img:'brew/AutoDrip.jpg' },\n    Tree:    { title:'Tree',    key:'Tree',    obj:null, pos:[40,40,0,30], back:'light',     icon:'fas fa-circle'    },\n    Wheel:   { title:'Wheel',   key:'Wheel',   obj:null, pos:[60,60,0,30], back:'success',   img:'brew/AutoDrip.jpg' }\n    } } },\n\n   mounted: function () {\n       this.publish( 'Tocs', 'Close' ); }\n   \n  }\n\n  import Dash from '../../../vue/dash/Dash.vue';\n  import Math from '../../../vue/math/Math.vue';\n  import Geom from '../../../vue/geom/Geom.vue';\n  import Note from '../../../vue/note/Note.vue';\n  import Data from '../../../vue/data/Data.vue';\n\n  Home.Dash = Dash;\n  Home.Math = Math;\n  Home.Geom = Geom;\n  Home.Note = Note;\n  Home.Data = Data;\n  \n  export default Home;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../../pub/css/themes/theme.less';\n  \n  .grid3x1() { display:grid; grid-template-columns:1fr; grid-template-rows:10fr 80fr 10fr;\n      grid-template-areas:\"head\" \"elem\" \"foot\"; }\n  \n  .home { .grid3x1(); position:relative; left:0; top:0; right:0; bottom:0;\n    background-color:@theme-back; color:@theme-color; }\n\n  .head { grid-area:head; justify-items:center; align-items:center; text-align:center; display:grid;\n          justify-self:stretch; align-self:stretch;\n    h1 { font-size:@theme-h1-size; } }\n  \n  .elem { grid-area:elem; position:relative; left:0; top:0; right:0; height:100%;\n    h1 { font-size:@theme-h1-size; } }\n\n  .foot { grid-area:foot; justify-items:center; align-items:center; text-align:center; display:grid;\n          justify-self:stretch; align-self:stretch;\n    h1 { font-size:@theme-h1-size; } }\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$h = undefined;
+  const __vue_scope_id__$g = undefined;
   /* module identifier */
-  const __vue_module_identifier__$h = undefined;
+  const __vue_module_identifier__$g = undefined;
   /* functional template */
-  const __vue_is_functional_template__$h = false;
+  const __vue_is_functional_template__$g = false;
   /* style inject SSR */
   
 
   
   var Home$1 = normalizeComponent_1(
     { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
-    __vue_inject_styles__$h,
-    __vue_script__$h,
-    __vue_scope_id__$h,
-    __vue_is_functional_template__$h,
-    __vue_module_identifier__$h,
+    __vue_inject_styles__$g,
+    __vue_script__$g,
+    __vue_scope_id__$g,
+    __vue_is_functional_template__$g,
+    __vue_module_identifier__$g,
     browser,
     undefined
   );

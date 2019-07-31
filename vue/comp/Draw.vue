@@ -21,6 +21,7 @@
 
     data() {
       return { comp:'Draw', key:'Draw', drew:null, pages:{
+        Wheel:   { title:'Wheel',   key:'Wheel',   obj:null },
         Axes:    { title:'Axes',    key:'Axes',    obj:null },
         Chord:   { title:'Chord',   key:'Chord',   obj:null },
         Link:    { title:'Link',    key:'Link',    obj:null },

@@ -1,5 +1,5 @@
 
-import Util  from '../util/Util.js'
+import Util  from '../../base/util/Util.js'
 import Coord from '../mbox/Coord.js'
 
 class Regress

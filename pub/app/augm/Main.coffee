@@ -1,6 +1,7 @@
 
 import Data   from '../../base/util/Data.js'
 import Stream from '../../base/util/Stream.js'
+import Nav    from '../../base/util/Nav.js'
 import Vis    from '../../base/util/Vis.js'
 import Cache  from '../../base/util/Cache.js'
 #mport Test   from './Test.js'
@@ -34,7 +35,8 @@ class Main
     subjects     = ["Draw","Note","Menu","Tabs","Geom","Data","Cache","Navd"]
     streamLog    = { subscribe:false, publish:false, subjects:subjects}
     Main.stream  = new Stream( subjects, streamLog )
-    Main.cache   = new Cache( Main.stream )
+    Main.nav    = new Nav(   Main.stream, batch, 'Info' )
+    #ain.cache  = new Cache( Main.stream )
     Main.onReady()
     # new Test()
     return
@@ -56,6 +58,8 @@ class Main
         Main.stream
       batch:() ->
         Main.Batch
+      nav:() ->
+        Main.nav
       keys:(obj) ->
         Object.keys(obj)
       comps:( compk ) ->

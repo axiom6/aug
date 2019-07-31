@@ -15230,11 +15230,11 @@ function pie() {
 
 var curveRadialLinear = curveRadial(curveLinear);
 
-function Radial(curve) {
+function Radial$1(curve) {
   this._curve = curve;
 }
 
-Radial.prototype = {
+Radial$1.prototype = {
   areaStart: function() {
     this._curve.areaStart();
   },
@@ -15255,7 +15255,7 @@ Radial.prototype = {
 function curveRadial(curve) {
 
   function radial(context) {
-    return new Radial(curve(context));
+    return new Radial$1(curve(context));
   }
 
   radial._curve = curve;
@@ -20781,6 +20781,718 @@ Vis = class Vis {
 
 var Vis$1 = Vis;
 
+var Data,
+  hasProp$1 = {}.hasOwnProperty;
+
+Data = class Data {
+  static refine(data, type) {
+    var akey, area, base, bkey, ckey, comp, disp, dkey, ikey, item, pkey, prac;
+    if (type === 'None') {
+      return data;
+    }
+    data.comps = {};
+    for (ckey in data) {
+      comp = data[ckey];
+      if (!(Util$1.isChild(ckey))) {
+        continue;
+      }
+      // console.log( 'Data.refine comp', comp )
+      data.comps[ckey] = comp;
+      if (comp['name'] == null) {
+        comp['name'] = ckey;
+      }
+      comp.pracs = {};
+      for (pkey in comp) {
+        prac = comp[pkey];
+        if (!(Util$1.isChild(pkey))) {
+          continue;
+        }
+        // console.log( '  Data.refine prac', prac )
+        comp.pracs[pkey] = prac;
+        prac.comp = comp;
+        if (prac['name'] == null) {
+          prac['name'] = pkey;
+        }
+        prac.disps = {};
+        for (dkey in prac) {
+          disp = prac[dkey];
+          if (!(Util$1.isChild(dkey))) {
+            continue;
+          }
+          prac.disps[dkey] = disp;
+          disp.prac = prac;
+          if (disp['name'] == null) {
+            disp['name'] = dkey;
+          }
+          disp.areas = {};
+          for (akey in disp) {
+            area = disp[akey];
+            if (!(Util$1.isChild(akey))) {
+              continue;
+            }
+            disp.areas[akey] = area;
+            area.disp = disp;
+            if (area['name'] == null) {
+              area['name'] = akey;
+            }
+            area.items = {};
+            for (ikey in area) {
+              item = area[ikey];
+              if (!(Util$1.isChild(ikey))) {
+                continue;
+              }
+              area.items[ikey] = item;
+              item.area = area;
+              if (item['name'] == null) {
+                item['name'] = ikey;
+              }
+              item.bases = {};
+              for (bkey in item) {
+                base = item[bkey];
+                if (!(Util$1.isChild(bkey))) {
+                  continue;
+                }
+                item.bases[bkey] = base;
+                base.item = item;
+                if (base['name'] == null) {
+                  base['name'] = bkey;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return data;
+  }
+
+  // ---- Read JSON with batch async
+  static batchRead(batch, callback, create = null) {
+    var key, obj;
+    for (key in batch) {
+      if (!hasProp$1.call(batch, key)) continue;
+      obj = batch[key];
+      this.batchJSON(obj, batch, callback, create);
+    }
+  }
+
+  static batchComplete(batch) {
+    var key, obj;
+    for (key in batch) {
+      if (!hasProp$1.call(batch, key)) continue;
+      obj = batch[key];
+      if (!obj['data']) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // "Access-Control-Request-Headers": "*", "Access-Control-Request-Method": "*"
+  static batchJSON(obj, batch, callback, refine = null) {
+    var opt, url;
+    url = obj.type === 'Font' ? obj.url : Data.toUrl(obj.url);
+    // console.log( 'Data.batchJSON', obj.url, url )
+    opt = {
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(url, opt).then((response) => {
+      return response.json();
+    }).then((data) => {
+      obj['data'] = Util$1.isFunc(refine) ? refine(data, obj.type) : data;
+      if (Data.batchComplete(batch)) {
+        return callback(batch);
+      }
+    }).catch((error) => {
+      return console.error("Data.batchJSON()", {
+        url: url,
+        error: error
+      });
+    });
+  }
+
+  static asyncJSON(urla, callback) {
+    var url;
+    url = Data.toUrl(urla);
+    // console.log( 'Data.asyncJSON', urla, url )
+    fetch(url).then((response) => {
+      return response.json();
+    }).then((data) => {
+      return callback(data);
+    }).catch((error) => {
+      return console.error("Data.asyncJSON()", {
+        url: url,
+        error: error
+      });
+    });
+  }
+
+  static planeData(batch, plane) {
+    return batch[plane].data[plane];
+  }
+
+  static toUrl(url) {
+    if (window.location.href.includes('localhost')) {
+      return Data.local + url;
+    } else {
+      return Data.hosted + url;
+    }
+  }
+
+  
+  // ------ Quick JSON read ------
+  static read(url, callback) {
+    if (Util$1.isObj(url)) {
+      Data.readFile(url, callback);
+    } else {
+      Data.asynsJson(url, callback);
+    }
+  }
+
+  static readFile(fileObj, doJson) {
+    var fileReader;
+    fileReader = new FileReader();
+    fileReader.onerror = function(e) {
+      return console.error('Store.readFile', fileObj.name, e.target.error);
+    };
+    fileReader.onload = function(e) {
+      return doJson(JSON.parse(e.target.result));
+    };
+    fileReader.readAsText(fileObj);
+  }
+
+  static saveFile(data, fileName) {
+    var downloadLink, htmlBlob, htmlUrl;
+    htmlBlob = new Blob([data], {
+      type: "text/html;charset=utf-8"
+    });
+    htmlUrl = window['URL'].createObjectURL(htmlBlob);
+    downloadLink = document.createElement("a");
+    downloadLink.href = htmlUrl;
+    downloadLink.download = fileName;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  }
+
+};
+
+//ata.parse   = Util.parseURI( window.location.href )
+//ata.hosted1 = Data.parse.hostname + '/app/data/'
+// console.log('Data.hosted', Data.hosted, window.location.href )
+Data.local = "app/data/";
+
+Data.hosted = '/app/data/';
+
+Data.cssDir = 'css/'; // /css in /pub
+
+var Data$1 = Data;
+
+var Wheel;
+
+Wheel = class Wheel {
+  constructor(drew, d3, name1, elem1, size) {
+    // Passed as a callback to Wheel and called when Wheel makes a choice to be published
+    this.publish = this.publish.bind(this);
+    this.adjustRadius = this.adjustRadius.bind(this);
+    this.xc = this.xc.bind(this);
+    this.yc = this.yc.bind(this);
+    this.isParentOf = this.isParentOf.bind(this);
+    // http://www.w3.org/WAI/ER/WD-AERT/#color-contrast
+    // brightness:( rgb ) ->
+    //   rgb.r * .299 + rgb.g * .587 + rgb.b * .114
+    this.fill = this.fill.bind(this);
+    this.doText = this.doText.bind(this);
+    // eventType is click mouseover mouseout AddChoice DelChoice
+    //textEnter.append("title").text( (d) -> d.data.name )
+    this.onEvent = this.onEvent.bind(this);
+    this.fontSize = this.fontSize.bind(this);
+    // eventType is click mouseover mouseout AddChoice DelChoice
+    this.doChoiceResize = this.doChoiceResize.bind(this);
+    this.textTransform = this.textTransform.bind(this);
+    this.displayAllLeaves = this.displayAllLeaves.bind(this);
+    this.zoomTween = this.zoomTween.bind(this);
+    this.drew = drew;
+    this.d3 = d3;
+    this.name = name1;
+    this.elem = elem1;
+    this.size = size;
+    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
+    this.opacity = 1.0;
+    this.showAllLeaves = false;
+    this.radiusFactorChoice = 1.3;
+    this.radiusFactorChild = 1.0;
+    this.url = Data$1.toUrl('jitter/Flavor.json');
+    this.ready();
+  }
+
+  publish(add, flavor, roast) {
+    var addDel, choice;
+    addDel = add ? 'AddChoice' : 'DelChoice';
+    choice = {
+      name: 'Wheel',
+      op: addDel,
+      flavor: flavor,
+      roast: roast
+    };
+    console.log('Choice', choice);
+  }
+
+  resize() {
+    var geo, h, sc, sx, sy, w, xc, yc;
+    geo = this.drew.geomElem();
+    w = geo.w;
+    h = geo.h;
+    sx = geo.sx;
+    sy = geo.sy;
+    sc = Math.min(sx, sy);
+    xc = w / 2;
+    yc = h / 2;
+    this.svg.attr("width", w).attr("height", h);
+    this.g.transition().attr("transform", `translate(${xc},${yc}) scale(${sc})`);
+  }
+
+  ready() {
+    var geo, scale, xc, yc;
+    geo = this.drew.geomElem();
+    scale = 1.0;
+    this.json = {};
+    this.width = geo.w;
+    this.height = geo.h;
+    this.radius = Math.min(this.width, this.height) * scale / 2;
+    this.xx = this.d3.scaleLinear().range([0, 2 * Math.PI]);
+    this.yy = this.d3.scalePow().exponent(1.4).domain([0, 1]).range([
+      0,
+      this.radius // 1.3
+    ]);
+    // @formatNumber = @d3.format(",d")
+    this.padding = 0;
+    this.duration = 300;
+    this.lookup = {};
+    xc = this.width / 2;
+    yc = this.height / 2;
+    this.g = this.svg.append("g").attr("transform", `translate(${xc},${yc}) scale(1,1)`);
+    this.g.append("text").text("Flavor").attr('x', -32).attr('y', 12).style('fill', 'black').style("font-size", "3vmin");
+    this.partition = this.d3.partition();
+    this.arc = this.d3.arc().startAngle((d) => {
+      return Math.max(0, Math.min(2 * Math.PI, this.xx(this.x0(d))));
+    }).endAngle((d) => {
+      return Math.max(0, Math.min(2 * Math.PI, this.xx(this.x1(d))));
+    }).innerRadius((d) => {
+      return Math.max(0, this.yy(this.y0(d)));
+    }).outerRadius((d) => {
+      return Math.max(0, this.yy(this.y1(d)));
+    });
+    this.d3.json(this.url).then((json) => {
+      this.json = json;
+      this.root = this.d3.hierarchy(json);
+      this.root.sum((d) => {
+        d.chosen = false;
+        d.hide = this.isLeaf(d);
+        if (this.isBranch(d)) {
+          return 0;
+        } else {
+          return 1;
+        }
+      });
+      this.nodes = this.partition(this.root).descendants();
+      this.adjustRadius(this.root);
+      this.path = this.g.selectAll("path").data(this.nodes).enter().append("path").attr("id", function(d, i) {
+        if (d != null) {
+          return "path-" + i;
+        } else {
+          return "path-" + i;
+        }
+      }).attr("d", this.arc).attr("fill-rule", "evenodd").style("fill", (d) => {
+        return this.fill(d);
+      }).style("opacity", this.opacity).style("stroke", 'black').style("stroke-width", '2').style("display", function(d) {
+        if (d.data.hide) {
+          return "none";
+        } else {
+          return "block";
+        }
+      }).on("click", (d) => {
+        return this.onEvent(d, 'click');
+      }).on("mouseover", (d) => {
+        return this.onEvent(d, 'mouseover');
+      }).on("mouseout", (d) => {
+        return this.onEvent(d, 'mouseout');
+      });
+      //append("title").text( (d) -> d.data.name )
+      return this.doText(this.nodes);
+    });
+    this.d3.select(self.frameElement).style("height", this.height + "px");
+  }
+
+  adjustRadius(d) {
+    var dy, sc;
+    this.lookup[d.data.name] = d;
+    sc = d['data'].scale != null ? d['data'].scale : d.children == null ? 0.8 : 1.0;
+    dy = (d.y1 - d.y0) * sc;
+    if (d.parent != null) {
+      d.y0 = d.parent.y1;
+    }
+    d.y1 = d.y0 + dy;
+    if (d.children != null) {
+      d.children.forEach((child) => {
+        return this.adjustRadius(child);
+      });
+    }
+  }
+
+  x0(d) {
+    if (d.m0 != null) {
+      return d.m0;
+    } else {
+      return d.x0;
+    }
+  }
+
+  x1(d) {
+    if (d.m1 != null) {
+      return d.m1;
+    } else {
+      return d.x1;
+    }
+  }
+
+  y0(d) {
+    if (d.n0 != null) {
+      return d.n0;
+    } else {
+      return d.y0;
+    }
+  }
+
+  y1(d) {
+    if (d.n1 != null) {
+      return d.n1;
+    } else {
+      return d.y1;
+    }
+  }
+
+  xc(d) {
+    return (this.x0(d) + this.x1(d)) / 2;
+  }
+
+  yc(d) {
+    return (this.y0(d) + this.y1(d)) / 2;
+  }
+
+  sameNode(a, b) {
+    return (a != null ? a.data.name : void 0) === (b != null ? b.data.name : void 0);
+  }
+
+  inBranch(branch, elem) {
+    var child, j, len, ref;
+    if ((branch != null ? branch.data.name : void 0) === (elem != null ? elem.data.name : void 0)) {
+      return true;
+    }
+    if (branch.children != null) {
+      ref = branch != null ? branch.children : void 0;
+      for (j = 0, len = ref.length; j < len; j++) {
+        child = ref[j];
+        if ((child != null ? child.data.name : void 0) === (elem != null ? elem.data.name : void 0)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  isBranch(d) {
+    return d.children != null;
+  }
+
+  isLeaf(d) {
+    return d.children == null;
+  }
+
+  isParentOf(p, c) {
+    if (p === c) {
+      return true;
+    }
+    if (p.children) {
+      return p.children.some((d) => {
+        return this.isParentOf(d, c);
+      });
+    }
+    return false;
+  }
+
+  fill(d) {
+    var a, b, colours;
+    // console.log( 'fill', d )
+    if ((d.data.fill != null) && (d.children != null)) {
+      return d.data.fill;
+    } else if ((d.data.fill != null) && (d.children == null) && (d.parent != null) && (d.parent.data.fill != null)) {
+      return d.parent.data.fill;
+    } else if (d.children != null) {
+      colours = d.children.map(this.fill);
+      a = this.d3.hsl(colours[0]);
+      b = this.d3.hsl(colours[1]);
+      // L*a*b* might be better here...
+      return this.d3.hsl((a.h + b.h) / 2, a.s * 1.2, a.l / 1.2);
+    } else {
+      return '#666666';
+    }
+  }
+
+  doText(nodes) {
+    var angle, xem;
+    this.text = this.g.selectAll('text').data(nodes);
+    this.textEnter = this.text.enter().append('text').on("click", (d) => {
+      return this.onEvent(d, 'click');
+    }).on("mouseover", (d) => {
+      return this.onEvent(d, 'mouseover');
+    }).on("mouseout", (d) => {
+      return this.onEvent(d, 'mouseout');
+    }).style("font-size", (t) => {
+      return this.fontSize(t);
+    //style('fill',       (d) => if @brightness( @d3.rgb( @fill(d.data) ) ) < 125 then '#eee' else '#000' )
+    }).style('opacity', 1).style('fill', '#000000').style('font-weight', 900).style("display", function(d) {
+      if (d.data.hide) {
+        return "none";
+      } else {
+        return "block";
+      }
+    }).attr('text-anchor', (d) => {
+      if (this.xx(this.xc(d)) > Math.PI) {
+        return 'end';
+      } else {
+        return 'start';
+      }
+    }).attr('dy', '.2em').attr('transform', (d) => {
+      return this.textTransform(d);
+    });
+    angle = (d) => {
+      return this.xx(this.xc(d)) * 180 / Math.PI;
+    };
+    xem = function(d) {
+      if (angle(d) <= 180) {
+        return '0.7em';
+      } else {
+        return '-0.7em';
+      }
+    };
+    this.textEnter.append('tspan').attr('x', function(d) {
+      return xem(d);
+    }).text(function(d) {
+      if (d.depth) {
+        return d.data.name.split(' ')[0];
+      } else {
+        return '';
+      }
+    });
+    this.textEnter.append('tspan').attr('x', function(d) {
+      return xem(d);
+    }).attr('dy', '1em').text(function(d) {
+      if ((d.depth != null) && (d.data.name != null)) {
+        return d.data.name.split(' ')[1] || '';
+      } else {
+        return '';
+      }
+    });
+  }
+
+  onEvent(d, eventType) {
+    var cy0, py0, py1, resize;
+    if (eventType === 'click' && (d.parent == null)) {
+      this.displayAllLeaves();
+    }
+    if (d.data['can'] == null) {
+      return;
+    }
+    //console.log( 'onEvent', d ) if eventType is 'click'
+    py0 = d.y0;
+    py1 = d.y0 + (d.y1 - d.y0) * this.radiusFactorChoice;
+    resize = this.doChoiceResize(d, eventType, d.x0, py0, d.x1, py1);
+    cy0 = resize ? py1 : d.y1;
+    if (d.children != null) {
+      d.children.forEach((child) => {
+        var cy1;
+        if (child != null) {
+          child.data.hide = resize;
+        }
+        cy1 = cy0 + (child['y1'] - child['y0']) * this.radiusFactorChild;
+        return this.resizeElem(child, resize, child['x0'], cy0, child['x1'], cy1);
+      });
+    }
+    this.g.selectAll('path').data(this.nodes).filter((e) => {
+      return this.inBranch(d, e);
+    }).transition().duration(this.duration).style("display", function(d) {
+      if (d.data.hide) {
+        return "none";
+      } else {
+        return "block";
+      }
+    //style( "stroke",        "black" )
+    //style( "stroke-width", "0.2vim" )
+    }).attr("d", this.arc);
+    this.g.selectAll('text').data(this.nodes).filter((e) => {
+      return this.inBranch(d, e);
+    }).transition().duration(this.duration).attr("transform", (t) => {
+      return this.textTransform(t);
+    }).style("font-size", (t) => {
+      return this.fontSize(t, d);
+    }).style("display", function(d) {
+      if (d.data.hide) {
+        return "none";
+      } else {
+        return "block";
+      }
+    });
+  }
+
+  fontSize(t, d = null) {
+    if ((d != null) && this.sameNode(t, d) && (t.m0 != null)) {
+      return '1.1rem';
+    } else {
+      if (t.children != null) {
+        return '1.0rem';
+      } else {
+        return '0.9rem';
+      }
+    }
+  }
+
+  doChoiceResize(elem, eventType, x0, y0, x1, y1) {
+    var resizeChild;
+    resizeChild = true;
+    if (eventType === 'click') {
+      elem.chosen = !elem.chosen;
+      this.resizeElem(elem, elem.chosen, x0, y0, x1, y1);
+      // This publish function is supplied to the constructor
+      // elem.chosen is true/false for add/del
+      // elem.data.name is the flavor
+      this.publish(elem.chosen, elem.data.name, this.getRoastValue(elem.data.name));
+      resizeChild = elem.chosen;
+    } else if (eventType === 'AddChoice' || eventType === 'DelChoice') {
+      elem.chosen = eventType === 'AddChoice';
+      this.resizeElem(elem, elem.chosen, x0, y0, x1, y1);
+      resizeChild = elem.chosen;
+    // Mouse event do not affect chosen elements
+    } else if (!elem.chosen && (eventType === 'mouseover' || eventType === 'mouseout')) {
+      resizeChild = eventType === 'mouseover';
+      this.resizeElem(elem, resizeChild, x0, y0, x1, y1);
+    }
+    //console.log( "Wheel.doChoiceResize()", { flavor:elem.data.name, eventType:eventType, resizeChild:resizeChild } )
+    return resizeChild;
+  }
+
+  resizeElem(elem, resize, x0, y0, x1, y1) {
+    if (resize) {
+      elem.m0 = x0;
+      elem.m1 = x1;
+      elem.n0 = y0;
+      elem.n1 = y1;
+      elem.data.hide = false;
+    } else {
+      elem.m0 = void 0;
+      elem.m1 = void 0;
+      elem.n0 = void 0;
+      elem.n1 = void 0;
+      elem.data.hide = !((elem.data.children != null) || this.showAllLeaves) ? true : false;
+    }
+  }
+
+  textTransform(d) {
+    var angle, multiline, rotate;
+    multiline = (d.data.name || '').split(' ').length > 1;
+    angle = this.xx(this.xc(d)) * 180 / Math.PI - 90;
+    rotate = angle + (multiline ? -.5 : 0);
+    return 'rotate(' + rotate + ')translate(' + this.yy(this.y0(d)) + this.padding + ')rotate(' + (angle > 90 ? -180 : 0) + ')';
+  }
+
+  displayAllLeaves() {
+    this.showAllLeaves = !this.showAllLeaves;
+    this.g.selectAll("path").style("display", (d) => {
+      if (this.isLeaf(d) && !this.showAllLeaves && !d.parent.chosen) {
+        return "none";
+      } else {
+        return "block";
+      }
+    });
+    this.g.selectAll('text').style("display", (d) => {
+      if (this.isLeaf(d) && !this.showAllLeaves && !d.parent.chosen) {
+        return "none";
+      } else {
+        return "block";
+      }
+    });
+  }
+
+  zoomTween(d) {
+    this.svg.transition().duration(this.duration).tween("scale", () => {
+      var xd, yd, yr;
+      xd = this.d3.interpolate(this.xx.domain(), [this.x0(d), this.x1(d)]);
+      yd = this.d3.interpolate(this.yy.domain(), [this.y0(d), 1]);
+      yr = this.d3.interpolate(this.yy.range(), [(d.y0 != null ? 20 : 0), this.radius]);
+      return (t) => {
+        this.xx.domain(xd(t));
+        return this.yy.domain(yd(t)).range(yr(t));
+      };
+    }).selectAll("path").attrTween("d", (d) => {
+      return () => {
+        return this.arc(d);
+      };
+    });
+  }
+
+  getFlavor(data, name, match) {
+    var child, flavor, j, len, ref;
+    if (data.children != null) {
+      ref = data.children;
+      for (j = 0, len = ref.length; j < len; j++) {
+        flavor = ref[j];
+        if (match(flavor)) {
+          return flavor;
+        }
+        child = this.getFlavor(flavor, name, match);
+        if (child != null) {
+          return child;
+        }
+      }
+    }
+    return null;
+  }
+
+  getRoastValue(name) {
+    var flavor, match, value;
+    match = function(flavor) {
+      return flavor.name === name;
+    };
+    flavor = this.getFlavor(this.json, name, match);
+    //console.log( 'Wheel.getRoastValue()', { name:name, flavor:flavor } )
+    value = flavor != null ? (flavor.roast[0] + flavor.roast[1]) * 0.5 : -1;
+    return value;
+  }
+
+  getFlavorName(roast) {
+    var flavor, match;
+    match = function(flavor) {
+      return (flavor.roast != null) && flavor.roast[0] <= roast && roast <= flavor.roast[1];
+    };
+    flavor = this.getFlavor(this.json, roast, match);
+    console.log('Wheel.getFlavorName()', {
+      roast: roast,
+      flavor: flavor
+    });
+    if (flavor) {
+      return flavor.name;
+    } else {
+      return "";
+    }
+  }
+
+};
+
+var Wheel$1 = Wheel;
+
 var Axes;
 
 Axes = class Axes {
@@ -21090,353 +21802,6 @@ xfade: (opacity) =>
 
  */
 var Chord$1 = Chord;
-
-var Data,
-  hasProp$1 = {}.hasOwnProperty;
-
-Data = class Data {
-  static refine(data, type) {
-    var akey, area, base, bkey, ckey, comp, disp, dkey, ikey, item, pkey, prac;
-    if (type === 'None') {
-      return data;
-    }
-    data.comps = {};
-    for (ckey in data) {
-      comp = data[ckey];
-      if (!(Util$1.isChild(ckey))) {
-        continue;
-      }
-      // console.log( 'Data.refine comp', comp )
-      data.comps[ckey] = comp;
-      if (comp['name'] == null) {
-        comp['name'] = ckey;
-      }
-      comp.pracs = {};
-      for (pkey in comp) {
-        prac = comp[pkey];
-        if (!(Util$1.isChild(pkey))) {
-          continue;
-        }
-        // console.log( '  Data.refine prac', prac )
-        comp.pracs[pkey] = prac;
-        prac.comp = comp;
-        if (prac['name'] == null) {
-          prac['name'] = pkey;
-        }
-        prac.disps = {};
-        for (dkey in prac) {
-          disp = prac[dkey];
-          if (!(Util$1.isChild(dkey))) {
-            continue;
-          }
-          prac.disps[dkey] = disp;
-          disp.prac = prac;
-          if (disp['name'] == null) {
-            disp['name'] = dkey;
-          }
-          disp.areas = {};
-          for (akey in disp) {
-            area = disp[akey];
-            if (!(Util$1.isChild(akey))) {
-              continue;
-            }
-            disp.areas[akey] = area;
-            area.disp = disp;
-            if (area['name'] == null) {
-              area['name'] = akey;
-            }
-            area.items = {};
-            for (ikey in area) {
-              item = area[ikey];
-              if (!(Util$1.isChild(ikey))) {
-                continue;
-              }
-              area.items[ikey] = item;
-              item.area = area;
-              if (item['name'] == null) {
-                item['name'] = ikey;
-              }
-              item.bases = {};
-              for (bkey in item) {
-                base = item[bkey];
-                if (!(Util$1.isChild(bkey))) {
-                  continue;
-                }
-                item.bases[bkey] = base;
-                base.item = item;
-                if (base['name'] == null) {
-                  base['name'] = bkey;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    return data;
-  }
-
-  // ---- Read JSON with batch async
-  static batchRead(batch, callback, create = null) {
-    var key, obj;
-    for (key in batch) {
-      if (!hasProp$1.call(batch, key)) continue;
-      obj = batch[key];
-      this.batchJSON(obj, batch, callback, create);
-    }
-  }
-
-  static batchComplete(batch) {
-    var key, obj;
-    for (key in batch) {
-      if (!hasProp$1.call(batch, key)) continue;
-      obj = batch[key];
-      if (!obj['data']) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  // "Access-Control-Request-Headers": "*", "Access-Control-Request-Method": "*"
-  static batchJSON(obj, batch, callback, refine = null) {
-    var opt, url;
-    url = obj.type === 'Font' ? obj.url : Data.toUrl(obj.url);
-    // console.log( 'Data.batchJSON', obj.url, url )
-    opt = {
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch(url, opt).then((response) => {
-      return response.json();
-    }).then((data) => {
-      obj['data'] = Util$1.isFunc(refine) ? refine(data, obj.type) : data;
-      if (Data.batchComplete(batch)) {
-        return callback(batch);
-      }
-    }).catch((error) => {
-      return console.error("Data.batchJSON()", {
-        url: url,
-        error: error
-      });
-    });
-  }
-
-  static asyncJSON(urla, callback) {
-    var url;
-    url = Data.toUrl(urla);
-    // console.log( 'Data.asyncJSON', urla, url )
-    fetch(url).then((response) => {
-      return response.json();
-    }).then((data) => {
-      return callback(data);
-    }).catch((error) => {
-      return console.error("Data.asyncJSON()", {
-        url: url,
-        error: error
-      });
-    });
-  }
-
-  static planeData(batch, plane) {
-    return batch[plane].data[plane];
-  }
-
-  static toUrl(url) {
-    if (window.location.href.includes('localhost')) {
-      return Data.local + url;
-    } else {
-      return Data.hosted + url;
-    }
-  }
-
-  
-  // ------ Quick JSON read ------
-  static read(url, callback) {
-    if (Util$1.isObj(url)) {
-      Data.readFile(url, callback);
-    } else {
-      Data.asynsJson(url, callback);
-    }
-  }
-
-  static readFile(fileObj, doJson) {
-    var fileReader;
-    fileReader = new FileReader();
-    fileReader.onerror = function(e) {
-      return console.error('Store.readFile', fileObj.name, e.target.error);
-    };
-    fileReader.onload = function(e) {
-      return doJson(JSON.parse(e.target.result));
-    };
-    fileReader.readAsText(fileObj);
-  }
-
-  static saveFile(data, fileName) {
-    var downloadLink, htmlBlob, htmlUrl;
-    htmlBlob = new Blob([data], {
-      type: "text/html;charset=utf-8"
-    });
-    htmlUrl = window['URL'].createObjectURL(htmlBlob);
-    downloadLink = document.createElement("a");
-    downloadLink.href = htmlUrl;
-    downloadLink.download = fileName;
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-  }
-
-};
-
-//ata.parse   = Util.parseURI( window.location.href )
-//ata.hosted1 = Data.parse.hostname + '/app/data/'
-// console.log('Data.hosted', Data.hosted, window.location.href )
-Data.local = "app/data/";
-
-Data.hosted = '/app/data/';
-
-Data.cssDir = 'css/'; // /css in /pub
-
-var Data$1 = Data;
-
-var Cluster;
-
-Cluster = class Cluster {
-  constructor(drew, d3, name, elem, size) {
-    this.doRadial = this.doRadial.bind(this);
-    this.doLinks = this.doLinks.bind(this);
-    this.doNodes = this.doNodes.bind(this);
-    this.moveTo = this.moveTo.bind(this);
-    this.project = this.project.bind(this);
-    this.nodeClass = this.nodeClass.bind(this);
-    this.iconNode = this.iconNode.bind(this);
-    this.textNode = this.textNode.bind(this);
-    this.isEnd180 = this.isEnd180.bind(this);
-    this.isEnd = this.isEnd.bind(this);
-    this.iconUnicode = this.iconUnicode.bind(this);
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name;
-    this.elem = elem;
-    this.size = size;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
-    this.ready();
-  }
-
-  ready() {
-    var geo;
-    geo = this.drew.geomElem();
-    this.graph = this.drew.svg;
-    this.w = geo.w;
-    this.h = geo.h;
-    this.r = Math.min(this.w / 2, this.h / 2) * 0.9;
-    this.tree = this.d3.cluster();
-    this.tree.size([
-      this.r,
-      this.r // size([@w,@h])
-    ]);
-    this.tree.separation((a, b) => {
-      return (a.parent === b.parent ? 5 : 10) / a.depth;
-    });
-    this.g.attr("transform", "translate(" + this.w * 0.5 + "," + this.h * 0.5 + ")");
-    return Data$1.asyncJSON('draw/Prin.json', (data) => {
-      return this.doRadial(data, this.g);
-    });
-  }
-
-  doRadial(data, g) {
-    var link, node, root;
-    root = this.d3.hierarchy(data);
-    this.tree(root);
-    link = this.doLinks(root, g);
-    node = this.doNodes(root, g);
-    //node.append("svg:circle").attr("r",4.5)
-    //iconNode( node ) # Clutters up overview
-    this.textNode(node);
-    Util$1.noop(link);
-  }
-
-  doLinks(root, g) {
-    return g.selectAll(".link").data(root.descendants().slice(1)).enter().append("svg:path").attr("class", "link").attr("stroke", 'blue').attr("fill", "none").attr("d", (d) => {
-      return this.moveTo(d);
-    });
-  }
-
-  doNodes(root, g) {
-    return g.selectAll("g.node").data(root.descendants()).enter().append("svg:g").attr("class", (d) => {
-      return this.nodeClass(d);
-    }).attr("transform", (d) => {
-      return "translate(" + this.project(d.x, d.y) + ")";
-    });
-  }
-
-  moveTo(d) {
-    var p;
-    p = d.parent;
-    return `M${this.project(d.x, d.y)}C${this.project(d.x, (d.y + p.y) / 2)} ${this.project(p.x, (d.y + p.y) / 2)} ${this.project(p.x, p.y)}`;
-  }
-
-  project(x, y) {
-    var angle, radius;
-    angle = (x - 90) / 180 * Math.PI;
-    radius = y;
-    return [radius * Math.cos(angle), radius * Math.sin(angle)];
-  }
-
-  nodeClass(d) {
-    if (d.children != null) {
-      return "node--internal";
-    } else {
-      return "node--leaf";
-    }
-  }
-
-  iconNode(node) {
-    node.append("svg:text").attr("dy", 4).attr("stroke", 'wheat').attr("font-size", "1.4em").attr("font-family", "FontAwesome").attr("text-anchor", "middle").text((d) => {
-      return this.iconUnicode(d);
-    });
-  }
-
-  textNode(node) {
-    node.append("svg:text").attr("dy", ".31em").attr("y", 2).attr("x", (d) => {
-      if (this.isEnd180(d)) {
-        return 6;
-      } else {
-        return -6;
-      }
-    }).attr("text-anchor", (d) => {
-      if (this.isEnd180(d)) {
-        return "end";
-      } else {
-        return "start";
-      }
-    }).attr("transform", (d) => {
-      return "rotate(" + (d.x < 180 ? d.x - 90 : d.x + 90) + ")";
-    //attr("font-size","1.0em")
-    }).attr("stroke", 'wheat').attr("font-family", "Roboto").text(function(d) {
-      return d.data.name;
-    });
-  }
-
-  isEnd180(d) {
-    return d.x > 180;
-  }
-
-  isEnd(d) {
-    return !((d.children != null) && d.children.length > 0);
-  }
-
-  iconUnicode(d) {
-    var icon;
-    icon = d.data.icon != null ? d.data.icon : 'fas fa-circle';
-    return Vis$1.unicode(icon);
-  }
-
-};
-
-var Cluster$1 = Cluster;
 
 var Link;
 
@@ -22100,143 +22465,6 @@ var Radar$1 = Radar;
         .on("dragend",   (tech) => @doDragEnd(tech)   )  )
 
 */
-
-var Radial$1;
-
-Radial$1 = class Radial {
-  constructor(drew, d3, name, elem, size) {
-    this.doRadial = this.doRadial.bind(this);
-    this.doLinks = this.doLinks.bind(this);
-    this.doNodes = this.doNodes.bind(this);
-    this.moveTo = this.moveTo.bind(this);
-    this.project = this.project.bind(this);
-    this.nodeClass = this.nodeClass.bind(this);
-    this.iconNode = this.iconNode.bind(this);
-    this.textNode = this.textNode.bind(this);
-    this.isEnd180 = this.isEnd180.bind(this);
-    this.isEnd = this.isEnd.bind(this);
-    this.iconUnicode = this.iconUnicode.bind(this);
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name;
-    this.elem = elem;
-    this.size = size;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
-    this.ready();
-  }
-
-  ready() {
-    var geo;
-    geo = this.drew.geomElem();
-    this.graph = this.drew.svg;
-    this.w = geo.w;
-    this.h = geo.h;
-    this.r = Math.min(this.w / 2, this.h / 2) * 0.9;
-    this.tree = this.d3.tree();
-    this.tree.size([
-      this.r,
-      this.r // size([@w,@h])
-    ]);
-    this.tree.separation((a, b) => {
-      return (a.parent === b.parent ? 5 : 10) / a.depth;
-    });
-    this.g.attr("transform", "translate(" + this.w * 0.5 + "," + this.h * 0.5 + ")");
-    return Data$1.asyncJSON('draw/Prin.json', (data) => {
-      return this.doRadial(data, this.g);
-    });
-  }
-
-  doRadial(data, g) {
-    var link, node, root;
-    root = this.d3.hierarchy(data);
-    this.tree(root);
-    link = this.doLinks(root, g);
-    node = this.doNodes(root, g);
-    //node.append("svg:circle").attr("r",4.5)
-    //iconNode( node ) # Clutters up overview
-    this.textNode(node);
-    Util$1.noop(link);
-  }
-
-  doLinks(root, g) {
-    return g.selectAll(".link").data(root.descendants().slice(1)).enter().append("svg:path").attr("class", "link").attr("stroke", 'blue').attr("fill", "none").attr("d", (d) => {
-      return this.moveTo(d);
-    });
-  }
-
-  doNodes(root, g) {
-    return g.selectAll("g.node").data(root.descendants()).enter().append("svg:g").attr("class", (d) => {
-      return this.nodeClass(d);
-    }).attr("transform", (d) => {
-      return "translate(" + this.project(d.x, d.y) + ")";
-    });
-  }
-
-  moveTo(d) {
-    var p;
-    p = d.parent;
-    return `M${this.project(d.x, d.y)}C${this.project(d.x, (d.y + p.y) / 2)} ${this.project(p.x, (d.y + p.y) / 2)} ${this.project(p.x, p.y)}`;
-  }
-
-  project(x, y) {
-    var angle, radius;
-    angle = (x - 90) / 180 * Math.PI;
-    radius = y;
-    return [radius * Math.cos(angle), radius * Math.sin(angle)];
-  }
-
-  nodeClass(d) {
-    if (d.children != null) {
-      return "node--internal";
-    } else {
-      return "node--leaf";
-    }
-  }
-
-  iconNode(node) {
-    node.append("svg:text").attr("dy", 4).attr("stroke", 'wheat').attr("font-size", "1.4em").attr("font-family", "FontAwesome").attr("text-anchor", "middle").text((d) => {
-      return this.iconUnicode(d);
-    });
-  }
-
-  textNode(node) {
-    node.append("svg:text").attr("dy", ".31em").attr("y", 2).attr("x", (d) => {
-      if (this.isEnd180(d)) {
-        return 6;
-      } else {
-        return -6;
-      }
-    }).attr("text-anchor", (d) => {
-      if (this.isEnd180(d)) {
-        return "end";
-      } else {
-        return "start";
-      }
-    }).attr("transform", (d) => {
-      return "rotate(" + (d.x < 180 ? d.x - 90 : d.x + 90) + ")";
-    //attr("font-size","1.0em")
-    }).attr("stroke", 'wheat').attr("font-family", "Roboto").text(function(d) {
-      return d.data.name;
-    });
-  }
-
-  isEnd180(d) {
-    return d.x > 180;
-  }
-
-  isEnd(d) {
-    return !((d.children != null) && d.children.length > 0);
-  }
-
-  iconUnicode(d) {
-    var icon;
-    icon = d.data.icon != null ? d.data.icon : 'fas fa-circle';
-    return Vis$1.unicode(icon);
-  }
-
-};
-
-var Radial$2 = Radial$1;
 
 var Tree;
 
@@ -25392,18 +25620,20 @@ Drew = class Drew {
 
   create(name, elem, size) {
     switch (name) {
+      case 'Wheel':
+        return new Wheel$1(this, d3, name, elem, size);
       case 'Axes':
         return new Axes$1(this, d3, name, elem, size);
       case 'Chord':
         return new Chord$1(this, d3, name, elem, size);
       case 'Cluster':
-        return new Cluster$1(this, d3, name, elem, size);
+        return new Cluster(this, d3, name, elem, size);
       case 'Link':
         return new Link$1(this, d3, name, elem, size);
       case 'Radar':
         return new Radar$1(this, d3, name, elem, size, 'Radar');
       case 'Radial':
-        return new Radial$2(this, d3, name, elem, size);
+        return new Radial(this, d3, name, elem, size);
       case 'Tree':
         return new Tree$1(this, d3, name, elem, size);
       case 'Hue':
@@ -25506,6 +25736,7 @@ let Draw = {
 
   data() {
     return { comp:'Draw', key:'Draw', drew:null, pages:{
+      Wheel:   { title:'Wheel',   key:'Wheel',   obj:null },
       Axes:    { title:'Axes',    key:'Axes',    obj:null },
       Chord:   { title:'Chord',   key:'Chord',   obj:null },
       Link:    { title:'Link',    key:'Link',    obj:null },
@@ -25588,7 +25819,7 @@ __vue_render__$1._withStripped = true;
   /* style */
   const __vue_inject_styles__$1 = function (inject) {
     if (!inject) return
-    inject("data-v-71ed0ed8_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;EACvB,+BAA+B;AACjC;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,eAAe;AACjB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;AACX;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n"]}, media: undefined });
+    inject("data-v-756cf4bc_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;EACvB,+BAA+B;AACjC;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,eAAe;AACjB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;AACX;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n"]}, media: undefined });
 
   };
   /* scoped */

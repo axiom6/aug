@@ -1,7 +1,6 @@
 
-import Util     from '../util/Util.js'
-import Vis      from '../util/Vis.js'
-#port MBox     from '../mbox/MBox.js'
+import Util     from '../../base/util/Util.js'
+import Vis      from '../../base/util/Vis.js'
 
 class Coord
 

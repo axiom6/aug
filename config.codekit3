@@ -1084,6 +1084,72 @@
 		"oAP": "/pub/404.html",
 		"oF": 0
 		},
+	"/pub/ap/mbox/Box.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/ap/mbox/Box-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/ap/mbox/Color.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/ap/mbox/Color-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/ap/mbox/Coord.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/ap/mbox/Coord-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/ap/mbox/Faces.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/ap/mbox/Faces-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/ap/mbox/MBox.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/ap/mbox/MBox-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/ap/mbox/Regress.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/ap/mbox/Regress-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/app/augm/Augm.js": {
 		"bF": 0,
 		"ft": 64,
@@ -1280,6 +1346,22 @@
 		"ft": 524288,
 		"oA": 1,
 		"oAP": "/pub/app/data/draw/Tops-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/app/data/jitter/Flavor.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/app/data/jitter/Flavor-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/app/data/jitter/Region.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/app/data/jitter/Region-min.json",
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
@@ -1606,17 +1688,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/base/d3d/Cluster.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/base/d3d/Cluster-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/pub/base/d3d/Drew.js": {
 		"bF": 0,
 		"ft": 64,
@@ -1668,17 +1739,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/base/d3d/Radar-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/base/d3d/Radial.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/base/d3d/Radial-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -4010,6 +4070,215 @@
 		"rFN": 0,
 		"uCM": 0
 		},
+	"/src/ap/jitter/Body.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/ap/jitter/Body.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ap/jitter/Brew.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/ap/jitter/Brew.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ap/jitter/Drink.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/ap/jitter/Drink.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ap/jitter/Flavor.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/ap/jitter/Flavor.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ap/jitter/Interact.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/ap/jitter/Interact.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ap/jitter/Jitter.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/ap/jitter/Jitter.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ap/jitter/Prefs.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/ap/jitter/Prefs.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ap/jitter/Region.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/ap/jitter/Region.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ap/jitter/Roast.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/ap/jitter/Roast.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ap/jitter/Summary.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/ap/jitter/Summary.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ap/jitter/User.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/ap/jitter/User.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ap/jitter/Wheel.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/ap/jitter/Wheel.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ap/jitter/World.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/ap/jitter/World.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ap/mbox/Box.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/ap/mbox/Box.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ap/mbox/Color.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/ap/mbox/Color.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ap/mbox/Coord.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/ap/mbox/Coord.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ap/mbox/Faces.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/ap/mbox/Faces.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ap/mbox/MBox.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/ap/mbox/MBox.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/ap/mbox/Regress.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/ap/mbox/Regress.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
 	"/src/base/d3d/Axes.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -4098,67 +4367,12 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/base/mbox/Box.coffee": {
+	"/src/base/d3d/Wheel.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/base/mbox/Box.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/base/mbox/Color.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/base/mbox/Color.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/base/mbox/Coord.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/base/mbox/Coord.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/base/mbox/Faces.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/base/mbox/Faces.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/base/mbox/MBox.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/base/mbox/MBox.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/base/mbox/Regress.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/base/mbox/Regress.js",
+		"oAP": "/pub/base/d3d/Wheel.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
@@ -5653,6 +5867,22 @@
 		"hM": 0,
 		"oA": 0,
 		"oAP": "/zzz/audit/Complexity.txt",
+		"oF": 0
+		},
+	"/zzz/audit/eia.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/audit/eia.txt",
+		"oF": 0
+		},
+	"/zzz/audit/EnlightPower.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/audit/EnlightPower.txt",
 		"oF": 0
 		},
 	"/zzz/audit/headers.txt": {

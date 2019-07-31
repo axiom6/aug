@@ -4,17 +4,15 @@ import * as d3 from '../../../pub/lib/d3/d3.5.9.0.esm.js';
 
 import Vis from '../../base/util/Vis.js';
 
+import Wheel from './Wheel.js';
+
 import Axes from './Axes.js';
 
 import Chord from './Chord.js';
 
-import Cluster from './Cluster.js';
-
 import Link from './Link.js';
 
 import Radar from './Radar.js';
-
-import Radial from './Radial.js';
 
 import Tree from './Tree.js';
 
@@ -31,6 +29,8 @@ Drew = class Drew {
 
   create(name, elem, size) {
     switch (name) {
+      case 'Wheel':
+        return new Wheel(this, d3, name, elem, size);
       case 'Axes':
         return new Axes(this, d3, name, elem, size);
       case 'Chord':
