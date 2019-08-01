@@ -1,7 +1,7 @@
 {
-  "name":             "Demo",
-  "short_name":       "Demo",
-  "start_url":        "/demo.html",
+  "name":             "Jitter",
+  "short_name":       "Jitter",
+  "start_url":        "/jitter.html",
   "display":          "standalone",
   "theme_color":      "#888888",
   "background_color": "#000000",
