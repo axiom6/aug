@@ -1358,6 +1358,22 @@
 		"oO": 0,
 		"oS": 1
 		},
+	"/pub/app/data/jitter/Jitter.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/app/data/jitter/Jitter-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/app/data/jitter/Navs.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/app/data/jitter/Navs-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
 	"/pub/app/data/jitter/Region.json": {
 		"ft": 524288,
 		"oA": 1,
@@ -1470,84 +1486,76 @@
 		"oAP": "/pub/app/data/text/Info.txt",
 		"oF": 0
 		},
-	"/pub/app/demo/Demo.js": {
+	"/pub/app/jitter/Home.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/app/demo/Demo-min.js",
+		"oAP": "/pub/app/jitter/Home-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/demo/Demo.roll.js": {
+	"/pub/app/jitter/Jitter.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/app/demo/Demo.roll-min.js",
+		"oAP": "/pub/app/jitter/Jitter-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/demo/Home.js": {
+	"/pub/app/jitter/Jitter.roll.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/app/demo/Home-min.js",
+		"oAP": "/pub/app/jitter/Jitter.roll-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/demo/Home.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/app/demo/Home.js",
-		"oF": 0
-		},
-	"/pub/app/demo/Main.coffee": {
+	"/pub/app/jitter/Main.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/app/demo/Main.js",
+		"oAP": "/pub/app/jitter/Main.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/demo/Main.js": {
+	"/pub/app/jitter/Main.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/app/demo/Main-min.js",
+		"oAP": "/pub/app/jitter/Main-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/demo/manifest.webmanifest": {
+	"/pub/app/jitter/manifest.webmanifest": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/pub/app/demo/manifest.webmanifest",
+		"oAP": "/pub/app/jitter/manifest.webmanifest",
 		"oF": 1
 		},
-	"/pub/app/demo/Router.js": {
+	"/pub/app/jitter/Router.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/app/demo/Router-min.js",
+		"oAP": "/pub/app/jitter/Router-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2021,6 +2029,17 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/base/util/Nav-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/base/util/NavMuse.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/base/util/NavMuse-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -2621,6 +2640,28 @@
 		"oT": 1,
 		"q": 100
 		},
+	"/pub/css/phone/landscape.png": {
+		"ft": 32768,
+		"iS": 115789,
+		"oA": 0,
+		"oAP": "/pub/css/phone/landscape.png",
+		"oF": 0,
+		"oIPL": 1,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/phone/portrait.png": {
+		"ft": 32768,
+		"iS": 113654,
+		"oA": 0,
+		"oAP": "/pub/css/phone/portrait.png",
+		"oF": 0,
+		"oIPL": 1,
+		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
 	"/pub/css/svg/hallowback2.svg": {
 		"ft": 2097152,
 		"miP": 0,
@@ -2798,14 +2839,6 @@
 		"opt": 0,
 		"oT": 1,
 		"q": 100
-		},
-	"/pub/demo.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/demo.html",
-		"oF": 0
 		},
 	"/pub/gan/2D/Basics.js": {
 		"bF": 0,
@@ -3103,6 +3136,14 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"/pub/jitter.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/jitter.html",
+		"oF": 0
 		},
 	"/pub/lib/d3/align.js": {
 		"bF": 0,
@@ -3930,6 +3971,72 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/vue/jitter/Body.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/jitter/Body-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/jitter/Brew.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/jitter/Brew-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/jitter/Drink.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/jitter/Drink-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/jitter/Flavor.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/jitter/Flavor-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/jitter/Home.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/jitter/Home-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/jitter/Roast.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/jitter/Roast-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/vue/math/MathEQ.js": {
 		"bF": 0,
 		"ft": 64,
@@ -4527,6 +4634,17 @@
 		"mi": 0,
 		"oA": 0,
 		"oAP": "/pub/base/util/Nav.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/base/util/NavMuse.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/base/util/NavMuse.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
@@ -5244,6 +5362,70 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/pub/vue/geom/GeomND.js",
+		"oF": 0
+		},
+	"/vue/jitter/Body.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/jitter/Body.js",
+		"oF": 0
+		},
+	"/vue/jitter/Brew.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/jitter/Brew.js",
+		"oF": 0
+		},
+	"/vue/jitter/Dash.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/jitter/Dash.js",
+		"oF": 0
+		},
+	"/vue/jitter/Drink.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/jitter/Drink.js",
+		"oF": 0
+		},
+	"/vue/jitter/Flavor.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/jitter/Flavor.js",
+		"oF": 0
+		},
+	"/vue/jitter/Home.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/jitter/Home.js",
+		"oF": 0
+		},
+	"/vue/jitter/Roast.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/jitter/Roast.js",
+		"oF": 0
+		},
+	"/vue/jitter/View.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/jitter/View.js",
 		"oF": 0
 		},
 	"/vue/maps/google/Goog.vue": {
@@ -9202,23 +9384,23 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.html",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "",
-			"autoOutputPathReplace2": "",
-			"autoOutputPathStyle": 0,
-			"fileExtension": "html",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.js",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "vue",
 			"autoOutputPathReplace2": "pub/vue",
 			"autoOutputPathStyle": 3,
 			"fileExtension": "vue",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.html",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "",
+			"autoOutputPathReplace2": "",
+			"autoOutputPathStyle": 0,
+			"fileExtension": "html",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
 			}

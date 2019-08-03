@@ -1,7 +1,7 @@
 
 import Data    from '../../base/util/Data.js'
 import Stream  from '../../base/util/Stream.js'
-import Nav     from '../../base/util/Nav.js'
+import Nav     from '../../base/util/NavMuse.js' # Expanded from basic Nav class
 import Vis     from '../../base/util/Vis.js'
 import Cache   from '../../base/util/Cache.js'
 

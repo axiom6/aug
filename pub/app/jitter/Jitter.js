@@ -1,7 +1,7 @@
 
 import Vue    from '../../lib/vue/vue.esm.browser.js';
 import Main   from './Main.js';
-import Home   from './Home.js';
+import Home   from '../../vue/Jitter/Home.js';
 import Router from './Router.js'
 
 Vue['config'].productionTip = false;
