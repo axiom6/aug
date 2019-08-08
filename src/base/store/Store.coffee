@@ -2,7 +2,7 @@
 class Store
 
   constructor:( @dbName, @tables, @url ) ->
-    @rest=null; @fire=null; @index=null; @local=null; @memory=null; @pipe=null
+    @rest=null; @fire=null; @cloud=null; @index=null; @local=null; @memory=null; @pipe=null
 
   table:(tn) ->
     if not @tables[tn]?
@@ -32,6 +32,7 @@ class Store
       switch obj.src
         when 'rest'   then @rest  .batch( name, obj, objs, callback ) if @rest?
         when 'fire'   then @fire  .batch( name, obj, objs, callback ) if @fire?
+        when 'cloud'  then @cloud .batch( name, obj, objs, callback ) if @cloud?
         when 'index'  then @index .batch( name, obj, objs, callback ) if @index?
         when 'local'  then @local .batch( name, obj, objs, callback ) if @local?
         when 'memory' then @memory.batch( name, obj, objs, callback ) if @memory?
@@ -46,6 +47,7 @@ class Store
     switch  src
       when 'rest'   then @rest  .get( table, id, callback ) if @rest?
       when 'fire'   then @fire  .get( table, id, callback ) if @fire?
+      when 'cloud'  then @cloud .get( table, id, callback ) if @cloud?
       when 'index'  then @index .get( table, id, callback ) if @index?
       when 'local'  then @local .get( table, id, callback ) if @local?
       when 'memory' then @memory.get( table, id, callback ) if @memory?
@@ -54,6 +56,7 @@ class Store
   add:         ( table, id, object ) -> # Post an object into table with id
     @rest  .add( table, id, object ) if @rest?
     @fire  .add( table, id, object ) if @fire?
+    @cloud .add( table, id, object ) if @cloud?
     @index .add( table, id, object ) if @index?
     @local .add( table, id, object ) if @local?
     @memory.add( table, id, object ) if @memory?

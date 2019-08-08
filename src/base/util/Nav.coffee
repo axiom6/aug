@@ -29,11 +29,12 @@ class Nav
 
   route:( comp, obj ) ->
     if @$router?
-       @$router.push( { name:comp     } )
+       @$router.push( { name:comp } )
        # console.log(   'Nav.router()', { name:comp } )
     else
        console.error( 'Nav.router() $router not set' )
     # Oueue up obj for for component to request when mounted
+    @comp   = comp
     @queue  = obj
     @queued = true
     return

@@ -39,7 +39,7 @@
       styleBlock: function(p) {
         let sy = 0.8
         let p2 = p[2]===0 ? p[3] : p[2];
-        return { position:'absolute', left:sy*p[0]+'vw', top:sy*p[1]+'vh', width:sy*p2+'vw', height:sy*p[3]+'vh',
+        return { position:'absolute', left:sy*p[0]+'%', top:sy*p[1]+'%', width:sy*p2+'%', height:sy*p[3]+'%',
         fontSize:(p[3]*0.1)+'em' } },
       styleBtn: function (btn) {
         let back = this.colors[btn.back] ? this.colors[btn.back] : this.back;

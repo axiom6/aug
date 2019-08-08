@@ -1,5 +1,6 @@
 
 import Fire   from './Fire.js'
+import Cloud  from './Cloud.js'
 #mport Index  from './Index.js'
 #mport Rest   from './store/Rest.js'
 #mport Local  from './Local.js'
@@ -15,6 +16,7 @@ class Table
     @tables       = { Prac:{} }
     @store        = new Store( @dbName, @tables, @url )
     @store.fire   = new Fire(   @store )
+    @store.Cloud  = new Cloud(  @store )
     @store.pipe   = new Pipe( @stream, @dbName )
     #store.rest   = new Rest(   @store )
     #store.local  = new Local(  @store )

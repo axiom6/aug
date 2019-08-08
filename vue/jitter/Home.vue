@@ -3,24 +3,32 @@
   <div class="home">
     <div class="head"><h1>Welcome to the Jitter Mobile App</h1></div>
     <div class="summary">
-      <div class="hflavor">Flavor:</div><div class="f1">F1</div><div class="f2">F2</div><div class="f3">F3</div>
-      <div class="hroast" >Roast: </div><div class="r1">R1</div><div class="r2">R2</div><div class="r3">R3</div>
-      <div class="hbrew"  >Brew:  </div><div class="b1">B1</div><div class="b2">B2</div><div class="b3">B3</div>
-      <div class="hdrink" >Drink: </div><div class="d1">D1</div><div class="d2">D2</div><div class="d3">D3</div>
-      <div class="hbody"  >Body:  </div><div class="s1">S1</div><div class="s2">S2</div><div class="s3">S3</div>
+      <div class="r1c1" @click="route('Flavor')">Flavor:</div>
+        <div class="r1c2">F1</div><div class="r1c3">F2</div><div class="r1c4">F3</div>
+      <div class="r2c1"  @click="route('Roast')" >Roast: </div>
+        <div class="r2c2">R1</div><div class="r2c3">R2</div><div class="r2c4">R3</div>
+      <div class="r3c1" @click="route('Brew')"  >Brew:  </div>
+        <div class="r3c2">B1</div><div class="r3c3">B2</div><div class="r3c4">B3</div>
+      <div class="r4c1" @click="route('Drink')" >Drink: </div>
+        <div class="r4c2">D1</div><div class="r4c3">D2</div><div class="r4c4">D3</div>
+      <div class="r5c1" @click="route('Body')"  >Body:  </div>
+        <div class="r5c2">S1</div><div class="r5c3">S2</div><div class="r5c4">S3</div>
     </div>
   </div>
 </template>
 
 <script type="module">
   
-   let Home = {
+  let Home = {
 
   data() { return { comp:'Home' } },
+  
+  methods:{
+    route: function( comp ) {
+        this.nav().route( comp, {} ); } },
 
    mounted: function () {
        this.publish( 'Nav', 'Home' ); }
-   
   }
 
   import Dash from './Dash.vue';
@@ -35,46 +43,28 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .grid2x1(){ display:grid; grid-template-columns:100fr; grid-template-rows: 25fr 75fr;
-    grid-template-areas:"head" "summary"; }
+  .grid5x4(){ display:grid; grid-template-rows: 20fr 20fr 20fr 20fr 20fr; grid-template-columns:40fr 20fr 20fr 20fr;
+    grid-template-areas:   "r1c1 r1c2 r1c3 r1c4" "r2c1 r2c2 r2c3 r2c4"
+     "r3c1 r3c2 r3c3 r3c4" "r4c1 r4c2 r4c3 r4c4" "r5c1 r5c2 r5c3 r5c4"; }
+
+  .c( @rc ) { display:grid; grid-area:@rc; justify-self:stretch; align-self:stretch;
+    justify-items:center; align-items:center; background-color:@theme-back; color:@theme-color;
+    border:solid thin @theme-color; }
   
-  .grid5x4() { display:grid; grid-template-columns:40fr 20fr 20fr 20fr; grid-template-rows:20fr 20fr 20fr 20fr 20fr;
-      grid-template-areas:"flavor f1 f2 f3" "roast r1 r2 r3"  "brew b1 b2 b3" "drink d1 d2 d3" "body s1 s2 s3"; }
-  
-  .home { .grid2x1(); position:absolute; left:0; top:0; right:0; bottom:0;
+  .home { position:absolute; left:0; top:0; width:100%; height:100%;
     background-color:@theme-back; color:@theme-color;
 
-    .head { grid-area:head; justify-items:center; align-items:center; text-align:center; display:grid;
-            justify-self:stretch; align-self:stretch;
+    .head { position:absolute; left:0; top:0; width:100%; height:20%;
+            display:grid;justify-items:center; align-items:center; text-align:center;
       h1 { font-size:@theme-h1-size; }
       h2 { font-size:@theme-h2-size; } }
       
-    .summary {  grid-area:summary; .grid5x4(); padding:2rem;
-    
-    .hflavor { grid-area:flavor; justify-self:stretch; align-self:stretch; display:grid; }
-    .f1      { grid-area:f1;     justify-self:stretch; align-self:stretch; display:grid; }
-    .f2      { grid-area:f2;     justify-self:stretch; align-self:stretch; display:grid; }
-    .f3      { grid-area:f3;     justify-self:stretch; align-self:stretch; display:grid; }
-  
-    .hroast  { grid-area:roast;  justify-self:stretch; align-self:stretch; display:grid; }
-    .r1      { grid-area:r1;     justify-self:stretch; align-self:stretch; display:grid; }
-    .r2      { grid-area:r2;     justify-self:stretch; align-self:stretch; display:grid; }
-    .r3      { grid-area:r3;     justify-self:stretch; align-self:stretch; display:grid; }
-  
-    .hbrew   { grid-area:brew;   justify-self:stretch; align-self:stretch; display:grid; }
-    .b1      { grid-area:b1;     justify-self:stretch; align-self:stretch; display:grid; }
-    .b2      { grid-area:b2;     justify-self:stretch; align-self:stretch; display:grid; }
-    .b3      { grid-area:b3;     justify-self:stretch; align-self:stretch; display:grid; }
-  
-    .hdrink  { grid-area:drink;  justify-self:stretch; align-self:stretch; display:grid; }
-    .d1      { grid-area:d1;     justify-self:stretch; align-self:stretch; display:grid; }
-    .d2      { grid-area:d2;     justify-self:stretch; align-self:stretch; display:grid; }
-    .d3      { grid-area:d3;     justify-self:stretch; align-self:stretch; display:grid; }
-    
-    .hbody   { grid-area:body;   justify-self:stretch; align-self:stretch; display:grid; }
-    .s1      { grid-area:s1;     justify-self:stretch; align-self:stretch; display:grid; }
-    .s2      { grid-area:s2;     justify-self:stretch; align-self:stretch; display:grid; }
-    .s3      { grid-area:s3;     justify-self:stretch; align-self:stretch; display:grid; }
+    .summary {  .grid5x4(); position:absolute; left:0; top:20%; width:100%; height:80%;
+      .r1c1{.c(r1c1)}; .r1c2{.c(r1c2)}; .r1c3{.c(r1c3)}; .r1c4{.c(r1c4)};
+      .r2c1{.c(r2c1)}; .r2c2{.c(r2c2)}; .r2c3{.c(r2c3)}; .r2c4{.c(r2c4)};
+      .r3c1{.c(r3c1)}; .r3c2{.c(r3c2)}; .r3c3{.c(r3c3)}; .r3c4{.c(r3c4)};
+      .r4c1{.c(r4c1)}; .r4c2{.c(r4c2)}; .r4c3{.c(r4c3)}; .r4c4{.c(r4c4)};
+      .r5c1{.c(r5c1)}; .r5c2{.c(r5c2)}; .r5c3{.c(r5c3)}; .r5c4{.c(r5c4)};
     }
   }
 
