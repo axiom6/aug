@@ -22,22 +22,25 @@
 
   export default {
 
-    props: { comp:String, btns:Object, klass:String, init:String, back:String, active:String },
+    props: { comp:String, btns:Object, klass:String, init:String, back:String, active:String, choices:Array },
 
-    data() { return { key:this.init,
+    data() { return { key:this.init, idx:-1,
       colors: { primary:'#007bff', secondary:'#6c757d', success:'#28a745', info:'#17a2b8',
                 warning:'#ffc107', danger:   '#dc3545', light:  '#f8f9fa', dark:'#343a40' } } },
 
     methods: {
       pubBtn: function (btn) {
         this.key = btn.key;
+        this.idx = ++this.idx % this.choices.length;
+        this.choices[this.idx] = this.key;
+        // console.log( 'Btns.publish()', { comp:this.comp, key:btn.key, idx:this.idx, choices:this.choices } );
         this.publish( this.comp, btn.key ); },
       aspect: function() {  // Only call in mounted
         let w = this.$refs['Btns']['clientWidth' ];
         let h = this.$refs['Btns']['clientHeight'];
         return h/w; },
       styleBlock: function(p) {
-        let sy = 0.8
+        let sy = 1.0
         let p2 = p[2]===0 ? p[3] : p[2];
         return { position:'absolute', left:sy*p[0]+'%', top:sy*p[1]+'%', width:sy*p2+'%', height:sy*p[3]+'%',
         fontSize:(p[3]*0.1)+'em' } },
@@ -46,7 +49,8 @@
         return this.key===btn.key ? { color:'black', backgroundColor:this.active }
                                   : { color:'black', backgroundColor:back }; },
       classCheck: function (btn) {
-        return this.key===btn.key ? 'check far fa-check-square' : 'check far fa-square' },
+        let    checked = this.idx === -1 ? this.key === btn.key : this.choices.indexOf(btn.key) !== -1;
+        return checked ? 'check far fa-check-square' : 'check far fa-square'; },
       classIcons: function (btn) {
         return 'icons ' + btn.icon },
       titleRef: function (btn) {
@@ -79,7 +83,7 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .btns { font-size:@theme-btn-size; position:absolute; left:0; top:0; right:0; bottom:0; }
+  .btns { font-size:@theme-btn-size; font-weight:bold; position:absolute; left:0; top:0; right:0; bottom:0; }
   
   .btn-center { display:grid;  width:100%; height:100%; } // A surrounding div for centering button
 

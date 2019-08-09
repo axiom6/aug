@@ -4485,6 +4485,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/src/base/store/Cloud.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/base/store/Cloud.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
 	"/src/base/store/Fire.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -5380,6 +5391,23 @@
 		"oAP": "/pub/vue/jitter/Brew.js",
 		"oF": 0
 		},
+	"/vue/jitter/choice.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/vue/jitter/choice.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
 	"/vue/jitter/Dash.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -6090,6 +6118,14 @@
 		"oA": 1,
 		"oAP": "/zzz/audit/pwa.txt",
 		"oF": 1
+		},
+	"/zzz/jitter/Home.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/jitter/Home.js",
+		"oF": 0
 		},
 	"/zzz/libs/ASCIIMathML.js": {
 		"bF": 0,

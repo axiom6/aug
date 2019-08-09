@@ -30,6 +30,9 @@ Nav = class Nav {
 
   dir(dr, event = null) {
     var comp;
+    if (dr === 'prev') {
+      return;
+    }
     if (event === null) {
       ({});
     }
@@ -58,6 +61,7 @@ Nav = class Nav {
       console.error('Nav.router() $router not set');
     }
     // Oueue up obj for for component to request when mounted
+    this.comp = comp;
     this.queue = obj;
     this.queued = true;
   }
