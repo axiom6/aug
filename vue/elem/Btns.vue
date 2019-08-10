@@ -30,10 +30,8 @@
 
     methods: {
       pubBtn: function (btn) {
-        this.key = btn.key;
         this.idx = ++this.idx % this.choices.length;
-        this.choices[this.idx] = this.key;
-        // console.log( 'Btns.publish()', { comp:this.comp, key:btn.key, idx:this.idx, choices:this.choices } );
+        this.choices[this.idx] = btn.key;
         this.publish( this.comp, btn.key ); },
       aspect: function() {  // Only call in mounted
         let w = this.$refs['Btns']['clientWidth' ];

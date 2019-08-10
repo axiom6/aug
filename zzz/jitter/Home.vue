@@ -3,22 +3,23 @@
   <div class="home">
     <div class="head"><h1>Jitter</h1></div>
     <div class="summary">
-      <div class="Flavor" @click="route('Flavor')"><h-summ name="Flavor" id="SFlavor"></h-summ></div>
-      <div class="Roast"  @click="route('Roast')" ><h-summ name="Roast"  id="SRoast"></h-summ></div>
-      <div class="Brew"   @click="route('Brew')"  ><h-summ name="Brew"   id="SBrew" ></h-summ></div>
-      <div class="Drink"  @click="route('Drink')" ><h-summ name="Drink"  id="SDrink"></h-summ></div>
-      <div class="Body"   @click="route('Body')"  ><h-summ name="Body"   id="SBody" ></h-summ></div>
+      <div class="Flavor"><div class="name" @click="route('Flavor')">Flavor</div>
+        <div class="c1">F1</div><div class="c2">F2</div><div class="c3">F3</div></div>
+      <div class="Roast"><div class="name"  @click="route('Roast')" >Roast</div>
+        <div class="c1">R1</div><div class="c2">R2</div><div class="c3">R3</div></div>
+      <div class="Brew"><div class="name" @click="route('Brew')"  >Brew</div>
+        <div class="c1">B1</div><div class="c2">B2</div><div class="c3">B3</div></div>
+      <div class="Drink"><div class="name" @click="route('Drink')" >Drink</div>
+        <div class="c1">D1</div><div class="c2">D2</div><div class="c3">D3</div></div>
+      <div class="Body"><div class="name" @click="route('Body')"  >Body</div>
+        <div class="c1">S1</div><div class="c2">S2</div><div class="c3">S3</div></div>
     </div>
   </div>
 </template>
 
 <script type="module">
-
-  import Summ from './Summ.vue';
   
   let Home = {
-
-    components:{ 'h-summ':Summ },
 
   data() { return { comp:'Home', choices:{
       Flavor: { key:'Flavor' },
@@ -31,7 +32,8 @@
     route: function( comp ) {
         this.nav().route( comp, {} ); } },
 
-   mounted: function () {}
+   mounted: function () {
+       this.publish( 'Nav', 'Home' ); }
   }
 
   import Dash from './Dash.vue';
@@ -62,6 +64,12 @@
       .Drink  { position:absolute; left:0; top:60%; width:100%; height:20%; }
       .Body   { position:absolute; left:0; top:80%; width:100%; height:20%; } }
     
+    .centerItems() { display:grid; align-items:center; justify-items:center; text-align:center; }
+    
+    .name { position:absolute; left:0;     top:0;   width:100%;   height:50%; .themeCenterItems(); }
+    .c1   { position:absolute; left:0;     top:50%; width: 33.3%; height:50%; .themeCenterItems(); }
+    .c2   { position:absolute; left:33.3%; top:50%; width: 33.3%; height:50%; .themeCenterItems(); }
+    .c3   { position:absolute; left:66.6%; top:50%; width: 33.3%; height:50%; .themeCenterItems(); }
   }
 
 </style>

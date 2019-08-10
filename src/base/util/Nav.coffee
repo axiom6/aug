@@ -19,7 +19,7 @@ class Nav
     return
 
   dir:( dr, event=null ) =>
-    return if dr is 'prev'
+    # return if dr is 'prev'
     if event is null then {}
     comp = @dirs[@comp][dr]
     @pub( comp )

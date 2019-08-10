@@ -30,9 +30,7 @@ Nav = class Nav {
 
   dir(dr, event = null) {
     var comp;
-    if (dr === 'prev') {
-      return;
-    }
+    // return if dr is 'prev'
     if (event === null) {
       ({});
     }

@@ -89,10 +89,6 @@
     }
   
    export default Tocs;
-  
-  // this.nav().pub( { level:'Tabs', tab:'Prac' } ); // Init view with Prac tab
-
-  //this.comp = comp==='Close' ? 'None' : comp;
    
 </script>
 
