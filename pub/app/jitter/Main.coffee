@@ -8,6 +8,7 @@ import Vis    from '../../base/util/Vis.js'
 class Main
 
   Main.Batch = {
+    Choice: { url:'jitter/Choice.json', data:null, type:'None', plane:'None' }
     Navs:   { url:'jitter/Navs.json',   data:null, type:'None', plane:'None' }
     Jitter: { url:'jitter/Jitter.json', data:null, type:'None', plane:'None' }
     Flavor: { url:'jitter/Flavor.json', data:null, type:'None', plane:'None' }
@@ -61,6 +62,8 @@ class Main
         Main.Batch[compk].data.comps
       kompsTocs:() ->
         Main.komps
+      choice:() ->
+        Main.Batch.Choice.data
       pracs:( compk ) ->
         Main.Batch[compk].data[compk].pracs
       subset:( compk, filter ) ->

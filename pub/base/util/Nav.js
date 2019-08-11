@@ -41,11 +41,7 @@ Nav = class Nav {
         name: comp
       });
     }
-    console.log('Nav.dir()', {
-      beg: this.comp,
-      dir: dr,
-      end: comp
-    });
+    // console.log('Nav.dir()', { beg:@comp, dir:dr, end:comp } )
     this.comp = comp;
   }
 

@@ -2,7 +2,7 @@
 <template>
   <div ref="Btns"                   class="btns">
     <template v-for="btn in btns">
-      <div        :ref="btn.key"   :style="styleBlock(btn.pos)">
+      <div        :ref="btn.name"  :style="styleBlock(btn.pos)">
         <div                        class="btn-center">
           <div class="btn" :style="styleBtn(btn)" @click="pubBtn(btn)">
             <span v-if="btn.check" :class="classCheck(btn)"></span>
@@ -22,17 +22,18 @@
 
   export default {
 
-    props: { comp:String, btns:Object, klass:String, init:String, back:String, active:String, choices:Array },
+    props: { comp:String, btns:Object, klass:String, back:String, active:String, choicea:Array },
 
-    data() { return { key:this.init, idx:-1,
+    data() { return { idx:-1, name:'-',
       colors: { primary:'#007bff', secondary:'#6c757d', success:'#28a745', info:'#17a2b8',
                 warning:'#ffc107', danger:   '#dc3545', light:  '#f8f9fa', dark:'#343a40' } } },
 
     methods: {
       pubBtn: function (btn) {
-        this.idx = ++this.idx % this.choices.length;
-        this.choices[this.idx] = btn.key;
-        this.publish( this.comp, btn.key ); },
+        this.idx  = ++this.idx % this.choicea.length;
+        this.name              = btn.name;
+        this.choicea[this.idx] = btn.name;
+        this.publish( this.comp, btn.name ); },
       aspect: function() {  // Only call in mounted
         let w = this.$refs['Btns']['clientWidth' ];
         let h = this.$refs['Btns']['clientHeight'];
@@ -44,24 +45,24 @@
         fontSize:(p[3]*0.1)+'em' } },
       styleBtn: function (btn) {
         let back = this.colors[btn.back] ? this.colors[btn.back] : this.back;
-        return this.key===btn.key ? { color:'black', backgroundColor:this.active }
-                                  : { color:'black', backgroundColor:back }; },
+        return this.name===btn.name ? { color:'black', backgroundColor:this.active }
+                                    : { color:'black', backgroundColor:back }; },
       classCheck: function (btn) {
-        let    checked = this.idx === -1 ? this.key === btn.key : this.choices.indexOf(btn.key) !== -1;
+        let    checked = this.name === btn.name || this.choicea.indexOf(btn.name) !== -1;
         return checked ? 'check far fa-check-square' : 'check far fa-square'; },
       classIcons: function (btn) {
         return 'icons ' + btn.icon },
       titleRef: function (btn) {
-        return 'Title' + btn.key },
+        return 'Title' + btn.name },
       img: function (btn) {
         return Data.cssDir + btn.img },
       adjustWidths: function() {
-         let keys = Object.keys(this.btns)
-         for( let key of keys ) {
-           let btn = this.btns[key];
+         let names = Object.keys(this.btns)
+         for( let name of names ) {
+           let btn = this.btns[name];
            if( btn.pos[2]===0 ) {
              let wt     = this.$refs[this.titleRef(btn)][0]['clientWidth']
-             btn.elem   = this.$refs[btn.key][0]
+             btn.elem   = this.$refs[btn.name][0]
              let wb     = btn.elem['clientWidth']
              btn.pos[2] = btn.pos[3]*2.4*wt/wb
              // console.log( 'Adj', { wt:wt, wb:wb, w:btn.pos[2], h:btn.pos[3] } ) }
@@ -71,6 +72,7 @@
     mounted: function () {
       this.asp = this.aspect();
       this.adjustWidths();
+      // console.log( 'Btns.choicea', this.choicea );
     }
 
   }

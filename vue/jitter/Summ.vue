@@ -16,16 +16,18 @@
 
     props: { name:String, id:String },
 
-    data() { return { idx:-1, num:3, c0:'None', c1:'None', c2:'None' } },
+    data() { return { idx:-1, num:3, c0:"-", c1:"-", c2:"-" } },
 
     methods:{
       onChoice: function( choice ) {
         this.idx = ++this.idx % this.num;
-        this['c'+this.idx] = choice;
-        console.log( 'Summ.onChoice()', { name:this.name, id:this.id, choice:choice,
-          ci:this['c'+this.idx], idx:this.idx, } ); } },
+        this['c'+this.idx]                     = choice;
+        this.choice()[this.name]['c'+this.idx] = choice; } },
 
     mounted: function () {
+      this.c0 = this.choice()[this.name].c0;
+      this.c1 = this.choice()[this.name].c1;
+      this.c2 = this.choice()[this.name].c2;
       this.subscribe( this.name, this.id, this.onChoice ); }
 
   }

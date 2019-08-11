@@ -24,7 +24,7 @@ class Nav
     comp = @dirs[@comp][dr]
     @pub( comp )
     @$router.push( { name:comp } ) if @$router?
-    console.log('Nav.dir()', { beg:@comp, dir:dr, end:comp } )
+    # console.log('Nav.dir()', { beg:@comp, dir:dr, end:comp } )
     @comp = comp
     return
 

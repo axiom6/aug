@@ -1350,6 +1350,14 @@
 		"oO": 0,
 		"oS": 1
 		},
+	"/pub/app/data/jitter/Choice.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/app/data/jitter/Choice-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
 	"/pub/app/data/jitter/Flavor.json": {
 		"ft": 524288,
 		"oA": 1,
@@ -6141,6 +6149,14 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/zzz/jitter/Body.js",
+		"oF": 0
+		},
+	"/zzz/jitter/Home.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/jitter/Home.js",
 		"oF": 0
 		},
 	"/zzz/libs/ASCIIMathML.js": {

@@ -5,7 +5,7 @@
       <h-summ name="Body" id="CBody" ></h-summ>
     </div>
     <div class="cbtns">
-      <h-btns comp="Body" :btns="btns" init="None" :choices="choices" back="#3B5999" active="tan"></h-btns>
+      <h-btns comp="Body" :btns="btns" :choicea="choicea" back="#3B5999" active="tan"></h-btns>
     </div>
   </div>
 </template>
@@ -19,17 +19,21 @@
 
     components:{ 'h-summ':Summ, 'h-btns':Btns },
 
-    data() { return { comp:'Body', choices:['','',''], btns:{
-      Thick:  { title:'Thick',  key:'Thick',  obj:null, pos:[20, 5,60,14], back:'primary',   check:true },
-      Full:   { title:'Full',   key:'Full',   obj:null, pos:[20,24,60,14], back:'secondary', check:true },
-      Creamy: { title:'Creamy', key:'Creamy', obj:null, pos:[20,43,60,14], back:'success',   check:true },
-      Milky:  { title:'Milky',  key:'Milky',  obj:null, pos:[20,62,60,14], back:'info',      check:true },
-      Silky:  { title:'Silky',  key:'Silky',  obj:null, pos:[20,81,60,14], back:'warning',   check:true }
+    data() { return { comp:'Body', choicea:['','',''], btns:{
+      Thick:  { title:'Thick',  name:'Thick',  pos:[20, 5,60,14], back:'primary',   check:true },
+      Full:   { title:'Full',   name:'Full',   pos:[20,24,60,14], back:'secondary', check:true },
+      Creamy: { title:'Creamy', name:'Creamy', pos:[20,43,60,14], back:'success',   check:true },
+      Milky:  { title:'Milky',  name:'Milky',  pos:[20,62,60,14], back:'info',      check:true },
+      Silky:  { title:'Silky',  name:'Silky',  pos:[20,81,60,14], back:'warning',   check:true }
     } } },
     
     methods:{},
-    
-    mounted: function () { }
+
+    beforeMount: function () {
+      this.choicea[0] = this.choice()['Body'].c0;
+      this.choicea[1] = this.choice()['Body'].c1;
+      this.choicea[2] = this.choice()['Body'].c2;
+    }
 
   }
 

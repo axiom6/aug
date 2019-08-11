@@ -21,11 +21,11 @@
     components:{ 'h-summ':Summ },
 
   data() { return { comp:'Home', choices:{
-      Flavor: { key:'Flavor' },
-      Roast:  { key:'Roast'  },
-      Brew:   { key:'Brew'   },
-      Drink:  { key:'Drink'  },
-      Body:   { key:'Body'   } } }; },
+      Flavor: { name:'Flavor' },
+      Roast:  { name:'Roast'  },
+      Brew:   { name:'Brew'   },
+      Drink:  { name:'Drink'  },
+      Body:   { name:'Body'   } } }; },
   
   methods:{
     route: function( comp ) {
