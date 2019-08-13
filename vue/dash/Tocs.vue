@@ -78,7 +78,7 @@
         let filt = {}
         for( let key in pracs ) {
           let prac = pracs[key];
-          if( prac.row !== 'Dim' && komp !== 'Cols' ) {
+          if( prac.row !== 'Dim' || komp === 'Cols' ) {
             filt[key] = prac; } }
         return filt;
       } },
@@ -88,7 +88,7 @@
       for( let key in this.komps ) {
         let komp = this.komps[key];
         if( komp.ikw ) {  // this.komps.hasOwnProperty(key) &&
-            komp.pracs = this.filterPracs( this.pracs(komp.comp), key );
+            komp.pracs = this.filterPracs( this.pracs(komp.comp), komp.comp );
             this.subscribe( key, 'Tocs.vue', (obj) => {
               this.onComp(key);
               if( obj.disp==='All' ) { this.onPrac(obj.prac); }
