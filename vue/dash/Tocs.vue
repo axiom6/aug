@@ -73,17 +73,26 @@
         if( this.disp!==disp ) {
           return { color:'black', backgroundColor:this.toRgbaHsv(hsv) }; }
         else {
-          return { color:'white', backgroundColor:'black' }; } } },
+          return { color:'white', backgroundColor:'black' }; } },
+      filterPracs: function(pracs,komp) {
+        let filt = {}
+        for( let key in pracs ) {
+          let prac = pracs[key];
+          if( prac.row !== 'Dim' && komp !== 'Cols' ) {
+            filt[key] = prac; } }
+        return filt;
+      } },
     
     mounted: function () {
       this.komps = this.kompsTocs();
       for( let key in this.komps ) {
-        if( this.komps.hasOwnProperty(key) && this.komps[key].ikw ) {
-          this.komps[key].pracs = this.pracs(key);
-          this.subscribe( key, 'Tocs.vue', (obj) => {
-            this.onComp(key);
-            if( obj.disp==='All' ) { this.onPrac(obj.prac); }
-            else                   { this.onDisp(obj.prac,obj.disp); } } ); } }
+        let komp = this.komps[key];
+        if( komp.ikw ) {  // this.komps.hasOwnProperty(key) &&
+            komp.pracs = this.filterPracs( this.pracs(komp.comp), key );
+            this.subscribe( key, 'Tocs.vue', (obj) => {
+              this.onComp(key);
+              if( obj.disp==='All' ) { this.onPrac(obj.prac); }
+              else                   { this.onDisp(obj.prac,obj.disp); } } ); } }
       this.subscribe( 'Nav', 'Tocs.vue', (obj) => {
           this.onNav(obj); } ); }
     }

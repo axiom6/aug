@@ -55,8 +55,6 @@ Main = (function() {
 
   };
 
-  //ata.local   = "app/data/"
-  //ata.hosted  = "https://muse-b90e1.firebaseapp.com/app/data/"
   Main.FontUrl = "css/font/three/helvetiker_regular.typeface.json";
 
   Main.Batch = {
@@ -128,6 +126,14 @@ Main = (function() {
       ikw: true,
       link: false,
       icon: "fab fa-tripadvisor"
+    },
+    Prin: {
+      name: 'Prin',
+      comp: 'Cols',
+      pracs: {},
+      ikw: true,
+      link: false,
+      icon: "fas fa-balance-scale"
     },
     Cube: {
       name: 'Cube',
