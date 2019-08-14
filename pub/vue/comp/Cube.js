@@ -1287,12 +1287,12 @@ Build = class Build {
   }
 
   static colPractices(batch) {
-    var cols, i, len, plane, ref;
-    cols = batch.Cols.data['Cols'];
+    var i, len, plane, prin, ref;
+    prin = batch.Prin.data['Prin'];
     ref = ['Info', 'Know', 'Wise'];
     for (i = 0, len = ref.length; i < len; i++) {
       plane = ref[i];
-      batch[plane].data['Cols'] = cols;
+      batch[plane].data['Prin'] = prin;
     }
   }
 
@@ -1706,7 +1706,7 @@ Build = class Build {
   }
 
   getCol(cname) {
-    return this.batch.Cols.data['Cols'][cname];
+    return this.batch.Prin.data['Prin'][cname];
   }
 
   logPlanes() {
@@ -1768,7 +1768,7 @@ Build = class Build {
       batKey = ref[i];
       console.log("Batch File: ", batKey);
       batObj = batch[batKey].data;
-      ref1 = ['Info', 'Know', 'Wise', 'Cols', 'Rows'];
+      ref1 = ['Info', 'Know', 'Wise', 'Prin', 'Rows'];
       for (j = 0, len1 = ref1.length; j < len1; j++) {
         packKey = ref1[j];
         packObj = batObj[packKey];
@@ -51818,7 +51818,7 @@ CubeTh = class CubeTh {
         }
       }
     }
-    group.add(this.cols());
+    group.add(this.prin());
     this.convey(sp, group);
     this.flow(sp, group);
     this.conduit(sp, group);
@@ -51835,7 +51835,7 @@ CubeTh = class CubeTh {
     return group;
   }
 
-  cols() {
+  prin() {
     var col, group, i, j, key, len, len1, plane, pracCube, pracGroup, practice, ref, ref1, sp, study, studyCube, x, y, z;
     sp = this.space();
     group = new Group();
@@ -51856,7 +51856,7 @@ CubeTh = class CubeTh {
     for (i = 0, len = ref.length; i < len; i++) {
       col = ref[i];
       practice = this.build.getCol(col.name);
-      pracCube = new Cube3D$1('Cols', 'Dim', col.name, col.name, [col.x, sp.yc, sp.zc], [sp.cubeWidth, sp.colsHeight, sp.colsDepth], practice['hsv'], 0.6, this.fontPrac);
+      pracCube = new Cube3D$1('Prin', 'Dim', col.name, col.name, [col.x, sp.yc, sp.zc], [sp.cubeWidth, sp.colsHeight, sp.colsDepth], practice['hsv'], 0.6, this.fontPrac);
       pracGroup = new Group();
       pracGroup.add(pracCube.mesh);
       ref1 = [
@@ -51888,7 +51888,7 @@ CubeTh = class CubeTh {
           x = col.x + sp.cx[study.dir];
           y = sp.yc + sp.cy[study.dir];
           z = plane.z;
-          studyCube = new Rect$1('Cols', 'Dim', col.name, key, [x, y, z], [sp.cw, sp.ch], study['hsv'], 1.0, this.fontPrac, 0x000000);
+          studyCube = new Rect$1('Prin', 'Dim', col.name, key, [x, y, z], [sp.cw, sp.ch], study['hsv'], 1.0, this.fontPrac, 0x000000);
           pracGroup.add(studyCube.mesh);
         }
       }
@@ -52223,7 +52223,7 @@ CubeTh = class CubeTh {
     f2.add(act, 'Learn').onChange(traverals.learn);
     f2.add(act, 'Do').onChange(traverals.doDo);
     f2.add(act, 'Share').onChange(traverals.share);
-    f3 = gui.addFolder('Cols');
+    f3 = gui.addFolder('Prin');
     f3.add(act, 'Embrace').onChange(traverals.embrace);
     f3.add(act, 'Innovate').onChange(traverals.innovate);
     f3.add(act, 'Encourage').onChange(traverals.encourage);

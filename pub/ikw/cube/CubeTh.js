@@ -298,7 +298,7 @@ CubeTh = class CubeTh {
         }
       }
     }
-    group.add(this.cols());
+    group.add(this.prin());
     this.convey(sp, group);
     this.flow(sp, group);
     this.conduit(sp, group);
@@ -315,7 +315,7 @@ CubeTh = class CubeTh {
     return group;
   }
 
-  cols() {
+  prin() {
     var col, group, i, j, key, len, len1, plane, pracCube, pracGroup, practice, ref, ref1, sp, study, studyCube, x, y, z;
     sp = this.space();
     group = new THREE.Group();
@@ -336,7 +336,7 @@ CubeTh = class CubeTh {
     for (i = 0, len = ref.length; i < len; i++) {
       col = ref[i];
       practice = this.build.getCol(col.name);
-      pracCube = new Cube3D('Cols', 'Dim', col.name, col.name, [col.x, sp.yc, sp.zc], [sp.cubeWidth, sp.colsHeight, sp.colsDepth], practice['hsv'], 0.6, this.fontPrac);
+      pracCube = new Cube3D('Prin', 'Dim', col.name, col.name, [col.x, sp.yc, sp.zc], [sp.cubeWidth, sp.colsHeight, sp.colsDepth], practice['hsv'], 0.6, this.fontPrac);
       pracGroup = new THREE.Group();
       pracGroup.add(pracCube.mesh);
       ref1 = [
@@ -368,7 +368,7 @@ CubeTh = class CubeTh {
           x = col.x + sp.cx[study.dir];
           y = sp.yc + sp.cy[study.dir];
           z = plane.z;
-          studyCube = new Rect('Cols', 'Dim', col.name, key, [x, y, z], [sp.cw, sp.ch], study['hsv'], 1.0, this.fontPrac, 0x000000);
+          studyCube = new Rect('Prin', 'Dim', col.name, key, [x, y, z], [sp.cw, sp.ch], study['hsv'], 1.0, this.fontPrac, 0x000000);
           pracGroup.add(studyCube.mesh);
         }
       }
@@ -703,7 +703,7 @@ CubeTh = class CubeTh {
     f2.add(act, 'Learn').onChange(traverals.learn);
     f2.add(act, 'Do').onChange(traverals.doDo);
     f2.add(act, 'Share').onChange(traverals.share);
-    f3 = gui.addFolder('Cols');
+    f3 = gui.addFolder('Prin');
     f3.add(act, 'Embrace').onChange(traverals.embrace);
     f3.add(act, 'Innovate').onChange(traverals.innovate);
     f3.add(act, 'Encourage').onChange(traverals.encourage);

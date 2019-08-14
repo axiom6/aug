@@ -10,7 +10,7 @@ class Main
   Main.FontUrl = "css/font/three/helvetiker_regular.typeface.json"
 
   Main.Batch = {
-    Cols: { url:'muse/Cols.json', data:null, type:'Pack', plane:'Cols' }
+    Prin: { url:'muse/Prin.json', data:null, type:'Pack', plane:'Prin' }
     Rows: { url:'muse/Rows.json', data:null, type:'Pack', plane:'Rows' }
     Info: { url:'muse/Info.json', data:null, type:'Pack', plane:'Info' }
     Know: { url:'muse/Know.json', data:null, type:'Pack', plane:'Know' }
@@ -19,10 +19,10 @@ class Main
     Font: { url:Main.FontUrl,     data:null, type:'Font', plane:'Cube' } }
 
   Main.komps = {
+    Prin:{ name:'Prin', comp:'Prin', pracs:{}, ikw:true,  link:false, icon:"fas fa-balance-scale" }
     Info:{ name:'Info', comp:'Info', pracs:{}, ikw:true,  link:false, icon:"fas fa-th"            }
     Know:{ name:'Know', comp:'Know', pracs:{}, ikw:true,  link:false, icon:"fas fa-university"    }
     Wise:{ name:'Wise', comp:'Wise', pracs:{}, ikw:true,  link:false, icon:"fab fa-tripadvisor"   }
-    Prin:{ name:'Prin', comp:'Cols', pracs:{}, ikw:true,  link:false, icon:"fas fa-balance-scale" }
     Cube:{ name:'Cube', comp:'Cube', pracs:{}, ikw:false, link:false, icon:"fas fa-cubes"         } }
 
   Main.begin  =  ( onReady ) ->
@@ -37,17 +37,17 @@ class Main
     Main.stream = new Stream( subjects, infoSpec )
     Main.nav    = new Nav(   Main.stream, batch, 'Info' )
     #ain.cache  = new Cache( Main.stream )
-    Main.mergePracsCols()
+    Main.mergePracsPrin()
     Main.onReady()
     return
 
-  Main.mergePracsCols = () ->
-    cols = Main.Batch['Cols'].data['Cols'].pracs
+  Main.mergePracsPrin = () ->
+    cols = Main.Batch['Prin'].data['Prin'].pracs
     for comp in ['Info','Know','Wise']
       prcs = Main.Batch[comp].data[comp].pracs
       for own  key, col of cols
         prcs[key] = col
-      # console.log( 'Main.mergePracsCols', prcs )
+      # console.log( 'Main.mergePracsPrin', prcs )
     return
 
   Main.logPracs = ( compk ) ->
@@ -75,8 +75,8 @@ class Main
         Main.nav
       keys:(obj) ->
         Object.keys(obj)
-      cols:()  ->
-        Main.Batch['Cols'].data['Cols'].pracs
+      prin:()  ->
+        Main.Batch['Prin'].data['Prin'].pracs
       comps:( compk ) ->
         Main.Batch[compk].data.comps
       kompsTocs:() ->   # For Tocs.vue
@@ -87,7 +87,8 @@ class Main
           filts[key] = prac
         filts
       conns:( compk ) ->
-        this.subset( compk, (prac) -> prac.row isnt 'Dim' )
+        filter = if compk isnt 'Prin' then (prac) -> prac.row isnt 'Dim' else (prac) -> prac.row is 'Dim'
+        this.subset( compk, filter )
       pracs:( compk ) ->
         Main.Batch[compk].data[compk].pracs
       disps:( compk, prack ) ->

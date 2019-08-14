@@ -345,8 +345,10 @@ Shapes = class Shapes {
       case 'Share':
         this.flow(g, geom, [90, 90, 90], 'sorth', 12);
         break;
+      case 'Dim':
+        break;
       default:
-        console.error(' unknown spec row ', spec.name, spec.row);
+        console.error('Shapes.practiceFlow() unknown spec row ', spec.name, spec.row);
         this.flow(g, geom, [90, 90, 90], 'south', 12);
     }
   }

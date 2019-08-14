@@ -78,7 +78,7 @@
         let filt = {}
         for( let key in pracs ) {
           let prac = pracs[key];
-          if( prac.row !== 'Dim' || komp === 'Cols' ) {
+          if( prac.row !== 'Dim' || komp === 'Prin' ) {
             filt[key] = prac; } }
         return filt;
       } },

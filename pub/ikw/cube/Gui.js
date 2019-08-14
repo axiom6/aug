@@ -39,7 +39,7 @@ Gui = class Gui {
     };
     this.planes();
     this.rows();
-    this.cols();
+    this.prin();
     this.misc();
     this.colors();
   }
@@ -100,9 +100,9 @@ Gui = class Gui {
     folder.open();
   }
 
-  cols() {
+  prin() {
     var folder;
-    folder = this.gui.addFolder('Cols');
+    folder = this.gui.addFolder('Prin');
     this.check(folder, this.act, 'Embrace', this.fun.embrace);
     this.check(folder, this.act, 'Innovate', this.fun.innovate);
     this.check(folder, this.act, 'Encourage', this.fun.encourage);

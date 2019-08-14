@@ -10,6 +10,9 @@ let lazy = (name) => () => {
 export default new Router( {
   routes:[
     { path: '/',      name:'Home',      components:{ Home:     Home } },
+    { path: '/prin',  name:'Prin',      components:{ Prin:     Home.Prin }, children: [
+      { path:'prac',  name:'PrinPrac',  components:{ PrinPrac: lazy( 'vue/page/Prac') } },
+      { path:'conn',  name:'PrinConn',  components:{ PrinConn: lazy( 'vue/page/Conn') } } ] },
     { path: '/info',  name:'Info',      components:{ Info:     Home.Info }, children: [
       { path:'prac',  name:'InfoPrac',  components:{ InfoPrac: lazy( 'vue/page/Prac') } },
       { path:'conn',  name:'InfoConn',  components:{ InfoConn: lazy( 'vue/page/Conn') } },
@@ -25,5 +28,5 @@ export default new Router( {
       { path:'conn',  name:'WiseConn',  components:{ WiseConn: lazy( 'vue/page/Conn') } },
       { path:'enli',  name:'WiseEnli',  components:{ WiseEnli: lazy( 'vue/page/Enli') } },
       { path:'data',  name:'WiseData',  components:{ WiseData: lazy( 'vue/page/Data') } } ] },
-    { path: '/cube',  name:'Cube',      components:{ Cube:     lazy('vue/comp/Cube'     ) } }
+    { path: '/cube',  name:'Cube',      components:{ Cube:     lazy( 'vue/comp/Cube') } }
     ] } )

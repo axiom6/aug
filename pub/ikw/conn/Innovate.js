@@ -29,6 +29,9 @@ Innovate = class Innovate {
     this.lay = this.shapes.layout(geom, this.spec.column, this.shapes.size(this.studies), this.shapes.size(this.studies));
     this.rings(g, geom, this.t);
     switch (this.spec.row) {
+      case 'Dim':
+        this.principle(g, geom);
+        break;
       case 'Learn':
         this.concept(g, geom);
         break;
@@ -55,6 +58,11 @@ Innovate = class Innovate {
     this.shapes.round(g, t, t, geom.w - t * 2, geom.h - t * 2, t, t, colorRing, 'none');
     this.shapes.round(g, t * 2.5, t * 2.5, geom.w - t * 5.0, geom.h - t * 5.0, t, t, colorBack, 'none');
     return this.shapes.text(g, t * 4, t * 2 + 2, this.spec.name, this.spec.name + 'Text', 'black', '1.2em');
+  }
+
+  principle(g, geom) {
+    this.eastInovate(g, geom);
+    this.westInovate(g, geom);
   }
 
   concept(g, geom) {

@@ -18,7 +18,7 @@ class Gui
     @fun.color3 = () -> Util.noop()
     @planes()
     @rows()
-    @cols()
+    @prin()
     @misc()
     @colors()
 
@@ -63,8 +63,8 @@ class Gui
     folder.open()
     return
 
-  cols:() ->
-    folder = @gui.addFolder('Cols')
+  prin:() ->
+    folder = @gui.addFolder('Prin')
     @check( folder, @act, 'Embrace',   @fun.embrace   )
     @check( folder, @act, 'Innovate',  @fun.innovate  )
     @check( folder, @act, 'Encourage', @fun.encourage )

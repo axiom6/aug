@@ -70,7 +70,7 @@
         this.$nextTick( function() {
           for( let key of this.pkeys ) {
               let prac = this.practices[key];
-              if( prac.row !== 'Dim' ) {
+              if( prac.row !== 'Dim' || this.comp === 'Prin') {
                 let elem  = this.$refs[key][0]
                 this.size = this.calcSize(key)
                 this.connects[prac.name] = new Connect( stream, build, prac, elem, this.size ); } }

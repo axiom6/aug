@@ -20,6 +20,7 @@ class Innovate
     @lay       = @shapes.layout( geom, @spec.column, @shapes.size(@studies), @shapes.size(@studies) )
     @rings( g, geom, @t )
     switch @spec.row
+      when 'Dim'   then @principle(  g, geom )
       when 'Learn' then @concept(    g, geom )
       when 'Do'    then @technology( g, geom )
       when 'Share' then @facilitate( g, geom )
@@ -34,6 +35,11 @@ class Innovate
     @shapes.round( g, t,     t,     geom.w-t*2,   geom.h-t*2,   t, t, colorRing, 'none' )
     @shapes.round( g, t*2.5, t*2.5, geom.w-t*5.0, geom.h-t*5.0, t, t, colorBack, 'none' )
     @shapes.text(  g, t*4,   t*2+2, @spec.name,   @spec.name+'Text', 'black', '1.2em' )
+
+  principle:( g, geom ) ->
+    @eastInovate(  g, geom )
+    @westInovate(  g, geom )
+    return
 
   concept:( g, geom ) ->
     @eastInovate(  g, geom )

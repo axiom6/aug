@@ -32,9 +32,9 @@ class Build
     data
 
   @colPractices:( batch ) ->
-    cols = batch.Cols.data['Cols']
+    prin = batch.Prin.data['Prin']
     for plane in ['Info', 'Know','Wise']
-      batch[plane].data['Cols'] = cols
+      batch[plane].data['Prin'] = prin
     return
 
   @rowPractices:( batch ) ->
@@ -246,7 +246,7 @@ class Build
     @None
 
   getCol:( cname ) ->
-    @batch.Cols.data['Cols'][cname]
+    @batch.Prin.data['Prin'][cname]
 
   logPlanes:() ->
     console.log( '----- Beg Log Planes  ------' )
@@ -271,7 +271,7 @@ class Build
     for batKey in ['Info','Know','Wise']
       console.log( "Batch File: ", batKey )
       batObj = batch[batKey].data
-      for packKey in ['Info','Know','Wise','Cols','Rows']
+      for packKey in ['Info','Know','Wise','Prin','Rows']
         packObj = batObj[packKey]
         console.log( "  Pack: ", packKey, packObj )
         for own keyPractice, objPractice of packObj when Util.isChild(keyPractice)

@@ -29,11 +29,13 @@
   }
 
   import Dash from '../../../vue/dash/Dash.vue';
+  import Prin from '../../../vue/comp/Prin.vue';
   import Info from '../../../vue/comp/Info.vue';
   import Know from '../../../vue/comp/Know.vue';
   import Wise from '../../../vue/comp/Wise.vue';
 
   Home.Dash = Dash;
+  Home.Prin = Prin;
   Home.Info = Info;
   Home.Know = Know;
   Home.Wise = Wise;

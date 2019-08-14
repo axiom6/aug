@@ -7,6 +7,7 @@
     <router-view name="Draw"></router-view>
     <router-view name="Note"></router-view>
     <router-view name="Home"></router-view>
+    <router-view name="Prin"></router-view>
     <router-view name="Info"></router-view>
     <router-view name="Know"></router-view>
     <router-view name="Wise"></router-view>

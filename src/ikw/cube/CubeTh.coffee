@@ -16,7 +16,7 @@ class CubeTh
       Info: { url:'muse/Info.json', data:null, type:'Pack' }
       Know: { url:'muse/Know.json', data:null, type:'Pack' }
       Wise: { url:'muse/Wise.json', data:null, type:'Pack' }
-      Font: { url:CubeTh.FontUrl,           data:null, type:'Spec' }
+      Font: { url:CubeTh.FontUrl,   data:null, type:'Spec' }
 
     Data.batchRead( CubeTh.Batch, CubeTh.init )
     return
@@ -157,7 +157,7 @@ class CubeTh
             studyCube = new Rect( plane.name, row.name, col.name, study.name, [x,y,z], [sp.sw,sp.sh],study['hsv'], 1.0, @fontPrac, 0x000000 )
             pracGroup.add( studyCube.mesh  )
           group.add( pracGroup )
-    group.add( @cols() )
+    group.add( @prin() )
     @convey(  sp, group )
     @flow(    sp, group )
     @conduit( sp, group )
@@ -168,12 +168,12 @@ class CubeTh
     @scene.add( group )
     group
 
-  cols: () ->
+  prin: () ->
     sp    = @space()
     group = new THREE.Group()
     for col in [ { name:'Embrace', x:sp.x3 }, { name:'Innovate', x:sp.x2 }, { name:'Encourage', x:sp.x1 } ]
       practice  = @build.getCol( col.name )
-      pracCube  = new Cube3D( 'Cols', 'Dim', col.name, col.name, [col.x,sp.yc,sp.zc],
+      pracCube  = new Cube3D( 'Prin', 'Dim', col.name, col.name, [col.x,sp.yc,sp.zc],
         [sp.cubeWidth,sp.colsHeight,sp.colsDepth],practice['hsv'], 0.6, @fontPrac )
       pracGroup = new THREE.Group()
       pracGroup.add( pracCube.mesh  )
@@ -187,7 +187,7 @@ class CubeTh
           x = col.x + sp.cx[study.dir]
           y = sp.yc + sp.cy[study.dir]
           z = plane.z
-          studyCube = new Rect( 'Cols', 'Dim', col.name, key, [x,y,z], [sp.cw,sp.ch],study['hsv'], 1.0, @fontPrac, 0x000000 )
+          studyCube = new Rect( 'Prin', 'Dim', col.name, key, [x,y,z], [sp.cw,sp.ch],study['hsv'], 1.0, @fontPrac, 0x000000 )
           pracGroup.add( studyCube.mesh  )
       group.add( pracGroup )
     group.material = new THREE.MeshLambertMaterial( { color:0x888888, transparent:true, opacity:0.5, side:THREE.DoubleSide } )
@@ -340,7 +340,7 @@ class CubeTh
     f2.add( act, 'Do'    ).onChange( traverals.doDo  )
     f2.add( act, 'Share' ).onChange( traverals.share )
 
-    f3 = gui.addFolder('Cols')
+    f3 = gui.addFolder('Prin')
     f3.add( act, 'Embrace'   ).onChange( traverals.embrace   )
     f3.add( act, 'Innovate'  ).onChange( traverals.innovate  )
     f3.add( act, 'Encourage' ).onChange( traverals.encourage )

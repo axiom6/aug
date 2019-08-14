@@ -267,8 +267,10 @@ class Shapes
         @flow( g, geom, [90,90,90], 'south', 12 )
       when 'Share'
         @flow( g, geom, [90,90,90], 'sorth', 12 )
+      when 'Dim'
+
       else
-        console.error( ' unknown spec row ', spec.name, spec.row )
+        console.error( 'Shapes.practiceFlow() unknown spec row ', spec.name, spec.row )
         @flow( g, geom, [90,90,90], 'south', 12 )
     return
 

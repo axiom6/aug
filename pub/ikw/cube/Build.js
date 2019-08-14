@@ -83,12 +83,12 @@ Build = class Build {
   }
 
   static colPractices(batch) {
-    var cols, i, len, plane, ref;
-    cols = batch.Cols.data['Cols'];
+    var i, len, plane, prin, ref;
+    prin = batch.Prin.data['Prin'];
     ref = ['Info', 'Know', 'Wise'];
     for (i = 0, len = ref.length; i < len; i++) {
       plane = ref[i];
-      batch[plane].data['Cols'] = cols;
+      batch[plane].data['Prin'] = prin;
     }
   }
 
@@ -502,7 +502,7 @@ Build = class Build {
   }
 
   getCol(cname) {
-    return this.batch.Cols.data['Cols'][cname];
+    return this.batch.Prin.data['Prin'][cname];
   }
 
   logPlanes() {
@@ -564,7 +564,7 @@ Build = class Build {
       batKey = ref[i];
       console.log("Batch File: ", batKey);
       batObj = batch[batKey].data;
-      ref1 = ['Info', 'Know', 'Wise', 'Cols', 'Rows'];
+      ref1 = ['Info', 'Know', 'Wise', 'Prin', 'Rows'];
       for (j = 0, len1 = ref1.length; j < len1; j++) {
         packKey = ref1[j];
         packObj = batObj[packKey];

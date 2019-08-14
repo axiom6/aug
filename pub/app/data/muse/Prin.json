@@ -1,7 +1,7 @@
 {
-  "Cols":{ "title":"Principles", "type":"pack", "content":"Study", "icon":"fas fa-bars fa-rotate-90",
+  "Prin":{ "title":"Principles", "type":"pack", "content":"Study", "icon":"fas fa-bars fa-rotate-90",
     "hsv":[90,90,90], "cells":[1,40,1,42], "pcells":[1,36,1,36], "pub":true, "show":true,
-    "Embrace":{ "type":"pane", "hsv":[195,90,60],"column":"Embrace","row":"Dim","icon":"fas fa-hands",
+    "Embrace":{ "type":"pane", "hsv":[195,90,60],"column":"Embrace","row":"Dim","plane":"Prin","icon":"fas fa-hands",
       "cells":[5,12,1,6], "dir":"em", "pcells":[1,12,1,36], "css":"ui-dims", "neg":"Exclude",
       "desc":"Tactics for colaboration and adapting to change",
       "Interact": { "dir":"west",  "icon":"fas fa-child",     "hsv":[195,90,70],
@@ -29,7 +29,7 @@
         "Contribute": { "desc":"Everyone’s individual contributions are sought after and valued." },
         "Recognize":  { "desc":"Attitude, approach and results are recognize."} }
     },
-    "Innovate":{ "type":"pane", "hsv":[50,90,90],"column":"Innovate","row":"Dim","icon":"fas fa-snowflake",
+    "Innovate":{ "type":"pane", "hsv":[50,90,90],"column":"Innovate","row":"Dim","plane":"Prin","icon":"fas fa-snowflake",
       "cells":[17,12,1,6], "dir":"in", "pcells":[13,12,1,36], "css":"ui-dims", "neg":"Neglect",
       "desc":"The space for adjacent connections where ideas flow, interact, evolve, extent and converge and in novel ways.",
         "Engage":  { "dir":"west", "icon":"fas fa-user-plus", "hsv":[195,90,70],
@@ -53,7 +53,7 @@
           "Adjacent":  { "desc":"Possibilities emerge and become close waiting to be connected." },
           "Freedom":   { "desc":"Ideas are allowed to move freely." } }
     },
-    "Encourage":{ "type":"pane", "hsv":[20,50,90],"column":"Encourage","row":"Dim","icon":"fab fa-slideshare",
+    "Encourage":{ "type":"pane", "hsv":[20,50,90],"column":"Encourage","row":"Dim","plane":"Prin","icon":"fab fa-slideshare",
       "cells":[29,12,1,6], "dir":"en", "pcells":[25,12,1,36], "css":"ui-dims", "neg":"Repress",
       "desc": "Discovery, benefits governed by principles",
         "Augment": { "dir":"west",  "icon":"fas fa-user-plus", "hsv":[195,90,70],

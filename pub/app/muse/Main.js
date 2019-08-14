@@ -30,13 +30,13 @@ Main = (function() {
       Main.stream = new Stream(subjects, infoSpec);
       Main.nav = new Nav(Main.stream, batch, 'Info');
       //ain.cache  = new Cache( Main.stream )
-      Main.mergePracsCols();
+      Main.mergePracsPrin();
       Main.onReady();
     }
 
-    static mergePracsCols() {
+    static mergePracsPrin() {
       var col, cols, comp, i, key, len, prcs, ref;
-      cols = Main.Batch['Cols'].data['Cols'].pracs;
+      cols = Main.Batch['Prin'].data['Prin'].pracs;
       ref = ['Info', 'Know', 'Wise'];
       for (i = 0, len = ref.length; i < len; i++) {
         comp = ref[i];
@@ -58,11 +58,11 @@ Main = (function() {
   Main.FontUrl = "css/font/three/helvetiker_regular.typeface.json";
 
   Main.Batch = {
-    Cols: {
-      url: 'muse/Cols.json',
+    Prin: {
+      url: 'muse/Prin.json',
       data: null,
       type: 'Pack',
-      plane: 'Cols'
+      plane: 'Prin'
     },
     Rows: {
       url: 'muse/Rows.json',
@@ -103,6 +103,14 @@ Main = (function() {
   };
 
   Main.komps = {
+    Prin: {
+      name: 'Prin',
+      comp: 'Prin',
+      pracs: {},
+      ikw: true,
+      link: false,
+      icon: "fas fa-balance-scale"
+    },
     Info: {
       name: 'Info',
       comp: 'Info',
@@ -126,14 +134,6 @@ Main = (function() {
       ikw: true,
       link: false,
       icon: "fab fa-tripadvisor"
-    },
-    Prin: {
-      name: 'Prin',
-      comp: 'Cols',
-      pracs: {},
-      ikw: true,
-      link: false,
-      icon: "fas fa-balance-scale"
     },
     Cube: {
       name: 'Cube',
@@ -170,8 +170,8 @@ Main = (function() {
       keys: function(obj) {
         return Object.keys(obj);
       },
-      cols: function() {
-        return Main.Batch['Cols'].data['Cols'].pracs;
+      prin: function() {
+        return Main.Batch['Prin'].data['Prin'].pracs;
       },
       comps: function(compk) {
         return Main.Batch[compk].data.comps;
@@ -193,9 +193,13 @@ Main = (function() {
         return filts;
       },
       conns: function(compk) {
-        return this.subset(compk, function(prac) {
+        var filter;
+        filter = compk !== 'Prin' ? function(prac) {
           return prac.row !== 'Dim';
-        });
+        } : function(prac) {
+          return prac.row === 'Dim';
+        };
+        return this.subset(compk, filter);
       },
       pracs: function(compk) {
         return Main.Batch[compk].data[compk].pracs;
