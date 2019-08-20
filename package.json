@@ -6,9 +6,10 @@
   "license": "MIT",
   "scripts": {
     "main": "pub/app/main/Main.roll.sh",
-    "jitt": "rollup --config pub/app/jitter/Jitter.roll.js",
+    "jitt": "rollup --config pub/app/jitt/Jitt.roll.js",
     "augm": "rollup --config pub/app/augm/Augm.roll.js",
     "muse": "rollup --config pub/app/muse/Muse.roll.js",
+    "prac": "rollup --config vue/prac/Prac.roll.js",
     "page": "rollup --config vue/page/Page.roll.js",
     "data": "rollup --config vue/data/Data.roll.js",
     "math": "rollup --config vue/math/Math.roll.js",

@@ -33,7 +33,7 @@
         "Boundary":    { "icon":"fas fa-vector-square", "desc":"" },
         "Position":    { "icon":"fas fa-map-marker-alt", "desc":"" } }
     },
-    "Nature":{ "type":"pane", "hsv":[45,90,90],"column":"Innovate","row":"Learn","plane":"Wise","icon":"fas fa-snowflake",
+    "Nature":{ "type":"pane", "hsv":[45,90,90],"column":"Innovate","row":"Learn","plane":"Wise","icon":"fab fa-pagelines",
       "cells":[17,12,7,12], "dir":"north", "neg":"Ritual", "neg1":"Anthropomorphize",
       "desc":"",
       "Habitat":       { "dir":"west", "icon":"fas fa-home", "hsv":[195,90,80],
@@ -57,7 +57,7 @@
         "Constructal":  { "icon":"fab fa-galactic-republic", "desc":"" },
         "Enhance":      { "icon":"fas fa-fill-drip", "desc":"" } }
     },
-    "Truth":{ "type":"pane", "hsv":[20,50,90],"column":"Encourage","row":"Learn","plane":"Wise","icon":"fas fa-universal-access",
+    "Truth":{ "type":"pane", "hsv":[20,50,90],"column":"Encourage","row":"Learn","plane":"Wise","icon":"fas fa-dharmachakra",
       "cells":[29,12,7,12], "dir":"ne", "neg":"Confuse",
       "desc":"",
       "Innate":   { "dir":"west","icon":"fas fa-heart", "hsv":[195,90,80],
@@ -129,7 +129,7 @@
         "Fluid":       { "icon":"fas fa-water", "desc":"" },
         "Harmonize":     { "icon":"fas fa-heart", "desc":"" } }
     },
-    "Mind":{ "type":"pane", "hsv":[20,50,90],"column":"Encourage","row":"Do","plane":"Wise","icon":"fas fa-eye",
+    "Mind":{ "type":"pane", "hsv":[20,50,90],"column":"Encourage","row":"Do","plane":"Wise","icon":"fas fa-brain",
       "cells":[29,12,19,12], "dir":"east", "neg":"Immoral",
       "desc":"",
       "Thought":      { "dir":"west", "icon":"fas fa-brain","hsv":[195,90,80],

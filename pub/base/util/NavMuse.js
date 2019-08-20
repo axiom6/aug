@@ -5,7 +5,7 @@ import Build from '../../ikw/cube/Build.js';
 
 NavMuse = class NavMuse {
   constructor(stream, batch, comp1) {
-    // console.log('Nav.set()', obj, @tab )
+    // console.log('Nav.set()', obj, @page )
     this.tap = this.tap.bind(this);
     this.dir = this.dir.bind(this);
     this.stream = stream;
@@ -16,12 +16,13 @@ NavMuse = class NavMuse {
     this.level = 'Prac'; // Prac Disp Tab
     this.prac = 'None';
     this.disp = 'None';
-    this.tab = 'Conn';
-    this.tabs = [
+    this.page = 'Conn';
+    this.pages = [
       'Conn',
       'Prac',
       'Data',
-      'Enli' // Set by the active view component
+      'Enli',
+      'Icon' // Set by the active view component
     ];
     this.queue = null; // Last published obj created before route call request by new component
     this.queued = false;
@@ -30,9 +31,9 @@ NavMuse = class NavMuse {
   }
 
   subscribe() {
-    return this.stream.subscribe('Tabs', 'NavMuse', (tab) => {
-      console.log('NavMuse.sub()', tab);
-      return this.tab = tab;
+    return this.stream.subscribe('Page', 'NavMuse', (page) => {
+      console.log('NavMuse.sub()', page);
+      return this.page = page;
     });
   }
 
@@ -93,7 +94,7 @@ NavMuse = class NavMuse {
       if (adj.plane !== this.comp) {
         obj.comp = adj.plane;
         this.comp = adj.plane;
-        this.route(this.level, this.comp, this.tab, obj);
+        this.route(this.level, this.comp, this.page, obj);
       }
       this.pub(obj);
     }
@@ -122,29 +123,29 @@ NavMuse = class NavMuse {
       if (adj.plane !== this.comp) {
         obj.comp = adj.plane;
         this.comp = adj.plane;
-        this.route(this.level, this.comp, this.tab, obj);
+        this.route(this.level, this.comp, this.page, obj);
       }
       this.pub(obj);
     }
   }
 
   dirTabs(dir) {
-    var idx, obj, tab;
-    if (this.tabs.length > 0 && this.tab !== 'None') {
-      idx = this.tabs.indexOf(this.tab);
-      if (dir === 'east' && idx < this.tabs.length - 1) {
-        tab = this.tabs[idx++];
+    var idx, obj, page;
+    if (this.pages.length > 0 && this.page !== 'None') {
+      idx = this.pages.indexOf(this.page);
+      if (dir === 'east' && idx < this.pages.length - 1) {
+        page = this.pages[idx++];
       }
       if (dir === 'west' && idx > 1) {
-        tab = this.tabs[idx--];
+        page = this.pages[idx--];
       }
-      if (tab !== this.tab) {
+      if (page !== this.page) {
         obj = {};
         obj.level = this.level;
         obj.comp = this.comp;
-        obj.tab = tab;
-        this.tab = tab;
-        this.route(this.level, this.comp, this.tab, obj);
+        obj.page = page;
+        this.page = page;
+        this.route(this.level, this.comp, this.page, obj);
       }
     } else {
       this.dirNone(dr);
@@ -158,7 +159,7 @@ NavMuse = class NavMuse {
     });
   }
 
-  route(level, comp, tab, obj) {
+  route(level, comp, page, obj) {
     if (this.$router != null) {
       if (level !== 'Tabs') {
         this.$router.push({
@@ -166,10 +167,10 @@ NavMuse = class NavMuse {
         });
       }
       this.$router.push({
-        name: comp + tab
+        name: comp + page
       });
     } else {
-      // console.log(   'Nav.router()', { name:comp+tab } )
+      // console.log(   'Nav.router()', { name:comp+page } )
       console.error('Nav.router() $router not set');
     }
     // Oueue up obj for for component to request when mounted

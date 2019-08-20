@@ -3,6 +3,7 @@ var FontAwe;
 FontAwe = {};
 
 FontAwe.icons = {
+  "fab fa-pagelines": "\uf18c",
   "fas fa-network-wired": "\uf6ff",
   "fas fa-warehouse": "\uf494",
   "fas fa-infinity": "\uf534",
@@ -183,6 +184,7 @@ FontAwe.icons = {
   "fas fa-database": "\uf1c0",
   "fas fa-deaf": "\uf2a4",
   "fas fa-desktop": "\uf108",
+  "fas fa-dharmachakra": "\uf655",
   "fas fa-diagnoses": "\uf470",
   "fas fa-dna": "\uf471",
   "fas fa-dollar-sign": "\uf155",

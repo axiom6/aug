@@ -29,9 +29,9 @@
         "Combine":     { "icon":"fas fa-object-group", "desc":""  },
         "Kanban":      { "icon":"fas fa-tasks", "desc":""  } }
     },
-    "Domain":{ "type":"pane", "hsv":[50,90,90],"column":"Innovate","row":"Learn","plane":"Info","icon":"fas fa-gift" ,
+    "Product":{ "type":"pane", "hsv":[50,90,90],"column":"Innovate","row":"Learn","plane":"Info","icon":"fab fa-empire" ,
       "cells":[17,12,7,12],  "dir":"north", "neg":"Yield",
-      "desc":"We Entitle our Team and our customers. Propose new initiatives for our Profolio. Acquire data to explore Insights",
+      "desc":"We Entitle our Team and our customers. Propose new initiatives for our Portfolio. Acquire data to explore Insights",
       "Entitle":    { "dir":"west", "icon":"fas fa-child",       "hsv":[195,90,70],
         "desc":"Empowerment by the secure allocation of resources by roles",
         "Party":       { "icon":"fas fa-child",  "desc":""  },
@@ -48,7 +48,7 @@
         "Schema":      { "icon":"fas fa-sitemap",            "desc":"" },
         "Prepare":     { "icon":"fas fa-check-square",       "desc":"" } },
       "Portfolio":   { "dir":"south","icon":"fas fa-briefcase",   "hsv":[60,90,90],
-        "desc":"The entire suite of services",
+        "desc":"The entire suite of products and services",
         "Applications": { "icon":"fas fa-wrench", "desc":""  },
         "Inventory":   { "icon":"fas fa-warehouse", "desc":""  },
         "Relevance":   { "icon":"fas fa-sort-amount-up", "desc":""  } }

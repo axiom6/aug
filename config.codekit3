@@ -7,7 +7,7 @@
 		"uuidString": "4F96D9D9-40BD-4464-83B5-5747212E5F83"
 		}
 	],
-"creatorBuild": "29156",
+"creatorBuild": "31491",
 "files": {
 	"/.firebase/hosting.cHVi.cache": {
 		"cB": 0,
@@ -958,8 +958,8 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 2,
-		"oAP": "/node_modules/estree-walker/src/estree-walker.js",
+		"oA": 1,
+		"oAP": "/node_modules/estree-walker/src/estree-walker-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -969,8 +969,8 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 2,
-		"oAP": "/node_modules/magic-string/dist/magic-string.es.js",
+		"oA": 1,
+		"oAP": "/node_modules/magic-string/dist/magic-string.es-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -980,8 +980,8 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 2,
-		"oAP": "/node_modules/micromatch/index.js",
+		"oA": 1,
+		"oAP": "/node_modules/micromatch/index-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -992,7 +992,7 @@
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/node_modules/resolve/index.js",
+		"oAP": "/node_modules/resolve/index-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -1003,7 +1003,7 @@
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/node_modules/rollup-plugin-commonjs/dist/rollup-plugin-commonjs.es.js",
+		"oAP": "/node_modules/rollup-plugin-commonjs/dist/rollup-plugin-commonjs.es-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -1014,7 +1014,7 @@
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/node_modules/rollup-plugin-less/dist/rollup-plugin-less.js",
+		"oAP": "/node_modules/rollup-plugin-less/dist/rollup-plugin-less-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -1032,8 +1032,8 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 2,
-		"oAP": "/node_modules/rollup-pluginutils/dist/pluginutils.es.js",
+		"oA": 1,
+		"oAP": "/node_modules/rollup-pluginutils/dist/pluginutils.es-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -1043,8 +1043,8 @@
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
-		"oA": 2,
-		"oAP": "/node_modules/sourcemap-codec/dist/sourcemap-codec.es.js",
+		"oA": 1,
+		"oAP": "/node_modules/sourcemap-codec/dist/sourcemap-codec.es-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -1494,76 +1494,76 @@
 		"oAP": "/pub/app/data/text/Info.txt",
 		"oF": 0
 		},
-	"/pub/app/jitter/Home.js": {
+	"/pub/app/jitt/Home.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/app/jitter/Home-min.js",
+		"oAP": "/pub/app/jitt/Home-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/jitter/Jitter.js": {
+	"/pub/app/jitt/Jitt.roll.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/app/jitter/Jitter-min.js",
+		"oAP": "/pub/app/jitt/Jitt.roll-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/jitter/Jitter.roll.js": {
+	"/pub/app/jitt/Jitter.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/app/jitter/Jitter.roll-min.js",
+		"oAP": "/pub/app/jitt/Jitter-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/jitter/Main.coffee": {
+	"/pub/app/jitt/Main.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/app/jitter/Main.js",
+		"oAP": "/pub/app/jitt/Main.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/jitter/Main.js": {
+	"/pub/app/jitt/Main.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/app/jitter/Main-min.js",
+		"oAP": "/pub/app/jitt/Main-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/jitter/manifest.webmanifest": {
+	"/pub/app/jitt/manifest.webmanifest": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/pub/app/jitter/manifest.webmanifest",
+		"oAP": "/pub/app/jitt/manifest.webmanifest",
 		"oF": 1
 		},
-	"/pub/app/jitter/Router.js": {
+	"/pub/app/jitt/Router.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/app/jitter/Router-min.js",
+		"oAP": "/pub/app/jitt/Router-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -4111,46 +4111,57 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/vue/page/Conn.js": {
+	"/pub/vue/page/Page.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/vue/page/Conn-min.js",
+		"oAP": "/pub/vue/page/Page-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/vue/page/Data.js": {
+	"/pub/vue/prac/Conn.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/vue/page/Data-min.js",
+		"oAP": "/pub/vue/prac/Conn-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/vue/page/Enli.js": {
+	"/pub/vue/prac/Data.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/vue/page/Enli-min.js",
+		"oAP": "/pub/vue/prac/Data-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/vue/page/Prac.js": {
+	"/pub/vue/prac/Enli.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/vue/page/Prac-min.js",
+		"oAP": "/pub/vue/prac/Enli-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/prac/Prac.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/prac/Prac-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -5233,7 +5244,7 @@
 		"oAP": "/pub/vue/dash/View.js",
 		"oF": 0
 		},
-	"/vue/Data/Data.roll.js": {
+	"/vue/data/Data.roll.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
@@ -5642,20 +5653,28 @@
 		"oAP": "/pub/vue/page/Conn.js",
 		"oF": 0
 		},
-	"/vue/page/Data.vue": {
+	"/vue/page/Desc.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/pub/vue/page/Data.js",
+		"oAP": "/pub/vue/page/Desc.js",
 		"oF": 0
 		},
-	"/vue/page/Enli.vue": {
+	"/vue/page/Dirs.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/pub/vue/page/Enli.js",
+		"oAP": "/pub/vue/page/Dirs.js",
+		"oF": 0
+		},
+	"/vue/page/Icon.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/page/Icon.js",
 		"oF": 0
 		},
 	"/vue/page/Page.roll.js": {
@@ -5669,12 +5688,63 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/vue/page/Prac.vue": {
+	"/vue/page/Page.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/pub/vue/page/Prac.js",
+		"oAP": "/pub/vue/page/Page.js",
+		"oF": 0
+		},
+	"/vue/page/Summ.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/page/Summ.js",
+		"oF": 0
+		},
+	"/vue/prac/Conn.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/prac/Conn.js",
+		"oF": 0
+		},
+	"/vue/prac/Data.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/prac/Data.js",
+		"oF": 0
+		},
+	"/vue/prac/Enli.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/prac/Enli.js",
+		"oF": 0
+		},
+	"/vue/prac/Prac.roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/prac/Prac.roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/vue/prac/Prac.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/prac/Prac.js",
 		"oF": 0
 		},
 	"/vue/wood/Wood.html": {
@@ -7422,6 +7492,7 @@
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,
+	"allowInjectionReloads": 1,
 	"alwaysUseExternalServer": 0,
 	"animateCSSInjections": 1,
 	"autoBuildNewItems": 1,
@@ -7433,6 +7504,7 @@
 	"babelConfigType": 0,
 	"babelCustomPluginsList": "",
 	"babelCustomPresetsList": "",
+	"babelExcludeString": "/\\/node_modules\\//, /\\/core-js\\//, /\\/bower_components\\//",
 	"babelInsertModuleIDs": 0,
 	"babelModuleID": "",
 	"babelNoComments": 0,
@@ -7572,6 +7644,9 @@
 		"modules-umd": {
 			"active": 0
 			},
+		"named-capturing-groups-regex": {
+			"active": 0
+			},
 		"new-target": {
 			"active": 0
 			},
@@ -7603,6 +7678,9 @@
 			"active": 0
 			},
 		"parameters": {
+			"active": 0
+			},
+		"partial-application": {
 			"active": 0
 			},
 		"pipeline-operator": {
@@ -7697,11 +7775,10 @@
 			}
 		},
 	"babelRetainLines": 0,
+	"babelUseBuiltInsType": 0,
 	"bowerAbbreviatedPath": "bower_components",
-	"bowerAutoCreateInfoFile": 1,
-	"bowerInstallDevDependencies": 0,
-	"bowerSaveDependencies": 1,
-	"bowerSaveDevDependencies": 0,
+	"bowerForceLatestOnConflict": 1,
+	"bowerTargetDependencyListType": 1,
 	"bowerUseExactVersion": 0,
 	"browserRefreshDelay": 0,
 	"browserslistString": ">0.2%, last 2 versions, Firefox ESR, not dead",
@@ -8706,6 +8783,10 @@
 			"active": 0,
 			"optionString": "{'array': true, 'object': true}, {'enforceForRenamedProperties': false}"
 			},
+		"prefer-named-capture-group": {
+			"active": 0,
+			"optionString": ""
+			},
 		"prefer-numeric-literals": {
 			"active": 0,
 			"optionString": ""
@@ -9460,17 +9541,6 @@
 	"languageDefaultsUserDefined": [
 		{
 			"autoOutputAction": 1,
-			"autoOutputPathFilenamePattern": "*.js",
-			"autoOutputPathRelativePath": "",
-			"autoOutputPathReplace1": "vue",
-			"autoOutputPathReplace2": "pub/vue",
-			"autoOutputPathStyle": 3,
-			"fileExtension": "vue",
-			"shouldRunCacheBuster": 0,
-			"shouldRunHTMLMinifier": 0
-			},
-		{
-			"autoOutputAction": 1,
 			"autoOutputPathFilenamePattern": "*.html",
 			"autoOutputPathRelativePath": "",
 			"autoOutputPathReplace1": "",
@@ -9479,8 +9549,24 @@
 			"fileExtension": "html",
 			"shouldRunCacheBuster": 0,
 			"shouldRunHTMLMinifier": 0
+			},
+		{
+			"autoOutputAction": 1,
+			"autoOutputPathFilenamePattern": "*.js",
+			"autoOutputPathRelativePath": "",
+			"autoOutputPathReplace1": "vue",
+			"autoOutputPathReplace2": "pub/vue",
+			"autoOutputPathStyle": 3,
+			"fileExtension": "vue",
+			"shouldRunCacheBuster": 0,
+			"shouldRunHTMLMinifier": 0
 			}
 		],
+	"npmAbbreviatedPath": "",
+	"npmCreatePackageLock": 1,
+	"npmInstallOptionalDependencies": 0,
+	"npmSaveExactVersion": 0,
+	"npmTargetDependencyListType": 1,
 	"overrideExternalServerCSS": 0,
 	"previewPathAddition": "",
 	"skippedFoldersString": "log, _logs, logs, _cache, cache, .idea, /storage/framework/sessions, node_modules",

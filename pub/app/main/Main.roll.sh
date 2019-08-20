@@ -7,8 +7,9 @@ rollup --config     vue/geom/Geom.roll.js
 rollup --config     vue/math/Math.roll.js
 rollup --config     vue/data/Data.roll.js
 rollup --config     vue/page/Page.roll.js
+rollup --config     vue/prac/Prac.roll.js
 rollup --config pub/app/muse/Muse.roll.js
 rollup --config pub/app/augm/Augm.roll.js
-rollup --config pub/app/jitter/Jitter.roll.js
+rollup --config pub/app/jitt/Jitt.roll.js
 
 

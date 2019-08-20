@@ -20,10 +20,15 @@
     components:{ 'b-tabs':Tabs },
 
     data() { return { comp:'None', pages:[
-        { title:'Connections',  key:'Conn' },
-        { title:'Practices',    key:'Prac' },
-        { title:'Enlight',      key:'Enli' },
-        { title:'Data Science', key:'Data' },
+        { title:'Icon', key:'Icon' },
+        { title:'Dirs', key:'Dirs' },
+        { title:'Conn', key:'Conn' },
+        { title:'Summ', key:'Summ' },
+        { title:'Desc', key:'Desc' },
+        { title:'Konn', key:'Konn' },
+        { title:'Prac', key:'Prac' },
+        { title:'Enli', key:'Enli' },
+        { title:'Data', key:'Data' },
       ] } },
 
     beforeMount: function() {

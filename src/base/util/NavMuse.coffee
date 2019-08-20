@@ -9,15 +9,15 @@ class NavMuse
     @level   =  'Prac' # Prac Disp Tab
     @prac    =  'None'
     @disp    =  'None'
-    @tab     =  'Conn'
-    @tabs    = ['Conn','Prac','Data','Enli']  # Set by the active view component
+    @page    =  'Conn'
+    @pages   = ['Conn','Prac','Data','Enli','Icon']  # Set by the active view component
     @queue   =   null # Last published obj created before route call request by new component
     @queued  =   false
     @compass =   ""
     @subscribe()
 
   subscribe:() ->
-    @stream.subscribe( 'Tabs',  'NavMuse', (tab) => console.log('NavMuse.sub()',tab); @tab = tab )
+    @stream.subscribe( 'Page',  'NavMuse', (page) => console.log('NavMuse.sub()',page); @page = page )
 
   # Publish twice because Tocs needs to update comp before any Nav view updates
   pub:( obj ) ->
@@ -28,7 +28,7 @@ class NavMuse
   set:( obj ) ->
     for own key,   val of obj
           @[key] = val
-    # console.log('Nav.set()', obj, @tab )
+    # console.log('Nav.set()', obj, @page )
     return
 
   tap:() =>
@@ -59,7 +59,7 @@ class NavMuse
       if adj.plane isnt @comp
          obj.comp  = adj.plane
          @comp     = adj.plane
-         @route( @level, @comp, @tab, obj )
+         @route( @level, @comp, @page, obj )
       @pub( obj )
     return
 
@@ -86,22 +86,22 @@ class NavMuse
        if adj.plane isnt @comp
           obj.comp = adj.plane
           @comp    = adj.plane
-          @route( @level, @comp, @tab, obj )
+          @route( @level, @comp, @page, obj )
        @pub( obj )
     return
 
   dirTabs:( dir ) ->
-    if @tabs.length > 0 and @tab isnt 'None'
-      idx = @tabs.indexOf(@tab)
-      tab = @tabs[idx++] if dir is 'east' and idx < @tabs.length-1
-      tab = @tabs[idx--] if dir is 'west' and idx > 1
-      if tab isnt @tab
+    if @pages.length > 0 and @page isnt 'None'
+      idx = @pages.indexOf(@page)
+      page = @pages[idx++] if dir is 'east' and idx < @pages.length-1
+      page = @pages[idx--] if dir is 'west' and idx > 1
+      if page isnt @page
          obj = {}
          obj.level = @level
          obj.comp  = @comp
-         obj.tab   = tab
-         @tab      = tab
-         @route( @level, @comp, @tab, obj )
+         obj.page   = page
+         @page      = page
+         @route( @level, @comp, @page, obj )
     else
       @dirNone(  dr )
     return
@@ -110,11 +110,11 @@ class NavMuse
     console.error( 'Nav.dirNone unknown dir', { dir:dir, level:@level } )
     return
 
-  route:( level, comp, tab, obj ) ->
+  route:( level, comp, page, obj ) ->
     if @$router?
        @$router.push( { name:comp     } ) if level isnt 'Tabs'
-       @$router.push( { name:comp+tab } )
-       # console.log(   'Nav.router()', { name:comp+tab } )
+       @$router.push( { name:comp+page } )
+       # console.log(   'Nav.router()', { name:comp+page } )
     else
        console.error( 'Nav.router() $router not set' )
     # Oueue up obj for for component to request when mounted
