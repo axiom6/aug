@@ -3,10 +3,10 @@
   <div class="comp" ref="Comp" title="Comp">
     <b-tabs :comp="comp" :pages="pages"></b-tabs>
     <template v-for="prac in practices">
-      <div :class="prac.dir" :key="prac.name" :ref="prac.name" :title="prac.name">
+      <div :class="pracDir(prac.dir)" :key="prac.name" :ref="prac.name" :title="prac.name">
         <p-icon v-show="pages['Icon'].show" :comp="comp" :prac="prac"></p-icon>
         <p-dirs v-show="pages['Dirs'].show" :comp="comp" :prac="prac"></p-dirs>
-        <p-conn   v-if="pages['Conn'].show" :comp="comp" :prac="prac"></p-conn>
+        <p-summ v-show="pages['Summ'].show" :comp="comp" :prac="prac"></p-summ>
         <p-desc v-show="pages['Desc'].show" :comp="comp" :prac="prac"></p-desc>
       </div>
     </template>
@@ -14,6 +14,8 @@
       <div v-show="isRows()" :class="row.dir" :key="row.name">
         <p-icon :comp="comp" :prac="row"></p-icon>
       </div>
+      <!--div v-show="isRows()" :class="row.dir" :key="row.name"><div class="row">
+        <div><i :class="row.icon"></i>{{row.name}}</div></div></div-->
     </template>
   </div>
 </template>
@@ -23,12 +25,12 @@
   import Tabs from '../elem/Tabs.vue';
   import Icon from './Icon.vue';
   import Dirs from './Dirs.vue';
-  import Conn from './Conn.vue';
+  import Summ from './Summ.vue';
   import Desc from './Desc.vue';
   
   let Comp = {
 
-    components:{ 'b-tabs':Tabs, 'p-icon':Icon, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },
+    components:{ 'b-tabs':Tabs, 'p-icon':Icon, 'p-dirs':Dirs, 'p-summ':Summ, 'p-desc':Desc },
     
     props: { pcomp:{ type:String, default:'None' } },
     
@@ -37,7 +39,7 @@
       pages:{
         Icon: { name:'Icon', show:false },
         Dirs: { name:'Dirs', show:false },
-        Conn: { name:'Conn', show:false },
+        Summ: { name:'Summ', show:false },
         Desc: { name:'Desc', show:false } },
       rows: {
         Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap" },
@@ -75,10 +77,19 @@
           case 'Prac' : this.onPrac(obj.prac);          break;
           case 'Disp' : this.onDisp(obj.prac,obj.disp); break;
           default     : this.onNone(obj); } },
+      pracDir: function(dir) {
+        return this.prac==='All' ? dir : 'pracFull'; },
+      dispDir: function(dir) {
+        return this.disp==='All' ? dir : 'dispFull'; },
+      areaDir: function() {
+        return this.prac==='All' ? 'none' : 'area' },
+      style: function( hsv ) {
+        return { backgroundColor:this.toRgbaHsv(hsv) }; },
       elems: function() { // Add DON elements. Must be called within $nextTick for $refs
         this.infoElem = this.$refs['Comp']
-        for( let pkey in this.practices ) {
-          let prac = this.practices[pkey];
+        let pracs = this.conns(this.comp); // We access conns because col practices have been filtered out
+        for( let pkey in pracs ) {
+          let prac = pracs[pkey];
           prac.elem = this.$refs[prac.name][0];
           this.touch.events( prac.elem );
           let disps = this.disps(this.comp,prac.name)
@@ -92,14 +103,12 @@
       this.onPage(this.nav().page); },
 
     mounted: function () {
-      this.practices = this.pracs(this.comp);
+      this.practices = this.pracs(this.comp); // 'Cols'
       this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
          if( obj.disp==='All' ) { this.onPrac(obj.prac); }
          else                   { this.onDisp(obj.prac,obj.disp); } } );
       this.subscribe(  "Nav",     this.comp+'.vue', (obj) => {
-        this.onNav(obj); } );
-      this.$nextTick( function() {
-         this.elems(); } ); }
+        this.onNav(obj); } ); }
   }
   
   export default Comp;
@@ -115,11 +124,16 @@
 
   .grid5x4() { display:grid; grid-template-columns:13fr 29fr 29fr 29fr; grid-template-rows:8fr 24fr 24fr 24fr 24fr;
     grid-template-areas: "tabs tabs tabs tabs" "cm em in en" "le nw north ne" "do west cen east" "sh sw south se"; }
+
+  .grid1x3() { display:grid; grid-template-columns:6fr 22fr 72fr; grid-template-areas: "icon name desc"; }
   
   .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;
                   justify-items:center; align-items:center; }
   
   .ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }
+  
+  .bgc( @bg )
+    { background-color:@bg; } // top | right | bottom | left
   
   .comp { position:relative; left:0; top:0; right:0; bottom:0; font-size:@theme-prac-size;
           background-color:@theme-back; color:@theme-color-prac;
@@ -140,6 +154,38 @@
                              .south { .ddir(south); }
       .cen  { font-size:@theme-cen-size; }
       div   { font-size:@theme-dir-size; } }
+  
+    .disp {   display:inline; justify-self:center; align-self:center; text-align:center; font-size:@theme-disp-size;
+      i     { display:inline-block;  margin-right: 0.25rem; }
+      .name { display:inline-block; }
+      .desc { display:none; margin:0.5rem 0.5rem 0.5rem 0.5rem; text-align:left; } }
+  
+    .area { .grid1x3(); justify-self:start; align-self:center; text-align:left; margin-left:1.5em;
+      width:90%; height:auto; font-size:@theme-area-size;
+      i     { grid-area:icon; }
+      .name { grid-area:name; font-weight:900; }
+      .desc { grid-area:desc; } }
+  
+    
+    
+    // Placed one level above .prac at the 9 Practices Grid Direction
+    .pracFull { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;
+      .prac { font-size:@theme-full-size; width:100%; height:100%;
+              justify-self:center; align-self:center; display:grid; border-radius:0.5rem;
+        div {     padding-bottom:2rem;
+          .disp { padding-bottom:0;
+            i     { font-size:@theme-disp-size; }
+            .name { font-size:@theme-disp-size; }
+            .desc { font-size:@theme-disp-size; display:block; } } }  // Turns on .disp .desc
+          .area { padding-bottom:0; } } }
+  
+    // Placed one level above .dir at the 4 Disipline plus Practice name Grid Direction
+    .dispFull { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid; border-radius:72px;
+       .disp { justify-self:center; margin:0;
+         i     { font-size:@theme-area-icon-size !important; }
+         .name { font-size:@theme-area-name-size !important; }
+         .desc { font-size:@theme-area-desc-size !important; display:block; } }  // Turns on .disp .desc
+       .area {   font-size:@theme-area-area-size !important; padding-bottom:0; } }
     
     .em, .in, .en { .prac .cen { font-size:@theme-row-size; } } // Font size columns
   
@@ -148,6 +194,10 @@
       div { text-align:center; justify-self:center;  align-self:center; font-size:@theme-row-size; color:@theme-color; }
       i { margin-bottom: 0.2rem; display:block; } }
     
+    .show { display:block }
+  
+    .hide { display:none; }
   }
   
 </style>
+

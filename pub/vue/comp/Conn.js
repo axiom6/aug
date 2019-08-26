@@ -1,230 +1,3 @@
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-var script = {
-
-  props: { comp:String, pages:Array },
-  
-  data() { return { page:"" } },
-  
-  methods: {
-    onPage: function (obj) {
-      this.page = obj.page; },
-    doPage: function (page) {
-      this.nav().pub( { page:page.page } ); },
-    clPage: function (page) {
-      return this.page===page ? 'tab-active' : 'tab'; } },
-  
-  mounted: function() {
-    this.subscribe(  "Nav", 'Page', (obj) => {
-      this.onPage(obj); } ); }
-  };
-
-function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
-/* server only */
-, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
-  if (typeof shadowMode !== 'boolean') {
-    createInjectorSSR = createInjector;
-    createInjector = shadowMode;
-    shadowMode = false;
-  } // Vue.extend constructor export interop.
-
-
-  var options = typeof script === 'function' ? script.options : script; // render functions
-
-  if (template && template.render) {
-    options.render = template.render;
-    options.staticRenderFns = template.staticRenderFns;
-    options._compiled = true; // functional template
-
-    if (isFunctionalTemplate) {
-      options.functional = true;
-    }
-  } // scopedId
-
-
-  if (scopeId) {
-    options._scopeId = scopeId;
-  }
-
-  var hook;
-
-  if (moduleIdentifier) {
-    // server build
-    hook = function hook(context) {
-      // 2.3 injection
-      context = context || // cached call
-      this.$vnode && this.$vnode.ssrContext || // stateful
-      this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext; // functional
-      // 2.2 with runInNewContext: true
-
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__;
-      } // inject component styles
-
-
-      if (style) {
-        style.call(this, createInjectorSSR(context));
-      } // register component module identifier for async chunk inference
-
-
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier);
-      }
-    }; // used by ssr in case component is cached and beforeCreate
-    // never gets called
-
-
-    options._ssrRegister = hook;
-  } else if (style) {
-    hook = shadowMode ? function () {
-      style.call(this, createInjectorShadow(this.$root.$options.shadowRoot));
-    } : function (context) {
-      style.call(this, createInjector(context));
-    };
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // register for functional component in vue file
-      var originalRender = options.render;
-
-      options.render = function renderWithStyleInjection(h, context) {
-        hook.call(context);
-        return originalRender(h, context);
-      };
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate;
-      options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
-    }
-  }
-
-  return script;
-}
-
-var normalizeComponent_1 = normalizeComponent;
-
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
-function createInjector(context) {
-  return function (id, style) {
-    return addStyle(id, style);
-  };
-}
-var HEAD = document.head || document.getElementsByTagName('head')[0];
-var styles = {};
-
-function addStyle(id, css) {
-  var group = isOldIE ? css.media || 'default' : id;
-  var style = styles[group] || (styles[group] = {
-    ids: new Set(),
-    styles: []
-  });
-
-  if (!style.ids.has(id)) {
-    style.ids.add(id);
-    var code = css.source;
-
-    if (css.map) {
-      // https://developer.chrome.com/devtools/docs/javascript-debugging
-      // this makes source maps inside style tags work properly in Chrome
-      code += '\n/*# sourceURL=' + css.map.sources[0] + ' */'; // http://stackoverflow.com/a/26603875
-
-      code += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(css.map)))) + ' */';
-    }
-
-    if (!style.element) {
-      style.element = document.createElement('style');
-      style.element.type = 'text/css';
-      if (css.media) style.element.setAttribute('media', css.media);
-      HEAD.appendChild(style.element);
-    }
-
-    if ('styleSheet' in style.element) {
-      style.styles.push(code);
-      style.element.styleSheet.cssText = style.styles.filter(Boolean).join('\n');
-    } else {
-      var index = style.ids.size - 1;
-      var textNode = document.createTextNode(code);
-      var nodes = style.element.childNodes;
-      if (nodes[index]) style.element.removeChild(nodes[index]);
-      if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
-    }
-  }
-}
-
-var browser = createInjector;
-
-/* script */
-const __vue_script__ = script;
-
-/* template */
-var __vue_render__ = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    { staticClass: "tabs" },
-    [
-      _vm._l(_vm.pages, function(page) {
-        return [
-          _c(
-            "div",
-            {
-              class: _vm.clPage(page.page),
-              on: {
-                click: function($event) {
-                  return _vm.doPage(page)
-                }
-              }
-            },
-            [_vm._v(_vm._s(page.title))]
-          )
-        ]
-      })
-    ],
-    2
-  )
-};
-var __vue_staticRenderFns__ = [];
-__vue_render__._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__ = function (inject) {
-    if (!inject) return
-    inject("data-v-5a6329eb_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-prac {\n  background-color: #603;\n  font-size: 2rem;\n}\n.theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 80%;\n  height: 90%;\n}\n.tabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tabs .tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Tabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Tabs.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;ACCnB;ADCA;ECCA,sBAAA;EACA,eAAA;AACA;AACA;EACA,sBAAA;EACA,mBAAA;EACA,UAAA;EACA,WAAA;ADCA;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,UAAU;EACV,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Tabs.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-prac {\n  background-color: #603;\n  font-size: 2rem;\n}\n.theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 80%;\n  height: 90%;\n}\n.tabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tabs .tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"tabs\">\n    <template v-for=\"page in pages\">\n      <div :class=\"clPage(page.page)\" @click=\"doPage(page)\">{{page.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Array },\n    \n    data() { return { page:\"\" } },\n    \n    methods: {\n      onPage: function (obj) {\n        this.page = obj.page; },\n      doPage: function (page) {\n        this.nav().pub( { page:page.page } ); },\n      clPage: function (page) {\n        return this.page===page ? 'tab-active' : 'tab'; } },\n    \n    mounted: function() {\n      this.subscribe(  \"Nav\", 'Page', (obj) => {\n        this.onPage(obj); } ); }\n    }\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .tabs { position:absolute; left:0; top:0; width:100%; height:5%;\n          background-color:@theme-back; font-size:@theme-tab-size;\n    .tab { display:inline-block; margin-left:2.0rem; padding:0.2rem 0.3rem 0.1rem 0.3rem;\n      border-radius:12px 12px 0 0; border-left: @theme-color solid thin;\n      border-top:@theme-color solid thin; border-right:@theme-color solid thin;\n                  background-color:@theme-back;  color:@theme-color;}\n    .tab:hover  {         background-color:@theme-color; color:@theme-back; }\n    .tab-active { .tab(); background-color:@theme-color; color:@theme-back; } }\n  \n</style>"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__ = undefined;
-  /* module identifier */
-  const __vue_module_identifier__ = undefined;
-  /* functional template */
-  const __vue_is_functional_template__ = false;
-  /* style inject SSR */
-  
-
-  
-  var Tabs = normalizeComponent_1(
-    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-    __vue_inject_styles__,
-    __vue_script__,
-    __vue_scope_id__,
-    __vue_is_functional_template__,
-    __vue_module_identifier__,
-    browser,
-    undefined
-  );
-
 var Util,
   indexOf = [].indexOf,
   hasProp = {}.hasOwnProperty;
@@ -10615,180 +10388,280 @@ var Connect$1 = Connect;
 
 //
 
-var script$1 = {
+ let Conn = {
 
-  components:{ 'b-tabs':Tabs },
+   props: { comp:String, prac:Object },
 
-  data() {
-    return { comp:'None', prac:'All', disp:'All',
-             build:{}, connects:{}, practices:{}, size:{},
-      pages:[
-        { title:'Icon', view:'Page', page:'Icon' },
-        { title:'Dirs', view:'Page', page:'Dirs' },
-        { title:'Summ', view:'Page', page:'Summ' },
-        { title:'Desc', view:'Page', page:'Desc' } ] }; },
+   data() {
+     return { comp:'None', prac:'All', disp:'All',
+              build:{}, connects:{}, practices:{}, size:{},
+}; },
 
-  methods: {
-    isPrac: function (prac) {
-      return this.prac===prac || this.prac==='All' },
-    onPrac: function (prac) {
-      if( prac==='All' && this.prac!=='All' ) {
-        if( Util$1.isDef(this.connects[this.prac]) ) {
-          this.connects[this.prac].layout( this.size, 'Restore'); }
-        else {
-          console.log( 'Conn.onPrac() connect undefined', { prat:this.prac } ); } }
-      if( prac!=='All' && typeof(this.connects[prac])==='object' ) { // Expand prac to Comp size
-        this.connects[prac].layout( this.size, 'Expand'); }
-      this.prac = prac; this.disp='All';  },
-    onDisp: function (prac,disp) {
-      this.prac = prac; this.disp=disp; },
-    onTabs: function ()    {}, // Does nothing
-    onNone: function (obj) {
-      console.error( 'Conn Nav Error', { obj:obj } ); },
-    onNav:  function (obj) {
-      switch( obj.level ) {
-        case 'Prac' : this.onPrac(obj.prac);          break;
-        case 'Disp' : this.onDisp(obj.prac,obj.disp); break;
-        case 'Tabs' : this.onTabs();                  break;
-        default     : this.onNone(obj); } },
-    pracDir: function(dir) {
-      return this.prac==='All' ? dir : 'fullPracDir'; },
-    pubPrac: function (prac) {
-      this.publish( this.comp, { prac:prac, disp:'All' } ); },
-    style: function( hsv ) {
-      return { backgroundColor:this.toRgbaHsv(hsv) }; },
-    
-    calcSize: function(prac) {        // Should only be called by $nextTick()
-      let elem = this.$refs[prac][0];  // As in createConnects and resize()
-      let sz   = {};
-      if( typeof(this.$refs['Conn'])==='undefined' ) {
-        console.log( 'Conn.calcSize() $refs[Conn] undefined', this.$refs ); }
-      sz.compWidth  = this.$refs['Conn']['clientWidth' ];
-      sz.compHeight = this.$refs['Conn']['clientHeight'];
-      sz.elemWidth  = elem['clientWidth' ];
-      sz.elemHeight = elem['clientHeight'];
-      // console.log( 'Conn.calcSize()', prac, sz );
-      return sz;
-    },
-    
-    createConnects: function( stream, build ) {
-      this.$nextTick( function() {
-        for( let key of this.pkeys ) {
-            let prac = this.practices[key];
-            if( prac.row !== 'Dim' || this.comp === 'Prin') {
-              let elem  = this.$refs[key][0];
-              this.size = this.calcSize(key);
-              this.connects[prac.name] = new Connect$1( stream, build, prac, elem, this.size ); } } } ); },
-    
-    resize: function() {
-      this.$nextTick( function() {
-        for( let key of this.pkeys ) {
-          let level = key!==this.prac ? 'Resize' : 'Expand';
-          if( level==='Expand') { this.connects[key].lastSize(this.size); }
-          this.connects[key].layout( this.size, level ); } } ); }
-  },
+   methods: {
+     isPrac: function (prac) {
+       return this.prac===prac || this.prac==='All' },
+     onPrac: function (prac) {
+       if( prac==='All' && this.prac!=='All' ) {
+         if( Util$1.isDef(this.connects[this.prac]) ) {
+           this.connects[this.prac].layout( this.size, 'Restore'); }
+         else {
+           console.log( 'Conn.onPrac() connect undefined', { prat:this.prac } ); } }
+       if( prac!=='All' && typeof(this.connects[prac])==='object' ) { // Expand prac to Comp size
+         this.connects[prac].layout( this.size, 'Expand'); }
+       this.prac = prac; this.disp='All';  },
+     onDisp: function (prac,disp) {
+       this.prac = prac; this.disp=disp; },
+     onTabs: function ()    {}, // Does nothing
+     onNone: function (obj) {
+       console.error( 'Conn Nav Error', { obj:obj } ); },
+     onNav:  function (obj) {
+       switch( obj.level ) {
+         case 'Prac' : this.onPrac(obj.prac);          break;
+         case 'Disp' : this.onDisp(obj.prac,obj.disp); break;
+         case 'Tabs' : this.onTabs();                  break;
+         default     : this.onNone(obj); } },
+     pracDir: function(dir) {
+       return this.prac==='All' ? dir : 'fullPracDir'; },
+     doPrac: function (prac) {
+       this.publish( this.comp, { prac:prac, disp:'All' } ); },
+     style: function( hsv ) {
+       return { backgroundColor:this.toRgbaHsv(hsv) }; },
+     
+     calcSize: function(prac) {        // Should only be called by $nextTick()
+       let elem = this.$refs[prac][0];  // As in createConnects and resize()
+       let sz   = {};
+       if( typeof(this.$refs['Conn'])==='undefined' ) {
+         console.log( 'Conn.calcSize() $refs[Conn] undefined', this.$refs ); }
+       sz.compWidth  = this.$refs['Conn']['clientWidth' ];
+       sz.compHeight = this.$refs['Conn']['clientHeight'];
+       sz.elemWidth  = elem['clientWidth' ];
+       sz.elemHeight = elem['clientHeight'];
+       // console.log( 'Conn.calcSize()', prac, sz );
+       return sz;
+     },
+     
+     createConnects: function( stream, build ) {
+       this.$nextTick( function() {
+         for( let key of this.pkeys ) {
+             let prac = this.practices[key];
+             if( prac.row !== 'Dim' || this.comp === 'Prin') {
+               let elem  = this.$refs[key][0];
+               this.size = this.calcSize(key);
+               this.connects[prac.name] = new Connect$1( stream, build, prac, elem, this.size ); } } } ); },
+     
+     resize: function() {
+       this.$nextTick( function() {
+         for( let key of this.pkeys ) {
+           let level = key!==this.prac ? 'Resize' : 'Expand';
+           if( level==='Expand') { this.connects[key].lastSize(this.size); }
+           this.connects[key].layout( this.size, level ); } } ); }
+   },
 
-  beforeMount: function() {
-    this.comp = this.nav().comp; },
+   beforeMount: function() {
+     this.comp = this.nav().comp; },
 
-  mounted: function () {
-    this.build     = new Build$1(  this.batch() );
-    this.practices = this.conns( this.comp );
-    this.pkeys     = this.keys(  this.practices );
-    this.subscribe(  this.comp,  this.comp+'.vue', (obj) => {
-      if( obj.disp==='All' ) {   this.onPrac(obj.prac); }
-      else                   {   this.onDisp(obj.prac,obj.disp); } } );
-    this.subscribe(  "Nav",      this.comp+'.vue', (obj) => {
-      this.onNav(obj); } );
-    this.createConnects( this.stream(), this.build ); },
-  
-  created: function () {
-    window.addEventListener(   'resize', this.resize ); },
-  destroyed: function () {
-    window.removeEventListener('resize', this.resize ); }
- };
+   mounted: function () {
+     this.build     = new Build$1(  this.batch() );
+     this.practices = this.conns( this.comp );
+     this.pkeys     = this.keys(  this.practices );
+     this.subscribe(  this.comp,  this.comp+'.vue', (obj) => {
+       if( obj.disp==='All' ) {   this.onPrac(obj.prac); }
+       else                   {   this.onDisp(obj.prac,obj.disp); } } );
+     this.subscribe(  "Nav",      this.comp+'.vue', (obj) => {
+       this.onNav(obj); } );
+     this.createConnects( this.stream(), this.build ); },
+   
+   created: function () {
+     window.addEventListener(   'resize', this.resize ); },
+   destroyed: function () {
+     window.removeEventListener('resize', this.resize ); }
+  };
+
+function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
+/* server only */
+, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+  if (typeof shadowMode !== 'boolean') {
+    createInjectorSSR = createInjector;
+    createInjector = shadowMode;
+    shadowMode = false;
+  } // Vue.extend constructor export interop.
+
+
+  var options = typeof script === 'function' ? script.options : script; // render functions
+
+  if (template && template.render) {
+    options.render = template.render;
+    options.staticRenderFns = template.staticRenderFns;
+    options._compiled = true; // functional template
+
+    if (isFunctionalTemplate) {
+      options.functional = true;
+    }
+  } // scopedId
+
+
+  if (scopeId) {
+    options._scopeId = scopeId;
+  }
+
+  var hook;
+
+  if (moduleIdentifier) {
+    // server build
+    hook = function hook(context) {
+      // 2.3 injection
+      context = context || // cached call
+      this.$vnode && this.$vnode.ssrContext || // stateful
+      this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext; // functional
+      // 2.2 with runInNewContext: true
+
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__;
+      } // inject component styles
+
+
+      if (style) {
+        style.call(this, createInjectorSSR(context));
+      } // register component module identifier for async chunk inference
+
+
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier);
+      }
+    }; // used by ssr in case component is cached and beforeCreate
+    // never gets called
+
+
+    options._ssrRegister = hook;
+  } else if (style) {
+    hook = shadowMode ? function () {
+      style.call(this, createInjectorShadow(this.$root.$options.shadowRoot));
+    } : function (context) {
+      style.call(this, createInjector(context));
+    };
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // register for functional component in vue file
+      var originalRender = options.render;
+
+      options.render = function renderWithStyleInjection(h, context) {
+        hook.call(context);
+        return originalRender(h, context);
+      };
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate;
+      options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+    }
+  }
+
+  return script;
+}
+
+var normalizeComponent_1 = normalizeComponent;
+
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
+function createInjector(context) {
+  return function (id, style) {
+    return addStyle(id, style);
+  };
+}
+var HEAD = document.head || document.getElementsByTagName('head')[0];
+var styles = {};
+
+function addStyle(id, css) {
+  var group = isOldIE ? css.media || 'default' : id;
+  var style = styles[group] || (styles[group] = {
+    ids: new Set(),
+    styles: []
+  });
+
+  if (!style.ids.has(id)) {
+    style.ids.add(id);
+    var code = css.source;
+
+    if (css.map) {
+      // https://developer.chrome.com/devtools/docs/javascript-debugging
+      // this makes source maps inside style tags work properly in Chrome
+      code += '\n/*# sourceURL=' + css.map.sources[0] + ' */'; // http://stackoverflow.com/a/26603875
+
+      code += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(css.map)))) + ' */';
+    }
+
+    if (!style.element) {
+      style.element = document.createElement('style');
+      style.element.type = 'text/css';
+      if (css.media) style.element.setAttribute('media', css.media);
+      HEAD.appendChild(style.element);
+    }
+
+    if ('styleSheet' in style.element) {
+      style.styles.push(code);
+      style.element.styleSheet.cssText = style.styles.filter(Boolean).join('\n');
+    } else {
+      var index = style.ids.size - 1;
+      var textNode = document.createTextNode(code);
+      var nodes = style.element.childNodes;
+      if (nodes[index]) style.element.removeChild(nodes[index]);
+      if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
+    }
+  }
+}
+
+var browser = createInjector;
 
 /* script */
-const __vue_script__$1 = script$1;
+const __vue_script__ = Conn;
 
 /* template */
-var __vue_render__$1 = function() {
+var __vue_render__ = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    { ref: "Conn", staticClass: "conn", attrs: { id: "Conn" } },
-    [
-      _c("b-tabs", { attrs: { comp: _vm.comp, pages: _vm.pages } }),
-      _vm._v(" "),
-      _vm._l(_vm.practices, function(prac) {
-        return [
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.isPrac(prac.name),
-                  expression: "isPrac(prac.name)"
-                }
-              ],
-              key: prac.name,
-              ref: "Prac",
-              refInFor: true,
-              class: _vm.pracDir(prac.dir)
-            },
-            [
-              _c("div", {
-                ref: prac.name,
-                refInFor: true,
-                staticClass: "prac",
-                staticStyle: { "background-color": "rgba(97,56,77,1.0)" },
-                attrs: { id: prac.name },
-                on: {
-                  click: function($event) {
-                    return _vm.pubPrac(prac.name)
-                  }
-                }
-              })
-            ]
-          )
-        ]
-      })
-    ],
-    2
-  )
+  return _c("div", { staticClass: "conn" }, [
+    _c("div", {
+      ref: _vm.prac.name,
+      staticClass: "prac",
+      staticStyle: { "background-color": "rgba(97,56,77,1.0)" },
+      attrs: { id: _vm.prac.name },
+      on: {
+        click: function($event) {
+          return _vm.doPrac(_vm.prac.name)
+        }
+      }
+    })
+  ])
 };
-var __vue_staticRenderFns__$1 = [];
-__vue_render__$1._withStripped = true;
+var __vue_staticRenderFns__ = [];
+__vue_render__._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$1 = function (inject) {
+  const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-5105cdc4_0", { source: ".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-prac {\n  background-color: #603;\n  font-size: 2rem;\n}\n.theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 80%;\n  height: 90%;\n}\n.conn {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.3rem;\n  background-color: black;\n  color: wheat;\n  display: grid;\n  grid-template-columns: 33.3fr 33.3fr 33.4fr;\n  grid-template-rows: 7fr 31fr 31fr 31fr;\n  grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.5rem;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 99%;\n  height: 98%;\n  font-size: 2rem;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 2.5rem;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2rem;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 2.5rem;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 2.5rem;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 2.5rem;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n", map: {"version":3,"sources":["Conn.vue","/Users/ax/Documents/prj/aug/vue/comp/Conn.vue"],"names":[],"mappings":"AAAA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,iBAAiB;EACjB,uBAAuB;EACvB,YAAY;EACZ,aAAa;EACb,2CAA2C;EAC3C,sCAAsC;EACtC,iFAAiF;EACjF,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,eAAe;EACf,eAAe;EACf,YAAY;EACZ,iBAAiB;EACjB,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;ACCA;EDCE,aAAa;ECCf,aAAA;EACA,qBAAA;EDCE,mBAAmB;ECCrB,qBAAA;EACA,mBAAA;ADCA;ACCA;EACA,aAAA;EDCE,gBAAgB;ECClB,qBAAA;EACA,mBAAA;EDCE,qBAAqB;ECCvB,mBAAA;AACA;AACA;EACA,aAAA;EACA,aAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EDCE,mBAAmB;ACCrB;AACA;EDCE,aAAa;ECCf,mBAAA;EACA,UAAA;EACA,WAAA;EACA,eAAA;EACA,iBAAA;AACA;AACA;EACA,oBAAA;EACA,kBAAA;EACA,kBAAA;AACA;ADCA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;AACf;AACA;EACE,iBAAiB;EACjB,WAAW;EACX,YAAY;EACZ,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;AACtB;AACA;EACE,oBAAoB;AACtB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,iBAAiB;EACjB,cAAc;AAChB;AACA;EACE,iBAAiB;AACnB","file":"Conn.vue","sourcesContent":[".theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-prac {\n  background-color: #603;\n  font-size: 2rem;\n}\n.theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 80%;\n  height: 90%;\n}\n.conn {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.3rem;\n  background-color: black;\n  color: wheat;\n  display: grid;\n  grid-template-columns: 33.3fr 33.3fr 33.4fr;\n  grid-template-rows: 7fr 31fr 31fr 31fr;\n  grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.5rem;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 99%;\n  height: 98%;\n  font-size: 2rem;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 2.5rem;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2rem;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 2.5rem;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 2.5rem;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 2.5rem;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n","\n<template>\n  <div id=\"Conn\" class=\"conn\" ref=\"Conn\">\n    <b-tabs :comp=\"comp\" :pages=\"pages\"></b-tabs>\n    <template v-for=\"prac in practices\">\n      <div v-show=\"isPrac(prac.name)\" ref=\"Prac\" :class=\"pracDir(prac.dir)\" :key=\"prac.name\">\n        <div :id=\"prac.name\" :ref=\"prac.name\" class=\"prac\"\n          @click=\"pubPrac(prac.name)\" style=\"background-color:rgba(97,56,77,1.0)\">\n        </div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Tabs    from '../elem/Tabs.vue';\n  import Util    from '../../pub/base/util/Util.js';\n  import Build   from '../../pub/ikw/cube/Build.js';\n  import Connect from '../../pub/ikw/conn/Connect.js';\n\n  export default {\n\n    components:{ 'b-tabs':Tabs },\n\n    data() {\n      return { comp:'None', prac:'All', disp:'All',\n               build:{}, connects:{}, practices:{}, size:{},\n        pages:[\n          { title:'Icon', view:'Page', page:'Icon' },\n          { title:'Dirs', view:'Page', page:'Dirs' },\n          { title:'Summ', view:'Page', page:'Summ' },\n          { title:'Desc', view:'Page', page:'Desc' } ] }; },\n\n    methods: {\n      isPrac: function (prac) {\n        return this.prac===prac || this.prac==='All' },\n      onPrac: function (prac) {\n        if( prac==='All' && this.prac!=='All' ) {\n          if( Util.isDef(this.connects[this.prac]) ) {\n            this.connects[this.prac].layout( this.size, 'Restore'); }\n          else {\n            console.log( 'Conn.onPrac() connect undefined', { prat:this.prac } ); } }\n        if( prac!=='All' && typeof(this.connects[prac])==='object' ) { // Expand prac to Comp size\n          this.connects[prac].layout( this.size, 'Expand'); }\n        this.prac = prac; this.disp='All';  },\n      onDisp: function (prac,disp) {\n        this.prac = prac; this.disp=disp; },\n      onTabs: function ()    {}, // Does nothing\n      onNone: function (obj) {\n        console.error( 'Conn Nav Error', { obj:obj } ); },\n      onNav:  function (obj) {\n        switch( obj.level ) {\n          case 'Prac' : this.onPrac(obj.prac);          break;\n          case 'Disp' : this.onDisp(obj.prac,obj.disp); break;\n          case 'Tabs' : this.onTabs();                  break;\n          default     : this.onNone(obj); } },\n      pracDir: function(dir) {\n        return this.prac==='All' ? dir : 'fullPracDir'; },\n      pubPrac: function (prac) {\n        this.publish( this.comp, { prac:prac, disp:'All' } ); },\n      style: function( hsv ) {\n        return { backgroundColor:this.toRgbaHsv(hsv) }; },\n      \n      calcSize: function(prac) {        // Should only be called by $nextTick()\n        let elem = this.$refs[prac][0]  // As in createConnects and resize()\n        let sz   = {}\n        if( typeof(this.$refs['Conn'])==='undefined' ) {\n          console.log( 'Conn.calcSize() $refs[Conn] undefined', this.$refs ) }\n        sz.compWidth  = this.$refs['Conn']['clientWidth' ];\n        sz.compHeight = this.$refs['Conn']['clientHeight'];\n        sz.elemWidth  = elem['clientWidth' ];\n        sz.elemHeight = elem['clientHeight'];\n        // console.log( 'Conn.calcSize()', prac, sz );\n        return sz;\n      },\n      \n      createConnects: function( stream, build ) {\n        this.$nextTick( function() {\n          for( let key of this.pkeys ) {\n              let prac = this.practices[key];\n              if( prac.row !== 'Dim' || this.comp === 'Prin') {\n                let elem  = this.$refs[key][0]\n                this.size = this.calcSize(key)\n                this.connects[prac.name] = new Connect( stream, build, prac, elem, this.size ); } } } ) },\n      \n      resize: function() {\n        this.$nextTick( function() {\n          for( let key of this.pkeys ) {\n            let level = key!==this.prac ? 'Resize' : 'Expand';\n            if( level==='Expand') { this.connects[key].lastSize(this.size) }\n            this.connects[key].layout( this.size, level ); } } ); }\n    },\n\n    beforeMount: function() {\n      this.comp = this.nav().comp; },\n\n    mounted: function () {\n      this.build     = new Build(  this.batch() );\n      this.practices = this.conns( this.comp );\n      this.pkeys     = this.keys(  this.practices )\n      this.subscribe(  this.comp,  this.comp+'.vue', (obj) => {\n        if( obj.disp==='All' ) {   this.onPrac(obj.prac); }\n        else                   {   this.onDisp(obj.prac,obj.disp); } } );\n      this.subscribe(  \"Nav\",      this.comp+'.vue', (obj) => {\n        this.onNav(obj); } );\n      this.createConnects( this.stream(), this.build ); },\n    \n    created: function () {\n      window.addEventListener(   'resize', this.resize ) },\n    destroyed: function () {\n      window.removeEventListener('resize', this.resize ) }\n   }\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .grid5x4() { display:grid; grid-template-columns:7fr 31fr 31fr 31fr; grid-template-rows:7fr 12fr 27fr 27fr 27fr;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid4x4() { display:grid; grid-template-columns:7fr 31fr 31fr 31fr; grid-template-rows:7fr 31fr 31fr 31fr;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid4x3() { display:grid; grid-template-columns:33.3fr 33.3fr 33.4fr; grid-template-rows:7fr 31fr 31fr 31fr;\n    grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\"; }\n  \n  .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n    justify-items:center; align-items:center; }\n  \n  .conn { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:@theme-conn-size;\n          background-color:@theme-back; color:@theme-color;\n    .grid4x3(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid\n    .tabs{ grid-area:tabs; display:inline; color:@theme-color; font-size:@theme-tab-size;\n      justify-self:start; align-self:center; text-align:left; }\n    .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }\n    .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }\n    .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }\n    \n    .prac { display:grid; border-radius:36px; width:99%; height:98%; font-size:@theme-prac-size; font-weight:bold;\n      .name { justify-self:center; align-self:center; text-align:center; } }\n  \n    // Placed one level above .prac at the 9 Practices Grid Direction\n    .fullPracDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;\n      .prac { font-size:@theme-full-size; width:100%; height:100%;\n        justify-self:center; align-self:center; display:grid; border-radius:0.5em;\n        div {     padding-bottom:2rem;\n          .disp { padding-bottom:0;\n            i     { font-size:@theme-full-size; }\n            .name { font-size:@theme-full-size; }\n            .desc { font-size:@theme-full-size; display:block; } } }  // Turns on .disp .desc\n        .area { padding-bottom:0; } } }\n  }\n</style>"]}, media: undefined });
+    inject("data-v-7d1c2d1a_0", { source: ".theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 80%;\n  height: 90%;\n}\n.theme-prac {\n  background-color: #333;\n  font-size: 2rem;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.conn {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.3rem;\n  background-color: black;\n  color: wheat;\n  display: grid;\n  grid-template-columns: 33.3fr 33.3fr 33.4fr;\n  grid-template-rows: 7fr 31fr 31fr 31fr;\n  grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.5rem;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 99%;\n  height: 98%;\n  font-size: 2rem;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 2.5rem;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2rem;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 2.5rem;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 2.5rem;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 2.5rem;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n", map: {"version":3,"sources":["Conn.vue","/Users/ax/Documents/prj/aug/vue/comp/Conn.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,eAAe;AACjB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,iBAAiB;EACjB,uBAAuB;EACvB,YAAY;EACZ,aAAa;EACb,2CAA2C;EAC3C,sCAAsC;EACtC,iFAAiF;EACjF,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,eAAe;EACf,eAAe;EACf,YAAY;EACZ,iBAAiB;EACjB,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;ACCA;EDCE,aAAa;ECCf,eAAA;EACA,qBAAA;EDCE,mBAAmB;ECCrB,qBAAA;EACA,mBAAA;ADCA;ACCA;EACA,aAAA;EDCE,aAAa;ECCf,qBAAA;EACA,mBAAA;EDCE,qBAAqB;ECCvB,mBAAA;AACA;AACA;EACA,aAAA;EACA,gBAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EDCE,mBAAmB;ACCrB;AACA;EDCE,aAAa;ECCf,aAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,mBAAA;AACA;AACA;EACA,aAAA;EACA,mBAAA;EACA,UAAA;EACA,WAAA;EDCE,eAAe;EACf,iBAAiB;AACnB;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,SAAS;EACT,UAAU;EACV,aAAa;AACf;AACA;EACE,iBAAiB;EACjB,WAAW;EACX,YAAY;EACZ,oBAAoB;EACpB,kBAAkB;EAClB,aAAa;EACb,oBAAoB;AACtB;AACA;EACE,oBAAoB;AACtB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,iBAAiB;EACjB,cAAc;AAChB;AACA;EACE,iBAAiB;AACnB","file":"Conn.vue","sourcesContent":[".theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 80%;\n  height: 90%;\n}\n.theme-prac {\n  background-color: #333;\n  font-size: 2rem;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.conn {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  font-size: 1.3rem;\n  background-color: black;\n  color: wheat;\n  display: grid;\n  grid-template-columns: 33.3fr 33.3fr 33.4fr;\n  grid-template-rows: 7fr 31fr 31fr 31fr;\n  grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.conn .tabs {\n  grid-area: tabs;\n  display: inline;\n  color: wheat;\n  font-size: 1.5rem;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.conn .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.conn .prac {\n  display: grid;\n  border-radius: 36px;\n  width: 99%;\n  height: 98%;\n  font-size: 2rem;\n  font-weight: bold;\n}\n.conn .prac .name {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.conn .fullPracDir {\n  position: absolute;\n  left: 3%;\n  top: 6%;\n  right: 3%;\n  bottom: 6%;\n  display: grid;\n}\n.conn .fullPracDir .prac {\n  font-size: 2.5rem;\n  width: 100%;\n  height: 100%;\n  justify-self: center;\n  align-self: center;\n  display: grid;\n  border-radius: 0.5em;\n}\n.conn .fullPracDir .prac div {\n  padding-bottom: 2rem;\n}\n.conn .fullPracDir .prac div .disp {\n  padding-bottom: 0;\n}\n.conn .fullPracDir .prac div .disp i {\n  font-size: 2.5rem;\n}\n.conn .fullPracDir .prac div .disp .name {\n  font-size: 2.5rem;\n}\n.conn .fullPracDir .prac div .disp .desc {\n  font-size: 2.5rem;\n  display: block;\n}\n.conn .fullPracDir .prac .area {\n  padding-bottom: 0;\n}\n","\n<template>\n  <div class=\"conn\">\n        <div :id=\"prac.name\" :ref=\"prac.name\" class=\"prac\"\n          @click=\"doPrac(prac.name)\" style=\"background-color:rgba(97,56,77,1.0)\">\n        </div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Util    from '../../pub/base/util/Util.js';\n  import Build   from '../../pub/ikw/cube/Build.js';\n  import Connect from '../../pub/ikw/conn/Connect.js';\n\n  let Conn = {\n\n    props: { comp:String, prac:Object },\n\n    data() {\n      return { comp:'None', prac:'All', disp:'All',\n               build:{}, connects:{}, practices:{}, size:{},\n }; },\n\n    methods: {\n      isPrac: function (prac) {\n        return this.prac===prac || this.prac==='All' },\n      onPrac: function (prac) {\n        if( prac==='All' && this.prac!=='All' ) {\n          if( Util.isDef(this.connects[this.prac]) ) {\n            this.connects[this.prac].layout( this.size, 'Restore'); }\n          else {\n            console.log( 'Conn.onPrac() connect undefined', { prat:this.prac } ); } }\n        if( prac!=='All' && typeof(this.connects[prac])==='object' ) { // Expand prac to Comp size\n          this.connects[prac].layout( this.size, 'Expand'); }\n        this.prac = prac; this.disp='All';  },\n      onDisp: function (prac,disp) {\n        this.prac = prac; this.disp=disp; },\n      onTabs: function ()    {}, // Does nothing\n      onNone: function (obj) {\n        console.error( 'Conn Nav Error', { obj:obj } ); },\n      onNav:  function (obj) {\n        switch( obj.level ) {\n          case 'Prac' : this.onPrac(obj.prac);          break;\n          case 'Disp' : this.onDisp(obj.prac,obj.disp); break;\n          case 'Tabs' : this.onTabs();                  break;\n          default     : this.onNone(obj); } },\n      pracDir: function(dir) {\n        return this.prac==='All' ? dir : 'fullPracDir'; },\n      doPrac: function (prac) {\n        this.publish( this.comp, { prac:prac, disp:'All' } ); },\n      style: function( hsv ) {\n        return { backgroundColor:this.toRgbaHsv(hsv) }; },\n      \n      calcSize: function(prac) {        // Should only be called by $nextTick()\n        let elem = this.$refs[prac][0]  // As in createConnects and resize()\n        let sz   = {}\n        if( typeof(this.$refs['Conn'])==='undefined' ) {\n          console.log( 'Conn.calcSize() $refs[Conn] undefined', this.$refs ) }\n        sz.compWidth  = this.$refs['Conn']['clientWidth' ];\n        sz.compHeight = this.$refs['Conn']['clientHeight'];\n        sz.elemWidth  = elem['clientWidth' ];\n        sz.elemHeight = elem['clientHeight'];\n        // console.log( 'Conn.calcSize()', prac, sz );\n        return sz;\n      },\n      \n      createConnects: function( stream, build ) {\n        this.$nextTick( function() {\n          for( let key of this.pkeys ) {\n              let prac = this.practices[key];\n              if( prac.row !== 'Dim' || this.comp === 'Prin') {\n                let elem  = this.$refs[key][0]\n                this.size = this.calcSize(key)\n                this.connects[prac.name] = new Connect( stream, build, prac, elem, this.size ); } } } ) },\n      \n      resize: function() {\n        this.$nextTick( function() {\n          for( let key of this.pkeys ) {\n            let level = key!==this.prac ? 'Resize' : 'Expand';\n            if( level==='Expand') { this.connects[key].lastSize(this.size) }\n            this.connects[key].layout( this.size, level ); } } ); }\n    },\n\n    beforeMount: function() {\n      this.comp = this.nav().comp; },\n\n    mounted: function () {\n      this.build     = new Build(  this.batch() );\n      this.practices = this.conns( this.comp );\n      this.pkeys     = this.keys(  this.practices )\n      this.subscribe(  this.comp,  this.comp+'.vue', (obj) => {\n        if( obj.disp==='All' ) {   this.onPrac(obj.prac); }\n        else                   {   this.onDisp(obj.prac,obj.disp); } } );\n      this.subscribe(  \"Nav\",      this.comp+'.vue', (obj) => {\n        this.onNav(obj); } );\n      this.createConnects( this.stream(), this.build ); },\n    \n    created: function () {\n      window.addEventListener(   'resize', this.resize ) },\n    destroyed: function () {\n      window.removeEventListener('resize', this.resize ) }\n   }\n\n  export default Conn;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .grid5x4() { display:grid; grid-template-columns:7fr 31fr 31fr 31fr; grid-template-rows:7fr 12fr 27fr 27fr 27fr;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid4x4() { display:grid; grid-template-columns:7fr 31fr 31fr 31fr; grid-template-rows:7fr 31fr 31fr 31fr;\n    grid-template-areas: \"tabs tabs tabs tabs\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n\n  .grid4x3() { display:grid; grid-template-columns:33.3fr 33.3fr 33.4fr; grid-template-rows:7fr 31fr 31fr 31fr;\n    grid-template-areas: \"tabs tabs tabs\" \"nw north ne\" \"west cen east\" \"sw south se\"; }\n  \n  .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n    justify-items:center; align-items:center; }\n  \n  .conn { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:@theme-conn-size;\n          background-color:@theme-back; color:@theme-color;\n    .grid4x3(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid\n    .tabs{ grid-area:tabs; display:inline; color:@theme-color; font-size:@theme-tab-size;\n      justify-self:start; align-self:center; text-align:left; }\n    .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }\n    .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }\n    .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }\n    \n    .prac { display:grid; border-radius:36px; width:99%; height:98%; font-size:@theme-prac-size; font-weight:bold;\n      .name { justify-self:center; align-self:center; text-align:center; } }\n  \n    // Placed one level above .prac at the 9 Practices Grid Direction\n    .fullPracDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;\n      .prac { font-size:@theme-full-size; width:100%; height:100%;\n        justify-self:center; align-self:center; display:grid; border-radius:0.5em;\n        div {     padding-bottom:2rem;\n          .disp { padding-bottom:0;\n            i     { font-size:@theme-full-size; }\n            .name { font-size:@theme-full-size; }\n            .desc { font-size:@theme-full-size; display:block; } } }  // Turns on .disp .desc\n        .area { padding-bottom:0; } } }\n  }\n</style>"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$1 = undefined;
+  const __vue_scope_id__ = undefined;
   /* module identifier */
-  const __vue_module_identifier__$1 = undefined;
+  const __vue_module_identifier__ = undefined;
   /* functional template */
-  const __vue_is_functional_template__$1 = false;
+  const __vue_is_functional_template__ = false;
   /* style inject SSR */
   
 
   
-  var Conn = normalizeComponent_1(
-    { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
-    __vue_inject_styles__$1,
-    __vue_script__$1,
-    __vue_scope_id__$1,
-    __vue_is_functional_template__$1,
-    __vue_module_identifier__$1,
+  var Conn$1 = normalizeComponent_1(
+    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+    __vue_inject_styles__,
+    __vue_script__,
+    __vue_scope_id__,
+    __vue_is_functional_template__,
+    __vue_module_identifier__,
     browser,
     undefined
   );
 
-export default Conn;
+export default Conn$1;

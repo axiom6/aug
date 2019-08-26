@@ -103,7 +103,7 @@
         "Texture":    { "icon":"fas fa-palette", "desc":"" },
         "Timbre":     { "icon":"fab fa-soundcloud", "desc":"" } }
     },
-    "Cognition":{ "type":"pane", "hsv":[45,90,90],"column":"Innovate","row":"Do","plane":"Know","icon":"fas fa-brain",
+    "Cognition":{ "type":"pane", "hsv":[45,90,90],"column":"Innovate","row":"Do","plane":"Know","icon":"fab fa-centos",
       "cells":[17,12,19,12], "dir":"cen",  "neg":"Thoughtless",
       "desc":"",
       "Express":    { "dir":"west", "icon":"fas fa-paint-brush",  "hsv":[195,90,70],

@@ -153,7 +153,7 @@
         "Visualize":    { "icon":"fas fa-image", "desc":"" },
         "Imagine":      { "icon":"fas fa-lightbulb", "desc":"" } }
     },
-    "Emerge":{ "type":"pane", "hsv":[195,90,60],"column":"Embrace","row":"Share","plane":"Wise","icon":"fab fa-dropbox",
+    "Emerge":{ "type":"pane", "hsv":[195,90,60],"column":"Embrace","row":"Share","plane":"Wise","icon":"fas fa-yin-yang",
       "cells":[5,12,31,12], "dir":"sw", "neg":"Extinct",
       "desc":"",
       "Novel":      { "dir":"west","icon":"fas fa-plus-circle", "hsv":[195,90,80],

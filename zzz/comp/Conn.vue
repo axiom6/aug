@@ -1,26 +1,36 @@
 
 <template>
-  <div class="conn">
+  <div id="Conn" class="conn" ref="Conn">
+    <b-tabs :comp="comp" :pages="pages"></b-tabs>
+    <template v-for="prac in practices">
+      <div v-show="isPrac(prac.name)" ref="Prac" :class="pracDir(prac.dir)" :key="prac.name">
         <div :id="prac.name" :ref="prac.name" class="prac"
-          @click="doPrac(prac.name)" style="background-color:rgba(97,56,77,1.0)">
+          @click="pubPrac(prac.name)" style="background-color:rgba(97,56,77,1.0)">
         </div>
+      </div>
+    </template>
   </div>
 </template>
 
 <script type="module">
-  
+
+  import Tabs    from '../elem/Tabs.vue';
   import Util    from '../../pub/base/util/Util.js';
   import Build   from '../../pub/ikw/cube/Build.js';
   import Connect from '../../pub/ikw/conn/Connect.js';
 
-  let Conn = {
+  export default {
 
-    props: { comp:String, prac:Object },
+    components:{ 'b-tabs':Tabs },
 
     data() {
       return { comp:'None', prac:'All', disp:'All',
                build:{}, connects:{}, practices:{}, size:{},
- }; },
+        pages:[
+          { title:'Icon', view:'Page', page:'Icon' },
+          { title:'Dirs', view:'Page', page:'Dirs' },
+          { title:'Summ', view:'Page', page:'Summ' },
+          { title:'Desc', view:'Page', page:'Desc' } ] }; },
 
     methods: {
       isPrac: function (prac) {
@@ -47,7 +57,7 @@
           default     : this.onNone(obj); } },
       pracDir: function(dir) {
         return this.prac==='All' ? dir : 'fullPracDir'; },
-      doPrac: function (prac) {
+      pubPrac: function (prac) {
         this.publish( this.comp, { prac:prac, disp:'All' } ); },
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; },
@@ -101,8 +111,6 @@
     destroyed: function () {
       window.removeEventListener('resize', this.resize ) }
    }
-
-  export default Conn;
 
 </script>
 

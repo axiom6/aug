@@ -2,7 +2,7 @@
 <template>
   <div class="tabs">
     <template v-for="page in pages">
-      <div :class="clPage(page.page)" @click="doPage(page)">{{page.title}}</div>
+      <div :class="clPage(page.name)" @click="doPage(page)">{{page.name}}</div>
     </template>
   </div>
 </template>
@@ -11,21 +11,25 @@
 
   export default {
 
-    props: { comp:String, pages:Array },
+    props: { comp:String, pages:Object },
     
     data() { return { page:"" } },
     
     methods: {
-      onPage: function (obj) {
-        this.page = obj.page; },
+      onPage: function (page) {
+        // console.log( 'Tabs.onPage()', { page:page, tabs:this.page } );
+        this.page = page; },
       doPage: function (page) {
-        this.nav().pub( { page:page.page } ); },
-      clPage: function (page) {
-        return this.page===page ? 'tab-active' : 'tab'; } },
-    
+        this.nav().pub( { page:page.name } ); },
+      clPage: function (name) {
+        return this.page===name ? 'tab-active' : 'tab'; } },
+
+    beforeMount: function() {
+      this.onPage(this.nav().page); },
+
     mounted: function() {
-      this.subscribe(  "Nav", 'Page', (obj) => {
-        this.onPage(obj); } ); }
+        this.subscribe(  "Nav", 'Tabs', (obj) => {
+          this.onPage(obj.page); } ); }
     }
   
 </script>

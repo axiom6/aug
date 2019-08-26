@@ -12,10 +12,6 @@ class NavMuse
     @page    =  'Icon'
     @pages   = ['Icon','Dirs','Conn','Summ','Desc']
     @compass =   ""
-    @subscribe()
-
-  subscribe:() ->
-    @stream.subscribe( 'Page',  'NavMuse', (page) => console.log('NavMuse.sub()',page); @page = page )
 
   pub:(   change ) ->
     @set( change )

@@ -1,6 +1,6 @@
 
 <template>
-  <div  class="icon" prac="prac" @click="doPrac(prac)">
+  <div  class="icon" @click="doPrac(prac)">
     <i  :class="prac.icon"></i>
     <div class="name">{{prac.name}}</div>
   </div>
@@ -29,7 +29,7 @@
 
 <style lang="less">
   @import '../../pub/css/themes/theme.less';
-  .icon { display:grid; align-self:stretch; justify-self:stretch; align-items:center; justify-items:center;
-    background-color:@theme-back; color:@theme-color; font-size:@theme-icon-size; text-align:center; .theme-icon;
+  .icon { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;
+    color:@theme-color; font-size:@theme-icon-size; text-align:center; .theme-icon; width:90%; height:80%;
     .name { font-size:@theme-name-size; text-align:center; } }
 </style>

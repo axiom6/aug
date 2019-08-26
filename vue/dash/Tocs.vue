@@ -52,7 +52,7 @@
           default     : this.onNone(obj); } },
       doComp: function(comp) {
         this.comp = comp;
-        let obj   = { level:'Comp', comp:comp, prac:'All', disp:'All' }
+        let obj   = { level:'Comp', comp:comp, prac:'All', disp:'All', page:this.nav().page }
         this.nav().pub(obj);
         this.nav().routeLevel('Comp'); },
       doPrac: function(prac) {
