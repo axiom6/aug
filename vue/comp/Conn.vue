@@ -1,6 +1,7 @@
 
 <template>
   <div id="Conn" class="conn" ref="Conn">
+    <b-tabs :comp="comp" :pages="pages"></b-tabs>
     <template v-for="prac in practices">
       <div v-show="isPrac(prac.name)" ref="Prac" :class="pracDir(prac.dir)" :key="prac.name">
         <div :id="prac.name" :ref="prac.name" class="prac"
@@ -13,15 +14,23 @@
 
 <script type="module">
 
+  import Tabs    from '../elem/Tabs.vue';
   import Util    from '../../pub/base/util/Util.js';
   import Build   from '../../pub/ikw/cube/Build.js';
   import Connect from '../../pub/ikw/conn/Connect.js';
 
   export default {
 
+    components:{ 'b-tabs':Tabs },
+
     data() {
       return { comp:'None', prac:'All', disp:'All',
-               build:{}, connects:{}, practices:{}, size:{} }; },
+               build:{}, connects:{}, practices:{}, size:{},
+        pages:[
+          { title:'Icon', view:'Page', page:'Icon' },
+          { title:'Dirs', view:'Page', page:'Dirs' },
+          { title:'Summ', view:'Page', page:'Summ' },
+          { title:'Desc', view:'Page', page:'Desc' } ] }; },
 
     methods: {
       isPrac: function (prac) {
@@ -73,9 +82,7 @@
               if( prac.row !== 'Dim' || this.comp === 'Prin') {
                 let elem  = this.$refs[key][0]
                 this.size = this.calcSize(key)
-                this.connects[prac.name] = new Connect( stream, build, prac, elem, this.size ); } }
-          if( this.nav().queued ) {
-            this.onNav( this.nav().que('Conn',false) ); } } ) },
+                this.connects[prac.name] = new Connect( stream, build, prac, elem, this.size ); } } } ) },
       
       resize: function() {
         this.$nextTick( function() {
@@ -86,8 +93,7 @@
     },
 
     beforeMount: function() {
-      this.comp = this.$route.name.substring(0,4); },
-      //console.log( 'Conn.beforeMount()', this.$route.name, this.comp );
+      this.comp = this.nav().comp; },
 
     mounted: function () {
       this.build     = new Build(  this.batch() );

@@ -1486,6 +1486,14 @@
 		"oAP": "/pub/app/data/text/Cols.txt",
 		"oF": 0
 		},
+	"/pub/app/data/text/Conn.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/app/data/text/Conn.txt",
+		"oF": 0
+		},
 	"/pub/app/data/text/Info.txt": {
 		"cB": 0,
 		"ft": 8192,
@@ -3785,35 +3793,46 @@
 		"oAP": "/pub/robots.txt",
 		"oF": 0
 		},
-	"/pub/vue/comp/Cube.js": {
+	"/pub/vue/comp/Comp.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/vue/comp/Cube-min.js",
+		"oAP": "/pub/vue/comp/Comp-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/vue/comp/Draw.js": {
+	"/pub/vue/comp/Conn.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/vue/comp/Draw-min.js",
+		"oAP": "/pub/vue/comp/Conn-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/vue/comp/Wood.js": {
+	"/pub/vue/comp/Disp.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/vue/comp/Wood-min.js",
+		"oAP": "/pub/vue/comp/Disp-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/comp/Prac.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/comp/Prac-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -4067,6 +4086,39 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/vue/mods/Cube.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/mods/Cube-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/mods/Draw.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/mods/Draw-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/mods/Wood.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/mods/Wood-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/vue/note/EmbedVue.js": {
 		"bF": 0,
 		"ft": 64,
@@ -4107,17 +4159,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/vue/note/StandVue-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/vue/page/Page.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/page/Page-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -5056,101 +5097,79 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/vue/comp/Cube.roll.js": {
+	"/vue/comp/Comp.roll.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/vue/comp/Cube.roll-min.js",
+		"oAP": "/vue/comp/Comp.roll-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/vue/comp/Cube.vue": {
+	"/vue/comp/Comp.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/pub/vue/comp/Cube.js",
-		"oF": 2
-		},
-	"/vue/comp/Draw.roll.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/comp/Draw.roll-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/comp/Draw.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/comp/Draw.js",
+		"oAP": "/pub/vue/comp/Comp.js",
 		"oF": 0
 		},
-	"/vue/comp/Home.vue": {
+	"/vue/comp/Conn.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/pub/vue/comp/Home.js",
+		"oAP": "/pub/vue/comp/Conn.js",
 		"oF": 0
 		},
-	"/vue/comp/Ikws.vue": {
+	"/vue/comp/Desc.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/pub/vue/comp/Ikws.js",
+		"oAP": "/pub/vue/comp/Desc.js",
 		"oF": 0
 		},
-	"/vue/comp/Info.vue": {
+	"/vue/comp/Dirs.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/pub/vue/comp/Info.js",
+		"oAP": "/pub/vue/comp/Dirs.js",
 		"oF": 0
 		},
-	"/vue/comp/Know.vue": {
+	"/vue/comp/Disp.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/pub/vue/comp/Know.js",
+		"oAP": "/pub/vue/comp/Disp.js",
 		"oF": 0
 		},
-	"/vue/comp/Prac.roll.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/comp/Prac.roll-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/comp/Prin.vue": {
+	"/vue/comp/Icon.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/pub/vue/comp/Prin.js",
+		"oAP": "/pub/vue/comp/Icon.js",
 		"oF": 0
 		},
-	"/vue/comp/Wise.vue": {
+	"/vue/comp/Prac.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/pub/vue/comp/Wise.js",
+		"oAP": "/pub/vue/comp/Prac.js",
+		"oF": 0
+		},
+	"/vue/comp/Summ.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/comp/Summ.js",
 		"oF": 0
 		},
 	"/vue/dash/Dash.vue": {
@@ -5550,6 +5569,44 @@
 		"oAP": "/pub/vue/math/MathND.js",
 		"oF": 0
 		},
+	"/vue/mods/Cube.roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/mods/Cube.roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/vue/mods/Cube.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/mods/Cube.js",
+		"oF": 2
+		},
+	"/vue/mods/Draw.roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/mods/Draw.roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/vue/mods/Draw.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/mods/Draw.js",
+		"oF": 0
+		},
 	"/vue/note/CheatNB.js": {
 		"bF": 0,
 		"ft": 64,
@@ -5644,108 +5701,6 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
-		},
-	"/vue/page/Conn.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/page/Conn.js",
-		"oF": 0
-		},
-	"/vue/page/Desc.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/page/Desc.js",
-		"oF": 0
-		},
-	"/vue/page/Dirs.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/page/Dirs.js",
-		"oF": 0
-		},
-	"/vue/page/Icon.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/page/Icon.js",
-		"oF": 0
-		},
-	"/vue/page/Page.roll.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/page/Page.roll-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/page/Page.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/page/Page.js",
-		"oF": 0
-		},
-	"/vue/page/Summ.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/page/Summ.js",
-		"oF": 0
-		},
-	"/vue/prac/Conn.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/prac/Conn.js",
-		"oF": 0
-		},
-	"/vue/prac/Data.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/prac/Data.js",
-		"oF": 0
-		},
-	"/vue/prac/Enli.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/prac/Enli.js",
-		"oF": 0
-		},
-	"/vue/prac/Prac.roll.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/prac/Prac.roll-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/prac/Prac.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/prac/Prac.js",
-		"oF": 0
 		},
 	"/vue/wood/Wood.html": {
 		"cB": 0,
@@ -6221,6 +6176,54 @@
 		"oO": 0,
 		"oS": 1
 		},
+	"/zzz/comp/Home.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/comp/Home.js",
+		"oF": 0
+		},
+	"/zzz/comp/Ikws.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/comp/Ikws.js",
+		"oF": 0
+		},
+	"/zzz/comp/Info.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/comp/Info.js",
+		"oF": 0
+		},
+	"/zzz/comp/Know.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/comp/Know.js",
+		"oF": 0
+		},
+	"/zzz/comp/Prin.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/comp/Prin.js",
+		"oF": 0
+		},
+	"/zzz/comp/Wise.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/comp/Wise.js",
+		"oF": 0
+		},
 	"/zzz/jitter/Body.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -6611,6 +6614,41 @@
 		"hM": 0,
 		"oA": 0,
 		"oAP": "/zzz/peg/ref/LatexKeys.txt",
+		"oF": 0
+		},
+	"/zzz/prac/Data.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/prac/Data.js",
+		"oF": 0
+		},
+	"/zzz/prac/Enli.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/prac/Enli.js",
+		"oF": 0
+		},
+	"/zzz/prac/Prac.roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/prac/Prac.roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/prac/Prac.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/prac/Prac.js",
 		"oF": 0
 		},
 	"/zzz/store/fire.html": {

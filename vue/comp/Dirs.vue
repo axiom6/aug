@@ -1,6 +1,6 @@
 
 <template>
-  <div v-show="isPage()" class="dirs" prac="prac">
+  <div class="dirs" prac="prac">
     <div :class="dispDir('cen')" :style="style(prac.hsv)">
       <div class="disp" @click="doPrac(prac)">
         <i   :class="prac.icon"></i>
@@ -27,16 +27,14 @@
 
     props: { comp:String, prac:Object },
 
-    data() { return { page:"None", disp:"All" } },
+    data() { return { disp:"All" } },
 
     methods: {
 
       isPage:  function () {
-        return this.page === 'Dirs'; },
+        return this.nav().page === 'Dirs'; },
       isDisp: function (disp) {
         return this.disp===disp || this.disp==='All' },
-      onPage:  function (page) {
-        return this.page = page; },
       doPrac: function (prac) {
         publish( this.comp, prac ); },
       doDisp: function (prac,disp) {
@@ -50,8 +48,7 @@
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; } },
 
-    mounted: function () {
-      this.subscribe( 'Page', 'Dirs.vue', (page) => this.onPage(page) ); }
+    mounted: function () {}
   }
 
   export default Dirs;

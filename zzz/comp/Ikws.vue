@@ -6,8 +6,8 @@
     <h1 v-if="comp==='Info'">Information</h1>
     <h1 v-if="comp==='Know'">Knowledge</h1>
     <h1 v-if="comp==='Wise'">Wisdom</h1>
-    <template v-for="page in pages">
-      <router-view :name="comp+page.key"></router-view>
+    <template v-for="view in views">
+      <router-view :name="comp+view"></router-view>
     </template>
   </div>
 </template>
@@ -19,20 +19,23 @@
   export default {
     components:{ 'b-tabs':Tabs },
 
-    data() { return { comp:'None', pages:[
-        { title:'Icon', key:'Icon' },
-        { title:'Dirs', key:'Dirs' },
-        { title:'Conn', key:'Conn' },
-        { title:'Summ', key:'Summ' },
-        { title:'Desc', key:'Desc' },
-        { title:'Konn', key:'Konn' },
-        { title:'Prac', key:'Prac' },
-        { title:'Enli', key:'Enli' },
-        { title:'Data', key:'Data' },
-      ] } },
+    data() { return { comp:'None',
+      pages:[
+        { title:'Icon', view:'Page', page:'Icon' },
+        { title:'Dirs', view:'Page', page:'Dirs' },
+        { title:'Conn', view:'Page', page:'Conn' },
+        { title:'Summ', view:'Page', page:'Summ' },
+        { title:'Desc', view:'Page', page:'Desc' },
+        { title:'Konn', view:'Konn', page:'None' },
+        { title:'Prac', view:'Prac', page:'None' },
+        { title:'Enli', view:'Enli', page:'None' },
+        { title:'Data', view:'Data', page:'None' } ],
+      views:['Page','Konn','Prac','Enli','Data']
+      } },
 
     beforeMount: function() {
-      this.comp = this.$route.name },
+      this.comp = this.$route.name;
+      this.nav().setPages( this.pages ); },
   }
 </script>
 

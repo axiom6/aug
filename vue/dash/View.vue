@@ -1,19 +1,9 @@
 
 <template>
   <div ref="View">
-    <router-view name="Data"></router-view>
-    <router-view name="Math"></router-view>
-    <router-view name="Geom"></router-view>
-    <router-view name="Draw"></router-view>
-    <router-view name="Note"></router-view>
-    <router-view name="Home"></router-view>
-    <router-view name="Prin"></router-view>
-    <router-view name="Info"></router-view>
-    <router-view name="Know"></router-view>
-    <router-view name="Wise"></router-view>
-    <router-view name="Cube"></router-view>
-    <router-view name="Wood"></router-view>
-    <router-view name="Prac"></router-view>
+    <template v-for="view in rviews">
+      <router-view :name="view"></router-view>
+    </template>
   </div>
 </template>
 
@@ -23,7 +13,7 @@
   
   export default {
 
-    data() { return { touch:null, elem:null }; },
+    data() { return { touch:null, elem:null, rviews:this.views() }; },
     
     methods:{
       show:function() {

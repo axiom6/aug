@@ -1,6 +1,6 @@
 
 <template>
-  <div v-show="isPage()" class="icon" prac="prac" @click="doPrac(prac)">
+  <div  class="icon" prac="prac" @click="doPrac(prac)">
     <i  :class="prac.icon"></i>
     <div class="name">{{prac.name}}</div>
   </div>
@@ -12,20 +12,16 @@
     
     props: { comp:String, prac:Object },
     
-    data() { return { page:"Icon"} },
+    data() { return { } },
     
     methods: {
       
       isPage:  function () {
-        return this.page === 'Icon'; },
-      onPage:  function (page) {
-        return this.page = page; },
+        return this.nav().page === 'Icon'; },
       doPrac: function (name) {
         publish( this.comp, name ); } },
         
-    mounted: function () {
-      this.subscribe( 'Page', 'Icon.vue', (page) => this.onPage(page) ); }
-  }
+    mounted: function () {} }
 
   export default Icon;
   

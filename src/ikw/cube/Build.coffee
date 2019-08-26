@@ -77,7 +77,7 @@ class Build
 
   # Build instance
 
-  constructor:( @batch, @plane ) ->
+  constructor:( @batch ) ->
     #@Spec   = @batch.Muse.data
     @None    = { name:"None" }
     Util.noop( @toGroups, @setAdjacents, Build.copyAtt  )
@@ -222,14 +222,14 @@ class Build
       {}
 
 
-  getPractice:( row, column, plane=@plane ) ->
+  getPractice:( row, column, plane ) ->
     practices = @getPractices(plane)
     for own pkey, prac of practices when Util.isChild(pkey) and prac.column is column and prac.row is row
       return prac
     console.error( 'Prac.getPractice() practice not found for', { column:column, row:row, plane:plane } )
     null # Landmine
 
-  getPracticeStudy:( row, column, dir, plane=@plane ) ->
+  getPracticeStudy:( row, column, dir ) ->
     practice = @getPractice( row, column, plane )
     study    = @getDir( practice, dir )
     study
@@ -362,7 +362,7 @@ class Build
   ###
     getPrevNextPlanes:( plane ) ->
 
-  isPractice:( key, plane=@plane ) ->
+  isPractice:( key, plane=) ->
     @getPractices(plane)[key]?
 
   logAdjacentPractices:() ->

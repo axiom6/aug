@@ -179,6 +179,9 @@ Main = (function() {
       kompsTocs: function() { // For Tocs.vue
         return Main.komps;
       },
+      views: function() {
+        return ['Home', 'Cube', 'Comp', 'Prac', 'Disp', 'Conn'];
+      },
       subset: function(compk, filter) {
         var filts, key, prac, ref;
         filts = {};

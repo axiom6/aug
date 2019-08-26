@@ -29,17 +29,17 @@
   }
 
   import Dash from '../../../vue/dash/Dash.vue';
-  import Prin from '../../../vue/comp/Prin.vue';
-  import Info from '../../../vue/comp/Info.vue';
-  import Know from '../../../vue/comp/Know.vue';
-  import Wise from '../../../vue/comp/Wise.vue';
-
+  import Comp from '../../../vue/comp/Comp.vue';
+  import Prac from '../../../vue/comp/Prac.vue';
+  import Disp from '../../../vue/comp/Disp.vue';
+  import Conn from '../../../vue/comp/Conn.vue';
+  
   Home.Dash = Dash;
-  Home.Prin = Prin;
-  Home.Info = Info;
-  Home.Know = Know;
-  Home.Wise = Wise;
-
+  Home.Comp = Comp;
+  Home.Prac = Prac;
+  Home.Disp = Disp;
+  Home.Conn = Conn;
+  
   export default Home;
   
 </script>

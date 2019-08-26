@@ -62,6 +62,8 @@ class Main
         Main.Batch[compk].data.comps
       kompsTocs:() ->
         Main.komps
+      views:() ->
+        ['Home','Flavor','Roast','Brew','Drink','Body']
       choice:() ->
         Main.Batch.Choice.data
       pracs:( compk ) ->

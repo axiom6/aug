@@ -29,7 +29,7 @@
   
   methods:{
     route: function( comp ) {
-        this.nav().route( comp, {} ); } },
+        this.nav().route( comp ); } },
 
    mounted: function () {}
   }

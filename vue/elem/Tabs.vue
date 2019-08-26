@@ -2,7 +2,7 @@
 <template>
   <div class="tabs">
     <template v-for="page in pages">
-      <div :class="classTab(page.key)" @click="pubTab(page.key)">{{page.title}}</div>
+      <div :class="clPage(page.page)" @click="doPage(page)">{{page.title}}</div>
     </template>
   </div>
 </template>
@@ -13,22 +13,19 @@
 
     props: { comp:String, pages:Array },
     
-    data() { return { tab:"" } },  // tab is a page.key
+    data() { return { page:"" } },
     
     methods: {
-      onTab: function (obj) {
-        if( obj.level === 'Tabs' && this.tab !== obj.tab ) {
-          this.$router.push( { name:this.comp+obj.tab } ); // Programmed router
-          this.tab = obj.tab; } },                         // Tab active with classTab
-      pubTab: function (tab) {
-        this.nav().set( { tab:tab               } );
-        this.nav().pub( { tab:tab, level:"Tabs" } ); },
-      classTab: function (tab) {
-        return this.tab===tab ? 'tab-active' : 'tab'; } },
+      onPage: function (obj) {
+        this.page = obj.page; },
+      doPage: function (page) {
+        this.nav().pub( { page:page.page } ); },
+      clPage: function (page) {
+        return this.page===page ? 'tab-active' : 'tab'; } },
     
     mounted: function() {
-      this.subscribe(  "Nav", 'Tabs', (obj) => {
-        this.onTab(obj); } ); }
+      this.subscribe(  "Nav", 'Page', (obj) => {
+        this.onPage(obj); } ); }
     }
   
 </script>

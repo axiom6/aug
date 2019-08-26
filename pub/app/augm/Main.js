@@ -143,6 +143,9 @@ Main = (function() {
       kompsTocs: function() {
         return Main.komps;
       },
+      views: function() {
+        return ['Home', 'Math', 'Geom', 'Data', 'Draw', 'Note', 'Wood'];
+      },
       pracs: function(compk) {
         return Main.Batch[compk].data[compk].pracs;
       },

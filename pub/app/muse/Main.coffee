@@ -81,6 +81,8 @@ class Main
         Main.Batch[compk].data.comps
       kompsTocs:() ->   # For Tocs.vue
         Main.komps
+      views:() ->
+        ['Home','Cube','Comp','Prac','Disp','Conn']
       subset:( compk, filter ) ->
         filts = {}
         for own key, prac of this.pracs(compk) when filter(prac)

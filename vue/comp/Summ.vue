@@ -1,6 +1,6 @@
 
 <template>
-  <div v-show="isPage()" class="summ" prac="prac" @click="doPrac(prac)">
+  <div class="summ" prac="prac" @click="doPrac(prac)">
     <i :class="prac.icon"></i>
   </div>
 </template>
@@ -11,19 +11,16 @@
 
     props: { comp:String, prac:Object },
 
-    data() { return { page:"None"} },
+    data() { return {} },
 
     methods: {
 
       isPage:  function () {
-        return this.page === 'Summ'; },
-      onPage:  function (page) {
-        return this.page = page; },
+        return this.nav().page === 'Summ'; },
       doPrac: function (name) {
         publish( this.comp, name ); } },
 
-    mounted: function () {
-      this.subscribe( 'Page', 'Icon.vue', (page) => this.onPage(page) ); }
+    mounted: function () {}
   }
 
   export default Summ;

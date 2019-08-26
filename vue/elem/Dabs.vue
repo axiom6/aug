@@ -18,7 +18,7 @@
     methods: {
       pubTab: function (key) {
         this.key = key;
-        this.publish( this.comp, key ); },
+        this.publish( this.comp, key ); },  // Key is a page
       classTab: function (key) {
         return this.key===key ? 'tab-active' : 'tab'; } },
 

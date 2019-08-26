@@ -1,11 +1,11 @@
 
 <template>
-  <div class="comp" ref="Info" title="Info">
+  <div class="comp" ref="Prac" title="Prac">
+    <b-tabs :comp="comp" :pages="pages"></b-tabs>
     <template v-for="prac in practices">
       <div v-show="isPrac(prac.name)" :class="pracDir(prac.dir)" :key="prac.name" :ref="prac.name" :title="prac.name">
         <p-icon :comp="comp" :prac="prac"></p-icon>
         <p-dirs :comp="comp" :prac="prac"></p-dirs>
-        <p-conn :comp="comp" :prac="prac"></p-conn>
         <p-summ :comp="comp" :prac="prac"></p-summ>
         <p-desc :comp="comp" :prac="prac"></p-desc>
       </div>
@@ -21,22 +21,26 @@
 </template>
 
 <script type="module">
-  
+
+  import Tabs from '../elem/Tabs.vue';
   import Icon from './Icon.vue';
   import Dirs from './Dirs.vue';
-  import Conn from './Conn.vue';
   import Summ from './Summ.vue';
   import Desc from './Desc.vue';
   
+  let Prac = {
 
-  let Page = {
-
-    components:{ 'p-icon':Icon, 'p-dirs':Dirs,'p-conn':Conn, 'p-summ':Summ, 'p-desc':Desc },
+    components:{ 'b-tabs':Tabs, 'p-icon':Icon, 'p-dirs':Dirs, 'p-summ':Summ, 'p-desc':Desc },
     
     props: { pcomp:{ type:String, default:'None' } },
     
     data() { return {
       comp:'None', prac:'All', disp:'All', practices:{},
+      pages:[
+        { title:'Icon', view:'Page', page:'Icon' },
+        { title:'Dirs', view:'Page', page:'Dirs' },
+        { title:'Summ', view:'Page', page:'Summ' },
+        { title:'Desc', view:'Page', page:'Desc' } ],
       rows: {
         Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap" },
         Do:{    name:'Do',    dir:'do', icon:"fas fas fa-cog" },
@@ -53,18 +57,21 @@
         this.publish( this.comp, { prac:prac, disp:'All' } ); },
       doDisp: function (prac,disp) {
         this.publish( this.comp, { prac:prac, disp:disp  } ); },
+      onComp: function (comp) {
+        this.comp = comp; this.prac = 'All'; this.disp='All'; },
       onPrac: function (prac) {
         this.prac = prac; this.disp='All'; },
       onDisp: function (prac,disp) {
         this.prac = prac; this.disp=disp; },
-      onTabs: function ()    {}, // Does nothing
+      onPage: function (obj)    {
+        console.log( 'Page.onPrac()', obj ); },
       onNone: function (obj) {
-        console.error( 'Prac Nav Error', { obj:obj } ); },
+        console.error( 'Page Nav Error', { obj:obj } ); },
       onNav:  function (obj) {
         switch( obj.level ) {
+          case 'Comp' : this.onComp(obj.comp);          break;
           case 'Prac' : this.onPrac(obj.prac);          break;
           case 'Disp' : this.onDisp(obj.prac,obj.disp); break;
-          case 'Tabs' : this.onTabs();                  break;
           default     : this.onNone(obj); } },
       pracDir: function(dir) {
         return this.prac==='All' ? dir : 'pracFull'; },
@@ -75,7 +82,7 @@
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; },
       elems: function() { // Add DON elements. Must be called within $nextTick for $refs
-        this.infoElem = this.$refs['Info']
+        this.infoElem = this.$refs['Prac']
         let pracs = this.conns(this.comp); // We access conns because col practices have been filtered out
         for( let pkey in pracs ) {
           let prac = pracs[pkey];
@@ -88,23 +95,18 @@
       },
 
     beforeMount: function() {
-      this.comp = this.$route.name.substring(0,4);  },
-      // console.log( 'Prac.beforeMount()', this.$route.name, this.comp, this.pcomp  );
+      this.comp = this.nav().comp; },
 
     mounted: function () {
-    //this.touch     = new Touch();
       this.practices = this.pracs(this.comp); // 'Cols'
       this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
          if( obj.disp==='All' ) { this.onPrac(obj.prac); }
          else                   { this.onDisp(obj.prac,obj.disp); } } );
       this.subscribe(  "Nav",     this.comp+'.vue', (obj) => {
-        this.onNav(obj); } );
-      this.$nextTick( function() {
-        if( this.nav().queued ) {
-          this.onNav( this.nav().que('Prac',false) ) } } ); }
+        this.onNav(obj); } ); }
   }
   
-  export default Page;
+  export default Prac;
   
 </script>
 
@@ -128,7 +130,7 @@
   .bgc( @bg )
     { background-color:@bg; } // top | right | bottom | left
   
-  .comp { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:@theme-prac-size;
+  .comp { position:relative; left:0; top:0; right:0; bottom:0; font-size:@theme-prac-size;
           background-color:@theme-back; color:@theme-color-prac;
     .grid5x4(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid
       .tabs{ grid-area:tabs; display:inline; color:@theme-color; font-size:@theme-tab-size;

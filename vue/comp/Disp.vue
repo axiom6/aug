@@ -1,57 +1,49 @@
 
 <template>
-  <div class="comp" ref="Info" title="Info" >
+  <div class="comp" ref="Disp" title="Disp">
+    <b-tabs :comp="comp" :pages="pages"></b-tabs>
     <template v-for="prac in practices">
-      <div v-show="isPrac(prac.name)" :class="pracDir(prac.dir)" :key="prac.name"
-        :ref="prac.name" :title="prac.name">
-        <div class="prac">
-          <div v-show="isDisp(prac.name)" :class="dispDir('cen')" :style="style(prac.hsv)">
-            <div class="disp" @click="pubPrac(prac.name)">
-              <i   :class="prac.icon"></i>
-              <span class="name">{{prac.name}}</span>
-              <span class="desc">{{prac.desc}}</span>
-            </div>
-          </div>
-          <template  v-for="disp in prac.disps">
-            <div v-show="isDisp(disp.name)" :class="dispDir(disp.dir)" :style="style(disp.hsv)"
-              :ref="disp.name" :title="disp.name">
-            <div class="disp" @click="pubDisp(prac.name,disp.name)">
-              <i   :class="disp.icon"></i>
-              <span class="name">{{disp.name}}</span>
-              <span class="desc">{{disp.desc}}</span>
-            </div>
-            <template v-for="area in disp.areas">
-              <div :class="areaDir()">
-                <i :class="area.icon"></i>
-                <span class="name">{{area.name}}</span>
-                <span class="desc">{{area.desc}}</span>
-              </div>
-            </template>
-          </div>
-          </template>
-        </div>
+      <div v-show="isPrac(prac.name)" :class="pracDir(prac.dir)" :key="prac.name" :ref="prac.name" :title="prac.name">
+        <p-icon :comp="comp" :prac="prac"></p-icon>
+        <p-dirs :comp="comp" :prac="prac"></p-dirs>
+        <p-summ :comp="comp" :prac="prac"></p-summ>
+        <p-desc :comp="comp" :prac="prac"></p-desc>
       </div>
     </template>
     <template v-for="row in rows">
-      <div v-show="isRows()" :class="row.dir" :key="row.name"><div class="row">
-        <div><i :class="row.icon"></i>{{row.name}}</div></div></div>
+      <div v-show="isRows()" :class="row.dir" :key="row.name">
+        <p-icon :comp="comp" :prac="row"></p-icon>
+      </div>
+      <!--div v-show="isRows()" :class="row.dir" :key="row.name"><div class="row">
+        <div><i :class="row.icon"></i>{{row.name}}</div></div></div-->
     </template>
-  </div>  
+  </div>
 </template>
 
 <script type="module">
-  
-//import Touch from '../../pub/base/util/Touch.js';
 
-  export default {
+  import Tabs from '../elem/Tabs.vue';
+  import Icon from './Icon.vue';
+  import Dirs from './Dirs.vue';
+  import Summ from './Summ.vue';
+  import Desc from './Desc.vue';
+  
+  let Disp = {
+
+    components:{ 'b-tabs':Tabs, 'p-icon':Icon, 'p-dirs':Dirs, 'p-summ':Summ, 'p-desc':Desc },
     
     props: { pcomp:{ type:String, default:'None' } },
     
     data() { return {
       comp:'None', prac:'All', disp:'All', practices:{},
+      pages:[
+        { title:'Icon', view:'Page', page:'Icon' },
+        { title:'Dirs', view:'Page', page:'Dirs' },
+        { title:'Summ', view:'Page', page:'Summ' },
+        { title:'Desc', view:'Page', page:'Desc' } ],
       rows: {
         Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap" },
-        Do:{    name:'Do',    dir:'do', icon:"fas fas fa-cogs" },
+        Do:{    name:'Do',    dir:'do', icon:"fas fas fa-cog" },
         Share:{ name:'Share', dir:'sh', icon:"fas fa-share-alt-square" } } } },
     
     methods: {
@@ -61,33 +53,36 @@
         return this.disp===disp || this.disp==='All' },
       isRows: function () {
         return this.prac==='All' },
-      pubPrac: function (prac) {
+      doPrac: function (prac) {
         this.publish( this.comp, { prac:prac, disp:'All' } ); },
-      pubDisp: function (prac,disp) {
+      doDisp: function (prac,disp) {
         this.publish( this.comp, { prac:prac, disp:disp  } ); },
+      onComp: function (comp) {
+        this.comp = comp; this.prac = 'All'; this.disp='All'; },
       onPrac: function (prac) {
         this.prac = prac; this.disp='All'; },
       onDisp: function (prac,disp) {
         this.prac = prac; this.disp=disp; },
-      onTabs: function ()    {}, // Does nothing
+      onPage: function (obj)    {
+        console.log( 'Page.onPrac()', obj ); },
       onNone: function (obj) {
-        console.error( 'Prac Nav Error', { obj:obj } ); },
+        console.error( 'Page Nav Error', { obj:obj } ); },
       onNav:  function (obj) {
         switch( obj.level ) {
+          case 'Comp' : this.onComp(obj.comp);          break;
           case 'Prac' : this.onPrac(obj.prac);          break;
           case 'Disp' : this.onDisp(obj.prac,obj.disp); break;
-          case 'Tabs' : this.onTabs();                  break;
           default     : this.onNone(obj); } },
       pracDir: function(dir) {
-        return this.prac==='All' ? dir : 'fullPracDir'; },
+        return this.prac==='All' ? dir : 'pracFull'; },
       dispDir: function(dir) {
-        return this.disp==='All' ? dir : 'fullDispDir'; },
+        return this.disp==='All' ? dir : 'dispFull'; },
       areaDir: function() {
         return this.prac==='All' ? 'none' : 'area' },
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; },
       elems: function() { // Add DON elements. Must be called within $nextTick for $refs
-        this.infoElem = this.$refs['Info']
+        this.infoElem = this.$refs['Disp']
         let pracs = this.conns(this.comp); // We access conns because col practices have been filtered out
         for( let pkey in pracs ) {
           let prac = pracs[pkey];
@@ -100,22 +95,19 @@
       },
 
     beforeMount: function() {
-      this.comp = this.$route.name.substring(0,4);  },
-      // console.log( 'Prac.beforeMount()', this.$route.name, this.comp, this.pcomp  );
+      this.comp = this.nav().comp; },
 
     mounted: function () {
-    //this.touch     = new Touch();
       this.practices = this.pracs(this.comp); // 'Cols'
       this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
          if( obj.disp==='All' ) { this.onPrac(obj.prac); }
          else                   { this.onDisp(obj.prac,obj.disp); } } );
       this.subscribe(  "Nav",     this.comp+'.vue', (obj) => {
-        this.onNav(obj); } );
-      this.$nextTick( function() {
-        if( this.nav().queued ) {
-          this.onNav( this.nav().que('Prac',false) ) } } ); }
+        this.onNav(obj); } ); }
   }
-         
+  
+  export default Disp;
+  
 </script>
 
 <style lang="less">
@@ -124,11 +116,8 @@
   
   .grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;
                grid-template-areas: "nw north ne" "west cen east" "sw south se"; }
-  
-  .grid4x4() { display:grid; grid-template-columns:7fr 31fr 31fr 31fr; grid-template-rows:13vh 29fr 29fr 29fr;
-    grid-template-areas: "cm em in en" "le nw north ne" "do west cen east" "sh sw south se"; }
 
-  .grid5x4() { display:grid; grid-template-columns:7fr 31fr 31fr 31fr; grid-template-rows:7fr 12fr 27fr 27fr 27fr;
+  .grid5x4() { display:grid; grid-template-columns:13fr 29fr 29fr 29fr; grid-template-rows:8fr 24fr 24fr 24fr 24fr;
     grid-template-areas: "tabs tabs tabs tabs" "cm em in en" "le nw north ne" "do west cen east" "sh sw south se"; }
 
   .grid1x3() { display:grid; grid-template-columns:6fr 22fr 72fr; grid-template-areas: "icon name desc"; }
@@ -141,7 +130,7 @@
   .bgc( @bg )
     { background-color:@bg; } // top | right | bottom | left
   
-  .comp { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:@theme-prac-size;
+  .comp { position:relative; left:0; top:0; right:0; bottom:0; font-size:@theme-prac-size;
           background-color:@theme-back; color:@theme-color-prac;
     .grid5x4(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid
       .tabs{ grid-area:tabs; display:inline; color:@theme-color; font-size:@theme-tab-size;
@@ -173,19 +162,9 @@
       .desc { grid-area:desc; } }
   
     .none { display:none; }
-  
-    // Placed one level above .dir at the 4 Disipline plus Practice name Grid Direction
-    .fullDispDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid; border-radius:72px;
-      .disp { justify-self:center; margin:0;
-        i     { font-size:@theme-area-icon-size !important; }
-        .name { font-size:@theme-area-name-size !important; }
-        .desc { font-size:@theme-area-desc-size !important; display:block; } }  // Turns on .disp .desc
-      .area {   font-size:@theme-area-area-size !important; padding-bottom:0; } }
-  
-    .none { display:none; }
     
     // Placed one level above .prac at the 9 Practices Grid Direction
-    .fullPracDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;
+    .pracFull { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;
       .prac { font-size:@theme-full-size; width:100%; height:100%;
               justify-self:center; align-self:center; display:grid; border-radius:0.5rem;
         div {     padding-bottom:2rem;
@@ -196,7 +175,7 @@
           .area { padding-bottom:0; } } }
   
     // Placed one level above .dir at the 4 Disipline plus Practice name Grid Direction
-    .fullDispDir { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid; border-radius:72px;
+    .dispFull { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid; border-radius:72px;
        .disp { justify-self:center; margin:0;
          i     { font-size:@theme-area-icon-size !important; }
          .name { font-size:@theme-area-name-size !important; }
@@ -214,3 +193,4 @@
   }
   
 </style>
+

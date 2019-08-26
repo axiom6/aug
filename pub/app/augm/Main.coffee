@@ -66,6 +66,8 @@ class Main
         Main.Batch[compk].data.comps
       kompsTocs:() ->
         Main.komps
+      views:() ->
+        ['Home','Math','Geom','Data','Draw','Note','Wood']
       pracs:( compk ) ->
         Main.Batch[compk].data[compk].pracs
       subset:( compk, filter ) ->
