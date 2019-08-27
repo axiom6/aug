@@ -46,19 +46,11 @@
     
     methods: {
       onPage: function (page) {
-        console.log( 'Conn.onPage()', { page:page } );
+      //console.log( 'Comp.onPage()', { page:page } );
         for( let pkey in this.pages ) {
           this.pages[pkey].show = pkey === page; } },
-      isPrac: function (prac) {
-        return this.prac===prac || this.prac==='All' },
-      isDisp: function (disp) {
-        return this.disp===disp || this.disp==='All' },
       isRows: function () {
         return this.prac==='All' },
-      doPrac: function (prac) {
-        this.publish( this.comp, { prac:prac, disp:'All' } ); },
-      doDisp: function (prac,disp) {
-        this.publish( this.comp, { prac:prac, disp:disp  } ); },
       onComp: function (comp) {
         this.comp = comp; this.prac = 'All'; this.disp='All';
         this.practices = this.pracs(this.comp); },
@@ -75,16 +67,6 @@
           case 'Prac' : this.onPrac(obj.prac);          break;
           case 'Disp' : this.onDisp(obj.prac,obj.disp); break;
           default     : this.onNone(obj); } },
-      elems: function() { // Add DON elements. Must be called within $nextTick for $refs
-        this.infoElem = this.$refs['Comp']
-        for( let pkey in this.practices ) {
-          let prac = this.practices[pkey];
-          prac.elem = this.$refs[prac.name][0];
-          this.touch.events( prac.elem );
-          let disps = this.disps(this.comp,prac.name)
-          for( let dkey in disps ) {
-            let disp = disps[dkey];
-            disp.elem = this.$refs[disp.name][0]; } } }  // this.touch.events( disp.elem );
       },
 
     beforeMount: function() {
@@ -97,9 +79,7 @@
          if( obj.disp==='All' ) { this.onPrac(obj.prac); }
          else                   { this.onDisp(obj.prac,obj.disp); } } );
       this.subscribe(  "Nav",     this.comp+'.vue', (obj) => {
-        this.onNav(obj); } );
-      this.$nextTick( function() {
-         this.elems(); } ); }
+        this.onNav(obj); } ); }
   }
   
   export default Comp;

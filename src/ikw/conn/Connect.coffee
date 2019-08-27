@@ -38,10 +38,10 @@ class Connect
     # console.log( 'Connect.layout()', @prac.name, op, size );
     if op is 'Expand'  # Zoom to the entire Comp size
       geo  = @geom( size.compWidth, size.compHeight, @size.elemWidth,    @size.elemHeight )
-      @shapes.layoutSvg( @graph, @g, size.compWidth, size.compHeight,    geo.sx, geo.sy   )
+      @shapes.layoutSvg( @graph, @g, size.compWidth,  size.compHeight,    geo.sx, geo.sy   )
     if op is 'Restore'  # @size is original while size is a reszize
       geo  = @geom( @size.lastWidth, @size.lastHeight, @size.elemWidth,  @size.elemHeight )
-      @shapes.layoutSvg( @graph, @g, @size.lastWidth, @size.lastHeight,  geo.sx, geo.sy   )
+      @shapes.layoutSvg( @graph, @g, @size.lastWidth,  @size.lastHeight,  geo.sx, geo.sy   )
     if op is 'Resize'  # @size is original while size is a reszize
       geo  = @geom(  size.elemWidth,  size.elemHeight, @size.elemWidth,  @size.elemHeight )
       @shapes.layoutSvg( @graph, @g, @size.elemWidth,  @size.elemHeight, geo.sx, geo.sy   )

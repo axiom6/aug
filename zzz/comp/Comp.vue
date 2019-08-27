@@ -48,7 +48,7 @@
     
     methods: {
       onPage: function (page) {
-        console.log( 'Conn.onPage()', { page:page } );
+      //console.log( 'Comp.onPage()', { page:page } );
         for( let pkey in this.pages ) {
           this.pages[pkey].show = pkey === page; } },
       isPrac: function (prac) {

@@ -59,15 +59,13 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  
-
   .grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;
     grid-template-areas: "nw north ne" "west cen east" "sw south se"; }
 
   .ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }
   
   .dirs { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;
-    color:black; text-align:center; border-radius:36px; width:90%; height:80%; font-weight:bold; .theme-prac();
+    color:black; text-align:center; font-weight:bold; .theme-prac();
     
       .grid3x3(); // The 4 Displine plus Practiice name Grid
                              .north { .ddir(north); }
