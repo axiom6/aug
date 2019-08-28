@@ -7,7 +7,7 @@
         <p-icon v-show="pages['Icon'].show" :comp="comp" :prac="prac"></p-icon>
         <p-dirs v-show="pages['Dirs'].show" :comp="comp" :prac="prac"></p-dirs>
         <p-conn   v-if="pages['Conn'].show" :comp="comp" :prac="prac"></p-conn>
-        <p-desc v-show="pages['Desc'].show" :comp="comp" :prac="prac"></p-desc>
+     <!--p-desc v-show="pages['Desc'].show" :comp="comp" :prac="prac"></p-desc-->
       </div>
     </template>
     <template v-for="row in rows">
@@ -37,8 +37,7 @@
       pages:{
         Icon: { name:'Icon', show:false },
         Dirs: { name:'Dirs', show:false },
-        Conn: { name:'Conn', show:false },
-        Desc: { name:'Desc', show:false } },
+        Conn: { name:'Conn', show:false } },
       rows: {
         Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap" },
         Do:{    name:'Do',    dir:'do', icon:"fas fas fa-cog" },

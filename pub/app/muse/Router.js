@@ -13,6 +13,5 @@ export default new Router( {
     { path: '/comp',  name:'Comp', components:{ Comp: Home.Comp } },
     { path: '/prac',  name:'Prac', components:{ Comp: Home.Prac } },
     { path: '/disp',  name:'Disp', components:{ Disp: Home.Disp } },
-    { path: '/conn',  name:'Conn', components:{ Disp: Home.Conn } },
     { path: '/cube',  name:'Cube', components:{ Cube: lazy( 'vue/prac/Cube') } }
     ] } )
