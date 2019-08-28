@@ -3,7 +3,6 @@
   <div   class="pane">
     <b-tabs :comp="comp" :pages="pages"></b-tabs>
     <div class="prac" :key="prac" :ref="prac" :title="prac">
-      <p-icon v-show="pages['Icon'].show" :comp="comp" :prac="pobj"></p-icon>
       <p-dirs v-show="pages['Dirs'].show" :comp="comp" :prac="pobj"></p-dirs>
       <p-conn   v-if="pages['Conn'].show" :comp="comp" :prac="pobj"></p-conn>
       <p-desc v-show="pages['Desc'].show" :comp="comp" :prac="pobj"></p-desc>
@@ -14,34 +13,34 @@
 <script type="module">
 
   import Tabs from '../elem/Tabs.vue';
-  import Icon from './Icon.vue';
   import Dirs from './Dirs.vue';
-  import Conn from './Conn.vue';
+  import Conn from '../comp/Conn.vue';
   import Desc from './Desc.vue';
   
   let Prac = {
 
-    components:{ 'b-tabs':Tabs, 'p-icon':Icon, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },
+    components:{ 'b-tabs':Tabs, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },
     
     data() { return {
       comp:'None', prac:'None', pobj:null,
       pages:{
-        Icon: { name:'Icon', show:false },
         Dirs: { name:'Dirs', show:false },
         Conn: { name:'Conn', show:false },
         Desc: { name:'Desc', show:false } } } },
     
     methods: {
-      onPage: function (page) {
+      onPage: function() {
+        if( !this.isDef(this.pages[this.nav().page]) ) {
+          this.nav().page = 'Dirs'; }
         for( let pkey in this.pages ) {
-          this.pages[pkey].show = pkey === page; } },
+          this.pages[pkey].show = pkey === this.nav().page; } },
       doDisp: function (prac,disp) {
         this.nav().pub( { level:'Disp', comp:this.comp, prac:prac, disp:disp } ); },
       onPrac: function (prac) {
         this.prac = prac;
         this.pobj = this.pracs(this.comp)[this.prac]; },
       onNav:  function (obj) {
-        this.onPage(this.nav().page);
+        this.onPage();
         if( obj.level === 'Prac' ) {
           this.onPrac(obj.prac); } },
       },
@@ -49,7 +48,7 @@
     beforeMount: function() {
       this.comp =  this.nav().comp;
       this.onPrac( this.nav().prac );
-      this.onPage( this.nav().page ); },
+      this.onPage(); },
 
     mounted: function () {
       this.subscribe(  "Nav", 'Prac.vue', (obj) => {

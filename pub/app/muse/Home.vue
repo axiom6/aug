@@ -30,15 +30,13 @@
 
   import Dash from '../../../vue/dash/Dash.vue';
   import Comp from '../../../vue/comp/Comp.vue';
-  import Prac from '../../../vue/comp/Prac.vue';
-  import Disp from '../../../vue/comp/Disp.vue';
-  import Conn from '../../../vue/comp/Conn.vue';
+  import Prac from '../../../vue/prac/Prac.vue';
+  import Disp from '../../../vue/disp/Disp.vue';
   
   Home.Dash = Dash;
   Home.Comp = Comp;
   Home.Prac = Prac;
   Home.Disp = Disp;
-  Home.Conn = Conn;
   
   export default Home;
   

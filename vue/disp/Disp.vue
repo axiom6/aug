@@ -1,107 +1,43 @@
 
 <template>
-  <div class="comp" ref="Disp" title="Disp">
+  <div class="disp" ref="Disp" title="Disp">
     <b-tabs :comp="comp" :pages="pages"></b-tabs>
-    <template v-for="prac in practices">
-      <div v-show="isPrac(prac.name)" :class="pracDir(prac.dir)" :key="prac.name" :ref="prac.name" :title="prac.name">
-        <p-icon :comp="comp" :prac="prac"></p-icon>
-        <p-dirs :comp="comp" :prac="prac"></p-dirs>
-        <p-summ :comp="comp" :prac="prac"></p-summ>
-        <p-desc :comp="comp" :prac="prac"></p-desc>
-      </div>
-    </template>
-    <template v-for="row in rows">
-      <div v-show="isRows()" :class="row.dir" :key="row.name">
-        <p-icon :comp="comp" :prac="row"></p-icon>
-      </div>
-      <!--div v-show="isRows()" :class="row.dir" :key="row.name"><div class="row">
-        <div><i :class="row.icon"></i>{{row.name}}</div></div></div-->
-    </template>
+    <p-desc v-show="pages['Desc'].show" :comp="comp" :prac="prac"></p-desc>
   </div>
 </template>
 
 <script type="module">
 
   import Tabs from '../elem/Tabs.vue';
-  import Icon from './Icon.vue';
-  import Dirs from './Dirs.vue';
-  import Summ from './Summ.vue';
   import Desc from './Desc.vue';
   
   let Disp = {
 
-    components:{ 'b-tabs':Tabs, 'p-icon':Icon, 'p-dirs':Dirs, 'p-summ':Summ, 'p-desc':Desc },
-    
-    props: { pcomp:{ type:String, default:'None' } },
+    components:{ 'b-tabs':Tabs, 'p-desc':Desc },
     
     data() { return {
-      comp:'None', prac:'All', disp:'All', practices:{},
-      pages:[
-        { title:'Icon', view:'Page', page:'Icon' },
-        { title:'Dirs', view:'Page', page:'Dirs' },
-        { title:'Summ', view:'Page', page:'Summ' },
-        { title:'Desc', view:'Page', page:'Desc' } ],
-      rows: {
-        Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap" },
-        Do:{    name:'Do',    dir:'do', icon:"fas fas fa-cog" },
-        Share:{ name:'Share', dir:'sh', icon:"fas fa-share-alt-square" } } } },
+      comp:'None', prac:'None', disp:'None', pobj:null, dobj:null,
+      pages:{
+        Desc: { name:'Desc', show:false } } } },
     
     methods: {
-      isPrac: function (prac) {
-        return this.prac===prac || this.prac==='All' },
-      isDisp: function (disp) {
-        return this.disp===disp || this.disp==='All' },
-      isRows: function () {
-        return this.prac==='All' },
-      doPrac: function (prac) {
-        this.publish( this.comp, { prac:prac, disp:'All' } ); },
-      doDisp: function (prac,disp) {
-        this.publish( this.comp, { prac:prac, disp:disp  } ); },
-      onComp: function (comp) {
-        this.comp = comp; this.prac = 'All'; this.disp='All'; },
-      onPrac: function (prac) {
-        this.prac = prac; this.disp='All'; },
-      onDisp: function (prac,disp) {
-        this.prac = prac; this.disp=disp; },
-      onPage: function (obj)    {
-        console.log( 'Page.onPrac()', obj ); },
-      onNone: function (obj) {
-        console.error( 'Page Nav Error', { obj:obj } ); },
+      onPage: function() {
+        if( !this.isDef(this.pages[this.nav().page]) ) {
+          this.nav().page = 'Dirs'; }
+        for( let pkey in this.pages ) {
+          this.pages[pkey].show = pkey === this.nav().page; } },
       onNav:  function (obj) {
-        switch( obj.level ) {
-          case 'Comp' : this.onComp(obj.comp);          break;
-          case 'Prac' : this.onPrac(obj.prac);          break;
-          case 'Disp' : this.onDisp(obj.prac,obj.disp); break;
-          default     : this.onNone(obj); } },
-      pracDir: function(dir) {
-        return this.prac==='All' ? dir : 'pracFull'; },
-      dispDir: function(dir) {
-        return this.disp==='All' ? dir : 'dispFull'; },
-      areaDir: function() {
-        return this.prac==='All' ? 'none' : 'area' },
-      style: function( hsv ) {
-        return { backgroundColor:this.toRgbaHsv(hsv) }; },
-      elems: function() { // Add DON elements. Must be called within $nextTick for $refs
-        this.infoElem = this.$refs['Disp']
-        let pracs = this.conns(this.comp); // We access conns because col practices have been filtered out
-        for( let pkey in pracs ) {
-          let prac = pracs[pkey];
-          prac.elem = this.$refs[prac.name][0];
-          this.touch.events( prac.elem );
-          let disps = this.disps(this.comp,prac.name)
-          for( let dkey in disps ) {
-            let disp = disps[dkey];
-            disp.elem = this.$refs[disp.name][0]; } } }  // this.touch.events( disp.elem );
-      },
+        if( obj===false ) {}
+        this.onPage(); } },
 
     beforeMount: function() {
-      this.comp = this.nav().comp; },
+      this.comp = this.nav().comp;
+      this.prac = this.nav().prac;
+      this.disp = this.nav().disp;
+      this.onPage(); },
 
     mounted: function () {
       this.practices = this.pracs(this.comp); // 'Cols'
-      this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
-         if( obj.disp==='All' ) { this.onPrac(obj.prac); }
-         else                   { this.onDisp(obj.prac,obj.disp); } } );
       this.subscribe(  "Nav",     this.comp+'.vue', (obj) => {
         this.onNav(obj); } ); }
   }

@@ -4,6 +4,6 @@ import LessRollup from 'rollup-plugin-less'
 import commonjs   from 'rollup-plugin-commonjs';
 
 export default
-{ input:              'vue/comp/Draw.vue',
-  output: { file: 'pub/vue/comp/Draw.js', format:'esm' },
+{ input:              'vue/cube/Cube.vue',
+  output: { file: 'pub/vue/cube/Cube.js', format:'esm' },
   plugins: [ VueRollup(), LessRollup(), commonjs() ] }
