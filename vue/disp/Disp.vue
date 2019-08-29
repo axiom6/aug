@@ -2,7 +2,7 @@
 <template>
   <div class="disp" ref="Disp" title="Disp">
     <b-tabs :comp="comp" :pages="pages"></b-tabs>
-    <p-desc v-show="pages['Desc'].show" :comp="comp" :prac="prac"></p-desc>
+    <d-desc v-show="pages['Desc'].show" :comp="comp" :prac="prac" :disp="disp"></d-desc>
   </div>
 </template>
 
@@ -13,7 +13,7 @@
   
   let Disp = {
 
-    components:{ 'b-tabs':Tabs, 'p-desc':Desc },
+    components:{ 'b-tabs':Tabs, 'd-desc':Desc },
     
     data() { return {
       comp:'None', prac:'None', disp:'None', pobj:null, dobj:null,
@@ -23,7 +23,7 @@
     methods: {
       onPage: function() {
         if( !this.isDef(this.pages[this.nav().page]) ) {
-          this.nav().page = 'Dirs'; }
+          this.nav().page = 'Desc'; }
         for( let pkey in this.pages ) {
           this.pages[pkey].show = pkey === this.nav().page; } },
       onNav:  function (obj) {

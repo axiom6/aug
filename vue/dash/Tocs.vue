@@ -57,7 +57,7 @@
         this.nav().routeLevel('Comp'); },
       doPrac: function(prac) {
         this.prac = prac;
-        let obj   = { level:'Prac', prac:prac, disp:'All' }
+        let obj   = { level:'Prac', prac:prac, disp:'All', page:'Desc' }
         this.nav().pub(obj);
         this.nav().routeLevel('Prac'); },
       doDisp: function(prac,disp) {
