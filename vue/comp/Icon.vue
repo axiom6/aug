@@ -16,10 +16,8 @@
     
     methods: {
       doPrac: function (prac) {
-        this.nav().pub( { prac:prac.name } ); }, },
-        
-    mounted: function () {} }
-
+        this.nav().pub( { prac:prac.name } ); } }
+  }
   export default Icon;
   
 </script>

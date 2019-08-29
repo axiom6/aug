@@ -1,24 +1,21 @@
 
 <template>
   <div   class="desc">
-    <div class="prac" prac="prac" :style="style(prac.hsv)" :ref="prac.name" :title="prac.name">
-      <i   :class="prac.icon"></i>
-      <span class="name">{{prac.name}}</span>
-      <span class="desc">{{prac.desc}}</span>
+    <div class="cen" prac="prac" :style="style(prac.hsv)" :ref="prac.name" :title="prac.name">
+      <div class="dead">
+        <i   :class="prac.icon">{{prac.name}}</i>
+        <!--span class="name">{{prac.name}}</span-->
+      </div>
+      <div class="summ">{{prac.desc}}</div>
     </div>
     <template  v-for="disp in prac.disps">
-        <div class="disp" @click="doDisp(disp.name)" :style="style(disp.hsv)" :ref="disp.name" :title="disp.name">
-          <i   :class="disp.icon"></i>
-          <span class="name">{{disp.name}}</span>
-          <span class="desc">{{disp.desc}}</span>
-        </div>
-        <!--template v-for="area in disp.areas">
-          <div  class="area">
-            <i :class="area.icon"></i>
-            <span class="name">{{area.name}}</span>
-            <span class="desc">{{area.desc}}</span>
+        <div  :class="disp.dir" @click="doDisp(disp.name)" :style="style(disp.hsv)" :ref="disp.name" :title="disp.name">
+          <div class="dead">
+            <i   :class="disp.icon">{{disp.name}}</i>
+            <!--span class="name">{{disp.name}}</span-->
           </div>
-        </template-->
+          <div class="summ">{{disp.desc}}</div>
+        </div>
   </template>
   </div>
 </template>
@@ -33,11 +30,10 @@
 
     methods: {
       doDisp: function (disp) {
-        this.nav().pub({level: 'Disp', prac: this.prac.name, disp: disp}) },
+        this.nav().pub({level: 'Disp', prac: this.prac.name, disp:disp }) },
       style: function (hsv) {
         return {backgroundColor: this.toRgbaHsv(hsv)};},
-    },
-    mounted: function () {}
+    }
   }
   export default Desc;
 
@@ -47,17 +43,36 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .desc { display:grid; align-self:stretch; justify-self:stretch; .theme-desc(); color:@theme-color;
-    
-    .prac {   display:inline; justify-self:center; align-self:center; text-align:center; font-size:@theme-disp-size;
-      i     { font-size:@theme-disp-size; }
-      .name { font-size:@theme-disp-size; }
-      .desc { font-size:@theme-disp-size; display:block; } }
+  .grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;
+    grid-template-areas: "nw north ne" "west cen east" "sw south se"; }
+
+  .grid2x1() { display:grid;  grid-template-columns:1fr; grid-template-rows:20fr 80fr;
+    grid-template-areas: "dead" "summ"; }
+
+  .ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }
   
-    .disp {   display:inline; justify-self:center; align-self:center; text-align:center; font-size:@theme-disp-size;
-      i     { display:inline-block;  margin-right: 0.25rem; }
-      .name { display:inline-block; }
-      .desc { display:inline-block; margin:0.5rem 0.5rem 0.5rem 0.5rem; text-align:left; } }
+  .desc { position:absolute; left:0; top:0; right:0; bottom:0; .grid3x3(); .theme-desc(); color:black;
+    
+    .cen { .ddir(cen); .grid2x1();
+      .dead { grid-area:dead; display:grid; align-self:center; justify-self:center;
+        margin-top:1rem; font-size:@theme-prac-size;
+        i     { }
+        .name { } }
+      .summ { grid-area:summ; display:grid; align-self:start;  justify-self:start; text-align:left;
+        margin:0.5rem 0.5rem 0.5rem 0.5rem; font-size:@theme-desc-size; } }
+    
+    .west  { .ddir(west);  }
+    .north { .ddir(north); }
+    .east  { .ddir(east);  }
+    .south { .ddir(south); }
+  
+    .west, .north, .east, .south { .grid2x1();
+      .dead { grid-area:dead; display:grid; align-self:center; justify-self:center; margin-top:1rem;
+        font-size:@theme-prac-size;
+        i     { }
+        .name { } }
+      .summ { grid-area:summ; display:grid; align-self:start;  justify-self:start; font-size:@theme-desc-size;
+        margin:0.5rem 0.5rem 0.5rem 0.5rem; } }
     
   }
 </style>

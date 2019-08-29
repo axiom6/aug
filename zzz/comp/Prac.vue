@@ -113,6 +113,9 @@
 <style lang="less">
   
   @import '../../pub/css/themes/theme.less';
+
+  .grid5x1() { display:grid;  grid-template-columns:1fr; grid-template-rows:28fr 18fr 18fr 18fr 18fr;
+    grid-template-areas: "prac" "west" "north" "east" "south"; }
   
   .grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;
                grid-template-areas: "nw north ne" "west cen east" "sw south se"; }
