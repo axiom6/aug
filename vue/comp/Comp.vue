@@ -33,7 +33,7 @@
     props: { pcomp:{ type:String, default:'None' } },
     
     data() { return {
-      comp:'None', prac:'All', disp:'All', practices:{},
+      comp:'None', prac:'None', disp:'None', practices:{},
       pages:{
         Icon: { name:'Icon', show:false },
         Dirs: { name:'Dirs', show:false },
@@ -51,10 +51,10 @@
       isRows: function () {
         return this.prac==='All' },
       onComp: function (comp) {
-        this.comp = comp; this.prac = 'All'; this.disp='All';
+        this.comp = comp;
         this.practices = this.pracs(this.comp); },
       onPrac: function (prac) {
-        this.prac = prac; this.disp='All'; },
+        this.prac = prac; },
       onDisp: function (prac,disp) {
         this.prac = prac; this.disp=disp; },
       onNone: function (obj) {
@@ -75,8 +75,8 @@
     mounted: function () {
       this.practices = this.pracs(this.comp);
       this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
-         if( obj.disp==='All' ) { this.onPrac(obj.prac); }
-         else                   { this.onDisp(obj.prac,obj.disp); } } );
+         if( obj.disp==='None' ) { this.onPrac(obj.prac); }
+         else                    { this.onDisp(obj.prac,obj.disp); } } );
       this.subscribe(  "Nav",     this.comp+'.vue', (obj) => {
         this.onNav(obj); } ); }
   }

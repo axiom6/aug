@@ -119,6 +119,9 @@ Main = (function() {
       isDef: function(d) {
         return d !== null && typeof d !== 'undefined';
       },
+      isStr: function(s) {
+        return this.isDef(s) && typeof s === "string" && s.length > 0;
+      },
       subscribe: function(subject, source, onMethod) {
         Main['stream'].subscribe(subject, source, onMethod);
       },

@@ -1,9 +1,11 @@
 
 <template>
-  <div :class="icClass()" :style="style()" @click="doClick()">
-    <i   :class="icon"></i>
-    <span class="name">{{name}}</span>
-    <span v-if="hasSumm()" class="summ">{{summ}}</span>
+  <div>
+    <div :class="icClass()" :style="style()" @click="doClick()">
+      <i   :class="icon"></i>
+      <span class="name">{{name}}</span>
+      <span v-if="hasSumm()" class="summ">{{summ}}</span>
+    </div>
   </div>
 </template>
 
@@ -47,11 +49,11 @@
     i     { grid-area:nicon; .themeCenterItems(); }
     .name { grid-area:nname; .themeCenterItems(); } }
 
-  .grid1x3() { display:grid; grid-template-columns:10fr 25fr 65fr; grid-template-areas:"sicon sname ssumm"; }
+  .grid1x4() { display:grid; grid-template-columns:5fr 5fr 15fr 75fr; grid-template-areas:"sleft sicon sname ssumm"; }
 
-  .icon-summ { .grid1x3(); align-self:start;  justify-self:center;
-    i     { grid-area:sicon; .themeCenterItems(); }
-    .name { grid-area:sname; .themeCenterItems(); font-weight:900; }
-    .summ { grid-area:ssumm; .themeCenterItems(); font-weight:900; } }
+  .icon-summ { .grid1x4(); align-self:start;  justify-self:center;
+    i     { grid-area:sicon; .themeLeftSelf(); }
+    .name { grid-area:sname; .themeLeftSelf(); font-weight:900; }
+    .summ { grid-area:ssumm; .themeLeftSelf(); font-weight:900; } }
   
 </style>

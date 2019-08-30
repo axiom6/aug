@@ -1,15 +1,10 @@
 
 <template>
-  <div   class="desd">
-    <div class="cen" prac="prac" :style="style(prac.hsv)" :ref="prac.name" :title="prac.name">
-      <div class="dead2"><d-icon :icon="prac.icon" :name="prac.name" :size="2" ></d-icon></div>
-      <div class="summ2">{{prac.desc}}</div>
-    </div>
-    <template  v-for="disp in prac.disps">
-        <div  :class="disp.dir" @click="doDisp(disp.name)" :style="style(disp.hsv)" :ref="disp.name" :title="disp.name">
-          <div class="dead2"><d-icon :icon="disp.icon" :name="disp.name" :size="2"></d-icon></div>
-          <div class="summ2">{{disp.desc}}</div>
-        </div>
+  <div   class="desd" :style="style(dobj.hsv)">
+    <d-icon class="iconq" :icon="dobj.icon" :name="disp" :size="3" ></d-icon>
+    <div    class="summq">{{dobj.desc}}</div>
+    <template v-for="area in dobj.areas">
+      <d-icon :class="clArea()" :icon="area.icon" :name="area.name" :summ="tsSumm(area.desc)" :size="1.7" ></d-icon>
   </template>
   </div>
 </template>
@@ -20,18 +15,25 @@
 
   let Desc = {
 
-    props: { comp:String, prac:Object },
+    props: { comp:String, prac:String, disp:String },
     
     components: { 'd-icon':Icon },
 
-    data() { return { page:"Desc"} },
+    data() { return { dobj:null, iarea:1 } },
 
     methods: {
-      doDisp: function (disp) {
-        this.nav().pub({level: 'Disp', prac: this.prac.name, disp:disp }) },
       style: function (hsv) {
-        return {backgroundColor: this.toRgbaHsv(hsv)};},
-    }
+        return {backgroundColor: this.toRgbaHsv(hsv)}; },
+      clArea: function() {
+        let  klass = 'area'+this.iarea;
+        this.iarea = this.iarea === 3 ? 1 : this.iarea+1;
+        return klass; },
+      tsSumm: function(summ) {
+        return this.isStr(summ) ? summ : "This is a test description"; }
+    },
+
+    beforeMount: function() {
+      this.dobj = this.pracs(this.comp)[this.prac][this.disp]; }
   }
   export default Desc;
 
@@ -40,31 +42,18 @@
 <style lang="less">
   
   @import '../../pub/css/themes/theme.less';
-  
-  .grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;
-    grid-template-areas: "nw north ne" "west cen east" "sw south se"; }
 
-  .grid2x1() { display:grid;  grid-template-columns:1fr; grid-template-rows:20fr 80fr;
-    grid-template-areas: "dead" "summ"; }
+  .grid5x1() { display:grid;  grid-template-columns:1fr; grid-template-rows:20fr 20fr 20fr 20fr 20fr;
+    grid-template-areas: "iconq" "summq""area1" "area2" "area3"; }
+  
+  .desd { .grid5x1(); position:absolute; left:0; top:5%; right:0; bottom:0; .theme-desc(); color:black;
+    .iconq { grid-area:iconq; }
+    .summq { grid-area:summq; }
+    .area1 { grid-area:area1; }
+    .area2 { grid-area:area2; }
+    .area3 { grid-area:area3; }
+    
 
-  .ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }
-  
-  .desd { position:absolute; left:0; top:0; right:0; bottom:0; .grid3x3(); .theme-desc(); color:black;
-    
-    .cen { .ddir(cen); .grid2x1();
-      .dead2 { grid-area:dead; }
-      .summ2 { grid-area:summ; display:grid; align-self:start;  justify-self:start; text-align:left;
-        margin:0.5rem 0.5rem 0.5rem 0.5rem; font-size:@theme-desc-size; } }
-    
-    .west  { .ddir(west);  }
-    .north { .ddir(north); }
-    .east  { .ddir(east);  }
-    .south { .ddir(south); }
-  
-    .west, .north, .east, .south { .grid2x1();
-      .dead2 { grid-area:dead; }
-      .summ2 { grid-area:summ; display:grid; align-self:start;  justify-self:start; font-size:@theme-desc-size;
-        margin:0.5rem 0.5rem 0.5rem 0.5rem; } }
   }
   
 </style>

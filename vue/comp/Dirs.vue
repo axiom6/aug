@@ -1,7 +1,7 @@
 
 <template>
   <div class="dirs" prac="prac">
-    <div :class="dispDir('cen')" :style="style(prac.hsv)">
+    <div class="cen" :style="style(prac.hsv)">
       <div class="disp" @click="doPrac(prac)">
         <i   :class="prac.icon"></i>
         <span class="name">{{prac.name}}</span>
@@ -9,7 +9,7 @@
       </div>
     </div>
     <template  v-for="disp in prac.disps">
-      <div v-show="isDisp(disp.name)" :class="dispDir(disp.dir)" :style="style(disp.hsv)"
+      <div :class="disp.dir" :style="style(disp.hsv)"
         :ref="disp.name" :title="disp.name">
         <div class="disp" @click="doDisp(prac.name,disp.name)">
           <i   :class="disp.icon"></i>
@@ -27,24 +27,14 @@
 
     props: { comp:String, prac:Object },
 
-    data() { return { disp:"All" } },
+    data() { return { disp:"None" } },
 
     methods: {
-
-      isPage:  function () {
-        return this.nav().page === 'Dirs'; },
-      isDisp: function (disp) {
-        return this.disp===disp || this.disp==='All' },
+      
       doPrac: function (prac) {
         publish( this.comp, prac ); },
       doDisp: function (prac,disp) {
         this.publish( this.comp, { prac:prac, disp:disp } ); },
-      pracDir: function(dir) {
-        return this.prac==='All' ? dir : 'pracFull'; },
-      dispDir: function(dir) {
-        return this.disp==='All' ? dir : 'dispFull'; },
-      areaDir: function() {
-        return this.prac==='All' ? 'none' : 'area' },
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; } },
 

@@ -48,6 +48,8 @@ class Main
     methods: {
       isDef:(d) ->
         d isnt null and typeof(d) isnt 'undefined'
+      isStr:(s) ->
+        this.isDef(s) and typeof(s)=="string" and s.length > 0
       subscribe:( subject, source, onMethod ) ->
         Main['stream'].subscribe( subject, source, onMethod )
         return

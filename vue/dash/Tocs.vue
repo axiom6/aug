@@ -52,12 +52,12 @@
           default     : this.onNone(obj); } },
       doComp: function(comp) {
         this.comp = comp;
-        let obj   = { level:'Comp', comp:comp, prac:'All', disp:'All', page:this.nav().page }
+        let obj   = { level:'Comp', comp:comp, page:this.nav().page }
         this.nav().pub(obj);
         this.nav().routeLevel('Comp'); },
       doPrac: function(prac) {
         this.prac = prac;
-        let obj   = { level:'Prac', prac:prac, disp:'All', page:'Desc' }
+        let obj   = { level:'Prac', prac:prac, page:'Desc' }
         this.nav().pub(obj);
         this.nav().routeLevel('Prac'); },
       doDisp: function(prac,disp) {
@@ -93,8 +93,8 @@
             komp.pracs = this.filterPracs( this.pracs(komp.comp), komp.comp );
             this.subscribe( key, 'Tocs.vue', (obj) => {
             //this.onComp(key);
-              if( obj.disp==='All' ) { this.onPrac(obj.prac); }
-              else                   { this.onDisp(obj.prac,obj.disp); } } ); } }
+              if( obj.disp==='None' ) { this.onPrac(obj.prac); }
+              else                    { this.onDisp(obj.prac,obj.disp); } } ); } }
       this.subscribe( 'Nav', 'Tocs.vue', (obj) => {
           this.onNav(obj); } ); }
     }
