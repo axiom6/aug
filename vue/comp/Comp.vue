@@ -1,7 +1,7 @@
 
 <template>
   <div class="comp" ref="Comp" title="Comp">
-    <b-tabs :comp="comp" :pages="pages"></b-tabs>
+    <b-tabs :comp="cname" :pages="pages"></b-tabs>
     <template v-for="prac in practices">
       <div :class="prac.dir" :key="prac.name" :ref="prac.name" :title="prac.name">
         <p-icon v-show="pages['Icon'].show" :comp="comp" :prac="prac"></p-icon>
@@ -28,10 +28,10 @@
 
     components:{ 'b-tabs':Tabs, 'p-icon':Icon, 'p-dirs':Dirs, 'p-conn':Conn },
 
-    props: { prac:{ type:Object } },
+    props: { comp:Object, prac:Object },
     
     data() { return {
-      comp:'None', disp:'None', practices:{},
+      cname:'None', pname:'None', dname:'None', practices:{},
       pages:{
         Icon: { name:'Icon', show:false },
         Dirs: { name:'Dirs', show:false },
@@ -43,18 +43,17 @@
     
     methods: {
       onPage: function (page) {
-      //console.log( 'Comp.onPage()', { page:page } );
         for( let pkey in this.pages ) {
           this.pages[pkey].show = pkey === page; } },
       isRows: function () {
         return true; },
-      onComp: function (comp) {
-        this.comp = comp;
-        this.practices = this.pracs(this.comp); },
-      onPrac: function (prac) {
-        this.prac = prac; },
-      onDisp: function (disp) {
-        this.disp=disp; },
+      onComp: function (cname) {
+        this.cname = cname;
+        this.practices = this.pracs(this.cname); },
+      onPrac: function (pname) {
+        this.pname = pname; },
+      onDisp: function (dname) {
+        this.dname=dname; },
       onNone: function (obj) {
         console.error( 'Page Nav Error', { obj:obj } ); },
       onNav:  function (obj) {
@@ -67,15 +66,12 @@
       },
 
     beforeMount: function() {
-      this.comp = this.nav().comp;
+      this.cname = this.nav().comp;
       this.onPage(this.nav().page); },
 
     mounted: function () {
-      this.practices = this.pracs(this.comp);
-      this.subscribe(  this.comp, this.comp+'.vue', (obj) => {
-         if( obj.disp==='None' ) { this.onPrac(obj.prac); }
-         else                    { this.onDisp(obj.prac,obj.disp); } } );
-      this.subscribe(  "Nav",     this.comp+'.vue', (obj) => {
+      this.practices = this.pracs(this.cname);
+      this.subscribe( 'Nav', 'Comp.vue', (obj) => {
         this.onNav(obj); } ); }
   }
   

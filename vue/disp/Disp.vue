@@ -16,31 +16,31 @@
     components:{ 'd-tabs':Tabs, 'd-desc':Desc },
     
     data() { return {
-      comp:'None', prac:'None', disp:'None',
+      cname:'None', pname:'None', dname:'None', page:'None', disp:null,
       pages:{
         Desc: { name:'Desc', show:false } } } },
     
     methods: {
-      onDisp: function(disp) {
-        if( this.disp !== disp ) {
-            this.disp =   disp; } },
-      onPage: function() {
-        if( !this.isDef(this.pages[this.nav().page]) ) {
-          this.nav().page = 'Desc'; }
+      onPrac: function(pname) {
+        this.pname = pname; },
+      onDisp: function(dname) {
+        this.dname = dname;
+        this.disp  = this.pracs(this.cname)[this.pname][this.dname]; },
+      onPage: function(page) {
+        this.page = page==='Desc' ? 'Desc' : 'Desc'; // Change when more pages added
         for( let pkey in this.pages ) {
-          this.pages[pkey].show = pkey === this.nav().page; } },
+          this.pages[pkey].show = pkey === this.page; } },
       onNav:  function (obj) {
-        this.onDisp(obj.disp)
-        this.onPage(); } },
+        this.cname = obj.comp;
+        this.onPrac( obj.prac );
+        this.onDisp( obj.disp );
+        this.onPage( obj.page ); } },
 
     beforeMount: function() {
-      this.comp = this.nav().comp;
-      this.prac = this.nav().prac;
-      this.disp = this.nav().disp;
-      this.onPage(); },
+      this.onNav(this.nav()); },
 
     mounted: function () {
-      this.subscribe(  "Nav", this.comp+'DispDisp.vue', (obj) => {
+      this.subscribe(  "Nav", this.comp+'Disp.Disp.vue', (obj) => {
         this.onNav(obj); } ); }
   }
   

@@ -119,7 +119,7 @@ class NavMuse
 
   routeLevel:( level ) ->
     if @$router?
-       @$router.push( { name:level } ) if @$router.name isnt level
+       @$router.push( { name:level } ) # if @$router.name isnt level
     else
       console.error( 'Nav.routeLevel() $router not set' )
     return

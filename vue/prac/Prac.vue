@@ -1,8 +1,8 @@
 
 <template>
   <div   class="pane">
-    <b-tabs :comp="comp" :pages="pages"></b-tabs>
-    <div class="prac" :key="prac" :ref="prac" :title="prac">
+    <b-tabs :comp="cname" :pages="pages"></b-tabs>
+    <div class="prac" :key="pname" :ref="pname" :title="pname">
       <p-dirs v-show="pages['Dirs'].show"></p-dirs>
       <p-conn   v-if="pages['Conn'].show"></p-conn>
       <p-desc v-show="pages['Desc'].show"></p-desc>
@@ -21,29 +21,34 @@
 
     components:{ 'b-tabs':Tabs, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },
     
+    // props: { prac:Object },
+    
     data() { return {
-      comp:'None',
+      cname:'None', pname:'None', page:'None', prac:null,
       pages:{
         Dirs: { name:'Dirs', show:false },
         Conn: { name:'Conn', show:false },
         Desc: { name:'Desc', show:false } } } },
     
     methods: {
-      onPage: function() {
-        if( !this.isDef(this.pages[this.nav().page]) ) {
-          this.nav().page = 'Dirs'; }
+      onPrac: function(pname) {
+        this.pname = pname;
+        this.prac  = this.pracs(this.cname)[pname]; },
+      onPage: function(page) {
+        this.page = page;
         for( let pkey in this.pages ) {
-          this.pages[pkey].show = pkey === this.nav().page; } },
+          this.pages[pkey].show = pkey === page; } },
       },
 
     beforeMount: function() {
-      this.comp =  this.nav().comp;
-      this.onPage(); },
+      this.cname = this.nav().comp;
+      this.onPrac( this.nav().prac );  // onPage() here ?
+      this.onPage( this.nav().page ); },
 
     mounted: function () {
       this.subscribe(  "Nav", 'Prac.vue', (obj) => {
-        if( obj === false ) {} // obj ignored
-        this.onPage(); } ); }
+        this.onPrac( obj.prac );
+        this.onPage( obj.page ); } ); }
   }
   
   export default Prac;
@@ -54,7 +59,7 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .pane {  position:relative; left:0;  top:0;  right:0; bottom:0;
+  .pane {   position:relative; left:0; top:0;  right:0; bottom:0;
     
     .prac { position:absolute; left:0; top:5%; right:0; bottom:0; background-color:@theme-icon-back; }
     

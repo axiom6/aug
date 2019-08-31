@@ -45,9 +45,9 @@
         this.nav().routeLevel('Prac'); },
       doDisp: function(dispn) {
         this.dispn  =  dispn;
-        this.nav().routeLevel('Disp');
         let obj   = { level:'Disp', disp:dispn, source:'Toc' }
-        this.nav().pub(obj); },
+        this.nav().pub(obj);
+        this.nav().routeLevel('Disp'); },
       onNav:  function (obj) {
         if( obj.source !== 'Toc' ) {
           switch( obj.level ) {

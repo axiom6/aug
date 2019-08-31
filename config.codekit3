@@ -5245,6 +5245,14 @@
 		"oAP": "/pub/vue/dash/Side.js",
 		"oF": 0
 		},
+	"/vue/dash/Toc1.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/dash/Toc1.js",
+		"oF": 0
+		},
 	"/vue/dash/Tocs.vue": {
 		"cB": 0,
 		"ft": 8192,
