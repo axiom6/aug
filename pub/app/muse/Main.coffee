@@ -104,7 +104,8 @@ class Main
       bases:( compk, prack, dispk, areak, itemk  ) ->
         Main.Batch[compk].data[compk][prack][dispk][areak][itemk].bases
       toRgbaHsv:( hsv ) ->
-         Vis.toRgbaHsv(hsv)
+         hsu = if not hsv then [30,90,90] else hsv
+         Vis.toRgbaHsv(hsu)
       #navbSpecs:() ->
       #  Main.NavbSpecs
     }

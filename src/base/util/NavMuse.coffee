@@ -16,6 +16,7 @@ class NavMuse
   pub:(   change ) ->
     @set( change )
     obj = { level:@level, comp:@comp, prac:@prac, disp:@disp, page:@page }
+    obj.source = if change.source? then change.source else 'None'
     console.log('Nav.pub()', obj )
     @stream.publish( 'Nav',  obj )
     return
@@ -118,7 +119,7 @@ class NavMuse
 
   routeLevel:( level ) ->
     if @$router?
-       @$router.push( { name:level } )
+       @$router.push( { name:level } ) if @$router.name isnt level
     else
       console.error( 'Nav.routeLevel() $router not set' )
     return

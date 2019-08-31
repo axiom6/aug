@@ -11,9 +11,9 @@
 
   export default {
 
-    props: { comp:String, pages:Object },
+    props: { pages:Object },
     
-    data() { return { page:"" } },
+    data() { return { page:"None" } },
     
     methods: {
       onPage: function (page) {

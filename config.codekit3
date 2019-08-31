@@ -5124,14 +5124,6 @@
 		"oAP": "/pub/vue/comp/Conn.js",
 		"oF": 0
 		},
-	"/vue/comp/Desc.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/comp/Desc.js",
-		"oF": 0
-		},
 	"/vue/comp/Dirs.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -6257,6 +6249,14 @@
 		"oAP": "/zzz/comp/Conn.js",
 		"oF": 0
 		},
+	"/zzz/comp/Desc.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/comp/Desc.js",
+		"oF": 0
+		},
 	"/zzz/comp/Home.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -6303,6 +6303,14 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/zzz/comp/Prin.js",
+		"oF": 0
+		},
+	"/zzz/comp/Tocs.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/comp/Tocs.js",
 		"oF": 0
 		},
 	"/zzz/comp/Wise.vue": {

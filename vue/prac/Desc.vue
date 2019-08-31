@@ -1,7 +1,7 @@
 
 <template>
   <div   class="desd">
-    <div class="cen" prac="prac" :style="style(prac.hsv)" :ref="prac.name" :title="prac.name">
+    <div class="cen" :style="style(prac.hsv)" :ref="prac.name" :title="prac.name">
       <div class="dead2"><d-icon :icon="prac.icon" :name="prac.name" :size="2" ></d-icon></div>
       <div class="summ2">{{prac.desc}}</div>
     </div>
@@ -20,18 +20,29 @@
 
   let Desc = {
 
-    props: { comp:String, prac:Object },
+    props: {  },
     
     components: { 'd-icon':Icon },
 
-    data() { return { page:"Desc"} },
+    data() { return { comp:"None", prac:null, page:"Desc" } },
 
     methods: {
+      onPrac: function () {
+        this.comp = this.nav().comp;
+        this.prac = this.pracs(this.comp)[this.nav().prac]; },
       doDisp: function (disp) {
-        this.nav().pub({level: 'Disp', prac: this.prac.name, disp:disp }) },
+        this.nav().pub({level: 'Disp', prac: this.prac.name, disp:disp.name }) },
       style: function (hsv) {
         return {backgroundColor: this.toRgbaHsv(hsv)};},
-    }
+    },
+
+    beforeMount: function() {
+      this.onPrac(); },
+
+    mounted: function () {
+      this.subscribe(  "Nav", this.comp+'Prac.Dirs.vue', (obj) => {
+        if( obj === false ) {} // obj ignored
+        this.onPrac();  } ); }
   }
   export default Desc;
 

@@ -1,6 +1,6 @@
 
 <template>
-  <div   class="desd" :style="style(dobj.hsv)">
+  <div   class="desd" :style="style(dobj)">
     <d-icon class="iconq" :icon="dobj.icon" :name="disp" :size="3" ></d-icon>
     <div    class="summq">{{dobj.desc}}</div>
     <template v-for="area in dobj.areas">
@@ -22,7 +22,11 @@
     data() { return { dobj:null, iarea:1 } },
 
     methods: {
-      style: function (hsv) {
+      onDisp: function(disp) {
+        this.disp =   disp;
+        this.dobj = this.pracs(this.comp)[this.prac][this.disp]; },
+      style: function (dobj) {
+        let hsv = this.isDef(dobj) ? dobj.hsv : [30,90,90];
         return {backgroundColor: this.toRgbaHsv(hsv)}; },
       clArea: function() {
         let  klass = 'area'+this.iarea;
@@ -33,7 +37,15 @@
     },
 
     beforeMount: function() {
-      this.dobj = this.pracs(this.comp)[this.prac][this.disp]; }
+      this.comp = this.nav().comp;
+      this.prac = this.nav().prac;
+      this.disp = this.nav().disp;
+      this.onDisp(this.disp); },
+
+    mounted: function () {
+      this.subscribe( 'Nav', 'Disp.Desc.vue', (obj) => {
+        this.onDisp(obj.disp); } ); }
+      
   }
   export default Desc;
 

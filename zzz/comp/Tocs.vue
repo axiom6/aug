@@ -6,12 +6,12 @@
       <div   v-on:click="doComp(komp.name)">
         <div><i :class="komp.icon"></i>{{komp.name}}</div>
       </div>
-      <ul v-if="compn===komp.name"><template v-for="prac in komps[komp.name].pracs" >
-        <li v-on:click="doPrac(prac.name)" :style="stylePrac(prac.hsv)" :key="prac.name">
+      <ul  v-if="comp===komp.name"><template v-for="prac in komps[komp.name].pracs" >
+        <li v-on:click="doPrac(prac.name)" :style="stylePrac(prac.name,prac.hsv)" :key="prac.name">
           <i :class="prac.icon"></i>
           <span        v-if="!komp.link">{{prac.name}}</span>
-          <ul v-show="pracn===prac.name"><template v-for="disp in prac.disps">
-            <li v-on:click.stop="doDisp(disp.name)" :style="styleDisp(disp.hsv)" :key="disp.name">
+          <ul v-show="isPrac(prac.name)"><template v-for="disp in prac.disps">
+            <li v-on:click.stop="doDisp(disp.name)" :style="styleDisp(disp.name,disp.hsv)" :key="disp.name">
               <i :class="disp.icon"></i>{{disp.name}}</li>
           </template></ul>
         </li>
@@ -25,42 +25,57 @@
   
   let Tocs = {
 
-    props: { prac:{ type:Object, default:null } },
+    props: { prac:Object },
     
-    data: function() { return { komps:{}, compn:'None', pracn:'None', dispn:'None' } },
+    data: function() { return {  comp:'None', disp:null, pname:'None', dname:'None', komps:{} } },
     
     methods: {
       
+      isPrac: function(pname) {
+        return this.pname === pname;  },
+      onComp: function(comp) {
+        if( this.comp !== comp ) {
+            this.comp  =  comp; } },
+      onPrac: function(pname) {
+        if( this.pname !== pname ) {
+            this.pname  =  pname; } },
+      onDisp: function(dname) {
+        if( this.dname !== dname ) {
+            this.dname  =  dname; } },
       onPage: function (obj) {
         console.log( 'Tocs.onPage()', obj ); },
-      doComp: function(compn) {
-        this.compn  =  compn;
-        let obj   = { level:'Comp', comp:compn, page:this.nav().page, source:'Toc' }
-        this.nav().pub(obj);
-        this.nav().routeLevel('Comp'); },
-      doPrac: function(pracn) {
-        this.pracn  =  pracn
-        let obj   = { level:'Prac', prac:pracn, page:'Dirs', source:'Toc' }
-        this.nav().pub(obj);
-        this.nav().routeLevel('Prac'); },
-      doDisp: function(dispn) {
-        this.dispn  =  dispn;
-        this.nav().routeLevel('Disp');
-        let obj   = { level:'Disp', disp:dispn, source:'Toc' }
-        this.nav().pub(obj); },
+      onNone: function (obj) {
+        console.log( 'Tocs.onNone()', obj ); },
       onNav:  function (obj) {
         if( obj.source !== 'Toc' ) {
           switch( obj.level ) {
-            case 'Comp' : this.compn = obj.comp; break;
-            case 'Prac' : this.pracn = obj.prac; break;
-            case 'Disp' : this.dispn = obj.disp; break;
+            case 'Comp' : this.onComp(obj.comp); break;
+            case 'Prac' : this.onPrac(obj.prac); break;
+            case 'Disp' : this.onDisp(obj.disp); break;
             default     : this.onNone(obj); } } },
-      onNone: function (obj) {
-        console.log( 'Tocs.onNone()', obj ); },
-      stylePrac: function( hsv ) {
+      doComp: function(comp) {
+        this.onComp(comp);
+        let obj   = { level:'Comp', comp:comp, page:this.nav().page, source:'Toc' }
+        this.nav().pub(obj);
+        this.nav().routeLevel('Comp'); },
+      doPrac: function(pname) {
+        this.onPrac(pname);
+        let obj   = { level:'Prac', prac:pname, page:'Dirs', source:'Toc' }
+        this.nav().pub(obj);
+        this.nav().routeLevel('Prac'); },
+      doDisp: function(dname) {
+        this.nav().routeLevel('Disp');
+        this.onDisp(dname);
+        let obj   = { level:'Disp', disp:dname, source:'Toc' }
+        this.nav().pub(obj); },
+      stylePrac: function( pname, hsv ) {
+        if( pname===false ) {} // Consume arg
         return { backgroundColor:this.toRgbaHsv(hsv) }; },
-      styleDisp: function( hsv ) {
-        return { backgroundColor:this.toRgbaHsv(hsv) }; },
+      styleDisp: function( dname, hsv ) {
+        if( this.dname!==dname ) {
+          return { color:'black', backgroundColor:this.toRgbaHsv(hsv) }; }
+        else {
+          return { color:'white', backgroundColor:'black' }; } },
       filterPracs: function(pracs,komp) {
         let filt = {}
         for( let key in pracs ) {
@@ -77,8 +92,8 @@
         if( komp.ikw ) {  // this.komps.hasOwnProperty(key) &&
           komp.pracs = this.filterPracs( this.pracs(komp.comp), komp.comp ); } }
       this.subscribe( 'Nav', 'Tocs.vue', (obj) => {
-        this.onNav(obj); } ); }
-  }
+          this.onNav(obj); } ); }
+    }
   
    export default Tocs;
    
@@ -104,3 +119,9 @@
                li:hover { background-color:@theme-back!important; color:@theme-color-tocs-disp!important; } } } } } } }
 </style>
 
+/*
+
+this.subscribe( key, 'Tocs.vue', (obj) => {
+if( obj.disp==='None' ) { this.onPrac(obj.prac); }
+else                    { this.onDisp(obj.prac,obj.disp); } } ); } }
+*/

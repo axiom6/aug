@@ -1,6 +1,6 @@
 
 <template>
-  <div class="dirs" prac="prac">
+  <div class="dirs">
     <div class="cen" :style="style(prac.hsv)">
       <div class="disp" @click="doPrac(prac.name)">
         <i   :class="prac.icon"></i>
@@ -10,7 +10,7 @@
     </div>
     <template  v-for="disp in prac.disps">
       <div :class="disp.dir" :style="style(disp.hsv)" :ref="disp.name" :title="disp.name">
-        <div class="disp" @click="doDisp(prac.name,disp.name)">
+        <div class="disp" @click="doDisp(disp.name)">
           <i   :class="disp.icon"></i>
           <span class="name">{{disp.name}}</span>
           <span class="desc">{{disp.desc}}</span>
@@ -24,18 +24,27 @@
 
   let Dirs = {
 
-    props: { comp:String, prac:Object },
-
-    data() { return {  } },
+    data() { return { comp:'None', prac:null } }, // prac is obj
 
     methods: {
       
-      doPrac: function (prac) {
-        this.nav().pub( { prac:prac } ); },
-      doDisp: function (prac,disp) {
-        this.nav().pub( { prac:prac, disp:disp } ); },
+      onPrac: function () {
+        this.comp = this.nav().comp;
+        this.prac = this.pracs(this.comp)[this.nav().prac]; },
+      doPrac: function (name) {
+        this.nav().pub( { prac:name } ); },
+      doDisp: function (name) {
+        this.nav().pub( { disp:name } ); },
       style: function( hsv ) {
-        return { backgroundColor:this.toRgbaHsv(hsv) }; } }
+        return { backgroundColor:this.toRgbaHsv(hsv) }; } },
+
+    beforeMount: function() {
+      this.onPrac(); },
+
+    mounted: function () {
+      this.subscribe(  "Nav", this.comp+'Prac.Dirs.vue', (obj) => {
+        if( obj === false ) {} // obj ignored
+        this.onPrac();  } ); }
     
   }
 

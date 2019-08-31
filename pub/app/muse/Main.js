@@ -223,7 +223,9 @@ Main = (function() {
         return Main.Batch[compk].data[compk][prack][dispk][areak][itemk].bases;
       },
       toRgbaHsv: function(hsv) {
-        return Vis.toRgbaHsv(hsv);
+        var hsu;
+        hsu = !hsv ? [30, 90, 90] : hsv;
+        return Vis.toRgbaHsv(hsu);
       }
     }
   };

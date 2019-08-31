@@ -18,14 +18,6 @@ NavMuse = class NavMuse {
     this.page = 'Icon';
     this.pages = ['Icon', 'Dirs', 'Conn', 'Summ', 'Desc'];
     this.compass = "";
-    this.subscribe();
-  }
-
-  subscribe() {
-    return this.stream.subscribe('Page', 'NavMuse', (page) => {
-      console.log('NavMuse.sub()', page);
-      return this.page = page;
-    });
   }
 
   pub(change) {
@@ -38,6 +30,7 @@ NavMuse = class NavMuse {
       disp: this.disp,
       page: this.page
     };
+    obj.source = change.source != null ? change.source : 'None';
     console.log('Nav.pub()', obj);
     this.stream.publish('Nav', obj);
   }
@@ -178,9 +171,11 @@ NavMuse = class NavMuse {
 
   routeLevel(level) {
     if (this.$router != null) {
-      this.$router.push({
-        name: level
-      });
+      if (this.$router.name !== level) {
+        this.$router.push({
+          name: level
+        });
+      }
     } else {
       console.error('Nav.routeLevel() $router not set');
     }

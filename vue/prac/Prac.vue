@@ -3,9 +3,9 @@
   <div   class="pane">
     <b-tabs :comp="comp" :pages="pages"></b-tabs>
     <div class="prac" :key="prac" :ref="prac" :title="prac">
-      <p-dirs v-show="pages['Dirs'].show" :comp="comp" :prac="pobj"></p-dirs>
-      <p-conn   v-if="pages['Conn'].show" :comp="comp" :prac="pobj"></p-conn>
-      <p-desc v-show="pages['Desc'].show" :comp="comp" :prac="pobj"></p-desc>
+      <p-dirs v-show="pages['Dirs'].show"></p-dirs>
+      <p-conn   v-if="pages['Conn'].show"></p-conn>
+      <p-desc v-show="pages['Desc'].show"></p-desc>
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@
     components:{ 'b-tabs':Tabs, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },
     
     data() { return {
-      comp:'None', prac:'None', pobj:null,
+      comp:'None',
       pages:{
         Dirs: { name:'Dirs', show:false },
         Conn: { name:'Conn', show:false },
@@ -34,25 +34,16 @@
           this.nav().page = 'Dirs'; }
         for( let pkey in this.pages ) {
           this.pages[pkey].show = pkey === this.nav().page; } },
-      doDisp: function (prac,disp) {
-        this.nav().pub( { level:'Disp', comp:this.comp, prac:prac, disp:disp } ); },
-      onPrac: function (prac) {
-        this.prac = prac;
-        this.pobj = this.pracs(this.comp)[this.prac]; },
-      onNav:  function (obj) {
-        this.onPage();
-        if( obj.level === 'Prac' ) {
-          this.onPrac(obj.prac); } },
       },
 
     beforeMount: function() {
       this.comp =  this.nav().comp;
-      this.onPrac( this.nav().prac );
       this.onPage(); },
 
     mounted: function () {
       this.subscribe(  "Nav", 'Prac.vue', (obj) => {
-        this.onNav(obj); } ); }
+        if( obj === false ) {} // obj ignored
+        this.onPage(); } ); }
   }
   
   export default Prac;

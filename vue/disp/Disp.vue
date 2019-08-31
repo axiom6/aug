@@ -2,7 +2,7 @@
 <template>
   <div class="disd" ref="Disp" title="Disp">
     <d-tabs :comp="comp" :pages="pages"></d-tabs>
-    <d-desc v-show="pages['Desc'].show" :comp="comp" :prac="prac" :disp="disp"></d-desc>
+    <d-desc v-show="pages['Desc'].show"></d-desc>
   </div>
 </template>
 
@@ -16,18 +16,21 @@
     components:{ 'd-tabs':Tabs, 'd-desc':Desc },
     
     data() { return {
-      comp:'None', prac:'None', disp:'None', pobj:null, dobj:null,
+      comp:'None', prac:'None', disp:'None',
       pages:{
         Desc: { name:'Desc', show:false } } } },
     
     methods: {
+      onDisp: function(disp) {
+        if( this.disp !== disp ) {
+            this.disp =   disp; } },
       onPage: function() {
         if( !this.isDef(this.pages[this.nav().page]) ) {
           this.nav().page = 'Desc'; }
         for( let pkey in this.pages ) {
           this.pages[pkey].show = pkey === this.nav().page; } },
       onNav:  function (obj) {
-        if( obj===false ) {}
+        this.onDisp(obj.disp)
         this.onPage(); } },
 
     beforeMount: function() {

@@ -7,7 +7,6 @@
         <p-icon v-show="pages['Icon'].show" :comp="comp" :prac="prac"></p-icon>
         <p-dirs v-show="pages['Dirs'].show" :comp="comp" :prac="prac"></p-dirs>
         <p-conn   v-if="pages['Conn'].show" :comp="comp" :prac="prac"></p-conn>
-     <!--p-desc v-show="pages['Desc'].show" :comp="comp" :prac="prac"></p-desc-->
       </div>
     </template>
     <template v-for="row in rows">
@@ -24,16 +23,15 @@
   import Icon from './Icon.vue';
   import Dirs from './Dirs.vue';
   import Conn from './Conn.vue';
-  import Desc from './Desc.vue';
   
   let Comp = {
 
-    components:{ 'b-tabs':Tabs, 'p-icon':Icon, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },
-    
-    props: { pcomp:{ type:String, default:'None' } },
+    components:{ 'b-tabs':Tabs, 'p-icon':Icon, 'p-dirs':Dirs, 'p-conn':Conn },
+
+    props: { prac:{ type:Object } },
     
     data() { return {
-      comp:'None', prac:'None', disp:'None', practices:{},
+      comp:'None', disp:'None', practices:{},
       pages:{
         Icon: { name:'Icon', show:false },
         Dirs: { name:'Dirs', show:false },
@@ -49,22 +47,22 @@
         for( let pkey in this.pages ) {
           this.pages[pkey].show = pkey === page; } },
       isRows: function () {
-        return this.prac==='All' },
+        return true; },
       onComp: function (comp) {
         this.comp = comp;
         this.practices = this.pracs(this.comp); },
       onPrac: function (prac) {
         this.prac = prac; },
-      onDisp: function (prac,disp) {
-        this.prac = prac; this.disp=disp; },
+      onDisp: function (disp) {
+        this.disp=disp; },
       onNone: function (obj) {
         console.error( 'Page Nav Error', { obj:obj } ); },
       onNav:  function (obj) {
         this.onPage(this.nav().page);
         switch( obj.level ) {
-          case 'Comp' : this.onComp(obj.comp);          break;
-          case 'Prac' : this.onPrac(obj.prac);          break;
-          case 'Disp' : this.onDisp(obj.prac,obj.disp); break;
+          case 'Comp' : this.onComp(obj.comp); break;
+          case 'Prac' : this.onPrac(obj.prac); break;
+          case 'Disp' : this.onDisp(obj.disp); break;
           default     : this.onNone(obj); } },
       },
 

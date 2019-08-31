@@ -13,7 +13,7 @@
     props: { comp:String, prac:Object },
 
     data() {
-      return { build:{}, connect:null,size:null }; },
+      return { build:null,  connect:null, size:null }; },
 
     methods: {
       doPrac: function (prac) {
@@ -43,14 +43,10 @@
             if( level==='Expand') { this.connect.lastSize(this.size) }
             this.connect.layout( this.size, level );  } ); }
     },
-
-    beforeMount: function() {
-      this.comp = this.nav().comp; },
+    
 
     mounted: function () {
       this.build     = new Build(  this.batch() );
-    //this.subscribe(  "Nav", 'Conn.vue', (obj) => {
-    //  this.onNav(obj); } );
     //this.createConnect( this.stream(), this.build );
       },
     
