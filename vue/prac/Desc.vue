@@ -1,15 +1,15 @@
 
 <template>
   <div   class="desd">
-    <div class="cen" :style="style(prac.hsv)" :ref="prac.name" :title="prac.name">
-      <div class="dead2"><d-icon :icon="prac.icon" :name="prac.name" :size="2" ></d-icon></div>
-      <div class="summ2">{{prac.desc}}</div>
+    <div class="cen" :style="style(pracObj.hsv)" :ref="pracObj.name" :title="pracObj.name">
+      <div class="dead2"><d-icon :icon="pracObj.icon" :name="pracObj.name" :size="2" ></d-icon></div>
+      <div class="summ2">{{pracObj.desc}}</div>
     </div>
-    <template  v-for="disp in prac.disps">
-        <div  :class="disp.dir" @click="doDisp(disp.name)" :style="style(disp.hsv)" :ref="disp.name" :title="disp.name">
-          <div class="dead2"><d-icon :icon="disp.icon" :name="disp.name" :size="2"></d-icon></div>
-          <div class="summ2">{{disp.desc}}</div>
-        </div>
+    <template  v-for="dispObj in pracObj.disps">
+      <div  :class="dispObj.dir" @click="doDisp(dispObj.name)" :style="style(dispObj.hsv)" :ref="dispObj.name">
+        <div class="dead2"><d-icon :icon="dispObj.icon" :name="dispObj.name" :size="2"></d-icon></div>
+        <div class="summ2">{{dispObj.desc}}</div>
+      </div>
   </template>
   </div>
 </template>
@@ -19,30 +19,24 @@
   import Icon from "../elem/Icon.vue"
 
   let Desc = {
-
-    props: {  },
     
     components: { 'd-icon':Icon },
 
-    data() { return { comp:"None", prac:null, page:"Desc" } },
+    props: { compKey:String, pracObj:Object },
 
+    data() { return { dispObj:null } },
+    
     methods: {
-      onPrac: function () {
-        this.comp = this.nav().comp;
-        this.prac = this.pracs(this.comp)[this.nav().prac]; },
-      doDisp: function (disp) {
-        this.nav().pub({level: 'Disp', prac: this.prac.name, disp:disp.name }) },
-      style: function (hsv) {
-        return {backgroundColor: this.toRgbaHsv(hsv)};},
+      
+      doPrac: function (pracKey) {
+        let obj = { level:"Prac", compKey:this.compKey, pracKey:pracKey };
+        this.nav.pub( obj ); },
+      doDisp: function (dispKey) {
+        let obj = { level:"Disp", compKey:this.compKey, pracKey:this.pracObj.name, dispKey:dispKey };
+        this.nav.pub( obj ); },
+      style: function( hsv ) {
+        return { backgroundColor:this.toRgbaHsv(hsv) }; }
     },
-
-    beforeMount: function() {
-      this.onPrac(); },
-
-    mounted: function () {
-      this.subscribe(  "Nav", this.comp+'Prac.Dirs.vue', (obj) => {
-        if( obj === false ) {} // obj ignored
-        this.onPrac();  } ); }
   }
   export default Desc;
 

@@ -1,10 +1,10 @@
 
 <template>
-  <div   class="desd" :style="style(dobj)">
-    <d-icon class="iconq" :icon="dobj.icon" :name="disp" :size="3" ></d-icon>
-    <div    class="summq">{{dobj.desc}}</div>
-    <template v-for="area in dobj.areas">
-      <d-icon :class="clArea()" :icon="area.icon" :name="area.name" :summ="tsSumm(area.desc)" :size="1.7" ></d-icon>
+  <div   class="desd" :style="style(dispObj)">
+    <d-icon class="iconq" :icon="dispObj.icon" :name="dispObj.name" :size="3" ></d-icon>
+    <div    class="summq">{{dispObj.desc}}</div>
+    <template v-for="areaObj in dispObj.areas">
+      <d-icon :class="clArea()" :icon="areaObj.icon" :name="areaObj.name" :summ="tsSumm(areaObj.desc)" :size="1.7" ></d-icon>
   </template>
   </div>
 </template>
@@ -14,17 +14,15 @@
   import Icon from "../elem/Icon.vue"
 
   let Desc = {
-
-    props: { comp:String, prac:String, disp:String },
     
     components: { 'd-icon':Icon },
 
-    data() { return { dobj:null, iarea:1 } },
+    data() { return { compKey:'None', pracKey:'None', dispObj:null, iarea:1 } },
 
     methods: {
       onDisp: function(disp) {
         this.disp =   disp;
-        this.dobj = this.pracs(this.comp)[this.prac][this.disp]; },
+        this.dispObj = this.pracs(this.comp)[this.prac][this.disp]; },
       style: function (dobj) {
         let hsv = this.isDef(dobj) ? dobj.hsv : [30,90,90];
         return {backgroundColor: this.toRgbaHsv(hsv)}; },

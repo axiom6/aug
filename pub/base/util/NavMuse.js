@@ -4,35 +4,39 @@ var NavMuse,
 import Build from '../../ikw/cube/Build.js';
 
 NavMuse = class NavMuse {
-  constructor(stream, batch, comp1) {
+  constructor(stream, batch, compKey1) {
     this.tap = this.tap.bind(this);
     this.dir = this.dir.bind(this);
     this.stream = stream;
     this.batch = batch;
-    this.comp = comp1;
+    this.compKey = compKey1;
     this.build = new Build(this.batch);
     this.$router = null;
-    this.level = 'Comp'; // Prac Disp Page
-    this.prac = 'None';
-    this.disp = 'None';
-    this.page = 'Icon';
-    this.pages = ['Icon', 'Dirs', 'Conn', 'Summ', 'Desc'];
+    this.level = 'Comp'; // Prac Disp
+    this.pracKey = 'None';
+    this.dispKey = 'None';
+    this.pageKey = 'Icon';
+    this.pageKeys = ['Icon', 'Dirs', 'Conn', 'Summ', 'Desc'];
     this.compass = "";
   }
 
   pub(change) {
-    var obj;
+    var levelChanged, obj;
+    levelChanged = (change.level != null) && change.level !== this.level;
     this.set(change);
     obj = {
       level: this.level,
-      comp: this.comp,
-      prac: this.prac,
-      disp: this.disp,
-      page: this.page
+      compKey: this.compKey,
+      pracKey: this.pracKey,
+      dispKey: this.dispKey,
+      pageKey: this.pageKey
     };
     obj.source = change.source != null ? change.source : 'None';
     console.log('Nav.pub()', obj);
     this.stream.publish('Nav', obj);
+    if (levelChanged) {
+      this.route(this.level);
+    }
   }
 
   set(obj) {
@@ -46,10 +50,10 @@ NavMuse = class NavMuse {
 
   setPages(array) {
     var i, len, obj;
-    this.pages = [];
+    this.pageKeys = [];
     for (i = 0, len = array.length; i < len; i++) {
       obj = array[i];
-      this.pages.push(obj.key);
+      this.pageKeys.push(obj.key);
     }
   }
 
@@ -84,9 +88,9 @@ NavMuse = class NavMuse {
   }
 
   dirComp(dir) {
-    this.comp = this.adjComp(this.comp, dir);
-    this.prac = this.build.getPractice(this.prac.row, this.prac.column, this.comp);
-    return this.disp = this.getDisp(this.prac, this.disp.dir);
+    this.compKey = this.adjComp(this.compKey, dir);
+    this.pracObj = this.build.getPractice(this.pracKey.row, this.pracKey.column, this.compKey);
+    return this.dispKey = this.getDisp(this.pracKey, this.dispKey.dir);
   }
 
   dirPrac(dir) {
@@ -96,15 +100,15 @@ NavMuse = class NavMuse {
     if (adj.name !== 'None') {
       obj = {};
       obj.level = this.level;
-      obj.comp = this.comp;
-      if (adj.name !== this.prac) {
+      obj.comp = this.compKey;
+      if (adj.name !== this.pracKey) {
         obj.prac = adj.name;
-        this.prac = adj.name;
+        this.pracKey = adj.name;
       }
-      if (adj.plane !== this.comp) {
+      if (adj.plane !== this.compKey) {
         obj.comp = adj.plane;
-        this.comp = adj.plane;
-        this.route(this.level, this.comp, this.page, obj);
+        this.compKey = adj.plane;
+        this.route(this.level, this.compKey, this.pageKey, obj);
       }
       this.pub(obj);
     }
@@ -112,8 +116,8 @@ NavMuse = class NavMuse {
 
   dirDisp(dir) {
     var adj, dis, obj, prc;
-    prc = this.pracs(this.comp)[this.prac];
-    dis = prc[this.disp];
+    prc = this.pracKeys(this.compKey)[this.pracKey];
+    dis = prc[this.dispKey];
     // if current prac.dir is dir or next or prev we will nav to adjacent prac
     if (dir === dis.dir || (dir === 'next' || dir === 'prev')) {
       adj = this.adjPrac(dir);
@@ -125,15 +129,15 @@ NavMuse = class NavMuse {
     if (adj.name !== 'None') {
       obj = {};
       obj.level = this.level;
-      obj.comp = this.comp;
+      obj.comp = this.compKey;
       obj.prac = adj.name;
-      this.prac = adj.name;
+      this.pracKey = adj.name;
       obj.disp = dis.name;
-      this.disp = dis.name;
-      if (adj.plane !== this.comp) {
+      this.dispKey = dis.name;
+      if (adj.plane !== this.compKey) {
         obj.comp = adj.plane;
-        this.comp = adj.plane;
-        this.route(this.level, this.comp, this.page, obj);
+        this.compKey = adj.plane;
+        this.route(this.level, this.compKey, this.pageKey, obj);
       }
       this.pub(obj);
     }
@@ -141,21 +145,21 @@ NavMuse = class NavMuse {
 
   dirPage(dir) {
     var idx, obj, page;
-    if (this.pages.length > 0 && this.page !== 'None') {
-      idx = this.pages.indexOf(this.page);
-      if (dir === 'east' && idx < this.pages.length - 1) {
-        page = this.pages[idx++];
+    if (this.pageKeys.length > 0 && this.pageKey !== 'None') {
+      idx = this.pageKeys.indexOf(this.pageKey);
+      if (dir === 'east' && idx < this.pageKeys.length - 1) {
+        page = this.pageKeys[idx++];
       }
       if (dir === 'west' && idx > 1) {
-        page = this.pages[idx--];
+        page = this.pageKeys[idx--];
       }
-      if (page !== this.page) {
+      if (page !== this.pageKey) {
         obj = {};
         obj.level = this.level;
-        obj.comp = this.comp;
-        obj.page = page;
-        this.page = page;
-        this.route(this.level, this.comp, this.page, obj);
+        obj.compKey = this.compKey;
+        obj.pageKey = page;
+        this.pageKey = page;
+        this.routeCompPage(this.compKey, this.pageKey);
       }
     } else {
       this.dirNone(dr);
@@ -169,31 +173,19 @@ NavMuse = class NavMuse {
     });
   }
 
-  routeLevel(level) {
-    if (this.$router != null) {
-      if (this.$router.name !== level) {
-        this.$router.push({
-          name: level
-        });
-      }
-    } else {
-      console.error('Nav.routeLevel() $router not set');
-    }
-  }
-
-  route(comp, page = null) {
+  route(level, compKey = null, pageKey = null) {
     var name;
-    name = page != null ? comp + page : comp;
+    name = pageKey != null ? compKey + pageKey : compKey ? compKey : level;
     if (this.$router != null) {
       this.$router.push({
         name: name
       });
     } else {
-      console.error('Nav.router() $router not set');
+      console.error('Nav.routeLevel() $router not set');
     }
   }
 
-  adjComp(comp, dir) {
+  adjComp(compKey, dir) {
     var adjDir;
     adjDir = (function() {
       switch (dir) {
@@ -214,25 +206,25 @@ NavMuse = class NavMuse {
       }
     })();
     if (adjDir === 'next') {
-      return this.build.next(comp);
+      return this.build.next(compKey);
     } else {
-      return this.build.prev(comp);
+      return this.build.prev(compKey);
     }
   }
 
   adjPrac(dir) {
-    var adj, prc;
-    prc = this.pracs(this.comp)[this.prac];
-    adj = this.build.adjacentPractice(prc, dir);
-    // console.log( 'Nav.adjPrac()', { dor:dir, prc:prc, adj:adj } )
-    return adj;
+    var adjcObj, pracObj;
+    pracObj = this.pracs(this.compKey)[this.pracKey];
+    adjcObj = this.build.adjacentPractice(pracObj, dir);
+    // console.log( 'Nav.adjPrac()', { dir:dir, pracObj:pracObj, adjcObj:adjcObj } )
+    return adjcObj;
   }
 
-  getDisp(prac, dirDisp) {
-    var disp;
-    disp = this.build.getDir(prac, dirDisp);
+  getDisp(pracObj, dirDisp) {
+    var dispObj;
+    dispObj = this.build.getDir(pracObj, dirDisp);
     // console.log( 'Nav.getDisp()', { dir:dir, prac:prac, disp:disp } )
-    return disp;
+    return dispObj;
   }
 
   adjDir(dir) {
@@ -250,12 +242,12 @@ NavMuse = class NavMuse {
     }
   }
 
-  pracs(comp) {
-    return this.batch[comp].data[comp].pracs;
+  pracs(compKey) {
+    return this.batch[compKey].data[compKey].pracs;
   }
 
-  disps(comp, prac) {
-    return this.batch[comp].data[comp][prac].disps;
+  disps(compKey, pracKey) {
+    return this.batch[compKey].data[compKey][pracKey].disps;
   }
 
 };

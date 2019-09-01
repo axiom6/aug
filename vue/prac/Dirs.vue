@@ -1,19 +1,19 @@
 
 <template>
   <div class="dirs">
-    <div class="cen" :style="style(prac.hsv)">
-      <div class="disp" @click="doPrac(prac.name)">
-        <i   :class="prac.icon"></i>
-        <span class="name">{{prac.name}}</span>
-        <span class="desc">{{prac.desc}}</span>
+    <div class="cen" :style="style(pracObj.hsv)">
+      <div class="disp" @click="doPrac(pracObj.name)">
+        <i   :class="pracObj.icon"></i>
+        <span class="name">{{pracObj.name}}</span>
+        <span class="desc">{{pracObj.desc}}</span>
       </div>
     </div>
-    <template  v-for="disp in prac.disps">
-      <div :class="disp.dir" :style="style(disp.hsv)" :ref="disp.name" :title="disp.name">
-        <div class="disp" @click="doDisp(disp.name)">
-          <i   :class="disp.icon"></i>
-          <span class="name">{{disp.name}}</span>
-          <span class="desc">{{disp.desc}}</span>
+    <template  v-for="dispObj in pracObj.disps">
+      <div :class="dispObj.dir" :style="style(dispObj.hsv)" :ref="dispObj.name" :title="dispObj.name">
+        <div class="disp" @click="doDisp(dispObj.name)">
+          <i   :class="dispObj.icon"></i>
+          <span class="name">{{dispObj.name}}</span>
+          <span class="desc">{{dispObj.desc}}</span>
         </div>
       </div>
     </template>
@@ -24,27 +24,20 @@
 
   let Dirs = {
 
-    data() { return { comp:'None', prac:null } }, // prac is obj
+    props: { compKey:String, pracObj:Object },
+
+    data() { return { dispObj:null } },
 
     methods: {
-      
-      onPrac: function () {
-        this.comp = this.nav().comp;
-        this.prac = this.pracs(this.comp)[this.nav().prac]; },
-      doPrac: function (name) {
-        this.nav().pub( { prac:name } ); },
-      doDisp: function (name) {
-        this.nav().pub( { disp:name } ); },
+
+      doPrac: function (pracKey) {
+        let obj = { level:"Prac", compKey:this.compKey, pracKey:pracKey };
+        this.nav.pub( obj ); },
+      doDisp: function (dispKey) {
+        let obj = { level:"Disp", compKey:this.compKey, pracKey:this.pracObj.name, dispKey:dispKey };
+        this.nav.pub( obj ); },
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; } },
-
-    beforeMount: function() {
-      this.onPrac(); },
-
-    mounted: function () {
-      this.subscribe(  "Nav", this.comp+'Prac.Dirs.vue', (obj) => {
-        if( obj === false ) {} // obj ignored
-        this.onPrac();  } ); }
     
   }
 

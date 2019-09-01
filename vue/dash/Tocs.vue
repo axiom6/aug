@@ -6,11 +6,11 @@
       <div   v-on:click="doComp(komp.name)">
         <div><i :class="komp.icon"></i>{{komp.name}}</div>
       </div>
-      <ul v-if="compn===komp.name"><template v-for="prac in komps[komp.name].pracs" >
+      <ul v-if="compKey===komp.name"><template v-for="prac in komps[komp.name].pracs" >
         <li v-on:click="doPrac(prac.name)" :style="stylePrac(prac.hsv)" :key="prac.name">
           <i :class="prac.icon"></i>
           <span        v-if="!komp.link">{{prac.name}}</span>
-          <ul v-show="pracn===prac.name"><template v-for="disp in prac.disps">
+          <ul v-show="pracKey===prac.name"><template v-for="disp in prac.disps">
             <li v-on:click.stop="doDisp(disp.name)" :style="styleDisp(disp.hsv)" :key="disp.name">
               <i :class="disp.icon"></i>{{disp.name}}</li>
           </template></ul>
@@ -24,36 +24,32 @@
 <script type="module">
   
   let Tocs = {
-
-    props: { prac:{ type:Object, default:null } },
     
-    data: function() { return { komps:{}, compn:'None', pracn:'None', dispn:'None' } },
+    data: function() { return { komps:{}, compKey:'None', pracKey:'None', dispKey:'None' } },
     
     methods: {
       
-      onPage: function (obj) {
-        console.log( 'Tocs.onPage()', obj ); },
-      doComp: function(compn) {
-        this.compn  =  compn;
-        let obj   = { level:'Comp', comp:compn, page:this.nav().page, source:'Toc' }
+      doComp: function(compKey) {
+        this.compKey =  compKey;
+        let obj      = { level:'Comp', compKey:compKey, page:this.nav().pageKey, source:'Toc' }
         this.nav().pub(obj);
-        this.nav().routeLevel('Comp'); },
-      doPrac: function(pracn) {
-        this.pracn  =  pracn
-        let obj   = { level:'Prac', prac:pracn, page:'Dirs', source:'Toc' }
+        this.nav().route('Comp'); },
+      doPrac: function(pracKey) {
+        this.pracKey =  pracKey
+        let obj      = { level:'Prac', pracKey:pracKey, pageKey:'Dirs', source:'Toc' }
         this.nav().pub(obj);
-        this.nav().routeLevel('Prac'); },
-      doDisp: function(dispn) {
-        this.dispn  =  dispn;
-        let obj   = { level:'Disp', disp:dispn, source:'Toc' }
+        this.nav().route('Prac'); },
+      doDisp: function(dispKey) {
+        this.dispKey =  dispKey;
+        let obj      = { level:'Disp', dispKey:dispKey, source:'Toc' }
         this.nav().pub(obj);
-        this.nav().routeLevel('Disp'); },
+        this.nav().route('Disp'); },
       onNav:  function (obj) {
         if( obj.source !== 'Toc' ) {
           switch( obj.level ) {
-            case 'Comp' : this.compn = obj.comp; break;
-            case 'Prac' : this.pracn = obj.prac; break;
-            case 'Disp' : this.dispn = obj.disp; break;
+            case 'Comp' : this.compKey = obj.compKey; break;
+            case 'Prac' : this.pracKey = obj.pracKey; break;
+            case 'Disp' : this.dispKey = obj.dispKey; break;
             default     : this.onNone(obj); } } },
       onNone: function (obj) {
         console.log( 'Tocs.onNone()', obj ); },

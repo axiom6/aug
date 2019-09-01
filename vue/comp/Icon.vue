@@ -1,8 +1,8 @@
 
 <template>
-  <div  class="icon" @click="doPrac(prac)">
-    <i  :class="prac.icon"></i>
-    <div class="name">{{prac.name}}</div>
+  <div  class="icon" @click="doPrac(pracObj.name)">
+    <i  :class="pracObj.icon"></i>
+    <div class="name">{{pracObj.name}}</div>
   </div>
 </template>
 
@@ -10,13 +10,14 @@
   
   let Icon = {
     
-    props: { comp:String, prac:Object },
+    props: { compKey:String, pracObj:Object },
     
     data() { return { } },
     
     methods: {
-      doPrac: function (prac) {
-        this.nav().pub( { prac:prac.name } ); } }
+      doPrac: function (pracKey) {
+        let obj = { level:"Prac", compKey:this.compKey, pracKey:pracKey };
+        this.nav.pub( obj ); } }
   }
   export default Icon;
   

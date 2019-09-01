@@ -222,6 +222,12 @@ Main = (function() {
       bases: function(compk, prack, dispk, areak, itemk) {
         return Main.Batch[compk].data[compk][prack][dispk][areak][itemk].bases;
       },
+      pracObject: function(compKey, pracKey) {
+        return this.pracs(compKey)[pracKey];
+      },
+      dispObject: function(compKey, pracKey, dispKey) {
+        return this.disps(compKey, pracKey)[dispKey];
+      },
       toRgbaHsv: function(hsv) {
         var hsu;
         hsu = !hsv ? [30, 90, 90] : hsv;

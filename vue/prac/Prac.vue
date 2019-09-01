@@ -1,11 +1,11 @@
 
 <template>
   <div   class="pane">
-    <b-tabs :comp="cname" :pages="pages"></b-tabs>
-    <div class="prac" :key="pname" :ref="pname" :title="pname">
-      <p-dirs v-show="pages['Dirs'].show"></p-dirs>
-      <p-conn   v-if="pages['Conn'].show"></p-conn>
-      <p-desc v-show="pages['Desc'].show"></p-desc>
+    <b-tabs :pages="pages"></b-tabs>
+    <div class="prac" :key="pracKey" :ref="pracKey" :title="pracKey">
+      <p-dirs v-show="pages['Dirs'].show" :pracObj="pracObj"></p-dirs>
+      <p-conn   v-if="pages['Conn'].show" :pracObj="pracObj"></p-conn>
+      <p-desc v-show="pages['Desc'].show" :pracObj="pracObj"></p-desc>
     </div>
   </div>
 </template>
@@ -21,34 +21,31 @@
 
     components:{ 'b-tabs':Tabs, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },
     
-    // props: { prac:Object },
-    
     data() { return {
-      cname:'None', pname:'None', page:'None', prac:null,
+      compKey:'None', pracKey:null, pracObj:null,
       pages:{
         Dirs: { name:'Dirs', show:false },
         Conn: { name:'Conn', show:false },
         Desc: { name:'Desc', show:false } } } },
     
     methods: {
-      onPrac: function(pname) {
-        this.pname = pname;
-        this.prac  = this.pracs(this.cname)[pname]; },
+      onPrac: function(pracKey) {
+        this.pracKey = pracKey;
+        this.pracObj = this.pracObject( this.compKey,pracKey ); },
       onPage: function(page) {
-        this.page = page;
         for( let pkey in this.pages ) {
           this.pages[pkey].show = pkey === page; } },
       },
 
     beforeMount: function() {
-      this.cname = this.nav().comp;
-      this.onPrac( this.nav().prac );  // onPage() here ?
-      this.onPage( this.nav().page ); },
+      this.compKey = this.nav().compKey;
+      this.onPrac(   this.nav().pracKey );  // onPage() here ?
+      this.onPage(   this.nav().pageKey ); },
 
     mounted: function () {
       this.subscribe(  "Nav", 'Prac.vue', (obj) => {
-        this.onPrac( obj.prac );
-        this.onPage( obj.page ); } ); }
+        this.onPrac( obj.pracKey );
+        this.onPage( obj.pageKey ); } ); }
   }
   
   export default Prac;

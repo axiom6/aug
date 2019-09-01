@@ -20,7 +20,7 @@
         // console.log( 'Tabs.onPage()', { page:page, tabs:this.page } );
         this.page = page; },
       doPage: function (page) {
-        this.nav().pub( { page:page.name } ); },
+        this.nav().pub( { pageKey:page.name } ); },
       clPage: function (name) {
         return this.page===name ? 'tab-active' : 'tab'; } },
 

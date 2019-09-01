@@ -1,20 +1,19 @@
 
 <template>
-  <div class="dirs" prac="prac">
-    <div class="cen" :style="style(prac.hsv)">
-      <div class="disp" @click="doPrac(prac)">
-        <i   :class="prac.icon"></i>
-        <span class="name">{{prac.name}}</span>
-        <span class="desc">{{prac.desc}}</span>
+  <div class="dirs" :pracObj="pracObj">
+    <div class="cen" :style="style(pracObj.hsv)">
+      <div class="disp" @click="doPrac(pracObj.name)">
+        <i   :class="pracObj.icon"></i>
+        <span class="name">{{pracObj.name}}</span>
+        <span class="desc">{{pracObj.desc}}</span>
       </div>
     </div>
-    <template  v-for="disp in prac.disps">
-      <div :class="disp.dir" :style="style(disp.hsv)"
-        :ref="disp.name" :title="disp.name">
-        <div class="disp" @click="doDisp(prac.name,disp.name)">
-          <i   :class="disp.icon"></i>
-          <span class="name">{{disp.name}}</span>
-          <span class="desc">{{disp.desc}}</span>
+    <template  v-for="dispObj in pracObj.disps">
+      <div :class="dispObj.dir" :style="style(dispObj.hsv)"  :ref="dispObj.name" :title="dispObj.name">
+        <div class="disp" @click="doDisp(prac.name,dispObj.name)">
+          <i   :class="dispObj.icon"></i>
+          <span class="name">{{dispObj.name}}</span>
+          <span class="desc">{{dispObj.desc}}</span>
         </div>
       </div>
     </template>
@@ -25,16 +24,18 @@
 
   let Dirs = {
 
-    props: { comp:String, prac:Object },
+    props: { compKey:String, pracObj:Object },
 
-    data() { return { disp:"None" } },
+    data() { return { dispObj:null } },
 
     methods: {
       
-      doPrac: function (prac) {
-        publish( this.comp, prac ); },
-      doDisp: function (prac,disp) {
-        this.publish( this.comp, { prac:prac, disp:disp } ); },
+      doPrac: function (pracKey) {
+        let obj = { level:"Prac", compKey:this.compKey, pracKey:pracKey };
+        this.nav.pub( obj ); },
+      doDisp: function (pracKey,dispKey) {
+        let obj = { level:"Disp", compKey:this.compKey, pracKey:pracKey, dispKey:dispKey };
+        this.nav.pub( obj ); },
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; } },
 
@@ -54,7 +55,7 @@
 
   .ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }
   
-  .dirs { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;
+  .dirs { display:grid; align-self:stretch; justify-self:stretch; align-items:center; justify-items:center;
     color:black; text-align:center; font-weight:bold; .theme-dirs();
     
       .grid3x3(); // The 4 Displine plus Practiice name Grid

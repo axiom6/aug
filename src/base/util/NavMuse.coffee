@@ -3,22 +3,25 @@ import Build from '../../ikw/cube/Build.js';
 
 class NavMuse
 
-  constructor:( @stream,   @batch, @comp ) ->
-    @build   =  new Build( @batch )
-    @$router =  null
-    @level   =  'Comp' # Prac Disp Page
-    @prac    =  'None'
-    @disp    =  'None'
-    @page    =  'Icon'
-    @pages   = ['Icon','Dirs','Conn','Summ','Desc']
-    @compass =   ""
+  constructor:( @stream,   @batch, @compKey ) ->
+    @build    =  new Build( @batch )
+    @$router  =  null
+    @level    =  'Comp' # Prac Disp
+    @pracKey  =  'None'
+    @dispKey  =  'None'
+    @pageKey  =  'Icon'
+    @pageKeys = ['Icon','Dirs','Conn','Summ','Desc']
+    @compass  =   ""
+
 
   pub:(   change ) ->
+    levelChanged = change.level? and change.level isnt @level
     @set( change )
-    obj = { level:@level, comp:@comp, prac:@prac, disp:@disp, page:@page }
+    obj = { level:@level, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey, pageKey:@pageKey }
     obj.source = if change.source? then change.source else 'None'
     console.log('Nav.pub()', obj )
     @stream.publish( 'Nav',  obj )
+    @route( @level ) if levelChanged
     return
 
   set:( obj ) ->
@@ -27,9 +30,9 @@ class NavMuse
     return
 
   setPages:( array ) ->
-    @pages = []
+    @pageKeys = []
     for obj in array
-      @pages.push( obj.key )
+      @pageKeys.push( obj.key )
     return
 
   tap:() =>
@@ -49,9 +52,9 @@ class NavMuse
     return
 
   dirComp:( dir ) ->
-    @comp = @adjComp( @comp, dir )
-    @prac = @build.getPractice( @prac.row, @prac.column, @comp )
-    @disp = @getDisp( @prac, @disp.dir )
+    @compKey = @adjComp( @compKey, dir )
+    @pracObj = @build.getPractice( @pracKey.row, @pracKey.column, @compKey )
+    @dispKey = @getDisp( @pracKey, @dispKey.dir )
 
   dirPrac:( dir ) ->
     adj = @adjPrac( dir )
@@ -59,20 +62,20 @@ class NavMuse
     if adj.name isnt 'None'
       obj = {}
       obj.level = @level
-      obj.comp  = @comp
-      if adj.name  isnt @prac
+      obj.comp  = @compKey
+      if adj.name  isnt @pracKey
          obj.prac  = adj.name
-         @prac     = adj.name
-      if adj.plane isnt @comp
+         @pracKey     = adj.name
+      if adj.plane isnt @compKey
          obj.comp  = adj.plane
-         @comp     = adj.plane
-         @route( @level, @comp, @page, obj )
+         @compKey     = adj.plane
+         @route( @level, @compKey, @pageKey, obj )
       @pub( obj )
     return
 
   dirDisp:( dir ) ->
-    prc = @pracs(@comp)[@prac] # Here adj is current practice
-    dis = prc[@disp]
+    prc = @pracKeys(@compKey)[@pracKey] # Here adj is current practice
+    dis = prc[@dispKey]
 
     # if current prac.dir is dir or next or prev we will nav to adjacent prac
     if dir is dis.dir or ( dir is 'next' or dir is 'prev')
@@ -85,30 +88,30 @@ class NavMuse
     if adj.name isnt 'None'
        obj = {}
        obj.level = @level
-       obj.comp  = @comp
+       obj.comp  = @compKey
        obj.prac  = adj.name
-       @prac     = adj.name
+       @pracKey     = adj.name
        obj.disp  = dis.name
-       @disp     = dis.name
-       if adj.plane isnt @comp
+       @dispKey     = dis.name
+       if adj.plane isnt @compKey
           obj.comp = adj.plane
-          @comp    = adj.plane
-          @route( @level, @comp, @page, obj )
+          @compKey    = adj.plane
+          @route( @level, @compKey, @pageKey, obj )
        @pub( obj )
     return
 
   dirPage:( dir ) ->
-    if @pages.length > 0 and @page isnt 'None'
-      idx  = @pages.indexOf(@page)
-      page = @pages[idx++] if dir is 'east' and idx < @pages.length-1
-      page = @pages[idx--] if dir is 'west' and idx > 1
-      if page isnt @page
+    if @pageKeys.length > 0 and @pageKey isnt 'None'
+      idx  = @pageKeys.indexOf(@pageKey)
+      page = @pageKeys[idx++] if dir is 'east' and idx < @pageKeys.length-1
+      page = @pageKeys[idx--] if dir is 'west' and idx > 1
+      if page isnt @pageKey
          obj = {}
-         obj.level = @level
-         obj.comp  = @comp
-         obj.page   = page
-         @page      = page
-         @route( @level, @comp, @page, obj )
+         obj.level   = @level
+         obj.compKey = @compKey
+         obj.pageKey = page
+         @pageKey    = page
+         @routeCompPage( @compKey, @pageKey )
     else
       @dirNone(  dr )
     return
@@ -117,22 +120,21 @@ class NavMuse
     console.error( 'Nav.dirNone unknown dir', { dir:dir, level:@level } )
     return
 
-  routeLevel:( level ) ->
-    if @$router?
-       @$router.push( { name:level } ) # if @$router.name isnt level
-    else
-      console.error( 'Nav.routeLevel() $router not set' )
-    return
-
-  route:( comp, page=null ) ->
-    name = if page? then comp+page else comp
+  route:( level,   compKey=null, pageKey=null ) ->
+    name = if      pageKey?
+                   compKey+pageKey
+           else if compKey
+                   compKey
+           else
+                   level
     if @$router?
        @$router.push( { name:name } )
     else
-       console.error( 'Nav.router() $router not set' )
+       console.error( 'Nav.routeLevel() $router not set' )
     return
 
-  adjComp:( comp, dir ) ->
+
+  adjComp:( compKey, dir ) ->
     adjDir = switch  dir
       when 'west'  then 'prev'
       when 'north' then 'prev'
@@ -141,18 +143,18 @@ class NavMuse
       when 'prev'  then 'prev'
       when 'next'  then 'next'
       else              'next'
-    return if adjDir is 'next' then @build.next(comp) else @build.prev(comp)
+    return if adjDir is 'next' then @build.next(compKey) else @build.prev(compKey)
 
   adjPrac:( dir ) ->
-    prc = @pracs(@comp)[@prac]
-    adj = @build.adjacentPractice(prc,dir)
-    # console.log( 'Nav.adjPrac()', { dor:dir, prc:prc, adj:adj } )
-    adj
+    pracObj = @pracs(@compKey)[@pracKey]
+    adjcObj = @build.adjacentPractice(pracObj,dir)
+    # console.log( 'Nav.adjPrac()', { dir:dir, pracObj:pracObj, adjcObj:adjcObj } )
+    adjcObj
 
-  getDisp:( prac, dirDisp ) ->
-    disp = @build.getDir( prac, dirDisp )
+  getDisp:( pracObj, dirDisp ) ->
+    dispObj = @build.getDir( pracObj, dirDisp )
     # console.log( 'Nav.getDisp()', { dir:dir, prac:prac, disp:disp } )
-    disp
+    dispObj
 
   adjDir:( dir ) ->
     switch dir
@@ -162,10 +164,10 @@ class NavMuse
       when 'south' then 'north'
       else              'west'
 
-  pracs:(  comp ) ->
-    @batch[comp].data[comp].pracs
+  pracs:(  compKey ) ->
+    @batch[compKey].data[compKey].pracs
 
-  disps:(  comp, prac ) ->
-    @batch[comp].data[comp][prac].disps
+  disps:(  compKey, pracKey ) ->
+    @batch[compKey].data[compKey][pracKey].disps
 
 export default NavMuse

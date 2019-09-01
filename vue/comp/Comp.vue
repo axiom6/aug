@@ -1,17 +1,17 @@
 
 <template>
   <div class="comp" ref="Comp" title="Comp">
-    <b-tabs :comp="cname" :pages="pages"></b-tabs>
-    <template v-for="prac in practices">
-      <div :class="prac.dir" :key="prac.name" :ref="prac.name" :title="prac.name">
-        <p-icon v-show="pages['Icon'].show" :comp="comp" :prac="prac"></p-icon>
-        <p-dirs v-show="pages['Dirs'].show" :comp="comp" :prac="prac"></p-dirs>
-        <p-conn   v-if="pages['Conn'].show" :comp="comp" :prac="prac"></p-conn>
+    <b-tabs :pages="pages"></b-tabs>
+    <template v-for="pracObj in practices">
+      <div   :class="pracObj.dir" :key="pracObj.name" :ref="pracObj.name" :title="pracObj.name">
+        <p-icon v-show="pages['Icon'].show" :compKey="compKey" :pracObj="pracObj"></p-icon>
+        <p-dirs v-show="pages['Dirs'].show" :compKey="compKey" :pracObj="pracObj"></p-dirs>
+        <p-conn   v-if="pages['Conn'].show" :compKey="compKey" :pracObj="pracObj"></p-conn>
       </div>
     </template>
     <template v-for="row in rows">
       <div v-show="isRows()" :class="row.dir" :key="row.name">
-        <p-icon :comp="comp" :prac="row"></p-icon>
+        <p-icon :compKey="compKey" :pracObj="row"></p-icon>
       </div>
     </template>
   </div>
@@ -27,11 +27,9 @@
   let Comp = {
 
     components:{ 'b-tabs':Tabs, 'p-icon':Icon, 'p-dirs':Dirs, 'p-conn':Conn },
-
-    props: { comp:Object, prac:Object },
     
     data() { return {
-      cname:'None', pname:'None', dname:'None', practices:{},
+      compKey:'None', pracObj:null, practices:{},
       pages:{
         Icon: { name:'Icon', show:false },
         Dirs: { name:'Dirs', show:false },
@@ -47,30 +45,23 @@
           this.pages[pkey].show = pkey === page; } },
       isRows: function () {
         return true; },
-      onComp: function (cname) {
-        this.cname = cname;
-        this.practices = this.pracs(this.cname); },
-      onPrac: function (pname) {
-        this.pname = pname; },
-      onDisp: function (dname) {
-        this.dname=dname; },
+      onComp: function (compKey) {
+        this.compKey  = compKey;
+        this.practices = this.pracs(this.compKey); },
       onNone: function (obj) {
         console.error( 'Page Nav Error', { obj:obj } ); },
       onNav:  function (obj) {
         this.onPage(this.nav().page);
-        switch( obj.level ) {
-          case 'Comp' : this.onComp(obj.comp); break;
-          case 'Prac' : this.onPrac(obj.prac); break;
-          case 'Disp' : this.onDisp(obj.disp); break;
-          default     : this.onNone(obj); } },
+        if( obj.level === 'Comp') {
+          this.onComp(obj.compKey); } }
       },
 
     beforeMount: function() {
-      this.cname = this.nav().comp;
+      this.compKey = this.nav().compKey;
       this.onPage(this.nav().page); },
 
     mounted: function () {
-      this.practices = this.pracs(this.cname);
+      this.practices = this.pracs(this.compKey);
       this.subscribe( 'Nav', 'Comp.vue', (obj) => {
         this.onNav(obj); } ); }
   }
