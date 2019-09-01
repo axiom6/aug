@@ -56,8 +56,10 @@ class Connect
     g.sx = compWidth /g.w
     g.sy = compHeight/g.h
     g.s  = Math.min( g.sx, g.sy )
-    g.fontSize  = '2em' # @toVh( 5 )+'vh'
-    g.iconSize  = '2em' # @toVh( 5 )+'vh'
+    g.scaleFont = g.h / 150
+    g.fontSize  = 2.0*g.scaleFont+'rem'
+    g.iconSize  = 2.0*g.scaleFont+'rem'
+    g.dispSize  = 0.8*g.scaleFont+'rem'
     g
 
   toFill:( hsv ) ->

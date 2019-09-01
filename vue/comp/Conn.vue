@@ -1,6 +1,6 @@
 
 <template>
-  <div :ref="prac.name" class="conn" @click="doPrac(prac.name)"></div>
+  <div class="conn" @click="doPrac(pracObj.name)" :ref="pracObj.name" ></div>
 </template>
 
 <script type="module">
@@ -10,45 +10,45 @@
 
   let Conn = {
 
-    props: { comp:String, prac:Object },
+    props: { pracObj:Object },
 
     data() {
-      return { build:null,  connect:null, size:null }; },
+      return { build:null, connect:null, size:null }; },
 
     methods: {
-      doPrac: function (prac) {
-        this.nav().pub( { prac:prac.name } ); },
-      calcSize: function(elem) {        // Should only be called by $nextTick()
+      
+      doPrac: function (pracKey) {
+        this.nav().pub( { pracKey:pracKey } ); },
+      
+      calcSize: function(elem) { // Should only be called within $nextTick()
         let sz   = {}
       //sz.compWidth  = this.$refs['Conn']['clientWidth' ];
       //sz.compHeight = this.$refs['Conn']['clientHeight'];
-        sz.elemWidth  = 383; // elem['clientWidth' ];
-        sz.elemHeight = 130; // elem['clientHeight'];
+        sz.elemWidth  = elem['clientWidth' ];
+        sz.elemHeight = elem['clientHeight'];
         sz.elem = elem;
-        sz.name = this.prac.name
-        console.log( 'Conn.calcSize()', sz );
-        return sz;
-      },
+        sz.name = this.pracObj.name
+      //console.log( 'Conn.calcSize()', sz );
+        return sz; },
+      
       createConnect: function( stream, build ) {
         this.$nextTick( function() {
-          let prac = this.prac;
-          if( prac.row !== 'Dim' ) {
-            let elem  = this.$refs[prac.name];
-            this.size = this.calcSize(elem);
-            this.connect = new Connect( stream, build, prac, elem, this.size ); } } ) },
+          if( this.pracObj.row !== 'Dim' ) {
+            let elem  = this.$refs[this.pracObj.name];
+          //console.log( 'Conn.createConnect', { refs:this.$refs, elem:elem } );
+            this.size    = this.calcSize(elem);
+            this.connect = new Connect( stream, build, this.pracObj, elem, this.size ); } } ) },
+      
       resize: function() {
-        
         this.$nextTick( function() {
             let level = 'Resize';  // 'Restore' 'Expand' requires 'Comp' sizes
             if( level==='Expand') { this.connect.lastSize(this.size) }
             this.connect.layout( this.size, level );  } ); }
     },
     
-
     mounted: function () {
       this.build     = new Build(  this.batch() );
-    //this.createConnect( this.stream(), this.build );
-      },
+      this.createConnect( this.stream(), this.build ); },
     
     //created: function () {
     //  window.addEventListener(   'resize', this.resize ) },

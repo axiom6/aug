@@ -222,6 +222,9 @@ Main = (function() {
       bases: function(compk, prack, dispk, areak, itemk) {
         return Main.Batch[compk].data[compk][prack][dispk][areak][itemk].bases;
       },
+      compObject: function(compKey) {
+        return Main.Batch[compKey].data[compKey].pracs;
+      },
       pracObject: function(compKey, pracKey) {
         return this.pracs(compKey)[pracKey];
       },

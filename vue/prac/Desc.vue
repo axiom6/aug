@@ -1,12 +1,12 @@
 
 <template>
   <div   class="desd">
-    <div class="cen" :style="style(pracObj.hsv)" :ref="pracObj.name" :title="pracObj.name">
+    <div class="cen" @click="doPrac(pracObj.name)" :style="style(pracObj.hsv)">
       <div class="dead2"><d-icon :icon="pracObj.icon" :name="pracObj.name" :size="2" ></d-icon></div>
       <div class="summ2">{{pracObj.desc}}</div>
     </div>
     <template  v-for="dispObj in pracObj.disps">
-      <div  :class="dispObj.dir" @click="doDisp(dispObj.name)" :style="style(dispObj.hsv)" :ref="dispObj.name">
+      <div  :class="dispObj.dir" @click="doDisp(dispObj.name)" :style="style(dispObj.hsv)">
         <div class="dead2"><d-icon :icon="dispObj.icon" :name="dispObj.name" :size="2"></d-icon></div>
         <div class="summ2">{{dispObj.desc}}</div>
       </div>
@@ -22,17 +22,17 @@
     
     components: { 'd-icon':Icon },
 
-    props: { compKey:String, pracObj:Object },
+    props: { pracObj:Object },
 
     data() { return { dispObj:null } },
     
     methods: {
       
       doPrac: function (pracKey) {
-        let obj = { level:"Prac", compKey:this.compKey, pracKey:pracKey };
+        let obj = { level:"Prac", pracKey:pracKey };
         this.nav.pub( obj ); },
       doDisp: function (dispKey) {
-        let obj = { level:"Disp", compKey:this.compKey, pracKey:this.pracObj.name, dispKey:dispKey };
+        let obj = { level:"Disp", pracKey:this.pracObj.name, dispKey:dispKey };
         this.nav.pub( obj ); },
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; }

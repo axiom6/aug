@@ -1,6 +1,6 @@
 
 <template>
-  <div class="dirs" :pracObj="pracObj">
+  <div class="dirs">
     <div class="cen" :style="style(pracObj.hsv)">
       <div class="disp" @click="doPrac(pracObj.name)">
         <i   :class="pracObj.icon"></i>
@@ -24,22 +24,20 @@
 
   let Dirs = {
 
-    props: { compKey:String, pracObj:Object },
+    props: { pracObj:Object },
 
     data() { return { dispObj:null } },
 
     methods: {
       
       doPrac: function (pracKey) {
-        let obj = { level:"Prac", compKey:this.compKey, pracKey:pracKey };
+        let obj = { level:"Prac", pracKey:pracKey };
         this.nav.pub( obj ); },
       doDisp: function (pracKey,dispKey) {
-        let obj = { level:"Disp", compKey:this.compKey, pracKey:pracKey, dispKey:dispKey };
+        let obj = { level:"Disp", pracKey:pracKey, dispKey:dispKey };
         this.nav.pub( obj ); },
       style: function( hsv ) {
-        return { backgroundColor:this.toRgbaHsv(hsv) }; } },
-
-    mounted: function () {}
+        return { backgroundColor:this.toRgbaHsv(hsv) }; } }
   }
 
   export default Dirs;
@@ -62,32 +60,12 @@
                              .north { .ddir(north); }
       .west { .ddir(west); } .cen   { .ddir(cen);   } .east { .ddir(east); }
                              .south { .ddir(south); }
-      .cen  { font-size:@theme-cen-size; } }
+      .cen  { font-size:@theme-cen-size; }
 
     .disp {   display:inline; justify-self:center; align-self:center; text-align:center; font-size:@theme-disp-size;
       i     { display:inline-block;  margin-right: 0.25rem; }
       .name { display:inline-block; }
-      .desc { display:none; margin:0.5rem 0.5rem 0.5rem 0.5rem; text-align:left; } }
-
-   
-    // Placed one level above .prac at the 9 Practices Grid Direction
-    .pracFull { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid;
-      .prac { font-size:@theme-full-size; width:100%; height:100%;
-        justify-self:center; align-self:center; display:grid; border-radius:0.5rem;
-        div {     padding-bottom:2rem;
-          .disp { padding-bottom:0;
-            i     { font-size:@theme-disp-size; }
-            .name { font-size:@theme-disp-size; }
-            .desc { font-size:@theme-disp-size; display:block; } } }  // Turns on .disp .desc
-        .area { padding-bottom:0; } } }
-    
-    // May not belong here
-    // Placed one level above .dir at the 4 Disipline plus Practice name Grid Direction
-    .dispFull { position:absolute; left:3%; top:6%; right:3%; bottom:6%; display:grid; border-radius:72px;
-      .disp { justify-self:center; margin:0;
-        i     { font-size:@theme-area-icon-size !important; }
-        .name { font-size:@theme-area-name-size !important; }
-        .desc { font-size:@theme-area-desc-size !important; display:block; } }  // Turns on .disp .desc
-      .area {   font-size:@theme-area-area-size !important; padding-bottom:0; } }
+      .desc { display:none; margin:0.5rem 0.5rem 0.5rem 0.5rem; text-align:left; } } }
+  
   
 </style>

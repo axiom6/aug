@@ -9,7 +9,7 @@
       </div>
     </div>
     <template  v-for="dispObj in pracObj.disps">
-      <div :class="dispObj.dir" :style="style(dispObj.hsv)" :ref="dispObj.name" :title="dispObj.name">
+      <div :class="dispObj.dir" :style="style(dispObj.hsv)">
         <div class="disp" @click="doDisp(dispObj.name)">
           <i   :class="dispObj.icon"></i>
           <span class="name">{{dispObj.name}}</span>
@@ -24,17 +24,17 @@
 
   let Dirs = {
 
-    props: { compKey:String, pracObj:Object },
+    props: { pracObj:Object },
 
     data() { return { dispObj:null } },
 
     methods: {
 
       doPrac: function (pracKey) {
-        let obj = { level:"Prac", compKey:this.compKey, pracKey:pracKey };
+        let obj = { level:"Prac", pracKey:pracKey };
         this.nav.pub( obj ); },
       doDisp: function (dispKey) {
-        let obj = { level:"Disp", compKey:this.compKey, pracKey:this.pracObj.name, dispKey:dispKey };
+        let obj = { level:"Disp", pracKey:this.pracObj.name, dispKey:dispKey };
         this.nav.pub( obj ); },
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; } },

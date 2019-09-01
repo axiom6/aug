@@ -4,9 +4,9 @@
     <b-tabs :pages="pages"></b-tabs>
     <template v-for="pracObj in practices">
       <div   :class="pracObj.dir" :key="pracObj.name" :ref="pracObj.name" :title="pracObj.name">
-        <p-icon v-show="pages['Icon'].show" :compKey="compKey" :pracObj="pracObj"></p-icon>
-        <p-dirs v-show="pages['Dirs'].show" :compKey="compKey" :pracObj="pracObj"></p-dirs>
-        <p-conn   v-if="pages['Conn'].show" :compKey="compKey" :pracObj="pracObj"></p-conn>
+        <p-icon v-show="pages['Icon'].show" :pracObj="pracObj"></p-icon>
+        <p-dirs v-show="pages['Dirs'].show" :pracObj="pracObj"></p-dirs>
+        <p-conn   v-if="pages['Conn'].show" :pracObj="pracObj"></p-conn>
       </div>
     </template>
     <template v-for="row in rows">
@@ -40,9 +40,9 @@
         Share:{ name:'Share', dir:'sh', icon:"fas fa-share-alt-square" } } } },
     
     methods: {
-      onPage: function (page) {
-        for( let pkey in this.pages ) {
-          this.pages[pkey].show = pkey === page; } },
+      onPage: function (pageKey) {
+        for( let key in this.pages ) {
+          this.pages[key].show = key === pageKey; } },
       isRows: function () {
         return true; },
       onComp: function (compKey) {
@@ -51,14 +51,14 @@
       onNone: function (obj) {
         console.error( 'Page Nav Error', { obj:obj } ); },
       onNav:  function (obj) {
-        this.onPage(this.nav().page);
+        this.onPage(this.nav().pageKey);
         if( obj.level === 'Comp') {
           this.onComp(obj.compKey); } }
       },
 
     beforeMount: function() {
       this.compKey = this.nav().compKey;
-      this.onPage(this.nav().page); },
+      this.onPage(this.nav().pageKey); },
 
     mounted: function () {
       this.practices = this.pracs(this.compKey);

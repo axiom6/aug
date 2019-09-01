@@ -1,8 +1,8 @@
 
 <template>
-  <div class="disd" ref="Disp" title="Disp">
-    <d-tabs :comp="comp" :pages="pages"></d-tabs>
-    <d-desc v-show="pages['Desc'].show"></d-desc>
+  <div class="disd">
+    <d-tabs :pages="pages"></d-tabs>
+    <d-desc v-show="pages['Desc'].show" :dispObj="dispObj"></d-desc>
   </div>
 </template>
 
@@ -15,26 +15,20 @@
 
     components:{ 'd-tabs':Tabs, 'd-desc':Desc },
     
-    data() { return {
-      cname:'None', pname:'None', dname:'None', page:'None', disp:null,
+    data() { return { dispObj:null,
       pages:{
         Desc: { name:'Desc', show:false } } } },
     
     methods: {
-      onPrac: function(pname) {
-        this.pname = pname; },
-      onDisp: function(dname) {
-        this.dname = dname;
-        this.disp  = this.pracs(this.cname)[this.pname][this.dname]; },
-      onPage: function(page) {
-        this.page = page==='Desc' ? 'Desc' : 'Desc'; // Change when more pages added
-        for( let pkey in this.pages ) {
-          this.pages[pkey].show = pkey === this.page; } },
+      
+      onDisp: function(dispKey) {
+        this.dispObj  = this.dispObject( this.nav().compKey, this.nav().pracKey, dispKey ); },
+      onPage: function(pageKey) {
+        for( let key in this.pages ) {
+          this.pages[key].show = key === pageKey; } },
       onNav:  function (obj) {
-        this.cname = obj.comp;
-        this.onPrac( obj.prac );
-        this.onDisp( obj.disp );
-        this.onPage( obj.page ); } },
+        this.onDisp( obj.dispKey );
+        this.onPage( obj.pageKey ); } },
 
     beforeMount: function() {
       this.onNav(this.nav()); },

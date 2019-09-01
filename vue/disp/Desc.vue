@@ -17,14 +17,13 @@
     
     components: { 'd-icon':Icon },
 
-    data() { return { compKey:'None', pracKey:'None', dispObj:null, iarea:1 } },
+    props: { dispObj:Object },
+
+    data() { return { areaObj:null, iarea:1 } },
 
     methods: {
-      onDisp: function(disp) {
-        this.disp =   disp;
-        this.dispObj = this.pracs(this.comp)[this.prac][this.disp]; },
-      style: function (dobj) {
-        let hsv = this.isDef(dobj) ? dobj.hsv : [30,90,90];
+      style: function (dispObj) {
+        let hsv = this.isDef(dispObj) ? dispObj.hsv : [30,90,90];
         return {backgroundColor: this.toRgbaHsv(hsv)}; },
       clArea: function() {
         let  klass = 'area'+this.iarea;
@@ -32,18 +31,9 @@
         return klass; },
       tsSumm: function(summ) {
         return this.isStr(summ) ? summ : "This is a test description"; }
-    },
-
-    beforeMount: function() {
-      this.comp = this.nav().comp;
-      this.prac = this.nav().prac;
-      this.disp = this.nav().disp;
-      this.onDisp(this.disp); },
-
-    mounted: function () {
-      this.subscribe( 'Nav', 'Disp.Desc.vue', (obj) => {
-        this.onDisp(obj.disp); } ); }
-      
+    }
+    
+    
   }
   export default Desc;
 

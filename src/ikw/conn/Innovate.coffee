@@ -34,7 +34,7 @@ class Innovate
     colorBack = 'rgba(97, 56, 77, 1.0 )'
     @shapes.round( g, t,     t,     geom.w-t*2,   geom.h-t*2,   t, t, colorRing, 'none' )
     @shapes.round( g, t*2.5, t*2.5, geom.w-t*5.0, geom.h-t*5.0, t, t, colorBack, 'none' )
-    @shapes.text(  g, t*4,   t*2+2, @spec.name,   @spec.name+'Text', 'black', '1.2em' )
+    @shapes.text(  g, t*4,   t*2+2, @spec.name,   @spec.name+'Text', 'black', geom.fontSize )
 
   principle:( g, geom ) ->
     @eastInovate(  g, geom )
@@ -127,8 +127,8 @@ class Innovate
     uc    = Vis.unicode( study.icon )
     # console.log( 'Innovate.hexStudy()', study.icon, uc )
     @hexPath( fill,       g, x, y, @shapes.htmlId( study.name, 'HexPath' ) )
-    @hexText( study.name, g, x, y, @shapes.htmlId( study.name, 'HexText' ) )
-    @hexIcon( uc,         g, x, y, @shapes.htmlId( study.name, 'HexIcon' ) )
+    @hexText( study.name, g, x, y, @shapes.htmlId( study.name, 'HexText' ), geom.dispSize )
+    @hexIcon( uc,         g, x, y, @shapes.htmlId( study.name, 'HexIcon' ), geom.dispSize )
     return
 
   hexPosTier:( dir ) ->
@@ -162,17 +162,17 @@ class Innovate
     .attr("stroke-width", @thick ).attr("stroke", @stroke ).attr("fill", fill )
     return
 
-  hexText:( text, g, x0, y0, textId ) ->
-    path = g.append("svg:text").text(text).attr("id",textId).attr("x",x0).attr("y",y0+16)
-            .attr("text-anchor","middle").attr("font-size","0.5em")
+  hexText:( text, g, x0, y0, textId, size ) ->
+    path = g.append("svg:text").text(text).attr("id",textId).attr("x",x0).attr("y",y0+10)
+            .attr("text-anchor","middle").attr("font-size",size)
             .attr("font-family",@shapes.fontText)
            #.attr("font-weight","bold")
     @shapes.click( path, text )
     return
 
-  hexIcon:( icon, g, x0, y0, iconId ) ->
+  hexIcon:( icon, g, x0, y0, iconId,size ) ->
     g.append("svg:text").text(icon).attr("x",x0).attr("y",y0-2).attr("id",iconId)
-     .attr("text-anchor","middle").attr("font-size","1.0em")
+     .attr("text-anchor","middle").attr("font-size",size)
      .attr("font-family","FontAwesome").attr("font-weight","normal")
     return
 

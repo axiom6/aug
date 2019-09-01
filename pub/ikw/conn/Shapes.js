@@ -168,15 +168,15 @@ Shapes = class Shapes {
     });
   }
 
-  wedge(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId) {
+  wedge(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize) {
     var arc;
     arc = d3.arc().innerRadius(r1).outerRadius(r2).startAngle(this.radD3(a1)).endAngle(this.radD3(a2));
     //console.log( 'Shape.wedge()', { x0:x0, y0:y0 } )
     g.append("svg:path").attr("d", arc).attr("fill", fill).attr("stroke", "none").attr("transform", Vis.translate(x0, y0));
-    this.wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId);
+    this.wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize);
   }
 
-  wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId) {
+  wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize) {
     var as, at, path, rt, th, x, y;
     Util.noop(wedgeId);
     th = 14;
@@ -190,13 +190,13 @@ Shapes = class Shapes {
     }
     x = x0 + rt * this.cos(at);
     y = y0 + rt * this.sin(at);
-    path = g.append("svg:text").text(text).attr("x", x).attr("y", y).attr("transform", Vis.rotate(as, x, y)).attr("text-anchor", "middle").attr("font-size", `${th}px`).attr("font-family", this.fontText).attr("font-weight", "bold").attr('fill', '#000000'); // @textFill(fill))
+    path = g.append("svg:text").text(text).attr("x", x).attr("y", y).attr("transform", Vis.rotate(as, x, y)).attr("text-anchor", "middle").attr("font-size", fontSize).attr("font-family", this.fontText).attr("font-weight", "bold").attr('fill', '#000000'); // @textFill(fill))
     this.click(path, text);
   }
 
-  icon(g, x0, y0, name, iconId, uc) {
+  icon(g, x0, y0, name, iconId, uc, size) {
     var path;
-    path = g.append("svg:text").text(uc).attr("x", x0).attr("y", y0 + 12).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", "4vh").attr("font-family", "FontAwesome");
+    path = g.append("svg:text").text(uc).attr("x", x0).attr("y", y0 + 12).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", size).attr("font-family", "FontAwesome");
     this.click(path, name);
   }
 

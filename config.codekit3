@@ -5151,14 +5151,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/vue/comp/Summ.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/comp/Summ.js",
-		"oF": 0
-		},
 	"/vue/cube/Cube.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -6311,6 +6303,14 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/zzz/comp/Prin.js",
+		"oF": 0
+		},
+	"/zzz/comp/Summ.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/comp/Summ.js",
 		"oF": 0
 		},
 	"/zzz/comp/Tocs.vue": {

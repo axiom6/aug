@@ -103,6 +103,8 @@ class Main
         Main.Batch[compk].data[compk][prack][dispk][areak].items
       bases:( compk, prack, dispk, areak, itemk  ) ->
         Main.Batch[compk].data[compk][prack][dispk][areak][itemk].bases
+      compObject:( compKey ) ->
+        Main.Batch[compKey].data[compKey].pracs
       pracObject:( compKey, pracKey ) ->
         this.pracs(compKey)[pracKey]
       dispObject:( compKey, pracKey,  dispKey ) ->

@@ -122,15 +122,15 @@ class Shapes
       @stream.publish( 'Select', select ) )
     return
 
-  wedge:( g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId ) ->
+  wedge:( g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize ) ->
     arc  = d3.arc().innerRadius(r1).outerRadius(r2).startAngle(@radD3(a1)).endAngle(@radD3(a2))
     #console.log( 'Shape.wedge()', { x0:x0, y0:y0 } )
     g.append("svg:path").attr("d",arc).attr("fill",fill).attr("stroke","none")
       .attr("transform", Vis.translate(x0,y0) )
-    @wedgeText( g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId )
+    @wedgeText( g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize )
     return
 
-  wedgeText:( g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId ) ->
+  wedgeText:( g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize ) ->
     Util.noop( wedgeId )
     th = 14
     at = (a1+a2)/2
@@ -143,15 +143,15 @@ class Shapes
     x  = x0 + rt * @cos(at)
     y  = y0 + rt * @sin(at)
     path = g.append("svg:text").text(text).attr("x",x).attr("y",y).attr("transform", Vis.rotate(as,x,y) )
-            .attr("text-anchor","middle").attr("font-size","#{th}px")
+            .attr("text-anchor","middle").attr("font-size",fontSize)
             .attr("font-family",@fontText).attr("font-weight","bold")
             .attr('fill','#000000' ) # @textFill(fill))
     @click( path, text )
     return
 
-  icon:( g, x0, y0, name, iconId, uc ) ->
+  icon:( g, x0, y0, name, iconId, uc, size ) ->
     path = g.append("svg:text").text(uc).attr("x",x0).attr("y",y0+12).attr("id",iconId)
-            .attr("text-anchor","middle").attr("font-size","4vh")
+            .attr("text-anchor","middle").attr("font-size",size)
             .attr("font-family","FontAwesome")
     @click( path, name )
     return

@@ -10,13 +10,13 @@
   
   let Icon = {
     
-    props: { compKey:String, pracObj:Object },
+    props: { pracObj:Object },
     
     data() { return { } },
     
     methods: {
       doPrac: function (pracKey) {
-        let obj = { level:"Prac", compKey:this.compKey, pracKey:pracKey };
+        let obj = { level:"Prac", pracKey:pracKey };
         this.nav.pub( obj ); } }
   }
   export default Icon;
@@ -24,8 +24,11 @@
 </script>
 
 <style lang="less">
+  
   @import '../../pub/css/themes/theme.less';
+  
   .icon { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;
     color:@theme-color; font-size:@theme-icon-size; text-align:center; .theme-icon(); // @theme-icon-size;
     .name {             font-size:@theme-name-size; text-align:center; } }            // @theme-name-size;
+  
 </style>

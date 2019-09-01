@@ -18,7 +18,7 @@ class Encourage
     for key, study of @studies
       fill = @shapes.toFill(study)
       wedgeId = @shapes.htmlId( study.name, 'Wedge' )
-      @shapes.wedge( g, lay.ro, lay.rs, a1, a1-lay.da, lay.xc, lay.yc, fill, study.name, wedgeId  )
+      @shapes.wedge( g, lay.ro, lay.rs, a1, a1-lay.da, lay.xc, lay.yc, fill, study.name, wedgeId, geom.dispSize  )
       for a in [a1-lay.li...a1-lay.da] by -lay.ds
         @shapes.link( g, a, lay.ro, lay.ri, lay.xc, lay.yc, lay.xc, yl, xr, yl, fill, lay.thick )
         yl += lay.dl
@@ -33,8 +33,8 @@ class Encourage
     xt = x +  w  * 0.5
     yt = geom.y0 * 0.5 - 6
     @shapes.conveySankey( "Encourage", defs, g, @studies, @innovs, x, y, w, h )
-    @shapes.icon( g, geom.x0, geom.y0, @spec.name, @shapes.htmlId(@spec.name,'IconSvg'), Vis.unicode(@spec.icon) )
-    @shapes.text( g, xt,           yt, @spec.name, @shapes.htmlId(@spec.name,'TextSvg'), 'black', '1.2em' )
+    @shapes.icon( g, geom.x0, geom.y0, @spec.name, @shapes.htmlId(@spec.name,'IconSvg'), Vis.unicode(@spec.icon), geom.iconSize )
+    @shapes.text( g, xt,           yt, @spec.name, @shapes.htmlId(@spec.name,'TextSvg'), 'black', geom.fontSize )
     @shapes.practiceFlow( g, geom, @spec )
     return
 
