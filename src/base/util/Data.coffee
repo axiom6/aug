@@ -6,37 +6,31 @@ class Data
 
   @refine:( data, type ) ->
     return  data if type is 'None'
-    data.comps = {}
-    for ckey, comp of data when Util.isChild(ckey)
-      # console.log( 'Data.refine comp', comp )
-      data.comps[ckey] = comp
-      comp['name']     = ckey if not comp['name']?
-      comp.pracs = {}
-      for pkey, prac of comp when Util.isChild(pkey)
-        # console.log( '  Data.refine prac', prac )
-        comp.pracs[pkey] = prac
-        prac.comp        = comp
-        prac['name']     = pkey if not prac['name']?
-        prac.disps = {}
-        for dkey, disp of prac  when Util.isChild(dkey)
-          prac.disps[dkey] = disp
-          disp.prac        = prac
-          disp['name']     = dkey if not disp['name']?
-          disp.areas = {}
-          for akey, area of disp  when Util.isChild(akey)
-            disp.areas[akey] = area
-            area.disp        = disp
-            area['name']     = akey if not area['name']?
-            area.items = {}
-            for ikey, item of area when Util.isChild(ikey)
-              area.items[ikey] = item
-              item.area        = area
-              item['name']     = ikey if not item['name']?
-              item.bases = {}
-              for bkey, base of item when Util.isChild(bkey)
-                item.bases[bkey] = base
-                base.item        = item
-                base['name']     = bkey if not base['name']?
+    data.pracs = {}
+    for pkey, prac of data when Util.isChild(pkey)
+      data.pracs[pkey] = prac
+      prac.data        = data
+      prac['name']     = pkey if not prac['name']?
+      prac.disps = {}
+      for dkey, disp of prac  when Util.isChild(dkey)
+        prac.disps[dkey] = disp
+        disp.prac        = prac
+        disp['name']     = dkey if not disp['name']?
+        disp.areas = {}
+        for akey, area of disp  when Util.isChild(akey)
+          disp.areas[akey] = area
+          area.disp        = disp
+          area['name']     = akey if not area['name']?
+          area.items = {}
+          for ikey, item of area when Util.isChild(ikey)
+            area.items[ikey] = item
+            item.area        = area
+            item['name']     = ikey if not item['name']?
+            item.bases = {}
+            for bkey, base of item when Util.isChild(bkey)
+              item.bases[bkey] = base
+              base.item        = item
+              base['name']     = bkey if not base['name']?
     data
 
   # ---- Read JSON with batch async

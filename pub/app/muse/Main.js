@@ -36,11 +36,11 @@ Main = (function() {
 
     static mergePracsPrin() {
       var col, cols, comp, i, key, len, prcs, ref;
-      cols = Main.Batch['Prin'].data['Prin'].pracs;
+      cols = Main.Batch['Prin'].data.pracs;
       ref = ['Info', 'Know', 'Wise'];
       for (i = 0, len = ref.length; i < len; i++) {
         comp = ref[i];
-        prcs = Main.Batch[comp].data[comp].pracs;
+        prcs = Main.Batch[comp].data.pracs;
         for (key in cols) {
           if (!hasProp.call(cols, key)) continue;
           col = cols[key];
@@ -208,22 +208,22 @@ Main = (function() {
         return this.subset(compk, filter);
       },
       pracs: function(compk) {
-        return Main.Batch[compk].data[compk].pracs;
+        return Main.Batch[compk].data.pracs;
       },
       disps: function(compk, prack) {
-        return Main.Batch[compk].data[compk][prack].disps;
+        return Main.Batch[compk].data[prack].disps;
       },
       areas: function(compk, prack, dispk) {
-        return Main.Batch[compk].data[compk][prack][dispk].areas;
+        return Main.Batch[compk].data[prack][dispk].areas;
       },
       items: function(compk, prack, dispk, areak) {
-        return Main.Batch[compk].data[compk][prack][dispk][areak].items;
+        return Main.Batch[compk].data[prack][dispk][areak].items;
       },
       bases: function(compk, prack, dispk, areak, itemk) {
-        return Main.Batch[compk].data[compk][prack][dispk][areak][itemk].bases;
+        return Main.Batch[compk].data[prack][dispk][areak][itemk].bases;
       },
       compObject: function(compKey) {
-        return Main.Batch[compKey].data[compKey].pracs;
+        return Main.Batch[compKey].data.pracs;
       },
       pracObject: function(compKey, pracKey) {
         return this.pracs(compKey)[pracKey];

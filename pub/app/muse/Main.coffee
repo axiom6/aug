@@ -42,9 +42,9 @@ class Main
     return
 
   Main.mergePracsPrin = () ->
-    cols = Main.Batch['Prin'].data['Prin'].pracs
+    cols = Main.Batch['Prin'].data.pracs
     for comp in ['Info','Know','Wise']
-      prcs = Main.Batch[comp].data[comp].pracs
+      prcs = Main.Batch[comp].data.pracs
       for own  key, col of cols
         prcs[key] = col
       # console.log( 'Main.mergePracsPrin', prcs )
@@ -94,17 +94,17 @@ class Main
         filter = if compk isnt 'Prin' then (prac) -> prac.row isnt 'Dim' else (prac) -> prac.row is 'Dim'
         this.subset( compk, filter )
       pracs:( compk ) ->
-        Main.Batch[compk].data[compk].pracs
+        Main.Batch[compk].data.pracs
       disps:( compk, prack ) ->
-        Main.Batch[compk].data[compk][prack].disps
+        Main.Batch[compk].data[prack].disps
       areas:( compk, prack, dispk ) ->
-        Main.Batch[compk].data[compk][prack][dispk].areas
+        Main.Batch[compk].data[prack][dispk].areas
       items:( compk, prack, dispk, areak ) ->
-        Main.Batch[compk].data[compk][prack][dispk][areak].items
+        Main.Batch[compk].data[prack][dispk][areak].items
       bases:( compk, prack, dispk, areak, itemk  ) ->
-        Main.Batch[compk].data[compk][prack][dispk][areak][itemk].bases
+        Main.Batch[compk].data[prack][dispk][areak][itemk].bases
       compObject:( compKey ) ->
-        Main.Batch[compKey].data[compKey].pracs
+        Main.Batch[compKey].data.pracs
       pracObject:( compKey, pracKey ) ->
         this.pracs(compKey)[pracKey]
       dispObject:( compKey, pracKey,  dispKey ) ->

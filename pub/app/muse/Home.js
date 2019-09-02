@@ -2421,77 +2421,64 @@ var Data,
 
 Data = class Data {
   static refine(data, type) {
-    var akey, area, base, bkey, ckey, comp, disp, dkey, ikey, item, pkey, prac;
+    var akey, area, base, bkey, disp, dkey, ikey, item, pkey, prac;
     if (type === 'None') {
       return data;
     }
-    data.comps = {};
-    for (ckey in data) {
-      comp = data[ckey];
-      if (!(Util$1.isChild(ckey))) {
+    data.pracs = {};
+    for (pkey in data) {
+      prac = data[pkey];
+      if (!(Util$1.isChild(pkey))) {
         continue;
       }
-      // console.log( 'Data.refine comp', comp )
-      data.comps[ckey] = comp;
-      if (comp['name'] == null) {
-        comp['name'] = ckey;
+      data.pracs[pkey] = prac;
+      prac.data = data;
+      if (prac['name'] == null) {
+        prac['name'] = pkey;
       }
-      comp.pracs = {};
-      for (pkey in comp) {
-        prac = comp[pkey];
-        if (!(Util$1.isChild(pkey))) {
+      prac.disps = {};
+      for (dkey in prac) {
+        disp = prac[dkey];
+        if (!(Util$1.isChild(dkey))) {
           continue;
         }
-        // console.log( '  Data.refine prac', prac )
-        comp.pracs[pkey] = prac;
-        prac.comp = comp;
-        if (prac['name'] == null) {
-          prac['name'] = pkey;
+        prac.disps[dkey] = disp;
+        disp.prac = prac;
+        if (disp['name'] == null) {
+          disp['name'] = dkey;
         }
-        prac.disps = {};
-        for (dkey in prac) {
-          disp = prac[dkey];
-          if (!(Util$1.isChild(dkey))) {
+        disp.areas = {};
+        for (akey in disp) {
+          area = disp[akey];
+          if (!(Util$1.isChild(akey))) {
             continue;
           }
-          prac.disps[dkey] = disp;
-          disp.prac = prac;
-          if (disp['name'] == null) {
-            disp['name'] = dkey;
+          disp.areas[akey] = area;
+          area.disp = disp;
+          if (area['name'] == null) {
+            area['name'] = akey;
           }
-          disp.areas = {};
-          for (akey in disp) {
-            area = disp[akey];
-            if (!(Util$1.isChild(akey))) {
+          area.items = {};
+          for (ikey in area) {
+            item = area[ikey];
+            if (!(Util$1.isChild(ikey))) {
               continue;
             }
-            disp.areas[akey] = area;
-            area.disp = disp;
-            if (area['name'] == null) {
-              area['name'] = akey;
+            area.items[ikey] = item;
+            item.area = area;
+            if (item['name'] == null) {
+              item['name'] = ikey;
             }
-            area.items = {};
-            for (ikey in area) {
-              item = area[ikey];
-              if (!(Util$1.isChild(ikey))) {
+            item.bases = {};
+            for (bkey in item) {
+              base = item[bkey];
+              if (!(Util$1.isChild(bkey))) {
                 continue;
               }
-              area.items[ikey] = item;
-              item.area = area;
-              if (item['name'] == null) {
-                item['name'] = ikey;
-              }
-              item.bases = {};
-              for (bkey in item) {
-                base = item[bkey];
-                if (!(Util$1.isChild(bkey))) {
-                  continue;
-                }
-                item.bases[bkey] = base;
-                base.item = item;
-                if (base['name'] == null) {
-                  base['name'] = bkey;
-                }
+              item.bases[bkey] = base;
+              base.item = item;
+              if (base['name'] == null) {
+                base['name'] = bkey;
               }
             }
           }
@@ -2814,9 +2801,8 @@ Build = class Build {
   }
 
   // Build instance
-  constructor(batch1, plane1) {
+  constructor(batch1) {
     this.batch = batch1;
-    this.plane = plane1;
     //@Spec   = @batch.Muse.data
     this.None = {
       name: "None"
@@ -2999,7 +2985,7 @@ Build = class Build {
       return this.None;
     }
     //racs = @getPractices( pln )
-    pracs = this.batch[pln].data[pln].pracs;
+    pracs = this.batch[pln].data.pracs;
     for (key in pracs) {
       if (!hasProp$2.call(pracs, key)) continue;
       adj = pracs[key];
@@ -3054,25 +3040,15 @@ Build = class Build {
   }
 
   getPractices(plane) {
-    if ((this.batch[plane] != null) && (this.batch[plane].data[plane] != null)) {
-      return this.batch[plane].data[plane];
+    if ((this.batch[plane] != null) && (this.batch[plane].data != null)) {
+      return this.batch[plane].data;
     } else {
       console.error('Build.getPractices()', plane);
       return {};
     }
   }
 
-  getPractices2(plane) {
-    Main.Batch[compk].data[compk].pracs;
-    if ((this.batch[plane] != null) && (this.batch[plane].data[plane] != null)) {
-      return this.batch[plane].data[plane];
-    } else {
-      console.error('Build.getPractices()', plane);
-      return {};
-    }
-  }
-
-  getPractice(row, column, plane = this.plane) {
+  getPractice(row, column, plane) {
     var pkey, prac, practices;
     practices = this.getPractices(plane);
     for (pkey in practices) {
@@ -3090,7 +3066,7 @@ Build = class Build {
     return null; // Landmine
   }
 
-  getPracticeStudy(row, column, dir, plane = this.plane) {
+  getPracticeStudy(row, column, dir) {
     var practice, study;
     practice = this.getPractice(row, column, plane);
     study = this.getDir(practice, dir);
@@ -3126,7 +3102,7 @@ Build = class Build {
   }
 
   getCol(cname) {
-    return this.batch.Prin.data['Prin'][cname];
+    return this.batch.Prin.data[cname];
   }
 
   logPlanes() {
@@ -3340,7 +3316,7 @@ Build = class Build {
 /*
 getPrevNextPlanes:( plane ) ->
 
-isPractice:( key, plane=@plane ) ->
+isPractice:( key, plane=) ->
 @getPractices(plane)[key]?
 
 logAdjacentPractices:() ->
@@ -11824,22 +11800,17 @@ let Conn = {
     
     calcSize: function(elem) { // Should only be called within $nextTick()
       let sz   = {};
-    //sz.compWidth  = this.$refs['Conn']['clientWidth' ];
-    //sz.compHeight = this.$refs['Conn']['clientHeight'];
       sz.elemWidth  = elem['clientWidth' ];
       sz.elemHeight = elem['clientHeight'];
       sz.elem = elem;
       sz.name = this.pracObj.name;
-    //console.log( 'Conn.calcSize()', sz );
       return sz; },
     
     createConnect: function( stream, build ) {
       this.$nextTick( function() {
-        if( this.pracObj.row !== 'Dim' ) {
-          let elem  = this.$refs[this.pracObj.name];
-        //console.log( 'Conn.createConnect', { refs:this.$refs, elem:elem } );
-          this.size    = this.calcSize(elem);
-          this.connect = new Connect$1( stream, build, this.pracObj, elem, this.size ); } } ); },
+        let elem  = this.$refs[this.pracObj.name];
+        this.size    = this.calcSize(elem);
+        this.connect = new Connect$1( stream, build, this.pracObj, elem, this.size ); } ); },
     
     resize: function() {
       this.$nextTick( function() {
@@ -11881,7 +11852,7 @@ __vue_render__$d._withStripped = true;
   /* style */
   const __vue_inject_styles__$d = function (inject) {
     if (!inject) return
-    inject("data-v-398bd877_0", { source: ".theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.conn {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  font-size: 5.5rem;\n  text-align: center;\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n", map: {"version":3,"sources":["Conn.vue","/Users/ax/Documents/prj/aug/vue/comp/Conn.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;AACxB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;ACCA;EDCE,aAAa;ECCf,kBAAA;EACA,oBAAA;EDCE,mBAAmB;EACnB,qBAAqB;EACrB,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;EAClB,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb","file":"Conn.vue","sourcesContent":[".theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.conn {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  font-size: 5.5rem;\n  text-align: center;\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n","\n<template>\n  <div class=\"conn\" @click=\"doPrac(pracObj.name)\" :ref=\"pracObj.name\" ></div>\n</template>\n\n<script type=\"module\">\n  \n  import Build   from '../../pub/ikw/cube/Build.js';\n  import Connect from '../../pub/ikw/conn/Connect.js';\n\n  let Conn = {\n\n    props: { pracObj:Object },\n\n    data() {\n      return { build:null, connect:null, size:null }; },\n\n    methods: {\n      \n      doPrac: function (pracKey) {\n        this.nav().pub( { pracKey:pracKey } ); },\n      \n      calcSize: function(elem) { // Should only be called within $nextTick()\n        let sz   = {}\n      //sz.compWidth  = this.$refs['Conn']['clientWidth' ];\n      //sz.compHeight = this.$refs['Conn']['clientHeight'];\n        sz.elemWidth  = elem['clientWidth' ];\n        sz.elemHeight = elem['clientHeight'];\n        sz.elem = elem;\n        sz.name = this.pracObj.name\n      //console.log( 'Conn.calcSize()', sz );\n        return sz; },\n      \n      createConnect: function( stream, build ) {\n        this.$nextTick( function() {\n          if( this.pracObj.row !== 'Dim' ) {\n            let elem  = this.$refs[this.pracObj.name];\n          //console.log( 'Conn.createConnect', { refs:this.$refs, elem:elem } );\n            this.size    = this.calcSize(elem);\n            this.connect = new Connect( stream, build, this.pracObj, elem, this.size ); } } ) },\n      \n      resize: function() {\n        this.$nextTick( function() {\n            let level = 'Resize';  // 'Restore' 'Expand' requires 'Comp' sizes\n            if( level==='Expand') { this.connect.lastSize(this.size) }\n            this.connect.layout( this.size, level );  } ); }\n    },\n    \n    mounted: function () {\n      this.build     = new Build(  this.batch() );\n      this.createConnect( this.stream(), this.build ); },\n    \n    //created: function () {\n    //  window.addEventListener(   'resize', this.resize ) },\n    //destroyed: function () {\n      //window.removeEventListener('resize', this.resize ) }\n   }\n\n  export default Conn;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  .conn { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;\n    color:@theme-color; font-size:@theme-icon-size; text-align:center; .theme-conn(); }\n  \n</style>"]}, media: undefined });
+    inject("data-v-57737302_0", { source: ".theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.conn {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  font-size: 5.5rem;\n  text-align: center;\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n", map: {"version":3,"sources":["Conn.vue","/Users/ax/Documents/prj/aug/vue/comp/Conn.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;AACxB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;ACCnB;ADCA;ECCA,uBAAA;EACA,iBAAA;ADCA;AACA;EACE,aAAa;EACb,kBAAkB;EAClB,oBAAoB;EACpB,mBAAmB;EACnB,qBAAqB;EACrB,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;EAClB,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb","file":"Conn.vue","sourcesContent":[".theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.conn {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  font-size: 5.5rem;\n  text-align: center;\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n","\n<template>\n  <div class=\"conn\" @click=\"doPrac(pracObj.name)\" :ref=\"pracObj.name\" ></div>\n</template>\n\n<script type=\"module\">\n  \n  import Build   from '../../pub/ikw/cube/Build.js';\n  import Connect from '../../pub/ikw/conn/Connect.js';\n\n  let Conn = {\n\n    props: { pracObj:Object },\n\n    data() {\n      return { build:null, connect:null, size:null }; },\n\n    methods: {\n      \n      doPrac: function (pracKey) {\n        this.nav().pub( { pracKey:pracKey } ); },\n      \n      calcSize: function(elem) { // Should only be called within $nextTick()\n        let sz   = {}\n        sz.elemWidth  = elem['clientWidth' ];\n        sz.elemHeight = elem['clientHeight'];\n        sz.elem = elem;\n        sz.name = this.pracObj.name\n        return sz; },\n      \n      createConnect: function( stream, build ) {\n        this.$nextTick( function() {\n          let elem  = this.$refs[this.pracObj.name];\n          this.size    = this.calcSize(elem);\n          this.connect = new Connect( stream, build, this.pracObj, elem, this.size ); } ) },\n      \n      resize: function() {\n        this.$nextTick( function() {\n            let level = 'Resize';  // 'Restore' 'Expand' requires 'Comp' sizes\n            if( level==='Expand') { this.connect.lastSize(this.size) }\n            this.connect.layout( this.size, level );  } ); }\n    },\n    \n    mounted: function () {\n      this.build     = new Build(  this.batch() );\n      this.createConnect( this.stream(), this.build ); },\n    \n    //created: function () {\n    //  window.addEventListener(   'resize', this.resize ) },\n    //destroyed: function () {\n      //window.removeEventListener('resize', this.resize ) }\n   }\n\n  export default Conn;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  .conn { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;\n    color:@theme-color; font-size:@theme-icon-size; text-align:center; .theme-conn(); }\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -12452,12 +12423,13 @@ let Prac = {
   methods: {
     
     onPrac: function(pracKey) {
-      this.pracObj = this.pracObject( this.nav().compKey, pracKey ); },
-    onPage: function(page) {
-      for( let pkey in this.pages ) {
-        this.pages[pkey].show = pkey === page; } },
+      if( this.pracObj.name !== pracKey ) {
+          this.pracObj = this.pracObject( this.nav().compKey, pracKey ); } },
+    onPage: function(pageKey) {
+      for( let key in this.pages ) {
+        this.pages[key].show = key === pageKey; } },
     onNav: function( obj ) {
-      this.onPrac(   obj.pracKey );  // onPage() here ?
+      this.onPrac( nav().pracKey );
       this.onPage(   obj.pageKey ); }
     },
 
@@ -12527,7 +12499,7 @@ __vue_render__$i._withStripped = true;
   /* style */
   const __vue_inject_styles__$i = function (inject) {
     if (!inject) return
-    inject("data-v-56fac222_0", { source: ".theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.pane {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.pane .prac {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: #333;\n}\n", map: {"version":3,"sources":["Prac.vue","/Users/ax/Documents/prj/aug/vue/prac/Prac.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;AACxB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;ACCnB;ADCA;ECCA,uBAAA;EDCE,iBAAiB;ACCnB;ADCA;ECCA,uBAAA;EDCE,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,sBAAsB;AACxB","file":"Prac.vue","sourcesContent":[".theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.pane {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.pane .prac {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: #333;\n}\n","\n<template>\n  <div   class=\"pane\">\n    <b-tabs :pages=\"pages\"></b-tabs>\n    <div class=\"prac\">\n      <p-dirs v-show=\"pages['Dirs'].show\" :pracObj=\"pracObj\"></p-dirs>\n      <p-conn   v-if=\"pages['Conn'].show\" :pracObj=\"pracObj\"></p-conn>\n      <p-desc v-show=\"pages['Desc'].show\" :pracObj=\"pracObj\"></p-desc>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Tabs from '../elem/Tabs.vue';\n  import Dirs from './Dirs.vue';\n  import Conn from '../comp/Conn.vue';\n  import Desc from './Desc.vue';\n  \n  let Prac = {\n\n    components:{ 'b-tabs':Tabs, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },\n    \n    data() { return { pracObj:null,\n      pages:{\n        Dirs: { name:'Dirs', show:false },\n        Conn: { name:'Conn', show:false },\n        Desc: { name:'Desc', show:false } } } },\n    \n    methods: {\n      \n      onPrac: function(pracKey) {\n        this.pracObj = this.pracObject( this.nav().compKey, pracKey ); },\n      onPage: function(page) {\n        for( let pkey in this.pages ) {\n          this.pages[pkey].show = pkey === page; } },\n      onNav: function( obj ) {\n        this.onPrac(   obj.pracKey );  // onPage() here ?\n        this.onPage(   obj.pageKey ); }\n      },\n\n    beforeMount: function() {\n      this.onNav( this.onNav( this.nav() ) ); },\n\n    mounted: function () {\n      this.subscribe(  \"Nav\", 'Prac.vue', (obj) => {\n        this.onNav( this.nav(obj) ); } ); }\n  }\n  \n  export default Prac;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .pane {   position:relative; left:0; top:0;  right:0; bottom:0;\n    \n    .prac { position:absolute; left:0; top:5%; right:0; bottom:0; background-color:@theme-icon-back; }\n    \n  }\n  \n</style>\n\n"]}, media: undefined });
+    inject("data-v-07a98f6a_0", { source: ".theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.pane {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.pane .prac {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: #333;\n}\n", map: {"version":3,"sources":["Prac.vue","/Users/ax/Documents/prj/aug/vue/prac/Prac.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;AACxB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;ACCA;EDCE,uBAAuB;ECCzB,iBAAA;ADCA;ACCA;EDCE,uBAAuB;ECCzB,iBAAA;ADCA;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;EACT,sBAAsB;AACxB","file":"Prac.vue","sourcesContent":[".theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.pane {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n}\n.pane .prac {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n  background-color: #333;\n}\n","\n<template>\n  <div   class=\"pane\">\n    <b-tabs :pages=\"pages\"></b-tabs>\n    <div class=\"prac\">\n      <p-dirs v-show=\"pages['Dirs'].show\" :pracObj=\"pracObj\"></p-dirs>\n      <p-conn   v-if=\"pages['Conn'].show\" :pracObj=\"pracObj\"></p-conn>\n      <p-desc v-show=\"pages['Desc'].show\" :pracObj=\"pracObj\"></p-desc>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Tabs from '../elem/Tabs.vue';\n  import Dirs from './Dirs.vue';\n  import Conn from '../comp/Conn.vue';\n  import Desc from './Desc.vue';\n  \n  let Prac = {\n\n    components:{ 'b-tabs':Tabs, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },\n    \n    data() { return { pracObj:null,\n      pages:{\n        Dirs: { name:'Dirs', show:false },\n        Conn: { name:'Conn', show:false },\n        Desc: { name:'Desc', show:false } } } },\n    \n    methods: {\n      \n      onPrac: function(pracKey) {\n        if( this.pracObj.name !== pracKey ) {\n            this.pracObj = this.pracObject( this.nav().compKey, pracKey ); } },\n      onPage: function(pageKey) {\n        for( let key in this.pages ) {\n          this.pages[key].show = key === pageKey; } },\n      onNav: function( obj ) {\n        this.onPrac( nav().pracKey );\n        this.onPage(   obj.pageKey ); }\n      },\n\n    beforeMount: function() {\n      this.onNav( this.onNav( this.nav() ) ); },\n\n    mounted: function () {\n      this.subscribe(  \"Nav\", 'Prac.vue', (obj) => {\n        this.onNav( this.nav(obj) ); } ); }\n  }\n  \n  export default Prac;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .pane {   position:relative; left:0; top:0;  right:0; bottom:0;\n    \n    .prac { position:absolute; left:0; top:5%; right:0; bottom:0; background-color:@theme-icon-back; }\n    \n  }\n  \n</style>\n\n"]}, media: undefined });
 
   };
   /* scoped */

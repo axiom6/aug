@@ -1,0 +1,5 @@
+{
+  "Data":{ "title":"Data",         "icon":"fas fa-database", "hsv":[90,90,90],
+    "Tables" : { "title":"Tables", "icon":"fas fa-th",       "hsv":[90,90,90] },
+    "Pivots" : { "title":"Pivots", "icon":"fas fa-cubes",    "hsv":[30,60,90] } }
+}

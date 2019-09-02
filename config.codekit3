@@ -6329,6 +6329,254 @@
 		"oAP": "/zzz/comp/Wise.js",
 		"oF": 0
 		},
+	"/zzz/data/augm/Data.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/augm/Data-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/augm/Geom.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/augm/Geom-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/augm/Math.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/augm/Math-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/draw/Augm.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/draw/Augm-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/draw/D3ds.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/draw/D3ds-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/draw/Data.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/draw/Data-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/draw/Hues.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/draw/Hues-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/draw/Prac.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/draw/Prac-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/draw/Prin.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/draw/Prin-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/draw/Quad.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/draw/Quad-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/draw/Tech.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/draw/Tech-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/draw/Tops.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/draw/Tops-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/jitter/Choice.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/jitter/Choice-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/jitter/Flavor.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/jitter/Flavor-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/jitter/Jitter.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/jitter/Jitter-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/jitter/Navs.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/jitter/Navs-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/jitter/Region.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/jitter/Region-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/muse/Cube.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/muse/Cube-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/muse/Info.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/muse/Info-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/muse/Know.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/muse/Know-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/muse/Muse.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/muse/Muse-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/muse/Prin.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/muse/Prin-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/muse/Rows.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/muse/Rows-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/muse/Wise.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/muse/Wise-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/store/Prac.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/store/Prac-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/store/Push.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/store/Push-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/store/Sync.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/data/store/Sync-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/data/text/BuildingCulture.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/data/text/BuildingCulture.txt",
+		"oF": 0
+		},
+	"/zzz/data/text/Cols.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/data/text/Cols.txt",
+		"oF": 0
+		},
+	"/zzz/data/text/Conn.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/data/text/Conn.txt",
+		"oF": 0
+		},
+	"/zzz/data/text/Info.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/data/text/Info.txt",
+		"oF": 0
+		},
 	"/zzz/jitter/Body.vue": {
 		"cB": 0,
 		"ft": 8192,

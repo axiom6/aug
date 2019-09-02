@@ -22,22 +22,17 @@
       
       calcSize: function(elem) { // Should only be called within $nextTick()
         let sz   = {}
-      //sz.compWidth  = this.$refs['Conn']['clientWidth' ];
-      //sz.compHeight = this.$refs['Conn']['clientHeight'];
         sz.elemWidth  = elem['clientWidth' ];
         sz.elemHeight = elem['clientHeight'];
         sz.elem = elem;
         sz.name = this.pracObj.name
-      //console.log( 'Conn.calcSize()', sz );
         return sz; },
       
       createConnect: function( stream, build ) {
         this.$nextTick( function() {
-          if( this.pracObj.row !== 'Dim' ) {
-            let elem  = this.$refs[this.pracObj.name];
-          //console.log( 'Conn.createConnect', { refs:this.$refs, elem:elem } );
-            this.size    = this.calcSize(elem);
-            this.connect = new Connect( stream, build, this.pracObj, elem, this.size ); } } ) },
+          let elem  = this.$refs[this.pracObj.name];
+          this.size    = this.calcSize(elem);
+          this.connect = new Connect( stream, build, this.pracObj, elem, this.size ); } ) },
       
       resize: function() {
         this.$nextTick( function() {

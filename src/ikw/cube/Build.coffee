@@ -177,7 +177,7 @@ class Build
     #console.log( 'adjacentPractice[col,row,pln]', [col,row,pln] )
     return @None if [col,row,pln] is ["None","None","None"]
     #racs = @getPractices( pln )
-    pracs = @batch[pln].data[pln].pracs
+    pracs = @batch[pln].data.pracs
     for own key, adj of pracs when Util.isChild(key)
       return adj if adj.column is col and adj.row is row and adj.plane is pln
     @None
@@ -207,20 +207,11 @@ class Build
 
   getPractices:( plane ) ->
 
-    if @batch[plane]? and @batch[plane].data[plane]?
-       @batch[plane].data[plane]
+    if @batch[plane]? and @batch[plane].data?
+       @batch[plane].data
     else
        console.error( 'Build.getPractices()', plane )
        {}
-
-  getPractices2:( plane ) ->
-    Main.Batch[compk].data[compk].pracs
-    if @batch[plane]? and @batch[plane].data[plane]?
-      @batch[plane].data[plane]
-    else
-      console.error( 'Build.getPractices()', plane )
-      {}
-
 
   getPractice:( row, column, plane ) ->
     practices = @getPractices(plane)
@@ -246,7 +237,7 @@ class Build
     @None
 
   getCol:( cname ) ->
-    @batch.Prin.data['Prin'][cname]
+    @batch.Prin.data[cname]
 
   logPlanes:() ->
     console.log( '----- Beg Log Planes  ------' )
@@ -358,22 +349,5 @@ class Build
     htm += """  </body>\n</html>\n"""
     Data.saveHtml( name, htm )
     return
-
-  ###
-    getPrevNextPlanes:( plane ) ->
-
-  isPractice:( key, plane=) ->
-    @getPractices(plane)[key]?
-
-  logAdjacentPractices:() ->
-    @setAdjacents( @None )
-    for key, plane of @Planes
-      practices = @getPractices( key )
-      for own pkey, p of practices  when Util.isChild(pkey)
-        @setAdjacents( p )
-    # console.log( { p:key, column:p.column, west:p.west.name, east:p.east.name, north:p.north.name, south:p.south.name, prev:p.prev.name, next:p.next.name } )
-    return
-
-  ###
 
 export default Build

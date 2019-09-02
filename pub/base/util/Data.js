@@ -5,77 +5,64 @@ import Util from './Util.js';
 
 Data = class Data {
   static refine(data, type) {
-    var akey, area, base, bkey, ckey, comp, disp, dkey, ikey, item, pkey, prac;
+    var akey, area, base, bkey, disp, dkey, ikey, item, pkey, prac;
     if (type === 'None') {
       return data;
     }
-    data.comps = {};
-    for (ckey in data) {
-      comp = data[ckey];
-      if (!(Util.isChild(ckey))) {
+    data.pracs = {};
+    for (pkey in data) {
+      prac = data[pkey];
+      if (!(Util.isChild(pkey))) {
         continue;
       }
-      // console.log( 'Data.refine comp', comp )
-      data.comps[ckey] = comp;
-      if (comp['name'] == null) {
-        comp['name'] = ckey;
+      data.pracs[pkey] = prac;
+      prac.data = data;
+      if (prac['name'] == null) {
+        prac['name'] = pkey;
       }
-      comp.pracs = {};
-      for (pkey in comp) {
-        prac = comp[pkey];
-        if (!(Util.isChild(pkey))) {
+      prac.disps = {};
+      for (dkey in prac) {
+        disp = prac[dkey];
+        if (!(Util.isChild(dkey))) {
           continue;
         }
-        // console.log( '  Data.refine prac', prac )
-        comp.pracs[pkey] = prac;
-        prac.comp = comp;
-        if (prac['name'] == null) {
-          prac['name'] = pkey;
+        prac.disps[dkey] = disp;
+        disp.prac = prac;
+        if (disp['name'] == null) {
+          disp['name'] = dkey;
         }
-        prac.disps = {};
-        for (dkey in prac) {
-          disp = prac[dkey];
-          if (!(Util.isChild(dkey))) {
+        disp.areas = {};
+        for (akey in disp) {
+          area = disp[akey];
+          if (!(Util.isChild(akey))) {
             continue;
           }
-          prac.disps[dkey] = disp;
-          disp.prac = prac;
-          if (disp['name'] == null) {
-            disp['name'] = dkey;
+          disp.areas[akey] = area;
+          area.disp = disp;
+          if (area['name'] == null) {
+            area['name'] = akey;
           }
-          disp.areas = {};
-          for (akey in disp) {
-            area = disp[akey];
-            if (!(Util.isChild(akey))) {
+          area.items = {};
+          for (ikey in area) {
+            item = area[ikey];
+            if (!(Util.isChild(ikey))) {
               continue;
             }
-            disp.areas[akey] = area;
-            area.disp = disp;
-            if (area['name'] == null) {
-              area['name'] = akey;
+            area.items[ikey] = item;
+            item.area = area;
+            if (item['name'] == null) {
+              item['name'] = ikey;
             }
-            area.items = {};
-            for (ikey in area) {
-              item = area[ikey];
-              if (!(Util.isChild(ikey))) {
+            item.bases = {};
+            for (bkey in item) {
+              base = item[bkey];
+              if (!(Util.isChild(bkey))) {
                 continue;
               }
-              area.items[ikey] = item;
-              item.area = area;
-              if (item['name'] == null) {
-                item['name'] = ikey;
-              }
-              item.bases = {};
-              for (bkey in item) {
-                base = item[bkey];
-                if (!(Util.isChild(bkey))) {
-                  continue;
-                }
-                item.bases[bkey] = base;
-                base.item = item;
-                if (base['name'] == null) {
-                  base['name'] = bkey;
-                }
+              item.bases[bkey] = base;
+              base.item = item;
+              if (base['name'] == null) {
+                base['name'] = bkey;
               }
             }
           }

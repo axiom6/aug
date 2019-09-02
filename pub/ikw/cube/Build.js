@@ -190,9 +190,8 @@ Build = class Build {
   }
 
   // Build instance
-  constructor(batch1, plane1) {
+  constructor(batch1) {
     this.batch = batch1;
-    this.plane = plane1;
     //@Spec   = @batch.Muse.data
     this.None = {
       name: "None"
@@ -375,7 +374,7 @@ Build = class Build {
       return this.None;
     }
     //racs = @getPractices( pln )
-    pracs = this.batch[pln].data[pln].pracs;
+    pracs = this.batch[pln].data.pracs;
     for (key in pracs) {
       if (!hasProp.call(pracs, key)) continue;
       adj = pracs[key];
@@ -430,25 +429,15 @@ Build = class Build {
   }
 
   getPractices(plane) {
-    if ((this.batch[plane] != null) && (this.batch[plane].data[plane] != null)) {
-      return this.batch[plane].data[plane];
+    if ((this.batch[plane] != null) && (this.batch[plane].data != null)) {
+      return this.batch[plane].data;
     } else {
       console.error('Build.getPractices()', plane);
       return {};
     }
   }
 
-  getPractices2(plane) {
-    Main.Batch[compk].data[compk].pracs;
-    if ((this.batch[plane] != null) && (this.batch[plane].data[plane] != null)) {
-      return this.batch[plane].data[plane];
-    } else {
-      console.error('Build.getPractices()', plane);
-      return {};
-    }
-  }
-
-  getPractice(row, column, plane = this.plane) {
+  getPractice(row, column, plane) {
     var pkey, prac, practices;
     practices = this.getPractices(plane);
     for (pkey in practices) {
@@ -466,7 +455,7 @@ Build = class Build {
     return null; // Landmine
   }
 
-  getPracticeStudy(row, column, dir, plane = this.plane) {
+  getPracticeStudy(row, column, dir) {
     var practice, study;
     practice = this.getPractice(row, column, plane);
     study = this.getDir(practice, dir);
@@ -502,7 +491,7 @@ Build = class Build {
   }
 
   getCol(cname) {
-    return this.batch.Prin.data['Prin'][cname];
+    return this.batch.Prin.data[cname];
   }
 
   logPlanes() {
@@ -713,20 +702,4 @@ Build = class Build {
 
 };
 
-/*
-getPrevNextPlanes:( plane ) ->
-
-isPractice:( key, plane=@plane ) ->
-@getPractices(plane)[key]?
-
-logAdjacentPractices:() ->
-@setAdjacents( @None )
-for key, plane of @Planes
-practices = @getPractices( key )
-for own pkey, p of practices  when Util.isChild(pkey)
-  @setAdjacents( p )
- * console.log( { p:key, column:p.column, west:p.west.name, east:p.east.name, north:p.north.name, south:p.south.name, prev:p.prev.name, next:p.next.name } )
-return
-
- */
 export default Build;

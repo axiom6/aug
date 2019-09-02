@@ -1,0 +1,5 @@
+
+Change ---
+  Principles:
+    Human       Top       Layer   Formal     Ownership
+    Communicate Landscape Culture Unexpected Individula
