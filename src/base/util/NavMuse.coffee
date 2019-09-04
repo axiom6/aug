@@ -6,13 +6,12 @@ class NavMuse
   constructor:( @stream,   @batch, @compKey ) ->
     @build    =  new Build( @batch )
     @$router  =  null
-    @level    =  'Comp' # Prac Disp
+    @level    =  'None' # Prac Disp
     @pracKey  =  'None'
     @dispKey  =  'None'
     @pageKey  =  'Icon'
     @pageKeys = ['Icon','Dirs','Conn','Summ','Desc']
     @compass  =   ""
-
 
   pub:(   change ) ->
     levelChanged = change.level? and change.level isnt @level
@@ -22,6 +21,14 @@ class NavMuse
     console.log('Nav.pub()', obj )
     @stream.publish( 'Nav',  obj )
     @route( @level ) if levelChanged
+    return
+
+  route:( name ) ->
+    # console.log( 'NavMuse.route()', name )
+    if @$router?
+      @$router.push( { name:name } )
+    else
+      console.error( 'Nav.routeLevel() $router not set' )
     return
 
   set:( obj ) ->
@@ -69,7 +76,7 @@ class NavMuse
       if adj.plane isnt @compKey
          obj.comp  = adj.plane
          @compKey     = adj.plane
-         @route( @level, @compKey, @pageKey, obj )
+         @route( @level ) # @compKey+@pageKey
       @pub( obj )
     return
 
@@ -95,8 +102,8 @@ class NavMuse
        @dispKey     = dis.name
        if adj.plane isnt @compKey
           obj.comp = adj.plane
-          @compKey    = adj.plane
-          @route( @level, @compKey, @pageKey, obj )
+          @compKey = adj.plane
+          @route( @level ) # @compKey+@pageKey
        @pub( obj )
     return
 
@@ -111,7 +118,7 @@ class NavMuse
          obj.compKey = @compKey
          obj.pageKey = page
          @pageKey    = page
-         @routeCompPage( @compKey, @pageKey )
+         @route( @level ) # @compKey+@pageKey
     else
       @dirNone(  dr )
     return
@@ -119,20 +126,6 @@ class NavMuse
   dirNone:( dir ) ->
     console.error( 'Nav.dirNone unknown dir', { dir:dir, level:@level } )
     return
-
-  route:( level,   compKey=null, pageKey=null ) ->
-    name = if      pageKey?
-                   compKey+pageKey
-           else if compKey
-                   compKey
-           else
-                   level
-    if @$router?
-       @$router.push( { name:name } )
-    else
-       console.error( 'Nav.routeLevel() $router not set' )
-    return
-
 
   adjComp:( compKey, dir ) ->
     adjDir = switch  dir

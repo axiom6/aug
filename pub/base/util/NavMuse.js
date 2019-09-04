@@ -12,7 +12,7 @@ NavMuse = class NavMuse {
     this.compKey = compKey1;
     this.build = new Build(this.batch);
     this.$router = null;
-    this.level = 'Comp'; // Prac Disp
+    this.level = 'None'; // Prac Disp
     this.pracKey = 'None';
     this.dispKey = 'None';
     this.pageKey = 'Icon';
@@ -36,6 +36,17 @@ NavMuse = class NavMuse {
     this.stream.publish('Nav', obj);
     if (levelChanged) {
       this.route(this.level);
+    }
+  }
+
+  route(name) {
+    // console.log( 'NavMuse.route()', name )
+    if (this.$router != null) {
+      this.$router.push({
+        name: name
+      });
+    } else {
+      console.error('Nav.routeLevel() $router not set');
     }
   }
 
@@ -108,7 +119,7 @@ NavMuse = class NavMuse {
       if (adj.plane !== this.compKey) {
         obj.comp = adj.plane;
         this.compKey = adj.plane;
-        this.route(this.level, this.compKey, this.pageKey, obj);
+        this.route(this.level); // @compKey+@pageKey
       }
       this.pub(obj);
     }
@@ -137,7 +148,7 @@ NavMuse = class NavMuse {
       if (adj.plane !== this.compKey) {
         obj.comp = adj.plane;
         this.compKey = adj.plane;
-        this.route(this.level, this.compKey, this.pageKey, obj);
+        this.route(this.level); // @compKey+@pageKey
       }
       this.pub(obj);
     }
@@ -159,7 +170,7 @@ NavMuse = class NavMuse {
         obj.compKey = this.compKey;
         obj.pageKey = page;
         this.pageKey = page;
-        this.routeCompPage(this.compKey, this.pageKey);
+        this.route(this.level); // @compKey+@pageKey
       }
     } else {
       this.dirNone(dr);
@@ -171,18 +182,6 @@ NavMuse = class NavMuse {
       dir: dir,
       level: this.level
     });
-  }
-
-  route(level, compKey = null, pageKey = null) {
-    var name;
-    name = pageKey != null ? compKey + pageKey : compKey ? compKey : level;
-    if (this.$router != null) {
-      this.$router.push({
-        name: name
-      });
-    } else {
-      console.error('Nav.routeLevel() $router not set');
-    }
   }
 
   adjComp(compKey, dir) {

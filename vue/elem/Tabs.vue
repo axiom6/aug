@@ -1,8 +1,8 @@
 
 <template>
   <div class="tabs">
-    <template v-for="page in pages">
-      <div :class="clPage(page.name)" @click="doPage(page)">{{page.name}}</div>
+    <template v-for="pageObj in pages">
+      <div :class="clPage(pageObj.name)" @click="doPage(pageObj.name)">{{pageObj.name}}</div>
     </template>
   </div>
 </template>
@@ -13,23 +13,23 @@
 
     props: { pages:Object },
     
-    data() { return { page:"None" } },
+    data() { return { pageKey:'None', pageObj:null } },
     
     methods: {
-      onPage: function (page) {
-        // console.log( 'Tabs.onPage()', { page:page, tabs:this.page } );
-        this.page = page; },
-      doPage: function (page) {
-        this.nav().pub( { pageKey:page.name } ); },
-      clPage: function (name) {
-        return this.page===name ? 'tab-active' : 'tab'; } },
+      onPage: function (pageKey) {
+        this.pageKey  = pageKey; },
+      doPage: function (pageKey) {
+        this.onPage( pageKey )
+        this.nav().pub( { pageKey:pageKey } ); },
+      clPage: function (pageKey) {
+        return this.pageKey===pageKey ? 'tab-active' : 'tab'; } },
 
     beforeMount: function() {
-      this.onPage(this.nav().page); },
+      this.onPage(this.nav().pageKey); },
 
     mounted: function() {
         this.subscribe(  "Nav", 'Tabs', (obj) => {
-          this.onPage(obj.page); } ); }
+          this.onPage(obj.pageKey); } ); }
     }
   
 </script>

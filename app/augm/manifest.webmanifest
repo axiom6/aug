@@ -1,0 +1,11 @@
+{
+  "name":             "Augment",
+  "short_name":       "Augm",
+  "start_url":        "/augm.html",
+  "display":          "standalone",
+  "theme_color":      "#888888",
+  "background_color": "#000000",
+  "icons": [
+    { "src": "../../css/icons/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

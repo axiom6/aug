@@ -32,18 +32,15 @@
       doComp: function(compKey) {
         this.compKey =  compKey;
         let obj      = { level:'Comp', compKey:compKey, page:this.nav().pageKey, source:'Toc' }
-        this.nav().pub(obj);
-        this.nav().route('Comp'); },
+        this.nav().pub(obj); },
       doPrac: function(pracKey) {
         this.pracKey =  pracKey
         let obj      = { level:'Prac', pracKey:pracKey, pageKey:'Dirs', source:'Toc' }
-        this.nav().pub(obj);
-        this.nav().route('Prac'); },
+        this.nav().pub(obj); },
       doDisp: function(dispKey) {
         this.dispKey =  dispKey;
         let obj      = { level:'Disp', dispKey:dispKey, source:'Toc' }
-        this.nav().pub(obj);
-        this.nav().route('Disp'); },
+        this.nav().pub(obj); },
       onNav:  function (obj) {
         if( obj.source !== 'Toc' ) {
           switch( obj.level ) {

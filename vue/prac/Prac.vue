@@ -30,22 +30,27 @@
     methods: {
       
       onPrac: function(pracKey) {
-        if( this.pracObj.name !== pracKey ) {
-            this.pracObj = this.pracObject( this.nav().compKey, pracKey ); } },
+        if( !this.isDef(this.pracObj) || this.pracObj.name !== pracKey ) {
+             this.pracObj = this.pracObject( this.nav().compKey, pracKey ); } },
       onPage: function(pageKey) {
-        for( let key in this.pages ) {
-          this.pages[key].show = key === pageKey; } },
+        let  hasPage = this.showPages( this.pages, pageKey );
+        if( !hasPage ) {
+          this.doPage('Dirs'); } },
+      doPage: function(   pageKey ) {
+        this.nav().set( { pageKey:pageKey } );
+        this.pages[pageKey].show = true; },
       onNav: function( obj ) {
-        this.onPrac( nav().pracKey );
-        this.onPage(   obj.pageKey ); }
+        if( this.nav().level === 'Prac' ) {
+          this.onPrac( obj.pracKey );
+          this.onPage( obj.pageKey ); } }
       },
 
-    beforeMount: function() {
-      this.onNav( this.onNav( this.nav() ) ); },
+    beforeMount: function () {
+      this.onNav( { pracKey:this.nav().pracKey, pageKey:this.nav().pageKey } ); },
 
     mounted: function () {
       this.subscribe(  "Nav", 'Prac.vue', (obj) => {
-        this.onNav( this.nav(obj) ); } ); }
+        this.onNav(obj); } ); }
   }
   
   export default Prac;

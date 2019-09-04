@@ -77,6 +77,7 @@ class Data
     batch[plane].data[plane]
 
   @toUrl:(url) ->
+    #  console.log( 'Data.toUrl()', Data.local+url )
     if window.location.href.includes('localhost') then Data.local+url else Data.hosted+url
            
   # ------ Quick JSON read ------
@@ -106,12 +107,8 @@ class Data
     document.body.removeChild(downloadLink)
     return
 
-#ata.parse   = Util.parseURI( window.location.href )
-#ata.hosted1 = Data.parse.hostname + '/app/data/'
-# console.log('Data.hosted', Data.hosted, window.location.href )
-
-Data.local   = "app/data/"
-Data.hosted  = '/app/data/'
+Data.local   =  "../../pub/data/"
+Data.hosted  = '/pub/data/'
 Data.cssDir  = 'css/'  # /css in /pub
 
 

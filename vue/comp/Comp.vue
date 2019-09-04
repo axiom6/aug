@@ -2,7 +2,7 @@
 <template>
   <div class="comp" ref="Comp" title="Comp">
     <b-tabs :pages="pages"></b-tabs>
-    <template v-for="pracObj in practices">
+    <template v-for="pracObj in compObj">
       <div   :class="pracObj.dir" :key="pracObj.name" :ref="pracObj.name" :title="pracObj.name">
         <p-icon v-show="pages['Icon'].show" :pracObj="pracObj"></p-icon>
         <p-dirs v-show="pages['Dirs'].show" :pracObj="pracObj"></p-dirs>
@@ -11,7 +11,7 @@
     </template>
     <template v-for="row in rows">
       <div v-show="isRows()" :class="row.dir" :key="row.name">
-        <p-icon :compKey="compKey" :pracObj="row"></p-icon>
+        <p-icon :pracObj="row"></p-icon>
       </div>
     </template>
   </div>
@@ -29,7 +29,7 @@
     components:{ 'b-tabs':Tabs, 'p-icon':Icon, 'p-dirs':Dirs, 'p-conn':Conn },
     
     data() { return {
-      compKey:'None', pracObj:null, practices:{},
+      compObj:null, pracObj:null,
       pages:{
         Icon: { name:'Icon', show:false },
         Dirs: { name:'Dirs', show:false },
@@ -40,28 +40,27 @@
         Share:{ name:'Share', dir:'sh', icon:"fas fa-share-alt-square" } } } },
     
     methods: {
-      onPage: function (pageKey) {
-        for( let key in this.pages ) {
-          this.pages[key].show = key === pageKey; } },
+      onComp: function (compKey) {
+        this.compObj = this.compObject(compKey); },
+      onPage: function(pageKey) {
+        let  hasPage = this.showPages( this.pages, pageKey );
+        if( !hasPage ) {
+          this.doPage('Icon'); } },
+      doPage: function(   pageKey ) {
+        this.nav().set( { pageKey:pageKey } );
+        this.pages[pageKey].show = true; },
       isRows: function () {
         return true; },
-      onComp: function (compKey) {
-        this.compKey  = compKey;
-        this.practices = this.pracs(this.compKey); },
-      onNone: function (obj) {
-        console.error( 'Page Nav Error', { obj:obj } ); },
       onNav:  function (obj) {
-        this.onPage(this.nav().pageKey);
-        if( obj.level === 'Comp') {
-          this.onComp(obj.compKey); } }
+        if( this.nav().level === 'Comp' ) {
+          this.onComp(obj.compKey);
+          this.onPage(obj.pageKey); } }
       },
 
     beforeMount: function() {
-      this.compKey = this.nav().compKey;
-      this.onPage(this.nav().pageKey); },
+      this.onNav( { compKey:this.nav().compKey, pageKey:this.nav().pageKey } ); },
 
     mounted: function () {
-      this.practices = this.pracs(this.compKey);
       this.subscribe( 'Nav', 'Comp.vue', (obj) => {
         this.onNav(obj); } ); }
   }

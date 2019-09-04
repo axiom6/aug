@@ -2,7 +2,7 @@
 <template>
   <div class="disd">
     <d-tabs :pages="pages"></d-tabs>
-    <d-desc v-show="pages['Desc'].show" :dispObj="dispObj"></d-desc>
+    <d-desc v-if="pages['Desc'].show" :dispObj="dispObj"></d-desc>
   </div>
 </template>
 
@@ -22,16 +22,24 @@
     methods: {
       
       onDisp: function(dispKey) {
-        this.dispObj  = this.dispObject( this.nav().compKey, this.nav().pracKey, dispKey ); },
+        this.dispObj  = this.dispObject( this.nav().compKey, this.nav().pracKey, dispKey );
+        if( !this.isDef(this.dispObj) ) {
+          console.error('Disp.onDisp() disp null',{comp:this.nav().compKey,prac:this.nav().pracKey,disp:dispKey})}},
       onPage: function(pageKey) {
-        for( let key in this.pages ) {
-          this.pages[key].show = key === pageKey; } },
+        let  hasPage = this.showPages( this.pages, pageKey );
+        if( !hasPage ) {
+          this.doPage('Desc'); } },
+      doPage: function( pageKey ) {
+        this.nav().set( {pageKey:pageKey } );
+        this.pages[pageKey].show = true; },
       onNav:  function (obj) {
-        this.onDisp( obj.dispKey );
-        this.onPage( obj.pageKey ); } },
+        if( this.nav().level === 'Disp' ) {
+          // console.log( 'Disp.onNav()', obj );
+          this.onDisp( obj.dispKey );
+          this.onPage( obj.pageKey ); } } },
 
     beforeMount: function() {
-      this.onNav(this.nav()); },
+      this.onNav( { dispKey:this.nav().dispKey, pageKey:this.nav().pageKey } ); },
 
     mounted: function () {
       this.subscribe(  "Nav", this.comp+'Disp.Disp.vue', (obj) => {

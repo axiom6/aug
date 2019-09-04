@@ -55,6 +55,330 @@
 		"oAP": "/build/.idea",
 		"oF": 0
 		},
+	"/app/augm/augm.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/app/augm/augm.html",
+		"oF": 0
+		},
+	"/app/augm/Augm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/augm/Augm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/augm/Home.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/augm/Home-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/augm/Home.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/app/augm/Home.js",
+		"oF": 0
+		},
+	"/app/augm/Main.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/app/augm/Main.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/augm/Main.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/augm/Main-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/augm/manifest.webmanifest": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/app/augm/manifest.webmanifest",
+		"oF": 0
+		},
+	"/app/augm/Roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/augm/Roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/augm/Router.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/augm/Router-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/augm/Test.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/app/augm/Test.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/augm/Test.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/augm/Test-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/jitter/Home.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/jitter/Home-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/jitter/jitter.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/app/jitter/jitter.html",
+		"oF": 0
+		},
+	"/app/jitter/Jitter.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/jitter/Jitter-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/jitter/Main.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/app/jitter/Main.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/jitter/Main.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/jitter/Main-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/jitter/manifest.webmanifest": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/app/jitter/manifest.webmanifest",
+		"oF": 0
+		},
+	"/app/jitter/Roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/jitter/Roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/jitter/Router.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/jitter/Router-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/main/main.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/app/main/main.html",
+		"oF": 0
+		},
+	"/app/main/manifest.webmanifest": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/app/main/manifest.webmanifest",
+		"oF": 0
+		},
+	"/app/main/Roll.sh": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/app/main/Roll.sh",
+		"oF": 0
+		},
+	"/app/mbox/manifest.webmanifest": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/app/mbox/manifest.webmanifest",
+		"oF": 0
+		},
+	"/app/mbox/mbox.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/app/mbox/mbox.html",
+		"oF": 0
+		},
+	"/app/muse/Home.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/muse/Home-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/muse/Home.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/app/muse/Home.js",
+		"oF": 0
+		},
+	"/app/muse/Main.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/app/muse/Main.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/muse/Main.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/muse/Main-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/muse/manifest.webmanifest": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/app/muse/manifest.webmanifest",
+		"oF": 0
+		},
+	"/app/muse/muse.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/app/muse/muse.html",
+		"oF": 0
+		},
+	"/app/muse/Muse.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/muse/Muse-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/muse/Roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/muse/Roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/app/muse/Router.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/app/muse/Router-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/aug.iml": {
 		"cB": 0,
 		"ft": 8192,
@@ -79,6 +403,83 @@
 		"rwU": 0,
 		"sI": 0,
 		"sU": 0
+		},
+	"/css/brew/AeroPress.jpg": {
+		"ft": 16384,
+		"iS": 6539,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/css/brew/AeroPress.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"/css/brew/AutoDrip.jpg": {
+		"ft": 16384,
+		"iS": 59936,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/css/brew/AutoDrip.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"/css/brew/ColdBrew.jpg": {
+		"ft": 16384,
+		"iS": 5429,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/css/brew/ColdBrew.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"/css/brew/Expresso.jpg": {
+		"ft": 16384,
+		"iS": 62811,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/css/brew/Expresso.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"/css/brew/FrenchPress.jpg": {
+		"ft": 16384,
+		"iS": 5660,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/css/brew/FrenchPress.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"/css/brew/PourOver.jpg": {
+		"ft": 16384,
+		"iS": 4467,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/css/brew/PourOver.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"/css/brew/SyphonPot.jpg": {
+		"ft": 16384,
+		"iS": 5357,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/css/brew/SyphonPot.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
 		},
 	"/css/font/fontawesome/fa-brands-400.eot": {
 		"cB": 0,
@@ -648,6 +1049,16 @@
 		"sI": 0,
 		"sU": 0
 		},
+	"/css/fontawesome/init.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/css/fontawesome/init-min.css",
+		"oF": 0,
+		"oS": 3
+		},
 	"/css/fontawesome/regular.less": {
 		"aP": 0,
 		"bl": 0,
@@ -716,6 +1127,167 @@
 		"rwU": 0,
 		"sI": 0,
 		"sU": 0
+		},
+	"/css/icons/android-chrome-192x192.png": {
+		"ft": 32768,
+		"iS": 9416,
+		"oA": 0,
+		"oAP": "/css/icons/android-chrome-192x192.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/icons/android-chrome-512x512.png": {
+		"ft": 32768,
+		"iS": 29808,
+		"oA": 0,
+		"oAP": "/css/icons/android-chrome-512x512.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/icons/apple-touch-icon-120x120.png": {
+		"ft": 32768,
+		"iS": 3369,
+		"oA": 0,
+		"oAP": "/css/icons/apple-touch-icon-120x120.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/icons/apple-touch-icon-152x152.png": {
+		"ft": 32768,
+		"iS": 4046,
+		"oA": 0,
+		"oAP": "/css/icons/apple-touch-icon-152x152.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/icons/apple-touch-icon-180x180.png": {
+		"ft": 32768,
+		"iS": 4678,
+		"oA": 0,
+		"oAP": "/css/icons/apple-touch-icon-180x180.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/icons/apple-touch-icon-60x60.png": {
+		"ft": 32768,
+		"iS": 1491,
+		"oA": 0,
+		"oAP": "/css/icons/apple-touch-icon-60x60.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/icons/apple-touch-icon-76x76.png": {
+		"ft": 32768,
+		"iS": 1823,
+		"oA": 0,
+		"oAP": "/css/icons/apple-touch-icon-76x76.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/icons/apple-touch-icon.png": {
+		"ft": 32768,
+		"iS": 4678,
+		"oA": 0,
+		"oAP": "/css/icons/apple-touch-icon.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/icons/favicon-16x16.png": {
+		"ft": 32768,
+		"iS": 799,
+		"oA": 0,
+		"oAP": "/css/icons/favicon-16x16.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/icons/favicon-32x32.png": {
+		"ft": 32768,
+		"iS": 1271,
+		"oA": 0,
+		"oAP": "/css/icons/favicon-32x32.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/icons/favicon.ico": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/css/icons/favicon.ico",
+		"oF": 0
+		},
+	"/css/icons/msapplication-icon-144x144.png": {
+		"ft": 32768,
+		"iS": 1169,
+		"oA": 0,
+		"oAP": "/css/icons/msapplication-icon-144x144.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/icons/mstile-150x150.png": {
+		"ft": 32768,
+		"iS": 4282,
+		"oA": 0,
+		"oAP": "/css/icons/mstile-150x150.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/icons/safari-pinned-tab.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/css/icons/safari-pinned-tab.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/css/icons/vue-logo.png": {
+		"ft": 32768,
+		"iS": 6849,
+		"oA": 0,
+		"oAP": "/css/icons/vue-logo.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
 		},
 	"/css/muse/Info.css": {
 		"aP": 1,
@@ -875,6 +1447,206 @@
 		"rwU": 0,
 		"sI": 0,
 		"sU": 0
+		},
+	"/css/phone/landscape.png": {
+		"ft": 32768,
+		"iS": 35274,
+		"oA": 0,
+		"oAP": "/css/phone/landscape.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/phone/portrait.png": {
+		"ft": 32768,
+		"iS": 37495,
+		"oA": 0,
+		"oAP": "/css/phone/portrait.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/svg/hallowback2.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/css/svg/hallowback2.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/css/svg/hallowfront4.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/css/svg/hallowfront4.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/css/svg/hallowmid2.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/css/svg/hallowmid2.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/css/svg/hallowmidfront2.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/css/svg/hallowmidfront2.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/css/svg/horse-hallow5.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/css/svg/horse-hallow5.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/css/svg/landscape.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/css/svg/landscape.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
+	"/css/themes/mobile.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/css/themes/mobile.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/css/themes/theme.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/css/themes/theme-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/css/themes/theme.css.map": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/css/themes/theme.css.map",
+		"oF": 0
+		},
+	"/css/themes/theme.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/css/themes/theme.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/css/vis/Clarity.png": {
+		"ft": 32768,
+		"iS": 42299,
+		"oA": 0,
+		"oAP": "/css/vis/Clarity.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/vis/Delight.png": {
+		"ft": 32768,
+		"iS": 44357,
+		"oA": 0,
+		"oAP": "/css/vis/Delight.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/vis/Help.png": {
+		"ft": 32768,
+		"iS": 40779,
+		"oA": 0,
+		"oAP": "/css/vis/Help.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/vis/Honest.png": {
+		"ft": 32768,
+		"iS": 53507,
+		"oA": 0,
+		"oAP": "/css/vis/Honest.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/vis/Scale.png": {
+		"ft": 32768,
+		"iS": 36676,
+		"oA": 0,
+		"oAP": "/css/vis/Scale.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/css/vis/Structure.png": {
+		"ft": 32768,
+		"iS": 14025,
+		"oA": 0,
+		"oAP": "/css/vis/Structure.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
 		},
 	"/firebase.json": {
 		"ft": 524288,
@@ -1076,80 +1848,6 @@
 		"oO": 0,
 		"oS": 1
 		},
-	"/pub/404.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/404.html",
-		"oF": 0
-		},
-	"/pub/ap/mbox/Box.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/ap/mbox/Box-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/ap/mbox/Color.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/ap/mbox/Color-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/ap/mbox/Coord.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/ap/mbox/Coord-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/ap/mbox/Faces.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/ap/mbox/Faces-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/ap/mbox/MBox.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/ap/mbox/MBox-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/ap/mbox/Regress.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/ap/mbox/Regress-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/pub/app/augm/Augm.js": {
 		"bF": 0,
 		"ft": 64,
@@ -1253,254 +1951,6 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
-		},
-	"/pub/app/data/augm/Data.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/augm/Data-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/augm/Geom.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/augm/Geom-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/augm/Math.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/augm/Math-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/draw/Augm.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/draw/Augm-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/draw/D3ds.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/draw/D3ds-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/draw/Data.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/draw/Data-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/draw/Hues.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/draw/Hues-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/draw/Prac.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/draw/Prac-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/draw/Prin.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/draw/Prin-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/draw/Quad.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/draw/Quad-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/draw/Tech.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/draw/Tech-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/draw/Tops.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/draw/Tops-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/jitter/Choice.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/jitter/Choice-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/jitter/Flavor.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/jitter/Flavor-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/jitter/Jitter.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/jitter/Jitter-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/jitter/Navs.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/jitter/Navs-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/jitter/Region.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/jitter/Region-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/muse/Cube.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/muse/Cube-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/muse/Info.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/muse/Info-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/muse/Know.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/muse/Know-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/muse/Muse.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/muse/Muse-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/muse/Prin.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/muse/Prin-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/muse/Rows.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/muse/Rows-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/muse/Wise.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/muse/Wise-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/store/Prac.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/store/Prac-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/store/Push.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/store/Push-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/store/Sync.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/app/data/store/Sync-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/app/data/text/BuildingCulture.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/pub/app/data/text/BuildingCulture.txt",
-		"oF": 0
-		},
-	"/pub/app/data/text/Cols.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/pub/app/data/text/Cols.txt",
-		"oF": 0
-		},
-	"/pub/app/data/text/Conn.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/pub/app/data/text/Conn.txt",
-		"oF": 0
-		},
-	"/pub/app/data/text/Info.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/pub/app/data/text/Info.txt",
-		"oF": 0
 		},
 	"/pub/app/jitt/Home.js": {
 		"bF": 0,
@@ -1681,14 +2131,6 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
-		},
-	"/pub/augm.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/augm.html",
-		"oF": 0
 		},
 	"/pub/base/d3d/Axes.js": {
 		"bF": 0,
@@ -2856,6 +3298,254 @@
 		"oT": 1,
 		"q": 100
 		},
+	"/pub/data/augm/Data.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/augm/Data-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/augm/Geom.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/augm/Geom-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/augm/Math.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/augm/Math-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/draw/Augm.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/draw/Augm-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/draw/D3ds.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/draw/D3ds-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/draw/Data.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/draw/Data-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/draw/Hues.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/draw/Hues-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/draw/Prac.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/draw/Prac-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/draw/Prin.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/draw/Prin-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/draw/Quad.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/draw/Quad-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/draw/Tech.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/draw/Tech-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/draw/Tops.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/draw/Tops-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/jitter/Choice.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/jitter/Choice-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/jitter/Flavor.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/jitter/Flavor-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/jitter/Jitter.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/jitter/Jitter-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/jitter/Navs.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/jitter/Navs-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/jitter/Region.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/jitter/Region-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/muse/Cube.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/muse/Cube-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/muse/Info.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/muse/Info-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/muse/Know.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/muse/Know-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/muse/Muse.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/muse/Muse-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/muse/Prin.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/muse/Prin-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/muse/Rows.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/muse/Rows-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/muse/Wise.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/muse/Wise-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/store/Prac.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/store/Prac-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/store/Push.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/store/Push-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/store/Sync.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/store/Sync-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/text/BuildingCulture.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/data/text/BuildingCulture.txt",
+		"oF": 0
+		},
+	"/pub/data/text/Cols.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/data/text/Cols.txt",
+		"oF": 0
+		},
+	"/pub/data/text/Conn.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/data/text/Conn.txt",
+		"oF": 0
+		},
+	"/pub/data/text/Info.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/data/text/Info.txt",
+		"oF": 0
+		},
 	"/pub/gan/2D/Basics.js": {
 		"bF": 0,
 		"ft": 64,
@@ -3010,6 +3700,73 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/html/404.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/html/404.html",
+		"oF": 0
+		},
+	"/pub/html/augm.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/html/augm.html",
+		"oF": 0
+		},
+	"/pub/html/jitter.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/html/jitter.html",
+		"oF": 0
+		},
+	"/pub/html/main.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/html/main.html",
+		"oF": 0
+		},
+	"/pub/html/mbox.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/html/mbox.html",
+		"oF": 0
+		},
+	"/pub/html/muse.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/html/muse.html",
+		"oF": 0
+		},
+	"/pub/html/robots.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/html/robots.txt",
+		"oF": 0
+		},
+	"/pub/html/Worker.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/html/Worker-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/ikw/conn/Chord.js": {
 		"bF": 0,
 		"ft": 64,
@@ -3152,14 +3909,6 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
-		},
-	"/pub/jitter.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/jitter.html",
-		"oF": 0
 		},
 	"/pub/lib/d3/align.js": {
 		"bF": 0,
@@ -3552,14 +4301,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/main.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/main.html",
-		"oF": 0
-		},
 	"/pub/math/adt/Adt.js": {
 		"bF": 0,
 		"ft": 64,
@@ -3644,6 +4385,72 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/math/geo/Op-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/math/mbox/Box.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/mbox/Box-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/math/mbox/Color.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/mbox/Color-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/math/mbox/Coord.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/mbox/Coord-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/math/mbox/Faces.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/mbox/Faces-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/math/mbox/MBox.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/mbox/MBox-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/math/mbox/Regress.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/math/mbox/Regress-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -3768,30 +4575,6 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
-		},
-	"/pub/mbox.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/mbox.html",
-		"oF": 0
-		},
-	"/pub/muse.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/muse.html",
-		"oF": 0
-		},
-	"/pub/robots.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/pub/robots.txt",
-		"oF": 0
 		},
 	"/pub/vue/comp/Comp.js": {
 		"bF": 0,
@@ -4218,17 +5001,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/Worker.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/Worker-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/README.md": {
 		"cB": 0,
 		"cS": 0,
@@ -4247,215 +5019,6 @@
 		"pME": 1,
 		"rFN": 0,
 		"uCM": 0
-		},
-	"/src/ap/jitter/Body.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ap/jitter/Body.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/ap/jitter/Brew.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ap/jitter/Brew.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/ap/jitter/Drink.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ap/jitter/Drink.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/ap/jitter/Flavor.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ap/jitter/Flavor.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/ap/jitter/Interact.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ap/jitter/Interact.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/ap/jitter/Jitter.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ap/jitter/Jitter.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/ap/jitter/Prefs.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ap/jitter/Prefs.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/ap/jitter/Region.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ap/jitter/Region.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/ap/jitter/Roast.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ap/jitter/Roast.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/ap/jitter/Summary.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ap/jitter/Summary.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/ap/jitter/User.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ap/jitter/User.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/ap/jitter/Wheel.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ap/jitter/Wheel.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/ap/jitter/World.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ap/jitter/World.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/ap/mbox/Box.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ap/mbox/Box.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/ap/mbox/Color.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ap/mbox/Color.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/ap/mbox/Coord.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ap/mbox/Coord.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/ap/mbox/Faces.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ap/mbox/Faces.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/ap/mbox/MBox.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ap/mbox/MBox.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/ap/mbox/Regress.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/ap/mbox/Regress.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
 		},
 	"/src/base/d3d/Axes.coffee": {
 		"ft": 32,
@@ -4930,6 +5493,149 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/src/jitter/Body.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/jitter/Body.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/jitter/Brew.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/jitter/Brew.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/jitter/Drink.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/jitter/Drink.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/jitter/Flavor.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/jitter/Flavor.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/jitter/Interact.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/jitter/Interact.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/jitter/Jitter.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/jitter/Jitter.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/jitter/Prefs.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/jitter/Prefs.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/jitter/Region.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/jitter/Region.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/jitter/Roast.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/jitter/Roast.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/jitter/Summary.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/jitter/Summary.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/jitter/User.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/jitter/User.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/jitter/Wheel.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/jitter/Wheel.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/jitter/World.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/jitter/World.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
 	"/src/math/adt/Adt.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -5013,6 +5719,72 @@
 		"mi": 0,
 		"oA": 0,
 		"oAP": "/pub/math/geo/Op.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/math/mbox/Box.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/math/mbox/Box.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/math/mbox/Color.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/math/mbox/Color.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/math/mbox/Coord.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/math/mbox/Coord.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/math/mbox/Faces.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/math/mbox/Faces.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/math/mbox/MBox.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/math/mbox/MBox.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/math/mbox/Regress.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/math/mbox/Regress.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
