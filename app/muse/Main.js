@@ -243,11 +243,10 @@ Main = (function() {
         for (key in pages) {
           if (!hasProp.call(pages, key)) continue;
           page = pages[key];
-          if (!(key === pageKey)) {
-            continue;
+          page.show = key === pageKey;
+          if (page.show) {
+            hasPage = true;
           }
-          page.show = true;
-          hasPage = true;
         }
         return hasPage;
       }

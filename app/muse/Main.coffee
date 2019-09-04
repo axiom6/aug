@@ -116,9 +116,9 @@ class Main
          Vis.toRgbaHsv(hsu)
       showPages:( pages, pageKey ) ->
         hasPage = false
-        for own key, page of pages when key is pageKey
-          page.show = true
-          hasPage   = true
+        for own key, page  of pages
+          page.show = key  is pageKey
+          hasPage   = true if page.show
         hasPage
       #navbSpecs:() ->
       #  Main.NavbSpecs

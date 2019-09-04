@@ -54,7 +54,7 @@
 
   .ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }
   
-  .desd { position:absolute; left:0; top:0; right:0; bottom:0; .grid3x3(); .theme-desc(); color:black;
+  .desd { position:absolute; left:0; top:0; right:0; bottom:0; .grid3x3(); .theme-prac-desc(); color:black;
     
     .cen { .ddir(cen); .grid2x1();
       .dead2 { grid-area:dead; }

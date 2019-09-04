@@ -1,6 +1,6 @@
 
 <template>
-  <div class="dirs">
+  <div class="dirs-prac">
     <div class="cen" :style="style(pracObj.hsv)">
       <div class="disp" @click="doPrac(pracObj.name)">
         <i   :class="pracObj.icon"></i>
@@ -54,8 +54,8 @@
 
   .ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }
   
-  .dirs { position:absolute; left:0; top:0; right:0; bottom:0; background-color:@theme-icon-back;
-    color:black; text-align:center; font-weight:bold; .theme-dirs(); .grid3x3();
+  .dirs-prac { position:absolute; left:0; top:0; right:0; bottom:0; background-color:@theme-icon-back;
+    color:black; text-align:center; font-weight:bold; .theme-prac-dirs(); .grid3x3();
                              .north { .ddir(north); }
       .west { .ddir(west); } .cen   { .ddir(cen);   } .east { .ddir(east); }
                              .south { .ddir(south); }

@@ -1,6 +1,6 @@
 
 <template>
-  <div class="conn" @click="doPrac(pracObj.name)" :ref="pracObj.name" ></div>
+  <div :class="clConn()" @click="doPrac(pracObj.name)" :ref="pracObj.name" ></div>
 </template>
 
 <script type="module">
@@ -19,6 +19,10 @@
       
       doPrac: function (pracKey) {
         this.nav().pub( { pracKey:pracKey } ); },
+      
+      clConn: function() {
+        // console.log( 'Conn.clConn() called' );
+        return this.nav().level === 'Comp' ? 'conn-comp' : 'conn-prac'; },
       
       calcSize: function(elem) { // Should only be called within $nextTick()
         let sz   = {}
@@ -59,7 +63,10 @@
   
   @import '../../pub/css/themes/theme.less';
 
-  .conn { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;
-    color:@theme-color; font-size:@theme-icon-size; text-align:center; .theme-conn(); }
+  .conn-comp { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;
+    color:@theme-color; font-size:@theme-icon-size; text-align:center; .theme-comp-conn(); }
+
+  .conn-prac { position:absolute; left:0; top:0; right:0; bottom:0;
+    color:@theme-color; font-size:@theme-icon-size; text-align:center; .theme-prac-conn(); }
   
 </style>

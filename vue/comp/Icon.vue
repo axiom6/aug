@@ -28,7 +28,7 @@
   @import '../../pub/css/themes/theme.less';
   
   .icon { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;
-    color:@theme-color; font-size:@theme-icon-size; text-align:center; .theme-icon(); // @theme-icon-size;
-    .name {             font-size:@theme-name-size; text-align:center; } }            // @theme-name-size;
+    color:@theme-color; font-size:@theme-icon-size; text-align:center; .theme-comp-icon(); // @theme-icon-size;
+    .name {             font-size:@theme-name-size; text-align:center; } }                 // @theme-name-size;
   
 </style>

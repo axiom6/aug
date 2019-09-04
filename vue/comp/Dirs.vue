@@ -54,7 +54,7 @@
   .ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }
   
   .dirs { display:grid; align-self:stretch; justify-self:stretch; align-items:center; justify-items:center;
-    color:black; text-align:center; font-weight:bold; .theme-dirs();
+    color:black; text-align:center; font-weight:bold; .theme-comp-dirs();
     
       .grid3x3(); // The 4 Displine plus Practiice name Grid
                              .north { .ddir(north); }

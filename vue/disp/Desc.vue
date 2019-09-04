@@ -46,7 +46,7 @@
   .grid5x1() { display:grid;  grid-template-columns:1fr; grid-template-rows:20fr 20fr 20fr 20fr 20fr;
     grid-template-areas: "iconq" "summq""area1" "area2" "area3"; }
   
-  .desd { .grid5x1(); position:absolute; left:0; top:5%; right:0; bottom:0; .theme-desc(); color:black;
+  .desd { .grid5x1(); position:absolute; left:0; top:5%; right:0; bottom:0; .theme-disp-desc(); color:black;
     .iconq { grid-area:iconq; }
     .summq { grid-area:summq; }
     .area1 { grid-area:area1; }
