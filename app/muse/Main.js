@@ -184,7 +184,7 @@ Main = (function() {
         return Main.komps;
       },
       views: function() {
-        return ['Home', 'Cube', 'Comp', 'Prac', 'Disp', 'Conn'];
+        return ['Home', 'Prin', 'Comp', 'Prac', 'Disp', 'Cube'];
       },
       subset: function(compk, filter) {
         var filts, key, prac, ref;

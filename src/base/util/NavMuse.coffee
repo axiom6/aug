@@ -10,7 +10,7 @@ class NavMuse
     @pracKey  =  'None'
     @dispKey  =  'None'
     @pageKey  =  'Icon'
-    @pageKeys = ['Icon','Dirs','Conn','Summ','Desc']
+    @pageKeys = ['Icon','Dirs','Conn','Desc']
     @compass  =   ""
 
   pub:(   change ) ->

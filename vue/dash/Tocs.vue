@@ -30,8 +30,9 @@
     methods: {
       
       doComp: function(compKey) {
-        this.compKey =  compKey;
-        let obj      = { level:'Comp', compKey:compKey, page:this.nav().pageKey, source:'Toc' }
+        this.compKey = compKey;
+        let level    = compKey === 'Prin' ? 'Prin' : 'Comp';
+        let obj      = { level:level, compKey:compKey, page:this.nav().pageKey, source:'Toc' }
         this.nav().pub(obj); },
       doPrac: function(pracKey) {
         this.pracKey =  pracKey
@@ -44,6 +45,7 @@
       onNav:  function (obj) {
         if( obj.source !== 'Toc' ) {
           switch( obj.level ) {
+            case 'Prin' : this.compKey = obj.compKey; break;
             case 'Comp' : this.compKey = obj.compKey; break;
             case 'Prac' : this.pracKey = obj.pracKey; break;
             case 'Disp' : this.dispKey = obj.dispKey; break;

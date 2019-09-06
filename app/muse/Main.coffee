@@ -86,7 +86,7 @@ class Main
       kompsTocs:() ->   # For Tocs.vue
         Main.komps
       views:() ->
-        ['Home','Cube','Comp','Prac','Disp','Conn']
+        ['Home','Prin','Comp','Prac','Disp','Cube']
       subset:( compk, filter ) ->
         filts = {}
         for own key, prac of this.pracs(compk) when filter(prac)

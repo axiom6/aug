@@ -7,6 +7,7 @@
   "scripts": {
     "main": "pub/app/main/Roll.sh",
     "muse": "rollup --config app/muse/Roll.js",
+    "prin": "rollup --config vue/prin/Roll.js",
     "comp": "rollup --config vue/comp/Roll.js",
     "prac": "rollup --config vue/prac/Roll.js",
     "disp": "rollup --config vue/disp/Roll.js",
