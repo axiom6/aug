@@ -17,7 +17,7 @@
     
     data() { return { dispObj:null,
       pages:{
-        Desc: { name:'Desc', show:false } } } },
+        Desc: { name:'Desc', key:'Desc', show:false } } } },
     
     methods: {
       
@@ -33,13 +33,13 @@
         this.nav().set( {pageKey:pageKey } );
         this.pages[pageKey].show = true; },
       onNav:  function (obj) {
+        let pageKey = this.nav().pageKey;
         if( this.nav().level === 'Disp' ) {
-          // console.log( 'Disp.onNav()', obj );
           this.onDisp( obj.dispKey );
-          this.onPage( obj.pageKey ); } } },
+          this.onPage(     pageKey ); } } },
 
     beforeMount: function() {
-      this.onNav( { dispKey:this.nav().dispKey, pageKey:this.nav().pageKey } ); },
+      this.onNav( { dispKey:this.nav().dispKey } ); },
 
     mounted: function () {
       this.subscribe(  "Nav", this.comp+'Disp.Disp.vue', (obj) => {

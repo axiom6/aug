@@ -119,6 +119,7 @@ class Main
         for own key, page  of pages
           page.show = key  is pageKey
           hasPage   = true if page.show
+        # console.log( 'Main.showPages()', { pageKey:pageKey, hasPage:hasPage, pages:pages })
         hasPage
       #navbSpecs:() ->
       #  Main.NavbSpecs

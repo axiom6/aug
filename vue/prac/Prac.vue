@@ -23,9 +23,9 @@
     
     data() { return { pracObj:null,
       pages:{
-        Dirs: { name:'Dirs', show:false },
-        Conn: { name:'Conn', show:false },
-        Desc: { name:'Desc', show:false } } } },
+        Dirs: { name:'Dirs', key:'Dirs', show:false },
+        Conn: { name:'Conn', key:'Conn', show:false },
+        Desc: { name:'Desc', key:'Desc', show:false } } } },
     
     methods: {
       
@@ -40,13 +40,14 @@
         this.nav().set( { pageKey:pageKey } );
         this.pages[pageKey].show = true; },
       onNav: function( obj ) {
+        let pageKey = this.nav().pageKey;
         if( this.nav().level === 'Prac' ) {
           this.onPrac( obj.pracKey );
-          this.onPage( obj.pageKey ); } }
+          this.onPage(     pageKey ); } }
       },
 
     beforeMount: function () {
-      this.onNav( { pracKey:this.nav().pracKey, pageKey:this.nav().pageKey } ); },
+      this.onNav( { pracKey:this.nav().pracKey } ); },
 
     mounted: function () {
       this.subscribe(  "Nav", 'Prac.vue', (obj) => {

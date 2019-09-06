@@ -31,9 +31,9 @@
     data() { return {
       compObj:null, pracObj:null,
       pages:{
-        Icon: { name:'Icon', show:false },
-        Dirs: { name:'Dirs', show:false },
-        Conn: { name:'Conn', show:false } },
+        Icon: { name:'Icon', key:'Icon', show:false },
+        Dirs: { name:'Dirs', key:'Dirs', show:false },
+        Conn: { name:'Conn', key:'Conn', show:false } },
       rows: {
         Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap" },
         Do:{    name:'Do',    dir:'do', icon:"fas fas fa-cog" },
@@ -52,13 +52,14 @@
       isRows: function () {
         return true; },
       onNav:  function (obj) {
+        let pageKey = this.nav().pageKey;
         if( this.nav().level === 'Comp' ) {
           this.onComp(obj.compKey);
-          this.onPage(obj.pageKey); } }
+          this.onPage(    pageKey); } }
       },
 
     beforeMount: function() {
-      this.onNav( { compKey:this.nav().compKey, pageKey:this.nav().pageKey } ); },
+      this.onNav( { compKey:this.nav().compKey } ); },
 
     mounted: function () {
       this.subscribe( 'Nav', 'Comp.vue', (obj) => {

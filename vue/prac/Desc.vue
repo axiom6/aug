@@ -1,14 +1,14 @@
 
 <template>
-  <div   class="desd">
+  <div   class="desdp">
     <div class="cen" @click="doPrac(pracObj.name)" :style="style(pracObj.hsv)">
-      <div class="dead2"><d-icon :icon="pracObj.icon" :name="pracObj.name" :size="2" ></d-icon></div>
-      <div class="summ2">{{pracObj.desc}}</div>
+      <div class="deadp"><d-icon :icon="pracObj.icon" :name="pracObj.name" :size="2" ></d-icon></div>
+      <div class="summp">{{pracObj.desc}}</div>
     </div>
-    <template  v-for="dispObj in pracObj.disps">
-      <div  :class="dispObj.dir" @click="doDisp(dispObj.name)" :style="style(dispObj.hsv)">
-        <div class="dead2"><d-icon :icon="dispObj.icon" :name="dispObj.name" :size="2"></d-icon></div>
-        <div class="summ2">{{dispObj.desc}}</div>
+    <template v-for="dispObj in pracObj.disps">
+      <div   :class="dispObj.dir" @click="doDisp(dispObj.name)" :style="style(dispObj.hsv)">
+        <div  class="deadp"><d-icon :icon="dispObj.icon" :name="dispObj.name" :size="2"></d-icon></div>
+        <div  class="summp">{{dispObj.desc}}</div>
       </div>
   </template>
   </div>
@@ -54,11 +54,11 @@
 
   .ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }
   
-  .desd { position:absolute; left:0; top:0; right:0; bottom:0; .grid3x3(); .theme-prac-desc(); color:black;
+  .desdp { position:absolute; left:0; top:0; right:0; bottom:0; .grid3x3(); .theme-prac-desc(); color:black;
     
     .cen { .ddir(cen); .grid2x1();
-      .dead2 { grid-area:dead; }
-      .summ2 { grid-area:summ; display:grid; align-self:start;  justify-self:start; text-align:left;
+      .deadp { grid-area:dead; }
+      .summp { grid-area:summ; display:grid; align-self:start;  justify-self:start; text-align:left;
         margin:0.5rem 0.5rem 0.5rem 0.5rem; font-size:@theme-desc-size; } }
     
     .west  { .ddir(west);  }
@@ -67,8 +67,8 @@
     .south { .ddir(south); }
   
     .west, .north, .east, .south { .grid2x1();
-      .dead2 { grid-area:dead; }
-      .summ2 { grid-area:summ; display:grid; align-self:start;  justify-self:start; font-size:@theme-desc-size;
+      .deadp { grid-area:dead; }
+      .summp { grid-area:summ; display:grid; align-self:start;  justify-self:start; font-size:@theme-desc-size;
         margin:0.5rem 0.5rem 0.5rem 0.5rem; } }
   }
   

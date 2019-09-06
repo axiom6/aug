@@ -35,7 +35,7 @@
         this.nav().pub(obj); },
       doPrac: function(pracKey) {
         this.pracKey =  pracKey
-        let obj      = { level:'Prac', pracKey:pracKey, pageKey:'Dirs', source:'Toc' }
+        let obj      = { level:'Prac', pracKey:pracKey, source:'Toc' }
         this.nav().pub(obj); },
       doDisp: function(dispKey) {
         this.dispKey =  dispKey;
