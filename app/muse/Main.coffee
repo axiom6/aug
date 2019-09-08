@@ -1,5 +1,7 @@
 
 import Data    from '../../pub/base/util/Data.js'
+import Util    from '../../pub/base/util/Util.js'
+import Build   from '../../pub/ikw/cube/Build.js'
 import Stream  from '../../pub/base/util/Stream.js'
 import Nav     from '../../pub/base/util/NavMuse.js' # Expanded from basic Nav class
 import Vis     from '../../pub/base/util/Vis.js'
@@ -38,17 +40,28 @@ class Main
     infoSpec    = { subscribe:false, publish:false, subjects:subjects}
     Main.stream = new Stream( subjects, infoSpec )
     Main.nav    = new Nav(   Main.stream, batch, 'Info' )
+    Main.build  = new Build( batch )
     #ain.cache  = new Cache( Main.stream )
     Main.mergePracsPrin()
+    Main.build.logByColumn()
     Main.onReady()
     return
 
   Main.mergePracsPrin = () ->
     cols = Main.Batch['Prin'].data.pracs
     for comp in ['Info','Know','Wise']
-      prcs = Main.Batch[comp].data.pracs
-      for own  key, col of cols
-        prcs[key] = col
+      pracs = Main.Batch[comp].data.pracs
+      komp  = Util.unCap(comp)
+      for own  ckey,  col of cols
+        pracs[ckey] = col
+        for pkey, prac of pracs
+          col[komp] = pkey
+          for dir in ['west','north','east','south' ]
+            ddisp = Main.build.getDim(ckey,dir)
+            pdisp = Main.build.getDir(prac,dir)
+            ddisp[komp] = pdisp.name
+          console.log( 'Prin', ddisp.name, pdisp.name )
+
       # console.log( 'Main.mergePracsPrin', prcs )
     return
 

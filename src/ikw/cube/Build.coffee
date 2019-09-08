@@ -233,7 +233,8 @@ class Build
   getDim:( cname, dir ) ->
     col = @getCol(cname)
     for key, dim of col  when Util.isChild(key)
-      return key if dim.dir is dir
+      # console.log( 'Build.getDim()', { key:key, dim:dim, col:col } )
+      return dim if dim.dir is dir
     @None
 
   getCol:( cname ) ->
@@ -294,7 +295,7 @@ class Build
       console.log( cname )
       for dir in ['west','north','east','south' ]
         dim  = @getDim(cname,dir)
-        console.log( '  ', dir, dim.name, 'Learn', 'Do', 'Share'   )
+        console.log( '  ', dim.name, '------' ) # Learn', 'Do', 'Share ', dir )
         for plane in [ 'Info',  'Know', 'Wise' ]
           lprac = @getPractice( 'Learn', cname, plane )
           dprac = @getPractice( 'Do',    cname, plane )
@@ -302,7 +303,7 @@ class Build
           learn = @getDir( lprac, dir )
           doit  = @getDir( dprac, dir )
           share = @getDir( sprac, dir )
-          console.log( '    ', plane+':', dim.name, learn.name, doit.name, share.name )
+          console.log( '    ', plane+':', learn.name, doit.name, share.name )
     console.log( '----- End Log By Column  ------' )
     return
 

@@ -3,6 +3,10 @@ var Main,
 
 import Data from '../../pub/base/util/Data.js';
 
+import Util from '../../pub/base/util/Util.js';
+
+import Build from '../../pub/ikw/cube/Build.js';
+
 import Stream from '../../pub/base/util/Stream.js';
 
 import Nav from '../../pub/base/util/NavMuse.js';
@@ -29,22 +33,37 @@ Main = (function() {
       };
       Main.stream = new Stream(subjects, infoSpec);
       Main.nav = new Nav(Main.stream, batch, 'Info');
+      Main.build = new Build(batch);
       //ain.cache  = new Cache( Main.stream )
       Main.mergePracsPrin();
+      Main.build.logByColumn();
       Main.onReady();
     }
 
     static mergePracsPrin() {
-      var col, cols, comp, i, key, len, prcs, ref;
+      var ckey, col, cols, comp, ddisp, dir, i, j, komp, len, len1, pdisp, pkey, prac, pracs, ref, ref1;
       cols = Main.Batch['Prin'].data.pracs;
       ref = ['Info', 'Know', 'Wise'];
       for (i = 0, len = ref.length; i < len; i++) {
         comp = ref[i];
-        prcs = Main.Batch[comp].data.pracs;
-        for (key in cols) {
-          if (!hasProp.call(cols, key)) continue;
-          col = cols[key];
-          prcs[key] = col;
+        pracs = Main.Batch[comp].data.pracs;
+        komp = Util.unCap(comp);
+        for (ckey in cols) {
+          if (!hasProp.call(cols, ckey)) continue;
+          col = cols[ckey];
+          pracs[ckey] = col;
+          for (pkey in pracs) {
+            prac = pracs[pkey];
+            col[komp] = pkey;
+            ref1 = ['west', 'north', 'east', 'south'];
+            for (j = 0, len1 = ref1.length; j < len1; j++) {
+              dir = ref1[j];
+              ddisp = Main.build.getDim(ckey, dir);
+              pdisp = Main.build.getDir(prac, dir);
+              ddisp[komp] = pdisp.name;
+            }
+            console.log('Prin', ddisp.name, pdisp.name);
+          }
         }
       }
     }

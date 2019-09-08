@@ -483,7 +483,8 @@ Build = class Build {
       dim = col[key];
       if (Util.isChild(key)) {
         if (dim.dir === dir) {
-          return key;
+          // console.log( 'Build.getDim()', { key:key, dim:dim, col:col } )
+          return dim;
         }
       }
     }
@@ -615,7 +616,7 @@ Build = class Build {
       for (j = 0, len1 = ref1.length; j < len1; j++) {
         dir = ref1[j];
         dim = this.getDim(cname, dir);
-        console.log('  ', dir, dim.name, 'Learn', 'Do', 'Share');
+        console.log('  ', dim.name, '------'); // Learn', 'Do', 'Share ', dir )
         ref2 = ['Info', 'Know', 'Wise'];
         for (k = 0, len2 = ref2.length; k < len2; k++) {
           plane = ref2[k];
@@ -625,7 +626,7 @@ Build = class Build {
           learn = this.getDir(lprac, dir);
           doit = this.getDir(dprac, dir);
           share = this.getDir(sprac, dir);
-          console.log('    ', plane + ':', dim.name, learn.name, doit.name, share.name);
+          console.log('    ', plane + ':', learn.name, doit.name, share.name);
         }
       }
     }
