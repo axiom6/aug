@@ -50,6 +50,15 @@ class Main
   Main.mergePracsPrin = () ->
     cols = Main.Batch['Prin'].data.pracs
     for comp in ['Info','Know','Wise']
+      prcs = Main.Batch[comp].data.pracs
+      for own  key, col of cols
+        prcs[key] = col
+    # console.log( 'Main.mergePracsPrin', prcs )
+    return
+
+  Main.mergePracsPrin2 = () ->
+    cols = Main.Batch['Prin'].data.pracs
+    for comp in ['Info','Know','Wise']
       pracs = Main.Batch[comp].data.pracs
       komp  = Util.unCap(comp)
       for own  ckey,  col of cols
@@ -62,7 +71,7 @@ class Main
             ddisp[komp] = pdisp.name
           console.log( 'Prin', ddisp.name, pdisp.name )
 
-      # console.log( 'Main.mergePracsPrin', prcs )
+    console.log( 'Main.mergePracsPrin', cols )
     return
 
   Main.logPracs = ( compk ) ->

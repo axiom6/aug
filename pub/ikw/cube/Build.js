@@ -605,6 +605,23 @@ Build = class Build {
     console.log('----- End Log By Conduit  ------');
   }
 
+  dimDisps(cname, dir) {
+    var dim, doit, dprac, i, learn, len, lprac, plane, ref, share, sprac;
+    dim = this.getDim(cname, dir);
+    console.log('  ', dim.name, '------'); // Learn', 'Do', 'Share ', dir )
+    ref = ['Info', 'Know', 'Wise'];
+    for (i = 0, len = ref.length; i < len; i++) {
+      plane = ref[i];
+      lprac = this.getPractice('Learn', cname, plane);
+      dprac = this.getPractice('Do', cname, plane);
+      sprac = this.getPractice('Share', cname, plane);
+      learn = this.getDir(lprac, dir);
+      doit = this.getDir(dprac, dir);
+      share = this.getDir(sprac, dir);
+      console.log('    ', plane + ':', learn.name, doit.name, share.name);
+    }
+  }
+
   logByColumn() {
     var cname, dim, dir, doit, dprac, i, j, k, learn, len, len1, len2, lprac, plane, ref, ref1, ref2, share, sprac;
     console.log('----- Beg Log By Column  ------');

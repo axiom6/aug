@@ -41,6 +41,21 @@ Main = (function() {
     }
 
     static mergePracsPrin() {
+      var col, cols, comp, i, key, len, prcs, ref;
+      cols = Main.Batch['Prin'].data.pracs;
+      ref = ['Info', 'Know', 'Wise'];
+      for (i = 0, len = ref.length; i < len; i++) {
+        comp = ref[i];
+        prcs = Main.Batch[comp].data.pracs;
+        for (key in cols) {
+          if (!hasProp.call(cols, key)) continue;
+          col = cols[key];
+          prcs[key] = col;
+        }
+      }
+    }
+
+    static mergePracsPrin2() {
       var ckey, col, cols, comp, ddisp, dir, i, j, komp, len, len1, pdisp, pkey, prac, pracs, ref, ref1;
       cols = Main.Batch['Prin'].data.pracs;
       ref = ['Info', 'Know', 'Wise'];
@@ -66,6 +81,7 @@ Main = (function() {
           }
         }
       }
+      console.log('Main.mergePracsPrin', cols);
     }
 
     static logPracs(compk) {

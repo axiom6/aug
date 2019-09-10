@@ -289,6 +289,19 @@ class Build
     console.log( '----- End Log By Conduit  ------' )
     return
 
+  dimDisps:( cname, dir ) ->
+    dim  = @getDim(cname,dir)
+    console.log( '  ', dim.name, '------' ) # Learn', 'Do', 'Share ', dir )
+    for plane in [ 'Info',  'Know', 'Wise' ]
+      lprac = @getPractice( 'Learn', cname, plane )
+      dprac = @getPractice( 'Do',    cname, plane )
+      sprac = @getPractice( 'Share', cname, plane )
+      learn = @getDir( lprac, dir )
+      doit  = @getDir( dprac, dir )
+      share = @getDir( sprac, dir )
+      console.log( '    ', plane+':', learn.name, doit.name, share.name )
+    return
+
   logByColumn:() ->
     console.log( '----- Beg Log By Column  ------' )
     for cname in ['Embrace','Innovate','Encourage']
