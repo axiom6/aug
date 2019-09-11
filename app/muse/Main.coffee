@@ -1,6 +1,5 @@
 
 import Data    from '../../pub/base/util/Data.js'
-import Util    from '../../pub/base/util/Util.js'
 import Build   from '../../pub/ikw/cube/Build.js'
 import Stream  from '../../pub/base/util/Stream.js'
 import Nav     from '../../pub/base/util/NavMuse.js' # Expanded from basic Nav class
@@ -43,7 +42,7 @@ class Main
     Main.build  = new Build( batch )
     #ain.cache  = new Cache( Main.stream )
     Main.mergePracsPrin()
-    Main.build.logByColumn()
+    #ain.build.logByColumn()
     Main.onReady()
     return
 
@@ -53,25 +52,7 @@ class Main
       prcs = Main.Batch[comp].data.pracs
       for own  key, col of cols
         prcs[key] = col
-    # console.log( 'Main.mergePracsPrin', prcs )
-    return
-
-  Main.mergePracsPrin2 = () ->
-    cols = Main.Batch['Prin'].data.pracs
-    for comp in ['Info','Know','Wise']
-      pracs = Main.Batch[comp].data.pracs
-      komp  = Util.unCap(comp)
-      for own  ckey,  col of cols
-        pracs[ckey] = col
-        for pkey, prac of pracs
-          col[komp] = pkey
-          for dir in ['west','north','east','south' ]
-            ddisp = Main.build.getDim(ckey,dir)
-            pdisp = Main.build.getDir(prac,dir)
-            ddisp[komp] = pdisp.name
-          console.log( 'Prin', ddisp.name, pdisp.name )
-
-    console.log( 'Main.mergePracsPrin', cols )
+    Main.build.dimDisps() # Add disps to every dim - dimension
     return
 
   Main.logPracs = ( compk ) ->
@@ -143,6 +124,8 @@ class Main
           hasPage   = true if page.show
         # console.log( 'Main.showPages()', { pageKey:pageKey, hasPage:hasPage, pages:pages })
         hasPage
+      eatArg:(arg) ->    # A dumb hack to for passing arguments to avoid infinite reactive loop
+        if arg is false then {}
       #navbSpecs:() ->
       #  Main.NavbSpecs
     }

@@ -5,7 +5,6 @@
       <div class="disp" @click="doPrac(pracObj.name)">
         <i   :class="pracObj.icon"></i>
         <span class="name">{{pracObj.name}}</span>
-        <span class="desc">{{pracObj.desc}}</span>
       </div>
     </div>
     <template  v-for="dispObj in pracObj.disps">
@@ -13,9 +12,14 @@
         <div class="disp" @click="doDisp(prac.name,dispObj.name)">
           <i   :class="dispObj.icon"></i>
           <span class="name">{{dispObj.name}}</span>
-          <span class="desc">{{dispObj.desc}}</span>
         </div>
-      </div>
+        <template v-for="ddObj in dispObj.disps">
+          <div class="disp">
+            <i   :class="ddObj.icon"></i>
+            <span class="name">{{ddObj.name}}</span>
+          </div>
+        </template>
+        </div>
     </template>
   </div>
 </template>
@@ -26,7 +30,7 @@
 
     props: { pracObj:Object },
 
-    data() { return { dispObj:null } },
+    data() { return { dispObj:null, ddObj:null } },
 
     methods: {
       
@@ -62,10 +66,9 @@
                              .south { .ddir(south); }
       .cen  { font-size:@theme-cen-size; }
 
-    .disp {   display:inline; justify-self:center; align-self:center; text-align:center; font-size:@theme-disp-size;
+    .disp {   display:block; text-align:left; font-size:@theme-disp-size;
       i     { display:inline-block;  margin-right: 0.25rem; }
-      .name { display:inline-block; }
-      .desc { display:none; margin:0.5rem 0.5rem 0.5rem 0.5rem; text-align:left; } } }
+      .name { display:inline-block; } } }
   
   
 </style>

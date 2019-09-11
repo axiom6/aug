@@ -605,20 +605,59 @@ Build = class Build {
     console.log('----- End Log By Conduit  ------');
   }
 
-  dimDisps(cname, dir) {
-    var dim, doit, dprac, i, learn, len, lprac, plane, ref, share, sprac;
-    dim = this.getDim(cname, dir);
-    console.log('  ', dim.name, '------'); // Learn', 'Do', 'Share ', dir )
-    ref = ['Info', 'Know', 'Wise'];
+  dimDisps() {
+    var col, dim, dir, disp, i, idx, j, k, l, len, len1, len2, len3, plane, prac, ref, ref1, ref2, ref3, row;
+    ref = ['Embrace', 'Innovate', 'Encourage'];
     for (i = 0, len = ref.length; i < len; i++) {
-      plane = ref[i];
-      lprac = this.getPractice('Learn', cname, plane);
-      dprac = this.getPractice('Do', cname, plane);
-      sprac = this.getPractice('Share', cname, plane);
-      learn = this.getDir(lprac, dir);
-      doit = this.getDir(dprac, dir);
-      share = this.getDir(sprac, dir);
-      console.log('    ', plane + ':', learn.name, doit.name, share.name);
+      col = ref[i];
+      ref1 = ['west', 'north', 'east', 'south'];
+      for (j = 0, len1 = ref1.length; j < len1; j++) {
+        dir = ref1[j];
+        dim = this.getDim(col, dir);
+        dim.disps = [];
+        idx = 0;
+        ref2 = ['Info', 'Know', 'Wise'];
+        for (k = 0, len2 = ref2.length; k < len2; k++) {
+          plane = ref2[k];
+          ref3 = ['Learn', 'Do', 'Share'];
+          for (l = 0, len3 = ref3.length; l < len3; l++) {
+            row = ref3[l];
+            prac = this.getPractice(row, col, plane);
+            disp = this.getDir(prac, dir);
+            disp.klass = Build.ddClasses[idx++];
+            dim.disps.push(disp);
+          }
+        }
+      }
+    }
+  }
+
+  dimDispsObj() {
+    var col, dim, dir, disp, i, idx, j, k, l, len, len1, len2, len3, plane, pln, prac, ref, ref1, ref2, ref3, row;
+    ref = ['Embrace', 'Innovate', 'Encourage'];
+    for (i = 0, len = ref.length; i < len; i++) {
+      col = ref[i];
+      ref1 = ['west', 'north', 'east', 'south'];
+      for (j = 0, len1 = ref1.length; j < len1; j++) {
+        dir = ref1[j];
+        dim = this.getDim(col, dir);
+        dim.disps = {};
+        idx = 0;
+        ref2 = ['Info', 'Know', 'Wise'];
+        for (k = 0, len2 = ref2.length; k < len2; k++) {
+          plane = ref2[k];
+          pln = Util.unCap(plane);
+          dim.disps[pln] = {};
+          ref3 = ['Learn', 'Do', 'Share'];
+          for (l = 0, len3 = ref3.length; l < len3; l++) {
+            row = ref3[l];
+            prac = this.getPractice(row, col, plane);
+            disp = this.getDir(prac, dir);
+            disp.klass = Build.ddClasses[idx++];
+            dim[pln][Util.unCap(row)] = disp;
+          }
+        }
+      }
     }
   }
 
@@ -719,5 +758,7 @@ Build = class Build {
   }
 
 };
+
+Build.ddClasses = ['li', 'di', 'si', 'lk', 'dk', 'sk', 'lw', 'dw', 'sw'];
 
 export default Build;

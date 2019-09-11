@@ -10,11 +10,8 @@
     </div>
     <template  v-for="dispObj in pracObj.disps">
       <div :class="dispObj.dir" :style="style(dispObj.hsv)">
-        <div class="disp" @click="doDisp(dispObj.name)">
-          <i   :class="dispObj.icon"></i>
-          <span class="name">{{dispObj.name}}</span>
-          <span class="desc">{{dispObj.desc}}</span>
-        </div>
+        <d-disp v-if="isDisp()" :dispObj="dispObj"></d-disp>
+        <d-dims v-if="isDims()" :dispObj="dispObj"></d-dims>
       </div>
     </template>
   </div>
@@ -22,7 +19,12 @@
 
 <script type="module">
 
+  import Disp from './Disp.vue';
+  import Dims from './Dims.vue';
+
   let Dirs = {
+
+    components:{ 'd-disp':Disp, 'd-dims':Dims },
 
     props: { pracObj:Object },
 
@@ -33,9 +35,10 @@
       doPrac: function (pracKey) {
         let obj = { level:"Prac", pracKey:pracKey };
         this.nav.pub( obj ); },
-      doDisp: function (dispKey) {
-        let obj = { level:"Disp", pracKey:this.pracObj.name, dispKey:dispKey };
-        this.nav.pub( obj ); },
+      isDims: function () {
+        return this.pracObj.row === 'Dim'; },
+      isDisp: function () {
+        return this.pracObj.row !== 'Dim'; },
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; } },
     

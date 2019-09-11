@@ -6444,12 +6444,28 @@
 		"oAP": "/pub/vue/prac/Desc.js",
 		"oF": 0
 		},
+	"/vue/prac/Dims.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/prac/Dims.js",
+		"oF": 0
+		},
 	"/vue/prac/Dirs.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/pub/vue/prac/Dirs.js",
+		"oF": 0
+		},
+	"/vue/prac/Disp.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/prac/Disp.js",
 		"oF": 0
 		},
 	"/vue/prac/Prac.vue": {

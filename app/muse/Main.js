@@ -3,8 +3,6 @@ var Main,
 
 import Data from '../../pub/base/util/Data.js';
 
-import Util from '../../pub/base/util/Util.js';
-
 import Build from '../../pub/ikw/cube/Build.js';
 
 import Stream from '../../pub/base/util/Stream.js';
@@ -36,7 +34,7 @@ Main = (function() {
       Main.build = new Build(batch);
       //ain.cache  = new Cache( Main.stream )
       Main.mergePracsPrin();
-      Main.build.logByColumn();
+      //ain.build.logByColumn()
       Main.onReady();
     }
 
@@ -53,35 +51,7 @@ Main = (function() {
           prcs[key] = col;
         }
       }
-    }
-
-    static mergePracsPrin2() {
-      var ckey, col, cols, comp, ddisp, dir, i, j, komp, len, len1, pdisp, pkey, prac, pracs, ref, ref1;
-      cols = Main.Batch['Prin'].data.pracs;
-      ref = ['Info', 'Know', 'Wise'];
-      for (i = 0, len = ref.length; i < len; i++) {
-        comp = ref[i];
-        pracs = Main.Batch[comp].data.pracs;
-        komp = Util.unCap(comp);
-        for (ckey in cols) {
-          if (!hasProp.call(cols, ckey)) continue;
-          col = cols[ckey];
-          pracs[ckey] = col;
-          for (pkey in pracs) {
-            prac = pracs[pkey];
-            col[komp] = pkey;
-            ref1 = ['west', 'north', 'east', 'south'];
-            for (j = 0, len1 = ref1.length; j < len1; j++) {
-              dir = ref1[j];
-              ddisp = Main.build.getDim(ckey, dir);
-              pdisp = Main.build.getDir(prac, dir);
-              ddisp[komp] = pdisp.name;
-            }
-            console.log('Prin', ddisp.name, pdisp.name);
-          }
-        }
-      }
-      console.log('Main.mergePracsPrin', cols);
+      Main.build.dimDisps(); // Add disps to every dim - dimension
     }
 
     static logPracs(compk) {
@@ -285,6 +255,11 @@ Main = (function() {
         }
         // console.log( 'Main.showPages()', { pageKey:pageKey, hasPage:hasPage, pages:pages })
         return hasPage;
+      },
+      eatArg: function(arg) { // A dumb hack to for passing arguments to avoid infinite reactive loop
+        if (arg === false) {
+          return {};
+        }
       }
     }
   };

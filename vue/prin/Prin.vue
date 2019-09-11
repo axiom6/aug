@@ -30,6 +30,7 @@
         Dirs: { name:'Dirs', key:'Dirs', show:false } } } },
     
     methods: {
+      
       onComp: function (compKey) {
         this.compObj = this.compObject(compKey); },
       onPage: function(pageKey) {

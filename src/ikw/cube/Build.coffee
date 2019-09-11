@@ -289,17 +289,34 @@ class Build
     console.log( '----- End Log By Conduit  ------' )
     return
 
-  dimDisps:( cname, dir ) ->
-    dim  = @getDim(cname,dir)
-    console.log( '  ', dim.name, '------' ) # Learn', 'Do', 'Share ', dir )
-    for plane in [ 'Info',  'Know', 'Wise' ]
-      lprac = @getPractice( 'Learn', cname, plane )
-      dprac = @getPractice( 'Do',    cname, plane )
-      sprac = @getPractice( 'Share', cname, plane )
-      learn = @getDir( lprac, dir )
-      doit  = @getDir( dprac, dir )
-      share = @getDir( sprac, dir )
-      console.log( '    ', plane+':', learn.name, doit.name, share.name )
+  dimDisps:() ->
+    for col in ['Embrace','Innovate','Encourage']
+      for dir in ['west','north','east','south']
+        dim  = @getDim(col,dir)
+        dim.disps = []
+        idx       = 0
+        for plane in ['Info', 'Know', 'Wise' ]
+          for row in ['Learn','Do',   'Share']
+            prac = @getPractice( row, col, plane )
+            disp = @getDir( prac, dir )
+            disp.klass = Build.ddClasses[idx++]
+            dim.disps.push(disp)
+    return
+
+  dimDispsObj:() ->
+    for col in ['Embrace','Innovate','Encourage']
+      for dir in ['west','north','east','south']
+        dim  = @getDim(col,dir)
+        dim.disps = {}
+        idx = 0
+        for plane in ['Info','Know','Wise']
+          pln = Util.unCap(plane)
+          dim.disps[pln] = {}
+          for row in ['Learn','Do','Share']
+            prac = @getPractice( row, col, plane )
+            disp = @getDir( prac, dir )
+            disp.klass = Build.ddClasses[idx++]
+            dim[pln][Util.unCap(row)] = disp
     return
 
   logByColumn:() ->
@@ -363,5 +380,7 @@ class Build
     htm += """  </body>\n</html>\n"""
     Data.saveHtml( name, htm )
     return
+
+Build.ddClasses = ['li','di','si','lk','dk','sk','lw','dw','sw']
 
 export default Build
