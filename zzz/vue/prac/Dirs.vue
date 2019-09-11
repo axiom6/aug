@@ -2,8 +2,10 @@
 <template>
   <div class="dirs-prac">
     <div class="cen" :style="style(pracObj.hsv)">
-      <d-disp v-if="isDisp()" :dispObj="pracObj"></d-disp>
-      <d-dims v-if="isDims()" :dispObj="pracObj"></d-dims>
+      <div class="disp" @click="doPrac(pracObj.name)">
+        <i   :class="pracObj.icon"></i>
+        <span class="name">{{pracObj.name}}</span>
+      </div>
     </div>
     <template  v-for="dispObj in pracObj.disps">
       <div :class="dispObj.dir" :style="style(dispObj.hsv)">

@@ -614,7 +614,7 @@ Build = class Build {
       for (j = 0, len1 = ref1.length; j < len1; j++) {
         dir = ref1[j];
         dim = this.getDim(col, dir);
-        dim.disps = [];
+        dim.dims = [];
         idx = 0;
         ref2 = ['Info', 'Know', 'Wise'];
         for (k = 0, len2 = ref2.length; k < len2; k++) {
@@ -625,37 +625,30 @@ Build = class Build {
             prac = this.getPractice(row, col, plane);
             disp = this.getDir(prac, dir);
             disp.klass = Build.ddClasses[idx++];
-            dim.disps.push(disp);
+            dim.dims.push(disp);
           }
         }
       }
     }
   }
 
-  dimDispsObj() {
-    var col, dim, dir, disp, i, idx, j, k, l, len, len1, len2, len3, plane, pln, prac, ref, ref1, ref2, ref3, row;
+  colPracs() {
+    var cname, col, i, idx, j, k, len, len1, len2, plane, prac, ref, ref1, ref2, row;
     ref = ['Embrace', 'Innovate', 'Encourage'];
     for (i = 0, len = ref.length; i < len; i++) {
-      col = ref[i];
-      ref1 = ['west', 'north', 'east', 'south'];
+      cname = ref[i];
+      col = this.getCol(cname);
+      col.dims = [];
+      idx = 0;
+      ref1 = ['Info', 'Know', 'Wise'];
       for (j = 0, len1 = ref1.length; j < len1; j++) {
-        dir = ref1[j];
-        dim = this.getDim(col, dir);
-        dim.disps = {};
-        idx = 0;
-        ref2 = ['Info', 'Know', 'Wise'];
+        plane = ref1[j];
+        ref2 = ['Learn', 'Do', 'Share'];
         for (k = 0, len2 = ref2.length; k < len2; k++) {
-          plane = ref2[k];
-          pln = Util.unCap(plane);
-          dim.disps[pln] = {};
-          ref3 = ['Learn', 'Do', 'Share'];
-          for (l = 0, len3 = ref3.length; l < len3; l++) {
-            row = ref3[l];
-            prac = this.getPractice(row, col, plane);
-            disp = this.getDir(prac, dir);
-            disp.klass = Build.ddClasses[idx++];
-            dim[pln][Util.unCap(row)] = disp;
-          }
+          row = ref2[k];
+          prac = this.getPractice(row, cname, plane);
+          prac.klass = Build.ddClasses[idx++];
+          col.dims.push(prac);
         }
       }
     }

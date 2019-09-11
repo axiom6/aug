@@ -2,6 +2,7 @@
 FontAwe = {}
 
 FontAwe.icons = {
+    "fas fa-yin-yang":"\uf6ad",
     "fab fa-pagelines":"\uf18c",
     "fas fa-network-wired":"\uf6ff",
     "fas fa-warehouse":"\uf494",

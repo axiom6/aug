@@ -16,10 +16,16 @@
       return { build:null, connect:null, size:null }; },
     
     watch: {
-      pracObj() {
+      pracObj: function() {
+        console.log( 'Conn.watch', this.pracObj );
         this.onPrac(); } },
     
     methods: {
+      
+      onNav: function( obj ) {
+        if( this.pracObj.name !== obj.pracKey && obj.pageKey === 'Conn' ) {
+          let    pracObj = this.pracObject( this.nav().compKey, obj.pracKey );
+          this.onPrac( pracObj ); } },
       
       onPrac: function() {
         this.createConnect( this.stream(), this.build, this.pracObj ); },
@@ -41,9 +47,7 @@
       
       createConnect: function( stream, build, pracObj ) {
         this.$nextTick( function() {
-          if( this.isDef(this.connect) ) {
-            this.connect.clear(); }
-          let elem     = this.$refs[this.pracObj.name];
+          let elem  = this.$refs[this.pracObj.name];
           this.size    = this.calcSize(elem);
           this.connect = new Connect( stream, build, pracObj, elem, this.size ); } ) },
       

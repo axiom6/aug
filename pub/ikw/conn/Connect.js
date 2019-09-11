@@ -1,5 +1,7 @@
 var Connect;
 
+import Vis from '../../base/util/Vis';
+
 import Shapes from './Shapes';
 
 import Embrace from './Embrace';
@@ -46,6 +48,10 @@ Connect = class Connect {
     this.draw = this.createDraw();
     this.draw.drawSvg(this.g, geo, this.defs);
     this.htmlId = svgId;
+  }
+
+  clear() {
+    this.shapes.clearSvg(this.graph);
   }
 
   lastSize(size) {

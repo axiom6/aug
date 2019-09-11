@@ -293,30 +293,26 @@ class Build
     for col in ['Embrace','Innovate','Encourage']
       for dir in ['west','north','east','south']
         dim  = @getDim(col,dir)
-        dim.disps = []
+        dim.dims = []
         idx       = 0
         for plane in ['Info', 'Know', 'Wise' ]
           for row in ['Learn','Do',   'Share']
             prac = @getPractice( row, col, plane )
             disp = @getDir( prac, dir )
             disp.klass = Build.ddClasses[idx++]
-            dim.disps.push(disp)
+            dim.dims.push(disp)
     return
 
-  dimDispsObj:() ->
-    for col in ['Embrace','Innovate','Encourage']
-      for dir in ['west','north','east','south']
-        dim  = @getDim(col,dir)
-        dim.disps = {}
-        idx = 0
-        for plane in ['Info','Know','Wise']
-          pln = Util.unCap(plane)
-          dim.disps[pln] = {}
-          for row in ['Learn','Do','Share']
-            prac = @getPractice( row, col, plane )
-            disp = @getDir( prac, dir )
-            disp.klass = Build.ddClasses[idx++]
-            dim[pln][Util.unCap(row)] = disp
+  colPracs:() ->
+    for cname in ['Embrace','Innovate','Encourage']
+      col = @getCol(cname)
+      col.dims = []
+      idx      = 0
+      for plane in ['Info', 'Know', 'Wise' ]
+        for row in ['Learn','Do',   'Share']
+          prac = @getPractice( row, cname, plane )
+          prac.klass = Build.ddClasses[idx++]
+          col.dims.push(prac)
     return
 
   logByColumn:() ->

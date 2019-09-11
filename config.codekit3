@@ -6996,102 +6996,6 @@
 		"oO": 0,
 		"oS": 1
 		},
-	"/zzz/comp/Comp.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/comp/Comp.js",
-		"oF": 0
-		},
-	"/zzz/comp/Conn.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/comp/Conn.js",
-		"oF": 0
-		},
-	"/zzz/comp/Desc.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/comp/Desc.js",
-		"oF": 0
-		},
-	"/zzz/comp/Home.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/comp/Home.js",
-		"oF": 0
-		},
-	"/zzz/comp/Ikws.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/comp/Ikws.js",
-		"oF": 0
-		},
-	"/zzz/comp/Info.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/comp/Info.js",
-		"oF": 0
-		},
-	"/zzz/comp/Know.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/comp/Know.js",
-		"oF": 0
-		},
-	"/zzz/comp/Prac.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/comp/Prac.js",
-		"oF": 0
-		},
-	"/zzz/comp/Prin.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/comp/Prin.js",
-		"oF": 0
-		},
-	"/zzz/comp/Summ.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/comp/Summ.js",
-		"oF": 0
-		},
-	"/zzz/comp/Tocs.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/comp/Tocs.js",
-		"oF": 0
-		},
-	"/zzz/comp/Wise.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/comp/Wise.js",
-		"oF": 0
-		},
 	"/zzz/data/augm/Data.json": {
 		"ft": 524288,
 		"oA": 1,
@@ -7338,22 +7242,6 @@
 		"hM": 0,
 		"oA": 0,
 		"oAP": "/zzz/data/text/Info.txt",
-		"oF": 0
-		},
-	"/zzz/jitter/Body.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/jitter/Body.js",
-		"oF": 0
-		},
-	"/zzz/jitter/Home.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/jitter/Home.js",
 		"oF": 0
 		},
 	"/zzz/libs/ASCIIMathML.js": {
@@ -7730,49 +7618,6 @@
 		"hM": 0,
 		"oA": 0,
 		"oAP": "/zzz/peg/ref/LatexKeys.txt",
-		"oF": 0
-		},
-	"/zzz/prac/Data.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/prac/Data.js",
-		"oF": 0
-		},
-	"/zzz/prac/Desc.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/prac/Desc.js",
-		"oF": 0
-		},
-	"/zzz/prac/Enli.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/prac/Enli.js",
-		"oF": 0
-		},
-	"/zzz/prac/Prac.roll.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/prac/Prac.roll-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/prac/Prac.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/prac/Prac.js",
 		"oF": 0
 		},
 	"/zzz/store/fire.html": {
@@ -8639,6 +8484,169 @@
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"/zzz/vue/comp/Comp.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/comp/Comp.js",
+		"oF": 0
+		},
+	"/zzz/vue/comp/Conn.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/comp/Conn.js",
+		"oF": 0
+		},
+	"/zzz/vue/comp/Desc.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/comp/Desc.js",
+		"oF": 0
+		},
+	"/zzz/vue/comp/Home.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/comp/Home.js",
+		"oF": 0
+		},
+	"/zzz/vue/comp/Ikws.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/comp/Ikws.js",
+		"oF": 0
+		},
+	"/zzz/vue/comp/Info.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/comp/Info.js",
+		"oF": 0
+		},
+	"/zzz/vue/comp/Know.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/comp/Know.js",
+		"oF": 0
+		},
+	"/zzz/vue/comp/Prac.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/comp/Prac.js",
+		"oF": 0
+		},
+	"/zzz/vue/comp/Prin.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/comp/Prin.js",
+		"oF": 0
+		},
+	"/zzz/vue/comp/Summ.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/comp/Summ.js",
+		"oF": 0
+		},
+	"/zzz/vue/comp/Tocs.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/comp/Tocs.js",
+		"oF": 0
+		},
+	"/zzz/vue/comp/Wise.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/comp/Wise.js",
+		"oF": 0
+		},
+	"/zzz/vue/jitter/Body.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/jitter/Body.js",
+		"oF": 0
+		},
+	"/zzz/vue/jitter/Home.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/jitter/Home.js",
+		"oF": 0
+		},
+	"/zzz/vue/prac/Data.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/prac/Data.js",
+		"oF": 0
+		},
+	"/zzz/vue/prac/Desc.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/prac/Desc.js",
+		"oF": 0
+		},
+	"/zzz/vue/prac/Dirs.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/prac/Dirs.js",
+		"oF": 0
+		},
+	"/zzz/vue/prac/Enli.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/prac/Enli.js",
+		"oF": 0
+		},
+	"/zzz/vue/prac/Prac.roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/vue/prac/Prac.roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/vue/prac/Prac.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/prac/Prac.js",
+		"oF": 0
 		}
 	},
 "hooks": [

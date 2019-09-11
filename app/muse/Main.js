@@ -52,6 +52,7 @@ Main = (function() {
         }
       }
       Main.build.dimDisps(); // Add disps to every dim - dimension
+      Main.build.colPracs(); // Add pracs to every col
     }
 
     static logPracs(compk) {

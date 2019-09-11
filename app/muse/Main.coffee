@@ -53,6 +53,7 @@ class Main
       for own  key, col of cols
         prcs[key] = col
     Main.build.dimDisps() # Add disps to every dim - dimension
+    Main.build.colPracs() # Add pracs to every col
     return
 
   Main.logPracs = ( compk ) ->

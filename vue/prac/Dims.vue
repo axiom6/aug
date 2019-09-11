@@ -1,12 +1,12 @@
 
 <template>
   <div>
-    <div class="ddisp" @click="doDisp(dispObj.name)">
+    <div class="ddisp" @click="doClick(dispObj.name)">
       <i   :class="dispObj.icon"></i>
       <span class="dname">{{dispObj.name}}</span>
     </div>
     <div  class="dd-grid">
-      <template v-for="ddObj in dispObj.disps">
+      <template v-for="ddObj in dispObj.dims">
         <div   :class="ddObj.klass">
           <i   :class="ddObj.icon"></i>
           <span class="ddname">{{ddObj.name}}</span>
@@ -23,8 +23,16 @@
     props: { dispObj:Object },
 
     methods: {
-      doDisp: function (dispKey) {
+      doClick: function (key) {
+        if( this.isDef(this.dispObj.column) ) {
+          this.doPrac(key) }
+        else {
+          this.doDisp(key) } },
+      doDisp:  function (dispKey) {
         let obj = { level:"Disp", dispKey:dispKey }; // pracKey:this.pracObj.name,
+        this.nav.pub( obj ); },
+      doPrac: function (pracKey) {
+        let obj = { level:"Prac", pracKey:pracKey };
         this.nav.pub( obj ); } },
   }
 

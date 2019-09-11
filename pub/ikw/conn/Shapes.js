@@ -37,6 +37,11 @@ Shapes = class Shapes {
     g.attr('transform', Vis.scale(sx, sy));
   }
 
+  clearSvg(svg) {
+    svg.selectAll("*").remove();
+    svg.remove();
+  }
+
   rectGrad(g, defs, xc, yc, w, h, fill, stroke, text) {
     this.rectCenter(g, xc, yc, w * 1.5, h * 1.5, fill, stroke, 0.1);
     this.rectCenter(g, xc, yc, w * 1.4, h * 1.4, fill, stroke, 0.2);

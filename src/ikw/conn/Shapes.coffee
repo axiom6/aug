@@ -28,6 +28,11 @@ class Shapes
     g  .attr( 'transform', Vis.scale( sx, sy ) )
     return
 
+  clearSvg:( svg ) ->
+    svg.selectAll("*").remove()
+    svg.remove()
+    return
+
   rectGrad:( g, defs, xc, yc, w, h, fill, stroke, text ) ->
     @rectCenter( g, xc, yc, w*1.5, h*1.5, fill, stroke, 0.1 )
     @rectCenter( g, xc, yc, w*1.4, h*1.4, fill, stroke, 0.2 )

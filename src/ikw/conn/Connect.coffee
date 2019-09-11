@@ -1,5 +1,5 @@
 
-
+import Vis       from '../../base/util/Vis'
 import Shapes    from './Shapes'
 import Embrace   from './Embrace'
 import Innovate  from './Innovate'
@@ -21,13 +21,16 @@ class Connect
   ready:() ->
     geo = @geom( @size.elemWidth, @size.elemHeight, @size.elemWidth, @size.elemHeight )
     @graph=null; @g=null; svgId=''; gId=''; @defs=null
-    [@graph,@g,svgId,gId,@defs] = @shapes.createSvg( @elem, @prac.name,
-      @size.elemWidth, @size.elemHeight )
+    [@graph,@g,svgId,gId,@defs] = @shapes.createSvg( @elem, @prac.name, @size.elemWidth, @size.elemHeight )
     @size.lastWidth  = @size.elemWidth
     @size.lastHeight = @size.elemHeight
     @draw   = @createDraw()
     @draw.drawSvg( @g, geo, @defs )
     @htmlId = svgId
+    return
+
+  clear:() ->
+    @shapes.clearSvg( @graph )
     return
 
   lastSize:( size ) ->
