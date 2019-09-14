@@ -4,7 +4,8 @@
     <d-icon class="iconq" :icon="dispObj.icon" :name="dispObj.name" :size="3" ></d-icon>
     <div    class="summq">{{dispObj.desc}}</div>
     <template v-for="areaObj in dispObj.areas">
-      <d-icon :class="clArea" :icon="areaObj.icon" :name="areaObj.name" :summ="tsSumm(areaObj.desc)" :size="1.7" ></d-icon>
+      <d-icon :class="clArea()" :icon="areaObj.icon" :name="areaObj.name" :summ="tsSumm(areaObj.desc)" :size="1.0"
+      ></d-icon>
   </template>
   </div>
 </template>
@@ -48,7 +49,7 @@
   
   .desd { .grid5x1(); position:absolute; left:0; top:5%; right:0; bottom:0; .theme-disp-desc(); color:black;
     .iconq { grid-area:iconq; }
-    .summq { grid-area:summq; }
+    .summq { grid-area:summq; margin-left:@theme-disp-size; }
     .area1 { grid-area:area1; }
     .area2 { grid-area:area2; }
     .area3 { grid-area:area3; }
