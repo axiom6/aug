@@ -8,10 +8,11 @@
     <template v-for="dispObj in pracObj.disps">
       <div   :class="dispObj.dir" @click="doDisp(dispObj.name)" :style="style(dispObj.hsv)">
         <div class="desp">
-          <d-icon class="iconp" :icon="dispObj.icon" :name="dispObj.name" :size="1" ></d-icon>
+          <d-icon class="iconp" :icon="dispObj.icon" :name="dispObj.name" :size="2" ></d-icon>
           <div    class="summp">{{dispObj.desc}}</div>
           <template v-for="areaObj in dispObj.areas">
-            <d-icon :class="clArea()" :icon="areaObj.icon" :name="areaObj.name" :summ="tsSumm(areaObj.desc)" :size="1"></d-icon>
+            <d-icon :class="clArea" :icon="areaObj.icon" :name="areaObj.name" :summ="tsSumm(areaObj.desc)"
+              :size="1"></d-icon>
           </template>
         </div>
       </div>
@@ -30,9 +31,13 @@
     props: { pracObj:Object },
 
     data() { return { dispObj:null, iarea:1 } },
+
+    watch: {
+      pracObj() { this.onPrac(); } },
     
     methods: {
-      
+
+      onPrac: function() { }, // console.log( { pracObj:this.pracObj } );
       doPrac: function (pracKey) {
         let obj = { level:"Prac", pracKey:pracKey };
         this.nav.pub( obj ); },
@@ -42,6 +47,7 @@
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; },
       clArea: function() {
+        //if( areaObj===false ) {}
         let  klass = 'areb'+this.iarea;
         this.iarea = this.iarea === 3 ? 1 : this.iarea+1;
         return klass; },
