@@ -187,9 +187,9 @@ Data = class Data {
 
 };
 
-Data.local = "../../pub/data/";
+Data.local = "../../data/";
 
-Data.hosted = '/pub/data/';
+Data.hosted = '/data/';
 
 Data.cssDir = 'css/'; // /css in /pub
 

@@ -1,5 +1,6 @@
 
 import Data    from '../../base/util/Data.js'
+import Build   from '../../ikw/cube/Build.js'
 import Stream  from '../../base/util/Stream.js'
 import Nav     from '../../base/util/NavMuse.js' # Expanded from basic Nav class
 import Vis     from '../../base/util/Vis.js'
@@ -7,7 +8,7 @@ import Cache   from '../../base/util/Cache.js'
 
 class Main
 
-  Main.FontUrl = "css/font/three/helvetiker_regular.typeface.json"
+  Main.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json"
 
   Main.Batch = {
     Prin: { url:'muse/Prin.json', data:null, type:'Pack', plane:'Prin' }
@@ -36,8 +37,10 @@ class Main
     infoSpec    = { subscribe:false, publish:false, subjects:subjects}
     Main.stream = new Stream( subjects, infoSpec )
     Main.nav    = new Nav(   Main.stream, batch, 'Info' )
+    Main.build  = new Build( batch )
     #ain.cache  = new Cache( Main.stream )
     Main.mergePracsPrin()
+    #ain.build.logByColumn()
     Main.onReady()
     return
 
@@ -47,7 +50,8 @@ class Main
       prcs = Main.Batch[comp].data.pracs
       for own  key, col of cols
         prcs[key] = col
-      # console.log( 'Main.mergePracsPrin', prcs )
+    Main.build.dimDisps() # Add disps to every dim - dimension
+    Main.build.colPracs() # Add pracs to every col
     return
 
   Main.logPracs = ( compk ) ->
@@ -84,7 +88,7 @@ class Main
       kompsTocs:() ->   # For Tocs.vue
         Main.komps
       views:() ->
-        ['Home','Cube','Comp','Prac','Disp','Conn']
+        ['Home','Prin','Comp','Prac','Disp','Cube']
       subset:( compk, filter ) ->
         filts = {}
         for own key, prac of this.pracs(compk) when filter(prac)
@@ -112,10 +116,15 @@ class Main
       toRgbaHsv:( hsv ) ->
          hsu = if not hsv then [30,90,90] else hsv
          Vis.toRgbaHsv(hsu)
-      #navbSpecs:() ->
-      #  Main.NavbSpecs
+      showPages:( pages, pageKey ) ->
+        hasPage = false
+        for own key, page  of pages
+          page.show = key  is pageKey
+          hasPage   = true if page.show
+          # console.log( 'Main.showPages()', { pageKey:pageKey, hasPage:hasPage, pages:pages })
+        hasPage
     }
   }
 
-`export default Main`
+export default Main
 

@@ -1,0 +1,194 @@
+.comp {
+  background-color: black;
+  position: relative;
+  display: grid;
+  grid-template-columns: 33fr 33fr 34fr;
+  grid-template-rows: 33fr 33fr 34fr;
+  grid-template-areas: "nw north ne" "west cen east" "sw south se";
+  justify-items: center;
+  align-items: center;
+}
+.comp .nw {
+  display: grid;
+  grid-area: nw;
+  justify-self: stretch;
+  align-self: stretch;
+  justify-items: center;
+  align-items: center;
+}
+.comp .north {
+  display: grid;
+  grid-area: north;
+  justify-self: stretch;
+  align-self: stretch;
+  justify-items: center;
+  align-items: center;
+}
+.comp .ne {
+  display: grid;
+  grid-area: ne;
+  justify-self: stretch;
+  align-self: stretch;
+  justify-items: center;
+  align-items: center;
+}
+.comp .west {
+  display: grid;
+  grid-area: west;
+  justify-self: stretch;
+  align-self: stretch;
+  justify-items: center;
+  align-items: center;
+}
+.comp .cen {
+  display: grid;
+  grid-area: cen;
+  justify-self: stretch;
+  align-self: stretch;
+  justify-items: center;
+  align-items: center;
+}
+.comp .east {
+  display: grid;
+  grid-area: east;
+  justify-self: stretch;
+  align-self: stretch;
+  justify-items: center;
+  align-items: center;
+}
+.comp .sw {
+  display: grid;
+  grid-area: sw;
+  justify-self: stretch;
+  align-self: stretch;
+  justify-items: center;
+  align-items: center;
+}
+.comp .south {
+  display: grid;
+  grid-area: south;
+  justify-self: stretch;
+  align-self: stretch;
+  justify-items: center;
+  align-items: center;
+}
+.comp .se {
+  display: grid;
+  grid-area: se;
+  justify-self: stretch;
+  align-self: stretch;
+  justify-items: center;
+  align-items: center;
+}
+.comp .prac {
+  background-color: #603;
+  border-radius: 36px;
+  width: 90%;
+  height: 80%;
+  font-size: 3vh;
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: 33fr 33fr 34fr;
+  grid-template-rows: 33fr 33fr 34fr;
+  grid-template-areas: "nw north ne" "west cen east" "sw south se";
+}
+.comp .prac .cen {
+  display: grid;
+  grid-area: cen;
+  justify-self: stretch;
+  align-self: stretch;
+  border-radius: 36px;
+  background-color: coral;
+  font-size: 4vh;
+}
+.comp .prac .west {
+  display: grid;
+  grid-area: west;
+  justify-self: stretch;
+  align-self: stretch;
+  border-radius: 36px;
+  background-color: springgreen;
+}
+.comp .prac .north {
+  display: grid;
+  grid-area: north;
+  justify-self: stretch;
+  align-self: stretch;
+  border-radius: 36px;
+  background-color: gold;
+}
+.comp .prac .east {
+  display: grid;
+  grid-area: east;
+  justify-self: stretch;
+  align-self: stretch;
+  border-radius: 36px;
+  background-color: salmon;
+}
+.comp .prac .south {
+  display: grid;
+  grid-area: south;
+  justify-self: stretch;
+  align-self: stretch;
+  border-radius: 36px;
+  background-color: peru;
+}
+.comp .prac div .disp {
+  text-align: center;
+  justify-self: center;
+  align-self: center;
+}
+.comp .fullPrac {
+  position: absolute;
+  left: 3%;
+  top: 6%;
+  right: 3%;
+  bottom: 6%;
+  display: grid;
+}
+.comp .fullPrac .prac {
+  font-size: 1.5em;
+  width: 100%;
+  height: 100%;
+  background-color: #603;
+  justify-self: center;
+  align-self: center;
+  display: grid;
+  border-radius: 0.5em;
+}
+.comp .fullPrac div .disp {
+  text-align: center;
+  justify-self: center;
+  align-self: center;
+  font-size: 2em;
+}
+.comp .fullDisp {
+  position: absolute;
+  left: 3%;
+  top: 6%;
+  right: 3%;
+  bottom: 6%;
+  display: grid;
+}
+.comp .fullDisp .disp {
+  text-align: center;
+  justify-self: center;
+  align-self: center;
+  font-size: 2em;
+}
+.comp [data-dir="cen"] {
+  background-color: coral;
+}
+.comp [data-dir="west"] {
+  background-color: springgreen;
+}
+.comp [data-dir="north"] {
+  background-color: gold;
+}
+.comp [data-dir="east"] {
+  background-color: salmon;
+}
+.comp [data-dir="south"] {
+  background-color: peru;
+}
+/*# sourceMappingURL=View.css.map */

@@ -83,7 +83,6 @@
     
     .grid1x3(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid
       .em { .pdir(em);   } .in { .pdir(in); } .en { .pdir(en); }
-
     
       // Placed one level below the 9 Practices Grid   - Check on background-color:#603;
     .prac { background-color:#603; border-radius:36px; width:90%; height:80%; font-size:@theme-prac-size;

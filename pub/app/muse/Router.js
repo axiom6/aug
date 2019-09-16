@@ -9,9 +9,10 @@ let lazy = (name) => () => {
 
 export default new Router( {
   routes:[
-    { path: '/',      name:'Home', components:{ Home: Home      } },
-    { path: '/comp',  name:'Comp', components:{ Comp: Home.Comp } },
-    { path: '/prac',  name:'Prac', components:{ Comp: Home.Prac } },
-    { path: '/disp',  name:'Disp', components:{ Disp: Home.Disp } },
-    { path: '/cube',  name:'Cube', components:{ Cube: lazy( 'vue/cube/Cube') } }
+    { path: '/',     name:'Home', components:{ Home: Home      } },
+    { path: '/prin', name:'Prin', components:{ Prin: Home.Prin } },
+    { path: '/comp', name:'Comp', components:{ Comp: Home.Comp } },
+    { path: '/prac', name:'Prac', components:{ Prac: Home.Prac } },
+    { path: '/disp', name:'Disp', components:{ Disp: Home.Disp } },
+    { path: '/cube', name:'Cube', components:{ Cube: lazy( 'vue/cube/Cube') } }
     ] } )

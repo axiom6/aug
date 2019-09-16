@@ -7,9 +7,9 @@
         <h2>Choose an Application Component on the Left</h2>
       </div>
     </div>
-    <div class="elem">
+    <!--div class="elem">
       <h-btns comp="Home" :btns="btns" init="Axes" back="#3B5999" active="tan"></h-btns>
-    </div>
+    </div-->
     <div class="foot">
       <div>
         <h1>Axiom Architectures</h1>

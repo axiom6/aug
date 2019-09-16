@@ -55,330 +55,6 @@
 		"oAP": "/build/.idea",
 		"oF": 0
 		},
-	"/app/augm/augm.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/augm/augm.html",
-		"oF": 0
-		},
-	"/app/augm/Augm.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/augm/Augm-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/augm/Home.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/augm/Home-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/augm/Home.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/augm/Home.js",
-		"oF": 0
-		},
-	"/app/augm/Main.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/app/augm/Main.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/augm/Main.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/augm/Main-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/augm/manifest.webmanifest": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/app/augm/manifest.webmanifest",
-		"oF": 0
-		},
-	"/app/augm/Roll.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/augm/Roll-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/augm/Router.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/augm/Router-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/augm/Test.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/app/augm/Test.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/augm/Test.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/augm/Test-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/jitter/Home.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/jitter/Home-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/jitter/jitter.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/jitter/jitter.html",
-		"oF": 0
-		},
-	"/app/jitter/Jitter.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/jitter/Jitter-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/jitter/Main.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/app/jitter/Main.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/jitter/Main.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/jitter/Main-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/jitter/manifest.webmanifest": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/app/jitter/manifest.webmanifest",
-		"oF": 0
-		},
-	"/app/jitter/Roll.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/jitter/Roll-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/jitter/Router.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/jitter/Router-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/main/main.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/main/main.html",
-		"oF": 0
-		},
-	"/app/main/manifest.webmanifest": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/app/main/manifest.webmanifest",
-		"oF": 0
-		},
-	"/app/main/Roll.sh": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/app/main/Roll.sh",
-		"oF": 0
-		},
-	"/app/mbox/manifest.webmanifest": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/app/mbox/manifest.webmanifest",
-		"oF": 0
-		},
-	"/app/mbox/mbox.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/mbox/mbox.html",
-		"oF": 0
-		},
-	"/app/muse/Home.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/muse/Home-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/muse/Home.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/muse/Home.js",
-		"oF": 0
-		},
-	"/app/muse/Main.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/app/muse/Main.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/muse/Main.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/muse/Main-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/muse/manifest.webmanifest": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/app/muse/manifest.webmanifest",
-		"oF": 0
-		},
-	"/app/muse/muse.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/app/muse/muse.html",
-		"oF": 0
-		},
-	"/app/muse/Muse.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/muse/Muse-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/muse/Roll.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/muse/Roll-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/app/muse/Router.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/app/muse/Router-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/aug.iml": {
 		"cB": 0,
 		"ft": 8192,
@@ -386,1215 +62,6 @@
 		"oA": 0,
 		"oAP": "/aug.iml",
 		"oF": 0
-		},
-	"/css/base/mixin.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 0,
-		"oAP": "/css/base/mixin.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/brew/AeroPress.jpg": {
-		"ft": 16384,
-		"iS": 6539,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/css/brew/AeroPress.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/css/brew/AutoDrip.jpg": {
-		"ft": 16384,
-		"iS": 59936,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/css/brew/AutoDrip.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/css/brew/ColdBrew.jpg": {
-		"ft": 16384,
-		"iS": 5429,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/css/brew/ColdBrew.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/css/brew/Expresso.jpg": {
-		"ft": 16384,
-		"iS": 62811,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/css/brew/Expresso.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/css/brew/FrenchPress.jpg": {
-		"ft": 16384,
-		"iS": 5660,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/css/brew/FrenchPress.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/css/brew/PourOver.jpg": {
-		"ft": 16384,
-		"iS": 4467,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/css/brew/PourOver.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/css/brew/SyphonPot.jpg": {
-		"ft": 16384,
-		"iS": 5357,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/css/brew/SyphonPot.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/css/font/fontawesome/fa-brands-400.eot": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/fontawesome/fa-brands-400.eot",
-		"oF": 0
-		},
-	"/css/font/fontawesome/fa-brands-400.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/css/font/fontawesome/fa-brands-400.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/css/font/fontawesome/fa-brands-400.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/fontawesome/fa-brands-400.ttf",
-		"oF": 0
-		},
-	"/css/font/fontawesome/fa-brands-400.woff": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/fontawesome/fa-brands-400.woff",
-		"oF": 0
-		},
-	"/css/font/fontawesome/fa-brands-400.woff2": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/fontawesome/fa-brands-400.woff2",
-		"oF": 0
-		},
-	"/css/font/fontawesome/fa-regular-400.eot": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/fontawesome/fa-regular-400.eot",
-		"oF": 0
-		},
-	"/css/font/fontawesome/fa-regular-400.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/css/font/fontawesome/fa-regular-400.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/css/font/fontawesome/fa-regular-400.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/fontawesome/fa-regular-400.ttf",
-		"oF": 0
-		},
-	"/css/font/fontawesome/fa-regular-400.woff": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/fontawesome/fa-regular-400.woff",
-		"oF": 0
-		},
-	"/css/font/fontawesome/fa-regular-400.woff2": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/fontawesome/fa-regular-400.woff2",
-		"oF": 0
-		},
-	"/css/font/fontawesome/fa-solid-900.eot": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/fontawesome/fa-solid-900.eot",
-		"oF": 0
-		},
-	"/css/font/fontawesome/fa-solid-900.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/css/font/fontawesome/fa-solid-900.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/css/font/fontawesome/fa-solid-900.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/fontawesome/fa-solid-900.ttf",
-		"oF": 0
-		},
-	"/css/font/fontawesome/fa-solid-900.woff": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/fontawesome/fa-solid-900.woff",
-		"oF": 0
-		},
-	"/css/font/fontawesome/fa-solid-900.woff2": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/fontawesome/fa-solid-900.woff2",
-		"oF": 0
-		},
-	"/css/font/roboto/Roboto-Black.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/roboto/Roboto-Black.ttf",
-		"oF": 0
-		},
-	"/css/font/roboto/Roboto-BlackItalic.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/roboto/Roboto-BlackItalic.ttf",
-		"oF": 0
-		},
-	"/css/font/roboto/Roboto-Bold.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/roboto/Roboto-Bold.ttf",
-		"oF": 0
-		},
-	"/css/font/roboto/Roboto-BoldItalic.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/roboto/Roboto-BoldItalic.ttf",
-		"oF": 0
-		},
-	"/css/font/roboto/Roboto-Italic.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/roboto/Roboto-Italic.ttf",
-		"oF": 0
-		},
-	"/css/font/roboto/Roboto-Light.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/roboto/Roboto-Light.ttf",
-		"oF": 0
-		},
-	"/css/font/roboto/Roboto-LightItalic.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/roboto/Roboto-LightItalic.ttf",
-		"oF": 0
-		},
-	"/css/font/roboto/Roboto-Medium.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/roboto/Roboto-Medium.ttf",
-		"oF": 0
-		},
-	"/css/font/roboto/Roboto-MediumItalic.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/roboto/Roboto-MediumItalic.ttf",
-		"oF": 0
-		},
-	"/css/font/roboto/Roboto-Regular.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/roboto/Roboto-Regular.ttf",
-		"oF": 0
-		},
-	"/css/font/roboto/Roboto-Thin.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/roboto/Roboto-Thin.ttf",
-		"oF": 0
-		},
-	"/css/font/roboto/Roboto-ThinItalic.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/roboto/Roboto-ThinItalic.ttf",
-		"oF": 0
-		},
-	"/css/font/roboto/Roboto.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "/css/font/roboto/Roboto-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"/css/font/roboto/RobotoCondensed-Bold.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/roboto/RobotoCondensed-Bold.ttf",
-		"oF": 0
-		},
-	"/css/font/roboto/RobotoCondensed-BoldItalic.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/roboto/RobotoCondensed-BoldItalic.ttf",
-		"oF": 0
-		},
-	"/css/font/roboto/RobotoCondensed-Italic.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/roboto/RobotoCondensed-Italic.ttf",
-		"oF": 0
-		},
-	"/css/font/roboto/RobotoCondensed-Light.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/roboto/RobotoCondensed-Light.ttf",
-		"oF": 0
-		},
-	"/css/font/roboto/RobotoCondensed-LightItalic.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/roboto/RobotoCondensed-LightItalic.ttf",
-		"oF": 0
-		},
-	"/css/font/roboto/RobotoCondensed-Regular.ttf": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/font/roboto/RobotoCondensed-Regular.ttf",
-		"oF": 0
-		},
-	"/css/font/three/helvetiker_bold.typeface.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/css/font/three/helvetiker_bold.typeface-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/css/font/three/helvetiker_regular.typeface.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/css/font/three/helvetiker_regular.typeface-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/css/fontawesome/_animated.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 1,
-		"oAP": "/css/fontawesome/_animated.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/fontawesome/_bordered-pulled.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 1,
-		"oAP": "/css/fontawesome/_bordered-pulled.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/fontawesome/_core.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 1,
-		"oAP": "/css/fontawesome/_core.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/fontawesome/_fixed-width.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 1,
-		"oAP": "/css/fontawesome/_fixed-width.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/fontawesome/_icons.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 1,
-		"oAP": "/css/fontawesome/_icons.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/fontawesome/_larger.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 1,
-		"oAP": "/css/fontawesome/_larger.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/fontawesome/_list.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 1,
-		"oAP": "/css/fontawesome/_list.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/fontawesome/_mixins.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 1,
-		"oAP": "/css/fontawesome/_mixins.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/fontawesome/_rotated-flipped.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 1,
-		"oAP": "/css/fontawesome/_rotated-flipped.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/fontawesome/_screen-reader.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 1,
-		"oAP": "/css/fontawesome/_screen-reader.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/fontawesome/_shims.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 1,
-		"oAP": "/css/fontawesome/_shims.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/fontawesome/_stacked.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 1,
-		"oAP": "/css/fontawesome/_stacked.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/fontawesome/_variables.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 1,
-		"oAP": "/css/fontawesome/_variables.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/fontawesome/brands.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 1,
-		"oAP": "/css/fontawesome/brands.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/fontawesome/fontawesome.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 1,
-		"oAP": "/css/fontawesome/fontawesome.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/fontawesome/init-awesome.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 0,
-		"oAP": "/pub/vue/dash/init.css",
-		"oF": 2,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/fontawesome/init.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "/css/fontawesome/init-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"/css/fontawesome/regular.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 1,
-		"oAP": "/css/fontawesome/regular.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/fontawesome/solid.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 1,
-		"oAP": "/css/fontawesome/solid.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/fontawesome/v4-shims.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "/css/fontawesome/v4-shims-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"/css/fontawesome/v4-shims.css.map": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/fontawesome/v4-shims.css.map",
-		"oF": 0
-		},
-	"/css/fontawesome/v4-shims.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 0,
-		"oAP": "/css/fontawesome/v4-shims.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/icons/android-chrome-192x192.png": {
-		"ft": 32768,
-		"iS": 9416,
-		"oA": 0,
-		"oAP": "/css/icons/android-chrome-192x192.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/icons/android-chrome-512x512.png": {
-		"ft": 32768,
-		"iS": 29808,
-		"oA": 0,
-		"oAP": "/css/icons/android-chrome-512x512.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/icons/apple-touch-icon-120x120.png": {
-		"ft": 32768,
-		"iS": 3369,
-		"oA": 0,
-		"oAP": "/css/icons/apple-touch-icon-120x120.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/icons/apple-touch-icon-152x152.png": {
-		"ft": 32768,
-		"iS": 4046,
-		"oA": 0,
-		"oAP": "/css/icons/apple-touch-icon-152x152.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/icons/apple-touch-icon-180x180.png": {
-		"ft": 32768,
-		"iS": 4678,
-		"oA": 0,
-		"oAP": "/css/icons/apple-touch-icon-180x180.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/icons/apple-touch-icon-60x60.png": {
-		"ft": 32768,
-		"iS": 1491,
-		"oA": 0,
-		"oAP": "/css/icons/apple-touch-icon-60x60.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/icons/apple-touch-icon-76x76.png": {
-		"ft": 32768,
-		"iS": 1823,
-		"oA": 0,
-		"oAP": "/css/icons/apple-touch-icon-76x76.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/icons/apple-touch-icon.png": {
-		"ft": 32768,
-		"iS": 4678,
-		"oA": 0,
-		"oAP": "/css/icons/apple-touch-icon.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/icons/favicon-16x16.png": {
-		"ft": 32768,
-		"iS": 799,
-		"oA": 0,
-		"oAP": "/css/icons/favicon-16x16.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/icons/favicon-32x32.png": {
-		"ft": 32768,
-		"iS": 1271,
-		"oA": 0,
-		"oAP": "/css/icons/favicon-32x32.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/icons/favicon.ico": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/icons/favicon.ico",
-		"oF": 0
-		},
-	"/css/icons/msapplication-icon-144x144.png": {
-		"ft": 32768,
-		"iS": 1169,
-		"oA": 0,
-		"oAP": "/css/icons/msapplication-icon-144x144.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/icons/mstile-150x150.png": {
-		"ft": 32768,
-		"iS": 4282,
-		"oA": 0,
-		"oAP": "/css/icons/mstile-150x150.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/icons/safari-pinned-tab.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/css/icons/safari-pinned-tab.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/css/icons/vue-logo.png": {
-		"ft": 32768,
-		"iS": 6849,
-		"oA": 0,
-		"oAP": "/css/icons/vue-logo.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/muse/Info.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "/css/muse/Info-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"/css/muse/Info.css.map": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/muse/Info.css.map",
-		"oF": 0
-		},
-	"/css/muse/Info.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 0,
-		"oAP": "/css/muse/Info.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/muse/View.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "/css/muse/View-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"/css/muse/View.css.map": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/muse/View.css.map",
-		"oF": 0
-		},
-	"/css/muse/View.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 0,
-		"oAP": "/css/muse/View.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/obs/app.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "/css/obs/app-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"/css/obs/app.css.map": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/css/obs/app.css.map",
-		"oF": 0
-		},
-	"/css/obs/app.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 0,
-		"oAP": "/css/obs/app.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/obs/inspector.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "/css/obs/inspector-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"/css/obs/inspector.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 0,
-		"oAP": "/css/obs/inspector.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/obs/obs.css": {
-		"aP": 1,
-		"bl": 0,
-		"ft": 16,
-		"ma": 0,
-		"oA": 1,
-		"oAP": "/css/obs/obs-min.css",
-		"oF": 0,
-		"oS": 3
-		},
-	"/css/obs/obs.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 0,
-		"oAP": "/css/obs/obs.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/css/phone/landscape.png": {
-		"ft": 32768,
-		"iS": 35274,
-		"oA": 0,
-		"oAP": "/css/phone/landscape.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/phone/portrait.png": {
-		"ft": 32768,
-		"iS": 37495,
-		"oA": 0,
-		"oAP": "/css/phone/portrait.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/svg/hallowback2.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/css/svg/hallowback2.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/css/svg/hallowfront4.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/css/svg/hallowfront4.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/css/svg/hallowmid2.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/css/svg/hallowmid2.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/css/svg/hallowmidfront2.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/css/svg/hallowmidfront2.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/css/svg/horse-hallow5.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/css/svg/horse-hallow5.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/css/svg/landscape.svg": {
-		"ft": 2097152,
-		"miP": 0,
-		"oA": 2,
-		"oAP": "/css/svg/landscape.svg",
-		"oF": 0,
-		"opt": 0,
-		"plM": 3758088159,
-		"prP": 0
-		},
-	"/css/vis/Clarity.png": {
-		"ft": 32768,
-		"iS": 42299,
-		"oA": 0,
-		"oAP": "/css/vis/Clarity.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/vis/Delight.png": {
-		"ft": 32768,
-		"iS": 44357,
-		"oA": 0,
-		"oAP": "/css/vis/Delight.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/vis/Help.png": {
-		"ft": 32768,
-		"iS": 40779,
-		"oA": 0,
-		"oAP": "/css/vis/Help.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/vis/Honest.png": {
-		"ft": 32768,
-		"iS": 53507,
-		"oA": 0,
-		"oAP": "/css/vis/Honest.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/vis/Scale.png": {
-		"ft": 32768,
-		"iS": 36676,
-		"oA": 0,
-		"oAP": "/css/vis/Scale.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/css/vis/Structure.png": {
-		"ft": 32768,
-		"iS": 14025,
-		"oA": 0,
-		"oAP": "/css/vis/Structure.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
 		},
 	"/firebase.json": {
 		"ft": 524288,
@@ -1796,6 +263,14 @@
 		"oO": 0,
 		"oS": 1
 		},
+	"/pub/app/augm/augm.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/app/augm/augm.html",
+		"oF": 0
+		},
 	"/pub/app/augm/Augm.js": {
 		"bF": 0,
 		"ft": 64,
@@ -1900,79 +375,103 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/jitt/Home.js": {
+	"/pub/app/jitter/Home.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/app/jitt/Home-min.js",
+		"oAP": "/pub/app/jitter/Home-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/jitt/Jitter.js": {
+	"/pub/app/jitter/Home.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/app/jitter/Home.js",
+		"oF": 0
+		},
+	"/pub/app/jitter/jitter.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/app/jitter/jitter.html",
+		"oF": 0
+		},
+	"/pub/app/jitter/Jitter.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/app/jitt/Jitter-min.js",
+		"oAP": "/pub/app/jitter/Jitter-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/jitt/Main.coffee": {
+	"/pub/app/jitter/Main.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/app/jitt/Main.js",
+		"oAP": "/pub/app/jitter/Main.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/jitt/Main.js": {
+	"/pub/app/jitter/Main.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/app/jitt/Main-min.js",
+		"oAP": "/pub/app/jitter/Main-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/jitt/manifest.webmanifest": {
+	"/pub/app/jitter/manifest.webmanifest": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/pub/app/jitt/manifest.webmanifest",
+		"oAP": "/pub/app/jitter/manifest.webmanifest",
 		"oF": 1
 		},
-	"/pub/app/jitt/Roll.js": {
+	"/pub/app/jitter/Roll.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/app/jitt/Roll-min.js",
+		"oAP": "/pub/app/jitter/Roll-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/jitt/Router.js": {
+	"/pub/app/jitter/Router.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/pub/app/jitt/Router-min.js",
+		"oAP": "/pub/app/jitter/Router-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"/pub/app/main/main.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/app/main/main.html",
+		"oF": 0
 		},
 	"/pub/app/main/manifest.webmanifest": {
 		"cB": 0,
@@ -1996,6 +495,14 @@
 		"hM": 0,
 		"oA": 0,
 		"oAP": "/pub/app/mbox/manifest.webmanifest",
+		"oF": 0
+		},
+	"/pub/app/mbox/mbox.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/app/mbox/mbox.html",
 		"oF": 0
 		},
 	"/pub/app/muse/Home.js": {
@@ -2046,6 +553,14 @@
 		"oA": 1,
 		"oAP": "/pub/app/muse/manifest.webmanifest",
 		"oF": 1
+		},
+	"/pub/app/muse/muse.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/app/muse/muse.html",
+		"oF": 0
 		},
 	"/pub/app/muse/Muse.js": {
 		"bF": 0,
@@ -2494,6 +1009,23 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/css/base/mixin.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/pub/css/base/mixin.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
 	"/pub/css/brew/AeroPress.jpg": {
 		"ft": 16384,
 		"iS": 6539,
@@ -2867,6 +1399,278 @@
 		"oO": 0,
 		"oS": 1
 		},
+	"/pub/css/fontawesome/_animated.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/pub/css/fontawesome/_animated.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/fontawesome/_bordered-pulled.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/pub/css/fontawesome/_bordered-pulled.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/fontawesome/_core.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/pub/css/fontawesome/_core.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/fontawesome/_fixed-width.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/pub/css/fontawesome/_fixed-width.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/fontawesome/_icons.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/pub/css/fontawesome/_icons.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/fontawesome/_larger.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/pub/css/fontawesome/_larger.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/fontawesome/_list.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/pub/css/fontawesome/_list.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/fontawesome/_mixins.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/pub/css/fontawesome/_mixins.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/fontawesome/_rotated-flipped.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/pub/css/fontawesome/_rotated-flipped.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/fontawesome/_screen-reader.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/pub/css/fontawesome/_screen-reader.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/fontawesome/_shims.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/pub/css/fontawesome/_shims.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/fontawesome/_stacked.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/pub/css/fontawesome/_stacked.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/fontawesome/_variables.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/pub/css/fontawesome/_variables.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/fontawesome/brands.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/pub/css/fontawesome/brands.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/fontawesome/fontawesome.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/pub/css/fontawesome/fontawesome.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/fontawesome/init-awesome.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/pub/css/fontawesome/init-awesome.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
 	"/pub/css/fontawesome/init.css": {
 		"aP": 1,
 		"bl": 0,
@@ -2884,6 +1688,57 @@
 		"oA": 0,
 		"oAP": "/pub/css/fontawesome/init.css.map",
 		"oF": 0
+		},
+	"/pub/css/fontawesome/regular.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/pub/css/fontawesome/regular.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/fontawesome/solid.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/pub/css/fontawesome/solid.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/fontawesome/v4-shims.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/pub/css/fontawesome/v4-shims.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
 		},
 	"/pub/css/icons/android-chrome-192x192.png": {
 		"ft": 32768,
@@ -3045,6 +1900,165 @@
 		"opt": 0,
 		"oT": 1,
 		"q": 100
+		},
+	"/pub/css/muse/Info.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/pub/css/muse/Info-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/pub/css/muse/Info.css.map": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/css/muse/Info.css.map",
+		"oF": 0
+		},
+	"/pub/css/muse/Info.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/pub/css/muse/Info.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/muse/View.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/pub/css/muse/View-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/pub/css/muse/View.css.map": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/css/muse/View.css.map",
+		"oF": 0
+		},
+	"/pub/css/muse/View.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/pub/css/muse/View.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/obs/app.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/pub/css/obs/app-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/pub/css/obs/app.css.map": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/css/obs/app.css.map",
+		"oF": 0
+		},
+	"/pub/css/obs/app.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/pub/css/obs/app.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/obs/inspector.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/pub/css/obs/inspector-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/pub/css/obs/inspector.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/pub/css/obs/inspector.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/pub/css/obs/obs.css": {
+		"aP": 1,
+		"bl": 0,
+		"ft": 16,
+		"ma": 0,
+		"oA": 1,
+		"oAP": "/pub/css/obs/obs-min.css",
+		"oF": 0,
+		"oS": 3
+		},
+	"/pub/css/obs/obs.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/pub/css/obs/obs.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
 		},
 	"/pub/css/phone/landscape.png": {
 		"ft": 32768,
@@ -3462,38 +2476,6 @@
 		"oO": 0,
 		"oS": 1
 		},
-	"/pub/data/text/BuildingCulture.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/pub/data/text/BuildingCulture.txt",
-		"oF": 0
-		},
-	"/pub/data/text/Cols.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/pub/data/text/Cols.txt",
-		"oF": 0
-		},
-	"/pub/data/text/Conn.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/pub/data/text/Conn.txt",
-		"oF": 0
-		},
-	"/pub/data/text/Info.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/pub/data/text/Info.txt",
-		"oF": 0
-		},
 	"/pub/gan/2D/Basics.js": {
 		"bF": 0,
 		"ft": 64,
@@ -3644,73 +2626,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/gan/lib/Style-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/html/404.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/html/404.html",
-		"oF": 0
-		},
-	"/pub/html/augm.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/html/augm.html",
-		"oF": 0
-		},
-	"/pub/html/jitter.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/html/jitter.html",
-		"oF": 0
-		},
-	"/pub/html/main.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/html/main.html",
-		"oF": 0
-		},
-	"/pub/html/mbox.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/html/mbox.html",
-		"oF": 0
-		},
-	"/pub/html/muse.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/html/muse.html",
-		"oF": 0
-		},
-	"/pub/html/robots.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/pub/html/robots.txt",
-		"oF": 0
-		},
-	"/pub/html/Worker.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/html/Worker-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -6557,33 +5472,365 @@
 		"oAP": "/pub/vue/wood/Wood.js",
 		"oF": 0
 		},
-	"/zzz/ani/bird/Bird.css": {
+	"/zzz/app/augm/augm.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/augm/augm.html",
+		"oF": 0
+		},
+	"/zzz/app/augm/Augm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/augm/Augm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/app/augm/Home.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/augm/Home-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/app/augm/Home.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/augm/Home.js",
+		"oF": 0
+		},
+	"/zzz/app/augm/Main.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/app/augm/Main.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/app/augm/Main.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/augm/Main-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/app/augm/manifest.webmanifest": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/app/augm/manifest.webmanifest",
+		"oF": 0
+		},
+	"/zzz/app/augm/Roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/augm/Roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/app/augm/Router.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/augm/Router-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/app/augm/Test.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/app/augm/Test.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/app/augm/Test.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/augm/Test-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/app/jitter/Home.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/jitter/Home-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/app/jitter/Home.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/jitter/Home.js",
+		"oF": 0
+		},
+	"/zzz/app/jitter/jitter.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/jitter/jitter.html",
+		"oF": 0
+		},
+	"/zzz/app/jitter/Jitter.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/jitter/Jitter-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/app/jitter/Main.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/app/jitter/Main.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/app/jitter/Main.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/jitter/Main-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/app/jitter/manifest.webmanifest": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/app/jitter/manifest.webmanifest",
+		"oF": 0
+		},
+	"/zzz/app/jitter/Roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/jitter/Roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/app/jitter/Router.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/jitter/Router-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/app/main/main.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/main/main.html",
+		"oF": 0
+		},
+	"/zzz/app/main/manifest.webmanifest": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/app/main/manifest.webmanifest",
+		"oF": 0
+		},
+	"/zzz/app/main/Roll.sh": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/app/main/Roll.sh",
+		"oF": 0
+		},
+	"/zzz/app/mbox/manifest.webmanifest": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/app/mbox/manifest.webmanifest",
+		"oF": 0
+		},
+	"/zzz/app/mbox/mbox.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/mbox/mbox.html",
+		"oF": 0
+		},
+	"/zzz/app/muse/Home.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/muse/Home-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/app/muse/Home.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/muse/Home.js",
+		"oF": 0
+		},
+	"/zzz/app/muse/Main.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/app/muse/Main.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/app/muse/Main.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/muse/Main-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/app/muse/manifest.webmanifest": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/app/muse/manifest.webmanifest",
+		"oF": 0
+		},
+	"/zzz/app/muse/muse.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/muse/muse.html",
+		"oF": 0
+		},
+	"/zzz/app/muse/Muse.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/muse/Muse-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/app/muse/Roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/muse/Roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/app/muse/Router.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/app/muse/Router-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/aug/ani/bird/Bird.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/bird/Bird-min.css",
+		"oAP": "/zzz/aug/ani/bird/Bird-min.css",
 		"oF": 0,
 		"oS": 3
 		},
-	"/zzz/ani/bird/Bird.gif": {
+	"/zzz/aug/ani/bird/Bird.gif": {
 		"ft": 4194304,
 		"iS": 81001,
 		"oA": 0,
-		"oAP": "/zzz/ani/bird/Bird.gif",
+		"oAP": "/zzz/aug/ani/bird/Bird.gif",
 		"oF": 0,
 		"opt": 0
 		},
-	"/zzz/ani/bird/Bird.html": {
+	"/zzz/aug/ani/bird/Bird.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/bird/Bird.html",
+		"oAP": "/zzz/aug/ani/bird/Bird.html",
 		"oF": 0
 		},
-	"/zzz/ani/bird/Bird.scss": {
+	"/zzz/aug/ani/bird/Bird.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -6591,125 +5838,125 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "/zzz/ani/bird/Bird.css",
+		"oAP": "/zzz/aug/ani/bird/Bird.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"/zzz/ani/gsap/findShapeIndex.js": {
+	"/zzz/aug/ani/gsap/findShapeIndex.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/gsap/findShapeIndex-min.js",
+		"oAP": "/zzz/aug/ani/gsap/findShapeIndex-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/ani/gsap/MorphSVGPlugin.min.js": {
+	"/zzz/aug/ani/gsap/MorphSVGPlugin.min.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/gsap/MorphSVGPlugin.min-min.js",
+		"oAP": "/zzz/aug/ani/gsap/MorphSVGPlugin.min-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/ani/gsap/TweenMax.esm.js": {
+	"/zzz/aug/ani/gsap/TweenMax.esm.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/gsap/TweenMax.esm-min.js",
+		"oAP": "/zzz/aug/ani/gsap/TweenMax.esm-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/ani/gsap/TweenMax.js": {
+	"/zzz/aug/ani/gsap/TweenMax.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/gsap/TweenMax-min.js",
+		"oAP": "/zzz/aug/ani/gsap/TweenMax-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/ani/jquery/jquery-3.3.1.js": {
+	"/zzz/aug/ani/jquery/jquery-3.3.1.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/jquery/jquery-3.3.1-min.js",
+		"oAP": "/zzz/aug/ani/jquery/jquery-3.3.1-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/ani/lava/Lava.css": {
+	"/zzz/aug/ani/lava/Lava.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/lava/Lava-min.css",
+		"oAP": "/zzz/aug/ani/lava/Lava-min.css",
 		"oF": 0,
 		"oS": 3
 		},
-	"/zzz/ani/lava/Lava.html": {
+	"/zzz/aug/ani/lava/Lava.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/lava/Lava.html",
+		"oAP": "/zzz/aug/ani/lava/Lava.html",
 		"oF": 0
 		},
-	"/zzz/ani/lava/Lava.js": {
+	"/zzz/aug/ani/lava/Lava.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/lava/Lava-min.js",
+		"oAP": "/zzz/aug/ani/lava/Lava-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/ani/london/London.css": {
+	"/zzz/aug/ani/london/London.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/london/London-min.css",
+		"oAP": "/zzz/aug/ani/london/London-min.css",
 		"oF": 0,
 		"oS": 3
 		},
-	"/zzz/ani/london/London.html": {
+	"/zzz/aug/ani/london/London.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/london/London.html",
+		"oAP": "/zzz/aug/ani/london/London.html",
 		"oF": 0
 		},
-	"/zzz/ani/london/London.js": {
+	"/zzz/aug/ani/london/London.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/london/London-min.js",
+		"oAP": "/zzz/aug/ani/london/London-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/ani/london/London.scss": {
+	"/zzz/aug/ani/london/London.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -6717,99 +5964,99 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "/zzz/ani/london/London.css",
+		"oAP": "/zzz/aug/ani/london/London.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"/zzz/ani/mtns/Mtns.css": {
+	"/zzz/aug/ani/mtns/Mtns.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/mtns/Mtns-min.css",
+		"oAP": "/zzz/aug/ani/mtns/Mtns-min.css",
 		"oF": 0,
 		"oS": 3
 		},
-	"/zzz/ani/mtns/Mtns.html": {
+	"/zzz/aug/ani/mtns/Mtns.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/mtns/Mtns.html",
+		"oAP": "/zzz/aug/ani/mtns/Mtns.html",
 		"oF": 0
 		},
-	"/zzz/ani/poly/Poly.css": {
+	"/zzz/aug/ani/poly/Poly.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/poly/Poly-min.css",
+		"oAP": "/zzz/aug/ani/poly/Poly-min.css",
 		"oF": 0,
 		"oS": 3
 		},
-	"/zzz/ani/poly/Poly.html": {
+	"/zzz/aug/ani/poly/Poly.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/poly/Poly.html",
+		"oAP": "/zzz/aug/ani/poly/Poly.html",
 		"oF": 0
 		},
-	"/zzz/ani/poly/Poly.js": {
+	"/zzz/aug/ani/poly/Poly.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/poly/Poly-min.js",
+		"oAP": "/zzz/aug/ani/poly/Poly-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/ani/space/particles.min.js": {
+	"/zzz/aug/ani/space/particles.min.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/space/particles.min-min.js",
+		"oAP": "/zzz/aug/ani/space/particles.min-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/ani/space/Space.css": {
+	"/zzz/aug/ani/space/Space.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/space/Space-min.css",
+		"oAP": "/zzz/aug/ani/space/Space-min.css",
 		"oF": 0,
 		"oS": 3
 		},
-	"/zzz/ani/space/Space.html": {
+	"/zzz/aug/ani/space/Space.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/space/Space.html",
+		"oAP": "/zzz/aug/ani/space/Space.html",
 		"oF": 0
 		},
-	"/zzz/ani/space/Space.js": {
+	"/zzz/aug/ani/space/Space.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/space/Space-min.js",
+		"oAP": "/zzz/aug/ani/space/Space-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/ani/space/Space.scss": {
+	"/zzz/aug/ani/space/Space.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -6817,30 +6064,30 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "/zzz/ani/space/Space.css",
+		"oAP": "/zzz/aug/ani/space/Space.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"/zzz/ani/sprite/Sprite.css": {
+	"/zzz/aug/ani/sprite/Sprite.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/sprite/Sprite-min.css",
+		"oAP": "/zzz/aug/ani/sprite/Sprite-min.css",
 		"oF": 0,
 		"oS": 3
 		},
-	"/zzz/ani/sprite/Sprite.html": {
+	"/zzz/aug/ani/sprite/Sprite.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/sprite/Sprite.html",
+		"oAP": "/zzz/aug/ani/sprite/Sprite.html",
 		"oF": 0
 		},
-	"/zzz/ani/sprite/Sprite.scss": {
+	"/zzz/aug/ani/sprite/Sprite.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -6848,70 +6095,70 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "/zzz/ani/sprite/Sprite.css",
+		"oAP": "/zzz/aug/ani/sprite/Sprite.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"/zzz/ani/sprite/svg/bkwalk2.svg": {
+	"/zzz/aug/ani/sprite/svg/bkwalk2.svg": {
 		"ft": 2097152,
 		"miP": 0,
 		"oA": 2,
-		"oAP": "/zzz/ani/sprite/svg/bkwalk2.svg",
+		"oAP": "/zzz/aug/ani/sprite/svg/bkwalk2.svg",
 		"oF": 0,
 		"opt": 0,
 		"plM": 3758088159,
 		"prP": 0
 		},
-	"/zzz/ani/sprite/svg/fore.svg": {
+	"/zzz/aug/ani/sprite/svg/fore.svg": {
 		"ft": 2097152,
 		"miP": 0,
 		"oA": 2,
-		"oAP": "/zzz/ani/sprite/svg/fore.svg",
+		"oAP": "/zzz/aug/ani/sprite/svg/fore.svg",
 		"oF": 0,
 		"opt": 0,
 		"plM": 3758088159,
 		"prP": 0
 		},
-	"/zzz/ani/sprite/svg/mid.svg": {
+	"/zzz/aug/ani/sprite/svg/mid.svg": {
 		"ft": 2097152,
 		"miP": 0,
 		"oA": 2,
-		"oAP": "/zzz/ani/sprite/svg/mid.svg",
+		"oAP": "/zzz/aug/ani/sprite/svg/mid.svg",
 		"oF": 0,
 		"opt": 0,
 		"plM": 3758088159,
 		"prP": 0
 		},
-	"/zzz/ani/sprite/svg/walk-ing4.svg": {
+	"/zzz/aug/ani/sprite/svg/walk-ing4.svg": {
 		"ft": 2097152,
 		"miP": 0,
 		"oA": 2,
-		"oAP": "/zzz/ani/sprite/svg/walk-ing4.svg",
+		"oAP": "/zzz/aug/ani/sprite/svg/walk-ing4.svg",
 		"oF": 0,
 		"opt": 0,
 		"plM": 3758088159,
 		"prP": 0
 		},
-	"/zzz/ani/wave/Wave.css": {
+	"/zzz/aug/ani/wave/Wave.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/wave/Wave-min.css",
+		"oAP": "/zzz/aug/ani/wave/Wave-min.css",
 		"oF": 0,
 		"oS": 3
 		},
-	"/zzz/ani/wave/Wave.html": {
+	"/zzz/aug/ani/wave/Wave.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/wave/Wave.html",
+		"oAP": "/zzz/aug/ani/wave/Wave.html",
 		"oF": 0
 		},
-	"/zzz/ani/wave/Wave.scss": {
+	"/zzz/aug/ani/wave/Wave.scss": {
 		"aP": 0,
 		"bl": 0,
 		"dP": 10,
@@ -6919,1216 +6166,590 @@
 		"ft": 4,
 		"ma": 0,
 		"oA": 0,
-		"oAP": "/zzz/ani/wave/Wave.css",
+		"oAP": "/zzz/aug/ani/wave/Wave.css",
 		"oF": 0,
 		"oS": 0,
 		"uL": 1
 		},
-	"/zzz/ani/wave/Wave.vue": {
+	"/zzz/aug/ani/wave/Wave.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/ani/wave/Wave.js",
+		"oAP": "/zzz/aug/ani/wave/Wave.js",
 		"oF": 0
 		},
-	"/zzz/audit/audit.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/audit/audit.txt",
-		"oF": 1
-		},
-	"/zzz/audit/Complexity.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/zzz/audit/Complexity.txt",
-		"oF": 0
-		},
-	"/zzz/audit/eia.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/zzz/audit/eia.txt",
-		"oF": 0
-		},
-	"/zzz/audit/EnlightPower.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/zzz/audit/EnlightPower.txt",
-		"oF": 0
-		},
-	"/zzz/audit/headers.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/audit/headers.txt",
-		"oF": 1
-		},
-	"/zzz/audit/plan.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/audit/plan.txt",
-		"oF": 1
-		},
-	"/zzz/audit/pwa.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/audit/pwa.txt",
-		"oF": 1
-		},
-	"/zzz/audit/sportstools.xyz-20190808T181234.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/audit/sportstools.xyz-20190808T181234-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/augm/Data.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/augm/Data-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/augm/Geom.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/augm/Geom-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/augm/Math.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/augm/Math-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/draw/Augm.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/draw/Augm-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/draw/D3ds.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/draw/D3ds-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/draw/Data.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/draw/Data-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/draw/Hues.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/draw/Hues-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/draw/Prac.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/draw/Prac-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/draw/Prin.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/draw/Prin-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/draw/Quad.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/draw/Quad-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/draw/Tech.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/draw/Tech-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/draw/Tops.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/draw/Tops-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/jitter/Choice.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/jitter/Choice-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/jitter/Flavor.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/jitter/Flavor-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/jitter/Jitter.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/jitter/Jitter-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/jitter/Navs.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/jitter/Navs-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/jitter/Region.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/jitter/Region-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/muse/Cube.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/muse/Cube-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/muse/Info.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/muse/Info-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/muse/Know.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/muse/Know-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/muse/Muse.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/muse/Muse-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/muse/Prin.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/muse/Prin-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/muse/Rows.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/muse/Rows-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/muse/Wise.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/muse/Wise-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/store/Prac.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/store/Prac-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/store/Push.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/store/Push-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/store/Sync.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/data/store/Sync-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/data/text/BuildingCulture.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/zzz/data/text/BuildingCulture.txt",
-		"oF": 0
-		},
-	"/zzz/data/text/Cols.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/zzz/data/text/Cols.txt",
-		"oF": 0
-		},
-	"/zzz/data/text/Conn.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/zzz/data/text/Conn.txt",
-		"oF": 0
-		},
-	"/zzz/data/text/Info.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/zzz/data/text/Info.txt",
-		"oF": 0
-		},
-	"/zzz/libs/ASCIIMathML.js": {
+	"/zzz/aug/libs/ASCIIMathML.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/libs/ASCIIMathML-min.js",
+		"oAP": "/zzz/aug/libs/ASCIIMathML-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/libs/LaTeXMathML.js": {
+	"/zzz/aug/libs/LaTeXMathML.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/libs/LaTeXMathML-min.js",
+		"oAP": "/zzz/aug/libs/LaTeXMathML-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/libs/math.js": {
+	"/zzz/aug/libs/math.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/libs/math-min.js",
+		"oAP": "/zzz/aug/libs/math-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/libs/MathJax.esm.js": {
+	"/zzz/aug/libs/MathJax.esm.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/libs/MathJax.esm-min.js",
+		"oAP": "/zzz/aug/libs/MathJax.esm-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/libs/MathJax.js": {
+	"/zzz/aug/libs/MathJax.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/libs/MathJax-min.js",
+		"oAP": "/zzz/aug/libs/MathJax-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/math/mathematics_cheat_sheet.pdf": {
+	"/zzz/aug/math/mathematics_cheat_sheet.pdf": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/math/mathematics_cheat_sheet.pdf",
+		"oAP": "/zzz/aug/math/mathematics_cheat_sheet.pdf",
 		"oF": 0
 		},
-	"/zzz/math/mathml.pdf": {
+	"/zzz/aug/math/mathml.pdf": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/math/mathml.pdf",
+		"oAP": "/zzz/aug/math/mathml.pdf",
 		"oF": 0
 		},
-	"/zzz/math/msor.7.3f.pdf": {
+	"/zzz/aug/math/msor.7.3f.pdf": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/math/msor.7.3f.pdf",
+		"oAP": "/zzz/aug/math/msor.7.3f.pdf",
 		"oF": 0
 		},
-	"/zzz/obs/embed.html": {
+	"/zzz/aug/obs/embed.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/obs/embed.html",
+		"oAP": "/zzz/aug/obs/embed.html",
 		"oF": 0
 		},
-	"/zzz/obs/Lazy.js": {
+	"/zzz/aug/obs/Lazy.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/obs/Lazy-min.js",
+		"oAP": "/zzz/aug/obs/Lazy-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/obs/Op.js": {
+	"/zzz/aug/obs/Op.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/obs/Op-min.js",
+		"oAP": "/zzz/aug/obs/Op-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/obs/Run.coffee": {
+	"/zzz/aug/obs/Run.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/zzz/obs/Run.js",
+		"oAP": "/zzz/aug/obs/Run.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/obs/run.html": {
+	"/zzz/aug/obs/run.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/obs/run.html",
+		"oAP": "/zzz/aug/obs/run.html",
 		"oF": 0
 		},
-	"/zzz/obs/Run.js": {
+	"/zzz/aug/obs/Run.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/obs/Run-min.js",
+		"oAP": "/zzz/aug/obs/Run-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/obs/std.html": {
+	"/zzz/aug/obs/std.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/obs/std.html",
+		"oAP": "/zzz/aug/obs/std.html",
 		"oF": 0
 		},
-	"/zzz/peg/arith/add.html": {
+	"/zzz/aug/peg/arith/add.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/peg/arith/add.html",
+		"oAP": "/zzz/aug/peg/arith/add.html",
 		"oF": 0
 		},
-	"/zzz/peg/arith/add.js": {
+	"/zzz/aug/peg/arith/add.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/peg/arith/add-min.js",
+		"oAP": "/zzz/aug/peg/arith/add-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/peg/arith/add.pegged": {
+	"/zzz/aug/peg/arith/add.pegged": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/peg/arith/add.pegged",
+		"oAP": "/zzz/aug/peg/arith/add.pegged",
 		"oF": 0
 		},
-	"/zzz/peg/arith/add.pegjs": {
+	"/zzz/aug/peg/arith/add.pegjs": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/peg/arith/add.pegjs",
+		"oAP": "/zzz/aug/peg/arith/add.pegjs",
 		"oF": 0
 		},
-	"/zzz/peg/arith/adt.js": {
+	"/zzz/aug/peg/arith/adt.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/peg/arith/adt-min.js",
+		"oAP": "/zzz/aug/peg/arith/adt-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/peg/arith/adt.pegjs": {
+	"/zzz/aug/peg/arith/adt.pegjs": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/peg/arith/adt.pegjs",
+		"oAP": "/zzz/aug/peg/arith/adt.pegjs",
 		"oF": 0
 		},
-	"/zzz/peg/arith/arith.js": {
+	"/zzz/aug/peg/arith/arith.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/peg/arith/arith-min.js",
+		"oAP": "/zzz/aug/peg/arith/arith-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/peg/arith/arith.pegjs": {
+	"/zzz/aug/peg/arith/arith.pegjs": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/peg/arith/arith.pegjs",
+		"oAP": "/zzz/aug/peg/arith/arith.pegjs",
 		"oF": 0
 		},
-	"/zzz/peg/arith/arith.txt": {
+	"/zzz/aug/peg/arith/arith.txt": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/peg/arith/arith.txt",
+		"oAP": "/zzz/aug/peg/arith/arith.txt",
 		"oF": 0
 		},
-	"/zzz/peg/arith/com.js": {
+	"/zzz/aug/peg/arith/com.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/peg/arith/com-min.js",
+		"oAP": "/zzz/aug/peg/arith/com-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/peg/arith/sub.html": {
+	"/zzz/aug/peg/arith/sub.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/peg/arith/sub.html",
+		"oAP": "/zzz/aug/peg/arith/sub.html",
 		"oF": 0
 		},
-	"/zzz/peg/ascii/Ascii.js": {
+	"/zzz/aug/peg/ascii/Ascii.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/peg/ascii/Ascii-min.js",
+		"oAP": "/zzz/aug/peg/ascii/Ascii-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/peg/ascii/Ascii.pegjs": {
+	"/zzz/aug/peg/ascii/Ascii.pegjs": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/peg/ascii/Ascii.pegjs",
+		"oAP": "/zzz/aug/peg/ascii/Ascii.pegjs",
 		"oF": 0
 		},
-	"/zzz/peg/ascii/Ascii.Pri.pegjs": {
+	"/zzz/aug/peg/ascii/Ascii.Pri.pegjs": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/peg/ascii/Ascii.Pri.pegjs",
+		"oAP": "/zzz/aug/peg/ascii/Ascii.Pri.pegjs",
 		"oF": 0
 		},
-	"/zzz/peg/ascii/Ascii.Sec.pegjs": {
+	"/zzz/aug/peg/ascii/Ascii.Sec.pegjs": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/peg/ascii/Ascii.Sec.pegjs",
+		"oAP": "/zzz/aug/peg/ascii/Ascii.Sec.pegjs",
 		"oF": 0
 		},
-	"/zzz/peg/ascii/run.js": {
+	"/zzz/aug/peg/ascii/run.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/peg/ascii/run-min.js",
+		"oAP": "/zzz/aug/peg/ascii/run-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/peg/ascii/Stuff.pegjs": {
+	"/zzz/aug/peg/ascii/Stuff.pegjs": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/peg/ascii/Stuff.pegjs",
+		"oAP": "/zzz/aug/peg/ascii/Stuff.pegjs",
 		"oF": 0
 		},
-	"/zzz/peg/ascii/Trace.js": {
+	"/zzz/aug/peg/ascii/Trace.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/peg/ascii/Trace-min.js",
+		"oAP": "/zzz/aug/peg/ascii/Trace-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/peg/pegjs/arith.pegjs": {
+	"/zzz/aug/peg/pegjs/arith.pegjs": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/peg/pegjs/arith.pegjs",
+		"oAP": "/zzz/aug/peg/pegjs/arith.pegjs",
 		"oF": 0
 		},
-	"/zzz/peg/pegjs/css.pegjs": {
+	"/zzz/aug/peg/pegjs/css.pegjs": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/peg/pegjs/css.pegjs",
+		"oAP": "/zzz/aug/peg/pegjs/css.pegjs",
 		"oF": 0
 		},
-	"/zzz/peg/pegjs/javascript.pegjs": {
+	"/zzz/aug/peg/pegjs/javascript.pegjs": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/peg/pegjs/javascript.pegjs",
+		"oAP": "/zzz/aug/peg/pegjs/javascript.pegjs",
 		"oF": 0
 		},
-	"/zzz/peg/pegjs/json.pegjs": {
+	"/zzz/aug/peg/pegjs/json.pegjs": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/peg/pegjs/json.pegjs",
+		"oAP": "/zzz/aug/peg/pegjs/json.pegjs",
 		"oF": 0
 		},
-	"/zzz/peg/ref/AcsiiExa.txt": {
+	"/zzz/aug/peg/ref/AcsiiExa.txt": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/peg/ref/AcsiiExa.txt",
+		"oAP": "/zzz/aug/peg/ref/AcsiiExa.txt",
 		"oF": 0
 		},
-	"/zzz/peg/ref/AsciiBnr.txt": {
+	"/zzz/aug/peg/ref/AsciiBnr.txt": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/peg/ref/AsciiBnr.txt",
+		"oAP": "/zzz/aug/peg/ref/AsciiBnr.txt",
 		"oF": 0
 		},
-	"/zzz/peg/ref/AsciiKeys.txt": {
+	"/zzz/aug/peg/ref/AsciiKeys.txt": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/peg/ref/AsciiKeys.txt",
+		"oAP": "/zzz/aug/peg/ref/AsciiKeys.txt",
 		"oF": 0
 		},
-	"/zzz/peg/ref/LatexKeys.txt": {
+	"/zzz/aug/peg/ref/LatexKeys.txt": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/peg/ref/LatexKeys.txt",
+		"oAP": "/zzz/aug/peg/ref/LatexKeys.txt",
 		"oF": 0
 		},
-	"/zzz/store/fire.html": {
+	"/zzz/aug/store/fire.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/store/fire.html",
+		"oAP": "/zzz/aug/store/fire.html",
 		"oF": 0
 		},
-	"/zzz/store/Fire.txt": {
+	"/zzz/aug/store/Fire.txt": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/store/Fire.txt",
+		"oAP": "/zzz/aug/store/Fire.txt",
 		"oF": 0
 		},
-	"/zzz/store/firebase.app.esm.js": {
+	"/zzz/aug/store/firebase.app.esm.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/store/firebase.app.esm-min.js",
+		"oAP": "/zzz/aug/store/firebase.app.esm-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/store/firebase.auth.esm.js": {
+	"/zzz/aug/store/firebase.auth.esm.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/store/firebase.auth.esm-min.js",
+		"oAP": "/zzz/aug/store/firebase.auth.esm-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/store/firebase.database.esm.js": {
+	"/zzz/aug/store/firebase.database.esm.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/store/firebase.database.esm-min.js",
+		"oAP": "/zzz/aug/store/firebase.database.esm-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/store/firebase.esm.js": {
+	"/zzz/aug/store/firebase.esm.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/store/firebase.esm-min.js",
+		"oAP": "/zzz/aug/store/firebase.esm-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/store/Firebase.esm.stub.js": {
+	"/zzz/aug/store/Firebase.esm.stub.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/store/Firebase.esm.stub-min.js",
+		"oAP": "/zzz/aug/store/Firebase.esm.stub-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/store/Index.coffee": {
+	"/zzz/aug/store/Index.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/zzz/store/Index.js",
+		"oAP": "/zzz/aug/store/Index.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/store/Index.js": {
+	"/zzz/aug/store/Index.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/store/Index-min.js",
+		"oAP": "/zzz/aug/store/Index-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/store/IndexDB.coffee": {
+	"/zzz/aug/store/IndexDB.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/zzz/store/IndexDB.js",
+		"oAP": "/zzz/aug/store/IndexDB.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/store/PouchDB.coffee": {
+	"/zzz/aug/store/PouchDB.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/zzz/store/PouchDB.js",
+		"oAP": "/zzz/aug/store/PouchDB.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/store/RestJQ.coffee": {
+	"/zzz/aug/store/RestJQ.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/zzz/store/RestJQ.js",
+		"oAP": "/zzz/aug/store/RestJQ.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/store/Stuff.coffee": {
+	"/zzz/aug/store/Stuff.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/zzz/store/Stuff.js",
+		"oAP": "/zzz/aug/store/Stuff.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/sw/push.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/sw/push-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/sw/Register.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/zzz/sw/Register.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/sw/registerServiceWorker.ini.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/sw/registerServiceWorker.ini-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/sw/registerServiceWorker.lib.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/sw/registerServiceWorker.lib-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/sw/service-worker.2015.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/sw/service-worker.2015-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/sw/service-worker.basic.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/sw/service-worker.basic-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/sw/service-worker.coyer.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/sw/service-worker.coyer-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/sw/service-worker.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/sw/service-worker-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/sw/service-worker.offline1.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/sw/service-worker.offline1-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/sw/service-worker1.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/sw/service-worker1-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/sw/service-worker2.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/sw/service-worker2-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/sw/service-worker3.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/sw/service-worker3-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/sw/service-worker4.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/sw/service-worker4-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/sw/service.worker.airhorn.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/sw/service.worker.airhorn-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/sw/ServiceWorker.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/zzz/sw/ServiceWorker.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/sw/sync.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/sw/sync-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/sw/Worker.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/zzz/sw/Worker.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/sw/Worker.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/sw/Worker-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/touch/swipe.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/touch/swipe-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/touch/Touch.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/zzz/touch/Touch.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/touch/Touch.Interact.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/zzz/touch/Touch.Interact.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/ui/Brew.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/zzz/ui/Brew.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/ui/Btn.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/zzz/ui/Btn.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/ui/btn.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 0,
-		"oAP": "/zzz/ui/btn.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/zzz/ui/Btns.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/ui/Btns.js",
-		"oF": 0
-		},
-	"/zzz/ui/color.less": {
-		"aP": 0,
-		"bl": 0,
-		"eJ": 0,
-		"ft": 1,
-		"ie": 1,
-		"iI": 0,
-		"ma": 1,
-		"mS": 0,
-		"oA": 1,
-		"oAP": "/zzz/ui/color.css",
-		"oF": 0,
-		"oS": 0,
-		"rwU": 0,
-		"sI": 0,
-		"sU": 0
-		},
-	"/zzz/ui/Dom.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/zzz/ui/Dom.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/ui/Tabs.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/zzz/ui/Tabs.js",
-		"oF": 0
-		},
-	"/zzz/versor/.gitignore": {
+	"/zzz/aug/versor/.gitignore": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/versor/.gitignore",
+		"oAP": "/zzz/aug/versor/.gitignore",
 		"oF": 0
 		},
-	"/zzz/versor/C2.js": {
+	"/zzz/aug/versor/C2.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/C2-min.js",
+		"oAP": "/zzz/aug/versor/C2-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/versor/C3.js": {
+	"/zzz/aug/versor/C3.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/C3-min.js",
+		"oAP": "/zzz/aug/versor/C3-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/versor/cli/C2parser.js": {
+	"/zzz/aug/versor/cli/C2parser.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/cli/C2parser-min.js",
+		"oAP": "/zzz/aug/versor/cli/C2parser-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/versor/cli/C2parser.pegjs": {
+	"/zzz/aug/versor/cli/C2parser.pegjs": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/versor/cli/C2parser.pegjs",
+		"oAP": "/zzz/aug/versor/cli/C2parser.pegjs",
 		"oF": 0
 		},
-	"/zzz/versor/cli/index.html": {
+	"/zzz/aug/versor/cli/index.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/cli/index.html",
+		"oAP": "/zzz/aug/versor/cli/index.html",
 		"oF": 0
 		},
-	"/zzz/versor/cli/README.md": {
+	"/zzz/aug/versor/cli/README.md": {
 		"cB": 0,
 		"cS": 0,
 		"eF": 1,
@@ -8138,7 +6759,7 @@
 		"ft": 4096,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/versor/cli/README.html",
+		"oAP": "/zzz/aug/versor/cli/README.html",
 		"oF": 0,
 		"oFM": 0,
 		"oS": 0,
@@ -8147,214 +6768,214 @@
 		"rFN": 0,
 		"uCM": 0
 		},
-	"/zzz/versor/deprecated/E3.js": {
+	"/zzz/aug/versor/deprecated/E3.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/deprecated/E3-min.js",
+		"oAP": "/zzz/aug/versor/deprecated/E3-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/versor/examples/C2.Boost.html": {
+	"/zzz/aug/versor/examples/C2.Boost.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/examples/C2.Boost.html",
+		"oAP": "/zzz/aug/versor/examples/C2.Boost.html",
 		"oF": 0
 		},
-	"/zzz/versor/examples/C2.Bst.html": {
+	"/zzz/aug/versor/examples/C2.Bst.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/examples/C2.Bst.html",
+		"oAP": "/zzz/aug/versor/examples/C2.Bst.html",
 		"oF": 0
 		},
-	"/zzz/versor/examples/C2.Bst2.html": {
+	"/zzz/aug/versor/examples/C2.Bst2.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/examples/C2.Bst2.html",
+		"oAP": "/zzz/aug/versor/examples/C2.Bst2.html",
 		"oF": 0
 		},
-	"/zzz/versor/examples/C2.Dil.html": {
+	"/zzz/aug/versor/examples/C2.Dil.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/examples/C2.Dil.html",
+		"oAP": "/zzz/aug/versor/examples/C2.Dil.html",
 		"oF": 0
 		},
-	"/zzz/versor/examples/C2.Inv.html": {
+	"/zzz/aug/versor/examples/C2.Inv.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/examples/C2.Inv.html",
+		"oAP": "/zzz/aug/versor/examples/C2.Inv.html",
 		"oF": 0
 		},
-	"/zzz/versor/examples/C2.Rot.html": {
+	"/zzz/aug/versor/examples/C2.Rot.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/examples/C2.Rot.html",
+		"oAP": "/zzz/aug/versor/examples/C2.Rot.html",
 		"oF": 0
 		},
-	"/zzz/versor/examples/C2.Transversion.html": {
+	"/zzz/aug/versor/examples/C2.Transversion.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/examples/C2.Transversion.html",
+		"oAP": "/zzz/aug/versor/examples/C2.Transversion.html",
 		"oF": 0
 		},
-	"/zzz/versor/examples/C3.hopf.html": {
+	"/zzz/aug/versor/examples/C3.hopf.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/examples/C3.hopf.html",
+		"oAP": "/zzz/aug/versor/examples/C3.hopf.html",
 		"oF": 0
 		},
-	"/zzz/versor/examples/C3.particles.boost.html": {
+	"/zzz/aug/versor/examples/C3.particles.boost.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/examples/C3.particles.boost.html",
+		"oAP": "/zzz/aug/versor/examples/C3.particles.boost.html",
 		"oF": 0
 		},
-	"/zzz/versor/examples/C3.particles.dilate.html": {
+	"/zzz/aug/versor/examples/C3.particles.dilate.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/examples/C3.particles.dilate.html",
+		"oAP": "/zzz/aug/versor/examples/C3.particles.dilate.html",
 		"oF": 0
 		},
-	"/zzz/versor/examples/C3.particles.twist.html": {
+	"/zzz/aug/versor/examples/C3.particles.twist.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/examples/C3.particles.twist.html",
+		"oAP": "/zzz/aug/versor/examples/C3.particles.twist.html",
 		"oF": 0
 		},
-	"/zzz/versor/examples/d3.v3.js": {
+	"/zzz/aug/versor/examples/d3.v3.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/examples/d3.v3-min.js",
+		"oAP": "/zzz/aug/versor/examples/d3.v3-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/versor/examples/d3.v3.min.js": {
+	"/zzz/aug/versor/examples/d3.v3.min.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/examples/d3.v3.min-min.js",
+		"oAP": "/zzz/aug/versor/examples/d3.v3.min-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/versor/examples/particle.png": {
+	"/zzz/aug/versor/examples/particle.png": {
 		"ft": 32768,
 		"iS": 7528,
 		"oA": 0,
-		"oAP": "/zzz/versor/examples/particle.png",
+		"oAP": "/zzz/aug/versor/examples/particle.png",
 		"oF": 0,
 		"oIPL": 0,
 		"opt": 0,
 		"oT": 1,
 		"q": 100
 		},
-	"/zzz/versor/examples/style.css": {
+	"/zzz/aug/versor/examples/style.css": {
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
 		"ma": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/examples/style-min.css",
+		"oAP": "/zzz/aug/versor/examples/style-min.css",
 		"oF": 0,
 		"oS": 3
 		},
-	"/zzz/versor/examples/test.C2.html": {
+	"/zzz/aug/versor/examples/test.C2.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/examples/test.C2.html",
+		"oAP": "/zzz/aug/versor/examples/test.C2.html",
 		"oF": 0
 		},
-	"/zzz/versor/examples/test.C3.html": {
+	"/zzz/aug/versor/examples/test.C3.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/examples/test.C3.html",
+		"oAP": "/zzz/aug/versor/examples/test.C3.html",
 		"oF": 0
 		},
-	"/zzz/versor/examples/test.E3.html": {
+	"/zzz/aug/versor/examples/test.E3.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/examples/test.E3.html",
+		"oAP": "/zzz/aug/versor/examples/test.E3.html",
 		"oF": 0
 		},
-	"/zzz/versor/examples/texture-noise.png": {
+	"/zzz/aug/versor/examples/texture-noise.png": {
 		"ft": 32768,
 		"iS": 25768,
 		"oA": 0,
-		"oAP": "/zzz/versor/examples/texture-noise.png",
+		"oAP": "/zzz/aug/versor/examples/texture-noise.png",
 		"oF": 0,
 		"oIPL": 0,
 		"opt": 0,
 		"oT": 1,
 		"q": 100
 		},
-	"/zzz/versor/examples/three.js": {
+	"/zzz/aug/versor/examples/three.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/examples/three-min.js",
+		"oAP": "/zzz/aug/versor/examples/three-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/versor/examples/TrackballControls.js": {
+	"/zzz/aug/versor/examples/TrackballControls.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/examples/TrackballControls-min.js",
+		"oAP": "/zzz/aug/versor/examples/TrackballControls-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/versor/package.json": {
+	"/zzz/aug/versor/package.json": {
 		"ft": 524288,
 		"oA": 1,
-		"oAP": "/zzz/versor/package-min.json",
+		"oAP": "/zzz/aug/versor/package-min.json",
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
 		},
-	"/zzz/versor/README.md": {
+	"/zzz/aug/versor/README.md": {
 		"cB": 0,
 		"cS": 0,
 		"eF": 1,
@@ -8364,7 +6985,7 @@
 		"ft": 4096,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/versor/README.html",
+		"oAP": "/zzz/aug/versor/README.html",
 		"oF": 0,
 		"oFM": 0,
 		"oS": 0,
@@ -8373,37 +6994,37 @@
 		"rFN": 0,
 		"uCM": 0
 		},
-	"/zzz/versor/render/C2Canvas.js": {
+	"/zzz/aug/versor/render/C2Canvas.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/render/C2Canvas-min.js",
+		"oAP": "/zzz/aug/versor/render/C2Canvas-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/versor/render/pointops.html": {
+	"/zzz/aug/versor/render/pointops.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/render/pointops.html",
+		"oAP": "/zzz/aug/versor/render/pointops.html",
 		"oF": 0
 		},
-	"/zzz/versor/render/pointops.js": {
+	"/zzz/aug/versor/render/pointops.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/render/pointops-min.js",
+		"oAP": "/zzz/aug/versor/render/pointops-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/versor/render/README.md": {
+	"/zzz/aug/versor/render/README.md": {
 		"cB": 0,
 		"cS": 0,
 		"eF": 1,
@@ -8413,7 +7034,7 @@
 		"ft": 4096,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/versor/render/README.html",
+		"oAP": "/zzz/aug/versor/render/README.html",
 		"oF": 0,
 		"oFM": 0,
 		"oS": 0,
@@ -8422,68 +7043,378 @@
 		"rFN": 0,
 		"uCM": 0
 		},
-	"/zzz/versor/render/test.html": {
+	"/zzz/aug/versor/render/test.html": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/render/test.html",
+		"oAP": "/zzz/aug/versor/render/test.html",
 		"oF": 0
 		},
-	"/zzz/versor/render/versor.c2.canvas.esm.js": {
+	"/zzz/aug/versor/render/versor.c2.canvas.esm.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/render/versor.c2.canvas.esm-min.js",
+		"oAP": "/zzz/aug/versor/render/versor.c2.canvas.esm-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/versor/versor.C2.esm.js": {
+	"/zzz/aug/versor/versor.C2.esm.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/versor.C2.esm-min.js",
+		"oAP": "/zzz/aug/versor/versor.C2.esm-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/versor/versor.C3.esm.js": {
+	"/zzz/aug/versor/versor.C3.esm.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/versor.C3.esm-min.js",
+		"oAP": "/zzz/aug/versor/versor.C3.esm-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/versor/versor.esm.js": {
+	"/zzz/aug/versor/versor.esm.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/versor.esm-min.js",
+		"oAP": "/zzz/aug/versor/versor.esm-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/versor/versor.js": {
+	"/zzz/aug/versor/versor.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/zzz/versor/versor-min.js",
+		"oAP": "/zzz/aug/versor/versor-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
+		},
+	"/zzz/cache": {
+		"ft": 65536,
+		"oA": 1,
+		"oAP": "/build/zzz/cache",
+		"oF": 0
+		},
+	"/zzz/notes/data/augm/Data.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/augm/Data-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/augm/Geom.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/augm/Geom-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/augm/Math.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/augm/Math-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/draw/Augm.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/draw/Augm-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/draw/D3ds.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/draw/D3ds-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/draw/Data.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/draw/Data-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/draw/Hues.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/draw/Hues-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/draw/Prac.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/draw/Prac-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/draw/Prin.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/draw/Prin-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/draw/Quad.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/draw/Quad-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/draw/Tech.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/draw/Tech-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/draw/Tops.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/draw/Tops-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/jitter/Choice.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/jitter/Choice-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/jitter/Flavor.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/jitter/Flavor-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/jitter/Jitter.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/jitter/Jitter-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/jitter/Navs.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/jitter/Navs-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/jitter/Region.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/jitter/Region-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/muse/Cube.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/muse/Cube-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/muse/Info.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/muse/Info-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/muse/Know.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/muse/Know-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/muse/Muse.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/muse/Muse-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/muse/Prin.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/muse/Prin-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/muse/Rows.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/muse/Rows-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/muse/Wise.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/muse/Wise-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/store/Prac.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/store/Prac-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/store/Push.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/store/Push-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/store/Sync.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/notes/data/store/Sync-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/notes/data/text/BuildingCulture.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/data/text/BuildingCulture.txt",
+		"oF": 0
+		},
+	"/zzz/notes/data/text/Cols.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/data/text/Cols.txt",
+		"oF": 0
+		},
+	"/zzz/notes/data/text/Conn.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/data/text/Conn.txt",
+		"oF": 0
+		},
+	"/zzz/notes/data/text/Info.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/data/text/Info.txt",
+		"oF": 0
+		},
+	"/zzz/notes/prin/AS.Interventions.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/prin/AS.Interventions.txt",
+		"oF": 0
+		},
+	"/zzz/notes/prin/HongKong.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/prin/HongKong.txt",
+		"oF": 0
+		},
+	"/zzz/notes/prin/Note.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/prin/Note.txt",
+		"oF": 0
+		},
+	"/zzz/notes/text/BuildingCulture.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/text/BuildingCulture.txt",
+		"oF": 0
+		},
+	"/zzz/notes/text/Cols.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/text/Cols.txt",
+		"oF": 0
+		},
+	"/zzz/notes/text/Conn.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/text/Conn.txt",
+		"oF": 0
+		},
+	"/zzz/notes/text/Info.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/text/Info.txt",
+		"oF": 0
 		},
 	"/zzz/vue/comp/Comp.vue": {
 		"cB": 0,
@@ -8581,6 +7512,73 @@
 		"oAP": "/zzz/pub/vue/comp/Wise.js",
 		"oF": 0
 		},
+	"/zzz/vue/html/404.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/vue/html/404.html",
+		"oF": 0
+		},
+	"/zzz/vue/html/augm.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/vue/html/augm.html",
+		"oF": 0
+		},
+	"/zzz/vue/html/jitter.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/vue/html/jitter.html",
+		"oF": 0
+		},
+	"/zzz/vue/html/main.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/vue/html/main.html",
+		"oF": 0
+		},
+	"/zzz/vue/html/mbox.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/vue/html/mbox.html",
+		"oF": 0
+		},
+	"/zzz/vue/html/muse.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/vue/html/muse.html",
+		"oF": 0
+		},
+	"/zzz/vue/html/robots.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/vue/html/robots.txt",
+		"oF": 0
+		},
+	"/zzz/vue/html/Worker.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/vue/html/Worker-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/zzz/vue/jitter/Body.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -8646,6 +7644,122 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/zzz/pub/vue/prac/Prac.js",
+		"oF": 0
+		},
+	"/zzz/vue/touch/swipe.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/vue/touch/swipe-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/vue/touch/Touch.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/vue/touch/Touch.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/vue/touch/Touch.Interact.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/vue/touch/Touch.Interact.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/vue/ui/Brew.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/vue/ui/Brew.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/vue/ui/Btn.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/vue/ui/Btn.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/vue/ui/btn.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 0,
+		"oAP": "/zzz/vue/ui/btn.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/zzz/vue/ui/Btns.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/ui/Btns.js",
+		"oF": 0
+		},
+	"/zzz/vue/ui/color.less": {
+		"aP": 0,
+		"bl": 0,
+		"eJ": 0,
+		"ft": 1,
+		"ie": 1,
+		"iI": 0,
+		"ma": 1,
+		"mS": 0,
+		"oA": 1,
+		"oAP": "/zzz/vue/ui/color.css",
+		"oF": 0,
+		"oS": 0,
+		"rwU": 0,
+		"sI": 0,
+		"sU": 0
+		},
+	"/zzz/vue/ui/Dom.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/vue/ui/Dom.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/vue/ui/Tabs.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/ui/Tabs.js",
 		"oF": 0
 		}
 	},

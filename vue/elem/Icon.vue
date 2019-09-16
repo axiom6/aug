@@ -31,9 +31,6 @@
         return { fontSize:this.size+'rem' }; }
 
     }
-
-    // mounted: function () {
-    //   console.log( 'Icon.mounted()', { name:this.name } ); }
     
   }
   
@@ -56,7 +53,7 @@
 
   .icon-summ { .grid1x4(); align-self:start;  justify-self:center;
     i     { grid-area:sicon; .themeLeftSelf(); }
-    .name { grid-area:sname; .themeLeftSelf(); font-weight:700; }
+    .name { grid-area:sname; .themeLeftSelf(); font-weight:900; }
     .summ { grid-area:ssumm; .themeLeftSelf(); } }
   
 </style>

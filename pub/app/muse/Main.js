@@ -3,6 +3,8 @@ var Main,
 
 import Data from '../../base/util/Data.js';
 
+import Build from '../../ikw/cube/Build.js';
+
 import Stream from '../../base/util/Stream.js';
 
 import Nav from '../../base/util/NavMuse.js';
@@ -29,8 +31,10 @@ Main = (function() {
       };
       Main.stream = new Stream(subjects, infoSpec);
       Main.nav = new Nav(Main.stream, batch, 'Info');
+      Main.build = new Build(batch);
       //ain.cache  = new Cache( Main.stream )
       Main.mergePracsPrin();
+      //ain.build.logByColumn()
       Main.onReady();
     }
 
@@ -47,6 +51,8 @@ Main = (function() {
           prcs[key] = col;
         }
       }
+      Main.build.dimDisps(); // Add disps to every dim - dimension
+      Main.build.colPracs(); // Add pracs to every col
     }
 
     static logPracs(compk) {
@@ -55,7 +61,7 @@ Main = (function() {
 
   };
 
-  Main.FontUrl = "css/font/three/helvetiker_regular.typeface.json";
+  Main.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json";
 
   Main.Batch = {
     Prin: {
@@ -183,7 +189,7 @@ Main = (function() {
         return Main.komps;
       },
       views: function() {
-        return ['Home', 'Cube', 'Comp', 'Prac', 'Disp', 'Conn'];
+        return ['Home', 'Prin', 'Comp', 'Prac', 'Disp', 'Cube'];
       },
       subset: function(compk, filter) {
         var filts, key, prac, ref;
@@ -235,6 +241,20 @@ Main = (function() {
         var hsu;
         hsu = !hsv ? [30, 90, 90] : hsv;
         return Vis.toRgbaHsv(hsu);
+      },
+      showPages: function(pages, pageKey) {
+        var hasPage, key, page;
+        hasPage = false;
+        for (key in pages) {
+          if (!hasProp.call(pages, key)) continue;
+          page = pages[key];
+          page.show = key === pageKey;
+          if (page.show) {
+            hasPage = true;
+          }
+        }
+        // console.log( 'Main.showPages()', { pageKey:pageKey, hasPage:hasPage, pages:pages })
+        return hasPage;
       }
     }
   };
@@ -243,6 +263,4 @@ Main = (function() {
 
 }).call(this);
 
-//navbSpecs:() ->
-//  Main.NavbSpecs
 export default Main;
