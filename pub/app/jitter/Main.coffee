@@ -15,12 +15,12 @@ class Main
     Region: { url:'jitter/Region.json', data:null, type:'None', plane:'None' } }
 
   Main.komps = { # Used by Tocs.vue with desk top apps
-    Home:{   name:'Home',   comp:'Home',   icon:"fas fa-draw-polygon" }
-    Flavor:{ name:'Flavor', comp:'Flavor', icon:"fas fa-bezier-curve" }
-    Roast:{  name:'Roast',  comp:'Roast',  icon:"fas fa-bezier-curve" }
-    Brew:{   name:'Brew',   comp:'Brew',   icon:"fas fa-bezier-curve" }
-    Drink:{  name:'Drink',  comp:'Drink',  icon:"fas fa-bezier-curve" }
-    Body:{   name:'Body',   comp:'Body',   icon:"fas fa-bezier-curve" } }
+    Home:{   name:'Home',   route:'Home',   icon:"fas fa-draw-polygon" }
+    Flavor:{ name:'Flavor', route:'Flavor', icon:"fas fa-bezier-curve" }
+    Roast:{  name:'Roast',  route:'Roast',  icon:"fas fa-bezier-curve" }
+    Brew:{   name:'Brew',   route:'Brew',   icon:"fas fa-bezier-curve" }
+    Drink:{  name:'Drink',  route:'Drink',  icon:"fas fa-bezier-curve" }
+    Body:{   name:'Body',   route:'Body',   icon:"fas fa-bezier-curve" } }
 
   Main.begin  =  ( onReady ) ->
     Main.onReady = onReady

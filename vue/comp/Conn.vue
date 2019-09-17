@@ -29,7 +29,7 @@
       
       clConn: function() {
         // console.log( 'Conn.clConn() called' );
-        return this.nav().level === 'Comp' ? 'conn-comp' : 'conn-prac'; },
+        return this.nav().route === 'Comp' ? 'conn-comp' : 'conn-prac'; },
       
       calcSize: function(elem) { // Should only be called within $nextTick()
         let sz   = {}

@@ -34,7 +34,7 @@
         this.pages[pageKey].show = true; },
       onNav:  function (obj) {
         let pageKey = this.nav().pageKey;
-        if( this.nav().level === 'Disp' ) {
+        if( this.nav().route === 'Disp' ) {
           this.onDisp( obj.dispKey );
           this.onPage(     pageKey ); } } },
 

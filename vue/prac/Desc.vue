@@ -39,10 +39,10 @@
 
       onPrac: function() { }, // console.log( { pracObj:this.pracObj } );
       doPrac: function (pracKey) {
-        let obj = { level:"Prac", pracKey:pracKey };
+        let obj = { route:"Prac", pracKey:pracKey };
         this.nav.pub( obj ); },
       doDisp: function (dispKey) {
-        let obj = { level:"Disp", pracKey:this.pracObj.name, dispKey:dispKey };
+        let obj = { route:"Disp", pracKey:this.pracObj.name, dispKey:dispKey };
         this.nav.pub( obj ); },
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; },

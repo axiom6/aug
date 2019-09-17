@@ -44,7 +44,7 @@
         return true; },
       onNav:  function (obj) {
         let pageKey = this.nav().pageKey;
-        if( this.nav().level === 'Prin' ) {
+        if( this.nav().route === 'Prin' ) {
           this.onComp(obj.compKey);
           this.onPage(    pageKey); } }
       },

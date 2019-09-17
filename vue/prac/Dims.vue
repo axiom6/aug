@@ -29,10 +29,10 @@
         else {
           this.doDisp(key) } },
       doDisp:  function (dispKey) {
-        let obj = { level:"Disp", dispKey:dispKey }; // pracKey:this.pracObj.name,
+        let obj = { route:"Disp", dispKey:dispKey }; // pracKey:this.pracObj.name,
         this.nav.pub( obj ); },
       doPrac: function (pracKey) {
-        let obj = { level:"Prac", pracKey:pracKey };
+        let obj = { route:"Prac", pracKey:pracKey };
         this.nav.pub( obj ); } },
   }
 

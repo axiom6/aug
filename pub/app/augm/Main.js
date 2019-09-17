@@ -5,7 +5,7 @@ import Data from '../../base/util/Data.js';
 
 import Stream from '../../base/util/Stream.js';
 
-import Nav from '../../base/util/NavMuse.js';
+import Nav from '../../base/util/Nav.js';
 
 import Vis from '../../base/util/Vis.js';
 
@@ -62,48 +62,54 @@ Main = (function() {
 
   Main.komps = {
     Math: {
-      name: 'Math',
-      level: 'Math',
+      title: 'Math',
+      key: 'Math',
+      route: 'Math',
       pracs: {},
       ikw: true,
       link: true,
       icon: "fas fa-bezier-curve"
     },
     Geom: {
-      name: 'Geom',
-      level: 'Geom',
+      title: 'Geom',
+      key: 'Geom',
+      route: 'Geom',
       pracs: {},
       ikw: true,
       link: true,
       icon: "fas fa-shapes"
     },
     Data: {
-      name: 'Data',
-      level: 'Data',
+      title: 'Data',
+      key: 'Data',
+      route: 'Data',
       pracs: {},
       ikw: true,
       link: true,
       icon: "fas fa-database"
     },
     Note: {
-      name: 'Note',
-      level: 'Note',
+      title: 'Note',
+      key: 'Note',
+      route: 'Note',
       pracs: {},
       ikw: false,
       link: false,
       icon: "fab fa-leanpub"
     },
     Draw: {
-      name: 'Draw',
-      level: 'Draw',
+      title: 'Draw',
+      key: 'Draw',
+      route: 'Draw',
       pracs: {},
       ikw: false,
       link: false,
       icon: "fas fa-draw-polygon"
     },
     Wood: {
-      name: 'Wood',
-      level: 'Wood',
+      title: 'Wood',
+      key: 'Wood',
+      route: 'Wood',
       pracs: {},
       ikw: false,
       link: false,

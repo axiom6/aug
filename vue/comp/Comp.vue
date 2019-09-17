@@ -53,7 +53,7 @@
         return true; },
       onNav:  function (obj) {
         let pageKey = this.nav().pageKey;
-        if( this.nav().level === 'Comp' ) {
+        if( this.nav().route === 'Comp' ) {
           this.onComp(obj.compKey);
           this.onPage(    pageKey); } }
       },

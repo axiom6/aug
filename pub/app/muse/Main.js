@@ -7,7 +7,7 @@ import Build from '../../ikw/cube/Build.js';
 
 import Stream from '../../base/util/Stream.js';
 
-import Nav from '../../base/util/NavMuse.js';
+import Nav from '../../base/util/Nav.js';
 
 import Vis from '../../base/util/Vis.js';
 
@@ -110,40 +110,45 @@ Main = (function() {
 
   Main.komps = {
     Prin: {
-      name: 'Prin',
-      level: 'Comp',
+      title: 'Prin',
+      key: 'Prin',
+      route: 'Prin',
       pracs: {},
       ikw: true,
       link: false,
       icon: "fas fa-balance-scale"
     },
     Info: {
-      name: 'Info',
-      level: 'Comp',
+      title: 'Info',
+      key: 'Info',
+      route: 'Comp',
       pracs: {},
       ikw: true,
       link: false,
       icon: "fas fa-th"
     },
     Know: {
-      name: 'Know',
-      level: 'Comp',
+      title: 'Know',
+      key: 'Know',
+      route: 'Comp',
       pracs: {},
       ikw: true,
       link: false,
       icon: "fas fa-university"
     },
     Wise: {
-      name: 'Wise',
-      level: 'Comp',
+      title: 'Wise',
+      key: 'Wise',
+      route: 'Comp',
       pracs: {},
       ikw: true,
       link: false,
       icon: "fab fa-tripadvisor"
     },
     Cube: {
-      name: 'Cube',
-      level: 'Comp',
+      title: 'Cube',
+      key: 'Cube',
+      route: 'Comp',
       pracs: {},
       ikw: false,
       link: false,

@@ -41,7 +41,7 @@
         this.pages[pageKey].show = true; },
       onNav: function( obj ) {
         let pageKey = this.nav().pageKey;
-        if( this.nav().level === 'Prac' ) {
+        if( this.nav().route === 'Prac' ) {
           this.onPrac( obj.pracKey );
           this.onPage(     pageKey ); } }
       },

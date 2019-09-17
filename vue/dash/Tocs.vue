@@ -2,11 +2,11 @@
 <template><div class="tocs">
   <ul>
     <template v-for="komp in komps">
-    <li :key="komp.name">
+    <li :key="komp.key">
       <div   v-on:click="doComp(komp)">
-        <div><i :class="komp.icon"></i>{{komp.name}}</div>
+        <div><i :class="komp.icon"></i>{{komp.title}}</div>
       </div>
-      <ul v-if="compKey===komp.name"><template v-for="prac in komps[komp.name].pracs" >
+      <ul v-if="compKey===komp.key"><template v-for="prac in komps[komp.key].pracs" >
         <li v-on:click="doPrac(prac.name)" :style="stylePrac(prac.hsv)" :key="prac.name">
           <i :class="prac.icon"></i>
           <span        v-if="!komp.link">{{prac.name}}</span>
@@ -30,21 +30,21 @@
     methods: {
       
       doComp: function(komp) {
-        this.compKey = komp.name;
-        let level    = komp.level; // !komp.ikw ? komp.name : this.compKey==='Prin' ? 'Prin' : 'Comp';
-        let obj      = { level:level, compKey:this.compKey, page:this.nav().pageKey, source:'Toc' }
+        this.compKey = komp.key;
+        let route    = komp.route;
+        let obj      = { route:route, compKey:this.compKey, page:this.nav().pageKey, source:'Toc' }
         this.nav().pub(obj); },
       doPrac: function(pracKey) {
         this.pracKey =  pracKey
-        let obj      = { level:'Prac', pracKey:pracKey, source:'Toc' }
+        let obj      = { route:'Prac', pracKey:pracKey, source:'Toc' }
         this.nav().pub(obj); },
       doDisp: function(dispKey) {
         this.dispKey =  dispKey;
-        let obj      = { level:'Disp', dispKey:dispKey, source:'Toc' }
+        let obj      = { route:'Disp', dispKey:dispKey, source:'Toc' }
         this.nav().pub(obj); },
       onNav:  function (obj) {
         if( obj.source !== 'Toc' ) {
-          switch( obj.level ) {
+          switch( obj.route ) {
             case 'Prin' : this.compKey = obj.compKey; break;
             case 'Comp' : this.compKey = obj.compKey; break;
             case 'Prac' : this.pracKey = obj.pracKey; break;
@@ -56,11 +56,11 @@
         return { backgroundColor:this.toRgbaHsv(hsv) }; },
       styleDisp: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; },
-      filterPracs: function(pracs,komp) {
+      filterPracs: function(pracs,kompKey) {
         let filt = {}
         for( let key in pracs ) {
           let prac = pracs[key];
-          if( prac.row !== 'Dim' || komp === 'Prin' ) {
+          if( prac.row !== 'Dim' || kompKey === 'Prin' ) {
             filt[key] = prac; } }
         return filt;
       } },
@@ -70,7 +70,7 @@
       for( let key in this.komps ) {
         let komp = this.komps[key];
         if( komp.ikw ) {  // this.komps.hasOwnProperty(key) &&
-          komp.pracs = this.filterPracs( this.pracs(komp.comp), komp.comp ); } }
+          komp.pracs = this.filterPracs( this.pracs(komp.key), komp.key ); } }
       this.subscribe( 'Nav', 'Tocs.vue', (obj) => {
         this.onNav(obj); } ); }
   }

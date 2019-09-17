@@ -16,7 +16,7 @@
     
     methods: {
       doPrac: function (pracKey) {
-        let obj = { level:"Prac", pracKey:pracKey };
+        let obj = { route:"Prac", pracKey:pracKey };
         this.nav.pub( obj ); } }
   }
   export default Icon;

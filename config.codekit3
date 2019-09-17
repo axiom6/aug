@@ -4147,17 +4147,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/base/util/NavMuse.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/base/util/NavMuse.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
 	"/src/base/util/Stream.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -7415,6 +7404,17 @@
 		"oA": 0,
 		"oAP": "/zzz/notes/text/Info.txt",
 		"oF": 0
+		},
+	"/zzz/src/NavOrig.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/pub/NavOrig.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
 		},
 	"/zzz/vue/comp/Comp.vue": {
 		"cB": 0,

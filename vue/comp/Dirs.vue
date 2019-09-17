@@ -31,10 +31,10 @@
     methods: {
       
       doPrac: function (pracKey) {
-        let obj = { level:"Prac", pracKey:pracKey };
+        let obj = { route:"Prac", pracKey:pracKey };
         this.nav.pub( obj ); },
       doDisp: function (pracKey,dispKey) {
-        let obj = { level:"Disp", pracKey:pracKey, dispKey:dispKey };
+        let obj = { route:"Disp", pracKey:pracKey, dispKey:dispKey };
         this.nav.pub( obj ); },
       style: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; } }
