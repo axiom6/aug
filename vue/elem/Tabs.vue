@@ -20,7 +20,10 @@
         this.pageKey  = pageKey; },
       doPage: function (pageKey) {
         this.onPage( pageKey )
-        this.nav().pub( { pageKey:pageKey } ); },
+        let obj = { pageKey:pageKey };
+        if( this.isDef(this.pages[pageKey].route) ) {
+          obj.route =  this.pages[pageKey].route }
+        this.nav().pub( obj ); },
       clPage: function (pageKey) {
         return this.pageKey===pageKey ? 'tab-active' : 'tab'; } },
 

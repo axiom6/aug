@@ -63,7 +63,7 @@ class Data
 
   @asyncJSON:( urla, callback ) ->
     url = Data.toUrl(urla)
-    # console.log( 'Data.asyncJSON', urla, url )
+    console.log( 'Data.asyncJSON()', urla, url )
     fetch( url )
       .then( (response) =>
         response.json() )

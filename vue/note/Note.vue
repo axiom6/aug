@@ -2,8 +2,8 @@
 
 <template>
   <div class="note">
-    <n-tabs :comp="comp" :pages="pages"></n-tabs>  <!-- init="Stand" -->
-    <h1 v-if="comp==='Note'">Notebooks</h1>
+    <n-tabs :pages="pages"></n-tabs>  <!-- init="Stand" -->
+    <h1 v-if="route==='Note'">Notebooks</h1>
     <template v-for="page in pages">
       <router-view :name="name(page)" :id="page.key"></router-view>
     </template>
@@ -19,17 +19,16 @@
     components:{ 'n-tabs':Tabs },
 
     data() {
-      return { comp:'Note', tab:'Standard', pages:[
-          { title:'Standard', key:'Stand' },
-          { title:'Embed',    key:'Embed' },
-          { title:'Maths',    key:'Maths' },
-          { title:'Ganja',    key:'Ganja' },
-        ] } },
+      return { route:'Note', tab:'Stand', pages:{
+          Stand: { name:'Stand', key:'Stand', show:false, route:'Stand' },
+          Embed: { name:'Embed', key:'Embed', show:false, route:'Embed' },
+          Maths: { name:'Maths', key:'Maths', show:false, route:'Maths' },
+          Ganja: { name:'Ganja', key:'Ganja', show:false, route:'Ganja' },
+        } } },
     
     methods: {
-      
       name: function(page) {
-        return this.comp+page.key; } },
+        return page.key; } }
     
   }
   

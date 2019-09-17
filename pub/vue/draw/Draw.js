@@ -201,7 +201,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-b3d8073e_0", { source: ".theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-desc {\n  background-color: #333;\n  font-size: 2rem;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Dabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Dabs.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,eAAe;AACjB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;ACCnB;ADCA;ECCA,uBAAA;EACA,iBAAA;AACA;AACA;EACA,iBAAA;AACA;AACA;EDCE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,UAAU;EACV,uBAAuB;AACzB;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Dabs.vue","sourcesContent":[".theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-desc {\n  background-color: #333;\n  font-size: 2rem;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"dabs\">\n    <template v-for=\"page in pages\">\n      <div :class=\"classTab(page.key)\" @click=\"pubTab(page.key)\">{{page.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Object, init:String },\n\n    data() { return { key:this.init } },\n\n    methods: {\n      pubTab: function (key) {\n        this.key = key;\n        this.publish( this.comp, key ); },  // Key is a page\n      classTab: function (key) {\n        return this.key===key ? 'tab-active' : 'tab'; } },\n\n    mounted: function () {\n      this.subscribe( 'Geom', 'Dabs.vue', (key) => {\n        this.classTab(key) } ); }\n\n  }\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .dabs { position:absolute; left:0; top:0; width:100%; height:5%; background-color:@theme-back;\n    .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;\n      border-radius:12px 12px 0 0; border-left: @theme-color solid thin;\n      border-top:@theme-color solid thin; border-right:@theme-color solid thin;\n      background-color:@theme-back; color:@theme-color; }\n    .tab:hover  {         background-color:@theme-color; color:@theme-back; }\n    .tab-active { .tab(); background-color:@theme-color; color:@theme-back; } }\n\n</style>"]}, media: undefined });
+    inject("data-v-b3d8073e_0", { source: ".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Dabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Dabs.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,iBAAiB;AACnB;ACCA;EDCE,sBAAsB;ECCxB,mBAAA;AACA;AACA;EACA,sBAAA;AACA;AACA;EACA,sBAAA;ADCA;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,UAAU;EACV,uBAAuB;AACzB;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,gBAAgB;EAChB,gCAAgC;EAChC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Dabs.vue","sourcesContent":[".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.dabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n}\n.dabs .tab {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.dabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.dabs .tab-active {\n  display: inline-block;\n  margin-left: 2em;\n  padding: 0.2em 0.3em 0.1em 0.3em;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"dabs\">\n    <template v-for=\"page in pages\">\n      <div :class=\"classTab(page.key)\" @click=\"pubTab(page.key)\">{{page.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { comp:String, pages:Object, init:String },\n\n    data() { return { key:this.init } },\n\n    methods: {\n      pubTab: function (key) {\n        this.key = key;\n        this.publish( this.comp, key ); },  // Key is a page\n      classTab: function (key) {\n        return this.key===key ? 'tab-active' : 'tab'; } },\n\n    mounted: function () {\n      this.subscribe( 'Geom', 'Dabs.vue', (key) => {\n        this.classTab(key) } ); }\n\n  }\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .dabs { position:absolute; left:0; top:0; width:100%; height:5%; background-color:@theme-back;\n    .tab { display:inline-block; margin-left:2.0em; padding:0.2em 0.3em 0.1em 0.3em;\n      border-radius:12px 12px 0 0; border-left: @theme-color solid thin;\n      border-top:@theme-color solid thin; border-right:@theme-color solid thin;\n      background-color:@theme-back; color:@theme-color; }\n    .tab:hover  {         background-color:@theme-color; color:@theme-back; }\n    .tab-active { .tab(); background-color:@theme-color; color:@theme-back; } }\n\n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -19523,6 +19523,7 @@ var FontAwe;
 FontAwe = {};
 
 FontAwe.icons = {
+  "fas fa-yin-yang": "\uf6ad",
   "fab fa-pagelines": "\uf18c",
   "fas fa-network-wired": "\uf6ff",
   "fas fa-warehouse": "\uf494",
@@ -20788,77 +20789,64 @@ var Data,
 
 Data = class Data {
   static refine(data, type) {
-    var akey, area, base, bkey, ckey, comp, disp, dkey, ikey, item, pkey, prac;
+    var akey, area, base, bkey, disp, dkey, ikey, item, pkey, prac;
     if (type === 'None') {
       return data;
     }
-    data.comps = {};
-    for (ckey in data) {
-      comp = data[ckey];
-      if (!(Util$1.isChild(ckey))) {
+    data.pracs = {};
+    for (pkey in data) {
+      prac = data[pkey];
+      if (!(Util$1.isChild(pkey))) {
         continue;
       }
-      // console.log( 'Data.refine comp', comp )
-      data.comps[ckey] = comp;
-      if (comp['name'] == null) {
-        comp['name'] = ckey;
+      data.pracs[pkey] = prac;
+      prac.data = data;
+      if (prac['name'] == null) {
+        prac['name'] = pkey;
       }
-      comp.pracs = {};
-      for (pkey in comp) {
-        prac = comp[pkey];
-        if (!(Util$1.isChild(pkey))) {
+      prac.disps = {};
+      for (dkey in prac) {
+        disp = prac[dkey];
+        if (!(Util$1.isChild(dkey))) {
           continue;
         }
-        // console.log( '  Data.refine prac', prac )
-        comp.pracs[pkey] = prac;
-        prac.comp = comp;
-        if (prac['name'] == null) {
-          prac['name'] = pkey;
+        prac.disps[dkey] = disp;
+        disp.prac = prac;
+        if (disp['name'] == null) {
+          disp['name'] = dkey;
         }
-        prac.disps = {};
-        for (dkey in prac) {
-          disp = prac[dkey];
-          if (!(Util$1.isChild(dkey))) {
+        disp.areas = {};
+        for (akey in disp) {
+          area = disp[akey];
+          if (!(Util$1.isChild(akey))) {
             continue;
           }
-          prac.disps[dkey] = disp;
-          disp.prac = prac;
-          if (disp['name'] == null) {
-            disp['name'] = dkey;
+          disp.areas[akey] = area;
+          area.disp = disp;
+          if (area['name'] == null) {
+            area['name'] = akey;
           }
-          disp.areas = {};
-          for (akey in disp) {
-            area = disp[akey];
-            if (!(Util$1.isChild(akey))) {
+          area.items = {};
+          for (ikey in area) {
+            item = area[ikey];
+            if (!(Util$1.isChild(ikey))) {
               continue;
             }
-            disp.areas[akey] = area;
-            area.disp = disp;
-            if (area['name'] == null) {
-              area['name'] = akey;
+            area.items[ikey] = item;
+            item.area = area;
+            if (item['name'] == null) {
+              item['name'] = ikey;
             }
-            area.items = {};
-            for (ikey in area) {
-              item = area[ikey];
-              if (!(Util$1.isChild(ikey))) {
+            item.bases = {};
+            for (bkey in item) {
+              base = item[bkey];
+              if (!(Util$1.isChild(bkey))) {
                 continue;
               }
-              area.items[ikey] = item;
-              item.area = area;
-              if (item['name'] == null) {
-                item['name'] = ikey;
-              }
-              item.bases = {};
-              for (bkey in item) {
-                base = item[bkey];
-                if (!(Util$1.isChild(bkey))) {
-                  continue;
-                }
-                item.bases[bkey] = base;
-                base.item = item;
-                if (base['name'] == null) {
-                  base['name'] = bkey;
-                }
+              item.bases[bkey] = base;
+              base.item = item;
+              if (base['name'] == null) {
+                base['name'] = bkey;
               }
             }
           }
@@ -20919,7 +20907,7 @@ Data = class Data {
   static asyncJSON(urla, callback) {
     var url;
     url = Data.toUrl(urla);
-    // console.log( 'Data.asyncJSON', urla, url )
+    console.log('Data.asyncJSON()', urla, url);
     fetch(url).then((response) => {
       return response.json();
     }).then((data) => {
@@ -20937,6 +20925,7 @@ Data = class Data {
   }
 
   static toUrl(url) {
+    //  console.log( 'Data.toUrl()', Data.local+url )
     if (window.location.href.includes('localhost')) {
       return Data.local + url;
     } else {
@@ -20982,12 +20971,9 @@ Data = class Data {
 
 };
 
-//ata.parse   = Util.parseURI( window.location.href )
-//ata.hosted1 = Data.parse.hostname + '/app/data/'
-// console.log('Data.hosted', Data.hosted, window.location.href )
-Data.local = "app/data/";
+Data.local = "../../data/";
 
-Data.hosted = '/app/data/';
+Data.hosted = '/data/';
 
 Data.cssDir = 'css/'; // /css in /pub
 
@@ -25821,7 +25807,7 @@ __vue_render__$1._withStripped = true;
   /* style */
   const __vue_inject_styles__$1 = function (inject) {
     if (!inject) return
-    inject("data-v-3a96beb2_0", { source: ".theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-desc {\n  background-color: #333;\n  font-size: 2rem;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue","/Users/ax/Documents/prj/aug/vue/draw/Draw.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,eAAe;AACjB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;EACvB,+BAA+B;AACjC;ACCA;EDCE,oBAAoB;ECCtB,kBAAA;EACA,kBAAA;EACA,YAAA;EACA,eAAA;ADCA;ACCA;EACA,kBAAA;EACA,OAAA;EDCE,OAAO;EACP,QAAQ;EACR,SAAS;AACX;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-desc {\n  background-color: #333;\n  font-size: 2rem;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n","\n\n<template>\n  <div class=\"draw\" ref=\"Draw\">\n    <d-dabs comp=\"Draw\" :pages=\"pages\"></d-dabs>\n    <h1 v-if=\"key==='Draw'\">Drawings in D3</h1>\n    <template v-for=\"page in pages\">\n      <div :ref=\"page.key\" v-show=\"isPage(page.key)\" class=\"page\" :key=\"page.key\"></div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Dabs from '../elem/Dabs.vue';\n  import Drew from '../../pub/base/d3d/Drew.js'\n\n  let Draw = {\n\n    components:{ 'd-dabs':Dabs },\n\n    data() {\n      return { comp:'Draw', key:'Draw', drew:null, pages:{\n        Wheel:   { title:'Wheel',   key:'Wheel',   obj:null },\n        Axes:    { title:'Axes',    key:'Axes',    obj:null },\n        Chord:   { title:'Chord',   key:'Chord',   obj:null },\n        Link:    { title:'Link',    key:'Link',    obj:null },\n        Radar:   { title:'Radar',   key:'Radar',   obj:null },\n        Hue:     { title:'Hue',     key:'Hue',     obj:null },\n        Tree:    { title:'Tree',    key:'Tree',    obj:null } } } },\n\n    methods: {\n      \n      isPage: function(key) {\n        return this.key === key; },\n      \n      onTabs: function(key) {\n        this.key =  key;\n        this.create(key); },\n\n      size: function() {\n        let sz   = {}\n        sz.compWidth  = this.$refs['Draw']['clientWidth' ];\n        sz.compHeight = this.$refs['Draw']['clientHeight'];\n        sz.elemWidth  = this.$refs['Draw']['clientWidth' ];\n        sz.elemHeight = this.$refs['Draw']['clientHeight'];\n        return sz; },\n      \n      create: function( key ) {\n        if( this.pages[key].obj===null ) {\n          this.$nextTick( function() {\n            let elem = this.$refs[key][0]\n            this.pages[key].obj = this.drew.create( key, elem, this.size() ); } ) } }\n    },\n\n    mounted: function () {\n      this.subscribe(  'Draw', 'Draw.vue', (obj) => {\n        this.onTabs(obj); } );\n      this.$nextTick( function() {\n        this.drew = new Drew( this.stream(), this.$refs['Draw'], this.size() ); } ) }\n  }\n  \n  export default Draw;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .draw {   position:relative; left:0; top:0;  right:0; bottom:0; display:grid;\n            background-color:@theme-back; font-family:@theme-font-family;\n    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:@theme-h1-size; }\n    .page { position:absolute; left:0; top:5%; right:0; bottom:0;  } }\n\n  // Chords\n  .group-tick line { stroke:#000;       }\n  .ribbons         { fill-opacity:0.67; }\n</style>"]}, media: undefined });
+    inject("data-v-3a96beb2_0", { source: ".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue","/Users/ax/Documents/prj/aug/vue/draw/Draw.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;AACrB;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;AACxB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;ECCA,uBAAA;EDCE,iBAAiB;ACCnB;AACA;EACA,uBAAA;EACA,iBAAA;ADCA;ACCA;EACA,uBAAA;EACA,iBAAA;ADCA;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;EACvB,+BAA+B;AACjC;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,eAAe;AACjB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;AACX;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n","\n\n<template>\n  <div class=\"draw\" ref=\"Draw\">\n    <d-dabs comp=\"Draw\" :pages=\"pages\"></d-dabs>\n    <h1 v-if=\"key==='Draw'\">Drawings in D3</h1>\n    <template v-for=\"page in pages\">\n      <div :ref=\"page.key\" v-show=\"isPage(page.key)\" class=\"page\" :key=\"page.key\"></div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Dabs from '../elem/Dabs.vue';\n  import Drew from '../../pub/base/d3d/Drew.js'\n\n  let Draw = {\n\n    components:{ 'd-dabs':Dabs },\n\n    data() {\n      return { comp:'Draw', key:'Draw', drew:null, pages:{\n        Wheel:   { title:'Wheel',   key:'Wheel',   obj:null },\n        Axes:    { title:'Axes',    key:'Axes',    obj:null },\n        Chord:   { title:'Chord',   key:'Chord',   obj:null },\n        Link:    { title:'Link',    key:'Link',    obj:null },\n        Radar:   { title:'Radar',   key:'Radar',   obj:null },\n        Hue:     { title:'Hue',     key:'Hue',     obj:null },\n        Tree:    { title:'Tree',    key:'Tree',    obj:null } } } },\n\n    methods: {\n      \n      isPage: function(key) {\n        return this.key === key; },\n      \n      onTabs: function(key) {\n        this.key =  key;\n        this.create(key); },\n\n      size: function() {\n        let sz   = {}\n        sz.compWidth  = this.$refs['Draw']['clientWidth' ];\n        sz.compHeight = this.$refs['Draw']['clientHeight'];\n        sz.elemWidth  = this.$refs['Draw']['clientWidth' ];\n        sz.elemHeight = this.$refs['Draw']['clientHeight'];\n        return sz; },\n      \n      create: function( key ) {\n        if( this.pages[key].obj===null ) {\n          this.$nextTick( function() {\n            let elem = this.$refs[key][0]\n            this.pages[key].obj = this.drew.create( key, elem, this.size() ); } ) } }\n    },\n\n    mounted: function () {\n      this.subscribe(  'Draw', 'Draw.vue', (obj) => {\n        this.onTabs(obj); } );\n      this.$nextTick( function() {\n        this.drew = new Drew( this.stream(), this.$refs['Draw'], this.size() ); } ) }\n  }\n  \n  export default Draw;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .draw {   position:relative; left:0; top:0;  right:0; bottom:0; display:grid;\n            background-color:@theme-back; font-family:@theme-font-family;\n    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:@theme-h1-size; }\n    .page { position:absolute; left:0; top:5%; right:0; bottom:0;  } }\n\n  // Chords\n  .group-tick line { stroke:#000;       }\n  .ribbons         { fill-opacity:0.67; }\n</style>"]}, media: undefined });
 
   };
   /* scoped */

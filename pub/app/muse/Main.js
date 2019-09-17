@@ -115,7 +115,6 @@ Main = (function() {
       route: 'Prin',
       pracs: {},
       ikw: true,
-      link: false,
       icon: "fas fa-balance-scale"
     },
     Info: {
@@ -124,7 +123,6 @@ Main = (function() {
       route: 'Comp',
       pracs: {},
       ikw: true,
-      link: false,
       icon: "fas fa-th"
     },
     Know: {
@@ -133,7 +131,6 @@ Main = (function() {
       route: 'Comp',
       pracs: {},
       ikw: true,
-      link: false,
       icon: "fas fa-university"
     },
     Wise: {
@@ -142,7 +139,6 @@ Main = (function() {
       route: 'Comp',
       pracs: {},
       ikw: true,
-      link: false,
       icon: "fab fa-tripadvisor"
     },
     Cube: {
@@ -151,7 +147,6 @@ Main = (function() {
       route: 'Comp',
       pracs: {},
       ikw: false,
-      link: false,
       icon: "fas fa-cubes"
     }
   };

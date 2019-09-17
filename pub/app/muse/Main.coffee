@@ -20,11 +20,11 @@ class Main
     Font: { url:Main.FontUrl,     data:null, type:'Font', plane:'Cube' } }
 
   Main.komps = {
-    Prin:{ title:'Prin', key:'Prin', route:'Prin', pracs:{}, ikw:true,  link:false, icon:"fas fa-balance-scale" }
-    Info:{ title:'Info', key:'Info', route:'Comp', pracs:{}, ikw:true,  link:false, icon:"fas fa-th"            }
-    Know:{ title:'Know', key:'Know', route:'Comp', pracs:{}, ikw:true,  link:false, icon:"fas fa-university"    }
-    Wise:{ title:'Wise', key:'Wise', route:'Comp', pracs:{}, ikw:true,  link:false, icon:"fab fa-tripadvisor"   }
-    Cube:{ title:'Cube', key:'Cube', route:'Comp', pracs:{}, ikw:false, link:false, icon:"fas fa-cubes"         } }
+    Prin:{ title:'Prin', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale" }
+    Info:{ title:'Info', key:'Info', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-th"            }
+    Know:{ title:'Know', key:'Know', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-university"    }
+    Wise:{ title:'Wise', key:'Wise', route:'Comp', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor"   }
+    Cube:{ title:'Cube', key:'Cube', route:'Comp', pracs:{}, ikw:false, icon:"fas fa-cubes"         } }
 
   Main.begin  =  ( onReady ) ->
     Main.onReady = onReady

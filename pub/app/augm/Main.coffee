@@ -17,12 +17,12 @@ class Main
     Data: { url:'augm/Data.json', data:null, type:'Pack', plane:'Data' } }
 
   Main.komps = {
-    Math:{ title:'Math', key:'Math', route:'Math', pracs:{}, ikw:true,  link:true,  icon:"fas fa-bezier-curve" }
-    Geom:{ title:'Geom', key:'Geom', route:'Geom', pracs:{}, ikw:true,  link:true,  icon:"fas fa-shapes"       }
-    Data:{ title:'Data', key:'Data', route:'Data', pracs:{}, ikw:true,  link:true,  icon:"fas fa-database"     }
-    Note:{ title:'Note', key:'Note', route:'Note', pracs:{}, ikw:false, link:false, icon:"fab fa-leanpub"      }
-    Draw:{ title:'Draw', key:'Draw', route:'Draw', pracs:{}, ikw:false, link:false, icon:"fas fa-draw-polygon" }
-    Wood:{ title:'Wood', key:'Wood', route:'Wood', pracs:{}, ikw:false, link:false, icon:"fas fa-tree"         } }
+    Math:{ title:'Math', key:'Math', route:'Math', pracs:{}, ikw:true,  icon:"fas fa-bezier-curve" }
+    Geom:{ title:'Geom', key:'Geom', route:'Geom', pracs:{}, ikw:true,  icon:"fas fa-shapes"       }
+    Data:{ title:'Data', key:'Data', route:'Data', pracs:{}, ikw:true,  icon:"fas fa-database"     }
+    Note:{ title:'Note', key:'Note', route:'Note', pracs:{}, ikw:false, icon:"fab fa-leanpub"      }
+    Draw:{ title:'Draw', key:'Draw', route:'Draw', pracs:{}, ikw:false, icon:"fas fa-draw-polygon" }
+    Wood:{ title:'Wood', key:'Wood', route:'Wood', pracs:{}, ikw:false, icon:"fas fa-tree"         } }
 
   Main.begin  =  ( onReady ) ->
     Main.onReady = onReady
@@ -35,8 +35,8 @@ class Main
     subjects     = ["Draw","Note","Menu","Tabs","Geom","Data","Cache","Navd"]
     streamLog    = { subscribe:false, publish:false, subjects:subjects}
     Main.stream  = new Stream( subjects, streamLog )
-    Main.nav    = new Nav(   Main.stream, batch, 'Info' )
-    #ain.cache  = new Cache( Main.stream )
+    Main.nav     = new Nav(   Main.stream, batch, 'Info' )
+    #ain.cache   = new Cache( Main.stream )
     Main.onReady()
     # new Test()
     return
@@ -64,21 +64,48 @@ class Main
         Main.nav
       keys:(obj) ->
         Object.keys(obj)
+      prin:()  ->
+        Main.Batch['Prin'].data['Prin'].pracs
       comps:( compk ) ->
         Main.Batch[compk].data.comps
-      kompsTocs:() ->
+      kompsTocs:() ->   # For Tocs.vue
         Main.komps
       views:() ->
         ['Home','Math','Geom','Data','Draw','Note','Wood']
-      pracs:( compk ) ->
-        Main.Batch[compk].data[compk].pracs
       subset:( compk, filter ) ->
         filts = {}
-        for own key, prac of Main.Batch[compk].data[compk].pracs when filter(prac)
+        for own key, prac of this.pracs(compk) when filter(prac)
           filts[key] = prac
         filts
+      conns:( compk ) ->
+        filter = if compk isnt 'Prin' then (prac) -> prac.row isnt 'Dim' else (prac) -> prac.row is 'Dim'
+        this.subset( compk, filter )
+      pracs:( compk ) ->
+        Main.Batch[compk].data.pracs
+      disps:( compk, prack ) ->
+        Main.Batch[compk].data[prack].disps
+      areas:( compk, prack, dispk ) ->
+        Main.Batch[compk].data[prack][dispk].areas
+      items:( compk, prack, dispk, areak ) ->
+        Main.Batch[compk].data[prack][dispk][areak].items
+      bases:( compk, prack, dispk, areak, itemk  ) ->
+        Main.Batch[compk].data[prack][dispk][areak][itemk].bases
+      compObject:( compKey ) ->
+        Main.Batch[compKey].data.pracs
+      pracObject:( compKey, pracKey ) ->
+        this.pracs(compKey)[pracKey]
+      dispObject:( compKey, pracKey,  dispKey ) ->
+        this.disps(compKey, pracKey )[dispKey]
       toRgbaHsv:( hsv ) ->
-         Vis.toRgbaHsv(hsv)
+        hsu = if not hsv then [30,90,90] else hsv
+        Vis.toRgbaHsv(hsu)
+      showPages:( pages, pageKey ) ->
+        hasPage = false
+        for own key, page  of pages
+          page.show = key  is pageKey
+          hasPage   = true if page.show
+        # console.log( 'Main.showPages()', { pageKey:pageKey, hasPage:hasPage, pages:pages })
+        hasPage
     }
   }
 

@@ -9,7 +9,7 @@
       <ul v-if="compKey===komp.key"><template v-for="prac in komps[komp.key].pracs" >
         <li v-on:click="doPrac(prac.name)" :style="stylePrac(prac.hsv)" :key="prac.name">
           <i :class="prac.icon"></i>
-          <span        v-if="!komp.link">{{prac.name}}</span>
+          <span>{{prac.name}}</span>
           <ul v-show="pracKey===prac.name"><template v-for="disp in prac.disps">
             <li v-on:click.stop="doDisp(disp.name)" :style="styleDisp(disp.hsv)" :key="disp.name">
               <i :class="disp.icon"></i>{{disp.name}}</li>
@@ -36,7 +36,8 @@
         this.nav().pub(obj); },
       doPrac: function(pracKey) {
         this.pracKey =  pracKey
-        let obj      = { route:'Prac', pracKey:pracKey, source:'Toc' }
+        let route    = this.compKey==='Comp' ? 'Prac' : pracKey;
+        let obj      = { route:route, pracKey:pracKey, source:'Toc' }
         this.nav().pub(obj); },
       doDisp: function(dispKey) {
         this.dispKey =  dispKey;
@@ -69,7 +70,8 @@
       this.komps = this.kompsTocs();
       for( let key in this.komps ) {
         let komp = this.komps[key];
-        if( komp.ikw ) {  // this.komps.hasOwnProperty(key) &&
+        if( komp.ikw ) {
+          // console.log( 'Tocs.mounted()', komp.key, komp );
           komp.pracs = this.filterPracs( this.pracs(komp.key), komp.key ); } }
       this.subscribe( 'Nav', 'Tocs.vue', (obj) => {
         this.onNav(obj); } ); }

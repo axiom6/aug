@@ -7,9 +7,9 @@
         <h2>Choose an Application Component on the Left</h2>
       </div>
     </div>
-    <!--div class="elem">
-      <h-btns comp="Home" :btns="btns" init="Axes" back="#3B5999" active="tan"></h-btns>
-    </div-->
+    <div class="midd">
+      <!--h-btns comp="Home" :btns="btns" init="Axes" back="#3B5999" active="tan"></h-btns-->
+    </div>
     <div class="foot">
       <div>
         <h1>Axiom Architectures</h1>
@@ -62,21 +62,21 @@
   
   @import '../../../pub/css/themes/theme.less';
   
-  .grid3x1() { display:grid; grid-template-columns:100fr; grid-template-rows:10fr 80fr 10fr;
-      grid-template-areas:"head" "elem" "foot"; }
+  .grid3x1() { display:grid; grid-template-columns:1fr; grid-template-rows:30fr 40fr 30fr;
+      grid-template-areas:"head" "midd" "foot"; }
   
   .home { .grid3x1(); position:relative; left:0; top:0; right:0; bottom:0;
-    background-color:@theme-back; color:@theme-color; }
+    background-color:@theme-back; color:@theme-color;
 
-  .head { grid-area:head; justify-items:center; align-items:center; text-align:center; display:grid;
-          justify-self:stretch; align-self:stretch;
-    h1 { font-size:@theme-h1-size; } }
+    .head { grid-area:head; .themeCenterItems(); justify-self:stretch; align-self:stretch;
+      h1 { font-size:@theme-h1-size; } }
+    
+    .midd { grid-area:midd; .themeCenterItems(); justify-self:stretch; align-self:stretch;
+      h1 { font-size:@theme-h1-size; } }
   
-  .elem { grid-area:elem; position:relative; left:0; top:0; right:0; height:100%;
-    h1 { font-size:@theme-h1-size; } }
-
-  .foot { grid-area:foot; justify-items:center; align-items:center; text-align:center; display:grid;
-          justify-self:stretch; align-self:stretch;
-    h1 { font-size:@theme-h1-size; } }
+    .foot { grid-area:foot; .themeCenterItems(); justify-self:stretch; align-self:stretch;
+      h1 { font-size:@theme-h1-size; } }
+    
+  }
   
 </style>
