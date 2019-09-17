@@ -5,7 +5,7 @@ import Data from '../../base/util/Data.js';
 
 import Stream from '../../base/util/Stream.js';
 
-import Nav from '../../base/util/Nav.js';
+import Nav from '../../base/util/NavMuse.js';
 
 import Vis from '../../base/util/Vis.js';
 
@@ -63,7 +63,7 @@ Main = (function() {
   Main.komps = {
     Math: {
       name: 'Math',
-      comp: 'Math',
+      level: 'Math',
       pracs: {},
       ikw: true,
       link: true,
@@ -71,7 +71,7 @@ Main = (function() {
     },
     Geom: {
       name: 'Geom',
-      comp: 'Geom',
+      level: 'Geom',
       pracs: {},
       ikw: true,
       link: true,
@@ -79,7 +79,7 @@ Main = (function() {
     },
     Data: {
       name: 'Data',
-      comp: 'Data',
+      level: 'Data',
       pracs: {},
       ikw: true,
       link: true,
@@ -87,7 +87,7 @@ Main = (function() {
     },
     Note: {
       name: 'Note',
-      comp: 'Note',
+      level: 'Note',
       pracs: {},
       ikw: false,
       link: false,
@@ -95,7 +95,7 @@ Main = (function() {
     },
     Draw: {
       name: 'Draw',
-      comp: 'Draw',
+      level: 'Draw',
       pracs: {},
       ikw: false,
       link: false,
@@ -103,7 +103,7 @@ Main = (function() {
     },
     Wood: {
       name: 'Wood',
-      comp: 'Wood',
+      level: 'Wood',
       pracs: {},
       ikw: false,
       link: false,

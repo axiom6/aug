@@ -1,7 +1,7 @@
 
 import Data   from '../../base/util/Data.js'
 import Stream from '../../base/util/Stream.js'
-import Nav    from '../../base/util/Nav.js'
+import Nav    from '../../base/util/NavMuse.js'
 import Vis    from '../../base/util/Vis.js'
 import Cache  from '../../base/util/Cache.js'
 #mport Test   from './Test.js'
@@ -17,12 +17,12 @@ class Main
     Data: { url:'augm/Data.json', data:null, type:'Pack', plane:'Data' } }
 
   Main.komps = {
-    Math:{ name:'Math', comp:'Math', pracs:{}, ikw:true,  link:true,  icon:"fas fa-bezier-curve" }
-    Geom:{ name:'Geom', comp:'Geom', pracs:{}, ikw:true,  link:true,  icon:"fas fa-shapes"       }
-    Data:{ name:'Data', comp:'Data', pracs:{}, ikw:true,  link:true,  icon:"fas fa-database"     }
-    Note:{ name:'Note', comp:'Note', pracs:{}, ikw:false, link:false, icon:"fab fa-leanpub"      }
-    Draw:{ name:'Draw', comp:'Draw', pracs:{}, ikw:false, link:false, icon:"fas fa-draw-polygon" }
-    Wood:{ name:'Wood', comp:'Wood', pracs:{}, ikw:false, link:false, icon:"fas fa-tree"         } }
+    Math:{ name:'Math', level:'Math', pracs:{}, ikw:true,  link:true,  icon:"fas fa-bezier-curve" }
+    Geom:{ name:'Geom', level:'Geom', pracs:{}, ikw:true,  link:true,  icon:"fas fa-shapes"       }
+    Data:{ name:'Data', level:'Data', pracs:{}, ikw:true,  link:true,  icon:"fas fa-database"     }
+    Note:{ name:'Note', level:'Note', pracs:{}, ikw:false, link:false, icon:"fab fa-leanpub"      }
+    Draw:{ name:'Draw', level:'Draw', pracs:{}, ikw:false, link:false, icon:"fas fa-draw-polygon" }
+    Wood:{ name:'Wood', level:'Wood', pracs:{}, ikw:false, link:false, icon:"fas fa-tree"         } }
 
   Main.begin  =  ( onReady ) ->
     Main.onReady = onReady

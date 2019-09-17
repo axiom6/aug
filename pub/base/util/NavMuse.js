@@ -16,7 +16,7 @@ NavMuse = class NavMuse {
     this.pracKey = 'None';
     this.dispKey = 'None';
     this.pageKey = 'Icon';
-    this.pageKeys = ['Icon', 'Dirs', 'Conn', 'Summ', 'Desc'];
+    this.pageKeys = ['Icon', 'Dirs', 'Conn', 'Desc'];
     this.compass = "";
   }
 
@@ -40,7 +40,7 @@ NavMuse = class NavMuse {
   }
 
   route(name) {
-    // console.log( 'NavMuse.route()', name )
+    console.log('NavMuse.route()', name);
     if (this.$router != null) {
       this.$router.push({
         name: name

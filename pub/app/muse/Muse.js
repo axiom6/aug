@@ -10,7 +10,7 @@ Vue['mixin']( Main.vueMixin );
 let Muse = {}
 
 Muse.onReady = () => {
-    const app = new Vue( { router: Router, render: h => h(Home.Dash) } );
+    const app = new Vue( { router:Router, render: h => h(Home.Dash) } );
     app.$mount('muse'); }
 
 Muse.start = () => {

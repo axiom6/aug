@@ -3,7 +3,7 @@
   <ul>
     <template v-for="komp in komps">
     <li :key="komp.name">
-      <div   v-on:click="doComp(komp.name)">
+      <div   v-on:click="doComp(komp)">
         <div><i :class="komp.icon"></i>{{komp.name}}</div>
       </div>
       <ul v-if="compKey===komp.name"><template v-for="prac in komps[komp.name].pracs" >
@@ -29,10 +29,10 @@
     
     methods: {
       
-      doComp: function(compKey) {
-        this.compKey = compKey;
-        let level    = compKey === 'Prin' ? 'Prin' : 'Comp';
-        let obj      = { level:level, compKey:compKey, page:this.nav().pageKey, source:'Toc' }
+      doComp: function(komp) {
+        this.compKey = komp.name;
+        let level    = komp.level; // !komp.ikw ? komp.name : this.compKey==='Prin' ? 'Prin' : 'Comp';
+        let obj      = { level:level, compKey:this.compKey, page:this.nav().pageKey, source:'Toc' }
         this.nav().pub(obj); },
       doPrac: function(pracKey) {
         this.pracKey =  pracKey

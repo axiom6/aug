@@ -111,7 +111,7 @@ Main = (function() {
   Main.komps = {
     Prin: {
       name: 'Prin',
-      comp: 'Prin',
+      level: 'Comp',
       pracs: {},
       ikw: true,
       link: false,
@@ -119,7 +119,7 @@ Main = (function() {
     },
     Info: {
       name: 'Info',
-      comp: 'Info',
+      level: 'Comp',
       pracs: {},
       ikw: true,
       link: false,
@@ -127,7 +127,7 @@ Main = (function() {
     },
     Know: {
       name: 'Know',
-      comp: 'Know',
+      level: 'Comp',
       pracs: {},
       ikw: true,
       link: false,
@@ -135,7 +135,7 @@ Main = (function() {
     },
     Wise: {
       name: 'Wise',
-      comp: 'Wise',
+      level: 'Comp',
       pracs: {},
       ikw: true,
       link: false,
@@ -143,7 +143,7 @@ Main = (function() {
     },
     Cube: {
       name: 'Cube',
-      comp: 'Cube',
+      level: 'Comp',
       pracs: {},
       ikw: false,
       link: false,

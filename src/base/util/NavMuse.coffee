@@ -3,7 +3,7 @@ import Build from '../../ikw/cube/Build.js';
 
 class NavMuse
 
-  constructor:( @stream,   @batch, @compKey ) ->
+  constructor:( @stream, @batch, @compKey ) ->
     @build    =  new Build( @batch )
     @$router  =  null
     @level    =  'None' # Prac Disp
@@ -13,7 +13,7 @@ class NavMuse
     @pageKeys = ['Icon','Dirs','Conn','Desc']
     @compass  =   ""
 
-  pub:(   change ) ->
+  pub:( change ) ->
     levelChanged = change.level? and change.level isnt @level
     @set( change )
     obj = { level:@level, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey, pageKey:@pageKey }
@@ -24,7 +24,7 @@ class NavMuse
     return
 
   route:( name ) ->
-    # console.log( 'NavMuse.route()', name )
+    console.log( 'NavMuse.route()', name )
     if @$router?
       @$router.push( { name:name } )
     else

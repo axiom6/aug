@@ -20,11 +20,11 @@ class Main
     Font: { url:Main.FontUrl,     data:null, type:'Font', plane:'Cube' } }
 
   Main.komps = {
-    Prin:{ name:'Prin', comp:'Prin', pracs:{}, ikw:true,  link:false, icon:"fas fa-balance-scale" }
-    Info:{ name:'Info', comp:'Info', pracs:{}, ikw:true,  link:false, icon:"fas fa-th"            }
-    Know:{ name:'Know', comp:'Know', pracs:{}, ikw:true,  link:false, icon:"fas fa-university"    }
-    Wise:{ name:'Wise', comp:'Wise', pracs:{}, ikw:true,  link:false, icon:"fab fa-tripadvisor"   }
-    Cube:{ name:'Cube', comp:'Cube', pracs:{}, ikw:false, link:false, icon:"fas fa-cubes"         } }
+    Prin:{ name:'Prin', level:'Comp', pracs:{}, ikw:true,  link:false, icon:"fas fa-balance-scale" }
+    Info:{ name:'Info', level:'Comp', pracs:{}, ikw:true,  link:false, icon:"fas fa-th"            }
+    Know:{ name:'Know', level:'Comp', pracs:{}, ikw:true,  link:false, icon:"fas fa-university"    }
+    Wise:{ name:'Wise', level:'Comp', pracs:{}, ikw:true,  link:false, icon:"fab fa-tripadvisor"   }
+    Cube:{ name:'Cube', level:'Comp', pracs:{}, ikw:false, link:false, icon:"fas fa-cubes"         } }
 
   Main.begin  =  ( onReady ) ->
     Main.onReady = onReady
