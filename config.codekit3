@@ -513,28 +513,6 @@
 		"oAP": "/pub/app/muse/Home.js",
 		"oF": 0
 		},
-	"/pub/app/muse/Main.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/app/muse/Main.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/app/muse/Main.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/app/muse/Main-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/pub/app/muse/manifest.webmanifest": {
 		"cB": 0,
 		"ft": 8192,
@@ -542,6 +520,17 @@
 		"oA": 1,
 		"oAP": "/pub/app/muse/manifest.webmanifest",
 		"oF": 1
+		},
+	"/pub/app/muse/Muse.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/app/muse/Muse.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
 		},
 	"/pub/app/muse/muse.html": {
 		"cB": 0,
@@ -569,17 +558,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/app/muse/Roll-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/app/muse/Router.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/app/muse/Router-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -5741,17 +5719,6 @@
 		"oAP": "/zzz/app/muse/Main.js",
 		"oF": 0,
 		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/app/muse/Main.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/app/muse/Main-min.js",
-		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},

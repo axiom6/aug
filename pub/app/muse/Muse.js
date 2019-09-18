@@ -1,22 +1,224 @@
+var Muse,
+  hasProp = {}.hasOwnProperty;
 
-import Vue    from '../../lib/vue/vue.esm.browser.js';
-import Main   from './Main.js';
-import Home   from './Home.js';
-import Router from './Router.js'
-import Mixin  from '../../base/vue/Mixin.js'
+import Data from '../../base/util/Data.js';
 
-let mixin = new Mixin( Main, ['Home','Prin','Comp','Prac','Disp','Cube'] )
+import Build from '../../ikw/cube/Build.js';
+
+import Stream from '../../base/util/Stream.js';
+
+import Nav from '../../base/util/Nav.js';
+
+import Cache from '../../base/util/Cache.js';
+
+import Mixin from '../../base/vue/Mixin.js';
+
+import Vue from '../../lib/vue/vue.esm.browser.js';
+
+import Router from '../../lib/vue/vue-router.esm.js';
+
+import Home from './Home.js';
 
 Vue['config'].productionTip = false;
-Vue['mixin']( mixin.mixin() );
 
-let Muse = {}
+Muse = (function() {
+  class Muse {
+    static start() {
+      Data.batchRead(Muse.Batch, Muse.init, Data.refine);
+    }
 
-Muse.onReady = () => {
-    const app = new Vue( { router:Router, render: h => h(Home.Dash) } );
-    app.$mount('muse'); }
+    static init(batch) {
+      var infoSpec, subjects;
+      Muse.Batch = batch; // Not necessary here, but assigned for compatibilitry
+      Muse.app = 'Muse';
+      subjects = ["Info", "Know", "Wise", "Cube", "Menu", "Page", "Nav", "Toc", "Cache"];
+      infoSpec = {
+        subscribe: false,
+        publish: false,
+        subjects: subjects
+      };
+      Muse.stream = new Stream(subjects, infoSpec);
+      Muse.nav = new Nav(Muse.stream, batch, 'Info');
+      Muse.build = new Build(batch);
+      //ain.cache  = new Cache( Muse.stream )
+      Muse.mergePracsPrin();
+      //ain.build.logByColumn()
+      Muse.vue();
+    }
 
-Muse.start = () => {
-    Main.begin(Muse.onReady); }
+    static vue() {
+      var app;
+      Muse.mixin = new Mixin(Muse, ['Home', 'Prin', 'Comp', 'Prac', 'Disp', 'Cube']);
+      Vue['mixin'](Muse.mixin.mixin());
+      Vue.use(Router);
+      app = new Vue({
+        router: Muse.router(),
+        render: function(h) {
+          return h(Home.Dash);
+        }
+      });
+      app.$mount('muse');
+    }
+
+    static lazy(name) {
+      var path;
+      path = `../../${name}.js`;
+      if (path === false) {
+        ({});
+      }
+      return import( path );
+    }
+
+    static router() {
+      return new Router({
+        routes: [
+          {
+            path: '/',
+            name: 'Home',
+            components: {
+              Home: Home
+            }
+          },
+          {
+            path: '/prin',
+            name: 'Prin',
+            components: {
+              Prin: Home.Prin
+            }
+          },
+          {
+            path: '/comp',
+            name: 'Comp',
+            components: {
+              Comp: Home.Comp
+            }
+          },
+          {
+            path: '/prac',
+            name: 'Prac',
+            components: {
+              Prac: Home.Prac
+            }
+          },
+          {
+            path: '/disp',
+            name: 'Disp',
+            components: {
+              Disp: Home.Disp
+            }
+          }
+        ]
+      });
+    }
+
+    static mergePracsPrin() {
+      var col, cols, comp, i, key, len, prcs, ref;
+      cols = Muse.Batch['Prin'].data.pracs;
+      ref = ['Info', 'Know', 'Wise'];
+      for (i = 0, len = ref.length; i < len; i++) {
+        comp = ref[i];
+        prcs = Muse.Batch[comp].data.pracs;
+        for (key in cols) {
+          if (!hasProp.call(cols, key)) continue;
+          col = cols[key];
+          prcs[key] = col;
+        }
+      }
+      Muse.build.dimDisps(); // Add disps to every dim - dimension
+      Muse.build.colPracs(); // Add pracs to every col
+    }
+
+    static logPracs(compk) {
+      console.log('Muse.pracs', Muse.Batch[compk].data[compk].pracs);
+    }
+
+  };
+
+  Muse.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json";
+
+  Muse.Batch = {
+    Prin: {
+      url: 'muse/Prin.json',
+      data: null,
+      type: 'Pack',
+      plane: 'Prin'
+    },
+    Rows: {
+      url: 'muse/Rows.json',
+      data: null,
+      type: 'Pack',
+      plane: 'Rows'
+    },
+    Info: {
+      url: 'muse/Info.json',
+      data: null,
+      type: 'Pack',
+      plane: 'Info'
+    },
+    Know: {
+      url: 'muse/Know.json',
+      data: null,
+      type: 'Pack',
+      plane: 'Know'
+    },
+    Wise: {
+      url: 'muse/Wise.json',
+      data: null,
+      type: 'Pack',
+      plane: 'Wise'
+    },
+    Cube: {
+      url: 'muse/Cube.json',
+      data: null,
+      type: 'Pack',
+      plane: 'Cube'
+    },
+    Font: {
+      url: Muse.FontUrl,
+      data: null,
+      type: 'Font',
+      plane: 'Cube'
+    }
+  };
+
+  // Toc.vue components and routes
+  Muse.komps = {
+    Prin: {
+      title: 'Prin',
+      key: 'Prin',
+      route: 'Prin',
+      pracs: {},
+      ikw: true,
+      icon: "fas fa-balance-scale"
+    },
+    Info: {
+      title: 'Info',
+      key: 'Info',
+      route: 'Comp',
+      pracs: {},
+      ikw: true,
+      icon: "fas fa-th"
+    },
+    Know: {
+      title: 'Know',
+      key: 'Know',
+      route: 'Comp',
+      pracs: {},
+      ikw: true,
+      icon: "fas fa-university"
+    },
+    Wise: {
+      title: 'Wise',
+      key: 'Wise',
+      route: 'Comp',
+      pracs: {},
+      ikw: true,
+      icon: "fab fa-tripadvisor"
+    }
+  };
+
+  return Muse;
+
+}).call(this);
 
 export default Muse;

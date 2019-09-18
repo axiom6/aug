@@ -1,7 +1,7 @@
 
-import  Vue     from '../../pub/lib/vue/vue.esm.browser.js';
+import  Vue     from '../../lib/vue/vue.esm.browser.js';
 import  Home    from './Home.js';
-import  Router  from '../../pub/lib/vue/vue-router.esm.js';
+import  Router  from '../../lib/vue/vue-router.esm.js';
 Vue.use(Router);
 
 let lazy = (name) => () => {

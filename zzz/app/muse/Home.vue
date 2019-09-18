@@ -52,18 +52,19 @@
       grid-template-areas:"head" "midd" "foot"; }
   
   .home { .grid3x1(); position:relative; left:0; top:0; right:0; bottom:0;
-    background-color:@theme-back; color:@theme-color; }
+    background-color:@theme-back; color:@theme-color;
 
-  .head { grid-area:head; justify-items:center; align-items:center; text-align:center; display:grid;
-    justify-self:stretch; align-self:stretch; }
+    .head { grid-area:head; justify-items:center; align-items:center; text-align:center; display:grid;
+      justify-self:stretch; align-self:stretch; }
+    
+    .midd { grid-area:midd; position:relative; left:0; top:0; right:0; height:100%; display:grid;
+      justify-self:stretch; align-self:stretch; }
   
-  .midd { grid-area:midd; position:relative; left:0; top:0; right:0; height:100%; display:grid;
-    justify-self:stretch; align-self:stretch; }
-
-  .foot { grid-area:foot; justify-items:center; align-items:center; text-align:center; display:grid;
-    justify-self:stretch; align-self:stretch;  }
+    .foot { grid-area:foot; justify-items:center; align-items:center; text-align:center; display:grid;
+      justify-self:stretch; align-self:stretch;  }
   
-  h1 { justify-self:center; align-self:center; font-size:@theme-h1-size; }
-  h2 { justify-self:center; align-self:center; font-size:@theme-h2-size; }
-  
+    h1 { justify-self:center; align-self:center; font-size:@theme-h1-size; }
+    h2 { justify-self:center; align-self:center; font-size:@theme-h2-size; }
+ }
+ 
 </style>
