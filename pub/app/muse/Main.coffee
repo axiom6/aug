@@ -3,7 +3,6 @@ import Data    from '../../base/util/Data.js'
 import Build   from '../../ikw/cube/Build.js'
 import Stream  from '../../base/util/Stream.js'
 import Nav     from '../../base/util/Nav.js' # Expanded from basic Nav class
-import Vis     from '../../base/util/Vis.js'
 import Cache   from '../../base/util/Cache.js'
 
 class Main
@@ -31,8 +30,9 @@ class Main
     Data.batchRead( Main.Batch, Main.init, Data.refine )
     return
 
-  Main.init =  ( batch ) ->
+  Main.init =   ( batch ) ->
     Main.Batch  = batch # Not necessary here, but assigned for compatibilitry
+    Main.app    = 'Muse'
     subjects    = ["Info","Know","Wise","Cube","Menu","Page","Nav","Toc","Cache"]
     infoSpec    = { subscribe:false, publish:false, subjects:subjects}
     Main.stream = new Stream( subjects, infoSpec )
@@ -57,74 +57,6 @@ class Main
   Main.logPracs = ( compk ) ->
     console.log( 'Main.pracs', Main.Batch[compk].data[compk].pracs )
     return
-
-  Main.vueMixin = {
-    created:() ->
-       # console.log( 'Main.vueMixin.created() globally' )
-       return
-    methods: {
-      isDef:(d) ->
-        d isnt null and typeof(d) isnt 'undefined'
-      isStr:(s) ->
-        this.isDef(s) and typeof(s)=="string" and s.length > 0
-      subscribe:( subject, source, onMethod ) ->
-        Main['stream'].subscribe( subject, source, onMethod )
-        return
-      publish:( subject, object ) ->
-        Main['stream'].publish( subject, object )
-        return
-      stream:() ->
-        Main.stream
-      batch:() ->
-        Main.Batch
-      nav:() ->
-        Main.nav
-      keys:(obj) ->
-        Object.keys(obj)
-      prin:()  ->
-        Main.Batch['Prin'].data['Prin'].pracs
-      comps:( compk ) ->
-        Main.Batch[compk].data.comps
-      kompsTocs:() ->   # For Tocs.vue
-        Main.komps
-      views:() ->
-        ['Home','Prin','Comp','Prac','Disp','Cube']
-      subset:( compk, filter ) ->
-        filts = {}
-        for own key, prac of this.pracs(compk) when filter(prac)
-          filts[key] = prac
-        filts
-      conns:( compk ) ->
-        filter = if compk isnt 'Prin' then (prac) -> prac.row isnt 'Dim' else (prac) -> prac.row is 'Dim'
-        this.subset( compk, filter )
-      pracs:( compk ) ->
-        Main.Batch[compk].data.pracs
-      disps:( compk, prack ) ->
-        Main.Batch[compk].data[prack].disps
-      areas:( compk, prack, dispk ) ->
-        Main.Batch[compk].data[prack][dispk].areas
-      items:( compk, prack, dispk, areak ) ->
-        Main.Batch[compk].data[prack][dispk][areak].items
-      bases:( compk, prack, dispk, areak, itemk  ) ->
-        Main.Batch[compk].data[prack][dispk][areak][itemk].bases
-      compObject:( compKey ) ->
-        Main.Batch[compKey].data.pracs
-      pracObject:( compKey, pracKey ) ->
-        this.pracs(compKey)[pracKey]
-      dispObject:( compKey, pracKey,  dispKey ) ->
-        this.disps(compKey, pracKey )[dispKey]
-      toRgbaHsv:( hsv ) ->
-         hsu = if not hsv then [30,90,90] else hsv
-         Vis.toRgbaHsv(hsu)
-      showPages:( pages, pageKey ) ->
-        hasPage = false
-        for own key, page  of pages
-          page.show = key  is pageKey
-          hasPage   = true if page.show
-          # console.log( 'Main.showPages()', { pageKey:pageKey, hasPage:hasPage, pages:pages })
-        hasPage
-    }
-  }
 
 export default Main
 

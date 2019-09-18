@@ -1,13 +1,10 @@
-var Main,
-  hasProp = {}.hasOwnProperty;
+var Main;
 
 import Data from '../../base/util/Data.js';
 
 import Stream from '../../base/util/Stream.js';
 
 import Nav from '../../base/util/Nav.js';
-
-import Vis from '../../base/util/Vis.js';
 
 import Cache from '../../base/util/Cache.js';
 
@@ -23,6 +20,7 @@ Main = (function() {
       var streamLog, subjects;
       window['Geom'] = {};
       Main.Batch = batch; // Not necessary here, but assigned for compatibilitry
+      Main.app = 'Augm';
       subjects = ["Draw", "Note", "Menu", "Tabs", "Geom", "Data", "Cache", "Navd"];
       streamLog = {
         subscribe: false,
@@ -37,8 +35,6 @@ Main = (function() {
 
   };
 
-  //ata.local   = "app/data/"
-  //ata.hosted  = "https://augm-d4b3c.firebaseapp.com/app/data/"
   Main.Batch = {
     Math: {
       url: 'augm/Math.json',
@@ -111,117 +107,9 @@ Main = (function() {
     }
   };
 
-  // new Test()
-  Main.vueMixin = {
-    created: function() {},
-    // console.log( 'Main.vueMixin.created() globally' )
-    methods: {
-      isDef: function(d) {
-        return d !== null && typeof d !== 'undefined';
-      },
-      isStr: function(s) {
-        return this.isDef(s) && typeof s === "string" && s.length > 0;
-      },
-      subscribe: function(subject, source, onMethod) {
-        Main['stream'].subscribe(subject, source, onMethod);
-      },
-      publish: function(subject, object) {
-        Main['stream'].publish(subject, object);
-      },
-      stream: function() {
-        return Main.stream;
-      },
-      batch: function() {
-        return Main.Batch;
-      },
-      nav: function() {
-        return Main.nav;
-      },
-      keys: function(obj) {
-        return Object.keys(obj);
-      },
-      prin: function() {
-        return Main.Batch['Prin'].data['Prin'].pracs;
-      },
-      comps: function(compk) {
-        return Main.Batch[compk].data.comps;
-      },
-      kompsTocs: function() { // For Tocs.vue
-        return Main.komps;
-      },
-      views: function() {
-        return ['Home', 'Math', 'Geom', 'Data', 'Draw', 'Note', 'Wood'];
-      },
-      subset: function(compk, filter) {
-        var filts, key, prac, ref;
-        filts = {};
-        ref = this.pracs(compk);
-        for (key in ref) {
-          if (!hasProp.call(ref, key)) continue;
-          prac = ref[key];
-          if (filter(prac)) {
-            filts[key] = prac;
-          }
-        }
-        return filts;
-      },
-      conns: function(compk) {
-        var filter;
-        filter = compk !== 'Prin' ? function(prac) {
-          return prac.row !== 'Dim';
-        } : function(prac) {
-          return prac.row === 'Dim';
-        };
-        return this.subset(compk, filter);
-      },
-      pracs: function(compk) {
-        return Main.Batch[compk].data.pracs;
-      },
-      disps: function(compk, prack) {
-        return Main.Batch[compk].data[prack].disps;
-      },
-      areas: function(compk, prack, dispk) {
-        return Main.Batch[compk].data[prack][dispk].areas;
-      },
-      items: function(compk, prack, dispk, areak) {
-        return Main.Batch[compk].data[prack][dispk][areak].items;
-      },
-      bases: function(compk, prack, dispk, areak, itemk) {
-        return Main.Batch[compk].data[prack][dispk][areak][itemk].bases;
-      },
-      compObject: function(compKey) {
-        return Main.Batch[compKey].data.pracs;
-      },
-      pracObject: function(compKey, pracKey) {
-        return this.pracs(compKey)[pracKey];
-      },
-      dispObject: function(compKey, pracKey, dispKey) {
-        return this.disps(compKey, pracKey)[dispKey];
-      },
-      toRgbaHsv: function(hsv) {
-        var hsu;
-        hsu = !hsv ? [30, 90, 90] : hsv;
-        return Vis.toRgbaHsv(hsu);
-      },
-      showPages: function(pages, pageKey) {
-        var hasPage, key, page;
-        hasPage = false;
-        for (key in pages) {
-          if (!hasProp.call(pages, key)) continue;
-          page = pages[key];
-          page.show = key === pageKey;
-          if (page.show) {
-            hasPage = true;
-          }
-        }
-        // console.log( 'Main.showPages()', { pageKey:pageKey, hasPage:hasPage, pages:pages })
-        return hasPage;
-      }
-    }
-  };
-
   return Main;
 
 }).call(this);
 
+// new Test()
 export default Main;

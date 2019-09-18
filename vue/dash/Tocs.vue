@@ -36,7 +36,7 @@
         this.nav().pub(obj); },
       doPrac: function(pracKey) {
         this.pracKey =  pracKey
-        let route    = this.compKey==='Comp' ? 'Prac' : pracKey;
+        let route    = this.app()==='Muse' ? 'Prac' : pracKey;
         let obj      = { route:route, pracKey:pracKey, source:'Toc' }
         this.nav().pub(obj); },
       doDisp: function(dispKey) {

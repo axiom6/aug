@@ -375,17 +375,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/jitter/Home.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/app/jitter/Home-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/pub/app/jitter/Home.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -1005,6 +994,17 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/base/util/Vis-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/base/vue/Mixin.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/base/vue/Mixin-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -4198,6 +4198,17 @@
 		"oA": 0,
 		"oAP": "/pub/Worker.js",
 		"oF": 2,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/base/vue/Mixin.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/base/vue/Mixin.js",
+		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0

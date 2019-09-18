@@ -2,7 +2,6 @@
 import Data   from '../../base/util/Data.js'
 import Stream from '../../base/util/Stream.js'
 import Nav    from '../../base/util/Nav.js'
-import Vis    from '../../base/util/Vis.js'
 #mport Cache  from '../../base/util/Cache.js'
 
 class Main
@@ -27,8 +26,9 @@ class Main
     Data.batchRead( Main.Batch, Main.init, Data.refine )
     return
 
-  Main.init =  ( batch ) ->
+  Main.init =   (  batch ) ->
     Main.Batch   = batch # Not necessary here, but assigned for compatibilitry
+    Main.app     = 'Jitter'
     subjects     = ["Nav"]
     streamLog    = { subscribe:false, publish:false, subjects:subjects}
     Main.stream  = new Stream( subjects, streamLog )
@@ -37,48 +37,5 @@ class Main
     Main.onReady()
     return
 
-  Main.vueMixin = {
-    created:() ->
-       # console.log( 'Main.vueMixin.created() globally' )
-       return
-    methods: {
-      isDef:(d) ->
-        d isnt null and typeof(d) isnt 'undefined'
-      isStr:(s) ->
-        this.isDef(s) and typeof(s)=="string" and s.length > 0
-      subscribe:( subject, source, onMethod ) ->
-        Main['stream'].subscribe( subject, source, onMethod )
-        return
-      publish:( subject, object ) ->
-        Main['stream'].publish( subject, object )
-        return
-      stream:() ->
-        Main.stream
-      batch:() ->
-        Main.Batch
-      nav:() ->
-        Main.nav
-      keys:(obj) ->
-        Object.keys(obj)
-      comps:( compk ) ->
-        Main.Batch[compk].data.comps
-      kompsTocs:() ->
-        Main.komps
-      views:() ->
-        ['Home','Flavor','Roast','Brew','Drink','Body']
-      choice:() ->
-        Main.Batch.Choice.data
-      pracs:( compk ) ->
-        Main.Batch[compk].data[compk].pracs
-      subset:( compk, filter ) ->
-        filts = {}
-        for own key, prac of Main.Batch[compk].data[compk].pracs when filter(prac)
-          filts[key] = prac
-        filts
-      toRgbaHsv:( hsv ) ->
-         Vis.toRgbaHsv(hsv)
-    }
-  }
-
-`export default Main`
+export default Main
 

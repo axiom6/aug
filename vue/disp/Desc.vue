@@ -4,7 +4,7 @@
     <d-icon class="iconq" :icon="dispObj.icon" :name="dispObj.name" :size="3" ></d-icon>
     <div    class="summq">{{dispObj.desc}}</div>
     <template v-for="areaObj in dispObj.areas">
-      <d-icon :class="clArea()" :icon="areaObj.icon" :name="areaObj.name" :summ="tsSumm(areaObj.desc)" :size="1.0"
+      <d-icon :class="clArea" :icon="areaObj.icon" :name="areaObj.name" :summ="tsSumm(areaObj.desc)" :size="1.0"
       ></d-icon>
   </template>
   </div>

@@ -11,16 +11,9 @@
 
 <script type="module">
   
-  let Home = {
+  let Home = {}
 
-  data() { return { comp:'Draw' } },
-
-   mounted: function () {
-       this.publish( 'Tocs', 'Close' ); }
-   
-  }
-
-  import Dash from '../../../vue/dash/Dash.vue';
+  import Dash from '../../../vue/jitter/Dash.vue';
 
   Home.Dash = Dash;
   
@@ -36,18 +29,19 @@
       grid-template-areas:"head" "elem" "foot"; }
   
   .home { .grid3x1(); position:relative; left:0; top:0; right:0; bottom:0;
-    background-color:@theme-back; color:@theme-color; }
+    background-color:@theme-back; color:@theme-color;
 
-  .head { grid-area:head; justify-items:center; align-items:center; text-align:center; display:grid;
-          justify-self:stretch; align-self:stretch;
-    h1 { font-size:@theme-h1-size; }
-    h2 { font-size:@theme-h2-size; } }
+    .head { grid-area:head; justify-items:center; align-items:center; text-align:center; display:grid;
+            justify-self:stretch; align-self:stretch;
+      h1 { font-size:@theme-h1-size; }
+      h2 { font-size:@theme-h2-size; } }
+    
+    .midd { grid-area:elem; position:relative; left:0; top:0; right:0; height:100%;
+      h1 { font-size:@theme-h1-size; } }
   
-  .elem { grid-area:elem; position:relative; left:0; top:0; right:0; height:100%;
-    h1 { font-size:@theme-h1-size; } }
-
-  .foot { grid-area:foot; justify-items:center; align-items:center; text-align:center; display:grid;
-          justify-self:stretch; align-self:stretch;
-    h1 { font-size:@theme-h1-size; } }
+    .foot { grid-area:foot; justify-items:center; align-items:center; text-align:center; display:grid;
+            justify-self:stretch; align-self:stretch;
+      h1 { font-size:@theme-h1-size; } }
+  }
   
 </style>
