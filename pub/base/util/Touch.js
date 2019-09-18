@@ -9,27 +9,27 @@ Touch = class Touch {
     this.evts = ['tap', 'dbltap', 'longtap', 'swipeleft', 'swipeup', 'swiperight', 'swipedown'];
   }
 
-  onNav(elem, nav) {
+  onDir(elem, dir) {
     this.tap(elem, function(e) {
-      return nav.dir('next', e);
+      return dir.touch('next', e);
     });
     this.dbl(elem, function(e) {
-      return nav.dir('next', e);
+      return dir.touch('next', e);
     });
     this.hold(elem, function(e) {
-      return nav.dir('prev', e);
+      return dir.touch('prev', e);
     });
     this.right(elem, function(e) {
-      return nav.dir('west', e); // All directions reversed
+      return dir.touch('west', e); // All directions reversed
     });
     this.down(elem, function(e) {
-      return nav.dir('north', e);
+      return dir.touch('north', e);
     });
     this.left(elem, function(e) {
-      return nav.dir('east', e);
+      return dir.touch('east', e);
     });
     this.up(elem, function(e) {
-      return nav.dir('south', e);
+      return dir.touch('south', e);
     });
   }
 

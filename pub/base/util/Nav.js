@@ -4,15 +4,17 @@ var Nav,
 import Build from '../../ikw/cube/Build.js';
 
 Nav = class Nav {
-  constructor(stream, batch, compKey1) {
+  constructor(stream, batch, navs = null) {
     this.tap = this.tap.bind(this);
+    this.touch = this.touch.bind(this);
     this.dir = this.dir.bind(this);
     this.stream = stream;
     this.batch = batch;
-    this.compKey = compKey1;
+    this.navs = navs;
     this.build = new Build(this.batch);
     this.$router = null;
     this.route = 'None'; // Prac Disp
+    this.compKey = 'None';
     this.pracKey = 'None';
     this.dispKey = 'None';
     this.pageKey = 'Icon';
@@ -40,7 +42,7 @@ Nav = class Nav {
   }
 
   doRoute(route) {
-    // console.log( 'Nav.route()', route )
+    // console.log( 'Nav.doRoute()', route )
     if (this.$router != null) {
       this.$router.push({
         name: route
@@ -70,6 +72,19 @@ Nav = class Nav {
 
   tap() {
     console.log('Nav.tap()');
+  }
+
+  touch(dr, event = null) {
+    var route;
+    // return if dr is 'prev'
+    if (event === null) {
+      ({});
+    }
+    route = this.dirs[this.comp][dr];
+    this.pub(comp);
+    this.doRoute(route);
+    // console.log('Nav.dir()', { beg:@comp, dir:dr, end:comp } )
+    this.comp = comp;
   }
 
   dir(dr, event = null) {

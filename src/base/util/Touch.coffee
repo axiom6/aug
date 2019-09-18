@@ -8,14 +8,14 @@ class Touch
     @dirs  = ['up', 'down', 'left', 'right']
     @evts  = ['tap', 'dbltap', 'longtap', 'swipeleft', 'swipeup', 'swiperight', 'swipedown']
 
-  onNav:(   elem, nav ) ->
-    @tap(   elem,(e) -> nav.dir('next',  e ) )
-    @dbl(   elem,(e) -> nav.dir('next',  e ) )
-    @hold(  elem,(e) -> nav.dir('prev',  e ) )
-    @right( elem,(e) -> nav.dir('west',  e ) )  # All directions reversed
-    @down(  elem,(e) -> nav.dir('north', e ) )
-    @left(  elem,(e) -> nav.dir('east',  e ) )
-    @up(    elem,(e) -> nav.dir('south', e ) )
+  onDir:(   elem, dir ) ->
+    @tap(   elem,(e) -> dir.touch('next',  e ) )
+    @dbl(   elem,(e) -> dir.touch('next',  e ) )
+    @hold(  elem,(e) -> dir.touch('prev',  e ) )
+    @right( elem,(e) -> dir.touch('west',  e ) )  # All directions reversed
+    @down(  elem,(e) -> dir.touch('north', e ) )
+    @left(  elem,(e) -> dir.touch('east',  e ) )
+    @up(    elem,(e) -> dir.touch('south', e ) )
     return
 
   tap:( elem, onEvent ) ->

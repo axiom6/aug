@@ -38,7 +38,7 @@ Muse = (function() {
         subjects: subjects
       };
       Muse.stream = new Stream(subjects, infoSpec);
-      Muse.nav = new Nav(Muse.stream, batch, 'Info');
+      Muse.nav = new Nav(Muse.stream, batch);
       Muse.build = new Build(batch);
       //ain.cache  = new Cache( Muse.stream )
       Muse.mergePracsPrin();

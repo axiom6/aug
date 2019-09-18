@@ -38,7 +38,11 @@ class Mixin
         batch: () ->
           Mixin.Main.Batch
         nav: () ->
+          console.error( 'Mixin.nav() null' ) if not Mixin.Main.nav?
           Mixin.Main.nav
+        dir: () ->
+          console.error( 'Mixin.dir() null' ) if not Mixin.Main.dir?
+          Mixin.Main.dir
         keys: (obj) ->
           Object.keys(obj)
         prin: ()  ->

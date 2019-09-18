@@ -353,13 +353,16 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/jitter/Home.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/app/jitter/Home.js",
-		"oF": 0
+	"/pub/app/jitter/Jitter.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/app/jitter/Jitter.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
 		},
 	"/pub/app/jitter/jitter.html": {
 		"cB": 0,
@@ -380,28 +383,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/app/jitter/Main.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/app/jitter/Main.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/app/jitter/Main.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/app/jitter/Main-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/pub/app/jitter/manifest.webmanifest": {
 		"cB": 0,
 		"ft": 8192,
@@ -417,17 +398,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/app/jitter/Roll-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/app/jitter/Router.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/app/jitter/Router-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -4054,6 +4024,17 @@
 		"mi": 0,
 		"oA": 0,
 		"oAP": "/pub/base/util/Data.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/base/util/Dir.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/base/util/Dir.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,

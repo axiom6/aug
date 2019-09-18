@@ -28,8 +28,8 @@
       this.$nextTick( function() {  // Enable touch events inside all views
         this.touch = new Touch();
         this.elem  = this.$refs['View'];
-        this.touch.onNav( this.elem, this.nav() );
-        this.nav().set( { $router:this.$router } );
+        this.touch.onDir( this.elem, this.dir() );
+        this.dir().$router = this.$router;
       } ) }
       
     }

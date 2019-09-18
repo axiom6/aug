@@ -3,10 +3,11 @@ import Build from '../../ikw/cube/Build.js';
 
 class Nav
 
-  constructor:( @stream, @batch, @compKey ) ->
+  constructor:( @stream, @batch, @navs=null ) ->
     @build    =  new Build( @batch )
     @$router  =  null
     @route    =  'None' # Prac Disp
+    @compKey  =  'None'
     @pracKey  =  'None'
     @dispKey  =  'None'
     @pageKey  =  'Icon'
@@ -24,7 +25,7 @@ class Nav
     return
 
   doRoute:( route ) ->
-    # console.log( 'Nav.route()', route )
+    # console.log( 'Nav.doRoute()', route )
     if @$router?
       @$router.push( { name:route } )
     else
@@ -44,6 +45,16 @@ class Nav
 
   tap:() =>
     console.log( 'Nav.tap()' )
+    return
+
+  touch:( dr, event=null ) =>
+    # return if dr is 'prev'
+    if event is null then {}
+    route = @dirs[@comp][dr]
+    @pub( comp )
+    @doRoute( route )
+    # console.log('Nav.dir()', { beg:@comp, dir:dr, end:comp } )
+    @comp = comp
     return
 
   dir:( dr, event=null ) =>

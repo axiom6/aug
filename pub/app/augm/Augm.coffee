@@ -48,7 +48,7 @@ class Augm
     subjects    = ["Draw","Note","Menu","Tabs","Geom","Data","Cache","Navd"]
     streamLog    = { subscribe:false, publish:false, subjects:subjects }
     Augm.stream  = new Stream( subjects, streamLog )
-    Augm.nav    = new Nav(   Augm.stream, batch, 'Info' )
+    Augm.nav    = new Nav(   Augm.stream, batch )
     Augm.build  = new Build( batch )
     #ain.cache  = new Cache( Augm.stream )
     Augm.vue()

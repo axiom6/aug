@@ -29,7 +29,7 @@
   
   methods:{
     route: function( comp ) {
-        this.nav().route( comp ); } },
+        this.dir().doRoute( comp ); } },
 
    mounted: function () {}
   }
@@ -50,7 +50,7 @@
   .home { position:absolute; left:0; top:0; width:100%; height:100%;
     background-color:@theme-back; color:@theme-color;
 
-    .head { position:absolute; left:0; top:0; width:100%; height:20%;
+    .head { position:absolute; left:0; top:0; width:100%; height:20%; border:1px solid @theme-color;
             display:grid;justify-items:center; align-items:center; text-align:center;
       h1 { font-size:@theme-h1-size; }
       h2 { font-size:@theme-h2-size; } }

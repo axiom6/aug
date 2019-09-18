@@ -48,10 +48,10 @@
   .choice { position:absolute; left:0; top:0; width:100%; height:100%;
     background-color:@theme-back; color:@theme-color;
     
-    .csumm { position:absolute; left:0; top:0; width:100%; height:15%; }
+    .csumm { position:absolute; left:0; top:0;   width:100%; height:15%; }
     
     .cbtns { position:absolute; left:0; top:15%; width:100%; height:85%;
-             background-color:@theme-back; color:@theme-color; }
+             background-color:@theme-back; color:@theme-color;  border:1px solid @theme-color; }
   }
 
 </style>
