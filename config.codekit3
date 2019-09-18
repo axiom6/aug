@@ -263,6 +263,17 @@
 		"oO": 0,
 		"oS": 1
 		},
+	"/pub/app/augm/Augm.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/app/augm/Augm.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/app/augm/augm.html": {
 		"cB": 0,
 		"ft": 8192,
@@ -301,28 +312,6 @@
 		"oAP": "/pub/app/augm/Home.js",
 		"oF": 0
 		},
-	"/pub/app/augm/Main.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/app/augm/Main.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/app/augm/Main.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/app/augm/Main-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/pub/app/augm/manifest.webmanifest": {
 		"cB": 0,
 		"ft": 8192,
@@ -338,17 +327,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/app/augm/Roll-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/app/augm/Router.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/app/augm/Router-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -4783,6 +4761,14 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/vue/dash/D3x3.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/dash/D3x3.js",
+		"oF": 0
+		},
 	"/vue/dash/Dash.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -5499,17 +5485,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/zzz/app/augm/Main.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/app/augm/Main-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/zzz/app/augm/manifest.webmanifest": {
 		"cB": 0,
 		"ft": 8192,
@@ -5517,6 +5492,17 @@
 		"oA": 0,
 		"oAP": "/zzz/app/augm/manifest.webmanifest",
 		"oF": 0
+		},
+	"/zzz/app/augm/Muse.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/app/augm/Muse.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
 		},
 	"/zzz/app/augm/Roll.js": {
 		"bF": 0,
@@ -5548,17 +5534,6 @@
 		"oAP": "/zzz/app/augm/Test.js",
 		"oF": 0,
 		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/zzz/app/augm/Test.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/zzz/app/augm/Test-min.js",
-		"oF": 0,
 		"sC": 0,
 		"tS": 0
 		},

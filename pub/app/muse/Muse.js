@@ -183,6 +183,14 @@ Muse = (function() {
 
   // Toc.vue components and routes
   Muse.komps = {
+    Home: {
+      title: 'Home',
+      key: 'Home',
+      route: 'Home',
+      pracs: {},
+      ikw: false,
+      icon: "fas fa-home"
+    },
     Prin: {
       title: 'Prin',
       key: 'Prin',

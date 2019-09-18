@@ -52,7 +52,7 @@
             case 'Disp' : this.dispKey = obj.dispKey; break;
             default     : this.onNone(obj); } } },
       onNone: function (obj) {
-        console.log( 'Tocs.onNone()', obj ); },
+        /* console.log( 'Tocs.onNone()', obj ); */ },
       stylePrac: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; },
       styleDisp: function( hsv ) {
