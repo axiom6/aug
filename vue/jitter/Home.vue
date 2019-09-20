@@ -20,12 +20,7 @@
 
     components:{ 'h-summ':Summ },
 
-  data() { return { comp:'Home', choices:{
-      Flavor: { name:'Flavor' },
-      Roast:  { name:'Roast'  },
-      Brew:   { name:'Brew'   },
-      Drink:  { name:'Drink'  },
-      Body:   { name:'Body'   } } }; },
+  data() { return { comp:'Home' }; },
   
   methods:{
     route: function( comp ) {

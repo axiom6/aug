@@ -14,21 +14,21 @@
   
   let Summ = {
 
-    props: { name:String, id:String },
+    props: { name:String },
 
-    data() { return { idx:-1, num:3, c0:"-", c1:"-", c2:"-" } },
+    data() { return { c0:"-", c1:"-", c2:"-" } },
 
     methods:{
+      
       onChoice: function( choice ) {
-        this.idx = ++this.idx % this.num;
-        this['c'+this.idx]                     = choice;
-        this.choice()[this.name]['c'+this.idx] = choice; } },
+        let idx = this.choiceIndex( this.name, choice )
+        this['c'+idx]     = choice; } },
 
     mounted: function () {
-      this.c0 = this.choice()[this.name].c0;
-      this.c1 = this.choice()[this.name].c1;
-      this.c2 = this.choice()[this.name].c2;
-      this.subscribe( this.name, this.id, this.onChoice ); }
+      this.subscribe( this.name,  this.name+'Id', this.onChoice );
+      let choices = this.choices( this.name );
+      for( let idx=0; idx <  choices.length; idx++ ) {
+        this['c'+idx] = choices[idx]; } }
 
   }
 

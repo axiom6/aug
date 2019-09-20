@@ -1,30 +1,29 @@
 
-<template>
-  <div class="drink"><h1>Drink</h1></div>
-</template>
-
 <script type="module">
+
+  import Choice from './Choice.vue'
 
   let Drink = {
 
-    data() { return { comp:'Drink' } },
+    extends:Choice,
 
-    mounted: function () {
-      this.publish( 'Nav', 'Drink' ); }
+    data() { return { name:'Drink', btns:{
+        Black:  { title:'Black',  name:'Black',                   pos:[20, 5,60,13], hsv:[34,44,69],
+          check:true, checked:false, icon:"fas fa-mug-hot" },
+        Sugar:   { title:'Sugar',   name:'Sugar',                 pos:[20,20,60,13], hsv:[34,44,69],
+          check:true, checked:false, icon:"fas fa-mug-hot" },
+        Cream: { title:'Cream', name:'Cream',                     pos:[20,35,60,13], hsv:[34,44,69],
+          check:true, checked:false, icon:"fas fa-coffee" },
+        CreamSugar:  { title:'Cream Sugar',  name:'CreamSugar',   pos:[20,50,60,13], hsv:[34,44,69],
+          check:true, checked:false, icon:"fas fa-coffee" },
+        OwnWords:  { title:'Own Words',  name:'OwnWords',         pos:[20,65,60,13], hsv:[34,44,69],
+          check:true, checked:false, icon:"fas fa-coffee" },
+        Alternative:  { title:'Alternative',  name:'Alternative', pos:[20,80,60,13], hsv:[34,44,69],
+          check:true, checked:false, icon:"fas fa-coffee" }
+      } } }
 
   }
 
   export default Drink;
 
 </script>
-
-<style lang="less">
-  
-  @import '../../pub/css/themes/theme.less';
-  
-  .drink { justify-items:center; align-items:center; text-align:center; display:grid;
-           background-color:@theme-back; color:@theme-color;
-           position:absolute; left:0; top:0; right:0; bottom:0;
-    h1 { font-size:@theme-h1-size; } }
-
-</style>

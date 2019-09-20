@@ -825,6 +825,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/base/util/Dir.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/base/util/Dir-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/base/util/FontAwe.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2005,6 +2016,105 @@
 		"oF": 0,
 		"oIPL": 1,
 		"opt": 1,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/roast/1.png": {
+		"ft": 32768,
+		"iS": 18775,
+		"oA": 0,
+		"oAP": "/pub/css/roast/1.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/roast/2.png": {
+		"ft": 32768,
+		"iS": 18749,
+		"oA": 0,
+		"oAP": "/pub/css/roast/2.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/roast/3.png": {
+		"ft": 32768,
+		"iS": 19425,
+		"oA": 0,
+		"oAP": "/pub/css/roast/3.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/roast/4.png": {
+		"ft": 32768,
+		"iS": 19290,
+		"oA": 0,
+		"oAP": "/pub/css/roast/4.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/roast/5.png": {
+		"ft": 32768,
+		"iS": 18901,
+		"oA": 0,
+		"oAP": "/pub/css/roast/5.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/roast/6.png": {
+		"ft": 32768,
+		"iS": 18312,
+		"oA": 0,
+		"oAP": "/pub/css/roast/6.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/roast/7.png": {
+		"ft": 32768,
+		"iS": 17945,
+		"oA": 0,
+		"oAP": "/pub/css/roast/7.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/roast/8.png": {
+		"ft": 32768,
+		"iS": 17495,
+		"oA": 0,
+		"oAP": "/pub/css/roast/8.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/roast/9.png": {
+		"ft": 32768,
+		"iS": 16427,
+		"oA": 0,
+		"oAP": "/pub/css/roast/9.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
 		"oT": 1,
 		"q": 100
 		},
@@ -3625,6 +3735,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/vue/jitter/Choice.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/jitter/Choice-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/vue/jitter/Drink.js": {
 		"bF": 0,
 		"ft": 64,
@@ -5085,6 +5206,14 @@
 		"rwU": 0,
 		"sI": 0,
 		"sU": 0
+		},
+	"/vue/jitter/Choice.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/jitter/Choice.js",
+		"oF": 0
 		},
 	"/vue/jitter/Dash.vue": {
 		"cB": 0,

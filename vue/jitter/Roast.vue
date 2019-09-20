@@ -1,30 +1,35 @@
 
-<template>
-  <div class="roast"><h1>Roast</h1></div>
-</template>
-
 <script type="module">
+
+  import Choice from './Choice.vue'
 
   let Roast = {
 
-    data() { return { comp:'Roast' } },
+    extends:Choice,
 
-    mounted: function () {
-      this.publish( 'Nav', 'Roast' ); }
+    data() { return { name:'Roast', btns:{
+        Blonde:    { title:'Blonde',    name:'Blonde',    pos:[7, 5,86,9], hsv:[34,44,69],
+          check:true, checked:false, img:'roast/1.png' },
+        Light:    { title:'Light',    name:'Light',       pos:[7,15,86,9], hsv:[34,44,69],
+          check:true, checked:false, img:'roast/2.png' },
+        City:    { title:'City',    name:'City',          pos:[7,25,86,9], hsv:[34,44,69],
+          check:true, checked:false, img:'roast/3.png' },
+        Full:   { title:'Full',   name:'Full',            pos:[7,35,86,9], hsv:[34,44,69],
+          check:true, checked:false, img:'roast/4.png' },
+        Medium: { title:'Medium', name:'Medium',          pos:[7,45,86,9], hsv:[34,44,69],
+          check:true, checked:false, img:'roast/5.png' },
+        Vienna:    { title:'Vienna',     name:'Vienna',   pos:[7,55,86,9], hsv:[34,44,69],
+          check:true, checked:false, img:'roast/6.png' },
+        Dark:   { title:'Dark',   name:'Dark',            pos:[7,65,86,9], hsv:[34,44,69],
+          check:true, checked:false, img:'roast/7.png' },
+        French: { title:'French', name:'French',          pos:[7,75,86,9], hsv:[34,44,69],
+          check:true, checked:false, img:'roast/8.png' },
+        Black:    { title:'Black',     name:'Black',      pos:[7,85,86,9], hsv:[34,44,69],
+          check:true, checked:false, img:'roast/9.png' }
+      } } }
 
   }
 
   export default Roast;
 
 </script>
-
-<style lang="less">
-  
-  @import '../../pub/css/themes/theme.less';
-  
-  .roast { justify-items:center; align-items:center; text-align:center; display:grid;
-           position:absolute; left:0; top:0; right:0; bottom:0;
-           background-color:@theme-back; color:@theme-color;
-    h1 { font-size:@theme-h1-size; } }
-
-</style>

@@ -1,9 +1,9 @@
 
 <template>
-  <div ref="Btns"                   class="btns">
+  <div ref="Btns" class="btns">
     <template v-for="btn in btns">
       <div        :ref="btn.name"  :style="styleBlock(btn.pos)">
-        <div                        class="btn-center">
+        <div   class="btn-center">
           <div class="btn" :style="styleBtn(btn)" @click="pubBtn(btn)">
             <span v-if="btn.check" :class="classCheck(btn)"></span>
             <i    v-if="btn.icon"  :class="classIcons(btn)"></i>
@@ -18,22 +18,20 @@
 
 <script type="module">
   
-  import Data from '../../pub/base/util/Data.js'
+  // import Data from '../../pub/base/util/Data.js'
 
   export default {
 
-    props: { comp:String, btns:Object, klass:String, back:String, active:String, choicea:Array },
-
-    data() { return { idx:-1, name:'-',
-      colors: { primary:'#007bff', secondary:'#6c757d', success:'#28a745', info:'#17a2b8',
-                warning:'#ffc107', danger:   '#dc3545', light:  '#f8f9fa', dark:'#343a40' } } },
+    props: { name:String, btns:Object },
 
     methods: {
       pubBtn: function (btn) {
-        this.idx  = ++this.idx % this.choicea.length;
-        this.name              = btn.name;
-        this.choicea[this.idx] = btn.name;
-        this.publish( this.comp, btn.name ); },
+        this.choose(  this.name, btn.name );
+        btn.checked = this.choosen( this.name, btn.name );
+        console.log( 'Btns.pubBtn()', this.name, btn.name,  btn.checked );
+        this.publish( this.name, btn.name ); },
+    //onWatch: function() {
+    //    console.log( 'Btns.onWatch()' ); },
       aspect: function() {  // Only call in mounted
         let w = this.$refs['Btns']['clientWidth' ];
         let h = this.$refs['Btns']['clientHeight'];
@@ -42,20 +40,20 @@
         let sy = 1.0
         let p2 = p[2]===0 ? p[3] : p[2];
         return { position:'absolute', left:sy*p[0]+'%', top:sy*p[1]+'%', width:sy*p2+'%', height:sy*p[3]+'%',
-        fontSize:(p[3]*0.1)+'em' } },
+        fontSize:(p[3]*0.08)+'em' } },
       styleBtn: function (btn) {
-        let back = this.colors[btn.back] ? this.colors[btn.back] : this.back;
-        return this.name===btn.name ? { color:'black', backgroundColor:this.active }
-                                    : { color:'black', backgroundColor:back }; },
+        let back = this.toRgbaHsv( btn.hsv );
+        return { color:'black', backgroundColor:back }; },
       classCheck: function (btn) {
-        let    checked = this.name === btn.name || this.choicea.indexOf(btn.name) !== -1;
-        return checked ? 'check far fa-check-square' : 'check far fa-square'; },
+        btn.checked = this.choosen( this.name, btn.name );
+        // console.log( 'Btns.classCheck()', { checked:btn.checked, name:this.name, choice:btn.name } );
+        return btn.checked ? 'check far fa-check-square' : 'check far fa-square'; },
       classIcons: function (btn) {
         return 'icons ' + btn.icon },
       titleRef: function (btn) {
         return 'Title' + btn.name },
       img: function (btn) {
-        return Data.cssDir + btn.img },
+        return '../../css/' + btn.img },
       adjustWidths: function() {
          let names = Object.keys(this.btns)
          for( let name of names ) {
@@ -71,9 +69,7 @@
 
     mounted: function () {
       this.asp = this.aspect();
-      this.adjustWidths();
-      // console.log( 'Btns.choicea', this.choicea );
-    }
+      this.adjustWidths(); }
 
   }
 
@@ -87,15 +83,15 @@
   
   .btn-center { display:grid;  width:100%; height:100%; } // A surrounding div for centering button
 
-  .grid1x3() { display:grid; grid-template-columns:35fr 65fr; grid-template-areas:"icons label"; }
+  .grid1x3() { display:grid; grid-template-columns:20fr 24fr 56fr; grid-template-areas:"check icons label"; }
 
   .btn { .grid1x3(); justify-self:center; align-self:center;
     width:80%; height:80%; font-size:inherit; font-family:@theme-font-family;
     cursor:pointer; border-radius:16px; border: solid @theme-back 1px; }
 
-  .btn .check { grid-area:icons; justify-self:center; align-self:center; }
+  .btn .check { grid-area:check; justify-self:center; align-self:center; }
   .btn .icons { grid-area:icons; justify-self:center; align-self:center; } // font-family: "font-awesome" serif;
-  .btn .image { grid-area:icons; justify-self:center; align-self:center; .image-radius; max-height:1.0em; }
+  .btn .image { grid-area:icons; justify-self:left;   align-self:center; .image-radius; max-height:1.5em; }
   .btn .title { grid-area:label; justify-self:left;   align-self:center; text-align:left; }
 
   .image-radius { border-radius:8px; border:solid @theme-back 1px; }
