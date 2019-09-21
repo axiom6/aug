@@ -1,17 +1,30 @@
 var Cache;
 
+import Worker from './Worker.js';
+
 Cache = class Cache {
-  constructor(stream) {
+  constructor(stream, cacheName, cacheObjs, logPub = false) {
     // else
     // console.log(   'Cache', { status:object.status, text:object.text } )
     this.quota = this.quota.bind(this);
     this.quotaGranted = this.quotaGranted.bind(this);
     this.onlineEvent = this.onlineEvent.bind(this);
     this.stream = stream;
+    this.cacheName = cacheName;
+    this.cacheObjs = cacheObjs;
+    this.logPub = logPub;
+    this.worker = new Worker(this.cacheName, this.cacheObjs, this.logPub);
+  }
+
+  constructor2(cacheName, cacheObjs, logPub = false, stream) {
+    this.cacheName = cacheName;
+    this.cacheObjs = cacheObjs;
+    this.logPub = logPub;
+    this.stream = stream;
     this.subject = 'Cache';
     this.subscribe();
     this.onlineEvent();
-    this.register('./Worker.js');
+    return this.register('./Worker.js');
   }
 
   register(swUrl) {

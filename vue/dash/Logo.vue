@@ -15,16 +15,19 @@
 <script type="module">
   
   let Logo = {
+    
     name: 'logo',
+    
     methods:{
       doDir: function( dir ) {
         if( this.isDef( this.dir() ) ) {
             this.dir().touch( dir ); }
         else {
-            this.nav().dir( dir ); } },
+            this.nav().dir( dir ); } } },
+    
     mounted: function () {
-      if( this.isDef( this.nav() ) )
-        this.nav().$router = this.$router; } }
+      // this.nav().$router = this.$router;
+    }
   };
 
   export default Logo;

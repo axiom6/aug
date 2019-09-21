@@ -1,8 +1,12 @@
 
+import Worker from './Worker.js'
 
 class Cache
 
-  constructor:( @stream ) ->
+  constructor:( @stream,  @cacheName, @cacheObjs, @logPub=false ) ->
+    @worker = new Worker( @cacheName, @cacheObjs, @logPub )
+
+  constructor2:( @cacheName, @cacheObjs, @logPub=false, @stream ) ->
     @subject       = 'Cache'
     @subscribe()
     @onlineEvent()
@@ -13,7 +17,6 @@ class Cache
     if not navigator['serviceWorker']?
       console.error( "Cache", "This browser does not suppor service workers")
       return
-
 
     navigator.serviceWorker.register( swUrl, { scope: './' } )
       .then( (registration) =>

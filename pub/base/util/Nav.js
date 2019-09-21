@@ -48,7 +48,7 @@ Nav = class Nav {
         name: route
       });
     } else {
-      console.error('Nav.routeLevel() $router not set');
+      console.error('Nav.doRoute() $router not set');
     }
   }
 

@@ -4276,8 +4276,19 @@
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/Worker.js",
+		"oAP": "/pub/base/util/Worker.js",
 		"oF": 2,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/base/util/Worker.orig.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/base/util/Worker.orig.js",
+		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0

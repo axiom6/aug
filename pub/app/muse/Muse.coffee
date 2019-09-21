@@ -45,7 +45,7 @@ class Muse
     Muse.stream = new Stream( subjects, infoSpec )
     Muse.nav    = new Nav(   Muse.stream, batch )
     Muse.build  = new Build( batch )
-    #ain.cache  = new Cache( Muse.stream )
+    Muse.cache  = new Cache( Muse.stream, 'Muse', Muse.cacheObjs, true )
     Muse.mergePracsPrin()
     #ain.build.logByColumn()
     Muse.vue()
@@ -53,11 +53,11 @@ class Muse
 
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Muse.vue = () ->
-
     Muse.mixin = new Mixin( Muse, ['Home','Prin','Comp','Prac','Disp','Cube'] )
     Vue['mixin']( Muse.mixin.mixin() )
     Vue.use(Router)
     app = new Vue( { router:Muse.router(), render: (h) -> h(Home.Dash) } );
+    Muse.nav.$router = app.$router;
     app.$mount('muse')
     return
 
@@ -85,6 +85,15 @@ class Muse
     Info:{ title:'Info', key:'Info', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-th"            }
     Know:{ title:'Know', key:'Know', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-university"    }
     Wise:{ title:'Wise', key:'Wise', route:'Comp', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor"   } }
+
+  Muse.cacheObjs = {
+    Html:     { name:'Html',      status:0, url:'/muse.html' }
+    Muse:     { name:'Muse',      status:0, url:'/Muse.js' }
+    Vue:      { name:'Vue',       status:0, url:'../../lib/vue/vue.esm.browser.js' }
+    VueRouter:{ name:'VueRouter', status:0, url:'../../lib/vue/vue-router.esm.js' }
+    Roboto:   { name:'Roboto',    status:0, url:'../../css/font/roboto/Roboto.css' }
+    Roll:     { name:'Roll',      status:0, url:'/Roll.js' }  # Gets deleted as a test
+  }
 
   # Merges principles into practices
   Muse.mergePracsPrin = () ->
