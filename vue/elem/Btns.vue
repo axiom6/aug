@@ -28,7 +28,7 @@
       pubBtn: function (btn) {
         this.choose(  this.name, btn.name );
         btn.checked = this.choosen( this.name, btn.name );
-        console.log( 'Btns.pubBtn()', this.name, btn.name,  btn.checked );
+        // console.log( 'Btns.pubBtn()', this.name, btn.name,  btn.checked );
         this.publish( this.name, btn.name ); },
     //onWatch: function() {
     //    console.log( 'Btns.onWatch()' ); },

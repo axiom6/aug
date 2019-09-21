@@ -22,7 +22,7 @@ class Dir
        @$router.push( { name:route } )
     else
        console.error( 'Nav.router() $router not set' )
-    console.log('Dir.doRoute()', { beg:@route, dir:dir, end:route } )
+    # console.log('Dir.doRoute()', { beg:@route, dir:dir, end:route } )
     @route = route
     return
 

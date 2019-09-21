@@ -1,3 +1,1974 @@
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+let Summ = {
+
+  props: { name:String },
+
+  data() { return { c0:"-", c1:"-", c2:"-" } },
+
+  methods:{
+    
+    onChoice: function( choice ) {
+      let idx = this.choiceIndex( this.name, choice );
+      this['c'+idx]     = choice; } },
+
+  mounted: function () {
+    this.subscribe( this.name,  this.name+'Id', this.onChoice );
+    let choices = this.choices( this.name );
+    for( let idx=0; idx <  choices.length; idx++ ) {
+      this['c'+idx] = choices[idx]; } }
+
+};
+
+function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
+/* server only */
+, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+  if (typeof shadowMode !== 'boolean') {
+    createInjectorSSR = createInjector;
+    createInjector = shadowMode;
+    shadowMode = false;
+  } // Vue.extend constructor export interop.
+
+
+  var options = typeof script === 'function' ? script.options : script; // render functions
+
+  if (template && template.render) {
+    options.render = template.render;
+    options.staticRenderFns = template.staticRenderFns;
+    options._compiled = true; // functional template
+
+    if (isFunctionalTemplate) {
+      options.functional = true;
+    }
+  } // scopedId
+
+
+  if (scopeId) {
+    options._scopeId = scopeId;
+  }
+
+  var hook;
+
+  if (moduleIdentifier) {
+    // server build
+    hook = function hook(context) {
+      // 2.3 injection
+      context = context || // cached call
+      this.$vnode && this.$vnode.ssrContext || // stateful
+      this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext; // functional
+      // 2.2 with runInNewContext: true
+
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__;
+      } // inject component styles
+
+
+      if (style) {
+        style.call(this, createInjectorSSR(context));
+      } // register component module identifier for async chunk inference
+
+
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier);
+      }
+    }; // used by ssr in case component is cached and beforeCreate
+    // never gets called
+
+
+    options._ssrRegister = hook;
+  } else if (style) {
+    hook = shadowMode ? function () {
+      style.call(this, createInjectorShadow(this.$root.$options.shadowRoot));
+    } : function (context) {
+      style.call(this, createInjector(context));
+    };
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // register for functional component in vue file
+      var originalRender = options.render;
+
+      options.render = function renderWithStyleInjection(h, context) {
+        hook.call(context);
+        return originalRender(h, context);
+      };
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate;
+      options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+    }
+  }
+
+  return script;
+}
+
+var normalizeComponent_1 = normalizeComponent;
+
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
+function createInjector(context) {
+  return function (id, style) {
+    return addStyle(id, style);
+  };
+}
+var HEAD = document.head || document.getElementsByTagName('head')[0];
+var styles = {};
+
+function addStyle(id, css) {
+  var group = isOldIE ? css.media || 'default' : id;
+  var style = styles[group] || (styles[group] = {
+    ids: new Set(),
+    styles: []
+  });
+
+  if (!style.ids.has(id)) {
+    style.ids.add(id);
+    var code = css.source;
+
+    if (css.map) {
+      // https://developer.chrome.com/devtools/docs/javascript-debugging
+      // this makes source maps inside style tags work properly in Chrome
+      code += '\n/*# sourceURL=' + css.map.sources[0] + ' */'; // http://stackoverflow.com/a/26603875
+
+      code += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(css.map)))) + ' */';
+    }
+
+    if (!style.element) {
+      style.element = document.createElement('style');
+      style.element.type = 'text/css';
+      if (css.media) style.element.setAttribute('media', css.media);
+      HEAD.appendChild(style.element);
+    }
+
+    if ('styleSheet' in style.element) {
+      style.styles.push(code);
+      style.element.styleSheet.cssText = style.styles.filter(Boolean).join('\n');
+    } else {
+      var index = style.ids.size - 1;
+      var textNode = document.createTextNode(code);
+      var nodes = style.element.childNodes;
+      if (nodes[index]) style.element.removeChild(nodes[index]);
+      if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
+    }
+  }
+}
+
+var browser = createInjector;
+
+/* script */
+const __vue_script__ = Summ;
+
+/* template */
+var __vue_render__ = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { staticClass: "summ" }, [
+    _c("div", { staticClass: "name" }, [_vm._v(_vm._s(this.name))]),
+    _vm._v(" "),
+    _c("div", { staticClass: "choices" }, [
+      _c("div", { staticClass: "c1" }, [_vm._v(_vm._s(this.c0))]),
+      _vm._v(" "),
+      _c("div", { staticClass: "c2" }, [_vm._v(_vm._s(this.c1))]),
+      _vm._v(" "),
+      _c("div", { staticClass: "c3" }, [_vm._v(_vm._s(this.c2))])
+    ])
+  ])
+};
+var __vue_staticRenderFns__ = [];
+__vue_render__._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__ = function (inject) {
+    if (!inject) return
+    inject("data-v-30d59186_0", { source: ".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.summ {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  color: wheat;\n  border: 1px solid wheat;\n}\n.summ .name {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 50%;\n  font-size: 2rem;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.summ .choices {\n  position: absolute;\n  left: 0;\n  top: 50%;\n  width: 100%;\n  height: 50%;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  grid-template-rows: 100fr;\n  grid-template-columns: 33.3fr 33.3fr 33.3fr;\n  grid-template-areas: \"c1 c2 c3\";\n  font-size: 1.4rem;\n}\n.summ .choices .c1 {\n  grid-area: c1;\n}\n.summ .choices .c2 {\n  grid-area: c2;\n}\n.summ .choices .c3 {\n  grid-area: c3;\n}\n", map: {"version":3,"sources":["Summ.vue","/Users/ax/Documents/prj/aug/vue/jitter/Summ.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;AACrB;AACA;EACE,sBAAsB;ACCxB;ADCA;ECCA,sBAAA;AACA;ADCA;ECCA,uBAAA;EACA,iBAAA;AACA;ADCA;ECCA,uBAAA;EACA,iBAAA;ADCA;ACCA;EACA,uBAAA;EACA,iBAAA;ADCA;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;AACzB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;EACX,eAAe;EACf,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,yBAAyB;EACzB,2CAA2C;EAC3C,+BAA+B;EAC/B,iBAAiB;AACnB;AACA;EACE,aAAa;AACf;AACA;EACE,aAAa;AACf;AACA;EACE,aAAa;AACf","file":"Summ.vue","sourcesContent":[".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.summ {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  color: wheat;\n  border: 1px solid wheat;\n}\n.summ .name {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 50%;\n  font-size: 2rem;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.summ .choices {\n  position: absolute;\n  left: 0;\n  top: 50%;\n  width: 100%;\n  height: 50%;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  grid-template-rows: 100fr;\n  grid-template-columns: 33.3fr 33.3fr 33.3fr;\n  grid-template-areas: \"c1 c2 c3\";\n  font-size: 1.4rem;\n}\n.summ .choices .c1 {\n  grid-area: c1;\n}\n.summ .choices .c2 {\n  grid-area: c2;\n}\n.summ .choices .c3 {\n  grid-area: c3;\n}\n","\n<template>\n  <div class=\"summ\">\n    <div class=\"name\">{{this.name}}</div>\n    <div class=\"choices\">\n      <div class=\"c1\">{{this.c0}}</div>\n      <div class=\"c2\">{{this.c1}}</div>\n      <div class=\"c3\">{{this.c2}}</div>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  let Summ = {\n\n    props: { name:String },\n\n    data() { return { c0:\"-\", c1:\"-\", c2:\"-\" } },\n\n    methods:{\n      \n      onChoice: function( choice ) {\n        let idx = this.choiceIndex( this.name, choice )\n        this['c'+idx]     = choice; } },\n\n    mounted: function () {\n      this.subscribe( this.name,  this.name+'Id', this.onChoice );\n      let choices = this.choices( this.name );\n      for( let idx=0; idx <  choices.length; idx++ ) {\n        this['c'+idx] = choices[idx]; } }\n\n  }\n\n  export default Summ;\n\n</script>\n\n<style lang=\"less\">\n  \n@import '../../pub/css/themes/theme.less';\n\n.summ { position:absolute; left:0; top:0; width:100%; height:100%;\n        background-color:@theme-back; color:@theme-color; border:1px solid @theme-color;\n  \n  // .themeCenterItems() has display:grid;\n  .gridChoices(){ .themeCenterItems(); grid-template-rows:100fr; grid-template-columns:33.3fr 33.3fr 33.3fr;\n    grid-template-areas:\"c1 c2 c3\" }\n  \n  .name {    position:absolute; left:0; top:0;   width:100%; height:50%; font-size:@theme-h1-size;\n    .themeCenterItems(); }\n  \n  .choices { position:absolute; left:0; top:50%; width:100%; height:50%; .gridChoices(); font-size:@theme-choice-size;\n    .c1 { grid-area:c1; } .c2 { grid-area:c2; } .c3 { grid-area:c3; } }\n  }\n\n</style>\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__ = undefined;
+  /* module identifier */
+  const __vue_module_identifier__ = undefined;
+  /* functional template */
+  const __vue_is_functional_template__ = false;
+  /* style inject SSR */
+  
+
+  
+  var Summ$1 = normalizeComponent_1(
+    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+    __vue_inject_styles__,
+    __vue_script__,
+    __vue_scope_id__,
+    __vue_is_functional_template__,
+    __vue_module_identifier__,
+    browser,
+    undefined
+  );
+
+var SvgMgr;
+
+SvgMgr = class SvgMgr {
+  constructor(name1, elem1, size, d31) {
+    var gId, svgId;
+    this.name = name1;
+    this.elem = elem1;
+    this.size = size;
+    this.d3 = d31;
+    this.svg = null;
+    this.g = null;
+    svgId = '';
+    gId = '';
+    this.defs = null;
+    [this.svg, this.g, svgId, gId, this.defs] = this.createSvg(this.elem, this.name, this.size.elemWidth, this.size.elemHeight, this.d3);
+    this.size.lastWidth = this.size.elemWidth;
+    this.size.lastHeight = this.size.elemHeight;
+  }
+
+  createSvg(elem, name, w, h, d3) {
+    var defs, g, gId, svg, svgId;
+    svgId = this.htmlId(name, 'Svg', '');
+    gId = this.htmlId(name, 'SvgG', '');
+    svg = d3.select(elem).append("svg:svg");
+    svg.attr("id", svgId).attr("width", w).attr("height", h).attr("xmlns", "http://www.w3.org/2000/svg");
+    defs = svg.append("svg:defs");
+    g = svg.append("svg:g").attr("id", gId); // All transforms are applied to g
+    return [svg, g, svgId, gId, defs];
+  }
+
+  htmlId(name, type, ext = '') {
+    return name + type + ext;
+  }
+
+  resize() {
+    var geo, h, sc, sx, sy, w, xc, yc;
+    geo = this.drew.geomElem();
+    w = this.width;
+    h = this.height;
+    sx = geo.sx;
+    sy = geo.sy;
+    sc = Math.min(sx, sy);
+    xc = w / 2;
+    yc = h / 2;
+    this.svg.attr("width", w).attr("height", h);
+    this.g.transition().attr("transform", `translate(${xc},${yc}) scale(${sc})`);
+  }
+
+  // Not called, here for reference
+  geom(compWidth, compHeight, elemWidth, elemHeight) {
+    var g;
+    g = {};
+    [g.w, g.h] = [elemWidth, elemHeight];
+    g.r = Math.min(g.w, g.h) * 0.2; // Use for hexagons
+    g.x0 = g.w * 0.5;
+    g.y0 = g.h * 0.5;
+    g.sx = compWidth / g.w;
+    g.sy = compHeight / g.h;
+    g.s = Math.min(g.sx, g.sy);
+    g.fontSize = '2em'; // @toVh( 5 )+'vh'
+    g.iconSize = '2em'; // @toVh( 5 )+'vh'
+    return g;
+  }
+
+};
+
+var SvgMgr$1 = SvgMgr;
+
+var Util,
+  indexOf = [].indexOf,
+  hasProp = {}.hasOwnProperty;
+
+Util = class Util {
+  constructor() {
+    this.dummy = "";
+    Util.noop(Util.loadScript, Util.hasMethod, Util.dependsOn, Util.setInstance, Util.getInstance);
+    Util.noop(Util.toError, Util.logJSON, Util.isNot, Util.isVal, Util.isntStr);
+    Util.noop(Util.inIndex, Util.isEvent, Util.atArray, Util.atLength, Util.isStrInteger);
+    Util.noop(Util.isStrCurrency, Util.isStrFloat, Util.isDefs, Util.toPosition, Util.xyScale);
+    Util.noop(Util.resizeTimeout, Util.eventErrorCode, Util.toAlpha, Util.hashCode, Util.pdfCSS);
+    Util.noop(Util.padStr, Util.isoDateTime, Util.toHMS, Util.toInt, Util.hex32);
+    Util.noop(Util.toFloat, Util.toCap, Util.match_test, Util.svgId, Util.saveFile);
+  }
+
+  static element($elem) {
+    // console.log( 'Dom.element()', $elem, Dom.isJQueryElem( $elem ) )
+    if (Util.isJQueryElem($elem)) {
+      return $elem.get(0);
+    } else if (Util.isStr($elem)) {
+      return $($elem).get(0);
+    } else {
+      console.error('Dom.domElement( $elem )', typeof $elem, $elem, '$elem is neither jQuery object nor selector');
+      return $().get(0);
+    }
+  }
+
+  static isJQueryElem($elem) {
+    return (typeof $ !== "undefined" && $ !== null) && ($elem != null) && ($elem instanceof $ || indexOf.call(Object($elem), 'jquery') >= 0);
+  }
+
+  static loadScript(path, fn) {
+    var head, script;
+    head = document.getElementsByTagName('head')[0];
+    script = document.createElement('script');
+    script.src = path;
+    script.async = false;
+    if (Util.isFunc(fn)) {
+      script.onload = fn;
+    }
+    head.appendChild(script);
+  }
+
+  static ready(fn) {
+    if (!Util.isFunc(fn)) { // Sanity check
+      return;
+    } else if (Util.skipReady) {
+      fn();
+    } else if (document.readyState === 'complete') { // If document is already loaded, run method
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', fn, false);
+    }
+  }
+
+  static isChild(key) {
+    var a, b;
+    a = key.charAt(0);
+    b = key.charAt(key.length - 1);
+    return a === a.toUpperCase() && a !== '$' && b !== '_';
+  }
+
+  // ---- Inquiry ----
+  static hasMethod(obj, method, issue = false) {
+    var has;
+    has = typeof obj[method] === 'function';
+    if (!has && issue) {
+      console.log('Util.hasMethod()', method, has);
+    }
+    return has;
+  }
+
+  static hasGlobal(global, issue = true) {
+    var has;
+    has = window[global] != null;
+    if (!has && issue) {
+      console.error(`Util.hasGlobal() ${global} not present`);
+    }
+    return has;
+  }
+
+  static getGlobal(global, issue = true) {
+    if (Util.hasGlobal(global, issue)) {
+      return window[global];
+    } else {
+      return null;
+    }
+  }
+
+  static hasModule(path, issue = true) {
+    var has;
+    has = Util.modules[path] != null;
+    if (!has && issue) {
+      console.error(`Util.hasModule() ${path} not present`);
+    }
+    return has;
+  }
+
+  static dependsOn() {
+    var arg, has, j, len1, ok;
+    ok = true;
+    for (j = 0, len1 = arguments.length; j < len1; j++) {
+      arg = arguments[j];
+      has = Util.hasGlobal(arg, false) || Util.hasModule(arg, false) || Util.hasPlugin(arg, false);
+      if (!has) {
+        console.error('Missing Dependency', arg);
+      }
+      if (has === false) {
+        ok = has;
+      }
+    }
+    return ok;
+  }
+
+  // ---- Instances ----
+  static setInstance(instance, path) {
+    console.log('Util.setInstance()', path);
+    if ((instance == null) && (path != null)) {
+      console.error('Util.setInstance() instance not defined for path', path);
+    } else if ((instance != null) && (path == null)) {
+      console.error('Util.setInstance() path not defined for instance', instance.toString());
+    } else {
+      Util.instances[path] = instance;
+    }
+  }
+
+  static getInstance(path, dbg = false) {
+    var instance;
+    if (dbg) {
+      console.log('getInstance', path);
+    }
+    instance = Util.instances[path];
+    if (instance == null) {
+      console.error('Util.getInstance() instance not defined for path', path);
+    }
+    return instance;
+  }
+
+  // ---- Logging -------
+
+  // args should be the arguments passed by the original calling function
+  // This method should not be called directly
+  static toStrArgs(prefix, args) {
+    var arg, j, len1, str;
+    Util.logStackNum = 0;
+    str = Util.isStr(prefix) ? prefix + " " : "";
+    for (j = 0, len1 = args.length; j < len1; j++) {
+      arg = args[j];
+      str += Util.toStr(arg) + " ";
+    }
+    return str;
+  }
+
+  static toStr(arg) {
+    Util.logStackNum++;
+    if (Util.logStackNum > Util.logStackMax) {
+      return '';
+    }
+    switch (typeof arg) {
+      case 'null':
+        return 'null';
+      case 'string':
+        return Util.toStrStr(arg);
+      case 'number':
+        return arg.toString();
+      case 'object':
+        return Util.toStrObj(arg);
+      default:
+        return arg;
+    }
+  }
+
+  // Recusively stringify arrays and objects
+  static toStrObj(arg) {
+    var a, j, key, len1, str, val;
+    str = "";
+    if (arg == null) {
+      str += "null";
+    } else if (Util.isArray(arg)) {
+      str += "[ ";
+      for (j = 0, len1 = arg.length; j < len1; j++) {
+        a = arg[j];
+        str += Util.toStr(a) + ",";
+      }
+      str = str.substr(0, str.length - 1) + " ]";
+    } else if (Util.isObjEmpty(arg)) {
+      str += "{}";
+    } else {
+      str += "{ ";
+      for (key in arg) {
+        if (!hasProp.call(arg, key)) continue;
+        val = arg[key];
+        str += key + ":" + Util.toStr(val) + ", ";
+      }
+      str = str.substr(0, str.length - 2) + " }"; // Removes last comma
+    }
+    return str;
+  }
+
+  static toStrStr(arg) {
+    if (arg.length > 0) {
+      return arg;
+    } else {
+      return '""';
+    }
+  }
+
+  static toOut(obj, level = 0) {
+    var ind, key, out, val;
+    ind = Util.indent(level * 2);
+    out = "";
+    for (key in obj) {
+      if (!hasProp.call(obj, key)) continue;
+      val = obj[key];
+      if (!(key.charAt(0) === key.charAt(0).toUpperCase())) {
+        continue;
+      }
+      out += ind + key + '\n';
+      if (Util.isObj(val)) {
+        out += Util.toOut(val, level + 1);
+      }
+    }
+    return out;
+  }
+
+  // Consume unused but mandated variable to pass code inspections
+  static noop(...args) {
+  }
+
+  static toError() {
+    var str;
+    str = Util.toStrArgs('Error:', arguments);
+    return new Error(str);
+  }
+
+  static alert() {
+    var str;
+    str = Util.toStrArgs('', arguments);
+    console.log(str);
+    alert(str);
+  }
+
+  static logJSON(json) {
+    var obj;
+    obj = JSON.parse(json);
+    console.log(obj);
+  }
+
+  static jQueryHasNotBeenLoaded() {
+    if (typeof jQuery === 'undefined') {
+      console.error('Util JQuery has not been loaded');
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // ------ Validators ------
+  static isDef(d) {
+    return d !== null && typeof d !== 'undefined';
+  }
+
+  static isNot(d) {
+    return !Util.isDef(d);
+  }
+
+  static isStr(s) {
+    return Util.isDef(s) && typeof s === "string" && s.length > 0;
+  }
+
+  static isntStr(s) {
+    return !Util.isStr(s);
+  }
+
+  static isNum(n) {
+    return !isNaN(n);
+  }
+
+  static isObj(o) {
+    return Util.isDef(o) && typeof o === "object";
+  }
+
+  static isVal(v) {
+    return typeof v === "number" || typeof v === "string" || typeof v === "boolean";
+  }
+
+  static isNaN(v) {
+    return Util.isDef(v) && typeof v === "number" && Number.isNaN(v);
+  }
+
+  static isSym(v) {
+    return typeof v === "symbol";
+  }
+
+  static isObjEmpty(o) {
+    return Util.isObj(o) && Object.getOwnPropertyNames(o).length === 0;
+  }
+
+  static isFunc(f) {
+    return Util.isDef(f) && typeof f === "function";
+  }
+
+  static isArray(a) {
+    return Util.isDef(a) && typeof a !== "string" && (a.length != null) && a.length > 0;
+  }
+
+  static isEvent(e) {
+    return Util.isDef(e) && (e.target != null);
+  }
+
+  static inIndex(a, i) {
+    return Util.isArray(a) && 0 <= i && i < a.length;
+  }
+
+  static inArray(a, e) {
+    return Util.isArray(a) && a.indexOf(e) > -1;
+  }
+
+  static atArray(a, e) {
+    if (Util.inArray(a, e)) {
+      return a.indexOf(e);
+    } else {
+      return -1;
+    }
+  }
+
+  static inString(s, e) {
+    return Util.isStr(s) && s.indexOf(e) > -1;
+  }
+
+  static atLength(a, n) {
+    return Util.isArray(a) && a.length === n;
+  }
+
+  static head(a) {
+    if (Util.isArray(a)) {
+      return a[0];
+    } else {
+      return null;
+    }
+  }
+
+  static tail(a) {
+    if (Util.isArray(a)) {
+      return a[a.length - 1];
+    } else {
+      return null;
+    }
+  }
+
+  static time() {
+    return new Date().getTime();
+  }
+
+  static isStrInteger(s) {
+    return /^\s*(\+|-)?\d+\s*$/.test(s);
+  }
+
+  static isStrFloat(s) {
+    return /^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$/.test(s);
+  }
+
+  static isStrCurrency(s) {
+    return /^\s*(\+|-)?((\d+(\.\d\d)?)|(\.\d\d))\s*$/.test(s);
+  }
+
+  //@isStrEmail:(s)   -> /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/.test(s)
+  static isDefs() {
+    var arg, j, len1;
+    for (j = 0, len1 = arguments.length; j < len1; j++) {
+      arg = arguments[j];
+      if (arg == null) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  static checkTypes(type, args) {
+    var arg, key;
+    for (key in args) {
+      if (!hasProp.call(args, key)) continue;
+      arg = args[key];
+      // console.log( "Util.checkTypes isNum() argument #{key} is #{type}", arg, Util.isNum(arg) )
+      if (!Util.checkType(type, arg)) {
+        console.log(`Util.checkTypes(type,args) argument ${key} is not ${type}`, arg);
+        console.trace();
+      }
+    }
+  }
+
+  static checkType(type, arg) {
+    switch (type) {
+      case "string":
+        return Util.isStr(arg);
+      case "number":
+        return Util.isNum(arg);
+      case "object":
+        return Util.isObj(arg);
+      case "symbol":
+        return Util.isSym(arg);
+      case "function":
+        return Util.isFunc(arg);
+      case "array":
+        return Util.isArray(arg);
+      default:
+        return false;
+    }
+  }
+
+  static copyProperties(to, from) {
+    var key, val;
+    for (key in from) {
+      if (!hasProp.call(from, key)) continue;
+      val = from[key];
+      to[key] = val;
+    }
+    return to;
+  }
+
+  static contains(array, value) {
+    return Util.isArray(array) && array.indexOf(value) !== -1;
+  }
+
+  // Screen absolute (left top width height) percent positioning and scaling
+
+  // Percent array to position mapping
+  static toPosition(array) {
+    return {
+      left: array[0],
+      top: array[1],
+      width: array[2],
+      height: array[3]
+    };
+  }
+
+  // Adds Percent from array for CSS position mapping
+  static toPositionPc(array) {
+    return {
+      position: 'absolute',
+      left: array[0] + '%',
+      top: array[1] + '%',
+      width: array[2] + '%',
+      height: array[3] + '%'
+    };
+  }
+
+  static xyScale(prev, next, port, land) {
+    var xn, xp, xs, yn, yp, ys;
+    xp = 0;
+    yp = 0;
+    xn = 0;
+    yn = 0;
+    [xp, yp] = prev.orientation === 'Portrait' ? [port[2], port[3]] : [land[2], land[3]];
+    [xn, yn] = next.orientation === 'Portrait' ? [port[2], port[3]] : [land[2], land[3]];
+    xs = next.width * xn / (prev.width * xp);
+    ys = next.height * yn / (prev.height * yp);
+    return [xs, ys];
+  }
+
+  // ----------------- Guarded jQuery dependent calls -----------------
+  static resize(callback) {
+    window.onresize = function() {
+      return setTimeout(callback, 100);
+    };
+  }
+
+  static resizeTimeout(callback, timeout = null) {
+    window.onresize = function() {
+      if (timeout != null) {
+        clearTimeout(timeout);
+      }
+      return timeout = setTimeout(callback, 100);
+    };
+  }
+
+  // ------ Html ------------
+  static getHtmlId(name, type = '', ext = '') {
+    var id;
+    id = name + type + ext + Util.uniqueIdExt;
+    return id.replace(/[ \.]/g, "");
+  }
+
+  static htmlId(name, type = '', ext = '', issueError = true) {
+    var id;
+    id = Util.getHtmlId(name, type, ext);
+    if ((Util.htmlIds[id] != null) && issueError) {
+      console.error('Util.htmlId() duplicate html id', id);
+    }
+    Util.htmlIds[id] = id;
+    return id;
+  }
+
+  static clearHtmlIds() {
+    return Util.htmlIds = {};
+  }
+
+  // ------ Converters ------
+  static extend(obj, mixin) {
+    var method, name;
+    for (name in mixin) {
+      if (!hasProp.call(mixin, name)) continue;
+      method = mixin[name];
+      obj[name] = method;
+    }
+    return obj;
+  }
+
+  static include(klass, mixin) {
+    return Util.extend(klass.prototype, mixin);
+  }
+
+  static eventErrorCode(e) {
+    var errorCode;
+    errorCode = (e.target != null) && e.target.errorCode ? e.target.errorCode : 'unknown';
+    return {
+      errorCode: errorCode
+    };
+  }
+
+  static toName(s1) {
+    var s2, s3, s4, s5;
+    if (s1 == null) {
+      console.trace();
+      return "???";
+    }
+    s2 = s1.replace('_', ' ');
+    s3 = s2.replace(/([A-Z][a-z])/g, ' $1');
+    s4 = s3.replace(/([A-Z]+)/g, ' $1');
+    s5 = s4.replace(/([0-9][A-Z])/g, ' $1');
+    return s5;
+  }
+
+  static toAlpha(s1) {
+    return s1.replace(/\W/g, '');
+  }
+
+  static indent(n) {
+    var i, j, ref, str;
+    str = '';
+    for (i = j = 0, ref = n; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
+      str += ' ';
+    }
+    return str;
+  }
+
+  static hashCode(str) {
+    var hash, i, j, ref;
+    hash = 0;
+    for (i = j = 0, ref = str.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
+      hash = (hash << 5) - hash + str.charCodeAt(i);
+    }
+    return hash;
+  }
+
+  static lastTok(str, delim) {
+    return str.split(delim).pop();
+  }
+
+  static firstTok(str, delim) {
+    if (Util.isStr(str) && (str.split != null)) {
+      return str.split(delim)[0];
+    } else {
+      console.error("Util.firstTok() str is not at string", str);
+      return '';
+    }
+  }
+
+  static pdfCSS(href) {
+    var link;
+    if (!window.location.search.match(/pdf/gi)) {
+      return;
+    }
+    link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = href;
+    document.getElementsByTagName('head')[0].appendChild(link);
+  }
+
+  /*
+  parse = document.createElement('a')
+  parse.href =  "http://example.com:3000/dir1/dir2/file.ext?search=test#hash"
+  parse.protocol  "http:"
+  parse.hostname  "example.com"
+  parse.port      "3000"
+  parse.pathname  "/dir1/dir2/file.ext"
+  parse.segments  ['dir1','dir2','file.ext']
+  parse.fileExt   ['file','ext']
+  parse.file       'file'
+  parse.ext        'ext'
+  parse.search    "?search=test"
+  parse.hash      "#hash"
+  parse.host      "example.com:3000"
+  */
+  static parseURI(uri) {
+    var a, j, len1, name, nameValue, nameValues, parse, value;
+    parse = {};
+    parse.params = {};
+    a = document.createElement('a');
+    a.href = uri;
+    parse.href = a.href;
+    parse.protocol = a.protocol;
+    parse.hostname = a.hostname;
+    parse.port = a.port;
+    parse.segments = a.pathname.split('/');
+    parse.fileExt = parse.segments.pop().split('.');
+    parse.file = parse.fileExt[0];
+    parse.ext = parse.fileExt.length === 2 ? parse.fileExt[1] : '';
+    parse.dbName = parse.file;
+    parse.fragment = a.hash;
+    parse.query = Util.isStr(a.search) ? a.search.substring(1) : '';
+    nameValues = parse.query.split('&');
+    if (Util.isArray(nameValues)) {
+      for (j = 0, len1 = nameValues.length; j < len1; j++) {
+        nameValue = nameValues[j];
+        name = '';
+        value = '';
+        [name, value] = nameValue.split('=');
+        parse.params[name] = value;
+      }
+    }
+    return parse;
+  }
+
+  static quicksort(array) {
+    var a, head, large, small;
+    if (array.length === 0) {
+      return [];
+    }
+    head = array.pop();
+    small = (function() {
+      var j, len1, results;
+      results = [];
+      for (j = 0, len1 = array.length; j < len1; j++) {
+        a = array[j];
+        if (a <= head) {
+          results.push(a);
+        }
+      }
+      return results;
+    })();
+    large = (function() {
+      var j, len1, results;
+      results = [];
+      for (j = 0, len1 = array.length; j < len1; j++) {
+        a = array[j];
+        if (a > head) {
+          results.push(a);
+        }
+      }
+      return results;
+    })();
+    return (Util.quicksort(small)).concat([head]).concat(Util.quicksort(large));
+  }
+
+  static pad(n) {
+    if (n < 10) {
+      return '0' + n;
+    } else {
+      return n;
+    }
+  }
+
+  static padStr(n) {
+    if (n < 10) {
+      return '0' + n.toString();
+    } else {
+      return n.toString();
+    }
+  }
+
+  // Return and ISO formated data string
+  static isoDateTime(dateIn) {
+    var date, pad;
+    date = dateIn != null ? dateIn : new Date();
+    console.log('Util.isoDatetime()', date);
+    console.log('Util.isoDatetime()', date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes, date.getUTCSeconds);
+    pad = function(n) {
+      return Util.pad(n);
+    };
+    return date.getFullYear()(+'-' + pad(date.getUTCMonth() + 1) + '-' + pad(date.getUTCDate()) + 'T' + pad(date.getUTCHours()) + ':' + pad(date.getUTCMinutes()) + ':' + pad(date.getUTCSeconds()) + 'Z');
+  }
+
+  static toHMS(unixTime) {
+    var ampm, date, hour, min, sec, time;
+    date = new Date();
+    if (Util.isNum(unixTime)) {
+      date.setTime(unixTime);
+    }
+    hour = date.getHours();
+    ampm = 'AM';
+    if (hour > 12) {
+      hour = hour - 12;
+      ampm = 'PM';
+    }
+    min = ('0' + date.getMinutes()).slice(-2);
+    sec = ('0' + date.getSeconds()).slice(-2);
+    time = `${hour}:${min}:${sec} ${ampm}`;
+    return time;
+  }
+
+  // Generate four random hex digits
+  static hex4() {
+    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+  }
+
+  // Generate a 32 bits hex
+  static hex32() {
+    var hex, i, j;
+    hex = this.hex4();
+    for (i = j = 1; j <= 4; i = ++j) {
+      Util.noop(i);
+      hex += this.hex4();
+    }
+    return hex;
+  }
+
+  // Return a number with fixed decimal places
+  static toFixed(arg, dec = 2) {
+    var num;
+    num = (function() {
+      switch (typeof arg) {
+        case 'number':
+          return arg;
+        case 'string':
+          return parseFloat(arg);
+        default:
+          return 0;
+      }
+    })();
+    return num.toFixed(dec);
+  }
+
+  static toInt(arg) {
+    switch (typeof arg) {
+      case 'number':
+        return Math.floor(arg);
+      case 'string':
+        return parseInt(arg);
+      default:
+        return 0;
+    }
+  }
+
+  static toFloat(arg) {
+    switch (typeof arg) {
+      case 'number':
+        return arg;
+      case 'string':
+        return parseFloat(arg);
+      default:
+        return 0;
+    }
+  }
+
+  static toCap(str) {
+    return str.charAt(0).toUpperCase() + str.substring(1);
+  }
+
+  static unCap(str) {
+    return str.charAt(0).toLowerCase() + str.substring(1);
+  }
+
+  static toArray(objs) {
+    var array, key, obj;
+    if (Util.isArray(objs)) {
+      return objs;
+    } else {
+      array = [];
+      for (key in objs) {
+        if (!hasProp.call(objs, key)) continue;
+        obj = objs[key];
+        array.push(obj);
+      }
+      return array;
+    }
+  }
+
+  
+  // Not working
+  static toArray2(objects, whereIn = null, keyField = 'id') {
+    var array, j, key, len1, object, where;
+    where = whereIn != null ? whereIn : function() {
+      return true;
+    };
+    array = [];
+    if (Util.isArray(objects)) {
+      for (j = 0, len1 = array.length; j < len1; j++) {
+        object = array[j];
+        if (!(where(object))) {
+          continue;
+        }
+        if ((object['id'] != null) && keyField !== 'id') {
+          object[keyField] = object['id'];
+        }
+        array.push(object);
+      }
+    } else {
+      for (key in objects) {
+        if (!hasProp.call(objects, key)) continue;
+        object = objects[key];
+        if (!(where(key, object))) {
+          continue;
+        }
+        object[keyField] = key;
+        array.push(object);
+      }
+    }
+    return array;
+  }
+
+  static toObjects(rows, whereIn = null, keyField = 'id') {
+    var j, key, len1, objects, row, where;
+    where = whereIn != null ? whereIn : function() {
+      return true;
+    };
+    objects = {};
+    if (Util.isArray(rows)) {
+      for (j = 0, len1 = rows.length; j < len1; j++) {
+        row = rows[j];
+        if (!(where(row))) {
+          continue;
+        }
+        if ((row['id'] != null) && keyField !== 'id') {
+          row[keyField] = row['id'];
+        }
+        objects[row[keyField]] = row;
+      }
+    } else {
+      for (key in rows) {
+        row = rows[key];
+        if (!(where(row))) {
+          continue;
+        }
+        row[keyField] = key;
+        objects[key] = row;
+      }
+    }
+    return objects;
+  }
+
+  static lenObject(object, where = function() {
+      return true;
+    }) {
+    var key, len, obj;
+    len = 0;
+    for (key in object) {
+      if (!hasProp.call(object, key)) continue;
+      obj = object[key];
+      if (where(key)) {
+        len = len + 1;
+      }
+    }
+    return len;
+  }
+
+  // Beautiful Code, Chapter 1.
+  // Implements a regular expression matcher that supports character matches,
+  // '.', '^', '$', and '*'.
+
+  // Search for the regexp anywhere in the text.
+  static match(regexp, text) {
+    if (regexp[0] === '^') {
+      return Util.match_here(regexp.slice(1), text);
+    }
+    while (text) {
+      if (Util.match_here(regexp, text)) {
+        return true;
+      }
+      text = text.slice(1);
+    }
+    return false;
+  }
+
+  // Search for the regexp at the beginning of the text.
+  static match_here(regexp, text) {
+    var cur, next;
+    cur = "";
+    next = "";
+    [cur, next] = [regexp[0], regexp[1]];
+    if (regexp.length === 0) {
+      return true;
+    }
+    if (next === '*') {
+      return Util.match_star(cur, regexp.slice(2), text);
+    }
+    if (cur === '$' && !next) {
+      return text.length === 0;
+    }
+    if (text && (cur === '.' || cur === text[0])) {
+      return Util.match_here(regexp.slice(1), text.slice(1));
+    }
+    return false;
+  }
+
+  // Search for a kleene star match at the beginning of the text.
+  static match_star(c, regexp, text) {
+    while (true) {
+      if (Util.match_here(regexp, text)) {
+        return true;
+      }
+      if (!(text && (text[0] === c || c === '.'))) {
+        return false;
+      }
+      text = text.slice(1);
+    }
+  }
+
+  static match_test() {
+    console.log(Util.match_args("ex", "some text"));
+    console.log(Util.match_args("s..t", "spit"));
+    console.log(Util.match_args("^..t", "buttercup"));
+    console.log(Util.match_args("i..$", "cherries"));
+    console.log(Util.match_args("o*m", "vrooooommm!"));
+    return console.log(Util.match_args("^hel*o$", "hellllllo"));
+  }
+
+  static match_args(regexp, text) {
+    return console.log(regexp, text, Util.match(regexp, text));
+  }
+
+  static svgId(name, type, svgType, check = false) {
+    if (check) {
+      return this.id(name, type, svgType);
+    } else {
+      return name + type + svgType;
+    }
+  }
+
+  static css(name, type = '') {
+    return name + type;
+  }
+
+  static icon(name, type, fa) {
+    return name + type + ' fa fa-' + fa;
+  }
+
+  // json - "application/json;charset=utf-8"
+  // svg
+  static mineType(fileType) {
+    var mine;
+    mine = (function() {
+      switch (fileType) {
+        case 'json':
+          return "application/json";
+        case 'adoc':
+          return "text/plain";
+        case 'html':
+          return "text/html";
+        case 'svg':
+          return "image/svg+xml";
+        default:
+          return "text/plain";
+      }
+    })();
+    mine += ";charset=utf-8";
+    return mine;
+  }
+
+  static saveFile(stuff, fileName, fileType) {
+    var blob, downloadLink, url;
+    blob = new Blob([stuff], {
+      type: this.mineType(fileType)
+    });
+    url = window['URL'].createObjectURL(blob);
+    downloadLink = document.createElement("a");
+    downloadLink.href = url;
+    downloadLink.download = fileName;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  }
+
+};
+
+// Static class variables have to be declared outside of class declarion to avoid function wrapper
+Util.htmlIds = {}; // Object of unique Html Ids
+
+Util.myVar = 'myVar';
+
+Util.skipReady = false;
+
+Util.modules = [];
+
+Util.instances = [];
+
+Util.logStackNum = 0;
+
+Util.logStackMax = 100;
+
+Util.fills = {};
+
+Util.uniqueIdExt = '';
+
+var Util$1 = Util;
+
+var Data,
+  hasProp$1 = {}.hasOwnProperty;
+
+Data = class Data {
+  static refine(data, type) {
+    var akey, area, base, bkey, disp, dkey, ikey, item, pkey, prac;
+    if (type === 'None') {
+      return data;
+    }
+    data.pracs = {};
+    for (pkey in data) {
+      prac = data[pkey];
+      if (!(Util$1.isChild(pkey))) {
+        continue;
+      }
+      data.pracs[pkey] = prac;
+      prac.data = data;
+      if (prac['name'] == null) {
+        prac['name'] = pkey;
+      }
+      prac.disps = {};
+      for (dkey in prac) {
+        disp = prac[dkey];
+        if (!(Util$1.isChild(dkey))) {
+          continue;
+        }
+        prac.disps[dkey] = disp;
+        disp.prac = prac;
+        if (disp['name'] == null) {
+          disp['name'] = dkey;
+        }
+        disp.areas = {};
+        for (akey in disp) {
+          area = disp[akey];
+          if (!(Util$1.isChild(akey))) {
+            continue;
+          }
+          disp.areas[akey] = area;
+          area.disp = disp;
+          if (area['name'] == null) {
+            area['name'] = akey;
+          }
+          area.items = {};
+          for (ikey in area) {
+            item = area[ikey];
+            if (!(Util$1.isChild(ikey))) {
+              continue;
+            }
+            area.items[ikey] = item;
+            item.area = area;
+            if (item['name'] == null) {
+              item['name'] = ikey;
+            }
+            item.bases = {};
+            for (bkey in item) {
+              base = item[bkey];
+              if (!(Util$1.isChild(bkey))) {
+                continue;
+              }
+              item.bases[bkey] = base;
+              base.item = item;
+              if (base['name'] == null) {
+                base['name'] = bkey;
+              }
+            }
+          }
+        }
+      }
+    }
+    return data;
+  }
+
+  // ---- Read JSON with batch async
+  static batchRead(batch, callback, create = null) {
+    var key, obj;
+    for (key in batch) {
+      if (!hasProp$1.call(batch, key)) continue;
+      obj = batch[key];
+      this.batchJSON(obj, batch, callback, create);
+    }
+  }
+
+  static batchComplete(batch) {
+    var key, obj;
+    for (key in batch) {
+      if (!hasProp$1.call(batch, key)) continue;
+      obj = batch[key];
+      if (!obj['data']) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // "Access-Control-Request-Headers": "*", "Access-Control-Request-Method": "*"
+  static batchJSON(obj, batch, callback, refine = null) {
+    var opt, url;
+    url = obj.type === 'Font' ? obj.url : Data.toUrl(obj.url);
+    // console.log( 'Data.batchJSON', obj.url, url )
+    opt = {
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(url, opt).then((response) => {
+      return response.json();
+    }).then((data) => {
+      obj['data'] = Util$1.isFunc(refine) ? refine(data, obj.type) : data;
+      if (Data.batchComplete(batch)) {
+        return callback(batch);
+      }
+    }).catch((error) => {
+      return console.error("Data.batchJSON()", {
+        url: url,
+        error: error
+      });
+    });
+  }
+
+  static asyncJSON(urla, callback) {
+    var url;
+    url = Data.toUrl(urla);
+    // console.log( 'Data.asyncJSON()', urla, url )
+    fetch(url).then((response) => {
+      return response.json();
+    }).then((data) => {
+      return callback(data);
+    }).catch((error) => {
+      return console.error("Data.asyncJSON()", {
+        url: url,
+        error: error
+      });
+    });
+  }
+
+  static planeData(batch, plane) {
+    return batch[plane].data[plane];
+  }
+
+  static toUrl(url) {
+    //  console.log( 'Data.toUrl()', Data.local+url )
+    if (window.location.href.includes('localhost')) {
+      return Data.local + url;
+    } else {
+      return Data.hosted + url;
+    }
+  }
+
+  
+  // ------ Quick JSON read ------
+  static read(url, callback) {
+    if (Util$1.isObj(url)) {
+      Data.readFile(url, callback);
+    } else {
+      Data.asynsJson(url, callback);
+    }
+  }
+
+  static readFile(fileObj, doJson) {
+    var fileReader;
+    fileReader = new FileReader();
+    fileReader.onerror = function(e) {
+      return console.error('Store.readFile', fileObj.name, e.target.error);
+    };
+    fileReader.onload = function(e) {
+      return doJson(JSON.parse(e.target.result));
+    };
+    fileReader.readAsText(fileObj);
+  }
+
+  static saveFile(data, fileName) {
+    var downloadLink, htmlBlob, htmlUrl;
+    htmlBlob = new Blob([data], {
+      type: "text/html;charset=utf-8"
+    });
+    htmlUrl = window['URL'].createObjectURL(htmlBlob);
+    downloadLink = document.createElement("a");
+    downloadLink.href = htmlUrl;
+    downloadLink.download = fileName;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  }
+
+};
+
+Data.local = "../../data/";
+
+Data.hosted = '/data/';
+
+Data.cssDir = 'css/'; // /css in /pub
+
+var Data$1 = Data;
+
+var Wheel;
+
+Wheel = class Wheel {
+  constructor(svgMgr, onChoice) {
+    // Passed as a callback to Wheel and called when Wheel makes a choice to be published
+    // Here we use @onChoice( choice, roast ) instead
+    this.publish = this.publish.bind(this);
+    this.adjustRadius = this.adjustRadius.bind(this);
+    this.xc = this.xc.bind(this);
+    this.yc = this.yc.bind(this);
+    this.isParentOf = this.isParentOf.bind(this);
+    // http://www.w3.org/WAI/ER/WD-AERT/#color-contrast
+    // brightness:( rgb ) ->
+    //   rgb.r * .299 + rgb.g * .587 + rgb.b * .114
+    this.fill = this.fill.bind(this);
+    this.doText = this.doText.bind(this);
+    // eventType is click mouseover mouseout AddChoice DelChoice
+    //textEnter.append("title").text( (d) -> d.data.name )
+    this.onEvent = this.onEvent.bind(this);
+    this.fontSize = this.fontSize.bind(this);
+    // eventType is click mouseover mouseout AddChoice DelChoice
+    this.doChoiceResize = this.doChoiceResize.bind(this);
+    this.textTransform = this.textTransform.bind(this);
+    this.displayAllLeaves = this.displayAllLeaves.bind(this);
+    this.zoomTween = this.zoomTween.bind(this);
+    this.svgMgr = svgMgr;
+    this.onChoice = onChoice;
+    this.svg = this.svgMgr.svg;
+    this.g = this.svgMgr.g;
+    this.d3 = this.svgMgr.d3;
+    this.name = this.svgMgr.name;
+    this.elem = this.svgMgr.elem;
+    this.size = this.svgMgr.size;
+    this.width = this.size.elemWidth;
+    this.height = this.size.elemHeight;
+    this.opacity = 1.0;
+    this.showAllLeaves = false;
+    this.radiusFactorChoice = 1.3;
+    this.radiusFactorChild = 1.0;
+    this.url = Data$1.toUrl('jitter/Flavor.json');
+    this.ready();
+  }
+
+  publish(add, flavor, roast) {
+    var addDel, choice;
+    addDel = add ? 'AddChoice' : 'DelChoice';
+    choice = {
+      name: 'Wheel',
+      op: addDel,
+      flavor: flavor,
+      roast: roast
+    };
+    console.log('Choice', choice);
+  }
+
+  ready() {
+    var scale, xc, yc;
+    scale = 1.0;
+    this.json = {};
+    this.radius = Math.min(this.width, this.height) * scale / 2;
+    this.xx = this.d3.scaleLinear().range([0, 2 * Math.PI]);
+    this.yy = this.d3.scalePow().exponent(1.4).domain([0, 1]).range([
+      0,
+      this.radius // 1.3
+    ]);
+    // @formatNumber = @d3.format(",d")
+    this.padding = 0;
+    this.duration = 300;
+    this.lookup = {};
+    xc = this.width / 2;
+    yc = this.height / 2;
+    this.g = this.svg.append("g").attr("transform", `translate(${xc},${yc}) scale(1,1)`);
+    this.g.append("text").text("Flavor").attr('x', -32).attr('y', 12).style('fill', 'black').style("font-size", "3vmin");
+    this.partition = this.d3.partition();
+    this.arc = this.d3.arc().startAngle((d) => {
+      return Math.max(0, Math.min(2 * Math.PI, this.xx(this.x0(d))));
+    }).endAngle((d) => {
+      return Math.max(0, Math.min(2 * Math.PI, this.xx(this.x1(d))));
+    }).innerRadius((d) => {
+      return Math.max(0, this.yy(this.y0(d)));
+    }).outerRadius((d) => {
+      return Math.max(0, this.yy(this.y1(d)));
+    });
+    this.d3.json(this.url).then((json) => {
+      this.json = json;
+      this.root = this.d3.hierarchy(json);
+      this.root.sum((d) => {
+        d.chosen = false;
+        d.hide = this.isLeaf(d);
+        if (this.isBranch(d)) {
+          return 0;
+        } else {
+          return 1;
+        }
+      });
+      this.nodes = this.partition(this.root).descendants();
+      this.adjustRadius(this.root);
+      this.path = this.g.selectAll("path").data(this.nodes).enter().append("path").attr("id", function(d, i) {
+        if (d != null) {
+          return "path-" + i;
+        } else {
+          return "path-" + i;
+        }
+      }).attr("d", this.arc).attr("fill-rule", "evenodd").style("fill", (d) => {
+        return this.fill(d);
+      }).style("opacity", this.opacity).style("stroke", 'black').style("stroke-width", '2').style("display", function(d) {
+        if (d.data.hide) {
+          return "none";
+        } else {
+          return "block";
+        }
+      }).on("click", (d) => {
+        return this.onEvent(d, 'click');
+      }).on("mouseover", (d) => {
+        return this.onEvent(d, 'mouseover');
+      }).on("mouseout", (d) => {
+        return this.onEvent(d, 'mouseout');
+      });
+      //append("title").text( (d) -> d.data.name )
+      return this.doText(this.nodes);
+    });
+    this.d3.select(self.frameElement).style("height", this.height + "px");
+  }
+
+  adjustRadius(d) {
+    var dy, sc;
+    this.lookup[d.data.name] = d;
+    sc = d['data'].scale != null ? d['data'].scale : d.children == null ? 0.8 : 1.0;
+    dy = (d.y1 - d.y0) * sc;
+    if (d.parent != null) {
+      d.y0 = d.parent.y1;
+    }
+    d.y1 = d.y0 + dy;
+    if (d.children != null) {
+      d.children.forEach((child) => {
+        return this.adjustRadius(child);
+      });
+    }
+  }
+
+  x0(d) {
+    if (d.m0 != null) {
+      return d.m0;
+    } else {
+      return d.x0;
+    }
+  }
+
+  x1(d) {
+    if (d.m1 != null) {
+      return d.m1;
+    } else {
+      return d.x1;
+    }
+  }
+
+  y0(d) {
+    if (d.n0 != null) {
+      return d.n0;
+    } else {
+      return d.y0;
+    }
+  }
+
+  y1(d) {
+    if (d.n1 != null) {
+      return d.n1;
+    } else {
+      return d.y1;
+    }
+  }
+
+  xc(d) {
+    return (this.x0(d) + this.x1(d)) / 2;
+  }
+
+  yc(d) {
+    return (this.y0(d) + this.y1(d)) / 2;
+  }
+
+  sameNode(a, b) {
+    return (a != null ? a.data.name : void 0) === (b != null ? b.data.name : void 0);
+  }
+
+  inBranch(branch, elem) {
+    var child, j, len, ref;
+    if ((branch != null ? branch.data.name : void 0) === (elem != null ? elem.data.name : void 0)) {
+      return true;
+    }
+    if (branch.children != null) {
+      ref = branch != null ? branch.children : void 0;
+      for (j = 0, len = ref.length; j < len; j++) {
+        child = ref[j];
+        if ((child != null ? child.data.name : void 0) === (elem != null ? elem.data.name : void 0)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  isBranch(d) {
+    return d.children != null;
+  }
+
+  isLeaf(d) {
+    return d.children == null;
+  }
+
+  isParentOf(p, c) {
+    if (p === c) {
+      return true;
+    }
+    if (p.children) {
+      return p.children.some((d) => {
+        return this.isParentOf(d, c);
+      });
+    }
+    return false;
+  }
+
+  fill(d) {
+    var a, b, colours;
+    // console.log( 'fill', d )
+    if ((d.data.fill != null) && (d.children != null)) {
+      return d.data.fill;
+    } else if ((d.data.fill != null) && (d.children == null) && (d.parent != null) && (d.parent.data.fill != null)) {
+      return d.parent.data.fill;
+    } else if (d.children != null) {
+      colours = d.children.map(this.fill);
+      a = this.d3.hsl(colours[0]);
+      b = this.d3.hsl(colours[1]);
+      // L*a*b* might be better here...
+      return this.d3.hsl((a.h + b.h) / 2, a.s * 1.2, a.l / 1.2);
+    } else {
+      return '#666666';
+    }
+  }
+
+  doText(nodes) {
+    var angle, xem;
+    this.text = this.g.selectAll('text').data(nodes);
+    this.textEnter = this.text.enter().append('text').on("click", (d) => {
+      return this.onEvent(d, 'click');
+    }).on("mouseover", (d) => {
+      return this.onEvent(d, 'mouseover');
+    }).on("mouseout", (d) => {
+      return this.onEvent(d, 'mouseout');
+    }).style("font-size", (t) => {
+      return this.fontSize(t);
+    //style('fill',       (d) => if @brightness( @d3.rgb( @fill(d.data) ) ) < 125 then '#eee' else '#000' )
+    }).style('opacity', 1).style('fill', '#000000').style('font-weight', 900).style("display", function(d) {
+      if (d.data.hide) {
+        return "none";
+      } else {
+        return "block";
+      }
+    }).attr('text-anchor', (d) => {
+      if (this.xx(this.xc(d)) > Math.PI) {
+        return 'end';
+      } else {
+        return 'start';
+      }
+    }).attr('dy', '.2em').attr('transform', (d) => {
+      return this.textTransform(d);
+    });
+    angle = (d) => {
+      return this.xx(this.xc(d)) * 180 / Math.PI;
+    };
+    xem = function(d) {
+      if (angle(d) <= 180) {
+        return '0.7em';
+      } else {
+        return '-0.7em';
+      }
+    };
+    this.textEnter.append('tspan').attr('x', function(d) {
+      return xem(d);
+    }).text(function(d) {
+      if (d.depth) {
+        return d.data.name.split(' ')[0];
+      } else {
+        return '';
+      }
+    });
+    this.textEnter.append('tspan').attr('x', function(d) {
+      return xem(d);
+    }).attr('dy', '1em').text(function(d) {
+      if ((d.depth != null) && (d.data.name != null)) {
+        return d.data.name.split(' ')[1] || '';
+      } else {
+        return '';
+      }
+    });
+  }
+
+  onEvent(d, eventType) {
+    var cy0, py0, py1, resize;
+    if (eventType === 'click' && (d.parent == null)) {
+      this.displayAllLeaves();
+    }
+    if (d.data['can'] == null) {
+      return;
+    }
+    //console.log( 'onEvent', d ) if eventType is 'click'
+    py0 = d.y0;
+    py1 = d.y0 + (d.y1 - d.y0) * this.radiusFactorChoice;
+    resize = this.doChoiceResize(d, eventType, d.x0, py0, d.x1, py1);
+    cy0 = resize ? py1 : d.y1;
+    if (d.children != null) {
+      d.children.forEach((child) => {
+        var cy1;
+        if (child != null) {
+          child.data.hide = resize;
+        }
+        cy1 = cy0 + (child['y1'] - child['y0']) * this.radiusFactorChild;
+        return this.resizeElem(child, resize, child['x0'], cy0, child['x1'], cy1);
+      });
+    }
+    this.g.selectAll('path').data(this.nodes).filter((e) => {
+      return this.inBranch(d, e);
+    }).transition().duration(this.duration).style("display", function(d) {
+      if (d.data.hide) {
+        return "none";
+      } else {
+        return "block";
+      }
+    //style( "stroke",        "black" )
+    //style( "stroke-width", "0.2vim" )
+    }).attr("d", this.arc);
+    this.g.selectAll('text').data(this.nodes).filter((e) => {
+      return this.inBranch(d, e);
+    }).transition().duration(this.duration).attr("transform", (t) => {
+      return this.textTransform(t);
+    }).style("font-size", (t) => {
+      return this.fontSize(t, d);
+    }).style("display", function(d) {
+      if (d.data.hide) {
+        return "none";
+      } else {
+        return "block";
+      }
+    });
+  }
+
+  fontSize(t, d = null) {
+    if ((d != null) && this.sameNode(t, d) && (t.m0 != null)) {
+      return '1.1rem';
+    } else {
+      if (t.children != null) {
+        return '1.0rem';
+      } else {
+        return '0.9rem';
+      }
+    }
+  }
+
+  doChoiceResize(elem, eventType, x0, y0, x1, y1) {
+    var resizeChild;
+    resizeChild = true;
+    if (eventType === 'click') {
+      elem.chosen = !elem.chosen;
+      this.resizeElem(elem, elem.chosen, x0, y0, x1, y1);
+      // This publish function is supplied to the constructor
+      // elem.chosen is true/false for add/del
+      // elem.data.name is the flavor
+      // @publish( elem.chosen, elem.data.name, @getRoastValue(elem.data.name) )
+      this.onChoice(elem.data.name, this.getRoastValue(elem.data.name));
+      resizeChild = elem.chosen;
+    } else if (eventType === 'AddChoice' || eventType === 'DelChoice') {
+      elem.chosen = eventType === 'AddChoice';
+      this.resizeElem(elem, elem.chosen, x0, y0, x1, y1);
+      resizeChild = elem.chosen;
+    // Mouse event do not affect chosen elements
+    } else if (!elem.chosen && (eventType === 'mouseover' || eventType === 'mouseout')) {
+      resizeChild = eventType === 'mouseover';
+      this.resizeElem(elem, resizeChild, x0, y0, x1, y1);
+    }
+    //console.log( "Wheel.doChoiceResize()", { flavor:elem.data.name, eventType:eventType, resizeChild:resizeChild } )
+    return resizeChild;
+  }
+
+  resizeElem(elem, resize, x0, y0, x1, y1) {
+    if (resize) {
+      elem.m0 = x0;
+      elem.m1 = x1;
+      elem.n0 = y0;
+      elem.n1 = y1;
+      elem.data.hide = false;
+    } else {
+      elem.m0 = void 0;
+      elem.m1 = void 0;
+      elem.n0 = void 0;
+      elem.n1 = void 0;
+      elem.data.hide = !((elem.data.children != null) || this.showAllLeaves) ? true : false;
+    }
+  }
+
+  textTransform(d) {
+    var angle, multiline, rotate;
+    multiline = (d.data.name || '').split(' ').length > 1;
+    angle = this.xx(this.xc(d)) * 180 / Math.PI - 90;
+    rotate = angle + (multiline ? -.5 : 0);
+    return 'rotate(' + rotate + ')translate(' + this.yy(this.y0(d)) + this.padding + ')rotate(' + (angle > 90 ? -180 : 0) + ')';
+  }
+
+  displayAllLeaves() {
+    this.showAllLeaves = !this.showAllLeaves;
+    this.g.selectAll("path").style("display", (d) => {
+      if (this.isLeaf(d) && !this.showAllLeaves && !d.parent.chosen) {
+        return "none";
+      } else {
+        return "block";
+      }
+    });
+    this.g.selectAll('text').style("display", (d) => {
+      if (this.isLeaf(d) && !this.showAllLeaves && !d.parent.chosen) {
+        return "none";
+      } else {
+        return "block";
+      }
+    });
+  }
+
+  zoomTween(d) {
+    this.svg.transition().duration(this.duration).tween("scale", () => {
+      var xd, yd, yr;
+      xd = this.d3.interpolate(this.xx.domain(), [this.x0(d), this.x1(d)]);
+      yd = this.d3.interpolate(this.yy.domain(), [this.y0(d), 1]);
+      yr = this.d3.interpolate(this.yy.range(), [(d.y0 != null ? 20 : 0), this.radius]);
+      return (t) => {
+        this.xx.domain(xd(t));
+        return this.yy.domain(yd(t)).range(yr(t));
+      };
+    }).selectAll("path").attrTween("d", (d) => {
+      return () => {
+        return this.arc(d);
+      };
+    });
+  }
+
+  getFlavor(data, name, match) {
+    var child, flavor, j, len, ref;
+    if (data.children != null) {
+      ref = data.children;
+      for (j = 0, len = ref.length; j < len; j++) {
+        flavor = ref[j];
+        if (match(flavor)) {
+          return flavor;
+        }
+        child = this.getFlavor(flavor, name, match);
+        if (child != null) {
+          return child;
+        }
+      }
+    }
+    return null;
+  }
+
+  getRoastValue(name) {
+    var flavor, match, value;
+    match = function(flavor) {
+      return flavor.name === name;
+    };
+    flavor = this.getFlavor(this.json, name, match);
+    //console.log( 'Wheel.getRoastValue()', { name:name, flavor:flavor } )
+    value = flavor != null ? (flavor.roast[0] + flavor.roast[1]) * 0.5 : -1;
+    return value;
+  }
+
+  getFlavorName(roast) {
+    var flavor, match;
+    match = function(flavor) {
+      return (flavor.roast != null) && flavor.roast[0] <= roast && roast <= flavor.roast[1];
+    };
+    flavor = this.getFlavor(this.json, roast, match);
+    console.log('Wheel.getFlavorName()', {
+      roast: roast,
+      flavor: flavor
+    });
+    if (flavor) {
+      return flavor.name;
+    } else {
+      return "";
+    }
+  }
+
+};
+
+var Wheel$1 = Wheel;
+
 function ascending(a, b) {
   return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
 }
@@ -6482,7 +8453,7 @@ function x(d) {
   return d.x + d.vx;
 }
 
-function y$1(d) {
+function y(d) {
   return d.y + d.vy;
 }
 
@@ -6504,7 +8475,7 @@ function collide(radius) {
         ri2;
 
     for (var k = 0; k < iterations; ++k) {
-      tree = quadtree(nodes, x, y$1).visitAfter(prepare);
+      tree = quadtree(nodes, x, y).visitAfter(prepare);
       for (i = 0; i < n; ++i) {
         node = nodes[i];
         ri = radii[node.index], ri2 = ri * ri;
@@ -6690,7 +8661,7 @@ function x$1(d) {
   return d.x;
 }
 
-function y$1$1(d) {
+function y$1(d) {
   return d.y;
 }
 
@@ -6845,7 +8816,7 @@ function manyBody() {
       theta2 = 0.81;
 
   function force(_) {
-    var i, n = nodes.length, tree = quadtree(nodes, x$1, y$1$1).visitAfter(accumulate);
+    var i, n = nodes.length, tree = quadtree(nodes, x$1, y$1).visitAfter(accumulate);
     for (alpha = _, i = 0; i < n; ++i) node = nodes[i], tree.visit(apply);
   }
 
@@ -15003,11 +16974,11 @@ function pie() {
 
 var curveRadialLinear = curveRadial(curveLinear);
 
-function Radial$1(curve) {
+function Radial(curve) {
   this._curve = curve;
 }
 
-Radial$1.prototype = {
+Radial.prototype = {
   areaStart: function() {
     this._curve.areaStart();
   },
@@ -15028,7 +16999,7 @@ Radial$1.prototype = {
 function curveRadial(curve) {
 
   function radial(context) {
-    return new Radial$1(curve(context));
+    return new Radial(curve(context));
   }
 
   radial._curve = curve;
@@ -18293,7211 +20264,23 @@ var d3 = /*#__PURE__*/Object.freeze({
   zoomIdentity: identity$9
 });
 
-var Util,
-  indexOf = [].indexOf,
-  hasProp = {}.hasOwnProperty;
-
-Util = class Util {
-  constructor() {
-    this.dummy = "";
-    Util.noop(Util.loadScript, Util.hasMethod, Util.dependsOn, Util.setInstance, Util.getInstance);
-    Util.noop(Util.toError, Util.logJSON, Util.isNot, Util.isVal, Util.isntStr);
-    Util.noop(Util.inIndex, Util.isEvent, Util.atArray, Util.atLength, Util.isStrInteger);
-    Util.noop(Util.isStrCurrency, Util.isStrFloat, Util.isDefs, Util.toPosition, Util.xyScale);
-    Util.noop(Util.resizeTimeout, Util.eventErrorCode, Util.toAlpha, Util.hashCode, Util.pdfCSS);
-    Util.noop(Util.padStr, Util.isoDateTime, Util.toHMS, Util.toInt, Util.hex32);
-    Util.noop(Util.toFloat, Util.toCap, Util.match_test, Util.svgId, Util.saveFile);
-  }
-
-  static element($elem) {
-    // console.log( 'Dom.element()', $elem, Dom.isJQueryElem( $elem ) )
-    if (Util.isJQueryElem($elem)) {
-      return $elem.get(0);
-    } else if (Util.isStr($elem)) {
-      return $($elem).get(0);
-    } else {
-      console.error('Dom.domElement( $elem )', typeof $elem, $elem, '$elem is neither jQuery object nor selector');
-      return $().get(0);
-    }
-  }
-
-  static isJQueryElem($elem) {
-    return (typeof $ !== "undefined" && $ !== null) && ($elem != null) && ($elem instanceof $ || indexOf.call(Object($elem), 'jquery') >= 0);
-  }
-
-  static loadScript(path, fn) {
-    var head, script;
-    head = document.getElementsByTagName('head')[0];
-    script = document.createElement('script');
-    script.src = path;
-    script.async = false;
-    if (Util.isFunc(fn)) {
-      script.onload = fn;
-    }
-    head.appendChild(script);
-  }
-
-  static ready(fn) {
-    if (!Util.isFunc(fn)) { // Sanity check
-      return;
-    } else if (Util.skipReady) {
-      fn();
-    } else if (document.readyState === 'complete') { // If document is already loaded, run method
-      fn();
-    } else {
-      document.addEventListener('DOMContentLoaded', fn, false);
-    }
-  }
-
-  static isChild(key) {
-    var a, b;
-    a = key.charAt(0);
-    b = key.charAt(key.length - 1);
-    return a === a.toUpperCase() && a !== '$' && b !== '_';
-  }
-
-  // ---- Inquiry ----
-  static hasMethod(obj, method, issue = false) {
-    var has;
-    has = typeof obj[method] === 'function';
-    if (!has && issue) {
-      console.log('Util.hasMethod()', method, has);
-    }
-    return has;
-  }
-
-  static hasGlobal(global, issue = true) {
-    var has;
-    has = window[global] != null;
-    if (!has && issue) {
-      console.error(`Util.hasGlobal() ${global} not present`);
-    }
-    return has;
-  }
-
-  static getGlobal(global, issue = true) {
-    if (Util.hasGlobal(global, issue)) {
-      return window[global];
-    } else {
-      return null;
-    }
-  }
-
-  static hasModule(path, issue = true) {
-    var has;
-    has = Util.modules[path] != null;
-    if (!has && issue) {
-      console.error(`Util.hasModule() ${path} not present`);
-    }
-    return has;
-  }
-
-  static dependsOn() {
-    var arg, has, j, len1, ok;
-    ok = true;
-    for (j = 0, len1 = arguments.length; j < len1; j++) {
-      arg = arguments[j];
-      has = Util.hasGlobal(arg, false) || Util.hasModule(arg, false) || Util.hasPlugin(arg, false);
-      if (!has) {
-        console.error('Missing Dependency', arg);
-      }
-      if (has === false) {
-        ok = has;
-      }
-    }
-    return ok;
-  }
-
-  // ---- Instances ----
-  static setInstance(instance, path) {
-    console.log('Util.setInstance()', path);
-    if ((instance == null) && (path != null)) {
-      console.error('Util.setInstance() instance not defined for path', path);
-    } else if ((instance != null) && (path == null)) {
-      console.error('Util.setInstance() path not defined for instance', instance.toString());
-    } else {
-      Util.instances[path] = instance;
-    }
-  }
-
-  static getInstance(path, dbg = false) {
-    var instance;
-    if (dbg) {
-      console.log('getInstance', path);
-    }
-    instance = Util.instances[path];
-    if (instance == null) {
-      console.error('Util.getInstance() instance not defined for path', path);
-    }
-    return instance;
-  }
-
-  // ---- Logging -------
-
-  // args should be the arguments passed by the original calling function
-  // This method should not be called directly
-  static toStrArgs(prefix, args) {
-    var arg, j, len1, str;
-    Util.logStackNum = 0;
-    str = Util.isStr(prefix) ? prefix + " " : "";
-    for (j = 0, len1 = args.length; j < len1; j++) {
-      arg = args[j];
-      str += Util.toStr(arg) + " ";
-    }
-    return str;
-  }
-
-  static toStr(arg) {
-    Util.logStackNum++;
-    if (Util.logStackNum > Util.logStackMax) {
-      return '';
-    }
-    switch (typeof arg) {
-      case 'null':
-        return 'null';
-      case 'string':
-        return Util.toStrStr(arg);
-      case 'number':
-        return arg.toString();
-      case 'object':
-        return Util.toStrObj(arg);
-      default:
-        return arg;
-    }
-  }
-
-  // Recusively stringify arrays and objects
-  static toStrObj(arg) {
-    var a, j, key, len1, str, val;
-    str = "";
-    if (arg == null) {
-      str += "null";
-    } else if (Util.isArray(arg)) {
-      str += "[ ";
-      for (j = 0, len1 = arg.length; j < len1; j++) {
-        a = arg[j];
-        str += Util.toStr(a) + ",";
-      }
-      str = str.substr(0, str.length - 1) + " ]";
-    } else if (Util.isObjEmpty(arg)) {
-      str += "{}";
-    } else {
-      str += "{ ";
-      for (key in arg) {
-        if (!hasProp.call(arg, key)) continue;
-        val = arg[key];
-        str += key + ":" + Util.toStr(val) + ", ";
-      }
-      str = str.substr(0, str.length - 2) + " }"; // Removes last comma
-    }
-    return str;
-  }
-
-  static toStrStr(arg) {
-    if (arg.length > 0) {
-      return arg;
-    } else {
-      return '""';
-    }
-  }
-
-  static toOut(obj, level = 0) {
-    var ind, key, out, val;
-    ind = Util.indent(level * 2);
-    out = "";
-    for (key in obj) {
-      if (!hasProp.call(obj, key)) continue;
-      val = obj[key];
-      if (!(key.charAt(0) === key.charAt(0).toUpperCase())) {
-        continue;
-      }
-      out += ind + key + '\n';
-      if (Util.isObj(val)) {
-        out += Util.toOut(val, level + 1);
-      }
-    }
-    return out;
-  }
-
-  // Consume unused but mandated variable to pass code inspections
-  static noop(...args) {
-  }
-
-  static toError() {
-    var str;
-    str = Util.toStrArgs('Error:', arguments);
-    return new Error(str);
-  }
-
-  static alert() {
-    var str;
-    str = Util.toStrArgs('', arguments);
-    console.log(str);
-    alert(str);
-  }
-
-  static logJSON(json) {
-    var obj;
-    obj = JSON.parse(json);
-    console.log(obj);
-  }
-
-  static jQueryHasNotBeenLoaded() {
-    if (typeof jQuery === 'undefined') {
-      console.error('Util JQuery has not been loaded');
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  // ------ Validators ------
-  static isDef(d) {
-    return d !== null && typeof d !== 'undefined';
-  }
-
-  static isNot(d) {
-    return !Util.isDef(d);
-  }
-
-  static isStr(s) {
-    return Util.isDef(s) && typeof s === "string" && s.length > 0;
-  }
-
-  static isntStr(s) {
-    return !Util.isStr(s);
-  }
-
-  static isNum(n) {
-    return !isNaN(n);
-  }
-
-  static isObj(o) {
-    return Util.isDef(o) && typeof o === "object";
-  }
-
-  static isVal(v) {
-    return typeof v === "number" || typeof v === "string" || typeof v === "boolean";
-  }
-
-  static isNaN(v) {
-    return Util.isDef(v) && typeof v === "number" && Number.isNaN(v);
-  }
-
-  static isSym(v) {
-    return typeof v === "symbol";
-  }
-
-  static isObjEmpty(o) {
-    return Util.isObj(o) && Object.getOwnPropertyNames(o).length === 0;
-  }
-
-  static isFunc(f) {
-    return Util.isDef(f) && typeof f === "function";
-  }
-
-  static isArray(a) {
-    return Util.isDef(a) && typeof a !== "string" && (a.length != null) && a.length > 0;
-  }
-
-  static isEvent(e) {
-    return Util.isDef(e) && (e.target != null);
-  }
-
-  static inIndex(a, i) {
-    return Util.isArray(a) && 0 <= i && i < a.length;
-  }
-
-  static inArray(a, e) {
-    return Util.isArray(a) && a.indexOf(e) > -1;
-  }
-
-  static atArray(a, e) {
-    if (Util.inArray(a, e)) {
-      return a.indexOf(e);
-    } else {
-      return -1;
-    }
-  }
-
-  static inString(s, e) {
-    return Util.isStr(s) && s.indexOf(e) > -1;
-  }
-
-  static atLength(a, n) {
-    return Util.isArray(a) && a.length === n;
-  }
-
-  static head(a) {
-    if (Util.isArray(a)) {
-      return a[0];
-    } else {
-      return null;
-    }
-  }
-
-  static tail(a) {
-    if (Util.isArray(a)) {
-      return a[a.length - 1];
-    } else {
-      return null;
-    }
-  }
-
-  static time() {
-    return new Date().getTime();
-  }
-
-  static isStrInteger(s) {
-    return /^\s*(\+|-)?\d+\s*$/.test(s);
-  }
-
-  static isStrFloat(s) {
-    return /^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$/.test(s);
-  }
-
-  static isStrCurrency(s) {
-    return /^\s*(\+|-)?((\d+(\.\d\d)?)|(\.\d\d))\s*$/.test(s);
-  }
-
-  //@isStrEmail:(s)   -> /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/.test(s)
-  static isDefs() {
-    var arg, j, len1;
-    for (j = 0, len1 = arguments.length; j < len1; j++) {
-      arg = arguments[j];
-      if (arg == null) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  static checkTypes(type, args) {
-    var arg, key;
-    for (key in args) {
-      if (!hasProp.call(args, key)) continue;
-      arg = args[key];
-      // console.log( "Util.checkTypes isNum() argument #{key} is #{type}", arg, Util.isNum(arg) )
-      if (!Util.checkType(type, arg)) {
-        console.log(`Util.checkTypes(type,args) argument ${key} is not ${type}`, arg);
-        console.trace();
-      }
-    }
-  }
-
-  static checkType(type, arg) {
-    switch (type) {
-      case "string":
-        return Util.isStr(arg);
-      case "number":
-        return Util.isNum(arg);
-      case "object":
-        return Util.isObj(arg);
-      case "symbol":
-        return Util.isSym(arg);
-      case "function":
-        return Util.isFunc(arg);
-      case "array":
-        return Util.isArray(arg);
-      default:
-        return false;
-    }
-  }
-
-  static copyProperties(to, from) {
-    var key, val;
-    for (key in from) {
-      if (!hasProp.call(from, key)) continue;
-      val = from[key];
-      to[key] = val;
-    }
-    return to;
-  }
-
-  static contains(array, value) {
-    return Util.isArray(array) && array.indexOf(value) !== -1;
-  }
-
-  // Screen absolute (left top width height) percent positioning and scaling
-
-  // Percent array to position mapping
-  static toPosition(array) {
-    return {
-      left: array[0],
-      top: array[1],
-      width: array[2],
-      height: array[3]
-    };
-  }
-
-  // Adds Percent from array for CSS position mapping
-  static toPositionPc(array) {
-    return {
-      position: 'absolute',
-      left: array[0] + '%',
-      top: array[1] + '%',
-      width: array[2] + '%',
-      height: array[3] + '%'
-    };
-  }
-
-  static xyScale(prev, next, port, land) {
-    var xn, xp, xs, yn, yp, ys;
-    xp = 0;
-    yp = 0;
-    xn = 0;
-    yn = 0;
-    [xp, yp] = prev.orientation === 'Portrait' ? [port[2], port[3]] : [land[2], land[3]];
-    [xn, yn] = next.orientation === 'Portrait' ? [port[2], port[3]] : [land[2], land[3]];
-    xs = next.width * xn / (prev.width * xp);
-    ys = next.height * yn / (prev.height * yp);
-    return [xs, ys];
-  }
-
-  // ----------------- Guarded jQuery dependent calls -----------------
-  static resize(callback) {
-    window.onresize = function() {
-      return setTimeout(callback, 100);
-    };
-  }
-
-  static resizeTimeout(callback, timeout = null) {
-    window.onresize = function() {
-      if (timeout != null) {
-        clearTimeout(timeout);
-      }
-      return timeout = setTimeout(callback, 100);
-    };
-  }
-
-  // ------ Html ------------
-  static getHtmlId(name, type = '', ext = '') {
-    var id;
-    id = name + type + ext + Util.uniqueIdExt;
-    return id.replace(/[ \.]/g, "");
-  }
-
-  static htmlId(name, type = '', ext = '', issueError = true) {
-    var id;
-    id = Util.getHtmlId(name, type, ext);
-    if ((Util.htmlIds[id] != null) && issueError) {
-      console.error('Util.htmlId() duplicate html id', id);
-    }
-    Util.htmlIds[id] = id;
-    return id;
-  }
-
-  static clearHtmlIds() {
-    return Util.htmlIds = {};
-  }
-
-  // ------ Converters ------
-  static extend(obj, mixin) {
-    var method, name;
-    for (name in mixin) {
-      if (!hasProp.call(mixin, name)) continue;
-      method = mixin[name];
-      obj[name] = method;
-    }
-    return obj;
-  }
-
-  static include(klass, mixin) {
-    return Util.extend(klass.prototype, mixin);
-  }
-
-  static eventErrorCode(e) {
-    var errorCode;
-    errorCode = (e.target != null) && e.target.errorCode ? e.target.errorCode : 'unknown';
-    return {
-      errorCode: errorCode
-    };
-  }
-
-  static toName(s1) {
-    var s2, s3, s4, s5;
-    if (s1 == null) {
-      console.trace();
-      return "???";
-    }
-    s2 = s1.replace('_', ' ');
-    s3 = s2.replace(/([A-Z][a-z])/g, ' $1');
-    s4 = s3.replace(/([A-Z]+)/g, ' $1');
-    s5 = s4.replace(/([0-9][A-Z])/g, ' $1');
-    return s5;
-  }
-
-  static toAlpha(s1) {
-    return s1.replace(/\W/g, '');
-  }
-
-  static indent(n) {
-    var i, j, ref, str;
-    str = '';
-    for (i = j = 0, ref = n; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
-      str += ' ';
-    }
-    return str;
-  }
-
-  static hashCode(str) {
-    var hash, i, j, ref;
-    hash = 0;
-    for (i = j = 0, ref = str.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
-      hash = (hash << 5) - hash + str.charCodeAt(i);
-    }
-    return hash;
-  }
-
-  static lastTok(str, delim) {
-    return str.split(delim).pop();
-  }
-
-  static firstTok(str, delim) {
-    if (Util.isStr(str) && (str.split != null)) {
-      return str.split(delim)[0];
-    } else {
-      console.error("Util.firstTok() str is not at string", str);
-      return '';
-    }
-  }
-
-  static pdfCSS(href) {
-    var link;
-    if (!window.location.search.match(/pdf/gi)) {
-      return;
-    }
-    link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.href = href;
-    document.getElementsByTagName('head')[0].appendChild(link);
-  }
-
-  /*
-  parse = document.createElement('a')
-  parse.href =  "http://example.com:3000/dir1/dir2/file.ext?search=test#hash"
-  parse.protocol  "http:"
-  parse.hostname  "example.com"
-  parse.port      "3000"
-  parse.pathname  "/dir1/dir2/file.ext"
-  parse.segments  ['dir1','dir2','file.ext']
-  parse.fileExt   ['file','ext']
-  parse.file       'file'
-  parse.ext        'ext'
-  parse.search    "?search=test"
-  parse.hash      "#hash"
-  parse.host      "example.com:3000"
-  */
-  static parseURI(uri) {
-    var a, j, len1, name, nameValue, nameValues, parse, value;
-    parse = {};
-    parse.params = {};
-    a = document.createElement('a');
-    a.href = uri;
-    parse.href = a.href;
-    parse.protocol = a.protocol;
-    parse.hostname = a.hostname;
-    parse.port = a.port;
-    parse.segments = a.pathname.split('/');
-    parse.fileExt = parse.segments.pop().split('.');
-    parse.file = parse.fileExt[0];
-    parse.ext = parse.fileExt.length === 2 ? parse.fileExt[1] : '';
-    parse.dbName = parse.file;
-    parse.fragment = a.hash;
-    parse.query = Util.isStr(a.search) ? a.search.substring(1) : '';
-    nameValues = parse.query.split('&');
-    if (Util.isArray(nameValues)) {
-      for (j = 0, len1 = nameValues.length; j < len1; j++) {
-        nameValue = nameValues[j];
-        name = '';
-        value = '';
-        [name, value] = nameValue.split('=');
-        parse.params[name] = value;
-      }
-    }
-    return parse;
-  }
-
-  static quicksort(array) {
-    var a, head, large, small;
-    if (array.length === 0) {
-      return [];
-    }
-    head = array.pop();
-    small = (function() {
-      var j, len1, results;
-      results = [];
-      for (j = 0, len1 = array.length; j < len1; j++) {
-        a = array[j];
-        if (a <= head) {
-          results.push(a);
-        }
-      }
-      return results;
-    })();
-    large = (function() {
-      var j, len1, results;
-      results = [];
-      for (j = 0, len1 = array.length; j < len1; j++) {
-        a = array[j];
-        if (a > head) {
-          results.push(a);
-        }
-      }
-      return results;
-    })();
-    return (Util.quicksort(small)).concat([head]).concat(Util.quicksort(large));
-  }
-
-  static pad(n) {
-    if (n < 10) {
-      return '0' + n;
-    } else {
-      return n;
-    }
-  }
-
-  static padStr(n) {
-    if (n < 10) {
-      return '0' + n.toString();
-    } else {
-      return n.toString();
-    }
-  }
-
-  // Return and ISO formated data string
-  static isoDateTime(dateIn) {
-    var date, pad;
-    date = dateIn != null ? dateIn : new Date();
-    console.log('Util.isoDatetime()', date);
-    console.log('Util.isoDatetime()', date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes, date.getUTCSeconds);
-    pad = function(n) {
-      return Util.pad(n);
-    };
-    return date.getFullYear()(+'-' + pad(date.getUTCMonth() + 1) + '-' + pad(date.getUTCDate()) + 'T' + pad(date.getUTCHours()) + ':' + pad(date.getUTCMinutes()) + ':' + pad(date.getUTCSeconds()) + 'Z');
-  }
-
-  static toHMS(unixTime) {
-    var ampm, date, hour, min, sec, time;
-    date = new Date();
-    if (Util.isNum(unixTime)) {
-      date.setTime(unixTime);
-    }
-    hour = date.getHours();
-    ampm = 'AM';
-    if (hour > 12) {
-      hour = hour - 12;
-      ampm = 'PM';
-    }
-    min = ('0' + date.getMinutes()).slice(-2);
-    sec = ('0' + date.getSeconds()).slice(-2);
-    time = `${hour}:${min}:${sec} ${ampm}`;
-    return time;
-  }
-
-  // Generate four random hex digits
-  static hex4() {
-    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-  }
-
-  // Generate a 32 bits hex
-  static hex32() {
-    var hex, i, j;
-    hex = this.hex4();
-    for (i = j = 1; j <= 4; i = ++j) {
-      Util.noop(i);
-      hex += this.hex4();
-    }
-    return hex;
-  }
-
-  // Return a number with fixed decimal places
-  static toFixed(arg, dec = 2) {
-    var num;
-    num = (function() {
-      switch (typeof arg) {
-        case 'number':
-          return arg;
-        case 'string':
-          return parseFloat(arg);
-        default:
-          return 0;
-      }
-    })();
-    return num.toFixed(dec);
-  }
-
-  static toInt(arg) {
-    switch (typeof arg) {
-      case 'number':
-        return Math.floor(arg);
-      case 'string':
-        return parseInt(arg);
-      default:
-        return 0;
-    }
-  }
-
-  static toFloat(arg) {
-    switch (typeof arg) {
-      case 'number':
-        return arg;
-      case 'string':
-        return parseFloat(arg);
-      default:
-        return 0;
-    }
-  }
-
-  static toCap(str) {
-    return str.charAt(0).toUpperCase() + str.substring(1);
-  }
-
-  static unCap(str) {
-    return str.charAt(0).toLowerCase() + str.substring(1);
-  }
-
-  static toArray(objs) {
-    var array, key, obj;
-    if (Util.isArray(objs)) {
-      return objs;
-    } else {
-      array = [];
-      for (key in objs) {
-        if (!hasProp.call(objs, key)) continue;
-        obj = objs[key];
-        array.push(obj);
-      }
-      return array;
-    }
-  }
-
-  
-  // Not working
-  static toArray2(objects, whereIn = null, keyField = 'id') {
-    var array, j, key, len1, object, where;
-    where = whereIn != null ? whereIn : function() {
-      return true;
-    };
-    array = [];
-    if (Util.isArray(objects)) {
-      for (j = 0, len1 = array.length; j < len1; j++) {
-        object = array[j];
-        if (!(where(object))) {
-          continue;
-        }
-        if ((object['id'] != null) && keyField !== 'id') {
-          object[keyField] = object['id'];
-        }
-        array.push(object);
-      }
-    } else {
-      for (key in objects) {
-        if (!hasProp.call(objects, key)) continue;
-        object = objects[key];
-        if (!(where(key, object))) {
-          continue;
-        }
-        object[keyField] = key;
-        array.push(object);
-      }
-    }
-    return array;
-  }
-
-  static toObjects(rows, whereIn = null, keyField = 'id') {
-    var j, key, len1, objects, row, where;
-    where = whereIn != null ? whereIn : function() {
-      return true;
-    };
-    objects = {};
-    if (Util.isArray(rows)) {
-      for (j = 0, len1 = rows.length; j < len1; j++) {
-        row = rows[j];
-        if (!(where(row))) {
-          continue;
-        }
-        if ((row['id'] != null) && keyField !== 'id') {
-          row[keyField] = row['id'];
-        }
-        objects[row[keyField]] = row;
-      }
-    } else {
-      for (key in rows) {
-        row = rows[key];
-        if (!(where(row))) {
-          continue;
-        }
-        row[keyField] = key;
-        objects[key] = row;
-      }
-    }
-    return objects;
-  }
-
-  static lenObject(object, where = function() {
-      return true;
-    }) {
-    var key, len, obj;
-    len = 0;
-    for (key in object) {
-      if (!hasProp.call(object, key)) continue;
-      obj = object[key];
-      if (where(key)) {
-        len = len + 1;
-      }
-    }
-    return len;
-  }
-
-  // Beautiful Code, Chapter 1.
-  // Implements a regular expression matcher that supports character matches,
-  // '.', '^', '$', and '*'.
-
-  // Search for the regexp anywhere in the text.
-  static match(regexp, text) {
-    if (regexp[0] === '^') {
-      return Util.match_here(regexp.slice(1), text);
-    }
-    while (text) {
-      if (Util.match_here(regexp, text)) {
-        return true;
-      }
-      text = text.slice(1);
-    }
-    return false;
-  }
-
-  // Search for the regexp at the beginning of the text.
-  static match_here(regexp, text) {
-    var cur, next;
-    cur = "";
-    next = "";
-    [cur, next] = [regexp[0], regexp[1]];
-    if (regexp.length === 0) {
-      return true;
-    }
-    if (next === '*') {
-      return Util.match_star(cur, regexp.slice(2), text);
-    }
-    if (cur === '$' && !next) {
-      return text.length === 0;
-    }
-    if (text && (cur === '.' || cur === text[0])) {
-      return Util.match_here(regexp.slice(1), text.slice(1));
-    }
-    return false;
-  }
-
-  // Search for a kleene star match at the beginning of the text.
-  static match_star(c, regexp, text) {
-    while (true) {
-      if (Util.match_here(regexp, text)) {
-        return true;
-      }
-      if (!(text && (text[0] === c || c === '.'))) {
-        return false;
-      }
-      text = text.slice(1);
-    }
-  }
-
-  static match_test() {
-    console.log(Util.match_args("ex", "some text"));
-    console.log(Util.match_args("s..t", "spit"));
-    console.log(Util.match_args("^..t", "buttercup"));
-    console.log(Util.match_args("i..$", "cherries"));
-    console.log(Util.match_args("o*m", "vrooooommm!"));
-    return console.log(Util.match_args("^hel*o$", "hellllllo"));
-  }
-
-  static match_args(regexp, text) {
-    return console.log(regexp, text, Util.match(regexp, text));
-  }
-
-  static svgId(name, type, svgType, check = false) {
-    if (check) {
-      return this.id(name, type, svgType);
-    } else {
-      return name + type + svgType;
-    }
-  }
-
-  static css(name, type = '') {
-    return name + type;
-  }
-
-  static icon(name, type, fa) {
-    return name + type + ' fa fa-' + fa;
-  }
-
-  // json - "application/json;charset=utf-8"
-  // svg
-  static mineType(fileType) {
-    var mine;
-    mine = (function() {
-      switch (fileType) {
-        case 'json':
-          return "application/json";
-        case 'adoc':
-          return "text/plain";
-        case 'html':
-          return "text/html";
-        case 'svg':
-          return "image/svg+xml";
-        default:
-          return "text/plain";
-      }
-    })();
-    mine += ";charset=utf-8";
-    return mine;
-  }
-
-  static saveFile(stuff, fileName, fileType) {
-    var blob, downloadLink, url;
-    blob = new Blob([stuff], {
-      type: this.mineType(fileType)
-    });
-    url = window['URL'].createObjectURL(blob);
-    downloadLink = document.createElement("a");
-    downloadLink.href = url;
-    downloadLink.download = fileName;
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-  }
-
-};
-
-// Static class variables have to be declared outside of class declarion to avoid function wrapper
-Util.htmlIds = {}; // Object of unique Html Ids
-
-Util.myVar = 'myVar';
-
-Util.skipReady = false;
-
-Util.modules = [];
-
-Util.instances = [];
-
-Util.logStackNum = 0;
-
-Util.logStackMax = 100;
-
-Util.fills = {};
-
-Util.uniqueIdExt = '';
-
-var Util$1 = Util;
-
-var FontAwe;
-
-FontAwe = {};
-
-FontAwe.icons = {
-  "fas fa-yin-yang": "\uf6ad",
-  "fab fa-pagelines": "\uf18c",
-  "fas fa-network-wired": "\uf6ff",
-  "fas fa-warehouse": "\uf494",
-  "fas fa-infinity": "\uf534",
-  "fas fa-satellite": "\uf7bf",
-  "fas fa-hands": "\uf4c2",
-  "fas fa-chalkboard-teacher": "\uf51c",
-  "fas fa-landmark": "\uf66f",
-  "fas fa-podcast": "\uf2ce",
-  "fas fa-hot-tub": "\uf593",
-  "fas fa-brain": "\uf5dc",
-  "fas fa-pen-fancy": "\uf5ac",
-  "fas fa-shapes": "\uf61f",
-  "fas fa-images": "\uf302",
-  "fas fa-people-carry": "\uf4ce",
-  "fas fa-poll": "\uf681",
-  "fas fa-user-graduate": "\uf501",
-  "fab fa-galactic-republic": "\uf50c",
-  "fas fa-address-book": "\uf2b9",
-  "fas fa-address-card": "\uf2bb",
-  "fas fa-adjust": "\uf042",
-  "fas fa-align-center": "\uf037",
-  "fas fa-align-justify": "\uf039",
-  "fas fa-align-left": "\uf036",
-  "fas fa-align-right": "\uf038",
-  "fas fa-allergies": "\uf461",
-  "fas fa-ambulance": "\uf0f9",
-  "fas fa-american-sign-language-interpreting": "\uf2a3",
-  "fas fa-anchor": "\uf13d",
-  "fas fa-angle-double-down": "\uf103",
-  "fas fa-angle-double-left": "\uf100",
-  "fas fa-angle-double-right": "\uf101",
-  "fas fa-angle-double-up": "\uf102",
-  "fas fa-angle-down": "\uf107",
-  "fas fa-angle-left": "\uf104",
-  "fas fa-angle-right": "\uf105",
-  "fas fa-angle-up": "\uf106",
-  "fas fa-archive": "\uf187",
-  "fas fa-arrow-alt-circle-down": "\uf358",
-  "fas fa-arrow-alt-circle-left": "\uf359",
-  "fas fa-arrow-alt-circle-right": "\uf35a",
-  "fas fa-arrow-alt-circle-up": "\uf35b",
-  "fas fa-arrow-circle-down": "\uf0ab",
-  "fas fa-arrow-circle-left": "\uf0a8",
-  "fas fa-arrow-circle-right": "\uf0a9",
-  "fas fa-arrow-circle-up": "\uf0aa",
-  "fas fa-arrow-down": "\uf063",
-  "fas fa-arrow-left": "\uf060",
-  "fas fa-arrow-right": "\uf061",
-  "fas fa-arrow-up": "\uf062",
-  "fas fa-arrows-alt": "\uf0b2",
-  "fas fa-arrows-alt-h": "\uf337",
-  "fas fa-arrows-alt-v": "\uf338",
-  "fas fa-assistive-listening-systems": "\uf2a2",
-  "fas fa-asterisk": "\uf069",
-  "fas fa-at": "\uf1fa",
-  "fas fa-atom": "\uf5d2",
-  "fas fa-atom fa-spin": "\uf5d2",
-  "fas fa-audio-description": "\uf29e",
-  "fas fa-backward": "\uf04a",
-  "fas fa-balance-scale": "\uf24e",
-  "fas fa-ban": "\uf05e",
-  "fas fa-band-aid": "\uf462",
-  "fas fa-barcode": "\uf02a",
-  "fas fa-bars": "\uf0c9",
-  "fas fa-baseball-ball": "\uf433",
-  "fas fa-basketball-ball": "\uf434",
-  "fas fa-bath": "\uf2cd",
-  "fas fa-battery-empty": "\uf244",
-  "fas fa-battery-full": "\uf240",
-  "fas fa-battery-half": "\uf242",
-  "fas fa-battery-quarter": "\uf243",
-  "fas fa-battery-three-quarters": "\uf241",
-  "fas fa-bed": "\uf236",
-  "fas fa-beer": "\uf0fc",
-  "fas fa-bell": "\uf0f3",
-  "fas fa-bell-slash": "\uf1f6",
-  "fas fa-bicycle": "\uf206",
-  "fas fa-binoculars": "\uf1e5",
-  "fas fa-birthday-cake": "\uf1fd",
-  "fas fa-blind": "\uf29d",
-  "fas fa-bold": "\uf032",
-  "fas fa-bolt": "\uf0e7",
-  "fas fa-bomb": "\uf1e2",
-  "fas fa-book": "\uf02d",
-  "fas fa-bookmark": "\uf02e",
-  "fas fa-bowling-ball": "\uf436",
-  "fas fa-box": "\uf466",
-  "fas fa-box-open": "\uf49e",
-  "fas fa-boxes": "\uf468",
-  "fas fa-braille": "\uf2a1",
-  "fas fa-briefcase": "\uf0b1",
-  "fas fa-briefcase-medical": "\uf469",
-  "fas fa-bug": "\uf188",
-  "fas fa-building": "\uf1ad",
-  "fas fa-bullhorn": "\uf0a1",
-  "fas fa-bullseye": "\uf140",
-  "fas fa-burn": "\uf46a",
-  "fas fa-bus": "\uf207",
-  "fas fa-calculator": "\uf1ec",
-  "fas fa-calendar": "\uf133",
-  "fas fa-calendar-alt": "\uf073",
-  "fas fa-calendar-check": "\uf274",
-  "fas fa-calendar-minus": "\uf272",
-  "fas fa-calendar-plus": "\uf271",
-  "fas fa-calendar-times": "\uf273",
-  "fas fa-camera": "\uf030",
-  "fas fa-camera-retro": "\uf083",
-  "fas fa-capsules": "\uf46b",
-  "fas fa-car": "\uf1b9",
-  "fas fa-caret-down": "\uf0d7",
-  "fas fa-caret-left": "\uf0d9",
-  "fas fa-caret-right": "\uf0da",
-  "fas fa-caret-square-down": "\uf150",
-  "fas fa-caret-square-left": "\uf191",
-  "fas fa-caret-square-right": "\uf152",
-  "fas fa-caret-square-up": "\uf151",
-  "fas fa-caret-up": "\uf0d8",
-  "fas fa-cart-arrow-down": "\uf218",
-  "fas fa-cart-plus": "\uf217",
-  "fas fa-certificate": "\uf0a3",
-  "fas fa-chart-area": "\uf1fe",
-  "fas fa-chart-bar": "\uf080",
-  "fas fa-chart-line": "\uf201",
-  "fas fa-chart-pie": "\uf200",
-  "fas fa-check": "\uf00c",
-  "fas fa-check-circle": "\uf058",
-  "fas fa-check-square": "\uf14a",
-  "fas fa-chess": "\uf439",
-  "fas fa-chess-bishop": "\uf43a",
-  "fas fa-chess-board": "\uf43c",
-  "fas fa-chess-king": "\uf43f",
-  "fas fa-chess-knight": "\uf441",
-  "fas fa-chess-pawn": "\uf443",
-  "fas fa-chess-queen": "\uf445",
-  "fas fa-chess-rook": "\uf447",
-  "fas fa-chevron-circle-down": "\uf13a",
-  "fas fa-chevron-circle-left": "\uf137",
-  "fas fa-chevron-circle-right": "\uf138",
-  "fas fa-chevron-circle-up": "\uf139",
-  "fas fa-chevron-down": "\uf078",
-  "fas fa-chevron-left": "\uf053",
-  "fas fa-chevron-right": "\uf054",
-  "fas fa-chevron-up": "\uf077",
-  "fas fa-child": "\uf1ae",
-  "fas fa-circle": "\uf111",
-  "fas fa-circle-notch": "\uf1ce",
-  "fas fa-clipboard": "\uf328",
-  "fas fa-clipboard-check": "\uf46c",
-  "fas fa-clipboard-list": "\uf46d",
-  "fas fa-clock": "\uf017",
-  "fas fa-clone": "\uf24d",
-  "fas fa-closed-captioning": "\uf20a",
-  "fas fa-cloud": "\uf0c2",
-  "fas fa-cloud-download-alt": "\uf381",
-  "fas fa-cloud-upload-alt": "\uf382",
-  "fas fa-code": "\uf121",
-  "fas fa-code-branch": "\uf126",
-  "fas fa-coffee": "\uf0f4",
-  "fas fa-cog": "\uf013",
-  "fas fa-cogs": "\uf085",
-  "fas fa-columns": "\uf0db",
-  "fas fa-comment": "\uf075",
-  "fas fa-comment-alt": "\uf27a",
-  "fas fa-comment-dots": "\uf4ad",
-  "fas fa-comment-slash": "\uf4b3",
-  "fas fa-comments": "\uf086",
-  "fas fa-compass": "\uf14e",
-  "fas fa-compress": "\uf066",
-  "fas fa-copy": "\uf0c5",
-  "fas fa-copyright": "\uf1f9",
-  "fas fa-couch": "\uf4b8",
-  "fas fa-credit-card": "\uf09d",
-  "fas fa-crop": "\uf125",
-  "fas fa-crosshairs": "\uf05b",
-  "fas fa-cube": "\uf1b2",
-  "fas fa-cubes": "\uf1b3",
-  "fas fa-cut": "\uf0c4",
-  "fas fa-database": "\uf1c0",
-  "fas fa-deaf": "\uf2a4",
-  "fas fa-desktop": "\uf108",
-  "fas fa-dharmachakra": "\uf655",
-  "fas fa-diagnoses": "\uf470",
-  "fas fa-dna": "\uf471",
-  "fas fa-dollar-sign": "\uf155",
-  "fas fa-dolly": "\uf472",
-  "fas fa-dolly-flatbed": "\uf474",
-  "fas fa-donate": "\uf4b9",
-  "fas fa-dot-circle": "\uf192",
-  "fas fa-dove": "\uf4ba",
-  "fas fa-download": "\uf019",
-  "fas fa-edit": "\uf044",
-  "fas fa-eject": "\uf052",
-  "fas fa-ellipsis-h": "\uf141",
-  "fas fa-ellipsis-v": "\uf142",
-  "fas fa-envelope": "\uf0e0",
-  "fas fa-envelope-open": "\uf2b6",
-  "fas fa-envelope-square": "\uf199",
-  "fas fa-eraser": "\uf12d",
-  "fas fa-euro-sign": "\uf153",
-  "fas fa-exchange-alt": "\uf362",
-  "fas fa-exclamation": "\uf12a",
-  "fas fa-exclamation-circle": "\uf06a",
-  "fas fa-exclamation-triangle": "\uf071",
-  "fas fa-expand": "\uf065",
-  "fas fa-expand-arrows-alt": "\uf31e",
-  "fas fa-external-link-alt": "\uf35d",
-  "fas fa-external-link-square-alt": "\uf360",
-  "fas fa-eye": "\uf06e",
-  "fas fa-eye-dropper": "\uf1fb",
-  "fas fa-eye-slash": "\uf070",
-  "fas fa-fast-backward": "\uf049",
-  "fas fa-fast-forward": "\uf050",
-  "fas fa-fax": "\uf1ac",
-  "fas fa-female": "\uf182",
-  "fas fa-fighter-jet": "\uf0fb",
-  "fas fa-file": "\uf15b",
-  "fas fa-file-alt": "\uf15c",
-  "fas fa-file-archive": "\uf1c6",
-  "fas fa-file-audio": "\uf1c7",
-  "fas fa-file-code": "\uf1c9",
-  "fas fa-file-excel": "\uf1c3",
-  "fas fa-file-image": "\uf1c5",
-  "fas fa-file-medical": "\uf477",
-  "fas fa-file-medical-alt": "\uf478",
-  "fas fa-file-pdf": "\uf1c1",
-  "fas fa-file-powerpoint": "\uf1c4",
-  "fas fa-file-video": "\uf1c8",
-  "fas fa-file-word": "\uf1c2",
-  "fas fa-film": "\uf008",
-  "fas fa-filter": "\uf0b0",
-  "fas fa-fire": "\uf06d",
-  "fas fa-fire-extinguisher": "\uf134",
-  "fas fa-first-aid": "\uf479",
-  "fas fa-flag": "\uf024",
-  "fas fa-flag-checkered": "\uf11e",
-  "fas fa-flask": "\uf0c3",
-  "fas fa-folder": "\uf07b",
-  "fas fa-folder-open": "\uf07c",
-  "fas fa-font": "\uf031",
-  "fas fa-football-ball": "\uf44e",
-  "fas fa-forward": "\uf04e",
-  "fas fa-frown": "\uf119",
-  "fas fa-futbol": "\uf1e3",
-  "fas fa-gamepad": "\uf11b",
-  "fas fa-gavel": "\uf0e3",
-  "fas fa-gem": "\uf3a5",
-  "fas fa-genderless": "\uf22d",
-  "fas fa-gift": "\uf06b",
-  "fas fa-glass-martini": "\uf000",
-  "fas fa-globe": "\uf0ac",
-  "fas fa-golf-ball": "\uf450",
-  "fas fa-graduation-cap": "\uf19d",
-  "fas fa-h-square": "\uf0fd",
-  "fas fa-hand-holding": "\uf4bd",
-  "fas fa-hand-holding-heart": "\uf4be",
-  "fas fa-hand-holding-usd": "\uf4c0",
-  "fas fa-hand-lizard": "\uf258",
-  "fas fa-hand-paper": "\uf256",
-  "fas fa-hand-peace": "\uf25b",
-  "fas fa-hand-point-down": "\uf0a7",
-  "fas fa-hand-point-left": "\uf0a5",
-  "fas fa-hand-point-right": "\uf0a4",
-  "fas fa-hand-point-up": "\uf0a6",
-  "fas fa-hand-pointer": "\uf25a",
-  "fas fa-hand-rock": "\uf255",
-  "fas fa-hand-scissors": "\uf257",
-  "fas fa-hand-spock": "\uf259",
-  "fas fa-hands": "\uf4c2",
-  "fas fa-hands-helping": "\uf4c4",
-  "fas fa-handshake": "\uf2b5",
-  "fas fa-hashtag": "\uf292",
-  "fas fa-hdd": "\uf0a0",
-  "fas fa-heading": "\uf1dc",
-  "fas fa-headphones": "\uf025",
-  "fas fa-heart": "\uf004",
-  "fas fa-heartbeat": "\uf21e",
-  "fas fa-history": "\uf1da",
-  "fas fa-hockey-puck": "\uf453",
-  "fas fa-home": "\uf015",
-  "fas fa-hospital": "\uf0f8",
-  "fas fa-hospital-alt": "\uf47d",
-  "fas fa-hospital-symbol": "\uf47e",
-  "fas fa-hourglass": "\uf254",
-  "fas fa-hourglass-end": "\uf253",
-  "fas fa-hourglass-half": "\uf252",
-  "fas fa-hourglass-start": "\uf251",
-  "fas fa-i-cursor": "\uf246",
-  "fas fa-id-badge": "\uf2c1",
-  "fas fa-id-card": "\uf2c2",
-  "fas fa-id-card-alt": "\uf47f",
-  "fas fa-image": "\uf03e",
-  "fas fa-inbox": "\uf01c",
-  "fas fa-indent": "\uf03c",
-  "fas fa-industry": "\uf275",
-  "fas fa-info": "\uf129",
-  "fas fa-info-circle": "\uf05a",
-  "fas fa-italic": "\uf033",
-  "fas fa-key": "\uf084",
-  "fas fa-keyboard": "\uf11c",
-  "fas fa-language": "\uf1ab",
-  "fas fa-laptop": "\uf109",
-  "fas fa-leaf": "\uf06c",
-  "fas fa-lemon": "\uf094",
-  "fas fa-level-down-alt": "\uf3be",
-  "fas fa-level-up-alt": "\uf3bf",
-  "fas fa-life-ring": "\uf1cd",
-  "fas fa-lightbulb": "\uf0eb",
-  "fas fa-link": "\uf0c1",
-  "fas fa-lira-sign": "\uf195",
-  "fas fa-list": "\uf03a",
-  "fas fa-list-alt": "\uf022",
-  "fas fa-list-ol": "\uf0cb",
-  "fas fa-list-ul": "\uf0ca",
-  "fas fa-location-arrow": "\uf124",
-  "fas fa-lock": "\uf023",
-  "fas fa-lock-open": "\uf3c1",
-  "fas fa-long-arrow-alt-down": "\uf309",
-  "fas fa-long-arrow-alt-left": "\uf30a",
-  "fas fa-long-arrow-alt-right": "\uf30b",
-  "fas fa-long-arrow-alt-up": "\uf30c",
-  "fas fa-low-vision": "\uf2a8",
-  "fas fa-magic": "\uf0d0",
-  "fas fa-magnet": "\uf076",
-  "fas fa-male": "\uf183",
-  "fas fa-map": "\uf279",
-  "fas fa-map-marker": "\uf041",
-  "fas fa-map-marker-alt": "\uf3c5",
-  "fas fa-map-pin": "\uf276",
-  "fas fa-map-signs": "\uf277",
-  "fas fa-mars": "\uf222",
-  "fas fa-mars-double": "\uf227",
-  "fas fa-mars-stroke": "\uf229",
-  "fas fa-mars-stroke-h": "\uf22b",
-  "fas fa-mars-stroke-v": "\uf22a",
-  "fas fa-medkit": "\uf0fa",
-  "fas fa-meh": "\uf11a",
-  "fas fa-mercury": "\uf223",
-  "fas fa-microchip": "\uf2db",
-  "fas fa-microphone": "\uf130",
-  "fas fa-microphone-slash": "\uf131",
-  "fas fa-minus": "\uf068",
-  "fas fa-minus-circle": "\uf056",
-  "fas fa-minus-square": "\uf146",
-  "fas fa-mobile": "\uf10b",
-  "fas fa-mobile-alt": "\uf3cd",
-  "fas fa-money-bill-alt": "\uf3d1",
-  "fas fa-moon": "\uf186",
-  "fas fa-motorcycle": "\uf21c",
-  "fas fa-mouse-pointer": "\uf245",
-  "fas fa-music": "\uf001",
-  "fas fa-neuter": "\uf22c",
-  "fas fa-newspaper": "\uf1ea",
-  "fas fa-notes-medical": "\uf481",
-  "fas fa-object-group": "\uf247",
-  "fas fa-object-ungroup": "\uf248",
-  "fas fa-outdent": "\uf03b",
-  "fas fa-paint-brush": "\uf1fc",
-  "fas fa-pallet": "\uf482",
-  "fas fa-paper-plane": "\uf1d8",
-  "fas fa-paperclip": "\uf0c6",
-  "fas fa-parachute-box": "\uf4cd",
-  "fas fa-paragraph": "\uf1dd",
-  "fas fa-paste": "\uf0ea",
-  "fas fa-pause": "\uf04c",
-  "fas fa-pause-circle": "\uf28b",
-  "fas fa-paw": "\uf1b0",
-  "fas fa-pen-square": "\uf14b",
-  "fas fa-pencil-alt": "\uf303",
-  "fas fa-percent": "\uf295",
-  "fas fa-phone": "\uf095",
-  "fas fa-phone-slash": "\uf3dd",
-  "fas fa-phone-square": "\uf098",
-  "fas fa-phone-volume": "\uf2a0",
-  "fas fa-piggy-bank": "\uf4d3",
-  "fas fa-pills": "\uf484",
-  "fas fa-plane": "\uf072",
-  "fas fa-play": "\uf04b",
-  "fas fa-play-circle": "\uf144",
-  "fas fa-plug": "\uf1e6",
-  "fas fa-plus": "\uf067",
-  "fas fa-plus-circle": "\uf055",
-  "fas fa-plus-square": "\uf0fe",
-  "fas fa-poo": "\uf2fe",
-  "fas fa-pound-sign": "\uf154",
-  "fas fa-power-off": "\uf011",
-  "fas fa-prescription-bottle": "\uf485",
-  "fas fa-prescription-bottle-alt": "\uf486",
-  "fas fa-print": "\uf02f",
-  "fas fa-procedures": "\uf487",
-  "fas fa-puzzle-piece": "\uf12e",
-  "fas fa-qrcode": "\uf029",
-  "fas fa-question": "\uf128",
-  "fas fa-question-circle": "\uf059",
-  "fas fa-quidditch": "\uf458",
-  "fas fa-quote-left": "\uf10d",
-  "fas fa-quote-right": "\uf10e",
-  "fas fa-random": "\uf074",
-  "fas fa-recycle": "\uf1b8",
-  "fas fa-redo": "\uf01e",
-  "fas fa-redo-alt": "\uf2f9",
-  "fas fa-registered": "\uf25d",
-  "fas fa-reply": "\uf3e5",
-  "fas fa-reply-all": "\uf122",
-  "fas fa-retweet": "\uf079",
-  "fas fa-ribbon": "\uf4d6",
-  "fas fa-road": "\uf018",
-  "fas fa-rocket": "\uf135",
-  "fas fa-rss": "\uf09e",
-  "fas fa-rss-square": "\uf143",
-  "fas fa-ruble-sign": "\uf158",
-  "fas fa-rupee-sign": "\uf156",
-  "fas fa-save": "\uf0c7",
-  "fas fa-search": "\uf002",
-  "fas fa-search-minus": "\uf010",
-  "fas fa-search-plus": "\uf00e",
-  "fas fa-seedling": "\uf4d8",
-  "fas fa-server": "\uf233",
-  "fas fa-share": "\uf064",
-  "fas fa-share-alt": "\uf1e0",
-  "fas fa-share-alt-square": "\uf1e1",
-  "fas fa-share-square": "\uf14d",
-  "fas fa-shekel-sign": "\uf20b",
-  "fas fa-shield-alt": "\uf3ed",
-  "fas fa-ship": "\uf21a",
-  "fas fa-shipping-fast": "\uf48b",
-  "fas fa-shopping-bag": "\uf290",
-  "fas fa-shopping-basket": "\uf291",
-  "fas fa-shopping-cart": "\uf07a",
-  "fas fa-shower": "\uf2cc",
-  "fas fa-sign": "\uf4d9",
-  "fas fa-sign-in-alt": "\uf2f6",
-  "fas fa-sign-language": "\uf2a7",
-  "fas fa-sign-out-alt": "\uf2f5",
-  "fas fa-signal": "\uf012",
-  "fas fa-sitemap": "\uf0e8",
-  "fas fa-sliders-h": "\uf1de",
-  "fas fa-smile": "\uf118",
-  "fas fa-smoking": "\uf48d",
-  "fas fa-snowflake": "\uf2dc",
-  "fas fa-sort": "\uf0dc",
-  "fas fa-sort-alpha-down": "\uf15d",
-  "fas fa-sort-alpha-up": "\uf15e",
-  "fas fa-sort-amount-down": "\uf160",
-  "fas fa-sort-amount-up": "\uf161",
-  "fas fa-sort-down": "\uf0dd",
-  "fas fa-sort-numeric-down": "\uf162",
-  "fas fa-sort-numeric-up": "\uf163",
-  "fas fa-sort-up": "\uf0de",
-  "fas fa-space-shuttle": "\uf197",
-  "fas fa-spinner": "\uf110",
-  "fas fa-spinner fa-pulse": "\uf110",
-  "fas fa-square": "\uf0c8",
-  "fas fa-square-full": "\uf45c",
-  "fas fa-star": "\uf005",
-  "fas fa-star-half": "\uf089",
-  "fas fa-step-backward": "\uf048",
-  "fas fa-step-forward": "\uf051",
-  "fas fa-stethoscope": "\uf0f1",
-  "fas fa-sticky-note": "\uf249",
-  "fas fa-stop": "\uf04d",
-  "fas fa-stop-circle": "\uf28d",
-  "fas fa-stopwatch": "\uf2f2",
-  "fas fa-street-view": "\uf21d",
-  "fas fa-strikethrough": "\uf0cc",
-  "fas fa-subscript": "\uf12c",
-  "fas fa-subway": "\uf239",
-  "fas fa-suitcase": "\uf0f2",
-  "fas fa-sun": "\uf185",
-  "fas fa-superscript": "\uf12b",
-  "fas fa-sync": "\uf021",
-  "fas fa-sync fa-spin": "\uf021",
-  "fas fa-sync-alt": "\uf2f1",
-  "fas fa-syringe": "\uf48e",
-  "fas fa-table": "\uf0ce",
-  "fas fa-table-tennis": "\uf45d",
-  "fas fa-tablet": "\uf10a",
-  "fas fa-tablet-alt": "\uf3fa",
-  "fas fa-tablets": "\uf490",
-  "fas fa-tachometer-alt": "\uf3fd",
-  "fas fa-tag": "\uf02b",
-  "fas fa-tags": "\uf02c",
-  "fas fa-tape": "\uf4db",
-  "fas fa-tasks": "\uf0ae",
-  "fas fa-taxi": "\uf1ba",
-  "fas fa-terminal": "\uf120",
-  "fas fa-text-height": "\uf034",
-  "fas fa-text-width": "\uf035",
-  "fas fa-th": "\uf00a",
-  "fas fa-th-large": "\uf009",
-  "fas fa-th-list": "\uf00b",
-  "fas fa-thermometer": "\uf491",
-  "fas fa-thermometer-empty": "\uf2cb",
-  "fas fa-thermometer-full": "\uf2c7",
-  "fas fa-thermometer-half": "\uf2c9",
-  "fas fa-thermometer-quarter": "\uf2ca",
-  "fas fa-thermometer-three-quarters": "\uf2c8",
-  "fas fa-thumbs-down": "\uf165",
-  "fas fa-thumbs-up": "\uf164",
-  "fas fa-thumbtack": "\uf08d",
-  "fas fa-ticket-alt": "\uf3ff",
-  "fas fa-times": "\uf00d",
-  "fas fa-times-circle": "\uf057",
-  "fas fa-tint": "\uf043",
-  "fas fa-toggle-off": "\uf204",
-  "fas fa-toggle-on": "\uf205",
-  "fas fa-trademark": "\uf25c",
-  "fas fa-train": "\uf238",
-  "fas fa-transgender": "\uf224",
-  "fas fa-transgender-alt": "\uf225",
-  "fas fa-trash": "\uf1f8",
-  "fas fa-trash-alt": "\uf2ed",
-  "fas fa-tree": "\uf1bb",
-  "fas fa-trophy": "\uf091",
-  "fas fa-truck": "\uf0d1",
-  "fas fa-truck-loading": "\uf4de",
-  "fas fa-truck-moving": "\uf4df",
-  "fas fa-tty": "\uf1e4",
-  "fas fa-tv": "\uf26c",
-  "fas fa-umbrella": "\uf0e9",
-  "fas fa-underline": "\uf0cd",
-  "fas fa-undo": "\uf0e2",
-  "fas fa-undo-alt": "\uf2ea",
-  "fas fa-universal-access": "\uf29a",
-  "fas fa-university": "\uf19c",
-  "fas fa-unlink": "\uf127",
-  "fas fa-unlock": "\uf09c",
-  "fas fa-unlock-alt": "\uf13e",
-  "fas fa-upload": "\uf093",
-  "fas fa-user": "\uf007",
-  "fas fa-user-circle": "\uf2bd",
-  "fas fa-user-md": "\uf0f0",
-  "fas fa-user-plus": "\uf234",
-  "fas fa-user-secret": "\uf21b",
-  "fas fa-user-times": "\uf235",
-  "fas fa-user-friends": "\uf500",
-  "fas fa-users": "\uf0c0",
-  "fas fa-utensil-spoon": "\uf2e5",
-  "fas fa-utensils": "\uf2e7",
-  "fas fa-venus": "\uf221",
-  "fas fa-venus-double": "\uf226",
-  "fas fa-venus-mars": "\uf228",
-  "fas fa-vial": "\uf492",
-  "fas fa-vials": "\uf493",
-  "fas fa-video": "\uf03d",
-  "fas fa-video-slash": "\uf4e2",
-  "fas fa-volleyball-ball": "\uf45f",
-  "fas fa-volume-down": "\uf027",
-  "fas fa-volume-off": "\uf026",
-  "fas fa-volume-up": "\uf028",
-  "fas fa-weight": "\uf496",
-  "fas fa-wheelchair": "\uf193",
-  "fas fa-wifi": "\uf1eb",
-  "fas fa-window-close": "\uf410",
-  "fas fa-window-maximize": "\uf2d0",
-  "fas fa-window-minimize": "\uf2d1",
-  "fas fa-window-restore": "\uf2d2",
-  "fas fa-wine-glass": "\uf4e3",
-  "fas fa-won-sign": "\uf159",
-  "fas fa-wrench": "\uf0ad",
-  "fas fa-x-ray": "\uf497",
-  "fas fa-yen-sign": "\uf157",
-  "fab fa-500px": "\uf26e",
-  "fab fa-accessible-icon": "\uf368",
-  "fab fa-accusoft": "\uf369",
-  "fab fa-adn": "\uf170",
-  "fab fa-adversal": "\uf36a",
-  "fab fa-affiliatetheme": "\uf36b",
-  "fab fa-algolia": "\uf36c",
-  "fab fa-amazon": "\uf270",
-  "fab fa-amazon-pay": "\uf42c",
-  "fab fa-amilia": "\uf36d",
-  "fab fa-android": "\uf17b",
-  "fab fa-angellist": "\uf209",
-  "fab fa-angrycreative": "\uf36e",
-  "fab fa-angular": "\uf420",
-  "fab fa-app-store": "\uf36f",
-  "fab fa-app-store-ios": "\uf370",
-  "fab fa-apper": "\uf371",
-  "fab fa-apple": "\uf179",
-  "fab fa-apple-pay": "\uf415",
-  "fab fa-asymmetrik": "\uf372",
-  "fab fa-audible": "\uf373",
-  "fab fa-autoprefixer": "\uf41c",
-  "fab fa-avianex": "\uf374",
-  "fab fa-aviato": "\uf421",
-  "fab fa-aws": "\uf375",
-  "fab fa-bandcamp": "\uf2d5",
-  "fab fa-behance": "\uf1b4",
-  "fab fa-behance-square": "\uf1b5",
-  "fab fa-bimobject": "\uf378",
-  "fab fa-bitbucket": "\uf171",
-  "fab fa-bitcoin": "\uf379",
-  "fab fa-bity": "\uf37a",
-  "fab fa-black-tie": "\uf27e",
-  "fab fa-blackberry": "\uf37b",
-  "fab fa-blogger": "\uf37c",
-  "fab fa-blogger-b": "\uf37d",
-  "fab fa-bluetooth": "\uf293",
-  "fab fa-bluetooth-b": "\uf294",
-  "fab fa-btc": "\uf15a",
-  "fab fa-buromobelexperte": "\uf37f",
-  "fab fa-buysellads": "\uf20d",
-  "fab fa-cc-amazon-pay": "\uf42d",
-  "fab fa-cc-amex": "\uf1f3",
-  "fab fa-cc-apple-pay": "\uf416",
-  "fab fa-cc-diners-club": "\uf24c",
-  "fab fa-cc-discover": "\uf1f2",
-  "fab fa-cc-jcb": "\uf24b",
-  "fab fa-cc-mastercard": "\uf1f1",
-  "fab fa-cc-paypal": "\uf1f4",
-  "fab fa-cc-stripe": "\uf1f5",
-  "fab fa-cc-visa": "\uf1f0",
-  "fab fa-centercode": "\uf380",
-  "fab fa-chrome": "\uf268",
-  "fab fa-cloudscale": "\uf383",
-  "fab fa-cloudsmith": "\uf384",
-  "fab fa-cloudversify": "\uf385",
-  "fab fa-codepen": "\uf1cb",
-  "fab fa-codiepie": "\uf284",
-  "fab fa-connectdevelop": "\uf20e",
-  "fab fa-contao": "\uf26d",
-  "fab fa-cpanel": "\uf388",
-  "fab fa-creative-commons": "\uf25e",
-  "fab fa-css3": "\uf13c",
-  "fab fa-css3-alt": "\uf38b",
-  "fab fa-cuttlefish": "\uf38c",
-  "fab fa-d-and-d": "\uf38d",
-  "fab fa-dashcube": "\uf210",
-  "fab fa-delicious": "\uf1a5",
-  "fab fa-deploydog": "\uf38e",
-  "fab fa-deskpro": "\uf38f",
-  "fab fa-deviantart": "\uf1bd",
-  "fab fa-digg": "\uf1a6",
-  "fab fa-digital-ocean": "\uf391",
-  "fab fa-discord": "\uf392",
-  "fab fa-discourse": "\uf393",
-  "fab fa-dochub": "\uf394",
-  "fab fa-docker": "\uf395",
-  "fab fa-draft2digital": "\uf396",
-  "fab fa-dribbble": "\uf17d",
-  "fab fa-dribbble-square": "\uf397",
-  "fab fa-dropbox": "\uf16b",
-  "fab fa-drupal": "\uf1a9",
-  "fab fa-dyalog": "\uf399",
-  "fab fa-earlybirds": "\uf39a",
-  "fab fa-edge": "\uf282",
-  "fab fa-elementor": "\uf430",
-  "fab fa-ember": "\uf423",
-  "fab fa-empire": "\uf1d1",
-  "fab fa-envira": "\uf299",
-  "fab fa-erlang": "\uf39d",
-  "fab fa-ethereum": "\uf42e",
-  "fab fa-etsy": "\uf2d7",
-  "fab fa-expeditedssl": "\uf23e",
-  "fab fa-facebook": "\uf09a",
-  "fab fa-facebook-f": "\uf39e",
-  "fab fa-facebook-messenger": "\uf39f",
-  "fab fa-facebook-square": "\uf082",
-  "fab fa-firefox": "\uf269",
-  "fab fa-first-order": "\uf2b0",
-  "fab fa-firstdraft": "\uf3a1",
-  "fab fa-flickr": "\uf16e",
-  "fab fa-flipboard": "\uf44d",
-  "fab fa-fly": "\uf417",
-  "fab fa-font-awesome": "\uf2b4",
-  "fab fa-font-awesome-alt": "\uf35c",
-  "fab fa-font-awesome-flag": "\uf425",
-  "fab fa-fonticons": "\uf280",
-  "fab fa-fonticons-fi": "\uf3a2",
-  "fab fa-fort-awesome": "\uf286",
-  "fab fa-fort-awesome-alt": "\uf3a3",
-  "fab fa-forumbee": "\uf211",
-  "fab fa-foursquare": "\uf180",
-  "fab fa-free-code-camp": "\uf2c5",
-  "fab fa-freebsd": "\uf3a4",
-  "fab fa-get-pocket": "\uf265",
-  "fab fa-gg": "\uf260",
-  "fab fa-gg-circle": "\uf261",
-  "fab fa-git": "\uf1d3",
-  "fab fa-git-square": "\uf1d2",
-  "fab fa-github": "\uf09b",
-  "fab fa-github-alt": "\uf113",
-  "fab fa-github-square": "\uf092",
-  "fab fa-gitkraken": "\uf3a6",
-  "fab fa-gitlab": "\uf296",
-  "fab fa-gitter": "\uf426",
-  "fab fa-glide": "\uf2a5",
-  "fab fa-glide-g": "\uf2a6",
-  "fab fa-gofore": "\uf3a7",
-  "fab fa-goodreads": "\uf3a8",
-  "fab fa-goodreads-g": "\uf3a9",
-  "fab fa-google": "\uf1a0",
-  "fab fa-google-drive": "\uf3aa",
-  "fab fa-google-play": "\uf3ab",
-  "fab fa-google-plus": "\uf2b3",
-  "fab fa-google-plus-g": "\uf0d5",
-  "fab fa-google-plus-square": "\uf0d4",
-  "fab fa-google-wallet": "\uf1ee",
-  "fab fa-gratipay": "\uf184",
-  "fab fa-grav": "\uf2d6",
-  "fab fa-gripfire": "\uf3ac",
-  "fab fa-grunt": "\uf3ad",
-  "fab fa-gulp": "\uf3ae",
-  "fab fa-hacker-news": "\uf1d4",
-  "fab fa-hacker-news-square": "\uf3af",
-  "fab fa-hips": "\uf452",
-  "fab fa-hire-a-helper": "\uf3b0",
-  "fab fa-hooli": "\uf427",
-  "fab fa-hotjar": "\uf3b1",
-  "fab fa-houzz": "\uf27c",
-  "fab fa-html5": "\uf13b",
-  "fab fa-hubspot": "\uf3b2",
-  "fab fa-imdb": "\uf2d8",
-  "fab fa-instagram": "\uf16d",
-  "fab fa-internet-explorer": "\uf26b",
-  "fab fa-ioxhost": "\uf208",
-  "fab fa-itunes": "\uf3b4",
-  "fab fa-itunes-note": "\uf3b5",
-  "fab fa-java": "\uf4e4",
-  "fab fa-jenkins": "\uf3b6",
-  "fab fa-joget": "\uf3b7",
-  "fab fa-joomla": "\uf1aa",
-  "fab fa-js": "\uf3b8",
-  "fab fa-js-square": "\uf3b9",
-  "fab fa-jsfiddle": "\uf1cc",
-  "fab fa-keycdn": "\uf3ba",
-  "fab fa-kickstarter": "\uf3bb",
-  "fab fa-kickstarter-k": "\uf3bc",
-  "fab fa-korvue": "\uf42f",
-  "fab fa-laravel": "\uf3bd",
-  "fab fa-lastfm": "\uf202",
-  "fab fa-lastfm-square": "\uf203",
-  "fab fa-leanpub": "\uf212",
-  "fab fa-less": "\uf41d",
-  "fab fa-line": "\uf3c0",
-  "fab fa-linkedin": "\uf08c",
-  "fab fa-linkedin-in": "\uf0e1",
-  "fab fa-linode": "\uf2b8",
-  "fab fa-linux": "\uf17c",
-  "fab fa-lyft": "\uf3c3",
-  "fab fa-magento": "\uf3c4",
-  "fab fa-maxcdn": "\uf136",
-  "fab fa-medapps": "\uf3c6",
-  "fab fa-medium": "\uf23a",
-  "fab fa-medium-m": "\uf3c7",
-  "fab fa-medrt": "\uf3c8",
-  "fab fa-meetup": "\uf2e0",
-  "fab fa-microsoft": "\uf3ca",
-  "fab fa-mix": "\uf3cb",
-  "fab fa-mixcloud": "\uf289",
-  "fab fa-mizuni": "\uf3cc",
-  "fab fa-modx": "\uf285",
-  "fab fa-monero": "\uf3d0",
-  "fab fa-napster": "\uf3d2",
-  "fab fa-nintendo-switch": "\uf418",
-  "fab fa-node": "\uf419",
-  "fab fa-node-js": "\uf3d3",
-  "fab fa-npm": "\uf3d4",
-  "fab fa-ns8": "\uf3d5",
-  "fab fa-nutritionix": "\uf3d6",
-  "fab fa-odnoklassniki": "\uf263",
-  "fab fa-odnoklassniki-square": "\uf264",
-  "fab fa-opencart": "\uf23d",
-  "fab fa-openid": "\uf19b",
-  "fab fa-opera": "\uf26a",
-  "fab fa-optin-monster": "\uf23c",
-  "fab fa-osi": "\uf41a",
-  "fab fa-page4": "\uf3d7",
-  "fab fa-pagelines": "\uf18c",
-  "fab fa-palfed": "\uf3d8",
-  "fab fa-patreon": "\uf3d9",
-  "fab fa-paypal": "\uf1ed",
-  "fab fa-periscope": "\uf3da",
-  "fab fa-phabricator": "\uf3db",
-  "fab fa-phoenix-framework": "\uf3dc",
-  "fab fa-php": "\uf457",
-  "fab fa-pied-piper": "\uf2ae",
-  "fab fa-pied-piper-alt": "\uf1a8",
-  "fab fa-pied-piper-hat": "\uf4e5",
-  "fab fa-pied-piper-pp": "\uf1a7",
-  "fab fa-pinterest": "\uf0d2",
-  "fab fa-pinterest-p": "\uf231",
-  "fab fa-pinterest-square": "\uf0d3",
-  "fab fa-playstation": "\uf3df",
-  "fab fa-product-hunt": "\uf288",
-  "fab fa-pushed": "\uf3e1",
-  "fab fa-python": "\uf3e2",
-  "fab fa-qq": "\uf1d6",
-  "fab fa-quinscape": "\uf459",
-  "fab fa-quora": "\uf2c4",
-  "fab fa-ravelry": "\uf2d9",
-  "fab fa-react": "\uf41b",
-  "fab fa-readme": "\uf4d5",
-  "fab fa-rebel": "\uf1d0",
-  "fab fa-red-river": "\uf3e3",
-  "fab fa-reddit": "\uf1a1",
-  "fab fa-reddit-alien": "\uf281",
-  "fab fa-reddit-square": "\uf1a2",
-  "fab fa-rendact": "\uf3e4",
-  "fab fa-renren": "\uf18b",
-  "fab fa-replyd": "\uf3e6",
-  "fab fa-resolving": "\uf3e7",
-  "fab fa-rocketchat": "\uf3e8",
-  "fab fa-rockrms": "\uf3e9",
-  "fab fa-safari": "\uf267",
-  "fab fa-sass": "\uf41e",
-  "fab fa-schlix": "\uf3ea",
-  "fab fa-scribd": "\uf28a",
-  "fab fa-searchengin": "\uf3eb",
-  "fab fa-sellcast": "\uf2da",
-  "fab fa-sellsy": "\uf213",
-  "fab fa-servicestack": "\uf3ec",
-  "fab fa-shirtsinbulk": "\uf214",
-  "fab fa-simplybuilt": "\uf215",
-  "fab fa-sistrix": "\uf3ee",
-  "fab fa-skyatlas": "\uf216",
-  "fab fa-skype": "\uf17e",
-  "fab fa-slack": "\uf198",
-  "fab fa-slack-hash": "\uf3ef",
-  "fab fa-slideshare": "\uf1e7",
-  "fab fa-snapchat": "\uf2ab",
-  "fab fa-snapchat-ghost": "\uf2ac",
-  "fab fa-snapchat-square": "\uf2ad",
-  "fab fa-soundcloud": "\uf1be",
-  "fab fa-speakap": "\uf3f3",
-  "fab fa-spotify": "\uf1bc",
-  "fab fa-stack-exchange": "\uf18d",
-  "fab fa-stack-overflow": "\uf16c",
-  "fab fa-staylinked": "\uf3f5",
-  "fab fa-steam": "\uf1b6",
-  "fab fa-steam-square": "\uf1b7",
-  "fab fa-steam-symbol": "\uf3f6",
-  "fab fa-sticker-mule": "\uf3f7",
-  "fab fa-strava": "\uf428",
-  "fab fa-stripe": "\uf429",
-  "fab fa-stripe-s": "\uf42a",
-  "fab fa-studiovinari": "\uf3f8",
-  "fab fa-stumbleupon": "\uf1a4",
-  "fab fa-stumbleupon-circle": "\uf1a3",
-  "fab fa-superpowers": "\uf2dd",
-  "fab fa-supple": "\uf3f9",
-  "fab fa-telegram": "\uf2c6",
-  "fab fa-telegram-plane": "\uf3fe",
-  "fab fa-tencent-weibo": "\uf1d5",
-  "fab fa-themeisle": "\uf2b2",
-  "fab fa-trello": "\uf181",
-  "fab fa-tripadvisor": "\uf262",
-  "fab fa-tumblr": "\uf173",
-  "fab fa-tumblr-square": "\uf174",
-  "fab fa-twitch": "\uf1e8",
-  "fab fa-twitter": "\uf099",
-  "fab fa-twitter-square": "\uf081",
-  "fab fa-typo3": "\uf42b",
-  "fab fa-uber": "\uf402",
-  "fab fa-uikit": "\uf403",
-  "fab fa-uniregistry": "\uf404",
-  "fab fa-untappd": "\uf405",
-  "fab fa-usb": "\uf287",
-  "fab fa-ussunnah": "\uf407",
-  "fab fa-vaadin": "\uf408",
-  "fab fa-viacoin": "\uf237",
-  "fab fa-viadeo": "\uf2a9",
-  "fab fa-viadeo-square": "\uf2aa",
-  "fab fa-viber": "\uf409",
-  "fab fa-vimeo": "\uf40a",
-  "fab fa-vimeo-square": "\uf194",
-  "fab fa-vimeo-v": "\uf27d",
-  "fab fa-vine": "\uf1ca",
-  "fab fa-vk": "\uf189",
-  "fab fa-vnv": "\uf40b",
-  "fab fa-vuejs": "\uf41f",
-  "fab fa-weibo": "\uf18a",
-  "fab fa-weixin": "\uf1d7",
-  "fab fa-whatsapp": "\uf232",
-  "fab fa-whatsapp-square": "\uf40c",
-  "fab fa-whmcs": "\uf40d",
-  "fab fa-wikipedia-w": "\uf266",
-  "fab fa-windows": "\uf17a",
-  "fab fa-wordpress": "\uf19a",
-  "fab fa-wordpress-simple": "\uf411",
-  "fab fa-wpbeginner": "\uf297",
-  "fab fa-wpexplorer": "\uf2de",
-  "fab fa-wpforms": "\uf298",
-  "fab fa-xbox": "\uf412",
-  "fab fa-xing": "\uf168",
-  "fab fa-xing-square": "\uf169",
-  "fab fa-y-combinator": "\uf23b",
-  "fab fa-yahoo": "\uf19e",
-  "fab fa-yandex": "\uf413",
-  "fab fa-yandex-international": "\uf414",
-  "fab fa-yelp": "\uf1e9",
-  "fab fa-yoast": "\uf2b1",
-  "fab fa-youtube": "\uf167",
-  "fab fa-youtube-square": "\uf431"
-};
-
-var FontAwe$1 = FontAwe;
-
-var Vis;
-
-Vis = class Vis {
-  static translate(x0, y0) {
-    Util$1.checkTypes('number', {
-      x0: x0,
-      y0: y0
-    });
-    return ` translate( ${x0}, ${y0} )`;
-  }
-
-  static scale(sx, sy) {
-    Util$1.checkTypes('number', {
-      sx: sx,
-      sy: sy
-    });
-    return ` scale( ${sx}, ${sy} )`;
-  }
-
-  static rotate(a, x, y) {
-    Util$1.checkTypes('number', {
-      a: a,
-      x: x,
-      y: y
-    });
-    return ` rotate(${a} ${x} ${y} )`;
-  }
-
-  static rad(deg) {
-    return deg * Math.PI / 180;
-  }
-
-  static deg(rad) {
-    return rad * 180 / Math.PI;
-  }
-
-  static sin(deg) {
-    return Math.sin(Vis.rad(deg));
-  }
-
-  static cos(deg) {
-    return Math.cos(Vis.rad(deg));
-  }
-
-  static rot(deg, ang) {
-    var a;
-    a = deg + ang;
-    if (a < 0) {
-      a = a + 360;
-    }
-    return a;
-  }
-
-  static toRadian(h, hueIsRygb = false) {
-    var hue, radian;
-    hue = hueIsRygb ? Vis.toHueRygb(h) : h;
-    radian = 2 * Math.PI * (90 - hue) / 360; // Correction for MathBox polar coordinate system
-    if (radian < 0) {
-      radian = 2 * Math.PI + radian;
-    }
-    return radian;
-  }
-
-  static svgDeg(deg) {
-    return 360 - deg;
-  }
-
-  static svgRad(rad) {
-    return 2 * Math.PI - rad;
-  }
-
-  static radSvg(deg) {
-    return Vis.rad(360 - deg);
-  }
-
-  static degSvg(rad) {
-    return Vis.deg(2 * Math.PI - rad);
-  }
-
-  static sinSvg(deg) {
-    return Math.sin(Vis.radSvg(deg));
-  }
-
-  static cosSvg(deg) {
-    return Math.cos(Vis.radSvg(deg));
-  }
-
-  //hexCss:( hex ) -> """##{hex.toString(16)}""" # For orthogonality
-  static rgbCss(rgb) {
-    return `rgb(${rgb.r},${rgb.g},${rgb.b})`;
-  }
-
-  static hslCss(hsl) {
-    return `hsl(${hsl.h},${hsl.s * 100}%,${hsl.l * 100}%)`;
-  }
-
-  static cssHex(str) {
-    return parseInt(str.substr(1), 16);
-  }
-
-  static rndRgb(rgb) {
-    return {
-      r: Math.round(rgb.r),
-      g: Math.round(rgb.g),
-      b: Math.round(rgb.b)
-    };
-  }
-
-  static hexRgb(hex) {
-    return Vis.rndRgb({
-      r: (hex & 0xFF0000) >> 16,
-      g: (hex & 0x00FF00) >> 8,
-      b: hex & 0x0000FF
-    });
-  }
-
-  static rgbHex(rgb) {
-    return rgb.r * 4096 + rgb.g * 256 + rgb.b;
-  }
-
-  static interpolateHexRgb(hex1, r1, hex2, r2) {
-    return Vis.interpolateRgb(Vis.hexRgb(hex1), r1, Vis.hexRgb(hex2), r2);
-  }
-
-  static interpolateRgb(rgb1, r1, rgb2, r2) {
-    return {
-      r: rgb1.r * r1 + rgb2.r * r2,
-      g: rgb1.g * r1 + rgb2.g * r2,
-      b: rgb1.b * r1 + rgb2.b * r2
-    };
-  }
-
-  static toRgbHsvStr(hsv) {
-    var i, j, rgba, str;
-    rgba = Vis.toRgbHsvSigmoidal(hsv[0], hsv[1], hsv[2] * 255, true);
-    for (i = j = 0; j < 3; i = ++j) {
-      rgba[i] = Math.round(rgba[i]);
-    }
-    str = `rgba(${rgba[0]},${rgba[1]},${rgba[2]},${rgba[3]})`;
-    //console.log( "Vis.toRgbHsvStr()", {h:hsv[0],s:hsv[1],v:hsv[2]}, str )
-    return str;
-  }
-
-  static toRgbaHsv(hsv) {
-    var i, j, rgba, str;
-    rgba = Vis.toRgbHsvSigmoidal(hsv[0], hsv[1], hsv[2] * 255, true);
-    for (i = j = 0; j < 3; i = ++j) {
-      rgba[i] = Math.round(rgba[i]);
-    }
-    str = `rgba(${rgba[0]},${rgba[1]},${rgba[2]},${rgba[3]})`;
-    //console.log( "Vis.toRgbaHsv()", {h:hsv[0],s:hsv[1],v:hsv[2]}, str )
-    return str;
-  }
-
-  static toRgbHsv(H, C, V, toRygb = true) {
-    return Vis.toRgbHsvSigmoidal(H, C, V, toRygb);
-  }
-
-  static toRgbHsvSigmoidal(H, C, V, toRygb = true) {
-    var b, c, d, f, g, h, i, r, v, x, y, z;
-    h = toRygb ? Vis.toHueRgb(H) : H;
-    d = C * 0.01;
-    c = Vis.sigmoidal(d, 2, 0.25);
-    v = V * 0.01;
-    i = Math.floor(h / 60);
-    f = h / 60 - i;
-    x = 1 - c;
-    y = 1 - f * c;
-    z = 1 - (1 - f) * c;
-    r = 1;
-    g = 1;
-    b = 1;
-    [r, g, b] = (function() {
-      switch (i % 6) {
-        case 0:
-          return [1, z, x, 1];
-        case 1:
-          return [y, 1, x, 1];
-        case 2:
-          return [x, 1, z, 1];
-        case 3:
-          return [x, y, 1, 1];
-        case 4:
-          return [z, x, 1, 1];
-        case 5:
-          return [1, x, y, 1];
-      }
-    })();
-    return [r * v, g * v, b * v, 1];
-  }
-
-  static hsvToRgb(hsv) {
-    var f, i, p, q, rgb, t, v;
-    i = Math.floor(hsv.h / 60);
-    f = hsv.h / 60 - i;
-    p = hsv.v * (1 - hsv.s);
-    q = hsv.v * (1 - f * hsv.s);
-    t = hsv.v * (1 - (1 - f) * hsv.s);
-    v = hsv.v;
-    rgb = (function() {
-      switch (i % 6) {
-        case 0:
-          return {
-            r: v,
-            g: t,
-            b: p
-          };
-        case 1:
-          return {
-            r: q,
-            g: v,
-            b: p
-          };
-        case 2:
-          return {
-            r: p,
-            g: v,
-            b: t
-          };
-        case 3:
-          return {
-            r: p,
-            g: q,
-            b: v
-          };
-        case 4:
-          return {
-            r: t,
-            g: p,
-            b: v
-          };
-        case 5:
-          return {
-            r: v,
-            g: p,
-            b: q
-          };
-        default:
-          console.error('Vis.hsvToRgb()');
-          return {
-            r: v,
-            g: t,
-            b: p // Should never happend
-          };
-      }
-    })();
-    return Vis.roundRgb(rgb, 255);
-  }
-
-  static roundRgb(rgb, f = 1.0) {
-    return {
-      r: Math.round(rgb.r * f),
-      g: Math.round(rgb.g * f),
-      b: Math.round(rgb.b * f)
-    };
-  }
-
-  static sigmoidal(x, k, x0 = 0.5, L = 1) {
-    return L / (1 + Math.exp(-k * (x - x0)));
-  }
-
-  // ransform RyGB to RGB hueT
-  static toHueRgb(hue) {
-    var hRgb;
-    hRgb = 0;
-    if (0 <= hue && hue < 90) {
-      hRgb = hue * 60 / 90;
-    } else if (90 <= hue && hue < 180) {
-      hRgb = 60 + (hue - 90) * 60 / 90;
-    } else if (180 <= hue && hue < 270) {
-      hRgb = 120 + (hue - 180) * 120 / 90;
-    } else if (270 <= hue && hue < 360) {
-      hRgb = 240 + (hue - 270) * 120 / 90;
-    }
-    return hRgb;
-  }
-
-  static toRgba(study) {
-    var hsv;
-    hsv = study.hsv != null ? study.hsv : [90, 90, 90];
-    return Vis.toRgbHsv(hsv[0], hsv[1], hsv[2]);
-  }
-
-  static toRgbSphere(hue, phi, rad) {
-    return Vis.toRgbHsv(Vis.rot(hue, 90), 100 * Vis.sin(phi), 100 * rad);
-  }
-
-  // Key algorithm from HCI for converting RGB to HCS  h 360 c 100 s 100 a special color system
-  static toHcsRgb(R, G, B, toRygb = true) {
-    var H, a, b, c, g, h, r, s, sum;
-    sum = R + G + B;
-    r = R / sum;
-    g = G / sum;
-    b = B / sum;
-    s = sum / 3;
-    c = R === G && G === B ? 0 : 1 - 3 * Math.min(r, g, b); // Center Grayscale
-    a = Vis.deg(Math.acos((r - 0.5 * (g + b)) / Math.sqrt((r - g) * (r - g) + (r - b) * (g - b))));
-    h = b <= g ? a : 360 - a;
-    if (c === 0) {
-      h = 0;
-    }
-    H = toRygb ? Vis.toHueRgb(h) : h;
-    return [H, c * 100, s / 2.55];
-  }
-
-  static sScale(hue, c, s) {
-    var ch, m120, m60, s60, ss;
-    ss = 1.0;
-    m60 = hue % 60;
-    m120 = hue % 120;
-    s60 = m60 / 60;
-    ch = c / 100;
-    ss = m120 < 60 ? 3.0 - 1.5 * s60 : 1.5 + 1.5 * s60;
-    return s * (1 - ch) + s * ch * ss;
-  }
-
-  static sScaleCf(hue, c, s) {
-    var cf, cosd, cosu, m120, m60, ss;
-    ss = Vis.sScale(hue, c, s);
-    m60 = hue % 60;
-    m120 = hue % 120;
-    cosu = (1 - Vis.cos(m60)) * 100.00;
-    cosd = (1 - Vis.cos(60 - m60)) * 100.00;
-    cf = m120 < 60 ? cosu : cosd;
-    return ss - cf;
-  }
-
-  static floor(x, dx) {
-    var dr;
-    dr = Math.round(dx);
-    return Math.floor(x / dr) * dr;
-  }
-
-  static ceil(x, dx) {
-    var dr;
-    dr = Math.round(dx);
-    return Math.ceil(x / dr) * dr;
-  }
-
-  static within(beg, deg, end) {
-    return beg <= deg && deg <= end; // Closed interval with <=
-  }
-
-  static isZero(v) {
-    return -0.01 < v && v < 0.01;
-  }
-
-  static unicode(icon) {
-    var uc;
-    uc = FontAwe$1.icons[icon];
-    if (uc == null) {
-      console.error('Vis.unicode() missing icon in Vis.FontAwesomeUnicodes for', icon);
-      uc = "\uf111"; // Circle
-    }
-    return uc;
-  }
-
-};
-
-var Vis$1 = Vis;
-
-var Data,
-  hasProp$1 = {}.hasOwnProperty;
-
-Data = class Data {
-  static refine(data, type) {
-    var akey, area, base, bkey, disp, dkey, ikey, item, pkey, prac;
-    if (type === 'None') {
-      return data;
-    }
-    data.pracs = {};
-    for (pkey in data) {
-      prac = data[pkey];
-      if (!(Util$1.isChild(pkey))) {
-        continue;
-      }
-      data.pracs[pkey] = prac;
-      prac.data = data;
-      if (prac['name'] == null) {
-        prac['name'] = pkey;
-      }
-      prac.disps = {};
-      for (dkey in prac) {
-        disp = prac[dkey];
-        if (!(Util$1.isChild(dkey))) {
-          continue;
-        }
-        prac.disps[dkey] = disp;
-        disp.prac = prac;
-        if (disp['name'] == null) {
-          disp['name'] = dkey;
-        }
-        disp.areas = {};
-        for (akey in disp) {
-          area = disp[akey];
-          if (!(Util$1.isChild(akey))) {
-            continue;
-          }
-          disp.areas[akey] = area;
-          area.disp = disp;
-          if (area['name'] == null) {
-            area['name'] = akey;
-          }
-          area.items = {};
-          for (ikey in area) {
-            item = area[ikey];
-            if (!(Util$1.isChild(ikey))) {
-              continue;
-            }
-            area.items[ikey] = item;
-            item.area = area;
-            if (item['name'] == null) {
-              item['name'] = ikey;
-            }
-            item.bases = {};
-            for (bkey in item) {
-              base = item[bkey];
-              if (!(Util$1.isChild(bkey))) {
-                continue;
-              }
-              item.bases[bkey] = base;
-              base.item = item;
-              if (base['name'] == null) {
-                base['name'] = bkey;
-              }
-            }
-          }
-        }
-      }
-    }
-    return data;
-  }
-
-  // ---- Read JSON with batch async
-  static batchRead(batch, callback, create = null) {
-    var key, obj;
-    for (key in batch) {
-      if (!hasProp$1.call(batch, key)) continue;
-      obj = batch[key];
-      this.batchJSON(obj, batch, callback, create);
-    }
-  }
-
-  static batchComplete(batch) {
-    var key, obj;
-    for (key in batch) {
-      if (!hasProp$1.call(batch, key)) continue;
-      obj = batch[key];
-      if (!obj['data']) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  // "Access-Control-Request-Headers": "*", "Access-Control-Request-Method": "*"
-  static batchJSON(obj, batch, callback, refine = null) {
-    var opt, url;
-    url = obj.type === 'Font' ? obj.url : Data.toUrl(obj.url);
-    // console.log( 'Data.batchJSON', obj.url, url )
-    opt = {
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch(url, opt).then((response) => {
-      return response.json();
-    }).then((data) => {
-      obj['data'] = Util$1.isFunc(refine) ? refine(data, obj.type) : data;
-      if (Data.batchComplete(batch)) {
-        return callback(batch);
-      }
-    }).catch((error) => {
-      return console.error("Data.batchJSON()", {
-        url: url,
-        error: error
-      });
-    });
-  }
-
-  static asyncJSON(urla, callback) {
-    var url;
-    url = Data.toUrl(urla);
-    // console.log( 'Data.asyncJSON()', urla, url )
-    fetch(url).then((response) => {
-      return response.json();
-    }).then((data) => {
-      return callback(data);
-    }).catch((error) => {
-      return console.error("Data.asyncJSON()", {
-        url: url,
-        error: error
-      });
-    });
-  }
-
-  static planeData(batch, plane) {
-    return batch[plane].data[plane];
-  }
-
-  static toUrl(url) {
-    //  console.log( 'Data.toUrl()', Data.local+url )
-    if (window.location.href.includes('localhost')) {
-      return Data.local + url;
-    } else {
-      return Data.hosted + url;
-    }
-  }
-
-  
-  // ------ Quick JSON read ------
-  static read(url, callback) {
-    if (Util$1.isObj(url)) {
-      Data.readFile(url, callback);
-    } else {
-      Data.asynsJson(url, callback);
-    }
-  }
-
-  static readFile(fileObj, doJson) {
-    var fileReader;
-    fileReader = new FileReader();
-    fileReader.onerror = function(e) {
-      return console.error('Store.readFile', fileObj.name, e.target.error);
-    };
-    fileReader.onload = function(e) {
-      return doJson(JSON.parse(e.target.result));
-    };
-    fileReader.readAsText(fileObj);
-  }
-
-  static saveFile(data, fileName) {
-    var downloadLink, htmlBlob, htmlUrl;
-    htmlBlob = new Blob([data], {
-      type: "text/html;charset=utf-8"
-    });
-    htmlUrl = window['URL'].createObjectURL(htmlBlob);
-    downloadLink = document.createElement("a");
-    downloadLink.href = htmlUrl;
-    downloadLink.download = fileName;
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-  }
-
-};
-
-Data.local = "../../data/";
-
-Data.hosted = '/data/';
-
-Data.cssDir = 'css/'; // /css in /pub
-
-var Data$1 = Data;
-
-var Wheel;
-
-Wheel = class Wheel {
-  constructor(drew, d3, name1, elem1, size) {
-    // Passed as a callback to Wheel and called when Wheel makes a choice to be published
-    this.publish = this.publish.bind(this);
-    this.adjustRadius = this.adjustRadius.bind(this);
-    this.xc = this.xc.bind(this);
-    this.yc = this.yc.bind(this);
-    this.isParentOf = this.isParentOf.bind(this);
-    // http://www.w3.org/WAI/ER/WD-AERT/#color-contrast
-    // brightness:( rgb ) ->
-    //   rgb.r * .299 + rgb.g * .587 + rgb.b * .114
-    this.fill = this.fill.bind(this);
-    this.doText = this.doText.bind(this);
-    // eventType is click mouseover mouseout AddChoice DelChoice
-    //textEnter.append("title").text( (d) -> d.data.name )
-    this.onEvent = this.onEvent.bind(this);
-    this.fontSize = this.fontSize.bind(this);
-    // eventType is click mouseover mouseout AddChoice DelChoice
-    this.doChoiceResize = this.doChoiceResize.bind(this);
-    this.textTransform = this.textTransform.bind(this);
-    this.displayAllLeaves = this.displayAllLeaves.bind(this);
-    this.zoomTween = this.zoomTween.bind(this);
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name1;
-    this.elem = elem1;
-    this.size = size;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
-    this.opacity = 1.0;
-    this.showAllLeaves = false;
-    this.radiusFactorChoice = 1.3;
-    this.radiusFactorChild = 1.0;
-    this.url = Data$1.toUrl('jitter/Flavor.json');
-    this.ready();
-  }
-
-  publish(add, flavor, roast) {
-    var addDel, choice;
-    addDel = add ? 'AddChoice' : 'DelChoice';
-    choice = {
-      name: 'Wheel',
-      op: addDel,
-      flavor: flavor,
-      roast: roast
-    };
-    console.log('Choice', choice);
-  }
-
-  resize() {
-    var geo, h, sc, sx, sy, w, xc, yc;
-    geo = this.drew.geomElem();
-    w = geo.w;
-    h = geo.h;
-    sx = geo.sx;
-    sy = geo.sy;
-    sc = Math.min(sx, sy);
-    xc = w / 2;
-    yc = h / 2;
-    this.svg.attr("width", w).attr("height", h);
-    this.g.transition().attr("transform", `translate(${xc},${yc}) scale(${sc})`);
-  }
-
-  ready() {
-    var geo, scale, xc, yc;
-    geo = this.drew.geomElem();
-    scale = 1.0;
-    this.json = {};
-    this.width = geo.w;
-    this.height = geo.h;
-    this.radius = Math.min(this.width, this.height) * scale / 2;
-    this.xx = this.d3.scaleLinear().range([0, 2 * Math.PI]);
-    this.yy = this.d3.scalePow().exponent(1.4).domain([0, 1]).range([
-      0,
-      this.radius // 1.3
-    ]);
-    // @formatNumber = @d3.format(",d")
-    this.padding = 0;
-    this.duration = 300;
-    this.lookup = {};
-    xc = this.width / 2;
-    yc = this.height / 2;
-    this.g = this.svg.append("g").attr("transform", `translate(${xc},${yc}) scale(1,1)`);
-    this.g.append("text").text("Flavor").attr('x', -32).attr('y', 12).style('fill', 'black').style("font-size", "3vmin");
-    this.partition = this.d3.partition();
-    this.arc = this.d3.arc().startAngle((d) => {
-      return Math.max(0, Math.min(2 * Math.PI, this.xx(this.x0(d))));
-    }).endAngle((d) => {
-      return Math.max(0, Math.min(2 * Math.PI, this.xx(this.x1(d))));
-    }).innerRadius((d) => {
-      return Math.max(0, this.yy(this.y0(d)));
-    }).outerRadius((d) => {
-      return Math.max(0, this.yy(this.y1(d)));
-    });
-    this.d3.json(this.url).then((json) => {
-      this.json = json;
-      this.root = this.d3.hierarchy(json);
-      this.root.sum((d) => {
-        d.chosen = false;
-        d.hide = this.isLeaf(d);
-        if (this.isBranch(d)) {
-          return 0;
-        } else {
-          return 1;
-        }
-      });
-      this.nodes = this.partition(this.root).descendants();
-      this.adjustRadius(this.root);
-      this.path = this.g.selectAll("path").data(this.nodes).enter().append("path").attr("id", function(d, i) {
-        if (d != null) {
-          return "path-" + i;
-        } else {
-          return "path-" + i;
-        }
-      }).attr("d", this.arc).attr("fill-rule", "evenodd").style("fill", (d) => {
-        return this.fill(d);
-      }).style("opacity", this.opacity).style("stroke", 'black').style("stroke-width", '2').style("display", function(d) {
-        if (d.data.hide) {
-          return "none";
-        } else {
-          return "block";
-        }
-      }).on("click", (d) => {
-        return this.onEvent(d, 'click');
-      }).on("mouseover", (d) => {
-        return this.onEvent(d, 'mouseover');
-      }).on("mouseout", (d) => {
-        return this.onEvent(d, 'mouseout');
-      });
-      //append("title").text( (d) -> d.data.name )
-      return this.doText(this.nodes);
-    });
-    this.d3.select(self.frameElement).style("height", this.height + "px");
-  }
-
-  adjustRadius(d) {
-    var dy, sc;
-    this.lookup[d.data.name] = d;
-    sc = d['data'].scale != null ? d['data'].scale : d.children == null ? 0.8 : 1.0;
-    dy = (d.y1 - d.y0) * sc;
-    if (d.parent != null) {
-      d.y0 = d.parent.y1;
-    }
-    d.y1 = d.y0 + dy;
-    if (d.children != null) {
-      d.children.forEach((child) => {
-        return this.adjustRadius(child);
-      });
-    }
-  }
-
-  x0(d) {
-    if (d.m0 != null) {
-      return d.m0;
-    } else {
-      return d.x0;
-    }
-  }
-
-  x1(d) {
-    if (d.m1 != null) {
-      return d.m1;
-    } else {
-      return d.x1;
-    }
-  }
-
-  y0(d) {
-    if (d.n0 != null) {
-      return d.n0;
-    } else {
-      return d.y0;
-    }
-  }
-
-  y1(d) {
-    if (d.n1 != null) {
-      return d.n1;
-    } else {
-      return d.y1;
-    }
-  }
-
-  xc(d) {
-    return (this.x0(d) + this.x1(d)) / 2;
-  }
-
-  yc(d) {
-    return (this.y0(d) + this.y1(d)) / 2;
-  }
-
-  sameNode(a, b) {
-    return (a != null ? a.data.name : void 0) === (b != null ? b.data.name : void 0);
-  }
-
-  inBranch(branch, elem) {
-    var child, j, len, ref;
-    if ((branch != null ? branch.data.name : void 0) === (elem != null ? elem.data.name : void 0)) {
-      return true;
-    }
-    if (branch.children != null) {
-      ref = branch != null ? branch.children : void 0;
-      for (j = 0, len = ref.length; j < len; j++) {
-        child = ref[j];
-        if ((child != null ? child.data.name : void 0) === (elem != null ? elem.data.name : void 0)) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-
-  isBranch(d) {
-    return d.children != null;
-  }
-
-  isLeaf(d) {
-    return d.children == null;
-  }
-
-  isParentOf(p, c) {
-    if (p === c) {
-      return true;
-    }
-    if (p.children) {
-      return p.children.some((d) => {
-        return this.isParentOf(d, c);
-      });
-    }
-    return false;
-  }
-
-  fill(d) {
-    var a, b, colours;
-    // console.log( 'fill', d )
-    if ((d.data.fill != null) && (d.children != null)) {
-      return d.data.fill;
-    } else if ((d.data.fill != null) && (d.children == null) && (d.parent != null) && (d.parent.data.fill != null)) {
-      return d.parent.data.fill;
-    } else if (d.children != null) {
-      colours = d.children.map(this.fill);
-      a = this.d3.hsl(colours[0]);
-      b = this.d3.hsl(colours[1]);
-      // L*a*b* might be better here...
-      return this.d3.hsl((a.h + b.h) / 2, a.s * 1.2, a.l / 1.2);
-    } else {
-      return '#666666';
-    }
-  }
-
-  doText(nodes) {
-    var angle, xem;
-    this.text = this.g.selectAll('text').data(nodes);
-    this.textEnter = this.text.enter().append('text').on("click", (d) => {
-      return this.onEvent(d, 'click');
-    }).on("mouseover", (d) => {
-      return this.onEvent(d, 'mouseover');
-    }).on("mouseout", (d) => {
-      return this.onEvent(d, 'mouseout');
-    }).style("font-size", (t) => {
-      return this.fontSize(t);
-    //style('fill',       (d) => if @brightness( @d3.rgb( @fill(d.data) ) ) < 125 then '#eee' else '#000' )
-    }).style('opacity', 1).style('fill', '#000000').style('font-weight', 900).style("display", function(d) {
-      if (d.data.hide) {
-        return "none";
-      } else {
-        return "block";
-      }
-    }).attr('text-anchor', (d) => {
-      if (this.xx(this.xc(d)) > Math.PI) {
-        return 'end';
-      } else {
-        return 'start';
-      }
-    }).attr('dy', '.2em').attr('transform', (d) => {
-      return this.textTransform(d);
-    });
-    angle = (d) => {
-      return this.xx(this.xc(d)) * 180 / Math.PI;
-    };
-    xem = function(d) {
-      if (angle(d) <= 180) {
-        return '0.7em';
-      } else {
-        return '-0.7em';
-      }
-    };
-    this.textEnter.append('tspan').attr('x', function(d) {
-      return xem(d);
-    }).text(function(d) {
-      if (d.depth) {
-        return d.data.name.split(' ')[0];
-      } else {
-        return '';
-      }
-    });
-    this.textEnter.append('tspan').attr('x', function(d) {
-      return xem(d);
-    }).attr('dy', '1em').text(function(d) {
-      if ((d.depth != null) && (d.data.name != null)) {
-        return d.data.name.split(' ')[1] || '';
-      } else {
-        return '';
-      }
-    });
-  }
-
-  onEvent(d, eventType) {
-    var cy0, py0, py1, resize;
-    if (eventType === 'click' && (d.parent == null)) {
-      this.displayAllLeaves();
-    }
-    if (d.data['can'] == null) {
-      return;
-    }
-    //console.log( 'onEvent', d ) if eventType is 'click'
-    py0 = d.y0;
-    py1 = d.y0 + (d.y1 - d.y0) * this.radiusFactorChoice;
-    resize = this.doChoiceResize(d, eventType, d.x0, py0, d.x1, py1);
-    cy0 = resize ? py1 : d.y1;
-    if (d.children != null) {
-      d.children.forEach((child) => {
-        var cy1;
-        if (child != null) {
-          child.data.hide = resize;
-        }
-        cy1 = cy0 + (child['y1'] - child['y0']) * this.radiusFactorChild;
-        return this.resizeElem(child, resize, child['x0'], cy0, child['x1'], cy1);
-      });
-    }
-    this.g.selectAll('path').data(this.nodes).filter((e) => {
-      return this.inBranch(d, e);
-    }).transition().duration(this.duration).style("display", function(d) {
-      if (d.data.hide) {
-        return "none";
-      } else {
-        return "block";
-      }
-    //style( "stroke",        "black" )
-    //style( "stroke-width", "0.2vim" )
-    }).attr("d", this.arc);
-    this.g.selectAll('text').data(this.nodes).filter((e) => {
-      return this.inBranch(d, e);
-    }).transition().duration(this.duration).attr("transform", (t) => {
-      return this.textTransform(t);
-    }).style("font-size", (t) => {
-      return this.fontSize(t, d);
-    }).style("display", function(d) {
-      if (d.data.hide) {
-        return "none";
-      } else {
-        return "block";
-      }
-    });
-  }
-
-  fontSize(t, d = null) {
-    if ((d != null) && this.sameNode(t, d) && (t.m0 != null)) {
-      return '1.1rem';
-    } else {
-      if (t.children != null) {
-        return '1.0rem';
-      } else {
-        return '0.9rem';
-      }
-    }
-  }
-
-  doChoiceResize(elem, eventType, x0, y0, x1, y1) {
-    var resizeChild;
-    resizeChild = true;
-    if (eventType === 'click') {
-      elem.chosen = !elem.chosen;
-      this.resizeElem(elem, elem.chosen, x0, y0, x1, y1);
-      // This publish function is supplied to the constructor
-      // elem.chosen is true/false for add/del
-      // elem.data.name is the flavor
-      this.publish(elem.chosen, elem.data.name, this.getRoastValue(elem.data.name));
-      resizeChild = elem.chosen;
-    } else if (eventType === 'AddChoice' || eventType === 'DelChoice') {
-      elem.chosen = eventType === 'AddChoice';
-      this.resizeElem(elem, elem.chosen, x0, y0, x1, y1);
-      resizeChild = elem.chosen;
-    // Mouse event do not affect chosen elements
-    } else if (!elem.chosen && (eventType === 'mouseover' || eventType === 'mouseout')) {
-      resizeChild = eventType === 'mouseover';
-      this.resizeElem(elem, resizeChild, x0, y0, x1, y1);
-    }
-    //console.log( "Wheel.doChoiceResize()", { flavor:elem.data.name, eventType:eventType, resizeChild:resizeChild } )
-    return resizeChild;
-  }
-
-  resizeElem(elem, resize, x0, y0, x1, y1) {
-    if (resize) {
-      elem.m0 = x0;
-      elem.m1 = x1;
-      elem.n0 = y0;
-      elem.n1 = y1;
-      elem.data.hide = false;
-    } else {
-      elem.m0 = void 0;
-      elem.m1 = void 0;
-      elem.n0 = void 0;
-      elem.n1 = void 0;
-      elem.data.hide = !((elem.data.children != null) || this.showAllLeaves) ? true : false;
-    }
-  }
-
-  textTransform(d) {
-    var angle, multiline, rotate;
-    multiline = (d.data.name || '').split(' ').length > 1;
-    angle = this.xx(this.xc(d)) * 180 / Math.PI - 90;
-    rotate = angle + (multiline ? -.5 : 0);
-    return 'rotate(' + rotate + ')translate(' + this.yy(this.y0(d)) + this.padding + ')rotate(' + (angle > 90 ? -180 : 0) + ')';
-  }
-
-  displayAllLeaves() {
-    this.showAllLeaves = !this.showAllLeaves;
-    this.g.selectAll("path").style("display", (d) => {
-      if (this.isLeaf(d) && !this.showAllLeaves && !d.parent.chosen) {
-        return "none";
-      } else {
-        return "block";
-      }
-    });
-    this.g.selectAll('text').style("display", (d) => {
-      if (this.isLeaf(d) && !this.showAllLeaves && !d.parent.chosen) {
-        return "none";
-      } else {
-        return "block";
-      }
-    });
-  }
-
-  zoomTween(d) {
-    this.svg.transition().duration(this.duration).tween("scale", () => {
-      var xd, yd, yr;
-      xd = this.d3.interpolate(this.xx.domain(), [this.x0(d), this.x1(d)]);
-      yd = this.d3.interpolate(this.yy.domain(), [this.y0(d), 1]);
-      yr = this.d3.interpolate(this.yy.range(), [(d.y0 != null ? 20 : 0), this.radius]);
-      return (t) => {
-        this.xx.domain(xd(t));
-        return this.yy.domain(yd(t)).range(yr(t));
-      };
-    }).selectAll("path").attrTween("d", (d) => {
-      return () => {
-        return this.arc(d);
-      };
-    });
-  }
-
-  getFlavor(data, name, match) {
-    var child, flavor, j, len, ref;
-    if (data.children != null) {
-      ref = data.children;
-      for (j = 0, len = ref.length; j < len; j++) {
-        flavor = ref[j];
-        if (match(flavor)) {
-          return flavor;
-        }
-        child = this.getFlavor(flavor, name, match);
-        if (child != null) {
-          return child;
-        }
-      }
-    }
-    return null;
-  }
-
-  getRoastValue(name) {
-    var flavor, match, value;
-    match = function(flavor) {
-      return flavor.name === name;
-    };
-    flavor = this.getFlavor(this.json, name, match);
-    //console.log( 'Wheel.getRoastValue()', { name:name, flavor:flavor } )
-    value = flavor != null ? (flavor.roast[0] + flavor.roast[1]) * 0.5 : -1;
-    return value;
-  }
-
-  getFlavorName(roast) {
-    var flavor, match;
-    match = function(flavor) {
-      return (flavor.roast != null) && flavor.roast[0] <= roast && roast <= flavor.roast[1];
-    };
-    flavor = this.getFlavor(this.json, roast, match);
-    console.log('Wheel.getFlavorName()', {
-      roast: roast,
-      flavor: flavor
-    });
-    if (flavor) {
-      return flavor.name;
-    } else {
-      return "";
-    }
-  }
-
-};
-
-var Wheel$1 = Wheel;
-
-var Axes;
-
-Axes = class Axes {
-  constructor(drew, d3, name, elem1, size) {
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name;
-    this.elem = elem1;
-    this.size = size;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
-    this.ready();
-  }
-
-  ready() {
-    var geo;
-    geo = this.drew.geomElem();
-    this.margin = {
-      left: 40,
-      top: 40,
-      right: 40,
-      bottom: 40
-    };
-    this.width = Math.min(geo.w, geo.h) - this.margin.left - this.margin.right;
-    this.height = Math.min(geo.w, geo.h) - this.margin.top - this.margin.bottom;
-    this.xObj = {
-      x1: 0,
-      x2: 100,
-      xtick1: 10,
-      xtick2: 1,
-      stroke1: '#AAAAAA',
-      stroke2: '#666666'
-    };
-    this.yObj = {
-      y1: 0,
-      y2: 100,
-      ytick1: 10,
-      ytick2: 1,
-      stroke1: '#AAAAAA',
-      stroke2: '#666666'
-    };
-    this.xScale = this.createXScale(this.xObj, this.width);
-    this.yScale = this.createYScale(this.yObj, this.height);
-    this.axes(this.g, this.xObj, this.yObj);
-    return this.grid(this.g, this.xObj, this.yObj);
-  }
-
-  //@d3d.transform( @svg.$s, @g, geo.w/2, geo.h/2, geo.s )
-  axes(g, xObj, yObj) {
-    this.attrG(g);
-    this.bAxis = this.createBAxis(g, xObj);
-    this.tAxis = this.createTAxis(g, xObj);
-    this.lAxis = this.createLAxis(g, yObj);
-    this.rAxis = this.createRAxis(g, yObj);
-    if (this.bAxis === false && this.tAxis === false && this.lAxis === false && this.rAxis === false) {
-      return {};
-    }
-  }
-
-  createXScale(xObj, width) {
-    return this.d3.scaleLinear().domain([xObj.x1, xObj.x2]).range([0, width]).clamp(true);
-  }
-
-  createYScale(yObj, height) {
-    return this.d3.scaleLinear().domain([yObj.y1, yObj.y2]).range([height, 0]).clamp(true);
-  }
-
-  attrG(g) {
-    return g.attr("style", "overflow:visible;").attr("transform", `translate(${this.margin.left},${this.margin.top})`).attr("style", "overflow:visible;");
-  }
-
-  createBAxis(g, xObj) {
-    var axisBottom, ntick1;
-    ntick1 = (xObj.x2 - xObj.x1) / xObj.xtick1; // ntick2 = xObj.xtick1/xObj.xtick2
-    axisBottom = this.d3.axisBottom().scale(this.xScale).ticks(ntick1).tickSize(12).tickPadding(1);
-    g.append("svg:g").attr("class", "axis-bottom axis").attr("stroke", '#FFFFFF').attr("transform", `translate(0,${this.height})`).call(axisBottom).selectAll('.tick line').attr("stroke", '#FFFFFF');
-    return axisBottom;
-  }
-
-  createTAxis(g, xObj) {
-    var axisTop, ntick1;
-    ntick1 = (xObj.x2 - xObj.x1) / xObj.xtick1; //ntick2 = xObj.xtick1/xObj.xtick2
-    axisTop = this.d3.axisTop().scale(this.xScale).ticks(ntick1).tickSize(12).tickPadding(1);
-    g.append("svg:g").attr("class", "axis-top axis").attr("stroke", '#FFFFFF').call(axisTop).selectAll('.tick line').attr("stroke", '#FFFFFF');
-    return axisTop;
-  }
-
-  createLAxis(g, yObj) {
-    var axisLeft, ntick1;
-    ntick1 = (yObj.y2 - yObj.y1) / yObj.ytick1; // ntick2 = ytick1/yObj.ytick2
-    axisLeft = this.d3.axisLeft().scale(this.yScale).ticks(ntick1).tickSize(12).tickPadding(1);
-    g.append("svg:g").attr("class", "axis-left axis").attr("stroke", '#FFFFFF').call(axisLeft).selectAll('.tick line').attr("stroke", '#FFFFFF');
-    return axisLeft;
-  }
-
-  createRAxis(g, yObj) {
-    var axisRight, ntick1;
-    ntick1 = (yObj.y2 - yObj.y1) / yObj.ytick1; //ntick2 = ytick1/yObj.ytick2
-    axisRight = this.d3.axisRight().scale(this.yScale).ticks(ntick1).tickSize(12).tickPadding(1);
-    g.append("svg:g").attr("class", "axis-right axis").attr("stroke", '#FFFFFF').attr("transform", `translate(${this.width},0)`).call(axisRight).selectAll('.tick line').attr("stroke", '#FFFFFF');
-    return axisRight;
-  }
-
-  grid(g, xObj, yObj) {
-    var elem;
-    elem = g.append("g:g");
-    this.xLines(elem, xObj.x1, xObj.x2, xObj.xtick2, yObj.y1, yObj.y2, xObj.stroke2, 1);
-    this.yLines(elem, yObj.y1, yObj.y2, yObj.ytick2, xObj.x1, xObj.x2, yObj.stroke2, 1);
-    this.xLines(elem, xObj.x1, xObj.x2, xObj.xtick1, yObj.y1, yObj.y2, xObj.stroke1, 1);
-    return this.yLines(elem, yObj.y1, yObj.y2, yObj.ytick1, xObj.x1, xObj.x2, yObj.stroke1, 1);
-  }
-
-  line(elem, x1, y1, x2, y2, stroke = "white", thick = 1, xScale = this.xScale, yScale = this.yScale) {
-    return elem.append("svg:line").attr("x1", xScale(x1)).attr("y1", yScale(y1)).attr("x2", xScale(x2)).attr("y2", yScale(y2)).attr("stroke", stroke).attr("stroke-width", thick); //attr("x1",x1).attr("y1",y1).attr("x2",x2).attr("y2",y2)
-  }
-
-  xLines(elem, xb, xe, dx, y1, y2, stroke, thick) {
-    var i, results, x, x1, x2;
-    i = 1;
-    x1 = Vis$1.floor(xb, dx);
-    x2 = Vis$1.ceil(xe, dx);
-    x = x1;
-    results = [];
-    while (x <= x2) {
-      this.line(elem, x, y1, x, y2, stroke, thick);
-      results.push(x = x1 + dx * i++);
-    }
-    return results;
-  }
-
-  yLines(elem, yb, ye, dy, x1, x2, stroke, thick) {
-    var i, results, y, y1, y2;
-    i = 1;
-    y1 = Vis$1.floor(yb, dy);
-    y2 = Vis$1.ceil(ye, dy);
-    y = y1;
-    results = [];
-    while (y <= y2) {
-      this.line(elem, x1, y, x2, y, stroke, thick);
-      results.push(y = y1 + dy * i++);
-    }
-    return results;
-  }
-
-};
-
-var Axes$1 = Axes;
-
-var Chord;
-
-Chord = class Chord {
-  constructor(drew, d3, name, elem, size) {
-    this.ready = this.ready.bind(this);
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name;
-    this.elem = elem;
-    this.size = size;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
-    this.matrix = [[0, 20, 20, 20], [20, 0, 20, 80], [20, 20, 0, 20], [20, 80, 20, 0]];
-    this.range = ["#FF0000", "#00FF00", "#0000FF", "#888888"];
-    this.ready();
-  }
-
-  ready() {
-    var geo;
-    geo = this.drew.geomElem();
-    this.graph = this.drew.svg;
-    this.width = geo.w;
-    this.height = geo.h;
-    this.outer = Math.min(this.width, this.height) * 0.5 - 40;
-    this.inner = this.outer - 30;
-    this.format = this.d3.formatPrefix(",.0", 1e3);
-    this.chord = this.createChord();
-    this.arc = this.createArc(this.inner, this.outer);
-    this.ribbon = this.createRibbon(this.inner);
-    this.color = this.createColor(this.range);
-    this.g.datum(this.chord(this.matrix));
-    this.g.attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")");
-    this.group = this.createGroup(this.arc);
-    this.ticks = this.createTicks(this.group, this.outer);
-    this.appendRibbons(this.g, this.ribbon);
-  }
-
-  createChord() {
-    return this.d3.chord().padAngle(0.05).sortSubgroups(this.d3.descending);
-  }
-
-  createArc(inner, outer) {
-    return this.d3.arc().innerRadius(inner).outerRadius(outer);
-  }
-
-  createRibbon(inner) {
-    return this.d3.ribbon().radius(inner);
-  }
-
-  createColor(range) {
-    return this.d3.scaleOrdinal().domain(this.d3.range(4)).range(range);
-  }
-
-  createGroup(arc) {
-    var group;
-    group = this.g.append("g").attr("class", "groups").selectAll("g").data((d) => {
-      return d.groups;
-    }).enter().append("g");
-    return group.append("path").style("fill", (d) => {
-      return this.color(d.index);
-    }).style("stroke", (d) => {
-      return this.d3.rgb(this.color(d.index)).darker();
-    }).attr("d", arc);
-  }
-
-  createTicks(group, outer) {
-    var ticks;
-    ticks = group.selectAll(".group-tick").data((d) => {
-      return this.groupTicks(d, 1e3);
-    }).enter().append("g").attr("class", "group-tick").attr("transform", (d) => {
-      return "rotate(" + (d.angle * 180 / Math.PI - 90) + ") translate(" + outer + ",0)";
-    });
-    ticks.append("line").attr("x2", 6);
-    ticks.filter(function(d) {
-      return d.value % 5e3 === 0;
-    }).append("text").attr("x", 8).attr("dy", ".35em").attr("transform", function(d) {
-      if (d.angle > Math.PI) {
-        return "rotate(180) translate(-16)";
-      } else {
-        return null;
-      }
-    }).style("text-anchor", function(d) {
-      if (d.angle > Math.PI) {
-        return "end";
-      } else {
-        return null;
-      }
-    }).text((d) => {
-      return this.format(d.value);
-    });
-    return ticks;
-  }
-
-  appendRibbons(g, ribbon) {
-    return g.append("g").attr("class", "ribbons").selectAll("path").data(function(chords) {
-      return chords;
-    }).enter().append("path").attr("d", ribbon).style("fill", (d) => {
-      return this.color(d.target.index);
-    }).style("stroke", (d) => {
-      return this.d3.rgb(this.color(d.target.index)).darker();
-    });
-  }
-
-  // Returns an array of tick angles and values for a given group and step.
-  groupTicks(d, step) {
-    var k;
-    k = (d.endAngle - d.startAngle) / d.value;
-    return this.d3.range(0, d.value, step).map(function(value) {
-      return {
-        value: value,
-        angle: value * k + d.startAngle
-      };
-    });
-  }
-
-};
-
-/*
-
-xcreateFill:(  range  ) ->
-d3.scaleOrdinal().domain( d3.range(4) ).range( range )
-
-xcreateGroups:() =>
-groups = @g.append("g").selectAll("path").data( (d) => d.groups ).enter().append("path") #
-.style("fill",   (d) => @fill( d.index ) )
-.style("stroke", (d) => @fill( d.index ) )
-groups.attr( "d", d3.arc().innerRadius(@inner).outerRadius(@outer) )
-groups.on( "mouseover", @fade(.1) ).on( "mouseout", @fade(1) )
-groups
-
-xupdateChords:() ->
-chords = @g.append("g").attr("class", "chord").selectAll("path").datam( @chords(@matrix) ).enter().append("path")
-.attr(  "d", d3.chord().radius(@inner))
-.style( "fill", (d) => @fill( d.target.index ) )
-.style( "opacity", 1 )
-chords
-
- * Returns an array of tick angles and labels, given a group.
-xcreateTicks:() ->
-ticks =  @g.append("g").selectAll("g").data( @chord.groups )
-ticks.enter().append("g").selectAll("g").data( @groupTicks   )
-#ticks.enter().append("g").attr("transform", (d) => "rotate(" + (d.angle * 180 / Math.PI - 90) + ")" + "translate(" + @outer + ",0)" )
-ticks.append("line").attr("x1", 1).attr("y1", 0).attr("x2", 5).attr("y2", 0).style( "stroke", "#000" )
-ticks.append("text").attr("x",  8).attr("dy", ".35em")
- .attr( "transform", (d) -> ( if d.angle > Math.PI then "rotate(180)translate(-16)" else null ) )
-ticks.style("text-anchor", (d) => ( if d.angle > Math.PI then "end" else null) )
-ticks.text( (d) => d.label )
-ticks
-
-xgroupTicks: (d) ->
-k = (d.endAngle - d.startAngle) / d.value
-range = d3.range(0, d.value, 1000).map( (v,i) => { angle: v * k + d.startAngle, label: (if i % 5 then null else v / 1000 + "k") } )
-#console.log( 'groupTicks', d, k )
-range
-
- * Returns an event handler for fading a given chord group.
-xfade: (opacity) =>
-(i) =>
-  @g.selectAll(".chord path").filter( (d) =>
-    d.source.index isnt i and d.target.index isnt i ).transition().style( "opacity", opacity )
-
- */
-var Chord$1 = Chord;
-
-var Link;
-
-Link = class Link {
-  constructor(drew, d3, name, elem, size) {
-    this.strokeOpp = this.strokeOpp.bind(this);
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name;
-    this.elem = elem;
-    this.size = size;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
-    this.ready();
-    if (this.link2 === false && this.strokeOpp === false) ;
-  }
-
-  ready() {
-    var geo;
-    geo = this.drew.geomElem();
-    this.graph = this.drew.svg;
-    this.w = geo.w;
-    this.h = geo.h;
-    this.cssLink = 'link';
-    this.thick = 1;
-    this.da = 5;
-    this.ornament(150);
-  }
-
-  link(x1, y1, x2, y2, n, fill) {
-    var a1, a2, r;
-    r = Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1)) / 2;
-    a1 = Vis$1.angleSvg(x2 - x1, y2 - y1);
-    a2 = Vis$1.angleSvg(x1 - x2, y1 - y2);
-    this.linkBeg(x1, y1, a1, r, n, fill);
-    this.linkEnd(x2, y2, a2, r, n, fill);
-  }
-
-  linkBeg(x1, y1, a1, r1, n, fill) {
-    var b1, e1, n2;
-    n2 = Math.floor(n / 2);
-    b1 = a1 - this.da * n2;
-    e1 = a1 + this.da * n2 + 1;
-    if (a1 === 0) {
-      b1 += 360;
-    }
-    if (a1 === 0) {
-      e1 += 360;
-    }
-    this.radiate(this.g, x1, y1, r1, b1, e1, this.da, false, this.rgb(fill));
-  }
-
-  linkEnd(x2, y2, a2, r2, n, fill) {
-    var b2, e2, n2;
-    n2 = Math.floor(n / 2);
-    b2 = a2 - this.da * n2;
-    e2 = a2 + this.da * n2 + 1;
-    if (a2 === 0) {
-      b2 += 360;
-    }
-    if (a2 === 0) {
-      e2 += 360;
-    }
-    this.radiate(this.g, x2, y2, r2, b2, e2, this.da, false, this.rgb(fill));
-  }
-
-  link2(x1, y1, x2, y2, n, fill) {
-    var a1, a2, b1, b2, e1, e2, n2, r;
-    r = Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1)) / 2;
-    n2 = Math.floor(n / 2);
-    a1 = Vis$1.angleSvg(x2 - x1, y2 - y1);
-    b1 = a1 - this.da * n2;
-    e1 = a1 + this.da * n2 + 1;
-    a2 = Vis$1.angleSvg(x1 - x2, y1 - y2);
-    b2 = a2 - this.da * n2;
-    e2 = a2 + this.da * n2 + 1;
-    this.radiate(this.g, x1, y1, r, b1, e1, this.da, false, this.rgb(fill));
-    this.radiate(this.g, x2, y2, r, b2, e2, this.da, false, this.rgb(fill));
-  }
-
-  rgb(fill) {
-    var hsv;
-    hsv = [fill, 90, 90];
-    return this.drew.toFill(hsv); //  Color.Prac[fill].rgba
-  }
-
-  strokeOpp(ang) {
-    var hue;
-    hue = 180 - ang;
-    if (hue < 0) {
-      hue = 360 + hue;
-    }
-    return [
-      Vis$1.hslCss({
-        h: hue,
-        s: 0.5,
-        l: 0.8
-      }),
-      hue
-    ];
-  }
-
-  inEast(ang) {
-    return (0 <= ang && ang <= 45) || (315 <= ang && ang <= 360);
-  }
-
-  inNorth(ang) {
-    return 45 < ang && ang < 134;
-  }
-
-  inWest(ang) {
-    return 135 <= ang && ang <= 225;
-  }
-
-  inSouth(ang) {
-    return 225 < ang && ang < 315;
-  }
-
-  hue090(ang) {
-    return 360 - ang;
-  }
-
-  hue180(ang) {
-    if (ang <= 180) {
-      return 180 - ang;
-    } else {
-      return 540 - ang;
-    }
-  }
-
-  hue270(ang) {
-    return 360 - ang;
-  }
-
-  hue360(ang) {
-    return 540 - ang;
-  }
-
-  ornament(r) {
-    this.radiate(this.g, this.w * 0.50, this.h * 0.50, r, 0, 360, 5, false);
-    this.radiate(this.g, this.w * 0.50 + 2 * r, this.h * 0.50, r, 135, 226, 5, false, this.hue180);
-    this.radiate(this.g, this.w * 0.50, this.h * 0.50 - 2 * r, r, 225, 315, 5, true, this.hue270);
-    this.radiate(this.g, this.w * 0.50 - 2 * r, this.h * 0.50, r, 315, 406, 5, false, this.hue360);
-    this.radiate(this.g, this.w * 0.50, this.h * 0.50 + 2 * r, r, 45, 135, 5, true, this.hue090);
-  }
-
-  line(x0, y0, x1, y1) {
-    return `M${x0},${y0}L${x1},${y1}`;
-  }
-
-  quad(x0, y0, x1, y1, x2, y2) {
-    return `M${x0},${y0}Q${x1},${y1} ${x2},${y2}`;
-  }
-
-  cubic(x0, y0, x1, y1, x2, y2, x3, y3) {
-    return `M${x0},${y0}C${x1},${y1} ${x2},${y2} ${x3},${y3}`;
-  }
-
-  circle(g, r, x, y, stroke) {
-    g.append("svg:circle").attr("r", r).attr("r", r).attr("cx", x).attr("cy", y).attr("fill", stroke).attr("stroke", 'none');
-  }
-
-  path(g, stroke, ang, hue, d) {
-    g.append('svg:path').attr('d', d).attr('stroke', stroke).attr('fill', 'none').attr('class', this.cssLink).attr('stroke-width', this.thick).attr('title', ang + ' ' + hue);
-  }
-
-  radiate(g, x0, y0, r, beg, end, da, skipBeg = false, toHue = function(ang) {
-      return ang;
-    }) {
-    var a, ang, hue, i, pc, ref, ref1, ref2, stroke, x, x1, x2, y1, y2, yy;
-    pc = .5;
-    for (a = i = ref = beg, ref1 = end, ref2 = da; ref2 !== 0 && (ref2 > 0 ? i < ref1 : i > ref1); a = i += ref2) {
-      if (a === beg && skipBeg) {
-        continue;
-      }
-      ang = a > 360 ? a - 360 : a;
-      yy = 0;
-      [x, yy] = this.xy(ang, x0, y0, r);
-      if (this.inEast(ang) || this.inWest(ang)) {
-        x1 = x0 * (1 - pc) + x * pc;
-        x2 = x0 * pc + x * (1 - pc);
-        y1 = y0;
-        y2 = yy;
-      } else {
-        x1 = x0;
-        x2 = x;
-        y1 = y0 * (1 - pc) + yy * pc;
-        y2 = y0 * pc + yy * (1 - pc);
-      }
-      hue = 0;
-      stroke = toHue;
-      if (Util$1.isFunc(toHue)) {
-        hue = toHue(ang);
-        stroke = Vis$1.hslCss({
-          h: hue,
-          s: 0.5,
-          l: 0.8
-        });
-      }
-      this.path(g, stroke, ang, hue, this.cubic(x0, y0, x1, y1, x2, y2, x, yy));
-    }
-  }
-
-  xy(ang, x0, y0, r) {
-    var cos, sin, x, y;
-    cos = Vis$1.cosSvg(ang);
-    sin = Vis$1.sinSvg(ang);
-    if (this.inEast(ang)) {
-      cos = 1;
-    }
-    if (this.inWest(ang)) {
-      cos = -1;
-    }
-    if (this.inNorth(ang)) {
-      sin = -1;
-    }
-    if (this.inSouth(ang)) {
-      sin = 1;
-    }
-    x = x0 + r * cos;
-    y = y0 + r * sin;
-    return [x, y];
-  }
-
-  tree(g, x0, y0, pts, stroke) {
-    var i, len, x, x1, x2, y1, y2, yy;
-    for (i = 0, len = pts.length; i < len; i++) {
-      [x, yy] = pts[i];
-      x1 = x - 30;
-      y1 = y0;
-      x2 = x0 - 30;
-      y2 = yy;
-      this.path(g, this.cubic(x0, y0, x1, y1, x2, y2, x, yy), stroke);
-      this.circle(g, 2, x0, y0, stroke);
-      this.circle(g, 2, x1, y1, stroke);
-      this.circle(g, 2, x2, y2, stroke);
-      this.circle(g, 2, x, yy, stroke);
-    }
-  }
-
-  //console.log( { x0:x0, y0:y0, x1:x1, y1:y1, x2:x2, y2:y2, x3:x, y3:yy } )
-  diag(g, x0, y0, pts, stroke) {
-    var ang, cos, i, len, pc, sin, x, x1, x2, y1, y2, yy;
-    pc = .5;
-    for (i = 0, len = pts.length; i < len; i++) {
-      [x, yy] = pts[i];
-      ang = Vis$1.angle(x - x0, y - y0);
-      cos = Vis$1.cos(ang);
-      sin = Vis$1.sin(ang);
-      Util$1.noop(cos, sin);
-      x1 = x0 * (1 - pc) + x * pc;
-      x2 = x0 * pc + x * (1 - pc);
-      y1 = y0;
-      y2 = yy;
-      this.path(g, this.cubic(x0, y0, x1, y1, x2, y2, x, yy), stroke);
-      this.circle(g, 2, x0, y0, stroke);
-      this.circle(g, 2, x1, y1, stroke);
-      this.circle(g, 2, x2, y2, stroke);
-      this.circle(g, 2, x, yy, stroke);
-    }
-  }
-
-};
-
-//console.log( { x0:x0, y0:y0, x1:x1, y1:y1, x2:x2, y2:y2, x3:x, y3:yy } )
-Link.pts1 = [[200, 40], [200, 60], [200, 80], [200, 100], [200, 120], [200, 140], [200, 160]];
-
-var Link$1 = Link;
-
-var Radar;
-
-Radar = class Radar {
-  constructor(drew, d3, name2, elem, size) {
-    this.doQuads = this.doQuads.bind(this);
-    this.doTechs = this.doTechs.bind(this);
-    this.attrG = this.attrG.bind(this);
-    this.prompt = this.prompt.bind(this);
-    this.grid = this.grid.bind(this);
-    this.circle = this.circle.bind(this);
-    // Concentric circles for delinating graded adoption criteria
-    this.circles = this.circles.bind(this);
-    this.quads = this.quads.bind(this);
-    this.quadName = this.quadName.bind(this);
-    this.degName = this.degName.bind(this);
-    this.wedge = this.wedge.bind(this);
-    // Background wedges to indicate technology quadrants
-    this.wedges = this.wedges.bind(this);
-    this.symType = this.symType.bind(this);
-    
-    // Plot tech points as either dots or triangles and add drag behavior. Add tech title tool tip
-    this.pts = this.pts.bind(this);
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name2;
-    this.elem = elem;
-    this.size = size;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
-    this.ready();
-  }
-
-  isRadar() {
-    return this.name === 'Radar';
-  }
-
-  ready() {
-    var geo;
-    geo = this.drew.geomElem();
-    this.graph = this.drew.svg;
-    this.width = geo.w;
-    this.height = geo.h;
-    this.x0 = this.width / 2;
-    this.y0 = this.height / 2;
-    this.inner = 0;
-    this.outer = (Math.min(this.width, this.height) - 100) / 2;
-    this.r04 = this.outer * 0.04;
-    this.r08 = this.outer * 0.08;
-    this.r16 = this.outer * 0.16;
-    this.r10 = this.outer * 0.1;
-    this.r20 = this.outer * 0.2;
-    this.r30 = this.outer * 0.3;
-    this.r40 = this.outer * 0.4;
-    this.r50 = this.outer * 0.5;
-    this.r60 = this.outer * 0.6;
-    this.r80 = this.outer * 0.8;
-    this.r90 = this.outer * 0.9;
-    this.r100 = this.outer * 1.0;
-    this.s2 = Math.sin(Vis$1.rad(60));
-    this.r2 = this.s2 * this.s2 * 60.0;
-    this.p60 = -Math.sin(Vis$1.rad(60));
-    if (this.r20 === false && this.r30 === false && this.r50 === false && this.r90 === false) ;
-    if (this.p60 === false && this.r04 === false && this.r10 === false) ;
-    this.attrG(this.g);
-    this.criterias = [ // Grade  Percentile
-      {
-        name: "Adopt",
-        radius: this.r40 //   A     90-100%
-      },
-      {
-        name: "Trial",
-        radius: this.r60 //   B     80-89%
-      },
-      {
-        name: "Access",
-        radius: this.r80 //   C     70-79%
-      },
-      {
-        name: "Hold",
-        radius: this.r100 //   D     60-69%
-      }
-    ];
-    if (this.isRadar()) {
-      Data$1.asyncJSON('draw/Quad.json', (quads) => {
-        return this.doQuads(quads);
-      });
-    }
-    if (this.isRadar()) {
-      Data$1.asyncJSON('draw/Tech.json', (techs) => {
-        return this.doTechs(techs);
-      });
-    }
-  }
-
-  doQuads(quads) {
-    this.quads(Util$1.toArray(quads), this.r08, this.r100);
-    this.circles(this.criterias);
-  }
-
-  doTechs(techs) {
-    this.pts(Util$1.toArray(techs));
-  }
-
-  attrG(g) {
-    return g.attr("style", `background${this.d3.rgb(250, 240, 200)}; overflow:visible;`);
-  }
-
-  prompt() {
-    return this.g.append("svg:text").text("Drag and drop the blue dots to target technologies as Adopt Trial Access or Hold").attr("x", 20).attr("y", 20).attr("font-family", "Arial").attr("font-size", "14px");
-  }
-
-  grid(da, dr, ba = 0, ea = 360, br = this.r40, er = this.r100) {
-    var ang, cos, j, k, l, r, ref, ref1, ref2, ref3, ref4, ref5, ref6, ref7, ref8, sin;
-    for (ang = j = ref = ba, ref1 = ea, ref2 = da; ref2 !== 0 && (ref2 > 0 ? j < ref1 : j > ref1); ang = j += ref2) {
-      cos = Math.cos(this.rad(ang));
-      sin = Math.sin(this.rad(ang));
-      this.quadLine(this.r16 * cos, this.r16 * sin, this.r100 * cos, this.r100 * sin, "#CCCCCC");
-    }
-    for (r = k = ref3 = br, ref4 = er, ref5 = dr; ref5 !== 0 && (ref5 > 0 ? k < ref4 : k > ref4); r = k += ref5) {
-      this.circle(r);
-    }
-    for (r = l = ref6 = this.r08, ref7 = this.r40, ref8 = this.r08; ref8 !== 0 && (ref8 > 0 ? l < ref7 : l > ref7); r = l += ref8) {
-      this.circle(r);
-    }
-  }
-
-  circle(r) {
-    this.g.append("svg:circle").attr("cx", this.x0).attr("cy", this.y0).attr("fill", "none").attr("stroke", "#CCCCCC").attr("stroke-width", 1).attr("r", r);
-  }
-
-  circles(criterias) {
-    var g;
-    g = this.g.selectAll("g").data(criterias).enter().append("svg:g");
-    g.append("svg:circle").attr("cx", this.x0).attr("cy", this.y0).attr("fill", "none").attr("stroke", "gray").attr("stroke-width", 1).attr("r", function(criteria) {
-      return criteria.radius;
-    });
-    if (this.isRadar()) {
-      g.append("svg:text").attr("x", this.x0).attr("y", (criteria) => {
-        return this.y0 - criteria.radius;
-      }).text((criteria) => {
-        return criteria.name;
-      }).attr("text-anchor", "middle").attr("dy", "1.2em").attr("font-size", "18pt").attr("font-family", "Arial");
-    }
-  }
-
-  quads(quadrants, r1, r2) {
-    var ang, beg, cos, dif, i, j, k, n, name1, name2s, ref, ref1, sin;
-    this.wedges(quadrants, this.inner, r2);
-    // @grid((@r100-@r40)/15,5)
-    n = quadrants.length * 2;
-    dif = 360 / n;
-    ang = 0;
-    cos = 0;
-    sin = 0;
-    name2s = null;
-    for (i = j = 0, ref = n; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
-      ang = i * dif;
-      cos = Math.cos(this.rad(ang));
-      sin = Math.sin(this.rad(ang));
-      this.quadLine(r1 * cos, r1 * sin, r2 * cos, r2 * sin, "white"); // "rgba(180,180,180,1.0)"
-      // @degName( @r100+12, ang )
-      name2s = quadrants[Math.floor(i / 2)]['name2s'];
-      if ((name2s != null) && name2s.length === 2) {
-        this.quadName(this.r100 + 12, ang + dif / 2, name2s[i % 2]);
-      }
-    }
-    n = quadrants.length;
-    dif = 360 / n;
-    beg = this.isRadar() ? dif / 2 : 0;
-    for (i = k = 0, ref1 = n; (0 <= ref1 ? k < ref1 : k > ref1); i = 0 <= ref1 ? ++k : --k) {
-      name1 = quadrants[i].name1;
-      if ((name1 != null) && name1.length > 0) {
-        this.quadName(this.r100 + 12, beg + dif * i, name1);
-      }
-    }
-  }
-
-  quadName(r, ang, name) {
-    var cx, cy, dy, rot;
-    cx = this.x0 + r * Math.cos(this.rad(ang));
-    cy = this.y0 + r * Math.sin(this.rad(ang));
-    rot = `rotate(${this.angleQuad(ang)},${cx},${cy})`;
-    dy = (0 <= ang && ang <= 180) ? ".15em" : ".5em";
-    this.g.append("svg:text").attr("x", cx).attr("y", cy).text(name).attr("transform", rot).attr("text-anchor", "middle").attr("dy", dy).attr("font-size", "18pt").attr("font-family", "Arial");
-  }
-
-  degName(r, ang) {
-    var cx, cy, rotate;
-    cx = this.x0 + r * Math.cos(this.rad(ang));
-    cy = this.y0 + r * Math.sin(this.rad(ang));
-    rotate = `rotate(${this.angleQuad(ang)},${cx},${cy})`;
-    this.g.append("svg:text").attr("x", cx).attr("y", cy).text(ang).attr("transform", rotate).attr("text-anchor", "middle").attr("dy", ".35em").attr("font-size", "12pt").attr("font-family", "Arial"); // .textUtilline("middle")
-  }
-
-  wedge(fill, g, r1, r2, a1, a2) {
-    var arc;
-    arc = this.d3.arc().innerRadius(r1).outerRadius(r2).startAngle(this.radD3(a1)).endAngle(this.radD3(a2));
-    g.append("svg:path").attr("d", arc).attr("fill", fill).attr("stroke", "none").attr("transform", `translate(${this.x0},${this.y0})`);
-  }
-
-  wedges(quadrants, r1, r2) {
-    var wedge;
-    wedge = this.d3.arc().innerRadius(r1).outerRadius(r2).startAngle((d) => {
-      return this.radD3(d.beg);
-    }).endAngle((d) => {
-      return this.radD3(d.end);
-    });
-    this.g.selectAll("path").data(quadrants).enter().append("svg:path").attr("d", wedge).attr("transform", `translate(${this.x0},${this.y0})`).attr("fill", (d) => {
-      return d.color;
-    }).attr("stroke", "none");
-  }
-
-  symType(tech) {
-    if ((tech.changed != null) && tech.changed === '+') {
-      return "triangle-up";
-    } else {
-      return "circle";
-    }
-  }
-
-  pts(techs) {
-    var dot, g;
-    g = this.g.selectAll("g").data(techs).enter().append("svg:g");
-    dot = g.append("svg:circle").attr("id", (tech) => {
-      return this.techId(tech);
-    }).attr("class", "dot").attr("cx", (tech) => {
-      return this.x(tech);
-    }).attr("cy", (tech) => {
-      return this.y(tech);
-    }).attr("title", (tech) => {
-      return this.techTitle(tech);
-    }).attr("r", 6).attr("fill", "orange").attr("stroke", "orange").attr("stroke-width", 1); // .attr("fill", (d) => if d.fix then "yellow" else "blue" )
-    dot.call((tech) => {
-      return tech.dot = dot;
-    });
-    g.append("svg:text").text((tech) => {
-      return (tech.i ? tech.i + ' ' : '') + tech.name;
-    }).attr("id", (tech) => {
-      return this.techTx(tech);
-    }).attr("text-anchor", (tech) => {
-      if (this.leftQuads(tech)) {
-        return "end";
-      } else {
-        return "start";
-      }
-    }).attr("x", (tech) => {
-      if (this.leftQuads(tech)) {
-        return this.x(tech) - 10;
-      } else {
-        return this.x(tech) + 10;
-      }
-    }).attr("y", (tech) => {
-      return this.y(tech);
-    }).attr("dy", ".35em").attr("font-family", "Roboto").attr("font-size", "10px").attr("stroke", "wheat");
-  }
-
-  // Start drag by setting fill yellow
-  doDragBeg(tech) {
-    //d3.select(tech.dot).attr("fill","yellow")
-    this.d3.select("circle#" + this.techId(tech)).attr("fill", "yellow");
-  }
-
-  // Respond to mouse drag by updating the tech grade angle and status
-  // Util.log("beg", @techTitle(tech) ); # d3.select(circle).attr("fill","yellow")
-  doDrag(tech) {
-    var x, y;
-    if (this.d3.event == null) {
-      return;
-    }
-    x = this.d3.event.x - this.x0;
-    y = this.y0 - this.d3.event.y; // Reverse sign of y
-    tech.angle = this.angle(x, y);
-    tech.grade = this.grade(x, y);
-    window.status = this.techTitle(tech);
-    this.d3.select('circle#' + this.techId(tech)).attr("cx", this.x(tech)).attr("cy", this.y(tech));
-  }
-
-  // End drag by setting fill blue
-  doDragEnd(tech) {
-    this.d3.select("circle#" + this.techId(tech)).attr("fill", "blue").attr("title", this.techTitle(tech));
-    this.d3.select("text#" + this.techTx(tech)).attr("x", (tech) => {
-      if (this.leftQuads(tech)) {
-        return this.x(tech) - 10;
-      } else {
-        return this.x(tech) + 10;
-      }
-    }).attr("y", (tech) => {
-      return this.y(tech);
-    });
-  }
-
-  leftQuads(tech) {
-    return 90 <= tech.angle && tech.angle < 270;
-  }
-
-  // Convert degress to radians and make angle counter clockwise
-  rad(deg) {
-    return (360 - deg) * Math.PI / 180.0;
-  }
-
-  degSVG(deg) {
-    return 360 - deg;
-  }
-
-  radD3(deg) {
-    return (450 - deg) * Math.PI / 180.0;
-  }
-
-  degD3(rad) {
-    return -rad * 180.0 / Math.PI;
-  }
-
-  // Calculate x y coordinates for plotting points from the tech grade and angle
-  x(tech) {
-    return this.x0 + this.r(tech) * Math.cos(this.rad(tech.angle));
-  }
-
-  y(tech) {
-    return this.y0 + this.r(tech) * Math.sin(this.rad(tech.angle));
-  }
-
-  // Calculate radius for plotting points from the tech grade
-  r(tech) {
-    var g;
-    g = tech.grade;
-    if (g > 90) {
-      return (100 - g) / 10.0 * this.r40;
-    } else {
-      return this.r40 + (90 - g) / 30.0 * this.r60;
-    }
-  }
-
-  // Calculate tech angle from xy pixel/mouse coordinates
-  angle(x, y) {
-    var ang;
-    ang = Math.atan2(y, x) * 180.0 / Math.PI;
-    ang = ang < 0 ? 360 + ang : ang;
-    return Math.round(ang);
-  }
-
-  // Calculate tech grade radius from xy pixel/mouse coordinates
-  grade(x, y) {
-    var r;
-    r = Math.sqrt(x * x + y * y);
-    r = r < this.r40 ? 100 - r * 10 / this.r40 : 90 + (this.r40 - r) * 30.0 / this.r60;
-    return Math.round(r);
-  }
-
-  // Create a string of tech data for tool tips and status
-  techTitle(tech) {
-    return tech.name + " " + Math.round(tech.grade) + "% " + Math.round(tech.angle) + " Deg  " + tech.title;
-  }
-
-  // Replace any CSS selection character with_ to create selectable ids
-  techId(tech) {
-    var ptn;
-    ptn = /[ .#>:~\^\=\+\*\(\)\[\]]/g;
-    return "_" + tech.name.replace(ptn, '_');
-  }
-
-  techTx(tech) {
-    return this.techId(tech) + "_tx";
-  }
-
-  angleQuad(ang) {
-    if (Vis$1.within(0, ang, 180)) {
-      return -ang + 90;
-    } else {
-      return -ang - 90;
-    }
-  }
-
-  quadLine(x1, y1, x2, y2, stroke) {
-    this.g.append("svg:line").attr("x1", x1 + this.x0).attr("y1", y1 + this.y0).attr("x2", x2 + this.x0).attr("y2", y2 + this.y0).attr("stroke", stroke).attr("stroke-width", "1");
-  }
-
-  noop() {
-    if (this.degName === false && this.prompt === false && this.symType === false) ;
-    if (this.doDragBeg === false && this.doDrag === false && this.doDragEnd === false) ;
-    if (this.degSVG === false && this.degD3 === false) {
-      return {};
-    }
-  }
-
-};
-
-var Radar$1 = Radar;
-
-/*
-      dot.call(
-      @d3.behavior.drag()
-        .on("dragstart", (tech) => @doDragStart(tech) )
-        .on("drag",      (tech) => @doDrag(tech) )
-        .on("dragend",   (tech) => @doDragEnd(tech)   )  )
-
-*/
-
-var Tree;
-
-Tree = class Tree {
-  constructor(drew, d3, name, elem, size, arrange1 = 'Radial') {
-    this.doRadial = this.doRadial.bind(this);
-    this.doLinks = this.doLinks.bind(this);
-    this.doNodes = this.doNodes.bind(this);
-    this.moveTo = this.moveTo.bind(this);
-    this.project = this.project.bind(this);
-    this.nodeClass = this.nodeClass.bind(this);
-    this.iconNode = this.iconNode.bind(this);
-    this.textNode = this.textNode.bind(this);
-    this.isEnd180 = this.isEnd180.bind(this);
-    this.isEnd = this.isEnd.bind(this);
-    this.iconUnicode = this.iconUnicode.bind(this);
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name;
-    this.elem = elem;
-    this.size = size;
-    this.arrange = arrange1;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
-    this.ready();
-  }
-
-  ready() {
-    var geo;
-    geo = this.drew.geomElem();
-    this.graph = this.drew.svg;
-    this.w = geo.w;
-    this.h = geo.h;
-    this.r = Math.min(this.w / 2, this.h / 2) * 0.9;
-    this.tree = this.treeArrange(this.arrange);
-    this.tree.size([
-      this.r,
-      this.r // size([@w,@h])
-    ]);
-    this.tree.separation((a, b) => {
-      return (a.parent === b.parent ? 5 : 10) / a.depth;
-    });
-    this.g.attr("transform", "translate(" + this.w * 0.5 + "," + this.h * 0.5 + ")");
-    return Data$1.asyncJSON('draw/Prin.json', (data) => {
-      return this.doRadial(data, this.g);
-    });
-  }
-
-  treeArrange(arrange) {
-    switch (arrange) {
-      case 'Tree':
-        return this.d3.tree();
-      case 'Radial':
-        return this.d3.tree();
-      case 'cluster':
-        return this.d3.cluster();
-      default:
-        return this.d3.tree();
-    }
-  }
-
-  doRadial(data, g) {
-    var link, node, root;
-    root = this.d3.hierarchy(data);
-    this.tree(root);
-    link = this.doLinks(root, g);
-    node = this.doNodes(root, g);
-    //node.append("svg:circle").attr("r",4.5)
-    //iconNode( node ) # Clutters up overview
-    this.textNode(node);
-    Util$1.noop(link);
-  }
-
-  doLinks(root, g) {
-    return g.selectAll(".link").data(root.descendants().slice(1)).enter().append("svg:path").attr("class", "link").attr("stroke", 'blue').attr("fill", "none").attr("d", (d) => {
-      return this.moveTo(d);
-    });
-  }
-
-  doNodes(root, g) {
-    return g.selectAll("g.node").data(root.descendants()).enter().append("svg:g").attr("class", (d) => {
-      return this.nodeClass(d);
-    }).attr("transform", (d) => {
-      return "translate(" + this.project(d.x, d.y) + ")";
-    });
-  }
-
-  moveTo(d) {
-    var p;
-    p = d.parent;
-    return `M${this.project(d.x, d.y)}C${this.project(d.x, (d.y + p.y) / 2)} ${this.project(p.x, (d.y + p.y) / 2)} ${this.project(p.x, p.y)}`;
-  }
-
-  project(x, y) {
-    var angle, radius;
-    angle = (x - 90) / 180 * Math.PI;
-    radius = y;
-    return [radius * Math.cos(angle), radius * Math.sin(angle)];
-  }
-
-  nodeClass(d) {
-    if (d.children != null) {
-      return "node--internal";
-    } else {
-      return "node--leaf";
-    }
-  }
-
-  iconNode(node) {
-    node.append("svg:text").attr("dy", 4).attr("stroke", 'wheat').attr("font-size", "1.4em").attr("font-family", "FontAwesome").attr("text-anchor", "middle").text((d) => {
-      return this.iconUnicode(d);
-    });
-  }
-
-  textNode(node) {
-    node.append("svg:text").attr("dy", ".31em").attr("y", 2).attr("x", (d) => {
-      if (this.isEnd180(d)) {
-        return 6;
-      } else {
-        return -6;
-      }
-    }).attr("text-anchor", (d) => {
-      if (this.isEnd180(d)) {
-        return "end";
-      } else {
-        return "start";
-      }
-    }).attr("transform", (d) => {
-      return "rotate(" + (d.x < 180 ? d.x - 90 : d.x + 90) + ")";
-    //attr("font-size","1.0em")
-    }).attr("stroke", 'wheat').attr("font-family", "Roboto").text(function(d) {
-      return d.data.name;
-    });
-  }
-
-  isEnd180(d) {
-    return d.x > 180;
-  }
-
-  isEnd(d) {
-    return !((d.children != null) && d.children.length > 0);
-  }
-
-  iconUnicode(d) {
-    var icon;
-    icon = d.data.icon != null ? d.data.icon : 'fas fa-circle';
-    return Vis$1.unicode(icon);
-  }
-
-};
-
-var Tree$1 = Tree;
-
-var Palettes;
-
-Palettes = class Palettes {
-  static setRgbs() {
-    var color, group, j, k, len, len1, ref;
-    ref = Palettes.groupRgbs;
-    for (j = 0, len = ref.length; j < len; j++) {
-      group = ref[j];
-      for (k = 0, len1 = group.length; k < len1; k++) {
-        color = group[k];
-        color.rgb = Vis$1.cssRgb(color.hex);
-      }
-    }
-  }
-
-  static findColor(name) {
-    var color, group, j, k, len, len1, ref;
-    ref = Palettes.groups;
-    for (j = 0, len = ref.length; j < len; j++) {
-      group = ref[j];
-      for (k = 0, len1 = group.length; k < len1; k++) {
-        color = group[k];
-        if (color.name === name) {
-          return color;
-        }
-      }
-    }
-    console.error('Palettes.findColor() not found for name', name);
-    return Palettes.gray;
-  }
-
-  static hexdec(name) {
-    var hex;
-    hex = Palettes.findColor(name).hex;
-    hex = '0x' + hex.substring(1);
-    return parseInt(hex, 16);
-  }
-
-  static hex(code) {
-    var color, group, j, k, len, len1, ref;
-    if (code == null) {
-      console.log('Palettes.hex()', code);
-    }
-    if (code == null) {
-      console.trace();
-    }
-    ref = Palettes.groups;
-    for (j = 0, len = ref.length; j < len; j++) {
-      group = ref[j];
-      for (k = 0, len1 = group.length; k < len1; k++) {
-        color = group[k];
-        if (color.code === code) {
-          return color.hex;
-        }
-      }
-    }
-    console.error('Palettes.hex not found for code', code);
-    return Palettes.gray.hex;
-  }
-
-  static hexGroup(group, code) {
-    var color, j, len;
-    for (j = 0, len = group.length; j < len; j++) {
-      color = group[j];
-      if (color.code === code) {
-        return color.hex;
-      }
-    }
-    console.error('Pallettes.color not found for code', code);
-    return Palettes.gray.hex;
-  }
-
-  static hexes(group, c) {
-    var code, hexs, j, len, ref;
-    hexs = [];
-    ref = Palettes.codes15;
-    for (j = 0, len = ref.length; j < len; j++) {
-      code = ref[j];
-      hexs.push(Palettes.hexGroup(group, code + c));
-    }
-    return hexs;
-  }
-
-  static hsvOut() {
-    var array, color, group, hsv, i, j, k, l, len, len1, ref, str;
-    array = [];
-    ref = Palettes.groups;
-    for (j = 0, len = ref.length; j < len; j++) {
-      group = ref[j];
-      for (k = 0, len1 = group.length; k < len1; k++) {
-        color = group[k];
-        hsv = Vis$1.toHsvHex(color.hex);
-        for (i = l = 0; l < 3; i = ++l) {
-          hsv[i] = Math.round(hsv[i]);
-        }
-        str = `[${hsv[0]},${hsv[1]},${hsv[2]}],"${color.code}","${color.hex}"\n `;
-        array.push(str);
-      }
-    }
-    console.log(array);
-  }
-
-  static toGroup(h) {
-    var group;
-    group = this.reds;
-    if (0 <= h && h <= 15) { // red
-      group = this.reds;
-    }
-    if (15 < h && h <= 45) { // orange
-      group = this.oranges;
-    }
-    if (45 < h && h <= 75) { // yellow
-      group = this.yellows;
-    }
-    if (75 < h && h <= 105) { // lime
-      group = this.limes;
-    }
-    if (105 < h && h <= 135) { // green
-      group = this.greens;
-    }
-    if (135 < h && h <= 165) { // teal
-      group = this.teals;
-    }
-    if (165 < h && h <= 195) { // cyan
-      group = this.cyans;
-    }
-    if (195 < h && h <= 225) { // azure
-      group = this.azures;
-    }
-    if (225 < h && h <= 255) { // blue
-      group = this.blues;
-    }
-    if (255 < h && h <= 285) { // violet
-      group = this.violets;
-    }
-    if (285 < h && h <= 315) { // magenta
-      group = this.magentas;
-    }
-    if (315 < h && h <= 345) { // pink
-      group = this.pinks;
-    }
-    if (345 < h && h <= 360) { // red
-      group = this.reds;
-    }
-    return group;
-  }
-
-  static toIndex(h) {
-    var index;
-    index = 0;
-    if (0 <= h && h <= 15) { // red
-      index = 0;
-    }
-    if (15 < h && h <= 45) { // orange
-      index = 1;
-    }
-    if (45 < h && h <= 75) { // yellow
-      index = 2;
-    }
-    if (75 < h && h <= 105) { // lime
-      index = 3;
-    }
-    if (105 < h && h <= 135) { // green
-      index = 4;
-    }
-    if (135 < h && h <= 165) { // teal
-      index = 5;
-    }
-    if (165 < h && h <= 195) { // cyan
-      index = 6;
-    }
-    if (195 < h && h <= 225) { // azure
-      index = 7;
-    }
-    if (225 < h && h <= 255) { // blue
-      index = 8;
-    }
-    if (255 < h && h <= 285) { // violet
-      index = 9;
-    }
-    if (285 < h && h <= 315) { // magenta
-      index = 10;
-    }
-    if (315 < h && h <= 345) { // pink
-      index = 11;
-    }
-    if (345 < h && h <= 360) { // red
-      index = 0;
-    }
-    return index;
-  }
-
-};
-
-/*
-@scales:() ->
-scs = []
-for group in @groupRgbs10
-colors = []
-len = group.length
-for j in [0...len]
-  colors.push( group[len-1-j].hex )
-scs.push( chroma.scale( colors ) )
-scs
-*/
-Palettes.codes15 = ['PW', 'LW', 'PD', 'LF', 'LD', 'MW', 'DW', 'MD', 'MF', 'LH', '', 'DH', 'DF', 'DD', 'OW'];
-
-Palettes.codes18 = ['PD', 'LH', 'LD', 'DH', 'DD', 'rr', 'Lr', 'Dr', 'Mor', 'Dor', 'oor', 'OD', 'ooy', 'Moy', 'Doy', 'Dyo', 'Lyo', 'yyo'];
-
-Palettes.rainbowMH = [
-  {
-    hex: "#ee4035"
-  },
-  {
-    hex: "#f37736"
-  },
-  {
-    hex: "#fdf498"
-  },
-  {
-    hex: "#7bc043"
-  },
-  {
-    hex: "#0392cf"
-  }
-];
-
-// ............................. Reds ......................................
-Palettes.redsMH = [
-  {
-    hex: "#ffb2b2"
-  },
-  {
-    hex: "#ff6666"
-  },
-  {
-    hex: "#ff0000"
-  },
-  {
-    hex: "#cc0000"
-  },
-  {
-    hex: "#990000"
-  }
-];
-
-Palettes.reds = [
-  {
-    //{ hex:"#DC143C", hsv:"hsv(348, 91%, 86%)", hsl:"hsl(348, 83%,47%)", code:"HTML", name:"crimson" }
-    //{ hex:"#DB7093", hsv:"hsv(340, 49%, 86%)", hsl:"hsl(340,  6%,65%)", code:"HTML", name:"palevioletred" }
-    //{ hex:"#FFF0F5", hsv:"hsv(340, 60%,100%)", hsl:"hsl(340, 10%,97%)", code:"HTML", name:"lavenderblush" }
-    //{ hex:"#DA70D6", hsv:"hsv(302, 49%, 85%)", hsl:"hsl(302, 59%,65%)", code:"HTML", name:"orchid" }
-    //{ hex:"#D8BFD8", hsv:"hsv(300, 12%, 85%)", hsl:"hsl(300, 24%, 8%)", code:"HTML", name:"thistle" }
-    //{ hex:"#DDA0DD", hsv:"hsv(300, 28%, 87%)", hsl:"hsl(300, 47%,75%)", code:"HTML", name:"plum" }
-    //{ hex:"#800000", hsv:"hsv(  0,100%, 50%)", hsl:"hsl(  0,100%,25%)", code:"HTML", name:"maroon" }
-    //{ hex:"#8B0000", hsv:"hsv(  0,100%, 55%)", hsl:"hsl(  0,100%,27%)", code:"HTML", name:"darkred" }
-    //{ hex:"#FF0000", hsv:"hsv(  0,100%,100%)", hsl:"hsl(  0,100%,50%)", code:"HTML", name:"red" }
-    hex: "#FFCCCC",
-    hsv: "hsv(  0, 22%,100%)",
-    hsl: "hsl(  0,100%, 9%)",
-    code: "PWR",
-    name: "Pale Weak Red"
-  },
-  {
-    hex: "#CC9999",
-    hsv: "hsv(  0, 25%, 80%)",
-    hsl: "hsl(  0, 33%, 7%)",
-    code: "LWR",
-    name: "Light Week Red"
-  },
-  {
-    hex: "#996666",
-    hsv: "hsv(  0, 33%, 60%)",
-    hsl: "hsl(  0, 20%,50%)",
-    code: "MWR",
-    name: "Medium Weak Red"
-  },
-  {
-    hex: "#996666",
-    hsv: "hsv(  0, 33%, 60%)",
-    hsl: "hsl(  0, 20%,50%)",
-    code: "MWR",
-    name: "Medium Weak Red"
-  },
-  {
-    hex: "#FF9999",
-    hsv: "hsv(  0, 40%,100%)",
-    hsl: "hsl(  0,100%,80%)",
-    code: "PDR",
-    name: "Pale Dull Red"
-  },
-  {
-    hex: "#FF6666",
-    hsv: "hsv(  0, 60%,100%)",
-    hsl: "hsl(  0,100%,70%)",
-    code: "LFR",
-    name: "Light Faded Red"
-  },
-  {
-    hex: "#CC6666",
-    hsv: "hsv(  0, 50%, 80%)",
-    hsl: "hsl(  0, 50%,60%)",
-    code: "LDR",
-    name: "Light Dull Red"
-  },
-  {
-    hex: "#FF3333",
-    hsv: "hsv(  0, 80%,100%)",
-    hsl: "hsl(  0,100%,60%)",
-    code: "LHR",
-    name: "Light Hard Red"
-  },
-  {
-    hex: "#CC3333",
-    hsv: "hsv(  0, 75%, 80%)",
-    hsl: "hsl(  0, 60%,50%)",
-    code: "MFR",
-    name: "Medium Faded Red"
-  },
-  {
-    hex: "#993333",
-    hsv: "hsv(  0, 67%, 60%)",
-    hsl: "hsl(  0, 50%,40%)",
-    code: "DDR",
-    name: "Dark Dull Red"
-  },
-  {
-    //{ hex:"#663333", hsv:"hsv(  0, 50%, 40%)", hsl:"hsl(  0, 33%,30%)", code:"DWR", name:"Dark Weak Red" }
-    hex: "#FF0000",
-    hsv: "hsv(  0,100%,100%)",
-    hsl: "hsl(  0,100%,50%)",
-    code: "R",
-    name: "Red"
-  },
-  {
-    hex: "#CC0000",
-    hsv: "hsv(  0,100%, 80%)",
-    hsl: "hsl(  0,100%,40%)",
-    code: "DHR",
-    name: "Dark Hard Red"
-  },
-  {
-    hex: "#990000",
-    hsv: "hsv(  0,100%, 60%)",
-    hsl: "hsl(  0,100%,30%)",
-    code: "DFR",
-    name: "Dark Faded Red"
-  },
-  {
-    hex: "#660000",
-    hsv: "hsv(  0,100%, 40%)",
-    hsl: "hsl(  0,100%,20%)",
-    code: "ODR",
-    name: "Obscure Dull Red"
-  },
-  {
-    hex: "#330000",
-    hsv: "hsv(  0,100%, 20%)",
-    hsl: "hsl(  0,100%,10%)",
-    code: "OWR",
-    name: "Obscure Weak Red"
-  }
-];
-
-// ............................. Brown ...................................
-Palettes.brownsMH = [
-  {
-    hex: "#f1e8dc"
-  },
-  {
-    hex: "#e4d2ba"
-  },
-  {
-    hex: "#d2b48c"
-  },
-  {
-    hex: "#a89070"
-  },
-  {
-    hex: "#7e6c54"
-  }
-];
-
-Palettes.browns = [
-  {
-    hex: "#8B4513",
-    hsv: "hsv(25,86%,55%)",
-    hsl: "hsl(25, 76%,31%)",
-    code: "HTML",
-    name: "saddlebrown"
-  },
-  {
-    hex: "#E9967A",
-    hsv: "hsv(15,48%,91%)",
-    hsl: "hsl(15, 72%,70%)",
-    code: "HTML",
-    name: "darksalmon"
-  },
-  {
-    hex: "#FF6347",
-    hsv: "hsv( 9,72,100%)",
-    hsl: "hsl( 9,100%,64%)",
-    code: "HTML",
-    name: "tomato"
-  },
-  {
-    hex: "#FA8072",
-    hsv: "hsv( 6,54%,98%)",
-    hsl: "hsl( 6, 93%,71%)",
-    code: "HTML",
-    name: "salmon"
-  },
-  {
-    hex: "#FFE4E1",
-    hsv: "hsv( 6,12,100%)",
-    hsl: "hsl( 6,100%,94%)",
-    code: "HTML",
-    name: "mistyrose"
-  },
-  {
-    hex: "#FFFAFA",
-    hsv: "hsv( 0,02,100%)",
-    hsl: "hsl( 0,100%,99%)",
-    code: "HTML",
-    name: "snow"
-  },
-  {
-    hex: "#D2691E",
-    hsv: "hsv(25,86%,82%)",
-    hsl: "hsl(25, 75%,47%)",
-    code: "HTML",
-    name: "chocolate"
-  },
-  {
-    hex: "#BC8F8F",
-    hsv: "hsv( 0,24%,74%)",
-    hsl: "hsl( 0, 25%,65%)",
-    code: "HTML",
-    name: "rosybrown"
-  },
-  {
-    hex: "#F4A460",
-    hsv: "hsv(28,61%,96%)",
-    hsl: "hsl(28, 87%,67%)",
-    code: "HTML",
-    name: "sandybrown"
-  },
-  {
-    hex: "#F08080",
-    hsv: "hsv( 0,47%,94%)",
-    hsl: "hsl( 0, 79%,72%)",
-    code: "HTML",
-    name: "lightcoral"
-  },
-  {
-    hex: "#CD5C5C",
-    hsv: "hsv( 0,55%,80%)",
-    hsl: "hsl( 0, 53%,58%)",
-    code: "HTML",
-    name: "indianred"
-  },
-  {
-    hex: "#A52A2A",
-    hsv: "hsv( 0,75%,65%)",
-    hsl: "hsl( 0, 59%,41%)",
-    code: "HTML",
-    name: "brown"
-  },
-  {
-    hex: "#B22222",
-    hsv: "hsv( 0,81%,70%)",
-    hsl: "hsl( 0, 68%,42%)",
-    code: "HTML",
-    name: "firebrick"
-  }
-];
-
-// ................................. Tans .................................
-Palettes.skinMH = [
-  {
-    hex: "#ffe0bd"
-  },
-  {
-    hex: "#ffcd94"
-  },
-  {
-    hex: "#eac086"
-  },
-  {
-    hex: "#ffad60"
-  },
-  {
-    hex: "#ffe39f"
-  }
-];
-
-Palettes.tansMH = [
-  {
-    hex: "#ffc14c"
-  },
-  {
-    hex: "#ec953c"
-  },
-  {
-    hex: "#f0800d"
-  },
-  {
-    hex: "#ee5a09"
-  },
-  {
-    hex: "#d03501"
-  }
-];
-
-Palettes.tans = [
-  {
-    hex: "#F5DEB3",
-    hsv: "hsv(39, 27%, 96%)",
-    hsl: "hsl(39, 77%,83%)",
-    code: "HTML",
-    name: "wheat"
-  },
-  {
-    hex: "#FFE4B5",
-    hsv: "hsv(38, 29%,100%)",
-    hsl: "hsl(38,100%,85%)",
-    code: "HTML",
-    name: "moccasin"
-  },
-  {
-    hex: "#FFEFD5",
-    hsv: "hsv(37, 16%,100%)",
-    hsl: "hsl(37,100%,92%)",
-    code: "HTML",
-    name: "papayawhip"
-  },
-  {
-    hex: "#FFEBCD",
-    hsv: "hsv(36, 20%,100%)",
-    hsl: "hsl(36,100%,90%)",
-    code: "HTML",
-    name: "blanchedalmond"
-  },
-  {
-    hex: "#FFDEAD",
-    hsv: "hsv(36, 32%,100%)",
-    hsl: "hsl(36,100%,84%)",
-    code: "HTML",
-    name: "navajowhite"
-  },
-  {
-    hex: "#FAEBD7",
-    hsv: "hsv(34, 14%, 98%)",
-    hsl: "hsl(34, 78%,91%)",
-    code: "HTML",
-    name: "antiquewhite"
-  },
-  {
-    hex: "#FFE4C4",
-    hsv: "hsv(33, 23%,100%)",
-    hsl: "hsl(33,100%,88%)",
-    code: "HTML",
-    name: "bisque"
-  },
-  {
-    hex: "#FFDAB9",
-    hsv: "hsv(28, 27%,100%)",
-    hsl: "hsl(28,100%,86%)",
-    code: "HTML",
-    name: "peachpuff"
-  },
-  {
-    hex: "#F5F5DC",
-    hsv: "hsv(60,100%, 96%)",
-    hsl: "hsl(60, 56%,91%)",
-    code: "HTML",
-    name: "beige"
-  },
-  {
-    hex: "#F0E68C",
-    hsv: "hsv(54, 42%, 94%)",
-    hsl: "hsl(54, 77%,75%)",
-    code: "HTML",
-    name: "khaki"
-  },
-  {
-    hex: "#FFD700",
-    hsv: "hsv(51,100%,100%)",
-    hsl: "hsl(51,100%,50%)",
-    code: "HTML",
-    name: "gold"
-  },
-  {
-    hex: "#D2B48C",
-    hsv: "hsv(34, 33%, 82%)",
-    hsl: "hsl(34, 44%,69%)",
-    code: "HTML",
-    name: "tan"
-  }
-];
-
-// ................................. Oranges ..............................
-Palettes.orangesMH = [
-  {
-    hex: "#ffe4b2"
-  },
-  {
-    hex: "#ffc966"
-  },
-  {
-    hex: "#ffa500"
-  },
-  {
-    hex: "#cc8400"
-  },
-  {
-    hex: "#996300"
-  }
-];
-
-Palettes.oranges = [
-  {
-    //{ hex:"#FFFAF0", hsv:"hsv(40, 60%,100%)", hsl:"hsl(40,100%,97%)", code:"HTML", name:"floralwhite" }
-    //{ hex:"#A0522D", hsv:"hsv(19, 72%, 63%)", hsl:"hsl(19, 56%,40%)", code:"HTML", name:"sienna" }
-    //{ hex:"#FDF5E6", hsv:"hsv(39, 09%, 99%)", hsl:"hsl(39, 85%,95%)", code:"HTML", name:"oldlace" }
-    //{ hex:"#FFA500", hsv:"hsv(39,100%,100%)", hsl:"hsl(39,100%,50%)", code:"HTML", name:"orange" }
-    //{ hex:"#DEB887", hsv:"hsv(34, 39%, 87%)", hsl:"hsl(34, 57%,70%)", code:"HTML", name:"burlywood" }
-    //{ hex:"#FF8C00", hsv:"hsv(33,100%,100%)", hsl:"hsl(33,100%,50%)", code:"HTML", name:"darkorange" }
-    //{ hex:"#FAF0E6", hsv:"hsv(30, 08%, 98%)", hsl:"hsl(30, 67%,94%)", code:"HTML", name:"linen" }
-    //{ hex:"#CD853F", hsv:"hsv(30, 69%, 80%)", hsl:"hsl(30, 59%,53%)", code:"HTML", name:"peru" }
-    //{ hex:"#FF4500", hsv:"hsv(16,100%,100%)", hsl:"hsl(16,100%,50%)", code:"HTML", name:"orangered" }
-    //{ hex:"#FF7F50", hsv:"hsv(16, 69%,100%)", hsl:"hsl(16,100%,66%)", code:"HTML", name:"coral" }
-    hex: "#FFCC99",
-    hsv: "hsv(30, 40%,100%)",
-    hsl: "hsl(30,100%,80%)",
-    code: "PDO",
-    name: "Pale Dull Orange"
-  },
-  {
-    hex: "#FFCC66",
-    hsv: "hsv(40, 60%,100%)",
-    hsl: "hsl(40,100%,70%)",
-    code: "LOY",
-    name: "Light Orange-Yellow"
-  },
-  {
-    hex: "#FFCC33",
-    hsv: "hsv(45, 80%,100%)",
-    hsl: "hsl(45,100%,60%)",
-    code: "LYO",
-    name: "Light Yellow-Orange"
-  },
-  {
-    hex: "#FFCC00",
-    hsv: "hsv(48,100%,100%)",
-    hsl: "hsl(48,100%,50%)",
-    code: "YYO",
-    name: "Yellow-Yellow-Orange"
-  },
-  {
-    hex: "#FF9966",
-    hsv: "hsv(20, 60%,100%)",
-    hsl: "hsl(20,100%,70%)",
-    code: "LOR",
-    name: "Light Orange-Red"
-  },
-  {
-    hex: "#FF9933",
-    hsv: "hsv(30, 80%,100%)",
-    hsl: "hsl(30,100%,60%)",
-    code: "LHO",
-    name: "Light Hard Orange"
-  },
-  {
-    hex: "#FF9900",
-    hsv: "hsv(36,100%,100%)",
-    hsl: "hsl(36,100%,50%)",
-    code: "OOY",
-    name: "Orange-Orange-Yellow"
-  },
-  {
-    hex: "#FF6633",
-    hsv: "hsv(15, 80%,100%)",
-    hsl: "hsl(15,100%,60%)",
-    code: "LRO",
-    name: "Light Red-Orange"
-  },
-  {
-    //{ hex:"#CC6600", hsv:"hsv(30,100%, 80%)", hsl:"hsl(30,100%,40%)", code:"DHO",  name:"Dark Hard Orange" }
-    hex: "#CC6633",
-    hsv: "hsv(20, 75%, 80%)",
-    hsl: "hsl(20, 60%,50%)",
-    code: "MOR",
-    name: "Medium Orange-Red"
-  },
-  {
-    hex: "#CC9900",
-    hsv: "hsv(45,100%, 80%)",
-    hsl: "hsl(45,100%,40%)",
-    code: "DYO",
-    name: "Dark Yellow-Orange"
-  },
-  {
-    //{ hex:"#996633", hsv:"hsv(30, 67%, 60%)", hsl:"hsl(30, 50%,40%)", code:"DDO",  name:"Dark Dull Orange" }
-    //{ hex:"#996600", hsv:"hsv(40,100%, 60%)", hsl:"hsl(40,100%,30%)", code:"DOY",  name:"Dark Orange-Yellow" }
-    hex: "#FF6600",
-    hsv: "hsv(24,100%,100%)",
-    hsl: "hsl(24,100%,50%)",
-    code: "OOR",
-    name: "Orange-Orange-Red"
-  },
-  {
-    hex: "#FF3300",
-    hsv: "hsv(12,100%,100%)",
-    hsl: "hsl(12,100%,50%)",
-    code: "RRO",
-    name: "Red-Red-Orange"
-  },
-  {
-    hex: "#CC3300",
-    hsv: "hsv(15,100%, 80%)",
-    hsl: "hsl(15,100%,40%)",
-    code: "DRO",
-    name: "Dark Red-Orange"
-  },
-  {
-    hex: "#993300",
-    hsv: "hsv(20,100%, 60%)",
-    hsl: "hsl(20,100%,30%)",
-    code: "DOR",
-    name: "Dark Orange-Red"
-  },
-  {
-    hex: "#663300",
-    hsv: "hsv(30,100%, 40%)",
-    hsl: "hsl(30,100%,20%)",
-    code: "ODO",
-    name: "Obscure Dull Orange"
-  }
-];
-
-// ................................ Yellows .....................................
-Palettes.yellowsMH = [
-  {
-    hex: "#ffffcc"
-  },
-  {
-    hex: "#ffff66"
-  },
-  {
-    hex: "#ffff00"
-  },
-  {
-    hex: "#FFD700" //cccc00
-  },
-  {
-    hex: "#DAA520" // 999900
-  }
-];
-
-Palettes.yellows = [
-  {
-    hex: "#FFFFF0",
-    hsv: "hsv(60%,06,100%)",
-    hsl: "hsl(60,100%,97%)",
-    code: "HTML",
-    name: "ivory"
-  },
-  {
-    hex: "#FFFFE0",
-    hsv: "hsv(60%,12,100%)",
-    hsl: "hsl(60,100%,94%)",
-    code: "HTML",
-    name: "lightyellow"
-  },
-  {
-    hex: "#FFFF00",
-    hsv: "hsv(60,100%,100%)",
-    hsl: "hsl(60,100%,50%)",
-    code: "HTML",
-    name: "yellow"
-  },
-  {
-    hex: "#FFF5EE",
-    hsv: "hsv(25%,07,100%)",
-    hsl: "hsl(25,100%,97%)",
-    code: "HTML",
-    name: "seashell"
-  },
-  {
-    hex: "#FFA07A",
-    hsv: "hsv(17%,52,100%)",
-    hsl: "hsl(17,100%,74%)",
-    code: "HTML",
-    name: "lightsalmon"
-  },
-  {
-    hex: "#808000",
-    hsv: "hsv(60,100%,50%)",
-    hsl: "hsl(60,100%,25%)",
-    code: "HTML",
-    name: "olive"
-  },
-  {
-    hex: "#BDB76B",
-    hsv: "hsv(56%,43%,74%)",
-    hsl: "hsl(56%,38%,58%)",
-    code: "HTML",
-    name: "darkkhaki"
-  },
-  {
-    hex: "#DAA520",
-    hsv: "hsv(43%,85%,85%)",
-    hsl: "hsl(43%,74%,49%)",
-    code: "HTML",
-    name: "goldenrod"
-  },
-  {
-    hex: "#B8860B",
-    hsv: "hsv(43%,94%,72%)",
-    hsl: "hsl(43%,89%,38%)",
-    code: "HTML",
-    name: "darkgoldenrod"
-  },
-  {
-    hex: "#FAFAD2",
-    hsv: "hsv(60%,16%,98%)",
-    hsl: "hsl(60%,80%,90%)",
-    code: "HTML",
-    name: "lightgoldenrodyellow"
-  },
-  {
-    hex: "#EEE8AA",
-    hsv: "hsv(55%,29%,93%)",
-    hsl: "hsl(55%,67%,80%)",
-    code: "HTML",
-    name: "palegoldenrod"
-  },
-  {
-    hex: "#FFFACD",
-    hsv: "hsv(54%,20%,100%)",
-    hsl: "hsl(54,100%,90%)",
-    code: "HTML",
-    name: "lemonchiffon"
-  },
-  {
-    hex: "#FFF8DC",
-    hsv: "hsv(48%,14,100%)",
-    hsl: "hsl(48,100%,93%)",
-    code: "HTML",
-    name: "cornsilk"
-  },
-  {
-    hex: "#FFFFCC",
-    hsv: "hsv(60%,20%,100%)",
-    hsl: "hsl(60,100%,90%)",
-    code: "PWY",
-    name: "Pale Weak Yellow"
-  },
-  {
-    hex: "#FFFF99",
-    hsv: "hsv(60%,4,100%)",
-    hsl: "hsl(60,100%,80%)",
-    code: "PDY",
-    name: "Pale Dull Yellow"
-  },
-  {
-    hex: "#FFFF66",
-    hsv: "hsv(60%,6,100%)",
-    hsl: "hsl(60,100%,70%)",
-    code: "LFY",
-    name: "Light Faded Yellow"
-  },
-  {
-    hex: "#FFFF33",
-    hsv: "hsv(60%,8,100%)",
-    hsl: "hsl(60,100%,60%)",
-    code: "LHY",
-    name: "Light Hard Yellow"
-  },
-  {
-    hex: "#FFFF00",
-    hsv: "hsv(60,100%,100%)",
-    hsl: "hsl(60,100%,50%)",
-    code: "Y",
-    name: "Yellow"
-  },
-  {
-    hex: "#CCCC99",
-    hsv: "hsv(60%,25%,80%)",
-    hsl: "hsl(60%,33%,70%)",
-    code: "LWY",
-    name: "Light Weak Yellow"
-  },
-  {
-    hex: "#CCCC66",
-    hsv: "hsv(60%,50%,80%)",
-    hsl: "hsl(60%,50%,60%)",
-    code: "LDY",
-    name: "Light Dull Yellow"
-  },
-  {
-    hex: "#CCCC33",
-    hsv: "hsv(60%,75%,80%)",
-    hsl: "hsl(60%,60%,50%)",
-    code: "MFY",
-    name: "Medium Faded Yellow"
-  },
-  {
-    hex: "#CCCC00",
-    hsv: "hsv(60,100%,80%)",
-    hsl: "hsl(60,100%,40%)",
-    code: "DHY",
-    name: "Dark Hard Yellow"
-  },
-  {
-    hex: "#999966",
-    hsv: "hsv(60%,33%,60%)",
-    hsl: "hsl(60%,20%,50%)",
-    code: "MWY",
-    name: "Medium Weak Yellow"
-  },
-  {
-    hex: "#999933",
-    hsv: "hsv(60%,67%,60%)",
-    hsl: "hsl(60%,50%,40%)",
-    code: "DDY",
-    name: "Dark Dull Yellow"
-  },
-  {
-    hex: "#999900",
-    hsv: "hsv(60,100%,60%)",
-    hsl: "hsl(60,100%,30%)",
-    code: "DFY",
-    name: "Dark Faded Yellow"
-  },
-  {
-    hex: "#666633",
-    hsv: "hsv(60%,50%,40%)",
-    hsl: "hsl(60%,33%,30%)",
-    code: "DWY",
-    name: "Dark Weak Yellow"
-  },
-  {
-    hex: "#666600",
-    hsv: "hsv(60,100%,40%)",
-    hsl: "hsl(60,100%,20%)",
-    code: "ODY",
-    name: "Obscure Dull Yellow"
-  },
-  {
-    hex: "#333300",
-    hsv: "hsv(60,100%,20%)",
-    hsl: "hsl(60,100%,100%)",
-    code: "OWY",
-    name: "Obscure Weak Yellow"
-  }
-];
-
-// ............................ Lime .....................................
-
-//32cd32
-//2db82d
-//28a428
-//238f23
-//1e7b1e
-Palettes.limesMH = [
-  {
-    hex: "#96e737"
-  },
-  {
-    hex: "#90f035"
-  },
-  {
-    hex: "#71f066"
-  },
-  {
-    hex: "#5ee718"
-  },
-  {
-    hex: "#43c52f"
-  }
-];
-
-Palettes.limes = [
-  {
-    //{ hex:"#7FFFD4", hsv:"hsv(160%,5,100%)", hsl:"hsl(160,100%,75%)", code:"HTML", name:"aquamarine" }
-    //{ hex:"#ADFF2F", hsv:"hsv(84%,82,100%)", hsl:"hsl(84,100%,59%)", code:"HTML", name:"greenyellow" }
-    //{ hex:"#7FFF00", hsv:"hsv(90,100%,100%)", hsl:"hsl(90,100%,50%)", code:"HTML", name:"chartreuse" }
-    //{ hex:"#00FF00", hsv:"hsv(120,100%,100%)", hsl:"hsl(120,100%,50%)", code:"HTML", name:"lime" }
-    //{ hex:"#7CFC00", hsv:"hsv(90,100%,99%)", hsl:"hsl(90,100%,49%)", code:"HTML", name:"lawngreen" }
-    //{ hex:"#98FB98", hsv:"hsv(120%,39%,98%)", hsl:"hsl(120%,93%,79%)", code:"HTML", name:"palegreen" }
-    //{ hex:"#00FA9A", hsv:"hsv(157,100%,98%)", hsl:"hsl(157,100%,49%)", code:"HTML", name:"mediumspringgreen" }
-    //{ hex:"#90EE90", hsv:"hsv(120%,39%,93%)", hsl:"hsl(120%,73%,75%)", code:"HTML", name:"lightgreen" }
-    //{ hex:"#00FFFF", hsv:"hsv(180,100%,100%)", hsl:"hsl(180,100%,50%)", code:"HTML", name:"aqua" }
-    //{ hex:"#40E0D0", hsv:"hsv(174%,7100%,88%)", hsl:"hsl(174%,72%,56%)", code:"HTML", name:"turquoise" }
-    hex: "#CCFF00",
-    hsv: "hsv(72,100%,100%)",
-    hsl: "hsl(72,100%,50%)",
-    code: "YYS",
-    name: "Yellow-Yellow-Spring"
-  },
-  {
-    hex: "#CCFF33",
-    hsv: "hsv(75%,8,100%)",
-    hsl: "hsl(75,100%,60%)",
-    code: "LYS",
-    name: "Light Yellow-Spring"
-  },
-  {
-    hex: "#99CC00",
-    hsv: "hsv(75,100%,80%)",
-    hsl: "hsl(75,100%,40%)",
-    code: "DYS",
-    name: "Dark Yellow-Spring"
-  },
-  {
-    hex: "#CCFF66",
-    hsv: "hsv(80%,6,100%)",
-    hsl: "hsl(80,100%,70%)",
-    code: "LSY",
-    name: "Light Spring-Yellow"
-  },
-  {
-    hex: "#99CC33",
-    hsv: "hsv(80%,75%,80%)",
-    hsl: "hsl(80%,60%,50%)",
-    code: "MSY",
-    name: "Medium Spring-Yellow"
-  },
-  {
-    hex: "#669900",
-    hsv: "hsv(80,100%,60%)",
-    hsl: "hsl(80,100%,30%)",
-    code: "DSY",
-    name: "Dark Spring-Yellow"
-  },
-  {
-    hex: "#99FF00",
-    hsv: "hsv(84,100%,100%)",
-    hsl: "hsl(84,100%,50%)",
-    code: "SSY",
-    name: "Spring-Spring-Yellow"
-  },
-  {
-    hex: "#99FF33",
-    hsv: "hsv(90%,8,100%)",
-    hsl: "hsl(90,100%,60%)",
-    code: "LHS",
-    name: "Light Hard Spring"
-  },
-  {
-    hex: "#66CC00",
-    hsv: "hsv(90,100%,80%)",
-    hsl: "hsl(90,100%,40%)",
-    code: "DHS",
-    name: "Dark Hard Spring"
-  },
-  {
-    hex: "#CCFF99",
-    hsv: "hsv(90%,4,100%)",
-    hsl: "hsl(90,100%,80%)",
-    code: "PDS",
-    name: "Pale Dull Spring"
-  },
-  {
-    hex: "#99CC66",
-    hsv: "hsv(90%,50%,80%)",
-    hsl: "hsl(90%,50%,60%)",
-    code: "LDS",
-    name: "Light Dull Spring"
-  },
-  {
-    hex: "#669933",
-    hsv: "hsv(90%,67%,60%)",
-    hsl: "hsl(90%,50%,40%)",
-    code: "DDS",
-    name: "Dark Dull Spring"
-  },
-  {
-    hex: "#336600",
-    hsv: "hsv(90,100%,40%)",
-    hsl: "hsl(90,100%,20%)",
-    code: "ODS",
-    name: "Obscure Dull Spring"
-  },
-  {
-    hex: "#66FF00",
-    hsv: "hsv(96,100%,100%)",
-    hsl: "hsl(96,100%,50%)",
-    code: "SSG",
-    name: "Spring-Spring-Green"
-  },
-  {
-    hex: "#99FF66",
-    hsv: "hsv(100%,6,100%)",
-    hsl: "hsl(100,100%,70%)",
-    code: "LSG",
-    name: "Light Spring-Green"
-  },
-  {
-    hex: "#66CC33",
-    hsv: "hsv(100%,75%,80%)",
-    hsl: "hsl(100%,60%,50%)",
-    code: "MSG",
-    name: "Medium Spring-Green"
-  },
-  {
-    hex: "#339900",
-    hsv: "hsv(100,100%,60%)",
-    hsl: "hsl(100,100%,30%)",
-    code: "DSG",
-    name: "Dark Spring-Green"
-  },
-  {
-    hex: "#66FF33",
-    hsv: "hsv(105%,8,100%)",
-    hsl: "hsl(105,100%,60%)",
-    code: "LGS",
-    name: "Light Green-Spring"
-  },
-  {
-    hex: "#33CC00",
-    hsv: "hsv(105,100%,80%)",
-    hsl: "hsl(105,100%,40%)",
-    code: "DGS",
-    name: "Dark Green-Spring"
-  },
-  {
-    hex: "#33FF00",
-    hsv: "hsv(108,100%,100%)",
-    hsl: "hsl(108,100%,50%)",
-    code: "GGS",
-    name: "Green-Green-Spring"
-  }
-];
-
-// ............................ Greens .....................................
-Palettes.greensMH = [
-  {
-    hex: "#b2ffb2"
-  },
-  {
-    hex: "#66ff66"
-  },
-  {
-    hex: "#00ff00"
-  },
-  {
-    hex: "#00cc00"
-  },
-  {
-    hex: "#009900"
-  }
-];
-
-Palettes.greens = [
-  {
-    //{ hex:"#008000", hsv:"hsv(120,100%,50%)", hsl:"hsl(120,100%,25%)", code:"HTML", name:"green" }
-    //{ hex:"#F0FFF0", hsv:"hsv(120%,06,100%)", hsl:"hsl(120,100%,97%)", code:"HTML", name:"honeydew" }
-    //{ hex:"#48D1CC", hsv:"hsv(178%,66%,82%)", hsl:"hsl(178%,60%,55%)", code:"HTML", name:"mediumturquoise" }
-    //{ hex:"#66CDAA", hsv:"hsv(160%,50%,80%)", hsl:"hsl(160%,5100%,60%)", code:"HTML", name:"mediumaquamarine" }
-    //{ hex:"#9ACD32", hsv:"hsv(80%,76%,80%)",  hsl:"hsl(80%,6100%,50%)", code:"HTML", name:"yellowgreen" }
-    //{ hex:"#32CD32", hsv:"hsv(120%,76%,80%)", hsl:"hsl(120%,6100%,50%)", code:"HTML", name:"limegreen" }
-    //{ hex:"#8FBC8F", hsv:"hsv(120%,24%,74%)", hsl:"hsl(120%,25%,65%)", code:"HTML", name:"darkseagreen" }
-    //{ hex:"#3CB371", hsv:"hsv(147%,66%,70%)", hsl:"hsl(147%,50%,47%)", code:"HTML", name:"mediumseagreen" }
-    //{ hex:"#20B2AA", hsv:"hsv(177%,82%,70%)", hsl:"hsl(177%,70%,4100%)", code:"HTML", name:"lightseagreen" }
-    //{ hex:"#6B8E23", hsv:"hsv(80%,75%,56%)",  hsl:"hsl(80%,60%,35%)", code:"HTML", name:"olivedrab" }
-    //{ hex:"#2E8B57", hsv:"hsv(146%,67%,55%)", hsl:"hsl(146%,50%,36%)", code:"HTML", name:"seagreen" }
-    //{ hex:"#228B22", hsv:"hsv(120%,76%,55%)", hsl:"hsl(120%,6100%,34%)", code:"HTML", name:"forestgreen" }
-    //{ hex:"#556B2F", hsv:"hsv(82%,56%,42%)",  hsl:"hsl(82%,39%,30%)", code:"HTML", name:"darkolivegreen" }
-    //{ hex:"#006400", hsv:"hsv(120,100%,39%)", hsl:"hsl(120,100%,20%)", code:"HTML", name:"darkgreen" }
-    hex: "#CCFFCC",
-    hsv: "hsv(120%,20%,100%)",
-    hsl: "hsl(120,100%,90%)",
-    code: "PWG",
-    name: "Pale Weak Green"
-  },
-  {
-    hex: "#99FF99",
-    hsv: "hsv(120%,4,100%)",
-    hsl: "hsl(120,100%,80%)",
-    code: "PDG",
-    name: "Pale Dull Green"
-  },
-  {
-    hex: "#66FF66",
-    hsv: "hsv(120%,6,100%)",
-    hsl: "hsl(120,100%,70%)",
-    code: "LFG",
-    name: "Light Faded Green"
-  },
-  {
-    hex: "#33FF33",
-    hsv: "hsv(120%,8,100%)",
-    hsl: "hsl(120,100%,60%)",
-    code: "LHG",
-    name: "Light Hard Green"
-  },
-  {
-    hex: "#00FF00",
-    hsv: "hsv(120,100%,100%)",
-    hsl: "hsl(120,100%,50%)",
-    code: "G",
-    name: "Green"
-  },
-  {
-    hex: "#99CC99",
-    hsv: "hsv(120%,25%,80%)",
-    hsl: "hsl(120%,33%,70%)",
-    code: "LWG",
-    name: "Light Weak Green"
-  },
-  {
-    hex: "#66CC66",
-    hsv: "hsv(120%,50%,80%)",
-    hsl: "hsl(120%,50%,60%)",
-    code: "LDG",
-    name: "Light Dull Green"
-  },
-  {
-    hex: "#33CC33",
-    hsv: "hsv(120%,75%,80%)",
-    hsl: "hsl(120%,60%,50%)",
-    code: "DHG",
-    name: "Medium Faded Green"
-  },
-  {
-    hex: "#00CC00",
-    hsv: "hsv(120,100%,80%)",
-    hsl: "hsl(120,100%,40%)",
-    code: "DHG",
-    name: "Dark Hard Green"
-  },
-  {
-    hex: "#669966",
-    hsv: "hsv(120%,33%,60%)",
-    hsl: "hsl(120%,20%,50%)",
-    code: "MWG",
-    name: "Medium Weak Green"
-  },
-  {
-    hex: "#339933",
-    hsv: "hsv(120%,67%,60%)",
-    hsl: "hsl(120%,50%,40%)",
-    code: "DDG",
-    name: "Dark Dull Green"
-  },
-  {
-    hex: "#009900",
-    hsv: "hsv(120,100%,60%)",
-    hsl: "hsl(120,100%,30%)",
-    code: "DFG",
-    name: "Dark Faded Green"
-  },
-  {
-    hex: "#336633",
-    hsv: "hsv(120%,50%,40%)",
-    hsl: "hsl(120%,33%,30%)",
-    code: "DWG",
-    name: "Dark Weak Green"
-  },
-  {
-    hex: "#006600",
-    hsv: "hsv(120,100%,40%)",
-    hsl: "hsl(120,100%,20%)",
-    code: "ODG",
-    name: "Obscure Dull Green"
-  },
-  {
-    hex: "#003300",
-    hsv: "hsv(120,100%,20%)",
-    hsl: "hsl(120,100%,100%)",
-    code: "OWG",
-    name: "Obscure Weak Green"
-  }
-];
-
-// .......... Teals .......
-Palettes.aquasMH = [
-  {
-    hex: "#76eec6"
-  },
-  {
-    hex: "#6ad6b2"
-  },
-  {
-    hex: "#5ebe9e"
-  },
-  {
-    hex: "#52a68a"
-  },
-  {
-    hex: "#468e76"
-  }
-];
-
-Palettes.aquasMHbak = [
-  {
-    hex: "#d8fff2"
-  },
-  {
-    hex: "#b2ffe5"
-  },
-  {
-    hex: "#8bffd8"
-  },
-  {
-    hex: "#65cca9"
-  },
-  {
-    hex: "#4c997f"
-  }
-];
-
-Palettes.tealsMH = [
-  {
-    hex: "#b2d8d8"
-  },
-  {
-    hex: "#66b2b2"
-  },
-  {
-    hex: "#008080"
-  },
-  {
-    hex: "#006666"
-  },
-  {
-    hex: "#004c4c"
-  }
-];
-
-Palettes.teals = [
-  {
-    //{ hex:"#008080", hsv:"hsv(180,100%,50%)", hsl:"hsl(180,100%,25%)", code:"HTML", name:"teal" }
-    //{ hex:"#00FF7F", hsv:"hsv(150,100%,100%)", hsl:"hsl(150,100%,50%)", code:"HTML", name:"springgreen" }
-    //{ hex:"#F5FFFA", hsv:"hsv(150%,04,100%)", hsl:"hsl(150,100%,98%)", code:"HTML", name:"mintcream" }
-    hex: "#00FF33",
-    hsv: "hsv(132,100%,100%)",
-    hsl: "hsl(132,100%,50%)",
-    code: "GGT",
-    name: "Green-Green-Teal"
-  },
-  {
-    hex: "#33FF66",
-    hsv: "hsv(135%,8,100%)",
-    hsl: "hsl(135,100%,60%)",
-    code: "LGT",
-    name: "Light Green-Teal"
-  },
-  {
-    hex: "#00CC33",
-    hsv: "hsv(135,100%,80%)",
-    hsl: "hsl(135,100%,40%)",
-    code: "DGT",
-    name: "Dark Green-Teal"
-  },
-  {
-    hex: "#66FF99",
-    hsv: "hsv(140%,6,100%)",
-    hsl: "hsl(140,100%,70%)",
-    code: "LTG",
-    name: "Light Teal-Green"
-  },
-  {
-    hex: "#33CC66",
-    hsv: "hsv(140%,75%,80%)",
-    hsl: "hsl(140%,60%,50%)",
-    code: "MTG",
-    name: "Medium Teal-Green"
-  },
-  {
-    hex: "#009933",
-    hsv: "hsv(140,100%,60%)",
-    hsl: "hsl(140,100%,30%)",
-    code: "DTG",
-    name: "Dark Teal-Green"
-  },
-  {
-    hex: "#00FF66",
-    hsv: "hsv(144,100%,100%)",
-    hsl: "hsl(144,100%,50%)",
-    code: "TTG",
-    name: "Teal-Teal-Green"
-  },
-  {
-    hex: "#33FF99",
-    hsv: "hsv(150%,8,100%)",
-    hsl: "hsl(150,100%,60%)",
-    code: "LHT",
-    name: "Light Hard Teal"
-  },
-  {
-    hex: "#00CC66",
-    hsv: "hsv(150,100%,80%)",
-    hsl: "hsl(150,100%,40%)",
-    code: "DHT",
-    name: "Dark Hard Teal"
-  },
-  {
-    hex: "#99FFCC",
-    hsv: "hsv(150%,4,100%)",
-    hsl: "hsl(150,100%,80%)",
-    code: "PDT",
-    name: "Pale Dull Teal"
-  },
-  {
-    hex: "#66CC99",
-    hsv: "hsv(150%,50%,80%)",
-    hsl: "hsl(150%,50%,60%)",
-    code: "LDT",
-    name: "Light Dull Teal"
-  },
-  {
-    hex: "#339966",
-    hsv: "hsv(150%,67%,60%)",
-    hsl: "hsl(150%,50%,40%)",
-    code: "DDT",
-    name: "Dark Dull Teal"
-  },
-  {
-    hex: "#00FF99",
-    hsv: "hsv(156,100%,100%)",
-    hsl: "hsl(156,100%,50%)",
-    code: "TTC",
-    name: "Teal-Teal-Cyan"
-  },
-  {
-    hex: "#66FFCC",
-    hsv: "hsv(160%,6,100%)",
-    hsl: "hsl(160,100%,70%)",
-    code: "LTC",
-    name: "Light Teal-Cyan"
-  },
-  {
-    hex: "#33CC99",
-    hsv: "hsv(160%,75%,80%)",
-    hsl: "hsl(160%,60%,50%)",
-    code: "MTC",
-    name: "Medium Teal-Cyan"
-  },
-  {
-    hex: "#009966",
-    hsv: "hsv(160,100%,60%)",
-    hsl: "hsl(160,100%,30%)",
-    code: "DTC",
-    name: "Dark Teal-Cyan"
-  },
-  {
-    hex: "#33FFCC",
-    hsv: "hsv(165%,8,100%)",
-    hsl: "hsl(165,100%,60%)",
-    code: "LCT",
-    name: "Light Cyan-Teal"
-  },
-  {
-    hex: "#00CC99",
-    hsv: "hsv(165,100%,80%)",
-    hsl: "hsl(165,100%,40%)",
-    code: "DCT",
-    name: "Dark Cyan-Teal"
-  },
-  {
-    hex: "#00FFCC",
-    hsv: "hsv(168,100%,100%)",
-    hsl: "hsl(168,100%,50%)",
-    code: "CCT",
-    name: "Cyan-Cyan-Teal"
-  },
-  {
-    hex: "#33DDAA",
-    hsv: "hsv(150%,67%,60%)",
-    hsl: "hsl(150%,50%,30%)",
-    code: "QDT",
-    name: "Q Dull Teal"
-  },
-  {
-    hex: "#006633",
-    hsv: "hsv(150,100%,40%)",
-    hsl: "hsl(150,100%,20%)",
-    code: "ODT",
-    name: "Obscure Dull Teal"
-  }
-];
-
-// ...... Cyans ......
-Palettes.cyansMH = [
-  {
-    hex: "#00ffff"
-  },
-  {
-    hex: "#00dfdf"
-  },
-  {
-    hex: "#00cccc"
-  },
-  {
-    hex: "#00b4b4"
-  },
-  {
-    hex: "#009292"
-  }
-];
-
-Palettes.cyans = [
-  {
-    //{ hex:"#00FFFF", hsv:"hsv(180,100%,100%)", hsl:"hsl(180,100%,50%)", code:"HTML", name:"cyan" }
-    //{ hex:"#008B8B", hsv:"hsv(180,100%,55%)", hsl:"hsl(180,100%,27%)", code:"HTML", name:"darkcyan" }
-    //{ hex:"#E0FFFF", hsv:"hsv(180%,12,100%)", hsl:"hsl(180,100%,94%)", code:"HTML", name:"lightcyan" }
-    hex: "#CCFFFF",
-    hsv: "hsv(180%,20%,100%)",
-    hsl: "hsl(180,100%,90%)",
-    code: "PWC",
-    name: "Pale Weak Cyan"
-  },
-  {
-    hex: "#99FFFF",
-    hsv: "hsv(180%,4,100%)",
-    hsl: "hsl(180,100%,80%)",
-    code: "PDC",
-    name: "Pale Dull Cyan"
-  },
-  {
-    hex: "#66FFFF",
-    hsv: "hsv(180%,6,100%)",
-    hsl: "hsl(180,100%,70%)",
-    code: "LFC",
-    name: "Light Faded Cyan"
-  },
-  {
-    hex: "#33FFFF",
-    hsv: "hsv(180%,8,100%)",
-    hsl: "hsl(180,100%,60%)",
-    code: "LHC",
-    name: "Light Hard Cyan"
-  },
-  {
-    hex: "#00FFFF",
-    hsv: "hsv(180,100%,100%)",
-    hsl: "hsl(180,100%,50%)",
-    code: "C",
-    name: "Cyan"
-  },
-  {
-    hex: "#99CCCC",
-    hsv: "hsv(180%,25%,80%)",
-    hsl: "hsl(180%,33%,70%)",
-    code: "LWC",
-    name: "Light Weak Cyan"
-  },
-  {
-    hex: "#66CCCC",
-    hsv: "hsv(180%,50%,80%)",
-    hsl: "hsl(180%,50%,60%)",
-    code: "LDC",
-    name: "Light Dull Cyan"
-  },
-  {
-    hex: "#33CCCC",
-    hsv: "hsv(180%,75%,80%)",
-    hsl: "hsl(180%,60%,50%)",
-    code: "MFC",
-    name: "Medium Faded Cyan"
-  },
-  {
-    hex: "#00CCCC",
-    hsv: "hsv(180,100%,80%)",
-    hsl: "hsl(180,100%,40%)",
-    code: "DHC",
-    name: "Dark Hard Cyan"
-  },
-  {
-    hex: "#669999",
-    hsv: "hsv(180%,33%,60%)",
-    hsl: "hsl(180%,20%,50%)",
-    code: "MWC",
-    name: "Medium Weak Cyan"
-  },
-  {
-    hex: "#339999",
-    hsv: "hsv(180%,67%,60%)",
-    hsl: "hsl(180%,50%,40%)",
-    code: "DDC",
-    name: "Dark Dull Cyan"
-  },
-  {
-    hex: "#009999",
-    hsv: "hsv(180,100%,60%)",
-    hsl: "hsl(180,100%,30%)",
-    code: "DFC",
-    name: "Dark Faded Cyan"
-  },
-  {
-    hex: "#336666",
-    hsv: "hsv(180%,50%,40%)",
-    hsl: "hsl(180%,33%,30%)",
-    code: "DWC",
-    name: "Dark Weak Cyan"
-  },
-  {
-    hex: "#006666",
-    hsv: "hsv(180,100%,40%)",
-    hsl: "hsl(180,100%,20%)",
-    code: "ODC",
-    name: "Obscure Dull Cyan"
-  },
-  {
-    hex: "#003333",
-    hsv: "hsv(180,100%,20%)",
-    hsl: "hsl(180,100%,100%)",
-    code: "OWC",
-    name: "Obscure Weak Cyan"
-  }
-];
-
-// ................................ Azures ...............................
-Palettes.azuresMH = [
-  {
-    hex: "#e2f3fb"
-  },
-  {
-    hex: "#93e1ed"
-  },
-  {
-    hex: "#02b9f3"
-  },
-  {
-    hex: "#018abd"
-  },
-  {
-    hex: "#005c9d"
-  }
-];
-
-Palettes.azures = [
-  {
-    //{ hex:"#F0F8FF", hsv:"hsv(208%,06,100%)", hsl:"hsl(208,100%,97%)", code:"HTML", name:"aliceblue" }
-    //{ hex:"#F0FFFF", hsv:"hsv(180%,06,100%)", hsl:"hsl(180,100%,97%)", code:"HTML", name:"azure" }
-    //{ hex:"#B0C4DE", hsv:"hsv(214%,2100%,87%)", hsl:"hsl(214%,4100%,78%)", code:"HTML", name:"lightsteelblue" }
-    //{ hex:"#B0E0E6", hsv:"hsv(187%,23%,90%)", hsl:"hsl(187%,52%,80%)", code:"HTML", name:"powderblue" }
-    //{ hex:"#ADD8E6", hsv:"hsv(195%,25%,90%)", hsl:"hsl(195%,53%,79%)", code:"HTML", name:"lightblue" }
-    //{ hex:"#AFEEEE", hsv:"hsv(180%,26%,93%)", hsl:"hsl(180%,65%,8100%)", code:"HTML", name:"paleturquoise" }
-    //{ hex:"#5F9EA0", hsv:"hsv(182%,4100%,63%)", hsl:"hsl(182%,25%,50%)", code:"HTML", name:"cadetblue" }
-    //{ hex:"#87CEEB", hsv:"hsv(197%,43%,92%)", hsl:"hsl(197%,7100%,73%)", code:"HTML", name:"skyblue" }
-    //{ hex:"#87CEFA", hsv:"hsv(203%,46%,98%)", hsl:"hsl(203%,92%,75%)", code:"HTML", name:"lightskyblue" }
-    //{ hex:"#6A5ACD", hsv:"hsv(248%,56%,80%)", hsl:"hsl(248%,53%,58%)", code:"HTML", name:"slateblue" }
-    hex: "#00CCFF",
-    hsv: "hsv(192,100%,100%)",
-    hsl: "hsl(192,100%,50%)",
-    code: "CCA",
-    name: "Cyan-Cyan-Azure"
-  },
-  {
-    hex: "#33CCFF",
-    hsv: "hsv(195%,8,100%)",
-    hsl: "hsl(195,100%,60%)",
-    code: "LCA",
-    name: "Light Cyan-Azure"
-  },
-  {
-    hex: "#0099CC",
-    hsv: "hsv(195,100%,80%)",
-    hsl: "hsl(195,100%,40%)",
-    code: "DCA",
-    name: "Dark Cyan-Azure"
-  },
-  {
-    hex: "#66CCFF",
-    hsv: "hsv(200%,6,100%)",
-    hsl: "hsl(200,100%,70%)",
-    code: "LAC",
-    name: "Light Azure-Cyan"
-  },
-  {
-    hex: "#3399CC",
-    hsv: "hsv(200%,75%,80%)",
-    hsl: "hsl(200%,60%,50%)",
-    code: "MAC",
-    name: "Medium Azure-Cyan"
-  },
-  {
-    hex: "#006699",
-    hsv: "hsv(200,100%,60%)",
-    hsl: "hsl(200,100%,30%)",
-    code: "DAC",
-    name: "Dark Azure-Cyan"
-  },
-  {
-    hex: "#0099FF",
-    hsv: "hsv(204,100%,100%)",
-    hsl: "hsl(204,100%,50%)",
-    code: "AAC",
-    name: "Azure-Azure-Cyan"
-  },
-  {
-    hex: "#3399FF",
-    hsv: "hsv(210%,8,100%)",
-    hsl: "hsl(210,100%,60%)",
-    code: "LHA",
-    name: "Light Hard Azure"
-  },
-  {
-    hex: "#0066CC",
-    hsv: "hsv(210,100%,80%)",
-    hsl: "hsl(210,100%,40%)",
-    code: "DHA",
-    name: "Dark Hard Azure"
-  },
-  {
-    hex: "#99CCFF",
-    hsv: "hsv(210%,4,100%)",
-    hsl: "hsl(210,100%,80%)",
-    code: "PDA",
-    name: "Pale Dull Azure"
-  },
-  {
-    hex: "#6699CC",
-    hsv: "hsv(210%,50%,80%)",
-    hsl: "hsl(210%,50%,60%)",
-    code: "LDA",
-    name: "Light Dull Azure"
-  },
-  {
-    hex: "#336699",
-    hsv: "hsv(210%,67%,60%)",
-    hsl: "hsl(210%,50%,40%)",
-    code: "DDA",
-    name: "Dark Dull Azure"
-  },
-  {
-    hex: "#003366",
-    hsv: "hsv(210,100%,40%)",
-    hsl: "hsl(210,100%,20%)",
-    code: "ODA",
-    name: "Obscure Dull Azure"
-  },
-  {
-    hex: "#0066FF",
-    hsv: "hsv(216,100%,100%)",
-    hsl: "hsl(216,100%,50%)",
-    code: "AAB",
-    name: "Azure-Azure-Blue"
-  },
-  {
-    hex: "#6699FF",
-    hsv: "hsv(220%,6,100%)",
-    hsl: "hsl(220,100%,70%)",
-    code: "LAB",
-    name: "Light Azure-Blue"
-  },
-  {
-    hex: "#3366CC",
-    hsv: "hsv(220%,75%,80%)",
-    hsl: "hsl(220%,60%,50%)",
-    code: "MAB",
-    name: "Medium Azure-Blue"
-  },
-  {
-    hex: "#003399",
-    hsv: "hsv(220,100%,60%)",
-    hsl: "hsl(220,100%,30%)",
-    code: "DAB",
-    name: "Dark Azure-Blue"
-  },
-  {
-    hex: "#3366FF",
-    hsv: "hsv(225%,8,100%)",
-    hsl: "hsl(225,100%,60%)",
-    code: "LBA",
-    name: "Light Blue-Azure"
-  },
-  {
-    hex: "#0033CC",
-    hsv: "hsv(225,100%,80%)",
-    hsl: "hsl(225,100%,40%)",
-    code: "DBA",
-    name: "Dark Blue-Azure"
-  },
-  {
-    hex: "#0033FF",
-    hsv: "hsv(228,100%,100%)",
-    hsl: "hsl(228,100%,50%)",
-    code: "BBA",
-    name: "Blue-Blue-Azure"
-  }
-];
-
-// ................................ Blues ......................................
-Palettes.bluesMH = [
-  {
-    hex: "#b2d8ff"
-  },
-  {
-    hex: "#66b2ff"
-  },
-  {
-    hex: "#0080ff"
-  },
-  {
-    hex: "#0066cc"
-  },
-  {
-    hex: "#004c99"
-  }
-];
-
-Palettes.blues = [
-  {
-    hex: "#b2d8ff"
-  },
-  {
-    hex: "#66b2ff"
-  },
-  {
-    hex: "#0080ff"
-  },
-  {
-    hex: "#0066cc"
-  },
-  {
-    hex: "#004c99"
-  },
-  {
-    //{ hex:"#483D8B", hsv:"hsv(248%,56%,55%)", hsl:"hsl(248%,39%,39%)", code:"HTML", name:"darkslateblue" }
-    //{ hex:"#E6E6FA", hsv:"hsv(240%,08%,98%)", hsl:"hsl(240%,67%,94%)", code:"HTML", name:"lavender" }
-    //{ hex:"#7B68EE", hsv:"hsv(249%,56%,93%)", hsl:"hsl(249%,80%,67%)", code:"HTML", name:"mediumslateblue" }
-    //{ hex:"#6495ED", hsv:"hsv(219%,58%,93%)", hsl:"hsl(219%,79%,66%)", code:"HTML", name:"cornflowerblue" }
-    //{ hex:"#4682B4", hsv:"hsv(207%,6100%,7100%)", hsl:"hsl(207%,44%,49%)", code:"HTML", name:"steelblue" }
-    //{ hex:"#00CED1", hsv:"hsv(181,100%,82%)", hsl:"hsl(181,100%,4100%)", code:"HTML", name:"darkturquoise" }
-    //{ hex:"#4169E1", hsv:"hsv(225%,7100%,88%)", hsl:"hsl(225%,73%,57%)", code:"HTML", name:"royalblue" }
-    //{ hex:"#00008B", hsv:"hsv(240,100%,55%)", hsl:"hsl(240,100%,27%)", code:"HTML", name:"darkblue" }
-    //{ hex:"#191970", hsv:"hsv(240%,78%,44%)", hsl:"hsl(240%,64%,27%)", code:"HTML", name:"midnightblue" }
-    //{ hex:"#1E90FF", hsv:"hsv(210%,88,100%)", hsl:"hsl(210,100%,56%)", code:"HTML", name:"dodgerblue" }
-    //{ hex:"#00BFFF", hsv:"hsv(195,100%,100%)", hsl:"hsl(195,100%,50%)", code:"HTML", name:"deepskyblue" }
-    //{ hex:"#0000CD", hsv:"hsv(240,100%,80%)", hsl:"hsl(240,100%,40%)", code:"HTML", name:"mediumblue" }
-    //{ hex:"#000080", hsv:"hsv(240,100%,50%)", hsl:"hsl(240,100%,25%)", code:"HTML", name:"navy" }
-    //{ hex:"#0000FF", hsv:"hsv(240,100%,100%)", hsl:"hsl(240,100%,50%)", code:"HTML", name:"blue" }
-    hex: "#CCCCFF",
-    hsv: "hsv(240%,20%,100%)",
-    hsl: "hsl(240,100%,90%)",
-    code: "PWB",
-    name: "Pale Weak Blue"
-  },
-  {
-    hex: "#9999FF",
-    hsv: "hsv(240%,4,100%)",
-    hsl: "hsl(240,100%,80%)",
-    code: "PDB",
-    name: "Pale Dull Blue"
-  },
-  {
-    hex: "#6666FF",
-    hsv: "hsv(240%,6,100%)",
-    hsl: "hsl(240,100%,70%)",
-    code: "LFB",
-    name: "Light Faded Blue"
-  },
-  {
-    hex: "#3333FF",
-    hsv: "hsv(240%,8,100%)",
-    hsl: "hsl(240,100%,60%)",
-    code: "LHB",
-    name: "Light Hard Blue"
-  },
-  {
-    hex: "#0000FF",
-    hsv: "hsv(240,100%,100%)",
-    hsl: "hsl(240,100%,50%)",
-    code: "B",
-    name: "Blue"
-  },
-  {
-    hex: "#9999CC",
-    hsv: "hsv(240%,25%,80%)",
-    hsl: "hsl(240%,33%,70%)",
-    code: "LWB",
-    name: "Light Weak Blue"
-  },
-  {
-    hex: "#6666CC",
-    hsv: "hsv(240%,50%,80%)",
-    hsl: "hsl(240%,50%,60%)",
-    code: "LDB",
-    name: "Light Dull Blue"
-  },
-  {
-    hex: "#3333CC",
-    hsv: "hsv(240%,75%,80%)",
-    hsl: "hsl(240%,60%,50%)",
-    code: "MFB",
-    name: "Medium Faded Blue"
-  },
-  {
-    hex: "#0000CC",
-    hsv: "hsv(240,100%,80%)",
-    hsl: "hsl(240,100%,40%)",
-    code: "DHB",
-    name: "Dark Hard Blue"
-  },
-  {
-    hex: "#666699",
-    hsv: "hsv(240%,33%,60%)",
-    hsl: "hsl(240%,20%,50%)",
-    code: "MWB",
-    name: "Medium Weak Blue"
-  },
-  {
-    hex: "#333399",
-    hsv: "hsv(240%,67%,60%)",
-    hsl: "hsl(240%,50%,40%)",
-    code: "DDB",
-    name: "Dark Dull Blue"
-  },
-  {
-    hex: "#000099",
-    hsv: "hsv(240,100%,60%)",
-    hsl: "hsl(240,100%,30%)",
-    code: "DFB",
-    name: "Dark Faded Blue"
-  },
-  {
-    hex: "#333366",
-    hsv: "hsv(240%,50%,40%)",
-    hsl: "hsl(240%,33%,30%)",
-    code: "DWB",
-    name: "Dark Weak Blue"
-  },
-  {
-    hex: "#000066",
-    hsv: "hsv(240,100%,40%)",
-    hsl: "hsl(240,100%,20%)",
-    code: "ODB",
-    name: "Obscure Dull Blue"
-  },
-  {
-    hex: "#000033",
-    hsv: "hsv(240,100%,20%)",
-    hsl: "hsl(240,100%,100%)",
-    code: "OWB",
-    name: "Obscure Weak Blue"
-  }
-];
-
-// ............................. Violets ...................................
-Palettes.violetsMH = [
-  {
-    hex: "#d8b2ff"
-  },
-  {
-    hex: "#b266ff"
-  },
-  {
-    hex: "#b266ff"
-  },
-  {
-    hex: "#6600cc"
-  },
-  {
-    hex: "#4c0099"
-  }
-];
-
-Palettes.violets = [
-  {
-    //{ hex:"#EE82EE", hsv:"hsv(300%,45%,93%)", hsl:"hsl(300%,76%,72%)", code:"HTML", name:"violet" }
-    //{ hex:"#C71585", hsv:"hsv(322%,89%,78%)", hsl:"hsl(322%,8100%,43%)", code:"HTML", name:"mediumvioletred" }
-    //{ hex:"#FF00FF", hsv:"hsv(300,100%,100%)", hsl:"hsl(300,100%,50%)", code:"HTML", name:"fuchsia" }
-    //{ hex:"#800080", hsv:"hsv(300,100%,50%)", hsl:"hsl(300,100%,25%)", code:"HTML", name:"purple" }
-    //{ hex:"#BA55D3", hsv:"hsv(288%,60%,83%)", hsl:"hsl(288%,59%,58%)", code:"HTML", name:"mediumorchid" }
-    //{ hex:"#9400D3", hsv:"hsv(282,100%,83%)", hsl:"hsl(282,100%,4100%)", code:"HTML", name:"darkviolet" }
-    //{ hex:"#9932CC", hsv:"hsv(280%,75%,80%)", hsl:"hsl(280%,6100%,50%)", code:"HTML", name:"darkorchid" }
-    //{ hex:"#8A2BE2", hsv:"hsv(27100%,8100%,89%)", hsl:"hsl(27100%,76%,53%)", code:"HTML", name:"blueviolet" }
-    //{ hex:"#9370DB", hsv:"hsv(260%,49%,86%)", hsl:"hsl(260%,60%,65%)", code:"HTML", name:"mediumpurple" }
-    //{ hex:"#4B0082", hsv:"hsv(275,100%,5100%)", hsl:"hsl(275,100%,25%)", code:"HTML", name:"indigo" }
-    hex: "#3300FF",
-    hsv: "hsv(252,100%,100%)",
-    hsl: "hsl(252,100%,50%)",
-    code: "BBV",
-    name: "Blue-Blue-Violet"
-  },
-  {
-    hex: "#6633FF",
-    hsv: "hsv(255%,8,100%)",
-    hsl: "hsl(255,100%,60%)",
-    code: "LBV",
-    name: "Light Blue-Violet"
-  },
-  {
-    hex: "#3300CC",
-    hsv: "hsv(255,100%,80%)",
-    hsl: "hsl(255,100%,40%)",
-    code: "DBV",
-    name: "Dark Blue-Violet"
-  },
-  {
-    hex: "#9966FF",
-    hsv: "hsv(260%,6,100%)",
-    hsl: "hsl(260,100%,70%)",
-    code: "LVB",
-    name: "Light Violet-Blue"
-  },
-  {
-    hex: "#6633CC",
-    hsv: "hsv(260%,75%,80%)",
-    hsl: "hsl(260%,60%,50%)",
-    code: "MVB",
-    name: "Medium Violet-Blue"
-  },
-  {
-    hex: "#330099",
-    hsv: "hsv(260,100%,60%)",
-    hsl: "hsl(260,100%,30%)",
-    code: "DVB",
-    name: "Dark Violet-Blue"
-  },
-  {
-    hex: "#6600FF",
-    hsv: "hsv(264,100%,100%)",
-    hsl: "hsl(264,100%,50%)",
-    code: "VVB",
-    name: "Violet-Violet-Blue"
-  },
-  {
-    hex: "#9933FF",
-    hsv: "hsv(270%,8,100%)",
-    hsl: "hsl(270,100%,60%)",
-    code: "LHV",
-    name: "Light Hard Violet"
-  },
-  {
-    hex: "#6600CC",
-    hsv: "hsv(270,100%,80%)",
-    hsl: "hsl(270,100%,40%)",
-    code: "DHV",
-    name: "Dark Hard Violet"
-  },
-  {
-    hex: "#CC99FF",
-    hsv: "hsv(270%,4,100%)",
-    hsl: "hsl(270,100%,80%)",
-    code: "PDV",
-    name: "Pale Dull Violet"
-  },
-  {
-    hex: "#9966CC",
-    hsv: "hsv(270%,50%,80%)",
-    hsl: "hsl(270%,50%,60%)",
-    code: "LDV",
-    name: "Light Dull Violet"
-  },
-  {
-    hex: "#663399",
-    hsv: "hsv(270%,67%,60%)",
-    hsl: "hsl(270%,50%,40%)",
-    code: "DDV",
-    name: "Dark Dull Violet"
-  },
-  {
-    hex: "#330066",
-    hsv: "hsv(270,100%,40%)",
-    hsl: "hsl(270,100%,20%)",
-    code: "ODV",
-    name: "Obscure Dull Violet"
-  },
-  {
-    hex: "#9900FF",
-    hsv: "hsv(276,100%,100%)",
-    hsl: "hsl(276,100%,50%)",
-    code: "VVM",
-    name: "Violet-Violet-Gray"
-  },
-  {
-    hex: "#CC66FF",
-    hsv: "hsv(280%,6,100%)",
-    hsl: "hsl(280,100%,70%)",
-    code: "LVM",
-    name: "Light Violet-Magenta"
-  },
-  {
-    hex: "#9933CC",
-    hsv: "hsv(280%,75%,80%)",
-    hsl: "hsl(280%,60%,50%)",
-    code: "MVM",
-    name: "Medium Violet-Magenta"
-  },
-  {
-    hex: "#660099",
-    hsv: "hsv(280,100%,60%)",
-    hsl: "hsl(280,100%,30%)",
-    code: "DVM",
-    name: "Dark Violet-Magenta"
-  },
-  {
-    hex: "#CC33FF",
-    hsv: "hsv(285%,8,100%)",
-    hsl: "hsl(285,100%,60%)",
-    code: "LMV",
-    name: "Light Magenta-Violet"
-  },
-  {
-    hex: "#9900CC",
-    hsv: "hsv(285,100%,80%)",
-    hsl: "hsl(285,100%,40%)",
-    code: "DMV",
-    name: "Dark Magenta-Violet"
-  },
-  {
-    hex: "#CC00FF",
-    hsv: "hsv(288,100%,100%)",
-    hsl: "hsl(288,100%,50%)",
-    code: "MMV",
-    name: "Magenta-Magenta-Violet"
-  }
-];
-
-Palettes.plumsMH = [
-  {
-    hex: "#4c004c"
-  },
-  {
-    hex: "#660066"
-  },
-  {
-    hex: "#800080"
-  },
-  {
-    hex: "#b266b2"
-  },
-  {
-    hex: "#d8b2d8"
-  }
-];
-
-Palettes.magentasMH = [
-  {
-    hex: "#ffb2ff"
-  },
-  {
-    hex: "#ff66ff"
-  },
-  {
-    hex: "#ff00ff"
-  },
-  {
-    hex: "#cc00cc"
-  },
-  {
-    hex: "#990099"
-  }
-];
-
-Palettes.magentas = [
-  {
-    //{ hex:"#FF00FF", hsv:"hsv(300,100%,100%)", hsl:"hsl(300,100%,50%)", code:"HTML", name:"magenta" }
-    //{ hex:"#8B008B", hsv:"hsv(300,100%,55%)", hsl:"hsl(300,100%,27%)", code:"HTML", name:"darkmagenta" }
-    hex: "#FFCCFF",
-    hsv: "hsv(300%,20%,100%)",
-    hsl: "hsl(300,100%,90%)",
-    code: "PWM",
-    name: "Pale Weak Magenta"
-  },
-  {
-    hex: "#FF99FF",
-    hsv: "hsv(300%,4,100%)",
-    hsl: "hsl(300,100%,80%)",
-    code: "PDM",
-    name: "Pale Dull Magenta"
-  },
-  {
-    hex: "#FF66FF",
-    hsv: "hsv(300%,6,100%)",
-    hsl: "hsl(300,100%,70%)",
-    code: "LFM",
-    name: "Light Faded Magenta"
-  },
-  {
-    hex: "#FF33FF",
-    hsv: "hsv(300%,8,100%)",
-    hsl: "hsl(300,100%,60%)",
-    code: "LHM",
-    name: "Light Hard Magenta"
-  },
-  {
-    hex: "#FF00FF",
-    hsv: "hsv(300,100%,100%)",
-    hsl: "hsl(300,100%,50%)",
-    code: "M",
-    name: "Magenta"
-  },
-  {
-    hex: "#CC99CC",
-    hsv: "hsv(300%,25%,80%)",
-    hsl: "hsl(300%,33%,70%)",
-    code: "LWM",
-    name: "Light Weak Magenta"
-  },
-  {
-    hex: "#CC66CC",
-    hsv: "hsv(300%,50%,80%)",
-    hsl: "hsl(300%,50%,60%)",
-    code: "LDM",
-    name: "Light Dull Magenta"
-  },
-  {
-    hex: "#CC33CC",
-    hsv: "hsv(300%,75%,80%)",
-    hsl: "hsl(300%,60%,50%)",
-    code: "MFM",
-    name: "Medium Faded Magenta"
-  },
-  {
-    hex: "#CC00CC",
-    hsv: "hsv(300,100%,80%)",
-    hsl: "hsl(300,100%,40%)",
-    code: "DHM",
-    name: "Dark Hard Magenta"
-  },
-  {
-    hex: "#996699",
-    hsv: "hsv(300%,33%,60%)",
-    hsl: "hsl(300%,20%,50%)",
-    code: "MWM",
-    name: "Medium Weak Magenta"
-  },
-  {
-    hex: "#993399",
-    hsv: "hsv(300%,67%,60%)",
-    hsl: "hsl(300%,50%,40%)",
-    code: "DDM",
-    name: "Dark Dull Magenta"
-  },
-  {
-    hex: "#990099",
-    hsv: "hsv(300,100%,60%)",
-    hsl: "hsl(300,100%,30%)",
-    code: "DFM",
-    name: "Dark Faded Magenta"
-  },
-  {
-    hex: "#663366",
-    hsv: "hsv(300%,50%,40%)",
-    hsl: "hsl(300%,33%,30%)",
-    code: "DWM",
-    name: "Dark Weak Magenta"
-  },
-  {
-    hex: "#660066",
-    hsv: "hsv(300,100%,40%)",
-    hsl: "hsl(300,100%,20%)",
-    code: "ODM",
-    name: "Obscure Dull Magenta"
-  },
-  {
-    hex: "#330033",
-    hsv: "hsv(300,100%,20%)",
-    hsl: "hsl(300,100%,100%)",
-    code: "OWM",
-    name: "Obscure Weak Magenta"
-  }
-];
-
-Palettes.pinksMH = [
-  {
-    hex: "#ffb2d8"
-  },
-  {
-    hex: "#ff66b2"
-  },
-  {
-    hex: "#ff0080"
-  },
-  {
-    hex: "#cc0066"
-  },
-  {
-    hex: "#99004c"
-  }
-];
-
-Palettes.pinks = [
-  {
-    //{ hex:"#FF69B4", hsv:"hsv(330, 59%,100%)", hsl:"hsl(330,100%,71%)", code:"HTML", name:"hotpink" }
-    //{ hex:"#FF1493", hsv:"hsv(328, 92%,100%)", hsl:"hsl(328,100%,54%)", code:"HTML", name:"deeppink" }
-    //{ hex:"#FFB6C1", hsv:"hsv(351, 29%,100%)", hsl:"hsl(351,100%,86%)", code:"HTML", name:"lightpink" }
-    //{ hex:"#FFC0CB", hsv:"hsv(350, 25%,100%)", hsl:"hsl(350,100%,88%)", code:"HTML", name:"pink" }
-    hex: "#FF00CC",
-    hsv: "hsv(312,100%,100%)",
-    hsl: "hsl(312,100%,50%)",
-    code: "MMP",
-    name: "Magenta-Magenta-Pink"
-  },
-  {
-    hex: "#FF33CC",
-    hsv: "hsv(315, 80%,100%)",
-    hsl: "hsl(315,100%,60%)",
-    code: "LMP",
-    name: "Light Magenta-Pink"
-  },
-  {
-    hex: "#CC0099",
-    hsv: "hsv(315,100%, 80%)",
-    hsl: "hsl(315,100%,40%)",
-    code: "DMP",
-    name: "Dark Magenta-Pink"
-  },
-  {
-    hex: "#FF66CC",
-    hsv: "hsv(320, 60%,100%)",
-    hsl: "hsl(320,100%,70%)",
-    code: "LPM",
-    name: "Light Pink-Magenta"
-  },
-  {
-    hex: "#CC3399",
-    hsv: "hsv(320, 75%, 80%)",
-    hsl: "hsl(320%,60%,50%)",
-    code: "MPM",
-    name: "Medium Pink-Magenta"
-  },
-  {
-    hex: "#990066",
-    hsv: "hsv(320,100%, 60%)",
-    hsl: "hsl(320,100%,30%)",
-    code: "DPM",
-    name: "Dark Pink-Magenta"
-  },
-  {
-    hex: "#FF0099",
-    hsv: "hsv(324,100%,100%)",
-    hsl: "hsl(324,100%,50%)",
-    code: "PPM",
-    name: "Pink-Pink-Magenta"
-  },
-  {
-    hex: "#FF3399",
-    hsv: "hsv(330, 80%,100%)",
-    hsl: "hsl(330,100%,60%)",
-    code: "LHP",
-    name: "Light Hard Pink"
-  },
-  {
-    hex: "#CC0066",
-    hsv: "hsv(330,100%, 80%)",
-    hsl: "hsl(330,100%,40%)",
-    code: "DHP",
-    name: "Dark Hard Pink"
-  },
-  {
-    hex: "#FF99CC",
-    hsv: "hsv(330, 40%,100%)",
-    hsl: "hsl(330,100%,80%)",
-    code: "PDP",
-    name: "Pale Dull Pink"
-  },
-  {
-    hex: "#CC6699",
-    hsv: "hsv(330, 50%, 80%)",
-    hsl: "hsl(330%,50%,60%)",
-    code: "LDP",
-    name: "Light Dull Pink"
-  },
-  {
-    hex: "#993366",
-    hsv: "hsv(330, 67%, 60%)",
-    hsl: "hsl(330%,50%,40%)",
-    code: "DDP",
-    name: "Dark Dull Pink"
-  },
-  {
-    hex: "#660033",
-    hsv: "hsv(330,100%, 40%)",
-    hsl: "hsl(330,100%,20%)",
-    code: "ODP",
-    name: "Obscure Dull Pink"
-  },
-  {
-    hex: "#FF0066",
-    hsv: "hsv(336,100%,100%)",
-    hsl: "hsl(336,100%,50%)",
-    code: "PPR",
-    name: "Pink-Pink-Red"
-  },
-  {
-    hex: "#FF6699",
-    hsv: "hsv(340, 60%,100%)",
-    hsl: "hsl(340,100%,70%)",
-    code: "LPR",
-    name: "Light Pink-Red"
-  },
-  {
-    hex: "#CC3366",
-    hsv: "hsv(340, 75%, 80%)",
-    hsl: "hsl(340%,60%,50%)",
-    code: "MPR",
-    name: "Medium Pink-Red"
-  },
-  {
-    hex: "#990033",
-    hsv: "hsv(340,100%, 60%)",
-    hsl: "hsl(340,100%,30%)",
-    code: "DPR",
-    name: "Dark Pink-Red"
-  },
-  {
-    hex: "#FF3366",
-    hsv: "hsv(345, 80%,100%)",
-    hsl: "hsl(345,100%,60%)",
-    code: "LRP",
-    name: "Light Red-Pink"
-  },
-  {
-    hex: "#CC0033",
-    hsv: "hsv(345,100%, 80%)",
-    hsl: "hsl(345,100%,40%)",
-    code: "DRP",
-    name: "Dark Red-Pink"
-  },
-  {
-    hex: "#FF0033",
-    hsv: "hsv(348,100%,100%)",
-    hsl: "hsl(348,100%,50%)",
-    code: "RRP",
-    name: "Red-Red-Pink"
-  }
-];
-
-// ................................. Grays .................................
-Palettes.gray = {
-  hex: "#777777",
-  hsv: "hsv(0,100%, 50%)",
-  hsl: "hsl(0,100%,50%)",
-  code: "G",
-  name: "Gray"
-};
-
-Palettes.grays = [
-  {
-    hex: "#111111",
-    hsv: "hsv(0, ,100%)",
-    hsl: "hsl(0,0,100%)",
-    code: "HTML",
-    name: "none"
-  },
-  {
-    hex: "#FFFFFF",
-    hsv: "hsv(0,0,100%)",
-    hsl: "hsl(0,0,100%)",
-    code: "HTML",
-    name: "white"
-  },
-  {
-    hex: "#F8F8FF",
-    hsv: "hsv(240%,03,100%)",
-    hsl: "hsl(240,100%,99%)",
-    code: "HTML",
-    name: "ghostwhite"
-  },
-  {
-    hex: "#F5F5F5",
-    hsv: "hsv(0,0%,96%)",
-    hsl: "hsl(0,0%,96%)",
-    code: "HTML",
-    name: "whitesmoke"
-  },
-  {
-    hex: "#DCDCDC",
-    hsv: "hsv(0,0%,86%)",
-    hsl: "hsl(0,0%,86%)",
-    code: "HTML",
-    name: "gainsboro"
-  },
-  {
-    hex: "#D3D3D3",
-    hsv: "hsv(0,0%,83%)",
-    hsl: "hsl(0,0%,83%)",
-    code: "HTML",
-    name: "lightgray"
-  },
-  {
-    hex: "#C0C0C0",
-    hsv: "hsv(0,0%,75%)",
-    hsl: "hsl(0,0%,75%)",
-    code: "HTML",
-    name: "silver"
-  },
-  {
-    hex: "#A9A9A9",
-    hsv: "hsv(0,0%,66%)",
-    hsl: "hsl(0,0%,66%)",
-    code: "HTML",
-    name: "darkgray"
-  },
-  {
-    hex: "#808080",
-    hsv: "hsv(0,0%,50%)",
-    hsl: "hsl(0,0%,50%)",
-    code: "HTML",
-    name: "gray"
-  },
-  {
-    hex: "#696969",
-    hsv: "hsv(0,0%,4100%)",
-    hsl: "hsl(0,0%,4100%)",
-    code: "HTML",
-    name: "dimgray"
-  },
-  {
-    hex: "#000000",
-    hsv: "hsv(0,0%,00%)",
-    hsl: "hsl(0,0,0%)",
-    code: "HTML",
-    name: "black"
-  },
-  {
-    hex: "#778899",
-    hsv: "hsv(210,22%,60%)",
-    hsl: "hsl(210%,14%,53%)",
-    code: "HTML",
-    name: "lightslategray"
-  },
-  {
-    hex: "#708090",
-    hsv: "hsv(210,22%,56%)",
-    hsl: "hsl(210%,13%,50%)",
-    code: "HTML",
-    name: "slategray"
-  },
-  {
-    hex: "#2F4F4F",
-    hsv: "hsv(180,41%,31%)",
-    hsl: "hsl(180%,25%,25%)",
-    code: "HTML",
-    name: "darkslategray"
-  },
-  {
-    hex: "#FFCCFF",
-    hsv: "hsv(0, 20%,100%)",
-    hsl: "hsl(0,100%,90%)",
-    code: "PWG",
-    name: "Pale Weak Gray"
-  },
-  {
-    hex: "#FF99FF",
-    hsv: "hsv(0, 40%,100%)",
-    hsl: "hsl(0,100%,80%)",
-    code: "PDG",
-    name: "Pale Dull Gray"
-  },
-  {
-    hex: "#EEEEEE",
-    hsv: "hsv(0, 25%, 80%)",
-    hsl: "hsl(0, 33%,70%)",
-    code: "LWG",
-    name: "Light Weak Gray"
-  },
-  {
-    hex: "#DDDDDD",
-    hsv: "hsv(0, 50%, 40%)",
-    hsl: "hsl(0, 33%,30%)",
-    code: "DWG",
-    name: "Dark Weak Gray"
-  },
-  {
-    hex: "#CCCCCC",
-    hsv: "hsv(0, 33%, 60%)",
-    hsl: "hsl(0, 20%,50%)",
-    code: "MWG",
-    name: "Medium Weak Gray"
-  },
-  {
-    hex: "#BBBBBB",
-    hsv: "hsv(0, 50%, 80%)",
-    hsl: "hsl(0, 50%,60%)",
-    code: "LDG",
-    name: "Light Dull Gray"
-  },
-  {
-    hex: "#AAAAAA",
-    hsv: "hsv(0, 67%, 60%)",
-    hsl: "hsl(0, 50%,40%)",
-    code: "DDG",
-    name: "Dark Dull Gray"
-  },
-  {
-    hex: "#999999",
-    hsv: "hsv(0, 60%,100%)",
-    hsl: "hsl(0,100%,70%)",
-    code: "LFG",
-    name: "Light Faded Gray"
-  },
-  {
-    hex: "#888888",
-    hsv: "hsv(0, 75%, 80%)",
-    hsl: "hsl(0, 60%,50%)",
-    code: "MFG",
-    name: "Medium Faded Gray"
-  },
-  {
-    hex: "#666666",
-    hsv: "hsv(0, 80%,100%)",
-    hsl: "hsl(0,100%,60%)",
-    code: "LHG",
-    name: "Light Hard Gray"
-  },
-  {
-    hex: "#555555",
-    hsv: "hsv(0,100%, 80%)",
-    hsl: "hsl(0,100%,40%)",
-    code: "DHG",
-    name: "Dark Hard Gray"
-  },
-  {
-    hex: "#444444",
-    hsv: "hsv(0,100%, 60%)",
-    hsl: "hsl(0,100%,30%)",
-    code: "DFG",
-    name: "Dark Faded Gray"
-  },
-  {
-    hex: "#777777",
-    hsv: "hsv(0,100%, 50%)",
-    hsl: "hsl(0,100%,50%)",
-    code: "G",
-    name: "Gray"
-  },
-  {
-    hex: "#333333",
-    hsv: "hsv(0,100%, 40%)",
-    hsl: "hsl(0,100%,20%)",
-    code: "ODG",
-    name: "Obscure Dull Gray"
-  },
-  {
-    hex: "#222222",
-    hsv: "hsv(0,100%, 20%)",
-    hsl: "hsl(0,100%,10%)",
-    code: "OWG",
-    name: "Obscure Weak Gray"
-  }
-];
-
-Palettes.group12 = ['red', 'orange', 'yellow', 'lime', 'green', 'aqua', 'cyan', 'teal', 'blue', 'violet', 'magenta', 'pink'];
-
-Palettes.Brewer = {
-  OrRd: ['#fff7ec', '#fee8c8', '#fdd49e', '#fdbb84', '#fc8d59', '#ef6548', '#d7301f', '#b30000', '#7f0000'],
-  PuBu: ['#fff7fb', '#ece7f2', '#d0d1e6', '#a6bddb', '#74a9cf', '#3690c0', '#0570b0', '#045a8d', '#023858'],
-  BuPu: ['#f7fcfd', '#e0ecf4', '#bfd3e6', '#9ebcda', '#8c96c6', '#8c6bb1', '#88419d', '#810f7c', '#4d004b'],
-  Oranges: ['#fff5eb', '#fee6ce', '#fdd0a2', '#fdae6b', '#fd8d3c', '#f16913', '#d94801', '#a63603', '#7f2704'],
-  BuGn: ['#f7fcfd', '#e5f5f9', '#ccece6', '#99d8c9', '#66c2a4', '#41ae76', '#238b45', '#006d2c', '#00441b'],
-  YlOrBr: ['#ffffe5', '#fff7bc', '#fee391', '#fec44f', '#fe9929', '#ec7014', '#cc4c02', '#993404', '#662506'],
-  YlGn: ['#ffffe5', '#f7fcb9', '#d9f0a3', '#addd8e', '#78c679', '#41ab5d', '#238443', '#006837', '#004529'],
-  Reds: ['#fff5f0', '#fee0d2', '#fcbba1', '#fc9272', '#fb6a4a', '#ef3b2c', '#cb181d', '#a50f15', '#67000d'],
-  RdPu: ['#fff7f3', '#fde0dd', '#fcc5c0', '#fa9fb5', '#f768a1', '#dd3497', '#ae017e', '#7a0177', '#49006a'],
-  Greens: ['#f7fcf5', '#e5f5e0', '#c7e9c0', '#a1d99b', '#74c476', '#41ab5d', '#238b45', '#006d2c', '#00441b'],
-  YlGnBu: ['#ffffd9', '#edf8b1', '#c7e9b4', '#7fcdbb', '#41b6c4', '#1d91c0', '#225ea8', '#253494', '#081d58'],
-  Purples: ['#fcfbfd', '#efedf5', '#dadaeb', '#bcbddc', '#9e9ac8', '#807dba', '#6a51a3', '#54278f', '#3f007d'],
-  GnBu: ['#f7fcf0', '#e0f3db', '#ccebc5', '#a8ddb5', '#7bccc4', '#4eb3d3', '#2b8cbe', '#0868ac', '#084081'],
-  Greys: ['#ffffff', '#f0f0f0', '#d9d9d9', '#bdbdbd', '#969696', '#737373', '#525252', '#252525', '#000000'],
-  YlOrRd: ['#ffffcc', '#ffeda0', '#fed976', '#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c', '#bd0026', '#800026'],
-  PuRd: ['#f7f4f9', '#e7e1ef', '#d4b9da', '#c994c7', '#df65b0', '#e7298a', '#ce1256', '#980043', '#67001f'],
-  Blues: ['#f7fbff', '#deebf7', '#c6dbef', '#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#08519c', '#08306b'],
-  PuBuGn: ['#fff7fb', '#ece2f0', '#d0d1e6', '#a6bddb', '#67a9cf', '#3690c0', '#02818a', '#016c59', '#014636'],
-  Spectral: ['#9e0142', '#d53e4f', '#f46d43', '#fdae61', '#fee08b', '#ffffbf', '#e6f598', '#abdda4', '#66c2a5', '#3288bd', '#5e4fa2'],
-  RdYlGn: ['#a50026', '#d73027', '#f46d43', '#fdae61', '#fee08b', '#ffffbf', '#d9ef8b', '#a6d96a', '#66bd63', '#1a9850', '#006837'],
-  RdBu: ['#67001f', '#b2182b', '#d6604d', '#f4a582', '#fddbc7', '#f7f7f7', '#d1e5f0', '#92c5de', '#4393c3', '#2166ac', '#053061'],
-  PiYG: ['#8e0152', '#c51b7d', '#de77ae', '#f1b6da', '#fde0ef', '#f7f7f7', '#e6f5d0', '#b8e186', '#7fbc41', '#4d9221', '#276419'],
-  PRGn: ['#40004b', '#762a83', '#9970ab', '#c2a5cf', '#e7d4e8', '#f7f7f7', '#d9f0d3', '#a6dba0', '#5aae61', '#1b7837', '#00441b'],
-  RdYlBu: ['#a50026', '#d73027', '#f46d43', '#fdae61', '#fee090', '#ffffbf', '#e0f3f8', '#abd9e9', '#74add1', '#4575b4', '#313695'],
-  BrBG: ['#543005', '#8c510a', '#bf812d', '#dfc27d', '#f6e8c3', '#f5f5f5', '#c7eae5', '#80cdc1', '#35978f', '#01665e', '#003c30'],
-  RdGy: ['#67001f', '#b2182b', '#d6604d', '#f4a582', '#fddbc7', '#ffffff', '#e0e0e0', '#bababa', '#878787', '#4d4d4d', '#1a1a1a'],
-  PuOr: ['#7f3b08', '#b35806', '#e08214', '#fdb863', '#fee0b6', '#f7f7f7', '#d8daeb', '#b2abd2', '#8073ac', '#542788', '#2d004b'],
-  Set2: ['#66c2a5', '#fc8d62', '#8da0cb', '#e78ac3', '#a6d854', '#ffd92f', '#e5c494', '#b3b3b3'],
-  Accent: ['#7fc97f', '#beaed4', '#fdc086', '#ffff99', '#386cb0', '#f0027f', '#bf5b17', '#666666'],
-  Set1: ['#e41a1c', '#377eb8', '#4daf4a', '#984ea3', '#ff7f00', '#ffff33', '#a65628', '#f781bf', '#999999'],
-  Set3: ['#8dd3c7', '#ffffb3', '#bebada', '#fb8072', '#80b1d3', '#fdb462', '#b3de69', '#fccde5', '#d9d9d9', '#bc80bd', '#ccebc5', '#ffed6f'],
-  Dark2: ['#1b9e77', '#d95f02', '#7570b3', '#e7298a', '#66a61e', '#e6ab02', '#a6761d', '#666666'],
-  Paired: ['#a6cee3', '#1f78b4', '#b2df8a', '#33a02c', '#fb9a99', '#e31a1c', '#fdbf6f', '#ff7f00', '#cab2d6', '#6a3d9a', '#ffff99', '#b15928'],
-  Pastel2: ['#b3e2cd', '#fdcdac', '#cbd5e8', '#f4cae4', '#e6f5c9', '#fff2ae', '#f1e2cc', '#cccccc'],
-  Pastel1: ['#fbb4ae', '#b3cde3', '#ccebc5', '#decbe4', '#fed9a6', '#ffffcc', '#e5d8bd', '#fddaec', '#f2f2f2']
-};
-
-Palettes.BrewerRainbow = ['OrRd', 'Oranges', 'YlOrBr', 'YlGn', 'Greens', 'GnBu', 'BuGn', 'PuBuGn', 'Blues', 'Purples', 'RdPu', 'PuRd', 'OrRd'];
-
-Palettes.groups = [Palettes.reds, Palettes.browns, Palettes.tans, Palettes.oranges, Palettes.yellows, Palettes.limes, Palettes.greens, Palettes.teals, Palettes.cyans, Palettes.azures, Palettes.blues, Palettes.violets, Palettes.magentas, Palettes.pinks, Palettes.grays];
-
-Palettes.groupRgbs = [Palettes.redsMH, Palettes.orangesMH, Palettes.yellowsMH, Palettes.limesMH, Palettes.greensMH, Palettes.aquasMH, Palettes.cyansMH, Palettes.azuresMH, Palettes.bluesMH, Palettes.violetsMH, Palettes.magentasMH, Palettes.pinksMH];
-
-Palettes.groupRgbs10 = [Palettes.redsMH, Palettes.orangesMH, Palettes.yellowsMH, Palettes.limesMH, Palettes.greensMH, Palettes.aquasMH, Palettes.cyansMH, Palettes.azuresMH, Palettes.bluesMH, Palettes.violetsMH];
-
-if (Palettes.setRgbs === false && Palettes.hexes === false && Palettes.hexdec === false) ;
-
-if (Palettes.hsvOut === false && Palettes.toGroup === false && Palettes.toIndex === false) ;
-
-if (Palettes.Brewer === false && Palettes.toGroup === false) ;
-
-var Palettes$1 = Palettes;
-
-var Hue;
-
-Hue = class Hue extends Radar$1 {
-  constructor(drew, d3, name, elem, size) {
-    super(drew, d3, name, elem, size);
-    this.quadrants = [
-      {
-        name1: "Red",
-        key: '0',
-        color: "hsl(  0,100%,50%)",
-        beg: -15,
-        end: 15
-      },
-      {
-        name1: "Orange",
-        key: '30',
-        color: "hsl( 30,100%,50%)",
-        beg: 15,
-        end: 45
-      },
-      {
-        name1: "Yellow",
-        key: '60',
-        color: "hsl( 60,100%,50%)",
-        beg: 45,
-        end: 75
-      },
-      {
-        name1: "Lime",
-        key: '90',
-        color: "hsl( 90,100%,50%)",
-        beg: 75,
-        end: 105
-      },
-      {
-        name1: "Green",
-        key: '120',
-        color: "hsl(120,100%,50%)",
-        beg: 105,
-        end: 135
-      },
-      {
-        name1: "Teal",
-        key: '150',
-        color: "hsl(150,100%,50%)",
-        beg: 135,
-        end: 165
-      },
-      {
-        name1: "Cyan",
-        key: '180',
-        color: "hsl(180,100%,50%)",
-        beg: 165,
-        end: 195
-      },
-      {
-        name1: "Azure",
-        key: '210',
-        color: "hsl(210,100%,50%)",
-        beg: 195,
-        end: 225
-      },
-      {
-        name1: "Blue",
-        key: '240',
-        color: "hsl(240,100%,50%)",
-        beg: 225,
-        end: 255
-      },
-      {
-        name1: "Violet",
-        key: '270',
-        color: "hsl(270,100%,50%)",
-        beg: 255,
-        end: 285
-      },
-      {
-        name1: "Magenta",
-        key: '300',
-        color: "hsl(300,100%,50%)",
-        beg: 285,
-        end: 315
-      },
-      {
-        name1: "Pink",
-        key: '330',
-        color: "hsl(330,100%,50%)",
-        beg: 315,
-        end: 345
-      }
-    ];
-    this.palettes = [
-      {
-        palette: Palettes$1.reds,
-        name1: "Red",
-        key: '0',
-        beg: -15,
-        end: 15
-      },
-      {
-        palette: Palettes$1.browns,
-        name1: "Brown",
-        key: '20',
-        beg: 15,
-        end: 25
-      },
-      {
-        palette: Palettes$1.tans,
-        name1: "Tan",
-        key: '30',
-        beg: 25,
-        end: 35
-      },
-      {
-        palette: Palettes$1.oranges,
-        name1: "Orange",
-        key: '40',
-        beg: 35,
-        end: 45
-      },
-      {
-        palette: Palettes$1.yellows,
-        name1: "Yellow",
-        key: '60',
-        beg: 45,
-        end: 75
-      },
-      {
-        palette: Palettes$1.limes,
-        name1: "Lime",
-        key: '90',
-        beg: 75,
-        end: 105
-      },
-      {
-        palette: Palettes$1.greens,
-        name1: "Green",
-        key: '120',
-        beg: 105,
-        end: 135
-      },
-      {
-        palette: Palettes$1.teals,
-        name1: "Teal",
-        key: '150',
-        beg: 135,
-        end: 165
-      },
-      {
-        palette: Palettes$1.cyans,
-        name1: "Cyan",
-        key: '180',
-        beg: 165,
-        end: 195
-      },
-      {
-        palette: Palettes$1.azures,
-        name1: "Azure",
-        key: '210',
-        beg: 195,
-        end: 225
-      },
-      {
-        palette: Palettes$1.blues,
-        name1: "Blue",
-        key: '240',
-        beg: 225,
-        end: 255
-      },
-      {
-        palette: Palettes$1.violets,
-        name1: "Violet",
-        key: '270',
-        beg: 255,
-        end: 285
-      },
-      {
-        palette: Palettes$1.magentas,
-        name1: "Magenta",
-        key: '300',
-        beg: 285,
-        end: 315
-      },
-      {
-        palette: Palettes$1.pinks,
-        name1: "Pink",
-        key: '330',
-        beg: 315,
-        end: 330
-      },
-      {
-        palette: Palettes$1.grays,
-        name1: "Gray",
-        key: '345',
-        beg: 330,
-        end: 345
-      }
-    ];
-    this.assoc = this.assocQuad(this.quadrants);
-    this.wheelReady();
-  }
-
-  wheelReady() {
-    var dr;
-    this.graph = this.drew.svg;
-    dr = (this.r100 - this.r40) / 30;
-    this.quads(this.hueQuads(10), this.r80, this.r100);
-    this.hsvWedges(5, dr, this.r40, this.r100);
-    this.paletteWedges(5, dr, this.r40, this.r100);
-  }
-
-  hueQuads(inc) {
-    var a, hue, i, ref;
-    a = [];
-    for (hue = i = 0, ref = inc; ref !== 0 && (ref > 0 ? i < 360 : i > 360); hue = i += ref) {
-      a.push({
-        name1: this.name1(hue),
-        color: `hsla(${hue},100%,50%,1.0)`,
-        beg: hue - inc / 2,
-        end: hue + inc / 2
-      });
-    }
-    return a;
-  }
-
-  /*
-  hueWedges:( dh, dr, r1, r2 ) ->
-  g = @g.selectAll("g").append("svg:g")
-  for hue in [0...360] by dh
-  for r in [r1...r2] by dr
-    lite = 80 - (r-r1) / (r2-r1) * 50
-    @wedge( "hsla(#{hue},100%,#{lite}%,1.0)", g, r, r+dr, hue-dh/2, hue+dh/2 )
-  @grid(dh)
-  return
-  */
-  hsvWedges(dh, dr, r1, r2) {
-    var g, hue, i, j, r, ref, ref1, ref2, ref3, sat;
-    g = this.g.selectAll("g").append("svg:g");
-    for (hue = i = 0, ref = dh; ref !== 0 && (ref > 0 ? i < 360 : i > 360); hue = i += ref) {
-      for (r = j = ref1 = r1, ref2 = r2, ref3 = dr; ref3 !== 0 && (ref3 > 0 ? j < ref2 : j > ref2); r = j += ref3) {
-        sat = 0.3 + (r - r1) / (r2 - r1) * 0.7;
-        this.wedge(Vis$1.rgbCss(Vis$1.hsvToRgb({
-          h: hue,
-          s: sat,
-          v: 1
-        })), g, r, r + dr, hue - dh / 2, hue + dh / 2);
-      }
-    }
-    this.grid(dh, dr, -dh / 2, 360 - dh / 2);
-  }
-
-  paletteWedges(dh, dr, r1, r2) {
-    var c, g, i, j, len, len1, palette, r, ref, ref1;
-    Util$1.noop(r2);
-    g = this.g.selectAll("g").append("svg:g");
-    ref = this.palettes;
-    for (i = 0, len = ref.length; i < len; i++) {
-      palette = ref[i];
-      r = r1;
-      ref1 = palette.palette;
-      for (j = 0, len1 = ref1.length; j < len1; j++) {
-        c = ref1[j];
-        this.wedge(c.hex, g, r, r + dr, palette.beg, palette.end);
-        r += dr;
-      }
-    }
-  }
-
-  name1(hue) {
-    var qa;
-    qa = this.assoc[hue.toString()];
-    if (qa != null) {
-      return qa.name1;
-    } else {
-      return null;
-    }
-  }
-
-  assocQuad(quadrants) {
-    var assoc, i, len, q;
-    assoc = [];
-    for (i = 0, len = quadrants.length; i < len; i++) {
-      q = quadrants[i];
-      assoc[q.key] = q;
-    }
-    return assoc;
-  }
-
-};
-
-var Hue$1 = Hue;
-
-var Drew;
-
-Drew = class Drew {
-  constructor(stream, drewElem, drewSize) {
-    this.transform = this.transform.bind(this);
-    this.stream = stream;
-    this.drewElem = drewElem;
-    this.drewSize = drewSize;
-    this.size = this.drewSize;
-  }
-
-  create(name, elem, size) {
-    switch (name) {
-      case 'Wheel':
-        return new Wheel$1(this, d3, name, elem, size);
-      case 'Axes':
-        return new Axes$1(this, d3, name, elem, size);
-      case 'Chord':
-        return new Chord$1(this, d3, name, elem, size);
-      case 'Cluster':
-        return new Cluster(this, d3, name, elem, size);
-      case 'Link':
-        return new Link$1(this, d3, name, elem, size);
-      case 'Radar':
-        return new Radar$1(this, d3, name, elem, size, 'Radar');
-      case 'Radial':
-        return new Radial(this, d3, name, elem, size);
-      case 'Tree':
-        return new Tree$1(this, d3, name, elem, size);
-      case 'Hue':
-        return new Hue$1(this, d3, name, elem, size, 'Hue');
-      default:
-        console.error('Draw.create(name) unknown name', name);
-        return new Axes$1(this, d3, name, elem, size);
-    }
-  }
-
-  ready(name, elem, size) {
-    var gId, svgId;
-    this.size = size;
-    //geo = @geom( size.elemWidth, size.elemHeight, size.elemWidth, size.elemHeight )
-    this.svg = null;
-    this.g = null;
-    svgId = '';
-    gId = '';
-    this.defs = null;
-    [this.svg, this.g, svgId, gId, this.defs] = this.createSvg(elem, name, size.elemWidth, size.elemHeight);
-    this.size.lastWidth = size.elemWidth;
-    this.size.lastHeight = size.elemHeight;
-    return [this.svg, this.g];
-  }
-
-  createSvg(elem, name, w, h) {
-    var defs, g, gId, svg, svgId;
-    svgId = this.htmlId(name, 'Svg', '');
-    gId = this.htmlId(name, 'SvgG', '');
-    svg = select(elem).append("svg:svg");
-    svg.attr("id", svgId).attr("width", w).attr("height", h).attr("xmlns", "http://www.w3.org/2000/svg");
-    defs = svg.append("svg:defs");
-    g = svg.append("svg:g").attr("id", gId); // All transforms are applied to g
-    return [svg, g, svgId, gId, defs];
-  }
-
-  htmlId(name, type, ext = '') {
-    return name + type + ext;
-  }
-
-  lastSize(size) {
-    this.size.lastWidth = size.elemWidth;
-    return this.size.lastHeight = size.elemHeight;
-  }
-
-  layout(size, op) {
-    var geo;
-    if (op === 'Expand') { // Zoom to the entire Comp size
-      geo = this.geom(size.compWidth, size.compHeight, this.size.elemWidth, this.size.elemHeight);
-      this.transform(this.svg, this.g, size.compWidth, size.compHeight, geo.sx, geo.sy);
-    }
-    if (op === 'Restore') { // @size is original while size is a reszize
-      geo = this.geom(this.size.lastWidth, this.size.lastHeight, this.size.elemWidth, this.size.elemHeight);
-      this.transform(this.svg, this.g, this.size.lastWidth, this.size.lastHeight, geo.sx, geo.sy);
-    }
-    if (op === 'Resize') { // @size is original while size is a reszize
-      geo = this.geom(size.elemWidth, size.elemHeight, this.size.elemWidth, this.size.elemHeight);
-      this.transform(this.svg, this.g, this.size.elemWidth, this.size.elemHeight, geo.sx, geo.sy);
-    }
-  }
-
-  transform(svg, g, svgWidth, svgHeight, sx, sy) {
-    // console.log( 'Drew.transform()', svgWidth, svgHeight, sx, sy )
-    svg.attr("width", svgWidth).attr("height", svgHeight);
-    g.attr('transform', Vis$1.scale(sx, sy));
-  }
-
-  geomElem() {
-    return this.geom(this.size.elemWidth, this.size.elemHeight, this.size.elemWidth, this.size.elemHeight);
-  }
-
-  geom(compWidth, compHeight, elemWidth, elemHeight) {
-    var g;
-    g = {};
-    [g.w, g.h] = [elemWidth, elemHeight];
-    g.r = Math.min(g.w, g.h) * 0.2; // Use for hexagons
-    g.x0 = g.w * 0.5;
-    g.y0 = g.h * 0.5;
-    g.sx = compWidth / g.w;
-    g.sy = compHeight / g.h;
-    g.s = Math.min(g.sx, g.sy);
-    g.fontSize = '2em'; // @toVh( 5 )+'vh'
-    g.iconSize = '2em'; // @toVh( 5 )+'vh'
-    return g;
-  }
-
-  toFill(hsv) {
-    return Vis$1.toRgbHsvStr(hsv);
-  }
-
-};
-
-var Drew$1 = Drew;
-
 //
 
 let Flavor = {
 
-  data() { return { name:'Flavor', wheel:null } },
+  components:{ 'h-summ':Summ$1 },
+
+  data() { return { name:'Flavor', svgMgr:null, wheel:null } },
   
   methods: {
-    
-    calcSize: function(elem) { // Should only be called within $nextTick()
+
+    onChoice: function ( choice, roast ) {
+      this.choose(  this.name, choice );
+      // console.log( 'Flavor.onChoice()', { name:this.name, choice:choice, roast:roast } );
+      this.publish( this.name, choice ); },
+
+    // Should only be called within $nextTick()
+    calcSize: function(elem) {
       let sz        = {};
       sz.elemWidth  = elem['clientWidth' ];
       sz.elemHeight = elem['clientHeight'];
@@ -25508,184 +20291,58 @@ let Flavor = {
 
   mounted: function () {
     this.$nextTick( function() {
-      let elem   = this.$refs[this.name];
-      let size   = this.calcSize( elem );
-      let drew   = new Drew$1(  this.stream(), elem, size );
-      this.wheel = new Wheel$1( drew, d3, this.name, elem, size ); } ); }
+      let elem    = this.$refs[this.name];
+      let size    = this.calcSize( elem );
+      this.svgMgr = new SvgMgr$1( this.name, elem, size, d3 );
+      this.wheel  = new Wheel$1(  this.svgMgr, this.onChoice ); } ); }
 
 };
 
-function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
-/* server only */
-, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
-  if (typeof shadowMode !== 'boolean') {
-    createInjectorSSR = createInjector;
-    createInjector = shadowMode;
-    shadowMode = false;
-  } // Vue.extend constructor export interop.
-
-
-  var options = typeof script === 'function' ? script.options : script; // render functions
-
-  if (template && template.render) {
-    options.render = template.render;
-    options.staticRenderFns = template.staticRenderFns;
-    options._compiled = true; // functional template
-
-    if (isFunctionalTemplate) {
-      options.functional = true;
-    }
-  } // scopedId
-
-
-  if (scopeId) {
-    options._scopeId = scopeId;
-  }
-
-  var hook;
-
-  if (moduleIdentifier) {
-    // server build
-    hook = function hook(context) {
-      // 2.3 injection
-      context = context || // cached call
-      this.$vnode && this.$vnode.ssrContext || // stateful
-      this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext; // functional
-      // 2.2 with runInNewContext: true
-
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__;
-      } // inject component styles
-
-
-      if (style) {
-        style.call(this, createInjectorSSR(context));
-      } // register component module identifier for async chunk inference
-
-
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier);
-      }
-    }; // used by ssr in case component is cached and beforeCreate
-    // never gets called
-
-
-    options._ssrRegister = hook;
-  } else if (style) {
-    hook = shadowMode ? function () {
-      style.call(this, createInjectorShadow(this.$root.$options.shadowRoot));
-    } : function (context) {
-      style.call(this, createInjector(context));
-    };
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // register for functional component in vue file
-      var originalRender = options.render;
-
-      options.render = function renderWithStyleInjection(h, context) {
-        hook.call(context);
-        return originalRender(h, context);
-      };
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate;
-      options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
-    }
-  }
-
-  return script;
-}
-
-var normalizeComponent_1 = normalizeComponent;
-
-var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
-function createInjector(context) {
-  return function (id, style) {
-    return addStyle(id, style);
-  };
-}
-var HEAD = document.head || document.getElementsByTagName('head')[0];
-var styles = {};
-
-function addStyle(id, css) {
-  var group = isOldIE ? css.media || 'default' : id;
-  var style = styles[group] || (styles[group] = {
-    ids: new Set(),
-    styles: []
-  });
-
-  if (!style.ids.has(id)) {
-    style.ids.add(id);
-    var code = css.source;
-
-    if (css.map) {
-      // https://developer.chrome.com/devtools/docs/javascript-debugging
-      // this makes source maps inside style tags work properly in Chrome
-      code += '\n/*# sourceURL=' + css.map.sources[0] + ' */'; // http://stackoverflow.com/a/26603875
-
-      code += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(css.map)))) + ' */';
-    }
-
-    if (!style.element) {
-      style.element = document.createElement('style');
-      style.element.type = 'text/css';
-      if (css.media) style.element.setAttribute('media', css.media);
-      HEAD.appendChild(style.element);
-    }
-
-    if ('styleSheet' in style.element) {
-      style.styles.push(code);
-      style.element.styleSheet.cssText = style.styles.filter(Boolean).join('\n');
-    } else {
-      var index = style.ids.size - 1;
-      var textNode = document.createTextNode(code);
-      var nodes = style.element.childNodes;
-      if (nodes[index]) style.element.removeChild(nodes[index]);
-      if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
-    }
-  }
-}
-
-var browser = createInjector;
-
 /* script */
-const __vue_script__ = Flavor;
+const __vue_script__$1 = Flavor;
 
 /* template */
-var __vue_render__ = function() {
+var __vue_render__$1 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", { ref: _vm.name, staticClass: "flavor" })
+  return _c("div", { staticClass: "flavor" }, [
+    _c(
+      "div",
+      { staticClass: "csumm" },
+      [_c("h-summ", { attrs: { name: _vm.name } })],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { ref: _vm.name, staticClass: "wheel" })
+  ])
 };
-var __vue_staticRenderFns__ = [];
-__vue_render__._withStripped = true;
+var __vue_staticRenderFns__$1 = [];
+__vue_render__$1._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__ = function (inject) {
+  const __vue_inject_styles__$1 = function (inject) {
     if (!inject) return
-    inject("data-v-cb48c5c4_0", { source: ".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.flavor {\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  display: grid;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  color: wheat;\n}\n", map: {"version":3,"sources":["Flavor.vue","/Users/ax/Documents/prj/aug/vue/jitter/Flavor.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;AACrB;AACA;EACE,sBAAsB;AACxB;ACCA;EDCE,sBAAsB;ACCxB;AACA;EACA,uBAAA;EDCE,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,aAAa;EACb,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,uBAAuB;EACvB,YAAY;AACd","file":"Flavor.vue","sourcesContent":[".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.flavor {\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  display: grid;\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  background-color: black;\n  color: wheat;\n}\n","\n<template>\n  <div class=\"flavor\" :ref=\"name\"></div>\n</template>\n\n<script type=\"module\">\n\n  import Drew    from '../../pub/base/d3d/Drew.js' ;\n  import Wheel   from '../../pub/base/d3d/Wheel.js' ;\n  import * as d3 from '../../pub/lib/d3/d3.5.9.0.esm.js';\n\n  let Flavor = {\n\n    data() { return { name:'Flavor', wheel:null } },\n    \n    methods: {\n      \n      calcSize: function(elem) { // Should only be called within $nextTick()\n        let sz        = {}\n        sz.elemWidth  = elem['clientWidth' ];\n        sz.elemHeight = elem['clientHeight'];\n        sz.elem       = elem;\n        sz.name       = this.name;\n        return sz; }\n    },\n\n    mounted: function () {\n      this.$nextTick( function() {\n        let elem   = this.$refs[this.name];\n        let size   = this.calcSize( elem );\n        let drew   = new Drew(  this.stream(), elem, size );\n        this.wheel = new Wheel( drew, d3, this.name, elem, size ); } ) }\n\n  }\n  \n  export default Flavor;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .flavor { justify-items:center; align-items:center; text-align:center; display:grid;\n            position:absolute; left:0; top:0; right:0; bottom:0;\n            background-color:@theme-back; color:@theme-color; }\n  \n</style>"]}, media: undefined });
+    inject("data-v-001cc632_0", { source: ".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.flavor {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  color: wheat;\n}\n.flavor .csumm {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 15%;\n}\n.flavor .wheel {\n  position: absolute;\n  left: 0;\n  top: 15%;\n  width: 100%;\n  height: 85%;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n  border: 1px solid wheat;\n}\n", map: {"version":3,"sources":["Flavor.vue","/Users/ax/Documents/prj/aug/vue/jitter/Flavor.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;AACrB;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;AACxB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;ECCzB,iBAAA;ADCA;ACCA;EACA,uBAAA;EDCE,iBAAiB;ACCnB;ADCA;ECCA,uBAAA;EACA,iBAAA;AACA;ADCA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;AACzB","file":"Flavor.vue","sourcesContent":[".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.flavor {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  color: wheat;\n}\n.flavor .csumm {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 15%;\n}\n.flavor .wheel {\n  position: absolute;\n  left: 0;\n  top: 15%;\n  width: 100%;\n  height: 85%;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  background-color: black;\n  color: wheat;\n  border: 1px solid wheat;\n}\n","\n<template>\n  <div class=\"flavor\">\n    <div class=\"csumm\"><h-summ :name=\"name\" ></h-summ></div>\n    <div class=\"wheel\" :ref=\"name\"></div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Summ    from './Summ.vue';\n  import SvgMgr  from '../../pub/base/vue/SvgMgr.js';\n  import Wheel   from '../../pub/base/vue/Wheel.js' ;\n  import * as d3 from '../../pub/lib/d3/d3.5.9.0.esm.js';\n\n  let Flavor = {\n\n    components:{ 'h-summ':Summ },\n\n    data() { return { name:'Flavor', svgMgr:null, wheel:null } },\n    \n    methods: {\n\n      onChoice: function ( choice, roast ) {\n        this.choose(  this.name, choice );\n        if( roast===false ) {}\n        // console.log( 'Flavor.onChoice()', { name:this.name, choice:choice, roast:roast } );\n        this.publish( this.name, choice ); },\n\n      // Should only be called within $nextTick()\n      calcSize: function(elem) {\n        let sz        = {}\n        sz.elemWidth  = elem['clientWidth' ];\n        sz.elemHeight = elem['clientHeight'];\n        sz.elem       = elem;\n        sz.name       = this.name;\n        return sz; }\n    },\n\n    mounted: function () {\n      this.$nextTick( function() {\n        let elem    = this.$refs[this.name];\n        let size    = this.calcSize( elem );\n        this.svgMgr = new SvgMgr( this.name, elem, size, d3 );\n        this.wheel  = new Wheel(  this.svgMgr, this.onChoice ); } ) }\n\n  }\n  \n  export default Flavor;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  .flavor { position:absolute; left:0; top:0; width:100%; height:100%;\n    background-color:@theme-back; color:@theme-color;\n\n    .csumm { position:absolute; left:0; top:0;   width:100%; height:15%; }\n    \n    .wheel { position:absolute; left:0; top:15%; width:100%; height:85%;\n      .themeCenterItems(); background-color:@theme-back; color:@theme-color; border:1px solid @theme-color; }\n  }\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__ = undefined;
+  const __vue_scope_id__$1 = undefined;
   /* module identifier */
-  const __vue_module_identifier__ = undefined;
+  const __vue_module_identifier__$1 = undefined;
   /* functional template */
-  const __vue_is_functional_template__ = false;
+  const __vue_is_functional_template__$1 = false;
   /* style inject SSR */
   
 
   
   var Flavor$1 = normalizeComponent_1(
-    { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
-    __vue_inject_styles__,
-    __vue_script__,
-    __vue_scope_id__,
-    __vue_is_functional_template__,
-    __vue_module_identifier__,
+    { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
+    __vue_inject_styles__$1,
+    __vue_script__$1,
+    __vue_scope_id__$1,
+    __vue_is_functional_template__$1,
+    __vue_module_identifier__$1,
     browser,
     undefined
   );
