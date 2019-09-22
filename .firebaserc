@@ -14,6 +14,12 @@
         ],
         "main": [
           "main-4a9c7"
+        ],
+        "mbox": [
+          "pub/app/mbox/mbox.html"
+        ],
+        "jits": [
+          "pub/app/jitter/jitter.html"
         ]
       }
     }

@@ -1,6 +1,5 @@
+// import Worker from './Worker.js'
 var Cache;
-
-import Worker from './Worker.js';
 
 Cache = class Cache {
   constructor(stream, cacheName, cacheObjs, logPub = false) {
@@ -13,10 +12,18 @@ Cache = class Cache {
     this.cacheName = cacheName;
     this.cacheObjs = cacheObjs;
     this.logPub = logPub;
-    this.worker = new Worker(this.cacheName, this.cacheObjs, this.logPub);
+    this.register('../../Worker.js');
   }
 
-  constructor2(cacheName, cacheObjs, logPub = false, stream) {
+  constructor2(stream, cacheName, cacheObjs, logPub = false) {
+    this.stream = stream;
+    this.cacheName = cacheName;
+    this.cacheObjs = cacheObjs;
+    this.logPub = logPub;
+    return this.worker = new Worker(this.cacheName, this.cacheObjs, this.logPub);
+  }
+
+  constructor3(cacheName, cacheObjs, logPub = false, stream) {
     this.cacheName = cacheName;
     this.cacheObjs = cacheObjs;
     this.logPub = logPub;

@@ -69,7 +69,7 @@ Worker = class Worker {
         if (!hasProp.call(ref, key)) continue;
         obj = ref[key];
         fetch(obj.url).then((response) => {
-          obj.cacheName = obj.responseUrl = response.url;
+          obj.responseUrl = response.url;
           this.publish('  Install', response.status, obj);
           return cache.put(response.url, response);
         });
@@ -197,38 +197,41 @@ Worker = class Worker {
 cacheName = 'Muse';
 
 cacheObjs = {
-  Html: {
-    name: 'Html',
+  MuseHtml: {
+    name: 'MuseHtml',
     status: 0,
-    url: '/muse.html'
+    url: '/pub/app/muse/muse.html'
   },
-  Muse: {
-    name: 'Muse',
+  AugmHtml: {
+    name: 'AugmHtml',
     status: 0,
-    url: '/Muse.js'
+    url: '/pub/app/augm/augm.html'
+  },
+  JitterHtml: {
+    name: 'JitterHtml',
+    status: 0,
+    url: '/pub/app/jitter/jitter.html'
+  },
+  MuseJS: {
+    name: 'MuseJS',
+    status: 0,
+    url: '/pub/app/muse/Muse.js'
   },
   Vue: {
     name: 'Vue',
     status: 0,
-    url: '../../lib/vue/vue.esm.browser.js'
+    url: '/pub/lib/vue/vue.esm.browser.js'
   },
   VueRouter: {
     name: 'VueRouter',
     status: 0,
-    url: '../../lib/vue/vue-router.esm.js'
+    url: '/pub/lib/vue/vue-router.esm.js'
   },
   Roboto: {
     name: 'Roboto',
     status: 0,
-    url: '../../css/font/roboto/Roboto.css'
-  },
-  Roll: {
-    name: 'Roll',
-    status: 0,
-    url: '/Roll.js' // Gets deleted as a test
+    url: '/pub/css/font/roboto/Roboto.css'
   }
 };
 
 worker = new Worker(cacheName, cacheObjs, true);
-
-//orker.addEventListeners()

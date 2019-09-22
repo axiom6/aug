@@ -135,8 +135,6 @@ Muse = (function() {
 
   };
 
-  Muse.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json";
-
   Muse.Batch = {
     Prin: {
       url: 'muse/Prin.json',
@@ -167,18 +165,6 @@ Muse = (function() {
       data: null,
       type: 'Pack',
       plane: 'Wise'
-    },
-    Cube: {
-      url: 'muse/Cube.json',
-      data: null,
-      type: 'Pack',
-      plane: 'Cube'
-    },
-    Font: {
-      url: Muse.FontUrl,
-      data: null,
-      type: 'Font',
-      plane: 'Cube'
     }
   };
 

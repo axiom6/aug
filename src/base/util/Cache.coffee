@@ -1,12 +1,15 @@
 
-import Worker from './Worker.js'
+# import Worker from './Worker.js'
 
 class Cache
 
   constructor:( @stream,  @cacheName, @cacheObjs, @logPub=false ) ->
+    @register('../../Worker.js' )
+
+  constructor2:( @stream,  @cacheName, @cacheObjs, @logPub=false ) ->
     @worker = new Worker( @cacheName, @cacheObjs, @logPub )
 
-  constructor2:( @cacheName, @cacheObjs, @logPub=false, @stream ) ->
+  constructor3:( @cacheName, @cacheObjs, @logPub=false, @stream ) ->
     @subject       = 'Cache'
     @subscribe()
     @onlineEvent()

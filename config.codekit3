@@ -63,6 +63,14 @@
 		"oAP": "/aug.iml",
 		"oF": 0
 		},
+	"/firebase-debug.log": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/firebase-debug.log",
+		"oF": 0
+		},
 	"/firebase.json": {
 		"ft": 524288,
 		"oA": 1,
@@ -931,6 +939,28 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/base/util/Vis-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/base/util/Worker.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/base/util/Worker-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/base/util/Worker.orig.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/base/util/Worker.orig-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -3933,6 +3963,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/Worker.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/Worker-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/README.md": {
 		"cB": 0,
 		"cS": 0,
@@ -4276,7 +4317,7 @@
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/base/util/Worker.js",
+		"oAP": "/pub/Worker.js",
 		"oF": 2,
 		"oS": 1,
 		"sC": 0,

@@ -39,7 +39,6 @@ class Worker
           for own key, obj of @cacheObjs
             fetch( obj.url )
               .then( (response) =>
-                obj.cacheName   =
                 obj.responseUrl = response.url
                 @publish( '  Install', response.status, obj )
                 return cache.put( response.url, response ) )
@@ -140,4 +139,19 @@ class Worker
     #elf.addEventListener('push',     @onPush     )
     #elf.addEventListener('sync',     @onSync     )
   
-export default Worker
+# export default Worker
+
+cacheName = 'Muse'
+
+cacheObjs = {
+  MuseHtml:   { name:'MuseHtml',   status:0, url:'/pub/app/muse/muse.html'         }
+  AugmHtml:   { name:'AugmHtml',   status:0, url:'/pub/app/augm/augm.html'         }
+  JitterHtml: { name:'JitterHtml', status:0, url:'/pub/app/jitter/jitter.html'     }
+  MuseJS:     { name:'MuseJS',     status:0, url:'/pub/app/muse/Muse.js'           }
+  Vue:        { name:'Vue',        status:0, url:'/pub/lib/vue/vue.esm.browser.js' }
+  VueRouter:  { name:'VueRouter',  status:0, url:'/pub/lib/vue/vue-router.esm.js'  }
+  Roboto:     { name:'Roboto',     status:0, url:'/pub/css/font/roboto/Roboto.css' }
+}
+
+worker = new Worker( cacheName, cacheObjs, true )
+

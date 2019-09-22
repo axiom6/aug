@@ -25,16 +25,12 @@ class Muse
     Data.batchRead( Muse.Batch, Muse.init, Data.refine )
     return
 
-  Muse.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json"
-
   Muse.Batch = {
     Prin: { url:'muse/Prin.json', data:null, type:'Pack', plane:'Prin' }
     Rows: { url:'muse/Rows.json', data:null, type:'Pack', plane:'Rows' }
     Info: { url:'muse/Info.json', data:null, type:'Pack', plane:'Info' }
     Know: { url:'muse/Know.json', data:null, type:'Pack', plane:'Know' }
-    Wise: { url:'muse/Wise.json', data:null, type:'Pack', plane:'Wise' }
-    Cube: { url:'muse/Cube.json', data:null, type:'Pack', plane:'Cube' }
-    Font: { url:Muse.FontUrl,     data:null, type:'Font', plane:'Cube' } }
+    Wise: { url:'muse/Wise.json', data:null, type:'Pack', plane:'Wise' } }
 
   # 2. Initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
   Muse.init =   ( batch ) ->
