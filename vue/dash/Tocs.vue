@@ -45,6 +45,11 @@
         this.nav().pub(obj); },
       onNav:  function (obj) {
         if( obj.source !== 'Toc' ) {
+          if( this.compKey !== obj.compKey ) { this.doComp( this.kompsTocs()[obj.compKey] ) }
+          if( this.pracKey !== obj.pracKey ) { this.doPrac( obj.pracKey ) }
+          if( this.dispKey !== obj.dispKey ) { this.doDisp( obj.dispKey ) } } },
+      onNav2:  function (obj) {
+        if( obj.source !== 'Toc' ) {
           switch( obj.route ) {
             case 'Prin' : this.compKey = obj.compKey; break;
             case 'Comp' : this.compKey = obj.compKey; break;

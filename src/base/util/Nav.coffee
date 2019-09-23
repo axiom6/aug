@@ -7,9 +7,11 @@ class Nav
     @build    =  new Build( @batch )
     @$router  =  null
     @route    =  'None' # Prac Disp
-    @compKey  =  'None'
+    @compKey  =  'None' # Also specifies current plane
     @pracKey  =  'None'
+    @pracObj  =   null
     @dispKey  =  'None'
+    @dispObj  =   null
     @pageKey  =  'Icon'
     @pageKeys = ['Icon','Dirs','Conn','Desc']
     @compass  =   ""
@@ -70,51 +72,41 @@ class Nav
     return
 
   dirComp:( dir ) ->
-    @compKey = @adjComp( @compKey, dir )
-    @pracObj = @build.getPractice( @pracKey.row, @pracKey.column, @compKey )
-    @dispKey = @getDisp( @pracKey, @dispKey.dir )
+    compKey = @adjCompKey( @compKey, dir )
+    @pub( {  compKey:compKey } )
+    return
 
   dirPrac:( dir ) ->
-    adj = @adjPrac( dir )
-    # console.log('Nav.adj()', adj )
+    adj = @adjPracObj( dir )
     if adj.name isnt 'None'
       obj = {}
-      obj.route = @route
-      obj.comp  = @compKey
+      obj.compKey = @compKey
       if adj.name  isnt @pracKey
-         obj.prac  = adj.name
-         @pracKey     = adj.name
+         obj.pracKey = adj.name
       if adj.plane isnt @compKey
-         obj.comp  = adj.plane
-         @compKey     = adj.plane
-         @doRrouteoute( @route ) # @compKey+@pageKey
+         obj.compKey = adj.plane
       @pub( obj )
     return
 
   dirDisp:( dir ) ->
-    prc = @pracKeys(@compKey)[@pracKey] # Here adj is current practice
+    prc = @pracs(@compKey)[@pracKey]
     dis = prc[@dispKey]
 
     # if current prac.dir is dir or next or prev we will nav to adjacent prac
     if dir is dis.dir or ( dir is 'next' or dir is 'prev')
-       adj = @adjPrac(dir)
-       dis = @getDisp( @adjDir(@compass), adj )
+       adj = @adjPracObj(dir)
+       dis = @getDispObj( adj, @adjDir(@compass) )
     else
        adj = prc
-       dis = @getDisp( @compass, prc )
+       dis = @getDispObj( prc, @compass )
 
     if adj.name isnt 'None'
        obj = {}
-       obj.route = @route
-       obj.comp  = @compKey
-       obj.prac  = adj.name
-       @pracKey     = adj.name
-       obj.disp  = dis.name
-       @dispKey     = dis.name
+       obj.compKey  = @compKey
+       obj.pracKey  = adj.name
+       obj.dispKey  = dis.name
        if adj.plane isnt @compKey
-          obj.comp = adj.plane
-          @compKey = adj.plane
-          @doRoute( @route) # @compKey+@pageKey
+          obj.compKey = adj.plane
        @pub( obj )
     return
 
@@ -125,11 +117,8 @@ class Nav
       page = @pageKeys[idx--] if dir is 'west' and idx > 1
       if page isnt @pageKey
          obj = {}
-         obj.route   = @route
-         obj.compKey = @compKey
          obj.pageKey = page
-         @pageKey    = page
-         @doRoute( @route ) # @compKey+@pageKey
+         @pub( obj )
     else
       @dirNone(  dr )
     return
@@ -138,7 +127,7 @@ class Nav
     console.error( 'Nav.dirNone unknown dir', { dir:dir, route:@route } )
     return
 
-  adjComp:( compKey, dir ) ->
+  adjCompKey:( compKey, dir ) ->
     adjDir = switch  dir
       when 'west'  then 'prev'
       when 'north' then 'prev'
@@ -149,13 +138,13 @@ class Nav
       else              'next'
     return if adjDir is 'next' then @build.next(compKey) else @build.prev(compKey)
 
-  adjPrac:( dir ) ->
+  adjPracObj:( dir ) ->
     pracObj = @pracs(@compKey)[@pracKey]
     adjcObj = @build.adjacentPractice(pracObj,dir)
     # console.log( 'Nav.adjPrac()', { dir:dir, pracObj:pracObj, adjcObj:adjcObj } )
     adjcObj
 
-  getDisp:( pracObj, dirDisp ) ->
+  getDispObj:( pracObj, dirDisp ) ->
     dispObj = @build.getDir( pracObj, dirDisp )
     # console.log( 'Nav.getDisp()', { dir:dir, prac:prac, disp:disp } )
     dispObj
@@ -169,9 +158,9 @@ class Nav
       else              'west'
 
   pracs:(  compKey ) ->
-    @batch[compKey].data[compKey].pracs
+    @batch[compKey].data.pracs
 
   disps:(  compKey, pracKey ) ->
-    @batch[compKey].data[compKey][pracKey].disps
+    @batch[compKey].data.pracs[pracKey].disps
 
 export default Nav

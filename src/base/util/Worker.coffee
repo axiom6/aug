@@ -3,6 +3,8 @@ class Worker
   
   constructor:( @cacheName, @cacheObjs, @logPub=false ) ->
     @cacheUrls = @toCacheUrls( @cacheObjs )
+    @cacheOpts = { headers:{ 'Cache-Control': 'public, max-age=86400' } }
+    # console.log( 'Worker.self', self )
     @addEventListeners()
 
   pushSyncParams:() ->
@@ -37,10 +39,9 @@ class Worker
         .then( (cache) =>
           @publish( 'Install', '------ Open ------' )
           for own key, obj of @cacheObjs
-            fetch( obj.url )
+            fetch( obj.url, @cacheOpts )
               .then( (response) =>
-                obj.responseUrl = response.url
-                @publish( '  Install', response.status, obj )
+                @publish( '  Install', response.url )
                 return cache.put( response.url, response ) )
           return )
         .catch( (error) =>
@@ -54,11 +55,11 @@ class Worker
           @publish( 'InstallAll', 'Success', { cacheName:@cacheName } )
           return cache.addAll(@cacheUrls) )
         .catch( (error) =>
-          @onCatch( 'InstallAll\'', 'Error', error ); return ) )
+          @onCatch( 'InstallAll', 'Error', error ); return ) )
     return
   
   cacheUrlNotNeeded:( cacheUrl ) =>
-    cacheUrl is '/app/augm/Augm.roll.js'
+    cacheUrl is '/pub/app/muse/roll.js'
   
   onActivate:( event ) =>
     event.waitUntil(
@@ -70,22 +71,21 @@ class Worker
             return caches.delete(cacheToDelete) ) ) )
         .then(() =>
            self.clients.claim()
-           @publish( 'Activate', 'Success' ) )
+           @publish( 'Activate', 'Called' ) )
         .catch( (error) =>
           @onCatch( 'Activate', 'Error', error )
           return ) )
     return
   
   onFetch:( event ) =>
-    # @publish( 'Fetch URL ', event.request.url )
-    # opt = { headers:{ 'Cache-Control': 'public, max-age=604800' } }
+
     event.respondWith(
-      caches.open( cacheName )
+      caches.open( @cacheName )
         .then( (cache) =>
           return cache.match( event.request, {ignoreSearch:true} ).then( (response) =>
-            return response or fetch(event.request).then( (response) =>
+            return response or fetch( event.request,  @cacheOpts ).then( (response) =>
               cache.put( event.request, response.clone() )
-              @publish( 'Fetch', 'Success', { url:event.request.url }  )
+              @publish( 'Fetch', event.request.url  )
               return response ) ) )
         .catch( (error) =>
           @onCatch( 'Fetch', event.request.url, error  ) ) )
@@ -138,24 +138,18 @@ class Worker
     #elf.addEventListener('fetch',    @onGet      )
     #elf.addEventListener('push',     @onPush     )
     #elf.addEventListener('sync',     @onSync     )
-  
-# export default Worker
+    return
 
-cacheName = 'Muse'
+Worker.cacheName = 'Muse'
 
-cacheObjs = {
+Worker.cacheObjs = {
   MuseHtml:     { name:'MuseHtml',     status:0, url:'/pub/app/muse/muse.html'         }
-  AugmHtml:     { name:'AugmHtml',     status:0, url:'/pub/app/augm/augm.html'         }
-  JitterHtml:   { name:'JitterHtml',   status:0, url:'/pub/app/jitter/jitter.html'     }
+ #AugmHtml:     { name:'AugmHtml',     status:0, url:'/pub/app/augm/augm.html'         }
+ #JitterHtml:   { name:'JitterHtml',   status:0, url:'/pub/app/jitter/jitter.html'     }
   MuseJS:       { name:'MuseJS',       status:0, url:'/pub/app/muse/Muse.js'           }
   Vue:          { name:'Vue',          status:0, url:'/pub/lib/vue/vue.esm.browser.js' }
   VueRouter:    { name:'VueRouter',    status:0, url:'/pub/lib/vue/vue-router.esm.js'  }
   Roboto:       { name:'Roboto',       status:0, url:'/pub/css/font/roboto/Roboto.css' }
-}
-
-cacheObjs2 = {
-
-  Home:         { name:'Home',         status:0, url:'/pub/app/muse/Home.js' }
   Home:         { name:'Home',         status:0, url:'/pub/app/muse/Home.js' }
   RobotoTTF:    { name:'RobotoTTF',    status:0, url:'/pub/css/font/roboto/Roboto-Regular.ttf' }
   FaSolidWoff2: { name:'FaSolidWoff2', status:0, url:'/pub/css/font/fontawesome/fa-solid-900.woff2' }
@@ -166,11 +160,17 @@ cacheObjs2 = {
   Cache:        { name:'Cache',        status:0, url:'/pub/base/util/Cache.js'   }
   FontAweJS:    { name:'FontAweJS',    status:0, url:'/pub/base/util/FontAwe.js' }
   UtilJS:       { name:'UtilJS',       status:0, url:'/pub/base/util/Util.js'    }
-  DataJS:       { name:'UtilJS',       status:0, url:'/pub/base/util/Util.js'    }
+  DataJS:       { name:'UtilJS',       status:0, url:'/pub/base/util/Data.js'    }
   VisJS:        { name:'VisJS',        status:0, url:'/pub/base/util/Vis.js'     }
   NavJS:        { name:'NavJS',        status:0, url:'/pub/base/util/Nav.js'     }
   BuildJS:      { name:'BuildJS',      status:0, url:'/pub/ikw/cube/Build.js'    }
+  RollJS:      { name:'RollJS',        status:0, url:'/pub/app/muse/roll.js'     }
 }
 
-worker = new Worker( cacheName, cacheObjs, true )
+Worker.create = ( cacheName, cacheObjs, logPub ) ->
+  worker = new Worker( cacheName, cacheObjs, logPub )
+  if worker is false then {}
+  console.log( "Worker.create()", cacheName )
+  return
 
+Worker.create( Worker.cacheName, Worker.cacheObjs, true )

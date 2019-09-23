@@ -43,6 +43,10 @@ class Mixin
         dir: () ->
           console.error( 'Mixin.dir() null' ) if not Mixin.Main.dir?
           Mixin.Main.dir
+        isDir:() ->
+          Mixin.Main.dir?
+        isNav:() ->
+          Mixin.Main.nav?
         keys: (obj) ->
           Object.keys(obj)
         prin: ()  ->

@@ -1,4 +1,3 @@
-// import Worker from './Worker.js'
 var Cache;
 
 Cache = class Cache {
@@ -20,10 +19,22 @@ Cache = class Cache {
     this.cacheName = cacheName;
     this.cacheObjs = cacheObjs;
     this.logPub = logPub;
+    Worker.cacheName = this.cacheName;
+    Worker.cacheObjs = this.cacheObjs;
+    Worker.logPub = this.logPub;
+    Worker.runCreate = true;
+    return this.register('../../Worker.js');
+  }
+
+  constructor3(stream, cacheName, cacheObjs, logPub = false) {
+    this.stream = stream;
+    this.cacheName = cacheName;
+    this.cacheObjs = cacheObjs;
+    this.logPub = logPub;
     return this.worker = new Worker(this.cacheName, this.cacheObjs, this.logPub);
   }
 
-  constructor3(cacheName, cacheObjs, logPub = false, stream) {
+  constructor4(cacheName, cacheObjs, logPub = false, stream) {
     this.cacheName = cacheName;
     this.cacheObjs = cacheObjs;
     this.logPub = logPub;

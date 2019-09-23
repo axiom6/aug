@@ -1,7 +1,7 @@
 {
   "name":             "Show Case",
   "short_name":       "Main",
-  "start_url":        "../../app/augm/main/",
+  "start_url":        "/app/main/main.html?source=pwa",
   "display":          "standalone",
   "theme_color":      "#888888",
   "background_color": "#000000",

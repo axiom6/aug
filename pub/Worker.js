@@ -1,8 +1,8 @@
-var Worker, cacheName, cacheObjs, worker,
+var Worker,
   hasProp = {}.hasOwnProperty;
 
 Worker = class Worker {
-  constructor(cacheName1, cacheObjs1, logPub = false) {
+  constructor(cacheName1, cacheObjs1, logPub1 = false) {
     this.publish = this.publish.bind(this);
     this.onCatch = this.onCatch.bind(this);
     this.onInstall = this.onInstall.bind(this);
@@ -21,8 +21,14 @@ Worker = class Worker {
     this.onSync = this.onSync.bind(this);
     this.cacheName = cacheName1;
     this.cacheObjs = cacheObjs1;
-    this.logPub = logPub;
+    this.logPub = logPub1;
     this.cacheUrls = this.toCacheUrls(this.cacheObjs);
+    this.cacheOpts = {
+      headers: {
+        'Cache-Control': 'public, max-age=86400'
+      }
+    };
+    // console.log( 'Worker.self', self )
     this.addEventListeners();
   }
 
@@ -68,9 +74,8 @@ Worker = class Worker {
       for (key in ref) {
         if (!hasProp.call(ref, key)) continue;
         obj = ref[key];
-        fetch(obj.url).then((response) => {
-          obj.responseUrl = response.url;
-          this.publish('  Install', response.status, obj);
+        fetch(obj.url, this.cacheOpts).then((response) => {
+          this.publish('  Install', response.url);
           return cache.put(response.url, response);
         });
       }
@@ -86,12 +91,12 @@ Worker = class Worker {
       });
       return cache.addAll(this.cacheUrls);
     }).catch((error) => {
-      this.onCatch('InstallAll\'', 'Error', error);
+      this.onCatch('InstallAll', 'Error', error);
     }));
   }
 
   cacheUrlNotNeeded(cacheUrl) {
-    return cacheUrl === '/app/augm/Augm.roll.js';
+    return cacheUrl === '/pub/app/muse/roll.js';
   }
 
   onActivate(event) {
@@ -106,24 +111,20 @@ Worker = class Worker {
       }));
     }).then(() => {
       self.clients.claim();
-      return this.publish('Activate', 'Success');
+      return this.publish('Activate', 'Called');
     }).catch((error) => {
       this.onCatch('Activate', 'Error', error);
     }));
   }
 
   onFetch(event) {
-    // @publish( 'Fetch URL ', event.request.url )
-    // opt = { headers:{ 'Cache-Control': 'public, max-age=604800' } }
-    event.respondWith(caches.open(cacheName).then((cache) => {
+    event.respondWith(caches.open(this.cacheName).then((cache) => {
       return cache.match(event.request, {
         ignoreSearch: true
       }).then((response) => {
-        return response || fetch(event.request).then((response) => {
+        return response || fetch(event.request, this.cacheOpts).then((response) => {
           cache.put(event.request, response.clone());
-          this.publish('Fetch', 'Success', {
-            url: event.request.url
-          });
+          this.publish('Fetch', event.request.url);
           return response;
         });
       });
@@ -184,7 +185,7 @@ Worker = class Worker {
   addEventListeners() {
     self.addEventListener('install', this.onInstall);
     self.addEventListener('activate', this.onActivate);
-    return self.addEventListener('fetch', this.onFetch);
+    self.addEventListener('fetch', this.onFetch);
   }
 
 };
@@ -192,26 +193,16 @@ Worker = class Worker {
 //elf.addEventListener('fetch',    @onGet      )
 //elf.addEventListener('push',     @onPush     )
 //elf.addEventListener('sync',     @onSync     )
+Worker.cacheName = 'Muse';
 
-// export default Worker
-cacheName = 'Muse';
-
-cacheObjs = {
+Worker.cacheObjs = {
   MuseHtml: {
     name: 'MuseHtml',
     status: 0,
     url: '/pub/app/muse/muse.html'
   },
-  AugmHtml: {
-    name: 'AugmHtml',
-    status: 0,
-    url: '/pub/app/augm/augm.html'
-  },
-  JitterHtml: {
-    name: 'JitterHtml',
-    status: 0,
-    url: '/pub/app/jitter/jitter.html'
-  },
+  //AugmHtml:     { name:'AugmHtml',     status:0, url:'/pub/app/augm/augm.html'         }
+  //JitterHtml:   { name:'JitterHtml',   status:0, url:'/pub/app/jitter/jitter.html'     }
   MuseJS: {
     name: 'MuseJS',
     status: 0,
@@ -231,7 +222,91 @@ cacheObjs = {
     name: 'Roboto',
     status: 0,
     url: '/pub/css/font/roboto/Roboto.css'
+  },
+  Home: {
+    name: 'Home',
+    status: 0,
+    url: '/pub/app/muse/Home.js'
+  },
+  RobotoTTF: {
+    name: 'RobotoTTF',
+    status: 0,
+    url: '/pub/css/font/roboto/Roboto-Regular.ttf'
+  },
+  FaSolidWoff2: {
+    name: 'FaSolidWoff2',
+    status: 0,
+    url: '/pub/css/font/fontawesome/fa-solid-900.woff2'
+  },
+  FaBrandWoff2: {
+    name: 'FaBrandWoff2',
+    status: 0,
+    url: '/pub/css/font/fontawesome/fa-brans-400.woff2'
+  },
+  FaInit: {
+    name: 'FaInit',
+    status: 0,
+    url: '/pub/css/font/fontawesome/init.css'
+  },
+  Mixin: {
+    name: 'Mixin',
+    status: 0,
+    url: '/pub/base/util/Mixin.js'
+  },
+  Stream: {
+    name: 'Stream',
+    status: 0,
+    url: '/pub/base/util/Stream.js'
+  },
+  Cache: {
+    name: 'Cache',
+    status: 0,
+    url: '/pub/base/util/Cache.js'
+  },
+  FontAweJS: {
+    name: 'FontAweJS',
+    status: 0,
+    url: '/pub/base/util/FontAwe.js'
+  },
+  UtilJS: {
+    name: 'UtilJS',
+    status: 0,
+    url: '/pub/base/util/Util.js'
+  },
+  DataJS: {
+    name: 'UtilJS',
+    status: 0,
+    url: '/pub/base/util/Data.js'
+  },
+  VisJS: {
+    name: 'VisJS',
+    status: 0,
+    url: '/pub/base/util/Vis.js'
+  },
+  NavJS: {
+    name: 'NavJS',
+    status: 0,
+    url: '/pub/base/util/Nav.js'
+  },
+  BuildJS: {
+    name: 'BuildJS',
+    status: 0,
+    url: '/pub/ikw/cube/Build.js'
+  },
+  RollJS: {
+    name: 'RollJS',
+    status: 0,
+    url: '/pub/app/muse/roll.js'
   }
 };
 
-worker = new Worker(cacheName, cacheObjs, true);
+Worker.create = function(cacheName, cacheObjs, logPub) {
+  var worker;
+  worker = new Worker(cacheName, cacheObjs, logPub);
+  if (worker === false) {
+    ({});
+  }
+  console.log("Worker.create()", cacheName);
+};
+
+Worker.create(Worker.cacheName, Worker.cacheObjs, true);

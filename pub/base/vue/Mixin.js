@@ -56,6 +56,12 @@ Mixin = class Mixin {
           }
           return Mixin.Main.dir;
         },
+        isDir: function() {
+          return Mixin.Main.dir != null;
+        },
+        isNav: function() {
+          return Mixin.Main.nav != null;
+        },
         keys: function(obj) {
           return Object.keys(obj);
         },

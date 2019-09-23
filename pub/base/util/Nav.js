@@ -14,9 +14,11 @@ Nav = class Nav {
     this.build = new Build(this.batch);
     this.$router = null;
     this.route = 'None'; // Prac Disp
-    this.compKey = 'None';
+    this.compKey = 'None'; // Also specifies current plane
     this.pracKey = 'None';
+    this.pracObj = null;
     this.dispKey = 'None';
+    this.dispObj = null;
     this.pageKey = 'Icon';
     this.pageKeys = ['Icon', 'Dirs', 'Conn', 'Desc'];
     this.compass = "";
@@ -114,27 +116,24 @@ Nav = class Nav {
   }
 
   dirComp(dir) {
-    this.compKey = this.adjComp(this.compKey, dir);
-    this.pracObj = this.build.getPractice(this.pracKey.row, this.pracKey.column, this.compKey);
-    return this.dispKey = this.getDisp(this.pracKey, this.dispKey.dir);
+    var compKey;
+    compKey = this.adjCompKey(this.compKey, dir);
+    this.pub({
+      compKey: compKey
+    });
   }
 
   dirPrac(dir) {
     var adj, obj;
-    adj = this.adjPrac(dir);
-    // console.log('Nav.adj()', adj )
+    adj = this.adjPracObj(dir);
     if (adj.name !== 'None') {
       obj = {};
-      obj.route = this.route;
-      obj.comp = this.compKey;
+      obj.compKey = this.compKey;
       if (adj.name !== this.pracKey) {
-        obj.prac = adj.name;
-        this.pracKey = adj.name;
+        obj.pracKey = adj.name;
       }
       if (adj.plane !== this.compKey) {
-        obj.comp = adj.plane;
-        this.compKey = adj.plane;
-        this.doRrouteoute(this.route); // @compKey+@pageKey
+        obj.compKey = adj.plane;
       }
       this.pub(obj);
     }
@@ -142,28 +141,23 @@ Nav = class Nav {
 
   dirDisp(dir) {
     var adj, dis, obj, prc;
-    prc = this.pracKeys(this.compKey)[this.pracKey];
+    prc = this.pracs(this.compKey)[this.pracKey];
     dis = prc[this.dispKey];
     // if current prac.dir is dir or next or prev we will nav to adjacent prac
     if (dir === dis.dir || (dir === 'next' || dir === 'prev')) {
-      adj = this.adjPrac(dir);
-      dis = this.getDisp(this.adjDir(this.compass), adj);
+      adj = this.adjPracObj(dir);
+      dis = this.getDispObj(adj, this.adjDir(this.compass));
     } else {
       adj = prc;
-      dis = this.getDisp(this.compass, prc);
+      dis = this.getDispObj(prc, this.compass);
     }
     if (adj.name !== 'None') {
       obj = {};
-      obj.route = this.route;
-      obj.comp = this.compKey;
-      obj.prac = adj.name;
-      this.pracKey = adj.name;
-      obj.disp = dis.name;
-      this.dispKey = dis.name;
+      obj.compKey = this.compKey;
+      obj.pracKey = adj.name;
+      obj.dispKey = dis.name;
       if (adj.plane !== this.compKey) {
-        obj.comp = adj.plane;
-        this.compKey = adj.plane;
-        this.doRoute(this.route); // @compKey+@pageKey
+        obj.compKey = adj.plane;
       }
       this.pub(obj);
     }
@@ -181,11 +175,8 @@ Nav = class Nav {
       }
       if (page !== this.pageKey) {
         obj = {};
-        obj.route = this.route;
-        obj.compKey = this.compKey;
         obj.pageKey = page;
-        this.pageKey = page;
-        this.doRoute(this.route); // @compKey+@pageKey
+        this.pub(obj);
       }
     } else {
       this.dirNone(dr);
@@ -199,7 +190,7 @@ Nav = class Nav {
     });
   }
 
-  adjComp(compKey, dir) {
+  adjCompKey(compKey, dir) {
     var adjDir;
     adjDir = (function() {
       switch (dir) {
@@ -226,7 +217,7 @@ Nav = class Nav {
     }
   }
 
-  adjPrac(dir) {
+  adjPracObj(dir) {
     var adjcObj, pracObj;
     pracObj = this.pracs(this.compKey)[this.pracKey];
     adjcObj = this.build.adjacentPractice(pracObj, dir);
@@ -234,7 +225,7 @@ Nav = class Nav {
     return adjcObj;
   }
 
-  getDisp(pracObj, dirDisp) {
+  getDispObj(pracObj, dirDisp) {
     var dispObj;
     dispObj = this.build.getDir(pracObj, dirDisp);
     // console.log( 'Nav.getDisp()', { dir:dir, prac:prac, disp:disp } )
@@ -257,11 +248,11 @@ Nav = class Nav {
   }
 
   pracs(compKey) {
-    return this.batch[compKey].data[compKey].pracs;
+    return this.batch[compKey].data.pracs;
   }
 
   disps(compKey, pracKey) {
-    return this.batch[compKey].data[compKey][pracKey].disps;
+    return this.batch[compKey].data.pracs[pracKey].disps;
   }
 
 };

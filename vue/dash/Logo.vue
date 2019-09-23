@@ -18,12 +18,14 @@
     
     name: 'logo',
     
-    methods:{
+    methods: {
       doDir: function( dir ) {
-        if( this.isDef( this.dir() ) ) {
+        if( this.isDir() ) {
             this.dir().touch( dir ); }
+        else if( this.isNav() ) {
+            this.nav().dir( dir ); }
         else {
-            this.nav().dir( dir ); } } },
+          console.error( 'Logo.vue.doDir() no direction navigator' ); } } },
     
     mounted: function () {
       // this.nav().$router = this.$router;
