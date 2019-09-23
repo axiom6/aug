@@ -2,13 +2,13 @@
 import Data    from '../../base/util/Data.js'
 import Stream  from '../../base/util/Stream.js'
 import Dir     from '../../base/util/Dir.js'
-#mport Cache   from '../../base/util/Cache.js'
-#mport Test   from './Test.js'
+import Cache   from '../../base/util/Cache.js'
+#mport Test    from './Test.js'
 
-import Mixin  from '../../base/vue/Mixin.js'
-import Vue    from '../../lib/vue/vue.esm.browser.js'
-import Router from '../../lib/vue/vue-router.esm.js'
-import Home   from '../../vue/jitter/Home.js'
+import Mixin   from '../../base/vue/Mixin.js'
+import Vue     from '../../lib/vue/vue.esm.browser.js'
+import Router  from '../../lib/vue/vue-router.esm.js'
+import Home    from '../../vue/jitter/Home.js'
 
 Vue['config'].productionTip = false
 
@@ -39,8 +39,8 @@ class Jitter
     subjects       = ["Dir"]
     streamLog      = { subscribe:false, publish:false, subjects:subjects }
     Jitter.stream  = new Stream( subjects, streamLog )
-    Jitter.dir     = new Dir( Jitter.stream, batch['Navs'].data, 'Home' )
-    #ain.cache  = new Cache( Jitter.stream )
+    Jitter.dir     = new Dir(   Jitter.stream, batch['Navs'].data, 'Home' )
+    Jitter.cache   = new Cache( Jitter.stream )
     Jitter.vue()
     return
 

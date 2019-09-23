@@ -32,6 +32,7 @@ Worker = class Worker {
     this.addEventListeners();
   }
 
+  // Not used. Push and Sync not implemented
   pushSyncParams() {
     this.pushTag = 'PushTest';
     this.pushUrl = '/app/data/store/Push.json';
@@ -118,6 +119,9 @@ Worker = class Worker {
   }
 
   onFetch(event) {
+    if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
+      return;
+    }
     event.respondWith(caches.open(this.cacheName).then((cache) => {
       return cache.match(event.request, {
         ignoreSearch: true
@@ -193,20 +197,108 @@ Worker = class Worker {
 //elf.addEventListener('fetch',    @onGet      )
 //elf.addEventListener('push',     @onPush     )
 //elf.addEventListener('sync',     @onSync     )
-Worker.cacheName = 'Muse';
+Worker.cacheName = 'Axiom';
 
 Worker.cacheObjs = {
+  MainHtml: {
+    name: 'MainHtml',
+    status: 0,
+    url: '/pub/app/main/main.html'
+  },
   MuseHtml: {
     name: 'MuseHtml',
     status: 0,
     url: '/pub/app/muse/muse.html'
   },
-  //AugmHtml:     { name:'AugmHtml',     status:0, url:'/pub/app/augm/augm.html'         }
-  //JitterHtml:   { name:'JitterHtml',   status:0, url:'/pub/app/jitter/jitter.html'     }
   MuseJS: {
     name: 'MuseJS',
     status: 0,
     url: '/pub/app/muse/Muse.js'
+  },
+  MuseHome: {
+    name: 'MuseHome',
+    status: 0,
+    url: '/pub/app/muse/Home.js'
+  },
+  MuseMani: {
+    name: 'MuseMani',
+    status: 0,
+    url: '/pub/app/muse/manifest.webmanifest'
+  },
+  AugmHtml: {
+    name: 'AugmHtml',
+    status: 0,
+    url: '/pub/app/augm/augm.html'
+  },
+  AugmJS: {
+    name: 'AugmJS',
+    status: 0,
+    url: '/pub/app/augm/augm.js'
+  },
+  AugmHome: {
+    name: 'AugmHome',
+    status: 0,
+    url: '/pub/app/augm/home.js'
+  },
+  AugmMani: {
+    name: 'AugmMani',
+    status: 0,
+    url: '/pub/app/augm/manifest.webmanifest'
+  },
+  JitterHtml: {
+    name: 'JitterHtml',
+    status: 0,
+    url: '/pub/app/jitter/jits.html'
+  },
+  JitterJS: {
+    name: 'JitterJS',
+    status: 0,
+    url: '/pub/app/jitter/jitter.js'
+  },
+  JitterMani: {
+    name: 'JitterMani',
+    status: 0,
+    url: '/pub/app/jitter/manifest.webmanifest'
+  },
+  JitterHome: {
+    name: 'JitterHome',
+    status: 0,
+    url: '/pub/vue/jitter/home.js'
+  },
+  JitterBody: {
+    name: 'JitterBody',
+    status: 0,
+    url: '/pub/vue/jitter/body.js'
+  },
+  JitterBrew: {
+    name: 'JitterBrew',
+    status: 0,
+    url: '/pub/vue/jitter/brew.js'
+  },
+  JitterChoice: {
+    name: 'JitterChoice',
+    status: 0,
+    url: '/pub/vue/jitter/choice.js'
+  },
+  JitterDrink: {
+    name: 'JitterDrink',
+    status: 0,
+    url: '/pub/vue/jitter/drink.js'
+  },
+  JitterFlavor: {
+    name: 'JitterFlavor',
+    status: 0,
+    url: '/pub/vue/jitter/flavor.js'
+  },
+  JitterRoast: {
+    name: 'JitterRoast',
+    status: 0,
+    url: '/pub/vue/jitter/roast.js'
+  },
+  MBoxHtml: {
+    name: 'MBoxHtml',
+    status: 0,
+    url: '/pub/app/mbox/mbox.html'
   },
   Vue: {
     name: 'Vue',
@@ -218,15 +310,15 @@ Worker.cacheObjs = {
     status: 0,
     url: '/pub/lib/vue/vue-router.esm.js'
   },
+  ChromeIcon: {
+    name: 'ChromeIcon',
+    status: 0,
+    url: '/pub/css/icons/android-chrome-512x512.png'
+  },
   Roboto: {
     name: 'Roboto',
     status: 0,
     url: '/pub/css/font/roboto/Roboto.css'
-  },
-  Home: {
-    name: 'Home',
-    status: 0,
-    url: '/pub/app/muse/Home.js'
   },
   RobotoTTF: {
     name: 'RobotoTTF',
@@ -248,6 +340,11 @@ Worker.cacheObjs = {
     status: 0,
     url: '/pub/css/font/fontawesome/init.css'
   },
+  FontAweJS: {
+    name: 'FontAweJS',
+    status: 0,
+    url: '/pub/base/util/FontAwe.js'
+  },
   Mixin: {
     name: 'Mixin',
     status: 0,
@@ -263,18 +360,13 @@ Worker.cacheObjs = {
     status: 0,
     url: '/pub/base/util/Cache.js'
   },
-  FontAweJS: {
-    name: 'FontAweJS',
-    status: 0,
-    url: '/pub/base/util/FontAwe.js'
-  },
   UtilJS: {
     name: 'UtilJS',
     status: 0,
     url: '/pub/base/util/Util.js'
   },
   DataJS: {
-    name: 'UtilJS',
+    name: 'DataJS',
     status: 0,
     url: '/pub/base/util/Data.js'
   },
@@ -297,6 +389,31 @@ Worker.cacheObjs = {
     name: 'RollJS',
     status: 0,
     url: '/pub/app/muse/roll.js'
+  },
+  PrinJson: {
+    name: 'PrinJson',
+    status: 0,
+    url: '/pub/data/muse/Prin.json'
+  },
+  RowsJson: {
+    name: 'RowsJson',
+    status: 0,
+    url: '/pub/data/muse/Rows.json'
+  },
+  InfoJson: {
+    name: 'InfoJson',
+    status: 0,
+    url: '/pub/data/muse/Info.json'
+  },
+  KnowJson: {
+    name: 'KnowJson',
+    status: 0,
+    url: '/pub/data/muse/Know.json'
+  },
+  WiseJson: {
+    name: 'WiseJson',
+    status: 0,
+    url: '/pub/data/muse/Wise.json'
   }
 };
 
@@ -306,7 +423,7 @@ Worker.create = function(cacheName, cacheObjs, logPub) {
   if (worker === false) {
     ({});
   }
-  console.log("Worker.create()", cacheName);
 };
 
+// console.log( "Worker.create()", cacheName )
 Worker.create(Worker.cacheName, Worker.cacheObjs, true);

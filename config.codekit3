@@ -353,6 +353,14 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/app/jitter/jits.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/app/jitter/jits.html",
+		"oF": 0
+		},
 	"/pub/app/jitter/Jitter.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -363,14 +371,6 @@
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
-		},
-	"/pub/app/jitter/jitter.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/app/jitter/jitter.html",
-		"oF": 0
 		},
 	"/pub/app/jitter/Jitter.js": {
 		"bF": 0,
@@ -4311,17 +4311,6 @@
 		"oA": 0,
 		"oAP": "/pub/Worker.js",
 		"oF": 2,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/base/util/Worker.orig.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/base/util/Worker.orig.js",
-		"oF": 0,
 		"oS": 1,
 		"sC": 0,
 		"tS": 0

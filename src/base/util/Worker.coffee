@@ -7,6 +7,7 @@ class Worker
     # console.log( 'Worker.self', self )
     @addEventListeners()
 
+  # Not used. Push and Sync not implemented
   pushSyncParams:() ->
     @pushTag      = 'PushTest'
     @pushUrl      = '/app/data/store/Push.json'
@@ -78,7 +79,7 @@ class Worker
     return
   
   onFetch:( event ) =>
-
+    return if event.request.cache is 'only-if-cached' and event.request.mode isnt 'same-origin'
     event.respondWith(
       caches.open( @cacheName )
         .then( (cache) =>
@@ -140,37 +141,59 @@ class Worker
     #elf.addEventListener('sync',     @onSync     )
     return
 
-Worker.cacheName = 'Muse'
+Worker.cacheName = 'Axiom'
 
 Worker.cacheObjs = {
-  MuseHtml:     { name:'MuseHtml',     status:0, url:'/pub/app/muse/muse.html'         }
- #AugmHtml:     { name:'AugmHtml',     status:0, url:'/pub/app/augm/augm.html'         }
- #JitterHtml:   { name:'JitterHtml',   status:0, url:'/pub/app/jitter/jitter.html'     }
-  MuseJS:       { name:'MuseJS',       status:0, url:'/pub/app/muse/Muse.js'           }
+  MainHtml:     { name:'MainHtml',     status:0, url:'/pub/app/main/main.html'     }
+  MuseHtml:     { name:'MuseHtml',     status:0, url:'/pub/app/muse/muse.html'     }
+  MuseJS:       { name:'MuseJS',       status:0, url:'/pub/app/muse/Muse.js'       }
+  MuseHome:     { name:'MuseHome',     status:0, url:'/pub/app/muse/Home.js'       }
+  MuseMani:     { name:'MuseMani',     status:0, url:'/pub/app/muse/manifest.webmanifest' }
+  AugmHtml:     { name:'AugmHtml',     status:0, url:'/pub/app/augm/augm.html'     }
+  AugmJS:       { name:'AugmJS',       status:0, url:'/pub/app/augm/augm.js'       }
+  AugmHome:     { name:'AugmHome',     status:0, url:'/pub/app/augm/home.js'       }
+  AugmMani:     { name:'AugmMani',     status:0, url:'/pub/app/augm/manifest.webmanifest' }
+  JitterHtml:   { name:'JitterHtml',   status:0, url:'/pub/app/jitter/jits.html'   }
+  JitterJS:     { name:'JitterJS',     status:0, url:'/pub/app/jitter/jitter.js'   }
+  JitterMani:   { name:'JitterMani',   status:0, url:'/pub/app/jitter/manifest.webmanifest' }
+  JitterHome:   { name:'JitterHome',   status:0, url:'/pub/vue/jitter/home.js'     }
+  JitterBody:   { name:'JitterBody',   status:0, url:'/pub/vue/jitter/body.js'     }
+  JitterBrew:   { name:'JitterBrew',   status:0, url:'/pub/vue/jitter/brew.js'     }
+  JitterChoice: { name:'JitterChoice', status:0, url:'/pub/vue/jitter/choice.js'   }
+  JitterDrink:  { name:'JitterDrink',  status:0, url:'/pub/vue/jitter/drink.js'    }
+  JitterFlavor: { name:'JitterFlavor', status:0, url:'/pub/vue/jitter/flavor.js'   }
+  JitterRoast:  { name:'JitterRoast',  status:0, url:'/pub/vue/jitter/roast.js'    }
+  MBoxHtml:     { name:'MBoxHtml',     status:0, url:'/pub/app/mbox/mbox.html'     }
   Vue:          { name:'Vue',          status:0, url:'/pub/lib/vue/vue.esm.browser.js' }
   VueRouter:    { name:'VueRouter',    status:0, url:'/pub/lib/vue/vue-router.esm.js'  }
+  ChromeIcon:   { name:'ChromeIcon',   status:0, url:'/pub/css/icons/android-chrome-512x512.png' }
   Roboto:       { name:'Roboto',       status:0, url:'/pub/css/font/roboto/Roboto.css' }
-  Home:         { name:'Home',         status:0, url:'/pub/app/muse/Home.js' }
-  RobotoTTF:    { name:'RobotoTTF',    status:0, url:'/pub/css/font/roboto/Roboto-Regular.ttf' }
+  RobotoTTF:    { name:'RobotoTTF',    status:0, url:'/pub/css/font/roboto/Roboto-Regular.ttf'      }
   FaSolidWoff2: { name:'FaSolidWoff2', status:0, url:'/pub/css/font/fontawesome/fa-solid-900.woff2' }
   FaBrandWoff2: { name:'FaBrandWoff2', status:0, url:'/pub/css/font/fontawesome/fa-brans-400.woff2' }
   FaInit:       { name:'FaInit',       status:0, url:'/pub/css/font/fontawesome/init.css' }
+  FontAweJS:    { name:'FontAweJS',    status:0, url:'/pub/base/util/FontAwe.js' }
   Mixin:        { name:'Mixin',        status:0, url:'/pub/base/util/Mixin.js'   }
   Stream:       { name:'Stream',       status:0, url:'/pub/base/util/Stream.js'  }
   Cache:        { name:'Cache',        status:0, url:'/pub/base/util/Cache.js'   }
-  FontAweJS:    { name:'FontAweJS',    status:0, url:'/pub/base/util/FontAwe.js' }
   UtilJS:       { name:'UtilJS',       status:0, url:'/pub/base/util/Util.js'    }
-  DataJS:       { name:'UtilJS',       status:0, url:'/pub/base/util/Data.js'    }
+  DataJS:       { name:'DataJS',       status:0, url:'/pub/base/util/Data.js'    }
   VisJS:        { name:'VisJS',        status:0, url:'/pub/base/util/Vis.js'     }
   NavJS:        { name:'NavJS',        status:0, url:'/pub/base/util/Nav.js'     }
   BuildJS:      { name:'BuildJS',      status:0, url:'/pub/ikw/cube/Build.js'    }
-  RollJS:      { name:'RollJS',        status:0, url:'/pub/app/muse/roll.js'     }
+  RollJS:       { name:'RollJS',       status:0, url:'/pub/app/muse/roll.js'     }
+  PrinJson:     { name:'PrinJson',     status:0, url:'/pub/data/muse/Prin.json'  }
+  RowsJson:     { name:'RowsJson',     status:0, url:'/pub/data/muse/Rows.json'  }
+  InfoJson:     { name:'InfoJson',     status:0, url:'/pub/data/muse/Info.json'  }
+  KnowJson:     { name:'KnowJson',     status:0, url:'/pub/data/muse/Know.json'  }
+  WiseJson:     { name:'WiseJson',     status:0, url:'/pub/data/muse/Wise.json'  }
 }
+
 
 Worker.create = ( cacheName, cacheObjs, logPub ) ->
   worker = new Worker( cacheName, cacheObjs, logPub )
   if worker is false then {}
-  console.log( "Worker.create()", cacheName )
+  # console.log( "Worker.create()", cacheName )
   return
 
 Worker.create( Worker.cacheName, Worker.cacheObjs, true )

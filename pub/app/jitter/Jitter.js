@@ -6,6 +6,8 @@ import Stream from '../../base/util/Stream.js';
 
 import Dir from '../../base/util/Dir.js';
 
+import Cache from '../../base/util/Cache.js';
+
 import Mixin from '../../base/vue/Mixin.js';
 
 import Vue from '../../lib/vue/vue.esm.browser.js';
@@ -34,7 +36,7 @@ Jitter = (function() {
       };
       Jitter.stream = new Stream(subjects, streamLog);
       Jitter.dir = new Dir(Jitter.stream, batch['Navs'].data, 'Home');
-      //ain.cache  = new Cache( Jitter.stream )
+      Jitter.cache = new Cache(Jitter.stream);
       Jitter.vue();
     }
 

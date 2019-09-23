@@ -40,7 +40,7 @@ Muse = (function() {
       Muse.stream = new Stream(subjects, infoSpec);
       Muse.nav = new Nav(Muse.stream, batch);
       Muse.build = new Build(batch);
-      Muse.cache = new Cache(Muse.stream, 'Muse', Muse.cacheObjs, true);
+      Muse.cache = new Cache(Muse.stream);
       Muse.mergePracsPrin();
       //ain.build.logByColumn()
       Muse.vue();
@@ -215,105 +215,5 @@ Muse = (function() {
   return Muse;
 
 }).call(this);
-
-Muse.cacheObjs = {
-  MuseHtml: {
-    name: 'MuseHtml',
-    status: 0,
-    url: '/pub/app/muse/muse.html'
-  },
-  //AugmHtml:     { name:'AugmHtml',     status:0, url:'/pub/app/augm/augm.html'         }
-  //JitterHtml:   { name:'JitterHtml',   status:0, url:'/pub/app/jitter/jitter.html'     }
-  MuseJS: {
-    name: 'MuseJS',
-    status: 0,
-    url: '/pub/app/muse/Muse.js'
-  },
-  Vue: {
-    name: 'Vue',
-    status: 0,
-    url: '/pub/lib/vue/vue.esm.browser.js'
-  },
-  VueRouter: {
-    name: 'VueRouter',
-    status: 0,
-    url: '/pub/lib/vue/vue-router.esm.js'
-  },
-  Roboto: {
-    name: 'Roboto',
-    status: 0,
-    url: '/pub/css/font/roboto/Roboto.css'
-  },
-  Home: {
-    name: 'Home',
-    status: 0,
-    url: '/pub/app/muse/Home.js'
-  },
-  RobotoTTF: {
-    name: 'RobotoTTF',
-    status: 0,
-    url: '/pub/css/font/roboto/Roboto-Regular.ttf'
-  },
-  FaSolidWoff2: {
-    name: 'FaSolidWoff2',
-    status: 0,
-    url: '/pub/css/font/fontawesome/fa-solid-900.woff2'
-  },
-  FaBrandWoff2: {
-    name: 'FaBrandWoff2',
-    status: 0,
-    url: '/pub/css/font/fontawesome/fa-brans-400.woff2'
-  },
-  FaInit: {
-    name: 'FaInit',
-    status: 0,
-    url: '/pub/css/font/fontawesome/init.css'
-  },
-  Mixin: {
-    name: 'Mixin',
-    status: 0,
-    url: '/pub/base/util/Mixin.js'
-  },
-  Stream: {
-    name: 'Stream',
-    status: 0,
-    url: '/pub/base/util/Stream.js'
-  },
-  Cache: {
-    name: 'Cache',
-    status: 0,
-    url: '/pub/base/util/Cache.js'
-  },
-  FontAweJS: {
-    name: 'FontAweJS',
-    status: 0,
-    url: '/pub/base/util/FontAwe.js'
-  },
-  UtilJS: {
-    name: 'UtilJS',
-    status: 0,
-    url: '/pub/base/util/Util.js'
-  },
-  DataJS: {
-    name: 'UtilJS',
-    status: 0,
-    url: '/pub/base/util/Data.js'
-  },
-  VisJS: {
-    name: 'VisJS',
-    status: 0,
-    url: '/pub/base/util/Vis.js'
-  },
-  NavJS: {
-    name: 'NavJS',
-    status: 0,
-    url: '/pub/base/util/Nav.js'
-  },
-  BuildJS: {
-    name: 'BuildJS',
-    status: 0,
-    url: '/pub/ikw/cube/Build.js'
-  }
-};
 
 export default Muse;

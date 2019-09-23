@@ -1,6 +1,5 @@
 
 import Data    from '../../base/util/Data.js'
-import Build   from '../../ikw/cube/Build.js'
 import Stream  from '../../base/util/Stream.js'
 import Nav     from '../../base/util/Nav.js'
 import Cache   from '../../base/util/Cache.js'
@@ -49,8 +48,7 @@ class Augm
     streamLog    = { subscribe:false, publish:false, subjects:subjects }
     Augm.stream  = new Stream( subjects, streamLog )
     Augm.nav    = new Nav(   Augm.stream, batch )
-    Augm.build  = new Build( batch )
-    #ain.cache  = new Cache( Augm.stream )
+    Augm.cache  = new Cache( Augm.stream )
     Augm.vue()
     return
 

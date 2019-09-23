@@ -2,7 +2,7 @@
 
 class Cache
 
-  constructor:( @stream,  @cacheName, @cacheObjs, @logPub=false ) ->
+  constructor:( @stream ) ->
     @register('../../Worker.js' )
 
   constructor2:( @stream,  @cacheName, @cacheObjs, @logPub=false ) ->

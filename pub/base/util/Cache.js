@@ -1,16 +1,13 @@
 var Cache;
 
 Cache = class Cache {
-  constructor(stream, cacheName, cacheObjs, logPub = false) {
+  constructor(stream) {
     // else
     // console.log(   'Cache', { status:object.status, text:object.text } )
     this.quota = this.quota.bind(this);
     this.quotaGranted = this.quotaGranted.bind(this);
     this.onlineEvent = this.onlineEvent.bind(this);
     this.stream = stream;
-    this.cacheName = cacheName;
-    this.cacheObjs = cacheObjs;
-    this.logPub = logPub;
     this.register('../../Worker.js');
   }
 
