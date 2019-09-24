@@ -50,6 +50,7 @@ class Jitter
     Vue['mixin']( Jitter.mixin.mixin() )
     Vue.use(Router)
     app = new Vue( { router:Jitter.router(), render: (h) -> h(Home.Dash) } );
+    Jitter.dir.$router = app.$router;
     app.$mount('j-jitter')
     return
 

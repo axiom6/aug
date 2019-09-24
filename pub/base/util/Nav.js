@@ -6,14 +6,13 @@ import Build from '../../ikw/cube/Build.js';
 Nav = class Nav {
   constructor(stream, batch, navs = null) {
     this.tap = this.tap.bind(this);
-    this.touch = this.touch.bind(this);
     this.dir = this.dir.bind(this);
     this.stream = stream;
     this.batch = batch;
     this.navs = navs;
     this.build = new Build(this.batch);
     this.$router = null;
-    this.route = 'None'; // Prac Disp
+    this.route = 'Home'; // Prac Disp
     this.compKey = 'None'; // Also specifies current plane
     this.pracKey = 'None';
     this.pracObj = null;
@@ -76,19 +75,6 @@ Nav = class Nav {
     console.log('Nav.tap()');
   }
 
-  touch(dr, event = null) {
-    var route;
-    // return if dr is 'prev'
-    if (event === null) {
-      ({});
-    }
-    route = this.dirs[this.comp][dr];
-    this.pub(comp);
-    this.doRoute(route);
-    // console.log('Nav.dir()', { beg:@comp, dir:dr, end:comp } )
-    this.comp = comp;
-  }
-
   dir(dr, event = null) {
     console.log('Nav.dir()', dr);
     if (event === null) {
@@ -111,7 +97,7 @@ Nav = class Nav {
         this.dirPage(dr);
         break;
       default:
-        this.dirNone(dr);
+        this.dirNavs(dr);
     }
   }
 
@@ -183,11 +169,20 @@ Nav = class Nav {
     }
   }
 
-  dirNone(dir) {
-    console.error('Nav.dirNone unknown dir', {
-      dir: dir,
-      route: this.route
-    });
+  dirNavs(dir) {
+    var route;
+    if (this.navs != null) {
+      route = this.navs[this.route][dir];
+      this.pub({
+        route: route,
+        compKey: route
+      });
+    } else {
+      console.error('Nav.dirNavs() @navs not specified', {
+        dir: dir,
+        route: this.route
+      });
+    }
   }
 
   adjCompKey(compKey, dir) {

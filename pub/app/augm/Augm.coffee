@@ -28,6 +28,7 @@ class Augm
   Augm.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json"
 
   Augm.Batch = {
+    Navs: { url:'augm/Navs.json', data:null, type:'None', plane:'None' }
     Math: { url:'augm/Math.json', data:null, type:'Pack', plane:'Math' }
     Geom: { url:'augm/Geom.json', data:null, type:'Pack', plane:'Geom' }
     Data: { url:'augm/Data.json', data:null, type:'Pack', plane:'Data' }
@@ -47,17 +48,18 @@ class Augm
     subjects    = ["Draw","Note","Menu","Tabs","Geom","Data","Cache","Navd"]
     streamLog    = { subscribe:false, publish:false, subjects:subjects }
     Augm.stream  = new Stream( subjects, streamLog )
-    Augm.nav    = new Nav(   Augm.stream, batch )
+    Augm.nav    = new Nav(   Augm.stream, batch, batch['Navs'].data )
     Augm.cache  = new Cache( Augm.stream )
     Augm.vue()
     return
 
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Augm.vue = () ->
-    Augm.mixin = new Mixin( Augm, ['Home','Math','Geom','Data','Note','Draw','Cube','Wood' ] )
+    Augm.mixin = new Mixin( Augm, ['Home','Math','Geom','Note','Draw','Hues','Cube','Wood' ] )
     Vue['mixin']( Augm.mixin.mixin() )
     Vue.use(Router)
     app = new Vue( { router:Augm.router(), render: (h) -> h(Home.Dash) } );
+    Augm.nav.$router = app.$router;
     app.$mount('h-augm')
     return
 
@@ -79,17 +81,18 @@ class Augm
           { path:'2D',      name:'Geom2D',  components:{ Geom2D:   Augm.lazy( 'vue/geom/Geom2D') } },
           { path:'3D',      name:'Geom3D',  components:{ Geom3D:   Augm.lazy( 'vue/geom/Geom3D') } },
           { path:'4D',      name:'Geom4D',  components:{ Geom4D:   Augm.lazy( 'vue/geom/Geom4D') } } ] },
-        { path: '/data',    name:'Data',    components:{ Data:     Home.Data }, children: [
-          { path:'tables',  name:'Tables',  components:{ Tables:   Augm.lazy( 'vue/data/Tables') } },
-          { path:'pivots',  name:'Pivots',  components:{ Pivots:   Augm.lazy( 'vue/data/Pivots') } } ] },
         { path: '/note',    name:'Note',    components:{ Note:     Home.Note }, children: [
           { path:'stand',   name:'Stand',   components:{ Stand:    Augm.lazy('vue/note/StandVue' ) } },
           { path:'embed',   name:'Embed',   components:{ Embed:    Augm.lazy('vue/note/EmbedVue' ) } },
           { path:'maths',   name:'Maths',   components:{ Maths:    Augm.lazy('vue/note/MathsVue' ) } },
           { path:'ganja',   name:'Ganja',   components:{ Ganja:    Augm.lazy('vue/note/GanjaVue' ) } } ] },
         { path: '/draw',    name:'Draw',    components:{ Draw:     Augm.lazy('vue/draw/Draw'     ) } },
+        { path: '/hues',    name:'Hues',    components:{ Hues:     Augm.lazy('vue/draw/Hues'     ) } },
         { path: '/cube',    name:'Cube',    components:{ Cube:     Augm.lazy('vue/cube/Cube'     ) } },
         { path: '/wood',    name:'Wood',    components:{ Wood:     Augm.lazy('vue/wood/Wood'     ) } }
+      # { path: '/data',    name:'Data',    components:{ Data:     Home.Data }, children: [
+      #   { path:'tables',  name:'Tables',  components:{ Tables:   Augm.lazy( 'vue/data/Tables') } },
+      #   { path:'pivots',  name:'Pivots',  components:{ Pivots:   Augm.lazy( 'vue/data/Pivots') } } ] }
       ] } )
 
   # Toc.vue components and routes
@@ -97,9 +100,10 @@ class Augm
     Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home"         }
     Math:{ title:'Math', key:'Math', route:'Math', pracs:{}, ikw:true,  icon:"fas fa-bezier-curve" }
     Geom:{ title:'Geom', key:'Geom', route:'Geom', pracs:{}, ikw:true,  icon:"fas fa-shapes"       }
-    Data:{ title:'Data', key:'Data', route:'Data', pracs:{}, ikw:true,  icon:"fas fa-database"     }
+  # Data:{ title:'Data', key:'Data', route:'Data', pracs:{}, ikw:true,  icon:"fas fa-database"     }
     Note:{ title:'Note', key:'Note', route:'Note', pracs:{}, ikw:false, icon:"fab fa-leanpub"      }
     Draw:{ title:'Draw', key:'Draw', route:'Draw', pracs:{}, ikw:false, icon:"fas fa-draw-polygon" }
+    Hues:{ title:'Hues', key:'Hues', route:'Hues', pracs:{}, ikw:false, icon:"fas fa-palette"      }
     Cube:{ title:'Cube', key:'Cube', route:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes"        }
     Wood:{ title:'Wood', key:'Wood', route:'Wood', pracs:{}, ikw:false, icon:"fas fa-tree"         } }
 

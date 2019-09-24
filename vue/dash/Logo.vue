@@ -27,9 +27,7 @@
         else {
           console.error( 'Logo.vue.doDir() no direction navigator' ); } } },
     
-    mounted: function () {
-      // this.nav().$router = this.$router;
-    }
+    mounted: function () {}
   };
 
   export default Logo;

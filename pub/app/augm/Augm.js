@@ -36,14 +36,14 @@ Augm = (function() {
         subjects: subjects
       };
       Augm.stream = new Stream(subjects, streamLog);
-      Augm.nav = new Nav(Augm.stream, batch);
+      Augm.nav = new Nav(Augm.stream, batch, batch['Navs'].data);
       Augm.cache = new Cache(Augm.stream);
       Augm.vue();
     }
 
     static vue() {
       var app;
-      Augm.mixin = new Mixin(Augm, ['Home', 'Math', 'Geom', 'Data', 'Note', 'Draw', 'Cube', 'Wood']);
+      Augm.mixin = new Mixin(Augm, ['Home', 'Math', 'Geom', 'Note', 'Draw', 'Hues', 'Cube', 'Wood']);
       Vue['mixin'](Augm.mixin.mixin());
       Vue.use(Router);
       app = new Vue({
@@ -52,6 +52,7 @@ Augm = (function() {
           return h(Home.Dash);
         }
       });
+      Augm.nav.$router = app.$router;
       app.$mount('h-augm');
     }
 
@@ -130,29 +131,6 @@ Augm = (function() {
             ]
           },
           {
-            path: '/data',
-            name: 'Data',
-            components: {
-              Data: Home.Data
-            },
-            children: [
-              {
-                path: 'tables',
-                name: 'Tables',
-                components: {
-                  Tables: Augm.lazy('vue/data/Tables')
-                }
-              },
-              {
-                path: 'pivots',
-                name: 'Pivots',
-                components: {
-                  Pivots: Augm.lazy('vue/data/Pivots')
-                }
-              }
-            ]
-          },
-          {
             path: '/note',
             name: 'Note',
             components: {
@@ -197,6 +175,13 @@ Augm = (function() {
             }
           },
           {
+            path: '/hues',
+            name: 'Hues',
+            components: {
+              Hues: Augm.lazy('vue/draw/Hues')
+            }
+          },
+          {
             path: '/cube',
             name: 'Cube',
             components: {
@@ -219,6 +204,12 @@ Augm = (function() {
   Augm.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json";
 
   Augm.Batch = {
+    Navs: {
+      url: 'augm/Navs.json',
+      data: null,
+      type: 'None',
+      plane: 'None'
+    },
     Math: {
       url: 'augm/Math.json',
       data: null,
@@ -282,6 +273,9 @@ Augm = (function() {
   };
 
   // Toc.vue components and routes
+  // { path: '/data',    name:'Data',    components:{ Data:     Home.Data }, children: [
+  //   { path:'tables',  name:'Tables',  components:{ Tables:   Augm.lazy( 'vue/data/Tables') } },
+  //   { path:'pivots',  name:'Pivots',  components:{ Pivots:   Augm.lazy( 'vue/data/Pivots') } } ] }
   Augm.komps = {
     Home: {
       title: 'Home',
@@ -307,14 +301,7 @@ Augm = (function() {
       ikw: true,
       icon: "fas fa-shapes"
     },
-    Data: {
-      title: 'Data',
-      key: 'Data',
-      route: 'Data',
-      pracs: {},
-      ikw: true,
-      icon: "fas fa-database"
-    },
+    // Data:{ title:'Data', key:'Data', route:'Data', pracs:{}, ikw:true,  icon:"fas fa-database"     }
     Note: {
       title: 'Note',
       key: 'Note',
@@ -330,6 +317,14 @@ Augm = (function() {
       pracs: {},
       ikw: false,
       icon: "fas fa-draw-polygon"
+    },
+    Hues: {
+      title: 'Hues',
+      key: 'Hues',
+      route: 'Hues',
+      pracs: {},
+      ikw: false,
+      icon: "fas fa-palette"
     },
     Cube: {
       title: 'Cube',

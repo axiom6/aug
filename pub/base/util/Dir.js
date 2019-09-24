@@ -6,6 +6,7 @@ Dir = class Dir {
     this.stream = stream;
     this.navs = navs;
     this.route = route1;
+    this.route = 'Home';
     this.$router = null;
   }
 

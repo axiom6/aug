@@ -62,6 +62,15 @@ Mixin = class Mixin {
         isNav: function() {
           return Mixin.Main.nav != null;
         },
+        isRoute: function(route) {
+          if (this.isNav()) {
+            return route === this.nav().route;
+          } else if (this.isDir()) {
+            return route === this.dir().route;
+          } else {
+            return false;
+          }
+        },
         keys: function(obj) {
           return Object.keys(obj);
         },

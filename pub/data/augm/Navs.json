@@ -1,0 +1,11 @@
+
+{
+  "Home": { "west":"Wood", "north":"Wood", "east":"Math", "south":"Math", "next":"Math", "prev":"Wood" },
+  "Math": { "west":"Home", "north":"Home", "east":"Geom", "south":"Geom", "next":"Geom", "prev":"Home" },
+  "Geom": { "west":"Math", "north":"Math", "east":"Note", "south":"Note", "next":"Note", "prev":"Math" },
+  "Note": { "west":"Geom", "north":"Geom", "east":"Draw", "south":"Draw", "next":"Draw", "prev":"Geom" },
+  "Draw": { "west":"Note", "north":"Note", "east":"Hues", "south":"Hues", "next":"Hues", "prev":"Note" },
+  "Hues": { "west":"Draw", "north":"Draw", "east":"Cube", "south":"Cube", "next":"Cube", "prev":"Draw" },
+  "Cube": { "west":"Hues", "north":"Hues", "east":"Wood", "south":"Wood", "next":"Wood", "prev":"Hues" },
+  "Wood": { "west":"Cube", "north":"Cube", "east":"Home", "south":"Home", "next":"Home", "prev":"Cube" }
+}

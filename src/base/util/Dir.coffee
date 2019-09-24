@@ -2,6 +2,7 @@
 class Dir
 
   constructor:( @stream,  @navs, @route='Home' ) ->
+    @route   = 'Home'
     @$router =  null
 
   pub:( route ) ->

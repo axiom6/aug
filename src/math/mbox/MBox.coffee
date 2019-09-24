@@ -4,11 +4,12 @@ import Vis      from '../../base/util/Vis.js'
 
 class MBox
 
-  constructor:() ->
+  constructor:( elem ) ->
     THREE     = window['THREE']
-    @mathbox  = mathBox(
-      plugins:['core','controls','cursor', 'stats']
-      controls: { klass: THREE.OrbitControls } ) # TrackballControls  OrbitControls
+    @mathbox  = mathBox( {
+      element:elem,
+      plugins:['core','controls','cursor', 'stats'],
+      controls: { klass: THREE.OrbitControls } } ) # TrackballControls  OrbitControls
     console.error('mathbox WebGL not supported') if @mathbox.fallback
     @three = @mathbox.three
     @three.renderer.setClearColor( new THREE.Color(0x000000), 1.0 )
@@ -69,8 +70,8 @@ class MBox
   cos01Oct:(  a, r ) -> .5 + .5 * Math.cos(       a      + Util.time ) * Math.cos(    r + Util.time )
 
   sin12AMay:( a    ) -> .5 + .50 * Math.cos( 12 * a + Util.time )
-  sin12RMay:( a, r ) -> .5 + .50                                  *        Math.cos( 12 * r + Util.time )
-  sin12MMay:( a, r ) -> .5 + .50 * Math.cos( 12 * a + Util.time ) * 1.00 * Math.cos( 12 * r + Util.time )
+  sin12RMay:( a, r ) -> .5 + .50                                     * Math.cos( 12 * r + Util.time )
+  sin12MMay:( a, r ) -> .5 + .50 * Math.cos( 12 * a + Util.time ) * Math.cos( 12 * r + Util.time )
 
 
   sin12PMay:( a, r ) -> .5 + .25 * Math.cos( 12 * a + Util.time ) +  .25 * Math.cos( 12 * r + Util.time )

@@ -29,7 +29,6 @@
         this.touch = new Touch();
         this.elem  = this.$refs['View'];
         this.touch.onDir( this.elem, this.dir() );
-        this.dir().$router = this.$router;
       } ) }
       
     }

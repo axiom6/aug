@@ -5,10 +5,11 @@ import Util from '../../base/util/Util.js';
 import Vis from '../../base/util/Vis.js';
 
 MBox = class MBox {
-  constructor() {
+  constructor(elem) {
     var THREE;
     THREE = window['THREE'];
     this.mathbox = mathBox({
+      element: elem,
       plugins: ['core', 'controls', 'cursor', 'stats'],
       controls: {
         klass: THREE.OrbitControls // TrackballControls  OrbitControls
@@ -135,7 +136,7 @@ MBox = class MBox {
   }
 
   sin12MMay(a, r) {
-    return .5 + .50 * Math.cos(12 * a + Util.time) * 1.00 * Math.cos(12 * r + Util.time);
+    return .5 + .50 * Math.cos(12 * a + Util.time) * Math.cos(12 * r + Util.time);
   }
 
   sin12PMay(a, r) {

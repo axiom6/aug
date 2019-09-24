@@ -15,74 +15,73 @@ import MRegress from '../mbox/Regress.js';
 Box = class Box {
   static init() {
     return Util.ready(function() {
-      return Box.doApp(MBox);
+      var elem;
+      elem = document.querySelector('#App');
+      Box.doApp('Color', elem);
     });
   }
 
-  static doApp(MBox) {
-    var name, parse;
-    parse = Util.parseURI(window.location);
-    name = Util.isStr(parse.fragment) ? parse.fragment.substring(1) : 'Color';
+  static doApp(name, elem) {
     switch (name) {
       case 'Color':
-        Box.doColor(MBox);
+        Box.doColor(elem);
         break;
       case 'Rgbs':
-        Box.doRgbs(MBox);
+        Box.doRgbs(elem);
         break;
       case 'Polar':
-        Box.doPolar(MBox);
+        Box.doPolar(elem);
         break;
       case 'Vecs':
-        Box.doVecs(MBox, 'hsv');
+        Box.doVecs(elem, 'hsv');
         break;
       case 'Sphere':
-        Box.doSphere(MBox);
+        Box.doSphere(elem);
         break;
       case 'Regress':
-        Box.doRegress(MBox);
+        Box.doRegress(elem);
         break;
       case 'Color':
-        Box.doColor(MBox);
+        Box.doColor(elem);
     }
   }
 
-  static doRgbs(MBox) {
+  static doRgbs(elem) {
     var coord, mbox, view;
-    mbox = new MBox();
+    mbox = new MBox(elem);
     coord = new Coord(mbox, 11, 11, 11);
     view = coord.cartesian();
     return coord.cartArray(view);
   }
 
-  static doColor(MBox) {
+  static doColor(elem) {
     var coord, mbox, view;
-    mbox = new MBox();
+    mbox = new MBox(elem);
     coord = new Coord(mbox, 8, 20, 20);
     view = coord.polar();
     coord.cylVolume(view, Vis.toRgbHsv);
     return coord.cylSurface(view, Vis.toRgbHsv, mbox.sin06F);
   }
 
-  static doRegress(MBox) {
+  static doRegress(elem) {
     var mbox, regress;
-    mbox = new MBox();
+    mbox = new MBox(elem);
     regress = new MRegress(mbox);
     return regress.viewLinearRegress();
   }
 
-  static doSphere(MBox) {
+  static doSphere(elem) {
     var coord, mbox, view;
-    mbox = new MBox();
+    mbox = new MBox(elem);
     coord = new Coord(mbox, 12, 60, 10);
     //color = new Color( mbox )
     view = coord.sphere();
     return coord.sphVolume(view, Vis.toRgbSphere);
   }
 
-  static doHcs(MBox) {
+  static doHcs(elem) {
     var color, coord, mbox, view;
-    mbox = new MBox();
+    mbox = new MBox(elem);
     coord = new Coord(mbox, 12, 10, 10);
     color = new Color(mbox);
     view = coord.polar();
@@ -90,27 +89,27 @@ Box = class Box {
     return coord.cylSurface(view, Vis.toRgbHsv, mbox.sin06F);
   }
 
-  static doVecs(MBox, see) {
+  static doVecs(elem, see) {
     var color, coord, mbox, view;
-    mbox = new MBox();
+    mbox = new MBox(elem);
     coord = new Coord(mbox, 12, 9, 9);
     color = new Color(mbox);
     view = coord.polar();
     return color.genWithVecsRgb(coord, view, see);
   }
 
-  static doPolar(MBox) {
+  static doPolar(elem) {
     var color, coord, mbox, view;
-    mbox = new MBox();
+    mbox = new MBox(elem);
     coord = new Coord(mbox, 12, 9, 9);
     color = new Color(mbox);
     view = coord.polar();
     return color.genPolarRgbs(coord, view, false);
   }
 
-  static doScaleRgb(MBox) {
+  static doScaleRgb(elem) {
     var color, coord, mbox, view;
-    mbox = new MBox();
+    mbox = new MBox(elem);
     coord = new Coord(mbox, 12, 9, 9);
     color = new Color(mbox);
     view = coord.polar();
@@ -154,6 +153,5 @@ Box = class Box {
 
 };
 
-Box.init();
-
+// Box.init()
 export default Box;

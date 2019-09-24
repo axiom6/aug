@@ -51,6 +51,7 @@ Jitter = (function() {
           return h(Home.Dash);
         }
       });
+      Jitter.dir.$router = app.$router;
       app.$mount('j-jitter');
     }
 

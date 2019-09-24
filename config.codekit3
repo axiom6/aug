@@ -2364,6 +2364,14 @@
 		"oO": 0,
 		"oS": 1
 		},
+	"/pub/data/augm/Navs.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/augm/Navs-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
 	"/pub/data/draw/Augm.json": {
 		"ft": 524288,
 		"oA": 1,
@@ -3720,6 +3728,17 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/vue/draw/Draw-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/draw/Hues.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/draw/Hues-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -5139,6 +5158,14 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/pub/vue/draw/Draw.js",
+		"oF": 0
+		},
+	"/vue/draw/Hues.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/draw/Hues.js",
 		"oF": 0
 		},
 	"/vue/draw/Roll.js": {

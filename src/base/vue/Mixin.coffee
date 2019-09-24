@@ -47,6 +47,10 @@ class Mixin
           Mixin.Main.dir?
         isNav:() ->
           Mixin.Main.nav?
+        isRoute:( route ) ->
+          if      this.isNav() then route is this.nav().route
+          else if this.isDir() then route is this.dir().route
+          else    false
         keys: (obj) ->
           Object.keys(obj)
         prin: ()  ->

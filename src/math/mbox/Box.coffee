@@ -9,71 +9,71 @@ import MRegress from '../mbox/Regress.js'
 class  Box
 
   @init = () ->
-    Util.ready ->
-      Box.doApp( MBox )
+     Util.ready ->
+       elem = document.querySelector('#App')
+       Box.doApp('Color', elem )
+       return
 
-  @doApp:( MBox ) ->
-    parse = Util.parseURI( window.location )
-    name  = if Util.isStr(parse.fragment) then parse.fragment.substring(1) else 'Color'
+  @doApp:( name, elem ) ->
     switch name
-      when 'Color'    then Box.doColor(    MBox )
-      when 'Rgbs'     then Box.doRgbs(     MBox )
-      when 'Polar'    then Box.doPolar(    MBox )
-      when 'Vecs'     then Box.doVecs(     MBox, 'hsv' )
-      when 'Sphere'   then Box.doSphere(   MBox )
-      when 'Regress'  then Box.doRegress(  MBox )
-      when 'Color'    then Box.doColor(    MBox )
+      when 'Color'    then Box.doColor(    elem )
+      when 'Rgbs'     then Box.doRgbs(     elem )
+      when 'Polar'    then Box.doPolar(    elem )
+      when 'Vecs'     then Box.doVecs(     elem, 'hsv' )
+      when 'Sphere'   then Box.doSphere(   elem )
+      when 'Regress'  then Box.doRegress(  elem )
+      when 'Color'    then Box.doColor(    elem )
     return
 
-  @doRgbs:( MBox ) ->
-    mbox   = new MBox();
+  @doRgbs:( elem ) ->
+    mbox   = new MBox( elem );
     coord  = new Coord( mbox, 11, 11, 11 );
     view   = coord.cartesian()
     coord.cartArray( view )
 
-  @doColor:( MBox ) ->
-    mbox   = new MBox()
+  @doColor:( elem ) ->
+    mbox   = new MBox( elem )
     coord  = new Coord( mbox, 8, 20, 20 )
     view   = coord.polar()
     coord.cylVolume(  view, Vis.toRgbHsv )
     coord.cylSurface( view, Vis.toRgbHsv, mbox.sin06F )
 
-  @doRegress:( MBox ) ->
-    mbox     = new MBox()
+  @doRegress:( elem ) ->
+    mbox     = new MBox( elem )
     regress  = new MRegress( mbox )
     regress.viewLinearRegress()
 
-  @doSphere:( MBox ) ->
-    mbox   = new MBox()
+  @doSphere:( elem ) ->
+    mbox   = new MBox( elem )
     coord  = new Coord( mbox, 12, 60, 10 )
     #color = new Color( mbox )
     view   = coord.sphere()
     coord.sphVolume( view, Vis.toRgbSphere )
 
-  @doHcs:( MBox ) ->
-    mbox   = new MBox()
+  @doHcs:( elem ) ->
+    mbox   = new MBox( elem )
     coord  = new Coord( mbox, 12, 10, 10 )
     color  = new Color( mbox )
     view   = coord.polar()
     color.genWithHcs( coord, view )
     coord.cylSurface( view, Vis.toRgbHsv, mbox.sin06F )
 
-  @doVecs:( MBox, see ) ->
-    mbox   = new MBox()
+  @doVecs:( elem, see ) ->
+    mbox   = new MBox(  elem )
     coord  = new Coord( mbox, 12, 9, 9 )
     color  = new Color( mbox )
     view   = coord.polar()
     color.genWithVecsRgb( coord, view, see )
 
-  @doPolar:( MBox ) ->
-    mbox   = new MBox()
+  @doPolar:( elem ) ->
+    mbox   = new MBox(  elem )
     coord  = new Coord( mbox, 12, 9, 9 )
     color  = new Color( mbox )
     view   = coord.polar()
     color.genPolarRgbs( coord, view, false )
 
-  @doScaleRgb:( MBox ) ->
-    mbox   = new MBox()
+  @doScaleRgb:( elem ) ->
+    mbox   = new MBox(  elem )
     coord  = new Coord( mbox, 12, 9, 9 )
     color  = new Color( mbox )
     view   = coord.polar()
@@ -88,6 +88,6 @@ class  Box
       for c   in [0,20,40,60,80,100]
         console.log( 'RgbHsv', { hue:hue, c:c, s:s }, Vis.toRgbHsv( hue, c, s ) )
 
-Box.init()
+# Box.init()
 
 export default Box

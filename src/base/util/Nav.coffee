@@ -6,7 +6,7 @@ class Nav
   constructor:( @stream, @batch, @navs=null ) ->
     @build    =  new Build( @batch )
     @$router  =  null
-    @route    =  'None' # Prac Disp
+    @route    =  'Home' # Prac Disp
     @compKey  =  'None' # Also specifies current plane
     @pracKey  =  'None'
     @pracObj  =   null
@@ -49,16 +49,6 @@ class Nav
     console.log( 'Nav.tap()' )
     return
 
-  touch:( dr, event=null ) =>
-    # return if dr is 'prev'
-    if event is null then {}
-    route = @dirs[@comp][dr]
-    @pub( comp )
-    @doRoute( route )
-    # console.log('Nav.dir()', { beg:@comp, dir:dr, end:comp } )
-    @comp = comp
-    return
-
   dir:( dr, event=null ) =>
     console.log('Nav.dir()', dr )
     if event is null then {}
@@ -68,7 +58,7 @@ class Nav
       when 'Prac'  then @dirPrac( dr )
       when 'Disp'  then @dirDisp( dr )
       when 'Page'  then @dirPage( dr )
-      else              @dirNone( dr )
+      else              @dirNavs( dr )
     return
 
   dirComp:( dir ) ->
@@ -123,8 +113,12 @@ class Nav
       @dirNone(  dr )
     return
 
-  dirNone:( dir ) ->
-    console.error( 'Nav.dirNone unknown dir', { dir:dir, route:@route } )
+  dirNavs:( dir ) ->
+    if @navs?
+      route = @navs[@route][dir]
+      @pub( { route:route, compKey:route } )
+    else
+      console.error( 'Nav.dirNavs() @navs not specified', { dir:dir, route:@route } )
     return
 
   adjCompKey:( compKey, dir ) ->
