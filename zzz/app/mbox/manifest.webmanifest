@@ -1,7 +1,7 @@
 {
   "name":             "Mathbox",
   "short_name":       "MBox",
-  "start_url":        "/mbox.html",
+  "start_url":        "/app/mbox/mbox.html?source=pwa",
   "display":          "standalone",
   "theme_color":      "#888888",
   "background_color": "#000000",

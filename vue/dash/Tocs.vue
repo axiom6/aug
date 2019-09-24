@@ -2,22 +2,22 @@
 <template><div class="tocs">
   <ul>
     <template v-for="komp in komps">
-    <li :key="komp.key">
-      <div   v-on:click="doComp(komp)">
-        <div><i :class="komp.icon"></i>{{komp.title}}</div>
-      </div>
-      <ul v-if="compKey===komp.key"><template v-for="prac in komps[komp.key].pracs" >
-        <li v-on:click="doPrac(prac.name)" :style="stylePrac(prac.hsv)" :key="prac.name">
-          <i :class="prac.icon"></i>
-          <span>{{prac.name}}</span>
-          <ul v-show="pracKey===prac.name"><template v-for="disp in prac.disps">
-            <li v-on:click.stop="doDisp(disp.name)" :style="styleDisp(disp.hsv)" :key="disp.name">
-              <i :class="disp.icon"></i>{{disp.name}}</li>
-          </template></ul>
-        </li>
-      </template></ul>
-    </li>
-  </template>
+      <li :key="komp.key">
+        <div   v-on:click="doComp(komp)">
+          <div  :style="styleComp(komp.key)"><i :class="komp.icon"></i>{{komp.title}}</div>
+        </div>
+        <ul v-if="compKey===komp.key"><template v-for="prac in komps[komp.key].pracs" >
+          <li v-on:click="doPrac(prac.name)" :style="stylePrac(prac.hsv)" :key="prac.name">
+            <i :class="prac.icon"></i>
+            <span>{{prac.name}}</span>
+            <ul v-show="pracKey===prac.name"><template v-for="disp in prac.disps">
+              <li v-on:click.stop="doDisp(disp.name)" :style="styleDisp(disp.hsv)" :key="disp.name">
+                <i :class="disp.icon"></i>{{disp.name}}</li>
+            </template></ul>
+          </li>
+        </template></ul>
+      </li>
+    </template>
   </ul>
 </div></template>
 
@@ -25,7 +25,7 @@
   
   let Tocs = {
     
-    data: function() { return { komps:{}, compKey:'None', pracKey:'None', dispKey:'None' } },
+    data: function() { return { komps:{}, compKey:'Home', pracKey:'None', dispKey:'None', fromNav:false } },
     
     methods: {
       
@@ -33,31 +33,29 @@
         this.compKey = komp.key;
         let route    = komp.route;
         let obj      = { route:route, compKey:this.compKey, page:this.nav().pageKey, source:'Toc' }
-        this.nav().pub(obj); },
+        this.pub(obj); },
       doPrac: function(pracKey) {
         this.pracKey =  pracKey
         let route    = this.app()==='Muse' ? 'Prac' : pracKey;
         let obj      = { route:route, pracKey:pracKey, source:'Toc' }
-        this.nav().pub(obj); },
+        this.pub(obj); },
       doDisp: function(dispKey) {
         this.dispKey =  dispKey;
         let obj      = { route:'Disp', dispKey:dispKey, source:'Toc' }
-        this.nav().pub(obj); },
+        this.pub(obj); },
+      pub: function(obj) {
+        if( !this.fromNav ) {
+          this.nav().pub(obj); }
+        this.fromNav = false; },
       onNav:  function (obj) {
+        this.fromNav = true;
         if( obj.source !== 'Toc' ) {
           if( this.compKey !== obj.compKey ) { this.doComp( this.kompsTocs()[obj.compKey] ) }
           if( this.pracKey !== obj.pracKey ) { this.doPrac( obj.pracKey ) }
           if( this.dispKey !== obj.dispKey ) { this.doDisp( obj.dispKey ) } } },
-      onNav2:  function (obj) {
-        if( obj.source !== 'Toc' ) {
-          switch( obj.route ) {
-            case 'Prin' : this.compKey = obj.compKey; break;
-            case 'Comp' : this.compKey = obj.compKey; break;
-            case 'Prac' : this.pracKey = obj.pracKey; break;
-            case 'Disp' : this.dispKey = obj.dispKey; break;
-            default     : this.onNone(obj); } } },
-      onNone: function (obj) {
-        /* console.log( 'Tocs.onNone()', obj ); */ },
+      styleComp: function( compKey ) {
+        return compKey===this.compKey ? { backgroundColor:'wheat', color:'black', borderRadius:'0 24px 24px 0' }
+                                      : { backgroundColor:'#333',  color:'wheat', borderRadius:'0 24px 24px 0' }; },
       stylePrac: function( hsv ) {
         return { backgroundColor:this.toRgbaHsv(hsv) }; },
       styleDisp: function( hsv ) {

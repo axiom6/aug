@@ -46,7 +46,6 @@ class  Box
   @doSphere:( elem ) ->
     mbox   = new MBox( elem )
     coord  = new Coord( mbox, 12, 60, 10 )
-    #color = new Color( mbox )
     view   = coord.sphere()
     coord.sphVolume( view, Vis.toRgbSphere )
 

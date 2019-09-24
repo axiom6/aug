@@ -28,7 +28,6 @@ class Augm
   Augm.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json"
 
   Augm.Batch = {
-    Navs: { url:'augm/Navs.json', data:null, type:'None', plane:'None' }
     Math: { url:'augm/Math.json', data:null, type:'Pack', plane:'Math' }
     Geom: { url:'augm/Geom.json', data:null, type:'Pack', plane:'Geom' }
     Data: { url:'augm/Data.json', data:null, type:'Pack', plane:'Data' }
@@ -48,14 +47,14 @@ class Augm
     subjects    = ["Draw","Note","Menu","Tabs","Geom","Data","Cache","Navd"]
     streamLog    = { subscribe:false, publish:false, subjects:subjects }
     Augm.stream  = new Stream( subjects, streamLog )
-    Augm.nav    = new Nav(   Augm.stream, batch, batch['Navs'].data )
+    Augm.nav    = new Nav(   Augm.stream, batch, Augm.komps )
     Augm.cache  = new Cache( Augm.stream )
     Augm.vue()
     return
 
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Augm.vue = () ->
-    Augm.mixin = new Mixin( Augm, ['Home','Math','Geom','Note','Draw','Hues','Cube','Wood' ] )
+    Augm.mixin = new Mixin( Augm, Augm.komps )
     Vue['mixin']( Augm.mixin.mixin() )
     Vue.use(Router)
     app = new Vue( { router:Augm.router(), render: (h) -> h(Home.Dash) } );
@@ -95,16 +94,24 @@ class Augm
       #   { path:'pivots',  name:'Pivots',  components:{ Pivots:   Augm.lazy( 'vue/data/Pivots') } } ] }
       ] } )
 
-  # Toc.vue components and routes
+  # Toc.vue and Nav components  routes and directions
   Augm.komps = {
-    Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home"         }
-    Math:{ title:'Math', key:'Math', route:'Math', pracs:{}, ikw:true,  icon:"fas fa-bezier-curve" }
-    Geom:{ title:'Geom', key:'Geom', route:'Geom', pracs:{}, ikw:true,  icon:"fas fa-shapes"       }
+    Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
+    west:"Wood", north:"Wood", east:"Math", south:"Math", next:"Math", prev:"Wood" }
+    Math:{ title:'Math', key:'Math', route:'Math', pracs:{}, ikw:true,  icon:"fas fa-bezier-curve",
+    west:"Home", north:"Home", east:"Geom", south:"Geom", next:"Geom", prev:"Home" }
+    Geom:{ title:'Geom', key:'Geom', route:'Geom', pracs:{}, ikw:true,  icon:"fas fa-shapes",
+    west:"Math", north:"Math", east:"Note", south:"Note", next:"Note", prev:"Math" }
   # Data:{ title:'Data', key:'Data', route:'Data', pracs:{}, ikw:true,  icon:"fas fa-database"     }
-    Note:{ title:'Note', key:'Note', route:'Note', pracs:{}, ikw:false, icon:"fab fa-leanpub"      }
-    Draw:{ title:'Draw', key:'Draw', route:'Draw', pracs:{}, ikw:false, icon:"fas fa-draw-polygon" }
-    Hues:{ title:'Hues', key:'Hues', route:'Hues', pracs:{}, ikw:false, icon:"fas fa-palette"      }
-    Cube:{ title:'Cube', key:'Cube', route:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes"        }
-    Wood:{ title:'Wood', key:'Wood', route:'Wood', pracs:{}, ikw:false, icon:"fas fa-tree"         } }
+    Note:{ title:'Note', key:'Note', route:'Note', pracs:{}, ikw:false, icon:"fab fa-leanpub",
+    west:"Geom", north:"Geom", east:"Draw", south:"Draw", next:"Draw", prev:"Geom" }
+    Draw:{ title:'Draw', key:'Draw', route:'Draw', pracs:{}, ikw:false, icon:"fas fa-draw-polygon",
+    west:"Note", north:"Note", east:"Hues", south:"Hues", next:"Hues", prev:"Note" }
+    Hues:{ title:'Hues', key:'Hues', route:'Hues', pracs:{}, ikw:false, icon:"fas fa-palette",
+    west:"Draw", north:"Draw", east:"Cube", south:"Cube", next:"Cube", prev:"Draw" }
+    Cube:{ title:'Cube', key:'Cube', route:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes",
+    west:"Hues", north:"Hues", east:"Wood", south:"Wood", next:"Wood", prev:"Hues" }
+    Wood:{ title:'Wood', key:'Wood', route:'Wood', pracs:{}, ikw:false, icon:"fas fa-tree",
+    west:"Cube", north:"Cube", east:"Home", south:"Home", next:"Home", prev:"Cube" } }
 
 export default Augm

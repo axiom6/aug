@@ -38,7 +38,7 @@ Muse = (function() {
         subjects: subjects
       };
       Muse.stream = new Stream(subjects, infoSpec);
-      Muse.nav = new Nav(Muse.stream, batch);
+      Muse.nav = new Nav(Muse.stream, batch, Muse.komps);
       Muse.build = new Build(batch);
       Muse.cache = new Cache(Muse.stream);
       Muse.mergePracsPrin();
@@ -48,7 +48,13 @@ Muse = (function() {
 
     static vue() {
       var app;
-      Muse.mixin = new Mixin(Muse, ['Home', 'Prin', 'Comp', 'Prac', 'Disp', 'Cube']);
+      Muse.mixin = new Mixin(Muse, [
+        'Home',
+        'Prin',
+        'Comp',
+        'Prac',
+        'Disp' // Can't use komps
+      ]);
       Vue['mixin'](Muse.mixin.mixin());
       Vue.use(Router);
       app = new Vue({
@@ -176,7 +182,13 @@ Muse = (function() {
       route: 'Home',
       pracs: {},
       ikw: false,
-      icon: "fas fa-home"
+      icon: "fas fa-home",
+      west: "Wise",
+      north: "Wise",
+      east: "Prin",
+      south: "Prin",
+      next: "Prin",
+      prev: "Wise"
     },
     Prin: {
       title: 'Prin',
@@ -184,7 +196,13 @@ Muse = (function() {
       route: 'Prin',
       pracs: {},
       ikw: true,
-      icon: "fas fa-balance-scale"
+      icon: "fas fa-balance-scale",
+      west: "Home",
+      north: "Home",
+      east: "Info",
+      south: "Info",
+      next: "Info",
+      prev: "Home"
     },
     Info: {
       title: 'Info',
@@ -192,7 +210,13 @@ Muse = (function() {
       route: 'Comp',
       pracs: {},
       ikw: true,
-      icon: "fas fa-th"
+      icon: "fas fa-th",
+      west: "Wise",
+      north: "Wise",
+      east: "Know",
+      south: "Know",
+      next: "Know",
+      prev: "Wise"
     },
     Know: {
       title: 'Know',
@@ -200,7 +224,13 @@ Muse = (function() {
       route: 'Comp',
       pracs: {},
       ikw: true,
-      icon: "fas fa-university"
+      icon: "fas fa-university",
+      west: "Info",
+      north: "Info",
+      east: "Wise",
+      south: "Wise",
+      next: "Wise",
+      prev: "Info"
     },
     Wise: {
       title: 'Wise',
@@ -208,7 +238,13 @@ Muse = (function() {
       route: 'Comp',
       pracs: {},
       ikw: true,
-      icon: "fab fa-tripadvisor"
+      icon: "fab fa-tripadvisor",
+      west: "Know",
+      north: "Know",
+      east: "Info",
+      south: "Info",
+      next: "Info",
+      prev: "Know"
     }
   };
 

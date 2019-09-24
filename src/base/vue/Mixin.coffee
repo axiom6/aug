@@ -7,9 +7,12 @@ class Mixin
   # Augn   ['Home','Math','Geom','Data','Draw','Note','Wood' ]
   # Jitter ['Home','Flavor','Roast','Brew','Drink','Body']
 
-  constructor:(   Main, views ) ->
+  constructor:(   Main, komps ) ->
     Mixin.Main  = Main
-    Mixin.views = views
+    Mixin.views = if @isArray(komps) then komps else Object.keys(komps)
+
+  isArray:(a) ->
+    typeof(a)!="string" and a.length? and a.length > 0
 
   mixin:() ->
     return  {

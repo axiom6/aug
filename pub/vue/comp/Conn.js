@@ -1001,77 +1001,64 @@ var Data,
 
 Data = class Data {
   static refine(data, type) {
-    var akey, area, base, bkey, ckey, comp, disp, dkey, ikey, item, pkey, prac;
+    var akey, area, base, bkey, disp, dkey, ikey, item, pkey, prac;
     if (type === 'None') {
       return data;
     }
-    data.comps = {};
-    for (ckey in data) {
-      comp = data[ckey];
-      if (!(Util$1.isChild(ckey))) {
+    data.pracs = {};
+    for (pkey in data) {
+      prac = data[pkey];
+      if (!(Util$1.isChild(pkey))) {
         continue;
       }
-      // console.log( 'Data.refine comp', comp )
-      data.comps[ckey] = comp;
-      if (comp['name'] == null) {
-        comp['name'] = ckey;
+      data.pracs[pkey] = prac;
+      prac.data = data;
+      if (prac['name'] == null) {
+        prac['name'] = pkey;
       }
-      comp.pracs = {};
-      for (pkey in comp) {
-        prac = comp[pkey];
-        if (!(Util$1.isChild(pkey))) {
+      prac.disps = {};
+      for (dkey in prac) {
+        disp = prac[dkey];
+        if (!(Util$1.isChild(dkey))) {
           continue;
         }
-        // console.log( '  Data.refine prac', prac )
-        comp.pracs[pkey] = prac;
-        prac.comp = comp;
-        if (prac['name'] == null) {
-          prac['name'] = pkey;
+        prac.disps[dkey] = disp;
+        disp.prac = prac;
+        if (disp['name'] == null) {
+          disp['name'] = dkey;
         }
-        prac.disps = {};
-        for (dkey in prac) {
-          disp = prac[dkey];
-          if (!(Util$1.isChild(dkey))) {
+        disp.areas = {};
+        for (akey in disp) {
+          area = disp[akey];
+          if (!(Util$1.isChild(akey))) {
             continue;
           }
-          prac.disps[dkey] = disp;
-          disp.prac = prac;
-          if (disp['name'] == null) {
-            disp['name'] = dkey;
+          disp.areas[akey] = area;
+          area.disp = disp;
+          if (area['name'] == null) {
+            area['name'] = akey;
           }
-          disp.areas = {};
-          for (akey in disp) {
-            area = disp[akey];
-            if (!(Util$1.isChild(akey))) {
+          area.items = {};
+          for (ikey in area) {
+            item = area[ikey];
+            if (!(Util$1.isChild(ikey))) {
               continue;
             }
-            disp.areas[akey] = area;
-            area.disp = disp;
-            if (area['name'] == null) {
-              area['name'] = akey;
+            area.items[ikey] = item;
+            item.area = area;
+            if (item['name'] == null) {
+              item['name'] = ikey;
             }
-            area.items = {};
-            for (ikey in area) {
-              item = area[ikey];
-              if (!(Util$1.isChild(ikey))) {
+            item.bases = {};
+            for (bkey in item) {
+              base = item[bkey];
+              if (!(Util$1.isChild(bkey))) {
                 continue;
               }
-              area.items[ikey] = item;
-              item.area = area;
-              if (item['name'] == null) {
-                item['name'] = ikey;
-              }
-              item.bases = {};
-              for (bkey in item) {
-                base = item[bkey];
-                if (!(Util$1.isChild(bkey))) {
-                  continue;
-                }
-                item.bases[bkey] = base;
-                base.item = item;
-                if (base['name'] == null) {
-                  base['name'] = bkey;
-                }
+              item.bases[bkey] = base;
+              base.item = item;
+              if (base['name'] == null) {
+                base['name'] = bkey;
               }
             }
           }
@@ -1132,7 +1119,7 @@ Data = class Data {
   static asyncJSON(urla, callback) {
     var url;
     url = Data.toUrl(urla);
-    // console.log( 'Data.asyncJSON', urla, url )
+    // console.log( 'Data.asyncJSON()', urla, url )
     fetch(url).then((response) => {
       return response.json();
     }).then((data) => {
@@ -1150,6 +1137,7 @@ Data = class Data {
   }
 
   static toUrl(url) {
+    //  console.log( 'Data.toUrl()', Data.local+url )
     if (window.location.href.includes('localhost')) {
       return Data.local + url;
     } else {
@@ -1195,12 +1183,9 @@ Data = class Data {
 
 };
 
-//ata.parse   = Util.parseURI( window.location.href )
-//ata.hosted1 = Data.parse.hostname + '/app/data/'
-// console.log('Data.hosted', Data.hosted, window.location.href )
-Data.local = "app/data/";
+Data.local = "../../data/";
 
-Data.hosted = '/app/data/';
+Data.hosted = '/data/';
 
 Data.cssDir = 'css/'; // /css in /pub
 
@@ -1394,9 +1379,8 @@ Build = class Build {
   }
 
   // Build instance
-  constructor(batch1, plane1) {
+  constructor(batch1) {
     this.batch = batch1;
-    this.plane = plane1;
     //@Spec   = @batch.Muse.data
     this.None = {
       name: "None"
@@ -1579,7 +1563,7 @@ Build = class Build {
       return this.None;
     }
     //racs = @getPractices( pln )
-    pracs = this.batch[pln].data[pln].pracs;
+    pracs = this.batch[pln].data.pracs;
     for (key in pracs) {
       if (!hasProp$2.call(pracs, key)) continue;
       adj = pracs[key];
@@ -1634,25 +1618,15 @@ Build = class Build {
   }
 
   getPractices(plane) {
-    if ((this.batch[plane] != null) && (this.batch[plane].data[plane] != null)) {
-      return this.batch[plane].data[plane];
+    if ((this.batch[plane] != null) && (this.batch[plane].data != null)) {
+      return this.batch[plane].data;
     } else {
       console.error('Build.getPractices()', plane);
       return {};
     }
   }
 
-  getPractices2(plane) {
-    Main.Batch[compk].data[compk].pracs;
-    if ((this.batch[plane] != null) && (this.batch[plane].data[plane] != null)) {
-      return this.batch[plane].data[plane];
-    } else {
-      console.error('Build.getPractices()', plane);
-      return {};
-    }
-  }
-
-  getPractice(row, column, plane = this.plane) {
+  getPractice(row, column, plane) {
     var pkey, prac, practices;
     practices = this.getPractices(plane);
     for (pkey in practices) {
@@ -1670,7 +1644,7 @@ Build = class Build {
     return null; // Landmine
   }
 
-  getPracticeStudy(row, column, dir, plane = this.plane) {
+  getPracticeStudy(row, column, dir) {
     var practice, study;
     practice = this.getPractice(row, column, plane);
     study = this.getDir(practice, dir);
@@ -1698,7 +1672,8 @@ Build = class Build {
       dim = col[key];
       if (Util$1.isChild(key)) {
         if (dim.dir === dir) {
-          return key;
+          // console.log( 'Build.getDim()', { key:key, dim:dim, col:col } )
+          return dim;
         }
       }
     }
@@ -1706,7 +1681,7 @@ Build = class Build {
   }
 
   getCol(cname) {
-    return this.batch.Prin.data['Prin'][cname];
+    return this.batch.Prin.data[cname];
   }
 
   logPlanes() {
@@ -1819,6 +1794,55 @@ Build = class Build {
     console.log('----- End Log By Conduit  ------');
   }
 
+  dimDisps() {
+    var col, dim, dir, disp, i, idx, j, k, l, len, len1, len2, len3, plane, prac, ref, ref1, ref2, ref3, row;
+    ref = ['Embrace', 'Innovate', 'Encourage'];
+    for (i = 0, len = ref.length; i < len; i++) {
+      col = ref[i];
+      ref1 = ['west', 'north', 'east', 'south'];
+      for (j = 0, len1 = ref1.length; j < len1; j++) {
+        dir = ref1[j];
+        dim = this.getDim(col, dir);
+        dim.dims = [];
+        idx = 0;
+        ref2 = ['Info', 'Know', 'Wise'];
+        for (k = 0, len2 = ref2.length; k < len2; k++) {
+          plane = ref2[k];
+          ref3 = ['Learn', 'Do', 'Share'];
+          for (l = 0, len3 = ref3.length; l < len3; l++) {
+            row = ref3[l];
+            prac = this.getPractice(row, col, plane);
+            disp = this.getDir(prac, dir);
+            disp.klass = Build.ddClasses[idx++];
+            dim.dims.push(disp);
+          }
+        }
+      }
+    }
+  }
+
+  colPracs() {
+    var cname, col, i, idx, j, k, len, len1, len2, plane, prac, ref, ref1, ref2, row;
+    ref = ['Embrace', 'Innovate', 'Encourage'];
+    for (i = 0, len = ref.length; i < len; i++) {
+      cname = ref[i];
+      col = this.getCol(cname);
+      col.dims = [];
+      idx = 0;
+      ref1 = ['Info', 'Know', 'Wise'];
+      for (j = 0, len1 = ref1.length; j < len1; j++) {
+        plane = ref1[j];
+        ref2 = ['Learn', 'Do', 'Share'];
+        for (k = 0, len2 = ref2.length; k < len2; k++) {
+          row = ref2[k];
+          prac = this.getPractice(row, cname, plane);
+          prac.klass = Build.ddClasses[idx++];
+          col.dims.push(prac);
+        }
+      }
+    }
+  }
+
   logByColumn() {
     var cname, dim, dir, doit, dprac, i, j, k, learn, len, len1, len2, lprac, plane, ref, ref1, ref2, share, sprac;
     console.log('----- Beg Log By Column  ------');
@@ -1830,7 +1854,7 @@ Build = class Build {
       for (j = 0, len1 = ref1.length; j < len1; j++) {
         dir = ref1[j];
         dim = this.getDim(cname, dir);
-        console.log('  ', dir, dim.name, 'Learn', 'Do', 'Share');
+        console.log('  ', dim.name, '------'); // Learn', 'Do', 'Share ', dir )
         ref2 = ['Info', 'Know', 'Wise'];
         for (k = 0, len2 = ref2.length; k < len2; k++) {
           plane = ref2[k];
@@ -1840,7 +1864,7 @@ Build = class Build {
           learn = this.getDir(lprac, dir);
           doit = this.getDir(dprac, dir);
           share = this.getDir(sprac, dir);
-          console.log('    ', plane + ':', dim.name, learn.name, doit.name, share.name);
+          console.log('    ', plane + ':', learn.name, doit.name, share.name);
         }
       }
     }
@@ -1917,22 +1941,8 @@ Build = class Build {
 
 };
 
-/*
-getPrevNextPlanes:( plane ) ->
+Build.ddClasses = ['li', 'di', 'si', 'lk', 'dk', 'sk', 'lw', 'dw', 'sw'];
 
-isPractice:( key, plane=@plane ) ->
-@getPractices(plane)[key]?
-
-logAdjacentPractices:() ->
-@setAdjacents( @None )
-for key, plane of @Planes
-practices = @getPractices( key )
-for own pkey, p of practices  when Util.isChild(pkey)
-  @setAdjacents( p )
- * console.log( { p:key, column:p.column, west:p.west.name, east:p.east.name, north:p.north.name, south:p.south.name, prev:p.prev.name, next:p.next.name } )
-return
-
- */
 var Build$1 = Build;
 
 var FontAwe;
@@ -1940,6 +1950,7 @@ var FontAwe;
 FontAwe = {};
 
 FontAwe.icons = {
+  "fas fa-yin-yang": "\uf6ad",
   "fab fa-pagelines": "\uf18c",
   "fas fa-network-wired": "\uf6ff",
   "fas fa-warehouse": "\uf494",
@@ -2839,9 +2850,9 @@ FontAwe.icons = {
 
 var FontAwe$1 = FontAwe;
 
-var Vis$1;
+var Vis;
 
-Vis$1 = class Vis {
+Vis = class Vis {
   static translate(x0, y0) {
     Util$1.checkTypes('number', {
       x0: x0,
@@ -3198,7 +3209,7 @@ Vis$1 = class Vis {
 
 };
 
-var Vis$2 = Vis$1;
+var Vis$1 = Vis;
 
 function ascending(a, b) {
   return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
@@ -9479,7 +9490,7 @@ Convey = class Convey {
   doNodes(graph) {
     var node;
     node = this.gc.append("g").selectAll(".node").data(graph.nodes).enter().append("g").attr("class", "node").attr("transform", function(d) {
-      return Vis$2.translate(d.x0, d.y0);
+      return Vis$1.translate(d.x0, d.y0);
     });
     node.append("rect").attr("height", function(d) {
       return d.y1 - d.y0;
@@ -9534,7 +9545,12 @@ Shapes = class Shapes {
   layoutSvg(svg, g, svgWidth, svgHeight, sx, sy) {
     // console.log( 'Shapes.layoutSvg()', svgWidth, svgHeight, sx, sy )
     svg.attr("width", svgWidth).attr("height", svgHeight);
-    g.attr('transform', Vis$2.scale(sx, sy));
+    g.attr('transform', Vis$1.scale(sx, sy));
+  }
+
+  clearSvg(svg) {
+    svg.selectAll("*").remove();
+    svg.remove();
   }
 
   rectGrad(g, defs, xc, yc, w, h, fill, stroke, text) {
@@ -9556,7 +9572,7 @@ Shapes = class Shapes {
     hsv = darken ? [hsv[0], hsv[1], hsv[2] * 0.75] : hsv; // [hsv[0],60,30]
     // console.log( 'Shapes.toFill()', studyPrac.hsv, hsv ) if darken
     if ((studyPrac.hsv != null) && studyPrac.hsv.length === 3) {
-      return Vis$2.toRgbHsvStr(hsv);
+      return Vis$1.toRgbHsvStr(hsv);
     } else {
       console.error('Shapes.toFill() unknown fill code', {
         name: studyPrac.name,
@@ -9665,15 +9681,15 @@ Shapes = class Shapes {
     });
   }
 
-  wedge(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId) {
+  wedge(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize) {
     var arc$1;
     arc$1 = arc().innerRadius(r1).outerRadius(r2).startAngle(this.radD3(a1)).endAngle(this.radD3(a2));
     //console.log( 'Shape.wedge()', { x0:x0, y0:y0 } )
-    g.append("svg:path").attr("d", arc$1).attr("fill", fill).attr("stroke", "none").attr("transform", Vis$2.translate(x0, y0));
-    this.wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId);
+    g.append("svg:path").attr("d", arc$1).attr("fill", fill).attr("stroke", "none").attr("transform", Vis$1.translate(x0, y0));
+    this.wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize);
   }
 
-  wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId) {
+  wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize) {
     var as, at, path, rt, th, x, y;
     Util$1.noop(wedgeId);
     th = 14;
@@ -9687,13 +9703,13 @@ Shapes = class Shapes {
     }
     x = x0 + rt * this.cos(at);
     y = y0 + rt * this.sin(at);
-    path = g.append("svg:text").text(text).attr("x", x).attr("y", y).attr("transform", Vis$2.rotate(as, x, y)).attr("text-anchor", "middle").attr("font-size", `${th}px`).attr("font-family", this.fontText).attr("font-weight", "bold").attr('fill', '#000000'); // @textFill(fill))
+    path = g.append("svg:text").text(text).attr("x", x).attr("y", y).attr("transform", Vis$1.rotate(as, x, y)).attr("text-anchor", "middle").attr("font-size", fontSize).attr("font-family", this.fontText).attr("font-weight", "bold").attr('fill', '#000000'); // @textFill(fill))
     this.click(path, text);
   }
 
-  icon(g, x0, y0, name, iconId, uc) {
+  icon(g, x0, y0, name, iconId, uc, size) {
     var path;
-    path = g.append("svg:text").text(uc).attr("x", x0).attr("y", y0 + 12).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", "4vh").attr("font-family", "FontAwesome");
+    path = g.append("svg:text").text(uc).attr("x", x0).attr("y", y0 + 12).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", size).attr("font-family", "FontAwesome");
     this.click(path, name);
   }
 
@@ -9855,7 +9871,7 @@ Shapes = class Shapes {
     w = 18;
     x0 = geom.x0 - w / 2;
     y0 = dir === 'south' ? geom.h - h : 0;
-    fill = Vis$2.toRgbHsvStr(hsv);
+    fill = Vis$1.toRgbHsvStr(hsv);
     this.rect(g, x0, y0, w, h, fill, 'none');
   }
 
@@ -9871,11 +9887,11 @@ Shapes = class Shapes {
 
   //degD3:( rad )  -> -rad * 180.0 / Math.PI
   cos(deg) {
-    return Vis$2.cosSvg(deg);
+    return Vis$1.cosSvg(deg);
   }
 
   sin(deg) {
-    return Vis$2.sinSvg(deg);
+    return Vis$1.sinSvg(deg);
   }
 
   gradientDef(defs, id, color1, color2, x1 = '0%', x2 = '100%', y1 = '0%', y2 = '100%') {
@@ -9946,7 +9962,7 @@ Embrace = class Embrace {
       study = ref[key];
       fill = this.shapes.toFill(study);
       wedgeId = this.shapes.htmlId(study.name, 'Wedge');
-      this.shapes.wedge(g, lay.ro, lay.rs, a1, a1 - lay.da, lay.xc, lay.yc, fill, study.name, wedgeId);
+      this.shapes.wedge(g, lay.ro, lay.rs, a1, a1 - lay.da, lay.xc, lay.yc, fill, study.name, wedgeId, geom.dispSize);
       for (a = i = ref1 = a1 - lay.li, ref2 = a1 - lay.da, ref3 = -lay.ds; ref3 !== 0 && (ref3 > 0 ? i < ref2 : i > ref2); a = i += ref3) {
         this.shapes.link(g, a, lay.ro, lay.ri, lay.xc, lay.yc, lay.xc, yl, xr, yl, fill, lay.thick);
         yl += lay.dl;
@@ -9961,8 +9977,8 @@ Embrace = class Embrace {
     xt = x + w * 0.5;
     yt = geom.y0 * 0.5 - 6;
     this.shapes.conveySankey("Embrace", defs, g, this.studies, this.innovs, x, y, w, h);
-    this.shapes.icon(g, geom.x0, geom.y0, this.spec.name, this.shapes.htmlId(this.spec.name, 'IconSvg'), Vis$2.unicode(this.spec.icon));
-    this.shapes.text(g, xt, yt, this.spec.name, this.shapes.htmlId(this.spec.name, 'TextSvg'), 'lack', '1.2em');
+    this.shapes.icon(g, geom.x0, geom.y0, this.spec.name, this.shapes.htmlId(this.spec.name, 'IconSvg'), Vis$1.unicode(this.spec.icon), geom.iconSize);
+    this.shapes.text(g, xt, yt, this.spec.name, this.shapes.htmlId(this.spec.name, 'TextSvg'), 'lack', geom.fontSize);
     this.shapes.practiceFlow(g, geom, this.spec);
   }
 
@@ -10037,11 +10053,11 @@ Innovate = class Innovate {
 
   rings(g, geom, t) {
     var colorBack, colorRing;
-    colorRing = Vis$2.toRgbHsvStr([70, 55, 70]);
+    colorRing = Vis$1.toRgbHsvStr([70, 55, 70]);
     colorBack = 'rgba(97, 56, 77, 1.0 )';
     this.shapes.round(g, t, t, geom.w - t * 2, geom.h - t * 2, t, t, colorRing, 'none');
     this.shapes.round(g, t * 2.5, t * 2.5, geom.w - t * 5.0, geom.h - t * 5.0, t, t, colorBack, 'none');
-    return this.shapes.text(g, t * 4, t * 2 + 2, this.spec.name, this.spec.name + 'Text', 'black', '1.2em');
+    return this.shapes.text(g, t * 4, t * 2 + 2, this.spec.name, this.spec.name + 'Text', 'black', geom.fontSize);
   }
 
   principle(g, geom) {
@@ -10153,11 +10169,11 @@ Innovate = class Innovate {
     x = j * dx + x0;
     y = -i * dy + y0 + yh;
     fill = this.shapes.toFill(study);
-    uc = Vis$2.unicode(study.icon);
+    uc = Vis$1.unicode(study.icon);
     // console.log( 'Innovate.hexStudy()', study.icon, uc )
     this.hexPath(fill, g, x, y, this.shapes.htmlId(study.name, 'HexPath'));
-    this.hexText(study.name, g, x, y, this.shapes.htmlId(study.name, 'HexText'));
-    this.hexIcon(uc, g, x, y, this.shapes.htmlId(study.name, 'HexIcon'));
+    this.hexText(study.name, g, x, y, this.shapes.htmlId(study.name, 'HexText'), geom.dispSize);
+    this.hexIcon(uc, g, x, y, this.shapes.htmlId(study.name, 'HexIcon'), geom.dispSize);
   }
 
   hexPosTier(dir) {
@@ -10194,19 +10210,19 @@ Innovate = class Innovate {
 
   line() {
     return line().x((ang) => {
-      return this.r * Vis$2.cosSvg(ang) + this.xh;
+      return this.r * Vis$1.cosSvg(ang) + this.xh;
     }).y((ang) => {
-      return this.r * Vis$2.sinSvg(ang) + this.yh;
+      return this.r * Vis$1.sinSvg(ang) + this.yh;
     });
   }
 
   hexPath(fill, g, x0, y0, pathId) {
     var ang, k, len, path$1, ref, xp, yp;
     xp = (ang) => {
-      return this.r * Vis$2.cosSvg(ang) + x0;
+      return this.r * Vis$1.cosSvg(ang) + x0;
     };
     yp = (ang) => {
-      return this.r * Vis$2.sinSvg(ang) + y0;
+      return this.r * Vis$1.sinSvg(ang) + y0;
     };
     path$1 = path();
     path$1.moveTo(xp(0), yp(0));
@@ -10220,15 +10236,15 @@ Innovate = class Innovate {
     g.append("svg:path").attr("d", path$1).attr("id", pathId).attr("stroke-width", this.thick).attr("stroke", this.stroke).attr("fill", fill);
   }
 
-  hexText(text, g, x0, y0, textId) {
+  hexText(text, g, x0, y0, textId, size) {
     var path;
-    path = g.append("svg:text").text(text).attr("id", textId).attr("x", x0).attr("y", y0 + 16).attr("text-anchor", "middle").attr("font-size", "0.5em").attr("font-family", this.shapes.fontText);
+    path = g.append("svg:text").text(text).attr("id", textId).attr("x", x0).attr("y", y0 + 10).attr("text-anchor", "middle").attr("font-size", size).attr("font-family", this.shapes.fontText);
     //.attr("font-weight","bold")
     this.shapes.click(path, text);
   }
 
-  hexIcon(icon, g, x0, y0, iconId) {
-    g.append("svg:text").text(icon).attr("x", x0).attr("y", y0 - 2).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", "1.0em").attr("font-family", "FontAwesome").attr("font-weight", "normal");
+  hexIcon(icon, g, x0, y0, iconId, size) {
+    g.append("svg:text").text(icon).attr("x", x0).attr("y", y0 - 2).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", size).attr("font-family", "FontAwesome").attr("font-weight", "normal");
   }
 
 };
@@ -10260,7 +10276,7 @@ Encourage = class Encourage {
       study = ref[key];
       fill = this.shapes.toFill(study);
       wedgeId = this.shapes.htmlId(study.name, 'Wedge');
-      this.shapes.wedge(g, lay.ro, lay.rs, a1, a1 - lay.da, lay.xc, lay.yc, fill, study.name, wedgeId);
+      this.shapes.wedge(g, lay.ro, lay.rs, a1, a1 - lay.da, lay.xc, lay.yc, fill, study.name, wedgeId, geom.dispSize);
       for (a = i = ref1 = a1 - lay.li, ref2 = a1 - lay.da, ref3 = -lay.ds; ref3 !== 0 && (ref3 > 0 ? i < ref2 : i > ref2); a = i += ref3) {
         this.shapes.link(g, a, lay.ro, lay.ri, lay.xc, lay.yc, lay.xc, yl, xr, yl, fill, lay.thick);
         yl += lay.dl;
@@ -10277,8 +10293,8 @@ Encourage = class Encourage {
     xt = x + w * 0.5;
     yt = geom.y0 * 0.5 - 6;
     this.shapes.conveySankey("Encourage", defs, g, this.studies, this.innovs, x, y, w, h);
-    this.shapes.icon(g, geom.x0, geom.y0, this.spec.name, this.shapes.htmlId(this.spec.name, 'IconSvg'), Vis$2.unicode(this.spec.icon));
-    this.shapes.text(g, xt, yt, this.spec.name, this.shapes.htmlId(this.spec.name, 'TextSvg'), 'black', '1.2em');
+    this.shapes.icon(g, geom.x0, geom.y0, this.spec.name, this.shapes.htmlId(this.spec.name, 'IconSvg'), Vis$1.unicode(this.spec.icon), geom.iconSize);
+    this.shapes.text(g, xt, yt, this.spec.name, this.shapes.htmlId(this.spec.name, 'TextSvg'), 'black', geom.fontSize);
     this.shapes.practiceFlow(g, geom, this.spec);
   }
 
@@ -10341,6 +10357,10 @@ Connect = class Connect {
     this.htmlId = svgId;
   }
 
+  clear() {
+    this.shapes.clearSvg(this.graph);
+  }
+
   lastSize(size) {
     this.size.lastWidth = size.elemWidth;
     return this.size.lastHeight = size.elemHeight;
@@ -10373,13 +10393,15 @@ Connect = class Connect {
     g.sx = compWidth / g.w;
     g.sy = compHeight / g.h;
     g.s = Math.min(g.sx, g.sy);
-    g.fontSize = '2em'; // @toVh( 5 )+'vh'
-    g.iconSize = '2em'; // @toVh( 5 )+'vh'
+    g.scaleFont = g.h / 150;
+    g.fontSize = 2.0 * g.scaleFont + 'rem';
+    g.iconSize = 2.0 * g.scaleFont + 'rem';
+    g.dispSize = 0.8 * g.scaleFont + 'rem';
     return g;
   }
 
   toFill(hsv) {
-    return Vis.toRgbHsvStr(hsv);
+    return Vis$1.toRgbHsvStr(hsv);
   }
 
 };
@@ -10390,48 +10412,52 @@ var Connect$1 = Connect;
 
 let Conn = {
 
-  props: { comp:String, prac:Object },
+  props: { pracObj:Object },
 
   data() {
-    return { build:{}, connect:null,size:null }; },
-
+    return { build:null, connect:null, size:null }; },
+  
+  watch: {
+    pracObj() {
+      this.onPrac(); } },
+  
   methods: {
-    doPrac: function (prac) {
-      this.nav().pub( { prac:prac.name } ); },
-    calcSize: function(elem) {        // Should only be called by $nextTick()
+    
+    onPrac: function() {
+      this.createConnect( this.stream(), this.build, this.pracObj ); },
+    
+    doPrac: function (pracKey) {
+      this.nav().pub( { pracKey:pracKey } ); },
+    
+    clConn: function() {
+      // console.log( 'Conn.clConn() called' );
+      return this.nav().route === 'Comp' ? 'conn-comp' : 'conn-prac'; },
+    
+    calcSize: function(elem) { // Should only be called within $nextTick()
       let sz   = {};
-    //sz.compWidth  = this.$refs['Conn']['clientWidth' ];
-    //sz.compHeight = this.$refs['Conn']['clientHeight'];
-      sz.elemWidth  = 383; // elem['clientWidth' ];
-      sz.elemHeight = 130; // elem['clientHeight'];
+      sz.elemWidth  = elem['clientWidth' ];
+      sz.elemHeight = elem['clientHeight'];
       sz.elem = elem;
-      sz.name = this.prac.name;
-      console.log( 'Conn.calcSize()', sz );
-      return sz;
-    },
-    createConnect: function( stream, build ) {
+      sz.name = this.pracObj.name;
+      return sz; },
+    
+    createConnect: function( stream, build, pracObj ) {
       this.$nextTick( function() {
-        let prac = this.prac;
-        if( prac.row !== 'Dim' ) {
-          let elem  = this.$refs[prac.name];
-          this.size = this.calcSize(elem);
-          this.connect = new Connect$1( stream, build, prac, elem, this.size ); } } ); },
+        if( this.isDef(this.connect) ) {
+          this.connect.clear(); }
+        let elem     = this.$refs[this.pracObj.name];
+        this.size    = this.calcSize(elem);
+        this.connect = new Connect$1( stream, build, pracObj, elem, this.size ); } ); },
+    
     resize: function() {
-      
       this.$nextTick( function() {
           let level = 'Resize';  // 'Restore' 'Expand' requires 'Comp' sizes
           this.connect.layout( this.size, level );  } ); }
   },
-
-  beforeMount: function() {
-    this.comp = this.nav().comp; },
-
+  
   mounted: function () {
-    this.build     = new Build$1(  this.batch() );
-  //this.subscribe(  "Nav", 'Conn.vue', (obj) => {
-  //  this.onNav(obj); } );
-  //this.createConnect( this.stream(), this.build );
-    },
+    this.build = new Build$1(  this.batch() );
+    this.onPrac(); }
   
   //created: function () {
   //  window.addEventListener(   'resize', this.resize ) },
@@ -10583,11 +10609,11 @@ var __vue_render__ = function() {
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
   return _c("div", {
-    ref: _vm.prac.name,
-    staticClass: "conn",
+    ref: _vm.pracObj.name,
+    class: _vm.clConn(),
     on: {
       click: function($event) {
-        return _vm.doPrac(_vm.prac.name)
+        return _vm.doPrac(_vm.pracObj.name)
       }
     }
   })
@@ -10598,7 +10624,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-2b9998e7_0", { source: ".theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 2rem;\n}\n.theme-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-desc {\n  background-color: #333;\n  font-size: 2rem;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.conn {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  font-size: 5.5rem;\n  text-align: center;\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n", map: {"version":3,"sources":["Conn.vue","/Users/ax/Documents/prj/aug/vue/comp/Conn.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,eAAe;AACjB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,aAAa;EACb,kBAAkB;EAClB,oBAAoB;EACpB,mBAAmB;ECCrB,qBAAA;EDCE,YAAY;ECCd,iBAAA;EACA,kBAAA;EDCE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb","file":"Conn.vue","sourcesContent":[".theme-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 2rem;\n}\n.theme-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-desc {\n  background-color: #333;\n  font-size: 2rem;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.conn {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  font-size: 5.5rem;\n  text-align: center;\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n","\n<template>\n  <div :ref=\"prac.name\" class=\"conn\" @click=\"doPrac(prac.name)\"></div>\n</template>\n\n<script type=\"module\">\n  \n  import Build   from '../../pub/ikw/cube/Build.js';\n  import Connect from '../../pub/ikw/conn/Connect.js';\n\n  let Conn = {\n\n    props: { comp:String, prac:Object },\n\n    data() {\n      return { build:{}, connect:null,size:null }; },\n\n    methods: {\n      doPrac: function (prac) {\n        this.nav().pub( { prac:prac.name } ); },\n      calcSize: function(elem) {        // Should only be called by $nextTick()\n        let sz   = {}\n      //sz.compWidth  = this.$refs['Conn']['clientWidth' ];\n      //sz.compHeight = this.$refs['Conn']['clientHeight'];\n        sz.elemWidth  = 383; // elem['clientWidth' ];\n        sz.elemHeight = 130; // elem['clientHeight'];\n        sz.elem = elem;\n        sz.name = this.prac.name\n        console.log( 'Conn.calcSize()', sz );\n        return sz;\n      },\n      createConnect: function( stream, build ) {\n        this.$nextTick( function() {\n          let prac = this.prac;\n          if( prac.row !== 'Dim' ) {\n            let elem  = this.$refs[prac.name];\n            this.size = this.calcSize(elem);\n            this.connect = new Connect( stream, build, prac, elem, this.size ); } } ) },\n      resize: function() {\n        \n        this.$nextTick( function() {\n            let level = 'Resize';  // 'Restore' 'Expand' requires 'Comp' sizes\n            if( level==='Expand') { this.connect.lastSize(this.size) }\n            this.connect.layout( this.size, level );  } ); }\n    },\n\n    beforeMount: function() {\n      this.comp = this.nav().comp; },\n\n    mounted: function () {\n      this.build     = new Build(  this.batch() );\n    //this.subscribe(  \"Nav\", 'Conn.vue', (obj) => {\n    //  this.onNav(obj); } );\n    //this.createConnect( this.stream(), this.build );\n      },\n    \n    //created: function () {\n    //  window.addEventListener(   'resize', this.resize ) },\n    //destroyed: function () {\n      //window.removeEventListener('resize', this.resize ) }\n   }\n\n  export default Conn;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  .conn { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;\n    color:@theme-color; font-size:@theme-icon-size; text-align:center; .theme-conn(); }\n  \n</style>"]}, media: undefined });
+    inject("data-v-a7132474_0", { source: ".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.conn-comp {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  font-size: 5.5rem;\n  text-align: center;\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.conn-prac {\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  color: wheat;\n  font-size: 5.5rem;\n  text-align: center;\n  background-color: #333;\n  border-radius: 36px;\n}\n", map: {"version":3,"sources":["Conn.vue","/Users/ax/Documents/prj/aug/vue/comp/Conn.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;AACrB;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;AACxB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;ACCA;EDCE,uBAAuB;ECCzB,iBAAA;AACA;ADCA;ECCA,uBAAA;EACA,iBAAA;ADCA;AACA;EACE,aAAa;EACb,kBAAkB;EAClB,oBAAoB;EACpB,mBAAmB;EACnB,qBAAqB;EACrB,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;EAClB,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;EAClB,sBAAsB;EACtB,mBAAmB;AACrB","file":"Conn.vue","sourcesContent":[".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.conn-comp {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  font-size: 5.5rem;\n  text-align: center;\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.conn-prac {\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  color: wheat;\n  font-size: 5.5rem;\n  text-align: center;\n  background-color: #333;\n  border-radius: 36px;\n}\n","\n<template>\n  <div :class=\"clConn()\" @click=\"doPrac(pracObj.name)\" :ref=\"pracObj.name\" ></div>\n</template>\n\n<script type=\"module\">\n  \n  import Build   from '../../pub/ikw/cube/Build.js';\n  import Connect from '../../pub/ikw/conn/Connect.js';\n\n  let Conn = {\n\n    props: { pracObj:Object },\n\n    data() {\n      return { build:null, connect:null, size:null }; },\n    \n    watch: {\n      pracObj() {\n        this.onPrac(); } },\n    \n    methods: {\n      \n      onPrac: function() {\n        this.createConnect( this.stream(), this.build, this.pracObj ); },\n      \n      doPrac: function (pracKey) {\n        this.nav().pub( { pracKey:pracKey } ); },\n      \n      clConn: function() {\n        // console.log( 'Conn.clConn() called' );\n        return this.nav().route === 'Comp' ? 'conn-comp' : 'conn-prac'; },\n      \n      calcSize: function(elem) { // Should only be called within $nextTick()\n        let sz   = {}\n        sz.elemWidth  = elem['clientWidth' ];\n        sz.elemHeight = elem['clientHeight'];\n        sz.elem = elem;\n        sz.name = this.pracObj.name\n        return sz; },\n      \n      createConnect: function( stream, build, pracObj ) {\n        this.$nextTick( function() {\n          if( this.isDef(this.connect) ) {\n            this.connect.clear(); }\n          let elem     = this.$refs[this.pracObj.name];\n          this.size    = this.calcSize(elem);\n          this.connect = new Connect( stream, build, pracObj, elem, this.size ); } ) },\n      \n      resize: function() {\n        this.$nextTick( function() {\n            let level = 'Resize';  // 'Restore' 'Expand' requires 'Comp' sizes\n            if( level==='Expand') { this.connect.lastSize(this.size) }\n            this.connect.layout( this.size, level );  } ); }\n    },\n    \n    mounted: function () {\n      this.build = new Build(  this.batch() );\n      this.onPrac(); }\n    \n    //created: function () {\n    //  window.addEventListener(   'resize', this.resize ) },\n    //destroyed: function () {\n      //window.removeEventListener('resize', this.resize ) }\n   }\n\n  export default Conn;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  .conn-comp { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;\n    color:@theme-color; font-size:@theme-icon-size; text-align:center; .theme-comp-conn(); }\n\n  .conn-prac { position:absolute; left:0; top:0; right:0; bottom:0;\n    color:@theme-color; font-size:@theme-icon-size; text-align:center; .theme-prac-conn(); }\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */

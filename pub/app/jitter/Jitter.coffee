@@ -27,7 +27,6 @@ class Jitter
 
   Jitter.Batch = {
     Choice: { url:'jitter/Choice.json', data:null, type:'None', plane:'None' }
-    Navs:   { url:'jitter/Navs.json',   data:null, type:'None', plane:'None' }
     Jitter: { url:'jitter/Jitter.json', data:null, type:'None', plane:'None' }
     Flavor: { url:'jitter/Flavor.json', data:null, type:'None', plane:'None' }
     Region: { url:'jitter/Region.json', data:null, type:'None', plane:'None' } }
@@ -39,14 +38,14 @@ class Jitter
     subjects       = ["Dir"]
     streamLog      = { subscribe:false, publish:false, subjects:subjects }
     Jitter.stream  = new Stream( subjects, streamLog )
-    Jitter.dir     = new Dir(   Jitter.stream, batch['Navs'].data, 'Home' )
+    Jitter.dir     = new Dir(   Jitter.stream, Jitter.komps )
     Jitter.cache   = new Cache( Jitter.stream )
     Jitter.vue()
     return
 
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Jitter.vue = () ->
-    Jitter.mixin = new Mixin( Jitter, ['Home','Flavor','Roast','Brew','Drink','Body'] )
+    Jitter.mixin = new Mixin( Jitter, Jitter.komps )
     Vue['mixin']( Jitter.mixin.mixin() )
     Vue.use(Router)
     app = new Vue( { router:Jitter.router(), render: (h) -> h(Home.Dash) } );
@@ -76,11 +75,17 @@ class Jitter
 
   # Toc.vue components and routes
   Jitter.komps = {
-    Home:{   name:'Home',   route:'Home',   icon:"fas fa-draw-polygon" }
-    Flavor:{ name:'Flavor', route:'Flavor', icon:"fas fa-bezier-curve" }
-    Roast:{  name:'Roast',  route:'Roast',  icon:"fas fa-bezier-curve" }
-    Brew:{   name:'Brew',   route:'Brew',   icon:"fas fa-bezier-curve" }
-    Drink:{  name:'Drink',  route:'Drink',  icon:"fas fa-bezier-curve" }
-    Body:{   name:'Body',   route:'Body',   icon:"fas fa-bezier-curve" } }
+    Home:{   name:'Home',   route:'Home',   icon:"fas fa-draw-polygon",
+    west:"Brew",   north:"Roast",  east:"Flavor", south:"Drink",  next:"Body",   prev:"Home" }
+    Flavor:{ name:'Flavor', route:'Flavor', icon:"fas fa-bezier-curve",
+    west:"Drink",  north:"Brew",   east:"Roast",  south:"Body",   next:"Home",   prev:"Home" }
+    Roast:{  name:'Roast',  route:'Roast',  icon:"fas fa-bezier-curve",
+    west:"Body",   north:"Drink",  east:"Brew",   south:"Home",   next:"Flavor", prev:"Home" }
+    Brew:{   name:'Brew',   route:'Brew',   icon:"fas fa-bezier-curve",
+    west:"Home",   north:"Body",   east:"Drink",  south:"Flavor", next:"Roast",  prev:"Home" }
+    Drink:{  name:'Drink',  route:'Drink',  icon:"fas fa-bezier-curve" ,
+    west:"Flavor", north:"Home",   east:"Body",   south:"Roast",  next:"Brew",   prev:"Home" }
+    Body:{   name:'Body',   route:'Body',   icon:"fas fa-bezier-curve",
+    west:"Roast",  north:"Flavor", east:"Home",   south:"Brew",   next:"Drink",  prev:"Home" } }
 
 export default Jitter

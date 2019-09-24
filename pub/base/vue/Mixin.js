@@ -7,9 +7,13 @@ Mixin = class Mixin {
   // Muse   ['Home','Prin','Comp','Prac','Disp','Cube']
   // Augn   ['Home','Math','Geom','Data','Draw','Note','Wood' ]
   // Jitter ['Home','Flavor','Roast','Brew','Drink','Body']
-  constructor(Main, views) {
+  constructor(Main, komps) {
     Mixin.Main = Main;
-    Mixin.views = views;
+    Mixin.views = this.isArray(komps) ? komps : Object.keys(komps);
+  }
+
+  isArray(a) {
+    return typeof a !== "string" && (a.length != null) && a.length > 0;
   }
 
   mixin() {

@@ -39,7 +39,7 @@ class Muse
     subjects    = ["Info","Know","Wise","Cube","Menu","Page","Nav","Toc","Cache"]
     infoSpec    = { subscribe:false, publish:false, subjects:subjects}
     Muse.stream = new Stream( subjects, infoSpec )
-    Muse.nav    = new Nav(   Muse.stream, batch )
+    Muse.nav    = new Nav(   Muse.stream, batch, Muse.komps )
     Muse.build  = new Build( batch )
     Muse.cache  = new Cache( Muse.stream )
     Muse.mergePracsPrin()
@@ -49,7 +49,7 @@ class Muse
 
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Muse.vue = () ->
-    Muse.mixin = new Mixin( Muse, ['Home','Prin','Comp','Prac','Disp','Cube'] )
+    Muse.mixin = new Mixin( Muse, ['Home','Prin','Comp','Prac','Disp'] ) # Can't use komps
     Vue['mixin']( Muse.mixin.mixin() )
     Vue.use(Router)
     app = new Vue( { router:Muse.router(), render: (h) -> h(Home.Dash) } );
@@ -76,11 +76,16 @@ class Muse
 
   # Toc.vue components and routes
   Muse.komps = {
-    Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home"          }
-    Prin:{ title:'Prin', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale" }
-    Info:{ title:'Info', key:'Info', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-th"            }
-    Know:{ title:'Know', key:'Know', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-university"    }
-    Wise:{ title:'Wise', key:'Wise', route:'Comp', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor"   } }
+    Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
+    west:"Wise", north:"Wise", east:"Prin", south:"Prin", next:"Prin", prev:"Wise"  }
+    Prin:{ title:'Prin', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",
+    west:"Home", north:"Home", east:"Info", south:"Info", next:"Info", prev:"Home" }
+    Info:{ title:'Info', key:'Info', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-th",
+    west:"Wise", north:"Wise", east:"Know", south:"Know", next:"Know", prev:"Wise" }
+    Know:{ title:'Know', key:'Know', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-university",
+    west:"Info", north:"Info", east:"Wise", south:"Wise", next:"Wise", prev:"Info" }
+    Wise:{ title:'Wise', key:'Wise', route:'Comp', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor",
+    west:"Know", north:"Know", east:"Info", south:"Info", next:"Info", prev:"Know" } }
 
   # Merges principles into practices
   Muse.mergePracsPrin = () ->

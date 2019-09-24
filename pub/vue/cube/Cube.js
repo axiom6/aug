@@ -1119,7 +1119,7 @@ Data = class Data {
   static asyncJSON(urla, callback) {
     var url;
     url = Data.toUrl(urla);
-    console.log('Data.asyncJSON()', urla, url);
+    // console.log( 'Data.asyncJSON()', urla, url )
     fetch(url).then((response) => {
       return response.json();
     }).then((data) => {

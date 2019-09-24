@@ -6,6 +6,7 @@ class Nav
   constructor:( @stream, @batch, @navs=null ) ->
     @build    =  new Build( @batch )
     @$router  =  null
+    @source   =  'None'
     @route    =  'Home' # Prac Disp
     @compKey  =  'None' # Also specifies current plane
     @pracKey  =  'None'
@@ -15,11 +16,12 @@ class Nav
     @pageKey  =  'Icon'
     @pageKeys = ['Icon','Dirs','Conn','Desc']
     @compass  =   ""
+    @keyEvents()
 
   pub:( change ) ->
     routeChanged = change.route? and change.route isnt @route
     @set( change )
-    obj = { route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey, pageKey:@pageKey }
+    obj = { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey, pageKey:@pageKey }
     obj.source = if change.source? then change.source else 'None'
     console.log('Nav.pub()', obj )
     @stream.publish( 'Nav',  obj )
@@ -49,8 +51,23 @@ class Nav
     console.log( 'Nav.tap()' )
     return
 
+  keyEvents:() ->
+
+    keyDir = (event) =>
+      # console.log( 'Nav.keyEvents()', event.key )
+      switch event.key
+        when 'ArrowRight' then @dir( 'east',  event )
+        when 'ArrowLeft'  then @dir( 'west',  event )
+        when 'ArrowDown'  then @dir( 'south', event )
+        when 'ArrowUp'    then @dir( 'north', event )
+        when '+'          then @dir( 'next',  event )
+        when '-'          then @dir( 'prev',  event )
+
+    document.addEventListener('keydown', (event) => keyDir(event) )
+    return
+
   dir:( dr, event=null ) =>
-    console.log('Nav.dir()', dr )
+    @source = dr
     if event is null then {}
     @compass = dr if dr isnt 'next' and dr isnt 'prev'
     switch @route
@@ -116,7 +133,10 @@ class Nav
   dirNavs:( dir ) ->
     if @navs?
       route = @navs[@route][dir]
-      @pub( { route:route, compKey:route } )
+      obj = { route:route, compKey:route, source:dir }
+      obj.route   = 'Comp' if route is 'Info' or route is 'Know' or route is 'Wise'
+      obj.pageKey = 'Icon' if @pageKey is 'None'
+      @pub( obj )
     else
       console.error( 'Nav.dirNavs() @navs not specified', { dir:dir, route:@route } )
     return

@@ -1,11 +1,10 @@
 var Dir;
 
 Dir = class Dir {
-  constructor(stream, navs, route1 = 'Home') {
+  constructor(stream, navs) {
     this.touch = this.touch.bind(this);
     this.stream = stream;
     this.navs = navs;
-    this.route = route1;
     this.route = 'Home';
     this.$router = null;
   }
@@ -26,7 +25,7 @@ Dir = class Dir {
     this.doRoute(route, dir);
   }
 
-  doRoute(route, dir = 'None') {
+  doRoute(route) {
     if (this.$router != null) {
       this.$router.push({
         name: route

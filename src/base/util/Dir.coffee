@@ -1,7 +1,7 @@
 
 class Dir
 
-  constructor:( @stream,  @navs, @route='Home' ) ->
+  constructor:( @stream,  @navs ) ->
     @route   = 'Home'
     @$router =  null
 
@@ -18,7 +18,7 @@ class Dir
     @doRoute( route, dir )
     return
 
-  doRoute:( route, dir='None' ) ->
+  doRoute:( route ) ->
     if @$router?
        @$router.push( { name:route } )
     else

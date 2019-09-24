@@ -12,6 +12,7 @@ Nav = class Nav {
     this.navs = navs;
     this.build = new Build(this.batch);
     this.$router = null;
+    this.source = 'None';
     this.route = 'Home'; // Prac Disp
     this.compKey = 'None'; // Also specifies current plane
     this.pracKey = 'None';
@@ -21,6 +22,7 @@ Nav = class Nav {
     this.pageKey = 'Icon';
     this.pageKeys = ['Icon', 'Dirs', 'Conn', 'Desc'];
     this.compass = "";
+    this.keyEvents();
   }
 
   pub(change) {
@@ -28,6 +30,7 @@ Nav = class Nav {
     routeChanged = (change.route != null) && change.route !== this.route;
     this.set(change);
     obj = {
+      source: this.source,
       route: this.route,
       compKey: this.compKey,
       pracKey: this.pracKey,
@@ -75,8 +78,32 @@ Nav = class Nav {
     console.log('Nav.tap()');
   }
 
+  keyEvents() {
+    var keyDir;
+    keyDir = (event) => {
+      // console.log( 'Nav.keyEvents()', event.key )
+      switch (event.key) {
+        case 'ArrowRight':
+          return this.dir('east', event);
+        case 'ArrowLeft':
+          return this.dir('west', event);
+        case 'ArrowDown':
+          return this.dir('south', event);
+        case 'ArrowUp':
+          return this.dir('north', event);
+        case '+':
+          return this.dir('next', event);
+        case '-':
+          return this.dir('prev', event);
+      }
+    };
+    document.addEventListener('keydown', (event) => {
+      return keyDir(event);
+    });
+  }
+
   dir(dr, event = null) {
-    console.log('Nav.dir()', dr);
+    this.source = dr;
     if (event === null) {
       ({});
     }
@@ -170,13 +197,21 @@ Nav = class Nav {
   }
 
   dirNavs(dir) {
-    var route;
+    var obj, route;
     if (this.navs != null) {
       route = this.navs[this.route][dir];
-      this.pub({
+      obj = {
         route: route,
-        compKey: route
-      });
+        compKey: route,
+        source: dir
+      };
+      if (route === 'Info' || route === 'Know' || route === 'Wise') {
+        obj.route = 'Comp';
+      }
+      if (this.pageKey === 'None') {
+        obj.pageKey = 'Icon';
+      }
+      this.pub(obj);
     } else {
       console.error('Nav.dirNavs() @navs not specified', {
         dir: dir,

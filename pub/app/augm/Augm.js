@@ -36,14 +36,14 @@ Augm = (function() {
         subjects: subjects
       };
       Augm.stream = new Stream(subjects, streamLog);
-      Augm.nav = new Nav(Augm.stream, batch, batch['Navs'].data);
+      Augm.nav = new Nav(Augm.stream, batch, Augm.komps);
       Augm.cache = new Cache(Augm.stream);
       Augm.vue();
     }
 
     static vue() {
       var app;
-      Augm.mixin = new Mixin(Augm, ['Home', 'Math', 'Geom', 'Note', 'Draw', 'Hues', 'Cube', 'Wood']);
+      Augm.mixin = new Mixin(Augm, Augm.komps);
       Vue['mixin'](Augm.mixin.mixin());
       Vue.use(Router);
       app = new Vue({
@@ -204,12 +204,6 @@ Augm = (function() {
   Augm.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json";
 
   Augm.Batch = {
-    Navs: {
-      url: 'augm/Navs.json',
-      data: null,
-      type: 'None',
-      plane: 'None'
-    },
     Math: {
       url: 'augm/Math.json',
       data: null,
@@ -272,7 +266,7 @@ Augm = (function() {
     }
   };
 
-  // Toc.vue components and routes
+  // Toc.vue and Nav components  routes and directions
   // { path: '/data',    name:'Data',    components:{ Data:     Home.Data }, children: [
   //   { path:'tables',  name:'Tables',  components:{ Tables:   Augm.lazy( 'vue/data/Tables') } },
   //   { path:'pivots',  name:'Pivots',  components:{ Pivots:   Augm.lazy( 'vue/data/Pivots') } } ] }
@@ -283,7 +277,13 @@ Augm = (function() {
       route: 'Home',
       pracs: {},
       ikw: false,
-      icon: "fas fa-home"
+      icon: "fas fa-home",
+      west: "Wood",
+      north: "Wood",
+      east: "Math",
+      south: "Math",
+      next: "Math",
+      prev: "Wood"
     },
     Math: {
       title: 'Math',
@@ -291,7 +291,13 @@ Augm = (function() {
       route: 'Math',
       pracs: {},
       ikw: true,
-      icon: "fas fa-bezier-curve"
+      icon: "fas fa-bezier-curve",
+      west: "Home",
+      north: "Home",
+      east: "Geom",
+      south: "Geom",
+      next: "Geom",
+      prev: "Home"
     },
     Geom: {
       title: 'Geom',
@@ -299,7 +305,13 @@ Augm = (function() {
       route: 'Geom',
       pracs: {},
       ikw: true,
-      icon: "fas fa-shapes"
+      icon: "fas fa-shapes",
+      west: "Math",
+      north: "Math",
+      east: "Note",
+      south: "Note",
+      next: "Note",
+      prev: "Math"
     },
     // Data:{ title:'Data', key:'Data', route:'Data', pracs:{}, ikw:true,  icon:"fas fa-database"     }
     Note: {
@@ -308,7 +320,13 @@ Augm = (function() {
       route: 'Note',
       pracs: {},
       ikw: false,
-      icon: "fab fa-leanpub"
+      icon: "fab fa-leanpub",
+      west: "Geom",
+      north: "Geom",
+      east: "Draw",
+      south: "Draw",
+      next: "Draw",
+      prev: "Geom"
     },
     Draw: {
       title: 'Draw',
@@ -316,7 +334,13 @@ Augm = (function() {
       route: 'Draw',
       pracs: {},
       ikw: false,
-      icon: "fas fa-draw-polygon"
+      icon: "fas fa-draw-polygon",
+      west: "Note",
+      north: "Note",
+      east: "Hues",
+      south: "Hues",
+      next: "Hues",
+      prev: "Note"
     },
     Hues: {
       title: 'Hues',
@@ -324,7 +348,13 @@ Augm = (function() {
       route: 'Hues',
       pracs: {},
       ikw: false,
-      icon: "fas fa-palette"
+      icon: "fas fa-palette",
+      west: "Draw",
+      north: "Draw",
+      east: "Cube",
+      south: "Cube",
+      next: "Cube",
+      prev: "Draw"
     },
     Cube: {
       title: 'Cube',
@@ -332,7 +362,13 @@ Augm = (function() {
       route: 'Cube',
       pracs: {},
       ikw: false,
-      icon: "fas fa-cubes"
+      icon: "fas fa-cubes",
+      west: "Hues",
+      north: "Hues",
+      east: "Wood",
+      south: "Wood",
+      next: "Wood",
+      prev: "Hues"
     },
     Wood: {
       title: 'Wood',
@@ -340,7 +376,13 @@ Augm = (function() {
       route: 'Wood',
       pracs: {},
       ikw: false,
-      icon: "fas fa-tree"
+      icon: "fas fa-tree",
+      west: "Cube",
+      north: "Cube",
+      east: "Home",
+      south: "Home",
+      next: "Home",
+      prev: "Cube"
     }
   };
 

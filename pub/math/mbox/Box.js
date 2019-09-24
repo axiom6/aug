@@ -74,7 +74,6 @@ Box = class Box {
     var coord, mbox, view;
     mbox = new MBox(elem);
     coord = new Coord(mbox, 12, 60, 10);
-    //color = new Color( mbox )
     view = coord.sphere();
     return coord.sphVolume(view, Vis.toRgbSphere);
   }

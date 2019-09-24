@@ -35,14 +35,14 @@ Jitter = (function() {
         subjects: subjects
       };
       Jitter.stream = new Stream(subjects, streamLog);
-      Jitter.dir = new Dir(Jitter.stream, batch['Navs'].data, 'Home');
+      Jitter.dir = new Dir(Jitter.stream, Jitter.komps);
       Jitter.cache = new Cache(Jitter.stream);
       Jitter.vue();
     }
 
     static vue() {
       var app;
-      Jitter.mixin = new Mixin(Jitter, ['Home', 'Flavor', 'Roast', 'Brew', 'Drink', 'Body']);
+      Jitter.mixin = new Mixin(Jitter, Jitter.komps);
       Vue['mixin'](Jitter.mixin.mixin());
       Vue.use(Router);
       app = new Vue({
@@ -138,12 +138,6 @@ Jitter = (function() {
       type: 'None',
       plane: 'None'
     },
-    Navs: {
-      url: 'jitter/Navs.json',
-      data: null,
-      type: 'None',
-      plane: 'None'
-    },
     Jitter: {
       url: 'jitter/Jitter.json',
       data: null,
@@ -169,32 +163,68 @@ Jitter = (function() {
     Home: {
       name: 'Home',
       route: 'Home',
-      icon: "fas fa-draw-polygon"
+      icon: "fas fa-draw-polygon",
+      west: "Brew",
+      north: "Roast",
+      east: "Flavor",
+      south: "Drink",
+      next: "Body",
+      prev: "Home"
     },
     Flavor: {
       name: 'Flavor',
       route: 'Flavor',
-      icon: "fas fa-bezier-curve"
+      icon: "fas fa-bezier-curve",
+      west: "Drink",
+      north: "Brew",
+      east: "Roast",
+      south: "Body",
+      next: "Home",
+      prev: "Home"
     },
     Roast: {
       name: 'Roast',
       route: 'Roast',
-      icon: "fas fa-bezier-curve"
+      icon: "fas fa-bezier-curve",
+      west: "Body",
+      north: "Drink",
+      east: "Brew",
+      south: "Home",
+      next: "Flavor",
+      prev: "Home"
     },
     Brew: {
       name: 'Brew',
       route: 'Brew',
-      icon: "fas fa-bezier-curve"
+      icon: "fas fa-bezier-curve",
+      west: "Home",
+      north: "Body",
+      east: "Drink",
+      south: "Flavor",
+      next: "Roast",
+      prev: "Home"
     },
     Drink: {
       name: 'Drink',
       route: 'Drink',
-      icon: "fas fa-bezier-curve"
+      icon: "fas fa-bezier-curve",
+      west: "Flavor",
+      north: "Home",
+      east: "Body",
+      south: "Roast",
+      next: "Brew",
+      prev: "Home"
     },
     Body: {
       name: 'Body',
       route: 'Body',
-      icon: "fas fa-bezier-curve"
+      icon: "fas fa-bezier-curve",
+      west: "Roast",
+      north: "Flavor",
+      east: "Home",
+      south: "Brew",
+      next: "Drink",
+      prev: "Home"
     }
   };
 
