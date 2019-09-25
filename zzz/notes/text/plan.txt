@@ -1,5 +1,9 @@
 
 1. Nav for pageKeys
+   a. Consider sub route dirs
+   b. Bug in tab dir cycling
+   c. Bug with Note
+   d. Test Muse
 
 2. Improve Landing Pages
      Muse Home Prin Info Know Wise

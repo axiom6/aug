@@ -141,6 +141,9 @@ Mixin = class Mixin {
           hsu = !hsv ? [30, 90, 90] : hsv;
           return Vis.toRgbaHsv(hsu);
         },
+        isMyNav: function(obj, route, pages, pageKey) {
+          return obj.route === route && this.showPages(pages, pageKey);
+        },
         showPages: function(pages, pageKey) {
           var hasPage, key, page;
           hasPage = false;

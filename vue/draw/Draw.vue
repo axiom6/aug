@@ -2,7 +2,7 @@
 
 <template>
   <div class="draw" ref="Draw">
-    <d-dabs route="Draw" :pages="pages"></d-dabs>
+    <d-tabs route="Draw" :pages="pages"></d-tabs>
     <h1 v-if="pageKey==='Draw'">Drawings in D3</h1>
     <template v-for="page in pages">
       <div :ref="page.key" v-show="isPage(page.key)" class="page" :key="page.key"></div>
@@ -12,12 +12,12 @@
 
 <script type="module">
 
-  import Dabs from '../elem/Dabs.vue';
+  import Tabs from '../elem/Tabs.vue';
   import Drew from '../../pub/base/d3d/Drew.js'
 
   let Draw = {
 
-    components:{ 'd-dabs':Dabs },
+    components:{ 'd-tabs':Tabs },
 
     data() {
       return { route:'Draw', pageKey:'Draw', drew:null, pages:{
@@ -31,13 +31,13 @@
 
     methods: {
       
-      isPage: function(key) {
-        return this.pageKey === key; },
+      isPage: function(pageKey) {
+        return this.pageKey === pageKey; },
       
       onTabs: function(obj) {
-        if( this.route === obj.route ) {
+        if( this.isMyNav( obj, this.route, this.pages, obj.pageKey ) ) {
             this.pageKey = obj.pageKey;
-            this.create(this.pageKey); } },
+            this.create(this.pageKey); }  },
 
       size: function() {
         let sz   = {}

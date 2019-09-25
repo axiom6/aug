@@ -119,7 +119,8 @@ Nav = class Nav {
     var compKey;
     compKey = this.adjCompKey(this.compKey, dir);
     this.pub({
-      compKey: compKey
+      compKey: compKey,
+      source: 'Nav.dirComp'
     });
   }
 
@@ -128,6 +129,7 @@ Nav = class Nav {
     adj = this.adjPracObj(dir);
     if (adj.name !== 'None') {
       obj = {};
+      obj.source = 'Nav.dirPrac';
       obj.compKey = this.compKey;
       if (adj.name !== this.pracKey) {
         obj.pracKey = adj.name;
@@ -153,6 +155,7 @@ Nav = class Nav {
     }
     if (adj.name !== 'None') {
       obj = {};
+      obj.source = 'Nav.dirDisp';
       obj.compKey = this.compKey;
       obj.pracKey = adj.name;
       obj.dispKey = dis.name;
@@ -163,52 +166,52 @@ Nav = class Nav {
     }
   }
 
+  dirNavs(dir) {
+    var obj, route;
+    if ((this.pages[this.route] != null) && dir === 'west' || dir === 'east') {
+      this.dirPage(dir);
+    } else if ((this.navs != null) && (this.navs[this.route] != null)) {
+      route = this.navs[this.route][dir];
+      obj = {
+        route: route,
+        compKey: route,
+        source: dir
+      };
+      if (route === 'Info' || route === 'Know' || route === 'Wise') {
+        obj.route = 'Comp';
+      }
+      if (this.pageKey === 'None') {
+        obj.pageKey = 'Icon';
+      }
+      this.pub(obj);
+    }
+  }
+
+  // else
+  //  console.error( 'Nav.dirNavs() no pages or @navs not specified', { dir:dir, route:@route } )
   dirPage(dir) {
-    var page, pageKey;
-    if (this.pages[this.route] == null) {
-      return;
-    }
-    page = this.pages[this.route];
-    pageKey = 'None';
-    if (page.pageKey === 'None') {
-      pageKey = page.pageKeys[0];
-    }
-    if (dir === 'east' || dir === 'west') {
-      pageKey = this.movePage(page, dir);
-    }
+    var pageKey;
+    pageKey = this.movePage(this.pages[this.route], dir);
     if (pageKey !== 'None') {
       this.pub({
-        pageKey: pageKey
+        pageKey: pageKey,
+        source: 'Nav.dorPage'
       });
     }
   }
 
   movePage(page, dir) {
     var idx, ndx;
-    if (page.pageKey === 'None') {
+    if (this.hasPageKey(page)) {
       page.pageKey = dir === 'east' ? page.pageKeys[0] : page.pageKeys[page.pageKeys.length - 1];
     } else {
       idx = page.pageKeys.indexOf(page.pageKey);
-      console.log('Nav.movePage 1', {
-        pageBeg: page.pageKey,
-        idx: idx,
-        page: page,
-        dir: dir
-      });
       if (dir === 'east') {
         ndx = this.range(idx + 1);
       }
       if (dir === 'west') {
         ndx = this.range(idx - 1);
       }
-      console.log('Nav.movePage 2', {
-        pageBeg: page.pageKey,
-        pageEnd: page.pageKeys[ndx],
-        idx: idx,
-        ndx: ndx,
-        page: page,
-        dir: dir
-      });
       page.pageKey = page.pageKeys[ndx];
     }
     return page.pageKey;
@@ -226,6 +229,10 @@ Nav = class Nav {
     return ndx;
   }
 
+  hasPageKey(page) {
+    return (page.pageKey == null) || page.pageKey === 'None';
+  }
+
   setPages(route, pagesObj) {
     this.pages[route] = {};
     this.pages[route].pageKey = 'None';
@@ -235,32 +242,6 @@ Nav = class Nav {
   setPageKey(route, pageKey) {
     if (this.pages[route] == null) {
       this.pages[route].pageKey = pageKey;
-    }
-  }
-
-  dirNavs(dir) {
-    var obj, route;
-    if ((this.pages[this.route] != null) && dir === 'west' || dir === 'east') {
-      this.dirPage(dir);
-    } else if (this.navs != null) {
-      route = this.navs[this.route][dir];
-      obj = {
-        route: route,
-        compKey: route,
-        source: dir
-      };
-      if (route === 'Info' || route === 'Know' || route === 'Wise') {
-        obj.route = 'Comp';
-      }
-      if (this.pageKey === 'None') {
-        obj.pageKey = 'Icon';
-      }
-      this.pub(obj);
-    } else {
-      console.error('Nav.dirNavs() no pages or @navs not specified', {
-        dir: dir,
-        route: this.route
-      });
     }
   }
 

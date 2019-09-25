@@ -31,9 +31,9 @@
     data() { return {
       compObj:null, pracObj:null,
       pages:{
-        Icon: { name:'Icon', key:'Icon', show:false },
-        Dirs: { name:'Dirs', key:'Dirs', show:false },
-        Conn: { name:'Conn', key:'Conn', show:false } },
+        Icon: { title:'Icon', key:'Icon', show:false },
+        Dirs: { title:'Dirs', key:'Dirs', show:false },
+        Conn: { title:'Conn', key:'Conn', show:false } },
       rows: {
         Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap" },
         Do:{    name:'Do',    dir:'do', icon:"fas fas fa-cog" },
@@ -42,20 +42,14 @@
     methods: {
       onComp: function (compKey) {
         this.compObj = this.compObject(compKey); },
-      onPage: function(pageKey) {
-        let  hasPage = this.showPages( this.pages, pageKey );
-        if( !hasPage ) {
-          this.doPage('Icon'); } },
-      doPage: function(   pageKey ) {
-        this.nav().set( { pageKey:pageKey } );
+      doPage: function( pageKey ) {
         this.pages[pageKey].show = true; },
       isRows: function () {
         return true; },
       onNav:  function (obj) {
-        let pageKey = this.nav().pageKey;
-        if( this.nav().route === 'Comp' ) {
+        if( this.isMyNav( obj, 'Comp', this.pages, obj.pageKey ) ) {
           this.onComp(obj.compKey);
-          this.onPage(    pageKey); } }
+          this.doPage(obj.pageKey); } }
       },
 
     beforeMount: function() {

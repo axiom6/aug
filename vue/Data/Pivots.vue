@@ -1,54 +1,52 @@
 
 <template>
   <div>
-    <d-dabs comp="Data" :pages="pages"></d-dabs>
+    <d-tabs route="Pivots" :pages="pages"></d-tabs>
     <div class="page">
-      <h1       v-if="isKey('None')">Pivots</h1>
-      <p_pivot1 v-if="isKey('Pivot1')"></p_pivot1>
-      <p_pivot2 v-if="isKey('Pivot2')"></p_pivot2>
+      <h1       v-if="isPageKey('None')">Pivots</h1>
+      <p_pivot1 v-if="isPageKey('Pivot1')"></p_pivot1>
+      <p_pivot2 v-if="isPageKey('Pivot2')"></p_pivot2>
     </div>
   </div>
 </template>
 
 <script type="module">
 
-  import Dabs   from '../elem/Dabs.vue';
+  import Tabs   from '../elem/Tabs.vue';
   import Pivot1 from './Pivot1.vue';
   import Pivot2 from './Pivot2.vue';
 
   let Pivots = {
 
-    components:{ 'd-dabs':Dabs, 'p_pivot1':Pivot1, 'p_pivot2':Pivot2 },
+    components:{ 'd-tabs':Tabs, 'p_pivot1':Pivot1, 'p_pivot2':Pivot2 },
 
     data() {
-      return { comp:'Pivots', key:'None',
+      return { route:'Pivots', pageKey:'None',
         pages:{
-          Table1: { title:'Pivot1', key:'Pivot1' },
-          Table2: { title:'Pivot2', key:'Pivot2' } } } },
+          Table1: { title:'Pivot1', key:'Pivot1', created:false, show:false },
+          Table2: { title:'Pivot2', key:'Pivot2', created:false, show:false } } } },
 
     methods: {
 
-      isKey: function(key) {
-        return this.key === key; },
+      isPageKey: function(pageKey) {
+        return this.pageKey === pageKey; },
 
-      onTabs: function(key) {
-        if( this.pages[key] ) {
-          this.key = key;
-          /* this.create(this.key); */ } },
+      onTabs: function(obj) {
+        if( this.isMyNav( obj, 'Pivots', this.pages, obj.pageKey ) ) {
+          this.pageKey = obj.pageKey;
+          this.create(   obj.pageKey ); } },
 
-      create: function( key ) {
-        if( !this.pages[key].created ) {
-          this.pages[key].created = true;
+      create: function( pageKey ) {
+        if( !this.pages[pageKey].created ) {
+          this.pages[pageKey].created = true;
           this.$nextTick( function() { // Wait for DOM to render
-            let elem = this.$refs[key][0];
+            let elem = this.$refs[pageKey][0];
             if( elem===false) {} } ) } }
     },
 
     mounted: function () {
-      this.subscribe( 'Data', this.comp+'.vue', (key) => {
-        if( typeof(key)==='string' ) {
-          this.onTabs( key ); } } );
-      this.onTabs( this.key ); }
+      this.subscribe( 'Nav', 'Pivots.vue', (obj) => {
+          this.onTabs( obj ); } ); }
 
   }
 

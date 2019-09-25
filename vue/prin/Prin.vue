@@ -26,27 +26,21 @@
     data() { return {
       compObj:null, pracObj:null,
       pages:{
-        Icon: { name:'Icon', key:'Icon', show:false },
-        Dirs: { name:'Dirs', key:'Dirs', show:false } } } },
+        Icon: { title:'Icon', key:'Icon', show:false },
+        Dirs: { title:'Dirs', key:'Dirs', show:false } } } },
     
     methods: {
       
       onComp: function (compKey) {
         this.compObj = this.compObject(compKey); },
-      onPage: function(pageKey) {
-        let  hasPage = this.showPages( this.pages, pageKey );
-        if( !hasPage ) {
-          this.doPage('Icon'); } },
       doPage: function(   pageKey ) {
-        this.nav().set( { pageKey:pageKey } );
         this.pages[pageKey].show = true; },
       isRows: function () {
         return true; },
       onNav:  function (obj) {
-        let pageKey = this.nav().pageKey;
-        if( this.nav().route === 'Prin' ) {
+        if( this.isMyNav( obj, 'Prin', this.pages, obj.pageKey ) ) {
           this.onComp(obj.compKey);
-          this.onPage(    pageKey); } }
+          this.doPage(obj.pageKey); } }
       },
 
     beforeMount: function() {

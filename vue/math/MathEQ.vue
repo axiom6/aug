@@ -10,7 +10,7 @@
     extends: MathND,
 
     data() {
-      return { comp:'MathEQ', key:'Differ', exps:{}, pages:{
+      return { route:'MathEQ', pageKey:'Differ', exps:{}, pages:{
           Differ: { title:'Differ', key:'Differ', create:Differ, obj:null },
           Solves: { title:'Solves', key:'Solves', create:Solves, obj:null }
         } } }

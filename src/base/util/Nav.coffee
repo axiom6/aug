@@ -70,13 +70,14 @@ class Nav
 
   dirComp:( dir ) ->
     compKey = @adjCompKey( @compKey, dir )
-    @pub( {  compKey:compKey } )
+    @pub( {  compKey:compKey, source:'Nav.dirComp' } )
     return
 
   dirPrac:( dir ) ->
     adj = @adjPracObj( dir )
     if adj.name isnt 'None'
       obj = {}
+      obj.source = 'Nav.dirPrac'
       obj.compKey = @compKey
       if adj.name  isnt @pracKey
          obj.pracKey = adj.name
@@ -99,6 +100,7 @@ class Nav
 
     if adj.name isnt 'None'
        obj = {}
+       obj.source = 'Nav.dirDisp'
        obj.compKey  = @compKey
        obj.pracKey  = adj.name
        obj.dispKey  = dis.name
@@ -107,24 +109,31 @@ class Nav
        @pub( obj )
     return
 
+  dirNavs:( dir ) ->
+    if @pages[@route]? and dir is 'west' or dir is 'east'
+      @dirPage( dir )
+    else if @navs? and @navs[@route]?
+      route = @navs[@route][dir]
+      obj = { route:route, compKey:route, source:dir }
+      obj.route   = 'Comp' if route is 'Info' or route is 'Know' or route is 'Wise'
+      obj.pageKey = 'Icon' if @pageKey is 'None'
+      @pub( obj )
+    # else
+    #  console.error( 'Nav.dirNavs() no pages or @navs not specified', { dir:dir, route:@route } )
+    return
+
   dirPage:( dir ) ->
-    return if not @pages[@route]?
-    page    = @pages[@route]
-    pageKey = 'None'
-    pageKey = page.pageKeys[0]         if page.pageKey is 'None'
-    pageKey = @movePage(page,dir)      if dir is 'east' or dir is 'west'
-    @pub( { pageKey:pageKey } ) if pageKey isnt 'None'
+    pageKey = @movePage(@pages[@route],dir)
+    @pub( { pageKey:pageKey, source:'Nav.dorPage' } ) if pageKey isnt 'None'
     return
 
   movePage:( page, dir  ) ->
-    if page.pageKey is 'None'
-       page.pageKey  = if dir is 'east' then page.pageKeys[0] else page.pageKeys[page.pageKeys.length-1]
+    if @hasPageKey( page )
+       page.pageKey  = if  dir is 'east' then page.pageKeys[0] else page.pageKeys[page.pageKeys.length-1]
     else
       idx = page.pageKeys.indexOf(page.pageKey)
-      console.log( 'Nav.movePage 1', { pageBeg:page.pageKey, idx:idx, page:page, dir:dir })
       ndx = @range(idx+1) if dir is 'east'
       ndx = @range(idx-1) if dir is 'west'
-      console.log( 'Nav.movePage 2', { pageBeg:page.pageKey, pageEnd:page.pageKeys[ndx], idx:idx, ndx:ndx, page:page, dir:dir })
       page.pageKey = page.pageKeys[ndx]
     page.pageKey
 
@@ -134,6 +143,9 @@ class Nav
     ndx = max-1 if ndx <  0
     ndx
 
+  hasPageKey:( page ) ->
+    not page.pageKey? or page.pageKey is 'None'
+
   setPages:( route, pagesObj ) ->
     @pages[route]          = {}
     @pages[route].pageKey  = 'None'
@@ -142,19 +154,6 @@ class Nav
 
   setPageKey:( route, pageKey ) ->
     @pages[route].pageKey = pageKey if not @pages[route]?
-    return
-
-  dirNavs:( dir ) ->
-    if @pages[@route]? and dir is 'west' or dir is 'east'
-       @dirPage( dir )
-    else if @navs?
-      route = @navs[@route][dir]
-      obj = { route:route, compKey:route, source:dir }
-      obj.route   = 'Comp' if route is 'Info' or route is 'Know' or route is 'Wise'
-      obj.pageKey = 'Icon' if @pageKey is 'None'
-      @pub( obj )
-    else
-      console.error( 'Nav.dirNavs() no pages or @navs not specified', { dir:dir, route:@route } )
     return
 
   adjCompKey:( compKey, dir ) ->
@@ -192,7 +191,5 @@ class Nav
 
   disps:(  compKey, pracKey ) ->
     @batch[compKey].data.pracs[pracKey].disps
-
-
 
 export default Nav

@@ -13,7 +13,7 @@
   
   let Data = {
 
-    data() { return { comp:'Data', datas:[
+    data() { return { route:'Data', datas:[
       { title:'Tables', key:'Tables' },
       { title:'Pivots', key:'Pivots' } ] } },
 

@@ -1,55 +1,52 @@
 
 <template>
   <div>
-    <d-dabs comp="Data" :pages="pages"></d-dabs>
+    <d-tabs route="Tables" :pages="pages"></d-tabs>
     <div class="page">
-      <h1       v-if="isKey('None')">Tables</h1>
-      <t_table1 v-if="isKey('Table1')"></t_table1>
-      <t_table2 v-if="isKey('Table2')"></t_table2>
+      <h1       v-if="isPageKey('None')">Tables</h1>
+      <t_table1 v-if="isPageKey('Table1')"></t_table1>
+      <t_table2 v-if="isPageKey('Table2')"></t_table2>
     </div>
   </div>
 </template>
 
 <script type="module">
   
-  import Dabs   from '../elem/Dabs.vue';
+  import Tabs   from '../elem/Tabs.vue';
   import Table1 from './Table1.vue';
   import Table2 from './Table2.vue';
   
   let Tables = {
     
-    components:{ 'd-dabs':Dabs, 't_table1':Table1, 't_table2':Table2 },
+    components:{ 'd-tabs':Tabs, 't_table1':Table1, 't_table2':Table2 },
 
     data() {
-      return { comp:'Tables', key:'None',
+      return { route:'Tables', pageKey:'None',
         pages:{
           Table1: { title:'Table1', key:'Table1' },
           Table2: { title:'Table2', key:'Table2' } } } },
 
     methods: {
 
-      isKey: function(key) {
-        return this.key === key; },
+      isPageKey: function(pageKey) {
+        return this.pageKey === pageKey; },
 
-      onTabs: function(key) {
-        if( this.pages[key] ) {
-            this.key = key;
-         /* this.create(this.key); */ } },
+      onTabs: function(obj) {
+        if( this.isMyNav( obj, 'Tables', this.pages, obj.pageKey ) ) {
+          this.pageKey = obj.pageKey;
+          this.create(   obj.pageKey ); } },
 
-      create: function( key ) {
-        if( !this.pages[key].created ) {
-          this.pages[key].created = true;
+      create: function( pageKey ) {
+        if( !this.pages[pageKey].created ) {
+          this.pages[pageKey].created = true;
           this.$nextTick( function() { // Wait for DOM to render
-            let elem = this.$refs[key][0];
+            let elem = this.$refs[pageKey][0];
             if( elem===false) {} } ) } }
     },
 
     mounted: function () {
-      this.subscribe( 'Data', this.comp+'.vue', (key) => {
-        if( typeof(key)==='string' ) {
-          this.onTabs( key ); } } );
-      this.onTabs( this.key ); }
-
+      this.subscribe( 'Nav', 'Pivots.vue', (obj) => {
+        this.onTabs( obj ); } ); }
   }
   
   export default Tables;

@@ -37,7 +37,7 @@ Augm = (function() {
       };
       Augm.stream = new Stream(subjects, streamLog);
       Augm.nav = new Nav(Augm.stream, batch, Augm.komps);
-      Augm.cache = new Cache(Augm.stream);
+      //ugm.cache  = new Cache( Augm.stream )
       Augm.vue();
     }
 

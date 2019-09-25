@@ -3,7 +3,7 @@
   <ul>
     <template v-for="komp in komps">
       <li :key="komp.key">
-        <div   v-on:click="doComp(komp)">
+        <div   v-on:click="doComp(komp.key)">
           <div  :style="styleComp(komp.key)"><i :class="komp.icon"></i>{{komp.title}}</div>
         </div>
         <ul v-if="compKey===komp.key"><template v-for="prac in komps[komp.key].pracs" >
@@ -25,34 +25,27 @@
   
   let Tocs = {
     
-    data: function() { return { komps:{}, compKey:'Home', pracKey:'None', dispKey:'None', fromNav:false } },
+    data: function() { return { komps:{}, compKey:'Home', pracKey:'None', dispKey:'None' } },
     
     methods: {
-      
-      doComp: function(komp) {
-        this.compKey = komp.key;
-        let route    = komp.route;
-        let obj      = { route:route, compKey:this.compKey, page:this.nav().pageKey, source:'Toc' }
-        this.pub(obj); },
+      doComp: function(compKey) {
+        this.compKey = compKey;
+        let route    = this.komps[compKey].route;
+        this.pub( { route:route, compKey:compKey, source:'Toc' } ); },
       doPrac: function(pracKey) {
-        this.pracKey =  pracKey
+        this.pracKey = pracKey;
         let route    = this.app()==='Muse' ? 'Prac' : pracKey;
-        let obj      = { route:route, pracKey:pracKey, source:'Toc' }
-        this.pub(obj); },
+        this.pub( { route:route, pracKey:pracKey, source:'Toc' } ); },
       doDisp: function(dispKey) {
-        this.dispKey =  dispKey;
-        let obj      = { route:'Disp', dispKey:dispKey, source:'Toc' }
-        this.pub(obj); },
+        this.dispKey = dispKey;
+        this.pub( { route:'Disp', dispKey:dispKey, source:'Toc' } ); },
       pub: function(obj) {
-        if( !this.fromNav ) {
-          this.nav().pub(obj); }
-        this.fromNav = false; },
+          this.nav().pub(obj); },
       onNav:  function (obj) {
-        this.fromNav = true;
         if( obj.source !== 'Toc' ) {
-          if( this.compKey !== obj.compKey ) { this.doComp( this.kompsTocs()[obj.compKey] ) }
-          if( this.pracKey !== obj.pracKey ) { this.doPrac( obj.pracKey ) }
-          if( this.dispKey !== obj.dispKey ) { this.doDisp( obj.dispKey ) } } },
+          if( this.compKey !== obj.compKey ) { this.compKey = obj.compKey; }
+          if( this.pracKey !== obj.pracKey ) { this.pracKey = obj.pracKey; }
+          if( this.dispKey !== obj.dispKey ) { this.dispKey = obj.dispKey; } } },
       styleComp: function( compKey ) {
         return compKey===this.compKey ? { backgroundColor:'wheat', color:'black', borderRadius:'0 24px 24px 0' }
                                       : { backgroundColor:'#333',  color:'wheat', borderRadius:'0 24px 24px 0' }; },
@@ -103,4 +96,3 @@
                  i { margin-right: 0.25rem; } }
                li:hover { background-color:@theme-back!important; color:@theme-color-tocs-disp!important; } } } } } } }
 </style>
-

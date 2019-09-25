@@ -5155,22 +5155,6 @@
 		"oAP": "/pub/vue/elem/Btns.js",
 		"oF": 0
 		},
-	"/vue/elem/Dabs.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/elem/Dabs.js",
-		"oF": 0
-		},
-	"/vue/elem/Elem.txt": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 0,
-		"oAP": "/vue/elem/Elem.txt",
-		"oF": 0
-		},
 	"/vue/elem/Icon.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -7575,12 +7559,28 @@
 		"oAP": "/zzz/pub/vue/comp/Conn.js",
 		"oF": 0
 		},
+	"/zzz/vue/comp/Dabs.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/comp/Dabs.js",
+		"oF": 0
+		},
 	"/zzz/vue/comp/Desc.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/zzz/pub/vue/comp/Desc.js",
+		"oF": 0
+		},
+	"/zzz/vue/comp/Elem.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/vue/comp/Elem.txt",
 		"oF": 0
 		},
 	"/zzz/vue/comp/Home.vue": {

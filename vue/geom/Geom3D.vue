@@ -3,7 +3,6 @@
 <script type="module">
   
   import GeomND  from './GeomND.vue'
-  import Dabs    from '../elem/Dabs.vue';
   import Lines   from '../../pub/gan/3D/Lines.js';
   import Grids   from '../../pub/gan/3D/Grids.js';
   import Isomet  from '../../pub/gan/3D/Isomet.js';
@@ -15,11 +14,9 @@
   export default {
 
     extends: GeomND,
-    
-    components:{ 'd-dabs':Dabs },
 
     data() {
-      return { comp:'Geom3D', key:'Grids', pages:{
+      return { route:'Geom3D', pageKey:'Grids', pages:{
         Lines:   { title:'Lines',   key:'Lines',   obj:Lines,   created:false },
         Grids:   { title:'Grids',   key:'Grids',   obj:Grids,   created:false },
         Isomet:  { title:'Isomet',  key:'Isomet',  obj:Isomet,  created:false },

@@ -1,9 +1,9 @@
 
 <template>
   <div class="math" ref="Math">
-    <h1 v-if="comp==='Math'">Mathematics</h1>
+    <h1 v-if="route==='Math'">Mathematics</h1>
     <template v-for="math in maths">
-      <router-view :name="comp+math.key"></router-view>
+      <router-view :name="route+math.key"></router-view>
     </template>
   </div>
 </template>
@@ -12,7 +12,7 @@
 
   let Math = {
 
-    data() { return { comp:'Math',
+    data() { return { route:'Math',
       maths:[
         { title:'MathML', key:'ML' },
         { title:'MathEQ', key:'EQ' } ] } },

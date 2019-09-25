@@ -91,11 +91,13 @@ class Mixin
         toRgbaHsv: (hsv) ->
           hsu = if not hsv then [30, 90, 90] else hsv
           Vis.toRgbaHsv(hsu)
-        showPages: (pages, pageKey) ->
+        isMyNav:( obj, route, pages, pageKey ) ->
+          obj.route is route and this.showPages( pages, pageKey )
+        showPages:( pages, pageKey ) ->
           hasPage = false
           for own key, page  of pages
-            page.show = key is pageKey
-            hasPage = true if page.show
+            page.show = key  is pageKey
+            hasPage   = true if page.show
           # console.log( 'Main.showPages()', { pageKey:pageKey, hasPage:hasPage, pages:pages })
           hasPage
         choice:() ->

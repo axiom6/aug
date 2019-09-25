@@ -23,27 +23,21 @@
     
     data() { return { pracObj:null,
       pages:{
-        Dirs: { name:'Dirs', key:'Dirs', show:false },
-        Conn: { name:'Conn', key:'Conn', show:false },
-        Desc: { name:'Desc', key:'Desc', show:false } } } },
+        Dirs: { title:'Dirs', key:'Dirs', show:false },
+        Conn: { title:'Conn', key:'Conn', show:false },
+        Desc: { title:'Desc', key:'Desc', show:false } } } },
     
     methods: {
       
       onPrac: function(pracKey) {
         if( !this.isDef(this.pracObj) || this.pracObj.name !== pracKey ) {
              this.pracObj = this.pracObject( this.nav().compKey, pracKey ); } },
-      onPage: function(pageKey) {
-        let  hasPage = this.showPages( this.pages, pageKey );
-        if( !hasPage ) {
-          this.doPage('Dirs'); } },
       doPage: function(   pageKey ) {
-        this.nav().set( { pageKey:pageKey } );
         this.pages[pageKey].show = true; },
       onNav: function( obj ) {
-        let pageKey = this.nav().pageKey;
-        if( this.nav().route === 'Prac' ) {
+        if( this.isMyNav( obj, 'Prac', this.pages, obj.pageKey ) ) {
           this.onPrac( obj.pracKey );
-          this.onPage(     pageKey ); } }
+          this.doPage( obj.pageKey ); } }
       },
 
     beforeMount: function () {

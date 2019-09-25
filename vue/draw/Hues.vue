@@ -2,8 +2,8 @@
 
 <template>
   <div class="hues" ref="Hues">
-    <d-dabs route="Hues" :pages="pages"></d-dabs>
-    <h1 v-if="key==='Hues'">Hues with MathBox</h1>
+    <d-tabs route="Hues" :pages="pages"></d-tabs>
+    <h1 v-if="pageKey==='Hues'">Hues with MathBox</h1>
     <template v-for="page in pages">
       <div :ref="page.key" v-show="isPage(page.key)" class="page" :key="page.key"></div>
     </template>
@@ -12,15 +12,15 @@
 
 <script type="module">
 
-  import Dabs from '../elem/Dabs.vue';
+  import Tabs from '../elem/Tabs.vue';
   import Box  from '../../pub/math/mbox/Box.js'
 
   let Hues = {
 
-    components:{ 'd-dabs':Dabs },
+    components:{ 'd-tabs':Tabs },
 
     data() {
-      return { comp:'Hues', key:'Hues', pages:{
+      return { route:'Hues', pageKey:'Hues', pages:{
           Color:   { title:'Color',   key:'Color'   },
           Rgbs:    { title:'Rgbs',    key:'Rgbs'    },
           Polar:   { title:'Polar',   key:'Polar'   },
@@ -30,12 +30,13 @@
 
     methods: {
 
-      isPage: function(key) {
-        return this.key === key; },
+      isPage: function(pageKey) {
+        return this.pageKey === pageKey; },
 
-      onTabs: function(key) {
-        this.key =  key;
-        this.doApp( key ); },
+      onTabs: function(obj) {
+        if( this.isMyNav( obj, this.route, this.pages, obj.pageKey ) ) {
+            this.pageKey = obj.pageKey;
+            this.doApp(    obj.pageKey ); } },
 
       size: function() {
         let sz   = {}
@@ -45,12 +46,11 @@
         sz.elemHeight = this.$refs['Hues']['clientHeight'];
         return sz; },
 
-      doApp: function( key ) {
+      doApp: function( pageKey ) {
           this.$nextTick( function() {
-            let elem = this.$refs[key][0];
-            // console.log( 'Hues.doApp()', { key:key, elem:elem } );
+            let elem = this.$refs[pageKey][0];
             if( this.isDef(elem) ) {
-              Box.doApp(key,elem); } } ) }
+              Box.doApp(pageKey,elem); } } ) }
     },
 
     mounted: function () {

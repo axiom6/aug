@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <d-dabs route="Geom" :pages="pages"></d-dabs>
+    <d-tabs :route="route" :pages="pages"></d-tabs>
     <template v-for="page in pages">
       <div :ref="page.key" v-show="isPage(page.key)" class="page" :key="page.key"></div>
     </template>
@@ -10,37 +10,37 @@
 
 <script type="module">
   
-  import Dabs  from '../elem/Dabs.vue';
+  import Tabs  from '../elem/Tabs.vue';
   import Style from '../../pub/gan/lib/Style.js';
 
-  export default {
+  let GeomND = {
 
-    components:{ 'd-dabs':Dabs },
+    components:{ 'd-tabs':Tabs },
 
     methods: {
 
-      isPage: function(key) {
-        return this.key === key; },
+      isPage: function(pageKey) {
+        return this.pageKey === pageKey; },
 
-      onTabs: function(key) {
-        if( this.pages[key] ) {
-            this.key = key;
-            this.create(this.key); } },
+      onTabs: function(obj) {
+        if( this.isMyNav( obj, this.route, this.pages, obj.pageKey ) ) {
+          this.pageKey = obj.pageKey;
+          this.create(this.pageKey); } },
 
-      create: function( key ) {
-        if( !this.pages[key].created ) {
-             this.pages[key].created = true;
+      create: function( pageKey ) {
+        if( !this.pages[pageKey].created ) {
+             this.pages[pageKey].created = true;
              this.$nextTick( function() { // Wait for DOM to render
-               window['Geom'][key] = new Style( this.$refs[key][0] );
-               this.pages[key].obj.ga(); } ) } }
+               window['Geom'][pageKey] = new Style( this.$refs[pageKey][0] );
+               this.pages[pageKey].obj.ga(); } ) } }
     },
 
     mounted: function () {
-      this.subscribe( 'Geom', this.comp+'.vue', (key) => {
-        if( typeof(key)==='string' ) {
-          this.onTabs( key ); } } );
-      this.onTabs( this.key ); }
+      this.subscribe(  'Nav', 'Draw.vue', (obj) => {
+        this.onTabs(obj); } ) }
     }
+    
+    export default GeomND;
 
 </script>
 

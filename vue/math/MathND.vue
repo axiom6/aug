@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <d-dabs route="Math" :pages="pages"></d-dabs>
+    <d-tabs :route="route" :pages="pages"></d-tabs>
     <div class="comp">
       <template v-for="exp in exps">
         <div :class="exp.klass" :ref="exp.klass"></div>
@@ -13,25 +13,25 @@
 
 <script type="module">
 
-  import Dabs  from '../elem/Dabs.vue';
+  import Tabs  from '../elem/Tabs.vue';
 
   let MathND = {
 
-    components:{ 'd-dabs':Dabs },
+    components:{ 'd-tabs':Tabs },
 
     methods: {
 
-      isPage: function(key) {
-        return this.key === key; },
+      isPage: function(pageKey) {
+        return this.pageKey === pageKey; },
 
-      onTabs: function(key) {
-        if( this.pages[key] ) {
-          this.key = key;
-          this.create(this.key);
+      onTabs: function(obj) {
+        if( this.isMyNav( obj, this.route, this.pages, obj.pageKey ) ) {
+          this.pageKey = obj.pageKey;
+          this.create(   obj.pageKey );
           this.mathML(this.exps); } },
 
-      create: function( key ) {
-        let page = this.pages[key];
+      create: function( pageKey ) {
+        let page = this.pages[pageKey];
         if( page.obj===null ) {
             page.obj = new page.create(); }
         let exps = page.obj.math();
@@ -59,10 +59,8 @@
     },
 
     mounted: function () {
-      this.subscribe( 'Math', this.comp+'.vue', (key) => {
-        if( typeof(key)==='string' ) {
-          this.onTabs( key ); } } );
-      this.onTabs( this.key ); }
+      this.subscribe( 'Nav', 'MathND.vue', (obj) => {
+          this.onTabs( obj ); } ); }
   }
   
 export default MathND;

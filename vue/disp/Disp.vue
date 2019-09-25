@@ -15,9 +15,9 @@
 
     components:{ 'd-tabs':Tabs, 'd-desc':Desc },
     
-    data() { return { dispObj:null,
+    data() { return { compKey:'Desc', dispObj:null,
       pages:{
-        Desc: { name:'Desc', key:'Desc', show:false } } } },
+        Desc: { title:'Desc', key:'Desc', show:false } } } },
     
     methods: {
       
@@ -25,24 +25,18 @@
         this.dispObj  = this.dispObject( this.nav().compKey, this.nav().pracKey, dispKey );
         if( !this.isDef(this.dispObj) ) {
           console.error('Disp.onDisp() disp null',{comp:this.nav().compKey,prac:this.nav().pracKey,disp:dispKey})}},
-      onPage: function(pageKey) {
-        let  hasPage = this.showPages( this.pages, pageKey );
-        if( !hasPage ) {
-          this.doPage('Desc'); } },
       doPage: function( pageKey ) {
-        this.nav().set( {pageKey:pageKey } );
         this.pages[pageKey].show = true; },
       onNav:  function (obj) {
-        let pageKey = this.nav().pageKey;
-        if( this.nav().route === 'Disp' ) {
+        if( this.isMyNav( obj, 'Disp', this.pages, obj.pageKey ) ) {
           this.onDisp( obj.dispKey );
-          this.onPage(     pageKey ); } } },
+          this.doPage( obj.pageKey ); } } },
 
     beforeMount: function() {
       this.onNav( { dispKey:this.nav().dispKey } ); },
 
     mounted: function () {
-      this.subscribe(  "Nav", this.comp+'Disp.Disp.vue', (obj) => {
+      this.subscribe(  "Nav", 'Disp.vue', (obj) => {
         this.onNav(obj); } ); }
   }
   

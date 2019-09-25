@@ -2,7 +2,7 @@
 <template>
   <div class="tabs">
     <template v-for="pageObj in pages">
-      <div :class="classTab(pageObj.name)" @click="doPage(pageObj.key)">{{pageObj.name}}</div>
+      <div :class="classTab(pageObj.key)" @click="doPage(pageObj.key)">{{pageObj.title}}</div>
     </template>
   </div>
 </template>
@@ -16,23 +16,20 @@
     data() { return { pageKey:'None', pageObj:null } },
     
     methods: {
-      onPage: function (obj) {
-        if( this.route === obj.route ) {
-          this.pageKey = obj.pageKey; } },
+      onPage: function (pageKey) {
+          this.pageKey = pageKey; },
       doPage: function (pageKey) {
         this.onPage( pageKey );
-        let obj = { route:this.route, pageKey:pageKey };
+        let obj = { route:this.route, pageKey:pageKey, source:'Tabs' };
         this.nav().pub( obj ); },
       classTab: function (pageKey) {
         return this.pageKey===pageKey ? 'tab-active' : 'tab'; } },
 
-  // beforeMount: function() {
-  //    this.onPage(this.nav()); },
-
     mounted: function() {
       this.nav().setPages( this.route, this.pages );
       this.subscribe(  "Nav", 'Tabs', (obj) => {
-          this.doPage(obj); } ); }
+        if( obj.source !== 'Tabs' && obj.route === this.route ) {
+          this.onPage(obj.pageKey); } } ); }
     }
   
 </script>
