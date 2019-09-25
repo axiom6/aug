@@ -2,7 +2,7 @@
 
 <template>
   <div class="note">
-    <n-tabs :pages="pages"></n-tabs>  <!-- init="Stand" -->
+    <n-tabs route="Note" :pages="pages"></n-tabs>  <!-- init="Stand" -->
     <h1 v-if="myRoute()">Notebooks</h1>
     <template v-for="page in pages">
       <router-view :name="name(page)" :id="page.key"></router-view>

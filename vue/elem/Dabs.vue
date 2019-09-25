@@ -1,8 +1,8 @@
 
 <template>
   <div class="dabs">
-    <template v-for="page in pages">
-      <div :class="classTab(page.key)" @click="pubTab(page.key)">{{page.title}}</div>
+    <template v-for="pageObj in pages">
+      <div :class="classTab(pageObj.key)" @click="doPage(pageObj.key)">{{pageObj.title}}</div>
     </template>
   </div>
 </template>
@@ -11,20 +11,24 @@
 
   export default {
 
-    props: { comp:String, pages:Object, init:String },
+    props: { route:String, pages:Object },
 
-    data() { return { key:this.init } },
+    data() { return { pageKey:'None', pageObj:null } },
 
     methods: {
-      pubTab: function (key) {
-        this.key = key;
-        this.publish( this.comp, key ); },  // Key is a page
-      classTab: function (key) {
-        return this.key===key ? 'tab-active' : 'tab'; } },
+      onPage: function (obj) {
+        if( this.route === obj.route ) {
+            this.pageKey = obj.pageKey; } },
+      doPage: function(pageKey) {
+        this.onPage( pageKey );
+        this.nav().pub( { route:this.route, pageKey:pageKey } ); },
+      classTab: function (pageKey) {
+        return this.pageKey===pageKey ? 'tab-active' : 'tab'; } },
 
     mounted: function () {
-      this.subscribe( 'Geom', 'Dabs.vue', (key) => {
-        this.classTab(key) } ); }
+      this.nav().setPages( this.route, this.pages );
+      this.subscribe( 'Nav', 'Dabs.vue', (obj) => {
+          this.onPage(obj); } ); }
 
   }
 

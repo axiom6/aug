@@ -2,7 +2,7 @@
 <template>
   <div class="tabs">
     <template v-for="pageObj in pages">
-      <div :class="clPage(pageObj.name)" @click="doPage(pageObj.key)">{{pageObj.name}}</div>
+      <div :class="classTab(pageObj.name)" @click="doPage(pageObj.key)">{{pageObj.name}}</div>
     </template>
   </div>
 </template>
@@ -11,28 +11,28 @@
 
   export default {
 
-    props: { pages:Object },
+    props: { route:String, pages:Object },
     
     data() { return { pageKey:'None', pageObj:null } },
     
     methods: {
-      onPage: function (pageKey) {
-        this.pageKey  = pageKey; },
+      onPage: function (obj) {
+        if( this.route === obj.route ) {
+          this.pageKey = obj.pageKey; } },
       doPage: function (pageKey) {
-        this.onPage( pageKey )
-        let obj = { pageKey:pageKey };
-        if( this.isDef(this.pages[pageKey].route) ) {
-          obj.route =  this.pages[pageKey].route }
+        this.onPage( pageKey );
+        let obj = { route:this.route, pageKey:pageKey };
         this.nav().pub( obj ); },
-      clPage: function (pageKey) {
+      classTab: function (pageKey) {
         return this.pageKey===pageKey ? 'tab-active' : 'tab'; } },
 
-    beforeMount: function() {
-      this.onPage(this.nav().pageKey); },
+  // beforeMount: function() {
+  //    this.onPage(this.nav()); },
 
     mounted: function() {
-        this.subscribe(  "Nav", 'Tabs', (obj) => {
-          this.onPage(obj.pageKey); } ); }
+      this.nav().setPages( this.route, this.pages );
+      this.subscribe(  "Nav", 'Tabs', (obj) => {
+          this.doPage(obj); } ); }
     }
   
 </script>

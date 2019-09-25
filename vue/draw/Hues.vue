@@ -2,7 +2,7 @@
 
 <template>
   <div class="hues" ref="Hues">
-    <d-dabs comp="Hues" :pages="pages"></d-dabs>
+    <d-dabs route="Hues" :pages="pages"></d-dabs>
     <h1 v-if="key==='Hues'">Hues with MathBox</h1>
     <template v-for="page in pages">
       <div :ref="page.key" v-show="isPage(page.key)" class="page" :key="page.key"></div>
@@ -54,7 +54,7 @@
     },
 
     mounted: function () {
-      this.subscribe(  'Hues', 'Hues.vue', (obj) => {
+      this.subscribe(  'Nav', 'Hues.vue', (obj) => {
         this.onTabs(obj); } ); }
   }
 

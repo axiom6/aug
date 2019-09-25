@@ -1,7 +1,7 @@
 
 <template>
   <div class="comp" ref="Comp" title="Comp">
-    <b-tabs :pages="pages"></b-tabs>
+    <b-tabs route="Comp" :pages="pages"></b-tabs>
     <template v-for="pracObj in compObj">
       <div   :class="pracObj.dir" :key="pracObj.name" :ref="pracObj.name" :title="pracObj.name">
         <p-icon v-show="pages['Icon'].show" :pracObj="pracObj"></p-icon>

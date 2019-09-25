@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <d-dabs comp="Geom" :pages="pages" :init="key"></d-dabs>
+    <d-dabs route="Geom" :pages="pages"></d-dabs>
     <template v-for="page in pages">
       <div :ref="page.key" v-show="isPage(page.key)" class="page" :key="page.key"></div>
     </template>

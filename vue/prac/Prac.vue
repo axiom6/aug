@@ -1,7 +1,7 @@
 
 <template>
   <div   class="pane">
-    <b-tabs :pages="pages"></b-tabs>
+    <b-tabs route="Prac" :pages="pages"></b-tabs>
     <div class="prac">
       <p-dirs v-show="pages['Dirs'].show" :pracObj="pracObj"></p-dirs>
       <p-conn   v-if="pages['Conn'].show" :pracObj="pracObj"></p-conn>

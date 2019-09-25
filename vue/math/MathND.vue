@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    <d-dabs comp="Math" :pages="pages" :init="key"></d-dabs>
+    <d-dabs route="Math" :pages="pages"></d-dabs>
     <div class="comp">
       <template v-for="exp in exps">
         <div :class="exp.klass" :ref="exp.klass"></div>

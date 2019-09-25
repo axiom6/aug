@@ -20,7 +20,7 @@ Nav = class Nav {
     this.dispKey = 'None';
     this.dispObj = null;
     this.pageKey = 'Icon';
-    this.pageKeys = ['Icon', 'Dirs', 'Conn', 'Desc'];
+    this.pages = {};
     this.compass = "";
     this.keyEvents();
   }
@@ -65,15 +65,6 @@ Nav = class Nav {
     }
   }
 
-  setPages(array) {
-    var i, len, obj;
-    this.pageKeys = [];
-    for (i = 0, len = array.length; i < len; i++) {
-      obj = array[i];
-      this.pageKeys.push(obj.key);
-    }
-  }
-
   tap() {
     console.log('Nav.tap()');
   }
@@ -81,7 +72,6 @@ Nav = class Nav {
   keyEvents() {
     var keyDir;
     keyDir = (event) => {
-      // console.log( 'Nav.keyEvents()', event.key )
       switch (event.key) {
         case 'ArrowRight':
           return this.dir('east', event);
@@ -119,9 +109,6 @@ Nav = class Nav {
         break;
       case 'Disp':
         this.dirDisp(dr);
-        break;
-      case 'Page':
-        this.dirPage(dr);
         break;
       default:
         this.dirNavs(dr);
@@ -177,28 +164,85 @@ Nav = class Nav {
   }
 
   dirPage(dir) {
-    var idx, obj, page;
-    if (this.pageKeys.length > 0 && this.pageKey !== 'None') {
-      idx = this.pageKeys.indexOf(this.pageKey);
-      if (dir === 'east' && idx < this.pageKeys.length - 1) {
-        page = this.pageKeys[idx++];
-      }
-      if (dir === 'west' && idx > 1) {
-        page = this.pageKeys[idx--];
-      }
-      if (page !== this.pageKey) {
-        obj = {};
-        obj.pageKey = page;
-        this.pub(obj);
-      }
+    var page, pageKey;
+    if (this.pages[this.route] == null) {
+      return;
+    }
+    page = this.pages[this.route];
+    pageKey = 'None';
+    if (page.pageKey === 'None') {
+      pageKey = page.pageKeys[0];
+    }
+    if (dir === 'east' || dir === 'west') {
+      pageKey = this.movePage(page, dir);
+    }
+    if (pageKey !== 'None') {
+      this.pub({
+        pageKey: pageKey
+      });
+    }
+  }
+
+  movePage(page, dir) {
+    var idx, ndx;
+    if (page.pageKey === 'None') {
+      page.pageKey = dir === 'east' ? page.pageKeys[0] : page.pageKeys[page.pageKeys.length - 1];
     } else {
-      this.dirNone(dr);
+      idx = page.pageKeys.indexOf(page.pageKey);
+      console.log('Nav.movePage 1', {
+        pageBeg: page.pageKey,
+        idx: idx,
+        page: page,
+        dir: dir
+      });
+      if (dir === 'east') {
+        ndx = this.range(idx + 1);
+      }
+      if (dir === 'west') {
+        ndx = this.range(idx - 1);
+      }
+      console.log('Nav.movePage 2', {
+        pageBeg: page.pageKey,
+        pageEnd: page.pageKeys[ndx],
+        idx: idx,
+        ndx: ndx,
+        page: page,
+        dir: dir
+      });
+      page.pageKey = page.pageKeys[ndx];
+    }
+    return page.pageKey;
+  }
+
+  range(idx, max) {
+    var ndx;
+    ndx = idx;
+    if (ndx >= max) {
+      ndx = 0;
+    }
+    if (ndx < 0) {
+      ndx = max - 1;
+    }
+    return ndx;
+  }
+
+  setPages(route, pagesObj) {
+    this.pages[route] = {};
+    this.pages[route].pageKey = 'None';
+    this.pages[route].pageKeys = Object.keys(pagesObj);
+  }
+
+  setPageKey(route, pageKey) {
+    if (this.pages[route] == null) {
+      this.pages[route].pageKey = pageKey;
     }
   }
 
   dirNavs(dir) {
     var obj, route;
-    if (this.navs != null) {
+    if ((this.pages[this.route] != null) && dir === 'west' || dir === 'east') {
+      this.dirPage(dir);
+    } else if (this.navs != null) {
       route = this.navs[this.route][dir];
       obj = {
         route: route,
@@ -213,7 +257,7 @@ Nav = class Nav {
       }
       this.pub(obj);
     } else {
-      console.error('Nav.dirNavs() @navs not specified', {
+      console.error('Nav.dirNavs() no pages or @navs not specified', {
         dir: dir,
         route: this.route
       });

@@ -1,7 +1,7 @@
 
 <template>
   <div class="disd">
-    <d-tabs :pages="pages"></d-tabs>
+    <d-tabs route="Disp" :pages="pages"></d-tabs>
     <d-desc v-if="pages['Desc'].show" :dispObj="dispObj"></d-desc>
   </div>
 </template>

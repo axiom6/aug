@@ -2,8 +2,8 @@
 
 <template>
   <div class="draw" ref="Draw">
-    <d-dabs comp="Draw" :pages="pages"></d-dabs>
-    <h1 v-if="key==='Draw'">Drawings in D3</h1>
+    <d-dabs route="Draw" :pages="pages"></d-dabs>
+    <h1 v-if="pageKey==='Draw'">Drawings in D3</h1>
     <template v-for="page in pages">
       <div :ref="page.key" v-show="isPage(page.key)" class="page" :key="page.key"></div>
     </template>
@@ -20,7 +20,7 @@
     components:{ 'd-dabs':Dabs },
 
     data() {
-      return { comp:'Draw', key:'Draw', drew:null, pages:{
+      return { route:'Draw', pageKey:'Draw', drew:null, pages:{
         Wheel:   { title:'Wheel',   key:'Wheel',   obj:null },
         Axes:    { title:'Axes',    key:'Axes',    obj:null },
         Chord:   { title:'Chord',   key:'Chord',   obj:null },
@@ -32,11 +32,12 @@
     methods: {
       
       isPage: function(key) {
-        return this.key === key; },
+        return this.pageKey === key; },
       
-      onTabs: function(key) {
-        this.key =  key;
-        this.create(key); },
+      onTabs: function(obj) {
+        if( this.route === obj.route ) {
+            this.pageKey = obj.pageKey;
+            this.create(this.pageKey); } },
 
       size: function() {
         let sz   = {}
@@ -54,7 +55,7 @@
     },
 
     mounted: function () {
-      this.subscribe(  'Draw', 'Draw.vue', (obj) => {
+      this.subscribe(  'Nav', 'Draw.vue', (obj) => {
         this.onTabs(obj); } );
       this.$nextTick( function() {
         this.drew = new Drew( this.stream(), this.$refs['Draw'], this.size() ); } ) }
