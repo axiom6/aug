@@ -7,11 +7,11 @@
           <div  :style="styleComp(komp.key)"><i :class="komp.icon"></i>{{komp.title}}</div>
         </div>
         <ul v-if="compKey===komp.key"><template v-for="prac in komps[komp.key].pracs" >
-          <li v-on:click="doPrac(prac.name)" :style="stylePrac(prac.hsv)" :key="prac.name">
+          <li v-on:click="doPrac(prac.name)" :style="style(prac)" :key="prac.name">
             <i :class="prac.icon"></i>
             <span>{{prac.name}}</span>
             <ul v-show="pracKey===prac.name"><template v-for="disp in prac.disps">
-              <li v-on:click.stop="doDisp(disp.name)" :style="styleDisp(disp.hsv)" :key="disp.name">
+              <li v-on:click.stop="doDisp(disp.name)" :style="style(disp)" :key="disp.name">
                 <i :class="disp.icon"></i>{{disp.name}}</li>
             </template></ul>
           </li>
@@ -49,10 +49,8 @@
       styleComp: function( compKey ) {
         return compKey===this.compKey ? { backgroundColor:'wheat', color:'black', borderRadius:'0 24px 24px 0' }
                                       : { backgroundColor:'#333',  color:'wheat', borderRadius:'0 24px 24px 0' }; },
-      stylePrac: function( hsv ) {
-        return { backgroundColor:this.toRgbaHsv(hsv) }; },
-      styleDisp: function( hsv ) {
-        return { backgroundColor:this.toRgbaHsv(hsv) }; },
+      style: function( ikwObj ) {
+        return this.styleHsv(ikwObj); },
       filterPracs: function(pracs,kompKey) {
         let filt = {}
         for( let key in pracs ) {

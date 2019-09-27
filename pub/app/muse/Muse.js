@@ -9,8 +9,6 @@ import Stream from '../../base/util/Stream.js';
 
 import Nav from '../../base/util/Nav.js';
 
-import Cache from '../../base/util/Cache.js';
-
 import Mixin from '../../base/vue/Mixin.js';
 
 import Vue from '../../lib/vue/vue.esm.browser.js';
@@ -31,16 +29,16 @@ Muse = (function() {
       var infoSpec, subjects;
       Muse.Batch = batch; // Not necessary here, but assigned for compatibilitry
       Muse.app = 'Muse';
-      subjects = ["Info", "Know", "Wise", "Cube", "Menu", "Page", "Nav", "Toc", "Cache"];
+      subjects = ["Nav"];
       infoSpec = {
-        subscribe: false,
+        subscribe: true,
         publish: false,
         subjects: subjects
       };
       Muse.stream = new Stream(subjects, infoSpec);
       Muse.nav = new Nav(Muse.stream, batch, Muse.komps);
       Muse.build = new Build(batch);
-      Muse.cache = new Cache(Muse.stream);
+      //use.cache  = new Cache( Muse.stream )
       Muse.mergePracsPrin();
       //ain.build.logByColumn()
       Muse.vue();

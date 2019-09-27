@@ -136,10 +136,20 @@ Mixin = class Mixin {
         dispObject: function(compKey, pracKey, dispKey) {
           return this.disps(compKey, pracKey)[dispKey];
         },
+        styleHsv: function(ikwObj) {
+          var hsv;
+          hsv = [30, 90, 90];
+          if (this.isDef(ikwObj) && this.isDef(ikwObj.hsv)) {
+            hsv = ikwObj.hsv;
+          } else {
+            console.error('Mixin.styleHvv() ikwObj or ikwObj.hsv not defined');
+          }
+          return {
+            backgroundColor: Vis.toRgbaHsv(hsv)
+          };
+        },
         toRgbaHsv: function(hsv) {
-          var hsu;
-          hsu = !hsv ? [30, 90, 90] : hsv;
-          return Vis.toRgbaHsv(hsu);
+          return Vis.toRgbaHsv(hsv);
         },
         isMyNav: function(obj, route, pages, pageKey) {
           return obj.route === route && this.showPages(pages, pageKey);
@@ -157,6 +167,26 @@ Mixin = class Mixin {
           }
           // console.log( 'Main.showPages()', { pageKey:pageKey, hasPage:hasPage, pages:pages })
           return hasPage;
+        },
+        resetPage: function(pageNew, pages, pageKey) {
+          var hasPage;
+          hasPage = this.showPages(pages, pageKey);
+          if (hasPage) {
+            return pageKey;
+          } else {
+            return pageNew;
+          }
+        },
+        activePage: function(pages) {
+          var page, pageKey;
+          for (pageKey in pages) {
+            if (!hasProp.call(pages, pageKey)) continue;
+            page = pages[pageKey];
+            if (page.show) {
+              return pageKey;
+            }
+          }
+          return 'None';
         },
         choice: function() {
           return Mixin.Main.Batch.Choice.data;

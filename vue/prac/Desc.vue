@@ -1,12 +1,12 @@
 
 <template>
   <div   class="desdp">
-    <div class="cen" @click="doPrac(pracObj.name)" :style="style(pracObj.hsv)">
+    <div class="cen" @click="doPrac(pracObj.name)" :style="style(pracObj)">
       <div class="deadp"><d-icon :icon="pracObj.icon" :name="pracObj.name" :size="2" ></d-icon></div>
       <div class="summp">{{pracObj.desc}}</div>
     </div>
     <template v-for="dispObj in pracObj.disps">
-      <div   :class="dispObj.dir" @click="doDisp(dispObj.name)" :style="style(dispObj.hsv)">
+      <div   :class="dispObj.dir" @click="doDisp(dispObj.name)" :style="style(dispObj)">
         <div class="desp">
           <d-icon class="iconp" :icon="dispObj.icon" :name="dispObj.name" :size="2" ></d-icon>
           <div    class="summp">{{dispObj.desc}}</div>
@@ -44,8 +44,8 @@
       doDisp: function (dispKey) {
         let obj = { route:"Disp", pracKey:this.pracObj.name, dispKey:dispKey };
         this.nav.pub( obj ); },
-      style: function( hsv ) {
-        return { backgroundColor:this.toRgbaHsv(hsv) }; },
+      style: function( ikwObj ) {
+        return this.styleHsv(ikwObj); },
       clArea: function() {
         //if( areaObj===false ) {}
         let  klass = 'areb'+this.iarea;

@@ -37,6 +37,9 @@ Nav = class Nav {
       dispKey: this.dispKey,
       pageKey: this.pageKey
     };
+    if (change.pageKey != null) {
+      obj.pageKey = change.pageKey; // Bandaid fix
+    }
     obj.source = change.source != null ? change.source : 'None';
     console.log('Nav.pub()', obj);
     this.stream.publish('Nav', obj);
@@ -62,7 +65,11 @@ Nav = class Nav {
       if (!hasProp.call(obj, key)) continue;
       val = obj[key];
       this[key] = val;
+      if (key === 'pageKey') {
+        console.log('Nav.set() key', key, val, this[key]);
+      }
     }
+    console.log('Nav.set() obj', obj);
   }
 
   tap() {

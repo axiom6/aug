@@ -28,7 +28,8 @@
       doPage: function( pageKey ) {
         this.pages[pageKey].show = true; },
       onNav:  function (obj) {
-        if( this.isMyNav( obj, 'Disp', this.pages, obj.pageKey ) ) {
+        obj.pageKey = this.resetPage( 'Desc', this.pages, obj.pageKey );
+        if( this.isMyNav(    obj,     'Disp', this.pages, obj.pageKey ) ) {
           this.onDisp( obj.dispKey );
           this.doPage( obj.pageKey ); } } },
 

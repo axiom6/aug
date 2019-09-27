@@ -88,9 +88,15 @@ class Mixin
           this.pracs(compKey)[pracKey]
         dispObject: (compKey, pracKey, dispKey) ->
           this.disps(compKey, pracKey)[dispKey]
+        styleHsv: (ikwObj) ->
+          hsv = [30, 90, 90]
+          if this.isDef(ikwObj) and this.isDef(ikwObj.hsv)
+            hsv = ikwObj.hsv
+          else
+            console.error( 'Mixin.styleHvv() ikwObj or ikwObj.hsv not defined' )
+          { backgroundColor:Vis.toRgbaHsv(hsv) }
         toRgbaHsv: (hsv) ->
-          hsu = if not hsv then [30, 90, 90] else hsv
-          Vis.toRgbaHsv(hsu)
+          Vis.toRgbaHsv(hsv)
         isMyNav:( obj, route, pages, pageKey ) ->
           obj.route is route and this.showPages( pages, pageKey )
         showPages:( pages, pageKey ) ->
@@ -100,6 +106,13 @@ class Mixin
             hasPage   = true if page.show
           # console.log( 'Main.showPages()', { pageKey:pageKey, hasPage:hasPage, pages:pages })
           hasPage
+        resetPage:( pageNew, pages, pageKey ) ->
+          hasPage =  this.showPages( pages, pageKey )
+          if hasPage then pageKey else pageNew
+        activePage:( pages ) ->
+          for own  pageKey, page of pages
+            return pageKey if page.show
+          return 'None'
         choice:() ->
           Mixin.Main.Batch.Choice.data
         choices:( name ) ->

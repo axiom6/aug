@@ -23,9 +23,8 @@
     data() { return { areaObj:null, iarea:1 } },
 
     methods: {
-      style: function (dispObj) {
-        let hsv = this.isDef(dispObj) ? dispObj.hsv : [30,90,90];
-        return {backgroundColor: this.toRgbaHsv(hsv)}; },
+      style: function (ikwObj) {
+        return this.styleHsv(ikwObj); },
       clArea: function() {
         let  klass = 'area'+this.iarea;
         this.iarea = this.iarea === 3 ? 1 : this.iarea+1;

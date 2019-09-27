@@ -38,13 +38,14 @@
       isRows: function () {
         return true; },
       onNav:  function (obj) {
-        if( this.isMyNav( obj, 'Prin', this.pages, obj.pageKey ) ) {
+        obj.pageKey = this.resetPage( 'Icon', this.pages, obj.pageKey );
+        if( this.isMyNav(  obj,       'Prin', this.pages, obj.pageKey ) ) {
           this.onComp(obj.compKey);
           this.doPage(obj.pageKey); } }
       },
 
     beforeMount: function() {
-      this.onNav( { compKey:this.nav().compKey } ); },
+      this.onNav( { route:'Prin', compKey:'Prin', pageKey:'Icon' } ); },
 
     mounted: function () {
       this.subscribe( 'Nav', 'Prin.vue', (obj) => {

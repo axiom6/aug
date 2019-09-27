@@ -17,6 +17,7 @@
     
     methods: {
       onPage: function (pageKey) {
+          console.log( 'Tabs.onPage()', { route:this.route, pageOld:this.pageKey, pageNew:pageKey } );
           this.pageKey = pageKey; },
       doPage: function (pageKey) {
         this.onPage( pageKey );
@@ -27,9 +28,14 @@
 
     mounted: function() {
       this.nav().setPages( this.route, this.pages );
-      this.subscribe(  "Nav", 'Tabs', (obj) => {
+      let pageKey = this.activePage(   this.pages );
+      this.onPage(pageKey);
+      this.subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {
         if( obj.source !== 'Tabs' && obj.route === this.route ) {
-          this.onPage(obj.pageKey); } } ); }
+          let pageKey = this.activePage( this.pages );
+          console.log( 'Tabs.subscribe()',
+            { route:this.route, pageOld:this.pageKey, pageObj:obj.pageKey, pageKey:pageKey } );
+          this.onPage(pageKey); } } ); }
     }
   
 </script>

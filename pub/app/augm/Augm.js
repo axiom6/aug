@@ -6,8 +6,6 @@ import Stream from '../../base/util/Stream.js';
 
 import Nav from '../../base/util/Nav.js';
 
-import Cache from '../../base/util/Cache.js';
-
 import Mixin from '../../base/vue/Mixin.js';
 
 import Vue from '../../lib/vue/vue.esm.browser.js';
@@ -29,9 +27,9 @@ Augm = (function() {
       Augm.Batch = batch; // Not necessary here, but assigned for compatibilitry
       window['Geom'] = {};
       Augm.app = 'Augm';
-      subjects = ["Draw", "Note", "Menu", "Tabs", "Geom", "Data", "Cache", "Navd"];
+      subjects = ["Nav"];
       streamLog = {
-        subscribe: false,
+        subscribe: true,
         publish: false,
         subjects: subjects
       };

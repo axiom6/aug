@@ -1,12 +1,12 @@
 
 <template>
   <div class="dirs-prac">
-    <div class="cen" :style="style(pracObj.hsv)">
+    <div class="cen" :style="style(pracObj)">
       <d-disp v-if="isDisp()" :dispObj="pracObj"></d-disp>
       <d-dims v-if="isDims()" :dispObj="pracObj"></d-dims>
     </div>
     <template  v-for="dispObj in pracObj.disps">
-      <div :class="dispObj.dir" :style="style(dispObj.hsv)">
+      <div :class="dispObj.dir" :style="style(dispObj)">
         <d-disp v-if="isDisp()" :dispObj="dispObj"></d-disp>
         <d-dims v-if="isDims()" :dispObj="dispObj"></d-dims>
       </div>
@@ -36,8 +36,12 @@
         return this.pracObj.row === 'Dim'; },
       isDisp: function () {
         return this.pracObj.row !== 'Dim'; },
-      style: function( hsv ) {
-        return { backgroundColor:this.toRgbaHsv(hsv) }; } },
+      style: function( ikwObj ) {
+        return this.styleHsv(ikwObj); } },
+
+    mounted: function () {
+      if( !this.isDef(this.pracObj) ) {
+        console.error( 'prac.Dirs.mounted() pracObj not defined' ); } }
     
   }
 

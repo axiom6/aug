@@ -1,7 +1,7 @@
 
 <template>
   <div class="dirs">
-    <div class="cen" :style="style(pracObj.hsv)">
+    <div class="cen" :style="style(pracObj)">
       <div class="disp" @click="doPrac(pracObj.name)">
         <i   :class="pracObj.icon"></i>
         <span class="name">{{pracObj.name}}</span>
@@ -9,7 +9,7 @@
       </div>
     </div>
     <template  v-for="dispObj in pracObj.disps">
-      <div :class="dispObj.dir" :style="style(dispObj.hsv)"  :ref="dispObj.name" :title="dispObj.name">
+      <div :class="dispObj.dir" :style="style(dispObj)"  :ref="dispObj.name" :title="dispObj.name">
         <div class="disp" @click="doDisp(prac.name,dispObj.name)">
           <i   :class="dispObj.icon"></i>
           <span class="name">{{dispObj.name}}</span>
@@ -36,8 +36,8 @@
       doDisp: function (pracKey,dispKey) {
         let obj = { route:"Disp", pracKey:pracKey, dispKey:dispKey };
         this.nav.pub( obj ); },
-      style: function( hsv ) {
-        return { backgroundColor:this.toRgbaHsv(hsv) }; } }
+      style: function( ikwObj ) {
+        return this.styleHsv(ikwObj); } }
   }
 
   export default Dirs;

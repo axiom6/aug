@@ -3,7 +3,7 @@ import Data    from '../../base/util/Data.js'
 import Build   from '../../ikw/cube/Build.js'
 import Stream  from '../../base/util/Stream.js'
 import Nav     from '../../base/util/Nav.js'
-import Cache   from '../../base/util/Cache.js'
+#mport Cache   from '../../base/util/Cache.js'
 
 import Mixin  from '../../base/vue/Mixin.js'
 import Vue    from '../../lib/vue/vue.esm.browser.js'
@@ -36,12 +36,12 @@ class Muse
   Muse.init =   ( batch ) ->
     Muse.Batch  = batch # Not necessary here, but assigned for compatibilitry
     Muse.app    = 'Muse'
-    subjects    = ["Info","Know","Wise","Cube","Menu","Page","Nav","Toc","Cache"]
-    infoSpec    = { subscribe:false, publish:false, subjects:subjects}
+    subjects    = ["Nav"]
+    infoSpec    = { subscribe:true, publish:false, subjects:subjects}
     Muse.stream = new Stream( subjects, infoSpec )
     Muse.nav    = new Nav(   Muse.stream, batch, Muse.komps )
     Muse.build  = new Build( batch )
-    Muse.cache  = new Cache( Muse.stream )
+    #use.cache  = new Cache( Muse.stream )
     Muse.mergePracsPrin()
     #ain.build.logByColumn()
     Muse.vue()

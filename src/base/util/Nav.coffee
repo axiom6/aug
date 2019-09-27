@@ -22,6 +22,7 @@ class Nav
     routeChanged = change.route? and change.route isnt @route
     @set( change )
     obj = { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey, pageKey:@pageKey }
+    obj.pageKey = change.pageKey if change.pageKey? # Bandaid fix
     obj.source = if change.source? then change.source else 'None'
     console.log('Nav.pub()', obj )
     @stream.publish( 'Nav',  obj )
@@ -38,7 +39,9 @@ class Nav
 
   set:( obj ) ->
     for own key,   val of obj
-          @[key] = val
+      @[key] = val
+      console.log( 'Nav.set() key', key, val, @[key] ) if key is 'pageKey'
+    console.log('Nav.set() obj', obj )
     return
 
   tap:() =>

@@ -2,7 +2,7 @@
 import Data    from '../../base/util/Data.js'
 import Stream  from '../../base/util/Stream.js'
 import Nav     from '../../base/util/Nav.js'
-import Cache   from '../../base/util/Cache.js'
+#mport Cache   from '../../base/util/Cache.js'
 #mport Test   from './Test.js'
 
 import Mixin  from '../../base/vue/Mixin.js'
@@ -44,8 +44,8 @@ class Augm
     Augm.Batch  = batch # Not necessary here, but assigned for compatibilitry
     window['Geom'] = {} # May still be needed by Ganjs
     Augm.app    = 'Augm'
-    subjects    = ["Draw","Note","Menu","Tabs","Geom","Data","Cache","Navd"]
-    streamLog    = { subscribe:false, publish:false, subjects:subjects }
+    subjects    = ["Nav"]
+    streamLog    = { subscribe:true, publish:false, subjects:subjects }
     Augm.stream  = new Stream( subjects, streamLog )
     Augm.nav    = new Nav(   Augm.stream, batch, Augm.komps )
     #ugm.cache  = new Cache( Augm.stream )
