@@ -25,16 +25,16 @@
         this.dispObj  = this.dispObject( this.nav().compKey, this.nav().pracKey, dispKey );
         if( !this.isDef(this.dispObj) ) {
           console.error('Disp.onDisp() disp null',{comp:this.nav().compKey,prac:this.nav().pracKey,disp:dispKey})}},
-      doPage: function( pageKey ) {
-        this.pages[pageKey].show = true; },
+      doPage: function( tabsKey ) {
+        this.nav().setPageKey( 'Disp', tabsKey ); },
       onNav:  function (obj) {
-        obj.pageKey = this.resetPage( 'Desc', this.pages, obj.pageKey );
-        if( this.isMyNav(    obj,     'Disp', this.pages, obj.pageKey ) ) {
-          this.onDisp( obj.dispKey );
-          this.doPage( obj.pageKey ); } } },
+        let tabsKey = this.nav().initTabsKey( 'Disp', 'Desc' );
+        if( this.nav().isMyNav( obj, 'Disp' ) ) {
+            this.onDisp( obj.dispKey );
+            this.doPage( tabsKey ); } } },
 
     beforeMount: function() {
-      this.onNav( { dispKey:this.nav().dispKey } ); },
+      this.onDisp( this.nav().dispKey ); },
 
     mounted: function () {
       this.subscribe(  "Nav", 'Disp.vue', (obj) => {

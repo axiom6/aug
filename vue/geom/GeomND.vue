@@ -17,15 +17,18 @@
 
     components:{ 'd-tabs':Tabs },
 
+    data() { return { route:'None', pages:{} } },
+
     methods: {
 
       isPage: function(pageKey) {
         return this.pageKey === pageKey; },
 
       onTabs: function(obj) {
-        if( this.isMyNav( obj, this.route, this.pages, obj.pageKey ) ) {
-          this.pageKey = obj.pageKey;
-          this.create(this.pageKey); } },
+        if( this.nav().isMyNav( obj, this.route ) ) {
+          this.pageKey = this.nav().getTabsKey(this.route);
+          if( this.pageKey !== 'None') {
+              this.create(this.pageKey); } } },
 
       create: function( pageKey ) {
         if( !this.pages[pageKey].created ) {

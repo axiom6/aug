@@ -34,9 +34,11 @@
         return this.pageKey === pageKey; },
 
       onTabs: function(obj) {
-        if( this.isMyNav( obj, this.route, this.pages, obj.pageKey ) ) {
-            this.pageKey = obj.pageKey;
-            this.doApp(    obj.pageKey ); } },
+        if( this.nav().isMyNav( obj, this.route ) ) {
+            this.pageKey = this.nav().getTabsKey('Hues');
+            if( this.pageKey !== 'None') {
+                this.nav().setPageKey( 'Hues', this.pageKey );
+                this.doApp( this.pageKey ); } } },
 
       size: function() {
         let sz   = {}
@@ -50,8 +52,7 @@
           this.$nextTick( function() {
             let elem = this.$refs[pageKey][0];
             if( this.isDef(elem) ) {
-              Box.doApp(pageKey,elem); } } ) }
-    },
+              Box.doApp(pageKey,elem); } } ) } },
 
     mounted: function () {
       this.subscribe(  'Nav', 'Hues.vue', (obj) => {

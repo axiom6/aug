@@ -4,9 +4,6 @@ var Mixin,
 import Vis from '../util/Vis.js';
 
 Mixin = class Mixin {
-  // Muse   ['Home','Prin','Comp','Prac','Disp','Cube']
-  // Augn   ['Home','Math','Geom','Data','Draw','Note','Wood' ]
-  // Jitter ['Home','Flavor','Roast','Brew','Drink','Body']
   constructor(Main, komps) {
     Mixin.Main = Main;
     Mixin.views = this.isArray(komps) ? komps : Object.keys(komps);
@@ -150,43 +147,6 @@ Mixin = class Mixin {
         },
         toRgbaHsv: function(hsv) {
           return Vis.toRgbaHsv(hsv);
-        },
-        isMyNav: function(obj, route, pages, pageKey) {
-          return obj.route === route && this.showPages(pages, pageKey);
-        },
-        showPages: function(pages, pageKey) {
-          var hasPage, key, page;
-          hasPage = false;
-          for (key in pages) {
-            if (!hasProp.call(pages, key)) continue;
-            page = pages[key];
-            page.show = key === pageKey;
-            if (page.show) {
-              hasPage = true;
-            }
-          }
-          // console.log( 'Main.showPages()', { pageKey:pageKey, hasPage:hasPage, pages:pages })
-          return hasPage;
-        },
-        resetPage: function(pageNew, pages, pageKey) {
-          var hasPage;
-          hasPage = this.showPages(pages, pageKey);
-          if (hasPage) {
-            return pageKey;
-          } else {
-            return pageNew;
-          }
-        },
-        activePage: function(pages) {
-          var page, pageKey;
-          for (pageKey in pages) {
-            if (!hasProp.call(pages, pageKey)) continue;
-            page = pages[pageKey];
-            if (page.show) {
-              return pageKey;
-            }
-          }
-          return 'None';
         },
         choice: function() {
           return Mixin.Main.Batch.Choice.data;

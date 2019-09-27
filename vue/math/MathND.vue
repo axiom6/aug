@@ -19,16 +19,19 @@
 
     components:{ 'd-tabs':Tabs },
 
+    data() { return { route:'None', pages:{} } },
+
     methods: {
 
       isPage: function(pageKey) {
         return this.pageKey === pageKey; },
 
       onTabs: function(obj) {
-        if( this.isMyNav( obj, this.route, this.pages, obj.pageKey ) ) {
-          this.pageKey = obj.pageKey;
-          this.create(   obj.pageKey );
-          this.mathML(this.exps); } },
+        if( this.nav().isMyNav( obj, this.route ) ) {
+          let pageKey = this.nav().getTabsKey(this.route);
+          if( pageKey !== 'None') {
+            this.create(   pageKey );
+            this.mathML(this.exps); } } },
 
       create: function( pageKey ) {
         let page = this.pages[pageKey];

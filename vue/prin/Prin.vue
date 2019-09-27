@@ -31,23 +31,25 @@
     
     methods: {
       
-      onComp: function (compKey) {
+      onComp: function( compKey ) {
         this.compObj = this.compObject(compKey); },
-      doPage: function(   pageKey ) {
-        this.pages[pageKey].show = true; },
+      doPage: function( tabsKey ) {
+        this.nav().setPageKey( 'Prin', tabsKey ); },
       isRows: function () {
         return true; },
       onNav:  function (obj) {
-        obj.pageKey = this.resetPage( 'Icon', this.pages, obj.pageKey );
-        if( this.isMyNav(  obj,       'Prin', this.pages, obj.pageKey ) ) {
+        let tabsKey = this.nav().getTabsKey( 'Prin' );
+        if( this.nav().isMyNav(  obj, 'Prin' ) ) {
           this.onComp(obj.compKey);
-          this.doPage(obj.pageKey); } }
+          this.doPage(tabsKey); } }
       },
 
     beforeMount: function() {
-      this.onNav( { route:'Prin', compKey:'Prin', pageKey:'Icon' } ); },
+      this.onComp('Prin'); },
 
     mounted: function () {
+      let tabsKey = this.nav().initTabsKey( 'Prin', 'Icon' );
+      this.doPage( tabsKey );
       this.subscribe( 'Nav', 'Prin.vue', (obj) => {
         this.onNav(obj); } ); }
   }

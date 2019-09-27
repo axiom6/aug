@@ -13,7 +13,6 @@ class Nav
     @pracObj  =   null
     @dispKey  =  'None'
     @dispObj  =   null
-    @pageKey  =  'Icon'
     @pages    =  {}
     @compass  =   ""
     @keyEvents()
@@ -21,7 +20,7 @@ class Nav
   pub:( change ) ->
     routeChanged = change.route? and change.route isnt @route
     @set( change )
-    obj = { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey, pageKey:@pageKey }
+    obj = { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey }
     obj.pageKey = change.pageKey if change.pageKey? # Bandaid fix
     obj.source = if change.source? then change.source else 'None'
     console.log('Nav.pub()', obj )
@@ -40,8 +39,6 @@ class Nav
   set:( obj ) ->
     for own key,   val of obj
       @[key] = val
-      console.log( 'Nav.set() key', key, val, @[key] ) if key is 'pageKey'
-    console.log('Nav.set() obj', obj )
     return
 
   tap:() =>
@@ -119,7 +116,6 @@ class Nav
       route = @navs[@route][dir]
       obj = { route:route, compKey:route, source:dir }
       obj.route   = 'Comp' if route is 'Info' or route is 'Know' or route is 'Wise'
-      obj.pageKey = 'Icon' if @pageKey is 'None'
       @pub( obj )
     # else
     #  console.error( 'Nav.dirNavs() no pages or @navs not specified', { dir:dir, route:@route } )
@@ -146,18 +142,46 @@ class Nav
     ndx = max-1 if ndx <  0
     ndx
 
-  hasPageKey:( page ) ->
-    not page.pageKey? or page.pageKey is 'None'
-
   setPages:( route, pagesObj ) ->
-    @pages[route]          = {}
-    @pages[route].pageKey  = 'None'
-    @pages[route].pageKeys = Object.keys( pagesObj )
+    @pages[route] = {}
+    @pages[route].tabsKey = 'None'
+    @pages[route].pages   = pagesObj
     return
 
-  setPageKey:( route, pageKey ) ->
-    @pages[route].pageKey = pageKey if not @pages[route]?
+  initTabsKey:( route, initKey ) ->
+    tabsKey = @getTabsKey(route)
+    @pages[route].tabsKey = if tabsKey is 'None' then initKey else tabsKey
+    console.log( 'Nav.initTabsKey', { route:route, tabsKey:@pages[route].tabsKey } )
+    @pages[route].tabsKey
+
+  setTabsKey:( route, tabsKey ) ->
+    @pages[route].tabsKey = if @hasPageKey(route,tabsKey) then tabsKey else 'None'
     return
+
+  getTabsKey:( route ) ->
+    @pages[route].tabsKey
+
+  hasTabsKey:(   route ) ->
+    @getTabsKey( route ) isnt 'None'
+
+  setPageKey:( route, tabsKey ) ->
+    @pages[route].tabsKey = 'None'
+    return if tabsKey is 'None' or not @pages[route]? or @pages[route].pages[tabsKey].show
+    for own key, page  of @pages[route].pages
+      page.show = key is tabsKey
+    return
+
+  getPageKey:( route ) ->
+    for own key, page  of @pages[route].pages
+      return key if page.show
+    return 'None'
+
+  hasPageKey:( route, pageKey ) ->
+    console.log( 'Nav.hasPageKey', { route:route, pageKey:pageKey, has:@pages[route].pages[pageKey]? } )
+    @pages[route]? and @pages[route].pages[pageKey]?
+
+  isMyNav:( obj, route ) ->
+    obj.route is route and @hasTabsKey(route)
 
   adjCompKey:( compKey, dir ) ->
     adjDir = switch  dir

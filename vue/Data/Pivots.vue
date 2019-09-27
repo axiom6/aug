@@ -32,11 +32,13 @@
         return this.pageKey === pageKey; },
 
       onTabs: function(obj) {
-        if( this.isMyNav( obj, 'Pivots', this.pages, obj.pageKey ) ) {
-          this.pageKey = obj.pageKey;
-          this.create(   obj.pageKey ); } },
+        if( this.nav().isMyNav( obj, 'Pivots' ) ) {
+          this.pageKey = this.nav().getTabsKey('Pivots');
+          if( this.pageKey !== 'None' ) {
+              this.create( this.pageKey ); } } },
 
       create: function( pageKey ) {
+        this.nav().setPageKey( 'Pivots', pageKey );
         if( !this.pages[pageKey].created ) {
           this.pages[pageKey].created = true;
           this.$nextTick( function() { // Wait for DOM to render

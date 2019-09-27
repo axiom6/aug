@@ -33,21 +33,19 @@
         if( !this.isDef(this.pracObj) || this.pracObj.name !== pracKey ) {
              this.pracObj = this.pracObject( compKey, pracKey ); } },
         // console.log( 'Prac.onPrac()', { compKey:compKey, pracKey:pracKey, pracObj:this.pracObj } ) },
-      doPage: function(   pageKey ) {
-        this.pages[pageKey].show = true; },
+      doPage: function( tabsKey ) {
+        this.nav().setPageKey( 'Prac', tabsKey ); },
       onNav: function( obj ) {
-        obj.pageKey = this.resetPage( 'Dirs', this.pages, obj.pageKey );
-        if( this.isMyNav(   obj,   'Prac',    this.pages, obj.pageKey ) ) {
+        let tabsKey = this.nav().initTabsKey( 'Prac', 'Dirs' );
+        if( this.nav().isMyNav( obj, 'Prac' ) ) {
           this.onPrac( obj.compKey, obj.pracKey );
-          this.doPage( obj.pageKey ); } }
+          this.doPage( tabsKey ); } }
       },
 
     beforeMount: function () {
       let compKey = this.nav().compKey;
       let pracKey = this.nav().pracKey;
-      let pageKey = 'Dirs';
-      let obj     = { route:'Prac', compKey:compKey, pracKey:pracKey, pageKey:pageKey };
-      this.onNav( obj );  },
+      this.onPrac( compKey, pracKey );  },
       // console.log( 'Prac.beforeMount()', obj, { pracObj:this.pracObj, pageNav:this.nav().pageKey } );
 
     mounted: function () {

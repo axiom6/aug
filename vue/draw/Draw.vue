@@ -35,9 +35,11 @@
         return this.pageKey === pageKey; },
       
       onTabs: function(obj) {
-        if( this.isMyNav( obj, this.route, this.pages, obj.pageKey ) ) {
-            this.pageKey = obj.pageKey;
-            this.create(this.pageKey); }  },
+        if( this.nav().isMyNav( obj, this.route ) ) {
+            this.pageKey = this.nav().getTabsKey('Draw');
+            if( this.pageKey !== 'None') {
+                this.nav().setPageKey( 'Draw', this.pageKey );
+                this.create(this.pageKey); } } },
 
       size: function() {
         let sz   = {}
@@ -47,11 +49,11 @@
         sz.elemHeight = this.$refs['Draw']['clientHeight'];
         return sz; },
       
-      create: function( key ) {
-        if( this.pages[key].obj===null ) {
-          this.$nextTick( function() {
-            let elem = this.$refs[key][0]
-            this.pages[key].obj = this.drew.create( key, elem, this.size() ); } ) } }
+      create: function( pageKey ) {
+        if( this.pages[pageKey].obj===null ) {
+            this.$nextTick( function() {
+              let elem = this.$refs[pageKey][0]
+              this.pages[key].obj = this.drew.create( pageKey, elem, this.size() ); } ) } }
     },
 
     mounted: function () {

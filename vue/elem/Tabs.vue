@@ -19,22 +19,21 @@
       onPage: function (pageKey) {
           console.log( 'Tabs.onPage()', { route:this.route, pageOld:this.pageKey, pageNew:pageKey } );
           this.pageKey = pageKey; },
-      doPage: function (pageKey) {
-        this.onPage( pageKey );
-        let obj = { route:this.route, pageKey:pageKey, source:'Tabs' };
+      doPage: function (tabsKey) {
+        this.onPage( tabsKey );
+        this.nav().setTabsKey( this.route, tabsKey )
+        let obj = { route:this.route, source:'Tabs' };
         this.nav().pub( obj ); },
       classTab: function (pageKey) {
         return this.pageKey===pageKey ? 'tab-active' : 'tab'; } },
 
     mounted: function() {
       this.nav().setPages( this.route, this.pages );
-      let pageKey = this.activePage(   this.pages );
-      this.onPage(pageKey);
+      let tabsKey = this.nav().getTabsKey( this.route );
+      this.onPage(tabsKey);
       this.subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {
         if( obj.source !== 'Tabs' && obj.route === this.route ) {
-          let pageKey = this.activePage( this.pages );
-          console.log( 'Tabs.subscribe()',
-            { route:this.route, pageOld:this.pageKey, pageObj:obj.pageKey, pageKey:pageKey } );
+          let pageKey = this.nav().getPageKey( this.route );
           this.onPage(pageKey); } } ); }
     }
   

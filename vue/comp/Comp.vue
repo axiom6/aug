@@ -42,19 +42,19 @@
     methods: {
       onComp: function (compKey) {
         this.compObj = this.compObject(compKey); },
-      doPage: function( pageKey ) {
-        this.pages[pageKey].show = true; },
+      doPage: function( tabsKey ) {
+        this.nav().setPageKey( 'Comp', tabsKey ); },
       isRows: function () {
         return true; },
       onNav:  function (obj) {
-        obj.pageKey = this.resetPage( 'Icon', this.pages, obj.pageKey );
-        if( this.isMyNav(   obj,    'Comp',   this.pages, obj.pageKey ) ) {
-          this.onComp(obj.compKey);
-          this.doPage(obj.pageKey); } }
+        let tabsKey = this.nav().initTabsKey( 'Comp', 'Icon' );
+        if( this.nav().isMyNav( obj, 'Comp' ) ) {
+            this.onComp( obj.compKey );
+            this.doPage( tabsKey ); } }
       },
 
     beforeMount: function() {
-      this.onNav( { route:'Comp', compKey:this.nav().compKey, pageKey:'Icon' } ); },
+      this.onComp( this.nav().compKey ); },
 
     mounted: function () {
       this.subscribe( 'Nav', 'Comp.vue', (obj) => {

@@ -3,10 +3,6 @@ import Vis from '../util/Vis.js'
 
 class Mixin
 
-  # Muse   ['Home','Prin','Comp','Prac','Disp','Cube']
-  # Augn   ['Home','Math','Geom','Data','Draw','Note','Wood' ]
-  # Jitter ['Home','Flavor','Roast','Brew','Drink','Body']
-
   constructor:(   Main, komps ) ->
     Mixin.Main  = Main
     Mixin.views = if @isArray(komps) then komps else Object.keys(komps)
@@ -97,22 +93,6 @@ class Mixin
           { backgroundColor:Vis.toRgbaHsv(hsv) }
         toRgbaHsv: (hsv) ->
           Vis.toRgbaHsv(hsv)
-        isMyNav:( obj, route, pages, pageKey ) ->
-          obj.route is route and this.showPages( pages, pageKey )
-        showPages:( pages, pageKey ) ->
-          hasPage = false
-          for own key, page  of pages
-            page.show = key  is pageKey
-            hasPage   = true if page.show
-          # console.log( 'Main.showPages()', { pageKey:pageKey, hasPage:hasPage, pages:pages })
-          hasPage
-        resetPage:( pageNew, pages, pageKey ) ->
-          hasPage =  this.showPages( pages, pageKey )
-          if hasPage then pageKey else pageNew
-        activePage:( pages ) ->
-          for own  pageKey, page of pages
-            return pageKey if page.show
-          return 'None'
         choice:() ->
           Mixin.Main.Batch.Choice.data
         choices:( name ) ->
