@@ -4,6 +4,7 @@
    b. Bug in tab dir cycling
    c. Bug with Note
    d. Test Muse
+   e. next dir with dir in Prin
 
 2. Talk and Improved Landing Pages
      Muse Home Prin Info Know Wise

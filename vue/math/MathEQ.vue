@@ -11,8 +11,8 @@
 
     data() {
       return { route:'MathEQ', pageKey:'Differ', exps:{}, pages:{
-          Differ: { title:'Differ', key:'Differ', create:Differ, obj:null },
-          Solves: { title:'Solves', key:'Solves', create:Solves, obj:null }
+          Differ: { title:'Differ', key:'Differ', create:Differ, obj:null, show:false },
+          Solves: { title:'Solves', key:'Solves', create:Solves, obj:null, show:false }
         } } }
   }
   

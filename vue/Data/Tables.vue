@@ -3,9 +3,9 @@
   <div>
     <d-tabs route="Tables" :pages="pages"></d-tabs>
     <div class="page">
-      <h1       v-if="isPageKey('None')">Tables</h1>
-      <t_table1 v-if="isPageKey('Table1')"></t_table1>
-      <t_table2 v-if="isPageKey('Table2')"></t_table2>
+      <h1       v-if="pageKey==='Tables'">Tables</h1>
+      <t_table1 v-if="pages['Table1'].show"></t_table1>
+      <t_table2 v-if="pages['Table2'].show"></t_table2>
     </div>
   </div>
 </template>
@@ -21,34 +21,34 @@
     components:{ 'd-tabs':Tabs, 't_table1':Table1, 't_table2':Table2 },
 
     data() {
-      return { route:'Tables', pageKey:'None',
+      return { route:'Tables', pageKey:'Tables',
         pages:{
-          Table1: { title:'Table1', key:'Table1' },
-          Table2: { title:'Table2', key:'Table2' } } } },
+          Table1: { title:'Table1', key:'Table1', created:false, show:false },
+          Table2: { title:'Table2', key:'Table2', created:false, show:false } } } },
 
     methods: {
 
       isPageKey: function(pageKey) {
         return this.pageKey === pageKey; },
 
-      onTabs: function(obj) {
+      onNav: function(obj) {
         if( this.nav().isMyNav( obj, 'Tables' ) ) {
-          this.pageKey = this.nav().getTabsKey('Tables');
+          this.pageKey = this.nav().getPageKey('Tables');
           if( this.pageKey !== 'None' ) {
               this.create( this.pageKey ); } } },
 
       create: function( pageKey ) {
         this.nav().setPageKey( 'Tables', pageKey );
         if( !this.pages[pageKey].created ) {
-          this.pages[pageKey].created = true;
-          this.$nextTick( function() { // Wait for DOM to render
-            let elem = this.$refs[pageKey][0];
-            if( elem===false) {} } ) } }
+             this.pages[pageKey].created = true;
+             this.$nextTick( function() { // Wait for DOM to render
+              let elem = this.$refs[pageKey][0];
+              if( elem===false) {} } ) } }
     },
 
     mounted: function () {
       this.subscribe( 'Nav', 'Pivots.vue', (obj) => {
-        this.onTabs( obj ); } ); }
+        this.onNav( obj ); } ); }
   }
   
   export default Tables;

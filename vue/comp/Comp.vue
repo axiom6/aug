@@ -1,19 +1,21 @@
 
 <template>
-  <div class="comp" ref="Comp" title="Comp">
+  <div class="comp-pane">
     <b-tabs route="Comp" :pages="pages"></b-tabs>
-    <template v-for="pracObj in compObj">
-      <div   :class="pracObj.dir" :key="pracObj.name" :ref="pracObj.name" :title="pracObj.name">
-        <p-icon v-show="pages['Icon'].show" :pracObj="pracObj"></p-icon>
-        <p-dirs v-show="pages['Dirs'].show" :pracObj="pracObj"></p-dirs>
-        <p-conn   v-if="pages['Conn'].show" :pracObj="pracObj"></p-conn>
-      </div>
-    </template>
-    <template v-for="row in rows">
-      <div v-show="isRows()" :class="row.dir" :key="row.name">
-        <p-icon :pracObj="row"></p-icon>
-      </div>
-    </template>
+    <div class="comp" ref="Comp" title="Comp">
+      <template v-for="pracObj in compObj">
+        <div   :class="pracObj.dir" :key="pracObj.name" :ref="pracObj.name" :title="pracObj.name">
+          <p-icon v-show="pages['Icon'].show" :pracObj="pracObj"></p-icon>
+          <p-dirs v-show="pages['Dirs'].show" :pracObj="pracObj"></p-dirs>
+          <p-conn   v-if="pages['Conn'].show" :pracObj="pracObj"></p-conn>
+        </div>
+      </template>
+      <template v-for="row in rows">
+        <div v-show="isRows()" :class="row.dir" :key="row.name">
+          <p-icon :pracObj="row"></p-icon>
+        </div>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -31,7 +33,7 @@
     data() { return {
       compObj:null, pracObj:null,
       pages:{
-        Icon: { title:'Icon', key:'Icon', show:false },
+        Icon: { title:'Icon', key:'Icon', show:true  },
         Dirs: { title:'Dirs', key:'Dirs', show:false },
         Conn: { title:'Conn', key:'Conn', show:false } },
       rows: {
@@ -47,10 +49,9 @@
       isRows: function () {
         return true; },
       onNav:  function (obj) {
-        let tabsKey = this.nav().initTabsKey( 'Comp', 'Icon' );
         if( this.nav().isMyNav( obj, 'Comp' ) ) {
             this.onComp( obj.compKey );
-            this.doPage( tabsKey ); } }
+            this.doPage( this.nav().getPageKey('Comp') ); } }
       },
 
     beforeMount: function() {
@@ -72,41 +73,40 @@
   .grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;
                grid-template-areas: "nw north ne" "west cen east" "sw south se"; }
 
-  .grid5x4() { display:grid; grid-template-columns:13fr 29fr 29fr 29fr; grid-template-rows:8fr 24fr 24fr 24fr 24fr;
-    grid-template-areas: "tabs tabs tabs tabs" "cm em in en" "le nw north ne" "do west cen east" "sh sw south se"; }
+  .grid4x4() { display:grid; grid-template-columns:13fr 29fr 29fr 29fr; grid-template-rows:25fr 25fr 25fr 25fr;
+    grid-template-areas:"cm em in en" "le nw north ne" "do west cen east" "sh sw south se"; }
   
   .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;
                   justify-items:center; align-items:center; }
   
   .ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }
+
+  .comp-pane { position:relative; left:0; top:0; right:0; bottom:0;
   
-  .comp { position:relative; left:0; top:0; right:0; bottom:0; font-size:@theme-prac-size;
-          background-color:@theme-back; color:@theme-color-prac;
-    .grid5x4(); justify-items:center; align-items:center; // The 5x4 Tabs + Dim + Per + 9 Practices Grid
-      .tabs{ grid-area:tabs; display:inline; color:@theme-color; font-size:@theme-tab-size;
-             justify-self:start; align-self:center; text-align:left; }
-      .cm { .pdir(cm); } .em   { .pdir(em);   } .in    { .pdir(in); }    .en   { .pdir(en);   }
-      .le { .pdir(le); } .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }
-      .do { .pdir(do); } .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }
-      .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }
+    .comp { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:@theme-prac-size;
+            background-color:@theme-back; color:@theme-color-prac;
+      .grid4x4(); justify-items:center; align-items:center; // The 4x4 Dim + Row + 9 Practices Grid
+        .cm { .pdir(cm); } .em   { .pdir(em);   } .in    { .pdir(in); }    .en   { .pdir(en);   }
+        .le { .pdir(le); } .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }
+        .do { .pdir(do); } .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }
+        .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }
+      
+        // Placed one level below the 9 Practices Grid   - Check on background-color:#603;
+      .prac { background-color:#603; border-radius:36px; width:90%; height:80%; font-size:@theme-prac-size;
+        font-weight:bold;
+        .grid3x3(); // The 4 Displine plus Practiice name Grid
+                               .north { .ddir(north); }
+        .west { .ddir(west); } .cen   { .ddir(cen);   } .east { .ddir(east); }
+                               .south { .ddir(south); }
+        .cen  { font-size:@theme-cen-size; }
+        div   { font-size:@theme-dir-size; } }
+      
+      .em, .in, .en { .prac .cen { font-size:@theme-row-size; } } // Font size columns
     
-      // Placed one level below the 9 Practices Grid   - Check on background-color:#603;
-    .prac { background-color:#603; border-radius:36px; width:90%; height:80%; font-size:@theme-prac-size;
-      font-weight:bold;
-      .grid3x3(); // The 4 Displine plus Practiice name Grid
-                             .north { .ddir(north); }
-      .west { .ddir(west); } .cen   { .ddir(cen);   } .east { .ddir(east); }
-                             .south { .ddir(south); }
-      .cen  { font-size:@theme-cen-size; }
-      div   { font-size:@theme-dir-size; } }
-    
-    .em, .in, .en { .prac .cen { font-size:@theme-row-size; } } // Font size columns
-  
-    .row { background-color:#603; border-radius:36px; margin-left:10%; width:80%; height:80%; font-size:@theme-row-size;
-      font-weight:bold; display:grid;
-      div { text-align:center; justify-self:center;  align-self:center; font-size:@theme-row-size; color:@theme-color; }
-      i { margin-bottom: 0.2rem; display:block; } }
-    
+      .row { background-color:#603; border-radius:36px; margin-left:10%; width:80%; height:80%; font-size:@theme-row-size;
+        font-weight:bold; display:grid;
+        div { text-align:center; justify-self:center;  align-self:center; font-size:@theme-row-size; color:@theme-color; }
+        i { margin-bottom: 0.2rem; display:block; } }
+    }
   }
-  
 </style>

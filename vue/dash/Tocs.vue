@@ -40,7 +40,8 @@
         this.dispKey = dispKey;
         this.pub( { route:'Disp', dispKey:dispKey, source:'Toc' } ); },
       pub: function(obj) {
-          this.nav().pub(obj); },
+        this.nav().dirTabs = false;
+        this.nav().pub(obj); },
       onNav:  function (obj) {
         if( obj.source !== 'Toc' ) {
           if( this.compKey !== obj.compKey ) { this.compKey = obj.compKey; }

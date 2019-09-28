@@ -22,16 +22,13 @@
     data() { return { route:'None', pages:{} } },
 
     methods: {
-
-      isPage: function(pageKey) {
-        return this.pageKey === pageKey; },
-
-      onTabs: function(obj) {
+      
+      onNav: function(obj) {
         if( this.nav().isMyNav( obj, this.route ) ) {
-          let pageKey = this.nav().getTabsKey(this.route);
+          let pageKey = this.nav().getPageKey(this.route);
           if( pageKey !== 'None') {
-            this.create(   pageKey );
-            this.mathML(this.exps); } } },
+            this.create( pageKey   );
+            this.mathML( this.exps ); } } },
 
       create: function( pageKey ) {
         let page = this.pages[pageKey];
@@ -62,8 +59,8 @@
     },
 
     mounted: function () {
-      this.subscribe( 'Nav', 'MathND.vue', (obj) => {
-          this.onTabs( obj ); } ); }
+      this.subscribe( 'Nav', 'Math.vue', (obj) => {
+          this.onNav( obj ); } ); }
   }
   
 export default MathND;

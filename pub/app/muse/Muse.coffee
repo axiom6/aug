@@ -37,7 +37,7 @@ class Muse
     Muse.Batch  = batch # Not necessary here, but assigned for compatibilitry
     Muse.app    = 'Muse'
     subjects    = ["Nav"]
-    infoSpec    = { subscribe:true, publish:false, subjects:subjects}
+    infoSpec    = { subscribe:false, publish:false, subjects:subjects}
     Muse.stream = new Stream( subjects, infoSpec )
     Muse.nav    = new Nav(   Muse.stream, batch, Muse.komps )
     Muse.build  = new Build( batch )

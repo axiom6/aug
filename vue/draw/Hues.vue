@@ -5,7 +5,7 @@
     <d-tabs route="Hues" :pages="pages"></d-tabs>
     <h1 v-if="pageKey==='Hues'">Hues with MathBox</h1>
     <template v-for="page in pages">
-      <div :ref="page.key" v-show="isPage(page.key)" class="page" :key="page.key"></div>
+      <div :ref="page.key" v-if="page.show" class="page" :key="page.key"></div>
     </template>
   </div>
 </template>
@@ -21,23 +21,22 @@
 
     data() {
       return { route:'Hues', pageKey:'Hues', pages:{
-          Color:   { title:'Color',   key:'Color'   },
-          Rgbs:    { title:'Rgbs',    key:'Rgbs'    },
-          Polar:   { title:'Polar',   key:'Polar'   },
-          Vecs:    { title:'Vecs',    key:'Vecs'    },
-          Sphere:  { title:'Sphere',  key:'Sphere'  },
-          Regress: { title:'Regress', key:'Regress' } } } },
+          Color:   { title:'Color',   key:'Color',   show:false },
+          Rgbs:    { title:'Rgbs',    key:'Rgbs',    show:false },
+          Polar:   { title:'Polar',   key:'Polar',   show:false },
+          Vecs:    { title:'Vecs',    key:'Vecs',    show:false },
+          Sphere:  { title:'Sphere',  key:'Sphere',  show:false },
+          Regress: { title:'Regress', key:'Regress', show:false } } } },
 
     methods: {
 
       isPage: function(pageKey) {
         return this.pageKey === pageKey; },
 
-      onTabs: function(obj) {
+      onNav: function(obj) {
         if( this.nav().isMyNav( obj, this.route ) ) {
-            this.pageKey = this.nav().getTabsKey('Hues');
+            this.pageKey = this.nav().getPageKey('Hues');
             if( this.pageKey !== 'None') {
-                this.nav().setPageKey( 'Hues', this.pageKey );
                 this.doApp( this.pageKey ); } } },
 
       size: function() {
@@ -56,7 +55,7 @@
 
     mounted: function () {
       this.subscribe(  'Nav', 'Hues.vue', (obj) => {
-        this.onTabs(obj); } ); }
+        this.onNav(obj); } ); }
   }
 
   export default Hues;

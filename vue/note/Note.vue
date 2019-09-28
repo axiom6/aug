@@ -5,7 +5,7 @@
     <n-tabs route="Note" :pages="pages"></n-tabs>  <!-- init="Stand" -->
     <h1 v-if="myRoute()">Notebooks</h1>
     <template v-for="page in pages">
-      <router-view :name="name(page)" :id="page.key"></router-view>
+      <router-view :name="page.key"></router-view>
     </template>
   </div>
 </template>
@@ -27,8 +27,6 @@
         } } },
     
     methods: {
-      name: function(page) {
-        return page.key; },
       myRoute: function() {
         this.isRoute('Note'); } }
     

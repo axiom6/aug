@@ -14,26 +14,33 @@ class Nav
     @dispKey  =  'None'
     @dispObj  =   null
     @pages    =  {}
-    @compass  =   ""
+    @dirTabs  = false
     @keyEvents()
 
-  pub:( change ) ->
-    routeChanged = change.route? and change.route isnt @route
-    @set( change )
+  pub:( msg ) ->
+    reset = @resetRoute( msg )
+    @set( msg )
     obj = { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey }
-    obj.pageKey = change.pageKey if change.pageKey? # Bandaid fix
-    obj.source = if change.source? then change.source else 'None'
+    obj.source = if msg.source? then msg.source else 'None'
     console.log('Nav.pub()', obj )
     @stream.publish( 'Nav',  obj )
-    @doRoute( @route ) if routeChanged
+    @doRoute( reset.route ) if reset.changed
     return
+    
+  resetRoute:( msg ) ->
+    reset         = {}
+    reset.route   = if msg['poute']? then msg['poute'] else if msg.route? then msg.route else @route
+    reset.changed = ( msg.route? and msg.route isnt @route ) or msg['poute']?
+    # console.log( 'Nav.resetRoute()', { msg:msg, prev:@route, next:reset.route, changed:reset.changed })
+    @route        = if msg.route? then msg.route else @route
+    reset
 
   doRoute:( route ) ->
     # console.log( 'Nav.doRoute()', route )
     if @$router?
-      @$router.push( { name:route } )
+       @$router.push( { name:route } )
     else
-      console.error( 'Nav.doRoute() $router not set' )
+       console.error( 'Nav.doRoute() $router not set' )
     return
 
   set:( obj ) ->
@@ -57,15 +64,17 @@ class Nav
     document.addEventListener('keydown', (event) => keyDir(event) )
     return
 
-  dir:( dr, event=null ) =>
-    @source = dr
+  dir:( direct, event=null ) =>
+    @source = direct
     if event is null then {}
-    @compass = dr if dr isnt 'next' and dr isnt 'prev'
-    switch @route
-      when 'Comp' then @dirComp( dr )
-      when 'Prac' then @dirPrac( dr )
-      when 'Disp' then @dirDisp( dr )
-      else             @dirNavs( dr )
+    if @dirTabs and ( direct is 'east'  or direct is 'west' )
+       @dirPage( direct )
+    else
+      switch @route
+        when 'Comp' then @dirComp( direct )
+        when 'Prac' then @dirPrac( direct )
+        when 'Disp' then @dirDisp( direct )
+        else             @dirNavs( direct )
     return
 
   dirComp:( dir ) ->
@@ -89,23 +98,16 @@ class Nav
   dirDisp:( dir ) ->
     prc = @pracs(@compKey)[@pracKey]
     dis = prc[@dispKey]
-
-    # if current prac.dir is dir or next or prev we will nav to adjacent prac
-    if dir is dis.dir or ( dir is 'next' or dir is 'prev')
-       adj = @adjPracObj(dir)
-       dis = @getDispObj( adj, @adjDir(@compass) )
-    else
-       adj = prc
-       dis = @getDispObj( prc, @compass )
+    adj = @adjPracObj(dir)
+    ddr = if dir is 'next' or dir is 'prev' then dis.dir else @adjDir(dir)
+    dis = @getDispObj( adj, ddr )
 
     if adj.name isnt 'None'
        obj = {}
        obj.source = 'Nav.dirDisp'
-       obj.compKey  = @compKey
+       obj.compKey  = adj.plane
        obj.pracKey  = adj.name
        obj.dispKey  = dis.name
-       if adj.plane isnt @compKey
-          obj.compKey = adj.plane
        @pub( obj )
     return
 
@@ -123,65 +125,51 @@ class Nav
 
   dirPage:( dir ) ->
     pageKey = @movePage(@pages[@route],dir)
-    @pub( { pageKey:pageKey, source:'Nav.dorPage' } ) if pageKey isnt 'None'
+    @pub( { source:'Nav.dirPage' } ) if pageKey isnt 'None'
     return
 
   movePage:( page, dir  ) ->
-    if @hasPageKey( page )
-       page.pageKey  = if  dir is 'east' then page.pageKeys[0] else page.pageKeys[page.pageKeys.length-1]
+    pageKey = @getPageKey( @route )
+    len     = page.keys.length
+    if pageKey isnt 'None'
+      idx = page.keys.indexOf(pageKey)
+      ndx = @range(idx+1,len) if dir is 'east'
+      ndx = @range(idx-1,len) if dir is 'west'
+      pageKey = page.keys[ndx]
     else
-      idx = page.pageKeys.indexOf(page.pageKey)
-      ndx = @range(idx+1) if dir is 'east'
-      ndx = @range(idx-1) if dir is 'west'
-      page.pageKey = page.pageKeys[ndx]
-    page.pageKey
+      pageKey = if dir is 'east' then page.keys[0] else page.keys[len-1]
+    @setPageKey( @route, pageKey )
+    pageKey
 
-  range:( idx, max ) ->
+  range:( idx, len ) ->
     ndx = idx
-    ndx = 0     if ndx >= max
-    ndx = max-1 if ndx <  0
+    ndx = 0     if ndx >= len
+    ndx = len-1 if ndx <  0
     ndx
 
   setPages:( route, pagesObj ) ->
     @pages[route] = {}
-    @pages[route].tabsKey = 'None'
-    @pages[route].pages   = pagesObj
-    return
+    @pages[route].pages = pagesObj
+    @pages[route].keys  = Object.keys(pagesObj)
+    @getPageKey( route )
 
-  initTabsKey:( route, initKey ) ->
-    tabsKey = @getTabsKey(route)
-    @pages[route].tabsKey = if tabsKey is 'None' then initKey else tabsKey
-    console.log( 'Nav.initTabsKey', { route:route, tabsKey:@pages[route].tabsKey } )
-    @pages[route].tabsKey
-
-  setTabsKey:( route, tabsKey ) ->
-    @pages[route].tabsKey = if @hasPageKey(route,tabsKey) then tabsKey else 'None'
-    return
-
-  getTabsKey:( route ) ->
-    @pages[route].tabsKey
-
-  hasTabsKey:(   route ) ->
-    @getTabsKey( route ) isnt 'None'
-
-  setPageKey:( route, tabsKey ) ->
-    @pages[route].tabsKey = 'None'
-    return if tabsKey is 'None' or not @pages[route]? or @pages[route].pages[tabsKey].show
+  setPageKey:( route, pageKey ) ->
+    return if  not        @pages[route].pages?
     for own key, page  of @pages[route].pages
-      page.show = key is tabsKey
+      page.show = key is pageKey
     return
 
   getPageKey:( route ) ->
-    for own key, page  of @pages[route].pages
+    return 'None' if not @pages[route].pages?
+    for own key, page of @pages[route].pages
       return key if page.show
     return 'None'
 
-  hasPageKey:( route, pageKey ) ->
-    console.log( 'Nav.hasPageKey', { route:route, pageKey:pageKey, has:@pages[route].pages[pageKey]? } )
-    @pages[route]? and @pages[route].pages[pageKey]?
+  hasPageKey:(  route ) ->
+    @getPageKey(route) isnt 'None'
 
   isMyNav:( obj, route ) ->
-    obj.route is route and @hasTabsKey(route)
+    obj.route is route and @hasPageKey(route)
 
   adjCompKey:( compKey, dir ) ->
     adjDir = switch  dir
@@ -211,7 +199,7 @@ class Nav
       when 'north' then 'south'
       when 'east'  then 'west'
       when 'south' then 'north'
-      else              'west'
+      else               dir
 
   pracs:(  compKey ) ->
     @batch[compKey].data.pracs

@@ -23,7 +23,7 @@
     
     data() { return { pracObj:null,
       pages:{
-        Dirs: { title:'Dirs', key:'Dirs', show:false },
+        Dirs: { title:'Dirs', key:'Dirs', show:true  },
         Conn: { title:'Conn', key:'Conn', show:false },
         Desc: { title:'Desc', key:'Desc', show:false } } } },
     
@@ -32,21 +32,18 @@
       onPrac: function(compKey,pracKey) {
         if( !this.isDef(this.pracObj) || this.pracObj.name !== pracKey ) {
              this.pracObj = this.pracObject( compKey, pracKey ); } },
-        // console.log( 'Prac.onPrac()', { compKey:compKey, pracKey:pracKey, pracObj:this.pracObj } ) },
-      doPage: function( tabsKey ) {
-        this.nav().setPageKey( 'Prac', tabsKey ); },
+      doPage: function( pageKey ) {
+        this.nav().setPageKey( 'Prac', pageKey ); },
       onNav: function( obj ) {
-        let tabsKey = this.nav().initTabsKey( 'Prac', 'Dirs' );
         if( this.nav().isMyNav( obj, 'Prac' ) ) {
-          this.onPrac( obj.compKey, obj.pracKey );
-          this.doPage( tabsKey ); } }
+            this.onPrac( obj.compKey, obj.pracKey );
+            this.doPage( this.nav().getPageKey('Prac') ); } }
       },
 
     beforeMount: function () {
       let compKey = this.nav().compKey;
       let pracKey = this.nav().pracKey;
       this.onPrac( compKey, pracKey );  },
-      // console.log( 'Prac.beforeMount()', obj, { pracObj:this.pracObj, pageNav:this.nav().pageKey } );
 
     mounted: function () {
       this.subscribe(  "Nav", 'Prac.vue', (obj) => {

@@ -11,8 +11,8 @@
 
     data() {
       return { route:'Geom2D', pageKey:'Graph', pages:{
-        Graph:  { title:'Graph',  key:'Graph',  obj:Graph,  created:false },
-        Basics: { title:'Basics', key:'Basics', obj:Basics, created:false }
+        Graph:  { title:'Graph',  key:'Graph',  obj:Graph,  created:false, show:false },
+        Basics: { title:'Basics', key:'Basics', obj:Basics, created:false, show:false }
     } } },
     
   }

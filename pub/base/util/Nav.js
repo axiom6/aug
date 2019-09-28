@@ -20,14 +20,14 @@ Nav = class Nav {
     this.dispKey = 'None';
     this.dispObj = null;
     this.pages = {};
-    this.compass = "";
+    this.dirTabs = false;
     this.keyEvents();
   }
 
-  pub(change) {
-    var obj, routeChanged;
-    routeChanged = (change.route != null) && change.route !== this.route;
-    this.set(change);
+  pub(msg) {
+    var obj, reset;
+    reset = this.resetRoute(msg);
+    this.set(msg);
     obj = {
       source: this.source,
       route: this.route,
@@ -35,15 +35,22 @@ Nav = class Nav {
       pracKey: this.pracKey,
       dispKey: this.dispKey
     };
-    if (change.pageKey != null) {
-      obj.pageKey = change.pageKey; // Bandaid fix
-    }
-    obj.source = change.source != null ? change.source : 'None';
+    obj.source = msg.source != null ? msg.source : 'None';
     console.log('Nav.pub()', obj);
     this.stream.publish('Nav', obj);
-    if (routeChanged) {
-      this.doRoute(this.route);
+    if (reset.changed) {
+      this.doRoute(reset.route);
     }
+  }
+
+  resetRoute(msg) {
+    var reset;
+    reset = {};
+    reset.route = msg['poute'] != null ? msg['poute'] : msg.route != null ? msg.route : this.route;
+    reset.changed = ((msg.route != null) && msg.route !== this.route) || (msg['poute'] != null);
+    // console.log( 'Nav.resetRoute()', { msg:msg, prev:@route, next:reset.route, changed:reset.changed })
+    this.route = msg.route != null ? msg.route : this.route;
+    return reset;
   }
 
   doRoute(route) {
@@ -93,26 +100,27 @@ Nav = class Nav {
     });
   }
 
-  dir(dr, event = null) {
-    this.source = dr;
+  dir(direct, event = null) {
+    this.source = direct;
     if (event === null) {
       ({});
     }
-    if (dr !== 'next' && dr !== 'prev') {
-      this.compass = dr;
-    }
-    switch (this.route) {
-      case 'Comp':
-        this.dirComp(dr);
-        break;
-      case 'Prac':
-        this.dirPrac(dr);
-        break;
-      case 'Disp':
-        this.dirDisp(dr);
-        break;
-      default:
-        this.dirNavs(dr);
+    if (this.dirTabs && (direct === 'east' || direct === 'west')) {
+      this.dirPage(direct);
+    } else {
+      switch (this.route) {
+        case 'Comp':
+          this.dirComp(direct);
+          break;
+        case 'Prac':
+          this.dirPrac(direct);
+          break;
+        case 'Disp':
+          this.dirDisp(direct);
+          break;
+        default:
+          this.dirNavs(direct);
+      }
     }
   }
 
@@ -143,26 +151,18 @@ Nav = class Nav {
   }
 
   dirDisp(dir) {
-    var adj, dis, obj, prc;
+    var adj, ddr, dis, obj, prc;
     prc = this.pracs(this.compKey)[this.pracKey];
     dis = prc[this.dispKey];
-    // if current prac.dir is dir or next or prev we will nav to adjacent prac
-    if (dir === dis.dir || (dir === 'next' || dir === 'prev')) {
-      adj = this.adjPracObj(dir);
-      dis = this.getDispObj(adj, this.adjDir(this.compass));
-    } else {
-      adj = prc;
-      dis = this.getDispObj(prc, this.compass);
-    }
+    adj = this.adjPracObj(dir);
+    ddr = dir === 'next' || dir === 'prev' ? dis.dir : this.adjDir(dir);
+    dis = this.getDispObj(adj, ddr);
     if (adj.name !== 'None') {
       obj = {};
       obj.source = 'Nav.dirDisp';
-      obj.compKey = this.compKey;
+      obj.compKey = adj.plane;
       obj.pracKey = adj.name;
       obj.dispKey = dis.name;
-      if (adj.plane !== this.compKey) {
-        obj.compKey = adj.plane;
-      }
       this.pub(obj);
     }
   }
@@ -192,86 +192,68 @@ Nav = class Nav {
     pageKey = this.movePage(this.pages[this.route], dir);
     if (pageKey !== 'None') {
       this.pub({
-        pageKey: pageKey,
-        source: 'Nav.dorPage'
+        source: 'Nav.dirPage'
       });
     }
   }
 
   movePage(page, dir) {
-    var idx, ndx;
-    if (this.hasPageKey(page)) {
-      page.pageKey = dir === 'east' ? page.pageKeys[0] : page.pageKeys[page.pageKeys.length - 1];
-    } else {
-      idx = page.pageKeys.indexOf(page.pageKey);
+    var idx, len, ndx, pageKey;
+    pageKey = this.getPageKey(this.route);
+    len = page.keys.length;
+    if (pageKey !== 'None') {
+      idx = page.keys.indexOf(pageKey);
       if (dir === 'east') {
-        ndx = this.range(idx + 1);
+        ndx = this.range(idx + 1, len);
       }
       if (dir === 'west') {
-        ndx = this.range(idx - 1);
+        ndx = this.range(idx - 1, len);
       }
-      page.pageKey = page.pageKeys[ndx];
+      pageKey = page.keys[ndx];
+    } else {
+      pageKey = dir === 'east' ? page.keys[0] : page.keys[len - 1];
     }
-    return page.pageKey;
+    this.setPageKey(this.route, pageKey);
+    return pageKey;
   }
 
-  range(idx, max) {
+  range(idx, len) {
     var ndx;
     ndx = idx;
-    if (ndx >= max) {
+    if (ndx >= len) {
       ndx = 0;
     }
     if (ndx < 0) {
-      ndx = max - 1;
+      ndx = len - 1;
     }
     return ndx;
   }
 
   setPages(route, pagesObj) {
     this.pages[route] = {};
-    this.pages[route].tabsKey = 'None';
     this.pages[route].pages = pagesObj;
+    this.pages[route].keys = Object.keys(pagesObj);
+    return this.getPageKey(route);
   }
 
-  initTabsKey(route, initKey) {
-    var tabsKey;
-    tabsKey = this.getTabsKey(route);
-    this.pages[route].tabsKey = tabsKey === 'None' ? initKey : tabsKey;
-    console.log('Nav.initTabsKey', {
-      route: route,
-      tabsKey: this.pages[route].tabsKey
-    });
-    return this.pages[route].tabsKey;
-  }
-
-  setTabsKey(route, tabsKey) {
-    this.pages[route].tabsKey = this.hasPageKey(route, tabsKey) ? tabsKey : 'None';
-  }
-
-  getTabsKey(route) {
-    return this.pages[route].tabsKey;
-  }
-
-  hasTabsKey(route) {
-    return this.getTabsKey(route) !== 'None';
-  }
-
-  setPageKey(route, tabsKey) {
+  setPageKey(route, pageKey) {
     var key, page, ref;
-    this.pages[route].tabsKey = 'None';
-    if (tabsKey === 'None' || (this.pages[route] == null) || this.pages[route].pages[tabsKey].show) {
+    if (this.pages[route].pages == null) {
       return;
     }
     ref = this.pages[route].pages;
     for (key in ref) {
       if (!hasProp.call(ref, key)) continue;
       page = ref[key];
-      page.show = key === tabsKey;
+      page.show = key === pageKey;
     }
   }
 
   getPageKey(route) {
     var key, page, ref;
+    if (this.pages[route].pages == null) {
+      return 'None';
+    }
     ref = this.pages[route].pages;
     for (key in ref) {
       if (!hasProp.call(ref, key)) continue;
@@ -283,17 +265,12 @@ Nav = class Nav {
     return 'None';
   }
 
-  hasPageKey(route, pageKey) {
-    console.log('Nav.hasPageKey', {
-      route: route,
-      pageKey: pageKey,
-      has: this.pages[route].pages[pageKey] != null
-    });
-    return (this.pages[route] != null) && (this.pages[route].pages[pageKey] != null);
+  hasPageKey(route) {
+    return this.getPageKey(route) !== 'None';
   }
 
   isMyNav(obj, route) {
-    return obj.route === route && this.hasTabsKey(route);
+    return obj.route === route && this.hasPageKey(route);
   }
 
   adjCompKey(compKey, dir) {
@@ -349,7 +326,7 @@ Nav = class Nav {
       case 'south':
         return 'north';
       default:
-        return 'west';
+        return dir;
     }
   }
 

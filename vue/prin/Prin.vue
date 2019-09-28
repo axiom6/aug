@@ -26,30 +26,27 @@
     data() { return {
       compObj:null, pracObj:null,
       pages:{
-        Icon: { title:'Icon', key:'Icon', show:false },
+        Icon: { title:'Icon', key:'Icon', show:true  },
         Dirs: { title:'Dirs', key:'Dirs', show:false } } } },
     
     methods: {
       
       onComp: function( compKey ) {
         this.compObj = this.compObject(compKey); },
-      doPage: function( tabsKey ) {
-        this.nav().setPageKey( 'Prin', tabsKey ); },
+      doPage: function( pageKey ) {
+        this.nav().setPageKey( 'Prin', pageKey ); },
       isRows: function () {
         return true; },
       onNav:  function (obj) {
-        let tabsKey = this.nav().getTabsKey( 'Prin' );
         if( this.nav().isMyNav(  obj, 'Prin' ) ) {
-          this.onComp(obj.compKey);
-          this.doPage(tabsKey); } }
+          this.onComp( obj.compKey );
+          this.doPage( this.nav().getPageKey('Prin') ); } }
       },
 
     beforeMount: function() {
       this.onComp('Prin'); },
 
     mounted: function () {
-      let tabsKey = this.nav().initTabsKey( 'Prin', 'Icon' );
-      this.doPage( tabsKey );
       this.subscribe( 'Nav', 'Prin.vue', (obj) => {
         this.onNav(obj); } ); }
   }

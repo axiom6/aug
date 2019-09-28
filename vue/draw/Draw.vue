@@ -5,7 +5,7 @@
     <d-tabs route="Draw" :pages="pages"></d-tabs>
     <h1 v-if="pageKey==='Draw'">Drawings in D3</h1>
     <template v-for="page in pages">
-      <div :ref="page.key" v-show="isPage(page.key)" class="page" :key="page.key"></div>
+      <div :ref="page.key" v-show="page.show" class="page" :key="page.key"></div>
     </template>
   </div>
 </template>
@@ -21,24 +21,21 @@
 
     data() {
       return { route:'Draw', pageKey:'Draw', drew:null, pages:{
-        Wheel:   { title:'Wheel',   key:'Wheel',   obj:null },
-        Axes:    { title:'Axes',    key:'Axes',    obj:null },
-        Chord:   { title:'Chord',   key:'Chord',   obj:null },
-        Link:    { title:'Link',    key:'Link',    obj:null },
-        Radar:   { title:'Radar',   key:'Radar',   obj:null },
-        Hue:     { title:'Hue',     key:'Hue',     obj:null },
-        Tree:    { title:'Tree',    key:'Tree',    obj:null } } } },
+        Wheel: { title:'Wheel', key:'Wheel', obj:null, show:false },
+        Axes:  { title:'Axes',  key:'Axes',  obj:null, show:false },
+        Chord: { title:'Chord', key:'Chord', obj:null, show:false },
+        Link:  { title:'Link',  key:'Link',  obj:null, show:false },
+        Radar: { title:'Radar', key:'Radar', obj:null, show:false },
+        Hue:   { title:'Hue',   key:'Hue',   obj:null, show:false },
+        Tree:  { title:'Tree',  key:'Tree',  obj:null, show:false} } } },
 
     methods: {
       
-      isPage: function(pageKey) {
-        return this.pageKey === pageKey; },
-      
-      onTabs: function(obj) {
+      onNav: function(obj) {
         if( this.nav().isMyNav( obj, this.route ) ) {
-            this.pageKey = this.nav().getTabsKey('Draw');
+            this.pageKey = this.nav().getPageKey('Draw');
             if( this.pageKey !== 'None') {
-                this.nav().setPageKey( 'Draw', this.pageKey );
+             // this.nav().setPageKey( 'Draw', this.pageKey );
                 this.create(this.pageKey); } } },
 
       size: function() {
@@ -50,15 +47,14 @@
         return sz; },
       
       create: function( pageKey ) {
-        if( this.pages[pageKey].obj===null ) {
             this.$nextTick( function() {
               let elem = this.$refs[pageKey][0]
-              this.pages[key].obj = this.drew.create( pageKey, elem, this.size() ); } ) } }
+              this.pages[pageKey].obj = this.drew.create( pageKey, elem, this.size() ); } ) }
     },
 
     mounted: function () {
       this.subscribe(  'Nav', 'Draw.vue', (obj) => {
-        this.onTabs(obj); } );
+        this.onNav(obj); } );
       this.$nextTick( function() {
         this.drew = new Drew( this.stream(), this.$refs['Draw'], this.size() ); } ) }
   }

@@ -45,7 +45,7 @@ class Augm
     window['Geom'] = {} # May still be needed by Ganjs
     Augm.app    = 'Augm'
     subjects    = ["Nav"]
-    streamLog    = { subscribe:true, publish:false, subjects:subjects }
+    streamLog    = { subscribe:false, publish:false, subjects:subjects }
     Augm.stream  = new Stream( subjects, streamLog )
     Augm.nav    = new Nav(   Augm.stream, batch, Augm.komps )
     #ugm.cache  = new Cache( Augm.stream )
@@ -89,9 +89,9 @@ class Augm
         { path: '/hues',    name:'Hues',    components:{ Hues:     Augm.lazy('vue/draw/Hues'     ) } },
         { path: '/cube',    name:'Cube',    components:{ Cube:     Augm.lazy('vue/cube/Cube'     ) } },
         { path: '/wood',    name:'Wood',    components:{ Wood:     Augm.lazy('vue/wood/Wood'     ) } }
-      # { path: '/data',    name:'Data',    components:{ Data:     Home.Data }, children: [
-      #   { path:'tables',  name:'Tables',  components:{ Tables:   Augm.lazy( 'vue/data/Tables') } },
-      #   { path:'pivots',  name:'Pivots',  components:{ Pivots:   Augm.lazy( 'vue/data/Pivots') } } ] }
+        { path: '/data',    name:'Data',    components:{ Data:     Home.Data }, children: [
+          { path:'tables',  name:'Tables',  components:{ Tables:   Augm.lazy( 'vue/data/Tables') } },
+          { path:'pivots',  name:'Pivots',  components:{ Pivots:   Augm.lazy( 'vue/data/Pivots') } } ] }
       ] } )
 
   # Toc.vue and Nav components  routes and directions
@@ -102,7 +102,7 @@ class Augm
     west:"Home", north:"Home", east:"Geom", south:"Geom", next:"Geom", prev:"Home" }
     Geom:{ title:'Geom', key:'Geom', route:'Geom', pracs:{}, ikw:true,  icon:"fas fa-shapes",
     west:"Math", north:"Math", east:"Note", south:"Note", next:"Note", prev:"Math" }
-  # Data:{ title:'Data', key:'Data', route:'Data', pracs:{}, ikw:true,  icon:"fas fa-database"     }
+    Data:{ title:'Data', key:'Data', route:'Data', pracs:{}, ikw:true,  icon:"fas fa-database"     }
     Note:{ title:'Note', key:'Note', route:'Note', pracs:{}, ikw:false, icon:"fab fa-leanpub",
     west:"Geom", north:"Geom", east:"Draw", south:"Draw", next:"Draw", prev:"Geom" }
     Draw:{ title:'Draw', key:'Draw', route:'Draw', pracs:{}, ikw:false, icon:"fas fa-draw-polygon",

@@ -4,8 +4,8 @@
     <d-tabs route="Pivots" :pages="pages"></d-tabs>
     <div class="page">
       <h1       v-if="isPageKey('None')">Pivots</h1>
-      <p_pivot1 v-if="isPageKey('Pivot1')"></p_pivot1>
-      <p_pivot2 v-if="isPageKey('Pivot2')"></p_pivot2>
+      <p_pivot1 v-if="pages['Pivot1'].show"></p_pivot1>
+      <p_pivot2 v-if="pages['Pivot2'].show"></p_pivot2>
     </div>
   </div>
 </template>
@@ -31,9 +31,9 @@
       isPageKey: function(pageKey) {
         return this.pageKey === pageKey; },
 
-      onTabs: function(obj) {
+      onNav: function(obj) {
         if( this.nav().isMyNav( obj, 'Pivots' ) ) {
-          this.pageKey = this.nav().getTabsKey('Pivots');
+          this.pageKey = this.nav().getPageKey('Pivots');
           if( this.pageKey !== 'None' ) {
               this.create( this.pageKey ); } } },
 
@@ -48,7 +48,7 @@
 
     mounted: function () {
       this.subscribe( 'Nav', 'Pivots.vue', (obj) => {
-          this.onTabs( obj ); } ); }
+          this.onNav( obj ); } ); }
 
   }
 

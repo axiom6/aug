@@ -17,13 +17,13 @@
 
     data() {
       return { route:'Geom3D', pageKey:'Grids', pages:{
-        Lines:   { title:'Lines',   key:'Lines',   obj:Lines,   created:false },
-        Grids:   { title:'Grids',   key:'Grids',   obj:Grids,   created:false },
-        Isomet:  { title:'Isomet',  key:'Isomet',  obj:Isomet,  created:false },
-        Play:    { title:'Play',    key:'Play',    obj:Play,    created:false },
-        Isohed:  { title:'Isohed',  key:'Isohed',  obj:Isohed,  created:false },
-        Objects: { title:'Objects', key:'Objects', obj:Objects, created:false },
-        Torus:   { title:'Torus',   key:'Torus',   obj:Torus,   created:false }
+        Lines:   { title:'Lines',   key:'Lines',   obj:Lines,   created:false, show:false },
+        Grids:   { title:'Grids',   key:'Grids',   obj:Grids,   created:false, show:false },
+        Isomet:  { title:'Isomet',  key:'Isomet',  obj:Isomet,  created:false, show:false },
+        Play:    { title:'Play',    key:'Play',    obj:Play,    created:false, show:false },
+        Isohed:  { title:'Isohed',  key:'Isohed',  obj:Isohed,  created:false, show:false },
+        Objects: { title:'Objects', key:'Objects', obj:Objects, created:false, show:false },
+        Torus:   { title:'Torus',   key:'Torus',   obj:Torus,   created:false, show:false }
       } } },
     
     }

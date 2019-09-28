@@ -3,7 +3,7 @@
   <div>
     <d-tabs :route="route" :pages="pages"></d-tabs>
     <template v-for="page in pages">
-      <div :ref="page.key" v-show="isPage(page.key)" class="page" :key="page.key"></div>
+      <div :ref="page.key" v-show="page.show" class="page" :key="page.key"></div>
     </template>
   </div>
 </template>
@@ -20,13 +20,10 @@
     data() { return { route:'None', pages:{} } },
 
     methods: {
-
-      isPage: function(pageKey) {
-        return this.pageKey === pageKey; },
-
-      onTabs: function(obj) {
+      
+      onNav: function(obj) {
         if( this.nav().isMyNav( obj, this.route ) ) {
-          this.pageKey = this.nav().getTabsKey(this.route);
+          this.pageKey = this.nav().getPageKey(this.route);
           if( this.pageKey !== 'None') {
               this.create(this.pageKey); } } },
 
@@ -39,8 +36,8 @@
     },
 
     mounted: function () {
-      this.subscribe(  'Nav', 'Draw.vue', (obj) => {
-        this.onTabs(obj); } ) }
+      this.subscribe(  'Nav', 'Geom.vue', (obj) => {
+        this.onNav(obj); } ) }
     }
     
     export default GeomND;

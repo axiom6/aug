@@ -17,7 +17,7 @@
     
     data() { return { compKey:'Desc', dispObj:null,
       pages:{
-        Desc: { title:'Desc', key:'Desc', show:false } } } },
+        Desc: { title:'Desc', key:'Desc', show:true } } } },
     
     methods: {
       
@@ -25,13 +25,12 @@
         this.dispObj  = this.dispObject( this.nav().compKey, this.nav().pracKey, dispKey );
         if( !this.isDef(this.dispObj) ) {
           console.error('Disp.onDisp() disp null',{comp:this.nav().compKey,prac:this.nav().pracKey,disp:dispKey})}},
-      doPage: function( tabsKey ) {
-        this.nav().setPageKey( 'Disp', tabsKey ); },
+      doPage: function( pageKey ) {
+        this.nav().setPageKey( 'Disp', pageKey ); },
       onNav:  function (obj) {
-        let tabsKey = this.nav().initTabsKey( 'Disp', 'Desc' );
         if( this.nav().isMyNav( obj, 'Disp' ) ) {
             this.onDisp( obj.dispKey );
-            this.doPage( tabsKey ); } } },
+            this.doPage( this.nav().getPageKey('Disp') ); } } },
 
     beforeMount: function() {
       this.onDisp( this.nav().dispKey ); },
