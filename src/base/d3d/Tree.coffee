@@ -5,15 +5,17 @@ import Vis  from '../../base/util/Vis.js'
 
 class Tree
 
-  constructor:( @drew, @d3,  @name, @elem, @size, @arrange='Radial' ) ->
-    [@svg,@g] = @drew.ready( @name, @elem, @size )
+  constructor:( @svgMgr ) ->
+    @d3  = @svgMgr.d3
+    @svg = @svgMgr.svg
+    @g   = @svgMgr.g
+    @arrange='Radial'
     @ready()
 
   ready:() ->
-    geo     = @drew.geomElem()
-    @graph  = @drew.svg
-    @w      = geo.w
-    @h      = geo.h
+    @graph  = @svgMgr.svg
+    @w      = @svgMgr.size.w
+    @h      = @svgMgr.size.h
     @r      = Math.min(@w/2,@h/2)*0.9
     @tree   = @treeArrange( @arrange )
     @tree.size([@r,@r]) # size([@w,@h])

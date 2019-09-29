@@ -1,25 +1,21 @@
 var Chord;
 
 Chord = class Chord {
-  constructor(drew, d3, name, elem, size) {
+  constructor(svgMgr) {
     this.ready = this.ready.bind(this);
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name;
-    this.elem = elem;
-    this.size = size;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
+    this.svgMgr = svgMgr;
+    this.d3 = this.svgMgr.d3;
+    this.svg = this.svgMgr.svg;
+    this.g = this.svgMgr.g;
     this.matrix = [[0, 20, 20, 20], [20, 0, 20, 80], [20, 20, 0, 20], [20, 80, 20, 0]];
     this.range = ["#FF0000", "#00FF00", "#0000FF", "#888888"];
     this.ready();
   }
 
   ready() {
-    var geo;
-    geo = this.drew.geomElem();
-    this.graph = this.drew.svg;
-    this.width = geo.w;
-    this.height = geo.h;
+    this.graph = this.svgMgr.g;
+    this.width = this.svgMgr.size.w;
+    this.height = this.svgMgr.size.h;
     this.outer = Math.min(this.width, this.height) * 0.5 - 40;
     this.inner = this.outer - 30;
     this.format = this.d3.formatPrefix(",.0", 1e3);

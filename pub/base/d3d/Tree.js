@@ -7,7 +7,7 @@ import Data from '../../base/util/Data.js';
 import Vis from '../../base/util/Vis.js';
 
 Tree = class Tree {
-  constructor(drew, d3, name, elem, size, arrange1 = 'Radial') {
+  constructor(svgMgr) {
     this.doRadial = this.doRadial.bind(this);
     this.doLinks = this.doLinks.bind(this);
     this.doNodes = this.doNodes.bind(this);
@@ -19,22 +19,18 @@ Tree = class Tree {
     this.isEnd180 = this.isEnd180.bind(this);
     this.isEnd = this.isEnd.bind(this);
     this.iconUnicode = this.iconUnicode.bind(this);
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name;
-    this.elem = elem;
-    this.size = size;
-    this.arrange = arrange1;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
+    this.svgMgr = svgMgr;
+    this.d3 = this.svgMgr.d3;
+    this.svg = this.svgMgr.svg;
+    this.g = this.svgMgr.g;
+    this.arrange = 'Radial';
     this.ready();
   }
 
   ready() {
-    var geo;
-    geo = this.drew.geomElem();
-    this.graph = this.drew.svg;
-    this.w = geo.w;
-    this.h = geo.h;
+    this.graph = this.svgMgr.svg;
+    this.w = this.svgMgr.size.w;
+    this.h = this.svgMgr.size.h;
     this.r = Math.min(this.w / 2, this.h / 2) * 0.9;
     this.tree = this.treeArrange(this.arrange);
     this.tree.size([

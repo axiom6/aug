@@ -5,16 +5,17 @@ import Vis  from '../../base/util/Vis.js'
 
 class Link
 
-  constructor:( @drew, @d3,  @name, @elem, @size ) ->
-    [@svg,@g] = @drew.ready( @name, @elem, @size )
+  constructor:( @svgMgr ) ->
+    @d3  = @svgMgr.d3
+    @svg = @svgMgr.svg
+    @g   = @svgMgr.g
     @ready()
     if @link2 is false and @strokeOpp is false then {}
 
   ready:() ->
-    geo       = @drew.geomElem()
-    @graph    = @drew.svg
-    @w        = geo.w
-    @h        = geo.h
+    @graph    = @svgMgr.svg
+    @w        = @svgMgr.size.w
+    @h        = @svgMgr.size.h
     @cssLink  = 'link'
     @thick    = 1
     @da       = 5
@@ -140,6 +141,8 @@ class Link
     [x,y]
 
   tree:( g, x0, y0, pts, stroke ) ->
+    x  = 0
+    yy = 0
     for [x,yy] in pts
       x1 = x  - 30
       y1 = y0
@@ -155,11 +158,9 @@ class Link
 
   diag:( g, x0, y0, pts, stroke ) ->
     pc = .5
+    x  = 0
+    yy = 0
     for [x,yy] in pts
-      ang = Vis.angle( x-x0, y-y0 )
-      cos = Vis.cos(ang)
-      sin = Vis.sin(ang)
-      Util.noop( cos, sin )
       x1  = (x0*(1-pc)+x*pc)
       x2  = (x0*pc+x*(1-pc))
       y1  = y0

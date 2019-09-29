@@ -88,26 +88,32 @@ Drew = class Drew {
     return this.size.lastHeight = size.elemHeight;
   }
 
-  layout(size, op) {
+  layout(size, op, name) {
     var geo;
+    this.size = size;
     if (op === 'Expand') { // Zoom to the entire Comp size
       geo = this.geom(size.compWidth, size.compHeight, this.size.elemWidth, this.size.elemHeight);
-      this.transform(this.svg, this.g, size.compWidth, size.compHeight, geo.sx, geo.sy);
+      this.transform(this.svg, this.g, size.compWidth, size.compHeight, geo, name);
     }
     if (op === 'Restore') { // @size is original while size is a reszize
       geo = this.geom(this.size.lastWidth, this.size.lastHeight, this.size.elemWidth, this.size.elemHeight);
-      this.transform(this.svg, this.g, this.size.lastWidth, this.size.lastHeight, geo.sx, geo.sy);
+      this.transform(this.svg, this.g, this.size.lastWidth, this.size.lastHeight, geo, name);
     }
     if (op === 'Resize') { // @size is original while size is a reszize
       geo = this.geom(size.elemWidth, size.elemHeight, this.size.elemWidth, this.size.elemHeight);
-      this.transform(this.svg, this.g, this.size.elemWidth, this.size.elemHeight, geo.sx, geo.sy);
+      this.transform(this.svg, this.g, this.size.elemWidth, this.size.elemHeight, geo, name);
     }
   }
 
-  transform(svg, g, svgWidth, svgHeight, sx, sy) {
-    // console.log( 'Drew.transform()', svgWidth, svgHeight, sx, sy )
+  transform(svg, g, svgWidth, svgHeight, geo, name) {
+    // console.log( 'Drew.transform()', svgWidth, svgHeight, geo )
     svg.attr("width", svgWidth).attr("height", svgHeight);
-    g.attr('transform', Vis.scale(sx, sy));
+    console.log('Drew', name);
+    if (name === 'Chord' || 'Tree') {
+      g.attr('transform', Vis.translateScale(geo.x0, geo.y0, geo.sx, geo.sy));
+    } else {
+      g.attr('transform', Vis.scale(geo.sx, geo.sy));
+    }
   }
 
   geomElem() {

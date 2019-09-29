@@ -9,8 +9,8 @@ import Radar from './Radar.js';
 import Palettes from './Palettes';
 
 Hue = class Hue extends Radar {
-  constructor(drew, d3, name, elem, size) {
-    super(drew, d3, name, elem, size);
+  constructor(svgMgr) {
+    super(svgMgr);
     this.quadrants = [
       {
         name1: "Red",
@@ -210,7 +210,7 @@ Hue = class Hue extends Radar {
 
   wheelReady() {
     var dr;
-    this.graph = this.drew.svg;
+    this.graph = this.svgMgr.svg;
     dr = (this.r100 - this.r40) / 30;
     this.quads(this.hueQuads(10), this.r80, this.r100);
     this.hsvWedges(5, dr, this.r40, this.r100);

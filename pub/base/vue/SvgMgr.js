@@ -1,20 +1,18 @@
 var SvgMgr;
 
 SvgMgr = class SvgMgr {
-  constructor(name1, elem1, size, d31) {
+  constructor(name1, elem1, d31) {
     var gId, svgId;
     this.name = name1;
     this.elem = elem1;
-    this.size = size;
     this.d3 = d31;
+    this.size = this.sizeElem(this.elem);
     this.svg = null;
     this.g = null;
     svgId = '';
     gId = '';
     this.defs = null;
-    [this.svg, this.g, svgId, gId, this.defs] = this.createSvg(this.elem, this.name, this.size.elemWidth, this.size.elemHeight, this.d3);
-    this.size.lastWidth = this.size.elemWidth;
-    this.size.lastHeight = this.size.elemHeight;
+    [this.svg, this.g, svgId, gId, this.defs] = this.createSvg(this.elem, this.name, this.size.w, this.size.h, this.d3);
   }
 
   createSvg(elem, name, w, h, d3) {
@@ -32,34 +30,32 @@ SvgMgr = class SvgMgr {
     return name + type + ext;
   }
 
-  resize() {
-    var geo, h, sc, sx, sy, w, xc, yc;
-    geo = this.drew.geomElem();
-    w = this.width;
-    h = this.height;
-    sx = geo.sx;
-    sy = geo.sy;
-    sc = Math.min(sx, sy);
-    xc = w / 2;
-    yc = h / 2;
-    this.svg.attr("width", w).attr("height", h);
-    this.g.transition().attr("transform", `translate(${xc},${yc}) scale(${sc})`);
+  sizeElem(elem) {
+    var sz;
+    sz = {};
+    sz.w = elem['clientWidth'];
+    sz.h = elem['clientHeight'];
+    sz.windWidth = window['clientWidth'];
+    sz.windHeight = window['clientHeight'];
+    sz.xc = sz.w * 0.5;
+    sz.yc = sz.h * 0.5;
+    sz.sx = this.size.lastWidth != null ? sz.w / this.size.lastWidth : 1.0;
+    sz.sy = this.size.lastHeight != null ? sz.h / this.size.lastHeight : 1.0;
+    sz.s = Math.min(sz.sx, sz.sy);
+    sz.r = Math.min(sz.w, sz.h) * 0.2; // Used for hexagons
+    sz.fontSize = '2em'; // @toVh( 5 )+'vh'
+    sz.iconSize = '2em'; // @toVh( 5 )+'vh'
+    sz.lastWidth = sz.w;
+    sz.lastHeight = sz.h;
+    this.size = sz;
+    return sz;
   }
 
-  // Not called, here for reference
-  geom(compWidth, compHeight, elemWidth, elemHeight) {
-    var g;
-    g = {};
-    [g.w, g.h] = [elemWidth, elemHeight];
-    g.r = Math.min(g.w, g.h) * 0.2; // Use for hexagons
-    g.x0 = g.w * 0.5;
-    g.y0 = g.h * 0.5;
-    g.sx = compWidth / g.w;
-    g.sy = compHeight / g.h;
-    g.s = Math.min(g.sx, g.sy);
-    g.fontSize = '2em'; // @toVh( 5 )+'vh'
-    g.iconSize = '2em'; // @toVh( 5 )+'vh'
-    return g;
+  resize() {
+    var sz;
+    sz = this.sizeElem(this.elem);
+    this.svg.attr("width", sz.w).attr("height", sz.h);
+    this.g.transition().attr("transform", `translate(${sz.xc},${sz.yc}) scale(${sz.sc})`);
   }
 
 };

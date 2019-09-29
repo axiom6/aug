@@ -1,14 +1,17 @@
 
 1. Bugs
-   a. Conn Prac
-   b. Maintain Tab with Dir
-   c. Route url path bugs
+   a. Conn Prac font size, position and resize
+      Wheel no resize | Axes,Chord,Tree translate  | Link good | Radar no display | Hue good
+   b. Draw SvgMgr look into tranform in Axes Chord
+   c. May have to refactor all Svg for Conn Draw
+
 
 2. Improve
    a. Desc Prac
    b. Desc Disp
    c. Hsv Backgrounds
    d. Consider bring Prin into IKW nav
+   e. Route url path bugs
 
 3. Improved Landing Pages
    a. Muse Home Prin Info Know Wise

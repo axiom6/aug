@@ -3,7 +3,7 @@ var Wheel;
 import Data from '../../base/util/Data.js';
 
 Wheel = class Wheel {
-  constructor(drew, d3, name1, elem1, size) {
+  constructor(svgMgr) {
     // Passed as a callback to Wheel and called when Wheel makes a choice to be published
     this.publish = this.publish.bind(this);
     this.adjustRadius = this.adjustRadius.bind(this);
@@ -24,17 +24,16 @@ Wheel = class Wheel {
     this.textTransform = this.textTransform.bind(this);
     this.displayAllLeaves = this.displayAllLeaves.bind(this);
     this.zoomTween = this.zoomTween.bind(this);
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name1;
-    this.elem = elem1;
-    this.size = size;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
+    this.svgMgr = svgMgr;
+    this.d3 = this.svgMgr.d3;
+    this.svg = this.svgMgr.svg;
+    this.g = this.svgMgr.g;
     this.opacity = 1.0;
     this.showAllLeaves = false;
     this.radiusFactorChoice = 1.3;
     this.radiusFactorChild = 1.0;
     this.url = Data.toUrl('jitter/Flavor.json');
+    console.log('Wheel()', this.svgMgr);
     this.ready();
   }
 
@@ -50,27 +49,12 @@ Wheel = class Wheel {
     console.log('Choice', choice);
   }
 
-  resize() {
-    var geo, h, sc, sx, sy, w, xc, yc;
-    geo = this.drew.geomElem();
-    w = geo.w;
-    h = geo.h;
-    sx = geo.sx;
-    sy = geo.sy;
-    sc = Math.min(sx, sy);
-    xc = w / 2;
-    yc = h / 2;
-    this.svg.attr("width", w).attr("height", h);
-    this.g.transition().attr("transform", `translate(${xc},${yc}) scale(${sc})`);
-  }
-
   ready() {
-    var geo, scale, xc, yc;
-    geo = this.drew.geomElem();
+    var scale, xc, yc;
     scale = 1.0;
     this.json = {};
-    this.width = geo.w;
-    this.height = geo.h;
+    this.width = this.svgMgr.size.w;
+    this.height = this.svgMgr.size.h;
     this.radius = Math.min(this.width, this.height) * scale / 2;
     this.xx = this.d3.scaleLinear().range([0, 2 * Math.PI]);
     this.yy = this.d3.scalePow().exponent(1.4).domain([0, 1]).range([

@@ -6,20 +6,22 @@ import Vis  from '../../base/util/Vis.js'
 
 class Radar
 
-  constructor:( @drew, @d3,  @name, @elem, @size ) ->
-    [@svg,@g] = @drew.ready( @name, @elem, @size )
+  constructor:( @svgMgr ) ->
+    @d3  = @svgMgr.d3
+    @svg = @svgMgr.svg
+    @g   = @svgMgr.g
     @ready()
 
   isRadar:() ->
     @name is 'Radar'
 
   ready:() ->
-    geo     = @drew.geomElem()
-    @graph  = @drew.svg
-    @width  = geo.w
-    @height = geo.h
-    @x0     = @width/2
-    @y0     = @height/2
+    @graph  = @svgMgr.svg
+    sz      = @svgMgr.size
+    @width  = sz.w
+    @height = sz.h
+    @x0     = sz.xc
+    @y0     = sz.yc
     @inner  = 0
     @outer  = ( Math.min(@width,@height) - 100 ) / 2
     @r04    = @outer*0.04; @r08 = @outer*0.08; @r16 = @outer*0.16;

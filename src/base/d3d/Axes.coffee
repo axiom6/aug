@@ -4,22 +4,23 @@ import Vis  from '../../base/util/Vis.js'
 
 class Axes
 
-  constructor:( @drew, @d3,  @name, @elem, @size ) ->
-    [@svg,@g] = @drew.ready( @name, @elem, @size )
+  constructor:( @svgMgr ) ->
+    @d3  = @svgMgr.d3
+    @svg = @svgMgr.svg
+    @g   = @svgMgr.g
     @ready()
 
   ready:() ->
-    geo     = @drew.geomElem()
+    sz = @svgMgr.size
     @margin = { left:40, top:40, right:40, bottom:40 }
-    @width  = Math.min(geo.w,geo.h) - @margin.left - @margin.right
-    @height = Math.min(geo.w,geo.h) - @margin.top  - @margin.bottom
+    @width  = Math.min(sz.w,sz.h) - @margin.left - @margin.right
+    @height = Math.min(sz.w,sz.h) - @margin.top  - @margin.bottom
     @xObj   = { x1:0, x2:100, xtick1:10, xtick2:1, stroke1:'#AAAAAA', stroke2:'#666666' }
     @yObj   = { y1:0, y2:100, ytick1:10, ytick2:1, stroke1:'#AAAAAA', stroke2:'#666666' }
     @xScale = @createXScale( @xObj, @width  )
     @yScale = @createYScale( @yObj, @height )
     @axes( @g, @xObj, @yObj )
     @grid( @g, @xObj, @yObj )
-    #@d3d.transform( @svg.$s, @g, geo.w/2, geo.h/2, geo.s )
 
   axes:( g, xObj, yObj ) ->
     @attrG( g )

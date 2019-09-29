@@ -20,14 +20,15 @@ var script = {
       if( tabsKey !== 'None') {
         this.pageKey = tabsKey; } },
     doPage: function (pageKey) {
-      this.nav().dirTabs = true;
+      this.nav().dirTabs = this.app() !== 'Muse';
       if( pageKey !== 'None') {
         this.onPage( pageKey );
-        this.nav().setPageKey(  this.route,   pageKey );
+        this.nav().setPageKey( this.route, pageKey );
         this.nav().pub( this.pubObj(pageKey) ); } },
     pubObj: function (pageKey) {
       let obj   = {};
-          obj.route = this.route;
+          obj.route   = this.route;
+          obj.pageKey = pageKey;
       let poute = this.pages[pageKey].route;
       if( this.isDef(poute) ) {
           obj.poute = poute; }
@@ -218,7 +219,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-b6e4a2da_0", { source: ".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tabs .tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Tabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Tabs.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;AACrB;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;AACxB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;ACCnB;ADCA;ECCA,uBAAA;EACA,iBAAA;AACA;AACA;EACA,uBAAA;EACA,iBAAA;AACA;AACA;EDCE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,UAAU;EACV,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Tabs.vue","sourcesContent":[".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tabs .tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"tabs\">\n    <template v-for=\"pageObj in pages\">\n      <div :class=\"classTab(pageObj.key)\" @click=\"doPage(pageObj.key)\">{{pageObj.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { route:String, pages:Object },\n    \n    data() { return { tabsKey:'None', pageKey:'None', pageObj:null } },\n    \n    methods: {\n      onPage: function (tabsKey) {\n        if( tabsKey !== 'None') {\n          this.pageKey = tabsKey; } },\n      doPage: function (pageKey) {\n        this.nav().dirTabs = true;\n        if( pageKey !== 'None') {\n          this.onPage( pageKey );\n          this.nav().setPageKey(  this.route,   pageKey );\n          this.nav().pub( this.pubObj(pageKey) ); } },\n      pubObj: function (pageKey) {\n        let obj   = {}\n            obj.route = this.route;\n        let poute = this.pages[pageKey].route;\n        if( this.isDef(poute) ) {\n            obj.poute = poute; }\n        return obj; },\n      classTab: function (pageKey) {\n        return this.pageKey===pageKey ? 'tab-active' : 'tab'; } },\n\n    beforeMount: function () {  // We want to set the routes pages asap\n      this.tabsKey = this.nav().setPages( this.route, this.pages ); },\n\n    mounted: function() {\n      this.onPage(this.tabsKey);\n      this.subscribe(  \"Nav\", 'Tabs.vue.'+this.route, (obj) => {\n        if( obj.source !== 'Tabs' && obj.route === this.route ) {\n          this.onPage( this.nav().getPageKey(this.route) ); } } ); }\n    }\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .tabs { position:absolute; left:0; top:0; width:100%; height:5%;\n          background-color:@theme-back; font-size:@theme-tab-size;\n    .tab { display:inline-block; margin-left:2.0rem; padding:0.2rem 0.3rem 0.1rem 0.3rem;\n      border-radius:12px 12px 0 0; border-left: @theme-color solid thin;\n      border-top:@theme-color solid thin; border-right:@theme-color solid thin;\n                  background-color:@theme-back;  color:@theme-color;}\n    .tab:hover  {         background-color:@theme-color; color:@theme-back; }\n    .tab-active { .tab(); background-color:@theme-color; color:@theme-back; } }\n  \n</style>"]}, media: undefined });
+    inject("data-v-85274166_0", { source: ".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tabs .tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Tabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Tabs.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;AACrB;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;AACxB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;ACCA;EDCE,uBAAuB;ECCzB,iBAAA;AACA;AACA;EACA,uBAAA;EACA,eAAA;AACA;AACA;EACA,uBAAA;EDCE,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,UAAU;EACV,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Tabs.vue","sourcesContent":[".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tabs {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 5%;\n  background-color: black;\n  font-size: 1.5rem;\n}\n.tabs .tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs .tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs .tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"tabs\">\n    <template v-for=\"pageObj in pages\">\n      <div :class=\"classTab(pageObj.key)\" @click=\"doPage(pageObj.key)\">{{pageObj.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { route:String, pages:Object },\n    \n    data() { return { tabsKey:'None', pageKey:'None', pageObj:null } },\n    \n    methods: {\n      onPage: function (tabsKey) {\n        if( tabsKey !== 'None') {\n          this.pageKey = tabsKey; } },\n      doPage: function (pageKey) {\n        this.nav().dirTabs = this.app() !== 'Muse';\n        if( pageKey !== 'None') {\n          this.onPage( pageKey );\n          this.nav().setPageKey( this.route, pageKey );\n          this.nav().pub( this.pubObj(pageKey) ); } },\n      pubObj: function (pageKey) {\n        let obj   = {}\n            obj.route   = this.route;\n            obj.pageKey = pageKey;\n        let poute = this.pages[pageKey].route;\n        if( this.isDef(poute) ) {\n            obj.poute = poute; }\n        return obj; },\n      classTab: function (pageKey) {\n        return this.pageKey===pageKey ? 'tab-active' : 'tab'; } },\n\n    beforeMount: function () {  // We want to set the routes pages asap\n      this.tabsKey = this.nav().setPages( this.route, this.pages ); },\n\n    mounted: function() {\n      this.onPage(this.tabsKey);\n      this.subscribe(  \"Nav\", 'Tabs.vue.'+this.route, (obj) => {\n        if( obj.source !== 'Tabs' && obj.route === this.route ) {\n          this.onPage( this.nav().getPageKey(this.route) ); } } ); }\n    }\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .tabs { position:absolute; left:0; top:0; width:100%; height:5%;\n          background-color:@theme-back; font-size:@theme-tab-size;\n    .tab { display:inline-block; margin-left:2.0rem; padding:0.2rem 0.3rem 0.1rem 0.3rem;\n      border-radius:12px 12px 0 0; border-left: @theme-color solid thin;\n      border-top:@theme-color solid thin; border-right:@theme-color solid thin;\n                  background-color:@theme-back;  color:@theme-color;}\n    .tab:hover  {         background-color:@theme-color; color:@theme-back; }\n    .tab-active { .tab(); background-color:@theme-color; color:@theme-back; } }\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -6726,7 +6727,7 @@ function x(d) {
   return d.x + d.vx;
 }
 
-function y$1(d) {
+function y(d) {
   return d.y + d.vy;
 }
 
@@ -6748,7 +6749,7 @@ function collide(radius) {
         ri2;
 
     for (var k = 0; k < iterations; ++k) {
-      tree = quadtree(nodes, x, y$1).visitAfter(prepare);
+      tree = quadtree(nodes, x, y).visitAfter(prepare);
       for (i = 0; i < n; ++i) {
         node = nodes[i];
         ri = radii[node.index], ri2 = ri * ri;
@@ -6934,7 +6935,7 @@ function x$1(d) {
   return d.x;
 }
 
-function y$1$1(d) {
+function y$1(d) {
   return d.y;
 }
 
@@ -7089,7 +7090,7 @@ function manyBody() {
       theta2 = 0.81;
 
   function force(_) {
-    var i, n = nodes.length, tree = quadtree(nodes, x$1, y$1$1).visitAfter(accumulate);
+    var i, n = nodes.length, tree = quadtree(nodes, x$1, y$1).visitAfter(accumulate);
     for (alpha = _, i = 0; i < n; ++i) node = nodes[i], tree.visit(apply);
   }
 
@@ -15247,11 +15248,11 @@ function pie() {
 
 var curveRadialLinear = curveRadial(curveLinear);
 
-function Radial$1(curve) {
+function Radial(curve) {
   this._curve = curve;
 }
 
-Radial$1.prototype = {
+Radial.prototype = {
   areaStart: function() {
     this._curve.areaStart();
   },
@@ -15272,7 +15273,7 @@ Radial$1.prototype = {
 function curveRadial(curve) {
 
   function radial(context) {
-    return new Radial$1(curve(context));
+    return new Radial(curve(context));
   }
 
   radial._curve = curve;
@@ -20468,6 +20469,18 @@ Vis = class Vis {
     return ` rotate(${a} ${x} ${y} )`;
   }
 
+  static translateScale(x0, y0, sx, sy) {
+    Util$1.checkTypes('number', {
+      x0: x0,
+      y0: y0
+    });
+    Util$1.checkTypes('number', {
+      sx: sx,
+      sy: sy
+    });
+    return ` translate( ${x0}, ${y0} ) scale( ${sx}, ${sy} )`;
+  }
+
   static rad(deg) {
     return deg * Math.PI / 180;
   }
@@ -20801,6 +20814,79 @@ Vis = class Vis {
 
 var Vis$1 = Vis;
 
+var SvgMgr;
+
+SvgMgr = class SvgMgr {
+  constructor(name1, elem1, stream = null) {
+    this.resize = this.resize.bind(this);
+    this.resize2 = this.resize2.bind(this);
+    this.name = name1;
+    this.elem = elem1;
+    this.stream = stream;
+    this.d3 = d3;
+    this.size = this.sizeElem(this.elem);
+    this.origWidth = this.size.w;
+    this.origHeight = this.size.h;
+    this.svgId = this.htmlId(this.name, 'Svg', '');
+    this.gId = this.htmlId(this.name, 'SvgG', '');
+    this.svg = this.d3.select(this.elem).append("svg:svg");
+    this.svg.attr("id", this.svgId).attr("width", this.size.w).attr("height", this.size.h).attr("xmlns", "http://www.w3.org/2000/svg");
+    this.defs = this.svg.append("svg:defs");
+    this.g = this.svg.append("svg:g").attr("id", this.gId); // All transforms are applied to g
+    window.onresize = this.resize;
+  }
+
+  htmlId(name, type, ext = '') {
+    return name + type + ext;
+  }
+
+  sizeElem(elem) {
+    var sz;
+    sz = {};
+    sz.w = elem['clientWidth'];
+    sz.h = elem['clientHeight'];
+    sz.windWidth = window['innerWidth'];
+    sz.windHeight = window['innerHeight'];
+    sz.xc = sz.w * 0.5;
+    sz.yc = sz.h * 0.5;
+    sz.sx = this.origWidth ? sz.w / this.origWidth : 1.0;
+    sz.sy = this.origHeight ? sz.h / this.origHeight : 1.0;
+    sz.s = Math.min(sz.sx, sz.sy);
+    sz.r = Math.min(sz.w, sz.h) * 0.2; // Used for hexagons
+    sz.fontSize = '2em'; // @toVh( 5 )+'vh'
+    sz.iconSize = '2em'; // @toVh( 5 )+'vh'
+    console.log('SvgMgr.sizeElem()', sz);
+    this.size = sz;
+    return sz;
+  }
+
+  resize() {
+    var sz;
+    sz = this.sizeElem(this.elem);
+    this.svg.attr("width", sz.w).attr("height", sz.h);
+    this.g.transition().attr("transform", `scale(${sz.s})`);
+  }
+
+  resize2() {
+    var sz, trans;
+    sz = this.sizeElem(this.elem);
+    this.svg.attr("width", sz.w).attr("height", sz.h);
+    trans = this.g.attr("transform");
+    if ((trans != null) && trans.includes("translate")) {
+      this.g.transition().attr("transform", `translate(${sz.xc},${sz.yc}) scale(${sz.s})`);
+    } else {
+      this.g.transition().attr("transform", `scale(${sz.s})`);
+    }
+  }
+
+  toFill(hsv) {
+    return Vis$1.toRgbHsvStr(hsv);
+  }
+
+};
+
+var SvgMgr$1 = SvgMgr;
+
 var Data,
   hasProp$1 = {}.hasOwnProperty;
 
@@ -20999,7 +21085,7 @@ var Data$1 = Data;
 var Wheel;
 
 Wheel = class Wheel {
-  constructor(drew, d3, name1, elem1, size) {
+  constructor(svgMgr) {
     // Passed as a callback to Wheel and called when Wheel makes a choice to be published
     this.publish = this.publish.bind(this);
     this.adjustRadius = this.adjustRadius.bind(this);
@@ -21020,17 +21106,16 @@ Wheel = class Wheel {
     this.textTransform = this.textTransform.bind(this);
     this.displayAllLeaves = this.displayAllLeaves.bind(this);
     this.zoomTween = this.zoomTween.bind(this);
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name1;
-    this.elem = elem1;
-    this.size = size;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
+    this.svgMgr = svgMgr;
+    this.d3 = this.svgMgr.d3;
+    this.svg = this.svgMgr.svg;
+    this.g = this.svgMgr.g;
     this.opacity = 1.0;
     this.showAllLeaves = false;
     this.radiusFactorChoice = 1.3;
     this.radiusFactorChild = 1.0;
     this.url = Data$1.toUrl('jitter/Flavor.json');
+    console.log('Wheel()', this.svgMgr);
     this.ready();
   }
 
@@ -21046,27 +21131,12 @@ Wheel = class Wheel {
     console.log('Choice', choice);
   }
 
-  resize() {
-    var geo, h, sc, sx, sy, w, xc, yc;
-    geo = this.drew.geomElem();
-    w = geo.w;
-    h = geo.h;
-    sx = geo.sx;
-    sy = geo.sy;
-    sc = Math.min(sx, sy);
-    xc = w / 2;
-    yc = h / 2;
-    this.svg.attr("width", w).attr("height", h);
-    this.g.transition().attr("transform", `translate(${xc},${yc}) scale(${sc})`);
-  }
-
   ready() {
-    var geo, scale, xc, yc;
-    geo = this.drew.geomElem();
+    var scale, xc, yc;
     scale = 1.0;
     this.json = {};
-    this.width = geo.w;
-    this.height = geo.h;
+    this.width = this.svgMgr.size.w;
+    this.height = this.svgMgr.size.h;
     this.radius = Math.min(this.width, this.height) * scale / 2;
     this.xx = this.d3.scaleLinear().range([0, 2 * Math.PI]);
     this.yy = this.d3.scalePow().exponent(1.4).domain([0, 1]).range([
@@ -21501,27 +21571,25 @@ var Wheel$1 = Wheel;
 var Axes;
 
 Axes = class Axes {
-  constructor(drew, d3, name, elem1, size) {
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name;
-    this.elem = elem1;
-    this.size = size;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
+  constructor(svgMgr) {
+    this.svgMgr = svgMgr;
+    this.d3 = this.svgMgr.d3;
+    this.svg = this.svgMgr.svg;
+    this.g = this.svgMgr.g;
     this.ready();
   }
 
   ready() {
-    var geo;
-    geo = this.drew.geomElem();
+    var sz;
+    sz = this.svgMgr.size;
     this.margin = {
       left: 40,
       top: 40,
       right: 40,
       bottom: 40
     };
-    this.width = Math.min(geo.w, geo.h) - this.margin.left - this.margin.right;
-    this.height = Math.min(geo.w, geo.h) - this.margin.top - this.margin.bottom;
+    this.width = Math.min(sz.w, sz.h) - this.margin.left - this.margin.right;
+    this.height = Math.min(sz.w, sz.h) - this.margin.top - this.margin.bottom;
     this.xObj = {
       x1: 0,
       x2: 100,
@@ -21544,7 +21612,6 @@ Axes = class Axes {
     return this.grid(this.g, this.xObj, this.yObj);
   }
 
-  //@d3d.transform( @svg.$s, @g, geo.w/2, geo.h/2, geo.s )
   axes(g, xObj, yObj) {
     this.attrG(g);
     this.bAxis = this.createBAxis(g, xObj);
@@ -21648,25 +21715,21 @@ var Axes$1 = Axes;
 var Chord;
 
 Chord = class Chord {
-  constructor(drew, d3, name, elem, size) {
+  constructor(svgMgr) {
     this.ready = this.ready.bind(this);
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name;
-    this.elem = elem;
-    this.size = size;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
+    this.svgMgr = svgMgr;
+    this.d3 = this.svgMgr.d3;
+    this.svg = this.svgMgr.svg;
+    this.g = this.svgMgr.g;
     this.matrix = [[0, 20, 20, 20], [20, 0, 20, 80], [20, 20, 0, 20], [20, 80, 20, 0]];
     this.range = ["#FF0000", "#00FF00", "#0000FF", "#888888"];
     this.ready();
   }
 
   ready() {
-    var geo;
-    geo = this.drew.geomElem();
-    this.graph = this.drew.svg;
-    this.width = geo.w;
-    this.height = geo.h;
+    this.graph = this.svgMgr.g;
+    this.width = this.svgMgr.size.w;
+    this.height = this.svgMgr.size.h;
     this.outer = Math.min(this.width, this.height) * 0.5 - 40;
     this.inner = this.outer - 30;
     this.format = this.d3.formatPrefix(",.0", 1e3);
@@ -21811,24 +21874,20 @@ var Chord$1 = Chord;
 var Link;
 
 Link = class Link {
-  constructor(drew, d3, name, elem, size) {
+  constructor(svgMgr) {
     this.strokeOpp = this.strokeOpp.bind(this);
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name;
-    this.elem = elem;
-    this.size = size;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
+    this.svgMgr = svgMgr;
+    this.d3 = this.svgMgr.d3;
+    this.svg = this.svgMgr.svg;
+    this.g = this.svgMgr.g;
     this.ready();
     if (this.link2 === false && this.strokeOpp === false) ;
   }
 
   ready() {
-    var geo;
-    geo = this.drew.geomElem();
-    this.graph = this.drew.svg;
-    this.w = geo.w;
-    this.h = geo.h;
+    this.graph = this.svgMgr.svg;
+    this.w = this.svgMgr.size.w;
+    this.h = this.svgMgr.size.h;
     this.cssLink = 'link';
     this.thick = 1;
     this.da = 5;
@@ -22032,6 +22091,8 @@ Link = class Link {
 
   tree(g, x0, y0, pts, stroke) {
     var i, len, x, x1, x2, y1, y2, yy;
+    x = 0;
+    yy = 0;
     for (i = 0, len = pts.length; i < len; i++) {
       [x, yy] = pts[i];
       x1 = x - 30;
@@ -22048,14 +22109,12 @@ Link = class Link {
 
   //console.log( { x0:x0, y0:y0, x1:x1, y1:y1, x2:x2, y2:y2, x3:x, y3:yy } )
   diag(g, x0, y0, pts, stroke) {
-    var ang, cos, i, len, pc, sin, x, x1, x2, y1, y2, yy;
+    var i, len, pc, x, x1, x2, y1, y2, yy;
     pc = .5;
+    x = 0;
+    yy = 0;
     for (i = 0, len = pts.length; i < len; i++) {
       [x, yy] = pts[i];
-      ang = Vis$1.angle(x - x0, y - y0);
-      cos = Vis$1.cos(ang);
-      sin = Vis$1.sin(ang);
-      Util$1.noop(cos, sin);
       x1 = x0 * (1 - pc) + x * pc;
       x2 = x0 * pc + x * (1 - pc);
       y1 = y0;
@@ -22078,7 +22137,7 @@ var Link$1 = Link;
 var Radar;
 
 Radar = class Radar {
-  constructor(drew, d3, name2, elem, size) {
+  constructor(svgMgr) {
     this.doQuads = this.doQuads.bind(this);
     this.doTechs = this.doTechs.bind(this);
     this.attrG = this.attrG.bind(this);
@@ -22097,12 +22156,10 @@ Radar = class Radar {
     
     // Plot tech points as either dots or triangles and add drag behavior. Add tech title tool tip
     this.pts = this.pts.bind(this);
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name2;
-    this.elem = elem;
-    this.size = size;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
+    this.svgMgr = svgMgr;
+    this.d3 = this.svgMgr.d3;
+    this.svg = this.svgMgr.svg;
+    this.g = this.svgMgr.g;
     this.ready();
   }
 
@@ -22111,13 +22168,13 @@ Radar = class Radar {
   }
 
   ready() {
-    var geo;
-    geo = this.drew.geomElem();
-    this.graph = this.drew.svg;
-    this.width = geo.w;
-    this.height = geo.h;
-    this.x0 = this.width / 2;
-    this.y0 = this.height / 2;
+    var sz;
+    this.graph = this.svgMgr.svg;
+    sz = this.svgMgr.size;
+    this.width = sz.w;
+    this.height = sz.h;
+    this.x0 = sz.xc;
+    this.y0 = sz.yc;
     this.inner = 0;
     this.outer = (Math.min(this.width, this.height) - 100) / 2;
     this.r04 = this.outer * 0.04;
@@ -22474,7 +22531,7 @@ var Radar$1 = Radar;
 var Tree;
 
 Tree = class Tree {
-  constructor(drew, d3, name, elem, size, arrange1 = 'Radial') {
+  constructor(svgMgr) {
     this.doRadial = this.doRadial.bind(this);
     this.doLinks = this.doLinks.bind(this);
     this.doNodes = this.doNodes.bind(this);
@@ -22486,22 +22543,18 @@ Tree = class Tree {
     this.isEnd180 = this.isEnd180.bind(this);
     this.isEnd = this.isEnd.bind(this);
     this.iconUnicode = this.iconUnicode.bind(this);
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name;
-    this.elem = elem;
-    this.size = size;
-    this.arrange = arrange1;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
+    this.svgMgr = svgMgr;
+    this.d3 = this.svgMgr.d3;
+    this.svg = this.svgMgr.svg;
+    this.g = this.svgMgr.g;
+    this.arrange = 'Radial';
     this.ready();
   }
 
   ready() {
-    var geo;
-    geo = this.drew.geomElem();
-    this.graph = this.drew.svg;
-    this.w = geo.w;
-    this.h = geo.h;
+    this.graph = this.svgMgr.svg;
+    this.w = this.svgMgr.size.w;
+    this.h = this.svgMgr.size.h;
     this.r = Math.min(this.w / 2, this.h / 2) * 0.9;
     this.tree = this.treeArrange(this.arrange);
     this.tree.size([
@@ -25323,8 +25376,8 @@ var Palettes$1 = Palettes;
 var Hue;
 
 Hue = class Hue extends Radar$1 {
-  constructor(drew, d3, name, elem, size) {
-    super(drew, d3, name, elem, size);
+  constructor(svgMgr) {
+    super(svgMgr);
     this.quadrants = [
       {
         name1: "Red",
@@ -25524,7 +25577,7 @@ Hue = class Hue extends Radar$1 {
 
   wheelReady() {
     var dr;
-    this.graph = this.drew.svg;
+    this.graph = this.svgMgr.svg;
     dr = (this.r100 - this.r40) / 30;
     this.quads(this.hueQuads(10), this.r80, this.r100);
     this.hsvWedges(5, dr, this.r40, this.r100);
@@ -25612,126 +25665,40 @@ Hue = class Hue extends Radar$1 {
 
 var Hue$1 = Hue;
 
-var Drew;
+var D3D;
 
-Drew = class Drew {
-  constructor(stream, drewElem, drewSize) {
-    this.transform = this.transform.bind(this);
+D3D = class D3D {
+  constructor(stream) {
     this.stream = stream;
-    this.drewElem = drewElem;
-    this.drewSize = drewSize;
-    this.size = this.drewSize;
   }
 
-  create(name, elem, size) {
+  create(name, elem) {
+    var svgMgr;
+    svgMgr = new SvgMgr$1(name, elem, this.stream);
     switch (name) {
       case 'Wheel':
-        return new Wheel$1(this, d3, name, elem, size);
+        return new Wheel$1(svgMgr);
       case 'Axes':
-        return new Axes$1(this, d3, name, elem, size);
+        return new Axes$1(svgMgr);
       case 'Chord':
-        return new Chord$1(this, d3, name, elem, size);
-      case 'Cluster':
-        return new Cluster(this, d3, name, elem, size);
+        return new Chord$1(svgMgr);
       case 'Link':
-        return new Link$1(this, d3, name, elem, size);
+        return new Link$1(svgMgr);
       case 'Radar':
-        return new Radar$1(this, d3, name, elem, size, 'Radar');
-      case 'Radial':
-        return new Radial(this, d3, name, elem, size);
+        return new Radar$1(svgMgr, 'Radar');
       case 'Tree':
-        return new Tree$1(this, d3, name, elem, size);
+        return new Tree$1(svgMgr);
       case 'Hue':
-        return new Hue$1(this, d3, name, elem, size, 'Hue');
+        return new Hue$1(svgMgr, 'Hue');
       default:
         console.error('Draw.create(name) unknown name', name);
-        return new Axes$1(this, d3, name, elem, size);
+        return new Axes$1(svgMgr);
     }
-  }
-
-  ready(name, elem, size) {
-    var gId, svgId;
-    this.size = size;
-    //geo = @geom( size.elemWidth, size.elemHeight, size.elemWidth, size.elemHeight )
-    this.svg = null;
-    this.g = null;
-    svgId = '';
-    gId = '';
-    this.defs = null;
-    [this.svg, this.g, svgId, gId, this.defs] = this.createSvg(elem, name, size.elemWidth, size.elemHeight);
-    this.size.lastWidth = size.elemWidth;
-    this.size.lastHeight = size.elemHeight;
-    return [this.svg, this.g];
-  }
-
-  createSvg(elem, name, w, h) {
-    var defs, g, gId, svg, svgId;
-    svgId = this.htmlId(name, 'Svg', '');
-    gId = this.htmlId(name, 'SvgG', '');
-    svg = select(elem).append("svg:svg");
-    svg.attr("id", svgId).attr("width", w).attr("height", h).attr("xmlns", "http://www.w3.org/2000/svg");
-    defs = svg.append("svg:defs");
-    g = svg.append("svg:g").attr("id", gId); // All transforms are applied to g
-    return [svg, g, svgId, gId, defs];
-  }
-
-  htmlId(name, type, ext = '') {
-    return name + type + ext;
-  }
-
-  lastSize(size) {
-    this.size.lastWidth = size.elemWidth;
-    return this.size.lastHeight = size.elemHeight;
-  }
-
-  layout(size, op) {
-    var geo;
-    if (op === 'Expand') { // Zoom to the entire Comp size
-      geo = this.geom(size.compWidth, size.compHeight, this.size.elemWidth, this.size.elemHeight);
-      this.transform(this.svg, this.g, size.compWidth, size.compHeight, geo.sx, geo.sy);
-    }
-    if (op === 'Restore') { // @size is original while size is a reszize
-      geo = this.geom(this.size.lastWidth, this.size.lastHeight, this.size.elemWidth, this.size.elemHeight);
-      this.transform(this.svg, this.g, this.size.lastWidth, this.size.lastHeight, geo.sx, geo.sy);
-    }
-    if (op === 'Resize') { // @size is original while size is a reszize
-      geo = this.geom(size.elemWidth, size.elemHeight, this.size.elemWidth, this.size.elemHeight);
-      this.transform(this.svg, this.g, this.size.elemWidth, this.size.elemHeight, geo.sx, geo.sy);
-    }
-  }
-
-  transform(svg, g, svgWidth, svgHeight, sx, sy) {
-    // console.log( 'Drew.transform()', svgWidth, svgHeight, sx, sy )
-    svg.attr("width", svgWidth).attr("height", svgHeight);
-    g.attr('transform', Vis$1.scale(sx, sy));
-  }
-
-  geomElem() {
-    return this.geom(this.size.elemWidth, this.size.elemHeight, this.size.elemWidth, this.size.elemHeight);
-  }
-
-  geom(compWidth, compHeight, elemWidth, elemHeight) {
-    var g;
-    g = {};
-    [g.w, g.h] = [elemWidth, elemHeight];
-    g.r = Math.min(g.w, g.h) * 0.2; // Use for hexagons
-    g.x0 = g.w * 0.5;
-    g.y0 = g.h * 0.5;
-    g.sx = compWidth / g.w;
-    g.sy = compHeight / g.h;
-    g.s = Math.min(g.sx, g.sy);
-    g.fontSize = '2em'; // @toVh( 5 )+'vh'
-    g.iconSize = '2em'; // @toVh( 5 )+'vh'
-    return g;
-  }
-
-  toFill(hsv) {
-    return Vis$1.toRgbHsvStr(hsv);
   }
 
 };
 
-var Drew$1 = Drew;
+var D3D$1 = D3D;
 
 //
 
@@ -25755,28 +25722,19 @@ let Draw = {
       if( this.nav().isMyNav( obj, this.route ) ) {
           this.pageKey = this.nav().getPageKey('Draw');
           if( this.pageKey !== 'None') {
-           // this.nav().setPageKey( 'Draw', this.pageKey );
               this.create(this.pageKey); } } },
-
-    size: function() {
-      let sz   = {};
-      sz.compWidth  = this.$refs['Draw']['clientWidth' ];
-      sz.compHeight = this.$refs['Draw']['clientHeight'];
-      sz.elemWidth  = this.$refs['Draw']['clientWidth' ];
-      sz.elemHeight = this.$refs['Draw']['clientHeight'];
-      return sz; },
     
     create: function( pageKey ) {
           this.$nextTick( function() {
             let elem = this.$refs[pageKey][0];
-            this.pages[pageKey].obj = this.drew.create( pageKey, elem, this.size() ); } ); }
+            this.pages[pageKey].obj = this.D3D.create( pageKey, elem ); } ); }
   },
 
   mounted: function () {
     this.subscribe(  'Nav', 'Draw.vue', (obj) => {
       this.onNav(obj); } );
     this.$nextTick( function() {
-      this.drew = new Drew$1( this.stream(), this.$refs['Draw'], this.size() ); } ); }
+      this.D3D = new D3D$1( this.stream() ); } ); }
 };
 
 /* script */
@@ -25823,7 +25781,7 @@ __vue_render__$1._withStripped = true;
   /* style */
   const __vue_inject_styles__$1 = function (inject) {
     if (!inject) return
-    inject("data-v-5c615160_0", { source: ".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue","/Users/ax/Documents/prj/aug/vue/draw/Draw.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;AACrB;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;AACxB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;ACCnB;ADCA;ECCA,uBAAA;EACA,iBAAA;AACA;AACA;EDCE,uBAAuB;ECCzB,iBAAA;AACA;AACA;EDCE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;EACvB,+BAA+B;AACjC;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,eAAe;AACjB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;AACX;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2.5rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n","\n\n<template>\n  <div class=\"draw\" ref=\"Draw\">\n    <d-tabs route=\"Draw\" :pages=\"pages\"></d-tabs>\n    <h1 v-if=\"pageKey==='Draw'\">Drawings in D3</h1>\n    <template v-for=\"page in pages\">\n      <div :ref=\"page.key\" v-show=\"page.show\" class=\"page\" :key=\"page.key\"></div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Tabs from '../elem/Tabs.vue';\n  import Drew from '../../pub/base/d3d/Drew.js'\n\n  let Draw = {\n\n    components:{ 'd-tabs':Tabs },\n\n    data() {\n      return { route:'Draw', pageKey:'Draw', drew:null, pages:{\n        Wheel: { title:'Wheel', key:'Wheel', obj:null, show:false },\n        Axes:  { title:'Axes',  key:'Axes',  obj:null, show:false },\n        Chord: { title:'Chord', key:'Chord', obj:null, show:false },\n        Link:  { title:'Link',  key:'Link',  obj:null, show:false },\n        Radar: { title:'Radar', key:'Radar', obj:null, show:false },\n        Hue:   { title:'Hue',   key:'Hue',   obj:null, show:false },\n        Tree:  { title:'Tree',  key:'Tree',  obj:null, show:false} } } },\n\n    methods: {\n      \n      onNav: function(obj) {\n        if( this.nav().isMyNav( obj, this.route ) ) {\n            this.pageKey = this.nav().getPageKey('Draw');\n            if( this.pageKey !== 'None') {\n             // this.nav().setPageKey( 'Draw', this.pageKey );\n                this.create(this.pageKey); } } },\n\n      size: function() {\n        let sz   = {}\n        sz.compWidth  = this.$refs['Draw']['clientWidth' ];\n        sz.compHeight = this.$refs['Draw']['clientHeight'];\n        sz.elemWidth  = this.$refs['Draw']['clientWidth' ];\n        sz.elemHeight = this.$refs['Draw']['clientHeight'];\n        return sz; },\n      \n      create: function( pageKey ) {\n            this.$nextTick( function() {\n              let elem = this.$refs[pageKey][0]\n              this.pages[pageKey].obj = this.drew.create( pageKey, elem, this.size() ); } ) }\n    },\n\n    mounted: function () {\n      this.subscribe(  'Nav', 'Draw.vue', (obj) => {\n        this.onNav(obj); } );\n      this.$nextTick( function() {\n        this.drew = new Drew( this.stream(), this.$refs['Draw'], this.size() ); } ) }\n  }\n  \n  export default Draw;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .draw {   position:relative; left:0; top:0;  right:0; bottom:0; display:grid;\n            background-color:@theme-back; font-family:@theme-font-family;\n    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:@theme-h1-size; }\n    .page { position:absolute; left:0; top:5%; right:0; bottom:0;  } }\n\n  // Chords\n  .group-tick line { stroke:#000;       }\n  .ribbons         { fill-opacity:0.67; }\n</style>"]}, media: undefined });
+    inject("data-v-7cff2c70_0", { source: ".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue","/Users/ax/Documents/prj/aug/vue/draw/Draw.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;AACrB;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;AACxB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;ECCzB,eAAA;ADCA;ACCA;EACA,uBAAA;EACA,iBAAA;AACA;ADCA;ECCA,uBAAA;EACA,iBAAA;AACA;ADCA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,aAAa;EACb,uBAAuB;EACvB,+BAA+B;AACjC;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,eAAe;AACjB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;AACX;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.draw {\n  position: relative;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 2rem;\n}\n.draw .page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n","\n\n<template>\n  <div class=\"draw\" ref=\"Draw\">\n    <d-tabs route=\"Draw\" :pages=\"pages\"></d-tabs>\n    <h1 v-if=\"pageKey==='Draw'\">Drawings in D3</h1>\n    <template v-for=\"page in pages\">\n      <div :ref=\"page.key\" v-show=\"page.show\" class=\"page\" :key=\"page.key\"></div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Tabs from '../elem/Tabs.vue';\n  import D3D  from '../../pub/base/d3d/D3D.js'\n\n  let Draw = {\n\n    components:{ 'd-tabs':Tabs },\n\n    data() {\n      return { route:'Draw', pageKey:'Draw', drew:null, pages:{\n        Wheel: { title:'Wheel', key:'Wheel', obj:null, show:false },\n        Axes:  { title:'Axes',  key:'Axes',  obj:null, show:false },\n        Chord: { title:'Chord', key:'Chord', obj:null, show:false },\n        Link:  { title:'Link',  key:'Link',  obj:null, show:false },\n        Radar: { title:'Radar', key:'Radar', obj:null, show:false },\n        Hue:   { title:'Hue',   key:'Hue',   obj:null, show:false },\n        Tree:  { title:'Tree',  key:'Tree',  obj:null, show:false} } } },\n\n    methods: {\n      \n      onNav: function(obj) {\n        if( this.nav().isMyNav( obj, this.route ) ) {\n            this.pageKey = this.nav().getPageKey('Draw');\n            if( this.pageKey !== 'None') {\n                this.create(this.pageKey); } } },\n      \n      create: function( pageKey ) {\n            this.$nextTick( function() {\n              let elem = this.$refs[pageKey][0]\n              this.pages[pageKey].obj = this.D3D.create( pageKey, elem ); } ) }\n    },\n\n    mounted: function () {\n      this.subscribe(  'Nav', 'Draw.vue', (obj) => {\n        this.onNav(obj); } );\n      this.$nextTick( function() {\n        this.D3D = new D3D( this.stream() ); } ) }\n  }\n  \n  export default Draw;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .draw {   position:relative; left:0; top:0;  right:0; bottom:0; display:grid;\n            background-color:@theme-back; font-family:@theme-font-family;\n    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:@theme-h1-size; }\n    .page { position:absolute; left:0; top:5%; right:0; bottom:0;  } }\n\n  // Chords\n  .group-tick line { stroke:#000;       }\n  .ribbons         { fill-opacity:0.67; }\n</style>"]}, media: undefined });
 
   };
   /* scoped */

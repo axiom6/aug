@@ -516,6 +516,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/base/d3d/D3D.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/base/d3d/D3D-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/base/d3d/Drew.js": {
 		"bF": 0,
 		"ft": 64,
@@ -567,6 +578,17 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/base/d3d/Radar-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/base/d3d/SvgMgr.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/base/d3d/SvgMgr-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -3994,12 +4016,12 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/src/base/d3d/Drew.coffee": {
+	"/src/base/d3d/D3D.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
-		"oAP": "/pub/base/d3d/Drew.js",
+		"oAP": "/pub/base/d3d/D3D.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
@@ -4044,6 +4066,17 @@
 		"mi": 0,
 		"oA": 0,
 		"oAP": "/pub/base/d3d/Radar.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/src/base/d3d/SvgMgr.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/base/d3d/SvgMgr.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,
@@ -4308,17 +4341,6 @@
 		"mi": 0,
 		"oA": 0,
 		"oAP": "/pub/base/vue/Mixin.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
-	"/src/base/vue/SvgMgr.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/base/vue/SvgMgr.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,

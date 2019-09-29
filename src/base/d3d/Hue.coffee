@@ -6,8 +6,8 @@ import Palettes from './Palettes'
 
 class Hue extends Radar
 
-  constructor:(  drew,  d3,   name,  elem,  size ) ->
-    super(       drew,  d3,   name,  elem,  size )
+  constructor:( svgMgr ) ->
+    super(  svgMgr )
 
     @quadrants = [
       { name1:"Red",        key:  '0', color:"hsl(  0,100%,50%)", beg:-15, end: 15 }
@@ -44,7 +44,7 @@ class Hue extends Radar
     @wheelReady()
 
   wheelReady:() ->
-    @graph  = @drew.svg
+    @graph  = @svgMgr.svg
     dr = ( @r100 - @r40 ) / 30
     @quads( @hueQuads(10), @r80, @r100 )
     @hsvWedges(     5, dr, @r40, @r100 )

@@ -2,8 +2,10 @@
 
 class Chord
 
-  constructor:( @drew, @d3,  @name, @elem, @size ) ->
-    [@svg,@g] = @drew.ready( @name, @elem, @size )
+  constructor:( @svgMgr ) ->
+    @d3  = @svgMgr.d3
+    @svg = @svgMgr.svg
+    @g   = @svgMgr.g
     @matrix = [
       [ 0,20,20,20],
       [20, 0,20,80],
@@ -13,10 +15,9 @@ class Chord
     @ready()
 
   ready:() =>
-    geo     = @drew.geomElem()
-    @graph  = @drew.svg
-    @width  = geo.w
-    @height = geo.h
+    @graph  = @svgMgr.g
+    @width  = @svgMgr.size.w
+    @height = @svgMgr.size.h
     @outer  = Math.min( @width, @height) * 0.5 - 40
     @inner  = @outer - 30
     @format = @d3.formatPrefix(",.0", 1e3)

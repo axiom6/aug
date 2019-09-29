@@ -4253,6 +4253,18 @@ Vis = class Vis {
     return ` rotate(${a} ${x} ${y} )`;
   }
 
+  static translateScale(x0, y0, sx, sy) {
+    Util$1.checkTypes('number', {
+      x0: x0,
+      y0: y0
+    });
+    Util$1.checkTypes('number', {
+      sx: sx,
+      sy: sy
+    });
+    return ` translate( ${x0}, ${y0} ) scale( ${sx}, ${sy} )`;
+  }
+
   static rad(deg) {
     return deg * Math.PI / 180;
   }

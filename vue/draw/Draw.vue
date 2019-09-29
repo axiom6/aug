@@ -13,7 +13,7 @@
 <script type="module">
 
   import Tabs from '../elem/Tabs.vue';
-  import Drew from '../../pub/base/d3d/Drew.js'
+  import D3D  from '../../pub/base/d3d/D3D.js'
 
   let Draw = {
 
@@ -35,28 +35,19 @@
         if( this.nav().isMyNav( obj, this.route ) ) {
             this.pageKey = this.nav().getPageKey('Draw');
             if( this.pageKey !== 'None') {
-             // this.nav().setPageKey( 'Draw', this.pageKey );
                 this.create(this.pageKey); } } },
-
-      size: function() {
-        let sz   = {}
-        sz.compWidth  = this.$refs['Draw']['clientWidth' ];
-        sz.compHeight = this.$refs['Draw']['clientHeight'];
-        sz.elemWidth  = this.$refs['Draw']['clientWidth' ];
-        sz.elemHeight = this.$refs['Draw']['clientHeight'];
-        return sz; },
       
       create: function( pageKey ) {
             this.$nextTick( function() {
               let elem = this.$refs[pageKey][0]
-              this.pages[pageKey].obj = this.drew.create( pageKey, elem, this.size() ); } ) }
+              this.pages[pageKey].obj = this.D3D.create( pageKey, elem ); } ) }
     },
 
     mounted: function () {
       this.subscribe(  'Nav', 'Draw.vue', (obj) => {
         this.onNav(obj); } );
       this.$nextTick( function() {
-        this.drew = new Drew( this.stream(), this.$refs['Draw'], this.size() ); } ) }
+        this.D3D = new D3D( this.stream() ); } ) }
   }
   
   export default Draw;

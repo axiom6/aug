@@ -1,16 +1,19 @@
 
 import Data     from '../../base/util/Data.js'
+
 class Wheel
 
-  constructor:( @drew, @d3,  @name, @elem, @size ) ->
-    [@svg,@g] = @drew.ready( @name, @elem, @size )
+  constructor:( @svgMgr ) ->
+    @d3  = @svgMgr.d3
+    @svg = @svgMgr.svg
+    @g   = @svgMgr.g
     @opacity            = 1.0
     @showAllLeaves      = false
     @radiusFactorChoice = 1.3
     @radiusFactorChild  = 1.0
     @url                = Data.toUrl( 'jitter/Flavor.json')
+    console.log( 'Wheel()', @svgMgr )
     @ready()
-
 
   # Passed as a callback to Wheel and called when Wheel makes a choice to be published
   publish:( add, flavor, roast ) =>
@@ -19,25 +22,11 @@ class Wheel
     console.log( 'Choice', choice )
     return
 
-  resize:() ->
-    geo = @drew.geomElem()
-    w   = geo.w
-    h   = geo.h
-    sx  = geo.sx
-    sy  = geo.sy
-    sc  = Math.min( sx, sy )
-    xc  = w/2
-    yc  = h/2
-    @svg.attr( "width", w ).attr( "height", h )
-    @g.transition().attr("transform", """translate(#{xc},#{yc}) scale(#{sc})""" )
-    return
-
   ready:( ) ->
-    geo     = @drew.geomElem()
     scale   = 1.0
     @json   = {}
-    @width  = geo.w
-    @height = geo.h
+    @width  = @svgMgr.size.w
+    @height = @svgMgr.size.h
     @radius = Math.min( @width, @height ) * scale / 2
     @xx     = @d3.scaleLinear().range([ 0, 2*Math.PI ] )
     @yy     = @d3.scalePow().exponent(1.4).domain([0, 1]).range([0, @radius]) # 1.3

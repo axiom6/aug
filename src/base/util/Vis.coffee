@@ -15,6 +15,12 @@ class Vis
   @rotate:( a, x, y ) ->
     Util.checkTypes('number',{a:a,x:x,y:y})
     " rotate(#{a} #{x} #{y} )"
+
+  @translateScale:( x0, y0, sx, sy ) ->
+    Util.checkTypes('number',{x0:x0,y0:y0})
+    Util.checkTypes('number',{sx:sx,sy:sy})
+    " translate( #{x0}, #{y0} ) scale( #{sx}, #{sy} )"
+
   
   @rad:( deg ) -> deg * Math.PI / 180
   @deg:( rad ) -> rad * 180 / Math.PI

@@ -5,14 +5,12 @@ import Util from '../../base/util/Util.js';
 import Vis from '../../base/util/Vis.js';
 
 Link = class Link {
-  constructor(drew, d3, name, elem, size) {
+  constructor(svgMgr) {
     this.strokeOpp = this.strokeOpp.bind(this);
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name;
-    this.elem = elem;
-    this.size = size;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
+    this.svgMgr = svgMgr;
+    this.d3 = this.svgMgr.d3;
+    this.svg = this.svgMgr.svg;
+    this.g = this.svgMgr.g;
     this.ready();
     if (this.link2 === false && this.strokeOpp === false) {
       ({});
@@ -20,11 +18,9 @@ Link = class Link {
   }
 
   ready() {
-    var geo;
-    geo = this.drew.geomElem();
-    this.graph = this.drew.svg;
-    this.w = geo.w;
-    this.h = geo.h;
+    this.graph = this.svgMgr.svg;
+    this.w = this.svgMgr.size.w;
+    this.h = this.svgMgr.size.h;
     this.cssLink = 'link';
     this.thick = 1;
     this.da = 5;
@@ -228,6 +224,8 @@ Link = class Link {
 
   tree(g, x0, y0, pts, stroke) {
     var i, len, x, x1, x2, y1, y2, yy;
+    x = 0;
+    yy = 0;
     for (i = 0, len = pts.length; i < len; i++) {
       [x, yy] = pts[i];
       x1 = x - 30;
@@ -244,14 +242,12 @@ Link = class Link {
 
   //console.log( { x0:x0, y0:y0, x1:x1, y1:y1, x2:x2, y2:y2, x3:x, y3:yy } )
   diag(g, x0, y0, pts, stroke) {
-    var ang, cos, i, len, pc, sin, x, x1, x2, y1, y2, yy;
+    var i, len, pc, x, x1, x2, y1, y2, yy;
     pc = .5;
+    x = 0;
+    yy = 0;
     for (i = 0, len = pts.length; i < len; i++) {
       [x, yy] = pts[i];
-      ang = Vis.angle(x - x0, y - y0);
-      cos = Vis.cos(ang);
-      sin = Vis.sin(ang);
-      Util.noop(cos, sin);
       x1 = x0 * (1 - pc) + x * pc;
       x2 = x0 * pc + x * (1 - pc);
       y1 = y0;

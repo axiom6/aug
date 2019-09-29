@@ -3,27 +3,25 @@ var Axes;
 import Vis from '../../base/util/Vis.js';
 
 Axes = class Axes {
-  constructor(drew, d3, name, elem1, size) {
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name;
-    this.elem = elem1;
-    this.size = size;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
+  constructor(svgMgr) {
+    this.svgMgr = svgMgr;
+    this.d3 = this.svgMgr.d3;
+    this.svg = this.svgMgr.svg;
+    this.g = this.svgMgr.g;
     this.ready();
   }
 
   ready() {
-    var geo;
-    geo = this.drew.geomElem();
+    var sz;
+    sz = this.svgMgr.size;
     this.margin = {
       left: 40,
       top: 40,
       right: 40,
       bottom: 40
     };
-    this.width = Math.min(geo.w, geo.h) - this.margin.left - this.margin.right;
-    this.height = Math.min(geo.w, geo.h) - this.margin.top - this.margin.bottom;
+    this.width = Math.min(sz.w, sz.h) - this.margin.left - this.margin.right;
+    this.height = Math.min(sz.w, sz.h) - this.margin.top - this.margin.bottom;
     this.xObj = {
       x1: 0,
       x2: 100,
@@ -46,7 +44,6 @@ Axes = class Axes {
     return this.grid(this.g, this.xObj, this.yObj);
   }
 
-  //@d3d.transform( @svg.$s, @g, geo.w/2, geo.h/2, geo.s )
   axes(g, xObj, yObj) {
     this.attrG(g);
     this.bAxis = this.createBAxis(g, xObj);

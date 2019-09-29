@@ -7,7 +7,7 @@ import Data from '../../base/util/Data.js';
 import Vis from '../../base/util/Vis.js';
 
 Radar = class Radar {
-  constructor(drew, d3, name2, elem, size) {
+  constructor(svgMgr) {
     this.doQuads = this.doQuads.bind(this);
     this.doTechs = this.doTechs.bind(this);
     this.attrG = this.attrG.bind(this);
@@ -26,12 +26,10 @@ Radar = class Radar {
     
     // Plot tech points as either dots or triangles and add drag behavior. Add tech title tool tip
     this.pts = this.pts.bind(this);
-    this.drew = drew;
-    this.d3 = d3;
-    this.name = name2;
-    this.elem = elem;
-    this.size = size;
-    [this.svg, this.g] = this.drew.ready(this.name, this.elem, this.size);
+    this.svgMgr = svgMgr;
+    this.d3 = this.svgMgr.d3;
+    this.svg = this.svgMgr.svg;
+    this.g = this.svgMgr.g;
     this.ready();
   }
 
@@ -40,13 +38,13 @@ Radar = class Radar {
   }
 
   ready() {
-    var geo;
-    geo = this.drew.geomElem();
-    this.graph = this.drew.svg;
-    this.width = geo.w;
-    this.height = geo.h;
-    this.x0 = this.width / 2;
-    this.y0 = this.height / 2;
+    var sz;
+    this.graph = this.svgMgr.svg;
+    sz = this.svgMgr.size;
+    this.width = sz.w;
+    this.height = sz.h;
+    this.x0 = sz.xc;
+    this.y0 = sz.yc;
     this.inner = 0;
     this.outer = (Math.min(this.width, this.height) - 100) / 2;
     this.r04 = this.outer * 0.04;
