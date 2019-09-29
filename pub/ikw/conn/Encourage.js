@@ -3,16 +3,17 @@ var Encourage;
 import Vis from "../../base/util/Vis.js";
 
 Encourage = class Encourage {
-  constructor(spec, shapes, build) {
+  constructor(spec, shapes, build, level) {
     this.spec = spec;
     this.shapes = shapes;
     this.build = build;
+    this.level = level;
     this.studies = this.shapes.arrange(this.spec);
     this.innovs = this.build.adjacentStudies(this.spec, 'west');
   }
 
   drawSvg(g, geom, defs) {
-    var a, a1, fill, h, i, key, lay, r0, ref, ref1, ref2, ref3, study, w, wedgeId, x, xr, xt, y, yl, yr, yt;
+    var a, a1, fill, h, i, key, lay, r0, ref, ref1, ref2, ref3, study, w, wedgeId, x, xr, xt, y, yi, yl, yr, yt;
     lay = this.shapes.layout(geom, this.spec.column, this.shapes.size(this.studies), this.shapes.size(this.innovs));
     fill = this.shapes.toFill(this.spec, true);
     this.shapes.keyHole(g, lay.xc, lay.yc, lay.xk, lay.yk, lay.ro, lay.hk, fill, lay.stroke);
@@ -40,9 +41,10 @@ Encourage = class Encourage {
     w = lay.xr + lay.wr;
     h = r0; // lay.ri
     xt = x + w * 0.5;
-    yt = geom.y0 * 0.5 - 6;
+    yt = geom.y0 * 0.5 - (this.level === 'Comp' ? 6 : 0);
+    yi = geom.y0 - geom.iconDy;
     this.shapes.conveySankey("Encourage", defs, g, this.studies, this.innovs, x, y, w, h);
-    this.shapes.icon(g, geom.x0, geom.y0, this.spec.name, this.shapes.htmlId(this.spec.name, 'IconSvg'), Vis.unicode(this.spec.icon), geom.iconSize);
+    this.shapes.icon(g, geom.x0, yi, this.spec.name, this.shapes.htmlId(this.spec.name, 'IconSvg'), Vis.unicode(this.spec.icon), geom.iconSize);
     this.shapes.text(g, xt, yt, this.spec.name, this.shapes.htmlId(this.spec.name, 'TextSvg'), 'black', geom.fontSize);
     this.shapes.practiceFlow(g, geom, this.spec);
   }

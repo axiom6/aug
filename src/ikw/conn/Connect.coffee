@@ -7,16 +7,16 @@ import Encourage from './Encourage'
 
 class Connect
 
-  constructor:( @stream, @build, @prac, @elem, @size ) ->
+  constructor:( @stream, @build, @prac, @elem, @size, @level ) ->
     @shapes = new Shapes( @stream )
     @ready()
 
   createDraw:() ->
     switch @prac.column
-      when 'Embrace'   then new Embrace(   @prac, @shapes, @build )
-      when 'Innovate'  then new Innovate(  @prac, @shapes, @build )
-      when 'Encourage' then new Encourage( @prac, @shapes, @build )
-      else                  new Innovate(  @prac, @shapes, @build )
+      when 'Embrace'   then new Embrace(   @prac, @shapes, @build, @level )
+      when 'Innovate'  then new Innovate(  @prac, @shapes, @build, @level )
+      when 'Encourage' then new Encourage( @prac, @shapes, @build, @level )
+      else                  new Innovate(  @prac, @shapes, @build, @level )
 
   ready:() ->
     geo = @geom( @size.elemWidth, @size.elemHeight, @size.elemWidth, @size.elemHeight )
@@ -24,7 +24,7 @@ class Connect
     [@graph,@g,svgId,gId,@defs] = @shapes.createSvg( @elem, @prac.name, @size.elemWidth, @size.elemHeight )
     @size.lastWidth  = @size.elemWidth
     @size.lastHeight = @size.elemHeight
-    @draw   = @createDraw()
+    @draw            = @createDraw()
     @draw.drawSvg( @g, geo, @defs )
     @htmlId = svgId
     return
@@ -60,6 +60,7 @@ class Connect
     g.sy = compHeight/g.h
     g.s  = Math.min( g.sx, g.sy )
     g.scaleFont = g.h / 150
+    g.iconDy    = if @level is 'Comp' then 12 else -12*g.scaleFont
     g.fontSize  = 2.0*g.scaleFont+'rem'
     g.iconSize  = 2.0*g.scaleFont+'rem'
     g.dispSize  = 0.8*g.scaleFont+'rem'

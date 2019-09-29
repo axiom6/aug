@@ -121,42 +121,58 @@ class Build
       when 'Embrace'   then 'Encourage'
       when 'Innovate'  then 'Embrace'
       when 'Encourage' then 'Innovate'
-      else                  'None'
+      else
+        console.error( 'Build.west() unknown col', col )
+        'Embrace'
 
   east:(   col ) ->
     switch col
       when 'Embrace'   then 'Innovate'
       when 'Innovate'  then 'Encourage'
       when 'Encourage' then 'Embrace'
-      else                  'None'
+      else
+        console.error( 'Build.east() unknown col', col )
+        'Embrace'
 
   north:(  row ) ->
     switch row
+      when 'Dim'   then 'Dim'
       when 'Learn' then 'Share'
       when 'Do'    then 'Learn'
       when 'Share' then 'Do'
-      else              'None'
+      else
+        console.error( 'Build.north() unknown row', row )
+        'Learn'
 
   south:(  row ) ->
     switch row
+      when 'Dim'   then 'Dim'
       when 'Learn' then 'Do'
       when 'Do'    then 'Share'
       when 'Share' then 'Learn'
-      else              'None'
+      else
+        console.error( 'Build.south() unknown row', row )
+        'Learn'
 
   prev:(   plane ) ->
     switch plane
+      when 'Prin' then 'Prin'
       when 'Info' then 'Wise'
       when 'Know' then 'Info'
       when 'Wise' then 'Know'
-      else             'None'
+      else
+        console.error( 'Build.prev() unknown plane', plane )
+        'Prin'
 
-  next:( plane ) ->
+  next:(   plane ) ->
     switch plane
+      when 'Prin' then 'Prin'
       when 'Info' then 'Know'
       when 'Know' then 'Wise'
       when 'Wise' then 'Info'
-      else             'None'
+      else
+        console.error( 'Build.next() unknown plane', plane )
+        'Prin'
 
   adjacentPractice:( prac, dir ) ->
     # console.log( 'adjacentPractice', { prac:prac, dir:dir } )
@@ -174,12 +190,14 @@ class Build
       when 'next'           then [prac.column, prac.row,   @next(prac.plane) ]
       else                       ["None","None","None"]
 
-    #console.log( 'adjacentPractice[col,row,pln]', [col,row,pln] )
+
     return @None if [col,row,pln] is ["None","None","None"]
-    #racs = @getPractices( pln )
     pracs = @batch[pln].data.pracs
     for own key, adj of pracs when Util.isChild(key)
-      return adj if adj.column is col and adj.row is row and adj.plane is pln
+      if adj.column is col and adj.row is row and adj.plane is pln
+        # console.log( 'adjacentPractice[col,row,pln]', [col,row,pln], adj )
+        return adj
+    console.log( 'adjacentPractice[col,row,pln]', [col,row,pln], 'adj not found' )
     @None
 
   adjacentStudies:( practice, dir ) ->

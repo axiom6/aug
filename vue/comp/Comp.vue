@@ -7,7 +7,7 @@
         <div   :class="pracObj.dir" :key="pracObj.name" :ref="pracObj.name" :title="pracObj.name">
           <p-icon v-show="pages['Icon'].show" :pracObj="pracObj"></p-icon>
           <p-dirs v-show="pages['Dirs'].show" :pracObj="pracObj"></p-dirs>
-          <p-conn   v-if="pages['Conn'].show" :pracObj="pracObj"></p-conn>
+          <p-conn   v-if="pages['Conn'].show" :pracObj="pracObj" level="Comp"></p-conn>
         </div>
       </template>
       <template v-for="row in rows">

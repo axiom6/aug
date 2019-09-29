@@ -269,7 +269,8 @@ Build = class Build {
       case 'Encourage':
         return 'Innovate';
       default:
-        return 'None';
+        console.error('Build.west() unknown col', col);
+        return 'Embrace';
     }
   }
 
@@ -282,12 +283,15 @@ Build = class Build {
       case 'Encourage':
         return 'Embrace';
       default:
-        return 'None';
+        console.error('Build.east() unknown col', col);
+        return 'Embrace';
     }
   }
 
   north(row) {
     switch (row) {
+      case 'Dim':
+        return 'Dim';
       case 'Learn':
         return 'Share';
       case 'Do':
@@ -295,12 +299,15 @@ Build = class Build {
       case 'Share':
         return 'Do';
       default:
-        return 'None';
+        console.error('Build.north() unknown row', row);
+        return 'Learn';
     }
   }
 
   south(row) {
     switch (row) {
+      case 'Dim':
+        return 'Dim';
       case 'Learn':
         return 'Do';
       case 'Do':
@@ -308,12 +315,15 @@ Build = class Build {
       case 'Share':
         return 'Learn';
       default:
-        return 'None';
+        console.error('Build.south() unknown row', row);
+        return 'Learn';
     }
   }
 
   prev(plane) {
     switch (plane) {
+      case 'Prin':
+        return 'Prin';
       case 'Info':
         return 'Wise';
       case 'Know':
@@ -321,12 +331,15 @@ Build = class Build {
       case 'Wise':
         return 'Know';
       default:
-        return 'None';
+        console.error('Build.prev() unknown plane', plane);
+        return 'Prin';
     }
   }
 
   next(plane) {
     switch (plane) {
+      case 'Prin':
+        return 'Prin';
       case 'Info':
         return 'Know';
       case 'Know':
@@ -334,7 +347,8 @@ Build = class Build {
       case 'Wise':
         return 'Info';
       default:
-        return 'None';
+        console.error('Build.next() unknown plane', plane);
+        return 'Prin';
     }
   }
 
@@ -370,20 +384,20 @@ Build = class Build {
       }
     }).call(this);
     if ([col, row, pln] === ["None", "None", "None"]) {
-      //console.log( 'adjacentPractice[col,row,pln]', [col,row,pln] )
       return this.None;
     }
-    //racs = @getPractices( pln )
     pracs = this.batch[pln].data.pracs;
     for (key in pracs) {
       if (!hasProp.call(pracs, key)) continue;
       adj = pracs[key];
       if (Util.isChild(key)) {
         if (adj.column === col && adj.row === row && adj.plane === pln) {
+          // console.log( 'adjacentPractice[col,row,pln]', [col,row,pln], adj )
           return adj;
         }
       }
     }
+    console.log('adjacentPractice[col,row,pln]', [col, row, pln], 'adj not found');
     return this.None;
   }
 

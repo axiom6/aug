@@ -155,7 +155,7 @@ class Shapes
     return
 
   icon:( g, x0, y0, name, iconId, uc, size ) ->
-    path = g.append("svg:text").text(uc).attr("x",x0).attr("y",y0+12).attr("id",iconId)
+    path = g.append("svg:text").text(uc).attr("x",x0).attr("y",y0).attr("id",iconId)
             .attr("text-anchor","middle").attr("font-size",size)
             .attr("font-family","FontAwesome")
     @click( path, name )

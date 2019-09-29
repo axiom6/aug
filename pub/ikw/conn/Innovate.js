@@ -7,12 +7,13 @@ import Util from '../../base/util/Util.js';
 import Vis from '../../base/util/Vis.js';
 
 Innovate = class Innovate {
-  constructor(spec, shapes, build) {
+  constructor(spec, shapes, build, level) {
     this.hexStudy = this.hexStudy.bind(this);
     this.line = this.line.bind(this);
     this.spec = spec;
     this.shapes = shapes;
     this.build = build;
+    this.level = level;
     this.studies = this.shapes.arrange(this.spec);
     this.cos30 = this.shapes.cos30;
     this.t = 24;

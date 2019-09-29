@@ -3,7 +3,7 @@ import Vis from "../../base/util/Vis.js"
 
 class Embrace
 
-  constructor:( @spec, @shapes, @build ) ->
+  constructor:( @spec, @shapes, @build, @level ) ->
     @studies = @shapes.arrange( @spec )         
     @innovs  = @build.adjacentStudies( @spec, 'east' )
 
@@ -29,10 +29,12 @@ class Embrace
     w  = lay.w  - x
     h  = lay.ri
     xt = x +  w  * 0.5
-    yt = geom.y0 * 0.5 - 6
+    yt = geom.y0 * 0.5 - if @level is 'Comp' then 6 else 0
+    yi = geom.y0 - geom.iconDy
+    # console.log( 'Embrace.drawSvg()', @level, yt, yi )
     @shapes.conveySankey( "Embrace", defs, g, @studies, @innovs, x, y, w, h  )
-    @shapes.icon( g, geom.x0, geom.y0, @spec.name, @shapes.htmlId(@spec.name,'IconSvg'), Vis.unicode(@spec.icon), geom.iconSize )
-    @shapes.text( g, xt,           yt, @spec.name, @shapes.htmlId(@spec.name,'TextSvg'), 'lack', geom.fontSize )
+    @shapes.icon( g, geom.x0, yi, @spec.name, @shapes.htmlId(@spec.name,'IconSvg'), Vis.unicode(@spec.icon), geom.iconSize )
+    @shapes.text( g, xt,      yt, @spec.name, @shapes.htmlId(@spec.name,'TextSvg'), 'lack', geom.fontSize )
     @shapes.practiceFlow( g, geom, @spec )
     return
 

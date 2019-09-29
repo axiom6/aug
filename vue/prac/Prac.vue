@@ -4,7 +4,7 @@
     <b-tabs route="Prac" :pages="pages"></b-tabs>
     <div class="prac">
       <p-dirs v-show="pages['Dirs'].show" :pracObj="pracObj"></p-dirs>
-      <p-conn   v-if="pages['Conn'].show" :pracObj="pracObj"></p-conn>
+      <p-conn   v-if="pages['Conn'].show" :pracObj="pracObj" level="Prac"></p-conn>
       <p-desc v-show="pages['Desc'].show" :pracObj="pracObj"></p-desc>
     </div>
   </div>
@@ -60,7 +60,8 @@
   
   .pane {   position:relative; left:0; top:0;  right:0; bottom:0;
     
-    .prac { position:absolute; left:0; top:5%; right:0; bottom:0; background-color:@theme-icon-back; }
+    .prac { position:absolute; left:0; top:5%; right:0; bottom:0;
+      background-color:@theme-icon-back; border-radius:36px; }
     
   }
   

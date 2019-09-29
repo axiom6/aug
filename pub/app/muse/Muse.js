@@ -31,7 +31,7 @@ Muse = (function() {
       Muse.app = 'Muse';
       subjects = ["Nav"];
       infoSpec = {
-        subscribe: true,
+        subscribe: false,
         publish: false,
         subjects: subjects
       };
@@ -183,13 +183,13 @@ Muse = (function() {
       icon: "fas fa-home",
       west: "Wise",
       north: "Wise",
+      prev: "Wise",
       east: "Prin",
       south: "Prin",
-      next: "Prin",
-      prev: "Wise"
+      next: "Prin"
     },
     Prin: {
-      title: 'Prin',
+      title: 'Care',
       key: 'Prin',
       route: 'Prin',
       pracs: {},
@@ -197,10 +197,10 @@ Muse = (function() {
       icon: "fas fa-balance-scale",
       west: "Home",
       north: "Home",
+      prev: "Home",
       east: "Info",
       south: "Info",
-      next: "Info",
-      prev: "Home"
+      next: "Info"
     },
     Info: {
       title: 'Info',
@@ -209,12 +209,12 @@ Muse = (function() {
       pracs: {},
       ikw: true,
       icon: "fas fa-th",
-      west: "Wise",
-      north: "Wise",
+      west: "Prin",
+      north: "Prin",
+      prev: "Prin",
       east: "Know",
       south: "Know",
-      next: "Know",
-      prev: "Wise"
+      next: "Know"
     },
     Know: {
       title: 'Know',
@@ -225,10 +225,10 @@ Muse = (function() {
       icon: "fas fa-university",
       west: "Info",
       north: "Info",
+      prev: "Info",
       east: "Wise",
       south: "Wise",
-      next: "Wise",
-      prev: "Info"
+      next: "Wise"
     },
     Wise: {
       title: 'Wise',
@@ -239,10 +239,10 @@ Muse = (function() {
       icon: "fab fa-tripadvisor",
       west: "Know",
       north: "Know",
-      east: "Info",
-      south: "Info",
-      next: "Info",
-      prev: "Know"
+      prev: "Know",
+      east: "Home",
+      south: "Home",
+      next: "Home"
     }
   };
 

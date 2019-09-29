@@ -10,7 +10,7 @@
 
   let Conn = {
 
-    props: { pracObj:Object },
+    props: { pracObj:Object, level:String },
 
     data() {
       return { build:null, connect:null, size:null }; },
@@ -45,7 +45,7 @@
             this.connect.clear(); }
           let elem     = this.$refs[this.pracObj.name];
           this.size    = this.calcSize(elem);
-          this.connect = new Connect( stream, build, pracObj, elem, this.size ); } ) },
+          this.connect = new Connect( stream, build, pracObj, elem, this.size, this.level ); } ) },
       
       resize: function() {
         this.$nextTick( function() {

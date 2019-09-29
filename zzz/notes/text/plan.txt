@@ -1,13 +1,24 @@
 
-1. Nav for pageKeys
-   a. Consider sub route dirs
-   b. Bug in tab dir cycling
-   c. Bug with Note
-   d. Test Muse
-   e. next dir with dir in Prin
+1. Bugs
+   a. Conn Prac
+   b. Desc Prac
+   c. Desc Disp
 
-2. Talk and Improved Landing Pages
-     Muse Home Prin Info Know Wise
-     Augm Home Math Geom Note Draw Hues
+2. Improve
+   a. Hsv Backgrounds
+   b. Consider bring Prin into IKW nav
 
-3. Center and Scale Hues
+3. Improved Landing Pages
+   a. Muse Home Prin Info Know Wise
+   b. Augm Home Math Geom Note Draw Hues
+
+4. Descriptions
+
+5. Talk
+   a. Nav scripts
+   b. Vue  Slide template
+   c. Core Slides
+
+6. Augm
+   a. Math MathML
+   b. Note

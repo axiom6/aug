@@ -3,7 +3,7 @@ import Vis from "../../base/util/Vis.js"
 
 class Encourage
 
-  constructor:( @spec, @shapes, @build ) ->
+  constructor:( @spec, @shapes, @build, @level ) ->
     @studies = @shapes.arrange( @spec )
     @innovs  = @build.adjacentStudies( @spec, 'west' )
 
@@ -31,10 +31,11 @@ class Encourage
     w  = lay.xr + lay.wr
     h  = r0 # lay.ri
     xt = x +  w  * 0.5
-    yt = geom.y0 * 0.5 - 6
+    yt = geom.y0 * 0.5 - if @level is 'Comp' then 6 else 0
+    yi = geom.y0 - geom.iconDy
     @shapes.conveySankey( "Encourage", defs, g, @studies, @innovs, x, y, w, h )
-    @shapes.icon( g, geom.x0, geom.y0, @spec.name, @shapes.htmlId(@spec.name,'IconSvg'), Vis.unicode(@spec.icon), geom.iconSize )
-    @shapes.text( g, xt,           yt, @spec.name, @shapes.htmlId(@spec.name,'TextSvg'), 'black', geom.fontSize )
+    @shapes.icon( g, geom.x0, yi, @spec.name, @shapes.htmlId(@spec.name,'IconSvg'), Vis.unicode(@spec.icon), geom.iconSize )
+    @shapes.text( g, xt,      yt, @spec.name, @shapes.htmlId(@spec.name,'TextSvg'), 'black', geom.fontSize )
     @shapes.practiceFlow( g, geom, @spec )
     return
 

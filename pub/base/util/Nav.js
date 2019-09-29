@@ -155,7 +155,7 @@ Nav = class Nav {
     prc = this.pracs(this.compKey)[this.pracKey];
     dis = prc[this.dispKey];
     adj = this.adjPracObj(dir);
-    ddr = dir === 'next' || dir === 'prev' ? dis.dir : this.adjDir(dir);
+    ddr = dis.dir; // if dir is 'next' or dir is 'prev' then dis.dir else @adjDir(dir)
     dis = this.getDispObj(adj, ddr);
     if (adj.name !== 'None') {
       obj = {};

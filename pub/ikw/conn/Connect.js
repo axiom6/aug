@@ -11,12 +11,13 @@ import Innovate from './Innovate';
 import Encourage from './Encourage';
 
 Connect = class Connect {
-  constructor(stream, build, prac, elem, size1) {
+  constructor(stream, build, prac, elem, size1, level) {
     this.stream = stream;
     this.build = build;
     this.prac = prac;
     this.elem = elem;
     this.size = size1;
+    this.level = level;
     this.shapes = new Shapes(this.stream);
     this.ready();
   }
@@ -24,13 +25,13 @@ Connect = class Connect {
   createDraw() {
     switch (this.prac.column) {
       case 'Embrace':
-        return new Embrace(this.prac, this.shapes, this.build);
+        return new Embrace(this.prac, this.shapes, this.build, this.level);
       case 'Innovate':
-        return new Innovate(this.prac, this.shapes, this.build);
+        return new Innovate(this.prac, this.shapes, this.build, this.level);
       case 'Encourage':
-        return new Encourage(this.prac, this.shapes, this.build);
+        return new Encourage(this.prac, this.shapes, this.build, this.level);
       default:
-        return new Innovate(this.prac, this.shapes, this.build);
+        return new Innovate(this.prac, this.shapes, this.build, this.level);
     }
   }
 
@@ -87,6 +88,7 @@ Connect = class Connect {
     g.sy = compHeight / g.h;
     g.s = Math.min(g.sx, g.sy);
     g.scaleFont = g.h / 150;
+    g.iconDy = this.level === 'Comp' ? 12 : -12 * g.scaleFont;
     g.fontSize = 2.0 * g.scaleFont + 'rem';
     g.iconSize = 2.0 * g.scaleFont + 'rem';
     g.dispSize = 0.8 * g.scaleFont + 'rem';

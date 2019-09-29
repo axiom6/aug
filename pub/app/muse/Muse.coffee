@@ -77,15 +77,15 @@ class Muse
   # Toc.vue components and routes
   Muse.komps = {
     Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
-    west:"Wise", north:"Wise", east:"Prin", south:"Prin", next:"Prin", prev:"Wise"  }
-    Prin:{ title:'Prin', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",
-    west:"Home", north:"Home", east:"Info", south:"Info", next:"Info", prev:"Home" }
+    west:"Wise", north:"Wise", prev:"Wise", east:"Prin", south:"Prin", next:"Prin"  }
+    Prin:{ title:'Care', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",
+    west:"Home", north:"Home", prev:"Home", east:"Info", south:"Info", next:"Info" }
     Info:{ title:'Info', key:'Info', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-th",
-    west:"Wise", north:"Wise", east:"Know", south:"Know", next:"Know", prev:"Wise" }
+    west:"Prin", north:"Prin", prev:"Prin", east:"Know", south:"Know", next:"Know" }
     Know:{ title:'Know', key:'Know', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-university",
-    west:"Info", north:"Info", east:"Wise", south:"Wise", next:"Wise", prev:"Info" }
+    west:"Info", north:"Info", prev:"Info", east:"Wise", south:"Wise", next:"Wise" }
     Wise:{ title:'Wise', key:'Wise', route:'Comp', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor",
-    west:"Know", north:"Know", east:"Info", south:"Info", next:"Info", prev:"Know" } }
+    west:"Know", north:"Know", prev:"Know", east:"Home", south:"Home", next:"Home" } }
 
   # Merges principles into practices
   Muse.mergePracsPrin = () ->

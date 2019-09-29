@@ -99,7 +99,7 @@ class Nav
     prc = @pracs(@compKey)[@pracKey]
     dis = prc[@dispKey]
     adj = @adjPracObj(dir)
-    ddr = if dir is 'next' or dir is 'prev' then dis.dir else @adjDir(dir)
+    ddr = dis.dir # if dir is 'next' or dir is 'prev' then dis.dir else @adjDir(dir)
     dis = @getDispObj( adj, ddr )
 
     if adj.name isnt 'None'

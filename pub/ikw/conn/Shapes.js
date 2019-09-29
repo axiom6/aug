@@ -201,7 +201,7 @@ Shapes = class Shapes {
 
   icon(g, x0, y0, name, iconId, uc, size) {
     var path;
-    path = g.append("svg:text").text(uc).attr("x", x0).attr("y", y0 + 12).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", size).attr("font-family", "FontAwesome");
+    path = g.append("svg:text").text(uc).attr("x", x0).attr("y", y0).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", size).attr("font-family", "FontAwesome");
     this.click(path, name);
   }
 

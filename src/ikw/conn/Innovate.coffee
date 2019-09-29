@@ -5,7 +5,7 @@ import Vis     from '../../base/util/Vis.js'
 
 class Innovate
 
-  constructor:( @spec, @shapes, @build ) ->
+  constructor:( @spec, @shapes, @build, @level ) ->
     @studies = @shapes.arrange( @spec )
     @cos30   = @shapes.cos30
     @t  = 24
