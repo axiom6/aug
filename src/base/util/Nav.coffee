@@ -13,6 +13,7 @@ class Nav
     @pracObj  =   null
     @dispKey  =  'None'
     @dispObj  =   null
+    @pageKey  =  'None' # Used to maintain continuity through dir tranvesals with Prac
     @pages    =  {}
     @dirTabs  = false
     @keyEvents()
@@ -20,7 +21,7 @@ class Nav
   pub:( msg ) ->
     reset = @resetRoute( msg )
     @set( msg )
-    obj = { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey }
+    obj = { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey, pageKey:@pageKey }
     obj.source = if msg.source? then msg.source else 'None'
     console.log('Nav.pub()', obj )
     @stream.publish( 'Nav',  obj )
@@ -78,7 +79,8 @@ class Nav
     return
 
   dirComp:( dir ) ->
-    compKey = @adjCompKey( @compKey, dir )
+    compKey  = @adjCompKey( @compKey, dir )
+    @pageKey = 'None'
     @pub( {  compKey:compKey, source:'Nav.dirComp' } )
     return
 
@@ -160,8 +162,9 @@ class Nav
     return
 
   getPageKey:( route ) ->
-    return 'None' if not @pages[route].pages?
-    for own key, page of @pages[route].pages
+    return @pageKey if ( route is 'Prac' or route is 'Disp' ) and @pageKey isnt 'None' # Maintain
+    return 'None'   if   not @pages[route].pages?
+    for own  key,   page  of @pages[route].pages
       return key if page.show
     return 'None'
 

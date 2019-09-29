@@ -78,7 +78,7 @@ class Muse
   Muse.komps = {
     Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
     west:"Wise", north:"Wise", prev:"Wise", east:"Prin", south:"Prin", next:"Prin"  }
-    Prin:{ title:'Care', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",
+    Prin:{ title:'Concerns', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",
     west:"Home", north:"Home", prev:"Home", east:"Info", south:"Info", next:"Info" }
     Info:{ title:'Info', key:'Info', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-th",
     west:"Prin", north:"Prin", prev:"Prin", east:"Know", south:"Know", next:"Know" }

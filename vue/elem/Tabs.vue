@@ -20,14 +20,15 @@
         if( tabsKey !== 'None') {
           this.pageKey = tabsKey; } },
       doPage: function (pageKey) {
-        this.nav().dirTabs = true;
+        this.nav().dirTabs = this.app() !== 'Muse';
         if( pageKey !== 'None') {
           this.onPage( pageKey );
-          this.nav().setPageKey(  this.route,   pageKey );
+          this.nav().setPageKey( this.route, pageKey );
           this.nav().pub( this.pubObj(pageKey) ); } },
       pubObj: function (pageKey) {
         let obj   = {}
-            obj.route = this.route;
+            obj.route   = this.route;
+            obj.pageKey = pageKey;
         let poute = this.pages[pageKey].route;
         if( this.isDef(poute) ) {
             obj.poute = poute; }

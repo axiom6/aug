@@ -19,6 +19,7 @@ Nav = class Nav {
     this.pracObj = null;
     this.dispKey = 'None';
     this.dispObj = null;
+    this.pageKey = 'None'; // Used to maintain continuity through dir tranvesals with Prac
     this.pages = {};
     this.dirTabs = false;
     this.keyEvents();
@@ -33,7 +34,8 @@ Nav = class Nav {
       route: this.route,
       compKey: this.compKey,
       pracKey: this.pracKey,
-      dispKey: this.dispKey
+      dispKey: this.dispKey,
+      pageKey: this.pageKey
     };
     obj.source = msg.source != null ? msg.source : 'None';
     console.log('Nav.pub()', obj);
@@ -127,6 +129,7 @@ Nav = class Nav {
   dirComp(dir) {
     var compKey;
     compKey = this.adjCompKey(this.compKey, dir);
+    this.pageKey = 'None';
     this.pub({
       compKey: compKey,
       source: 'Nav.dirComp'
@@ -251,6 +254,9 @@ Nav = class Nav {
 
   getPageKey(route) {
     var key, page, ref;
+    if ((route === 'Prac' || route === 'Disp') && this.pageKey !== 'None') { // Maintain
+      return this.pageKey;
+    }
     if (this.pages[route].pages == null) {
       return 'None';
     }

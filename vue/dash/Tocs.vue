@@ -86,11 +86,11 @@
             border-radius:0 24px 24px 0; margin:0.2rem 0.2rem 0.2rem 0.2rem;
          i   { margin-right: 0.4rem; }
          div { color:@theme-color; text-decoration:none; }
-         ul { font-size:@theme-tocs-size*0.60; font-weight:bold; padding:0; margin:0;
+         ul { font-size:@theme-tocs-size*0.80; font-weight:bold; padding:0; margin:0;
            li { border-radius:0 12px 12px 0; color:@theme-back; margin:0.2rem 0.2rem 0.2rem 0.2rem;            // Prac
              i { margin-right: 0.3rem; }
              a { color:@theme-high; }
-             ul { font-size:@theme-tocs-size*0.50; padding:0; margin:0 0 0 0.2rem;
+             ul { font-size:@theme-tocs-size*0.65; padding:0; margin:0 0 0 0.2rem;
                li { border-radius:0 12px 12px 0; color:@theme-back; margin:0.2rem 0.2rem 0.2rem 0.2rem;       // Disp
                  i { margin-right: 0.25rem; } }
                li:hover { background-color:@theme-back!important; color:@theme-color-tocs-disp!important; } } } } } } }

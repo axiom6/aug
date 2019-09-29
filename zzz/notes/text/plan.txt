@@ -1,12 +1,14 @@
 
 1. Bugs
    a. Conn Prac
-   b. Desc Prac
-   c. Desc Disp
+   b. Maintain Tab with Dir
+   c. Route url path bugs
 
 2. Improve
-   a. Hsv Backgrounds
-   b. Consider bring Prin into IKW nav
+   a. Desc Prac
+   b. Desc Disp
+   c. Hsv Backgrounds
+   d. Consider bring Prin into IKW nav
 
 3. Improved Landing Pages
    a. Muse Home Prin Info Know Wise
