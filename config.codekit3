@@ -7554,12 +7554,34 @@
 		"oAP": "/zzz/notes/text/plan.txt",
 		"oF": 0
 		},
+	"/zzz/src/Connect.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/pub/Connect.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
 	"/zzz/src/NavOrig.coffee": {
 		"ft": 32,
 		"ma": 0,
 		"mi": 0,
 		"oA": 0,
 		"oAP": "/zzz/pub/NavOrig.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/src/Shapes.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/pub/Shapes.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,

@@ -11,6 +11,27 @@ class Shapes
     #@cos15 = Vis.cos(15)
     @fontText = "Roboto"
 
+  createSvg:( elem, name, w, h ) =>
+    svgId = Util.htmlId( name, 'Svg',  '', false ) # Turn off duplicate id error message
+    gId   = Util.htmlId( name, 'SvgG', '', false ) # Turn off duplicate id error message
+    svg   = d3.select(elem).append("svg:svg")
+    svg.attr("id",svgId).attr("width",w).attr("height",h)
+       .attr("xmlns","http://www.w3.org/2000/svg")
+    defs   = svg.append("svg:defs")
+    g      = svg.append("svg:g").attr("id",gId) # All transforms are applied to g
+    [svg,g,svgId,gId,defs]
+
+  layoutSvg:( svg, g, svgWidth, svgHeight, sx, sy ) =>
+    # console.log( 'Shapes.layoutSvg()', svgWidth, svgHeight, sx, sy )
+    svg.attr( "width", svgWidth ).attr("height", svgHeight )
+    g  .attr( 'transform', Vis.scale( sx, sy ) )
+    return
+
+  clearSvg:( svg ) ->
+    svg.selectAll("*").remove()
+    svg.remove()
+    return
+
   rectGrad:( g, defs, xc, yc, w, h, fill, stroke, text ) ->
     @rectCenter( g, xc, yc, w*1.5, h*1.5, fill, stroke, 0.1 )
     @rectCenter( g, xc, yc, w*1.4, h*1.4, fill, stroke, 0.2 )
@@ -59,13 +80,13 @@ class Shapes
   isWest:(col) ->
     col is 'Embrace'
 
-  layout:( size, col, ns, ni ) ->
+  layout:( geom, col, ns, ni ) ->
     lay        = {}                                    # Layout ob
     lay.dir    = if( @isWest(col) ) then 1 else -1     # convey direction
-    lay.xc     = size.xc                               # x center
-    lay.yc     = size.yc                               # y center
-    lay.w      = size.w                                # pane width
-    lay.h      = size.h                                # pane height
+    lay.xc     = geom.x0                               # x center
+    lay.yc     = geom.y0                               # y center
+    lay.w      = geom.w                                # pane width
+    lay.h      = geom.h                                # pane height
     lay.hk     = lay.h / 8                             # height keyhole rect
     lay.xk     = if( @isWest(col) ) then lay.w else 0  # x keyhole rect
     lay.yk     = lay.yc - lay.hk                       # y keyhole rect
@@ -93,7 +114,7 @@ class Shapes
     lay.hi     = lay.ri / lay.ni                       # h innovative study rects
     lay.thick  = 1                                     # line thickness
     lay.stroke = 'none'                                # line stroke
-    # console.log( 'Shapes.layout()', col, size, lay )
+    # console.log( 'Shapes.layout()', col, geom, lay )
     lay
 
   click:( path, text) ->
@@ -240,27 +261,27 @@ class Shapes
     return
 
   # All flows are colored the north color of yellow [[90,90.90]
-  practiceFlow:( g, size, spec ) ->
+  practiceFlow:( g, geom, spec ) ->
     return if not spec.row?
     switch spec.row
       when 'Learn'
-        @flow( g, size, [90,90,90], 'south', 12 )
+        @flow( g, geom, [90,90,90], 'south', 12 )
       when 'Do'
-        @flow( g, size, [90,90,90], 'north', 12 )
-        @flow( g, size, [90,90,90], 'south', 12 )
+        @flow( g, geom, [90,90,90], 'north', 12 )
+        @flow( g, geom, [90,90,90], 'south', 12 )
       when 'Share'
-        @flow( g, size, [90,90,90], 'sorth', 12 )
+        @flow( g, geom, [90,90,90], 'sorth', 12 )
       when 'Dim'
 
       else
         console.error( 'Shapes.practiceFlow() unknown spec row ', spec.name, spec.row )
-        @flow( g, size, [90,90,90], 'south', 12 )
+        @flow( g, geom, [90,90,90], 'south', 12 )
     return
 
-  flow:( g, size, hsv, dir, h ) ->
+  flow:( g, geom, hsv, dir, h ) ->
     w    = 18
-    x0   = size.xc - w / 2
-    y0   = if dir is 'south' then size.h  - h else 0
+    x0   = geom.x0 - w / 2
+    y0   = if dir is 'south' then geom.h  - h else 0
     fill = Vis.toRgbHsvStr( hsv )
     @rect( g, x0, y0, w, h, fill, 'none' )
     return

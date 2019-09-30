@@ -11,35 +11,10 @@ import * as d3 from '../../../pub/lib/d3/d3.5.9.0.esm.js';
 
 Shapes = class Shapes {
   constructor(stream) {
-    this.createSvg = this.createSvg.bind(this);
-    this.layoutSvg = this.layoutSvg.bind(this);
     this.stream = stream;
     this.cos30 = 0.86602540378;
     //@cos15 = Vis.cos(15)
     this.fontText = "Roboto";
-    Util.noop(this.ellipse, this.pathPlot, this.textFill, this.rectGrad, this.saveSvg, this.createSvg, this.layoutSvg);
-  }
-
-  createSvg(elem, name, w, h) {
-    var defs, g, gId, svg, svgId;
-    svgId = Util.htmlId(name, 'Svg', '', false); // Turn off duplicate id error message
-    gId = Util.htmlId(name, 'SvgG', '', false); // Turn off duplicate id error message
-    svg = d3.select(elem).append("svg:svg");
-    svg.attr("id", svgId).attr("width", w).attr("height", h).attr("xmlns", "http://www.w3.org/2000/svg");
-    defs = svg.append("svg:defs");
-    g = svg.append("svg:g").attr("id", gId); // All transforms are applied to g
-    return [svg, g, svgId, gId, defs];
-  }
-
-  layoutSvg(svg, g, svgWidth, svgHeight, sx, sy) {
-    // console.log( 'Shapes.layoutSvg()', svgWidth, svgHeight, sx, sy )
-    svg.attr("width", svgWidth).attr("height", svgHeight);
-    g.attr('transform', Vis.scale(sx, sy));
-  }
-
-  clearSvg(svg) {
-    svg.selectAll("*").remove();
-    svg.remove();
   }
 
   rectGrad(g, defs, xc, yc, w, h, fill, stroke, text) {
@@ -121,14 +96,14 @@ Shapes = class Shapes {
     return col === 'Embrace';
   }
 
-  layout(geom, col, ns, ni) {
+  layout(size, col, ns, ni) {
     var lay;
     lay = {}; // Layout ob
     lay.dir = (this.isWest(col)) ? 1 : -1; // convey direction
-    lay.xc = geom.x0; // x center
-    lay.yc = geom.y0; // y center
-    lay.w = geom.w; // pane width
-    lay.h = geom.h; // pane height
+    lay.xc = size.xc; // x center
+    lay.yc = size.yc; // y center
+    lay.w = size.w; // pane width
+    lay.h = size.h; // pane height
     lay.hk = lay.h / 8; // height keyhole rect
     lay.xk = (this.isWest(col)) ? lay.w : 0; // x keyhole rect
     lay.yk = lay.yc - lay.hk; // y keyhole rect
@@ -156,7 +131,7 @@ Shapes = class Shapes {
     lay.hi = lay.ri / lay.ni; // h innovative study rects
     lay.thick = 1; // line thickness
     lay.stroke = 'none'; // line stroke
-    // console.log( 'Shapes.layout()', col, geom, lay )
+    // console.log( 'Shapes.layout()', col, size, lay )
     return lay;
   }
 
@@ -335,34 +310,34 @@ Shapes = class Shapes {
   }
 
   // All flows are colored the north color of yellow [[90,90.90]
-  practiceFlow(g, geom, spec) {
+  practiceFlow(g, size, spec) {
     if (spec.row == null) {
       return;
     }
     switch (spec.row) {
       case 'Learn':
-        this.flow(g, geom, [90, 90, 90], 'south', 12);
+        this.flow(g, size, [90, 90, 90], 'south', 12);
         break;
       case 'Do':
-        this.flow(g, geom, [90, 90, 90], 'north', 12);
-        this.flow(g, geom, [90, 90, 90], 'south', 12);
+        this.flow(g, size, [90, 90, 90], 'north', 12);
+        this.flow(g, size, [90, 90, 90], 'south', 12);
         break;
       case 'Share':
-        this.flow(g, geom, [90, 90, 90], 'sorth', 12);
+        this.flow(g, size, [90, 90, 90], 'sorth', 12);
         break;
       case 'Dim':
         break;
       default:
         console.error('Shapes.practiceFlow() unknown spec row ', spec.name, spec.row);
-        this.flow(g, geom, [90, 90, 90], 'south', 12);
+        this.flow(g, size, [90, 90, 90], 'south', 12);
     }
   }
 
-  flow(g, geom, hsv, dir, h) {
+  flow(g, size, hsv, dir, h) {
     var fill, w, x0, y0;
     w = 18;
-    x0 = geom.x0 - w / 2;
-    y0 = dir === 'south' ? geom.h - h : 0;
+    x0 = size.xc - w / 2;
+    y0 = dir === 'south' ? size.h - h : 0;
     fill = Vis.toRgbHsvStr(hsv);
     this.rect(g, x0, y0, w, h, fill, 'none');
   }

@@ -6,6 +6,7 @@ class SvgMgr
 
   constructor:( @name, @elem, @stream=null ) ->
     @d3    = d3
+    @level = 'Prac'
     @size  = @sizeElem( @elem )
     @origWidth  = @size.w
     @origHeight = @size.h
@@ -34,8 +35,11 @@ class SvgMgr
     sz.sy = if @origHeight then sz.h / @origHeight else 1.0
     sz.s  = Math.min( sz.sx, sz.sy )
     sz.r  = Math.min( sz.w,  sz.h ) * 0.2  # Used for hexagons
-    sz.fontSize   = '2em' # @toVh( 5 )+'vh'
-    sz.iconSize   = '2em' # @toVh( 5 )+'vh'
+    sz.scaleFont = sz.h / 150
+    sz.fontSize  = 2.0*sz.scaleFont+'rem' # '2em' @toVh( 5 )+'vh'
+    sz.iconSize  = 2.0*sz.scaleFont+'rem' # '2em' @toVh( 5 )+'vh'
+    sz.dispSize  = 0.8*sz.scaleFont+'rem'
+    sz.iconDy    = if @level is 'Comp' then 12 else -12*sz.scaleFont
     console.log( 'SvgMgr.sizeElem()', sz )
     @size = sz
     sz
@@ -58,5 +62,10 @@ class SvgMgr
 
   toFill:( hsv ) ->
     Vis.toRgbHsvStr( hsv )
+
+  clearSvg:() ->
+    @svg.selectAll("*").remove()
+    @svg.remove()
+    return
 
 export default SvgMgr

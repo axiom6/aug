@@ -20818,12 +20818,13 @@ var SvgMgr;
 
 SvgMgr = class SvgMgr {
   constructor(name1, elem1, stream = null) {
-    this.resize = this.resize.bind(this);
     this.resize2 = this.resize2.bind(this);
+    this.resize = this.resize.bind(this);
     this.name = name1;
     this.elem = elem1;
     this.stream = stream;
     this.d3 = d3;
+    this.level = 'Prac';
     this.size = this.sizeElem(this.elem);
     this.origWidth = this.size.w;
     this.origHeight = this.size.h;
@@ -20853,21 +20854,24 @@ SvgMgr = class SvgMgr {
     sz.sy = this.origHeight ? sz.h / this.origHeight : 1.0;
     sz.s = Math.min(sz.sx, sz.sy);
     sz.r = Math.min(sz.w, sz.h) * 0.2; // Used for hexagons
+    sz.scaleFont = sz.h / 150;
     sz.fontSize = '2em'; // @toVh( 5 )+'vh'
     sz.iconSize = '2em'; // @toVh( 5 )+'vh'
+    sz.dispSize = 0.8 * g.scaleFont + 'rem';
+    sz.iconDy = this.level === 'Comp' ? 12 : -12 * sz.scaleFont;
     console.log('SvgMgr.sizeElem()', sz);
     this.size = sz;
     return sz;
   }
 
-  resize() {
+  resize2() {
     var sz;
     sz = this.sizeElem(this.elem);
     this.svg.attr("width", sz.w).attr("height", sz.h);
     this.g.transition().attr("transform", `scale(${sz.s})`);
   }
 
-  resize2() {
+  resize() {
     var sz, trans;
     sz = this.sizeElem(this.elem);
     this.svg.attr("width", sz.w).attr("height", sz.h);
@@ -20881,6 +20885,11 @@ SvgMgr = class SvgMgr {
 
   toFill(hsv) {
     return Vis$1.toRgbHsvStr(hsv);
+  }
+
+  clearSvg() {
+    this.svg.selectAll("*").remove();
+    this.svg.remove();
   }
 
 };

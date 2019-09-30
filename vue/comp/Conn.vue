@@ -5,7 +5,6 @@
 
 <script type="module">
   
-  import Build   from '../../pub/ikw/cube/Build.js';
   import Connect from '../../pub/ikw/conn/Connect.js';
 
   let Conn = {
@@ -13,7 +12,7 @@
     props: { pracObj:Object, level:String },
 
     data() {
-      return { build:null, connect:null, size:null }; },
+      return { connect:null, size:null }; },
     
     watch: {
       pracObj() {
@@ -22,46 +21,38 @@
     methods: {
       
       onPrac: function() {
-        this.createConnect( this.stream(), this.build, this.pracObj ); },
+        if( this.isDef(this.connect) ) {
+            this.connect.clearSvg(); }
+        this.createConnect( this.stream(), this.pracObj ); },
       
       doPrac: function (pracKey) {
         this.nav().pub( { pracKey:pracKey } ); },
       
       clConn: function() {
-        // console.log( 'Conn.clConn() called' );
         return this.nav().route === 'Comp' ? 'conn-comp' : 'conn-prac'; },
       
-      calcSize: function(elem) { // Should only be called within $nextTick()
-        let sz   = {}
-        sz.elemWidth  = elem['clientWidth' ];
-        sz.elemHeight = elem['clientHeight'];
-        sz.elem = elem;
-        sz.name = this.pracObj.name
-        return sz; },
-      
-      createConnect: function( stream, build, pracObj ) {
+      createConnect: function( stream, pracObj ) {
         this.$nextTick( function() {
-          if( this.isDef(this.connect) ) {
-            this.connect.clear(); }
           let elem     = this.$refs[this.pracObj.name];
-          this.size    = this.calcSize(elem);
-          this.connect = new Connect( stream, build, pracObj, elem, this.size, this.level ); } ) },
+          if( elem['clientHeight'] > 0 ) {
+            this.connect = new Connect( stream, this.batch(), pracObj, elem, this.level ); }
+          else {
+            console.error( 'Conn.vue empty elem for',
+              { name:this.pracObj.name, height:elem['clientHeight'], elem:elem, refs:this.$refs } ); } } ) },
       
       resize: function() {
         this.$nextTick( function() {
-            let level = 'Resize';  // 'Restore' 'Expand' requires 'Comp' sizes
-            if( level==='Expand') { this.connect.lastSize(this.size) }
-            this.connect.layout( this.size, level );  } ); }
+          if( this.isDef(this.connect) ) {
+              this.connect.resize();  } } ); }
     },
     
     mounted: function () {
-      this.build = new Build(  this.batch() );
-      this.onPrac(); }
-    
-    //created: function () {
-    //  window.addEventListener(   'resize', this.resize ) },
-    //destroyed: function () {
-      //window.removeEventListener('resize', this.resize ) }
+      this.onPrac(); },
+    created: function () {
+      window.addEventListener(   'resize', this.resize ) },
+    destroyed: function () {
+      window.removeEventListener('resize', this.resize ) }
+      
    }
 
   export default Conn;

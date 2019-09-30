@@ -24,81 +24,81 @@ Innovate = class Innovate {
     this.stroke = 'black';
   }
 
-  drawSvg(g, geom, defs) {
+  drawSvg(g, size, defs) {
     var key, ref, study;
     Util.noop(defs);
-    this.lay = this.shapes.layout(geom, this.spec.column, this.shapes.size(this.studies), this.shapes.size(this.studies));
-    this.rings(g, geom, this.t);
+    this.lay = this.shapes.layout(size, this.spec.column, this.shapes.size(this.studies), this.shapes.size(this.studies));
+    this.rings(g, size, this.t);
     switch (this.spec.row) {
       case 'Dim':
-        this.principle(g, geom);
+        this.principle(g, size);
         break;
       case 'Learn':
-        this.concept(g, geom);
+        this.concept(g, size);
         break;
       case 'Do':
-        this.technology(g, geom);
+        this.technology(g, size);
         break;
       case 'Share':
-        this.facilitate(g, geom);
+        this.facilitate(g, size);
         break;
       default:
-        this.technology(g, geom); // Default for group spec
+        this.technology(g, size); // Default for group spec
     }
     ref = this.studies;
     for (key in ref) {
       study = ref[key];
-      this.hexStudy(g, geom, study);
+      this.hexStudy(g, size, study);
     }
   }
 
-  rings(g, geom, t) {
+  rings(g, size, t) {
     var colorBack, colorRing;
     colorRing = Vis.toRgbHsvStr([70, 55, 70]);
     colorBack = 'rgba(97, 56, 77, 1.0 )';
-    this.shapes.round(g, t, t, geom.w - t * 2, geom.h - t * 2, t, t, colorRing, 'none');
-    this.shapes.round(g, t * 2.5, t * 2.5, geom.w - t * 5.0, geom.h - t * 5.0, t, t, colorBack, 'none');
-    return this.shapes.text(g, t * 4, t * 2 + 2, this.spec.name, this.spec.name + 'Text', 'black', geom.fontSize);
+    this.shapes.round(g, t, t, size.w - t * 2, size.h - t * 2, t, t, colorRing, 'none');
+    this.shapes.round(g, t * 2.5, t * 2.5, size.w - t * 5.0, size.h - t * 5.0, t, t, colorBack, 'none');
+    return this.shapes.text(g, t * 4, t * 2 + 2, this.spec.name, this.spec.name + 'Text', 'black', size.fontSize);
   }
 
-  principle(g, geom) {
-    this.eastInovate(g, geom);
-    this.westInovate(g, geom);
+  principle(g, size) {
+    this.eastInovate(g, size);
+    this.westInovate(g, size);
   }
 
-  concept(g, geom) {
-    this.eastInovate(g, geom);
-    this.westInovate(g, geom);
-    this.southInovate(g, geom, function(study) {
+  concept(g, size) {
+    this.eastInovate(g, size);
+    this.westInovate(g, size);
+    this.southInovate(g, size, function(study) {
       return study.dir !== 'north';
     });
   }
 
   // "ArchitectEngineerConstruct":{"dir":"pradd","icon":"fa-university","hsv":[ 30,60,90]}
-  technology(g, geom) {
-    this.eastInovate(g, geom);
-    this.westInovate(g, geom);
-    this.northInovate(g, geom, function(study) {
+  technology(g, size) {
+    this.eastInovate(g, size);
+    this.westInovate(g, size);
+    this.northInovate(g, size, function(study) {
       return study.dir !== 'south';
     });
-    this.southInovate(g, geom, function(study) {
+    this.southInovate(g, size, function(study) {
       return study.dir !== 'north';
     });
   }
 
-  facilitate(g, geom) {
-    this.eastInovate(g, geom);
-    this.westInovate(g, geom);
-    this.northInovate(g, geom);
+  facilitate(g, size) {
+    this.eastInovate(g, size);
+    this.westInovate(g, size);
+    this.northInovate(g, size);
   }
 
-  westInovate(g, geom) {
+  westInovate(g, size) {
     var fill, h, key, r0, ref, study, w, x0, y0;
-    r0 = this.lay.ri; // geom.x0/2 - 36
+    r0 = this.lay.ri; // size.x0/2 - 36
     w = 24;
     h = r0 / this.shapes.size(this.studies);
-    x0 = geom.w - w;
-    y0 = geom.y0 - r0 / 2;
+    x0 = size.w - w;
+    y0 = size.yc - r0 / 2;
     ref = this.studies;
     for (key in ref) {
       study = ref[key];
@@ -108,13 +108,13 @@ Innovate = class Innovate {
     }
   }
 
-  eastInovate(g, geom) {
+  eastInovate(g, size) {
     var fill, h, key, r0, ref, study, w, x0, y0;
-    r0 = this.lay.ri; // geom.x0/2 - 36
+    r0 = this.lay.ri; // size.x0/2 - 36
     w = 24;
     h = r0 / this.shapes.size(this.studies);
     x0 = 0;
-    y0 = geom.y0 - r0 / 2;
+    y0 = size.yc - r0 / 2;
     ref = this.studies;
     for (key in ref) {
       study = ref[key];
@@ -124,12 +124,12 @@ Innovate = class Innovate {
     }
   }
 
-  northInovate(g, geom) {
+  northInovate(g, size) {
     var dx, fill, h, key, ordered, study, w, x0, y0;
     w = 18;
     h = 24;
-    dx = geom.r * 1.5;
-    x0 = geom.x0 - dx - w / 2;
+    dx = size.r * 1.5;
+    x0 = size.xc - dx - w / 2;
     y0 = 0;
     ordered = this.build.toOrder(this.studies, ['west', 'north', 'east']);
     for (key in ordered) {
@@ -140,13 +140,13 @@ Innovate = class Innovate {
     }
   }
 
-  southInovate(g, geom) {
+  southInovate(g, size) {
     var dx, fill, h, key, ordered, study, w, x0, y0;
     w = 18;
     h = 24;
-    dx = geom.r * 1.5;
-    x0 = geom.x0 - dx - w / 2;
-    y0 = geom.h - h;
+    dx = size.r * 1.5;
+    x0 = size.xc - dx - w / 2;
+    y0 = size.h - h;
     ordered = this.build.toOrder(this.studies, ['west', 'north', 'east']);
     for (key in ordered) {
       study = ordered[key];
@@ -156,13 +156,13 @@ Innovate = class Innovate {
     }
   }
 
-  hexStudy(g, geom, study) {
+  hexStudy(g, size, study) {
     var dx, dy, fill, i, j, uc, x, x0, y, y0, yh;
-    this.r = geom.r;
+    this.r = size.r;
     dx = this.r * 1.5;
     dy = this.r * 2.0 * this.cos30;
-    x0 = geom.x0;
-    y0 = geom.y0; // - 26
+    x0 = size.xc;
+    y0 = size.yc; // - 26
     j = 0;
     i = 0;
     [j, i] = this.hexPosTier(study.dir);
@@ -173,8 +173,8 @@ Innovate = class Innovate {
     uc = Vis.unicode(study.icon);
     // console.log( 'Innovate.hexStudy()', study.icon, uc )
     this.hexPath(fill, g, x, y, this.shapes.htmlId(study.name, 'HexPath'));
-    this.hexText(study.name, g, x, y, this.shapes.htmlId(study.name, 'HexText'), geom.dispSize);
-    this.hexIcon(uc, g, x, y, this.shapes.htmlId(study.name, 'HexIcon'), geom.dispSize);
+    this.hexText(study.name, g, x, y, this.shapes.htmlId(study.name, 'HexText'), size.dispSize);
+    this.hexIcon(uc, g, x, y, this.shapes.htmlId(study.name, 'HexIcon'), size.dispSize);
   }
 
   hexPosTier(dir) {
