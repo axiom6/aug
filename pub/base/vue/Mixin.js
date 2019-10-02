@@ -193,6 +193,21 @@ Mixin = class Mixin {
             });
           }
           return idx;
+        },
+        hasElem: function(elem) {
+          return this.isDef(elem) && this.isDef(elem['clientHeight']) && elem['clientHeight'] > 0;
+        },
+        getElem: function($refs, name) {
+          var elem;
+          elem = $refs[name];
+          if (!this.hasElem(elem)) {
+            elem = $refs[name][0];
+            if (!this.hasElem(elem)) {
+              console.error('Mixin.hasElem() unable to find elem in $refs[name] or $refs[name][0]', name);
+              console.dir($refs);
+            }
+          }
+          return elem;
         }
       }
     };

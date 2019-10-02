@@ -7,13 +7,12 @@ import Util from '../../base/util/Util.js';
 import Vis from '../../base/util/Vis.js';
 
 Innovate = class Innovate {
-  constructor(spec, shapes, build, level) {
+  constructor(spec, shapes, build) {
     this.hexStudy = this.hexStudy.bind(this);
     this.line = this.line.bind(this);
     this.spec = spec;
     this.shapes = shapes;
     this.build = build;
-    this.level = level;
     this.studies = this.shapes.arrange(this.spec);
     this.cos30 = this.shapes.cos30;
     this.t = 24;
@@ -58,7 +57,7 @@ Innovate = class Innovate {
     colorBack = 'rgba(97, 56, 77, 1.0 )';
     this.shapes.round(g, t, t, size.w - t * 2, size.h - t * 2, t, t, colorRing, 'none');
     this.shapes.round(g, t * 2.5, t * 2.5, size.w - t * 5.0, size.h - t * 5.0, t, t, colorBack, 'none');
-    return this.shapes.text(g, t * 4, t * 2 + 2, this.spec.name, this.spec.name + 'Text', 'black', size.fontSize);
+    return this.shapes.text(g, t * 4, t * 2 + 2, this.spec.name, this.spec.name + 'Text', 'black', size.bannSize);
   }
 
   principle(g, size) {

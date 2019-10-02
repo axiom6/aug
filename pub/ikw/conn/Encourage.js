@@ -3,11 +3,10 @@ var Encourage;
 import Vis from "../../base/util/Vis.js";
 
 Encourage = class Encourage {
-  constructor(spec, shapes, build, level) {
+  constructor(spec, shapes, build) {
     this.spec = spec;
     this.shapes = shapes;
     this.build = build;
-    this.level = level;
     this.studies = this.shapes.arrange(this.spec);
     this.innovs = this.build.adjacentStudies(this.spec, 'west');
   }
@@ -26,7 +25,7 @@ Encourage = class Encourage {
       study = ref[key];
       fill = this.shapes.toFill(study);
       wedgeId = this.shapes.htmlId(study.name, 'Wedge');
-      this.shapes.wedge(g, lay.ro, lay.rs, a1, a1 - lay.da, lay.xc, lay.yc, fill, study.name, wedgeId, size.dispSize);
+      this.shapes.wedge(g, lay.ro, lay.rs, a1, a1 - lay.da, lay.xc, lay.yc, fill, study.name, wedgeId, size.dispSize, size.level);
       for (a = i = ref1 = a1 - lay.li, ref2 = a1 - lay.da, ref3 = -lay.ds; ref3 !== 0 && (ref3 > 0 ? i < ref2 : i > ref2); a = i += ref3) {
         this.shapes.link(g, a, lay.ro, lay.ri, lay.xc, lay.yc, lay.xc, yl, xr, yl, fill, lay.thick);
         yl += lay.dl;
@@ -41,11 +40,11 @@ Encourage = class Encourage {
     w = lay.xr + lay.wr;
     h = r0; // lay.ri
     xt = x + w * 0.5;
-    yt = size.yc * 0.5 - (this.level === 'Comp' ? 6 : 0);
-    yi = size.yc - size.iconDy;
+    yt = size.yc * 0.5 - size.bannDy;
+    yi = size.yc + size.iconDy;
     this.shapes.conveySankey("Encourage", defs, g, this.studies, this.innovs, x, y, w, h);
-    this.shapes.icon(g, size.xc, yi, this.spec.name, this.shapes.htmlId(this.spec.name, 'IconSvg'), Vis.unicode(this.spec.icon), size.iconSize);
-    this.shapes.text(g, xt, yt, this.spec.name, this.shapes.htmlId(this.spec.name, 'TextSvg'), 'black', size.fontSize);
+    this.shapes.icon(g, size.xc, yi, this.spec.name, this.shapes.htmlId(this.spec.name, 'IconSvg'), 'black', size.iconSize, Vis.unicode(this.spec.icon));
+    this.shapes.text(g, xt, yt, this.spec.name, this.shapes.htmlId(this.spec.name, 'TextSvg'), 'black', size.bannSize);
     this.shapes.practiceFlow(g, size, this.spec);
   }
 

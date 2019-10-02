@@ -5,7 +5,7 @@ import Vis     from '../../base/util/Vis.js'
 
 class Innovate
 
-  constructor:( @spec, @shapes, @build, @level ) ->
+  constructor:( @spec, @shapes, @build ) ->
     @studies = @shapes.arrange( @spec )
     @cos30   = @shapes.cos30
     @t  = 24
@@ -34,7 +34,7 @@ class Innovate
     colorBack = 'rgba(97, 56, 77, 1.0 )'
     @shapes.round( g, t,     t,     size.w-t*2,   size.h-t*2,   t, t, colorRing, 'none' )
     @shapes.round( g, t*2.5, t*2.5, size.w-t*5.0, size.h-t*5.0, t, t, colorBack, 'none' )
-    @shapes.text(  g, t*4,   t*2+2, @spec.name,   @spec.name+'Text', 'black', size.fontSize )
+    @shapes.text(  g, t*4,   t*2+2, @spec.name,   @spec.name+'Text', 'black', size.bannSize )
 
   principle:( g, size ) ->
     @eastInovate(  g, size )

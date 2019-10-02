@@ -13,7 +13,7 @@ class D3D
   constructor:( @stream ) ->
 
   create:( name, elem ) ->
-    svgMgr = new SvgMgr( name, elem, @stream )
+    svgMgr = new SvgMgr( name, elem, 'Comp', @stream )
     switch name
       when 'Wheel'   then new Wheel( svgMgr )
       when 'Axes'    then new Axes(  svgMgr )

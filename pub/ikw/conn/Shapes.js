@@ -148,35 +148,42 @@ Shapes = class Shapes {
     });
   }
 
-  wedge(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize) {
+  wedge(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize, level) {
     var arc;
     arc = d3.arc().innerRadius(r1).outerRadius(r2).startAngle(this.radD3(a1)).endAngle(this.radD3(a2));
     //console.log( 'Shape.wedge()', { x0:x0, y0:y0 } )
     g.append("svg:path").attr("d", arc).attr("fill", fill).attr("stroke", "none").attr("transform", Vis.translate(x0, y0));
-    this.wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize);
+    this.wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize, level);
   }
 
-  wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize) {
-    var as, at, path, rt, th, x, y;
+  wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize, level = 'None') {
+    var as, at, path, rt, sc, th, x, y;
     Util.noop(wedgeId);
     th = 14;
     at = (a1 + a2) / 2;
+    rt = (r1 + r2) / 2;
+    sc = 0.50;
     if ((210 <= at && at <= 330) || (-150 <= at && at <= -30)) {
-      rt = (r1 + r2) / 2 + th * 0.25;
+      sc = level === 'Prac' ? 0.30 : 0.25; // level is a hack
+      rt = (r1 + r2) / 2 + th * sc;
       as = 270 - at;
+      console.log('Shapes.wedgeText() 1', text, level, sc, rt);
     } else {
-      rt = (r1 + r2) / 2 - th * 0.5;
+      sc = level === 'Prac' ? 0.85 : 0.50; // level is a hack
+      rt = (r1 + r2) / 2 - th * sc;
       as = 90 - at;
+      console.log('Shapes.wedgeText() 2', text, level, sc, rt);
     }
+    console.log('Shapes.wedgeText() 3', text, level, sc, rt);
     x = x0 + rt * this.cos(at);
     y = y0 + rt * this.sin(at);
     path = g.append("svg:text").text(text).attr("x", x).attr("y", y).attr("transform", Vis.rotate(as, x, y)).attr("text-anchor", "middle").attr("font-size", fontSize).attr("font-family", this.fontText).attr("font-weight", "bold").attr('fill', '#000000'); // @textFill(fill))
     this.click(path, text);
   }
 
-  icon(g, x0, y0, name, iconId, uc, size) {
+  icon(g, x0, y0, name, iconId, color, size, uc) {
     var path;
-    path = g.append("svg:text").text(uc).attr("x", x0).attr("y", y0).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", size).attr("font-family", "FontAwesome");
+    path = g.append("svg:text").text(uc).attr("x", x0).attr("y", y0).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", size).attr("fill", color).attr("font-family", "FontAwesome");
     this.click(path, name);
   }
 

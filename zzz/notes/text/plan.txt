@@ -1,10 +1,12 @@
 
-1. Bugs
-   a. Conn Prac font size, position and resize
-      Wheel no resize | Axes,Chord,Tree translate  | Link good | Radar no display | Hue good
-   b. Draw SvgMgr look into tranform in Axes Chord
-   c. May have to refactor all Svg for Conn Draw
+0. Resize
+   a. Turning on resize
+   b. Stick to just transform scale
+   c. Wheel no resize | Axes,Chord,Tree translate  | Link good | Radar no display | Hue good
 
+1. Bugs
+   a. Conn Prac font size, position
+   b. Nav.pageKey with Conn
 
 2. Improve
    a. Desc Prac

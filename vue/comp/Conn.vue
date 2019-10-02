@@ -19,6 +19,10 @@
         this.onPrac(); } },
     
     methods: {
+
+      onNav:  function (obj) {
+        if( ( obj.route==='Comp' || obj.route==='Prac' ) && this.isDef(obj.pageKey) && obj.pageKey==='Conn' ) {
+          this.onPrac(); } },
       
       onPrac: function() {
         if( this.isDef(this.connect) ) {
@@ -33,12 +37,9 @@
       
       createConnect: function( stream, pracObj ) {
         this.$nextTick( function() {
-          let elem     = this.$refs[this.pracObj.name];
-          if( elem['clientHeight'] > 0 ) {
-            this.connect = new Connect( stream, this.batch(), pracObj, elem, this.level ); }
-          else {
-            console.error( 'Conn.vue empty elem for',
-              { name:this.pracObj.name, height:elem['clientHeight'], elem:elem, refs:this.$refs } ); } } ) },
+          let elem = this.getElem( this.$refs, this.pracObj.name );
+          if( this.hasElem(elem) ) {
+            this.connect = new Connect( stream, this.batch(), pracObj, elem, this.level ); } } ) },
       
       resize: function() {
         this.$nextTick( function() {
@@ -47,7 +48,9 @@
     },
     
     mounted: function () {
-      this.onPrac(); },
+      this.onPrac();
+      this.subscribe( 'Nav', 'Conn.vue', (obj) => {
+        this.onNav(obj); } ); },
     created: function () {
       window.addEventListener(   'resize', this.resize ) },
     destroyed: function () {

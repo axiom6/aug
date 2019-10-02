@@ -4,10 +4,9 @@ import Vis      from '../../base/util/Vis.js'
 
 class SvgMgr
 
-  constructor:( @name, @elem, @stream=null ) ->
+  constructor:( @name, @elem, @level, @stream=null ) ->
     @d3    = d3
-    @level = 'Prac'
-    @size  = @sizeElem( @elem )
+    @size  = @sizeElem( @elem, @level )
     @origWidth  = @size.w
     @origHeight = @size.h
     @svgId = @htmlId( @name, 'Svg',  '' )
@@ -23,7 +22,7 @@ class SvgMgr
   htmlId:( name, type, ext='' ) ->
     name + type + ext
 
-  sizeElem:( elem ) ->
+  sizeElem:( elem, level ) ->
     sz = {}
     sz.w          =   elem['clientWidth' ]
     sz.h          =   elem['clientHeight']
@@ -35,12 +34,17 @@ class SvgMgr
     sz.sy = if @origHeight then sz.h / @origHeight else 1.0
     sz.s  = Math.min( sz.sx, sz.sy )
     sz.r  = Math.min( sz.w,  sz.h ) * 0.2  # Used for hexagons
-    sz.scaleFont = sz.h / 150
-    sz.fontSize  = 2.0*sz.scaleFont+'rem' # '2em' @toVh( 5 )+'vh'
-    sz.iconSize  = 2.0*sz.scaleFont+'rem' # '2em' @toVh( 5 )+'vh'
-    sz.dispSize  = 0.8*sz.scaleFont+'rem'
-    sz.iconDy    = if @level is 'Comp' then 12 else -12*sz.scaleFont
-    console.log( 'SvgMgr.sizeElem()', sz )
+    sz.level     = level
+    sz.scaleFont = sz.h / 100
+    sz.iconSize  = 20.0*sz.scaleFont+'px'
+    sz.bannSize  = 15.0*sz.scaleFont+'px'
+    sz.pracSize  = 10.0*sz.scaleFont+'px'
+    sz.dispSize  =  7.0*sz.scaleFont+'px'
+    sz.iconDy    = if sz.level is 'Comp' then 20.0*sz.scaleFont else 7.5*sz.scaleFont
+    sz.bannDy    = if sz.level is 'Comp' then  6                else 0
+    sz.pracDy    = 0
+    sz.dispDy    = if sz.level is 'Comp' then  0                else 0
+    # console.log( 'SvgMgr.sizeElem()', sz )
     @size = sz
     sz
 

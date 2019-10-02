@@ -20854,12 +20854,14 @@ SvgMgr = class SvgMgr {
     sz.sy = this.origHeight ? sz.h / this.origHeight : 1.0;
     sz.s = Math.min(sz.sx, sz.sy);
     sz.r = Math.min(sz.w, sz.h) * 0.2; // Used for hexagons
-    sz.scaleFont = sz.h / 150;
-    sz.fontSize = '2em'; // @toVh( 5 )+'vh'
-    sz.iconSize = '2em'; // @toVh( 5 )+'vh'
-    sz.dispSize = 0.8 * g.scaleFont + 'rem';
-    sz.iconDy = this.level === 'Comp' ? 12 : -12 * sz.scaleFont;
-    console.log('SvgMgr.sizeElem()', sz);
+    sz.scaleFont = sz.h / 100;
+    sz.bannSize = 15.0 * sz.scaleFont + 'px';
+    sz.pracSize = 10.0 * sz.scaleFont + 'px';
+    sz.dispSize = 7.0 * sz.scaleFont + 'px';
+    sz.bannDy = 0;
+    sz.pracDy = this.level === 'Comp' ? 12 : -120 * sz.scaleFont;
+    sz.dispDy = 0;
+    // console.log( 'SvgMgr.sizeElem()', sz )
     this.size = sz;
     return sz;
   }

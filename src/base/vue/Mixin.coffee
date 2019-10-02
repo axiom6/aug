@@ -122,6 +122,18 @@ class Mixin
             console.error( 'Mixin.choiceIndex() bad choice name', { name:name, idx:idx } )
           idx
 
+        hasElem:(elem) ->
+          this.isDef(elem) and this.isDef(elem['clientHeight']) and elem['clientHeight'] > 0
+
+        getElem:($refs,name) ->
+          elem = $refs[name]
+          if not this.hasElem(elem)
+            elem = $refs[name][0]
+            if not this.hasElem(elem)
+              console.error( 'Mixin.hasElem() unable to find elem in $refs[name] or $refs[name][0]', name )
+              console.dir($refs)
+          elem
+
 
       }
     }

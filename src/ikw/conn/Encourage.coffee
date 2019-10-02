@@ -3,7 +3,7 @@ import Vis from "../../base/util/Vis.js"
 
 class Encourage
 
-  constructor:( @spec, @shapes, @build, @level ) ->
+  constructor:( @spec, @shapes, @build ) ->
     @studies = @shapes.arrange( @spec )
     @innovs  = @build.adjacentStudies( @spec, 'west' )
 
@@ -18,7 +18,7 @@ class Encourage
     for key, study of @studies
       fill = @shapes.toFill(study)
       wedgeId = @shapes.htmlId( study.name, 'Wedge' )
-      @shapes.wedge( g, lay.ro, lay.rs, a1, a1-lay.da, lay.xc, lay.yc, fill, study.name, wedgeId, size.dispSize  )
+      @shapes.wedge( g, lay.ro, lay.rs, a1, a1-lay.da, lay.xc, lay.yc, fill, study.name, wedgeId, size.dispSize, size.level  )
       for a in [a1-lay.li...a1-lay.da] by -lay.ds
         @shapes.link( g, a, lay.ro, lay.ri, lay.xc, lay.yc, lay.xc, yl, xr, yl, fill, lay.thick )
         yl += lay.dl
@@ -31,11 +31,11 @@ class Encourage
     w  = lay.xr + lay.wr
     h  = r0 # lay.ri
     xt = x +  w  * 0.5
-    yt = size.yc * 0.5 - if @level is 'Comp' then 6 else 0
-    yi = size.yc - size.iconDy
+    yt = size.yc * 0.5 - size.bannDy
+    yi = size.yc       + size.iconDy
     @shapes.conveySankey( "Encourage", defs, g, @studies, @innovs, x, y, w, h )
-    @shapes.icon( g, size.xc, yi, @spec.name, @shapes.htmlId(@spec.name,'IconSvg'), Vis.unicode(@spec.icon), size.iconSize )
-    @shapes.text( g, xt,      yt, @spec.name, @shapes.htmlId(@spec.name,'TextSvg'), 'black', size.fontSize )
+    @shapes.icon( g, size.xc, yi, @spec.name, @shapes.htmlId(@spec.name,'IconSvg'), 'black', size.iconSize, Vis.unicode(@spec.icon) )
+    @shapes.text( g, xt,      yt, @spec.name, @shapes.htmlId(@spec.name,'TextSvg'), 'black', size.bannSize )
     @shapes.practiceFlow( g, size, @spec )
     return
 

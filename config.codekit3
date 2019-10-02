@@ -7554,6 +7554,17 @@
 		"oAP": "/zzz/notes/text/plan.txt",
 		"oF": 0
 		},
+	"/zzz/pub/Connect.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/Connect-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/zzz/src/Connect.coffee": {
 		"ft": 32,
 		"ma": 0,
