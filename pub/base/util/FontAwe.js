@@ -3,6 +3,7 @@ var FontAwe;
 FontAwe = {};
 
 FontAwe.icons = {
+  "fab fa-centos": "\uf789",
   "fas fa-yin-yang": "\uf6ad",
   "fab fa-pagelines": "\uf18c",
   "fas fa-network-wired": "\uf6ff",

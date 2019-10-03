@@ -1,31 +1,26 @@
 
-
-
-0. Bugs
-   a. Innovate | Improve Banner background width with text length
-   b. Flow Width and Height
-
-1. Resize
-   a. Turning on resize
-   b. Stick to just transform scale
-   c. Wheel no resize | Axes,Chord,Tree translate  | Link good | Radar no display | Hue good
-
-2. Improve
+1. Improve
    a. Desc Prac
    b. Desc Disp
    c. Consider bring Prin into IKW nav
    d. Route url path init bug
 
-3. Improved Landing Pages
+2. Improved Landing Pages
    a. Muse Home Prin Info Know Wise
    b. Augm Home Math Geom Note Draw Hues
 
-4. Descriptions
+3. Descriptions
 
-5. Talk
+4. Talk
    a. Nav scripts
    b. Vue  Slide template
    c. Core Slides
+
+5. Resize
+   a. Turning on resize for Conns in Comp
+   b. smin smmax sx sy approach?
+   b. Stick to just transform scale
+   c. Wheel no resize | Axes,Chord,Tree translate  | Link good | Radar no display | Hue good
 
 6. Augm
    a. Math MathML

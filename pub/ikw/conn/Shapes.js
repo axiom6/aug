@@ -180,9 +180,10 @@ Shapes = class Shapes {
     this.click(path, text);
   }
 
+  // "font-family: Arial, Font Awesome\ 5 Free; font-weight: 900;
   icon(g, x0, y0, name, iconId, color, size, uc) {
     var path;
-    path = g.append("svg:text").text(uc).attr("x", x0).attr("y", y0).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", size).attr("fill", color).attr("font-family", "FontAwesome");
+    path = g.append("svg:text").text(uc).attr("x", x0).attr("y", y0).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", size).attr("fill", color).attr("font-family", "Arial, Font Awesome\\ 5 Free").attr("font-weight", "900");
     this.click(path, name);
   }
 

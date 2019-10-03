@@ -28,33 +28,37 @@ class SvgMgr
     sz.h          =   elem['clientHeight']
     sz.windWidth  = window['innerWidth' ]
     sz.windHeight = window['innerHeight']
-    sz.xc = sz.w * 0.5
-    sz.yc = sz.h * 0.5
-    sz.sx = if @origWidth  then sz.w / @origWidth  else 1.0
-    sz.sy = if @origHeight then sz.h / @origHeight else 1.0
-    sz.s  = Math.min( sz.sx, sz.sy )
-    sz.r  = Math.min( sz.w,  sz.h ) * 0.2  # Used for hexagons
-    sz.level     = level
-    sz.scaleFont = sz.h / 100
-    sz.iconSize  = 20.0*sz.scaleFont+'px'
-    sz.bannSize  = 15.0*sz.scaleFont+'px'
-    sz.pracSize  = 10.0*sz.scaleFont+'px'
-    sz.dispSize  =  7.0*sz.scaleFont+'px'
-    sz.iconDy    = if sz.level is 'Comp' then  7.5*sz.scaleFont else 7.5*sz.scaleFont
-    sz.bannDy    = if sz.level is 'Comp' then  2.0*sz.scaleFont                else 0
-    sz.pracDy    = 0
-    sz.dispDy    = if sz.level is 'Comp' then  0                else 0
+    sz.xc         = sz.w * 0.5
+    sz.yc         = sz.h * 0.5
+    sz.sx         = if @origWidth  then sz.w / @origWidth  else 1.0
+    sz.sy         = if @origHeight then sz.h / @origHeight else 1.0
+    sz.smin       = Math.min( sz.sx, sz.sy )
+    sz.smax       = Math.max( sz.sx, sz.sy )
+    sz.s          = sz.smin
+    sz.r          = Math.min( sz.w,  sz.h ) * 0.2  # Used for hexagons
+    sz.level      = level
+    sz.scaleFont  = sz.h / 100
+    sz.ringSize   = if sz.level is 'Comp' then 24 else 6*sz.scaleFont
+    sz.ringIcon   = 12.0*sz.scaleFont
+    sz.iconSize   = 20.0*sz.scaleFont+'px'
+    sz.bannSize   = if sz.level is 'Comp' then 15.0*sz.scaleFont+'px' else 12.0*sz.scaleFont+'px'
+    sz.pracSize   = 10.0*sz.scaleFont+'px'
+    sz.dispSize   =  7.0*sz.scaleFont+'px'
+    sz.iconDy     = if sz.level is 'Comp' then  7.5*sz.scaleFont else 7.5*sz.scaleFont
+    sz.bannDy     = if sz.level is 'Comp' then  2.0*sz.scaleFont                else 0
+    sz.pracDy     = 0
+    sz.dispDy     = if sz.level is 'Comp' then  0                else 0
     # console.log( 'SvgMgr.sizeElem()', sz )
     @size = sz
     sz
 
-  resize2:() =>
+  resize:() =>
     sz = @sizeElem( @elem )
     @svg.attr( "width", sz.w ).attr( "height", sz.h )
-    @g.transition().attr("transform", """scale(#{sz.s})""" )
+    @g.transition().attr("transform", """scale(#{sz.smin})""" )
     return
 
-  resize:() =>
+  resize2:() =>
     sz = @sizeElem( @elem )
     @svg.attr( "width", sz.w ).attr( "height", sz.h )
     trans = @g.attr("transform")

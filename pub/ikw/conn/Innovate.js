@@ -52,19 +52,22 @@ Innovate = class Innovate {
 
   // getComputedTextLength()
   rings(g, size) {
-    var colorBack, colorRing, hr, t, wr, xt, yt;
-    t = size.level === 'Comp' ? 24 : 6 * size.scaleFont;
-    wr = size.level === 'Comp' ? t : 60 * size.scaleFont;
+    var colorBack, colorRing, hr, t, uc, wr, xi, xt, y;
+    t = size.ringSize;
+    wr = size.level === 'Comp' ? t : 80 * size.scaleFont;
     hr = size.level === 'Comp' ? t : 18 * size.scaleFont;
-    xt = size.level === 'Comp' ? t * 1.25 : t * 2;
-    yt = size.level === 'Comp' ? t * 2 + 1 : 20 * size.scaleFont;
+    xi = size.level === 'Comp' ? t * 1.70 : t * 2.5;
+    xt = xi + size.ringIcon;
+    y = size.level === 'Comp' ? t * 2.1 : 18 * size.scaleFont;
+    uc = Vis.unicode(this.spec.icon);
     // console.log( 'Innovate.rings()', { t:t, wr:wr, hr:hr, xt:xt, yt:yt } )
     colorRing = Vis.toRgbHsvStr([70, 55, 70]);
     colorBack = 'rgba(97, 56, 77, 1.0 )';
     this.shapes.round(g, t, t, size.w - t * 2, size.h - t * 2, t, t, colorRing, 'none');
     this.shapes.round(g, t * 2.5, t * 2.5, size.w - t * 5.0, size.h - t * 5.0, t, t, colorBack, 'none');
     this.shapes.rect(g, t, t, wr, hr, colorRing, 'none');
-    return this.shapes.text(g, xt, yt, this.spec.name, this.spec.name + 'Text', 'black', size.bannSize, "start");
+    this.shapes.icon(g, xi, y, this.spec.name, this.spec.name + 'Icon', 'black', size.bannSize, uc);
+    return this.shapes.text(g, xt, y, this.spec.name, this.spec.name + 'Text', 'black', size.bannSize, "start");
   }
 
   principle(g, size) {
@@ -99,12 +102,11 @@ Innovate = class Innovate {
   }
 
   westInovate(g, size) {
-    var fill, h, key, r0, ref, study, w, x0, y0;
-    r0 = this.lay.ri; // size.x0/2 - 36
-    w = 24;
-    h = r0 / this.shapes.size(this.studies);
+    var fill, h, key, ref, study, w, x0, y0;
+    w = size.ringSize;
+    h = size.ringSize * 0.75;
     x0 = size.w - w;
-    y0 = size.yc - r0 / 2;
+    y0 = size.yc - h / 2;
     ref = this.studies;
     for (key in ref) {
       study = ref[key];
@@ -115,12 +117,11 @@ Innovate = class Innovate {
   }
 
   eastInovate(g, size) {
-    var fill, h, key, r0, ref, study, w, x0, y0;
-    r0 = this.lay.ri; // size.x0/2 - 36
-    w = 24;
-    h = r0 / this.shapes.size(this.studies);
+    var fill, h, key, ref, study, w, x0, y0;
+    w = size.ringSize;
+    h = size.ringSize * 0.75; //  @shapes.size(@studies)
     x0 = 0;
-    y0 = size.yc - r0 / 2;
+    y0 = size.yc - h / 2;
     ref = this.studies;
     for (key in ref) {
       study = ref[key];
@@ -132,8 +133,8 @@ Innovate = class Innovate {
 
   northInovate(g, size) {
     var dx, fill, h, key, ordered, study, w, x0, y0;
-    w = 18;
-    h = 24;
+    w = size.ringSize * 0.75;
+    h = size.ringSize;
     dx = size.r * 1.5;
     x0 = size.xc - dx - w / 2;
     y0 = 0;
@@ -148,8 +149,8 @@ Innovate = class Innovate {
 
   southInovate(g, size) {
     var dx, fill, h, key, ordered, study, w, x0, y0;
-    w = 18;
-    h = 24;
+    w = size.ringSize * 0.75;
+    h = size.ringSize;
     dx = size.r * 1.5;
     x0 = size.xc - dx - w / 2;
     y0 = size.h - h;

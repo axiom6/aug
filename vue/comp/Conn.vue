@@ -39,7 +39,9 @@
         this.$nextTick( function() {
           let elem = this.$refs[this.pracObj.name] // this.getElem( this.$refs, this.pracObj.name );
           if( this.hasElem(elem) ) {
-            this.connect = new Connect( stream, this.batch(), pracObj, elem, this.level ); }
+            this.connect = new Connect( stream, this.batch(), pracObj, elem, this.level );
+            if( this.level==='Prac') {
+              window.addEventListener(   'resize', this.resize ) } }
           else {
             console.log( 'Conn.createConnect()',
               { name:this.pracObj.name, has:this.hasElem(elem), elem:elem } ); } } ) },
@@ -55,8 +57,8 @@
     //this.subscribe( 'Nav', 'Conn.vue', (obj) => {
     //    this.onNav(obj); } );
     
-    created: function () {
-      window.addEventListener(   'resize', this.resize ) },
+    // created: function () {
+    //  window.addEventListener(   'resize', this.resize ) },
     destroyed: function () {
       window.removeEventListener('resize', this.resize ) }
       

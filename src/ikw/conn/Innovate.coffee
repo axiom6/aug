@@ -30,18 +30,21 @@ class Innovate
 
   # getComputedTextLength()
   rings:( g, size ) ->
-    t  = if size.level is 'Comp' then 24      else  6*size.scaleFont
-    wr = if size.level is 'Comp' then  t      else 60*size.scaleFont
+    t  = size.ringSize
+    wr = if size.level is 'Comp' then  t      else 80*size.scaleFont
     hr = if size.level is 'Comp' then  t      else 18*size.scaleFont
-    xt = if size.level is 'Comp' then  t*1.25 else t*2
-    yt = if size.level is 'Comp' then  t*2+1  else 20*size.scaleFont
+    xi = if size.level is 'Comp' then  t*1.70 else t*2.5
+    xt = xi + size.ringIcon
+    y  = if size.level is 'Comp' then  t*2.1  else 18*size.scaleFont
+    uc = Vis.unicode( @spec.icon )
     # console.log( 'Innovate.rings()', { t:t, wr:wr, hr:hr, xt:xt, yt:yt } )
     colorRing = Vis.toRgbHsvStr( [70,55,70] )
     colorBack = 'rgba(97, 56, 77, 1.0 )'
     @shapes.round( g, t,      t,     size.w-t*2,   size.h-t*2,   t, t, colorRing, 'none' )
     @shapes.round( g, t*2.5,  t*2.5, size.w-t*5.0, size.h-t*5.0, t, t, colorBack, 'none' )
     @shapes.rect(  g, t,      t,     wr,           hr,                 colorRing, 'none' )
-    @shapes.text(  g, xt,     yt,    @spec.name,   @spec.name+'Text', 'black', size.bannSize, "start" )
+    @shapes.icon(  g, xi, y, @spec.name, @spec.name+'Icon', 'black', size.bannSize, uc )
+    @shapes.text(  g, xt, y, @spec.name, @spec.name+'Text', 'black', size.bannSize , "start" )
 
   principle:( g, size ) ->
     @eastInovate(  g, size )
@@ -69,11 +72,10 @@ class Innovate
     return
 
   westInovate:( g, size ) ->
-    r0   = @lay.ri # size.x0/2 - 36
-    w    = 24
-    h    = r0 / @shapes.size(@studies)
+    w    = size.ringSize
+    h    = size.ringSize * 0.75
     x0   = size.w  - w
-    y0   = size.yc - r0/2
+    y0   = size.yc - h/2
     for key, study of @studies
       fill = @shapes.toFill(study)
       @shapes.rect( g, x0, y0, w, h, fill, 'none' )
@@ -81,11 +83,10 @@ class Innovate
     return
 
   eastInovate:( g, size ) ->
-    r0 = @lay.ri # size.x0/2 - 36
-    w  = 24
-    h  = r0 /  @shapes.size(@studies)
+    w  = size.ringSize
+    h  = size.ringSize * 0.75 #  @shapes.size(@studies)
     x0 = 0
-    y0 = size.yc - r0/2
+    y0 = size.yc - h/2
     for key, study of @studies
       fill = @shapes.toFill(study)
       @shapes.rect( g, x0, y0, w, h, fill, 'none' )
@@ -93,8 +94,8 @@ class Innovate
     return
 
   northInovate:( g, size ) ->
-    w    = 18
-    h    = 24
+    w    = size.ringSize * 0.75
+    h    = size.ringSize
     dx   = size.r * 1.5
     x0   = size.xc - dx - w / 2
     y0   = 0
@@ -106,8 +107,8 @@ class Innovate
     return
 
   southInovate:( g, size ) ->
-    w    = 18
-    h    = 24
+    w    = size.ringSize * 0.75
+    h    = size.ringSize
     dx   = size.r * 1.5
     x0   = size.xc - dx - w / 2
     y0   = size.h  - h
