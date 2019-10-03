@@ -8,7 +8,6 @@ class Innovate
   constructor:( @spec, @shapes, @build ) ->
     @studies = @shapes.arrange( @spec )
     @cos30   = @shapes.cos30
-    @t  = 24
     @xh =  0
     @yh =  0
     @r  =  0
@@ -18,7 +17,7 @@ class Innovate
   drawSvg:( g, size, defs ) ->
     Util.noop( defs )
     @lay       = @shapes.layout( size, @spec.column, @shapes.size(@studies), @shapes.size(@studies) )
-    @rings( g, size, @t )
+    @rings( g, size )
     switch @spec.row
       when 'Dim'   then @principle(  g, size )
       when 'Learn' then @concept(    g, size )
@@ -29,13 +28,20 @@ class Innovate
       @hexStudy( g, size, study )
     return
 
-  rings:( g, size, t ) ->
+  # getComputedTextLength()
+  rings:( g, size ) ->
+    t  = if size.level is 'Comp' then 24      else  6*size.scaleFont
+    wr = if size.level is 'Comp' then  t      else 60*size.scaleFont
+    hr = if size.level is 'Comp' then  t      else 18*size.scaleFont
+    xt = if size.level is 'Comp' then  t*1.25 else t*2
+    yt = if size.level is 'Comp' then  t*2+1  else 20*size.scaleFont
+    # console.log( 'Innovate.rings()', { t:t, wr:wr, hr:hr, xt:xt, yt:yt } )
     colorRing = Vis.toRgbHsvStr( [70,55,70] )
     colorBack = 'rgba(97, 56, 77, 1.0 )'
     @shapes.round( g, t,      t,     size.w-t*2,   size.h-t*2,   t, t, colorRing, 'none' )
     @shapes.round( g, t*2.5,  t*2.5, size.w-t*5.0, size.h-t*5.0, t, t, colorBack, 'none' )
-    @shapes.rect(  g, t,      t,     t,            t,                  colorRing, 'none' )
-    @shapes.text(  g, t*1.25, t*2+2, @spec.name,   @spec.name+'Text', 'black', size.bannSize, "start" )
+    @shapes.rect(  g, t,      t,     wr,           hr,                 colorRing, 'none' )
+    @shapes.text(  g, xt,     yt,    @spec.name,   @spec.name+'Text', 'black', size.bannSize, "start" )
 
   principle:( g, size ) ->
     @eastInovate(  g, size )
@@ -122,14 +128,16 @@ class Innovate
     i = 0
     [j,i] = @hexPosTier( study.dir )
     yh    = if j % 2 is 0 then 0 else  @r*@cos30
-    x     =  j*dx + x0
-    y     = -i*dy + y0 + yh
+    x      =  j*dx + x0
+    y      = -i*dy + y0 + yh
+    yt     = if size.level is 'Comp' then y+10 else y+4.5*size.scaleFont
+    yi     = if size.level is 'Comp' then y-2  else y-2.0*size.scaleFont
     fill  = @shapes.toFill(study)
     uc    = Vis.unicode( study.icon )
     # console.log( 'Innovate.hexStudy()', study.icon, uc )
-    @hexPath( fill,       g, x, y, @shapes.htmlId( study.name, 'HexPath' ) )
-    @hexText( study.name, g, x, y, @shapes.htmlId( study.name, 'HexText' ), size.dispSize )
-    @hexIcon( uc,         g, x, y, @shapes.htmlId( study.name, 'HexIcon' ), size.dispSize )
+    @hexPath( fill,       g, x, y,  @shapes.htmlId( study.name, 'HexPath' ) )
+    @hexText( study.name, g, x, yt, @shapes.htmlId( study.name, 'HexText' ), size.dispSize )
+    @hexIcon( uc,         g, x, yi, @shapes.htmlId( study.name, 'HexIcon' ), size.dispSize )
     return
 
   hexPosTier:( dir ) ->
@@ -164,15 +172,15 @@ class Innovate
     return
 
   hexText:( text, g, x0, y0, textId, size ) ->
-    path = g.append("svg:text").text(text).attr("id",textId).attr("x",x0).attr("y",y0+10)
+    path = g.append("svg:text").text(text).attr("id",textId).attr("x",x0).attr("y",y0)
             .attr("text-anchor","middle").attr("font-size",size)
             .attr("font-family",@shapes.fontText)
            #.attr("font-weight","bold")
     @shapes.click( path, text )
     return
 
-  hexIcon:( icon, g, x0, y0, iconId,size ) ->
-    g.append("svg:text").text(icon).attr("x",x0).attr("y",y0-2).attr("id",iconId)
+  hexIcon:( icon, g, x0, y0, iconId, size ) ->
+    g.append("svg:text").text(icon).attr("x",x0).attr("y",y0).attr("id",iconId)
      .attr("text-anchor","middle").attr("font-size",size)
      .attr("font-family","FontAwesome").attr("font-weight","normal")
     return

@@ -2,7 +2,7 @@
 
 
 0. Bugs
-   a. Innovate | Hex Icon & Text Position | Banner Text Position | Ring Width
+   a. Innovate | Improve Banner background width with text length
    b. Flow Width and Height
 
 1. Resize

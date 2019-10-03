@@ -15,7 +15,6 @@ Innovate = class Innovate {
     this.build = build;
     this.studies = this.shapes.arrange(this.spec);
     this.cos30 = this.shapes.cos30;
-    this.t = 24;
     this.xh = 0;
     this.yh = 0;
     this.r = 0;
@@ -27,7 +26,7 @@ Innovate = class Innovate {
     var key, ref, study;
     Util.noop(defs);
     this.lay = this.shapes.layout(size, this.spec.column, this.shapes.size(this.studies), this.shapes.size(this.studies));
-    this.rings(g, size, this.t);
+    this.rings(g, size);
     switch (this.spec.row) {
       case 'Dim':
         this.principle(g, size);
@@ -51,14 +50,21 @@ Innovate = class Innovate {
     }
   }
 
-  rings(g, size, t) {
-    var colorBack, colorRing;
+  // getComputedTextLength()
+  rings(g, size) {
+    var colorBack, colorRing, hr, t, wr, xt, yt;
+    t = size.level === 'Comp' ? 24 : 6 * size.scaleFont;
+    wr = size.level === 'Comp' ? t : 60 * size.scaleFont;
+    hr = size.level === 'Comp' ? t : 18 * size.scaleFont;
+    xt = size.level === 'Comp' ? t * 1.25 : t * 2;
+    yt = size.level === 'Comp' ? t * 2 + 1 : 20 * size.scaleFont;
+    // console.log( 'Innovate.rings()', { t:t, wr:wr, hr:hr, xt:xt, yt:yt } )
     colorRing = Vis.toRgbHsvStr([70, 55, 70]);
     colorBack = 'rgba(97, 56, 77, 1.0 )';
     this.shapes.round(g, t, t, size.w - t * 2, size.h - t * 2, t, t, colorRing, 'none');
     this.shapes.round(g, t * 2.5, t * 2.5, size.w - t * 5.0, size.h - t * 5.0, t, t, colorBack, 'none');
-    this.shapes.rect(g, t, t, t, t, colorRing, 'none');
-    return this.shapes.text(g, t * 1.25, t * 2 + 2, this.spec.name, this.spec.name + 'Text', 'black', size.bannSize, "start");
+    this.shapes.rect(g, t, t, wr, hr, colorRing, 'none');
+    return this.shapes.text(g, xt, yt, this.spec.name, this.spec.name + 'Text', 'black', size.bannSize, "start");
   }
 
   principle(g, size) {
@@ -157,7 +163,7 @@ Innovate = class Innovate {
   }
 
   hexStudy(g, size, study) {
-    var dx, dy, fill, i, j, uc, x, x0, y, y0, yh;
+    var dx, dy, fill, i, j, uc, x, x0, y, y0, yh, yi, yt;
     this.r = size.r;
     dx = this.r * 1.5;
     dy = this.r * 2.0 * this.cos30;
@@ -169,12 +175,14 @@ Innovate = class Innovate {
     yh = j % 2 === 0 ? 0 : this.r * this.cos30;
     x = j * dx + x0;
     y = -i * dy + y0 + yh;
+    yt = size.level === 'Comp' ? y + 10 : y + 4.5 * size.scaleFont;
+    yi = size.level === 'Comp' ? y - 2 : y - 2.0 * size.scaleFont;
     fill = this.shapes.toFill(study);
     uc = Vis.unicode(study.icon);
     // console.log( 'Innovate.hexStudy()', study.icon, uc )
     this.hexPath(fill, g, x, y, this.shapes.htmlId(study.name, 'HexPath'));
-    this.hexText(study.name, g, x, y, this.shapes.htmlId(study.name, 'HexText'), size.dispSize);
-    this.hexIcon(uc, g, x, y, this.shapes.htmlId(study.name, 'HexIcon'), size.dispSize);
+    this.hexText(study.name, g, x, yt, this.shapes.htmlId(study.name, 'HexText'), size.dispSize);
+    this.hexIcon(uc, g, x, yi, this.shapes.htmlId(study.name, 'HexIcon'), size.dispSize);
   }
 
   hexPosTier(dir) {
@@ -239,13 +247,13 @@ Innovate = class Innovate {
 
   hexText(text, g, x0, y0, textId, size) {
     var path;
-    path = g.append("svg:text").text(text).attr("id", textId).attr("x", x0).attr("y", y0 + 10).attr("text-anchor", "middle").attr("font-size", size).attr("font-family", this.shapes.fontText);
+    path = g.append("svg:text").text(text).attr("id", textId).attr("x", x0).attr("y", y0).attr("text-anchor", "middle").attr("font-size", size).attr("font-family", this.shapes.fontText);
     //.attr("font-weight","bold")
     this.shapes.click(path, text);
   }
 
   hexIcon(icon, g, x0, y0, iconId, size) {
-    g.append("svg:text").text(icon).attr("x", x0).attr("y", y0 - 2).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", size).attr("font-family", "FontAwesome").attr("font-weight", "normal");
+    g.append("svg:text").text(icon).attr("x", x0).attr("y", y0).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", size).attr("font-family", "FontAwesome").attr("font-weight", "normal");
   }
 
 };

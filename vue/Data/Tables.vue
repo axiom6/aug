@@ -33,7 +33,7 @@
 
       onNav: function(obj) {
         if( this.nav().isMyNav( obj, 'Tables' ) ) {
-          this.pageKey = this.nav().getPageKey('Tables');
+          this.pageKey = this.nav().getPageKey('Tables','None');
           if( this.pageKey !== 'None' ) {
               this.create( this.pageKey ); } } },
 
