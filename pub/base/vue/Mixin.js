@@ -195,17 +195,24 @@ Mixin = class Mixin {
           return idx;
         },
         hasElem: function(elem) {
-          return this.isDef(elem) && this.isDef(elem['clientHeight']) && elem['clientHeight'] > 0;
+          return (elem != null) && (elem['clientHeight'] != null) && elem['clientHeight'] > 0;
         },
+        // Not called
         getElem: function($refs, name) {
           var elem;
           elem = $refs[name];
-          if (!this.hasElem(elem)) {
+          console.log('Mixin.getElem() $refs[name]   ', $refs, elem, name);
+          if (!this.hasElem(elem) && (elem[0] != null)) {
             elem = $refs[name][0];
+            console.log('Mixin.getElem() $refs[name][0]', $refs, elem, name);
             if (!this.hasElem(elem)) {
-              console.error('Mixin.hasElem() unable to find elem in $refs[name] or $refs[name][0]', name);
+              console.error('Mixin.hasElem() unable to find elem in $refs[name]', name);
               console.dir($refs);
+              elem = null;
             }
+          } else {
+            console.error('Mixin.hasElem() unable to find elem in $refs[name][0]', name);
+            elem = null;
           }
           return elem;
         }

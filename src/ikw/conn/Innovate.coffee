@@ -32,9 +32,10 @@ class Innovate
   rings:( g, size, t ) ->
     colorRing = Vis.toRgbHsvStr( [70,55,70] )
     colorBack = 'rgba(97, 56, 77, 1.0 )'
-    @shapes.round( g, t,     t,     size.w-t*2,   size.h-t*2,   t, t, colorRing, 'none' )
-    @shapes.round( g, t*2.5, t*2.5, size.w-t*5.0, size.h-t*5.0, t, t, colorBack, 'none' )
-    @shapes.text(  g, t*4,   t*2+2, @spec.name,   @spec.name+'Text', 'black', size.bannSize )
+    @shapes.round( g, t,      t,     size.w-t*2,   size.h-t*2,   t, t, colorRing, 'none' )
+    @shapes.round( g, t*2.5,  t*2.5, size.w-t*5.0, size.h-t*5.0, t, t, colorBack, 'none' )
+    @shapes.rect(  g, t,      t,     t,            t,                  colorRing, 'none' )
+    @shapes.text(  g, t*1.25, t*2+2, @spec.name,   @spec.name+'Text', 'black', size.bannSize, "start" )
 
   principle:( g, size ) ->
     @eastInovate(  g, size )

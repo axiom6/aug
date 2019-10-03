@@ -29,7 +29,7 @@ class Embrace
     w  = lay.w  - x
     h  = lay.ri
     xt = x +  w  * 0.5
-    yt = size.yc * 0.5 - size.bannDy
+    yt = size.yc * 0.5 + size.bannDy
     yi = size.yc       + size.iconDy
     # console.log( 'Embrace.drawSvg()', @level, yt, yi )
     @shapes.conveySankey( "Embrace", defs, g, @studies, @innovs, x, y, w, h  )

@@ -31,7 +31,7 @@ class Encourage
     w  = lay.xr + lay.wr
     h  = r0 # lay.ri
     xt = x +  w  * 0.5
-    yt = size.yc * 0.5 - size.bannDy
+    yt = size.yc * 0.5 + size.bannDy
     yi = size.yc       + size.iconDy
     @shapes.conveySankey( "Encourage", defs, g, @studies, @innovs, x, y, w, h )
     @shapes.icon( g, size.xc, yi, @spec.name, @shapes.htmlId(@spec.name,'IconSvg'), 'black', size.iconSize, Vis.unicode(@spec.icon) )

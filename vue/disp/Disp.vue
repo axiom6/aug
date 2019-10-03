@@ -17,7 +17,7 @@
     
     data() { return { compKey:'Desc', dispObj:null,
       pages:{
-        Desc: { title:'Desc', key:'Desc', show:true } } } },
+        Desc: { title:'Descriptions', key:'Desc', show:true } } } },
     
     methods: {
       
@@ -29,13 +29,13 @@
         this.nav().setPageKey( 'Disp', pageKey ); },
       onNav:  function (obj) {
         if( this.nav().isMyNav( obj, 'Disp' ) ) {
-            this.onDisp( obj.dispKey );
-            this.doPage( this.nav().getPageKey('Disp') ); } } },
+            this.onDisp( obj.dispKey ); } } },
 
     beforeMount: function() {
       this.onDisp( this.nav().dispKey ); },
 
     mounted: function () {
+      this.doPage( this.nav().getPageKey('Disp','Desc') );
       this.subscribe(  "Nav", 'Disp.vue', (obj) => {
         this.onNav(obj); } ); }
   }

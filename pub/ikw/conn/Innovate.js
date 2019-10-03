@@ -57,7 +57,8 @@ Innovate = class Innovate {
     colorBack = 'rgba(97, 56, 77, 1.0 )';
     this.shapes.round(g, t, t, size.w - t * 2, size.h - t * 2, t, t, colorRing, 'none');
     this.shapes.round(g, t * 2.5, t * 2.5, size.w - t * 5.0, size.h - t * 5.0, t, t, colorBack, 'none');
-    return this.shapes.text(g, t * 4, t * 2 + 2, this.spec.name, this.spec.name + 'Text', 'black', size.bannSize);
+    this.shapes.rect(g, t, t, t, t, colorRing, 'none');
+    return this.shapes.text(g, t * 1.25, t * 2 + 2, this.spec.name, this.spec.name + 'Text', 'black', size.bannSize, "start");
   }
 
   principle(g, size) {

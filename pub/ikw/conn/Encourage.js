@@ -40,7 +40,7 @@ Encourage = class Encourage {
     w = lay.xr + lay.wr;
     h = r0; // lay.ri
     xt = x + w * 0.5;
-    yt = size.yc * 0.5 - size.bannDy;
+    yt = size.yc * 0.5 + size.bannDy;
     yi = size.yc + size.iconDy;
     this.shapes.conveySankey("Encourage", defs, g, this.studies, this.innovs, x, y, w, h);
     this.shapes.icon(g, size.xc, yi, this.spec.name, this.shapes.htmlId(this.spec.name, 'IconSvg'), 'black', size.iconSize, Vis.unicode(this.spec.icon));

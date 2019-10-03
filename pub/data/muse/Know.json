@@ -47,7 +47,7 @@
       "Process":    { "icon":"fas fa-procedures", "desc":"" },
       "Medical":    { "icon":"fas fa-user-md", "desc":"" } }
   },
-  "Understand":{ "type":"pane", "hsv":[20,50,90],"column":"Encourage","row":"Learn","plane":"Know","icon":"fab fa-tripadvisor",
+  "Meaning":{ "type":"pane", "hsv":[20,50,90],"column":"Encourage","row":"Learn","plane":"Know","icon":"fab fa-tripadvisor",
     "cells":[29,12,7,12], "dir":"ne", "neg":"Disregard",
     "desc":"",
     "Paradigm":    { "dir":"west", "icon":"fas fa-balance-scale",  "hsv":[195,90,70],
@@ -189,7 +189,7 @@
       "Curriculum":     { "icon":"fas fa-book-open", "desc":"" },
       "Individual": { "icon":"fas fa-user", "desc":"" },
       "Faculty":    { "icon":"fas fa-graduation-cap", "desc":"" } },
-    "Publish":   { "dir":"east", "icon":"fab fa-leanpub",    "hsv":[30,60,90], "was":"Libary",
+    "Impart":   { "dir":"east", "icon":"fab fa-leanpub",    "hsv":[30,60,90], "was":"Libary",
       "desc":"",
       "Resource":   { "icon":"fas fa-briefcase", "desc":"" },
       "Study":      { "icon":"fas fa-portrait", "desc":"" },

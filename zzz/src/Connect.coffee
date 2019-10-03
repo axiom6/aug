@@ -10,6 +10,7 @@ import Encourage from './Encourage'
 class Connect
 
   constructor:( @stream,  @batch, @prac, @elem, @level ) ->
+    console.log( 'Connect', @level )
     @build  = new Build(  @batch() )
     @shapes = new Shapes( @stream  )
     @svgMgr = new SvgMgr( @prac.name, @elem, @level, @stream )

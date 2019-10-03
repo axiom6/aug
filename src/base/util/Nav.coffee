@@ -131,7 +131,7 @@ class Nav
     return
 
   movePage:( page, dir  ) ->
-    pageKey = @getPageKey( @route )
+    pageKey = @getPageKey( @route, 'None' )
     len     = page.keys.length
     if pageKey isnt 'None'
       idx = page.keys.indexOf(pageKey)
@@ -153,23 +153,38 @@ class Nav
     @pages[route] = {}
     @pages[route].pages = pagesObj
     @pages[route].keys  = Object.keys(pagesObj)
-    @getPageKey( route )
+    @getPageKey( route, 'None' )
 
   setPageKey:( route, pageKey ) ->
+    @pageKey = pageKey
     return if  not        @pages[route].pages?
     for own key, page  of @pages[route].pages
       page.show = key is pageKey
     return
 
-  getPageKey:( route ) ->
-    return @pageKey if ( route is 'Prac' or route is 'Disp' ) and @pageKey isnt 'None' # Maintain
+  getPageKey:( route, defn ) ->
+    pageKey = @getPageKey2( route, defn )
+    # console.log( 'Nav.getPageKey',
+    #   { route:route, pageKey:pageKey, pageNav:@pageKey, defn:defn, use:@usePageAtt(route), has:@hasPageKey(route) } )
+    # console.trace() if not defn? or defn is 'None'
+    pageKey
+
+  getPageKey2:( route, defn ) ->
+    return @pageKey if  @usePageAtt(route)
     return 'None'   if   not @pages[route].pages?
     for own  key,   page  of @pages[route].pages
       return key if page.show
-    return 'None'
+    return defn
 
-  hasPageKey:(  route ) ->
-    @getPageKey(route) isnt 'None'
+  hasPageKey:( route ) ->
+    return false    if    not @pages[route].pages?
+    for own  key,    page  of @pages[route].pages
+      return true if page.show
+    false
+
+  usePageAtt:( route ) ->
+    @pageKey isnt 'None' and @pages[route].pages? and @pages[route].pages[@pageKey]? and
+      ( route is 'Comp' or route is 'Prac' or route is 'Disp' )
 
   isMyNav:( obj, route ) ->
     obj.route is route and @hasPageKey(route)

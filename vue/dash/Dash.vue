@@ -27,7 +27,7 @@
 
   .dash { font-family:@theme-font-family;
      position:absolute; left:0; top:0; right:0; bottom:0; display:grid; overflow:hidden;
-     grid-template-columns: 12fr 88fr;
+     grid-template-columns: 10fr 90fr;
      grid-template-rows:    10fr 90fr;
      grid-template-areas:
        "logo view"

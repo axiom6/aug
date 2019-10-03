@@ -37,9 +37,12 @@
       
       createConnect: function( stream, pracObj ) {
         this.$nextTick( function() {
-          let elem = this.getElem( this.$refs, this.pracObj.name );
+          let elem = this.$refs[this.pracObj.name] // this.getElem( this.$refs, this.pracObj.name );
           if( this.hasElem(elem) ) {
-            this.connect = new Connect( stream, this.batch(), pracObj, elem, this.level ); } } ) },
+            this.connect = new Connect( stream, this.batch(), pracObj, elem, this.level ); }
+          else {
+            console.log( 'Conn.createConnect()',
+              { name:this.pracObj.name, has:this.hasElem(elem), elem:elem } ); } } ) },
       
       resize: function() {
         this.$nextTick( function() {
@@ -48,9 +51,10 @@
     },
     
     mounted: function () {
-      this.onPrac();
-      this.subscribe( 'Nav', 'Conn.vue', (obj) => {
-        this.onNav(obj); } ); },
+      this.onPrac(); },
+    //this.subscribe( 'Nav', 'Conn.vue', (obj) => {
+    //    this.onNav(obj); } );
+    
     created: function () {
       window.addEventListener(   'resize', this.resize ) },
     destroyed: function () {

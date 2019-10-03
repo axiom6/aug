@@ -26,8 +26,8 @@
     data() { return {
       compObj:null, pracObj:null,
       pages:{
-        Icon: { title:'Icon', key:'Icon', show:true  },
-        Dirs: { title:'Dirs', key:'Dirs', show:false } } } },
+        Icon: { title:'Foundations', key:'Icon', show:true  },
+        Dirs: { title:'Concerns',    key:'Dirs', show:false } } } },
     
     methods: {
       
@@ -40,13 +40,14 @@
       onNav:  function (obj) {
         if( this.nav().isMyNav(  obj, 'Prin' ) ) {
           this.onComp( obj.compKey );
-          this.doPage( this.nav().getPageKey('Prin') ); } }
+          this.doPage( this.nav().getPageKey('Prin','Icon') ); } }
       },
 
     beforeMount: function() {
       this.onComp('Prin'); },
 
     mounted: function () {
+      this.doPage( this.nav().getPageKey('Prin','Icon') );
       this.subscribe( 'Nav', 'Prin.vue', (obj) => {
         this.onNav(obj); } ); }
   }

@@ -123,15 +123,22 @@ class Mixin
           idx
 
         hasElem:(elem) ->
-          this.isDef(elem) and this.isDef(elem['clientHeight']) and elem['clientHeight'] > 0
+          elem? and elem['clientHeight']? and elem['clientHeight'] > 0
 
+        # Not called
         getElem:($refs,name) ->
           elem = $refs[name]
-          if not this.hasElem(elem)
+          console.log( 'Mixin.getElem() $refs[name]   ', $refs, elem, name )
+          if not @hasElem(elem) and elem[0]?
             elem = $refs[name][0]
-            if not this.hasElem(elem)
-              console.error( 'Mixin.hasElem() unable to find elem in $refs[name] or $refs[name][0]', name )
+            console.log( 'Mixin.getElem() $refs[name][0]', $refs, elem, name )
+            if not @hasElem(elem)
+              console.error( 'Mixin.hasElem() unable to find elem in $refs[name]', name )
               console.dir($refs)
+              elem = null
+          else
+            console.error( 'Mixin.hasElem() unable to find elem in $refs[name][0]', name )
+            elem = null
           elem
 
 

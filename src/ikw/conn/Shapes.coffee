@@ -123,13 +123,12 @@ class Shapes
       sc = if level is 'Prac' then 0.30 else 0.25 # level is a hack
       rt = (r1+r2)/2 + th * sc
       as = 270-at
-      console.log( 'Shapes.wedgeText() 1', text, level, sc , rt )
+      # console.log( 'Shapes.wedgeText() 1', text, level, sc , rt )
     else
-      sc = if level is 'Prac' then 0.85 else 0.50 # level is a hack
+      sc = if level is 'Prac' then 1.25 else 0.50 # level is a hack
       rt = (r1+r2)/2 - th * sc
       as = 90-at
-      console.log( 'Shapes.wedgeText() 2', text, level, sc, rt )
-    console.log(   'Shapes.wedgeText() 3', text, level, sc, rt )
+      # console.log( 'Shapes.wedgeText() 2', text, level, sc, rt )
     x  = x0 + rt * @cos(at)
     y  = y0 + rt * @sin(at)
     path = g.append("svg:text").text(text).attr("x",x).attr("y",y).attr("transform", Vis.rotate(as,x,y) )
@@ -146,9 +145,9 @@ class Shapes
     @click( path, name )
     return
 
-  text:( g, x0, y0, name, textId, color, size ) ->
+  text:( g, x0, y0, name, textId, color, size, anchor="middle" ) ->
     path = g.append("svg:text").text(name).attr("x",x0).attr("y",y0).attr("id",textId).attr("fill",color)
-             .attr("text-anchor","middle").attr("font-size", size )
+             .attr("text-anchor",anchor).attr("font-size", size )
              .attr("font-family",@fontText).attr("font-weight","bold")
     @click( path, name )
     return

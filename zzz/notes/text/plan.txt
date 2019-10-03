@@ -1,19 +1,20 @@
 
-0. Resize
+
+
+0. Bugs
+   a. Innovate | Hex Icon & Text Position | Banner Text Position | Ring Width
+   b. Flow Width and Height
+
+1. Resize
    a. Turning on resize
    b. Stick to just transform scale
    c. Wheel no resize | Axes,Chord,Tree translate  | Link good | Radar no display | Hue good
 
-1. Bugs
-   a. Conn Prac font size, position
-   b. Nav.pageKey with Conn
-
 2. Improve
    a. Desc Prac
    b. Desc Disp
-   c. Hsv Backgrounds
-   d. Consider bring Prin into IKW nav
-   e. Route url path bugs
+   c. Consider bring Prin into IKW nav
+   d. Route url path init bug
 
 3. Improved Landing Pages
    a. Muse Home Prin Info Know Wise

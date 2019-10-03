@@ -2719,17 +2719,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/ikw/conn/Connect.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/ikw/conn/Connect-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/pub/ikw/conn/Connected.js": {
 		"bF": 0,
 		"ft": 64,

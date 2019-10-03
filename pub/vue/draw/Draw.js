@@ -20817,15 +20817,16 @@ var Vis$1 = Vis;
 var SvgMgr;
 
 SvgMgr = class SvgMgr {
-  constructor(name1, elem1, stream = null) {
+  constructor(name1, elem1, level1, stream = null) {
     this.resize2 = this.resize2.bind(this);
     this.resize = this.resize.bind(this);
     this.name = name1;
     this.elem = elem1;
+    this.level = level1;
     this.stream = stream;
+    console.log('SvgMgr', this.level);
     this.d3 = d3;
-    this.level = 'Prac';
-    this.size = this.sizeElem(this.elem);
+    this.size = this.sizeElem(this.elem, this.level);
     this.origWidth = this.size.w;
     this.origHeight = this.size.h;
     this.svgId = this.htmlId(this.name, 'Svg', '');
@@ -20841,7 +20842,7 @@ SvgMgr = class SvgMgr {
     return name + type + ext;
   }
 
-  sizeElem(elem) {
+  sizeElem(elem, level) {
     var sz;
     sz = {};
     sz.w = elem['clientWidth'];
@@ -20854,14 +20855,17 @@ SvgMgr = class SvgMgr {
     sz.sy = this.origHeight ? sz.h / this.origHeight : 1.0;
     sz.s = Math.min(sz.sx, sz.sy);
     sz.r = Math.min(sz.w, sz.h) * 0.2; // Used for hexagons
+    sz.level = level;
     sz.scaleFont = sz.h / 100;
+    sz.iconSize = 20.0 * sz.scaleFont + 'px';
     sz.bannSize = 15.0 * sz.scaleFont + 'px';
     sz.pracSize = 10.0 * sz.scaleFont + 'px';
     sz.dispSize = 7.0 * sz.scaleFont + 'px';
-    sz.bannDy = 0;
-    sz.pracDy = this.level === 'Comp' ? 12 : -120 * sz.scaleFont;
-    sz.dispDy = 0;
-    // console.log( 'SvgMgr.sizeElem()', sz )
+    sz.iconDy = sz.level === 'Comp' ? 7.5 * sz.scaleFont : 7.5 * sz.scaleFont;
+    sz.bannDy = sz.level === 'Comp' ? 2.0 * sz.scaleFont : 0;
+    sz.pracDy = 0;
+    sz.dispDy = sz.level === 'Comp' ? 0 : 0;
+    console.log('SvgMgr.sizeElem()', sz);
     this.size = sz;
     return sz;
   }
@@ -25685,7 +25689,7 @@ D3D = class D3D {
 
   create(name, elem) {
     var svgMgr;
-    svgMgr = new SvgMgr$1(name, elem, this.stream);
+    svgMgr = new SvgMgr$1(name, elem, 'Comp', this.stream);
     switch (name) {
       case 'Wheel':
         return new Wheel$1(svgMgr);

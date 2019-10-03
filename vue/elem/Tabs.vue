@@ -43,7 +43,7 @@
       this.onPage(this.tabsKey);
       this.subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {
         if( obj.source !== 'Tabs' && obj.route === this.route ) {
-          this.onPage( this.nav().getPageKey(this.route) ); } } ); }
+          this.onPage( this.nav().getPageKey(this.route,'None') ); } } ); }
     }
   
 </script>

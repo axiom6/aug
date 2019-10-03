@@ -35,7 +35,7 @@
 
       onNav: function(obj) {
         if( this.nav().isMyNav( obj, this.route ) ) {
-            this.pageKey = this.nav().getPageKey('Hues');
+            this.pageKey = this.nav().getPageKey('Hues','None');
             if( this.pageKey !== 'None') {
                 this.doApp( this.pageKey ); } } },
 

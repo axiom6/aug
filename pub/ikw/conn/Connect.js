@@ -21,7 +21,7 @@ Connect = class Connect {
     this.level = level;
     this.build = new Build(this.batch);
     this.shapes = new Shapes(this.stream);
-    this.svgMgr = new SvgMgr(this.prac.name, this.elem, this.stream);
+    this.svgMgr = new SvgMgr(this.prac.name, this.elem, this.level, this.stream);
     this.draw = this.createDraw();
     this.draw.drawSvg(this.svgMgr.g, this.svgMgr.size, this.svgMgr.defs);
   }

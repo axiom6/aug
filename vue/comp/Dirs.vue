@@ -63,7 +63,7 @@
       .cen  { font-size:@theme-cen-size; }
 
     .disp {   display:inline; justify-self:center; align-self:center; text-align:center; font-size:@theme-disp-size;
-      i     { display:inline-block;  margin-right: 0.25rem; }
+      i     { display:inline-block;  margin-right: 0.15rem; }
       .name { display:inline-block; }
       .desc { display:none; margin:0.5rem 0.5rem 0.5rem 0.5rem; text-align:left; } } }
   

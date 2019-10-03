@@ -202,7 +202,7 @@ Nav = class Nav {
 
   movePage(page, dir) {
     var idx, len, ndx, pageKey;
-    pageKey = this.getPageKey(this.route);
+    pageKey = this.getPageKey(this.route, 'None');
     len = page.keys.length;
     if (pageKey !== 'None') {
       idx = page.keys.indexOf(pageKey);
@@ -236,11 +236,12 @@ Nav = class Nav {
     this.pages[route] = {};
     this.pages[route].pages = pagesObj;
     this.pages[route].keys = Object.keys(pagesObj);
-    return this.getPageKey(route);
+    return this.getPageKey(route, 'None');
   }
 
   setPageKey(route, pageKey) {
     var key, page, ref;
+    this.pageKey = pageKey;
     if (this.pages[route].pages == null) {
       return;
     }
@@ -252,9 +253,18 @@ Nav = class Nav {
     }
   }
 
-  getPageKey(route) {
+  getPageKey(route, defn) {
+    var pageKey;
+    pageKey = this.getPageKey2(route, defn);
+    // console.log( 'Nav.getPageKey',
+    //   { route:route, pageKey:pageKey, pageNav:@pageKey, defn:defn, use:@usePageAtt(route), has:@hasPageKey(route) } )
+    // console.trace() if not defn? or defn is 'None'
+    return pageKey;
+  }
+
+  getPageKey2(route, defn) {
     var key, page, ref;
-    if ((route === 'Prac' || route === 'Disp') && this.pageKey !== 'None') { // Maintain
+    if (this.usePageAtt(route)) {
       return this.pageKey;
     }
     if (this.pages[route].pages == null) {
@@ -268,11 +278,27 @@ Nav = class Nav {
         return key;
       }
     }
-    return 'None';
+    return defn;
   }
 
   hasPageKey(route) {
-    return this.getPageKey(route) !== 'None';
+    var key, page, ref;
+    if (this.pages[route].pages == null) {
+      return false;
+    }
+    ref = this.pages[route].pages;
+    for (key in ref) {
+      if (!hasProp.call(ref, key)) continue;
+      page = ref[key];
+      if (page.show) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  usePageAtt(route) {
+    return this.pageKey !== 'None' && (this.pages[route].pages != null) && (this.pages[route].pages[this.pageKey] != null) && (route === 'Comp' || route === 'Prac' || route === 'Disp');
   }
 
   isMyNav(obj, route) {

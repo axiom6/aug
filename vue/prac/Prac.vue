@@ -23,9 +23,9 @@
     
     data() { return { pracObj:null,
       pages:{
-        Dirs: { title:'Dirs', key:'Dirs', show:true  },
-        Conn: { title:'Conn', key:'Conn', show:false },
-        Desc: { title:'Desc', key:'Desc', show:false } } } },
+        Dirs: { title:'Disciplines',  key:'Dirs', show:true  },
+        Conn: { title:'Connections',  key:'Conn', show:false },
+        Desc: { title:'Descriptions', key:'Desc', show:false } } } },
     
     methods: {
       
@@ -36,8 +36,8 @@
         this.nav().setPageKey( 'Prac', pageKey ); },
       onNav: function( obj ) {
         if( this.nav().isMyNav( obj, 'Prac' ) ) {
-            this.onPrac( obj.compKey, obj.pracKey );
-            this.doPage( this.nav().getPageKey('Prac') ); } }
+            this.doPage( this.nav().getPageKey('Prac','Dirs') );
+            this.onPrac( obj.compKey, obj.pracKey ); } }
       },
 
     beforeMount: function () {
@@ -46,6 +46,7 @@
       this.onPrac( compKey, pracKey );  },
 
     mounted: function () {
+      this.doPage( this.nav().getPageKey('Prac','Dirs') );
       this.subscribe(  "Nav", 'Prac.vue', (obj) => {
         this.onNav(obj); } ); }
   }

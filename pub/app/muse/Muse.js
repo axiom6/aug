@@ -189,7 +189,7 @@ Muse = (function() {
       next: "Prin"
     },
     Prin: {
-      title: 'Concerns',
+      title: 'Care',
       key: 'Prin',
       route: 'Prin',
       pracs: {},

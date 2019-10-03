@@ -33,9 +33,9 @@
     data() { return {
       compObj:null, pracObj:null,
       pages:{
-        Icon: { title:'Icon', key:'Icon', show:true  },
-        Dirs: { title:'Dirs', key:'Dirs', show:false },
-        Conn: { title:'Conn', key:'Conn', show:false } },
+        Icon: { title:'Practices',   key:'Icon', show:true  },
+        Dirs: { title:'Disciplines', key:'Dirs', show:false },
+        Conn: { title:'Connections', key:'Conn', show:false } },
       rows: {
         Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap" },
         Do:{    name:'Do',    dir:'do', icon:"fas fas fa-cog" },
@@ -51,13 +51,14 @@
       onNav:  function (obj) {
         if( this.nav().isMyNav( obj, 'Comp' ) ) {
             this.onComp( obj.compKey );
-            this.doPage( this.nav().getPageKey('Comp') ); } }
+            this.doPage( this.nav().getPageKey('Comp','Icon') ); } }
       },
 
     beforeMount: function() {
       this.onComp( this.nav().compKey ); },
 
     mounted: function () {
+      this.doPage( this.nav().getPageKey('Comp','Icon') );
       this.subscribe( 'Nav', 'Comp.vue', (obj) => {
         this.onNav(obj); } ); }
   }

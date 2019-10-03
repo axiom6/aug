@@ -17,7 +17,7 @@ class SvgMgr
         .attr("xmlns","http://www.w3.org/2000/svg")
     @defs = @svg.append("svg:defs")
     @g    = @svg.append("svg:g").attr("id",@gId) # All transforms are applied to g
-    window.onresize = @resize
+    # window.onresize = @resize
 
   htmlId:( name, type, ext='' ) ->
     name + type + ext
@@ -40,8 +40,8 @@ class SvgMgr
     sz.bannSize  = 15.0*sz.scaleFont+'px'
     sz.pracSize  = 10.0*sz.scaleFont+'px'
     sz.dispSize  =  7.0*sz.scaleFont+'px'
-    sz.iconDy    = if sz.level is 'Comp' then 20.0*sz.scaleFont else 7.5*sz.scaleFont
-    sz.bannDy    = if sz.level is 'Comp' then  6                else 0
+    sz.iconDy    = if sz.level is 'Comp' then  7.5*sz.scaleFont else 7.5*sz.scaleFont
+    sz.bannDy    = if sz.level is 'Comp' then  2.0*sz.scaleFont                else 0
     sz.pracDy    = 0
     sz.dispDy    = if sz.level is 'Comp' then  0                else 0
     # console.log( 'SvgMgr.sizeElem()', sz )
