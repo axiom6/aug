@@ -24,6 +24,8 @@
 <style lang="less">
   
   @import '../../pub/css/themes/theme.less';
+  
+  body { font-size:2vmin; }
 
   .dash { font-family:@theme-font-family;
      position:absolute; left:0; top:0; right:0; bottom:0; display:grid; overflow:hidden;

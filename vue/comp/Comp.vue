@@ -10,7 +10,7 @@
           <p-conn   v-if="pages['Conn'].show" :pracObj="pracObj" level="Comp"></p-conn>
         </div>
       </template>
-      <template v-for="row in rows">
+      <template v-for="row in myRows">
         <div v-show="isRows()" :class="row.dir" :key="row.name">
           <p-icon :pracObj="row"></p-icon>
         </div>
@@ -31,19 +31,29 @@
     components:{ 'b-tabs':Tabs, 'p-icon':Icon, 'p-dirs':Dirs, 'p-conn':Conn },
     
     data() { return {
-      compObj:null, pracObj:null,
+      compObj:null, pracObj:null, myRows:null,
       pages:{
         Icon: { title:'Practices',   key:'Icon', show:true  },
         Dirs: { title:'Disciplines', key:'Dirs', show:false },
         Conn: { title:'Connections', key:'Conn', show:false } },
       rows: {
-        Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap" },
-        Do:{    name:'Do',    dir:'do', icon:"fas fas fa-cog" },
-        Share:{ name:'Share', dir:'sh', icon:"fas fa-share-alt-square" } } } },
+        Plane:{ name:'Information', dir:'cm', icon:"fas fas fa-th" },
+        Learn:{ name:'Learn',       dir:'le', icon:"fas fa-graduation-cap" },
+        Do:{    name:'Do',          dir:'do', icon:"fas fas fa-cog" },
+        Share:{ name:'Share',       dir:'sh', icon:"fas fa-share-alt-square" } },
+      planes: {
+        Info:{ name:'Information', dir:'cm', icon:"fas fas fa-th" },
+        Know:{ name:'Knowledge',   dir:'cm', icon:"fas fas fa-university"  },
+        Wise:{ name:'Wisdom',      dir:'cm', icon:"fas fas fa-tripadvisor" } } } },
     
     methods: {
+      onRows: function (compKey) {
+         this.myRows          = this.rows;
+         this.myRows['Plane'] = this.planes[compKey]; },
       onComp: function (compKey) {
-        this.compObj = this.compObject(compKey); },
+        // console.log( 'Comp.onComp()', compKey );
+        this.compObj = this.compObject(compKey);
+        this.onRows(compKey); },
       doPage: function( tabsKey ) {
         this.nav().setPageKey( 'Comp', tabsKey ); },
       isRows: function () {
@@ -91,6 +101,8 @@
         .le { .pdir(le); } .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }
         .do { .pdir(do); } .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }
         .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }
+      
+      .cm .icon { background-color:@theme-back; }
       
         // Placed one level below the 9 Practices Grid   - Check on background-color:#603;
       .prac { background-color:#603; border-radius:36px; width:90%; height:80%; font-size:@theme-prac-size;

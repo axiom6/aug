@@ -1,8 +1,8 @@
 
 <template>
-  <div class="dirs">
+  <div class="dirs-comp">
     <div class="cen" :style="style(pracObj)">
-      <div class="disp" @click="doPrac(pracObj.name)">
+      <div class="disp-comp" @click="doPrac(pracObj.name)">
         <i   :class="pracObj.icon"></i>
         <span class="name">{{pracObj.name}}</span>
         <span class="desc">{{pracObj.desc}}</span>
@@ -10,7 +10,7 @@
     </div>
     <template  v-for="dispObj in pracObj.disps">
       <div :class="dispObj.dir" :style="style(dispObj)"  :ref="dispObj.name" :title="dispObj.name">
-        <div class="disp" @click="doDisp(prac.name,dispObj.name)">
+        <div class="disp-comp" @click="doDisp(prac.name,dispObj.name)">
           <i   :class="dispObj.icon"></i>
           <span class="name">{{dispObj.name}}</span>
           <span class="desc">{{dispObj.desc}}</span>
@@ -32,10 +32,10 @@
       
       doPrac: function (pracKey) {
         let obj = { route:"Prac", pracKey:pracKey };
-        this.nav.pub( obj ); },
+        this.nav().pub( obj ); },
       doDisp: function (pracKey,dispKey) {
         let obj = { route:"Disp", pracKey:pracKey, dispKey:dispKey };
-        this.nav.pub( obj ); },
+        this.nav().pub( obj ); },
       style: function( ikwObj ) {
         return this.styleHsv(ikwObj); } }
   }
@@ -53,16 +53,16 @@
 
   .ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }
   
-  .dirs { display:grid; align-self:stretch; justify-self:stretch; align-items:center; justify-items:center;
+  .dirs-comp { display:grid; align-self:stretch; justify-self:stretch; align-items:center; justify-items:center;
     color:black; text-align:center; font-weight:bold; .theme-comp-dirs();
     
       .grid3x3(); // The 4 Displine plus Practiice name Grid
                              .north { .ddir(north); }
       .west { .ddir(west); } .cen   { .ddir(cen);   } .east { .ddir(east); }
                              .south { .ddir(south); }
-      .cen  { font-size:@theme-cen-size; }
+      .cen  { font-size:@theme-dirs-size; }
 
-    .disp {   display:inline; justify-self:center; align-self:center; text-align:center; font-size:@theme-disp-size;
+    .disp-comp {   display:inline; justify-self:center; align-self:center; text-align:center;
       i     { display:inline-block;  margin-right: 0.15rem; }
       .name { display:inline-block; }
       .desc { display:none; margin:0.5rem 0.5rem 0.5rem 0.5rem; text-align:left; } } }

@@ -40,10 +40,10 @@
       onPrac: function() { }, // console.log( { pracObj:this.pracObj } );
       doPrac: function (pracKey) {
         let obj = { route:"Prac", pracKey:pracKey };
-        this.nav.pub( obj ); },
+        this.nav().pub( obj ); },
       doDisp: function (dispKey) {
         let obj = { route:"Disp", pracKey:this.pracObj.name, dispKey:dispKey };
-        this.nav.pub( obj ); },
+        this.nav().pub( obj ); },
       style: function( ikwObj ) {
         return this.styleHsv(ikwObj); },
       clArea: function() {

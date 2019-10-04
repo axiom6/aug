@@ -30,10 +30,10 @@
           this.doDisp(key) } },
       doDisp:  function (dispKey) {
         let obj = { route:"Disp", dispKey:dispKey }; // pracKey:this.pracObj.name,
-        this.nav.pub( obj ); },
+        this.nav().pub( obj ); },
       doPrac: function (pracKey) {
         let obj = { route:"Prac", pracKey:pracKey };
-        this.nav.pub( obj ); } },
+        this.nav().pub( obj ); } },
   }
 
   export default Dims;

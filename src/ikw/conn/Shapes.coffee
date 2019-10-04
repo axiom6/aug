@@ -251,22 +251,23 @@ class Shapes
     return if not spec.row?
     switch spec.row
       when 'Learn'
-        @flow( g, size, [90,90,90], 'south', 12 )
+        @flow( g, size, [90,90,90], 'south' )
       when 'Do'
-        @flow( g, size, [90,90,90], 'north', 12 )
-        @flow( g, size, [90,90,90], 'south', 12 )
+        @flow( g, size, [90,90,90], 'north' )
+        @flow( g, size, [90,90,90], 'south' )
       when 'Share'
-        @flow( g, size, [90,90,90], 'sorth', 12 )
+        @flow( g, size, [90,90,90], 'sorth' )
       when 'Dim'
 
       else
         console.error( 'Shapes.practiceFlow() unknown spec row ', spec.name, spec.row )
-        @flow( g, size, [90,90,90], 'south', 12 )
+        @flow( g, size, [90,90,90], 'south' )
     return
 
   flow:( g, size, hsv, dir, h ) ->
-    w    = 18
-    x0   = size.xc - w / 2
+    w    = if size.level is 'Comp' then size.ringSize * 0.75 else size.ringSize * 0.8
+    h    = if size.level is 'Comp' then size.ringSize * 0.55 else size.ringSize * 1.3
+    x0   = size.xc  -  w * 0.5
     y0   = if dir is 'south' then size.h  - h else 0
     fill = Vis.toRgbHsvStr( hsv )
     @rect( g, x0, y0, w, h, fill, 'none' )

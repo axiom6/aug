@@ -54,10 +54,10 @@ Innovate = class Innovate {
   rings(g, size) {
     var colorBack, colorRing, hr, t, uc, wr, xi, xt, y;
     t = size.ringSize;
-    wr = size.level === 'Comp' ? t : 80 * size.scaleFont;
+    wr = size.level === 'Comp' ? t : 75 * size.scaleFont;
     hr = size.level === 'Comp' ? t : 18 * size.scaleFont;
     xi = size.level === 'Comp' ? t * 1.70 : t * 2.5;
-    xt = xi + size.ringIcon;
+    xt = xi + size.ringIcon * 0.8;
     y = size.level === 'Comp' ? t * 2.1 : 18 * size.scaleFont;
     uc = Vis.unicode(this.spec.icon);
     // console.log( 'Innovate.rings()', { t:t, wr:wr, hr:hr, xt:xt, yt:yt } )
@@ -104,9 +104,9 @@ Innovate = class Innovate {
   westInovate(g, size) {
     var fill, h, key, ref, study, w, x0, y0;
     w = size.ringSize;
-    h = size.ringSize * 0.75;
+    h = size.level === 'Comp' ? size.ringSize * 0.5 : size.ringSize;
     x0 = size.w - w;
-    y0 = size.yc - h / 2;
+    y0 = size.yc - h * 2; // 4 studies
     ref = this.studies;
     for (key in ref) {
       study = ref[key];
@@ -119,9 +119,9 @@ Innovate = class Innovate {
   eastInovate(g, size) {
     var fill, h, key, ref, study, w, x0, y0;
     w = size.ringSize;
-    h = size.ringSize * 0.75; //  @shapes.size(@studies)
+    h = size.level === 'Comp' ? size.ringSize * 0.5 : size.ringSize;
     x0 = 0;
-    y0 = size.yc - h / 2;
+    y0 = size.yc - h * 2; // 4 studies
     ref = this.studies;
     for (key in ref) {
       study = ref[key];
@@ -133,7 +133,7 @@ Innovate = class Innovate {
 
   northInovate(g, size) {
     var dx, fill, h, key, ordered, study, w, x0, y0;
-    w = size.ringSize * 0.75;
+    w = size.level === 'Comp' ? size.ringSize * 0.75 : size.ringSize * 1.25;
     h = size.ringSize;
     dx = size.r * 1.5;
     x0 = size.xc - dx - w / 2;
@@ -149,7 +149,7 @@ Innovate = class Innovate {
 
   southInovate(g, size) {
     var dx, fill, h, key, ordered, study, w, x0, y0;
-    w = size.ringSize * 0.75;
+    w = size.level === 'Comp' ? size.ringSize * 0.75 : size.ringSize * 1.25;
     h = size.ringSize;
     dx = size.r * 1.5;
     x0 = size.xc - dx - w / 2;

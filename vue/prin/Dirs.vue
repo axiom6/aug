@@ -1,20 +1,20 @@
 
 <template>
-  <div class="dirs">
+  <div class="dirs-prin">
     <div class="cen" :style="style(pracObj)">
-      <div class="disp" @click="doPrac(pracObj.name)">
+      <div class="disp-prin" @click="doPrac(pracObj.name)">
         <i   :class="pracObj.icon"></i>
         <span class="name">{{pracObj.name}}</span>
       </div>
     </div>
     <template  v-for="dispObj in pracObj.disps">
       <div :class="dispObj.dir" :style="style(dispObj)"  :ref="dispObj.name" :title="dispObj.name">
-        <div class="disp" @click="doDisp(prac.name,dispObj.name)">
+        <div class="disp-prin" @click="doDisp(prac.name,dispObj.name)">
           <i   :class="dispObj.icon"></i>
           <span class="name">{{dispObj.name}}</span>
         </div>
         <template v-for="ddObj in dispObj.disps">
-          <div class="disp">
+          <div class="disp-prin">
             <i   :class="ddObj.icon"></i>
             <span class="name">{{ddObj.name}}</span>
           </div>
@@ -56,16 +56,16 @@
 
   .ddir( @dir ) { .themeCenterItems(); grid-area:@dir; border-radius:36px; }
   
-  .dirs { display:grid; align-self:stretch; justify-self:stretch;
+  .dirs-prin { display:grid; align-self:stretch; justify-self:stretch;
     color:black; font-weight:bold; .theme-comp-dirs();
     
       .grid3x3(); // The 4 Displine plus Practiice name Grid
                              .north { .ddir(north); }
       .west { .ddir(west); } .cen   { .ddir(cen);   } .east { .ddir(east); }
                              .south { .ddir(south); }
-      .cen  { font-size:@theme-cen-size; }
+      .cen { font-size:@theme-dirs-size; }
 
-    .disp {   display:block; text-align:left; font-size:@theme-disp-size;
+    .disp-prin {   display:block; text-align:left;
       i     { display:inline-block;  margin-right: 0.25rem; }
       .name { display:inline-block; } } }
   

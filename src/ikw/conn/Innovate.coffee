@@ -31,10 +31,10 @@ class Innovate
   # getComputedTextLength()
   rings:( g, size ) ->
     t  = size.ringSize
-    wr = if size.level is 'Comp' then  t      else 80*size.scaleFont
+    wr = if size.level is 'Comp' then  t      else 75*size.scaleFont
     hr = if size.level is 'Comp' then  t      else 18*size.scaleFont
     xi = if size.level is 'Comp' then  t*1.70 else t*2.5
-    xt = xi + size.ringIcon
+    xt = xi + size.ringIcon * 0.8
     y  = if size.level is 'Comp' then  t*2.1  else 18*size.scaleFont
     uc = Vis.unicode( @spec.icon )
     # console.log( 'Innovate.rings()', { t:t, wr:wr, hr:hr, xt:xt, yt:yt } )
@@ -73,9 +73,9 @@ class Innovate
 
   westInovate:( g, size ) ->
     w    = size.ringSize
-    h    = size.ringSize * 0.75
+    h    = if size.level is 'Comp' then size.ringSize * 0.5 else size.ringSize
     x0   = size.w  - w
-    y0   = size.yc - h/2
+    y0   = size.yc - h * 2 # 4 studies
     for key, study of @studies
       fill = @shapes.toFill(study)
       @shapes.rect( g, x0, y0, w, h, fill, 'none' )
@@ -84,9 +84,9 @@ class Innovate
 
   eastInovate:( g, size ) ->
     w  = size.ringSize
-    h  = size.ringSize * 0.75 #  @shapes.size(@studies)
+    h  = if size.level is 'Comp' then size.ringSize * 0.5 else size.ringSize
     x0 = 0
-    y0 = size.yc - h/2
+    y0 = size.yc - h * 2 # 4 studies
     for key, study of @studies
       fill = @shapes.toFill(study)
       @shapes.rect( g, x0, y0, w, h, fill, 'none' )
@@ -94,7 +94,7 @@ class Innovate
     return
 
   northInovate:( g, size ) ->
-    w    = size.ringSize * 0.75
+    w    = if size.level is 'Comp' then size.ringSize * 0.75 else size.ringSize * 1.25
     h    = size.ringSize
     dx   = size.r * 1.5
     x0   = size.xc - dx - w / 2
@@ -107,7 +107,7 @@ class Innovate
     return
 
   southInovate:( g, size ) ->
-    w    = size.ringSize * 0.75
+    w    = if size.level is 'Comp' then size.ringSize * 0.75 else size.ringSize * 1.25
     h    = size.ringSize
     dx   = size.r * 1.5
     x0   = size.xc - dx - w / 2

@@ -47,6 +47,7 @@
     grid-template-areas: "iconq" "summq""area1" "area2" "area3"; }
   
   .desd { .grid5x1(); position:absolute; left:0; top:5%; right:0; bottom:0; .theme-disp-desc(); color:black;
+           border-radius:36px;
     .iconq { grid-area:iconq; }
     .summq { grid-area:summq; margin-left:@theme-disp-size; }
     .area1 { grid-area:area1; }

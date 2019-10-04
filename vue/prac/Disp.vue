@@ -15,7 +15,7 @@
     methods: {
       doDisp: function (dispKey) {
         let obj = { route:"Disp", dispKey:dispKey }; // pracKey:this.pracObj.name,
-        this.nav.pub( obj ); } } }
+        this.nav().pub( obj ); } } }
   
   export default Disp;
   
@@ -25,7 +25,7 @@
 
   @import '../../pub/css/themes/theme.less';
 
-  .disp {   display:inline; justify-self:center; align-self:center; text-align:center; font-size:@theme-disp-size*3;
+  .disp {   display:inline; justify-self:center; align-self:center; text-align:center;
     i     { display:inline-block;  margin-right: 0.25rem; }
     .name { display:inline-block; } }
 

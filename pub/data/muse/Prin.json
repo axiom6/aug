@@ -14,7 +14,7 @@
       "Trust":    { "desc":"Our teams thrive on interpersonal trust." } },
     "Empower": { "dir":"east", "name":"Empower",  "icon":"fas fa-user-plus", "hsv":[30,60,90], "dim":true,
       "desc":"Safety, authority, autonomy and self-determination",
-      "Freedom":  { "desc":"Individual freedom and liberty" },
+      "Autonomy":  { "desc":"Individual freedom and liberty" },
       "Confide":  { "desc":"Our teams instill confidence into each member." },
       "Safety":   { "desc":"We will not embarrass someone for speaking up." } },
     "Action": { "dir":"south", "name":"Action", "icon":"fas fa-tasks",     "hsv":[ 60,90,90], "dim":true,
@@ -45,7 +45,7 @@
         "desc":"Chance favors the connected mind with serendipitous inventions.",
         "Ecosystem": { "desc":"Allows ideas to be diffused and be reconnected in novel ways." },
         "Adjacent":  { "desc":"Possibilities emerge and become close waiting to be connected." },
-        "Freedom":   { "desc":"Ideas are allowed to move freely." } }
+        "Effortless":   { "desc":"Ideas are allowed to move freely." } }
   },
   "Encourage":{ "type":"pane", "hsv":[20,50,90],"column":"Encourage","row":"Dim","plane":"Prin","icon":"fab fa-slideshare",
     "cells":[29,12,1,6], "dir":"en", "pcells":[25,12,1,36], "css":"ui-dims", "neg":"Repress",

@@ -323,27 +323,28 @@ Shapes = class Shapes {
     }
     switch (spec.row) {
       case 'Learn':
-        this.flow(g, size, [90, 90, 90], 'south', 12);
+        this.flow(g, size, [90, 90, 90], 'south');
         break;
       case 'Do':
-        this.flow(g, size, [90, 90, 90], 'north', 12);
-        this.flow(g, size, [90, 90, 90], 'south', 12);
+        this.flow(g, size, [90, 90, 90], 'north');
+        this.flow(g, size, [90, 90, 90], 'south');
         break;
       case 'Share':
-        this.flow(g, size, [90, 90, 90], 'sorth', 12);
+        this.flow(g, size, [90, 90, 90], 'sorth');
         break;
       case 'Dim':
         break;
       default:
         console.error('Shapes.practiceFlow() unknown spec row ', spec.name, spec.row);
-        this.flow(g, size, [90, 90, 90], 'south', 12);
+        this.flow(g, size, [90, 90, 90], 'south');
     }
   }
 
   flow(g, size, hsv, dir, h) {
     var fill, w, x0, y0;
-    w = 18;
-    x0 = size.xc - w / 2;
+    w = size.level === 'Comp' ? size.ringSize * 0.75 : size.ringSize * 0.8;
+    h = size.level === 'Comp' ? size.ringSize * 0.55 : size.ringSize * 1.3;
+    x0 = size.xc - w * 0.5;
     y0 = dir === 'south' ? size.h - h : 0;
     fill = Vis.toRgbHsvStr(hsv);
     this.rect(g, x0, y0, w, h, fill, 'none');

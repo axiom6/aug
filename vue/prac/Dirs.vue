@@ -31,7 +31,7 @@
 
       doPrac: function (pracKey) {
         let obj = { route:"Prac", pracKey:pracKey };
-        this.nav.pub( obj ); },
+        this.nav().pub( obj ); },
       isDims: function () {
         return this.pracObj.row === 'Dim'; },
       isDisp: function () {
@@ -63,11 +63,13 @@
                              .north { .ddir(north); }
       .west { .ddir(west); } .cen   { .ddir(cen);   } .east { .ddir(east); }
                              .south { .ddir(south); }
-      .cen  { font-size:@theme-cen-size; } }
+      .cen  { font-size:@theme-cen-size*3.5; } }
 
-    .disp {   display:inline; justify-self:center; align-self:center; text-align:center; font-size:@theme-disp-size*3;
+    /*
+    .disp-prac {   display:inline; justify-self:center; align-self:center; text-align:center;
       i     { display:inline-block;  margin-right: 0.25rem; }
       .name { display:inline-block; }
       .desc { display:none; margin:0.5rem 0.5rem 0.5rem 0.5rem; text-align:left; } }
+     */
   
 </style>
