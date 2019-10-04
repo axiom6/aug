@@ -2,6 +2,9 @@
 FontAwe = {}
 
 FontAwe.icons = {
+    "fab fa-mendeley":"\uf7b3",
+    "fas fa-drafting-compass":"\uf568",
+    "fas fa-users-cog":"\uf509",
     "fab fa-centos":"\uf789",
     "fas fa-yin-yang":"\uf6ad",
     "fab fa-pagelines":"\uf18c",
@@ -19,11 +22,8 @@ FontAwe.icons = {
     "fas fa-shapes":"\uf61f",
     "fas fa-images":"\uf302",
     "fas fa-people-carry":"\uf4ce",
-
     "fas fa-poll":"\uf681",
     "fas fa-user-graduate":"\uf501",
-
-
     "fab fa-galactic-republic":"\uf50c",
     "fas fa-address-book":"\uf2b9",
     "fas fa-address-card":"\uf2bb",

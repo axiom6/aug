@@ -128,7 +128,24 @@ Mixin = class Mixin {
           return Mixin.Main.Batch[compKey].data.pracs;
         },
         pracObject: function(compKey, pracKey) {
-          return this.pracs(compKey)[pracKey];
+          var prac;
+          prac = {};
+          if (this.pracs(compKey) != null) {
+            if (this.pracs(compKey)[pracKey] != null) {
+              prac = this.pracs(compKey)[pracKey];
+            } else {
+              console.error('Mixin.pracObj() unknown pracKey', {
+                compKey: compKey,
+                pracKey: pracKey
+              });
+            }
+          } else {
+            console.error('Mixin.pracObj() unknown compKey', {
+              compKey: compKey,
+              pracKey: pracKey
+            });
+          }
+          return prac;
         },
         dispObject: function(compKey, pracKey, dispKey) {
           return this.disps(compKey, pracKey)[dispKey];

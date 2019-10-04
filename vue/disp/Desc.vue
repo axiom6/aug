@@ -1,10 +1,10 @@
 
 <template>
   <div   class="desd" :style="style(dispObj)">
-    <d-icon class="iconq" :icon="dispObj.icon" :name="dispObj.name" :size="3" ></d-icon>
+    <d-icon class="iconq" :icon="dispObj.icon" :name="dispObj.name" :size="5.0" ></d-icon>
     <div    class="summq">{{dispObj.desc}}</div>
     <template v-for="areaObj in dispObj.areas">
-      <d-icon :class="clArea" :icon="areaObj.icon" :name="areaObj.name" :summ="tsSumm(areaObj.desc)" :size="1.0"
+      <d-icon :class="clArea" :icon="areaObj.icon" :name="areaObj.name" :summ="tsSumm(areaObj.desc)" :size="3.0"
       ></d-icon>
   </template>
   </div>

@@ -26,8 +26,8 @@
     data() { return {
       compObj:null, pracObj:null,
       pages:{
-        Icon: { title:'Foundations', key:'Icon', show:true  },
-        Dirs: { title:'Concerns',    key:'Dirs', show:false } } } },
+        Icon: { title:'Foundation', key:'Icon', show:true  },
+        Dirs: { title:'Principles', key:'Dirs', show:false } } } },
     
     methods: {
       

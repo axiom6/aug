@@ -2,17 +2,17 @@
 <template>
   <div   class="desdp">
     <div class="cen" @click="doPrac(pracObj.name)" :style="style(pracObj)">
-      <div class="deadp"><d-icon :icon="pracObj.icon" :name="pracObj.name" :size="2" ></d-icon></div>
+      <div class="deadp"><d-icon :icon="pracObj.icon" :name="pracObj.name" :size="3.0" ></d-icon></div>
       <div class="summp">{{pracObj.desc}}</div>
     </div>
     <template v-for="dispObj in pracObj.disps">
       <div   :class="dispObj.dir" @click="doDisp(dispObj.name)" :style="style(dispObj)">
         <div class="desp">
-          <d-icon class="iconp" :icon="dispObj.icon" :name="dispObj.name" :size="2" ></d-icon>
+          <d-icon class="iconp" :icon="dispObj.icon" :name="dispObj.name" :size="2.5" ></d-icon>
           <div    class="summp">{{dispObj.desc}}</div>
           <template v-for="areaObj in dispObj.areas">
             <d-icon :class="clArea" :icon="areaObj.icon" :name="areaObj.name" :summ="tsSumm(areaObj.desc)"
-              :size="1"></d-icon>
+              :size="1.3"></d-icon>
           </template>
         </div>
       </div>

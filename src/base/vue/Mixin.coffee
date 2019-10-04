@@ -81,7 +81,15 @@ class Mixin
         compObject: (compKey) ->
           Mixin.Main.Batch[compKey].data.pracs
         pracObject: (compKey, pracKey) ->
-          this.pracs(compKey)[pracKey]
+          prac = {}
+          if this.pracs(compKey)?
+            if this.pracs(compKey)[pracKey]?
+              prac = this.pracs(compKey)[pracKey]
+            else
+              console.error( 'Mixin.pracObj() unknown pracKey', { compKey:compKey, pracKey:pracKey } )
+          else
+            console.error( 'Mixin.pracObj() unknown compKey', { compKey:compKey, pracKey:pracKey } )
+          prac
         dispObject: (compKey, pracKey, dispKey) ->
           this.disps(compKey, pracKey)[dispKey]
         styleHsv: (ikwObj) ->

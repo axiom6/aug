@@ -57,17 +57,17 @@
   .ddir( @dir ) { .themeCenterItems(); grid-area:@dir; border-radius:36px; }
   
   .dirs-prin { display:grid; align-self:stretch; justify-self:stretch;
-    color:black; font-weight:bold; .theme-comp-dirs();
+    color:black; font-weight:bold; .theme-prin-dirs();
     
       .grid3x3(); // The 4 Displine plus Practiice name Grid
                              .north { .ddir(north); }
       .west { .ddir(west); } .cen   { .ddir(cen);   } .east { .ddir(east); }
                              .south { .ddir(south); }
-      .cen { font-size:@theme-dirs-size; }
+      .cen { font-size:@theme-prin-cen; }
 
-    .disp-prin {   display:block; text-align:left;
-      i     { display:inline-block;  margin-right: 0.25rem; }
-      .name { display:inline-block; } } }
+    .disp-prin { display:block; text-align:center;
+      i     {    display:block; }
+      .name {    display:block; } } }
   
   
 </style>

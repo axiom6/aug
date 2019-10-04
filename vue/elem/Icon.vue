@@ -49,7 +49,7 @@
     i     { grid-area:nicon; .themeCenterItems(); }
     .name { grid-area:nname; .themeCenterItems(); } }
 
-  .grid1x4() { display:grid; grid-template-columns:5fr 5fr 15fr 75fr; grid-template-areas:"sleft sicon sname ssumm"; }
+  .grid1x4() { display:grid; grid-template-columns:5fr 10fr 20fr 65fr; grid-template-areas:"sleft sicon sname ssumm"; }
 
   .icon-summ { .grid1x4(); align-self:start;  justify-self:center;
     i     { grid-area:sicon; .themeLeftSelf(); }

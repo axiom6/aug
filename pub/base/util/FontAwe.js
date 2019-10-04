@@ -3,6 +3,9 @@ var FontAwe;
 FontAwe = {};
 
 FontAwe.icons = {
+  "fab fa-mendeley": "\uf7b3",
+  "fas fa-drafting-compass": "\uf568",
+  "fas fa-users-cog": "\uf509",
   "fab fa-centos": "\uf789",
   "fas fa-yin-yang": "\uf6ad",
   "fab fa-pagelines": "\uf18c",

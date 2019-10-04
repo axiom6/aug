@@ -1,20 +1,20 @@
 
 <template>
   <div class="home">
-    <div class="head">
+    <!--div class="head">
       <div>
         <h1>Welcome to Muse Home Page</h1>
         <h2>Choose an Application Component on the Left</h2>
       </div>
-    </div>
+    </div-->
     <div class="midd">
       <h1>Humanistic Practices</h1>
     </div>
-    <div class="foot">
+    <!--div class="foot">
       <div>
         <h1>Axiom Architectures</h1>
       </div>
-    </div>
+    </div-->
   </div>
 </template>
 
@@ -63,7 +63,7 @@
     .foot { grid-area:foot; justify-items:center; align-items:center; text-align:center; display:grid;
       justify-self:stretch; align-self:stretch;  }
   
-    h1 { justify-self:center; align-self:center; font-size:@theme-h1-size; }
+    h1 { justify-self:center; align-self:center; font-size:5rem; }  // @theme-h1-size;
     h2 { justify-self:center; align-self:center; font-size:@theme-h2-size; }
  }
  

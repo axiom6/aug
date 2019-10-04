@@ -1,16 +1,20 @@
 
-1. Improve
-      Home Page
+0. Bugs
+   a. Mixin pracObject
+
+1. Improve Landing Pages
+   a. Landing Pages: Home Prin Info Know Wise
    a. Desc Prac
    b. Desc Disp
-   c. Consider bring Prin into IKW nav
-   d. Route url path init bug
 
-2. Improved Landing Pages
-   a. Muse Home Prin Info Know Wise
-   b. Augm Home Math Geom Note Draw Hues
+2. Descriptions
+   a. Bold Labels
+   b. Info.json Know.json Wise.json
 
-3. Descriptions
+3. Concerns
+   a. Scale fonts
+   b. Consider bringing Prin into IKW nav
+   c. Route url path init bug
 
 4. Talk
    a. Nav scripts
@@ -26,3 +30,4 @@
 6. Augm
    a. Math MathML
    b. Note
+   c. Landing Pages for Home Math Geom Note Draw Hues
