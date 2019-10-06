@@ -2450,6 +2450,38 @@
 		"oO": 0,
 		"oS": 1
 		},
+	"/pub/data/innovate/Augm.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/innovate/Augm-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/innovate/Data.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/innovate/Data-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/innovate/Data2.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/innovate/Data2-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/innovate/Mach.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/innovate/Mach-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
 	"/pub/data/jitter/Choice.json": {
 		"ft": 524288,
 		"oA": 1,
@@ -2486,6 +2518,14 @@
 		"ft": 524288,
 		"oA": 1,
 		"oAP": "/pub/data/muse/Cube-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/muse/Data.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/muse/Data-min.json",
 		"oF": 0,
 		"oO": 0,
 		"oS": 1

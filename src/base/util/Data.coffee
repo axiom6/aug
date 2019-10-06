@@ -55,7 +55,7 @@ class Data
       .then( (response) =>
         return response.json() )
       .then( (data) =>
-        obj['data'] = if Util.isFunc(refine) then refine( data, obj.type ) else data
+        obj['data']     = if Util.isFunc(refine) then refine( data, obj.type ) else data
         callback( batch ) if Data.batchComplete( batch ) )
       .catch( (error) =>
         console.error( "Data.batchJSON()", { url:url, error:error } ) )

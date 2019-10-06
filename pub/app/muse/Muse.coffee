@@ -30,7 +30,8 @@ class Muse
     Rows: { url:'muse/Rows.json', data:null, type:'Pack', plane:'Rows' }
     Info: { url:'muse/Info.json', data:null, type:'Pack', plane:'Info' }
     Know: { url:'muse/Know.json', data:null, type:'Pack', plane:'Know' }
-    Wise: { url:'muse/Wise.json', data:null, type:'Pack', plane:'Wise' } }
+    Wise: { url:'muse/Wise.json', data:null, type:'Pack', plane:'Wise' },
+    Data: { url:'muse/Data.json', data:null, type:'Pack', plane:'Data' } }
 
   # 2. Initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
   Muse.init =   ( batch ) ->

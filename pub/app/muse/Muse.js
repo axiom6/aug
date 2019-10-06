@@ -169,6 +169,12 @@ Muse = (function() {
       data: null,
       type: 'Pack',
       plane: 'Wise'
+    },
+    Data: {
+      url: 'muse/Data.json',
+      data: null,
+      type: 'Pack',
+      plane: 'Data'
     }
   };
 
