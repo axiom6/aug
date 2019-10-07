@@ -19296,6 +19296,10 @@ var FontAwe;
 FontAwe = {};
 
 FontAwe.icons = {
+  "fab fa-mendeley": "\uf7b3",
+  "fas fa-drafting-compass": "\uf568",
+  "fas fa-users-cog": "\uf509",
+  "fab fa-centos": "\uf789",
   "fas fa-yin-yang": "\uf6ad",
   "fab fa-pagelines": "\uf18c",
   "fas fa-network-wired": "\uf6ff",
@@ -20573,13 +20577,12 @@ var SvgMgr;
 
 SvgMgr = class SvgMgr {
   constructor(name1, elem1, level1, stream = null) {
-    this.resize2 = this.resize2.bind(this);
     this.resize = this.resize.bind(this);
+    this.resize2 = this.resize2.bind(this);
     this.name = name1;
     this.elem = elem1;
     this.level = level1;
     this.stream = stream;
-    console.log('SvgMgr', this.level);
     this.d3 = d3;
     this.size = this.sizeElem(this.elem, this.level);
     this.origWidth = this.size.w;
@@ -20590,9 +20593,9 @@ SvgMgr = class SvgMgr {
     this.svg.attr("id", this.svgId).attr("width", this.size.w).attr("height", this.size.h).attr("xmlns", "http://www.w3.org/2000/svg");
     this.defs = this.svg.append("svg:defs");
     this.g = this.svg.append("svg:g").attr("id", this.gId); // All transforms are applied to g
-    window.onresize = this.resize;
   }
 
+  // window.onresize = @resize
   htmlId(name, type, ext = '') {
     return name + type + ext;
   }
@@ -20608,31 +20611,35 @@ SvgMgr = class SvgMgr {
     sz.yc = sz.h * 0.5;
     sz.sx = this.origWidth ? sz.w / this.origWidth : 1.0;
     sz.sy = this.origHeight ? sz.h / this.origHeight : 1.0;
-    sz.s = Math.min(sz.sx, sz.sy);
+    sz.smin = Math.min(sz.sx, sz.sy);
+    sz.smax = Math.max(sz.sx, sz.sy);
+    sz.s = sz.smin;
     sz.r = Math.min(sz.w, sz.h) * 0.2; // Used for hexagons
     sz.level = level;
     sz.scaleFont = sz.h / 100;
+    sz.ringSize = sz.level === 'Comp' ? 24 : 6 * sz.scaleFont;
+    sz.ringIcon = 12.0 * sz.scaleFont;
     sz.iconSize = 20.0 * sz.scaleFont + 'px';
-    sz.bannSize = 15.0 * sz.scaleFont + 'px';
+    sz.bannSize = sz.level === 'Comp' ? 15.0 * sz.scaleFont + 'px' : 12.0 * sz.scaleFont + 'px';
     sz.pracSize = 10.0 * sz.scaleFont + 'px';
     sz.dispSize = 7.0 * sz.scaleFont + 'px';
     sz.iconDy = sz.level === 'Comp' ? 7.5 * sz.scaleFont : 7.5 * sz.scaleFont;
     sz.bannDy = sz.level === 'Comp' ? 2.0 * sz.scaleFont : 0;
     sz.pracDy = 0;
     sz.dispDy = sz.level === 'Comp' ? 0 : 0;
-    console.log('SvgMgr.sizeElem()', sz);
+    // console.log( 'SvgMgr.sizeElem()', sz )
     this.size = sz;
     return sz;
   }
 
-  resize2() {
+  resize() {
     var sz;
     sz = this.sizeElem(this.elem);
     this.svg.attr("width", sz.w).attr("height", sz.h);
-    this.g.transition().attr("transform", `scale(${sz.s})`);
+    this.g.transition().attr("transform", `scale(${sz.smin})`);
   }
 
-  resize() {
+  resize2() {
     var sz, trans;
     sz = this.sizeElem(this.elem);
     this.svg.attr("width", sz.w).attr("height", sz.h);
@@ -20727,6 +20734,34 @@ Data = class Data {
       }
     }
     return data;
+  }
+
+  // Merges principles and innovations into comp practices
+  static mergePracs(batch, srcKey, comps) {
+    var comp, i, key, len, src, srcs;
+    srcs = batch[srcKey].data.pracs;
+    for (i = 0, len = comps.length; i < len; i++) {
+      comp = comps[i];
+      for (key in srcs) {
+        if (!hasProp$1.call(srcs, key)) continue;
+        src = srcs[key];
+        batch[comp].data.pracs[key] = src;
+      }
+    }
+  }
+
+  // Build a new Innovative Plane
+  static buildInnov(batch, innv, comp) {
+    var i, innvs, key, len, pracs, ref;
+    innvs = batch[innv].data;
+    pracs = batch[comp].data;
+    ref = ['Team', 'Discover', 'Adapt', 'Benefit', 'Change', 'Govern'];
+    for (i = 0, len = ref.length; i < len; i++) {
+      key = ref[i];
+      innvs[key] = pracs[key];
+      innvs[key].plane = innv;
+    }
+    Data.refine(innvs, 'Pack');
   }
 
   // ---- Read JSON with batch async
@@ -21359,12 +21394,11 @@ Build = class Build {
     return this.batch.Prin.data[cname];
   }
 
-  logPlanes() {
-    var i, keyBase, keyItem, keyPlane, keyPractice, keyStudy, keyTopic, len, objBase, objItem, objPractice, objStudy, objTopic, practices, ref;
+  logPlanes(planes) {
+    var i, keyBase, keyItem, keyPlane, keyPractice, keyStudy, keyTopic, len, objBase, objItem, objPractice, objStudy, objTopic, practices;
     console.log('----- Beg Log Planes  ------');
-    ref = ['Info', 'Know', 'Wise'];
-    for (i = 0, len = ref.length; i < len; i++) {
-      keyPlane = ref[i];
+    for (i = 0, len = planes.length; i < len; i++) {
+      keyPlane = planes[i];
       console.log("Plane: ", keyPlane);
       practices = this.getPractices(keyPlane);
       for (keyPractice in practices) {
@@ -21410,32 +21444,25 @@ Build = class Build {
     console.log('----- End Log Planes ------');
   }
 
-  logBatch(batch) {
-    var batKey, batObj, i, j, keyPractice, keyStudy, len, len1, objPractice, objStudy, packKey, packObj, ref, ref1;
+  logBatch(batch, comps) { // ['Info','Know','Wise']
+    var comp, i, keyPractice, keyStudy, len, objPractice, objStudy, pracs;
     console.log('----- Beg Log Batch  ------');
-    ref = ['Info', 'Know', 'Wise'];
-    for (i = 0, len = ref.length; i < len; i++) {
-      batKey = ref[i];
-      console.log("Batch File: ", batKey);
-      batObj = batch[batKey].data;
-      ref1 = ['Info', 'Know', 'Wise', 'Prin', 'Rows'];
-      for (j = 0, len1 = ref1.length; j < len1; j++) {
-        packKey = ref1[j];
-        packObj = batObj[packKey];
-        console.log("  Pack: ", packKey, packObj);
-        for (keyPractice in packObj) {
-          if (!hasProp$2.call(packObj, keyPractice)) continue;
-          objPractice = packObj[keyPractice];
-          if (!(Util$1.isChild(keyPractice))) {
-            continue;
-          }
-          console.log("    Practice: ", keyPractice);
-          for (keyStudy in objPractice) {
-            if (!hasProp$2.call(objPractice, keyStudy)) continue;
-            objStudy = objPractice[keyStudy];
-            if (Util$1.isChild(keyStudy)) {
-              console.log("      Study: ", keyStudy);
-            }
+    for (i = 0, len = comps.length; i < len; i++) {
+      comp = comps[i];
+      console.log("Comp: ", comp);
+      pracs = batch[comp].data;
+      for (keyPractice in pracs) {
+        if (!hasProp$2.call(pracs, keyPractice)) continue;
+        objPractice = pracs[keyPractice];
+        if (!(Util$1.isChild(keyPractice))) {
+          continue;
+        }
+        console.log("    Prac: ", keyPractice);
+        for (keyStudy in objPractice) {
+          if (!hasProp$2.call(objPractice, keyStudy)) continue;
+          objStudy = objPractice[keyStudy];
+          if (Util$1.isChild(keyStudy)) {
+            console.log("      Disp: ", keyStudy);
           }
         }
       }
@@ -21480,7 +21507,7 @@ Build = class Build {
         dim = this.getDim(col, dir);
         dim.dims = [];
         idx = 0;
-        ref2 = ['Info', 'Know', 'Wise'];
+        ref2 = ['Info', 'Know', 'Wise', 'Data'];
         for (k = 0, len2 = ref2.length; k < len2; k++) {
           plane = ref2[k];
           ref3 = ['Learn', 'Do', 'Share'];
@@ -21504,7 +21531,7 @@ Build = class Build {
       col = this.getCol(cname);
       col.dims = [];
       idx = 0;
-      ref1 = ['Info', 'Know', 'Wise'];
+      ref1 = ['Info', 'Know', 'Wise', 'Data'];
       for (j = 0, len1 = ref1.length; j < len1; j++) {
         plane = ref1[j];
         ref2 = ['Learn', 'Do', 'Share'];
@@ -22251,22 +22278,23 @@ Shapes = class Shapes {
       sc = level === 'Prac' ? 0.30 : 0.25; // level is a hack
       rt = (r1 + r2) / 2 + th * sc;
       as = 270 - at;
-      console.log('Shapes.wedgeText() 1', text, level, sc, rt);
     } else {
+      // console.log( 'Shapes.wedgeText() 1', text, level, sc , rt )
       sc = level === 'Prac' ? 1.25 : 0.50; // level is a hack
       rt = (r1 + r2) / 2 - th * sc;
       as = 90 - at;
-      console.log('Shapes.wedgeText() 2', text, level, sc, rt);
     }
+    // console.log( 'Shapes.wedgeText() 2', text, level, sc, rt )
     x = x0 + rt * this.cos(at);
     y = y0 + rt * this.sin(at);
     path = g.append("svg:text").text(text).attr("x", x).attr("y", y).attr("transform", Vis$1.rotate(as, x, y)).attr("text-anchor", "middle").attr("font-size", fontSize).attr("font-family", this.fontText).attr("font-weight", "bold").attr('fill', '#000000'); // @textFill(fill))
     this.click(path, text);
   }
 
+  // "font-family: Arial, Font Awesome\ 5 Free; font-weight: 900;
   icon(g, x0, y0, name, iconId, color, size, uc) {
     var path;
-    path = g.append("svg:text").text(uc).attr("x", x0).attr("y", y0).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", size).attr("fill", color).attr("font-family", "FontAwesome");
+    path = g.append("svg:text").text(uc).attr("x", x0).attr("y", y0).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", size).attr("fill", color).attr("font-family", "Arial, Font Awesome\\ 5 Free").attr("font-weight", "900");
     this.click(path, name);
   }
 
@@ -22406,27 +22434,28 @@ Shapes = class Shapes {
     }
     switch (spec.row) {
       case 'Learn':
-        this.flow(g, size, [90, 90, 90], 'south', 12);
+        this.flow(g, size, [90, 90, 90], 'south');
         break;
       case 'Do':
-        this.flow(g, size, [90, 90, 90], 'north', 12);
-        this.flow(g, size, [90, 90, 90], 'south', 12);
+        this.flow(g, size, [90, 90, 90], 'north');
+        this.flow(g, size, [90, 90, 90], 'south');
         break;
       case 'Share':
-        this.flow(g, size, [90, 90, 90], 'sorth', 12);
+        this.flow(g, size, [90, 90, 90], 'sorth');
         break;
       case 'Dim':
         break;
       default:
         console.error('Shapes.practiceFlow() unknown spec row ', spec.name, spec.row);
-        this.flow(g, size, [90, 90, 90], 'south', 12);
+        this.flow(g, size, [90, 90, 90], 'south');
     }
   }
 
   flow(g, size, hsv, dir, h) {
     var fill, w, x0, y0;
-    w = 18;
-    x0 = size.xc - w / 2;
+    w = size.level === 'Comp' ? size.ringSize * 0.75 : size.ringSize * 0.8;
+    h = size.level === 'Comp' ? size.ringSize * 0.55 : size.ringSize * 1.3;
+    x0 = size.xc - w * 0.5;
     y0 = dir === 'south' ? size.h - h : 0;
     fill = Vis$1.toRgbHsvStr(hsv);
     this.rect(g, x0, y0, w, h, fill, 'none');
@@ -22574,7 +22603,6 @@ Innovate = class Innovate {
     this.build = build;
     this.studies = this.shapes.arrange(this.spec);
     this.cos30 = this.shapes.cos30;
-    this.t = 24;
     this.xh = 0;
     this.yh = 0;
     this.r = 0;
@@ -22586,7 +22614,7 @@ Innovate = class Innovate {
     var key, ref, study;
     Util$1.noop(defs);
     this.lay = this.shapes.layout(size, this.spec.column, this.shapes.size(this.studies), this.shapes.size(this.studies));
-    this.rings(g, size, this.t);
+    this.rings(g, size);
     switch (this.spec.row) {
       case 'Dim':
         this.principle(g, size);
@@ -22610,14 +22638,24 @@ Innovate = class Innovate {
     }
   }
 
-  rings(g, size, t) {
-    var colorBack, colorRing;
+  // getComputedTextLength()
+  rings(g, size) {
+    var colorBack, colorRing, hr, t, uc, wr, xi, xt, y;
+    t = size.ringSize;
+    wr = size.level === 'Comp' ? t : 75 * size.scaleFont;
+    hr = size.level === 'Comp' ? t : 18 * size.scaleFont;
+    xi = size.level === 'Comp' ? t * 1.70 : t * 2.5;
+    xt = xi + size.ringIcon * 0.8;
+    y = size.level === 'Comp' ? t * 2.1 : 18 * size.scaleFont;
+    uc = Vis$1.unicode(this.spec.icon);
+    // console.log( 'Innovate.rings()', { t:t, wr:wr, hr:hr, xt:xt, yt:yt } )
     colorRing = Vis$1.toRgbHsvStr([70, 55, 70]);
     colorBack = 'rgba(97, 56, 77, 1.0 )';
     this.shapes.round(g, t, t, size.w - t * 2, size.h - t * 2, t, t, colorRing, 'none');
     this.shapes.round(g, t * 2.5, t * 2.5, size.w - t * 5.0, size.h - t * 5.0, t, t, colorBack, 'none');
-    this.shapes.rect(g, t, t, t, t, colorRing, 'none');
-    return this.shapes.text(g, t * 1.25, t * 2 + 2, this.spec.name, this.spec.name + 'Text', 'black', size.bannSize, "start");
+    this.shapes.rect(g, t, t, wr, hr, colorRing, 'none');
+    this.shapes.icon(g, xi, y, this.spec.name, this.spec.name + 'Icon', 'black', size.bannSize, uc);
+    return this.shapes.text(g, xt, y, this.spec.name, this.spec.name + 'Text', 'black', size.bannSize, "start");
   }
 
   principle(g, size) {
@@ -22652,12 +22690,11 @@ Innovate = class Innovate {
   }
 
   westInovate(g, size) {
-    var fill, h, key, r0, ref, study, w, x0, y0;
-    r0 = this.lay.ri; // size.x0/2 - 36
-    w = 24;
-    h = r0 / this.shapes.size(this.studies);
+    var fill, h, key, ref, study, w, x0, y0;
+    w = size.ringSize;
+    h = size.level === 'Comp' ? size.ringSize * 0.5 : size.ringSize;
     x0 = size.w - w;
-    y0 = size.yc - r0 / 2;
+    y0 = size.yc - h * 2; // 4 studies
     ref = this.studies;
     for (key in ref) {
       study = ref[key];
@@ -22668,12 +22705,11 @@ Innovate = class Innovate {
   }
 
   eastInovate(g, size) {
-    var fill, h, key, r0, ref, study, w, x0, y0;
-    r0 = this.lay.ri; // size.x0/2 - 36
-    w = 24;
-    h = r0 / this.shapes.size(this.studies);
+    var fill, h, key, ref, study, w, x0, y0;
+    w = size.ringSize;
+    h = size.level === 'Comp' ? size.ringSize * 0.5 : size.ringSize;
     x0 = 0;
-    y0 = size.yc - r0 / 2;
+    y0 = size.yc - h * 2; // 4 studies
     ref = this.studies;
     for (key in ref) {
       study = ref[key];
@@ -22685,8 +22721,8 @@ Innovate = class Innovate {
 
   northInovate(g, size) {
     var dx, fill, h, key, ordered, study, w, x0, y0;
-    w = 18;
-    h = 24;
+    w = size.level === 'Comp' ? size.ringSize * 0.75 : size.ringSize * 1.25;
+    h = size.ringSize;
     dx = size.r * 1.5;
     x0 = size.xc - dx - w / 2;
     y0 = 0;
@@ -22701,8 +22737,8 @@ Innovate = class Innovate {
 
   southInovate(g, size) {
     var dx, fill, h, key, ordered, study, w, x0, y0;
-    w = 18;
-    h = 24;
+    w = size.level === 'Comp' ? size.ringSize * 0.75 : size.ringSize * 1.25;
+    h = size.ringSize;
     dx = size.r * 1.5;
     x0 = size.xc - dx - w / 2;
     y0 = size.h - h;
@@ -22716,7 +22752,7 @@ Innovate = class Innovate {
   }
 
   hexStudy(g, size, study) {
-    var dx, dy, fill, i, j, uc, x, x0, y, y0, yh;
+    var dx, dy, fill, i, j, uc, x, x0, y, y0, yh, yi, yt;
     this.r = size.r;
     dx = this.r * 1.5;
     dy = this.r * 2.0 * this.cos30;
@@ -22728,12 +22764,14 @@ Innovate = class Innovate {
     yh = j % 2 === 0 ? 0 : this.r * this.cos30;
     x = j * dx + x0;
     y = -i * dy + y0 + yh;
+    yt = size.level === 'Comp' ? y + 10 : y + 4.5 * size.scaleFont;
+    yi = size.level === 'Comp' ? y - 2 : y - 2.0 * size.scaleFont;
     fill = this.shapes.toFill(study);
     uc = Vis$1.unicode(study.icon);
     // console.log( 'Innovate.hexStudy()', study.icon, uc )
     this.hexPath(fill, g, x, y, this.shapes.htmlId(study.name, 'HexPath'));
-    this.hexText(study.name, g, x, y, this.shapes.htmlId(study.name, 'HexText'), size.dispSize);
-    this.hexIcon(uc, g, x, y, this.shapes.htmlId(study.name, 'HexIcon'), size.dispSize);
+    this.hexText(study.name, g, x, yt, this.shapes.htmlId(study.name, 'HexText'), size.dispSize);
+    this.hexIcon(uc, g, x, yi, this.shapes.htmlId(study.name, 'HexIcon'), size.dispSize);
   }
 
   hexPosTier(dir) {
@@ -22798,13 +22836,13 @@ Innovate = class Innovate {
 
   hexText(text, g, x0, y0, textId, size) {
     var path;
-    path = g.append("svg:text").text(text).attr("id", textId).attr("x", x0).attr("y", y0 + 10).attr("text-anchor", "middle").attr("font-size", size).attr("font-family", this.shapes.fontText);
+    path = g.append("svg:text").text(text).attr("id", textId).attr("x", x0).attr("y", y0).attr("text-anchor", "middle").attr("font-size", size).attr("font-family", this.shapes.fontText);
     //.attr("font-weight","bold")
     this.shapes.click(path, text);
   }
 
   hexIcon(icon, g, x0, y0, iconId, size) {
-    g.append("svg:text").text(icon).attr("x", x0).attr("y", y0 - 2).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", size).attr("font-family", "FontAwesome").attr("font-weight", "normal");
+    g.append("svg:text").text(icon).attr("x", x0).attr("y", y0).attr("id", iconId).attr("text-anchor", "middle").attr("font-size", size).attr("font-family", "FontAwesome").attr("font-weight", "normal");
   }
 
 };
@@ -22950,9 +22988,13 @@ let Conn = {
     createConnect: function( stream, pracObj ) {
       this.$nextTick( function() {
         let elem = this.$refs[this.pracObj.name]; // this.getElem( this.$refs, this.pracObj.name );
-        console.log( 'Conn.createConnect()', { has:this.hasElem(elem), elem:elem, refs:this.$refs } );
-        if( this.isDef(elem) ) {
-          this.connect = new Connect$1( stream, this.batch(), pracObj, elem, this.level ); } } ); },
+        if( this.hasElem(elem) ) {
+          this.connect = new Connect$1( stream, this.batch(), pracObj, elem, this.level );
+          if( this.level==='Prac') {
+            window.addEventListener(   'resize', this.resize ); } }
+        else {
+          console.log( 'Conn.createConnect()',
+            { name:this.pracObj.name, has:this.hasElem(elem), elem:elem } ); } } ); },
     
     resize: function() {
       this.$nextTick( function() {
@@ -22965,8 +23007,8 @@ let Conn = {
   //this.subscribe( 'Nav', 'Conn.vue', (obj) => {
   //    this.onNav(obj); } );
   
-  created: function () {
-    window.addEventListener(   'resize', this.resize ); },
+  // created: function () {
+  //  window.addEventListener(   'resize', this.resize ) },
   destroyed: function () {
     window.removeEventListener('resize', this.resize ); }
     
@@ -23131,7 +23173,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-3cc4c4f8_0", { source: ".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.conn-comp {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  font-size: 5.5rem;\n  text-align: center;\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.conn-prac {\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  color: wheat;\n  font-size: 5.5rem;\n  text-align: center;\n  background-color: #333;\n  border-radius: 36px;\n}\n", map: {"version":3,"sources":["Conn.vue","/Users/ax/Documents/prj/aug/vue/comp/Conn.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;AACrB;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;AACxB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,eAAe;AACjB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;ACCA;EDCE,uBAAuB;ECCzB,iBAAA;AACA;ADCA;ECCA,uBAAA;EACA,iBAAA;ADCA;AACA;EACE,uBAAuB;EACvB,iBAAiB;AACnB;AACA;EACE,aAAa;EACb,kBAAkB;EAClB,oBAAoB;EACpB,mBAAmB;EACnB,qBAAqB;EACrB,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;EAClB,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;EAClB,sBAAsB;EACtB,mBAAmB;AACrB","file":"Conn.vue","sourcesContent":[".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 1.3rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5rem;\n}\n.conn-comp {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  font-size: 5.5rem;\n  text-align: center;\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.conn-prac {\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  color: wheat;\n  font-size: 5.5rem;\n  text-align: center;\n  background-color: #333;\n  border-radius: 36px;\n}\n","\n<template>\n  <div :class=\"clConn()\" @click=\"doPrac(pracObj.name)\" :ref=\"pracObj.name\" ></div>\n</template>\n\n<script type=\"module\">\n  \n  import Connect from '../../pub/ikw/conn/Connect.js';\n\n  let Conn = {\n\n    props: { pracObj:Object, level:String },\n\n    data() {\n      return { connect:null, size:null }; },\n    \n    watch: {\n      pracObj() {\n        this.onPrac(); } },\n    \n    methods: {\n\n      onNav:  function (obj) {\n        if( ( obj.route==='Comp' || obj.route==='Prac' ) && this.isDef(obj.pageKey) && obj.pageKey==='Conn' ) {\n          this.onPrac(); } },\n      \n      onPrac: function() {\n        if( this.isDef(this.connect) ) {\n            this.connect.clearSvg(); }\n        this.createConnect( this.stream(), this.pracObj ); },\n      \n      doPrac: function (pracKey) {\n        this.nav().pub( { pracKey:pracKey } ); },\n      \n      clConn: function() {\n        return this.nav().route === 'Comp' ? 'conn-comp' : 'conn-prac'; },\n      \n      createConnect: function( stream, pracObj ) {\n        this.$nextTick( function() {\n          let elem = this.$refs[this.pracObj.name] // this.getElem( this.$refs, this.pracObj.name );\n          console.log( 'Conn.createConnect()', { has:this.hasElem(elem), elem:elem, refs:this.$refs } );\n          if( this.isDef(elem) ) {\n            this.connect = new Connect( stream, this.batch(), pracObj, elem, this.level ); } } ) },\n      \n      resize: function() {\n        this.$nextTick( function() {\n          if( this.isDef(this.connect) ) {\n              this.connect.resize();  } } ); }\n    },\n    \n    mounted: function () {\n      this.onPrac(); },\n    //this.subscribe( 'Nav', 'Conn.vue', (obj) => {\n    //    this.onNav(obj); } );\n    \n    created: function () {\n      window.addEventListener(   'resize', this.resize ) },\n    destroyed: function () {\n      window.removeEventListener('resize', this.resize ) }\n      \n   }\n\n  export default Conn;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  .conn-comp { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;\n    color:@theme-color; font-size:@theme-icon-size; text-align:center; .theme-comp-conn(); }\n\n  .conn-prac { position:absolute; left:0; top:0; right:0; bottom:0;\n    color:@theme-color; font-size:@theme-icon-size; text-align:center; .theme-prac-conn(); }\n  \n</style>"]}, media: undefined });
+    inject("data-v-1d8d528d_0", { source: ".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-prin-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 3.9rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n  font-size: 2rem;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5vmin;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5vmin;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5vmin;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5vmin;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5vmin;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5vmin;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5vmin;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5vmin;\n}\n.conn-comp {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  font-size: 5.5rem;\n  text-align: center;\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.conn-prac {\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  color: wheat;\n  font-size: 5.5rem;\n  text-align: center;\n  background-color: #333;\n  border-radius: 36px;\n}\n", map: {"version":3,"sources":["Conn.vue","/Users/ax/Documents/prj/aug/vue/comp/Conn.vue"],"names":[],"mappings":"AAAA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;EACX,eAAe;AACjB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;EACtB,mBAAmB;EACnB,iBAAiB;AACnB;AACA;EACE,sBAAsB;EACtB,mBAAmB;AACrB;AACA;EACE,sBAAsB;AACxB;AACA;EACE,sBAAsB;EACtB,eAAe;AACjB;AACA;EACE,uBAAuB;EACvB,kBAAkB;AACpB;AACA;EACE,uBAAuB;EACvB,kBAAkB;AACpB;AACA;EACE,uBAAuB;EACvB,kBAAkB;AACpB;AACA;EACE,uBAAuB;EACvB,eAAe;AACjB;AACA;EACE,uBAAuB;EACvB,kBAAkB;AACpB;ACCA;EDCE,uBAAuB;ECCzB,kBAAA;AACA;ADCA;ECCA,uBAAA;EACA,kBAAA;ADCA;AACA;EACE,uBAAuB;EACvB,kBAAkB;AACpB;AACA;EACE,uBAAuB;EACvB,kBAAkB;AACpB;AACA;EACE,aAAa;EACb,kBAAkB;EAClB,oBAAoB;EACpB,mBAAmB;EACnB,qBAAqB;EACrB,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;EAClB,sBAAsB;EACtB,mBAAmB;EACnB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,QAAQ;EACR,SAAS;EACT,YAAY;EACZ,iBAAiB;EACjB,kBAAkB;EAClB,sBAAsB;EACtB,mBAAmB;AACrB","file":"Conn.vue","sourcesContent":[".theme-prac {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-icon {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 1.3rem;\n}\n.theme-prin-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n  font-size: 2rem;\n}\n.theme-comp-conn {\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.theme-comp-desc {\n  background-color: #333;\n}\n.theme-prac-dirs {\n  background-color: #333;\n  border-radius: 36px;\n  font-size: 3.9rem;\n}\n.theme-prac-conn {\n  background-color: #333;\n  border-radius: 36px;\n}\n.theme-prac-desc {\n  background-color: #333;\n}\n.theme-disp-desc {\n  background-color: #333;\n  font-size: 2rem;\n}\n.theme-logo {\n  background-color: black;\n  font-size: 1.5vmin;\n}\n.theme-menu {\n  background-color: black;\n  font-size: 1.5vmin;\n}\n.theme-find {\n  background-color: black;\n  font-size: 1.5vmin;\n}\n.theme-tocs {\n  background-color: black;\n  font-size: 2rem;\n}\n.theme-view {\n  background-color: black;\n  font-size: 1.5vmin;\n}\n.theme-side {\n  background-color: black;\n  font-size: 1.5vmin;\n}\n.theme-pref {\n  background-color: black;\n  font-size: 1.5vmin;\n}\n.theme-foot {\n  background-color: black;\n  font-size: 1.5vmin;\n}\n.theme-trak {\n  background-color: black;\n  font-size: 1.5vmin;\n}\n.conn-comp {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  font-size: 5.5rem;\n  text-align: center;\n  background-color: #333;\n  border-radius: 36px;\n  width: 90%;\n  height: 90%;\n}\n.conn-prac {\n  position: absolute;\n  left: 0;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  color: wheat;\n  font-size: 5.5rem;\n  text-align: center;\n  background-color: #333;\n  border-radius: 36px;\n}\n","\n<template>\n  <div :class=\"clConn()\" @click=\"doPrac(pracObj.name)\" :ref=\"pracObj.name\" ></div>\n</template>\n\n<script type=\"module\">\n  \n  import Connect from '../../pub/ikw/conn/Connect.js';\n\n  let Conn = {\n\n    props: { pracObj:Object, level:String },\n\n    data() {\n      return { connect:null, size:null }; },\n    \n    watch: {\n      pracObj() {\n        this.onPrac(); } },\n    \n    methods: {\n\n      onNav:  function (obj) {\n        if( ( obj.route==='Comp' || obj.route==='Prac' ) && this.isDef(obj.pageKey) && obj.pageKey==='Conn' ) {\n          this.onPrac(); } },\n      \n      onPrac: function() {\n        if( this.isDef(this.connect) ) {\n            this.connect.clearSvg(); }\n        this.createConnect( this.stream(), this.pracObj ); },\n      \n      doPrac: function (pracKey) {\n        this.nav().pub( { pracKey:pracKey } ); },\n      \n      clConn: function() {\n        return this.nav().route === 'Comp' ? 'conn-comp' : 'conn-prac'; },\n      \n      createConnect: function( stream, pracObj ) {\n        this.$nextTick( function() {\n          let elem = this.$refs[this.pracObj.name] // this.getElem( this.$refs, this.pracObj.name );\n          if( this.hasElem(elem) ) {\n            this.connect = new Connect( stream, this.batch(), pracObj, elem, this.level );\n            if( this.level==='Prac') {\n              window.addEventListener(   'resize', this.resize ) } }\n          else {\n            console.log( 'Conn.createConnect()',\n              { name:this.pracObj.name, has:this.hasElem(elem), elem:elem } ); } } ) },\n      \n      resize: function() {\n        this.$nextTick( function() {\n          if( this.isDef(this.connect) ) {\n              this.connect.resize();  } } ); }\n    },\n    \n    mounted: function () {\n      this.onPrac(); },\n    //this.subscribe( 'Nav', 'Conn.vue', (obj) => {\n    //    this.onNav(obj); } );\n    \n    // created: function () {\n    //  window.addEventListener(   'resize', this.resize ) },\n    destroyed: function () {\n      window.removeEventListener('resize', this.resize ) }\n      \n   }\n\n  export default Conn;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  .conn-comp { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;\n    color:@theme-color; font-size:@theme-icon-size; text-align:center; .theme-comp-conn(); }\n\n  .conn-prac { position:absolute; left:0; top:0; right:0; bottom:0;\n    color:@theme-color; font-size:@theme-icon-size; text-align:center; .theme-prac-conn(); }\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */

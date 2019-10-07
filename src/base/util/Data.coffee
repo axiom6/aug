@@ -33,6 +33,24 @@ class Data
               base['name']     = bkey if not base['name']?
     data
 
+  # Merges principles and innovations into comp practices
+  @mergePracs = ( batch, srcKey, comps ) ->
+    srcs = batch[srcKey].data.pracs
+    for comp in comps
+      for own   key, src of srcs
+        batch[comp].data.pracs[key] = src
+    return
+
+  # Build a new Innovative Plane
+  @buildInnov = ( batch, innv, comp ) ->
+    innvs = batch[innv].data
+    pracs = batch[comp].data
+    for key in ['Team','Discover','Adapt','Benefit','Change','Govern']
+      innvs[key] = pracs[key]
+      innvs[key].plane = innv
+    Data.refine( innvs, 'Pack' )
+    return
+
   # ---- Read JSON with batch async
 
   @batchRead:( batch, callback, create=null ) ->

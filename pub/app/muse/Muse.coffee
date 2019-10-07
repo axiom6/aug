@@ -43,8 +43,9 @@ class Muse
     Muse.nav    = new Nav(   Muse.stream, batch, Muse.komps )
     Muse.build  = new Build( batch )
     #use.cache  = new Cache( Muse.stream )
-    Muse.mergePracsPrin()
-    #ain.build.logByColumn()
+    Data.buildInnov( batch, 'Data', 'Info' )
+    Data.mergePracs( batch, 'Prin', ['Info','Know','Wise','Data'] )
+    Muse.mergeCols()
     Muse.vue()
     return
 
@@ -86,15 +87,12 @@ class Muse
     Know:{ title:'Know', key:'Know', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-university",
     west:"Info", north:"Info", prev:"Info", east:"Wise", south:"Wise", next:"Wise" }
     Wise:{ title:'Wise', key:'Wise', route:'Comp', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor",
-    west:"Know", north:"Know", prev:"Know", east:"Home", south:"Home", next:"Home" } }
+    west:"Know", north:"Know", prev:"Know", east:"Data", south:"Data", next:"Data" }
+    Data:{ title:'Data', key:'Data', route:'Comp', pracs:{}, ikw:true,  icon:"fab fa-table",
+    west:"Wise", north:"Wise", prev:"Wise", east:"Home", south:"Home", next:"Home" } }
 
-  # Merges principles into practices
-  Muse.mergePracsPrin = () ->
-    cols = Muse.Batch['Prin'].data.pracs
-    for comp in ['Info','Know','Wise']
-      prcs = Muse.Batch[comp].data.pracs
-      for own  key, col of cols
-        prcs[key] = col
+  # Merges principles and innovations into comp practices
+  Muse.mergeCols = ( ) ->
     Muse.build.dimDisps() # Add disps to every dim - dimension
     Muse.build.colPracs() # Add pracs to every col
     return

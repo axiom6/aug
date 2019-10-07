@@ -72,6 +72,34 @@ Data = class Data {
     return data;
   }
 
+  // Merges principles and innovations into comp practices
+  static mergePracs(batch, srcKey, comps) {
+    var comp, i, key, len, src, srcs;
+    srcs = batch[srcKey].data.pracs;
+    for (i = 0, len = comps.length; i < len; i++) {
+      comp = comps[i];
+      for (key in srcs) {
+        if (!hasProp.call(srcs, key)) continue;
+        src = srcs[key];
+        batch[comp].data.pracs[key] = src;
+      }
+    }
+  }
+
+  // Build a new Innovative Plane
+  static buildInnov(batch, innv, comp) {
+    var i, innvs, key, len, pracs, ref;
+    innvs = batch[innv].data;
+    pracs = batch[comp].data;
+    ref = ['Team', 'Discover', 'Adapt', 'Benefit', 'Change', 'Govern'];
+    for (i = 0, len = ref.length; i < len; i++) {
+      key = ref[i];
+      innvs[key] = pracs[key];
+      innvs[key].plane = innv;
+    }
+    Data.refine(innvs, 'Pack');
+  }
+
   // ---- Read JSON with batch async
   static batchRead(batch, callback, create = null) {
     var key, obj;

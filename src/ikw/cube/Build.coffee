@@ -258,9 +258,9 @@ class Build
   getCol:( cname ) ->
     @batch.Prin.data[cname]
 
-  logPlanes:() ->
+  logPlanes:( planes ) ->
     console.log( '----- Beg Log Planes  ------' )
-    for keyPlane in ['Info','Know','Wise']
+    for keyPlane in planes
       console.log( "Plane: ",    keyPlane )
       practices = @getPractices( keyPlane )
       for own keyPractice, objPractice of practices when Util.isChild(keyPractice)
@@ -276,18 +276,15 @@ class Build
     console.log( '----- End Log Planes ------' )
     return
 
-  logBatch:( batch ) ->
+  logBatch:( batch, comps ) ->  # ['Info','Know','Wise']
     console.log( '----- Beg Log Batch  ------' )
-    for batKey in ['Info','Know','Wise']
-      console.log( "Batch File: ", batKey )
-      batObj = batch[batKey].data
-      for packKey in ['Info','Know','Wise','Prin','Rows']
-        packObj = batObj[packKey]
-        console.log( "  Pack: ", packKey, packObj )
-        for own keyPractice, objPractice of packObj when Util.isChild(keyPractice)
-          console.log( "    Practice: ", keyPractice )
-          for own keyStudy, objStudy of objPractice when Util.isChild(keyStudy)
-            console.log( "      Study: ", keyStudy )
+    for comp in comps
+      console.log( "Comp: ", comp )
+      pracs = batch[comp].data
+      for own keyPractice, objPractice of pracs when Util.isChild(keyPractice)
+        console.log( "    Prac: ", keyPractice )
+        for own keyStudy, objStudy of objPractice when Util.isChild(keyStudy)
+          console.log( "      Disp: ", keyStudy )
     console.log( '----- End Log Batch ------' )
     return
 
@@ -313,7 +310,7 @@ class Build
         dim  = @getDim(col,dir)
         dim.dims = []
         idx       = 0
-        for plane in ['Info', 'Know', 'Wise' ]
+        for plane in ['Info', 'Know', 'Wise', 'Data' ]
           for row in ['Learn','Do',   'Share']
             prac = @getPractice( row, col, plane )
             disp = @getDir( prac, dir )
@@ -326,7 +323,7 @@ class Build
       col = @getCol(cname)
       col.dims = []
       idx      = 0
-      for plane in ['Info', 'Know', 'Wise' ]
+      for plane in ['Info', 'Know', 'Wise', 'Data' ]
         for row in ['Learn','Do',   'Share']
           prac = @getPractice( row, cname, plane )
           prac.klass = Build.ddClasses[idx++]

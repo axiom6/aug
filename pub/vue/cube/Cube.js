@@ -1068,6 +1068,34 @@ Data = class Data {
     return data;
   }
 
+  // Merges principles and innovations into comp practices
+  static mergePracs(batch, srcKey, comps) {
+    var comp, i, key, len, src, srcs;
+    srcs = batch[srcKey].data.pracs;
+    for (i = 0, len = comps.length; i < len; i++) {
+      comp = comps[i];
+      for (key in srcs) {
+        if (!hasProp$1.call(srcs, key)) continue;
+        src = srcs[key];
+        batch[comp].data.pracs[key] = src;
+      }
+    }
+  }
+
+  // Build a new Innovative Plane
+  static buildInnov(batch, innv, comp) {
+    var i, innvs, key, len, pracs, ref;
+    innvs = batch[innv].data;
+    pracs = batch[comp].data;
+    ref = ['Team', 'Discover', 'Adapt', 'Benefit', 'Change', 'Govern'];
+    for (i = 0, len = ref.length; i < len; i++) {
+      key = ref[i];
+      innvs[key] = pracs[key];
+      innvs[key].plane = innv;
+    }
+    Data.refine(innvs, 'Pack');
+  }
+
   // ---- Read JSON with batch async
   static batchRead(batch, callback, create = null) {
     var key, obj;
@@ -1698,12 +1726,11 @@ Build = class Build {
     return this.batch.Prin.data[cname];
   }
 
-  logPlanes() {
-    var i, keyBase, keyItem, keyPlane, keyPractice, keyStudy, keyTopic, len, objBase, objItem, objPractice, objStudy, objTopic, practices, ref;
+  logPlanes(planes) {
+    var i, keyBase, keyItem, keyPlane, keyPractice, keyStudy, keyTopic, len, objBase, objItem, objPractice, objStudy, objTopic, practices;
     console.log('----- Beg Log Planes  ------');
-    ref = ['Info', 'Know', 'Wise'];
-    for (i = 0, len = ref.length; i < len; i++) {
-      keyPlane = ref[i];
+    for (i = 0, len = planes.length; i < len; i++) {
+      keyPlane = planes[i];
       console.log("Plane: ", keyPlane);
       practices = this.getPractices(keyPlane);
       for (keyPractice in practices) {
@@ -1749,32 +1776,25 @@ Build = class Build {
     console.log('----- End Log Planes ------');
   }
 
-  logBatch(batch) {
-    var batKey, batObj, i, j, keyPractice, keyStudy, len, len1, objPractice, objStudy, packKey, packObj, ref, ref1;
+  logBatch(batch, comps) { // ['Info','Know','Wise']
+    var comp, i, keyPractice, keyStudy, len, objPractice, objStudy, pracs;
     console.log('----- Beg Log Batch  ------');
-    ref = ['Info', 'Know', 'Wise'];
-    for (i = 0, len = ref.length; i < len; i++) {
-      batKey = ref[i];
-      console.log("Batch File: ", batKey);
-      batObj = batch[batKey].data;
-      ref1 = ['Info', 'Know', 'Wise', 'Prin', 'Rows'];
-      for (j = 0, len1 = ref1.length; j < len1; j++) {
-        packKey = ref1[j];
-        packObj = batObj[packKey];
-        console.log("  Pack: ", packKey, packObj);
-        for (keyPractice in packObj) {
-          if (!hasProp$2.call(packObj, keyPractice)) continue;
-          objPractice = packObj[keyPractice];
-          if (!(Util$1.isChild(keyPractice))) {
-            continue;
-          }
-          console.log("    Practice: ", keyPractice);
-          for (keyStudy in objPractice) {
-            if (!hasProp$2.call(objPractice, keyStudy)) continue;
-            objStudy = objPractice[keyStudy];
-            if (Util$1.isChild(keyStudy)) {
-              console.log("      Study: ", keyStudy);
-            }
+    for (i = 0, len = comps.length; i < len; i++) {
+      comp = comps[i];
+      console.log("Comp: ", comp);
+      pracs = batch[comp].data;
+      for (keyPractice in pracs) {
+        if (!hasProp$2.call(pracs, keyPractice)) continue;
+        objPractice = pracs[keyPractice];
+        if (!(Util$1.isChild(keyPractice))) {
+          continue;
+        }
+        console.log("    Prac: ", keyPractice);
+        for (keyStudy in objPractice) {
+          if (!hasProp$2.call(objPractice, keyStudy)) continue;
+          objStudy = objPractice[keyStudy];
+          if (Util$1.isChild(keyStudy)) {
+            console.log("      Disp: ", keyStudy);
           }
         }
       }
@@ -1819,7 +1839,7 @@ Build = class Build {
         dim = this.getDim(col, dir);
         dim.dims = [];
         idx = 0;
-        ref2 = ['Info', 'Know', 'Wise'];
+        ref2 = ['Info', 'Know', 'Wise', 'Data'];
         for (k = 0, len2 = ref2.length; k < len2; k++) {
           plane = ref2[k];
           ref3 = ['Learn', 'Do', 'Share'];
@@ -1843,7 +1863,7 @@ Build = class Build {
       col = this.getCol(cname);
       col.dims = [];
       idx = 0;
-      ref1 = ['Info', 'Know', 'Wise'];
+      ref1 = ['Info', 'Know', 'Wise', 'Data'];
       for (j = 0, len1 = ref1.length; j < len1; j++) {
         plane = ref1[j];
         ref2 = ['Learn', 'Do', 'Share'];
@@ -1964,6 +1984,10 @@ var FontAwe;
 FontAwe = {};
 
 FontAwe.icons = {
+  "fab fa-mendeley": "\uf7b3",
+  "fas fa-drafting-compass": "\uf568",
+  "fas fa-users-cog": "\uf509",
+  "fab fa-centos": "\uf789",
   "fas fa-yin-yang": "\uf6ad",
   "fab fa-pagelines": "\uf18c",
   "fas fa-network-wired": "\uf6ff",

@@ -1,0 +1,73 @@
+{
+  "Deep":           { "title":"Deep Learning",
+    "Convolution":  { "title":"Convolutional Neural Networks",   "ab":"CNN",
+      "DCNN": {}
+    },
+    "Recurrent":    { "title":"Recurrent Neural Networks",       "ab":"RNN",
+      "LSM":  {},
+      "LTSM": {},
+      "GRU":  {}
+    },
+    "Generative":   { "title":"Generative Adversarial Networks", "ab":"GAN" },
+    "Autoencoders": { "title":"Autoencoders",                    "ab":"AEN",
+      "Seq2Seq": {}
+    }
+  },
+  "Unsupervised":  { "title":"Unsupervised Learning",
+    "Associate":   { "title":"Association Rule Learning",
+      "FPGrowth": {},
+      "Euciat":   {},
+      "Apriori":  {}
+    },
+    "Dimension": { "title":"Dimensionality Reduction",
+      "tSNE": {},
+      "PCA":  {},
+      "LSA":  {},
+      "SVD":  {},
+      "LDA":  {}
+    },
+    "Cluster": { "title":"Clustering",
+      "KMeans":         {},
+      "DBSCAN":         {},
+      "Agglocmetative": {},
+      "MeanShift":      {},
+      "FuzzyCMeans":    {}
+    }
+  },
+  "Supervised": { "title":"Supervised Learning",
+    "Regress":      { "title":"Regression",
+      "Linear":     {},
+      "Polynomial": {},
+      "RidgeLasso": {}
+    },
+    "Classify":    { "title":"Classification",
+      "Logistic":      { "title":"Logistic Regression"},
+      "SVM":           {},
+      "NaiveBayes":    {},
+      "DecisionTrees": {},
+      "K-NN":          {}
+    }
+
+  },
+  "Ensemble":      { "title":"Ensemble Learning",
+    "Stacking":    { "title":"Stacking" },
+    "Bagging":     { "title":"Bagging"  },
+    "Boosting":    { "title":"Boosting",
+      "XGBoost":   {},
+      "LightGBM":  {},
+      "CatBoost":  {},
+      "AdaBoost":  {}
+    }
+
+  },
+  "Reinforcement":  {  "title":"Reinforcement Learning",
+    "Learning":     {
+      "Q-Learning": {},
+      "DON":        {},
+      "SARSA":      {},
+      "Genetic":    { "title":"Genetic Algorithm"},
+      "A3C":        {}
+    },
+    "Simulate": {}
+  }
+}

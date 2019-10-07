@@ -3,6 +3,7 @@ var FontAwe;
 FontAwe = {};
 
 FontAwe.icons = {
+  "fas fa-refresh": "\uf021",
   "fab fa-mendeley": "\uf7b3",
   "fas fa-drafting-compass": "\uf568",
   "fas fa-users-cog": "\uf509",

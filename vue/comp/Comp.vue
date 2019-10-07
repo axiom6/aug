@@ -42,9 +42,10 @@
         Do:{    name:'Do',          dir:'do', icon:"fas fas fa-cog" },
         Share:{ name:'Share',       dir:'sh', icon:"fas fa-share-alt-square" } },
       planes: {
-        Info:{ name:'Information', dir:'cm', icon:"fas fas fa-th" },
-        Know:{ name:'Knowledge',   dir:'cm', icon:"fas fas fa-university"  },
-        Wise:{ name:'Wisdom',      dir:'cm', icon:"fas fas fa-tripadvisor" } } } },
+        Info:{ name:'Information',  dir:'cm', icon:"fas fas fa-th" },
+        Know:{ name:'Knowledge',    dir:'cm', icon:"fas fas fa-university"  },
+        Wise:{ name:'Wisdom',       dir:'cm', icon:"fas fas fa-tripadvisor" },
+        Data:{ name:'Data Science', dir:'cm', icon:"fas fas fa-table" } } } },
     
     methods: {
       onRows: function (compKey) {

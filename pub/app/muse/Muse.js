@@ -1,5 +1,4 @@
-var Muse,
-  hasProp = {}.hasOwnProperty;
+var Muse;
 
 import Data from '../../base/util/Data.js';
 
@@ -39,8 +38,9 @@ Muse = (function() {
       Muse.nav = new Nav(Muse.stream, batch, Muse.komps);
       Muse.build = new Build(batch);
       //use.cache  = new Cache( Muse.stream )
-      Muse.mergePracsPrin();
-      //ain.build.logByColumn()
+      Data.buildInnov(batch, 'Data', 'Info');
+      Data.mergePracs(batch, 'Prin', ['Info', 'Know', 'Wise', 'Data']);
+      Muse.mergeCols();
       Muse.vue();
     }
 
@@ -116,19 +116,7 @@ Muse = (function() {
       });
     }
 
-    static mergePracsPrin() {
-      var col, cols, comp, i, key, len, prcs, ref;
-      cols = Muse.Batch['Prin'].data.pracs;
-      ref = ['Info', 'Know', 'Wise'];
-      for (i = 0, len = ref.length; i < len; i++) {
-        comp = ref[i];
-        prcs = Muse.Batch[comp].data.pracs;
-        for (key in cols) {
-          if (!hasProp.call(cols, key)) continue;
-          col = cols[key];
-          prcs[key] = col;
-        }
-      }
+    static mergeCols() {
       Muse.build.dimDisps(); // Add disps to every dim - dimension
       Muse.build.colPracs(); // Add pracs to every col
     }
@@ -246,6 +234,20 @@ Muse = (function() {
       west: "Know",
       north: "Know",
       prev: "Know",
+      east: "Data",
+      south: "Data",
+      next: "Data"
+    },
+    Data: {
+      title: 'Data',
+      key: 'Data',
+      route: 'Comp',
+      pracs: {},
+      ikw: true,
+      icon: "fab fa-table",
+      west: "Wise",
+      north: "Wise",
+      prev: "Wise",
       east: "Home",
       south: "Home",
       next: "Home"
