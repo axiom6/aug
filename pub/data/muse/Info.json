@@ -160,7 +160,7 @@
       "Diagnose":   { "icon":"fas fa-stethoscope",      "desc":""  },
       "Evaluate":   { "icon":"fas fa-balance-scale",    "desc":""  },
       "Recreate":   { "icon":"fas fa-universal-access", "desc":""  } },
-    "Harness":        { "dir":"east","icon":"fas fa-stethoscope","hsv":[30,60,90],
+    "Leverage":   { "dir":"east","icon":"fas fa-stethoscope","hsv":[30,60,90],
       "desc":"Quality, defect and risk measures at many levels and types",
       "Unit":        { "icon":"fas fa-microscope", "desc":""  },
       "Module":      { "icon":"fas fa-cube",       "desc":""    },

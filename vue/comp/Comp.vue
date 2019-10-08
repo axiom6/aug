@@ -33,9 +33,10 @@
     data() { return {
       compObj:null, pracObj:null, myRows:null,
       pages:{
-        Icon: { title:'Practices',   key:'Icon', show:true  },
-        Dirs: { title:'Disciplines', key:'Dirs', show:false },
-        Conn: { title:'Connections', key:'Conn', show:false } },
+        Icon: { title:'Practices',    key:'Icon', show:true  },
+        Dirs: { title:'Disciplines',  key:'Dirs', show:false },
+        Conn: { title:'Connections',  key:'Conn', show:false },
+        Data: { title:'Data Science', key:'Data', show:false } },
       rows: {
         Plane:{ name:'Information', dir:'cm', icon:"fas fas fa-th" },
         Learn:{ name:'Learn',       dir:'le', icon:"fas fa-graduation-cap" },
@@ -52,17 +53,19 @@
          this.myRows          = this.rows;
          this.myRows['Plane'] = this.planes[compKey]; },
       onComp: function (compKey) {
-        // console.log( 'Comp.onComp()', compKey );
         this.compObj = this.compObject(compKey);
         this.onRows(compKey); },
-      doPage: function( tabsKey ) {
-        this.nav().setPageKey( 'Comp', tabsKey ); },
+      doPage: function( pageKey ) {
+        this.nav().setPageKey( 'Comp', pageKey ); },
       isRows: function () {
         return true; },
       onNav:  function (obj) {
         if( this.nav().isMyNav( obj, 'Comp' ) ) {
-            this.onComp( obj.compKey );
-            this.doPage( this.nav().getPageKey('Comp','Icon') ); } }
+          let compKey = obj.pageKey==='Data' ? 'Data'      : obj.compKey;
+          let pageKey = obj.pageKey==='Data' ? obj.prevKey : this.nav().getPageKey('Comp','Icon');
+          // console.log( 'Comp.onNav()', { prevKey:obj.prevKey, compKey:compKey, pageKey:pageKey, obj:obj } );
+          this.onComp( compKey );
+          this.doPage( pageKey ); } }
       },
 
     beforeMount: function() {

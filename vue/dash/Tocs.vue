@@ -30,7 +30,8 @@
     methods: {
       doComp: function(compKey) {
         this.compKey = compKey;
-        let route    = this.komps[compKey].route;
+        let  kompKey = compKey==='Data' ? 'Info' : compKey;
+        let  route   = this.komps[kompKey].route;
         this.pub( { route:route, compKey:compKey, source:'Toc' } ); },
       doPrac: function(pracKey) {
         this.pracKey = pracKey;

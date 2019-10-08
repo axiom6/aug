@@ -14,27 +14,20 @@ class Nav
     @dispKey  =  'None'
     @dispObj  =   null
     @pageKey  =  'None' # Used to maintain continuity through dir tranvesals with Prac
+    @prevKey  =  'None' # Only changed by Tabs
     @pages    =  {}
     @dirTabs  = false
     @keyEvents()
 
   pub:( msg ) ->
-    reset = @resetRoute( msg )
+    lastRoute = @route
     @set( msg )
-    obj = { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey, pageKey:@pageKey }
+    obj = { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey, pageKey:@pageKey, prevKey:@prevKey }
     obj.source = if msg.source? then msg.source else 'None'
     console.log('Nav.pub()', obj )
     @stream.publish( 'Nav',  obj )
-    @doRoute( reset.route ) if reset.changed
+    @doRoute( msg.route ) if lastRoute isnt msg.route
     return
-    
-  resetRoute:( msg ) ->
-    reset         = {}
-    reset.route   = if msg['poute']? then msg['poute'] else if msg.route? then msg.route else @route
-    reset.changed = ( msg.route? and msg.route isnt @route ) or msg['poute']?
-    # console.log( 'Nav.resetRoute()', { msg:msg, prev:@route, next:reset.route, changed:reset.changed })
-    @route        = if msg.route? then msg.route else @route
-    reset
 
   doRoute:( route ) ->
     # console.log( 'Nav.doRoute()', route )
@@ -42,6 +35,7 @@ class Nav
        @$router.push( { name:route } )
     else
        console.error( 'Nav.doRoute() $router not set' )
+    @route = route
     return
 
   set:( obj ) ->

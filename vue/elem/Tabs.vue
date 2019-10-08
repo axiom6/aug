@@ -13,23 +13,22 @@
 
     props: { route:String, pages:Object },
     
-    data() { return { tabsKey:'None', pageKey:'None', pageObj:null } },
+    data() { return { tabsKey:'None', pageKey:'None', prevKey:'None', pageObj:null } },
     
     methods: {
       onPage: function (tabsKey) {
         if( tabsKey !== 'None') {
+          this.prevKey = this.pageKey;
           this.pageKey = tabsKey; } },
       doPage: function (pageKey) {
         this.nav().dirTabs = this.app() !== 'Muse';
-        if( pageKey !== 'None') {
+        if(   pageKey!=='None' ) {
           this.onPage( pageKey );
           this.nav().setPageKey( this.route, pageKey );
           this.nav().pub( this.pubObj(pageKey) ); } },
       pubObj: function (pageKey) {
-        let obj   = { source:'Tabs', route:this.route, pageKey:pageKey }
-        let poute = this.pages[pageKey].route;
-        if( this.isDef(poute) ) {
-            obj.poute = poute; }
+        let obj = { source:'Tabs', route:this.route, pageKey:pageKey, prevKey:this.prevKey };
+        if( pageKey==='Data' ) { obj.compKey = 'Data'; }
         return obj; },
       classTab: function (pageKey) {
         return this.pageKey===pageKey ? 'tab-active' : 'tab'; } },

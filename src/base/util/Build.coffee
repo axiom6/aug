@@ -156,12 +156,11 @@ class Build
 
   prev:(   plane ) ->
     switch plane
-      when 'Home' then 'Data'
+      when 'Home' then 'Wise'
       when 'Prin' then 'Home'
       when 'Info' then 'Prin'
       when 'Know' then 'Info'
       when 'Wise' then 'Know'
-      when 'Data' then 'Wise'
       else
         console.error( 'Build.prev() unknown plane', plane )
         'Prin'
@@ -172,8 +171,7 @@ class Build
       when 'Prin' then 'Info'
       when 'Info' then 'Know'
       when 'Know' then 'Wise'
-      when 'Wise' then 'Data'
-      when 'Data' then 'Home'
+      when 'Wise' then 'Home'
       else
         console.error( 'Build.next() unknown plane', plane )
         'Prin'
@@ -310,17 +308,17 @@ class Build
 
   dimDisps:() ->
     for col in ['Embrace','Innovate','Encourage']
-      planes = if col is 'Innovate' then ['Info','Data','Know','Wise'] else ['Info','Know','Wise']
+      planes = if col is  'Innovate' then ['Info','Data','Know','Wise'] else ['Info','Know','Wise']
       for dir in ['west','north','east','south']
         dim  = @getDim(col,dir)
         dim.column = col
         dim.dims = []
         for plane in planes
+          dim.dims.push( { name:plane, icon:"fas fa-circle", klass:@dimKlass('Plane',plane) } )
           for row in ['Learn','Do',   'Share']
             prac = @getPractice( row, col, plane )
             disp = @getDir( prac, dir )
             disp.klass  = @dimKlass( row, plane )
-
             dim.dims.push(disp)
     return
 
@@ -329,11 +327,12 @@ class Build
 
   colPracs:() ->
     for cname in ['Embrace','Innovate','Encourage']
-      planes = if cname is 'Innovate' then ['Info','Data','Know','Wise'] else ['Info','Know','Wise']
+      planes = if cname is  'Innovate' then ['Info','Data','Know','Wise'] else ['Info','Know','Wise']
       col = @getCol(cname)
       col.dims = []
       for plane in planes
-        for row in ['Learn','Do',   'Share']
+        col.dims.push( { name:plane, icon:"fas fa-circle", klass:@dimKlass('Plane',plane) } )
+        for row in ['Learn','Do','Share']
           prac = @getPractice( row, cname, plane )
           prac.klass = @dimKlass( row, plane )
           col.dims.push(prac)

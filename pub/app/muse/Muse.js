@@ -234,20 +234,6 @@ Muse = (function() {
       west: "Know",
       north: "Know",
       prev: "Know",
-      east: "Data",
-      south: "Data",
-      next: "Data"
-    },
-    Data: {
-      title: 'Data',
-      key: 'Data',
-      route: 'Comp',
-      pracs: {},
-      ikw: true,
-      icon: "fab fa-table",
-      west: "Wise",
-      north: "Wise",
-      prev: "Wise",
       east: "Home",
       south: "Home",
       next: "Home"

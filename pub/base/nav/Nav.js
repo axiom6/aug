@@ -20,14 +20,15 @@ Nav = class Nav {
     this.dispKey = 'None';
     this.dispObj = null;
     this.pageKey = 'None'; // Used to maintain continuity through dir tranvesals with Prac
+    this.prevKey = 'None'; // Only changed by Tabs
     this.pages = {};
     this.dirTabs = false;
     this.keyEvents();
   }
 
   pub(msg) {
-    var obj, reset;
-    reset = this.resetRoute(msg);
+    var lastRoute, obj;
+    lastRoute = this.route;
     this.set(msg);
     obj = {
       source: this.source,
@@ -35,24 +36,15 @@ Nav = class Nav {
       compKey: this.compKey,
       pracKey: this.pracKey,
       dispKey: this.dispKey,
-      pageKey: this.pageKey
+      pageKey: this.pageKey,
+      prevKey: this.prevKey
     };
     obj.source = msg.source != null ? msg.source : 'None';
     console.log('Nav.pub()', obj);
     this.stream.publish('Nav', obj);
-    if (reset.changed) {
-      this.doRoute(reset.route);
+    if (lastRoute !== msg.route) {
+      this.doRoute(msg.route);
     }
-  }
-
-  resetRoute(msg) {
-    var reset;
-    reset = {};
-    reset.route = msg['poute'] != null ? msg['poute'] : msg.route != null ? msg.route : this.route;
-    reset.changed = ((msg.route != null) && msg.route !== this.route) || (msg['poute'] != null);
-    // console.log( 'Nav.resetRoute()', { msg:msg, prev:@route, next:reset.route, changed:reset.changed })
-    this.route = msg.route != null ? msg.route : this.route;
-    return reset;
   }
 
   doRoute(route) {
@@ -64,6 +56,7 @@ Nav = class Nav {
     } else {
       console.error('Nav.doRoute() $router not set');
     }
+    this.route = route;
   }
 
   set(obj) {

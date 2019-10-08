@@ -87,9 +87,7 @@ class Muse
     Know:{ title:'Know', key:'Know', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-university",
     west:"Info", north:"Info", prev:"Info", east:"Wise", south:"Wise", next:"Wise" }
     Wise:{ title:'Wise', key:'Wise', route:'Comp', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor",
-    west:"Know", north:"Know", prev:"Know", east:"Data", south:"Data", next:"Data" }
-    Data:{ title:'Data', key:'Data', route:'Comp', pracs:{}, ikw:true,  icon:"fab fa-table",
-    west:"Wise", north:"Wise", prev:"Wise", east:"Home", south:"Home", next:"Home" } }
+    west:"Know", north:"Know", prev:"Know", east:"Home", south:"Home", next:"Home" }  }
 
   # Merges principles and innovations into comp practices
   Muse.mergeCols = ( ) ->
