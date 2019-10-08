@@ -1,6 +1,6 @@
 
 import {match} from '../../base/util/Match.js'
-import Latex   from '../../base/util/Latex.js'
+import Latex   from '../../draw/base/Latex.js'
 import A       from '../adt/Adt.js'
 import Ptn     from '../adt/Ptn.js'
 

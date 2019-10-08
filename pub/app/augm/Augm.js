@@ -4,7 +4,7 @@ import Data from '../../base/util/Data.js';
 
 import Stream from '../../base/util/Stream.js';
 
-import Nav from '../../base/util/Nav.js';
+import Nav from '../../base/nav/Nav.js';
 
 import Mixin from '../../base/vue/Mixin.js';
 

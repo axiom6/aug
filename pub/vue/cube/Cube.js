@@ -1539,14 +1539,18 @@ Build = class Build {
 
   prev(plane) {
     switch (plane) {
+      case 'Home':
+        return 'Data';
       case 'Prin':
-        return 'Prin';
+        return 'Home';
       case 'Info':
-        return 'Wise';
+        return 'Prin';
       case 'Know':
         return 'Info';
       case 'Wise':
         return 'Know';
+      case 'Data':
+        return 'Wise';
       default:
         console.error('Build.prev() unknown plane', plane);
         return 'Prin';
@@ -1555,14 +1559,18 @@ Build = class Build {
 
   next(plane) {
     switch (plane) {
-      case 'Prin':
+      case 'Home':
         return 'Prin';
+      case 'Prin':
+        return 'Info';
       case 'Info':
         return 'Know';
       case 'Know':
         return 'Wise';
       case 'Wise':
-        return 'Info';
+        return 'Data';
+      case 'Data':
+        return 'Home';
       default:
         console.error('Build.next() unknown plane', plane);
         return 'Prin';
@@ -1829,25 +1837,25 @@ Build = class Build {
   }
 
   dimDisps() {
-    var col, dim, dir, disp, i, idx, j, k, l, len, len1, len2, len3, plane, prac, ref, ref1, ref2, ref3, row;
+    var col, dim, dir, disp, i, j, k, l, len, len1, len2, len3, plane, planes, prac, ref, ref1, ref2, row;
     ref = ['Embrace', 'Innovate', 'Encourage'];
     for (i = 0, len = ref.length; i < len; i++) {
       col = ref[i];
+      planes = col === 'Innovate' ? ['Info', 'Data', 'Know', 'Wise'] : ['Info', 'Know', 'Wise'];
       ref1 = ['west', 'north', 'east', 'south'];
       for (j = 0, len1 = ref1.length; j < len1; j++) {
         dir = ref1[j];
         dim = this.getDim(col, dir);
+        dim.column = col;
         dim.dims = [];
-        idx = 0;
-        ref2 = ['Info', 'Know', 'Wise', 'Data'];
-        for (k = 0, len2 = ref2.length; k < len2; k++) {
-          plane = ref2[k];
-          ref3 = ['Learn', 'Do', 'Share'];
-          for (l = 0, len3 = ref3.length; l < len3; l++) {
-            row = ref3[l];
+        for (k = 0, len2 = planes.length; k < len2; k++) {
+          plane = planes[k];
+          ref2 = ['Learn', 'Do', 'Share'];
+          for (l = 0, len3 = ref2.length; l < len3; l++) {
+            row = ref2[l];
             prac = this.getPractice(row, col, plane);
             disp = this.getDir(prac, dir);
-            disp.klass = Build.ddClasses[idx++];
+            disp.klass = this.dimKlass(row, plane);
             dim.dims.push(disp);
           }
         }
@@ -1855,22 +1863,25 @@ Build = class Build {
     }
   }
 
+  dimKlass(row, plane) {
+    return row.charAt(0).toLowerCase() + plane.charAt(0).toLowerCase();
+  }
+
   colPracs() {
-    var cname, col, i, idx, j, k, len, len1, len2, plane, prac, ref, ref1, ref2, row;
+    var cname, col, i, j, k, len, len1, len2, plane, planes, prac, ref, ref1, row;
     ref = ['Embrace', 'Innovate', 'Encourage'];
     for (i = 0, len = ref.length; i < len; i++) {
       cname = ref[i];
+      planes = cname === 'Innovate' ? ['Info', 'Data', 'Know', 'Wise'] : ['Info', 'Know', 'Wise'];
       col = this.getCol(cname);
       col.dims = [];
-      idx = 0;
-      ref1 = ['Info', 'Know', 'Wise', 'Data'];
-      for (j = 0, len1 = ref1.length; j < len1; j++) {
-        plane = ref1[j];
-        ref2 = ['Learn', 'Do', 'Share'];
-        for (k = 0, len2 = ref2.length; k < len2; k++) {
-          row = ref2[k];
+      for (j = 0, len1 = planes.length; j < len1; j++) {
+        plane = planes[j];
+        ref1 = ['Learn', 'Do', 'Share'];
+        for (k = 0, len2 = ref1.length; k < len2; k++) {
+          row = ref1[k];
           prac = this.getPractice(row, cname, plane);
-          prac.klass = Build.ddClasses[idx++];
+          prac.klass = this.dimKlass(row, plane);
           col.dims.push(prac);
         }
       }
@@ -1975,8 +1986,6 @@ Build = class Build {
 
 };
 
-Build.ddClasses = ['li', 'di', 'si', 'lk', 'dk', 'sk', 'lw', 'dw', 'sw'];
-
 var Build$1 = Build;
 
 var FontAwe;
@@ -1984,6 +1993,7 @@ var FontAwe;
 FontAwe = {};
 
 FontAwe.icons = {
+  "fas fa-refresh": "\uf021",
   "fab fa-mendeley": "\uf7b3",
   "fas fa-drafting-compass": "\uf568",
   "fas fa-users-cog": "\uf509",

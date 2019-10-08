@@ -172,21 +172,22 @@ Worker.cacheObjs = {
   FaSolidWoff2: { name:'FaSolidWoff2', status:0, url:'/pub/css/font/fontawesome/fa-solid-900.woff2' }
   FaBrandWoff2: { name:'FaBrandWoff2', status:0, url:'/pub/css/font/fontawesome/fa-brans-400.woff2' }
   FaInit:       { name:'FaInit',       status:0, url:'/pub/css/font/fontawesome/init.css' }
-  FontAweJS:    { name:'FontAweJS',    status:0, url:'/pub/base/util/FontAwe.js' }
-  Mixin:        { name:'Mixin',        status:0, url:'/pub/base/util/Mixin.js'   }
+  FontAweJS:    { name:'FontAweJS',    status:0, url:'/pub/base/draw/FontAwe.js' }
+  Mixin:        { name:'Mixin',        status:0, url:'/pub/base/vue/Mixin.js'    }
   Stream:       { name:'Stream',       status:0, url:'/pub/base/util/Stream.js'  }
   Cache:        { name:'Cache',        status:0, url:'/pub/base/util/Cache.js'   }
   UtilJS:       { name:'UtilJS',       status:0, url:'/pub/base/util/Util.js'    }
   DataJS:       { name:'DataJS',       status:0, url:'/pub/base/util/Data.js'    }
-  VisJS:        { name:'VisJS',        status:0, url:'/pub/base/util/Vis.js'     }
-  NavJS:        { name:'NavJS',        status:0, url:'/pub/base/util/Nav.js'     }
-  BuildJS:      { name:'BuildJS',      status:0, url:'/pub/ikw/cube/Build.js'    }
+  VisJS:        { name:'VisJS',        status:0, url:'/pub/draw/base/Vis.js'     }
+  NavJS:        { name:'NavJS',        status:0, url:'/pub/base/nav/Nav.js'      }
+  BuildJS:      { name:'BuildJS',      status:0, url:'/pub/base/conn/Build.js'   }
   RollJS:       { name:'RollJS',       status:0, url:'/pub/app/muse/roll.js'     }
   PrinJson:     { name:'PrinJson',     status:0, url:'/pub/data/muse/Prin.json'  }
   RowsJson:     { name:'RowsJson',     status:0, url:'/pub/data/muse/Rows.json'  }
   InfoJson:     { name:'InfoJson',     status:0, url:'/pub/data/muse/Info.json'  }
   KnowJson:     { name:'KnowJson',     status:0, url:'/pub/data/muse/Know.json'  }
   WiseJson:     { name:'WiseJson',     status:0, url:'/pub/data/muse/Wise.json'  }
+  DataJson:     { name:'DataJson',     status:0, url:'/pub/data/muse/Data.json'  }
 }
 
 

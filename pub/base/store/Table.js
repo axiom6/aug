@@ -16,6 +16,7 @@ Table = class Table {
     };
     this.store = new Store(this.dbName, this.tables, this.url);
     this.store.fire = new Fire(this.store);
+    //store.Cloud  = new Cloud(  @store )
     this.store.pipe = new Pipe(this.stream, this.dbName);
   }
 

@@ -2,11 +2,11 @@ var Muse;
 
 import Data from '../../base/util/Data.js';
 
-import Build from '../../ikw/cube/Build.js';
+import Build from '../../base/util/Build.js';
 
 import Stream from '../../base/util/Stream.js';
 
-import Nav from '../../base/util/Nav.js';
+import Nav from '../../base/nav/Nav.js';
 
 import Mixin from '../../base/vue/Mixin.js';
 
@@ -183,7 +183,7 @@ Muse = (function() {
       next: "Prin"
     },
     Prin: {
-      title: 'Basis',
+      title: 'Base',
       key: 'Prin',
       route: 'Prin',
       pracs: {},

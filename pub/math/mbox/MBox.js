@@ -2,7 +2,7 @@ var MBox;
 
 import Util from '../../base/util/Util.js';
 
-import Vis from '../../base/util/Vis.js';
+import Vis from '../../draw/base/Vis.js';
 
 MBox = class MBox {
   constructor(elem) {

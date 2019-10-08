@@ -1,8 +1,8 @@
 
 import Data    from '../../base/util/Data.js'
-import Build   from '../../ikw/cube/Build.js'
+import Build   from '../../base/util/Build.js'
 import Stream  from '../../base/util/Stream.js'
-import Nav     from '../../base/util/Nav.js'
+import Nav     from '../../base/nav/Nav.js'
 #mport Cache   from '../../base/util/Cache.js'
 
 import Mixin  from '../../base/vue/Mixin.js'
@@ -80,7 +80,7 @@ class Muse
   Muse.komps = {
     Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
     west:"Wise", north:"Wise", prev:"Wise", east:"Prin", south:"Prin", next:"Prin"  }
-    Prin:{ title:'Basis', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",
+    Prin:{ title:'Base', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",
     west:"Home", north:"Home", prev:"Home", east:"Info", south:"Info", next:"Info" }
     Info:{ title:'Info', key:'Info', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-th",
     west:"Prin", north:"Prin", prev:"Prin", east:"Know", south:"Know", next:"Know" }

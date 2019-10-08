@@ -482,33 +482,35 @@ let Tocca = function() {
 var Touch;
 
 Touch = class Touch {
-  constructor() {
+  constructor(stream, dir) {
+    this.stream = stream;
+    this.dir = dir;
     this.tocca = Tocca();
     this.dirs = ['up', 'down', 'left', 'right'];
     this.evts = ['tap', 'dbltap', 'longtap', 'swipeleft', 'swipeup', 'swiperight', 'swipedown'];
   }
 
-  onDir(elem, dir) {
+  onDir(elem) {
     this.tap(elem, function(e) {
-      return dir.touch('next', e);
+      return this.dir.touch('next', e);
     });
     this.dbl(elem, function(e) {
-      return dir.touch('next', e);
+      return this.dir.touch('next', e);
     });
     this.hold(elem, function(e) {
-      return dir.touch('prev', e);
+      return this.dir.touch('prev', e);
     });
     this.right(elem, function(e) {
-      return dir.touch('west', e); // All directions reversed
+      return this.dir.touch('west', e); // All directions reversed
     });
     this.down(elem, function(e) {
-      return dir.touch('north', e);
+      return this.dir.touch('north', e);
     });
     this.left(elem, function(e) {
-      return dir.touch('east', e);
+      return this.dir.touch('east', e);
     });
     this.up(elem, function(e) {
-      return dir.touch('south', e);
+      return this.dir.touch('south', e);
     });
   }
 
@@ -556,9 +558,9 @@ var script = {
   
   mounted: function () {
     this.$nextTick( function() {  // Enable touch events inside all views
-      this.touch = new Touch$1();
+      this.touch = new Touch$1( this.stream(), this.dir() );
       this.elem  = this.$refs['View'];
-      this.touch.onDir( this.elem, this.dir() );
+      this.touch.onDir( this.elem );
     } ); }
     
   };

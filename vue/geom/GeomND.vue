@@ -11,7 +11,7 @@
 <script type="module">
   
   import Tabs  from '../elem/Tabs.vue';
-  import Style from '../../pub/gan/lib/Style.js';
+  import Style from '../../pub/geom/lib/Style.js';
 
   let GeomND = {
 

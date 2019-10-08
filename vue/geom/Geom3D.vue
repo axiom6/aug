@@ -3,13 +3,13 @@
 <script type="module">
   
   import GeomND  from './GeomND.vue'
-  import Lines   from '../../pub/gan/3D/Lines.js';
-  import Grids   from '../../pub/gan/3D/Grids.js';
-  import Isomet  from '../../pub/gan/3D/Isomet.js';
-  import Play    from '../../pub/gan/3D/Play.js';
-  import Isohed  from '../../pub/gan/3D/Isohed.js';
-  import Objects from '../../pub/gan/3D/Objects.js';
-  import Torus   from '../../pub/gan/3D/Torus.js';
+  import Lines   from '../../pub/geom/3D/Lines.js';
+  import Grids   from '../../pub/geom/3D/Grids.js';
+  import Isomet  from '../../pub/geom/3D/Isomet.js';
+  import Play    from '../../pub/geom/3D/Play.js';
+  import Isohed  from '../../pub/geom/3D/Isohed.js';
+  import Objects from '../../pub/geom/3D/Objects.js';
+  import Torus   from '../../pub/geom/3D/Torus.js';
 
   export default {
 

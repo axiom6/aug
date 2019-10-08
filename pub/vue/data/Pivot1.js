@@ -11194,6 +11194,7 @@ Store = class Store {
     this.url = url;
     this.rest = null;
     this.fire = null;
+    this.cloud = null;
     this.index = null;
     this.local = null;
     this.memory = null;
@@ -11252,6 +11253,11 @@ Store = class Store {
             this.fire.batch(name, obj, objs, callback);
           }
           break;
+        case 'cloud':
+          if (this.cloud != null) {
+            this.cloud.batch(name, obj, objs, callback);
+          }
+          break;
         case 'index':
           if (this.index != null) {
             this.index.batch(name, obj, objs, callback);
@@ -11294,6 +11300,11 @@ Store = class Store {
           this.fire.get(table, id, callback);
         }
         break;
+      case 'cloud':
+        if (this.cloud != null) {
+          this.cloud.get(table, id, callback);
+        }
+        break;
       case 'index':
         if (this.index != null) {
           this.index.get(table, id, callback);
@@ -11317,6 +11328,9 @@ Store = class Store {
     }
     if (this.fire != null) {
       this.fire.add(table, id, object);
+    }
+    if (this.cloud != null) {
+      this.cloud.add(table, id, object);
     }
     if (this.index != null) {
       this.index.add(table, id, object);
@@ -11605,6 +11619,7 @@ Table = class Table {
     };
     this.store = new Store$1(this.dbName, this.tables, this.url);
     this.store.fire = new Fire$1(this.store);
+    //store.Cloud  = new Cloud(  @store )
     this.store.pipe = new Pipe$1(this.stream, this.dbName);
   }
 

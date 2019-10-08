@@ -9,7 +9,7 @@
 
 <script type="module">
   
-  import Touch from '../../pub/base/util/Touch.js'
+  // import Touch from '../../pub/base/nav/Touch.js'
   
   export default {
 
@@ -21,9 +21,9 @@
     
     mounted: function () {
       this.$nextTick( function() {  // Enable touch events inside all views
-        // this.touch = new Touch();
+        // this.touch = new Touch( this.stream(), this.dir() );
         // this.elem  = this.$refs['View'];
-        // this.touch.onNav( this.elem, this.nav() );
+        // this.touch.onDir( this.elem );
       } ) }
       
     }

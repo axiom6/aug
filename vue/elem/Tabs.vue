@@ -26,9 +26,7 @@
           this.nav().setPageKey( this.route, pageKey );
           this.nav().pub( this.pubObj(pageKey) ); } },
       pubObj: function (pageKey) {
-        let obj   = {}
-            obj.route   = this.route;
-            obj.pageKey = pageKey;
+        let obj   = { source:'Tabs', route:this.route, pageKey:pageKey }
         let poute = this.pages[pageKey].route;
         if( this.isDef(poute) ) {
             obj.poute = poute; }

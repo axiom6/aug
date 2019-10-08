@@ -13,7 +13,7 @@
 <script type="module">
 
   import Tabs from '../elem/Tabs.vue';
-  import D3D  from '../../pub/base/d3d/D3D.js'
+  import D3D  from '../../pub/draw/show/D3D.js'
 
   let Draw = {
 

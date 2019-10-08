@@ -5,7 +5,7 @@
 
 <script type="module">
   
-  import Connect from '../../pub/ikw/conn/Connect.js';
+  import Connect from '../../pub/draw/conn/Connect.js';
 
   let Conn = {
 

@@ -1,7 +1,7 @@
 
 import Data    from '../../base/util/Data.js'
 import Stream  from '../../base/util/Stream.js'
-import Dir     from '../../base/util/Dir.js'
+import Dir     from '../../base/nav/Dir.js'
 import Cache   from '../../base/util/Cache.js'
 #mport Test    from './Test.js'
 

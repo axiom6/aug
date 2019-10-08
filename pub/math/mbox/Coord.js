@@ -2,7 +2,7 @@ var Coord;
 
 import Util from '../../base/util/Util.js';
 
-import Vis from '../../base/util/Vis.js';
+import Vis from '../../draw/base/Vis.js';
 
 Coord = class Coord {
   constructor(mbox, width1, height, depth = 10) {

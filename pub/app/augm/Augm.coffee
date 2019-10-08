@@ -1,9 +1,9 @@
 
 import Data    from '../../base/util/Data.js'
 import Stream  from '../../base/util/Stream.js'
-import Nav     from '../../base/util/Nav.js'
+import Nav     from '../../base/nav/Nav.js'
 #mport Cache   from '../../base/util/Cache.js'
-#mport Test   from './Test.js'
+#mport Test    from './Test.js'
 
 import Mixin  from '../../base/vue/Mixin.js'
 import Vue    from '../../lib/vue/vue.esm.browser.js'

@@ -343,12 +343,12 @@ Worker.cacheObjs = {
   FontAweJS: {
     name: 'FontAweJS',
     status: 0,
-    url: '/pub/base/util/FontAwe.js'
+    url: '/pub/base/draw/FontAwe.js'
   },
   Mixin: {
     name: 'Mixin',
     status: 0,
-    url: '/pub/base/util/Mixin.js'
+    url: '/pub/base/vue/Mixin.js'
   },
   Stream: {
     name: 'Stream',
@@ -373,17 +373,17 @@ Worker.cacheObjs = {
   VisJS: {
     name: 'VisJS',
     status: 0,
-    url: '/pub/base/util/Vis.js'
+    url: '/pub/draw/base/Vis.js'
   },
   NavJS: {
     name: 'NavJS',
     status: 0,
-    url: '/pub/base/util/Nav.js'
+    url: '/pub/base/nav/Nav.js'
   },
   BuildJS: {
     name: 'BuildJS',
     status: 0,
-    url: '/pub/ikw/cube/Build.js'
+    url: '/pub/base/conn/Build.js'
   },
   RollJS: {
     name: 'RollJS',
@@ -414,6 +414,11 @@ Worker.cacheObjs = {
     name: 'WiseJson',
     status: 0,
     url: '/pub/data/muse/Wise.json'
+  },
+  DataJson: {
+    name: 'DataJson',
+    status: 0,
+    url: '/pub/data/muse/Data.json'
   }
 };
 

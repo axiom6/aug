@@ -1,7 +1,7 @@
 
 
-import Util  from '../util/Util.js'
-import Vis   from '../vis/Vis.js'
+import Util  from '../base/util/Util.js'
+import Vis   from '../draw/base/Vis.js'
 import UI    from '../ui/UI.js'
 import Dom   from '../ui/Dom.js'
 import Base  from '../ui/Base.js'
@@ -95,7 +95,7 @@ class Roast extends Base
   publish:( study, v ) ->
     name         = study.name
     study.chosen = if not ( study.chosen? or study.chosen ) then true else false
-    addDel       = if study.chosen then UI.AddChoice    else UI.DelChoice
+    addDel       = if study.chosen then 'AddChoice'     else 'DelChoice'
     color        = if study.chosen then Dom.choiceColor else Dom.basisColor
     choice = UI.toTopic( 'Roast', 'Roast', addDel, name )
     choice.value = v if v?
@@ -103,7 +103,7 @@ class Roast extends Base
     color
 
   onChoice:( choice ) =>
-    return  if choice.source is 'Roast' or choice.name isnt 'Roast' or choice.intent is UI.DelChoice
+    return  if choice.source is 'Roast' or choice.name isnt 'Roast' or choice['intent'] is 'DelChoice'
     console.info( 'Roast.onChoice()', choice ) if @stream.isInfo('Choice')
     value = if choice.value? then choice.value else @getValue( choice.study )
     @doInput( value, false ) if value isnt -1

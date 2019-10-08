@@ -1,5 +1,5 @@
 
-import Vis from '../util/Vis.js'
+import Vis from '../../draw/base/Vis.js'
 
 class Mixin
 

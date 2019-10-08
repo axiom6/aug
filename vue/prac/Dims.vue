@@ -5,7 +5,7 @@
       <i   :class="dispObj.icon"></i>
       <span class="dname">{{dispObj.name}}</span>
     </div>
-    <div  class="dd-grid">
+    <div  :class="gridClass()">
       <template v-for="ddObj in dispObj.dims">
         <div   :class="ddObj.klass">
           <i   :class="ddObj.icon"></i>
@@ -28,6 +28,9 @@
           this.doPrac(key) }
         else {
           this.doDisp(key) } },
+      gridClass: function() {
+        console.log( 'Dims.gridClass', this.dispObj.column )
+        return this.dispObj.column==="Innovate" ? 'dd-3x4' : 'dd-3x3'; },
       doDisp:  function (dispKey) {
         let obj = { route:"Disp", dispKey:dispKey }; // pracKey:this.pracObj.name,
         this.nav().pub( obj ); },
@@ -47,17 +50,25 @@
   .grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;
     grid-template-areas: "li lk lw" "di dk dw" "si sk sw"; }
 
-  .ddisp {   display:inline; justify-self:center; align-self:center; text-align:center; font-size:@theme-disp-size*3;
-    i     { display:inline-block;  margin-right: 0.25rem; }
-    .dname { display:inline-block; } }
+  .grid3x4() { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;
+    grid-template-areas: "li ld lk lw" "di dd dk dw" "si sd sk sw"; }
 
-  .dd( @area ) { display:inline; grid-area:@area; font-size:@theme-disp-size*1; text-align:left;
+  .ddisp {   display:inline; justify-self:center; align-self:center; text-align:center; font-size:@theme-disp-size*3;
+    i      { display:inline-block;  margin-right: 0.25rem; }
+    .ddname { display:inline-block; } }
+
+  .area( @area ) { display:inline; grid-area:@area; font-size:@theme-disp-size*1.1; text-align:left;
     i          { display:inline-block;  margin-right: 0.25rem; }
     .ddname    { display:inline-block; } }
+
+  .dd-3x3 { .grid3x3(); margin-left:@theme-disp-size;
+    .li { .area(li); }  .lk { .area(lk); }  .lw { .area(lw); }
+    .di { .area(di); }  .dk { .area(dk); }  .dw { .area(dw); }
+    .si { .area(si); }  .sk { .area(sk); }  .sw { .area(sw); } }
   
-  .dd-grid { .grid3x3(); margin-left:@theme-disp-size;
-    .li { .dd(li); }   .lk { .dd(lk); }  .lw { .dd(lw); }
-    .di { .dd(di); }   .dk { .dd(dk); }  .dw { .dd(dw); }
-    .si { .dd(si); }   .sk { .dd(sk); }  .sw { .dd(sw); } }
+  .dd-3x4 { .grid3x4(); margin-left:@theme-disp-size;
+    .li { .area(li); }  .ld { .area(ld); } .lk { .area(lk); }  .lw { .area(lw); }
+    .di { .area(di); }  .dd { .area(dd); } .dk { .area(dk); }  .dw { .area(dw); }
+    .si { .area(si); }  .sd { .area(sd); } .sk { .area(sk); }  .sw { .area(sw); } }
 
 </style>

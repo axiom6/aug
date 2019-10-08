@@ -1,7 +1,7 @@
 var Mixin,
   hasProp = {}.hasOwnProperty;
 
-import Vis from '../util/Vis.js';
+import Vis from '../../draw/base/Vis.js';
 
 Mixin = class Mixin {
   constructor(Main, komps) {

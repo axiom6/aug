@@ -2,8 +2,8 @@
 <script type="module">
 
   import GeomND  from './GeomND.vue';
-  import Graph   from '../../pub/gan/2D/Graph.js';
-  import Basics  from '../../pub/gan/2D/Basics.js';
+  import Graph   from '../../pub/geom/2D/Graph.js';
+  import Basics  from '../../pub/geom/2D/Basics.js';
 
   export default {
 

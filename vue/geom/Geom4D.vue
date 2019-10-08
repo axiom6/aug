@@ -3,8 +3,8 @@
 <script type="module">
 
   import GeomND  from './GeomND.vue';
-  import Planes  from '../../pub/gan/4D/Planes.js';
-  import Sphere  from '../../pub/gan/4D/Sphere.js';
+  import Planes  from '../../pub/geom/4D/Planes.js';
+  import Sphere  from '../../pub/geom/4D/Sphere.js';
 
   export default {
 
