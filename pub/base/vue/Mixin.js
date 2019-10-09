@@ -150,6 +150,9 @@ Mixin = class Mixin {
         dispObject: function(compKey, pracKey, dispKey) {
           return this.disps(compKey, pracKey)[dispKey];
         },
+        isPageKeyComp: function(pageKey) {
+          return pageKey === 'Info' || pageKey === 'Data';
+        },
         styleHsv: function(ikwObj) {
           var hsv;
           hsv = [30, 90, 90];

@@ -92,6 +92,8 @@ class Mixin
           prac
         dispObject: (compKey, pracKey, dispKey) ->
           this.disps(compKey, pracKey)[dispKey]
+        isPageKeyComp:( pageKey ) ->
+          pageKey is'Info' or pageKey is 'Data'
         styleHsv: (ikwObj) ->
           hsv = [30, 90, 90]
           if this.isDef(ikwObj) and this.isDef(ikwObj.hsv)

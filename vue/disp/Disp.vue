@@ -2,6 +2,7 @@
 <template>
   <div class="disd">
     <d-tabs route="Disp" :pages="pages"></d-tabs>
+    <d-dims v-if="pages['Dims'].show" :dispObj="dispObj"></d-dims>
     <d-desc v-if="pages['Desc'].show" :dispObj="dispObj"></d-desc>
   </div>
 </template>
@@ -9,15 +10,17 @@
 <script type="module">
 
   import Tabs from '../elem/Tabs.vue';
+  import Dims from '../prac/Dims.vue';
   import Desc from './Desc.vue';
   
   let Disp = {
 
-    components:{ 'd-tabs':Tabs, 'd-desc':Desc },
+    components:{ 'd-tabs':Tabs, 'd-dims':Dims, 'd-desc':Desc },
     
-    data() { return { compKey:'Desc', dispObj:null,
+    data() { return { dispObj:null, // compKey:'Desc', 
       pages:{
-        Desc: { title:'Descriptions', key:'Desc', show:true } } } },
+        Dims: { title:'Disciplines',  key:'Dims', show:true  },
+        Desc: { title:'Descriptions', key:'Desc', show:false } } } },
     
     methods: {
       

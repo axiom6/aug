@@ -13,12 +13,13 @@
 
     props: { route:String, pages:Object },
     
-    data() { return { tabsKey:'None', pageKey:'None', prevKey:'None', pageObj:null } },
+    data() { return { tabPages:null, tabsKey:'None', pageKey:'None', prevKey:'None', pageObj:null } },
     
     methods: {
       onPage: function (tabsKey) {
         if( tabsKey !== 'None') {
-          this.prevKey = this.pageKey;
+          if( !this.isPageKeyComp(this.pageKey) ) {
+               this.prevKey = this.pageKey; }
           this.pageKey = tabsKey; } },
       doPage: function (pageKey) {
         this.nav().dirTabs = this.app() !== 'Muse';
@@ -34,7 +35,7 @@
         return this.pageKey===pageKey ? 'tab-active' : 'tab'; } },
 
     beforeMount: function () {  // We want to set the routes pages asap
-      this.tabsKey = this.nav().setPages( this.route, this.pages ); },
+      this.tabsKey  = this.nav().setPages( this.route, this.pages ); },
 
     mounted: function() {
       this.onPage(this.tabsKey);

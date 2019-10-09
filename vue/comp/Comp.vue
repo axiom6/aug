@@ -35,15 +35,14 @@
       pages:{
         Icon: { title:'Practices',    key:'Icon', show:true  },
         Dirs: { title:'Disciplines',  key:'Dirs', show:false },
-        Conn: { title:'Connections',  key:'Conn', show:false },
-        Data: { title:'Data Science', key:'Data', show:false } },
+        Conn: { title:'Connections',  key:'Conn', show:false } },
       rows: {
         Plane:{ name:'Information', dir:'cm', icon:"fas fas fa-th" },
         Learn:{ name:'Learn',       dir:'le', icon:"fas fa-graduation-cap" },
         Do:{    name:'Do',          dir:'do', icon:"fas fas fa-cog" },
         Share:{ name:'Share',       dir:'sh', icon:"fas fa-share-alt-square" } },
       planes: {
-        Info:{ name:'Information',  dir:'cm', icon:"fas fas fa-th" },
+        Info:{ name:'Technology',   dir:'cm', icon:"fas fas fa-cogs" },
         Know:{ name:'Knowledge',    dir:'cm', icon:"fas fas fa-university"  },
         Wise:{ name:'Wisdom',       dir:'cm', icon:"fas fas fa-tripadvisor" },
         Data:{ name:'Data Science', dir:'cm', icon:"fas fas fa-table" } } } },
@@ -60,16 +59,21 @@
       isRows: function () {
         return true; },
       onNav:  function (obj) {
-        if( this.nav().isMyNav( obj, 'Comp' ) ) {
-          let compKey = obj.pageKey==='Data' ? 'Data'      : obj.compKey;
-          let pageKey = obj.pageKey==='Data' ? obj.prevKey : this.nav().getPageKey('Comp','Icon');
-          // console.log( 'Comp.onNav()', { prevKey:obj.prevKey, compKey:compKey, pageKey:pageKey, obj:obj } );
-          this.onComp( compKey );
-          this.doPage( pageKey ); } }
+          console.log( 'Comp.onNav()', { myNav:this.nav().isMyNav(obj,'Comp') } );
+          if( this.nav().isMyNav( obj, 'Comp' ) ) {
+            let compKey = this.isPageKeyComp(obj.pageKey) ? obj.pageKey : obj.compKey;
+            let pageKey = this.isPageKeyComp(obj.pageKey) ? obj.prevKey : this.nav().getPageKey('Comp','Icon');
+            console.log( 'Comp.onNav()', { prevKey:obj.prevKey, compKey:compKey, pageKey:pageKey, obj:obj } );
+            this.onComp( compKey );
+            this.doPage( pageKey ); } }
       },
 
     beforeMount: function() {
-      this.onComp( this.nav().compKey ); },
+      let compKey = this.nav().compKey;
+      if( this.isPageKeyComp(compKey) ) {
+        this.pages['Info'] = { title:'Technology',    key:'Info', show:false };
+        this.pages['Data'] = { title:'Data Science',  key:'Data', show:false }; }
+      this.onComp( compKey ); },
 
     mounted: function () {
       this.doPage( this.nav().getPageKey('Comp','Icon') );
