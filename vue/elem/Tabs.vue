@@ -23,13 +23,14 @@
           this.pageKey = tabsKey; } },
       doPage: function (pageKey) {
         this.nav().dirTabs = this.app() !== 'Muse';
-        if(   pageKey!=='None' ) {
+        if( pageKey!=='None' ) {
           this.onPage( pageKey );
           this.nav().setPageKey( this.route, pageKey );
           this.nav().pub( this.pubObj(pageKey) ); } },
       pubObj: function (pageKey) {
         let obj = { source:'Tabs', route:this.route, pageKey:pageKey, prevKey:this.prevKey };
-        if( pageKey==='Data' ) { obj.compKey = 'Data'; }
+        if( this.isPageKeyComp(pageKey) ) {
+          obj.compKey = pageKey; }
         return obj; },
       classTab: function (pageKey) {
         return this.pageKey===pageKey ? 'tab-active' : 'tab'; } },

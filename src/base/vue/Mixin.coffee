@@ -5,10 +5,19 @@ class Mixin
 
   constructor:(   Main, komps ) ->
     Mixin.Main  = Main
-    Mixin.views = if @isArray(komps) then komps else Object.keys(komps)
+    Mixin.views = @kompsViews(komps) # if @isArray(komps) then komps else Object.keys(komps)
 
   isArray:(a) ->
     typeof(a)!="string" and a.length? and a.length > 0
+
+  inArray:(a,e) ->
+    a.indexOf(e) > -1
+
+  kompsViews:( komps ) ->
+    views = []
+    for own key,  komp of komps
+      views.push( komp.route ) if not @inArray( views, komp.route )
+    views
 
   mixin:() ->
     return  {
@@ -93,7 +102,7 @@ class Mixin
         dispObject: (compKey, pracKey, dispKey) ->
           this.disps(compKey, pracKey)[dispKey]
         isPageKeyComp:( pageKey ) ->
-          pageKey is'Info' or pageKey is 'Data'
+          pageKey is'Info' or pageKey is 'Data' # this.app() is 'Muse' and
         styleHsv: (ikwObj) ->
           hsv = [30, 90, 90]
           if this.isDef(ikwObj) and this.isDef(ikwObj.hsv)

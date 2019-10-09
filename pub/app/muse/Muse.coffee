@@ -51,7 +51,7 @@ class Muse
 
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Muse.vue = () ->
-    Muse.mixin = new Mixin( Muse, ['Home','Prin','Comp','Prac','Disp'] ) # Can't use komps
+    Muse.mixin = new Mixin( Muse, Muse.komps ) # Can't use komps ['Home','Prin','Comp','Prac','Disp']
     Vue['mixin']( Muse.mixin.mixin() )
     Vue.use(Router)
     app = new Vue( { router:Muse.router(), render: (h) -> h(Home.Dash) } );

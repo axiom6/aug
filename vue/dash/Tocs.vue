@@ -6,7 +6,7 @@
         <div   v-on:click="doComp(komp.key)">
           <div  :style="styleComp(komp.key)"><i :class="komp.icon"></i>{{komp.title}}</div>
         </div>
-        <ul v-if="compKey===komp.key"><template v-for="prac in komps[komp.key].pracs" >
+        <ul v-if="compKey===komp.key"><template v-for="prac in myPracs(dataKey)" >
           <li v-on:click="doPrac(prac.name)" :style="style(prac)" :key="prac.name">
             <i :class="prac.icon"></i>
             <span>{{prac.name}}</span>
@@ -25,11 +25,17 @@
   
   let Tocs = {
     
-    data: function() { return { komps:{}, compKey:'Home', pracKey:'None', dispKey:'None' } },
+    data: function() { return { komps:{}, compPracs:{}, compKey:'Home', dataKey:'Home',  pracKey:'None', dispKey:'None'
+    } },
     
     methods: {
-      doComp: function(compKey) {
+      myPracs: function(dataKey) {
+        return this.isDef(this.komps[dataKey]) ? this.komps[dataKey].pracs : this.cpPracs[dataKey]; },
+      cpPracs: function(dataKey) {
+        return this.isPageKeyComp(dataKey) ? this.compPracs[dataKey] : {}; },
+      doComp:  function(compKey) {
         this.compKey = compKey;
+        this.dataKey = compKey;
         let  kompKey = compKey==='Data' ? 'Info' : compKey;
         let  route   = this.komps[kompKey].route;
         this.pub( { route:route, compKey:compKey, source:'Toc' } ); },
@@ -45,7 +51,9 @@
         this.nav().pub(obj); },
       onNav:  function (obj) {
         if( obj.source !== 'Toc' ) {
-          if( this.compKey !== obj.compKey ) { this.compKey = obj.compKey; }
+          if( this.compKey !== obj.compKey ) {
+              this.compKey = this.isPageKeyComp(obj.compKey) ? 'Info' : obj.compKey;
+              this.dataKey = obj.compKey; }
           if( this.pracKey !== obj.pracKey ) { this.pracKey = obj.pracKey; }
           if( this.dispKey !== obj.dispKey ) { this.dispKey = obj.dispKey; } } },
       styleComp: function( compKey ) {
@@ -53,22 +61,25 @@
                                       : { backgroundColor:'#333',  color:'wheat', borderRadius:'0 24px 24px 0' }; },
       style: function( ikwObj ) {
         return this.styleHsv(ikwObj); },
-      filterPracs: function(pracs,kompKey) {
+      filterPracs: function(pracs,compKey) {
         let filt = {}
         for( let key in pracs ) {
           let prac = pracs[key];
-          if( prac.row !== 'Dim' || kompKey === 'Prin' ) {
+          if( prac.row !== 'Dim' || compKey === 'Prin' ) {
             filt[key] = prac; } }
         return filt;
       } },
-    
-    mounted: function () {
+
+    beforeMount: function () {
       this.komps = this.kompsTocs();
       for( let key in this.komps ) {
         let komp = this.komps[key];
         if( komp.ikw ) {
-          // console.log( 'Tocs.mounted()', komp.key, komp );
           komp.pracs = this.filterPracs( this.pracs(komp.key), komp.key ); } }
+      if( this.isPageKeyComp('Data') ) {
+        this.compPracs['Data'] = this.filterPracs( this.pracs('Data'),'Data'); } },
+    
+    mounted: function () {
       this.subscribe( 'Nav', 'Tocs.vue', (obj) => {
         this.onNav(obj); } ); }
   }

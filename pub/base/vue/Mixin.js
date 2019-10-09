@@ -6,11 +6,28 @@ import Vis from '../../draw/base/Vis.js';
 Mixin = class Mixin {
   constructor(Main, komps) {
     Mixin.Main = Main;
-    Mixin.views = this.isArray(komps) ? komps : Object.keys(komps);
+    Mixin.views = this.kompsViews(komps); // if @isArray(komps) then komps else Object.keys(komps)
   }
 
   isArray(a) {
     return typeof a !== "string" && (a.length != null) && a.length > 0;
+  }
+
+  inArray(a, e) {
+    return a.indexOf(e) > -1;
+  }
+
+  kompsViews(komps) {
+    var key, komp, views;
+    views = [];
+    for (key in komps) {
+      if (!hasProp.call(komps, key)) continue;
+      komp = komps[key];
+      if (!this.inArray(views, komp.route)) {
+        views.push(komp.route);
+      }
+    }
+    return views;
   }
 
   mixin() {
@@ -151,7 +168,7 @@ Mixin = class Mixin {
           return this.disps(compKey, pracKey)[dispKey];
         },
         isPageKeyComp: function(pageKey) {
-          return pageKey === 'Info' || pageKey === 'Data';
+          return pageKey === 'Info' || pageKey === 'Data'; // this.app() is 'Muse' and
         },
         styleHsv: function(ikwObj) {
           var hsv;
