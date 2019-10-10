@@ -37,7 +37,7 @@
         let obj = { route:"Disp", pracKey:pracKey, dispKey:dispKey };
         this.nav().pub( obj ); },
       style: function( ikwObj ) {
-        return this.styleHsv(ikwObj); } }
+        return this.styleObj(ikwObj); } }
   }
 
   export default Dirs;
@@ -62,10 +62,10 @@
                              .south { .ddir(south); }
       .cen  { font-size:@theme-dirs-size; }
 
-    .disp-comp {   display:inline; justify-self:center; align-self:center; text-align:center;
-      i     { display:inline-block;  margin-right: 0.15rem; }
-      .name { display:inline-block; }
-      .desc { display:none; margin:0.5rem 0.5rem 0.5rem 0.5rem; text-align:left; } } }
+    .disp-comp { display:inline; justify-self:center; align-self:center; text-align:center;
+      i        { display:inline-block;  margin-right: 0.15rem; }
+      .name    { display:inline-block; }
+      .desc    { display:none; margin:0.5rem 0.5rem 0.5rem 0.5rem; text-align:left; } } }
   
   
 </style>

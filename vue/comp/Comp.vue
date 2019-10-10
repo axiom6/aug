@@ -31,11 +31,17 @@
     components:{ 'b-tabs':Tabs, 'p-icon':Icon, 'p-dirs':Dirs, 'p-conn':Conn },
     
     data() { return {
-      compObj:null, pracObj:null, myRows:null,
-      pages:{
+      pages:null, compObj:null, pracObj:null, myRows:null,
+      pagesComp:{
         Icon: { title:'Practices',    key:'Icon', show:true  },
         Dirs: { title:'Disciplines',  key:'Dirs', show:false },
         Conn: { title:'Connections',  key:'Conn', show:false } },
+      pagesInfo:{
+        Icon: { title:'Practices',    key:'Icon', show:true  },
+        Dirs: { title:'Disciplines',  key:'Dirs', show:false },
+        Conn: { title:'Connections',  key:'Conn', show:false },
+        Info: { title:'Technology',   key:'Info', show:false },
+        Data: { title:'Data Science', key:'Data', show:false } },
       rows: {
         Plane:{ name:'Information', dir:'cm', icon:"fas fas fa-th" },
         Learn:{ name:'Learn',       dir:'le', icon:"fas fa-graduation-cap" },
@@ -52,36 +58,25 @@
          this.myRows          = this.rows;
          this.myRows['Plane'] = this.planes[compKey]; },
       onComp: function (compKey) {
+        this.pages   = this.isPageKeyComp(compKey) ? this.pagesInfo : this.pagesComp
         this.compObj = this.compObject(compKey);
         this.onRows( compKey); },
-      onPages: function (compKey) {
-        console.log( 'Comp.onPages()', { compKey:compKey, isPageComp:this.isPageKeyComp(compKey) } );
-        if( this.isPageKeyComp(compKey) ) {
-          this.pages['Info'] = { title:'Technology',    key:'Info', show:false };
-          this.pages['Data'] = { title:'Data Science',  key:'Data', show:false }; } },
       doPage: function( pageKey ) {
         this.nav().setPageKey( 'Comp', pageKey ); },
       isRows: function () {
         return true; },
       onNav:  function (obj) {
-          // console.log( 'Comp.onNav()', { myNav:this.nav().isMyNav(obj,'Comp') } );
-          if( this.nav().isMyNav( obj, 'Comp' ) ) {
-            let compKey = this.isPageKeyComp(obj.pageKey) ? obj.pageKey : obj.compKey;
-            let pageKey = this.isPageKeyComp(obj.pageKey) ? obj.prevKey : this.nav().getPageKey('Comp','Icon');
-            //console.log( 'Comp.onNav()', { prevKey:obj.prevKey, compKey:compKey, pageKey:pageKey, obj:obj } );
-            this.onPages( compKey );
-            this.onComp(  compKey );
-            this.doPage(  pageKey ); } }
+        if( this.nav().isMyNav( obj, 'Comp' ) ) {
+          let compKey = this.isPageKeyComp(obj.pageKey) ? obj.pageKey : obj.compKey;
+          let pageKey = this.isPageKeyComp(obj.pageKey) ? obj.prevKey : this.nav().getPageKey('Comp','Icon');
+          this.onComp( compKey );
+          this.doPage( pageKey ); } }
       },
 
     beforeMount: function() {
-      let compKey = this.nav().compKey;
-      this.onComp(  compKey ); },
+      this.onComp(  this.nav().compKey ); },
 
     mounted: function () {
-      let compKey = this.nav().compKey;
-      console.log( 'Comp.mounted()', { compKey:compKey } );
-      this.onPages( compKey )
       this.doPage( this.nav().getPageKey('Comp','Icon') );
       this.subscribe( 'Nav', 'Comp.vue', (obj) => {
         this.onNav(obj); } ); }

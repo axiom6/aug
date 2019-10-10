@@ -4,9 +4,9 @@ var Mixin,
 import Vis from '../../draw/base/Vis.js';
 
 Mixin = class Mixin {
-  constructor(Main, komps) {
+  constructor(Main, views) {
     Mixin.Main = Main;
-    Mixin.views = this.kompsViews(komps); // if @isArray(komps) then komps else Object.keys(komps)
+    Mixin.views = views;
   }
 
   isArray(a) {
@@ -15,19 +15,6 @@ Mixin = class Mixin {
 
   inArray(a, e) {
     return a.indexOf(e) > -1;
-  }
-
-  kompsViews(komps) {
-    var key, komp, views;
-    views = [];
-    for (key in komps) {
-      if (!hasProp.call(komps, key)) continue;
-      komp = komps[key];
-      if (!this.inArray(views, komp.route)) {
-        views.push(komp.route);
-      }
-    }
-    return views;
   }
 
   mixin() {
@@ -170,17 +157,36 @@ Mixin = class Mixin {
         isPageKeyComp: function(pageKey) {
           return pageKey === 'Info' || pageKey === 'Data'; // this.app() is 'Muse' and
         },
-        styleHsv: function(ikwObj) {
-          var hsv;
+        styleObj: function(ikwObj, fontSize = void 0) {
+          var hsv, style;
           hsv = [30, 90, 90];
-          if (this.isDef(ikwObj) && this.isDef(ikwObj.hsv)) {
-            hsv = ikwObj.hsv;
-          } else {
-            console.error('Mixin.styleHvv() ikwObj or ikwObj.hsv not defined');
+          if (this.isDef(ikwObj)) {
+            if (this.isDef(ikwObj.hsv)) {
+              hsv = ikwObj.hsv;
+            } else if (this.isDef(ikwObj.dir)) {
+              hsv = (function() {
+                switch (ikwObj.dir) {
+                  case 'west':
+                    return [195, 90, 70];
+                  case 'north':
+                    return [90, 90, 90];
+                  case 'east':
+                    return [30, 60, 90];
+                  case 'south':
+                    return [60, 90, 90];
+                  default:
+                    return [30, 90, 90];
+                }
+              })();
+            }
           }
-          return {
+          style = {
             backgroundColor: Vis.toRgbaHsv(hsv)
           };
+          if (fontSize) {
+            style['fontSize'] = fontSize + 'rem';
+          }
+          return style;
         },
         toRgbaHsv: function(hsv) {
           return Vis.toRgbaHsv(hsv);

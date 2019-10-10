@@ -18,13 +18,13 @@
     
     components: { 'd-icon':Icon },
 
-    props: { dispObj:Object },
+    props: { dispObj:Object, from:String },
 
     data() { return { areaObj:null, iarea:1 } },
 
     methods: {
       style: function (ikwObj) {
-        return this.styleHsv(ikwObj); },
+        return this.styleObj(ikwObj); },
       clArea: function() {
         let  klass = 'area'+this.iarea;
         this.iarea = this.iarea === 3 ? 1 : this.iarea+1;

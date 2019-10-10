@@ -18300,13 +18300,6 @@ var Util,
 Util = class Util {
   constructor() {
     this.dummy = "";
-    Util.noop(Util.loadScript, Util.hasMethod, Util.dependsOn, Util.setInstance, Util.getInstance);
-    Util.noop(Util.toError, Util.logJSON, Util.isNot, Util.isVal, Util.isntStr);
-    Util.noop(Util.inIndex, Util.isEvent, Util.atArray, Util.atLength, Util.isStrInteger);
-    Util.noop(Util.isStrCurrency, Util.isStrFloat, Util.isDefs, Util.toPosition, Util.xyScale);
-    Util.noop(Util.resizeTimeout, Util.eventErrorCode, Util.toAlpha, Util.hashCode, Util.pdfCSS);
-    Util.noop(Util.padStr, Util.isoDateTime, Util.toHMS, Util.toInt, Util.hex32);
-    Util.noop(Util.toFloat, Util.toCap, Util.match_test, Util.svgId, Util.saveFile);
   }
 
   static element($elem) {
@@ -21076,8 +21069,9 @@ Build = class Build {
   }
 
   // Build instance
-  constructor(batch1) {
+  constructor(batch1, komps = null) {
     this.batch = batch1;
+    this.komps = komps;
     //@Spec   = @batch.Muse.data
     this.None = {
       name: "None"
@@ -21209,7 +21203,7 @@ Build = class Build {
   prev(plane) {
     switch (plane) {
       case 'Home':
-        return 'Data';
+        return 'Wise';
       case 'Prin':
         return 'Home';
       case 'Info':
@@ -21218,8 +21212,6 @@ Build = class Build {
         return 'Info';
       case 'Wise':
         return 'Know';
-      case 'Data':
-        return 'Wise';
       default:
         console.error('Build.prev() unknown plane', plane);
         return 'Prin';
@@ -21237,8 +21229,6 @@ Build = class Build {
       case 'Know':
         return 'Wise';
       case 'Wise':
-        return 'Data';
-      case 'Data':
         return 'Home';
       default:
         console.error('Build.next() unknown plane', plane);
@@ -21505,6 +21495,16 @@ Build = class Build {
     console.log('----- End Log By Conduit  ------');
   }
 
+  planeIcon(plane) {
+    if (plane === 'Data') {
+      return 'fas fa-table';
+    } else if (this.komps != null) {
+      return this.komps[plane].icon;
+    } else {
+      return 'fas fa-circle';
+    }
+  }
+
   dimDisps() {
     var col, dim, dir, disp, i, j, k, l, len, len1, len2, len3, plane, planes, prac, ref, ref1, ref2, row;
     ref = ['Embrace', 'Innovate', 'Encourage'];
@@ -21519,6 +21519,11 @@ Build = class Build {
         dim.dims = [];
         for (k = 0, len2 = planes.length; k < len2; k++) {
           plane = planes[k];
+          dim.dims.push({
+            name: plane,
+            icon: this.planeIcon(plane),
+            klass: this.dimKlass('Plane', plane)
+          });
           ref2 = ['Learn', 'Do', 'Share'];
           for (l = 0, len3 = ref2.length; l < len3; l++) {
             row = ref2[l];
@@ -21546,6 +21551,11 @@ Build = class Build {
       col.dims = [];
       for (j = 0, len1 = planes.length; j < len1; j++) {
         plane = planes[j];
+        col.dims.push({
+          name: plane,
+          icon: this.planeIcon(plane),
+          klass: this.dimKlass('Plane', plane)
+        });
         ref1 = ['Learn', 'Do', 'Share'];
         for (k = 0, len2 = ref1.length; k < len2; k++) {
           row = ref1[k];

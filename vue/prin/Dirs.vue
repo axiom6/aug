@@ -40,7 +40,7 @@
         let obj = { route:"Disp", pracKey:pracKey, dispKey:dispKey };
         this.nav.pub( obj ); },
       style: function( ikwObj ) {
-        return this.styleHsv(ikwObj); } }
+        return this.styleObj(ikwObj); } }
   }
 
   export default Dirs;

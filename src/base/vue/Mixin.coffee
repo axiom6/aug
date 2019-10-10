@@ -3,21 +3,15 @@ import Vis from '../../draw/base/Vis.js'
 
 class Mixin
 
-  constructor:(   Main, komps ) ->
+  constructor:( Main, views ) ->
     Mixin.Main  = Main
-    Mixin.views = @kompsViews(komps) # if @isArray(komps) then komps else Object.keys(komps)
+    Mixin.views = views
 
   isArray:(a) ->
     typeof(a)!="string" and a.length? and a.length > 0
 
   inArray:(a,e) ->
     a.indexOf(e) > -1
-
-  kompsViews:( komps ) ->
-    views = []
-    for own key,  komp of komps
-      views.push( komp.route ) if not @inArray( views, komp.route )
-    views
 
   mixin:() ->
     return  {
@@ -103,13 +97,23 @@ class Mixin
           this.disps(compKey, pracKey)[dispKey]
         isPageKeyComp:( pageKey ) ->
           pageKey is'Info' or pageKey is 'Data' # this.app() is 'Muse' and
-        styleHsv: (ikwObj) ->
+
+        styleObj:( ikwObj, fontSize=undefined ) ->
           hsv = [30, 90, 90]
-          if this.isDef(ikwObj) and this.isDef(ikwObj.hsv)
-            hsv = ikwObj.hsv
-          else
-            console.error( 'Mixin.styleHvv() ikwObj or ikwObj.hsv not defined' )
-          { backgroundColor:Vis.toRgbaHsv(hsv) }
+          if this.isDef(ikwObj)
+            if this.isDef(ikwObj.hsv)
+              hsv = ikwObj.hsv
+            else if this.isDef(ikwObj.dir)
+              hsv = switch ikwObj.dir
+                when 'west'  then [195, 90, 70]
+                when 'north' then [ 90, 90, 90]
+                when 'east'  then [ 30, 60, 90]
+                when 'south' then [ 60, 90, 90]
+                else              [ 30, 90, 90]
+          style = { backgroundColor:Vis.toRgbaHsv(hsv) }
+          style['fontSize'] = fontSize+'rem' if fontSize
+          style
+
         toRgbaHsv: (hsv) ->
           Vis.toRgbaHsv(hsv)
         choice:() ->

@@ -28,7 +28,7 @@
     
     components: { 'd-icon':Icon },
 
-    props: { pracObj:Object },
+    props: { pracObj:Object, from:String },
 
     data() { return { dispObj:null, iarea:1 } },
 
@@ -45,7 +45,7 @@
         let obj = { route:"Disp", pracKey:this.pracObj.name, dispKey:dispKey };
         this.nav().pub( obj ); },
       style: function( ikwObj ) {
-        return this.styleHsv(ikwObj); },
+        return this.styleObj(ikwObj); },
       clArea: function() {
         //if( areaObj===false ) {}
         let  klass = 'areb'+this.iarea;

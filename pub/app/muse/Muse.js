@@ -36,7 +36,7 @@ Muse = (function() {
       };
       Muse.stream = new Stream(subjects, infoSpec);
       Muse.nav = new Nav(Muse.stream, batch, Muse.komps);
-      Muse.build = new Build(batch);
+      Muse.build = new Build(batch, Muse.komps);
       //use.cache  = new Cache( Muse.stream )
       Data.buildInnov(batch, 'Data', 'Info');
       Data.mergePracs(batch, 'Prin', ['Info', 'Know', 'Wise', 'Data']);
@@ -46,7 +46,13 @@ Muse = (function() {
 
     static vue() {
       var app;
-      Muse.mixin = new Mixin(Muse, Muse.komps); // Can't use komps ['Home','Prin','Comp','Prac','Disp']
+      Muse.mixin = new Mixin(Muse, [
+        'Home',
+        'Prin',
+        'Comp',
+        'Prac',
+        'Disp' // Really can't use komps. Need Prac and Disp
+      ]);
       Vue['mixin'](Muse.mixin.mixin());
       Vue.use(Router);
       app = new Vue({

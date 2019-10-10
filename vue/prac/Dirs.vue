@@ -2,13 +2,13 @@
 <template>
   <div class="dirs-prac">
     <div class="cen" :style="style(pracObj)">
-      <d-disp v-if="isDisp()" :dispObj="pracObj"></d-disp>
-      <d-dims v-if="isDims()" :dispObj="pracObj"></d-dims>
+      <d-disp v-if="isDisp()" :dispObj="pracObj" from="Dirs"></d-disp>
+      <d-dims v-if="isDims()" :dispObj="pracObj" from="Dirs"></d-dims>
     </div>
     <template  v-for="dispObj in pracObj.disps">
       <div :class="dispObj.dir" :style="style(dispObj)">
-        <d-disp v-if="isDisp()" :dispObj="dispObj"></d-disp>
-        <d-dims v-if="isDims()" :dispObj="dispObj"></d-dims>
+        <d-disp v-if="isDisp()" :dispObj="dispObj" from="Dirs"></d-disp>
+        <d-dims v-if="isDims()" :dispObj="dispObj" from="Dirs"></d-dims>
       </div>
     </template>
   </div>
@@ -37,7 +37,7 @@
       isDisp: function () {
         return this.pracObj.row !== 'Dim'; },
       style: function( ikwObj ) {
-        return this.styleHsv(ikwObj); } },
+        return this.styleObj(ikwObj); } },
 
     mounted: function () {
       if( !this.isDef(this.pracObj) ) {

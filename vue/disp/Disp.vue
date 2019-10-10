@@ -2,8 +2,8 @@
 <template>
   <div class="disd">
     <d-tabs route="Disp" :pages="pages"></d-tabs>
-    <d-dims v-if="pages['Dims'].show" :dispObj="dispObj"></d-dims>
-    <d-desc v-if="pages['Desc'].show" :dispObj="dispObj"></d-desc>
+    <d-dims v-if="pages['Dims'].show" :dispObj="dispObj" from="Disp"></d-dims>
+    <d-desc v-if="pages['Desc'].show" :dispObj="dispObj" from="Disp"></d-desc>
   </div>
 </template>
 

@@ -77,7 +77,7 @@ class Build
 
   # Build instance
 
-  constructor:( @batch ) ->
+  constructor:( @batch, @komps=null ) ->
     #@Spec   = @batch.Muse.data
     @None    = { name:"None" }
     Util.noop( @toGroups, @setAdjacents, Build.copyAtt  )
@@ -306,6 +306,9 @@ class Build
     console.log( '----- End Log By Conduit  ------' )
     return
 
+  planeIcon:( plane ) ->
+    if plane is 'Data' then 'fas fa-table' else if @komps? then @komps[plane].icon else 'fas fa-circle'
+
   dimDisps:() ->
     for col in ['Embrace','Innovate','Encourage']
       planes = if col is  'Innovate' then ['Info','Data','Know','Wise'] else ['Info','Know','Wise']
@@ -314,7 +317,7 @@ class Build
         dim.column = col
         dim.dims = []
         for plane in planes
-          dim.dims.push( { name:plane, icon:"fas fa-circle", klass:@dimKlass('Plane',plane) } )
+          dim.dims.push( { name:plane, icon:@planeIcon(plane), klass:@dimKlass('Plane',plane) } )
           for row in ['Learn','Do',   'Share']
             prac = @getPractice( row, col, plane )
             disp = @getDir( prac, dir )
@@ -331,7 +334,7 @@ class Build
       col = @getCol(cname)
       col.dims = []
       for plane in planes
-        col.dims.push( { name:plane, icon:"fas fa-circle", klass:@dimKlass('Plane',plane) } )
+        col.dims.push( { name:plane, icon:@planeIcon(plane), klass:@dimKlass('Plane',plane) } )
         for row in ['Learn','Do','Share']
           prac = @getPractice( row, cname, plane )
           prac.klass = @dimKlass( row, plane )

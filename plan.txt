@@ -4,8 +4,11 @@ https://main-4a9c7.firebaseapp.com/app/main.html
 https://augm-d4b3c.firebaseapp.com/app/augm.html
 https://muse-b90e1.firebaseapp.com/app/muse.html  https://is.gd/KO7klq
 
-0. Bugs
-   a. Mixin pracObject
+0. Fixes
+   a. Prin Disp Disciplines styling
+   b. Font Scaling
+   c. Toc Pracs for Technology and Data Science and Clean Up
+   d. Test Augm
 
 1. Improve Landing Pages
    a. Landing Pages: Home Prin Info Know Wise

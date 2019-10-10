@@ -60,7 +60,7 @@
         return compKey===this.compKey ? { backgroundColor:'wheat', color:'black', borderRadius:'0 24px 24px 0' }
                                       : { backgroundColor:'#333',  color:'wheat', borderRadius:'0 24px 24px 0' }; },
       style: function( ikwObj ) {
-        return this.styleHsv(ikwObj); },
+        return this.styleObj(ikwObj); },
       filterPracs: function(pracs,compKey) {
         let filt = {}
         for( let key in pracs ) {
