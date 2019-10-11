@@ -2,7 +2,7 @@
 
 
 <template>
-  <div class="geom" ref="Geom">
+  <div class="geom-pane" ref="Geom">
     <h1 v-if="comp==='Geom'">Geometric Algebra</h1>
     <template v-for="geom in geoms">
       <router-view :name="comp+geom.key"></router-view>
@@ -32,7 +32,7 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .geom {   position:relative; left:0; top:0; right:0; bottom:0; background-color:@theme-back; display:grid;
+  .geom-pane {   position:relative; left:0; top:0; right:0; bottom:0; background-color:@theme-back; display:grid;
     h1    { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:@theme-h1-size; } }
   
 </style>;

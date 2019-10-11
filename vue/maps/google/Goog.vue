@@ -1,6 +1,6 @@
 
 <template>
-  <div class="goog"></div>
+  <div class="goog-pane"></div>
 </template>
 
 <script type="module">
@@ -9,5 +9,5 @@
 
 <style lang="less">
   @import '../../../pub/css/themes/theme.less';
-  .goog { background-color:@theme-back; }
+  .goog-pane { background-color:@theme-back; }
 </style>

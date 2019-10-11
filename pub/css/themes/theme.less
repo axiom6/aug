@@ -1,97 +1,79 @@
 
+// --- Color ---
+
 @theme-back:black;
 @theme-high:black; // Highlight font color
 @theme-color:wheat;
 @theme-color-prac:black;
 @theme-border-color:wheat;
+@theme-back-menu:#222;
+@theme-back-item:#444;
+@theme-back-item-hover:#777;
+@theme-color-item-hover:black;
+@theme-sign-back:  #333;
+@theme-back-tocs-comp:#333;
+@theme-back-tocs-prac:#444; // Not used yet
+@theme-back-tocs-disp:#555; // Not used yet
+@theme-color-tocs-disp:white;
+
+// -- Grid Justify and Aligh ---
+
+.themeCenterItems() { display:grid; justify-items:center; align-items:center; text-align:center; }
+.themeLeftSelf()    { display:grid; justify-self: start;  align-self: center; text-align:left;   }
+
+// -- Font Size ---
+
 @theme-font-family:Roboto, sans-serif;
+@theme-h1-size:2.0rem; @theme-h2-size:1.5rem; @theme-h3-size:1.0rem;
 
-@theme-west:   11fr;
-@theme-center: 85fr;
-@theme-east:   4fr;
+@theme-sign-size:  5.5rem;
+@theme-name-size:  2.0rem;
 
-@theme-north:  10fr;
-@theme-middle: 85fr;
-@theme-south:   5fr;
-
-@theme-h1-size:     2.0rem;
-@theme-h2-size:     1.5rem;
-@theme-h3-size:     1.0rem;
-@theme-tab-size:    1.5rem;
 @theme-btn-size:    1.4rem;
 @theme-choice-size: 1.4rem;
 @theme-table-size:  1.0rem;
 @theme-math-size:   2.5rem;
 @theme-obs-size:    2.5rem;
 
-@theme-dash-size:  1.5vmin;
-@theme-navd-size:  1.2rem;
-@theme-tocs-size:  2.0rem;
+@theme-tocs-size:1.5rem;
+@theme-comp-size:1.0rem;
+@theme-prin-size:1.0rem;
+@theme-tabs-size:1.5rem;
+@theme-menu-size:1.0rem;
+@theme-desc-size:1.0rem;
+@theme-dims-size:1.2rem;
+@theme-dirs-size:1.0rem;
+@theme-sign-size:2.0rem;
 
-@theme-prin-size:  2.0rem;
-@theme-prin-cen:   2.0rem;
+@theme-tabs-height-pc:7%;
 
-@theme-prac-size:  2.0rem;
-@theme-full-size:  2.5rem;
-@theme-disp-size:  1.2em;
+// --- Themes with Font Size ---
 
-@theme-dirs-size:  1.3rem;
-@theme-conn-size:  1.3rem;
-@theme-desc-size:  1.6rem;
-@theme-summ-size:  1.3rem;
+.theme-html { font-size:calc(1em + 1vmin); background-color:@theme-back; }
+.theme-dash { font-size:1.0rem;             background-color:@theme-back; }
+.theme-tocs { font-size:@theme-tocs-size;  background-color:@theme-back; }
 
-@theme-cen-size:   1.5rem;
-@theme-dir-size:   1.4rem;
-@theme-row-size:   1.6rem;
+.theme-logo  { font-size:0.7rem;             background-color:@theme-back; }
+.theme-arrow { font-size:1.3rem; }
+.theme-gamer { font-size:0.9rem; }
 
-@theme-area-size:       1.5rem;
-@theme-area-icon-size:  1.6rem;
-@theme-area-name-size:  1.6rem;
-@theme-area-desc-size:  1.6rem;
+.theme-prin { font-size:1.0rem; border-radius:0.7em; background-color:@theme-back; }
+.theme-comp { font-size:@theme-comp-size; border-radius:0.7em; }
+.theme-prac { font-size:1.0rem; border-radius:0.7em; }
+.theme-disp { font-size:1.0rem; border-radius:0.7em; }
 
-@theme-prac-area-size:  1.0rem;
+.theme-sign { font-size:@theme-sign-size; background-color:@theme-sign-back; border-radius:0.7em; width:90%; height:90%; }
 
-@theme-icon-back:  #333;
-@theme-icon-size:  5.5rem;
-@theme-name-size:  2.0rem;
+.theme-conn { font-size:1.0rem; background-color:@theme-sign-back; border-radius:0.7em; }
+.theme-desc { font-size:1.0rem; background-color:@theme-sign-back; border-radius:0.7em; width:90%; height:90%; }
 
+.theme-prin-dirs { font-size:1.8rem; background-color:@theme-sign-back; border-radius:0.7em; width:90%; height:90%; }
+.theme-comp-dirs { font-size:0.8rem; background-color:@theme-sign-back; border-radius:0.7em; width:90%; height:90%; }
+.theme-prac-dirs { font-size:3.0rem; background-color:@theme-sign-back; border-radius:0.7em; }
 
-.theme-prac      { background-color:@theme-icon-back; border-radius:36px; width:90%; height:90%; font-size:@theme-prac-size; }
-
-.theme-comp-icon { background-color:@theme-icon-back; border-radius:36px; width:90%; height:90%; }
-.theme-comp-dirs { background-color:@theme-icon-back; border-radius:36px; width:90%; height:90%; font-size:@theme-dirs-size; }
-.theme-prin-dirs { background-color:@theme-icon-back; border-radius:36px; width:90%; height:90%; font-size:@theme-prin-size; }
-.theme-comp-conn { background-color:@theme-icon-back; border-radius:36px; width:90%; height:90%; }
-.theme-comp-desc { background-color:@theme-icon-back; }
-
-.theme-prac-dirs { background-color:@theme-icon-back; border-radius:36px; font-size:@theme-dirs-size*3; }
-.theme-prac-conn { background-color:@theme-icon-back; border-radius:36px;  }
-.theme-prac-desc { background-color:@theme-icon-back; }
-
-.theme-disp-desc { background-color:@theme-icon-back; font-size:2rem; }
-@theme-area-area-size:2rem;
-
-.theme-logo { background-color:@theme-back; font-size:@theme-dash-size; }
-.theme-menu { background-color:@theme-back; font-size:@theme-dash-size; }
-.theme-find { background-color:@theme-back; font-size:@theme-dash-size; }
-.theme-tocs { background-color:@theme-back; font-size:@theme-tocs-size; }
-.theme-view { background-color:@theme-back; font-size:@theme-dash-size; }
-.theme-side { background-color:@theme-back; font-size:@theme-dash-size; }
-.theme-pref { background-color:@theme-back; font-size:@theme-dash-size; }
-.theme-foot { background-color:@theme-back; font-size:@theme-dash-size; }
-.theme-trak { background-color:@theme-back; font-size:@theme-dash-size; }
-
-.themeCenterItems() { display:grid; justify-items:center; align-items:center; text-align:center; }
-.themeLeftSelf()    { display:grid; justify-self: start;  align-self: center; text-align:left;   }
-
-@theme-back-tocs-comp:#333;
-@theme-back-tocs-prac:#444; // Not used yet
-@theme-back-tocs-disp:#555; // Not used yet
-@theme-color-tocs-disp:white;
-
-@theme-back-menu:#222;
-@theme-back-item:#444;
-@theme-back-item-hover:#777;
-@theme-color-item-hover:black;
+.theme-btns {}
+.theme-game {}
+.theme-icon {}
+.theme-tabs {}
 
 // top | right | bottom | left

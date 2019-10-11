@@ -53,17 +53,17 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;
+  .dirs-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;
     grid-template-areas: "nw north ne" "west cen east" "sw south se"; }
 
   .ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }
   
-  .dirs-prac { position:absolute; left:0; top:0; right:0; bottom:0; background-color:@theme-icon-back;
-    color:black; text-align:center; font-weight:bold; .theme-prac-dirs(); .grid3x3();
+  .dirs-prac { position:absolute; left:0; top:0; right:0; bottom:0; background-color:@theme-sign-back;
+    color:black; text-align:center; font-weight:bold; .theme-prac-dirs(); .dirs-grid3x3();
                              .north { .ddir(north); }
       .west { .ddir(west); } .cen   { .ddir(cen);   } .east { .ddir(east); }
                              .south { .ddir(south); }
-      .cen  { font-size:@theme-cen-size*3.5; } }
+      .cen  { font-size:5.2@theme-dirs-size; } }
 
     /*
     .disp-prac {   display:inline; justify-self:center; align-self:center; text-align:center;

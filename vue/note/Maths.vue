@@ -1,6 +1,6 @@
 
 <template>
-  <div class="maths" ref="MathsNB"></div>
+  <div class="maths-pane" ref="MathsNB"></div>
 </template>
 
 <script type="module">
@@ -23,7 +23,7 @@
 
 <style lang="less">
   @import '../../pub/css/themes/theme.less';
-  .maths { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:@theme-obs-size;
+  .maths-pane { position:absolute; left:0; top:@theme-tabs-height-pc; right:0; bottom:0; font-size:@theme-obs-size;
     display:grid; justify-items:center; align-items:center; text-align:center;
     background-color:@theme-back; color:@theme-color; overflow:scroll; }
 

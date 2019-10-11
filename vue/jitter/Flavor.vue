@@ -1,8 +1,8 @@
 
 <template>
-  <div class="flavor">
-    <div class="csumm"><h-summ :name="name" ></h-summ></div>
-    <div class="wheel" :ref="name"></div>
+  <div   class="flavor-pane">
+    <div class="flavor-summ"><h-summ :name="name" ></h-summ></div>
+    <div class="flavor-wheel" :ref="name"></div>
   </div>
 </template>
 
@@ -54,12 +54,12 @@
   
   @import '../../pub/css/themes/theme.less';
 
-  .flavor { position:absolute; left:0; top:0; width:100%; height:100%;
+  .flavor-pane { position:absolute; left:0; top:0; width:100%; height:100%;
     background-color:@theme-back; color:@theme-color;
 
-    .csumm { position:absolute; left:0; top:0;   width:100%; height:15%; }
+    .flavor-summ  { position:absolute; left:0; top:0;   width:100%; height:15%; }
     
-    .wheel { position:absolute; left:0; top:15%; width:100%; height:85%;
+    .flavor-wheel { position:absolute; left:0; top:15%; width:100%; height:85%;
       .themeCenterItems(); background-color:@theme-back; color:@theme-color; border:1px solid @theme-color; }
   }
   

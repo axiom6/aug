@@ -24,20 +24,18 @@
 <style lang="less">
   
   @import '../../pub/css/themes/theme.less';
-  
-  body { font-size:2vmin; }
 
-  .dash { font-family:@theme-font-family;
+
+  html { .theme-html(); }
+  body { margin:0; }
+
+  .dash { font-family:@theme-font-family; .theme-dash();
      position:absolute; left:0; top:0; right:0; bottom:0; display:grid; overflow:hidden;
-     grid-template-columns: 10fr 90fr;
-     grid-template-rows:    10fr 90fr;
-     grid-template-areas:
-       "logo view"
-       "tocs view";
+     grid-template-columns: 10fr 90fr; grid-template-rows:10fr 90fr;grid-template-areas: "logo view" "tocs view";
   
-  #logo { grid-area:logo; justify-self:stretch; align-self:stretch; display:grid; .theme-logo; }
-  #tocs { grid-area:tocs; justify-self:stretch; align-self:stretch; display:grid; .theme-tocs; padding-bottom:1rem; }
-  #view { grid-area:view; justify-self:stretch; align-self:stretch; display:grid; .theme-view; padding:       1rem; } }
+    #logo { grid-area:logo; justify-self:stretch; align-self:stretch; display:grid; .theme-logo(); }
+    #tocs { grid-area:tocs; justify-self:stretch; align-self:stretch; display:grid; .theme-tocs(); padding-bottom:1rem; }
+    #view { grid-area:view; justify-self:stretch; align-self:stretch; display:grid; .theme-dash(); padding:       1rem; } }
   
 </style>
 

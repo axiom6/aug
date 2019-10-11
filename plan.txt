@@ -7,7 +7,8 @@ https://muse-b90e1.firebaseapp.com/app/muse.html  https://is.gd/KO7klq
 0. Fixes
    a. Prin Disp Disciplines styling
    b. Font Scaling
-   c. Toc Pracs for Technology and Data Science and Clean Up
+   c. Tocs Pracs for Technology and Data Science and Clean Up
+   d. Tocs constrain height expansion
    d. Test Augm
 
 1. Improve Landing Pages

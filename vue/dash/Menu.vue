@@ -1,15 +1,15 @@
 
 <template>
-  <div class="menu">    <!-- <i class="fas fa-home"></i> -->
-    <div class="navh"><router-link :to="{ name:'Home'}"><i class="fas fa-home"></i>Home</router-link></div>
-    <div class="search"   @click="click('Search')">
+  <div   class="menu-pane">    <!-- <i class="fas fa-home"></i> -->
+    <div class="menu-navh"><router-link :to="{ name:'Home'}"><i class="fas fa-home"></i>Home</router-link></div>
+    <div class="menu-search"   @click="click('Search')">
       <label for="search">Search</label>
       <i class="fas fa-search"></i>
-      <input class="input" placeholder=" Search" id="search" type="text" size="16">
+      <input class="menu-input" placeholder=" Search" id="search" type="text" size="16">
     </div>
-    <div class="contact"  @click="click('Contact')" ><i class="fas fa-user"       ></i>Contact</div>
-    <div class="signon"   @click="click('Signon')"  ><i class="fas fa-sign-in-alt"></i>Sign On</div>
-    <div class="settings"><i class="fas fa-cog"></i><span>Settings</span>
+    <div class="menu-contact"  @click="click('Contact')" ><i class="fas fa-user"       ></i>Contact</div>
+    <div class="menu-signon"   @click="click('Signon')"  ><i class="fas fa-sign-in-alt"></i>Sign On</div>
+    <div class="menu-settings"><i class="fas fa-cog"></i><span>Settings</span>
       <ul>
         <li @click="click('Preferences')"><i class="fas fa-cog"></i><span>Preferences</span></li>
         <li @click="click('Connection')" ><i class="fas fa-cog"></i><span>Connection</span></li>
@@ -38,22 +38,22 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .grid1x5() { display:grid; grid-template-columns:5fr 40fr 25fr 10fr 10fr 10fr; grid-template-rows:@theme-north;
+  .grid1x5() { display:grid; grid-template-columns:5fr 40fr 25fr 10fr 10fr 10fr; grid-template-rows:1fr;
     grid-template-areas: "gleft ghome gsearch gcontact gsettings gsignon"; }
   
-  .menu {  .grid1x5(); display:grid; background:@theme-back; color:@theme-color;
+  .menu-pane {  .grid1x5(); display:grid; background:@theme-back; color:@theme-color;
     font-family:@theme-font-family; font-weight:bold;    // Using because Navb sensistive to width
-    .navh     { grid-area:ghome;     justify-self:start; align-self:center;
+    .menu-navh     { grid-area:ghome;     justify-self:start; align-self:center;
       i { margin-right:0.3em; }
       a { color:@theme-color; text-decoration:none; }}
-    .search   { grid-area:gsearch;   justify-self:start; align-self:center;
+    .menu-search   { grid-area:gsearch;   justify-self:start; align-self:center;
       label { color:@theme-back; }
-      .input{ font-family:@theme-font-family; font-weight:bold;  font-size:0.9em;
+      .menu-input{ font-family:@theme-font-family; font-weight:bold;  font-size:0.9*@theme-menu-size;
         border-radius:0 12px 12px 0; background:@theme-color; color:@theme-back; } }
-    .contact  { grid-area:gcontact;  justify-self:start; align-self:center; }
-    .signon   { grid-area:gsignon;   justify-self:start; align-self:center; }
-    .settings { grid-area:gsettings; justify-self:start; align-self:center; position:relative;
-      ul { display:none; align-self:start; list-style:none; font-size:0.7rem; z-index:3;
+    .menu-contact  { grid-area:gcontact;  justify-self:start; align-self:center; }
+    .menu-signon   { grid-area:gsignon;   justify-self:start; align-self:center; }
+    .menu-settings { grid-area:gsettings; justify-self:start; align-self:center; position:relative;
+      ul { display:none; align-self:start; list-style:none; font-size:0.7@theme-menu-size; z-index:3;
         background:@theme-back-menu;
         position:absolute; left:10px; top:12px; width:200px; height:auto;
         padding:0.2em 0.2em 0.2em 0.6em; border-radius:0 24px 24px 0;
@@ -61,7 +61,7 @@
              margin:0.3em 0.3em 0.3em 0.3em; padding:0.2em 0.4em 0.2em 0.4em;
           i {    display:inline-block; margin-right:0.25em; }
           span { display:inline-block; } } } }
-    .settings:hover {
+    .menu-settings:hover {
       ul { display:grid; align-self:start; background:@theme-back-item;
         li:hover { background:@theme-back-item-hover; color:@theme-color-item-hover; } } }
      div i { margin-right:0.3em; } }

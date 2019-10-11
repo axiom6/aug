@@ -1,7 +1,7 @@
 
 
 <template>
-  <div class="note">
+  <div class="note-pane">
     <n-tabs route="Note" :pages="pages"></n-tabs>  <!-- init="Stand" -->
     <h1 v-if="myRoute()">Notebooks</h1>
     <template v-for="page in pages">
@@ -38,6 +38,6 @@
 
 <style lang="less">
   @import '../../pub/css/themes/theme.less';
-  .note { position:relative; left:0; top:0; right:0; bottom:0; background-color:@theme-back; display:grid;
-    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:@theme-h1-size; } }
+  .note-pane { position:relative; left:0; top:0; right:0; bottom:0; background-color:@theme-back; display:grid;
+    h1 { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:@theme-h1-size; } }
 </style>

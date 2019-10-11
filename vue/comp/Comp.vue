@@ -2,17 +2,17 @@
 <template>
   <div class="comp-pane">
     <b-tabs route="Comp" :pages="pages"></b-tabs>
-    <div class="comp" ref="Comp" title="Comp">
+    <div class="comp-comp" ref="Comp" title="Comp">
       <template v-for="pracObj in compObj">
         <div   :class="pracObj.dir" :key="pracObj.name" :ref="pracObj.name" :title="pracObj.name">
-          <p-icon v-show="pages['Icon'].show" :pracObj="pracObj"></p-icon>
+          <p-sign v-show="pages['Sign'].show" :pracObj="pracObj"></p-sign>
           <p-dirs v-show="pages['Dirs'].show" :pracObj="pracObj"></p-dirs>
           <p-conn   v-if="pages['Conn'].show" :pracObj="pracObj" level="Comp"></p-conn>
         </div>
       </template>
       <template v-for="row in myRows">
         <div v-show="isRows()" :class="row.dir" :key="row.name">
-          <p-icon :pracObj="row"></p-icon>
+          <p-sign :pracObj="row"></p-sign>
         </div>
       </template>
     </div>
@@ -22,22 +22,22 @@
 <script type="module">
 
   import Tabs from '../elem/Tabs.vue';
-  import Icon from './Icon.vue';
+  import Sign from './Sign.vue';
   import Dirs from './Dirs.vue';
   import Conn from './Conn.vue';
   
   let Comp = {
 
-    components:{ 'b-tabs':Tabs, 'p-icon':Icon, 'p-dirs':Dirs, 'p-conn':Conn },
+    components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs, 'p-conn':Conn },
     
     data() { return {
       pages:null, compObj:null, pracObj:null, myRows:null,
       pagesComp:{
-        Icon: { title:'Practices',    key:'Icon', show:true  },
+        Sign: { title:'Practices',    key:'Sign', show:true  },
         Dirs: { title:'Disciplines',  key:'Dirs', show:false },
         Conn: { title:'Connections',  key:'Conn', show:false } },
       pagesInfo:{
-        Icon: { title:'Practices',    key:'Icon', show:true  },
+        Sign: { title:'Practices',    key:'Sign', show:true  },
         Dirs: { title:'Disciplines',  key:'Dirs', show:false },
         Conn: { title:'Connections',  key:'Conn', show:false },
         Info: { title:'Technology',   key:'Info', show:false },
@@ -68,7 +68,7 @@
       onNav:  function (obj) {
         if( this.nav().isMyNav( obj, 'Comp' ) ) {
           let compKey = this.isPageKeyComp(obj.pageKey) ? obj.pageKey : obj.compKey;
-          let pageKey = this.isPageKeyComp(obj.pageKey) ? obj.prevKey : this.nav().getPageKey('Comp','Icon');
+          let pageKey = this.isPageKeyComp(obj.pageKey) ? obj.prevKey : this.nav().getPageKey('Comp','Sign');
           this.onComp( compKey );
           this.doPage( pageKey ); } }
       },
@@ -77,7 +77,7 @@
       this.onComp(  this.nav().compKey ); },
 
     mounted: function () {
-      this.doPage( this.nav().getPageKey('Comp','Icon') );
+      this.doPage( this.nav().getPageKey('Comp','Sign') );
       this.subscribe( 'Nav', 'Comp.vue', (obj) => {
         this.onNav(obj); } ); }
   }
@@ -103,7 +103,7 @@
 
   .comp-pane { position:relative; left:0; top:0; right:0; bottom:0;
   
-    .comp { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:@theme-prac-size;
+    .comp-comp { position:absolute; left:0; top:@theme-tabs-height-pc; right:0; bottom:0; .theme-comp();
             background-color:@theme-back; color:@theme-color-prac;
       .grid4x4(); justify-items:center; align-items:center; // The 4x4 Dim + Row + 9 Practices Grid
         .cm { .pdir(cm); } .em   { .pdir(em);   } .in    { .pdir(in); }    .en   { .pdir(en);   }
@@ -111,23 +111,23 @@
         .do { .pdir(do); } .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }
         .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }
       
-      .cm .icon { background-color:@theme-back; }
+      .cm .comp-sign { background-color:@theme-back; }
       
         // Placed one level below the 9 Practices Grid   - Check on background-color:#603;
-      .prac { background-color:#603; border-radius:36px; width:90%; height:80%; font-size:@theme-prac-size;
+      .comp-prac { background-color:#603; .theme-prac();
         font-weight:bold;
         .grid3x3(); // The 4 Displine plus Practiice name Grid
                                .north { .ddir(north); }
         .west { .ddir(west); } .cen   { .ddir(cen);   } .east { .ddir(east); }
                                .south { .ddir(south); }
-        .cen  { font-size:@theme-cen-size; }
-        div   { font-size:@theme-dir-size; } }
+        .cen  { font-size:@theme-comp-size*1.5; }
+        div   { font-size:@theme-comp-size*1.4; } }
       
-      .em, .in, .en { .prac .cen { font-size:@theme-row-size; } } // Font size columns
+      .em, .in, .en { .prac .cen { font-size:@theme-comp-size*1.5; } } // Font size columns
     
-      .row { background-color:#603; border-radius:36px; margin-left:10%; width:80%; height:80%; font-size:@theme-row-size;
-        font-weight:bold; display:grid;
-        div { text-align:center; justify-self:center;  align-self:center; font-size:@theme-row-size; color:@theme-color; }
+      .comp-row { background-color:#603; border-radius:36px; margin-left:10%; width:80%; height:80%;
+        font-size:@theme-comp-size*3.0; font-weight:bold; display:grid;
+        div { text-align:center; justify-self:center;  align-self:center; font-size:@theme-comp-size*1.4; color:@theme-color; }
         i { margin-bottom: 0.2rem; display:block; } }
     }
   }

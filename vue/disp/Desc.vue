@@ -1,8 +1,8 @@
 
 <template>
-  <div   class="desd" :style="style(dispObj)">
-    <d-icon class="iconq" :icon="dispObj.icon" :name="dispObj.name" :size="5.0" ></d-icon>
-    <div    class="summq">{{dispObj.desc}}</div>
+  <div      class="ddesc-pane" :style="style(dispObj)">
+    <d-icon class="ddesc-icon" :icon="dispObj.icon" :name="dispObj.name" :size="5.0" ></d-icon>
+    <div    class="ddesc-summ">{{dispObj.desc}}</div>
     <template v-for="areaObj in dispObj.areas">
       <d-icon :class="clArea" :icon="areaObj.icon" :name="areaObj.name" :summ="tsSumm(areaObj.desc)" :size="3.0"
       ></d-icon>
@@ -26,7 +26,7 @@
       style: function (ikwObj) {
         return this.styleObj(ikwObj); },
       clArea: function() {
-        let  klass = 'area'+this.iarea;
+        let  klass = 'ddesc-area'+this.iarea;
         this.iarea = this.iarea === 3 ? 1 : this.iarea+1;
         return klass; },
       tsSumm: function(summ) {
@@ -46,13 +46,13 @@
   .grid5x1() { display:grid;  grid-template-columns:1fr; grid-template-rows:20fr 20fr 20fr 20fr 20fr;
     grid-template-areas: "iconq" "summq""area1" "area2" "area3"; }
   
-  .desd { .grid5x1(); position:absolute; left:0; top:5%; right:0; bottom:0; .theme-disp-desc(); color:black;
+  .ddesc-pane { .grid5x1(); position:absolute; left:0; top:@theme-tabs-height-pc; right:0; bottom:0; .theme-desc(); color:black;
            border-radius:36px;
-    .iconq { grid-area:iconq; }
-    .summq { grid-area:summq; margin-left:@theme-disp-size; }
-    .area1 { grid-area:area1; }
-    .area2 { grid-area:area2; }
-    .area3 { grid-area:area3; }
+    .ddesc-iconq { grid-area:iconq; }
+    .ddesc-summq { grid-area:summq; margin-left:1.2em; }
+    .ddesc-area1 { grid-area:area1; }
+    .ddesc-area2 { grid-area:area2; }
+    .ddesc-area3 { grid-area:area3; }
     
 
   }

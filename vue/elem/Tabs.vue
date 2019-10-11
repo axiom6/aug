@@ -1,6 +1,6 @@
 
 <template>
-  <div class="tabs">
+  <div class="tabs-pane">
     <template v-for="pageObj in pages">
       <div :class="classTab(pageObj.key)" @click="doPage(pageObj.key)">{{pageObj.title}}</div>
     </template>
@@ -33,7 +33,7 @@
           obj.compKey = pageKey; }
         return obj; },
       classTab: function (pageKey) {
-        return this.pageKey===pageKey ? 'tab-active' : 'tab'; } },
+        return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },
 
     beforeMount: function () {  // We want to set the routes pages asap
       this.tabsKey  = this.nav().setPages( this.route, this.pages ); },
@@ -51,13 +51,13 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .tabs { position:absolute; left:0; top:0; width:100%; height:5%;
-          background-color:@theme-back; font-size:@theme-tab-size;
-    .tab { display:inline-block; margin-left:2.0rem; padding:0.2rem 0.3rem 0.1rem 0.3rem;
+  .tabs-pane { position:absolute; left:0; top:0; width:100%; height:@theme-tabs-height-pc;
+          background-color:@theme-back; font-size:@theme-tabs-size;
+    .tabs-tab { display:inline-block; margin-left:2.0rem; padding:0.2rem 0.3rem 0.1rem 0.3rem;
       border-radius:12px 12px 0 0; border-left: @theme-color solid thin;
       border-top:@theme-color solid thin; border-right:@theme-color solid thin;
                   background-color:@theme-back;  color:@theme-color;}
-    .tab:hover  {         background-color:@theme-color; color:@theme-back; }
-    .tab-active { .tab(); background-color:@theme-color; color:@theme-back; } }
+    .tabs-tab:hover  {         background-color:@theme-color; color:@theme-back; }
+    .tabs-tab-active { .tabs-tab(); background-color:@theme-color; color:@theme-back; } }
   
 </style>

@@ -60,7 +60,7 @@
                              .north { .ddir(north); }
       .west { .ddir(west); } .cen   { .ddir(cen);   } .east { .ddir(east); }
                              .south { .ddir(south); }
-      .cen  { font-size:@theme-dirs-size; }
+      .cen  { font-size:@theme-comp-size*0.8; }
 
     .disp-comp { display:inline; justify-self:center; align-self:center; text-align:center;
       i        { display:inline-block;  margin-right: 0.15rem; }

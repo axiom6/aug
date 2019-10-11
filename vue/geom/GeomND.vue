@@ -1,9 +1,9 @@
 
 <template>
-  <div>
+  <div class="geom-nd-pane">
     <d-tabs :route="route" :pages="pages"></d-tabs>
     <template v-for="page in pages">
-      <div :ref="page.key" v-show="page.show" class="page" :key="page.key"></div>
+      <div :ref="page.key" v-show="page.show" class="geom-nd-page" :key="page.key"></div>
     </template>
   </div>
 </template>
@@ -48,6 +48,8 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .page { position:absolute; left:0; top:5%; right:0; bottom:0; background-color:@theme-back; display:grid; }
+  .geom-nd-pane {}
+  
+  .geom-nd-page { position:absolute; left:0; top:@theme-tabs-height-pc; right:0; bottom:0; background-color:@theme-back; display:grid; }
 
 </style>

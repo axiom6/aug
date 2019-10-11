@@ -73,9 +73,9 @@
   @import '../../pub/css/themes/theme.less';
 
   .conn-comp { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;
-    color:@theme-color; font-size:@theme-icon-size; text-align:center; .theme-comp-conn(); }
+    color:@theme-color; text-align:center; .theme-conn(); }
 
   .conn-prac { position:absolute; left:0; top:0; right:0; bottom:0;
-    color:@theme-color; font-size:@theme-icon-size; text-align:center; .theme-prac-conn(); }
+    color:@theme-color; text-align:center; .theme-conn(); }
   
 </style>

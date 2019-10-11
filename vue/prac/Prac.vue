@@ -1,8 +1,8 @@
 
 <template>
-  <div   class="pane">
+  <div   class="prac-pane">
     <b-tabs route="Prac" :pages="pages"></b-tabs>
-    <div class="prac">
+    <div class="prac-prac">
       <p-dirs v-show="pages['Dirs'].show" :pracObj="pracObj"></p-dirs>
       <p-conn   v-if="pages['Conn'].show" :pracObj="pracObj" level="Prac"></p-conn>
       <p-desc v-show="pages['Desc'].show" :pracObj="pracObj"></p-desc>
@@ -59,10 +59,10 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .pane {   position:relative; left:0; top:0;  right:0; bottom:0;
+  .prac-pane {   position:relative; left:0; top:0;  right:0; bottom:0;
     
-    .prac { position:absolute; left:0; top:5%; right:0; bottom:0;
-      background-color:@theme-icon-back; border-radius:36px; }
+    .prac-prac { position:absolute; left:0; top:@theme-tabs-height-pc; right:0; bottom:0;
+      background-color:@theme-sign-back; border-radius:36px; }
     
   }
   

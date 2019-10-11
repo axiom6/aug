@@ -1,17 +1,17 @@
 
 <template>
-  <div>
-    <div :class="icClass()" :style="style()" @click="doClick()">
-      <i   :class="icon"></i>
-      <span class="name">{{name}}</span>
-      <span v-if="hasSumm()" class="summ">{{summ}}</span>
+  <div      class="icon-pane">
+    <div   :class="icClass()" :style="style()" @click="doClick()">
+      <i    class="icon-icon"></i>
+      <span class="icon-name">{{name}}</span>
+      <span class="icon-summ" v-if="hasSumm()">{{summ}}</span>
     </div>
   </div>
 </template>
 
 <script type="module">
   
-  let IconName = {
+  let Icon = {
 
     props: { icon:String, name:String, summ:String, size:Number, fnClick:Function },
     
@@ -34,7 +34,7 @@
     
   }
   
-  export default IconName;
+  export default Icon;
   
 </script>
 
@@ -42,16 +42,20 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .grid1x2() { display:grid; grid-template-columns:30fr 10fr 30fr 30fr;
+  .icon-grid1x2() { display:grid; grid-template-columns:30fr 10fr 30fr 30fr;
     grid-template-areas:"nleft nicon nname nright"; }
+
+  .icon-pane {}
   
-  .icon-name { .grid1x2(); align-self:center;  justify-self:center; height:100%;
+  .icon-icon {}
+  
+  .icon-name { .icon-grid1x2(); align-self:center;  justify-self:center; height:100%;
     i     { grid-area:nicon; .themeCenterItems(); }
     .name { grid-area:nname; .themeCenterItems(); } }
 
-  .grid1x4() { display:grid; grid-template-columns:5fr 10fr 20fr 65fr; grid-template-areas:"sleft sicon sname ssumm"; }
+  .icon-grid1x4() { display:grid; grid-template-columns:5fr 10fr 20fr 65fr; grid-template-areas:"sleft sicon sname ssumm"; }
 
-  .icon-summ { .grid1x4(); align-self:start;  justify-self:center;
+  .icon-summ { .icon-grid1x4(); align-self:start;  justify-self:center;
     i     { grid-area:sicon; .themeLeftSelf(); }
     .name { grid-area:sname; .themeLeftSelf(); font-weight:900; }
     .summ { grid-area:ssumm; .themeLeftSelf(); } }

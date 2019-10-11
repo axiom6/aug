@@ -1,6 +1,6 @@
 
 <template>
-  <div class="leaf"></div>
+  <div class="leaf-pane"></div>
 </template>
 
 <script type="module">
@@ -9,5 +9,5 @@
 
 <style lang="less">
   @import '../../../pub/css/themes/theme.less';
-  .leaf { background-color:@theme-back; }
+  .leaf-pane { background-color:@theme-back; }
 </style>

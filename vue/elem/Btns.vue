@@ -1,10 +1,10 @@
 
 <template>
-  <div ref="Btns" class="btns">
+  <div ref="Btns" class="btns-pane">
     <template v-for="btn in btns">
       <div        :ref="btn.name"  :style="styleBlock(btn.pos)">
-        <div   class="btn-center">
-          <div class="btn" :style="styleBtn(btn)" @click="pubBtn(btn)">
+        <div   class="btns-center">
+          <div class="btns-btn" :style="styleBtn(btn)" @click="pubBtn(btn)">
             <span v-if="btn.check" :class="classCheck(btn)"></span>
             <i    v-if="btn.icon"  :class="classIcons(btn)"></i>
             <img  v-if="btn.img"    class="image" :src="img(btn)" alt=""/>
@@ -79,13 +79,13 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .btns { font-size:@theme-btn-size; font-weight:bold; position:absolute; left:0; top:0; right:0; bottom:0; }
+  .btns-pane { font-size:@theme-btn-size; font-weight:bold; position:absolute; left:0; top:0; right:0; bottom:0; }
   
-  .btn-center { display:grid;  width:100%; height:100%; } // A surrounding div for centering button
+  .btns-center { display:grid;  width:100%; height:100%; } // A surrounding div for centering button
 
-  .grid1x3() { display:grid; grid-template-columns:20fr 24fr 56fr; grid-template-areas:"check icons label"; }
+  .btns-grid1x3() { display:grid; grid-template-columns:20fr 24fr 56fr; grid-template-areas:"check icons label"; }
 
-  .btn { .grid1x3(); justify-self:center; align-self:center;
+  .btns-btn { .btns-grid1x3(); justify-self:center; align-self:center;
     width:80%; height:80%; font-size:inherit; font-family:@theme-font-family;
     cursor:pointer; border-radius:16px; border: solid @theme-back 1px; }
 

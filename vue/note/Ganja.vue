@@ -1,6 +1,6 @@
 
 <template>
-  <div class="ganja">
+  <div class="ganja-pane">
     <div>
       <h1>Ganja Notebook</h1>
     </div>
@@ -13,7 +13,7 @@
 
 <style lang="less">
   @import '../../pub/css/themes/theme.less';
-  .ganja { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:@theme-obs-size;
+  .ganja-pane { position:absolute; left:0; top:@theme-tabs-height-pc; right:0; bottom:0; font-size:@theme-obs-size;
     display:grid; justify-items:center; align-items:center; text-align:center;
     background-color:@theme-back; color:@theme-color; }
 </style>

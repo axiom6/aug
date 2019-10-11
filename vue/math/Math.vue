@@ -1,6 +1,6 @@
 
 <template>
-  <div class="math" ref="Math">
+  <div class="math-pane" ref="Math">
     <h1 v-if="route==='Math'">Mathematics</h1>
     <template v-for="math in maths">
       <router-view :name="route+math.key"></router-view>
@@ -29,7 +29,7 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .math {   position:relative; left:0; top:0; right:0; bottom:0; background-color:@theme-back; display:grid;
-    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:@theme-h1-size; } }
+  .math-pane { position:relative; left:0; top:0; right:0; bottom:0; background-color:@theme-back; display:grid;
+    h1 { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:@theme-h1-size; } }
 
 </style>

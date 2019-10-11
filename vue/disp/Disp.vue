@@ -1,6 +1,6 @@
 
 <template>
-  <div class="disd">
+  <div class="disp-pane">
     <d-tabs route="Disp" :pages="pages"></d-tabs>
     <d-dims v-if="pages['Dims'].show" :dispObj="dispObj" from="Disp"></d-dims>
     <d-desc v-if="pages['Desc'].show" :dispObj="dispObj" from="Disp"></d-desc>
@@ -51,7 +51,7 @@
   
   @import '../../pub/css/themes/theme.less';
 
-  .disd { position:relative; left:0; top:0; right:0; bottom:0; background-color:@theme-icon-back; }
+  .disp-pane { position:relative; left:0; top:0; right:0; bottom:0; background-color:@theme-sign-back; }
   
 </style>
 

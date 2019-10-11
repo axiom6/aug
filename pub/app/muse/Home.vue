@@ -1,18 +1,18 @@
 
 <template>
-  <div class="home">
-    <!--div class="head">
+  <div class="home-pane">
+    <!--div class="home-head">
       <div>
-        <h1>Welcome to Muse Home Page</h1>
-        <h2>Choose an Application Component on the Left</h2>
+        <h1 class="home-h1">Welcome to Muse Home Page</h1>
+        <h2 class="home-h2">Choose an Application Component on the Left</h2>
       </div>
     </div-->
-    <div class="midd">
-      <h1>Humanistic Practices</h1>
+    <div  class="home-midd">
+      <h1 class="home-h1">Humanistic Practices</h1>
     </div>
-    <!--div class="foot">
+    <!--div class="home-foot">
       <div>
-        <h1>Axiom Architectures</h1>
+        <h1 class="home-h1">Axiom Architectures</h1>
       </div>
     </div-->
   </div>
@@ -51,20 +51,20 @@
   .grid3x1() { display:grid; grid-template-columns:1fr; grid-template-rows:30fr 40fr 30fr;
       grid-template-areas:"head" "midd" "foot"; }
   
-  .home { .grid3x1(); position:relative; left:0; top:0; right:0; bottom:0;
+  .home-pane { .grid3x1(); position:relative; left:0; top:0; right:0; bottom:0;
     background-color:@theme-back; color:@theme-color;
 
-    .head { grid-area:head; justify-items:center; align-items:center; text-align:center; display:grid;
+    .home-head { grid-area:head; justify-items:center; align-items:center; text-align:center; display:grid;
       justify-self:stretch; align-self:stretch; }
     
-    .midd { grid-area:midd; position:relative; left:0; top:0; right:0; height:100%; display:grid;
+    .home-midd { grid-area:midd; position:relative; left:0; top:0; right:0; height:100%; display:grid;
       justify-self:stretch; align-self:stretch; }
   
-    .foot { grid-area:foot; justify-items:center; align-items:center; text-align:center; display:grid;
+    .home-foot { grid-area:foot; justify-items:center; align-items:center; text-align:center; display:grid;
       justify-self:stretch; align-self:stretch;  }
   
-    h1 { justify-self:center; align-self:center; font-size:5rem; }  // @theme-h1-size;
-    h2 { justify-self:center; align-self:center; font-size:@theme-h2-size; }
+    .home-h1 { justify-self:center; align-self:center; font-size:3.5rem; }
+    .home-h2 { justify-self:center; align-self:center; font-size:2.5rem }
  }
  
 </style>

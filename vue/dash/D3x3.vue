@@ -40,24 +40,24 @@
   
   @import '../../pub/css/themes/theme.less';
 
-  .dash { font-family:@theme-font-family;
+  .dash { font-family:@theme-font-family; .theme-dash();
    position:absolute; left:0; top:0; right:0; bottom:0; display:grid;
-   grid-template-columns: @theme-west  @theme-center @theme-east;
-   grid-template-rows:    @theme-north @theme-middle @theme-south;
+   grid-template-columns: 11fr 85fr 4fr;
+   grid-template-rows:    10fr 85fr 5fr;
    grid-template-areas:
      "logo menu find"
      "tocs view side"
      "pref foot trak";
   
-  #logo { grid-area:logo; justify-self:stretch; align-self:stretch; display:grid; .theme-logo; }
-  #menu { grid-area:menu; justify-self:stretch; align-self:stretch; display:grid; .theme-menu; }
-  #find { grid-area:find; justify-self:stretch; align-self:stretch; display:grid; .theme-find; }
-  #tocs { grid-area:tocs; justify-self:stretch; align-self:stretch; display:grid; .theme-tocs; }
-  #view { grid-area:view; justify-self:stretch; align-self:stretch; display:grid; .theme-view; }
-  #side { grid-area:side; justify-self:stretch; align-self:stretch; display:grid; .theme-side; }
-  #pref { grid-area:pref; justify-self:stretch; align-self:stretch; display:grid; .theme-pref; }
-  #foot { grid-area:foot; justify-self:stretch; align-self:stretch; display:grid; .theme-foot; }
-  #trak { grid-area:trak; justify-self:stretch; align-self:stretch; display:grid; .theme-trak; } }
+  #logo { grid-area:logo; justify-self:stretch; align-self:stretch; display:grid; .theme-dash(); }
+  #menu { grid-area:menu; justify-self:stretch; align-self:stretch; display:grid; .theme-dash(); }
+  #find { grid-area:find; justify-self:stretch; align-self:stretch; display:grid; .theme-dash(); }
+  #tocs { grid-area:tocs; justify-self:stretch; align-self:stretch; display:grid; .theme-tocs(); }
+  #view { grid-area:view; justify-self:stretch; align-self:stretch; display:grid; .theme-dash(); }
+  #side { grid-area:side; justify-self:stretch; align-self:stretch; display:grid; .theme-dash(); }
+  #pref { grid-area:pref; justify-self:stretch; align-self:stretch; display:grid; .theme-dash(); }
+  #foot { grid-area:foot; justify-self:stretch; align-self:stretch; display:grid; .theme-dash(); }
+  #trak { grid-area:trak; justify-self:stretch; align-self:stretch; display:grid; .theme-dash(); } }
   
 </style>
 

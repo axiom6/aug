@@ -1,6 +1,6 @@
 
 <template>
-  <div class="stand" ref="StandNB"></div>
+  <div class="stand-pane" ref="StandNB"></div>
 </template>
 
 <script type="module">
@@ -23,7 +23,7 @@
 
 <style lang="less">
   @import '../../pub/css/themes/theme.less';
-  .stand { position:absolute; left:0; top:5%; right:0; bottom:0; font-size:@theme-obs-size;
+  .stand-pane { position:absolute; left:0; top:@theme-tabs-height-pc; right:0; bottom:0; font-size:@theme-obs-size;
     display:grid; justify-items:center; align-items:center; text-align:center;
     background-color:@theme-back; color:@theme-color; overflow:scroll; }
   
