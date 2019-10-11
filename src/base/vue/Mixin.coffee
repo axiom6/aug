@@ -7,12 +7,6 @@ class Mixin
     Mixin.Main  = Main
     Mixin.views = views
 
-  isArray:(a) ->
-    typeof(a)!="string" and a.length? and a.length > 0
-
-  inArray:(a,e) ->
-    a.indexOf(e) > -1
-
   mixin:() ->
     return  {
       created: () ->
@@ -29,6 +23,8 @@ class Mixin
           this.isArray(a) and a.indexOf(e) > -1
         app:() ->
           Mixin.Main.app
+        isMuse:() ->
+          'Muse' is this.app()
         subscribe: (subject, source, onMethod) ->
           Mixin.Main['stream'].subscribe(subject, source, onMethod)
           return

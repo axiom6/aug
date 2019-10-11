@@ -9,14 +9,6 @@ Mixin = class Mixin {
     Mixin.views = views;
   }
 
-  isArray(a) {
-    return typeof a !== "string" && (a.length != null) && a.length > 0;
-  }
-
-  inArray(a, e) {
-    return a.indexOf(e) > -1;
-  }
-
   mixin() {
     return {
       created: function() {},
@@ -36,6 +28,9 @@ Mixin = class Mixin {
         },
         app: function() {
           return Mixin.Main.app;
+        },
+        isMuse: function() {
+          return 'Muse' === this.app();
         },
         subscribe: function(subject, source, onMethod) {
           Mixin.Main['stream'].subscribe(subject, source, onMethod);

@@ -25,14 +25,17 @@
   
   let Tocs = {
     
-    data: function() { return { komps:{}, compPracs:{}, compKey:'Home', dataKey:'Home',  pracKey:'None', dispKey:'None'
-    } },
+    data: function() {
+      return { komps:{}, compPracs:{}, innovs:['Explore','Model','Simulate'],
+        compKey:'Home', dataKey:'Home', pracKey:'None', dispKey:'None' } },
     
     methods: {
       myPracs: function(dataKey) {
-        return this.isDef(this.komps[dataKey]) ? this.komps[dataKey].pracs : this.cpPracs[dataKey]; },
-      cpPracs: function(dataKey) {
-        return this.isPageKeyComp(dataKey) ? this.compPracs[dataKey] : {}; },
+        let pracs = {}
+        if(      this.isDef(this.compPracs[dataKey]) ) { pracs = this.compPracs[dataKey];   }
+        else if( this.isDef(this.komps[dataKey])     ) { pracs = this.komps[dataKey].pracs; }
+        return pracs; },
+
       doComp:  function(compKey) {
         this.compKey = compKey;
         this.dataKey = compKey;
@@ -40,9 +43,17 @@
         let  route   = this.komps[kompKey].route;
         this.pub( { route:route, compKey:compKey, source:'Toc' } ); },
       doPrac: function(pracKey) {
-        this.pracKey = pracKey;
-        let route    = this.app()==='Muse' ? 'Prac' : pracKey;
-        this.pub( { route:route, pracKey:pracKey, source:'Toc' } ); },
+        this.pracKey  = pracKey;
+        let route     = this.isMuse() ? 'Prac' : pracKey;
+        let innovKey  = this.innovCompKey( pracKey, 'Data' );
+        if( innovKey!== 'None' && innovKey!==this.compKey ) {
+          this.doComp( innovKey ) }
+        else {
+          this.pub( { route:route, pracKey:pracKey, source:'Toc' } ); } },
+      innovCompKey: function ( pracKey, compKey ) {
+        let pracs   = this.myPracs(compKey)
+        let isInnov = this.isMuse() && this.inArray(pracKey,this.innovs) && this.isDef(pracs) && this.isDef(pracs[pracKey]);
+        return isInnov ? compKey : 'None' },
       doDisp: function(dispKey) {
         this.dispKey = dispKey;
         this.pub( { route:'Disp', dispKey:dispKey, source:'Toc' } ); },
@@ -67,15 +78,22 @@
           let prac = pracs[key];
           if( prac.row !== 'Dim' || compKey === 'Prin' ) {
             filt[key] = prac; } }
-        return filt;
-      } },
+        return filt; },
+      mergePracs: function( base, add, keys ) {
+        let pracs = this.filterPracs( this.pracs(base) )
+        let merge = this.pracs(add);
+        for( let key of keys ) {
+          pracs[key] = merge[key]; }
+        return pracs; },
+      },
 
     beforeMount: function () {
       this.komps = this.kompsTocs();
       for( let key in this.komps ) {
         let komp = this.komps[key];
         if( komp.ikw ) {
-          komp.pracs = this.filterPracs( this.pracs(komp.key), komp.key ); } }
+          if( key==='Info') { komp.pracs = this.mergePracs(  'Info', 'Data', this.innovs ); }
+          else              { komp.pracs = this.filterPracs( this.pracs(komp.key), komp.key ); } } }
       if( this.isPageKeyComp('Data') ) {
         this.compPracs['Data'] = this.filterPracs( this.pracs('Data'),'Data'); } },
     

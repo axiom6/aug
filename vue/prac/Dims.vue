@@ -58,20 +58,21 @@
   .dims-grid4x4() { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr 1fr;
     grid-template-areas: "pi pd pk pw" "li ld lk lw" "di dd dk dw" "si sd sk sw"; }
   
-  .dims-disp { border-radius:36px; position:absolute; left:0; top:@theme-tabs-height-pc; right:0; bottom:0; }
+  .dims-disp { font-size:@theme-dims-size*2.0; border-radius:36px;
+    position:absolute; left:0; top:@theme-tabs-height-pc; right:0; bottom:0; }
 
-  .dims-dirs { border-radius:36px; }
+  .dims-dirs { font-size:@theme-dims-size; border-radius:36px; }
 
-  .dims-head    { display:grid; justify-self:center; align-self:center; text-align:center; font-size:@theme-dims-size*3;
+  .dims-head    { display:grid; justify-self:center; align-self:center; text-align:center; font-size:1.7em;
     .dims-title { display:inline;
     i           { display:inline-block;  margin-right: 0.25rem; }
     .dims-name  { display:inline-block; } } }
 
-  .plane( @area ) { display:inline; grid-area:@area; font-size:@theme-dims-size*1.4; text-align:left;
+  .plane( @area ) { display:inline; grid-area:@area; font-size:1.2em; text-align:left;
     i             { display:inline-block;  margin-right: 0.25rem; }
-    .ddname       { display:inline-block; } }
+    .dims-name    { display:inline-block; } }
 
-  .study( @area ) { display:inline; grid-area:@area; font-size:@theme-dims-size*1.1; text-align:left;
+  .study( @area ) { display:inline; grid-area:@area; font-size:0.9em; text-align:left;
     i             { display:inline-block;  margin-right: 0.25rem; }
     .dims-name    { display:inline-block; } }
 

@@ -43,7 +43,7 @@ class Muse
     Muse.nav    = new Nav(   Muse.stream, batch, Muse.komps )
     Muse.build  = new Build( batch, Muse.komps )
     #use.cache  = new Cache( Muse.stream )
-    Data.buildInnov( batch, 'Data', 'Info' )
+    Data.buildInnov( batch, 'Data',   'Info' )
     Data.mergePracs( batch, 'Prin', ['Info','Know','Wise','Data'] )
     Muse.mergeCols()
     Muse.vue()
