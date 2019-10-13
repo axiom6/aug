@@ -5,9 +5,10 @@ https://augm-d4b3c.firebaseapp.com/app/augm.html
 https://muse-b90e1.firebaseapp.com/app/muse.html  https://is.gd/KO7klq
 
 0. Fixes
-   a. Clean Up Descriptions
+   a. Remember Invo page 'Info' or 'Data'
+   b. Clean Up Descriptions
    b. Tocs constrain height expansion
-   c. Test Augm
+   d. Test Augm
 
 1. Improve Landing Pages
    a. Landing Pages: Home Prin Info Know Wise

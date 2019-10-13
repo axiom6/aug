@@ -1,6 +1,6 @@
 
 <template>
-  <div class="tabs-pane">
+  <div class="tabs-pane" :style="stylePos()">
     <template v-for="pageObj in pages">
       <div :class="classTab(pageObj.key)" @click="doPage(pageObj.key)">{{pageObj.title}}</div>
     </template>
@@ -11,7 +11,7 @@
 
   export default {
 
-    props: { route:String, pages:Object },
+    props: { route:String, pages:Object, position:String },
     
     data() { return { tabPages:null, tabsKey:'None', pageKey:'None', prevKey:'None', pageObj:null } },
     
@@ -28,10 +28,13 @@
           this.nav().setPageKey( this.route, pageKey );
           this.nav().pub( this.pubObj(pageKey) ); } },
       pubObj: function (pageKey) {
-        let obj = { source:'Tabs', route:this.route, pageKey:pageKey, prevKey:this.prevKey };
-        if( this.isPageKeyComp(pageKey) ) {
+        let route = this.route==='Inov' ? 'Comp' : this.route;
+        let obj   = { source:'Tabs', route:route, pageKey:pageKey, prevKey:this.prevKey };
+        if( this.route==='Inov' ) {
           obj.compKey = pageKey; }
         return obj; },
+      stylePos: function () {
+        return this.position==='right' ? { left:'50%' } : { left:0 }; },
       classTab: function (pageKey) {
         return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },
 
@@ -51,7 +54,7 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .tabs-pane { position:absolute; left:0; top:0; width:100%; height:@theme-tabs-height-pc;
+  .tabs-pane { position:absolute; left:0; top:0; width:50%; height:@theme-tabs-height-pc;
           background-color:@theme-back; font-size:@theme-tabs-size;
     .tabs-tab { display:inline-block; margin-left:2.0rem; padding:0.2rem 0.3rem 0.1rem 0.3rem;
       border-radius:12px 12px 0 0; border-left: @theme-color solid thin;

@@ -1,7 +1,8 @@
 
 <template>
   <div class="comp-pane">
-    <b-tabs route="Comp" :pages="pages"></b-tabs>
+    <b-tabs route="Comp" :pages="pages" position="left" ></b-tabs>
+    <b-tabs route="Inov" :pages="inovs" position="right" v-if="hasInnov()"></b-tabs>
     <div class="comp-comp" ref="Comp" title="Comp">
       <template v-for="pracObj in compObj">
         <div   :class="pracObj.dir" :key="pracObj.name" :ref="pracObj.name" :title="pracObj.name">
@@ -30,18 +31,14 @@
 
     components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs, 'p-conn':Conn },
     
-    data() { return {
-      pages:{}, compObj:{}, pracObj:{}, myRows:{},
-      pagesComp:{
+    data() { return { compObj:null, pracObj:{}, myRows:{},
+      pages:{
         Sign: { title:'Practices',    key:'Sign', show:true  },
         Dirs: { title:'Disciplines',  key:'Dirs', show:false },
         Conn: { title:'Connections',  key:'Conn', show:false } },
-      pagesInfo:{
-        Sign: { title:'Practices',    key:'Sign', show:true  },
-        Dirs: { title:'Disciplines',  key:'Dirs', show:false },
-        Conn: { title:'Connections',  key:'Conn', show:false },
-        Info: { title:'Technology',   key:'Info', show:false },
-        Data: { title:'Data Science', key:'Data', show:false } },
+      inovs:{
+        Info: { title:'Tech', key:'Info', show:true  },
+        Data: { title:'Data', key:'Data', show:false } },
       rows: {
         Plane:{ name:'Information', dir:'cm', icon:"fas fas fa-th" },
         Learn:{ name:'Learn',       dir:'le', icon:"fas fa-graduation-cap" },
@@ -54,29 +51,30 @@
         Data:{ name:'Data Science', dir:'cm', icon:"fas fas fa-table" } } } },
     
     methods: {
+      hasInnov: function() {
+        return this.isDef(this.compObj) && this.isDef(this.compObj['Team']); },
       onRows: function (compKey) {
          this.myRows          = this.rows;
          this.myRows['Plane'] = this.planes[compKey]; },
       onComp: function (compKey) {
-        this.pages   = this.isPageKeyComp(compKey) ? this.pagesInfo : this.pagesComp
         this.compObj = this.compObject(compKey);
         // console.log( 'Comp.onComp()', compKey, this.compObj );
         this.onRows( compKey); },
-      doPage: function( pageKey ) {
+      doPage: function( objKey ) {
+        let pageKey = objKey==='None' ? this.nav().getPageKey('Comp','Sign') : objKey;
         this.nav().setPageKey( 'Comp', pageKey ); },
       isRows: function () {
         return true; },
       onNav:  function (obj) {
-        if( this.nav().isMyNav( obj, 'Comp' ) || this.isPageKeyComp(obj.pageKey) ) {
+        if( this.nav().isMyNav( obj, 'Comp' ) ) { // || this.isPageKeyComp(obj.pageKey) )
           let compKey = this.isPageKeyComp(obj.pageKey) ? obj.pageKey : obj.compKey;
-          let pageKey = this.isPageKeyComp(obj.pageKey) ? obj.prevKey : this.nav().getPageKey('Comp','Sign');
+          let pageKey = this.isPageKeyComp(obj.pageKey) ? obj.prevKey : obj.pageKey;
           this.onComp( compKey );
           this.doPage( pageKey ); } }
       },
 
     beforeMount: function() {
-      this.onComp( this.nav().compKey );
-      this.doPage( this.nav().getPageKey('Comp','Sign') ); },
+      this.onComp( this.nav().compKey ); }, //       this.doPage( this.nav().getPageKey('Comp','Sign') );
 
     mounted: function () {
       this.subscribe( 'Nav', 'Comp.vue', (obj) => {
