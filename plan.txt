@@ -5,10 +5,9 @@ https://augm-d4b3c.firebaseapp.com/app/augm.html
 https://muse-b90e1.firebaseapp.com/app/muse.html  https://is.gd/KO7klq
 
 0. Fixes
-   b. Clean Up Descriptions
-   c. Tocs Closing Up and leveraing onNav() for changing compKey
-   d. Tocs constrain height expansion
-   d. Test Augm
+   a. Clean Up Descriptions
+   b. Tocs constrain height expansion
+   c. Test Augm
 
 1. Improve Landing Pages
    a. Landing Pages: Home Prin Info Know Wise

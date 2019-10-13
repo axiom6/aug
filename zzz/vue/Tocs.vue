@@ -6,7 +6,7 @@
         <div   v-on:click="doComp(komp.key)">
           <div  :style="styleComp(komp.key)"><i :class="komp.icon"></i>{{komp.title}}</div>
         </div>
-        <ul v-if="myKomp(komp.key)"><template v-for="prac in myPracs(compKey)" >
+        <ul v-if="compKey===komp.key"><template v-for="prac in myPracs(dataKey)" >
           <li v-on:click="doPrac(prac.name)" :style="style(prac)" :key="prac.name">
             <i :class="prac.icon"></i>
             <span>{{prac.name}}</span>
@@ -26,26 +26,34 @@
   let Tocs = {
     
     data: function() {
-      return { komps:{}, compPracs:{}, compKey:'Home', pracKey:'None', dispKey:'None' } },
+      return { komps:{}, compPracs:{}, innovs:['Explore','Model','Simulate'],
+        compKey:'Home', dataKey:'Home', pracKey:'None', dispKey:'None' } },
     
     methods: {
-      myPracs: function(compKey) {
+      myPracs: function(dataKey) {
         let pracs = {}
-        if(      this.isDef(this.compPracs[compKey]) ) { pracs = this.compPracs[compKey];   }
-        else if( this.isDef(this.komps[compKey])     ) { pracs = this.komps[compKey].pracs; }
-        // console.log( 'Tocs.myPrac()', compKey, pracs );
+        if(      this.isDef(this.compPracs[dataKey]) ) { pracs = this.compPracs[dataKey];   }
+        else if( this.isDef(this.komps[dataKey])     ) { pracs = this.komps[dataKey].pracs; }
         return pracs; },
-      myKomp: function(kompKey) {
-        return kompKey===this.compKey || ( kompKey==='Info' && this.compKey==='Data' ) },
-      doComp: function(compKey) {
+
+      doComp:  function(compKey) {
         this.compKey = compKey;
+        this.dataKey = compKey;
         let  kompKey = compKey==='Data' ? 'Info' : compKey;
         let  route   = this.komps[kompKey].route;
         this.pub( { route:route, compKey:compKey, source:'Toc' } ); },
       doPrac: function(pracKey) {
-        this.pracKey = pracKey;
-        let route    = this.isMuse() ? 'Prac' : pracKey;
-        this.pub( { route:route, pracKey:pracKey, source:'Toc' } ); },
+        this.pracKey  = pracKey;
+        let route     = this.isMuse() ? 'Prac' : pracKey;
+        let innovKey  = this.innovCompKey( pracKey, 'Data' );
+        if( innovKey!== 'None' && innovKey!==this.compKey ) {
+          this.doComp( innovKey ) }
+        else {
+          this.pub( { route:route, pracKey:pracKey, source:'Toc' } ); } },
+      innovCompKey: function ( pracKey, compKey ) {
+        let pracs   = this.myPracs(compKey)
+        let isInnov = this.isMuse() && this.inArray(pracKey,this.innovs) && this.isDef(pracs) && this.isDef(pracs[pracKey]);
+        return isInnov ? compKey : 'None' },
       doDisp: function(dispKey) {
         this.dispKey = dispKey;
         this.pub( { route:'Disp', dispKey:dispKey, source:'Toc' } ); },
@@ -54,12 +62,14 @@
         this.nav().pub(obj); },
       onNav:  function (obj) {
         if( obj.source !== 'Toc' ) {
-          if( this.compKey !== obj.compKey ) { this.compKey = obj.compKey; } // this.myPracs(obj.compKey);
+          if( this.compKey !== obj.compKey ) {
+              this.compKey = this.isPageKeyComp(obj.compKey) ? 'Info' : obj.compKey;
+              this.dataKey = obj.compKey; }
           if( this.pracKey !== obj.pracKey ) { this.pracKey = obj.pracKey; }
           if( this.dispKey !== obj.dispKey ) { this.dispKey = obj.dispKey; } } },
-      styleComp: function( kompKey ) {
-        return this.myKomp(kompKey) ? { backgroundColor:'wheat', color:'black', borderRadius:'0 24px 24px 0' }
-                                    : { backgroundColor:'#333',  color:'wheat', borderRadius:'0 24px 24px 0' }; },
+      styleComp: function( compKey ) {
+        return compKey===this.compKey ? { backgroundColor:'wheat', color:'black', borderRadius:'0 24px 24px 0' }
+                                      : { backgroundColor:'#333',  color:'wheat', borderRadius:'0 24px 24px 0' }; },
       style: function( ikwObj ) {
         return this.styleObj(ikwObj); },
       filterPracs: function(pracs,compKey) {
@@ -69,14 +79,21 @@
           if( prac.row !== 'Dim' || compKey === 'Prin' ) {
             filt[key] = prac; } }
         return filt; },
+      mergePracs: function( base, add, keys ) {
+        let pracs = this.filterPracs( this.pracs(base) )
+        let merge = this.pracs(add);
+        for( let key of keys ) {
+          pracs[key] = merge[key]; }
+        return pracs; },
       },
 
     beforeMount: function () {
       this.komps = this.kompsTocs();
       for( let key in this.komps ) {
-        let komp = this.komps[key]
+        let komp = this.komps[key];
         if( komp.ikw ) {
-            komp.pracs = this.filterPracs( this.pracs(key), key ); } }
+          if( key==='Info') { komp.pracs = this.mergePracs(  'Info', 'Data', this.innovs ); }
+          else              { komp.pracs = this.filterPracs( this.pracs(komp.key), komp.key ); } } }
       if( this.isPageKeyComp('Data') ) {
         this.compPracs['Data'] = this.filterPracs( this.pracs('Data'),'Data'); } },
     

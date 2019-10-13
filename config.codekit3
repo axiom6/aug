@@ -1742,6 +1742,27 @@
 		"oT": 1,
 		"q": 100
 		},
+	"/pub/css/math/550px-Uncertainty.svg.png": {
+		"ft": 32768,
+		"iS": 14806,
+		"oA": 0,
+		"oAP": "/pub/css/math/550px-Uncertainty.svg.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/math/Uncertainty.svg": {
+		"ft": 2097152,
+		"miP": 0,
+		"oA": 2,
+		"oAP": "/pub/css/math/Uncertainty.svg",
+		"oF": 0,
+		"opt": 0,
+		"plM": 3758088159,
+		"prP": 0
+		},
 	"/pub/css/muse/Info.css": {
 		"aP": 1,
 		"bl": 0,
@@ -7468,6 +7489,30 @@
 		"oAP": "/build/zzz/cache",
 		"oF": 0
 		},
+	"/zzz/font/barlow-1.422.zip": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/font/barlow-1.422.zip",
+		"oF": 0
+		},
+	"/zzz/font/BarlowGX.ttf": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/font/BarlowGX.ttf",
+		"oF": 0
+		},
+	"/zzz/font/css-is-awesomevariable-fonts-edition.zip": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/font/css-is-awesomevariable-fonts-edition.zip",
+		"oF": 0
+		},
 	"/zzz/notes/data/augm/Data.json": {
 		"ft": 524288,
 		"oA": 1,
@@ -8079,6 +8124,14 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/zzz/pub/vue/prac/Prac.js",
+		"oF": 0
+		},
+	"/zzz/vue/Tocs.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/zzz/pub/vue/Tocs.js",
 		"oF": 0
 		},
 	"/zzz/vue/touch/swipe.js": {

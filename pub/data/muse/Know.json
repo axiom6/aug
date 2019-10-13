@@ -44,7 +44,7 @@
     "Apply":  { "dir":"south", "icon":"fas fa-child", "hsv":[60,90,90],  "paradigm":"Computational?",
       "desc":"",
       "Constraint": { "icon":"fas fa-object-group", "desc":"" },
-      "Process":    { "icon":"fas fa-procedures", "desc":"" },
+      "Engineer":    { "icon":"fas fa-procedures", "desc":"" },
       "Medical":    { "icon":"fas fa-user-md", "desc":"" } }
   },
   "Meaning":{ "type":"pane", "hsv":[20,50,90],"column":"Encourage","row":"Learn","plane":"Know","icon":"fab fa-tripadvisor",

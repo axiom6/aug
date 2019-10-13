@@ -39,7 +39,7 @@
       "desc":"Ideas for new services",
       "Investigate": { "icon":"fas fa-question-circle", "desc":""  },
       "Concept":     { "icon":"fas fa-shapes",         "desc":""  },
-      "Context":     { "icon":"fas fa-vector-square",         "desc":""  } },
+      "Contextual":     { "icon":"fas fa-vector-square",         "desc":""  } },
     "Gather": { "dir":"east", "icon":"fab fa-dropbox", "hsv":[30,60,90],
       "desc":"",
       "Document":     { "icon":"fas fa-arrow-circle-right", "desc":"" },

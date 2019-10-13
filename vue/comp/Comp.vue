@@ -31,7 +31,7 @@
     components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs, 'p-conn':Conn },
     
     data() { return {
-      pages:null, compObj:null, pracObj:null, myRows:null,
+      pages:{}, compObj:{}, pracObj:{}, myRows:{},
       pagesComp:{
         Sign: { title:'Practices',    key:'Sign', show:true  },
         Dirs: { title:'Disciplines',  key:'Dirs', show:false },
@@ -60,13 +60,14 @@
       onComp: function (compKey) {
         this.pages   = this.isPageKeyComp(compKey) ? this.pagesInfo : this.pagesComp
         this.compObj = this.compObject(compKey);
+        // console.log( 'Comp.onComp()', compKey, this.compObj );
         this.onRows( compKey); },
       doPage: function( pageKey ) {
         this.nav().setPageKey( 'Comp', pageKey ); },
       isRows: function () {
         return true; },
       onNav:  function (obj) {
-        if( this.nav().isMyNav( obj, 'Comp' ) ) {
+        if( this.nav().isMyNav( obj, 'Comp' ) || this.isPageKeyComp(obj.pageKey) ) {
           let compKey = this.isPageKeyComp(obj.pageKey) ? obj.pageKey : obj.compKey;
           let pageKey = this.isPageKeyComp(obj.pageKey) ? obj.prevKey : this.nav().getPageKey('Comp','Sign');
           this.onComp( compKey );
@@ -74,10 +75,10 @@
       },
 
     beforeMount: function() {
-      this.onComp(  this.nav().compKey ); },
+      this.onComp( this.nav().compKey );
+      this.doPage( this.nav().getPageKey('Comp','Sign') ); },
 
     mounted: function () {
-      this.doPage( this.nav().getPageKey('Comp','Sign') );
       this.subscribe( 'Nav', 'Comp.vue', (obj) => {
         this.onNav(obj); } ); }
   }
