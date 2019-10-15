@@ -1,42 +1,33 @@
 
-
-https://main-4a9c7.firebaseapp.com/app/main.html
-https://augm-d4b3c.firebaseapp.com/app/augm.html
-https://muse-b90e1.firebaseapp.com/app/muse.html  https://is.gd/KO7klq
-
-0. Fixes
+1. Fixes
    a. Remember Invo page 'Info' or 'Data'
-   b. Clean Up Descriptions
-   b. Tocs constrain height expansion
-   d. Test Augm
+   b. Scale fonts
+   c. Tocs constrain height expansion
+   d. Route url path init bug
+   e. Test Augm
+   f. Nav Script test suite
 
-1. Improve Landing Pages
+2. Improve Intrinsic Info
    a. Landing Pages: Home Prin Info Know Wise
-   a. Desc Prac
-   b. Desc Disp
+   b. Descriptions:  Clean Up Info.json Know.json Wise.json
+   c. Bold Labels
 
-2. Descriptions
-   a. Update Disp topics
-   b. Bold Labels
-   c. Info.json Know.json Wise.json
-
-3. Concerns
-   a. Scale fonts
-   b. Consider bringing Prin into IKW nav
-   c. Route url path init bug
-
-4. Talk
+3. Talk
    a. Nav scripts
    b. Vue  Slide template
    c. Core Slides
 
-5. Resize
+4. Resize
    a. Turning on resize for Conns in Comp
    b. smin smmax sx sy approach?
    b. Stick to just transform scale
    c. Wheel no resize | Axes,Chord,Tree translate  | Link good | Radar no display | Hue good
 
-6. Augm
+5. Augm
    a. Math MathML
    b. Note
    c. Landing Pages for Home Math Geom Note Draw Hues
+
+https://main-4a9c7.firebaseapp.com/app/main.html
+https://augm-d4b3c.firebaseapp.com/app/augm.html
+https://muse-b90e1.firebaseapp.com/app/muse.html  https://is.gd/KO7klq

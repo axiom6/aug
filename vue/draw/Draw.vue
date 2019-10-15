@@ -1,13 +1,13 @@
 
 
 <template>
-  <div class="draw" ref="Draw">
+  <div class="draw-pane">
     <d-tabs route="Draw" :pages="pages"></d-tabs>
     <h1 v-if="pageKey==='Draw'">Drawings in D3</h1>
     <template v-for="page in pages">
-      <div :ref="page.key" v-show="page.show" class="page" :key="page.key"></div>
+      <div :ref="page.key" v-show="page.show" class="draw-page" :key="page.key"></div>
     </template>
-  </div>
+    </div>
 </template>
 
 <script type="module">
@@ -58,10 +58,10 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .draw {   position:relative; left:0; top:0;  right:0; bottom:0; display:grid;
+  .draw-pane {   position:absolute; left:0; top:0; width:100%; height:100%;display:grid;
             background-color:@theme-back; font-family:@theme-font-family;
-    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:@theme-h1-size; }
-    .page { position:absolute; left:0; top:@theme-tabs-height-pc; right:0; bottom:0;  } }
+    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-fore; font-size:@theme-h1-FS; }
+    .draw-page { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;  } }
 
   // Chords
   .group-tick line { stroke:#000;       }

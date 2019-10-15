@@ -1,8 +1,8 @@
 
 <template>
-  <div class="pdisp-pane" @click="doDisp(dispObj.name)">
+  <div class="prac-disp-pane" @click="doDisp(dispObj.name)">
     <i   :class="dispObj.icon"></i>
-    <span class="pdisp-name">{{dispObj.name}}</span>
+    <span class="prac-disp-name">{{dispObj.name}}</span>
   </div>
 </template>
 
@@ -24,9 +24,11 @@
 <style lang="less">
 
   @import '../../pub/css/themes/theme.less';
+  
+  @pracDispFS:@themeFS;
 
-  .pdisp-pane {   display:inline; justify-self:center; align-self:center; text-align:center;
-    i     { display:inline-block;  margin-right: 0.25rem; }
-    .pdisp-name { display:inline-block; } }
+  .prac-disp-pane {   display:inline; justify-self:center; align-self:center; text-align:center;
+     i     {          display:inline-block;  margin-right: 0.25*@pracDispFS; }
+    .prac-disp-name { display:inline-block; } }
 
 </style>

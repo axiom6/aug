@@ -1,11 +1,11 @@
 
 
 <template>
-  <div class="hues" ref="Hues">
+  <div class="hues-pane" ref="Hues">
     <d-tabs route="Hues" :pages="pages"></d-tabs>
     <h1 v-if="pageKey==='Hues'">Hues with MathBox</h1>
     <template v-for="page in pages">
-      <div :ref="page.key" v-if="page.show" class="page" :key="page.key"></div>
+      <div :ref="page.key" v-if="page.show" class="hues-page" :key="page.key"></div>
     </template>
   </div>
 </template>
@@ -66,9 +66,9 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .hues {   position:relative; left:0; top:0;  right:0; bottom:0; display:grid;
+  .hues-pane {   position:absolute; left:0; top:0; width:100%; height:100%; display:grid;
     background-color:@theme-back; font-family:@theme-font-family;
-    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:@theme-h1-size; }
-    .page { position:absolute; left:0; top:@theme-tabs-height-pc; right:0; bottom:0;  } }
+    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-fore; font-size:@theme-h1-FS; }
+    .hues-page { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height  } }
   
 </style>

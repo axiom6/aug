@@ -1,6 +1,6 @@
 
 <template>
-  <div class="wood">
+  <div class="wood-pane">
     <svg class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
       <circle r="30" fill="#fff" cx="70" cy="70" ></circle>
     </svg>
@@ -21,8 +21,9 @@
   
   @import '../../pub/css/themes/theme.less';
   
-.wood {
-  position:relative; width: 100%; height: 100%; min-height: 700px; overflow:hidden; background-color: #041e2b;
+.wood-pane { position:absolute; left:0; top:0; width:100%; height:100%; min-height:700px;
+    overflow:hidden; background-color:#041e2b;
+  
   background-image: linear-gradient(to bottom, #041e2b 0%, #407886 41%, #d4dbdb 69%, black 69%, black 100%); }
 
   .wood .moon {  position:absolute; left:25%; top:100px; }

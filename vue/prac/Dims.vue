@@ -52,37 +52,39 @@
   
   @import '../../pub/css/themes/theme.less';
 
+  @dimsFS:1.3*@themeFS;
+
   .dims-grid4x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr 1fr;
     grid-template-areas: "pi pk pw" "li lk lw" "di dk dw" "si sk sw"; }
 
   .dims-grid4x4() { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr 1fr;
     grid-template-areas: "pi pd pk pw" "li ld lk lw" "di dd dk dw" "si sd sk sw"; }
   
-  .dims-disp { font-size:@theme-dims-size*2.0; border-radius:36px;
-    position:absolute; left:0; top:@theme-tabs-height-pc; right:0; bottom:0; }
+  .dims-disp { font-size:2.0*@dimsFS; border-radius:0.5*@dimsFS;
+    position:absolute; left:0; top:@theme-tabs-height; right:0; bottom:0; }
 
-  .dims-dirs { font-size:@theme-dims-size; border-radius:36px; }
+  .dims-dirs { font-size:@dimsFS; border-radius:36px; }
 
-  .dims-head    { display:grid; justify-self:center; align-self:center; text-align:center; font-size:1.7em;
+  .dims-head    { display:grid; justify-self:center; align-self:center; text-align:center; font-size:2.3*@dimsFS;
     .dims-title { display:inline;
-    i           { display:inline-block;  margin-right: 0.25rem; }
+    i           { display:inline-block;  margin-right:0.25*@dimsFS; }
     .dims-name  { display:inline-block; } } }
 
-  .plane( @area ) { display:inline; grid-area:@area; font-size:1.2em; text-align:left;
+  .plane( @area ) { display:inline; grid-area:@area; font-size:1.2*@dimsFS; text-align:left;
     i             { display:inline-block;  margin-right: 0.25rem; }
     .dims-name    { display:inline-block; } }
 
-  .study( @area ) { display:inline; grid-area:@area; font-size:0.9em; text-align:left;
-    i             { display:inline-block;  margin-right: 0.25rem; }
+  .study( @area ) { display:inline; grid-area:@area; font-size:0.9*@dimsFS; text-align:left;
+    i             { display:inline-block;  margin-right:0.25*@dimsFS; }
     .dims-name    { display:inline-block; } }
 
-  .dd-4x3 { .dims-grid4x3(); margin-left:@theme-dims-size;
+  .dd-4x3 { .dims-grid4x3(); margin-left:@dimsFS;
     .pi { .plane(pi); }  .pk { .plane(pk); }  .pw { .plane(pw); }
     .li { .study(li); }  .lk { .study(lk); }  .lw { .study(lw); }
     .di { .study(di); }  .dk { .study(dk); }  .dw { .study(dw); }
     .si { .study(si); }  .sk { .study(sk); }  .sw { .study(sw); } }
   
-  .dd-4x4 { .dims-grid4x4(); margin-left:@theme-dims-size;
+  .dd-4x4 { .dims-grid4x4(); margin-left:@dimsFS;
     .pi { .plane(pi); }  .pd { .plane(pd); } .pk { .plane(pk); }  .pw { .plane(pw); }
     .li { .study(li); }  .ld { .study(ld); } .lk { .study(lk); }  .lw { .study(lw); }
     .di { .study(di); }  .dd { .study(dd); } .dk { .study(dk); }  .dw { .study(dw); }

@@ -1,20 +1,20 @@
 
 <template>
   <div class="home-pane">
-    <!--div class="home-head">
+    <div class="home-head">
       <div>
         <h1 class="home-h1">Welcome to Muse Home Page</h1>
         <h2 class="home-h2">Choose an Application Component on the Left</h2>
       </div>
-    </div-->
+    </div>
     <div  class="home-midd">
       <h1 class="home-h1">Humanistic Practices</h1>
     </div>
-    <!--div class="home-foot">
+    <div class="home-foot">
       <div>
         <h1 class="home-h1">Axiom Architectures</h1>
       </div>
-    </div-->
+    </div>
   </div>
 </template>
 
@@ -48,11 +48,13 @@
   
   @import '../../../pub/css/themes/theme.less';
   
-  .grid3x1() { display:grid; grid-template-columns:1fr; grid-template-rows:30fr 40fr 30fr;
+  @homeFS:4vmin;
+  
+  .home-grid3x1() { display:grid; grid-template-columns:1fr; grid-template-rows:20fr 60fr 20fr;
       grid-template-areas:"head" "midd" "foot"; }
   
-  .home-pane { .grid3x1(); position:relative; left:0; top:0; right:0; bottom:0;
-    background-color:@theme-back; color:@theme-color;
+  .home-pane { .home-grid3x1(); width:100%; height:100%;
+    background-color:@theme-back; color:@theme-fore;
 
     .home-head { grid-area:head; justify-items:center; align-items:center; text-align:center; display:grid;
       justify-self:stretch; align-self:stretch; }
@@ -63,8 +65,8 @@
     .home-foot { grid-area:foot; justify-items:center; align-items:center; text-align:center; display:grid;
       justify-self:stretch; align-self:stretch;  }
   
-    .home-h1 { justify-self:center; align-self:center; font-size:3.5rem; }
-    .home-h2 { justify-self:center; align-self:center; font-size:2.5rem }
+    .home-h1 { justify-self:center; align-self:center; font-size:3.0*@homeFS; }
+    .home-h2 { justify-self:center; align-self:center; font-size:2.0*@homeFS; }
  }
  
 </style>

@@ -1,6 +1,6 @@
 
 <template>
-  <div class="dirs-prac">
+  <div class="prac-dirs-pane">
     <div class="cen" :style="style(pracObj)">
       <d-disp v-if="isDisp()" :dispObj="pracObj" from="Dirs"></d-disp>
       <d-dims v-if="isDims()" :dispObj="pracObj" from="Dirs"></d-dims>
@@ -53,23 +53,18 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .dirs-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;
+  @pracDirsFS:2.0*@themeFS;
+  
+  .prac-dirs-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;
     grid-template-areas: "nw north ne" "west cen east" "sw south se"; }
 
-  .ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }
+  .prac-dir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }
   
-  .dirs-prac { position:absolute; left:0; top:0; right:0; bottom:0; background-color:@theme-sign-back;
-    color:black; text-align:center; font-weight:bold; .theme-prac-dirs(); .dirs-grid3x3();
-                             .north { .ddir(north); }
-      .west { .ddir(west); } .cen   { .ddir(cen);   } .east { .ddir(east); }
-                             .south { .ddir(south); }
-      .cen  { font-size:5.2@theme-dirs-size; } }
-
-    /*
-    .disp-prac {   display:inline; justify-self:center; align-self:center; text-align:center;
-      i     { display:inline-block;  margin-right: 0.25rem; }
-      .name { display:inline-block; }
-      .desc { display:none; margin:0.5rem 0.5rem 0.5rem 0.5rem; text-align:left; } }
-     */
+  .prac-dirs-pane { position:absolute; left:0; top:0; width:100%; height:100%; background-color:@theme-gray;
+    color:black; text-align:center; font-weight:bold; .prac-dirs-grid3x3(); font-size:2.0*@pracDirsFS;
+                                 .north { .prac-dir(north); }
+      .west { .prac-dir(west); } .cen   { .prac-dir(cen);   } .east { .prac-dir(east); }
+                                 .south { .prac-dir(south); } }
+  
   
 </style>

@@ -50,6 +50,7 @@
   
   .geom-nd-pane {}
   
-  .geom-nd-page { position:absolute; left:0; top:@theme-tabs-height-pc; right:0; bottom:0; background-color:@theme-back; display:grid; }
+  .geom-nd-page { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;
+     background-color:@theme-back; display:grid; }
 
 </style>

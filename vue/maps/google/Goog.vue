@@ -9,5 +9,6 @@
 
 <style lang="less">
   @import '../../../pub/css/themes/theme.less';
-  .goog-pane { background-color:@theme-back; }
+  @googFS:@themeFS;
+  .goog-pane { background-color:@theme-back; font-size:@googFS; }
 </style>

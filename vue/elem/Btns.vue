@@ -79,7 +79,9 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .btns-pane { font-size:@theme-btn-size; font-weight:bold; position:absolute; left:0; top:0; right:0; bottom:0; }
+  @btnsFS:1.4*@themeFS;
+  
+  .btns-pane { font-size:@btnsFS; font-weight:bold; position:absolute; left:0; top:0; right:0; bottom:0; }
   
   .btns-center { display:grid;  width:100%; height:100%; } // A surrounding div for centering button
 

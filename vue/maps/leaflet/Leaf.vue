@@ -9,5 +9,6 @@
 
 <style lang="less">
   @import '../../../pub/css/themes/theme.less';
-  .leaf-pane { background-color:@theme-back; }
+  @leafFS:@themeFS;
+  .leaf-pane { background-color:@theme-back; font-size:@leafFS; }
 </style>

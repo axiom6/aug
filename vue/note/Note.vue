@@ -38,6 +38,7 @@
 
 <style lang="less">
   @import '../../pub/css/themes/theme.less';
-  .note-pane { position:relative; left:0; top:0; right:0; bottom:0; background-color:@theme-back; display:grid;
-    h1 { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:@theme-h1-size; } }
+  .note-pane { position:absolute; left:0; top:0; width:100%; height:100%;
+      background-color:@theme-back; display:grid;
+    h1 { justify-self:center; align-self:center; text-align:center; color:@theme-fore; font-size:@theme-h1-FS; } }
 </style>

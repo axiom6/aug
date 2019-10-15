@@ -1,6 +1,6 @@
 
 <template>
-  <div ref="View">
+  <div class="view-pane" ref="View">
     <template v-for="view in rviews">
       <router-view :name="view"></router-view>
     </template>
@@ -32,7 +32,8 @@
 
 <style lang="less">
 
-
+      .view-pane {}
+  
 </style>
 
 

@@ -63,6 +63,8 @@
   
   @import '../../pub/css/themes/theme.less';
   
+  @descFS:@themeFS;
+  
   .prac-desc-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;
     grid-template-areas: "nw north ne" "west cen east" "sw south se"; }
 
@@ -76,7 +78,7 @@
     .prac-desc-cent { .ddir(cen); .prac-desc-grid2x1();
       .prac-desc-head { grid-area:head; }
       .prac-desc-summ { grid-area:summ; display:grid; align-self:start;  justify-self:start; text-align:left;
-        margin:0.5rem 0.5rem 0.5rem 0.5rem; font-size:1.6*@theme-desc-size; } }
+        margin:0.5rem 0.5rem 0.5rem 0.5rem; font-size:1.6*@descFS; } }
     
     .west  { .ddir(west);  }
     .north { .ddir(north); }
@@ -88,7 +90,7 @@
   
     .prac-desc-desc { .grid5x1(); color:black;
       .prac-desc-iconp { grid-area:iconq; }
-      .prac-desc-summp { grid-area:summq; margin-left:1.2em;font-size:1.5*@theme-desc-size; }
+      .prac-desc-summp { grid-area:summq; margin-left:1.2em;font-size:1.5*@descFS; }
       .prac-desc-area1 { grid-area:area1; }
       .prac-desc-area2 { grid-area:area2; }
       .prac-desc-area3 { grid-area:area3; } }

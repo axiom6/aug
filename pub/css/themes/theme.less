@@ -1,79 +1,36 @@
 
 // --- Color ---
 
+@theme-fore:wheat;
 @theme-back:black;
 @theme-high:black; // Highlight font color
-@theme-color:wheat;
-@theme-color-prac:black;
-@theme-border-color:wheat;
-@theme-back-menu:#222;
-@theme-back-item:#444;
-@theme-back-item-hover:#777;
-@theme-color-item-hover:black;
-@theme-sign-back:  #333;
-@theme-back-tocs-comp:#333;
-@theme-back-tocs-prac:#444; // Not used yet
-@theme-back-tocs-disp:#555; // Not used yet
-@theme-color-tocs-disp:white;
+@theme-dark:black;
+@theme-gray:#333;
+
+// --- Position ---
+
+@theme-navd-width: 10%;
+@theme-navd-height:10%;
+@theme-view-width: 90%;
+@theme-view-height:90%;
+@theme-tabs-width: 50%;
+@theme-tabs-height: 5%; @theme-tabs-height-pc: 5%;
 
 // -- Grid Justify and Aligh ---
 
-.themeCenterItems() { display:grid; justify-items:center; align-items:center; text-align:center; }
-.themeLeftSelf()    { display:grid; justify-self: start;  align-self: center; text-align:left;   }
+.themeCenterStretch() { display:grid; justify-items:center; align-items:center; text-align:center;
+  align-self:stretch; justify-self:stretch; }
+.themeCenterItems()   { display:grid; justify-items:center; align-items:center; text-align:center; }
+.themeLeftSelf()      { display:grid; justify-self: start;  align-self: center; text-align:left;   }
 
 // -- Font Size ---
 
+@themeFS:2vmin;
+@theme-h1-FS:2.0*@themeFS; @theme-h2-FS:1.5*@themeFS; @theme-h1-FS:1.0*@themeFS;
 @theme-font-family:Roboto, sans-serif;
-@theme-h1-size:2.0rem; @theme-h2-size:1.5rem; @theme-h3-size:1.0rem;
+@theme-h1FS:2.0rem; @theme-h2-size:1.5rem; @theme-h3-size:1.0rem;
 
-@theme-sign-size:  5.5rem;
-@theme-name-size:  2.0rem;
 
-@theme-btn-size:    1.4rem;
-@theme-choice-size: 1.4rem;
-@theme-table-size:  1.0rem;
-@theme-math-size:   2.5rem;
-@theme-obs-size:    2.5rem;
-
-@theme-tocs-size:1.5rem;
-@theme-comp-size:1.0rem;
-@theme-prin-size:1.0rem;
-@theme-tabs-size:1.5rem;
-@theme-menu-size:1.0rem;
-@theme-desc-size:1.0rem;
-@theme-dims-size:0.9rem;
-@theme-dirs-size:1.0rem;
-@theme-sign-size:2.0rem;
-
-@theme-tabs-height-pc:7%;
-
-// --- Themes with Font Size ---
-
-.theme-html { font-size:calc(1em + 1vmin); background-color:@theme-back; }
-.theme-dash { font-size:1.0rem;             background-color:@theme-back; }
-.theme-tocs { font-size:@theme-tocs-size;  background-color:@theme-back; }
-
-.theme-logo  { font-size:0.7rem;             background-color:@theme-back; }
-.theme-arrow { font-size:1.3rem; }
-.theme-gamer { font-size:0.9rem; }
-
-.theme-prin { font-size:1.0rem; border-radius:0.7em; background-color:@theme-back; }
-.theme-comp { font-size:@theme-comp-size; border-radius:0.7em; }
-.theme-prac { font-size:1.0rem; border-radius:0.7em; }
-.theme-disp { font-size:1.0rem; border-radius:0.7em; }
-
-.theme-sign { font-size:@theme-sign-size; background-color:@theme-sign-back; border-radius:0.7em; width:90%; height:90%; }
-
-.theme-conn { font-size:1.0rem; background-color:@theme-sign-back; border-radius:0.7em; width:97%; height:97%; }
-.theme-desc { font-size:1.0rem; background-color:@theme-sign-back; border-radius:0.7em; width:90%; height:90%; }
-
-.theme-prin-dirs { font-size:1.8rem; background-color:@theme-sign-back; border-radius:0.7em; width:90%; height:90%; }
-.theme-comp-dirs { font-size:0.8rem; background-color:@theme-sign-back; border-radius:0.7em; width:90%; height:90%; }
-.theme-prac-dirs { font-size:3.0rem; background-color:@theme-sign-back; border-radius:0.7em; }
-
-.theme-btns {}
-.theme-game {}
-.theme-icon {}
-.theme-tabs {}
+.theme-desc { font-size:1.0rem; background-color:@theme-gray; border-radius:0.7em; width:90%; height:90%; }
 
 // top | right | bottom | left

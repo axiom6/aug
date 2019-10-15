@@ -2,7 +2,7 @@
   "Team":{ "type":"pane", "hsv":[195,90,60], "column":"Embrace","row":"Learn","plane":"Info",
     "icon":"fas fa-user-plus","cells":[5,12,7,12], "dir":"nw", "neg":"Conspire",  "ref":"",
     "desc":"",
-    "Collaborate": { "dir":"west", "icon":"fas fa-users","hsv":[195,90,70],
+    "Collab": { "dir":"west", "icon":"fas fa-users","hsv":[195,90,70],
       "desc":"Communal Friendship over Agendas",  "ref":"", "topics":"Response",
       "descg":"We count on each other to do high quality work on time",
       "Safety":      { "icon":"fas fa-user-plus",      "desc":"", "ref":"Googles Psychological Safety"  },

@@ -42,14 +42,16 @@
 <style lang="less">
   
   @import '../../pub/css/themes/theme.less';
+  
+  @descFS:@themeFS;
 
   .grid5x1() { display:grid;  grid-template-columns:1fr; grid-template-rows:20fr 20fr 20fr 20fr 20fr;
     grid-template-areas: "iconq" "summq""area1" "area2" "area3"; }
   
-  .ddesc-pane { .grid5x1(); position:absolute; left:0; top:@theme-tabs-height-pc; right:0; bottom:0; .theme-desc(); color:black;
-           border-radius:36px;
+  .ddesc-pane { .grid5x1(); position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%;
+    font-size:@descFS; color:black; border-radius:2.0*@descFS;
     .ddesc-iconq { grid-area:iconq; }
-    .ddesc-summq { grid-area:summq; margin-left:1.2em; }
+    .ddesc-summq { grid-area:summq; margin-left:1.2*@descFS; }
     .ddesc-area1 { grid-area:area1; }
     .ddesc-area2 { grid-area:area2; }
     .ddesc-area3 { grid-area:area3; }

@@ -28,7 +28,7 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .game-pane { background-color:@theme-back; color:@theme-color;
+  .game-pane { background-color:@theme-back; color:@theme-fore;
     .game-west  { position:absolute; left: 0;  top:33%; width:33%; height:33%; }
     .game-north { position:absolute; left:33%; top: 0;  width:33%; height:33%; }
     .game-mext  { position:absolute; left:33%; top:33%; width:17%; height:33%; }

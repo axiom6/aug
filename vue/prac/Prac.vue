@@ -58,13 +58,13 @@
 <style lang="less">
   
   @import '../../pub/css/themes/theme.less';
+
+  @pracFS:2.0*@themeFS;
   
-  .prac-pane {   position:relative; left:0; top:0;  right:0; bottom:0;
+  .prac-pane   { position:absolute; left:0; top:0; width:100%; height:100%;
     
-    .prac-prac { position:absolute; left:0; top:@theme-tabs-height-pc; right:0; bottom:0;
-      background-color:@theme-sign-back; border-radius:36px; }
-    
-  }
+    .prac-prac { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;
+      background-color:@theme-gray; font-size:@pracFS; border-radius:0.5*@pracFS; } }
   
 </style>
 

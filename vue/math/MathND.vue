@@ -71,6 +71,8 @@ export default MathND;
   
   @import '../../pub/css/themes/theme.less';
   
+  @mathFS:@themeFS;
+  
   .math-nd-grid9x3() { display:grid; grid-template-columns:33fr 33fr 34fr; grid-template-rows:11fr 11fr 11fr 11fr 11fr 11fr 11fr 11fr 12fr;
     grid-template-areas:
       "r1c1 r1c2 r1c3" "r2c1 r2c2 r2c3" "r3c1 r3c2 r3c3"
@@ -78,13 +80,14 @@ export default MathND;
       "r7c1 r7c2 r7c3" "r8c1 r8c2 r8c3" "r9c1 r9c2 r9c3"; }
   
   .c( @rc ) { display:grid; grid-area:@rc; justify-self:stretch; align-self:stretch;
-    justify-items:center; align-items:center; background-color:@theme-back; color:@theme-color;
-    border:solid thin @theme-color; }
+    justify-items:center; align-items:center; background-color:@theme-back; color:@theme-fore;
+    border:solid thin @theme-fore; }
 
-  .math-nd-pane {}
+  .math-nd-pane { position:absolute; left:0; top:0; width:100%; height:100%; }
   
-  .math-nd-comp { background-color:@theme-back;
-      position:absolute; left:0; top:@theme-tabs-height-pc; right:0; bottom:0; font-size:@theme-math-size;
+  .math-nd-comp {
+    position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;
+      background-color:@theme-back;font-size:@mathFS;
     .math-nd-grid9x3(); justify-items:center; align-items:center;
     
     .r1c1{.c(r1c1)}; .r1c2{.c(r1c2)}; .r1c3{.c(r1c3)};

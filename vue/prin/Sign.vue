@@ -26,10 +26,13 @@
 <style lang="less">
   
   @import '../../pub/css/themes/theme.less';
-  
+
+  @signFS:2.0*@themeFS;
+
   .prin-sign-pane { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;
-    color:@theme-color; text-align:center; .theme-sign();
-    i               { font-size:1.5*@theme-sign-size; }
-    .prin-sign-name { font-size:0.8*@theme-sign-size;  text-align:center; } }
+    color:@theme-fore; text-align:center; background-color:@theme-gray; border-radius:1.0*@signFS;
+    width:90%; height:90%;
+    i               { font-size:7.5*@signFS; }
+    .prin-sign-name { font-size:2.3*@signFS;  text-align:center; } }
   
 </style>

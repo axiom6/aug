@@ -54,13 +54,16 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .tabs-pane { position:absolute; left:0; top:0; width:50%; height:@theme-tabs-height-pc;
-          background-color:@theme-back; font-size:@theme-tabs-size;
+  @tabsFS:1.7*@themeFS;
+  
+  .tabs-pane { background-color:@theme-back; font-size:@tabsFS;
+    position:absolute; left:0; top:0; width:@theme-tabs-width; height:@theme-tabs-height;
+    
     .tabs-tab { display:inline-block; margin-left:2.0rem; padding:0.2rem 0.3rem 0.1rem 0.3rem;
-      border-radius:12px 12px 0 0; border-left: @theme-color solid thin;
-      border-top:@theme-color solid thin; border-right:@theme-color solid thin;
-                  background-color:@theme-back;  color:@theme-color;}
-    .tabs-tab:hover  {         background-color:@theme-color; color:@theme-back; }
-    .tabs-tab-active { .tabs-tab(); background-color:@theme-color; color:@theme-back; } }
+      border-radius:12px 12px 0 0; border-left: @theme-fore solid thin;
+      border-top:@theme-fore solid thin; border-right:@theme-fore solid thin;
+                  background-color:@theme-back;  color:@theme-fore;}
+    .tabs-tab:hover  {         background-color:@theme-fore; color:@theme-back; }
+    .tabs-tab-active { .tabs-tab(); background-color:@theme-fore; color:@theme-back; } }
   
 </style>

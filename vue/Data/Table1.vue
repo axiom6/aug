@@ -46,16 +46,18 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .table { background-color:@theme-back; justify-self:center; align-self:center; font-size:@theme-table-size;
-     table-layout: fixed; border-collapse: collapse; border:1px solid @theme-border-color; }
+  @tableFS:@themeFS;
+  
+  .table { background-color:@theme-back; justify-self:center; align-self:center; font-size:@tableFS;
+     table-layout: fixed; border-collapse: collapse; border:1px solid @theme-fore; }
 
-  caption  { color:@theme-color; }
-  thead th { color:@theme-color; padding:0.1em 0.2em 0.1em 0.2em; border:1px solid @theme-border-color; }
+  caption  { color:@theme-fore; }
+  thead th { color:@theme-fore; padding:0.1em 0.2em 0.1em 0.2em; border:1px solid @theme-fore; }
 
   tbody tr {}
   tbody tr:nth-child(odd)  { background-color: #111111; }
   tbody tr:nth-child(even) { background-color: #222222; }
   
-  tbody tr td { color:@theme-color; padding:0.1em 0.2em 0.1em 0.2em; border:1px solid @theme-border-color; }
+  tbody tr td { color:@theme-fore; padding:0.1em 0.2em 0.1em 0.2em; border:1px solid @theme-fore; }
 
 </style>

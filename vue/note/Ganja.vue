@@ -13,7 +13,10 @@
 
 <style lang="less">
   @import '../../pub/css/themes/theme.less';
-  .ganja-pane { position:absolute; left:0; top:@theme-tabs-height-pc; right:0; bottom:0; font-size:@theme-obs-size;
-    display:grid; justify-items:center; align-items:center; text-align:center;
-    background-color:@theme-back; color:@theme-color; }
+  
+  @ganjaFS:@themeFS;
+
+  .ganja-pane { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;
+    font-size:@ganjaFS;.themeCenterItems(); background-color:@theme-back; color:@theme-fore; overflow:scroll; }
+  
 </style>

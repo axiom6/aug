@@ -63,11 +63,13 @@
 <style lang="less">
   
   @import '../../pub/css/themes/theme.less';
+  
+  @connFS:@themeFS;
 
-  .conn-comp { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;
-    color:@theme-color; text-align:center; .theme-conn(); }
+  .conn-comp { font-size:@connFS; background-color:@theme-gray; color:@theme-fore; width:97%; height:97%;
+    border-radius:2.0*@connFS; .themeCenterStretch();   }
 
-  .conn-prac { position:absolute; left:0; top:0; right:0; bottom:0;
-    color:@theme-color; text-align:center; .theme-conn(); }
+  .conn-prac { font-size:@connFS; background-color:@theme-gray; color:@theme-fore; text-align:center;
+    border-radius:2.0*@connFS; position:absolute; left:0; top:0; width:97%; height:97%; }
   
 </style>

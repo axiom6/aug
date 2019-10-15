@@ -66,16 +66,16 @@
       grid-template-areas:"head" "midd" "foot"; }
   
   .home { .grid3x1(); position:relative; left:0; top:0; right:0; bottom:0;
-    background-color:@theme-back; color:@theme-color;
+    background-color:@theme-back; color:@theme-fore;
 
     .head { grid-area:head; .themeCenterItems(); justify-self:stretch; align-self:stretch;
-      h1 { font-size:@theme-h1-size; } }
+      h1 { font-size:@theme-h1-FS; } }
     
     .midd { grid-area:midd; .themeCenterItems(); justify-self:stretch; align-self:stretch;
-      h1 { font-size:@theme-h1-size; } }
+      h1 { font-size:@theme-h1-FS; } }
   
     .foot { grid-area:foot; .themeCenterItems(); justify-self:stretch; align-self:stretch;
-      h1 { font-size:@theme-h1-size; } }
+      h1 { font-size:@theme-h1-FS; } }
     
   }
   

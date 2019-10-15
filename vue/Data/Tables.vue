@@ -59,7 +59,8 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  .page { position:absolute; left:0; top:@theme-tabs-height-pc; right:0; bottom:0; background-color:@theme-back; display:grid;
-    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-color; font-size:@theme-h1-size; } }
+  .page { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;
+          background-color:@theme-back; display:grid;
+    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-fore; font-size:@theme-h1-FS; } }
 
 </style>

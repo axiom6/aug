@@ -32,12 +32,12 @@
   @import '../../pub/css/themes/theme.less';
   
   .choice-pane { position:absolute; left:0; top:0; width:100%; height:100%;
-    background-color:@theme-back; color:@theme-color;
+    background-color:@theme-back; color:@theme-fore;
     
     .choice-summ { position:absolute; left:0; top:0;   width:100%; height:15%; }
     
     .choice-btns { position:absolute; left:0; top:15%; width:100%; height:85%;
-                   background-color:@theme-back; color:@theme-color;  border:1px solid @theme-color; }
+                   background-color:@theme-back; color:@theme-fore;  border:1px solid @theme-fore; }
   }
 
 </style>

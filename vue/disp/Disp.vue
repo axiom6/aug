@@ -51,7 +51,7 @@
   
   @import '../../pub/css/themes/theme.less';
 
-  .disp-pane { position:relative; left:0; top:0; right:0; bottom:0; background-color:@theme-sign-back; }
+  .disp-pane { position:absolute; left:0; top:0; width:100%; height:100%; background-color:@theme-gray; }
   
 </style>
 
