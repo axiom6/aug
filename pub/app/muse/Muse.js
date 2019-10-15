@@ -35,7 +35,7 @@ Muse = (function() {
         subjects: subjects
       };
       Muse.stream = new Stream(subjects, infoSpec);
-      Muse.nav = new Nav(Muse.stream, batch, Muse.komps);
+      Muse.nav = new Nav(Muse.stream, batch, Muse.komps, true);
       Muse.build = new Build(batch, Muse.komps);
       //use.cache  = new Cache( Muse.stream )
       Data.buildInnov(batch, 'Data', 'Info');

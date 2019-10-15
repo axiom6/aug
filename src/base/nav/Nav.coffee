@@ -3,26 +3,22 @@ import Build from '../util/Build.js';
 
 class Nav
 
-  constructor:( @stream, @batch, @navs=null ) ->
+  constructor:( @stream, @batch, @navs=null, @isMuse=false ) ->
     @build    =  new Build( @batch )
     @$router  =  null
     @source   =  'None'
-    @route    =  'Home' # Prac Disp
+    @route    =  'Home'
     @compKey  =  'None' # Also specifies current plane
     @pracKey  =  'None'
-    @pracObj  =   null
     @dispKey  =  'None'
-    @dispObj  =   null
-    @pageKey  =  'None' # Used to maintain continuity through dir tranvesals with Prac
-    @prevKey  =  'None' # Only changed by Tabs
+    @pageKey  =  'None'
     @pages    =  {}
-    @dirTabs  = false
     @keyEvents()
 
   pub:( msg ) ->
     lastRoute = @route
     @set( msg )
-    obj = { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey, pageKey:@pageKey, prevKey:@prevKey }
+    obj = { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey, pageKey:@pageKey }
     obj.source = if msg.source? then msg.source else 'None'
     console.log('Nav.pub()', obj )
     @stream.publish( 'Nav',  obj )
@@ -62,7 +58,7 @@ class Nav
   dir:( direct, event=null ) =>
     @source = direct
     if event is null then {}
-    if @dirTabs and ( direct is 'east'  or direct is 'west' )
+    if @isMuse and ( direct is 'east'  or direct is 'west' )
        @dirPage( direct )
     else
       switch @route

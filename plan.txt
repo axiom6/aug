@@ -1,20 +1,18 @@
 
 1. Fixes
-   a. Remember Invo page 'Info' or 'Data'
-   b. Scale fonts
-   c. Tocs constrain height expansion
-   d. Route url path init bug
-   e. Test Augm
-   f. Nav Script test suite
+   a. Dirs keys cutting out
+   b. Fix Descriptions
+   c. Test Augm
 
 2. Improve Intrinsic Info
    a. Landing Pages: Home Prin Info Know Wise
    b. Descriptions:  Clean Up Info.json Know.json Wise.json
    c. Bold Labels
+   d. Route url path init bug
 
 3. Talk
-   a. Nav scripts
-   b. Vue  Slide template
+   a. Nav scripts test suite and talks
+   b. Talk.vue Vue  Slide template
    c. Core Slides
 
 4. Resize

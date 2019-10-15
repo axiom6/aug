@@ -2,7 +2,7 @@
 <template>
   <div class="comp-pane">
     <b-tabs route="Comp" :pages="pages" position="left" ></b-tabs>
-    <b-tabs route="Inov" :pages="inovs" position="right" v-if="hasInnov()"></b-tabs>
+    <b-tabs route="Inov" :pages="inovs" position="right" v-if="hasInovs()"></b-tabs>
     <div class="comp-comp" ref="Comp" title="Comp">
       <template v-for="pracObj in compObj">
         <div   :class="pracObj.dir" :key="pracObj.name" :ref="pracObj.name" :title="pracObj.name">
@@ -31,7 +31,7 @@
 
     components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs, 'p-conn':Conn },
     
-    data() { return { compObj:null, pracObj:{}, myRows:{},
+    data() { return { compKey:'None', compObj:null, pracObj:{}, myRows:{},
       pages:{
         Sign: { title:'Practices',    key:'Sign', show:true  },
         Dirs: { title:'Disciplines',  key:'Dirs', show:false },
@@ -45,32 +45,34 @@
         Do:{    name:'Do',          dir:'do', icon:"fas fas fa-cog" },
         Share:{ name:'Share',       dir:'sh', icon:"fas fa-share-alt-square" } },
       planes: {
-        Info:{ name:'Techs',      dir:'cm', icon:"fas fas fa-cogs" },
+        Info:{ name:'Techs',     dir:'cm', icon:"fas fas fa-cogs" },
         Know:{ name:'Knowledge', dir:'cm', icon:"fas fas fa-university"  },
         Wise:{ name:'Wisdom',    dir:'cm', icon:"fas fas fa-tripadvisor" },
         Data:{ name:'Data',      dir:'cm', icon:"fas fas fa-table" } } } },
     
     methods: {
-      hasInnov: function() {
-        return this.isDef(this.compObj) && this.isDef(this.compObj['Team']); },
+      hasInovs: function() {
+        return this.isDef(this.inovs)  },
       onRows: function (compKey) {
          this.myRows          = this.rows;
          this.myRows['Plane'] = this.planes[compKey]; },
       onComp: function (compKey) {
-        this.compObj = this.compObject(compKey);
-        // console.log( 'Comp.onComp()', compKey, this.compObj );
-        this.onRows( compKey); },
+        if( this.compKey!==compKey ) {
+            this.compKey = compKey;
+            this.compObj = this.compObject(compKey);
+            // console.log( 'Comp.onComp()', compKey, this.compObj );
+            this.onRows( compKey); } },
       doPage: function( objKey ) {
         let pageKey = objKey==='None' ? this.nav().getPageKey('Comp','Sign') : objKey;
         this.nav().setPageKey( 'Comp', pageKey ); },
       isRows: function () {
         return true; },
       onNav:  function (obj) {
-        if( this.nav().isMyNav( obj, 'Comp' ) ) { // || this.isPageKeyComp(obj.pageKey) )
-          let compKey = this.isPageKeyComp(obj.pageKey) ? obj.pageKey : obj.compKey;
-          let pageKey = this.isPageKeyComp(obj.pageKey) ? obj.prevKey : obj.pageKey;
-          this.onComp( compKey );
-          this.doPage( pageKey ); } }
+        if(      this.nav().isMyNav( obj, 'Comp' ) ) {
+          this.onComp( obj.compKey );
+          this.doPage( obj.pageKey ); } }
+      //else if( this.nav().isMyNav( obj, 'Inov' ) ) {
+      //    this.onComp( obj.compKey ); } }
       },
 
     beforeMount: function() {

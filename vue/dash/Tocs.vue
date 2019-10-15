@@ -54,7 +54,7 @@
         this.nav().pub(obj); },
       onNav:  function (obj) {
         if( obj.source !== 'Toc' ) {
-          if( this.compKey !== obj.compKey ) { this.compKey = obj.compKey; } // this.myPracs(obj.compKey);
+          if( this.compKey !== obj.compKey ) { this.compKey = obj.compKey; }
           if( this.pracKey !== obj.pracKey ) { this.pracKey = obj.pracKey; }
           if( this.dispKey !== obj.dispKey ) { this.dispKey = obj.dispKey; } } },
       styleComp: function( kompKey ) {

@@ -4,25 +4,22 @@ var Nav,
 import Build from '../util/Build.js';
 
 Nav = class Nav {
-  constructor(stream, batch, navs = null) {
+  constructor(stream, batch, navs = null, isMuse = false) {
     this.tap = this.tap.bind(this);
     this.dir = this.dir.bind(this);
     this.stream = stream;
     this.batch = batch;
     this.navs = navs;
+    this.isMuse = isMuse;
     this.build = new Build(this.batch);
     this.$router = null;
     this.source = 'None';
-    this.route = 'Home'; // Prac Disp
+    this.route = 'Home';
     this.compKey = 'None'; // Also specifies current plane
     this.pracKey = 'None';
-    this.pracObj = null;
     this.dispKey = 'None';
-    this.dispObj = null;
-    this.pageKey = 'None'; // Used to maintain continuity through dir tranvesals with Prac
-    this.prevKey = 'None'; // Only changed by Tabs
+    this.pageKey = 'None';
     this.pages = {};
-    this.dirTabs = false;
     this.keyEvents();
   }
 
@@ -36,8 +33,7 @@ Nav = class Nav {
       compKey: this.compKey,
       pracKey: this.pracKey,
       dispKey: this.dispKey,
-      pageKey: this.pageKey,
-      prevKey: this.prevKey
+      pageKey: this.pageKey
     };
     obj.source = msg.source != null ? msg.source : 'None';
     console.log('Nav.pub()', obj);
@@ -100,7 +96,7 @@ Nav = class Nav {
     if (event === null) {
       ({});
     }
-    if (this.dirTabs && (direct === 'east' || direct === 'west')) {
+    if (this.isMuse && (direct === 'east' || direct === 'west')) {
       this.dirPage(direct);
     } else {
       switch (this.route) {

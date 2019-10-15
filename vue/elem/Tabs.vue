@@ -13,36 +13,33 @@
 
     props: { route:String, pages:Object, position:String },
     
-    data() { return { tabPages:null, tabsKey:'None', pageKey:'None', prevKey:'None', pageObj:null } },
+    data() { return { pageKey:'None', pageObj:null } },
     
     methods: {
-      onPage: function (tabsKey) {
-        if( tabsKey !== 'None') {
-          if( !this.isPageKeyComp(this.pageKey) ) {
-               this.prevKey = this.pageKey; }
-          this.pageKey = tabsKey; } },
-      doPage: function (pageKey) {
-        this.nav().dirTabs = this.app() !== 'Muse';
-        if( pageKey!=='None' ) {
-          this.onPage( pageKey );
-          this.nav().setPageKey( this.route, pageKey );
-          this.nav().pub( this.pubObj(pageKey) ); } },
-      pubObj: function (pageKey) {
-        let route = this.route==='Inov' ? 'Comp' : this.route;
-        let obj   = { source:'Tabs', route:route, pageKey:pageKey, prevKey:this.prevKey };
-        if( this.route==='Inov' ) {
-          obj.compKey = pageKey; }
-        return obj; },
+      onPage: function (key) {
+        if( key !== 'None') {
+          this.pageKey = key; } },
+      doPage: function (key) {
+        if( key!=='None' ) {
+          if( this.route!=='Inov' ) {
+              this.nav().setPageKey( this.route, key ); }
+          this.onPage( key );
+          this.nav().pub( this.pubObj(key) ); } },
+      pubObj: function (key) {
+        return this.route==='Inov'
+                ? { source:'Tabs', route:'Comp',     compKey:key }
+                : { source:'Tabs', route:this.route, pageKey:key }; },
+      pubObj2: function (key) {
+        return { source:'Tabs', route:this.route, pageKey:key }; },
       stylePos: function () {
         return this.position==='right' ? { left:'50%' } : { left:0 }; },
       classTab: function (pageKey) {
         return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },
 
     beforeMount: function () {  // We want to set the routes pages asap
-      this.tabsKey  = this.nav().setPages( this.route, this.pages ); },
+      this.onPage( this.nav().setPages( this.route, this.pages ) ); },
 
     mounted: function() {
-      this.onPage(this.tabsKey);
       this.subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {
         if( obj.source !== 'Tabs' && obj.route === this.route ) {
           this.onPage( this.nav().getPageKey(this.route,'None') ); } } ); }

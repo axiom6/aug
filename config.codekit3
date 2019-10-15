@@ -1753,6 +1753,39 @@
 		"oT": 1,
 		"q": 100
 		},
+	"/pub/css/math/BuildingsLearn.png": {
+		"ft": 32768,
+		"iS": 23450,
+		"oA": 0,
+		"oAP": "/pub/css/math/BuildingsLearn.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/math/PaceLayers.png": {
+		"ft": 32768,
+		"iS": 34520,
+		"oA": 0,
+		"oAP": "/pub/css/math/PaceLayers.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/math/PacePlus.jpg": {
+		"ft": 16384,
+		"iS": 207390,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/pub/css/math/PacePlus.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
 	"/pub/css/math/Uncertainty.svg": {
 		"ft": 2097152,
 		"miP": 0,
@@ -5239,20 +5272,20 @@
 		"oT": 1,
 		"q": 100
 		},
-	"/vue/dash/Logo.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/dash/Logo.js",
-		"oF": 0
-		},
 	"/vue/dash/Menu.vue": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/pub/vue/dash/Menu.js",
+		"oF": 0
+		},
+	"/vue/dash/Navd.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/dash/Navd.js",
 		"oF": 0
 		},
 	"/vue/dash/Pref.vue": {
@@ -5693,13 +5726,13 @@
 		"oAP": "/pub/vue/note/Ganja.js",
 		"oF": 0
 		},
-	"/vue/note/GanjaND.js": {
+	"/vue/note/GanjaNB.js": {
 		"bF": 0,
 		"ft": 64,
 		"ma": 0,
 		"mi": 0,
 		"oA": 1,
-		"oAP": "/vue/note/GanjaND-min.js",
+		"oAP": "/vue/note/GanjaNB-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -7815,6 +7848,14 @@
 		"hM": 0,
 		"oA": 0,
 		"oAP": "/zzz/notes/text/Info.txt",
+		"oF": 0
+		},
+	"/zzz/notes/text/mental.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/text/mental.txt",
 		"oF": 0
 		},
 	"/zzz/notes/text/Neg.txt": {
