@@ -156,25 +156,21 @@ class Build
 
   prev:(   plane ) ->
     switch plane
-      when 'Home' then 'Wise'
-      when 'Prin' then 'Home'
-      when 'Info' then 'Prin'
+      when 'Info' then 'Wise'
       when 'Know' then 'Info'
       when 'Wise' then 'Know'
-      else
+      else           
         console.error( 'Build.prev() unknown plane', plane )
-        'Prin'
+        'None'
 
   next:(   plane ) ->
     switch plane
-      when 'Home' then 'Prin'
-      when 'Prin' then 'Info'
       when 'Info' then 'Know'
       when 'Know' then 'Wise'
-      when 'Wise' then 'Home'
+      when 'Wise' then 'Info'
       else
         console.error( 'Build.next() unknown plane', plane )
-        'Prin'
+        'None'
 
   adjacentPractice:( prac, dir ) ->
     # console.log( 'adjacentPractice', { prac:prac, dir:dir } )

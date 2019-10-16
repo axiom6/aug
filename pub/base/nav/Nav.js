@@ -15,53 +15,95 @@ Nav = class Nav {
     this.$router = null;
     this.source = 'None';
     this.route = 'Home';
-    this.compKey = 'None'; // Also specifies current plane
+    this.compKey = 'Home'; // Also specifies current plane
     this.pracKey = 'None';
     this.dispKey = 'None';
     this.pageKey = 'None';
+    this.warnMsg = 'None';
     this.pages = {};
     this.keyEvents();
   }
 
   pub(msg) {
     var lastRoute, obj;
-    lastRoute = this.route;
+    if (this.msgOK(msg)) {
+      lastRoute = this.route;
+      obj = this.pubObj(msg);
+      console.log('Nav.pub()', obj);
+      this.stream.publish('Nav', obj);
+      if ((msg.route != null) && msg.route !== lastRoute) {
+        this.doRoute(msg.route);
+      }
+    }
+  }
+
+  msgOK(msg) {
+    var ok;
+    ok = true;
+    if ((msg.compKey != null) && !this.hasCompKey(msg.compKey)) {
+      ok = false;
+    }
+    return ok;
+  }
+
+  hasCompKey(compKey, dir = null) {
+    var has;
+    has = (compKey != null) && (this.navs != null) && (this.navs[compKey] != null);
+    if ((dir != null) && has) {
+      return this.navs[compKey][dir] != null;
+    } else {
+      return has;
+    }
+  }
+
+  pubObj(msg) {
     this.set(msg);
-    obj = {
+    if (msg.warnMsg == null) {
+      this.warnMsg = 'None';
+    }
+    if (msg.source == null) {
+      this.source = 'None';
+    }
+    return {
       source: this.source,
       route: this.route,
       compKey: this.compKey,
       pracKey: this.pracKey,
       dispKey: this.dispKey,
-      pageKey: this.pageKey
+      pageKey: this.pageKey,
+      warnMsg: this.warnMsg
     };
-    obj.source = msg.source != null ? msg.source : 'None';
-    console.log('Nav.pub()', obj);
-    this.stream.publish('Nav', obj);
-    if (lastRoute !== msg.route) {
-      this.doRoute(msg.route);
-    }
   }
 
   doRoute(route) {
-    // console.log( 'Nav.doRoute()', route )
-    if (this.$router != null) {
-      this.$router.push({
-        name: route
-      });
+    if ((route != null) && route !== 'None') {
+      if (this.$router != null) {
+        this.$router.push({
+          name: route
+        });
+      } else {
+        console.error('Nav.doRoute() $router not set');
+      }
+      this.route = route;
     } else {
-      console.error('Nav.doRoute() $router not set');
+      console.error('Nav.doRoute() undefined route');
     }
-    this.route = route;
   }
 
-  set(obj) {
+  set(msg) {
     var key, val;
-    for (key in obj) {
-      if (!hasProp.call(obj, key)) continue;
-      val = obj[key];
+    for (key in msg) {
+      if (!hasProp.call(msg, key)) continue;
+      val = msg[key];
       this[key] = val;
     }
+  }
+
+  log(source, warnMsg) {
+    return console.log('Nav.log()', this.pubObj({
+      source: source,
+      warnMsg: warnMsg
+    }));
   }
 
   tap() {
@@ -117,14 +159,25 @@ Nav = class Nav {
 
   dirComp(dir) {
     var compKey, route;
-    compKey = this.adjCompKey(this.compKey, dir);
-    route = compKey === 'Home' ? 'Home' : 'Comp';
-    route = compKey === 'Prin' ? 'Prin' : route;
-    this.pub({
-      route: route,
-      compKey: compKey,
-      source: 'Nav.dirComp'
-    });
+    if (this.hasCompKey(this.compKey, dir)) {
+      compKey = this.navs[this.compKey][dir];
+      route = this.toRoute(compKey);
+      this.pub({
+        route: route,
+        compKey: compKey,
+        source: `${'Nav.dirComp'}(${dir})`
+      });
+    } else {
+
+    }
+  }
+
+  toRoute(compKey) {
+    if (compKey === 'Info' || compKey === 'Know' || compKey === 'Wise') {
+      return 'Comp';
+    } else {
+      return compKey;
+    }
   }
 
   dirPrac(dir) {
@@ -132,7 +185,7 @@ Nav = class Nav {
     adj = this.adjPracObj(dir);
     if (adj.name !== 'None') {
       obj = {};
-      obj.source = 'Nav.dirPrac';
+      obj.source = `${'Nav.dirPrac'}(${dir})`;
       obj.compKey = this.compKey;
       if (adj.name !== this.pracKey) {
         obj.pracKey = adj.name;
@@ -149,11 +202,11 @@ Nav = class Nav {
     prc = this.pracs(this.compKey)[this.pracKey];
     dis = prc[this.dispKey];
     adj = this.adjPracObj(dir);
-    ddr = dis.dir; // if dir is 'next' or dir is 'prev' then dis.dir else @adjDir(dir)
+    ddr = dis.dir;
     dis = this.getDispObj(adj, ddr);
     if (adj.name !== 'None') {
       obj = {};
-      obj.source = 'Nav.dirDisp';
+      obj.source = `${'Nav.dirDisp'}(${dir})`;
       obj.compKey = adj.plane;
       obj.pracKey = adj.name;
       obj.dispKey = dis.name;
@@ -162,31 +215,36 @@ Nav = class Nav {
   }
 
   dirNavs(dir) {
-    var obj, route;
+    var compKey, msg, route;
     if (this.hasPages(this.route) && dir === 'west' || dir === 'east') {
       this.dirPage(dir);
-    } else if ((this.navs != null) && (this.navs[this.route] != null)) {
-      route = this.navs[this.route][dir];
-      obj = {
+    } else if (this.hasCompKey(this.compKey, dir)) {
+      compKey = this.navs[this.compKey][dir];
+      route = this.toRoute(compKey);
+      msg = {
         route: route,
-        compKey: route,
-        source: dir
+        compKey: compKey,
+        source: `${'Nav.dirNavs'}(${dir})`
       };
-      if (route === 'Info' || route === 'Know' || route === 'Wise') {
-        obj.route = 'Comp';
-      }
-      this.pub(obj);
+      this.pub(msg);
+    } else {
+      this.log(`${'Nav.dirNavs'}(${dir})`, {
+        warnMsg: 'Cannot find pageKey or missing @navs'
+      });
     }
   }
 
-  // else
-  //  console.error( 'Nav.dirNavs() no pages or @navs not specified', { dir:dir, route:@route } )
   dirPage(dir) {
     var pageKey;
     pageKey = this.hasPages(this.route) ? this.movePage(this.pages[this.route], dir) : 'None';
     if (pageKey !== 'None') {
       this.pub({
-        source: 'Nav.dirPage'
+        source: `${'Nav.dirPage'}(${dir})`,
+        pageKey: pageKey
+      });
+    } else {
+      this.log(`${'Nav.dirPage'}(${dir})`, {
+        warnMsg: 'Cannot find pageKey'
       });
     }
   }
@@ -291,61 +349,17 @@ Nav = class Nav {
     return obj.route === route && this.hasPageKey(route);
   }
 
-  adjCompKey(compKey, dir) {
-    var adjDir;
-    adjDir = (function() {
-      switch (dir) {
-        case 'west':
-          return 'prev';
-        case 'north':
-          return 'prev';
-        case 'east':
-          return 'next';
-        case 'south':
-          return 'next';
-        case 'prev':
-          return 'prev';
-        case 'next':
-          return 'next';
-        default:
-          return 'next';
-      }
-    })();
-    if (adjDir === 'next') {
-      return this.build.next(compKey);
-    } else {
-      return this.build.prev(compKey);
-    }
-  }
-
   adjPracObj(dir) {
     var adjcObj, pracObj;
     pracObj = this.pracs(this.compKey)[this.pracKey];
     adjcObj = this.build.adjacentPractice(pracObj, dir);
-    // console.log( 'Nav.adjPrac()', { dir:dir, pracObj:pracObj, adjcObj:adjcObj } )
     return adjcObj;
   }
 
   getDispObj(pracObj, dirDisp) {
     var dispObj;
     dispObj = this.build.getDir(pracObj, dirDisp);
-    // console.log( 'Nav.getDisp()', { dir:dir, prac:prac, disp:disp } )
     return dispObj;
-  }
-
-  adjDir(dir) {
-    switch (dir) {
-      case 'west':
-        return 'east';
-      case 'north':
-        return 'south';
-      case 'east':
-        return 'west';
-      case 'south':
-        return 'north';
-      default:
-        return dir;
-    }
   }
 
   pracs(compKey) {

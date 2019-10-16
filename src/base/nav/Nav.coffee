@@ -8,36 +8,56 @@ class Nav
     @$router  =  null
     @source   =  'None'
     @route    =  'Home'
-    @compKey  =  'None' # Also specifies current plane
+    @compKey  =  'Home' # Also specifies current plane
     @pracKey  =  'None'
     @dispKey  =  'None'
     @pageKey  =  'None'
+    @warnMsg  =  'None'
     @pages    =  {}
     @keyEvents()
 
   pub:( msg ) ->
-    lastRoute = @route
-    @set( msg )
-    obj = { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey, pageKey:@pageKey }
-    obj.source = if msg.source? then msg.source else 'None'
-    console.log('Nav.pub()', obj )
-    @stream.publish( 'Nav',  obj )
-    @doRoute( msg.route ) if lastRoute isnt msg.route
+    if @msgOK(msg)
+      lastRoute = @route
+      obj = @pubObj( msg )
+      console.log('Nav.pub()', obj )
+      @stream.publish( 'Nav',  obj )
+      @doRoute( msg.route ) if msg.route? and msg.route isnt lastRoute
     return
+
+  msgOK:( msg ) ->
+    ok = true
+    ok = false if msg.compKey? and not @hasCompKey(msg.compKey)
+    ok
+
+  hasCompKey:( compKey, dir=null ) ->
+    has = compKey? and @navs? and @navs[compKey]?
+    if dir?   and   has   then    @navs[compKey][dir]? else has
+
+  pubObj:( msg ) ->
+    @set(  msg )
+    @warnMsg = 'None' if not msg.warnMsg?
+    @source  = 'None' if not msg.source?
+    { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey, pageKey:@pageKey, warnMsg:@warnMsg }
 
   doRoute:( route ) ->
-    # console.log( 'Nav.doRoute()', route )
-    if @$router?
-       @$router.push( { name:route } )
+    if route? and route isnt 'None'
+      if @$router?
+         @$router.push( { name:route } )
+      else
+         console.error( 'Nav.doRoute() $router not set' )
+      @route = route
     else
-       console.error( 'Nav.doRoute() $router not set' )
-    @route = route
+      console.error( 'Nav.doRoute() undefined route' )
     return
 
-  set:( obj ) ->
-    for own key,   val of obj
+  set:( msg ) ->
+    for own key,   val of msg
       @[key] = val
     return
+
+  log:( source, warnMsg ) ->
+    console.log( 'Nav.log()', @pubObj( { source:source, warnMsg:warnMsg } ) )
 
   tap:() =>
     console.log( 'Nav.tap()' )
@@ -69,17 +89,21 @@ class Nav
     return
 
   dirComp:( dir ) ->
-    compKey = @adjCompKey( @compKey, dir )
-    route   =  if compKey is 'Home' then 'Home' else 'Comp'
-    route   =  if compKey is 'Prin' then 'Prin' else route
-    @pub( {  route:route, compKey:compKey, source:'Nav.dirComp' } )
+    if @hasCompKey(@compKey,dir)
+      compKey =   @navs[@compKey][dir]
+      route   =  @toRoute( compKey )
+      @pub( {  route:route, compKey:compKey, source:"#{'Nav.dirComp'}(#{dir})" } )
+    else
     return
+
+  toRoute:( compKey ) ->
+    if compKey is 'Info' or compKey is 'Know' or compKey is 'Wise' then 'Comp' else compKey
 
   dirPrac:( dir ) ->
     adj = @adjPracObj( dir )
     if adj.name isnt 'None'
       obj = {}
-      obj.source = 'Nav.dirPrac'
+      obj.source = "#{'Nav.dirPrac'}(#{dir})"
       obj.compKey = @compKey
       if adj.name  isnt @pracKey
          obj.pracKey = adj.name
@@ -92,12 +116,11 @@ class Nav
     prc = @pracs(@compKey)[@pracKey]
     dis = prc[@dispKey]
     adj = @adjPracObj(dir)
-    ddr = dis.dir # if dir is 'next' or dir is 'prev' then dis.dir else @adjDir(dir)
+    ddr = dis.dir
     dis = @getDispObj( adj, ddr )
-
     if adj.name isnt 'None'
        obj = {}
-       obj.source = 'Nav.dirDisp'
+       obj.source = "#{'Nav.dirDisp'}(#{dir})"
        obj.compKey  = adj.plane
        obj.pracKey  = adj.name
        obj.dispKey  = dis.name
@@ -107,18 +130,21 @@ class Nav
   dirNavs:( dir ) ->
     if @hasPages(@route) and dir is 'west' or dir is 'east'
        @dirPage( dir )
-    else if @navs? and @navs[@route]?
-      route = @navs[@route][dir]
-      obj = { route:route, compKey:route, source:dir }
-      obj.route   = 'Comp' if route is 'Info' or route is 'Know' or route is 'Wise'
-      @pub( obj )
-    # else
-    #  console.error( 'Nav.dirNavs() no pages or @navs not specified', { dir:dir, route:@route } )
+    else if @hasCompKey(@compKey, dir)
+      compKey =   @navs[@compKey][dir]
+      route   = @toRoute(compKey )
+      msg = { route:route, compKey:compKey, source:"#{'Nav.dirNavs'}(#{dir})" }
+      @pub( msg )
+    else
+      @log( "#{'Nav.dirNavs'}(#{dir})", warnMsg:'Cannot find pageKey or missing @navs' )
     return
 
   dirPage:( dir ) ->
     pageKey = if @hasPages(@route) then @movePage(@pages[@route],dir) else 'None'
-    @pub( { source:'Nav.dirPage' } ) if pageKey isnt 'None'
+    if pageKey isnt 'None'
+      @pub(   { source:"#{'Nav.dirPage'}(#{dir})", pageKey:pageKey } )
+    else
+      @log( "#{'Nav.dirPage'}(#{dir})", warnMsg:'Cannot find pageKey'  )
     return
 
   movePage:( page, dir  ) ->
@@ -176,35 +202,14 @@ class Nav
   isMyNav:( obj, route ) ->
     obj.route is route and @hasPageKey(route)
 
-  adjCompKey:( compKey, dir ) ->
-    adjDir = switch  dir
-      when 'west'  then 'prev'
-      when 'north' then 'prev'
-      when 'east'  then 'next'
-      when 'south' then 'next'
-      when 'prev'  then 'prev'
-      when 'next'  then 'next'
-      else              'next'
-    return if adjDir is 'next' then @build.next(compKey) else @build.prev(compKey)
-
   adjPracObj:( dir ) ->
     pracObj = @pracs(@compKey)[@pracKey]
     adjcObj = @build.adjacentPractice(pracObj,dir)
-    # console.log( 'Nav.adjPrac()', { dir:dir, pracObj:pracObj, adjcObj:adjcObj } )
     adjcObj
 
   getDispObj:( pracObj, dirDisp ) ->
     dispObj = @build.getDir( pracObj, dirDisp )
-    # console.log( 'Nav.getDisp()', { dir:dir, prac:prac, disp:disp } )
     dispObj
-
-  adjDir:( dir ) ->
-    switch dir
-      when 'west'  then 'east'
-      when 'north' then 'south'
-      when 'east'  then 'west'
-      when 'south' then 'north'
-      else               dir
 
   pracs:(  compKey ) ->
     @batch[compKey].data.pracs

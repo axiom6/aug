@@ -78,7 +78,11 @@ class Mixin
         bases: (compk, prack, dispk, areak, itemk) ->
           Mixin.Main.Batch[compk].data[prack][dispk][areak][itemk].bases
         compObject: (compKey) ->
-          Mixin.Main.Batch[compKey].data.pracs
+          if Mixin.Main.Batch[compKey]?
+             Mixin.Main.Batch[compKey].data.pracs
+          else
+             console.error( 'Mixin.compObject() bad compKey', compKey )
+             {}
         pracObject: (compKey, pracKey) ->
           prac = {}
           if this.pracs(compKey)?

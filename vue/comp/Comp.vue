@@ -6,9 +6,9 @@
     <div class="comp-comp" ref="Comp" title="Comp">
       <template v-for="pracObj in compObj">
         <div   :class="pracObj.dir" :key="pracObj.name" :ref="pracObj.name" :title="pracObj.name">
-          <p-sign v-show="pages['Sign'].show" :pracObj="pracObj"></p-sign>
-          <p-dirs v-show="pages['Dirs'].show" :pracObj="pracObj"></p-dirs>
-          <p-conn   v-if="pages['Conn'].show" :pracObj="pracObj" level="Comp"></p-conn>
+          <p-sign v-if="pages['Sign'].show" :pracObj="pracObj"></p-sign>
+          <p-dirs v-if="pages['Dirs'].show" :pracObj="pracObj"></p-dirs>
+          <p-conn v-if="pages['Conn'].show" :pracObj="pracObj" level="Comp"></p-conn>
         </div>
       </template>
       <template v-for="row in myRows">
@@ -57,14 +57,14 @@
          this.myRows          = this.rows;
          this.myRows['Plane'] = this.planes[compKey]; },
       onComp: function (compKey) {
-        if( this.compKey!==compKey ) {
+      //if( this.compKey!==compKey ) {
             this.compKey = compKey;
             this.compObj = this.compObject(compKey);
-            // console.log( 'Comp.onComp()', compKey, this.compObj );
-            this.onRows( compKey); } },
+            this.onRows( compKey); },// },
       doPage: function( objKey ) {
         let pageKey = objKey==='None' ? this.nav().getPageKey('Comp','Sign') : objKey;
         this.nav().setPageKey( 'Comp', pageKey ); },
+      // console.log( 'Comp.doPage() 2', { sign:this.pages['Sign'].show, dirs:this.pages['Dirs'].show } )
       isRows: function () {
         return true; },
       onNav:  function (obj) {
@@ -76,7 +76,7 @@
       },
 
     beforeMount: function() {
-      this.onComp( this.nav().compKey ); }, //       this.doPage( this.nav().getPageKey('Comp','Sign') );
+      this.onComp( this.nav().compKey ); },
 
     mounted: function () {
       this.subscribe( 'Nav', 'Comp.vue', (obj) => {

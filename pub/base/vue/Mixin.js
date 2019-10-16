@@ -124,7 +124,12 @@ Mixin = class Mixin {
           return Mixin.Main.Batch[compk].data[prack][dispk][areak][itemk].bases;
         },
         compObject: function(compKey) {
-          return Mixin.Main.Batch[compKey].data.pracs;
+          if (Mixin.Main.Batch[compKey] != null) {
+            return Mixin.Main.Batch[compKey].data.pracs;
+          } else {
+            console.error('Mixin.compObject() bad compKey', compKey);
+            return {};
+          }
         },
         pracObject: function(compKey, pracKey) {
           var prac;
