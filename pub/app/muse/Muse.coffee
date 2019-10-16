@@ -76,18 +76,18 @@ class Muse
         { path: '/disp', name:'Disp', components:{ Disp: Home.Disp } }
       ] } )
 
-  # Toc.vue components and routes
+  # Toc.vue components and routes with no west or east directions
   Muse.komps = {
     Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
-    west:"Wise", north:"Wise", prev:"Wise", east:"Prin", south:"Prin",  next:"Prin"  }
+    north:"Wise", prev:"Wise", south:"Prin",  next:"Prin"  }
     Prin:{ title:'Base', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",
-    west:"Home", north:"Home", prev:"Home", east:"Info", south:"Info",  next:"Info" }
+    north:"Home", prev:"Home", south:"Info",  next:"Info" }
     Info:{ title:'Info', key:'Info', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-th",
-    west:"Prin", north:"Prin", prev:"Prin", east:"Know", south:"Know",  next:"Know" }
+    north:"Prin", prev:"Prin", south:"Know",  next:"Know" }
     Know:{ title:'Know', key:'Know', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-university",
-    west:"Info", north:"Info", prev:"Info", east:"Wise", south:"Wise",  next:"Wise" }
+    north:"Info", prev:"Info", south:"Wise",  next:"Wise" }
     Wise:{ title:'Wise', key:'Wise', route:'Comp', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor",
-    west:"Know", north:"Know", prev:"Know", east:"Home", south:"Home",  next:"Home" }  }
+    north:"Know", prev:"Know", south:"Home",  next:"Home" }  }
 
   # Merges principles and innovations into comp practices
   Muse.mergeCols = ( ) ->

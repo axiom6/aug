@@ -4,25 +4,26 @@ import Build from '../util/Build.js';
 class Nav
 
   constructor:( @stream, @batch, @navs=null, @isMuse=false ) ->
-    @build    =  new Build( @batch )
-    @$router  =  null
-    @source   =  'None'
-    @route    =  'Home'
-    @compKey  =  'Home' # Also specifies current plane
-    @pracKey  =  'None'
-    @dispKey  =  'None'
-    @pageKey  =  'None'
-    @warnMsg  =  'None'
-    @pages    =  {}
+    @build     =  new Build( @batch )
+    @$router   =  null
+    @source    = 'None'
+    @route     = 'Home'
+    @routeLast = 'None'
+    @compKey   = 'Home' # Also specifies current plane
+    @pracKey   = 'None'
+    @dispKey   = 'None'
+    @pageKey   = 'None'
+    @warnMsg   = 'None'
+    @pages     = {}
+    @setPagesCallbacks = {}
     @keyEvents()
 
   pub:( msg ) ->
     if @msgOK(msg)
-      lastRoute = @route
-      obj = @pubObj( msg )
+      obj = @toObj( msg )
+      @doRoute( obj.route ) # Creates route if necessary to publish to
       console.log('Nav.pub()', obj )
       @stream.publish( 'Nav',  obj )
-      @doRoute( msg.route ) if msg.route? and msg.route isnt lastRoute
     return
 
   msgOK:( msg ) ->
@@ -30,34 +31,45 @@ class Nav
     ok = false if msg.compKey? and not @hasCompKey(msg.compKey)
     ok
 
-  hasCompKey:( compKey, dir=null ) ->
-    has = compKey? and @navs? and @navs[compKey]?
-    if dir?   and   has   then    @navs[compKey][dir]? else has
-
-  pubObj:( msg ) ->
-    @set(  msg )
+  toObj:( msg ) ->
+    @set( @reviseMsg(msg) )
     @warnMsg = 'None' if not msg.warnMsg?
     @source  = 'None' if not msg.source?
     { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey, pageKey:@pageKey, warnMsg:@warnMsg }
 
-  doRoute:( route ) ->
-    if route? and route isnt 'None'
-      if @$router?
-         @$router.push( { name:route } )
-      else
-         console.error( 'Nav.doRoute() $router not set' )
-      @route = route
-    else
-      console.error( 'Nav.doRoute() undefined route' )
-    return
+  # A hack for Innovate Tabs
+  reviseMsg:( msg ) ->
+    if msg.route? and msg.route is 'Inov'
+       msg.route   = 'Comp'
+       msg.compKey = msg.pageKey
+       msg.pageKey = @getPageKey( 'Comp' )
+    msg
 
   set:( msg ) ->
     for own key,   val of msg
       @[key] = val
     return
 
-  log:( source, warnMsg ) ->
-    console.log( 'Nav.log()', @pubObj( { source:source, warnMsg:warnMsg } ) )
+  doRoute:( route ) ->
+    return if route is @routeLast
+    if route? and route isnt 'None'
+      if @$router?
+         @$router.push( { name:route } )
+      else
+         console.error( 'Nav.doRoute() $router not set' )
+      @routeLast = @route
+      @route     =  route
+    else
+      console.error( 'Nav.doRoute() undefined route' )
+    return
+
+  hasCompKey:( compKey, dir=null ) ->
+    has = compKey? and @navs? and @navs[compKey]?
+    if dir?   and   has   then    @navs[compKey][dir]? else has
+
+  log:( msg, warnMsg ) ->
+    msg.warnMsg = warnMsg
+    console.log( 'Nav.log()', @toObj( msg ) )
 
   tap:() =>
     console.log( 'Nav.tap()' )
@@ -78,77 +90,116 @@ class Nav
   dir:( direct, event=null ) =>
     @source = direct
     if event is null then {}
-    if @isMuse and ( direct is 'east'  or direct is 'west' )
-       @dirPage( direct )
-    else
+    if @isMuse
       switch @route
         when 'Comp' then @dirComp( direct )
         when 'Prac' then @dirPrac( direct )
         when 'Disp' then @dirDisp( direct )
-        else             @dirNavs( direct )
+        else             @dirComp( direct )
+    else
+      @dirComp( direct )
     return
 
   dirComp:( dir ) ->
-    if @hasCompKey(@compKey,dir)
-      compKey =   @navs[@compKey][dir]
-      route   =  @toRoute( compKey )
-      @pub( {  route:route, compKey:compKey, source:"#{'Nav.dirComp'}(#{dir})" } )
+    msg = {}
+    msg.source = "#{'Nav.dirComp'}(#{dir})"
+    if @hasCompKey( @compKey, dir )
+      msg.compKey = @navs[@compKey][dir]
+      msg.route   = @toRoute( msg.compKey )
+      @doRoute( msg.route )
+      msg.pageKey = if @pageKey isnt 'None' and @pageKey isnt 'Info' then @pageKey else 'Sign'
+      #sg.pageKey = if @hasPageKey(msg.route,@pageKey)               then @pageKey else @getPageKey(msg.route)
+      @pub( msg )
+    else if @hasActivePageDir( @route, dir )
+      @dirPage( dir )
     else
+      @log( msg, warnMsg:'Missing component' )
+    return
+
+  dirComp2:( dir ) ->
+    msg = {}
+    msg.source = "#{'Nav.dirComp'}(#{dir})"
+    if @hasCompKey( @compKey, dir )
+      msg.compKey = @navs[@compKey][dir]
+      msg.route   = @toRoute( msg.compKey )
+      callback = () =>
+        msg.pageKey = if @hasPageKey(msg.route,@pageKey) then @pageKey else @getPageKey(msg.route)
+        @pub( msg )
+      if @hasPages()
+        @doRoute( msg.route )
+        callback()
+      else
+        @setPagesCallbacks[msg.route] = callback
+        @doRoute( msg.route )
+    else if @hasActivePageDir( @route, dir )
+      @dirPage( dir )
+    else
+      @log( msg, warnMsg:'Missing component' )
     return
 
   toRoute:( compKey ) ->
     if compKey is 'Info' or compKey is 'Know' or compKey is 'Wise' then 'Comp' else compKey
 
   dirPrac:( dir ) ->
+    msg = {}
+    msg.source = "#{'Nav.dirPrac'}(#{dir})"
+    msg.compKey = @compKey
     adj = @adjPracObj( dir )
     if adj.name isnt 'None'
-      obj = {}
-      obj.source = "#{'Nav.dirPrac'}(#{dir})"
-      obj.compKey = @compKey
       if adj.name  isnt @pracKey
-         obj.pracKey = adj.name
+         msg.pracKey = adj.name
       if adj.plane isnt @compKey
-         obj.compKey = adj.plane
-      @pub( obj )
+         msg.compKey = adj.plane
+      @pub( msg )
+    else
+      @log( msg, "Missing practice @adjPracObj(dir)" )
     return
 
   dirDisp:( dir ) ->
+    msg = {}
+    msg.source = "#{'Nav.dirDisp'}(#{dir})"
     prc = @pracs(@compKey)[@pracKey]
     dis = prc[@dispKey]
     adj = @adjPracObj(dir)
     ddr = dis.dir
     dis = @getDispObj( adj, ddr )
     if adj.name isnt 'None'
-       obj = {}
-       obj.source = "#{'Nav.dirDisp'}(#{dir})"
-       obj.compKey  = adj.plane
-       obj.pracKey  = adj.name
-       obj.dispKey  = dis.name
-       @pub( obj )
+       msg.compKey  = adj.plane
+       msg.pracKey  = adj.name
+       msg.dispKey  = dis.name
+       @pub( msg )
+    else
+       @log( msg, "Missing displine @adjPracObj(dir)" )
     return
 
+  ###
   dirNavs:( dir ) ->
-    if @hasPages(@route) and dir is 'west' or dir is 'east'
+    msg = {}
+    msg.source = "#{'Nav.dirNavs'}(#{dir})"
+    if @hasActivePageDir(@route,dir)
        @dirPage( dir )
     else if @hasCompKey(@compKey, dir)
-      compKey =   @navs[@compKey][dir]
-      route   = @toRoute(compKey )
-      msg = { route:route, compKey:compKey, source:"#{'Nav.dirNavs'}(#{dir})" }
+      msg.compKey = @navs[@compKey][dir]
+      msg.route   = @toRoute(msg.compKey )
       @pub( msg )
     else
-      @log( "#{'Nav.dirNavs'}(#{dir})", warnMsg:'Cannot find pageKey or missing @navs' )
+      @log( msg, warnMsg:'Missing compKey or @navs' )
     return
+  ###
 
   dirPage:( dir ) ->
-    pageKey = if @hasPages(@route) then @movePage(@pages[@route],dir) else 'None'
+    msg = {}
+    msg.source = "#{'Nav.dirPage'}(#{dir})"
+    pageKey = if @hasActivePageDir(@route,dir) then @movePage(@pages[@route],dir) else 'None'
     if pageKey isnt 'None'
-      @pub(   { source:"#{'Nav.dirPage'}(#{dir})", pageKey:pageKey } )
+      msg.pageKey = pageKey
+      @pub( msg )
     else
-      @log( "#{'Nav.dirPage'}(#{dir})", warnMsg:'Cannot find pageKey'  )
+      @log( msg, warnMsg:'Cannot find pageKey'  )
     return
 
   movePage:( page, dir  ) ->
-    pageKey = @getPageKey( @route, 'None' )
+    pageKey = @getPageKey( @route )
     len     = page.keys.length
     if pageKey isnt 'None'
       idx = page.keys.indexOf(pageKey)
@@ -170,37 +221,43 @@ class Nav
     @pages[route] = {}
     @pages[route].pages = pagesObj
     @pages[route].keys  = Object.keys(pagesObj)
-    @getPageKey( route, 'None' )
+    console.log( 'Nav().setPages', route, @pages[route] )
+    if @setPagesCallbacks[route]?
+       @setPagesCallbacks[route]()
+       @setPagesCallbacks[route] = null # Only call once
+    @getPageKey( route )
 
   setPageKey:( route, pageKey ) ->
-    @pageKey = pageKey
+    @pageKey = pageKey if route isnt 'Inov'
     return if  not        @hasPages(route)
     for own key, page  of @pages[route].pages
       page.show = key is pageKey
     return
 
-  getPageKey:( route, defn ) ->
-    return @pageKey if     @usePageAtt(route)
-    return 'None'   if   not @hasPages(route)
+  getPageKey:( route ) ->
+    return @pageKey if @hasPageKey(route,@pageKey)
+    return 'None'   if not @hasPages(route)
     for own  key,   page  of @pages[route].pages
       return key if page.show
-    return defn
+    @pages[route].keys[0] # Default is first page
 
-  hasPageKey:( route ) ->
+  hasPageKey:( route, pageKey ) ->
+    pageKey isnt 'None' and @hasPages(route) and @pages[route].pages[pageKey]?
+
+  hasActivePage:( route ) ->
     return false    if    not @hasPages(route)
     for own  key,    page  of @pages[route].pages
       return true if page.show
     false
 
-  usePageAtt:( route ) ->
-    @pageKey isnt 'None' and @hasPages(route) and @pages[route].pages[@pageKey]? and
-      ( route is 'Prin'or route is 'Comp' or route is 'Prac' or route is 'Disp' )
-
   hasPages:( route ) ->
     @pages[route]? and @pages[route].pages? and @pages[route].keys.length > 0
 
+  hasActivePageDir:( route, dir ) ->
+     @hasActivePage( route ) and ( dir is 'west' or dir is 'east' )
+
   isMyNav:( obj, route ) ->
-    obj.route is route and @hasPageKey(route)
+    obj.route is route # and @hasActivePage(route)
 
   adjPracObj:( dir ) ->
     pracObj = @pracs(@compKey)[@pracKey]

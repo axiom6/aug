@@ -173,7 +173,7 @@ class Build
         'None'
 
   adjacentPractice:( prac, dir ) ->
-    # console.log( 'adjacentPractice', { prac:prac, dir:dir } )
+    # console.log( 'Build.adjacentPractice', { prac:prac, dir:dir } )
     return @None if not prac? or not prac.name? or prac.name is 'None' or not prac.column?
 
     col = ""
@@ -188,14 +188,22 @@ class Build
       when 'next'           then [prac.column, prac.row,   @next(prac.plane) ]
       else                       ["None","None","None"]
 
-
     return @None if [col,row,pln] is ["None","None","None"]
-    pracs = @batch[pln].data.pracs
+
+    pracs = {}
+    if @batch[pln]?
+      pracs = @batch[pln].data.pracs
+      # console.log( 'Build.adjacentPractice()', { plane:pln, pracs:pracs } )
+    else
+      console.error( 'Build.adjacentPractice() batch[] not found', [col,row,pln] )
+      return @None
+
     for own key, adj of pracs when Util.isChild(key)
       if adj.column is col and adj.row is row and adj.plane is pln
         # console.log( 'adjacentPractice[col,row,pln]', [col,row,pln], adj )
         return adj
-    console.log( 'adjacentPractice[col,row,pln]', [col,row,pln], 'adj not found' )
+
+    console.log( 'Build.adjacentPractice[col,row,pln]', [col,row,pln], 'adj not found' )
     @None
 
   adjacentStudies:( practice, dir ) ->

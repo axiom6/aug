@@ -18,19 +18,11 @@
     methods: {
       onPage: function (key) {
         if( key !== 'None') {
-          this.pageKey = key; } },
+          this.pageKey = key;
+          this.nav().setPageKey( this.route, key ); } },
       doPage: function (key) {
-        if( key!=='None' ) {
-          if( this.route!=='Inov' ) {
-              this.nav().setPageKey( this.route, key ); }
           this.onPage( key );
-          this.nav().pub( this.pubObj(key) ); } },
-      pubObj: function (key) {
-        return this.route==='Inov'
-                ? { source:'Tabs', route:'Comp',     compKey:key }
-                : { source:'Tabs', route:this.route, pageKey:key }; },
-      pubObj2: function (key) {
-        return { source:'Tabs', route:this.route, pageKey:key }; },
+          this.nav().pub( { source:'Tabs', route:this.route, pageKey:key } ); },
       stylePos: function () {
         return this.position==='right' ? { left:'50%' } : { left:0 }; },
       classTab: function (pageKey) {
@@ -42,7 +34,7 @@
     mounted: function() {
       this.subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {
         if( obj.source !== 'Tabs' && obj.route === this.route ) {
-          this.onPage( this.nav().getPageKey(this.route,'None') ); } } ); }
+          this.onPage( obj.pageKey ); } } ); }  // this.nav().getPageKey(this.route)
     }
   
 </script>

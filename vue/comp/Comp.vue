@@ -57,22 +57,15 @@
          this.myRows          = this.rows;
          this.myRows['Plane'] = this.planes[compKey]; },
       onComp: function (compKey) {
-      //if( this.compKey!==compKey ) {
+        if( this.compKey!==compKey ) {
             this.compKey = compKey;
             this.compObj = this.compObject(compKey);
-            this.onRows( compKey); },// },
-      doPage: function( objKey ) {
-        let pageKey = objKey==='None' ? this.nav().getPageKey('Comp','Sign') : objKey;
-        this.nav().setPageKey( 'Comp', pageKey ); },
-      // console.log( 'Comp.doPage() 2', { sign:this.pages['Sign'].show, dirs:this.pages['Dirs'].show } )
+            this.onRows( compKey); } },
       isRows: function () {
         return true; },
       onNav:  function (obj) {
-        if(      this.nav().isMyNav( obj, 'Comp' ) ) {
-          this.onComp( obj.compKey );
-          this.doPage( obj.pageKey ); } }
-      //else if( this.nav().isMyNav( obj, 'Inov' ) ) {
-      //    this.onComp( obj.compKey ); } }
+        if( this.nav().isMyNav( obj, 'Comp' ) ) {
+            this.onComp( obj.compKey ); } }
       },
 
     beforeMount: function() {
@@ -84,6 +77,10 @@
   }
   
   export default Comp;
+
+  //doPage: function( objKey ) { // Not called
+  //  let pageKey = objKey==='None' ? this.nav().getPageKey('Comp') : objKey;
+  //  this.nav().setPageKey( 'Comp', pageKey ); },
   
 </script>
 

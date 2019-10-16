@@ -36,7 +36,7 @@
         this.nav().setPageKey( 'Prac', pageKey ); },
       onNav: function( obj ) {
         if( this.nav().isMyNav( obj, 'Prac' ) ) {
-            this.doPage( this.nav().getPageKey('Prac','Dirs') );
+            this.doPage( this.nav().getPageKey('Prac') );
             this.onPrac( obj.compKey, obj.pracKey ); } }
       },
 
@@ -46,7 +46,7 @@
       this.onPrac( compKey, pracKey );  },
 
     mounted: function () {
-      this.doPage( this.nav().getPageKey('Prac','Dirs') );
+      this.doPage( this.nav().getPageKey('Prac') );
       this.subscribe(  "Nav", 'Prac.vue', (obj) => {
         this.onNav(obj); } ); }
   }

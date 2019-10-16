@@ -13,39 +13,28 @@ var script = {
 
   props: { route:String, pages:Object, position:String },
   
-  data() { return { tabPages:null, tabsKey:'None', pageKey:'None', prevKey:'None', pageObj:null } },
+  data() { return { pageKey:'None', pageObj:null } },
   
   methods: {
-    onPage: function (tabsKey) {
-      if( tabsKey !== 'None') {
-        if( !this.isPageKeyComp(this.pageKey) ) {
-             this.prevKey = this.pageKey; }
-        this.pageKey = tabsKey; } },
-    doPage: function (pageKey) {
-      this.nav().dirTabs = this.app() !== 'Muse';
-      if( pageKey!=='None' ) {
-        this.onPage( pageKey );
-        this.nav().setPageKey( this.route, pageKey );
-        this.nav().pub( this.pubObj(pageKey) ); } },
-    pubObj: function (pageKey) {
-      let route = this.route==='Inov' ? 'Comp' : this.route;
-      let obj   = { source:'Tabs', route:route, pageKey:pageKey, prevKey:this.prevKey };
-      if( this.route==='Inov' ) {
-        obj.compKey = pageKey; }
-      return obj; },
+    onPage: function (key) {
+      if( key !== 'None') {
+        this.pageKey = key;
+        this.nav().setPageKey( this.route, key ); } },
+    doPage: function (key) {
+        this.onPage( key );
+        this.nav().pub( { source:'Tabs', route:this.route, pageKey:key } ); },
     stylePos: function () {
       return this.position==='right' ? { left:'50%' } : { left:0 }; },
     classTab: function (pageKey) {
       return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },
 
   beforeMount: function () {  // We want to set the routes pages asap
-    this.tabsKey  = this.nav().setPages( this.route, this.pages ); },
+    this.onPage( this.nav().setPages( this.route, this.pages ) ); },
 
   mounted: function() {
-    this.onPage(this.tabsKey);
     this.subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {
       if( obj.source !== 'Tabs' && obj.route === this.route ) {
-        this.onPage( this.nav().getPageKey(this.route,'None') ); } } ); }
+        this.onPage( obj.pageKey ); } } ); }  // this.nav().getPageKey(this.route)
   };
 
 function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
@@ -221,7 +210,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-79f253b8_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3.4vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Tabs.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,uBAAuB;EACvB,kBAAkB;EAClB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,UAAU;EACV,UAAU;AACZ;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Tabs.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3.4vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n"]}, media: undefined });
+    inject("data-v-fb25520c_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3.4vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Tabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Tabs.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,uBAAuB;EACvB,kBAAkB;EAClB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,UAAU;EACV,UAAU;AACZ;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;ACCd","file":"Tabs.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3.4vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"tabs-pane\" :style=\"stylePos()\">\n    <template v-for=\"pageObj in pages\">\n      <div :class=\"classTab(pageObj.key)\" @click=\"doPage(pageObj.key)\">{{pageObj.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { route:String, pages:Object, position:String },\n    \n    data() { return { pageKey:'None', pageObj:null } },\n    \n    methods: {\n      onPage: function (key) {\n        if( key !== 'None') {\n          this.pageKey = key;\n          this.nav().setPageKey( this.route, key ); } },\n      doPage: function (key) {\n          this.onPage( key );\n          this.nav().pub( { source:'Tabs', route:this.route, pageKey:key } ); },\n      stylePos: function () {\n        return this.position==='right' ? { left:'50%' } : { left:0 }; },\n      classTab: function (pageKey) {\n        return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },\n\n    beforeMount: function () {  // We want to set the routes pages asap\n      this.onPage( this.nav().setPages( this.route, this.pages ) ); },\n\n    mounted: function() {\n      this.subscribe(  \"Nav\", 'Tabs.vue.'+this.route, (obj) => {\n        if( obj.source !== 'Tabs' && obj.route === this.route ) {\n          this.onPage( obj.pageKey ); } } ); }  // this.nav().getPageKey(this.route)\n    }\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @tabsFS:1.7*@themeFS;\n  \n  .tabs-pane { background-color:@theme-back; font-size:@tabsFS;\n    position:absolute; left:0; top:0; width:@theme-tabs-width; height:@theme-tabs-height;\n    \n    .tabs-tab { display:inline-block; margin-left:2.0rem; padding:0.2rem 0.3rem 0.1rem 0.3rem;\n      border-radius:12px 12px 0 0; border-left: @theme-fore solid thin;\n      border-top:@theme-fore solid thin; border-right:@theme-fore solid thin;\n                  background-color:@theme-back;  color:@theme-fore;}\n    .tabs-tab:hover  {         background-color:@theme-fore; color:@theme-back; }\n    .tabs-tab-active { .tabs-tab(); background-color:@theme-fore; color:@theme-back; } }\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -21229,7 +21218,7 @@ Data = class Data {
     ref = ['Team', 'Discover', 'Adapt', 'Benefit', 'Change', 'Govern'];
     for (i = 0, len = ref.length; i < len; i++) {
       key = ref[i];
-      innvs[key] = pracs[key];
+      innvs[key] = Object.assign({}, pracs[key]);
       innvs[key].plane = innv;
     }
     Data.refine(innvs, 'Pack');
@@ -21679,44 +21668,36 @@ Build = class Build {
 
   prev(plane) {
     switch (plane) {
-      case 'Home':
-        return 'Wise';
-      case 'Prin':
-        return 'Home';
       case 'Info':
-        return 'Prin';
+        return 'Wise';
       case 'Know':
         return 'Info';
       case 'Wise':
         return 'Know';
       default:
         console.error('Build.prev() unknown plane', plane);
-        return 'Prin';
+        return 'None';
     }
   }
 
   next(plane) {
     switch (plane) {
-      case 'Home':
-        return 'Prin';
-      case 'Prin':
-        return 'Info';
       case 'Info':
         return 'Know';
       case 'Know':
         return 'Wise';
       case 'Wise':
-        return 'Home';
+        return 'Info';
       default:
         console.error('Build.next() unknown plane', plane);
-        return 'Prin';
+        return 'None';
     }
   }
 
   adjacentPractice(prac, dir) {
     var adj, col, key, pln, pracs, row;
     if ((prac == null) || (prac.name == null) || prac.name === 'None' || (prac.column == null)) {
-      // console.log( 'adjacentPractice', { prac:prac, dir:dir } )
+      // console.log( 'Build.adjacentPractice', { prac:prac, dir:dir } )
       return this.None;
     }
     col = "";
@@ -21747,7 +21728,14 @@ Build = class Build {
     if ([col, row, pln] === ["None", "None", "None"]) {
       return this.None;
     }
-    pracs = this.batch[pln].data.pracs;
+    pracs = {};
+    if (this.batch[pln] != null) {
+      pracs = this.batch[pln].data.pracs;
+    } else {
+      // console.log( 'Build.adjacentPractice()', { plane:pln, pracs:pracs } )
+      console.error('Build.adjacentPractice() batch[] not found', [col, row, pln]);
+      return this.None;
+    }
     for (key in pracs) {
       if (!hasProp$2.call(pracs, key)) continue;
       adj = pracs[key];
@@ -21758,7 +21746,7 @@ Build = class Build {
         }
       }
     }
-    console.log('adjacentPractice[col,row,pln]', [col, row, pln], 'adj not found');
+    console.log('Build.adjacentPractice[col,row,pln]', [col, row, pln], 'adj not found');
     return this.None;
   }
 
@@ -23557,7 +23545,7 @@ let Comp = {
 
   components:{ 'b-tabs':Tabs, 'p-sign':Sign$1, 'p-dirs':Dirs$1, 'p-conn':Conn$1 },
   
-  data() { return { compObj:null, pracObj:{}, myRows:{},
+  data() { return { compKey:'None', compObj:null, pracObj:{}, myRows:{},
     pages:{
       Sign: { title:'Practices',    key:'Sign', show:true  },
       Dirs: { title:'Disciplines',  key:'Dirs', show:false },
@@ -23571,36 +23559,34 @@ let Comp = {
       Do:{    name:'Do',          dir:'do', icon:"fas fas fa-cog" },
       Share:{ name:'Share',       dir:'sh', icon:"fas fa-share-alt-square" } },
     planes: {
-      Info:{ name:'Techs',      dir:'cm', icon:"fas fas fa-cogs" },
+      Info:{ name:'Techs',     dir:'cm', icon:"fas fas fa-cogs" },
       Know:{ name:'Knowledge', dir:'cm', icon:"fas fas fa-university"  },
       Wise:{ name:'Wisdom',    dir:'cm', icon:"fas fas fa-tripadvisor" },
       Data:{ name:'Data',      dir:'cm', icon:"fas fas fa-table" } } } },
   
   methods: {
-    hasInnov: function() {
-      return this.isDef(this.compObj) && this.isDef(this.compObj['Team']); },
+    hasInovs: function() {
+      return this.isDef(this.inovs)  },
     onRows: function (compKey) {
        this.myRows          = this.rows;
        this.myRows['Plane'] = this.planes[compKey]; },
     onComp: function (compKey) {
-      this.compObj = this.compObject(compKey);
-      // console.log( 'Comp.onComp()', compKey, this.compObj );
-      this.onRows( compKey); },
-    doPage: function( objKey ) {
-      let pageKey = objKey==='None' ? this.nav().getPageKey('Comp','Sign') : objKey;
+      if( this.compKey!==compKey ) {
+          this.compKey = compKey;
+          this.compObj = this.compObject(compKey);
+          this.onRows( compKey); } },
+    doPage: function( objKey ) { // Not called
+      let pageKey = objKey==='None' ? this.nav().getPageKey('Comp') : objKey;
       this.nav().setPageKey( 'Comp', pageKey ); },
     isRows: function () {
       return true; },
     onNav:  function (obj) {
-      if( this.nav().isMyNav( obj, 'Comp' ) ) { // || this.isPageKeyComp(obj.pageKey) )
-        let compKey = this.isPageKeyComp(obj.pageKey) ? obj.pageKey : obj.compKey;
-        let pageKey = this.isPageKeyComp(obj.pageKey) ? obj.prevKey : obj.pageKey;
-        this.onComp( compKey );
-        this.doPage( pageKey ); } }
+      if( this.nav().isMyNav( obj, 'Comp' ) ) {
+          this.onComp( obj.compKey ); } }
     },
 
   beforeMount: function() {
-    this.onComp( this.nav().compKey ); }, //       this.doPage( this.nav().getPageKey('Comp','Sign') );
+    this.onComp( this.nav().compKey ); },
 
   mounted: function () {
     this.subscribe( 'Nav', 'Comp.vue', (obj) => {
@@ -23623,7 +23609,7 @@ var __vue_render__$4 = function() {
         attrs: { route: "Comp", pages: _vm.pages, position: "left" }
       }),
       _vm._v(" "),
-      _vm.hasInnov()
+      _vm.hasInovs()
         ? _c("b-tabs", {
             attrs: { route: "Inov", pages: _vm.inovs, position: "right" }
           })
@@ -23645,29 +23631,13 @@ var __vue_render__$4 = function() {
                   attrs: { title: pracObj.name }
                 },
                 [
-                  _c("p-sign", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.pages["Sign"].show,
-                        expression: "pages['Sign'].show"
-                      }
-                    ],
-                    attrs: { pracObj: pracObj }
-                  }),
+                  _vm.pages["Sign"].show
+                    ? _c("p-sign", { attrs: { pracObj: pracObj } })
+                    : _vm._e(),
                   _vm._v(" "),
-                  _c("p-dirs", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.pages["Dirs"].show,
-                        expression: "pages['Dirs'].show"
-                      }
-                    ],
-                    attrs: { pracObj: pracObj }
-                  }),
+                  _vm.pages["Dirs"].show
+                    ? _c("p-dirs", { attrs: { pracObj: pracObj } })
+                    : _vm._e(),
                   _vm._v(" "),
                   _vm.pages["Conn"].show
                     ? _c("p-conn", {
@@ -23714,7 +23684,7 @@ __vue_render__$4._withStripped = true;
   /* style */
   const __vue_inject_styles__$4 = function (inject) {
     if (!inject) return
-    inject("data-v-378d21fe_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.comp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.comp-pane .comp-comp {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  color: black;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n  display: grid;\n  grid-template-columns: 13fr 29fr 29fr 29fr;\n  grid-template-rows: 25fr 25fr 25fr 25fr;\n  grid-template-areas: \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm .comp-sign {\n  background-color: black;\n}\n", map: {"version":3,"sources":["Comp.vue","/Users/ax/Documents/prj/aug/vue/comp/Comp.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;EACX,uBAAuB;EACvB,YAAY;EACZ,gBAAgB;EAChB,oBAAoB;EACpB,aAAa;EACb,0CAA0C;EAC1C,uCAAuC;EACvC,uFAAuF;EACvF,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;ECCf,aAAA;EDCE,qBAAqB;ECCvB,mBAAA;EACA,qBAAA;EDCE,mBAAmB;ACCrB;AACA;EDCE,aAAa;ECCf,aAAA;EACA,qBAAA;EDCE,mBAAmB;ECCrB,qBAAA;EDCE,mBAAmB;ACCrB;ADCA;ECCA,aAAA;EACA,eAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,mBAAA;AACA;ADCA;ECCA,aAAA;EACA,cAAA;EACA,qBAAA;EDCE,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,uBAAuB;AACzB","file":"Comp.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.comp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.comp-pane .comp-comp {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  color: black;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n  display: grid;\n  grid-template-columns: 13fr 29fr 29fr 29fr;\n  grid-template-rows: 25fr 25fr 25fr 25fr;\n  grid-template-areas: \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm .comp-sign {\n  background-color: black;\n}\n","\n<template>\n  <div class=\"comp-pane\">\n    <b-tabs route=\"Comp\" :pages=\"pages\" position=\"left\" ></b-tabs>\n    <b-tabs route=\"Inov\" :pages=\"inovs\" position=\"right\" v-if=\"hasInnov()\"></b-tabs>\n    <div class=\"comp-comp\" ref=\"Comp\" title=\"Comp\">\n      <template v-for=\"pracObj in compObj\">\n        <div   :class=\"pracObj.dir\" :key=\"pracObj.name\" :ref=\"pracObj.name\" :title=\"pracObj.name\">\n          <p-sign v-show=\"pages['Sign'].show\" :pracObj=\"pracObj\"></p-sign>\n          <p-dirs v-show=\"pages['Dirs'].show\" :pracObj=\"pracObj\"></p-dirs>\n          <p-conn   v-if=\"pages['Conn'].show\" :pracObj=\"pracObj\" level=\"Comp\"></p-conn>\n        </div>\n      </template>\n      <template v-for=\"row in myRows\">\n        <div v-show=\"isRows()\" :class=\"row.dir\" :key=\"row.name\">\n          <p-sign :pracObj=\"row\"></p-sign>\n        </div>\n      </template>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Tabs from '../elem/Tabs.vue';\n  import Sign from './Sign.vue';\n  import Dirs from './Dirs.vue';\n  import Conn from './Conn.vue';\n  \n  let Comp = {\n\n    components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs, 'p-conn':Conn },\n    \n    data() { return { compObj:null, pracObj:{}, myRows:{},\n      pages:{\n        Sign: { title:'Practices',    key:'Sign', show:true  },\n        Dirs: { title:'Disciplines',  key:'Dirs', show:false },\n        Conn: { title:'Connections',  key:'Conn', show:false } },\n      inovs:{\n        Info: { title:'Tech', key:'Info', show:true  },\n        Data: { title:'Data', key:'Data', show:false } },\n      rows: {\n        Plane:{ name:'Information', dir:'cm', icon:\"fas fas fa-th\" },\n        Learn:{ name:'Learn',       dir:'le', icon:\"fas fa-graduation-cap\" },\n        Do:{    name:'Do',          dir:'do', icon:\"fas fas fa-cog\" },\n        Share:{ name:'Share',       dir:'sh', icon:\"fas fa-share-alt-square\" } },\n      planes: {\n        Info:{ name:'Techs',      dir:'cm', icon:\"fas fas fa-cogs\" },\n        Know:{ name:'Knowledge', dir:'cm', icon:\"fas fas fa-university\"  },\n        Wise:{ name:'Wisdom',    dir:'cm', icon:\"fas fas fa-tripadvisor\" },\n        Data:{ name:'Data',      dir:'cm', icon:\"fas fas fa-table\" } } } },\n    \n    methods: {\n      hasInnov: function() {\n        return this.isDef(this.compObj) && this.isDef(this.compObj['Team']); },\n      onRows: function (compKey) {\n         this.myRows          = this.rows;\n         this.myRows['Plane'] = this.planes[compKey]; },\n      onComp: function (compKey) {\n        this.compObj = this.compObject(compKey);\n        // console.log( 'Comp.onComp()', compKey, this.compObj );\n        this.onRows( compKey); },\n      doPage: function( objKey ) {\n        let pageKey = objKey==='None' ? this.nav().getPageKey('Comp','Sign') : objKey;\n        this.nav().setPageKey( 'Comp', pageKey ); },\n      isRows: function () {\n        return true; },\n      onNav:  function (obj) {\n        if( this.nav().isMyNav( obj, 'Comp' ) ) { // || this.isPageKeyComp(obj.pageKey) )\n          let compKey = this.isPageKeyComp(obj.pageKey) ? obj.pageKey : obj.compKey;\n          let pageKey = this.isPageKeyComp(obj.pageKey) ? obj.prevKey : obj.pageKey;\n          this.onComp( compKey );\n          this.doPage( pageKey ); } }\n      },\n\n    beforeMount: function() {\n      this.onComp( this.nav().compKey ); }, //       this.doPage( this.nav().getPageKey('Comp','Sign') );\n\n    mounted: function () {\n      this.subscribe( 'Nav', 'Comp.vue', (obj) => {\n        this.onNav(obj); } ); }\n  }\n  \n  export default Comp;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .comp-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n               grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .comp-grid4x4() { display:grid; grid-template-columns:13fr 29fr 29fr 29fr; grid-template-rows:25fr 25fr 25fr 25fr;\n    grid-template-areas:\"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n  \n  .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n                  justify-items:center; align-items:center; }\n  \n  @compFS:2.0*@themeFS;\n\n  .comp-pane { position:absolute; left:0; top:0; width:100%; height:100%;\n  \n    .comp-comp { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;\n            background-color:@theme-back; color:@theme-dark; font-size:@compFS; border-radius:0.5*@compFS;\n      .comp-grid4x4(); justify-items:center; align-items:center; // The 4x4 Dim + Row + 9 Practices Grid\n        .cm { .pdir(cm); } .em   { .pdir(em);   } .in    { .pdir(in); }    .en   { .pdir(en);   }\n        .le { .pdir(le); } .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }\n        .do { .pdir(do); } .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }\n        .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }\n      \n      .cm .comp-sign { background-color:@theme-back; }\n    }\n  }\n\n</style>\n"]}, media: undefined });
+    inject("data-v-e3b159b2_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.comp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.comp-pane .comp-comp {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  color: black;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n  display: grid;\n  grid-template-columns: 13fr 29fr 29fr 29fr;\n  grid-template-rows: 25fr 25fr 25fr 25fr;\n  grid-template-areas: \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm .comp-sign {\n  background-color: black;\n}\n", map: {"version":3,"sources":["Comp.vue","/Users/ax/Documents/prj/aug/vue/comp/Comp.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;EACX,uBAAuB;EACvB,YAAY;EACZ,gBAAgB;EAChB,oBAAoB;EACpB,aAAa;EACb,0CAA0C;EAC1C,uCAAuC;EACvC,uFAAuF;EACvF,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;ACCA;EDCE,aAAa;ECCf,aAAA;EACA,qBAAA;EDCE,mBAAmB;ECCrB,qBAAA;EACA,mBAAA;ADCA;ACCA;EACA,aAAA;EDCE,aAAa;ECCf,qBAAA;EDCE,mBAAmB;ECCrB,qBAAA;EDCE,mBAAmB;ACCrB;AACA;EACA,aAAA;EACA,eAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EDCE,mBAAmB;ACCrB;AACA;EACA,aAAA;EDCE,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,uBAAuB;AACzB","file":"Comp.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.comp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.comp-pane .comp-comp {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  color: black;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n  display: grid;\n  grid-template-columns: 13fr 29fr 29fr 29fr;\n  grid-template-rows: 25fr 25fr 25fr 25fr;\n  grid-template-areas: \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm .comp-sign {\n  background-color: black;\n}\n","\n<template>\n  <div class=\"comp-pane\">\n    <b-tabs route=\"Comp\" :pages=\"pages\" position=\"left\" ></b-tabs>\n    <b-tabs route=\"Inov\" :pages=\"inovs\" position=\"right\" v-if=\"hasInovs()\"></b-tabs>\n    <div class=\"comp-comp\" ref=\"Comp\" title=\"Comp\">\n      <template v-for=\"pracObj in compObj\">\n        <div   :class=\"pracObj.dir\" :key=\"pracObj.name\" :ref=\"pracObj.name\" :title=\"pracObj.name\">\n          <p-sign v-if=\"pages['Sign'].show\" :pracObj=\"pracObj\"></p-sign>\n          <p-dirs v-if=\"pages['Dirs'].show\" :pracObj=\"pracObj\"></p-dirs>\n          <p-conn v-if=\"pages['Conn'].show\" :pracObj=\"pracObj\" level=\"Comp\"></p-conn>\n        </div>\n      </template>\n      <template v-for=\"row in myRows\">\n        <div v-show=\"isRows()\" :class=\"row.dir\" :key=\"row.name\">\n          <p-sign :pracObj=\"row\"></p-sign>\n        </div>\n      </template>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Tabs from '../elem/Tabs.vue';\n  import Sign from './Sign.vue';\n  import Dirs from './Dirs.vue';\n  import Conn from './Conn.vue';\n  \n  let Comp = {\n\n    components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs, 'p-conn':Conn },\n    \n    data() { return { compKey:'None', compObj:null, pracObj:{}, myRows:{},\n      pages:{\n        Sign: { title:'Practices',    key:'Sign', show:true  },\n        Dirs: { title:'Disciplines',  key:'Dirs', show:false },\n        Conn: { title:'Connections',  key:'Conn', show:false } },\n      inovs:{\n        Info: { title:'Tech', key:'Info', show:true  },\n        Data: { title:'Data', key:'Data', show:false } },\n      rows: {\n        Plane:{ name:'Information', dir:'cm', icon:\"fas fas fa-th\" },\n        Learn:{ name:'Learn',       dir:'le', icon:\"fas fa-graduation-cap\" },\n        Do:{    name:'Do',          dir:'do', icon:\"fas fas fa-cog\" },\n        Share:{ name:'Share',       dir:'sh', icon:\"fas fa-share-alt-square\" } },\n      planes: {\n        Info:{ name:'Techs',     dir:'cm', icon:\"fas fas fa-cogs\" },\n        Know:{ name:'Knowledge', dir:'cm', icon:\"fas fas fa-university\"  },\n        Wise:{ name:'Wisdom',    dir:'cm', icon:\"fas fas fa-tripadvisor\" },\n        Data:{ name:'Data',      dir:'cm', icon:\"fas fas fa-table\" } } } },\n    \n    methods: {\n      hasInovs: function() {\n        return this.isDef(this.inovs)  },\n      onRows: function (compKey) {\n         this.myRows          = this.rows;\n         this.myRows['Plane'] = this.planes[compKey]; },\n      onComp: function (compKey) {\n        if( this.compKey!==compKey ) {\n            this.compKey = compKey;\n            this.compObj = this.compObject(compKey);\n            this.onRows( compKey); } },\n      doPage: function( objKey ) { // Not called\n        let pageKey = objKey==='None' ? this.nav().getPageKey('Comp') : objKey;\n        this.nav().setPageKey( 'Comp', pageKey ); },\n      isRows: function () {\n        return true; },\n      onNav:  function (obj) {\n        if( this.nav().isMyNav( obj, 'Comp' ) ) {\n            this.onComp( obj.compKey ); } }\n      },\n\n    beforeMount: function() {\n      this.onComp( this.nav().compKey ); },\n\n    mounted: function () {\n      this.subscribe( 'Nav', 'Comp.vue', (obj) => {\n        this.onNav(obj); } ); }\n  }\n  \n  export default Comp;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .comp-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n               grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .comp-grid4x4() { display:grid; grid-template-columns:13fr 29fr 29fr 29fr; grid-template-rows:25fr 25fr 25fr 25fr;\n    grid-template-areas:\"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n  \n  .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n                  justify-items:center; align-items:center; }\n  \n  @compFS:2.0*@themeFS;\n\n  .comp-pane { position:absolute; left:0; top:0; width:100%; height:100%;\n  \n    .comp-comp { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;\n            background-color:@theme-back; color:@theme-dark; font-size:@compFS; border-radius:0.5*@compFS;\n      .comp-grid4x4(); justify-items:center; align-items:center; // The 4x4 Dim + Row + 9 Practices Grid\n        .cm { .pdir(cm); } .em   { .pdir(em);   } .in    { .pdir(in); }    .en   { .pdir(en);   }\n        .le { .pdir(le); } .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }\n        .do { .pdir(do); } .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }\n        .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }\n      \n      .cm .comp-sign { background-color:@theme-back; }\n    }\n  }\n\n</style>\n"]}, media: undefined });
 
   };
   /* scoped */

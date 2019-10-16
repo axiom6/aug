@@ -40,14 +40,14 @@
       onNav:  function (obj) {
         if( this.nav().isMyNav(  obj, 'Prin' ) ) {
           this.onComp( obj.compKey );
-          this.doPage( this.nav().getPageKey('Prin','Sign') ); } }
+          this.doPage( this.nav().getPageKey('Prin') ); } }
       },
 
     beforeMount: function() {
       this.onComp('Prin'); },
 
     mounted: function () {
-      this.doPage( this.nav().getPageKey('Prin','Sign') );
+      this.doPage( this.nav().getPageKey('Prin') );
       this.subscribe( 'Nav', 'Prin.vue', (obj) => {
         this.onNav(obj); } ); }
   }

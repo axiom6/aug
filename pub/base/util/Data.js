@@ -94,7 +94,7 @@ Data = class Data {
     ref = ['Team', 'Discover', 'Adapt', 'Benefit', 'Change', 'Govern'];
     for (i = 0, len = ref.length; i < len; i++) {
       key = ref[i];
-      innvs[key] = pracs[key];
+      innvs[key] = Object.assign({}, pracs[key]);
       innvs[key].plane = innv;
     }
     Data.refine(innvs, 'Pack');

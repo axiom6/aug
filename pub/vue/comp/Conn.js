@@ -20752,7 +20752,7 @@ Data = class Data {
     ref = ['Team', 'Discover', 'Adapt', 'Benefit', 'Change', 'Govern'];
     for (i = 0, len = ref.length; i < len; i++) {
       key = ref[i];
-      innvs[key] = pracs[key];
+      innvs[key] = Object.assign({}, pracs[key]);
       innvs[key].plane = innv;
     }
     Data.refine(innvs, 'Pack');
@@ -21202,44 +21202,36 @@ Build = class Build {
 
   prev(plane) {
     switch (plane) {
-      case 'Home':
-        return 'Wise';
-      case 'Prin':
-        return 'Home';
       case 'Info':
-        return 'Prin';
+        return 'Wise';
       case 'Know':
         return 'Info';
       case 'Wise':
         return 'Know';
       default:
         console.error('Build.prev() unknown plane', plane);
-        return 'Prin';
+        return 'None';
     }
   }
 
   next(plane) {
     switch (plane) {
-      case 'Home':
-        return 'Prin';
-      case 'Prin':
-        return 'Info';
       case 'Info':
         return 'Know';
       case 'Know':
         return 'Wise';
       case 'Wise':
-        return 'Home';
+        return 'Info';
       default:
         console.error('Build.next() unknown plane', plane);
-        return 'Prin';
+        return 'None';
     }
   }
 
   adjacentPractice(prac, dir) {
     var adj, col, key, pln, pracs, row;
     if ((prac == null) || (prac.name == null) || prac.name === 'None' || (prac.column == null)) {
-      // console.log( 'adjacentPractice', { prac:prac, dir:dir } )
+      // console.log( 'Build.adjacentPractice', { prac:prac, dir:dir } )
       return this.None;
     }
     col = "";
@@ -21270,7 +21262,14 @@ Build = class Build {
     if ([col, row, pln] === ["None", "None", "None"]) {
       return this.None;
     }
-    pracs = this.batch[pln].data.pracs;
+    pracs = {};
+    if (this.batch[pln] != null) {
+      pracs = this.batch[pln].data.pracs;
+    } else {
+      // console.log( 'Build.adjacentPractice()', { plane:pln, pracs:pracs } )
+      console.error('Build.adjacentPractice() batch[] not found', [col, row, pln]);
+      return this.None;
+    }
     for (key in pracs) {
       if (!hasProp$2.call(pracs, key)) continue;
       adj = pracs[key];
@@ -21281,7 +21280,7 @@ Build = class Build {
         }
       }
     }
-    console.log('adjacentPractice[col,row,pln]', [col, row, pln], 'adj not found');
+    console.log('Build.adjacentPractice[col,row,pln]', [col, row, pln], 'adj not found');
     return this.None;
   }
 

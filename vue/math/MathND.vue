@@ -25,7 +25,7 @@
       
       onNav: function(obj) {
         if( this.nav().isMyNav( obj, this.route ) ) {
-          let pageKey = this.nav().getPageKey(this.route,'None');
+          let pageKey = this.nav().getPageKey(this.route);
           if( pageKey !== 'None') {
             this.create( pageKey   );
             this.mathML( this.exps ); } } },

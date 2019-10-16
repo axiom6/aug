@@ -13,39 +13,28 @@ var script = {
 
   props: { route:String, pages:Object, position:String },
   
-  data() { return { tabPages:null, tabsKey:'None', pageKey:'None', prevKey:'None', pageObj:null } },
+  data() { return { pageKey:'None', pageObj:null } },
   
   methods: {
-    onPage: function (tabsKey) {
-      if( tabsKey !== 'None') {
-        if( !this.isPageKeyComp(this.pageKey) ) {
-             this.prevKey = this.pageKey; }
-        this.pageKey = tabsKey; } },
-    doPage: function (pageKey) {
-      this.nav().dirTabs = this.app() !== 'Muse';
-      if( pageKey!=='None' ) {
-        this.onPage( pageKey );
-        this.nav().setPageKey( this.route, pageKey );
-        this.nav().pub( this.pubObj(pageKey) ); } },
-    pubObj: function (pageKey) {
-      let route = this.route==='Inov' ? 'Comp' : this.route;
-      let obj   = { source:'Tabs', route:route, pageKey:pageKey, prevKey:this.prevKey };
-      if( this.route==='Inov' ) {
-        obj.compKey = pageKey; }
-      return obj; },
+    onPage: function (key) {
+      if( key !== 'None') {
+        this.pageKey = key;
+        this.nav().setPageKey( this.route, key ); } },
+    doPage: function (key) {
+        this.onPage( key );
+        this.nav().pub( { source:'Tabs', route:this.route, pageKey:key } ); },
     stylePos: function () {
       return this.position==='right' ? { left:'50%' } : { left:0 }; },
     classTab: function (pageKey) {
       return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },
 
   beforeMount: function () {  // We want to set the routes pages asap
-    this.tabsKey  = this.nav().setPages( this.route, this.pages ); },
+    this.onPage( this.nav().setPages( this.route, this.pages ) ); },
 
   mounted: function() {
-    this.onPage(this.tabsKey);
     this.subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {
       if( obj.source !== 'Tabs' && obj.route === this.route ) {
-        this.onPage( this.nav().getPageKey(this.route,'None') ); } } ); }
+        this.onPage( obj.pageKey ); } } ); }  // this.nav().getPageKey(this.route)
   };
 
 function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier
@@ -221,7 +210,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-79f253b8_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3.4vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Tabs.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,uBAAuB;EACvB,kBAAkB;EAClB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,UAAU;EACV,UAAU;AACZ;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Tabs.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3.4vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n"]}, media: undefined });
+    inject("data-v-fb25520c_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3.4vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Tabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Tabs.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,uBAAuB;EACvB,kBAAkB;EAClB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,UAAU;EACV,UAAU;AACZ;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;ACCd","file":"Tabs.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3.4vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"tabs-pane\" :style=\"stylePos()\">\n    <template v-for=\"pageObj in pages\">\n      <div :class=\"classTab(pageObj.key)\" @click=\"doPage(pageObj.key)\">{{pageObj.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { route:String, pages:Object, position:String },\n    \n    data() { return { pageKey:'None', pageObj:null } },\n    \n    methods: {\n      onPage: function (key) {\n        if( key !== 'None') {\n          this.pageKey = key;\n          this.nav().setPageKey( this.route, key ); } },\n      doPage: function (key) {\n          this.onPage( key );\n          this.nav().pub( { source:'Tabs', route:this.route, pageKey:key } ); },\n      stylePos: function () {\n        return this.position==='right' ? { left:'50%' } : { left:0 }; },\n      classTab: function (pageKey) {\n        return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },\n\n    beforeMount: function () {  // We want to set the routes pages asap\n      this.onPage( this.nav().setPages( this.route, this.pages ) ); },\n\n    mounted: function() {\n      this.subscribe(  \"Nav\", 'Tabs.vue.'+this.route, (obj) => {\n        if( obj.source !== 'Tabs' && obj.route === this.route ) {\n          this.onPage( obj.pageKey ); } } ); }  // this.nav().getPageKey(this.route)\n    }\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @tabsFS:1.7*@themeFS;\n  \n  .tabs-pane { background-color:@theme-back; font-size:@tabsFS;\n    position:absolute; left:0; top:0; width:@theme-tabs-width; height:@theme-tabs-height;\n    \n    .tabs-tab { display:inline-block; margin-left:2.0rem; padding:0.2rem 0.3rem 0.1rem 0.3rem;\n      border-radius:12px 12px 0 0; border-left: @theme-fore solid thin;\n      border-top:@theme-fore solid thin; border-right:@theme-fore solid thin;\n                  background-color:@theme-back;  color:@theme-fore;}\n    .tabs-tab:hover  {         background-color:@theme-fore; color:@theme-back; }\n    .tabs-tab-active { .tabs-tab(); background-color:@theme-fore; color:@theme-back; } }\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -530,7 +519,7 @@ __vue_render__$3._withStripped = true;
   /* style */
   const __vue_inject_styles__$3 = function (inject) {
     if (!inject) return
-    inject("data-v-6294847e_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.prac-dirs-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n  color: black;\n  text-align: center;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.prac-dirs-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .cen {\n  font-size: 5.2 2vmin;\n}\n", map: {"version":3,"sources":["Dirs.vue","/Users/ax/Documents/prj/aug/vue/prac/Dirs.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,sBAAsB;EACtB,YAAY;EACZ,kBAAkB;EAClB,iBAAiB;EACjB,aAAa;EACb,kCAAkC;EAClC,+BAA+B;EAC/B,gEAAgE;AAClE;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;ECClB,qBAAA;EDCE,mBAAmB;ECCrB,mBAAA;ADCA;ACCA;EACA,oBAAA;ADCA","file":"Dirs.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.prac-dirs-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n  color: black;\n  text-align: center;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.prac-dirs-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .cen {\n  font-size: 5.2 2vmin;\n}\n","\n<template>\n  <div class=\"prac-dirs-pane\">\n    <div class=\"cen\" :style=\"style(pracObj)\">\n      <d-disp v-if=\"isDisp()\" :dispObj=\"pracObj\" from=\"Dirs\"></d-disp>\n      <d-dims v-if=\"isDims()\" :dispObj=\"pracObj\" from=\"Dirs\"></d-dims>\n    </div>\n    <template  v-for=\"dispObj in pracObj.disps\">\n      <div :class=\"dispObj.dir\" :style=\"style(dispObj)\">\n        <d-disp v-if=\"isDisp()\" :dispObj=\"dispObj\" from=\"Dirs\"></d-disp>\n        <d-dims v-if=\"isDims()\" :dispObj=\"dispObj\" from=\"Dirs\"></d-dims>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Disp from './Disp.vue';\n  import Dims from './Dims.vue';\n\n  let Dirs = {\n\n    components:{ 'd-disp':Disp, 'd-dims':Dims },\n\n    props: { pracObj:Object },\n\n    data() { return { dispObj:null } },\n\n    methods: {\n\n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav().pub( obj ); },\n      isDims: function () {\n        return this.pracObj.row === 'Dim'; },\n      isDisp: function () {\n        return this.pracObj.row !== 'Dim'; },\n      style: function( ikwObj ) {\n        return this.styleObj(ikwObj); } },\n\n    mounted: function () {\n      if( !this.isDef(this.pracObj) ) {\n        console.error( 'prac.Dirs.mounted() pracObj not defined' ); } }\n    \n  }\n\n  export default Dirs;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @pracDirsFS:@themeFS;\n  \n  .prac-dirs-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n    grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .prac-dir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }\n  \n  .prac-dirs-pane { position:absolute; left:0; top:0; width:100%; height:100%; background-color:@theme-gray;\n    color:black; text-align:center; font-weight:bold; .prac-dirs-grid3x3();\n                                 .north { .prac-dir(north); }\n      .west { .prac-dir(west); } .cen   { .prac-dir(cen);   } .east { .prac-dir(east); }\n                                 .south { .prac-dir(south); }\n      .cen  { font-size:5.2@pracDirsFS; } }\n  \n  \n</style>"]}, media: undefined });
+    inject("data-v-1c983a0a_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.prac-dirs-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n  color: black;\n  text-align: center;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n  font-size: 8vmin;\n}\n.prac-dirs-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n", map: {"version":3,"sources":["Dirs.vue","/Users/ax/Documents/prj/aug/vue/prac/Dirs.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,sBAAsB;EACtB,YAAY;EACZ,kBAAkB;EAClB,iBAAiB;EACjB,aAAa;EACb,kCAAkC;EAClC,+BAA+B;EAC/B,gEAAgE;EAChE,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;ECCf,gBAAA;EDCE,qBAAqB;ECCvB,mBAAA;EDCE,mBAAmB;ACCrB","file":"Dirs.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.prac-dirs-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n  color: black;\n  text-align: center;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n  font-size: 8vmin;\n}\n.prac-dirs-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n","\n<template>\n  <div class=\"prac-dirs-pane\">\n    <div class=\"cen\" :style=\"style(pracObj)\">\n      <d-disp v-if=\"isDisp()\" :dispObj=\"pracObj\" from=\"Dirs\"></d-disp>\n      <d-dims v-if=\"isDims()\" :dispObj=\"pracObj\" from=\"Dirs\"></d-dims>\n    </div>\n    <template  v-for=\"dispObj in pracObj.disps\">\n      <div :class=\"dispObj.dir\" :style=\"style(dispObj)\">\n        <d-disp v-if=\"isDisp()\" :dispObj=\"dispObj\" from=\"Dirs\"></d-disp>\n        <d-dims v-if=\"isDims()\" :dispObj=\"dispObj\" from=\"Dirs\"></d-dims>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Disp from './Disp.vue';\n  import Dims from './Dims.vue';\n\n  let Dirs = {\n\n    components:{ 'd-disp':Disp, 'd-dims':Dims },\n\n    props: { pracObj:Object },\n\n    data() { return { dispObj:null } },\n\n    methods: {\n\n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav().pub( obj ); },\n      isDims: function () {\n        return this.pracObj.row === 'Dim'; },\n      isDisp: function () {\n        return this.pracObj.row !== 'Dim'; },\n      style: function( ikwObj ) {\n        return this.styleObj(ikwObj); } },\n\n    mounted: function () {\n      if( !this.isDef(this.pracObj) ) {\n        console.error( 'prac.Dirs.mounted() pracObj not defined' ); } }\n    \n  }\n\n  export default Dirs;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @pracDirsFS:2.0*@themeFS;\n  \n  .prac-dirs-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n    grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .prac-dir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }\n  \n  .prac-dirs-pane { position:absolute; left:0; top:0; width:100%; height:100%; background-color:@theme-gray;\n    color:black; text-align:center; font-weight:bold; .prac-dirs-grid3x3(); font-size:2.0*@pracDirsFS;\n                                 .north { .prac-dir(north); }\n      .west { .prac-dir(west); } .cen   { .prac-dir(cen);   } .east { .prac-dir(east); }\n                                 .south { .prac-dir(south); } }\n  \n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -21308,7 +21297,7 @@ Data = class Data {
     ref = ['Team', 'Discover', 'Adapt', 'Benefit', 'Change', 'Govern'];
     for (i = 0, len = ref.length; i < len; i++) {
       key = ref[i];
-      innvs[key] = pracs[key];
+      innvs[key] = Object.assign({}, pracs[key]);
       innvs[key].plane = innv;
     }
     Data.refine(innvs, 'Pack');
@@ -21758,44 +21747,36 @@ Build = class Build {
 
   prev(plane) {
     switch (plane) {
-      case 'Home':
-        return 'Wise';
-      case 'Prin':
-        return 'Home';
       case 'Info':
-        return 'Prin';
+        return 'Wise';
       case 'Know':
         return 'Info';
       case 'Wise':
         return 'Know';
       default:
         console.error('Build.prev() unknown plane', plane);
-        return 'Prin';
+        return 'None';
     }
   }
 
   next(plane) {
     switch (plane) {
-      case 'Home':
-        return 'Prin';
-      case 'Prin':
-        return 'Info';
       case 'Info':
         return 'Know';
       case 'Know':
         return 'Wise';
       case 'Wise':
-        return 'Home';
+        return 'Info';
       default:
         console.error('Build.next() unknown plane', plane);
-        return 'Prin';
+        return 'None';
     }
   }
 
   adjacentPractice(prac, dir) {
     var adj, col, key, pln, pracs, row;
     if ((prac == null) || (prac.name == null) || prac.name === 'None' || (prac.column == null)) {
-      // console.log( 'adjacentPractice', { prac:prac, dir:dir } )
+      // console.log( 'Build.adjacentPractice', { prac:prac, dir:dir } )
       return this.None;
     }
     col = "";
@@ -21826,7 +21807,14 @@ Build = class Build {
     if ([col, row, pln] === ["None", "None", "None"]) {
       return this.None;
     }
-    pracs = this.batch[pln].data.pracs;
+    pracs = {};
+    if (this.batch[pln] != null) {
+      pracs = this.batch[pln].data.pracs;
+    } else {
+      // console.log( 'Build.adjacentPractice()', { plane:pln, pracs:pracs } )
+      console.error('Build.adjacentPractice() batch[] not found', [col, row, pln]);
+      return this.None;
+    }
     for (key in pracs) {
       if (!hasProp$2.call(pracs, key)) continue;
       adj = pracs[key];
@@ -21837,7 +21825,7 @@ Build = class Build {
         }
       }
     }
-    console.log('adjacentPractice[col,row,pln]', [col, row, pln], 'adj not found');
+    console.log('Build.adjacentPractice[col,row,pln]', [col, row, pln], 'adj not found');
     return this.None;
   }
 
@@ -23909,7 +23897,7 @@ let Prac = {
       this.nav().setPageKey( 'Prac', pageKey ); },
     onNav: function( obj ) {
       if( this.nav().isMyNav( obj, 'Prac' ) ) {
-          this.doPage( this.nav().getPageKey('Prac','Dirs') );
+          this.doPage( this.nav().getPageKey('Prac') );
           this.onPrac( obj.compKey, obj.pracKey ); } }
     },
 
@@ -23919,7 +23907,7 @@ let Prac = {
     this.onPrac( compKey, pracKey );  },
 
   mounted: function () {
-    this.doPage( this.nav().getPageKey('Prac','Dirs') );
+    this.doPage( this.nav().getPageKey('Prac') );
     this.subscribe(  "Nav", 'Prac.vue', (obj) => {
       this.onNav(obj); } ); }
 };
@@ -23982,7 +23970,7 @@ __vue_render__$7._withStripped = true;
   /* style */
   const __vue_inject_styles__$7 = function (inject) {
     if (!inject) return
-    inject("data-v-3f026775_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.prac-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.prac-pane .prac-prac {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: #333;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n}\n", map: {"version":3,"sources":["Prac.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;EACX,sBAAsB;EACtB,gBAAgB;EAChB,oBAAoB;AACtB","file":"Prac.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.prac-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.prac-pane .prac-prac {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: #333;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n}\n"]}, media: undefined });
+    inject("data-v-6b8b5587_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.prac-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.prac-pane .prac-prac {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: #333;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n}\n", map: {"version":3,"sources":["Prac.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;EACX,sBAAsB;EACtB,gBAAgB;EAChB,oBAAoB;AACtB","file":"Prac.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.prac-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.prac-pane .prac-prac {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: #333;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n}\n"]}, media: undefined });
 
   };
   /* scoped */

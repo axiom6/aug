@@ -38,7 +38,7 @@
       this.onDisp( this.nav().dispKey ); },
 
     mounted: function () {
-      this.doPage( this.nav().getPageKey('Disp','Desc') );
+      this.doPage( this.nav().getPageKey('Disp') );
       this.subscribe(  "Nav", 'Disp.vue', (obj) => {
         this.onNav(obj); } ); }
   }

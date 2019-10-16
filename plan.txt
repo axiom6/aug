@@ -1,6 +1,6 @@
 
 1. Fixes
-   a. Dirs keys cutting out
+   a. Rembember page key from Base to Info
    b. Fix Descriptions
    c. Test Augm
 

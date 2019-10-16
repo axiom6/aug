@@ -39,9 +39,6 @@
     "coffeescript": "^2.4.1",
     "typescript": "^3.4.5",
     "lodash": ">=4.17.13",
-    "eslint": "^5.12.0",
-    "eslint-config-jwalker": "^5.2.0",
-    "eslint-plugin-vue": "^5.1.0",
     "node-sass": "^4.11.0",
     "rollup": "^1.7.3",
     "rollup-plugin-ascii": "0.0.3",
@@ -56,6 +53,11 @@
     "rollup-plugin-typescript2": "^0.21.1",
     "rollup-plugin-vue": "^4.6.1",
     "vue-template-compiler": "^2.5.22"
+  },
+  "devDependenciesLint": {
+    "eslint": "^5.12.0",
+    "eslint-config-jwalker": "^5.2.0",
+    "eslint-plugin-vue": "^5.1.0"
   },
   "engines": {
     "node": ">=10.15.3"

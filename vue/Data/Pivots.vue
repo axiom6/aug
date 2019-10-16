@@ -33,7 +33,7 @@
 
       onNav: function(obj) {
         if( this.nav().isMyNav( obj, 'Pivots' ) ) {
-          this.pageKey = this.nav().getPageKey('Pivots','None');
+          this.pageKey = this.nav().getPageKey('Pivots');
           if( this.pageKey !== 'None' ) {
               this.create( this.pageKey ); } } },
 

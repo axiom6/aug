@@ -46,7 +46,7 @@ class Data
     innvs = batch[innv].data
     pracs = batch[comp].data
     for key in ['Team','Discover','Adapt','Benefit','Change','Govern']
-      innvs[key] = pracs[key]
+      innvs[key] = Object.assign( {}, pracs[key] )
       innvs[key].plane = innv
     Data.refine( innvs, 'Pack' )
     return

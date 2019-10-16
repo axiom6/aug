@@ -166,7 +166,7 @@ Muse = (function() {
     }
   };
 
-  // Toc.vue components and routes
+  // Toc.vue components and routes with no west or east directions
   Muse.komps = {
     Home: {
       title: 'Home',
@@ -175,10 +175,8 @@ Muse = (function() {
       pracs: {},
       ikw: false,
       icon: "fas fa-home",
-      west: "Wise",
       north: "Wise",
       prev: "Wise",
-      east: "Prin",
       south: "Prin",
       next: "Prin"
     },
@@ -189,10 +187,8 @@ Muse = (function() {
       pracs: {},
       ikw: true,
       icon: "fas fa-balance-scale",
-      west: "Home",
       north: "Home",
       prev: "Home",
-      east: "Info",
       south: "Info",
       next: "Info"
     },
@@ -203,10 +199,8 @@ Muse = (function() {
       pracs: {},
       ikw: true,
       icon: "fas fa-th",
-      west: "Prin",
       north: "Prin",
       prev: "Prin",
-      east: "Know",
       south: "Know",
       next: "Know"
     },
@@ -217,10 +211,8 @@ Muse = (function() {
       pracs: {},
       ikw: true,
       icon: "fas fa-university",
-      west: "Info",
       north: "Info",
       prev: "Info",
-      east: "Wise",
       south: "Wise",
       next: "Wise"
     },
@@ -231,10 +223,8 @@ Muse = (function() {
       pracs: {},
       ikw: true,
       icon: "fab fa-tripadvisor",
-      west: "Know",
       north: "Know",
       prev: "Know",
-      east: "Home",
       south: "Home",
       next: "Home"
     }
