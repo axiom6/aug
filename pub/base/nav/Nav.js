@@ -3,14 +3,17 @@ var Nav,
 
 import Build from '../util/Build.js';
 
+import Util from '../util/Util.js';
+
 Nav = class Nav {
-  constructor(stream, batch, navs = null, isMuse = false) {
+  constructor(stream, batch, komps1 = null, isMuse = false) {
     this.tap = this.tap.bind(this);
     this.dir = this.dir.bind(this);
     this.stream = stream;
     this.batch = batch;
-    this.navs = navs;
+    this.komps = komps1;
     this.isMuse = isMuse;
+    this.navs = this.isMuse ? this.toNavs(this.komps) : null;
     this.build = new Build(this.batch);
     this.$router = null;
     this.source = 'None';
@@ -22,7 +25,6 @@ Nav = class Nav {
     this.pageKey = 'None';
     this.warnMsg = 'None';
     this.pages = {};
-    this.setPagesCallbacks = {};
     this.keyEvents();
   }
 
@@ -66,7 +68,7 @@ Nav = class Nav {
 
   // A hack for Innovate Tabs
   reviseMsg(msg) {
-    if ((msg.route != null) && msg.route === 'Inov') {
+    if ((msg.route != null) && msg.route === 'Inov' && msg.source === 'Tabs') {
       msg.route = 'Comp';
       msg.compKey = msg.pageKey;
       msg.pageKey = this.getPageKey('Comp');
@@ -84,7 +86,7 @@ Nav = class Nav {
   }
 
   doRoute(route) {
-    if (route === this.routeLast) {
+    if (route === this.routeLast || route === 'Inov') {
       return;
     }
     if ((route != null) && route !== 'None') {
@@ -102,6 +104,25 @@ Nav = class Nav {
     }
   }
 
+  toNavs(komps) {
+    var navs;
+    if (komps == null) {
+      return null;
+    }
+    navs = Object.assign({}, komps);
+    navs['Info'].south = "Data";
+    navs['Info'].next = "Data"; // key:'Data', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-table",
+    navs['Data'] = {
+      north: "Info",
+      prev: "Info",
+      south: "Know",
+      next: "Know"
+    };
+    navs['Know'].north = "Data";
+    navs['Info'].prev = "Data";
+    return navs;
+  }
+
   hasCompKey(compKey, dir = null) {
     var has;
     has = (compKey != null) && (this.navs != null) && (this.navs[compKey] != null);
@@ -109,6 +130,14 @@ Nav = class Nav {
       return this.navs[compKey][dir] != null;
     } else {
       return has;
+    }
+  }
+
+  adjCompKey(compKey, dir) {
+    if (this.hasCompKey(compKey, dir)) {
+      return this.navs[compKey][dir];
+    } else {
+      return 'None';
     }
   }
 
@@ -169,54 +198,34 @@ Nav = class Nav {
   }
 
   dirComp(dir) {
-    var msg;
+    var msg, msh;
     msg = {};
     msg.source = `${'Nav.dirComp'}(${dir})`;
     if (this.hasCompKey(this.compKey, dir)) {
-      msg.compKey = this.navs[this.compKey][dir];
+      msg.compKey = this.adjCompKey(this.compKey, dir);
       msg.route = this.toRoute(msg.compKey);
       this.doRoute(msg.route);
-      msg.pageKey = this.pageKey !== 'None' && this.pageKey !== 'Info' ? this.pageKey : 'Sign';
-      //sg.pageKey = if @hasPageKey(msg.route,@pageKey)               then @pageKey else @getPageKey(msg.route)
+      msg.pageKey = this.getPageKey(msg.route);
       this.pub(msg);
-    } else if (this.hasActivePageDir(this.route, dir)) {
-      this.dirPage(dir);
-    } else {
-      this.log(msg, {
-        warnMsg: 'Missing component'
-      });
-    }
-  }
-
-  dirComp2(dir) {
-    var callback, msg;
-    msg = {};
-    msg.source = `${'Nav.dirComp'}(${dir})`;
-    if (this.hasCompKey(this.compKey, dir)) {
-      msg.compKey = this.navs[this.compKey][dir];
-      msg.route = this.toRoute(msg.compKey);
-      callback = () => {
-        msg.pageKey = this.hasPageKey(msg.route, this.pageKey) ? this.pageKey : this.getPageKey(msg.route);
-        return this.pub(msg);
-      };
-      if (this.hasPages()) {
-        this.doRoute(msg.route);
-        callback();
-      } else {
-        this.setPagesCallbacks[msg.route] = callback;
-        this.doRoute(msg.route);
+      if (msg.compKey === 'Info' || msg.compKey === 'Data') {
+        msh = Object.assign({}, msg);
+        this.setPageKey('Inov', msh.compKey);
+        msh.source = `${'Nav.dirInov'}(${dir})`;
+        msh.route = 'Inov';
+        msh.pageKey = msh.compKey;
+        this.pub(msh);
       }
     } else if (this.hasActivePageDir(this.route, dir)) {
       this.dirPage(dir);
     } else {
       this.log(msg, {
-        warnMsg: 'Missing component'
+        warnMsg: `Missing adjacent component for ${dir} ${this.compKey}`
       });
     }
   }
 
   toRoute(compKey) {
-    if (compKey === 'Info' || compKey === 'Know' || compKey === 'Wise') {
+    if (Util.inArray(['Info', 'Data', 'Know', 'Wise'], compKey)) {
       return 'Comp';
     } else {
       return compKey;
@@ -238,7 +247,7 @@ Nav = class Nav {
       }
       this.pub(msg);
     } else {
-      this.log(msg, "Missing practice @adjPracObj(dir)");
+      this.log(msg, `Missing adjacent practice for ${dir} ${this.compKey} ${this.pracKey}`);
     }
   }
 
@@ -257,24 +266,10 @@ Nav = class Nav {
       msg.dispKey = dis.name;
       this.pub(msg);
     } else {
-      this.log(msg, "Missing displine @adjPracObj(dir)");
+      this.log(msg, `Missing adjacent displine for ${dir} ${this.compKey} ${this.pracKey}`);
     }
   }
 
-  /*
-  dirNavs:( dir ) ->
-  msg = {}
-  msg.source = "#{'Nav.dirNavs'}(#{dir})"
-  if @hasActivePageDir(@route,dir)
-   @dirPage( dir )
-  else if @hasCompKey(@compKey, dir)
-  msg.compKey = @navs[@compKey][dir]
-  msg.route   = @toRoute(msg.compKey )
-  @pub( msg )
-  else
-  @log( msg, warnMsg:'Missing compKey or @navs' )
-  return
-  */
   dirPage(dir) {
     var msg, pageKey;
     msg = {};
@@ -285,7 +280,7 @@ Nav = class Nav {
       this.pub(msg);
     } else {
       this.log(msg, {
-        warnMsg: 'Cannot find pageKey'
+        warnMsg: `Cannot find pageKey for ${dir}`
       });
     }
   }
@@ -323,14 +318,11 @@ Nav = class Nav {
   }
 
   setPages(route, pagesObj) {
+    // if not @pages[route]?
     this.pages[route] = {};
     this.pages[route].pages = pagesObj;
     this.pages[route].keys = Object.keys(pagesObj);
-    console.log('Nav().setPages', route, this.pages[route]);
-    if (this.setPagesCallbacks[route] != null) {
-      this.setPagesCallbacks[route]();
-      this.setPagesCallbacks[route] = null; // Only call once
-    }
+    // console.log( 'Nav().setPages', route, @pages[route] )
     return this.getPageKey(route);
   }
 
@@ -351,22 +343,24 @@ Nav = class Nav {
   }
 
   getPageKey(route) {
-    var key, page, ref;
+    var key, page, pageKey, ref;
+    pageKey = 'Sign';
     if (this.hasPageKey(route, this.pageKey)) {
-      return this.pageKey;
-    }
-    if (!this.hasPages(route)) {
-      return 'None';
-    }
-    ref = this.pages[route].pages;
-    for (key in ref) {
-      if (!hasProp.call(ref, key)) continue;
-      page = ref[key];
-      if (page.show) {
-        return key;
+      pageKey = this.pageKey;
+    } else if (!this.hasPages(route)) {
+      pageKey = this.pageKey !== 'None' && this.pageKey !== 'Info' ? this.pageKey : 'Sign';
+    } else {
+      ref = this.pages[route].pages;
+      for (key in ref) {
+        if (!hasProp.call(ref, key)) continue;
+        page = ref[key];
+        if (page.show) {
+          return key;
+        }
       }
+      pageKey = this.pages[route].keys[0];
     }
-    return this.pages[route].keys[0];
+    return pageKey;
   }
 
   hasPageKey(route, pageKey) {
@@ -390,7 +384,10 @@ Nav = class Nav {
   }
 
   hasPages(route) {
-    return (this.pages[route] != null) && (this.pages[route].pages != null) && this.pages[route].keys.length > 0;
+    var has;
+    has = (this.pages[route] != null) && (this.pages[route].pages != null) && this.pages[route].keys.length > 0;
+    // console.log( 'Nav.hasPages()', { route:route, has:has } )
+    return has;
   }
 
   hasActivePageDir(route, dir) {

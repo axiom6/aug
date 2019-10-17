@@ -28,7 +28,7 @@
       classTab: function (pageKey) {
         return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },
 
-    beforeMount: function () {  // We want to set the routes pages asap
+    created: function () {  // We want to set the routes pages asap
       this.onPage( this.nav().setPages( this.route, this.pages ) ); },
 
     mounted: function() {

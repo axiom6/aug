@@ -1,11 +1,9 @@
 
 import Build from '../util/Build.js';
-import Util  from '../util/Util.js';
 
 class Nav
 
-  constructor:( @stream, @batch, @komps=null, @isMuse=false ) ->
-    @navs      = if @isMuse then @toNavs(@komps) else null
+  constructor:( @stream, @batch, @navs=null, @isMuse=false ) ->
     @build     =  new Build( @batch )
     @$router   =  null
     @source    = 'None'
@@ -17,6 +15,7 @@ class Nav
     @pageKey   = 'None'
     @warnMsg   = 'None'
     @pages     = {}
+    @setPagesCallbacks = {}
     @keyEvents()
 
   pub:( msg ) ->
@@ -40,7 +39,7 @@ class Nav
 
   # A hack for Innovate Tabs
   reviseMsg:( msg ) ->
-    if msg.route? and msg.route is 'Inov' and msg.source is 'Tabs'
+    if msg.route? and msg.route is 'Inov'
        msg.route   = 'Comp'
        msg.compKey = msg.pageKey
        msg.pageKey = @getPageKey( 'Comp' )
@@ -52,7 +51,7 @@ class Nav
     return
 
   doRoute:( route ) ->
-    return if route is @routeLast or route is 'Inov'
+    return if route is @routeLast
     if route? and route isnt 'None'
       if @$router?
          @$router.push( { name:route } )
@@ -64,22 +63,9 @@ class Nav
       console.error( 'Nav.doRoute() undefined route' )
     return
 
-  toNavs:( komps ) ->
-    return null if not komps?
-    navs = Object.assign( {}, komps )
-    navs['Info'].south = "Data"
-    navs['Info'].next  = "Data"  # key:'Data', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-table",
-    navs['Data'] = { north:"Info", prev:"Info", south:"Know",  next:"Know" }
-    navs['Know'].north = "Data"
-    navs['Info'].prev  = "Data"
-    navs
-
   hasCompKey:( compKey, dir=null ) ->
     has = compKey? and @navs? and @navs[compKey]?
-    if dir? and has then @navs[compKey][dir]? else has
-
-  adjCompKey:( compKey, dir ) ->
-    if @hasCompKey( compKey, dir ) then  @navs[compKey][dir] else 'None'
+    if dir?   and   has   then    @navs[compKey][dir]? else has
 
   log:( msg, warnMsg ) ->
     msg.warnMsg = warnMsg
@@ -118,26 +104,41 @@ class Nav
     msg = {}
     msg.source = "#{'Nav.dirComp'}(#{dir})"
     if @hasCompKey( @compKey, dir )
-      msg.compKey = @adjCompKey( @compKey,dir )
+      msg.compKey = @navs[@compKey][dir]
       msg.route   = @toRoute( msg.compKey )
       @doRoute( msg.route )
-      msg.pageKey = @getPageKey(msg.route)
+      msg.pageKey = if @pageKey isnt 'None' and @pageKey isnt 'Info' then @pageKey else 'Sign'
+      #sg.pageKey = if @hasPageKey(msg.route,@pageKey)               then @pageKey else @getPageKey(msg.route)
       @pub( msg )
-      if msg.compKey is 'Info' or  msg.compKey is 'Data'
-         msh = Object.assign( {}, msg )
-         @setPageKey( 'Inov', msh.compKey )
-         msh.source = "#{'Nav.dirInov'}(#{dir})"
-         msh.route  = 'Inov'
-         msh.pageKey = msh.compKey
-         @pub( msh )
     else if @hasActivePageDir( @route, dir )
       @dirPage( dir )
     else
-      @log( msg, warnMsg:"Missing adjacent component for #{dir} #{@compKey}" )
+      @log( msg, warnMsg:'Missing component' )
+    return
+
+  dirComp2:( dir ) ->
+    msg = {}
+    msg.source = "#{'Nav.dirComp'}(#{dir})"
+    if @hasCompKey( @compKey, dir )
+      msg.compKey = @navs[@compKey][dir]
+      msg.route   = @toRoute( msg.compKey )
+      callback = () =>
+        msg.pageKey = if @hasPageKey(msg.route,@pageKey) then @pageKey else @getPageKey(msg.route)
+        @pub( msg )
+      if @hasPages()
+        @doRoute( msg.route )
+        callback()
+      else
+        @setPagesCallbacks[msg.route] = callback
+        @doRoute( msg.route )
+    else if @hasActivePageDir( @route, dir )
+      @dirPage( dir )
+    else
+      @log( msg, warnMsg:'Missing component' )
     return
 
   toRoute:( compKey ) ->
-    if Util.inArray(['Info','Data','Know','Wise'],compKey,) then 'Comp' else compKey
+    if compKey is 'Info' or compKey is 'Know' or compKey is 'Wise' then 'Comp' else compKey
 
   dirPrac:( dir ) ->
     msg = {}
@@ -151,7 +152,7 @@ class Nav
          msg.compKey = adj.plane
       @pub( msg )
     else
-      @log( msg, "Missing adjacent practice for #{dir} #{@compKey} #{@pracKey}" )
+      @log( msg, "Missing practice @adjPracObj(dir)" )
     return
 
   dirDisp:( dir ) ->
@@ -168,7 +169,7 @@ class Nav
        msg.dispKey  = dis.name
        @pub( msg )
     else
-       @log( msg, "Missing adjacent displine for #{dir} #{@compKey} #{@pracKey}" )
+       @log( msg, "Missing displine @adjPracObj(dir)" )
     return
 
   dirPage:( dir ) ->
@@ -179,7 +180,7 @@ class Nav
       msg.pageKey = pageKey
       @pub( msg )
     else
-      @log( msg, warnMsg:"Cannot find pageKey for #{dir}" )
+      @log( msg, warnMsg:'Cannot find pageKey'  )
     return
 
   movePage:( page, dir  ) ->
@@ -202,11 +203,13 @@ class Nav
     ndx
 
   setPages:( route, pagesObj ) ->
-    # if not @pages[route]?
     @pages[route] = {}
     @pages[route].pages = pagesObj
     @pages[route].keys  = Object.keys(pagesObj)
-    # console.log( 'Nav().setPages', route, @pages[route] )
+    console.log( 'Nav().setPages', route, @pages[route] )
+    if @setPagesCallbacks[route]?
+       @setPagesCallbacks[route]()
+       @setPagesCallbacks[route] = null # Only call once
     @getPageKey( route )
 
   setPageKey:( route, pageKey ) ->
@@ -217,16 +220,11 @@ class Nav
     return
 
   getPageKey:( route ) ->
-    pageKey = 'Sign'
-    if @hasPageKey(route,@pageKey)
-      pageKey =  @pageKey
-    else if not @hasPages(route)
-      pageKey = if @pageKey isnt 'None' and @pageKey isnt 'Info' then @pageKey else 'Sign'
-    else
-      for own  key,   page  of @pages[route].pages
-        return key if page.show
-      pageKey = @pages[route].keys[0] # Default is first page
-    pageKey
+    return @pageKey if @hasPageKey(route,@pageKey)
+    return 'None'   if not @hasPages(route)
+    for own  key,   page  of @pages[route].pages
+      return key if page.show
+    @pages[route].keys[0] # Default is first page
 
   hasPageKey:( route, pageKey ) ->
     pageKey isnt 'None' and @hasPages(route) and @pages[route].pages[pageKey]?
@@ -238,9 +236,7 @@ class Nav
     false
 
   hasPages:( route ) ->
-    has = @pages[route]? and @pages[route].pages? and @pages[route].keys.length > 0
-    # console.log( 'Nav.hasPages()', { route:route, has:has } )
-    has
+    @pages[route]? and @pages[route].pages? and @pages[route].keys.length > 0
 
   hasActivePageDir:( route, dir ) ->
      @hasActivePage( route ) and ( dir is 'west' or dir is 'east' )

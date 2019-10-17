@@ -52,7 +52,7 @@
     
     methods: {
       hasInovs: function() {
-        return this.isDef(this.inovs)  },
+        return this.compKey==='Info' || this.compKey==='Data'  },
       onRows: function (compKey) {
          this.myRows          = this.rows;
          this.myRows['Plane'] = this.planes[compKey]; },

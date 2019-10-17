@@ -1,7 +1,7 @@
 
 1. Fixes
-   a. Rembember page key from Base to Info
-   b. Fix Descriptions
+   a. Innov on Know and Wise
+   b. Attribute height for small Connections
    c. Test Augm
 
 2. Improve Intrinsic Info
@@ -25,6 +25,9 @@
    a. Math MathML
    b. Note
    c. Landing Pages for Home Math Geom Note Draw Hues
+
+6. Test Suite
+   a. Revisit page key from Base to Info
 
 https://main-4a9c7.firebaseapp.com/app/main.html
 https://augm-d4b3c.firebaseapp.com/app/augm.html
