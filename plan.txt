@@ -1,8 +1,7 @@
 
 1. Fixes
-   a. Innov on Know and Wise
-   b. Attribute height for small Connections
-   c. Test Augm
+   a. Attribute height for small Connections
+   b. Test Augm Jitter Main
 
 2. Improve Intrinsic Info
    a. Landing Pages: Home Prin Info Know Wise

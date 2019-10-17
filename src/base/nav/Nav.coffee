@@ -1,11 +1,10 @@
 
 import Build from '../util/Build.js';
-import Util  from '../util/Util.js';
 
 class Nav
 
   constructor:( @stream, @batch, @komps=null, @isMuse=false ) ->
-    @navs      = if @isMuse then @toNavs(@komps) else null
+    @navs      = @addInovToNavs( @komps )
     @build     =  new Build( @batch )
     @$router   =  null
     @source    = 'None'
@@ -33,26 +32,19 @@ class Nav
     ok
 
   toObj:( msg ) ->
-    @set( @reviseMsg(msg) )
+    @set( msg )
     @warnMsg = 'None' if not msg.warnMsg?
     @source  = 'None' if not msg.source?
     { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey, pageKey:@pageKey, warnMsg:@warnMsg }
 
-  # A hack for Innovate Tabs
-  reviseMsg:( msg ) ->
-    if msg.route? and msg.route is 'Inov' and msg.source is 'Tabs'
-       msg.route   = 'Comp'
-       msg.compKey = msg.pageKey
-       msg.pageKey = @getPageKey( 'Comp' )
-    msg
-
   set:( msg ) ->
+    msg = @tabInov(msg) # Revise tab innovate messages
     for own key,   val of msg
       @[key] = val
     return
 
   doRoute:( route ) ->
-    return if route is @routeLast or route is 'Inov'
+    return if route is @routeLast or @isInov(route)
     if route? and route isnt 'None'
       if @$router?
          @$router.push( { name:route } )
@@ -64,21 +56,11 @@ class Nav
       console.error( 'Nav.doRoute() undefined route' )
     return
 
-  toNavs:( komps ) ->
-    return null if not komps?
-    navs = Object.assign( {}, komps )
-    navs['Info'].south = "Data"
-    navs['Info'].next  = "Data"  # key:'Data', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-table",
-    navs['Data'] = { north:"Info", prev:"Info", south:"Know",  next:"Know" }
-    navs['Know'].north = "Data"
-    navs['Info'].prev  = "Data"
-    navs
-
   hasCompKey:( compKey, dir=null ) ->
     has = compKey? and @navs? and @navs[compKey]?
     if dir? and has then @navs[compKey][dir]? else has
 
-  adjCompKey:( compKey, dir ) ->
+  adjCompKey:(      compKey, dir ) ->
     if @hasCompKey( compKey, dir ) then  @navs[compKey][dir] else 'None'
 
   log:( msg, warnMsg ) ->
@@ -122,22 +104,17 @@ class Nav
       msg.route   = @toRoute( msg.compKey )
       @doRoute( msg.route )
       msg.pageKey = @getPageKey(msg.route)
-      @pub( msg )
-      if msg.compKey is 'Info' or  msg.compKey is 'Data'
-         msh = Object.assign( {}, msg )
-         @setPageKey( 'Inov', msh.compKey )
-         msh.source = "#{'Nav.dirInov'}(#{dir})"
-         msh.route  = 'Inov'
-         msh.pageKey = msh.compKey
-         @pub( msh )
+      @pub(     msg )
+      @pubInov( msg, dir ) # Publish Innovate pageKey to Innovate Tabs if necessary
     else if @hasActivePageDir( @route, dir )
       @dirPage( dir )
     else
       @log( msg, warnMsg:"Missing adjacent component for #{dir} #{@compKey}" )
     return
 
+  # Map compKeys to a single Comp route for Muse
   toRoute:( compKey ) ->
-    if Util.inArray(['Info','Data','Know','Wise'],compKey,) then 'Comp' else compKey
+    if @isMuse and @inArray(compKey,['Info','Data','Know','Wise']) then 'Comp' else compKey
 
   dirPrac:( dir ) ->
     msg = {}
@@ -201,6 +178,7 @@ class Nav
     ndx = len-1 if ndx <  0
     ndx
 
+  # An important indicator of when Comps and Tabs are instanciated
   setPages:( route, pagesObj ) ->
     # if not @pages[route]?
     @pages[route] = {}
@@ -210,23 +188,28 @@ class Nav
     @getPageKey( route )
 
   setPageKey:( route, pageKey ) ->
-    @pageKey = pageKey if route isnt 'Inov'
-    return if  not        @hasPages(route)
+    @pageKey = pageKey if not @isInov(route)
+    return             if not @hasPages(route)
     for own key, page  of @pages[route].pages
-      page.show = key is pageKey
+      page.show = key  is pageKey
     return
 
+  # Jumps through hoops to set the right pageKey
   getPageKey:( route ) ->
     pageKey = 'Sign'
     if @hasPageKey(route,@pageKey)
       pageKey =  @pageKey
     else if not @hasPages(route)
-      pageKey = if @pageKey isnt 'None' and @pageKey isnt 'Info' then @pageKey else 'Sign'
+      pageKey = if @isPageKey(@pageKey) then @pageKey else 'Sign'
     else
       for own  key,   page  of @pages[route].pages
         return key if page.show
       pageKey = @pages[route].keys[0] # Default is first page
     pageKey
+
+  # Inov plays a roll is validating pageKey
+  isPageKey:( pageKey ) ->
+    pageKey? and pageKey isnt 'None' and not @isInov(pageKey)
 
   hasPageKey:( route, pageKey ) ->
     pageKey isnt 'None' and @hasPages(route) and @pages[route].pages[pageKey]?
@@ -262,5 +245,55 @@ class Nav
 
   disps:(  compKey, pracKey ) ->
     @batch[compKey].data.pracs[pracKey].disps
+
+  isDef:(d) ->
+    d isnt null and typeof(d) isnt 'undefined'
+
+  isArray:(a) ->
+    @isDef(a) and typeof(a)!="string" and a.length? and a.length > 0
+
+  inArray:(e,a) ->
+    @isArray(a) and a.indexOf(e) > -1
+
+  # --- Innovate --- Inov in one place
+
+  # Across the board Inov detector for compKey pageKey and route
+  isInov:( e ) ->
+    @inArray( e, ['Info','Data','Inov'] )
+
+  # A hack for Innovate Tabs
+  tabInov:( msg ) ->
+    if msg.route? and @isInov(msg.route) and msg.source is 'Tabs'
+       msg.route   = 'Comp'
+       msg.compKey = msg.pageKey
+       msg.pageKey = @getPageKey( 'Comp' )
+    msg
+
+  # Publish a message after dirComp() to update Innovate Tabs
+  pubInov:( msg, dir ) ->
+    return if not @isInov(msg.compKey)
+    saveKey = @pageKey
+    msh = Object.assign( {}, msg )
+    @setPageKey( 'Inov', msh.compKey )
+    msh.source = "#{'Nav.dirInov'}(#{dir})"
+    msh.route  = 'Inov'
+    msh.pageKey = msh.compKey
+    @pub( msh )
+    @pageKey = saveKey
+    return
+
+  addInovToNavs:( komps ) ->
+    return komps? if not @isMuse
+    navs = Object.assign( {}, komps )
+    navs = @insInov( navs, 'Info', 'Data', 'Know' )
+    navs
+
+  insInov:( navs, prev, inov, next ) ->
+    navs[prev].south = inov
+    navs[prev].next  = inov
+    navs[inov] = { north:prev, prev:prev, south:next, next:next }
+    navs[next].north = inov
+    navs[next].prev  = inov
+    navs
 
 export default Nav

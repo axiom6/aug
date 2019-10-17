@@ -1,0 +1,78 @@
+.theme-html {
+  font-size: calc(1em + 1vmin);
+  background-color: black;
+}
+.theme-dash {
+  font-size: 1rem;
+  background-color: black;
+}
+.theme-tocs {
+  font-size: 1.5rem;
+  background-color: black;
+}
+.theme-logo {
+  font-size: 0.7rem;
+  background-color: black;
+}
+.theme-arrow {
+  font-size: 1.3rem;
+}
+.theme-gamer {
+  font-size: 0.9rem;
+}
+.theme-prin {
+  font-size: 1rem;
+  border-radius: 0.7em;
+  background-color: black;
+}
+.theme-comp {
+  font-size: 1rem;
+  border-radius: 0.7em;
+}
+.theme-prac {
+  font-size: 1rem;
+  border-radius: 0.7em;
+}
+.theme-disp {
+  font-size: 1rem;
+  border-radius: 0.7em;
+}
+.theme-sign {
+  font-size: 2rem;
+  background-color: #333;
+  border-radius: 0.7em;
+  width: 90%;
+  height: 90%;
+}
+.theme-conn {
+  font-size: 1rem;
+  background-color: #333;
+  border-radius: 0.7em;
+}
+.theme-desc {
+  font-size: 1rem;
+  background-color: #333;
+  border-radius: 0.7em;
+  width: 90%;
+  height: 90%;
+}
+.theme-prin-dirs {
+  font-size: 1.8rem;
+  background-color: #333;
+  border-radius: 0.7em;
+  width: 90%;
+  height: 90%;
+}
+.theme-comp-dirs {
+  font-size: 0.8rem;
+  background-color: #333;
+  border-radius: 0.7em;
+  width: 90%;
+  height: 90%;
+}
+.theme-prac-dirs {
+  font-size: 3rem;
+  background-color: #333;
+  border-radius: 0.7em;
+}
+/*# sourceMappingURL=theme.css.map */

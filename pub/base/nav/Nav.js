@@ -3,8 +3,6 @@ var Nav,
 
 import Build from '../util/Build.js';
 
-import Util from '../util/Util.js';
-
 Nav = class Nav {
   constructor(stream, batch, komps1 = null, isMuse = false) {
     this.tap = this.tap.bind(this);
@@ -13,7 +11,7 @@ Nav = class Nav {
     this.batch = batch;
     this.komps = komps1;
     this.isMuse = isMuse;
-    this.navs = this.isMuse ? this.toNavs(this.komps) : null;
+    this.navs = this.addInovToNavs(this.komps);
     this.build = new Build(this.batch);
     this.$router = null;
     this.source = 'None';
@@ -48,7 +46,7 @@ Nav = class Nav {
   }
 
   toObj(msg) {
-    this.set(this.reviseMsg(msg));
+    this.set(msg);
     if (msg.warnMsg == null) {
       this.warnMsg = 'None';
     }
@@ -66,18 +64,9 @@ Nav = class Nav {
     };
   }
 
-  // A hack for Innovate Tabs
-  reviseMsg(msg) {
-    if ((msg.route != null) && msg.route === 'Inov' && msg.source === 'Tabs') {
-      msg.route = 'Comp';
-      msg.compKey = msg.pageKey;
-      msg.pageKey = this.getPageKey('Comp');
-    }
-    return msg;
-  }
-
   set(msg) {
     var key, val;
+    msg = this.tabInov(msg); // Revise tab innovate messages
     for (key in msg) {
       if (!hasProp.call(msg, key)) continue;
       val = msg[key];
@@ -86,7 +75,7 @@ Nav = class Nav {
   }
 
   doRoute(route) {
-    if (route === this.routeLast || route === 'Inov') {
+    if (route === this.routeLast || this.isInov(route)) {
       return;
     }
     if ((route != null) && route !== 'None') {
@@ -102,25 +91,6 @@ Nav = class Nav {
     } else {
       console.error('Nav.doRoute() undefined route');
     }
-  }
-
-  toNavs(komps) {
-    var navs;
-    if (komps == null) {
-      return null;
-    }
-    navs = Object.assign({}, komps);
-    navs['Info'].south = "Data";
-    navs['Info'].next = "Data"; // key:'Data', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-table",
-    navs['Data'] = {
-      north: "Info",
-      prev: "Info",
-      south: "Know",
-      next: "Know"
-    };
-    navs['Know'].north = "Data";
-    navs['Info'].prev = "Data";
-    return navs;
   }
 
   hasCompKey(compKey, dir = null) {
@@ -198,7 +168,7 @@ Nav = class Nav {
   }
 
   dirComp(dir) {
-    var msg, msh;
+    var msg;
     msg = {};
     msg.source = `${'Nav.dirComp'}(${dir})`;
     if (this.hasCompKey(this.compKey, dir)) {
@@ -207,14 +177,7 @@ Nav = class Nav {
       this.doRoute(msg.route);
       msg.pageKey = this.getPageKey(msg.route);
       this.pub(msg);
-      if (msg.compKey === 'Info' || msg.compKey === 'Data') {
-        msh = Object.assign({}, msg);
-        this.setPageKey('Inov', msh.compKey);
-        msh.source = `${'Nav.dirInov'}(${dir})`;
-        msh.route = 'Inov';
-        msh.pageKey = msh.compKey;
-        this.pub(msh);
-      }
+      this.pubInov(msg, dir); // Publish Innovate pageKey to Innovate Tabs if necessary
     } else if (this.hasActivePageDir(this.route, dir)) {
       this.dirPage(dir);
     } else {
@@ -224,8 +187,9 @@ Nav = class Nav {
     }
   }
 
+  // Map compKeys to a single Comp route for Muse
   toRoute(compKey) {
-    if (Util.inArray(['Info', 'Data', 'Know', 'Wise'], compKey)) {
+    if (this.isMuse && this.inArray(compKey, ['Info', 'Data', 'Know', 'Wise'])) {
       return 'Comp';
     } else {
       return compKey;
@@ -317,6 +281,7 @@ Nav = class Nav {
     return ndx;
   }
 
+  // An important indicator of when Comps and Tabs are instanciated
   setPages(route, pagesObj) {
     // if not @pages[route]?
     this.pages[route] = {};
@@ -328,7 +293,7 @@ Nav = class Nav {
 
   setPageKey(route, pageKey) {
     var key, page, ref;
-    if (route !== 'Inov') {
+    if (!this.isInov(route)) {
       this.pageKey = pageKey;
     }
     if (!this.hasPages(route)) {
@@ -342,13 +307,14 @@ Nav = class Nav {
     }
   }
 
+  // Jumps through hoops to set the right pageKey
   getPageKey(route) {
     var key, page, pageKey, ref;
     pageKey = 'Sign';
     if (this.hasPageKey(route, this.pageKey)) {
       pageKey = this.pageKey;
     } else if (!this.hasPages(route)) {
-      pageKey = this.pageKey !== 'None' && this.pageKey !== 'Info' ? this.pageKey : 'Sign';
+      pageKey = this.isPageKey(this.pageKey) ? this.pageKey : 'Sign';
     } else {
       ref = this.pages[route].pages;
       for (key in ref) {
@@ -361,6 +327,11 @@ Nav = class Nav {
       pageKey = this.pages[route].keys[0];
     }
     return pageKey;
+  }
+
+  // Inov plays a roll is validating pageKey
+  isPageKey(pageKey) {
+    return (pageKey != null) && pageKey !== 'None' && !this.isInov(pageKey);
   }
 
   hasPageKey(route, pageKey) {
@@ -417,6 +388,75 @@ Nav = class Nav {
 
   disps(compKey, pracKey) {
     return this.batch[compKey].data.pracs[pracKey].disps;
+  }
+
+  isDef(d) {
+    return d !== null && typeof d !== 'undefined';
+  }
+
+  isArray(a) {
+    return this.isDef(a) && typeof a !== "string" && (a.length != null) && a.length > 0;
+  }
+
+  inArray(e, a) {
+    return this.isArray(a) && a.indexOf(e) > -1;
+  }
+
+  // --- Innovate --- Inov in one place
+
+  // Across the board Inov detector for compKey pageKey and route
+  isInov(e) {
+    return this.inArray(e, ['Info', 'Data', 'Inov']);
+  }
+
+  // A hack for Innovate Tabs
+  tabInov(msg) {
+    if ((msg.route != null) && this.isInov(msg.route) && msg.source === 'Tabs') {
+      msg.route = 'Comp';
+      msg.compKey = msg.pageKey;
+      msg.pageKey = this.getPageKey('Comp');
+    }
+    return msg;
+  }
+
+  // Publish a message after dirComp() to update Innovate Tabs
+  pubInov(msg, dir) {
+    var msh, saveKey;
+    if (!this.isInov(msg.compKey)) {
+      return;
+    }
+    saveKey = this.pageKey;
+    msh = Object.assign({}, msg);
+    this.setPageKey('Inov', msh.compKey);
+    msh.source = `${'Nav.dirInov'}(${dir})`;
+    msh.route = 'Inov';
+    msh.pageKey = msh.compKey;
+    this.pub(msh);
+    this.pageKey = saveKey;
+  }
+
+  addInovToNavs(komps) {
+    var navs;
+    if (!this.isMuse) {
+      return komps != null;
+    }
+    navs = Object.assign({}, komps);
+    navs = this.insInov(navs, 'Info', 'Data', 'Know');
+    return navs;
+  }
+
+  insInov(navs, prev, inov, next) {
+    navs[prev].south = inov;
+    navs[prev].next = inov;
+    navs[inov] = {
+      north: prev,
+      prev: prev,
+      south: next,
+      next: next
+    };
+    navs[next].north = inov;
+    navs[next].prev = inov;
+    return navs;
   }
 
 };
