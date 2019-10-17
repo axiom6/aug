@@ -2592,17 +2592,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/draw/conn/Build.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/draw/conn/Build-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/pub/draw/conn/Chord.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2724,17 +2713,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/draw/show/Drew.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/draw/show/Drew-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/pub/draw/show/Hue.js": {
 		"bF": 0,
 		"ft": 64,
@@ -2753,17 +2731,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/draw/show/Link-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/pub/draw/show/Palettes.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/draw/show/Palettes-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
