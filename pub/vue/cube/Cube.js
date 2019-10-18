@@ -51678,7 +51678,7 @@ CubeTh = class CubeTh {
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMapSoft = true;
     this.camera = new PerspectiveCamera(45, this.aspectRatio, 1, 10000);
-    this.camera.position.set(0, 6, 1200);
+    this.camera.position.set(0, 6, 1500);
     this.camera.lookAt(this.scene.position);
     this.scene.add(this.camera);
     this.axes = new AxesHelper(2);

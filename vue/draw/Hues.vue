@@ -2,7 +2,7 @@
 
 <template>
   <div class="hues-pane" ref="Hues">
-    <d-tabs route="Hues" :pages="pages"></d-tabs>
+    <d-tabs route="Hues" :pages="pages" defn="None"></d-tabs>
     <h1 v-if="pageKey==='Hues'">Hues with MathBox</h1>
     <template v-for="page in pages">
       <div :ref="page.key" v-if="page.show" class="hues-page" :key="page.key"></div>
@@ -35,7 +35,7 @@
 
       onNav: function(obj) {
         if( this.nav().isMyNav( obj, this.route ) ) {
-            this.pageKey = this.nav().getPageKey('Hues');
+            this.pageKey = this.nav().getPageKey('Hues','None'); // No default
             if( this.pageKey !== 'None') {
                 this.doApp( this.pageKey ); } } },
 

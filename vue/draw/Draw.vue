@@ -2,7 +2,7 @@
 
 <template>
   <div class="draw-pane">
-    <d-tabs route="Draw" :pages="pages"></d-tabs>
+    <d-tabs route="Draw" :pages="pages" defn="None"></d-tabs>
     <h1 v-if="pageKey==='Draw'">Drawings in D3</h1>
     <template v-for="page in pages">
       <div :ref="page.key" v-show="page.show" class="draw-page" :key="page.key"></div>
@@ -27,13 +27,13 @@
         Link:  { title:'Link',  key:'Link',  obj:null, show:false },
         Radar: { title:'Radar', key:'Radar', obj:null, show:false },
         Hue:   { title:'Hue',   key:'Hue',   obj:null, show:false },
-        Tree:  { title:'Tree',  key:'Tree',  obj:null, show:false} } } },
+        Tree:  { title:'Tree',  key:'Tree',  obj:null, show:false } } } },
 
     methods: {
       
       onNav: function(obj) {
         if( this.nav().isMyNav( obj, this.route ) ) {
-            this.pageKey = this.nav().getPageKey('Draw');
+            this.pageKey = this.nav().getPageKey('Draw','None'); // None implies no defaults
             if( this.pageKey !== 'None') {
                 this.create(this.pageKey); } } },
       

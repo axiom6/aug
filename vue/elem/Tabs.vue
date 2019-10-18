@@ -11,9 +11,10 @@
 
   export default {
 
-    props: { route:String, pages:Object, position:String },
+    props: { route:String, pages:Object, defn:{ default:'null', type:String }, position:{ default:'full', type:String } },
     
-    data() { return { pageKey:'None', pageObj:null } },
+    data() { return { pageKey:'None', pageObj:null,
+      positions:{ left:{ left:0, width:'50%' }, right:{ left:'50%', width:'50%' }, full:{ left:0, width:'100%' } } } },
     
     methods: {
       onPage: function (key) {
@@ -24,12 +25,12 @@
           this.onPage( key );
           this.nav().pub( { source:'Tabs', route:this.route, pageKey:key } ); },
       stylePos: function () {
-        return this.position==='right' ? { left:'50%' } : { left:0 }; },
+        return this.positions[this.position]; },
       classTab: function (pageKey) {
         return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },
 
     created: function () {  // We want to set the routes pages asap
-      this.onPage( this.nav().setPages( this.route, this.pages ) ); },
+      this.onPage( this.nav().setPages( this.route, this.pages, this.defn ) ); },
 
     mounted: function() {
       this.subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {

@@ -179,13 +179,13 @@ class Nav
     ndx
 
   # An important indicator of when Comps and Tabs are instanciated
-  setPages:( route, pagesObj ) ->
+  setPages:( route, pagesObj, defn=null ) ->
     # if not @pages[route]?
     @pages[route] = {}
     @pages[route].pages = pagesObj
     @pages[route].keys  = Object.keys(pagesObj)
     # console.log( 'Nav().setPages', route, @pages[route] )
-    @getPageKey( route )
+    @getPageKey( route, defn )
 
   setPageKey:( route, pageKey ) ->
     @pageKey = pageKey if not @isInov(route)
@@ -195,7 +195,8 @@ class Nav
     return
 
   # Jumps through hoops to set the right pageKey
-  getPageKey:( route ) ->
+  # Defn implies not to use first key as default
+  getPageKey:( route, defn=null ) ->
     pageKey = 'Sign'
     if @hasPageKey(route,@pageKey)
       pageKey =  @pageKey
@@ -204,7 +205,9 @@ class Nav
     else
       for own  key,   page  of @pages[route].pages
         return key if page.show
-      pageKey = @pages[route].keys[0] # Default is first page
+      pageKey = if defn? then defn else @pages[route].keys[0] # Default is first page
+    # console.trace()
+    # console.log( 'Nav.getPageKey()', { pageKey:pageKey, defn:defn } )
     pageKey
 
   # Inov plays a roll is validating pageKey

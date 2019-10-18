@@ -45,7 +45,7 @@ class CubeTh
     @renderer.shadowMapSoft = true
 
     @camera = new THREE.PerspectiveCamera( 45, @aspectRatio, 1, 10000 )
-    @camera.position.set( 0, 6, 1200 )
+    @camera.position.set( 0, 6, 1500 )
     @camera.lookAt( @scene.position )
     @scene.add(@camera)
 

@@ -282,13 +282,13 @@ Nav = class Nav {
   }
 
   // An important indicator of when Comps and Tabs are instanciated
-  setPages(route, pagesObj) {
+  setPages(route, pagesObj, defn = null) {
     // if not @pages[route]?
     this.pages[route] = {};
     this.pages[route].pages = pagesObj;
     this.pages[route].keys = Object.keys(pagesObj);
     // console.log( 'Nav().setPages', route, @pages[route] )
-    return this.getPageKey(route);
+    return this.getPageKey(route, defn);
   }
 
   setPageKey(route, pageKey) {
@@ -308,7 +308,8 @@ Nav = class Nav {
   }
 
   // Jumps through hoops to set the right pageKey
-  getPageKey(route) {
+  // Defn implies not to use first key as default
+  getPageKey(route, defn = null) {
     var key, page, pageKey, ref;
     pageKey = 'Sign';
     if (this.hasPageKey(route, this.pageKey)) {
@@ -324,8 +325,10 @@ Nav = class Nav {
           return key;
         }
       }
-      pageKey = this.pages[route].keys[0];
+      pageKey = defn != null ? defn : this.pages[route].keys[0];
     }
+    // console.trace()
+    // console.log( 'Nav.getPageKey()', { pageKey:pageKey, defn:defn } )
     return pageKey;
   }
 
