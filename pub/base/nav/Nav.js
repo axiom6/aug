@@ -39,7 +39,7 @@ Nav = class Nav {
   msgOK(msg) {
     var ok;
     ok = true;
-    if ((msg.compKey != null) && !this.hasCompKey(msg.compKey)) {
+    if (this.isMuse && (msg.compKey != null) && !this.hasCompKey(msg.compKey)) {
       ok = false;
     }
     return ok;

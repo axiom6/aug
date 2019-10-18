@@ -1,7 +1,16 @@
 
-1. Fixes
-   a. Attribute height for small Connections
-   b. Test Augm Jitter Main
+0. Fixes
+   a. Test Augm Jitter Main
+   b. Review hacks in: Tocs
+
+   b. Attribute height for small Connections
+
+1. Augm
+   a. Geom Math Hues Draw(Radar) good | Cube(size,position) | Data(Table2 error)
+   b. First Tab
+   c. Font size
+   d. Note not Working | first Note bad message
+   e. Wood not getting Svgs
 
 2. Improve Intrinsic Info
    a. Landing Pages: Home Prin Info Know Wise

@@ -47,14 +47,14 @@ class Augm
     subjects    = ["Nav"]
     streamLog    = { subscribe:false, publish:false, subjects:subjects }
     Augm.stream  = new Stream( subjects, streamLog )
-    Augm.nav    = new Nav(   Augm.stream, batch, Augm.komps )
+    Augm.nav    = new Nav( Augm.stream, batch, Augm.komps )
     #ugm.cache  = new Cache( Augm.stream )
     Augm.vue()
     return
 
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Augm.vue = () ->
-    Augm.mixin = new Mixin( Augm, Augm.komps )
+    Augm.mixin = new Mixin( Augm, Object.keys(Augm.komps) )
     Vue['mixin']( Augm.mixin.mixin() )
     Vue.use(Router)
     app = new Vue( { router:Augm.router(), render: (h) -> h(Home.Dash) } );

@@ -28,7 +28,7 @@ class Nav
 
   msgOK:( msg ) ->
     ok = true
-    ok = false if msg.compKey? and not @hasCompKey(msg.compKey)
+    ok = false if @isMuse and msg.compKey? and not @hasCompKey(msg.compKey)
     ok
 
   toObj:( msg ) ->

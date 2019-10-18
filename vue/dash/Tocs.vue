@@ -39,7 +39,7 @@
         return kompKey===this.compKey || ( kompKey==='Info' && this.compKey==='Data' ) },
       doComp: function(compKey) {
         this.compKey = compKey;
-        let  kompKey = compKey==='Data' ? 'Info' : compKey;
+        let  kompKey = this.isMuse() && compKey==='Data'  ? 'Info' : compKey;
         let  route   = this.komps[kompKey].route;
         this.pub( { route:route, compKey:compKey, source:'Toc' } ); },
       doPrac: function(pracKey) {

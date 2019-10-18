@@ -45,7 +45,7 @@ class Jitter
 
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Jitter.vue = () ->
-    Jitter.mixin = new Mixin( Jitter, Jitter.komps )
+    Jitter.mixin = new Mixin( Jitter, Object.keys(Jitter.komps) )
     Vue['mixin']( Jitter.mixin.mixin() )
     Vue.use(Router)
     app = new Vue( { router:Jitter.router(), render: (h) -> h(Home.Dash) } );

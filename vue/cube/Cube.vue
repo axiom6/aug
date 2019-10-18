@@ -1,7 +1,6 @@
 
 <template>
-  <div id="CubeTh" class="cube">
-  </div>
+  <div id="CubeTh" class="cube-pane"></div>
 </template>
 
 <script type="module">
@@ -27,5 +26,5 @@
 </script>
 
 <style lang="less">
-  .cube {}
+  .cube-pane { position:absolute; left:0; top:0; width:100%; height:100%; }
 </style>

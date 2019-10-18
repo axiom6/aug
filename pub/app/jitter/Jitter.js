@@ -42,7 +42,7 @@ Jitter = (function() {
 
     static vue() {
       var app;
-      Jitter.mixin = new Mixin(Jitter, Jitter.komps);
+      Jitter.mixin = new Mixin(Jitter, Object.keys(Jitter.komps));
       Vue['mixin'](Jitter.mixin.mixin());
       Vue.use(Router);
       app = new Vue({
