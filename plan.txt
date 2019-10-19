@@ -2,15 +2,11 @@
 0. Fixes
    a. Test Augm Jitter Main
    b. Review hacks in: Tocs
-
-   b. Attribute height for small Connections
+   c. Attribute height for small Connections
 
 1. Augm
-   a. Geom Math Hues Draw(Radar) good | Cube(size,position) | Data(Table2 error)
-   b. First Tab
-   c. Font size
+   a. Math(MathML) Geom Data(out) Note(h1) Draw(Radar) Hues Cube
    d. Note not Working | first Note bad message
-   e. Wood not getting Svgs
 
 2. Improve Intrinsic Info
    a. Landing Pages: Home Prin Info Know Wise
@@ -31,7 +27,9 @@
 
 5. Augm
    a. Math MathML
-   b. Note
+   b. Note h1
+   c. Draw(Radar out)
+   c. Data pulled out. Need to review Fire
    c. Landing Pages for Home Math Geom Note Draw Hues
 
 6. Test Suite

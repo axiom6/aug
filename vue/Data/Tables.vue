@@ -4,8 +4,8 @@
     <d-tabs route="Tables" :pages="pages" defn="None"></d-tabs>
     <div class="page">
       <h1       v-if="pageKey==='Tables'">Tables</h1>
-      <t_table1 v-if="pages['Table1'].show"></t_table1>
-      <t_table2 v-if="pages['Table2'].show"></t_table2>
+      <t_table1 v-if="pages['Table1'].show" ref="Table1"></t_table1>
+      <t_table2 v-if="pages['Table2'].show" ref="Table2"></t_table2>
     </div>
   </div>
 </template>

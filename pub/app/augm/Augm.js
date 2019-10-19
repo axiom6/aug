@@ -192,29 +192,6 @@ Augm = (function() {
             components: {
               Wood: Augm.lazy('vue/wood/Wood')
             }
-          },
-          {
-            path: '/data',
-            name: 'Data',
-            components: {
-              Data: Home.Data
-            },
-            children: [
-              {
-                path: 'tables',
-                name: 'Tables',
-                components: {
-                  Tables: Augm.lazy('vue/data/Tables')
-                }
-              },
-              {
-                path: 'pivots',
-                name: 'Pivots',
-                components: {
-                  Pivots: Augm.lazy('vue/data/Pivots')
-                }
-              }
-            ]
           }
         ]
       });
@@ -288,6 +265,9 @@ Augm = (function() {
   };
 
   // Toc.vue and Nav components  routes and directions
+  //{path: '/data',    name:'Data',    components:{ Data:     Home.Data }, children: [
+  // { path:'tables',  name:'Tables',  components:{ Tables:   Augm.lazy( 'vue/data/Tables') } },
+  //  { path:'pivots',  name:'Pivots',  components:{ Pivots:   Augm.lazy( 'vue/data/Pivots') } } ] }
   Augm.komps = {
     Home: {
       title: 'Home',
@@ -331,14 +311,7 @@ Augm = (function() {
       next: "Note",
       prev: "Math"
     },
-    Data: {
-      title: 'Data',
-      key: 'Data',
-      route: 'Data',
-      pracs: {},
-      ikw: true,
-      icon: "fas fa-database"
-    },
+    //Data:{ title:'Data', key:'Data', route:'Data', pracs:{}, ikw:true,  icon:"fas fa-database"     }
     Note: {
       title: 'Note',
       key: 'Note',

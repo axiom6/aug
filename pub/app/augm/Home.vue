@@ -1,16 +1,16 @@
 
 <template>
-  <div class="home">
-    <div class="head">
+  <div   class="home-pane">
+    <div class="home-head">
       <div>
         <h1>Welcome to Augmentation Home Page</h1>
         <h2>Choose an Application Component on the Left</h2>
       </div>
     </div>
-    <div class="midd">
+    <div class="home-midd">
       <!--h-btns comp="Home" :btns="btns" init="Axes" back="#3B5999" active="tan"></h-btns-->
     </div>
-    <div class="foot">
+    <div class="home-foot">
       <div>
         <h1>Axiom Architectures</h1>
       </div>
@@ -62,20 +62,22 @@
   
   @import '../../../pub/css/themes/theme.less';
   
+  @homeFS:@themeFS;
+  
   .grid3x1() { display:grid; grid-template-columns:1fr; grid-template-rows:30fr 40fr 30fr;
       grid-template-areas:"head" "midd" "foot"; }
   
-  .home { .grid3x1(); position:relative; left:0; top:0; right:0; bottom:0;
+  .home-pane { .grid3x1(); position:relative; left:0; top:0; right:0; bottom:0;
     background-color:@theme-back; color:@theme-fore;
 
-    .head { grid-area:head; .themeCenterItems(); justify-self:stretch; align-self:stretch;
-      h1 { font-size:@theme-h1-FS; } }
+    .home-head { grid-area:head; .themeCenterItems(); justify-self:stretch; align-self:stretch;
+      h1 { font-size:2.5*@homeFS; } }
     
-    .midd { grid-area:midd; .themeCenterItems(); justify-self:stretch; align-self:stretch;
-      h1 { font-size:@theme-h1-FS; } }
+    .home-midd { grid-area:midd; .themeCenterItems(); justify-self:stretch; align-self:stretch;
+      h1 { font-size:2.5*@homeFS; } }
   
-    .foot { grid-area:foot; .themeCenterItems(); justify-self:stretch; align-self:stretch;
-      h1 { font-size:@theme-h1-FS; } }
+    .home-foot { grid-area:foot; .themeCenterItems(); justify-self:stretch; align-self:stretch;
+      h1 { font-size:2.5*@homeFS; } }
     
   }
   

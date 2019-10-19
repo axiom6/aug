@@ -1,7 +1,7 @@
 
 
 <template>
-  <div class="data" ref="Data">
+  <div class="data-pane" ref="Data">
     <h1 :v-if="isData()">Data</h1>
     <template v-for="dat in datas">
       <router-view :name="dat.key"></router-view>
@@ -32,8 +32,10 @@
 <style lang="less">
   
   @import '../../pub/css/themes/theme.less';
+
+  @dataFS:@themeFS;
   
-  .data {   position:absolute; left:0; top:0; width:100%; height:100%; background-color:@theme-back; display:grid;
-    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-fore; font-size:@theme-h1-FS; } }
+  .data-pane { position:absolute; left:0; top:0; width:100%; height:100%; background-color:@theme-back; display:grid;
+    h1 { justify-self:center; align-self:center; text-align:center; color:@theme-fore; font-size:2.5*@dataFS; } }
   
 </style>;

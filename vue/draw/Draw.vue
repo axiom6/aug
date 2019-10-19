@@ -20,12 +20,12 @@
     components:{ 'd-tabs':Tabs },
 
     data() {
-      return { route:'Draw', pageKey:'Draw', drew:null, pages:{
+      return { route:'Draw', pageKey:'Draw', D3D:null, pages:{
         Wheel: { title:'Wheel', key:'Wheel', obj:null, show:false },
         Axes:  { title:'Axes',  key:'Axes',  obj:null, show:false },
         Chord: { title:'Chord', key:'Chord', obj:null, show:false },
         Link:  { title:'Link',  key:'Link',  obj:null, show:false },
-        Radar: { title:'Radar', key:'Radar', obj:null, show:false },
+      //Radar: { title:'Radar', key:'Radar', obj:null, show:false },
         Hue:   { title:'Hue',   key:'Hue',   obj:null, show:false },
         Tree:  { title:'Tree',  key:'Tree',  obj:null, show:false } } } },
 
@@ -57,10 +57,12 @@
 <style lang="less">
   
   @import '../../pub/css/themes/theme.less';
+
+  @drawFS:@themeFS;
   
-  .draw-pane {   position:absolute; left:0; top:0; width:100%; height:100%;display:grid;
-            background-color:@theme-back; font-family:@theme-font-family;
-    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-fore; font-size:@theme-h1-FS; }
+  .draw-pane { position:absolute; left:0; top:0; width:100%; height:100%;display:grid;
+               background-color:@theme-back; font-family:@theme-font-family;
+    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-fore; font-size:2.5*@drawFS; }
     .draw-page { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;  } }
 
   // Chords

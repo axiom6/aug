@@ -28,8 +28,10 @@
 <style lang="less">
   
   @import '../../pub/css/themes/theme.less';
+
+  @mathFS:@themeFS;
   
   .math-pane { position:absolute; left:0; top:0; width:100%; height:100%; background-color:@theme-back; display:grid;
-    h1 { justify-self:center; align-self:center; text-align:center; color:@theme-fore; font-size:@theme-h1-FS; } }
+    h1 { justify-self:center; align-self:center; text-align:center; color:@theme-fore; font-size:2.5*@mathFS; } }
 
 </style>

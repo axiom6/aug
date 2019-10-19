@@ -23,7 +23,8 @@
           this.nav().setPageKey( this.route, key ); } },
       doPage: function (key) {
           this.onPage( key );
-          this.nav().pub( { source:'Tabs', route:this.route, pageKey:key } ); },
+          let route = this.isDef(this.pages[key].route) ? this.pages[key].route : this.route
+          this.nav().pub( { source:'Tabs', route:route, pageKey:key } ); },
       stylePos: function () {
         return this.positions[this.position]; },
       classTab: function (pageKey) {

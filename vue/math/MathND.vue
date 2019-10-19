@@ -87,7 +87,7 @@ export default MathND;
   
   .math-nd-comp {
     position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;
-      background-color:@theme-back;font-size:@mathFS;
+      background-color:@theme-back;font-size:2*@mathFS;
     .math-nd-grid9x3(); justify-items:center; align-items:center;
     
     .r1c1{.c(r1c1)}; .r1c2{.c(r1c2)}; .r1c3{.c(r1c3)};

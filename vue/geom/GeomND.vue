@@ -47,10 +47,12 @@
 <style lang="less">
   
   @import '../../pub/css/themes/theme.less';
+
+  @geomNDFS:@themeFS;
   
   .geom-nd-pane {}
   
   .geom-nd-page { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;
-     background-color:@theme-back; display:grid; }
+     background-color:@theme-back; display:grid; font-size:@geomNDFS; }
 
 </style>
