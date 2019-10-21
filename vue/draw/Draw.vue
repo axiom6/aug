@@ -25,7 +25,7 @@
         Axes:  { title:'Axes',  key:'Axes',  obj:null, show:false },
         Chord: { title:'Chord', key:'Chord', obj:null, show:false },
         Link:  { title:'Link',  key:'Link',  obj:null, show:false },
-      //Radar: { title:'Radar', key:'Radar', obj:null, show:false },
+        Radar: { title:'Radar', key:'Radar', obj:null, show:false },
         Hue:   { title:'Hue',   key:'Hue',   obj:null, show:false },
         Tree:  { title:'Tree',  key:'Tree',  obj:null, show:false } } } },
 

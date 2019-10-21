@@ -25,6 +25,8 @@
   
   let Tocs = {
     
+    // Hacks: 1.kompKey==='Info' 2.compKey==='Data' 3.this.isPageKeyComp('Data')
+    
     data: function() {
       return { komps:{}, compPracs:{}, compKey:'Home', pracKey:'None', dispKey:'None' } },
     
@@ -33,7 +35,6 @@
         let pracs = {}
         if(      this.isDef(this.compPracs[compKey]) ) { pracs = this.compPracs[compKey];   }
         else if( this.isDef(this.komps[compKey])     ) { pracs = this.komps[compKey].pracs; }
-        // console.log( 'Tocs.myPrac()', compKey, pracs );
         return pracs; },
       myKomp: function(kompKey) {
         return kompKey===this.compKey || ( kompKey==='Info' && this.compKey==='Data' ) },

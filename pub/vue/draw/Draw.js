@@ -22174,7 +22174,7 @@ var Link$1 = Link;
 var Radar;
 
 Radar = class Radar {
-  constructor(svgMgr) {
+  constructor(svgMgr, name2) {
     this.doQuads = this.doQuads.bind(this);
     this.doTechs = this.doTechs.bind(this);
     this.attrG = this.attrG.bind(this);
@@ -22194,6 +22194,7 @@ Radar = class Radar {
     // Plot tech points as either dots or triangles and add drag behavior. Add tech title tool tip
     this.pts = this.pts.bind(this);
     this.svgMgr = svgMgr;
+    this.name = name2;
     this.d3 = this.svgMgr.d3;
     this.svg = this.svgMgr.svg;
     this.g = this.svgMgr.g;
@@ -22206,7 +22207,6 @@ Radar = class Radar {
 
   ready() {
     var sz;
-    this.graph = this.svgMgr.svg;
     sz = this.svgMgr.size;
     this.width = sz.w;
     this.height = sz.h;
@@ -22555,15 +22555,6 @@ Radar = class Radar {
 };
 
 var Radar$1 = Radar;
-
-/*
-      dot.call(
-      @d3.behavior.drag()
-        .on("dragstart", (tech) => @doDragStart(tech) )
-        .on("drag",      (tech) => @doDrag(tech) )
-        .on("dragend",   (tech) => @doDragEnd(tech)   )  )
-
-*/
 
 var Tree;
 
@@ -25414,7 +25405,7 @@ var Hue;
 
 Hue = class Hue extends Radar$1 {
   constructor(svgMgr) {
-    super(svgMgr);
+    super(svgMgr, 'Hue');
     this.quadrants = [
       {
         name1: "Red",
@@ -25749,7 +25740,7 @@ let Draw = {
       Axes:  { title:'Axes',  key:'Axes',  obj:null, show:false },
       Chord: { title:'Chord', key:'Chord', obj:null, show:false },
       Link:  { title:'Link',  key:'Link',  obj:null, show:false },
-    //Radar: { title:'Radar', key:'Radar', obj:null, show:false },
+      Radar: { title:'Radar', key:'Radar', obj:null, show:false },
       Hue:   { title:'Hue',   key:'Hue',   obj:null, show:false },
       Tree:  { title:'Tree',  key:'Tree',  obj:null, show:false } } } },
 
@@ -25820,7 +25811,7 @@ __vue_render__$1._withStripped = true;
   /* style */
   const __vue_inject_styles__$1 = function (inject) {
     if (!inject) return
-    inject("data-v-033ed5d4_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.draw-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw-pane h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 5vmin;\n}\n.draw-pane .draw-page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,aAAa;EACb,uBAAuB;EACvB,+BAA+B;AACjC;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.draw-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw-pane h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 5vmin;\n}\n.draw-pane .draw-page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n"]}, media: undefined });
+    inject("data-v-f63d4994_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.draw-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw-pane h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 5vmin;\n}\n.draw-pane .draw-page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n", map: {"version":3,"sources":["Draw.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,aAAa;EACb,uBAAuB;EACvB,+BAA+B;AACjC;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,YAAY;AACd;AACA;EACE,kBAAkB;AACpB","file":"Draw.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.draw-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  display: grid;\n  background-color: black;\n  font-family: Roboto, sans-serif;\n}\n.draw-pane h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 5vmin;\n}\n.draw-pane .draw-page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n}\n.group-tick line {\n  stroke: #000;\n}\n.ribbons {\n  fill-opacity: 0.67;\n}\n"]}, media: undefined });
 
   };
   /* scoped */

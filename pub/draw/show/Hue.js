@@ -10,7 +10,7 @@ import Palettes from '../base/Palettes';
 
 Hue = class Hue extends Radar {
   constructor(svgMgr) {
-    super(svgMgr);
+    super(svgMgr, 'Hue');
     this.quadrants = [
       {
         name1: "Red",

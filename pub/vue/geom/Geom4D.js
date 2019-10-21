@@ -276,6 +276,7 @@ let GeomND = {
     
     onNav: function(obj) {
       if( this.nav().isMyNav( obj, this.route ) ) {
+        console.log( 'Geom.onNav()', this.route );
         this.pageKey = this.nav().getPageKey(this.route);
         if( this.pageKey !== 'None') {
             this.create(this.pageKey); } } },
@@ -337,7 +338,7 @@ __vue_render__$1._withStripped = true;
   /* style */
   const __vue_inject_styles__$1 = function (inject) {
     if (!inject) return
-    inject("data-v-24c70436_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.geom-nd-page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  display: grid;\n  font-size: 2vmin;\n}\n", map: {"version":3,"sources":["GeomND.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;EACX,uBAAuB;EACvB,aAAa;EACb,gBAAgB;AAClB","file":"GeomND.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.geom-nd-page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  display: grid;\n  font-size: 2vmin;\n}\n"]}, media: undefined });
+    inject("data-v-40f47466_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.geom-nd-page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  display: grid;\n  font-size: 2vmin;\n}\n", map: {"version":3,"sources":["GeomND.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;EACX,uBAAuB;EACvB,aAAa;EACb,gBAAgB;AAClB","file":"GeomND.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.geom-nd-page {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  display: grid;\n  font-size: 2vmin;\n}\n"]}, media: undefined });
 
   };
   /* scoped */

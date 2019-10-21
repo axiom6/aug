@@ -7,7 +7,7 @@ import Data from '../../base/util/Data.js';
 import Vis from '../base/Vis.js';
 
 Radar = class Radar {
-  constructor(svgMgr) {
+  constructor(svgMgr, name2) {
     this.doQuads = this.doQuads.bind(this);
     this.doTechs = this.doTechs.bind(this);
     this.attrG = this.attrG.bind(this);
@@ -27,6 +27,7 @@ Radar = class Radar {
     // Plot tech points as either dots or triangles and add drag behavior. Add tech title tool tip
     this.pts = this.pts.bind(this);
     this.svgMgr = svgMgr;
+    this.name = name2;
     this.d3 = this.svgMgr.d3;
     this.svg = this.svgMgr.svg;
     this.g = this.svgMgr.g;
@@ -39,7 +40,6 @@ Radar = class Radar {
 
   ready() {
     var sz;
-    this.graph = this.svgMgr.svg;
     sz = this.svgMgr.size;
     this.width = sz.w;
     this.height = sz.h;
@@ -396,12 +396,3 @@ Radar = class Radar {
 };
 
 export default Radar;
-
-/*
-      dot.call(
-      @d3.behavior.drag()
-        .on("dragstart", (tech) => @doDragStart(tech) )
-        .on("drag",      (tech) => @doDrag(tech) )
-        .on("dragend",   (tech) => @doDragEnd(tech)   )  )
-
-*/

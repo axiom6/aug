@@ -1,12 +1,7 @@
 
-0. Fixes
-   a. Test Augm Jitter Main
-   b. Review hacks in: Tocs
-   c. Attribute height for small Connections
 
-1. Augm
-   a. Math(MathML) Geom Data(out) Note(h1) Draw(Radar) Hues Cube
-   d. Note not Working | first Note bad message
+1. Fixes
+
 
 2. Improve Intrinsic Info
    a. Landing Pages: Home Prin Info Know Wise
@@ -24,16 +19,17 @@
    b. smin smmax sx sy approach?
    b. Stick to just transform scale
    c. Wheel no resize | Axes,Chord,Tree translate  | Link good | Radar no display | Hue good
+   d. Attribute height for small Connections
 
 5. Augm
-   a. Math MathML
-   b. Note h1
-   c. Draw(Radar out)
-   c. Data pulled out. Need to review Fire
-   c. Landing Pages for Home Math Geom Note Draw Hues
+   a. Math(Firefox) Geom Data(out) Note Draw Hues Cube
+   a. Data pulled out. Need to review Fire
+   b. Landing Pages for Home Math Geom Note Draw Hues
 
 6. Test Suite
-   a. Revisit page key from Base to Info
+   a. Test Jitter Main
+   b. Revisit page key from Base to Info
+   c. Review hacks in: Tocs
 
 https://main-4a9c7.firebaseapp.com/app/main.html
 https://augm-d4b3c.firebaseapp.com/app/augm.html

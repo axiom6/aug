@@ -17,7 +17,7 @@
 
     components:{ 'd-tabs':Tabs },
 
-    data() { return { route:'None', pages:{} } },
+    data() { return { route:'Geom', pages:{} } },
 
     methods: {
       

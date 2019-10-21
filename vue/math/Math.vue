@@ -1,7 +1,7 @@
 
 <template>
   <div class="math-pane" ref="Math">
-    <h1 v-if="route==='Math'">Mathematics</h1>
+    <h1 v-show="myRoute()">Mathematics</h1>
     <template v-for="math in maths">
       <router-view :name="route+math.key"></router-view>
     </template>
@@ -16,6 +16,10 @@
       maths:[
         { title:'MathML', key:'ML' },
         { title:'MathEQ', key:'EQ' } ] } },
+
+    methods: {
+      myRoute: function() {
+        return this.isRoute('Math'); } },
 
     mounted: function () {} 
 

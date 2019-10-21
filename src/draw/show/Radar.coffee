@@ -6,7 +6,7 @@ import Vis  from    '../base/Vis.js'
 
 class Radar
 
-  constructor:( @svgMgr ) ->
+  constructor:( @svgMgr, @name ) ->
     @d3  = @svgMgr.d3
     @svg = @svgMgr.svg
     @g   = @svgMgr.g
@@ -16,7 +16,6 @@ class Radar
     @name is 'Radar'
 
   ready:() ->
-    @graph  = @svgMgr.svg
     sz      = @svgMgr.size
     @width  = sz.w
     @height = sz.h
@@ -275,13 +274,3 @@ class Radar
     if @degSVG    is false and @degD3  is false  then {}
 
 export default Radar
-
-###
-      dot.call(
-      @d3.behavior.drag()
-        .on("dragstart", (tech) => @doDragStart(tech) )
-        .on("drag",      (tech) => @doDrag(tech) )
-        .on("dragend",   (tech) => @doDragEnd(tech)   )  )
-  
-
-###

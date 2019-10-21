@@ -7,7 +7,7 @@ import Palettes from '../base/Palettes'
 class Hue extends Radar
 
   constructor:( svgMgr ) ->
-    super(  svgMgr )
+    super(  svgMgr, 'Hue' )
 
     @quadrants = [
       { name1:"Red",        key:  '0', color:"hsl(  0,100%,50%)", beg:-15, end: 15 }

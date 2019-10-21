@@ -4514,14 +4514,14 @@ MathML = class MathML {
   }
 
   fen(u) {
-    this.beg('mfenced');
+    this.beg("mfenced open='(' close=')' separators=''");
     this.exp(u);
     this.end('mfenced');
   }
 
   vec(rest) {
     var e, i, len;
-    this.beg("mfenced open='[' close=']'");
+    this.beg("mfenced open='[' close=']' separators=','");
 // MathML takes care of commans
     for (i = 0, len = rest.length; i < len; i++) {
       e = rest[i];

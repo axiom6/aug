@@ -841,6 +841,10 @@ let Math = {
       { title:'MathML', key:'ML' },
       { title:'MathEQ', key:'EQ' } ] } },
 
+  methods: {
+    myRoute: function() {
+      return this.isRoute('Math'); } },
+
   mounted: function () {} 
 
 };
@@ -857,7 +861,20 @@ var __vue_render__$5 = function() {
     "div",
     { ref: "Math", staticClass: "math-pane" },
     [
-      _vm.route === "Math" ? _c("h1", [_vm._v("Mathematics")]) : _vm._e(),
+      _c(
+        "h1",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.myRoute(),
+              expression: "myRoute()"
+            }
+          ]
+        },
+        [_vm._v("Mathematics")]
+      ),
       _vm._v(" "),
       _vm._l(_vm.maths, function(math) {
         return [_c("router-view", { attrs: { name: _vm.route + math.key } })]
@@ -872,7 +889,7 @@ __vue_render__$5._withStripped = true;
   /* style */
   const __vue_inject_styles__$5 = function (inject) {
     if (!inject) return
-    inject("data-v-00bf0e87_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.math-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  display: grid;\n}\n.math-pane h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 5vmin;\n}\n", map: {"version":3,"sources":["Math.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,uBAAuB;EACvB,aAAa;AACf;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,gBAAgB;AAClB","file":"Math.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.math-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  display: grid;\n}\n.math-pane h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 5vmin;\n}\n"]}, media: undefined });
+    inject("data-v-392f629e_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.math-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  display: grid;\n}\n.math-pane h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 5vmin;\n}\n", map: {"version":3,"sources":["Math.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,uBAAuB;EACvB,aAAa;AACf;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,gBAAgB;AAClB","file":"Math.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.math-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  display: grid;\n}\n.math-pane h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 5vmin;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -912,11 +929,15 @@ __vue_render__$5._withStripped = true;
 
 let Geom = {
 
-  data() { return { comp:'Geom',
+  data() { return {
     geoms:[
       { title:'Geom2D', key:'2D' },
       { title:'Geom3D', key:'3D' },
       { title:'Geom4D', key:'4D' } ] } },
+
+  methods: {
+    myRoute: function() {
+      return this.isRoute('Geom'); } },
 
   mounted: function () {}
 
@@ -934,7 +955,20 @@ var __vue_render__$6 = function() {
     "div",
     { staticClass: "geom-pane" },
     [
-      _vm.comp === "Geom" ? _c("h1", [_vm._v("Geometric Algebra")]) : _vm._e(),
+      _c(
+        "h1",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.myRoute(),
+              expression: "myRoute()"
+            }
+          ]
+        },
+        [_vm._v("Geometric Algebra")]
+      ),
       _vm._v(" "),
       _vm._l(_vm.geoms, function(geom) {
         return [_c("router-view", { attrs: { name: _vm.comp + geom.key } })]
@@ -949,7 +983,7 @@ __vue_render__$6._withStripped = true;
   /* style */
   const __vue_inject_styles__$6 = function (inject) {
     if (!inject) return
-    inject("data-v-03c66ea6_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.geom-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  display: grid;\n}\n.geom-pane h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 5vmin;\n}\n", map: {"version":3,"sources":["Geom.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,uBAAuB;EACvB,aAAa;AACf;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,gBAAgB;AAClB","file":"Geom.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.geom-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  display: grid;\n}\n.geom-pane h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 5vmin;\n}\n"]}, media: undefined });
+    inject("data-v-48ce8fb8_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.geom-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  display: grid;\n}\n.geom-pane h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 5vmin;\n}\n", map: {"version":3,"sources":["Geom.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,uBAAuB;EACvB,aAAa;AACf;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,gBAAgB;AAClB","file":"Geom.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.geom-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  display: grid;\n}\n.geom-pane h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 5vmin;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -1092,7 +1126,7 @@ let Note = {
   
   methods: {
     myRoute: function() {
-      this.isRoute('Note'); } }
+      return this.isRoute('Note'); } }
   
 };
 
@@ -1140,7 +1174,7 @@ __vue_render__$8._withStripped = true;
   /* style */
   const __vue_inject_styles__$8 = function (inject) {
     if (!inject) return
-    inject("data-v-820fa932_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.note-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  display: grid;\n}\n.note-pane h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 5vmin;\n}\n", map: {"version":3,"sources":["Note.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,uBAAuB;EACvB,aAAa;AACf;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,gBAAgB;AAClB","file":"Note.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.note-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  display: grid;\n}\n.note-pane h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 5vmin;\n}\n"]}, media: undefined });
+    inject("data-v-813993ca_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.note-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  display: grid;\n}\n.note-pane h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 5vmin;\n}\n", map: {"version":3,"sources":["Note.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,uBAAuB;EACvB,aAAa;AACf;AACA;EACE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,YAAY;EACZ,gBAAgB;AAClB","file":"Note.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.note-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  display: grid;\n}\n.note-pane h1 {\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  color: wheat;\n  font-size: 5vmin;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
