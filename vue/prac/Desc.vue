@@ -2,17 +2,16 @@
 <template>
   <div     class="prac-desc-pane">
     <div   class="prac-desc-cent" @click="doPrac(pracObj.name)" :style="style(pracObj)">
-      <div class="prac-desc-head"><d-icon :icon="pracObj.icon" :name="pracObj.name" :size="3.0" ></d-icon></div>
-      <div class="prac-desc-summ">{{pracObj.desc}}</div>
+      <d-icon :icon="pracObj.icon" :name="pracObj.name" :size="2.5"></d-icon>
+      <div class="prac-desc-summ">{{pracObj['desc']}}</div>
     </div>
     <template v-for="dispObj in pracObj.disps">
       <div   :class="dispObj.dir" @click="doDisp(dispObj.name)" :style="style(dispObj)">
         <div      class="prac-desc-desc">
-          <d-icon class="prac-desc-icon" :icon="dispObj.icon" :name="dispObj.name" :size="2.5" ></d-icon>
-          <div    class="prac-desc-summ">{{dispObj.desc}}</div>
+          <d-icon :icon="dispObj.icon" :name="dispObj.name" :size="2.0"></d-icon>
+          <div    class="prac-desc-sumd">{{dispObj['desc']}}</div>
           <template v-for="areaObj in dispObj.areas">
-            <d-icon :class="clArea" :icon="areaObj.icon" :name="areaObj.name" :summ="tsSumm(areaObj.desc)"
-              :size="1.3"></d-icon>
+            <d-item :class="clArea" :icon="areaObj.icon" :name="areaObj.name" :size="1.0"></d-item>
           </template>
         </div>
       </div>
@@ -23,10 +22,11 @@
 <script type="module">
   
   import Icon from "../elem/Icon.vue"
+  import Item from "../elem/Item.vue"
 
   let Desc = {
     
-    components: { 'd-icon':Icon },
+    components: { 'd-icon':Icon, 'd-item':Item },
 
     props: { pracObj:Object, from:String },
 
@@ -68,32 +68,21 @@
   .prac-desc-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;
     grid-template-areas: "nw north ne" "west cen east" "sw south se"; }
 
-  .prac-desc-grid2x1() { display:grid;  grid-template-columns:1fr; grid-template-rows:20fr 80fr;
-    grid-template-areas: "head" "summ"; }
-
-  .ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }
+  .prac-desc-ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }
   
-  .prac-desc-pane { position:absolute; left:0; top:0; right:0; bottom:0; .prac-desc-grid3x3(); color:black;
+  .prac-desc-pane { position:absolute; left:0; top:0; width:100%; height:100%; .prac-desc-grid3x3(); color:black;
     
-    .prac-desc-cent { .ddir(cen); .prac-desc-grid2x1();
-      .prac-desc-head { grid-area:head; }
-      .prac-desc-summ { grid-area:summ; display:grid; align-self:start;  justify-self:start; text-align:left;
-        margin:0.5rem 0.5rem 0.5rem 0.5rem; font-size:1.6*@descFS; } }
+    .prac-desc-cent { .prac-desc-ddir(cen);
+      .prac-desc-summ { text-align:left; margin-left:1.2em; font-size:1.5*@descFS; } }
     
-    .west  { .ddir(west);  }
-    .north { .ddir(north); }
-    .east  { .ddir(east);  }
-    .south { .ddir(south); }
+    .west  { .prac-desc-ddir(west);  } .north { .prac-desc-ddir(north); }
+    .east  { .prac-desc-ddir(east);  } .south { .prac-desc-ddir(south); }
   
-    .grid5x1() { display:grid;  grid-template-columns:1fr; grid-template-rows:20fr 20fr 20fr 20fr 20fr;
-      grid-template-areas: "iconq" "summq""area1" "area2" "area3"; }
-  
-    .prac-desc-desc { .grid5x1(); color:black;
-      .prac-desc-iconp { grid-area:iconq; }
-      .prac-desc-summp { grid-area:summq; margin-left:1.2em;font-size:1.5*@descFS; }
-      .prac-desc-area1 { grid-area:area1; }
-      .prac-desc-area2 { grid-area:area2; }
-      .prac-desc-area3 { grid-area:area3; } }
+    .prac-desc-desc { color:black;
+      .prac-desc-sumd  { text-align:left; margin-left:1.2em; font-size:1.5*@descFS; }
+      .prac-desc-area1 { }
+      .prac-desc-area2 { }
+      .prac-desc-area3 { } }
   }
   
 </style>

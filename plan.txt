@@ -1,18 +1,18 @@
 
-
-1. Fixes
-
+1. Tasks
+   a. Loveland Internet
+   b. Twitter
+   c. Pack Clothes
+   d. Clean Room
 
 2. Improve Intrinsic Info
-   a. Landing Pages: Home Prin Info Know Wise
-   b. Descriptions:  Clean Up Info.json Know.json Wise.json
-   c. Bold Labels
-   d. Route url path init bug
+   a. Descriptions:  Clean Up Info.json Know.json Wise.json Bold Labels
+   b. Landing Pages: Home Prin Info Know Wise
 
 3. Talk
    a. Nav scripts test suite and talks
-   b. Talk.vue Vue  Slide template
-   c. Core Slides
+   b. Templates: Json Tags Land Desc Talk Narr
+   c. Slides Prac Conn Disp
 
 4. Resize
    a. Turning on resize for Conns in Comp
@@ -30,6 +30,8 @@
    a. Test Jitter Main
    b. Revisit page key from Base to Info
    c. Review hacks in: Tocs
+   d. Route url path init bug
+   e. Consolidate Muse?
 
 https://main-4a9c7.firebaseapp.com/app/main.html
 https://augm-d4b3c.firebaseapp.com/app/augm.html
