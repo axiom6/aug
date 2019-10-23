@@ -62,17 +62,31 @@ Mixin = class Mixin {
         isNav: function() {
           return Mixin.Main.nav != null;
         },
-        isRoute: function(route) {
+        navRoute: function() {
           if (this.isNav()) {
-            return route === this.nav().route;
+            return this.nav().route;
           } else if (this.isDir()) {
-            return route === this.dir().route;
+            return this.dir().route;
           } else {
-            return false;
+            return 'None';
           }
+        },
+        isRoute: function(route) {
+          return route === this.navRoute();
         },
         keys: function(obj) {
           return Object.keys(obj);
+        },
+        fontSize: function(scale) { // JavaScript font-size the matches themeFS in theme.less
+          var fs, sc;
+          fs = Mixin.Main.fontSize != null ? Mixin.Main.fontSize : 2;
+          sc = scale != null ? scale : 1;
+          return sc * fs + 'vmin';
+        },
+        fontSizeCss: function(scale) {
+          return {
+            fontSize: this.fontSize(scale)
+          };
         },
         prin: function() {
           return Mixin.Main.Batch['Prin'].data.pracs;

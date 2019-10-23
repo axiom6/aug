@@ -25,7 +25,7 @@
           this.fnClick(this.name); } },
 
       style: function() {
-        return { fontSize:this.size+'rem' }; }
+        return this.fontSizeCss(this.size); }
     }
   }
   

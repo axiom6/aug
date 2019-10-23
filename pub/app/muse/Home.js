@@ -24932,7 +24932,7 @@ let Icon = {
         this.fnClick(this.name); } },
 
     style: function() {
-      return { fontSize:this.size+'rem' }; }
+      return this.fontSizeCss(this.size); }
   }
 };
 
@@ -24971,7 +24971,7 @@ __vue_render__$f._withStripped = true;
   /* style */
   const __vue_inject_styles__$f = function (inject) {
     if (!inject) return
-    inject("data-v-a79ff06c_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.icon-pane {\n  display: grid;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n}\n.icon-pane .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-name {\n  display: inline-block;\n}\n", map: {"version":3,"sources":["Icon.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,aAAa;AACf;AACA;EACE,eAAe;EACf,oBAAoB;EACpB,kBAAkB;AACpB;AACA;EACE,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,qBAAqB;AACvB","file":"Icon.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.icon-pane {\n  display: grid;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n}\n.icon-pane .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-name {\n  display: inline-block;\n}\n"]}, media: undefined });
+    inject("data-v-587fd8ce_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.icon-pane {\n  display: grid;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n}\n.icon-pane .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-name {\n  display: inline-block;\n}\n", map: {"version":3,"sources":["Icon.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,aAAa;AACf;AACA;EACE,eAAe;EACf,oBAAoB;EACpB,kBAAkB;AACpB;AACA;EACE,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,qBAAqB;AACvB","file":"Icon.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.icon-pane {\n  display: grid;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n}\n.icon-pane .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-name {\n  display: inline-block;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -25022,7 +25022,7 @@ let Item = {
         this.fnClick(this.name); } },
 
     style: function() {
-      return { fontSize:this.size+'rem' }; },
+      return this.fontSizeCss(this.size); }
 
   }
   
@@ -25067,7 +25067,7 @@ __vue_render__$g._withStripped = true;
   /* style */
   const __vue_inject_styles__$g = function (inject) {
     if (!inject) return
-    inject("data-v-45aed9db_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.item-pane .item-line {\n  display: grid;\n  grid-template-columns: 10fr 20fr 70fr;\n  grid-template-areas: \"item-area-icon item-area-name item-area-summ\";\n  margin-left: 4vmin;\n}\n.item-pane .item-icon {\n  grid-area: item-area-icon;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.item-pane .item-name {\n  grid-area: item-area-name;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n  font-weight: bold;\n}\n.item-pane .item-summ {\n  grid-area: item-area-summ;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n", map: {"version":3,"sources":["Item.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,aAAa;EACb,qCAAqC;EACrC,mEAAmE;EACnE,kBAAkB;AACpB;AACA;EACE,yBAAyB;EACzB,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,yBAAyB;EACzB,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,yBAAyB;EACzB,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB","file":"Item.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.item-pane .item-line {\n  display: grid;\n  grid-template-columns: 10fr 20fr 70fr;\n  grid-template-areas: \"item-area-icon item-area-name item-area-summ\";\n  margin-left: 4vmin;\n}\n.item-pane .item-icon {\n  grid-area: item-area-icon;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.item-pane .item-name {\n  grid-area: item-area-name;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n  font-weight: bold;\n}\n.item-pane .item-summ {\n  grid-area: item-area-summ;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n"]}, media: undefined });
+    inject("data-v-7cde37c6_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.item-pane .item-line {\n  display: grid;\n  grid-template-columns: 10fr 20fr 70fr;\n  grid-template-areas: \"item-area-icon item-area-name item-area-summ\";\n  margin-left: 4vmin;\n}\n.item-pane .item-icon {\n  grid-area: item-area-icon;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.item-pane .item-name {\n  grid-area: item-area-name;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n  font-weight: bold;\n}\n.item-pane .item-summ {\n  grid-area: item-area-summ;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n", map: {"version":3,"sources":["Item.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,aAAa;EACb,qCAAqC;EACrC,mEAAmE;EACnE,kBAAkB;AACpB;AACA;EACE,yBAAyB;EACzB,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,yBAAyB;EACzB,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,yBAAyB;EACzB,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB","file":"Item.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.item-pane .item-line {\n  display: grid;\n  grid-template-columns: 10fr 20fr 70fr;\n  grid-template-areas: \"item-area-icon item-area-name item-area-summ\";\n  margin-left: 4vmin;\n}\n.item-pane .item-icon {\n  grid-area: item-area-icon;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.item-pane .item-name {\n  grid-area: item-area-name;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n  font-weight: bold;\n}\n.item-pane .item-summ {\n  grid-area: item-area-summ;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n"]}, media: undefined });
 
   };
   /* scoped */

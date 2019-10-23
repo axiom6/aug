@@ -53,6 +53,12 @@ class Mixin
           route is this.navRoute()
         keys: (obj) ->
           Object.keys(obj)
+        fontSize:( scale ) ->  # JavaScript font-size the matches themeFS in theme.less
+          fs = if Mixin.Main.fontSize? then Mixin.Main.fontSize else 2
+          sc = if scale?               then scale               else 1
+          sc * fs + 'vmin'
+        fontSizeCss:( scale ) ->
+          { fontSize:@fontSize(scale) }
         prin: ()  ->
           Mixin.Main.Batch['Prin'].data.pracs
         comps: (compk) ->

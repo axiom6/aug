@@ -372,30 +372,25 @@ __vue_render__$1._withStripped = true;
 //
 //
 //
-//
 
 
 let Icon = {
 
-  props: { icon:String, name:String, summ:String, size:Number, fnClick:Function },
+  props: { icon:String, name:String, summ:String, size:Number,
+      fnClick:Function },
   
   methods: {
     
     hasSumm: function() {
       return this.isDef(this.summ); },
     
-    icClass:function() {
-      return this.hasSumm() ? 'icon-summ' : 'icon-name'; },
-    
     doClick: function() {
       if( this.isDef(this.fnClick) ) {
         this.fnClick(this.name); } },
-    
-    style: function() {
-      return { fontSize:this.size+'rem' }; }
 
+    style: function() {
+      return this.fontSizeCss(this.size); }
   }
-  
 };
 
 /* script */
@@ -406,12 +401,11 @@ var __vue_render__$2 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", { staticClass: "icon-pane" }, [
+  return _c("div", { staticClass: "icon-pane", style: _vm.style() }, [
     _c(
       "div",
       {
-        class: _vm.icClass(),
-        style: _vm.style(),
+        staticClass: "icon-line",
         on: {
           click: function($event) {
             return _vm.doClick()
@@ -419,13 +413,11 @@ var __vue_render__$2 = function() {
         }
       },
       [
-        _c("i", { staticClass: "icon-icon" }),
+        _c("span", { staticClass: "icon-icon" }, [
+          _c("i", { class: _vm.icon })
+        ]),
         _vm._v(" "),
-        _c("span", { staticClass: "icon-name" }, [_vm._v(_vm._s(_vm.name))]),
-        _vm._v(" "),
-        _vm.hasSumm()
-          ? _c("span", { staticClass: "icon-summ" }, [_vm._v(_vm._s(_vm.summ))])
-          : _vm._e()
+        _c("span", { staticClass: "icon-name" }, [_vm._v(_vm._s(_vm.name))])
       ]
     )
   ])
@@ -436,7 +428,7 @@ __vue_render__$2._withStripped = true;
   /* style */
   const __vue_inject_styles__$2 = function (inject) {
     if (!inject) return
-    inject("data-v-13136434_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.icon-name {\n  display: grid;\n  grid-template-columns: 30fr 10fr 30fr 30fr;\n  grid-template-areas: \"nleft nicon nname nright\";\n  align-self: center;\n  justify-self: center;\n  height: 100%;\n}\n.icon-name i {\n  grid-area: nicon;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.icon-name .name {\n  grid-area: nname;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.icon-summ {\n  display: grid;\n  grid-template-columns: 5fr 10fr 20fr 65fr;\n  grid-template-areas: \"sleft sicon sname ssumm\";\n  align-self: start;\n  justify-self: center;\n}\n.icon-summ i {\n  grid-area: sicon;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.icon-summ .name {\n  grid-area: sname;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n  font-weight: 900;\n}\n.icon-summ .summ {\n  grid-area: ssumm;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n", map: {"version":3,"sources":["Icon.vue","/Users/ax/Documents/prj/aug/vue/elem/Icon.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,aAAa;EACb,0CAA0C;EAC1C,+CAA+C;EAC/C,kBAAkB;EAClB,oBAAoB;EACpB,YAAY;AACd;AACA;EACE,gBAAgB;EAChB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,aAAa;EACb,yCAAyC;EACzC,8CAA8C;EAC9C,iBAAiB;EACjB,oBAAoB;AACtB;AACA;EACE,gBAAgB;EAChB,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;ACClB;ADCA;ECCA,gBAAA;EACA,aAAA;EDCE,mBAAmB;ECCrB,kBAAA;EDCE,gBAAgB;ECClB,gBAAA;ADCA;ACCA;EACA,gBAAA;EACA,aAAA;EDCE,mBAAmB;ECCrB,kBAAA;EDCE,gBAAgB;ACClB","file":"Icon.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.icon-name {\n  display: grid;\n  grid-template-columns: 30fr 10fr 30fr 30fr;\n  grid-template-areas: \"nleft nicon nname nright\";\n  align-self: center;\n  justify-self: center;\n  height: 100%;\n}\n.icon-name i {\n  grid-area: nicon;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.icon-name .name {\n  grid-area: nname;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.icon-summ {\n  display: grid;\n  grid-template-columns: 5fr 10fr 20fr 65fr;\n  grid-template-areas: \"sleft sicon sname ssumm\";\n  align-self: start;\n  justify-self: center;\n}\n.icon-summ i {\n  grid-area: sicon;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.icon-summ .name {\n  grid-area: sname;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n  font-weight: 900;\n}\n.icon-summ .summ {\n  grid-area: ssumm;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n","\n<template>\n  <div      class=\"icon-pane\">\n    <div   :class=\"icClass()\" :style=\"style()\" @click=\"doClick()\">\n      <i    class=\"icon-icon\"></i>\n      <span class=\"icon-name\">{{name}}</span>\n      <span class=\"icon-summ\" v-if=\"hasSumm()\">{{summ}}</span>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  let Icon = {\n\n    props: { icon:String, name:String, summ:String, size:Number, fnClick:Function },\n    \n    methods: {\n      \n      hasSumm: function() {\n        return this.isDef(this.summ); },\n      \n      icClass:function() {\n        return this.hasSumm() ? 'icon-summ' : 'icon-name'; },\n      \n      doClick: function() {\n        if( this.isDef(this.fnClick) ) {\n          this.fnClick(this.name); } },\n      \n      style: function() {\n        return { fontSize:this.size+'rem' }; }\n\n    }\n    \n  }\n  \n  export default Icon;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .icon-grid1x2() { display:grid; grid-template-columns:30fr 10fr 30fr 30fr;\n    grid-template-areas:\"nleft nicon nname nright\"; }\n\n  .icon-pane {}\n  \n  .icon-icon {}\n  \n  .icon-name { .icon-grid1x2(); align-self:center;  justify-self:center; height:100%;\n    i     { grid-area:nicon; .themeCenterItems(); }\n    .name { grid-area:nname; .themeCenterItems(); } }\n\n  .icon-grid1x4() { display:grid; grid-template-columns:5fr 10fr 20fr 65fr; grid-template-areas:\"sleft sicon sname ssumm\"; }\n\n  .icon-summ { .icon-grid1x4(); align-self:start;  justify-self:center;\n    i     { grid-area:sicon; .themeLeftSelf(); }\n    .name { grid-area:sname; .themeLeftSelf(); font-weight:900; }\n    .summ { grid-area:ssumm; .themeLeftSelf(); } }\n  \n</style>"]}, media: undefined });
+    inject("data-v-587fd8ce_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.icon-pane {\n  display: grid;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n}\n.icon-pane .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-name {\n  display: inline-block;\n}\n", map: {"version":3,"sources":["Icon.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,aAAa;AACf;AACA;EACE,eAAe;EACf,oBAAoB;EACpB,kBAAkB;AACpB;AACA;EACE,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,qBAAqB;AACvB","file":"Icon.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.icon-pane {\n  display: grid;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n}\n.icon-pane .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-name {\n  display: inline-block;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -461,10 +453,106 @@ __vue_render__$2._withStripped = true;
   );
 
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+let Item = {
+
+  props: { icon:String, name:String, summ:String, size:Number, fnClick:Function },
+  
+  methods: {
+    
+    hasSumm: function() {
+      return this.isDef(this.summ); },
+    
+    doClick: function() {
+      if( this.isDef(this.fnClick) ) {
+        this.fnClick(this.name); } },
+
+    style: function() {
+      return this.fontSizeCss(this.size); }
+
+  }
+  
+};
+
+/* script */
+const __vue_script__$3 = Item;
+
+/* template */
+var __vue_render__$3 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { staticClass: "item-pane", style: _vm.style() }, [
+    _c(
+      "div",
+      {
+        staticClass: "item-line",
+        on: {
+          click: function($event) {
+            return _vm.doClick()
+          }
+        }
+      },
+      [
+        _c("span", { staticClass: "item-icon" }, [
+          _c("i", { class: _vm.icon })
+        ]),
+        _vm._v(" "),
+        _c("span", { staticClass: "item-name" }, [_vm._v(_vm._s(_vm.name))]),
+        _vm._v(" "),
+        _vm.hasSumm()
+          ? _c("span", { staticClass: "item-summ" }, [_vm._v(_vm._s(_vm.summ))])
+          : _vm._e()
+      ]
+    )
+  ])
+};
+var __vue_staticRenderFns__$3 = [];
+__vue_render__$3._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$3 = function (inject) {
+    if (!inject) return
+    inject("data-v-7cde37c6_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.item-pane .item-line {\n  display: grid;\n  grid-template-columns: 10fr 20fr 70fr;\n  grid-template-areas: \"item-area-icon item-area-name item-area-summ\";\n  margin-left: 4vmin;\n}\n.item-pane .item-icon {\n  grid-area: item-area-icon;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.item-pane .item-name {\n  grid-area: item-area-name;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n  font-weight: bold;\n}\n.item-pane .item-summ {\n  grid-area: item-area-summ;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n", map: {"version":3,"sources":["Item.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,aAAa;EACb,qCAAqC;EACrC,mEAAmE;EACnE,kBAAkB;AACpB;AACA;EACE,yBAAyB;EACzB,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,yBAAyB;EACzB,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,yBAAyB;EACzB,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB","file":"Item.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.item-pane .item-line {\n  display: grid;\n  grid-template-columns: 10fr 20fr 70fr;\n  grid-template-areas: \"item-area-icon item-area-name item-area-summ\";\n  margin-left: 4vmin;\n}\n.item-pane .item-icon {\n  grid-area: item-area-icon;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.item-pane .item-name {\n  grid-area: item-area-name;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n  font-weight: bold;\n}\n.item-pane .item-summ {\n  grid-area: item-area-summ;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$3 = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$3 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$3 = false;
+  /* style inject SSR */
+  
+
+  
+  var Item$1 = normalizeComponent_1(
+    { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
+    __vue_inject_styles__$3,
+    __vue_script__$3,
+    __vue_scope_id__$3,
+    __vue_is_functional_template__$3,
+    __vue_module_identifier__$3,
+    browser,
+    undefined
+  );
+
+//
 
 let Desc = {
   
-  components: { 'd-icon':Icon$1 },
+  components: { 'd-icon':Icon$1, 'd-item':Item$1 },
 
   props: { dispObj:Object, from:String },
 
@@ -485,10 +573,10 @@ let Desc = {
 };
 
 /* script */
-const __vue_script__$3 = Desc;
+const __vue_script__$4 = Desc;
 
 /* template */
-var __vue_render__$3 = function() {
+var __vue_render__$4 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -501,19 +589,19 @@ var __vue_render__$3 = function() {
         attrs: { icon: _vm.dispObj.icon, name: _vm.dispObj.name, size: 5.0 }
       }),
       _vm._v(" "),
-      _c("div", { staticClass: "ddesc-summ" }, [
-        _vm._v(_vm._s(_vm.dispObj.desc))
+      _c("div", { staticClass: "ddesc-summ", style: { "font-size": "2rem" } }, [
+        _vm._v(_vm._s(_vm.dispObj["desc"]))
       ]),
       _vm._v(" "),
       _vm._l(_vm.dispObj.areas, function(areaObj) {
         return [
-          _c("d-icon", {
+          _c("d-item", {
             class: _vm.clArea,
             attrs: {
               icon: areaObj.icon,
               name: areaObj.name,
-              summ: _vm.tsSumm(areaObj.desc),
-              size: 3.0
+              summ: _vm.tsSumm(areaObj["desc"]),
+              size: 2.0
             }
           })
         ]
@@ -522,32 +610,32 @@ var __vue_render__$3 = function() {
     2
   )
 };
-var __vue_staticRenderFns__$3 = [];
-__vue_render__$3._withStripped = true;
+var __vue_staticRenderFns__$4 = [];
+__vue_render__$4._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$3 = function (inject) {
+  const __vue_inject_styles__$4 = function (inject) {
     if (!inject) return
-    inject("data-v-b4614bec_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.ddesc-pane {\n  display: grid;\n  grid-template-columns: 1fr;\n  grid-template-rows: 20fr 20fr 20fr 20fr 20fr;\n  grid-template-areas: \"iconq\" \"summq\" \"area1\" \"area2\" \"area3\";\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 100%;\n  font-size: 2vmin;\n  color: black;\n  border-radius: 4vmin;\n}\n.ddesc-pane .ddesc-iconq {\n  grid-area: iconq;\n}\n.ddesc-pane .ddesc-summq {\n  grid-area: summq;\n  margin-left: 2.4vmin;\n}\n.ddesc-pane .ddesc-area1 {\n  grid-area: area1;\n}\n.ddesc-pane .ddesc-area2 {\n  grid-area: area2;\n}\n.ddesc-pane .ddesc-area3 {\n  grid-area: area3;\n}\n", map: {"version":3,"sources":["Desc.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,aAAa;EACb,0BAA0B;EAC1B,4CAA4C;EAC5C,4DAA4D;EAC5D,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,YAAY;EACZ,gBAAgB;EAChB,YAAY;EACZ,oBAAoB;AACtB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,gBAAgB;EAChB,oBAAoB;AACtB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,gBAAgB;AAClB","file":"Desc.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.ddesc-pane {\n  display: grid;\n  grid-template-columns: 1fr;\n  grid-template-rows: 20fr 20fr 20fr 20fr 20fr;\n  grid-template-areas: \"iconq\" \"summq\" \"area1\" \"area2\" \"area3\";\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 100%;\n  font-size: 2vmin;\n  color: black;\n  border-radius: 4vmin;\n}\n.ddesc-pane .ddesc-iconq {\n  grid-area: iconq;\n}\n.ddesc-pane .ddesc-summq {\n  grid-area: summq;\n  margin-left: 2.4vmin;\n}\n.ddesc-pane .ddesc-area1 {\n  grid-area: area1;\n}\n.ddesc-pane .ddesc-area2 {\n  grid-area: area2;\n}\n.ddesc-pane .ddesc-area3 {\n  grid-area: area3;\n}\n"]}, media: undefined });
+    inject("data-v-124b070f_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.ddesc-pane {\n  display: grid;\n  grid-template-columns: 1fr;\n  grid-template-rows: 20fr 20fr 20fr 20fr 20fr;\n  grid-template-areas: \"iconq\" \"summq\" \"area1\" \"area2\" \"area3\";\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 100%;\n  font-size: 2vmin;\n  color: black;\n  border-radius: 4vmin;\n}\n.ddesc-pane .ddesc-icon {\n  grid-area: iconq;\n}\n.ddesc-pane .ddesc-summ {\n  grid-area: summq;\n  margin-left: 2.4vmin;\n}\n.ddesc-pane .ddesc-area1 {\n  grid-area: area1;\n}\n.ddesc-pane .ddesc-area2 {\n  grid-area: area2;\n}\n.ddesc-pane .ddesc-area3 {\n  grid-area: area3;\n}\n", map: {"version":3,"sources":["Desc.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,aAAa;EACb,0BAA0B;EAC1B,4CAA4C;EAC5C,4DAA4D;EAC5D,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,YAAY;EACZ,gBAAgB;EAChB,YAAY;EACZ,oBAAoB;AACtB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,gBAAgB;EAChB,oBAAoB;AACtB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,gBAAgB;AAClB","file":"Desc.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.ddesc-pane {\n  display: grid;\n  grid-template-columns: 1fr;\n  grid-template-rows: 20fr 20fr 20fr 20fr 20fr;\n  grid-template-areas: \"iconq\" \"summq\" \"area1\" \"area2\" \"area3\";\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 100%;\n  font-size: 2vmin;\n  color: black;\n  border-radius: 4vmin;\n}\n.ddesc-pane .ddesc-icon {\n  grid-area: iconq;\n}\n.ddesc-pane .ddesc-summ {\n  grid-area: summq;\n  margin-left: 2.4vmin;\n}\n.ddesc-pane .ddesc-area1 {\n  grid-area: area1;\n}\n.ddesc-pane .ddesc-area2 {\n  grid-area: area2;\n}\n.ddesc-pane .ddesc-area3 {\n  grid-area: area3;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$3 = undefined;
+  const __vue_scope_id__$4 = undefined;
   /* module identifier */
-  const __vue_module_identifier__$3 = undefined;
+  const __vue_module_identifier__$4 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$3 = false;
+  const __vue_is_functional_template__$4 = false;
   /* style inject SSR */
   
 
   
   var Desc$1 = normalizeComponent_1(
-    { render: __vue_render__$3, staticRenderFns: __vue_staticRenderFns__$3 },
-    __vue_inject_styles__$3,
-    __vue_script__$3,
-    __vue_scope_id__$3,
-    __vue_is_functional_template__$3,
-    __vue_module_identifier__$3,
+    { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
+    __vue_inject_styles__$4,
+    __vue_script__$4,
+    __vue_scope_id__$4,
+    __vue_is_functional_template__$4,
+    __vue_module_identifier__$4,
     browser,
     undefined
   );
@@ -585,10 +673,10 @@ let Disp = {
 };
 
 /* script */
-const __vue_script__$4 = Disp;
+const __vue_script__$5 = Disp;
 
 /* template */
-var __vue_render__$4 = function() {
+var __vue_render__$5 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -609,32 +697,32 @@ var __vue_render__$4 = function() {
     1
   )
 };
-var __vue_staticRenderFns__$4 = [];
-__vue_render__$4._withStripped = true;
+var __vue_staticRenderFns__$5 = [];
+__vue_render__$5._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$4 = function (inject) {
+  const __vue_inject_styles__$5 = function (inject) {
     if (!inject) return
     inject("data-v-9a649ce4_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.disp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n}\n", map: {"version":3,"sources":["Disp.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,sBAAsB;AACxB","file":"Disp.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.disp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$4 = undefined;
+  const __vue_scope_id__$5 = undefined;
   /* module identifier */
-  const __vue_module_identifier__$4 = undefined;
+  const __vue_module_identifier__$5 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$4 = false;
+  const __vue_is_functional_template__$5 = false;
   /* style inject SSR */
   
 
   
   var Disp$1 = normalizeComponent_1(
-    { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
-    __vue_inject_styles__$4,
-    __vue_script__$4,
-    __vue_scope_id__$4,
-    __vue_is_functional_template__$4,
-    __vue_module_identifier__$4,
+    { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
+    __vue_inject_styles__$5,
+    __vue_script__$5,
+    __vue_scope_id__$5,
+    __vue_is_functional_template__$5,
+    __vue_module_identifier__$5,
     browser,
     undefined
   );
