@@ -12,8 +12,7 @@
   
   let Icon = {
 
-    props: { icon:String, name:String, summ:String, size:Number,
-        fnClick:Function },
+    props: { icon:String, name:String, summ:String, size:Number, fnClick:Function },
     
     methods: {
       
