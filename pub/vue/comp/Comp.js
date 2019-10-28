@@ -14,7 +14,7 @@ var script = {
   props: { route:String, pages:Object, defn:{ default:'null', type:String }, position:{ default:'full', type:String } },
   
   data() { return { pageKey:'None', pageObj:null,
-    positions:{ left:{ left:0, width:'50%' }, right:{ left:'50%', width:'50%' }, full:{ left:0, width:'100%' } } } },
+    positions:{ left:{ left:0, width:'60%' }, right:{ left:'60%', width:'40%' }, full:{ left:0, width:'100%' } } } },
   
   methods: {
     onPage: function (key) {
@@ -212,7 +212,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-fce7d676_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3.4vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Tabs.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,uBAAuB;EACvB,kBAAkB;EAClB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,UAAU;EACV,UAAU;AACZ;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Tabs.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3.4vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n"]}, media: undefined });
+    inject("data-v-36652744_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Tabs.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,uBAAuB;EACvB,gBAAgB;EAChB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,UAAU;EACV,UAAU;AACZ;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Tabs.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -402,8 +402,7 @@ var __vue_render__$2 = function() {
               ref: dispObj.name,
               refInFor: true,
               class: dispObj.dir,
-              style: _vm.style(dispObj),
-              attrs: { title: dispObj.name }
+              style: _vm.style(dispObj)
             },
             [
               _c(
@@ -442,7 +441,7 @@ __vue_render__$2._withStripped = true;
   /* style */
   const __vue_inject_styles__$2 = function (inject) {
     if (!inject) return
-    inject("data-v-6f7cd086_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.dirs-comp {\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  font-size: 2.5vmin;\n  width: 90%;\n  height: 90%;\n  color: black;\n  background-color: #333;\n  border-radius: 2.5vmin;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.dirs-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .cen {\n  font-size: 2.5vmin;\n}\n.dirs-comp .disp-comp {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.dirs-comp .disp-comp i {\n  display: inline-block;\n  margin-right: 0.375vmin;\n}\n.dirs-comp .disp-comp .disp-name {\n  display: inline-block;\n}\n.dirs-comp .disp-comp .disp-desc {\n  display: none;\n  margin: 0.25vmin;\n  text-align: left;\n}\n", map: {"version":3,"sources":["Dirs.vue","/Users/ax/Documents/prj/aug/vue/comp/Dirs.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,mBAAmB;EACnB,qBAAqB;EACrB,kBAAkB;EAClB,UAAU;EACV,WAAW;EACX,YAAY;EACZ,sBAAsB;EACtB,sBAAsB;EACtB,iBAAiB;EACjB,aAAa;EACb,kCAAkC;EAClC,+BAA+B;EAC/B,gEAAgE;AAClE;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;AACzB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;AACzB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;AACzB;AACA;EACE,aAAa;ECCf,eAAA;EDCE,qBAAqB;ECCvB,mBAAA;EDCE,uBAAuB;ACCzB;AACA;EDCE,aAAa;ECCf,gBAAA;EDCE,qBAAqB;ECCvB,mBAAA;EACA,uBAAA;ADCA;ACCA;EACA,kBAAA;AACA;AACA;EACA,eAAA;EDCE,oBAAoB;ECCtB,kBAAA;EACA,kBAAA;AACA;AACA;EDCE,qBAAqB;EACrB,uBAAuB;AACzB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,gBAAgB;AAClB","file":"Dirs.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.dirs-comp {\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  font-size: 2.5vmin;\n  width: 90%;\n  height: 90%;\n  color: black;\n  background-color: #333;\n  border-radius: 2.5vmin;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.dirs-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .cen {\n  font-size: 2.5vmin;\n}\n.dirs-comp .disp-comp {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.dirs-comp .disp-comp i {\n  display: inline-block;\n  margin-right: 0.375vmin;\n}\n.dirs-comp .disp-comp .disp-name {\n  display: inline-block;\n}\n.dirs-comp .disp-comp .disp-desc {\n  display: none;\n  margin: 0.25vmin;\n  text-align: left;\n}\n","\n<template>\n  <div class=\"dirs-comp\">\n    <div class=\"cen\" :style=\"style(pracObj)\">\n      <div class=\"disp-comp\" @click=\"doPrac(pracObj.name)\">\n        <i   :class=\"pracObj.icon\"></i>\n        <span class=\"disp-name\">{{pracObj.name}}</span>\n        <span class=\"disp-desc\">{{pracObj.desc}}</span>\n      </div>\n    </div>\n    <template  v-for=\"dispObj in pracObj.disps\">\n      <div :class=\"dispObj.dir\" :style=\"style(dispObj)\"  :ref=\"dispObj.name\" :title=\"dispObj.name\">\n        <div class=\"disp-comp\" @click=\"doDisp(prac.name,dispObj.name)\">\n          <i   :class=\"dispObj.icon\"></i>\n          <span class=\"disp-name\">{{dispObj.name}}</span>\n          <span class=\"disp-desc\">{{dispObj.desc}}</span>\n        </div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  let Dirs = {\n\n    props: { pracObj:Object },\n\n    data() { return { dispObj:null } },\n\n    methods: {\n      \n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav().pub( obj ); },\n      doDisp: function (pracKey,dispKey) {\n        let obj = { route:\"Disp\", pracKey:pracKey, dispKey:dispKey };\n        this.nav().pub( obj ); },\n      style: function( ikwObj ) {\n        return this.styleObj(ikwObj); } }\n  }\n\n  export default Dirs;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  @dirsFS:1.25*@themeFS;\n  \n  .dirs-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n    grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .dirs-dir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:0.5*@dirsFS; }\n  \n  .dirs-comp { .themeCenterStretch(); font-size:@dirsFS; width:90%; height:90%;\n    color:black; background-color:@theme-gray; border-radius:1.0*@dirsFS; font-weight:bold;\n    \n      .dirs-grid3x3(); // The 4 Displine plus Practiice name Grid\n                                 .north { .dirs-dir(north); }\n      .west { .dirs-dir(west); } .cen   { .dirs-dir(cen);   } .east { .dirs-dir(east); }\n                                 .south { .dirs-dir(south); }\n      .cen  { font-size:@dirsFS; }\n\n    .disp-comp   { display:inline; justify-self:center; align-self:center; text-align:center;\n      i          { display:inline-block;  margin-right: 0.15*@dirsFS; }\n      .disp-name { display:inline-block; }\n      .disp-desc { display:none; margin:0.1*@dirsFS; text-align:left; } } }\n  \n  \n</style>"]}, media: undefined });
+    inject("data-v-e2d2eebc_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.dirs-comp {\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  font-size: 2.5vmin;\n  width: 90%;\n  height: 90%;\n  color: black;\n  background-color: #333;\n  border-radius: 2.5vmin;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.dirs-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .cen {\n  font-size: 2.5vmin;\n}\n.dirs-comp .disp-comp {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.dirs-comp .disp-comp i {\n  display: inline-block;\n  margin-right: 0.375vmin;\n}\n.dirs-comp .disp-comp .disp-name {\n  display: inline-block;\n}\n.dirs-comp .disp-comp .disp-desc {\n  display: none;\n  margin: 0.25vmin;\n  text-align: left;\n}\n", map: {"version":3,"sources":["Dirs.vue","/Users/ax/Documents/prj/aug/vue/comp/Dirs.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,mBAAmB;EACnB,qBAAqB;EACrB,kBAAkB;EAClB,UAAU;EACV,WAAW;EACX,YAAY;EACZ,sBAAsB;EACtB,sBAAsB;EACtB,iBAAiB;EACjB,aAAa;EACb,kCAAkC;EAClC,+BAA+B;EAC/B,gEAAgE;AAClE;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;AACzB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;AACzB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;AACzB;AACA;EACE,aAAa;ECCf,eAAA;EDCE,qBAAqB;ECCvB,mBAAA;EDCE,uBAAuB;ACCzB;AACA;EDCE,aAAa;ECCf,gBAAA;EDCE,qBAAqB;ECCvB,mBAAA;EACA,uBAAA;ADCA;ACCA;EACA,kBAAA;AACA;AACA;EACA,eAAA;EDCE,oBAAoB;ECCtB,kBAAA;EACA,kBAAA;AACA;AACA;EDCE,qBAAqB;EACrB,uBAAuB;AACzB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,gBAAgB;AAClB","file":"Dirs.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.dirs-comp {\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  font-size: 2.5vmin;\n  width: 90%;\n  height: 90%;\n  color: black;\n  background-color: #333;\n  border-radius: 2.5vmin;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.dirs-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .cen {\n  font-size: 2.5vmin;\n}\n.dirs-comp .disp-comp {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.dirs-comp .disp-comp i {\n  display: inline-block;\n  margin-right: 0.375vmin;\n}\n.dirs-comp .disp-comp .disp-name {\n  display: inline-block;\n}\n.dirs-comp .disp-comp .disp-desc {\n  display: none;\n  margin: 0.25vmin;\n  text-align: left;\n}\n","\n<template>\n  <div class=\"dirs-comp\">\n    <div class=\"cen\" :style=\"style(pracObj)\">\n      <div class=\"disp-comp\" @click=\"doPrac(pracObj.name)\">\n        <i   :class=\"pracObj.icon\"></i>\n        <span class=\"disp-name\">{{pracObj.name}}</span>\n        <span class=\"disp-desc\">{{pracObj.desc}}</span>\n      </div>\n    </div>\n    <template  v-for=\"dispObj in pracObj.disps\">\n      <div :class=\"dispObj.dir\" :style=\"style(dispObj)\"  :ref=\"dispObj.name\">\n        <div class=\"disp-comp\" @click=\"doDisp(prac.name,dispObj.name)\">\n          <i   :class=\"dispObj.icon\"></i>\n          <span class=\"disp-name\">{{dispObj.name}}</span>\n          <span class=\"disp-desc\">{{dispObj.desc}}</span>\n        </div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  let Dirs = {\n\n    props: { pracObj:Object },\n\n    data() { return { dispObj:null } },\n\n    methods: {\n      \n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav().pub( obj ); },\n      doDisp: function (pracKey,dispKey) {\n        let obj = { route:\"Disp\", pracKey:pracKey, dispKey:dispKey };\n        this.nav().pub( obj ); },\n      style: function( ikwObj ) {\n        return this.styleObj(ikwObj); } }\n  }\n\n  export default Dirs;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  @dirsFS:1.25*@themeFS;\n  \n  .dirs-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n    grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .dirs-dir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:0.5*@dirsFS; }\n  \n  .dirs-comp { .themeCenterStretch(); font-size:@dirsFS; width:90%; height:90%;\n    color:black; background-color:@theme-gray; border-radius:1.0*@dirsFS; font-weight:bold;\n    \n      .dirs-grid3x3(); // The 4 Displine plus Practiice name Grid\n                                 .north { .dirs-dir(north); }\n      .west { .dirs-dir(west); } .cen   { .dirs-dir(cen);   } .east { .dirs-dir(east); }\n                                 .south { .dirs-dir(south); }\n      .cen  { font-size:@dirsFS; }\n\n    .disp-comp   { display:inline; justify-self:center; align-self:center; text-align:center;\n      i          { display:inline-block;  margin-right: 0.15*@dirsFS; }\n      .disp-name { display:inline-block; }\n      .disp-desc { display:none; margin:0.1*@dirsFS; text-align:left; } } }\n  \n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -23542,16 +23541,178 @@ __vue_render__$3._withStripped = true;
   );
 
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+let Icon = {
+
+  props: { icon:String, name:String, summ:String, size:Number, fnClick:Function },
+  
+  methods: {
+    
+    hasSumm: function() {
+      return this.isDef(this.summ); },
+    
+    doClick: function() {
+      if( this.isDef(this.fnClick) ) {
+        this.fnClick(this.name); } },
+
+    style: function() {
+      return this.fontSizeCss(this.size); }
+  }
+};
+
+/* script */
+const __vue_script__$4 = Icon;
+
+/* template */
+var __vue_render__$4 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { staticClass: "icon-pane", style: _vm.style() }, [
+    _c(
+      "div",
+      {
+        staticClass: "icon-line",
+        on: {
+          click: function($event) {
+            return _vm.doClick()
+          }
+        }
+      },
+      [
+        _c("span", { staticClass: "icon-icon" }, [
+          _c("i", { class: _vm.icon })
+        ]),
+        _vm._v(" "),
+        _c("span", { staticClass: "icon-name" }, [_vm._v(_vm._s(_vm.name))])
+      ]
+    )
+  ])
+};
+var __vue_staticRenderFns__$4 = [];
+__vue_render__$4._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$4 = function (inject) {
+    if (!inject) return
+    inject("data-v-7eae6c43_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.icon-pane {\n  display: grid;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n}\n.icon-pane .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-name {\n  display: inline-block;\n}\n", map: {"version":3,"sources":["Icon.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,aAAa;AACf;AACA;EACE,eAAe;EACf,oBAAoB;EACpB,kBAAkB;AACpB;AACA;EACE,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,qBAAqB;AACvB","file":"Icon.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.icon-pane {\n  display: grid;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n}\n.icon-pane .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-name {\n  display: inline-block;\n}\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$4 = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$4 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$4 = false;
+  /* style inject SSR */
+  
+
+  
+  var Icon$1 = normalizeComponent_1(
+    { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
+    __vue_inject_styles__$4,
+    __vue_script__$4,
+    __vue_scope_id__$4,
+    __vue_is_functional_template__$4,
+    __vue_module_identifier__$4,
+    browser,
+    undefined
+  );
+
+//
+
+let Desc = {
+  
+  components: { 'd-icon':Icon$1 },
+
+  props: { pracObj:Object, from:String },
+
+  data() { return { areaObj:null, iarea:1 } },
+
+  methods: {
+    style: function (ikwObj) {
+      return this.styleObj(ikwObj); }
+  }
+  
+  
+};
+
+/* script */
+const __vue_script__$5 = Desc;
+
+/* template */
+var __vue_render__$5 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { staticClass: "comp-desc-pane" },
+    [
+      _c("d-icon", {
+        staticClass: "comp-desc-icon",
+        attrs: { icon: _vm.pracObj.icon, name: _vm.pracObj.name, size: 2.5 }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "comp-desc-summ" }, [
+        _vm._v(_vm._s(_vm.pracObj["desc"]))
+      ])
+    ],
+    1
+  )
+};
+var __vue_staticRenderFns__$5 = [];
+__vue_render__$5._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$5 = function (inject) {
+    if (!inject) return
+    inject("data-v-27f69eb4_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.comp-desc-pane {\n  font-size: 2vmin;\n  color: black;\n  border-radius: 4vmin;\n  background-color: #333;\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.comp-desc-pane .comp-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 2%;\n  width: 100%;\n  height: 23%;\n}\n.comp-desc-pane .comp-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 25%;\n  width: 94%;\n  height: 75%;\n  text-align: left;\n  font-size: 3vmin;\n}\n", map: {"version":3,"sources":["Desc.vue","/Users/ax/Documents/prj/aug/vue/comp/Desc.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,YAAY;EACZ,oBAAoB;EACpB,sBAAsB;EACtB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;EAChB,gBAAgB;ACClB","file":"Desc.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.comp-desc-pane {\n  font-size: 2vmin;\n  color: black;\n  border-radius: 4vmin;\n  background-color: #333;\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.comp-desc-pane .comp-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 2%;\n  width: 100%;\n  height: 23%;\n}\n.comp-desc-pane .comp-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 25%;\n  width: 94%;\n  height: 75%;\n  text-align: left;\n  font-size: 3vmin;\n}\n","\n<template>\n  <div      class=\"comp-desc-pane\">\n    <d-icon class=\"comp-desc-icon\" :icon=\"pracObj.icon\" :name=\"pracObj.name\" :size=\"2.5\" ></d-icon>\n    <div    class=\"comp-desc-summ\">{{pracObj['desc']}}</div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Icon from \"../elem/Icon.vue\"\n\n  let Desc = {\n    \n    components: { 'd-icon':Icon },\n\n    props: { pracObj:Object, from:String },\n\n    data() { return { areaObj:null, iarea:1 } },\n\n    methods: {\n      style: function (ikwObj) {\n        return this.styleObj(ikwObj); }\n    }\n    \n    \n  }\n  export default Desc;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @descFS:@themeFS;\n  @summFS:1.5*@descFS;\n\n.comp-desc-pane {   font-size:@descFS; color:black; border-radius:2.0*@descFS; background-color:@theme-gray;\n                    position:relative; left:0;  top: 0;  width:100%; height:100%;\n  .comp-desc-icon { position:absolute; left:0;  top: 2%; width:100%; height: 23%; }\n  .comp-desc-summ { position:absolute; left:3%; top:25%; width: 94%; height: 75%; text-align:left; font-size:@summFS;} }\n  \n</style>"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$5 = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$5 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$5 = false;
+  /* style inject SSR */
+  
+
+  
+  var Desc$1 = normalizeComponent_1(
+    { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
+    __vue_inject_styles__$5,
+    __vue_script__$5,
+    __vue_scope_id__$5,
+    __vue_is_functional_template__$5,
+    __vue_module_identifier__$5,
+    browser,
+    undefined
+  );
+
+//
 
 let Comp = {
 
-  components:{ 'b-tabs':Tabs, 'p-sign':Sign$1, 'p-dirs':Dirs$1, 'p-conn':Conn$1 },
+  components:{ 'b-tabs':Tabs, 'p-sign':Sign$1, 'p-dirs':Dirs$1, 'p-conn':Conn$1, 'p-desc':Desc$1 },
   
   data() { return { compKey:'None', compObj:null, pracObj:{}, myRows:{},
     pages:{
       Sign: { title:'Practices',    key:'Sign', show:true  },
       Dirs: { title:'Disciplines',  key:'Dirs', show:false },
-      Conn: { title:'Connections',  key:'Conn', show:false } },
+      Conn: { title:'Connections',  key:'Conn', show:false },
+      Desc: { title:'Descriptions', key:'Desc', show:false } },
     inovs:{
       Info: { title:'Tech', key:'Info', show:true  },
       Data: { title:'Data', key:'Data', show:false } },
@@ -23561,7 +23722,7 @@ let Comp = {
       Do:{    name:'Do',          dir:'do', icon:"fas fas fa-cog" },
       Share:{ name:'Share',       dir:'sh', icon:"fas fa-share-alt-square" } },
     planes: {
-      Info:{ name:'Techs',     dir:'cm', icon:"fas fas fa-cogs" },
+      Info:{ name:'Tech',      dir:'cm', icon:"fas fas fa-cogs" },
       Know:{ name:'Knowledge', dir:'cm', icon:"fas fas fa-university"  },
       Wise:{ name:'Wisdom',    dir:'cm', icon:"fas fas fa-tripadvisor" },
       Data:{ name:'Data',      dir:'cm', icon:"fas fas fa-table" } } } },
@@ -23592,15 +23753,11 @@ let Comp = {
       this.onNav(obj); } ); }
 };
 
-//doPage: function( objKey ) { // Not called
-//  let pageKey = objKey==='None' ? this.nav().getPageKey('Comp') : objKey;
-//  this.nav().setPageKey( 'Comp', pageKey ); },
-
 /* script */
-const __vue_script__$4 = Comp;
+const __vue_script__$6 = Comp;
 
 /* template */
-var __vue_render__$4 = function() {
+var __vue_render__$6 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -23620,19 +23777,13 @@ var __vue_render__$4 = function() {
       _vm._v(" "),
       _c(
         "div",
-        { ref: "Comp", staticClass: "comp-comp", attrs: { title: "Comp" } },
+        { ref: "Comp", staticClass: "comp-comp" },
         [
           _vm._l(_vm.compObj, function(pracObj) {
             return [
               _c(
                 "div",
-                {
-                  key: pracObj.name,
-                  ref: pracObj.name,
-                  refInFor: true,
-                  class: pracObj.dir,
-                  attrs: { title: pracObj.name }
-                },
+                { class: pracObj.dir },
                 [
                   _vm.pages["Sign"].show
                     ? _c("p-sign", { attrs: { pracObj: pracObj } })
@@ -23640,6 +23791,10 @@ var __vue_render__$4 = function() {
                   _vm._v(" "),
                   _vm.pages["Dirs"].show
                     ? _c("p-dirs", { attrs: { pracObj: pracObj } })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.pages["Desc"].show
+                    ? _c("p-desc", { attrs: { pracObj: pracObj } })
                     : _vm._e(),
                   _vm._v(" "),
                   _vm.pages["Conn"].show
@@ -23666,7 +23821,6 @@ var __vue_render__$4 = function() {
                       expression: "isRows()"
                     }
                   ],
-                  key: row.name,
                   class: row.dir
                 },
                 [_c("p-sign", { attrs: { pracObj: row } })],
@@ -23681,32 +23835,32 @@ var __vue_render__$4 = function() {
     1
   )
 };
-var __vue_staticRenderFns__$4 = [];
-__vue_render__$4._withStripped = true;
+var __vue_staticRenderFns__$6 = [];
+__vue_render__$6._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$4 = function (inject) {
+  const __vue_inject_styles__$6 = function (inject) {
     if (!inject) return
-    inject("data-v-cc233034_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.comp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.comp-pane .comp-comp {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  color: black;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n  display: grid;\n  grid-template-columns: 13fr 29fr 29fr 29fr;\n  grid-template-rows: 25fr 25fr 25fr 25fr;\n  grid-template-areas: \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm .comp-sign {\n  background-color: black;\n}\n", map: {"version":3,"sources":["Comp.vue","/Users/ax/Documents/prj/aug/vue/comp/Comp.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;EACX,uBAAuB;EACvB,YAAY;EACZ,gBAAgB;EAChB,oBAAoB;EACpB,aAAa;EACb,0CAA0C;EAC1C,uCAAuC;EACvC,uFAAuF;EACvF,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;ECCA,aAAA;EDCE,aAAa;ECCf,qBAAA;EACA,mBAAA;EDCE,qBAAqB;ECCvB,mBAAA;AACA;ADCA;ECCA,aAAA;EACA,aAAA;EDCE,qBAAqB;ECCvB,mBAAA;EDCE,qBAAqB;ECCvB,mBAAA;ADCA;ACCA;EACA,aAAA;EACA,eAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,mBAAA;ADCA;ACCA;EACA,aAAA;EACA,cAAA;EDCE,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,uBAAuB;AACzB","file":"Comp.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.comp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.comp-pane .comp-comp {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  color: black;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n  display: grid;\n  grid-template-columns: 13fr 29fr 29fr 29fr;\n  grid-template-rows: 25fr 25fr 25fr 25fr;\n  grid-template-areas: \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm .comp-sign {\n  background-color: black;\n}\n","\n<template>\n  <div class=\"comp-pane\">\n    <b-tabs route=\"Comp\" :pages=\"pages\" position=\"left\" ></b-tabs>\n    <b-tabs route=\"Inov\" :pages=\"inovs\" position=\"right\" v-if=\"hasInovs()\"></b-tabs>\n    <div class=\"comp-comp\" ref=\"Comp\" title=\"Comp\">\n      <template v-for=\"pracObj in compObj\">\n        <div   :class=\"pracObj.dir\" :key=\"pracObj.name\" :ref=\"pracObj.name\" :title=\"pracObj.name\">\n          <p-sign v-if=\"pages['Sign'].show\" :pracObj=\"pracObj\"></p-sign>\n          <p-dirs v-if=\"pages['Dirs'].show\" :pracObj=\"pracObj\"></p-dirs>\n          <p-conn v-if=\"pages['Conn'].show\" :pracObj=\"pracObj\" level=\"Comp\"></p-conn>\n        </div>\n      </template>\n      <template v-for=\"row in myRows\">\n        <div v-show=\"isRows()\" :class=\"row.dir\" :key=\"row.name\">\n          <p-sign :pracObj=\"row\"></p-sign>\n        </div>\n      </template>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Tabs from '../elem/Tabs.vue';\n  import Sign from './Sign.vue';\n  import Dirs from './Dirs.vue';\n  import Conn from './Conn.vue';\n  \n  let Comp = {\n\n    components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs, 'p-conn':Conn },\n    \n    data() { return { compKey:'None', compObj:null, pracObj:{}, myRows:{},\n      pages:{\n        Sign: { title:'Practices',    key:'Sign', show:true  },\n        Dirs: { title:'Disciplines',  key:'Dirs', show:false },\n        Conn: { title:'Connections',  key:'Conn', show:false } },\n      inovs:{\n        Info: { title:'Tech', key:'Info', show:true  },\n        Data: { title:'Data', key:'Data', show:false } },\n      rows: {\n        Plane:{ name:'Information', dir:'cm', icon:\"fas fas fa-th\" },\n        Learn:{ name:'Learn',       dir:'le', icon:\"fas fa-graduation-cap\" },\n        Do:{    name:'Do',          dir:'do', icon:\"fas fas fa-cog\" },\n        Share:{ name:'Share',       dir:'sh', icon:\"fas fa-share-alt-square\" } },\n      planes: {\n        Info:{ name:'Techs',     dir:'cm', icon:\"fas fas fa-cogs\" },\n        Know:{ name:'Knowledge', dir:'cm', icon:\"fas fas fa-university\"  },\n        Wise:{ name:'Wisdom',    dir:'cm', icon:\"fas fas fa-tripadvisor\" },\n        Data:{ name:'Data',      dir:'cm', icon:\"fas fas fa-table\" } } } },\n    \n    methods: {\n      hasInovs: function() {\n        return this.compKey==='Info' || this.compKey==='Data'  },\n      onRows: function (compKey) {\n         this.myRows          = this.rows;\n         this.myRows['Plane'] = this.planes[compKey]; },\n      onComp: function (compKey) {\n        if( this.compKey!==compKey ) {\n            this.compKey = compKey;\n            this.compObj = this.compObject(compKey);\n            this.onRows( compKey); } },\n      isRows: function () {\n        return true; },\n      onNav:  function (obj) {\n        if( this.nav().isMyNav( obj, 'Comp' ) ) {\n            this.onComp( obj.compKey ); } }\n      },\n\n    beforeMount: function() {\n      this.onComp( this.nav().compKey ); },\n\n    mounted: function () {\n      this.subscribe( 'Nav', 'Comp.vue', (obj) => {\n        this.onNav(obj); } ); }\n  }\n  \n  export default Comp;\n\n  //doPage: function( objKey ) { // Not called\n  //  let pageKey = objKey==='None' ? this.nav().getPageKey('Comp') : objKey;\n  //  this.nav().setPageKey( 'Comp', pageKey ); },\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .comp-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n               grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .comp-grid4x4() { display:grid; grid-template-columns:13fr 29fr 29fr 29fr; grid-template-rows:25fr 25fr 25fr 25fr;\n    grid-template-areas:\"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n  \n  .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n                  justify-items:center; align-items:center; }\n  \n  @compFS:2.0*@themeFS;\n\n  .comp-pane { position:absolute; left:0; top:0; width:100%; height:100%;\n  \n    .comp-comp { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;\n            background-color:@theme-back; color:@theme-dark; font-size:@compFS; border-radius:0.5*@compFS;\n      .comp-grid4x4(); justify-items:center; align-items:center; // The 4x4 Dim + Row + 9 Practices Grid\n        .cm { .pdir(cm); } .em   { .pdir(em);   } .in    { .pdir(in); }    .en   { .pdir(en);   }\n        .le { .pdir(le); } .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }\n        .do { .pdir(do); } .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }\n        .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }\n      \n      .cm .comp-sign { background-color:@theme-back; }\n    }\n  }\n\n</style>\n"]}, media: undefined });
+    inject("data-v-96770646_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.comp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.comp-pane .comp-comp {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  color: black;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n  display: grid;\n  grid-template-columns: 16fr 28fr 28fr 28fr;\n  grid-template-rows: 25fr 25fr 25fr 25fr;\n  grid-template-areas: \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm .comp-sign {\n  background-color: black;\n}\n", map: {"version":3,"sources":["Comp.vue","/Users/ax/Documents/prj/aug/vue/comp/Comp.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;EACX,uBAAuB;EACvB,YAAY;EACZ,gBAAgB;EAChB,oBAAoB;EACpB,aAAa;EACb,0CAA0C;EAC1C,uCAAuC;EACvC,uFAAuF;EACvF,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;ECCf,aAAA;EDCE,qBAAqB;ECCvB,mBAAA;EACA,qBAAA;EDCE,mBAAmB;ACCrB;AACA;EDCE,aAAa;ECCf,aAAA;EACA,qBAAA;EDCE,mBAAmB;ECCrB,qBAAA;EDCE,mBAAmB;ACCrB;ADCA;ECCA,aAAA;EACA,eAAA;EACA,qBAAA;EACA,mBAAA;EACA,qBAAA;EACA,mBAAA;AACA;ADCA;ECCA,aAAA;EACA,cAAA;EACA,qBAAA;EDCE,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,uBAAuB;AACzB","file":"Comp.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.comp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.comp-pane .comp-comp {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  color: black;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n  display: grid;\n  grid-template-columns: 16fr 28fr 28fr 28fr;\n  grid-template-rows: 25fr 25fr 25fr 25fr;\n  grid-template-areas: \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm .comp-sign {\n  background-color: black;\n}\n","\n<template>\n  <div class=\"comp-pane\">\n    <b-tabs route=\"Comp\" :pages=\"pages\" position=\"left\" ></b-tabs>\n    <b-tabs route=\"Inov\" :pages=\"inovs\" position=\"right\" v-if=\"hasInovs()\"></b-tabs>\n    <div class=\"comp-comp\" ref=\"Comp\">\n      <template v-for=\"pracObj in compObj\">\n        <div   :class=\"pracObj.dir\">\n          <p-sign v-if=\"pages['Sign'].show\" :pracObj=\"pracObj\"></p-sign>\n          <p-dirs v-if=\"pages['Dirs'].show\" :pracObj=\"pracObj\"></p-dirs>\n          <p-desc v-if=\"pages['Desc'].show\" :pracObj=\"pracObj\"></p-desc>\n          <p-conn v-if=\"pages['Conn'].show\" :pracObj=\"pracObj\" level=\"Comp\"></p-conn>\n        </div>\n      </template>\n      <template v-for=\"row in myRows\">\n        <div v-show=\"isRows()\" :class=\"row.dir\">\n          <p-sign :pracObj=\"row\"></p-sign>\n        </div>\n      </template>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  // :key=\"pracObj.name\" :ref=\"pracObj.name\"\n\n  import Tabs from '../elem/Tabs.vue';\n  import Sign from './Sign.vue';\n  import Dirs from './Dirs.vue';\n  import Conn from './Conn.vue';\n  import Desc from './Desc.vue';\n  \n  let Comp = {\n\n    components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },\n    \n    data() { return { compKey:'None', compObj:null, pracObj:{}, myRows:{},\n      pages:{\n        Sign: { title:'Practices',    key:'Sign', show:true  },\n        Dirs: { title:'Disciplines',  key:'Dirs', show:false },\n        Conn: { title:'Connections',  key:'Conn', show:false },\n        Desc: { title:'Descriptions', key:'Desc', show:false } },\n      inovs:{\n        Info: { title:'Tech', key:'Info', show:true  },\n        Data: { title:'Data', key:'Data', show:false } },\n      rows: {\n        Plane:{ name:'Information', dir:'cm', icon:\"fas fas fa-th\" },\n        Learn:{ name:'Learn',       dir:'le', icon:\"fas fa-graduation-cap\" },\n        Do:{    name:'Do',          dir:'do', icon:\"fas fas fa-cog\" },\n        Share:{ name:'Share',       dir:'sh', icon:\"fas fa-share-alt-square\" } },\n      planes: {\n        Info:{ name:'Tech',      dir:'cm', icon:\"fas fas fa-cogs\" },\n        Know:{ name:'Knowledge', dir:'cm', icon:\"fas fas fa-university\"  },\n        Wise:{ name:'Wisdom',    dir:'cm', icon:\"fas fas fa-tripadvisor\" },\n        Data:{ name:'Data',      dir:'cm', icon:\"fas fas fa-table\" } } } },\n    \n    methods: {\n      hasInovs: function() {\n        return this.compKey==='Info' || this.compKey==='Data'  },\n      onRows: function (compKey) {\n         this.myRows          = this.rows;\n         this.myRows['Plane'] = this.planes[compKey]; },\n      onComp: function (compKey) {\n        if( this.compKey!==compKey ) {\n            this.compKey = compKey;\n            this.compObj = this.compObject(compKey);\n            this.onRows( compKey); } },\n      isRows: function () {\n        return true; },\n      onNav:  function (obj) {\n        if( this.nav().isMyNav( obj, 'Comp' ) ) {\n            this.onComp( obj.compKey ); } }\n      },\n\n    beforeMount: function() {\n      this.onComp( this.nav().compKey ); },\n\n    mounted: function () {\n      this.subscribe( 'Nav', 'Comp.vue', (obj) => {\n        this.onNav(obj); } ); }\n  }\n  \n  export default Comp;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .comp-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n               grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .comp-grid4x4() { display:grid; grid-template-columns:16fr 28fr 28fr 28fr; grid-template-rows:25fr 25fr 25fr 25fr;\n    grid-template-areas:\"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n  \n  .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n                  justify-items:center; align-items:center; }\n  \n  @compFS:2.0*@themeFS;\n\n  .comp-pane { position:absolute; left:0; top:0; width:100%; height:100%;\n  \n    .comp-comp { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;\n            background-color:@theme-back; color:@theme-dark; font-size:@compFS; border-radius:0.5*@compFS;\n      .comp-grid4x4(); justify-items:center; align-items:center; // The 4x4 Dim + Row + 9 Practices Grid\n        .cm { .pdir(cm); } .em   { .pdir(em);   } .in    { .pdir(in); }    .en   { .pdir(en);   }\n        .le { .pdir(le); } .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }\n        .do { .pdir(do); } .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }\n        .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }\n      \n      .cm .comp-sign { background-color:@theme-back; }\n    }\n  }\n\n</style>\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$4 = undefined;
+  const __vue_scope_id__$6 = undefined;
   /* module identifier */
-  const __vue_module_identifier__$4 = undefined;
+  const __vue_module_identifier__$6 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$4 = false;
+  const __vue_is_functional_template__$6 = false;
   /* style inject SSR */
   
 
   
   var Comp$1 = normalizeComponent_1(
-    { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
-    __vue_inject_styles__$4,
-    __vue_script__$4,
-    __vue_scope_id__$4,
-    __vue_is_functional_template__$4,
-    __vue_module_identifier__$4,
+    { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
+    __vue_inject_styles__$6,
+    __vue_script__$6,
+    __vue_scope_id__$6,
+    __vue_is_functional_template__$6,
+    __vue_module_identifier__$6,
     browser,
     undefined
   );

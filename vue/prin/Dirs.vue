@@ -8,7 +8,7 @@
       </div>
     </div>
     <template v-for="dispObj in pracObj.disps">
-      <div   :class="dispObj.dir" :style="style(dispObj)"  :ref="dispObj.name" :title="dispObj.name">
+      <div   :class="dispObj.dir" :style="style(dispObj)"  :ref="dispObj.name">
         <div class="prin-dirs-disp" @click="doDisp(prac.name,dispObj.name)">
           <i   :class="dispObj.icon"></i>
           <span class="prin-dirs-name">{{dispObj.name}}</span>

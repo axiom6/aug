@@ -4,7 +4,7 @@
     <b-tabs route="Prin" :pages="pages"></b-tabs>
     <div class="prin-comp">
         <template v-for="pracObj in compObj">
-          <div   :class="pracObj.dir" :key="pracObj.name" :ref="pracObj.name" :title="pracObj.name">
+          <div   :class="pracObj.dir" :key="pracObj.name" :ref="pracObj.name">
             <p-sign v-show="pages['Sign'].show" :pracObj="pracObj"></p-sign>
             <p-dirs v-show="pages['Dirs'].show" :pracObj="pracObj"></p-dirs>
           </div>

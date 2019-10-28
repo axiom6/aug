@@ -14,7 +14,7 @@
     props: { route:String, pages:Object, defn:{ default:'null', type:String }, position:{ default:'full', type:String } },
     
     data() { return { pageKey:'None', pageObj:null,
-      positions:{ left:{ left:0, width:'50%' }, right:{ left:'50%', width:'50%' }, full:{ left:0, width:'100%' } } } },
+      positions:{ left:{ left:0, width:'60%' }, right:{ left:'60%', width:'40%' }, full:{ left:0, width:'100%' } } } },
     
     methods: {
       onPage: function (key) {
@@ -45,7 +45,7 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  @tabsFS:1.7*@themeFS;
+  @tabsFS:1.5*@themeFS;
   
   .tabs-pane { background-color:@theme-back; font-size:@tabsFS;
     position:absolute; left:0; top:0; width:@theme-tabs-width; height:@theme-tabs-height;

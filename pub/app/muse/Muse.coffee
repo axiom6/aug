@@ -51,7 +51,7 @@ class Muse
 
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Muse.vue = () ->
-    Muse.mixin = new Mixin( Muse, ['Home','Prin','Comp','Prac','Disp'] ) # Really can't use komps. Need Prac and Disp
+    Muse.mixin = new Mixin( Muse, ['Home','Cube','Prin','Comp','Prac','Disp'] ) # Can't use komps
     Vue['mixin']( Muse.mixin.mixin() )
     Vue.use(Router)
     app = new Vue( { router:Muse.router(), render: (h) -> h(Home.Dash) } );
@@ -70,6 +70,7 @@ class Muse
     new Router( {
       routes:[
         { path: '/',     name:'Home', components:{ Home: Home      } },
+        { path: '/cube', name:'Cube', components:{ Cube: Home.Cube } },
         { path: '/prin', name:'Prin', components:{ Prin: Home.Prin } },
         { path: '/comp', name:'Comp', components:{ Comp: Home.Comp } },
         { path: '/prac', name:'Prac', components:{ Prac: Home.Prac } },
@@ -79,8 +80,10 @@ class Muse
   # Toc.vue components and routes with no west or east directions
   Muse.komps = {
     Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
-    north:"Wise", prev:"Wise", south:"Prin",  next:"Prin"  }
-    Prin:{ title:'Base', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",
+    north:"Wise", prev:"Wise", south:"Cube",  next:"Cube"  }
+    Cube:{ title:'Cube', key:'Cube', route:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes",
+    north:"Home", prev:"Home", south:"Prin",  next:"Prin"  }
+    Prin:{ title:'Prin', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",
     north:"Home", prev:"Home", south:"Info",  next:"Info" }
     Info:{ title:'Info', key:'Info', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-th",
     north:"Prin", prev:"Prin", south:"Know",  next:"Know" }

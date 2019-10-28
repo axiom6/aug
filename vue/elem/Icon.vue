@@ -38,13 +38,13 @@
   
   @iconFS:2.0*@themeFS;
 
-  .icon-pane   { display:grid;
+  .icon-pane     { display:grid; height:100%;
   
-    .icon-line {  display:inline; justify-self:center; text-align:center; }
+    .icon-line   { display:inline; justify-self:center; text-align:center;  height:auto;
   
-    .icon-icon {  display:inline-block;  margin-right: 0.25*@iconFS; }
-    
-    .icon-name { display:inline-block; }
+      .icon-icon { display:inline-block;  margin-right: 0.25*@iconFS; }
+      
+      .icon-name { display:inline-block; } }
   }
 
   

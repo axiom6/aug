@@ -14,7 +14,7 @@ var script = {
   props: { route:String, pages:Object, defn:{ default:'null', type:String }, position:{ default:'full', type:String } },
   
   data() { return { pageKey:'None', pageObj:null,
-    positions:{ left:{ left:0, width:'50%' }, right:{ left:'50%', width:'50%' }, full:{ left:0, width:'100%' } } } },
+    positions:{ left:{ left:0, width:'60%' }, right:{ left:'60%', width:'40%' }, full:{ left:0, width:'100%' } } } },
   
   methods: {
     onPage: function (key) {
@@ -212,7 +212,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-fce7d676_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3.4vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Tabs.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,uBAAuB;EACvB,kBAAkB;EAClB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,UAAU;EACV,UAAU;AACZ;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Tabs.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3.4vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n"]}, media: undefined });
+    inject("data-v-36652744_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Tabs.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,uBAAuB;EACvB,gBAAgB;EAChB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,UAAU;EACV,UAAU;AACZ;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Tabs.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -376,8 +376,7 @@ __vue_render__$1._withStripped = true;
 
 let Icon = {
 
-  props: { icon:String, name:String, summ:String, size:Number,
-      fnClick:Function },
+  props: { icon:String, name:String, summ:String, size:Number, fnClick:Function },
   
   methods: {
     
@@ -428,7 +427,7 @@ __vue_render__$2._withStripped = true;
   /* style */
   const __vue_inject_styles__$2 = function (inject) {
     if (!inject) return
-    inject("data-v-587fd8ce_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.icon-pane {\n  display: grid;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n}\n.icon-pane .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-name {\n  display: inline-block;\n}\n", map: {"version":3,"sources":["Icon.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,aAAa;AACf;AACA;EACE,eAAe;EACf,oBAAoB;EACpB,kBAAkB;AACpB;AACA;EACE,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,qBAAqB;AACvB","file":"Icon.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.icon-pane {\n  display: grid;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n}\n.icon-pane .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-name {\n  display: inline-block;\n}\n"]}, media: undefined });
+    inject("data-v-7eae6c43_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.icon-pane {\n  display: grid;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n}\n.icon-pane .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-name {\n  display: inline-block;\n}\n", map: {"version":3,"sources":["Icon.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,aAAa;AACf;AACA;EACE,eAAe;EACf,oBAAoB;EACpB,kBAAkB;AACpB;AACA;EACE,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,qBAAqB;AACvB","file":"Icon.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.icon-pane {\n  display: grid;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n}\n.icon-pane .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-name {\n  display: inline-block;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -561,15 +560,9 @@ let Desc = {
   methods: {
     style: function (ikwObj) {
       return this.styleObj(ikwObj); },
-    clArea: function() {
-      let  klass = 'ddesc-area'+this.iarea;
-      this.iarea = this.iarea === 3 ? 1 : this.iarea+1;
-      return klass; },
     tsSumm: function(summ) {
       return this.isStr(summ) ? summ : "This is a test description"; }
   }
-  
-  
 };
 
 /* script */
@@ -582,32 +575,38 @@ var __vue_render__$4 = function() {
   var _c = _vm._self._c || _h;
   return _c(
     "div",
-    { staticClass: "ddesc-pane", style: _vm.style(_vm.dispObj) },
+    { staticClass: "disp-desc-pane", style: _vm.style(_vm.dispObj) },
     [
       _c("d-icon", {
-        staticClass: "ddesc-icon",
+        staticClass: "disp-desc-icon",
         attrs: { icon: _vm.dispObj.icon, name: _vm.dispObj.name, size: 5.0 }
       }),
       _vm._v(" "),
-      _c("div", { staticClass: "ddesc-summ", style: { "font-size": "2rem" } }, [
+      _c("div", { staticClass: "disp-desc-summ" }, [
         _vm._v(_vm._s(_vm.dispObj["desc"]))
       ]),
       _vm._v(" "),
-      _vm._l(_vm.dispObj.areas, function(areaObj) {
-        return [
-          _c("d-item", {
-            class: _vm.clArea,
-            attrs: {
-              icon: areaObj.icon,
-              name: areaObj.name,
-              summ: _vm.tsSumm(areaObj["desc"]),
-              size: 2.0
-            }
+      _c(
+        "div",
+        { staticClass: "disp-desc-area" },
+        [
+          _vm._l(_vm.dispObj.areas, function(areaObj) {
+            return [
+              _c("d-item", {
+                attrs: {
+                  icon: areaObj.icon,
+                  name: areaObj.name,
+                  summ: _vm.tsSumm(areaObj["desc"]),
+                  size: 2.0
+                }
+              })
+            ]
           })
-        ]
-      })
+        ],
+        2
+      )
     ],
-    2
+    1
   )
 };
 var __vue_staticRenderFns__$4 = [];
@@ -616,7 +615,7 @@ __vue_render__$4._withStripped = true;
   /* style */
   const __vue_inject_styles__$4 = function (inject) {
     if (!inject) return
-    inject("data-v-124b070f_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.ddesc-pane {\n  display: grid;\n  grid-template-columns: 1fr;\n  grid-template-rows: 20fr 20fr 20fr 20fr 20fr;\n  grid-template-areas: \"iconq\" \"summq\" \"area1\" \"area2\" \"area3\";\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 100%;\n  font-size: 2vmin;\n  color: black;\n  border-radius: 4vmin;\n}\n.ddesc-pane .ddesc-icon {\n  grid-area: iconq;\n}\n.ddesc-pane .ddesc-summ {\n  grid-area: summq;\n  margin-left: 2.4vmin;\n}\n.ddesc-pane .ddesc-area1 {\n  grid-area: area1;\n}\n.ddesc-pane .ddesc-area2 {\n  grid-area: area2;\n}\n.ddesc-pane .ddesc-area3 {\n  grid-area: area3;\n}\n", map: {"version":3,"sources":["Desc.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,aAAa;EACb,0BAA0B;EAC1B,4CAA4C;EAC5C,4DAA4D;EAC5D,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,YAAY;EACZ,gBAAgB;EAChB,YAAY;EACZ,oBAAoB;AACtB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,gBAAgB;EAChB,oBAAoB;AACtB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,gBAAgB;AAClB","file":"Desc.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.ddesc-pane {\n  display: grid;\n  grid-template-columns: 1fr;\n  grid-template-rows: 20fr 20fr 20fr 20fr 20fr;\n  grid-template-areas: \"iconq\" \"summq\" \"area1\" \"area2\" \"area3\";\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 100%;\n  font-size: 2vmin;\n  color: black;\n  border-radius: 4vmin;\n}\n.ddesc-pane .ddesc-icon {\n  grid-area: iconq;\n}\n.ddesc-pane .ddesc-summ {\n  grid-area: summq;\n  margin-left: 2.4vmin;\n}\n.ddesc-pane .ddesc-area1 {\n  grid-area: area1;\n}\n.ddesc-pane .ddesc-area2 {\n  grid-area: area2;\n}\n.ddesc-pane .ddesc-area3 {\n  grid-area: area3;\n}\n"]}, media: undefined });
+    inject("data-v-5d3a8fb8_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.disp-desc-pane {\n  font-size: 2vmin;\n  color: black;\n  border-radius: 4vmin;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n}\n.disp-desc-pane .disp-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 3%;\n  width: 100%;\n  height: 18%;\n}\n.disp-desc-pane .disp-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 21%;\n  width: 94%;\n  height: 28%;\n  text-align: left;\n  font-size: 5vmin;\n}\n.disp-desc-pane .disp-desc-area {\n  position: absolute;\n  left: 3%;\n  top: 49%;\n  width: 94%;\n  height: 51%;\n}\n", map: {"version":3,"sources":["Desc.vue","/Users/ax/Documents/prj/aug/vue/disp/Desc.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,YAAY;EACZ,oBAAoB;EACpB,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;EAChB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;ACCb","file":"Desc.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.disp-desc-pane {\n  font-size: 2vmin;\n  color: black;\n  border-radius: 4vmin;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n}\n.disp-desc-pane .disp-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 3%;\n  width: 100%;\n  height: 18%;\n}\n.disp-desc-pane .disp-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 21%;\n  width: 94%;\n  height: 28%;\n  text-align: left;\n  font-size: 5vmin;\n}\n.disp-desc-pane .disp-desc-area {\n  position: absolute;\n  left: 3%;\n  top: 49%;\n  width: 94%;\n  height: 51%;\n}\n","\n<template>\n  <div      class=\"disp-desc-pane\" :style=\"style(dispObj)\">\n    <d-icon class=\"disp-desc-icon\" :icon=\"dispObj.icon\" :name=\"dispObj.name\" :size=\"5.0\" ></d-icon>\n    <div    class=\"disp-desc-summ\">{{dispObj['desc']}}</div>\n    <div    class=\"disp-desc-area\">\n      <template v-for=\"areaObj in dispObj.areas\">\n        <d-item :icon=\"areaObj.icon\" :name=\"areaObj.name\" :summ=\"tsSumm(areaObj['desc'])\" :size=\"2.0\"></d-item>\n      </template>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Icon from \"../elem/Icon.vue\"\n  import Item from \"../elem/Item.vue\"\n\n  let Desc = {\n    \n    components: { 'd-icon':Icon, 'd-item':Item },\n\n    props: { dispObj:Object, from:String },\n\n    data() { return { areaObj:null, iarea:1 } },\n\n    methods: {\n      style: function (ikwObj) {\n        return this.styleObj(ikwObj); },\n      tsSumm: function(summ) {\n        return this.isStr(summ) ? summ : \"This is a test description\"; }\n    }\n  }\n  export default Desc;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @descFS:@themeFS;\n  @th:@theme-tabs-height;\n\n.disp-desc-pane {   font-size:@descFS; color:black; border-radius:2.0*@descFS;\n                    position:absolute; left:0;  top:@th; width:100%; height:100%-@th;\n  .disp-desc-icon { position:absolute; left:0;  top: 3%; width:100%; height: 18%; }\n  .disp-desc-summ { position:absolute; left:3%; top:21%; width: 94%; height: 28%;text-align:left;font-size:2.5*@descFS;}\n  .disp-desc-area { position:absolute; left:3%; top:49%; width: 94%; height: 51%; } }\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */

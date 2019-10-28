@@ -41,14 +41,14 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  
   .home-pane { position:absolute; left:0; top:0; width:100%; height:100%;
     background-color:@theme-back; color:@theme-fore;
 
     .home-head { position:absolute; left:0; top:0; width:100%; height:20%; border:1px solid @theme-fore;
             display:grid;justify-items:center; align-items:center; text-align:center;
-      h1 { font-size:@theme-h1-FS; }
-      h2 { font-size:@theme-h2-FS; } }
+      
+      h1 { font-size:2.0*@themeFS; }
+      h2 { font-size:1.5*@themeFS; } }
       
     .home-summ{  position:absolute; left:0; top:20%; width:100%; height:80%;
       .home-flavor { position:absolute; left:0; top:0;   width:100%; height:20%; }

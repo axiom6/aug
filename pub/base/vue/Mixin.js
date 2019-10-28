@@ -12,7 +12,6 @@ Mixin = class Mixin {
   mixin() {
     return {
       created: function() {},
-      // console.log( 'Main.vueMixin.created() globally' )
       methods: {
         isDef: function(d) {
           return d !== null && typeof d !== 'undefined';
@@ -25,6 +24,12 @@ Mixin = class Mixin {
         },
         inArray: function(e, a) {
           return this.isArray(a) && a.indexOf(e) > -1;
+        },
+        isChild: function(key) {
+          var a, b;
+          a = key.charAt(0);
+          b = key.charAt(key.length - 1);
+          return a === a.toUpperCase() && a !== '$' && b !== '_';
         },
         app: function() {
           return Mixin.Main.app;

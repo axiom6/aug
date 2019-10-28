@@ -14,7 +14,7 @@ var script = {
   props: { route:String, pages:Object, defn:{ default:'null', type:String }, position:{ default:'full', type:String } },
   
   data() { return { pageKey:'None', pageObj:null,
-    positions:{ left:{ left:0, width:'50%' }, right:{ left:'50%', width:'50%' }, full:{ left:0, width:'100%' } } } },
+    positions:{ left:{ left:0, width:'60%' }, right:{ left:'60%', width:'40%' }, full:{ left:0, width:'100%' } } } },
   
   methods: {
     onPage: function (key) {
@@ -212,7 +212,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-fce7d676_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3.4vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Tabs.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,uBAAuB;EACvB,kBAAkB;EAClB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,UAAU;EACV,UAAU;AACZ;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Tabs.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3.4vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n"]}, media: undefined });
+    inject("data-v-36652744_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Tabs.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,uBAAuB;EACvB,gBAAgB;EAChB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,UAAU;EACV,UAAU;AACZ;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Tabs.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: wheat;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -23634,8 +23634,7 @@ __vue_render__$4._withStripped = true;
 
 let Icon = {
 
-  props: { icon:String, name:String, summ:String, size:Number,
-      fnClick:Function },
+  props: { icon:String, name:String, summ:String, size:Number, fnClick:Function },
   
   methods: {
     
@@ -23686,7 +23685,7 @@ __vue_render__$5._withStripped = true;
   /* style */
   const __vue_inject_styles__$5 = function (inject) {
     if (!inject) return
-    inject("data-v-587fd8ce_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.icon-pane {\n  display: grid;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n}\n.icon-pane .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-name {\n  display: inline-block;\n}\n", map: {"version":3,"sources":["Icon.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,aAAa;AACf;AACA;EACE,eAAe;EACf,oBAAoB;EACpB,kBAAkB;AACpB;AACA;EACE,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,qBAAqB;AACvB","file":"Icon.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.icon-pane {\n  display: grid;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n}\n.icon-pane .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-name {\n  display: inline-block;\n}\n"]}, media: undefined });
+    inject("data-v-7eae6c43_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.icon-pane {\n  display: grid;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n}\n.icon-pane .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-name {\n  display: inline-block;\n}\n", map: {"version":3,"sources":["Icon.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,aAAa;AACf;AACA;EACE,eAAe;EACf,oBAAoB;EACpB,kBAAkB;AACpB;AACA;EACE,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,qBAAqB;AACvB","file":"Icon.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.icon-pane {\n  display: grid;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n}\n.icon-pane .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-name {\n  display: inline-block;\n}\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -23830,11 +23829,6 @@ let Desc = {
       this.nav().pub( obj ); },
     style: function( ikwObj ) {
       return this.styleObj(ikwObj); },
-    clArea: function() {
-      //if( areaObj===false ) {}
-      let  klass = 'prac-desc-area'+this.iarea;
-      this.iarea = this.iarea === 3 ? 1 : this.iarea+1;
-      return klass; },
     tsSumm: function(summ) {
       return this.isStr(summ) ? summ : "This is a test description"; }
   },
@@ -23864,15 +23858,25 @@ var __vue_render__$7 = function() {
           }
         },
         [
-          _c("d-icon", {
-            attrs: { icon: _vm.pracObj.icon, name: _vm.pracObj.name, size: 2.5 }
-          }),
+          _c(
+            "div",
+            { staticClass: "prac-desc-icon" },
+            [
+              _c("d-icon", {
+                attrs: {
+                  icon: _vm.pracObj.icon,
+                  name: _vm.pracObj.name,
+                  size: 3.0
+                }
+              })
+            ],
+            1
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "prac-desc-summ" }, [
             _vm._v(_vm._s(_vm.pracObj["desc"]))
           ])
-        ],
-        1
+        ]
       ),
       _vm._v(" "),
       _vm._l(_vm.pracObj.disps, function(dispObj) {
@@ -23889,33 +23893,45 @@ var __vue_render__$7 = function() {
               }
             },
             [
-              _c(
-                "div",
-                { staticClass: "prac-desc-desc" },
-                [
-                  _c("d-icon", {
-                    attrs: { icon: dispObj.icon, name: dispObj.name, size: 2.0 }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "prac-desc-sumd" }, [
-                    _vm._v(_vm._s(dispObj["desc"]))
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(dispObj.areas, function(areaObj) {
-                    return [
-                      _c("d-item", {
-                        class: _vm.clArea,
-                        attrs: {
-                          icon: areaObj.icon,
-                          name: areaObj.name,
-                          size: 1.0
-                        }
-                      })
-                    ]
-                  })
-                ],
-                2
-              )
+              _c("div", { staticClass: "prac-disp-desc" }, [
+                _c(
+                  "div",
+                  { staticClass: "prac-disp-icon" },
+                  [
+                    _c("d-icon", {
+                      attrs: {
+                        icon: dispObj.icon,
+                        name: dispObj.name,
+                        size: 2.0
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "prac-disp-summ" }, [
+                  _vm._v(_vm._s(dispObj["desc"]))
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "prac-disp-area" },
+                  [
+                    _vm._l(dispObj.areas, function(areaObj) {
+                      return [
+                        _c("d-item", {
+                          attrs: {
+                            icon: areaObj.icon,
+                            name: areaObj.name,
+                            size: 1.7
+                          }
+                        })
+                      ]
+                    })
+                  ],
+                  2
+                )
+              ])
             ]
           )
         ]
@@ -23930,7 +23946,7 @@ __vue_render__$7._withStripped = true;
   /* style */
   const __vue_inject_styles__$7 = function (inject) {
     if (!inject) return
-    inject("data-v-3a9c24e6_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.prac-desc-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n  color: black;\n}\n.prac-desc-pane .prac-desc-cent {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .prac-desc-cent .prac-desc-summ {\n  text-align: left;\n  margin-left: 1.2em;\n  font-size: 3vmin;\n}\n.prac-desc-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .prac-desc-desc {\n  color: black;\n}\n.prac-desc-pane .prac-desc-desc .prac-desc-sumd {\n  text-align: left;\n  margin-left: 1.2em;\n  font-size: 3vmin;\n}\n", map: {"version":3,"sources":["Desc.vue","/Users/ax/Documents/prj/aug/vue/prac/Desc.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,aAAa;EACb,kCAAkC;EAClC,+BAA+B;EAC/B,gEAAgE;EAChE,YAAY;AACd;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,gBAAgB;EAChB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,YAAY;AACd;AACA;ECCA,gBAAA;EDCE,kBAAkB;ECCpB,gBAAA;ADCA","file":"Desc.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.prac-desc-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n  color: black;\n}\n.prac-desc-pane .prac-desc-cent {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .prac-desc-cent .prac-desc-summ {\n  text-align: left;\n  margin-left: 1.2em;\n  font-size: 3vmin;\n}\n.prac-desc-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .prac-desc-desc {\n  color: black;\n}\n.prac-desc-pane .prac-desc-desc .prac-desc-sumd {\n  text-align: left;\n  margin-left: 1.2em;\n  font-size: 3vmin;\n}\n","\n<template>\n  <div     class=\"prac-desc-pane\">\n    <div   class=\"prac-desc-cent\" @click=\"doPrac(pracObj.name)\" :style=\"style(pracObj)\">\n      <d-icon :icon=\"pracObj.icon\" :name=\"pracObj.name\" :size=\"2.5\"></d-icon>\n      <div class=\"prac-desc-summ\">{{pracObj['desc']}}</div>\n    </div>\n    <template v-for=\"dispObj in pracObj.disps\">\n      <div   :class=\"dispObj.dir\" @click=\"doDisp(dispObj.name)\" :style=\"style(dispObj)\">\n        <div      class=\"prac-desc-desc\">\n          <d-icon :icon=\"dispObj.icon\" :name=\"dispObj.name\" :size=\"2.0\"></d-icon>\n          <div    class=\"prac-desc-sumd\">{{dispObj['desc']}}</div>\n          <template v-for=\"areaObj in dispObj.areas\">\n            <d-item :class=\"clArea\" :icon=\"areaObj.icon\" :name=\"areaObj.name\" :size=\"1.0\"></d-item>\n          </template>\n        </div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Icon from \"../elem/Icon.vue\"\n  import Item from \"../elem/Item.vue\"\n\n  let Desc = {\n    \n    components: { 'd-icon':Icon, 'd-item':Item },\n\n    props: { pracObj:Object, from:String },\n\n    data() { return { dispObj:null, iarea:1 } },\n\n    watch: {\n      pracObj() { this.onPrac(); } },\n    \n    methods: {\n\n      onPrac: function() { }, // console.log( { pracObj:this.pracObj } );\n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav().pub( obj ); },\n      doDisp: function (dispKey) {\n        let obj = { route:\"Disp\", pracKey:this.pracObj.name, dispKey:dispKey };\n        this.nav().pub( obj ); },\n      style: function( ikwObj ) {\n        return this.styleObj(ikwObj); },\n      clArea: function() {\n        //if( areaObj===false ) {}\n        let  klass = 'prac-desc-area'+this.iarea;\n        this.iarea = this.iarea === 3 ? 1 : this.iarea+1;\n        return klass; },\n      tsSumm: function(summ) {\n        return this.isStr(summ) ? summ : \"This is a test description\"; }\n    },\n  }\n  export default Desc;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @descFS:@themeFS;\n  \n  .prac-desc-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n    grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .prac-desc-ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }\n  \n  .prac-desc-pane { position:absolute; left:0; top:0; width:100%; height:100%; .prac-desc-grid3x3(); color:black;\n    \n    .prac-desc-cent { .prac-desc-ddir(cen);\n      .prac-desc-summ { text-align:left; margin-left:1.2em; font-size:1.5*@descFS; } }\n    \n    .west  { .prac-desc-ddir(west);  } .north { .prac-desc-ddir(north); }\n    .east  { .prac-desc-ddir(east);  } .south { .prac-desc-ddir(south); }\n  \n    .prac-desc-desc { color:black;\n      .prac-desc-sumd  { text-align:left; margin-left:1.2em; font-size:1.5*@descFS; }\n      .prac-desc-area1 { }\n      .prac-desc-area2 { }\n      .prac-desc-area3 { } }\n  }\n  \n</style>"]}, media: undefined });
+    inject("data-v-70dec791_0", { source: ".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.prac-desc-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n  color: black;\n}\n.prac-desc-pane .prac-desc-cent {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.prac-desc-pane .prac-desc-cent .prac-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 4%;\n  width: 100%;\n  height: 22%;\n}\n.prac-desc-pane .prac-desc-cent .prac-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 26%;\n  width: 94%;\n  height: 74%;\n  text-align: left;\n  font-size: 3vmin;\n}\n.prac-desc-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .prac-disp-desc {\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  color: black;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-icon {\n  position: absolute;\n  left: 0;\n  top: 3%;\n  width: 100%;\n  height: 18%;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-summ {\n  position: absolute;\n  left: 3%;\n  top: 21%;\n  width: 94%;\n  height: 28%;\n  text-align: left;\n  font-size: 3vmin;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-area {\n  position: absolute;\n  left: 3%;\n  top: 49%;\n  width: 94%;\n  height: 51%;\n}\n", map: {"version":3,"sources":["Desc.vue","/Users/ax/Documents/prj/aug/vue/prac/Desc.vue"],"names":[],"mappings":"AAAA;EACE,eAAe;EACf,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,aAAa;EACb,kCAAkC;EAClC,+BAA+B;EAC/B,gEAAgE;EAChE,YAAY;AACd;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;EACnB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;EAChB,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;ACCrB;ADCA;ECCA,aAAA;EDCE,eAAe;ECCjB,qBAAA;EACA,mBAAA;EDCE,mBAAmB;ACCrB;ADCA;ECCA,aAAA;EDCE,gBAAgB;ECClB,qBAAA;EACA,mBAAA;EACA,mBAAA;AACA;ADCA;ECCA,kBAAA;EACA,OAAA;EDCE,MAAM;ECCR,WAAA;EACA,YAAA;EACA,YAAA;AACA;AACA;EDCE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;EAChB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;AACb","file":"Desc.vue","sourcesContent":[".theme-desc {\n  font-size: 1rem;\n  background-color: #333;\n  border-radius: 0.7em;\n  width: 90%;\n  height: 90%;\n}\n.prac-desc-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n  color: black;\n}\n.prac-desc-pane .prac-desc-cent {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.prac-desc-pane .prac-desc-cent .prac-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 4%;\n  width: 100%;\n  height: 22%;\n}\n.prac-desc-pane .prac-desc-cent .prac-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 26%;\n  width: 94%;\n  height: 74%;\n  text-align: left;\n  font-size: 3vmin;\n}\n.prac-desc-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .prac-disp-desc {\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  color: black;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-icon {\n  position: absolute;\n  left: 0;\n  top: 3%;\n  width: 100%;\n  height: 18%;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-summ {\n  position: absolute;\n  left: 3%;\n  top: 21%;\n  width: 94%;\n  height: 28%;\n  text-align: left;\n  font-size: 3vmin;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-area {\n  position: absolute;\n  left: 3%;\n  top: 49%;\n  width: 94%;\n  height: 51%;\n}\n","\n<template>\n  <div     class=\"prac-desc-pane\">\n    <div   class=\"prac-desc-cent\" @click=\"doPrac(pracObj.name)\" :style=\"style(pracObj)\">\n      <div class=\"prac-desc-icon\"><d-icon :icon=\"pracObj.icon\" :name=\"pracObj.name\" :size=\"3.0\"></d-icon></div>\n      <div class=\"prac-desc-summ\">{{pracObj['desc']}}</div>\n    </div>\n    <template v-for=\"dispObj in pracObj.disps\">\n      <div   :class=\"dispObj.dir\" @click=\"doDisp(dispObj.name)\" :style=\"style(dispObj)\">\n        <div   class=\"prac-disp-desc\">\n          <div class=\"prac-disp-icon\"><d-icon :icon=\"dispObj.icon\" :name=\"dispObj.name\" :size=\"2.0\"></d-icon></div>\n          <div class=\"prac-disp-summ\">{{dispObj['desc']}}</div>\n          <div class=\"prac-disp-area\">\n            <template v-for=\"areaObj in dispObj.areas\">\n              <d-item :icon=\"areaObj.icon\" :name=\"areaObj.name\" :size=\"1.7\"></d-item>\n            </template>\n          </div>\n        </div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Icon from \"../elem/Icon.vue\"\n  import Item from \"../elem/Item.vue\"\n\n  let Desc = {\n    \n    components: { 'd-icon':Icon, 'd-item':Item },\n\n    props: { pracObj:Object, from:String },\n\n    data() { return { dispObj:null, iarea:1 } },\n\n    watch: {\n      pracObj() { this.onPrac(); } },\n    \n    methods: {\n\n      onPrac: function() { }, // console.log( { pracObj:this.pracObj } );\n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav().pub( obj ); },\n      doDisp: function (dispKey) {\n        let obj = { route:\"Disp\", pracKey:this.pracObj.name, dispKey:dispKey };\n        this.nav().pub( obj ); },\n      style: function( ikwObj ) {\n        return this.styleObj(ikwObj); },\n      tsSumm: function(summ) {\n        return this.isStr(summ) ? summ : \"This is a test description\"; }\n    },\n  }\n  export default Desc;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @descFS:@themeFS;\n  \n  .prac-desc-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n    grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .prac-desc-ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }\n  \n  .prac-desc-pane { position:absolute; left:0; top:0; width:100%; height:100%; .prac-desc-grid3x3(); color:black;\n    \n    .prac-desc-cent { .prac-desc-ddir(cen);\n                        position:relative; left:0;  top:0;    width:100%; height:100%;\n      .prac-desc-icon { position:absolute; left:0;  top: 4%;  width:100%; height: 22%; }\n      .prac-desc-summ { position:absolute; left:3%; top:26%;; width: 94%; height: 74%;text-align:left; font-size:1.5*@descFS; } }\n    \n    .west  { .prac-desc-ddir(west);  } .north { .prac-desc-ddir(north); }\n    .east  { .prac-desc-ddir(east);  } .south { .prac-desc-ddir(south); }\n  \n    .prac-disp-desc   { position:relative; left:0;  top:0;   width:100%; height:100%; color:black;\n      .prac-disp-icon { position:absolute; left:0;  top: 3%; width:100%; height: 18%; }\n      .prac-disp-summ { position:absolute; left:3%; top:21%; width: 94%; height: 28%; text-align:left;font-size:1.5*@descFS; }\n      .prac-disp-area { position:absolute; left:3%; top:49%; width: 94%; height: 51%; } }\n  }\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */

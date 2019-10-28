@@ -1,8 +1,6 @@
 
 1. Tasks
    a. Loveland Internet
-   b. Pack Clothes
-   c. Clean Room
 
 2. Improve Intrinsic Info
    a. Descriptions:  Clean Up Info.json Know.json Wise.json Bold Labels

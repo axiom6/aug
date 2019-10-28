@@ -5,7 +5,7 @@
     <div    class="disp-desc-summ">{{dispObj['desc']}}</div>
     <div    class="disp-desc-area">
       <template v-for="areaObj in dispObj.areas">
-        <d-item :class="clArea" :icon="areaObj.icon" :name="areaObj.name" :summ="tsSumm(areaObj['desc'])" :size="2.0"></d-item>
+        <d-item :icon="areaObj.icon" :name="areaObj.name" :summ="tsSumm(areaObj['desc'])" :size="2.0"></d-item>
       </template>
     </div>
   </div>
@@ -27,15 +27,9 @@
     methods: {
       style: function (ikwObj) {
         return this.styleObj(ikwObj); },
-      clArea: function() {
-        let  klass = 'disp-desc-area'+this.iarea;
-        this.iarea = this.iarea === 3 ? 1 : this.iarea+1;
-        return klass; },
       tsSumm: function(summ) {
         return this.isStr(summ) ? summ : "This is a test description"; }
     }
-    
-    
   }
   export default Desc;
 

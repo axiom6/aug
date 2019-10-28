@@ -33,7 +33,7 @@
   
   .comp-sign-pane { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;
     color:@theme-fore; text-align:center; background-color:@theme-gray; border-radius:1.0*@signFS;
-    width:90%; height:90%;
+    width:98%; height:97%;
     i               { font-size:2.7*@signFS; }
     .comp-sign-name { font-size:1.2*@signFS;  text-align:center; } }
   

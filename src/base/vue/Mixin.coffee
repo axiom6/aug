@@ -10,7 +10,6 @@ class Mixin
   mixin:() ->
     return  {
       created: () ->
-        # console.log( 'Main.vueMixin.created() globally' )
         return
       methods: {
         isDef: (d) ->
@@ -21,6 +20,10 @@ class Mixin
           this.isDef(a) and typeof(a)!="string" and a.length? and a.length > 0
         inArray:(e,a) ->
           this.isArray(a) and a.indexOf(e) > -1
+        isChild:( key ) ->
+          a = key.charAt(0)
+          b = key.charAt(key.length-1)
+          a is a.toUpperCase() and a isnt '$' and b isnt '_'
         app:() ->
           Mixin.Main.app
         isMuse:() ->

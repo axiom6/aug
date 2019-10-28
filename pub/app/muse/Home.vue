@@ -3,16 +3,16 @@
   <div class="home-pane">
     <div class="home-head">
       <div>
-        <h1 class="home-h1">Welcome to Muse Home Page</h1>
-        <h2 class="home-h2">Choose an Application Component on the Left</h2>
+        <h1 class="theme-h1">Welcome to Muse Home Page</h1>
       </div>
     </div>
     <div  class="home-midd">
-      <h1 class="home-h1">Humanistic Practices</h1>
+      <h2 class="theme-h2">Choose an Application Component on the Left</h2>
     </div>
     <div class="home-foot">
       <div>
-        <h1 class="home-h1">Axiom Architectures</h1>
+        <h1 class="theme-h1">Humanistic Practices</h1>
+        <h1 class="theme-h1">Axiom Architectures</h1>
       </div>
     </div>
   </div>
@@ -29,12 +29,14 @@
   }
 
   import Dash from '../../../vue/dash/Dash.vue';
+  import Cube from '../../../vue/comp/Cube.vue';
   import Prin from '../../../vue/prin/Prin.vue';
   import Comp from '../../../vue/comp/Comp.vue';
   import Prac from '../../../vue/prac/Prac.vue';
   import Disp from '../../../vue/disp/Disp.vue';
   
   Home.Dash = Dash;
+  Home.Cube = Cube;
   Home.Prin = Prin;
   Home.Comp = Comp;
   Home.Prac = Prac;
@@ -48,7 +50,7 @@
   
   @import '../../../pub/css/themes/theme.less';
   
-  @homeFS:4vmin;
+  @homeFS:2.0*@themeFS;
   
   .home-grid3x1() { display:grid; grid-template-columns:1fr; grid-template-rows:20fr 60fr 20fr;
       grid-template-areas:"head" "midd" "foot"; }
@@ -65,8 +67,7 @@
     .home-foot { grid-area:foot; justify-items:center; align-items:center; text-align:center; display:grid;
       justify-self:stretch; align-self:stretch;  }
   
-    .home-h1 { justify-self:center; align-self:center; font-size:3.0*@homeFS; }
-    .home-h2 { justify-self:center; align-self:center; font-size:2.0*@homeFS; }
+
  }
  
 </style>

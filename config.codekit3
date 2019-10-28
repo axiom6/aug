@@ -5144,6 +5144,22 @@
 		"oAP": "/pub/vue/comp/Conn.js",
 		"oF": 0
 		},
+	"/vue/comp/Cube.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/comp/Cube.js",
+		"oF": 0
+		},
+	"/vue/comp/Desc.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/comp/Desc.js",
+		"oF": 0
+		},
 	"/vue/comp/Dirs.vue": {
 		"cB": 0,
 		"ft": 8192,

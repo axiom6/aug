@@ -48,10 +48,11 @@ Muse = (function() {
       var app;
       Muse.mixin = new Mixin(Muse, [
         'Home',
+        'Cube',
         'Prin',
         'Comp',
         'Prac',
-        'Disp' // Really can't use komps. Need Prac and Disp
+        'Disp' // Can't use komps
       ]);
       Vue['mixin'](Muse.mixin.mixin());
       Vue.use(Router);
@@ -82,6 +83,13 @@ Muse = (function() {
             name: 'Home',
             components: {
               Home: Home
+            }
+          },
+          {
+            path: '/cube',
+            name: 'Cube',
+            components: {
+              Cube: Home.Cube
             }
           },
           {
@@ -177,11 +185,23 @@ Muse = (function() {
       icon: "fas fa-home",
       north: "Wise",
       prev: "Wise",
+      south: "Cube",
+      next: "Cube"
+    },
+    Cube: {
+      title: 'Cube',
+      key: 'Cube',
+      route: 'Cube',
+      pracs: {},
+      ikw: false,
+      icon: "fas fa-cubes",
+      north: "Home",
+      prev: "Home",
       south: "Prin",
       next: "Prin"
     },
     Prin: {
-      title: 'Base',
+      title: 'Prin',
       key: 'Prin',
       route: 'Prin',
       pracs: {},

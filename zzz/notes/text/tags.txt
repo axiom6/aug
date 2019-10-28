@@ -12,7 +12,7 @@
 <pre> <code>
 <cite> <blockquote>
 
-<ul> <ol> <lil>
+<ul> <ol> <li>
 
 <dl><dt></dt><dd></dd></dl>
 
