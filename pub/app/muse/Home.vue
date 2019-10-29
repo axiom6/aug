@@ -1,15 +1,29 @@
 
 <template>
   <div class="home-pane">
-    <div class="home-head">
+    <div class="theme-header">
       <div>
         <h1 class="theme-h1">Welcome to Muse Home Page</h1>
+        <h2 class="theme-h2">Choose an Application Component on the Left</h2>
+
       </div>
     </div>
-    <div  class="home-midd">
-      <h2 class="theme-h2">Choose an Application Component on the Left</h2>
+    <div  class="theme-section">
+      <h3 class="theme-h3">H3</h3>
+      <h4 class="theme-h4">H4</h4>
+      <h5 class="theme-h5">H5</h5>
+      <h6 class="theme-h6">H6</h6>
+      <div class="home-list">
+        <ul class="theme-ul">
+          <li>LI 1<ul>
+            <li>LI 2<ul>
+              <li>LI 3</li></ul>
+            </li></ul>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="home-foot">
+    <div class="theme-footer">
       <div>
         <h1 class="theme-h1">Humanistic Practices</h1>
         <h1 class="theme-h1">Axiom Architectures</h1>
@@ -63,6 +77,8 @@
     
     .home-midd { grid-area:midd; position:relative; left:0; top:0; right:0; height:100%; display:grid;
       justify-self:stretch; align-self:stretch; }
+    
+    .home-list { .themeCenterSelf(); }
   
     .home-foot { grid-area:foot; justify-items:center; align-items:center; text-align:center; display:grid;
       justify-self:stretch; align-self:stretch;  }
