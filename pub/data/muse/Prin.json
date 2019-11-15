@@ -51,7 +51,7 @@
     "cells":[29,12,1,6], "dir":"en", "pcells":[25,12,1,36], "css":"ui-dims", "neg":"Repress",
     "desc": "Augmentation informed by Innovation, enhanced with strong Intent, Ethics and Reflection",
       "Augment": { "dir":"west", "name":"Augment",  "icon":"fas fa-dove", "hsv":[195,90,70], "dim":true,
-        "desc":"To increase the capability to approach a complex problem situation, to gain comprehension and to derive solutions",
+        "desc":"Capability to approach a complex problem situation, to gain comprehension and to derive solutions",
         "Approach":   { "desc":"Capability to approach a complex problem situation" },
         "Comprehend": { "desc":"How to suit particular needs" },
         "Derive":     { "desc":"The human feel for a situation combined with sophisticated methods" } },

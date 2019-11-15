@@ -2,9 +2,9 @@
 <template>
   <div      class="item-pane" :style="style()">
     <div    class="item-line" @click="doClick()">
-      <span class="item-icon"><i :class="icon"></i></span>
-      <span class="item-name">{{name}}</span>
-      <span class="item-summ" v-if="hasSumm()">{{summ}}</span>
+      <span class="item-icon" v-if="hasProp('icon')"><i :class="icon"></i></span>
+      <span class="item-name" v-if="hasProp('name')">{{name}}</span>
+      <span class="item-desc" v-if="hasProp('desc')">{{desc}}</span>
     </div>
   </div>
 </template>
@@ -13,12 +13,12 @@
   
   let Item = {
 
-    props: { icon:String, name:String, summ:String, size:Number, fnClick:Function },
+    props: { icon:String, name:String, desc:String, size:Number, fnClick:Function },
     
     methods: {
-      
-      hasSumm: function() {
-        return this.isDef(this.summ); },
+
+      hasProp: function(prop) {
+        return this.isDef(this[prop]); },
       
       doClick: function() {
         if( this.isDef(this.fnClick) ) {
@@ -39,22 +39,12 @@
   
   @import '../../pub/css/themes/theme.less';
   
-  @iconFS:2.0*@themeFS;
+  @itemFS:1.0*@themeFS;
 
-  .item-pane  {
-  
-    .item-grid1x3() { display:grid; grid-template-columns:10fr 20fr 70fr;
-      grid-template-areas:"item-area-icon item-area-name item-area-summ"; }
-
-    .item-line { .item-grid1x3(); margin-left:@iconFS; }
-  
-    .item-icon { grid-area:item-area-icon; .themeLeftSelf(); }
-    
-    .item-name { grid-area:item-area-name; .themeLeftSelf(); font-weight:bold; }
-  
-    .item-summ { grid-area:item-area-summ; .themeLeftSelf(); }
-    
-  }
-
+  .item-pane {     display:grid; height:33%;
+    .item-line {   display:inline;       justify-self:left; text-align:left;
+      .item-icon { display:inline-block; margin-left:@itemFS; }
+      .item-name { display:inline-block; margin-left:@itemFS; font-weight:bold; }
+      .item-desc { display:inline-block; margin-left:@itemFS; } } }
   
 </style>

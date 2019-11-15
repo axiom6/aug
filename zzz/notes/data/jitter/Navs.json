@@ -1,9 +1,0 @@
-
-{
-  "Home":   { "west":"Brew",   "north":"Roast",  "east":"Flavor", "south":"Drink",  "next":"Body",   "prev":"Home" },
-  "Flavor": { "west":"Drink",  "north":"Brew",   "east":"Roast",  "south":"Body",   "next":"Home",   "prev":"Home" },
-  "Roast":  { "west":"Body",   "north":"Drink",  "east":"Brew",   "south":"Home",   "next":"Flavor", "prev":"Home" },
-  "Brew":   { "west":"Home",   "north":"Body",   "east":"Drink",  "south":"Flavor", "next":"Roast",  "prev":"Home" },
-  "Drink":  { "west":"Flavor", "north":"Home",   "east":"Body",   "south":"Roast",  "next":"Brew",   "prev":"Home" },
-  "Body":   { "west":"Roast",  "north":"Flavor", "east":"Home",   "south":"Brew",   "next":"Drink",  "prev":"Home" }
-}

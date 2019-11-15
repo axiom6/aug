@@ -3,22 +3,18 @@
   <div      class="disp-desc-pane" :style="style(dispObj)">
     <d-icon class="disp-desc-icon" :icon="dispObj.icon" :name="dispObj.name" :size="5.0" ></d-icon>
     <div    class="disp-desc-summ">{{dispObj['desc']}}</div>
-    <div    class="disp-desc-area">
-      <template v-for="areaObj in dispObj.areas">
-        <d-item :icon="areaObj.icon" :name="areaObj.name" :summ="tsSumm(areaObj['desc'])" :size="2.0"></d-item>
-      </template>
-    </div>
+    <d-area class="disp-desc-area" :dispObj="dispObj" :size="2.0"></d-area>
   </div>
 </template>
 
 <script type="module">
   
   import Icon from "../elem/Icon.vue"
-  import Item from "../elem/Item.vue"
+  import Area from "../elem/Area.vue"
 
   let Desc = {
     
-    components: { 'd-icon':Icon, 'd-item':Item },
+    components: { 'd-icon':Icon, 'd-area':Area },
 
     props: { dispObj:Object, from:String },
 
@@ -27,8 +23,8 @@
     methods: {
       style: function (ikwObj) {
         return this.styleObj(ikwObj); },
-      tsSumm: function(summ) {
-        return this.isStr(summ) ? summ : "This is a test description"; }
+      toDesc: function(desc) {
+        return this.isStr(desc) ? desc : "This is a test description"; }
     }
   }
   export default Desc;

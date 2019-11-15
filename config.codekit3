@@ -2217,6 +2217,17 @@
 		"oT": 1,
 		"q": 100
 		},
+	"/pub/css/vis/EHbxO87VUAEdXZT.jpg": {
+		"ft": 16384,
+		"iS": 24212,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/pub/css/vis/EHbxO87VUAEdXZT.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
 	"/pub/css/vis/Help.png": {
 		"ft": 32768,
 		"iS": 40779,
@@ -2259,6 +2270,28 @@
 		"oF": 0,
 		"oIPL": 0,
 		"opt": 0,
+		"q": 100
+		},
+	"/pub/css/vis/monitoring_vs_observability-1024x528.png": {
+		"ft": 32768,
+		"iS": 189826,
+		"oA": 0,
+		"oAP": "/pub/css/vis/monitoring_vs_observability-1024x528.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/vis/monitoring_vs_observability_overlay-1024x539.png": {
+		"ft": 32768,
+		"iS": 66796,
+		"oA": 0,
+		"oAP": "/pub/css/vis/monitoring_vs_observability_overlay-1024x539.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
 		"q": 100
 		},
 	"/pub/css/vis/Scale.png": {
