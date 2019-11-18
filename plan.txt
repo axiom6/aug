@@ -1,15 +1,17 @@
 
 1. Tasks
-   a. Loveland Internet
+   a. Apple ID
+   b. Org paper work
+   c. Finance
 
-2. Improve Intrinsic Info
+2. Talk
+   a. Templates: Json Tags Land Desc Talk Narr
+   b. Nav scripts test suite and talks
+   c. Talks Principle Perspect Connect Practice Dispipline
+
+3. Improve Intrinsic Info
    a. Descriptions:  Clean Up Info.json Know.json Wise.json Bold Labels
    b. Landing Pages: Home Prin Info Know Wise
-
-3. Talk
-   a. Nav scripts test suite and talks
-   b. Templates: Json Tags Land Desc Talk Narr
-   c. Slides Prac Conn Disp
 
 4. Resize
    a. Turning on resize for Conns in Comp
