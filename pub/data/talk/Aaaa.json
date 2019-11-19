@@ -1,0 +1,10 @@
+{
+  "Beg":        { "banner":"Aaaa",        "type":"Sect", "icon":"fas fa-hourglass-start", "author":"Tom Flaherty", "date":"yyyy-mm-dd" },
+  "Slide1":     { "name":"Slide1",        "type":"Sect", "icon":"fas fa-circle" },
+  "Slide2":     { "name":"Slide2",        "type":"Sect", "icon":"fas fa-circle" },
+  "Slide3":     { "name":"Slide3",        "type":"Sect", "icon":"fas fa-circle" },
+  "Credits":    { "title":"Credits",      "type":"Cred", "icon":"fas fa-check-square" },
+  "References": { "title":"References",   "type":"Refs", "icon":"fas fa-book-open"    },
+  "Links":      { "title":"Links",        "type":"Link", "icon":"fas fa-link"         },
+  "End":        { "banner":"The End",     "type":"Sect", "icon":"fas fa-stopwatch"    }
+}

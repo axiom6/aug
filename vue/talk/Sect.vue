@@ -2,25 +2,31 @@
 
 <template>
   <div class="sect-pane">
-    <div v-if="hasProp('banner')" class="sect-banner" :sectObj="pracObj">{{sectObj.banner}}</div>
-    <div v-if="hasProp('title')" class="sect-title" :sectObj="pracObj">{{sectObj.title}}</div>
-    <div v-if="hasProp('author')" class="sect-author" :sectObj="pracObj">{{sectObj.author}}</div>
-    <div v-if="hasProp('desc')" class="sect-desc" :sectObj="pracObj">{{sectObj.desc}}</div>
-
+    <div    v-if="hasProp('icon')"   class="sect-icon"><i :class="getProp('icon')"></i></div>
+    <div    v-if="hasProp('banner')" class="sect-banner"><div>{{sectObj.banner}}</div></div>
+    <div    v-if="hasProp('title')"  class="sect-title">{{sectObj.title}}</div>
+    <div    v-if="hasProp('name')"   class="sect-name" >{{sectObj.name}}</div>
+    <div    v-if="hasProp('desc')"   class="sect-desc">{{getProp('desc')}}</div>
+    <t-prac v-if="isType('Prac')"    class="sect-prac" :sectObj="sectObj" :pracObj="dataObj"></t-prac>
+    <t-disp v-if="isType('Disp')"    class="sect-disp" :sectObj="sectObj" :dispObj="dataObj"></t-disp>
+    <div    v-if="hasProp('author')" class="sect-author">{{sectObj.author}}</div>
   </div>
 </template>
 
 <script type="module">
 
+  import Prac from './Prac.vue';
+  import Disp from './Disp.vue';
+
   let Sect = {
 
-    components:{  },
+    components:{ 't-prac':Prac, 't-disp':Disp },
 
-    data() { return { sectObj:null, dataObj:null } },
+    data() { return { sectObj:null, dataObj:null, type:"Sect" } },
 
     methods: {
 
-      show: function(type) {
+      isType: function(type) {
         return type===this.type; },
       
       hasProp: function(prop) {
@@ -49,15 +55,15 @@
   @sectFS:2.0*@themeFS;
   
   .sect-pane   { position:absolute; left:0; top:0; width:100%; height:100%;
-    background-color:@theme-gray; font-size:@sectFS; border-radius:0.5*@sectFS;
-    .sect-banner {}
-    .sect-author {}
-    .sect-title  {}
-    .sect-desc   {}
-    .sect-prac   {}
-    .sect-disp   {}
-  
+    background-color:@theme-back; font-size:@sectFS; border-radius:0.5*@sectFS;
+    .sect-icon   { position:absolute; left:0;   top:0;   width: 10%; height:10%; i   { .themeCenterItems(); } }
+    .sect-banner { position:absolute; left:35%; top:40%; width: 40%; height:20%; div { .themeCenterItems(); } }
+    .sect-title  { position:absolute; left:0;   top:10%; width:100%; height:10%; div { .themeCenterItems(); } }
+    .sect-name   { position:absolute; left:0;   top:10%; width:100%; height:10%; div { .themeCenterItems(); } }
+    .sect-desc   { position:absolute; left:0;   top:20%; width:100%; height:80%; div { .themeCenterItems(); } }
+    .sect-prac   { position:absolute; left:10%; top:10%; width: 80%; height:80%; }
+    .sect-disp   { position:absolute; left:10%; top:10%; width: 80%; height:80%; }
+    .sect-author { position:absolute; left:70%; top:95%; width: 30%; height: 5%; div { .themeCenterItems(); } }
   }
 
 </style>
-

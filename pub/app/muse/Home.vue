@@ -43,6 +43,7 @@
   }
 
   import Dash from '../../../vue/dash/Dash.vue';
+  import Talk from '../../../vue/talk/Talk.vue';
   import Cube from '../../../vue/comp/Cube.vue';
   import Prin from '../../../vue/prin/Prin.vue';
   import Comp from '../../../vue/comp/Comp.vue';
@@ -50,6 +51,7 @@
   import Disp from '../../../vue/disp/Disp.vue';
   
   Home.Dash = Dash;
+  Home.Talk = Talk;
   Home.Cube = Cube;
   Home.Prin = Prin;
   Home.Comp = Comp;

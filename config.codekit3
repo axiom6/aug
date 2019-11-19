@@ -1722,6 +1722,160 @@
 		"oT": 1,
 		"q": 100
 		},
+	"/pub/css/know/Clarity.png": {
+		"ft": 32768,
+		"iS": 42299,
+		"oA": 0,
+		"oAP": "/pub/css/know/Clarity.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/know/Delight.png": {
+		"ft": 32768,
+		"iS": 44357,
+		"oA": 0,
+		"oAP": "/pub/css/know/Delight.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/know/EHbxO87VUAEdXZT.jpg": {
+		"ft": 16384,
+		"iS": 24212,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/pub/css/know/EHbxO87VUAEdXZT.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"/pub/css/know/GeneralKnowledgeGraph.jpg": {
+		"ft": 16384,
+		"iS": 83199,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/pub/css/know/GeneralKnowledgeGraph.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"/pub/css/know/Help.png": {
+		"ft": 32768,
+		"iS": 40779,
+		"oA": 0,
+		"oAP": "/pub/css/know/Help.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/know/Honest.png": {
+		"ft": 32768,
+		"iS": 53507,
+		"oA": 0,
+		"oAP": "/pub/css/know/Honest.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/know/KnowGraphHype.jpg": {
+		"ft": 16384,
+		"iS": 51911,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/pub/css/know/KnowGraphHype.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"/pub/css/know/KnowGraphsScienceDataConfluence.jpg": {
+		"ft": 16384,
+		"iS": 103493,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/pub/css/know/KnowGraphsScienceDataConfluence.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"/pub/css/know/KnowlegeBase.jpg": {
+		"ft": 16384,
+		"iS": 111902,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/pub/css/know/KnowlegeBase.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"/pub/css/know/monitoring_vs_observability-1024x528.png": {
+		"ft": 32768,
+		"iS": 189826,
+		"oA": 0,
+		"oAP": "/pub/css/know/monitoring_vs_observability-1024x528.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/know/monitoring_vs_observability_overlay-1024x539.png": {
+		"ft": 32768,
+		"iS": 66796,
+		"oA": 0,
+		"oAP": "/pub/css/know/monitoring_vs_observability_overlay-1024x539.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/know/Scale.png": {
+		"ft": 32768,
+		"iS": 36676,
+		"oA": 0,
+		"oAP": "/pub/css/know/Scale.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
+	"/pub/css/know/SpatialLayers.jpg": {
+		"ft": 16384,
+		"iS": 85856,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/pub/css/know/SpatialLayers.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"/pub/css/know/Structure.png": {
+		"ft": 32768,
+		"iS": 14025,
+		"oA": 0,
+		"oAP": "/pub/css/know/Structure.png",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"oT": 1,
+		"q": 100
+		},
 	"/pub/css/math/550px-Uncertainty.svg.png": {
 		"ft": 32768,
 		"iS": 14806,
@@ -2195,127 +2349,6 @@
 		"sI": 0,
 		"sU": 0
 		},
-	"/pub/css/vis/Clarity.png": {
-		"ft": 32768,
-		"iS": 42299,
-		"oA": 0,
-		"oAP": "/pub/css/vis/Clarity.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/pub/css/vis/Delight.png": {
-		"ft": 32768,
-		"iS": 44357,
-		"oA": 0,
-		"oAP": "/pub/css/vis/Delight.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/pub/css/vis/EHbxO87VUAEdXZT.jpg": {
-		"ft": 16384,
-		"iS": 24212,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/pub/css/vis/EHbxO87VUAEdXZT.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/pub/css/vis/Help.png": {
-		"ft": 32768,
-		"iS": 40779,
-		"oA": 0,
-		"oAP": "/pub/css/vis/Help.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/pub/css/vis/Honest.png": {
-		"ft": 32768,
-		"iS": 53507,
-		"oA": 0,
-		"oAP": "/pub/css/vis/Honest.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/pub/css/vis/KnowGraphHype.jpg": {
-		"ft": 16384,
-		"iS": 51911,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/pub/css/vis/KnowGraphHype.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/pub/css/vis/KnowGraphsScienceDataConfluence.jpg": {
-		"ft": 16384,
-		"iS": 103493,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/pub/css/vis/KnowGraphsScienceDataConfluence.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/pub/css/vis/monitoring_vs_observability-1024x528.png": {
-		"ft": 32768,
-		"iS": 189826,
-		"oA": 0,
-		"oAP": "/pub/css/vis/monitoring_vs_observability-1024x528.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/pub/css/vis/monitoring_vs_observability_overlay-1024x539.png": {
-		"ft": 32768,
-		"iS": 66796,
-		"oA": 0,
-		"oAP": "/pub/css/vis/monitoring_vs_observability_overlay-1024x539.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/pub/css/vis/Scale.png": {
-		"ft": 32768,
-		"iS": 36676,
-		"oA": 0,
-		"oAP": "/pub/css/vis/Scale.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
-	"/pub/css/vis/Structure.png": {
-		"ft": 32768,
-		"iS": 14025,
-		"oA": 0,
-		"oAP": "/pub/css/vis/Structure.png",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"oT": 1,
-		"q": 100
-		},
 	"/pub/data/augm/Data.json": {
 		"ft": 524288,
 		"oA": 1,
@@ -2560,6 +2593,102 @@
 		"ft": 524288,
 		"oA": 1,
 		"oAP": "/pub/data/store/Sync-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/talk/Aaaa.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/talk/Aaaa-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/talk/Data.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/talk/Data-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/talk/Info.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/talk/Info-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/talk/Know.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/talk/Know-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/talk/Natu..json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/talk/Natu.-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/talk/Prin.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/talk/Prin-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/talk/Rows.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/talk/Rows-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/talk/Scie.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/talk/Scie-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/talk/Soft.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/talk/Soft-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/talk/Talk.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/talk/Talk-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/talk/Wise.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/talk/Wise-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/tall/Tall.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/tall/Tall-min.json",
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
@@ -4238,6 +4367,50 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/vue/talk/Disp.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/talk/Disp-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/talk/Prac.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/talk/Prac-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/talk/Sect.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/talk/Sect-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/talk/Talk.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/talk/Talk-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/vue/wood/Wood.js": {
 		"bF": 0,
 		"ft": 64,
@@ -5459,6 +5632,14 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/vue/elem/Area.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/elem/Area.js",
+		"oF": 0
+		},
 	"/vue/elem/Btns.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -5884,6 +6065,49 @@
 		"hM": 0,
 		"oA": 1,
 		"oAP": "/pub/vue/prin/Sign.js",
+		"oF": 0
+		},
+	"/vue/talk/Disp.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/talk/Disp.js",
+		"oF": 0
+		},
+	"/vue/talk/Prac.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/talk/Prac.js",
+		"oF": 0
+		},
+	"/vue/talk/Roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/talk/Roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/vue/talk/Sect.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/talk/Sect.js",
+		"oF": 0
+		},
+	"/vue/talk/Talk.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/talk/Talk.js",
 		"oF": 0
 		},
 	"/vue/wood/Roll.js": {
@@ -7563,252 +7787,44 @@
 		"oAP": "/zzz/font/css-is-awesomevariable-fonts-edition.zip",
 		"oF": 0
 		},
-	"/zzz/notes/data/augm/Data.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/augm/Data-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/augm/Geom.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/augm/Geom-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/augm/Math.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/augm/Math-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/draw/Augm.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/draw/Augm-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/draw/D3ds.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/draw/D3ds-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/draw/Data.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/draw/Data-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/draw/Hues.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/draw/Hues-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/draw/Prac.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/draw/Prac-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/draw/Prin.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/draw/Prin-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/draw/Quad.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/draw/Quad-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/draw/Tech.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/draw/Tech-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/draw/Tops.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/draw/Tops-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/jitter/Choice.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/jitter/Choice-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/jitter/Flavor.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/jitter/Flavor-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/jitter/Jitter.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/jitter/Jitter-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/jitter/Navs.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/jitter/Navs-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/jitter/Region.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/jitter/Region-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/muse/Cube.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/muse/Cube-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/muse/Info.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/muse/Info-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/muse/Know.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/muse/Know-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/muse/Muse.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/muse/Muse-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/muse/Prin.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/muse/Prin-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/muse/Rows.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/muse/Rows-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/muse/Wise.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/muse/Wise-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/store/Prac.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/store/Prac-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/store/Push.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/store/Push-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/store/Sync.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/zzz/notes/data/store/Sync-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/zzz/notes/data/text/BuildingCulture.txt": {
+	"/zzz/notes/know/Aristotle.Virtues.txt": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/notes/data/text/BuildingCulture.txt",
+		"oAP": "/zzz/notes/know/Aristotle.Virtues.txt",
 		"oF": 0
 		},
-	"/zzz/notes/data/text/Cols.txt": {
+	"/zzz/notes/know/Define.txt": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/notes/data/text/Cols.txt",
+		"oAP": "/zzz/notes/know/Define.txt",
 		"oF": 0
 		},
-	"/zzz/notes/data/text/Conn.txt": {
+	"/zzz/notes/know/Principles.Virtues.txt": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/notes/data/text/Conn.txt",
+		"oAP": "/zzz/notes/know/Principles.Virtues.txt",
 		"oF": 0
 		},
-	"/zzz/notes/data/text/Info.txt": {
+	"/zzz/notes/know/Research.ideas.txt": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
-		"oAP": "/zzz/notes/data/text/Info.txt",
+		"oAP": "/zzz/notes/know/Research.ideas.txt",
+		"oF": 0
+		},
+	"/zzz/notes/know/Research.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/know/Research.txt",
 		"oF": 0
 		},
 	"/zzz/notes/prin/AS.Interventions.txt": {
@@ -7819,12 +7835,44 @@
 		"oAP": "/zzz/notes/prin/AS.Interventions.txt",
 		"oF": 0
 		},
+	"/zzz/notes/prin/BuildingCulture.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/prin/BuildingCulture.txt",
+		"oF": 0
+		},
+	"/zzz/notes/prin/Cols.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/prin/Cols.txt",
+		"oF": 0
+		},
+	"/zzz/notes/prin/Conn.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/prin/Conn.txt",
+		"oF": 0
+		},
 	"/zzz/notes/prin/HongKong.txt": {
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
 		"oA": 0,
 		"oAP": "/zzz/notes/prin/HongKong.txt",
+		"oF": 0
+		},
+	"/zzz/notes/prin/Info.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/prin/Info.txt",
 		"oF": 0
 		},
 	"/zzz/notes/prin/Note.txt": {

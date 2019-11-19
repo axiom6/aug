@@ -48,6 +48,7 @@ Muse = (function() {
       var app;
       Muse.mixin = new Mixin(Muse, [
         'Home',
+        'Talk',
         'Cube',
         'Prin',
         'Comp',
@@ -83,6 +84,13 @@ Muse = (function() {
             name: 'Home',
             components: {
               Home: Home
+            }
+          },
+          {
+            path: '/talk',
+            name: 'Talk',
+            components: {
+              Talk: Home.Talk
             }
           },
           {
@@ -136,6 +144,12 @@ Muse = (function() {
   };
 
   Muse.Batch = {
+    Talk: {
+      url: 'talk/Talk.json',
+      data: null,
+      type: 'Pack',
+      plane: 'Talk'
+    },
     Prin: {
       url: 'muse/Prin.json',
       data: null,
@@ -170,7 +184,7 @@ Muse = (function() {
       url: 'muse/Data.json',
       data: null,
       type: 'Pack',
-      plane: 'Data'
+      plane: 'Info'
     }
   };
 
@@ -188,6 +202,18 @@ Muse = (function() {
       south: "Cube",
       next: "Cube"
     },
+    Talk: {
+      title: 'Talk',
+      key: 'Talk',
+      route: 'Talk',
+      pracs: {},
+      ikw: true,
+      icon: "fas fa-circle",
+      north: "Home",
+      prev: "Home",
+      south: "Cube",
+      next: "PrCubein"
+    },
     Cube: {
       title: 'Cube',
       key: 'Cube',
@@ -195,8 +221,8 @@ Muse = (function() {
       pracs: {},
       ikw: false,
       icon: "fas fa-cubes",
-      north: "Home",
-      prev: "Home",
+      north: "Talk",
+      prev: "Talk",
       south: "Prin",
       next: "Prin"
     },

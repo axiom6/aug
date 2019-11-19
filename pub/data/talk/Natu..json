@@ -1,0 +1,22 @@
+{
+  "Beg":       { "banner":"Nature",   "type":"Sect", "icon":"fas fa-hourglass-start", "author":"Tom Flaherty", "date":"yyyy-mm-dd" },
+  "Nature":    { "name":"Nature",     "type":"Prac",
+    "Habitat":   { "name":"Observe",    "type":"Disp" },
+    "Complex":   { "name":"Theory",     "type":"Disp" },
+    "Brain":     { "name":"Brain",      "type":"Disp" },
+    "Flow":      { "name":"Flow",       "type":"Disp" } },
+  "Create":    { "name":"Create",     "type":"Prac",
+    "Play":      { "name":"Play",       "type":"Disp" },
+    "Originate": { "name":"Originate",  "type":"Disp" },
+    "Aesthetic": { "name":"Aesthetic",  "type":"Disp" },
+    "Channel":   { "name":"Channel",    "type":"Disp" } },
+  "Inspire":   { "name":"Inspire",    "type":"Prac",
+    "Nurture":   { "name":"Nurture",    "type":"Disp" },
+    "Imagine":   { "name":"Imagine",    "type":"Disp" },
+    "Reveal":    { "name":"Reveal",     "type":"Disp" },
+    "Relate":    { "name":"Relate",     "type":"Disp" } },
+  "Credits":   { "title":"Credits",    "type":"Cred", "icon":"fas fa-check-square" },
+  "References":{ "title":"References", "type":"Refs", "icon":"fas fa-book-open"    },
+  "Links":     { "title":"Links",      "type":"Link", "icon":"fas fa-link"         },
+  "End":       { "banner":"The End",   "type":"Sect", "icon":"fas fa-stopwatch"    }
+}

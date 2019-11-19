@@ -9,6 +9,7 @@
     "muse":   "rollup --config pub/app/muse/Roll.js",
     "jitter": "rollup --config pub/app/jitter/Roll.js",
     "augm":   "rollup --config pub/app/augm/Roll.js",
+    "talk": "rollup --config vue/talk/Roll.js",
     "prin": "rollup --config vue/prin/Roll.js",
     "comp": "rollup --config vue/comp/Roll.js",
     "prac": "rollup --config vue/prac/Roll.js",

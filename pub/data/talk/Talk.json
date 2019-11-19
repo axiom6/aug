@@ -1,0 +1,11 @@
+{
+  "Principles":   { "name":"Principles",   "sect":"talk/Prin.json", "data":"Prin", "icon": "fas fa-snowflake"   },
+  "Perspectives": { "name":"Perspectives", "sect":"talk/Rows.json", "data":"Rows", "icon": "fas fa-sitemap"     },
+  "Information":  { "name":"Information",  "sect":"talk/Info.json", "data":"Info", "icon": "fas fa-th"          },
+  "Knowledge":    { "name":"Knowledge",    "sect":"talk/Know.json", "data":"Know", "icon": "fas fa-university"  },
+  "Wisdom":       { "name":"Wisdom",       "sect":"talk/Wise.json", "data":"Wise", "icon": "fab fa-tripadvisor" },
+  "Software":     { "name":"Software",     "sect":"talk/Soft.json", "data":"Info", "icon": "fas fa-code"        },
+  "Data":         { "name":"Data",         "sect":"talk/Data.json", "data":"Data", "icon": "fax fa-database"    },
+  "Science":      { "name":"Science",      "sect":"talk/Scie.json", "data":"Know", "icon": "fas fa-flask"       },
+  "Nature":       { "name":"Nature",       "sect":"talk/Natu.json", "data":"Wise", "icon": "fab fa-pagelines"   }
+}

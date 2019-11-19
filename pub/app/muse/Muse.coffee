@@ -26,12 +26,13 @@ class Muse
     return
 
   Muse.Batch = {
+    Talk: { url:'talk/Talk.json', data:null, type:'Pack', plane:'Talk' }
     Prin: { url:'muse/Prin.json', data:null, type:'Pack', plane:'Prin' }
     Rows: { url:'muse/Rows.json', data:null, type:'Pack', plane:'Rows' }
     Info: { url:'muse/Info.json', data:null, type:'Pack', plane:'Info' }
     Know: { url:'muse/Know.json', data:null, type:'Pack', plane:'Know' }
     Wise: { url:'muse/Wise.json', data:null, type:'Pack', plane:'Wise' },
-    Data: { url:'muse/Data.json', data:null, type:'Pack', plane:'Data' } }
+    Data: { url:'muse/Data.json', data:null, type:'Pack', plane:'Info' } }
 
   # 2. Initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
   Muse.init =   ( batch ) ->
@@ -51,7 +52,7 @@ class Muse
 
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Muse.vue = () ->
-    Muse.mixin = new Mixin( Muse, ['Home','Cube','Prin','Comp','Prac','Disp'] ) # Can't use komps
+    Muse.mixin = new Mixin( Muse, ['Home','Talk','Cube','Prin','Comp','Prac','Disp'] ) # Can't use komps
     Vue['mixin']( Muse.mixin.mixin() )
     Vue.use(Router)
     app = new Vue( { router:Muse.router(), render: (h) -> h(Home.Dash) } );
@@ -70,6 +71,7 @@ class Muse
     new Router( {
       routes:[
         { path: '/',     name:'Home', components:{ Home: Home      } },
+        { path: '/talk', name:'Talk', components:{ Talk: Home.Talk } },
         { path: '/cube', name:'Cube', components:{ Cube: Home.Cube } },
         { path: '/prin', name:'Prin', components:{ Prin: Home.Prin } },
         { path: '/comp', name:'Comp', components:{ Comp: Home.Comp } },
@@ -81,8 +83,10 @@ class Muse
   Muse.komps = {
     Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
     north:"Wise", prev:"Wise", south:"Cube",  next:"Cube"  }
+    Talk:{ title:'Talk', key:'Talk', route:'Talk', pracs:{}, ikw:true,  icon:"fas fa-circle",
+    north:"Home", prev:"Home", south:"Cube",  next:"PrCubein"  }
     Cube:{ title:'Cube', key:'Cube', route:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes",
-    north:"Home", prev:"Home", south:"Prin",  next:"Prin"  }
+    north:"Talk", prev:"Talk", south:"Prin",  next:"Prin"  }
     Prin:{ title:'Prin', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",
     north:"Home", prev:"Home", south:"Info",  next:"Info" }
     Info:{ title:'Info', key:'Info', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-th",

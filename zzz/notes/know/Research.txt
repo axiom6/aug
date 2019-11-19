@@ -35,4 +35,10 @@ Humanity     Science       Meaning
   Social       Life          Moral
   Perform      Social        History
 
+Science
+  Observe
+  Theory
+  Research
+  Apply
+
   
