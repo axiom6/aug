@@ -14,7 +14,7 @@
 
     methods: {
       doDisp: function (dispKey) {
-        let obj = { route:"Disp", dispKey:dispKey }; // pracKey:this.pracObj.name,
+        let obj = { route:"Disp", dispKey:dispKey };
         this.nav().pub( obj ); } } }
   
   export default Disp;

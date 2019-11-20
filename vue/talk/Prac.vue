@@ -16,21 +16,17 @@
   let Prac = {
 
     components:{ 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },
+
+    props: { sectObj:Object, pracObj:Object },
     
-    data() { return { pracObj:null, type:'Dirs' } },
+    data() { return {  type:'Dirs' } },
     
     methods: {
       
       show:function( type ) {
         return type===this.type; },
       
-      onNav: function( obj ) { }
-      
-      },
-
-    mounted: function () {
-      this.subscribe(  "Talk", 'Prac.vue', (obj) => {
-        this.onNav(obj); } ); }
+      }
   }
   
   export default Prac;

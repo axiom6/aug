@@ -38,7 +38,7 @@ class Muse
   Muse.init =   ( batch ) ->
     Muse.Batch  = batch # Not necessary here, but assigned for compatibilitry
     Muse.app    = 'Muse'
-    subjects    = ["Nav"]
+    subjects    = ["Nav","Talk","Sect"]
     infoSpec    = { subscribe:false, publish:false, subjects:subjects}
     Muse.stream = new Stream( subjects, infoSpec )
     Muse.nav    = new Nav( Muse.stream, batch, Muse.komps, true )
@@ -52,7 +52,7 @@ class Muse
 
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Muse.vue = () ->
-    Muse.mixin = new Mixin( Muse, ['Home','Talk','Cube','Prin','Comp','Prac','Disp'] ) # Can't use komps
+    Muse.mixin = new Mixin( Muse, ['Home','Talk','Sect','Cube','Prin','Comp','Prac','Disp'] ) # Can't use komps
     Vue['mixin']( Muse.mixin.mixin() )
     Vue.use(Router)
     app = new Vue( { router:Muse.router(), render: (h) -> h(Home.Dash) } );
@@ -72,6 +72,7 @@ class Muse
       routes:[
         { path: '/',     name:'Home', components:{ Home: Home      } },
         { path: '/talk', name:'Talk', components:{ Talk: Home.Talk } },
+        { path: '/sect', name:'Sect', components:{ Talk: Home.Sect } },
         { path: '/cube', name:'Cube', components:{ Cube: Home.Cube } },
         { path: '/prin', name:'Prin', components:{ Prin: Home.Prin } },
         { path: '/comp', name:'Comp', components:{ Comp: Home.Comp } },

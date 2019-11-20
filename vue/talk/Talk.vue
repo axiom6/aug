@@ -1,39 +1,36 @@
 
-
-
 <template>
   <div class="talk-pane">
+    <template v-for="talkObj in talkObjs">
+      <div class="talk-talk" @click="doTalk(talkObj.name)">
+        <i   :class="talkObj.icon"></i>
+        <span class="talk-name">{{talkObj.name}}</span>
+      </div>
+    </template>
   </div>
 </template>
 
 <script type="module">
 
-  import Sect from './Sect.vue';
-
   let Talk = {
 
-    components:{ 't-prac':Prac, 't-disp':Disp },
-
-    data() { return { sectObj:null, dataObj:null, type:"Sect" } },
+    data() { return { talkObjs:null, talkObj:null } },
 
     methods: {
 
-      isType: function(type) {
-        return type===this.type; },
+      onTalk: function () {
+          this.talkObjs = this.compObject('Talk'); },
 
-      hasProp: function(prop) {
-        this.isDef(this.sectObj[prop]) || this.isDef(this.dataObj[prop]); },
-
-      getProp: function(prop) {
-        return this.isDef(this.sectObj[prop]) ? this.sectObj[prop] : this.dataObj[prop]; },
-
-      onNav: function( obj ) { }
-
+      doTalk: function (talkKey) {
+        this.talkObj = this.talkObjs[talkKey];
+        let obj = { source:"Talk", route:"Talk", pracKey:talkKey };
+        this.nav().pub( obj ); },
+      
     },
 
-    mounted: function () {
-      this.subscribe(  "Talk", 'Prac.vue', (obj) => {
-        this.onNav(obj); } ); }
+    beforeMount: function() {
+      this.onTalk(); }
+    
   }
 
   export default Talk;
@@ -46,7 +43,9 @@
   
   @sectFS:2.0*@themeFS;
   
-  .talk-pane   { position:absolute; left:0; top:0; width:100%; height:100%;
-    background-color:@theme-back; font-size:@sectFS; border-radius:0.5*@sectFS; }
+  .talk-pane   { position:absolute; left:0; top:15%; width:100%; height:70%;
+    color:@theme-fore; background-color:@theme-back; font-size:@sectFS; .themeCenterItems();
+    .talk-talk {
+      .talk-name { } } }
 
 </style>

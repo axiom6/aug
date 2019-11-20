@@ -25,8 +25,6 @@
 </template>
 
 <script type="module">
-  
-  // :key="pracObj.name" :ref="pracObj.name"
 
   import Tabs from '../elem/Tabs.vue';
   import Sign from './Sign.vue';

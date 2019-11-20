@@ -28,7 +28,7 @@ Muse = (function() {
       var infoSpec, subjects;
       Muse.Batch = batch; // Not necessary here, but assigned for compatibilitry
       Muse.app = 'Muse';
-      subjects = ["Nav"];
+      subjects = ["Nav", "Talk", "Sect"];
       infoSpec = {
         subscribe: false,
         publish: false,
@@ -49,6 +49,7 @@ Muse = (function() {
       Muse.mixin = new Mixin(Muse, [
         'Home',
         'Talk',
+        'Sect',
         'Cube',
         'Prin',
         'Comp',
@@ -91,6 +92,13 @@ Muse = (function() {
             name: 'Talk',
             components: {
               Talk: Home.Talk
+            }
+          },
+          {
+            path: '/sect',
+            name: 'Sect',
+            components: {
+              Talk: Home.Sect
             }
           },
           {
