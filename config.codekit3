@@ -2605,6 +2605,14 @@
 		"oO": 0,
 		"oS": 1
 		},
+	"/pub/data/talk/Conn.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/talk/Conn-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
 	"/pub/data/talk/Data.json": {
 		"ft": 524288,
 		"oA": 1,
@@ -2629,10 +2637,10 @@
 		"oO": 0,
 		"oS": 1
 		},
-	"/pub/data/talk/Natu..json": {
+	"/pub/data/talk/Natu.json": {
 		"ft": 524288,
 		"oA": 1,
-		"oAP": "/pub/data/talk/Natu.-min.json",
+		"oAP": "/pub/data/talk/Natu-min.json",
 		"oF": 0,
 		"oO": 0,
 		"oS": 1

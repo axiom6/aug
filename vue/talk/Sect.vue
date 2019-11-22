@@ -17,7 +17,6 @@
 
   import Prac from './Prac.vue';
   import Disp from './Disp.vue';
-  import Data from '../../pub/base/util/Data.js';
 
   let Sect = {
 
@@ -35,37 +34,32 @@
 
       getProp: function(prop) {
         return this.isDef(this.sectObj[prop]) ? this.sectObj[prop] : this.dataObj[prop]; },
-      
-      asyncSects: function( url ) {
-        let callback = (sectObjs) => {
-          console.log( 'Sect.asyncSects()', sectObjs );
-          this.sectObjs = sectObjs; };
-        Data.asyncJSON( url, callback ); },
 
-      onTalk: function(talkKey) {
-        console.log( 'Sect.onTalk()', talkKey );
+      onNav: function (obj) {
+        if(      this.nav().isMyNav( obj, 'Talk' ) ) {
+          this.onTalk( obj.pracKey ); }
+        else if( this.nav().isMyNav( obj, 'Sect' ) ) {
+          this.onSect( obj.dispKey ); } },
+
+      onTalk: function( talkKey ) {
         this.talkObjs  = this.compObject('Talk');
-        this.talkObj   = this.talkObjs(talkKey);
-        this.asyncSects( this.talkObj.url ); },
+        this.talkObj   = this.talkObjs[talkKey];
+        this.sectObjs  = this.compObject(this.talkObj.sect); },
 
-      onSect: function( sectKey, dispKey ) {
-        this.sectObj = this.sectObjs[sectKey];
+      onSect: function( sectKey ) {
+        this.sectObj   = this.sectObjs[sectKey];
         console.log( 'Sect.onSect()', sectKey, this.sectObj );
         this.dataObj = null;
         if( this.sectObj.type==='Prac' ) {
-            this.dataObj = this.pracObject( this.talkObj.compKey, this.sectObj.name ) }
-        if( this.sectObj.type==='Disp' ) {
-            this.dataObj = this.dispObject( this.talkObj.compKey, this.sectObj.name, dispKey ) } },
+            this.dataObj = this.pracObject( this.talkObj.data, this.sectObj.name ) } },
+     // if( this.sectObj.type==='Disp' ) {
+     //     this.dataObj = this.dispObject( this.talkObj.data, this.sectObj.name, dispKey ) }
+     
     },
 
-    beforeMount: function() {
-      this.onTalk(); },
-
     mounted: function () {
-      this.subscribe(  "Talk", 'Sect.vue', (obj) => {
-        this.onTalk( obj.pracKey ); } );
-      this.subscribe(  "Sect", 'Sect.vue', (obj) => {
-        this.onSect( obj.pracKey, obj.dispKey ); } ); }
+      this.subscribe(  "Nav", 'Sect.vue', (obj) => {
+        this.onNav( obj ); } ); }
   }
 
   export default Sect;

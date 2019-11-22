@@ -4,11 +4,8 @@ var Data,
 import Util from './Util.js';
 
 Data = class Data {
-  static refine(data, type) {
+  static refine(data) {
     var akey, area, base, bkey, disp, dkey, ikey, item, pkey, prac;
-    if (type === 'None') {
-      return data;
-    }
     data.pracs = {};
     for (pkey in data) {
       prac = data[pkey];
@@ -97,7 +94,7 @@ Data = class Data {
       innvs[key] = Object.assign({}, pracs[key]);
       innvs[key].plane = innv;
     }
-    Data.refine(innvs, 'Pack');
+    Data.refine(innvs);
   }
 
   // ---- Read JSON with batch async
@@ -125,8 +122,7 @@ Data = class Data {
   // "Access-Control-Request-Headers": "*", "Access-Control-Request-Method": "*"
   static batchJSON(obj, batch, callback, refine = null) {
     var opt, url;
-    url = obj.type === 'Font' ? obj.url : Data.toUrl(obj.url);
-    // console.log( 'Data.batchJSON', obj.url, url )
+    url = Data.toUrl(obj.url);
     opt = {
       mode: 'no-cors',
       headers: {
@@ -136,7 +132,7 @@ Data = class Data {
     fetch(url, opt).then((response) => {
       return response.json();
     }).then((data) => {
-      obj['data'] = Util.isFunc(refine) ? refine(data, obj.type) : data;
+      obj['data'] = Util.isFunc(refine) ? refine(data) : data;
       if (Data.batchComplete(batch)) {
         return callback(batch);
       }
@@ -169,11 +165,14 @@ Data = class Data {
   }
 
   static toUrl(url) {
-    //  console.log( 'Data.toUrl()', Data.local+url )
-    if (window.location.href.includes('localhost')) {
-      return Data.local + url;
+    if (!url.startsWith('../')) {
+      if (window.location.href.includes('localhost')) {
+        return Data.local + url;
+      } else {
+        return Data.hosted + url;
+      }
     } else {
-      return Data.hosted + url;
+      return url;
     }
   }
 

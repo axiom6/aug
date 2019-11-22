@@ -4,8 +4,7 @@ import Util from './Util.js'
 
 class Data
 
-  @refine:( data, type ) ->
-    return  data if type is 'None'
+  @refine:( data ) ->
     data.pracs = {}
     for pkey, prac of data when Util.isChild(pkey)
       data.pracs[pkey] = prac
@@ -48,7 +47,7 @@ class Data
     for key in ['Team','Discover','Adapt','Benefit','Change','Govern']
       innvs[key] = Object.assign( {}, pracs[key] )
       innvs[key].plane = innv
-    Data.refine( innvs, 'Pack' )
+    Data.refine( innvs )
     return
 
   # ---- Read JSON with batch async
@@ -66,14 +65,13 @@ class Data
   # "Access-Control-Request-Headers": "*", "Access-Control-Request-Method": "*"
 
   @batchJSON:( obj, batch, callback, refine=null ) ->
-    url = if obj.type is 'Font' then obj.url else Data.toUrl(obj.url)
-    # console.log( 'Data.batchJSON', obj.url, url )
+    url = Data.toUrl(obj.url)
     opt = { mode:'no-cors', headers:{ 'Content-Type':'application/json' } }
     fetch( url, opt )
       .then( (response) =>
         return response.json() )
       .then( (data) =>
-        obj['data']     = if Util.isFunc(refine) then refine( data, obj.type ) else data
+        obj['data']     = if Util.isFunc(refine) then refine( data ) else data
         callback( batch ) if Data.batchComplete( batch ) )
       .catch( (error) =>
         console.error( "Data.batchJSON()", { url:url, error:error } ) )
@@ -95,8 +93,10 @@ class Data
     batch[plane].data[plane]
 
   @toUrl:(url) ->
-    #  console.log( 'Data.toUrl()', Data.local+url )
-    if window.location.href.includes('localhost') then Data.local+url else Data.hosted+url
+    if not url.startsWith('../')
+      if window.location.href.includes('localhost') then Data.local+url else Data.hosted+url
+    else
+      url
            
   # ------ Quick JSON read ------
 

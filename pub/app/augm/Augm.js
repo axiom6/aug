@@ -204,63 +204,43 @@ Augm = (function() {
   Augm.Batch = {
     Math: {
       url: 'augm/Math.json',
-      data: null,
-      type: 'Pack',
-      plane: 'Math'
+      data: null
     },
     Geom: {
       url: 'augm/Geom.json',
-      data: null,
-      type: 'Pack',
-      plane: 'Geom'
+      data: null
     },
     Data: {
       url: 'augm/Data.json',
-      data: null,
-      type: 'Pack',
-      plane: 'Data'
+      data: null
     },
     Prin: {
       url: 'muse/Prin.json',
-      data: null,
-      type: 'Pack',
-      plane: 'Prin'
+      data: null
     },
     Rows: {
       url: 'muse/Rows.json',
-      data: null,
-      type: 'Pack',
-      plane: 'Rows'
+      data: null
     },
     Info: {
       url: 'muse/Info.json',
-      data: null,
-      type: 'Pack',
-      plane: 'Info'
+      data: null
     },
     Know: {
       url: 'muse/Know.json',
-      data: null,
-      type: 'Pack',
-      plane: 'Know'
+      data: null
     },
     Wise: {
       url: 'muse/Wise.json',
-      data: null,
-      type: 'Pack',
-      plane: 'Wise'
+      data: null
     },
     Cube: {
       url: 'muse/Cube.json',
-      data: null,
-      type: 'Pack',
-      plane: 'Cube'
+      data: null
     },
     Font: {
       url: Augm.FontUrl,
-      data: null,
-      type: 'Font',
-      plane: 'Cube'
+      data: null
     }
   };
 

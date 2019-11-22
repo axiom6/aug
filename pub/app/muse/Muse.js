@@ -28,7 +28,7 @@ Muse = (function() {
       var infoSpec, subjects;
       Muse.Batch = batch; // Not necessary here, but assigned for compatibilitry
       Muse.app = 'Muse';
-      subjects = ["Nav", "Talk", "Sect"];
+      subjects = ["Nav"];
       infoSpec = {
         subscribe: false,
         publish: false,
@@ -152,47 +152,73 @@ Muse = (function() {
   };
 
   Muse.Batch = {
-    Talk: {
-      url: 'talk/Talk.json',
-      data: null,
-      type: 'Pack',
-      plane: 'Talk'
-    },
     Prin: {
       url: 'muse/Prin.json',
-      data: null,
-      type: 'Pack',
-      plane: 'Prin'
+      data: null
     },
     Rows: {
       url: 'muse/Rows.json',
-      data: null,
-      type: 'Pack',
-      plane: 'Rows'
+      data: null
     },
     Info: {
       url: 'muse/Info.json',
-      data: null,
-      type: 'Pack',
-      plane: 'Info'
+      data: null
     },
     Know: {
       url: 'muse/Know.json',
-      data: null,
-      type: 'Pack',
-      plane: 'Know'
+      data: null
     },
     Wise: {
       url: 'muse/Wise.json',
-      data: null,
-      type: 'Pack',
-      plane: 'Wise'
+      data: null
     },
     Data: {
       url: 'muse/Data.json',
-      data: null,
-      type: 'Pack',
-      plane: 'Info'
+      data: null
+    },
+    Talk: {
+      url: 'talk/Talk.json',
+      data: null
+    },
+    PrinTalk: {
+      url: 'talk/Prin.json',
+      data: null
+    },
+    RowsTalk: {
+      url: 'talk/Rows.json',
+      data: null
+    },
+    ConnTalk: {
+      url: 'talk/Conn.json',
+      data: null
+    },
+    InfoTalk: {
+      url: 'talk/Info.json',
+      data: null
+    },
+    KnowTalk: {
+      url: 'talk/Know.json',
+      data: null
+    },
+    WiseTalk: {
+      url: 'talk/Wise.json',
+      data: null
+    },
+    SoftTalk: {
+      url: 'talk/Soft.json',
+      data: null
+    },
+    DataTalk: {
+      url: 'talk/Data.json',
+      data: null
+    },
+    ScieTalk: {
+      url: 'talk/Scie.json',
+      data: null
+    },
+    NatuTalk: {
+      url: 'talk/Natu.json',
+      data: null
     }
   };
 

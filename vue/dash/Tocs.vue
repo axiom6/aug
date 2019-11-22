@@ -25,8 +25,6 @@
   
   let Tocs = {
     
-    // Hacks: 1.kompKey==='Info' 2.compKey==='Data' 3.this.isPageKeyComp('Data')
-    
     data: function() {
       return { komps:{}, compPracs:{}, compKey:'Home', pracKey:'None', dispKey:'None' } },
     
@@ -50,7 +48,8 @@
         this.pub( { route:route, pracKey:pracKey, source:'Toc' } ); },
       doDisp: function(dispKey) {
         this.dispKey = dispKey;
-        this.pub( { route:'Disp', dispKey:dispKey, source:'Toc' } ); },
+        let route    = this.compKey==='Talk' ? 'Sect' : 'Disp';
+        this.pub( { route:route, dispKey:dispKey, source:'Toc' } ); },
       pub: function(obj) {
         this.nav().dirTabs = false;
         this.nav().pub(obj); },

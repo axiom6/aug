@@ -28,16 +28,16 @@ class Augm
   Augm.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json"
 
   Augm.Batch = {
-    Math: { url:'augm/Math.json', data:null, type:'Pack', plane:'Math' }
-    Geom: { url:'augm/Geom.json', data:null, type:'Pack', plane:'Geom' }
-    Data: { url:'augm/Data.json', data:null, type:'Pack', plane:'Data' }
-    Prin: { url:'muse/Prin.json', data:null, type:'Pack', plane:'Prin' }
-    Rows: { url:'muse/Rows.json', data:null, type:'Pack', plane:'Rows' }
-    Info: { url:'muse/Info.json', data:null, type:'Pack', plane:'Info' }
-    Know: { url:'muse/Know.json', data:null, type:'Pack', plane:'Know' }
-    Wise: { url:'muse/Wise.json', data:null, type:'Pack', plane:'Wise' }
-    Cube: { url:'muse/Cube.json', data:null, type:'Pack', plane:'Cube' }
-    Font: { url:Augm.FontUrl,     data:null, type:'Font', plane:'Cube' } }
+    Math: { url:'augm/Math.json', data:null }
+    Geom: { url:'augm/Geom.json', data:null }
+    Data: { url:'augm/Data.json', data:null }
+    Prin: { url:'muse/Prin.json', data:null }
+    Rows: { url:'muse/Rows.json', data:null }
+    Info: { url:'muse/Info.json', data:null }
+    Know: { url:'muse/Know.json', data:null }
+    Wise: { url:'muse/Wise.json', data:null }
+    Cube: { url:'muse/Cube.json', data:null }
+    Font: { url:Augm.FontUrl,     data:null } }
 
   # 2. Initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
   Augm.init =   ( batch ) ->
