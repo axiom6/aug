@@ -164,14 +164,8 @@ Nav = class Nav {
         case 'Disp':
           this.dirDisp(direct);
           break;
-        case 'Talk':
-          this.dirTalk(direct);
-          break;
         case 'Sect':
           this.dirSect(direct);
-          break;
-        case 'Pres':
-          this.dirPres(direct);
           break;
         default:
           this.dirComp(direct);
@@ -246,13 +240,6 @@ Nav = class Nav {
     } else {
       this.log(msg, `Missing adjacent displine for ${dir} ${this.compKey} ${this.pracKey}`);
     }
-  }
-
-  dirTalk(dir) {
-    var msg;
-    msg = {};
-    msg.source = `${'Nav.dirTalk'}(${dir})`;
-    this.pub(msg);
   }
 
   dirSect(dir) {

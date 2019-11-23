@@ -96,9 +96,7 @@ class Nav
         when 'Comp' then @dirComp( direct )
         when 'Prac' then @dirPrac( direct )
         when 'Disp' then @dirDisp( direct )
-        when 'Talk' then @dirTalk( direct )
         when 'Sect' then @dirSect( direct )
-        when 'Pres' then @dirPres( direct )
         else             @dirComp( direct )
     else
       @dirComp( direct )
@@ -154,12 +152,6 @@ class Nav
        @pub( msg )
     else
        @log( msg, "Missing adjacent displine for #{dir} #{@compKey} #{@pracKey}" )
-    return
-
-  dirTalk:( dir ) ->
-    msg = {}
-    msg.source = "#{'Nav.dirTalk'}(#{dir})"
-    @pub( msg )
     return
 
   dirSect:( dir ) ->

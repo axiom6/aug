@@ -44,7 +44,7 @@
       doPrac: function(pracKey) {
         this.pracKey = pracKey;
         let route    = this.isMuse()         ? 'Prac' : pracKey;
-            route    = this.compKey==='Talk' ? 'Talk' : route;
+            route    = this.compKey==='Talk' ? 'Sect' : route;
         this.pub( { route:route, pracKey:pracKey, source:'Toc' } ); },
       doDisp: function(dispKey) {
         this.dispKey = dispKey;

@@ -1,7 +1,7 @@
 
 
 <template>
-  <div class="sect-pane">
+  <div      v-if="sectObj!==null"    class="sect-pane">
     <div    v-if="hasProp('icon')"   class="sect-icon"><i :class="getProp('icon')"></i></div>
     <div    v-if="hasProp('banner')" class="sect-banner"><div>{{sectObj.banner}}</div></div>
     <div    v-if="hasProp('title')"  class="sect-title">{{sectObj.title}}</div>
@@ -30,41 +30,31 @@
         return type===this.type; },
       
       hasProp: function(prop) {
-        this.isDef(this.sectObj[prop]) || this.isDef(this.dataObj[prop]); },
+        console.log( 'Sect.hasProp()',
+          { prop:prop, sectObj:this.isDef(this.sectObj), has:this.isDef(this.sectObj[prop]) } );
+        this.isDef(this.sectObj) && this.isDef(this.sectObj[prop]) }, // || this.isDef(this.dataObj[prop]); },
 
       getProp: function(prop) {
         return this.isDef(this.sectObj[prop]) ? this.sectObj[prop] : this.dataObj[prop]; },
 
       onNav: function (obj) {
-        if(      this.nav().isMyNav( obj, 'Talk' ) ) {
-          this.onTalk( obj.pracKey ); }
-        else if( this.nav().isMyNav( obj, 'Sect' ) ) {
-          this.onSect( obj.dispKey ); }
-        else if( this.nav().isMyNav( obj, 'Pres' ) ) {
-          this.onPres( obj.pageKey ); } },
-
-      onTalk: function( talkKey ) {
-        this.talkObjs  = this.compObject('Talk');
-        this.talkObj   = this.talkObjs[talkKey];
-        this.sectObjs  = this.compObject(this.talkObj.sect);
-        console.log( 'Sect.onTalk()', talkKey, this.talkObj, this.sectObjs ); },
-
-      onSect: function( sectKey ) {
-        this.sectObj = this.sectObjs[sectKey];
-        this.dataObj = null;
-        if( this.sectObj.type==='Prac' ) {
-            this.dataObj = this.pracObject( this.talkObj.data, this.sectObj.name ) }
-        console.log( 'Sect.onSect()', sectKey, this.sectObj, this.dataObj ); },
-     // if( this.sectObj.type==='Disp' ) {
-     //     this.dataObj = this.dispObject( this.talkObj.data, this.sectObj.name, dispKey ) }
-
-      onPres: function( presKey ) {
-        this.sectObj   = this.sectObjs[sectKey];
-        this.dataObj = null;
-        if( this.sectObj.type==='Prac' ) {
-          this.dataObj = this.pracObject( this.talkObj.data, this.sectObj.name ) }
-        console.log( 'Sect.onSect()', sectKey, this.sectObj, this.dataObj ); },
-     
+        if( this.nav().isMyNav( obj, 'Sect' ) ) {
+            this.onSect( obj.pracKey, obj.dispKey, obj.pageKey ); } },
+      
+      onSect: function( talkKey, dispKey, pageKey ) {
+        this.$nextTick( function() {
+          console.log( 'Sect.onSect() 1', { talkKey:talkKey, dispKey:dispKey, pageKey:pageKey } );
+          this.talkObjs  = this.compObject('Talk');
+          this.talkObj   = this.talkObjs[talkKey];
+          this.sectObjs  = this.compObject(this.talkObj.sect);
+          let  sectKey   = dispKey==='None' ? 'Beg' : dispKey;
+          this.sectObj   = this.sectObjs[sectKey];
+          console.log( 'Sect.onSect() 2', { talkKey:talkKey, sectKey:sectKey, sectObjs:this.sectObjs, sectObj:this.sectObj } );
+          this.dataObj   = null;
+          if( this.sectObj.type==='Prac' ) {
+              this.dataObj = this.pracObject( this.talkObj.data, this.sectObj.name ) }
+          else if( this.sectObj.type==='Disp' && pageKey!=='None' ) {
+              this.dataObj = this.dispObject( this.talkObj.data, this.sectObj.name, pageKey ) } } ) }
     },
 
     mounted: function () {
