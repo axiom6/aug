@@ -39,21 +39,31 @@
         if(      this.nav().isMyNav( obj, 'Talk' ) ) {
           this.onTalk( obj.pracKey ); }
         else if( this.nav().isMyNav( obj, 'Sect' ) ) {
-          this.onSect( obj.dispKey ); } },
+          this.onSect( obj.dispKey ); }
+        else if( this.nav().isMyNav( obj, 'Pres' ) ) {
+          this.onPres( obj.pageKey ); } },
 
       onTalk: function( talkKey ) {
         this.talkObjs  = this.compObject('Talk');
         this.talkObj   = this.talkObjs[talkKey];
-        this.sectObjs  = this.compObject(this.talkObj.sect); },
+        this.sectObjs  = this.compObject(this.talkObj.sect);
+        console.log( 'Sect.onTalk()', talkKey, this.talkObj, this.sectObjs ); },
 
       onSect: function( sectKey ) {
-        this.sectObj   = this.sectObjs[sectKey];
-        console.log( 'Sect.onSect()', sectKey, this.sectObj );
+        this.sectObj = this.sectObjs[sectKey];
         this.dataObj = null;
         if( this.sectObj.type==='Prac' ) {
-            this.dataObj = this.pracObject( this.talkObj.data, this.sectObj.name ) } },
+            this.dataObj = this.pracObject( this.talkObj.data, this.sectObj.name ) }
+        console.log( 'Sect.onSect()', sectKey, this.sectObj, this.dataObj ); },
      // if( this.sectObj.type==='Disp' ) {
      //     this.dataObj = this.dispObject( this.talkObj.data, this.sectObj.name, dispKey ) }
+
+      onPres: function( presKey ) {
+        this.sectObj   = this.sectObjs[sectKey];
+        this.dataObj = null;
+        if( this.sectObj.type==='Prac' ) {
+          this.dataObj = this.pracObject( this.talkObj.data, this.sectObj.name ) }
+        console.log( 'Sect.onSect()', sectKey, this.sectObj, this.dataObj ); },
      
     },
 

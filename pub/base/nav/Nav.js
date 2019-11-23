@@ -22,6 +22,7 @@ Nav = class Nav {
     this.dispKey = 'None';
     this.pageKey = 'None';
     this.warnMsg = 'None';
+    this.mixins = null;
     this.pages = {};
     this.keyEvents();
   }
@@ -72,6 +73,10 @@ Nav = class Nav {
       val = msg[key];
       this[key] = val;
     }
+  }
+
+  setMixinMethods(methods) {
+    this.mixins = methods;
   }
 
   doRoute(route) {
@@ -159,6 +164,15 @@ Nav = class Nav {
         case 'Disp':
           this.dirDisp(direct);
           break;
+        case 'Talk':
+          this.dirTalk(direct);
+          break;
+        case 'Sect':
+          this.dirSect(direct);
+          break;
+        case 'Pres':
+          this.dirPres(direct);
+          break;
         default:
           this.dirComp(direct);
       }
@@ -232,6 +246,57 @@ Nav = class Nav {
     } else {
       this.log(msg, `Missing adjacent displine for ${dir} ${this.compKey} ${this.pracKey}`);
     }
+  }
+
+  dirTalk(dir) {
+    var msg;
+    msg = {};
+    msg.source = `${'Nav.dirTalk'}(${dir})`;
+    this.pub(msg);
+  }
+
+  dirSect(dir) {
+    var msg, talkObj, talkObjs;
+    msg = {};
+    msg.source = `${'Nav.dirSect'}(${dir})`;
+    talkObjs = this.mixin.compObject('Talk');
+    talkObj = talkObjs[msg.pracKey];
+    msg.pracKey = dir === 'east' ? this.prevKey(this.pracKey, talkObj.pracKeys) : this.nextKey(this.pracKey, talkObj.pracKeys);
+    msg.dispKey = talkObj.pracKeys[0];
+    this.pub(msg);
+  }
+
+  dirPres(dir) {
+    var msg, sectKeys, sectObj, sectObjs, talkObj, talkObjs;
+    msg = {};
+    msg.source = `${'Nav.dirPres'}(${dir})`;
+    talkObjs = this.mixin.compObject('Talk');
+    talkObj = talkObjs[msg.pracKey];
+    sectObjs = this.compObject(talkObj.sect);
+    sectObj = sectObjs[this.pracKey];
+    sectKeys = sectObj.dispKeys;
+    msg.dispKey = dir === 'east' ? this.prevKey(this.dispKey, sectKeys) : this.nextKey(this.dispKey, sectKeys);
+    this.pub(msg);
+  }
+
+  prevKey(key, keys) {
+    var kidx, pidx;
+    kidx = keys.indexOf(key);
+    pidx = kidx - 1;
+    if (pidx === -1) {
+      pidx = keys.length - 1;
+    }
+    return keys(pidx);
+  }
+
+  nextKey(key, keys) {
+    var kidx, nidx;
+    kidx = keys.indexOf(key);
+    nidx = kidx + 1;
+    if (nidx === keys.length) {
+      nidx = 0;
+    }
+    return keys(nidx);
   }
 
   dirPage(dir) {

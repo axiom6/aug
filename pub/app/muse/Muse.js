@@ -56,6 +56,7 @@ Muse = (function() {
         'Prac',
         'Disp' // Can't use komps
       ]);
+      Muse.nav.setMixinMethods(Muse.mixin.mixin().methods);
       Vue['mixin'](Muse.mixin.mixin());
       Vue.use(Router);
       app = new Vue({

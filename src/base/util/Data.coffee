@@ -30,6 +30,8 @@ class Data
               item.bases[bkey] = base
               base.item        = item
               base['name']     = bkey if not base['name']?
+      prac.dispKeys = Object.keys( prac.disps )
+    data.pracKeys   = Object.keys( data.pracs )
     data
 
   # Merges principles and innovations into comp practices

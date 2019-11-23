@@ -65,7 +65,9 @@ Data = class Data {
           }
         }
       }
+      prac.dispKeys = Object.keys(prac.disps);
     }
+    data.pracKeys = Object.keys(data.pracs);
     return data;
   }
 

@@ -55,6 +55,7 @@ class Augm
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Augm.vue = () ->
     Augm.mixin = new Mixin( Augm, Object.keys(Augm.komps) )
+    Augm.nav.setMixinMethods(  Augm.mixin.mixin().methods )
     Vue['mixin']( Augm.mixin.mixin() )
     Vue.use(Router)
     app = new Vue( { router:Augm.router(), render: (h) -> h(Home.Dash) } );

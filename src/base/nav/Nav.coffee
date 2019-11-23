@@ -15,6 +15,7 @@ class Nav
     @dispKey   = 'None'
     @pageKey   = 'None'
     @warnMsg   = 'None'
+    @mixins    = null
     @pages     = {}
     @keyEvents()
 
@@ -41,6 +42,10 @@ class Nav
     msg = @tabInov(msg) # Revise tab innovate messages
     for own key,   val of msg
       @[key] = val
+    return
+
+  setMixinMethods:( methods ) ->
+    @mixins = methods
     return
 
   doRoute:( route ) ->
@@ -91,6 +96,9 @@ class Nav
         when 'Comp' then @dirComp( direct )
         when 'Prac' then @dirPrac( direct )
         when 'Disp' then @dirDisp( direct )
+        when 'Talk' then @dirTalk( direct )
+        when 'Sect' then @dirSect( direct )
+        when 'Pres' then @dirPres( direct )
         else             @dirComp( direct )
     else
       @dirComp( direct )
@@ -147,6 +155,46 @@ class Nav
     else
        @log( msg, "Missing adjacent displine for #{dir} #{@compKey} #{@pracKey}" )
     return
+
+  dirTalk:( dir ) ->
+    msg = {}
+    msg.source = "#{'Nav.dirTalk'}(#{dir})"
+    @pub( msg )
+    return
+
+  dirSect:( dir ) ->
+    msg = {}
+    msg.source  = "#{'Nav.dirSect'}(#{dir})"
+    talkObjs    = @mixin.compObject('Talk');
+    talkObj     = talkObjs[msg.pracKey];
+    msg.pracKey = if dir is 'east' then @prevKey(@pracKey,talkObj.pracKeys) else  @nextKey(@pracKey,talkObj.pracKeys)
+    msg.dispKey = talkObj.pracKeys[0]
+    @pub( msg )
+    return
+
+  dirPres:( dir ) ->
+    msg = {}
+    msg.source = "#{'Nav.dirPres'}(#{dir})"
+    talkObjs    = @mixin.compObject('Talk');
+    talkObj     = talkObjs[msg.pracKey];
+    sectObjs    = this.compObject(talkObj.sect);
+    sectObj     = sectObjs[@pracKey]
+    sectKeys    = sectObj.dispKeys
+    msg.dispKey = if dir is 'east' then @prevKey(@dispKey,sectKeys) else  @nextKey(@dispKey,sectKeys)
+    @pub( msg )
+    return
+
+  prevKey:( key, keys ) ->
+    kidx = keys.indexOf(key)
+    pidx = kidx - 1
+    pidx = keys.length - 1 if pidx is -1
+    keys(pidx)
+
+  nextKey:( key, keys ) ->
+    kidx = keys.indexOf(key)
+    nidx = kidx + 1
+    nidx = 0 if nidx is keys.length
+    keys(nidx)
 
   dirPage:( dir ) ->
     msg = {}
