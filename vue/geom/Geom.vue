@@ -1,6 +1,4 @@
 
-
-
 <template>
   <div class="geom-pane">
     <h1 v-show="myRoute()">Geometric Algebra</h1>

@@ -658,109 +658,6 @@ __vue_render__$3._withStripped = true;
 //
 //
 //
-//
-//
-//
-//
-
-
-let Talk = {
-
-  data() { return { talkObjs:null, talkObj:null } },
-
-  methods: {
-
-    onTalk: function () {
-        this.talkObjs = this.compObject('Talk'); },
-
-    doTalk: function (talkKey) {
-      this.talkObj = this.talkObjs[talkKey];
-      let obj = { source:"Talk", route:"Talk", pracKey:talkKey };
-      this.nav().pub( obj ); },
-    
-  },
-
-  beforeMount: function() {
-    this.onTalk(); }
-  
-};
-
-/* script */
-const __vue_script__$4 = Talk;
-
-/* template */
-var __vue_render__$4 = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    { staticClass: "talk-pane" },
-    [
-      _vm._l(_vm.talkObjs, function(talkObj) {
-        return [
-          _c(
-            "div",
-            {
-              staticClass: "talk-talk",
-              on: {
-                click: function($event) {
-                  return _vm.doTalk(talkObj.name)
-                }
-              }
-            },
-            [
-              _c("i", { class: talkObj.icon }),
-              _vm._v(" "),
-              _c("span", { staticClass: "talk-name" }, [
-                _vm._v(_vm._s(talkObj.name))
-              ])
-            ]
-          )
-        ]
-      })
-    ],
-    2
-  )
-};
-var __vue_staticRenderFns__$4 = [];
-__vue_render__$4._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$4 = function (inject) {
-    if (!inject) return
-    inject("data-v-4f762a2c_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.talk-pane {\n  position: absolute;\n  left: 0;\n  top: 15%;\n  width: 100%;\n  height: 70%;\n  color: wheat;\n  background-color: black;\n  font-size: 4vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Talk.vue","/Users/ax/Documents/prj/aug/vue/talk/Talk.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;ECCA,mBAAA;EDCE,+BAA+B;ECCjC,aAAA;EDCE,oBAAoB;ECCtB,kBAAA;EACA,kBAAA;AACA;AACA;EDCE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,YAAY;EACZ,uBAAuB;EACvB,gBAAgB;EAChB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB","file":"Talk.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.talk-pane {\n  position: absolute;\n  left: 0;\n  top: 15%;\n  width: 100%;\n  height: 70%;\n  color: wheat;\n  background-color: black;\n  font-size: 4vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n","\n<template>\n  <div class=\"talk-pane\">\n    <template v-for=\"talkObj in talkObjs\">\n      <div class=\"talk-talk\" @click=\"doTalk(talkObj.name)\">\n        <i   :class=\"talkObj.icon\"></i>\n        <span class=\"talk-name\">{{talkObj.name}}</span>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  let Talk = {\n\n    data() { return { talkObjs:null, talkObj:null } },\n\n    methods: {\n\n      onTalk: function () {\n          this.talkObjs = this.compObject('Talk'); },\n\n      doTalk: function (talkKey) {\n        this.talkObj = this.talkObjs[talkKey];\n        let obj = { source:\"Talk\", route:\"Talk\", pracKey:talkKey };\n        this.nav().pub( obj ); },\n      \n    },\n\n    beforeMount: function() {\n      this.onTalk(); }\n    \n  }\n\n  export default Talk;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @sectFS:2.0*@themeFS;\n  \n  .talk-pane   { position:absolute; left:0; top:15%; width:100%; height:70%;\n    color:@theme-fore; background-color:@theme-back; font-size:@sectFS; .themeCenterItems();\n    .talk-talk {\n      .talk-name { } } }\n\n</style>\n"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$4 = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$4 = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$4 = false;
-  /* style inject SSR */
-  
-
-  
-  var Talk$1 = normalizeComponent_1(
-    { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
-    __vue_inject_styles__$4,
-    __vue_script__$4,
-    __vue_scope_id__$4,
-    __vue_is_functional_template__$4,
-    __vue_module_identifier__$4,
-    browser,
-    undefined
-  );
-
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 let Disp = {
@@ -773,10 +670,10 @@ let Disp = {
       this.nav().pub( obj ); } } };
 
 /* script */
-const __vue_script__$5 = Disp;
+const __vue_script__$4 = Disp;
 
 /* template */
-var __vue_render__$5 = function() {
+var __vue_render__$4 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -799,32 +696,32 @@ var __vue_render__$5 = function() {
     ]
   )
 };
-var __vue_staticRenderFns__$5 = [];
-__vue_render__$5._withStripped = true;
+var __vue_staticRenderFns__$4 = [];
+__vue_render__$4._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$5 = function (inject) {
+  const __vue_inject_styles__$4 = function (inject) {
     if (!inject) return
     inject("data-v-be7174f2_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-disp-pane {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.prac-disp-pane i {\n  display: inline-block;\n  margin-right: 0.5vmin;\n}\n.prac-disp-pane .prac-disp-name {\n  display: inline-block;\n}\n", map: {"version":3,"sources":["Disp.vue","/Users/ax/Documents/prj/aug/vue/prac/Disp.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;ECCA,gBAAA;EDCE,+BAA+B;ECCjC,aAAA;EDCE,oBAAoB;ECCtB,kBAAA;EACA,kBAAA;AACA;ADCA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,eAAe;EACf,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB","file":"Disp.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-disp-pane {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.prac-disp-pane i {\n  display: inline-block;\n  margin-right: 0.5vmin;\n}\n.prac-disp-pane .prac-disp-name {\n  display: inline-block;\n}\n","\n<template>\n  <div class=\"prac-disp-pane\" @click=\"doDisp(dispObj.name)\">\n    <i   :class=\"dispObj.icon\"></i>\n    <span class=\"prac-disp-name\">{{dispObj.name}}</span>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  let Disp = {\n    \n    props: { dispObj:Object },\n\n    methods: {\n      doDisp: function (dispKey) {\n        let obj = { route:\"Disp\", dispKey:dispKey };\n        this.nav().pub( obj ); } } }\n  \n  export default Disp;\n  \n</script>\n\n<style lang=\"less\">\n\n  @import '../../pub/css/themes/theme.less';\n  \n  @pracDispFS:@themeFS;\n\n  .prac-disp-pane {   display:inline; justify-self:center; align-self:center; text-align:center;\n     i     {          display:inline-block;  margin-right: 0.25*@pracDispFS; }\n    .prac-disp-name { display:inline-block; } }\n\n</style>"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$5 = undefined;
+  const __vue_scope_id__$4 = undefined;
   /* module identifier */
-  const __vue_module_identifier__$5 = undefined;
+  const __vue_module_identifier__$4 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$5 = false;
+  const __vue_is_functional_template__$4 = false;
   /* style inject SSR */
   
 
   
   var Disp$1 = normalizeComponent_1(
-    { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
-    __vue_inject_styles__$5,
-    __vue_script__$5,
-    __vue_scope_id__$5,
-    __vue_is_functional_template__$5,
-    __vue_module_identifier__$5,
+    { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
+    __vue_inject_styles__$4,
+    __vue_script__$4,
+    __vue_scope_id__$4,
+    __vue_is_functional_template__$4,
+    __vue_module_identifier__$4,
     browser,
     undefined
   );
@@ -876,10 +773,10 @@ let Dims = {
 };
 
 /* script */
-const __vue_script__$6 = Dims;
+const __vue_script__$5 = Dims;
 
 /* template */
-var __vue_render__$6 = function() {
+var __vue_render__$5 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -925,32 +822,32 @@ var __vue_render__$6 = function() {
     )
   ])
 };
-var __vue_staticRenderFns__$6 = [];
-__vue_render__$6._withStripped = true;
+var __vue_staticRenderFns__$5 = [];
+__vue_render__$5._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$6 = function (inject) {
+  const __vue_inject_styles__$5 = function (inject) {
     if (!inject) return
     inject("data-v-3768f549_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.dims-disp {\n  font-size: 5.2vmin;\n  border-radius: 1.3vmin;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.dims-dirs {\n  font-size: 2.6vmin;\n  border-radius: 36px;\n}\n.dims-head {\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  font-size: 5.98vmin;\n}\n.dims-head .dims-title {\n  display: inline;\n}\n.dims-head .dims-title i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dims-head .dims-title .dims-name {\n  display: inline-block;\n}\n.dd-4x3 {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr 1fr;\n  grid-template-areas: \"pi pk pw\" \"li lk lw\" \"di dk dw\" \"si sk sw\";\n  margin-left: 2.6vmin;\n}\n.dd-4x3 .pi {\n  display: inline;\n  grid-area: pi;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x3 .pi i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x3 .pi .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .pk {\n  display: inline;\n  grid-area: pk;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x3 .pk i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x3 .pk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .pw {\n  display: inline;\n  grid-area: pw;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x3 .pw i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x3 .pw .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .li {\n  display: inline;\n  grid-area: li;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .li i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .li .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .lk {\n  display: inline;\n  grid-area: lk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .lk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .lk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .lw {\n  display: inline;\n  grid-area: lw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .lw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .lw .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .di {\n  display: inline;\n  grid-area: di;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .di i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .di .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .dk {\n  display: inline;\n  grid-area: dk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .dk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .dk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .dw {\n  display: inline;\n  grid-area: dw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .dw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .dw .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .si {\n  display: inline;\n  grid-area: si;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .si i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .si .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .sk {\n  display: inline;\n  grid-area: sk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .sk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .sk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .sw {\n  display: inline;\n  grid-area: sw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .sw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .sw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr 1fr;\n  grid-template-areas: \"pi pd pk pw\" \"li ld lk lw\" \"di dd dk dw\" \"si sd sk sw\";\n  margin-left: 2.6vmin;\n}\n.dd-4x4 .pi {\n  display: inline;\n  grid-area: pi;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pi i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pi .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .pd {\n  display: inline;\n  grid-area: pd;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pd i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pd .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .pk {\n  display: inline;\n  grid-area: pk;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pk i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .pw {\n  display: inline;\n  grid-area: pw;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pw i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .li {\n  display: inline;\n  grid-area: li;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .li i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .li .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .ld {\n  display: inline;\n  grid-area: ld;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .ld i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .ld .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .lk {\n  display: inline;\n  grid-area: lk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .lk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .lk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .lw {\n  display: inline;\n  grid-area: lw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .lw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .lw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .di {\n  display: inline;\n  grid-area: di;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .di i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .di .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .dd {\n  display: inline;\n  grid-area: dd;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .dd i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .dd .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .dk {\n  display: inline;\n  grid-area: dk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .dk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .dk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .dw {\n  display: inline;\n  grid-area: dw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .dw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .dw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .si {\n  display: inline;\n  grid-area: si;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .si i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .si .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .sd {\n  display: inline;\n  grid-area: sd;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .sd i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .sd .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .sk {\n  display: inline;\n  grid-area: sk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .sk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .sk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .sw {\n  display: inline;\n  grid-area: sw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .sw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .sw .dims-name {\n  display: inline-block;\n}\n", map: {"version":3,"sources":["Dims.vue","/Users/ax/Documents/prj/aug/vue/prac/Dims.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;ECCf,mBAAA;EDCE,kBAAkB;ECCpB,gBAAA;ADCA;ACCA;EACA,kBAAA;EDCE,OAAO;ECCT,MAAA;EACA,WAAA;EDCE,YAAY;ACCd;AACA;EDCE,kBAAkB;ECCpB,OAAA;EDCE,MAAM;ECCR,WAAA;EACA,WAAA;AACA;AACA;EDCE,kBAAkB;ECCpB,OAAA;EACA,QAAA;EACA,WAAA;EDCE,WAAW;ACCb;AACA;EACA,kBAAA;EDCE,OAAO;ECCT,QAAA;EACA,WAAA;EACA,WAAA;AACA;AACA;EDCE,gBAAgB;ECClB,UAAA;EACA,SAAA;EACA,gBAAA;EACA,iBAAA;AACA;ADCA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,sBAAsB;EACtB,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,mBAAmB;AACrB;AACA;EACE,eAAe;AACjB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,aAAa;EACb,kCAAkC;EAClC,mCAAmC;EACnC,gEAAgE;EAChE,oBAAoB;AACtB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,aAAa;EACb,sCAAsC;EACtC,mCAAmC;EACnC,4EAA4E;EAC5E,oBAAoB;AACtB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB","file":"Dims.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.dims-disp {\n  font-size: 5.2vmin;\n  border-radius: 1.3vmin;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.dims-dirs {\n  font-size: 2.6vmin;\n  border-radius: 36px;\n}\n.dims-head {\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  font-size: 5.98vmin;\n}\n.dims-head .dims-title {\n  display: inline;\n}\n.dims-head .dims-title i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dims-head .dims-title .dims-name {\n  display: inline-block;\n}\n.dd-4x3 {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr 1fr;\n  grid-template-areas: \"pi pk pw\" \"li lk lw\" \"di dk dw\" \"si sk sw\";\n  margin-left: 2.6vmin;\n}\n.dd-4x3 .pi {\n  display: inline;\n  grid-area: pi;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x3 .pi i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x3 .pi .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .pk {\n  display: inline;\n  grid-area: pk;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x3 .pk i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x3 .pk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .pw {\n  display: inline;\n  grid-area: pw;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x3 .pw i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x3 .pw .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .li {\n  display: inline;\n  grid-area: li;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .li i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .li .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .lk {\n  display: inline;\n  grid-area: lk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .lk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .lk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .lw {\n  display: inline;\n  grid-area: lw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .lw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .lw .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .di {\n  display: inline;\n  grid-area: di;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .di i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .di .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .dk {\n  display: inline;\n  grid-area: dk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .dk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .dk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .dw {\n  display: inline;\n  grid-area: dw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .dw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .dw .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .si {\n  display: inline;\n  grid-area: si;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .si i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .si .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .sk {\n  display: inline;\n  grid-area: sk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .sk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .sk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .sw {\n  display: inline;\n  grid-area: sw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .sw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .sw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr 1fr;\n  grid-template-areas: \"pi pd pk pw\" \"li ld lk lw\" \"di dd dk dw\" \"si sd sk sw\";\n  margin-left: 2.6vmin;\n}\n.dd-4x4 .pi {\n  display: inline;\n  grid-area: pi;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pi i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pi .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .pd {\n  display: inline;\n  grid-area: pd;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pd i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pd .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .pk {\n  display: inline;\n  grid-area: pk;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pk i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .pw {\n  display: inline;\n  grid-area: pw;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pw i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .li {\n  display: inline;\n  grid-area: li;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .li i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .li .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .ld {\n  display: inline;\n  grid-area: ld;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .ld i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .ld .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .lk {\n  display: inline;\n  grid-area: lk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .lk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .lk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .lw {\n  display: inline;\n  grid-area: lw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .lw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .lw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .di {\n  display: inline;\n  grid-area: di;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .di i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .di .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .dd {\n  display: inline;\n  grid-area: dd;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .dd i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .dd .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .dk {\n  display: inline;\n  grid-area: dk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .dk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .dk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .dw {\n  display: inline;\n  grid-area: dw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .dw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .dw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .si {\n  display: inline;\n  grid-area: si;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .si i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .si .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .sd {\n  display: inline;\n  grid-area: sd;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .sd i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .sd .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .sk {\n  display: inline;\n  grid-area: sk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .sk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .sk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .sw {\n  display: inline;\n  grid-area: sw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .sw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .sw .dims-name {\n  display: inline-block;\n}\n","\n<template>\n  <div  :class=\"dispClass()\" :style=\"style(dispObj)\">\n    <div   class=\"dims-head\" @click=\"doClick(dispObj.name)\">\n      <div class=\"dims-title\">\n        <i   :class=\"dispObj.icon\"></i>\n        <span class=\"dims-name\">{{dispObj.name}}</span>\n      </div>\n    </div>\n    <div  :class=\"gridClass()\">\n      <template v-for=\"ddObj in dispObj.dims\">\n        <div   :class=\"ddObj.klass\">\n          <i   :class=\"ddObj.icon\"></i>\n          <span class=\"dims-name\">{{ddObj.name}}</span>\n        </div>\n      </template>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  let Dims = {\n\n    props: { dispObj:Object, from:String },\n\n    methods: {\n      doClick: function (key) {\n        if( this.isDef(this.dispObj.column) ) { this.doPrac(key) }\n        else                                  { this.doDisp(key) } },\n      gridClass: function() {\n        return this.dispObj.column===\"Innovate\" ? 'dd-4x4' : 'dd-4x3'; },\n      doDisp:  function (dispKey) {\n        let obj = { route:\"Disp\", dispKey:dispKey }; // pracKey:this.pracObj.name,\n        this.nav().pub( obj ); },\n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav().pub( obj ); },\n      dispClass: function() {\n        return this.from==='Disp' ? 'dims-disp' : 'dims-dirs';\n      },\n      style: function( ikwObj ) {\n        let fontSize = this.from==='Disp' ? 2.0 : 1.0;\n        return this.styleObj(ikwObj,fontSize); } },\n  }\n\n  export default Dims;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  @dimsFS:1.3*@themeFS;\n\n  .dims-grid4x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr 1fr;\n    grid-template-areas: \"pi pk pw\" \"li lk lw\" \"di dk dw\" \"si sk sw\"; }\n\n  .dims-grid4x4() { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr 1fr;\n    grid-template-areas: \"pi pd pk pw\" \"li ld lk lw\" \"di dd dk dw\" \"si sd sk sw\"; }\n  \n  .dims-disp { font-size:2.0*@dimsFS; border-radius:0.5*@dimsFS;\n    position:absolute; left:0; top:@theme-tabs-height; right:0; bottom:0; }\n\n  .dims-dirs { font-size:@dimsFS; border-radius:36px; }\n\n  .dims-head    { display:grid; justify-self:center; align-self:center; text-align:center; font-size:2.3*@dimsFS;\n    .dims-title { display:inline;\n    i           { display:inline-block;  margin-right:0.25*@dimsFS; }\n    .dims-name  { display:inline-block; } } }\n\n  .plane( @area ) { display:inline; grid-area:@area; font-size:1.2*@dimsFS; text-align:left;\n    i             { display:inline-block;  margin-right: 0.25rem; }\n    .dims-name    { display:inline-block; } }\n\n  .study( @area ) { display:inline; grid-area:@area; font-size:0.9*@dimsFS; text-align:left;\n    i             { display:inline-block;  margin-right:0.25*@dimsFS; }\n    .dims-name    { display:inline-block; } }\n\n  .dd-4x3 { .dims-grid4x3(); margin-left:@dimsFS;\n    .pi { .plane(pi); }  .pk { .plane(pk); }  .pw { .plane(pw); }\n    .li { .study(li); }  .lk { .study(lk); }  .lw { .study(lw); }\n    .di { .study(di); }  .dk { .study(dk); }  .dw { .study(dw); }\n    .si { .study(si); }  .sk { .study(sk); }  .sw { .study(sw); } }\n  \n  .dd-4x4 { .dims-grid4x4(); margin-left:@dimsFS;\n    .pi { .plane(pi); }  .pd { .plane(pd); } .pk { .plane(pk); }  .pw { .plane(pw); }\n    .li { .study(li); }  .ld { .study(ld); } .lk { .study(lk); }  .lw { .study(lw); }\n    .di { .study(di); }  .dd { .study(dd); } .dk { .study(dk); }  .dw { .study(dw); }\n    .si { .study(si); }  .sd { .study(sd); } .sk { .study(sk); }  .sw { .study(sw); } }\n\n</style>"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$6 = undefined;
+  const __vue_scope_id__$5 = undefined;
   /* module identifier */
-  const __vue_module_identifier__$6 = undefined;
+  const __vue_module_identifier__$5 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$6 = false;
+  const __vue_is_functional_template__$5 = false;
   /* style inject SSR */
   
 
   
   var Dims$1 = normalizeComponent_1(
-    { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
-    __vue_inject_styles__$6,
-    __vue_script__$6,
-    __vue_scope_id__$6,
-    __vue_is_functional_template__$6,
-    __vue_module_identifier__$6,
+    { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
+    __vue_inject_styles__$5,
+    __vue_script__$5,
+    __vue_scope_id__$5,
+    __vue_is_functional_template__$5,
+    __vue_module_identifier__$5,
     browser,
     undefined
   );
@@ -984,10 +881,10 @@ let Dirs = {
 };
 
 /* script */
-const __vue_script__$7 = Dirs;
+const __vue_script__$6 = Dirs;
 
 /* template */
-var __vue_render__$7 = function() {
+var __vue_render__$6 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -1032,32 +929,32 @@ var __vue_render__$7 = function() {
     2
   )
 };
-var __vue_staticRenderFns__$7 = [];
-__vue_render__$7._withStripped = true;
+var __vue_staticRenderFns__$6 = [];
+__vue_render__$6._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$7 = function (inject) {
+  const __vue_inject_styles__$6 = function (inject) {
     if (!inject) return
     inject("data-v-1c983a0a_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-dirs-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n  color: black;\n  text-align: center;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n  font-size: 8vmin;\n}\n.prac-dirs-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n", map: {"version":3,"sources":["Dirs.vue","/Users/ax/Documents/prj/aug/vue/prac/Dirs.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;ECCrB,kBAAA;EDCE,gBAAgB;ACClB;ADCA;ECCA,kBAAA;EACA,OAAA;EDCE,MAAM;ECCR,WAAA;EDCE,YAAY;ACCd;AACA;EACA,kBAAA;EACA,OAAA;EACA,MAAA;EDCE,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,sBAAsB;EACtB,YAAY;EACZ,kBAAkB;EAClB,iBAAiB;EACjB,aAAa;EACb,kCAAkC;EAClC,+BAA+B;EAC/B,gEAAgE;EAChE,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB","file":"Dirs.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-dirs-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n  color: black;\n  text-align: center;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n  font-size: 8vmin;\n}\n.prac-dirs-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n","\n<template>\n  <div class=\"prac-dirs-pane\">\n    <div class=\"cen\" :style=\"style(pracObj)\">\n      <d-disp v-if=\"isDisp()\" :dispObj=\"pracObj\" from=\"Dirs\"></d-disp>\n      <d-dims v-if=\"isDims()\" :dispObj=\"pracObj\" from=\"Dirs\"></d-dims>\n    </div>\n    <template  v-for=\"dispObj in pracObj.disps\">\n      <div :class=\"dispObj.dir\" :style=\"style(dispObj)\">\n        <d-disp v-if=\"isDisp()\" :dispObj=\"dispObj\" from=\"Dirs\"></d-disp>\n        <d-dims v-if=\"isDims()\" :dispObj=\"dispObj\" from=\"Dirs\"></d-dims>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Disp from './Disp.vue';\n  import Dims from './Dims.vue';\n\n  let Dirs = {\n\n    components:{ 'd-disp':Disp, 'd-dims':Dims },\n\n    props: { pracObj:Object },\n\n    data() { return { dispObj:null } },\n\n    methods: {\n\n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav().pub( obj ); },\n      isDims: function () {\n        return this.pracObj.row === 'Dim'; },\n      isDisp: function () {\n        return this.pracObj.row !== 'Dim'; },\n      style: function( ikwObj ) {\n        return this.styleObj(ikwObj); } },\n\n    mounted: function () {\n      if( !this.isDef(this.pracObj) ) {\n        console.error( 'prac.Dirs.mounted() pracObj not defined' ); } }\n    \n  }\n\n  export default Dirs;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @pracDirsFS:2.0*@themeFS;\n  \n  .prac-dirs-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n    grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .prac-dir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }\n  \n  .prac-dirs-pane { position:absolute; left:0; top:0; width:100%; height:100%; background-color:@theme-gray;\n    color:black; text-align:center; font-weight:bold; .prac-dirs-grid3x3(); font-size:2.0*@pracDirsFS;\n                                 .north { .prac-dir(north); }\n      .west { .prac-dir(west); } .cen   { .prac-dir(cen);   } .east { .prac-dir(east); }\n                                 .south { .prac-dir(south); } }\n  \n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$7 = undefined;
+  const __vue_scope_id__$6 = undefined;
   /* module identifier */
-  const __vue_module_identifier__$7 = undefined;
+  const __vue_module_identifier__$6 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$7 = false;
+  const __vue_is_functional_template__$6 = false;
   /* style inject SSR */
   
 
   
   var Dirs$1 = normalizeComponent_1(
-    { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
-    __vue_inject_styles__$7,
-    __vue_script__$7,
-    __vue_scope_id__$7,
-    __vue_is_functional_template__$7,
-    __vue_module_identifier__$7,
+    { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
+    __vue_inject_styles__$6,
+    __vue_script__$6,
+    __vue_scope_id__$6,
+    __vue_is_functional_template__$6,
+    __vue_module_identifier__$6,
     browser,
     undefined
   );
@@ -24091,10 +23988,10 @@ let Conn = {
  };
 
 /* script */
-const __vue_script__$8 = Conn;
+const __vue_script__$7 = Conn;
 
 /* template */
-var __vue_render__$8 = function() {
+var __vue_render__$7 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -24108,32 +24005,32 @@ var __vue_render__$8 = function() {
     }
   })
 };
-var __vue_staticRenderFns__$8 = [];
-__vue_render__$8._withStripped = true;
+var __vue_staticRenderFns__$7 = [];
+__vue_render__$7._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$8 = function (inject) {
+  const __vue_inject_styles__$7 = function (inject) {
     if (!inject) return
     inject("data-v-42177306_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.conn-comp {\n  font-size: 2vmin;\n  background-color: #333;\n  color: wheat;\n  width: 98%;\n  height: 97%;\n  border-radius: 4vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n}\n.conn-prac {\n  font-size: 2vmin;\n  background-color: #333;\n  color: wheat;\n  text-align: center;\n  border-radius: 4vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 98%;\n  height: 97%;\n}\n", map: {"version":3,"sources":["Conn.vue","/Users/ax/Documents/prj/aug/vue/comp/Conn.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;ECCA,kBAAA;EDCE,OAAO;ECCT,MAAA;EDCE,WAAW;ECCb,WAAA;AACA;ADCA;ECCA,kBAAA;EACA,OAAA;EDCE,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,sBAAsB;EACtB,YAAY;EACZ,UAAU;EACV,WAAW;EACX,oBAAoB;EACpB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,mBAAmB;EACnB,qBAAqB;AACvB;AACA;EACE,gBAAgB;EAChB,sBAAsB;EACtB,YAAY;EACZ,kBAAkB;EAClB,oBAAoB;EACpB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,UAAU;EACV,WAAW;AACb","file":"Conn.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.conn-comp {\n  font-size: 2vmin;\n  background-color: #333;\n  color: wheat;\n  width: 98%;\n  height: 97%;\n  border-radius: 4vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n}\n.conn-prac {\n  font-size: 2vmin;\n  background-color: #333;\n  color: wheat;\n  text-align: center;\n  border-radius: 4vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 98%;\n  height: 97%;\n}\n","\n<template>\n  <div :class=\"clConn()\" @click=\"doPrac(pracObj.name)\" :ref=\"pracObj.name\" ></div>\n</template>\n\n<script type=\"module\">\n  \n  import Connect from '../../pub/draw/conn/Connect.js';\n\n  let Conn = {\n\n    props: { pracObj:Object, level:String },\n\n    data() {\n      return { connect:null, size:null }; },\n    \n    watch: {\n      pracObj() {\n        this.onPrac(); } },\n    \n    methods: {\n      \n      onPrac: function() {\n        if( this.isDef(this.connect) ) {\n            this.connect.clearSvg(); }\n        this.createConnect( this.stream(), this.pracObj ); },\n      \n      doPrac: function (pracKey) {\n        this.nav().pub( { pracKey:pracKey } ); },\n      \n      clConn: function() {\n        return this.nav().route === 'Comp' ? 'conn-comp' : 'conn-prac'; },\n      \n      createConnect: function( stream, pracObj ) {\n        this.$nextTick( function() {\n          let elem = this.$refs[this.pracObj.name] // this.getElem( this.$refs, this.pracObj.name );\n          if( this.hasElem(elem) ) {\n            this.connect = new Connect( stream, this.batch(), pracObj, elem, this.level );\n            if( this.level==='Prac') {\n              window.addEventListener( 'resize', this.resize ) } }\n          else {\n            console.log( 'Conn.createConnect()',\n              { name:this.pracObj.name, has:this.hasElem(elem), elem:elem, $refs:this.$refs } ); } } ) },\n      \n      resize: function() {\n        this.$nextTick( function() {\n          if( this.isDef(this.connect) ) {\n              this.connect.resize();  } } ); }\n    },\n    \n    mounted: function () {\n      this.onPrac(); },\n\n    destroyed: function () {\n      window.removeEventListener('resize', this.resize ) }\n      \n   }\n\n  export default Conn;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @connFS:@themeFS;\n\n  .conn-comp { font-size:@connFS; background-color:@theme-gray; color:@theme-fore; width:98%; height:97%;\n    border-radius:2.0*@connFS; .themeCenterStretch();   }\n\n  .conn-prac { font-size:@connFS; background-color:@theme-gray; color:@theme-fore; text-align:center;\n    border-radius:2.0*@connFS; position:absolute; left:0; top:0; width:98%; height:97%; }\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$8 = undefined;
+  const __vue_scope_id__$7 = undefined;
   /* module identifier */
-  const __vue_module_identifier__$8 = undefined;
+  const __vue_module_identifier__$7 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$8 = false;
+  const __vue_is_functional_template__$7 = false;
   /* style inject SSR */
   
 
   
   var Conn$1 = normalizeComponent_1(
-    { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
-    __vue_inject_styles__$8,
-    __vue_script__$8,
-    __vue_scope_id__$8,
-    __vue_is_functional_template__$8,
-    __vue_module_identifier__$8,
+    { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
+    __vue_inject_styles__$7,
+    __vue_script__$7,
+    __vue_scope_id__$7,
+    __vue_is_functional_template__$7,
+    __vue_module_identifier__$7,
     browser,
     undefined
   );
@@ -24169,10 +24066,10 @@ let Icon = {
 };
 
 /* script */
-const __vue_script__$9 = Icon;
+const __vue_script__$8 = Icon;
 
 /* template */
-var __vue_render__$9 = function() {
+var __vue_render__$8 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -24197,32 +24094,32 @@ var __vue_render__$9 = function() {
     )
   ])
 };
-var __vue_staticRenderFns__$9 = [];
-__vue_render__$9._withStripped = true;
+var __vue_staticRenderFns__$8 = [];
+__vue_render__$8._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$9 = function (inject) {
+  const __vue_inject_styles__$8 = function (inject) {
     if (!inject) return
     inject("data-v-2bfd5374_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.icon-pane {\n  display: grid;\n  height: 100%;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n  height: auto;\n}\n.icon-pane .icon-line .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-line .icon-name {\n  display: inline-block;\n}\n", map: {"version":3,"sources":["Icon.vue","/Users/ax/Documents/prj/aug/vue/elem/Icon.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;ECCf,oBAAA;EDCE,kBAAkB;ECCpB,kBAAA;ADCA;ACCA;EDCE,mBAAmB;ECCrB,+BAAA;EDCE,aAAa;ECCf,oBAAA;EDCE,kBAAkB;ECCpB,kBAAA;AACA;ADCA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,aAAa;EACb,YAAY;AACd;AACA;EACE,eAAe;EACf,oBAAoB;EACpB,kBAAkB;EAClB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,qBAAqB;AACvB","file":"Icon.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.icon-pane {\n  display: grid;\n  height: 100%;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n  height: auto;\n}\n.icon-pane .icon-line .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-line .icon-name {\n  display: inline-block;\n}\n","\n<template>\n  <div      class=\"icon-pane\" :style=\"style()\">\n    <div    class=\"icon-line\" @click=\"doClick()\">\n      <span class=\"icon-icon\"><i :class=\"icon\"></i></span>\n      <span class=\"icon-name\">{{name}}</span>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  let Icon = {\n\n    props: { icon:String, name:String, summ:String, size:Number, fnClick:Function },\n    \n    methods: {\n      \n      hasSumm: function() {\n        return this.isDef(this.summ); },\n      \n      doClick: function() {\n        if( this.isDef(this.fnClick) ) {\n          this.fnClick(this.name); } },\n\n      style: function() {\n        return this.fontSizeCss(this.size); }\n    }\n  }\n  \n  export default Icon;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @iconFS:2.0*@themeFS;\n\n  .icon-pane     { display:grid; height:100%;\n  \n    .icon-line   { display:inline; justify-self:center; text-align:center;  height:auto;\n  \n      .icon-icon { display:inline-block;  margin-right: 0.25*@iconFS; }\n      \n      .icon-name { display:inline-block; } }\n  }\n\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$9 = undefined;
+  const __vue_scope_id__$8 = undefined;
   /* module identifier */
-  const __vue_module_identifier__$9 = undefined;
+  const __vue_module_identifier__$8 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$9 = false;
+  const __vue_is_functional_template__$8 = false;
   /* style inject SSR */
   
 
   
   var Icon$1 = normalizeComponent_1(
-    { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
-    __vue_inject_styles__$9,
-    __vue_script__$9,
-    __vue_scope_id__$9,
-    __vue_is_functional_template__$9,
-    __vue_module_identifier__$9,
+    { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
+    __vue_inject_styles__$8,
+    __vue_script__$8,
+    __vue_scope_id__$8,
+    __vue_is_functional_template__$8,
+    __vue_module_identifier__$8,
     browser,
     undefined
   );
@@ -24263,10 +24160,10 @@ let Area = {
 };
 
 /* script */
-const __vue_script__$a = Area;
+const __vue_script__$9 = Area;
 
 /* template */
-var __vue_render__$a = function() {
+var __vue_render__$9 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -24292,32 +24189,32 @@ var __vue_render__$a = function() {
     )
   ])
 };
-var __vue_staticRenderFns__$a = [];
-__vue_render__$a._withStripped = true;
+var __vue_staticRenderFns__$9 = [];
+__vue_render__$9._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$a = function (inject) {
+  const __vue_inject_styles__$9 = function (inject) {
     if (!inject) return
     inject("data-v-582dfefd_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.area-pane .area-name {\n  font-weight: bold;\n}\n.area-pane .area-desc {\n  padding-left: 1vmin;\n}\n", map: {"version":3,"sources":["Area.vue","/Users/ax/Documents/prj/aug/vue/elem/Area.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;ECCA,mBAAA;EDCE,+BAA+B;ECCjC,aAAA;EDCE,oBAAoB;ECCtB,kBAAA;EACA,kBAAA;AACA;ADCA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,iBAAiB;AACnB;AACA;EACE,mBAAmB;AACrB","file":"Area.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.area-pane .area-name {\n  font-weight: bold;\n}\n.area-pane .area-desc {\n  padding-left: 1vmin;\n}\n","\n<template>\n    <table class=\"area-pane\" :style=\"style()\">\n      <tbody>\n        <template v-for=\"area in dispObj.areas\">\n          <tr>\n            <td class=\"area-name\">{{area.name}}</td>\n            <td class=\"area-desc\">{{area.desc}}</td>\n          </tr>\n        </template>\n      </tbody>\n    </table>\n</template>\n\n<script type=\"module\">\n\n  let Area = {\n\n    props: { dispObj:Object, size:Number },\n\n    data() { return { area:null } },\n\n    methods: {\n\n      doClick: function() {\n        if( this.isDef(this.fnClick) ) {\n          this.fnClick(this.name); } },\n\n      style: function() {\n        return this.fontSizeCss(this.size); }\n\n    }\n\n  }\n\n  export default Area;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @itemFS:1.0*@themeFS;\n  \n  .area-pane {\n      .area-name { font-weight:bold;         }\n      .area-desc { padding-left:0.5*@itemFS; } }\n\n</style>"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$a = undefined;
+  const __vue_scope_id__$9 = undefined;
   /* module identifier */
-  const __vue_module_identifier__$a = undefined;
+  const __vue_module_identifier__$9 = undefined;
   /* functional template */
-  const __vue_is_functional_template__$a = false;
+  const __vue_is_functional_template__$9 = false;
   /* style inject SSR */
   
 
   
   var Area$1 = normalizeComponent_1(
-    { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
-    __vue_inject_styles__$a,
-    __vue_script__$a,
-    __vue_scope_id__$a,
-    __vue_is_functional_template__$a,
-    __vue_module_identifier__$a,
+    { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
+    __vue_inject_styles__$9,
+    __vue_script__$9,
+    __vue_scope_id__$9,
+    __vue_is_functional_template__$9,
+    __vue_module_identifier__$9,
     browser,
     undefined
   );
@@ -24352,10 +24249,10 @@ let Desc = {
 };
 
 /* script */
-const __vue_script__$b = Desc;
+const __vue_script__$a = Desc;
 
 /* template */
-var __vue_render__$b = function() {
+var __vue_render__$a = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -24448,32 +24345,32 @@ var __vue_render__$b = function() {
     2
   )
 };
-var __vue_staticRenderFns__$b = [];
-__vue_render__$b._withStripped = true;
+var __vue_staticRenderFns__$a = [];
+__vue_render__$a._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$b = function (inject) {
+  const __vue_inject_styles__$a = function (inject) {
     if (!inject) return
     inject("data-v-3aaaf5e8_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-desc-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n  color: black;\n}\n.prac-desc-pane .prac-desc-cent {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.prac-desc-pane .prac-desc-cent .prac-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 4%;\n  width: 100%;\n  height: 22%;\n}\n.prac-desc-pane .prac-desc-cent .prac-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 26%;\n  width: 94%;\n  height: 74%;\n  text-align: left;\n  font-size: 3vmin;\n}\n.prac-desc-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .prac-disp-desc {\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  color: black;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-icon {\n  position: absolute;\n  left: 0;\n  top: 3%;\n  width: 100%;\n  height: 18%;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-summ {\n  position: absolute;\n  left: 3%;\n  top: 21%;\n  width: 94%;\n  height: 28%;\n  text-align: left;\n  font-size: 2.7vmin;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-area {\n  position: absolute;\n  left: 3%;\n  top: 49%;\n  width: 94%;\n  height: 51%;\n}\n", map: {"version":3,"sources":["Desc.vue","/Users/ax/Documents/prj/aug/vue/prac/Desc.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;ACCA;EDCE,kBAAkB;ECCpB,OAAA;EDCE,MAAM;ECCR,WAAA;EACA,YAAA;ADCA;ACCA;EDCE,kBAAkB;ECCpB,OAAA;EDCE,MAAM;ECCR,WAAA;EACA,WAAA;AACA;AACA;EDCE,kBAAkB;ECCpB,OAAA;EACA,QAAA;EDCE,WAAW;ECCb,WAAA;AACA;AACA;EACA,kBAAA;EACA,OAAA;EACA,QAAA;EDCE,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,aAAa;EACb,kCAAkC;EAClC,+BAA+B;EAC/B,gEAAgE;EAChE,YAAY;AACd;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;EACnB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;EAChB,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;EAChB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;AACb","file":"Desc.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-desc-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n  color: black;\n}\n.prac-desc-pane .prac-desc-cent {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.prac-desc-pane .prac-desc-cent .prac-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 4%;\n  width: 100%;\n  height: 22%;\n}\n.prac-desc-pane .prac-desc-cent .prac-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 26%;\n  width: 94%;\n  height: 74%;\n  text-align: left;\n  font-size: 3vmin;\n}\n.prac-desc-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .prac-disp-desc {\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  color: black;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-icon {\n  position: absolute;\n  left: 0;\n  top: 3%;\n  width: 100%;\n  height: 18%;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-summ {\n  position: absolute;\n  left: 3%;\n  top: 21%;\n  width: 94%;\n  height: 28%;\n  text-align: left;\n  font-size: 2.7vmin;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-area {\n  position: absolute;\n  left: 3%;\n  top: 49%;\n  width: 94%;\n  height: 51%;\n}\n","\n<template>\n  <div     class=\"prac-desc-pane\">\n    <div   class=\"prac-desc-cent\" @click=\"doPrac(pracObj.name)\" :style=\"style(pracObj)\">\n      <div class=\"prac-desc-icon\"><d-icon :icon=\"pracObj.icon\" :name=\"pracObj.name\" :size=\"3.0\"></d-icon></div>\n      <div class=\"prac-desc-summ\">{{pracObj['desc']}}</div>\n    </div>\n    <template v-for=\"dispObj in pracObj.disps\">\n      <div   :class=\"dispObj.dir\" @click=\"doDisp(dispObj.name)\" :style=\"style(dispObj)\">\n        <div      class=\"prac-disp-desc\">\n          <div    class=\"prac-disp-icon\"><d-icon :icon=\"dispObj.icon\" :name=\"dispObj.name\" :size=\"2.0\"></d-icon></div>\n          <div    class=\"prac-disp-summ\">{{dispObj['desc']}}</div>\n          <d-area class=\"prac-disp-area\" :dispObj=\"dispObj\" :size=\"1.1\"></d-area>\n        </div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Icon from \"../elem/Icon.vue\"\n  import Area from \"../elem/Area.vue\"\n\n  let Desc = {\n    \n    components: { 'd-icon':Icon, 'd-area':Area },\n\n    props: { pracObj:Object, from:String },\n\n    data() { return { dispObj:null, iarea:1 } },\n\n    watch: {\n      pracObj() { this.onPrac(); } },\n    \n    methods: {\n\n      onPrac: function() { }, // console.log( { pracObj:this.pracObj } );\n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav().pub( obj ); },\n      doDisp: function (dispKey) {\n        let obj = { route:\"Disp\", pracKey:this.pracObj.name, dispKey:dispKey };\n        this.nav().pub( obj ); },\n      style: function( ikwObj ) {\n        return this.styleObj(ikwObj); },\n      tsSumm: function(summ) {\n        return this.isStr(summ) ? summ : \"This is a test description\"; }\n    },\n  }\n  export default Desc;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @descFS:@themeFS;\n  \n  .prac-desc-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n    grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .prac-desc-ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }\n  \n  .prac-desc-pane { position:absolute; left:0; top:0; width:100%; height:100%; .prac-desc-grid3x3(); color:black;\n    \n    .prac-desc-cent { .prac-desc-ddir(cen);\n                        position:relative; left:0;  top:0;    width:100%; height:100%;\n      .prac-desc-icon { position:absolute; left:0;  top: 4%;  width:100%; height: 22%; }\n      .prac-desc-summ { position:absolute; left:3%; top:26%;; width: 94%; height: 74%;text-align:left; font-size:1.5*@descFS; } }\n    \n    .west  { .prac-desc-ddir(west);  } .north { .prac-desc-ddir(north); }\n    .east  { .prac-desc-ddir(east);  } .south { .prac-desc-ddir(south); }\n  \n    .prac-disp-desc   { position:relative; left:0;  top:0;   width:100%; height:100%; color:black;\n      .prac-disp-icon { position:absolute; left:0;  top: 3%; width:100%; height: 18%; }\n      .prac-disp-summ { position:absolute; left:3%; top:21%; width: 94%; height: 28%;\n        text-align:left;font-size:1.35*@descFS; }\n      .prac-disp-area { position:absolute; left:3%; top:49%; width: 94%; height: 51%; } }\n  }\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$b = undefined;
+  const __vue_scope_id__$a = undefined;
   /* module identifier */
-  const __vue_module_identifier__$b = undefined;
+  const __vue_module_identifier__$a = undefined;
   /* functional template */
-  const __vue_is_functional_template__$b = false;
+  const __vue_is_functional_template__$a = false;
   /* style inject SSR */
   
 
   
   var Desc$1 = normalizeComponent_1(
-    { render: __vue_render__$b, staticRenderFns: __vue_staticRenderFns__$b },
-    __vue_inject_styles__$b,
-    __vue_script__$b,
-    __vue_scope_id__$b,
-    __vue_is_functional_template__$b,
-    __vue_module_identifier__$b,
+    { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
+    __vue_inject_styles__$a,
+    __vue_script__$a,
+    __vue_scope_id__$a,
+    __vue_is_functional_template__$a,
+    __vue_module_identifier__$a,
     browser,
     undefined
   );
@@ -24497,10 +24394,10 @@ let Prac = {
 };
 
 /* script */
-const __vue_script__$c = Prac;
+const __vue_script__$b = Prac;
 
 /* template */
-var __vue_render__$c = function() {
+var __vue_render__$b = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -24523,32 +24420,32 @@ var __vue_render__$c = function() {
     1
   )
 };
-var __vue_staticRenderFns__$c = [];
-__vue_render__$c._withStripped = true;
+var __vue_staticRenderFns__$b = [];
+__vue_render__$b._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$c = function (inject) {
+  const __vue_inject_styles__$b = function (inject) {
     if (!inject) return
     inject("data-v-09419177_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n}\n", map: {"version":3,"sources":["Prac.vue","/Users/ax/Documents/prj/aug/vue/talk/Prac.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;ECCtB,kBAAA;EDCE,kBAAkB;ACCpB;ADCA;ECCA,mBAAA;EACA,+BAAA;EDCE,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,sBAAsB;EACtB,gBAAgB;EAChB,oBAAoB;AACtB","file":"Prac.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n}\n","\n<template>\n  <div class=\"prac-pane\">\n    <p-dirs v-if=\"show('Dirs')\" :pracObj=\"pracObj\"></p-dirs>\n    <p-conn v-if=\"show('Conn')\" :pracObj=\"pracObj\" level=\"Prac\"></p-conn>\n    <p-desc v-if=\"show('Desc')\" :pracObj=\"pracObj\"></p-desc>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Dirs from '../prac/Dirs.vue';\n  import Conn from '../comp/Conn.vue';\n  import Desc from '../prac/Desc.vue';\n  \n  let Prac = {\n\n    components:{ 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },\n\n    props: { sectObj:Object, pracObj:Object },\n    \n    data() { return {  type:'Dirs' } },\n    \n    methods: {\n      \n      show:function( type ) {\n        return type===this.type; },\n      \n      }\n  }\n  \n  export default Prac;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  @pracFS:2.0*@themeFS;\n  \n  .prac-pane   { position:absolute; left:0; top:0; width:100%; height:100%;\n    background-color:@theme-gray; font-size:@pracFS; border-radius:0.5*@pracFS; }\n  \n</style>\n\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$c = undefined;
+  const __vue_scope_id__$b = undefined;
   /* module identifier */
-  const __vue_module_identifier__$c = undefined;
+  const __vue_module_identifier__$b = undefined;
   /* functional template */
-  const __vue_is_functional_template__$c = false;
+  const __vue_is_functional_template__$b = false;
   /* style inject SSR */
   
 
   
   var Prac$1 = normalizeComponent_1(
-    { render: __vue_render__$c, staticRenderFns: __vue_staticRenderFns__$c },
-    __vue_inject_styles__$c,
-    __vue_script__$c,
-    __vue_scope_id__$c,
-    __vue_is_functional_template__$c,
-    __vue_module_identifier__$c,
+    { render: __vue_render__$b, staticRenderFns: __vue_staticRenderFns__$b },
+    __vue_inject_styles__$b,
+    __vue_script__$b,
+    __vue_scope_id__$b,
+    __vue_is_functional_template__$b,
+    __vue_module_identifier__$b,
     browser,
     undefined
   );
@@ -24572,10 +24469,10 @@ let Desc$2 = {
 };
 
 /* script */
-const __vue_script__$d = Desc$2;
+const __vue_script__$c = Desc$2;
 
 /* template */
-var __vue_render__$d = function() {
+var __vue_render__$c = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -24600,32 +24497,32 @@ var __vue_render__$d = function() {
     1
   )
 };
-var __vue_staticRenderFns__$d = [];
-__vue_render__$d._withStripped = true;
+var __vue_staticRenderFns__$c = [];
+__vue_render__$c._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$d = function (inject) {
+  const __vue_inject_styles__$c = function (inject) {
     if (!inject) return
     inject("data-v-3b6d785c_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.disp-desc-pane {\n  font-size: 2vmin;\n  color: black;\n  border-radius: 4vmin;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n}\n.disp-desc-pane .disp-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 3%;\n  width: 100%;\n  height: 18%;\n}\n.disp-desc-pane .disp-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 21%;\n  width: 94%;\n  height: 28%;\n  text-align: left;\n  font-size: 5vmin;\n}\n.disp-desc-pane .disp-desc-area {\n  position: absolute;\n  left: 3%;\n  top: 49%;\n  width: 94%;\n  height: 51%;\n}\n", map: {"version":3,"sources":["Desc.vue","/Users/ax/Documents/prj/aug/vue/disp/Desc.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;ECC/B,aAAA;EDCE,oBAAoB;ECCtB,kBAAA;EACA,kBAAA;ADCA;ACCA;EACA,mBAAA;EACA,+BAAA;EACA,aAAA;EACA,oBAAA;EDCE,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,YAAY;EACZ,oBAAoB;EACpB,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;EAChB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;AACb","file":"Desc.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.disp-desc-pane {\n  font-size: 2vmin;\n  color: black;\n  border-radius: 4vmin;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n}\n.disp-desc-pane .disp-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 3%;\n  width: 100%;\n  height: 18%;\n}\n.disp-desc-pane .disp-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 21%;\n  width: 94%;\n  height: 28%;\n  text-align: left;\n  font-size: 5vmin;\n}\n.disp-desc-pane .disp-desc-area {\n  position: absolute;\n  left: 3%;\n  top: 49%;\n  width: 94%;\n  height: 51%;\n}\n","\n<template>\n  <div      class=\"disp-desc-pane\" :style=\"style(dispObj)\">\n    <d-icon class=\"disp-desc-icon\" :icon=\"dispObj.icon\" :name=\"dispObj.name\" :size=\"5.0\" ></d-icon>\n    <div    class=\"disp-desc-summ\">{{dispObj['desc']}}</div>\n    <d-area class=\"disp-desc-area\" :dispObj=\"dispObj\" :size=\"2.0\"></d-area>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Icon from \"../elem/Icon.vue\"\n  import Area from \"../elem/Area.vue\"\n\n  let Desc = {\n    \n    components: { 'd-icon':Icon, 'd-area':Area },\n\n    props: { dispObj:Object, from:String },\n\n    data() { return { areaObj:null, iarea:1 } },\n\n    methods: {\n      style: function (ikwObj) {\n        return this.styleObj(ikwObj); },\n      toDesc: function(desc) {\n        return this.isStr(desc) ? desc : \"This is a test description\"; }\n    }\n  }\n  export default Desc;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @descFS:@themeFS;\n  @th:@theme-tabs-height;\n\n.disp-desc-pane {   font-size:@descFS; color:black; border-radius:2.0*@descFS;\n                    position:absolute; left:0;  top:@th; width:100%; height:100%-@th;\n  .disp-desc-icon { position:absolute; left:0;  top: 3%; width:100%; height: 18%; }\n  .disp-desc-summ { position:absolute; left:3%; top:21%; width: 94%; height: 28%;text-align:left;font-size:2.5*@descFS;}\n  .disp-desc-area { position:absolute; left:3%; top:49%; width: 94%; height: 51%; } }\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$d = undefined;
+  const __vue_scope_id__$c = undefined;
   /* module identifier */
-  const __vue_module_identifier__$d = undefined;
+  const __vue_module_identifier__$c = undefined;
   /* functional template */
-  const __vue_is_functional_template__$d = false;
+  const __vue_is_functional_template__$c = false;
   /* style inject SSR */
   
 
   
   var Desc$3 = normalizeComponent_1(
-    { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
-    __vue_inject_styles__$d,
-    __vue_script__$d,
-    __vue_scope_id__$d,
-    __vue_is_functional_template__$d,
-    __vue_module_identifier__$d,
+    { render: __vue_render__$c, staticRenderFns: __vue_staticRenderFns__$c },
+    __vue_inject_styles__$c,
+    __vue_script__$c,
+    __vue_scope_id__$c,
+    __vue_is_functional_template__$c,
+    __vue_module_identifier__$c,
     browser,
     undefined
   );
@@ -24649,10 +24546,10 @@ let Disp$2 = {
 };
 
 /* script */
-const __vue_script__$e = Disp$2;
+const __vue_script__$d = Disp$2;
 
 /* template */
-var __vue_render__$e = function() {
+var __vue_render__$d = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -24671,32 +24568,32 @@ var __vue_render__$e = function() {
     1
   )
 };
-var __vue_staticRenderFns__$e = [];
-__vue_render__$e._withStripped = true;
+var __vue_staticRenderFns__$d = [];
+__vue_render__$d._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$e = function (inject) {
+  const __vue_inject_styles__$d = function (inject) {
     if (!inject) return
     inject("data-v-2d3a6f34_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.disp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n}\n", map: {"version":3,"sources":["Disp.vue","/Users/ax/Documents/prj/aug/vue/talk/Disp.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;ECC/B,aAAA;EDCE,oBAAoB;ECCtB,kBAAA;EDCE,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,sBAAsB;AACxB","file":"Disp.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.disp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n}\n","\n<template>\n  <div class=\"disp-pane\">\n    <d-dims v-if=\"show('Dims')\" :dispObj=\"dispObj\" from=\"Disp\"></d-dims>\n    <d-desc v-if=\"show('Desc')\" :dispObj=\"dispObj\" from=\"Disp\"></d-desc>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Dims from '../prac/Dims.vue';\n  import Desc from '../disp/Desc.vue';\n\n  let Disp = {\n\n    components:{ 'd-dims':Dims, 'd-desc':Desc },\n\n    props: { sectObj:Object, dispObj:Object },\n\n    data() { return {  type:'Dims' } },\n\n    methods: {\n\n      show:function( type ) {\n        return type===this.type; },\n    },\n    \n  }\n\n  export default Disp;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .disp-pane { position:absolute; left:0; top:0; width:100%; height:100%; background-color:@theme-gray; }\n\n</style>\n\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$e = undefined;
+  const __vue_scope_id__$d = undefined;
   /* module identifier */
-  const __vue_module_identifier__$e = undefined;
+  const __vue_module_identifier__$d = undefined;
   /* functional template */
-  const __vue_is_functional_template__$e = false;
+  const __vue_is_functional_template__$d = false;
   /* style inject SSR */
   
 
   
   var Disp$3 = normalizeComponent_1(
-    { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
-    __vue_inject_styles__$e,
-    __vue_script__$e,
-    __vue_scope_id__$e,
-    __vue_is_functional_template__$e,
-    __vue_module_identifier__$e,
+    { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
+    __vue_inject_styles__$d,
+    __vue_script__$d,
+    __vue_scope_id__$d,
+    __vue_is_functional_template__$d,
+    __vue_module_identifier__$d,
     browser,
     undefined
   );
@@ -24706,8 +24603,10 @@ __vue_render__$e._withStripped = true;
 let Sect = {
 
   components:{ 't-prac':Prac$1, 't-disp':Disp$3 },
+  
+//props: {  },
 
-  data() { return { talkObjs:null, talkObj:null, sectObjs:null, sectObj:null, dataObj:null, type:"Sect" } },
+  data() { return { talkObj:Object, sectObjs:null, sectObj:null, dataObj:null, type:"Sect" } },
 
   methods: {
 
@@ -24715,8 +24614,6 @@ let Sect = {
       return type===this.type; },
     
     hasProp: function(prop) {
-      console.log( 'Sect.hasProp()',
-        { prop:prop, sectObj:this.isDef(this.sectObj), has:this.isDef(this.sectObj[prop]) } );
       this.isDef(this.sectObj) && this.isDef(this.sectObj[prop]); }, // || this.isDef(this.dataObj[prop]); },
 
     getProp: function(prop) {
@@ -24726,32 +24623,32 @@ let Sect = {
       if( this.nav().isMyNav( obj, 'Sect' ) ) {
           this.onSect( obj.pracKey, obj.dispKey, obj.pageKey ); } },
     
-    onSect: function( talkKey, dispKey, pageKey ) {
-      this.$nextTick( function() {
-        console.log( 'Sect.onSect() 1', { talkKey:talkKey, dispKey:dispKey, pageKey:pageKey } );
-        this.talkObjs  = this.compObject('Talk');
-        this.talkObj   = this.talkObjs[talkKey];
-        this.sectObjs  = this.compObject(this.talkObj.sect);
-        let  sectKey   = dispKey==='None' ? 'Beg' : dispKey;
-        this.sectObj   = this.sectObjs[sectKey];
-        console.log( 'Sect.onSect() 2', { talkKey:talkKey, sectKey:sectKey, sectObjs:this.sectObjs, sectObj:this.sectObj } );
-        this.dataObj   = null;
-        if( this.sectObj.type==='Prac' ) {
-            this.dataObj = this.pracObject( this.talkObj.data, this.sectObj.name ); }
-        else if( this.sectObj.type==='Disp' && pageKey!=='None' ) {
-            this.dataObj = this.dispObject( this.talkObj.data, this.sectObj.name, pageKey ); } } ); }
+    onSect: function( talkKey, sectKey, pageKey ) {
+      console.log( 'Sect.onSect() 1', { talkKey:talkKey, sectKey:sectKey, pageKey:pageKey } );
+      this.talkObjs  = this.compObject('Talk');
+      this.talkObj   = this.talkObjs[talkKey];
+      this.sectObjs  = this.compObject(this.talkObj.route);
+      this.sectObj   = this.sectObjs['Beg'];
+      this.sectObj   = this.sectObjs[sectKey];
+      console.log( 'Sect.onSect() 2', { talkKey:talkKey, sectKey:sectKey, sectObjs:this.sectObjs, sectObj:this.sectObj } );
+      this.dataObj   = null;
+      if( this.sectObj.type==='Prac' ) {
+          this.dataObj = this.pracObject( this.talkObj.data, this.sectObj.name ); }
+      else if( this.sectObj.type==='Disp' && pageKey!=='None' ) {
+          this.dataObj = this.dispObject( this.talkObj.data, this.sectObj.name, pageKey ); } }
   },
 
   mounted: function () {
+ //console.log( "Sect.mounted()",   this.talkObj );
     this.subscribe(  "Nav", 'Sect.vue', (obj) => {
       this.onNav( obj ); } ); }
 };
 
 /* script */
-const __vue_script__$f = Sect;
+const __vue_script__$e = Sect;
 
 /* template */
-var __vue_render__$f = function() {
+var __vue_render__$e = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -24814,13 +24711,110 @@ var __vue_render__$f = function() {
       )
     : _vm._e()
 };
+var __vue_staticRenderFns__$e = [];
+__vue_render__$e._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$e = function (inject) {
+    if (!inject) return
+    inject("data-v-6e8c9c98_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.sect-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  font-size: 4vmin;\n}\n.sect-pane .sect-icon {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 10%;\n  height: 10%;\n  font-size: 20vmin;\n}\n.sect-pane .sect-icon i {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-banner {\n  position: absolute;\n  left: 35%;\n  top: 40%;\n  width: 40%;\n  height: 20%;\n  font-size: 20vmin;\n}\n.sect-pane .sect-banner div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-title {\n  position: absolute;\n  left: 0;\n  top: 10%;\n  width: 100%;\n  height: 10%;\n  font-size: 12vmin;\n}\n.sect-pane .sect-title div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-name {\n  position: absolute;\n  left: 0;\n  top: 10%;\n  width: 100%;\n  height: 10%;\n  font-size: 12vmin;\n}\n.sect-pane .sect-name div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-desc {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-desc div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-prac {\n  position: absolute;\n  left: 10%;\n  top: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-disp {\n  position: absolute;\n  left: 10%;\n  top: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-author {\n  position: absolute;\n  left: 70%;\n  top: 95%;\n  width: 30%;\n  height: 5%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-author div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Sect.vue","/Users/ax/Documents/prj/aug/vue/talk/Sect.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;ACCA;EDCE,kBAAkB;ECCpB,OAAA;EDCE,QAAQ;ECCV,WAAA;EACA,WAAA;AACA;AACA;EACA,kBAAA;EACA,OAAA;EACA,QAAA;EACA,WAAA;EACA,WAAA;AACA;AACA;EACA,gBAAA;EACA,UAAA;EACA,SAAA;EACA,gBAAA;EACA,iBAAA;AACA;ADCA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,uBAAuB;EACvB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,UAAU;EACV,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB","file":"Sect.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.sect-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  font-size: 4vmin;\n}\n.sect-pane .sect-icon {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 10%;\n  height: 10%;\n  font-size: 20vmin;\n}\n.sect-pane .sect-icon i {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-banner {\n  position: absolute;\n  left: 35%;\n  top: 40%;\n  width: 40%;\n  height: 20%;\n  font-size: 20vmin;\n}\n.sect-pane .sect-banner div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-title {\n  position: absolute;\n  left: 0;\n  top: 10%;\n  width: 100%;\n  height: 10%;\n  font-size: 12vmin;\n}\n.sect-pane .sect-title div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-name {\n  position: absolute;\n  left: 0;\n  top: 10%;\n  width: 100%;\n  height: 10%;\n  font-size: 12vmin;\n}\n.sect-pane .sect-name div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-desc {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-desc div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-prac {\n  position: absolute;\n  left: 10%;\n  top: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-disp {\n  position: absolute;\n  left: 10%;\n  top: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-author {\n  position: absolute;\n  left: 70%;\n  top: 95%;\n  width: 30%;\n  height: 5%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-author div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n","\n\n<template>\n  <div      v-if=\"sectObj!==null\"    class=\"sect-pane\">\n    <div    v-if=\"hasProp('icon')\"   class=\"sect-icon\"><i :class=\"getProp('icon')\"></i></div>\n    <div    v-if=\"hasProp('banner')\" class=\"sect-banner\"><div>{{sectObj.banner}}</div></div>\n    <div    v-if=\"hasProp('title')\"  class=\"sect-title\">{{sectObj.title}}</div>\n    <div    v-if=\"hasProp('name')\"   class=\"sect-name\" >{{sectObj.name}}</div>\n    <div    v-if=\"hasProp('desc')\"   class=\"sect-desc\">{{getProp('desc')}}</div>\n    <t-prac v-if=\"isType('Prac')\"    class=\"sect-prac\" :sectObj=\"sectObj\" :pracObj=\"dataObj\"></t-prac>\n    <t-disp v-if=\"isType('Disp')\"    class=\"sect-disp\" :sectObj=\"sectObj\" :dispObj=\"dataObj\"></t-disp>\n    <div    v-if=\"hasProp('author')\" class=\"sect-author\">{{sectObj.author}}</div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Prac from './Prac.vue';\n  import Disp from './Disp.vue';\n\n  let Sect = {\n\n    components:{ 't-prac':Prac, 't-disp':Disp },\n    \n  //props: {  },\n\n    data() { return { talkObj:Object, sectObjs:null, sectObj:null, dataObj:null, type:\"Sect\" } },\n\n    methods: {\n\n      isType: function(type) {\n        return type===this.type; },\n      \n      hasProp: function(prop) {\n        this.isDef(this.sectObj) && this.isDef(this.sectObj[prop]) }, // || this.isDef(this.dataObj[prop]); },\n\n      getProp: function(prop) {\n        return this.isDef(this.sectObj[prop]) ? this.sectObj[prop] : this.dataObj[prop]; },\n\n      onNav: function (obj) {\n        if( this.nav().isMyNav( obj, 'Sect' ) ) {\n            this.onSect( obj.pracKey, obj.dispKey, obj.pageKey ); } },\n      \n      onSect: function( talkKey, sectKey, pageKey ) {\n        console.log( 'Sect.onSect() 1', { talkKey:talkKey, sectKey:sectKey, pageKey:pageKey } );\n        this.talkObjs  = this.compObject('Talk');\n        this.talkObj   = this.talkObjs[talkKey];\n        this.sectObjs  = this.compObject(this.talkObj.route);\n        this.sectObj   = this.sectObjs['Beg'];\n        this.sectObj   = this.sectObjs[sectKey];\n        console.log( 'Sect.onSect() 2', { talkKey:talkKey, sectKey:sectKey, sectObjs:this.sectObjs, sectObj:this.sectObj } );\n        this.dataObj   = null;\n        if( this.sectObj.type==='Prac' ) {\n            this.dataObj = this.pracObject( this.talkObj.data, this.sectObj.name ) }\n        else if( this.sectObj.type==='Disp' && pageKey!=='None' ) {\n            this.dataObj = this.dispObject( this.talkObj.data, this.sectObj.name, pageKey ) } }\n    },\n\n    mounted: function () {\n   //console.log( \"Sect.mounted()\",   this.talkObj );\n      this.subscribe(  \"Nav\", 'Sect.vue', (obj) => {\n        this.onNav( obj ); } ); }\n  }\n\n  export default Sect;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @sectFS:2.0*@themeFS;  //  border-radius:0.5*@sectFS;\n  \n  .sect-pane   { position:absolute; left:0; top:0; width:100%; height:100%;\n    background-color:@theme-back; font-size:@sectFS;\n    .sect-icon   { position:absolute; left:0;   top:0;   width: 10%; height:10%; font-size:5.0*@sectFS;\n      i { .themeCenterItems(); } }\n    .sect-banner { position:absolute; left:35%; top:40%; width: 40%; height:20%; font-size:5.0*@sectFS;\n      div { .themeCenterItems(); } }\n    .sect-title  { position:absolute; left:0;   top:10%; width:100%; height:10%; font-size:3.0*@sectFS;\n      div { .themeCenterItems(); } }\n    .sect-name   { position:absolute; left:0;   top:10%; width:100%; height:10%; font-size:3.0*@sectFS;\n      div { .themeCenterItems(); } }\n    .sect-desc   { position:absolute; left:0;   top:20%; width:100%; height:80%; font-size:1.0*@sectFS;\n      div { .themeCenterItems(); } }\n    .sect-prac   { position:absolute; left:10%; top:10%; width: 80%; height:80%; font-size:1.0*@sectFS;  }\n    .sect-disp   { position:absolute; left:10%; top:10%; width: 80%; height:80%; font-size:1.0*@sectFS;  }\n    .sect-author { position:absolute; left:70%; top:95%; width: 30%; height: 5%; font-size:1.0*@sectFS;\n      div { .themeCenterItems(); } }\n  }\n\n</style>\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$e = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$e = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$e = false;
+  /* style inject SSR */
+  
+
+  
+  var Sect$1 = normalizeComponent_1(
+    { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
+    __vue_inject_styles__$e,
+    __vue_script__$e,
+    __vue_scope_id__$e,
+    __vue_is_functional_template__$e,
+    __vue_module_identifier__$e,
+    browser,
+    undefined
+  );
+
+//
+
+let Talk = {
+
+  components:{ 't-sect':Sect$1 },
+
+  data() { return { talkObjs:null, talkObj:null } },
+
+  methods: {
+
+    myRoute: function() {
+      return this.isRoute('Talk'); },
+
+    doTalk: function(talkKey) {
+      this.talkObj = this.talkObjs[talkKey];
+      let obj = { source:"Talk", route:'Sect', pracKey:talkKey, dispKey:'Beg' };
+      this.nav().pub( obj ); },
+    
+  },
+
+  beforeMount: function() {
+    this.talkObjs = this.compObject('Talk'); }
+  
+};
+
+/* script */
+const __vue_script__$f = Talk;
+
+/* template */
+var __vue_render__$f = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("div", { staticClass: "talk-pane" }, [
+    _vm.myRoute()
+      ? _c(
+          "div",
+          { staticClass: "talk-list" },
+          [
+            _vm._l(_vm.talkObjs, function(talkObj) {
+              return [
+                _c(
+                  "div",
+                  {
+                    staticClass: "talk-talk",
+                    on: {
+                      click: function($event) {
+                        return _vm.doTalk(talkObj.name)
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { class: talkObj.icon }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "talk-name" }, [
+                      _vm._v(_vm._s(talkObj.name))
+                    ])
+                  ]
+                )
+              ]
+            })
+          ],
+          2
+        )
+      : _vm._e()
+  ])
+};
 var __vue_staticRenderFns__$f = [];
 __vue_render__$f._withStripped = true;
 
   /* style */
   const __vue_inject_styles__$f = function (inject) {
     if (!inject) return
-    inject("data-v-35a94636_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.sect-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  font-size: 4vmin;\n}\n.sect-pane .sect-icon {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 10%;\n  height: 10%;\n  font-size: 20vmin;\n}\n.sect-pane .sect-icon i {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-banner {\n  position: absolute;\n  left: 35%;\n  top: 40%;\n  width: 40%;\n  height: 20%;\n  font-size: 20vmin;\n}\n.sect-pane .sect-banner div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-title {\n  position: absolute;\n  left: 0;\n  top: 10%;\n  width: 100%;\n  height: 10%;\n  font-size: 12vmin;\n}\n.sect-pane .sect-title div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-name {\n  position: absolute;\n  left: 0;\n  top: 10%;\n  width: 100%;\n  height: 10%;\n  font-size: 12vmin;\n}\n.sect-pane .sect-name div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-desc {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-desc div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-prac {\n  position: absolute;\n  left: 10%;\n  top: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-disp {\n  position: absolute;\n  left: 10%;\n  top: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-author {\n  position: absolute;\n  left: 70%;\n  top: 95%;\n  width: 30%;\n  height: 5%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-author div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Sect.vue","/Users/ax/Documents/prj/aug/vue/talk/Sect.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;ACCA;EDCE,kBAAkB;ECCpB,OAAA;EDCE,QAAQ;ECCV,WAAA;EACA,WAAA;AACA;AACA;EACA,kBAAA;EACA,OAAA;EACA,QAAA;EACA,WAAA;EACA,WAAA;AACA;AACA;EACA,gBAAA;EACA,UAAA;EACA,SAAA;EACA,gBAAA;EACA,iBAAA;AACA;ADCA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,uBAAuB;EACvB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,UAAU;EACV,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB","file":"Sect.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.sect-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  font-size: 4vmin;\n}\n.sect-pane .sect-icon {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 10%;\n  height: 10%;\n  font-size: 20vmin;\n}\n.sect-pane .sect-icon i {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-banner {\n  position: absolute;\n  left: 35%;\n  top: 40%;\n  width: 40%;\n  height: 20%;\n  font-size: 20vmin;\n}\n.sect-pane .sect-banner div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-title {\n  position: absolute;\n  left: 0;\n  top: 10%;\n  width: 100%;\n  height: 10%;\n  font-size: 12vmin;\n}\n.sect-pane .sect-title div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-name {\n  position: absolute;\n  left: 0;\n  top: 10%;\n  width: 100%;\n  height: 10%;\n  font-size: 12vmin;\n}\n.sect-pane .sect-name div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-desc {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-desc div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-prac {\n  position: absolute;\n  left: 10%;\n  top: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-disp {\n  position: absolute;\n  left: 10%;\n  top: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-author {\n  position: absolute;\n  left: 70%;\n  top: 95%;\n  width: 30%;\n  height: 5%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-author div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n","\n\n<template>\n  <div      v-if=\"sectObj!==null\"    class=\"sect-pane\">\n    <div    v-if=\"hasProp('icon')\"   class=\"sect-icon\"><i :class=\"getProp('icon')\"></i></div>\n    <div    v-if=\"hasProp('banner')\" class=\"sect-banner\"><div>{{sectObj.banner}}</div></div>\n    <div    v-if=\"hasProp('title')\"  class=\"sect-title\">{{sectObj.title}}</div>\n    <div    v-if=\"hasProp('name')\"   class=\"sect-name\" >{{sectObj.name}}</div>\n    <div    v-if=\"hasProp('desc')\"   class=\"sect-desc\">{{getProp('desc')}}</div>\n    <t-prac v-if=\"isType('Prac')\"    class=\"sect-prac\" :sectObj=\"sectObj\" :pracObj=\"dataObj\"></t-prac>\n    <t-disp v-if=\"isType('Disp')\"    class=\"sect-disp\" :sectObj=\"sectObj\" :dispObj=\"dataObj\"></t-disp>\n    <div    v-if=\"hasProp('author')\" class=\"sect-author\">{{sectObj.author}}</div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Prac from './Prac.vue';\n  import Disp from './Disp.vue';\n\n  let Sect = {\n\n    components:{ 't-prac':Prac, 't-disp':Disp },\n\n    data() { return { talkObjs:null, talkObj:null, sectObjs:null, sectObj:null, dataObj:null, type:\"Sect\" } },\n\n    methods: {\n\n      isType: function(type) {\n        return type===this.type; },\n      \n      hasProp: function(prop) {\n        console.log( 'Sect.hasProp()',\n          { prop:prop, sectObj:this.isDef(this.sectObj), has:this.isDef(this.sectObj[prop]) } );\n        this.isDef(this.sectObj) && this.isDef(this.sectObj[prop]) }, // || this.isDef(this.dataObj[prop]); },\n\n      getProp: function(prop) {\n        return this.isDef(this.sectObj[prop]) ? this.sectObj[prop] : this.dataObj[prop]; },\n\n      onNav: function (obj) {\n        if( this.nav().isMyNav( obj, 'Sect' ) ) {\n            this.onSect( obj.pracKey, obj.dispKey, obj.pageKey ); } },\n      \n      onSect: function( talkKey, dispKey, pageKey ) {\n        this.$nextTick( function() {\n          console.log( 'Sect.onSect() 1', { talkKey:talkKey, dispKey:dispKey, pageKey:pageKey } );\n          this.talkObjs  = this.compObject('Talk');\n          this.talkObj   = this.talkObjs[talkKey];\n          this.sectObjs  = this.compObject(this.talkObj.sect);\n          let  sectKey   = dispKey==='None' ? 'Beg' : dispKey;\n          this.sectObj   = this.sectObjs[sectKey];\n          console.log( 'Sect.onSect() 2', { talkKey:talkKey, sectKey:sectKey, sectObjs:this.sectObjs, sectObj:this.sectObj } );\n          this.dataObj   = null;\n          if( this.sectObj.type==='Prac' ) {\n              this.dataObj = this.pracObject( this.talkObj.data, this.sectObj.name ) }\n          else if( this.sectObj.type==='Disp' && pageKey!=='None' ) {\n              this.dataObj = this.dispObject( this.talkObj.data, this.sectObj.name, pageKey ) } } ) }\n    },\n\n    mounted: function () {\n      this.subscribe(  \"Nav\", 'Sect.vue', (obj) => {\n        this.onNav( obj ); } ); }\n  }\n\n  export default Sect;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @sectFS:2.0*@themeFS;  //  border-radius:0.5*@sectFS;\n  \n  .sect-pane   { position:absolute; left:0; top:0; width:100%; height:100%;\n    background-color:@theme-back; font-size:@sectFS;\n    .sect-icon   { position:absolute; left:0;   top:0;   width: 10%; height:10%; font-size:5.0*@sectFS;\n      i { .themeCenterItems(); } }\n    .sect-banner { position:absolute; left:35%; top:40%; width: 40%; height:20%; font-size:5.0*@sectFS;\n      div { .themeCenterItems(); } }\n    .sect-title  { position:absolute; left:0;   top:10%; width:100%; height:10%; font-size:3.0*@sectFS;\n      div { .themeCenterItems(); } }\n    .sect-name   { position:absolute; left:0;   top:10%; width:100%; height:10%; font-size:3.0*@sectFS;\n      div { .themeCenterItems(); } }\n    .sect-desc   { position:absolute; left:0;   top:20%; width:100%; height:80%; font-size:1.0*@sectFS;\n      div { .themeCenterItems(); } }\n    .sect-prac   { position:absolute; left:10%; top:10%; width: 80%; height:80%; font-size:1.0*@sectFS;  }\n    .sect-disp   { position:absolute; left:10%; top:10%; width: 80%; height:80%; font-size:1.0*@sectFS;  }\n    .sect-author { position:absolute; left:70%; top:95%; width: 30%; height: 5%; font-size:1.0*@sectFS;\n      div { .themeCenterItems(); } }\n  }\n\n</style>\n"]}, media: undefined });
+    inject("data-v-7a23acd6_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.talk-pane {\n  position: absolute;\n  left: 0;\n  top: 15%;\n  width: 100%;\n  height: 70%;\n  color: wheat;\n  background-color: black;\n  font-size: 4vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Talk.vue","/Users/ax/Documents/prj/aug/vue/talk/Talk.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;ECCrB,kBAAA;EDCE,gBAAgB;ACClB;ADCA;ECCA,kBAAA;EACA,OAAA;EACA,MAAA;EACA,WAAA;EACA,YAAA;AACA;ADCA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,YAAY;EACZ,uBAAuB;EACvB,gBAAgB;EAChB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB","file":"Talk.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.talk-pane {\n  position: absolute;\n  left: 0;\n  top: 15%;\n  width: 100%;\n  height: 70%;\n  color: wheat;\n  background-color: black;\n  font-size: 4vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n","\n<template>\n  <div class=\"talk-pane\">\n    <div v-if=\"myRoute()\" class=\"talk-list\">\n    <template v-for=\"talkObj in talkObjs\">\n      <div class=\"talk-talk\" @click=\"doTalk(talkObj.name)\">\n        <i   :class=\"talkObj.icon\"></i>\n        <span class=\"talk-name\">{{talkObj.name}}</span>\n      </div>\n    </template>\n  </div>\n  <!--div v-show=\"!myRoute()\" class=\"talk-sect\">\n    <template v-for=\"talkObj in talkObjs\">\n      <t-sect :talkObj=\"talkObj\"></t-sect>\n      <router-view :name=\"talkObj.route\"></router-view>\n    </template>\n  </div-->\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Sect from './Sect.vue';\n\n  let Talk = {\n\n    components:{ 't-sect':Sect },\n\n    data() { return { talkObjs:null, talkObj:null } },\n\n    methods: {\n\n      myRoute: function() {\n        return this.isRoute('Talk'); },\n\n      doTalk: function(talkKey) {\n        this.talkObj = this.talkObjs[talkKey];\n        let obj = { source:\"Talk\", route:'Sect', pracKey:talkKey, dispKey:'Beg' };\n        this.nav().pub( obj ); },\n      \n    },\n\n    beforeMount: function() {\n      this.talkObjs = this.compObject('Talk'); }\n    \n  }\n\n  export default Talk;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @sectFS:2.0*@themeFS;\n  \n  .talk-pane   { position:absolute; left:0; top:15%; width:100%; height:70%;\n    color:@theme-fore; background-color:@theme-back; font-size:@sectFS; .themeCenterItems();\n    .talk-list { }\n    .talk-sect { }\n    .talk-talk {\n      .talk-name { } } }\n\n</style>\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -24833,7 +24827,7 @@ __vue_render__$f._withStripped = true;
   
 
   
-  var Sect$1 = normalizeComponent_1(
+  var Talk$1 = normalizeComponent_1(
     { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
     __vue_inject_styles__$f,
     __vue_script__$f,

@@ -21,8 +21,10 @@
   let Sect = {
 
     components:{ 't-prac':Prac, 't-disp':Disp },
+    
+  //props: {  },
 
-    data() { return { talkObjs:null, talkObj:null, sectObjs:null, sectObj:null, dataObj:null, type:"Sect" } },
+    data() { return { talkObj:Object, sectObjs:null, sectObj:null, dataObj:null, type:"Sect" } },
 
     methods: {
 
@@ -30,8 +32,6 @@
         return type===this.type; },
       
       hasProp: function(prop) {
-        console.log( 'Sect.hasProp()',
-          { prop:prop, sectObj:this.isDef(this.sectObj), has:this.isDef(this.sectObj[prop]) } );
         this.isDef(this.sectObj) && this.isDef(this.sectObj[prop]) }, // || this.isDef(this.dataObj[prop]); },
 
       getProp: function(prop) {
@@ -41,23 +41,23 @@
         if( this.nav().isMyNav( obj, 'Sect' ) ) {
             this.onSect( obj.pracKey, obj.dispKey, obj.pageKey ); } },
       
-      onSect: function( talkKey, dispKey, pageKey ) {
-        this.$nextTick( function() {
-          console.log( 'Sect.onSect() 1', { talkKey:talkKey, dispKey:dispKey, pageKey:pageKey } );
-          this.talkObjs  = this.compObject('Talk');
-          this.talkObj   = this.talkObjs[talkKey];
-          this.sectObjs  = this.compObject(this.talkObj.sect);
-          let  sectKey   = dispKey==='None' ? 'Beg' : dispKey;
-          this.sectObj   = this.sectObjs[sectKey];
-          console.log( 'Sect.onSect() 2', { talkKey:talkKey, sectKey:sectKey, sectObjs:this.sectObjs, sectObj:this.sectObj } );
-          this.dataObj   = null;
-          if( this.sectObj.type==='Prac' ) {
-              this.dataObj = this.pracObject( this.talkObj.data, this.sectObj.name ) }
-          else if( this.sectObj.type==='Disp' && pageKey!=='None' ) {
-              this.dataObj = this.dispObject( this.talkObj.data, this.sectObj.name, pageKey ) } } ) }
+      onSect: function( talkKey, sectKey, pageKey ) {
+        console.log( 'Sect.onSect() 1', { talkKey:talkKey, sectKey:sectKey, pageKey:pageKey } );
+        this.talkObjs  = this.compObject('Talk');
+        this.talkObj   = this.talkObjs[talkKey];
+        this.sectObjs  = this.compObject(this.talkObj.route);
+        this.sectObj   = this.sectObjs['Beg'];
+        this.sectObj   = this.sectObjs[sectKey];
+        console.log( 'Sect.onSect() 2', { talkKey:talkKey, sectKey:sectKey, sectObjs:this.sectObjs, sectObj:this.sectObj } );
+        this.dataObj   = null;
+        if( this.sectObj.type==='Prac' ) {
+            this.dataObj = this.pracObject( this.talkObj.data, this.sectObj.name ) }
+        else if( this.sectObj.type==='Disp' && pageKey!=='None' ) {
+            this.dataObj = this.dispObject( this.talkObj.data, this.sectObj.name, pageKey ) } }
     },
 
     mounted: function () {
+   //console.log( "Sect.mounted()",   this.talkObj );
       this.subscribe(  "Nav", 'Sect.vue', (obj) => {
         this.onNav( obj ); } ); }
   }
