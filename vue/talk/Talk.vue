@@ -28,7 +28,7 @@
     methods: {
       
       doTalk: function(talkKey) {
-        this.onSect( talkKey, 'Beg', 'None' ); },
+        this.nav().pub( { pracKey:talkKey, dispKey:'Beg', pageKey:'None' } ); },
 
       onNav: function (obj) {
         if( this.nav().isMyNav( obj, 'Talk' ) ) {
@@ -40,12 +40,13 @@
         let  sectKey   = dispKey==='None' ? 'Beg' : dispKey
         this.sectObj   = this.sectObjs[sectKey];
         console.log( 'Sect.onSect()',
-          { talkKey:talkKey, sectKey:sectKey, pageKey:pageKey, sectObjs:this.sectObjs, sectObj:this.sectObj } );
+          { talkKey:talkKey, talkObj:this.talkObj,   sectKey:sectKey,
+            pageKey:pageKey, sectObjs:this.sectObjs, sectObj:this.sectObj } );
         this.dataObj   = null;
         if( this.sectObj.type==='Prac' ) {
-          this.dataObj = this.pracObject( this.talkObj.data, this.sectObj.name ) }
+          this.dataObj = this.pracObject( this.talkObj.src, this.sectObj.name ) }
         else if( this.sectObj.type==='Disp' && pageKey!=='None' ) {
-          this.dataObj = this.dispObject( this.talkObj.data, this.sectObj.name, pageKey ) } }
+          this.dataObj = this.dispObject( this.talkObj.src, this.sectObj.name, pageKey ) } }
       
     },
 

@@ -158,10 +158,11 @@ class Nav
     return if @pracKey is 'None' || @dispKey is 'None'
     msg        = {}
     msg.source = "#{'Nav.dirSect'}(#{dir})"
-    talkObjs   = @mixin.compObject('Talk');
+    talkObjs   = @mixins.compObject('Talk')
     talkObj    = talkObjs[@pracKey];
+    talkObj.sectKeys = Object.keys(@mixins.compObject(talkObj.comp)) if not talkObj.sectKeys?
     if talkObj?
-      msg.dispKey = if dir is 'east' then @prevKey(@dispKey,talkObj.pracKeys) else  @nextKey(@dispKey,talkObj.pracKeys)
+      msg.dispKey = if dir is 'west' then @prevKey(@dispKey,talkObj.sectKeys) else  @nextKey(@dispKey,talkObj.sectKeys)
       @pub( msg )
     return
 
@@ -169,13 +170,13 @@ class Nav
     kidx = keys.indexOf(key)
     pidx = kidx - 1
     pidx = keys.length - 1 if pidx is -1
-    keys(pidx)
+    keys[pidx]
 
   nextKey:( key, keys ) ->
     kidx = keys.indexOf(key)
     nidx = kidx + 1
     nidx = 0 if nidx is keys.length
-    keys(nidx)
+    keys[nidx]
 
   dirPage:( dir ) ->
     msg = {}

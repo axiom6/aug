@@ -249,10 +249,13 @@ Nav = class Nav {
     }
     msg = {};
     msg.source = `${'Nav.dirSect'}(${dir})`;
-    talkObjs = this.mixin.compObject('Talk');
+    talkObjs = this.mixins.compObject('Talk');
     talkObj = talkObjs[this.pracKey];
+    if (talkObj.sectKeys == null) {
+      talkObj.sectKeys = Object.keys(this.mixins.compObject(talkObj.comp));
+    }
     if (talkObj != null) {
-      msg.dispKey = dir === 'east' ? this.prevKey(this.dispKey, talkObj.pracKeys) : this.nextKey(this.dispKey, talkObj.pracKeys);
+      msg.dispKey = dir === 'west' ? this.prevKey(this.dispKey, talkObj.sectKeys) : this.nextKey(this.dispKey, talkObj.sectKeys);
       this.pub(msg);
     }
   }
@@ -264,7 +267,7 @@ Nav = class Nav {
     if (pidx === -1) {
       pidx = keys.length - 1;
     }
-    return keys(pidx);
+    return keys[pidx];
   }
 
   nextKey(key, keys) {
@@ -274,7 +277,7 @@ Nav = class Nav {
     if (nidx === keys.length) {
       nidx = 0;
     }
-    return keys(nidx);
+    return keys[nidx];
   }
 
   dirPage(dir) {

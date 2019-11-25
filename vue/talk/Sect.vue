@@ -5,7 +5,6 @@
     <div    v-if="hasProp('icon')"   class="sect-icon"><i :class="sectObj.icon"></i></div>
     <div    v-if="hasProp('banner')" class="sect-banner"><div>{{sectObj.banner}}</div></div>
     <div    v-if="hasProp('title')"  class="sect-title" >{{sectObj.title}}</div>
-    <div    v-if="hasProp('name')"   class="sect-name"  >{{sectObj.name}}</div>
     <div    v-if="hasProp('desc')"   class="sect-desc"  >{{sectObj.desc}}</div>
  <!--t-prac v-if="isType('Prac')"    class="sect-prac" :sectObj="sectObj" :pracObj="dataObj"></t-prac-->
  <!--t-disp v-if="isType('Disp')"    class="sect-disp" :sectObj="sectObj" :dispObj="dataObj"></t-disp-->
@@ -35,9 +34,7 @@
             return this.isDef(this.sectObj); },
           
           hasProp: function(prop) {
-            console.log( 'Sect.hasProp()', prop,
-              { isSect:this.isDef(this.sectObj), isProp:this.isDef(this.sectObj[prop]), isObj:this.sectObj } );
-            this.isDef(this.sectObj[prop]) }, // || this.isDef(this.dataObj[prop]); },
+            return this.isDef(this.sectObj[prop]) }, // || this.isDef(this.dataObj[prop]); },
           
         }
       }
@@ -59,8 +56,6 @@
         .sect-banner { position:absolute; left:35%; top:40%; width: 40%; height:20%; font-size:5.0*@sectFS;
           div { .themeCenterItems(); } }
         .sect-title  { position:absolute; left:0;   top:10%; width:100%; height:10%; font-size:3.0*@sectFS;
-          div { .themeCenterItems(); } }
-        .sect-name   { position:absolute; left:0;   top:10%; width:100%; height:10%; font-size:3.0*@sectFS;
           div { .themeCenterItems(); } }
         .sect-desc   { position:absolute; left:0;   top:20%; width:100%; height:80%; font-size:1.0*@sectFS;
           div { .themeCenterItems(); } }
