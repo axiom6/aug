@@ -1,7 +1,7 @@
 
 <template>
   <div class="talk-pane">
-    <div v-if="myRoute()" class="talk-list">
+    <div v-show="sectObj===null" class="talk-list">
     <template v-for="talkObj in talkObjs">
       <div class="talk-talk" @click="doTalk(talkObj.name)">
         <i   :class="talkObj.icon"></i>
@@ -9,12 +9,9 @@
       </div>
     </template>
   </div>
-  <!--div v-show="!myRoute()" class="talk-sect">
-    <template v-for="talkObj in talkObjs">
-      <t-sect :talkObj="talkObj"></t-sect>
-      <router-view :name="talkObj.route"></router-view>
-    </template>
-  </div-->
+  <div v-if="sectObj!==null" class="talk-sect">
+    <t-sect :sectObj="sectObj" :dataObj="dataObj"></t-sect>
+  </div>
   </div>
 </template>
 
@@ -26,22 +23,38 @@
 
     components:{ 't-sect':Sect },
 
-    data() { return { talkObjs:null, talkObj:null } },
+    data() { return { talkObjs:null, talkObj:null, sectObjs:null, sectObj:null, dataObj:null } },
 
     methods: {
-
-      myRoute: function() {
-        return this.isRoute('Talk'); },
-
+      
       doTalk: function(talkKey) {
-        this.talkObj = this.talkObjs[talkKey];
-        let obj = { source:"Talk", route:'Sect', pracKey:talkKey, dispKey:'Beg' };
-        this.nav().pub( obj ); },
+        this.onSect( talkKey, 'Beg', 'None' ); },
+
+      onNav: function (obj) {
+        if( this.nav().isMyNav( obj, 'Talk' ) ) {
+            this.onSect( obj.pracKey, obj.dispKey, obj.pageKey ); } },
+
+      onSect: function( talkKey, dispKey, pageKey ) {
+        this.talkObj   = this.talkObjs[talkKey];
+        this.sectObjs  = this.compObject(this.talkObj.comp);
+        let  sectKey   = dispKey==='None' ? 'Beg' : dispKey
+        this.sectObj   = this.sectObjs[sectKey];
+        console.log( 'Sect.onSect()',
+          { talkKey:talkKey, sectKey:sectKey, pageKey:pageKey, sectObjs:this.sectObjs, sectObj:this.sectObj } );
+        this.dataObj   = null;
+        if( this.sectObj.type==='Prac' ) {
+          this.dataObj = this.pracObject( this.talkObj.data, this.sectObj.name ) }
+        else if( this.sectObj.type==='Disp' && pageKey!=='None' ) {
+          this.dataObj = this.dispObject( this.talkObj.data, this.sectObj.name, pageKey ) } }
       
     },
 
     beforeMount: function() {
-      this.talkObjs = this.compObject('Talk'); }
+      this.talkObjs = this.compObject('Talk'); },
+
+    mounted: function () {
+      this.subscribe(  "Nav", 'Talk.vue', (obj) => {
+        this.onNav( obj ); } ); }
     
   }
 

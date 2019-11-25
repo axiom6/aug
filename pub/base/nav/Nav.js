@@ -164,8 +164,8 @@ Nav = class Nav {
         case 'Disp':
           this.dirDisp(direct);
           break;
-        case 'Sect':
-          this.dirSect(direct);
+        case 'Talk':
+          this.dirTalk(direct);
           break;
         default:
           this.dirComp(direct);
@@ -242,28 +242,19 @@ Nav = class Nav {
     }
   }
 
-  dirSect(dir) {
+  dirTalk(dir) {
     var msg, talkObj, talkObjs;
+    if (this.pracKey === 'None' || this.dispKey === 'None') {
+      return;
+    }
     msg = {};
     msg.source = `${'Nav.dirSect'}(${dir})`;
     talkObjs = this.mixin.compObject('Talk');
-    talkObj = talkObjs[msg.pracKey];
-    msg.pracKey = dir === 'east' ? this.prevKey(this.pracKey, talkObj.pracKeys) : this.nextKey(this.pracKey, talkObj.pracKeys);
-    msg.dispKey = talkObj.pracKeys[0];
-    this.pub(msg);
-  }
-
-  dirPres(dir) {
-    var msg, sectKeys, sectObj, sectObjs, talkObj, talkObjs;
-    msg = {};
-    msg.source = `${'Nav.dirPres'}(${dir})`;
-    talkObjs = this.mixin.compObject('Talk');
-    talkObj = talkObjs[msg.pracKey];
-    sectObjs = this.compObject(talkObj.sect);
-    sectObj = sectObjs[this.pracKey];
-    sectKeys = sectObj.dispKeys;
-    msg.dispKey = dir === 'east' ? this.prevKey(this.dispKey, sectKeys) : this.nextKey(this.dispKey, sectKeys);
-    this.pub(msg);
+    talkObj = talkObjs[this.pracKey];
+    if (talkObj != null) {
+      msg.dispKey = dir === 'east' ? this.prevKey(this.dispKey, talkObj.pracKeys) : this.nextKey(this.dispKey, talkObj.pracKeys);
+      this.pub(msg);
+    }
   }
 
   prevKey(key, keys) {

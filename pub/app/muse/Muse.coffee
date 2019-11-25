@@ -63,7 +63,7 @@ class Muse
 
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Muse.vue = () ->
-    Muse.mixin = new Mixin( Muse, ['Home','Talk','Sect','Cube','Prin','Comp','Prac','Disp'] ) # Can't use komps
+    Muse.mixin = new Mixin( Muse, ['Home','Talk','Cube','Prin','Comp','Prac','Disp'] ) # Can't use komps
     Muse.nav.setMixinMethods(  Muse.mixin.mixin().methods )
     Vue['mixin']( Muse.mixin.mixin() )
     Vue.use(Router)
@@ -84,7 +84,6 @@ class Muse
       routes:[
         { path: '/',     name:'Home', components:{ Home: Home      } },
         { path: '/talk', name:'Talk', components:{ Talk: Home.Talk } },
-        { path: '/sect', name:'Sect', components:{ Talk: Home.Sect } },
         { path: '/cube', name:'Cube', components:{ Cube: Home.Cube } },
         { path: '/prin', name:'Prin', components:{ Prin: Home.Prin } },
         { path: '/comp', name:'Comp', components:{ Comp: Home.Comp } },
@@ -96,7 +95,7 @@ class Muse
   Muse.komps = {
     Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
     north:"Wise", prev:"Wise", south:"Cube",  next:"Cube"  }
-    Talk:{ title:'Talk', key:'Talk', route:'Talk', pracs:{}, ikw:true,  icon:"fas fa-circle",
+    Talk:{ title:'Talk', key:'Talk', route:'Talk', pracs:{}, ikw:true,  icon:"fas fa-portrait",
     north:"Home", prev:"Home", south:"Cube",  next:"PrCubein"  }
     Cube:{ title:'Cube', key:'Cube', route:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes",
     north:"Talk", prev:"Talk", south:"Prin",  next:"Prin"  }

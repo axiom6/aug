@@ -49,7 +49,6 @@ Muse = (function() {
       Muse.mixin = new Mixin(Muse, [
         'Home',
         'Talk',
-        'Sect',
         'Cube',
         'Prin',
         'Comp',
@@ -93,13 +92,6 @@ Muse = (function() {
             name: 'Talk',
             components: {
               Talk: Home.Talk
-            }
-          },
-          {
-            path: '/sect',
-            name: 'Sect',
-            components: {
-              Talk: Home.Sect
             }
           },
           {
@@ -243,7 +235,7 @@ Muse = (function() {
       route: 'Talk',
       pracs: {},
       ikw: true,
-      icon: "fas fa-circle",
+      icon: "fas fa-portrait",
       north: "Home",
       prev: "Home",
       south: "Cube",

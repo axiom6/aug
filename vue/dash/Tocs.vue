@@ -31,8 +31,8 @@
     methods: {
       myPracs: function(compKey) {
         let pracs = {}
-        if(      this.isDef(this.compPracs[compKey]) ) { pracs = this.compPracs[compKey];   }
-        else if( this.isDef(this.komps[compKey])     ) { pracs = this.komps[compKey].pracs; }
+        if(      compKey!=='Talk' && this.isDef(this.compPracs[compKey]) ) { pracs = this.compPracs[compKey];   }
+        else if( compKey!=='Talk' && this.isDef(this.komps[compKey])     ) { pracs = this.komps[compKey].pracs; }
         return pracs; },
       myKomp: function(kompKey) {
         return kompKey===this.compKey || ( kompKey==='Info' && this.compKey==='Data' ) },
@@ -43,12 +43,11 @@
         this.pub( { route:route, compKey:compKey, source:'Toc' } ); },
       doPrac: function(pracKey) {
         this.pracKey = pracKey;
-        let route    = this.isMuse()         ? 'Prac' : pracKey;
-            route    = this.compKey==='Talk' ? 'Sect' : route;
+        let route    = this.isMuse() ? 'Prac' : pracKey;
         this.pub( { route:route, pracKey:pracKey, source:'Toc' } ); },
       doDisp: function(dispKey) {
         this.dispKey = dispKey;
-        let route    = this.compKey==='Talk' ? 'Sect' : 'Disp';
+        let route    = this.isMuse() ? 'Disp' : dispKey;
         this.pub( { route:route, dispKey:dispKey, source:'Toc' } ); },
       pub: function(obj) {
         this.nav().dirTabs = false;

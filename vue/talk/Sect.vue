@@ -1,93 +1,73 @@
 
 
 <template>
-  <div      v-if="sectObj!==null"    class="sect-pane">
-    <div    v-if="hasProp('icon')"   class="sect-icon"><i :class="getProp('icon')"></i></div>
+  <div      v-if="hasSect()"         class="sect-pane">
+    <div    v-if="hasProp('icon')"   class="sect-icon"><i :class="sectObj.icon"></i></div>
     <div    v-if="hasProp('banner')" class="sect-banner"><div>{{sectObj.banner}}</div></div>
-    <div    v-if="hasProp('title')"  class="sect-title">{{sectObj.title}}</div>
-    <div    v-if="hasProp('name')"   class="sect-name" >{{sectObj.name}}</div>
-    <div    v-if="hasProp('desc')"   class="sect-desc">{{getProp('desc')}}</div>
-    <t-prac v-if="isType('Prac')"    class="sect-prac" :sectObj="sectObj" :pracObj="dataObj"></t-prac>
-    <t-disp v-if="isType('Disp')"    class="sect-disp" :sectObj="sectObj" :dispObj="dataObj"></t-disp>
-    <div    v-if="hasProp('author')" class="sect-author">{{sectObj.author}}</div>
+    <div    v-if="hasProp('title')"  class="sect-title" >{{sectObj.title}}</div>
+    <div    v-if="hasProp('name')"   class="sect-name"  >{{sectObj.name}}</div>
+    <div    v-if="hasProp('desc')"   class="sect-desc"  >{{sectObj.desc}}</div>
+ <!--t-prac v-if="isType('Prac')"    class="sect-prac" :sectObj="sectObj" :pracObj="dataObj"></t-prac-->
+ <!--t-disp v-if="isType('Disp')"    class="sect-disp" :sectObj="sectObj" :dispObj="dataObj"></t-disp-->
+    <div    v-if="hasProp('author')" class="sect-author" >{{sectObj.author}}</div>
   </div>
 </template>
-
-<script type="module">
-
-  import Prac from './Prac.vue';
-  import Disp from './Disp.vue';
-
-  let Sect = {
-
-    components:{ 't-prac':Prac, 't-disp':Disp },
     
-  //props: {  },
+    <script type="module">
+    
+      import Prac from './Prac.vue';
+      import Disp from './Disp.vue';
+    
+      let Sect = {
+    
+        components:{ 't-prac':Prac, 't-disp':Disp },
+        
+        props: { sectObj:Object, dataObj:Object },
+    
+        data() { return {} },
+    
+        methods: {
+    
+          isType: function(type) {
+            return type===this.sectObj.type; },
 
-    data() { return { talkObj:Object, sectObjs:null, sectObj:null, dataObj:null, type:"Sect" } },
-
-    methods: {
-
-      isType: function(type) {
-        return type===this.type; },
+          hasSect: function() {
+            return this.isDef(this.sectObj); },
+          
+          hasProp: function(prop) {
+            console.log( 'Sect.hasProp()', prop,
+              { isSect:this.isDef(this.sectObj), isProp:this.isDef(this.sectObj[prop]), isObj:this.sectObj } );
+            this.isDef(this.sectObj[prop]) }, // || this.isDef(this.dataObj[prop]); },
+          
+        }
+      }
+    
+      export default Sect;
+    
+    </script>
+    
+    <style lang="less">
       
-      hasProp: function(prop) {
-        this.isDef(this.sectObj) && this.isDef(this.sectObj[prop]) }, // || this.isDef(this.dataObj[prop]); },
-
-      getProp: function(prop) {
-        return this.isDef(this.sectObj[prop]) ? this.sectObj[prop] : this.dataObj[prop]; },
-
-      onNav: function (obj) {
-        if( this.nav().isMyNav( obj, 'Sect' ) ) {
-            this.onSect( obj.pracKey, obj.dispKey, obj.pageKey ); } },
+      @import '../../pub/css/themes/theme.less';
       
-      onSect: function( talkKey, sectKey, pageKey ) {
-        console.log( 'Sect.onSect() 1', { talkKey:talkKey, sectKey:sectKey, pageKey:pageKey } );
-        this.talkObjs  = this.compObject('Talk');
-        this.talkObj   = this.talkObjs[talkKey];
-        this.sectObjs  = this.compObject(this.talkObj.route);
-        this.sectObj   = this.sectObjs['Beg'];
-        this.sectObj   = this.sectObjs[sectKey];
-        console.log( 'Sect.onSect() 2', { talkKey:talkKey, sectKey:sectKey, sectObjs:this.sectObjs, sectObj:this.sectObj } );
-        this.dataObj   = null;
-        if( this.sectObj.type==='Prac' ) {
-            this.dataObj = this.pracObject( this.talkObj.data, this.sectObj.name ) }
-        else if( this.sectObj.type==='Disp' && pageKey!=='None' ) {
-            this.dataObj = this.dispObject( this.talkObj.data, this.sectObj.name, pageKey ) } }
-    },
-
-    mounted: function () {
-   //console.log( "Sect.mounted()",   this.talkObj );
-      this.subscribe(  "Nav", 'Sect.vue', (obj) => {
-        this.onNav( obj ); } ); }
-  }
-
-  export default Sect;
-
-</script>
-
-<style lang="less">
-  
-  @import '../../pub/css/themes/theme.less';
-  
-  @sectFS:2.0*@themeFS;  //  border-radius:0.5*@sectFS;
-  
-  .sect-pane   { position:absolute; left:0; top:0; width:100%; height:100%;
-    background-color:@theme-back; font-size:@sectFS;
-    .sect-icon   { position:absolute; left:0;   top:0;   width: 10%; height:10%; font-size:5.0*@sectFS;
-      i { .themeCenterItems(); } }
-    .sect-banner { position:absolute; left:35%; top:40%; width: 40%; height:20%; font-size:5.0*@sectFS;
-      div { .themeCenterItems(); } }
-    .sect-title  { position:absolute; left:0;   top:10%; width:100%; height:10%; font-size:3.0*@sectFS;
-      div { .themeCenterItems(); } }
-    .sect-name   { position:absolute; left:0;   top:10%; width:100%; height:10%; font-size:3.0*@sectFS;
-      div { .themeCenterItems(); } }
-    .sect-desc   { position:absolute; left:0;   top:20%; width:100%; height:80%; font-size:1.0*@sectFS;
-      div { .themeCenterItems(); } }
-    .sect-prac   { position:absolute; left:10%; top:10%; width: 80%; height:80%; font-size:1.0*@sectFS;  }
-    .sect-disp   { position:absolute; left:10%; top:10%; width: 80%; height:80%; font-size:1.0*@sectFS;  }
-    .sect-author { position:absolute; left:70%; top:95%; width: 30%; height: 5%; font-size:1.0*@sectFS;
-      div { .themeCenterItems(); } }
-  }
-
-</style>
+      @sectFS:2.0*@themeFS;  //  border-radius:0.5*@sectFS;
+      
+      .sect-pane   { position:absolute; left:0; top:0; width:100%; height:100%;
+        background-color:@theme-back; font-size:@sectFS;
+        .sect-icon   { position:absolute; left:0;   top:0;   width: 10%; height:10%; font-size:5.0*@sectFS;
+          i { .themeCenterItems(); } }
+        .sect-banner { position:absolute; left:35%; top:40%; width: 40%; height:20%; font-size:5.0*@sectFS;
+          div { .themeCenterItems(); } }
+        .sect-title  { position:absolute; left:0;   top:10%; width:100%; height:10%; font-size:3.0*@sectFS;
+          div { .themeCenterItems(); } }
+        .sect-name   { position:absolute; left:0;   top:10%; width:100%; height:10%; font-size:3.0*@sectFS;
+          div { .themeCenterItems(); } }
+        .sect-desc   { position:absolute; left:0;   top:20%; width:100%; height:80%; font-size:1.0*@sectFS;
+          div { .themeCenterItems(); } }
+        .sect-prac   { position:absolute; left:10%; top:10%; width: 80%; height:80%; font-size:1.0*@sectFS;  }
+        .sect-disp   { position:absolute; left:10%; top:10%; width: 80%; height:80%; font-size:1.0*@sectFS;  }
+        .sect-author { position:absolute; left:70%; top:95%; width: 30%; height: 5%; font-size:1.0*@sectFS;
+          div { .themeCenterItems(); } }
+      }
+    
+    </style>
