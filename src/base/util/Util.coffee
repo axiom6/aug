@@ -43,6 +43,17 @@ class Util
     b = key.charAt(key.length-1)
     a is a.toUpperCase() and a isnt '$' and b isnt '_'
 
+  @hasChild:( obj ) ->
+    for own key, val of obj
+      return true if Util.isChild(key)
+    false
+
+  @childKeys:( obj ) ->
+    vals = []
+    for own key, val of obj
+      vals.push(key) if Util.isChild(key)
+    vals
+
   # ---- Inquiry ----
 
   @hasMethod:( obj, method, issue=false ) ->

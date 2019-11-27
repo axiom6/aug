@@ -54,6 +54,31 @@ Util = class Util {
     return a === a.toUpperCase() && a !== '$' && b !== '_';
   }
 
+  static hasChild(obj) {
+    var key, val;
+    for (key in obj) {
+      if (!hasProp.call(obj, key)) continue;
+      val = obj[key];
+      if (Util.isChild(key)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  static childKeys(obj) {
+    var key, val, vals;
+    vals = [];
+    for (key in obj) {
+      if (!hasProp.call(obj, key)) continue;
+      val = obj[key];
+      if (Util.isChild(key)) {
+        vals.push(key);
+      }
+    }
+    return vals;
+  }
+
   // ---- Inquiry ----
   static hasMethod(obj, method, issue = false) {
     var has;

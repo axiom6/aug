@@ -35,18 +35,19 @@
             this.onSect( obj.pracKey, obj.dispKey, obj.pageKey ); } },
 
       onSect: function( talkKey, dispKey, pageKey ) {
-        this.talkObj   = this.talkObjs[talkKey];
-        this.sectObjs  = this.compObject(this.talkObj.comp);
-        let  sectKey   = dispKey==='None' ? 'Beg' : dispKey
-        this.sectObj   = this.sectObjs[sectKey];
+        this.talkObj  = this.talkObjs[talkKey];
+        this.sectObjs = this.compObject(this.talkObj.comp);
+        let  sectKey  = dispKey==='None' ? 'Beg' : dispKey
+        let  sectObj  = this.sectObjs[sectKey];
+        this.sectObj  = pageKey!=='None' && Util.isDef(sectObj[pageKey]) ? sectObj[pageKey] : sectObj;
         console.log( 'Sect.onSect()',
           { talkKey:talkKey, talkObj:this.talkObj,   sectKey:sectKey,
-            pageKey:pageKey, sectObjs:this.sectObjs, sectObj:this.sectObj } );
+            pageKey:pageKey, sectObjs:this.sectObjs, sectObj:sectObj, pageObj:this.sectObj } );
         this.dataObj   = null;
         if( this.sectObj.type==='Prac' ) {
-          this.dataObj = this.pracObject( this.talkObj.src, this.sectObj.name ) }
+          this.dataObj = this.pracObject( this.talkObj.src, sectObj.name ) }
         else if( this.sectObj.type==='Disp' && pageKey!=='None' ) {
-          this.dataObj = this.dispObject( this.talkObj.src, this.sectObj.name, pageKey ) } }
+          this.dataObj = this.dispObject( this.talkObj.src, sectObj.name, pageKey ) } }
       
     },
 

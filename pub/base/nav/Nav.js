@@ -1,6 +1,8 @@
 var Nav,
   hasProp = {}.hasOwnProperty;
 
+import Util from '../util/Util.js';
+
 import Build from '../util/Build.js';
 
 Nav = class Nav {
@@ -243,21 +245,98 @@ Nav = class Nav {
   }
 
   dirTalk(dir) {
-    var msg, talkObj, talkObjs;
-    if (this.pracKey === 'None' || this.dispKey === 'None') {
+    var msg, sectObj, sectObjs, talkObj, talkObjs;
+    if (this.pracKey === 'None') {
       return;
     }
     msg = {};
     msg.source = `${'Nav.dirSect'}(${dir})`;
+    this.dispKey = this.dispKey === 'None' ? 'Beg' : this.dispKey;
     talkObjs = this.mixins.compObject('Talk');
     talkObj = talkObjs[this.pracKey];
-    if (talkObj.sectKeys == null) {
-      talkObj.sectKeys = Object.keys(this.mixins.compObject(talkObj.comp));
+    if ((talkObj == null) || (talkObj.comp == null)) {
+      return;
     }
-    if (talkObj != null) {
-      msg.dispKey = dir === 'west' ? this.prevKey(this.dispKey, talkObj.sectKeys) : this.nextKey(this.dispKey, talkObj.sectKeys);
-      this.pub(msg);
+    talkObj.keys = talkObj.keys != null ? talkObj.keys : Object.keys(talkObj);
+    sectObjs = this.mixins.compObject(talkObj.comp);
+    sectObj = sectObjs[this.dispKey];
+    [this.dispKey, this.pageKey] = (function() {
+      switch (dir) {
+        case 'west':
+          return this.westKey(this.dispKey, talkObj.keys, sectObj);
+        case 'east':
+          return this.eastKey(this.dispKey, talkObj.keys, sectObj);
+        case 'north':
+          return this.northKey(this.dispKey, talkObj.keys, sectObj);
+        case 'south':
+          return this.southKey(this.dispKey, talkObj.keys, sectObj);
+        case 'prev':
+          return [this.prevKey(this.dispKey, talkObj.keys), 'None'];
+        case 'next':
+          return [this.nextKey(this.dispKey, talkObj.keys), 'None'];
+        default:
+          return ['None', 'None'];
+      }
+    }).call(this);
+    msg.dispKey = this.dispKey;
+    msg.pageKey = this.pageKey;
+    this.pub(msg);
+  }
+
+  westKey(key, keys, obj) {
+    if (Util.hasChild(obj)) {
+      return this.northKey(key, keys, obj);
     }
+    return [this.prevKey(key, keys), 'None'];
+  }
+
+  eastKey(key, keys, obj) {
+    if (Util.hasChild(obj)) {
+      return this.southKey(key, keys, obj);
+    }
+    return [this.nextKey(key, keys), 'None'];
+  }
+
+  northKey(key, keys, obj) {
+    console.log('Nav.northKey() beg', {
+      dispKey: key,
+      pageKey: this.pageKey,
+      childKeys: Util.childKeys(obj),
+      has: Util.hasChild(obj)
+    });
+    if (!Util.hasChild(obj)) {
+      return this.westKey(key, keys, obj);
+    }
+    obj.childKeys = obj.childKeys != null ? obj.childKeys : Util.childKeys(obj);
+    this.pageKey = this.pageKey === 'None' ? obj.childKeys[obj.childKeys.length - 1] : this.prevKey(this.pageKey, obj.childKeys);
+    console.log('Nav.northKey() end', {
+      dispKey: key,
+      pageKey: this.pageKey,
+      childKeys: Util.childKeys(obj),
+      has: Util.hasChild(obj)
+    });
+    return [key, this.pageKey];
+  }
+
+  southKey(key, keys, obj) {
+    console.log('Nav.southKey() beg', {
+      dispKey: key,
+      pageKey: this.pageKey,
+      childKeys: Util.childKeys(obj),
+      has: Util.hasChild(obj)
+    });
+    if (!Util.hasChild(obj)) {
+      return this.eastKey(key, keys, obj);
+    }
+    obj.childKeys = obj.childKeys != null ? obj.childKeys : Util.childKeys(obj);
+    this.pageKey = this.pageKey === 'None' ? obj.childKeys[0] : this.nextKey(this.pageKey, obj.childKeys);
+    console.log('Nav.southKey() end', {
+      dispKey: key,
+      pageKey: this.pageKey,
+      childKeys: Util.childKeys(obj),
+      has: Util.hasChild(obj)
+    });
+    return [key, this.pageKey];
   }
 
   prevKey(key, keys) {

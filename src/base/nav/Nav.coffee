@@ -1,5 +1,6 @@
 
-import Build from '../util/Build.js';
+import Util  from '../util/Util.js'
+import Build from '../util/Build.js'
 
 class Nav
 
@@ -155,16 +156,52 @@ class Nav
     return
 
   dirTalk:( dir ) ->
-    return if @pracKey is 'None' || @dispKey is 'None'
-    msg        = {}
-    msg.source = "#{'Nav.dirSect'}(#{dir})"
-    talkObjs   = @mixins.compObject('Talk')
-    talkObj    = talkObjs[@pracKey];
-    talkObj.sectKeys = Object.keys(@mixins.compObject(talkObj.comp)) if not talkObj.sectKeys?
-    if talkObj?
-      msg.dispKey = if dir is 'west' then @prevKey(@dispKey,talkObj.sectKeys) else  @nextKey(@dispKey,talkObj.sectKeys)
-      @pub( msg )
+    return if @pracKey is 'None'
+    msg          = {}
+    msg.source   = "#{'Nav.dirSect'}(#{dir})"
+    @dispKey     = if @dispKey is 'None' then 'Beg' else @dispKey
+    talkObjs     = @mixins.compObject('Talk')
+    talkObj      = talkObjs[@pracKey];
+    return if not talkObj? or not talkObj.comp?
+    talkObj.keys = if talkObj.keys? then talkObj.keys else Object.keys(talkObj)
+    sectObjs   = @mixins.compObject(talkObj.comp)
+    sectObj    = sectObjs[@dispKey]
+    [@dispKey,@pageKey] = switch dir
+      when 'west'  then  @westKey( @dispKey, talkObj.keys, sectObj )
+      when 'east'  then  @eastKey( @dispKey, talkObj.keys, sectObj )
+      when 'north' then @northKey( @dispKey, talkObj.keys, sectObj )
+      when 'south' then @southKey( @dispKey, talkObj.keys, sectObj )
+      when 'prev'  then [@prevKey( @dispKey, talkObj.keys ), 'None' ]
+      when 'next'  then [@nextKey( @dispKey, talkObj.keys ), 'None' ]
+      else              ['None','None']
+    msg.dispKey = @dispKey
+    msg.pageKey = @pageKey
+    @pub( msg )
     return
+
+  westKey:( key, keys, obj ) ->
+    return @northKey(key,keys,obj) if Util.hasChild(obj)
+    [@prevKey( key, keys ),'None']
+
+  eastKey:( key, keys, obj ) ->
+    return @southKey(key,keys,obj) if Util.hasChild(obj)
+    [@nextKey( key, keys ),'None']
+
+  northKey:( key, keys, obj ) ->
+    console.log( 'Nav.northKey() beg', { dispKey:key, pageKey:@pageKey, childKeys:Util.childKeys(obj), has:Util.hasChild(obj) } )
+    return @westKey(key,keys,obj) if not Util.hasChild(obj)
+    obj.childKeys = if obj.childKeys? then obj.childKeys else Util.childKeys(obj)
+    @pageKey = if @pageKey is 'None'  then obj.childKeys[obj.childKeys.length-1] else @prevKey( @pageKey, obj.childKeys )
+    console.log( 'Nav.northKey() end', { dispKey:key, pageKey:@pageKey, childKeys:Util.childKeys(obj), has:Util.hasChild(obj) } )
+    [key,@pageKey]
+
+  southKey:( key, keys, obj ) ->
+    console.log( 'Nav.southKey() beg', { dispKey:key, pageKey:@pageKey, childKeys:Util.childKeys(obj), has:Util.hasChild(obj) } )
+    return @eastKey(key,keys,obj) if not Util.hasChild(obj)
+    obj.childKeys = if obj.childKeys? then obj.childKeys else Util.childKeys(obj)
+    @pageKey = if @pageKey is 'None'  then obj.childKeys[0] else @nextKey( @pageKey, obj.childKeys )
+    console.log( 'Nav.southKey() end', { dispKey:key, pageKey:@pageKey, childKeys:Util.childKeys(obj), has:Util.hasChild(obj) } )
+    [key,@pageKey]
 
   prevKey:( key, keys ) ->
     kidx = keys.indexOf(key)
@@ -176,7 +213,7 @@ class Nav
     kidx = keys.indexOf(key)
     nidx = kidx + 1
     nidx = 0 if nidx is keys.length
-    keys[nidx]
+    keys[nidx]    
 
   dirPage:( dir ) ->
     msg = {}
