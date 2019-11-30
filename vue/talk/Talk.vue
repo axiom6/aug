@@ -35,7 +35,8 @@
             this.onSect( obj.pracKey, obj.dispKey, obj.pageKey ); } },
 
       onSect: function( talkKey, sectKey, pageKey ) {
-        this.sectObj = this.sectObject( talkKey, sectKey, pageKey );
+        let dispObj  = this.sectObject( talkKey, sectKey );
+        this.sectObj = pageKey!=='None' ? this.pageObject(dispObj,pageKey) : dispObj;
       //this.dataObj = this.dataObject( this.sectObj, pageKey );
       } },
 

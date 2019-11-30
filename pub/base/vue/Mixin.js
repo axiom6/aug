@@ -172,35 +172,42 @@ Mixin = class Mixin {
           }
           return prac;
         },
-        sectObject: function(pracKey, dispKey, pageKey) {
-          var keys, sectKey, sectObj, sectObjs, talkObj, talkObjs;
+        sectObject: function(pracKey, dispKey) {
+          var sectObj, sectObjs, talkObj, talkObjs;
           talkObjs = this.compObject('Talk');
           talkObj = talkObjs[pracKey];
           sectObjs = this.compObject(talkObj.comp);
           talkObj.keys = talkObj.keys != null ? talkObj.keys : Util.childKeys(sectObjs);
-          sectKey = dispKey === 'None' ? this.keys(sectObjs)[0] : dispKey;
-          sectObj = sectObjs[sectKey];
-          sectObj.level = 'Disp';
+          dispKey = dispKey === 'None' ? this.keys(sectObjs)[0] : dispKey;
+          sectObj = sectObjs[dispKey];
           sectObj.src = talkObj.src;
-          sectObj.name = sectKey;
+          sectObj.name = dispKey;
           sectObj.peys = talkObj.keys;
-          keys = sectObj.keys != null ? sectObj.keys : Util.childKeys(sectObj);
-          sectObj.keys = keys;
-          if (pageKey !== 'None' && (sectObj[pageKey] != null)) {
-            sectObj = sectObj[pageKey];
-            sectObj.level = 'Page';
-            sectObj.src = talkObj.src;
-            sectObj.name = pageKey;
-            sectObj.peys = keys; // Get parent keys
-            sectObj.keys = sectObj.keys != null ? sectObj.keys : Util.childKeys(sectObj);
-          }
+          sectObj.keys = sectObj.keys != null ? sectObj.keys : Util.childKeys(sectObj);
           console.log('Mixin.sectObj()', {
             pracKey: pracKey,
-            dispKey: sectKey,
-            pageKey: pageKey,
+            dispKey: dispKey,
             sectObj: sectObj
           });
           return sectObj;
+        },
+        pageObject: function(sectObj, pageKey) {
+          var pageObj;
+          pageKey = pageKey === 'None' && (sectObj.keys[0] != null) ? sectObj.keys[0] : pageKey;
+          pageObj = null;
+          if (pageKey !== 'None' && (sectObj[pageKey] != null)) {
+            pageObj = sectObj[pageKey];
+            pageObj.src = sectObj.src;
+            pageObj.name = pageKey;
+            pageObj.peys = sectObj.keys;
+            pageObj.keys = pageObj.keys != null ? pageObj.keys : Util.childKeys(pageObj);
+          }
+          console.log('Mixin.pageObj()', {
+            dispKey: sectObj.name,
+            pageKey: pageKey,
+            pageObj: pageObj
+          });
+          return pageObj;
         },
         dataObject: function(sectObj, pageKey) {
           var dataObj;

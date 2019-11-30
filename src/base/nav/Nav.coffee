@@ -157,72 +157,49 @@ class Nav
   dirTalk:( dir ) ->
     return if @pracKey is 'None'
     msg        = {}
-    msg.source = "#{'Nav.dirSect'}(#{dir})"
-    sectObj    = @mixins.sectObject( @pracKey, @dispKey, @pageKey )
-    @dispKey   = sectObj.name if sectObj.level is 'Disp'
-    @pageKey   = sectObj.name if sectObj.level is 'Page'
-    [@dispKey,@pageKey] = switch dir
-      when 'west'  then  @westKey( @dispKey, sectObj )
-      when 'east'  then  @eastKey( @dispKey, sectObj )
-      when 'north' then @northKey( @dispKey, sectObj )
-      when 'south' then @southKey( @dispKey, sectObj )
-      when 'prev'  then [@prevKey( @dispKey, sectObj ), 'None' ]
-      when 'next'  then [@nextKey( @dispKey, sectObj ), 'None' ]
-      else              ['None','None']
-    console.log( 'Nav.dirTalk()', { dir:dir, sectObj:sectObj, dispKey:@dispKey, pageKey:@pageKey } )
+    msg.source = "#{'Nav.dirTalk'}(#{dir})"
+    sectObj    = @mixins.sectObject( @pracKey, @dispKey )
+    @dispKey   = sectObj.name
+    if @pageKey isnt 'None' and sectObj[@pageKey]?
+       @pageKey = switch dir
+         when 'west'  then @prevKey(  @pageKey, sectObj.keys )
+         when 'east'  then @nextKey(  @pageKey, sectObj.keys )
+         when 'prev'  then @prevKey(  @pageKey, sectObj.keys )
+         when 'next'  then @nextKey(  @pageKey, sectObj.keys )
+         else              'None'
+    else
+       @dispKey = switch dir
+         when 'west'  then  @prevKey( @dispKey, sectObj.peys )
+         when 'east'  then  @nextKey( @dispKey, sectObj.peys )
+         when 'north'
+           @pageKey = 'None'
+           @dispKey
+         when 'south'
+           @pageKey = sectObj.keys[0]
+           @dispKey
+         when 'prev'  then  @prevKey( @dispKey, sectObj.peys )
+         when 'next'  then  @nextKey( @dispKey, sectObj.peys )
+         else              'None'
+
+    console.log( 'Nav.dirTalk()',
+      { dir:dir, sectObj:sectObj, dispKey:@dispKey, pageKey:@pageKey } )
     msg.dispKey = @dispKey
     msg.pageKey = @pageKey
     @pub( msg )
     return
 
-  westKey:( key, obj ) ->
-    if obj.keys.length > 0
-      @northKey(key,obj)
-    else if obj.level is 'Disp'
-      [@prevKey(key,obj),'None']
-    else if obj.level is 'Page'
-      [@dispKey,@prevKey(key,obj)]
-    else
-      console.warn( 'Nav.westKey() unable to move', { key:key, obj:obj } )
-      [@dispKey,@pageKey]
-
-  eastKey:( key, obj ) ->
-    if obj.keys.length > 0
-      @southKey(key,obj)
-    else if obj.level is 'Disp'
-      [@nextKey(key,obj),'None']
-    else if obj.level is 'Page'
-      [@dispKey,@nextKey(key,obj)]
-    else
-      console.warn( 'Nav.eastKey() unable to move', { key:key, obj:obj } )
-      [@dispKey,@pageKey]
-
-  northKey:( key, obj ) ->
-    if obj.keys.length is 0
-      [@prevKey(key,obj),'None']
-    else
-      @pageKey = if @pageKey is 'None' then obj.keys[keys.length-1] else @prevKey( @pageKey, obj )
-      [key,@pageKey]
-
-  southKey:( key, obj ) ->
-    if obj.keys.length is 0
-      [@nextKey(key,obj),'None']
-    else
-      @pageKey = if @pageKey is 'None' then obj.keys[0] else @nextKey( @pageKey, obj )
-      [key,@pageKey]
-
-  prevKey:( key, obj ) ->
-    kidx = obj.peys.indexOf(key)
+  prevKey:( key, keys ) ->
+    kidx = keys.indexOf(key)
     pidx = kidx - 1
-    pidx = obj.peys.length - 1 if pidx is -1
-    obj.peys[pidx]
+    pidx = keys.length - 1 if pidx is -1
+    keys[pidx]
 
-  nextKey:( key, obj ) ->
-    kidx = obj.peys.indexOf(key)
+  nextKey:( key, keys ) ->
+    kidx = keys.indexOf(key)
     nidx = kidx + 1
-    nidx = 0 if nidx is obj.peys.length
-    console.log( 'Nav.nextKey()', { key:key, next:obj.peys[nidx], obj:obj } )
-    obj.peys[nidx]
+    nidx = 0 if nidx is keys.length
+    console.log( 'Nav.nextKey()', { key:key, next:keys[nidx], keys:keys } )
+    keys[nidx]
 
   dirPage:( dir ) ->
     msg = {}

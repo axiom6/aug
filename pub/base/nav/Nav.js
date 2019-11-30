@@ -248,32 +248,46 @@ Nav = class Nav {
       return;
     }
     msg = {};
-    msg.source = `${'Nav.dirSect'}(${dir})`;
-    sectObj = this.mixins.sectObject(this.pracKey, this.dispKey, this.pageKey);
-    if (sectObj.level === 'Disp') {
-      this.dispKey = sectObj.name;
+    msg.source = `${'Nav.dirTalk'}(${dir})`;
+    sectObj = this.mixins.sectObject(this.pracKey, this.dispKey);
+    this.dispKey = sectObj.name;
+    if (this.pageKey !== 'None' && (sectObj[this.pageKey] != null)) {
+      this.pageKey = (function() {
+        switch (dir) {
+          case 'west':
+            return this.prevKey(this.pageKey, sectObj.keys);
+          case 'east':
+            return this.nextKey(this.pageKey, sectObj.keys);
+          case 'prev':
+            return this.prevKey(this.pageKey, sectObj.keys);
+          case 'next':
+            return this.nextKey(this.pageKey, sectObj.keys);
+          default:
+            return 'None';
+        }
+      }).call(this);
+    } else {
+      this.dispKey = (function() {
+        switch (dir) {
+          case 'west':
+            return this.prevKey(this.dispKey, sectObj.peys);
+          case 'east':
+            return this.nextKey(this.dispKey, sectObj.peys);
+          case 'north':
+            this.pageKey = 'None';
+            return this.dispKey;
+          case 'south':
+            this.pageKey = sectObj.keys[0];
+            return this.dispKey;
+          case 'prev':
+            return this.prevKey(this.dispKey, sectObj.peys);
+          case 'next':
+            return this.nextKey(this.dispKey, sectObj.peys);
+          default:
+            return 'None';
+        }
+      }).call(this);
     }
-    if (sectObj.level === 'Page') {
-      this.pageKey = sectObj.name;
-    }
-    [this.dispKey, this.pageKey] = (function() {
-      switch (dir) {
-        case 'west':
-          return this.westKey(this.dispKey, sectObj);
-        case 'east':
-          return this.eastKey(this.dispKey, sectObj);
-        case 'north':
-          return this.northKey(this.dispKey, sectObj);
-        case 'south':
-          return this.southKey(this.dispKey, sectObj);
-        case 'prev':
-          return [this.prevKey(this.dispKey, sectObj), 'None'];
-        case 'next':
-          return [this.nextKey(this.dispKey, sectObj), 'None'];
-        default:
-          return ['None', 'None'];
-      }
-    }).call(this);
     console.log('Nav.dirTalk()', {
       dir: dir,
       sectObj: sectObj,
@@ -285,79 +299,29 @@ Nav = class Nav {
     this.pub(msg);
   }
 
-  westKey(key, obj) {
-    if (obj.keys.length > 0) {
-      return this.northKey(key, obj);
-    } else if (obj.level === 'Disp') {
-      return [this.prevKey(key, obj), 'None'];
-    } else if (obj.level === 'Page') {
-      return [this.dispKey, this.prevKey(key, obj)];
-    } else {
-      console.warn('Nav.westKey() unable to move', {
-        key: key,
-        obj: obj
-      });
-      return [this.dispKey, this.pageKey];
-    }
-  }
-
-  eastKey(key, obj) {
-    if (obj.keys.length > 0) {
-      return this.southKey(key, obj);
-    } else if (obj.level === 'Disp') {
-      return [this.nextKey(key, obj), 'None'];
-    } else if (obj.level === 'Page') {
-      return [this.dispKey, this.nextKey(key, obj)];
-    } else {
-      console.warn('Nav.eastKey() unable to move', {
-        key: key,
-        obj: obj
-      });
-      return [this.dispKey, this.pageKey];
-    }
-  }
-
-  northKey(key, obj) {
-    if (obj.keys.length === 0) {
-      return [this.prevKey(key, obj), 'None'];
-    } else {
-      this.pageKey = this.pageKey === 'None' ? obj.keys[keys.length - 1] : this.prevKey(this.pageKey, obj);
-      return [key, this.pageKey];
-    }
-  }
-
-  southKey(key, obj) {
-    if (obj.keys.length === 0) {
-      return [this.nextKey(key, obj), 'None'];
-    } else {
-      this.pageKey = this.pageKey === 'None' ? obj.keys[0] : this.nextKey(this.pageKey, obj);
-      return [key, this.pageKey];
-    }
-  }
-
-  prevKey(key, obj) {
+  prevKey(key, keys) {
     var kidx, pidx;
-    kidx = obj.peys.indexOf(key);
+    kidx = keys.indexOf(key);
     pidx = kidx - 1;
     if (pidx === -1) {
-      pidx = obj.peys.length - 1;
+      pidx = keys.length - 1;
     }
-    return obj.peys[pidx];
+    return keys[pidx];
   }
 
-  nextKey(key, obj) {
+  nextKey(key, keys) {
     var kidx, nidx;
-    kidx = obj.peys.indexOf(key);
+    kidx = keys.indexOf(key);
     nidx = kidx + 1;
-    if (nidx === obj.peys.length) {
+    if (nidx === keys.length) {
       nidx = 0;
     }
     console.log('Nav.nextKey()', {
       key: key,
-      next: obj.peys[nidx],
-      obj: obj
+      next: keys[nidx],
+      keys: keys
     });
-    return obj.peys[nidx];
+    return keys[nidx];
   }
 
   dirPage(dir) {

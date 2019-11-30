@@ -105,29 +105,35 @@ class Mixin
           else
             console.error( 'Mixin.pracObj() unknown compKey', { compKey:compKey, pracKey:pracKey } )
           prac
-        sectObject:( pracKey, dispKey, pageKey ) ->
+
+        sectObject:( pracKey, dispKey ) ->
           talkObjs      = @compObject('Talk')
           talkObj       = talkObjs[pracKey]
           sectObjs      = @compObject(talkObj.comp)
           talkObj.keys  = if talkObj.keys?  then talkObj.keys else Util.childKeys(sectObjs)
-          sectKey       = if dispKey is 'None' then @keys(sectObjs)[0] else dispKey
-          sectObj       = sectObjs[sectKey]
-          sectObj.level = 'Disp'
+          dispKey       = if dispKey is 'None' then @keys(sectObjs)[0] else dispKey
+          sectObj       = sectObjs[dispKey]
           sectObj.src   = talkObj.src
-          sectObj.name  = sectKey
+          sectObj.name  = dispKey
           sectObj.peys  = talkObj.keys
-          keys          = if sectObj.keys?  then sectObj.keys else Util.childKeys(sectObj)
-          sectObj.keys  = keys
-          if pageKey isnt 'None' and sectObj[pageKey]? # Recurse down a level
-            sectObj       = sectObj[pageKey]
-            sectObj.level = 'Page'
-            sectObj.src   = talkObj.src
-            sectObj.name  = pageKey
-            sectObj.peys  = keys # Get parent keys
-            sectObj.keys  = if sectObj.keys?  then sectObj.keys else Util.childKeys(sectObj)
+          sectObj.keys  = if sectObj.keys?  then sectObj.keys else Util.childKeys(sectObj)
           console.log( 'Mixin.sectObj()',
-            { pracKey:pracKey, dispKey:sectKey, pageKey:pageKey, sectObj:sectObj } )
+            { pracKey:pracKey, dispKey:dispKey, sectObj:sectObj } )
           sectObj
+
+        pageObject:( sectObj, pageKey ) ->
+          pageKey = if pageKey is 'None' and sectObj.keys[0]? then sectObj.keys[0] else pageKey
+          pageObj = null
+          if pageKey isnt 'None' and sectObj[pageKey]?
+             pageObj      = sectObj[pageKey]
+             pageObj.src  = sectObj.src
+             pageObj.name = pageKey
+             pageObj.peys = sectObj.keys
+             pageObj.keys = if pageObj.keys?  then pageObj.keys else Util.childKeys(pageObj)
+          console.log( 'Mixin.pageObj()',
+            { dispKey:sectObj.name, pageKey:pageKey, pageObj:pageObj } )
+          pageObj
+
         dataObject:( sectObj, pageKey ) ->
           dataObj = null
           if sectObj.type is 'Prac'
