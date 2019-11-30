@@ -1,8 +1,8 @@
 {
   "Beg":        { "banner":"Perspectives","type":"Sect", "icon":"fas fa-hourglass-start", "author":"Tom Flaherty", "date":"yyyy-mm-dd" },
-  "Learn":      { "name":"Learn",         "type":"Sect", "icon":"fas fa-graduation-cap" },
-  "Do":         { "name":"Do",            "type":"Sect", "icon":"fas fa-cogs" },
-  "Share":      { "name":"Share",         "type":"Sect", "icon":"fas fa-share-alt-square" },
+  "Learn":      { "title":"Learn",         "type":"Sect", "icon":"fas fa-graduation-cap" },
+  "Do":         { "title":"Do",            "type":"Sect", "icon":"fas fa-cogs" },
+  "Share":      { "title":"Share",         "type":"Sect", "icon":"fas fa-share-alt-square" },
   "Credits":    { "title":"Credits",      "type":"Cred", "icon":"fas fa-check-square" },
   "References": { "title":"References",   "type":"Refs", "icon":"fas fa-book-open"  },
   "Links":      { "title":"Links",        "type":"Link", "icon":"fas fa-link" },

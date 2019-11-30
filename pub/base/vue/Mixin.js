@@ -1,6 +1,8 @@
 var Mixin,
   hasProp = {}.hasOwnProperty;
 
+import Util from '../util/Util.js';
+
 import Vis from '../../draw/base/Vis.js';
 
 Mixin = class Mixin {
@@ -169,6 +171,46 @@ Mixin = class Mixin {
             });
           }
           return prac;
+        },
+        sectObject: function(pracKey, dispKey, pageKey) {
+          var keys, sectKey, sectObj, sectObjs, talkObj, talkObjs;
+          talkObjs = this.compObject('Talk');
+          talkObj = talkObjs[pracKey];
+          sectObjs = this.compObject(talkObj.comp);
+          talkObj.keys = talkObj.keys != null ? talkObj.keys : Util.childKeys(sectObjs);
+          sectKey = dispKey === 'None' ? this.keys(sectObjs)[0] : dispKey;
+          sectObj = sectObjs[sectKey];
+          sectObj.level = 'Disp';
+          sectObj.src = talkObj.src;
+          sectObj.name = sectKey;
+          sectObj.peys = talkObj.keys;
+          keys = sectObj.keys != null ? sectObj.keys : Util.childKeys(sectObj);
+          sectObj.keys = keys;
+          if (pageKey !== 'None' && (sectObj[pageKey] != null)) {
+            sectObj = sectObj[pageKey];
+            sectObj.level = 'Page';
+            sectObj.src = talkObj.src;
+            sectObj.name = pageKey;
+            sectObj.peys = keys; // Get parent keys
+            sectObj.keys = sectObj.keys != null ? sectObj.keys : Util.childKeys(sectObj);
+          }
+          console.log('Mixin.sectObj()', {
+            pracKey: pracKey,
+            dispKey: sectKey,
+            pageKey: pageKey,
+            sectObj: sectObj
+          });
+          return sectObj;
+        },
+        dataObject: function(sectObj, pageKey) {
+          var dataObj;
+          dataObj = null;
+          if (sectObj.type === 'Prac') {
+            dataObj = this.pracObject(sectObj.src, sectObj.name);
+          } else if (sectObj.type === 'Disp' && pageKey !== 'None') {
+            dataObj = this.dispObject(sectObj.src, sectObj.name, pageKey);
+          }
+          return dataObj;
         },
         dispObject: function(compKey, pracKey, dispKey) {
           return this.disps(compKey, pracKey)[dispKey];

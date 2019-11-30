@@ -1,8 +1,6 @@
 var Nav,
   hasProp = {}.hasOwnProperty;
 
-import Util from '../util/Util.js';
-
 import Build from '../util/Build.js';
 
 Nav = class Nav {
@@ -245,118 +243,121 @@ Nav = class Nav {
   }
 
   dirTalk(dir) {
-    var msg, sectObj, sectObjs, talkObj, talkObjs;
+    var msg, sectObj;
     if (this.pracKey === 'None') {
       return;
     }
     msg = {};
     msg.source = `${'Nav.dirSect'}(${dir})`;
-    this.dispKey = this.dispKey === 'None' ? 'Beg' : this.dispKey;
-    talkObjs = this.mixins.compObject('Talk');
-    talkObj = talkObjs[this.pracKey];
-    if ((talkObj == null) || (talkObj.comp == null)) {
-      return;
+    sectObj = this.mixins.sectObject(this.pracKey, this.dispKey, this.pageKey);
+    if (sectObj.level === 'Disp') {
+      this.dispKey = sectObj.name;
     }
-    talkObj.keys = talkObj.keys != null ? talkObj.keys : Object.keys(talkObj);
-    sectObjs = this.mixins.compObject(talkObj.comp);
-    sectObj = sectObjs[this.dispKey];
+    if (sectObj.level === 'Page') {
+      this.pageKey = sectObj.name;
+    }
     [this.dispKey, this.pageKey] = (function() {
       switch (dir) {
         case 'west':
-          return this.westKey(this.dispKey, talkObj.keys, sectObj);
+          return this.westKey(this.dispKey, sectObj);
         case 'east':
-          return this.eastKey(this.dispKey, talkObj.keys, sectObj);
+          return this.eastKey(this.dispKey, sectObj);
         case 'north':
-          return this.northKey(this.dispKey, talkObj.keys, sectObj);
+          return this.northKey(this.dispKey, sectObj);
         case 'south':
-          return this.southKey(this.dispKey, talkObj.keys, sectObj);
+          return this.southKey(this.dispKey, sectObj);
         case 'prev':
-          return [this.prevKey(this.dispKey, talkObj.keys), 'None'];
+          return [this.prevKey(this.dispKey, sectObj), 'None'];
         case 'next':
-          return [this.nextKey(this.dispKey, talkObj.keys), 'None'];
+          return [this.nextKey(this.dispKey, sectObj), 'None'];
         default:
           return ['None', 'None'];
       }
     }).call(this);
+    console.log('Nav.dirTalk()', {
+      dir: dir,
+      sectObj: sectObj,
+      dispKey: this.dispKey,
+      pageKey: this.pageKey
+    });
     msg.dispKey = this.dispKey;
     msg.pageKey = this.pageKey;
     this.pub(msg);
   }
 
-  westKey(key, keys, obj) {
-    if (Util.hasChild(obj)) {
-      return this.northKey(key, keys, obj);
+  westKey(key, obj) {
+    if (obj.keys.length > 0) {
+      return this.northKey(key, obj);
+    } else if (obj.level === 'Disp') {
+      return [this.prevKey(key, obj), 'None'];
+    } else if (obj.level === 'Page') {
+      return [this.dispKey, this.prevKey(key, obj)];
+    } else {
+      console.warn('Nav.westKey() unable to move', {
+        key: key,
+        obj: obj
+      });
+      return [this.dispKey, this.pageKey];
     }
-    return [this.prevKey(key, keys), 'None'];
   }
 
-  eastKey(key, keys, obj) {
-    if (Util.hasChild(obj)) {
-      return this.southKey(key, keys, obj);
+  eastKey(key, obj) {
+    if (obj.keys.length > 0) {
+      return this.southKey(key, obj);
+    } else if (obj.level === 'Disp') {
+      return [this.nextKey(key, obj), 'None'];
+    } else if (obj.level === 'Page') {
+      return [this.dispKey, this.nextKey(key, obj)];
+    } else {
+      console.warn('Nav.eastKey() unable to move', {
+        key: key,
+        obj: obj
+      });
+      return [this.dispKey, this.pageKey];
     }
-    return [this.nextKey(key, keys), 'None'];
   }
 
-  northKey(key, keys, obj) {
-    console.log('Nav.northKey() beg', {
-      dispKey: key,
-      pageKey: this.pageKey,
-      childKeys: Util.childKeys(obj),
-      has: Util.hasChild(obj)
-    });
-    if (!Util.hasChild(obj)) {
-      return this.westKey(key, keys, obj);
+  northKey(key, obj) {
+    if (obj.keys.length === 0) {
+      return [this.prevKey(key, obj), 'None'];
+    } else {
+      this.pageKey = this.pageKey === 'None' ? obj.keys[keys.length - 1] : this.prevKey(this.pageKey, obj);
+      return [key, this.pageKey];
     }
-    obj.childKeys = obj.childKeys != null ? obj.childKeys : Util.childKeys(obj);
-    this.pageKey = this.pageKey === 'None' ? obj.childKeys[obj.childKeys.length - 1] : this.prevKey(this.pageKey, obj.childKeys);
-    console.log('Nav.northKey() end', {
-      dispKey: key,
-      pageKey: this.pageKey,
-      childKeys: Util.childKeys(obj),
-      has: Util.hasChild(obj)
-    });
-    return [key, this.pageKey];
   }
 
-  southKey(key, keys, obj) {
-    console.log('Nav.southKey() beg', {
-      dispKey: key,
-      pageKey: this.pageKey,
-      childKeys: Util.childKeys(obj),
-      has: Util.hasChild(obj)
-    });
-    if (!Util.hasChild(obj)) {
-      return this.eastKey(key, keys, obj);
+  southKey(key, obj) {
+    if (obj.keys.length === 0) {
+      return [this.nextKey(key, obj), 'None'];
+    } else {
+      this.pageKey = this.pageKey === 'None' ? obj.keys[0] : this.nextKey(this.pageKey, obj);
+      return [key, this.pageKey];
     }
-    obj.childKeys = obj.childKeys != null ? obj.childKeys : Util.childKeys(obj);
-    this.pageKey = this.pageKey === 'None' ? obj.childKeys[0] : this.nextKey(this.pageKey, obj.childKeys);
-    console.log('Nav.southKey() end', {
-      dispKey: key,
-      pageKey: this.pageKey,
-      childKeys: Util.childKeys(obj),
-      has: Util.hasChild(obj)
-    });
-    return [key, this.pageKey];
   }
 
-  prevKey(key, keys) {
+  prevKey(key, obj) {
     var kidx, pidx;
-    kidx = keys.indexOf(key);
+    kidx = obj.peys.indexOf(key);
     pidx = kidx - 1;
     if (pidx === -1) {
-      pidx = keys.length - 1;
+      pidx = obj.peys.length - 1;
     }
-    return keys[pidx];
+    return obj.peys[pidx];
   }
 
-  nextKey(key, keys) {
+  nextKey(key, obj) {
     var kidx, nidx;
-    kidx = keys.indexOf(key);
+    kidx = obj.peys.indexOf(key);
     nidx = kidx + 1;
-    if (nidx === keys.length) {
+    if (nidx === obj.peys.length) {
       nidx = 0;
     }
-    return keys[nidx];
+    console.log('Nav.nextKey()', {
+      key: key,
+      next: obj.peys[nidx],
+      obj: obj
+    });
+    return obj.peys[nidx];
   }
 
   dirPage(dir) {

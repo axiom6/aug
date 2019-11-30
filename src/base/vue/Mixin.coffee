@@ -1,5 +1,6 @@
 
-import Vis from '../../draw/base/Vis.js'
+import Util from '../util/Util.js'
+import Vis  from '../../draw/base/Vis.js'
 
 class Mixin
 
@@ -94,7 +95,7 @@ class Mixin
           else
              console.error( 'Mixin.compObject() bad compKey', compKey )
              {}
-        pracObject: (compKey, pracKey) ->
+        pracObject:( compKey, pracKey ) ->
           prac = {}
           if this.pracs(compKey)?
             if this.pracs(compKey)[pracKey]?
@@ -104,8 +105,39 @@ class Mixin
           else
             console.error( 'Mixin.pracObj() unknown compKey', { compKey:compKey, pracKey:pracKey } )
           prac
+        sectObject:( pracKey, dispKey, pageKey ) ->
+          talkObjs      = @compObject('Talk')
+          talkObj       = talkObjs[pracKey]
+          sectObjs      = @compObject(talkObj.comp)
+          talkObj.keys  = if talkObj.keys?  then talkObj.keys else Util.childKeys(sectObjs)
+          sectKey       = if dispKey is 'None' then @keys(sectObjs)[0] else dispKey
+          sectObj       = sectObjs[sectKey]
+          sectObj.level = 'Disp'
+          sectObj.src   = talkObj.src
+          sectObj.name  = sectKey
+          sectObj.peys  = talkObj.keys
+          keys          = if sectObj.keys?  then sectObj.keys else Util.childKeys(sectObj)
+          sectObj.keys  = keys
+          if pageKey isnt 'None' and sectObj[pageKey]? # Recurse down a level
+            sectObj       = sectObj[pageKey]
+            sectObj.level = 'Page'
+            sectObj.src   = talkObj.src
+            sectObj.name  = pageKey
+            sectObj.peys  = keys # Get parent keys
+            sectObj.keys  = if sectObj.keys?  then sectObj.keys else Util.childKeys(sectObj)
+          console.log( 'Mixin.sectObj()',
+            { pracKey:pracKey, dispKey:sectKey, pageKey:pageKey, sectObj:sectObj } )
+          sectObj
+        dataObject:( sectObj, pageKey ) ->
+          dataObj = null
+          if sectObj.type is 'Prac'
+             dataObj = @pracObject( sectObj.src, sectObj.name )
+          else if sectObj.type is 'Disp' and  pageKey isnt 'None'
+             dataObj = @dispObject( sectObj.src, sectObj.name, pageKey )
+          dataObj
         dispObject: (compKey, pracKey, dispKey) ->
           this.disps(compKey, pracKey)[dispKey]
+
         isPageKeyComp:( pageKey ) ->
           pageKey is'Info' or pageKey is 'Data' # this.app() is 'Muse' and
 

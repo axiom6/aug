@@ -19253,11 +19253,11 @@ var d3 = /*#__PURE__*/Object.freeze({
   zoomIdentity: identity$9
 });
 
-var Util$1,
+var Util,
   indexOf = [].indexOf,
   hasProp = {}.hasOwnProperty;
 
-Util$1 = class Util {
+Util = class Util {
   constructor() {
     this.dummy = "";
   }
@@ -20249,25 +20249,25 @@ Util$1 = class Util {
 };
 
 // Static class variables have to be declared outside of class declarion to avoid function wrapper
-Util$1.htmlIds = {}; // Object of unique Html Ids
+Util.htmlIds = {}; // Object of unique Html Ids
 
-Util$1.myVar = 'myVar';
+Util.myVar = 'myVar';
 
-Util$1.skipReady = false;
+Util.skipReady = false;
 
-Util$1.modules = [];
+Util.modules = [];
 
-Util$1.instances = [];
+Util.instances = [];
 
-Util$1.logStackNum = 0;
+Util.logStackNum = 0;
 
-Util$1.logStackMax = 100;
+Util.logStackMax = 100;
 
-Util$1.fills = {};
+Util.fills = {};
 
-Util$1.uniqueIdExt = '';
+Util.uniqueIdExt = '';
 
-var Util$2 = Util$1;
+var Util$1 = Util;
 
 var FontAwe;
 
@@ -21183,7 +21183,7 @@ var Vis;
 
 Vis = class Vis {
   static translate(x0, y0) {
-    Util$2.checkTypes('number', {
+    Util$1.checkTypes('number', {
       x0: x0,
       y0: y0
     });
@@ -21191,7 +21191,7 @@ Vis = class Vis {
   }
 
   static scale(sx, sy) {
-    Util$2.checkTypes('number', {
+    Util$1.checkTypes('number', {
       sx: sx,
       sy: sy
     });
@@ -21199,7 +21199,7 @@ Vis = class Vis {
   }
 
   static rotate(a, x, y) {
-    Util$2.checkTypes('number', {
+    Util$1.checkTypes('number', {
       a: a,
       x: x,
       y: y
@@ -21208,11 +21208,11 @@ Vis = class Vis {
   }
 
   static translateScale(x0, y0, sx, sy) {
-    Util$2.checkTypes('number', {
+    Util$1.checkTypes('number', {
       x0: x0,
       y0: y0
     });
-    Util$2.checkTypes('number', {
+    Util$1.checkTypes('number', {
       sx: sx,
       sy: sy
     });
@@ -21652,7 +21652,7 @@ Data = class Data {
     data.pracs = {};
     for (pkey in data) {
       prac = data[pkey];
-      if (!(Util$2.isChild(pkey))) {
+      if (!(Util$1.isChild(pkey))) {
         continue;
       }
       data.pracs[pkey] = prac;
@@ -21663,7 +21663,7 @@ Data = class Data {
       prac.disps = {};
       for (dkey in prac) {
         disp = prac[dkey];
-        if (!(Util$2.isChild(dkey))) {
+        if (!(Util$1.isChild(dkey))) {
           continue;
         }
         prac.disps[dkey] = disp;
@@ -21674,7 +21674,7 @@ Data = class Data {
         disp.areas = {};
         for (akey in disp) {
           area = disp[akey];
-          if (!(Util$2.isChild(akey))) {
+          if (!(Util$1.isChild(akey))) {
             continue;
           }
           disp.areas[akey] = area;
@@ -21685,7 +21685,7 @@ Data = class Data {
           area.items = {};
           for (ikey in area) {
             item = area[ikey];
-            if (!(Util$2.isChild(ikey))) {
+            if (!(Util$1.isChild(ikey))) {
               continue;
             }
             area.items[ikey] = item;
@@ -21696,7 +21696,7 @@ Data = class Data {
             item.bases = {};
             for (bkey in item) {
               base = item[bkey];
-              if (!(Util$2.isChild(bkey))) {
+              if (!(Util$1.isChild(bkey))) {
                 continue;
               }
               item.bases[bkey] = base;
@@ -21777,7 +21777,7 @@ Data = class Data {
     fetch(url, opt).then((response) => {
       return response.json();
     }).then((data) => {
-      obj['data'] = Util$2.isFunc(refine) ? refine(data) : data;
+      obj['data'] = Util$1.isFunc(refine) ? refine(data) : data;
       if (Data.batchComplete(batch)) {
         return callback(batch);
       }
@@ -21824,7 +21824,7 @@ Data = class Data {
   
   // ------ Quick JSON read ------
   static read(url, callback) {
-    if (Util$2.isObj(url)) {
+    if (Util$1.isObj(url)) {
       Data.readFile(url, callback);
     } else {
       Data.asynsJson(url, callback);
@@ -21887,7 +21887,7 @@ Build = class Build {
     var key, pack;
     for (key in data) {
       pack = data[key];
-      if (!(Util$2.isChild(key))) {
+      if (!(Util$1.isChild(key))) {
         continue;
       }
       if (pack['name'] == null) {
@@ -21902,7 +21902,7 @@ Build = class Build {
     var base, bkey, ikey, item, pkey, pract, skey, study, tkey, topic;
     for (pkey in data) {
       pract = data[pkey];
-      if (!(Util$2.isChild(pkey))) {
+      if (!(Util$1.isChild(pkey))) {
         continue;
       }
       if (pract['name'] == null) {
@@ -21910,7 +21910,7 @@ Build = class Build {
       }
       for (skey in pract) {
         study = pract[skey];
-        if (!(Util$2.isChild(skey))) {
+        if (!(Util$1.isChild(skey))) {
           continue;
         }
         if (study['name'] == null) {
@@ -21918,7 +21918,7 @@ Build = class Build {
         }
         for (tkey in study) {
           topic = study[tkey];
-          if (!(Util$2.isChild(tkey))) {
+          if (!(Util$1.isChild(tkey))) {
             continue;
           }
           if (topic['name'] == null) {
@@ -21926,7 +21926,7 @@ Build = class Build {
           }
           for (ikey in topic) {
             item = topic[ikey];
-            if (!(Util$2.isChild(ikey))) {
+            if (!(Util$1.isChild(ikey))) {
               continue;
             }
             if (item['name'] == null) {
@@ -21934,7 +21934,7 @@ Build = class Build {
             }
             for (bkey in item) {
               base = item[bkey];
-              if (Util$2.isChild(bkey)) {
+              if (Util$1.isChild(bkey)) {
                 if (base['name'] == null) {
                   base['name'] = bkey;
                 }
@@ -21972,7 +21972,7 @@ Build = class Build {
     for (key in src) {
       if (!hasProp$2.call(src, key)) continue;
       obj = src[key];
-      if (!Util$2.isChild(key)) {
+      if (!Util$1.isChild(key)) {
         des[key] = obj;
       }
     }
@@ -21986,13 +21986,13 @@ Build = class Build {
     var gkey, group, pkey, pract, skey, study;
     for (gkey in groups) {
       group = groups[gkey];
-      if (Util$2.isChild(gkey)) {
+      if (Util$1.isChild(gkey)) {
         for (pkey in group) {
           pract = group[pkey];
-          if (Util$2.isChild(pkey)) {
+          if (Util$1.isChild(pkey)) {
             for (skey in pract) {
               study = pract[skey];
-              if (Util$2.isChild(skey)) {
+              if (Util$1.isChild(skey)) {
                 if (studies[skey] != null) {
                   pract[skey] = studies[skey];
                 }
@@ -22009,7 +22009,7 @@ Build = class Build {
     var gkey, group, pkey, pract, skey, study, tkey, topic;
     for (gkey in groups) {
       group = groups[gkey];
-      if (!(Util$2.isChild(gkey))) {
+      if (!(Util$1.isChild(gkey))) {
         continue;
       }
       if (log) {
@@ -22017,7 +22017,7 @@ Build = class Build {
       }
       for (pkey in group) {
         pract = group[pkey];
-        if (!(Util$2.isChild(pkey))) {
+        if (!(Util$1.isChild(pkey))) {
           continue;
         }
         if (log) {
@@ -22025,7 +22025,7 @@ Build = class Build {
         }
         for (skey in pract) {
           study = pract[skey];
-          if (!(Util$2.isChild(skey))) {
+          if (!(Util$1.isChild(skey))) {
             continue;
           }
           if (log) {
@@ -22033,7 +22033,7 @@ Build = class Build {
           }
           for (tkey in study) {
             topic = study[tkey];
-            if (Util$2.isChild(tkey)) {
+            if (Util$1.isChild(tkey)) {
               if (topics[tkey] != null) {
                 if (log) {
                   console.log("      ", tkey, "match");
@@ -22062,7 +22062,7 @@ Build = class Build {
     this.None = {
       name: "None"
     };
-    Util$2.noop(this.toGroups, this.setAdjacents, Build.copyAtt);
+    Util$1.noop(this.toGroups, this.setAdjacents, Build.copyAtt);
   }
 
   getSpecs(plane) {
@@ -22090,7 +22090,7 @@ Build = class Build {
     studies = {};
     for (skey in prac) {
       study = prac[skey];
-      if (Util$2.isChild(skey)) {
+      if (Util$1.isChild(skey)) {
         studies[skey] = study;
       }
     }
@@ -22259,7 +22259,7 @@ Build = class Build {
     for (key in pracs) {
       if (!hasProp$2.call(pracs, key)) continue;
       adj = pracs[key];
-      if (Util$2.isChild(key)) {
+      if (Util$1.isChild(key)) {
         if (adj.column === col && adj.row === row && adj.plane === pln) {
           // console.log( 'adjacentPractice[col,row,pln]', [col,row,pln], adj )
           return adj;
@@ -22292,8 +22292,8 @@ Build = class Build {
 
   centerBegEnd(beg, end, reverse) {
     var b, e;
-    b = end.length > beg.length ? Util$2.indent((end.length - beg.length) / 2) + beg : beg;
-    e = beg.length > end.length ? Util$2.indent((beg.length - end.length) / 2) + end : end;
+    b = end.length > beg.length ? Util$1.indent((end.length - beg.length) / 2) + beg : beg;
+    e = beg.length > end.length ? Util$1.indent((beg.length - end.length) / 2) + end : end;
     // console.log( 'Build.centerBegEnd()', { beg:beg, end:end, blen:beg.length, elen:end.length, b:b, e:e,be:b+'\n'+e })
     if (!reverse) {
       return b + '\n' + e;
@@ -22326,7 +22326,7 @@ Build = class Build {
     for (pkey in practices) {
       if (!hasProp$2.call(practices, pkey)) continue;
       prac = practices[pkey];
-      if (Util$2.isChild(pkey) && prac.column === column && prac.row === row) {
+      if (Util$1.isChild(pkey) && prac.column === column && prac.row === row) {
         return prac;
       }
     }
@@ -22350,7 +22350,7 @@ Build = class Build {
     for (skey in practice) {
       if (!hasProp$2.call(practice, skey)) continue;
       study = practice[skey];
-      if (Util$2.isChild(skey)) {
+      if (Util$1.isChild(skey)) {
         if (study.dir === dir) {
           return study;
         }
@@ -22364,7 +22364,7 @@ Build = class Build {
     col = this.getCol(cname);
     for (key in col) {
       dim = col[key];
-      if (Util$2.isChild(key)) {
+      if (Util$1.isChild(key)) {
         if (dim.dir === dir) {
           // console.log( 'Build.getDim()', { key:key, dim:dim, col:col } )
           return dim;
@@ -22388,35 +22388,35 @@ Build = class Build {
       for (keyPractice in practices) {
         if (!hasProp$2.call(practices, keyPractice)) continue;
         objPractice = practices[keyPractice];
-        if (!(Util$2.isChild(keyPractice))) {
+        if (!(Util$1.isChild(keyPractice))) {
           continue;
         }
         console.log("  Practice: ", keyPractice);
         for (keyStudy in objPractice) {
           if (!hasProp$2.call(objPractice, keyStudy)) continue;
           objStudy = objPractice[keyStudy];
-          if (!(Util$2.isChild(keyStudy))) {
+          if (!(Util$1.isChild(keyStudy))) {
             continue;
           }
           console.log("    Study: ", keyStudy);
           for (keyTopic in objStudy) {
             if (!hasProp$2.call(objStudy, keyTopic)) continue;
             objTopic = objStudy[keyTopic];
-            if (!(Util$2.isChild(keyTopic))) {
+            if (!(Util$1.isChild(keyTopic))) {
               continue;
             }
             console.log("      Topic: ", keyTopic);
             for (keyItem in objTopic) {
               if (!hasProp$2.call(objTopic, keyItem)) continue;
               objItem = objTopic[keyItem];
-              if (!(Util$2.isChild(keyItem))) {
+              if (!(Util$1.isChild(keyItem))) {
                 continue;
               }
               console.log("        Item: ", keyItem);
               for (keyBase in objItem) {
                 if (!hasProp$2.call(objItem, keyBase)) continue;
                 objBase = objItem[keyBase];
-                if (Util$2.isChild(keyBase)) {
+                if (Util$1.isChild(keyBase)) {
                   console.log("          Base: ", keyBase);
                 }
               }
@@ -22438,14 +22438,14 @@ Build = class Build {
       for (keyPractice in pracs) {
         if (!hasProp$2.call(pracs, keyPractice)) continue;
         objPractice = pracs[keyPractice];
-        if (!(Util$2.isChild(keyPractice))) {
+        if (!(Util$1.isChild(keyPractice))) {
           continue;
         }
         console.log("    Prac: ", keyPractice);
         for (keyStudy in objPractice) {
           if (!hasProp$2.call(objPractice, keyStudy)) continue;
           objStudy = objPractice[keyStudy];
-          if (Util$2.isChild(keyStudy)) {
+          if (Util$1.isChild(keyStudy)) {
             console.log("      Disp: ", keyStudy);
           }
         }
@@ -23181,7 +23181,7 @@ Shapes = class Shapes {
     var key, study;
     for (key in prac) {
       study = prac[key];
-      if (Util$2.isChild(key) && study.dir === dir) {
+      if (Util$1.isChild(key) && study.dir === dir) {
         return key;
       }
     }
@@ -23192,7 +23192,7 @@ Shapes = class Shapes {
     var key, study;
     for (key in prac) {
       study = prac[key];
-      if (Util$2.isChild(key) && study.dir === dir) {
+      if (Util$1.isChild(key) && study.dir === dir) {
         return study;
       }
     }
@@ -23200,7 +23200,7 @@ Shapes = class Shapes {
   }
 
   htmlId(pracName, contentName) {
-    return Util$2.getHtmlId(pracName, 'Info', contentName); // @ui.plane.id
+    return Util$1.getHtmlId(pracName, 'Info', contentName); // @ui.plane.id
   }
 
   size(obj) {
@@ -23274,7 +23274,7 @@ Shapes = class Shapes {
 
   wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize, level = 'None') {
     var as, at, path, rt, sc, th, x, y;
-    Util$2.noop(wedgeId);
+    Util$1.noop(wedgeId);
     th = 14;
     at = (a1 + a2) / 2;
     rt = (r1 + r2) / 2;
@@ -23617,7 +23617,7 @@ Innovate = class Innovate {
 
   drawSvg(g, size, defs) {
     var key, ref, study;
-    Util$2.noop(defs);
+    Util$1.noop(defs);
     this.lay = this.shapes.layout(size, this.spec.column, this.shapes.size(this.studies), this.shapes.size(this.studies));
     this.rings(g, size);
     switch (this.spec.row) {
@@ -24724,33 +24724,21 @@ let Talk = {
 
   components:{ 't-sect':Sect$1 },
 
-  data() { return { talkObjs:null, talkObj:null, sectObjs:null, sectObj:null, dataObj:null } },
+  data() { return { sectObj:null, dataObj:null, talkObjs:null, takkObj:null } },
 
   methods: {
     
     doTalk: function(talkKey) {
-      this.nav().pub( { pracKey:talkKey, dispKey:'Beg', pageKey:'None' } ); },
+      this.nav().pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None', pageKey:'None' } ); },
 
     onNav: function (obj) {
       if( this.nav().isMyNav( obj, 'Talk' ) ) {
           this.onSect( obj.pracKey, obj.dispKey, obj.pageKey ); } },
 
-    onSect: function( talkKey, dispKey, pageKey ) {
-      this.talkObj  = this.talkObjs[talkKey];
-      this.sectObjs = this.compObject(this.talkObj.comp);
-      let  sectKey  = dispKey==='None' ? 'Beg' : dispKey;
-      let  sectObj  = this.sectObjs[sectKey];
-      this.sectObj  = pageKey!=='None' && Util.isDef(sectObj[pageKey]) ? sectObj[pageKey] : sectObj;
-      console.log( 'Sect.onSect()',
-        { talkKey:talkKey, talkObj:this.talkObj,   sectKey:sectKey,
-          pageKey:pageKey, sectObjs:this.sectObjs, sectObj:sectObj, pageObj:this.sectObj } );
-      this.dataObj   = null;
-      if( this.sectObj.type==='Prac' ) {
-        this.dataObj = this.pracObject( this.talkObj.src, sectObj.name ); }
-      else if( this.sectObj.type==='Disp' && pageKey!=='None' ) {
-        this.dataObj = this.dispObject( this.talkObj.src, sectObj.name, pageKey ); } }
-    
-  },
+    onSect: function( talkKey, sectKey, pageKey ) {
+      this.sectObj = this.sectObject( talkKey, sectKey, pageKey );
+    //this.dataObj = this.dataObject( this.sectObj, pageKey );
+    } },
 
   beforeMount: function() {
     this.talkObjs = this.compObject('Talk'); },
@@ -24830,7 +24818,7 @@ __vue_render__$f._withStripped = true;
   /* style */
   const __vue_inject_styles__$f = function (inject) {
     if (!inject) return
-    inject("data-v-904fde5a_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.talk-pane {\n  position: absolute;\n  left: 0;\n  top: 15%;\n  width: 100%;\n  height: 70%;\n  color: wheat;\n  background-color: black;\n  font-size: 4vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Talk.vue","/Users/ax/Documents/prj/aug/vue/talk/Talk.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;ECCb,WAAA;ADCA;ACCA;EDCE,kBAAkB;ECCpB,OAAA;EACA,QAAA;EACA,WAAA;EACA,WAAA;AACA;AACA;EDCE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,YAAY;EACZ,uBAAuB;EACvB,gBAAgB;EAChB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB","file":"Talk.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.talk-pane {\n  position: absolute;\n  left: 0;\n  top: 15%;\n  width: 100%;\n  height: 70%;\n  color: wheat;\n  background-color: black;\n  font-size: 4vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n","\n<template>\n  <div class=\"talk-pane\">\n    <div v-show=\"sectObj===null\" class=\"talk-list\">\n    <template v-for=\"talkObj in talkObjs\">\n      <div class=\"talk-talk\" @click=\"doTalk(talkObj.name)\">\n        <i   :class=\"talkObj.icon\"></i>\n        <span class=\"talk-name\">{{talkObj.name}}</span>\n      </div>\n    </template>\n  </div>\n  <div v-if=\"sectObj!==null\" class=\"talk-sect\">\n    <t-sect :sectObj=\"sectObj\" :dataObj=\"dataObj\"></t-sect>\n  </div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Sect from './Sect.vue';\n\n  let Talk = {\n\n    components:{ 't-sect':Sect },\n\n    data() { return { talkObjs:null, talkObj:null, sectObjs:null, sectObj:null, dataObj:null } },\n\n    methods: {\n      \n      doTalk: function(talkKey) {\n        this.nav().pub( { pracKey:talkKey, dispKey:'Beg', pageKey:'None' } ); },\n\n      onNav: function (obj) {\n        if( this.nav().isMyNav( obj, 'Talk' ) ) {\n            this.onSect( obj.pracKey, obj.dispKey, obj.pageKey ); } },\n\n      onSect: function( talkKey, dispKey, pageKey ) {\n        this.talkObj  = this.talkObjs[talkKey];\n        this.sectObjs = this.compObject(this.talkObj.comp);\n        let  sectKey  = dispKey==='None' ? 'Beg' : dispKey\n        let  sectObj  = this.sectObjs[sectKey];\n        this.sectObj  = pageKey!=='None' && Util.isDef(sectObj[pageKey]) ? sectObj[pageKey] : sectObj;\n        console.log( 'Sect.onSect()',\n          { talkKey:talkKey, talkObj:this.talkObj,   sectKey:sectKey,\n            pageKey:pageKey, sectObjs:this.sectObjs, sectObj:sectObj, pageObj:this.sectObj } );\n        this.dataObj   = null;\n        if( this.sectObj.type==='Prac' ) {\n          this.dataObj = this.pracObject( this.talkObj.src, sectObj.name ) }\n        else if( this.sectObj.type==='Disp' && pageKey!=='None' ) {\n          this.dataObj = this.dispObject( this.talkObj.src, sectObj.name, pageKey ) } }\n      \n    },\n\n    beforeMount: function() {\n      this.talkObjs = this.compObject('Talk'); },\n\n    mounted: function () {\n      this.subscribe(  \"Nav\", 'Talk.vue', (obj) => {\n        this.onNav( obj ); } ); }\n    \n  }\n\n  export default Talk;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @sectFS:2.0*@themeFS;\n  \n  .talk-pane   { position:absolute; left:0; top:15%; width:100%; height:70%;\n    color:@theme-fore; background-color:@theme-back; font-size:@sectFS; .themeCenterItems();\n    .talk-list { }\n    .talk-sect { }\n    .talk-talk {\n      .talk-name { } } }\n\n</style>\n"]}, media: undefined });
+    inject("data-v-57ebcd58_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.talk-pane {\n  position: absolute;\n  left: 0;\n  top: 15%;\n  width: 100%;\n  height: 70%;\n  color: wheat;\n  background-color: black;\n  font-size: 4vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Talk.vue","/Users/ax/Documents/prj/aug/vue/talk/Talk.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;ACCA;EDCE,kBAAkB;ECCpB,OAAA;EDCE,MAAM;ECCR,WAAA;EACA,YAAA;AACA;AACA;EACA,kBAAA;EACA,OAAA;EDCE,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,YAAY;EACZ,uBAAuB;EACvB,gBAAgB;EAChB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB","file":"Talk.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.talk-pane {\n  position: absolute;\n  left: 0;\n  top: 15%;\n  width: 100%;\n  height: 70%;\n  color: wheat;\n  background-color: black;\n  font-size: 4vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n","\n<template>\n  <div class=\"talk-pane\">\n    <div v-show=\"sectObj===null\" class=\"talk-list\">\n    <template v-for=\"talkObj in talkObjs\">\n      <div class=\"talk-talk\" @click=\"doTalk(talkObj.name)\">\n        <i   :class=\"talkObj.icon\"></i>\n        <span class=\"talk-name\">{{talkObj.name}}</span>\n      </div>\n    </template>\n  </div>\n  <div v-if=\"sectObj!==null\" class=\"talk-sect\">\n    <t-sect :sectObj=\"sectObj\" :dataObj=\"dataObj\"></t-sect>\n  </div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Sect from './Sect.vue';\n\n  let Talk = {\n\n    components:{ 't-sect':Sect },\n\n    data() { return { sectObj:null, dataObj:null, talkObjs:null, takkObj:null } },\n\n    methods: {\n      \n      doTalk: function(talkKey) {\n        this.nav().pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None', pageKey:'None' } ); },\n\n      onNav: function (obj) {\n        if( this.nav().isMyNav( obj, 'Talk' ) ) {\n            this.onSect( obj.pracKey, obj.dispKey, obj.pageKey ); } },\n\n      onSect: function( talkKey, sectKey, pageKey ) {\n        this.sectObj = this.sectObject( talkKey, sectKey, pageKey );\n      //this.dataObj = this.dataObject( this.sectObj, pageKey );\n      } },\n\n    beforeMount: function() {\n      this.talkObjs = this.compObject('Talk'); },\n\n    mounted: function () {\n      this.subscribe(  \"Nav\", 'Talk.vue', (obj) => {\n        this.onNav( obj ); } ); }\n    \n  }\n\n  export default Talk;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @sectFS:2.0*@themeFS;\n  \n  .talk-pane   { position:absolute; left:0; top:15%; width:100%; height:70%;\n    color:@theme-fore; background-color:@theme-back; font-size:@sectFS; .themeCenterItems();\n    .talk-list { }\n    .talk-sect { }\n    .talk-talk {\n      .talk-name { } } }\n\n</style>\n"]}, media: undefined });
 
   };
   /* scoped */

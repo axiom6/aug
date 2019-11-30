@@ -23,33 +23,21 @@
 
     components:{ 't-sect':Sect },
 
-    data() { return { talkObjs:null, talkObj:null, sectObjs:null, sectObj:null, dataObj:null } },
+    data() { return { sectObj:null, dataObj:null, talkObjs:null, takkObj:null } },
 
     methods: {
       
       doTalk: function(talkKey) {
-        this.nav().pub( { pracKey:talkKey, dispKey:'Beg', pageKey:'None' } ); },
+        this.nav().pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None', pageKey:'None' } ); },
 
       onNav: function (obj) {
         if( this.nav().isMyNav( obj, 'Talk' ) ) {
             this.onSect( obj.pracKey, obj.dispKey, obj.pageKey ); } },
 
-      onSect: function( talkKey, dispKey, pageKey ) {
-        this.talkObj  = this.talkObjs[talkKey];
-        this.sectObjs = this.compObject(this.talkObj.comp);
-        let  sectKey  = dispKey==='None' ? 'Beg' : dispKey
-        let  sectObj  = this.sectObjs[sectKey];
-        this.sectObj  = pageKey!=='None' && Util.isDef(sectObj[pageKey]) ? sectObj[pageKey] : sectObj;
-        console.log( 'Sect.onSect()',
-          { talkKey:talkKey, talkObj:this.talkObj,   sectKey:sectKey,
-            pageKey:pageKey, sectObjs:this.sectObjs, sectObj:sectObj, pageObj:this.sectObj } );
-        this.dataObj   = null;
-        if( this.sectObj.type==='Prac' ) {
-          this.dataObj = this.pracObject( this.talkObj.src, sectObj.name ) }
-        else if( this.sectObj.type==='Disp' && pageKey!=='None' ) {
-          this.dataObj = this.dispObject( this.talkObj.src, sectObj.name, pageKey ) } }
-      
-    },
+      onSect: function( talkKey, sectKey, pageKey ) {
+        this.sectObj = this.sectObject( talkKey, sectKey, pageKey );
+      //this.dataObj = this.dataObject( this.sectObj, pageKey );
+      } },
 
     beforeMount: function() {
       this.talkObjs = this.compObject('Talk'); },
