@@ -90,22 +90,20 @@ class Nav
 
   dir:( direct, event=null ) =>
     @source = direct
-    dirs = { west:true, east:true, north:true, south:true, prev:true, next:true }
+
     if event is null then {}
     if @isMuse
       switch @route
-        when 'Comp' then @dirComp( direct, dirs )
-        when 'Prac' then @dirPrac( direct, dirs )
-        when 'Disp' then @dirDisp( direct, dirs )
-        when 'Talk' then @dirTalk( direct, dirs )
-        else             @dirComp( direct, dirs )
+        when 'Comp' then @dirComp( direct )
+        when 'Prac' then @dirPrac( direct )
+        when 'Disp' then @dirDisp( direct )
+        when 'Talk' then @dirTalk( direct )
+        else             @dirComp( direct )
     else
       @dirComp( direct, dirs )
-    @stream.publish( 'Navd',  dirs )
     return
 
-  dirComp:( dir, dirs ) ->
-    if dirs then {}
+  dirComp:( dir ) ->
     msg = {}
     msg.source = "#{'Nav.dirComp'}(#{dir})"
     if @hasCompKey( @compKey, dir )
@@ -125,8 +123,7 @@ class Nav
   toRoute:( compKey ) ->
     if @isMuse and @inArray(compKey,['Info','Data','Know','Wise']) then 'Comp' else compKey
 
-  dirPrac:( dir, dirs ) ->
-    if dirs then {}
+  dirPrac:( dir ) ->
     msg = {}
     msg.source = "#{'Nav.dirPrac'}(#{dir})"
     msg.compKey = @compKey
@@ -141,8 +138,7 @@ class Nav
       @log( msg, "Missing adjacent practice for #{dir} #{@compKey} #{@pracKey}" )
     return
 
-  dirDisp:( dir, dirs ) ->
-    if dirs then {}
+  dirDisp:( dir ) ->
     msg = {}
     msg.source = "#{'Nav.dirDisp'}(#{dir})"
     prc = @pracs(@compKey)[@pracKey]
@@ -159,15 +155,14 @@ class Nav
        @log( msg, "Missing adjacent displine for #{dir} #{@compKey} #{@pracKey}" )
     return
 
-  dirTalk:( dir, dirs ) ->
+  dirTalk:( dir) ->
     return if @pracKey is 'None'
-    msg        = {}
-    msg.source = "#{'Nav.dirTalk'}(#{dir})"
-    sectObj    = @mixins.sectObject( @pracKey, @dispKey )
-    @dispKey   = sectObj.name
-    if @pageKey isnt 'None' and sectObj[@pageKey]?
-       dirs.north = true
-       dirs.south = false
+    msg         = {}
+    msg.source  = "#{'Nav.dirTalk'}(#{dir})"
+    sectObj     = @mixins.sectObject( @pracKey, @dispKey )
+    hasChildren = @mixins.isArray(sectObj.keys)
+    @dispKey    = sectObj.name
+    if @isPageTalk( sectObj, hasChildren, @pageKey )
        @pageKey   = switch dir
          when 'west'  then @prevKey( @pageKey, sectObj.keys )
          when 'east'  then @nextKey( @pageKey, sectObj.keys )
@@ -175,9 +170,7 @@ class Nav
          when 'next'  then @nextKey( @pageKey, sectObj.keys )
          else              'None'
     else
-       dirs.north = false
-       dirs.south = true
-       @dispKey   = switch dir
+       @dispKey    = switch dir
          when 'west'  then @prevKey( @dispKey, sectObj.peys )
          when 'east'  then @nextKey( @dispKey, sectObj.peys )
          when 'north' then @pageKey = 'None';          @dispKey
@@ -185,12 +178,46 @@ class Nav
          when 'prev'  then @prevKey( @dispKey, sectObj.peys )
          when 'next'  then @nextKey( @dispKey, sectObj.peys )
          else              'None'
-
-
-    # console.log( 'Nav.dirTalk()', { dir:dir, sectObj:sectObj, dispKey:@dispKey, pageKey:@pageKey } )
+    #console.log( 'Nav.dirTalk()', { dir:dir, sectObj:sectObj, dispKey:@dispKey, pageKey:@pageKey,hasChildren:hasChildren } )
     msg.dispKey = @dispKey
     msg.pageKey = @pageKey
     @pub( msg )
+    @dirsTalkNavd()
+    return
+
+  isPageTalk:( sectObj, hasChildren, pageKey ) ->
+    @pageKey isnt 'None' and hasChildren and sectObj[pageKey]?
+
+  dirsTalkNavd:() ->
+    sectObj = @mixins.sectObject( @pracKey, @dispKey )
+    hasChildren = @mixins.isArray(sectObj.keys)
+    if @isPageTalk( sectObj, hasChildren, @pageKey )
+       @dirsTalkNavdPage( sectObj )
+    else
+       @dirsTalkNavdSect( sectObj, hasChildren )
+    return
+
+  dirsTalkNavdSect:( sectObj, hasChildren ) ->
+    dirs = { west:true, east:true, north:true, south:true, prev:true, next:true }
+    dirs.west   = sectObj.name isnt sectObj.peys[0]
+    dirs.prev   = dirs.west
+    dirs.east   = sectObj.name isnt sectObj.peys[sectObj.peys.length-1]
+    dirs.next   = dirs.east
+    dirs.north  = false
+    dirs.south  = hasChildren
+    @stream.publish( 'Navd',  dirs )
+    return
+
+  dirsTalkNavdPage:( sectObj ) ->
+    dirs = { west:true, east:true, north:true, south:true, prev:true, next:true }
+    pageObj = @mixins.pageObject(  sectObj, @pageKey )
+    dirs.west   = pageObj.name isnt sectObj.keys[0]
+    dirs.prev   = dirs.west
+    dirs.east   = pageObj.name isnt sectObj.keys[sectObj.keys.length-1]
+    dirs.next   = dirs.east
+    dirs.north  = true
+    dirs.south  = false
+    @stream.publish( 'Navd',  dirs )
     return
 
   prevKey:( key, keys ) ->

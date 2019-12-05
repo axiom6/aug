@@ -25,7 +25,7 @@
       doDir: function( dir ) {
         if( this.isDir() ) {
             this.dir().touch( dir ); }
-        else if( this.isNav() ) {
+        else if( this.isNav() && this.dirs[dir] ) {
             this.nav().dir( dir ); }
         else {
           console.error( 'NavddoDir() no direction navigator' ); } },

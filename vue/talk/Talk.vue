@@ -28,7 +28,8 @@
     methods: {
       
       doTalk: function(talkKey) {
-        this.nav().pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None', pageKey:'None' } ); },
+        this.nav().pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None', pageKey:'None' } );
+        this.nav().dirsTalkNavd(); },
 
       onNav: function (obj) {
         if( this.nav().isMyNav( obj, 'Talk' ) ) {

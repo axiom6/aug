@@ -5656,14 +5656,6 @@
 		"oAP": "/pub/vue/elem/Btns.js",
 		"oF": 0
 		},
-	"/vue/elem/Game.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/elem/Game.js",
-		"oF": 0
-		},
 	"/vue/elem/Icon.vue": {
 		"cB": 0,
 		"ft": 8192,

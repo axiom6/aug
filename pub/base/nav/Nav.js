@@ -149,47 +149,34 @@ Nav = class Nav {
   }
 
   dir(direct, event = null) {
-    var dirs;
     this.source = direct;
-    dirs = {
-      west: true,
-      east: true,
-      north: true,
-      south: true,
-      prev: true,
-      next: true
-    };
     if (event === null) {
       ({});
     }
     if (this.isMuse) {
       switch (this.route) {
         case 'Comp':
-          this.dirComp(direct, dirs);
+          this.dirComp(direct);
           break;
         case 'Prac':
-          this.dirPrac(direct, dirs);
+          this.dirPrac(direct);
           break;
         case 'Disp':
-          this.dirDisp(direct, dirs);
+          this.dirDisp(direct);
           break;
         case 'Talk':
-          this.dirTalk(direct, dirs);
+          this.dirTalk(direct);
           break;
         default:
-          this.dirComp(direct, dirs);
+          this.dirComp(direct);
       }
     } else {
       this.dirComp(direct, dirs);
     }
-    this.stream.publish('Navd', dirs);
   }
 
-  dirComp(dir, dirs) {
+  dirComp(dir) {
     var msg;
-    if (dirs) {
-      ({});
-    }
     msg = {};
     msg.source = `${'Nav.dirComp'}(${dir})`;
     if (this.hasCompKey(this.compKey, dir)) {
@@ -217,11 +204,8 @@ Nav = class Nav {
     }
   }
 
-  dirPrac(dir, dirs) {
+  dirPrac(dir) {
     var adj, msg;
-    if (dirs) {
-      ({});
-    }
     msg = {};
     msg.source = `${'Nav.dirPrac'}(${dir})`;
     msg.compKey = this.compKey;
@@ -239,11 +223,8 @@ Nav = class Nav {
     }
   }
 
-  dirDisp(dir, dirs) {
+  dirDisp(dir) {
     var adj, ddr, dis, msg, prc;
-    if (dirs) {
-      ({});
-    }
     msg = {};
     msg.source = `${'Nav.dirDisp'}(${dir})`;
     prc = this.pracs(this.compKey)[this.pracKey];
@@ -261,18 +242,17 @@ Nav = class Nav {
     }
   }
 
-  dirTalk(dir, dirs) {
-    var msg, sectObj;
+  dirTalk(dir) {
+    var hasChildren, msg, sectObj;
     if (this.pracKey === 'None') {
       return;
     }
     msg = {};
     msg.source = `${'Nav.dirTalk'}(${dir})`;
     sectObj = this.mixins.sectObject(this.pracKey, this.dispKey);
+    hasChildren = this.mixins.isArray(sectObj.keys);
     this.dispKey = sectObj.name;
-    if (this.pageKey !== 'None' && (sectObj[this.pageKey] != null)) {
-      dirs.north = true;
-      dirs.south = false;
+    if (this.isPageTalk(sectObj, hasChildren, this.pageKey)) {
       this.pageKey = (function() {
         switch (dir) {
           case 'west':
@@ -288,8 +268,6 @@ Nav = class Nav {
         }
       }).call(this);
     } else {
-      dirs.north = false;
-      dirs.south = true;
       this.dispKey = (function() {
         switch (dir) {
           case 'west':
@@ -311,10 +289,65 @@ Nav = class Nav {
         }
       }).call(this);
     }
-    // console.log( 'Nav.dirTalk()', { dir:dir, sectObj:sectObj, dispKey:@dispKey, pageKey:@pageKey } )
+    //console.log( 'Nav.dirTalk()', { dir:dir, sectObj:sectObj, dispKey:@dispKey, pageKey:@pageKey,hasChildren:hasChildren } )
     msg.dispKey = this.dispKey;
     msg.pageKey = this.pageKey;
     this.pub(msg);
+    this.dirsTalkNavd();
+  }
+
+  isPageTalk(sectObj, hasChildren, pageKey) {
+    return this.pageKey !== 'None' && hasChildren && (sectObj[pageKey] != null);
+  }
+
+  dirsTalkNavd() {
+    var hasChildren, sectObj;
+    sectObj = this.mixins.sectObject(this.pracKey, this.dispKey);
+    hasChildren = this.mixins.isArray(sectObj.keys);
+    if (this.isPageTalk(sectObj, hasChildren, this.pageKey)) {
+      this.dirsTalkNavdPage(sectObj);
+    } else {
+      this.dirsTalkNavdSect(sectObj, hasChildren);
+    }
+  }
+
+  dirsTalkNavdSect(sectObj, hasChildren) {
+    var dirs;
+    dirs = {
+      west: true,
+      east: true,
+      north: true,
+      south: true,
+      prev: true,
+      next: true
+    };
+    dirs.west = sectObj.name !== sectObj.peys[0];
+    dirs.prev = dirs.west;
+    dirs.east = sectObj.name !== sectObj.peys[sectObj.peys.length - 1];
+    dirs.next = dirs.east;
+    dirs.north = false;
+    dirs.south = hasChildren;
+    this.stream.publish('Navd', dirs);
+  }
+
+  dirsTalkNavdPage(sectObj) {
+    var dirs, pageObj;
+    dirs = {
+      west: true,
+      east: true,
+      north: true,
+      south: true,
+      prev: true,
+      next: true
+    };
+    pageObj = this.mixins.pageObject(sectObj, this.pageKey);
+    dirs.west = pageObj.name !== sectObj.keys[0];
+    dirs.prev = dirs.west;
+    dirs.east = pageObj.name !== sectObj.keys[sectObj.keys.length - 1];
+    dirs.next = dirs.east;
+    dirs.north = true;
+    dirs.south = false;
+    this.stream.publish('Navd', dirs);
   }
 
   prevKey(key, keys) {
