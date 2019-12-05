@@ -184,11 +184,7 @@ Mixin = class Mixin {
           sectObj.name = dispKey;
           sectObj.peys = talkObj.keys;
           sectObj.keys = sectObj.keys != null ? sectObj.keys : Util.childKeys(sectObj);
-          console.log('Mixin.sectObj()', {
-            pracKey: pracKey,
-            dispKey: dispKey,
-            sectObj: sectObj
-          });
+          // console.log( 'Mixin.sectObj()', { pracKey:pracKey, dispKey:dispKey, sectObj:sectObj } )
           return sectObj;
         },
         pageObject: function(sectObj, pageKey) {
@@ -202,11 +198,7 @@ Mixin = class Mixin {
             pageObj.peys = sectObj.keys;
             pageObj.keys = pageObj.keys != null ? pageObj.keys : Util.childKeys(pageObj);
           }
-          console.log('Mixin.pageObj()', {
-            dispKey: sectObj.name,
-            pageKey: pageKey,
-            pageObj: pageObj
-          });
+          // console.log( 'Mixin.pageObj()', { dispKey:sectObj.name, pageKey:pageKey, pageObj:pageObj } )
           return pageObj;
         },
         dataObject: function(sectObj, pageKey) {

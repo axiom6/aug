@@ -149,34 +149,47 @@ Nav = class Nav {
   }
 
   dir(direct, event = null) {
+    var dirs;
     this.source = direct;
+    dirs = {
+      west: true,
+      east: true,
+      north: true,
+      south: true,
+      prev: true,
+      next: true
+    };
     if (event === null) {
       ({});
     }
     if (this.isMuse) {
       switch (this.route) {
         case 'Comp':
-          this.dirComp(direct);
+          this.dirComp(direct, dirs);
           break;
         case 'Prac':
-          this.dirPrac(direct);
+          this.dirPrac(direct, dirs);
           break;
         case 'Disp':
-          this.dirDisp(direct);
+          this.dirDisp(direct, dirs);
           break;
         case 'Talk':
-          this.dirTalk(direct);
+          this.dirTalk(direct, dirs);
           break;
         default:
-          this.dirComp(direct);
+          this.dirComp(direct, dirs);
       }
     } else {
-      this.dirComp(direct);
+      this.dirComp(direct, dirs);
     }
+    this.stream.publish('Navd', dirs);
   }
 
-  dirComp(dir) {
+  dirComp(dir, dirs) {
     var msg;
+    if (dirs) {
+      ({});
+    }
     msg = {};
     msg.source = `${'Nav.dirComp'}(${dir})`;
     if (this.hasCompKey(this.compKey, dir)) {
@@ -204,8 +217,11 @@ Nav = class Nav {
     }
   }
 
-  dirPrac(dir) {
+  dirPrac(dir, dirs) {
     var adj, msg;
+    if (dirs) {
+      ({});
+    }
     msg = {};
     msg.source = `${'Nav.dirPrac'}(${dir})`;
     msg.compKey = this.compKey;
@@ -223,8 +239,11 @@ Nav = class Nav {
     }
   }
 
-  dirDisp(dir) {
+  dirDisp(dir, dirs) {
     var adj, ddr, dis, msg, prc;
+    if (dirs) {
+      ({});
+    }
     msg = {};
     msg.source = `${'Nav.dirDisp'}(${dir})`;
     prc = this.pracs(this.compKey)[this.pracKey];
@@ -242,7 +261,7 @@ Nav = class Nav {
     }
   }
 
-  dirTalk(dir) {
+  dirTalk(dir, dirs) {
     var msg, sectObj;
     if (this.pracKey === 'None') {
       return;
@@ -252,6 +271,8 @@ Nav = class Nav {
     sectObj = this.mixins.sectObject(this.pracKey, this.dispKey);
     this.dispKey = sectObj.name;
     if (this.pageKey !== 'None' && (sectObj[this.pageKey] != null)) {
+      dirs.north = true;
+      dirs.south = false;
       this.pageKey = (function() {
         switch (dir) {
           case 'west':
@@ -267,6 +288,8 @@ Nav = class Nav {
         }
       }).call(this);
     } else {
+      dirs.north = false;
+      dirs.south = true;
       this.dispKey = (function() {
         switch (dir) {
           case 'west':
@@ -288,12 +311,7 @@ Nav = class Nav {
         }
       }).call(this);
     }
-    console.log('Nav.dirTalk()', {
-      dir: dir,
-      sectObj: sectObj,
-      dispKey: this.dispKey,
-      pageKey: this.pageKey
-    });
+    // console.log( 'Nav.dirTalk()', { dir:dir, sectObj:sectObj, dispKey:@dispKey, pageKey:@pageKey } )
     msg.dispKey = this.dispKey;
     msg.pageKey = this.pageKey;
     this.pub(msg);
@@ -316,11 +334,7 @@ Nav = class Nav {
     if (nidx === keys.length) {
       nidx = 0;
     }
-    console.log('Nav.nextKey()', {
-      key: key,
-      next: keys[nidx],
-      keys: keys
-    });
+    // console.log( 'Nav.nextKey()', { key:key, next:keys[nidx], keys:keys } )
     return keys[nidx];
   }
 

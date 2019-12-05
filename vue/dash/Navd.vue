@@ -1,13 +1,13 @@
 
 <template>
-  <div     class="navd-pane">
-    <div   class="navd-navd"  ref="navd">
-      <div class="navd-west"  ref="west"  @click="doDir('west' )"><i class="fas fa-angle-left"  ></i></div>
-      <div class="navd-north" ref="north" @click="doDir('north')"><i class="fas fa-angle-up"    ></i></div>
-      <div class="navd-next"  ref="next"  @click="doDir('next')" ><i class="fas fa-plus-circle" ></i></div>
-      <div class="navd-prev"  ref="prev"  @click="doDir('prev')" ><i class="fas fa-minus-circle"></i></div>
-      <div class="navd-east"  ref="east"  @click="doDir('east' )"><i class="fas fa-angle-right" ></i></div>
-      <div class="navd-south" ref="south" @click="doDir('south')"><i class="fas fa-angle-down"  ></i></div>
+  <div   class="navd-pane">
+    <div   class="navd-navd">
+      <div class="navd-west"  :style="style('west')"  @click="doDir('west' )"><i class="fas fa-angle-left"  ></i></div>
+      <div class="navd-north" :style="style('north')" @click="doDir('north')"><i class="fas fa-angle-up"    ></i></div>
+      <div class="navd-next"  :style="style('next')"  @click="doDir('next' )"><i class="fas fa-plus-circle" ></i></div>
+      <div class="navd-prev"  :style="style('prev')"  @click="doDir('prev' )"><i class="fas fa-minus-circle"></i></div>
+      <div class="navd-east"  :style="style('east')"  @click="doDir('east' )"><i class="fas fa-angle-right" ></i></div>
+      <div class="navd-south" :style="style('south')" @click="doDir('south')"><i class="fas fa-angle-down"  ></i></div>
     </div>
   </div>
 </template>
@@ -17,17 +17,29 @@
   let Navd = {
     
     name: 'navd',
+
+    data() { return { dirs:{ west:true, east:true, north:true, south:true, prev:true, next:true } }; },
     
     methods: {
+      
       doDir: function( dir ) {
         if( this.isDir() ) {
             this.dir().touch( dir ); }
         else if( this.isNav() ) {
             this.nav().dir( dir ); }
         else {
-          console.error( 'NavddoDir() no direction navigator' ); } } },
-    
-    mounted: function () {}
+          console.error( 'NavddoDir() no direction navigator' ); } },
+
+      style:  function(dir) {
+        return this.dirs[dir] ? { color:'wheat' } : { color:'#333' } },
+
+      onDirs:  function(dirs) {
+        for( let key in dirs ) {
+          this.dirs[key] = dirs[key]; } } },
+
+    mounted: function () {
+      this.subscribe(  "Navd", 'Navd.vue', (dirs) => {
+        this.onDirs( dirs ); } ); }
   };
 
   export default Navd;

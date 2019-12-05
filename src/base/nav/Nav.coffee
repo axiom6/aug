@@ -90,19 +90,22 @@ class Nav
 
   dir:( direct, event=null ) =>
     @source = direct
+    dirs = { west:true, east:true, north:true, south:true, prev:true, next:true }
     if event is null then {}
     if @isMuse
       switch @route
-        when 'Comp' then @dirComp( direct )
-        when 'Prac' then @dirPrac( direct )
-        when 'Disp' then @dirDisp( direct )
-        when 'Talk' then @dirTalk( direct )
-        else             @dirComp( direct )
+        when 'Comp' then @dirComp( direct, dirs )
+        when 'Prac' then @dirPrac( direct, dirs )
+        when 'Disp' then @dirDisp( direct, dirs )
+        when 'Talk' then @dirTalk( direct, dirs )
+        else             @dirComp( direct, dirs )
     else
-      @dirComp( direct )
+      @dirComp( direct, dirs )
+    @stream.publish( 'Navd',  dirs )
     return
 
-  dirComp:( dir ) ->
+  dirComp:( dir, dirs ) ->
+    if dirs then {}
     msg = {}
     msg.source = "#{'Nav.dirComp'}(#{dir})"
     if @hasCompKey( @compKey, dir )
@@ -122,7 +125,8 @@ class Nav
   toRoute:( compKey ) ->
     if @isMuse and @inArray(compKey,['Info','Data','Know','Wise']) then 'Comp' else compKey
 
-  dirPrac:( dir ) ->
+  dirPrac:( dir, dirs ) ->
+    if dirs then {}
     msg = {}
     msg.source = "#{'Nav.dirPrac'}(#{dir})"
     msg.compKey = @compKey
@@ -137,7 +141,8 @@ class Nav
       @log( msg, "Missing adjacent practice for #{dir} #{@compKey} #{@pracKey}" )
     return
 
-  dirDisp:( dir ) ->
+  dirDisp:( dir, dirs ) ->
+    if dirs then {}
     msg = {}
     msg.source = "#{'Nav.dirDisp'}(#{dir})"
     prc = @pracs(@compKey)[@pracKey]
@@ -154,35 +159,35 @@ class Nav
        @log( msg, "Missing adjacent displine for #{dir} #{@compKey} #{@pracKey}" )
     return
 
-  dirTalk:( dir ) ->
+  dirTalk:( dir, dirs ) ->
     return if @pracKey is 'None'
     msg        = {}
     msg.source = "#{'Nav.dirTalk'}(#{dir})"
     sectObj    = @mixins.sectObject( @pracKey, @dispKey )
     @dispKey   = sectObj.name
     if @pageKey isnt 'None' and sectObj[@pageKey]?
-       @pageKey = switch dir
-         when 'west'  then @prevKey(  @pageKey, sectObj.keys )
-         when 'east'  then @nextKey(  @pageKey, sectObj.keys )
-         when 'prev'  then @prevKey(  @pageKey, sectObj.keys )
-         when 'next'  then @nextKey(  @pageKey, sectObj.keys )
+       dirs.north = true
+       dirs.south = false
+       @pageKey   = switch dir
+         when 'west'  then @prevKey( @pageKey, sectObj.keys )
+         when 'east'  then @nextKey( @pageKey, sectObj.keys )
+         when 'prev'  then @prevKey( @pageKey, sectObj.keys )
+         when 'next'  then @nextKey( @pageKey, sectObj.keys )
          else              'None'
     else
-       @dispKey = switch dir
-         when 'west'  then  @prevKey( @dispKey, sectObj.peys )
-         when 'east'  then  @nextKey( @dispKey, sectObj.peys )
-         when 'north'
-           @pageKey = 'None'
-           @dispKey
-         when 'south'
-           @pageKey = sectObj.keys[0]
-           @dispKey
-         when 'prev'  then  @prevKey( @dispKey, sectObj.peys )
-         when 'next'  then  @nextKey( @dispKey, sectObj.peys )
+       dirs.north = false
+       dirs.south = true
+       @dispKey   = switch dir
+         when 'west'  then @prevKey( @dispKey, sectObj.peys )
+         when 'east'  then @nextKey( @dispKey, sectObj.peys )
+         when 'north' then @pageKey = 'None';          @dispKey
+         when 'south' then @pageKey = sectObj.keys[0]; @dispKey
+         when 'prev'  then @prevKey( @dispKey, sectObj.peys )
+         when 'next'  then @nextKey( @dispKey, sectObj.peys )
          else              'None'
 
-    console.log( 'Nav.dirTalk()',
-      { dir:dir, sectObj:sectObj, dispKey:@dispKey, pageKey:@pageKey } )
+
+    # console.log( 'Nav.dirTalk()', { dir:dir, sectObj:sectObj, dispKey:@dispKey, pageKey:@pageKey } )
     msg.dispKey = @dispKey
     msg.pageKey = @pageKey
     @pub( msg )
@@ -198,7 +203,7 @@ class Nav
     kidx = keys.indexOf(key)
     nidx = kidx + 1
     nidx = 0 if nidx is keys.length
-    console.log( 'Nav.nextKey()', { key:key, next:keys[nidx], keys:keys } )
+    # console.log( 'Nav.nextKey()', { key:key, next:keys[nidx], keys:keys } )
     keys[nidx]
 
   dirPage:( dir ) ->

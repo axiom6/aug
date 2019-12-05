@@ -1,23 +1,39 @@
 
 <tenplate>
   <div   class="game-pane"  ref="Navd">
-    <div class="game-west"  ref="West"  @click="pubNav('west' )"><i class="fas fa-angle-left"  ></i></div>
-    <div class="game-north" ref="North" @click="pubNav('north')"><i class="fas fa-angle-up"    ></i></div>
-    <div class="game-next"  ref="Next"  @click="pubNav('next' )"><i class="fas fa-plus-circle" ></i></div>
-    <div class="game-pref"  ref="Prev"  @click="pubNav('prev' )"><i class="fas fa-minus-circle"></i></div>
-    <div class="game-east"  ref="East"  @click="pubNav('east' )"><i class="fas fa-angle-right" ></i></div>
-    <div class="game-south" ref="South" @click="pubNav('south')"><i class="fas fa-angle-down"  ></i></div>
+    <div class="game-west"  style="style('west')"  @click="pubNav('west' )"><i class="fas fa-angle-left"  ></i></div>
+    <div class="game-north" style="style('north')" @click="pubNav('north')"><i class="fas fa-angle-up"    ></i></div>
+    <div class="game-next"  style="style('next')"  @click="pubNav('next' )"><i class="fas fa-plus-circle" ></i></div>
+    <div class="game-prev"  style="style('prev')"  @click="pubNav('prev' )"><i class="fas fa-minus-circle"></i></div>
+    <div class="game-east"  style="style('east')"  @click="pubNav('east' )"><i class="fas fa-angle-right" ></i></div>
+    <div class="game-south" style="style('south')" @click="pubNav('south')"><i class="fas fa-angle-down"  ></i></div>
   </div>
 </tenplate>
 
 <script type="module">
   
   let Game = {
+    
     name: 'Game',
-    data() { return { hi:"Hi" }; },
-    methods:{
-      pubNav: function (dir) {
-         this.nav().dir(dir); } }
+    
+    data() { return { dirs:{ west:true, east:true, north:true, south:true, prev:true, next:true } }; },
+    
+    methods: {
+      
+      pubNav: function(dir) {
+        this.nav().dir(dir); },
+      
+      style:  function(dir) {
+        return this.dirs[dir] ? { color:'wheat' } : { color:'#333' } },
+      
+      onDirs:  function(dirs) {
+        for( let key in dirs ) {
+          this.dirs[key] = dirs[key]; } },
+    },
+    
+    mounted: function () {
+      this.subscribe(  "Game", 'Game.vue', (dirs) => {
+        this.onDirs( dirs ); } ); }
   }
   
   export default Game;

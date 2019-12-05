@@ -117,8 +117,7 @@ class Mixin
           sectObj.name  = dispKey
           sectObj.peys  = talkObj.keys
           sectObj.keys  = if sectObj.keys?  then sectObj.keys else Util.childKeys(sectObj)
-          console.log( 'Mixin.sectObj()',
-            { pracKey:pracKey, dispKey:dispKey, sectObj:sectObj } )
+          # console.log( 'Mixin.sectObj()', { pracKey:pracKey, dispKey:dispKey, sectObj:sectObj } )
           sectObj
 
         pageObject:( sectObj, pageKey ) ->
@@ -130,8 +129,7 @@ class Mixin
              pageObj.name = pageKey
              pageObj.peys = sectObj.keys
              pageObj.keys = if pageObj.keys?  then pageObj.keys else Util.childKeys(pageObj)
-          console.log( 'Mixin.pageObj()',
-            { dispKey:sectObj.name, pageKey:pageKey, pageObj:pageObj } )
+          # console.log( 'Mixin.pageObj()', { dispKey:sectObj.name, pageKey:pageKey, pageObj:pageObj } )
           pageObj
 
         dataObject:( sectObj, pageKey ) ->
