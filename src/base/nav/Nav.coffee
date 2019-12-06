@@ -90,7 +90,6 @@ class Nav
 
   dir:( direct, event=null ) =>
     @source = direct
-
     if event is null then {}
     if @isMuse
       switch @route
@@ -101,6 +100,7 @@ class Nav
         else             @dirComp( direct )
     else
       @dirComp( direct, dirs )
+    @dirsNavd( @route )
     return
 
   dirComp:( dir ) ->
@@ -182,34 +182,33 @@ class Nav
     msg.dispKey = @dispKey
     msg.pageKey = @pageKey
     @pub( msg )
-    @dirsTalkNavd()
     return
 
   isPageTalk:( sectObj, hasChildren, pageKey ) ->
     @pageKey isnt 'None' and hasChildren and sectObj[pageKey]?
 
-  dirsTalkNavd:() ->
-    sectObj = @mixins.sectObject( @pracKey, @dispKey )
-    hasChildren = @mixins.isArray(sectObj.keys)
-    if @isPageTalk( sectObj, hasChildren, @pageKey )
-       @dirsTalkNavdPage( sectObj )
-    else
-       @dirsTalkNavdSect( sectObj, hasChildren )
+  dirsNavd:( route ) ->
+    dirs = { west:true, east:true, north:true, south:true, prev:true, next:true }
+    if route is 'Talk'
+      sectObj = @mixins.sectObject( @pracKey, @dispKey )
+      hasChildren = @mixins.isArray(sectObj.keys)
+      if @isPageTalk( sectObj, hasChildren, @pageKey )
+         @dirsTalkNavdPage( dirs, sectObj )
+      else
+         @dirsTalkNavdSect( dirs, sectObj, hasChildren )
+    @stream.publish( 'Navd',  dirs )
     return
 
-  dirsTalkNavdSect:( sectObj, hasChildren ) ->
-    dirs = { west:true, east:true, north:true, south:true, prev:true, next:true }
+  dirsTalkNavdSect:( dirs, sectObj, hasChildren ) ->
     dirs.west   = sectObj.name isnt sectObj.peys[0]
     dirs.prev   = dirs.west
     dirs.east   = sectObj.name isnt sectObj.peys[sectObj.peys.length-1]
     dirs.next   = dirs.east
     dirs.north  = false
     dirs.south  = hasChildren
-    @stream.publish( 'Navd',  dirs )
     return
 
-  dirsTalkNavdPage:( sectObj ) ->
-    dirs = { west:true, east:true, north:true, south:true, prev:true, next:true }
+  dirsTalkNavdPage:( dirs, sectObj ) ->
     pageObj = @mixins.pageObject(  sectObj, @pageKey )
     dirs.west   = pageObj.name isnt sectObj.keys[0]
     dirs.prev   = dirs.west
@@ -217,7 +216,6 @@ class Nav
     dirs.next   = dirs.east
     dirs.north  = true
     dirs.south  = false
-    @stream.publish( 'Navd',  dirs )
     return
 
   prevKey:( key, keys ) ->

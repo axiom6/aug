@@ -3,7 +3,7 @@
   <div      class="disp-desc-pane" :style="style(dispObj)">
     <d-icon class="disp-desc-icon" :icon="dispObj.icon" :name="dispObj.name" :size="5.0" ></d-icon>
     <div    class="disp-desc-summ">{{dispObj['desc']}}</div>
-    <d-area class="disp-desc-area" :dispObj="dispObj" :size="2.0"></d-area>
+    <d-area class="disp-desc-area" :areat="dispObj.areas" :size="2.0"></d-area>
   </div>
 </template>
 

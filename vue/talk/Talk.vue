@@ -2,13 +2,8 @@
 <template>
   <div class="talk-pane">
     <div v-show="sectObj===null" class="talk-list">
-    <template v-for="talkObj in talkObjs">
-      <div class="talk-talk" @click="doTalk(talkObj.name)">
-        <i   :class="talkObj.icon"></i>
-        <span class="talk-name">{{talkObj.name}}</span>
-      </div>
-    </template>
-  </div>
+      <t-area :areat="talkObjs" :size="2.0" :fnClick="doTalk"></t-area>
+    </div>
   <div v-if="sectObj!==null" class="talk-sect">
     <t-sect :sectObj="sectObj" :dataObj="dataObj"></t-sect>
   </div>
@@ -18,10 +13,11 @@
 <script type="module">
 
   import Sect from './Sect.vue';
+  import Area from '../elem/Area.vue';
 
   let Talk = {
 
-    components:{ 't-sect':Sect },
+    components:{ 't-sect':Sect, 't-area':Area },
 
     data() { return { sectObj:null, dataObj:null, talkObjs:null, takkObj:null } },
 
@@ -29,7 +25,7 @@
       
       doTalk: function(talkKey) {
         this.nav().pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None', pageKey:'None' } );
-        this.nav().dirsTalkNavd(); },
+        this.nav().dirsNavd('Init'); },
 
       onNav: function (obj) {
         if( this.nav().isMyNav( obj, 'Talk' ) ) {
@@ -60,11 +56,8 @@
   
   @sectFS:2.0*@themeFS;
   
-  .talk-pane   { position:absolute; left:0; top:15%; width:100%; height:70%;
+  .talk-pane   { position:absolute; left:5%; top:5%; width:90%; height:90%;
     color:@theme-fore; background-color:@theme-back; font-size:@sectFS; .themeCenterItems();
-    .talk-list { }
-    .talk-sect { }
-    .talk-talk {
-      .talk-name { } } }
+    .talk-list {  }  }
 
 </style>

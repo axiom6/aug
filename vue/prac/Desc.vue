@@ -10,7 +10,7 @@
         <div      class="prac-disp-desc">
           <div    class="prac-disp-icon"><d-icon :icon="dispObj.icon" :name="dispObj.name" :size="2.0"></d-icon></div>
           <div    class="prac-disp-summ">{{dispObj['desc']}}</div>
-          <d-area class="prac-disp-area" :dispObj="dispObj" :size="1.1"></d-area>
+          <d-area class="prac-disp-area" :areat="dispObj.areas" :size="1.1"></d-area>
         </div>
       </div>
     </template>

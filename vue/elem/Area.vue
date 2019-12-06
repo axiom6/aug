@@ -2,9 +2,10 @@
 <template>
     <table class="area-pane" :style="style()">
       <tbody>
-        <template v-for="area in dispObj.areas">
-          <tr>
-            <td class="area-name">{{area.name}}</td>
+        <template v-for="area in areat">
+          <tr >
+            <td v-if="isDef(area.icon)" class="area-icon"><i :class="area.icon"></i></td>
+            <td class="area-name" @click="doClick(area.name)">{{area.name}}</td>
             <td class="area-desc">{{area.desc}}</td>
           </tr>
         </template>
@@ -16,20 +17,23 @@
 
   let Area = {
 
-    props: { dispObj:Object, size:Number },
+    props: { areat:Object, size:Number, fnClick:Function },
 
     data() { return { area:null } },
 
     methods: {
 
-      doClick: function() {
+      doClick: function(name) {
         if( this.isDef(this.fnClick) ) {
-          this.fnClick(this.name); } },
+          this.fnClick(name); } },
 
       style: function() {
         return this.fontSizeCss(this.size); }
 
-    }
+    }//,
+
+    //mounted: function () {
+    //  console.log( 'Area.vue', this.areat ); }
 
   }
 
@@ -44,7 +48,8 @@
   @itemFS:1.0*@themeFS;
   
   .area-pane {
-      .area-name { font-weight:bold;         }
-      .area-desc { padding-left:0.5*@itemFS; } }
+      .area-icon { text-align:center;                           }
+      .area-name { text-align:left;   font-weight:bold;         }
+      .area-desc { text-align:left;   padding-left:1.5*@itemFS; } }
 
 </style>
