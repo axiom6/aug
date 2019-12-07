@@ -1,0 +1,7 @@
+
+ 4. Resize
+    a. Turning on resize for Conns in Comp
+    b. smin smmax sx sy approach?
+    b. Stick to just transform scale
+    c. Wheel no resize | Axes,Chord,Tree translate  | Link good | Radar no display | Hue good
+    d. Attribute height for small Connections

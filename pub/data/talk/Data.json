@@ -18,5 +18,5 @@
   "Credits":   { "title":"Credits",    "type":"Cred", "icon":"fas fa-check-square" },
   "References":{ "title":"References", "type":"Refs", "icon":"fas fa-book-open"    },
   "Links":     { "title":"Links",      "type":"Link", "icon":"fas fa-link"         },
-  "End":       { "banner":"The End",   "type":"Sect", "icon":"fas fa-stopwatch"    }
+  "End":       { "banner":"The End",   "type":"Sect", "icon":"fas fa-hourglass-end"    }
 }

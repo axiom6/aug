@@ -30,10 +30,7 @@
       style: function() {
         return this.fontSizeCss(this.size); }
 
-    }//,
-
-    //mounted: function () {
-    //  console.log( 'Area.vue', this.areat ); }
+    }
 
   }
 

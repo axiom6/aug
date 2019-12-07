@@ -84,6 +84,7 @@ Nav = class Nav {
       return;
     }
     if ((route != null) && route !== 'None') {
+      this.dirsNavd(route);
       if (this.$router != null) {
         this.$router.push({
           name: route
@@ -244,8 +245,9 @@ Nav = class Nav {
   }
 
   dirTalk(dir) {
-    var hasChildren, msg, sectObj;
-    if (this.pracKey === 'None') {
+    var dirs, hasChildren, msg, sectObj;
+    dirs = this.dirsNavdTalk();
+    if (this.pracKey === 'None' || !dirs[dir]) {
       return;
     }
     msg = {};
@@ -263,7 +265,7 @@ Nav = class Nav {
           case 'prev':
             return this.prevKey(this.pageKey, sectObj.keys);
           case 'next':
-            return this.nextKey(this.pageKey, sectObj.keys);
+            return this.nextPage(this.pageKey, sectObj.keys, sectObj.peys); // Special case
           default:
             return 'None';
         }
@@ -284,7 +286,7 @@ Nav = class Nav {
           case 'prev':
             return this.prevKey(this.dispKey, sectObj.peys);
           case 'next':
-            return this.nextKey(this.dispKey, sectObj.peys);
+            return this.nextDisp(this.dispKey, sectObj.keys, sectObj.peys); // Special case
           default:
             return 'None';
         }
@@ -301,6 +303,12 @@ Nav = class Nav {
   }
 
   dirsNavd(route) {
+    var dirs;
+    dirs = this.dirsNavdTalk(route);
+    this.stream.publish('Navd', dirs);
+  }
+
+  dirsNavdTalk(route) {
     var dirs, hasChildren, sectObj;
     dirs = {
       west: true,
@@ -310,19 +318,20 @@ Nav = class Nav {
       prev: true,
       next: true
     };
-    if (route === 'Talk') {
-      sectObj = this.mixins.sectObject(this.pracKey, this.dispKey);
-      hasChildren = this.mixins.isArray(sectObj.keys);
-      if (this.isPageTalk(sectObj, hasChildren, this.pageKey)) {
-        this.dirsTalkNavdPage(dirs, sectObj);
-      } else {
-        this.dirsTalkNavdSect(dirs, sectObj, hasChildren);
-      }
+    if (route !== 'Talk' || this.pracKey === 'None') {
+      return dirs;
     }
-    this.stream.publish('Navd', dirs);
+    sectObj = this.mixins.sectObject(this.pracKey, this.dispKey);
+    hasChildren = this.mixins.isArray(sectObj.keys);
+    if (this.isPageTalk(sectObj, hasChildren, this.pageKey)) {
+      this.dirsNavdTalkPage(dirs, sectObj);
+    } else {
+      this.dirsNavdTalkSect(dirs, sectObj, hasChildren);
+    }
+    return dirs;
   }
 
-  dirsTalkNavdSect(dirs, sectObj, hasChildren) {
+  dirsNavdTalkSect(dirs, sectObj, hasChildren) {
     dirs.west = sectObj.name !== sectObj.peys[0];
     dirs.prev = dirs.west;
     dirs.east = sectObj.name !== sectObj.peys[sectObj.peys.length - 1];
@@ -331,13 +340,13 @@ Nav = class Nav {
     dirs.south = hasChildren;
   }
 
-  dirsTalkNavdPage(dirs, sectObj) {
+  dirsNavdTalkPage(dirs, sectObj) {
     var pageObj;
     pageObj = this.mixins.pageObject(sectObj, this.pageKey);
     dirs.west = pageObj.name !== sectObj.keys[0];
     dirs.prev = dirs.west;
     dirs.east = pageObj.name !== sectObj.keys[sectObj.keys.length - 1];
-    dirs.next = dirs.east;
+    dirs.next = true; // dirs.east
     dirs.north = true;
     dirs.south = false;
   }
@@ -361,6 +370,27 @@ Nav = class Nav {
     }
     // console.log( 'Nav.nextKey()', { key:key, next:keys[nidx], keys:keys } )
     return keys[nidx];
+  }
+
+  // Special case
+  nextPage(key, keys, peys) {
+    if (key !== keys[keys.length - 1]) {
+      return this.nextKey(key, keys);
+    } else {
+      this.dispKey = this.nextKey(this.dispKey, peys);
+      return 'None';
+    }
+  }
+
+  // Special case
+  nextDisp(dispKey, keys, peys) {
+    if (keys[0] != null) {
+      this.pageKey = keys[0];
+      return dispKey;
+    } else {
+      this.pageKey = 'None';
+      return this.nextKey(dispKey, peys);
+    }
   }
 
   dirPage(dir) {

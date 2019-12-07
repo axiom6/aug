@@ -7947,6 +7947,14 @@
 		"oAP": "/zzz/notes/text/Pace.txt",
 		"oF": 0
 		},
+	"/zzz/notes/text/Resize.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/text/Resize.txt",
+		"oF": 0
+		},
 	"/zzz/notes/text/tags.txt": {
 		"cB": 0,
 		"ft": 8192,

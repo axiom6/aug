@@ -51,6 +51,7 @@ class Nav
   doRoute:( route ) ->
     return if route is @routeLast or @isInov(route)
     if route? and route isnt 'None'
+      @dirsNavd(  route )
       if @$router?
          @$router.push( { name:route } )
       else
@@ -156,7 +157,8 @@ class Nav
     return
 
   dirTalk:( dir) ->
-    return if @pracKey is 'None'
+    dirs = @dirsNavdTalk()
+    return if @pracKey is 'None' or not dirs[dir]
     msg         = {}
     msg.source  = "#{'Nav.dirTalk'}(#{dir})"
     sectObj     = @mixins.sectObject( @pracKey, @dispKey )
@@ -164,19 +166,19 @@ class Nav
     @dispKey    = sectObj.name
     if @isPageTalk( sectObj, hasChildren, @pageKey )
        @pageKey   = switch dir
-         when 'west'  then @prevKey( @pageKey, sectObj.keys )
-         when 'east'  then @nextKey( @pageKey, sectObj.keys )
-         when 'prev'  then @prevKey( @pageKey, sectObj.keys )
-         when 'next'  then @nextKey( @pageKey, sectObj.keys )
+         when 'west'  then @prevKey(  @pageKey, sectObj.keys )
+         when 'east'  then @nextKey(  @pageKey, sectObj.keys )
+         when 'prev'  then @prevKey(  @pageKey, sectObj.keys )
+         when 'next'  then @nextPage( @pageKey, sectObj.keys, sectObj.peys ) # Special case
          else              'None'
     else
        @dispKey    = switch dir
-         when 'west'  then @prevKey( @dispKey, sectObj.peys )
-         when 'east'  then @nextKey( @dispKey, sectObj.peys )
+         when 'west'  then @prevKey(  @dispKey, sectObj.peys )
+         when 'east'  then @nextKey(  @dispKey, sectObj.peys )
          when 'north' then @pageKey = 'None';          @dispKey
          when 'south' then @pageKey = sectObj.keys[0]; @dispKey
-         when 'prev'  then @prevKey( @dispKey, sectObj.peys )
-         when 'next'  then @nextKey( @dispKey, sectObj.peys )
+         when 'prev'  then @prevKey(  @dispKey, sectObj.peys )
+         when 'next'  then @nextDisp( @dispKey, sectObj.keys, sectObj.peys )  # Special case
          else              'None'
     #console.log( 'Nav.dirTalk()', { dir:dir, sectObj:sectObj, dispKey:@dispKey, pageKey:@pageKey,hasChildren:hasChildren } )
     msg.dispKey = @dispKey
@@ -188,18 +190,22 @@ class Nav
     @pageKey isnt 'None' and hasChildren and sectObj[pageKey]?
 
   dirsNavd:( route ) ->
-    dirs = { west:true, east:true, north:true, south:true, prev:true, next:true }
-    if route is 'Talk'
-      sectObj = @mixins.sectObject( @pracKey, @dispKey )
-      hasChildren = @mixins.isArray(sectObj.keys)
-      if @isPageTalk( sectObj, hasChildren, @pageKey )
-         @dirsTalkNavdPage( dirs, sectObj )
-      else
-         @dirsTalkNavdSect( dirs, sectObj, hasChildren )
+    dirs = @dirsNavdTalk(route)
     @stream.publish( 'Navd',  dirs )
     return
 
-  dirsTalkNavdSect:( dirs, sectObj, hasChildren ) ->
+  dirsNavdTalk:( route ) ->
+    dirs = { west:true, east:true, north:true, south:true, prev:true, next:true }
+    return dirs if route isnt 'Talk' or @pracKey is 'None'
+    sectObj     = @mixins.sectObject( @pracKey, @dispKey )
+    hasChildren = @mixins.isArray(sectObj.keys)
+    if @isPageTalk( sectObj, hasChildren, @pageKey )
+      @dirsNavdTalkPage( dirs, sectObj )
+    else
+      @dirsNavdTalkSect( dirs, sectObj, hasChildren )
+    dirs
+
+  dirsNavdTalkSect:( dirs, sectObj, hasChildren ) ->
     dirs.west   = sectObj.name isnt sectObj.peys[0]
     dirs.prev   = dirs.west
     dirs.east   = sectObj.name isnt sectObj.peys[sectObj.peys.length-1]
@@ -208,12 +214,12 @@ class Nav
     dirs.south  = hasChildren
     return
 
-  dirsTalkNavdPage:( dirs, sectObj ) ->
+  dirsNavdTalkPage:( dirs, sectObj ) ->
     pageObj = @mixins.pageObject(  sectObj, @pageKey )
     dirs.west   = pageObj.name isnt sectObj.keys[0]
     dirs.prev   = dirs.west
     dirs.east   = pageObj.name isnt sectObj.keys[sectObj.keys.length-1]
-    dirs.next   = dirs.east
+    dirs.next   = true # dirs.east
     dirs.north  = true
     dirs.south  = false
     return
@@ -230,6 +236,23 @@ class Nav
     nidx = 0 if nidx is keys.length
     # console.log( 'Nav.nextKey()', { key:key, next:keys[nidx], keys:keys } )
     keys[nidx]
+
+  # Special case
+  nextPage:( key, keys, peys ) ->
+    if key isnt keys[keys.length-1]
+      @nextKey( key, keys )
+    else
+      @dispKey = @nextKey( @dispKey, peys )
+      'None'
+
+  # Special case
+  nextDisp:( dispKey, keys, peys ) ->
+    if keys[0]?
+      @pageKey = keys[0]
+      dispKey
+    else
+      @pageKey = 'None'
+      @nextKey( dispKey, peys )
 
   dirPage:( dir ) ->
     msg = {}

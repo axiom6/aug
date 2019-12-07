@@ -58,8 +58,8 @@
                   position:relative; left:15.0%; top:0;   width:70%; height:100%;
     .navd-west  { position:absolute; left:0;     top:33%; width:25%; height: 33%; font-size:1.3*@navdFS; }
     .navd-north { position:absolute; left:37.5%; top:0;   width:25%; height: 33%; font-size:1.3*@navdFS; }
-    .navd-next  { position:absolute; left:25.0%; top:42%; width:25%; height: 33%; font-size:0.8*@navdFS; }
-    .navd-prev  { position:absolute; left:50.0%; top:42%; width:25%; height: 33%; font-size:0.8*@navdFS; }
+    .navd-next  { position:absolute; left:50.0%; top:42%; width:25%; height: 33%; font-size:0.8*@navdFS; }
+    .navd-prev  { position:absolute; left:25.0%; top:42%; width:25%; height: 33%; font-size:0.8*@navdFS; }
     .navd-east  { position:absolute; left:75.0%; top:33%; width:25%; height: 33%; font-size:1.3*@navdFS; }
     .navd-south { position:absolute; left:37.5%; top:66%; width:25%; height: 33%; font-size:1.3*@navdFS; }
     div    { display:grid;

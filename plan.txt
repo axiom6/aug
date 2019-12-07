@@ -4,28 +4,21 @@
    b. Org paper work
    c. Finance
 
-2. Talk
-   a. Templates: Json Tags Land Desc Talk Narr
-   b. Nav scripts test suite and talks
-   c. Talks Principle Perspect Connect Practice Dispipline
+2. Fix
+   a. Next flow
+   b. Resize
 
-3. Improve Intrinsic Info
-   a. Descriptions:  Clean Up Info.json Know.json Wise.json Bold Labels
-   b. Landing Pages: Home Prin Info Know Wise
+3. Write
+   a. Talks: Principles Perspectives Connections Information Knowledge Wisdom Software Data Science Nature
+   b. Descs: Clean Up Info.json Know.json Wise.json
+   c. Lands: Pages: Home Prin Info Know Wise
 
-4. Resize
-   a. Turning on resize for Conns in Comp
-   b. smin smmax sx sy approach?
-   b. Stick to just transform scale
-   c. Wheel no resize | Axes,Chord,Tree translate  | Link good | Radar no display | Hue good
-   d. Attribute height for small Connections
-
-5. Augm
+4. Augm
    a. Math(Firefox) Geom Data(out) Note Draw Hues Cube
    a. Data pulled out. Need to review Fire
    b. Landing Pages for Home Math Geom Note Draw Hues
 
-6. Test Suite
+5. Test Suite
    a. Test Jitter Main
    b. Revisit page key from Base to Info
    c. Review hacks in: Tocs
