@@ -7,10 +7,8 @@ class Wheel
     @g                  = @svgMgr.g
     @d3                 = @svgMgr.d3
     @name               = @svgMgr.name
-    @elem               = @svgMgr.elem
-    @size               = @svgMgr.size
-    @width              = @size.elemWidth
-    @height             = @size.elemHeight
+    @width              = @svgMgr.size.w
+    @height             = @svgMgr.size.h
     @opacity            = 1.0
     @showAllLeaves      = false
     @radiusFactorChoice = 1.3

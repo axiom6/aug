@@ -4,19 +4,21 @@ import Tocca from '../../../pub/lib/touch/Tocca.esm.js'
 
 class Touch
 
-  constructor:( @stream, @dir ) ->
-    @tocca = Tocca()
-    @dirs  = ['up', 'down', 'left', 'right']
-    @evts  = ['tap', 'dbltap', 'longtap', 'swipeleft', 'swipeup', 'swiperight', 'swipedown']
+  constructor:( @stream, @navs ) ->
+    @tocca   = Tocca()
+    @dirs    = ['up', 'down', 'left', 'right']
+    @evts    = ['tap', 'dbltap', 'longtap', 'swipeleft', 'swipeup', 'swiperight', 'swipedown']
+    @route   = 'Home'
+    @$router =  null  # Set later
 
   onDir:(   elem ) ->
-    @tap(   elem,(e) -> @dir.touch('next',  e ) )
-    @dbl(   elem,(e) -> @dir.touch('next',  e ) )
-    @hold(  elem,(e) -> @dir.touch('prev',  e ) )
-    @right( elem,(e) -> @dir.touch('west',  e ) )  # All directions reversed
-    @down(  elem,(e) -> @dir.touch('north', e ) )
-    @left(  elem,(e) -> @dir.touch('east',  e ) )
-    @up(    elem,(e) -> @dir.touch('south', e ) )
+    @tap(   elem,(e) => @doTouch('next',  e ) )
+    @dbl(   elem,(e) => @doTouch('next',  e ) )
+    @hold(  elem,(e) => @doTouch('prev',  e ) )
+    @right( elem,(e) => @doTouch('west',  e ) )  # All directions reversed
+    @down(  elem,(e) => @doTouch('north', e ) )
+    @left(  elem,(e) => @doTouch('east',  e ) )
+    @up(    elem,(e) => @doTouch('south', e ) )
     return
 
   tap:( elem, onEvent ) ->
@@ -47,7 +49,28 @@ class Touch
     elem.addEventListener( 'swipedown',  onEvent )
     return
 
-export default Touch
-    
+  doTouch:( dir, event=null ) =>
+    # return if dir is 'prev'
+    if event is null then {}
+    route = @navs[@route][dir]
+    obj = { source:'Dir', route:route }
+    @pub(     obj )
+    @doRoute( route, dir )
+    return
 
-    
+  pub:( obj ) ->
+    # console.log('Dir.pub()', obj )
+    @stream.publish( 'Dir',  obj )
+    return
+
+  doRoute:( route ) ->
+    if @$router?
+      @$router.push( { name:route } )
+    else
+      console.error( 'Nav.router() $router not set' )
+    # console.log('Dir.doRoute()', { beg:@route, dir:dir, end:route } )
+    @route = route
+    return
+
+export default Touch
+       

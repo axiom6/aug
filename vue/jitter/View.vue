@@ -14,11 +14,9 @@
 
 <script type="module">
   
-  import Touch from '../../pub/base/nav/Touch.js'
-  
   export default {
 
-    data() { return { touch:null, elem:null }; },
+    data() { return { elem:null }; },
     
     methods:{
       show:function() {
@@ -26,9 +24,8 @@
     
     mounted: function () {
       this.$nextTick( function() {  // Enable touch events inside all views
-        this.touch = new Touch( this.stream(), this.dir() );
         this.elem  = this.$refs['View'];
-        this.touch.onDir( this.elem );
+        this.touch().onDir( this.elem );
       } ) }
       
     }

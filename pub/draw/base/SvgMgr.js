@@ -5,13 +5,12 @@ import * as d3 from '../../../pub/lib/d3/d3.5.9.0.esm.js';
 import Vis from './Vis.js';
 
 SvgMgr = class SvgMgr {
-  constructor(name1, elem1, level1, stream = null) {
+  constructor(name1, elem1, level1) {
     this.resize = this.resize.bind(this);
     this.resize2 = this.resize2.bind(this);
     this.name = name1;
     this.elem = elem1;
     this.level = level1;
-    this.stream = stream;
     this.d3 = d3;
     this.size = this.sizeElem(this.elem, this.level);
     this.origWidth = this.size.w;
@@ -57,7 +56,6 @@ SvgMgr = class SvgMgr {
     sz.pracDy = 0;
     sz.dispDy = sz.level === 'Comp' ? 0 : 0;
     // console.log( 'SvgMgr.sizeElem()', sz )
-    this.size = sz;
     return sz;
   }
 

@@ -7,7 +7,7 @@
           <div class="btns-btn" :style="styleBtn(btn)" @click="pubBtn(btn)">
             <span v-if="btn.check" :class="classCheck(btn)"></span>
             <i    v-if="btn.icon"  :class="classIcons(btn)"></i>
-            <img  v-if="btn.img"    class="image" :src="img(btn)" alt=""/>
+            <img  v-if="btn.img"    class="image" :src="srcImg(btn)" alt=""/>
             <span v-if="btn.title"  class="title" :ref="titleRef(btn)">{{btn.title}}</span>
           </div>
         </div>
@@ -30,8 +30,6 @@
         btn.checked = this.choosen( this.name, btn.name );
         // console.log( 'Btns.pubBtn()', this.name, btn.name,  btn.checked );
         this.publish( this.name, btn.name ); },
-    //onWatch: function() {
-    //    console.log( 'Btns.onWatch()' ); },
       aspect: function() {  // Only call in mounted
         let w = this.$refs['Btns']['clientWidth' ];
         let h = this.$refs['Btns']['clientHeight'];
@@ -52,7 +50,7 @@
         return 'icons ' + btn.icon },
       titleRef: function (btn) {
         return 'Title' + btn.name },
-      img: function (btn) {
+      srcImg: function (btn) {
         return '../../css/' + btn.img },
       adjustWidths: function() {
          let names = Object.keys(this.btns)
@@ -80,6 +78,8 @@
   @import '../../pub/css/themes/theme.less';
   
   @btnsFS:1.4*@themeFS;
+
+  .image-radius { border-radius:8px; border:solid @theme-back 1px; }
   
   .btns-pane { font-size:@btnsFS; font-weight:bold; position:absolute; left:0; top:0; right:0; bottom:0; }
   
@@ -89,14 +89,12 @@
 
   .btns-btn { .btns-grid1x3(); justify-self:center; align-self:center;
     width:80%; height:80%; font-size:inherit; font-family:@theme-font-family;
-    cursor:pointer; border-radius:16px; border: solid @theme-back 1px; }
+    cursor:pointer; border-radius:16px; border: solid @theme-back 1px;
 
-  .btn .check { grid-area:check; justify-self:center; align-self:center; }
-  .btn .icons { grid-area:icons; justify-self:center; align-self:center; } // font-family: "font-awesome" serif;
-  .btn .image { grid-area:icons; justify-self:left;   align-self:center; .image-radius; max-height:1.5em; }
-  .btn .title { grid-area:label; justify-self:left;   align-self:center; text-align:left; }
-
-  .image-radius { border-radius:8px; border:solid @theme-back 1px; }
-
-
+    .check { grid-area:check; justify-self:center; align-self:center; }
+    .icons { grid-area:icons; justify-self:center; align-self:center; } // font-family: "font-awesome" serif;
+    .image { grid-area:icons; justify-self:left;   align-self:center; .image-radius; max-height:1.5em; }
+    .title { grid-area:label; justify-self:left;   align-self:center; text-align:left; }
+  }
+  
 </style>

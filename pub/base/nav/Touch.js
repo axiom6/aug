@@ -3,35 +3,38 @@ var Touch;
 import Tocca from '../../../pub/lib/touch/Tocca.esm.js';
 
 Touch = class Touch {
-  constructor(stream, dir) {
+  constructor(stream, navs) {
+    this.doTouch = this.doTouch.bind(this);
     this.stream = stream;
-    this.dir = dir;
+    this.navs = navs;
     this.tocca = Tocca();
     this.dirs = ['up', 'down', 'left', 'right'];
     this.evts = ['tap', 'dbltap', 'longtap', 'swipeleft', 'swipeup', 'swiperight', 'swipedown'];
+    this.route = 'Home';
+    this.$router = null; // Set later
   }
 
   onDir(elem) {
-    this.tap(elem, function(e) {
-      return this.dir.touch('next', e);
+    this.tap(elem, (e) => {
+      return this.doTouch('next', e);
     });
-    this.dbl(elem, function(e) {
-      return this.dir.touch('next', e);
+    this.dbl(elem, (e) => {
+      return this.doTouch('next', e);
     });
-    this.hold(elem, function(e) {
-      return this.dir.touch('prev', e);
+    this.hold(elem, (e) => {
+      return this.doTouch('prev', e);
     });
-    this.right(elem, function(e) {
-      return this.dir.touch('west', e); // All directions reversed
+    this.right(elem, (e) => {
+      return this.doTouch('west', e); // All directions reversed
     });
-    this.down(elem, function(e) {
-      return this.dir.touch('north', e);
+    this.down(elem, (e) => {
+      return this.doTouch('north', e);
     });
-    this.left(elem, function(e) {
-      return this.dir.touch('east', e);
+    this.left(elem, (e) => {
+      return this.doTouch('east', e);
     });
-    this.up(elem, function(e) {
-      return this.dir.touch('south', e);
+    this.up(elem, (e) => {
+      return this.doTouch('south', e);
     });
   }
 
@@ -61,6 +64,38 @@ Touch = class Touch {
 
   down(elem, onEvent) {
     elem.addEventListener('swipedown', onEvent);
+  }
+
+  doTouch(dir, event = null) {
+    var obj, route;
+    // return if dir is 'prev'
+    if (event === null) {
+      ({});
+    }
+    route = this.navs[this.route][dir];
+    obj = {
+      source: 'Dir',
+      route: route
+    };
+    this.pub(obj);
+    this.doRoute(route, dir);
+  }
+
+  pub(obj) {
+    // console.log('Dir.pub()', obj )
+    this.stream.publish('Dir', obj);
+  }
+
+  doRoute(route) {
+    if (this.$router != null) {
+      this.$router.push({
+        name: route
+      });
+    } else {
+      console.error('Nav.router() $router not set');
+    }
+    // console.log('Dir.doRoute()', { beg:@route, dir:dir, end:route } )
+    this.route = route;
   }
 
 };

@@ -23,12 +23,12 @@
     methods: {
       
       doDir: function( dir ) {
-        if( this.isDir() ) {
-            this.dir().touch( dir ); }
+        if( this.isTouch() ) {
+            this.touch().doTouch( dir ); }
         else if( this.isNav() && this.dirs[dir] ) {
             this.nav().dir( dir ); }
         else {
-          console.error( 'NavddoDir() no direction navigator' ); } },
+          console.error( 'Navd.doDir() no direction navigator' ); } },
 
       style:  function(dir) {
         return this.dirs[dir] ? { color:'wheat' } : { color:'#333' } },
@@ -56,12 +56,12 @@
   
   .navd-navd { background-color:@theme-back; color:@theme-fore;
                   position:relative; left:15.0%; top:0;   width:70%; height:100%;
-    .navd-west  { position:absolute; left:0;     top:33%; width:25%; height: 33%; font-size:1.3*@navdFS; }
-    .navd-north { position:absolute; left:37.5%; top:0;   width:25%; height: 33%; font-size:1.3*@navdFS; }
-    .navd-next  { position:absolute; left:50.0%; top:42%; width:25%; height: 33%; font-size:0.8*@navdFS; }
-    .navd-prev  { position:absolute; left:25.0%; top:42%; width:25%; height: 33%; font-size:0.8*@navdFS; }
-    .navd-east  { position:absolute; left:75.0%; top:33%; width:25%; height: 33%; font-size:1.3*@navdFS; }
-    .navd-south { position:absolute; left:37.5%; top:66%; width:25%; height: 33%; font-size:1.3*@navdFS; }
+    .navd-west  { position:absolute; left:0;     top:33%; width:25%; height: 33%; font-size:133% }
+    .navd-north { position:absolute; left:37.5%; top:0;   width:25%; height: 33%; font-size:133% }
+    .navd-next  { position:absolute; left:50.0%; top:33%; width:25%; height: 33%; font-size:100% }
+    .navd-prev  { position:absolute; left:25.0%; top:33%; width:25%; height: 33%; font-size:100% }
+    .navd-east  { position:absolute; left:75.0%; top:33%; width:25%; height: 33%; font-size:133% }
+    .navd-south { position:absolute; left:37.5%; top:66%; width:25%; height: 33%; font-size:133% }
     div    { display:grid;
       i    { justify-self:center; align-self:center; } } }
   

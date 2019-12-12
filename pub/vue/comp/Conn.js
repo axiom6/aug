@@ -18349,6 +18349,31 @@ Util = class Util {
     return a === a.toUpperCase() && a !== '$' && b !== '_';
   }
 
+  static hasChild(obj) {
+    var key, val;
+    for (key in obj) {
+      if (!hasProp.call(obj, key)) continue;
+      val = obj[key];
+      if (Util.isChild(key)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  static childKeys(obj) {
+    var key, val, vals;
+    vals = [];
+    for (key in obj) {
+      if (!hasProp.call(obj, key)) continue;
+      val = obj[key];
+      if (Util.isChild(key)) {
+        vals.push(key);
+      }
+    }
+    return vals;
+  }
+
   // ---- Inquiry ----
   static hasMethod(obj, method, issue = false) {
     var has;
@@ -20570,13 +20595,12 @@ var Vis$1 = Vis;
 var SvgMgr;
 
 SvgMgr = class SvgMgr {
-  constructor(name1, elem1, level1, stream = null) {
+  constructor(name1, elem1, level1) {
     this.resize = this.resize.bind(this);
     this.resize2 = this.resize2.bind(this);
     this.name = name1;
     this.elem = elem1;
     this.level = level1;
-    this.stream = stream;
     this.d3 = d3;
     this.size = this.sizeElem(this.elem, this.level);
     this.origWidth = this.size.w;
@@ -20662,11 +20686,8 @@ var Data,
   hasProp$1 = {}.hasOwnProperty;
 
 Data = class Data {
-  static refine(data, type) {
+  static refine(data) {
     var akey, area, base, bkey, disp, dkey, ikey, item, pkey, prac;
-    if (type === 'None') {
-      return data;
-    }
     data.pracs = {};
     for (pkey in data) {
       prac = data[pkey];
@@ -20726,7 +20747,9 @@ Data = class Data {
           }
         }
       }
+      prac.dispKeys = Object.keys(prac.disps);
     }
+    data.pracKeys = Object.keys(data.pracs);
     return data;
   }
 
@@ -20755,7 +20778,7 @@ Data = class Data {
       innvs[key] = Object.assign({}, pracs[key]);
       innvs[key].plane = innv;
     }
-    Data.refine(innvs, 'Pack');
+    Data.refine(innvs);
   }
 
   // ---- Read JSON with batch async
@@ -20783,8 +20806,7 @@ Data = class Data {
   // "Access-Control-Request-Headers": "*", "Access-Control-Request-Method": "*"
   static batchJSON(obj, batch, callback, refine = null) {
     var opt, url;
-    url = obj.type === 'Font' ? obj.url : Data.toUrl(obj.url);
-    // console.log( 'Data.batchJSON', obj.url, url )
+    url = Data.toUrl(obj.url);
     opt = {
       mode: 'no-cors',
       headers: {
@@ -20794,7 +20816,7 @@ Data = class Data {
     fetch(url, opt).then((response) => {
       return response.json();
     }).then((data) => {
-      obj['data'] = Util$1.isFunc(refine) ? refine(data, obj.type) : data;
+      obj['data'] = Util$1.isFunc(refine) ? refine(data) : data;
       if (Data.batchComplete(batch)) {
         return callback(batch);
       }
@@ -20827,11 +20849,14 @@ Data = class Data {
   }
 
   static toUrl(url) {
-    //  console.log( 'Data.toUrl()', Data.local+url )
-    if (window.location.href.includes('localhost')) {
-      return Data.local + url;
+    if (!url.startsWith('../')) {
+      if (window.location.href.includes('localhost')) {
+        return Data.local + url;
+      } else {
+        return Data.hosted + url;
+      }
     } else {
-      return Data.hosted + url;
+      return url;
     }
   }
 
@@ -22944,7 +22969,7 @@ Connect = class Connect {
     this.level = level;
     this.build = new Build$1(this.batch);
     this.shapes = new Shapes$1(this.stream);
-    this.svgMgr = new SvgMgr$1(this.prac.name, this.elem, this.level, this.stream);
+    this.svgMgr = new SvgMgr$1(this.prac.name, this.elem, this.level);
     this.draw = this.createDraw();
     this.draw.drawSvg(this.svgMgr.g, this.svgMgr.size, this.svgMgr.defs);
   }

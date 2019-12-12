@@ -61,6 +61,6 @@
   
   .page { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;
           background-color:@theme-back; display:grid;
-    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-fore; font-size:@theme-h1-FS; } }
+    h1    { @theme-h1;  color:@theme-fore; } }
 
 </style>

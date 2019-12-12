@@ -11,7 +11,7 @@ class Connect
   constructor:( @stream,  @batch, @prac, @elem, @level ) ->
     @build  = new Build(  @batch  )
     @shapes = new Shapes( @stream )
-    @svgMgr = new SvgMgr( @prac.name, @elem, @level, @stream )
+    @svgMgr = new SvgMgr( @prac.name, @elem, @level )
     @draw   = @createDraw()
     @draw.drawSvg( @svgMgr.g, @svgMgr.size, @svgMgr.defs )
 

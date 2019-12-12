@@ -68,7 +68,7 @@
   
   .hues-pane {   position:absolute; left:0; top:0; width:100%; height:100%; display:grid;
     background-color:@theme-back; font-family:@theme-font-family;
-    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-fore; font-size:@theme-h1-FS; }
+    h1    { @theme-h1; color:@theme-fore;  }
     .hues-page { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height  } }
   
 </style>

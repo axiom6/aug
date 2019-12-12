@@ -4,7 +4,7 @@ import Vis      from './Vis.js'
 
 class SvgMgr
 
-  constructor:( @name, @elem, @level, @stream=null ) ->
+  constructor:( @name, @elem, @level ) ->
     @d3    = d3
     @size  = @sizeElem( @elem, @level )
     @origWidth  = @size.w
@@ -49,7 +49,6 @@ class SvgMgr
     sz.pracDy     = 0
     sz.dispDy     = if sz.level is 'Comp' then  0                else 0
     # console.log( 'SvgMgr.sizeElem()', sz )
-    @size = sz
     sz
 
   resize:() =>

@@ -57,14 +57,14 @@ Mixin = class Mixin {
           }
           return Mixin.Main.nav;
         },
-        dir: function() {
-          if (Mixin.Main.dir == null) {
-            console.error('Mixin.dir() null');
+        touch: function() {
+          if (Mixin.Main.touch == null) {
+            console.error('Mixin.touch() null');
           }
-          return Mixin.Main.dir;
+          return Mixin.Main.touch;
         },
-        isDir: function() {
-          return Mixin.Main.dir != null;
+        isTouch: function() {
+          return Mixin.Main.touch != null;
         },
         isNav: function() {
           return Mixin.Main.nav != null;

@@ -828,17 +828,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/base/vue/SvgMgr.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/base/vue/SvgMgr-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/pub/base/vue/Wheel.js": {
 		"bF": 0,
 		"ft": 64,

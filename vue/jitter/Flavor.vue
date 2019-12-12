@@ -9,9 +9,8 @@
 <script type="module">
 
   import Summ    from './Summ.vue';
-  import SvgMgr  from '../../pub/base/vue/SvgMgr.js';
-  import Wheel   from '../../pub/base/vue/Wheel.js' ;
-  import * as d3 from '../../pub/lib/d3/d3.5.9.0.esm.js';
+  import SvgMgr  from '../../pub/draw/base/SvgMgr.js';
+  import Wheel   from '../../pub/base/vue/Wheel.js';
 
   let Flavor = {
 
@@ -26,22 +25,12 @@
         if( roast===false ) {}
         // console.log( 'Flavor.onChoice()', { name:this.name, choice:choice, roast:roast } );
         this.publish( this.name, choice ); },
-
-      // Should only be called within $nextTick()
-      calcSize: function(elem) {
-        let sz        = {}
-        sz.elemWidth  = elem['clientWidth' ];
-        sz.elemHeight = elem['clientHeight'];
-        sz.elem       = elem;
-        sz.name       = this.name;
-        return sz; }
     },
 
     mounted: function () {
       this.$nextTick( function() {
         let elem    = this.$refs[this.name];
-        let size    = this.calcSize( elem );
-        this.svgMgr = new SvgMgr( this.name, elem, size, d3 );
+        this.svgMgr = new SvgMgr( this.name, elem, 'Flavor' );
         this.wheel  = new Wheel(  this.svgMgr, this.onChoice ); } ) }
 
   }

@@ -54,6 +54,31 @@ Util = class Util {
     return a === a.toUpperCase() && a !== '$' && b !== '_';
   }
 
+  static hasChild(obj) {
+    var key, val;
+    for (key in obj) {
+      if (!hasProp.call(obj, key)) continue;
+      val = obj[key];
+      if (Util.isChild(key)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  static childKeys(obj) {
+    var key, val, vals;
+    vals = [];
+    for (key in obj) {
+      if (!hasProp.call(obj, key)) continue;
+      val = obj[key];
+      if (Util.isChild(key)) {
+        vals.push(key);
+      }
+    }
+    return vals;
+  }
+
   // ---- Inquiry ----
   static hasMethod(obj, method, issue = false) {
     var has;
@@ -993,11 +1018,8 @@ var Data,
   hasProp$1 = {}.hasOwnProperty;
 
 Data = class Data {
-  static refine(data, type) {
+  static refine(data) {
     var akey, area, base, bkey, disp, dkey, ikey, item, pkey, prac;
-    if (type === 'None') {
-      return data;
-    }
     data.pracs = {};
     for (pkey in data) {
       prac = data[pkey];
@@ -1057,7 +1079,9 @@ Data = class Data {
           }
         }
       }
+      prac.dispKeys = Object.keys(prac.disps);
     }
+    data.pracKeys = Object.keys(data.pracs);
     return data;
   }
 
@@ -1086,7 +1110,7 @@ Data = class Data {
       innvs[key] = Object.assign({}, pracs[key]);
       innvs[key].plane = innv;
     }
-    Data.refine(innvs, 'Pack');
+    Data.refine(innvs);
   }
 
   // ---- Read JSON with batch async
@@ -1114,8 +1138,7 @@ Data = class Data {
   // "Access-Control-Request-Headers": "*", "Access-Control-Request-Method": "*"
   static batchJSON(obj, batch, callback, refine = null) {
     var opt, url;
-    url = obj.type === 'Font' ? obj.url : Data.toUrl(obj.url);
-    // console.log( 'Data.batchJSON', obj.url, url )
+    url = Data.toUrl(obj.url);
     opt = {
       mode: 'no-cors',
       headers: {
@@ -1125,7 +1148,7 @@ Data = class Data {
     fetch(url, opt).then((response) => {
       return response.json();
     }).then((data) => {
-      obj['data'] = Util$1.isFunc(refine) ? refine(data, obj.type) : data;
+      obj['data'] = Util$1.isFunc(refine) ? refine(data) : data;
       if (Data.batchComplete(batch)) {
         return callback(batch);
       }
@@ -1158,11 +1181,14 @@ Data = class Data {
   }
 
   static toUrl(url) {
-    //  console.log( 'Data.toUrl()', Data.local+url )
-    if (window.location.href.includes('localhost')) {
-      return Data.local + url;
+    if (!url.startsWith('../')) {
+      if (window.location.href.includes('localhost')) {
+        return Data.local + url;
+      } else {
+        return Data.hosted + url;
+      }
     } else {
-      return Data.hosted + url;
+      return url;
     }
   }
 

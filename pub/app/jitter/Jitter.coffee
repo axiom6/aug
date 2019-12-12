@@ -1,7 +1,7 @@
 
 import Data    from '../../base/util/Data.js'
 import Stream  from '../../base/util/Stream.js'
-import Dir     from '../../base/nav/Dir.js'
+import Touch   from '../../base/nav/Touch.js'
 import Cache   from '../../base/util/Cache.js'
 #mport Test    from './Test.js'
 
@@ -38,7 +38,7 @@ class Jitter
     subjects       = ["Dir"]
     streamLog      = { subscribe:false, publish:false, subjects:subjects }
     Jitter.stream  = new Stream( subjects, streamLog )
-    Jitter.dir     = new Dir(   Jitter.stream, Jitter.komps )
+    Jitter.touch   = new Touch( Jitter.stream, Jitter.komps )
     Jitter.cache   = new Cache( Jitter.stream )
     Jitter.vue()
     return
@@ -49,7 +49,7 @@ class Jitter
     Vue['mixin']( Jitter.mixin.mixin() )
     Vue.use(Router)
     app = new Vue( { router:Jitter.router(), render: (h) -> h(Home.Dash) } );
-    Jitter.dir.$router = app.$router;
+    Jitter.touch.$router = app.$router;
     app.$mount('j-jitter')
     return
 

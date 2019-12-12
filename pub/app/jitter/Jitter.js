@@ -4,7 +4,7 @@ import Data from '../../base/util/Data.js';
 
 import Stream from '../../base/util/Stream.js';
 
-import Dir from '../../base/nav/Dir.js';
+import Touch from '../../base/nav/Touch.js';
 
 import Cache from '../../base/util/Cache.js';
 
@@ -35,7 +35,7 @@ Jitter = (function() {
         subjects: subjects
       };
       Jitter.stream = new Stream(subjects, streamLog);
-      Jitter.dir = new Dir(Jitter.stream, Jitter.komps);
+      Jitter.touch = new Touch(Jitter.stream, Jitter.komps);
       Jitter.cache = new Cache(Jitter.stream);
       Jitter.vue();
     }
@@ -51,7 +51,7 @@ Jitter = (function() {
           return h(Home.Dash);
         }
       });
-      Jitter.dir.$router = app.$router;
+      Jitter.touch.$router = app.$router;
       app.$mount('j-jitter');
     }
 
