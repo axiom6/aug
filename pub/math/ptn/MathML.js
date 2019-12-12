@@ -98,20 +98,20 @@ MathML = class MathML {
   }
 
   fen(u) {
-    this.beg("mfenced open='(' close=')' separators=''");
+    this.tag('mo', '(');
     this.exp(u);
-    this.end('mfenced');
+    this.tag('mo', ')');
   }
 
   vec(rest) {
     var e, i, len;
-    this.beg("mfenced open='[' close=']' separators=','");
+    this.tag('mo', '[');
 // MathML takes care of commans
     for (i = 0, len = rest.length; i < len; i++) {
       e = rest[i];
       this.exp(e);
     }
-    this.end("mfenced");
+    this.tag('mo', ']');
   }
 
   unk(q) {

@@ -21113,7 +21113,6 @@ SvgMgr = class SvgMgr {
     sz.pracDy = 0;
     sz.dispDy = sz.level === 'Comp' ? 0 : 0;
     // console.log( 'SvgMgr.sizeElem()', sz )
-    this.size = sz;
     return sz;
   }
 

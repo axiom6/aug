@@ -2,21 +2,22 @@
 1. Tasks
    a. Apple ID
    b. Org paper work
-   c. Finance
 
-2. Fix
-   a. Next flow
-   b. Resize
-
-3. Write
+2. Write
    a. Talks: Principles Perspectives Connections Information Knowledge Wisdom Software Data Science Nature
    b. Descs: Clean Up Info.json Know.json Wise.json
    c. Lands: Pages: Home Prin Info Know Wise
 
+3. Fix
+   a. Nav ok for now
+   b. Resize
+   c. Streamline builds
+
 4. Augm
-   a. Math(Firefox) Geom Data(out) Note Draw Hues Cube
-   a. Data pulled out. Need to review Fire
-   b. Landing Pages for Home Math Geom Note Draw Hues
+   a. MathML browser compatibility
+   b. Geom Data(out) Note Draw Hues Cube
+   c. Data pulled out. Need to review Fire
+   d. Landing Pages for Home Math Geom Note Draw Hues
 
 5. Test Suite
    a. Test Jitter Main

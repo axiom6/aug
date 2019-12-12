@@ -3,7 +3,7 @@
   <div class="geom-pane">
     <h1 v-show="myRoute()">Geometric Algebra</h1>
     <template v-for="geom in geoms">
-      <router-view :name="comp+geom.key"></router-view>
+      <router-view :name="route+geom.key"></router-view>
     </template>
   </div>
 </template>
@@ -12,7 +12,7 @@
   
   let Geom = {
 
-    data() { return {
+    data() { return { route:'Geom',
       geoms:[
         { title:'Geom2D', key:'2D' },
         { title:'Geom3D', key:'3D' },

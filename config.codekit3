@@ -4449,17 +4449,6 @@
 		"rFN": 0,
 		"uCM": 0
 		},
-	"/src/base/nav/Dir.coffee": {
-		"ft": 32,
-		"ma": 0,
-		"mi": 0,
-		"oA": 0,
-		"oAP": "/pub/base/nav/Dir.js",
-		"oF": 0,
-		"oS": 1,
-		"sC": 0,
-		"tS": 0
-		},
 	"/src/base/nav/Nav.coffee": {
 		"ft": 32,
 		"ma": 0,
@@ -7980,6 +7969,17 @@
 		"mi": 0,
 		"oA": 0,
 		"oAP": "/zzz/pub/Connect.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/zzz/src/Dir.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/zzz/pub/Dir.js",
 		"oF": 0,
 		"oS": 1,
 		"sC": 0,

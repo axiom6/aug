@@ -60,13 +60,13 @@ class MathML
     return
 
   fen:( u ) ->
-    @beg("mfenced open='(' close=')' separators=''" ); @exp(u); @end('mfenced')
+    @tag('mo','('); @exp(u); @tag('mo',')')
     return
 
   vec:( rest ) ->
-    @beg("mfenced open='[' close=']' separators=','" )
+    @tag('mo','[')
     @exp(e) for e in rest   # MathML takes care of commans
-    @end("mfenced" )
+    @tag('mo',']')
     return
 
   unk:( q ) ->
