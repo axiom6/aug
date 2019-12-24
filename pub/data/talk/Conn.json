@@ -1,8 +1,9 @@
 {
   "Beg":        { "banner":"Connections", "type":"Sect", "icon":"fas fa-hourglass-start", "author":"Tom Flaherty", "date":"yyyy-mm-dd" },
-  "Refine":     { "title":"Deliver",       "type":"Sect" },
-  "Fulfuill":   { "title":"Deliver",       "type":"Sect" },
-  "Enlight":    { "title":"Product",       "type":"Sect" },
+  "Enlight":    { "title":"Enlight",      "type":"Sect" },
+  "Inform":     { "title":"Inform",       "type":"Sect" },
+  "Refine":     { "title":"Refine",       "type":"Sect" },
+  "Fulfill":    { "title":"Fulfull",      "type":"Sect" },
   "Credits":    { "title":"Credits",      "type":"Cred", "icon":"fas fa-check-square" },
   "References": { "title":"References",   "type":"Refs", "icon":"fas fa-book-open"    },
   "Links":      { "title":"Links",        "type":"Link", "icon":"fas fa-link"         },

@@ -1,7 +1,7 @@
 
 1. Tasks
-   a. Apple ID
-   b. Org paper work
+   a. Apple ID for App store
+   b. Groom
 
 2. Write
    a. Talks: Principles Perspectives Connections Information Knowledge Wisdom Software Data Science Nature
@@ -9,9 +9,10 @@
    c. Lands: Pages: Home Prin Info Know Wise
 
 3. Fix
-   a. Nav ok for now
-   b. Resize
-   c. Streamline builds
+   a. Refine Mixin
+   b. Nav ok for now
+   c. Resize
+   d. Streamline builds
 
 4. Augm
    a. MathML browser compatibility

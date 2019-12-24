@@ -15,6 +15,7 @@ Mixin = class Mixin {
     return {
       created: function() {},
       methods: {
+        // Util
         isDef: function(d) {
           return d !== null && typeof d !== 'undefined';
         },
@@ -33,6 +34,65 @@ Mixin = class Mixin {
           b = key.charAt(key.length - 1);
           return a === a.toUpperCase() && a !== '$' && b !== '_';
         },
+        keys: function(obj) {
+          return Object.keys(obj);
+        },
+        hasElem: function(elem) {
+          return (elem != null) && (elem['clientHeight'] != null) && elem['clientHeight'] > 0;
+        },
+        getElem: function($refs, name) { // Not called
+          var elem;
+          elem = $refs[name];
+          console.log('Mixin.getElem() $refs[name]   ', $refs, elem, name);
+          if (!this.hasElem(elem) && (elem[0] != null)) {
+            elem = $refs[name][0];
+            console.log('Mixin.getElem() $refs[name][0]', $refs, elem, name);
+            if (!this.hasElem(elem)) {
+              console.error('Mixin.hasElem() unable to find elem in $refs[name]', name);
+              console.dir($refs);
+              elem = null;
+            }
+          } else {
+            console.error('Mixin.hasElem() unable to find elem in $refs[name][0]', name);
+            elem = null;
+          }
+          return elem;
+        },
+        styleObj: function(ikwObj, fontSize = void 0) {
+          var hsv, style;
+          hsv = [30, 90, 90];
+          if (this.isDef(ikwObj)) {
+            if (this.isDef(ikwObj.hsv)) {
+              hsv = ikwObj.hsv;
+            } else if (this.isDef(ikwObj.dir)) {
+              hsv = (function() {
+                switch (ikwObj.dir) {
+                  case 'west':
+                    return [195, 90, 70];
+                  case 'north':
+                    return [90, 90, 90];
+                  case 'east':
+                    return [30, 60, 90];
+                  case 'south':
+                    return [60, 90, 90];
+                  default:
+                    return [30, 90, 90];
+                }
+              })();
+            }
+          }
+          style = {
+            backgroundColor: Vis.toRgbaHsv(hsv)
+          };
+          if (fontSize) {
+            style['fontSize'] = fontSize + 'rem';
+          }
+          return style;
+        },
+        toRgbaHsv: function(hsv) {
+          return Vis.toRgbaHsv(hsv);
+        },
+        // Main
         app: function() {
           return Mixin.Main.app;
         },
@@ -51,6 +111,19 @@ Mixin = class Mixin {
         batch: function() {
           return Mixin.Main.Batch;
         },
+        fontSize: function(scale) { // JavaScript font-size the matches themeFS in theme.less
+          var fs, sc;
+          fs = Mixin.Main.fontSize != null ? Mixin.Main.fontSize : 2;
+          sc = scale != null ? scale : 1;
+          return sc * fs + 'vmin';
+        },
+        fontSizeCss: function(scale) {
+          return {
+            fontSize: this.fontSize(scale)
+          };
+        },
+        
+        // Nav
         nav: function() {
           if (Mixin.Main.nav == null) {
             console.error('Mixin.nav() null');
@@ -81,20 +154,7 @@ Mixin = class Mixin {
         isRoute: function(route) {
           return route === this.navRoute();
         },
-        keys: function(obj) {
-          return Object.keys(obj);
-        },
-        fontSize: function(scale) { // JavaScript font-size the matches themeFS in theme.less
-          var fs, sc;
-          fs = Mixin.Main.fontSize != null ? Mixin.Main.fontSize : 2;
-          sc = scale != null ? scale : 1;
-          return sc * fs + 'vmin';
-        },
-        fontSizeCss: function(scale) {
-          return {
-            fontSize: this.fontSize(scale)
-          };
-        },
+        // Batch
         prin: function() {
           return Mixin.Main.Batch['Prin'].data.pracs;
         },
@@ -144,6 +204,7 @@ Mixin = class Mixin {
         bases: function(compk, prack, dispk, areak, itemk) {
           return Mixin.Main.Batch[compk].data[prack][dispk][areak][itemk].bases;
         },
+        // Talk
         compObject: function(compKey) {
           if (Mixin.Main.Batch[compKey] != null) {
             return Mixin.Main.Batch[compKey].data.pracs;
@@ -217,40 +278,8 @@ Mixin = class Mixin {
         isPageKeyComp: function(pageKey) {
           return pageKey === 'Info' || pageKey === 'Data'; // this.app() is 'Muse' and
         },
-        styleObj: function(ikwObj, fontSize = void 0) {
-          var hsv, style;
-          hsv = [30, 90, 90];
-          if (this.isDef(ikwObj)) {
-            if (this.isDef(ikwObj.hsv)) {
-              hsv = ikwObj.hsv;
-            } else if (this.isDef(ikwObj.dir)) {
-              hsv = (function() {
-                switch (ikwObj.dir) {
-                  case 'west':
-                    return [195, 90, 70];
-                  case 'north':
-                    return [90, 90, 90];
-                  case 'east':
-                    return [30, 60, 90];
-                  case 'south':
-                    return [60, 90, 90];
-                  default:
-                    return [30, 90, 90];
-                }
-              })();
-            }
-          }
-          style = {
-            backgroundColor: Vis.toRgbaHsv(hsv)
-          };
-          if (fontSize) {
-            style['fontSize'] = fontSize + 'rem';
-          }
-          return style;
-        },
-        toRgbaHsv: function(hsv) {
-          return Vis.toRgbaHsv(hsv);
-        },
+        
+        // Choice
         choice: function() {
           return Mixin.Main.Batch.Choice.data;
         },
@@ -296,28 +325,6 @@ Mixin = class Mixin {
             });
           }
           return idx;
-        },
-        hasElem: function(elem) {
-          return (elem != null) && (elem['clientHeight'] != null) && elem['clientHeight'] > 0;
-        },
-        // Not called
-        getElem: function($refs, name) {
-          var elem;
-          elem = $refs[name];
-          console.log('Mixin.getElem() $refs[name]   ', $refs, elem, name);
-          if (!this.hasElem(elem) && (elem[0] != null)) {
-            elem = $refs[name][0];
-            console.log('Mixin.getElem() $refs[name][0]', $refs, elem, name);
-            if (!this.hasElem(elem)) {
-              console.error('Mixin.hasElem() unable to find elem in $refs[name]', name);
-              console.dir($refs);
-              elem = null;
-            }
-          } else {
-            console.error('Mixin.hasElem() unable to find elem in $refs[name][0]', name);
-            elem = null;
-          }
-          return elem;
         }
       }
     };

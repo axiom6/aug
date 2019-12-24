@@ -10,9 +10,13 @@ class Mixin
 
   mixin:() ->
     return  {
+
       created: () ->
         return
+
       methods: {
+
+        # Util
         isDef: (d) ->
           d isnt null and typeof (d) isnt 'undefined'
         isStr: (s) ->
@@ -25,6 +29,43 @@ class Mixin
           a = key.charAt(0)
           b = key.charAt(key.length-1)
           a is a.toUpperCase() and a isnt '$' and b isnt '_'
+        keys: (obj) ->
+          Object.keys(obj)
+        hasElem:(elem) ->
+          elem? and elem['clientHeight']? and elem['clientHeight'] > 0
+        getElem:($refs,name) ->  # Not called
+          elem = $refs[name]
+          console.log( 'Mixin.getElem() $refs[name]   ', $refs, elem, name )
+          if not @hasElem(elem) and elem[0]?
+            elem = $refs[name][0]
+            console.log( 'Mixin.getElem() $refs[name][0]', $refs, elem, name )
+            if not @hasElem(elem)
+              console.error( 'Mixin.hasElem() unable to find elem in $refs[name]', name )
+              console.dir($refs)
+              elem = null
+          else
+            console.error( 'Mixin.hasElem() unable to find elem in $refs[name][0]', name )
+            elem = null
+          elem
+        styleObj:( ikwObj, fontSize=undefined ) ->
+          hsv = [30, 90, 90]
+          if this.isDef(ikwObj)
+            if this.isDef(ikwObj.hsv)
+              hsv = ikwObj.hsv
+            else if this.isDef(ikwObj.dir)
+              hsv = switch ikwObj.dir
+                when 'west'  then [195, 90, 70]
+                when 'north' then [ 90, 90, 90]
+                when 'east'  then [ 30, 60, 90]
+                when 'south' then [ 60, 90, 90]
+                else              [ 30, 90, 90]
+          style = { backgroundColor:Vis.toRgbaHsv(hsv) }
+          style['fontSize'] = fontSize+'rem' if fontSize
+          style
+        toRgbaHsv: (hsv) ->
+          Vis.toRgbaHsv(hsv)
+
+        # Main
         app:() ->
           Mixin.Main.app
         isMuse:() ->
@@ -39,6 +80,14 @@ class Mixin
           Mixin.Main.stream
         batch: () ->
           Mixin.Main.Batch
+        fontSize:( scale ) ->  # JavaScript font-size the matches themeFS in theme.less
+          fs = if Mixin.Main.fontSize? then Mixin.Main.fontSize else 2
+          sc = if scale?               then scale               else 1
+          sc * fs + 'vmin'
+        fontSizeCss:( scale ) ->
+          { fontSize:@fontSize(scale) }
+          
+        # Nav
         nav: () ->
           console.error( 'Mixin.nav() null' ) if not Mixin.Main.nav?
           Mixin.Main.nav
@@ -55,14 +104,8 @@ class Mixin
           else                      'None'
         isRoute:( route ) ->
           route is this.navRoute()
-        keys: (obj) ->
-          Object.keys(obj)
-        fontSize:( scale ) ->  # JavaScript font-size the matches themeFS in theme.less
-          fs = if Mixin.Main.fontSize? then Mixin.Main.fontSize else 2
-          sc = if scale?               then scale               else 1
-          sc * fs + 'vmin'
-        fontSizeCss:( scale ) ->
-          { fontSize:@fontSize(scale) }
+
+        # Batch
         prin: ()  ->
           Mixin.Main.Batch['Prin'].data.pracs
         comps: (compk) ->
@@ -89,6 +132,8 @@ class Mixin
           Mixin.Main.Batch[compk].data[prack][dispk][areak].items
         bases: (compk, prack, dispk, areak, itemk) ->
           Mixin.Main.Batch[compk].data[prack][dispk][areak][itemk].bases
+
+        # Talk
         compObject: (compKey) ->
           if Mixin.Main.Batch[compKey]?
              Mixin.Main.Batch[compKey].data.pracs
@@ -145,24 +190,9 @@ class Mixin
         isPageKeyComp:( pageKey ) ->
           pageKey is'Info' or pageKey is 'Data' # this.app() is 'Muse' and
 
-        styleObj:( ikwObj, fontSize=undefined ) ->
-          hsv = [30, 90, 90]
-          if this.isDef(ikwObj)
-            if this.isDef(ikwObj.hsv)
-              hsv = ikwObj.hsv
-            else if this.isDef(ikwObj.dir)
-              hsv = switch ikwObj.dir
-                when 'west'  then [195, 90, 70]
-                when 'north' then [ 90, 90, 90]
-                when 'east'  then [ 30, 60, 90]
-                when 'south' then [ 60, 90, 90]
-                else              [ 30, 90, 90]
-          style = { backgroundColor:Vis.toRgbaHsv(hsv) }
-          style['fontSize'] = fontSize+'rem' if fontSize
-          style
 
-        toRgbaHsv: (hsv) ->
-          Vis.toRgbaHsv(hsv)
+
+        # Choice
         choice:() ->
           Mixin.Main.Batch.Choice.data
         choices:( name ) ->
@@ -191,26 +221,6 @@ class Mixin
           else
             console.error( 'Mixin.choiceIndex() bad choice name', { name:name, idx:idx } )
           idx
-
-        hasElem:(elem) ->
-          elem? and elem['clientHeight']? and elem['clientHeight'] > 0
-
-        # Not called
-        getElem:($refs,name) ->
-          elem = $refs[name]
-          console.log( 'Mixin.getElem() $refs[name]   ', $refs, elem, name )
-          if not @hasElem(elem) and elem[0]?
-            elem = $refs[name][0]
-            console.log( 'Mixin.getElem() $refs[name][0]', $refs, elem, name )
-            if not @hasElem(elem)
-              console.error( 'Mixin.hasElem() unable to find elem in $refs[name]', name )
-              console.dir($refs)
-              elem = null
-          else
-            console.error( 'Mixin.hasElem() unable to find elem in $refs[name][0]', name )
-            elem = null
-          elem
-
 
       }
     }
