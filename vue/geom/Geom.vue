@@ -20,7 +20,7 @@
 
     methods: {
       myRoute: function() {
-        return this.isRoute('Geom'); } },
+        return this.mix().isRoute('Geom'); } },
 
     mounted: function () {}
 

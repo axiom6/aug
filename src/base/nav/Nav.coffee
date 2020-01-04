@@ -4,19 +4,19 @@ import Build from '../util/Build.js'
 class Nav
 
   constructor:( @stream, @batch, @komps=null, @isMuse=false ) ->
-    @navs      = @addInovToNavs( @komps )
-    @build     =  new Build( @batch )
-    @$router   =  null
-    @source    = 'None'
-    @route     = 'Home'
-    @routeLast = 'None'
-    @compKey   = 'Home' # Also specifies current plane
-    @pracKey   = 'None'
-    @dispKey   = 'None'
-    @pageKey   = 'None'
-    @warnMsg   = 'None'
-    @mixins    = null
-    @pages     = {}
+    @navs       = @addInovToNavs( @komps )
+    @build      =  new Build( @batch )
+    @$router    =  null
+    @source     = 'None'
+    @route      = 'Home'
+    @routeLast  = 'None'
+    @compKey    = 'Home' # Also specifies current plane
+    @pracKey    = 'None'
+    @dispKey    = 'None'
+    @pageKey    = 'None'
+    @warnMsg    = 'None'
+    @mix        = null
+    @pages      = {}
     @keyEvents()
 
   pub:( msg ) ->
@@ -44,8 +44,8 @@ class Nav
       @[key] = val
     return
 
-  setMixinMethods:( methods ) ->
-    @mixins = methods
+  setMix:( methods ) ->
+    @mix = methods.mix # mix
     return
 
   doRoute:( route ) ->
@@ -161,8 +161,8 @@ class Nav
     return if @pracKey is 'None' or not dirs[dir]
     msg         = {}
     msg.source  = "#{'Nav.dirTalk'}(#{dir})"
-    sectObj     = @mixins.sectObject( @pracKey, @dispKey )
-    hasChildren = @mixins.isArray(sectObj.keys)
+    sectObj     = @mix().sectObject( @pracKey, @dispKey )
+    hasChildren = @mix().isArray(sectObj.keys)
     @dispKey    = sectObj.name
     if @isPageTalk( sectObj, hasChildren, @pageKey )
        @pageKey   = switch dir
@@ -197,8 +197,8 @@ class Nav
   dirsNavdTalk:( route ) ->
     dirs = { west:true, east:true, north:true, south:true, prev:true, next:true }
     return dirs if route isnt 'Talk' or @pracKey is 'None'
-    sectObj     = @mixins.sectObject( @pracKey, @dispKey )
-    hasChildren = @mixins.isArray(sectObj.keys)
+    sectObj     = @mix().sectObject( @pracKey, @dispKey )
+    hasChildren = @mix().isArray(sectObj.keys)
     if @isPageTalk( sectObj, hasChildren, @pageKey )
       @dirsNavdTalkPage( dirs, sectObj )
     else
@@ -215,7 +215,7 @@ class Nav
     return
 
   dirsNavdTalkPage:( dirs, sectObj ) ->
-    pageObj = @mixins.pageObject(  sectObj, @pageKey )
+    pageObj     = @mix().pageObject(  sectObj, @pageKey )
     dirs.west   = pageObj.name isnt sectObj.keys[0]
     dirs.prev   = dirs.west
     dirs.east   = pageObj.name isnt sectObj.keys[sectObj.keys.length-1]

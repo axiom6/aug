@@ -23,7 +23,7 @@
     data() { return { comp:'Home', key:'Home' } },
     
     mounted: function () {
-      this.publish( 'Tocs', 'Close' ); }
+      this.mix().publish( 'Tocs', 'Close' ); }
   }
 
   import Dash from '../../../vue/dash/Dash.vue';

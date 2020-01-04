@@ -1,14 +1,14 @@
 
-import Data    from '../../base/util/Data.js'
-import Build   from '../../base/util/Build.js'
-import Stream  from '../../base/util/Stream.js'
-import Nav     from '../../base/nav/Nav.js'
-#mport Cache   from '../../base/util/Cache.js'
+import Data      from '../../base/util/Data.js'
+import Build     from '../../base/util/Build.js'
+import Stream    from '../../base/util/Stream.js'
+import Nav       from '../../base/nav/Nav.js'
+#mport Cache     from '../../base/util/Cache.js'
 
-import Mixin  from '../../base/vue/Mixin.js'
-import Vue    from '../../lib/vue/vue.esm.browser.js'
-import Router from '../../lib/vue/vue-router.esm.js'
-import Home   from './Home.js'
+import Mixin     from '../../base/vue/Mixin.js'
+import Vue       from '../../lib/vue/vue.esm.browser.js'
+import Router    from '../../lib/vue/vue-router.esm.js'
+import Home      from './Home.js'
 
 Vue['config'].productionTip = false
 
@@ -63,9 +63,10 @@ class Muse
 
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Muse.vue = () ->
+
     Muse.mixin = new Mixin( Muse, ['Home','Talk','Cube','Prin','Comp','Prac','Disp'] ) # Can't use komps
-    Muse.nav.setMixinMethods(  Muse.mixin.mixin().methods )
-    Vue['mixin']( Muse.mixin.mixin() )
+    Muse.nav.setMix( Muse.mixin.mixin().methods )
+    Vue['mixin'](    Muse.mixin.mixin() )
     Vue.use(Router)
     app = new Vue( { router:Muse.router(), render: (h) -> h(Home.Dash) } );
     Muse.nav.$router = app.$router;

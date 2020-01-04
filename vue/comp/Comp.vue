@@ -65,22 +65,22 @@
       onComp: function (compKey) {
         if( this.compKey!==compKey ) {
             this.compKey = compKey;
-            this.compObj = this.compObject(compKey);
+            this.compObj = this.mix().compObject(compKey);
             this.onRows( compKey); } },
       isDim: function ( pracObj ) {
         return pracObj.row==="Dim"; },
       isRows: function () {
         return true; },
       onNav:  function (obj) {
-        if( this.nav().isMyNav( obj, 'Comp' ) ) {
+        if( this.mix().nav().isMyNav( obj, 'Comp' ) ) {
             this.onComp( obj.compKey ); } }
       },
 
     beforeMount: function() {
-      this.onComp( this.nav().compKey ); },
+      this.onComp( this.mix().nav().compKey ); },
 
     mounted: function () {
-      this.subscribe( 'Nav', 'Comp.vue', (obj) => {
+      this.mix().subscribe( 'Nav', 'Comp.vue', (obj) => {
         this.onNav(obj); } ); }
   }
   

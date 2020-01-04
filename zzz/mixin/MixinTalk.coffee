@@ -13,28 +13,28 @@ class MixinTalk
 
       methods: {
 
-        compObjectTalk: (compKey) ->
+        compObject: (compKey) ->
           if this.batchDataUtil(compKey)?
              this.batchDataUtil(compKey).pracs
           else
              console.error( 'Mixin.compObject() bad compKey', compKey )
              {}
 
-        pracObjectTalk:( compKey, pracKey ) ->
+        pracObject:( compKey, pracKey ) ->
           prac = {}
-          if         this.compObjectTalk(compKey)?
-            if       this.compObjectTalk(compKey)[pracKey]?
-              prac = this.compObjectTalk(compKey)[pracKey]
+          if         this.compObject(compKey)?
+            if       this.compObject(compKey)[pracKey]?
+              prac = this.compObject(compKey)[pracKey]
             else
               console.error( 'Mixin.pracObj() unknown pracKey', { compKey:compKey, pracKey:pracKey } )
           else
             console.error( 'Mixin.pracObj() unknown compKey', { compKey:compKey, pracKey:pracKey } )
           prac
 
-        sectObjectTalk:( pracKey, dispKey ) ->
-          talkObjs      = this.compObjectTalk('Talk')
+        sectObject:( pracKey, dispKey ) ->
+          talkObjs      = this.compObject('Talk')
           talkObj       = talkObjs[pracKey]
-          sectObjs      = this.compObjectTalk(talkObj.comp)
+          sectObjs      = this.compObject(talkObj.comp)
           talkObj.keys  = if talkObj.keys?  then talkObj.keys else this.childKeysUtil(sectObjs)
           dispKey       = if dispKey is 'None' then this.keysUtil(sectObjs)[0] else dispKey
           sectObj       = sectObjs[dispKey]
@@ -45,7 +45,7 @@ class MixinTalk
           # console.log( 'Mixin.sectObj()', { pracKey:pracKey, dispKey:dispKey, sectObj:sectObj } )
           sectObj
 
-        pageObjectTalk:( sectObj, pageKey ) ->
+        pageObject:( sectObj, pageKey ) ->
           pageKey = if pageKey is 'None' and sectObj.keys[0]? then sectObj.keys[0] else pageKey
           pageObj = null
           if pageKey isnt 'None' and sectObj[pageKey]?
@@ -57,23 +57,23 @@ class MixinTalk
             # console.log( 'Mixin.pageObj()', { dispKey:sectObj.name, pageKey:pageKey, pageObj:pageObj } )
           pageObj
 
-        dataObjectTalk:( sectObj, pageKey ) ->
+        dataObject:( sectObj, pageKey ) ->
           dataObj = null
           if sectObj.type is 'Prac'
-            dataObj = this.pracObjectTalk( sectObj.src, sectObj.name )
+            dataObj = this.pracObject( sectObj.src, sectObj.name )
           else if sectObj.type is 'Disp' and  pageKey isnt 'None'
-            dataObj = this.dispObjectTalk( sectObj.src, sectObj.name, pageKey )
+            dataObj = this.dispObject( sectObj.src, sectObj.name, pageKey )
           dataObj
 
-        dispObjectTalk: (compKey, pracKey, dispKey) ->
-          comp = this.compObjectTalk(compKey)
+        dispObject: (compKey, pracKey, dispKey) ->
+          comp = this.compObject(compKey)
           prac = if comp[pracKey]? then comp[pracKey] else null
-          disp = if prac? and prac.disps? and prac.disps[pracKey]?prac.disps[dispKey] else null
+          disp = if prac? and prac.disps? and prac.disps[pracKey]? then prac.disps[dispKey] else null
           if not disp?
             console.error( 'MixinTalk.dispObjectTalk() unable to find disp for', { compKey:compKey, pracKey:pracKey, dispKey:dispKey } )
           disp
 
-        isPageKeyCompTalk:( pageKey ) ->
+        isPageKeyComp:( pageKey ) ->
           pageKey is'Info' or pageKey is 'Data' # this.app() is 'Muse' and
 
       }

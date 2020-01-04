@@ -32,23 +32,23 @@
     methods: {
       
       onComp: function( compKey ) {
-        this.compObj = this.compObject(compKey); },
+        this.compObj = this.mix().compObject(compKey); },
       doPage: function( pageKey ) {
-        this.nav().setPageKey( 'Prin', pageKey ); },
+        this.mix().nav().setPageKey( 'Prin', pageKey ); },
       isRows: function () {
         return true; },
       onNav:  function (obj) {
-        if( this.nav().isMyNav(  obj, 'Prin' ) ) {
+        if( this.mix().nav().isMyNav(  obj, 'Prin' ) ) {
           this.onComp( obj.compKey );
-          this.doPage( this.nav().getPageKey('Prin') ); } }
+          this.doPage( this.mix().nav().getPageKey('Prin') ); } }
       },
 
     beforeMount: function() {
       this.onComp('Prin'); },
 
     mounted: function () {
-      this.doPage( this.nav().getPageKey('Prin') );
-      this.subscribe( 'Nav', 'Prin.vue', (obj) => {
+      this.doPage( this.mix().nav().getPageKey('Prin') );
+      this.mix().subscribe( 'Nav', 'Prin.vue', (obj) => {
         this.onNav(obj); } ); }
   }
   

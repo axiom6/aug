@@ -31,16 +31,16 @@
 
       doPrac: function (pracKey) {
         let obj = { route:"Prac", pracKey:pracKey };
-        this.nav().pub( obj ); },
+        this.mix().nav().pub( obj ); },
       isDims: function () {
         return this.pracObj.row === 'Dim'; },
       isDisp: function () {
         return this.pracObj.row !== 'Dim'; },
       style: function( ikwObj ) {
-        return this.styleObj(ikwObj); } },
+        return this.mix().styleObj(ikwObj); } },
 
     mounted: function () {
-      if( !this.isDef(this.pracObj) ) {
+      if( !this.mix().isDef(this.pracObj) ) {
         console.error( 'prac.Dirs.mounted() pracObj not defined' ); } }
     
   }

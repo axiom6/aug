@@ -21,30 +21,30 @@
     methods: {
       
       onPrac: function() {
-        if( this.isDef(this.connect) ) {
+        if( this.mix().isDef(this.connect) ) {
             this.connect.clearSvg(); }
-        this.createConnect( this.stream(), this.pracObj ); },
+        this.createConnect( this.mix().stream(), this.pracObj ); },
       
       doPrac: function (pracKey) {
-        this.nav().pub( { pracKey:pracKey } ); },
+        this.mix().nav().pub( { pracKey:pracKey } ); },
       
       clConn: function() {
-        return this.nav().route === 'Comp' ? 'conn-comp' : 'conn-prac'; },
+        return this.mix().nav().route === 'Comp' ? 'conn-comp' : 'conn-prac'; },
       
       createConnect: function( stream, pracObj ) {
         this.$nextTick( function() {
           let elem = this.$refs[this.pracObj.name] // this.getElem( this.$refs, this.pracObj.name );
-          if( this.hasElem(elem) ) {
-            this.connect = new Connect( stream, this.batch(), pracObj, elem, this.level );
+          if( this.mix().hasElem(elem) ) {
+            this.connect = new Connect( stream, this.mix().batch(), pracObj, elem, this.level );
             if( this.level==='Prac') {
               window.addEventListener( 'resize', this.resize ) } }
           else {
             console.log( 'Conn.createConnect()',
-              { name:this.pracObj.name, has:this.hasElem(elem), elem:elem, $refs:this.$refs } ); } } ) },
+              { name:this.pracObj.name, has:this.mix().hasElem(elem), elem:elem, $refs:this.$refs } ); } } ) },
       
       resize: function() {
         this.$nextTick( function() {
-          if( this.isDef(this.connect) ) {
+          if( this.mix().isDef(this.connect) ) {
               this.connect.resize();  } } ); }
     },
     

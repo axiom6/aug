@@ -24,8 +24,8 @@
     methods: {
       
       onNav: function(obj) {
-        if( this.nav().isMyNav( obj, this.route ) ) {
-          let pageKey = this.nav().getPageKey(this.route);
+        if( this.mix().nav().isMyNav( obj, this.route ) ) {
+          let pageKey = this.mix().nav().getPageKey(this.route);
           if( pageKey !== 'None') {
             this.create( pageKey   );
             this.mathML( this.exps ); } } },
@@ -59,7 +59,7 @@
     },
 
     mounted: function () {
-      this.subscribe( 'Nav', 'Math.vue', (obj) => {
+      this.mix().subscribe( 'Nav', 'Math.vue', (obj) => {
           this.onNav( obj ); } ); }
   }
   

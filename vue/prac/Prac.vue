@@ -30,24 +30,24 @@
     methods: {
       
       onPrac: function(compKey,pracKey) {
-        if( !this.isDef(this.pracObj) || this.pracObj.name !== pracKey ) {
-             this.pracObj = this.pracObject( compKey, pracKey ); } },
+        if( !this.mix().isDef(this.pracObj) || this.pracObj.name !== pracKey ) {
+             this.pracObj = this.mix().pracObject( compKey, pracKey ); } },
       doPage: function( pageKey ) {
-        this.nav().setPageKey( 'Prac', pageKey ); },
+        this.mix().nav().setPageKey( 'Prac', pageKey ); },
       onNav: function( obj ) {
-        if( this.nav().isMyNav( obj, 'Prac' ) ) {
-            this.doPage( this.nav().getPageKey('Prac') );
+        if( this.mix().nav().isMyNav( obj, 'Prac' ) ) {
+            this.doPage( this.mix().nav().getPageKey('Prac') );
             this.onPrac( obj.compKey, obj.pracKey ); } }
       },
 
     beforeMount: function () {
-      let compKey = this.nav().compKey;
-      let pracKey = this.nav().pracKey;
+      let compKey = this.mix().nav().compKey;
+      let pracKey = this.mix().nav().pracKey;
       this.onPrac( compKey, pracKey );  },
 
     mounted: function () {
-      this.doPage( this.nav().getPageKey('Prac') );
-      this.subscribe(  "Nav", 'Prac.vue', (obj) => {
+      this.doPage( this.mix().nav().getPageKey('Prac') );
+      this.mix().subscribe(  "Nav", 'Prac.vue', (obj) => {
         this.onNav(obj); } ); }
   }
   

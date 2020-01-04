@@ -17,14 +17,14 @@
     methods: {
       
       hasSumm: function() {
-        return this.isDef(this.summ); },
+        return this.mix().isDef(this.summ); },
       
       doClick: function() {
-        if( this.isDef(this.fnClick) ) {
+        if( this.mix().isDef(this.fnClick) ) {
           this.fnClick(this.name); } },
 
       style: function() {
-        return this.fontSizeCss(this.size); }
+        return this.mix().fontSizeCss(this.size); }
     }
   }
   

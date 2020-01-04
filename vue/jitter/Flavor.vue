@@ -21,10 +21,10 @@
     methods: {
 
       onChoice: function ( choice, roast ) {
-        this.choose(  this.name, choice );
+        this.mix().choose(  this.name, choice );
         if( roast===false ) {}
         // console.log( 'Flavor.onChoice()', { name:this.name, choice:choice, roast:roast } );
-        this.publish( this.name, choice ); },
+        this.mix().publish( this.name, choice ); },
     },
 
     mounted: function () {

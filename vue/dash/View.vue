@@ -11,7 +11,7 @@
   
   export default {
 
-    data() { return { elem:null, rviews:this.views() }; },
+    data() { return { elem:null, rviews:this.mix().views() }; },
     
     methods:{
       show:function() {

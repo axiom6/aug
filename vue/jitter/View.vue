@@ -25,7 +25,7 @@
     mounted: function () {
       this.$nextTick( function() {  // Enable touch events inside all views
         this.elem  = this.$refs['View'];
-        this.touch().onDir( this.elem );
+        this.mix().touch().onDir( this.elem );
       } ) }
       
     }

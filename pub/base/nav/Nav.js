@@ -22,7 +22,7 @@ Nav = class Nav {
     this.dispKey = 'None';
     this.pageKey = 'None';
     this.warnMsg = 'None';
-    this.mixins = null;
+    this.mix = null;
     this.pages = {};
     this.keyEvents();
   }
@@ -75,8 +75,8 @@ Nav = class Nav {
     }
   }
 
-  setMixinMethods(methods) {
-    this.mixins = methods;
+  setMix(methods) {
+    this.mix = methods.mix; // mix
   }
 
   doRoute(route) {
@@ -252,8 +252,8 @@ Nav = class Nav {
     }
     msg = {};
     msg.source = `${'Nav.dirTalk'}(${dir})`;
-    sectObj = this.mixins.sectObject(this.pracKey, this.dispKey);
-    hasChildren = this.mixins.isArray(sectObj.keys);
+    sectObj = this.mix().sectObject(this.pracKey, this.dispKey);
+    hasChildren = this.mix().isArray(sectObj.keys);
     this.dispKey = sectObj.name;
     if (this.isPageTalk(sectObj, hasChildren, this.pageKey)) {
       this.pageKey = (function() {
@@ -321,8 +321,8 @@ Nav = class Nav {
     if (route !== 'Talk' || this.pracKey === 'None') {
       return dirs;
     }
-    sectObj = this.mixins.sectObject(this.pracKey, this.dispKey);
-    hasChildren = this.mixins.isArray(sectObj.keys);
+    sectObj = this.mix().sectObject(this.pracKey, this.dispKey);
+    hasChildren = this.mix().isArray(sectObj.keys);
     if (this.isPageTalk(sectObj, hasChildren, this.pageKey)) {
       this.dirsNavdTalkPage(dirs, sectObj);
     } else {
@@ -342,7 +342,7 @@ Nav = class Nav {
 
   dirsNavdTalkPage(dirs, sectObj) {
     var pageObj;
-    pageObj = this.mixins.pageObject(sectObj, this.pageKey);
+    pageObj = this.mix().pageObject(sectObj, this.pageKey);
     dirs.west = pageObj.name !== sectObj.keys[0];
     dirs.prev = dirs.west;
     dirs.east = pageObj.name !== sectObj.keys[sectObj.keys.length - 1];

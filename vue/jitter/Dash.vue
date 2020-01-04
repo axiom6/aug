@@ -26,7 +26,7 @@
         this.orient = orient; } },
 
     mounted: function () {
-      this.publish( 'Nav', 'Dash' ); }
+      this.mix().publish( 'Nav', 'Dash' ); }
     
   };
   

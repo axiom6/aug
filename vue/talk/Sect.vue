@@ -31,10 +31,10 @@
             return type===this.sectObj.type; },
 
           hasSect: function() {
-            return this.isDef(this.sectObj); },
+            return this.mix().isDef(this.sectObj); },
           
           hasProp: function(prop) {
-            return this.isDef(this.sectObj[prop]) }, // || this.isDef(this.dataObj[prop]); },
+            return this.mix().isDef(this.sectObj[prop]) }, // || this.isDef(this.dataObj[prop]); },
           
         }
       }

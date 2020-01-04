@@ -18,14 +18,14 @@
     methods: {
 
       hasProp: function(prop) {
-        return this.isDef(this[prop]); },
+        return this.mix().isDef(this[prop]); },
       
       doClick: function() {
-        if( this.isDef(this.fnClick) ) {
+        if( this.mix().isDef(this.fnClick) ) {
           this.fnClick(this.name); } },
 
       style: function() {
-        return this.fontSizeCss(this.size); }
+        return this.mix().fontSizeCss(this.size); }
 
     }
     

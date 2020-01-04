@@ -38,7 +38,7 @@
     } } },
 
    mounted: function () {
-       this.publish( 'Tocs', 'Close' ); }
+       this.mix().publish( 'Tocs', 'Close' ); }
    
   }
 

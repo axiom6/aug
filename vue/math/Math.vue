@@ -19,7 +19,7 @@
 
     methods: {
       myRoute: function() {
-        return this.isRoute('Math'); } },
+        return this.mix().isRoute('Math'); } },
 
     mounted: function () {} 
 

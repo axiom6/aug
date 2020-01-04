@@ -28,7 +28,7 @@
     
     methods: {
       myRoute: function() {
-        return this.isRoute('Note'); } }
+        return this.mix().isRoute('Note'); } }
     
   }
   

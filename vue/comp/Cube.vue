@@ -44,9 +44,9 @@
     beforeMount: function() {
       for( let ckey in this.planes ) {
         let plane   =  this.planes[ckey];
-        let compObj =  this.compObject(ckey);
+        let compObj =  this.mix().compObject(ckey);
         for( let pkey in compObj ) {
-          if( this.isChild(pkey) && !this.isDef(this.cols[pkey] ) ) {
+          if( this.mix().isChild(pkey) && !this.mix().isDef(this.cols[pkey] ) ) {
             plane.compObj[pkey] = compObj[pkey]; } } } },
 
     mounted: function () {}

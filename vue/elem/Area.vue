@@ -22,13 +22,16 @@
     data() { return { area:null } },
 
     methods: {
+      
+      isDef:function( obj ) {
+        return this.mix().isDef(obj); },
 
       doClick: function(name) {
-        if( this.isDef(this.fnClick) ) {
+        if( this.mix().isDef(this.fnClick) ) {
           this.fnClick(name); } },
 
       style: function() {
-        return this.fontSizeCss(this.size); }
+        return this.mix().fontSizeCss(this.size); }
 
     }
 

@@ -24,24 +24,24 @@
     methods: {
       
       doTalk: function(talkKey) {
-        this.nav().pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None', pageKey:'None' } );
-        this.nav().dirsNavd('Init'); },
+        this.mix().nav().pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None', pageKey:'None' } );
+        this.mix().nav().dirsNavd('Init'); },
 
       onNav: function (obj) {
-        if( this.nav().isMyNav( obj, 'Talk' ) ) {
+        if( this.mix().nav().isMyNav( obj, 'Talk' ) ) {
             this.onSect( obj.pracKey, obj.dispKey, obj.pageKey ); } },
 
       onSect: function( talkKey, sectKey, pageKey ) {
-        let dispObj  = this.sectObject( talkKey, sectKey );
-        this.sectObj = pageKey!=='None' ? this.pageObject(dispObj,pageKey) : dispObj;
+        let dispObj  = this.mix().sectObject( talkKey, sectKey );
+        this.sectObj = pageKey!=='None' ? this.mix().pageObject(dispObj,pageKey) : dispObj;
       //this.dataObj = this.dataObject( this.sectObj, pageKey );
       } },
 
     beforeMount: function() {
-      this.talkObjs = this.compObject('Talk'); },
+      this.talkObjs = this.mix().compObject('Talk'); },
 
     mounted: function () {
-      this.subscribe(  "Nav", 'Talk.vue', (obj) => {
+      this.mix().subscribe(  "Nav", 'Talk.vue', (obj) => {
         this.onNav( obj ); } ); }
     
   }

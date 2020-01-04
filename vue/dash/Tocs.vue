@@ -31,27 +31,27 @@
     methods: {
       myPracs: function(compKey) {
         let pracs = {}
-        if(      compKey!=='Talk' && this.isDef(this.compPracs[compKey]) ) { pracs = this.compPracs[compKey];   }
-        else if( compKey!=='Talk' && this.isDef(this.komps[compKey])     ) { pracs = this.komps[compKey].pracs; }
+        if(      compKey!=='Talk' && this.mix().isDef(this.compPracs[compKey]) ) { pracs = this.compPracs[compKey];   }
+        else if( compKey!=='Talk' && this.mix().isDef(this.komps[compKey])     ) { pracs = this.komps[compKey].pracs; }
         return pracs; },
       myKomp: function(kompKey) {
         return kompKey===this.compKey || ( kompKey==='Info' && this.compKey==='Data' ) },
       doComp: function(compKey) {
         this.compKey = compKey;
-        let  kompKey = this.isMuse() && compKey==='Data'  ? 'Info' : compKey;
+        let  kompKey = this.mix().isMuse() && compKey==='Data'  ? 'Info' : compKey;
         let  route   = this.komps[kompKey].route;
         this.pub( { route:route, compKey:compKey, source:'Toc' } ); },
       doPrac: function(pracKey) {
         this.pracKey = pracKey;
-        let route    = this.isMuse() ? 'Prac' : pracKey;
+        let route    = this.mix().isMuse() ? 'Prac' : pracKey;
         this.pub( { route:route, pracKey:pracKey, source:'Toc' } ); },
       doDisp: function(dispKey) {
         this.dispKey = dispKey;
-        let route    = this.isMuse() ? 'Disp' : dispKey;
+        let route    = this.mix().isMuse() ? 'Disp' : dispKey;
         this.pub( { route:route, dispKey:dispKey, source:'Toc' } ); },
       pub: function(obj) {
-        this.nav().dirTabs = false;
-        this.nav().pub(obj); },
+        this.mix().nav().dirTabs = false;
+        this.mix().nav().pub(obj); },
       onNav:  function (obj) {
         if( obj.source !== 'Toc' ) {
           if( this.compKey !== obj.compKey ) { this.compKey = obj.compKey; }
@@ -61,7 +61,7 @@
         return this.myKomp(kompKey) ? { backgroundColor:'wheat', color:'black', borderRadius:'0 24px 24px 0' }
                                     : { backgroundColor:'#333',  color:'wheat', borderRadius:'0 24px 24px 0' }; },
       style: function( ikwObj ) {
-        return this.styleObj(ikwObj); },
+        return this.mix().styleObj(ikwObj); },
       filterPracs: function(pracs,compKey) {
         let filt = {}
         for( let key in pracs ) {
@@ -72,16 +72,16 @@
       },
 
     beforeMount: function () {
-      this.komps = this.kompsTocs();
+      this.komps = this.mix().kompsTocs();
       for( let key in this.komps ) {
         let komp = this.komps[key]
         if( komp.ikw ) {
-            komp.pracs = this.filterPracs( this.pracs(key), key ); } }
-      if( this.isPageKeyComp('Data') ) {
-        this.compPracs['Data'] = this.filterPracs( this.pracs('Data'),'Data'); } },
+            komp.pracs = this.filterPracs( this.mix().pracs(key), key ); } }
+      if( this.mix().isPageKeyComp('Data') ) {
+        this.compPracs['Data'] = this.filterPracs( this.mix().pracs('Data'),'Data'); } },
     
     mounted: function () {
-      this.subscribe( 'Nav', 'Tocs.vue', (obj) => {
+      this.mix().subscribe( 'Nav', 'Tocs.vue', (obj) => {
         this.onNav(obj); } ); }
   }
   

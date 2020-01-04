@@ -26,22 +26,22 @@
 
     methods: {
       doClick: function (key) {
-        if( this.isDef(this.dispObj.column) ) { this.doPrac(key) }
+        if( this.mix().isDef(this.dispObj.column) ) { this.doPrac(key) }
         else                                  { this.doDisp(key) } },
       gridClass: function() {
         return this.dispObj.column==="Innovate" ? 'dd-4x4' : 'dd-4x3'; },
       doDisp:  function (dispKey) {
         let obj = { route:"Disp", dispKey:dispKey }; // pracKey:this.pracObj.name,
-        this.nav().pub( obj ); },
+        this.mix().nav().pub( obj ); },
       doPrac: function (pracKey) {
         let obj = { route:"Prac", pracKey:pracKey };
-        this.nav().pub( obj ); },
+        this.mix().nav().pub( obj ); },
       dispClass: function() {
         return this.from==='Disp' ? 'dims-disp' : 'dims-dirs';
       },
       style: function( ikwObj ) {
         let fontSize = this.from==='Disp' ? 2.0 : 1.0;
-        return this.styleObj(ikwObj,fontSize); } },
+        return this.mix().styleObj(ikwObj,fontSize); } },
   }
 
   export default Dims;

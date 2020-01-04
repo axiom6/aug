@@ -17,7 +17,7 @@
     methods: {
       doPrac: function (pracKey) {
         let obj = { route:"Prac", pracKey:pracKey };
-        this.nav().pub( obj ); } }
+        this.mix().nav().pub( obj ); } }
   }
   export default Sign;
   

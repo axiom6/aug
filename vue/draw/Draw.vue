@@ -32,8 +32,8 @@
     methods: {
       
       onNav: function(obj) {
-        if( this.nav().isMyNav( obj, this.route ) ) {
-            this.pageKey = this.nav().getPageKey('Draw','None'); // None implies no defaults
+        if( this.mix().nav().isMyNav( obj, this.route ) ) {
+            this.pageKey = this.mix().nav().getPageKey('Draw','None'); // None implies no defaults
             if( this.pageKey !== 'None') {
                 this.create(this.pageKey); } } },
       
@@ -44,7 +44,7 @@
     },
 
     mounted: function () {
-      this.subscribe(  'Nav', 'Draw.vue', (obj) => {
+      this.mix().subscribe(  'Nav', 'Draw.vue', (obj) => {
         this.onNav(obj); } );
       this.$nextTick( function() {
         this.D3D = new D3D( this.stream() ); } ) }

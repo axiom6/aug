@@ -26,10 +26,10 @@
 
     methods: {
       pubBtn: function (btn) {
-        this.choose(  this.name, btn.name );
+        this.mix().choose(  this.name, btn.name );
         btn.checked = this.choosen( this.name, btn.name );
         // console.log( 'Btns.pubBtn()', this.name, btn.name,  btn.checked );
-        this.publish( this.name, btn.name ); },
+        this.mix().publish( this.name, btn.name ); },
       aspect: function() {  // Only call in mounted
         let w = this.$refs['Btns']['clientWidth' ];
         let h = this.$refs['Btns']['clientHeight'];
@@ -43,7 +43,7 @@
         let back = this.toRgbaHsv( btn.hsv );
         return { color:'black', backgroundColor:back }; },
       classCheck: function (btn) {
-        btn.checked = this.choosen( this.name, btn.name );
+        btn.checked = this.mix().choosen( this.name, btn.name );
         // console.log( 'Btns.classCheck()', { checked:btn.checked, name:this.name, choice:btn.name } );
         return btn.checked ? 'check far fa-check-square' : 'check far fa-square'; },
       classIcons: function (btn) {

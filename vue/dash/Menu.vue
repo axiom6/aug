@@ -26,11 +26,11 @@
       return {} },
     methods: {
       click:  function( obj )  {
-        this.publish(  'Menu', obj    ); },
+        this.mix().publish(  'Menu', obj    ); },
       onMenu: function( obj )  {
         console.log(  'Menu.onMenu()', obj ); } },
     mounted: function () {
-      this.subscribe( 'Menu', 'Menu.vue', this.onMenu ) } };
+      this.mix().subscribe( 'Menu', 'Menu.vue', this.onMenu ) } };
   
 </script>
 

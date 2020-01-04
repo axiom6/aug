@@ -24,7 +24,7 @@
   
   methods:{
     route: function( comp ) {
-        this.touch().doRoute( comp ); } },
+        this.mix().touch().doRoute( comp ); } },
 
    mounted: function () {}
   }

@@ -25,21 +25,21 @@
     methods: {
       
       onDisp: function(dispKey) {
-        this.dispObj  = this.dispObject( this.nav().compKey, this.nav().pracKey, dispKey );
-        if( !this.isDef(this.dispObj) ) {
-          console.error('Disp.onDisp() disp null',{comp:this.nav().compKey,prac:this.nav().pracKey,disp:dispKey})}},
+        this.dispObj  = this.mix().dispObject( this.mix().nav().compKey, this.mix().nav().pracKey, dispKey );
+        if( !this.mix().isDef(this.dispObj) ) {
+          console.error('Disp.onDisp() disp null',{comp:this.mix().nav().compKey,prac:this.mix().nav().pracKey,disp:dispKey})}},
       doPage: function( pageKey ) {
-        this.nav().setPageKey( 'Disp', pageKey ); },
+        this.mix().nav().setPageKey( 'Disp', pageKey ); },
       onNav:  function (obj) {
-        if( this.nav().isMyNav( obj, 'Disp' ) ) {
+        if( this.mix().nav().isMyNav( obj, 'Disp' ) ) {
             this.onDisp( obj.dispKey ); } } },
 
     beforeMount: function() {
-      this.onDisp( this.nav().dispKey ); },
+      this.onDisp( this.mix().nav().dispKey ); },
 
     mounted: function () {
-      this.doPage( this.nav().getPageKey('Disp') );
-      this.subscribe(  "Nav", 'Disp.vue', (obj) => {
+      this.doPage( this.mix().nav().getPageKey('Disp') );
+      this.mix().subscribe(  "Nav", 'Disp.vue', (obj) => {
         this.onNav(obj); } ); }
   }
   

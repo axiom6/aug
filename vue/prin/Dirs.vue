@@ -35,12 +35,12 @@
     methods: {
       doPrac: function (pracKey) {
         let obj = { route:"Prac", pracKey:pracKey };
-        this.nav.pub( obj ); },
+        this.mix().nav.pub( obj ); },
       doDisp: function (pracKey,dispKey) {
         let obj = { route:"Disp", pracKey:pracKey, dispKey:dispKey };
-        this.nav.pub( obj ); },
+        this.mix().nav.pub( obj ); },
       style: function( ikwObj ) {
-        return this.styleObj(ikwObj); } }
+        return this.mix().styleObj(ikwObj); } }
   }
 
   export default Dirs;

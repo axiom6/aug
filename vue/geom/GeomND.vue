@@ -22,8 +22,8 @@
     methods: {
       
       onNav: function(obj) {
-        if( this.nav().isMyNav( obj, this.route ) ) {
-          this.pageKey = this.nav().getPageKey(this.route);
+        if( this.mix().nav().isMyNav( obj, this.route ) ) {
+          this.pageKey = this.mix().nav().getPageKey(this.route);
           if( this.pageKey !== 'None') {
               this.create(this.pageKey); } } },
 
@@ -36,7 +36,7 @@
     },
 
     mounted: function () {
-      this.subscribe(  'Nav', 'Geom.vue', (obj) => {
+      this.mix().subscribe(  'Nav', 'Geom.vue', (obj) => {
         this.onNav(obj); } ) }
     }
     

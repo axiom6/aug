@@ -22,9 +22,9 @@
 
     methods: {
       style: function (ikwObj) {
-        return this.styleObj(ikwObj); },
+        return this.mix().styleObj(ikwObj); },
       toDesc: function(desc) {
-        return this.isStr(desc) ? desc : "This is a test description"; }
+        return this.mix().isStr(desc) ? desc : "This is a test description"; }
     }
   }
   export default Desc;

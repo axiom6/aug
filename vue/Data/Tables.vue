@@ -32,13 +32,13 @@
         return this.pageKey === pageKey; },
 
       onNav: function(obj) {
-        if( this.nav().isMyNav( obj, 'Tables' ) ) {
-          this.pageKey = this.nav().getPageKey('Tables');
+        if( this.mix().nav().isMyNav( obj, 'Tables' ) ) {
+          this.pageKey = this.mix().nav().getPageKey('Tables');
           if( this.pageKey !== 'None' ) {
               this.create( this.pageKey ); } } },
 
       create: function( pageKey ) {
-        this.nav().setPageKey( 'Tables', pageKey );
+        this.mix().nav().setPageKey( 'Tables', pageKey );
         if( !this.pages[pageKey].created ) {
              this.pages[pageKey].created = true;
              this.$nextTick( function() { // Wait for DOM to render
@@ -47,7 +47,7 @@
     },
 
     mounted: function () {
-      this.subscribe( 'Nav', 'Pivots.vue', (obj) => {
+      this.mix().subscribe( 'Nav', 'Pivots.vue', (obj) => {
         this.onNav( obj ); } ); }
   }
   

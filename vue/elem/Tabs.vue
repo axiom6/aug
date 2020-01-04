@@ -20,23 +20,23 @@
       onPage: function (key) {
         if( key !== 'None') {
           this.pageKey = key;
-          this.nav().setPageKey( this.route, key ); } },
+          this.mix().nav().setPageKey( this.route, key ); } },
       doPage: function (key) {
           this.onPage( key );
-          let route = this.isDef(this.pages[key].route) ? this.pages[key].route : this.route
-          this.nav().pub( { source:'Tabs', route:route, pageKey:key } ); },
+          let route = this.mix().isDef(this.pages[key].route) ? this.pages[key].route : this.route
+          this.mix().nav().pub( { source:'Tabs', route:route, pageKey:key } ); },
       stylePos: function () {
         return this.positions[this.position]; },
       classTab: function (pageKey) {
         return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },
 
     created: function () {  // We want to set the routes pages asap
-      this.onPage( this.nav().setPages( this.route, this.pages, this.defn ) ); },
+      this.onPage( this.mix().nav().setPages( this.route, this.pages, this.defn ) ); },
 
     mounted: function() {
-      this.subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {
+      this.mix().subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {
         if( obj.source !== 'Tabs' && obj.route === this.route ) {
-          this.onPage( obj.pageKey ); } } ); }  // this.nav().getPageKey(this.route)
+          this.onPage( obj.pageKey ); } } ); }  // this.mix().nav().getPageKey(this.route)
     }
   
 </script>

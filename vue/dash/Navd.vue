@@ -23,10 +23,10 @@
     methods: {
       
       doDir: function( dir ) {
-        if( this.isTouch() ) {
+        if( this.mix().isTouch() ) {
             this.touch().doTouch( dir ); }
-        else if( this.isNav() && this.dirs[dir] ) {
-            this.nav().dir( dir ); }
+        else if( this.mix().isNav() && this.dirs[dir] ) {
+            this.mix().nav().dir( dir ); }
         else {
           console.error( 'Navd.doDir() no direction navigator' ); } },
 
@@ -38,7 +38,7 @@
           this.dirs[key] = dirs[key]; } } },
 
     mounted: function () {
-      this.subscribe(  "Navd", 'Navd.vue', (dirs) => {
+      this.mix().subscribe(  "Navd", 'Navd.vue', (dirs) => {
         this.onDirs( dirs ); } ); }
   };
 
