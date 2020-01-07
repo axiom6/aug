@@ -153,7 +153,7 @@ Worker.cacheObjs = {
   AugmJS:       { name:'AugmJS',       status:0, url:'/pub/app/augm/augm.js'       }
   AugmHome:     { name:'AugmHome',     status:0, url:'/pub/app/augm/home.js'       }
   AugmMani:     { name:'AugmMani',     status:0, url:'/pub/app/augm/manifest.webmanifest' }
-  JitterHtml:   { name:'JitterHtml',   status:0, url:'/pub/app/jitter/jits.html'   }
+  JitterHtml:   { name:'JitterHtml',   status:0, url:'/pub/app/jitter/jitter.html' }
   JitterJS:     { name:'JitterJS',     status:0, url:'/pub/app/jitter/jitter.js'   }
   JitterMani:   { name:'JitterMani',   status:0, url:'/pub/app/jitter/manifest.webmanifest' }
   JitterHome:   { name:'JitterHome',   status:0, url:'/pub/vue/jitter/home.js'     }

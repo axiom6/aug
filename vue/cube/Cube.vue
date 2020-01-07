@@ -19,7 +19,7 @@
       return { build:{}, cubeTh:{} }; },
     
     mounted: function () {
-      this.build  = new Build(  this.batch() );
+      this.build  = new Build(  this.mix().batch() );
       this.cubeTh = new CubeTh( this.build, "CubeTh", false );
       this.cubeTh.animate(); } }
       

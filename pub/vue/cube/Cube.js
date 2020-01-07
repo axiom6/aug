@@ -52415,7 +52415,7 @@ var script = {
     return { build:{}, cubeTh:{} }; },
   
   mounted: function () {
-    this.build  = new Build$1(  this.batch() );
+    this.build  = new Build$1(  this.mix().batch() );
     this.cubeTh = new CubeTh$1( this.build, "CubeTh", false );
     this.cubeTh.animate(); } };
 
@@ -52570,7 +52570,7 @@ __vue_render__._withStripped = true;
   /* style */
   const __vue_inject_styles__ = function (inject) {
     if (!inject) return
-    inject("data-v-0a8c87e5_0", { source: ".cube-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n", map: {"version":3,"sources":["Cube.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd","file":"Cube.vue","sourcesContent":[".cube-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n"]}, media: undefined });
+    inject("data-v-4f3466d8_0", { source: ".cube-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n", map: {"version":3,"sources":["Cube.vue"],"names":[],"mappings":"AAAA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd","file":"Cube.vue","sourcesContent":[".cube-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n"]}, media: undefined });
 
   };
   /* scoped */

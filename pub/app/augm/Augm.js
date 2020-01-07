@@ -42,7 +42,7 @@ Augm = (function() {
     static vue() {
       var app;
       Augm.mixin = new Mixin(Augm, Object.keys(Augm.komps));
-      Augm.nav.setMixinMethods(Augm.mixin.mixin().methods);
+      Augm.nav.setMix(Augm.mixin.mixin().methods);
       Vue['mixin'](Augm.mixin.mixin());
       Vue.use(Router);
       app = new Vue({

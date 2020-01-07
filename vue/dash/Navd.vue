@@ -24,7 +24,7 @@
       
       doDir: function( dir ) {
         if( this.mix().isTouch() ) {
-            this.touch().doTouch( dir ); }
+            this.mix().touch().doTouch( dir ); }
         else if( this.mix().isNav() && this.dirs[dir] ) {
             this.mix().nav().dir( dir ); }
         else {

@@ -27,7 +27,7 @@
     methods: {
       pubBtn: function (btn) {
         this.mix().choose(  this.name, btn.name );
-        btn.checked = this.choosen( this.name, btn.name );
+        btn.checked = this.mix().choosen( this.name, btn.name );
         // console.log( 'Btns.pubBtn()', this.name, btn.name,  btn.checked );
         this.mix().publish( this.name, btn.name ); },
       aspect: function() {  // Only call in mounted
@@ -40,7 +40,7 @@
         return { position:'absolute', left:sy*p[0]+'%', top:sy*p[1]+'%', width:sy*p2+'%', height:sy*p[3]+'%',
         fontSize:(p[3]*0.08)+'em' } },
       styleBtn: function (btn) {
-        let back = this.toRgbaHsv( btn.hsv );
+        let back = this.mix().toRgbaHsv( btn.hsv );
         return { color:'black', backgroundColor:back }; },
       classCheck: function (btn) {
         btn.checked = this.mix().choosen( this.name, btn.name );
@@ -88,7 +88,7 @@
   .btns-grid1x3() { display:grid; grid-template-columns:20fr 24fr 56fr; grid-template-areas:"check icons label"; }
 
   .btns-btn { .btns-grid1x3(); justify-self:center; align-self:center;
-    width:80%; height:80%; font-size:inherit; font-family:@theme-font-family;
+    width:90%; height:80%; font-size:inherit; font-family:@theme-font-family;
     cursor:pointer; border-radius:16px; border: solid @theme-back 1px;
 
     .check { grid-area:check; justify-self:center; align-self:center; }

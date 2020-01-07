@@ -248,7 +248,7 @@ Worker.cacheObjs = {
   JitterHtml: {
     name: 'JitterHtml',
     status: 0,
-    url: '/pub/app/jitter/jits.html'
+    url: '/pub/app/jitter/jitter.html'
   },
   JitterJS: {
     name: 'JitterJS',

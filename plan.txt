@@ -9,10 +9,11 @@
    c. Lands: Pages: Home Prin Info Know Wise
 
 3. Fix
-   a. Refine Mixin
-   b. Nav ok for now
-   c. Resize
-   d. Streamline builds
+   a. Resize
+   b. Streamline builds
+   c. Augm url startup in Firefox
+   d. Wood has an unaccounted gray area
+   e. svg urls in /vue/svg and /app/svg - moved from css/svg
 
 4. Augm
    a. MathML browser compatibility

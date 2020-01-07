@@ -47,7 +47,7 @@
       this.mix().subscribe(  'Nav', 'Draw.vue', (obj) => {
         this.onNav(obj); } );
       this.$nextTick( function() {
-        this.D3D = new D3D( this.stream() ); } ) }
+        this.D3D = new D3D( this.mix().stream() ); } ) }
   }
   
   export default Draw;
