@@ -4,7 +4,9 @@
    b. Groom
 
 2. Write
-   a. Talks: Principles Perspectives Connections Information Knowledge Wisdom Software Data Science Nature
+   a. Talks: Principles  Perspectives Connections
+             Information Knowledge    Wisdom
+             Software    DataScience  Nature
    b. Descs: Clean Up Info.json Know.json Wise.json
    c. Lands: Pages: Home Prin Info Know Wise
 
@@ -30,4 +32,5 @@
 
 https://main-4a9c7.firebaseapp.com/app/main.html
 https://augm-d4b3c.firebaseapp.com/app/augm.html
-https://muse-b90e1.firebaseapp.com/app/muse.html  https://is.gd/KO7klq
+https://muse-b90e1.firebaseapp.com/app/muse.html
+https://is.gd/KO7klq
