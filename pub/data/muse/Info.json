@@ -14,7 +14,7 @@
       "Iterate":   { "icon":"fas fa-handshake",    "desc":"We begin with iterative prototypes"  },
       "Core":      { "icon":"fas fa-people-carry", "desc":"Core technology that drives effort"  },
       "Project":   { "icon":"fas fa-cogs",         "desc":"Projects are staffed by interdisciplinary experts"  } },
-    "Freedom":   { "dir":"east", "icon":"fas fa-street-view", "hsv":[30,60,90], "ref":"",
+    "Empower":   { "dir":"east", "icon":"fas fa-people-carry", "hsv":[30,60,90], "ref":"",
       "desc":"We have the freedom to take risks without feeling insecure or embarrassed",
       "Automony": { "icon":"fas fa-cogs",           "desc":"The authority to get jobs done "  },
       "Choice":   { "icon":"fas fa-graduation-cap", "desc":"Challenge the status quo and the conventional wisdom"  },
