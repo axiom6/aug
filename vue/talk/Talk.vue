@@ -5,7 +5,7 @@
       <t-area :areat="talkObjs" :size="2.0" :fnClick="doTalk"></t-area>
     </div>
   <div v-if="sectObj!==null" class="talk-sect">
-    <t-sect :sectObj="sectObj" :dataObj="dataObj"></t-sect>
+    <t-sect :sectObj="sectObj" :dataObj="dataObj" :imgsObj="imgsObj"></t-sect>
   </div>
   </div>
 </template>
@@ -19,7 +19,7 @@
 
     components:{ 't-sect':Sect, 't-area':Area },
 
-    data() { return { sectObj:null, dataObj:null, talkObjs:null, takkObj:null } },
+    data() { return { sectObj:null, dataObj:null, imgsObj:null, talkObjs:null, takkObj:null } },
 
     methods: {
       
@@ -32,9 +32,10 @@
             this.onSect( obj.pracKey, obj.dispKey, obj.pageKey ); } },
 
       onSect: function( talkKey, sectKey, pageKey ) {
-        let dispObj  = this.mix().sectObject( talkKey, sectKey );
+        let  dispObj = this.mix().sectObject( talkKey, sectKey );
         this.sectObj = pageKey!=='None' ? this.mix().pageObject(dispObj,pageKey) : dispObj;
-      //this.dataObj = this.dataObject( this.sectObj, pageKey );
+        this.imgsObj = this.mix().compObject( 'Imgs' );
+        // console.log( 'imgsObj', this.imgsObj );
       } },
 
     beforeMount: function() {

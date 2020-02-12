@@ -48,7 +48,6 @@ Muse = (function() {
       var app;
       Muse.mixin = new Mixin(Muse, [
         'Home',
-        'Imgs',
         'Talk',
         'Cube',
         'Prin',
@@ -86,13 +85,6 @@ Muse = (function() {
             name: 'Home',
             components: {
               Home: Home
-            }
-          },
-          {
-            path: '/imgs',
-            name: 'Imgs',
-            components: {
-              Imgs: Home.Imgs
             }
           },
           {
@@ -181,6 +173,10 @@ Muse = (function() {
       url: 'talk/Talk.json',
       data: null
     },
+    Imgs: {
+      url: 'imgs/Imgs.json',
+      data: null
+    },
     PrinTalk: {
       url: 'talk/Prin.json',
       data: null
@@ -234,18 +230,6 @@ Muse = (function() {
       icon: "fas fa-home",
       north: "Wise",
       prev: "Wise",
-      south: "Cube",
-      next: "Cube"
-    },
-    Imgs: {
-      title: 'Imgs',
-      key: 'Imgs',
-      route: 'Imgs',
-      pracs: {},
-      ikw: false,
-      icon: "fas fa-images",
-      north: "Home",
-      prev: "Home",
       south: "Talk",
       next: "Talk"
     },
@@ -256,8 +240,8 @@ Muse = (function() {
       pracs: {},
       ikw: true,
       icon: "fas fa-portrait",
-      north: "Imgs",
-      prev: "Imgs",
+      north: "Home",
+      prev: "Home",
       south: "Cube",
       next: "Cube"
     },

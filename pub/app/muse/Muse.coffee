@@ -33,6 +33,7 @@ class Muse
     Wise:     { url:'muse/Wise.json', data:null }
     Data:     { url:'muse/Data.json', data:null }
     Talk:     { url:'talk/Talk.json', data:null }
+    Imgs:     { url:'imgs/Imgs.json', data:null }
     PrinTalk: { url:'talk/Prin.json', data:null }
     RowsTalk: { url:'talk/Rows.json', data:null }
     ConnTalk: { url:'talk/Conn.json', data:null }
@@ -63,7 +64,7 @@ class Muse
 
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Muse.vue = () ->
-    Muse.mixin = new Mixin( Muse, ['Home','Imgs','Talk','Cube','Prin','Comp','Prac','Disp'] ) # Can't use komps
+    Muse.mixin = new Mixin( Muse, ['Home','Talk','Cube','Prin','Comp','Prac','Disp'] ) # Can't use komps
     Muse.nav.setMix( Muse.mixin.mixin().methods )
     Vue['mixin'](    Muse.mixin.mixin() )
     Vue.use(Router)
@@ -83,7 +84,6 @@ class Muse
     new Router( {
       routes:[
         { path: '/',     name:'Home', components:{ Home: Home      } },
-        { path: '/imgs', name:'Imgs', components:{ Imgs: Home.Imgs } },
         { path: '/talk', name:'Talk', components:{ Talk: Home.Talk } },
         { path: '/cube', name:'Cube', components:{ Cube: Home.Cube } },
         { path: '/prin', name:'Prin', components:{ Prin: Home.Prin } },
@@ -95,11 +95,9 @@ class Muse
   # Toc.vue components and routes with no west or east directions
   Muse.komps = {
     Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
-    north:"Wise", prev:"Wise", south:"Cube",  next:"Cube"  }
-    Imgs:{ title:'Imgs', key:'Imgs', route:'Imgs', pracs:{}, ikw:false,  icon:"fas fa-images",
-    north:"Home", prev:"Home", south:"Talk",  next:"Talk"  }
+    north:"Wise", prev:"Wise", south:"Talk",  next:"Talk"  }
     Talk:{ title:'Talk', key:'Talk', route:'Talk', pracs:{}, ikw:true,  icon:"fas fa-portrait",
-    north:"Imgs", prev:"Imgs", south:"Cube",  next:"Cube"  }
+    north:"Home", prev:"Home", south:"Cube",  next:"Cube"  }
     Cube:{ title:'Cube', key:'Cube', route:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes",
     north:"Talk", prev:"Talk", south:"Prin",  next:"Prin"  }
     Prin:{ title:'Prin', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",

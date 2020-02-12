@@ -15,6 +15,8 @@ class Nav
     @dispKey    = 'None'
     @pageKey    = 'None'
     @warnMsg    = 'None'
+    @imgsIdx    = 0
+    @imgsNum    = 0
     @mix        = null
     @pages      = {}
     @keyEvents()
@@ -36,7 +38,7 @@ class Nav
     @set( msg )
     @warnMsg = 'None' if not msg.warnMsg?
     @source  = 'None' if not msg.source?
-    { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey, pageKey:@pageKey, warnMsg:@warnMsg }
+    { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey,pageKey:@pageKey,warnMsg:@warnMsg,imgsIdx:@imgsIdx }
 
   set:( msg ) ->
     msg = @tabInov(msg) # Revise tab innovate messages
@@ -156,7 +158,7 @@ class Nav
        @log( msg, "Missing adjacent displine for #{dir} #{@compKey} #{@pracKey}" )
     return
 
-  dirTalk:( dir) ->
+  dirTalk:( dir ) ->
     dirs = @dirsNavdTalk()
     return if @pracKey is 'None' or not dirs[dir]
     msg         = {}
@@ -164,7 +166,15 @@ class Nav
     sectObj     = @mix().sectObject( @pracKey, @dispKey )
     hasChildren = @mix().isArray(sectObj.keys)
     @dispKey    = sectObj.name
-    if @isPageTalk( sectObj, hasChildren, @pageKey )
+    @imgsNum    = 0 if not sectObj['imgs']
+    console.log( 'Nav.dirTalk()', { imgsNum:@imgsNum, sectObj:sectObj } )
+    if @imgsNum > 0
+      @pageKey = 'None'
+      @imgsIdx = @prevImg()                                        if dir is 'west'
+      @imgsIdx = @nextImg()                                        if dir is 'east'
+      @pageKey = @prevKey(  @pageKey, sectObj.keys )               if dir is 'prev'
+      @pageKey = @nextPage( @pageKey, sectObj.keys, sectObj.peys ) if dir is 'next'
+    else if @isPageTalk( sectObj, hasChildren, @pageKey )
        @pageKey   = switch dir
          when 'west'  then @prevKey(  @pageKey, sectObj.keys )
          when 'east'  then @nextKey(  @pageKey, sectObj.keys )
@@ -185,6 +195,12 @@ class Nav
     msg.pageKey = @pageKey
     @pub( msg )
     return
+
+  prevImg:() ->
+    if @imgsIdx > 0 then @imgsIdx-1 else @imgsNum-1
+
+  nextImg:() ->
+    if @imgsIdx < @imgsNum-1 then @imgsIdx+1 else 0
 
   isPageTalk:( sectObj, hasChildren, pageKey ) ->
     @pageKey isnt 'None' and hasChildren and sectObj[pageKey]?

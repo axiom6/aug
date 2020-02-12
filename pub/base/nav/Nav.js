@@ -22,6 +22,8 @@ Nav = class Nav {
     this.dispKey = 'None';
     this.pageKey = 'None';
     this.warnMsg = 'None';
+    this.imgsIdx = 0;
+    this.imgsNum = 0;
     this.mix = null;
     this.pages = {};
     this.keyEvents();
@@ -61,7 +63,8 @@ Nav = class Nav {
       pracKey: this.pracKey,
       dispKey: this.dispKey,
       pageKey: this.pageKey,
-      warnMsg: this.warnMsg
+      warnMsg: this.warnMsg,
+      imgsIdx: this.imgsIdx
     };
   }
 
@@ -255,7 +258,28 @@ Nav = class Nav {
     sectObj = this.mix().sectObject(this.pracKey, this.dispKey);
     hasChildren = this.mix().isArray(sectObj.keys);
     this.dispKey = sectObj.name;
-    if (this.isPageTalk(sectObj, hasChildren, this.pageKey)) {
+    if (!sectObj['imgs']) {
+      this.imgsNum = 0;
+    }
+    console.log('Nav.dirTalk()', {
+      imgsNum: this.imgsNum,
+      sectObj: sectObj
+    });
+    if (this.imgsNum > 0) {
+      this.pageKey = 'None';
+      if (dir === 'west') {
+        this.imgsIdx = this.prevImg();
+      }
+      if (dir === 'east') {
+        this.imgsIdx = this.nextImg();
+      }
+      if (dir === 'prev') {
+        this.pageKey = this.prevKey(this.pageKey, sectObj.keys);
+      }
+      if (dir === 'next') {
+        this.pageKey = this.nextPage(this.pageKey, sectObj.keys, sectObj.peys);
+      }
+    } else if (this.isPageTalk(sectObj, hasChildren, this.pageKey)) {
       this.pageKey = (function() {
         switch (dir) {
           case 'west':
@@ -296,6 +320,22 @@ Nav = class Nav {
     msg.dispKey = this.dispKey;
     msg.pageKey = this.pageKey;
     this.pub(msg);
+  }
+
+  prevImg() {
+    if (this.imgsIdx > 0) {
+      return this.imgsIdx - 1;
+    } else {
+      return this.imgsNum - 1;
+    }
+  }
+
+  nextImg() {
+    if (this.imgsIdx < this.imgsNum - 1) {
+      return this.imgsIdx + 1;
+    } else {
+      return 0;
+    }
   }
 
   isPageTalk(sectObj, hasChildren, pageKey) {

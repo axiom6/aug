@@ -1,6 +1,7 @@
 {
   "Beg":        { "banner":"Principles","type":"Sect", "icon":"fas fa-hourglass-start", "author":"Tom Flaherty", "date":"yyyy-mm-dd" },
-  "Image":      { "title":"Image", "img":"NightSky.jpeg" },
+  "Image":      { "caption":"Image", "img":"NightSky.jpeg" },
+  "Over":       { "caption":"Over",  "imgs":"Over" },
   "Embrace":    { "title":"Embrace",     "type":"Prac",
     "Interact":   { "title":"Interact",    "type":"Disp" },
     "Guide":      { "title":"Guide",       "type":"Disp" },
