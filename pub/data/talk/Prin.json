@@ -1,5 +1,6 @@
 {
   "Beg":        { "banner":"Principles","type":"Sect", "icon":"fas fa-hourglass-start", "author":"Tom Flaherty", "date":"yyyy-mm-dd" },
+  "Image":      { "title":"Image", "img":"NightSky.jpeg" },
   "Embrace":    { "title":"Embrace",     "type":"Prac",
     "Interact":   { "title":"Interact",    "type":"Disp" },
     "Guide":      { "title":"Guide",       "type":"Disp" },
@@ -15,8 +16,8 @@
     "Intent":     { "title":"Intent",      "type":"Disp" },
     "Ethics":     { "title":"Ethics",      "type":"Disp" },
     "Reflect":    { "title":"Reflect",     "type":"Disp" } },
-  "Credits":    { "title":"Credits",      "type":"Cred", "icon":"fas fa-check-square" },
-  "References": { "title":"References",   "type":"Refs", "icon":"fas fa-book-open"  },
-  "Links":      { "title":"Links",        "type":"Link", "icon":"fas fa-link" },
-  "End":        { "banner":"The End",     "type":"Sect", "icon":"fas fa-hourglass-end" }
+  "Credits":    { "title":"Credits",      "icon":"fas fa-check-square" },
+  "References": { "title":"References",   "icon":"fas fa-book-open"  },
+  "Links":      { "title":"Links",        "icon":"fas fa-link" },
+  "End":        { "banner":"The End",     "icon":"fas fa-hourglass-end" }
 }

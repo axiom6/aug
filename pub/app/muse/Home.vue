@@ -27,6 +27,7 @@
   }
 
   import Dash from '../../../vue/dash/Dash.vue';
+  import Imgs from '../../../vue/imgs/Imgs.vue';
   import Talk from '../../../vue/talk/Talk.vue';
   import Cube from '../../../vue/comp/Cube.vue';
   import Prin from '../../../vue/prin/Prin.vue';
@@ -35,6 +36,7 @@
   import Disp from '../../../vue/disp/Disp.vue';
   
   Home.Dash = Dash;
+  Home.Imgs = Imgs;
   Home.Talk = Talk;
   Home.Cube = Cube;
   Home.Prin = Prin;
@@ -67,19 +69,3 @@
  }
  
 </style>
-
-<!--div  class="theme-section">
-  <h3 class="theme-h3">H3</h3>
-  <h4 class="theme-h4">H4</h4>
-  <h5 class="theme-h5">H5</h5>
-  <h6 class="theme-h6">H6</h6>
-  <div class="home-list">
-    <ul class="theme-ul">
-      <li>LI 1<ul>
-        <li>LI 2<ul>
-          <li>LI 3</li></ul>
-        </li></ul>
-      </li>
-    </ul>
-  </div>
-</div-->

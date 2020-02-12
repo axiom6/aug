@@ -491,6 +491,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/app/muse/NightSky.jpeg": {
+		"ft": 16384,
+		"iS": 648909,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/pub/app/muse/NightSky.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
 	"/pub/app/muse/Roll.js": {
 		"bF": 0,
 		"ft": 64,
@@ -3565,6 +3576,17 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/lib/vue/vue-carousel.esm.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/lib/vue/vue-carousel.esm-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/pub/lib/vue/vue-router.esm.js": {
 		"bF": 0,
 		"ft": 64,
@@ -4173,6 +4195,17 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/pub/vue/geom/Geom4D-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/vue/imgs/Imgs.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/imgs/Imgs-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0
@@ -5709,6 +5742,25 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/vue/imgs/Imgs.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/vue/imgs/Imgs.js",
+		"oF": 0
+		},
+	"/vue/imgs/Roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/vue/imgs/Roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
 	"/vue/jitter/Body.vue": {
 		"cB": 0,
 		"ft": 8192,
@@ -6104,6 +6156,14 @@
 		"opt": 0,
 		"plM": 3758088159,
 		"prP": 0
+		},
+	"/vue/talk/Branch.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/vue/talk/Branch.html",
+		"oF": 0
 		},
 	"/vue/talk/Disp.vue": {
 		"cB": 0,
