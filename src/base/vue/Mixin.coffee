@@ -22,7 +22,7 @@ class Mixin
 
           # Util
           isDef: (d) ->
-            d isnt null and typeof (d) isnt 'undefined'
+            d isnt null and typeof (d) isnt 'undefined' and d isnt 'None'
           isStr: (s) ->
             @isDef(s) and typeof (s) == "string" and s.length > 0
           isArray: (a) ->
@@ -165,6 +165,9 @@ class Mixin
             talkObj.keys = if talkObj.keys?  then talkObj.keys else Util.childKeys(sectObjs)
             dispKey = if dispKey is 'None' then @keys(sectObjs)[0] else dispKey
             sectObj = sectObjs[dispKey]
+            if not sectObj?
+              console.error( 'Nav.sectObject null', { pracKey:pracKey, dispKey:dispKey } )
+              sectObj = {}
             sectObj.src = talkObj.src
             sectObj.name = dispKey
             sectObj.peys = talkObj.keys
@@ -228,20 +231,21 @@ class Mixin
               console.error('Mixin.choiceIndex() bad choice name', {name: name, idx: idx})
             idx
 
-          imgHW:( src, callback ) ->
+          appendImgsHW:( src, elem ) ->
             hw  = {}
             img = new Image();
             img.onload = () ->
-              hw.w = this.width
-              hw.h = this.height
-              callback( hw )
+              hw.iw = this.width
+              hw.ih = this.height
+              hw.ew = elem['clientWidth']
+              hw.eh = elem['clientHeight']
+              hw.r  = Math.min( hw.ew/hw.iw, hw.eh/hw.ih )
+              img.width  = hw.iw * hw.r
+              img.height = hw.ih * hw.r
+              # console.log( 'Mixin.appendImgsHW()', hw:hw, { w:img.width, h:img.height } )
+              elem.children[0].remove() if elem.children[0]?
+              elem.append( img )
             img.src = src
-
-          elemHW:( elem ) ->
-            hw = {}
-            hw.w = elem['clientWidth']
-            hw.h = elem['clientHeight']
-            hw
 
           # aspectHW:( )
         }

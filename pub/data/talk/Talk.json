@@ -1,4 +1,6 @@
 {
+  "Skyline":      { "title":"Skyline",      "url":"talk/Skyc.json", "comp":"SkycTalk", "src":"Prin", "icon":"fas fa-image",
+    "desc": "Syline Cottages Photo Galley" },
   "Principles":   { "title":"Principles",   "url":"talk/Prin.json", "comp":"PrinTalk", "src":"Prin", "icon":"fas fa-snowflake",
     "desc": "12 core principles grouped in 3 columns" },
   "Perspectives": { "title":"Perspectives", "url":"talk/Rows.json", "comp":"RowsTalk", "src":"Rows", "icon":"fas fa-sitemap",

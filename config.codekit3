@@ -4774,116 +4774,6 @@
 		"opt": 0,
 		"q": 100
 		},
-	"/pub/data/imgs/rn/N.jpg": {
-		"ft": 16384,
-		"iS": 45161,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/pub/data/imgs/rn/N.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/pub/data/imgs/rn/SL-2003-300x200.jpg": {
-		"ft": 16384,
-		"iS": 15281,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/pub/data/imgs/rn/SL-2003-300x200.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/pub/data/imgs/rn/SL-2004-300x200.jpg": {
-		"ft": 16384,
-		"iS": 15064,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/pub/data/imgs/rn/SL-2004-300x200.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/pub/data/imgs/rn/SL-2005-300x200.jpg": {
-		"ft": 16384,
-		"iS": 15358,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/pub/data/imgs/rn/SL-2005-300x200.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/pub/data/imgs/rn/SL-2006-300x200.jpg": {
-		"ft": 16384,
-		"iS": 15159,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/pub/data/imgs/rn/SL-2006-300x200.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/pub/data/imgs/rs/S.jpg": {
-		"ft": 16384,
-		"iS": 126315,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/pub/data/imgs/rs/S.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/pub/data/imgs/rs/SL-2001-300x200.jpg": {
-		"ft": 16384,
-		"iS": 40261,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/pub/data/imgs/rs/SL-2001-300x200.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/pub/data/imgs/rs/SL-2008-300x200.jpg": {
-		"ft": 16384,
-		"iS": 15207,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/pub/data/imgs/rs/SL-2008-300x200.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/pub/data/imgs/rs/SL-2013-300x200.jpg": {
-		"ft": 16384,
-		"iS": 15212,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/pub/data/imgs/rs/SL-2013-300x200.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
-	"/pub/data/imgs/rs/SL-2014-300x200.jpg": {
-		"ft": 16384,
-		"iS": 15139,
-		"jF": 0,
-		"oA": 0,
-		"oAP": "/pub/data/imgs/rs/SL-2014-300x200.jpg",
-		"oF": 0,
-		"oIPL": 0,
-		"opt": 0,
-		"q": 100
-		},
 	"/pub/data/imgs/site/EstesParkMap.gif": {
 		"ft": 4194304,
 		"iS": 31807,
@@ -5757,6 +5647,14 @@
 		"ft": 524288,
 		"oA": 1,
 		"oAP": "/pub/data/talk/Scie-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/talk/Skyc.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/talk/Skyc-min.json",
 		"oF": 0,
 		"oO": 0,
 		"oS": 1

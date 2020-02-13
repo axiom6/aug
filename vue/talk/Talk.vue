@@ -33,7 +33,11 @@
 
       onSect: function( talkKey, sectKey, pageKey ) {
         let  dispObj = this.mix().sectObject( talkKey, sectKey );
-        this.sectObj = pageKey!=='None' ? this.mix().pageObject(dispObj,pageKey) : dispObj;
+        this.sectObj = this.mix().isDef(pageKey) ? this.mix().pageObject(dispObj,pageKey) : dispObj;
+        if( !this.mix().isDef(this.sectObj) ) {
+          console.error( 'Talk.vue.onSect() sectObj null',
+            { dispObj:dispObj, talkKey:talkKey, sectKey:sectKey, pageKey:pageKey } );
+          this.sectObj = {}; }
         this.sectObj.imgsIdx = this.mix().nav().imgsIdx;
         this.imgsObj = this.mix().compObject( 'Imgs' );
         // console.log( 'imgsObj', this.imgsObj );

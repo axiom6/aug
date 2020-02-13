@@ -34,6 +34,7 @@ class Muse
     Data:     { url:'muse/Data.json', data:null }
     Talk:     { url:'talk/Talk.json', data:null }
     Imgs:     { url:'imgs/Imgs.json', data:null }
+    SkycTalk: { url:'talk/Skyc.json', data:null }
     PrinTalk: { url:'talk/Prin.json', data:null }
     RowsTalk: { url:'talk/Rows.json', data:null }
     ConnTalk: { url:'talk/Conn.json', data:null }
@@ -64,7 +65,7 @@ class Muse
 
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Muse.vue = () ->
-    Muse.mixin = new Mixin( Muse, ['Home','Talk','Cube','Prin','Comp','Prac','Disp'] ) # Can't use komps
+    Muse.mixin = new Mixin( Muse, ['Home','Talk','Prin','Comp','Prac','Disp','Cube'] ) # Can't use komps
     Muse.nav.setMix( Muse.mixin.mixin().methods )
     Vue['mixin'](    Muse.mixin.mixin() )
     Vue.use(Router)
@@ -85,21 +86,19 @@ class Muse
       routes:[
         { path: '/',     name:'Home', components:{ Home: Home      } },
         { path: '/talk', name:'Talk', components:{ Talk: Home.Talk } },
-        { path: '/cube', name:'Cube', components:{ Cube: Home.Cube } },
         { path: '/prin', name:'Prin', components:{ Prin: Home.Prin } },
         { path: '/comp', name:'Comp', components:{ Comp: Home.Comp } },
         { path: '/prac', name:'Prac', components:{ Prac: Home.Prac } },
-        { path: '/disp', name:'Disp', components:{ Disp: Home.Disp } }
+        { path: '/disp', name:'Disp', components:{ Disp: Home.Disp } },
+        { path: '/cube', name:'Cube', components:{ Cube: Home.Cube } }
       ] } )
 
   # Toc.vue components and routes with no west or east directions
   Muse.komps = {
     Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
-    north:"Wise", prev:"Wise", south:"Talk",  next:"Talk"  }
+    north:"Cube", prev:"Cube", south:"Talk",  next:"Talk"  }
     Talk:{ title:'Talk', key:'Talk', route:'Talk', pracs:{}, ikw:true,  icon:"fas fa-portrait",
-    north:"Home", prev:"Home", south:"Cube",  next:"Cube"  }
-    Cube:{ title:'Cube', key:'Cube', route:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes",
-    north:"Talk", prev:"Talk", south:"Prin",  next:"Prin"  }
+    north:"Home", prev:"Home", south:"Prin",  next:"Prin"  }
     Prin:{ title:'Prin', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",
     north:"Home", prev:"Home", south:"Info",  next:"Info" }
     Info:{ title:'Info', key:'Info', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-th",
@@ -107,7 +106,9 @@ class Muse
     Know:{ title:'Know', key:'Know', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-university",
     north:"Info", prev:"Info", south:"Wise",  next:"Wise" }
     Wise:{ title:'Wise', key:'Wise', route:'Comp', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor",
-    north:"Know", prev:"Know", south:"Home",  next:"Home" }  }
+    north:"Know", prev:"Know", south:"Home",  next:"Home" }
+    Cube:{ title:'Cube', key:'Cube', route:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes",
+    north:"Talk", prev:"Wise", south:"Wise",  next:"Home"  } }
 
   # Merges principles and innovations into comp practices
   Muse.mergeCols = ( ) ->

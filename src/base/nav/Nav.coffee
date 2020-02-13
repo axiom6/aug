@@ -165,12 +165,15 @@ class Nav
     msg.source  = "#{'Nav.dirTalk'}(#{dir})"
     sectObj     = @mix().sectObject( @pracKey, @dispKey )
     hasChildren = @mix().isArray(sectObj.keys)
+    @pageKey    = 'None' if not @pageKey?
     @dispKey    = sectObj.name
     @imgsNum    = 0 if not sectObj['imgs']
     # console.log( 'Nav.dirTalk()', { imgsNum:@imgsNum, sectObj:sectObj } )
     if @imgsNum > 0
       @imgsIdx = @prevImg()                                        if dir is 'west'
       @imgsIdx = @nextImg()                                        if dir is 'east'
+      @pageKey = @prevKey(  @pageKey, sectObj.keys )               if dir is 'north'
+      @pageKey = @nextKey(  @pageKey, sectObj.keys )               if dir is 'south'
       @pageKey = @prevKey(  @pageKey, sectObj.keys )               if dir is 'prev'
       @pageKey = @nextPage( @pageKey, sectObj.keys, sectObj.peys ) if dir is 'next'
       sectObj.imgsIdx = @imgsIdx

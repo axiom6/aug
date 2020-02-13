@@ -1,0 +1,20 @@
+{
+  "Beg":   { "banner":"Skyline","type":"Sect", "icon":"fas fa-hourglass-start", "author":"Tom Flaherty", "date":"yyyy-mm-dd" },
+  "Image": { "caption":"Image", "img":"NightSky.jpeg" },
+  "Over":  { "caption":"Over",  "imgs":"Over"  },
+  "Deck":  { "caption":"Deck",  "imgs":"Deck"  },
+  "Mtn":   { "caption":"Mtn",   "imgs":"Mtn"   },
+  "River": { "caption":"River", "imgs":"River" },
+  "Walk":  { "caption":"Walk",  "imgs":"Walk"  },
+  "Wild":  { "caption":"Wild",  "imgs":"Wild"  },
+  "Yard":  { "caption":"Yard",  "imgs":"Yard"  },
+  "R1":    { "caption":"R1",    "imgs":"R1"    },
+  "R2":    { "caption":"R2",    "imgs":"R2"    },
+  "R3":    { "caption":"R3",    "imgs":"R3"    },
+  "R4":    { "caption":"R4",    "imgs":"R4"    },
+  "R5":    { "caption":"R5",    "imgs":"R5"    },
+  "R6":    { "caption":"R6",    "imgs":"R6"    },
+  "R7":    { "caption":"R7",    "imgs":"R7"    },
+  "R8":    { "caption":"R8",    "imgs":"R8"    },
+  "End":   { "banner":"The End", "icon":"fas fa-hourglass-end" }
+}

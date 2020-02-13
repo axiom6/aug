@@ -1,17 +1,17 @@
 
 
 <template>
-  <div      v-if="hasSect()"               class="sect-pane">
-    <div    v-if="hasProp('icon')"    class="sect-icon"><i :class="sectObj.icon"></i></div>
-    <div    v-if="hasProp('banner')"  class="sect-banner"  ><div>{{sectObj.banner}}</div></div>
-    <div    v-if="hasProp('title')"   class="sect-title"   >{{sectObj.title}}</div>
-    <div    v-if="hasProp('caption')" class="sect-caption" >{{sectObj.caption}}</div>
-    <div    v-if="hasProp('img')"     class="sect-img"  v-html="htmlImg( sectObj.img )"></div>
-    <div    v-if="hasProp('imgs')"    class="sect-imgs" v-html="htmlImgs(sectObj['imgs'])"></div>
-    <div    v-if="hasProp('desc')"    class="sect-desc"  >{{sectObj.desc}}</div>
- <!--t-prac v-if="isType('Prac')"    class="sect-prac" :sectObj="sectObj" :pracObj="dataObj"></t-prac-->
- <!--t-disp v-if="isType('Disp')"    class="sect-disp" :sectObj="sectObj" :dispObj="dataObj"></t-disp-->
-    <div    v-if="hasProp('author')" class="sect-author" >{{sectObj.author}}</div>
+  <div   v-if="hasSect()"               class="sect-pane">
+    <div v-if="hasProp('icon')"    class="sect-icon"><i :class="sectObj.icon"></i></div>
+    <div v-if="hasProp('banner')"  class="sect-banner"  ><div>{{sectObj.banner}}</div></div>
+    <div v-if="hasProp('title')"   class="sect-title"   >{{sectObj.title}}</div>
+    <div v-if="hasProp('caption')" class="sect-caption" >{{sectObj.caption}}</div>
+    <div v-if="hasProp('img')"     class="sect-img"  v-html="htmlImg( sectObj.img )"></div>
+    <div v-if="hasProp('imgs')" class="sect-imgs" :ref="sectObj.name">{{appendImgs(sectObj['imgs'],sectObj.name)}}</div>
+    <div v-if="hasProp('desc')"    class="sect-desc"  >{{sectObj.desc}}</div>
+    <div v-if="hasProp('author')"  class="sect-author" >{{sectObj.author}}</div>
+    <!--t-prac v-if="isType('Prac')"    class="sect-prac" :sectObj="sectObj" :pracObj="dataObj"></t-prac-->
+    <!--t-disp v-if="isType('Disp')"    class="sect-disp" :sectObj="sectObj" :dispObj="dataObj"></t-disp-->
   </div>
 </template>
     
@@ -36,14 +36,17 @@
           htmlImg: function(src) {
             return `<img src="${src}" alt="x"/>`; },
 
-          htmlImgs: function(imgs) {
-            let pics = this.imgsObj[imgs]['pics'];
-            let idx  = this.sectObj.imgsIdx;
-            let num  = pics.length;
-            this.mix().nav().imgsNum = num;
-            let src = "../../data/imgs/" + this.imgsObj[imgs]['dir'] + pics[idx].src;
-            console.log( 'sect.htmlImgs', { pics:pics, pic:pics[idx], src:src, idx:idx, num:num, sectObj:this.sectObj } );
-            return `<img src="${src}" alt="x"/>`; },
+          appendImgs: function( imgs, refn ) {
+            this.$nextTick( function() {
+              let pics = this.imgsObj[imgs]['pics'];
+              let idx  = this.sectObj.imgsIdx;
+              this.mix().nav().imgsNum = pics.length;
+              let src  = "../../data/imgs/" + this.imgsObj[imgs]['dir'] + pics[idx].src;
+              let elem = this.$refs[refn];
+              this.mix().appendImgsHW( src, elem ); } ) },
+          
+            //console.log( 'sect.htmlImgs', {$refs:this.$refs,refn:refn,elem:elem,
+            //    pics:pics,pic:pics[idx],src:src,idx:idx,num:pics.length,sectObj:this.sectObj} ); } )
 
           hasSect: function() {
             return this.mix().isDef(this.sectObj); },
@@ -76,8 +79,7 @@
           div { .themeCenterItems(); } }
         .sect-img    { position:absolute; left:10%; top:10%; width: 80%; height:80%; font-size:1.0*@sectFS;
           img { width:100%; height:100%; } }
-        .sect-imgs   { position:absolute; left:10%; top:10%; width: 80%; height:80%; font-size:1.0*@sectFS;
-          img { width:100%; height:100%; } }
+        .sect-imgs   { position:absolute; left:10%; top:10%; width: 80%; height:80%; font-size:1.0*@sectFS; }
         .sect-desc   { position:absolute; left:0;   top:20%; width:100%; height:80%; font-size:1.0*@sectFS;
           div { .themeCenterItems(); } }
         .sect-prac   { position:absolute; left:10%; top:10%; width: 80%; height:80%; font-size:1.0*@sectFS;  }

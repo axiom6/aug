@@ -257,6 +257,9 @@ Nav = class Nav {
     msg.source = `${'Nav.dirTalk'}(${dir})`;
     sectObj = this.mix().sectObject(this.pracKey, this.dispKey);
     hasChildren = this.mix().isArray(sectObj.keys);
+    if (this.pageKey == null) {
+      this.pageKey = 'None';
+    }
     this.dispKey = sectObj.name;
     if (!sectObj['imgs']) {
       this.imgsNum = 0;
@@ -268,6 +271,12 @@ Nav = class Nav {
       }
       if (dir === 'east') {
         this.imgsIdx = this.nextImg();
+      }
+      if (dir === 'north') {
+        this.pageKey = this.prevKey(this.pageKey, sectObj.keys);
+      }
+      if (dir === 'south') {
+        this.pageKey = this.nextKey(this.pageKey, sectObj.keys);
       }
       if (dir === 'prev') {
         this.pageKey = this.prevKey(this.pageKey, sectObj.keys);

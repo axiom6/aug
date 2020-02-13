@@ -49,11 +49,11 @@ Muse = (function() {
       Muse.mixin = new Mixin(Muse, [
         'Home',
         'Talk',
-        'Cube',
         'Prin',
         'Comp',
         'Prac',
-        'Disp' // Can't use komps
+        'Disp',
+        'Cube' // Can't use komps
       ]);
       Muse.nav.setMix(Muse.mixin.mixin().methods);
       Vue['mixin'](Muse.mixin.mixin());
@@ -95,13 +95,6 @@ Muse = (function() {
             }
           },
           {
-            path: '/cube',
-            name: 'Cube',
-            components: {
-              Cube: Home.Cube
-            }
-          },
-          {
             path: '/prin',
             name: 'Prin',
             components: {
@@ -127,6 +120,13 @@ Muse = (function() {
             name: 'Disp',
             components: {
               Disp: Home.Disp
+            }
+          },
+          {
+            path: '/cube',
+            name: 'Cube',
+            components: {
+              Cube: Home.Cube
             }
           }
         ]
@@ -175,6 +175,10 @@ Muse = (function() {
     },
     Imgs: {
       url: 'imgs/Imgs.json',
+      data: null
+    },
+    SkycTalk: {
+      url: 'talk/Skyc.json',
       data: null
     },
     PrinTalk: {
@@ -228,8 +232,8 @@ Muse = (function() {
       pracs: {},
       ikw: false,
       icon: "fas fa-home",
-      north: "Wise",
-      prev: "Wise",
+      north: "Cube",
+      prev: "Cube",
       south: "Talk",
       next: "Talk"
     },
@@ -242,18 +246,6 @@ Muse = (function() {
       icon: "fas fa-portrait",
       north: "Home",
       prev: "Home",
-      south: "Cube",
-      next: "Cube"
-    },
-    Cube: {
-      title: 'Cube',
-      key: 'Cube',
-      route: 'Cube',
-      pracs: {},
-      ikw: false,
-      icon: "fas fa-cubes",
-      north: "Talk",
-      prev: "Talk",
       south: "Prin",
       next: "Prin"
     },
@@ -303,6 +295,18 @@ Muse = (function() {
       north: "Know",
       prev: "Know",
       south: "Home",
+      next: "Home"
+    },
+    Cube: {
+      title: 'Cube',
+      key: 'Cube',
+      route: 'Cube',
+      pracs: {},
+      ikw: false,
+      icon: "fas fa-cubes",
+      north: "Talk",
+      prev: "Wise",
+      south: "Wise",
       next: "Home"
     }
   };

@@ -20,7 +20,7 @@ Mixin = class Mixin {
             
             // Util
             isDef: function(d) {
-              return d !== null && typeof d !== 'undefined';
+              return d !== null && typeof d !== 'undefined' && d !== 'None';
             },
             isStr: function(s) {
               return this.isDef(s) && typeof s === "string" && s.length > 0;
@@ -244,6 +244,13 @@ Mixin = class Mixin {
               talkObj.keys = talkObj.keys != null ? talkObj.keys : Util.childKeys(sectObjs);
               dispKey = dispKey === 'None' ? this.keys(sectObjs)[0] : dispKey;
               sectObj = sectObjs[dispKey];
+              if (sectObj == null) {
+                console.error('Nav.sectObject null', {
+                  pracKey: pracKey,
+                  dispKey: dispKey
+                });
+                sectObj = {};
+              }
               sectObj.src = talkObj.src;
               sectObj.name = dispKey;
               sectObj.peys = talkObj.keys;
@@ -332,23 +339,25 @@ Mixin = class Mixin {
               }
               return idx;
             },
-            imgHW: function(src, callback) {
+            appendImgsHW: function(src, elem) {
               var hw, img;
               hw = {};
               img = new Image();
               img.onload = function() {
-                hw.w = this.width;
-                hw.h = this.height;
-                return callback(hw);
+                hw.iw = this.width;
+                hw.ih = this.height;
+                hw.ew = elem['clientWidth'];
+                hw.eh = elem['clientHeight'];
+                hw.r = Math.min(hw.ew / hw.iw, hw.eh / hw.ih);
+                img.width = hw.iw * hw.r;
+                img.height = hw.ih * hw.r;
+                if (elem.children[0] != null) {
+                  // console.log( 'Mixin.appendImgsHW()', hw:hw, { w:img.width, h:img.height } )
+                  elem.children[0].remove();
+                }
+                return elem.append(img);
               };
               return img.src = src;
-            },
-            elemHW: function(elem) {
-              var hw;
-              hw = {};
-              hw.w = elem['clientWidth'];
-              hw.h = elem['clientHeight'];
-              return hw;
             }
           };
         }
