@@ -169,7 +169,8 @@ class Mixin
             sectObj.name = dispKey
             sectObj.peys = talkObj.keys
             sectObj.keys = if sectObj.keys?  then sectObj.keys else Util.childKeys(sectObj)
-            sectObj.imgsIdx = 0
+            sectObj = Object.assign( {}, sectObj ) if sectObj.imgsIdx isnt @nav().imgsIdx  # Trigger reactive render
+            sectObj.imgsIdx = @nav().imgsIdx
             sectObj
 
           pageObject: (sectObj, pageKey) ->
@@ -226,6 +227,23 @@ class Mixin
             else
               console.error('Mixin.choiceIndex() bad choice name', {name: name, idx: idx})
             idx
+
+          imgHW:( src, callback ) ->
+            hw  = {}
+            img = new Image();
+            img.onload = () ->
+              hw.w = this.width
+              hw.h = this.height
+              callback( hw )
+            img.src = src
+
+          elemHW:( elem ) ->
+            hw = {}
+            hw.w = elem['clientWidth']
+            hw.h = elem['clientHeight']
+            hw
+
+          # aspectHW:( )
         }
       }
     }

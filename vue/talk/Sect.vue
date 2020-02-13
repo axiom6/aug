@@ -38,11 +38,11 @@
 
           htmlImgs: function(imgs) {
             let pics = this.imgsObj[imgs]['pics'];
-            this.mix().nav().imgsNum = pics.length;
-            let idx  = this.mix().nav().imgsIdx;
+            let idx  = this.sectObj.imgsIdx;
+            let num  = pics.length;
+            this.mix().nav().imgsNum = num;
             let src = "../../data/imgs/" + this.imgsObj[imgs]['dir'] + pics[idx].src;
-            console.log( 'sect.htmlImgs', { pics:pics, pic:pics[idx], src:src,
-              idx:this.mix().nav().imgsIdx, num:this.mix().nav().imgsNum } );
+            console.log( 'sect.htmlImgs', { pics:pics, pic:pics[idx], src:src, idx:idx, num:num, sectObj:this.sectObj } );
             return `<img src="${src}" alt="x"/>`; },
 
           hasSect: function() {

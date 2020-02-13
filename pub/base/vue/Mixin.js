@@ -248,7 +248,10 @@ Mixin = class Mixin {
               sectObj.name = dispKey;
               sectObj.peys = talkObj.keys;
               sectObj.keys = sectObj.keys != null ? sectObj.keys : Util.childKeys(sectObj);
-              sectObj.imgsIdx = 0;
+              if (sectObj.imgsIdx !== this.nav().imgsIdx) { // Trigger reactive render
+                sectObj = Object.assign({}, sectObj);
+              }
+              sectObj.imgsIdx = this.nav().imgsIdx;
               return sectObj;
             },
             pageObject: function(sectObj, pageKey) {
@@ -328,6 +331,24 @@ Mixin = class Mixin {
                 });
               }
               return idx;
+            },
+            imgHW: function(src, callback) {
+              var hw, img;
+              hw = {};
+              img = new Image();
+              img.onload = function() {
+                hw.w = this.width;
+                hw.h = this.height;
+                return callback(hw);
+              };
+              return img.src = src;
+            },
+            elemHW: function(elem) {
+              var hw;
+              hw = {};
+              hw.w = elem['clientWidth'];
+              hw.h = elem['clientHeight'];
+              return hw;
             }
           };
         }
@@ -337,4 +358,5 @@ Mixin = class Mixin {
 
 };
 
+// aspectHW:( )
 export default Mixin;
