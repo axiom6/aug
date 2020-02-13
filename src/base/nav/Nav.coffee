@@ -167,13 +167,13 @@ class Nav
     hasChildren = @mix().isArray(sectObj.keys)
     @dispKey    = sectObj.name
     @imgsNum    = 0 if not sectObj['imgs']
-    console.log( 'Nav.dirTalk()', { imgsNum:@imgsNum, sectObj:sectObj } )
+    # console.log( 'Nav.dirTalk()', { imgsNum:@imgsNum, sectObj:sectObj } )
     if @imgsNum > 0
-      @pageKey = 'None'
       @imgsIdx = @prevImg()                                        if dir is 'west'
       @imgsIdx = @nextImg()                                        if dir is 'east'
       @pageKey = @prevKey(  @pageKey, sectObj.keys )               if dir is 'prev'
       @pageKey = @nextPage( @pageKey, sectObj.keys, sectObj.peys ) if dir is 'next'
+      sectObj.imgsIdx = @imgsIdx
     else if @isPageTalk( sectObj, hasChildren, @pageKey )
        @pageKey   = switch dir
          when 'west'  then @prevKey(  @pageKey, sectObj.keys )

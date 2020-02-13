@@ -248,6 +248,7 @@ Mixin = class Mixin {
               sectObj.name = dispKey;
               sectObj.peys = talkObj.keys;
               sectObj.keys = sectObj.keys != null ? sectObj.keys : Util.childKeys(sectObj);
+              sectObj.imgsIdx = 0;
               return sectObj;
             },
             pageObject: function(sectObj, pageKey) {

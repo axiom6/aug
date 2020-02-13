@@ -34,6 +34,7 @@
       onSect: function( talkKey, sectKey, pageKey ) {
         let  dispObj = this.mix().sectObject( talkKey, sectKey );
         this.sectObj = pageKey!=='None' ? this.mix().pageObject(dispObj,pageKey) : dispObj;
+        this.sectObj.imgsIdx = this.mix().nav().imgsIdx;
         this.imgsObj = this.mix().compObject( 'Imgs' );
         // console.log( 'imgsObj', this.imgsObj );
       } },

@@ -169,7 +169,7 @@ class Mixin
             sectObj.name = dispKey
             sectObj.peys = talkObj.keys
             sectObj.keys = if sectObj.keys?  then sectObj.keys else Util.childKeys(sectObj)
-
+            sectObj.imgsIdx = 0
             sectObj
 
           pageObject: (sectObj, pageKey) ->

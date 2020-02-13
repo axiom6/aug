@@ -26,7 +26,7 @@
         
         props: { sectObj:Object, dataObj:Object, imgsObj:Object },
     
-        data() { return {} },
+        data() { return { imgsIdx:0 } },
     
         methods: {
     
@@ -41,7 +41,8 @@
             this.mix().nav().imgsNum = pics.length;
             let idx  = this.mix().nav().imgsIdx;
             let src = "../../data/imgs/" + this.imgsObj[imgs]['dir'] + pics[idx].src;
-            console.log( 'sect.htmlImgs', { pics:pics, pic:pics[idx], src:src, num:this.mix().nav().imgsNum } );
+            console.log( 'sect.htmlImgs', { pics:pics, pic:pics[idx], src:src,
+              idx:this.mix().nav().imgsIdx, num:this.mix().nav().imgsNum } );
             return `<img src="${src}" alt="x"/>`; },
 
           hasSect: function() {

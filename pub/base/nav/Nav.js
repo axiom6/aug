@@ -261,12 +261,8 @@ Nav = class Nav {
     if (!sectObj['imgs']) {
       this.imgsNum = 0;
     }
-    console.log('Nav.dirTalk()', {
-      imgsNum: this.imgsNum,
-      sectObj: sectObj
-    });
+    // console.log( 'Nav.dirTalk()', { imgsNum:@imgsNum, sectObj:sectObj } )
     if (this.imgsNum > 0) {
-      this.pageKey = 'None';
       if (dir === 'west') {
         this.imgsIdx = this.prevImg();
       }
@@ -279,6 +275,7 @@ Nav = class Nav {
       if (dir === 'next') {
         this.pageKey = this.nextPage(this.pageKey, sectObj.keys, sectObj.peys);
       }
+      sectObj.imgsIdx = this.imgsIdx;
     } else if (this.isPageTalk(sectObj, hasChildren, this.pageKey)) {
       this.pageKey = (function() {
         switch (dir) {
