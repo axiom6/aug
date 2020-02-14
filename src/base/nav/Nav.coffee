@@ -165,27 +165,19 @@ class Nav
     msg.source  = "#{'Nav.dirTalk'}(#{dir})"
     sectObj     = @mix().sectObject( @pracKey, @dispKey )
     hasChildren = @mix().isArray(sectObj.keys)
-    @pageKey    = 'None' if not @pageKey?
     @dispKey    = sectObj.name
     @imgsNum    = 0 if not sectObj['imgs']
-    # console.log( 'Nav.dirTalk()', { imgsNum:@imgsNum, sectObj:sectObj } )
-    if @imgsNum > 0
-      @imgsIdx = @prevImg()                                        if dir is 'west'
-      @imgsIdx = @nextImg()                                        if dir is 'east'
-      @pageKey = @prevKey(  @pageKey, sectObj.keys )               if dir is 'north'
-      @pageKey = @nextKey(  @pageKey, sectObj.keys )               if dir is 'south'
-      @pageKey = @prevKey(  @pageKey, sectObj.keys )               if dir is 'prev'
-      @pageKey = @nextPage( @pageKey, sectObj.keys, sectObj.peys ) if dir is 'next'
-      sectObj.imgsIdx = @imgsIdx
+    if @imgsNum > 0 and ( dir is 'west' or dir is 'east' )
+      @imgsIdx = @prevImg() if dir is 'west'
+      @imgsIdx = @nextImg() if dir is 'east'
     else if @isPageTalk( sectObj, hasChildren, @pageKey )
-       @pageKey   = switch dir
-         when 'west'  then @prevKey(  @pageKey, sectObj.keys )
-         when 'east'  then @nextKey(  @pageKey, sectObj.keys )
-         when 'prev'  then @prevKey(  @pageKey, sectObj.keys )
-         when 'next'  then @nextPage( @pageKey, sectObj.keys, sectObj.peys ) # Special case
-         else              'None'
+       @pageKey = switch dir
+         when 'west','north','prev' then @prevKey(  @pageKey, sectObj.keys )
+         when 'east','south'        then @nextKey(  @pageKey, sectObj.keys )
+         when 'next             '   then @nextPage( @pageKey, sectObj.keys, sectObj.peys ) # Special case
+         else 'None'
     else
-       @dispKey    = switch dir
+       @dispKey = switch dir
          when 'west'  then @prevKey(  @dispKey, sectObj.peys )
          when 'east'  then @nextKey(  @dispKey, sectObj.peys )
          when 'north' then @pageKey = 'None';          @dispKey
@@ -193,9 +185,11 @@ class Nav
          when 'prev'  then @prevKey(  @dispKey, sectObj.peys )
          when 'next'  then @nextDisp( @dispKey, sectObj.keys, sectObj.peys )  # Special case
          else              'None'
-    #console.log( 'Nav.dirTalk()', { dir:dir, sectObj:sectObj, dispKey:@dispKey, pageKey:@pageKey,hasChildren:hasChildren } )
+    console.log( 'Nav.dirTalk()', { dir:dir, pracKey:@pracKey, dispKey:@dispKey, pageKey:@pageKey, imgsIdx:@imgsIdx,
+    sectObj:sectObj, hasChildren:hasChildren } )
     msg.dispKey = @dispKey
     msg.pageKey = @pageKey
+    msg.imgsIdx = @imgsIdx
     @pub( msg )
     return
 

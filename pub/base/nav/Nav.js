@@ -257,44 +257,28 @@ Nav = class Nav {
     msg.source = `${'Nav.dirTalk'}(${dir})`;
     sectObj = this.mix().sectObject(this.pracKey, this.dispKey);
     hasChildren = this.mix().isArray(sectObj.keys);
-    if (this.pageKey == null) {
-      this.pageKey = 'None';
-    }
     this.dispKey = sectObj.name;
     if (!sectObj['imgs']) {
       this.imgsNum = 0;
     }
-    // console.log( 'Nav.dirTalk()', { imgsNum:@imgsNum, sectObj:sectObj } )
-    if (this.imgsNum > 0) {
+    if (this.imgsNum > 0 && (dir === 'west' || dir === 'east')) {
       if (dir === 'west') {
         this.imgsIdx = this.prevImg();
       }
       if (dir === 'east') {
         this.imgsIdx = this.nextImg();
       }
-      if (dir === 'north') {
-        this.pageKey = this.prevKey(this.pageKey, sectObj.keys);
-      }
-      if (dir === 'south') {
-        this.pageKey = this.nextKey(this.pageKey, sectObj.keys);
-      }
-      if (dir === 'prev') {
-        this.pageKey = this.prevKey(this.pageKey, sectObj.keys);
-      }
-      if (dir === 'next') {
-        this.pageKey = this.nextPage(this.pageKey, sectObj.keys, sectObj.peys);
-      }
-      sectObj.imgsIdx = this.imgsIdx;
     } else if (this.isPageTalk(sectObj, hasChildren, this.pageKey)) {
       this.pageKey = (function() {
         switch (dir) {
           case 'west':
-            return this.prevKey(this.pageKey, sectObj.keys);
-          case 'east':
-            return this.nextKey(this.pageKey, sectObj.keys);
+          case 'north':
           case 'prev':
             return this.prevKey(this.pageKey, sectObj.keys);
-          case 'next':
+          case 'east':
+          case 'south':
+            return this.nextKey(this.pageKey, sectObj.keys);
+          case 'next             ':
             return this.nextPage(this.pageKey, sectObj.keys, sectObj.peys); // Special case
           default:
             return 'None';
@@ -322,9 +306,18 @@ Nav = class Nav {
         }
       }).call(this);
     }
-    //console.log( 'Nav.dirTalk()', { dir:dir, sectObj:sectObj, dispKey:@dispKey, pageKey:@pageKey,hasChildren:hasChildren } )
+    console.log('Nav.dirTalk()', {
+      dir: dir,
+      pracKey: this.pracKey,
+      dispKey: this.dispKey,
+      pageKey: this.pageKey,
+      imgsIdx: this.imgsIdx,
+      sectObj: sectObj,
+      hasChildren: hasChildren
+    });
     msg.dispKey = this.dispKey;
     msg.pageKey = this.pageKey;
+    msg.imgsIdx = this.imgsIdx;
     this.pub(msg);
   }
 

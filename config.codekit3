@@ -6566,17 +6566,6 @@
 		"sC": 0,
 		"tS": 0
 		},
-	"/pub/lib/vue/vue-carousel.esm.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/pub/lib/vue/vue-carousel.esm-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
 	"/pub/lib/vue/vue-router.esm.js": {
 		"bF": 0,
 		"ft": 64,
@@ -8728,25 +8717,6 @@
 		"mi": 0,
 		"oA": 1,
 		"oAP": "/vue/geom/Roll-min.js",
-		"oF": 0,
-		"sC": 0,
-		"tS": 0
-		},
-	"/vue/imgs/Imgs.vue": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 0,
-		"oA": 1,
-		"oAP": "/pub/vue/imgs/Imgs.js",
-		"oF": 0
-		},
-	"/vue/imgs/Roll.js": {
-		"bF": 0,
-		"ft": 64,
-		"ma": 0,
-		"mi": 0,
-		"oA": 1,
-		"oAP": "/vue/imgs/Roll-min.js",
 		"oF": 0,
 		"sC": 0,
 		"tS": 0

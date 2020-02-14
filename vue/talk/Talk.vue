@@ -29,16 +29,16 @@
 
       onNav: function (obj) {
         if( this.mix().nav().isMyNav( obj, 'Talk' ) ) {
-            this.onSect( obj.pracKey, obj.dispKey, obj.pageKey ); } },
+            this.onSect( obj.pracKey, obj.dispKey, obj.pageKey, obj.imgsIdx ); } },
 
-      onSect: function( talkKey, sectKey, pageKey ) {
+      onSect: function( talkKey, sectKey, pageKey, imgsIdx ) {
         let  dispObj = this.mix().sectObject( talkKey, sectKey );
         this.sectObj = this.mix().isDef(pageKey) ? this.mix().pageObject(dispObj,pageKey) : dispObj;
         if( !this.mix().isDef(this.sectObj) ) {
           console.error( 'Talk.vue.onSect() sectObj null',
             { dispObj:dispObj, talkKey:talkKey, sectKey:sectKey, pageKey:pageKey } );
           this.sectObj = {}; }
-        this.sectObj.imgsIdx = this.mix().nav().imgsIdx;
+        this.sectObj.imgsIdx = imgsIdx;
         this.imgsObj = this.mix().compObject( 'Imgs' );
         // console.log( 'imgsObj', this.imgsObj );
       } },
