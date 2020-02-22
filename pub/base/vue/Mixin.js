@@ -215,6 +215,44 @@ Mixin = class Mixin {
                 return {};
               }
             },
+            inovObject: function(compKey, inovKey) {
+              var compPracs, inovPracs, key, prac, pracs;
+              pracs = {};
+              if ((this.pracs(compKey) != null) && (this.pracs(inovKey) != null)) {
+                compPracs = this.pracs(compKey);
+                inovPracs = this.pracs(inovKey);
+                for (key in compPracs) {
+                  prac = compPracs[key];
+                  if (prac.column === 'Innovate' && prac.row !== 'Dim') {
+                    pracs[key] = this.getPrac(inovPracs, prac.row, prac.column, inovKey);
+                  } else {
+                    pracs[key] = prac;
+                  }
+                }
+                return pracs;
+              } else {
+                console.error('Mixin.inovObject() bad compKey or inovKey', {
+                  compKey: compKey,
+                  inovKey: inovKey
+                });
+                return pracs;
+              }
+            },
+            getPrac: function(pracs, row, column, inovKey) {
+              var key, prac;
+              for (key in pracs) {
+                prac = pracs[key];
+                if (prac.row === row && prac.column === column) {
+                  return prac;
+                }
+              }
+              console.error('Mixin.getPrac() missing prac for', {
+                inovKey: inovKey,
+                row: row,
+                column: column
+              });
+              return {};
+            },
             pracObject: function(compKey, pracKey) {
               var prac;
               prac = {};

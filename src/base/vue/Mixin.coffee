@@ -146,6 +146,27 @@ class Mixin
                console.error('Mixin.compObject() bad compKey', compKey)
                {}
 
+          inovObject: (compKey,inovKey) ->
+            pracs = {}
+            if @pracs(compKey)? and @pracs(inovKey)?
+              compPracs = @pracs(compKey)
+              inovPracs = @pracs(inovKey)
+              for key, prac of compPracs
+                if prac.column is 'Innovate' and prac.row isnt 'Dim'
+                  pracs[key] = @getPrac(inovPracs,prac.row,prac.column,inovKey)
+                else
+                  pracs[key] = prac
+              pracs
+            else
+              console.error('Mixin.inovObject() bad compKey or inovKey', { compKey:compKey, inovKey:inovKey } )
+              pracs
+
+          getPrac: ( pracs, row, column, inovKey ) ->
+            for key, prac of pracs
+              return prac if prac.row is row and prac.column is column
+            console.error( 'Mixin.getPrac() missing prac for', { inovKey:inovKey, row:row, column:column } )
+            {}
+
           pracObject: (compKey, pracKey) ->
             prac = {}
             if @pracs(compKey)?

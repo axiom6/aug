@@ -165,8 +165,20 @@ Muse = (function() {
       url: 'muse/Wise.json',
       data: null
     },
+    Soft: {
+      url: 'inno/Soft.json',
+      data: null
+    },
     Data: {
-      url: 'muse/Data.json',
+      url: 'inno/Data.json',
+      data: null
+    },
+    Scie: {
+      url: 'inno/Scie.json',
+      data: null
+    },
+    Math: {
+      url: 'inno/Math.json',
       data: null
     },
     Talk: {

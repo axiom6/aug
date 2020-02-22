@@ -5427,34 +5427,66 @@
 		"opt": 0,
 		"q": 100
 		},
-	"/pub/data/innovate/Augm.json": {
+	"/pub/data/inno/Augm.json": {
 		"ft": 524288,
 		"oA": 1,
-		"oAP": "/pub/data/innovate/Augm-min.json",
+		"oAP": "/pub/data/inno/Augm-min.json",
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
 		},
-	"/pub/data/innovate/Data.json": {
+	"/pub/data/inno/Data.json": {
 		"ft": 524288,
 		"oA": 1,
-		"oAP": "/pub/data/innovate/Data-min.json",
+		"oAP": "/pub/data/inno/Data-min.json",
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
 		},
-	"/pub/data/innovate/Data2.json": {
+	"/pub/data/inno/Data1.json": {
 		"ft": 524288,
 		"oA": 1,
-		"oAP": "/pub/data/innovate/Data2-min.json",
+		"oAP": "/pub/data/inno/Data1-min.json",
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
 		},
-	"/pub/data/innovate/Mach.json": {
+	"/pub/data/inno/Data2.json": {
 		"ft": 524288,
 		"oA": 1,
-		"oAP": "/pub/data/innovate/Mach-min.json",
+		"oAP": "/pub/data/inno/Data2-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/inno/Mach.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/inno/Mach-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/inno/Math.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/inno/Math-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/inno/Scie.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/inno/Scie-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/pub/data/inno/Soft.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/pub/data/inno/Soft-min.json",
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
@@ -5495,14 +5527,6 @@
 		"ft": 524288,
 		"oA": 1,
 		"oAP": "/pub/data/muse/Cube-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/data/muse/Data.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/data/muse/Data-min.json",
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
@@ -5679,14 +5703,6 @@
 		"ft": 524288,
 		"oA": 1,
 		"oAP": "/pub/data/talk/Wise-min.json",
-		"oF": 0,
-		"oO": 0,
-		"oS": 1
-		},
-	"/pub/data/tall/Tall.json": {
-		"ft": 524288,
-		"oA": 1,
-		"oAP": "/pub/data/tall/Tall-min.json",
 		"oF": 0,
 		"oO": 0,
 		"oS": 1
@@ -11163,6 +11179,22 @@
 		"oS": 1,
 		"sC": 0,
 		"tS": 0
+		},
+	"/zzz/tall/Data.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/tall/Data-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
+	"/zzz/tall/Tall.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/zzz/tall/Tall-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
 		},
 	"/zzz/vue/comp/Comp.vue": {
 		"cB": 0,

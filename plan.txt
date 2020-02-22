@@ -1,4 +1,8 @@
 
+0. Work
+   a. inovPracs in Toc
+   b. Update screen when inovKey eq compKey
+   
 1. Tasks
    a. Apple ID for App store
    b. Groom

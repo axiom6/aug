@@ -2,7 +2,7 @@
 <template>
   <div class="comp-pane">
     <b-tabs route="Comp" :pages="pages" position="left" ></b-tabs>
-    <b-tabs route="Inov" :pages="inovs" position="right" v-if="hasInovs()"></b-tabs>
+    <b-tabs route="Inov" :pages="inovPages()" position="right" v-if="hasInovs()"></b-tabs>
     <div class="comp-comp" ref="Comp">
       <template v-for="pracObj in compObj">
         <div   :class="pracObj.dir">
@@ -36,37 +36,54 @@
 
     components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },
     
-    data() { return { compKey:'None', compObj:null, pracObj:{}, myRows:{},
+    data() { return { compKey:'None', compObj:null, pracObj:{}, myRows:{}, inovKey:'None',
       pages:{
         Sign: { title:'Practices',    key:'Sign', show:true  },
         Dirs: { title:'Disciplines',  key:'Dirs', show:false },
         Conn: { title:'Connections',  key:'Conn', show:false },
         Desc: { title:'Descriptions', key:'Desc', show:false } },
-      inovs:{
-        Info: { title:'Tech', key:'Info', show:true  },
-        Data: { title:'Data', key:'Data', show:false } },
+      infos:{
+        Info: { title:'Information',  key:"Info", show:true,  icon:"fas fa-th"         },
+        Soft: { title:'Software',     key:"Soft", show:false, icon:"fas fa-codepen"    },
+        Data: { title:'Data',         key:"Data", show:false, icon:"fas fa-table"      } },
+      knows:{
+        Know: { title:'Knowledge',    key:"Know", show:true,  icon:"fas fa-university" },
+        Scie: { title:'Science',      key:"Scie", show:false, icon:"fas fa-flask"          },
+        Math: { title:'Math',         key:"Math", show:false, icon:"fas fa-calculator"     } },
+      wises:{
+        Wise: { title:'Wisdom',       key:"Wise", show:true, icon:"fas fa-tripadvisor" } },
       rows: {
-        Plane:{ name:'Information', dir:'cm', icon:"fas fas fa-th" },
+        Plane:{ name:'Information', dir:'cm', icon:"fas fa-th" },
         Learn:{ name:'Learn',       dir:'le', icon:"fas fa-graduation-cap" },
-        Do:{    name:'Do',          dir:'do', icon:"fas fas fa-cog" },
-        Share:{ name:'Share',       dir:'sh', icon:"fas fa-share-alt-square" } },
-      planes: {
-        Info:{ name:'Tech',      dir:'cm', icon:"fas fas fa-cogs" },
-        Know:{ name:'Knowledge', dir:'cm', icon:"fas fas fa-university"  },
-        Wise:{ name:'Wisdom',    dir:'cm', icon:"fas fas fa-tripadvisor" },
-        Data:{ name:'Data',      dir:'cm', icon:"fas fas fa-table" } } } },
+        Do:{    name:'Do',          dir:'do', icon:"fas fa-cog" },
+        Share:{ name:'Share',       dir:'sh', icon:"fas fa-share-alt-square" } } } },
     
     methods: {
+      inovPages: function() {
+        let pages = this.infos;
+        if(      this.compKey==='Info' ) { pages = this.infos; }
+        else if( this.compKey==='Know' ) { pages = this.knows; }
+        else if( this.compKey==='Wise' ) { pages = this.wises; }
+        return pages; },
+      isComp: function (key) {
+        return key==='Info' || key==='Know' || key==='Wise'; },
       hasInovs: function() {
-        return this.compKey==='Info' || this.compKey==='Data'  },
+        return this.compKey==='Info' || this.compKey==='Know' || this.compKey==='Wise' },
       onRows: function (compKey) {
+         let pages            = this.inovPages();
          this.myRows          = this.rows;
-         this.myRows['Plane'] = this.planes[compKey]; },
-      onComp: function (compKey) {
-        if( this.compKey!==compKey ) {
-            this.compKey = compKey;
-            this.compObj = this.mix().compObject(compKey);
-            this.onRows( compKey); } },
+         this.myRows['Plane'] = pages[compKey]; },
+      onComp: function (key) {
+        if( this.compKey!==key ) {
+          this.inovKey = key;
+          if( this.isComp(key) ) {
+            this.compKey = key;
+            console.log( 'Comp.vue.onComp() compObj', { compKey:this.compKey } );
+            this.compObj = this.mix().compObject(this.compKey);
+            this.onRows( this.compKey ); }
+          else {
+            console.log( 'Comp.vue.onComp() inovObj', { compKey:this.compKey, inovKey:this.inovKey } );
+            this.compObj = this.mix().inovObject(this.compKey,this.inovKey); } } },
       isDim: function ( pracObj ) {
         return pracObj.row==="Dim"; },
       isRows: function () {

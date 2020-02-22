@@ -31,7 +31,10 @@ class Muse
     Info:     { url:'muse/Info.json', data:null }
     Know:     { url:'muse/Know.json', data:null }
     Wise:     { url:'muse/Wise.json', data:null }
-    Data:     { url:'muse/Data.json', data:null }
+    Soft:     { url:'inno/Soft.json', data:null }
+    Data:     { url:'inno/Data.json', data:null }
+    Scie:     { url:'inno/Scie.json', data:null }
+    Math:     { url:'inno/Math.json', data:null }
     Talk:     { url:'talk/Talk.json', data:null }
     Imgs:     { url:'imgs/Imgs.json', data:null }
     SkycTalk: { url:'talk/Skyc.json', data:null }

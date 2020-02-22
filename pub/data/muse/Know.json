@@ -23,7 +23,7 @@
       "Dance":      { "icon":"fab fa-pied-piper-alt", "desc":"" },
       "Theater":    { "icon":"fas fa-theater-masks", "desc":"" } }
   },
-  "Science":{ "type":"pane", "hsv":[45,90,90],"column":"Innovate","row":"Learn","plane":"Know","icon":"fas fa-flask",
+  "Concept":{ "type":"pane", "hsv":[45,90,90],"column":"Innovate","row":"Learn","plane":"Know","icon":"fas fa-flask",
     "cells":[17,12,7,12],  "dir":"north", "neg":"Dogma",
     "desc":"",
     "Observe":    { "dir":"west", "icon":"fas fa-binoculars", "hsv":[195,90,70], "paradigm":"Empirical",
