@@ -307,7 +307,7 @@ class Nav
     @getPageKey( route, defn )
 
   setPageKey:( route, pageKey ) ->
-    @pageKey = pageKey if not @isInov(route)
+    @pageKey = pageKey if not @isInov(route,pageKey)
     return             if not @hasPages(route)
     for own key, page  of @pages[route].pages
       page.show = key  is pageKey
@@ -331,7 +331,7 @@ class Nav
 
   # Inov plays a roll is validating pageKey
   isPageKey:( pageKey ) ->
-    pageKey? and pageKey isnt 'None' and not @isInov(pageKey)
+    pageKey? and pageKey isnt 'None' and not @isInov(@route)
 
   hasPageKey:( route, pageKey ) ->
     pageKey isnt 'None' and @hasPages(route) and @pages[route].pages[pageKey]?
@@ -380,8 +380,8 @@ class Nav
   # --- Innovate --- Inov in one place
 
   # Across the board Inov detector for compKey pageKey and route
-  isInov:( e ) ->
-    @inArray( e, ['Info','Data','Inov'] )
+  isInov:( route ) ->
+    @inArray( route, ['Inov','Info','Know','Wise'] ) # and route isnt pageKey
 
   # A hack for Innovate Tabs
   tabInov:( msg ) ->
@@ -396,10 +396,10 @@ class Nav
     return if not @isInov(msg.compKey)
     saveKey = @pageKey
     msh = Object.assign( {}, msg )
-    @setPageKey( 'Inov', msh.compKey )
+    @setPageKey( msh.route, msh.compKey )
     msh.source = "#{'Nav.dirInov'}(#{dir})"
     msh.route  = 'Inov'
-    msh.pageKey = msh.compKey
+    #sh.pageKey = msh.compKey
     @pub( msh )
     @pageKey = saveKey
     return

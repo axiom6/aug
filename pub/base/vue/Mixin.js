@@ -238,6 +238,22 @@ Mixin = class Mixin {
                 return pracs;
               }
             },
+            tocsObject: function(compKey, inovKey) {
+              console.log('Mixin.tocsObject()', {
+                compKey: compKey,
+                inovKey: inovKey
+              });
+              if (compKey === 'Home') {
+                return {};
+              } else if (!this.isDef(inovKey) || (this.isPlane(inovKey) && compKey === inovKey)) {
+                return this.compObject(compKey);
+              } else {
+                return this.inovObject(compKey, inovKey);
+              }
+            },
+            isPlane: function(key) {
+              return key === 'Info' || key === 'Know' || key === 'Wise';
+            },
             getPrac: function(pracs, row, column, inovKey) {
               var key, prac;
               for (key in pracs) {

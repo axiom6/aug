@@ -161,6 +161,18 @@ class Mixin
               console.error('Mixin.inovObject() bad compKey or inovKey', { compKey:compKey, inovKey:inovKey } )
               pracs
 
+          tocsObject: (compKey,inovKey) ->
+            console.log( 'Mixin.tocsObject()', { compKey:compKey, inovKey:inovKey } )
+            if compKey is 'Home'
+              {}
+            else if not @isDef(inovKey) or ( @isPlane(inovKey) and compKey is inovKey )
+              @compObject(compKey)
+            else
+              @inovObject(compKey,inovKey)
+
+          isPlane: (key) ->
+            key is 'Info' or key is 'Know' or key is 'Wise'
+
           getPrac: ( pracs, row, column, inovKey ) ->
             for key, prac of pracs
               return prac if prac.row is row and prac.column is column

@@ -6,7 +6,7 @@
         <div   v-on:click="doComp(komp.key)">
           <div  :style="styleComp(komp.key)"><i :class="komp.icon"></i>{{komp.title}}</div>
         </div>
-        <ul v-if="myKomp(komp.key)"><template v-for="prac in myPracs(compKey)" >
+        <ul v-if="myKomp(komp.key)"><template v-for="prac in tocPracs(compKey)" >
           <li v-on:click="doPrac(prac.name)" :style="style(prac)" :key="prac.name">
             <i :class="prac.icon"></i>
             <span>{{prac.name}}</span>
@@ -26,14 +26,9 @@
   let Tocs = {
     
     data: function() {
-      return { komps:{}, compPracs:{}, compKey:'Home', pracKey:'None', dispKey:'None' } },
+      return { komps:{}, compKey:'Home', pracKey:'None', dispKey:'None', pageKey:'None' } },
     
     methods: {
-      myPracs: function(compKey) {
-        let pracs = {}
-        if(      compKey!=='Talk' && this.mix().isDef(this.compPracs[compKey]) ) { pracs = this.compPracs[compKey];   }
-        else if( compKey!=='Talk' && this.mix().isDef(this.komps[compKey])     ) { pracs = this.komps[compKey].pracs; }
-        return pracs; },
       myKomp: function(kompKey) {
         return kompKey===this.compKey || ( kompKey==='Info' && this.compKey==='Data' ) },
       doComp: function(compKey) {
@@ -56,29 +51,26 @@
         if( obj.source !== 'Toc' ) {
           if( this.compKey !== obj.compKey ) { this.compKey = obj.compKey; }
           if( this.pracKey !== obj.pracKey ) { this.pracKey = obj.pracKey; }
-          if( this.dispKey !== obj.dispKey ) { this.dispKey = obj.dispKey; } } },
+          if( this.dispKey !== obj.dispKey ) { this.dispKey = obj.dispKey; }
+          if( this.pageKey !== obj.pageKey ) { this.pageKey = obj.pageKey; } } },
       styleComp: function( kompKey ) {
         return this.myKomp(kompKey) ? { backgroundColor:'wheat', color:'black', borderRadius:'0 24px 24px 0' }
                                     : { backgroundColor:'#333',  color:'wheat', borderRadius:'0 24px 24px 0' }; },
       style: function( ikwObj ) {
         return this.mix().styleObj(ikwObj); },
-      filterPracs: function(pracs,compKey) {
-        let filt = {}
+
+      tocPracs: function(compKey) {
+        let pracs = compKey!=='Talk' ? this.mix().tocsObject( compKey, this.pageKey ) : {};
+        let filts = {}
         for( let key in pracs ) {
           let prac = pracs[key];
           if( prac.row !== 'Dim' || compKey === 'Prin' ) {
-            filt[key] = prac; } }
-        return filt; },
+            filts[key] = prac; } }
+        return filts; },
       },
 
     beforeMount: function () {
-      this.komps = this.mix().kompsTocs();
-      for( let key in this.komps ) {
-        let komp = this.komps[key]
-        if( komp.ikw ) {
-            komp.pracs = this.filterPracs( this.mix().pracs(key), key ); } }
-      if( this.mix().isPageKeyComp('Data') ) {
-        this.compPracs['Data'] = this.filterPracs( this.mix().pracs('Data'),'Data'); } },
+      this.komps = this.mix().kompsTocs(); },
     
     mounted: function () {
       this.mix().subscribe( 'Nav', 'Tocs.vue', (obj) => {

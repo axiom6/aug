@@ -491,7 +491,7 @@ Nav = class Nav {
 
   setPageKey(route, pageKey) {
     var key, page, ref;
-    if (!this.isInov(route)) {
+    if (!this.isInov(route, pageKey)) {
       this.pageKey = pageKey;
     }
     if (!this.hasPages(route)) {
@@ -532,7 +532,7 @@ Nav = class Nav {
 
   // Inov plays a roll is validating pageKey
   isPageKey(pageKey) {
-    return (pageKey != null) && pageKey !== 'None' && !this.isInov(pageKey);
+    return (pageKey != null) && pageKey !== 'None' && !this.isInov(this.route);
   }
 
   hasPageKey(route, pageKey) {
@@ -606,10 +606,16 @@ Nav = class Nav {
   // --- Innovate --- Inov in one place
 
   // Across the board Inov detector for compKey pageKey and route
-  isInov(e) {
-    return this.inArray(e, ['Info', 'Data', 'Inov']);
+  isInov(route) {
+    return this.inArray(route, [
+      'Inov',
+      'Info',
+      'Know',
+      'Wise' // and route isnt pageKey
+    ]);
   }
 
+  
   // A hack for Innovate Tabs
   tabInov(msg) {
     if ((msg.route != null) && this.isInov(msg.route) && msg.source === 'Tabs') {
@@ -628,10 +634,10 @@ Nav = class Nav {
     }
     saveKey = this.pageKey;
     msh = Object.assign({}, msg);
-    this.setPageKey('Inov', msh.compKey);
+    this.setPageKey(msh.route, msh.compKey);
     msh.source = `${'Nav.dirInov'}(${dir})`;
     msh.route = 'Inov';
-    msh.pageKey = msh.compKey;
+    //sh.pageKey = msh.compKey
     this.pub(msh);
     this.pageKey = saveKey;
   }

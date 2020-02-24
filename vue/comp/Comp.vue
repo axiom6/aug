@@ -65,10 +65,8 @@
         else if( this.compKey==='Know' ) { pages = this.knows; }
         else if( this.compKey==='Wise' ) { pages = this.wises; }
         return pages; },
-      isComp: function (key) {
-        return key==='Info' || key==='Know' || key==='Wise'; },
       hasInovs: function() {
-        return this.compKey==='Info' || this.compKey==='Know' || this.compKey==='Wise' },
+        return this.mix().isPlane(this.compKey) },
       onRows: function (compKey) {
          let pages            = this.inovPages();
          this.myRows          = this.rows;
@@ -76,7 +74,7 @@
       onComp: function (key) {
         if( this.compKey!==key ) {
           this.inovKey = key;
-          if( this.isComp(key) ) {
+          if( this.mix().isPlane(key) ) {
             this.compKey = key;
             console.log( 'Comp.vue.onComp() compObj', { compKey:this.compKey } );
             this.compObj = this.mix().compObject(this.compKey);

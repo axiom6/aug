@@ -1,6 +1,6 @@
 
 0. Work
-   a. inovPracs in Toc
+   a. inovKey from pageKey in Tocs
    b. Update screen when inovKey eq compKey
    
 1. Tasks
