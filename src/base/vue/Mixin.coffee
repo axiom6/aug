@@ -111,6 +111,8 @@ class Mixin
             route is @navRoute()
 
           # Batch
+          isBatch:(compk) ->
+            Mixin.Main.Batch[compk]?
           prin: ()  ->
             Mixin.Main.Batch['Prin'].data.pracs
           comps: (compk) ->
@@ -165,7 +167,7 @@ class Mixin
             console.log( 'Mixin.tocsObject()', { compKey:compKey, inovKey:inovKey } )
             if compKey is 'Home'
               {}
-            else if not @isDef(inovKey) or ( @isPlane(inovKey) and compKey is inovKey )
+            else if not @isDef(inovKey) or not @isBatch(inovKey) or ( @isPlane(inovKey) and compKey is inovKey )
               @compObject(compKey)
             else
               @inovObject(compKey,inovKey)

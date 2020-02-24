@@ -30,11 +30,10 @@
     
     methods: {
       myKomp: function(kompKey) {
-        return kompKey===this.compKey || ( kompKey==='Info' && this.compKey==='Data' ) },
+        return kompKey===this.compKey && this.mix().isBatch(this.compKey) },
       doComp: function(compKey) {
         this.compKey = compKey;
-        let  kompKey = this.mix().isMuse() && compKey==='Data'  ? 'Info' : compKey;
-        let  route   = this.komps[kompKey].route;
+        let  route   = this.komps[compKey].route;
         this.pub( { route:route, compKey:compKey, source:'Toc' } ); },
       doPrac: function(pracKey) {
         this.pracKey = pracKey;

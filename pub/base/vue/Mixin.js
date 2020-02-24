@@ -157,6 +157,9 @@ Mixin = class Mixin {
               return route === this.navRoute();
             },
             // Batch
+            isBatch: function(compk) {
+              return Mixin.Main.Batch[compk] != null;
+            },
             prin: function() {
               return Mixin.Main.Batch['Prin'].data.pracs;
             },
@@ -245,7 +248,7 @@ Mixin = class Mixin {
               });
               if (compKey === 'Home') {
                 return {};
-              } else if (!this.isDef(inovKey) || (this.isPlane(inovKey) && compKey === inovKey)) {
+              } else if (!this.isDef(inovKey) || !this.isBatch(inovKey) || (this.isPlane(inovKey) && compKey === inovKey)) {
                 return this.compObject(compKey);
               } else {
                 return this.inovObject(compKey, inovKey);
