@@ -21,6 +21,7 @@ Nav = class Nav {
     this.pracKey = 'None';
     this.dispKey = 'None';
     this.pageKey = 'None';
+    this.inovKey = 'None';
     this.warnMsg = 'None';
     this.imgsIdx = 0;
     this.imgsNum = 0;
@@ -63,6 +64,7 @@ Nav = class Nav {
       pracKey: this.pracKey,
       dispKey: this.dispKey,
       pageKey: this.pageKey,
+      inovKey: this.inovKey,
       warnMsg: this.warnMsg,
       imgsIdx: this.imgsIdx
     };
@@ -491,8 +493,11 @@ Nav = class Nav {
 
   setPageKey(route, pageKey) {
     var key, page, ref;
-    if (!this.isInov(route, pageKey)) {
+    if (!this.isInov(route)) {
       this.pageKey = pageKey;
+    }
+    if (route === 'Inov') {
+      this.inovKey = pageKey;
     }
     if (!this.hasPages(route)) {
       return;
@@ -619,8 +624,9 @@ Nav = class Nav {
   // A hack for Innovate Tabs
   tabInov(msg) {
     if ((msg.route != null) && this.isInov(msg.route) && msg.source === 'Tabs') {
-      msg.route = 'Comp';
-      msg.compKey = msg.pageKey;
+      msg.route = msg.route === 'Inov' ? 'Inov' : 'Comp';
+      msg.compKey = msg.route === 'Inov' ? this.compKey : msg.route;
+      msg.inovKey = msg.pageKey;
       msg.pageKey = this.getPageKey('Comp');
     }
     return msg;

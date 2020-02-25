@@ -14,6 +14,7 @@ class Nav
     @pracKey    = 'None'
     @dispKey    = 'None'
     @pageKey    = 'None'
+    @inovKey    = 'None'
     @warnMsg    = 'None'
     @imgsIdx    = 0
     @imgsNum    = 0
@@ -38,7 +39,8 @@ class Nav
     @set( msg )
     @warnMsg = 'None' if not msg.warnMsg?
     @source  = 'None' if not msg.source?
-    { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey,pageKey:@pageKey,warnMsg:@warnMsg,imgsIdx:@imgsIdx }
+    { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey,
+    pageKey:@pageKey, inovKey:@inovKey, warnMsg:@warnMsg, imgsIdx:@imgsIdx }
 
   set:( msg ) ->
     msg = @tabInov(msg) # Revise tab innovate messages
@@ -307,7 +309,8 @@ class Nav
     @getPageKey( route, defn )
 
   setPageKey:( route, pageKey ) ->
-    @pageKey = pageKey if not @isInov(route,pageKey)
+    @pageKey = pageKey if not @isInov(route)
+    @inovKey = pageKey if route is 'Inov'
     return             if not @hasPages(route)
     for own key, page  of @pages[route].pages
       page.show = key  is pageKey
@@ -386,8 +389,9 @@ class Nav
   # A hack for Innovate Tabs
   tabInov:( msg ) ->
     if msg.route? and @isInov(msg.route) and msg.source is 'Tabs'
-       msg.route   = 'Comp'
-       msg.compKey = msg.pageKey
+       msg.route   = if msg.route is 'Inov' then 'Inov'   else 'Comp'
+       msg.compKey = if msg.route is 'Inov' then @compKey else msg.route
+       msg.inovKey = msg.pageKey
        msg.pageKey = @getPageKey( 'Comp' )
     msg
 

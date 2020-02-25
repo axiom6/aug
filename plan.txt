@@ -1,7 +1,6 @@
 
 0. Work
-   a. inovKey from pageKey in Tocs
-   b. Update screen when inovKey eq compKey
+   a. Change Inov name
    
 1. Tasks
    a. Apple ID for App store

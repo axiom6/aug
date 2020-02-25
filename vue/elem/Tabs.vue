@@ -11,7 +11,8 @@
 
   export default {
 
-    props: { route:String, pages:Object, defn:{ default:'null', type:String }, position:{ default:'full', type:String } },
+    props: { route:String, pages:Object, compKey:String, defn:{ default:'null', type:String },
+             position:{ default:'full', type:String } },
     
     data() { return { pageKey:'None', pageObj:null,
       positions:{ left:{ left:0, width:'60%' }, right:{ left:'60%', width:'40%' }, full:{ left:0, width:'100%' } } } },
@@ -23,8 +24,8 @@
           this.mix().nav().setPageKey( this.route, key ); } },
       doPage: function (key) {
           this.onPage( key );
-          let route = this.mix().isDef(this.pages[key].route) ? this.pages[key].route : this.route
-          this.mix().nav().pub( { source:'Tabs', route:route, pageKey:key } ); },
+          //let route = this.mix().isDef(this.pages[key].route) ? this.pages[key].route : this.route
+          this.mix().nav().pub( { source:'Tabs', route:this.route, compKey:this.compKey, pageKey:key, inovKey:key } ); },
       stylePos: function () {
         return this.positions[this.position]; },
       classTab: function (pageKey) {

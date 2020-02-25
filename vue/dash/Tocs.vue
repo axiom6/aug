@@ -6,7 +6,7 @@
         <div   v-on:click="doComp(komp.key)">
           <div  :style="styleComp(komp.key)"><i :class="komp.icon"></i>{{komp.title}}</div>
         </div>
-        <ul v-if="myKomp(komp.key)"><template v-for="prac in tocPracs(compKey)" >
+        <ul v-if="myKomp(komp.key)"><template v-for="prac in tocPracs(compKey,inovKey)" >
           <li v-on:click="doPrac(prac.name)" :style="style(prac)" :key="prac.name">
             <i :class="prac.icon"></i>
             <span>{{prac.name}}</span>
@@ -26,7 +26,7 @@
   let Tocs = {
     
     data: function() {
-      return { komps:{}, compKey:'Home', pracKey:'None', dispKey:'None', pageKey:'None' } },
+      return { komps:{}, compKey:'Home', pracKey:'None', dispKey:'None', inovKey:'None', routNav:'None' } },
     
     methods: {
       myKomp: function(kompKey) {
@@ -51,20 +51,26 @@
           if( this.compKey !== obj.compKey ) { this.compKey = obj.compKey; }
           if( this.pracKey !== obj.pracKey ) { this.pracKey = obj.pracKey; }
           if( this.dispKey !== obj.dispKey ) { this.dispKey = obj.dispKey; }
-          if( this.pageKey !== obj.pageKey ) { this.pageKey = obj.pageKey; } } },
+          if( this.inovKey !== obj.inovKey ) { this.inovKey = obj.inovKey; }
+          if( this.routNav !== obj.route   ) { this.routNav = obj.route;   } } },
       styleComp: function( kompKey ) {
         return this.myKomp(kompKey) ? { backgroundColor:'wheat', color:'black', borderRadius:'0 24px 24px 0' }
                                     : { backgroundColor:'#333',  color:'wheat', borderRadius:'0 24px 24px 0' }; },
       style: function( ikwObj ) {
         return this.mix().styleObj(ikwObj); },
 
-      tocPracs: function(compKey) {
-        let pracs = compKey!=='Talk' ? this.mix().tocsObject( compKey, this.pageKey ) : {};
+      tocPracs: function(compKey,inovKey) {
+        let pracs = {};
+        if( this.routNav === 'Inov' ) {
+          pracs = this.mix().inovObject( compKey, inovKey ); }
+        else if( compKey !== 'Talk' ) {
+          pracs = this.mix().compObject( compKey ); }
         let filts = {}
         for( let key in pracs ) {
           let prac = pracs[key];
           if( prac.row !== 'Dim' || compKey === 'Prin' ) {
             filts[key] = prac; } }
+        // console.log( 'Tocs.tocPracs()', { route:this.routNav, compKey:compKey, inovKey:inovKey } )
         return filts; },
       },
 
