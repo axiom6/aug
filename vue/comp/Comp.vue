@@ -36,7 +36,7 @@
 
     components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },
     
-    data() { return { compKey:'None', compObj:null, pracObj:{}, myRows:{},
+    data() { return { compKey:'None', inovKey:'None', compObj:null, pracObj:{}, myRows:{},
       pages:{
         Sign: { title:'Practices',    key:'Sign', show:true  },
         Dirs: { title:'Disciplines',  key:'Dirs', show:false },
@@ -72,25 +72,21 @@
          this.myRows          = this.rows;
          this.myRows['Plane']      = pages[compKey];
          this.myRows['Plane'].name = pages[compKey].title
-         this.myRows['Plane'].dir  = 'cm';
-         console.log( 'Comp.onRows()', { compKey:compKey, pages:pages, plane:this.myRows['Plane'] } ) },
+         this.myRows['Plane'].dir  = 'cm';  },
       onComp: function( obj ) {
         this.compKey = obj.compKey;
         this.onRows( this.compKey );
-        if( obj.route === 'Comp' ) {
-          // console.log( 'Comp.vue.onComp() compObj', { compKey:this.compKey } );
-          this.compObj = this.mix().compObject(this.compKey); }
-        else if( obj.route === 'Inov' ) {
-          // console.log( 'Comp.vue.onComp() inovObj', { compKey:this.compKey, inovKey:obj.inovKey } );
-          this.compObj = this.mix().inovObject( this.compKey, obj.inovKey ); } },
+        if( obj.route === 'Inov' ) {
+          this.inovKey = obj.inovKey; }
+        this.compObj = this.mix().inovObject( this.compKey, this.inovKey ); },
+
       isDim: function ( pracObj ) {
         return pracObj.row==="Dim"; },
       isRows: function () {
         return true; },
       onNav:  function( obj ) {
-        if( obj.route === 'Comp' || obj.route === 'Inov'  ) { // ) && this.compKey !== obj.compKey
-            this.onComp( obj ); } }
-      },
+        if( obj.route === 'Comp' || obj.route === 'Inov'  ) {
+            this.onComp( obj ); } } },
 
     beforeMount: function() {
       this.onComp( { route:'Comp', compKey:this.mix().nav().compKey } ); },

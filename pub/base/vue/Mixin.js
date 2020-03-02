@@ -221,16 +221,20 @@ Mixin = class Mixin {
             inovObject: function(compKey, inovKey) {
               var compPracs, inovPracs, key, prac, pracs;
               pracs = {};
-              if ((this.pracs(compKey) != null) && (this.pracs(inovKey) != null)) {
+              if (this.pracs(compKey) != null) {
                 compPracs = this.pracs(compKey);
-                inovPracs = this.pracs(inovKey);
-                for (key in compPracs) {
-                  prac = compPracs[key];
-                  if (prac.column === 'Innovate' && prac.row !== 'Dim') {
-                    pracs[key] = this.getPrac(inovPracs, prac.row, prac.column, inovKey);
-                  } else {
-                    pracs[key] = prac;
+                if (this.isDef(inovKey) && inovKey !== compKey && (this.pracs(inovKey) != null)) {
+                  inovPracs = this.pracs(inovKey);
+                  for (key in compPracs) {
+                    prac = compPracs[key];
+                    if (prac.column === 'Innovate' && prac.row !== 'Dim') {
+                      pracs[key] = this.getPrac(inovPracs, prac.row, prac.column, inovKey);
+                    } else {
+                      pracs[key] = prac;
+                    }
                   }
+                } else {
+                  pracs = compPracs;
                 }
                 return pracs;
               } else {

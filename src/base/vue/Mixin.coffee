@@ -150,14 +150,17 @@ class Mixin
 
           inovObject: (compKey,inovKey) ->
             pracs = {}
-            if @pracs(compKey)? and @pracs(inovKey)?
+            if @pracs(compKey)?
               compPracs = @pracs(compKey)
-              inovPracs = @pracs(inovKey)
-              for key, prac of compPracs
-                if prac.column is 'Innovate' and prac.row isnt 'Dim'
-                  pracs[key] = @getPrac(inovPracs,prac.row,prac.column,inovKey)
-                else
-                  pracs[key] = prac
+              if @isDef(inovKey) and inovKey isnt compKey and @pracs(inovKey)?
+                inovPracs = @pracs(inovKey)
+                for key, prac of compPracs
+                  if prac.column is 'Innovate' and prac.row isnt 'Dim'
+                    pracs[key] = @getPrac(inovPracs,prac.row,prac.column,inovKey)
+                  else
+                    pracs[key] = prac
+              else
+                pracs = compPracs
               pracs
             else
               console.error('Mixin.inovObject() bad compKey or inovKey', { compKey:compKey, inovKey:inovKey } )

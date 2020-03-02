@@ -24,8 +24,8 @@
           this.mix().nav().setPageKey( this.route, key ); } },
       doPage: function (key) {
           this.onPage( key );
-          //let route = this.mix().isDef(this.pages[key].route) ? this.pages[key].route : this.route
-          this.mix().nav().pub( { source:'Tabs', route:this.route, compKey:this.compKey, pageKey:key, inovKey:key } ); },
+          let inovKey = this.route === 'Inov' ? key : 'None'
+          this.mix().nav().pub( { source:'Tabs', route:this.route, compKey:this.compKey, pageKey:key, inovKey:inovKey } ); },
       stylePos: function () {
         return this.positions[this.position]; },
       classTab: function (pageKey) {

@@ -60,17 +60,12 @@
         return this.mix().styleObj(ikwObj); },
 
       tocPracs: function(compKey,inovKey) {
-        let pracs = {};
-        if( this.routNav === 'Inov' ) {
-          pracs = this.mix().inovObject( compKey, inovKey ); }
-        else if( compKey !== 'Talk' ) {
-          pracs = this.mix().compObject( compKey ); }
+        let pracs = this.mix().inovObject( compKey, inovKey );
         let filts = {}
         for( let key in pracs ) {
           let prac = pracs[key];
           if( prac.row !== 'Dim' || compKey === 'Prin' ) {
             filts[key] = prac; } }
-        // console.log( 'Tocs.tocPracs()', { route:this.routNav, compKey:compKey, inovKey:inovKey } )
         return filts; },
       },
 
