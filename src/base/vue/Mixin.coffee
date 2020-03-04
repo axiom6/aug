@@ -150,13 +150,15 @@ class Mixin
 
           inovObject: (compKey,inovKey) ->
             pracs = {}
-            if @pracs(compKey)?
+            if @isBatch(compKey)
               compPracs = @pracs(compKey)
-              if @isDef(inovKey) and inovKey isnt compKey and @pracs(inovKey)?
+              if @isDef(inovKey) and inovKey isnt compKey and @isBatch(inovKey)
                 inovPracs = @pracs(inovKey)
+                # console.log( 'Mixin.inovObject() inovPracs', inovPracs )
                 for key, prac of compPracs
                   if prac.column is 'Innovate' and prac.row isnt 'Dim'
-                    pracs[key] = @getPrac(inovPracs,prac.row,prac.column,inovKey)
+                    inovPrac = @getPrac(inovPracs,prac.row,prac.column,inovKey)
+                    pracs[inovPrac.name] = inovPrac
                   else
                     pracs[key] = prac
               else
@@ -175,15 +177,13 @@ class Mixin
             console.error( 'Mixin.getPrac() missing prac for', { inovKey:inovKey, row:row, column:column } )
             {}
 
-          pracObject: (compKey, pracKey) ->
-            prac = {}
-            if @pracs(compKey)?
-              if @pracs(compKey)[pracKey]?
-                prac = @pracs(compKey)[pracKey]
-              else
-                console.error('Mixin.pracObj() unknown pracKey', {compKey: compKey, pracKey: pracKey})
+          pracObject:( compKey, inovKey, pracKey ) ->
+            pracs = @inovObject( compKey, inovKey )
+            prac  = {}
+            if pracs[pracKey]?
+              prac = pracs[pracKey]
             else
-              console.error('Mixin.pracObj() unknown compKey', {compKey: compKey, pracKey: pracKey})
+              console.error('Mixin.pracObject() unknown pracKey', { compKey:compKey, inovKey:inovKey, pracKey:pracKey, pracs:pracs } )
             prac
 
           sectObject: (pracKey, dispKey) ->
@@ -224,8 +224,19 @@ class Mixin
             else if sectObj.type is 'Disp' and pageKey isnt 'None'
               dataObj = @dispObject(sectObj.src, sectObj.name, pageKey)
             dataObj
-          dispObject: (compKey, pracKey, dispKey) ->
-            @disps(compKey, pracKey)[dispKey]
+
+          dispObject:( compKey, inovKey, pracKey, dispKey ) ->
+            disp = {}
+            pracs = @inovObject( compKey, inovKey )
+            if pracs[pracKey]?
+              prac = pracs[pracKey]
+              if prac[dispKey]?
+                disp = prac[dispKey]
+              else
+                console.error( 'Mixin.dispObject() unknown dispKey', { compKey:compKey, inovKey:inovKey, pracKey:pracKey, dispKey:dispKey } )
+            else
+              console.error( 'Mixin.dispObject() unknown pracKey',   { compKey:compKey, inovKey:inovKey, pracKey:pracKey, dispKey:dispKey } )
+            disp
 
           isPageKeyComp: (pageKey) ->
             pageKey is 'Info' or pageKey is 'Data' # @app() is 'Muse' and

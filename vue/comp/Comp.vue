@@ -1,8 +1,8 @@
 
 <template>
   <div class="comp-pane">
-    <b-tabs route="Comp" :pages="pages"       :compKey="compKey" position="left" ></b-tabs>
-    <b-tabs route="Inov" :pages="inovPages()" :compKey="compKey" position="right" v-if="hasInovs()"></b-tabs>
+    <b-tabs route="Comp" :pages="pages"       position="left" ></b-tabs>
+    <b-tabs route="Inov" :pages="inovPages()" position="right" v-if="hasInovs()"></b-tabs>
     <div class="comp-comp" ref="Comp">
       <template v-for="pracObj in compObj">
         <div   :class="pracObj.dir">

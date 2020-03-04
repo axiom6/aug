@@ -11,33 +11,41 @@
 
   export default {
 
-    props: { route:String, pages:Object, compKey:String, defn:{ default:'null', type:String },
-             position:{ default:'full', type:String } },
+    props: { route:String, pages:Object, defn:{ default:'null', type:String }, position:{ default:'full', type:String } },
     
     data() { return { pageKey:'None', pageObj:null,
       positions:{ left:{ left:0, width:'60%' }, right:{ left:'60%', width:'40%' }, full:{ left:0, width:'100%' } } } },
+
+    watch: {
+      pages() { this.onPage( this.setPages() ); } },
     
     methods: {
-      onPage: function (key) {
-        if( key !== 'None') {
-          this.pageKey = key;
-          this.mix().nav().setPageKey( this.route, key ); } },
+      setPages: function() {
+        return this.mix().nav().setPages( this.route, this.pages, this.defn ); },
+      onPage: function (pageKey) {
+        if( this.mix().isDef(pageKey) ) {
+          this.pageKey = pageKey;
+          this.mix().nav().setPageKey( this.route, pageKey ); }
+        else {
+          console.error( 'Tabs.vue.onPage() bad pageKey', pageKey ); } },
       doPage: function (key) {
           this.onPage( key );
-          let inovKey = this.route === 'Inov' ? key : 'None'
-          this.mix().nav().pub( { source:'Tabs', route:this.route, compKey:this.compKey, pageKey:key, inovKey:inovKey } ); },
+          let nav = this.mix().nav();
+          let inovKey = this.route === 'Inov' ? key : nav.inovKey;
+          let obj = { source:'Tabs',route:this.route, inovKey:inovKey, pageKey:key };
+          this.mix().nav().pub( obj ); },
       stylePos: function () {
         return this.positions[this.position]; },
       classTab: function (pageKey) {
         return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },
 
     created: function () {  // We want to set the routes pages asap
-      this.onPage( this.mix().nav().setPages( this.route, this.pages, this.defn ) ); },
+      this.onPage( this.setPages() ); },
 
     mounted: function() {
       this.mix().subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {
         if( obj.source !== 'Tabs' && obj.route === this.route ) {
-          this.onPage( obj.pageKey ); } } ); }  // this.mix().nav().getPageKey(this.route)
+          this.onPage( obj.pageKey ); } } ); } 
     }
   
 </script>
@@ -54,8 +62,8 @@
     .tabs-tab { display:inline-block; margin-left:2.0rem; padding:0.2rem 0.3rem 0.1rem 0.3rem;
       border-radius:12px 12px 0 0; border-left: @theme-fore solid thin;
       border-top:@theme-fore solid thin; border-right:@theme-fore solid thin;
-                  background-color:@theme-back;  color:@theme-fore;}
-    .tabs-tab:hover  {         background-color:@theme-fore; color:@theme-back; }
+                                    background-color:@theme-back; color:@theme-fore; }
+    .tabs-tab:hover  {              background-color:@theme-hove; color:@theme-back; }
     .tabs-tab-active { .tabs-tab(); background-color:@theme-fore; color:@theme-back; } }
   
 </style>

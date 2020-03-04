@@ -219,16 +219,18 @@ Mixin = class Mixin {
               }
             },
             inovObject: function(compKey, inovKey) {
-              var compPracs, inovPracs, key, prac, pracs;
+              var compPracs, inovPrac, inovPracs, key, prac, pracs;
               pracs = {};
-              if (this.pracs(compKey) != null) {
+              if (this.isBatch(compKey)) {
                 compPracs = this.pracs(compKey);
-                if (this.isDef(inovKey) && inovKey !== compKey && (this.pracs(inovKey) != null)) {
+                if (this.isDef(inovKey) && inovKey !== compKey && this.isBatch(inovKey)) {
                   inovPracs = this.pracs(inovKey);
+// console.log( 'Mixin.inovObject() inovPracs', inovPracs )
                   for (key in compPracs) {
                     prac = compPracs[key];
                     if (prac.column === 'Innovate' && prac.row !== 'Dim') {
-                      pracs[key] = this.getPrac(inovPracs, prac.row, prac.column, inovKey);
+                      inovPrac = this.getPrac(inovPracs, prac.row, prac.column, inovKey);
+                      pracs[inovPrac.name] = inovPrac;
                     } else {
                       pracs[key] = prac;
                     }
@@ -263,22 +265,18 @@ Mixin = class Mixin {
               });
               return {};
             },
-            pracObject: function(compKey, pracKey) {
-              var prac;
+            pracObject: function(compKey, inovKey, pracKey) {
+              var prac, pracs;
+              pracs = this.inovObject(compKey, inovKey);
               prac = {};
-              if (this.pracs(compKey) != null) {
-                if (this.pracs(compKey)[pracKey] != null) {
-                  prac = this.pracs(compKey)[pracKey];
-                } else {
-                  console.error('Mixin.pracObj() unknown pracKey', {
-                    compKey: compKey,
-                    pracKey: pracKey
-                  });
-                }
+              if (pracs[pracKey] != null) {
+                prac = pracs[pracKey];
               } else {
-                console.error('Mixin.pracObj() unknown compKey', {
+                console.error('Mixin.pracObject() unknown pracKey', {
                   compKey: compKey,
-                  pracKey: pracKey
+                  inovKey: inovKey,
+                  pracKey: pracKey,
+                  pracs: pracs
                 });
               }
               return prac;
@@ -333,8 +331,31 @@ Mixin = class Mixin {
               }
               return dataObj;
             },
-            dispObject: function(compKey, pracKey, dispKey) {
-              return this.disps(compKey, pracKey)[dispKey];
+            dispObject: function(compKey, inovKey, pracKey, dispKey) {
+              var disp, prac, pracs;
+              disp = {};
+              pracs = this.inovObject(compKey, inovKey);
+              if (pracs[pracKey] != null) {
+                prac = pracs[pracKey];
+                if (prac[dispKey] != null) {
+                  disp = prac[dispKey];
+                } else {
+                  console.error('Mixin.dispObject() unknown dispKey', {
+                    compKey: compKey,
+                    inovKey: inovKey,
+                    pracKey: pracKey,
+                    dispKey: dispKey
+                  });
+                }
+              } else {
+                console.error('Mixin.dispObject() unknown pracKey', {
+                  compKey: compKey,
+                  inovKey: inovKey,
+                  pracKey: pracKey,
+                  dispKey: dispKey
+                });
+              }
+              return disp;
             },
             isPageKeyComp: function(pageKey) {
               return pageKey === 'Info' || pageKey === 'Data'; // @app() is 'Muse' and

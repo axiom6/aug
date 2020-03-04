@@ -20,7 +20,7 @@ Nav = class Nav {
     this.compKey = 'Home'; // Also specifies current plane
     this.pracKey = 'None';
     this.dispKey = 'None';
-    this.pageKey = 'None';
+    this.pageKey = 'Sign';
     this.inovKey = 'None';
     this.warnMsg = 'None';
     this.imgsIdx = 0;
@@ -51,6 +51,7 @@ Nav = class Nav {
 
   toObj(msg) {
     this.set(msg);
+    this.tabPages();
     if (msg.warnMsg == null) {
       this.warnMsg = 'None';
     }
@@ -61,10 +62,10 @@ Nav = class Nav {
       source: this.source,
       route: this.route,
       compKey: this.compKey,
+      inovKey: this.inovKey,
       pracKey: this.pracKey,
       dispKey: this.dispKey,
       pageKey: this.pageKey,
-      inovKey: this.inovKey,
       warnMsg: this.warnMsg,
       imgsIdx: this.imgsIdx
     };
@@ -72,7 +73,6 @@ Nav = class Nav {
 
   set(msg) {
     var key, val;
-    msg = this.tabInov(msg); // Revise tab innovate messages
     for (key in msg) {
       if (!hasProp.call(msg, key)) continue;
       val = msg[key];
@@ -192,7 +192,6 @@ Nav = class Nav {
       this.doRoute(msg.route);
       msg.pageKey = this.getPageKey(msg.route);
       this.pub(msg);
-      this.pubInov(msg, dir); // Publish Innovate pageKey to Innovate Tabs if necessary
     } else if (this.hasActivePageDir(this.route, dir)) {
       this.dirPage(dir);
     } else {
@@ -317,9 +316,9 @@ Nav = class Nav {
       sectObj: sectObj,
       hasChildren: hasChildren
     });
-    msg.dispKey = this.dispKey;
-    msg.pageKey = this.pageKey;
-    msg.imgsIdx = this.imgsIdx;
+    // msg.dispKey = @dispKey
+    // msg.pageKey = @pageKey
+    // msg.imgsIdx = @imgsIdx
     this.pub(msg);
   }
 
@@ -409,7 +408,6 @@ Nav = class Nav {
     if (nidx === keys.length) {
       nidx = 0;
     }
-    // console.log( 'Nav.nextKey()', { key:key, next:keys[nidx], keys:keys } )
     return keys[nidx];
   }
 
@@ -487,17 +485,19 @@ Nav = class Nav {
     this.pages[route] = {};
     this.pages[route].pages = pagesObj;
     this.pages[route].keys = Object.keys(pagesObj);
-    // console.log( 'Nav().setPages', route, @pages[route] )
+    console.log('Nav.setPages()', {
+      route: route,
+      pages: this.pages[route]
+    });
     return this.getPageKey(route, defn);
   }
 
   setPageKey(route, pageKey) {
     var key, page, ref;
-    if (!this.isInov(route)) {
-      this.pageKey = pageKey;
-    }
     if (route === 'Inov') {
       this.inovKey = pageKey;
+    } else {
+      this.pageKey = pageKey;
     }
     if (!this.hasPages(route)) {
       return;
@@ -508,6 +508,13 @@ Nav = class Nav {
       page = ref[key];
       page.show = key === pageKey;
     }
+    console.log('Nav.setPageKey()', {
+      route: route,
+      pages: this.pages[route],
+      pageKey: this.pageKey,
+      inovKey: this.inovKey,
+      key: pageKey
+    });
   }
 
   // Jumps through hoops to set the right pageKey
@@ -530,18 +537,17 @@ Nav = class Nav {
       }
       pageKey = defn != null ? defn : this.pages[route].keys[0];
     }
-    // console.trace()
-    // console.log( 'Nav.getPageKey()', { pageKey:pageKey, defn:defn } )
+    console.log('Nav.getetPageKey()', pageKey);
     return pageKey;
   }
 
   // Inov plays a roll is validating pageKey
   isPageKey(pageKey) {
-    return (pageKey != null) && pageKey !== 'None' && !this.isInov(this.route);
+    return (pageKey != null) && pageKey !== 'None'; // and not @isInov(@route)
   }
 
   hasPageKey(route, pageKey) {
-    return pageKey !== 'None' && this.hasPages(route) && (this.pages[route].pages[pageKey] != null);
+    return (pageKey != null) && pageKey !== 'None' && this.hasPages(route) && (this.pages[route].pages[pageKey] != null);
   }
 
   hasActivePage(route) {
@@ -563,7 +569,6 @@ Nav = class Nav {
   hasPages(route) {
     var has;
     has = (this.pages[route] != null) && (this.pages[route].pages != null) && this.pages[route].keys.length > 0;
-    // console.log( 'Nav.hasPages()', { route:route, has:has } )
     return has;
   }
 
@@ -612,40 +617,13 @@ Nav = class Nav {
 
   // Across the board Inov detector for compKey pageKey and route
   isInov(route) {
-    return this.inArray(route, [
-      'Inov',
-      'Info',
-      'Know',
-      'Wise' // and route isnt pageKey
-    ]);
+    return this.inArray(route, ['Inov', 'Info', 'Know', 'Wise']);
   }
 
-  
   // A hack for Innovate Tabs
-  tabInov(msg) {
-    if ((msg.route != null) && this.isInov(msg.route) && msg.source === 'Tabs') {
-      msg.route = msg.route === 'Inov' ? 'Inov' : 'Comp';
-      msg.compKey = msg.route === 'Inov' ? this.compKey : msg.route;
-      msg.inovKey = msg.pageKey;
-      msg.pageKey = this.getPageKey('Comp');
-    }
-    return msg;
-  }
-
-  // Publish a message after dirComp() to update Innovate Tabs
-  pubInov(msg, dir) {
-    var msh, saveKey;
-    if (!this.isInov(msg.compKey)) {
-      return;
-    }
-    saveKey = this.pageKey;
-    msh = Object.assign({}, msg);
-    this.setPageKey(msh.route, msh.compKey);
-    msh.source = `${'Nav.dirInov'}(${dir})`;
-    msh.route = 'Inov';
-    //sh.pageKey = msh.compKey
-    this.pub(msh);
-    this.pageKey = saveKey;
+  tabPages() {
+    this.setPageKey(this.route, this.pageKey);
+    this.setPageKey('Inov', this.inovKey);
   }
 
   addInovToNavs(komps) {

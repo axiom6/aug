@@ -26,15 +26,17 @@
   let Tocs = {
     
     data: function() {
-      return { komps:{}, compKey:'Home', pracKey:'None', dispKey:'None', inovKey:'None', routNav:'None' } },
+      return { komps:{}, compKey:'Home', inovKey:'None', pracKey:'None', dispKey:'None', routNav:'None' } },
     
     methods: {
       myKomp: function(kompKey) {
         return kompKey===this.compKey && this.mix().isBatch(this.compKey) },
       doComp: function(compKey) {
-        this.compKey = compKey;
         let  route   = this.komps[compKey].route;
-        this.pub( { route:route, compKey:compKey, source:'Toc' } ); },
+        this.compKey = compKey;
+        this.inovKey = compKey;
+        let obj = { route:route, compKey:compKey, inovKey:this.inovKey, source:'Toc' }
+        this.pub( obj ); }, // this.mix().nav().pubInov( obj )
       doPrac: function(pracKey) {
         this.pracKey = pracKey;
         let route    = this.mix().isMuse() ? 'Prac' : pracKey;
@@ -48,11 +50,13 @@
         this.mix().nav().pub(obj); },
       onNav:  function (obj) {
         if( obj.source !== 'Toc' ) {
-          if( this.compKey !== obj.compKey ) { this.compKey = obj.compKey; }
-          if( this.pracKey !== obj.pracKey ) { this.pracKey = obj.pracKey; }
-          if( this.dispKey !== obj.dispKey ) { this.dispKey = obj.dispKey; }
-          if( this.inovKey !== obj.inovKey ) { this.inovKey = obj.inovKey; }
-          if( this.routNav !== obj.route   ) { this.routNav = obj.route;   } } },
+          if( this.keyEq(this.compKey,obj.compKey ) ) { this.compKey = obj.compKey; }
+          if( this.keyEq(this.pracKey,obj.pracKey ) ) { this.pracKey = obj.pracKey; }
+          if( this.keyEq(this.dispKey,obj.dispKey ) ) { this.dispKey = obj.dispKey; }
+          if( this.keyEq(this.inovKey,obj.inovKey ) ) { this.inovKey = obj.inovKey; }
+          if( this.keyEq(this.routNav,obj.route   ) ) { this.routNav = obj.route;   } } },
+      keyEq: function( tkey, okey ) {
+         return this.mix().isDef(okey) && tkey !== okey; },
       styleComp: function( kompKey ) {
         return this.myKomp(kompKey) ? { backgroundColor:'wheat', color:'black', borderRadius:'0 24px 24px 0' }
                                     : { backgroundColor:'#333',  color:'wheat', borderRadius:'0 24px 24px 0' }; },

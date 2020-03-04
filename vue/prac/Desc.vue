@@ -40,7 +40,8 @@
         let obj = { route:"Prac", pracKey:pracKey };
         this.mix().nav().pub( obj ); },
       doDisp: function (dispKey) {
-        let obj = { route:"Disp", pracKey:this.pracObj.name, dispKey:dispKey };
+        let nav = this.mix().nav();
+        let obj = { route:"Disp", compObj:nav.compKey, inovKey:nav.inovKey, pracKey:this.pracObj.name, dispKey:dispKey };
         this.mix().nav().pub( obj ); },
       style: function( ikwObj ) {
         return this.mix().styleObj(ikwObj); },

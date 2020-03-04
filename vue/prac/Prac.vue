@@ -29,21 +29,23 @@
     
     methods: {
       
-      onPrac: function(compKey,pracKey) {
-        if( !this.mix().isDef(this.pracObj) || this.pracObj.name !== pracKey ) {
-             this.pracObj = this.mix().pracObject( compKey, pracKey ); } },
+      onPrac: function( obj ) {
+        if( !this.mix().isDef(this.pracObj) || this.pracObj.name !== obj.pracKey ) {
+             this.pracObj = this.mix().pracObject( obj.compKey, obj.inovKey, obj.pracKey ); } },
       doPage: function( pageKey ) {
         this.mix().nav().setPageKey( 'Prac', pageKey ); },
       onNav: function( obj ) {
         if( this.mix().nav().isMyNav( obj, 'Prac' ) ) {
             this.doPage( this.mix().nav().getPageKey('Prac') );
-            this.onPrac( obj.compKey, obj.pracKey ); } }
+            this.onPrac( obj ); } }
       },
 
     beforeMount: function () {
-      let compKey = this.mix().nav().compKey;
-      let pracKey = this.mix().nav().pracKey;
-      this.onPrac( compKey, pracKey );  },
+      let obj = {}
+      obj.compKey = this.mix().nav().compKey;
+      obj.pracKey = this.mix().nav().pracKey;
+      obj.inovKey = this.mix().nav().inovKey;
+      this.onPrac( obj );  },
 
     mounted: function () {
       this.doPage( this.mix().nav().getPageKey('Prac') );

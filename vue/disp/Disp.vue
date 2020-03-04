@@ -24,18 +24,18 @@
     
     methods: {
       
-      onDisp: function(dispKey) {
-        this.dispObj  = this.mix().dispObject( this.mix().nav().compKey, this.mix().nav().pracKey, dispKey );
+      onDisp: function( obj ) {
+        this.dispObj  = this.mix().dispObject( obj.compKey, obj.inovKey, obj.pracKey, obj.dispKey );
         if( !this.mix().isDef(this.dispObj) ) {
-          console.error('Disp.onDisp() disp null',{comp:this.mix().nav().compKey,prac:this.mix().nav().pracKey,disp:dispKey})}},
+          console.error('Disp.onDisp() disp null',{comp:obj.compKey, prac:obj.pracKey, disp:obj.dispKey } ) } },
       doPage: function( pageKey ) {
         this.mix().nav().setPageKey( 'Disp', pageKey ); },
       onNav:  function (obj) {
         if( this.mix().nav().isMyNav( obj, 'Disp' ) ) {
-            this.onDisp( obj.dispKey ); } } },
+            this.onDisp( obj ); } } },
 
     beforeMount: function() {
-      this.onDisp( this.mix().nav().dispKey ); },
+      this.onDisp( this.mix().nav() ); },
 
     mounted: function () {
       this.doPage( this.mix().nav().getPageKey('Disp') );

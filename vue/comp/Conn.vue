@@ -29,7 +29,7 @@
         this.mix().nav().pub( { pracKey:pracKey } ); },
       
       clConn: function() {
-        return this.mix().nav().route === 'Comp' ? 'conn-comp' : 'conn-prac'; },
+        return this.mix().nav().route === 'Prac' ? 'conn-prac' : 'conn-comp'; },
       
       createConnect: function( stream, pracObj ) {
         this.$nextTick( function() {
