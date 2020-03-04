@@ -2,7 +2,7 @@
 
 <template>
   <div class="hues-pane" ref="Hues">
-    <d-tabs route="Hues" :pages="pages" defn="None"></d-tabs>
+    <d-tabs :route="route" :pagesKey="route" :pages="pages" defn="None"></d-tabs>
     <h1 v-if="pageKey==='Hues'">Hues with MathBox</h1>
     <template v-for="page in pages">
       <div :ref="page.key" v-if="page.show" class="hues-page" :key="page.key"></div>
@@ -21,7 +21,7 @@
 
     data() {
       return { route:'Hues', pageKey:'Hues', pages:{
-          Color:   { title:'Color',   key:'Color',   show:false },
+          Color:   { title:'Color',   key:'Color',   show:true  },
           Rgbs:    { title:'Rgbs',    key:'Rgbs',    show:false },
           Polar:   { title:'Polar',   key:'Polar',   show:false },
           Vecs:    { title:'Vecs',    key:'Vecs',    show:false },
@@ -35,7 +35,7 @@
 
       onNav: function(obj) {
         if( this.mix().nav().isMyNav( obj, this.route ) ) {
-            this.pageKey = this.mix().nav().getPageKey('Hues','None'); // No default
+            this.pageKey = this.mix().nav().getPageKey(this.route);
             if( this.pageKey !== 'None') {
                 this.doApp( this.pageKey ); } } },
 
@@ -54,6 +54,7 @@
               Box.doApp(pageKey,elem); } } ) } },
 
     mounted: function () {
+      this.mix().nav().setPages( this.route, this.pages );
       this.mix().subscribe(  'Nav', 'Hues.vue', (obj) => {
         this.onNav(obj); } ); }
   }

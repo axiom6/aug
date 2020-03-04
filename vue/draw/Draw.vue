@@ -2,7 +2,7 @@
 
 <template>
   <div class="draw-pane">
-    <d-tabs route="Draw" :pages="pages" defn="None"></d-tabs>
+    <d-tabs :route="route" :pagesKey="route" :pages="pages" defn="None"></d-tabs>
     <h1 v-if="pageKey==='Draw'">Drawings in D3</h1>
     <template v-for="page in pages">
       <div :ref="page.key" v-show="page.show" class="draw-page" :key="page.key"></div>
@@ -21,8 +21,8 @@
 
     data() {
       return { route:'Draw', pageKey:'Draw', D3D:null, pages:{
+        Axes:  { title:'Axes',  key:'Axes',  obj:null, show:true  },
         Wheel: { title:'Wheel', key:'Wheel', obj:null, show:false },
-        Axes:  { title:'Axes',  key:'Axes',  obj:null, show:false },
         Chord: { title:'Chord', key:'Chord', obj:null, show:false },
         Link:  { title:'Link',  key:'Link',  obj:null, show:false },
         Radar: { title:'Radar', key:'Radar', obj:null, show:false },
@@ -33,7 +33,7 @@
       
       onNav: function(obj) {
         if( this.mix().nav().isMyNav( obj, this.route ) ) {
-            this.pageKey = this.mix().nav().getPageKey('Draw','None'); // None implies no defaults
+            this.pageKey = this.mix().nav().getPageKey(this.route);
             if( this.pageKey !== 'None') {
                 this.create(this.pageKey); } } },
       
@@ -44,6 +44,7 @@
     },
 
     mounted: function () {
+      this.mix().nav().setPages( this.route, this.pages );
       this.mix().subscribe(  'Nav', 'Draw.vue', (obj) => {
         this.onNav(obj); } );
       this.$nextTick( function() {

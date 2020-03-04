@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <d-tabs route="Tables" :pages="pages" defn="None"></d-tabs>
+    <d-tabs :route="route" :pagesKey="route" :pages="pages" defn="None"></d-tabs>
     <div class="page">
       <h1       v-if="pageKey==='Tables'">Tables</h1>
       <t_table1 v-if="pages['Table1'].show" ref="Table1"></t_table1>
@@ -32,13 +32,12 @@
         return this.pageKey === pageKey; },
 
       onNav: function(obj) {
-        if( this.mix().nav().isMyNav( obj, 'Tables' ) ) {
+        if( this.mix().nav().isMyNav( obj, this.route ) ) {
           this.pageKey = this.mix().nav().getPageKey('Tables');
           if( this.pageKey !== 'None' ) {
               this.create( this.pageKey ); } } },
 
       create: function( pageKey ) {
-        this.mix().nav().setPageKey( 'Tables', pageKey );
         if( !this.pages[pageKey].created ) {
              this.pages[pageKey].created = true;
              this.$nextTick( function() { // Wait for DOM to render
@@ -47,6 +46,7 @@
     },
 
     mounted: function () {
+      this.mix().nav().setPages( this.route, this.pages );
       this.mix().subscribe( 'Nav', 'Pivots.vue', (obj) => {
         this.onNav( obj ); } ); }
   }

@@ -7,7 +7,7 @@
     <div v-if="hasProp('title')"   class="sect-title"   >{{sectObj.title}}</div>
     <div v-if="hasProp('caption')" class="sect-caption" >{{sectObj.caption}}</div>
     <div v-if="hasProp('img')"     class="sect-img"  v-html="htmlImg( sectObj.img )"></div>
-    <div v-if="hasProp('imgs')" class="sect-imgs" :ref="sectObj.name">{{appendImgs(sectObj['imgs'],sectObj.name)}}</div>
+    <div v-if="hasProp('imgs')" class="sect-imgs" :ref="sectObj.name">{{appendImgs(sectObj['imgs'],sectObj.name) }}</div>
     <div v-if="hasProp('desc')"    class="sect-desc"  >{{sectObj.desc}}</div>
     <div v-if="hasProp('author')"  class="sect-author" >{{sectObj.author}}</div>
     <!--t-prac v-if="isType('Prac')"    class="sect-prac" :sectObj="sectObj" :pracObj="dataObj"></t-prac-->
@@ -52,7 +52,7 @@
             return this.mix().isDef(this.sectObj); },
           
           hasProp: function(prop) {
-            return this.mix().isDef(this.sectObj[prop]) }, // || this.isDef(this.dataObj[prop]); },
+            return this.mix().isDef(this.sectObj[prop]) }
           
         }
       }

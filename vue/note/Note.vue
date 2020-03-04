@@ -2,7 +2,7 @@
 
 <template>
   <div class="note-pane">
-    <n-tabs route="Note" :pages="pages" defn="None"></n-tabs>
+    <n-tabs route="Note"  :pagesKey="route" :pages="pages" defn="None"></n-tabs>
     <h1 v-show="myRoute()">Notebooks</h1>
     <template v-for="page in pages">
       <router-view :name="page.key"></router-view>
@@ -20,13 +20,14 @@
 
     data() {
       return { route:'Note', pages:{
-          Stand: { title:'Stand', key:'Stand', show:false, route:'Stand' },
+          Stand: { title:'Stand', key:'Stand', show:true,  route:'Stand' },
           Embed: { title:'Embed', key:'Embed', show:false, route:'Embed' },
           Maths: { title:'Maths', key:'Maths', show:false, route:'Maths' },
-          Ganja: { title:'Ganja', key:'Ganja', show:false, route:'Ganja' },
+          Ganja: { title:'Ganja', key:'Ganja', show:false, route:'Ganja' }
         } } },
     
     methods: {
+      this.mix().nav().setPages( this.route, this.pages );
       myRoute: function() {
         return this.mix().isRoute('Note'); } }
     

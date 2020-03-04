@@ -11,21 +11,16 @@
 
   export default {
 
-    props: { route:String, pages:Object, defn:{ default:'null', type:String }, position:{ default:'full', type:String } },
+    props: { route:String, pagesKey:String, pages:Object, position:{ default:'full', type:String } },
     
     data() { return { pageKey:'None', pageObj:null,
       positions:{ left:{ left:0, width:'60%' }, right:{ left:'60%', width:'40%' }, full:{ left:0, width:'100%' } } } },
-
-    watch: {
-      pages() { this.onPage( this.setPages() ); } },
     
     methods: {
-      setPages: function() {
-        return this.mix().nav().setPages( this.route, this.pages, this.defn ); },
       onPage: function (pageKey) {
         if( this.mix().isDef(pageKey) ) {
           this.pageKey = pageKey;
-          this.mix().nav().setPageKey( this.route, pageKey ); }
+          this.mix().nav().setPageKey( this.pagesKey, this.pageKey ); }
         else {
           console.error( 'Tabs.vue.onPage() bad pageKey', pageKey ); } },
       doPage: function (key) {
@@ -39,10 +34,8 @@
       classTab: function (pageKey) {
         return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },
 
-    created: function () {  // We want to set the routes pages asap
-      this.onPage( this.setPages() ); },
-
     mounted: function() {
+      this.onPage( this.mix().nav().getPageKey( this.pagesKey ) )
       this.mix().subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {
         if( obj.source !== 'Tabs' && obj.route === this.route ) {
           this.onPage( obj.pageKey ); } } ); } 

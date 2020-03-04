@@ -24,7 +24,7 @@
     methods: {
       
       doTalk: function(talkKey) {
-        this.mix().nav().pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None', pageKey:'None' } );
+        this.mix().nav().pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None' } );
         this.mix().nav().dirsNavd('Init'); },
 
       onNav: function (obj) {

@@ -205,7 +205,7 @@ class Mixin
             sectObj.imgsIdx = @nav().imgsIdx
             sectObj
 
-          pageObject: (sectObj, pageKey) ->
+          pageObject:( sectObj, pageKey ) ->
             pageKey = if pageKey is 'None' and sectObj.keys[0]? then sectObj.keys[0] else pageKey
             pageObj = null
             if pageKey isnt 'None' and sectObj[pageKey]?

@@ -20,8 +20,6 @@ Nav = class Nav {
     this.compKey = 'Home'; // Also specifies current plane
     this.pracKey = 'None';
     this.dispKey = 'None';
-    this.pageKey = 'Sign';
-    this.inovKey = 'None';
     this.warnMsg = 'None';
     this.imgsIdx = 0;
     this.imgsNum = 0;
@@ -51,7 +49,6 @@ Nav = class Nav {
 
   toObj(msg) {
     this.set(msg);
-    this.tabPages();
     if (msg.warnMsg == null) {
       this.warnMsg = 'None';
     }
@@ -62,10 +59,8 @@ Nav = class Nav {
       source: this.source,
       route: this.route,
       compKey: this.compKey,
-      inovKey: this.inovKey,
       pracKey: this.pracKey,
       dispKey: this.dispKey,
-      pageKey: this.pageKey,
       warnMsg: this.warnMsg,
       imgsIdx: this.imgsIdx
     };
@@ -190,7 +185,6 @@ Nav = class Nav {
       msg.compKey = this.adjCompKey(this.compKey, dir);
       msg.route = this.toRoute(msg.compKey);
       this.doRoute(msg.route);
-      msg.pageKey = this.getPageKey(msg.route);
       this.pub(msg);
     } else if (this.hasActivePageDir(this.route, dir)) {
       this.dirPage(dir);
@@ -339,7 +333,7 @@ Nav = class Nav {
   }
 
   isPageTalk(sectObj, hasChildren, pageKey) {
-    return this.pageKey !== 'None' && hasChildren && (sectObj[pageKey] != null);
+    return this && hasChildren && (sectObj[pageKey] != null);
   }
 
   dirsNavd(route) {
@@ -433,12 +427,13 @@ Nav = class Nav {
   }
 
   dirPage(dir) {
-    var msg, pageKey;
+    var msg, pageKey, pagesKey;
+    pagesKey = this.getPagesKeyFromRouteCompKey(this.route, this.compKey);
     msg = {};
     msg.source = `${'Nav.dirPage'}(${dir})`;
     pageKey = this.hasActivePageDir(this.route, dir) ? this.movePage(this.pages[this.route], dir) : 'None';
     if (pageKey !== 'None') {
-      msg.pageKey = pageKey;
+      this.setPageKey(pagesKey, pageKey);
       this.pub(msg);
     } else {
       this.log(msg, {
@@ -448,7 +443,8 @@ Nav = class Nav {
   }
 
   movePage(page, dir) {
-    var idx, len, ndx, pageKey;
+    var idx, len, ndx, pageKey, pagesKey;
+    pagesKey = this.getPagesKeyFromRouteCompKey(this.route, this.compKey);
     pageKey = this.getPageKey(this.route);
     len = page.keys.length;
     if (pageKey !== 'None') {
@@ -463,7 +459,7 @@ Nav = class Nav {
     } else {
       pageKey = dir === 'east' ? page.keys[0] : page.keys[len - 1];
     }
-    this.setPageKey(this.route, pageKey);
+    this.setPageKey(pagesKey, pageKey);
     return pageKey;
   }
 
@@ -480,65 +476,61 @@ Nav = class Nav {
   }
 
   // An important indicator of when Comps and Tabs are instanciated
-  setPages(route, pagesObj, defn = null) {
-    // if not @pages[route]?
-    this.pages[route] = {};
-    this.pages[route].pages = pagesObj;
-    this.pages[route].keys = Object.keys(pagesObj);
-    console.log('Nav.setPages()', {
-      route: route,
-      pages: this.pages[route]
-    });
-    return this.getPageKey(route, defn);
+  setPages(pagesKey, pagesObj) {
+    this.pages[pagesKey] = {};
+    this.pages[pagesKey].pages = pagesObj;
+    this.pages[pagesKey].keys = Object.keys(pagesObj);
   }
 
-  setPageKey(route, pageKey) {
+  setPageKey(pagesKey, pageKey) {
     var key, page, ref;
-    if (route === 'Inov') {
-      this.inovKey = pageKey;
-    } else {
-      this.pageKey = pageKey;
-    }
-    if (!this.hasPages(route)) {
+    if (!this.hasPages(pagesKey)) {
       return;
     }
-    ref = this.pages[route].pages;
+    ref = this.pages[pagesKey].pages;
     for (key in ref) {
       if (!hasProp.call(ref, key)) continue;
       page = ref[key];
       page.show = key === pageKey;
     }
-    console.log('Nav.setPageKey()', {
-      route: route,
-      pages: this.pages[route],
-      pageKey: this.pageKey,
-      inovKey: this.inovKey,
-      key: pageKey
-    });
   }
 
-  // Jumps through hoops to set the right pageKey
-  // Defn implies not to use first key as default
-  getPageKey(route, defn = null) {
+  // pagesKeys is usually a route except for Comp which uses getPagesKeyFromRouteCompKey:( route, compKey )
+  getPageKey(pagesKey) {
     var key, page, pageKey, ref;
-    pageKey = 'Sign';
-    if (this.hasPageKey(route, this.pageKey)) {
-      pageKey = this.pageKey;
-    } else if (!this.hasPages(route)) {
-      pageKey = this.isPageKey(this.pageKey) ? this.pageKey : 'Sign';
-    } else {
-      ref = this.pages[route].pages;
-      for (key in ref) {
-        if (!hasProp.call(ref, key)) continue;
-        page = ref[key];
-        if (page.show) {
-          return key;
-        }
+    ref = this.pages[pagesKey].pages;
+    for (key in ref) {
+      if (!hasProp.call(ref, key)) continue;
+      page = ref[key];
+      if (page.show) {
+        return key;
       }
-      pageKey = defn != null ? defn : this.pages[route].keys[0];
     }
-    console.log('Nav.getetPageKey()', pageKey);
+    pageKey = this.pages[pagesKey].keys[0];
+    this.pages[pagesKey].pages[pageKey].show = true;
     return pageKey;
+  }
+
+  getPagesKeyFromRouteCompKey(route, compKey) {
+    var key;
+    key = route;
+    if (route === 'Comp') {
+      key = 'pages';
+    } else if (route === 'Inov') {
+      key = (function() {
+        switch (compKey) {
+          case 'Info':
+            return 'infos';
+          case 'Know':
+            return 'knows';
+          case 'Wise':
+            return 'wises';
+          default:
+            return 'infos';
+        }
+      })();
+    }
+    return key;
   }
 
   // Inov plays a roll is validating pageKey
@@ -546,16 +538,16 @@ Nav = class Nav {
     return (pageKey != null) && pageKey !== 'None'; // and not @isInov(@route)
   }
 
-  hasPageKey(route, pageKey) {
-    return (pageKey != null) && pageKey !== 'None' && this.hasPages(route) && (this.pages[route].pages[pageKey] != null);
+  hasPageKey(pagesKey, pageKey) {
+    return this.isDef(pageKey) && this.hasPages(pagesKey) && (this.pages[pagesKey].pages[pageKey] != null);
   }
 
-  hasActivePage(route) {
+  hasActivePage(pagesKey) {
     var key, page, ref;
-    if (!this.hasPages(route)) {
+    if (!this.hasPages(pagesKey)) {
       return false;
     }
-    ref = this.pages[route].pages;
+    ref = this.pages[pagesKey].pages;
     for (key in ref) {
       if (!hasProp.call(ref, key)) continue;
       page = ref[key];
@@ -566,14 +558,14 @@ Nav = class Nav {
     return false;
   }
 
-  hasPages(route) {
+  hasPages(pagesKey) {
     var has;
-    has = (this.pages[route] != null) && (this.pages[route].pages != null) && this.pages[route].keys.length > 0;
+    has = (this.pages[pagesKey] != null) && (this.pages[pagesKey].pages != null) && this.pages[pagesKey].keys.length > 0;
     return has;
   }
 
-  hasActivePageDir(route, dir) {
-    return this.hasActivePage(route) && (dir === 'west' || dir === 'east');
+  hasActivePageDir(pagesKey, dir) {
+    return this.hasActivePage(pagesKey) && (dir === 'west' || dir === 'east');
   }
 
   isMyNav(obj, route) {
@@ -602,7 +594,7 @@ Nav = class Nav {
   }
 
   isDef(d) {
-    return d !== null && typeof d !== 'undefined';
+    return d !== null && typeof d !== 'undefined' && d !== 'None';
   }
 
   isArray(a) {
@@ -618,12 +610,6 @@ Nav = class Nav {
   // Across the board Inov detector for compKey pageKey and route
   isInov(route) {
     return this.inArray(route, ['Inov', 'Info', 'Know', 'Wise']);
-  }
-
-  // A hack for Innovate Tabs
-  tabPages() {
-    this.setPageKey(this.route, this.pageKey);
-    this.setPageKey('Inov', this.inovKey);
   }
 
   addInovToNavs(komps) {

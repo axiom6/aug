@@ -1,7 +1,7 @@
 
 <template>
   <div class="disp-pane">
-    <d-tabs route="Disp" :pages="pages"></d-tabs>
+    <d-tabs route="route" :pagesKey="route" :pages="pages"></d-tabs>
     <d-dims v-if="pages['Dims'].show" :dispObj="dispObj" from="Disp"></d-dims>
     <d-desc v-if="pages['Desc'].show" :dispObj="dispObj" from="Disp"></d-desc>
   </div>
@@ -17,7 +17,7 @@
 
     components:{ 'd-tabs':Tabs, 'd-dims':Dims, 'd-desc':Desc },
     
-    data() { return { dispObj:null, // compKey:'Desc', 
+    data() { return { route:"Disp", dispObj:null, // compKey:'Desc',
       pages:{
         Dims: { title:'Disciplines',  key:'Dims', show:true  },
         Desc: { title:'Descriptions', key:'Desc', show:false } } } },
@@ -28,8 +28,6 @@
         this.dispObj  = this.mix().dispObject( obj.compKey, obj.inovKey, obj.pracKey, obj.dispKey );
         if( !this.mix().isDef(this.dispObj) ) {
           console.error('Disp.onDisp() disp null',{comp:obj.compKey, prac:obj.pracKey, disp:obj.dispKey } ) } },
-      doPage: function( pageKey ) {
-        this.mix().nav().setPageKey( 'Disp', pageKey ); },
       onNav:  function (obj) {
         if( this.mix().nav().isMyNav( obj, 'Disp' ) ) {
             this.onDisp( obj ); } } },
@@ -38,7 +36,7 @@
       this.onDisp( this.mix().nav() ); },
 
     mounted: function () {
-      this.doPage( this.mix().nav().getPageKey('Disp') );
+      this.mix().nav().setPages( this.route, this.pages );
       this.mix().subscribe(  "Nav", 'Disp.vue', (obj) => {
         this.onNav(obj); } ); }
   }

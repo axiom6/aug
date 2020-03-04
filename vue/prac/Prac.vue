@@ -1,7 +1,7 @@
 
 <template>
   <div   class="prac-pane">
-    <b-tabs route="Prac" :pages="pages"></b-tabs>
+    <b-tabs :route="route" :pagesKey="route" :pages="pages"></b-tabs>
     <div class="prac-prac">
       <p-dirs v-show="pages['Dirs'].show" :pracObj="pracObj"></p-dirs>
       <p-conn   v-if="pages['Conn'].show" :pracObj="pracObj" level="Prac"></p-conn>
@@ -21,7 +21,7 @@
 
     components:{ 'b-tabs':Tabs, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },
     
-    data() { return { pracObj:null,
+    data() { return { route:'Prac', pracObj:null,
       pages:{
         Dirs: { title:'Disciplines',  key:'Dirs', show:true  },
         Conn: { title:'Connections',  key:'Conn', show:false },
@@ -32,11 +32,9 @@
       onPrac: function( obj ) {
         if( !this.mix().isDef(this.pracObj) || this.pracObj.name !== obj.pracKey ) {
              this.pracObj = this.mix().pracObject( obj.compKey, obj.inovKey, obj.pracKey ); } },
-      doPage: function( pageKey ) {
-        this.mix().nav().setPageKey( 'Prac', pageKey ); },
       onNav: function( obj ) {
-        if( this.mix().nav().isMyNav( obj, 'Prac' ) ) {
-            this.doPage( this.mix().nav().getPageKey('Prac') );
+        if( this.mix().nav().isMyNav( obj, this.route ) ) {
+         // this.doPage( this.mix().nav().getPageKey( this.route) );
             this.onPrac( obj ); } }
       },
 
@@ -48,7 +46,7 @@
       this.onPrac( obj );  },
 
     mounted: function () {
-      this.doPage( this.mix().nav().getPageKey('Prac') );
+      this.mix().nav().setPages( this.route, this.pages );
       this.mix().subscribe(  "Nav", 'Prac.vue', (obj) => {
         this.onNav(obj); } ); }
   }

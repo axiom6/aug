@@ -1,7 +1,7 @@
 
 <template>
   <div class="prin-pane">
-    <b-tabs route="Prin" :pages="pages"></b-tabs>
+    <b-tabs :route="route" :pageKey="route" :pages="pages"></b-tabs>
     <div class="prin-comp">
         <template v-for="pracObj in compObj">
           <div   :class="pracObj.dir" :key="pracObj.name" :ref="pracObj.name">
@@ -23,8 +23,7 @@
 
     components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs },
     
-    data() { return {
-      compObj:null, pracObj:null,
+    data() { return { route:'Prin',compObj:null, pracObj:null,
       pages:{
         Sign: { title:'Foundation', key:'Sign', show:true  },
         Dirs: { title:'Principles', key:'Dirs', show:false } } } },
@@ -33,21 +32,18 @@
       
       onComp: function( compKey ) {
         this.compObj = this.mix().compObject(compKey); },
-      doPage: function( pageKey ) {
-        this.mix().nav().setPageKey( 'Prin', pageKey ); },
       isRows: function () {
         return true; },
       onNav:  function (obj) {
-        if( this.mix().nav().isMyNav(  obj, 'Prin' ) ) {
-          this.onComp( obj.compKey );
-          this.doPage( this.mix().nav().getPageKey('Prin') ); } }
+        if( this.mix().nav().isMyNav(  obj, this.route ) ) {
+          this.onComp( obj.compKey ); } }
       },
 
     beforeMount: function() {
       this.onComp('Prin'); },
 
     mounted: function () {
-      this.doPage( this.mix().nav().getPageKey('Prin') );
+      this.mix().nav().setPages( this.route, this.pages );
       this.mix().subscribe( 'Nav', 'Prin.vue', (obj) => {
         this.onNav(obj); } ); }
   }

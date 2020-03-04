@@ -13,8 +13,6 @@ class Nav
     @compKey    = 'Home' # Also specifies current plane
     @pracKey    = 'None'
     @dispKey    = 'None'
-    @pageKey    = 'Sign'
-    @inovKey    = 'None'
     @warnMsg    = 'None'
     @imgsIdx    = 0
     @imgsNum    = 0
@@ -37,11 +35,9 @@ class Nav
 
   toObj:( msg ) ->
     @set( msg )
-    @tabPages()
     @warnMsg = 'None' if not msg.warnMsg?
     @source  = 'None' if not msg.source?
-    { source:@source, route:@route, compKey:@compKey, inovKey:@inovKey, pracKey:@pracKey, dispKey:@dispKey,
-    pageKey:@pageKey, warnMsg:@warnMsg, imgsIdx:@imgsIdx }
+    { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey,warnMsg:@warnMsg, imgsIdx:@imgsIdx }
 
   set:( msg ) ->
     for own key, val of msg
@@ -115,7 +111,6 @@ class Nav
       msg.compKey = @adjCompKey( @compKey,dir )
       msg.route   = @toRoute( msg.compKey )
       @doRoute( msg.route )
-      msg.pageKey = @getPageKey(msg.route)
       @pub( msg )
     else if @hasActivePageDir( @route, dir )
       @dirPage( dir )
@@ -201,7 +196,7 @@ class Nav
     if @imgsIdx < @imgsNum-1 then @imgsIdx+1 else 0
 
   isPageTalk:( sectObj, hasChildren, pageKey ) ->
-    @pageKey isnt 'None' and hasChildren and sectObj[pageKey]?
+    @ and hasChildren and sectObj[pageKey]?
 
   dirsNavd:( route ) ->
     dirs = @dirsNavdTalk(route)
@@ -268,18 +263,20 @@ class Nav
       @nextKey( dispKey, peys )
 
   dirPage:( dir ) ->
+    pagesKey = @getPagesKeyFromRouteCompKey( @route, @compKey )
     msg = {}
     msg.source = "#{'Nav.dirPage'}(#{dir})"
     pageKey = if @hasActivePageDir(@route,dir) then @movePage(@pages[@route],dir) else 'None'
     if pageKey isnt 'None'
-      msg.pageKey = pageKey
+      @setPageKey( pagesKey, pageKey )
       @pub( msg )
     else
       @log( msg, warnMsg:"Cannot find pageKey for #{dir}" )
     return
 
   movePage:( page, dir  ) ->
-    pageKey = @getPageKey( @route )
+    pagesKey = @getPagesKeyFromRouteCompKey( @route, @compKey )
+    pageKey  = @getPageKey( @route )
     len     = page.keys.length
     if pageKey isnt 'None'
       idx = page.keys.indexOf(pageKey)
@@ -288,7 +285,7 @@ class Nav
       pageKey = page.keys[ndx]
     else
       pageKey = if dir is 'east' then page.keys[0] else page.keys[len-1]
-    @setPageKey( @route, pageKey )
+    @setPageKey( pagesKey, pageKey )
     pageKey
 
   range:( idx, len ) ->
@@ -298,59 +295,57 @@ class Nav
     ndx
 
   # An important indicator of when Comps and Tabs are instanciated
-  setPages:( route, pagesObj, defn=null ) ->
-    # if not @pages[route]?
-    @pages[route] = {}
-    @pages[route].pages = pagesObj
-    @pages[route].keys  = Object.keys(pagesObj)
-    console.log( 'Nav.setPages()', { route:route, pages:@pages[route] } )
-    @getPageKey( route, defn )
-
-  setPageKey:( route, pageKey ) ->
-    if route is 'Inov'
-      @inovKey = pageKey
-    else
-      @pageKey = pageKey
-    return             if not @hasPages(route)
-    for own key, page  of @pages[route].pages
-      page.show = key  is pageKey
-    console.log( 'Nav.setPageKey()', { route:route, pages:@pages[route], pageKey:@pageKey, inovKey:@inovKey, key:pageKey } )
+  setPages:( pagesKey, pagesObj ) ->
+    @pages[pagesKey] = {}
+    @pages[pagesKey].pages = pagesObj
+    @pages[pagesKey].keys  = Object.keys(pagesObj)
     return
 
-  # Jumps through hoops to set the right pageKey
-  # Defn implies not to use first key as default
-  getPageKey:( route, defn=null ) ->
-    pageKey = 'Sign'
-    if @hasPageKey(route,@pageKey)
-      pageKey =  @pageKey
-    else if not @hasPages(route)
-      pageKey = if @isPageKey(@pageKey) then @pageKey else 'Sign'
-    else
-      for own  key,   page  of @pages[route].pages
-        return key if page.show
-      pageKey = if defn? then defn else @pages[route].keys[0] # Default is first page
-    console.log( 'Nav.getetPageKey()', pageKey )
+  setPageKey:( pagesKey, pageKey ) ->
+    return             if not @hasPages(pagesKey)
+    for own key, page  of @pages[pagesKey].pages
+      page.show = key  is pageKey
+    return
+
+  # pagesKeys is usually a route except for Comp which uses getPagesKeyFromRouteCompKey:( route, compKey )
+  getPageKey:( pagesKey ) ->
+    for own  key,   page  of @pages[pagesKey].pages
+      return key if page.show
+    pageKey = @pages[pagesKey].keys[0] # Default is first page
+    @pages[pagesKey].pages[pageKey].show = true
     pageKey
+
+  getPagesKeyFromRouteCompKey:( route, compKey ) ->
+    key = route
+    if route is 'Comp'
+      key = 'pages'
+    else if route is 'Inov'
+      key = switch compKey
+        when 'Info' then 'infos'
+        when 'Know' then 'knows'
+        when 'Wise' then 'wises'
+        else             'infos'
+    key
 
   # Inov plays a roll is validating pageKey
   isPageKey:( pageKey ) ->
     pageKey? and pageKey isnt 'None' # and not @isInov(@route)
 
-  hasPageKey:( route, pageKey ) ->
-    pageKey? and pageKey isnt 'None' and @hasPages(route) and @pages[route].pages[pageKey]?
+  hasPageKey:( pagesKey, pageKey ) ->
+    @isDef(pageKey) and @hasPages(pagesKey) and @pages[pagesKey].pages[pageKey]?
 
-  hasActivePage:( route ) ->
-    return false    if    not @hasPages(route)
-    for own  key,    page  of @pages[route].pages
+  hasActivePage:( pagesKey ) ->
+    return false    if    not @hasPages(pagesKey)
+    for own  key,    page  of @pages[pagesKey].pages
       return true if page.show
     false
 
-  hasPages:( route ) ->
-    has = @pages[route]? and @pages[route].pages? and @pages[route].keys.length > 0
+  hasPages:( pagesKey ) ->
+    has = @pages[pagesKey]? and @pages[pagesKey].pages? and @pages[pagesKey].keys.length > 0
     has
 
-  hasActivePageDir:( route, dir ) ->
-     @hasActivePage( route ) and ( dir is 'west' or dir is 'east' )
+  hasActivePageDir:( pagesKey, dir ) ->
+     @hasActivePage( pagesKey ) and ( dir is 'west' or dir is 'east' )
 
   isMyNav:( obj, route ) ->
     obj.route is route # and @hasActivePage(route)
@@ -371,7 +366,7 @@ class Nav
     @batch[compKey].data.pracs[pracKey].disps
 
   isDef:(d) ->
-    d isnt null and typeof(d) isnt 'undefined'
+    d isnt null and typeof(d) isnt 'undefined' and d isnt 'None'
 
   isArray:(a) ->
     @isDef(a) and typeof(a)!="string" and a.length? and a.length > 0
@@ -384,12 +379,6 @@ class Nav
   # Across the board Inov detector for compKey pageKey and route
   isInov:( route ) ->
     @inArray( route, ['Inov','Info','Know','Wise'] )
-
-  # A hack for Innovate Tabs
-  tabPages:() ->
-    @setPageKey( @route,      @pageKey )
-    @setPageKey( 'Inov', @inovKey )
-    return
 
   addInovToNavs:( komps ) ->
     return komps? if not @isMuse
