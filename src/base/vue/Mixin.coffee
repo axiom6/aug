@@ -205,24 +205,24 @@ class Mixin
             sectObj.imgsIdx = @nav().imgsIdx
             sectObj
 
-          pageObject:( sectObj, pageKey ) ->
-            pageKey = if pageKey is 'None' and sectObj.keys[0]? then sectObj.keys[0] else pageKey
+          presObject:( sectObj, presKey ) ->
+            presKey = if presKey is 'None' and sectObj.keys[0]? then sectObj.keys[0] else presKey
             pageObj = null
-            if pageKey isnt 'None' and sectObj[pageKey]?
-              pageObj = sectObj[pageKey]
+            if pageKey isnt 'None' and sectObj[presKey]?
+              pageObj = sectObj[presKey]
               pageObj.src = sectObj.src
-              pageObj.name = pageKey
+              pageObj.name = presKey
               pageObj.peys = sectObj.keys
               pageObj.keys = if pageObj.keys?  then pageObj.keys else Util.childKeys(pageObj)
             # console.log( 'Mixin.pageObj()', { dispKey:sectObj.name, pageKey:pageKey, pageObj:pageObj } )
             pageObj
 
-          dataObject: (sectObj, pageKey) ->
+          dataObject: (sectObj, presKey) ->
             dataObj = null
             if sectObj.type is 'Prac'
               dataObj = @pracObject(sectObj.src, sectObj.name)
-            else if sectObj.type is 'Disp' and pageKey isnt 'None'
-              dataObj = @dispObject(sectObj.src, sectObj.name, pageKey)
+            else if sectObj.type is 'Disp' and presKey isnt 'None'
+              dataObj = @dispObject(sectObj.src, 'None', sectObj.name, presKey )
             dataObj
 
           dispObject:( compKey, inovKey, pracKey, dispKey ) ->

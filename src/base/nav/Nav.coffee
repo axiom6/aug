@@ -14,6 +14,8 @@ class Nav
     @pracKey    = 'None'
     @dispKey    = 'None'
     @warnMsg    = 'None'
+    @inovKey    = 'None' # Only used by Tabs to Tocs
+    @presKey    = 'None'
     @imgsIdx    = 0
     @imgsNum    = 0
     @mix        = null
@@ -37,7 +39,8 @@ class Nav
     @set( msg )
     @warnMsg = 'None' if not msg.warnMsg?
     @source  = 'None' if not msg.source?
-    { source:@source, route:@route, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey,warnMsg:@warnMsg, imgsIdx:@imgsIdx }
+    { source:@source, route:@route, compKey:@compKey, inovKey:@inovKey, pracKey:@pracKey,
+    dispKey:@dispKey,warnMsg:@warnMsg, imgsIdx:@imgsIdx }
 
   set:( msg ) ->
     for own key, val of msg
@@ -166,26 +169,26 @@ class Nav
     if @imgsNum > 0 and ( dir is 'west' or dir is 'east' )
       @imgsIdx = @prevImg() if dir is 'west'
       @imgsIdx = @nextImg() if dir is 'east'
-    else if @isPageTalk( sectObj, hasChildren, @pageKey )
-       @pageKey = switch dir
-         when 'west','north','prev' then @prevKey(  @pageKey, sectObj.keys )
-         when 'east','south'        then @nextKey(  @pageKey, sectObj.keys )
-         when 'next             '   then @nextPage( @pageKey, sectObj.keys, sectObj.peys ) # Special case
+    else if @isPageTalk( sectObj, hasChildren, @presKey )
+       @presKey = switch dir
+         when 'west','north','prev' then @prevKey(  @presKey, sectObj.keys )
+         when 'east','south'        then @nextKey(  @presKey, sectObj.keys )
+         when 'next             '   then @nextPage( @presKey, sectObj.keys, sectObj.peys ) # Special case
          else 'None'
     else
        @dispKey = switch dir
          when 'west'  then @prevKey(  @dispKey, sectObj.peys )
          when 'east'  then @nextKey(  @dispKey, sectObj.peys )
-         when 'north' then @pageKey = 'None';          @dispKey
-         when 'south' then @pageKey = sectObj.keys[0]; @dispKey
+         when 'north' then @presKey = 'None';          @dispKey
+         when 'south' then @presKey = sectObj.keys[0]; @dispKey
          when 'prev'  then @prevKey(  @dispKey, sectObj.peys )
          when 'next'  then @nextDisp( @dispKey, sectObj.keys, sectObj.peys )  # Special case
          else              'None'
-    console.log( 'Nav.dirTalk()', { dir:dir, pracKey:@pracKey, dispKey:@dispKey, pageKey:@pageKey, imgsIdx:@imgsIdx,
-    sectObj:sectObj, hasChildren:hasChildren } )
-    # msg.dispKey = @dispKey
-    # msg.pageKey = @pageKey
-    # msg.imgsIdx = @imgsIdx
+    # console.log( 'Nav.dirTalk()', { dir:dir, pracKey:@pracKey, dispKey:@dispKey, presKey:@presKey, imgsIdx:@imgsIdx,
+    # sectObj:sectObj, hasChildren:hasChildren } )
+    msg.dispKey = @dispKey
+    msg.presKey = @presKey
+    msg.imgsIdx = @imgsIdx
     @pub( msg )
     return
 
@@ -195,8 +198,8 @@ class Nav
   nextImg:() ->
     if @imgsIdx < @imgsNum-1 then @imgsIdx+1 else 0
 
-  isPageTalk:( sectObj, hasChildren, pageKey ) ->
-    @ and hasChildren and sectObj[pageKey]?
+  isPageTalk:( sectObj, hasChildren, presKey ) ->
+    @ and hasChildren and sectObj[presKey]?
 
   dirsNavd:( route ) ->
     dirs = @dirsNavdTalk(route)
@@ -208,7 +211,7 @@ class Nav
     return dirs if route isnt 'Talk' or @pracKey is 'None'
     sectObj     = @mix().sectObject( @pracKey, @dispKey )
     hasChildren = @mix().isArray(sectObj.keys)
-    if @isPageTalk( sectObj, hasChildren, @pageKey )
+    if @isPageTalk( sectObj, hasChildren, @presKey )
       @dirsNavdTalkPage( dirs, sectObj )
     else
       @dirsNavdTalkSect( dirs, sectObj, hasChildren )
@@ -224,7 +227,7 @@ class Nav
     return
 
   dirsNavdTalkPage:( dirs, sectObj ) ->
-    pageObj     = @mix().pageObject(  sectObj, @pageKey )
+    pageObj     = @mix().pageObject(  sectObj, @presKey )
     dirs.west   = pageObj.name isnt sectObj.keys[0]
     dirs.prev   = dirs.west
     dirs.east   = pageObj.name isnt sectObj.keys[sectObj.keys.length-1]
@@ -256,28 +259,28 @@ class Nav
   # Special case
   nextDisp:( dispKey, keys, peys ) ->
     if keys[0]?
-      @pageKey = keys[0]
+      @presKey = keys[0]
       dispKey
     else
-      @pageKey = 'None'
+      @presKey = 'None'
       @nextKey( dispKey, peys )
 
   dirPage:( dir ) ->
-    pagesKey = @getPagesKeyFromRouteCompKey( @route, @compKey )
+    pagesKey = @getPagesKey( @route, @compKey )
     msg = {}
     msg.source = "#{'Nav.dirPage'}(#{dir})"
-    pageKey = if @hasActivePageDir(@route,dir) then @movePage(@pages[@route],dir) else 'None'
+    pageKey = if @hasActivePageDir(@route,dir) then @movePage(@pages[pagesKey],dir) else 'None'
     if pageKey isnt 'None'
       @setPageKey( pagesKey, pageKey )
-      @pub( msg )
+      # @pub( msg )
     else
       @log( msg, warnMsg:"Cannot find pageKey for #{dir}" )
     return
 
   movePage:( page, dir  ) ->
-    pagesKey = @getPagesKeyFromRouteCompKey( @route, @compKey )
-    pageKey  = @getPageKey( @route )
-    len     = page.keys.length
+    pagesKey = @getPagesKey( @route, @compKey )
+    pageKey  = @getPageKey( pagesKey )
+    len      = page.keys.length
     if pageKey isnt 'None'
       idx = page.keys.indexOf(pageKey)
       ndx = @range(idx+1,len) if dir is 'east'
@@ -285,7 +288,6 @@ class Nav
       pageKey = page.keys[ndx]
     else
       pageKey = if dir is 'east' then page.keys[0] else page.keys[len-1]
-    @setPageKey( pagesKey, pageKey )
     pageKey
 
   range:( idx, len ) ->
@@ -302,34 +304,34 @@ class Nav
     return
 
   setPageKey:( pagesKey, pageKey ) ->
-    return             if not @hasPages(pagesKey)
+    # return             if not @hasPages(pagesKey)
     for own key, page  of @pages[pagesKey].pages
       page.show = key  is pageKey
+    # console.log( 'Nav.setPageKey()', { pagesKey:pagesKey, pageKey:pageKey, has:@hasPages(pagesKey) } )
     return
 
-  # pagesKeys is usually a route except for Comp which uses getPagesKeyFromRouteCompKey:( route, compKey )
+  # pagesKeys is usually a route except for Comp which uses getPagesKey:( route, compKey )
   getPageKey:( pagesKey ) ->
+    return 'None' if not @hasPages(pagesKey)
     for own  key,   page  of @pages[pagesKey].pages
       return key if page.show
     pageKey = @pages[pagesKey].keys[0] # Default is first page
     @pages[pagesKey].pages[pageKey].show = true
+    # console.log( 'Nav.getPageKey()', { pagesKey:pagesKey, pageKey:pageKey, has:@hasPages(pagesKey) } )
     pageKey
 
-  getPagesKeyFromRouteCompKey:( route, compKey ) ->
-    key = route
+  getPagesKey:( route, compKey ) ->
+    pagesKey = route
     if route is 'Comp'
-      key = 'pages'
+      pagesKey = 'Pane'
     else if route is 'Inov'
-      key = switch compKey
-        when 'Info' then 'infos'
-        when 'Know' then 'knows'
-        when 'Wise' then 'wises'
-        else             'infos'
-    key
+      pagesKey = compKey
+    pagesKey
 
-  # Inov plays a roll is validating pageKey
-  isPageKey:( pageKey ) ->
-    pageKey? and pageKey isnt 'None' # and not @isInov(@route)
+  hasPages:( pagesKey ) ->
+    has = @isDef(@pages[pagesKey]) and @isDef(@pages[pagesKey].pages) and @pages[pagesKey].keys.length > 0
+    # console.log( 'Nav.hasPages()', { pagesKey:pagesKey, has:@isDef(@pages[pagesKey]), pages:@pages } ) # if not has
+    has
 
   hasPageKey:( pagesKey, pageKey ) ->
     @isDef(pageKey) and @hasPages(pagesKey) and @pages[pagesKey].pages[pageKey]?
@@ -339,10 +341,6 @@ class Nav
     for own  key,    page  of @pages[pagesKey].pages
       return true if page.show
     false
-
-  hasPages:( pagesKey ) ->
-    has = @pages[pagesKey]? and @pages[pagesKey].pages? and @pages[pagesKey].keys.length > 0
-    has
 
   hasActivePageDir:( pagesKey, dir ) ->
      @hasActivePage( pagesKey ) and ( dir is 'west' or dir is 'east' )

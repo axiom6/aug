@@ -23,11 +23,10 @@
           this.mix().nav().setPageKey( this.pagesKey, this.pageKey ); }
         else {
           console.error( 'Tabs.vue.onPage() bad pageKey', pageKey ); } },
-      doPage: function (key) {
-          this.onPage( key );
-          let nav = this.mix().nav();
-          let inovKey = this.route === 'Inov' ? key : nav.inovKey;
-          let obj = { source:'Tabs',route:this.route, inovKey:inovKey, pageKey:key };
+      doPage: function (pageKey) {
+          this.onPage( pageKey );
+          let obj = { source:'Tabs',route:this.route }
+          if( this.route === 'Inov' ) { obj.inovKey = pageKey; }
           this.mix().nav().pub( obj ); },
       stylePos: function () {
         return this.positions[this.position]; },
@@ -35,10 +34,10 @@
         return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },
 
     mounted: function() {
-      this.onPage( this.mix().nav().getPageKey( this.pagesKey ) )
+      this.onPage(    this.mix().nav().getPageKey( this.pagesKey ) )
       this.mix().subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {
         if( obj.source !== 'Tabs' && obj.route === this.route ) {
-          this.onPage( obj.pageKey ); } } ); } 
+          this.onPage( this.mix().nav().getPageKey( this.pagesKey ) ); } } ); }
     }
   
 </script>

@@ -27,10 +27,13 @@
         } } },
     
     methods: {
-      this.mix().nav().setPages( this.route, this.pages );
+      
       myRoute: function() {
-        return this.mix().isRoute('Note'); } }
-    
+        return this.mix().isRoute('Note'); } },
+
+    mounted: function () {
+      this.mix().nav().setPages( this.route, this.pages ); }
+
   }
   
   export default Note;

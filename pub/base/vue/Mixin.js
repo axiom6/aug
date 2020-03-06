@@ -307,27 +307,27 @@ Mixin = class Mixin {
               sectObj.imgsIdx = this.nav().imgsIdx;
               return sectObj;
             },
-            pageObject: function(sectObj, pageKey) {
+            presObject: function(sectObj, presKey) {
               var pageObj;
-              pageKey = pageKey === 'None' && (sectObj.keys[0] != null) ? sectObj.keys[0] : pageKey;
+              presKey = presKey === 'None' && (sectObj.keys[0] != null) ? sectObj.keys[0] : presKey;
               pageObj = null;
-              if (pageKey !== 'None' && (sectObj[pageKey] != null)) {
-                pageObj = sectObj[pageKey];
+              if (pageKey !== 'None' && (sectObj[presKey] != null)) {
+                pageObj = sectObj[presKey];
                 pageObj.src = sectObj.src;
-                pageObj.name = pageKey;
+                pageObj.name = presKey;
                 pageObj.peys = sectObj.keys;
                 pageObj.keys = pageObj.keys != null ? pageObj.keys : Util.childKeys(pageObj);
               }
               // console.log( 'Mixin.pageObj()', { dispKey:sectObj.name, pageKey:pageKey, pageObj:pageObj } )
               return pageObj;
             },
-            dataObject: function(sectObj, pageKey) {
+            dataObject: function(sectObj, presKey) {
               var dataObj;
               dataObj = null;
               if (sectObj.type === 'Prac') {
                 dataObj = this.pracObject(sectObj.src, sectObj.name);
-              } else if (sectObj.type === 'Disp' && pageKey !== 'None') {
-                dataObj = this.dispObject(sectObj.src, sectObj.name, pageKey);
+              } else if (sectObj.type === 'Disp' && presKey !== 'None') {
+                dataObj = this.dispObject(sectObj.src, 'None', sectObj.name, presKey);
               }
               return dataObj;
             },

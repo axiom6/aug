@@ -24,23 +24,24 @@
     methods: {
       
       doTalk: function(talkKey) {
-        this.mix().nav().pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None' } );
+        this.mix().nav().pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None',
+          presKey:'None', imgsNum:0, imgsIdx:0 } );
         this.mix().nav().dirsNavd('Init'); },
 
       onNav: function (obj) {
         if( this.mix().nav().isMyNav( obj, 'Talk' ) ) {
-            this.onSect( obj.pracKey, obj.dispKey, obj.pageKey, obj.imgsIdx ); } },
+            this.onSect( obj.pracKey, obj.dispKey, obj.presKey, obj.imgsIdx ); } },
 
-      onSect: function( talkKey, sectKey, pageKey, imgsIdx ) {
+      onSect: function( talkKey, sectKey, presKey, imgsIdx ) {
         let  dispObj = this.mix().sectObject( talkKey, sectKey );
-        this.sectObj = this.mix().isDef(pageKey) ? this.mix().pageObject(dispObj,pageKey) : dispObj;
+        this.sectObj = this.mix().isDef(presKey) ? this.mix().presObject(dispObj,presKey) : dispObj;
         if( !this.mix().isDef(this.sectObj) ) {
           console.error( 'Talk.vue.onSect() sectObj null',
-            { dispObj:dispObj, talkKey:talkKey, sectKey:sectKey, pageKey:pageKey } );
+            { dispObj:dispObj, talkKey:talkKey, sectKey:sectKey, presKey:presKey } );
           this.sectObj = {}; }
         this.sectObj.imgsIdx = imgsIdx;
         this.imgsObj = this.mix().compObject( 'Imgs' );
-        // console.log( 'imgsObj', this.imgsObj );
+        
       } },
 
     beforeMount: function() {

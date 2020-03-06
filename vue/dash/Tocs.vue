@@ -6,7 +6,7 @@
         <div   v-on:click="doComp(komp.key)">
           <div  :style="styleComp(komp.key)"><i :class="komp.icon"></i>{{komp.title}}</div>
         </div>
-        <ul v-if="myKomp(komp.key)"><template v-for="prac in tocPracs(compKey)" >
+        <ul v-if="myKomp(komp.key)"><template v-for="prac in tocPracs(compKey,inovKey)" >
           <li v-on:click="doPrac(prac.name)" :style="style(prac)" :key="prac.name">
             <i :class="prac.icon"></i>
             <span>{{prac.name}}</span>
@@ -26,7 +26,7 @@
   let Tocs = {
     
     data: function() {
-      return { komps:{}, compKey:'Home', pracKey:'None', dispKey:'None', routNav:'None' } },
+      return { komps:{}, compKey:'Home', inovKey:'None', pracKey:'None', dispKey:'None', routNav:'None' } },
     
     methods: {
       myKomp: function(kompKey) {
@@ -36,7 +36,7 @@
         this.compKey = compKey;
         this.inovKey = compKey;
         let obj = { route:route, compKey:compKey, inovKey:this.inovKey, source:'Toc' }
-        this.pub( obj ); }, // this.mix().nav().pubInov( obj )
+        this.pub( obj ); },
       doPrac: function(pracKey) {
         this.pracKey = pracKey;
         let route    = this.mix().isMuse() ? 'Prac' : pracKey;
@@ -53,6 +53,7 @@
           if( this.keyEq(this.compKey,obj.compKey ) ) { this.compKey = obj.compKey; }
           if( this.keyEq(this.pracKey,obj.pracKey ) ) { this.pracKey = obj.pracKey; }
           if( this.keyEq(this.dispKey,obj.dispKey ) ) { this.dispKey = obj.dispKey; }
+          if( this.keyEq(this.inovKey,obj.inovKey ) ) { this.inovKey = obj.inovKey; }
           if( this.keyEq(this.routNav,obj.route   ) ) { this.routNav = obj.route;   } } },
       keyEq: function( tkey, okey ) {
          return this.mix().isDef(okey) && tkey !== okey; },
@@ -62,11 +63,9 @@
       style: function( ikwObj ) {
         return this.mix().styleObj(ikwObj); },
 
-      tocPracs: function(compKey) {
-        let pagesKey = this.mix().nav().getPagesKeyFromRouteCompKey('Inov', compKey );
-        let inovKey  = this.mix().nav().getPageKey( pagesKey );
-        let pracs    = this.mix().inovObject( compKey, inovKey );
-        let filts    = {}
+      tocPracs: function(compKey,inovKey) {
+        let pracs = this.mix().inovObject( compKey, inovKey );
+        let filts = {}
         for( let key in pracs ) {
           let prac = pracs[key];
           if( prac.row !== 'Dim' || compKey === 'Prin' ) {

@@ -21,6 +21,8 @@ Nav = class Nav {
     this.pracKey = 'None';
     this.dispKey = 'None';
     this.warnMsg = 'None';
+    this.inovKey = 'None'; // Only used by Tabs to Tocs
+    this.presKey = 'None';
     this.imgsIdx = 0;
     this.imgsNum = 0;
     this.mix = null;
@@ -59,6 +61,7 @@ Nav = class Nav {
       source: this.source,
       route: this.route,
       compKey: this.compKey,
+      inovKey: this.inovKey,
       pracKey: this.pracKey,
       dispKey: this.dispKey,
       warnMsg: this.warnMsg,
@@ -263,18 +266,18 @@ Nav = class Nav {
       if (dir === 'east') {
         this.imgsIdx = this.nextImg();
       }
-    } else if (this.isPageTalk(sectObj, hasChildren, this.pageKey)) {
-      this.pageKey = (function() {
+    } else if (this.isPageTalk(sectObj, hasChildren, this.presKey)) {
+      this.presKey = (function() {
         switch (dir) {
           case 'west':
           case 'north':
           case 'prev':
-            return this.prevKey(this.pageKey, sectObj.keys);
+            return this.prevKey(this.presKey, sectObj.keys);
           case 'east':
           case 'south':
-            return this.nextKey(this.pageKey, sectObj.keys);
+            return this.nextKey(this.presKey, sectObj.keys);
           case 'next             ':
-            return this.nextPage(this.pageKey, sectObj.keys, sectObj.peys); // Special case
+            return this.nextPage(this.presKey, sectObj.keys, sectObj.peys); // Special case
           default:
             return 'None';
         }
@@ -287,10 +290,10 @@ Nav = class Nav {
           case 'east':
             return this.nextKey(this.dispKey, sectObj.peys);
           case 'north':
-            this.pageKey = 'None';
+            this.presKey = 'None';
             return this.dispKey;
           case 'south':
-            this.pageKey = sectObj.keys[0];
+            this.presKey = sectObj.keys[0];
             return this.dispKey;
           case 'prev':
             return this.prevKey(this.dispKey, sectObj.peys);
@@ -301,18 +304,11 @@ Nav = class Nav {
         }
       }).call(this);
     }
-    console.log('Nav.dirTalk()', {
-      dir: dir,
-      pracKey: this.pracKey,
-      dispKey: this.dispKey,
-      pageKey: this.pageKey,
-      imgsIdx: this.imgsIdx,
-      sectObj: sectObj,
-      hasChildren: hasChildren
-    });
-    // msg.dispKey = @dispKey
-    // msg.pageKey = @pageKey
-    // msg.imgsIdx = @imgsIdx
+    // console.log( 'Nav.dirTalk()', { dir:dir, pracKey:@pracKey, dispKey:@dispKey, presKey:@presKey, imgsIdx:@imgsIdx,
+    // sectObj:sectObj, hasChildren:hasChildren } )
+    msg.dispKey = this.dispKey;
+    msg.presKey = this.presKey;
+    msg.imgsIdx = this.imgsIdx;
     this.pub(msg);
   }
 
@@ -332,8 +328,8 @@ Nav = class Nav {
     }
   }
 
-  isPageTalk(sectObj, hasChildren, pageKey) {
-    return this && hasChildren && (sectObj[pageKey] != null);
+  isPageTalk(sectObj, hasChildren, presKey) {
+    return this && hasChildren && (sectObj[presKey] != null);
   }
 
   dirsNavd(route) {
@@ -357,7 +353,7 @@ Nav = class Nav {
     }
     sectObj = this.mix().sectObject(this.pracKey, this.dispKey);
     hasChildren = this.mix().isArray(sectObj.keys);
-    if (this.isPageTalk(sectObj, hasChildren, this.pageKey)) {
+    if (this.isPageTalk(sectObj, hasChildren, this.presKey)) {
       this.dirsNavdTalkPage(dirs, sectObj);
     } else {
       this.dirsNavdTalkSect(dirs, sectObj, hasChildren);
@@ -376,7 +372,7 @@ Nav = class Nav {
 
   dirsNavdTalkPage(dirs, sectObj) {
     var pageObj;
-    pageObj = this.mix().pageObject(sectObj, this.pageKey);
+    pageObj = this.mix().pageObject(sectObj, this.presKey);
     dirs.west = pageObj.name !== sectObj.keys[0];
     dirs.prev = dirs.west;
     dirs.east = pageObj.name !== sectObj.keys[sectObj.keys.length - 1];
@@ -418,24 +414,24 @@ Nav = class Nav {
   // Special case
   nextDisp(dispKey, keys, peys) {
     if (keys[0] != null) {
-      this.pageKey = keys[0];
+      this.presKey = keys[0];
       return dispKey;
     } else {
-      this.pageKey = 'None';
+      this.presKey = 'None';
       return this.nextKey(dispKey, peys);
     }
   }
 
   dirPage(dir) {
     var msg, pageKey, pagesKey;
-    pagesKey = this.getPagesKeyFromRouteCompKey(this.route, this.compKey);
+    pagesKey = this.getPagesKey(this.route, this.compKey);
     msg = {};
     msg.source = `${'Nav.dirPage'}(${dir})`;
-    pageKey = this.hasActivePageDir(this.route, dir) ? this.movePage(this.pages[this.route], dir) : 'None';
+    pageKey = this.hasActivePageDir(this.route, dir) ? this.movePage(this.pages[pagesKey], dir) : 'None';
     if (pageKey !== 'None') {
       this.setPageKey(pagesKey, pageKey);
-      this.pub(msg);
     } else {
+      // @pub( msg )
       this.log(msg, {
         warnMsg: `Cannot find pageKey for ${dir}`
       });
@@ -444,8 +440,8 @@ Nav = class Nav {
 
   movePage(page, dir) {
     var idx, len, ndx, pageKey, pagesKey;
-    pagesKey = this.getPagesKeyFromRouteCompKey(this.route, this.compKey);
-    pageKey = this.getPageKey(this.route);
+    pagesKey = this.getPagesKey(this.route, this.compKey);
+    pageKey = this.getPageKey(pagesKey);
     len = page.keys.length;
     if (pageKey !== 'None') {
       idx = page.keys.indexOf(pageKey);
@@ -459,7 +455,6 @@ Nav = class Nav {
     } else {
       pageKey = dir === 'east' ? page.keys[0] : page.keys[len - 1];
     }
-    this.setPageKey(pagesKey, pageKey);
     return pageKey;
   }
 
@@ -484,9 +479,6 @@ Nav = class Nav {
 
   setPageKey(pagesKey, pageKey) {
     var key, page, ref;
-    if (!this.hasPages(pagesKey)) {
-      return;
-    }
     ref = this.pages[pagesKey].pages;
     for (key in ref) {
       if (!hasProp.call(ref, key)) continue;
@@ -495,9 +487,13 @@ Nav = class Nav {
     }
   }
 
-  // pagesKeys is usually a route except for Comp which uses getPagesKeyFromRouteCompKey:( route, compKey )
+  // pagesKeys is usually a route except for Comp which uses getPagesKey:( route, compKey )
+  // console.log( 'Nav.setPageKey()', { pagesKey:pagesKey, pageKey:pageKey, has:@hasPages(pagesKey) } )
   getPageKey(pagesKey) {
     var key, page, pageKey, ref;
+    if (!this.hasPages(pagesKey)) {
+      return 'None';
+    }
     ref = this.pages[pagesKey].pages;
     for (key in ref) {
       if (!hasProp.call(ref, key)) continue;
@@ -508,34 +504,26 @@ Nav = class Nav {
     }
     pageKey = this.pages[pagesKey].keys[0];
     this.pages[pagesKey].pages[pageKey].show = true;
+    // console.log( 'Nav.getPageKey()', { pagesKey:pagesKey, pageKey:pageKey, has:@hasPages(pagesKey) } )
     return pageKey;
   }
 
-  getPagesKeyFromRouteCompKey(route, compKey) {
-    var key;
-    key = route;
+  getPagesKey(route, compKey) {
+    var pagesKey;
+    pagesKey = route;
     if (route === 'Comp') {
-      key = 'pages';
+      pagesKey = 'Pane';
     } else if (route === 'Inov') {
-      key = (function() {
-        switch (compKey) {
-          case 'Info':
-            return 'infos';
-          case 'Know':
-            return 'knows';
-          case 'Wise':
-            return 'wises';
-          default:
-            return 'infos';
-        }
-      })();
+      pagesKey = compKey;
     }
-    return key;
+    return pagesKey;
   }
 
-  // Inov plays a roll is validating pageKey
-  isPageKey(pageKey) {
-    return (pageKey != null) && pageKey !== 'None'; // and not @isInov(@route)
+  hasPages(pagesKey) {
+    var has;
+    has = this.isDef(this.pages[pagesKey]) && this.isDef(this.pages[pagesKey].pages) && this.pages[pagesKey].keys.length > 0;
+    // console.log( 'Nav.hasPages()', { pagesKey:pagesKey, has:@isDef(@pages[pagesKey]), pages:@pages } ) # if not has
+    return has;
   }
 
   hasPageKey(pagesKey, pageKey) {
@@ -556,12 +544,6 @@ Nav = class Nav {
       }
     }
     return false;
-  }
-
-  hasPages(pagesKey) {
-    var has;
-    has = (this.pages[pagesKey] != null) && (this.pages[pagesKey].pages != null) && this.pages[pagesKey].keys.length > 0;
-    return has;
   }
 
   hasActivePageDir(pagesKey, dir) {

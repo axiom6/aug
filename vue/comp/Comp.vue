@@ -6,10 +6,10 @@
     <div class="comp-comp" ref="Comp">
       <template v-for="pracObj in compObj">
         <div   :class="pracObj.dir">
-          <p-sign   v-if="pages['Sign'].show" :pracObj="pracObj"></p-sign>
-          <p-dirs   v-if="pages['Dirs'].show" :pracObj="pracObj"></p-dirs>
-          <p-desc   v-if="pages['Desc'].show" :pracObj="pracObj"></p-desc>
-          <template v-if="pages['Conn'].show">
+          <p-sign   v-if="Pane['Sign'].show" :pracObj="pracObj"></p-sign>
+          <p-dirs   v-if="Pane['Dirs'].show" :pracObj="pracObj"></p-dirs>
+          <p-desc   v-if="Pane['Desc'].show" :pracObj="pracObj"></p-desc>
+          <template v-if="Pane['Conn'].show">
             <p-conn v-if="!isDim(pracObj)" :pracObj="pracObj" level="Comp"></p-conn>
             <p-sign v-if=" isDim(pracObj)" :pracObj="pracObj"></p-sign>
           </template>
@@ -37,22 +37,22 @@
     components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },
     
     data() { return { compKey:'None', compObj:null, pracObj:{}, myRows:{},
-      pages:{
+      Pane:{
         Sign: { title:'Practices',    key:'Sign', show:true  },
         Dirs: { title:'Disciplines',  key:'Dirs', show:false },
         Conn: { title:'Connections',  key:'Conn', show:false },
         Desc: { title:'Descriptions', key:'Desc', show:false } },
-      infos:{
+      Info:{
         Info: { title:'Information',  key:"Info", show:true,  icon:"fas fa-th"         },
         Soft: { title:'Software',     key:"Soft", show:false, icon:"fas fa-codepen"    },
         Data: { title:'Data',         key:"Data", show:false, icon:"fas fa-table"      } },
-      knows:{
+      Know:{
         Know: { title:'Knowledge',    key:"Know", show:true,  icon:"fas fa-university" },
         Scie: { title:'Science',      key:"Scie", show:false, icon:"fas fa-flask"          },
         Math: { title:'Math',         key:"Math", show:false, icon:"fas fa-calculator"     } },
-      wises:{
+      Wise:{
         Wise: { title:'Wisdom',       key:"Wise", show:true, icon:"fas fa-tripadvisor" } },
-      rows: {
+      Rows: {
         Plane:{ name:'Information', dir:'cm', icon:"fas fa-th" },
         Learn:{ name:'Learn',       dir:'le', icon:"fas fa-graduation-cap" },
         Do:{    name:'Do',          dir:'do', icon:"fas fa-cog" },
@@ -60,18 +60,20 @@
     
     methods: {
       pagesKey: function(route) {
-        return this.mix().nav().getPagesKeyFromRouteCompKey(route,this.compKey); },
-      tabPages: function(route) {
+        return this.mix().nav().getPagesKey(route,this.compKey); },
+      setPages: function(route) {
         let key   = this.pagesKey(route);
         let pages = this[key];
-        this.mix().nav().setPages( key, pages );
-        return pages; },
+        this.mix().nav().setPages( key, pages ); },
+      tabPages: function(route) {
+        let pagesKey = this.pagesKey(route);
+        return this[pagesKey]; },
       hasInovs: function() {
         return this.mix().isPlane(this.compKey) },
       onRows: function () {
          let pages            = this.tabPages('Comp');
          let pageKey          = 'Sign'
-         this.myRows          = this.rows;
+         this.myRows          = this.Rows;
          this.myRows['Plane']      = pages[pageKey];
          this.myRows['Plane'].name = pages[pageKey].title
          this.myRows['Plane'].dir  = 'cm';  },
@@ -80,7 +82,6 @@
         this.onRows();
         let  inovKey = this.mix().nav().getPageKey( this.pagesKey('Inov') );
         this.compObj = this.mix().inovObject( this.compKey, inovKey ); },
-
       isDim: function ( pracObj ) {
         return pracObj.row==="Dim"; },
       isRows: function () {
@@ -90,7 +91,9 @@
             this.onComp( obj ); } } },
 
     beforeMount: function() {
-      this.onComp( { route:'Comp', compKey:this.mix().nav().compKey } ); },
+      this.onComp( { route:'Comp', compKey:this.mix().nav().compKey } );
+      this.setPages('Comp')
+      this.setPages('Inov') },
 
     mounted: function () {
       this.mix().subscribe( 'Nav', 'Comp.vue', (obj) => {
