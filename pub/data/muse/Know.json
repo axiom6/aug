@@ -1,5 +1,5 @@
 {
-  "Humanity":{ "type":"pane", "hsv":[195,90,60],"column":"Embrace","row":"Learn","plane":"Know","icon":"fas fa-users",
+  "Social":{ "type":"pane", "hsv":[195,90,60],"column":"Embrace","row":"Learn","plane":"Know","icon":"fas fa-users",
     "cells":[5,12,7,12], "dir":"nw", "neg":"Greed",
     "desc":"",
     "Art":       { "dir":"west", "icon":"fas fa-palette","hsv":[195,90,70],
@@ -12,7 +12,7 @@
       "Literature": { "icon":"fas fa-book-reader", "desc":"" },
       "Poetry":     { "icon":"fas fa-comments", "desc":"" },
       "Happening":   { "icon":"fab fa-pied-piper-alt", "desc":"" } },
-    "Social": { "dir":"east","icon":"fas fa-brain", "hsv":[30,60,90],
+    "Study": { "dir":"east","icon":"fas fa-brain", "hsv":[30,60,90],
       "desc":"",
       "Psychology": { "icon":"fas fa-brain", "desc":"" },
       "Sociology":  { "icon":"fas fa-user-friends", "desc":"" },
@@ -23,7 +23,7 @@
       "Dance":      { "icon":"fab fa-pied-piper-alt", "desc":"" },
       "Theater":    { "icon":"fas fa-theater-masks", "desc":"" } }
   },
-  "Concept":{ "type":"pane", "hsv":[45,90,90],"column":"Innovate","row":"Learn","plane":"Know","icon":"fas fa-flask",
+  "Discover":{ "type":"pane", "hsv":[45,90,90],"column":"Innovate","row":"Learn","plane":"Know","icon":"fas fa-flask",
     "cells":[17,12,7,12],  "dir":"north", "neg":"Dogma",
     "desc":"",
     "Observe":    { "dir":"west", "icon":"fas fa-binoculars", "hsv":[195,90,70], "paradigm":"Empirical",
@@ -47,7 +47,7 @@
       "Engineer":    { "icon":"fas fa-procedures", "desc":"" },
       "Medical":    { "icon":"fas fa-user-md", "desc":"" } }
   },
-  "Meaning":{ "type":"pane", "hsv":[20,50,90],"column":"Encourage","row":"Learn","plane":"Know","icon":"fab fa-tripadvisor",
+  "Understand":{ "type":"pane", "hsv":[20,50,90],"column":"Encourage","row":"Learn","plane":"Know","icon":"fab fa-tripadvisor",
     "cells":[29,12,7,12], "dir":"ne", "neg":"Disregard",
     "desc":"",
     "Paradigm":    { "dir":"west", "icon":"fas fa-balance-scale",  "hsv":[195,90,70],
@@ -71,7 +71,7 @@
       "Anthro":        { "icon":"fas fa-users", "desc":"Anthropology" },
       "Linguistic":   { "icon":"fas fa-user-friends", "desc":"" } }
   },
-  "Conduct":{ "type":"pane", "hsv":[195,90,60],"column":"Embrace","row":"Do","plane":"Know","icon":"fas fa-music",
+  "Orchestrate":{ "type":"pane", "hsv":[195,90,60],"column":"Embrace","row":"Do","plane":"Know","icon":"fas fa-music",
     "cells":[5,12,19,12], "dir":"west",  "neg":"Manipulate",
     "desc":"",
     "Adjust": { "dir":"west",  "icon":"fas fa-headphones", "hsv":[195,90,70],

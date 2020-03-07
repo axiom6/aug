@@ -49,7 +49,7 @@
       "Inventory":   { "icon":"fas fa-warehouse", "desc":""  },
       "Relevance":   { "icon":"fas fa-sort-amount-up", "desc":""  } }
   },
-  "Discover":{ "type":"pane", "hsv":[20,50,90],"column":"Encourage","row":"Learn","plane":"Info","icon":"fas fa-eye",
+  "Relate":{ "type":"pane", "hsv":[20,50,90],"column":"Encourage","row":"Learn","plane":"Info","icon":"fas fa-eye",
     "cells":[29,12, 7,12], "dir":"ne", "neg":"Conceal",
     "desc":"Gaining Insight to articulate an ethical Vision for defining a Strategy to learn about our Market and ourselves.",
     "Insight":  { "dir":"west", "icon":"fas fa-eye",    "hsv":[195,90,70],

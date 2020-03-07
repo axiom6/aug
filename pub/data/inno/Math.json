@@ -1,5 +1,5 @@
 {
-  "Theorum":{ "type":"pane", "hsv":[45,90,90],"column":"Innovate","row":"Learn","plane":"Know","icon":"fas fa-flask",
+  "Conjecture":{ "type":"pane", "hsv":[45,90,90],"column":"Innovate","row":"Learn","plane":"Know","icon":"fas fa-flask",
     "cells":[17,12,7,12],  "dir":"north", "neg":"Dogma",
     "desc":"",
     "Inquiry":    { "dir":"west", "icon":"fas fa-binoculars", "hsv":[195,90,70],
@@ -12,7 +12,7 @@
       "A":        { "icon":"fas fa-chart-area", "desc":"" },
       "B":     { "icon":"fas fa-magnet", "desc":"" },
       "C":   { "icon":"fas fa-flask", "desc":"" } },
-    "Research":    { "dir":"east",  "icon":"fas fa-flask", "hsv":[30,60,90],
+    "Theorum":    { "dir":"east",  "icon":"fas fa-flask", "hsv":[30,60,90],
       "desc":"",
       "A":  { "icon":"fas fa-vials", "desc":"" },
       "B":      { "icon":"fas fa-network-wired", "desc":"" },
