@@ -11055,6 +11055,14 @@
 		"oAP": "/zzz/notes/text/html.txt",
 		"oF": 0
 		},
+	"/zzz/notes/text/Hum-Stick.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/text/Hum-Stick.txt",
+		"oF": 0
+		},
 	"/zzz/notes/text/Info.txt": {
 		"cB": 0,
 		"ft": 8192,
@@ -11093,6 +11101,14 @@
 		"hM": 0,
 		"oA": 0,
 		"oAP": "/zzz/notes/text/Resize.txt",
+		"oF": 0
+		},
+	"/zzz/notes/text/Shopify.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/text/Shopify.txt",
 		"oF": 0
 		},
 	"/zzz/notes/text/tags.txt": {

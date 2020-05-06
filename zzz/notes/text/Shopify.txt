@@ -1,0 +1,35 @@
+
+ CampNWorld.com
+
+1. Image
+   a. Ease up on homepage hero slides - Campfile
+   b. Decrease thumbnail image size
+   c. Compress and reduce images
+   d. Lazy load images
+
+2. Popup and Apps
+   a. Use pop-up quick view windows sparingly
+   b. Weigh the benefits of installing another app
+   c. Beware of excessive liquid loops
+
+3. Hosting and Linking
+   a. Use fast and reliable hosting
+   b. Use a content delivery network (CDN)
+      - We use the asset_url filter and automatically append version numbers to all of the URLs we generate
+   c. Reduce redirects and remove broken links
+      <link rel=”preconnect” href=”example.com” crossorigin>
+   d. Monitor the number of requests per subdomain
+
+4. Testing and Minify
+   a. Organize your tracking with Google Tag Manager
+   b. Prioritize testing and optimizing your mobile performance
+      - Pagespeed Google Labes
+   c. Minify your code universally
+
+5. Build for mobile first
+   a. Stop using carousels and sliders
+
+6. CSS
+   a. font-display: swap
+   b. change your CSS syntax to include the asset_url filter
+

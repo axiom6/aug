@@ -1,8 +1,9 @@
 
 <template>
   <div class="comp-pane">
-    <b-tabs route="Comp" :pagesKey="pagesKey('Comp')" :pages="tabPages('Comp')" position="left" ></b-tabs>
-    <b-tabs route="Inov" :pagesKey="pagesKey('Inov')" :pages="tabPages('Inov')" position="right" v-if="hasInovs()"></b-tabs>
+    <b-tabs route="Comp" :pagesInit="pagesComp('Comp')" :pages="tabPages('Comp')" position="left" ></b-tabs>
+    <b-tabs route="Inov" :pagesInit="pagesComp('Inov')" :pages="tabPages('Inov')" position="right"
+      v-if="hasInovs()"></b-tabs>
     <div class="comp-comp" ref="Comp">
       <template v-for="pracObj in compObj">
         <div   :class="pracObj.dir">
@@ -36,7 +37,7 @@
 
     components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },
     
-    data() { return { compKey:'None', compObj:null, pracObj:{}, myRows:{},
+    data() { return { compKey:'None', inovKey:'None', compObj:null, pracObj:{}, myRows:{},
       Pane:{
         Sign: { title:'Practices',    key:'Sign', show:true  },
         Dirs: { title:'Disciplines',  key:'Dirs', show:false },
@@ -59,15 +60,15 @@
         Share:{ name:'Share',       dir:'sh', icon:"fas fa-share-alt-square" } } } },
     
     methods: {
-      pagesKey: function(route) {
-        return this.mix().nav().getPagesKey(route,this.compKey); },
+      pagesComp: function(route) {
+        return this.mix().nav().getPagesComp(route,this.compKey); },
       setPages: function(route) {
-        let key   = this.pagesKey(route);
-        let pages = this[key];
-        this.mix().nav().setPages( key, pages ); },
+        let pagesComp = this.pagesComp(route);
+        let pages     = this[pagesComp];
+        this.mix().nav().setPages( pagesComp, pages ); },
       tabPages: function(route) {
-        let pagesKey = this.pagesKey(route);
-        return this[pagesKey]; },
+        let pagesComp = this.pagesComp(route);
+        return this[pagesComp]; },
       hasInovs: function() {
         return this.mix().isPlane(this.compKey) },
       onRows: function () {
@@ -79,9 +80,12 @@
          this.myRows['Plane'].dir  = 'cm';  },
       onComp: function( obj ) {
         this.compKey = obj.compKey;
+        this.inovKey = obj.inovKey;
+        console.log( 'comp.onComp()', { compKey:this.compKey, inovKey:this.inovKey, obj:obj } )
         this.onRows();
-        let  inovKey = this.mix().nav().getPageKey( this.pagesKey('Inov') );
-        this.compObj = this.mix().inovObject( this.compKey, inovKey ); },
+        this.compObj = this.mix().inovObject( this.compKey, this.inovKey );
+        this.setPages('Comp');
+        this.setPages('Inov'); },
       isDim: function ( pracObj ) {
         return pracObj.row==="Dim"; },
       isRows: function () {
@@ -91,9 +95,7 @@
             this.onComp( obj ); } } },
 
     beforeMount: function() {
-      this.onComp( { route:'Comp', compKey:this.mix().nav().compKey } );
-      this.setPages('Comp')
-      this.setPages('Inov') },
+      this.onComp( { route:'Comp', compKey:this.mix().nav().compKey, inovKey:this.mix().nav().inovKey } ); },
 
     mounted: function () {
       this.mix().subscribe( 'Nav', 'Comp.vue', (obj) => {

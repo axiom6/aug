@@ -39,6 +39,7 @@ class Nav
     @set( msg )
     @warnMsg = 'None' if not msg.warnMsg?
     @source  = 'None' if not msg.source?
+    @inovKey = if @mix().isDef(msg.inovKey) then msg.inovKey else @compKey
     { source:@source, route:@route, compKey:@compKey, inovKey:@inovKey, pracKey:@pracKey,
     dispKey:@dispKey,warnMsg:@warnMsg, imgsIdx:@imgsIdx }
 
@@ -266,7 +267,7 @@ class Nav
       @nextKey( dispKey, peys )
 
   dirPage:( dir ) ->
-    pagesKey = @getPagesKey( @route, @compKey )
+    pagesKey = @getPagesComp( @route, @compKey )
     msg = {}
     msg.source = "#{'Nav.dirPage'}(#{dir})"
     pageKey = if @hasActivePageDir(@route,dir) then @movePage(@pages[pagesKey],dir) else 'None'
@@ -278,7 +279,7 @@ class Nav
     return
 
   movePage:( page, dir  ) ->
-    pagesKey = @getPagesKey( @route, @compKey )
+    pagesKey = @getPagesComp( @route, @compKey )
     pageKey  = @getPageKey( pagesKey )
     len      = page.keys.length
     if pageKey isnt 'None'
@@ -297,20 +298,21 @@ class Nav
     ndx
 
   # An important indicator of when Comps and Tabs are instanciated
-  setPages:( pagesKey, pagesObj ) ->
-    @pages[pagesKey] = {}
-    @pages[pagesKey].pages = pagesObj
-    @pages[pagesKey].keys  = Object.keys(pagesObj)
+  setPages:( pagesComp, pagesObj ) ->
+    @pages[pagesComp] = {}
+    @pages[pagesComp].pages = pagesObj
+    @pages[pagesComp].keys  = Object.keys(pagesObj)
     return
 
-  setPageKey:( pagesKey, pageKey ) ->
-    # return             if not @hasPages(pagesKey)
-    for own key, page  of @pages[pagesKey].pages
+  setPageKey:( pagesComp, pageKey ) ->
+    if not @hasPages(pagesComp)
+      console.log( 'Nav.setPageKey()', { pagesComp:pagesComp, pageKey:pageKey, has:@hasPages(pagesComp) } )
+      return
+    for own key, page  of @pages[pagesComp].pages
       page.show = key  is pageKey
-    # console.log( 'Nav.setPageKey()', { pagesKey:pagesKey, pageKey:pageKey, has:@hasPages(pagesKey) } )
     return
 
-  # pagesKeys is usually a route except for Comp which uses getPagesKey:( route, compKey )
+  # pagesKeys is usually a route except for Comp which uses getPagesComp:( route, compKey )
   getPageKey:( pagesKey ) ->
     return 'None' if not @hasPages(pagesKey)
     for own  key,   page  of @pages[pagesKey].pages
@@ -320,7 +322,7 @@ class Nav
     # console.log( 'Nav.getPageKey()', { pagesKey:pagesKey, pageKey:pageKey, has:@hasPages(pagesKey) } )
     pageKey
 
-  getPagesKey:( route, compKey ) ->
+  getPagesComp:( route, compKey ) ->
     pagesKey = route
     if route is 'Comp'
       pagesKey = 'Pane'
@@ -329,8 +331,10 @@ class Nav
     pagesKey
 
   hasPages:( pagesKey ) ->
-    has = @isDef(@pages[pagesKey]) and @isDef(@pages[pagesKey].pages) and @pages[pagesKey].keys.length > 0
-    # console.log( 'Nav.hasPages()', { pagesKey:pagesKey, has:@isDef(@pages[pagesKey]), pages:@pages } ) # if not has
+    # @isDef(@pages[pagesKey]) and @isDef(@pages[pagesKey].pages) and @pages[pagesKey].keys.length > 0
+    has = @pages[pagesKey]?
+    console.log( 'Nav.hasPages()', { pagesKey:pagesKey, has1:has, has2:@isDef(@pages[pagesKey]), pages:@pages } ) # if
+    # not has
     has
 
   hasPageKey:( pagesKey, pageKey ) ->

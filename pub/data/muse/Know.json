@@ -71,7 +71,7 @@
       "Anthro":        { "icon":"fas fa-users", "desc":"Anthropology" },
       "Linguistic":   { "icon":"fas fa-user-friends", "desc":"" } }
   },
-  "Orchestrate":{ "type":"pane", "hsv":[195,90,60],"column":"Embrace","row":"Do","plane":"Know","icon":"fas fa-music",
+  "Thrive":{ "type":"pane", "hsv":[195,90,60],"column":"Embrace","row":"Do","plane":"Know","icon":"fas fa-music",
     "cells":[5,12,19,12], "dir":"west",  "neg":"Manipulate",
     "desc":"",
     "Adjust": { "dir":"west",  "icon":"fas fa-headphones", "hsv":[195,90,70],
