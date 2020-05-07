@@ -81,7 +81,7 @@
       onComp: function( obj ) {
         this.compKey = obj.compKey;
         this.inovKey = obj.inovKey;
-        console.log( 'comp.onComp()', { compKey:this.compKey, inovKey:this.inovKey, obj:obj } )
+        // console.log( 'comp.onComp()', { compKey:this.compKey, inovKey:this.inovKey, obj:obj } )
         this.onRows();
         this.compObj = this.mix().inovObject( this.compKey, this.inovKey );
         this.setPages('Comp');

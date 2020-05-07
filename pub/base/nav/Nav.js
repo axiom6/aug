@@ -529,15 +529,14 @@ Nav = class Nav {
 
   hasPages(pagesKey) {
     var has;
-    // @isDef(@pages[pagesKey]) and @isDef(@pages[pagesKey].pages) and @pages[pagesKey].keys.length > 0
-    has = this.pages[pagesKey] != null;
-    console.log('Nav.hasPages()', {
-      pagesKey: pagesKey,
-      has1: has,
-      has2: this.isDef(this.pages[pagesKey]),
-      pages: this.pages // if
-    });
-    // not has
+    has = this.isDef(this.pages[pagesKey]) && this.isDef(this.pages[pagesKey].pages) && this.pages[pagesKey].keys.length > 0;
+    if (!has) {
+      console.log('Nav.hasPages()', {
+        pagesKey: pagesKey,
+        has: has,
+        pages: this.pages
+      });
+    }
     return has;
   }
 
@@ -604,7 +603,7 @@ Nav = class Nav {
 
   // --- Innovate --- Inov in one place
 
-  // Across the board Inov detector for compKey pageKey and route
+    // Across the board Inov detector for compKey pageKey and route
   isInov(route) {
     return this.inArray(route, ['Inov', 'Info', 'Know', 'Wise']);
   }

@@ -17,7 +17,7 @@
       positions:{ left:{ left:0, width:'60%' }, right:{ left:'60%', width:'40%' }, full:{ left:0, width:'100%' } } } },
     
     methods: {
-      onPage: function (pageKey,) {
+      onPage: function (pageKey) {
         if( this.mix().isDef(this.pagesComp) && this.mix().isDef(pageKey) ) {
           this.pageKey = pageKey;
           this.mix().nav().setPageKey( this.pagesComp, pageKey ); }
@@ -27,7 +27,7 @@
           this.onPage(  pageKey );
           let obj = { source:'Tabs',route:this.route }
           if( this.route === 'Inov' ) { obj.inovKey = pageKey; }
-          this.mix().nav().pub( obj ); },
+          this.mix().nav().pub(obj); },
       stylePos: function () {
         return this.positions[this.position]; },
       classTab: function (pageKey) {
@@ -35,15 +35,16 @@
     mounted: function() {
       let  pageKey = this.mix().nav().getPageKey(this.pagesComp);
       this.onPage(   pageKey );
-      console.log( 'Tabs.mounted()', { pagesComp:this.pagesComp, pageKey:pageKey } );
+      // console.log( 'Tabs.mounted()', { pagesComp:this.pagesComp, pageKey:pageKey } );
       this.mix().subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {
         if( obj.source !== 'Tabs'  ) { // && obj.route === this.route
-          if( this.route==='Inov' && this.mix().isDef(obj.inovKey) ) {
-            this.pagesComp = obj.inovKey; }
-          let  pageKey = this.mix().nav().getPageKey(this.pagesComp);
-          console.log( 'Tabs.subscribe()', obj, { route:this.route, inovKey:obj.inovKey, pagesComp:this.pagesComp,
-            pageKey:pageKey, pages:this.pages } );
-          this.onPage(pageKey); } } ); }
+          this.$nextTick( function() {
+            if( this.route==='Inov' && this.mix().isDef(obj.inovKey) ) {
+              this.pagesComp = obj.inovKey; }
+            let  pageKey = this.mix().nav().getPageKey(this.pagesComp);
+            // console.log( 'Tabs.subscribe()', obj, { route:this.route, inovKey:obj.inovKey, pagesComp:this.pagesComp,
+            //   pageKey:pageKey, pages:this.pages } );
+            this.onPage(pageKey); } ); } } ); }
     }
   
 </script>

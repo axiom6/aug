@@ -331,10 +331,8 @@ class Nav
     pagesKey
 
   hasPages:( pagesKey ) ->
-    # @isDef(@pages[pagesKey]) and @isDef(@pages[pagesKey].pages) and @pages[pagesKey].keys.length > 0
-    has = @pages[pagesKey]?
-    console.log( 'Nav.hasPages()', { pagesKey:pagesKey, has1:has, has2:@isDef(@pages[pagesKey]), pages:@pages } ) # if
-    # not has
+    has = @isDef(@pages[pagesKey]) and @isDef(@pages[pagesKey].pages) and @pages[pagesKey].keys.length > 0
+    console.log( 'Nav.hasPages()', { pagesKey:pagesKey, has:has, pages:@pages } ) if not has
     has
 
   hasPageKey:( pagesKey, pageKey ) ->
