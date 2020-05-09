@@ -1,7 +1,7 @@
 
 <template>
   <div class="disp-pane">
-    <d-tabs route="route" :pagesKey="route" :pages="pages"></d-tabs>
+    <d-tabs route="route" :pagesInit="'Disp'" :pages="pages"></d-tabs>
     <d-dims v-if="pages['Dims'].show" :dispObj="dispObj" from="Disp"></d-dims>
     <d-desc v-if="pages['Desc'].show" :dispObj="dispObj" from="Disp"></d-desc>
   </div>
@@ -25,6 +25,7 @@
     methods: {
       
       onDisp: function( obj ) {
+        this.mix().nav().setPages( this.route, this.pages );
         this.dispObj  = this.mix().dispObject( obj.compKey, obj.inovKey, obj.pracKey, obj.dispKey );
         if( !this.mix().isDef(this.dispObj) ) {
           console.error('Disp.onDisp() disp null',{comp:obj.compKey, prac:obj.pracKey, disp:obj.dispKey } ) } },

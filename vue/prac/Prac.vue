@@ -1,7 +1,7 @@
 
 <template>
   <div   class="prac-pane">
-    <b-tabs :route="route" :pagesKey="route" :pages="pages"></b-tabs>
+    <b-tabs :route="route" :pagesInit="'Prac'" :pages="pages"></b-tabs>
     <div class="prac-prac">
       <p-dirs v-show="pages['Dirs'].show" :pracObj="pracObj"></p-dirs>
       <p-conn   v-if="pages['Conn'].show" :pracObj="pracObj" level="Prac"></p-conn>
@@ -31,7 +31,8 @@
       
       onPrac: function( obj ) {
         if( !this.mix().isDef(this.pracObj) || this.pracObj.name !== obj.pracKey ) {
-             this.pracObj = this.mix().pracObject( obj.compKey, obj.inovKey, obj.pracKey ); } },
+             this.pracObj = this.mix().pracObject( obj.compKey, obj.inovKey, obj.pracKey );
+             this.mix().nav().setPages( this.route, this.pages ); } },
       onNav: function( obj ) {
         if( this.mix().nav().isMyNav( obj, this.route ) ) {
          // this.doPage( this.mix().nav().getPageKey( this.route) );
