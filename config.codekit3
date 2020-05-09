@@ -11007,6 +11007,22 @@
 		"oAP": "/zzz/notes/prin/HongKong.txt",
 		"oF": 0
 		},
+	"/zzz/notes/prin/HumDef.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/prin/HumDef.txt",
+		"oF": 0
+		},
+	"/zzz/notes/prin/HumHist.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/prin/HumHist.txt",
+		"oF": 0
+		},
 	"/zzz/notes/prin/Info.txt": {
 		"cB": 0,
 		"ft": 8192,

@@ -2,7 +2,7 @@
 
 <template>
   <div class="math-nd-pane">
-    <d-tabs :route="route" :pagesKey="route" :pages="pages"></d-tabs>
+    <d-tabs :route="route" :pagesInit="route" :pages="pages"></d-tabs>
     <div class="math-nd-comp">
       <template v-for="exp in exps">
         <div :class="exp.klass" :ref="exp.klass"></div>

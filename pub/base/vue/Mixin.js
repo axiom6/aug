@@ -285,7 +285,11 @@ Mixin = class Mixin {
               var sectObj, sectObjs, talkObj, talkObjs;
               talkObjs = this.compObject('Talk');
               talkObj = talkObjs[pracKey];
-              // console.log( 'Mixin.sectObj()', { pracKey:pracKey, talkObj:talkObj, dispKey:dispKey } ) # , sectObj:sectObj
+              console.log('Mixin.sectObj()', {
+                pracKey: pracKey,
+                talkObj: talkObj,
+                dispKey: dispKey // , sectObj:sectObj
+              });
               sectObjs = this.compObject(talkObj.comp);
               talkObj.keys = talkObj.keys != null ? talkObj.keys : Util.childKeys(sectObjs);
               dispKey = dispKey === 'None' ? this.keys(sectObjs)[0] : dispKey;

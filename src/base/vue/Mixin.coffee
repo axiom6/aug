@@ -189,7 +189,7 @@ class Mixin
           sectObject: (pracKey, dispKey) ->
             talkObjs = @compObject('Talk')
             talkObj = talkObjs[pracKey]
-            # console.log( 'Mixin.sectObj()', { pracKey:pracKey, talkObj:talkObj, dispKey:dispKey } ) # , sectObj:sectObj
+            console.log( 'Mixin.sectObj()', { pracKey:pracKey, talkObj:talkObj, dispKey:dispKey } ) # , sectObj:sectObj
             sectObjs = @compObject(talkObj.comp)
             talkObj.keys = if talkObj.keys?  then talkObj.keys else Util.childKeys(sectObjs)
             dispKey = if dispKey is 'None' then @keys(sectObjs)[0] else dispKey

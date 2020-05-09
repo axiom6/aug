@@ -1,7 +1,7 @@
 
 <template>
   <div class="geom-nd-pane">
-    <d-tabs :route="route" :pageKey="route" :pages="pages" defn="None"></d-tabs>
+    <d-tabs :route="route" :pagesInit="route" :pages="pages" defn="None"></d-tabs>
     <template v-for="page in pages">
       <div :ref="page.key" v-show="page.show" class="geom-nd-page" :key="page.key"></div>
     </template>

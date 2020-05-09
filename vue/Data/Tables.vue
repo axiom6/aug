@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <d-tabs :route="route" :pagesKey="route" :pages="pages" defn="None"></d-tabs>
+    <d-tabs :route="route" :pagesInit="route" :pages="pages" defn="None"></d-tabs>
     <div class="page">
       <h1       v-if="pageKey==='Tables'">Tables</h1>
       <t_table1 v-if="pages['Table1'].show" ref="Table1"></t_table1>

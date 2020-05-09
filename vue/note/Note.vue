@@ -2,7 +2,7 @@
 
 <template>
   <div class="note-pane">
-    <n-tabs route="Note"  :pagesKey="route" :pages="pages" defn="None"></n-tabs>
+    <n-tabs route="Note"  :pagesInit="route" :pages="pages" defn="None"></n-tabs>
     <h1 v-show="myRoute()">Notebooks</h1>
     <template v-for="page in pages">
       <router-view :name="page.key"></router-view>
