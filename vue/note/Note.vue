@@ -20,7 +20,7 @@
 
     data() {
       return { route:'Note', pages:{
-          Stand: { title:'Stand', key:'Stand', show:true,  route:'Stand' },
+          Stand: { title:'Stand', key:'Stand', show:false, route:'Stand' },
           Embed: { title:'Embed', key:'Embed', show:false, route:'Embed' },
           Maths: { title:'Maths', key:'Maths', show:false, route:'Maths' },
           Ganja: { title:'Ganja', key:'Ganja', show:false, route:'Ganja' }

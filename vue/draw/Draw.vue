@@ -21,7 +21,7 @@
 
     data() {
       return { route:'Draw', pageKey:'Draw', D3D:null, pages:{
-        Axes:  { title:'Axes',  key:'Axes',  obj:null, show:true  },
+        Axes:  { title:'Axes',  key:'Axes',  obj:null, show:false },
         Wheel: { title:'Wheel', key:'Wheel', obj:null, show:false },
         Chord: { title:'Chord', key:'Chord', obj:null, show:false },
         Link:  { title:'Link',  key:'Link',  obj:null, show:false },

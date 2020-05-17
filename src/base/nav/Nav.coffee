@@ -299,6 +299,7 @@ class Nav
 
   # An important indicator of when Comps and Tabs are instanciated
   setPages:( route, pages ) ->
+    return if @hasPages(route,false)
     @pages[route] = {}
     @pages[route].pages = pages
     @pages[route].keys  = Object.keys(pages)
@@ -318,10 +319,11 @@ class Nav
     return 'None' if not @hasPages(route)
     for own  key,   page  of @pages[route].pages
       return key if page.show
-    pageKey = @pages[route].keys[0] # Default is first page
-    @pages[route].pages[pageKey].show = true
+    'None'
+    # pageKey = @pages[route].keys[0] # Default is first page
+    # @pages[route].pages[pageKey].show = true
     # console.log( 'Nav.getPageKey()', { route:route, pageKey:pageKey, has:@hasPages(route) } )
-    pageKey
+    # pageKey
 
   getPageKeyDefn:( pages ) ->
     for own  key,   page  of pages

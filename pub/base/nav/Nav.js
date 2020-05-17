@@ -473,6 +473,9 @@ Nav = class Nav {
 
   // An important indicator of when Comps and Tabs are instanciated
   setPages(route, pages) {
+    if (this.hasPages(route, false)) {
+      return;
+    }
     this.pages[route] = {};
     this.pages[route].pages = pages;
     this.pages[route].keys = Object.keys(pages);
@@ -499,7 +502,7 @@ Nav = class Nav {
 
   // pagesKeys is usually a route except for Comp which uses getPagesComp:( route, compKey )
   getPageKey(route) {
-    var key, page, pageKey, ref;
+    var key, page, ref;
     if (!this.hasPages(route)) {
       return 'None';
     }
@@ -511,12 +514,13 @@ Nav = class Nav {
         return key;
       }
     }
-    pageKey = this.pages[route].keys[0];
-    this.pages[route].pages[pageKey].show = true;
-    // console.log( 'Nav.getPageKey()', { route:route, pageKey:pageKey, has:@hasPages(route) } )
-    return pageKey;
+    return 'None';
   }
 
+  // pageKey = @pages[route].keys[0] # Default is first page
+  // @pages[route].pages[pageKey].show = true
+  // console.log( 'Nav.getPageKey()', { route:route, pageKey:pageKey, has:@hasPages(route) } )
+  // pageKey
   getPageKeyDefn(pages) {
     var key, page;
     for (key in pages) {

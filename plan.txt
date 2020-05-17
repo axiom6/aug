@@ -1,6 +1,8 @@
 
 0. Work
-   a. Change Inov name
+   a. Change Inov name?
+   b. Ref reset when returning to Geom Draw Hue for Augm
+   c. Tabs.doPage() not working for tab defaults
    
 1. Tasks
    a. Apple ID for App store

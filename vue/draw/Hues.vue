@@ -21,7 +21,7 @@
 
     data() {
       return { route:'Hues', pageKey:'Hues', pages:{
-          Color:   { title:'Color',   key:'Color',   show:true  },
+          Color:   { title:'Color',   key:'Color',   show:false },
           Rgbs:    { title:'Rgbs',    key:'Rgbs',    show:false },
           Polar:   { title:'Polar',   key:'Polar',   show:false },
           Vecs:    { title:'Vecs',    key:'Vecs',    show:false },

@@ -17,34 +17,37 @@
       positions:{ left:{ left:0, width:'60%' }, right:{ left:'60%', width:'40%' }, full:{ left:0, width:'100%' } } } },
     
     methods: {
+      doTab: function () {
+        this.mix().nav().setPages(this.route,this.pages); // Will only set pages if needed
+        let first   = this.pageKey==='None' && !this.mix().hasInov(this.route);
+        let pageKey = this.mix().nav().getPageKey(this.route);
+        // console.log( 'Tabs.init()', obj, { route:this.route, pageKey:pageKey, pages:this.pages } );
+        if( first ){ this.doPage(pageKey); }
+        else       { this.onPage(pageKey); } },
+      isPage: function (pageKey) {
+        return this.mix().isDef(this.route) && this.mix().isDef(pageKey); },
       onPage: function (pageKey) {
-        if( this.mix().isDef(this.route) && this.mix().isDef(pageKey) ) {
+        if( this.isPage(pageKey) ) {
           this.pageKey = pageKey;
           this.mix().nav().setPageKey( this.route, pageKey ); }
         else {
           console.log( 'Tabs.onPage() bad pageKey', { route:this.route, pageKey:pageKey } ); } },
       doPage: function (pageKey) {
-          this.onPage(  pageKey );
-          let obj = { source:'Tabs',route:this.route }
-          obj.inovKey = this.mix().hasInov(this.route) ? pageKey : 'None';
-          this.mix().nav().pub(obj); },
+        if( this.isPage(pageKey) ) {
+            this.onPage(pageKey) ;
+            let obj = { source:'Tabs',route:this.route }
+            obj.inovKey = this.mix().hasInov(this.route) ? pageKey : 'None';
+             this.mix().nav().pub(obj); } },
       stylePos: function () {
         return this.positions[this.position]; },
       classTab: function (pageKey) {
         return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },
     mounted: function() {
-      this.mix().nav().setPages( this.route, this.pages );
-      let  pageKey = this.mix().nav().getPageKey(this.route);
-      this.onPage( pageKey );
-      // console.log( 'Tabs.mounted()', { route:this.route, pageKey:pageKey, pages:this.pages } );
+      this.doTab();
       this.mix().subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {
         if( obj.source !== 'Tabs'  ) { // && obj.route === this.route
           this.$nextTick( function() {
-            if( !this.mix().nav().hasPages(this.route,false) ) {
-              this.mix().nav().setPages( this.route, this.pages ); }
-            let  pageKey = this.mix().nav().getPageKey(this.route);
-            // console.log( 'Tabs.subscribe()', obj, { route:this.route, inovKey:obj.inovKey, pageKey:pageKey, pages:this.pages } );
-            this.onPage(pageKey); } ); } } ); }
+            this.doTab(); } ); } } ); }
     }
   
 </script>
