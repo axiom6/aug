@@ -472,23 +472,24 @@ Nav = class Nav {
   }
 
   // An important indicator of when Comps and Tabs are instanciated
-  setPages(pagesComp, pagesObj) {
-    this.pages[pagesComp] = {};
-    this.pages[pagesComp].pages = pagesObj;
-    this.pages[pagesComp].keys = Object.keys(pagesObj);
+  setPages(route, pages) {
+    this.pages[route] = {};
+    this.pages[route].pages = pages;
+    this.pages[route].keys = Object.keys(pages);
   }
 
-  setPageKey(pagesComp, pageKey) {
+  // console.log( 'Nav.setPages()', { route:route, has:@hasPages(route), pages:@pages[route] } )
+  setPageKey(route, pageKey) {
     var key, page, ref;
-    if (!this.hasPages(pagesComp)) {
+    if (!this.hasPages(route)) {
       console.log('Nav.setPageKey()', {
-        pagesComp: pagesComp,
+        route: route,
         pageKey: pageKey,
-        has: this.hasPages(pagesComp)
+        has: this.hasPages(route)
       });
       return;
     }
-    ref = this.pages[pagesComp].pages;
+    ref = this.pages[route].pages;
     for (key in ref) {
       if (!hasProp.call(ref, key)) continue;
       page = ref[key];
@@ -497,12 +498,12 @@ Nav = class Nav {
   }
 
   // pagesKeys is usually a route except for Comp which uses getPagesComp:( route, compKey )
-  getPageKey(pagesKey) {
+  getPageKey(route) {
     var key, page, pageKey, ref;
-    if (!this.hasPages(pagesKey)) {
+    if (!this.hasPages(route)) {
       return 'None';
     }
-    ref = this.pages[pagesKey].pages;
+    ref = this.pages[route].pages;
     for (key in ref) {
       if (!hasProp.call(ref, key)) continue;
       page = ref[key];
@@ -510,29 +511,30 @@ Nav = class Nav {
         return key;
       }
     }
-    pageKey = this.pages[pagesKey].keys[0];
-    this.pages[pagesKey].pages[pageKey].show = true;
-    // console.log( 'Nav.getPageKey()', { pagesKey:pagesKey, pageKey:pageKey, has:@hasPages(pagesKey) } )
+    pageKey = this.pages[route].keys[0];
+    this.pages[route].pages[pageKey].show = true;
+    // console.log( 'Nav.getPageKey()', { route:route, pageKey:pageKey, has:@hasPages(route) } )
     return pageKey;
   }
 
-  getPagesComp(route, compKey) {
-    var pagesKey;
-    pagesKey = route;
-    if (route === 'Comp') {
-      pagesKey = 'Pane';
-    } else if (route === 'Inov') {
-      pagesKey = compKey;
+  getPageKeyDefn(pages) {
+    var key, page;
+    for (key in pages) {
+      if (!hasProp.call(pages, key)) continue;
+      page = pages[key];
+      if (page.show) {
+        return key;
+      }
     }
-    return pagesKey;
+    return 'None';
   }
 
-  hasPages(pagesKey) {
+  hasPages(route, logNot = true) {
     var has;
-    has = this.isDef(this.pages[pagesKey]) && this.isDef(this.pages[pagesKey].pages) && this.pages[pagesKey].keys.length > 0;
-    if (!has) {
+    has = this.isDef(this.pages[route]) && this.isDef(this.pages[route].pages) && this.pages[route].keys.length > 0;
+    if (!has && logNot) {
       console.log('Nav.hasPages()', {
-        pagesKey: pagesKey,
+        route: route,
         has: has,
         pages: this.pages
       });
@@ -540,16 +542,16 @@ Nav = class Nav {
     return has;
   }
 
-  hasPageKey(pagesKey, pageKey) {
-    return this.isDef(pageKey) && this.hasPages(pagesKey) && (this.pages[pagesKey].pages[pageKey] != null);
+  hasPageKey(route, pageKey) {
+    return this.isDef(pageKey) && this.hasPages(route) && (this.pages[route].pages[pageKey] != null);
   }
 
-  hasActivePage(pagesKey) {
+  hasActivePage(route) {
     var key, page, ref;
-    if (!this.hasPages(pagesKey)) {
+    if (!this.hasPages(route)) {
       return false;
     }
-    ref = this.pages[pagesKey].pages;
+    ref = this.pages[route].pages;
     for (key in ref) {
       if (!hasProp.call(ref, key)) continue;
       page = ref[key];
@@ -560,8 +562,8 @@ Nav = class Nav {
     return false;
   }
 
-  hasActivePageDir(pagesKey, dir) {
-    return this.hasActivePage(pagesKey) && (dir === 'west' || dir === 'east');
+  hasActivePageDir(route, dir) {
+    return this.hasActivePage(route) && (dir === 'west' || dir === 'east');
   }
 
   isMyNav(obj, route) {

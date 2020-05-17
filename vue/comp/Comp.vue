@@ -1,16 +1,15 @@
 
 <template>
   <div class="comp-pane">
-    <b-tabs route="Comp" :pagesInit="pagesComp('Comp')" :pages="tabPages('Comp')" position="left" ></b-tabs>
-    <b-tabs route="Inov" :pagesInit="pagesComp('Inov')" :pages="tabPages('Inov')" position="right"
-      v-if="hasInovs()"></b-tabs>
+    <b-tabs  route="Comp"    :pages="tabPages('Comp')" position="left" ></b-tabs>
+    <b-tabs :route="compKey" :pages="tabPages(compKey)"     position="right" v-if="hasInov()"></b-tabs>
     <div class="comp-comp" ref="Comp">
       <template v-for="pracObj in compObj">
         <div   :class="pracObj.dir">
-          <p-sign   v-if="Pane['Sign'].show" :pracObj="pracObj"></p-sign>
-          <p-dirs   v-if="Pane['Dirs'].show" :pracObj="pracObj"></p-dirs>
-          <p-desc   v-if="Pane['Desc'].show" :pracObj="pracObj"></p-desc>
-          <template v-if="Pane['Conn'].show">
+          <p-sign   v-if="Comp['Sign'].show" :pracObj="pracObj"></p-sign>
+          <p-dirs   v-if="Comp['Dirs'].show" :pracObj="pracObj"></p-dirs>
+          <p-desc   v-if="Comp['Desc'].show" :pracObj="pracObj"></p-desc>
+          <template v-if="Comp['Conn'].show">
             <p-conn v-if="!isDim(pracObj)" :pracObj="pracObj" level="Comp"></p-conn>
             <p-sign v-if=" isDim(pracObj)" :pracObj="pracObj"></p-sign>
           </template>
@@ -38,7 +37,7 @@
     components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },
     
     data() { return { compKey:'None', inovKey:'None', compObj:null, pracObj:{}, myRows:{},
-      Pane:{
+      Comp:{
         Sign: { title:'Practices',    key:'Sign', show:true  },
         Dirs: { title:'Disciplines',  key:'Dirs', show:false },
         Conn: { title:'Connections',  key:'Conn', show:false },
@@ -60,17 +59,10 @@
         Share:{ name:'Share',       dir:'sh', icon:"fas fa-share-alt-square" } } } },
     
     methods: {
-      pagesComp: function(route) {
-        return this.mix().nav().getPagesComp(route,this.compKey); },
-      setPages: function(route) {
-        let pagesComp = this.pagesComp(route);
-        let pages     = this[pagesComp];
-        this.mix().nav().setPages( pagesComp, pages ); },
       tabPages: function(route) {
-        let pagesComp = this.pagesComp(route);
-        return this[pagesComp]; },
-      hasInovs: function() {
-        return this.mix().isPlane(this.compKey) },
+        return this[route]; },
+      hasInov: function() {
+        return this.mix().hasInov(this.compKey); },
       onRows: function () {
          let pages            = this.tabPages('Comp');
          let pageKey          = 'Sign'
@@ -83,15 +75,13 @@
         this.inovKey = obj.inovKey;
         // console.log( 'comp.onComp()', { compKey:this.compKey, inovKey:this.inovKey, obj:obj } )
         this.onRows();
-        this.compObj = this.mix().inovObject( this.compKey, this.inovKey );
-        this.setPages('Comp');
-        this.setPages('Inov'); },
+        this.compObj = this.mix().inovObject( this.compKey, this.inovKey ); },
       isDim: function ( pracObj ) {
         return pracObj.row==="Dim"; },
       isRows: function () {
         return true; },
       onNav:  function( obj ) {
-        if( obj.route === 'Comp' || obj.route === 'Inov'  ) {
+        if( obj.route === 'Comp' || this.hasInov() ) {
             this.onComp( obj ); } } },
 
     beforeMount: function() {

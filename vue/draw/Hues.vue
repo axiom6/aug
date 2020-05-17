@@ -2,7 +2,7 @@
 
 <template>
   <div class="hues-pane" ref="Hues">
-    <d-tabs :route="route" :pagesInit="route" :pages="pages" defn="None"></d-tabs>
+    <d-tabs :route="route" :pages="pages"></d-tabs>
     <h1 v-if="pageKey==='Hues'">Hues with MathBox</h1>
     <template v-for="page in pages">
       <div :ref="page.key" v-if="page.show" class="hues-page" :key="page.key"></div>

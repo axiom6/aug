@@ -1,7 +1,7 @@
 
 <template>
   <div class="disp-pane">
-    <d-tabs route="route" :pagesInit="'Disp'" :pages="pages"></d-tabs>
+    <d-tabs route="route" :pages="pages"></d-tabs>
     <d-dims v-if="pages['Dims'].show" :dispObj="dispObj" from="Disp"></d-dims>
     <d-desc v-if="pages['Desc'].show" :dispObj="dispObj" from="Disp"></d-desc>
   </div>

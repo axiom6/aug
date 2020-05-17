@@ -247,7 +247,7 @@ Mixin = class Mixin {
                 return pracs;
               }
             },
-            isPlane: function(key) {
+            hasInov: function(key) {
               return key === 'Info' || key === 'Know' || key === 'Wise';
             },
             getPrac: function(pracs, row, column, inovKey) {

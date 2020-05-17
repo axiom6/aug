@@ -2,7 +2,7 @@
 
 <template>
   <div class="draw-pane">
-    <d-tabs :route="route" :pagesInit="route" :pages="pages" defn="None"></d-tabs>
+    <d-tabs :route="route" :pages="pages"></d-tabs>
     <h1 v-if="pageKey==='Draw'">Drawings in D3</h1>
     <template v-for="page in pages">
       <div :ref="page.key" v-show="page.show" class="draw-page" :key="page.key"></div>

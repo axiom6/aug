@@ -298,54 +298,52 @@ class Nav
     ndx
 
   # An important indicator of when Comps and Tabs are instanciated
-  setPages:( pagesComp, pagesObj ) ->
-    @pages[pagesComp] = {}
-    @pages[pagesComp].pages = pagesObj
-    @pages[pagesComp].keys  = Object.keys(pagesObj)
+  setPages:( route, pages ) ->
+    @pages[route] = {}
+    @pages[route].pages = pages
+    @pages[route].keys  = Object.keys(pages)
+    # console.log( 'Nav.setPages()', { route:route, has:@hasPages(route), pages:@pages[route] } )
     return
 
-  setPageKey:( pagesComp, pageKey ) ->
-    if not @hasPages(pagesComp)
-      console.log( 'Nav.setPageKey()', { pagesComp:pagesComp, pageKey:pageKey, has:@hasPages(pagesComp) } )
+  setPageKey:( route, pageKey ) ->
+    if not @hasPages(route)
+      console.log( 'Nav.setPageKey()', { route:route, pageKey:pageKey, has:@hasPages(route) } )
       return
-    for own key, page  of @pages[pagesComp].pages
+    for own key, page  of @pages[route].pages
       page.show = key  is pageKey
     return
 
   # pagesKeys is usually a route except for Comp which uses getPagesComp:( route, compKey )
-  getPageKey:( pagesKey ) ->
-    return 'None' if not @hasPages(pagesKey)
-    for own  key,   page  of @pages[pagesKey].pages
+  getPageKey:( route ) ->
+    return 'None' if not @hasPages(route)
+    for own  key,   page  of @pages[route].pages
       return key if page.show
-    pageKey = @pages[pagesKey].keys[0] # Default is first page
-    @pages[pagesKey].pages[pageKey].show = true
-    # console.log( 'Nav.getPageKey()', { pagesKey:pagesKey, pageKey:pageKey, has:@hasPages(pagesKey) } )
+    pageKey = @pages[route].keys[0] # Default is first page
+    @pages[route].pages[pageKey].show = true
+    # console.log( 'Nav.getPageKey()', { route:route, pageKey:pageKey, has:@hasPages(route) } )
     pageKey
 
-  getPagesComp:( route, compKey ) ->
-    pagesKey = route
-    if route is 'Comp'
-      pagesKey = 'Pane'
-    else if route is 'Inov'
-      pagesKey = compKey
-    pagesKey
+  getPageKeyDefn:( pages ) ->
+    for own  key,   page  of pages
+      return key if page.show
+    'None'
 
-  hasPages:( pagesKey ) ->
-    has = @isDef(@pages[pagesKey]) and @isDef(@pages[pagesKey].pages) and @pages[pagesKey].keys.length > 0
-    console.log( 'Nav.hasPages()', { pagesKey:pagesKey, has:has, pages:@pages } ) if not has
+  hasPages:( route, logNot=true ) ->
+    has = @isDef(@pages[route]) and @isDef(@pages[route].pages) and @pages[route].keys.length > 0
+    console.log( 'Nav.hasPages()', { route:route, has:has, pages:@pages } ) if not has and logNot
     has
 
-  hasPageKey:( pagesKey, pageKey ) ->
-    @isDef(pageKey) and @hasPages(pagesKey) and @pages[pagesKey].pages[pageKey]?
+  hasPageKey:( route, pageKey ) ->
+    @isDef(pageKey) and @hasPages(route) and @pages[route].pages[pageKey]?
 
-  hasActivePage:( pagesKey ) ->
-    return false    if    not @hasPages(pagesKey)
-    for own  key,    page  of @pages[pagesKey].pages
+  hasActivePage:( route ) ->
+    return false    if    not @hasPages(route)
+    for own  key,    page  of @pages[route].pages
       return true if page.show
     false
 
-  hasActivePageDir:( pagesKey, dir ) ->
-     @hasActivePage( pagesKey ) and ( dir is 'west' or dir is 'east' )
+  hasActivePageDir:( route, dir ) ->
+     @hasActivePage( route ) and ( dir is 'west' or dir is 'east' )
 
   isMyNav:( obj, route ) ->
     obj.route is route # and @hasActivePage(route)

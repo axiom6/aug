@@ -168,7 +168,7 @@ class Mixin
               console.error('Mixin.inovObject() bad compKey or inovKey', { compKey:compKey, inovKey:inovKey } )
               pracs
 
-          isPlane: (key) ->
+          hasInov: (key) ->
             key is 'Info' or key is 'Know' or key is 'Wise'
 
           getPrac: ( pracs, row, column, inovKey ) ->

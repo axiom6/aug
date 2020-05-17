@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <d-tabs :route="route" :pagesInit="route" :pages="pages" defn="None"></d-tabs>
+    <d-tabs :route="route" :pages="pages" defn="None"></d-tabs>
     <div class="page">
       <h1       v-if="isPageKey('None')">Pivots</h1>
       <p_pivot1 v-if="pages['Pivot1'].show"></p_pivot1>

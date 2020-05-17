@@ -1,7 +1,7 @@
 
 <template>
   <div class="prin-pane">
-    <b-tabs :route="route" :pagesInit="'Prin'" :pages="pages"></b-tabs>
+    <b-tabs :route="route" :pages="pages"></b-tabs>
     <div class="prin-comp">
         <template v-for="pracObj in compObj">
           <div   :class="pracObj.dir" :key="pracObj.name" :ref="pracObj.name">
