@@ -25,19 +25,19 @@
     methods: {
       
       onDisp: function( obj ) {
-        this.mix().nav().setPages( this.route, this.pages );
+        this.nav().setPages( this.route, this.pages );
         this.dispObj  = this.mix().dispObject( obj.compKey, obj.inovKey, obj.pracKey, obj.dispKey );
         if( !this.mix().isDef(this.dispObj) ) {
           console.error('Disp.onDisp() disp null',{comp:obj.compKey, prac:obj.pracKey, disp:obj.dispKey } ) } },
       onNav:  function (obj) {
-        if( this.mix().nav().isMyNav( obj, 'Disp' ) ) {
+        if( this.nav().isMyNav( obj, 'Disp' ) ) {
             this.onDisp( obj ); } } },
 
     beforeMount: function() {
-      this.onDisp( this.mix().nav() ); },
+      this.onDisp( this.nav() ); },
 
     mounted: function () {
-      this.mix().nav().setPages( this.route, this.pages );
+      this.nav().setPages( this.route, this.pages );
       this.mix().subscribe(  "Nav", 'Disp.vue', (obj) => {
         this.onNav(obj); } ); }
   }

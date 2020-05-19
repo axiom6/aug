@@ -32,22 +32,22 @@
       onPrac: function( obj ) {
         if( !this.mix().isDef(this.pracObj) || this.pracObj.name !== obj.pracKey ) {
              this.pracObj = this.mix().pracObject( obj.compKey, obj.inovKey, obj.pracKey );
-             this.mix().nav().setPages( this.route, this.pages ); } },
+             this.nav().setPages( this.route, this.pages ); } },
       onNav: function( obj ) {
-        if( this.mix().nav().isMyNav( obj, this.route ) ) {
-         // this.doPage( this.mix().nav().getPageKey( this.route) );
+        if( this.nav().isMyNav( obj, this.route ) ) {
+         // this.doPage( this.nav().getPageKey( this.route) );
             this.onPrac( obj ); } }
       },
 
     beforeMount: function () {
       let obj = {}
-      obj.compKey = this.mix().nav().compKey;
-      obj.pracKey = this.mix().nav().pracKey;
-      obj.inovKey = this.mix().nav().inovKey;
+      obj.compKey = this.nav().compKey;
+      obj.pracKey = this.nav().pracKey;
+      obj.inovKey = this.nav().inovKey;
       this.onPrac( obj );  },
 
     mounted: function () {
-      this.mix().nav().setPages( this.route, this.pages );
+      this.nav().setPages( this.route, this.pages );
       this.mix().subscribe(  "Nav", 'Prac.vue', (obj) => {
         this.onNav(obj); } ); }
   }

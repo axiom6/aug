@@ -46,8 +46,8 @@
         let route    = this.mix().isMuse() ? 'Disp' : dispKey;
         this.pub( { route:route, dispKey:dispKey, source:'Toc' } ); },
       pub: function(obj) {
-        this.mix().nav().dirTabs = false;
-        this.mix().nav().pub(obj); },
+        this.nav().dirTabs = false;
+        this.nav().pub(obj); },
       onNav:  function (obj) {
         if( obj.source !== 'Toc' ) {
           if( this.keyEq(this.compKey,obj.compKey ) ) { this.compKey = obj.compKey; }

@@ -34,8 +34,8 @@
         return this.pageKey === pageKey; },
 
       onNav: function(obj) {
-        if( this.mix().nav().isMyNav( obj, this.route ) ) {
-            this.pageKey = this.mix().nav().getPageKey(this.route);
+        if( this.nav().isMyNav( obj, this.route ) ) {
+            this.pageKey = this.nav().getPageKey(this.route);
             if( this.pageKey !== 'None') {
                 this.doApp( this.pageKey ); } } },
 
@@ -54,7 +54,7 @@
               Box.doApp(pageKey,elem); } } ) } },
 
     mounted: function () {
-      this.mix().nav().setPages( this.route, this.pages );
+      this.nav().setPages( this.route, this.pages );
       this.mix().subscribe(  'Nav', 'Hues.vue', (obj) => {
         this.onNav(obj); } ); }
   }

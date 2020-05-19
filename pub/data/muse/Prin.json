@@ -64,7 +64,7 @@
         "desc":"The capacity to think critically about and act on moral values.",
         "Virtue":     { "desc":"Foundation of principle and good moral being" },
         "Values":     { "desc":"Preferences concerning appropriate courses of conduct" },
-        "Conduct":    { "desc":"How our actions affect outcomes" } },
+        "Outcome":    { "desc":"How our actions affect outcomes" } },
       "Reflect": { "dir":"south", "name":"Reflect", "icon":"fas fa-lightbulb",     "hsv":[ 60,90,90], "dim":true,
         "desc":"Think deeply or carefully about",
         "Introspect": { "desc":"Self examination of conscious thoughts and feelings" },

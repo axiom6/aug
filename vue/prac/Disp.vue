@@ -15,7 +15,7 @@
     methods: {
       doDisp: function (dispKey) {
         let obj = { route:"Disp", dispKey:dispKey };
-        this.mix().nav().pub( obj ); } } }
+        this.nav().pub( obj ); } } }
   
   export default Disp;
   

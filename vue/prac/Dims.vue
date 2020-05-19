@@ -32,10 +32,10 @@
         return this.dispObj.column==="Innovate" ? 'dd-4x4' : 'dd-4x3'; },
       doDisp:  function (dispKey) {
         let obj = { route:"Disp", dispKey:dispKey }; // pracKey:this.pracObj.name,
-        this.mix().nav().pub( obj ); },
+        this.nav().pub( obj ); },
       doPrac: function (pracKey) {
         let obj = { route:"Prac", pracKey:pracKey };
-        this.mix().nav().pub( obj ); },
+        this.nav().pub( obj ); },
       dispClass: function() {
         return this.from==='Disp' ? 'dims-disp' : 'dims-dirs';
       },

@@ -32,8 +32,8 @@
     methods: {
       
       onNav: function(obj) {
-        if( this.mix().nav().isMyNav( obj, this.route ) ) {
-            this.pageKey = this.mix().nav().getPageKey(this.route);
+        if( this.nav().isMyNav( obj, this.route ) ) {
+            this.pageKey = this.nav().getPageKey(this.route);
             if( this.pageKey !== 'None') {
                 this.create(this.pageKey); } } },
       
@@ -44,7 +44,7 @@
     },
 
     mounted: function () {
-      this.mix().nav().setPages( this.route, this.pages );
+      this.nav().setPages( this.route, this.pages );
       this.mix().subscribe(  'Nav', 'Draw.vue', (obj) => {
         this.onNav(obj); } );
       this.$nextTick( function() {

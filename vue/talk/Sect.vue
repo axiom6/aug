@@ -40,7 +40,7 @@
             this.$nextTick( function() {
               let pics = this.imgsObj[imgs]['pics'];
               let idx  = this.sectObj.imgsIdx;
-              this.mix().nav().imgsNum = pics.length;
+              this.nav().imgsNum = pics.length;
               let src  = "../../data/imgs/" + this.imgsObj[imgs]['dir'] + pics[idx].src;
               let elem = this.$refs[refn];
               this.mix().appendImgsHW( src, elem ); } ) },

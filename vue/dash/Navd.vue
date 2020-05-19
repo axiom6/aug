@@ -26,7 +26,7 @@
         if( this.mix().isTouch() ) {
             this.mix().touch().doTouch( dir ); }
         else if( this.mix().isNav() && this.dirs[dir] ) {
-            this.mix().nav().dir( dir ); }
+            this.nav().dir( dir ); }
         else {
           console.error( 'Navd.doDir() no direction navigator' ); } },
 

@@ -32,11 +32,11 @@
       
       onComp: function( compKey ) {
         this.compObj = this.mix().compObject(compKey);
-        this.mix().nav().setPages( compKey, this.pages ); },
+        this.nav().setPages( compKey, this.pages ); },
       isRows: function () {
         return true; },
       onNav:  function (obj) {
-        if( this.mix().nav().isMyNav(  obj, this.route ) ) {
+        if( this.nav().isMyNav(  obj, this.route ) ) {
           this.onComp( obj.compKey ); } }
       },
 
@@ -44,7 +44,7 @@
       this.onComp('Prin'); },
 
     mounted: function () {
-      this.mix().nav().setPages( this.route, this.pages );
+      this.nav().setPages( this.route, this.pages );
       this.mix().subscribe( 'Nav', 'Prin.vue', (obj) => {
         this.onNav(obj); } ); }
   }

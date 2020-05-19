@@ -32,8 +32,8 @@
         return this.pageKey === pageKey; },
 
       onNav: function(obj) {
-        if( this.mix().nav().isMyNav( obj, this.route ) ) {
-          this.pageKey = this.mix().nav().getPageKey('Pivots');
+        if( this.nav().isMyNav( obj, this.route ) ) {
+          this.pageKey = this.nav().getPageKey('Pivots');
           if( this.pageKey !== 'None' ) {
               this.create( this.pageKey ); } } },
 
@@ -46,7 +46,7 @@
     },
 
     mounted: function () {
-      this.mix().nav().setPages( this.route, this.pages );
+      this.nav().setPages( this.route, this.pages );
       this.mix().subscribe( 'Nav', 'Pivots.vue', (obj) => {
           this.onNav( obj ); } ); }
 

@@ -32,10 +32,10 @@
       
       doPrac: function (pracKey) {
         let obj = { route:"Prac", pracKey:pracKey };
-        this.mix().nav().pub( obj ); },
+        this.nav().pub( obj ); },
       doDisp: function (pracKey,dispKey) {
         let obj = { route:"Disp", pracKey:pracKey, dispKey:dispKey };
-        this.mix().nav().pub( obj ); },
+        this.nav().pub( obj ); },
       style: function( ikwObj ) {
         return this.mix().styleObj(ikwObj); } }
   }

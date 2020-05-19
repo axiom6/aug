@@ -32,7 +32,7 @@
         return this.mix().isRoute('Note'); } },
 
     mounted: function () {
-      this.mix().nav().setPages( this.route, this.pages ); }
+      this.nav().setPages( this.route, this.pages ); }
 
   }
   

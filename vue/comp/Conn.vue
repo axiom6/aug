@@ -26,10 +26,10 @@
         this.createConnect( this.mix().stream(), this.pracObj ); },
       
       doPrac: function (pracKey) {
-        this.mix().nav().pub( { pracKey:pracKey } ); },
+        this.nav().pub( { pracKey:pracKey } ); },
       
       clConn: function() {
-        return this.mix().nav().route === 'Prac' ? 'conn-prac' : 'conn-comp'; },
+        return this.nav().route === 'Prac' ? 'conn-prac' : 'conn-comp'; },
       
       createConnect: function( stream, pracObj ) {
         this.$nextTick( function() {

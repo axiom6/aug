@@ -38,11 +38,11 @@
       onPrac: function() { }, // console.log( { pracObj:this.pracObj } );
       doPrac: function (pracKey) {
         let obj = { route:"Prac", pracKey:pracKey };
-        this.mix().nav().pub( obj ); },
+        this.nav().pub( obj ); },
       doDisp: function (dispKey) {
-        let nav = this.mix().nav();
+        let nav = this.nav();
         let obj = { route:"Disp", compObj:nav.compKey, inovKey:nav.inovKey, pracKey:this.pracObj.name, dispKey:dispKey };
-        this.mix().nav().pub( obj ); },
+        this.nav().pub( obj ); },
       style: function( ikwObj ) {
         return this.mix().styleObj(ikwObj); },
       tsSumm: function(summ) {

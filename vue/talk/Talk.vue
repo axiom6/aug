@@ -24,12 +24,12 @@
     methods: {
       
       doTalk: function(talkKey) {
-        this.mix().nav().pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None',
+        this.nav().pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None',
           presKey:'None', imgsNum:0, imgsIdx:0 } );
-        this.mix().nav().dirsNavd('Init'); },
+        this.nav().dirsNavd('Init'); },
 
       onNav: function (obj) {
-        if( this.mix().nav().isMyNav( obj, 'Talk' ) ) {
+        if( this.nav().isMyNav( obj, 'Talk' ) ) {
             this.onSect( obj.pracKey, obj.dispKey, obj.presKey, obj.imgsIdx ); } },
 
       onSect: function( talkKey, sectKey, presKey, imgsIdx ) {

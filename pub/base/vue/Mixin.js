@@ -433,6 +433,10 @@ Mixin = class Mixin {
               return img.src = src;
             }
           };
+        },
+        // aspectHW:( )
+        nav: function() {
+          return mix().nav();
         }
       }
     };
@@ -440,5 +444,4 @@ Mixin = class Mixin {
 
 };
 
-// aspectHW:( )
 export default Mixin;

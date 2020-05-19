@@ -85,7 +85,7 @@
             this.onComp( obj ); } } },
 
     beforeMount: function() {
-      this.onComp( { route:'Comp', compKey:this.mix().nav().compKey, inovKey:this.mix().nav().inovKey } ); },
+      this.onComp( { route:'Comp', compKey:this.nav().compKey, inovKey:this.nav().inovKey } ); },
 
     mounted: function () {
       this.mix().subscribe( 'Nav', 'Comp.vue', (obj) => {

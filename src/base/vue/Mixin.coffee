@@ -289,6 +289,9 @@ class Mixin
 
           # aspectHW:( )
         }
+
+        nav:() ->
+          mix().nav()
       }
     }
 

@@ -31,7 +31,7 @@
 
       doPrac: function (pracKey) {
         let obj = { route:"Prac", pracKey:pracKey };
-        this.mix().nav().pub( obj ); },
+        this.nav().pub( obj ); },
       isDims: function () {
         return this.pracObj.row === 'Dim'; },
       isDisp: function () {
