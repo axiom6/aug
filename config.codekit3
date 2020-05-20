@@ -267,9 +267,9 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 0,
+		"oA": 1,
 		"oAP": "/plan.txt",
-		"oF": 0
+		"oF": 1
 		},
 	"/pub/app/augm/Augm.coffee": {
 		"ft": 32,

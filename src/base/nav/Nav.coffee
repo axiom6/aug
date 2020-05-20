@@ -307,6 +307,7 @@ class Nav
     return
 
   setPageKey:( route, pageKey ) ->
+    # console.log( 'Nav.setPageKey()', { route:route, pageKey:pageKey, has:@hasPages(route) } )
     if not @hasPages(route)
       console.log( 'Nav.setPageKey()', { route:route, pageKey:pageKey, has:@hasPages(route) } )
       return
@@ -314,9 +315,8 @@ class Nav
       page.show = key  is pageKey
     return
 
-  # pagesKeys is usually a route except for Comp which uses getPagesComp:( route, compKey )
-  getPageKey:( route ) ->
-    return 'None' if not @hasPages(route)
+  getPageKey:( route, logNot=true ) ->
+    return 'None' if not  @hasPages(route,logNot)
     for own  key,   page  of @pages[route].pages
       return key if page.show
     'None'
@@ -325,7 +325,7 @@ class Nav
     # console.log( 'Nav.getPageKey()', { route:route, pageKey:pageKey, has:@hasPages(route) } )
     # pageKey
 
-  getPageKeyDefn:( pages ) ->
+  getPageDef:( pages ) ->
     for own  key,   page  of pages
       return key if page.show
     'None'

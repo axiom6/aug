@@ -1,8 +1,10 @@
 
 0. Work
-   a. Change Inov name?
+   a. Review nav().getPageDef() in Comp.vue
+   b. Reactivity on Comp.compObj() after a route 'Prac' or 'Disp'
    b. Ref reset when returning to Geom Draw Hue for Augm
    c. Tabs.doPage() not working for tab defaults
+   d. Change Inov name?
    
 1. Tasks
    a. Apple ID for App store

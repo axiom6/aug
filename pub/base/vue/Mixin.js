@@ -436,7 +436,7 @@ Mixin = class Mixin {
         },
         // aspectHW:( )
         nav: function() {
-          return mix().nav();
+          return this.mix().nav();
         }
       }
     };

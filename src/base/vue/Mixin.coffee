@@ -291,7 +291,7 @@ class Mixin
         }
 
         nav:() ->
-          mix().nav()
+          @mix().nav()
       }
     }
 

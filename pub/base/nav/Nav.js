@@ -484,6 +484,7 @@ Nav = class Nav {
   // console.log( 'Nav.setPages()', { route:route, has:@hasPages(route), pages:@pages[route] } )
   setPageKey(route, pageKey) {
     var key, page, ref;
+    // console.log( 'Nav.setPageKey()', { route:route, pageKey:pageKey, has:@hasPages(route) } )
     if (!this.hasPages(route)) {
       console.log('Nav.setPageKey()', {
         route: route,
@@ -500,10 +501,9 @@ Nav = class Nav {
     }
   }
 
-  // pagesKeys is usually a route except for Comp which uses getPagesComp:( route, compKey )
-  getPageKey(route) {
+  getPageKey(route, logNot = true) {
     var key, page, ref;
-    if (!this.hasPages(route)) {
+    if (!this.hasPages(route, logNot)) {
       return 'None';
     }
     ref = this.pages[route].pages;
@@ -521,7 +521,7 @@ Nav = class Nav {
   // @pages[route].pages[pageKey].show = true
   // console.log( 'Nav.getPageKey()', { route:route, pageKey:pageKey, has:@hasPages(route) } )
   // pageKey
-  getPageKeyDefn(pages) {
+  getPageDef(pages) {
     var key, page;
     for (key in pages) {
       if (!hasProp.call(pages, key)) continue;

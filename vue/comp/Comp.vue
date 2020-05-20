@@ -6,10 +6,10 @@
     <div class="comp-comp" ref="Comp">
       <template v-for="pracObj in compObj">
         <div   :class="pracObj.dir">
-          <p-sign   v-if="Comp['Sign'].show" :pracObj="pracObj"></p-sign>
-          <p-dirs   v-if="Comp['Dirs'].show" :pracObj="pracObj"></p-dirs>
-          <p-desc   v-if="Comp['Desc'].show" :pracObj="pracObj"></p-desc>
-          <template v-if="Comp['Conn'].show">
+          <p-sign   v-if="isShow('Sign')" :pracObj="pracObj"></p-sign>
+          <p-dirs   v-if="isShow('Dirs')" :pracObj="pracObj"></p-dirs>
+          <p-desc   v-if="isShow('Desc')" :pracObj="pracObj"></p-desc>
+          <template v-if="isShow('Conn')">
             <p-conn v-if="!isDim(pracObj)" :pracObj="pracObj" level="Comp"></p-conn>
             <p-sign v-if=" isDim(pracObj)" :pracObj="pracObj"></p-sign>
           </template>
@@ -59,6 +59,10 @@
         Share:{ name:'Share',       dir:'sh', icon:"fas fa-share-alt-square" } } } },
     
     methods: {
+      isShow: function(pageKey){
+        let    pageNav = this.nav().getPageKey('Comp',false);
+               pageNav = pageNav==='None' ? this.nav().getPageDef(this.Comp) : pageNav;
+        return pageKey===pageNav; },
       tabPages: function(route) {
         return this[route]; },
       hasInov: function() {
@@ -73,7 +77,6 @@
       onComp: function( obj ) {
         this.compKey = obj.compKey;
         this.inovKey = obj.inovKey;
-        // console.log( 'comp.onComp()', { compKey:this.compKey, inovKey:this.inovKey, obj:obj } )
         this.onRows();
         this.compObj = this.mix().inovObject( this.compKey, this.inovKey ); },
       isDim: function ( pracObj ) {
@@ -93,6 +96,11 @@
   }
   
   export default Comp;
+
+  // this.Comp['__ob__'].dep.notify(); this.compObj = Object.assign({},this.compObj );
+  // console.log('Comp.isShow()', { compKey:this.compKey, pageKey:pageKey, show:pageKey===this.nav().getPageKey('Comp') } );
+  // let pageKey  = this.nav().getPageKey('Comp');
+  // console.log('Comp.onComp()',{compKey:this.compKey,inovKey:this.inovKey,obj:obj,pageKey:pageKey,Comp:this.Comp})
   
 </script>
 
