@@ -286,13 +286,13 @@ Mixin = class Mixin {
               talkObjs = this.compObject('Talk');
               talkObj = talkObjs[pracKey];
               console.log('Mixin.sectObj()', {
-                pracKey: pracKey,
                 talkObj: talkObj,
-                dispKey: dispKey // , sectObj:sectObj
+                talkKey: pracKey,
+                sectKey: dispKey // , sectObj:sectObj
               });
               sectObjs = this.compObject(talkObj.comp);
               talkObj.keys = talkObj.keys != null ? talkObj.keys : Util.childKeys(sectObjs);
-              dispKey = dispKey === 'None' ? this.keys(sectObjs)[0] : dispKey;
+              dispKey = dispKey === 'None' || !this.inArray(dispKey, talkObj.keys) ? this.keys(sectObjs)[0] : dispKey;
               sectObj = sectObjs[dispKey];
               if (sectObj == null) {
                 console.error('Nav.sectObject null', {
@@ -315,14 +315,18 @@ Mixin = class Mixin {
               var pageObj;
               presKey = presKey === 'None' && (sectObj.keys[0] != null) ? sectObj.keys[0] : presKey;
               pageObj = null;
-              if (pageKey !== 'None' && (sectObj[presKey] != null)) {
+              if (presKey !== 'None' && (sectObj[presKey] != null)) {
                 pageObj = sectObj[presKey];
                 pageObj.src = sectObj.src;
                 pageObj.name = presKey;
                 pageObj.peys = sectObj.keys;
                 pageObj.keys = pageObj.keys != null ? pageObj.keys : Util.childKeys(pageObj);
+                console.log('Mixin.pageObj()', {
+                  dispKey: sectObj.name,
+                  presKey: presKey,
+                  pageObj: pageObj
+                });
               }
-              // console.log( 'Mixin.pageObj()', { dispKey:sectObj.name, pageKey:pageKey, pageObj:pageObj } )
               return pageObj;
             },
             dataObject: function(sectObj, presKey) {

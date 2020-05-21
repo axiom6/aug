@@ -260,6 +260,9 @@ Nav = class Nav {
     if (!sectObj['imgs']) {
       this.imgsNum = 0;
     }
+    if (!this.mix().isDef(this.pageKey) || !this.mix().inArray(this.pageKey, sectObj.keys)) {
+      this.pageKey = sectObj.keys[0];
+    }
     if (this.imgsNum > 0 && (dir === 'west' || dir === 'east')) {
       if (dir === 'west') {
         this.imgsIdx = this.prevImg();
@@ -373,7 +376,7 @@ Nav = class Nav {
 
   dirsNavdTalkPage(dirs, sectObj) {
     var pageObj;
-    pageObj = this.mix().pageObject(sectObj, this.presKey);
+    pageObj = this.mix().presObject(sectObj, this.presKey);
     dirs.west = pageObj.name !== sectObj.keys[0];
     dirs.prev = dirs.west;
     dirs.east = pageObj.name !== sectObj.keys[sectObj.keys.length - 1];

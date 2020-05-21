@@ -49,6 +49,8 @@
             //    pics:pics,pic:pics[idx],src:src,idx:idx,num:pics.length,sectObj:this.sectObj} ); } )
 
           hasSect: function() {
+            let has = this.mix().isDef(this.sectObj);
+            console.log( 'Sect.hasSect()', { has:has, sectObj:this.sectObj } );
             return this.mix().isDef(this.sectObj); },
           
           hasProp: function(prop) {

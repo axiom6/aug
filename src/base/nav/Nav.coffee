@@ -167,6 +167,7 @@ class Nav
     hasChildren = @mix().isArray(sectObj.keys)
     @dispKey    = sectObj.name
     @imgsNum    = 0 if not sectObj['imgs']
+    @pageKey    = sectObj.keys[0] if not @mix().isDef(@pageKey) or not @mix().inArray(@pageKey,sectObj.keys)
     if @imgsNum > 0 and ( dir is 'west' or dir is 'east' )
       @imgsIdx = @prevImg() if dir is 'west'
       @imgsIdx = @nextImg() if dir is 'east'
@@ -228,7 +229,7 @@ class Nav
     return
 
   dirsNavdTalkPage:( dirs, sectObj ) ->
-    pageObj     = @mix().pageObject(  sectObj, @presKey )
+    pageObj     = @mix().presObject(  sectObj, @presKey )
     dirs.west   = pageObj.name isnt sectObj.keys[0]
     dirs.prev   = dirs.west
     dirs.east   = pageObj.name isnt sectObj.keys[sectObj.keys.length-1]

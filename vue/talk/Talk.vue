@@ -35,10 +35,9 @@
       onSect: function( talkKey, sectKey, presKey, imgsIdx ) {
         let  dispObj = this.mix().sectObject( talkKey, sectKey );
         this.sectObj = this.mix().isDef(presKey) ? this.mix().presObject(dispObj,presKey) : dispObj;
-        if( !this.mix().isDef(this.sectObj) ) {
-          console.error( 'Talk.vue.onSect() sectObj null',
-            { dispObj:dispObj, talkKey:talkKey, sectKey:sectKey, presKey:presKey } );
-          this.sectObj = {}; }
+     // if( !this.mix().isDef(this.sectObj) ) {
+        console.log( 'Talk.vue.onSect()',
+          { dispObj:dispObj, sectObj:this.sectObj, talkKey:talkKey, sectKey:sectKey, presKey:presKey } );
         this.sectObj.imgsIdx = imgsIdx;
         this.imgsObj = this.mix().compObject( 'Imgs' );
         

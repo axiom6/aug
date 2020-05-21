@@ -39,11 +39,11 @@
         this.pub( obj ); },
       doPrac: function(pracKey) {
         this.pracKey = pracKey;
-        let route    = this.mix().isMuse() ? 'Prac' : pracKey;
+        let route    = this.toRoute('Prac', pracKey );
         this.pub( { route:route, pracKey:pracKey, source:'Toc' } ); },
       doDisp: function(dispKey) {
         this.dispKey = dispKey;
-        let route    = this.mix().isMuse() ? 'Disp' : dispKey;
+        let route    = this.toRoute('Disp', dispKey );
         this.pub( { route:route, dispKey:dispKey, source:'Toc' } ); },
       pub: function(obj) {
         this.nav().dirTabs = false;
@@ -62,7 +62,10 @@
                                     : { backgroundColor:'#333',  color:'wheat', borderRadius:'0 24px 24px 0' }; },
       style: function( ikwObj ) {
         return this.mix().styleObj(ikwObj); },
-
+      toRoute: function( level, routeKey ) {
+        let route = this.mix().isMuse()   ? level  : routeKey;
+            route = this.compKey==='Talk' ? 'Talk' : route;
+            return route; },
       tocPracs: function(compKey,inovKey) {
         let pracs = this.mix().inovObject( compKey, inovKey );
         let filts = {}

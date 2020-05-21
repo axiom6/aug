@@ -189,10 +189,10 @@ class Mixin
           sectObject: (pracKey, dispKey) ->
             talkObjs = @compObject('Talk')
             talkObj = talkObjs[pracKey]
-            console.log( 'Mixin.sectObj()', { pracKey:pracKey, talkObj:talkObj, dispKey:dispKey } ) # , sectObj:sectObj
+            console.log( 'Mixin.sectObj()', { talkObj:talkObj, talkKey:pracKey, sectKey:dispKey } ) # , sectObj:sectObj
             sectObjs = @compObject(talkObj.comp)
             talkObj.keys = if talkObj.keys?  then talkObj.keys else Util.childKeys(sectObjs)
-            dispKey = if dispKey is 'None' then @keys(sectObjs)[0] else dispKey
+            dispKey = if dispKey is 'None' or not @inArray(dispKey,talkObj.keys) then @keys(sectObjs)[0] else dispKey
             sectObj = sectObjs[dispKey]
             if not sectObj?
               console.error( 'Nav.sectObject null', { pracKey:pracKey, dispKey:dispKey } )
@@ -208,13 +208,13 @@ class Mixin
           presObject:( sectObj, presKey ) ->
             presKey = if presKey is 'None' and sectObj.keys[0]? then sectObj.keys[0] else presKey
             pageObj = null
-            if pageKey isnt 'None' and sectObj[presKey]?
+            if presKey isnt 'None' and sectObj[presKey]?
               pageObj = sectObj[presKey]
               pageObj.src = sectObj.src
               pageObj.name = presKey
               pageObj.peys = sectObj.keys
               pageObj.keys = if pageObj.keys?  then pageObj.keys else Util.childKeys(pageObj)
-            # console.log( 'Mixin.pageObj()', { dispKey:sectObj.name, pageKey:pageKey, pageObj:pageObj } )
+              console.log( 'Mixin.pageObj()', { dispKey:sectObj.name, presKey:presKey, pageObj:pageObj } )
             pageObj
 
           dataObject: (sectObj, presKey) ->
