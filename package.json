@@ -40,7 +40,7 @@
     "coffeescript": "^2.4.1",
     "typescript": "^3.4.5",
     "lodash": ">=4.17.13",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "rollup": "^1.7.3",
     "rollup-plugin-ascii": "0.0.3",
     "rollup-plugin-buble": "^0.19.6",
