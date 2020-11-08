@@ -1,0 +1,19 @@
+
+---- Medigap ----
+Part A     - Hospital After 365 days
+Part B     - Coinsurance
+Bload      - After 3 pints
+Part A     - Hospice
+Nursing    - Home
+Part A     - Deductible
+Part B     - Deductible
+Part B     - Excess Charge
+Foreingn   - Travel
+Out Pocket - Limit
+
+---- Plan F ----
+Skilled nursing facility is available
+Part A deductible is available
+Part B deductible is available
+Part B excess charges is available
+Foreign travel emergency

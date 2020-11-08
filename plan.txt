@@ -1,7 +1,7 @@
 
 0. Work
-   a. Review nav().getPageDef() in Comp.vue
-   b. Reactivity on Comp.compObj() after a route 'Prac' or 'Disp'
+   a. Talk sectObj to pageObj
+   b. Review nav().getPageDef() in Comp.vue
    b. Ref reset when returning to Geom Draw Hue for Augm
    c. Tabs.doPage() not working for tab defaults
    d. Change Inov name?

@@ -2,7 +2,7 @@
   "Embrace":{ "type":"pane", "hsv":[195,90,60],"column":"Embrace","row":"Dim","plane":"Prin","icon":"fas fa-hands",
     "cells":[5,12,1,6], "dir":"em", "pcells":[1,12,1,36], "css":"ui-dims", "neg":"Exclude",
     "desc":"Creative interaction and guidance that empowers active change",
-    "Interact": { "dir":"west", "name":"Interact", "icon":"fas fa-users-cog", "hsv":[195,90,70], "dim":true,
+    "Commune": { "dir":"west", "name":"Commune", "icon":"fas fa-users-cog", "hsv":[195,90,70], "dim":true,
       "desc":"Dependable participation through spontaneous interactions",
       "Respect":  { "desc":"We respect people and their viewpoints."},
       "Diversity":{ "desc":"We recognize everyone’s diversity and approach." },

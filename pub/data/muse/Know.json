@@ -1,5 +1,5 @@
 {
-  "Social":{ "type":"pane", "hsv":[195,90,60],"column":"Embrace","row":"Learn","plane":"Know","icon":"fas fa-users",
+  "Interact":{ "type":"pane", "hsv":[195,90,60],"column":"Embrace","row":"Learn","plane":"Know","icon":"fas fa-users",
     "cells":[5,12,7,12], "dir":"nw", "neg":"Greed",
     "desc":"Living and working in communities",
     "Art":       { "dir":"west", "icon":"fas fa-palette","hsv":[195,90,70],
