@@ -667,17 +667,20 @@ __vue_render__$3._withStripped = true;
 //
 
 
-let Disp = {
+let Sign = {
   
-  props: { dispObj:Object },
-
+  props: { pracObj:Object },
+  
+  data() { return { } },
+  
   methods: {
-    doDisp: function (dispKey) {
-      let obj = { route:"Disp", dispKey:dispKey };
-      this.nav().pub( obj ); } } };
+    doPrac: function (pracKey) {
+      let obj = { route:"Prac", pracKey:pracKey };
+      this.nav().pub( obj ); } }
+};
 
 /* script */
-const __vue_script__$4 = Disp;
+const __vue_script__$4 = Sign;
 
 /* template */
 var __vue_render__$4 = function() {
@@ -687,18 +690,18 @@ var __vue_render__$4 = function() {
   return _c(
     "div",
     {
-      staticClass: "prac-disp-pane",
+      staticClass: "comp-sign-pane",
       on: {
         click: function($event) {
-          return _vm.doDisp(_vm.dispObj.name)
+          return _vm.doPrac(_vm.pracObj.name)
         }
       }
     },
     [
-      _c("i", { class: _vm.dispObj.icon }),
+      _c("i", { class: _vm.pracObj.icon }),
       _vm._v(" "),
-      _c("span", { staticClass: "prac-disp-name" }, [
-        _vm._v(_vm._s(_vm.dispObj.name))
+      _c("div", { staticClass: "comp-sign-name" }, [
+        _vm._v(_vm._s(_vm.pracObj.name))
       ])
     ]
   )
@@ -709,7 +712,7 @@ __vue_render__$4._withStripped = true;
   /* style */
   const __vue_inject_styles__$4 = function (inject) {
     if (!inject) return
-    inject("data-v-be7174f2_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-disp-pane {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.prac-disp-pane i {\n  display: inline-block;\n  margin-right: 0.5vmin;\n}\n.prac-disp-pane .prac-disp-name {\n  display: inline-block;\n}\n", map: {"version":3,"sources":["Disp.vue","/Users/ax/Documents/prj/aug/vue/prac/Disp.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;ECCA,gBAAA;EDCE,+BAA+B;ECCjC,aAAA;EDCE,oBAAoB;ECCtB,kBAAA;EACA,kBAAA;AACA;ADCA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,eAAe;EACf,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB","file":"Disp.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-disp-pane {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.prac-disp-pane i {\n  display: inline-block;\n  margin-right: 0.5vmin;\n}\n.prac-disp-pane .prac-disp-name {\n  display: inline-block;\n}\n","\n<template>\n  <div class=\"prac-disp-pane\" @click=\"doDisp(dispObj.name)\">\n    <i   :class=\"dispObj.icon\"></i>\n    <span class=\"prac-disp-name\">{{dispObj.name}}</span>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  let Disp = {\n    \n    props: { dispObj:Object },\n\n    methods: {\n      doDisp: function (dispKey) {\n        let obj = { route:\"Disp\", dispKey:dispKey };\n        this.nav().pub( obj ); } } }\n  \n  export default Disp;\n  \n</script>\n\n<style lang=\"less\">\n\n  @import '../../pub/css/themes/theme.less';\n  \n  @pracDispFS:@themeFS;\n\n  .prac-disp-pane {   display:inline; justify-self:center; align-self:center; text-align:center;\n     i     {          display:inline-block;  margin-right: 0.25*@pracDispFS; }\n    .prac-disp-name { display:inline-block; } }\n\n</style>"]}, media: undefined });
+    inject("data-v-6ac4058f_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-sign {\n  font-size: 4vmin;\n  border-radius: 0.7em;\n}\n.comp-sign-pane {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  text-align: center;\n  background-color: #333;\n  border-radius: 4vmin;\n  width: 98%;\n  height: 97%;\n}\n.comp-sign-pane i {\n  font-size: 10.8vmin;\n}\n.comp-sign-pane .comp-sign-name {\n  font-size: 4.8vmin;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Sign.vue","/Users/ax/Documents/prj/aug/vue/comp/Sign.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;ECCjC,aAAA;EDCE,oBAAoB;ECCtB,kBAAA;EDCE,kBAAkB;ACCpB;ADCA;ECCA,kBAAA;EACA,6BAAA;EACA,aAAA;EACA,oBAAA;EACA,kBAAA;EDCE,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,oBAAoB;AACtB;AACA;EACE,aAAa;EACb,kBAAkB;EAClB,oBAAoB;EACpB,mBAAmB;EACnB,qBAAqB;EACrB,YAAY;EACZ,kBAAkB;EAClB,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,mBAAmB;AACrB;AACA;EACE,kBAAkB;EAClB,kBAAkB;AACpB","file":"Sign.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-sign {\n  font-size: 4vmin;\n  border-radius: 0.7em;\n}\n.comp-sign-pane {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  text-align: center;\n  background-color: #333;\n  border-radius: 4vmin;\n  width: 98%;\n  height: 97%;\n}\n.comp-sign-pane i {\n  font-size: 10.8vmin;\n}\n.comp-sign-pane .comp-sign-name {\n  font-size: 4.8vmin;\n  text-align: center;\n}\n","\n<template>\n  <div  class=\"comp-sign-pane\" @click=\"doPrac(pracObj.name)\">\n    <i  :class=\"pracObj.icon\"></i>\n    <div class=\"comp-sign-name\">{{pracObj.name}}</div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  let Sign = {\n    \n    props: { pracObj:Object },\n    \n    data() { return { } },\n    \n    methods: {\n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav().pub( obj ); } }\n  }\n  export default Sign;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @signFS:2.0*@themeFS;\n\n  .theme-sign { font-size:@signFS;  border-radius:0.7em; }\n  \n  .comp-sign-pane { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;\n    color:@theme-fore; text-align:center; background-color:@theme-gray; border-radius:1.0*@signFS;\n    width:98%; height:97%;\n    i               { font-size:2.7*@signFS; }\n    .comp-sign-name { font-size:1.2*@signFS;  text-align:center; } }\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -722,7 +725,7 @@ __vue_render__$4._withStripped = true;
   
 
   
-  var Disp$1 = normalizeComponent_1(
+  var Sign$1 = normalizeComponent_1(
     { render: __vue_render__$4, staticRenderFns: __vue_staticRenderFns__$4 },
     __vue_inject_styles__$4,
     __vue_script__$4,
@@ -743,89 +746,52 @@ __vue_render__$4._withStripped = true;
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
-let Dims = {
+let Icon = {
 
-  props: { dispObj:Object, from:String },
-
+  props: { icon:String, name:String, summ:String, size:Number, fnClick:Function },
+  
   methods: {
-    doClick: function (key) {
-      if( this.mix().isDef(this.dispObj.column) ) { this.doPrac(key); }
-      else                                  { this.doDisp(key); } },
-    gridClass: function() {
-      return this.dispObj.column==="Innovate" ? 'dd-4x4' : 'dd-4x3'; },
-    doDisp:  function (dispKey) {
-      let obj = { route:"Disp", dispKey:dispKey }; // pracKey:this.pracObj.name,
-      this.nav().pub( obj ); },
-    doPrac: function (pracKey) {
-      let obj = { route:"Prac", pracKey:pracKey };
-      this.nav().pub( obj ); },
-    dispClass: function() {
-      return this.from==='Disp' ? 'dims-disp' : 'dims-dirs';
-    },
-    style: function( ikwObj ) {
-      let fontSize = this.from==='Disp' ? 2.0 : 1.0;
-      return this.mix().styleObj(ikwObj,fontSize); } },
+    
+    hasSumm: function() {
+      return this.mix().isDef(this.summ); },
+    
+    doClick: function() {
+      if( this.mix().isDef(this.fnClick) ) {
+        this.fnClick(this.name); } },
+
+    style: function() {
+      return this.mix().fontSizeCss(this.size); }
+  }
 };
 
 /* script */
-const __vue_script__$5 = Dims;
+const __vue_script__$5 = Icon;
 
 /* template */
 var __vue_render__$5 = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", { class: _vm.dispClass(), style: _vm.style(_vm.dispObj) }, [
+  return _c("div", { staticClass: "icon-pane", style: _vm.style() }, [
     _c(
       "div",
       {
-        staticClass: "dims-head",
+        staticClass: "icon-line",
         on: {
           click: function($event) {
-            return _vm.doClick(_vm.dispObj.name)
+            return _vm.doClick()
           }
         }
       },
       [
-        _c("div", { staticClass: "dims-title" }, [
-          _c("i", { class: _vm.dispObj.icon }),
-          _vm._v(" "),
-          _c("span", { staticClass: "dims-name" }, [
-            _vm._v(_vm._s(_vm.dispObj.name))
-          ])
-        ])
+        _c("span", { staticClass: "icon-icon" }, [
+          _c("i", { class: _vm.icon })
+        ]),
+        _vm._v(" "),
+        _c("span", { staticClass: "icon-name" }, [_vm._v(_vm._s(_vm.name))])
       ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { class: _vm.gridClass() },
-      [
-        _vm._l(_vm.dispObj.dims, function(ddObj) {
-          return [
-            _c("div", { class: ddObj.klass }, [
-              _c("i", { class: ddObj.icon }),
-              _vm._v(" "),
-              _c("span", { staticClass: "dims-name" }, [
-                _vm._v(_vm._s(ddObj.name))
-              ])
-            ])
-          ]
-        })
-      ],
-      2
     )
   ])
 };
@@ -835,7 +801,7 @@ __vue_render__$5._withStripped = true;
   /* style */
   const __vue_inject_styles__$5 = function (inject) {
     if (!inject) return
-    inject("data-v-184886ab_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.dims-disp {\n  font-size: 5.2vmin;\n  border-radius: 1.3vmin;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.dims-dirs {\n  font-size: 2.6vmin;\n  border-radius: 36px;\n}\n.dims-head {\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  font-size: 5.98vmin;\n}\n.dims-head .dims-title {\n  display: inline;\n}\n.dims-head .dims-title i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dims-head .dims-title .dims-name {\n  display: inline-block;\n}\n.dd-4x3 {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr 1fr;\n  grid-template-areas: \"pi pk pw\" \"li lk lw\" \"di dk dw\" \"si sk sw\";\n  margin-left: 2.6vmin;\n}\n.dd-4x3 .pi {\n  display: inline;\n  grid-area: pi;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x3 .pi i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x3 .pi .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .pk {\n  display: inline;\n  grid-area: pk;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x3 .pk i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x3 .pk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .pw {\n  display: inline;\n  grid-area: pw;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x3 .pw i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x3 .pw .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .li {\n  display: inline;\n  grid-area: li;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .li i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .li .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .lk {\n  display: inline;\n  grid-area: lk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .lk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .lk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .lw {\n  display: inline;\n  grid-area: lw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .lw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .lw .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .di {\n  display: inline;\n  grid-area: di;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .di i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .di .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .dk {\n  display: inline;\n  grid-area: dk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .dk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .dk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .dw {\n  display: inline;\n  grid-area: dw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .dw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .dw .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .si {\n  display: inline;\n  grid-area: si;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .si i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .si .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .sk {\n  display: inline;\n  grid-area: sk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .sk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .sk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .sw {\n  display: inline;\n  grid-area: sw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .sw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .sw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr 1fr;\n  grid-template-areas: \"pi pd pk pw\" \"li ld lk lw\" \"di dd dk dw\" \"si sd sk sw\";\n  margin-left: 2.6vmin;\n}\n.dd-4x4 .pi {\n  display: inline;\n  grid-area: pi;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pi i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pi .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .pd {\n  display: inline;\n  grid-area: pd;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pd i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pd .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .pk {\n  display: inline;\n  grid-area: pk;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pk i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .pw {\n  display: inline;\n  grid-area: pw;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pw i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .li {\n  display: inline;\n  grid-area: li;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .li i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .li .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .ld {\n  display: inline;\n  grid-area: ld;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .ld i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .ld .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .lk {\n  display: inline;\n  grid-area: lk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .lk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .lk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .lw {\n  display: inline;\n  grid-area: lw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .lw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .lw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .di {\n  display: inline;\n  grid-area: di;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .di i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .di .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .dd {\n  display: inline;\n  grid-area: dd;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .dd i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .dd .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .dk {\n  display: inline;\n  grid-area: dk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .dk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .dk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .dw {\n  display: inline;\n  grid-area: dw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .dw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .dw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .si {\n  display: inline;\n  grid-area: si;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .si i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .si .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .sd {\n  display: inline;\n  grid-area: sd;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .sd i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .sd .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .sk {\n  display: inline;\n  grid-area: sk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .sk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .sk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .sw {\n  display: inline;\n  grid-area: sw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .sw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .sw .dims-name {\n  display: inline-block;\n}\n", map: {"version":3,"sources":["Dims.vue","/Users/ax/Documents/prj/aug/vue/prac/Dims.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;ECCf,mBAAA;EDCE,kBAAkB;ECCpB,gBAAA;ADCA;ACCA;EACA,kBAAA;EDCE,OAAO;ECCT,MAAA;EACA,WAAA;EDCE,YAAY;ACCd;AACA;EDCE,kBAAkB;ECCpB,OAAA;EDCE,MAAM;ECCR,WAAA;EACA,WAAA;AACA;AACA;EDCE,kBAAkB;ECCpB,OAAA;EACA,QAAA;EACA,WAAA;EDCE,WAAW;ACCb;AACA;EACA,kBAAA;EDCE,OAAO;ECCT,QAAA;EACA,WAAA;EACA,WAAA;AACA;AACA;EDCE,gBAAgB;ECClB,UAAA;EACA,SAAA;EACA,gBAAA;EACA,iBAAA;AACA;ADCA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,sBAAsB;EACtB,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,mBAAmB;AACrB;AACA;EACE,eAAe;AACjB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,aAAa;EACb,kCAAkC;EAClC,mCAAmC;EACnC,gEAAgE;EAChE,oBAAoB;AACtB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,aAAa;EACb,sCAAsC;EACtC,mCAAmC;EACnC,4EAA4E;EAC5E,oBAAoB;AACtB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB","file":"Dims.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.dims-disp {\n  font-size: 5.2vmin;\n  border-radius: 1.3vmin;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.dims-dirs {\n  font-size: 2.6vmin;\n  border-radius: 36px;\n}\n.dims-head {\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  font-size: 5.98vmin;\n}\n.dims-head .dims-title {\n  display: inline;\n}\n.dims-head .dims-title i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dims-head .dims-title .dims-name {\n  display: inline-block;\n}\n.dd-4x3 {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr 1fr;\n  grid-template-areas: \"pi pk pw\" \"li lk lw\" \"di dk dw\" \"si sk sw\";\n  margin-left: 2.6vmin;\n}\n.dd-4x3 .pi {\n  display: inline;\n  grid-area: pi;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x3 .pi i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x3 .pi .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .pk {\n  display: inline;\n  grid-area: pk;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x3 .pk i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x3 .pk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .pw {\n  display: inline;\n  grid-area: pw;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x3 .pw i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x3 .pw .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .li {\n  display: inline;\n  grid-area: li;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .li i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .li .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .lk {\n  display: inline;\n  grid-area: lk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .lk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .lk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .lw {\n  display: inline;\n  grid-area: lw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .lw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .lw .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .di {\n  display: inline;\n  grid-area: di;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .di i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .di .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .dk {\n  display: inline;\n  grid-area: dk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .dk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .dk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .dw {\n  display: inline;\n  grid-area: dw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .dw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .dw .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .si {\n  display: inline;\n  grid-area: si;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .si i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .si .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .sk {\n  display: inline;\n  grid-area: sk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .sk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .sk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .sw {\n  display: inline;\n  grid-area: sw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .sw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .sw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr 1fr;\n  grid-template-areas: \"pi pd pk pw\" \"li ld lk lw\" \"di dd dk dw\" \"si sd sk sw\";\n  margin-left: 2.6vmin;\n}\n.dd-4x4 .pi {\n  display: inline;\n  grid-area: pi;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pi i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pi .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .pd {\n  display: inline;\n  grid-area: pd;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pd i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pd .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .pk {\n  display: inline;\n  grid-area: pk;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pk i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .pw {\n  display: inline;\n  grid-area: pw;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pw i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .li {\n  display: inline;\n  grid-area: li;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .li i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .li .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .ld {\n  display: inline;\n  grid-area: ld;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .ld i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .ld .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .lk {\n  display: inline;\n  grid-area: lk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .lk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .lk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .lw {\n  display: inline;\n  grid-area: lw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .lw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .lw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .di {\n  display: inline;\n  grid-area: di;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .di i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .di .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .dd {\n  display: inline;\n  grid-area: dd;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .dd i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .dd .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .dk {\n  display: inline;\n  grid-area: dk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .dk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .dk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .dw {\n  display: inline;\n  grid-area: dw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .dw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .dw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .si {\n  display: inline;\n  grid-area: si;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .si i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .si .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .sd {\n  display: inline;\n  grid-area: sd;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .sd i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .sd .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .sk {\n  display: inline;\n  grid-area: sk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .sk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .sk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .sw {\n  display: inline;\n  grid-area: sw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .sw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .sw .dims-name {\n  display: inline-block;\n}\n","\n<template>\n  <div  :class=\"dispClass()\" :style=\"style(dispObj)\">\n    <div   class=\"dims-head\" @click=\"doClick(dispObj.name)\">\n      <div class=\"dims-title\">\n        <i   :class=\"dispObj.icon\"></i>\n        <span class=\"dims-name\">{{dispObj.name}}</span>\n      </div>\n    </div>\n    <div  :class=\"gridClass()\">\n      <template v-for=\"ddObj in dispObj.dims\">\n        <div   :class=\"ddObj.klass\">\n          <i   :class=\"ddObj.icon\"></i>\n          <span class=\"dims-name\">{{ddObj.name}}</span>\n        </div>\n      </template>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  let Dims = {\n\n    props: { dispObj:Object, from:String },\n\n    methods: {\n      doClick: function (key) {\n        if( this.mix().isDef(this.dispObj.column) ) { this.doPrac(key) }\n        else                                  { this.doDisp(key) } },\n      gridClass: function() {\n        return this.dispObj.column===\"Innovate\" ? 'dd-4x4' : 'dd-4x3'; },\n      doDisp:  function (dispKey) {\n        let obj = { route:\"Disp\", dispKey:dispKey }; // pracKey:this.pracObj.name,\n        this.nav().pub( obj ); },\n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav().pub( obj ); },\n      dispClass: function() {\n        return this.from==='Disp' ? 'dims-disp' : 'dims-dirs';\n      },\n      style: function( ikwObj ) {\n        let fontSize = this.from==='Disp' ? 2.0 : 1.0;\n        return this.mix().styleObj(ikwObj,fontSize); } },\n  }\n\n  export default Dims;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  @dimsFS:1.3*@themeFS;\n\n  .dims-grid4x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr 1fr;\n    grid-template-areas: \"pi pk pw\" \"li lk lw\" \"di dk dw\" \"si sk sw\"; }\n\n  .dims-grid4x4() { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr 1fr;\n    grid-template-areas: \"pi pd pk pw\" \"li ld lk lw\" \"di dd dk dw\" \"si sd sk sw\"; }\n  \n  .dims-disp { font-size:2.0*@dimsFS; border-radius:0.5*@dimsFS;\n    position:absolute; left:0; top:@theme-tabs-height; right:0; bottom:0; }\n\n  .dims-dirs { font-size:@dimsFS; border-radius:36px; }\n\n  .dims-head    { display:grid; justify-self:center; align-self:center; text-align:center; font-size:2.3*@dimsFS;\n    .dims-title { display:inline;\n    i           { display:inline-block;  margin-right:0.25*@dimsFS; }\n    .dims-name  { display:inline-block; } } }\n\n  .plane( @area ) { display:inline; grid-area:@area; font-size:1.2*@dimsFS; text-align:left;\n    i             { display:inline-block;  margin-right: 0.25rem; }\n    .dims-name    { display:inline-block; } }\n\n  .study( @area ) { display:inline; grid-area:@area; font-size:0.9*@dimsFS; text-align:left;\n    i             { display:inline-block;  margin-right:0.25*@dimsFS; }\n    .dims-name    { display:inline-block; } }\n\n  .dd-4x3 { .dims-grid4x3(); margin-left:@dimsFS;\n    .pi { .plane(pi); }  .pk { .plane(pk); }  .pw { .plane(pw); }\n    .li { .study(li); }  .lk { .study(lk); }  .lw { .study(lw); }\n    .di { .study(di); }  .dk { .study(dk); }  .dw { .study(dw); }\n    .si { .study(si); }  .sk { .study(sk); }  .sw { .study(sw); } }\n  \n  .dd-4x4 { .dims-grid4x4(); margin-left:@dimsFS;\n    .pi { .plane(pi); }  .pd { .plane(pd); } .pk { .plane(pk); }  .pw { .plane(pw); }\n    .li { .study(li); }  .ld { .study(ld); } .lk { .study(lk); }  .lw { .study(lw); }\n    .di { .study(di); }  .dd { .study(dd); } .dk { .study(dk); }  .dw { .study(dw); }\n    .si { .study(si); }  .sd { .study(sd); } .sk { .study(sk); }  .sw { .study(sw); } }\n\n</style>"]}, media: undefined });
+    inject("data-v-0040d556_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.icon-pane {\n  display: grid;\n  height: 100%;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n  height: auto;\n}\n.icon-pane .icon-line .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-line .icon-name {\n  display: inline-block;\n}\n", map: {"version":3,"sources":["Icon.vue","/Users/ax/Documents/prj/aug/vue/elem/Icon.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;ECCf,oBAAA;EDCE,kBAAkB;ECCpB,kBAAA;ADCA;ACCA;EDCE,mBAAmB;ECCrB,+BAAA;EDCE,aAAa;ECCf,oBAAA;EDCE,kBAAkB;ECCpB,kBAAA;AACA;ADCA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,aAAa;EACb,YAAY;AACd;AACA;EACE,eAAe;EACf,oBAAoB;EACpB,kBAAkB;EAClB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,qBAAqB;AACvB","file":"Icon.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.icon-pane {\n  display: grid;\n  height: 100%;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n  height: auto;\n}\n.icon-pane .icon-line .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-line .icon-name {\n  display: inline-block;\n}\n","\n<template>\n  <div      class=\"icon-pane\" :style=\"style()\">\n    <div    class=\"icon-line\" @click=\"doClick()\">\n      <span class=\"icon-icon\"><i :class=\"icon\"></i></span>\n      <span class=\"icon-name\">{{name}}</span>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  let Icon = {\n\n    props: { icon:String, name:String, summ:String, size:Number, fnClick:Function },\n    \n    methods: {\n      \n      hasSumm: function() {\n        return this.mix().isDef(this.summ); },\n      \n      doClick: function() {\n        if( this.mix().isDef(this.fnClick) ) {\n          this.fnClick(this.name); } },\n\n      style: function() {\n        return this.mix().fontSizeCss(this.size); }\n    }\n  }\n  \n  export default Icon;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @iconFS:2.0*@themeFS;\n\n  .icon-pane     { display:grid; height:100%;\n  \n    .icon-line   { display:inline; justify-self:center; text-align:center;  height:auto;\n  \n      .icon-icon { display:inline-block;  margin-right: 0.25*@iconFS; }\n      \n      .icon-name { display:inline-block; } }\n  }\n\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -848,7 +814,7 @@ __vue_render__$5._withStripped = true;
   
 
   
-  var Dims$1 = normalizeComponent_1(
+  var Icon$1 = normalizeComponent_1(
     { render: __vue_render__$5, staticRenderFns: __vue_staticRenderFns__$5 },
     __vue_inject_styles__$5,
     __vue_script__$5,
@@ -861,34 +827,40 @@ __vue_render__$5._withStripped = true;
 
 //
 
-let Dirs = {
+let Cube = {
 
-  components:{ 'd-disp':Disp$1, 'd-dims':Dims$1 },
-
-  props: { pracObj:Object },
-
-  data() { return { dispObj:null } },
-
-  methods: {
-
-    doPrac: function (pracKey) {
-      let obj = { route:"Prac", pracKey:pracKey };
-      this.nav().pub( obj ); },
-    isDims: function () {
-      return this.pracObj.row === 'Dim'; },
-    isDisp: function () {
-      return this.pracObj.row !== 'Dim'; },
-    style: function( ikwObj ) {
-      return this.mix().styleObj(ikwObj); } },
-
-  mounted: function () {
-    if( !this.mix().isDef(this.pracObj) ) {
-      console.error( 'prac.Dirs.mounted() pracObj not defined' ); } }
+  components:{ 'p-icon':Icon$1, 'p-sign':Sign$1 },
   
+  data() { return { pracObj:{},
+  planes: {
+    Wise:{ name:'Wise', title:'Wisdom',      left:18, top:26, compObj:{}, back:'#222', icon:"fas fas fa-tripadvisor" },
+    Know:{ name:'Know', title:'Knowledge',   left:14, top:18, compObj:{}, back:'#333', icon:"fas fas fa-university"},
+    Info:{ name:'Info', title:'Information', left:10, top:10, compObj:{}, back:'#444', icon:"fas fas fa-th" } },
+    cols:{ Embrace:0, Innovate:33.30, Encourage:66.7 },
+    rows:{ Learn:  1, Do:      44.50, Share:    87.5 }, } },
+  
+  methods: {
+    stylePlane: function( plane ) {
+      return { position:'absolute', left:plane.left+'%', top:plane.top+'%', width:'66.7%', height:'62%' } },
+    stylePract: function( plane, pract ) {
+      let left = this.cols[pract.column]; // plane.left;
+      let top  = this.rows[pract.row];    // plane.top    +
+      return { position:'absolute', left:left+'%', top:top+'%', width:'33%', height:'11.1%', 'z-index':2,
+        'background-color':plane.back } } },
+
+  beforeMount: function() {
+    for( let ckey in this.planes ) {
+      let plane   =  this.planes[ckey];
+      let compObj =  this.mix().compObject(ckey);
+      for( let pkey in compObj ) {
+        if( this.mix().isChild(pkey) && !this.mix().isDef(this.cols[pkey] ) ) {
+          plane.compObj[pkey] = compObj[pkey]; } } } },
+
+  mounted: function () {}
 };
 
 /* script */
-const __vue_script__$6 = Dirs;
+const __vue_script__$6 = Cube;
 
 /* template */
 var __vue_render__$6 = function() {
@@ -897,38 +869,37 @@ var __vue_render__$6 = function() {
   var _c = _vm._self._c || _h;
   return _c(
     "div",
-    { staticClass: "prac-dirs-pane" },
+    { staticClass: "cube-pane" },
     [
-      _c(
-        "div",
-        { staticClass: "cen", style: _vm.style(_vm.pracObj) },
-        [
-          _vm.isDisp()
-            ? _c("d-disp", { attrs: { dispObj: _vm.pracObj, from: "Dirs" } })
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.isDims()
-            ? _c("d-dims", { attrs: { dispObj: _vm.pracObj, from: "Dirs" } })
-            : _vm._e()
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _vm._l(_vm.pracObj.disps, function(dispObj) {
+      _vm._l(_vm.planes, function(plane) {
         return [
           _c(
             "div",
-            { class: dispObj.dir, style: _vm.style(dispObj) },
+            { staticClass: "cube-plane", style: _vm.stylePlane(plane) },
             [
-              _vm.isDisp()
-                ? _c("d-disp", { attrs: { dispObj: dispObj, from: "Dirs" } })
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.isDims()
-                ? _c("d-dims", { attrs: { dispObj: dispObj, from: "Dirs" } })
-                : _vm._e()
+              _vm._l(plane.compObj, function(pracObj) {
+                return [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "cube-pract",
+                      style: _vm.stylePract(plane, pracObj)
+                    },
+                    [
+                      _c("p-icon", {
+                        attrs: {
+                          icon: pracObj.icon,
+                          name: pracObj.name,
+                          size: 2.7
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ]
+              })
             ],
-            1
+            2
           )
         ]
       })
@@ -942,7 +913,7 @@ __vue_render__$6._withStripped = true;
   /* style */
   const __vue_inject_styles__$6 = function (inject) {
     if (!inject) return
-    inject("data-v-6dc63bac_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-dirs-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n  color: black;\n  text-align: center;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n  font-size: 8vmin;\n}\n.prac-dirs-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n", map: {"version":3,"sources":["Dirs.vue","/Users/ax/Documents/prj/aug/vue/prac/Dirs.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;ECCrB,kBAAA;EDCE,gBAAgB;ACClB;ADCA;ECCA,kBAAA;EACA,OAAA;EDCE,MAAM;ECCR,WAAA;EDCE,YAAY;ACCd;AACA;EACA,kBAAA;EACA,OAAA;EACA,MAAA;EDCE,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,sBAAsB;EACtB,YAAY;EACZ,kBAAkB;EAClB,iBAAiB;EACjB,aAAa;EACb,kCAAkC;EAClC,+BAA+B;EAC/B,gEAAgE;EAChE,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB","file":"Dirs.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-dirs-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n  color: black;\n  text-align: center;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n  font-size: 8vmin;\n}\n.prac-dirs-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n","\n<template>\n  <div class=\"prac-dirs-pane\">\n    <div class=\"cen\" :style=\"style(pracObj)\">\n      <d-disp v-if=\"isDisp()\" :dispObj=\"pracObj\" from=\"Dirs\"></d-disp>\n      <d-dims v-if=\"isDims()\" :dispObj=\"pracObj\" from=\"Dirs\"></d-dims>\n    </div>\n    <template  v-for=\"dispObj in pracObj.disps\">\n      <div :class=\"dispObj.dir\" :style=\"style(dispObj)\">\n        <d-disp v-if=\"isDisp()\" :dispObj=\"dispObj\" from=\"Dirs\"></d-disp>\n        <d-dims v-if=\"isDims()\" :dispObj=\"dispObj\" from=\"Dirs\"></d-dims>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Disp from './Disp.vue';\n  import Dims from './Dims.vue';\n\n  let Dirs = {\n\n    components:{ 'd-disp':Disp, 'd-dims':Dims },\n\n    props: { pracObj:Object },\n\n    data() { return { dispObj:null } },\n\n    methods: {\n\n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav().pub( obj ); },\n      isDims: function () {\n        return this.pracObj.row === 'Dim'; },\n      isDisp: function () {\n        return this.pracObj.row !== 'Dim'; },\n      style: function( ikwObj ) {\n        return this.mix().styleObj(ikwObj); } },\n\n    mounted: function () {\n      if( !this.mix().isDef(this.pracObj) ) {\n        console.error( 'prac.Dirs.mounted() pracObj not defined' ); } }\n    \n  }\n\n  export default Dirs;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @pracDirsFS:2.0*@themeFS;\n  \n  .prac-dirs-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n    grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .prac-dir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }\n  \n  .prac-dirs-pane { position:absolute; left:0; top:0; width:100%; height:100%; background-color:@theme-gray;\n    color:black; text-align:center; font-weight:bold; .prac-dirs-grid3x3(); font-size:2.0*@pracDirsFS;\n                                 .north { .prac-dir(north); }\n      .west { .prac-dir(west); } .cen   { .prac-dir(cen);   } .east { .prac-dir(east); }\n                                 .south { .prac-dir(south); } }\n  \n  \n</style>"]}, media: undefined });
+    inject("data-v-aecbc04a_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.cube-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.cube-pane .cube-plane {\n  font-size: 4vmin;\n  border-radius: 8vmin;\n  color: wheat;\n  background-color: transparent;\n}\n.cube-pane .cube-pract {\n  font-size: 4vmin;\n  border-radius: 8vmin;\n  border: wheat solid 2px;\n  color: wheat;\n  background-color: #333;\n}\n.cube-pane .cube-plane-icon {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 10%;\n  font-size: 4vmin;\n}\n", map: {"version":3,"sources":["Cube.vue","/Users/ax/Documents/prj/aug/vue/comp/Cube.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;ECCR,WAAA;EDCE,YAAY;ACCd;ADCA;ECCA,kBAAA;EACA,OAAA;EACA,MAAA;EACA,WAAA;EACA,WAAA;AACA;ADCA;ECCA,kBAAA;EDCE,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,gBAAgB;EAChB,oBAAoB;EACpB,YAAY;EACZ,6BAA6B;AAC/B;AACA;EACE,gBAAgB;EAChB,oBAAoB;EACpB,uBAAuB;EACvB,YAAY;EACZ,sBAAsB;AACxB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;EACX,gBAAgB;AAClB","file":"Cube.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.cube-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.cube-pane .cube-plane {\n  font-size: 4vmin;\n  border-radius: 8vmin;\n  color: wheat;\n  background-color: transparent;\n}\n.cube-pane .cube-pract {\n  font-size: 4vmin;\n  border-radius: 8vmin;\n  border: wheat solid 2px;\n  color: wheat;\n  background-color: #333;\n}\n.cube-pane .cube-plane-icon {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 10%;\n  font-size: 4vmin;\n}\n","\n<template>\n  <div class=\"cube-pane\">\n    <template v-for=\"plane in planes\">\n      <div   class=\"cube-plane\" :style=\"stylePlane(plane)\">\n        <!--div class=\"cube-plane-icon\"><p-icon  :icon=\"plane.icon\" :name=\"plane.name\" :size=\"2.5\" ></p-icon></div-->\n        <template v-for=\"pracObj in plane.compObj\">\n          <div class=\"cube-pract\" :style=\"stylePract(plane,pracObj)\">\n            <!--p-sign :pracObj=\"pracObj\"></p-sign-->\n            <p-icon  :icon=\"pracObj.icon\" :name=\"pracObj.name\" :size=\"2.7\" ></p-icon>\n          </div>\n        </template>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Sign from './Sign.vue';\n  import Icon from '../elem/Icon.vue';\n  \n  let Cube = {\n\n    components:{ 'p-icon':Icon, 'p-sign':Sign },\n    \n    data() { return { pracObj:{},\n    planes: {\n      Wise:{ name:'Wise', title:'Wisdom',      left:18, top:26, compObj:{}, back:'#222', icon:\"fas fas fa-tripadvisor\" },\n      Know:{ name:'Know', title:'Knowledge',   left:14, top:18, compObj:{}, back:'#333', icon:\"fas fas fa-university\"},\n      Info:{ name:'Info', title:'Information', left:10, top:10, compObj:{}, back:'#444', icon:\"fas fas fa-th\" } },\n      cols:{ Embrace:0, Innovate:33.30, Encourage:66.7 },\n      rows:{ Learn:  1, Do:      44.50, Share:    87.5 }, } },\n    \n    methods: {\n      stylePlane: function( plane ) {\n        return { position:'absolute', left:plane.left+'%', top:plane.top+'%', width:'66.7%', height:'62%' } },\n      stylePract: function( plane, pract ) {\n        let left = this.cols[pract.column]; // plane.left;\n        let top  = this.rows[pract.row];    // plane.top    +\n        return { position:'absolute', left:left+'%', top:top+'%', width:'33%', height:'11.1%', 'z-index':2,\n          'background-color':plane.back } } },\n\n    beforeMount: function() {\n      for( let ckey in this.planes ) {\n        let plane   =  this.planes[ckey];\n        let compObj =  this.mix().compObject(ckey);\n        for( let pkey in compObj ) {\n          if( this.mix().isChild(pkey) && !this.mix().isDef(this.cols[pkey] ) ) {\n            plane.compObj[pkey] = compObj[pkey]; } } } },\n\n    mounted: function () {}\n  }\n  \n  export default Cube;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @ikwFS:2.0*@themeFS;\n\n  .cube-pane { position:absolute; left:0; top:0; width:100%; height:100%;\n    .cube-plane { font-size:@ikwFS;  border-radius:2.0*@ikwFS; // border:@theme-fore solid 2px;\n                  color:@theme-fore; background-color:transparent; }\n    .cube-pract { font-size:@ikwFS;  border-radius:2.0*@ikwFS;    border:@theme-fore solid 2px;\n                  color:@theme-fore; background-color:@theme-gray; }\n    .cube-plane-icon { position:absolute; left:0; top:0; width:100%; height:10%; font-size:@ikwFS; }\n    \n  }\n\n</style>\n"]}, media: undefined });
 
   };
   /* scoped */
@@ -955,13 +926,640 @@ __vue_render__$6._withStripped = true;
   
 
   
-  var Dirs$1 = normalizeComponent_1(
+  var Cube$1 = normalizeComponent_1(
     { render: __vue_render__$6, staticRenderFns: __vue_staticRenderFns__$6 },
     __vue_inject_styles__$6,
     __vue_script__$6,
     __vue_scope_id__$6,
     __vue_is_functional_template__$6,
     __vue_module_identifier__$6,
+    browser,
+    undefined
+  );
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+var script$1 = {
+
+  props: { route:String, pages:Object, position:{ default:'full', type:String } },
+  
+  data() { return { pageKey:'None', pageObj:null,
+    positions:{ left:{ left:0, width:'60%' }, right:{ left:'60%', width:'40%' }, full:{ left:0, width:'100%' } } } },
+  
+  methods: {
+    doTabs: function () {
+      this.nav().setPages(this.route,this.pages); // Will only set pages if needed
+      let first   = this.pageKey==='None' && !this.mix().hasInov(this.route);
+      let pageKey = this.nav().getPageKey(this.route);
+      // console.log( 'Tabs.init()', obj, { route:this.route, pageKey:pageKey, pages:this.pages } );
+      if( first ){ this.doPage(pageKey); }
+      else       { this.onPage(pageKey); } },
+    isPage: function (pageKey) {
+      return this.mix().isDef(this.route) && this.mix().isDef(pageKey); },
+    onPage: function (pageKey) {
+      if( this.isPage(pageKey) ) {
+        this.pageKey = pageKey;
+        this.nav().setPageKey( this.route, pageKey ); }
+      else {
+        console.log( 'Tabs.onPage() bad pageKey', { route:this.route, pageKey:pageKey } ); } },
+    doPage: function (pageKey) {
+      if( this.isPage(pageKey) ) {
+          this.onPage(pageKey) ;
+          let obj = { source:'Tabs',route:this.route };
+          obj.inovKey = this.mix().hasInov(this.route) ? pageKey : 'None';
+           this.nav().pub(obj); } },
+    stylePos: function () {
+      return this.positions[this.position]; },
+    classTab: function (pageKey) {
+      return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },
+  mounted: function() {
+    this.doTabs();
+    this.mix().subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {
+      if( obj.source !== 'Tabs'  ) { // && obj.route === this.route
+        this.$nextTick( function() {
+          this.doTabs(); } ); } } ); }
+  };
+
+/* script */
+const __vue_script__$7 = script$1;
+
+/* template */
+var __vue_render__$7 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { staticClass: "tabs-pane", style: _vm.stylePos() },
+    [
+      _vm._l(_vm.pages, function(pageObj) {
+        return [
+          _c(
+            "div",
+            {
+              class: _vm.classTab(pageObj.key),
+              on: {
+                click: function($event) {
+                  return _vm.doPage(pageObj.key)
+                }
+              }
+            },
+            [_vm._v(_vm._s(pageObj.title))]
+          )
+        ]
+      })
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$7 = [];
+__vue_render__$7._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$7 = function (inject) {
+    if (!inject) return
+    inject("data-v-4af43c03_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: tan;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Tabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Tabs.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;ACCA;EDCE,kBAAkB;ECCpB,OAAA;EDCE,MAAM;ECCR,WAAA;EACA,YAAA;ADCA;ACCA;EACA,kBAAA;EACA,OAAA;EACA,MAAA;EACA,WAAA;EACA,WAAA;ADCA;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,uBAAuB;EACvB,gBAAgB;EAChB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,UAAU;EACV,UAAU;AACZ;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Tabs.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: tan;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"tabs-pane\" :style=\"stylePos()\">\n    <template v-for=\"pageObj in pages\">\n      <div :class=\"classTab(pageObj.key)\" @click=\"doPage(pageObj.key)\">{{pageObj.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { route:String, pages:Object, position:{ default:'full', type:String } },\n    \n    data() { return { pageKey:'None', pageObj:null,\n      positions:{ left:{ left:0, width:'60%' }, right:{ left:'60%', width:'40%' }, full:{ left:0, width:'100%' } } } },\n    \n    methods: {\n      doTabs: function () {\n        this.nav().setPages(this.route,this.pages); // Will only set pages if needed\n        let first   = this.pageKey==='None' && !this.mix().hasInov(this.route);\n        let pageKey = this.nav().getPageKey(this.route);\n        // console.log( 'Tabs.init()', obj, { route:this.route, pageKey:pageKey, pages:this.pages } );\n        if( first ){ this.doPage(pageKey); }\n        else       { this.onPage(pageKey); } },\n      isPage: function (pageKey) {\n        return this.mix().isDef(this.route) && this.mix().isDef(pageKey); },\n      onPage: function (pageKey) {\n        if( this.isPage(pageKey) ) {\n          this.pageKey = pageKey;\n          this.nav().setPageKey( this.route, pageKey ); }\n        else {\n          console.log( 'Tabs.onPage() bad pageKey', { route:this.route, pageKey:pageKey } ); } },\n      doPage: function (pageKey) {\n        if( this.isPage(pageKey) ) {\n            this.onPage(pageKey) ;\n            let obj = { source:'Tabs',route:this.route }\n            obj.inovKey = this.mix().hasInov(this.route) ? pageKey : 'None';\n             this.nav().pub(obj); } },\n      stylePos: function () {\n        return this.positions[this.position]; },\n      classTab: function (pageKey) {\n        return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },\n    mounted: function() {\n      this.doTabs();\n      this.mix().subscribe(  \"Nav\", 'Tabs.vue.'+this.route, (obj) => {\n        if( obj.source !== 'Tabs'  ) { // && obj.route === this.route\n          this.$nextTick( function() {\n            this.doTabs(); } ); } } ); }\n    }\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @tabsFS:1.5*@themeFS;\n  \n  .tabs-pane { background-color:@theme-back; font-size:@tabsFS;\n    position:absolute; left:0; top:0; width:@theme-tabs-width; height:@theme-tabs-height;\n    \n    .tabs-tab { display:inline-block; margin-left:2.0rem; padding:0.2rem 0.3rem 0.1rem 0.3rem;\n      border-radius:12px 12px 0 0; border-left: @theme-fore solid thin;\n      border-top:@theme-fore solid thin; border-right:@theme-fore solid thin;\n                                    background-color:@theme-back; color:@theme-fore; }\n    .tabs-tab:hover  {              background-color:@theme-hove; color:@theme-back; }\n    .tabs-tab-active { .tabs-tab(); background-color:@theme-fore; color:@theme-back; } }\n  \n</style>"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$7 = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$7 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$7 = false;
+  /* style inject SSR */
+  
+
+  
+  var Tabs = normalizeComponent_1(
+    { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
+    __vue_inject_styles__$7,
+    __vue_script__$7,
+    __vue_scope_id__$7,
+    __vue_is_functional_template__$7,
+    __vue_module_identifier__$7,
+    browser,
+    undefined
+  );
+
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+let Sign$2 = {
+  
+  props: { pracObj:Object },
+  
+  data() { return { } },
+  
+  methods: {
+    doPrac: function (pracKey) {
+      let obj = { route:"Prac", pracKey:pracKey };
+      this.nav.pub( obj ); } }
+};
+
+/* script */
+const __vue_script__$8 = Sign$2;
+
+/* template */
+var __vue_render__$8 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    {
+      staticClass: "prin-sign-pane",
+      on: {
+        click: function($event) {
+          return _vm.doPrac(_vm.pracObj.name)
+        }
+      }
+    },
+    [
+      _c("i", { class: _vm.pracObj.icon }),
+      _vm._v(" "),
+      _c("div", { staticClass: "prin-sign-name" }, [
+        _vm._v(_vm._s(_vm.pracObj.name))
+      ])
+    ]
+  )
+};
+var __vue_staticRenderFns__$8 = [];
+__vue_render__$8._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$8 = function (inject) {
+    if (!inject) return
+    inject("data-v-4bc7f5fc_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prin-sign-pane {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  text-align: center;\n  background-color: #333;\n  border-radius: 4vmin;\n  width: 90%;\n  height: 90%;\n}\n.prin-sign-pane i {\n  font-size: 30vmin;\n}\n.prin-sign-pane .prin-sign-name {\n  font-size: 9.2vmin;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Sign.vue","/Users/ax/Documents/prj/aug/vue/prin/Sign.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;ECCjC,aAAA;EDCE,oBAAoB;ECCtB,kBAAA;EDCE,kBAAkB;ACCpB;AACA;EACA,kBAAA;EACA,6BAAA;EACA,aAAA;EDCE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,aAAa;EACb,kBAAkB;EAClB,oBAAoB;EACpB,mBAAmB;EACnB,qBAAqB;EACrB,YAAY;EACZ,kBAAkB;EAClB,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,kBAAkB;AACpB","file":"Sign.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prin-sign-pane {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  text-align: center;\n  background-color: #333;\n  border-radius: 4vmin;\n  width: 90%;\n  height: 90%;\n}\n.prin-sign-pane i {\n  font-size: 30vmin;\n}\n.prin-sign-pane .prin-sign-name {\n  font-size: 9.2vmin;\n  text-align: center;\n}\n","\n<template>\n  <div   class=\"prin-sign-pane\" @click=\"doPrac(pracObj.name)\">\n    <i  :class=\"pracObj.icon\"></i>\n    <div class=\"prin-sign-name\">{{pracObj.name}}</div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  let Sign = {\n    \n    props: { pracObj:Object },\n    \n    data() { return { } },\n    \n    methods: {\n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav.pub( obj ); } }\n  }\n  export default Sign;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  @signFS:2.0*@themeFS;\n\n  .prin-sign-pane { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;\n    color:@theme-fore; text-align:center; background-color:@theme-gray; border-radius:1.0*@signFS;\n    width:90%; height:90%;\n    i               { font-size:7.5*@signFS; }\n    .prin-sign-name { font-size:2.3*@signFS;  text-align:center; } }\n  \n</style>"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$8 = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$8 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$8 = false;
+  /* style inject SSR */
+  
+
+  
+  var Sign$3 = normalizeComponent_1(
+    { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
+    __vue_inject_styles__$8,
+    __vue_script__$8,
+    __vue_scope_id__$8,
+    __vue_is_functional_template__$8,
+    __vue_module_identifier__$8,
+    browser,
+    undefined
+  );
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+let Dirs = {
+
+  props: { pracObj:Object },
+
+  data() { return { dispObj:null, ddObj:null } },
+
+  methods: {
+    doPrac: function (pracKey) {
+      let obj = { route:"Prac", pracKey:pracKey };
+      this.mix().nav.pub( obj ); },
+    doDisp: function (pracKey,dispKey) {
+      let obj = { route:"Disp", pracKey:pracKey, dispKey:dispKey };
+      this.mix().nav.pub( obj ); },
+    style: function( ikwObj ) {
+      return this.mix().styleObj(ikwObj); } }
+};
+
+/* script */
+const __vue_script__$9 = Dirs;
+
+/* template */
+var __vue_render__$9 = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { staticClass: "prin-dirs-pane" },
+    [
+      _c("div", { staticClass: "cen", style: _vm.style(_vm.pracObj) }, [
+        _c(
+          "div",
+          {
+            staticClass: "prin-dirs-disp",
+            on: {
+              click: function($event) {
+                return _vm.doPrac(_vm.pracObj.name)
+              }
+            }
+          },
+          [
+            _c("i", { class: _vm.pracObj.icon }),
+            _vm._v(" "),
+            _c("span", { staticClass: "prin-dirs-name" }, [
+              _vm._v(_vm._s(_vm.pracObj.name))
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.pracObj.disps, function(dispObj) {
+        return [
+          _c(
+            "div",
+            {
+              ref: dispObj.name,
+              refInFor: true,
+              class: dispObj.dir,
+              style: _vm.style(dispObj)
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "prin-dirs-disp",
+                  on: {
+                    click: function($event) {
+                      return _vm.doDisp(_vm.prac.name, dispObj.name)
+                    }
+                  }
+                },
+                [
+                  _c("i", { class: dispObj.icon }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "prin-dirs-name" }, [
+                    _vm._v(_vm._s(dispObj.name))
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _vm._l(dispObj.disps, function(ddObj) {
+                return [
+                  _c("div", { staticClass: "prin-dirs-disp" }, [
+                    _c("i", { class: ddObj.icon }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "prin-dirs-name" }, [
+                      _vm._v(_vm._s(ddObj.name))
+                    ])
+                  ])
+                ]
+              })
+            ],
+            2
+          )
+        ]
+      })
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$9 = [];
+__vue_render__$9._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$9 = function (inject) {
+    if (!inject) return
+    inject("data-v-65ac0c26_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prin-dirs-pane {\n  font-size: 4vmin;\n  width: 90%;\n  height: 96%;\n  color: black;\n  background-color: #333;\n  border-radius: 2.5vmin;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.prin-dirs-pane .north {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: north;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .west {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: west;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .cen {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: cen;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .east {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: east;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .south {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: south;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .cen {\n  font-size: 4vmin;\n}\n.prin-dirs-pane .prin-dirs-disp {\n  display: block;\n  text-align: center;\n}\n.prin-dirs-pane .prin-dirs-disp i {\n  display: block;\n}\n.prin-dirs-pane .prin-dirs-disp .prin-dirs-name {\n  display: block;\n}\n", map: {"version":3,"sources":["Dirs.vue","/Users/ax/Documents/prj/aug/vue/prin/Dirs.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;ECCjC,aAAA;EDCE,mBAAmB;ECCrB,kBAAA;EDCE,gBAAgB;ACClB;AACA;EDCE,kBAAkB;ECCpB,OAAA;EDCE,MAAM;ECCR,WAAA;EACA,YAAA;ADCA;ACCA;EACA,kBAAA;EACA,OAAA;EACA,MAAA;EACA,WAAA;EDCE,WAAW;ACCb;AACA;EACA,kBAAA;EDCE,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,WAAW;EACX,YAAY;EACZ,sBAAsB;EACtB,sBAAsB;EACtB,iBAAiB;EACjB,aAAa;EACb,kCAAkC;EAClC,+BAA+B;EAC/B,gEAAgE;AAClE;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,mBAAmB;EACnB,qBAAqB;EACrB,gBAAgB;EAChB,sBAAsB;AACxB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,mBAAmB;EACnB,qBAAqB;EACrB,eAAe;EACf,sBAAsB;AACxB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,mBAAmB;EACnB,qBAAqB;EACrB,cAAc;EACd,sBAAsB;AACxB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,mBAAmB;EACnB,qBAAqB;EACrB,eAAe;EACf,sBAAsB;AACxB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,mBAAmB;EACnB,qBAAqB;EACrB,gBAAgB;EAChB,sBAAsB;AACxB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,cAAc;EACd,kBAAkB;AACpB;AACA;EACE,cAAc;AAChB;AACA;EACE,cAAc;AAChB","file":"Dirs.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prin-dirs-pane {\n  font-size: 4vmin;\n  width: 90%;\n  height: 96%;\n  color: black;\n  background-color: #333;\n  border-radius: 2.5vmin;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.prin-dirs-pane .north {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: north;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .west {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: west;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .cen {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: cen;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .east {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: east;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .south {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: south;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .cen {\n  font-size: 4vmin;\n}\n.prin-dirs-pane .prin-dirs-disp {\n  display: block;\n  text-align: center;\n}\n.prin-dirs-pane .prin-dirs-disp i {\n  display: block;\n}\n.prin-dirs-pane .prin-dirs-disp .prin-dirs-name {\n  display: block;\n}\n","\n<template>\n  <div class=\"prin-dirs-pane\">\n    <div class=\"cen\" :style=\"style(pracObj)\">\n      <div class=\"prin-dirs-disp\" @click=\"doPrac(pracObj.name)\">\n        <i   :class=\"pracObj.icon\"></i>\n        <span class=\"prin-dirs-name\">{{pracObj.name}}</span>\n      </div>\n    </div>\n    <template v-for=\"dispObj in pracObj.disps\">\n      <div   :class=\"dispObj.dir\" :style=\"style(dispObj)\"  :ref=\"dispObj.name\">\n        <div class=\"prin-dirs-disp\" @click=\"doDisp(prac.name,dispObj.name)\">\n          <i   :class=\"dispObj.icon\"></i>\n          <span class=\"prin-dirs-name\">{{dispObj.name}}</span>\n        </div>\n        <template v-for=\"ddObj in dispObj.disps\">\n          <div class=\"prin-dirs-disp\">\n            <i   :class=\"ddObj.icon\"></i>\n            <span class=\"prin-dirs-name\">{{ddObj.name}}</span>\n          </div>\n        </template>\n        </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  let Dirs = {\n\n    props: { pracObj:Object },\n\n    data() { return { dispObj:null, ddObj:null } },\n\n    methods: {\n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.mix().nav.pub( obj ); },\n      doDisp: function (pracKey,dispKey) {\n        let obj = { route:\"Disp\", pracKey:pracKey, dispKey:dispKey };\n        this.mix().nav.pub( obj ); },\n      style: function( ikwObj ) {\n        return this.mix().styleObj(ikwObj); } }\n  }\n\n  export default Dirs;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  @prinDirsFS:1.25*@themeFS;\n\n  .prin-dirs-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n    grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .prin-dirs-dir( @dir ) { .themeCenterStretch(); grid-area:@dir; border-radius:1.0*@prinDirsFS; }\n\n  .prin-dirs-pane { font-size:1.6*@prinDirsFS; width:90%; height:96%;\n    color:black; background-color:@theme-gray; border-radius:1.0*@prinDirsFS; font-weight:bold;\n  \n      .prin-dirs-grid3x3(); // The 4 Displine plus Practiice name Grid\n                                       .north { .prin-dirs-dir(north); }\n      .west { .prin-dirs-dir(west); }  .cen   { .prin-dirs-dir(cen);   } .east { .prin-dirs-dir(east); }\n                                       .south { .prin-dirs-dir(south); }\n      .cen { font-size:1.6*@prinDirsFS; }\n    \n    .prin-dirs-disp   { display:block; text-align:center;\n       i              { display:block; }\n      .prin-dirs-name { display:block; } } }\n  \n</style>"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$9 = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$9 = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$9 = false;
+  /* style inject SSR */
+  
+
+  
+  var Dirs$1 = normalizeComponent_1(
+    { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
+    __vue_inject_styles__$9,
+    __vue_script__$9,
+    __vue_scope_id__$9,
+    __vue_is_functional_template__$9,
+    __vue_module_identifier__$9,
+    browser,
+    undefined
+  );
+
+//
+
+let Prin = {
+
+  components:{ 'b-tabs':Tabs, 'p-sign':Sign$3, 'p-dirs':Dirs$1 },
+  
+  data() { return { route:'Prin',compObj:null, pracObj:null,
+    pages:{
+      Sign: { title:'Foundation', key:'Sign', show:true  },
+      Dirs: { title:'Principles', key:'Dirs', show:false } } } },
+  
+  methods: {
+    
+    onComp: function( compKey ) {
+      this.compObj = this.mix().compObject(compKey);
+      this.nav().setPages( compKey, this.pages ); },
+    isRows: function () {
+      return true; },
+    onNav:  function (obj) {
+      if( this.nav().isMyNav(  obj, this.route ) ) {
+        this.onComp( obj.compKey ); } }
+    },
+
+  beforeMount: function() {
+    this.onComp('Prin'); },
+
+  mounted: function () {
+    this.nav().setPages( this.route, this.pages );
+    this.mix().subscribe( 'Nav', 'Prin.vue', (obj) => {
+      this.onNav(obj); } ); }
+};
+
+/* script */
+const __vue_script__$a = Prin;
+
+/* template */
+var __vue_render__$a = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { staticClass: "prin-pane" },
+    [
+      _c("b-tabs", { attrs: { route: _vm.route, pages: _vm.pages } }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "prin-comp" },
+        [
+          _vm._l(_vm.compObj, function(pracObj) {
+            return [
+              _c(
+                "div",
+                {
+                  key: pracObj.name,
+                  ref: pracObj.name,
+                  refInFor: true,
+                  class: pracObj.dir
+                },
+                [
+                  _c("p-sign", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.pages["Sign"].show,
+                        expression: "pages['Sign'].show"
+                      }
+                    ],
+                    attrs: { pracObj: pracObj }
+                  }),
+                  _vm._v(" "),
+                  _c("p-dirs", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.pages["Dirs"].show,
+                        expression: "pages['Dirs'].show"
+                      }
+                    ],
+                    attrs: { pracObj: pracObj }
+                  })
+                ],
+                1
+              )
+            ]
+          })
+        ],
+        2
+      )
+    ],
+    1
+  )
+};
+var __vue_staticRenderFns__$a = [];
+__vue_render__$a._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$a = function (inject) {
+    if (!inject) return
+    inject("data-v-56dfd85a_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prin-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.prin-pane .prin-comp {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  color: black;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n  display: grid;\n  grid-template-columns: 29fr 29fr 29fr;\n  grid-template-rows: 100fr;\n  grid-template-areas: \"em in en\";\n  justify-items: center;\n  align-items: center;\n}\n.prin-pane .prin-comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.prin-pane .prin-comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.prin-pane .prin-comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n", map: {"version":3,"sources":["Prin.vue","/Users/ax/Documents/prj/aug/vue/prin/Prin.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;ECCA,kBAAA;EDCE,OAAO;ECCT,MAAA;EACA,WAAA;EDCE,YAAY;ACCd;AACA;EDCE,kBAAkB;ECCpB,OAAA;EDCE,MAAM;ECCR,WAAA;EDCE,WAAW;ACCb;AACA;EACA,kBAAA;EACA,OAAA;EDCE,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;EACX,uBAAuB;EACvB,YAAY;EACZ,gBAAgB;EAChB,oBAAoB;EACpB,aAAa;EACb,qCAAqC;EACrC,yBAAyB;EACzB,+BAA+B;EAC/B,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB","file":"Prin.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prin-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.prin-pane .prin-comp {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  color: black;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n  display: grid;\n  grid-template-columns: 29fr 29fr 29fr;\n  grid-template-rows: 100fr;\n  grid-template-areas: \"em in en\";\n  justify-items: center;\n  align-items: center;\n}\n.prin-pane .prin-comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.prin-pane .prin-comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.prin-pane .prin-comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n","\n<template>\n  <div class=\"prin-pane\">\n    <b-tabs :route=\"route\" :pages=\"pages\"></b-tabs>\n    <div class=\"prin-comp\">\n        <template v-for=\"pracObj in compObj\">\n          <div   :class=\"pracObj.dir\" :key=\"pracObj.name\" :ref=\"pracObj.name\">\n            <p-sign v-show=\"pages['Sign'].show\" :pracObj=\"pracObj\"></p-sign>\n            <p-dirs v-show=\"pages['Dirs'].show\" :pracObj=\"pracObj\"></p-dirs>\n          </div>\n        </template>\n      </div>\n    </div>\n</template>\n\n<script type=\"module\">\n\n  import Tabs from '../elem/Tabs.vue';\n  import Sign from './Sign.vue';\n  import Dirs from './Dirs.vue';\n  \n  let Prin = {\n\n    components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs },\n    \n    data() { return { route:'Prin',compObj:null, pracObj:null,\n      pages:{\n        Sign: { title:'Foundation', key:'Sign', show:true  },\n        Dirs: { title:'Principles', key:'Dirs', show:false } } } },\n    \n    methods: {\n      \n      onComp: function( compKey ) {\n        this.compObj = this.mix().compObject(compKey);\n        this.nav().setPages( compKey, this.pages ); },\n      isRows: function () {\n        return true; },\n      onNav:  function (obj) {\n        if( this.nav().isMyNav(  obj, this.route ) ) {\n          this.onComp( obj.compKey ); } }\n      },\n\n    beforeMount: function() {\n      this.onComp('Prin'); },\n\n    mounted: function () {\n      this.nav().setPages( this.route, this.pages );\n      this.mix().subscribe( 'Nav', 'Prin.vue', (obj) => {\n        this.onNav(obj); } ); }\n  }\n  \n  export default Prin;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  .prin-grid1x3() { display:grid; grid-template-columns:29fr 29fr 29fr; grid-template-rows:100fr;\n    grid-template-areas: \"em in en\" }\n  \n  .prin-dir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n                  justify-items:center; align-items:center; }\n\n  @prinFS:2.0*@themeFS;\n\n  .prin-pane { position:absolute; left:0; top:0; width:100%; height:100%;\n  \n    .prin-comp { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;\n      background-color:@theme-back; color:@theme-dark; font-size:@prinFS; border-radius:0.5*@prinFS;\n      .prin-grid1x3(); justify-items:center; align-items:center; // The 4x4 Dim + Row + 9 Practices Grid\n        .em { .prin-dir(em); } .in { .prin-dir(in); }  .en  { .prin-dir(en); } } }\n  \n</style>\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$a = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$a = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$a = false;
+  /* style inject SSR */
+  
+
+  
+  var Prin$1 = normalizeComponent_1(
+    { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
+    __vue_inject_styles__$a,
+    __vue_script__$a,
+    __vue_scope_id__$a,
+    __vue_is_functional_template__$a,
+    __vue_module_identifier__$a,
+    browser,
+    undefined
+  );
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+let Dirs$2 = {
+
+  props: { pracObj:Object },
+
+  data() { return { dispObj:null } },
+
+  methods: {
+    
+    doPrac: function (pracKey) {
+      let obj = { route:"Prac", pracKey:pracKey };
+      this.nav().pub( obj ); },
+    doDisp: function (pracKey,dispKey) {
+      let obj = { route:"Disp", pracKey:pracKey, dispKey:dispKey };
+      this.nav().pub( obj ); },
+    style: function( ikwObj ) {
+      return this.mix().styleObj(ikwObj); } }
+};
+
+/* script */
+const __vue_script__$b = Dirs$2;
+
+/* template */
+var __vue_render__$b = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { staticClass: "dirs-comp" },
+    [
+      _c("div", { staticClass: "cen", style: _vm.style(_vm.pracObj) }, [
+        _c(
+          "div",
+          {
+            staticClass: "disp-comp",
+            on: {
+              click: function($event) {
+                return _vm.doPrac(_vm.pracObj.name)
+              }
+            }
+          },
+          [
+            _c("i", { class: _vm.pracObj.icon }),
+            _vm._v(" "),
+            _c("span", { staticClass: "disp-name" }, [
+              _vm._v(_vm._s(_vm.pracObj.name))
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "disp-desc" }, [
+              _vm._v(_vm._s(_vm.pracObj.desc))
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _vm._l(_vm.pracObj.disps, function(dispObj) {
+        return [
+          _c(
+            "div",
+            {
+              ref: dispObj.name,
+              refInFor: true,
+              class: dispObj.dir,
+              style: _vm.style(dispObj)
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "disp-comp",
+                  on: {
+                    click: function($event) {
+                      return _vm.doDisp(_vm.prac.name, dispObj.name)
+                    }
+                  }
+                },
+                [
+                  _c("i", { class: dispObj.icon }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "disp-name" }, [
+                    _vm._v(_vm._s(dispObj.name))
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "disp-desc" }, [
+                    _vm._v(_vm._s(dispObj.desc))
+                  ])
+                ]
+              )
+            ]
+          )
+        ]
+      })
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$b = [];
+__vue_render__$b._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$b = function (inject) {
+    if (!inject) return
+    inject("data-v-7645bd5a_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.dirs-comp {\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  font-size: 2.5vmin;\n  width: 90%;\n  height: 90%;\n  color: black;\n  background-color: #333;\n  border-radius: 2.5vmin;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.dirs-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .cen {\n  font-size: 2.5vmin;\n}\n.dirs-comp .disp-comp {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.dirs-comp .disp-comp i {\n  display: inline-block;\n  margin-right: 0.375vmin;\n}\n.dirs-comp .disp-comp .disp-name {\n  display: inline-block;\n}\n.dirs-comp .disp-comp .disp-desc {\n  display: none;\n  margin: 0.25vmin;\n  text-align: left;\n}\n", map: {"version":3,"sources":["Dirs.vue","/Users/ax/Documents/prj/aug/vue/comp/Dirs.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;ACCA;EDCE,gBAAgB;ECClB,+BAAA;EDCE,aAAa;ECCf,mBAAA;EACA,kBAAA;EDCE,gBAAgB;ACClB;ADCA;ECCA,kBAAA;EACA,OAAA;EDCE,MAAM;ECCR,WAAA;EACA,YAAA;AACA;AACA;EACA,kBAAA;EDCE,OAAO;ECCT,MAAA;EACA,WAAA;EACA,WAAA;AACA;ADCA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,mBAAmB;EACnB,qBAAqB;EACrB,kBAAkB;EAClB,UAAU;EACV,WAAW;EACX,YAAY;EACZ,sBAAsB;EACtB,sBAAsB;EACtB,iBAAiB;EACjB,aAAa;EACb,kCAAkC;EAClC,+BAA+B;EAC/B,gEAAgE;AAClE;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;AACzB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;AACzB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;AACzB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;AACzB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;AACzB;AACA;EACE,kBAAkB;AACpB;AACA;EACE,eAAe;EACf,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,qBAAqB;EACrB,uBAAuB;AACzB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,gBAAgB;AAClB","file":"Dirs.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.dirs-comp {\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  font-size: 2.5vmin;\n  width: 90%;\n  height: 90%;\n  color: black;\n  background-color: #333;\n  border-radius: 2.5vmin;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.dirs-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .cen {\n  font-size: 2.5vmin;\n}\n.dirs-comp .disp-comp {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.dirs-comp .disp-comp i {\n  display: inline-block;\n  margin-right: 0.375vmin;\n}\n.dirs-comp .disp-comp .disp-name {\n  display: inline-block;\n}\n.dirs-comp .disp-comp .disp-desc {\n  display: none;\n  margin: 0.25vmin;\n  text-align: left;\n}\n","\n<template>\n  <div class=\"dirs-comp\">\n    <div class=\"cen\" :style=\"style(pracObj)\">\n      <div class=\"disp-comp\" @click=\"doPrac(pracObj.name)\">\n        <i   :class=\"pracObj.icon\"></i>\n        <span class=\"disp-name\">{{pracObj.name}}</span>\n        <span class=\"disp-desc\">{{pracObj.desc}}</span>\n      </div>\n    </div>\n    <template  v-for=\"dispObj in pracObj.disps\">\n      <div :class=\"dispObj.dir\" :style=\"style(dispObj)\"  :ref=\"dispObj.name\">\n        <div class=\"disp-comp\" @click=\"doDisp(prac.name,dispObj.name)\">\n          <i   :class=\"dispObj.icon\"></i>\n          <span class=\"disp-name\">{{dispObj.name}}</span>\n          <span class=\"disp-desc\">{{dispObj.desc}}</span>\n        </div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  let Dirs = {\n\n    props: { pracObj:Object },\n\n    data() { return { dispObj:null } },\n\n    methods: {\n      \n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav().pub( obj ); },\n      doDisp: function (pracKey,dispKey) {\n        let obj = { route:\"Disp\", pracKey:pracKey, dispKey:dispKey };\n        this.nav().pub( obj ); },\n      style: function( ikwObj ) {\n        return this.mix().styleObj(ikwObj); } }\n  }\n\n  export default Dirs;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  @dirsFS:1.25*@themeFS;\n  \n  .dirs-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n    grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .dirs-dir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:0.5*@dirsFS; }\n  \n  .dirs-comp { .themeCenterStretch(); font-size:@dirsFS; width:90%; height:90%;\n    color:black; background-color:@theme-gray; border-radius:1.0*@dirsFS; font-weight:bold;\n    \n      .dirs-grid3x3(); // The 4 Displine plus Practiice name Grid\n                                 .north { .dirs-dir(north); }\n      .west { .dirs-dir(west); } .cen   { .dirs-dir(cen);   } .east { .dirs-dir(east); }\n                                 .south { .dirs-dir(south); }\n      .cen  { font-size:@dirsFS; }\n\n    .disp-comp   { display:inline; justify-self:center; align-self:center; text-align:center;\n      i          { display:inline-block;  margin-right: 0.15*@dirsFS; }\n      .disp-name { display:inline-block; }\n      .disp-desc { display:none; margin:0.1*@dirsFS; text-align:left; } } }\n  \n  \n</style>"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$b = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$b = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$b = false;
+  /* style inject SSR */
+  
+
+  
+  var Dirs$3 = normalizeComponent_1(
+    { render: __vue_render__$b, staticRenderFns: __vue_staticRenderFns__$b },
+    __vue_inject_styles__$b,
+    __vue_script__$b,
+    __vue_scope_id__$b,
+    __vue_is_functional_template__$b,
+    __vue_module_identifier__$b,
     browser,
     undefined
   );
@@ -24018,10 +24616,10 @@ let Conn = {
  };
 
 /* script */
-const __vue_script__$7 = Conn;
+const __vue_script__$c = Conn;
 
 /* template */
-var __vue_render__$7 = function() {
+var __vue_render__$c = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -24035,32 +24633,370 @@ var __vue_render__$7 = function() {
     }
   })
 };
-var __vue_staticRenderFns__$7 = [];
-__vue_render__$7._withStripped = true;
+var __vue_staticRenderFns__$c = [];
+__vue_render__$c._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$7 = function (inject) {
+  const __vue_inject_styles__$c = function (inject) {
     if (!inject) return
     inject("data-v-81065234_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.conn-comp {\n  font-size: 2vmin;\n  background-color: #333;\n  color: wheat;\n  width: 98%;\n  height: 97%;\n  border-radius: 4vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n}\n.conn-prac {\n  font-size: 2vmin;\n  background-color: #333;\n  color: wheat;\n  text-align: center;\n  border-radius: 4vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 98%;\n  height: 97%;\n}\n", map: {"version":3,"sources":["Conn.vue","/Users/ax/Documents/prj/aug/vue/comp/Conn.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;ECCA,kBAAA;EDCE,OAAO;ECCT,MAAA;EDCE,WAAW;ECCb,WAAA;AACA;ADCA;ECCA,kBAAA;EACA,OAAA;EDCE,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,sBAAsB;EACtB,YAAY;EACZ,UAAU;EACV,WAAW;EACX,oBAAoB;EACpB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,mBAAmB;EACnB,qBAAqB;AACvB;AACA;EACE,gBAAgB;EAChB,sBAAsB;EACtB,YAAY;EACZ,kBAAkB;EAClB,oBAAoB;EACpB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,UAAU;EACV,WAAW;AACb","file":"Conn.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.conn-comp {\n  font-size: 2vmin;\n  background-color: #333;\n  color: wheat;\n  width: 98%;\n  height: 97%;\n  border-radius: 4vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n}\n.conn-prac {\n  font-size: 2vmin;\n  background-color: #333;\n  color: wheat;\n  text-align: center;\n  border-radius: 4vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 98%;\n  height: 97%;\n}\n","\n<template>\n  <div :class=\"clConn()\" @click=\"doPrac(pracObj.name)\" :ref=\"pracObj.name\" ></div>\n</template>\n\n<script type=\"module\">\n  \n  import Connect from '../../pub/draw/conn/Connect.js';\n\n  let Conn = {\n\n    props: { pracObj:Object, level:String },\n\n    data() {\n      return { connect:null, size:null }; },\n    \n    watch: {\n      pracObj() {\n        this.onPrac(); } },\n    \n    methods: {\n      \n      onPrac: function() {\n        if( this.mix().isDef(this.connect) ) {\n            this.connect.clearSvg(); }\n        this.createConnect( this.mix().stream(), this.pracObj ); },\n      \n      doPrac: function (pracKey) {\n        this.nav().pub( { pracKey:pracKey } ); },\n      \n      clConn: function() {\n        return this.nav().route === 'Prac' ? 'conn-prac' : 'conn-comp'; },\n      \n      createConnect: function( stream, pracObj ) {\n        this.$nextTick( function() {\n          let elem = this.$refs[this.pracObj.name] // this.getElem( this.$refs, this.pracObj.name );\n          if( this.mix().hasElem(elem) ) {\n            this.connect = new Connect( stream, this.mix().batch(), pracObj, elem, this.level );\n            if( this.level==='Prac') {\n              window.addEventListener( 'resize', this.resize ) } }\n          else {\n            console.log( 'Conn.createConnect()',\n              { name:this.pracObj.name, has:this.mix().hasElem(elem), elem:elem, $refs:this.$refs } ); } } ) },\n      \n      resize: function() {\n        this.$nextTick( function() {\n          if( this.mix().isDef(this.connect) ) {\n              this.connect.resize();  } } ); }\n    },\n    \n    mounted: function () {\n      this.onPrac(); },\n\n    destroyed: function () {\n      window.removeEventListener('resize', this.resize ) }\n      \n   }\n\n  export default Conn;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @connFS:@themeFS;\n\n  .conn-comp { font-size:@connFS; background-color:@theme-gray; color:@theme-fore; width:98%; height:97%;\n    border-radius:2.0*@connFS; .themeCenterStretch();   }\n\n  .conn-prac { font-size:@connFS; background-color:@theme-gray; color:@theme-fore; text-align:center;\n    border-radius:2.0*@connFS; position:absolute; left:0; top:0; width:98%; height:97%; }\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$7 = undefined;
+  const __vue_scope_id__$c = undefined;
   /* module identifier */
-  const __vue_module_identifier__$7 = undefined;
+  const __vue_module_identifier__$c = undefined;
   /* functional template */
-  const __vue_is_functional_template__$7 = false;
+  const __vue_is_functional_template__$c = false;
   /* style inject SSR */
   
 
   
   var Conn$1 = normalizeComponent_1(
-    { render: __vue_render__$7, staticRenderFns: __vue_staticRenderFns__$7 },
-    __vue_inject_styles__$7,
-    __vue_script__$7,
-    __vue_scope_id__$7,
-    __vue_is_functional_template__$7,
-    __vue_module_identifier__$7,
+    { render: __vue_render__$c, staticRenderFns: __vue_staticRenderFns__$c },
+    __vue_inject_styles__$c,
+    __vue_script__$c,
+    __vue_scope_id__$c,
+    __vue_is_functional_template__$c,
+    __vue_module_identifier__$c,
+    browser,
+    undefined
+  );
+
+//
+
+let Desc = {
+  
+  components: { 'd-icon':Icon$1 },
+
+  props: { pracObj:Object, from:String },
+
+  data() { return { areaObj:null, iarea:1 } },
+
+  methods: {}
+  
+};
+
+/* script */
+const __vue_script__$d = Desc;
+
+/* template */
+var __vue_render__$d = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { staticClass: "comp-desc-pane" },
+    [
+      _c("d-icon", {
+        staticClass: "comp-desc-icon",
+        attrs: { icon: _vm.pracObj.icon, name: _vm.pracObj.name, size: 2.5 }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "comp-desc-summ" }, [
+        _vm._v(_vm._s(_vm.pracObj["desc"]))
+      ])
+    ],
+    1
+  )
+};
+var __vue_staticRenderFns__$d = [];
+__vue_render__$d._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$d = function (inject) {
+    if (!inject) return
+    inject("data-v-f86cffc6_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.comp-desc-pane {\n  font-size: 2vmin;\n  color: wheat;\n  border-radius: 4vmin;\n  background-color: #333;\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 90%;\n  height: 90%;\n}\n.comp-desc-pane .comp-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 2%;\n  width: 100%;\n  height: 26%;\n}\n.comp-desc-pane .comp-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 28%;\n  width: 94%;\n  height: 70%;\n  text-align: left;\n  font-size: 2.8vmin;\n}\n", map: {"version":3,"sources":["Desc.vue","/Users/ax/Documents/prj/aug/vue/comp/Desc.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;ECCtB,kBAAA;EDCE,kBAAkB;ACCpB;AACA;EDCE,kBAAkB;ECCpB,6BAAA;EACA,aAAA;EACA,oBAAA;EACA,kBAAA;EDCE,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,YAAY;EACZ,oBAAoB;EACpB,sBAAsB;EACtB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;EAChB,kBAAkB;AACpB","file":"Desc.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.comp-desc-pane {\n  font-size: 2vmin;\n  color: wheat;\n  border-radius: 4vmin;\n  background-color: #333;\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 90%;\n  height: 90%;\n}\n.comp-desc-pane .comp-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 2%;\n  width: 100%;\n  height: 26%;\n}\n.comp-desc-pane .comp-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 28%;\n  width: 94%;\n  height: 70%;\n  text-align: left;\n  font-size: 2.8vmin;\n}\n","\n<template>\n  <div      class=\"comp-desc-pane\">\n    <d-icon class=\"comp-desc-icon\" :icon=\"pracObj.icon\" :name=\"pracObj.name\" :size=\"2.5\" ></d-icon>\n    <div    class=\"comp-desc-summ\">{{pracObj['desc']}}</div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Icon from \"../elem/Icon.vue\"\n\n  let Desc = {\n    \n    components: { 'd-icon':Icon },\n\n    props: { pracObj:Object, from:String },\n\n    data() { return { areaObj:null, iarea:1 } },\n\n    methods: {}\n    \n  }\n  export default Desc;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @descFS:@themeFS;\n  @summFS:1.4*@descFS;\n\n.comp-desc-pane {   font-size:@descFS; color:@theme-fore; border-radius:2.0*@descFS; background-color:@theme-gray;\n                    position:relative; left:0;  top: 0;  width: 90%; height: 90%;\n  .comp-desc-icon { position:absolute; left:0;  top: 2%; width:100%; height: 26%; }\n  .comp-desc-summ { position:absolute; left:3%; top:28%; width: 94%; height: 70%; text-align:left; font-size:@summFS;} }\n  \n</style>"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$d = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$d = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$d = false;
+  /* style inject SSR */
+  
+
+  
+  var Desc$1 = normalizeComponent_1(
+    { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
+    __vue_inject_styles__$d,
+    __vue_script__$d,
+    __vue_scope_id__$d,
+    __vue_is_functional_template__$d,
+    __vue_module_identifier__$d,
+    browser,
+    undefined
+  );
+
+//
+
+let Comp = {
+
+  components:{ 'b-tabs':Tabs, 'p-sign':Sign$1, 'p-dirs':Dirs$3, 'p-conn':Conn$1, 'p-desc':Desc$1 },
+  
+  data() { return { compKey:'None', inovKey:'None', compObj:null, pracObj:{}, myRows:{},
+    Comp:{
+      Sign: { title:'Practices',    key:'Sign', show:true  },
+      Dirs: { title:'Disciplines',  key:'Dirs', show:false },
+      Conn: { title:'Connections',  key:'Conn', show:false },
+      Desc: { title:'Descriptions', key:'Desc', show:false } },
+    Info:{
+      Info: { title:'Information',  key:"Info", show:true,  icon:"fas fa-th"         },
+      Soft: { title:'Software',     key:"Soft", show:false, icon:"fas fa-codepen"    },
+      Data: { title:'Data',         key:"Data", show:false, icon:"fas fa-table"      } },
+    Know:{
+      Know: { title:'Knowledge',    key:"Know", show:true,  icon:"fas fa-university" },
+      Scie: { title:'Science',      key:"Scie", show:false, icon:"fas fa-flask"          },
+      Math: { title:'Math',         key:"Math", show:false, icon:"fas fa-calculator"     } },
+    Wise:{
+      Wise: { title:'Wisdom',       key:"Wise", show:true, icon:"fas fa-tripadvisor" } },
+    Rows: {
+      Plane:{ name:'Information', dir:'cm', icon:"fas fa-th" },
+      Learn:{ name:'Learn',       dir:'le', icon:"fas fa-graduation-cap" },
+      Do:{    name:'Do',          dir:'do', icon:"fas fa-cog" },
+      Share:{ name:'Share',       dir:'sh', icon:"fas fa-share-alt-square" } } } },
+  
+  methods: {
+    isShow: function(pageKey){
+      let    pageNav = this.nav().getPageKey('Comp',false);
+             pageNav = pageNav==='None' ? this.nav().getPageDef(this.Comp) : pageNav;
+      return pageKey===pageNav; },
+    tabPages: function(route) {
+      return this[route]; },
+    hasInov: function() {
+      return this.mix().hasInov(this.compKey); },
+    onRows: function () {
+       let pages            = this.tabPages('Comp');
+       let pageKey          = 'Sign';
+       this.myRows          = this.Rows;
+       this.myRows['Plane']      = pages[pageKey];
+       this.myRows['Plane'].name = pages[pageKey].title;
+       this.myRows['Plane'].dir  = 'cm';  },
+    onComp: function( obj ) {
+      this.compKey = obj.compKey;
+      this.inovKey = obj.inovKey;
+      this.onRows();
+      this.compObj = this.mix().inovObject( this.compKey, this.inovKey ); },
+    isDim: function ( pracObj ) {
+      return pracObj.row==="Dim"; },
+    isRows: function () {
+      return true; },
+    onNav:  function( obj ) {
+      if( obj.route === 'Comp' || this.hasInov() ) {
+          this.onComp( obj ); } } },
+
+  beforeMount: function() {
+    this.onComp( { route:'Comp', compKey:this.nav().compKey, inovKey:this.nav().inovKey } ); },
+
+  mounted: function () {
+    this.mix().subscribe( 'Nav', 'Comp.vue', (obj) => {
+      this.onNav(obj); } ); }
+};
+
+// this.Comp['__ob__'].dep.notify(); this.compObj = Object.assign({},this.compObj );
+// console.log('Comp.isShow()', { compKey:this.compKey, pageKey:pageKey, show:pageKey===this.nav().getPageKey('Comp') } );
+// let pageKey  = this.nav().getPageKey('Comp');
+// console.log('Comp.onComp()',{compKey:this.compKey,inovKey:this.inovKey,obj:obj,pageKey:pageKey,Comp:this.Comp})
+
+/* script */
+const __vue_script__$e = Comp;
+
+/* template */
+var __vue_render__$e = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { staticClass: "comp-pane" },
+    [
+      _c("b-tabs", {
+        attrs: { route: "Comp", pages: _vm.tabPages("Comp"), position: "left" }
+      }),
+      _vm._v(" "),
+      _vm.hasInov()
+        ? _c("b-tabs", {
+            attrs: {
+              route: _vm.compKey,
+              pages: _vm.tabPages(_vm.compKey),
+              position: "right"
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        { ref: "Comp", staticClass: "comp-comp" },
+        [
+          _vm._l(_vm.compObj, function(pracObj) {
+            return [
+              _c(
+                "div",
+                { class: pracObj.dir },
+                [
+                  _vm.isShow("Sign")
+                    ? _c("p-sign", { attrs: { pracObj: pracObj } })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isShow("Dirs")
+                    ? _c("p-dirs", { attrs: { pracObj: pracObj } })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isShow("Desc")
+                    ? _c("p-desc", { attrs: { pracObj: pracObj } })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.isShow("Conn")
+                    ? [
+                        !_vm.isDim(pracObj)
+                          ? _c("p-conn", {
+                              attrs: { pracObj: pracObj, level: "Comp" }
+                            })
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.isDim(pracObj)
+                          ? _c("p-sign", { attrs: { pracObj: pracObj } })
+                          : _vm._e()
+                      ]
+                    : _vm._e()
+                ],
+                2
+              )
+            ]
+          }),
+          _vm._v(" "),
+          _vm._l(_vm.myRows, function(row) {
+            return [
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.isRows(),
+                      expression: "isRows()"
+                    }
+                  ],
+                  class: row.dir
+                },
+                [_c("p-sign", { attrs: { pracObj: row } })],
+                1
+              )
+            ]
+          })
+        ],
+        2
+      )
+    ],
+    1
+  )
+};
+var __vue_staticRenderFns__$e = [];
+__vue_render__$e._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$e = function (inject) {
+    if (!inject) return
+    inject("data-v-ef41f554_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.comp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.comp-pane .comp-comp {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  color: black;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n  display: grid;\n  grid-template-columns: 16fr 28fr 28fr 28fr;\n  grid-template-rows: 25fr 25fr 25fr 25fr;\n  grid-template-areas: \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm .comp-sign {\n  background-color: black;\n}\n", map: {"version":3,"sources":["Comp.vue","/Users/ax/Documents/prj/aug/vue/comp/Comp.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;ECCX,gBAAA;ADCA;ACCA;EACA,mBAAA;EDCE,2CAA2C;ACC7C;AACA;EDCE,kBAAkB;ECCpB,OAAA;EACA,MAAA;EDCE,WAAW;ECCb,YAAA;ADCA;ACCA;EDCE,kBAAkB;ECCpB,OAAA;EACA,OAAA;EACA,WAAA;EACA,WAAA;EACA,uBAAA;EACA,YAAA;EACA,gBAAA;EDCE,oBAAoB;ECCtB,aAAA;EACA,0CAAA;EACA,uCAAA;EDCE,uFAAuF;EACvF,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,uBAAuB;AACzB","file":"Comp.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.comp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.comp-pane .comp-comp {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  color: black;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n  display: grid;\n  grid-template-columns: 16fr 28fr 28fr 28fr;\n  grid-template-rows: 25fr 25fr 25fr 25fr;\n  grid-template-areas: \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm .comp-sign {\n  background-color: black;\n}\n","\n<template>\n  <div class=\"comp-pane\">\n    <b-tabs  route=\"Comp\"    :pages=\"tabPages('Comp')\" position=\"left\" ></b-tabs>\n    <b-tabs :route=\"compKey\" :pages=\"tabPages(compKey)\"     position=\"right\" v-if=\"hasInov()\"></b-tabs>\n    <div class=\"comp-comp\" ref=\"Comp\">\n      <template v-for=\"pracObj in compObj\">\n        <div   :class=\"pracObj.dir\">\n          <p-sign   v-if=\"isShow('Sign')\" :pracObj=\"pracObj\"></p-sign>\n          <p-dirs   v-if=\"isShow('Dirs')\" :pracObj=\"pracObj\"></p-dirs>\n          <p-desc   v-if=\"isShow('Desc')\" :pracObj=\"pracObj\"></p-desc>\n          <template v-if=\"isShow('Conn')\">\n            <p-conn v-if=\"!isDim(pracObj)\" :pracObj=\"pracObj\" level=\"Comp\"></p-conn>\n            <p-sign v-if=\" isDim(pracObj)\" :pracObj=\"pracObj\"></p-sign>\n          </template>\n        </div>\n      </template>\n      <template v-for=\"row in myRows\">\n        <div v-show=\"isRows()\" :class=\"row.dir\">\n          <p-sign :pracObj=\"row\"></p-sign>\n        </div>\n      </template>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Tabs from '../elem/Tabs.vue';\n  import Sign from './Sign.vue';\n  import Dirs from './Dirs.vue';\n  import Conn from './Conn.vue';\n  import Desc from './Desc.vue';\n  \n  let Comp = {\n\n    components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },\n    \n    data() { return { compKey:'None', inovKey:'None', compObj:null, pracObj:{}, myRows:{},\n      Comp:{\n        Sign: { title:'Practices',    key:'Sign', show:true  },\n        Dirs: { title:'Disciplines',  key:'Dirs', show:false },\n        Conn: { title:'Connections',  key:'Conn', show:false },\n        Desc: { title:'Descriptions', key:'Desc', show:false } },\n      Info:{\n        Info: { title:'Information',  key:\"Info\", show:true,  icon:\"fas fa-th\"         },\n        Soft: { title:'Software',     key:\"Soft\", show:false, icon:\"fas fa-codepen\"    },\n        Data: { title:'Data',         key:\"Data\", show:false, icon:\"fas fa-table\"      } },\n      Know:{\n        Know: { title:'Knowledge',    key:\"Know\", show:true,  icon:\"fas fa-university\" },\n        Scie: { title:'Science',      key:\"Scie\", show:false, icon:\"fas fa-flask\"          },\n        Math: { title:'Math',         key:\"Math\", show:false, icon:\"fas fa-calculator\"     } },\n      Wise:{\n        Wise: { title:'Wisdom',       key:\"Wise\", show:true, icon:\"fas fa-tripadvisor\" } },\n      Rows: {\n        Plane:{ name:'Information', dir:'cm', icon:\"fas fa-th\" },\n        Learn:{ name:'Learn',       dir:'le', icon:\"fas fa-graduation-cap\" },\n        Do:{    name:'Do',          dir:'do', icon:\"fas fa-cog\" },\n        Share:{ name:'Share',       dir:'sh', icon:\"fas fa-share-alt-square\" } } } },\n    \n    methods: {\n      isShow: function(pageKey){\n        let    pageNav = this.nav().getPageKey('Comp',false);\n               pageNav = pageNav==='None' ? this.nav().getPageDef(this.Comp) : pageNav;\n        return pageKey===pageNav; },\n      tabPages: function(route) {\n        return this[route]; },\n      hasInov: function() {\n        return this.mix().hasInov(this.compKey); },\n      onRows: function () {\n         let pages            = this.tabPages('Comp');\n         let pageKey          = 'Sign'\n         this.myRows          = this.Rows;\n         this.myRows['Plane']      = pages[pageKey];\n         this.myRows['Plane'].name = pages[pageKey].title\n         this.myRows['Plane'].dir  = 'cm';  },\n      onComp: function( obj ) {\n        this.compKey = obj.compKey;\n        this.inovKey = obj.inovKey;\n        this.onRows();\n        this.compObj = this.mix().inovObject( this.compKey, this.inovKey ); },\n      isDim: function ( pracObj ) {\n        return pracObj.row===\"Dim\"; },\n      isRows: function () {\n        return true; },\n      onNav:  function( obj ) {\n        if( obj.route === 'Comp' || this.hasInov() ) {\n            this.onComp( obj ); } } },\n\n    beforeMount: function() {\n      this.onComp( { route:'Comp', compKey:this.nav().compKey, inovKey:this.nav().inovKey } ); },\n\n    mounted: function () {\n      this.mix().subscribe( 'Nav', 'Comp.vue', (obj) => {\n        this.onNav(obj); } ); }\n  }\n  \n  export default Comp;\n\n  // this.Comp['__ob__'].dep.notify(); this.compObj = Object.assign({},this.compObj );\n  // console.log('Comp.isShow()', { compKey:this.compKey, pageKey:pageKey, show:pageKey===this.nav().getPageKey('Comp') } );\n  // let pageKey  = this.nav().getPageKey('Comp');\n  // console.log('Comp.onComp()',{compKey:this.compKey,inovKey:this.inovKey,obj:obj,pageKey:pageKey,Comp:this.Comp})\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .comp-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n               grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .comp-grid4x4() { display:grid; grid-template-columns:16fr 28fr 28fr 28fr; grid-template-rows:25fr 25fr 25fr 25fr;\n    grid-template-areas:\"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n  \n  .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n                  justify-items:center; align-items:center; }\n  \n  @compFS:2.0*@themeFS;\n\n  .comp-pane { position:absolute; left:0; top:0; width:100%; height:100%;\n  \n    .comp-comp { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;\n            background-color:@theme-back; color:@theme-dark; font-size:@compFS; border-radius:0.5*@compFS;\n      .comp-grid4x4(); justify-items:center; align-items:center; // The 4x4 Dim + Row + 9 Practices Grid\n        .cm { .pdir(cm); } .em   { .pdir(em);   } .in    { .pdir(in); }    .en   { .pdir(en);   }\n        .le { .pdir(le); } .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }\n        .do { .pdir(do); } .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }\n        .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }\n      \n      .cm .comp-sign { background-color:@theme-back; }\n    }\n  }\n\n</style>\n"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$e = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$e = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$e = false;
+  /* style inject SSR */
+  
+
+  
+  var Comp$1 = normalizeComponent_1(
+    { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
+    __vue_inject_styles__$e,
+    __vue_script__$e,
+    __vue_scope_id__$e,
+    __vue_is_functional_template__$e,
+    __vue_module_identifier__$e,
+    browser,
+    undefined
+  );
+
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+let Disp = {
+  
+  props: { dispObj:Object },
+
+  methods: {
+    doDisp: function (dispKey) {
+      let obj = { route:"Disp", dispKey:dispKey };
+      this.nav().pub( obj ); } } };
+
+/* script */
+const __vue_script__$f = Disp;
+
+/* template */
+var __vue_render__$f = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    {
+      staticClass: "prac-disp-pane",
+      on: {
+        click: function($event) {
+          return _vm.doDisp(_vm.dispObj.name)
+        }
+      }
+    },
+    [
+      _c("i", { class: _vm.dispObj.icon }),
+      _vm._v(" "),
+      _c("span", { staticClass: "prac-disp-name" }, [
+        _vm._v(_vm._s(_vm.dispObj.name))
+      ])
+    ]
+  )
+};
+var __vue_staticRenderFns__$f = [];
+__vue_render__$f._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$f = function (inject) {
+    if (!inject) return
+    inject("data-v-be7174f2_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-disp-pane {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.prac-disp-pane i {\n  display: inline-block;\n  margin-right: 0.5vmin;\n}\n.prac-disp-pane .prac-disp-name {\n  display: inline-block;\n}\n", map: {"version":3,"sources":["Disp.vue","/Users/ax/Documents/prj/aug/vue/prac/Disp.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;ECCA,gBAAA;EDCE,+BAA+B;ECCjC,aAAA;EDCE,oBAAoB;ECCtB,kBAAA;EACA,kBAAA;AACA;ADCA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,eAAe;EACf,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB","file":"Disp.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-disp-pane {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.prac-disp-pane i {\n  display: inline-block;\n  margin-right: 0.5vmin;\n}\n.prac-disp-pane .prac-disp-name {\n  display: inline-block;\n}\n","\n<template>\n  <div class=\"prac-disp-pane\" @click=\"doDisp(dispObj.name)\">\n    <i   :class=\"dispObj.icon\"></i>\n    <span class=\"prac-disp-name\">{{dispObj.name}}</span>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  let Disp = {\n    \n    props: { dispObj:Object },\n\n    methods: {\n      doDisp: function (dispKey) {\n        let obj = { route:\"Disp\", dispKey:dispKey };\n        this.nav().pub( obj ); } } }\n  \n  export default Disp;\n  \n</script>\n\n<style lang=\"less\">\n\n  @import '../../pub/css/themes/theme.less';\n  \n  @pracDispFS:@themeFS;\n\n  .prac-disp-pane {   display:inline; justify-self:center; align-self:center; text-align:center;\n     i     {          display:inline-block;  margin-right: 0.25*@pracDispFS; }\n    .prac-disp-name { display:inline-block; } }\n\n</style>"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$f = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$f = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$f = false;
+  /* style inject SSR */
+  
+
+  
+  var Disp$1 = normalizeComponent_1(
+    { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
+    __vue_inject_styles__$f,
+    __vue_script__$f,
+    __vue_scope_id__$f,
+    __vue_is_functional_template__$f,
+    __vue_module_identifier__$f,
     browser,
     undefined
   );
@@ -24075,81 +25011,225 @@ __vue_render__$7._withStripped = true;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
-let Icon = {
+let Dims = {
 
-  props: { icon:String, name:String, summ:String, size:Number, fnClick:Function },
-  
+  props: { dispObj:Object, from:String },
+
   methods: {
-    
-    hasSumm: function() {
-      return this.mix().isDef(this.summ); },
-    
-    doClick: function() {
-      if( this.mix().isDef(this.fnClick) ) {
-        this.fnClick(this.name); } },
-
-    style: function() {
-      return this.mix().fontSizeCss(this.size); }
-  }
+    doClick: function (key) {
+      if( this.mix().isDef(this.dispObj.column) ) { this.doPrac(key); }
+      else                                  { this.doDisp(key); } },
+    gridClass: function() {
+      return this.dispObj.column==="Innovate" ? 'dd-4x4' : 'dd-4x3'; },
+    doDisp:  function (dispKey) {
+      let obj = { route:"Disp", dispKey:dispKey }; // pracKey:this.pracObj.name,
+      this.nav().pub( obj ); },
+    doPrac: function (pracKey) {
+      let obj = { route:"Prac", pracKey:pracKey };
+      this.nav().pub( obj ); },
+    dispClass: function() {
+      return this.from==='Disp' ? 'dims-disp' : 'dims-dirs';
+    },
+    style: function( ikwObj ) {
+      let fontSize = this.from==='Disp' ? 2.0 : 1.0;
+      return this.mix().styleObj(ikwObj,fontSize); } },
 };
 
 /* script */
-const __vue_script__$8 = Icon;
+const __vue_script__$g = Dims;
 
 /* template */
-var __vue_render__$8 = function() {
+var __vue_render__$g = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
-  return _c("div", { staticClass: "icon-pane", style: _vm.style() }, [
+  return _c("div", { class: _vm.dispClass(), style: _vm.style(_vm.dispObj) }, [
     _c(
       "div",
       {
-        staticClass: "icon-line",
+        staticClass: "dims-head",
         on: {
           click: function($event) {
-            return _vm.doClick()
+            return _vm.doClick(_vm.dispObj.name)
           }
         }
       },
       [
-        _c("span", { staticClass: "icon-icon" }, [
-          _c("i", { class: _vm.icon })
-        ]),
-        _vm._v(" "),
-        _c("span", { staticClass: "icon-name" }, [_vm._v(_vm._s(_vm.name))])
+        _c("div", { staticClass: "dims-title" }, [
+          _c("i", { class: _vm.dispObj.icon }),
+          _vm._v(" "),
+          _c("span", { staticClass: "dims-name" }, [
+            _vm._v(_vm._s(_vm.dispObj.name))
+          ])
+        ])
       ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { class: _vm.gridClass() },
+      [
+        _vm._l(_vm.dispObj.dims, function(ddObj) {
+          return [
+            _c("div", { class: ddObj.klass }, [
+              _c("i", { class: ddObj.icon }),
+              _vm._v(" "),
+              _c("span", { staticClass: "dims-name" }, [
+                _vm._v(_vm._s(ddObj.name))
+              ])
+            ])
+          ]
+        })
+      ],
+      2
     )
   ])
 };
-var __vue_staticRenderFns__$8 = [];
-__vue_render__$8._withStripped = true;
+var __vue_staticRenderFns__$g = [];
+__vue_render__$g._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$8 = function (inject) {
+  const __vue_inject_styles__$g = function (inject) {
     if (!inject) return
-    inject("data-v-0040d556_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.icon-pane {\n  display: grid;\n  height: 100%;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n  height: auto;\n}\n.icon-pane .icon-line .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-line .icon-name {\n  display: inline-block;\n}\n", map: {"version":3,"sources":["Icon.vue","/Users/ax/Documents/prj/aug/vue/elem/Icon.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;ECCf,oBAAA;EDCE,kBAAkB;ECCpB,kBAAA;ADCA;ACCA;EDCE,mBAAmB;ECCrB,+BAAA;EDCE,aAAa;ECCf,oBAAA;EDCE,kBAAkB;ECCpB,kBAAA;AACA;ADCA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,aAAa;EACb,YAAY;AACd;AACA;EACE,eAAe;EACf,oBAAoB;EACpB,kBAAkB;EAClB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,qBAAqB;AACvB","file":"Icon.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.icon-pane {\n  display: grid;\n  height: 100%;\n}\n.icon-pane .icon-line {\n  display: inline;\n  justify-self: center;\n  text-align: center;\n  height: auto;\n}\n.icon-pane .icon-line .icon-icon {\n  display: inline-block;\n  margin-right: 1vmin;\n}\n.icon-pane .icon-line .icon-name {\n  display: inline-block;\n}\n","\n<template>\n  <div      class=\"icon-pane\" :style=\"style()\">\n    <div    class=\"icon-line\" @click=\"doClick()\">\n      <span class=\"icon-icon\"><i :class=\"icon\"></i></span>\n      <span class=\"icon-name\">{{name}}</span>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  let Icon = {\n\n    props: { icon:String, name:String, summ:String, size:Number, fnClick:Function },\n    \n    methods: {\n      \n      hasSumm: function() {\n        return this.mix().isDef(this.summ); },\n      \n      doClick: function() {\n        if( this.mix().isDef(this.fnClick) ) {\n          this.fnClick(this.name); } },\n\n      style: function() {\n        return this.mix().fontSizeCss(this.size); }\n    }\n  }\n  \n  export default Icon;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @iconFS:2.0*@themeFS;\n\n  .icon-pane     { display:grid; height:100%;\n  \n    .icon-line   { display:inline; justify-self:center; text-align:center;  height:auto;\n  \n      .icon-icon { display:inline-block;  margin-right: 0.25*@iconFS; }\n      \n      .icon-name { display:inline-block; } }\n  }\n\n  \n</style>"]}, media: undefined });
+    inject("data-v-184886ab_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.dims-disp {\n  font-size: 5.2vmin;\n  border-radius: 1.3vmin;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.dims-dirs {\n  font-size: 2.6vmin;\n  border-radius: 36px;\n}\n.dims-head {\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  font-size: 5.98vmin;\n}\n.dims-head .dims-title {\n  display: inline;\n}\n.dims-head .dims-title i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dims-head .dims-title .dims-name {\n  display: inline-block;\n}\n.dd-4x3 {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr 1fr;\n  grid-template-areas: \"pi pk pw\" \"li lk lw\" \"di dk dw\" \"si sk sw\";\n  margin-left: 2.6vmin;\n}\n.dd-4x3 .pi {\n  display: inline;\n  grid-area: pi;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x3 .pi i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x3 .pi .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .pk {\n  display: inline;\n  grid-area: pk;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x3 .pk i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x3 .pk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .pw {\n  display: inline;\n  grid-area: pw;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x3 .pw i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x3 .pw .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .li {\n  display: inline;\n  grid-area: li;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .li i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .li .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .lk {\n  display: inline;\n  grid-area: lk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .lk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .lk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .lw {\n  display: inline;\n  grid-area: lw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .lw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .lw .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .di {\n  display: inline;\n  grid-area: di;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .di i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .di .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .dk {\n  display: inline;\n  grid-area: dk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .dk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .dk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .dw {\n  display: inline;\n  grid-area: dw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .dw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .dw .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .si {\n  display: inline;\n  grid-area: si;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .si i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .si .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .sk {\n  display: inline;\n  grid-area: sk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .sk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .sk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .sw {\n  display: inline;\n  grid-area: sw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .sw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .sw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr 1fr;\n  grid-template-areas: \"pi pd pk pw\" \"li ld lk lw\" \"di dd dk dw\" \"si sd sk sw\";\n  margin-left: 2.6vmin;\n}\n.dd-4x4 .pi {\n  display: inline;\n  grid-area: pi;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pi i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pi .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .pd {\n  display: inline;\n  grid-area: pd;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pd i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pd .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .pk {\n  display: inline;\n  grid-area: pk;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pk i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .pw {\n  display: inline;\n  grid-area: pw;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pw i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .li {\n  display: inline;\n  grid-area: li;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .li i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .li .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .ld {\n  display: inline;\n  grid-area: ld;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .ld i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .ld .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .lk {\n  display: inline;\n  grid-area: lk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .lk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .lk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .lw {\n  display: inline;\n  grid-area: lw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .lw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .lw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .di {\n  display: inline;\n  grid-area: di;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .di i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .di .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .dd {\n  display: inline;\n  grid-area: dd;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .dd i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .dd .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .dk {\n  display: inline;\n  grid-area: dk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .dk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .dk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .dw {\n  display: inline;\n  grid-area: dw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .dw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .dw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .si {\n  display: inline;\n  grid-area: si;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .si i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .si .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .sd {\n  display: inline;\n  grid-area: sd;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .sd i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .sd .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .sk {\n  display: inline;\n  grid-area: sk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .sk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .sk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .sw {\n  display: inline;\n  grid-area: sw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .sw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .sw .dims-name {\n  display: inline-block;\n}\n", map: {"version":3,"sources":["Dims.vue","/Users/ax/Documents/prj/aug/vue/prac/Dims.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;ECCf,mBAAA;EDCE,kBAAkB;ECCpB,gBAAA;ADCA;ACCA;EACA,kBAAA;EDCE,OAAO;ECCT,MAAA;EACA,WAAA;EDCE,YAAY;ACCd;AACA;EDCE,kBAAkB;ECCpB,OAAA;EDCE,MAAM;ECCR,WAAA;EACA,WAAA;AACA;AACA;EDCE,kBAAkB;ECCpB,OAAA;EACA,QAAA;EACA,WAAA;EDCE,WAAW;ACCb;AACA;EACA,kBAAA;EDCE,OAAO;ECCT,QAAA;EACA,WAAA;EACA,WAAA;AACA;AACA;EDCE,gBAAgB;ECClB,UAAA;EACA,SAAA;EACA,gBAAA;EACA,iBAAA;AACA;ADCA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,sBAAsB;EACtB,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,QAAQ;EACR,SAAS;AACX;AACA;EACE,kBAAkB;EAClB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;EAClB,mBAAmB;AACrB;AACA;EACE,eAAe;AACjB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,aAAa;EACb,kCAAkC;EAClC,mCAAmC;EACnC,gEAAgE;EAChE,oBAAoB;AACtB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,aAAa;EACb,sCAAsC;EACtC,mCAAmC;EACnC,4EAA4E;EAC5E,oBAAoB;AACtB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,qBAAqB;AACvB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,eAAe;EACf,aAAa;EACb,mBAAmB;EACnB,gBAAgB;AAClB;AACA;EACE,qBAAqB;EACrB,sBAAsB;AACxB;AACA;EACE,qBAAqB;AACvB","file":"Dims.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.dims-disp {\n  font-size: 5.2vmin;\n  border-radius: 1.3vmin;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  right: 0;\n  bottom: 0;\n}\n.dims-dirs {\n  font-size: 2.6vmin;\n  border-radius: 36px;\n}\n.dims-head {\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n  font-size: 5.98vmin;\n}\n.dims-head .dims-title {\n  display: inline;\n}\n.dims-head .dims-title i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dims-head .dims-title .dims-name {\n  display: inline-block;\n}\n.dd-4x3 {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr 1fr;\n  grid-template-areas: \"pi pk pw\" \"li lk lw\" \"di dk dw\" \"si sk sw\";\n  margin-left: 2.6vmin;\n}\n.dd-4x3 .pi {\n  display: inline;\n  grid-area: pi;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x3 .pi i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x3 .pi .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .pk {\n  display: inline;\n  grid-area: pk;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x3 .pk i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x3 .pk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .pw {\n  display: inline;\n  grid-area: pw;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x3 .pw i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x3 .pw .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .li {\n  display: inline;\n  grid-area: li;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .li i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .li .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .lk {\n  display: inline;\n  grid-area: lk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .lk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .lk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .lw {\n  display: inline;\n  grid-area: lw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .lw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .lw .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .di {\n  display: inline;\n  grid-area: di;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .di i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .di .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .dk {\n  display: inline;\n  grid-area: dk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .dk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .dk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .dw {\n  display: inline;\n  grid-area: dw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .dw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .dw .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .si {\n  display: inline;\n  grid-area: si;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .si i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .si .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .sk {\n  display: inline;\n  grid-area: sk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .sk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .sk .dims-name {\n  display: inline-block;\n}\n.dd-4x3 .sw {\n  display: inline;\n  grid-area: sw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x3 .sw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x3 .sw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr 1fr;\n  grid-template-areas: \"pi pd pk pw\" \"li ld lk lw\" \"di dd dk dw\" \"si sd sk sw\";\n  margin-left: 2.6vmin;\n}\n.dd-4x4 .pi {\n  display: inline;\n  grid-area: pi;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pi i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pi .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .pd {\n  display: inline;\n  grid-area: pd;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pd i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pd .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .pk {\n  display: inline;\n  grid-area: pk;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pk i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .pw {\n  display: inline;\n  grid-area: pw;\n  font-size: 3.12vmin;\n  text-align: left;\n}\n.dd-4x4 .pw i {\n  display: inline-block;\n  margin-right: 0.25rem;\n}\n.dd-4x4 .pw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .li {\n  display: inline;\n  grid-area: li;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .li i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .li .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .ld {\n  display: inline;\n  grid-area: ld;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .ld i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .ld .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .lk {\n  display: inline;\n  grid-area: lk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .lk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .lk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .lw {\n  display: inline;\n  grid-area: lw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .lw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .lw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .di {\n  display: inline;\n  grid-area: di;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .di i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .di .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .dd {\n  display: inline;\n  grid-area: dd;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .dd i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .dd .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .dk {\n  display: inline;\n  grid-area: dk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .dk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .dk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .dw {\n  display: inline;\n  grid-area: dw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .dw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .dw .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .si {\n  display: inline;\n  grid-area: si;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .si i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .si .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .sd {\n  display: inline;\n  grid-area: sd;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .sd i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .sd .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .sk {\n  display: inline;\n  grid-area: sk;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .sk i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .sk .dims-name {\n  display: inline-block;\n}\n.dd-4x4 .sw {\n  display: inline;\n  grid-area: sw;\n  font-size: 2.34vmin;\n  text-align: left;\n}\n.dd-4x4 .sw i {\n  display: inline-block;\n  margin-right: 0.65vmin;\n}\n.dd-4x4 .sw .dims-name {\n  display: inline-block;\n}\n","\n<template>\n  <div  :class=\"dispClass()\" :style=\"style(dispObj)\">\n    <div   class=\"dims-head\" @click=\"doClick(dispObj.name)\">\n      <div class=\"dims-title\">\n        <i   :class=\"dispObj.icon\"></i>\n        <span class=\"dims-name\">{{dispObj.name}}</span>\n      </div>\n    </div>\n    <div  :class=\"gridClass()\">\n      <template v-for=\"ddObj in dispObj.dims\">\n        <div   :class=\"ddObj.klass\">\n          <i   :class=\"ddObj.icon\"></i>\n          <span class=\"dims-name\">{{ddObj.name}}</span>\n        </div>\n      </template>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  let Dims = {\n\n    props: { dispObj:Object, from:String },\n\n    methods: {\n      doClick: function (key) {\n        if( this.mix().isDef(this.dispObj.column) ) { this.doPrac(key) }\n        else                                  { this.doDisp(key) } },\n      gridClass: function() {\n        return this.dispObj.column===\"Innovate\" ? 'dd-4x4' : 'dd-4x3'; },\n      doDisp:  function (dispKey) {\n        let obj = { route:\"Disp\", dispKey:dispKey }; // pracKey:this.pracObj.name,\n        this.nav().pub( obj ); },\n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav().pub( obj ); },\n      dispClass: function() {\n        return this.from==='Disp' ? 'dims-disp' : 'dims-dirs';\n      },\n      style: function( ikwObj ) {\n        let fontSize = this.from==='Disp' ? 2.0 : 1.0;\n        return this.mix().styleObj(ikwObj,fontSize); } },\n  }\n\n  export default Dims;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  @dimsFS:1.3*@themeFS;\n\n  .dims-grid4x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr 1fr;\n    grid-template-areas: \"pi pk pw\" \"li lk lw\" \"di dk dw\" \"si sk sw\"; }\n\n  .dims-grid4x4() { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr 1fr;\n    grid-template-areas: \"pi pd pk pw\" \"li ld lk lw\" \"di dd dk dw\" \"si sd sk sw\"; }\n  \n  .dims-disp { font-size:2.0*@dimsFS; border-radius:0.5*@dimsFS;\n    position:absolute; left:0; top:@theme-tabs-height; right:0; bottom:0; }\n\n  .dims-dirs { font-size:@dimsFS; border-radius:36px; }\n\n  .dims-head    { display:grid; justify-self:center; align-self:center; text-align:center; font-size:2.3*@dimsFS;\n    .dims-title { display:inline;\n    i           { display:inline-block;  margin-right:0.25*@dimsFS; }\n    .dims-name  { display:inline-block; } } }\n\n  .plane( @area ) { display:inline; grid-area:@area; font-size:1.2*@dimsFS; text-align:left;\n    i             { display:inline-block;  margin-right: 0.25rem; }\n    .dims-name    { display:inline-block; } }\n\n  .study( @area ) { display:inline; grid-area:@area; font-size:0.9*@dimsFS; text-align:left;\n    i             { display:inline-block;  margin-right:0.25*@dimsFS; }\n    .dims-name    { display:inline-block; } }\n\n  .dd-4x3 { .dims-grid4x3(); margin-left:@dimsFS;\n    .pi { .plane(pi); }  .pk { .plane(pk); }  .pw { .plane(pw); }\n    .li { .study(li); }  .lk { .study(lk); }  .lw { .study(lw); }\n    .di { .study(di); }  .dk { .study(dk); }  .dw { .study(dw); }\n    .si { .study(si); }  .sk { .study(sk); }  .sw { .study(sw); } }\n  \n  .dd-4x4 { .dims-grid4x4(); margin-left:@dimsFS;\n    .pi { .plane(pi); }  .pd { .plane(pd); } .pk { .plane(pk); }  .pw { .plane(pw); }\n    .li { .study(li); }  .ld { .study(ld); } .lk { .study(lk); }  .lw { .study(lw); }\n    .di { .study(di); }  .dd { .study(dd); } .dk { .study(dk); }  .dw { .study(dw); }\n    .si { .study(si); }  .sd { .study(sd); } .sk { .study(sk); }  .sw { .study(sw); } }\n\n</style>"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$8 = undefined;
+  const __vue_scope_id__$g = undefined;
   /* module identifier */
-  const __vue_module_identifier__$8 = undefined;
+  const __vue_module_identifier__$g = undefined;
   /* functional template */
-  const __vue_is_functional_template__$8 = false;
+  const __vue_is_functional_template__$g = false;
   /* style inject SSR */
   
 
   
-  var Icon$1 = normalizeComponent_1(
-    { render: __vue_render__$8, staticRenderFns: __vue_staticRenderFns__$8 },
-    __vue_inject_styles__$8,
-    __vue_script__$8,
-    __vue_scope_id__$8,
-    __vue_is_functional_template__$8,
-    __vue_module_identifier__$8,
+  var Dims$1 = normalizeComponent_1(
+    { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
+    __vue_inject_styles__$g,
+    __vue_script__$g,
+    __vue_scope_id__$g,
+    __vue_is_functional_template__$g,
+    __vue_module_identifier__$g,
+    browser,
+    undefined
+  );
+
+//
+
+let Dirs$4 = {
+
+  components:{ 'd-disp':Disp$1, 'd-dims':Dims$1 },
+
+  props: { pracObj:Object },
+
+  data() { return { dispObj:null } },
+
+  methods: {
+
+    doPrac: function (pracKey) {
+      let obj = { route:"Prac", pracKey:pracKey };
+      this.nav().pub( obj ); },
+    isDims: function () {
+      return this.pracObj.row === 'Dim'; },
+    isDisp: function () {
+      return this.pracObj.row !== 'Dim'; },
+    style: function( ikwObj ) {
+      return this.mix().styleObj(ikwObj); } },
+
+  mounted: function () {
+    if( !this.mix().isDef(this.pracObj) ) {
+      console.error( 'prac.Dirs.mounted() pracObj not defined' ); } }
+  
+};
+
+/* script */
+const __vue_script__$h = Dirs$4;
+
+/* template */
+var __vue_render__$h = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { staticClass: "prac-dirs-pane" },
+    [
+      _c(
+        "div",
+        { staticClass: "cen", style: _vm.style(_vm.pracObj) },
+        [
+          _vm.isDisp()
+            ? _c("d-disp", { attrs: { dispObj: _vm.pracObj, from: "Dirs" } })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.isDims()
+            ? _c("d-dims", { attrs: { dispObj: _vm.pracObj, from: "Dirs" } })
+            : _vm._e()
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm._l(_vm.pracObj.disps, function(dispObj) {
+        return [
+          _c(
+            "div",
+            { class: dispObj.dir, style: _vm.style(dispObj) },
+            [
+              _vm.isDisp()
+                ? _c("d-disp", { attrs: { dispObj: dispObj, from: "Dirs" } })
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.isDims()
+                ? _c("d-dims", { attrs: { dispObj: dispObj, from: "Dirs" } })
+                : _vm._e()
+            ],
+            1
+          )
+        ]
+      })
+    ],
+    2
+  )
+};
+var __vue_staticRenderFns__$h = [];
+__vue_render__$h._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$h = function (inject) {
+    if (!inject) return
+    inject("data-v-6dc63bac_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-dirs-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n  color: black;\n  text-align: center;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n  font-size: 8vmin;\n}\n.prac-dirs-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n", map: {"version":3,"sources":["Dirs.vue","/Users/ax/Documents/prj/aug/vue/prac/Dirs.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;ECCrB,kBAAA;EDCE,gBAAgB;ACClB;ADCA;ECCA,kBAAA;EACA,OAAA;EDCE,MAAM;ECCR,WAAA;EDCE,YAAY;ACCd;AACA;EACA,kBAAA;EACA,OAAA;EACA,MAAA;EDCE,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,sBAAsB;EACtB,YAAY;EACZ,kBAAkB;EAClB,iBAAiB;EACjB,aAAa;EACb,kCAAkC;EAClC,+BAA+B;EAC/B,gEAAgE;EAChE,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB","file":"Dirs.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-dirs-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n  color: black;\n  text-align: center;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n  font-size: 8vmin;\n}\n.prac-dirs-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-dirs-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n","\n<template>\n  <div class=\"prac-dirs-pane\">\n    <div class=\"cen\" :style=\"style(pracObj)\">\n      <d-disp v-if=\"isDisp()\" :dispObj=\"pracObj\" from=\"Dirs\"></d-disp>\n      <d-dims v-if=\"isDims()\" :dispObj=\"pracObj\" from=\"Dirs\"></d-dims>\n    </div>\n    <template  v-for=\"dispObj in pracObj.disps\">\n      <div :class=\"dispObj.dir\" :style=\"style(dispObj)\">\n        <d-disp v-if=\"isDisp()\" :dispObj=\"dispObj\" from=\"Dirs\"></d-disp>\n        <d-dims v-if=\"isDims()\" :dispObj=\"dispObj\" from=\"Dirs\"></d-dims>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Disp from './Disp.vue';\n  import Dims from './Dims.vue';\n\n  let Dirs = {\n\n    components:{ 'd-disp':Disp, 'd-dims':Dims },\n\n    props: { pracObj:Object },\n\n    data() { return { dispObj:null } },\n\n    methods: {\n\n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav().pub( obj ); },\n      isDims: function () {\n        return this.pracObj.row === 'Dim'; },\n      isDisp: function () {\n        return this.pracObj.row !== 'Dim'; },\n      style: function( ikwObj ) {\n        return this.mix().styleObj(ikwObj); } },\n\n    mounted: function () {\n      if( !this.mix().isDef(this.pracObj) ) {\n        console.error( 'prac.Dirs.mounted() pracObj not defined' ); } }\n    \n  }\n\n  export default Dirs;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @pracDirsFS:2.0*@themeFS;\n  \n  .prac-dirs-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n    grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .prac-dir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }\n  \n  .prac-dirs-pane { position:absolute; left:0; top:0; width:100%; height:100%; background-color:@theme-gray;\n    color:black; text-align:center; font-weight:bold; .prac-dirs-grid3x3(); font-size:2.0*@pracDirsFS;\n                                 .north { .prac-dir(north); }\n      .west { .prac-dir(west); } .cen   { .prac-dir(cen);   } .east { .prac-dir(east); }\n                                 .south { .prac-dir(south); } }\n  \n  \n</style>"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$h = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$h = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$h = false;
+  /* style inject SSR */
+  
+
+  
+  var Dirs$5 = normalizeComponent_1(
+    { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
+    __vue_inject_styles__$h,
+    __vue_script__$h,
+    __vue_scope_id__$h,
+    __vue_is_functional_template__$h,
+    __vue_module_identifier__$h,
     browser,
     undefined
   );
@@ -24194,10 +25274,10 @@ let Area = {
 };
 
 /* script */
-const __vue_script__$9 = Area;
+const __vue_script__$i = Area;
 
 /* template */
-var __vue_render__$9 = function() {
+var __vue_render__$i = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -24238,39 +25318,39 @@ var __vue_render__$9 = function() {
     )
   ])
 };
-var __vue_staticRenderFns__$9 = [];
-__vue_render__$9._withStripped = true;
+var __vue_staticRenderFns__$i = [];
+__vue_render__$i._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$9 = function (inject) {
+  const __vue_inject_styles__$i = function (inject) {
     if (!inject) return
     inject("data-v-6aca21d2_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.area-pane .area-icon {\n  text-align: center;\n}\n.area-pane .area-name {\n  text-align: left;\n  font-weight: bold;\n}\n.area-pane .area-desc {\n  text-align: left;\n  padding-left: 3vmin;\n}\n", map: {"version":3,"sources":["Area.vue","/Users/ax/Documents/prj/aug/vue/elem/Area.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;ECCtB,kBAAA;EDCE,kBAAkB;ACCpB;ADCA;ECCA,gBAAA;EACA,+BAAA;EACA,aAAA;EACA,mBAAA;EDCE,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,gBAAgB;EAChB,mBAAmB;AACrB","file":"Area.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.area-pane .area-icon {\n  text-align: center;\n}\n.area-pane .area-name {\n  text-align: left;\n  font-weight: bold;\n}\n.area-pane .area-desc {\n  text-align: left;\n  padding-left: 3vmin;\n}\n","\n<template>\n    <table class=\"area-pane\" :style=\"style()\">\n      <tbody>\n        <template v-for=\"area in areat\">\n          <tr >\n            <td v-if=\"isDef(area.icon)\" class=\"area-icon\"><i :class=\"area.icon\"></i></td>\n            <td class=\"area-name\" @click=\"doClick(area.name)\">{{area.name}}</td>\n            <td class=\"area-desc\">{{area.desc}}</td>\n          </tr>\n        </template>\n      </tbody>\n    </table>\n</template>\n\n<script type=\"module\">\n\n  let Area = {\n\n    props: { areat:Object, size:Number, fnClick:Function },\n\n    data() { return { area:null } },\n\n    methods: {\n      \n      isDef:function( obj ) {\n        return this.mix().isDef(obj); },\n\n      doClick: function(name) {\n        if( this.mix().isDef(this.fnClick) ) {\n          this.fnClick(name); } },\n\n      style: function() {\n        return this.mix().fontSizeCss(this.size); }\n\n    }\n\n  }\n\n  export default Area;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @itemFS:1.0*@themeFS;\n  \n  .area-pane {\n      .area-icon { text-align:center;                           }\n      .area-name { text-align:left;   font-weight:bold;         }\n      .area-desc { text-align:left;   padding-left:1.5*@itemFS; } }\n\n</style>"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$9 = undefined;
+  const __vue_scope_id__$i = undefined;
   /* module identifier */
-  const __vue_module_identifier__$9 = undefined;
+  const __vue_module_identifier__$i = undefined;
   /* functional template */
-  const __vue_is_functional_template__$9 = false;
+  const __vue_is_functional_template__$i = false;
   /* style inject SSR */
   
 
   
   var Area$1 = normalizeComponent_1(
-    { render: __vue_render__$9, staticRenderFns: __vue_staticRenderFns__$9 },
-    __vue_inject_styles__$9,
-    __vue_script__$9,
-    __vue_scope_id__$9,
-    __vue_is_functional_template__$9,
-    __vue_module_identifier__$9,
+    { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
+    __vue_inject_styles__$i,
+    __vue_script__$i,
+    __vue_scope_id__$i,
+    __vue_is_functional_template__$i,
+    __vue_module_identifier__$i,
     browser,
     undefined
   );
 
 //
 
-let Desc = {
+let Desc$2 = {
   
   components: { 'd-icon':Icon$1, 'd-area':Area$1 },
 
@@ -24299,10 +25379,10 @@ let Desc = {
 };
 
 /* script */
-const __vue_script__$a = Desc;
+const __vue_script__$j = Desc$2;
 
 /* template */
-var __vue_render__$a = function() {
+var __vue_render__$j = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -24395,871 +25475,13 @@ var __vue_render__$a = function() {
     2
   )
 };
-var __vue_staticRenderFns__$a = [];
-__vue_render__$a._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$a = function (inject) {
-    if (!inject) return
-    inject("data-v-50ea0634_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-desc-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n  color: black;\n}\n.prac-desc-pane .prac-desc-cent {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.prac-desc-pane .prac-desc-cent .prac-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 4%;\n  width: 100%;\n  height: 22%;\n}\n.prac-desc-pane .prac-desc-cent .prac-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 26%;\n  width: 94%;\n  height: 74%;\n  text-align: left;\n  font-size: 3vmin;\n}\n.prac-desc-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .prac-disp-desc {\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  color: black;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-icon {\n  position: absolute;\n  left: 0;\n  top: 3%;\n  width: 100%;\n  height: 18%;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-summ {\n  position: absolute;\n  left: 3%;\n  top: 21%;\n  width: 94%;\n  height: 28%;\n  text-align: left;\n  font-size: 2.7vmin;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-area {\n  position: absolute;\n  left: 3%;\n  top: 49%;\n  width: 94%;\n  height: 51%;\n}\n", map: {"version":3,"sources":["Desc.vue","/Users/ax/Documents/prj/aug/vue/prac/Desc.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;ECCA,kBAAA;EDCE,OAAO;ECCT,MAAA;EDCE,WAAW;ECCb,YAAA;AACA;ADCA;ECCA,kBAAA;EDCE,OAAO;ECCT,MAAA;EDCE,WAAW;ECCb,WAAA;AACA;AACA;EACA,kBAAA;EDCE,OAAO;ECCT,QAAA;EACA,WAAA;EDCE,WAAW;ACCb;AACA;EACA,kBAAA;EACA,OAAA;EACA,QAAA;EACA,WAAA;EDCE,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,aAAa;EACb,kCAAkC;EAClC,+BAA+B;EAC/B,gEAAgE;EAChE,YAAY;AACd;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;EACnB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;EAChB,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;EAChB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;AACb","file":"Desc.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-desc-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n  color: black;\n}\n.prac-desc-pane .prac-desc-cent {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.prac-desc-pane .prac-desc-cent .prac-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 4%;\n  width: 100%;\n  height: 22%;\n}\n.prac-desc-pane .prac-desc-cent .prac-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 26%;\n  width: 94%;\n  height: 74%;\n  text-align: left;\n  font-size: 3vmin;\n}\n.prac-desc-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .prac-disp-desc {\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  color: black;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-icon {\n  position: absolute;\n  left: 0;\n  top: 3%;\n  width: 100%;\n  height: 18%;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-summ {\n  position: absolute;\n  left: 3%;\n  top: 21%;\n  width: 94%;\n  height: 28%;\n  text-align: left;\n  font-size: 2.7vmin;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-area {\n  position: absolute;\n  left: 3%;\n  top: 49%;\n  width: 94%;\n  height: 51%;\n}\n","\n<template>\n  <div     class=\"prac-desc-pane\">\n    <div   class=\"prac-desc-cent\" @click=\"doPrac(pracObj.name)\" :style=\"style(pracObj)\">\n      <div class=\"prac-desc-icon\"><d-icon :icon=\"pracObj.icon\" :name=\"pracObj.name\" :size=\"3.0\"></d-icon></div>\n      <div class=\"prac-desc-summ\">{{pracObj['desc']}}</div>\n    </div>\n    <template v-for=\"dispObj in pracObj.disps\">\n      <div   :class=\"dispObj.dir\" @click=\"doDisp(dispObj.name)\" :style=\"style(dispObj)\">\n        <div      class=\"prac-disp-desc\">\n          <div    class=\"prac-disp-icon\"><d-icon :icon=\"dispObj.icon\" :name=\"dispObj.name\" :size=\"2.0\"></d-icon></div>\n          <div    class=\"prac-disp-summ\">{{dispObj['desc']}}</div>\n          <d-area class=\"prac-disp-area\" :areat=\"dispObj.areas\" :size=\"1.1\"></d-area>\n        </div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Icon from \"../elem/Icon.vue\"\n  import Area from \"../elem/Area.vue\"\n\n  let Desc = {\n    \n    components: { 'd-icon':Icon, 'd-area':Area },\n\n    props: { pracObj:Object, from:String },\n\n    data() { return { dispObj:null, iarea:1 } },\n\n    watch: {\n      pracObj() { this.onPrac(); } },\n    \n    methods: {\n\n      onPrac: function() { }, // console.log( { pracObj:this.pracObj } );\n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav().pub( obj ); },\n      doDisp: function (dispKey) {\n        let nav = this.nav();\n        let obj = { route:\"Disp\", compObj:nav.compKey, inovKey:nav.inovKey, pracKey:this.pracObj.name, dispKey:dispKey };\n        this.nav().pub( obj ); },\n      style: function( ikwObj ) {\n        return this.mix().styleObj(ikwObj); },\n      tsSumm: function(summ) {\n        return this.mix().isStr(summ) ? summ : \"This is a test description\"; }\n    },\n  }\n  export default Desc;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @descFS:@themeFS;\n  \n  .prac-desc-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n    grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .prac-desc-ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }\n  \n  .prac-desc-pane { position:absolute; left:0; top:0; width:100%; height:100%; .prac-desc-grid3x3(); color:black;\n    \n    .prac-desc-cent { .prac-desc-ddir(cen);\n                        position:relative; left:0;  top:0;    width:100%; height:100%;\n      .prac-desc-icon { position:absolute; left:0;  top: 4%;  width:100%; height: 22%; }\n      .prac-desc-summ { position:absolute; left:3%; top:26%;; width: 94%; height: 74%;text-align:left; font-size:1.5*@descFS; } }\n    \n    .west  { .prac-desc-ddir(west);  } .north { .prac-desc-ddir(north); }\n    .east  { .prac-desc-ddir(east);  } .south { .prac-desc-ddir(south); }\n  \n    .prac-disp-desc   { position:relative; left:0;  top:0;   width:100%; height:100%; color:black;\n      .prac-disp-icon { position:absolute; left:0;  top: 3%; width:100%; height: 18%; }\n      .prac-disp-summ { position:absolute; left:3%; top:21%; width: 94%; height: 28%;\n        text-align:left;font-size:1.35*@descFS; }\n      .prac-disp-area { position:absolute; left:3%; top:49%; width: 94%; height: 51%; } }\n  }\n  \n</style>"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$a = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$a = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$a = false;
-  /* style inject SSR */
-  
-
-  
-  var Desc$1 = normalizeComponent_1(
-    { render: __vue_render__$a, staticRenderFns: __vue_staticRenderFns__$a },
-    __vue_inject_styles__$a,
-    __vue_script__$a,
-    __vue_scope_id__$a,
-    __vue_is_functional_template__$a,
-    __vue_module_identifier__$a,
-    browser,
-    undefined
-  );
-
-//
-
-let Prac = {
-
-  components:{ 'p-dirs':Dirs$1, 'p-conn':Conn$1, 'p-desc':Desc$1 },
-
-  props: { sectObj:Object, pracObj:Object },
-  
-  data() { return {  type:'Dirs' } },
-  
-  methods: {
-    
-    show:function( type ) {
-      return type===this.type; },
-    
-    }
-};
-
-/* script */
-const __vue_script__$b = Prac;
-
-/* template */
-var __vue_render__$b = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    { staticClass: "prac-pane" },
-    [
-      _vm.show("Dirs")
-        ? _c("p-dirs", { attrs: { pracObj: _vm.pracObj } })
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.show("Conn")
-        ? _c("p-conn", { attrs: { pracObj: _vm.pracObj, level: "Prac" } })
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.show("Desc")
-        ? _c("p-desc", { attrs: { pracObj: _vm.pracObj } })
-        : _vm._e()
-    ],
-    1
-  )
-};
-var __vue_staticRenderFns__$b = [];
-__vue_render__$b._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$b = function (inject) {
-    if (!inject) return
-    inject("data-v-09419177_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n}\n", map: {"version":3,"sources":["Prac.vue","/Users/ax/Documents/prj/aug/vue/talk/Prac.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;ECCtB,kBAAA;EDCE,kBAAkB;ACCpB;ADCA;ECCA,mBAAA;EACA,+BAAA;EDCE,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,sBAAsB;EACtB,gBAAgB;EAChB,oBAAoB;AACtB","file":"Prac.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n}\n","\n<template>\n  <div class=\"prac-pane\">\n    <p-dirs v-if=\"show('Dirs')\" :pracObj=\"pracObj\"></p-dirs>\n    <p-conn v-if=\"show('Conn')\" :pracObj=\"pracObj\" level=\"Prac\"></p-conn>\n    <p-desc v-if=\"show('Desc')\" :pracObj=\"pracObj\"></p-desc>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Dirs from '../prac/Dirs.vue';\n  import Conn from '../comp/Conn.vue';\n  import Desc from '../prac/Desc.vue';\n  \n  let Prac = {\n\n    components:{ 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },\n\n    props: { sectObj:Object, pracObj:Object },\n    \n    data() { return {  type:'Dirs' } },\n    \n    methods: {\n      \n      show:function( type ) {\n        return type===this.type; },\n      \n      }\n  }\n  \n  export default Prac;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  @pracFS:2.0*@themeFS;\n  \n  .prac-pane   { position:absolute; left:0; top:0; width:100%; height:100%;\n    background-color:@theme-gray; font-size:@pracFS; border-radius:0.5*@pracFS; }\n  \n</style>\n\n"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$b = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$b = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$b = false;
-  /* style inject SSR */
-  
-
-  
-  var Prac$1 = normalizeComponent_1(
-    { render: __vue_render__$b, staticRenderFns: __vue_staticRenderFns__$b },
-    __vue_inject_styles__$b,
-    __vue_script__$b,
-    __vue_scope_id__$b,
-    __vue_is_functional_template__$b,
-    __vue_module_identifier__$b,
-    browser,
-    undefined
-  );
-
-//
-
-let Desc$2 = {
-  
-  components: { 'd-icon':Icon$1, 'd-area':Area$1 },
-
-  props: { dispObj:Object, from:String },
-
-  data() { return { areaObj:null, iarea:1 } },
-
-  methods: {
-    style: function (ikwObj) {
-      return this.mix().styleObj(ikwObj); },
-    toDesc: function(desc) {
-      return this.mix().isStr(desc) ? desc : "This is a test description"; }
-  }
-};
-
-/* script */
-const __vue_script__$c = Desc$2;
-
-/* template */
-var __vue_render__$c = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    { staticClass: "disp-desc-pane", style: _vm.style(_vm.dispObj) },
-    [
-      _c("d-icon", {
-        staticClass: "disp-desc-icon",
-        attrs: { icon: _vm.dispObj.icon, name: _vm.dispObj.name, size: 5.0 }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "disp-desc-summ" }, [
-        _vm._v(_vm._s(_vm.dispObj["desc"]))
-      ]),
-      _vm._v(" "),
-      _c("d-area", {
-        staticClass: "disp-desc-area",
-        attrs: { areat: _vm.dispObj.areas, size: 2.0 }
-      })
-    ],
-    1
-  )
-};
-var __vue_staticRenderFns__$c = [];
-__vue_render__$c._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$c = function (inject) {
-    if (!inject) return
-    inject("data-v-49f67c00_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.disp-desc-pane {\n  font-size: 2vmin;\n  color: black;\n  border-radius: 4vmin;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n}\n.disp-desc-pane .disp-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 3%;\n  width: 100%;\n  height: 18%;\n}\n.disp-desc-pane .disp-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 21%;\n  width: 94%;\n  height: 28%;\n  text-align: left;\n  font-size: 5vmin;\n}\n.disp-desc-pane .disp-desc-area {\n  position: absolute;\n  left: 3%;\n  top: 49%;\n  width: 94%;\n  height: 51%;\n}\n", map: {"version":3,"sources":["Desc.vue","/Users/ax/Documents/prj/aug/vue/disp/Desc.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;ECC/B,aAAA;EDCE,oBAAoB;ECCtB,kBAAA;EACA,kBAAA;ADCA;ACCA;EACA,mBAAA;EACA,+BAAA;EACA,aAAA;EACA,oBAAA;EDCE,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,YAAY;EACZ,oBAAoB;EACpB,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;EAChB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;AACb","file":"Desc.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.disp-desc-pane {\n  font-size: 2vmin;\n  color: black;\n  border-radius: 4vmin;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n}\n.disp-desc-pane .disp-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 3%;\n  width: 100%;\n  height: 18%;\n}\n.disp-desc-pane .disp-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 21%;\n  width: 94%;\n  height: 28%;\n  text-align: left;\n  font-size: 5vmin;\n}\n.disp-desc-pane .disp-desc-area {\n  position: absolute;\n  left: 3%;\n  top: 49%;\n  width: 94%;\n  height: 51%;\n}\n","\n<template>\n  <div      class=\"disp-desc-pane\" :style=\"style(dispObj)\">\n    <d-icon class=\"disp-desc-icon\" :icon=\"dispObj.icon\" :name=\"dispObj.name\" :size=\"5.0\" ></d-icon>\n    <div    class=\"disp-desc-summ\">{{dispObj['desc']}}</div>\n    <d-area class=\"disp-desc-area\" :areat=\"dispObj.areas\" :size=\"2.0\"></d-area>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Icon from \"../elem/Icon.vue\"\n  import Area from \"../elem/Area.vue\"\n\n  let Desc = {\n    \n    components: { 'd-icon':Icon, 'd-area':Area },\n\n    props: { dispObj:Object, from:String },\n\n    data() { return { areaObj:null, iarea:1 } },\n\n    methods: {\n      style: function (ikwObj) {\n        return this.mix().styleObj(ikwObj); },\n      toDesc: function(desc) {\n        return this.mix().isStr(desc) ? desc : \"This is a test description\"; }\n    }\n  }\n  export default Desc;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @descFS:@themeFS;\n  @th:@theme-tabs-height;\n\n.disp-desc-pane {   font-size:@descFS; color:black; border-radius:2.0*@descFS;\n                    position:absolute; left:0;  top:@th; width:100%; height:100%-@th;\n  .disp-desc-icon { position:absolute; left:0;  top: 3%; width:100%; height: 18%; }\n  .disp-desc-summ { position:absolute; left:3%; top:21%; width: 94%; height: 28%;text-align:left;font-size:2.5*@descFS;}\n  .disp-desc-area { position:absolute; left:3%; top:49%; width: 94%; height: 51%; } }\n  \n</style>"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$c = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$c = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$c = false;
-  /* style inject SSR */
-  
-
-  
-  var Desc$3 = normalizeComponent_1(
-    { render: __vue_render__$c, staticRenderFns: __vue_staticRenderFns__$c },
-    __vue_inject_styles__$c,
-    __vue_script__$c,
-    __vue_scope_id__$c,
-    __vue_is_functional_template__$c,
-    __vue_module_identifier__$c,
-    browser,
-    undefined
-  );
-
-//
-
-let Disp$2 = {
-
-  components:{ 'd-dims':Dims$1, 'd-desc':Desc$3 },
-
-  props: { sectObj:Object, dispObj:Object },
-
-  data() { return {  type:'Dims' } },
-
-  methods: {
-
-    show:function( type ) {
-      return type===this.type; },
-  },
-  
-};
-
-/* script */
-const __vue_script__$d = Disp$2;
-
-/* template */
-var __vue_render__$d = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    { staticClass: "disp-pane" },
-    [
-      _vm.show("Dims")
-        ? _c("d-dims", { attrs: { dispObj: _vm.dispObj, from: "Disp" } })
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.show("Desc")
-        ? _c("d-desc", { attrs: { dispObj: _vm.dispObj, from: "Disp" } })
-        : _vm._e()
-    ],
-    1
-  )
-};
-var __vue_staticRenderFns__$d = [];
-__vue_render__$d._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$d = function (inject) {
-    if (!inject) return
-    inject("data-v-2d3a6f34_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.disp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n}\n", map: {"version":3,"sources":["Disp.vue","/Users/ax/Documents/prj/aug/vue/talk/Disp.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;ECC/B,aAAA;EDCE,oBAAoB;ECCtB,kBAAA;EDCE,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,sBAAsB;AACxB","file":"Disp.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.disp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n}\n","\n<template>\n  <div class=\"disp-pane\">\n    <d-dims v-if=\"show('Dims')\" :dispObj=\"dispObj\" from=\"Disp\"></d-dims>\n    <d-desc v-if=\"show('Desc')\" :dispObj=\"dispObj\" from=\"Disp\"></d-desc>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Dims from '../prac/Dims.vue';\n  import Desc from '../disp/Desc.vue';\n\n  let Disp = {\n\n    components:{ 'd-dims':Dims, 'd-desc':Desc },\n\n    props: { sectObj:Object, dispObj:Object },\n\n    data() { return {  type:'Dims' } },\n\n    methods: {\n\n      show:function( type ) {\n        return type===this.type; },\n    },\n    \n  }\n\n  export default Disp;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .disp-pane { position:absolute; left:0; top:0; width:100%; height:100%; background-color:@theme-gray; }\n\n</style>\n\n"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$d = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$d = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$d = false;
-  /* style inject SSR */
-  
-
-  
-  var Disp$3 = normalizeComponent_1(
-    { render: __vue_render__$d, staticRenderFns: __vue_staticRenderFns__$d },
-    __vue_inject_styles__$d,
-    __vue_script__$d,
-    __vue_scope_id__$d,
-    __vue_is_functional_template__$d,
-    __vue_module_identifier__$d,
-    browser,
-    undefined
-  );
-
-//
-
-let Sect = {
-
-  components:{ 't-prac':Prac$1, 't-disp':Disp$3 },
-  
-  props: { sectObj:Object, dataObj:Object, imgsObj:Object },
-
-  data() { return { imgsIdx:0 } },
-
-  methods: {
-
-    isType: function(type) {
-      return type===this.sectObj.type; },
-    
-    htmlImg: function(src) {
-      return `<img src="${src}" alt="x"/>`; },
-
-    appendImgs: function( imgs, refn ) {
-      this.$nextTick( function() {
-        let pics = this.imgsObj[imgs]['pics'];
-        let idx  = this.sectObj.imgsIdx;
-        this.nav().imgsNum = pics.length;
-        let src  = "../../data/imgs/" + this.imgsObj[imgs]['dir'] + pics[idx].src;
-        let elem = this.$refs[refn];
-        this.mix().appendImgsHW( src, elem ); } ); },
-    
-      //console.log( 'sect.htmlImgs', {$refs:this.$refs,refn:refn,elem:elem,
-      //    pics:pics,pic:pics[idx],src:src,idx:idx,num:pics.length,sectObj:this.sectObj} ); } )
-
-    hasSect: function() {
-      let has = this.mix().isDef(this.sectObj);
-      console.log( 'Sect.hasSect()', { has:has, sectObj:this.sectObj } );
-      return this.mix().isDef(this.sectObj); },
-    
-    hasProp: function(prop) {
-      return this.mix().isDef(this.sectObj[prop]) }
-    
-  }
-};
-
-/* script */
-const __vue_script__$e = Sect;
-
-/* template */
-var __vue_render__$e = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _vm.hasSect()
-    ? _c("div", { staticClass: "sect-pane" }, [
-        _vm.hasProp("icon")
-          ? _c("div", { staticClass: "sect-icon" }, [
-              _c("i", { class: _vm.sectObj.icon })
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.hasProp("banner")
-          ? _c("div", { staticClass: "sect-banner" }, [
-              _c("div", [_vm._v(_vm._s(_vm.sectObj.banner))])
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.hasProp("title")
-          ? _c("div", { staticClass: "sect-title" }, [
-              _vm._v(_vm._s(_vm.sectObj.title))
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.hasProp("caption")
-          ? _c("div", { staticClass: "sect-caption" }, [
-              _vm._v(_vm._s(_vm.sectObj.caption))
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.hasProp("img")
-          ? _c("div", {
-              staticClass: "sect-img",
-              domProps: { innerHTML: _vm._s(_vm.htmlImg(_vm.sectObj.img)) }
-            })
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.hasProp("imgs")
-          ? _c("div", { ref: _vm.sectObj.name, staticClass: "sect-imgs" }, [
-              _vm._v(
-                _vm._s(_vm.appendImgs(_vm.sectObj["imgs"], _vm.sectObj.name))
-              )
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.hasProp("desc")
-          ? _c("div", { staticClass: "sect-desc" }, [
-              _vm._v(_vm._s(_vm.sectObj.desc))
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.hasProp("author")
-          ? _c("div", { staticClass: "sect-author" }, [
-              _vm._v(_vm._s(_vm.sectObj.author))
-            ])
-          : _vm._e()
-      ])
-    : _vm._e()
-};
-var __vue_staticRenderFns__$e = [];
-__vue_render__$e._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$e = function (inject) {
-    if (!inject) return
-    inject("data-v-3dfefc0e_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.sect-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  font-size: 4vmin;\n}\n.sect-pane .sect-icon {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 10%;\n  height: 10%;\n  font-size: 20vmin;\n}\n.sect-pane .sect-icon i {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-banner {\n  position: absolute;\n  left: 35%;\n  top: 40%;\n  width: 40%;\n  height: 20%;\n  font-size: 20vmin;\n}\n.sect-pane .sect-banner div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-title {\n  position: absolute;\n  left: 0;\n  top: 10%;\n  width: 100%;\n  height: 10%;\n  font-size: 12vmin;\n}\n.sect-pane .sect-title div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-caption {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 10%;\n  font-size: 6vmin;\n}\n.sect-pane .sect-caption div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-img {\n  position: absolute;\n  left: 10%;\n  top: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-img img {\n  width: 100%;\n  height: 100%;\n}\n.sect-pane .sect-imgs {\n  position: absolute;\n  left: 10%;\n  top: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-desc {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-desc div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-prac {\n  position: absolute;\n  left: 10%;\n  top: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-disp {\n  position: absolute;\n  left: 10%;\n  top: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-author {\n  position: absolute;\n  left: 70%;\n  top: 95%;\n  width: 30%;\n  height: 5%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-author div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Sect.vue","/Users/ax/Documents/prj/aug/vue/talk/Sect.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;ECCR,WAAA;EDCE,WAAW;ACCb;ADCA;ECCA,kBAAA;EACA,OAAA;EACA,QAAA;EACA,WAAA;EACA,WAAA;AACA;AACA;EACA,kBAAA;EACA,OAAA;EACA,QAAA;EACA,WAAA;EACA,WAAA;AACA;AACA;EACA,gBAAA;EACA,UAAA;EACA,SAAA;EACA,gBAAA;EACA,iBAAA;AACA;ADCA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,uBAAuB;EACvB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,iBAAiB;AACnB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;EACX,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;AAClB;AACA;EACE,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,SAAS;EACT,QAAQ;EACR,UAAU;EACV,UAAU;EACV,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB","file":"Sect.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.sect-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  font-size: 4vmin;\n}\n.sect-pane .sect-icon {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 10%;\n  height: 10%;\n  font-size: 20vmin;\n}\n.sect-pane .sect-icon i {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-banner {\n  position: absolute;\n  left: 35%;\n  top: 40%;\n  width: 40%;\n  height: 20%;\n  font-size: 20vmin;\n}\n.sect-pane .sect-banner div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-title {\n  position: absolute;\n  left: 0;\n  top: 10%;\n  width: 100%;\n  height: 10%;\n  font-size: 12vmin;\n}\n.sect-pane .sect-title div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-caption {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 10%;\n  font-size: 6vmin;\n}\n.sect-pane .sect-caption div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-img {\n  position: absolute;\n  left: 10%;\n  top: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-img img {\n  width: 100%;\n  height: 100%;\n}\n.sect-pane .sect-imgs {\n  position: absolute;\n  left: 10%;\n  top: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-desc {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-desc div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.sect-pane .sect-prac {\n  position: absolute;\n  left: 10%;\n  top: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-disp {\n  position: absolute;\n  left: 10%;\n  top: 10%;\n  width: 80%;\n  height: 80%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-author {\n  position: absolute;\n  left: 70%;\n  top: 95%;\n  width: 30%;\n  height: 5%;\n  font-size: 4vmin;\n}\n.sect-pane .sect-author div {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n","\n\n<template>\n  <div   v-if=\"hasSect()\"               class=\"sect-pane\">\n    <div v-if=\"hasProp('icon')\"    class=\"sect-icon\"><i :class=\"sectObj.icon\"></i></div>\n    <div v-if=\"hasProp('banner')\"  class=\"sect-banner\"  ><div>{{sectObj.banner}}</div></div>\n    <div v-if=\"hasProp('title')\"   class=\"sect-title\"   >{{sectObj.title}}</div>\n    <div v-if=\"hasProp('caption')\" class=\"sect-caption\" >{{sectObj.caption}}</div>\n    <div v-if=\"hasProp('img')\"     class=\"sect-img\"  v-html=\"htmlImg( sectObj.img )\"></div>\n    <div v-if=\"hasProp('imgs')\" class=\"sect-imgs\" :ref=\"sectObj.name\">{{appendImgs(sectObj['imgs'],sectObj.name) }}</div>\n    <div v-if=\"hasProp('desc')\"    class=\"sect-desc\"  >{{sectObj.desc}}</div>\n    <div v-if=\"hasProp('author')\"  class=\"sect-author\" >{{sectObj.author}}</div>\n    <!--t-prac v-if=\"isType('Prac')\"    class=\"sect-prac\" :sectObj=\"sectObj\" :pracObj=\"dataObj\"></t-prac-->\n    <!--t-disp v-if=\"isType('Disp')\"    class=\"sect-disp\" :sectObj=\"sectObj\" :dispObj=\"dataObj\"></t-disp-->\n  </div>\n</template>\n    \n    <script type=\"module\">\n    \n      import Prac from './Prac.vue';\n      import Disp from './Disp.vue';\n    \n      let Sect = {\n    \n        components:{ 't-prac':Prac, 't-disp':Disp },\n        \n        props: { sectObj:Object, dataObj:Object, imgsObj:Object },\n    \n        data() { return { imgsIdx:0 } },\n    \n        methods: {\n    \n          isType: function(type) {\n            return type===this.sectObj.type; },\n          \n          htmlImg: function(src) {\n            return `<img src=\"${src}\" alt=\"x\"/>`; },\n\n          appendImgs: function( imgs, refn ) {\n            this.$nextTick( function() {\n              let pics = this.imgsObj[imgs]['pics'];\n              let idx  = this.sectObj.imgsIdx;\n              this.nav().imgsNum = pics.length;\n              let src  = \"../../data/imgs/\" + this.imgsObj[imgs]['dir'] + pics[idx].src;\n              let elem = this.$refs[refn];\n              this.mix().appendImgsHW( src, elem ); } ) },\n          \n            //console.log( 'sect.htmlImgs', {$refs:this.$refs,refn:refn,elem:elem,\n            //    pics:pics,pic:pics[idx],src:src,idx:idx,num:pics.length,sectObj:this.sectObj} ); } )\n\n          hasSect: function() {\n            let has = this.mix().isDef(this.sectObj);\n            console.log( 'Sect.hasSect()', { has:has, sectObj:this.sectObj } );\n            return this.mix().isDef(this.sectObj); },\n          \n          hasProp: function(prop) {\n            return this.mix().isDef(this.sectObj[prop]) }\n          \n        }\n      }\n    \n      export default Sect;\n    \n    </script>\n    \n    <style lang=\"less\">\n      \n      @import '../../pub/css/themes/theme.less';\n      \n      @sectFS:2.0*@themeFS;  //  border-radius:0.5*@sectFS;\n      \n      .sect-pane   { position:absolute; left:0; top:0; width:100%; height:100%;\n        background-color:@theme-back; font-size:@sectFS;\n        .sect-icon   { position:absolute; left:0;   top:0;   width: 10%; height:10%; font-size:5.0*@sectFS;\n          i { .themeCenterItems(); } }\n        .sect-banner { position:absolute; left:35%; top:40%; width: 40%; height:20%; font-size:5.0*@sectFS;\n          div { .themeCenterItems(); } }\n        .sect-title  { position:absolute; left:0;   top:10%; width:100%; height:10%; font-size:3.0*@sectFS;\n          div { .themeCenterItems(); } }\n        .sect-caption  { position:absolute; left:0; top:0;   width:100%; height:10%; font-size:1.5*@sectFS;\n          div { .themeCenterItems(); } }\n        .sect-img    { position:absolute; left:10%; top:10%; width: 80%; height:80%; font-size:1.0*@sectFS;\n          img { width:100%; height:100%; } }\n        .sect-imgs   { position:absolute; left:10%; top:10%; width: 80%; height:80%; font-size:1.0*@sectFS; }\n        .sect-desc   { position:absolute; left:0;   top:20%; width:100%; height:80%; font-size:1.0*@sectFS;\n          div { .themeCenterItems(); } }\n        .sect-prac   { position:absolute; left:10%; top:10%; width: 80%; height:80%; font-size:1.0*@sectFS;  }\n        .sect-disp   { position:absolute; left:10%; top:10%; width: 80%; height:80%; font-size:1.0*@sectFS;  }\n        .sect-author { position:absolute; left:70%; top:95%; width: 30%; height: 5%; font-size:1.0*@sectFS;\n          div { .themeCenterItems(); } }\n      }\n    \n    </style>\n"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$e = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$e = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$e = false;
-  /* style inject SSR */
-  
-
-  
-  var Sect$1 = normalizeComponent_1(
-    { render: __vue_render__$e, staticRenderFns: __vue_staticRenderFns__$e },
-    __vue_inject_styles__$e,
-    __vue_script__$e,
-    __vue_scope_id__$e,
-    __vue_is_functional_template__$e,
-    __vue_module_identifier__$e,
-    browser,
-    undefined
-  );
-
-//
-
-let Talk = {
-
-  components:{ 't-sect':Sect$1, 't-area':Area$1 },
-
-  data() { return { sectObj:null, dataObj:null, imgsObj:null, talkObjs:null, takkObj:null } },
-
-  methods: {
-    
-    doTalk: function(talkKey) {
-      this.nav().pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None',
-        presKey:'None', imgsNum:0, imgsIdx:0 } );
-      this.nav().dirsNavd('Init'); },
-
-    onNav: function (obj) {
-      if( this.nav().isMyNav( obj, 'Talk' ) ) {
-          this.onSect( obj.pracKey, obj.dispKey, obj.presKey, obj.imgsIdx ); } },
-
-    onSect: function( talkKey, sectKey, presKey, imgsIdx ) {
-      let  dispObj = this.mix().sectObject( talkKey, sectKey );
-      this.sectObj = this.mix().isDef(presKey) ? this.mix().presObject(dispObj,presKey) : dispObj;
-   // if( !this.mix().isDef(this.sectObj) ) {
-      console.log( 'Talk.vue.onSect()',
-        { dispObj:dispObj, sectObj:this.sectObj, talkKey:talkKey, sectKey:sectKey, presKey:presKey } );
-      this.sectObj.imgsIdx = imgsIdx;
-      this.imgsObj = this.mix().compObject( 'Imgs' );
-      
-    } },
-
-  beforeMount: function() {
-    this.talkObjs = this.mix().compObject('Talk'); },
-
-  mounted: function () {
-    this.mix().subscribe(  "Nav", 'Talk.vue', (obj) => {
-      this.onNav( obj ); } ); }
-  
-};
-
-/* script */
-const __vue_script__$f = Talk;
-
-/* template */
-var __vue_render__$f = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c("div", { staticClass: "talk-pane" }, [
-    _c(
-      "div",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.sectObj === null,
-            expression: "sectObj===null"
-          }
-        ],
-        staticClass: "talk-list"
-      },
-      [
-        _c("t-area", {
-          attrs: { areat: _vm.talkObjs, size: 2.0, fnClick: _vm.doTalk }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _vm.sectObj !== null
-      ? _c(
-          "div",
-          { staticClass: "talk-sect" },
-          [
-            _c("t-sect", {
-              attrs: {
-                sectObj: _vm.sectObj,
-                dataObj: _vm.dataObj,
-                imgsObj: _vm.imgsObj
-              }
-            })
-          ],
-          1
-        )
-      : _vm._e()
-  ])
-};
-var __vue_staticRenderFns__$f = [];
-__vue_render__$f._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$f = function (inject) {
-    if (!inject) return
-    inject("data-v-6cce12ee_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.talk-pane {\n  position: absolute;\n  left: 5%;\n  top: 5%;\n  width: 90%;\n  height: 90%;\n  color: wheat;\n  background-color: black;\n  font-size: 4vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Talk.vue","/Users/ax/Documents/prj/aug/vue/talk/Talk.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;ECCR,WAAA;EDCE,YAAY;ACCd;ADCA;ECCA,kBAAA;EACA,OAAA;EACA,MAAA;EDCE,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,OAAO;EACP,UAAU;EACV,WAAW;EACX,YAAY;EACZ,uBAAuB;EACvB,gBAAgB;EAChB,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB","file":"Talk.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.talk-pane {\n  position: absolute;\n  left: 5%;\n  top: 5%;\n  width: 90%;\n  height: 90%;\n  color: wheat;\n  background-color: black;\n  font-size: 4vmin;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n","\n<template>\n  <div class=\"talk-pane\">\n    <div v-show=\"sectObj===null\" class=\"talk-list\">\n      <t-area :areat=\"talkObjs\" :size=\"2.0\" :fnClick=\"doTalk\"></t-area>\n    </div>\n  <div v-if=\"sectObj!==null\" class=\"talk-sect\">\n    <t-sect :sectObj=\"sectObj\" :dataObj=\"dataObj\" :imgsObj=\"imgsObj\"></t-sect>\n  </div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Sect from './Sect.vue';\n  import Area from '../elem/Area.vue';\n\n  let Talk = {\n\n    components:{ 't-sect':Sect, 't-area':Area },\n\n    data() { return { sectObj:null, dataObj:null, imgsObj:null, talkObjs:null, takkObj:null } },\n\n    methods: {\n      \n      doTalk: function(talkKey) {\n        this.nav().pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None',\n          presKey:'None', imgsNum:0, imgsIdx:0 } );\n        this.nav().dirsNavd('Init'); },\n\n      onNav: function (obj) {\n        if( this.nav().isMyNav( obj, 'Talk' ) ) {\n            this.onSect( obj.pracKey, obj.dispKey, obj.presKey, obj.imgsIdx ); } },\n\n      onSect: function( talkKey, sectKey, presKey, imgsIdx ) {\n        let  dispObj = this.mix().sectObject( talkKey, sectKey );\n        this.sectObj = this.mix().isDef(presKey) ? this.mix().presObject(dispObj,presKey) : dispObj;\n     // if( !this.mix().isDef(this.sectObj) ) {\n        console.log( 'Talk.vue.onSect()',\n          { dispObj:dispObj, sectObj:this.sectObj, talkKey:talkKey, sectKey:sectKey, presKey:presKey } );\n        this.sectObj.imgsIdx = imgsIdx;\n        this.imgsObj = this.mix().compObject( 'Imgs' );\n        \n      } },\n\n    beforeMount: function() {\n      this.talkObjs = this.mix().compObject('Talk'); },\n\n    mounted: function () {\n      this.mix().subscribe(  \"Nav\", 'Talk.vue', (obj) => {\n        this.onNav( obj ); } ); }\n    \n  }\n\n  export default Talk;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @sectFS:2.0*@themeFS;\n  \n  .talk-pane   { position:absolute; left:5%; top:5%; width:90%; height:90%;\n    color:@theme-fore; background-color:@theme-back; font-size:@sectFS; .themeCenterItems();\n    .talk-list {  }  }\n\n</style>\n"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$f = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$f = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$f = false;
-  /* style inject SSR */
-  
-
-  
-  var Talk$1 = normalizeComponent_1(
-    { render: __vue_render__$f, staticRenderFns: __vue_staticRenderFns__$f },
-    __vue_inject_styles__$f,
-    __vue_script__$f,
-    __vue_scope_id__$f,
-    __vue_is_functional_template__$f,
-    __vue_module_identifier__$f,
-    browser,
-    undefined
-  );
-
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-let Sign = {
-  
-  props: { pracObj:Object },
-  
-  data() { return { } },
-  
-  methods: {
-    doPrac: function (pracKey) {
-      let obj = { route:"Prac", pracKey:pracKey };
-      this.nav().pub( obj ); } }
-};
-
-/* script */
-const __vue_script__$g = Sign;
-
-/* template */
-var __vue_render__$g = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    {
-      staticClass: "comp-sign-pane",
-      on: {
-        click: function($event) {
-          return _vm.doPrac(_vm.pracObj.name)
-        }
-      }
-    },
-    [
-      _c("i", { class: _vm.pracObj.icon }),
-      _vm._v(" "),
-      _c("div", { staticClass: "comp-sign-name" }, [
-        _vm._v(_vm._s(_vm.pracObj.name))
-      ])
-    ]
-  )
-};
-var __vue_staticRenderFns__$g = [];
-__vue_render__$g._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$g = function (inject) {
-    if (!inject) return
-    inject("data-v-6ac4058f_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-sign {\n  font-size: 4vmin;\n  border-radius: 0.7em;\n}\n.comp-sign-pane {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  text-align: center;\n  background-color: #333;\n  border-radius: 4vmin;\n  width: 98%;\n  height: 97%;\n}\n.comp-sign-pane i {\n  font-size: 10.8vmin;\n}\n.comp-sign-pane .comp-sign-name {\n  font-size: 4.8vmin;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Sign.vue","/Users/ax/Documents/prj/aug/vue/comp/Sign.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;ECCjC,aAAA;EDCE,oBAAoB;ECCtB,kBAAA;EDCE,kBAAkB;ACCpB;ADCA;ECCA,kBAAA;EACA,6BAAA;EACA,aAAA;EACA,oBAAA;EACA,kBAAA;EDCE,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,oBAAoB;AACtB;AACA;EACE,aAAa;EACb,kBAAkB;EAClB,oBAAoB;EACpB,mBAAmB;EACnB,qBAAqB;EACrB,YAAY;EACZ,kBAAkB;EAClB,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,mBAAmB;AACrB;AACA;EACE,kBAAkB;EAClB,kBAAkB;AACpB","file":"Sign.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-sign {\n  font-size: 4vmin;\n  border-radius: 0.7em;\n}\n.comp-sign-pane {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  text-align: center;\n  background-color: #333;\n  border-radius: 4vmin;\n  width: 98%;\n  height: 97%;\n}\n.comp-sign-pane i {\n  font-size: 10.8vmin;\n}\n.comp-sign-pane .comp-sign-name {\n  font-size: 4.8vmin;\n  text-align: center;\n}\n","\n<template>\n  <div  class=\"comp-sign-pane\" @click=\"doPrac(pracObj.name)\">\n    <i  :class=\"pracObj.icon\"></i>\n    <div class=\"comp-sign-name\">{{pracObj.name}}</div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  let Sign = {\n    \n    props: { pracObj:Object },\n    \n    data() { return { } },\n    \n    methods: {\n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav().pub( obj ); } }\n  }\n  export default Sign;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @signFS:2.0*@themeFS;\n\n  .theme-sign { font-size:@signFS;  border-radius:0.7em; }\n  \n  .comp-sign-pane { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;\n    color:@theme-fore; text-align:center; background-color:@theme-gray; border-radius:1.0*@signFS;\n    width:98%; height:97%;\n    i               { font-size:2.7*@signFS; }\n    .comp-sign-name { font-size:1.2*@signFS;  text-align:center; } }\n  \n</style>"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$g = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$g = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$g = false;
-  /* style inject SSR */
-  
-
-  
-  var Sign$1 = normalizeComponent_1(
-    { render: __vue_render__$g, staticRenderFns: __vue_staticRenderFns__$g },
-    __vue_inject_styles__$g,
-    __vue_script__$g,
-    __vue_scope_id__$g,
-    __vue_is_functional_template__$g,
-    __vue_module_identifier__$g,
-    browser,
-    undefined
-  );
-
-//
-
-let Cube = {
-
-  components:{ 'p-icon':Icon$1, 'p-sign':Sign$1 },
-  
-  data() { return { pracObj:{},
-  planes: {
-    Wise:{ name:'Wise', title:'Wisdom',      left:18, top:26, compObj:{}, back:'#222', icon:"fas fas fa-tripadvisor" },
-    Know:{ name:'Know', title:'Knowledge',   left:14, top:18, compObj:{}, back:'#333', icon:"fas fas fa-university"},
-    Info:{ name:'Info', title:'Information', left:10, top:10, compObj:{}, back:'#444', icon:"fas fas fa-th" } },
-    cols:{ Embrace:0, Innovate:33.30, Encourage:66.7 },
-    rows:{ Learn:  1, Do:      44.50, Share:    87.5 }, } },
-  
-  methods: {
-    stylePlane: function( plane ) {
-      return { position:'absolute', left:plane.left+'%', top:plane.top+'%', width:'66.7%', height:'62%' } },
-    stylePract: function( plane, pract ) {
-      let left = this.cols[pract.column]; // plane.left;
-      let top  = this.rows[pract.row];    // plane.top    +
-      return { position:'absolute', left:left+'%', top:top+'%', width:'33%', height:'11.1%', 'z-index':2,
-        'background-color':plane.back } } },
-
-  beforeMount: function() {
-    for( let ckey in this.planes ) {
-      let plane   =  this.planes[ckey];
-      let compObj =  this.mix().compObject(ckey);
-      for( let pkey in compObj ) {
-        if( this.mix().isChild(pkey) && !this.mix().isDef(this.cols[pkey] ) ) {
-          plane.compObj[pkey] = compObj[pkey]; } } } },
-
-  mounted: function () {}
-};
-
-/* script */
-const __vue_script__$h = Cube;
-
-/* template */
-var __vue_render__$h = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    { staticClass: "cube-pane" },
-    [
-      _vm._l(_vm.planes, function(plane) {
-        return [
-          _c(
-            "div",
-            { staticClass: "cube-plane", style: _vm.stylePlane(plane) },
-            [
-              _vm._l(plane.compObj, function(pracObj) {
-                return [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "cube-pract",
-                      style: _vm.stylePract(plane, pracObj)
-                    },
-                    [
-                      _c("p-icon", {
-                        attrs: {
-                          icon: pracObj.icon,
-                          name: pracObj.name,
-                          size: 2.7
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ]
-              })
-            ],
-            2
-          )
-        ]
-      })
-    ],
-    2
-  )
-};
-var __vue_staticRenderFns__$h = [];
-__vue_render__$h._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$h = function (inject) {
-    if (!inject) return
-    inject("data-v-aecbc04a_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.cube-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.cube-pane .cube-plane {\n  font-size: 4vmin;\n  border-radius: 8vmin;\n  color: wheat;\n  background-color: transparent;\n}\n.cube-pane .cube-pract {\n  font-size: 4vmin;\n  border-radius: 8vmin;\n  border: wheat solid 2px;\n  color: wheat;\n  background-color: #333;\n}\n.cube-pane .cube-plane-icon {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 10%;\n  font-size: 4vmin;\n}\n", map: {"version":3,"sources":["Cube.vue","/Users/ax/Documents/prj/aug/vue/comp/Cube.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;ECCR,WAAA;EDCE,YAAY;ACCd;ADCA;ECCA,kBAAA;EACA,OAAA;EACA,MAAA;EACA,WAAA;EACA,WAAA;AACA;ADCA;ECCA,kBAAA;EDCE,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,gBAAgB;EAChB,oBAAoB;EACpB,YAAY;EACZ,6BAA6B;AAC/B;AACA;EACE,gBAAgB;EAChB,oBAAoB;EACpB,uBAAuB;EACvB,YAAY;EACZ,sBAAsB;AACxB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;EACX,gBAAgB;AAClB","file":"Cube.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.cube-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.cube-pane .cube-plane {\n  font-size: 4vmin;\n  border-radius: 8vmin;\n  color: wheat;\n  background-color: transparent;\n}\n.cube-pane .cube-pract {\n  font-size: 4vmin;\n  border-radius: 8vmin;\n  border: wheat solid 2px;\n  color: wheat;\n  background-color: #333;\n}\n.cube-pane .cube-plane-icon {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 10%;\n  font-size: 4vmin;\n}\n","\n<template>\n  <div class=\"cube-pane\">\n    <template v-for=\"plane in planes\">\n      <div   class=\"cube-plane\" :style=\"stylePlane(plane)\">\n        <!--div class=\"cube-plane-icon\"><p-icon  :icon=\"plane.icon\" :name=\"plane.name\" :size=\"2.5\" ></p-icon></div-->\n        <template v-for=\"pracObj in plane.compObj\">\n          <div class=\"cube-pract\" :style=\"stylePract(plane,pracObj)\">\n            <!--p-sign :pracObj=\"pracObj\"></p-sign-->\n            <p-icon  :icon=\"pracObj.icon\" :name=\"pracObj.name\" :size=\"2.7\" ></p-icon>\n          </div>\n        </template>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Sign from './Sign.vue';\n  import Icon from '../elem/Icon.vue';\n  \n  let Cube = {\n\n    components:{ 'p-icon':Icon, 'p-sign':Sign },\n    \n    data() { return { pracObj:{},\n    planes: {\n      Wise:{ name:'Wise', title:'Wisdom',      left:18, top:26, compObj:{}, back:'#222', icon:\"fas fas fa-tripadvisor\" },\n      Know:{ name:'Know', title:'Knowledge',   left:14, top:18, compObj:{}, back:'#333', icon:\"fas fas fa-university\"},\n      Info:{ name:'Info', title:'Information', left:10, top:10, compObj:{}, back:'#444', icon:\"fas fas fa-th\" } },\n      cols:{ Embrace:0, Innovate:33.30, Encourage:66.7 },\n      rows:{ Learn:  1, Do:      44.50, Share:    87.5 }, } },\n    \n    methods: {\n      stylePlane: function( plane ) {\n        return { position:'absolute', left:plane.left+'%', top:plane.top+'%', width:'66.7%', height:'62%' } },\n      stylePract: function( plane, pract ) {\n        let left = this.cols[pract.column]; // plane.left;\n        let top  = this.rows[pract.row];    // plane.top    +\n        return { position:'absolute', left:left+'%', top:top+'%', width:'33%', height:'11.1%', 'z-index':2,\n          'background-color':plane.back } } },\n\n    beforeMount: function() {\n      for( let ckey in this.planes ) {\n        let plane   =  this.planes[ckey];\n        let compObj =  this.mix().compObject(ckey);\n        for( let pkey in compObj ) {\n          if( this.mix().isChild(pkey) && !this.mix().isDef(this.cols[pkey] ) ) {\n            plane.compObj[pkey] = compObj[pkey]; } } } },\n\n    mounted: function () {}\n  }\n  \n  export default Cube;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @ikwFS:2.0*@themeFS;\n\n  .cube-pane { position:absolute; left:0; top:0; width:100%; height:100%;\n    .cube-plane { font-size:@ikwFS;  border-radius:2.0*@ikwFS; // border:@theme-fore solid 2px;\n                  color:@theme-fore; background-color:transparent; }\n    .cube-pract { font-size:@ikwFS;  border-radius:2.0*@ikwFS;    border:@theme-fore solid 2px;\n                  color:@theme-fore; background-color:@theme-gray; }\n    .cube-plane-icon { position:absolute; left:0; top:0; width:100%; height:10%; font-size:@ikwFS; }\n    \n  }\n\n</style>\n"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$h = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$h = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$h = false;
-  /* style inject SSR */
-  
-
-  
-  var Cube$1 = normalizeComponent_1(
-    { render: __vue_render__$h, staticRenderFns: __vue_staticRenderFns__$h },
-    __vue_inject_styles__$h,
-    __vue_script__$h,
-    __vue_scope_id__$h,
-    __vue_is_functional_template__$h,
-    __vue_module_identifier__$h,
-    browser,
-    undefined
-  );
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-var script$1 = {
-
-  props: { route:String, pages:Object, position:{ default:'full', type:String } },
-  
-  data() { return { pageKey:'None', pageObj:null,
-    positions:{ left:{ left:0, width:'60%' }, right:{ left:'60%', width:'40%' }, full:{ left:0, width:'100%' } } } },
-  
-  methods: {
-    doTabs: function () {
-      this.nav().setPages(this.route,this.pages); // Will only set pages if needed
-      let first   = this.pageKey==='None' && !this.mix().hasInov(this.route);
-      let pageKey = this.nav().getPageKey(this.route);
-      // console.log( 'Tabs.init()', obj, { route:this.route, pageKey:pageKey, pages:this.pages } );
-      if( first ){ this.doPage(pageKey); }
-      else       { this.onPage(pageKey); } },
-    isPage: function (pageKey) {
-      return this.mix().isDef(this.route) && this.mix().isDef(pageKey); },
-    onPage: function (pageKey) {
-      if( this.isPage(pageKey) ) {
-        this.pageKey = pageKey;
-        this.nav().setPageKey( this.route, pageKey ); }
-      else {
-        console.log( 'Tabs.onPage() bad pageKey', { route:this.route, pageKey:pageKey } ); } },
-    doPage: function (pageKey) {
-      if( this.isPage(pageKey) ) {
-          this.onPage(pageKey) ;
-          let obj = { source:'Tabs',route:this.route };
-          obj.inovKey = this.mix().hasInov(this.route) ? pageKey : 'None';
-           this.nav().pub(obj); } },
-    stylePos: function () {
-      return this.positions[this.position]; },
-    classTab: function (pageKey) {
-      return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },
-  mounted: function() {
-    this.doTabs();
-    this.mix().subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {
-      if( obj.source !== 'Tabs'  ) { // && obj.route === this.route
-        this.$nextTick( function() {
-          this.doTabs(); } ); } } ); }
-  };
-
-/* script */
-const __vue_script__$i = script$1;
-
-/* template */
-var __vue_render__$i = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    { staticClass: "tabs-pane", style: _vm.stylePos() },
-    [
-      _vm._l(_vm.pages, function(pageObj) {
-        return [
-          _c(
-            "div",
-            {
-              class: _vm.classTab(pageObj.key),
-              on: {
-                click: function($event) {
-                  return _vm.doPage(pageObj.key)
-                }
-              }
-            },
-            [_vm._v(_vm._s(pageObj.title))]
-          )
-        ]
-      })
-    ],
-    2
-  )
-};
-var __vue_staticRenderFns__$i = [];
-__vue_render__$i._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$i = function (inject) {
-    if (!inject) return
-    inject("data-v-4af43c03_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: tan;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n", map: {"version":3,"sources":["Tabs.vue","/Users/ax/Documents/prj/aug/vue/elem/Tabs.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;ACCA;EDCE,kBAAkB;ECCpB,OAAA;EDCE,MAAM;ECCR,WAAA;EACA,YAAA;ADCA;ACCA;EACA,kBAAA;EACA,OAAA;EACA,MAAA;EACA,WAAA;EACA,WAAA;ADCA;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,uBAAuB;EACvB,gBAAgB;EAChB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,UAAU;EACV,UAAU;AACZ;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,YAAY;AACd;AACA;EACE,qBAAqB;EACrB,iBAAiB;EACjB,oCAAoC;EACpC,4BAA4B;EAC5B,6BAA6B;EAC7B,4BAA4B;EAC5B,8BAA8B;EAC9B,uBAAuB;EACvB,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd","file":"Tabs.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.tabs-pane {\n  background-color: black;\n  font-size: 3vmin;\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 50%;\n  height: 5%;\n}\n.tabs-pane .tabs-tab {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n}\n.tabs-pane .tabs-tab:hover {\n  background-color: tan;\n  color: black;\n}\n.tabs-pane .tabs-tab-active {\n  display: inline-block;\n  margin-left: 2rem;\n  padding: 0.2rem 0.3rem 0.1rem 0.3rem;\n  border-radius: 12px 12px 0 0;\n  border-left: wheat solid thin;\n  border-top: wheat solid thin;\n  border-right: wheat solid thin;\n  background-color: black;\n  color: wheat;\n  background-color: wheat;\n  color: black;\n}\n","\n<template>\n  <div class=\"tabs-pane\" :style=\"stylePos()\">\n    <template v-for=\"pageObj in pages\">\n      <div :class=\"classTab(pageObj.key)\" @click=\"doPage(pageObj.key)\">{{pageObj.title}}</div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  export default {\n\n    props: { route:String, pages:Object, position:{ default:'full', type:String } },\n    \n    data() { return { pageKey:'None', pageObj:null,\n      positions:{ left:{ left:0, width:'60%' }, right:{ left:'60%', width:'40%' }, full:{ left:0, width:'100%' } } } },\n    \n    methods: {\n      doTabs: function () {\n        this.nav().setPages(this.route,this.pages); // Will only set pages if needed\n        let first   = this.pageKey==='None' && !this.mix().hasInov(this.route);\n        let pageKey = this.nav().getPageKey(this.route);\n        // console.log( 'Tabs.init()', obj, { route:this.route, pageKey:pageKey, pages:this.pages } );\n        if( first ){ this.doPage(pageKey); }\n        else       { this.onPage(pageKey); } },\n      isPage: function (pageKey) {\n        return this.mix().isDef(this.route) && this.mix().isDef(pageKey); },\n      onPage: function (pageKey) {\n        if( this.isPage(pageKey) ) {\n          this.pageKey = pageKey;\n          this.nav().setPageKey( this.route, pageKey ); }\n        else {\n          console.log( 'Tabs.onPage() bad pageKey', { route:this.route, pageKey:pageKey } ); } },\n      doPage: function (pageKey) {\n        if( this.isPage(pageKey) ) {\n            this.onPage(pageKey) ;\n            let obj = { source:'Tabs',route:this.route }\n            obj.inovKey = this.mix().hasInov(this.route) ? pageKey : 'None';\n             this.nav().pub(obj); } },\n      stylePos: function () {\n        return this.positions[this.position]; },\n      classTab: function (pageKey) {\n        return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },\n    mounted: function() {\n      this.doTabs();\n      this.mix().subscribe(  \"Nav\", 'Tabs.vue.'+this.route, (obj) => {\n        if( obj.source !== 'Tabs'  ) { // && obj.route === this.route\n          this.$nextTick( function() {\n            this.doTabs(); } ); } } ); }\n    }\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @tabsFS:1.5*@themeFS;\n  \n  .tabs-pane { background-color:@theme-back; font-size:@tabsFS;\n    position:absolute; left:0; top:0; width:@theme-tabs-width; height:@theme-tabs-height;\n    \n    .tabs-tab { display:inline-block; margin-left:2.0rem; padding:0.2rem 0.3rem 0.1rem 0.3rem;\n      border-radius:12px 12px 0 0; border-left: @theme-fore solid thin;\n      border-top:@theme-fore solid thin; border-right:@theme-fore solid thin;\n                                    background-color:@theme-back; color:@theme-fore; }\n    .tabs-tab:hover  {              background-color:@theme-hove; color:@theme-back; }\n    .tabs-tab-active { .tabs-tab(); background-color:@theme-fore; color:@theme-back; } }\n  \n</style>"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$i = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$i = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$i = false;
-  /* style inject SSR */
-  
-
-  
-  var Tabs = normalizeComponent_1(
-    { render: __vue_render__$i, staticRenderFns: __vue_staticRenderFns__$i },
-    __vue_inject_styles__$i,
-    __vue_script__$i,
-    __vue_scope_id__$i,
-    __vue_is_functional_template__$i,
-    __vue_module_identifier__$i,
-    browser,
-    undefined
-  );
-
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-let Sign$2 = {
-  
-  props: { pracObj:Object },
-  
-  data() { return { } },
-  
-  methods: {
-    doPrac: function (pracKey) {
-      let obj = { route:"Prac", pracKey:pracKey };
-      this.nav.pub( obj ); } }
-};
-
-/* script */
-const __vue_script__$j = Sign$2;
-
-/* template */
-var __vue_render__$j = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    {
-      staticClass: "prin-sign-pane",
-      on: {
-        click: function($event) {
-          return _vm.doPrac(_vm.pracObj.name)
-        }
-      }
-    },
-    [
-      _c("i", { class: _vm.pracObj.icon }),
-      _vm._v(" "),
-      _c("div", { staticClass: "prin-sign-name" }, [
-        _vm._v(_vm._s(_vm.pracObj.name))
-      ])
-    ]
-  )
-};
 var __vue_staticRenderFns__$j = [];
 __vue_render__$j._withStripped = true;
 
   /* style */
   const __vue_inject_styles__$j = function (inject) {
     if (!inject) return
-    inject("data-v-4bc7f5fc_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prin-sign-pane {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  text-align: center;\n  background-color: #333;\n  border-radius: 4vmin;\n  width: 90%;\n  height: 90%;\n}\n.prin-sign-pane i {\n  font-size: 30vmin;\n}\n.prin-sign-pane .prin-sign-name {\n  font-size: 9.2vmin;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Sign.vue","/Users/ax/Documents/prj/aug/vue/prin/Sign.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;ECCjC,aAAA;EDCE,oBAAoB;ECCtB,kBAAA;EDCE,kBAAkB;ACCpB;AACA;EACA,kBAAA;EACA,6BAAA;EACA,aAAA;EDCE,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,aAAa;EACb,kBAAkB;EAClB,oBAAoB;EACpB,mBAAmB;EACnB,qBAAqB;EACrB,YAAY;EACZ,kBAAkB;EAClB,sBAAsB;EACtB,oBAAoB;EACpB,UAAU;EACV,WAAW;AACb;AACA;EACE,iBAAiB;AACnB;AACA;EACE,kBAAkB;EAClB,kBAAkB;AACpB","file":"Sign.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prin-sign-pane {\n  display: grid;\n  align-self: center;\n  justify-self: center;\n  align-items: center;\n  justify-items: center;\n  color: wheat;\n  text-align: center;\n  background-color: #333;\n  border-radius: 4vmin;\n  width: 90%;\n  height: 90%;\n}\n.prin-sign-pane i {\n  font-size: 30vmin;\n}\n.prin-sign-pane .prin-sign-name {\n  font-size: 9.2vmin;\n  text-align: center;\n}\n","\n<template>\n  <div   class=\"prin-sign-pane\" @click=\"doPrac(pracObj.name)\">\n    <i  :class=\"pracObj.icon\"></i>\n    <div class=\"prin-sign-name\">{{pracObj.name}}</div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  let Sign = {\n    \n    props: { pracObj:Object },\n    \n    data() { return { } },\n    \n    methods: {\n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav.pub( obj ); } }\n  }\n  export default Sign;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  @signFS:2.0*@themeFS;\n\n  .prin-sign-pane { display:grid; align-self:center; justify-self:center; align-items:center; justify-items:center;\n    color:@theme-fore; text-align:center; background-color:@theme-gray; border-radius:1.0*@signFS;\n    width:90%; height:90%;\n    i               { font-size:7.5*@signFS; }\n    .prin-sign-name { font-size:2.3*@signFS;  text-align:center; } }\n  \n</style>"]}, media: undefined });
+    inject("data-v-50ea0634_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-desc-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n  color: black;\n}\n.prac-desc-pane .prac-desc-cent {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.prac-desc-pane .prac-desc-cent .prac-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 4%;\n  width: 100%;\n  height: 22%;\n}\n.prac-desc-pane .prac-desc-cent .prac-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 26%;\n  width: 94%;\n  height: 74%;\n  text-align: left;\n  font-size: 3vmin;\n}\n.prac-desc-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .prac-disp-desc {\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  color: black;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-icon {\n  position: absolute;\n  left: 0;\n  top: 3%;\n  width: 100%;\n  height: 18%;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-summ {\n  position: absolute;\n  left: 3%;\n  top: 21%;\n  width: 94%;\n  height: 28%;\n  text-align: left;\n  font-size: 2.7vmin;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-area {\n  position: absolute;\n  left: 3%;\n  top: 49%;\n  width: 94%;\n  height: 51%;\n}\n", map: {"version":3,"sources":["Desc.vue","/Users/ax/Documents/prj/aug/vue/prac/Desc.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;ECCA,kBAAA;EDCE,OAAO;ECCT,MAAA;EDCE,WAAW;ECCb,YAAA;AACA;ADCA;ECCA,kBAAA;EDCE,OAAO;ECCT,MAAA;EDCE,WAAW;ECCb,WAAA;AACA;AACA;EACA,kBAAA;EDCE,OAAO;ECCT,QAAA;EACA,WAAA;EDCE,WAAW;ACCb;AACA;EACA,kBAAA;EACA,OAAA;EACA,QAAA;EACA,WAAA;EDCE,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,aAAa;EACb,kCAAkC;EAClC,+BAA+B;EAC/B,gEAAgE;EAChE,YAAY;AACd;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;EACnB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;EAChB,gBAAgB;AAClB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,mBAAmB;AACrB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;EAChB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;AACb","file":"Desc.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-desc-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n  color: black;\n}\n.prac-desc-pane .prac-desc-cent {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.prac-desc-pane .prac-desc-cent .prac-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 4%;\n  width: 100%;\n  height: 22%;\n}\n.prac-desc-pane .prac-desc-cent .prac-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 26%;\n  width: 94%;\n  height: 74%;\n  text-align: left;\n  font-size: 3vmin;\n}\n.prac-desc-pane .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 36px;\n}\n.prac-desc-pane .prac-disp-desc {\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  color: black;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-icon {\n  position: absolute;\n  left: 0;\n  top: 3%;\n  width: 100%;\n  height: 18%;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-summ {\n  position: absolute;\n  left: 3%;\n  top: 21%;\n  width: 94%;\n  height: 28%;\n  text-align: left;\n  font-size: 2.7vmin;\n}\n.prac-desc-pane .prac-disp-desc .prac-disp-area {\n  position: absolute;\n  left: 3%;\n  top: 49%;\n  width: 94%;\n  height: 51%;\n}\n","\n<template>\n  <div     class=\"prac-desc-pane\">\n    <div   class=\"prac-desc-cent\" @click=\"doPrac(pracObj.name)\" :style=\"style(pracObj)\">\n      <div class=\"prac-desc-icon\"><d-icon :icon=\"pracObj.icon\" :name=\"pracObj.name\" :size=\"3.0\"></d-icon></div>\n      <div class=\"prac-desc-summ\">{{pracObj['desc']}}</div>\n    </div>\n    <template v-for=\"dispObj in pracObj.disps\">\n      <div   :class=\"dispObj.dir\" @click=\"doDisp(dispObj.name)\" :style=\"style(dispObj)\">\n        <div      class=\"prac-disp-desc\">\n          <div    class=\"prac-disp-icon\"><d-icon :icon=\"dispObj.icon\" :name=\"dispObj.name\" :size=\"2.0\"></d-icon></div>\n          <div    class=\"prac-disp-summ\">{{dispObj['desc']}}</div>\n          <d-area class=\"prac-disp-area\" :areat=\"dispObj.areas\" :size=\"1.1\"></d-area>\n        </div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Icon from \"../elem/Icon.vue\"\n  import Area from \"../elem/Area.vue\"\n\n  let Desc = {\n    \n    components: { 'd-icon':Icon, 'd-area':Area },\n\n    props: { pracObj:Object, from:String },\n\n    data() { return { dispObj:null, iarea:1 } },\n\n    watch: {\n      pracObj() { this.onPrac(); } },\n    \n    methods: {\n\n      onPrac: function() { }, // console.log( { pracObj:this.pracObj } );\n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav().pub( obj ); },\n      doDisp: function (dispKey) {\n        let nav = this.nav();\n        let obj = { route:\"Disp\", compObj:nav.compKey, inovKey:nav.inovKey, pracKey:this.pracObj.name, dispKey:dispKey };\n        this.nav().pub( obj ); },\n      style: function( ikwObj ) {\n        return this.mix().styleObj(ikwObj); },\n      tsSumm: function(summ) {\n        return this.mix().isStr(summ) ? summ : \"This is a test description\"; }\n    },\n  }\n  export default Desc;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @descFS:@themeFS;\n  \n  .prac-desc-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n    grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .prac-desc-ddir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:36px; }\n  \n  .prac-desc-pane { position:absolute; left:0; top:0; width:100%; height:100%; .prac-desc-grid3x3(); color:black;\n    \n    .prac-desc-cent { .prac-desc-ddir(cen);\n                        position:relative; left:0;  top:0;    width:100%; height:100%;\n      .prac-desc-icon { position:absolute; left:0;  top: 4%;  width:100%; height: 22%; }\n      .prac-desc-summ { position:absolute; left:3%; top:26%;; width: 94%; height: 74%;text-align:left; font-size:1.5*@descFS; } }\n    \n    .west  { .prac-desc-ddir(west);  } .north { .prac-desc-ddir(north); }\n    .east  { .prac-desc-ddir(east);  } .south { .prac-desc-ddir(south); }\n  \n    .prac-disp-desc   { position:relative; left:0;  top:0;   width:100%; height:100%; color:black;\n      .prac-disp-icon { position:absolute; left:0;  top: 3%; width:100%; height: 18%; }\n      .prac-disp-summ { position:absolute; left:3%; top:21%; width: 94%; height: 28%;\n        text-align:left;font-size:1.35*@descFS; }\n      .prac-disp-area { position:absolute; left:3%; top:49%; width: 94%; height: 51%; } }\n  }\n  \n</style>"]}, media: undefined });
 
   };
   /* scoped */
@@ -25272,7 +25494,7 @@ __vue_render__$j._withStripped = true;
   
 
   
-  var Sign$3 = normalizeComponent_1(
+  var Desc$3 = normalizeComponent_1(
     { render: __vue_render__$j, staticRenderFns: __vue_staticRenderFns__$j },
     __vue_inject_styles__$j,
     __vue_script__$j,
@@ -25284,706 +25506,10 @@ __vue_render__$j._withStripped = true;
   );
 
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
+let Prac = {
 
-let Dirs$2 = {
-
-  props: { pracObj:Object },
-
-  data() { return { dispObj:null, ddObj:null } },
-
-  methods: {
-    doPrac: function (pracKey) {
-      let obj = { route:"Prac", pracKey:pracKey };
-      this.mix().nav.pub( obj ); },
-    doDisp: function (pracKey,dispKey) {
-      let obj = { route:"Disp", pracKey:pracKey, dispKey:dispKey };
-      this.mix().nav.pub( obj ); },
-    style: function( ikwObj ) {
-      return this.mix().styleObj(ikwObj); } }
-};
-
-/* script */
-const __vue_script__$k = Dirs$2;
-
-/* template */
-var __vue_render__$k = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    { staticClass: "prin-dirs-pane" },
-    [
-      _c("div", { staticClass: "cen", style: _vm.style(_vm.pracObj) }, [
-        _c(
-          "div",
-          {
-            staticClass: "prin-dirs-disp",
-            on: {
-              click: function($event) {
-                return _vm.doPrac(_vm.pracObj.name)
-              }
-            }
-          },
-          [
-            _c("i", { class: _vm.pracObj.icon }),
-            _vm._v(" "),
-            _c("span", { staticClass: "prin-dirs-name" }, [
-              _vm._v(_vm._s(_vm.pracObj.name))
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _vm._l(_vm.pracObj.disps, function(dispObj) {
-        return [
-          _c(
-            "div",
-            {
-              ref: dispObj.name,
-              refInFor: true,
-              class: dispObj.dir,
-              style: _vm.style(dispObj)
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "prin-dirs-disp",
-                  on: {
-                    click: function($event) {
-                      return _vm.doDisp(_vm.prac.name, dispObj.name)
-                    }
-                  }
-                },
-                [
-                  _c("i", { class: dispObj.icon }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "prin-dirs-name" }, [
-                    _vm._v(_vm._s(dispObj.name))
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _vm._l(dispObj.disps, function(ddObj) {
-                return [
-                  _c("div", { staticClass: "prin-dirs-disp" }, [
-                    _c("i", { class: ddObj.icon }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "prin-dirs-name" }, [
-                      _vm._v(_vm._s(ddObj.name))
-                    ])
-                  ])
-                ]
-              })
-            ],
-            2
-          )
-        ]
-      })
-    ],
-    2
-  )
-};
-var __vue_staticRenderFns__$k = [];
-__vue_render__$k._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$k = function (inject) {
-    if (!inject) return
-    inject("data-v-65ac0c26_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prin-dirs-pane {\n  font-size: 4vmin;\n  width: 90%;\n  height: 96%;\n  color: black;\n  background-color: #333;\n  border-radius: 2.5vmin;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.prin-dirs-pane .north {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: north;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .west {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: west;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .cen {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: cen;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .east {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: east;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .south {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: south;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .cen {\n  font-size: 4vmin;\n}\n.prin-dirs-pane .prin-dirs-disp {\n  display: block;\n  text-align: center;\n}\n.prin-dirs-pane .prin-dirs-disp i {\n  display: block;\n}\n.prin-dirs-pane .prin-dirs-disp .prin-dirs-name {\n  display: block;\n}\n", map: {"version":3,"sources":["Dirs.vue","/Users/ax/Documents/prj/aug/vue/prin/Dirs.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;ECCjC,aAAA;EDCE,mBAAmB;ECCrB,kBAAA;EDCE,gBAAgB;ACClB;AACA;EDCE,kBAAkB;ECCpB,OAAA;EDCE,MAAM;ECCR,WAAA;EACA,YAAA;ADCA;ACCA;EACA,kBAAA;EACA,OAAA;EACA,MAAA;EACA,WAAA;EDCE,WAAW;ACCb;AACA;EACA,kBAAA;EDCE,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,WAAW;EACX,YAAY;EACZ,sBAAsB;EACtB,sBAAsB;EACtB,iBAAiB;EACjB,aAAa;EACb,kCAAkC;EAClC,+BAA+B;EAC/B,gEAAgE;AAClE;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,mBAAmB;EACnB,qBAAqB;EACrB,gBAAgB;EAChB,sBAAsB;AACxB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,mBAAmB;EACnB,qBAAqB;EACrB,eAAe;EACf,sBAAsB;AACxB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,mBAAmB;EACnB,qBAAqB;EACrB,cAAc;EACd,sBAAsB;AACxB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,mBAAmB;EACnB,qBAAqB;EACrB,eAAe;EACf,sBAAsB;AACxB;AACA;EACE,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,mBAAmB;EACnB,qBAAqB;EACrB,gBAAgB;EAChB,sBAAsB;AACxB;AACA;EACE,gBAAgB;AAClB;AACA;EACE,cAAc;EACd,kBAAkB;AACpB;AACA;EACE,cAAc;AAChB;AACA;EACE,cAAc;AAChB","file":"Dirs.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prin-dirs-pane {\n  font-size: 4vmin;\n  width: 90%;\n  height: 96%;\n  color: black;\n  background-color: #333;\n  border-radius: 2.5vmin;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.prin-dirs-pane .north {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: north;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .west {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: west;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .cen {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: cen;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .east {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: east;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .south {\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  grid-area: south;\n  border-radius: 2.5vmin;\n}\n.prin-dirs-pane .cen {\n  font-size: 4vmin;\n}\n.prin-dirs-pane .prin-dirs-disp {\n  display: block;\n  text-align: center;\n}\n.prin-dirs-pane .prin-dirs-disp i {\n  display: block;\n}\n.prin-dirs-pane .prin-dirs-disp .prin-dirs-name {\n  display: block;\n}\n","\n<template>\n  <div class=\"prin-dirs-pane\">\n    <div class=\"cen\" :style=\"style(pracObj)\">\n      <div class=\"prin-dirs-disp\" @click=\"doPrac(pracObj.name)\">\n        <i   :class=\"pracObj.icon\"></i>\n        <span class=\"prin-dirs-name\">{{pracObj.name}}</span>\n      </div>\n    </div>\n    <template v-for=\"dispObj in pracObj.disps\">\n      <div   :class=\"dispObj.dir\" :style=\"style(dispObj)\"  :ref=\"dispObj.name\">\n        <div class=\"prin-dirs-disp\" @click=\"doDisp(prac.name,dispObj.name)\">\n          <i   :class=\"dispObj.icon\"></i>\n          <span class=\"prin-dirs-name\">{{dispObj.name}}</span>\n        </div>\n        <template v-for=\"ddObj in dispObj.disps\">\n          <div class=\"prin-dirs-disp\">\n            <i   :class=\"ddObj.icon\"></i>\n            <span class=\"prin-dirs-name\">{{ddObj.name}}</span>\n          </div>\n        </template>\n        </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  let Dirs = {\n\n    props: { pracObj:Object },\n\n    data() { return { dispObj:null, ddObj:null } },\n\n    methods: {\n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.mix().nav.pub( obj ); },\n      doDisp: function (pracKey,dispKey) {\n        let obj = { route:\"Disp\", pracKey:pracKey, dispKey:dispKey };\n        this.mix().nav.pub( obj ); },\n      style: function( ikwObj ) {\n        return this.mix().styleObj(ikwObj); } }\n  }\n\n  export default Dirs;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  @prinDirsFS:1.25*@themeFS;\n\n  .prin-dirs-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n    grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .prin-dirs-dir( @dir ) { .themeCenterStretch(); grid-area:@dir; border-radius:1.0*@prinDirsFS; }\n\n  .prin-dirs-pane { font-size:1.6*@prinDirsFS; width:90%; height:96%;\n    color:black; background-color:@theme-gray; border-radius:1.0*@prinDirsFS; font-weight:bold;\n  \n      .prin-dirs-grid3x3(); // The 4 Displine plus Practiice name Grid\n                                       .north { .prin-dirs-dir(north); }\n      .west { .prin-dirs-dir(west); }  .cen   { .prin-dirs-dir(cen);   } .east { .prin-dirs-dir(east); }\n                                       .south { .prin-dirs-dir(south); }\n      .cen { font-size:1.6*@prinDirsFS; }\n    \n    .prin-dirs-disp   { display:block; text-align:center;\n       i              { display:block; }\n      .prin-dirs-name { display:block; } } }\n  \n</style>"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$k = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$k = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$k = false;
-  /* style inject SSR */
-  
-
-  
-  var Dirs$3 = normalizeComponent_1(
-    { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
-    __vue_inject_styles__$k,
-    __vue_script__$k,
-    __vue_scope_id__$k,
-    __vue_is_functional_template__$k,
-    __vue_module_identifier__$k,
-    browser,
-    undefined
-  );
-
-//
-
-let Prin = {
-
-  components:{ 'b-tabs':Tabs, 'p-sign':Sign$3, 'p-dirs':Dirs$3 },
-  
-  data() { return { route:'Prin',compObj:null, pracObj:null,
-    pages:{
-      Sign: { title:'Foundation', key:'Sign', show:true  },
-      Dirs: { title:'Principles', key:'Dirs', show:false } } } },
-  
-  methods: {
-    
-    onComp: function( compKey ) {
-      this.compObj = this.mix().compObject(compKey);
-      this.nav().setPages( compKey, this.pages ); },
-    isRows: function () {
-      return true; },
-    onNav:  function (obj) {
-      if( this.nav().isMyNav(  obj, this.route ) ) {
-        this.onComp( obj.compKey ); } }
-    },
-
-  beforeMount: function() {
-    this.onComp('Prin'); },
-
-  mounted: function () {
-    this.nav().setPages( this.route, this.pages );
-    this.mix().subscribe( 'Nav', 'Prin.vue', (obj) => {
-      this.onNav(obj); } ); }
-};
-
-/* script */
-const __vue_script__$l = Prin;
-
-/* template */
-var __vue_render__$l = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    { staticClass: "prin-pane" },
-    [
-      _c("b-tabs", { attrs: { route: _vm.route, pages: _vm.pages } }),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "prin-comp" },
-        [
-          _vm._l(_vm.compObj, function(pracObj) {
-            return [
-              _c(
-                "div",
-                {
-                  key: pracObj.name,
-                  ref: pracObj.name,
-                  refInFor: true,
-                  class: pracObj.dir
-                },
-                [
-                  _c("p-sign", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.pages["Sign"].show,
-                        expression: "pages['Sign'].show"
-                      }
-                    ],
-                    attrs: { pracObj: pracObj }
-                  }),
-                  _vm._v(" "),
-                  _c("p-dirs", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.pages["Dirs"].show,
-                        expression: "pages['Dirs'].show"
-                      }
-                    ],
-                    attrs: { pracObj: pracObj }
-                  })
-                ],
-                1
-              )
-            ]
-          })
-        ],
-        2
-      )
-    ],
-    1
-  )
-};
-var __vue_staticRenderFns__$l = [];
-__vue_render__$l._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$l = function (inject) {
-    if (!inject) return
-    inject("data-v-56dfd85a_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prin-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.prin-pane .prin-comp {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  color: black;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n  display: grid;\n  grid-template-columns: 29fr 29fr 29fr;\n  grid-template-rows: 100fr;\n  grid-template-areas: \"em in en\";\n  justify-items: center;\n  align-items: center;\n}\n.prin-pane .prin-comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.prin-pane .prin-comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.prin-pane .prin-comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n", map: {"version":3,"sources":["Prin.vue","/Users/ax/Documents/prj/aug/vue/prin/Prin.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;ECCA,kBAAA;EDCE,OAAO;ECCT,MAAA;EACA,WAAA;EDCE,YAAY;ACCd;AACA;EDCE,kBAAkB;ECCpB,OAAA;EDCE,MAAM;ECCR,WAAA;EDCE,WAAW;ACCb;AACA;EACA,kBAAA;EACA,OAAA;EDCE,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;EACX,uBAAuB;EACvB,YAAY;EACZ,gBAAgB;EAChB,oBAAoB;EACpB,aAAa;EACb,qCAAqC;EACrC,yBAAyB;EACzB,+BAA+B;EAC/B,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB","file":"Prin.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prin-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.prin-pane .prin-comp {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  color: black;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n  display: grid;\n  grid-template-columns: 29fr 29fr 29fr;\n  grid-template-rows: 100fr;\n  grid-template-areas: \"em in en\";\n  justify-items: center;\n  align-items: center;\n}\n.prin-pane .prin-comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.prin-pane .prin-comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.prin-pane .prin-comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n","\n<template>\n  <div class=\"prin-pane\">\n    <b-tabs :route=\"route\" :pages=\"pages\"></b-tabs>\n    <div class=\"prin-comp\">\n        <template v-for=\"pracObj in compObj\">\n          <div   :class=\"pracObj.dir\" :key=\"pracObj.name\" :ref=\"pracObj.name\">\n            <p-sign v-show=\"pages['Sign'].show\" :pracObj=\"pracObj\"></p-sign>\n            <p-dirs v-show=\"pages['Dirs'].show\" :pracObj=\"pracObj\"></p-dirs>\n          </div>\n        </template>\n      </div>\n    </div>\n</template>\n\n<script type=\"module\">\n\n  import Tabs from '../elem/Tabs.vue';\n  import Sign from './Sign.vue';\n  import Dirs from './Dirs.vue';\n  \n  let Prin = {\n\n    components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs },\n    \n    data() { return { route:'Prin',compObj:null, pracObj:null,\n      pages:{\n        Sign: { title:'Foundation', key:'Sign', show:true  },\n        Dirs: { title:'Principles', key:'Dirs', show:false } } } },\n    \n    methods: {\n      \n      onComp: function( compKey ) {\n        this.compObj = this.mix().compObject(compKey);\n        this.nav().setPages( compKey, this.pages ); },\n      isRows: function () {\n        return true; },\n      onNav:  function (obj) {\n        if( this.nav().isMyNav(  obj, this.route ) ) {\n          this.onComp( obj.compKey ); } }\n      },\n\n    beforeMount: function() {\n      this.onComp('Prin'); },\n\n    mounted: function () {\n      this.nav().setPages( this.route, this.pages );\n      this.mix().subscribe( 'Nav', 'Prin.vue', (obj) => {\n        this.onNav(obj); } ); }\n  }\n  \n  export default Prin;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  .prin-grid1x3() { display:grid; grid-template-columns:29fr 29fr 29fr; grid-template-rows:100fr;\n    grid-template-areas: \"em in en\" }\n  \n  .prin-dir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n                  justify-items:center; align-items:center; }\n\n  @prinFS:2.0*@themeFS;\n\n  .prin-pane { position:absolute; left:0; top:0; width:100%; height:100%;\n  \n    .prin-comp { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;\n      background-color:@theme-back; color:@theme-dark; font-size:@prinFS; border-radius:0.5*@prinFS;\n      .prin-grid1x3(); justify-items:center; align-items:center; // The 4x4 Dim + Row + 9 Practices Grid\n        .em { .prin-dir(em); } .in { .prin-dir(in); }  .en  { .prin-dir(en); } } }\n  \n</style>\n"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$l = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$l = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$l = false;
-  /* style inject SSR */
-  
-
-  
-  var Prin$1 = normalizeComponent_1(
-    { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
-    __vue_inject_styles__$l,
-    __vue_script__$l,
-    __vue_scope_id__$l,
-    __vue_is_functional_template__$l,
-    __vue_module_identifier__$l,
-    browser,
-    undefined
-  );
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-let Dirs$4 = {
-
-  props: { pracObj:Object },
-
-  data() { return { dispObj:null } },
-
-  methods: {
-    
-    doPrac: function (pracKey) {
-      let obj = { route:"Prac", pracKey:pracKey };
-      this.nav().pub( obj ); },
-    doDisp: function (pracKey,dispKey) {
-      let obj = { route:"Disp", pracKey:pracKey, dispKey:dispKey };
-      this.nav().pub( obj ); },
-    style: function( ikwObj ) {
-      return this.mix().styleObj(ikwObj); } }
-};
-
-/* script */
-const __vue_script__$m = Dirs$4;
-
-/* template */
-var __vue_render__$m = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    { staticClass: "dirs-comp" },
-    [
-      _c("div", { staticClass: "cen", style: _vm.style(_vm.pracObj) }, [
-        _c(
-          "div",
-          {
-            staticClass: "disp-comp",
-            on: {
-              click: function($event) {
-                return _vm.doPrac(_vm.pracObj.name)
-              }
-            }
-          },
-          [
-            _c("i", { class: _vm.pracObj.icon }),
-            _vm._v(" "),
-            _c("span", { staticClass: "disp-name" }, [
-              _vm._v(_vm._s(_vm.pracObj.name))
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "disp-desc" }, [
-              _vm._v(_vm._s(_vm.pracObj.desc))
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _vm._l(_vm.pracObj.disps, function(dispObj) {
-        return [
-          _c(
-            "div",
-            {
-              ref: dispObj.name,
-              refInFor: true,
-              class: dispObj.dir,
-              style: _vm.style(dispObj)
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "disp-comp",
-                  on: {
-                    click: function($event) {
-                      return _vm.doDisp(_vm.prac.name, dispObj.name)
-                    }
-                  }
-                },
-                [
-                  _c("i", { class: dispObj.icon }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "disp-name" }, [
-                    _vm._v(_vm._s(dispObj.name))
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "disp-desc" }, [
-                    _vm._v(_vm._s(dispObj.desc))
-                  ])
-                ]
-              )
-            ]
-          )
-        ]
-      })
-    ],
-    2
-  )
-};
-var __vue_staticRenderFns__$m = [];
-__vue_render__$m._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$m = function (inject) {
-    if (!inject) return
-    inject("data-v-7645bd5a_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.dirs-comp {\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  font-size: 2.5vmin;\n  width: 90%;\n  height: 90%;\n  color: black;\n  background-color: #333;\n  border-radius: 2.5vmin;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.dirs-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .cen {\n  font-size: 2.5vmin;\n}\n.dirs-comp .disp-comp {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.dirs-comp .disp-comp i {\n  display: inline-block;\n  margin-right: 0.375vmin;\n}\n.dirs-comp .disp-comp .disp-name {\n  display: inline-block;\n}\n.dirs-comp .disp-comp .disp-desc {\n  display: none;\n  margin: 0.25vmin;\n  text-align: left;\n}\n", map: {"version":3,"sources":["Dirs.vue","/Users/ax/Documents/prj/aug/vue/comp/Dirs.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;ACCA;EDCE,gBAAgB;ECClB,+BAAA;EDCE,aAAa;ECCf,mBAAA;EACA,kBAAA;EDCE,gBAAgB;ACClB;ADCA;ECCA,kBAAA;EACA,OAAA;EDCE,MAAM;ECCR,WAAA;EACA,YAAA;AACA;AACA;EACA,kBAAA;EDCE,OAAO;ECCT,MAAA;EACA,WAAA;EACA,WAAA;AACA;ADCA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;EAClB,mBAAmB;EACnB,qBAAqB;EACrB,kBAAkB;EAClB,UAAU;EACV,WAAW;EACX,YAAY;EACZ,sBAAsB;EACtB,sBAAsB;EACtB,iBAAiB;EACjB,aAAa;EACb,kCAAkC;EAClC,+BAA+B;EAC/B,gEAAgE;AAClE;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;AACzB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;AACzB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;AACzB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;AACzB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,uBAAuB;AACzB;AACA;EACE,kBAAkB;AACpB;AACA;EACE,eAAe;EACf,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,qBAAqB;EACrB,uBAAuB;AACzB;AACA;EACE,qBAAqB;AACvB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,gBAAgB;AAClB","file":"Dirs.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.dirs-comp {\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n  align-self: stretch;\n  justify-self: stretch;\n  font-size: 2.5vmin;\n  width: 90%;\n  height: 90%;\n  color: black;\n  background-color: #333;\n  border-radius: 2.5vmin;\n  font-weight: bold;\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: 1fr 1fr 1fr;\n  grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\";\n}\n.dirs-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  border-radius: 1.25vmin;\n}\n.dirs-comp .cen {\n  font-size: 2.5vmin;\n}\n.dirs-comp .disp-comp {\n  display: inline;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.dirs-comp .disp-comp i {\n  display: inline-block;\n  margin-right: 0.375vmin;\n}\n.dirs-comp .disp-comp .disp-name {\n  display: inline-block;\n}\n.dirs-comp .disp-comp .disp-desc {\n  display: none;\n  margin: 0.25vmin;\n  text-align: left;\n}\n","\n<template>\n  <div class=\"dirs-comp\">\n    <div class=\"cen\" :style=\"style(pracObj)\">\n      <div class=\"disp-comp\" @click=\"doPrac(pracObj.name)\">\n        <i   :class=\"pracObj.icon\"></i>\n        <span class=\"disp-name\">{{pracObj.name}}</span>\n        <span class=\"disp-desc\">{{pracObj.desc}}</span>\n      </div>\n    </div>\n    <template  v-for=\"dispObj in pracObj.disps\">\n      <div :class=\"dispObj.dir\" :style=\"style(dispObj)\"  :ref=\"dispObj.name\">\n        <div class=\"disp-comp\" @click=\"doDisp(prac.name,dispObj.name)\">\n          <i   :class=\"dispObj.icon\"></i>\n          <span class=\"disp-name\">{{dispObj.name}}</span>\n          <span class=\"disp-desc\">{{dispObj.desc}}</span>\n        </div>\n      </div>\n    </template>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  let Dirs = {\n\n    props: { pracObj:Object },\n\n    data() { return { dispObj:null } },\n\n    methods: {\n      \n      doPrac: function (pracKey) {\n        let obj = { route:\"Prac\", pracKey:pracKey };\n        this.nav().pub( obj ); },\n      doDisp: function (pracKey,dispKey) {\n        let obj = { route:\"Disp\", pracKey:pracKey, dispKey:dispKey };\n        this.nav().pub( obj ); },\n      style: function( ikwObj ) {\n        return this.mix().styleObj(ikwObj); } }\n  }\n\n  export default Dirs;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  @dirsFS:1.25*@themeFS;\n  \n  .dirs-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n    grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .dirs-dir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch; border-radius:0.5*@dirsFS; }\n  \n  .dirs-comp { .themeCenterStretch(); font-size:@dirsFS; width:90%; height:90%;\n    color:black; background-color:@theme-gray; border-radius:1.0*@dirsFS; font-weight:bold;\n    \n      .dirs-grid3x3(); // The 4 Displine plus Practiice name Grid\n                                 .north { .dirs-dir(north); }\n      .west { .dirs-dir(west); } .cen   { .dirs-dir(cen);   } .east { .dirs-dir(east); }\n                                 .south { .dirs-dir(south); }\n      .cen  { font-size:@dirsFS; }\n\n    .disp-comp   { display:inline; justify-self:center; align-self:center; text-align:center;\n      i          { display:inline-block;  margin-right: 0.15*@dirsFS; }\n      .disp-name { display:inline-block; }\n      .disp-desc { display:none; margin:0.1*@dirsFS; text-align:left; } } }\n  \n  \n</style>"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$m = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$m = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$m = false;
-  /* style inject SSR */
-  
-
-  
-  var Dirs$5 = normalizeComponent_1(
-    { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
-    __vue_inject_styles__$m,
-    __vue_script__$m,
-    __vue_scope_id__$m,
-    __vue_is_functional_template__$m,
-    __vue_module_identifier__$m,
-    browser,
-    undefined
-  );
-
-//
-
-let Desc$4 = {
-  
-  components: { 'd-icon':Icon$1 },
-
-  props: { pracObj:Object, from:String },
-
-  data() { return { areaObj:null, iarea:1 } },
-
-  methods: {}
-  
-};
-
-/* script */
-const __vue_script__$n = Desc$4;
-
-/* template */
-var __vue_render__$n = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    { staticClass: "comp-desc-pane" },
-    [
-      _c("d-icon", {
-        staticClass: "comp-desc-icon",
-        attrs: { icon: _vm.pracObj.icon, name: _vm.pracObj.name, size: 2.5 }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "comp-desc-summ" }, [
-        _vm._v(_vm._s(_vm.pracObj["desc"]))
-      ])
-    ],
-    1
-  )
-};
-var __vue_staticRenderFns__$n = [];
-__vue_render__$n._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$n = function (inject) {
-    if (!inject) return
-    inject("data-v-f86cffc6_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.comp-desc-pane {\n  font-size: 2vmin;\n  color: wheat;\n  border-radius: 4vmin;\n  background-color: #333;\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 90%;\n  height: 90%;\n}\n.comp-desc-pane .comp-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 2%;\n  width: 100%;\n  height: 26%;\n}\n.comp-desc-pane .comp-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 28%;\n  width: 94%;\n  height: 70%;\n  text-align: left;\n  font-size: 2.8vmin;\n}\n", map: {"version":3,"sources":["Desc.vue","/Users/ax/Documents/prj/aug/vue/comp/Desc.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;ECCtB,kBAAA;EDCE,kBAAkB;ACCpB;AACA;EDCE,kBAAkB;ECCpB,6BAAA;EACA,aAAA;EACA,oBAAA;EACA,kBAAA;EDCE,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,YAAY;EACZ,oBAAoB;EACpB,sBAAsB;EACtB,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,UAAU;EACV,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;EAChB,kBAAkB;AACpB","file":"Desc.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.comp-desc-pane {\n  font-size: 2vmin;\n  color: wheat;\n  border-radius: 4vmin;\n  background-color: #333;\n  position: relative;\n  left: 0;\n  top: 0;\n  width: 90%;\n  height: 90%;\n}\n.comp-desc-pane .comp-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 2%;\n  width: 100%;\n  height: 26%;\n}\n.comp-desc-pane .comp-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 28%;\n  width: 94%;\n  height: 70%;\n  text-align: left;\n  font-size: 2.8vmin;\n}\n","\n<template>\n  <div      class=\"comp-desc-pane\">\n    <d-icon class=\"comp-desc-icon\" :icon=\"pracObj.icon\" :name=\"pracObj.name\" :size=\"2.5\" ></d-icon>\n    <div    class=\"comp-desc-summ\">{{pracObj['desc']}}</div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Icon from \"../elem/Icon.vue\"\n\n  let Desc = {\n    \n    components: { 'd-icon':Icon },\n\n    props: { pracObj:Object, from:String },\n\n    data() { return { areaObj:null, iarea:1 } },\n\n    methods: {}\n    \n  }\n  export default Desc;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @descFS:@themeFS;\n  @summFS:1.4*@descFS;\n\n.comp-desc-pane {   font-size:@descFS; color:@theme-fore; border-radius:2.0*@descFS; background-color:@theme-gray;\n                    position:relative; left:0;  top: 0;  width: 90%; height: 90%;\n  .comp-desc-icon { position:absolute; left:0;  top: 2%; width:100%; height: 26%; }\n  .comp-desc-summ { position:absolute; left:3%; top:28%; width: 94%; height: 70%; text-align:left; font-size:@summFS;} }\n  \n</style>"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$n = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$n = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$n = false;
-  /* style inject SSR */
-  
-
-  
-  var Desc$5 = normalizeComponent_1(
-    { render: __vue_render__$n, staticRenderFns: __vue_staticRenderFns__$n },
-    __vue_inject_styles__$n,
-    __vue_script__$n,
-    __vue_scope_id__$n,
-    __vue_is_functional_template__$n,
-    __vue_module_identifier__$n,
-    browser,
-    undefined
-  );
-
-//
-
-let Comp = {
-
-  components:{ 'b-tabs':Tabs, 'p-sign':Sign$1, 'p-dirs':Dirs$5, 'p-conn':Conn$1, 'p-desc':Desc$5 },
-  
-  data() { return { compKey:'None', inovKey:'None', compObj:null, pracObj:{}, myRows:{},
-    Comp:{
-      Sign: { title:'Practices',    key:'Sign', show:true  },
-      Dirs: { title:'Disciplines',  key:'Dirs', show:false },
-      Conn: { title:'Connections',  key:'Conn', show:false },
-      Desc: { title:'Descriptions', key:'Desc', show:false } },
-    Info:{
-      Info: { title:'Information',  key:"Info", show:true,  icon:"fas fa-th"         },
-      Soft: { title:'Software',     key:"Soft", show:false, icon:"fas fa-codepen"    },
-      Data: { title:'Data',         key:"Data", show:false, icon:"fas fa-table"      } },
-    Know:{
-      Know: { title:'Knowledge',    key:"Know", show:true,  icon:"fas fa-university" },
-      Scie: { title:'Science',      key:"Scie", show:false, icon:"fas fa-flask"          },
-      Math: { title:'Math',         key:"Math", show:false, icon:"fas fa-calculator"     } },
-    Wise:{
-      Wise: { title:'Wisdom',       key:"Wise", show:true, icon:"fas fa-tripadvisor" } },
-    Rows: {
-      Plane:{ name:'Information', dir:'cm', icon:"fas fa-th" },
-      Learn:{ name:'Learn',       dir:'le', icon:"fas fa-graduation-cap" },
-      Do:{    name:'Do',          dir:'do', icon:"fas fa-cog" },
-      Share:{ name:'Share',       dir:'sh', icon:"fas fa-share-alt-square" } } } },
-  
-  methods: {
-    isShow: function(pageKey){
-      let    pageNav = this.nav().getPageKey('Comp',false);
-             pageNav = pageNav==='None' ? this.nav().getPageDef(this.Comp) : pageNav;
-      return pageKey===pageNav; },
-    tabPages: function(route) {
-      return this[route]; },
-    hasInov: function() {
-      return this.mix().hasInov(this.compKey); },
-    onRows: function () {
-       let pages            = this.tabPages('Comp');
-       let pageKey          = 'Sign';
-       this.myRows          = this.Rows;
-       this.myRows['Plane']      = pages[pageKey];
-       this.myRows['Plane'].name = pages[pageKey].title;
-       this.myRows['Plane'].dir  = 'cm';  },
-    onComp: function( obj ) {
-      this.compKey = obj.compKey;
-      this.inovKey = obj.inovKey;
-      this.onRows();
-      this.compObj = this.mix().inovObject( this.compKey, this.inovKey ); },
-    isDim: function ( pracObj ) {
-      return pracObj.row==="Dim"; },
-    isRows: function () {
-      return true; },
-    onNav:  function( obj ) {
-      if( obj.route === 'Comp' || this.hasInov() ) {
-          this.onComp( obj ); } } },
-
-  beforeMount: function() {
-    this.onComp( { route:'Comp', compKey:this.nav().compKey, inovKey:this.nav().inovKey } ); },
-
-  mounted: function () {
-    this.mix().subscribe( 'Nav', 'Comp.vue', (obj) => {
-      this.onNav(obj); } ); }
-};
-
-// this.Comp['__ob__'].dep.notify(); this.compObj = Object.assign({},this.compObj );
-// console.log('Comp.isShow()', { compKey:this.compKey, pageKey:pageKey, show:pageKey===this.nav().getPageKey('Comp') } );
-// let pageKey  = this.nav().getPageKey('Comp');
-// console.log('Comp.onComp()',{compKey:this.compKey,inovKey:this.inovKey,obj:obj,pageKey:pageKey,Comp:this.Comp})
-
-/* script */
-const __vue_script__$o = Comp;
-
-/* template */
-var __vue_render__$o = function() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c(
-    "div",
-    { staticClass: "comp-pane" },
-    [
-      _c("b-tabs", {
-        attrs: { route: "Comp", pages: _vm.tabPages("Comp"), position: "left" }
-      }),
-      _vm._v(" "),
-      _vm.hasInov()
-        ? _c("b-tabs", {
-            attrs: {
-              route: _vm.compKey,
-              pages: _vm.tabPages(_vm.compKey),
-              position: "right"
-            }
-          })
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "div",
-        { ref: "Comp", staticClass: "comp-comp" },
-        [
-          _vm._l(_vm.compObj, function(pracObj) {
-            return [
-              _c(
-                "div",
-                { class: pracObj.dir },
-                [
-                  _vm.isShow("Sign")
-                    ? _c("p-sign", { attrs: { pracObj: pracObj } })
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.isShow("Dirs")
-                    ? _c("p-dirs", { attrs: { pracObj: pracObj } })
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.isShow("Desc")
-                    ? _c("p-desc", { attrs: { pracObj: pracObj } })
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.isShow("Conn")
-                    ? [
-                        !_vm.isDim(pracObj)
-                          ? _c("p-conn", {
-                              attrs: { pracObj: pracObj, level: "Comp" }
-                            })
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.isDim(pracObj)
-                          ? _c("p-sign", { attrs: { pracObj: pracObj } })
-                          : _vm._e()
-                      ]
-                    : _vm._e()
-                ],
-                2
-              )
-            ]
-          }),
-          _vm._v(" "),
-          _vm._l(_vm.myRows, function(row) {
-            return [
-              _c(
-                "div",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.isRows(),
-                      expression: "isRows()"
-                    }
-                  ],
-                  class: row.dir
-                },
-                [_c("p-sign", { attrs: { pracObj: row } })],
-                1
-              )
-            ]
-          })
-        ],
-        2
-      )
-    ],
-    1
-  )
-};
-var __vue_staticRenderFns__$o = [];
-__vue_render__$o._withStripped = true;
-
-  /* style */
-  const __vue_inject_styles__$o = function (inject) {
-    if (!inject) return
-    inject("data-v-ef41f554_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.comp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.comp-pane .comp-comp {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  color: black;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n  display: grid;\n  grid-template-columns: 16fr 28fr 28fr 28fr;\n  grid-template-rows: 25fr 25fr 25fr 25fr;\n  grid-template-areas: \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm .comp-sign {\n  background-color: black;\n}\n", map: {"version":3,"sources":["Comp.vue","/Users/ax/Documents/prj/aug/vue/comp/Comp.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;ECCX,gBAAA;ADCA;ACCA;EACA,mBAAA;EDCE,2CAA2C;ACC7C;AACA;EDCE,kBAAkB;ECCpB,OAAA;EACA,MAAA;EDCE,WAAW;ECCb,YAAA;ADCA;ACCA;EDCE,kBAAkB;ECCpB,OAAA;EACA,OAAA;EACA,WAAA;EACA,WAAA;EACA,uBAAA;EACA,YAAA;EACA,gBAAA;EDCE,oBAAoB;ECCtB,aAAA;EACA,0CAAA;EACA,uCAAA;EDCE,uFAAuF;EACvF,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,cAAc;EACd,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,eAAe;EACf,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,gBAAgB;EAChB,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,aAAa;EACb,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,qBAAqB;EACrB,mBAAmB;AACrB;AACA;EACE,uBAAuB;AACzB","file":"Comp.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.comp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.comp-pane .comp-comp {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: black;\n  color: black;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n  display: grid;\n  grid-template-columns: 16fr 28fr 28fr 28fr;\n  grid-template-rows: 25fr 25fr 25fr 25fr;\n  grid-template-areas: \"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\";\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm {\n  display: grid;\n  grid-area: cm;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .em {\n  display: grid;\n  grid-area: em;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .in {\n  display: grid;\n  grid-area: in;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .en {\n  display: grid;\n  grid-area: en;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .le {\n  display: grid;\n  grid-area: le;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .nw {\n  display: grid;\n  grid-area: nw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .north {\n  display: grid;\n  grid-area: north;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .ne {\n  display: grid;\n  grid-area: ne;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .do {\n  display: grid;\n  grid-area: do;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .west {\n  display: grid;\n  grid-area: west;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cen {\n  display: grid;\n  grid-area: cen;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .east {\n  display: grid;\n  grid-area: east;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sh {\n  display: grid;\n  grid-area: sh;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .sw {\n  display: grid;\n  grid-area: sw;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .south {\n  display: grid;\n  grid-area: south;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .se {\n  display: grid;\n  grid-area: se;\n  justify-self: stretch;\n  align-self: stretch;\n  justify-items: center;\n  align-items: center;\n}\n.comp-pane .comp-comp .cm .comp-sign {\n  background-color: black;\n}\n","\n<template>\n  <div class=\"comp-pane\">\n    <b-tabs  route=\"Comp\"    :pages=\"tabPages('Comp')\" position=\"left\" ></b-tabs>\n    <b-tabs :route=\"compKey\" :pages=\"tabPages(compKey)\"     position=\"right\" v-if=\"hasInov()\"></b-tabs>\n    <div class=\"comp-comp\" ref=\"Comp\">\n      <template v-for=\"pracObj in compObj\">\n        <div   :class=\"pracObj.dir\">\n          <p-sign   v-if=\"isShow('Sign')\" :pracObj=\"pracObj\"></p-sign>\n          <p-dirs   v-if=\"isShow('Dirs')\" :pracObj=\"pracObj\"></p-dirs>\n          <p-desc   v-if=\"isShow('Desc')\" :pracObj=\"pracObj\"></p-desc>\n          <template v-if=\"isShow('Conn')\">\n            <p-conn v-if=\"!isDim(pracObj)\" :pracObj=\"pracObj\" level=\"Comp\"></p-conn>\n            <p-sign v-if=\" isDim(pracObj)\" :pracObj=\"pracObj\"></p-sign>\n          </template>\n        </div>\n      </template>\n      <template v-for=\"row in myRows\">\n        <div v-show=\"isRows()\" :class=\"row.dir\">\n          <p-sign :pracObj=\"row\"></p-sign>\n        </div>\n      </template>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Tabs from '../elem/Tabs.vue';\n  import Sign from './Sign.vue';\n  import Dirs from './Dirs.vue';\n  import Conn from './Conn.vue';\n  import Desc from './Desc.vue';\n  \n  let Comp = {\n\n    components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },\n    \n    data() { return { compKey:'None', inovKey:'None', compObj:null, pracObj:{}, myRows:{},\n      Comp:{\n        Sign: { title:'Practices',    key:'Sign', show:true  },\n        Dirs: { title:'Disciplines',  key:'Dirs', show:false },\n        Conn: { title:'Connections',  key:'Conn', show:false },\n        Desc: { title:'Descriptions', key:'Desc', show:false } },\n      Info:{\n        Info: { title:'Information',  key:\"Info\", show:true,  icon:\"fas fa-th\"         },\n        Soft: { title:'Software',     key:\"Soft\", show:false, icon:\"fas fa-codepen\"    },\n        Data: { title:'Data',         key:\"Data\", show:false, icon:\"fas fa-table\"      } },\n      Know:{\n        Know: { title:'Knowledge',    key:\"Know\", show:true,  icon:\"fas fa-university\" },\n        Scie: { title:'Science',      key:\"Scie\", show:false, icon:\"fas fa-flask\"          },\n        Math: { title:'Math',         key:\"Math\", show:false, icon:\"fas fa-calculator\"     } },\n      Wise:{\n        Wise: { title:'Wisdom',       key:\"Wise\", show:true, icon:\"fas fa-tripadvisor\" } },\n      Rows: {\n        Plane:{ name:'Information', dir:'cm', icon:\"fas fa-th\" },\n        Learn:{ name:'Learn',       dir:'le', icon:\"fas fa-graduation-cap\" },\n        Do:{    name:'Do',          dir:'do', icon:\"fas fa-cog\" },\n        Share:{ name:'Share',       dir:'sh', icon:\"fas fa-share-alt-square\" } } } },\n    \n    methods: {\n      isShow: function(pageKey){\n        let    pageNav = this.nav().getPageKey('Comp',false);\n               pageNav = pageNav==='None' ? this.nav().getPageDef(this.Comp) : pageNav;\n        return pageKey===pageNav; },\n      tabPages: function(route) {\n        return this[route]; },\n      hasInov: function() {\n        return this.mix().hasInov(this.compKey); },\n      onRows: function () {\n         let pages            = this.tabPages('Comp');\n         let pageKey          = 'Sign'\n         this.myRows          = this.Rows;\n         this.myRows['Plane']      = pages[pageKey];\n         this.myRows['Plane'].name = pages[pageKey].title\n         this.myRows['Plane'].dir  = 'cm';  },\n      onComp: function( obj ) {\n        this.compKey = obj.compKey;\n        this.inovKey = obj.inovKey;\n        this.onRows();\n        this.compObj = this.mix().inovObject( this.compKey, this.inovKey ); },\n      isDim: function ( pracObj ) {\n        return pracObj.row===\"Dim\"; },\n      isRows: function () {\n        return true; },\n      onNav:  function( obj ) {\n        if( obj.route === 'Comp' || this.hasInov() ) {\n            this.onComp( obj ); } } },\n\n    beforeMount: function() {\n      this.onComp( { route:'Comp', compKey:this.nav().compKey, inovKey:this.nav().inovKey } ); },\n\n    mounted: function () {\n      this.mix().subscribe( 'Nav', 'Comp.vue', (obj) => {\n        this.onNav(obj); } ); }\n  }\n  \n  export default Comp;\n\n  // this.Comp['__ob__'].dep.notify(); this.compObj = Object.assign({},this.compObj );\n  // console.log('Comp.isShow()', { compKey:this.compKey, pageKey:pageKey, show:pageKey===this.nav().getPageKey('Comp') } );\n  // let pageKey  = this.nav().getPageKey('Comp');\n  // console.log('Comp.onComp()',{compKey:this.compKey,inovKey:this.inovKey,obj:obj,pageKey:pageKey,Comp:this.Comp})\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  .comp-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;\n               grid-template-areas: \"nw north ne\" \"west cen east\" \"sw south se\"; }\n\n  .comp-grid4x4() { display:grid; grid-template-columns:16fr 28fr 28fr 28fr; grid-template-rows:25fr 25fr 25fr 25fr;\n    grid-template-areas:\"cm em in en\" \"le nw north ne\" \"do west cen east\" \"sh sw south se\"; }\n  \n  .pdir( @dir ) { display:grid; grid-area:@dir; justify-self:stretch; align-self:stretch;\n                  justify-items:center; align-items:center; }\n  \n  @compFS:2.0*@themeFS;\n\n  .comp-pane { position:absolute; left:0; top:0; width:100%; height:100%;\n  \n    .comp-comp { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;\n            background-color:@theme-back; color:@theme-dark; font-size:@compFS; border-radius:0.5*@compFS;\n      .comp-grid4x4(); justify-items:center; align-items:center; // The 4x4 Dim + Row + 9 Practices Grid\n        .cm { .pdir(cm); } .em   { .pdir(em);   } .in    { .pdir(in); }    .en   { .pdir(en);   }\n        .le { .pdir(le); } .nw   { .pdir(nw);   } .north { .pdir(north); } .ne   { .pdir(ne);   }\n        .do { .pdir(do); } .west { .pdir(west); } .cen   { .pdir(cen);   } .east { .pdir(east); }\n        .sh { .pdir(sh); } .sw   { .pdir(sw);   } .south { .pdir(south); } .se   { .pdir(se);   }\n      \n      .cm .comp-sign { background-color:@theme-back; }\n    }\n  }\n\n</style>\n"]}, media: undefined });
-
-  };
-  /* scoped */
-  const __vue_scope_id__$o = undefined;
-  /* module identifier */
-  const __vue_module_identifier__$o = undefined;
-  /* functional template */
-  const __vue_is_functional_template__$o = false;
-  /* style inject SSR */
-  
-
-  
-  var Comp$1 = normalizeComponent_1(
-    { render: __vue_render__$o, staticRenderFns: __vue_staticRenderFns__$o },
-    __vue_inject_styles__$o,
-    __vue_script__$o,
-    __vue_scope_id__$o,
-    __vue_is_functional_template__$o,
-    __vue_module_identifier__$o,
-    browser,
-    undefined
-  );
-
-//
-
-let Prac$2 = {
-
-  components:{ 'b-tabs':Tabs, 'p-dirs':Dirs$1, 'p-conn':Conn$1, 'p-desc':Desc$1 },
+  components:{ 'b-tabs':Tabs, 'p-dirs':Dirs$5, 'p-conn':Conn$1, 'p-desc':Desc$3 },
   
   data() { return { route:'Prac', pracObj:null,
     pages:{
@@ -26017,10 +25543,10 @@ let Prac$2 = {
 };
 
 /* script */
-const __vue_script__$p = Prac$2;
+const __vue_script__$k = Prac;
 
 /* template */
-var __vue_render__$p = function() {
+var __vue_render__$k = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -26068,41 +25594,118 @@ var __vue_render__$p = function() {
     1
   )
 };
-var __vue_staticRenderFns__$p = [];
-__vue_render__$p._withStripped = true;
+var __vue_staticRenderFns__$k = [];
+__vue_render__$k._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$p = function (inject) {
+  const __vue_inject_styles__$k = function (inject) {
     if (!inject) return
     inject("data-v-676b78db_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.prac-pane .prac-prac {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: #333;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n}\n", map: {"version":3,"sources":["Prac.vue","/Users/ax/Documents/prj/aug/vue/prac/Prac.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;ECCR,WAAA;EDCE,YAAY;ACCd;ADCA;ECCA,kBAAA;EDCE,OAAO;ECCT,MAAA;EACA,WAAA;EDCE,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;EACX,sBAAsB;EACtB,gBAAgB;EAChB,oBAAoB;AACtB","file":"Prac.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.prac-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.prac-pane .prac-prac {\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n  background-color: #333;\n  font-size: 4vmin;\n  border-radius: 2vmin;\n}\n","\n<template>\n  <div   class=\"prac-pane\">\n    <b-tabs :route=\"route\" :pages=\"pages\"></b-tabs>\n    <div class=\"prac-prac\">\n      <p-dirs v-show=\"pages['Dirs'].show\" :pracObj=\"pracObj\"></p-dirs>\n      <p-conn   v-if=\"pages['Conn'].show\" :pracObj=\"pracObj\" level=\"Prac\"></p-conn>\n      <p-desc v-show=\"pages['Desc'].show\" :pracObj=\"pracObj\"></p-desc>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Tabs from '../elem/Tabs.vue';\n  import Dirs from './Dirs.vue';\n  import Conn from '../comp/Conn.vue';\n  import Desc from './Desc.vue';\n  \n  let Prac = {\n\n    components:{ 'b-tabs':Tabs, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },\n    \n    data() { return { route:'Prac', pracObj:null,\n      pages:{\n        Dirs: { title:'Disciplines',  key:'Dirs', show:true  },\n        Conn: { title:'Connections',  key:'Conn', show:false },\n        Desc: { title:'Descriptions', key:'Desc', show:false } } } },\n    \n    methods: {\n      \n      onPrac: function( obj ) {\n        if( !this.mix().isDef(this.pracObj) || this.pracObj.name !== obj.pracKey ) {\n             this.pracObj = this.mix().pracObject( obj.compKey, obj.inovKey, obj.pracKey );\n             this.nav().setPages( this.route, this.pages ); } },\n      onNav: function( obj ) {\n        if( this.nav().isMyNav( obj, this.route ) ) {\n         // this.doPage( this.nav().getPageKey( this.route) );\n            this.onPrac( obj ); } }\n      },\n\n    beforeMount: function () {\n      let obj = {}\n      obj.compKey = this.nav().compKey;\n      obj.pracKey = this.nav().pracKey;\n      obj.inovKey = this.nav().inovKey;\n      this.onPrac( obj );  },\n\n    mounted: function () {\n      this.nav().setPages( this.route, this.pages );\n      this.mix().subscribe(  \"Nav\", 'Prac.vue', (obj) => {\n        this.onNav(obj); } ); }\n  }\n  \n  export default Prac;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  @pracFS:2.0*@themeFS;\n  \n  .prac-pane   { position:absolute; left:0; top:0; width:100%; height:100%;\n    \n    .prac-prac { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;\n      background-color:@theme-gray; font-size:@pracFS; border-radius:0.5*@pracFS; } }\n  \n</style>\n\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$p = undefined;
+  const __vue_scope_id__$k = undefined;
   /* module identifier */
-  const __vue_module_identifier__$p = undefined;
+  const __vue_module_identifier__$k = undefined;
   /* functional template */
-  const __vue_is_functional_template__$p = false;
+  const __vue_is_functional_template__$k = false;
   /* style inject SSR */
   
 
   
-  var Prac$3 = normalizeComponent_1(
-    { render: __vue_render__$p, staticRenderFns: __vue_staticRenderFns__$p },
-    __vue_inject_styles__$p,
-    __vue_script__$p,
-    __vue_scope_id__$p,
-    __vue_is_functional_template__$p,
-    __vue_module_identifier__$p,
+  var Prac$1 = normalizeComponent_1(
+    { render: __vue_render__$k, staticRenderFns: __vue_staticRenderFns__$k },
+    __vue_inject_styles__$k,
+    __vue_script__$k,
+    __vue_scope_id__$k,
+    __vue_is_functional_template__$k,
+    __vue_module_identifier__$k,
     browser,
     undefined
   );
 
 //
 
-let Disp$4 = {
+let Desc$4 = {
+  
+  components: { 'd-icon':Icon$1, 'd-area':Area$1 },
 
-  components:{ 'd-tabs':Tabs, 'd-dims':Dims$1, 'd-desc':Desc$3 },
+  props: { dispObj:Object, from:String },
+
+  data() { return { areaObj:null, iarea:1 } },
+
+  methods: {
+    style: function (ikwObj) {
+      return this.mix().styleObj(ikwObj); },
+    toDesc: function(desc) {
+      return this.mix().isStr(desc) ? desc : "This is a test description"; }
+  }
+};
+
+/* script */
+const __vue_script__$l = Desc$4;
+
+/* template */
+var __vue_render__$l = function() {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c(
+    "div",
+    { staticClass: "disp-desc-pane", style: _vm.style(_vm.dispObj) },
+    [
+      _c("d-icon", {
+        staticClass: "disp-desc-icon",
+        attrs: { icon: _vm.dispObj.icon, name: _vm.dispObj.name, size: 5.0 }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "disp-desc-summ" }, [
+        _vm._v(_vm._s(_vm.dispObj["desc"]))
+      ]),
+      _vm._v(" "),
+      _c("d-area", {
+        staticClass: "disp-desc-area",
+        attrs: { areat: _vm.dispObj.areas, size: 2.0 }
+      })
+    ],
+    1
+  )
+};
+var __vue_staticRenderFns__$l = [];
+__vue_render__$l._withStripped = true;
+
+  /* style */
+  const __vue_inject_styles__$l = function (inject) {
+    if (!inject) return
+    inject("data-v-49f67c00_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.disp-desc-pane {\n  font-size: 2vmin;\n  color: black;\n  border-radius: 4vmin;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n}\n.disp-desc-pane .disp-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 3%;\n  width: 100%;\n  height: 18%;\n}\n.disp-desc-pane .disp-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 21%;\n  width: 94%;\n  height: 28%;\n  text-align: left;\n  font-size: 5vmin;\n}\n.disp-desc-pane .disp-desc-area {\n  position: absolute;\n  left: 3%;\n  top: 49%;\n  width: 94%;\n  height: 51%;\n}\n", map: {"version":3,"sources":["Desc.vue","/Users/ax/Documents/prj/aug/vue/disp/Desc.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;ECC/B,aAAA;EDCE,oBAAoB;ECCtB,kBAAA;EACA,kBAAA;ADCA;ACCA;EACA,mBAAA;EACA,+BAAA;EACA,aAAA;EACA,oBAAA;EDCE,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,mBAAmB;EACnB,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,YAAY;EACZ,oBAAoB;EACpB,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,OAAO;EACP,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;EACX,gBAAgB;EAChB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,QAAQ;EACR,QAAQ;EACR,UAAU;EACV,WAAW;AACb","file":"Desc.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.disp-desc-pane {\n  font-size: 2vmin;\n  color: black;\n  border-radius: 4vmin;\n  position: absolute;\n  left: 0;\n  top: 5%;\n  width: 100%;\n  height: 95%;\n}\n.disp-desc-pane .disp-desc-icon {\n  position: absolute;\n  left: 0;\n  top: 3%;\n  width: 100%;\n  height: 18%;\n}\n.disp-desc-pane .disp-desc-summ {\n  position: absolute;\n  left: 3%;\n  top: 21%;\n  width: 94%;\n  height: 28%;\n  text-align: left;\n  font-size: 5vmin;\n}\n.disp-desc-pane .disp-desc-area {\n  position: absolute;\n  left: 3%;\n  top: 49%;\n  width: 94%;\n  height: 51%;\n}\n","\n<template>\n  <div      class=\"disp-desc-pane\" :style=\"style(dispObj)\">\n    <d-icon class=\"disp-desc-icon\" :icon=\"dispObj.icon\" :name=\"dispObj.name\" :size=\"5.0\" ></d-icon>\n    <div    class=\"disp-desc-summ\">{{dispObj['desc']}}</div>\n    <d-area class=\"disp-desc-area\" :areat=\"dispObj.areas\" :size=\"2.0\"></d-area>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  import Icon from \"../elem/Icon.vue\"\n  import Area from \"../elem/Area.vue\"\n\n  let Desc = {\n    \n    components: { 'd-icon':Icon, 'd-area':Area },\n\n    props: { dispObj:Object, from:String },\n\n    data() { return { areaObj:null, iarea:1 } },\n\n    methods: {\n      style: function (ikwObj) {\n        return this.mix().styleObj(ikwObj); },\n      toDesc: function(desc) {\n        return this.mix().isStr(desc) ? desc : \"This is a test description\"; }\n    }\n  }\n  export default Desc;\n\n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n  \n  @descFS:@themeFS;\n  @th:@theme-tabs-height;\n\n.disp-desc-pane {   font-size:@descFS; color:black; border-radius:2.0*@descFS;\n                    position:absolute; left:0;  top:@th; width:100%; height:100%-@th;\n  .disp-desc-icon { position:absolute; left:0;  top: 3%; width:100%; height: 18%; }\n  .disp-desc-summ { position:absolute; left:3%; top:21%; width: 94%; height: 28%;text-align:left;font-size:2.5*@descFS;}\n  .disp-desc-area { position:absolute; left:3%; top:49%; width: 94%; height: 51%; } }\n  \n</style>"]}, media: undefined });
+
+  };
+  /* scoped */
+  const __vue_scope_id__$l = undefined;
+  /* module identifier */
+  const __vue_module_identifier__$l = undefined;
+  /* functional template */
+  const __vue_is_functional_template__$l = false;
+  /* style inject SSR */
+  
+
+  
+  var Desc$5 = normalizeComponent_1(
+    { render: __vue_render__$l, staticRenderFns: __vue_staticRenderFns__$l },
+    __vue_inject_styles__$l,
+    __vue_script__$l,
+    __vue_scope_id__$l,
+    __vue_is_functional_template__$l,
+    __vue_module_identifier__$l,
+    browser,
+    undefined
+  );
+
+//
+
+let Disp$2 = {
+
+  components:{ 'd-tabs':Tabs, 'd-dims':Dims$1, 'd-desc':Desc$5 },
   
   data() { return { route:"Disp", dispObj:null, // compKey:'Desc',
     pages:{
@@ -26130,10 +25733,10 @@ let Disp$4 = {
 };
 
 /* script */
-const __vue_script__$q = Disp$4;
+const __vue_script__$m = Disp$2;
 
 /* template */
-var __vue_render__$q = function() {
+var __vue_render__$m = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -26154,32 +25757,32 @@ var __vue_render__$q = function() {
     1
   )
 };
-var __vue_staticRenderFns__$q = [];
-__vue_render__$q._withStripped = true;
+var __vue_staticRenderFns__$m = [];
+__vue_render__$m._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$q = function (inject) {
+  const __vue_inject_styles__$m = function (inject) {
     if (!inject) return
     inject("data-v-4fbc1f5a_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.disp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n}\n", map: {"version":3,"sources":["Disp.vue","/Users/ax/Documents/prj/aug/vue/disp/Disp.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;ECClB,+BAAA;EDCE,aAAa;ECCf,mBAAA;EDCE,kBAAkB;EAClB,gBAAgB;AAClB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,sBAAsB;AACxB","file":"Disp.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.disp-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: #333;\n}\n","\n<template>\n  <div class=\"disp-pane\">\n    <d-tabs :route=\"route\" :pages=\"pages\"></d-tabs>\n    <d-dims v-if=\"pages['Dims'].show\" :dispObj=\"dispObj\" from=\"Disp\"></d-dims>\n    <d-desc v-if=\"pages['Desc'].show\" :dispObj=\"dispObj\" from=\"Disp\"></d-desc>\n  </div>\n</template>\n\n<script type=\"module\">\n\n  import Tabs from '../elem/Tabs.vue';\n  import Dims from '../prac/Dims.vue';\n  import Desc from './Desc.vue';\n  \n  let Disp = {\n\n    components:{ 'd-tabs':Tabs, 'd-dims':Dims, 'd-desc':Desc },\n    \n    data() { return { route:\"Disp\", dispObj:null, // compKey:'Desc',\n      pages:{\n        Dims: { title:'Disciplines',  key:'Dims', show:true  },\n        Desc: { title:'Descriptions', key:'Desc', show:false } } } },\n    \n    methods: {\n      \n      onDisp: function( obj ) {\n        this.nav().setPages( this.route, this.pages );\n        this.dispObj  = this.mix().dispObject( obj.compKey, obj.inovKey, obj.pracKey, obj.dispKey );\n        if( !this.mix().isDef(this.dispObj) ) {\n          console.error('Disp.onDisp() disp null',{comp:obj.compKey, prac:obj.pracKey, disp:obj.dispKey } ) } },\n      onNav:  function (obj) {\n        if( this.nav().isMyNav( obj, 'Disp' ) ) {\n            this.onDisp( obj ); } } },\n\n    beforeMount: function() {\n      this.onDisp( this.nav() ); },\n\n    mounted: function () {\n      this.nav().setPages( this.route, this.pages );\n      this.mix().subscribe(  \"Nav\", 'Disp.vue', (obj) => {\n        this.onNav(obj); } ); }\n  }\n  \n  export default Disp;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../pub/css/themes/theme.less';\n\n  .disp-pane { position:absolute; left:0; top:0; width:100%; height:100%; background-color:@theme-gray; }\n  \n</style>\n\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$q = undefined;
+  const __vue_scope_id__$m = undefined;
   /* module identifier */
-  const __vue_module_identifier__$q = undefined;
+  const __vue_module_identifier__$m = undefined;
   /* functional template */
-  const __vue_is_functional_template__$q = false;
+  const __vue_is_functional_template__$m = false;
   /* style inject SSR */
   
 
   
-  var Disp$5 = normalizeComponent_1(
-    { render: __vue_render__$q, staticRenderFns: __vue_staticRenderFns__$q },
-    __vue_inject_styles__$q,
-    __vue_script__$q,
-    __vue_scope_id__$q,
-    __vue_is_functional_template__$q,
-    __vue_module_identifier__$q,
+  var Disp$3 = normalizeComponent_1(
+    { render: __vue_render__$m, staticRenderFns: __vue_staticRenderFns__$m },
+    __vue_inject_styles__$m,
+    __vue_script__$m,
+    __vue_scope_id__$m,
+    __vue_is_functional_template__$m,
+    __vue_module_identifier__$m,
     browser,
     undefined
   );
@@ -26213,24 +25816,23 @@ let Home = {
 };
 
 Home.Dash = Dash$1;
-Home.Talk = Talk$1;
 Home.Cube = Cube$1;
 Home.Prin = Prin$1;
 Home.Comp = Comp$1;
-Home.Prac = Prac$3;
-Home.Disp = Disp$5;
+Home.Prac = Prac$1;
+Home.Disp = Disp$3;
 
 /* script */
-const __vue_script__$r = Home;
+const __vue_script__$n = Home;
 
 /* template */
-var __vue_render__$r = function() {
+var __vue_render__$n = function() {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
   return _vm._m(0)
 };
-var __vue_staticRenderFns__$r = [
+var __vue_staticRenderFns__$n = [
   function() {
     var _vm = this;
     var _h = _vm.$createElement;
@@ -26260,31 +25862,31 @@ var __vue_staticRenderFns__$r = [
     ])
   }
 ];
-__vue_render__$r._withStripped = true;
+__vue_render__$n._withStripped = true;
 
   /* style */
-  const __vue_inject_styles__$r = function (inject) {
+  const __vue_inject_styles__$n = function (inject) {
     if (!inject) return
-    inject("data-v-19f60b8c_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.home-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  color: wheat;\n}\n.home-pane .home-head {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 20%;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.home-pane .home-midd {\n  position: absolute;\n  left: 0;\n  top: 40%;\n  width: 100%;\n  height: 10%;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.home-pane .home-list {\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.home-pane .home-foot {\n  position: absolute;\n  left: 0;\n  top: 50%;\n  width: 100%;\n  height: 20%;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Home.vue","/Users/ax/Documents/prj/aug/pub/app/muse/Home.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;ECClB,+BAAA;EDCE,aAAa;ECCf,mBAAA;EDCE,kBAAkB;ECCpB,gBAAA;AACA;ADCA;ECCA,kBAAA;EDCE,OAAO;ECCT,MAAA;EDCE,WAAW;ECCb,YAAA;ADCA;ACCA;EDCE,kBAAkB;EAClB,OAAO;ECCT,MAAA;EDCE,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB","file":"Home.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.home-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  color: wheat;\n}\n.home-pane .home-head {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 20%;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.home-pane .home-midd {\n  position: absolute;\n  left: 0;\n  top: 40%;\n  width: 100%;\n  height: 10%;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.home-pane .home-list {\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.home-pane .home-foot {\n  position: absolute;\n  left: 0;\n  top: 50%;\n  width: 100%;\n  height: 20%;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n","\n<template>\n  <div class=\"home-pane\">\n    <div class=\"home-header\">\n      <div>\n        <h1 class=\"theme-h1\">Welcome to Muse Home Page</h1>\n        <h2 class=\"theme-h2\">Choose an Application Component on the Left</h2>\n      </div>\n    </div>\n    <div class=\"home-footer\">\n      <div>\n        <h1 class=\"theme-h1\">Humanistic Practices</h1>\n        <h1 class=\"theme-h1\">Axiom Architectures</h1>\n      </div>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  let Home = {\n\n    data() { return { comp:'Home', key:'Home' } },\n    \n    mounted: function () {\n      this.mix().publish( 'Tocs', 'Close' ); }\n  }\n\n  import Dash from '../../../vue/dash/Dash.vue';\n  import Talk from '../../../vue/talk/Talk.vue';\n  import Cube from '../../../vue/comp/Cube.vue';\n  import Prin from '../../../vue/prin/Prin.vue';\n  import Comp from '../../../vue/comp/Comp.vue';\n  import Prac from '../../../vue/prac/Prac.vue';\n  import Disp from '../../../vue/disp/Disp.vue';\n  \n  Home.Dash = Dash;\n  Home.Talk = Talk;\n  Home.Cube = Cube;\n  Home.Prin = Prin;\n  Home.Comp = Comp;\n  Home.Prac = Prac;\n  Home.Disp = Disp;\n  \n  export default Home;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../../pub/css/themes/theme.less';\n  \n  @homeFS:2.0*@themeFS;\n  \n  .home-pane { position:absolute; left:0; top:0; width:100%; height:100%;\n    background-color:@theme-back; color:@theme-fore;\n\n    .home-head { position:absolute; left:0; top:20%;   width:100%; height:20%; .themeCenterItems(); }\n    \n    .home-midd { position:absolute; left:0; top:40%; width:100%; height:10%; .themeCenterItems(); }\n    \n    .home-list { .themeCenterSelf(); }\n  \n    .home-foot { position:absolute; left:0; top:50%; width:100%; height:20%; .themeCenterItems(); }\n  \n\n }\n \n</style>\n"]}, media: undefined });
+    inject("data-v-0f375030_0", { source: ".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.home-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  color: wheat;\n}\n.home-pane .home-head {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 20%;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.home-pane .home-midd {\n  position: absolute;\n  left: 0;\n  top: 40%;\n  width: 100%;\n  height: 10%;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.home-pane .home-list {\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.home-pane .home-foot {\n  position: absolute;\n  left: 0;\n  top: 50%;\n  width: 100%;\n  height: 20%;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n", map: {"version":3,"sources":["Home.vue","/Users/ax/Documents/prj/aug/pub/app/muse/Home.vue"],"names":[],"mappings":"AAAA;EACE,gBAAgB;EAChB,uBAAuB;EACvB,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,2BAA2B;EAC3B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,gBAAgB;EAChB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,6BAA6B;EAC7B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,mBAAmB;EACnB,+BAA+B;EAC/B,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;ACCA;EDCE,gBAAgB;ECClB,+BAAA;EDCE,aAAa;ECCf,mBAAA;EACA,kBAAA;EDCE,gBAAgB;ACClB;ADCA;ECCA,kBAAA;EDCE,OAAO;ECCT,MAAA;EDCE,WAAW;ECCb,YAAA;ADCA;AACA;ECCA,kBAAA;EDCE,OAAO;EACP,MAAM;EACN,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;AACb;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;EAChB,iBAAiB;AACnB;AACA;EACE,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,gBAAgB;EAChB,UAAU;EACV,SAAS;EACT,gBAAgB;AAClB;AACA;EACE,mBAAmB;EACnB,2CAA2C;AAC7C;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,MAAM;EACN,WAAW;EACX,YAAY;EACZ,uBAAuB;EACvB,YAAY;AACd;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB;AACA;EACE,aAAa;EACb,oBAAoB;EACpB,kBAAkB;EAClB,kBAAkB;AACpB;AACA;EACE,kBAAkB;EAClB,OAAO;EACP,QAAQ;EACR,WAAW;EACX,WAAW;EACX,aAAa;EACb,qBAAqB;EACrB,mBAAmB;EACnB,kBAAkB;AACpB","file":"Home.vue","sourcesContent":[".theme-h1 {\n  font-size: 8vmin;\n  margin: 2vmin 0 2vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h2 {\n  font-size: 6.4vmin;\n  margin: 1.6vmin 0 1.6vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h3 {\n  font-size: 5.12vmin;\n  margin: 1.28vmin 0 1.28vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h4 {\n  font-size: 4vmin;\n  margin: 1.024vmin 0 1.024vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h5 {\n  font-size: 3.2vmin;\n  margin: 0.82vmin 0 0.82vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-h6 {\n  font-size: 2.56vmin;\n  margin: 0.656vmin 0 0.656vmin 0;\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.theme-p {\n  font-size: 2vmin;\n  margin: 0.524vmin 0 0.524vmin 0;\n  display: grid;\n  justify-self: start;\n  align-self: center;\n  text-align: left;\n}\n.theme-article {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n}\n.theme-header {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 20%;\n}\n.theme-section {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 60%;\n}\n.theme-footer {\n  position: absolute;\n  left: 0;\n  top: 80%;\n  width: 100%;\n  height: 20%;\n}\n.theme-ul {\n  font-size: 4vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n  font-weight: bold;\n}\n.theme-ul li {\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul {\n  font-size: 3.5vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.theme-ul li ul li ul {\n  font-size: 3vmin;\n  padding: 0;\n  margin: 0;\n  list-style: none;\n}\n.theme-ul li ul li ul li {\n  padding-left: 1vmin;\n  margin: 0.25vmin 0.25vmin 0.25vmin 0.25vmin;\n}\n.home-pane {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background-color: black;\n  color: wheat;\n}\n.home-pane .home-head {\n  position: absolute;\n  left: 0;\n  top: 20%;\n  width: 100%;\n  height: 20%;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.home-pane .home-midd {\n  position: absolute;\n  left: 0;\n  top: 40%;\n  width: 100%;\n  height: 10%;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n.home-pane .home-list {\n  display: grid;\n  justify-self: center;\n  align-self: center;\n  text-align: center;\n}\n.home-pane .home-foot {\n  position: absolute;\n  left: 0;\n  top: 50%;\n  width: 100%;\n  height: 20%;\n  display: grid;\n  justify-items: center;\n  align-items: center;\n  text-align: center;\n}\n","\n<template>\n  <div class=\"home-pane\">\n    <div class=\"home-header\">\n      <div>\n        <h1 class=\"theme-h1\">Welcome to Muse Home Page</h1>\n        <h2 class=\"theme-h2\">Choose an Application Component on the Left</h2>\n      </div>\n    </div>\n    <div class=\"home-footer\">\n      <div>\n        <h1 class=\"theme-h1\">Humanistic Practices</h1>\n        <h1 class=\"theme-h1\">Axiom Architectures</h1>\n      </div>\n    </div>\n  </div>\n</template>\n\n<script type=\"module\">\n  \n  let Home = {\n\n    data() { return { comp:'Home', key:'Home' } },\n    \n    mounted: function () {\n      this.mix().publish( 'Tocs', 'Close' ); }\n  }\n\n  import Dash from '../../../vue/dash/Dash.vue';\n  import Cube from '../../../vue/comp/Cube.vue';\n  import Prin from '../../../vue/prin/Prin.vue';\n  import Comp from '../../../vue/comp/Comp.vue';\n  import Prac from '../../../vue/prac/Prac.vue';\n  import Disp from '../../../vue/disp/Disp.vue';\n  \n  Home.Dash = Dash;\n  Home.Cube = Cube;\n  Home.Prin = Prin;\n  Home.Comp = Comp;\n  Home.Prac = Prac;\n  Home.Disp = Disp;\n  \n  export default Home;\n  \n</script>\n\n<style lang=\"less\">\n  \n  @import '../../../pub/css/themes/theme.less';\n  \n  @homeFS:2.0*@themeFS;\n  \n  .home-pane { position:absolute; left:0; top:0; width:100%; height:100%;\n    background-color:@theme-back; color:@theme-fore;\n\n    .home-head { position:absolute; left:0; top:20%;   width:100%; height:20%; .themeCenterItems(); }\n    \n    .home-midd { position:absolute; left:0; top:40%; width:100%; height:10%; .themeCenterItems(); }\n    \n    .home-list { .themeCenterSelf(); }\n  \n    .home-foot { position:absolute; left:0; top:50%; width:100%; height:20%; .themeCenterItems(); }\n  \n\n }\n \n</style>\n"]}, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$r = undefined;
+  const __vue_scope_id__$n = undefined;
   /* module identifier */
-  const __vue_module_identifier__$r = undefined;
+  const __vue_module_identifier__$n = undefined;
   /* functional template */
-  const __vue_is_functional_template__$r = false;
+  const __vue_is_functional_template__$n = false;
   /* style inject SSR */
   
 
   
   var Home$1 = normalizeComponent_1(
-    { render: __vue_render__$r, staticRenderFns: __vue_staticRenderFns__$r },
-    __vue_inject_styles__$r,
-    __vue_script__$r,
-    __vue_scope_id__$r,
-    __vue_is_functional_template__$r,
-    __vue_module_identifier__$r,
+    { render: __vue_render__$n, staticRenderFns: __vue_staticRenderFns__$n },
+    __vue_inject_styles__$n,
+    __vue_script__$n,
+    __vue_scope_id__$n,
+    __vue_is_functional_template__$n,
+    __vue_module_identifier__$n,
     browser,
     undefined
   );

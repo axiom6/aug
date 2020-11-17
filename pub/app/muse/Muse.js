@@ -8,6 +8,8 @@ import Stream from '../../base/util/Stream.js';
 
 import Nav from '../../base/nav/Nav.js';
 
+import Touch from '../../base/nav/Touch.js';
+
 import Mixin from '../../base/vue/Mixin.js';
 
 import Vue from '../../lib/vue/vue.esm.browser.js';
@@ -36,6 +38,7 @@ Muse = (function() {
       };
       Muse.stream = new Stream(subjects, infoSpec);
       Muse.nav = new Nav(Muse.stream, batch, Muse.komps, true);
+      Muse.touch = new Touch(Muse.stream, Muse.nav.addInovToNavs(Muse.komps));
       Muse.build = new Build(batch, Muse.komps);
       //use.cache  = new Cache( Muse.stream )
       Data.buildInnov(batch, 'Data', 'Info');
@@ -85,13 +88,6 @@ Muse = (function() {
             name: 'Home',
             components: {
               Home: Home
-            }
-          },
-          {
-            path: '/talk',
-            name: 'Talk',
-            components: {
-              Talk: Home.Talk
             }
           },
           {
@@ -181,56 +177,8 @@ Muse = (function() {
       url: 'inno/Math.json',
       data: null
     },
-    Talk: {
-      url: 'talk/Talk.json',
-      data: null
-    },
     Imgs: {
       url: 'imgs/Imgs.json',
-      data: null
-    },
-    SkycTalk: {
-      url: 'talk/Skyc.json',
-      data: null
-    },
-    PrinTalk: {
-      url: 'talk/Prin.json',
-      data: null
-    },
-    RowsTalk: {
-      url: 'talk/Rows.json',
-      data: null
-    },
-    ConnTalk: {
-      url: 'talk/Conn.json',
-      data: null
-    },
-    InfoTalk: {
-      url: 'talk/Info.json',
-      data: null
-    },
-    KnowTalk: {
-      url: 'talk/Know.json',
-      data: null
-    },
-    WiseTalk: {
-      url: 'talk/Wise.json',
-      data: null
-    },
-    SoftTalk: {
-      url: 'talk/Soft.json',
-      data: null
-    },
-    DataTalk: {
-      url: 'talk/Data.json',
-      data: null
-    },
-    ScieTalk: {
-      url: 'talk/Scie.json',
-      data: null
-    },
-    NatuTalk: {
-      url: 'talk/Natu.json',
       data: null
     }
   };
@@ -248,18 +196,6 @@ Muse = (function() {
       prev: "Cube",
       south: "Talk",
       next: "Talk"
-    },
-    Talk: {
-      title: 'Talk',
-      key: 'Talk',
-      route: 'Talk',
-      pracs: {},
-      ikw: true,
-      icon: "fas fa-portrait",
-      north: "Home",
-      prev: "Home",
-      south: "Prin",
-      next: "Prin"
     },
     Prin: {
       title: 'Prin',

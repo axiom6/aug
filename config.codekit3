@@ -71,6 +71,14 @@
 		"oO": 0,
 		"oS": 1
 		},
+	"/firebase2.json": {
+		"ft": 524288,
+		"oA": 1,
+		"oAP": "/firebase2-min.json",
+		"oF": 0,
+		"oO": 0,
+		"oS": 1
+		},
 	"/LICENSE": {
 		"cB": 0,
 		"ft": 8192,
@@ -572,6 +580,74 @@
 		"opt": 0,
 		"plM": 3758088159,
 		"prP": 0
+		},
+	"/pub/app/talk/Home.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/app/talk/Home-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/app/talk/Home.vue": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/app/talk/Home.js",
+		"oF": 0
+		},
+	"/pub/app/talk/manifest.webmanifest": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/pub/app/talk/manifest.webmanifest",
+		"oF": 0
+		},
+	"/pub/app/talk/Muse.coffee": {
+		"ft": 32,
+		"ma": 0,
+		"mi": 0,
+		"oA": 0,
+		"oAP": "/pub/app/talk/Muse.js",
+		"oF": 0,
+		"oS": 1,
+		"sC": 0,
+		"tS": 0
+		},
+	"/pub/app/talk/muse.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/app/talk/muse.html",
+		"oF": 0
+		},
+	"/pub/app/talk/NightSky.jpeg": {
+		"ft": 16384,
+		"iS": 648909,
+		"jF": 0,
+		"oA": 0,
+		"oAP": "/pub/app/talk/NightSky.jpg",
+		"oF": 0,
+		"oIPL": 0,
+		"opt": 0,
+		"q": 100
+		},
+	"/pub/app/talk/Roll.js": {
+		"bF": 0,
+		"ft": 64,
+		"ma": 0,
+		"mi": 0,
+		"oA": 1,
+		"oAP": "/pub/app/talk/Roll-min.js",
+		"oF": 0,
+		"sC": 0,
+		"tS": 0
 		},
 	"/pub/base/mbox/Box.js": {
 		"bF": 0,
@@ -6100,6 +6176,14 @@
 		"sC": 0,
 		"tS": 0
 		},
+	"/pub/index.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/pub/index.html",
+		"oF": 0
+		},
 	"/pub/jitter/Body.js": {
 		"bF": 0,
 		"ft": 64,
@@ -11047,6 +11131,22 @@
 		"oAP": "/zzz/notes/prin/Note.txt",
 		"oF": 0
 		},
+	"/zzz/notes/text/advantage.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/text/advantage.txt",
+		"oF": 0
+		},
+	"/zzz/notes/text/BornToFollow.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/text/BornToFollow.txt",
+		"oF": 0
+		},
 	"/zzz/notes/text/BuildingCulture.txt": {
 		"cB": 0,
 		"ft": 8192,
@@ -11095,6 +11195,30 @@
 		"oAP": "/zzz/notes/text/Info.txt",
 		"oF": 0
 		},
+	"/zzz/notes/text/kind.dev.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/text/kind.dev.txt",
+		"oF": 0
+		},
+	"/zzz/notes/text/medicare.plans.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/text/medicare.plans.txt",
+		"oF": 0
+		},
+	"/zzz/notes/text/MedicareSupplement.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/text/MedicareSupplement.txt",
+		"oF": 0
+		},
 	"/zzz/notes/text/mental.txt": {
 		"cB": 0,
 		"ft": 8192,
@@ -11117,6 +11241,14 @@
 		"hM": 0,
 		"oA": 0,
 		"oAP": "/zzz/notes/text/Pace.txt",
+		"oF": 0
+		},
+	"/zzz/notes/text/PrimaryCare.txt": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/zzz/notes/text/PrimaryCare.txt",
 		"oF": 0
 		},
 	"/zzz/notes/text/Resize.txt": {

@@ -1,5 +1,7 @@
 {
   "hosting": [
+    { "target":"main", "public":"pub", "rewrites":{ "source":"pub/app/main/main.html",     "destination":"/app/main/main.html"     } },
+    { "target":"augm", "public":"pub", "rewrites":{ "source":"pub/app/augm/augm.html",     "destination":"/app/augm/augm.html"     } },
     { "target":"muse", "public":"pub", "rewrites":{ "source":"pub/app/muse/muse.html",     "destination":"/app/muse/muse.html"     } } ],
   "database": {
     "rules":   "pub/base/rules/database.rules.json" },
