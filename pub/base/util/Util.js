@@ -157,7 +157,7 @@ Util = class Util {
 
   // ---- Logging -------
 
-  // args should be the arguments passed by the original calling function
+    // args should be the arguments passed by the original calling function
   // This method should not be called directly
   static toStrArgs(prefix, args) {
     var arg, j, len1, str;
@@ -446,7 +446,7 @@ Util = class Util {
 
   // Screen absolute (left top width height) percent positioning and scaling
 
-  // Percent array to position mapping
+    // Percent array to position mapping
   static toPosition(array) {
     return {
       left: array[0],
@@ -601,19 +601,19 @@ Util = class Util {
   }
 
   /*
-  parse = document.createElement('a')
-  parse.href =  "http://example.com:3000/dir1/dir2/file.ext?search=test#hash"
-  parse.protocol  "http:"
-  parse.hostname  "example.com"
-  parse.port      "3000"
-  parse.pathname  "/dir1/dir2/file.ext"
-  parse.segments  ['dir1','dir2','file.ext']
-  parse.fileExt   ['file','ext']
-  parse.file       'file'
-  parse.ext        'ext'
-  parse.search    "?search=test"
-  parse.hash      "#hash"
-  parse.host      "example.com:3000"
+    parse = document.createElement('a')
+    parse.href =  "http://example.com:3000/dir1/dir2/file.ext?search=test#hash"
+    parse.protocol  "http:"
+    parse.hostname  "example.com"
+    parse.port      "3000"
+    parse.pathname  "/dir1/dir2/file.ext"
+    parse.segments  ['dir1','dir2','file.ext']
+    parse.fileExt   ['file','ext']
+    parse.file       'file'
+    parse.ext        'ext'
+    parse.search    "?search=test"
+    parse.hash      "#hash"
+    parse.host      "example.com:3000"
   */
   static parseURI(uri) {
     var a, j, len1, name, nameValue, nameValues, parse, value;
@@ -800,7 +800,7 @@ Util = class Util {
   }
 
   
-  // Not working
+    // Not working
   static toArray2(objects, whereIn = null, keyField = 'id') {
     var array, j, key, len1, object, where;
     where = whereIn != null ? whereIn : function() {
@@ -881,7 +881,7 @@ Util = class Util {
   // Implements a regular expression matcher that supports character matches,
   // '.', '^', '$', and '*'.
 
-  // Search for the regexp anywhere in the text.
+    // Search for the regexp anywhere in the text.
   static match(regexp, text) {
     if (regexp[0] === '^') {
       return Util.match_here(regexp.slice(1), text);

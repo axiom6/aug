@@ -34,8 +34,8 @@ Interact = class Interact extends Base {
 
   horz() {
     var $e, $p, dx, f, h, hc, hp, key, n, r, ref, spec, t, tp, w, x, y;
-    $p = $("<div class=\"panel\" style=\"position:relative; left:0; top: 0;  width:100%; height:100%; text-align:center;\"></div>");
-    $p.append("<hr             style=\"position:absolute; left:0; top:38%; width:100%; height:  1%; z-index:1; color:white; background-color:white;\"></hr>");
+    $p = $(`<div class="panel" style="position:relative; left:0; top: 0;  width:100%; height:100%; text-align:center;"></div>`);
+    $p.append(`<hr             style="position:absolute; left:0; top:38%; width:100%; height:  1%; z-index:1; color:white; background-color:white;"></hr>`);
     n = Util.lenObject(this.specs, UI.isChild);
     dx = 100 / n;
     w = dx * 0.6;
@@ -127,7 +127,7 @@ Interact = class Interact extends Base {
   }
 
   readyView() {
-    return $("<h1 style=\" display:grid; justify-self:center; align-self:center; \">Interact</h1>");
+    return $(`<h1 style=" display:grid; justify-self:center; align-self:center; ">Interact</h1>`);
   }
 
 };

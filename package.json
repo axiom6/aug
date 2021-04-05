@@ -5,10 +5,10 @@
   "author": "Tom Flaherty",
   "license": "MIT",
   "scripts": {
-    "main":   "pub/app/main/Roll.sh",
-    "muse":   "rollup --config pub/app/muse/Roll.js",
+    "main": "pub/app/main/Roll.sh",
+    "muse": "rollup --config pub/app/muse/Roll.js",
     "jitter": "rollup --config pub/app/jitter/Roll.js",
-    "augm":   "rollup --config pub/app/augm/Roll.js",
+    "augm": "rollup --config pub/app/augm/Roll.js",
     "talk": "rollup --config vue/talk/Roll.js",
     "prin": "rollup --config vue/prin/Roll.js",
     "comp": "rollup --config vue/comp/Roll.js",
@@ -32,13 +32,12 @@
     "interactjs": "^1.4.0-rc.13",
     "pegjs": "^0.10.0",
     "pegjs-backtrace": "^0.2.0",
-    "vue": "^2.5.22"
+    "vue": "^3.0.7"
   },
   "devDependencies": {
     "@vue/dev-server": "^0.1.1",
     "babel-eslint": "^10.0.1",
     "coffeescript": "^2.4.1",
-    "typescript": "^3.4.5",
     "lodash": ">=4.17.13",
     "node-sass": "^4.11.0",
     "rollup": "^1.7.3",
@@ -53,6 +52,7 @@
     "rollup-plugin-scss": "^1.0.1",
     "rollup-plugin-typescript2": "^0.21.1",
     "rollup-plugin-vue": "^4.6.1",
+    "typescript": "^3.4.5",
     "vue-template-compiler": "^2.5.22"
   },
   "devDependenciesLint": {

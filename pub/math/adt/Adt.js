@@ -59,7 +59,7 @@ Adt = class Adt {
   }
 
   
-  // Vector, Matrix, Numbers and Variables
+    // Vector, Matrix, Numbers and Variables
   static Vec(f, rest) {
     return f(rest);
   }
@@ -141,7 +141,7 @@ Adt = class Adt {
   }
 
   
-  // Trigometric
+    // Trigometric
   static Sin(u) {
     return Math.sin(u);
   }
@@ -192,7 +192,7 @@ Adt = class Adt {
   }
 
   
-  // Hyperbolic  with Inverse
+    // Hyperbolic  with Inverse
   static Sinh(u) {
     return Math.sinh(u);
   }
@@ -239,7 +239,7 @@ Adt = class Adt {
   }
 
   
-  // Subscripts Superscripts Limits
+    // Subscripts Superscripts Limits
   static Sus(u, a) {
     return u + a; // u_a  Subscript  u^b  Superscript is Power
   }
@@ -249,7 +249,7 @@ Adt = class Adt {
   }
 
   
-  // Finge
+    // Finge
   //Obj = (k,v)  => { k:v } # ???
   static Latex(o) {
     return o;

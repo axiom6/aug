@@ -16,6 +16,14 @@ firebase-debug.log*
 # it commented so all members can deploy to the same project(s) in .firebaserc.
 # .firebaserc
 
+.DS_Store
+*.local
+.firebase
+.idea
+dist
+node_modules
+zzz
+
 # Runtime data
 pids
 *.pid
@@ -44,7 +52,6 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
 
 # Optional npm cache directory
 .npm

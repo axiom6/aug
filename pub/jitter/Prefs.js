@@ -194,34 +194,34 @@ Prefs = class Prefs {
 /*
 
 toMeta:() ->
-meta = {} # Need to see if meta object is correct
-for own key, choice of @choices
-meta[key] = []
-for value in choice.array
-  meta[key].push( value )
-meta
+  meta = {} # Need to see if meta object is correct
+  for own key, choice of @choices
+    meta[key] = []
+    for value in choice.array
+      meta[key].push( value )
+  meta
 
 fromMeta:( metas ) ->
-choices = {}
-for own key, meta of metas
-choices[meta.key] = meta.key
-choices
+  choices = {}
+  for own key, meta of metas
+    choices[meta.key] = meta.key
+  choices
 
 toSchema:() ->
-schema       = {}
-schema.id    = @id
-schema.name  = @name
-schema.email = @email
-schema.meta  = @toMeta()
-schema
+  schema       = {}
+  schema.id    = @id
+  schema.name  = @name
+  schema.email = @email
+  schema.meta  = @toMeta()
+  schema
 
 fromSchema:( schema ) ->
-prefs         = {}
-prefs.id      = schema.id
-prefs.name    = schema.name
-prefs.choices = @fromMeta( schema.meta )
-prefs.schema  = schema      # For reviewing data
-prefs
+  prefs         = {}
+  prefs.id      = schema.id
+  prefs.name    = schema.name
+  prefs.choices = @fromMeta( schema.meta )
+  prefs.schema  = schema      # For reviewing data
+  prefs
 
 */
 export default Prefs;

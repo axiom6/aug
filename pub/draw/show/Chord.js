@@ -113,46 +113,46 @@ Chord = class Chord {
 /*
 
 xcreateFill:(  range  ) ->
-d3.scaleOrdinal().domain( d3.range(4) ).range( range )
+  d3.scaleOrdinal().domain( d3.range(4) ).range( range )
 
 xcreateGroups:() =>
-groups = @g.append("g").selectAll("path").data( (d) => d.groups ).enter().append("path") #
-.style("fill",   (d) => @fill( d.index ) )
-.style("stroke", (d) => @fill( d.index ) )
-groups.attr( "d", d3.arc().innerRadius(@inner).outerRadius(@outer) )
-groups.on( "mouseover", @fade(.1) ).on( "mouseout", @fade(1) )
-groups
+  groups = @g.append("g").selectAll("path").data( (d) => d.groups ).enter().append("path") #
+    .style("fill",   (d) => @fill( d.index ) )
+    .style("stroke", (d) => @fill( d.index ) )
+  groups.attr( "d", d3.arc().innerRadius(@inner).outerRadius(@outer) )
+  groups.on( "mouseover", @fade(.1) ).on( "mouseout", @fade(1) )
+  groups
 
 xupdateChords:() ->
-chords = @g.append("g").attr("class", "chord").selectAll("path").datam( @chords(@matrix) ).enter().append("path")
-.attr(  "d", d3.chord().radius(@inner))
-.style( "fill", (d) => @fill( d.target.index ) )
-.style( "opacity", 1 )
-chords
+  chords = @g.append("g").attr("class", "chord").selectAll("path").datam( @chords(@matrix) ).enter().append("path")
+    .attr(  "d", d3.chord().radius(@inner))
+    .style( "fill", (d) => @fill( d.target.index ) )
+    .style( "opacity", 1 )
+  chords
 
  * Returns an array of tick angles and labels, given a group.
 xcreateTicks:() ->
-ticks =  @g.append("g").selectAll("g").data( @chord.groups )
-ticks.enter().append("g").selectAll("g").data( @groupTicks   )
-#ticks.enter().append("g").attr("transform", (d) => "rotate(" + (d.angle * 180 / Math.PI - 90) + ")" + "translate(" + @outer + ",0)" )
-ticks.append("line").attr("x1", 1).attr("y1", 0).attr("x2", 5).attr("y2", 0).style( "stroke", "#000" )
-ticks.append("text").attr("x",  8).attr("dy", ".35em")
- .attr( "transform", (d) -> ( if d.angle > Math.PI then "rotate(180)translate(-16)" else null ) )
-ticks.style("text-anchor", (d) => ( if d.angle > Math.PI then "end" else null) )
-ticks.text( (d) => d.label )
-ticks
+  ticks =  @g.append("g").selectAll("g").data( @chord.groups )
+  ticks.enter().append("g").selectAll("g").data( @groupTicks   )
+  #ticks.enter().append("g").attr("transform", (d) => "rotate(" + (d.angle * 180 / Math.PI - 90) + ")" + "translate(" + @outer + ",0)" )
+  ticks.append("line").attr("x1", 1).attr("y1", 0).attr("x2", 5).attr("y2", 0).style( "stroke", "#000" )
+  ticks.append("text").attr("x",  8).attr("dy", ".35em")
+   .attr( "transform", (d) -> ( if d.angle > Math.PI then "rotate(180)translate(-16)" else null ) )
+  ticks.style("text-anchor", (d) => ( if d.angle > Math.PI then "end" else null) )
+  ticks.text( (d) => d.label )
+  ticks
 
 xgroupTicks: (d) ->
-k = (d.endAngle - d.startAngle) / d.value
-range = d3.range(0, d.value, 1000).map( (v,i) => { angle: v * k + d.startAngle, label: (if i % 5 then null else v / 1000 + "k") } )
-#console.log( 'groupTicks', d, k )
-range
+  k = (d.endAngle - d.startAngle) / d.value
+  range = d3.range(0, d.value, 1000).map( (v,i) => { angle: v * k + d.startAngle, label: (if i % 5 then null else v / 1000 + "k") } )
+  #console.log( 'groupTicks', d, k )
+  range
 
  * Returns an event handler for fading a given chord group.
 xfade: (opacity) =>
-(i) =>
-  @g.selectAll(".chord path").filter( (d) =>
-    d.source.index isnt i and d.target.index isnt i ).transition().style( "opacity", opacity )
+  (i) =>
+      @g.selectAll(".chord path").filter( (d) =>
+        d.source.index isnt i and d.target.index isnt i ).transition().style( "opacity", opacity )
 
  */
 export default Chord;

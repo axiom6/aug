@@ -11,28 +11,28 @@ GA = class GA {
   //   baseType,     float32Array (default), float64Array, .. baseType to be used for the Elements.
   //   mix           Set to true to enable interoperable sub-algebras. (defaults to false). }
 
-  // Basic
+    // Basic
   // var Hyper   = Algebra(1);       // Hyperbolic numbers.
   // var Complex = Algebra(0,1);     // Complex numbers.
   // var Dual    = Algebra(0,0,1);   // Dual numbers.
   // var H       = Algebra(0,2);     // Quaternions.
 
-  // Clifford
+    // Clifford
   // var Cl2 = Algebra(2);           // Clifford algebra for 2D vector space.
   // var Cl3 = Algebra(3);           // Clifford algebra for 3D vector space.
   // var CTS = Algebra(1,3);         // Clifford algebra for timespace vectors.
 
-  // SubAlgebras
+    // SubAlgebras
   // var Complex = Algebra({p:3,basis:['1','e123']});            // Complex Numbers as subalgebra of Cl3
   // var Quater  = Algebra({p:3,basis:['1','e12','e13','e23']}); // Quaternions as even subalgebra of Cl3
 
-  // Geometric
+    // Geometric
   // var PGA2D = Algebra(2,0,1);     // Projective Euclidean 2D plane. (dual)
   // var PGA3D = Algebra(3,0,1);     // Projective Euclidean 3D space. (dual)
   // var CGA2D = Algebra(3,1);       // conformal 2D space.
   // var CGA3D = Algebra(4,1);       // Conformal 3D space.
 
-  // High-Dimensional GA
+    // High-Dimensional GA
   // var DCGA3D = Algebra(6,2);      // Double Conformal 3D Space.
   // var TCGA3D = Algebra(9,3);      // Tripple Conformal 3D Space.
   // var DCGSTA = Algebra(4,8);      // Double Conformal Geometric Space Time Algebra.

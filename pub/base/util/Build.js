@@ -763,7 +763,7 @@ Build = class Build {
       for (j = 0, len1 = ref1.length; j < len1; j++) {
         dir = ref1[j];
         dim = this.getDim(col, dir);
-        htm += "    <table>\n      <thead>\n        ";
+        htm += `    <table>\n      <thead>\n        `;
         htm += `<tr><th>Plane</th><th>${dim}</th><th>Learn</th><th>Do</th><th>Share</th></tr>\n      </thead>\n      <tbody>\n`;
         ref2 = ['Info', 'Know', 'Wise'];
         for (k = 0, len2 = ref2.length; k < len2; k++) {
@@ -776,10 +776,10 @@ Build = class Build {
           share = this.getDir(sprac, dir);
           htm += `        <tr><td>${plane}:</td><td>${dim}</td><td>${learn.name}</td><td>${doit.name}</td><td>${share.name}</td></tr>\n`;
         }
-        htm += "      </tbody>\n    </table>\n";
+        htm += `      </tbody>\n    </table>\n`;
       }
     }
-    htm += "  </body>\n</html>\n";
+    htm += `  </body>\n</html>\n`;
     Data.saveHtml(name, htm);
   }
 

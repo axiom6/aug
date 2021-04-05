@@ -141,25 +141,55 @@ Test = class Test {
 
   prac() {
     var str;
-    str = " {\n  \"Collab\":{\"column\":\"Embrace\",\"row\":\"Learn\",\"plane\":\"Information\",\"icon\":\"fa-group\",\"id\":\"Collab\"},\n  \"Domain\":{\"column\":\"Innovate\",\"row\":\"Learn\",\"plane\":\"Information\",\"icon\":\"fa-empire\",\"id\":\"Domain\"},\n  \"Discover\":{\"column\":\"Encourage\",\"row\":\"Learn\",\"plane\":\"Information\",\"icon\":\"fa-external-link-square\",\"id\":\"Discover\"},\n  \"Adapt\":{\"column\":\"Embrace\",\"row\":\"Do\",\"plane\":\"Information\",\"icon\":\"fa-spinner\",\"id\":\"Adapt\"},\n  \"Tech\":{\"column\":\"Innovate\",\"row\":\"Do\",\"plane\":\"Information\",\"icon\":\"fa-wrench\",\"id\":\"Tech\"},\n  \"Benefit\":{\"column\":\"Encourage\",\"row\":\"Do\",\"plane\":\"Information\",\"icon\":\"fa-bar-chart-o\",\"id\":\"Benefit\"},\n  \"Change\":{\"column\":\"Embrace\",\"row\":\"Share\",\"plane\":\"Information\",\"icon\":\"fa-refresh\",\"id\":\"Change\"},\n  \"Deliver\":{\"column\":\"Innovate\",\"row\":\"Share\",\"plane\":\"Information\",\"icon\":\"fa-medkit\",\"id\":\"Deliver\"},\n  \"Govern\":{\"column\":\"Encourage\",\"row\":\"Share\",\"plane\":\"Information\",\"icon\":\"fa-compass\",\"id\":\"Govern\"},\n  \"Humanity\":{\"column\":\"Embrace\",\"row\":\"Learn\",\"plane\":\"Knowledge\",\"icon\":\"fa-question-circle\",\"id\":\"Humanity\"},\n  \"Science\":{\"column\":\"Innovate\",\"row\":\"Learn\",\"plane\":\"Knowledge\",\"icon\":\"fa-flask\",\"id\":\"Science\"},\n  \"Understand\":{\"column\":\"Encourage\",\"row\":\"Learn\",\"plane\":\"Knowledge\",\"icon\":\"fa-tripadvisor\",\"id\":\"Understand\"},\n  \"Conduct\":{\"column\":\"Embrace\",\"row\":\"Do\",\"plane\":\"Knowledge\",\"icon\":\"fa-magic\",\"id\":\"Conduct\"},\n  \"Cognition\":{\"column\":\"Innovate\",\"row\":\"Do\",\"plane\":\"Knowledge\",\"icon\":\"fa-object-group\",\"id\":\"Cognition\"},\n  \"Reason\":{\"column\":\"Encourage\",\"row\":\"Do\",\"plane\":\"Knowledge\",\"icon\":\"fa-connectdevelop\",\"id\":\"Reason\"},\n  \"Evolve\":{\"column\":\"Embrace\",\"row\":\"Share\",\"plane\":\"Knowledge\",\"icon\":\"fa-language\",\"id\":\"Evolve\"},\n  \"Educate\":{\"column\":\"Innovate\",\"row\":\"Share\",\"plane\":\"Knowledge\",\"icon\":\"fa-graduation-cap\",\"id\":\"Educate\"},\n  \"Culture\":{\"column\":\"Encourage\",\"row\":\"Share\",\"plane\":\"Knowledge\",\"icon\":\"fa-user-plus\",\"id\":\"Culture\"},\n  \"Trust\":{\"column\":\"Embrace\",\"row\":\"Learn\",\"plane\":\"Wisdom\",\"icon\":\"fa-github-square\",\"id\":\"Trust\"},\n  \"Nature\":{\"column\":\"Innovate\",\"row\":\"Learn\",\"plane\":\"Wisdom\",\"icon\":\"fa-paint-brush\",\"id\":\"Nature\"},\n  \"Truth\":{\"column\":\"Encourage\",\"row\":\"Learn\",\"plane\":\"Wisdom\",\"icon\":\"fa-lightbulb-o\",\"id\":\"Truth\"},\n  \"Experience\":{\"column\":\"Embrace\",\"row\":\"Do\",\"plane\":\"Wisdom\",\"icon\":\"fa-history\",\"id\":\"Experience\"},\n  \"Create\":{\"column\":\"Innovate\",\"row\":\"Do\",\"plane\":\"Wisdom\",\"icon\":\"fa-eye\",\"id\":\"Create\"},\n  \"Conscious\":{\"column\":\"Encourage\",\"row\":\"Do\",\"plane\":\"Wisdom\",\"icon\":\"fa-connectdevelop\",\"id\":\"Conscious\"},\n  \"Emerge\":{\"column\":\"Embrace\",\"row\":\"Share\",\"plane\":\"Wisdom\",\"icon\":\"fa-dropbox\",\"id\":\"Emerge\"},\n  \"Inspire\":{\"column\":\"Innovate\",\"row\":\"Share\",\"plane\":\"Wisdom\",\"icon\":\"fa-fire\",\"id\":\"Inspire\"},\n  \"Actualize\":{\"column\":\"Encourage\",\"row\":\"Share\",\"plane\":\"Wisdom\",\"icon\":\"fa-codepen\",\"id\":\"Actualize\"}\n} ";
+    str = ` {
+  "Collab":{"column":"Embrace","row":"Learn","plane":"Information","icon":"fa-group","id":"Collab"},
+  "Domain":{"column":"Innovate","row":"Learn","plane":"Information","icon":"fa-empire","id":"Domain"},
+  "Discover":{"column":"Encourage","row":"Learn","plane":"Information","icon":"fa-external-link-square","id":"Discover"},
+  "Adapt":{"column":"Embrace","row":"Do","plane":"Information","icon":"fa-spinner","id":"Adapt"},
+  "Tech":{"column":"Innovate","row":"Do","plane":"Information","icon":"fa-wrench","id":"Tech"},
+  "Benefit":{"column":"Encourage","row":"Do","plane":"Information","icon":"fa-bar-chart-o","id":"Benefit"},
+  "Change":{"column":"Embrace","row":"Share","plane":"Information","icon":"fa-refresh","id":"Change"},
+  "Deliver":{"column":"Innovate","row":"Share","plane":"Information","icon":"fa-medkit","id":"Deliver"},
+  "Govern":{"column":"Encourage","row":"Share","plane":"Information","icon":"fa-compass","id":"Govern"},
+  "Humanity":{"column":"Embrace","row":"Learn","plane":"Knowledge","icon":"fa-question-circle","id":"Humanity"},
+  "Science":{"column":"Innovate","row":"Learn","plane":"Knowledge","icon":"fa-flask","id":"Science"},
+  "Understand":{"column":"Encourage","row":"Learn","plane":"Knowledge","icon":"fa-tripadvisor","id":"Understand"},
+  "Conduct":{"column":"Embrace","row":"Do","plane":"Knowledge","icon":"fa-magic","id":"Conduct"},
+  "Cognition":{"column":"Innovate","row":"Do","plane":"Knowledge","icon":"fa-object-group","id":"Cognition"},
+  "Reason":{"column":"Encourage","row":"Do","plane":"Knowledge","icon":"fa-connectdevelop","id":"Reason"},
+  "Evolve":{"column":"Embrace","row":"Share","plane":"Knowledge","icon":"fa-language","id":"Evolve"},
+  "Educate":{"column":"Innovate","row":"Share","plane":"Knowledge","icon":"fa-graduation-cap","id":"Educate"},
+  "Culture":{"column":"Encourage","row":"Share","plane":"Knowledge","icon":"fa-user-plus","id":"Culture"},
+  "Trust":{"column":"Embrace","row":"Learn","plane":"Wisdom","icon":"fa-github-square","id":"Trust"},
+  "Nature":{"column":"Innovate","row":"Learn","plane":"Wisdom","icon":"fa-paint-brush","id":"Nature"},
+  "Truth":{"column":"Encourage","row":"Learn","plane":"Wisdom","icon":"fa-lightbulb-o","id":"Truth"},
+  "Experience":{"column":"Embrace","row":"Do","plane":"Wisdom","icon":"fa-history","id":"Experience"},
+  "Create":{"column":"Innovate","row":"Do","plane":"Wisdom","icon":"fa-eye","id":"Create"},
+  "Conscious":{"column":"Encourage","row":"Do","plane":"Wisdom","icon":"fa-connectdevelop","id":"Conscious"},
+  "Emerge":{"column":"Embrace","row":"Share","plane":"Wisdom","icon":"fa-dropbox","id":"Emerge"},
+  "Inspire":{"column":"Innovate","row":"Share","plane":"Wisdom","icon":"fa-fire","id":"Inspire"},
+  "Actualize":{"column":"Encourage","row":"Share","plane":"Wisdom","icon":"fa-codepen","id":"Actualize"}
+} `;
     return JSON.parse(str);
   }
 
   pracUpdate() {
     var str;
-    str = " {\n\"Collab\":{\"column\":\"Embrace\", \"row\":\"Learn\",\"plane\":\"Knowledge\",\"icon\":\"fa-group\", \"id\":\"Collab\"},\n\"Domain\":{\"column\":\"Innovate\",\"row\":\"Learn\",\"plane\":\"Knowledge\",\"icon\":\"fa-empire\",\"id\":\"Domain\"} } ";
+    str = ` {
+"Collab":{"column":"Embrace", "row":"Learn","plane":"Knowledge","icon":"fa-group", "id":"Collab"},
+"Domain":{"column":"Innovate","row":"Learn","plane":"Knowledge","icon":"fa-empire","id":"Domain"} } `;
     return JSON.parse(str);
   }
 
   pracAdd() {
     var str;
-    str = " { \"column\":\"Embrace\", \"row\":\"Learn\",\"plane\":\"Knowledge\",\"icon\":\"fa-group\", \"id\":\"Unite\" } ";
+    str = ` { "column":"Embrace", "row":"Learn","plane":"Knowledge","icon":"fa-group", "id":"Unite" } `;
     return JSON.parse(str);
   }
 
   pracPut() {
     var str;
-    str = " {\"column\":\"Encourage\",\"row\":\"Learn\",\"plane\":\"Wisdom\",\"icon\":\"fa-external-link-square\",\"id\":\"Discover\"} ";
+    str = ` {"column":"Encourage","row":"Learn","plane":"Wisdom","icon":"fa-external-link-square","id":"Discover"} `;
     return JSON.parse(str);
   }
 

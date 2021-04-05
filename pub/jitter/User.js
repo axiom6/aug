@@ -117,23 +117,23 @@ User = class User {
 /*
 
 nonceData:( email ) ->
-'action=get_posts_commented&amp;email='+email+'&amp;security='+@nonce()
+  'action=get_posts_commented&amp;email='+email+'&amp;security='+@nonce()
 
 nonce:() ->
-'XxYxZz' # 'wp_rest'
+  'XxYxZz' # 'wp_rest'
 
 if method is 'POST'
-settings.headers = { 'X-WP-Nonce':@nonce() }
+  settings.headers = { 'X-WP-Nonce':@nonce() }
 settings.beforeSend = ( xhr ) =>
-xhr.setRequestHeader( {'Accept':'*'} ) # 'Access-Control-Allow-Origin:', '*' X-WP-Nonce', @nonce() )
+  xhr.setRequestHeader( {'Accept':'*'} ) # 'Access-Control-Allow-Origin:', '*' X-WP-Nonce', @nonce() )
 settings.xhrFields = { withCredentials: false }
 
 @settings = {
-root:          "esc_url_raw( get_rest_url() )"
-nonce:         "wp_create_nonce( 'wp_rest' )"
-versionString: "wp/v2/"
-schema:        "$schema"
-cacheSchema:   true }
+  root:          "esc_url_raw( get_rest_url() )"
+  nonce:         "wp_create_nonce( 'wp_rest' )"
+  versionString: "wp/v2/"
+  schema:        "$schema"
+  cacheSchema:   true }
 
 */
 export default User;

@@ -196,14 +196,14 @@ Palettes = class Palettes {
 
 /*
 @scales:() ->
-scs = []
-for group in @groupRgbs10
-colors = []
-len = group.length
-for j in [0...len]
-  colors.push( group[len-1-j].hex )
-scs.push( chroma.scale( colors ) )
-scs
+  scs = []
+  for group in @groupRgbs10
+    colors = []
+    len = group.length
+    for j in [0...len]
+      colors.push( group[len-1-j].hex )
+    scs.push( chroma.scale( colors ) )
+  scs
 */
 Palettes.codes15 = ['PW', 'LW', 'PD', 'LF', 'LD', 'MW', 'DW', 'MD', 'MF', 'LH', '', 'DH', 'DF', 'DD', 'OW'];
 

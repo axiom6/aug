@@ -15,7 +15,7 @@ html {
   perspective: 1000px; }
 
 .figure {
-  background: url("../svg/walk-ing4.svg") no-repeat;
+  background: url("svg/walk-ing4.svg") no-repeat;
   width: 182px;
   height: 266px;
   transform: translate3D(200px, 50px, 0);
@@ -24,17 +24,17 @@ html {
   perspective: 1000px; }
 
 .fore {
-  background: url("../svg/fore.svg");
+  background: url("svg/fore.svg");
   transform: translateZ(0);
   animation: bk 7s -5s linear infinite; }
 
 .mid {
-  background: url("../svg/mid.svg");
+  background: url("svg/mid.svg");
   animation: bk 15s -5s linear infinite;
   transform: translateZ(0); }
 
 .bk {
-  background: url("../svg/bkwalk2.svg");
+  background: url("svg/bkwalk2.svg");
   animation: bk 20s -5s linear infinite;
   transform: translateZ(0); }
 

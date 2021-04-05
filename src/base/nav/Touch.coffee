@@ -1,5 +1,5 @@
 
-import Tocca from '../../../pub/lib/touch/Tocca.esm.js'
+import Tocca from '../../lib/touch/Tocca.esm.js'
 
 
 class Touch

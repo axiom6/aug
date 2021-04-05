@@ -179,7 +179,7 @@ Data = class Data {
   }
 
   
-  // ------ Quick JSON read ------
+    // ------ Quick JSON read ------
   static read(url, callback) {
     if (Util.isObj(url)) {
       Data.readFile(url, callback);

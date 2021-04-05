@@ -233,13 +233,13 @@ Hue = class Hue extends Radar {
 
   /*
   hueWedges:( dh, dr, r1, r2 ) ->
-  g = @g.selectAll("g").append("svg:g")
-  for hue in [0...360] by dh
-  for r in [r1...r2] by dr
-    lite = 80 - (r-r1) / (r2-r1) * 50
-    @wedge( "hsla(#{hue},100%,#{lite}%,1.0)", g, r, r+dr, hue-dh/2, hue+dh/2 )
-  @grid(dh)
-  return
+    g = @g.selectAll("g").append("svg:g")
+    for hue in [0...360] by dh
+      for r in [r1...r2] by dr
+        lite = 80 - (r-r1) / (r2-r1) * 50
+        @wedge( "hsla(#{hue},100%,#{lite}%,1.0)", g, r, r+dr, hue-dh/2, hue+dh/2 )
+    @grid(dh)
+    return
   */
   hsvWedges(dh, dr, r1, r2) {
     var g, hue, i, j, r, ref, ref1, ref2, ref3, sat;

@@ -2,7 +2,7 @@ var Basis;
 
 Basis = class Basis {
   
-  // signature  default basis names
+    // signature  default basis names
   // 1,0,1   1,e0,e1,e01
   // 1,1,0   1,e1,e2,e12
   // 2,0,0   1,e1,e2,e12
