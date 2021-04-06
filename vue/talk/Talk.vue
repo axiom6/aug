@@ -12,6 +12,7 @@
 
 <script type="module">
 
+  import { inject } from 'vue';
   import Sect from './Sect.vue';
   import Area from '../elem/Area.vue';
 
@@ -24,30 +25,32 @@
     methods: {
       
       doTalk: function(talkKey) {
-        this.nav().pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None',
+        this.nav.pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None',
           presKey:'None', imgsNum:0, imgsIdx:0 } );
-        this.nav().dirsNavd('Init'); },
+        this.nav.dirsNavd('Init'); },
 
       onNav: function (obj) {
-        if( this.nav().isMyNav( obj, 'Talk' ) ) {
+        if( this.nav.isMyNav( obj, 'Talk' ) ) {
             this.onSect( obj.pracKey, obj.dispKey, obj.presKey, obj.imgsIdx ); } },
 
       onSect: function( talkKey, sectKey, presKey, imgsIdx ) {
-        let  dispObj = this.mix().sectObject( talkKey, sectKey );
-        this.sectObj = this.mix().isDef(presKey) ? this.mix().presObject(dispObj,presKey) : dispObj;
-     // if( !this.mix().isDef(this.sectObj) ) {
+        let  dispObj = this.mix.sectObject( talkKey, sectKey );
+        this.sectObj = this.mix.isDef(presKey) ? this.mix.presObject(dispObj,presKey) : dispObj;
+     // if( !this.mix.isDef(this.sectObj) ) {
         console.log( 'Talk.vue.onSect()',
           { dispObj:dispObj, sectObj:this.sectObj, talkKey:talkKey, sectKey:sectKey, presKey:presKey } );
         this.sectObj.imgsIdx = imgsIdx;
-        this.imgsObj = this.mix().compObject( 'Imgs' );
+        this.imgsObj = this.mix.compObject( 'Imgs' );
         
       } },
 
     beforeMount: function() {
-      this.talkObjs = this.mix().compObject('Talk'); },
+      this.mix = inject('mix');
+      this.nav = inject('nav');
+      this.talkObjs = this.mix.compObject('Talk'); },
 
     mounted: function () {
-      this.mix().subscribe(  "Nav", 'Talk.vue', (obj) => {
+      this.mix.subscribe(  "Nav", 'Talk.vue', (obj) => {
         this.onNav( obj ); } ); }
     
   }
@@ -58,7 +61,7 @@
 
 <style lang="less">
   
-  @import '../../pub/css/themes/theme.less';
+  @import '../../css/themes/theme.less';
   
   @sectFS:2.0*@themeFS;
   

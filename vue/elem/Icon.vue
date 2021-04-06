@@ -9,7 +9,9 @@
 </template>
 
 <script type="module">
-  
+
+  import { inject } from 'vue';
+
   let Icon = {
 
     props: { icon:String, name:String, summ:String, size:Number, fnClick:Function },
@@ -17,14 +19,17 @@
     methods: {
       
       hasSumm: function() {
-        return this.mix().isDef(this.summ); },
+        return this.mix.isDef(this.summ); },
       
       doClick: function() {
-        if( this.mix().isDef(this.fnClick) ) {
+        if( this.mix.isDef(this.fnClick) ) {
           this.fnClick(this.name); } },
 
       style: function() {
-        return this.mix().fontSizeCss(this.size); }
+        return this.mix.fontSizeCss(this.size); }
+
+      mounted: function () {
+        this.mix = inject('mix'); }
     }
   }
   
@@ -34,7 +39,7 @@
 
 <style lang="less">
   
-  @import '../../pub/css/themes/theme.less';
+  @import '../../css/themes/theme.less';
   
   @iconFS:2.0*@themeFS;
 

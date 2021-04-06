@@ -10,7 +10,9 @@
 </template>
 
 <script type="module">
-  
+
+  import { inject } from 'vue';
+
   let Item = {
 
     props: { icon:String, name:String, desc:String, size:Number, fnClick:Function },
@@ -18,14 +20,17 @@
     methods: {
 
       hasProp: function(prop) {
-        return this.mix().isDef(this[prop]); },
+        return this.mix.isDef(this[prop]); },
       
       doClick: function() {
-        if( this.mix().isDef(this.fnClick) ) {
+        if( this.mix.isDef(this.fnClick) ) {
           this.fnClick(this.name); } },
 
       style: function() {
-        return this.mix().fontSizeCss(this.size); }
+        return this.mix.fontSizeCss(this.size); }
+
+      mounted: function () {
+        this.mix = inject('mix'); }
 
     }
     
@@ -37,7 +42,7 @@
 
 <style lang="less">
   
-  @import '../../pub/css/themes/theme.less';
+  @import '../../css/themes/theme.less';
   
   @itemFS:1.0*@themeFS;
 

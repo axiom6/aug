@@ -8,7 +8,7 @@
 </script>
 
 <style lang="less">
-  @import '../../../pub/css/themes/theme.less';
+  @import '../../../css/themes/theme.less';
   @googFS:@themeFS;
   .goog-pane { background-color:@theme-back; font-size:@googFS; }
 </style>

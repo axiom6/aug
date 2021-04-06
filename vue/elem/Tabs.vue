@@ -9,6 +9,9 @@
 
 <script type="module">
 
+  import { inject } from 'vue';
+
+
   export default {
 
     props: { route:String, pages:Object, position:{ default:'full', type:String } },
@@ -18,33 +21,39 @@
     
     methods: {
       doTabs: function () {
-        this.nav().setPages(this.route,this.pages); // Will only set pages if needed
-        let first   = this.pageKey==='None' && !this.mix().hasInov(this.route);
-        let pageKey = this.nav().getPageKey(this.route);
+        this.mix = inject('mix');
+        this.nav.setPages(this.route,this.pages); // Will only set pages if needed
+        let first   = this.pageKey==='None'; // && !this.mix.hasInov(this.route);
+        let pageKey = this.nav.getPageKey(this.route);
         // console.log( 'Tabs.init()', obj, { route:this.route, pageKey:pageKey, pages:this.pages } );
         if( first ){ this.doPage(pageKey); }
         else       { this.onPage(pageKey); } },
       isPage: function (pageKey) {
-        return this.mix().isDef(this.route) && this.mix().isDef(pageKey); },
+        // console.log( 'Tabs.isPage()', { route:this.route, pageKey:pageKey }  );
+        return this.mix.isDef(this.route) && this.mix.isDef(pageKey); },
       onPage: function (pageKey) {
         if( this.isPage(pageKey) ) {
           this.pageKey = pageKey;
-          this.nav().setPageKey( this.route, pageKey ); }
+          this.nav.setPageKey( this.route, pageKey ); }
         else {
           console.log( 'Tabs.onPage() bad pageKey', { route:this.route, pageKey:pageKey } ); } },
       doPage: function (pageKey) {
         if( this.isPage(pageKey) ) {
             this.onPage(pageKey) ;
             let obj = { source:'Tabs',route:this.route }
-            obj.inovKey = this.mix().hasInov(this.route) ? pageKey : 'None';
-             this.nav().pub(obj); } },
+            obj.inovKey = 'None'; // this.mix.hasInov(this.route) ? pageKey : 'None';
+             this.nav.pub(obj); } },
       stylePos: function () {
         return this.positions[this.position]; },
       classTab: function (pageKey) {
         return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },
+
     mounted: function() {
+      this.mix = inject('mix');
+      this.nav = inject('nav');
       this.doTabs();
-      this.mix().subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {
+      // console.log( 'Tabs.onMounted()', { route:this.route, pages:this.pages } );
+      this.mix.subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {
         if( obj.source !== 'Tabs'  ) { // && obj.route === this.route
           this.$nextTick( function() {
             this.doTabs(); } ); } } ); }
@@ -54,7 +63,7 @@
 
 <style lang="less">
   
-  @import '../../pub/css/themes/theme.less';
+  @import '../../css/themes/theme.less';
   
   @tabsFS:1.5*@themeFS;
   

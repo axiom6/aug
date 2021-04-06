@@ -10,28 +10,30 @@
 
 <script type="module">
 
+  import { inject } from 'vue';
+
   let Math = {
 
-    data() { return { route:'Math',
-      maths:[
+    setup() {
+
+      const mix = inject('mix');
+      const route = 'Math';
+      const maths = [
         { title:'MathML', key:'ML' },
-        { title:'MathEQ', key:'EQ' } ] } },
+        { title:'MathEQ', key:'EQ' } ];
 
-    methods: {
-      myRoute: function() {
-        return this.mix().isRoute('Math'); } },
+      const myRoute = function() {
+        return mix.isRoute('Math'); }
 
-    mounted: function () {} 
-
+    return { myRoute, maths }; }
   }
-
   export default Math;
 
 </script>
 
 <style lang="less">
   
-  @import '../../pub/css/themes/theme.less';
+  @import '../../css/themes/theme.less';
 
   @mathFS:@themeFS;
   

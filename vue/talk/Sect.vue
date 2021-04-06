@@ -16,9 +16,11 @@
 </template>
     
     <script type="module">
-    
+
+
       import Prac from './Prac.vue';
       import Disp from './Disp.vue';
+      import {inject} from "vue";
     
       let Sect = {
     
@@ -40,21 +42,26 @@
             this.$nextTick( function() {
               let pics = this.imgsObj[imgs]['pics'];
               let idx  = this.sectObj.imgsIdx;
-              this.nav().imgsNum = pics.length;
+              this.nav.imgsNum = pics.length;
               let src  = "../../data/imgs/" + this.imgsObj[imgs]['dir'] + pics[idx].src;
               let elem = this.$refs[refn];
-              this.mix().appendImgsHW( src, elem ); } ) },
+              this.mix.appendImgsHW( src, elem ); } ) },
           
             //console.log( 'sect.htmlImgs', {$refs:this.$refs,refn:refn,elem:elem,
             //    pics:pics,pic:pics[idx],src:src,idx:idx,num:pics.length,sectObj:this.sectObj} ); } )
 
           hasSect: function() {
-            let has = this.mix().isDef(this.sectObj);
+            this.mix = inject('mix')
+            let has = this.mix.isDef(this.sectObj);
             console.log( 'Sect.hasSect()', { has:has, sectObj:this.sectObj } );
-            return this.mix().isDef(this.sectObj); },
+            return this.mix.isDef(this.sectObj); },
           
           hasProp: function(prop) {
-            return this.mix().isDef(this.sectObj[prop]) }
+            return this.mix.isDef(this.sectObj[prop]) }
+
+          mounted: function () {
+            this.mix = inject('mix');
+            this.nav = inject('nav'); }
           
         }
       }
@@ -65,7 +72,7 @@
     
     <style lang="less">
       
-      @import '../../pub/css/themes/theme.less';
+      @import '../../css/themes/theme.less';
       
       @sectFS:2.0*@themeFS;  //  border-radius:0.5*@sectFS;
       

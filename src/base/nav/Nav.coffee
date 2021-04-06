@@ -3,10 +3,12 @@ import Build from '../util/Build.js'
 
 class Nav
 
-  constructor:( @stream, @batch, @komps=null, @isMuse=false ) ->
+  constructor:( @stream, @batch,  @routes, @routeNames, @komps, @isMuse=false ) ->
+    @dirs       = { west:true, east:true, north:true, south:true, prev:true, next:true }
     @navs       = @addInovToNavs( @komps )
+    @touch      =  null
     @build      =  new Build( @batch )
-    @$router    =  null
+    @router     =  null
     @source     = 'None'
     @route      = 'Home'
     @routeLast  = 'None'
@@ -15,18 +17,19 @@ class Nav
     @dispKey    = 'None'
     @warnMsg    = 'None'
     @inovKey    = 'None' # Only used by Tabs to Tocs
+    @pageKey    = 'None'
     @presKey    = 'None'
     @imgsIdx    = 0
     @imgsNum    = 0
-    @mix        = null
     @pages      = {}
     @keyEvents()
+
 
   pub:( msg ) ->
     if @msgOK(msg)
       obj = @toObj( msg )
-      @doRoute( obj.route ) # Creates route if necessary to publish to
       console.log('Nav.pub()', obj )
+      @doRoute( obj ) # Creates route if necessary to publish to
       @stream.publish( 'Nav',  obj )
     return
 
@@ -37,10 +40,11 @@ class Nav
 
   toObj:( msg ) ->
     @set( msg )
-    @warnMsg = 'None' if not msg.warnMsg?
-    @source  = 'None' if not msg.source?
-    @inovKey = if @mix().isDef(msg.inovKey) then msg.inovKey else @compKey
-    { source:@source, route:@route, compKey:@compKey, inovKey:@inovKey, pracKey:@pracKey,
+    @warnMsg = 'None'      if not msg.warnMsg?
+    @source  = 'None'      if not msg.source?
+    #inovKey = msg.inovKey if     msg.inovKey?
+    @pageKey = @getPageKey( @route, false )
+    { source:@source, route:@route, compKey:@compKey, inovKey:@inovKey, pageKey:@pageKey, pracKey:@pracKey,
     dispKey:@dispKey,warnMsg:@warnMsg, imgsIdx:@imgsIdx }
 
   set:( msg ) ->
@@ -48,22 +52,18 @@ class Nav
       @[key] = val
     return
 
-  setMix:( methods ) ->
-    @mix = methods.mix # mix
-    return
-
-  doRoute:( route ) ->
-    return if route is @routeLast or @isInov(route)
-    if route? and route isnt 'None'
-      @dirsNavd(  route )
-      if @$router?
-         @$router.push( { name:route } )
+  doRoute:( obj ) ->
+    return if obj.route is @routeLast or @isInov(obj.route)
+    # console.log( 'Nav.doRoute()', { routeNames:@routeNames } )
+    if obj.route? and @inArray(obj.route,@routeNames )
+      if @router?
+         @router.push( name:obj.route )
       else
-         console.error( 'Nav.doRoute() $router not set' )
+         console.error( 'Nav.doRoute() router not set' )
       @routeLast = @route
-      @route     =  route
-    else
-      console.error( 'Nav.doRoute() undefined route' )
+      @route     =  obj.route
+    else                                                                                                                     
+      console.error( 'Nav.doRoute() undefined or unnamed route', obj.route )
     return
 
   hasCompKey:( compKey, dir=null ) ->
@@ -93,19 +93,16 @@ class Nav
     document.addEventListener('keydown', (event) => keyDir(event) )
     return
 
-  dir:( direct, event=null ) =>
+  dir:( direct ) =>
     @source = direct
-    if event is null then {}
     if @isMuse
       switch @route
         when 'Comp' then @dirComp( direct )
         when 'Prac' then @dirPrac( direct )
         when 'Disp' then @dirDisp( direct )
-        when 'Talk' then @dirTalk( direct )
         else             @dirComp( direct )
     else
-      @dirComp( direct, dirs )
-    @dirsNavd( @route )
+      @dirComp( direct )
     return
 
   dirComp:( dir ) ->
@@ -114,7 +111,7 @@ class Nav
     if @hasCompKey( @compKey, dir )
       msg.compKey = @adjCompKey( @compKey,dir )
       msg.route   = @toRoute( msg.compKey )
-      @doRoute( msg.route )
+      @doRoute( { route:msg.route } )
       @pub( msg )
     else if @hasActivePageDir( @route, dir )
       @dirPage( dir )
@@ -124,7 +121,7 @@ class Nav
 
   # Map compKeys to a single Comp route for Muse
   toRoute:( compKey ) ->
-    if @isMuse and @inArray(compKey,['Info','Data','Know','Wise']) then 'Comp' else compKey
+    if @isMuse and @inArray(compKey,['Info','Know','Wise']) then 'Comp' else compKey
 
   dirPrac:( dir ) ->
     msg = {}
@@ -158,85 +155,12 @@ class Nav
        @log( msg, "Missing adjacent displine for #{dir} #{@compKey} #{@pracKey}" )
     return
 
-  dirTalk:( dir ) ->
-    dirs = @dirsNavdTalk()
-    return if @pracKey is 'None' or not dirs[dir]
-    msg         = {}
-    msg.source  = "#{'Nav.dirTalk'}(#{dir})"
-    sectObj     = @mix().sectObject( @pracKey, @dispKey )
-    hasChildren = @mix().isArray(sectObj.keys)
-    @dispKey    = sectObj.name
-    @imgsNum    = 0 if not sectObj['imgs']
-    @pageKey    = sectObj.keys[0] if not @mix().isDef(@pageKey) or not @mix().inArray(@pageKey,sectObj.keys)
-    if @imgsNum > 0 and ( dir is 'west' or dir is 'east' )
-      @imgsIdx = @prevImg() if dir is 'west'
-      @imgsIdx = @nextImg() if dir is 'east'
-    else if @isPageTalk( sectObj, hasChildren, @presKey )
-       @presKey = switch dir
-         when 'west','north','prev' then @prevKey(  @presKey, sectObj.keys )
-         when 'east','south'        then @nextKey(  @presKey, sectObj.keys )
-         when 'next             '   then @nextPage( @presKey, sectObj.keys, sectObj.peys ) # Special case
-         else 'None'
-    else
-       @dispKey = switch dir
-         when 'west'  then @prevKey(  @dispKey, sectObj.peys )
-         when 'east'  then @nextKey(  @dispKey, sectObj.peys )
-         when 'north' then @presKey = 'None';          @dispKey
-         when 'south' then @presKey = sectObj.keys[0]; @dispKey
-         when 'prev'  then @prevKey(  @dispKey, sectObj.peys )
-         when 'next'  then @nextDisp( @dispKey, sectObj.keys, sectObj.peys )  # Special case
-         else              'None'
-    # console.log( 'Nav.dirTalk()', { dir:dir, pracKey:@pracKey, dispKey:@dispKey, presKey:@presKey, imgsIdx:@imgsIdx,
-    # sectObj:sectObj, hasChildren:hasChildren } )
-    msg.dispKey = @dispKey
-    msg.presKey = @presKey
-    msg.imgsIdx = @imgsIdx
-    @pub( msg )
-    return
 
   prevImg:() ->
     if @imgsIdx > 0 then @imgsIdx-1 else @imgsNum-1
 
   nextImg:() ->
     if @imgsIdx < @imgsNum-1 then @imgsIdx+1 else 0
-
-  isPageTalk:( sectObj, hasChildren, presKey ) ->
-    @ and hasChildren and sectObj[presKey]?
-
-  dirsNavd:( route ) ->
-    dirs = @dirsNavdTalk(route)
-    @stream.publish( 'Navd',  dirs )
-    return
-
-  dirsNavdTalk:( route ) ->
-    dirs = { west:true, east:true, north:true, south:true, prev:true, next:true }
-    return dirs if route isnt 'Talk' or @pracKey is 'None'
-    sectObj     = @mix().sectObject( @pracKey, @dispKey )
-    hasChildren = @mix().isArray(sectObj.keys)
-    if @isPageTalk( sectObj, hasChildren, @presKey )
-      @dirsNavdTalkPage( dirs, sectObj )
-    else
-      @dirsNavdTalkSect( dirs, sectObj, hasChildren )
-    dirs
-
-  dirsNavdTalkSect:( dirs, sectObj, hasChildren ) ->
-    dirs.west   = sectObj.name isnt sectObj.peys[0]
-    dirs.prev   = dirs.west
-    dirs.east   = sectObj.name isnt sectObj.peys[sectObj.peys.length-1]
-    dirs.next   = dirs.east
-    dirs.north  = false
-    dirs.south  = hasChildren
-    return
-
-  dirsNavdTalkPage:( dirs, sectObj ) ->
-    pageObj     = @mix().presObject(  sectObj, @presKey )
-    dirs.west   = pageObj.name isnt sectObj.keys[0]
-    dirs.prev   = dirs.west
-    dirs.east   = pageObj.name isnt sectObj.keys[sectObj.keys.length-1]
-    dirs.next   = true # dirs.east
-    dirs.north  = true
-    dirs.south  = false
-    return
 
   prevKey:( key, keys ) ->
     kidx = keys.indexOf(key)
@@ -268,20 +192,18 @@ class Nav
       @nextKey( dispKey, peys )
 
   dirPage:( dir ) ->
-    pagesKey = @getPagesComp( @route, @compKey )
     msg = {}
     msg.source = "#{'Nav.dirPage'}(#{dir})"
-    pageKey = if @hasActivePageDir(@route,dir) then @movePage(@pages[pagesKey],dir) else 'None'
+    pageKey = if @hasActivePageDir(@route,dir) then @movePage(@pages[@route],dir) else 'None'
     if pageKey isnt 'None'
-      @setPageKey( pagesKey, pageKey )
+      @setPageKey( @route, pageKey )
       # @pub( msg )
     else
       @log( msg, warnMsg:"Cannot find pageKey for #{dir}" )
     return
 
   movePage:( page, dir  ) ->
-    pagesKey = @getPagesComp( @route, @compKey )
-    pageKey  = @getPageKey( pagesKey )
+    pageKey  = @getPageKey( @route )
     len      = page.keys.length
     if pageKey isnt 'None'
       idx = page.keys.indexOf(pageKey)
@@ -298,12 +220,19 @@ class Nav
     ndx = len-1 if ndx <  0
     ndx
 
+  isShow:( route, pageKey ) ->
+    pageNav = @getPageKey( route, true )
+    # pageNav = if pageNav is 'None' then @getPageDef(@pages[@route].pages) else pageNav
+    # console.log( 'Nav.isShow()', { pageKey:pageKey, pageNav:pageNav, equals:pageKey===pageNav } );
+    pageKey is pageNav
+
   # An important indicator of when Comps and Tabs are instanciated
   setPages:( route, pages ) ->
-    return if @hasPages(route,false)
+    return if @hasPages(route,false )
     @pages[route] = {}
     @pages[route].pages = pages
     @pages[route].keys  = Object.keys(pages)
+    @pageKey            = @getPageKey( route, false ) # Check
     # console.log( 'Nav.setPages()', { route:route, has:@hasPages(route), pages:@pages[route] } )
     return
 
@@ -349,6 +278,7 @@ class Nav
      @hasActivePage( route ) and ( dir is 'west' or dir is 'east' )
 
   isMyNav:( obj, route ) ->
+    # console.log( 'Nav.isMyNav()', { route1:route, route2:obj.route, obj:obj } )
     obj.route is route # and @hasActivePage(route)
 
   adjPracObj:( dir ) ->
@@ -369,6 +299,9 @@ class Nav
   isDef:(d) ->
     d isnt null and typeof(d) isnt 'undefined' and d isnt 'None'
 
+  isStr:(s) ->
+    @isDef(s) and typeof (s) == "string" and s.length > 0
+
   isArray:(a) ->
     @isDef(a) and typeof(a)!="string" and a.length? and a.length > 0
 
@@ -384,12 +317,12 @@ class Nav
   addInovToNavs:( komps ) ->
     return komps? if not @isMuse
     navs = Object.assign( {}, komps )
-    navs = @insInov( navs, 'Info', 'Data', 'Know' )
+    #avs = @insInov( navs, 'Info', 'Data', 'Know' )
     navs
 
   insInov:( navs, prev, inov, next ) ->
-    navs[prev].south = inov
-    navs[prev].next  = inov
+    # navs[prev].south = inov
+    # navs[prev].next  = inov
     navs[inov] = { north:prev, prev:prev, south:next, next:next }
     navs[next].north = inov
     navs[next].prev  = inov

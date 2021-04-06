@@ -1,18 +1,16 @@
 
 <template>
-  <div class="home">
-    <div class="head">
+  <div class="home-pane">
+    <div class="home-header">
       <div>
-        <h1>Welcome to Muse Home Page</h1>
-        <h2>Choose an Application Component on the Left</h2>
+        <h1 class="theme-h1">Welcome to Muse Home Page</h1>
+        <h2 class="theme-h2">Choose an Application Component on the Left</h2>
       </div>
     </div>
-    <div class="midd">
-      <h1>Humanistic Practices</h1>
-    </div>
-    <div class="foot">
+    <div class="home-footer">
       <div>
-        <h1>Axiom Architectures</h1>
+        <h1 class="theme-h1">Humanistic Practices</h1>
+        <h1 class="theme-h1">Axiom Architectures</h1>
       </div>
     </div>
   </div>
@@ -25,16 +23,18 @@
     data() { return { comp:'Home', key:'Home' } },
     
     mounted: function () {
-      this.publish( 'Tocs', 'Close' ); }
+      this.mix().publish( 'Tocs', 'Close' ); }
   }
 
   import Dash from '../../../vue/dash/Dash.vue';
+  import Cube from '../../../vue/comp/Cube.vue';
   import Prin from '../../../vue/prin/Prin.vue';
   import Comp from '../../../vue/comp/Comp.vue';
   import Prac from '../../../vue/prac/Prac.vue';
   import Disp from '../../../vue/disp/Disp.vue';
   
   Home.Dash = Dash;
+  Home.Cube = Cube;
   Home.Prin = Prin;
   Home.Comp = Comp;
   Home.Prac = Prac;
@@ -48,23 +48,20 @@
   
   @import '../../../pub/css/themes/theme.less';
   
-  .grid3x1() { display:grid; grid-template-columns:1fr; grid-template-rows:30fr 40fr 30fr;
-      grid-template-areas:"head" "midd" "foot"; }
+  @homeFS:2.0*@themeFS;
   
-  .home { .grid3x1(); position:relative; left:0; top:0; right:0; bottom:0;
-    background-color:@theme-back; color:@theme-color;
+  .home-pane { position:absolute; left:0; top:0; width:100%; height:100%;
+    background-color:@theme-back; color:@theme-fore;
 
-    .head { grid-area:head; justify-items:center; align-items:center; text-align:center; display:grid;
-      justify-self:stretch; align-self:stretch; }
+    .home-head { position:absolute; left:0; top:20%;   width:100%; height:20%; .themeCenterItems(); }
     
-    .midd { grid-area:midd; position:relative; left:0; top:0; right:0; height:100%; display:grid;
-      justify-self:stretch; align-self:stretch; }
+    .home-midd { position:absolute; left:0; top:40%; width:100%; height:10%; .themeCenterItems(); }
+    
+    .home-list { .themeCenterSelf(); }
   
-    .foot { grid-area:foot; justify-items:center; align-items:center; text-align:center; display:grid;
-      justify-self:stretch; align-self:stretch;  }
+    .home-foot { position:absolute; left:0; top:50%; width:100%; height:20%; .themeCenterItems(); }
   
-    h1 { justify-self:center; align-self:center; font-size:@theme-h1-size; }
-    h2 { justify-self:center; align-self:center; font-size:@theme-h2-size; }
+
  }
  
 </style>

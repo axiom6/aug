@@ -41,7 +41,7 @@ class Util
   @isChild:( key ) ->
     a = key.charAt(0)
     b = key.charAt(key.length-1)
-    a is a.toUpperCase() and a isnt '$' and b isnt '_'
+    a is a.toUpperCase() and a isnt '$' and a isnt '_' and b isnt '_'
 
   @hasChild:( obj ) ->
     for own key, val of obj

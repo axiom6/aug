@@ -95,10 +95,10 @@ class Data
     batch[plane].data[plane]
 
   @toUrl:(url) ->
-    if not url.startsWith('../')
-      if window.location.href.includes('localhost') then Data.local+url else Data.hosted+url
-    else
-      url
+    # console.log( 'Data.toUrl', { url:url, local:Data.local, serve:Data.serve, href:window.location.href })
+    if      window.location.href.includes('3000') then Data.local+url
+    else if window.location.href.includes('5000') then Data.serve+url
+    else                                               Data.hosted+url
            
   # ------ Quick JSON read ------
 
@@ -127,8 +127,9 @@ class Data
     document.body.removeChild(downloadLink)
     return
 
-Data.local   =  "../../data/"
-Data.hosted  = '/data/'
+Data.local   =  "../pub/data/"
+Data.serve   =  "../data/"
+Data.hosted  =  "./data/"
 Data.cssDir  = 'css/'  # /css in /pub
 
 

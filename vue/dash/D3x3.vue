@@ -38,7 +38,7 @@
 
 <style lang="less">
   
-  @import '../../pub/css/themes/theme.less';
+  @import '../../css/themes/theme.less';
 
   .dash { font-family:@theme-font-family; .theme-dash();
    position:absolute; left:0; top:0; right:0; bottom:0; display:grid;

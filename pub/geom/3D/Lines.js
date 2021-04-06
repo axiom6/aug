@@ -1,5 +1,5 @@
 
-import GA from '../../lib/ga/ganja.esm.js';
+import { GA } from '../../../lib/ga/ganja.esm.js';
 
 let Lines  = class Lines {
 

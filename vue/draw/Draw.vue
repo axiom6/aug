@@ -4,14 +4,15 @@
   <div class="draw-pane">
     <d-tabs :route="route" :pages="pages"></d-tabs>
     <h1 v-if="pageKey==='Draw'">Drawings in D3</h1>
-    <template v-for="page in pages">
-      <div :ref="page.key" v-show="page.show" class="draw-page" :key="page.key"></div>
+    <template v-for="page in pages" :key="page.key">
+      <div :ref="page.key" v-show="page.show" class="draw-page"></div>
     </template>
     </div>
 </template>
 
 <script type="module">
 
+   import { inject } from 'vue';
   import Tabs from '../elem/Tabs.vue';
   import D3D  from '../../pub/draw/show/D3D.js'
 
@@ -32,8 +33,8 @@
     methods: {
       
       onNav: function(obj) {
-        if( this.nav().isMyNav( obj, this.route ) ) {
-            this.pageKey = this.nav().getPageKey(this.route);
+        if( this.nav.isMyNav( obj, this.route ) ) {
+            this.pageKey = this.nav.getPageKey(this.route);
             if( this.pageKey !== 'None') {
                 this.create(this.pageKey); } } },
       
@@ -44,11 +45,13 @@
     },
 
     mounted: function () {
-      this.nav().setPages( this.route, this.pages );
-      this.mix().subscribe(  'Nav', 'Draw.vue', (obj) => {
+      this.mix = inject('mix');
+      this.nav = inject('nav');
+      this.nav.setPages( this.route, this.pages );
+      this.mix.subscribe(  'Nav', 'Draw.vue', (obj) => {
         this.onNav(obj); } );
       this.$nextTick( function() {
-        this.D3D = new D3D( this.mix().stream() ); } ) }
+        this.D3D = new D3D( this.mix.stream() ); } ) }
   }
   
   export default Draw;
@@ -57,7 +60,7 @@
 
 <style lang="less">
   
-  @import '../../pub/css/themes/theme.less';
+  @import '../../css/themes/theme.less';
 
   @drawFS:@themeFS;
   

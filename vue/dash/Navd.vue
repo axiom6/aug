@@ -13,6 +13,8 @@
 </template>
 
 <script type="module">
+
+  import { inject } from 'vue';
   
   let Navd = {
     
@@ -23,10 +25,10 @@
     methods: {
       
       doDir: function( dir ) {
-        if( this.mix().isTouch() ) {
-            this.mix().touch().doTouch( dir ); }
-        else if( this.mix().isNav() && this.dirs[dir] ) {
-            this.nav().dir( dir ); }
+        if( this.mix.isTouch() ) {
+            this.mix.touch().doTouch( dir ); }
+        else if( this.mix.isNav() && this.dirs[dir] ) {
+            this.nav.dir( dir ); }
         else {
           console.error( 'Navd.doDir() no direction navigator' ); } },
 
@@ -38,7 +40,9 @@
           this.dirs[key] = dirs[key]; } } },
 
     mounted: function () {
-      this.mix().subscribe(  "Navd", 'Navd.vue', (dirs) => {
+      this.mix = inject('mix');
+      this.nav = inject('nav');
+      this.mix.subscribe(  "Navd", 'Navd.vue', (dirs) => {
         this.onDirs( dirs ); } ); }
   };
 
@@ -48,7 +52,7 @@
 
 <style lang="less">
   
-  @import '../../pub/css/themes/theme.less';
+  @import '../../css/themes/theme.less';
   
   @navdFS:2*@themeFS;
   

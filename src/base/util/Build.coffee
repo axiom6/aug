@@ -315,7 +315,7 @@ class Build
 
   dimDisps:() ->
     for col in ['Embrace','Innovate','Encourage']
-      planes = if col is  'Innovate' then ['Info','Data','Know','Wise'] else ['Info','Know','Wise']
+      planes = if col is  'Innovate' then ['Info','Know','Wise'] else ['Info','Know','Wise'] # 'Data',
       for dir in ['west','north','east','south']
         dim  = @getDim(col,dir)
         dim.column = col
@@ -334,7 +334,7 @@ class Build
 
   colPracs:() ->
     for cname in ['Embrace','Innovate','Encourage']
-      planes = if cname is  'Innovate' then ['Info','Data','Know','Wise'] else ['Info','Know','Wise']
+      planes = if cname is  'Innovate' then ['Info','Know','Wise'] else ['Info','Know','Wise'] # 'Data',
       col = @getCol(cname)
       col.dims = []
       for plane in planes

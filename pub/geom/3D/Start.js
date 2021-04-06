@@ -1,5 +1,5 @@
 
-import GA from '../../lib/ga/ganja.esm.js';
+import { GA } from '../../../lib/ga/ganja.esm.js';
 
 GA(3,0,1,()=>{  // Create a Clifford Algebra with 3 positive and one zero generator.
 

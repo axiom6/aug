@@ -20,23 +20,25 @@
 </template>
 
 <script type="module">
+
+  import { inject } from 'vue';
   
   export default {
     data() {
       return {} },
     methods: {
       click:  function( obj )  {
-        this.mix().publish(  'Menu', obj    ); },
+        this.mix.publish(  'Menu', obj    ); },
       onMenu: function( obj )  {
         console.log(  'Menu.onMenu()', obj ); } },
     mounted: function () {
-      this.mix().subscribe( 'Menu', 'Menu.vue', this.onMenu ) } };
+      this.mix.subscribe( 'Menu', 'Menu.vue', this.onMenu ) } };
   
 </script>
 
 <style lang="less">
   
-  @import '../../pub/css/themes/theme.less';
+  @import '../../css/themes/theme.less';
   
   @menuFS:@themeFS;
   @menu-back:#222;

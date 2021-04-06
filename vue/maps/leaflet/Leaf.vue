@@ -8,7 +8,7 @@
 </script>
 
 <style lang="less">
-  @import '../../../pub/css/themes/theme.less';
+  @import '../../../css/themes/theme.less';
   @leafFS:@themeFS;
   .leaf-pane { background-color:@theme-back; font-size:@leafFS; }
 </style>

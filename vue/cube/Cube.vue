@@ -12,6 +12,7 @@
   // CoffeeScript does not produce warning messages.
   import Build  from '../../pub/base/util/Build.js'
   import CubeTh from '../../pub/math/cube/CubeTh.js'
+  import { inject } from 'vue';
   
   export default {
     
@@ -19,7 +20,7 @@
       return { build:{}, cubeTh:{} }; },
     
     mounted: function () {
-      this.build  = new Build(  this.mix().batch() );
+      this.build  = new Build(  this.mix.batch() );
       this.cubeTh = new CubeTh( this.build, "CubeTh", false );
       this.cubeTh.animate(); } }
       

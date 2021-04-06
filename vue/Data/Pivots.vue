@@ -12,6 +12,7 @@
 
 <script type="module">
 
+  import { inject } from 'vue';
   import Tabs   from '../elem/Tabs.vue';
   import Pivot1 from './Pivot1.vue';
   import Pivot2 from './Pivot2.vue';
@@ -32,8 +33,8 @@
         return this.pageKey === pageKey; },
 
       onNav: function(obj) {
-        if( this.nav().isMyNav( obj, this.route ) ) {
-          this.pageKey = this.nav().getPageKey('Pivots');
+        if( this.nav.isMyNav( obj, this.route ) ) {
+          this.pageKey = this.nav.getPageKey('Pivots');
           if( this.pageKey !== 'None' ) {
               this.create( this.pageKey ); } } },
 
@@ -46,8 +47,10 @@
     },
 
     mounted: function () {
-      this.nav().setPages( this.route, this.pages );
-      this.mix().subscribe( 'Nav', 'Pivots.vue', (obj) => {
+      this.mix = inject('mix');
+      this.nav = inject('nav');
+      this.nav.setPages( this.route, this.pages );
+      this.mix.subscribe( 'Nav', 'Pivots.vue', (obj) => {
           this.onNav( obj ); } ); }
 
   }
@@ -58,7 +61,7 @@
 
 <style lang="less">
   
-  @import '../../pub/css/themes/theme.less';
+  @import '../../css/themes/theme.less';
   
   .page { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;
     background-color:@theme-back; display:grid;

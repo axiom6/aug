@@ -1,17 +1,17 @@
 
 <template><div class="tocs-pane">
   <ul>
-    <template v-for="komp in komps">
-      <li :key="komp.key">
+    <template v-for="komp in komps" :key="komp.key">
+      <li>
         <div   v-on:click="doComp(komp.key)">
           <div  :style="styleComp(komp.key)"><i :class="komp.icon"></i>{{komp.title}}</div>
         </div>
-        <ul v-if="myKomp(komp.key)"><template v-for="prac in tocPracs(compKey,inovKey)" >
-          <li v-on:click="doPrac(prac.name)" :style="style(prac)" :key="prac.name">
+        <ul v-if="myKomp(komp.key)"><template v-for="prac in tocPracs(compKey,inovKey)" :key="prac.name">
+          <li v-on:click="doPrac(prac.name)" :style="style(prac)" >
             <i :class="prac.icon"></i>
             <span>{{prac.name}}</span>
-            <ul v-show="pracKey===prac.name"><template v-for="disp in prac.disps">
-              <li v-on:click.stop="doDisp(disp.name)" :style="style(disp)" :key="disp.name">
+            <ul v-show="pracKey===prac.name"><template v-for="disp in prac.disps" :key="disp.name">
+              <li v-on:click.stop="doDisp(disp.name)" :style="style(disp)" >
                 <i :class="disp.icon"></i>{{disp.name}}</li>
             </template></ul>
           </li>
@@ -22,6 +22,8 @@
 </div></template>
 
 <script type="module">
+
+  import { inject } from 'vue';
   
   let Tocs = {
     
@@ -30,7 +32,7 @@
     
     methods: {
       myKomp: function(kompKey) {
-        return kompKey===this.compKey && this.mix().isBatch(this.compKey) },
+        return kompKey===this.compKey && this.mix.isBatch(this.compKey) },
       doComp: function(compKey) {
         let  route   = this.komps[compKey].route;
         this.compKey = compKey;
@@ -46,8 +48,8 @@
         let route    = this.toRoute('Disp', dispKey );
         this.pub( { route:route, dispKey:dispKey, source:'Toc' } ); },
       pub: function(obj) {
-        this.nav().dirTabs = false;
-        this.nav().pub(obj); },
+        this.nav.dirTabs = false;
+        this.nav.pub(obj); },
       onNav:  function (obj) {
         if( obj.source !== 'Toc' ) {
           if( this.keyEq(this.compKey,obj.compKey ) ) { this.compKey = obj.compKey; }
@@ -56,18 +58,18 @@
           if( this.keyEq(this.inovKey,obj.inovKey ) ) { this.inovKey = obj.inovKey; }
           if( this.keyEq(this.routNav,obj.route   ) ) { this.routNav = obj.route;   } } },
       keyEq: function( tkey, okey ) {
-         return this.mix().isDef(okey) && tkey !== okey; },
+         return this.mix.isDef(okey) && tkey !== okey; },
       styleComp: function( kompKey ) {
         return this.myKomp(kompKey) ? { backgroundColor:'wheat', color:'black', borderRadius:'0 24px 24px 0' }
                                     : { backgroundColor:'#333',  color:'wheat', borderRadius:'0 24px 24px 0' }; },
       style: function( ikwObj ) {
-        return this.mix().styleObj(ikwObj); },
+        return this.mix.styleObj(ikwObj); },
       toRoute: function( level, routeKey ) {
-        let route = this.mix().isMuse()   ? level  : routeKey;
+        let route = this.mix.isMuse()   ? level  : routeKey;
             route = this.compKey==='Talk' ? 'Talk' : route;
             return route; },
       tocPracs: function(compKey,inovKey) {
-        let pracs = this.mix().inovObject( compKey, inovKey );
+        let pracs = this.mix.inovObject( compKey, inovKey );
         let filts = {}
         for( let key in pracs ) {
           let prac = pracs[key];
@@ -77,10 +79,12 @@
       },
 
     beforeMount: function () {
-      this.komps = this.mix().kompsTocs(); },
+      this.mix = inject('mix');
+      this.nav = inject('nav');
+      this.komps = this.mix.kompsTocs(); },
     
     mounted: function () {
-      this.mix().subscribe( 'Nav', 'Tocs.vue', (obj) => {
+      this.mix.subscribe( 'Nav', 'Tocs.vue', (obj) => {
         this.onNav(obj); } ); }
   }
   
@@ -90,7 +94,7 @@
 
 <style lang="less">
   
-  @import '../../pub/css/themes/theme.less';
+  @import '../../css/themes/theme.less';
 
   @tocsFS:2*@themeFS;
   @tocs-back-comp:#333;

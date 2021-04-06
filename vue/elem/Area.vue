@@ -15,6 +15,7 @@
 
 <script type="module">
 
+  import { inject } from 'vue';
   let Area = {
 
     props: { areat:Object, size:Number, fnClick:Function },
@@ -24,14 +25,14 @@
     methods: {
       
       isDef:function( obj ) {
-        return this.mix().isDef(obj); },
+        return this.mix.isDef(obj); },
 
       doClick: function(name) {
-        if( this.mix().isDef(this.fnClick) ) {
+        if( this.mix.isDef(this.fnClick) ) {
           this.fnClick(name); } },
 
       style: function() {
-        return this.mix().fontSizeCss(this.size); }
+        return this.mix.fontSizeCss(this.size); }
 
     }
 
@@ -43,7 +44,7 @@
 
 <style lang="less">
   
-  @import '../../pub/css/themes/theme.less';
+  @import '../../css/themes/theme.less';
   
   @itemFS:1.0*@themeFS;
   

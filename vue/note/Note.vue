@@ -12,6 +12,7 @@
 
 <script type="module">
 
+  import { inject } from 'vue';
   import Tabs  from '../elem/Tabs.vue';
   
   let Note = {
@@ -29,10 +30,12 @@
     methods: {
       
       myRoute: function() {
-        return this.mix().isRoute('Note'); } },
+        return this.mix.isRoute('Note'); } },
 
     mounted: function () {
-      this.nav().setPages( this.route, this.pages ); }
+      this.mix = inject('mix');
+      this.nav = inject('nav');
+      this.nav.setPages( this.route, this.pages ); }
 
   }
   
@@ -42,7 +45,7 @@
 
 <style lang="less">
   
-  @import '../../pub/css/themes/theme.less';
+  @import '../../css/themes/theme.less';
 
   @noteFS:@themeFS;
   

@@ -1,21 +1,12 @@
 
 class Worker
   
-  constructor:( @cacheName, @cacheObjs, @logPub=false ) ->
-    @cacheUrls = @toCacheUrls( @cacheObjs )
-    @cacheOpts = { headers:{ 'Cache-Control': 'public, max-age=86400' } }
+  constructor:() ->
+    @logPub    = false
+    @cacheUrls = @toCacheUrls( Worker.cacheObjs )                        #    1200 = 20 min
+    @cacheOpts = { headers:{ 'Cache-Control': 'public, max-age=1200' } } # 2592000 = 30 days
     # console.log( 'Worker.self', self )
     @addEventListeners()
-
-  # Not used. Push and Sync not implemented
-  pushSyncParams:() ->
-    @pushTag      = 'PushTest'
-    @pushUrl      = '/app/data/store/Push.json'
-    @cacheSync    = 'Sync'
-    @syncTag      = 'SyncTest'
-    @syncUrl      = '/app/data/store/Sync.json'
-    @offlineUrl   = '/augm.html'
-    return
   
   toCacheUrls:( objs ) ->
     urls = []
@@ -31,15 +22,15 @@ class Worker
     return
   
   onCatch:( name, status, error ) =>
-    console.error( name, status, error )
+    console.log( name, status, error )
     return
   
   onInstall:( event ) =>
     event.waitUntil(
-      caches.open( @cacheName )
+      caches.open( Worker.cacheName )
         .then( (cache) =>
           @publish( 'Install', '------ Open ------' )
-          for own key, obj of @cacheObjs
+          for own key, obj of Worker.cacheObjs
             fetch( obj.url, @cacheOpts )
               .then( (response) =>
                 @publish( '  Install', response.url )
@@ -51,9 +42,9 @@ class Worker
   
   onInstallAll:( event ) =>
     event.waitUntil(
-      caches.open( @cacheName )
+      caches.open( Worker.cacheName )
         .then( (cache) =>
-          @publish( 'InstallAll', 'Success', { cacheName:@cacheName } )
+          @publish( 'InstallAll', 'Success', { cacheName:Worker.cacheName } )
           return cache.addAll(@cacheUrls) )
         .catch( (error) =>
           @onCatch( 'InstallAll', 'Error', error ); return ) )
@@ -79,9 +70,11 @@ class Worker
     return
   
   onFetch:( event ) =>
+    console.log( 'Worker.onFetch()', event.request.url )
     return if event.request.cache is 'only-if-cached' and event.request.mode isnt 'same-origin'
+    return if event.request.url   is 'http://localhost:3000/index.html?source=pwa'
     event.respondWith(
-      caches.open( @cacheName )
+      caches.open( Worker.cacheName )
         .then( (cache) =>
           return cache.match( event.request, {ignoreSearch:true} ).then( (response) =>
             return response or fetch( event.request,  @cacheOpts ).then( (response) =>
@@ -143,7 +136,15 @@ class Worker
 
 Worker.cacheName = 'Axiom'
 
-Worker.cacheObjs = {
+Worker.cacheObjs = {}
+
+Worker.cacheObjs2 = {
+  IndexHtml: { name:'IndexHtml', status:0, url:'/index.html'}
+  Favicon:   { name:'Favicon',    status:0, url:'/favicon.icon'},
+  IndexJS:   { name:'IndexJS',   status:0, url:'/index.js'  }
+}
+
+Worker.cacheObjsMuse = {
   MainHtml:     { name:'MainHtml',     status:0, url:'/pub/app/main/main.html'     }
   MuseHtml:     { name:'MuseHtml',     status:0, url:'/pub/app/muse/muse.html'     }
   MuseJS:       { name:'MuseJS',       status:0, url:'/pub/app/muse/Muse.js'       }
@@ -198,3 +199,5 @@ Worker.create = ( cacheName, cacheObjs, logPub ) ->
   return
 
 Worker.create( Worker.cacheName, Worker.cacheObjs, true )
+
+# export default Worker

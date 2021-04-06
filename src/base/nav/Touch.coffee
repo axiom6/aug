@@ -1,76 +1,96 @@
 
-import Tocca from '../../lib/touch/Tocca.esm.js'
-
-
 class Touch
 
-  constructor:( @stream, @navs ) ->
-    @tocca   = Tocca()
-    @dirs    = ['up', 'down', 'left', 'right']
-    @evts    = ['tap', 'dbltap', 'longtap', 'swipeleft', 'swipeup', 'swiperight', 'swipedown']
-    @route   = 'Home'
-    @$router =  null  # Set later
+  constructor:( @stream, @nav ) ->
+    @nav.touch    = @
+    @elem         = null
+    @reset()          # "tabs-tab","disp-comp","west","east","south","north","cen"
+    @touchClasses = []
 
-  onDir:(   elem ) ->
-    @tap(   elem,(e) => @doTouch('next',  e ) )
-    @dbl(   elem,(e) => @doTouch('next',  e ) )
-    @hold(  elem,(e) => @doTouch('prev',  e ) )
-    @right( elem,(e) => @doTouch('west',  e ) )  # All directions reversed
-    @down(  elem,(e) => @doTouch('north', e ) )
-    @left(  elem,(e) => @doTouch('east',  e ) )
-    @up(    elem,(e) => @doTouch('south', e ) )
+  reset:() ->
+    @beg = null
+    @pnt = null
+
+  listen:(  elem, touchClasses ) ->
+    @elem         = elem
+    @touchClasses = touchClasses
+    @elem.addEventListener( 'pointerdown',   @start,  false )
+    @elem.addEventListener( 'pointerup',     @up,     false )
+    @elem.addEventListener( 'pointerleave',  @leave,  false )
+    @elem.addEventListener( 'pointercancel', @cancel, false )
+    #elem.addEventListener( 'pointerout',    @out,    false )
     return
 
-  tap:( elem, onEvent ) ->
-    elem.addEventListener( 'tap',        onEvent )
+  start:(  event ) =>
+    # event.preventDefault()
+    inTouch = @nav.inArray( event.target.className, @touchClasses )
+    return if not inTouch
+    if not ( event.touches? and event.touches.length > 1 )
+      @elem.setPointerCapture( event.pointerId )
+    @beg = event
+    @pnt = @coord( event, {} )
+    @elem.addEventListener( 'pointermove',   @movit, false )
+    console.log( 'Touch.start()', { target:event.target.className, inTouch:inTouch } )
     return
 
-  dbl:( elem, onEvent ) ->
-    elem.addEventListener( 'dbltap',     onEvent )
+  movit:( event ) =>
+    # event.preventDefault()
+    pnt  = if @pnt? then @pnt else {}
+    @pnt = @coord( event, pnt )
     return
 
-  hold:( elem, onEvent ) ->
-    elem.addEventListener( 'longtap',    onEvent )
+  coord:( event, pnt ) ->
+    if event.targetTouches?                    # Prefer touch points
+       pnt.x = event.targetTouches[0].clientX
+       pnt.y = event.targetTouches[0].clientY
+    else                                      # Either Mouse event or Pointer Event
+       pnt.x = event.clientX
+       pnt.y = event.clientY
+    # console.log( 'Touch.movit()', { x:pnt.x, y:pnt.y, touches:event.targetTouches? } )
+    return pnt
+
+  leave:( event ) =>
+    @endit( event, 'leave' )
     return
 
-  left:( elem, onEvent ) ->
-    elem.addEventListener( 'swipeleft',  onEvent )
+  cancel:( event ) =>
+    @endit( event, 'cancel' )
     return
 
-  up:( elem, onEvent ) ->
-    elem.addEventListener( 'swipeup',    onEvent )
+  out:( event ) =>
+    @endit( event, 'out' )
     return
 
-  right:( elem, onEvent ) ->
-    elem.addEventListener( 'swiperight', onEvent )
+  up:( event ) =>
+    @endit( event, 'cancel' )
     return
 
-  down:( elem, onEvent ) ->
-    elem.addEventListener( 'swipedown',  onEvent )
+  endit:( event, type ) =>
+    # event.preventDefault()
+    return if event.touches? && event.touches.length > 1
+    dir  = 'none'
+    if @beg? and @pnt?
+       event.target.releasePointerCapture(event.pointerId)
+       dir = @swipeDir( @beg.clientX, @beg.clientY, @pnt.x, @pnt.y )
+       @nav.dir( dir ) if dir isnt 'none'
+       console.log( 'Touch.endit()', { type:type, x1:@beg.clientX, y1:@beg.clientY, x2:@pnt.x, y2:@pnt.y, dir:dir } )
+    @elem.removeEventListener( 'pointermove', @movit, false )
+    @reset()
     return
 
-  doTouch:( dir, event=null ) =>
-    # return if dir is 'prev'
-    if event is null then {}
-    route = @navs[@route][dir]
-    obj = { source:'Dir', route:route }
-    @pub(     obj )
-    @doRoute( route, dir )
-    return
+  swipeDir:( begX, begY, endX, endY ) ->
+    dir = "none"
+    dx  = endX - begX
+    dy  = endY - begY
+    ax  = Math.abs(dx)
+    ay  = Math.abs(dy)
+    #if ax < 10 and ay < 10
+    #   dir = if event.shiftKey then 'prev' else 'next'
+    if      dx <  0 and ax > ay then dir = 'west'
+    else if dx >  0 and ax > ay then dir = 'east'
+    else if dy <  0 and ay > ax then dir = 'north'
+    else if dy >  0 and ay > ax then dir = 'south'
+    else                             dir = 'none'
+    dir
 
-  pub:( obj ) ->
-    # console.log('Dir.pub()', obj )
-    @stream.publish( 'Dir',  obj )
-    return
-
-  doRoute:( route ) ->
-    if @$router?
-      @$router.push( { name:route } )
-    else
-      console.error( 'Nav.router() $router not set' )
-    # console.log('Dir.doRoute()', { beg:@route, dir:dir, end:route } )
-    @route = route
-    return
-
-export default Touch
-       
+export default Touch 

@@ -12,6 +12,7 @@
 
 <script type="module">
 
+  import { inject } from 'vue';
   import Tabs from '../elem/Tabs.vue';
   import Box  from '../../pub/math/mbox/Box.js'
 
@@ -34,8 +35,8 @@
         return this.pageKey === pageKey; },
 
       onNav: function(obj) {
-        if( this.nav().isMyNav( obj, this.route ) ) {
-            this.pageKey = this.nav().getPageKey(this.route);
+        if( this.nav.isMyNav( obj, this.route ) ) {
+            this.pageKey = this.nav.getPageKey(this.route);
             if( this.pageKey !== 'None') {
                 this.doApp( this.pageKey ); } } },
 
@@ -50,12 +51,14 @@
       doApp: function( pageKey ) {
           this.$nextTick( function() {
             let elem = this.$refs[pageKey][0];
-            if( this.mix().isDef(elem) ) {
+            if( this.mix.isDef(elem) ) {
               Box.doApp(pageKey,elem); } } ) } },
 
     mounted: function () {
-      this.nav().setPages( this.route, this.pages );
-      this.mix().subscribe(  'Nav', 'Hues.vue', (obj) => {
+      this.mix = inject('mix');
+      this.nav = inject('nav');
+      this.nav.setPages( this.route, this.pages );
+      this.mix.subscribe(  'Nav', 'Hues.vue', (obj) => {
         this.onNav(obj); } ); }
   }
 
@@ -65,7 +68,7 @@
 
 <style lang="less">
   
-  @import '../../pub/css/themes/theme.less';
+  @import '../../css/themes/theme.less';
   
   .hues-pane {   position:absolute; left:0; top:0; width:100%; height:100%; display:grid;
     background-color:@theme-back; font-family:@theme-font-family;

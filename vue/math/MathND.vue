@@ -13,6 +13,7 @@
 
 <script type="module">
 
+   import { inject } from 'vue';
   import Tabs  from '../elem/Tabs.vue';
 
   let MathND = {
@@ -24,8 +25,8 @@
     methods: {
       
       onNav: function(obj) {
-        if( this.nav().isMyNav( obj, this.route ) ) {
-          let pageKey = this.nav().getPageKey(this.route);
+        if( this.nav.isMyNav( obj, this.route ) ) {
+          let pageKey = this.nav.getPageKey(this.route);
           if( pageKey !== 'None') {
             this.create( pageKey   );
             this.mathML( this.exps ); } } },
@@ -59,7 +60,9 @@
     },
 
     mounted: function () {
-      this.mix().subscribe( 'Nav', 'Math.vue', (obj) => {
+      this.mix = inject('mix');
+      this.nav = inject('nav');
+      this.mix.subscribe( 'Nav', 'Math.vue', (obj) => {
           this.onNav( obj ); } ); }
   }
   
@@ -69,7 +72,7 @@ export default MathND;
 
 <style lang="less">
   
-  @import '../../pub/css/themes/theme.less';
+  @import '../../css/themes/theme.less';
   
   @mathFS:@themeFS;
   

@@ -2,17 +2,19 @@
 <template>
   <div class="geom-pane">
     <h1 v-show="myRoute()">Geometric Algebra</h1>
-    <template v-for="geom in geoms">
-      <router-view :name="route+geom.key"></router-view>
-    </template>
+    <!--template v-for="geom in geoms"-->
+      <router-view :name="route"></router-view>
+    <!--/template-->
   </div>
 </template>
 
 <script type="module">
-  
+
+  import { inject } from 'vue';
+
   let Geom = {
 
-    data() { return { route:'Geom',
+    data() { return { route:'GeomND',
       geoms:[
         { title:'Geom2D', key:'2D' },
         { title:'Geom3D', key:'3D' },
@@ -20,9 +22,13 @@
 
     methods: {
       myRoute: function() {
-        return this.mix().isRoute('Geom'); } },
+        this.mix = inject('mix');
+        return this.mix.isRoute('Geom'); } },
 
-    mounted: function () {}
+    mounted: function () {
+      this.mix = inject('mix');
+      this.nav = inject('nav');
+      this.nav.route = this.route; }
 
   }
 
@@ -32,7 +38,7 @@
 
 <style lang="less">
   
-  @import '../../pub/css/themes/theme.less';
+  @import '../../css/themes/theme.less';
 
   @geomFS:@themeFS;
   

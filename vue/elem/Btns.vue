@@ -17,7 +17,9 @@
 </template>
 
 <script type="module">
-  
+
+  import { inject } from 'vue';
+
   // import Data from '../../pub/base/util/Data.js'
 
   export default {
@@ -26,10 +28,10 @@
 
     methods: {
       pubBtn: function (btn) {
-        this.mix().choose(  this.name, btn.name );
-        btn.checked = this.mix().choosen( this.name, btn.name );
+        this.mix.choose(  this.name, btn.name );
+        btn.checked = this.mix.choosen( this.name, btn.name );
         // console.log( 'Btns.pubBtn()', this.name, btn.name,  btn.checked );
-        this.mix().publish( this.name, btn.name ); },
+        this.mix.publish( this.name, btn.name ); },
       aspect: function() {  // Only call in mounted
         let w = this.$refs['Btns']['clientWidth' ];
         let h = this.$refs['Btns']['clientHeight'];
@@ -40,10 +42,10 @@
         return { position:'absolute', left:sy*p[0]+'%', top:sy*p[1]+'%', width:sy*p2+'%', height:sy*p[3]+'%',
         fontSize:(p[3]*0.08)+'em' } },
       styleBtn: function (btn) {
-        let back = this.mix().toRgbaHsv( btn.hsv );
+        let back = this.mix.toRgbaHsv( btn.hsv );
         return { color:'black', backgroundColor:back }; },
       classCheck: function (btn) {
-        btn.checked = this.mix().choosen( this.name, btn.name );
+        btn.checked = this.mix.choosen( this.name, btn.name );
         // console.log( 'Btns.classCheck()', { checked:btn.checked, name:this.name, choice:btn.name } );
         return btn.checked ? 'check far fa-check-square' : 'check far fa-square'; },
       classIcons: function (btn) {
@@ -66,6 +68,7 @@
       } },
 
     mounted: function () {
+      this.mix = inject('mix');
       this.asp = this.aspect();
       this.adjustWidths(); }
 
@@ -75,7 +78,7 @@
 
 <style lang="less">
   
-  @import '../../pub/css/themes/theme.less';
+  @import '../../css/themes/theme.less';
   
   @btnsFS:1.4*@themeFS;
 
