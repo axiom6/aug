@@ -10,9 +10,11 @@ import Cube3D from './Cube3D.js';
 
 import Rect from './Rect.js';
 
-import * as THREE from '../../../pub/lib/three/three.module.js';
+import * as THREE from 'three';
 
-import OrbitControls from '../../../pub/lib/three/OrbitControls.js';
+import {
+  OrbitControls
+} from 'three/examples/jsm/controls/OrbitControls.js';
 
 CubeTh = class CubeTh {
   static load() {

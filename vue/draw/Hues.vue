@@ -1,78 +1,65 @@
 
 
 <template>
-  <div class="hues-pane" ref="Hues">
+  <div class="hues-pane">
     <d-tabs :route="route" :pages="pages"></d-tabs>
-    <h1 v-if="pageKey==='Hues'">Hues with MathBox</h1>
-    <template v-for="page in pages">
-      <div :ref="page.key" v-if="page.show" class="hues-page" :key="page.key"></div>
+    <h1 v-if="route==='Draw'">Mathbox Colors</h1>
+    <template v-for="page in pages" :key="pageIdx">
+      <d-port v-if="page.show" :page="page" class="port-pane"></d-port>
     </template>
-  </div>
+    </div>
 </template>
 
 <script type="module">
 
-  import { inject } from 'vue';
-  import Tabs from '../elem/Tabs.vue';
-  import Box  from '../../pub/math/mbox/Box.js'
+ import { inject, ref, onMounted } from 'vue';
+ import Tabs from '../elem/Tabs.vue';
+ import Port from './Port.vue'
 
-  let Hues = {
+ let Hues = {
 
-    components:{ 'd-tabs':Tabs },
+    components:{ 'd-tabs':Tabs, 'd-port':Port },
 
-    data() {
-      return { route:'Hues', pageKey:'Hues', pages:{
-          Color:   { title:'Color',   key:'Color',   show:false },
-          Rgbs:    { title:'Rgbs',    key:'Rgbs',    show:false },
-          Polar:   { title:'Polar',   key:'Polar',   show:false },
-          Vecs:    { title:'Vecs',    key:'Vecs',    show:false },
-          Sphere:  { title:'Sphere',  key:'Sphere',  show:false },
-          Regress: { title:'Regress', key:'Regress', show:false } } } },
+    setup() {
 
-    methods: {
+      const mix     = inject('mix');
+      const nav     = inject('nav');
+      const route   = 'Hues';
+      const pageIdx = ref(0);
+      const page    = ref(null);
+      const pages   = {
+        Color:   { title:'Color',   key:'Color',   show:false },
+        Rgbs:    { title:'Rgbs',    key:'Rgbs',    show:false },
+        Polar:   { title:'Polar',   key:'Polar',   show:false },
+        Vecs:    { title:'Vecs',    key:'Vecs',    show:false },
+        Sphere:  { title:'Sphere',  key:'Sphere',  show:false },
+        Regress: { title:'Regress', key:'Regress', show:false } };
 
-      isPage: function(pageKey) {
-        return this.pageKey === pageKey; },
+      const onNav = function(obj) {
+        if( nav.isMyNav( obj, route ) && nav.hasPageKey( route, obj.pageKey ) ) {
+            nav.setPageKey( route, obj.pageKey );
+            pageIdx.value++; } } // console.log( 'Darw.onNav()', pages );
 
-      onNav: function(obj) {
-        if( this.nav.isMyNav( obj, this.route ) ) {
-            this.pageKey = this.nav.getPageKey(this.route);
-            if( this.pageKey !== 'None') {
-                this.doApp( this.pageKey ); } } },
+      onMounted( function () {
+        nav.setPages( route, pages );
+        mix.subscribe(  'Nav', 'Hues.vue', (obj) => {
+          onNav(obj); } ); } )
 
-      size: function() {
-        let sz   = {}
-        sz.compWidth  = this.$refs['Hues']['clientWidth' ];
-        sz.compHeight = this.$refs['Hues']['clientHeight'];
-        sz.elemWidth  = this.$refs['Hues']['clientWidth' ];
-        sz.elemHeight = this.$refs['Hues']['clientHeight'];
-        return sz; },
-
-      doApp: function( pageKey ) {
-          this.$nextTick( function() {
-            let elem = this.$refs[pageKey][0];
-            if( this.mix.isDef(elem) ) {
-              Box.doApp(pageKey,elem); } } ) } },
-
-    mounted: function () {
-      this.mix = inject('mix');
-      this.nav = inject('nav');
-      this.nav.setPages( this.route, this.pages );
-      this.mix.subscribe(  'Nav', 'Hues.vue', (obj) => {
-        this.onNav(obj); } ); }
+    return { route, pages, page, pageIdx }; }
   }
-
   export default Hues;
-
+  
 </script>
 
 <style lang="less">
   
   @import '../../css/themes/theme.less';
+
+  @huesFS:@themeFS;
   
-  .hues-pane {   position:absolute; left:0; top:0; width:100%; height:100%; display:grid;
-    background-color:@theme-back; font-family:@theme-font-family;
-    h1    { @theme-h1; color:@theme-fore;  }
-    .hues-page { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height  } }
-  
+  .hues-pane { position:absolute; left:0; top:0; width:100%; height:100%;display:grid;
+               background-color:@theme-back; font-family:@theme-font-family;
+    h1    { justify-self:center; align-self:center; text-align:center; color:@theme-fore; font-size:2.5*@huesFS; }
+    .port-pane { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;  } }
+
 </style>

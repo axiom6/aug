@@ -1,8 +1,8 @@
 
 import Data     from '../../base/util/Data.js'
-class Flavor
+class  Flavor
 
-  constructor:( @svgMgr, @onChoice ) ->
+  constructor:( @svgMgr, @onChoice, @mix ) ->
     @svg                = @svgMgr.svg
     @g                  = @svgMgr.g
     @d3                 = @svgMgr.d3
@@ -14,20 +14,29 @@ class Flavor
     @radiusFactorChoice = 1.3
     @radiusFactorChild  = 1.0
     @url                = Data.toUrl( 'jitter/Flavor.json')
+    @nodes              = null
+    @callPub            = true
     @ready()
 
+  setChoosen:( d ) =>
+    if @mix.choosen('Flavor',d.data.name)
+      # console.log( 'Wheel.setChoose()', d.data.name, @mix.choosen('Flavor',d.data.name) )
+      @callPub = false
+      @onEvent( d, 'click')
+      @callPub = true
+    return
 
   # Passed as a callback to Wheel and called when Wheel makes a choice to be published
   # Here we use @onChoice( choice, roast ) instead
-  publish:( add, flavor, roast ) =>
+  publish:( add, flavor ) =>
     addDel    = if add then 'AddChoice' else 'DelChoice'
-    choice = { name:'Wheel', op: addDel, flavor:flavor, roast:roast }
+    choice = { name:'Wheel', op: addDel, flavor:flavor }
     console.log( 'Choice', choice )
     return
 
   ready:( ) ->
     scale   = 1.0
-    @json   = {}
+    @json   = @mix.flavorJson()
 
     @radius = Math.min( @width, @height ) * scale / 2
     @xx     = @d3.scaleLinear().range([ 0, 2*Math.PI ] )
@@ -55,31 +64,32 @@ class Flavor
       .innerRadius( (d) => Math.max( 0, @yy(@y0(d)) ) )
       .outerRadius( (d) => Math.max( 0, @yy(@y1(d)) ) )
 
-    @d3.json( @url ).then ( json ) =>
+    #@d3.json( @url ).then ( json ) =>
 
-      @json = json
-      @root = @d3.hierarchy(json)
-      @root.sum(  (d) => ( d.chosen = false; d.hide = @isLeaf(d); if @isBranch(d) then 0 else 1 ) )
-      @nodes = @partition(@root).descendants()
-      @adjustRadius( @root )
+      #@json = json
+    console.log( 'Wheel.ready()', @json )
+    @root = @d3.hierarchy(@json)
+    @root.sum(  (d) => ( d.chosen = false; d.hide = @isLeaf(d); if @isBranch(d) then 0 else 1 ) )
+    @nodes = @partition(@root).descendants()
+    @adjustRadius( @root )
 
-      @path  = @g.selectAll("path")
-        .data( @nodes )
-        .enter().append("path")
-        .attr( "id", (d, i) -> ( if d? then "path-" + i else "path-" + i ) )
-        .attr(  "d", @arc )
-        .attr(  "fill-rule", "evenodd")
-        .style( "fill",    (d) => @fill(d)  )
-        .style( "opacity", @opacity )
-        .style( "stroke",       'black' )
-        .style( "stroke-width", '2' )
-        .style( "display", (d) -> if d.data.hide then "none" else "block" )
-        .on( "click",      (d) => @onEvent( d, 'click'     ) )
-        .on( "mouseover",  (d) => @onEvent( d, 'mouseover' ) )
-        .on( "mouseout",   (d) => @onEvent( d, 'mouseout'  ) )
-        #append("title").text( (d) -> d.data.name )
+    @path  = @g.selectAll("path")
+      .data( @nodes )
+      .enter().append("path")
+      .attr( "id", (d, i) -> ( if d? then "path-" + i else "path-" + i ) )
+      .attr(  "d", @arc )
+      .attr(  "fill-rule", "evenodd")
+      .style( "fill",    (d) => @fill(d)  )
+      .style( "opacity", @opacity )
+      .style( "stroke",       'black' )
+      .style( "stroke-width", '2' )
+      .style( "display", (d) -> if d.data.hide then "none" else "block" )
+      .on( "click",      (d) => @onEvent( d, 'click'     ) )
+      .on( "mouseover",  (d) => @onEvent( d, 'mouseover' ) )
+      .on( "mouseout",   (d) => @onEvent( d, 'mouseout'  ) )
+      #append("title").text( (d) -> d.data.name )
 
-      @doText( @nodes )
+    @doText( @nodes )
 
     @d3.select( self.frameElement).style( "height", @height + "px" )
     return
@@ -169,13 +179,14 @@ class Flavor
     @textEnter.append('tspan').attr( 'x', (d) -> xem(d) ).text( (d) -> if d.depth then d.data.name.split(' ')[0] else '' )
     @textEnter.append('tspan').attr( 'x', (d) -> xem(d) ).attr('dy', '1em')
       .text( (d) -> if d.depth? and d.data.name? then d.data.name.split(' ')[1] or '' else '' )
+      .attr(  "d", (d) => @setChoosen(d) )
     #textEnter.append("title").text( (d) -> d.data.name )
     return
 
   # eventType is click mouseover mouseout AddChoice DelChoice
   onEvent:( d, eventType ) =>
     @displayAllLeaves() if eventType is 'click' and not d.parent?
-    return if not d.data['can']?
+    # return if not d.data['can']?
     #console.log( 'onEvent', d ) if eventType is 'click'
     py0    = d.y0
     py1    = d.y0 + (d.y1-d.y0) * @radiusFactorChoice
@@ -210,19 +221,20 @@ class Flavor
       if t.children? then '1.0rem' else '0.9rem'
 
   # eventType is click mouseover mouseout AddChoice DelChoice
+  # This publish function is supplied to the constructor
+  # elem.chosen is true/false for add/del
+  # elem.data.name is the flavor
+  # @publish( elem.chosen, elem.data.name )
   doChoiceResize:( elem, eventType, x0, y0, x1, y1 ) =>
     resizeChild = true
     if eventType is 'click'
-      elem.chosen = not elem.chosen
+      elem.chosen = !elem.chosen # @mix.choosen( 'Flavor', elem.data.name )
       @resizeElem( elem, elem.chosen, x0, y0, x1, y1 )
-      # This publish function is supplied to the constructor
-      # elem.chosen is true/false for add/del
-      # elem.data.name is the flavor
-      # @publish( elem.chosen, elem.data.name, @getRoastValue(elem.data.name) )
-      @onChoice(               elem.data.name, @getRoastValue(elem.data.name) )
+      @onChoice( elem.data.name, elem.chosen ) if @callPub
       resizeChild = elem.chosen
     else if eventType is 'AddChoice' or eventType is 'DelChoice'
       elem.chosen = eventType is 'AddChoice'
+      @onChoice( elem.data.name )
       @resizeElem( elem, elem.chosen, x0, y0, x1, y1 )
       resizeChild = elem.chosen
     # Mouse event do not affect chosen elements

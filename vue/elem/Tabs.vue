@@ -9,72 +9,85 @@
 
 <script type="module">
 
-  import { inject } from 'vue';
+import {inject, onMounted, ref} from 'vue';
 
+  let Tabs = {
 
-  export default {
+    props: { route:String, pages:Object, position:{  type:String, default:'full' },
+             isInov:{ type:Boolean, default:false } },
 
-    props: { route:String, pages:Object, position:{ default:'full', type:String } },
-    
-    data() { return { pageKey:'None', pageObj:null,
-      positions:{ left:{ left:0, width:'60%' }, right:{ left:'60%', width:'40%' }, full:{ left:0, width:'100%' } } } },
-    
-    methods: {
-      doTabs: function () {
-        this.mix = inject('mix');
-        this.nav.setPages(this.route,this.pages); // Will only set pages if needed
-        let first   = this.pageKey==='None'; // && !this.mix.hasInov(this.route);
-        let pageKey = this.nav.getPageKey(this.route);
-        // console.log( 'Tabs.init()', obj, { route:this.route, pageKey:pageKey, pages:this.pages } );
-        if( first ){ this.doPage(pageKey); }
-        else       { this.onPage(pageKey); } },
-      isPage: function (pageKey) {
-        // console.log( 'Tabs.isPage()', { route:this.route, pageKey:pageKey }  );
-        return this.mix.isDef(this.route) && this.mix.isDef(pageKey); },
-      onPage: function (pageKey) {
-        if( this.isPage(pageKey) ) {
-          this.pageKey = pageKey;
-          this.nav.setPageKey( this.route, pageKey ); }
+    setup( props ) {
+
+      const mix = inject( 'mix' );
+      const nav = inject( 'nav' );
+
+      nav.setPages( props.route, props.pages );
+
+      const pageKey   = ref( nav.getPageKey(props.route) );
+      const pageObj   = null;
+      const positions = { left:{  left:0,     width: '60%' },
+                          right:{ left:'60%', width: '40%' },
+                           full:{ left:0,     width:'100%' } };
+
+      const isPage = function (pageArg) {
+        return mix.isDef(props.route) && mix.isDef(pageArg); }
+      const onPage = function (pageArg) {
+        pageKey.value = pageArg;
+        if( isPage( pageArg ) ) {
+          //console.log( 'Tabs.onPage()', { pageKey:pageKey.value, pageArg:pageArg } )
+          nav.setPageKey( props.route, pageArg ); }
         else {
-          console.log( 'Tabs.onPage() bad pageKey', { route:this.route, pageKey:pageKey } ); } },
-      doPage: function (pageKey) {
-        if( this.isPage(pageKey) ) {
-            this.onPage(pageKey) ;
-            let obj = { source:'Tabs',route:this.route }
-            obj.inovKey = 'None'; // this.mix.hasInov(this.route) ? pageKey : 'None';
-             this.nav.pub(obj); } },
-      stylePos: function () {
-        return this.positions[this.position]; },
-      classTab: function (pageKey) {
-        return this.pageKey===pageKey ? 'tabs-tab-active' : 'tabs-tab'; } },
+          console.log( 'Tabs.onPage() bad pageKey', { route:props.route, pageKey:pageArg } ); } }
+      const doPage = function (pageArg) {
+        if( isPage(pageArg) ) {
+            onPage(pageArg) ;
+            let obj = { source:'Tabs',route:props.route, pageKey:pageArg }
+            if( props.isInov ) { obj.inovKey = pageArg; }
+            nav.pub(obj); } }
+      const stylePos = function () {
+        return positions[props.position]; }
+      const classTab = function (pageArg) {
+        // console.log( 'Tabs.classTab', { pageKey:pageKey.value, pageArg:pageArg } )
+        return pageKey.value===pageArg ? 'tabs-tab-active' : 'tabs-tab'; }
 
-    mounted: function() {
-      this.mix = inject('mix');
-      this.nav = inject('nav');
-      this.doTabs();
-      // console.log( 'Tabs.onMounted()', { route:this.route, pages:this.pages } );
-      this.mix.subscribe(  "Nav", 'Tabs.vue.'+this.route, (obj) => {
-        if( obj.source !== 'Tabs'  ) { // && obj.route === this.route
-          this.$nextTick( function() {
-            this.doTabs(); } ); } } ); }
+    return { pageObj, doPage, classTab, stylePos } }
+
     }
+
+  export default Tabs;
   
 </script>
 
-<style lang="less">
+<style scoped lang="less">
   
   @import '../../css/themes/theme.less';
   
   @tabsFS:1.5*@themeFS;
   
-  .tabs-pane { background-color:@theme-back; font-size:@tabsFS;
-    position:absolute; left:0; top:0; width:@theme-tabs-width; height:@theme-tabs-height;
+  .tabs-pane { background-color:@theme-back; font-size:@tabsFS; // @theme-tabs-height*0.5
+    position:absolute; left:0; top:1%; width:@theme-tabs-width; height:@theme-tabs-height;
     
     .tabs-tab { display:inline-block; margin-left:2.0rem; padding:0.2rem 0.3rem 0.1rem 0.3rem;
-      border-radius:12px 12px 0 0; border-left: @theme-fore solid thin;
-      border-top:@theme-fore solid thin; border-right:@theme-fore solid thin;
+      border-radius:12px 12px 0 0; border: @theme-fore solid thin;
                                     background-color:@theme-back; color:@theme-fore; }
     .tabs-tab:hover  {              background-color:@theme-hove; color:@theme-back; }
     .tabs-tab-active { .tabs-tab(); background-color:@theme-fore; color:@theme-back; } }
   
 </style>
+
+<!--
+
+border-left: @theme-fore solid thin;
+      border-top:@theme-fore solid thin; border-right:@theme-fore solid thin;
+      const init = function ()  {
+        nav.setPages(props.route,props.pages); // Will only set pages if needed
+        let pageArg = nav.getPageKey(props.route);
+        console.log( 'Tabs.init()', { route:props.route, pageKey:pageKey.value, pages:props.pages } );
+        onPage(pageArg); }
+
+      onMounted( function() {
+        mix.subscribe(  "Nav", 'Tabs.vue.'+props.route, (obj) => {
+          if( obj.source !== 'Tabs'  ) {
+            nextTick( function() {
+              init(); } ) } } ) } )
+-->

@@ -11,33 +11,33 @@
 <script type="module">
 
   import { inject } from 'vue';
-
+  
   let Icon = {
 
     props: { icon:String, name:String, summ:String, size:Number, fnClick:Function },
-    
-    methods: {
-      
-      hasSumm: function() {
-        return this.mix.isDef(this.summ); },
-      
-      doClick: function() {
-        if( this.mix.isDef(this.fnClick) ) {
-          this.fnClick(this.name); } },
 
-      style: function() {
-        return this.mix.fontSizeCss(this.size); }
+    setup( props ) {
 
-      mounted: function () {
-        this.mix = inject('mix'); }
-    }
+      const mix = inject( 'mix' );
+
+      const hasSumm = function() {
+        return mix.isDef(props.summ); }
+
+      const doClick = function() {
+        if( mix.isDef(props.fnClick) ) {
+          props.fnClick(props.name); } }
+
+      const style = function() {
+        return mix.fontSizeCss(props.size); }
+        
+    return { doClick, style, hasSumm }; }
   }
   
   export default Icon;
   
 </script>
 
-<style lang="less">
+<style scoped lang="less">
   
   @import '../../css/themes/theme.less';
   

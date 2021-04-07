@@ -6171,17 +6171,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/node_modules\/@vue\/shared\/dist\/shared.esm-bundler.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/@vue\/shared\/dist\/shared.esm-bundler-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/node_modules\/d3-array\/src\/array.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -12109,6 +12098,17 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/pub\/draw\/show\/Flavor.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/draw\/show\/Flavor-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/pub\/draw\/show\/Hue.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -12667,17 +12667,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/src\/appl\/Muse.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/appl\/Muse.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/src\/base\/nav\/Mix.coffee" : {
       "ft" : 32,
       "ma" : 0,
@@ -13179,17 +13168,6 @@
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/draw\/show\/Tree.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/draw\/show\/Wheel.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/draw\/show\/Wheel.js",
       "oF" : 0,
       "oS" : 1,
       "sC" : 0,
@@ -13881,16 +13859,21 @@
       "oAP" : "\/pub\/vue\/draw\/Hues.js",
       "oF" : 0
     },
-    "\/vue\/draw\/Roll.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
+    "\/vue\/draw\/Pane.vue" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
       "oA" : 1,
-      "oAP" : "\/vue\/draw\/Roll-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
+      "oAP" : "\/pub\/vue\/draw\/Pane.js",
+      "oF" : 0
+    },
+    "\/vue\/draw\/Port.vue" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/vue\/draw\/Port.js",
+      "oF" : 0
     },
     "\/vue\/elem\/Area.vue" : {
       "cB" : 0,
@@ -13923,6 +13906,17 @@
       "oA" : 1,
       "oAP" : "\/pub\/vue\/elem\/Item.js",
       "oF" : 0
+    },
+    "\/vue\/elem\/Roll.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/vue\/elem\/Roll-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
     },
     "\/vue\/elem\/Tabs.vue" : {
       "cB" : 0,
@@ -13980,22 +13974,6 @@
       "oAP" : "\/pub\/vue\/math\/Math.js",
       "oF" : 0
     },
-    "\/vue\/math\/MathEQ.vue" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/vue\/math\/MathEQ.js",
-      "oF" : 0
-    },
-    "\/vue\/math\/MathML.vue" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/vue\/math\/MathML.js",
-      "oF" : 0
-    },
     "\/vue\/math\/MathND.vue" : {
       "cB" : 0,
       "ft" : 8192,
@@ -14004,111 +13982,13 @@
       "oAP" : "\/pub\/vue\/math\/MathND.js",
       "oF" : 0
     },
-    "\/vue\/math\/Roll.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/vue\/math\/Roll-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/vue\/note\/CheatNB.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/vue\/note\/CheatNB-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/vue\/note\/Embed.vue" : {
+    "\/vue\/math\/PageExp.vue" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 1,
-      "oAP" : "\/pub\/vue\/note\/Embed.js",
+      "oAP" : "\/pub\/vue\/math\/PageExp.js",
       "oF" : 0
-    },
-    "\/vue\/note\/EmbedNB.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/vue\/note\/EmbedNB-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/vue\/note\/Ganja.vue" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/vue\/note\/Ganja.js",
-      "oF" : 0
-    },
-    "\/vue\/note\/GanjaNB.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/vue\/note\/GanjaNB-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/vue\/note\/Maths.vue" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/vue\/note\/Maths.js",
-      "oF" : 0
-    },
-    "\/vue\/note\/Note.vue" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/vue\/note\/Note.js",
-      "oF" : 0
-    },
-    "\/vue\/note\/Roll.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/vue\/note\/Roll-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/vue\/note\/Stand.vue" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/vue\/note\/Stand.js",
-      "oF" : 0
-    },
-    "\/vue\/note\/StandNB.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/vue\/note\/StandNB-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
     },
     "\/vue\/svg\/hallowback2.svg" : {
       "ft" : 2097152,

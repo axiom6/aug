@@ -12,19 +12,25 @@
   // CoffeeScript does not produce warning messages.
   import Build  from '../../pub/base/util/Build.js'
   import CubeTh from '../../pub/math/cube/CubeTh.js'
-  import { inject } from 'vue';
+  import { inject, onMounted } from 'vue';
   
-  export default {
-    
-    data() {
-      return { build:{}, cubeTh:{} }; },
-    
-    mounted: function () {
-      this.build  = new Build(  this.mix.batch() );
-      this.cubeTh = new CubeTh( this.build, "CubeTh", false );
-      this.cubeTh.animate(); } }
+  let Cube = {
+
+    setup() {
+
+      const mix    = inject('mix');
+      const build  = new Build(  mix.batch() );
+
+      onMounted( function () {
+        const cubeTh = new CubeTh( build, "CubeTh", false );
+        cubeTh.animate(); } )
       
+    return {}; }
+  }
+
+  export default Cube;
 </script>
+
 
 <style lang="less">
   .cube-pane { position:absolute; left:0; top:0; width:100%; height:100%; }

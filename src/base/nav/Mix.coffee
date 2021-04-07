@@ -218,6 +218,12 @@ class Mix
       console.error( 'Mix.dispObject() unknown pracKey',   { compKey:compKey, inovKey:inovKey, pracKey:pracKey, dispKey:dispKey } )
     disp
 
+  flavorJson: () ->
+    if Mix.Main.Batch.Flavor?
+      Mix.Main.Batch.Flavor.data
+    else
+      console.error( 'Mix.flavorJson Flavor.json has not been import into Batch')
+      {}
 
   getPrac: ( pracs, row, column, inovKey ) ->
     for key, prac of pracs

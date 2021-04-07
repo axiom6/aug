@@ -5,10 +5,10 @@ import Nav     from '../base/nav/Nav.js'
 import Mix     from '../base/nav/Mix.js'
 import Home    from '../../vue/appl/Home.vue'
 import GeomND  from '../../vue/geom/GeomND.vue'
+import MathND  from '../../vue/math/MathND.vue'
 
 import { createApp }    from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
-
 
 #mport Cache   from '../base/util/Cache.js'
 #mport Test    from './Test.js'
@@ -22,6 +22,9 @@ import InfoJson from '../../data/muse/Info.json'
 import KnowJson from '../../data/muse/Know.json'
 import WiseJson from '../../data/muse/Wise.json'
 import CubeJson from '../../data/muse/Cube.json'
+import FlavorJson from '../../data/jitter/Flavor.json'
+import ChoiceJson from '../../data/jitter/Choice.json'
+import FontJson from "../../css/font/three/helvetiker_regular.typeface.json"
 #mport DataInov from '../../data/inno/Data.json'
 #mport MachInov from '../../data/inno/Mach.json'
 #mport MathInov from '../../data/inno/Math.json'
@@ -32,31 +35,28 @@ import CubeJson from '../../data/muse/Cube.json'
 class Augm
 
   Augm.Batch = {
-    Math: { url:'augm/Math.json', data:MathJson }
-    Geom: { url:'augm/Geom.json', data:GeomJson }
-    Data: { url:'augm/Data.json', data:DataJson }
-    Prin: { url:'muse/Prin.json', data:PrinJson }
-    Rows: { url:'muse/Rows.json', data:RowsJson }
-    Info: { url:'muse/Info.json', data:InfoJson }
-    Know: { url:'muse/Know.json', data:KnowJson }
-    Wise: { url:'muse/Wise.json', data:WiseJson }
-    Cube: { url:'muse/Cube.json', data:CubeJson } }
-    #ont: { url:Augm.FontUrl,     data:null } }
+    Math:   { url:'augm/Math.json',     data:MathJson   }
+    Geom:   { url:'augm/Geom.json',     data:GeomJson   }
+    Data:   { url:'augm/Data.json',     data:DataJson   }
+    Prin:   { url:'muse/Prin.json',     data:PrinJson   }
+    Rows:   { url:'muse/Rows.json',     data:RowsJson   }
+    Info:   { url:'muse/Info.json',     data:InfoJson   }
+    Know:   { url:'muse/Know.json',     data:KnowJson   }
+    Wise:   { url:'muse/Wise.json',     data:WiseJson   }
+    Cube:   { url:'muse/Cube.json',     data:CubeJson   }
+    Flavor: { url:'jitter/Flavor.json', data:FlavorJson }
+    Choice: { url:'jitter/Choice.json', data:FlavorJson }
+    Font:   { url: '',                  data:FontJson   } }
 
   Augm.routes = [
     { path: '/',        name:'Home',    components:{ Home:     Home } },
     { path: '/math',    name:'Math',    components:{ Math:     Home.Math }, children: [
-      { path:'ML',      name:'MathML',  components:{ MathML:   Augm.lazy( 'vue/math/MathML') } },
-      { path:'EQ',      name:'MathEQ',  components:{ MathEQ:   Augm.lazy( 'vue/math/MathEQ') } } ] },
+      { path:'ML',      name:'MathML',  components:{ MathML:   MathND } },     # Augm.lazy( 'vue/math/MathND') } },
+      { path:'EQ',      name:'MathEQ',  components:{ MathEQ:   MathND } } ] }, # Augm.lazy( 'vue/math/MathND') } } ] },
     { path: '/geom',    name:'Geom',    components:{ Geom:     Home.Geom }, children: [
       { path:'2D',      name:'Geom2D',  components:{ GeomND:   GeomND } }, # Augm.lazy( 'vue/geom/GeomND')
       { path:'3D',      name:'Geom3D',  components:{ GeomND:   Augm.lazy( 'vue/geom/GeomND') } },
       { path:'4D',      name:'Geom4D',  components:{ GeomND:   Augm.lazy( 'vue/geom/GeomND') } } ] },
-    { path: '/note',    name:'Note',    components:{ Note:     Home.Note }, children: [
-      { path:'stand',   name:'Stand',   components:{ Stand:    Augm.lazy('vue/note/StandVue' ) } },
-      { path:'embed',   name:'Embed',   components:{ Embed:    Augm.lazy('vue/note/EmbedVue' ) } },
-      { path:'maths',   name:'Maths',   components:{ Maths:    Augm.lazy('vue/note/MathsVue' ) } },
-      { path:'ganja',   name:'Ganja',   components:{ Ganja:    Augm.lazy('vue/note/GanjaVue' ) } } ] },
     { path: '/draw',    name:'Draw',    components:{ Draw:     Augm.lazy('vue/draw/Draw'     ) } },
     { path: '/hues',    name:'Hues',    components:{ Hues:     Augm.lazy('vue/draw/Hues'     ) } },
     { path: '/cube',    name:'Cube',    components:{ Cube:     Augm.lazy('vue/cube/Cube'     ) } },
@@ -72,8 +72,6 @@ class Augm
     Geom:{ title:'Geom', key:'Geom', route:'Geom', pracs:{}, ikw:true,  icon:"fas fa-shapes",
     west:"Math", north:"Math", east:"Note", south:"Note", next:"Note", prev:"Math" }
     #Data:{ title:'Data', key:'Data', route:'Data', pracs:{}, ikw:true,  icon:"fas fa-database"     }
-    Note:{ title:'Note', key:'Note', route:'Note', pracs:{}, ikw:false, icon:"fab fa-leanpub",
-    west:"Geom", north:"Geom", east:"Draw", south:"Draw", next:"Draw", prev:"Geom" }
     Draw:{ title:'Draw', key:'Draw', route:'Draw', pracs:{}, ikw:false, icon:"fas fa-draw-polygon",
     west:"Note", north:"Note", east:"Hues", south:"Hues", next:"Hues", prev:"Note" }
     Hues:{ title:'Hues', key:'Hues', route:'Hues', pracs:{}, ikw:false, icon:"fas fa-palette",

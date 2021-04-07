@@ -4,7 +4,7 @@
       <tbody>
         <template v-for="area in areat">
           <tr >
-            <td v-if="isDef(area.icon)" class="area-icon"><i :class="area.icon"></i></td>
+            <td v-if="mix.isDef(area.icon)" class="area-icon"><i :class="area.icon"></i></td>
             <td class="area-name" @click="doClick(area.name)">{{area.name}}</td>
             <td class="area-desc">{{area.desc}}</td>
           </tr>
@@ -15,26 +15,26 @@
 
 <script type="module">
 
-  import { inject } from 'vue';
+  import { inject, ref } from 'vue';
+
   let Area = {
 
     props: { areat:Object, size:Number, fnClick:Function },
 
-    data() { return { area:null } },
+    setup( props ) {
 
-    methods: {
-      
-      isDef:function( obj ) {
-        return this.mix.isDef(obj); },
+      const mix = inject( 'mix' );
 
-      doClick: function(name) {
-        if( this.mix.isDef(this.fnClick) ) {
-          this.fnClick(name); } },
+      const area = ref(null);
 
-      style: function() {
-        return this.mix.fontSizeCss(this.size); }
+      const doClick = function(name) {
+        if( mix.isDef(props.fnClick) ) {
+          props.fnClick(name); } }
 
-    }
+      const style = function() {
+        return mix.fontSizeCss(props.size); }
+
+    return { area, doClick, style, mix }; }
 
   }
 
@@ -42,15 +42,15 @@
 
 </script>
 
-<style lang="less">
+<style scoped lang="less">
   
   @import '../../css/themes/theme.less';
-  
+
   @itemFS:1.0*@themeFS;
   
   .area-pane {
       .area-icon { text-align:center;                           }
       .area-name { text-align:left;   font-weight:bold;         }
-      .area-desc { text-align:left;   padding-left:1.5*@itemFS; } }
+      .area-desc { text-align:left;   padding-left:2.5; } }
 
 </style>

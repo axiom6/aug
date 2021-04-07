@@ -1,17 +1,17 @@
 
 <template><div class="tocs-pane">
   <ul>
-    <template v-for="komp in komps" :key="komp.key">
-      <li>
+    <template v-for="komp in komps">
+      <li><!--/* @vite-ignore */ -->
         <div   v-on:click="doComp(komp.key)">
           <div  :style="styleComp(komp.key)"><i :class="komp.icon"></i>{{komp.title}}</div>
         </div>
-        <ul v-if="myKomp(komp.key)"><template v-for="prac in tocPracs(compKey,inovKey)" :key="prac.name">
-          <li v-on:click="doPrac(prac.name)" :style="style(prac)" >
+        <ul v-if="myKomp(komp.key)"><template v-for="prac in tocPracs(compKey,inovKey)">
+          <li v-on:click="doPrac(prac.name)" :style="style(prac)">
             <i :class="prac.icon"></i>
             <span>{{prac.name}}</span>
-            <ul v-show="pracKey===prac.name"><template v-for="disp in prac.disps" :key="disp.name">
-              <li v-on:click.stop="doDisp(disp.name)" :style="style(disp)" >
+            <ul v-show="pracKey===prac.name"><template v-for="disp in prac.disps">
+              <li v-on:click.stop="doDisp(disp.name)" :style="style(disp)">
                 <i :class="disp.icon"></i>{{disp.name}}</li>
             </template></ul>
           </li>
@@ -23,69 +23,74 @@
 
 <script type="module">
 
-  import { inject } from 'vue';
-  
+  import { inject, ref, onMounted } from "vue";
+
   let Tocs = {
     
-    data: function() {
-      return { komps:{}, compKey:'Home', inovKey:'None', pracKey:'None', dispKey:'None', routNav:'None' } },
-    
-    methods: {
-      myKomp: function(kompKey) {
-        return kompKey===this.compKey && this.mix.isBatch(this.compKey) },
-      doComp: function(compKey) {
-        let  route   = this.komps[compKey].route;
-        this.compKey = compKey;
-        this.inovKey = compKey;
-        let obj = { route:route, compKey:compKey, inovKey:this.inovKey, source:'Toc' }
-        this.pub( obj ); },
-      doPrac: function(pracKey) {
-        this.pracKey = pracKey;
-        let route    = this.toRoute('Prac', pracKey );
-        this.pub( { route:route, pracKey:pracKey, source:'Toc' } ); },
-      doDisp: function(dispKey) {
-        this.dispKey = dispKey;
-        let route    = this.toRoute('Disp', dispKey );
-        this.pub( { route:route, dispKey:dispKey, source:'Toc' } ); },
-      pub: function(obj) {
-        this.nav.dirTabs = false;
-        this.nav.pub(obj); },
-      onNav:  function (obj) {
-        if( obj.source !== 'Toc' ) {
-          if( this.keyEq(this.compKey,obj.compKey ) ) { this.compKey = obj.compKey; }
-          if( this.keyEq(this.pracKey,obj.pracKey ) ) { this.pracKey = obj.pracKey; }
-          if( this.keyEq(this.dispKey,obj.dispKey ) ) { this.dispKey = obj.dispKey; }
-          if( this.keyEq(this.inovKey,obj.inovKey ) ) { this.inovKey = obj.inovKey; }
-          if( this.keyEq(this.routNav,obj.route   ) ) { this.routNav = obj.route;   } } },
-      keyEq: function( tkey, okey ) {
-         return this.mix.isDef(okey) && tkey !== okey; },
-      styleComp: function( kompKey ) {
-        return this.myKomp(kompKey) ? { backgroundColor:'wheat', color:'black', borderRadius:'0 24px 24px 0' }
-                                    : { backgroundColor:'#333',  color:'wheat', borderRadius:'0 24px 24px 0' }; },
-      style: function( ikwObj ) {
-        return this.mix.styleObj(ikwObj); },
-      toRoute: function( level, routeKey ) {
-        let route = this.mix.isMuse()   ? level  : routeKey;
-            route = this.compKey==='Talk' ? 'Talk' : route;
-            return route; },
-      tocPracs: function(compKey,inovKey) {
-        let pracs = this.mix.inovObject( compKey, inovKey );
-        let filts = {}
-        for( let key in pracs ) {
-          let prac = pracs[key];
-          if( prac.row !== 'Dim' || compKey === 'Prin' ) {
-            filts[key] = prac; } }
-        return filts; },
-      },
+    setup() {
 
-    beforeMount: function () {
-      this.mix = inject('mix');
-      this.nav = inject('nav');
-      this.komps = this.mix.kompsTocs(); },
+      const mix     = inject( 'mix' );
+      const nav     = inject( 'nav' );
+      let   komps   = mix.kompsTocs();
+      const compKey = ref('Home');
+      const inovKey = ref('None');
+      const pracKey = ref('None');
+      const dispKey = ref('None');
+      const routNav = ref('None');
+
+      const myKomp = function(kompArg) {
+        return kompArg===compKey.value && mix.isBatch(compKey.value) }
+      const doComp = function(kompKey) {
+        let  route    = komps[kompKey].route;
+        compKey.value = kompKey;
+        inovKey.value = nav.inovKey;
+        let obj = { route:route, compKey:compKey.value, source:'Toc' };
+        pub( obj ); }
+      const doPrac = function(pracArg) {
+        pracKey.value = pracArg;
+        let route    = toRoute('Prac', pracArg );
+        pub( { route:route, pracKey:pracArg, source:'Toc' } ); }
+      const doDisp = function(dispArg) {
+        dispKey.value = dispArg;
+        let route    = toRoute('Disp', dispArg );
+        pub( { route:route, dispKey:dispArg, source:'Toc' } ); }
+      const pub = function(obj) {
+        nav.dirTabs = false;
+        nav.pub(obj); }
+      const onNav =  function (obj) {
+        if( obj.source !== 'Toc' ) {
+          if( keyEq(compKey.value,obj.compKey ) ) { compKey.value = obj.compKey; }
+          if( keyEq(pracKey.value,obj.pracKey ) ) { pracKey.value = obj.pracKey; }
+          if( keyEq(dispKey.value,obj.dispKey ) ) { dispKey.value = obj.dispKey; }
+          if( keyEq(inovKey.value,obj.inovKey ) ) { inovKey.value = obj.inovKey; }
+          if( keyEq(routNav.value,obj.route   ) ) { routNav.value = obj.route;   } } }
+      const keyEq = function( tkey, okey ) {
+         return mix.isDef(okey) && tkey !== okey; }
+      const styleComp = function( kompArg ) {
+        return myKomp(kompArg) ? { backgroundColor:'wheat', color:'black', borderRadius:'0 24px 24px 0' }
+                               : { backgroundColor:'#333',  color:'wheat', borderRadius:'0 24px 24px 0' }; }
+      const style = function( ikwObj ) {
+        return mix.styleObj(ikwObj); }
+      const toRoute = function( level, routeArg ) {
+        let route = mix.isMuse()   ? level  : routeArg;
+            route = compKey.value==='Talk' ? 'Talk' : route;
+            return route; }
+      const tocPracs = function(compArg,inovArg) {
+        let pracs = compArg !== 'Cube' ? mix.inovObject(compArg,inovArg) : {};
+        let filts = {}
+        for( let keyn in pracs ) {
+          if( pracs.hasOwnProperty(keyn) ) {
+            let prac = pracs[keyn];
+            if( prac.row !== 'Dim' || compKey.value === 'Prin' ) {
+              filts[keyn] = prac; } } }
+        return filts; }
     
-    mounted: function () {
-      this.mix.subscribe( 'Nav', 'Tocs.vue', (obj) => {
-        this.onNav(obj); } ); }
+    onMounted( function () {
+      mix.subscribe( 'Nav', 'Tocs.vue', (obj) => {
+        onNav(obj); } ); } )
+        
+  return { komps, myKomp, doComp, compKey, inovKey, style, styleComp, doPrac, doDisp, tocPracs }; }
+  
   }
   
    export default Tocs;
@@ -96,7 +101,7 @@
   
   @import '../../css/themes/theme.less';
 
-  @tocsFS:2*@themeFS;
+  @tocsFS:2.5*@themeFS;
   @tocs-back-comp:#333;
   @tocs-back-prac:#444; // Not used yet
   @tocs-back-disp:#555; // Not used yet

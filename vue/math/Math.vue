@@ -2,30 +2,29 @@
 <template>
   <div class="math-pane" ref="Math">
     <h1 v-show="myRoute()">Mathematics</h1>
-    <template v-for="math in maths">
-      <router-view :name="route+math.key"></router-view>
-    </template>
+    <router-view :name="'MathML'"></router-view>
+    <router-view :name="'MathEQ'"></router-view>
   </div>
 </template>
 
 <script type="module">
 
-  import { inject } from 'vue';
+import { inject, onMounted } from 'vue';
 
   let Math = {
 
     setup() {
 
       const mix = inject('mix');
-      const route = 'Math';
-      const maths = [
-        { title:'MathML', key:'ML' },
-        { title:'MathEQ', key:'EQ' } ];
 
       const myRoute = function() {
         return mix.isRoute('Math'); }
 
-    return { myRoute, maths }; }
+    // onMounted( function () {
+    //   console.log( 'Math.onMounted()' ); } )
+
+    return { myRoute }; }
+    
   }
   export default Math;
 

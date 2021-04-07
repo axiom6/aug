@@ -2,7 +2,7 @@ var Cube3D;
 
 import Vis from '../../draw/base/Vis.js';
 
-import * as THREE from '../../../pub/lib/three/three.module.js';
+import * as THREE from 'three';
 
 Cube3D = class Cube3D {
   constructor(plane, row, col1, title, xyz, whd, hsv, opacity, font) {

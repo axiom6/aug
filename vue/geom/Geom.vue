@@ -2,9 +2,7 @@
 <template>
   <div class="geom-pane">
     <h1 v-show="myRoute()">Geometric Algebra</h1>
-    <!--template v-for="geom in geoms"-->
-      <router-view :name="route"></router-view>
-    <!--/template-->
+    <router-view :name="route"></router-view>
   </div>
 </template>
 

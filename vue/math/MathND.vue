@@ -2,10 +2,10 @@
 
 <template>
   <div class="math-nd-pane">
-    <d-tabs :route="route" :pages="pages"></d-tabs>
+    <d-tabs :route="route" :pages="toPages()"></d-tabs>
     <div class="math-nd-comp">
       <template v-for="exp in exps">
-        <div :class="exp.klass" :ref="exp.klass"></div>
+        <m-exp :exp="exp"></m-exp>
       </template>
     </div>
   </div>
@@ -13,57 +13,70 @@
 
 <script type="module">
 
-   import { inject } from 'vue';
-  import Tabs  from '../elem/Tabs.vue';
+  import { inject, ref, onMounted } from 'vue';
+  import Tabs    from '../elem/Tabs.vue';
+  import PageExp from './PageExp.vue';
+  import Differ from '../../pub/math/doc/Differ.js';
+  import Solves from '../../pub/math/doc/Solves.js';
+  import Basics from '../../pub/math/doc/Basics.js';
 
   let MathND = {
 
-    components:{ 'd-tabs':Tabs },
+    components:{ 'd-tabs':Tabs, 'm-exp':PageExp },
+    
+    setup() {
+      const mix   = inject('mix');
+      const nav   = inject('nav');
+      const route = ref(nav.route);
+      const exps  = ref({ } );
+      const pages = {
+        MathEQ: {         
+          Differ: { title:'Differ', key:'Differ', create:Differ, obj:null, show:false },
+          Solves: { title:'Solves', key:'Solves', create:Solves, obj:null, show:false } },
+        MathML: {
+          Basics: { title:'Basics', key:'Basics', create:Basics, obj:null, show:false } } };
 
-    data() { return { route:'None', pages:{} } },
+      const toPages = function() {
+        // console.log( 'MathND.toPages()', { route:route.value, paged:pages[route.value] } );
+        return mix.isDef(pages[route.value]) ? pages[route.value] : {}; }
 
-    methods: {
+      const hasPages = function( name, pageKey ) {
+        return mix.isDef(pages[name]) && mix.isDef(pages[name][pageKey]); }
       
-      onNav: function(obj) {
-        if( this.nav.isMyNav( obj, this.route ) ) {
-          let pageKey = this.nav.getPageKey(this.route);
-          if( pageKey !== 'None') {
-            this.create( pageKey   );
-            this.mathML( this.exps ); } } },
+      const onNav = function(obj) {
+        // console.log( 'MathND.onNav()', obj );
+        if( hasPages( obj.route, obj.pageKey ) ) {
+          route.value = obj.route
+          let page    = pages[obj.route][obj.pageKey];
+          exps.value = createExps( page ); }
+         else {
+           console.log( 'MathND.onNav() unknown route or pageKey', obj );
+        }}
 
-      create: function( pageKey ) {
-        let page = this.pages[pageKey];
+      const createExps = function( page ) {
         if( page.obj===null ) {
             page.obj = new page.create(); }
-        let exps = page.obj.math();
+        let expsa = page.obj.math();
         let i    = 0;
-        for( let key in exps ) {
-          let exp   = exps[key];
-          exp.klass = this.klass(i);
+        for( let key in expsa ) {
+          let exp   = expsa[key];
+          exp.klass = klass(i);
           i++; }
-        this.exps = exps; },
+        return expsa; }
 
-      mathML: function ( exps ) {
-        this.$nextTick( function() { // Wait for DOM to render
-          for( let key in exps ){
-            let exp  = exps[key];
-            let elem = this.$refs[exp.klass][0];
-              elem.innerHTML = exp.mathML; } } ) },
+      // Generate a row column layout class
+      const klass = function( i ) {
+        let ncol = 3;
+        let mod  = i       % ncol;
+        let row  = (i-mod) / ncol + 1;
+        let col  = mod + 1;
+        return `r${row}c${col}`; }
 
-    // Generate a row column layout class
-    klass: function( i ) {
-      let ncol = 3;
-      let mod  = i       % ncol;
-      let row  = (i-mod) / ncol + 1;
-      let col  = mod + 1;
-      return `r${row}c${col}`; }
-    },
+    onMounted( function () {
+      mix.subscribe( 'Nav', 'MathMD.vue', (obj) => {
+          onNav( obj ); } ); } )
 
-    mounted: function () {
-      this.mix = inject('mix');
-      this.nav = inject('nav');
-      this.mix.subscribe( 'Nav', 'Math.vue', (obj) => {
-          this.onNav( obj ); } ); }
+      return { route, exps, toPages }; }
   }
   
 export default MathND;

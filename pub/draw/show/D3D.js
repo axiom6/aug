@@ -2,7 +2,7 @@ var D3D;
 
 import SvgMgr from '../base/SvgMgr.js';
 
-import Wheel from './Wheel.js';
+import Flavor from './Flavor.js';
 
 import Axes from './Axes.js';
 
@@ -17,16 +17,19 @@ import Tree from './Tree.js';
 import Hue from './Hue.js';
 
 D3D = class D3D {
-  constructor(stream) {
-    this.stream = stream;
+  static onChoice(choice, checked) {
+    console.log('D3D.onChoice()', {
+      choice: choice,
+      checked: checked
+    });
   }
 
-  create(name, elem) {
+  static create(name, elem, mix) {
     var svgMgr;
-    svgMgr = new SvgMgr(name, elem, 'Comp', this.stream);
+    svgMgr = new SvgMgr(name, elem, 'Comp');
     switch (name) {
-      case 'Wheel':
-        return new Wheel(svgMgr);
+      case 'Flavor':
+        return new Flavor(svgMgr, D3D.onChoice, mix);
       case 'Axes':
         return new Axes(svgMgr);
       case 'Chord':
