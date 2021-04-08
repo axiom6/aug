@@ -35,6 +35,8 @@
         Sphere:  { title:'Sphere',  key:'Sphere',  show:false },
         Regress: { title:'Regress', key:'Regress', show:false } };
 
+      mix.addScript( "/assets/mathbox-bundle.js" )
+
       const onNav = function(obj) {
         if( nav.isMyNav( obj, route ) && nav.hasPageKey( route, obj.pageKey ) ) {
             nav.setPageKey( route, obj.pageKey );
@@ -54,6 +56,7 @@
 <style lang="less">
   
   @import '../../css/themes/theme.less';
+  @import '../../css/themes/mathbox.css';
 
   @huesFS:@themeFS;
   

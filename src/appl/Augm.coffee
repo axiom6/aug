@@ -1,11 +1,11 @@
 
+
+import Load    from './Load.js'
 import Data    from '../base/util/Data.js'
 import Stream  from '../base/util/Stream.js'
 import Nav     from '../base/nav/Nav.js'
 import Mix     from '../base/nav/Mix.js'
 import Home    from '../../vue/appl/Home.vue'
-import GeomND  from '../../vue/geom/GeomND.vue'
-import MathND  from '../../vue/math/MathND.vue'
 
 import { createApp }    from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
@@ -45,32 +45,31 @@ class Augm
     Wise:   { url:'muse/Wise.json',     data:WiseJson   }
     Cube:   { url:'muse/Cube.json',     data:CubeJson   }
     Flavor: { url:'jitter/Flavor.json', data:FlavorJson }
-    Choice: { url:'jitter/Choice.json', data:FlavorJson }
+    Choice: { url:'jitter/Choice.json', data:ChoiceJson }
     Font:   { url: '',                  data:FontJson   } }
 
-  Augm.routes = [
-    { path: '/',        name:'Home',    components:{ Home:     Home } },
-    { path: '/math',    name:'Math',    components:{ Math:     Home.Math }, children: [
-      { path:'ML',      name:'MathML',  components:{ MathML:   MathND } },     # Augm.lazy( 'vue/math/MathND') } },
-      { path:'EQ',      name:'MathEQ',  components:{ MathEQ:   MathND } } ] }, # Augm.lazy( 'vue/math/MathND') } } ] },
-    { path: '/geom',    name:'Geom',    components:{ Geom:     Home.Geom }, children: [
-      { path:'2D',      name:'Geom2D',  components:{ GeomND:   GeomND } }, # Augm.lazy( 'vue/geom/GeomND')
-      { path:'3D',      name:'Geom3D',  components:{ GeomND:   Augm.lazy( 'vue/geom/GeomND') } },
-      { path:'4D',      name:'Geom4D',  components:{ GeomND:   Augm.lazy( 'vue/geom/GeomND') } } ] },
-    { path: '/draw',    name:'Draw',    components:{ Draw:     Augm.lazy('vue/draw/Draw'     ) } },
-    { path: '/hues',    name:'Hues',    components:{ Hues:     Augm.lazy('vue/draw/Hues'     ) } },
-    { path: '/cube',    name:'Cube',    components:{ Cube:     Augm.lazy('vue/cube/Cube'     ) } },
-    { path: '/wood',    name:'Wood',    components:{ Wood:     Augm.lazy('vue/wood/Wood'     ) } } ]
+  loader = new Load()
 
-  Augm.routeNames = Augm.createRouteNames( Augm.routes )
+  Augm.routes = [
+    { path: '/',     name:'Home',   components:{ Home:   Home } },
+    { path: '/math', name:'Math',   components:{ Math:   Home.Math }, children: [
+      { path:'ML',   name:'MathML', components:{ MathML: loader.load('MathND') } },
+      { path:'EQ',   name:'MathEQ', components:{ MathEQ: loader.load('MathND') } } ] },
+    { path: '/draw', name:'Draw',   components:{ Draw:   loader.load('Draw') } },
+    { path: '/hues', name:'Hues',   components:{ Hues:   loader.load('Hues') } },
+    { path: '/cube', name:'Cube',   components:{ Cube:   loader.load('Cube') } },
+    { path: '/wood', name:'Wood',   components:{ Wood:   loader.load('Wood') } } ]
+
+  Augm.geomRoute =
+    { path: '/geom', name:'Geom',   components:{ Geom:   Home.Geom }, children: [
+      { path:'2D',   name:'Geom2D', components:{ Geom2D: loader.load('GeomND') } },
+      { path:'3D',   name:'Geom3D', components:{ Geom3D: loader.load('GeomND') } } ] }
 
   Augm.komps = {
     Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
     west:"Wood", north:"Wood", east:"Math", south:"Math", next:"Math", prev:"Wood" }
     Math:{ title:'Math', key:'Math', route:'Math', pracs:{}, ikw:true,  icon:"fas fa-bezier-curve",
     west:"Home", north:"Home", east:"Geom", south:"Geom", next:"Geom", prev:"Home" }
-    Geom:{ title:'Geom', key:'Geom', route:'Geom', pracs:{}, ikw:true,  icon:"fas fa-shapes",
-    west:"Math", north:"Math", east:"Note", south:"Note", next:"Note", prev:"Math" }
     #Data:{ title:'Data', key:'Data', route:'Data', pracs:{}, ikw:true,  icon:"fas fa-database"     }
     Draw:{ title:'Draw', key:'Draw', route:'Draw', pracs:{}, ikw:false, icon:"fas fa-draw-polygon",
     west:"Note", north:"Note", east:"Hues", south:"Hues", next:"Hues", prev:"Note" }
@@ -81,6 +80,10 @@ class Augm
     Wood:{ title:'Wood', key:'Wood', route:'Wood', pracs:{}, ikw:false, icon:"fas fa-tree",
     west:"Cube", north:"Cube", east:"Home", south:"Home", next:"Home", prev:"Cube" } }
 
+  Augm.geomKomp =
+    { title:'Geom', key:'Geom', route:'Geom', pracs:{}, ikw:true,  icon:"fas fa-shapes",
+    west:"Math", north:"Math", east:"Note", south:"Note", next:"Note", prev:"Math" }
+
   # Initialization is accomplished in 3 steps:
   # 1. Read in all the JSON config files in Augm.Batch. Call Augm.init() when complete.
   # 2. Augm.init() initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
@@ -89,6 +92,11 @@ class Augm
   # Called by muse.html to kick things off
   # 1. Read in all the JSON config files in Augm.Batch. Call Augm.init() when complete.
   Augm.start = () ->
+    # console.log( 'Augm.start() env', process.env.NODE_ENV )
+    if process.env.NODE_ENV is 'development'
+      Augm.routes.push( Augm.geomRoute )
+      Augm.komps.Geom = Augm.geomKomp
+    Augm.routeNames = Augm.createRouteNames( Augm.routes )
     Augm.addToHead()
     for key, val of Augm.Batch
       val.data = Data.refine(val.data)
@@ -97,16 +105,16 @@ class Augm
 
   # Add these <link> tags to <head> because vite build makes a mess of them
   Augm.addToHead = () ->
-  # manifest = """<link href="manifest.json"  rel="manifest" crossorigin="use-credentials">"""
-  # siteLink = """<link href="https://vit-muse.web.app/" rel="canonical">"""
-    maniElem                = document.createElement('link')
-    maniElem.href           = "manifest.json"
-    maniElem.rel            = "manifest"
+  # manifest   = """<link href="manifest.json"  rel="manifest" crossorigin="use-credentials">"""
+  # siteLink   = """<link href="https://vit-muse.web.app/" rel="canonical">"""
+  # mboxScript = """<script src="/lib/mbox/mathbox-bundle.js"></script>"""
+    maniElem       = document.createElement('link')
+    maniElem.href  = "manifest.json"
+    maniElem.rel   = "manifest"
     maniElem['crossorigin'] = "use-credentials"
     siteElem = document.createElement('link')
-    # console.log( 'Location', window.location.href )
-    siteElem.href        =   window.location.href
-    siteElem.rel         = "canonical"
+    siteElem.href  =   window.location.href
+    siteElem.rel   = "canonical"
     document.getElementsByTagName("head")[0].appendChild(maniElem);
     document.getElementsByTagName("head")[0].appendChild(siteElem);
     return

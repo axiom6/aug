@@ -3,7 +3,7 @@
 <template>
   <div class="draw-pane">
     <d-tabs :route="route" :pages="pages"></d-tabs>
-    <h1 v-if="route==='Draw'">Drawings in D3</h1>
+    <h1 v-if="showH1">Drawings in D3</h1>
     <template v-for="page in pages" :key="pageIdx">
       <d-pane v-if="page.show" :page="page" class="pane-pane"></d-pane>
     </template>
@@ -25,6 +25,7 @@
       const mix     = inject('mix');
       const nav     = inject('nav');
       const route   = 'Draw';
+      let   showH1  = ref(true);
       const pageIdx = ref(0);
       const page    = ref(null);
       const pages   = {
@@ -39,14 +40,16 @@
       const onNav = function(obj) {
         if( nav.isMyNav( obj, route ) && nav.hasPageKey( route, obj.pageKey ) ) {
             nav.setPageKey( route, obj.pageKey );
+            showH1.value = false;
             pageIdx.value++; } } // console.log( 'Darw.onNav()', pages );
 
       onMounted( function () {
+        showH1.value  = true;
         nav.setPages( route, pages );
         mix.subscribe(  'Nav', 'Draw.vue', (obj) => {
           onNav(obj); } ); } )
 
-    return { route, pages, page, pageIdx }; }
+    return { route, pages, page, pageIdx, showH1 }; }
   }
   export default Draw;
   

@@ -19,9 +19,7 @@
   import Isomet  from "../../src/geom/3D/Isomet.js";
   import Play    from "../../src/geom/3D/Play.js";
   import Isohed  from "../../src/geom/3D/Isohed.js";
-  import Objects from "../../src/geom/3D/Objects.js";
   import Torus   from "../../src/geom/3D/Torus.js";
-  import Planes  from "../../src/geom/4D/Planes.js";
   import Sphere  from "../../src/geom/4D/Sphere.js";
 
   let GeomND = {
@@ -41,10 +39,7 @@
           Isomet:  { title:'Isomet',  key:'Isomet',  obj:Isomet  },
           Play:    { title:'Play',    key:'Play',    obj:Play    },
           Isohed:  { title:'Isohed',  key:'Isohed',  obj:Isohed  },
-          Objects: { title:'Objects', key:'Objects', obj:Objects },
-          Torus:   { title:'Torus',   key:'Torus',   obj:Torus   } },
-        Geom4D: {
-          Planes:  { title:'Planes',  key:'Planes',  obj:Planes  },
+          Torus:   { title:'Torus',   key:'Torus',   obj:Torus   },
           Sphere:  { title:'Sphere',  key:'Sphere',  obj:Sphere  } } }
 
       const page     = ref(null);
@@ -57,8 +52,7 @@
 
       const onNav = function(obj) {
         if( mix.inArray(   obj.route, pageKeys ) ) {
-          pagesKey.value = obj.route;
-          console.log( 'GeomND.onNav()', obj ); } }
+          pagesKey.value = obj.route; } }
 
       onBeforeMount( function () {
         pagesKey.value = mix.inArray(nav.route,pageKeys) ? nav.route : 'Geom2D'; } )

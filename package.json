@@ -14,6 +14,7 @@
     "test": "node --experimental-modules -r esm  pub/math/test/Run.js"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.3",
     "d3": "^6.6.2",
     "d3-sankey": "^0.12.3",
     "firebase": "^6.1.1",

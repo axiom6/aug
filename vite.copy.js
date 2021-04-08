@@ -12,6 +12,6 @@ async function copyDir( src, dest ) {
       ? await copyDir(     srcPath, destPath )
       : await fs.copyFile( srcPath, destPath ); } }
 
-copyDir( 'assets',  'dist/assets' ).then();
-fs.copyFile( 'manifest.json',   'dist/manifest.json' );
-fs.copyFile( 'Worker.js',       'dist/Worker.js'     );
+copyDir( 'assets',   'dist/assets' ).then();
+fs.copyFile( 'manifest.json', 'dist/manifest.json' );
+fs.copyFile( 'Worker.js',     'dist/Worker.js'     );

@@ -1,0 +1,19 @@
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDfsI0FThECdePqyBAStwwwiKs31g-ZApM",
+    authDomain: "augm-visual.firebaseapp.com",
+    projectId: "augm-visual",
+    storageBucket: "augm-visual.appspot.com",
+    messagingSenderId: "987656097376",
+    appId: "1:987656097376:web:0f971f42f1615ab9117d05"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>

@@ -1,4 +1,0 @@
-{
-  "Research":     { "name":"Research",     "sect":"talk/Resh.json", "data":"Resh", "icon": "fas fa-filter" },
-  "Constructual": { "name":"Constructual", "sect":"talk/Cons.json", "data":"None", "icon": "fab fa-connectdevelop" }
-}

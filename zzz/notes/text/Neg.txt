@@ -1,9 +1,0 @@
-
-create          criticize
-inspire         complain
-educate         imitate
-empower         control
-develop         blame
-finish          give up
-collaborate     ignore
-trust           exaggerate

@@ -1,15 +1,5 @@
 {
   "projects": {
-    "dev": "muse",
-    "default": "muse"
-  },
-  "targets": {
-    "augm-d4b3c": {
-      "hosting": {
-        "muse": [
-          "muse-ad352"
-        ]
-      }
-    }
+    "default": "augm-visual"
   }
 }

@@ -85,6 +85,16 @@ class Mix
     sc * fs + 'vmin'
   fontSizeCss: (scale) ->
     {fontSize: @fontSize(scale)}
+  addScript:( src ) ->       # "/lib/mbox/mathbox-bundle.js"
+    scripts    = document.getElementsByTagName('script');
+    for scriptx in scripts
+      # console.log( 'Mix.addScript() scriptx src', scriptx.src )
+      return if scriptx.src.includes(src)
+    # console.log( 'Mix.addScript() adding', src )
+    script     = document.createElement('script')
+    script.src = src
+    document.getElementsByTagName("head")[0].appendChild(script)
+    return
 
   # Nav
   nav: () ->
@@ -96,7 +106,7 @@ class Mix
   isNav: () ->
     Mix.Main.nav?
   navRoute: () ->
-    if      @isNav() then @nav().route else if @isDir() then @dir().route else 'None'
+    if @isNav() then @nav().route else if @isDir() then @dir().route else 'None'
   isRoute: (route) ->
     route is @navRoute()
 

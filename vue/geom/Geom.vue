@@ -2,7 +2,8 @@
 <template>
   <div class="geom-pane">
     <h1 v-show="myRoute()">Geometric Algebra</h1>
-    <router-view :name="route"></router-view>
+    <router-view name="Geom2D"></router-view>
+    <router-view name="Geom3D"></router-view>
   </div>
 </template>
 
@@ -12,22 +13,14 @@
 
   let Geom = {
 
-    data() { return { route:'GeomND',
-      geoms:[
-        { title:'Geom2D', key:'2D' },
-        { title:'Geom3D', key:'3D' },
-        { title:'Geom4D', key:'4D' } ] } },
+    setup() {
 
-    methods: {
-      myRoute: function() {
-        this.mix = inject('mix');
-        return this.mix.isRoute('Geom'); } },
+      const mix   = inject('mix');
 
-    mounted: function () {
-      this.mix = inject('mix');
-      this.nav = inject('nav');
-      this.nav.route = this.route; }
+      const myRoute =function() {
+        return mix.isRoute('Geom'); }
 
+    return { myRoute, }; }
   }
 
   export default Geom;

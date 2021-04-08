@@ -1,11 +1,16 @@
 {
-  "hosting": [
-    { "target":"muse", "public":"pub", "rewrites":{ "source":"pub/app/muse/muse.html",     "destination":"/app/muse/muse.html"     } } ],
-  "database": {
-    "rules":   "pub/base/rules/database.rules.json" },
-  "firestore": {
-    "rules":   "pub/base/rules/firestore.rules",
-    "indexes": "pub/base/rules/firestore.indexes.json" },
-  "storage": {
-    "rules":   "pub/base/rules/storage.rules" }
+  "hosting": {
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
 }

@@ -15,10 +15,10 @@ import { inject, onMounted } from 'vue';
 
     setup() {
 
-      const mix = inject('mix');
+      const nav = inject('nav');
 
       const myRoute = function() {
-        return mix.isRoute('Math'); }
+        return nav.route === 'Math'; }
 
     // onMounted( function () {
     //   console.log( 'Math.onMounted()' ); } )

@@ -7,8 +7,10 @@
         <h2>Choose an Application Component on the Left</h2>
       </div>
     </div>
-    <div class="home-midd">
-      <!--h-btns comp="Home" :btns="btns" init="Axes" back="#3B5999" active="tan"></h-btns-->
+    <div   class="home-midd">
+      <div class="home-btns">
+        <h-btn name="Button"></h-btn>
+      </div>
     </div>
     <div class="home-foot">
       <div>
@@ -20,8 +22,9 @@
 
 <script type="module">
 
-  import { inject } from 'vue';
-  import Btns from '../elem/Btns.vue';
+  import { inject, onMounted } from 'vue';
+  import Btn  from '../elem/Btn.vue';
+//import Btns from '../elem/Btns.vue';
   import Dash from '../dash/Dash.vue';
   import Math from '../math/Math.vue';
   import Geom from '../geom/Geom.vue';
@@ -29,23 +32,16 @@
   
   let Home = {
     
-    components:{ 'h-btns':Btns },
+    components:{ 'h-btn':Btn },
 
-  data() { return { comp:'Draw', key:'Axes', btns:{
-    Axes:    { title:'Axes',    key:'Axes',    obj:null, pos:[ 5,10,0,10], back:'primary',   check:true              },
-    Chord:   { title:'Chord',   key:'Chord',   obj:null, pos:[30,10,0,20], back:'secondary', img:'brew/AutoDrip.jpg' },
-    Cluster: { title:'Cluster', key:'Cluster', obj:null, pos:[50,10,0,10], back:'success',   icon:'fas fa-circle'    },
-    Link:    { title:'Link',    key:'Link',    obj:null, pos:[ 5,25,0,20], back:'info',      check:true              },
-    Radar:   { title:'Radar',   key:'Radar',   obj:null, pos:[ 5,40,0,10], back:'warning',   icon:'fas fa-circle'    },
-    Radial:  { title:'Radial',  key:'Radial',  obj:null, pos:[ 5,55,0,20], back:'danger',    img:'brew/AutoDrip.jpg' },
-    Tree:    { title:'Tree',    key:'Tree',    obj:null, pos:[40,40,0,30], back:'light',     icon:'fas fa-circle'    },
-    Wheel:   { title:'Wheel',   key:'Wheel',   obj:null, pos:[60,60,0,30], back:'success',   img:'brew/AutoDrip.jpg' }
-    } } },
+    setup() {
 
-   mounted: function () {
-       this.mix = inject('mix');
-       this.mix.publish( 'Tocs', 'Close' ); }
-   
+      const mix = inject('mix');
+
+    onMounted( function () {
+      mix.publish( 'Tocs', 'Close' ); } )
+
+    return {}; }
   }
 
   Home.Dash = Dash;
@@ -58,7 +54,9 @@
 </script>
 
 <style lang="less">
-  
+
+  @import '../../css/font/roboto/Roboto.css';
+  @import '../../node_modules/@fortawesome/fontawesome-free/css/all.css';
   @import '../../css/themes/theme.less';
   
   @homeFS:@themeFS;
@@ -74,10 +72,12 @@
     
     .home-midd { grid-area:midd; .themeCenterItems(); justify-self:stretch; align-self:stretch;
       h1 { font-size:2.5*@homeFS; } }
+
+    .home-btns { width:30%; height:30%; }
   
     .home-foot { grid-area:foot; .themeCenterItems(); justify-self:stretch; align-self:stretch;
       h1 { font-size:2.5*@homeFS; } }
-    
   }
+  
   
 </style>

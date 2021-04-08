@@ -48,10 +48,9 @@
         if( hasPages( obj.route, obj.pageKey ) ) {
           route.value = obj.route
           let page    = pages[obj.route][obj.pageKey];
-          exps.value = createExps( page ); }
-         else {
-           console.log( 'MathND.onNav() unknown route or pageKey', obj );
-        }}
+          exps.value = createExps( page ); } }
+       //else {
+       //  console.log( 'MathND.onNav() unknown route or pageKey', obj );
 
       const createExps = function( page ) {
         if( page.obj===null ) {
@@ -73,7 +72,7 @@
         return `r${row}c${col}`; }
 
     onMounted( function () {
-      mix.subscribe( 'Nav', 'MathMD.vue', (obj) => {
+      mix.subscribe( 'Nav', 'MathND.vue', (obj) => {
           onNav( obj ); } ); } )
 
       return { route, exps, toPages }; }

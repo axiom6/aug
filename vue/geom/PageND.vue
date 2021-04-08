@@ -25,11 +25,12 @@ let PageND = {
 
     const remove = function() {
       nextTick( function() {
-        while( mix.isDef(elem.value) && mix.isDef(elem.value.firstChild) ) {
-          elem.value.removeChild(elem.value.firstChild); } } ) }
+        let dom = elem.value;
+        while( mix.isDef(dom) && mix.isDef(dom.firstChild) ) {
+          dom.removeChild(dom.firstChild); } } ) }
 
     const onNav = function(obj) {
-      console.log( 'PageND.onNav()', { key:props.page.key }, obj );
+      // console.log( 'PageND.onNav()', { key:props.page.key }, obj );
       if( props.page.key === obj.pageKey ) {
         show.value = true;
         create(); }
@@ -38,7 +39,6 @@ let PageND = {
          remove(); } }
 
     onMounted( function () {
-      console.log( 'PageND.onMounted()' );
       mix.subscribe( 'Nav', 'PageND.vue'+props.page.key, (obj) => {
         onNav(obj); } ) } )
 
