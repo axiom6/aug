@@ -167,14 +167,13 @@ Data = class Data {
   }
 
   static toUrl(url) {
-    if (!url.startsWith('../')) {
-      if (window.location.href.includes('localhost')) {
-        return Data.local + url;
-      } else {
-        return Data.hosted + url;
-      }
+    // console.log( 'Data.toUrl', { url:url, local:Data.local, serve:Data.serve, href:window.location.href })
+    if (window.location.href.includes('3000')) {
+      return Data.local + url;
+    } else if (window.location.href.includes('5000')) {
+      return Data.serve + url;
     } else {
-      return url;
+      return Data.hosted + url;
     }
   }
 
@@ -216,9 +215,11 @@ Data = class Data {
 
 };
 
-Data.local = "../../data/";
+Data.local = "../pub/data/";
 
-Data.hosted = '/data/';
+Data.serve = "../data/";
+
+Data.hosted = "./data/";
 
 Data.cssDir = 'css/'; // /css in /pub
 

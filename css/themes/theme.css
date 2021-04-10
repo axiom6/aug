@@ -1,3 +1,15 @@
+.theme-btns {
+  color: black;
+  background: wheat;
+}
+.theme-dash {
+  color: black;
+  background: wheat;
+}
+.theme-tocs {
+  color: black;
+  background: wheat;
+}
 .theme-h1 {
   font-size: 8vmin;
   margin: 2vmin 0 2vmin 0;

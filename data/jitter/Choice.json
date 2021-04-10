@@ -1,7 +1,7 @@
 {
-  "Flavor":{ "name":"Flavor", "choices":["-","-","-"], "idx":0 },
-  "Roast":{  "name":"Roast",  "choices":["-","-","-"], "idx":0 },
-  "Brew":{   "name":"Brew",   "choices":["-","-","-"], "idx":0 },
-  "Drink":{  "name":"Drink",  "choices":["-","-","-"], "idx":0 },
-  "Body":{   "name":"Body",   "choices":["-","-","-"], "idx":0 }
+  "Flavor":{ "name":"Flavor", "choices":[] },
+  "Roast":{  "name":"Roast",  "choices":[] },
+  "Brew":{   "name":"Brew",   "choices":[] },
+  "Drink":{  "name":"Drink",  "choices":[] },
+  "Body":{   "name":"Body",   "choices":[] }
 }

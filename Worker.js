@@ -385,7 +385,7 @@ Worker.cacheObjsMuse = {
   VisJS: {
     name: 'VisJS',
     status: 0,
-    url: '/pub/draw/base/Vis.js'
+    url: '/pub/base/draw/Vis.js'
   },
   NavJS: {
     name: 'NavJS',
@@ -395,7 +395,7 @@ Worker.cacheObjsMuse = {
   BuildJS: {
     name: 'BuildJS',
     status: 0,
-    url: '/pub/base/conn/Build.js'
+    url: '/pub/muse/conn/Build.js'
   },
   RollJS: {
     name: 'RollJS',

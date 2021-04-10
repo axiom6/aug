@@ -630,7 +630,11 @@ Build = class Build {
     ref = ['Embrace', 'Innovate', 'Encourage'];
     for (i = 0, len = ref.length; i < len; i++) {
       col = ref[i];
-      planes = col === 'Innovate' ? ['Info', 'Data', 'Know', 'Wise'] : ['Info', 'Know', 'Wise'];
+      planes = col === 'Innovate' ? ['Info', 'Know', 'Wise'] : [
+        'Info',
+        'Know',
+        'Wise' // 'Data',
+      ];
       ref1 = ['west', 'north', 'east', 'south'];
       for (j = 0, len1 = ref1.length; j < len1; j++) {
         dir = ref1[j];
@@ -666,7 +670,11 @@ Build = class Build {
     ref = ['Embrace', 'Innovate', 'Encourage'];
     for (i = 0, len = ref.length; i < len; i++) {
       cname = ref[i];
-      planes = cname === 'Innovate' ? ['Info', 'Data', 'Know', 'Wise'] : ['Info', 'Know', 'Wise'];
+      planes = cname === 'Innovate' ? ['Info', 'Know', 'Wise'] : [
+        'Info',
+        'Know',
+        'Wise' // 'Data',
+      ];
       col = this.getCol(cname);
       col.dims = [];
       for (j = 0, len1 = planes.length; j < len1; j++) {

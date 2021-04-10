@@ -1,3 +1,4 @@
+// import WorkerJS from '/Worker.js'
 var Cache;
 
 Cache = class Cache {
@@ -8,38 +9,8 @@ Cache = class Cache {
     this.quotaGranted = this.quotaGranted.bind(this);
     this.onlineEvent = this.onlineEvent.bind(this);
     this.stream = stream;
-    this.register('../../Worker.js');
-  }
-
-  constructor2(stream, cacheName, cacheObjs, logPub = false) {
-    this.stream = stream;
-    this.cacheName = cacheName;
-    this.cacheObjs = cacheObjs;
-    this.logPub = logPub;
-    Worker.cacheName = this.cacheName;
-    Worker.cacheObjs = this.cacheObjs;
-    Worker.logPub = this.logPub;
-    Worker.runCreate = true;
-    return this.register('../../Worker.js');
-  }
-
-  constructor3(stream, cacheName, cacheObjs, logPub = false) {
-    this.stream = stream;
-    this.cacheName = cacheName;
-    this.cacheObjs = cacheObjs;
-    this.logPub = logPub;
-    return this.worker = new Worker(this.cacheName, this.cacheObjs, this.logPub);
-  }
-
-  constructor4(cacheName, cacheObjs, logPub = false, stream) {
-    this.cacheName = cacheName;
-    this.cacheObjs = cacheObjs;
-    this.logPub = logPub;
-    this.stream = stream;
-    this.subject = 'Cache';
-    this.subscribe();
-    this.onlineEvent();
-    return this.register('./Worker.js');
+    // WorkerJS.cacheName = 'Axiom'
+    this.register('./Worker.js');
   }
 
   register(swUrl) {

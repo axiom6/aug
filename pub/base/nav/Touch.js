@@ -1,101 +1,138 @@
 var Touch;
 
-import Tocca from '../../lib/touch/Tocca.esm.js';
-
 Touch = class Touch {
-  constructor(stream, navs) {
-    this.doTouch = this.doTouch.bind(this);
+  constructor(stream, nav) {
+    //elem.addEventListener( 'pointerout',    @out,    false )
+    this.start = this.start.bind(this);
+    this.movit = this.movit.bind(this);
+    this.leave = this.leave.bind(this);
+    this.cancel = this.cancel.bind(this);
+    this.out = this.out.bind(this);
+    this.up = this.up.bind(this);
+    this.endit = this.endit.bind(this);
     this.stream = stream;
-    this.navs = navs;
-    this.tocca = Tocca();
-    this.dirs = ['up', 'down', 'left', 'right'];
-    this.evts = ['tap', 'dbltap', 'longtap', 'swipeleft', 'swipeup', 'swiperight', 'swipedown'];
-    this.route = 'Home';
-    this.$router = null; // Set later
+    this.nav = nav;
+    this.nav.touch = this;
+    this.elem = null;
+    this.reset(); // "tabs-tab","disp-comp","west","east","south","north","cen"
+    this.touchClasses = [];
   }
 
-  onDir(elem) {
-    this.tap(elem, (e) => {
-      return this.doTouch('next', e);
-    });
-    this.dbl(elem, (e) => {
-      return this.doTouch('next', e);
-    });
-    this.hold(elem, (e) => {
-      return this.doTouch('prev', e);
-    });
-    this.right(elem, (e) => {
-      return this.doTouch('west', e); // All directions reversed
-    });
-    this.down(elem, (e) => {
-      return this.doTouch('north', e);
-    });
-    this.left(elem, (e) => {
-      return this.doTouch('east', e);
-    });
-    this.up(elem, (e) => {
-      return this.doTouch('south', e);
-    });
+  reset() {
+    this.beg = null;
+    return this.pnt = null;
   }
 
-  tap(elem, onEvent) {
-    elem.addEventListener('tap', onEvent);
+  listen(elem, touchClasses) {
+    this.elem = elem;
+    this.touchClasses = touchClasses;
+    this.elem.addEventListener('pointerdown', this.start, false);
+    this.elem.addEventListener('pointerup', this.up, false);
+    this.elem.addEventListener('pointerleave', this.leave, false);
+    this.elem.addEventListener('pointercancel', this.cancel, false);
   }
 
-  dbl(elem, onEvent) {
-    elem.addEventListener('dbltap', onEvent);
-  }
-
-  hold(elem, onEvent) {
-    elem.addEventListener('longtap', onEvent);
-  }
-
-  left(elem, onEvent) {
-    elem.addEventListener('swipeleft', onEvent);
-  }
-
-  up(elem, onEvent) {
-    elem.addEventListener('swipeup', onEvent);
-  }
-
-  right(elem, onEvent) {
-    elem.addEventListener('swiperight', onEvent);
-  }
-
-  down(elem, onEvent) {
-    elem.addEventListener('swipedown', onEvent);
-  }
-
-  doTouch(dir, event = null) {
-    var obj, route;
-    // return if dir is 'prev'
-    if (event === null) {
-      ({});
+  start(event) {
+    var inTouch;
+    // event.preventDefault()
+    inTouch = this.nav.inArray(event.target.className, this.touchClasses);
+    if (!inTouch) {
+      return;
     }
-    route = this.navs[this.route][dir];
-    obj = {
-      source: 'Dir',
-      route: route
-    };
-    this.pub(obj);
-    this.doRoute(route, dir);
+    if (!((event.touches != null) && event.touches.length > 1)) {
+      this.elem.setPointerCapture(event.pointerId);
+    }
+    this.beg = event;
+    this.pnt = this.coord(event, {});
+    this.elem.addEventListener('pointermove', this.movit, false);
+    console.log('Touch.start()', {
+      target: event.target.className,
+      inTouch: inTouch
+    });
   }
 
-  pub(obj) {
-    // console.log('Dir.pub()', obj )
-    this.stream.publish('Dir', obj);
+  movit(event) {
+    var pnt;
+    // event.preventDefault()
+    pnt = this.pnt != null ? this.pnt : {};
+    this.pnt = this.coord(event, pnt);
   }
 
-  doRoute(route) {
-    if (this.$router != null) {
-      this.$router.push({
-        name: route
-      });
+  coord(event, pnt) {
+    if (event.targetTouches != null) {
+      pnt.x = event.targetTouches[0].clientX;
+      pnt.y = event.targetTouches[0].clientY; // Either Mouse event or Pointer Event
     } else {
-      console.error('Nav.router() $router not set');
+      pnt.x = event.clientX;
+      pnt.y = event.clientY; // Prefer touch points
     }
-    // console.log('Dir.doRoute()', { beg:@route, dir:dir, end:route } )
-    this.route = route;
+    // console.log( 'Touch.movit()', { x:pnt.x, y:pnt.y, touches:event.targetTouches? } )
+    return pnt;
+  }
+
+  leave(event) {
+    this.endit(event, 'leave');
+  }
+
+  cancel(event) {
+    this.endit(event, 'cancel');
+  }
+
+  out(event) {
+    this.endit(event, 'out');
+  }
+
+  up(event) {
+    this.endit(event, 'cancel');
+  }
+
+  endit(event, type) {
+    var dir;
+    // event.preventDefault()
+    if ((event.touches != null) && event.touches.length > 1) {
+      return;
+    }
+    dir = 'none';
+    if ((this.beg != null) && (this.pnt != null)) {
+      event.target.releasePointerCapture(event.pointerId);
+      dir = this.swipeDir(this.beg.clientX, this.beg.clientY, this.pnt.x, this.pnt.y);
+      if (dir !== 'none') {
+        this.nav.dir(dir);
+      }
+      console.log('Touch.endit()', {
+        type: type,
+        x1: this.beg.clientX,
+        y1: this.beg.clientY,
+        x2: this.pnt.x,
+        y2: this.pnt.y,
+        dir: dir
+      });
+    }
+    this.elem.removeEventListener('pointermove', this.movit, false);
+    this.reset();
+  }
+
+  swipeDir(begX, begY, endX, endY) {
+    var ax, ay, dir, dx, dy;
+    dir = "none";
+    dx = endX - begX;
+    dy = endY - begY;
+    ax = Math.abs(dx);
+    ay = Math.abs(dy);
+    //if ax < 10 and ay < 10
+    //   dir = if event.shiftKey then 'prev' else 'next'
+    if (dx < 0 && ax > ay) {
+      dir = 'west';
+    } else if (dx > 0 && ax > ay) {
+      dir = 'east';
+    } else if (dy < 0 && ay > ax) {
+      dir = 'north';
+    } else if (dy > 0 && ay > ax) {
+      dir = 'south';
+    } else {
+      dir = 'none';
+    }
+    return dir;
   }
 
 };

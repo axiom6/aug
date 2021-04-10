@@ -51,7 +51,7 @@ Util = class Util {
     var a, b;
     a = key.charAt(0);
     b = key.charAt(key.length - 1);
-    return a === a.toUpperCase() && a !== '$' && b !== '_';
+    return a === a.toUpperCase() && a !== '$' && a !== '_' && b !== '_';
   }
 
   static hasChild(obj) {

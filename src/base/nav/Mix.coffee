@@ -1,6 +1,6 @@
 
 import Util from '../util/Util.js'
-import Vis  from '../../draw/base/Vis.js'
+import Vis  from '../../base/draw/Vis.js'
 
 class Mix
 
@@ -85,7 +85,7 @@ class Mix
     sc * fs + 'vmin'
   fontSizeCss: (scale) ->
     {fontSize: @fontSize(scale)}
-  addScript:( src ) ->       # "/lib/mbox/mathbox-bundle.js"
+  addScript:( src ) ->       # "/lib/mbox/augm/mathbox-bundle.js"
     scripts    = document.getElementsByTagName('script');
     for scriptx in scripts
       # console.log( 'Mix.addScript() scriptx src', scriptx.src )
@@ -113,6 +113,12 @@ class Mix
   # Batch
   isBatch:(compk) ->
     Mix.Main.Batch[compk]?
+  data:( name ) ->
+    if @isBatch(name)
+      Mix.Main.Batch[name].data
+    else
+      console.error( 'Mix.data() unknown data name', name )
+      {}
   prin: ()  ->
     Mix.Main.Batch['Prin'].data.pracs
   comps: (compk) ->

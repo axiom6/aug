@@ -179,9 +179,9 @@ Worker.cacheObjsMuse = {
   Cache:        { name:'Cache',        status:0, url:'/pub/base/util/Cache.js'   }
   UtilJS:       { name:'UtilJS',       status:0, url:'/pub/base/util/Util.js'    }
   DataJS:       { name:'DataJS',       status:0, url:'/pub/base/util/Data.js'    }
-  VisJS:        { name:'VisJS',        status:0, url:'/pub/draw/base/Vis.js'     }
+  VisJS:        { name:'VisJS',        status:0, url:'/pub/base/draw/Vis.js'     }
   NavJS:        { name:'NavJS',        status:0, url:'/pub/base/nav/Nav.js'      }
-  BuildJS:      { name:'BuildJS',      status:0, url:'/pub/base/conn/Build.js'   }
+  BuildJS:      { name:'BuildJS',      status:0, url:'/pub/muse/conn/Build.js'   }
   RollJS:       { name:'RollJS',       status:0, url:'/pub/app/muse/roll.js'     }
   PrinJson:     { name:'PrinJson',     status:0, url:'/pub/data/muse/Prin.json'  }
   RowsJson:     { name:'RowsJson',     status:0, url:'/pub/data/muse/Rows.json'  }
