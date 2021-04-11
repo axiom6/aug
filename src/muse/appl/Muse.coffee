@@ -35,7 +35,7 @@ class Muse
   # 1. Read in all the JSON config files in Muse.Batch. Call Muse.init() when complete.
   Muse.start = () ->
     Muse.addToHead()
-    for key, val of Muse.Batch
+    for key, val of Muse.Batch when val.refine? and val.refine
       val.data = Data.refine(val.data)
     Muse.init( Muse.Batch )
     return
@@ -57,15 +57,15 @@ class Muse
     return
 
   Muse.Batch = {
-    Prin:     { url:'muse/Prin.json', data:PrinJson } # data:PrinJson }
-    Rows:     { url:'muse/Rows.json', data:RowsJson } # data:RowsJson }
-    Info:     { url:'muse/Info.json', data:InfoJson } # data:InfoJson }
-    Know:     { url:'muse/Know.json', data:KnowJson } # data:KnowJson }
-    Wise:     { url:'muse/Wise.json', data:WiseJson } # data:WiseJson }
-    Soft:     { url:'inno/Soft.json', data:SoftJson } # data:SoftJson }
-    Data:     { url:'inno/Data.json', data:DataJson } # data:DataJson }
-    Scie:     { url:'inno/Scie.json', data:ScieJson } # data:ScieJson }
-    Math:     { url:'inno/Math.json', data:MathJson } # data:MathJson }
+    Prin:     { url:'muse/Prin.json', data:PrinJson, refine:true }
+    Rows:     { url:'muse/Rows.json', data:RowsJson, refine:true }
+    Info:     { url:'muse/Info.json', data:InfoJson, refine:true }
+    Know:     { url:'muse/Know.json', data:KnowJson, refine:true }
+    Wise:     { url:'muse/Wise.json', data:WiseJson, refine:true }
+    Soft:     { url:'inno/Soft.json', data:SoftJson, refine:true }
+    Data:     { url:'inno/Data.json', data:DataJson, refine:true }
+    Scie:     { url:'inno/Scie.json', data:ScieJson, refine:true }
+    Math:     { url:'inno/Math.json', data:MathJson, refine:true }
   }
 
   Muse.routes = [

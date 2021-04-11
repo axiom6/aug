@@ -1,6 +1,6 @@
 
 import SvgMgr   from '../../base/draw/SvgMgr.js'
-import Flavor   from './Flavor.js'
+import Wheel    from './Wheel.js'
 import Axes     from './Axes.js'
 import Chord    from './Chord.js'
 import Link     from './Link.js'
@@ -17,7 +17,7 @@ class D3D
   D3D.create = ( name, elem, mix ) ->
     svgMgr = new SvgMgr( name, elem, 'Comp' )
     switch name
-      when 'Flavor'  then new Flavor( svgMgr, D3D.onChoice, mix )
+      when 'Flavor'  then new Wheel(  svgMgr, D3D.onChoice, mix )
       when 'Axes'    then new Axes(   svgMgr )
       when 'Chord'   then new Chord(  svgMgr )
       when 'Link'    then new Link(   svgMgr )

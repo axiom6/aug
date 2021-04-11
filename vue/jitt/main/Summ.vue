@@ -30,7 +30,7 @@
       const c0    = ref('-');
       const c1    = ref('-');
       const c2    = ref('-');
-      const debug = true;
+      const debug = false;
 
       const onChoices = function( obj ) {
         if( obj.route === props.name ) {

@@ -49,7 +49,9 @@ Jitter = (function() {
       // Data.batchRead( Jitter.Batch, Jitter.init, Data.refine )
       for (key in ref) {
         val = ref[key];
-        val.data = Data.refine(val.data);
+        if ((val.refine != null) && val.refine) {
+          val.data = Data.refine(val.data);
+        }
       }
       Jitter.init(Jitter.Batch);
     }
@@ -122,19 +124,22 @@ Jitter = (function() {
       url: 'jitter/Choice.json',
       data: ChoiceJson,
       type: 'None',
-      plane: 'None'
+      plane: 'None',
+      refine: true
     },
     Jitter: {
       url: 'jitter/Jitter.json',
       data: JitterJson,
       type: 'None',
-      plane: 'None'
+      plane: 'None',
+      refine: true
     },
     Flavor: {
       url: 'jitter/Flavor.json',
       data: FlavorJson,
       type: 'None',
-      plane: 'None'
+      plane: 'None',
+      refine: true
     }
   };
 

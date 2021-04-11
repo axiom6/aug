@@ -1,27 +1,20 @@
 var Wheel;
 
-import Data from '../../base/util/Data.js';
-
 Wheel = class Wheel {
   constructor(svgMgr, onChoice, mix) {
     this.setChoosen = this.setChoosen.bind(this);
-    // Passed as a callback to Wheel and called when Wheel makes a choice to be published
-    // Here we use @onChoice( choice, roast ) instead
-    this.publish = this.publish.bind(this);
     this.adjustRadius = this.adjustRadius.bind(this);
     this.xc = this.xc.bind(this);
     this.yc = this.yc.bind(this);
     this.isParentOf = this.isParentOf.bind(this);
-    // http://www.w3.org/WAI/ER/WD-AERT/#color-contrast
-    // brightness:( rgb ) ->
-    //   rgb.r * .299 + rgb.g * .587 + rgb.b * .114
     this.fill = this.fill.bind(this);
     this.doText = this.doText.bind(this);
-    // eventType is click mouseover mouseout AddChoice DelChoice
+    // eventType is click mouseover mouseout
     //textEnter.append("title").text( (d) -> d.data.name )
     this.onEvent = this.onEvent.bind(this);
     this.fontSize = this.fontSize.bind(this);
-    // eventType is click mouseover mouseout AddChoice DelChoice
+    this.fontSize2 = this.fontSize2.bind(this);
+    // eventType is click mouseover mouseout
     // This publish function is supplied to the constructor
     // elem.chosen is true/false for add/del
     // elem.data.name is the flavor
@@ -43,30 +36,21 @@ Wheel = class Wheel {
     this.showAllLeaves = false;
     this.radiusFactorChoice = 1.3;
     this.radiusFactorChild = 1.0;
-    this.url = Data.toUrl('jitter/Flavor.json');
     this.nodes = null;
     this.callPub = true;
+    this.childResize = false;
     this.ready();
   }
 
   setChoosen(d) {
-    if (this.mix.choosen('Flavor', d.data.name)) {
-      // console.log( 'Wheel.setChoose()', d.data.name, @mix.choosen('Flavor',d.data.name) )
+    if (d.data == null) {
+      console.log('Wheel.setChoosen() missing d.data'.d);
+    } else if (this.mix.choosen('Flavor', d.data.name)) {
+      // console.log( 'Wheel.setChoosen()', d.data.name, @mix.choosen('Flavor',d.data.name) )
       this.callPub = false;
-      this.onEvent(d, 'click');
+      this.onEvent({}, d, 'click');
       this.callPub = true;
     }
-  }
-
-  publish(add, flavor) {
-    var addDel, choice;
-    addDel = add ? 'AddChoice' : 'DelChoice';
-    choice = {
-      name: 'Wheel',
-      op: addDel,
-      flavor: flavor
-    };
-    console.log('Choice', choice);
   }
 
   ready() {
@@ -79,10 +63,8 @@ Wheel = class Wheel {
       0,
       this.radius // 1.3
     ]);
-    // @formatNumber = @d3.format(",d")
     this.padding = 0;
     this.duration = 300;
-    this.lookup = {};
     xc = this.width / 2;
     yc = this.height / 2;
     this.g = this.svg.append("g").attr("transform", `translate(${xc},${yc}) scale(1,1)`);
@@ -97,9 +79,9 @@ Wheel = class Wheel {
     }).outerRadius((d) => {
       return Math.max(0, this.yy(this.y1(d)));
     });
-    //@d3.json( @url ).then ( json ) =>
-    //@json = json
-    // console.log( 'Wheel.ready()', @json )
+    this.setLevels(this.json, 0);
+    this.json.children = this.removeBranches(this.json.children, ['Rich', 'Fruit']);
+    console.log('Wheel.ready()', this.json);
     this.root = this.d3.hierarchy(this.json);
     this.root.sum((d) => {
       d.chosen = false;
@@ -126,12 +108,12 @@ Wheel = class Wheel {
       } else {
         return "block";
       }
-    }).on("click", (d) => {
-      return this.onEvent(d, 'click');
-    }).on("mouseover", (d) => {
-      return this.onEvent(d, 'mouseover');
-    }).on("mouseout", (d) => {
-      return this.onEvent(d, 'mouseout');
+    }).on("click", (e, d) => {
+      return this.onEvent(e, d, 'click');
+    }).on("mouseover", (e, d) => {
+      return this.onEvent(e, d, 'mouseover');
+    }).on("mouseout", (e, d) => {
+      return this.onEvent(e, d, 'mouseout');
     });
     //.attr( "d", (d) -> console.log( 'Wheel.path(d)', d ) )
     //append("title").text( (d) -> d.data.name )
@@ -139,9 +121,49 @@ Wheel = class Wheel {
     this.d3.select(self.frameElement).style("height", this.height + "px");
   }
 
+  setLevels(obj, level) {
+    var child, j, len, ref;
+    obj.level = level;
+    if (obj.children == null) {
+      return;
+    }
+    ref = obj.children;
+    for (j = 0, len = ref.length; j < len; j++) {
+      child = ref[j];
+      this.setLevels(child, level + 1);
+    }
+  }
+
+  removeBranches(children1, branches) {
+    var child, children2, j, len;
+    if (children1 == null) {
+      return;
+    }
+    children2 = [];
+    for (j = 0, len = children1.length; j < len; j++) {
+      child = children1[j];
+      if (this.inChildren(child, branches)) {
+        Array.prototype.push.apply(children2, this.removeBranches(child.children, branches));
+      } else {
+        children2.push(child);
+      }
+    }
+    return children2;
+  }
+
+  inChildren(child, branches) {
+    var branch, j, len;
+    for (j = 0, len = branches.length; j < len; j++) {
+      branch = branches[j];
+      if (branch === child.name) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   adjustRadius(d) {
     var dy, sc;
-    this.lookup[d.data.name] = d;
     sc = d['data'].scale != null ? d['data'].scale : d.children == null ? 0.8 : 1.0;
     dy = (d.y1 - d.y0) * sc;
     if (d.parent != null) {
@@ -258,12 +280,12 @@ Wheel = class Wheel {
   doText(nodes) {
     var angle, xem;
     this.text = this.g.selectAll('text').data(nodes);
-    this.textEnter = this.text.enter().append('text').on("click", (d) => {
-      return this.onEvent(d, 'click');
-    }).on("mouseover", (d) => {
-      return this.onEvent(d, 'mouseover');
-    }).on("mouseout", (d) => {
-      return this.onEvent(d, 'mouseout');
+    this.textEnter = this.text.enter().append('text').data(nodes).on("click", (e, d) => {
+      return this.onEvent(e, d, 'click');
+    }).on("mouseover", (e, d) => {
+      return this.onEvent(e, d, 'mouseover');
+    }).on("mouseout", (e, d) => {
+      return this.onEvent(e, d, 'mouseout');
     }).style("font-size", (t) => {
       return this.fontSize(t);
     //style('fill',       (d) => if @brightness( @d3.rgb( @fill(d.data) ) ) < 125 then '#eee' else '#000' )
@@ -314,22 +336,22 @@ Wheel = class Wheel {
     });
   }
 
-  onEvent(d, eventType) {
+  onEvent(e, d, eventType) {
     var cy0, py0, py1, resize;
-    if (eventType === 'click' && (d.parent == null)) {
+    if (d.data == null) {
+      console.error('Wheel.onEvent() missing d.data', d);
+      return;
+    } else if ((d.parent == null) && eventType === 'click') {
       this.displayAllLeaves();
     }
-    if (eventType === 'click') {
-      console.log('onEvent', d);
-    }
-    if ((d.data == null) || (d.data['can'] == null)) {
+    if (!d.data['can']) {
       return;
     }
     py0 = d.y0;
     py1 = d.y0 + (d.y1 - d.y0) * this.radiusFactorChoice;
     resize = this.doChoiceResize(d, eventType, d.x0, py0, d.x1, py1);
     cy0 = resize ? py1 : d.y1;
-    if (false) { // d.children?
+    if (d.children != null) {
       d.children.forEach((child) => {
         var cy1;
         if (child != null) {
@@ -339,7 +361,7 @@ Wheel = class Wheel {
         return this.resizeElem(child, resize, child['x0'], cy0, child['x1'], cy1);
       });
     } else {
-      this.resizeElem(d, resize, d['x0'], cy0, d['x1'], d['y1']);
+      this.resizeElem(d, resize, d['x0'], cy0, d['x1'], d['y1']); // and @childResize
     }
     this.g.selectAll('path').data(this.nodes).filter((e) => {
       return this.inBranch(d, e);
@@ -358,7 +380,7 @@ Wheel = class Wheel {
       return this.textTransform(t);
     }).style("font-size", (t) => {
       return this.fontSize(t, d);
-    }).style("display", function(d) {
+    }).style("font-weight", 'bold').style("display", function(d) {
       if (d.data.hide) {
         return "none";
       } else {
@@ -368,6 +390,18 @@ Wheel = class Wheel {
   }
 
   fontSize(t, d = null) {
+    if ((d != null) && this.sameNode(t, d) && (t.m0 != null)) {
+      return '1.2rem';
+    } else {
+      if (t.children != null) {
+        return '1.1rem';
+      } else {
+        return '1.0rem';
+      }
+    }
+  }
+
+  fontSize2(t, d = null) {
     if ((d != null) && this.sameNode(t, d) && (t.m0 != null)) {
       return '1.1rem';
     } else {
@@ -389,12 +423,6 @@ Wheel = class Wheel {
         this.onChoice(elem.data.name, elem.chosen);
       }
       resizeChild = elem.chosen;
-    } else if (eventType === 'AddChoice' || eventType === 'DelChoice') {
-      elem.chosen = eventType === 'AddChoice';
-      this.onChoice(elem.data.name);
-      this.resizeElem(elem, elem.chosen, x0, y0, x1, y1);
-      resizeChild = elem.chosen;
-    // Mouse event do not affect chosen elements
     } else if (!elem.chosen && (eventType === 'mouseover' || eventType === 'mouseout')) {
       resizeChild = eventType === 'mouseover';
       this.resizeElem(elem, resizeChild, x0, y0, x1, y1);
@@ -404,7 +432,9 @@ Wheel = class Wheel {
   }
 
   resizeElem(elem, resize, x0, y0, x1, y1) {
-    if (resize) {
+    if (elem.data == null) {
+      console.error('Wheel.resizeElem() missing d.data', elem);
+    } else if (resize) {
       elem.m0 = x0;
       elem.m1 = x1;
       elem.n0 = y0;

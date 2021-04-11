@@ -34,15 +34,15 @@ class Jitter
   # 1. Read in all the JSON config files in Jitter.Batch. Call Jitter.init() when complete.
   Jitter.start = () ->
     # Data.batchRead( Jitter.Batch, Jitter.init, Data.refine )
-    for key, val of Jitter.Batch
+    for key, val of Jitter.Batch when val.refine? and val.refine
       val.data = Data.refine(val.data)
     Jitter.init( Jitter.Batch )
     return
 
   Jitter.Batch = {
-    Choice: { url:'jitter/Choice.json', data:ChoiceJson, type:'None', plane:'None' }
-    Jitter: { url:'jitter/Jitter.json', data:JitterJson, type:'None', plane:'None' }
-    Flavor: { url:'jitter/Flavor.json', data:FlavorJson, type:'None', plane:'None' } }
+    Choice: { url:'jitter/Choice.json', data:ChoiceJson, type:'None', plane:'None', refine:true }
+    Jitter: { url:'jitter/Jitter.json', data:JitterJson, type:'None', plane:'None', refine:true }
+    Flavor: { url:'jitter/Flavor.json', data:FlavorJson, type:'None', plane:'None', refine:true } }
 
   # Vue Router Routes
   Jitter.routes = [

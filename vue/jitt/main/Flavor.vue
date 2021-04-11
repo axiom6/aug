@@ -18,7 +18,7 @@
   import Btns    from '../../base/elem/Btns.vue';
   import Summ    from './Summ.vue';
   import SvgMgr  from '../../../pub/base/draw/SvgMgr.js';
-  import Wheel   from '../../../pub/augm/show/Wheel.Jitt.js';
+  import Wheel   from '../../../pub/augm/show/Wheel.js';
   const  homeBtn = inject('homeBtn');
 
   let Flavor = {

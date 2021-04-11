@@ -49,7 +49,9 @@ Muse = (function() {
       ref = Muse.Batch;
       for (key in ref) {
         val = ref[key];
-        val.data = Data.refine(val.data);
+        if ((val.refine != null) && val.refine) {
+          val.data = Data.refine(val.data);
+        }
       }
       Muse.init(Muse.Batch);
     }
@@ -155,39 +157,48 @@ Muse = (function() {
   Muse.Batch = {
     Prin: {
       url: 'muse/Prin.json',
-      data: PrinJson // data:PrinJson }
+      data: PrinJson,
+      refine: true
     },
     Rows: {
       url: 'muse/Rows.json',
-      data: RowsJson // data:RowsJson }
+      data: RowsJson,
+      refine: true
     },
     Info: {
       url: 'muse/Info.json',
-      data: InfoJson // data:InfoJson }
+      data: InfoJson,
+      refine: true
     },
     Know: {
       url: 'muse/Know.json',
-      data: KnowJson // data:KnowJson }
+      data: KnowJson,
+      refine: true
     },
     Wise: {
       url: 'muse/Wise.json',
-      data: WiseJson // data:WiseJson }
+      data: WiseJson,
+      refine: true
     },
     Soft: {
       url: 'inno/Soft.json',
-      data: SoftJson // data:SoftJson }
+      data: SoftJson,
+      refine: true
     },
     Data: {
       url: 'inno/Data.json',
-      data: DataJson // data:DataJson }
+      data: DataJson,
+      refine: true
     },
     Scie: {
       url: 'inno/Scie.json',
-      data: ScieJson // data:ScieJson }
+      data: ScieJson,
+      refine: true
     },
     Math: {
       url: 'inno/Math.json',
-      data: MathJson // data:MathJson }
+      data: MathJson,
+      refine: true
     }
   };
 

@@ -2,7 +2,7 @@ var D3D;
 
 import SvgMgr from '../../base/draw/SvgMgr.js';
 
-import Flavor from './Flavor.js';
+import Wheel from './Wheel.js';
 
 import Axes from './Axes.js';
 
@@ -29,7 +29,7 @@ D3D = class D3D {
     svgMgr = new SvgMgr(name, elem, 'Comp');
     switch (name) {
       case 'Flavor':
-        return new Flavor(svgMgr, D3D.onChoice, mix);
+        return new Wheel(svgMgr, D3D.onChoice, mix);
       case 'Axes':
         return new Axes(svgMgr);
       case 'Chord':
