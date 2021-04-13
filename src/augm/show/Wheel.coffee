@@ -10,6 +10,8 @@ class Wheel
     @height             = @svgMgr.size.h
     @opacity            = 1.0
     @showAllLeaves      = false
+    @sameAngle          = true
+    @scale              = 1.2
     @radiusFactorChoice = 1.3
     @radiusFactorChild  = 1.0
     @nodes              = null
@@ -28,11 +30,10 @@ class Wheel
     return
 
   ready:( ) ->
-    scale   = 1.0
     @json   = @mix.flavorJson()
-    @radius = Math.min( @width, @height ) * scale / 2
+    @radius = Math.min( @width, @height ) * @scale / 2
     @xx     = @d3.scaleLinear().range([ 0, 2*Math.PI ] )
-    @yy     = @d3.scalePow().exponent(1.4).domain([0, 1]).range([0, @radius]) # 1.3
+    @yy     = @d3.scalePow().exponent(1.4).domain([0,1]).range([0,@radius])
     @padding = 0
     @duration = 300
 
@@ -40,10 +41,13 @@ class Wheel
     yc = @height/2
     @g = @svg.append("g")
       .attr("transform", """translate(#{xc},#{yc}) scale(1,1)""")
-    @g.append("text").text("Flavor")
+    @g.append("text")
+      .text("Flavor")
       .attr( 'x', -32 )
       .attr( 'y',  12 )
-      .style('fill', 'black' )
+      .style('color', 'wheat' )
+      #style('fill',  'black' )
+      .style('z-index',  2 )
       .style("font-size", "3vmin" )
 
     @partition = @d3.partition()
@@ -56,7 +60,7 @@ class Wheel
 
     @setLevels( @json, 0 )
     @json.children = @removeBranches( @json.children, ['Rich','Fruit'] )
-    console.log( 'Wheel.ready()', @json )
+    # console.log( 'Wheel.ready()', @json )
 
     @root = @d3.hierarchy(@json)
     @root.sum(  (d) => ( d.chosen = false; d.hide = @isLeaf(d); if @isBranch(d) then 0 else 1 ) )
@@ -78,7 +82,6 @@ class Wheel
       .on( "mouseover",  (e,d) => @onEvent( e, d, 'mouseover' ) )
       .on( "mouseout",   (e,d) => @onEvent( e, d, 'mouseout'  ) )
       #.attr( "d", (d) -> console.log( 'Wheel.path(d)', d ) )
-      #append("title").text( (d) -> d.data.name )
 
     @doText( @nodes )
     @d3.select( self.frameElement).style( "height", @height + "px" )
@@ -129,11 +132,11 @@ class Wheel
   sameNode:( a, b ) ->
     a?.data.name is b?.data.name
 
-  inBranch:( branch, elem ) ->
-    return true if  branch?.data.name is elem?.data.name
+  inBranch:( branch, d ) ->
+    return true if  branch?.data.name is d?.data.name
     if branch.children?
       for child in branch?.children
-        return true if child?.data.name is elem?.data.name
+        return true if child?.data.name is d?.data.name
     return false
 
   isBranch:( d ) ->
@@ -172,59 +175,74 @@ class Wheel
       .on( "mouseover",   (e,d) => @onEvent( e,d, 'mouseover' ) )
       .on( "mouseout",    (e,d) => @onEvent( e,d, 'mouseout'  ) )
       .style("font-size", (t) => @fontSize( t ) )
+      .style('font-weight', 900 )
       .style('opacity', 1 )
       #style('fill',       (d) => if @brightness( @d3.rgb( @fill(d.data) ) ) < 125 then '#eee' else '#000' )
       .style('fill', '#000000' )
-      .style('font-weight', 900 )
       .style( "display",   (d) -> if d.data.hide then "none" else "block" )
       .attr('text-anchor', (d) => if @xx( @xc(d) ) > Math.PI then 'end' else 'start' )
-      .attr('dy', '.2em').attr('transform', (d) => @textTransform(d) )
+      .attr('dy', '.2em')
+      .attr('transform', (d) => @textTransform(d) )
 
     angle = (d) => @xx( @xc(d) ) * 180 / Math.PI
-    xem   = (d) -> if angle(d) <= 180 then '0.7em' else '-0.7em'
+    xem   = (d) -> if angle(d) <= 180 then '1.2em' else '-1.2em'
 
     @textEnter.append('tspan').attr( 'x', (d) -> xem(d) ).text( (d) -> if d.depth then d.data.name.split(' ')[0] else '' )
     @textEnter.append('tspan').attr( 'x', (d) -> xem(d) ).attr('dy', '1em')
       .text( (d) -> if d.depth? and d.data.name? then d.data.name.split(' ')[1] or '' else '' )
       .attr(  "d", (d) => @setChoosen(d) )
-    #textEnter.append("title").text( (d) -> d.data.name )
     return
-
-  # eventType is click mouseover mouseout
-  onEvent:( e, d, eventType ) =>
+    
+  noData:( d, eventType ) ->
+    missing = false
     if not d.data?
       console.error( 'Wheel.onEvent() missing d.data', d )
-      return
+      missing = true
     else if not d.parent? and eventType is 'click'
       @displayAllLeaves()
     if not d.data['can']
-      return
+      missing = true
+    missing
+
+  # eventType is click mouseover mouseout
+  onEvent:( e, d, eventType ) =>
+    return if @noData( d, eventType )
     py0    = d.y0
     py1    = d.y0 + (d.y1-d.y0) * @radiusFactorChoice
     resize = @doChoiceResize( d, eventType, d.x0, py0, d.x1, py1 )
     cy0    = if resize then py1 else d.y1
-    if d.children? # and @childResize
-       d.children.forEach( (child) =>
-         child?.data.hide = resize
-         cy1 = cy0 + (child['y1']-child['y0']) * @radiusFactorChild
-         @resizeElem( child, resize, child['x0'], cy0, child['x1'], cy1 ) )
+    if d.children?
+      @resizeChild( d, resize, cy0 ) if d.level < 2
     else
       @resizeElem( d, resize, d['x0'], cy0, d['x1'], d['y1'] )
+    @reDisplayPaths( d )
+    @reDisplayTexts( d )
+    return
+
+  resizeChild:( d, resize, cy0 ) ->
+    d.children.forEach( (child) =>
+      child?.data.hide = resize
+      cy1 = cy0 + (child['y1']-child['y0']) * @radiusFactorChild
+      @resizeElem( child, resize, child['x0'], cy0, child['x1'], cy1 ) )
+    return
+
+  reDisplayPaths:( d ) ->
     @g.selectAll('path').data( @nodes )
-      .filter( (e) => @inBranch( d, e ) )
+      .filter( (f) => @inBranch( d, f ) )
       .transition()
       .duration(@duration)
       .style( "display", (d) -> if d.data.hide then "none" else "block" )
-      #style( "stroke",        "black" )
-      #style( "stroke-width", "0.2vim" )
       .attr(  "d", @arc )
+    return
+
+  reDisplayTexts:( d ) ->
     @g.selectAll('text').data( @nodes )
-      .filter( (e) => @inBranch( d, e ) )
+      .filter( (f) => @inBranch( d, f ) )
       .transition()
       .duration(@duration)
       .attr( "transform",   (t) => @textTransform(t) )
       .style("font-size",   (t) => @fontSize( t, d ) )
-      .style("font-weight", 'bold' )
+      .style("font-weight", '900' )
       .style( "display",  (d) -> if d.data.hide then "none" else "block" )
     return
 
@@ -234,45 +252,39 @@ class Wheel
     else
       if t.children? then '1.1rem' else '1.0rem'
 
-  fontSize2:( t, d=null ) =>
-    if d? and @sameNode( t, d ) and t.m0?
-      '1.1rem'
-    else
-      if t.children? then '1.0rem' else '0.9rem'
-
   # eventType is click mouseover mouseout
   # This publish function is supplied to the constructor
-  # elem.chosen is true/false for add/del
-  # elem.data.name is the flavor
-  # @publish( elem.chosen, elem.data.name )
-  doChoiceResize:( elem, eventType, x0, y0, x1, y1 ) =>
-    resizeChild = true
+  # d.chosen is true/false for add/del
+  # d.data.name is the flavor
+  # @publish( d.chosen, d.data.name )
+  doChoiceResize:( d, eventType, x0, y0, x1, y1 ) =>
+    resize = true
     if eventType is 'click'
-      elem.chosen = !elem.chosen # @mix.choosen( 'Flavor', elem.data.name )
-      @resizeElem( elem, elem.chosen, x0, y0, x1, y1 )
-      @onChoice( elem.data.name, elem.chosen ) if @callPub
-      resizeChild = elem.chosen
-    else if not elem.chosen and ( eventType is 'mouseover' or eventType is 'mouseout' )
-      resizeChild = eventType is 'mouseover'
-      @resizeElem( elem, resizeChild, x0, y0, x1, y1 )
-    # console.log( "Wheel.doChoiceResize()", { flavor:elem.data.name, eventType:eventType, resizeChild:resizeChild } )
-    resizeChild
+      d.chosen = !d.chosen # @mix.choosen( 'Flavor', d.data.name )
+      @resizeElem( d, d.chosen, x0, y0, x1, y1 )
+      @onChoice( d.data.name, d.chosen ) if @callPub
+      resize = d.chosen
+    else if not d.chosen and ( eventType is 'mouseover' or eventType is 'mouseout' )
+      resize = eventType is 'mouseover'
+      @resizeElem( d, resize, x0, y0, x1, y1 )
+    # console.log( "Wheel.doChoiceResize()", { flavor:d.data.name, eventType:eventType, resize:resize } )
+    resize
 
-  resizeElem:( elem, resize, x0, y0, x1, y1 ) ->
-    if not elem.data?
-      console.error( 'Wheel.resizeElem() missing d.data', elem )
+  resizeElem:( d, resize, x0, y0, x1, y1 ) ->
+    if not d.data?
+      console.error( 'Wheel.resizeElem() missing d.data', d )
     else if resize
-      elem.m0 = x0
-      elem.m1 = x1
-      elem.n0 = y0
-      elem.n1 = y1
-      elem.data.hide = false
+      d.m0 = x0
+      d.m1 = x1
+      d.n0 = y0
+      d.n1 = y1
+      d.data.hide = false
     else
-      elem.m0 = undefined
-      elem.m1 = undefined
-      elem.n0 = undefined
-      elem.n1 = undefined
-      elem.data.hide = if not (elem.data.children? or @showAllLeaves) then true else false
+      d.m0 = undefined
+      d.m1 = undefined
+      d.n0 = undefined
+      d.n1 = undefined
+      d.data.hide = if not (d.data.children? or @showAllLeaves) then true else false
     return
 
   textTransform:( d ) =>
@@ -288,38 +300,5 @@ class Wheel
     @g.selectAll('text')
       .style( "display", (d) => if @isLeaf(d) and not @showAllLeaves and not d.parent.chosen then "none" else "block" )
     return
-
-  zoomTween:( d ) =>
-    @svg.transition()
-      .duration(@duration)
-      .tween( "scale", () =>
-        xd = @d3.interpolate( @xx.domain(), [ @x0(d), @x1(d)] )
-        yd = @d3.interpolate( @yy.domain(), [ @y0(d), 1] )
-        yr = @d3.interpolate( @yy.range(),  [ (if d.y0? then 20 else 0), @radius ] )
-        (t) => ( @xx.domain(xd(t)); @yy.domain(yd(t)).range(yr(t)) ) )
-    .selectAll("path")
-      .attrTween( "d", (d) => ( () => @arc(d) ) )
-    return
-
-  getFlavor:( data, name, match ) ->
-    if data.children?
-      for flavor in data.children
-        return flavor  if match(flavor)
-        child = @getFlavor( flavor, name, match )
-        return child if child?
-    null
-
-  getRoastValue:( name ) ->
-    match  = (flavor) -> ( flavor.name is name )
-    flavor = @getFlavor( @json, name, match )
-    # console.log( 'Wheel.getRoastValue()', { name:name, flavor:flavor } )
-    value = if flavor? then ( flavor.roast[0]+flavor.roast[1] ) * 0.5 else -1
-    value
-
-  getFlavorName:( roast ) ->
-    match  = (flavor) -> ( flavor.roast? and flavor.roast[0] <= roast and roast <= flavor.roast[1] )
-    flavor = @getFlavor( @json, roast, match )
-    # console.log( 'Wheel.getFlavorName()', { roast:roast, flavor:flavor } )
-    if flavor then flavor.name else ""
 
 export default Wheel

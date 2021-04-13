@@ -10,19 +10,16 @@ Wheel = class Wheel {
     this.fill = this.fill.bind(this);
     this.doText = this.doText.bind(this);
     // eventType is click mouseover mouseout
-    //textEnter.append("title").text( (d) -> d.data.name )
     this.onEvent = this.onEvent.bind(this);
     this.fontSize = this.fontSize.bind(this);
-    this.fontSize2 = this.fontSize2.bind(this);
     // eventType is click mouseover mouseout
     // This publish function is supplied to the constructor
-    // elem.chosen is true/false for add/del
-    // elem.data.name is the flavor
-    // @publish( elem.chosen, elem.data.name )
+    // d.chosen is true/false for add/del
+    // d.data.name is the flavor
+    // @publish( d.chosen, d.data.name )
     this.doChoiceResize = this.doChoiceResize.bind(this);
     this.textTransform = this.textTransform.bind(this);
     this.displayAllLeaves = this.displayAllLeaves.bind(this);
-    this.zoomTween = this.zoomTween.bind(this);
     this.svgMgr = svgMgr;
     this.onChoice = onChoice;
     this.mix = mix;
@@ -34,6 +31,8 @@ Wheel = class Wheel {
     this.height = this.svgMgr.size.h;
     this.opacity = 1.0;
     this.showAllLeaves = false;
+    this.sameAngle = true;
+    this.scale = 1.2;
     this.radiusFactorChoice = 1.3;
     this.radiusFactorChild = 1.0;
     this.nodes = null;
@@ -54,21 +53,18 @@ Wheel = class Wheel {
   }
 
   ready() {
-    var scale, xc, yc;
-    scale = 1.0;
+    var xc, yc;
     this.json = this.mix.flavorJson();
-    this.radius = Math.min(this.width, this.height) * scale / 2;
+    this.radius = Math.min(this.width, this.height) * this.scale / 2;
     this.xx = this.d3.scaleLinear().range([0, 2 * Math.PI]);
-    this.yy = this.d3.scalePow().exponent(1.4).domain([0, 1]).range([
-      0,
-      this.radius // 1.3
-    ]);
+    this.yy = this.d3.scalePow().exponent(1.4).domain([0, 1]).range([0, this.radius]);
     this.padding = 0;
     this.duration = 300;
     xc = this.width / 2;
     yc = this.height / 2;
     this.g = this.svg.append("g").attr("transform", `translate(${xc},${yc}) scale(1,1)`);
-    this.g.append("text").text("Flavor").attr('x', -32).attr('y', 12).style('fill', 'black').style("font-size", "3vmin");
+    //style('fill',  'black' )
+    this.g.append("text").text("Flavor").attr('x', -32).attr('y', 12).style('color', 'wheat').style('z-index', 2).style("font-size", "3vmin");
     this.partition = this.d3.partition();
     this.arc = this.d3.arc().startAngle((d) => {
       return Math.max(0, Math.min(2 * Math.PI, this.xx(this.x0(d))));
@@ -81,7 +77,7 @@ Wheel = class Wheel {
     });
     this.setLevels(this.json, 0);
     this.json.children = this.removeBranches(this.json.children, ['Rich', 'Fruit']);
-    console.log('Wheel.ready()', this.json);
+    // console.log( 'Wheel.ready()', @json )
     this.root = this.d3.hierarchy(this.json);
     this.root.sum((d) => {
       d.chosen = false;
@@ -116,7 +112,6 @@ Wheel = class Wheel {
       return this.onEvent(e, d, 'mouseout');
     });
     //.attr( "d", (d) -> console.log( 'Wheel.path(d)', d ) )
-    //append("title").text( (d) -> d.data.name )
     this.doText(this.nodes);
     this.d3.select(self.frameElement).style("height", this.height + "px");
   }
@@ -222,16 +217,16 @@ Wheel = class Wheel {
     return (a != null ? a.data.name : void 0) === (b != null ? b.data.name : void 0);
   }
 
-  inBranch(branch, elem) {
+  inBranch(branch, d) {
     var child, j, len, ref;
-    if ((branch != null ? branch.data.name : void 0) === (elem != null ? elem.data.name : void 0)) {
+    if ((branch != null ? branch.data.name : void 0) === (d != null ? d.data.name : void 0)) {
       return true;
     }
     if (branch.children != null) {
       ref = branch != null ? branch.children : void 0;
       for (j = 0, len = ref.length; j < len; j++) {
         child = ref[j];
-        if ((child != null ? child.data.name : void 0) === (elem != null ? elem.data.name : void 0)) {
+        if ((child != null ? child.data.name : void 0) === (d != null ? d.data.name : void 0)) {
           return true;
         }
       }
@@ -289,7 +284,7 @@ Wheel = class Wheel {
     }).style("font-size", (t) => {
       return this.fontSize(t);
     //style('fill',       (d) => if @brightness( @d3.rgb( @fill(d.data) ) ) < 125 then '#eee' else '#000' )
-    }).style('opacity', 1).style('fill', '#000000').style('font-weight', 900).style("display", function(d) {
+    }).style('font-weight', 900).style('opacity', 1).style('fill', '#000000').style("display", function(d) {
       if (d.data.hide) {
         return "none";
       } else {
@@ -309,9 +304,9 @@ Wheel = class Wheel {
     };
     xem = function(d) {
       if (angle(d) <= 180) {
-        return '0.7em';
+        return '1.2em';
       } else {
-        return '-0.7em';
+        return '-1.2em';
       }
     };
     this.textEnter.append('tspan').attr('x', function(d) {
@@ -336,15 +331,24 @@ Wheel = class Wheel {
     });
   }
 
-  onEvent(e, d, eventType) {
-    var cy0, py0, py1, resize;
+  noData(d, eventType) {
+    var missing;
+    missing = false;
     if (d.data == null) {
       console.error('Wheel.onEvent() missing d.data', d);
-      return;
+      missing = true;
     } else if ((d.parent == null) && eventType === 'click') {
       this.displayAllLeaves();
     }
     if (!d.data['can']) {
+      missing = true;
+    }
+    return missing;
+  }
+
+  onEvent(e, d, eventType) {
+    var cy0, py0, py1, resize;
+    if (this.noData(d, eventType)) {
       return;
     }
     py0 = d.y0;
@@ -352,35 +356,47 @@ Wheel = class Wheel {
     resize = this.doChoiceResize(d, eventType, d.x0, py0, d.x1, py1);
     cy0 = resize ? py1 : d.y1;
     if (d.children != null) {
-      d.children.forEach((child) => {
-        var cy1;
-        if (child != null) {
-          child.data.hide = resize;
-        }
-        cy1 = cy0 + (child['y1'] - child['y0']) * this.radiusFactorChild;
-        return this.resizeElem(child, resize, child['x0'], cy0, child['x1'], cy1);
-      });
+      if (d.level < 2) {
+        this.resizeChild(d, resize, cy0);
+      }
     } else {
-      this.resizeElem(d, resize, d['x0'], cy0, d['x1'], d['y1']); // and @childResize
+      this.resizeElem(d, resize, d['x0'], cy0, d['x1'], d['y1']);
     }
-    this.g.selectAll('path').data(this.nodes).filter((e) => {
-      return this.inBranch(d, e);
+    this.reDisplayPaths(d);
+    this.reDisplayTexts(d);
+  }
+
+  resizeChild(d, resize, cy0) {
+    d.children.forEach((child) => {
+      var cy1;
+      if (child != null) {
+        child.data.hide = resize;
+      }
+      cy1 = cy0 + (child['y1'] - child['y0']) * this.radiusFactorChild;
+      return this.resizeElem(child, resize, child['x0'], cy0, child['x1'], cy1);
+    });
+  }
+
+  reDisplayPaths(d) {
+    this.g.selectAll('path').data(this.nodes).filter((f) => {
+      return this.inBranch(d, f);
     }).transition().duration(this.duration).style("display", function(d) {
       if (d.data.hide) {
         return "none";
       } else {
         return "block";
       }
-    //style( "stroke",        "black" )
-    //style( "stroke-width", "0.2vim" )
     }).attr("d", this.arc);
-    this.g.selectAll('text').data(this.nodes).filter((e) => {
-      return this.inBranch(d, e);
+  }
+
+  reDisplayTexts(d) {
+    this.g.selectAll('text').data(this.nodes).filter((f) => {
+      return this.inBranch(d, f);
     }).transition().duration(this.duration).attr("transform", (t) => {
       return this.textTransform(t);
     }).style("font-size", (t) => {
       return this.fontSize(t, d);
-    }).style("font-weight", 'bold').style("display", function(d) {
+    }).style("font-weight", '900').style("display", function(d) {
       if (d.data.hide) {
         return "none";
       } else {
@@ -401,51 +417,39 @@ Wheel = class Wheel {
     }
   }
 
-  fontSize2(t, d = null) {
-    if ((d != null) && this.sameNode(t, d) && (t.m0 != null)) {
-      return '1.1rem';
-    } else {
-      if (t.children != null) {
-        return '1.0rem';
-      } else {
-        return '0.9rem';
-      }
-    }
-  }
-
-  doChoiceResize(elem, eventType, x0, y0, x1, y1) {
-    var resizeChild;
-    resizeChild = true;
+  doChoiceResize(d, eventType, x0, y0, x1, y1) {
+    var resize;
+    resize = true;
     if (eventType === 'click') {
-      elem.chosen = !elem.chosen; // @mix.choosen( 'Flavor', elem.data.name )
-      this.resizeElem(elem, elem.chosen, x0, y0, x1, y1);
+      d.chosen = !d.chosen; // @mix.choosen( 'Flavor', d.data.name )
+      this.resizeElem(d, d.chosen, x0, y0, x1, y1);
       if (this.callPub) {
-        this.onChoice(elem.data.name, elem.chosen);
+        this.onChoice(d.data.name, d.chosen);
       }
-      resizeChild = elem.chosen;
-    } else if (!elem.chosen && (eventType === 'mouseover' || eventType === 'mouseout')) {
-      resizeChild = eventType === 'mouseover';
-      this.resizeElem(elem, resizeChild, x0, y0, x1, y1);
+      resize = d.chosen;
+    } else if (!d.chosen && (eventType === 'mouseover' || eventType === 'mouseout')) {
+      resize = eventType === 'mouseover';
+      this.resizeElem(d, resize, x0, y0, x1, y1);
     }
-    // console.log( "Wheel.doChoiceResize()", { flavor:elem.data.name, eventType:eventType, resizeChild:resizeChild } )
-    return resizeChild;
+    // console.log( "Wheel.doChoiceResize()", { flavor:d.data.name, eventType:eventType, resize:resize } )
+    return resize;
   }
 
-  resizeElem(elem, resize, x0, y0, x1, y1) {
-    if (elem.data == null) {
-      console.error('Wheel.resizeElem() missing d.data', elem);
+  resizeElem(d, resize, x0, y0, x1, y1) {
+    if (d.data == null) {
+      console.error('Wheel.resizeElem() missing d.data', d);
     } else if (resize) {
-      elem.m0 = x0;
-      elem.m1 = x1;
-      elem.n0 = y0;
-      elem.n1 = y1;
-      elem.data.hide = false;
+      d.m0 = x0;
+      d.m1 = x1;
+      d.n0 = y0;
+      d.n1 = y1;
+      d.data.hide = false;
     } else {
-      elem.m0 = void 0;
-      elem.m1 = void 0;
-      elem.n0 = void 0;
-      elem.n1 = void 0;
-      elem.data.hide = !((elem.data.children != null) || this.showAllLeaves) ? true : false;
+      d.m0 = void 0;
+      d.m1 = void 0;
+      d.n0 = void 0;
+      d.n1 = void 0;
+      d.data.hide = !((d.data.children != null) || this.showAllLeaves) ? true : false;
     }
   }
 
@@ -473,66 +477,6 @@ Wheel = class Wheel {
         return "block";
       }
     });
-  }
-
-  zoomTween(d) {
-    this.svg.transition().duration(this.duration).tween("scale", () => {
-      var xd, yd, yr;
-      xd = this.d3.interpolate(this.xx.domain(), [this.x0(d), this.x1(d)]);
-      yd = this.d3.interpolate(this.yy.domain(), [this.y0(d), 1]);
-      yr = this.d3.interpolate(this.yy.range(), [(d.y0 != null ? 20 : 0), this.radius]);
-      return (t) => {
-        this.xx.domain(xd(t));
-        return this.yy.domain(yd(t)).range(yr(t));
-      };
-    }).selectAll("path").attrTween("d", (d) => {
-      return () => {
-        return this.arc(d);
-      };
-    });
-  }
-
-  getFlavor(data, name, match) {
-    var child, flavor, j, len, ref;
-    if (data.children != null) {
-      ref = data.children;
-      for (j = 0, len = ref.length; j < len; j++) {
-        flavor = ref[j];
-        if (match(flavor)) {
-          return flavor;
-        }
-        child = this.getFlavor(flavor, name, match);
-        if (child != null) {
-          return child;
-        }
-      }
-    }
-    return null;
-  }
-
-  getRoastValue(name) {
-    var flavor, match, value;
-    match = function(flavor) {
-      return flavor.name === name;
-    };
-    flavor = this.getFlavor(this.json, name, match);
-    // console.log( 'Wheel.getRoastValue()', { name:name, flavor:flavor } )
-    value = flavor != null ? (flavor.roast[0] + flavor.roast[1]) * 0.5 : -1;
-    return value;
-  }
-
-  getFlavorName(roast) {
-    var flavor, match;
-    match = function(flavor) {
-      return (flavor.roast != null) && flavor.roast[0] <= roast && roast <= flavor.roast[1];
-    };
-    flavor = this.getFlavor(this.json, roast, match);
-    // console.log( 'Wheel.getFlavorName()', { roast:roast, flavor:flavor } )
-    if (flavor) {
-      return flavor.name;
-    } else {
-      return "";
-    }
   }
 
 };

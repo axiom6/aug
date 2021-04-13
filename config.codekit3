@@ -2034,30 +2034,6 @@
       "oO" : 0,
       "oS" : 1
     },
-    "\/data\/jitter\/Flavor1.json" : {
-      "ft" : 524288,
-      "oA" : 1,
-      "oAP" : "\/data\/jitter\/Flavor1-min.json",
-      "oF" : 1,
-      "oO" : 0,
-      "oS" : 1
-    },
-    "\/data\/jitter\/Flavor2.json" : {
-      "ft" : 524288,
-      "oA" : 1,
-      "oAP" : "\/data\/jitter\/Flavor2-min.json",
-      "oF" : 1,
-      "oO" : 0,
-      "oS" : 1
-    },
-    "\/data\/jitter\/Flavor3.json" : {
-      "ft" : 524288,
-      "oA" : 1,
-      "oAP" : "\/data\/jitter\/Flavor3-min.json",
-      "oF" : 1,
-      "oO" : 0,
-      "oS" : 1
-    },
     "\/data\/jitter\/Jitter.json" : {
       "ft" : 524288,
       "oA" : 1,
@@ -2648,17 +2624,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/node_modules\/d3-array\/src\/bin.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/bin-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/node_modules\/d3-array\/src\/bisect.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -2703,39 +2668,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/node_modules\/d3-array\/src\/cross.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/cross-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/cumsum.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/cumsum-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/descending.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/descending-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/node_modules\/d3-array\/src\/deviation.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -2743,39 +2675,6 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/node_modules\/d3-array\/src\/deviation-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/difference.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/difference-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/disjoint.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/disjoint-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/every.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/every-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
@@ -2791,50 +2690,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/node_modules\/d3-array\/src\/filter.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/filter-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/fsum.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/fsum-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/greatest.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/greatest-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/greatestIndex.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/greatestIndex-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/node_modules\/d3-array\/src\/group.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -2842,17 +2697,6 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/node_modules\/d3-array\/src\/group-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/groupSort.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/groupSort-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
@@ -2868,39 +2712,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/node_modules\/d3-array\/src\/index.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/index-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/intersection.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/intersection-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/least.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/least-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/node_modules\/d3-array\/src\/leastIndex.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -2908,17 +2719,6 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/node_modules\/d3-array\/src\/leastIndex-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/map.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/map-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
@@ -2941,39 +2741,6 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/node_modules\/d3-array\/src\/maxIndex-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/mean.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/mean-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/median.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/median-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/merge.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/merge-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
@@ -3022,17 +2789,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/node_modules\/d3-array\/src\/pairs.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/pairs-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/node_modules\/d3-array\/src\/permute.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -3066,50 +2822,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/node_modules\/d3-array\/src\/range.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/range-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/reduce.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/reduce-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/reverse.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/reverse-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/scan.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/scan-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/node_modules\/d3-array\/src\/set.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -3117,28 +2829,6 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/node_modules\/d3-array\/src\/set-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/shuffle.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/shuffle-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/some.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/some-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
@@ -3154,28 +2844,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/node_modules\/d3-array\/src\/subset.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/subset-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/sum.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/sum-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/node_modules\/d3-array\/src\/superset.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -3183,28 +2851,6 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/node_modules\/d3-array\/src\/superset-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/threshold\/freedmanDiaconis.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/threshold\/freedmanDiaconis-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/threshold\/scott.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/threshold\/scott-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
@@ -3242,17 +2888,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/node_modules\/d3-array\/src\/union.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/union-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/node_modules\/d3-array\/src\/variance.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -3260,17 +2895,6 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/node_modules\/d3-array\/src\/variance-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/zip.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/zip-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
@@ -3359,116 +2983,6 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/node_modules\/d3-dispatch\/src\/index-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-geo\/src\/cartesian.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-geo\/src\/cartesian-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-geo\/src\/clip\/buffer.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-geo\/src\/clip\/buffer-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-geo\/src\/clip\/rejoin.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-geo\/src\/clip\/rejoin-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-geo\/src\/compose.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-geo\/src\/compose-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-geo\/src\/constant.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-geo\/src\/constant-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-geo\/src\/math.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-geo\/src\/math-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-geo\/src\/noop.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-geo\/src\/noop-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-geo\/src\/pointEqual.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-geo\/src\/pointEqual-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-geo\/src\/polygonContains.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-geo\/src\/polygonContains-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-geo\/src\/rotation.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-geo\/src\/rotation-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
