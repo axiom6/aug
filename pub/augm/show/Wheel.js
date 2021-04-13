@@ -1,14 +1,15 @@
 var Wheel;
 
 Wheel = class Wheel {
-  constructor(svgMgr, onChoice, mix) {
+  constructor(svgMgr, onChoice, mix, oneLevel) {
     this.setChoosen = this.setChoosen.bind(this);
-    this.adjustRadius = this.adjustRadius.bind(this);
     this.xc = this.xc.bind(this);
     this.yc = this.yc.bind(this);
+    this.adjustRadius = this.adjustRadius.bind(this);
+    this.adjustAngles = this.adjustAngles.bind(this);
     this.isParentOf = this.isParentOf.bind(this);
     this.fill = this.fill.bind(this);
-    this.doText = this.doText.bind(this);
+    this.doTexts = this.doTexts.bind(this);
     // eventType is click mouseover mouseout
     this.onEvent = this.onEvent.bind(this);
     this.fontSize = this.fontSize.bind(this);
@@ -23,6 +24,7 @@ Wheel = class Wheel {
     this.svgMgr = svgMgr;
     this.onChoice = onChoice;
     this.mix = mix;
+    this.oneLevel = oneLevel;
     this.svg = this.svgMgr.svg;
     this.g = this.svgMgr.g;
     this.d3 = this.svgMgr.d3;
@@ -31,13 +33,11 @@ Wheel = class Wheel {
     this.height = this.svgMgr.size.h;
     this.opacity = 1.0;
     this.showAllLeaves = false;
-    this.sameAngle = true;
     this.scale = 1.2;
     this.radiusFactorChoice = 1.3;
     this.radiusFactorChild = 1.0;
     this.nodes = null;
     this.callPub = true;
-    this.childResize = false;
     this.ready();
   }
 
@@ -52,19 +52,62 @@ Wheel = class Wheel {
     }
   }
 
+  x0(d) {
+    if (d.m0 != null) {
+      return d.m0;
+    } else {
+      return d.x0;
+    }
+  }
+
+  x1(d) {
+    if (d.m1 != null) {
+      return d.m1;
+    } else {
+      return d.x1;
+    }
+  }
+
+  y0(d) {
+    if (d.n0 != null) {
+      return d.n0;
+    } else {
+      return d.y0;
+    }
+  }
+
+  y1(d) {
+    if (d.n1 != null) {
+      return d.n1;
+    } else {
+      return d.y1;
+    }
+  }
+
+  xc(d) {
+    return (this.x0(d) + this.x1(d)) / 2;
+  }
+
+  yc(d) {
+    return (this.y0(d) + this.y1(d)) / 2;
+  }
+
+  centerText() {
+    return this.g.append("text").text("Flavors").attr('x', -32).attr('y', 12).style('stroke', 'wheat').style("font-size", "3vmin");
+  }
+
   ready() {
     var xc, yc;
     this.json = this.mix.flavorJson();
     this.radius = Math.min(this.width, this.height) * this.scale / 2;
-    this.xx = this.d3.scaleLinear().range([0, 2 * Math.PI]);
+    this.xx = this.d3.scaleLinear().domain([0, 1]).range([0, 2 * Math.PI]);
     this.yy = this.d3.scalePow().exponent(1.4).domain([0, 1]).range([0, this.radius]);
     this.padding = 0;
     this.duration = 300;
     xc = this.width / 2;
     yc = this.height / 2;
     this.g = this.svg.append("g").attr("transform", `translate(${xc},${yc}) scale(1,1)`);
-    //style('fill',  'black' )
-    this.g.append("text").text("Flavor").attr('x', -32).attr('y', 12).style('color', 'wheat').style('z-index', 2).style("font-size", "3vmin");
+    this.centerText();
     this.partition = this.d3.partition();
     this.arc = this.d3.arc().startAngle((d) => {
       return Math.max(0, Math.min(2 * Math.PI, this.xx(this.x0(d))));
@@ -75,9 +118,9 @@ Wheel = class Wheel {
     }).outerRadius((d) => {
       return Math.max(0, this.yy(this.y1(d)));
     });
-    this.setLevels(this.json, 0);
-    this.json.children = this.removeBranches(this.json.children, ['Rich', 'Fruit']);
-    // console.log( 'Wheel.ready()', @json )
+    if (this.oneLevel) {
+      this.json.children = this.removeBranches(this.json.children, ['Rich', 'Fruit']);
+    }
     this.root = this.d3.hierarchy(this.json);
     this.root.sum((d) => {
       d.chosen = false;
@@ -90,7 +133,16 @@ Wheel = class Wheel {
     });
     this.nodes = this.partition(this.root).descendants();
     this.adjustRadius(this.root);
-    this.path = this.g.selectAll("path").data(this.nodes).enter().append("path").attr("id", function(d, i) {
+    if (this.oneLevel) {
+      this.adjustAngles(this.root, this.nodes);
+    }
+    this.doPaths(this.nodes);
+    this.doTexts(this.nodes);
+    this.d3.select(self.frameElement).style("height", this.height + "px");
+  }
+
+  doPaths(nodes) {
+    return this.g.selectAll("path").data(nodes).enter().append("path").attr("id", function(d, i) {
       if (d != null) {
         return "path-" + i;
       } else {
@@ -111,22 +163,6 @@ Wheel = class Wheel {
     }).on("mouseout", (e, d) => {
       return this.onEvent(e, d, 'mouseout');
     });
-    //.attr( "d", (d) -> console.log( 'Wheel.path(d)', d ) )
-    this.doText(this.nodes);
-    this.d3.select(self.frameElement).style("height", this.height + "px");
-  }
-
-  setLevels(obj, level) {
-    var child, j, len, ref;
-    obj.level = level;
-    if (obj.children == null) {
-      return;
-    }
-    ref = obj.children;
-    for (j = 0, len = ref.length; j < len; j++) {
-      child = ref[j];
-      this.setLevels(child, level + 1);
-    }
   }
 
   removeBranches(children1, branches) {
@@ -172,45 +208,19 @@ Wheel = class Wheel {
     }
   }
 
-  // console.log( 'Wheel.adjustRadius()', { sc:sc, dy:dy, dy0:d.y0, dy1:d.y1 } )
-  x0(d) {
-    if (d.m0 != null) {
-      return d.m0;
-    } else {
-      return d.x0;
+  adjustAngles(root, nodes) {
+    var dx, j, len, node, x0;
+    dx = 1.0 / root.children.length;
+    x0 = 0.0;
+    for (j = 0, len = nodes.length; j < len; j++) {
+      node = nodes[j];
+      if (!(node.depth === 1)) {
+        continue;
+      }
+      node.x0 = x0;
+      node.x1 = x0 + dx;
+      x0 = x0 + dx;
     }
-  }
-
-  x1(d) {
-    if (d.m1 != null) {
-      return d.m1;
-    } else {
-      return d.x1;
-    }
-  }
-
-  y0(d) {
-    if (d.n0 != null) {
-      return d.n0;
-    } else {
-      return d.y0;
-    }
-  }
-
-  y1(d) {
-    if (d.n1 != null) {
-      return d.n1;
-    } else {
-      return d.y1;
-    }
-  }
-
-  xc(d) {
-    return (this.x0(d) + this.x1(d)) / 2;
-  }
-
-  yc(d) {
-    return (this.y0(d) + this.y1(d)) / 2;
   }
 
   sameNode(a, b) {
@@ -256,7 +266,6 @@ Wheel = class Wheel {
 
   fill(d) {
     var a, b, colours;
-    // console.log( 'fill', d )
     if ((d.data.fill != null) && (d.children != null)) {
       return d.data.fill;
     } else if ((d.data.fill != null) && (d.children == null) && (d.parent != null) && (d.parent.data.fill != null)) {
@@ -272,7 +281,7 @@ Wheel = class Wheel {
     }
   }
 
-  doText(nodes) {
+  doTexts(nodes) {
     var angle, xem;
     this.text = this.g.selectAll('text').data(nodes);
     this.textEnter = this.text.enter().append('text').data(nodes).on("click", (e, d) => {
@@ -356,7 +365,7 @@ Wheel = class Wheel {
     resize = this.doChoiceResize(d, eventType, d.x0, py0, d.x1, py1);
     cy0 = resize ? py1 : d.y1;
     if (d.children != null) {
-      if (d.level < 2) {
+      if (!this.oneLevel || e.depth < 2) {
         this.resizeChild(d, resize, cy0);
       }
     } else {
@@ -431,7 +440,6 @@ Wheel = class Wheel {
       resize = eventType === 'mouseover';
       this.resizeElem(d, resize, x0, y0, x1, y1);
     }
-    // console.log( "Wheel.doChoiceResize()", { flavor:d.data.name, eventType:eventType, resize:resize } )
     return resize;
   }
 

@@ -1,7 +1,7 @@
 
 class Wheel
 
-  constructor:( @svgMgr, @onChoice, @mix ) ->
+  constructor:( @svgMgr, @onChoice, @mix, @oneLevel ) ->
     @svg                = @svgMgr.svg
     @g                  = @svgMgr.g
     @d3                 = @svgMgr.d3
@@ -10,13 +10,11 @@ class Wheel
     @height             = @svgMgr.size.h
     @opacity            = 1.0
     @showAllLeaves      = false
-    @sameAngle          = true
     @scale              = 1.2
     @radiusFactorChoice = 1.3
     @radiusFactorChild  = 1.0
     @nodes              = null
     @callPub            = true
-    @childResize        = false
     @ready()
 
   setChoosen:( d ) =>
@@ -29,26 +27,33 @@ class Wheel
       @callPub = true
     return
 
-  ready:( ) ->
-    @json   = @mix.flavorJson()
-    @radius = Math.min( @width, @height ) * @scale / 2
-    @xx     = @d3.scaleLinear().range([ 0, 2*Math.PI ] )
-    @yy     = @d3.scalePow().exponent(1.4).domain([0,1]).range([0,@radius])
-    @padding = 0
-    @duration = 300
+  x0:(d) ->  if d.m0? then d.m0 else d.x0
+  x1:(d) ->  if d.m1? then d.m1 else d.x1
+  y0:(d) ->  if d.n0? then d.n0 else d.y0
+  y1:(d) ->  if d.n1? then d.n1 else d.y1
+  xc:(d) => (@x0(d)+@x1(d))/2
+  yc:(d) => (@y0(d)+@y1(d))/2
 
-    xc = @width/2
-    yc = @height/2
-    @g = @svg.append("g")
-      .attr("transform", """translate(#{xc},#{yc}) scale(1,1)""")
+  centerText:() ->
     @g.append("text")
-      .text("Flavor")
+      .text("Flavors")
       .attr( 'x', -32 )
       .attr( 'y',  12 )
-      .style('color', 'wheat' )
-      #style('fill',  'black' )
-      .style('z-index',  2 )
+      .style('stroke', 'wheat' )
       .style("font-size", "3vmin" )
+
+  ready:( ) ->
+    @json     = @mix.flavorJson()
+    @radius   = Math.min( @width, @height ) * @scale / 2
+    @xx       = @d3.scaleLinear().domain([0,1]).range([0,2*Math.PI])
+    @yy       = @d3.scalePow().exponent(1.4).domain([0,1]).range([0,@radius])
+    @padding  = 0
+    @duration = 300
+    xc        = @width/2
+    yc        = @height/2
+    @g = @svg.append("g")
+      .attr("transform", """translate(#{xc},#{yc}) scale(1,1)""")
+    @centerText()
 
     @partition = @d3.partition()
 
@@ -58,17 +63,21 @@ class Wheel
       .innerRadius( (d) => Math.max( 0, @yy(@y0(d)) ) )
       .outerRadius( (d) => Math.max( 0, @yy(@y1(d)) ) )
 
-    @setLevels( @json, 0 )
-    @json.children = @removeBranches( @json.children, ['Rich','Fruit'] )
-    # console.log( 'Wheel.ready()', @json )
-
+    if @oneLevel
+      @json.children = @removeBranches( @json.children, ['Rich','Fruit'] )
     @root = @d3.hierarchy(@json)
     @root.sum(  (d) => ( d.chosen = false; d.hide = @isLeaf(d); if @isBranch(d) then 0 else 1 ) )
     @nodes = @partition(@root).descendants()
     @adjustRadius( @root )
+    @adjustAngles( @root, @nodes ) if @oneLevel
+    @doPaths( @nodes )
+    @doTexts( @nodes )
+    @d3.select( self.frameElement).style( "height", @height + "px" )
+    return
 
-    @path  = @g.selectAll("path")
-      .data( @nodes )
+  doPaths:( nodes ) ->
+    @g.selectAll("path")
+      .data( nodes )
       .enter().append("path")
       .attr( "id", (d, i) -> ( if d? then "path-" + i else "path-" + i ) )
       .attr(  "d", @arc )
@@ -81,18 +90,6 @@ class Wheel
       .on( "click",      (e,d) => @onEvent( e, d, 'click'     ) )
       .on( "mouseover",  (e,d) => @onEvent( e, d, 'mouseover' ) )
       .on( "mouseout",   (e,d) => @onEvent( e, d, 'mouseout'  ) )
-      #.attr( "d", (d) -> console.log( 'Wheel.path(d)', d ) )
-
-    @doText( @nodes )
-    @d3.select( self.frameElement).style( "height", @height + "px" )
-    return
-
-  setLevels:( obj, level ) ->
-    obj.level = level
-    return if not obj.children?
-    for  child in obj.children
-      @setLevels( child, level+1 )
-    return
 
   removeBranches:( children1, branches ) ->
     return if not  children1?
@@ -119,15 +116,16 @@ class Wheel
     if d.children?
        d.children.forEach (child) =>
          @adjustRadius( child )
-    # console.log( 'Wheel.adjustRadius()', { sc:sc, dy:dy, dy0:d.y0, dy1:d.y1 } )
     return
 
-  x0:(d) ->  if d.m0? then d.m0 else d.x0
-  x1:(d) ->  if d.m1? then d.m1 else d.x1
-  y0:(d) ->  if d.n0? then d.n0 else d.y0
-  y1:(d) ->  if d.n1? then d.n1 else d.y1
-  xc:(d) => (@x0(d)+@x1(d))/2
-  yc:(d) => (@y0(d)+@y1(d))/2
+  adjustAngles:( root, nodes  ) =>
+    dx = 1.0 / root.children.length
+    x0 = 0.0
+    for node in nodes when node.depth is 1
+      node.x0 = x0
+      node.x1 = x0 + dx
+      x0       = x0 + dx
+    return
 
   sameNode:( a, b ) ->
     a?.data.name is b?.data.name
@@ -153,7 +151,6 @@ class Wheel
     false
 
   fill:(d) =>
-    # console.log( 'fill', d )
     if d.data.fill? and d.children?
       d.data.fill
     else if  d.data.fill? and not d.children? and d.parent?  and d.parent.data.fill?
@@ -167,7 +164,7 @@ class Wheel
     else
       '#666666'
 
-  doText:( nodes ) =>
+  doTexts:( nodes ) =>
     @text = @g.selectAll('text').data(nodes)
     @textEnter = @text.enter().append('text')
       .data( nodes )
@@ -212,7 +209,8 @@ class Wheel
     resize = @doChoiceResize( d, eventType, d.x0, py0, d.x1, py1 )
     cy0    = if resize then py1 else d.y1
     if d.children?
-      @resizeChild( d, resize, cy0 ) if d.level < 2
+      if not @oneLevel or e.depth < 2
+        @resizeChild( d, resize, cy0 )
     else
       @resizeElem( d, resize, d['x0'], cy0, d['x1'], d['y1'] )
     @reDisplayPaths( d )
@@ -267,7 +265,6 @@ class Wheel
     else if not d.chosen and ( eventType is 'mouseover' or eventType is 'mouseout' )
       resize = eventType is 'mouseover'
       @resizeElem( d, resize, x0, y0, x1, y1 )
-    # console.log( "Wheel.doChoiceResize()", { flavor:d.data.name, eventType:eventType, resize:resize } )
     resize
 
   resizeElem:( d, resize, x0, y0, x1, y1 ) ->

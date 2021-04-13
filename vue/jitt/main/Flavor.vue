@@ -41,7 +41,7 @@
           // console.log( 'Flavor.vue.mounted() wheel created' );
           let elem     = elemf.value;
           let svgMgr   = new SvgMgr( name, elem, 'Flavor' );
-          new Wheel(  svgMgr, onChoice, mix ); } ) } )
+          new Wheel(  svgMgr, onChoice, mix, true ); } ) } )
 
     return { name, elemf }; }
   }

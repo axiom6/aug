@@ -29,7 +29,7 @@ D3D = class D3D {
     svgMgr = new SvgMgr(name, elem, 'Comp');
     switch (name) {
       case 'Flavor':
-        return new Wheel(svgMgr, D3D.onChoice, mix);
+        return new Wheel(svgMgr, D3D.onChoice, mix, false);
       case 'Axes':
         return new Axes(svgMgr);
       case 'Chord':

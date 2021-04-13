@@ -2602,17 +2602,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/node_modules\/d3-array\/src\/array.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/array-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/node_modules\/d3-array\/src\/ascending.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -2620,17 +2609,6 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/node_modules\/d3-array\/src\/ascending-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/bisect.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/bisect-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
@@ -2646,17 +2624,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/node_modules\/d3-array\/src\/constant.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/constant-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/node_modules\/d3-array\/src\/count.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -2664,39 +2631,6 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/node_modules\/d3-array\/src\/count-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/deviation.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/deviation-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/extent.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/extent-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/group.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/group-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
@@ -2712,17 +2646,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/node_modules\/d3-array\/src\/leastIndex.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/leastIndex-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/node_modules\/d3-array\/src\/max.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -2730,17 +2653,6 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/node_modules\/d3-array\/src\/max-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/maxIndex.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/maxIndex-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
@@ -2767,17 +2679,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/node_modules\/d3-array\/src\/nice.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/nice-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/node_modules\/d3-array\/src\/number.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -2800,17 +2701,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/node_modules\/d3-array\/src\/quantile.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/quantile-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/node_modules\/d3-array\/src\/quickselect.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -2822,50 +2712,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/node_modules\/d3-array\/src\/set.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/set-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/sort.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/sort-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/superset.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/superset-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/threshold\/sturges.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/threshold\/sturges-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/node_modules\/d3-array\/src\/ticks.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -2873,17 +2719,6 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/node_modules\/d3-array\/src\/ticks-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/node_modules\/d3-array\/src\/transpose.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/node_modules\/d3-array\/src\/transpose-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
