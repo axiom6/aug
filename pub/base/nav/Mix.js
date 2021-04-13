@@ -464,13 +464,16 @@ Mix = class Mix {
     }
   }
 
-  choose(name, choice) {
+  choose(name, choice, checked) {
     var obj;
     obj = this.choice()[name];
-    if (obj != null) {
-      obj.choices[obj.idx] = choice;
-      obj.idx = ++obj.idx % obj.choices.length;
-    } else {
+    if ((obj != null) && checked) {
+      obj.choices.push(choice);
+    } else if ((obj != null) && !checked) {
+      obj.choices = obj.choices.filter(function(elem) {
+        return elem !== choice;
+      });
+    } else if (obj == null) {
       console.error('Mix.choose() bad choice', {
         name: name,
         choice: choice
@@ -479,7 +482,10 @@ Mix = class Mix {
   }
 
   choosen(name, choice) {
-    return (this.choice()[name] != null) && this.inArray(choice, this.choices(name));
+    var has;
+    has = (this.choice()[name] != null) && this.inArray(choice, this.choices(name));
+    // console.log( 'Mix.choosen()', { name:name, choice:choice, has:has, choices:@choices(name) } )
+    return has;
   }
 
   choiceIndex(name, choice) {
@@ -495,7 +501,17 @@ Mix = class Mix {
         idx: idx
       });
     }
+    // console.log( 'Mix.choiceIndex()', { name:name, choice:choice, idx:idx, obj:obj } )
     return idx;
+  }
+
+  refreshBtns(name, btns) {
+    var btn, key;
+    for (key in btns) {
+      if (!hasProp.call(btns, key)) continue;
+      btn = btns[key];
+      btn.checked.value = this.choosen(name, btn.name);
+    }
   }
 
   appendImgsHW(src, elem) {

@@ -6,9 +6,9 @@ import Stream from '../../base/util/Stream.js';
 
 import Touch from '../../base/nav/Touch.js';
 
-import Mix from '../../base/nav/Mix.Jitt.js';
+import Mix from '../../base/nav/Mix.js';
 
-import Nav from '../../base/nav/Nav.Jitt.js';
+import Nav from '../../base/nav/Nav.js';
 
 import {
   createApp

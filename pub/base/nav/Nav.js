@@ -28,6 +28,8 @@ Nav = class Nav {
     this.source = 'None';
     this.route = 'Home';
     this.routeLast = 'None';
+    this.choice = 'None';
+    this.checked = false;
     this.compKey = 'Home'; // Also specifies current plane
     this.pracKey = 'None';
     this.dispKey = 'None';
@@ -78,6 +80,8 @@ Nav = class Nav {
       pageKey: this.pageKey,
       pracKey: this.pracKey,
       dispKey: this.dispKey,
+      choice: this.choice,
+      checked: this.checked,
       warnMsg: this.warnMsg,
       imgsIdx: this.imgsIdx
     };
@@ -93,7 +97,8 @@ Nav = class Nav {
   }
 
   doRoute(obj) {
-    if (obj.route === this.routeLast || this.isInov(obj.route)) {
+    // console.log( 'Nav.doRoute()', { objRoute:obj.route, routeLast:@routeLast})
+    if (obj.route === 'None' || obj.route === this.routeLast || this.isInov(obj.route)) {
       return;
     }
     // console.log( 'Nav.doRoute()', { routeNames:@routeNames } )
@@ -105,7 +110,7 @@ Nav = class Nav {
       } else {
         console.error('Nav.doRoute() router not set');
       }
-      this.routeLast = this.route;
+      this.routeLast = obj.route;
       this.route = obj.route;
     } else {
       console.error('Nav.doRoute() undefined or unnamed route', obj.route);
@@ -375,13 +380,7 @@ Nav = class Nav {
   // console.log( 'Nav.setPages()', { route:route, has:@hasPages(route), pages:@pages[route] } )
   setPageKey(route, pageKey) {
     var key, page, ref;
-    // console.log( 'Nav.setPageKey()', { route:route, pageKey:pageKey, has:@hasPages(route) } )
     if (!this.hasPages(route)) {
-      console.log('Nav.setPageKey()', {
-        route: route,
-        pageKey: pageKey,
-        has: this.hasPages(route)
-      });
       return;
     }
     ref = this.pages[route].pages;
@@ -427,13 +426,7 @@ Nav = class Nav {
   hasPages(route, logNot = true) {
     var has;
     has = this.isDef(this.pages[route]) && this.isDef(this.pages[route].pages) && this.pages[route].keys.length > 0;
-    if (!has && logNot) {
-      console.log('Nav.hasPages()', {
-        route: route,
-        has: has,
-        pages: this.pages
-      });
-    }
+    // console.log( 'Nav.hasPages()', { route:route, has:has, pages:@pages } ) if not has and logNot
     return has;
   }
 
@@ -521,8 +514,12 @@ Nav = class Nav {
   }
 
   insInov(navs, prev, inov, next) {
-    // navs[prev].south = inov
-    // navs[prev].next  = inov
+    if (navs[prev] != null) {
+      navs[prev].south = inov;
+    }
+    if (navs[next] != null) {
+      navs[prev].next = inov;
+    }
     navs[inov] = {
       north: prev,
       prev: prev,

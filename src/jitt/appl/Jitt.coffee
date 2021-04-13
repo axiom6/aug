@@ -3,8 +3,8 @@ import Data    from '../../base/util/Data.js'
 import Stream  from '../../base/util/Stream.js'
 import Touch   from '../../base/nav/Touch.js'
 #mport Cache   from '../../base/util/Cache.js'
-import Mix     from '../../base/nav/Mix.Jitt.js'
-import Nav     from '../../base/nav/Nav.Jitt.js'
+import Mix     from '../../base/nav/Mix.js'
+import Nav     from '../../base/nav/Nav.js'
 
 import { createApp } from 'vue'    #
 import { createRouter, createWebHistory } from 'vue-router'

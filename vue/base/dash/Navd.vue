@@ -58,11 +58,11 @@
   
   .navd-navd { background-color:@theme-back; color:@theme-fore;
                   position:relative; left:15.0%; top:0;   width:70%; height:100%;
-    .navd-west  { position:absolute; left:0;     top:33%; width:25%; height: 33%; font-size:200% } // 133%
+    .navd-west  { position:absolute; left:0;     top:35%; width:25%; height: 33%; font-size:200% } // 133%
     .navd-north { position:absolute; left:37.5%; top:0%;  width:25%; height: 33%; font-size:200% } // 133%
-    .navd-next  { position:absolute; left:50.0%; top:33%; width:25%; height: 33%; font-size:150% } // 100%
-    .navd-prev  { position:absolute; left:25.0%; top:33%; width:25%; height: 33%; font-size:150% } // 100%
-    .navd-east  { position:absolute; left:75.0%; top:33%; width:25%; height: 33%; font-size:200% } // 133%
+    .navd-next  { position:absolute; left:50.0%; top:35%; width:25%; height: 33%; font-size:150% } // 100%
+    .navd-prev  { position:absolute; left:25.0%; top:35%; width:25%; height: 33%; font-size:150% } // 100%
+    .navd-east  { position:absolute; left:75.0%; top:35%; width:25%; height: 33%; font-size:200% } // 133%
     .navd-south { position:absolute; left:37.5%; top:66%; width:25%; height: 33%; font-size:200% } // 133%
     div    { display:grid;
       i    { justify-self:center; align-self:center; } } }

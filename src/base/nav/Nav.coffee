@@ -12,6 +12,8 @@ class Nav
     @source     = 'None'
     @route      = 'Home'
     @routeLast  = 'None'
+    @choice     = 'None'
+    @checked    = false
     @compKey    = 'Home' # Also specifies current plane
     @pracKey    = 'None'
     @dispKey    = 'None'
@@ -45,7 +47,7 @@ class Nav
     #inovKey = msg.inovKey if     msg.inovKey?
     @pageKey = @getPageKey( @route, false )
     { source:@source, route:@route, compKey:@compKey, inovKey:@inovKey, pageKey:@pageKey, pracKey:@pracKey,
-    dispKey:@dispKey,warnMsg:@warnMsg, imgsIdx:@imgsIdx }
+    dispKey:@dispKey, choice:@choice, checked:@checked, warnMsg:@warnMsg, imgsIdx:@imgsIdx }
 
   set:( msg ) ->
     for own key, val of msg
@@ -53,16 +55,17 @@ class Nav
     return
 
   doRoute:( obj ) ->
-    return if obj.route is @routeLast or @isInov(obj.route)
+    # console.log( 'Nav.doRoute()', { objRoute:obj.route, routeLast:@routeLast})
+    return if obj.route is 'None' or obj.route is @routeLast or @isInov(obj.route)
     # console.log( 'Nav.doRoute()', { routeNames:@routeNames } )
     if obj.route? and @inArray(obj.route,@routeNames )
       if @router?
-         @router.push( name:obj.route )
+        @router.push( name:obj.route )
       else
-         console.error( 'Nav.doRoute() router not set' )
-      @routeLast = @route
-      @route     =  obj.route
-    else                                                                                                                     
+        console.error( 'Nav.doRoute() router not set' )
+      @routeLast = obj.route
+      @route     = obj.route
+    else
       console.error( 'Nav.doRoute() undefined or unnamed route', obj.route )
     return
 
@@ -237,9 +240,8 @@ class Nav
     return
 
   setPageKey:( route, pageKey ) ->
-    # console.log( 'Nav.setPageKey()', { route:route, pageKey:pageKey, has:@hasPages(route) } )
     if not @hasPages(route)
-      console.log( 'Nav.setPageKey()', { route:route, pageKey:pageKey, has:@hasPages(route) } )
+      # console.log( 'Nav.setPageKey()', { route:route, pageKey:pageKey, has:@hasPages(route) } )
       return
     for own key, page  of @pages[route].pages
       page.show = key  is pageKey
@@ -262,7 +264,7 @@ class Nav
 
   hasPages:( route, logNot=true ) ->
     has = @isDef(@pages[route]) and @isDef(@pages[route].pages) and @pages[route].keys.length > 0
-    console.log( 'Nav.hasPages()', { route:route, has:has, pages:@pages } ) if not has and logNot
+    # console.log( 'Nav.hasPages()', { route:route, has:has, pages:@pages } ) if not has and logNot
     has
 
   hasPageKey:( route, pageKey ) ->
@@ -321,8 +323,8 @@ class Nav
     navs
 
   insInov:( navs, prev, inov, next ) ->
-    # navs[prev].south = inov
-    # navs[prev].next  = inov
+    navs[prev].south = inov if navs[prev]?
+    navs[prev].next  = inov if navs[next]?
     navs[inov] = { north:prev, prev:prev, south:next, next:next }
     navs[next].north = inov
     navs[next].prev  = inov
