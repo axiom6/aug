@@ -10,7 +10,7 @@ import Home    from '../../../vue/augm/appl/Augm.vue'
 class Load
 
   constructor:() ->
-    @addScript("/assets/augm/mathbox-bundle.js")
+    @addScript("/assets/mathbox-bundle.js")
 
   load:( name ) ->
     return switch( name )
@@ -22,7 +22,7 @@ class Load
       when 'Wood'   then Wood
       else               Home
 
-  addScript:( src ) ->       # "/lib/mbox/augm/mathbox-bundle.js"
+  addScript:( src ) ->   
     scripts    = document.getElementsByTagName('script');
     for scriptx in scripts
       # console.log( 'Mods.addScript() scriptx src', scriptx.src )

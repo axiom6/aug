@@ -78,6 +78,19 @@
       "oAP" : "\/assets\/favicon.ico",
       "oF" : 1
     },
+    "\/assets\/landscape.png" : {
+      "ft" : 32768,
+      "iS" : 35243,
+      "oA" : 0,
+      "oAP" : "\/assets\/landscape.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
     "\/assets\/mathbox-bundle.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -88,6 +101,19 @@
       "oF" : 1,
       "sC" : 0,
       "tS" : 0
+    },
+    "\/assets\/portrait.png" : {
+      "ft" : 32768,
+      "iS" : 37460,
+      "oA" : 0,
+      "oAP" : "\/assets\/portrait.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
     },
     "\/aug.iml" : {
       "cB" : 0,
@@ -2242,6 +2268,123 @@
       "oO" : 0,
       "oS" : 1
     },
+    "\/dist\/assets\/1.fc487955.png" : {
+      "ft" : 32768,
+      "iS" : 7389,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/1.fc487955.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/dist\/assets\/2.205ad8a0.png" : {
+      "ft" : 32768,
+      "iS" : 7313,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/2.205ad8a0.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/dist\/assets\/3.4d04d4d4.png" : {
+      "ft" : 32768,
+      "iS" : 7530,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/3.4d04d4d4.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/dist\/assets\/4.a12eb19d.png" : {
+      "ft" : 32768,
+      "iS" : 7385,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/4.a12eb19d.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/dist\/assets\/5.285ea724.png" : {
+      "ft" : 32768,
+      "iS" : 7398,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/5.285ea724.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/dist\/assets\/6.7207c00d.png" : {
+      "ft" : 32768,
+      "iS" : 7421,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/6.7207c00d.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/dist\/assets\/7.b5a84dc6.png" : {
+      "ft" : 32768,
+      "iS" : 7432,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/7.b5a84dc6.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/dist\/assets\/8.3639a9ef.png" : {
+      "ft" : 32768,
+      "iS" : 7405,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/8.3639a9ef.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/dist\/assets\/9.ac7bd647.png" : {
+      "ft" : 32768,
+      "iS" : 7513,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/9.ac7bd647.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
     "\/dist\/assets\/android-chrome-192x192.png" : {
       "ft" : 32768,
       "iS" : 4502,
@@ -2277,6 +2420,45 @@
       "oIPL" : 0,
       "opt" : 0,
       "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/dist\/assets\/AutoDrip.696c56bc.jpg" : {
+      "ft" : 16384,
+      "iS" : 53424,
+      "jF" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/AutoDrip.696c56bc.jpg",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/dist\/assets\/ColdBrew.554e10d1.jpg" : {
+      "ft" : 16384,
+      "iS" : 4285,
+      "jF" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/ColdBrew.554e10d1.jpg",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/dist\/assets\/Expresso.ffad7806.jpg" : {
+      "ft" : 16384,
+      "iS" : 55242,
+      "jF" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/Expresso.ffad7806.jpg",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
       "ou" : "lpckwebp-none",
       "q" : 100,
       "rq" : 75
@@ -2423,57 +2605,31 @@
       "oAP" : "\/dist\/assets\/favicon.ico",
       "oF" : 0
     },
-    "\/dist\/assets\/hallowback2.18bb66ac.svg" : {
-      "ft" : 2097152,
-      "miP" : 0,
-      "oA" : 2,
-      "oAP" : "\/dist\/assets\/hallowback2.18bb66ac.svg",
+    "\/dist\/assets\/FrenchPress.613e24e9.jpg" : {
+      "ft" : 16384,
+      "iS" : 4641,
+      "jF" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/FrenchPress.613e24e9.jpg",
       "oF" : 0,
+      "oIPL" : 0,
       "opt" : 0,
-      "plM" : 3758088159,
-      "prP" : 0
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
     },
-    "\/dist\/assets\/hallowfront4.48486b97.svg" : {
-      "ft" : 2097152,
-      "miP" : 0,
-      "oA" : 2,
-      "oAP" : "\/dist\/assets\/hallowfront4.48486b97.svg",
+    "\/dist\/assets\/index.76bab4cb.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/dist\/assets\/index.76bab4cb-min.js",
       "oF" : 0,
-      "opt" : 0,
-      "plM" : 3758088159,
-      "prP" : 0
+      "sC" : 0,
+      "tS" : 0
     },
-    "\/dist\/assets\/hallowmid2.841fb136.svg" : {
-      "ft" : 2097152,
-      "miP" : 0,
-      "oA" : 2,
-      "oAP" : "\/dist\/assets\/hallowmid2.841fb136.svg",
-      "oF" : 0,
-      "opt" : 0,
-      "plM" : 3758088159,
-      "prP" : 0
-    },
-    "\/dist\/assets\/hallowmidfront2.07f922cf.svg" : {
-      "ft" : 2097152,
-      "miP" : 0,
-      "oA" : 2,
-      "oAP" : "\/dist\/assets\/hallowmidfront2.07f922cf.svg",
-      "oF" : 0,
-      "opt" : 0,
-      "plM" : 3758088159,
-      "prP" : 0
-    },
-    "\/dist\/assets\/horse-hallow5.0ae14e14.svg" : {
-      "ft" : 2097152,
-      "miP" : 0,
-      "oA" : 2,
-      "oAP" : "\/dist\/assets\/horse-hallow5.0ae14e14.svg",
-      "oF" : 0,
-      "opt" : 0,
-      "plM" : 3758088159,
-      "prP" : 0
-    },
-    "\/dist\/assets\/index.cb801068.css" : {
+    "\/dist\/assets\/index.613ede5b.css" : {
       "aP" : 1,
       "bl" : 0,
       "ci" : 0,
@@ -2481,20 +2637,22 @@
       "ft" : 16,
       "ma" : 0,
       "oA" : 1,
-      "oAP" : "\/dist\/assets\/index.cb801068-min.css",
+      "oAP" : "\/dist\/assets\/index.613ede5b-min.css",
       "oF" : 0,
       "pg" : 0
     },
-    "\/dist\/assets\/index.f4c7a7ec.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/dist\/assets\/index.f4c7a7ec-min.js",
+    "\/dist\/assets\/landscape.png" : {
+      "ft" : 32768,
+      "iS" : 35243,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/landscape.png",
       "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
     },
     "\/dist\/assets\/mathbox-bundle.js" : {
       "bF" : 0,
@@ -2507,6 +2665,19 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/dist\/assets\/portrait.png" : {
+      "ft" : 32768,
+      "iS" : 37460,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/portrait.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
     "\/dist\/assets\/Roboto-Regular.79e85140.ttf" : {
       "cB" : 0,
       "ft" : 8192,
@@ -2515,13 +2686,26 @@
       "oAP" : "\/dist\/assets\/Roboto-Regular.79e85140.ttf",
       "oF" : 0
     },
-    "\/dist\/assets\/vendor.05801bed.js" : {
+    "\/dist\/assets\/SyphonPot.b5d28b49.jpg" : {
+      "ft" : 16384,
+      "iS" : 4246,
+      "jF" : 0,
+      "oA" : 0,
+      "oAP" : "\/dist\/assets\/SyphonPot.b5d28b49.jpg",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/dist\/assets\/vendor.6a39cb3c.js" : {
       "bF" : 0,
       "ft" : 64,
       "ma" : 0,
       "mi" : 0,
       "oA" : 1,
-      "oAP" : "\/dist\/assets\/vendor.05801bed-min.js",
+      "oAP" : "\/dist\/assets\/vendor.6a39cb3c-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0

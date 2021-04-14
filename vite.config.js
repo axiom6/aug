@@ -9,7 +9,7 @@ export default  ( { command, mode } ) => {
     console.log( 'vite.config.js build', { command:command, mode:mode } );
     fs.copyFile( 'pub/augm/appl/Mods.js', 'pub/augm/appl/Load.js' );
     return defineConfig({
-      plugins:[vue()] } ); }
+      plugins:[vue()] } ); }    // server: { https:true } }
   else if( command === 'serve' ) {
     console.log( 'vite.config.js serve', { command:command, mode:mode } );
     if( mode === 'development' ) {

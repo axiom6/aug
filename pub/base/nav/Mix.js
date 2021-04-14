@@ -148,7 +148,7 @@ Mix = class Mix {
     };
   }
 
-  addScript(src) { // "/lib/mbox/augm/mathbox-bundle.js"
+  addScript(src) {
     var i, len, script, scripts, scriptx;
     scripts = document.getElementsByTagName('script');
     for (i = 0, len = scripts.length; i < len; i++) {

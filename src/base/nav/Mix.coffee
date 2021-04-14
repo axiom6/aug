@@ -85,7 +85,7 @@ class Mix
     sc * fs + 'vmin'
   fontSizeCss: (scale) ->
     {fontSize: @fontSize(scale)}
-  addScript:( src ) ->       # "/lib/mbox/augm/mathbox-bundle.js"
+  addScript:( src ) ->     
     scripts    = document.getElementsByTagName('script');
     for scriptx in scripts
       # console.log( 'Mix.addScript() scriptx src', scriptx.src )

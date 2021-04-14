@@ -45,8 +45,8 @@
   
   @import '../../../css/themes/theme.less';
   
-  @portrait: "../../css/phone/portrait.png";
-  @landscape:"../../css/phone/landscape.png";
+  @portrait: "../../assets/portrait.png";
+  @landscape:"../../assets/landscape.png";
   
   @dashFS:@themeFS;
   @dash-theme: { font-size:@dashFS; background-color:@theme-back; border-radius:2.0*@dashFS; }

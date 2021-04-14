@@ -5,7 +5,8 @@
   "author": "Tom Flaherty",
   "license": "MIT",
   "scripts": {
-    "dev": "vite serve",
+    "dev":   "vite serve",
+    "https": "npx vite --https",
     "build": "vite build && node vite.copy.js",
     "serve": "vite preview",
     "vhelp": "vite --help",

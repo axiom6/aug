@@ -16,7 +16,7 @@ import Home from '../../../vue/augm/appl/Augm.vue';
 
 Load = class Load {
   constructor() {
-    this.addScript("/assets/augm/mathbox-bundle.js");
+    this.addScript("/assets/mathbox-bundle.js");
   }
 
   load(name) {
@@ -38,7 +38,7 @@ Load = class Load {
     }
   }
 
-  addScript(src) { // "/lib/mbox/augm/mathbox-bundle.js"
+  addScript(src) {
     var i, len, script, scripts, scriptx;
     scripts = document.getElementsByTagName('script');
     for (i = 0, len = scripts.length; i < len; i++) {

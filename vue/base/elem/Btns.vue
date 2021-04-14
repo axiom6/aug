@@ -55,7 +55,7 @@
         let p  = btn.pos;
         let sy = 1.0;
         let p2 = p[2]===0 ? p[3] : p[2];
-        let fs = btn.type==='choice' ? (p[3]*0.09)+'em' : (p[3]*0.07)+'em';
+        let fs = btn.type==='choice' ? (p[3]*0.06)+'em' : (p[3]*0.07)+'em';
         return { position:'absolute', left:sy*p[0]+'%', top:sy*p[1]+'%', width:sy*p2+'%', height:sy*p[3]+'%',
           fontSize:fs, 'z-index':2 } }
       const styleBtn = function (btn) {
@@ -114,7 +114,7 @@
 
     .check { grid-area:check; justify-self:center; align-self:center; }
     .icons { grid-area:icons; justify-self:center; align-self:center; } // font-family: "font-awesome" serif;
-    .image { grid-area:icons; justify-self:left;   align-self:center; .image-radius; max-height:2.0em; }
+    .image { grid-area:icons; justify-self:left;   align-self:center; .image-radius; max-height:1.8em; }
     .title { grid-area:label; justify-self:left;   align-self:center; text-align:left; }
 
 </style>
