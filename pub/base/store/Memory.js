@@ -1,25 +1,23 @@
 var Memory,
   hasProp = {}.hasOwnProperty;
 
-Memory = class Memory {
-  constructor(store) {
-    this.store = store;
-    this.dbName = this.store.dbName;
-  }
+import Store from '../util/Store.js';
 
-  table(tn) {
-    return this.store.table(tn);
+Memory = class Memory extends Store {
+  constructor(dbName, tables, stream) {
+    super(dbName, tables, stream);
+    this.dbName = this.dbName;
   }
 
   batch(name, obj, objs, callback = null) {
     var onBatch, where;
     onBatch = (result) => {
       obj.result = result;
-      if (this.store.batchComplete(objs)) {
+      if (this.batchComplete(objs)) {
         if (callback != null) {
           return callback(objs);
         } else {
-          return this.store.results(name, 'batch', objs);
+          return this.results(name, 'batch', objs);
         }
       }
     };
@@ -40,10 +38,10 @@ Memory = class Memory {
       if (callback != null) {
         callback(object);
       } else {
-        this.store.results(tn, 'get', object, id);
+        this.results(tn, 'get', object, id);
       }
     } else {
-      this.store.onerror(tn, 'get', {
+      this.onerror(tn, 'get', {
         error: 'Memory object no found'
       }, id);
     }
@@ -59,7 +57,7 @@ Memory = class Memory {
     if (object != null) {
       delete this.table(tn)[id];
     } else {
-      this.store.onerror(tn, 'get', {
+      this.onerror(tn, 'get', {
         error: 'Memory object not found'
       }, id);
     }
@@ -78,11 +76,11 @@ Memory = class Memory {
   select(tn, where, callback = null) {
     var objects, table;
     table = this.table(tn);
-    objects = this.store.filter(table, where);
+    objects = this.filter(table, where);
     if (callback != null) {
       callback(objects);
     } else {
-      this.store.results(tn, 'select', objects);
+      this.results(tn, 'select', objects);
     }
   }
 
@@ -109,7 +107,7 @@ Memory = class Memory {
       objs[key] = obj;
       delete table[key];
     }
-    this.store.results(table, 'remove', objs);
+    this.results(table, 'remove', objs);
   }
 
   open(tn) {

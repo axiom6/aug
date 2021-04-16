@@ -1,17 +1,13 @@
 var Fire,
   hasProp = {}.hasOwnProperty;
 
-import firebase from '../../../pub/lib/store/firebase-app.esm.js';
+import Store from '../util/Store.js';
 
-import '../../../pub/lib/store/firebase-database.esm.js';
+import firebase from '@firebase';
 
-import '../../../pub/lib/store/firebase-auth.esm.js';
-
-Fire = class Fire {
-  constructor(store) {
-    this.store = store;
-    this.dbName = this.store.dbName;
-    this.tables = this.store.tables;
+Fire = class Fire extends Store {
+  constructor(dbName, tables, stream) {
+    super(dbName, tables, stream);
     this.keyProp = 'id';
     this.fb = this.init(this.config("augm-d4b3c"));
     //@auth() # Anonomous logins have to be enabled
@@ -52,16 +48,16 @@ Fire = class Fire {
     this.fd.ref(table).once('value').then((snapshot) => {
       if ((snapshot != null) && (snapshot.val() != null)) {
         obj.result = snapshot.val();
-        if (this.store.batchComplete(objs)) {
+        if (this.batchComplete(objs)) {
           if (callback != null) {
             return callback(objs);
           } else {
-            return this.store.results(name, 'batch', objs);
+            return this.results(name, 'batch', objs);
           }
         }
       }
     }).catch((error) => {
-      return this.store.onerror(obj.table, 'batch', error);
+      return this.onerror(obj.table, 'batch', error);
     });
   }
 
@@ -77,11 +73,11 @@ Fire = class Fire {
         if (callback != null) {
           return callback(val);
         } else {
-          return this.store.results(table, 'change', val, key);
+          return this.results(table, 'change', val, key);
         }
       }
     }).catch((error) => {
-      return this.store.onerror(table, 'change', error);
+      return this.onerror(table, 'change', error);
     });
   }
 
@@ -91,30 +87,30 @@ Fire = class Fire {
         if (callback != null) {
           return callback(snapshot.val());
         } else {
-          return this.store.results(table, 'get', snapshot.val(), id);
+          return this.results(table, 'get', snapshot.val(), id);
         }
       }
     }).catch((error) => {
-      return this.store.onerror(table, 'get', error, id);
+      return this.onerror(table, 'get', error, id);
     });
   }
 
   add(table, id, object) {
     this.fd.ref(table + '/' + id).set(object).catch((error) => {
-      return this.store.onerror(table, 'add', error, id);
+      return this.onerror(table, 'add', error, id);
     });
   }
 
   // Same as add
   put(table, id, object) {
     this.fd.ref(table + '/' + id).set(object).catch((error) => {
-      return this.store.onerror(table, 'put', error, id);
+      return this.onerror(table, 'put', error, id);
     });
   }
 
   del(table, id) {
     this.fd.ref(table + '/' + id).remove().catch((error) => {
-      return this.store.onerror(table, 'del', error, id);
+      return this.onerror(table, 'del', error, id);
     });
   }
 
@@ -122,11 +118,11 @@ Fire = class Fire {
     this.fd.ref(table).once('value').then((snapshot) => {
       var objs;
       if ((snapshot != null) && (snapshot.val() != null)) {
-        objs = this.store.toObjs(snapshot.val(), where, this.keyProp);
+        objs = this.toObjs(snapshot.val(), where, this.keyProp);
         if (callback != null) {
           return callback(objs);
         } else {
-          return this.store.results(table, 'select', objs);
+          return this.results(table, 'select', objs);
         }
       }
     });
@@ -134,13 +130,13 @@ Fire = class Fire {
 
   insert(table, objects) {
     this.fd.ref(table).set(objects).catch((error) => {
-      return this.store.onerror(table, 'insert', error);
+      return this.onerror(table, 'insert', error);
     });
   }
 
   update(table, objects) {
     this.fd.ref(table).update(objects).catch((error) => {
-      return this.store.onerror(table, 'update', error);
+      return this.onerror(table, 'update', error);
     });
   }
 
@@ -148,13 +144,13 @@ Fire = class Fire {
     var key, obj, objs;
     this.fd.ref(table).once('value').then((snapshot) => {}, (function() {
       if ((typeof snapshot !== "undefined" && snapshot !== null) && (snapshot.val() != null)) {
-        objs = this.store.toObjs(snapshot.val(), where, this.keyProp);
+        objs = this.toObjs(snapshot.val(), where, this.keyProp);
         for (key in objs) {
           if (!hasProp.call(objs, key)) continue;
           obj = objs[key];
           this.del(table, key); // @fd.ref(table+'/'+key).remove()
         }
-        return this.store.results(table, 'select', objs);
+        return this.results(table, 'select', objs);
       }
     }).call(this));
   }
@@ -164,10 +160,10 @@ Fire = class Fire {
       var objs;
       if ((snapshot != null) && (snapshot.val() != null)) {
         objs = this.toObjects(snapshot.val());
-        return this.store.results(table, 'range', objs);
+        return this.results(table, 'range', objs);
       }
     }).catch((error) => {
-      return this.store.onerror(table, 'range', error);
+      return this.onerror(table, 'range', error);
     });
   }
 
@@ -193,17 +189,17 @@ Fire = class Fire {
   // ref.remove() is Dangerous and has removed all tables in Firebase
   // @fd.ref(table).set( {} )
   //    .catch( (error) =>
-  //      @store.onerror( table, 'open', error ) )
+  //      @onerror( table, 'open', error ) )
   drop(table) {
     this.fd.ref(table).remove().catch((error) => {
-      return this.store.onerror(table, 'drop', error);
+      return this.onerror(table, 'drop', error);
     });
   }
 
   // Sign Anonymously
   auth() {
     this.fb.auth().signInAnonymously().catch((error) => {
-      return this.store.onerror('auth', 'auth', error);
+      return this.onerror('auth', 'auth', error);
     });
   }
 

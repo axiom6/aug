@@ -1,13 +1,13 @@
-  //import { openDB } from '../../lib/idb/index.js';
 var Index,
-  hasProp = {}.hasOwnProperty;
+  hasProp = {}.hasOwnProperty,
+  boundMethodCheck = function(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new Error('Bound instance method accessed before binding'); } };
 
-Index = class Index {
-  constructor(store) {
+import Store from '../util/Store.js';
+
+Index = class Index extends Store {
+  constructor(dbName, tables, stream) {
+    super(dbName, tables, stream);
     this.insert = this.insert.bind(this);
-    this.store = store;
-    this.dbName = this.store.dbName;
-    this.tables = this.store.tables;
     this.keyPath = 'id';
     window.indexedDB.deleteDatabase(this.dbName);
   }
@@ -40,14 +40,14 @@ Index = class Index {
         resolve(db);
       };
       request.onblocked = () => { // event
-        this.store.onerror(dbName, 'open', {
+        this.onerror(dbName, 'open', {
           cause: 'Index.openDB() onblocked',
           error: request.error
         });
         reject();
       };
       return request.onerror = () => {
-        this.store.onerror(dbName, 'open', {
+        this.onerror(dbName, 'open', {
           cause: 'Index.openDB() onerror',
           error: request.error
         });
@@ -102,11 +102,11 @@ Index = class Index {
     var onBatch, where;
     onBatch = (result) => {
       obj.result = result;
-      if (this.store.batchComplete(objs)) {
+      if (this.batchComplete(objs)) {
         if (callback != null) {
           return callback(objs);
         } else {
-          return this.store.results(name, 'batch', objs);
+          return this.results(name, 'batch', objs);
         }
       }
     };
@@ -126,11 +126,11 @@ Index = class Index {
           [`${id}`]: req.result
         });
       } else {
-        return this.store.results(table, op, req.result, id);
+        return this.results(table, op, req.result, id);
       }
     };
     req.onerror = (error) => {
-      return this.store.onerror(table, op, error, id);
+      return this.onerror(table, op, error, id);
     };
   }
 
@@ -154,6 +154,7 @@ Index = class Index {
 
   insert(table, objects) {
     var id, object, txo;
+    boundMethodCheck(this, Index);
     txo = this.txo(table);
     for (id in objects) {
       if (!hasProp.call(objects, id)) continue;
@@ -203,11 +204,11 @@ Index = class Index {
       if (callback != null) {
         return callback(objs);
       } else {
-        return this.store.results(table, op, objs);
+        return this.results(table, op, objs);
       }
     };
     req.onerror = (error) => {
-      return this.store.onerror(table, op, error);
+      return this.onerror(table, op, error);
     };
   }
 
@@ -215,7 +216,7 @@ Index = class Index {
     if (this.db != null) {
       this.openStore(this.db, table);
     } else {
-      this.store.onerror(table, 'open', '@db null for IndexedDB');
+      this.onerror(table, 'open', '@db null for IndexedDB');
     }
   }
 
@@ -223,7 +224,7 @@ Index = class Index {
     if (this.db != null) {
       this.db.deleteObjectStore(table);
     } else {
-      this.store.onerror(table, 'drop', '@db null for IndexedDB');
+      this.onerror(table, 'drop', '@db null for IndexedDB');
     }
   }
 

@@ -1,14 +1,16 @@
 var Local,
   hasProp = {}.hasOwnProperty;
 
-Local = class Local {
-  constructor(store) {
-    this.store = store;
+import Store from '../util/Store.js';
+
+Local = class Local extends Store {
+  constructor(dbName, tables, stream) {
+    super(dbName, tables, stream);
     this.tableIds = {};
   }
 
   key(table, id) {
-    return this.store.dbName + table + id;
+    return this.dbName + table + id;
   }
 
   obj(table, id) {
@@ -39,11 +41,11 @@ Local = class Local {
     var onBatch, where;
     onBatch = (result) => {
       obj.result = result;
-      if (this.store.batchComplete(objs)) {
+      if (this.batchComplete(objs)) {
         if (callback != null) {
           return callback(objs);
         } else {
-          return this.store.results(name, 'batch', objs);
+          return this.results(name, 'batch', objs);
         }
       }
     };
@@ -60,10 +62,10 @@ Local = class Local {
       if (callback != null) {
         callback(obj);
       } else {
-        this.store.results(table, op, obj, id);
+        this.results(table, op, obj, id);
       }
     } else {
-      this.store.onerror(table, op, {
+      this.onerror(table, op, {
         error: "Local get error"
       }, id);
     }
@@ -106,7 +108,7 @@ Local = class Local {
     if (callback != null) {
       callback(objs);
     } else {
-      this.store.results(table, op, objs);
+      this.results(table, op, objs);
     }
   }
 
@@ -131,7 +133,7 @@ Local = class Local {
         objs[id] = obj;
       }
     }
-    this.store.results(table, 'remove', objs);
+    this.results(table, 'remove', objs);
   }
 
   // Nothing to do until we get ids

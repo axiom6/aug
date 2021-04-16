@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "augm-visual"
+    "default": "augm-visual",
+    "augm": "augm-visual",
+    "jitt": "jitter-48413",
+    "muse": "muse-ad352"
   }
 }

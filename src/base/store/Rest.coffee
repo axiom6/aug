@@ -1,7 +1,10 @@
 
-class Rest
+import Store  from '../util/Store.js'
 
-  constructor:( @store, @baseUrl ) ->
+class Rest extends Store
+
+  constructor:( dbName, tables, stream, @baseUrl ) ->
+    super(      dbName, tables, stream )
     @key  = "id"
 
   # Rest
@@ -38,13 +41,13 @@ class Rest
         response.json() )
       .then( (data) =>
         obj['result'] = data
-        if @store.batchComplete(objs)
+        if @batchComplete(objs)
           if callback?
              callback(objs)
           else
-             @store.results( name, 'batch', objs, id ) )
+             @results( name, 'batch', objs, id ) )
       .catch( (error) =>
-        @store.onerror( obj.table, 'batch', @toError(url,error) ) )
+        @onerror( obj.table, 'batch', @toError(url,error) ) )
     return
 
   rest:( op, table, id, object=null, path, callback=null ) ->
@@ -58,9 +61,9 @@ class Rest
         if callback?
            callback(result)
         else
-           @store.results( table, op, result, id ) )
+           @results( table, op, result, id ) )
       .catch( (error) =>
-        @store.onerror( table, op, @toError(url,error), id ) )
+        @onerror( table, op, @toError(url,error), id ) )
     return
 
   sql:( op, table, where, objects=null, callback=null ) ->
@@ -74,9 +77,9 @@ class Rest
         if callback?
            callback(result)
         else
-           @store.results( table, op, result ) )
+           @results( table, op, result ) )
       .catch( (error) =>
-        @store.onerror( table, op, @toError(url,error) ) )
+        @onerror( table, op, @toError(url,error) ) )
     return
 
   # Only for open and drop. Needs to be thought out
@@ -88,9 +91,9 @@ class Rest
         response.json() )
       .then( (data) =>
         result = @restResult( null, data )
-        @store.results( table, op, result ) )
+        @results( table, op, result ) )
       .catch( (error) =>
-        @store.onerror( table, op, @toError(url,error) ) )
+        @onerror( table, op, @toError(url,error) ) )
     return
 
   restResult:( object, data=null, where=()->true ) ->  # object can also be objects

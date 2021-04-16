@@ -1,8 +1,10 @@
 var Rest;
 
-Rest = class Rest {
-  constructor(store, baseUrl) {
-    this.store = store;
+import Store from '../util/Store.js';
+
+Rest = class Rest extends Store {
+  constructor(dbName, tables, stream, baseUrl) {
+    super(dbName, tables, stream);
     this.baseUrl = baseUrl;
     this.key = "id";
   }
@@ -72,15 +74,15 @@ Rest = class Rest {
       return response.json();
     }).then((data) => {
       obj['result'] = data;
-      if (this.store.batchComplete(objs)) {
+      if (this.batchComplete(objs)) {
         if (callback != null) {
           return callback(objs);
         } else {
-          return this.store.results(name, 'batch', objs, id);
+          return this.results(name, 'batch', objs, id);
         }
       }
     }).catch((error) => {
-      return this.store.onerror(obj.table, 'batch', this.toError(url, error));
+      return this.onerror(obj.table, 'batch', this.toError(url, error));
     });
   }
 
@@ -96,10 +98,10 @@ Rest = class Rest {
       if (callback != null) {
         return callback(result);
       } else {
-        return this.store.results(table, op, result, id);
+        return this.results(table, op, result, id);
       }
     }).catch((error) => {
-      return this.store.onerror(table, op, this.toError(url, error), id);
+      return this.onerror(table, op, this.toError(url, error), id);
     });
   }
 
@@ -115,10 +117,10 @@ Rest = class Rest {
       if (callback != null) {
         return callback(result);
       } else {
-        return this.store.results(table, op, result);
+        return this.results(table, op, result);
       }
     }).catch((error) => {
-      return this.store.onerror(table, op, this.toError(url, error));
+      return this.onerror(table, op, this.toError(url, error));
     });
   }
 
@@ -132,9 +134,9 @@ Rest = class Rest {
     }).then((data) => {
       var result;
       result = this.restResult(null, data);
-      return this.store.results(table, op, result);
+      return this.results(table, op, result);
     }).catch((error) => {
-      return this.store.onerror(table, op, this.toError(url, error));
+      return this.onerror(table, op, this.toError(url, error));
     });
   }
 

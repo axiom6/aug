@@ -1,20 +1,20 @@
+import Store  from '../util/Store.js'
 
-class Memory
+class Memory extends Store
 
-  constructor:( @store ) ->
-    @dbName    = @store.dbName
+  constructor:( dbName, tables, stream ) ->
+    super(      dbName, tables, stream )
+    @dbName    = @dbName
 
-  table:(tn) ->
-    @store.table(tn)
 
   batch:( name, obj, objs, callback=null ) ->
     onBatch = (result) =>
       obj.result = result
-      if @store.batchComplete( objs )
+      if @batchComplete( objs )
         if callback?
            callback( objs )
         else
-           @store.results( name, 'batch', objs )
+           @results( name, 'batch', objs )
     where = () -> true
     @select( obj.table, where, onBatch )
     return
@@ -29,9 +29,9 @@ class Memory
       if callback?
          callback( object )
       else
-         @store.results( tn, 'get', object, id )
+         @results( tn, 'get', object, id )
     else
-      @store.onerror( tn, 'get', { error:'Memory object no found'}, id )
+      @onerror( tn, 'get', { error:'Memory object no found'}, id )
     return
 
   put:( tn, id,  object ) ->
@@ -43,7 +43,7 @@ class Memory
     if object?
       delete @table(tn)[id]
     else
-      @store.onerror( tn, 'get', { error:'Memory object not found'}, id )
+      @onerror( tn, 'get', { error:'Memory object not found'}, id )
     return
 
   insert:( tn, objects ) ->
@@ -54,11 +54,11 @@ class Memory
 
   select:( tn, where, callback=null ) ->
     table   = @table(tn)
-    objects = @store.filter( table, where )
+    objects = @filter( table, where )
     if callback?
        callback( objects )
     else
-       @store.results( tn, 'select', objects )
+       @results( tn, 'select', objects )
     return
 
   update:( tn, objects ) ->
@@ -73,7 +73,7 @@ class Memory
     for own key,  obj of table when where(obj)
       objs[key] = obj
       delete table[key]
-    @store.results( table, 'remove', objs )
+    @results( table, 'remove', objs )
     return
 
   open:( tn ) ->

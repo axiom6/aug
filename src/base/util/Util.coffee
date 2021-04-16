@@ -185,7 +185,7 @@ class Util
 
   @isDef:(d)         ->  d isnt null and typeof(d) isnt 'undefined'
   @isNot:(d)         ->  not Util.isDef(d)
-  @isStr:(s)         ->  Util.isDef(s) and typeof(s)=="string" and s.length > 0
+  @isStr:(s)         ->  Util.isDef(s) and typeof(s)=="string" and s.length > 0 and s isnt 'None'
   @isntStr:(s)       ->  not Util.isStr(s)
   @isNum:(n)         ->  not isNaN(n)
   @isObj:(o)         ->  Util.isDef(o) and typeof(o) is "object"
@@ -470,20 +470,6 @@ class Util
       for own key, obj of objs
         array.push( obj )
       array
-      
-  # Not working
-  @toArray2:( objects, whereIn=null, keyField='id' ) ->
-    where = if whereIn? then whereIn else () -> true
-    array = []
-    if Util.isArray(objects)
-      for object in array  when where(object)
-        object[keyField] = object['id'] if object['id']? and keyField isnt 'id'
-        array.push( object )
-    else
-      for own key, object of objects when where(key,object)
-        object[keyField] = key
-        array.push(object)
-    array
 
   @toObjects:( rows, whereIn=null, keyField='id' ) ->
     where = if whereIn? then whereIn else () -> true

@@ -1,12 +1,10 @@
 
+import Store  from '../util/Store.js'
 
-#import { openDB } from '../../lib/idb/index.js';
+class Index extends Store
 
-class Index
-
-  constructor:(  @store ) ->
-    @dbName    = @store.dbName
-    @tables    = @store.tables
+  constructor:( dbName, tables, stream ) ->
+    super(      dbName, tables, stream )
     @keyPath   = 'id'
     window.indexedDB.deleteDatabase( @dbName )
 
@@ -34,11 +32,11 @@ class Index
         resolve(db)
         return
       request.onblocked = (  ) =>  # event
-        @store.onerror( dbName, 'open', { cause:'Index.openDB() onblocked', error:request.error } )
+        @onerror( dbName, 'open', { cause:'Index.openDB() onblocked', error:request.error } )
         reject()
         return
       request.onerror   = () =>
-        @store.onerror( dbName, 'open', { cause:'Index.openDB() onerror', error:request.error } )
+        @onerror( dbName, 'open', { cause:'Index.openDB() onerror', error:request.error } )
         reject()
         return )
     return dbp
@@ -74,11 +72,11 @@ class Index
   batch:( name, obj, objs, callback=null ) ->
     onBatch = (result) =>
       obj.result = result
-      if @store.batchComplete( objs )
+      if @batchComplete( objs )
         if callback?
            callback( objs )
         else
-           @store.results( name, 'batch', objs )
+           @results( name, 'batch', objs )
     where = () -> true
     @select( obj.table, where, onBatch )
     return
@@ -90,9 +88,9 @@ class Index
       if callback?
          callback( { "#{id}":req.result } )
       else
-         @store.results( table, op, req.result, id )
+         @results( table, op, req.result, id )
     req.onerror = (error) =>
-      @store.onerror( table, op, error, id )
+      @onerror( table, op, error, id )
     return
 
   add:( table, id, object ) ->
@@ -142,23 +140,23 @@ class Index
       if callback?
          callback(objs)
       else
-         @store.results( table, op, objs  )
+         @results( table, op, objs  )
     req.onerror = (error) =>
-      @store.onerror( table, op, error )
+      @onerror( table, op, error )
     return
 
   open:( table ) ->
     if @db?
       @openStore( @db, table )
     else
-      @store.onerror( table, 'open', '@db null for IndexedDB' )
+      @onerror( table, 'open', '@db null for IndexedDB' )
     return
 
   drop:( table ) ->
     if @db?
        @db.deleteObjectStore(table)
     else
-       @store.onerror( table, 'drop', '@db null for IndexedDB' )
+       @onerror( table, 'drop', '@db null for IndexedDB' )
     return
 
 export default Index

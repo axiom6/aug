@@ -1,11 +1,13 @@
+import Store  from '../util/Store.js'
 
-class Local
+class Local extends Store
 
-  constructor:( @store ) ->
+  constructor:( dbName, tables, stream ) ->
+    super(      dbName, tables, stream )
     @tableIds = {}
 
   key:( table, id ) ->
-    @store.dbName + table + id
+    @dbName + table + id
 
   obj:( table, id ) ->
     str = localStorage.getItem( @key(table,id) )
@@ -22,11 +24,11 @@ class Local
   batch:( name, obj, objs, callback=null ) ->
     onBatch = (result) =>
       obj.result = result
-      if @store.batchComplete( objs )
+      if @batchComplete( objs )
         if callback?
            callback( objs )
         else
-           @store.results( name, 'batch', objs )
+           @results( name, 'batch', objs )
     where = () -> true
     @select( obj.table, where, onBatch )
     return
@@ -37,9 +39,9 @@ class Local
       if callback?
          callback( obj )
       else
-         @store.results( table, op, obj, id )
+         @results( table, op, obj, id )
     else
-      @store.onerror( table, op, { error:"Local get error"}, id )
+      @onerror( table, op, { error:"Local get error"}, id )
     return
 
   add:(     table, id, obj  )    ->
@@ -70,7 +72,7 @@ class Local
     if callback?
       callback( objs )
     else
-      @store.results( table, op, objs )
+      @results( table, op, objs )
     return
 
   update:( table, objs ) ->
@@ -86,7 +88,7 @@ class Local
       if obj? and where(obj)
         @del( table, id )
         objs[id] = obj
-    @store.results( table, 'remove', objs )
+    @results( table, 'remove', objs )
     return
 
   # Nothing to do until we get ids

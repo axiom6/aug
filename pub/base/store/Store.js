@@ -1,18 +1,12 @@
 var Store,
   hasProp = {}.hasOwnProperty;
 
+import Util from '../util/Util.js';
+
 Store = class Store {
-  constructor(dbName, tables, url) {
+  constructor(dbName, tables) {
     this.dbName = dbName;
     this.tables = tables;
-    this.url = url;
-    this.rest = null;
-    this.fire = null;
-    this.cloud = null;
-    this.index = null;
-    this.local = null;
-    this.memory = null;
-    this.pipe = null;
   }
 
   table(tn) {
@@ -22,10 +16,24 @@ Store = class Store {
     return this.tables[tn];
   }
 
-  results(table, op, result, id = null) {
-    if (this.pipe != null) {
-      this.pipe.results(table, op, result, id);
+  toSubject(table, op) {
+    if (table != null) {
+      return this.dbName + ':' + table + ':' + op;
+    } else {
+      return this.dbName + ':' + op;
     }
+  }
+
+  publish(table, op, result, id = null) {
+    var obj;
+    obj = id != null ? {
+      [`${id}`]: result
+    } : result;
+    this.stream.publish(this.toSubject(table, op), obj);
+  }
+
+  results(table, op, result, id = null) {
+    this.publish(table, op, result, id);
   }
 
   onerror(table, op, error, id = 'none') {
@@ -39,56 +47,49 @@ Store = class Store {
   }
 
   subscribe(table, op, source, onSubscribe) {
-    if (this.pipe != null) {
-      this.pipe.subscribe(table, op, source, onSubscribe);
-    }
-  }
-
-  publish(table, op, result, id = null) {
-    if (this.pipe != null) {
-      this.pipe.publish(table, op, result, id);
-    }
-  }
-
-  // REST Api  CRUD + Subscribe for objectect records 
-  batch(name, objs, callback) { // Batch populate a set of objects from various sources
-    var key, obj;
-    for (key in objs) {
-      if (!hasProp.call(objs, key)) continue;
-      obj = objs[key];
-      switch (obj.src) {
-        case 'rest':
-          if (this.rest != null) {
-            this.rest.batch(name, obj, objs, callback);
-          }
-          break;
-        case 'fire':
-          if (this.fire != null) {
-            this.fire.batch(name, obj, objs, callback);
-          }
-          break;
-        case 'cloud':
-          if (this.cloud != null) {
-            this.cloud.batch(name, obj, objs, callback);
-          }
-          break;
-        case 'index':
-          if (this.index != null) {
-            this.index.batch(name, obj, objs, callback);
-          }
-          break;
-        case 'local':
-          if (this.local != null) {
-            this.local.batch(name, obj, objs, callback);
-          }
-          break;
-        case 'memory':
-          if (this.memory != null) {
-            this.memory.batch(name, obj, objs, callback);
-          }
+    var changeOp, i, len, ref;
+    if (op !== 'change') {
+      this.stream.subscribe(this.toSubject(table, op), source, onSubscribe);
+    } else {
+      ref = Store.changeOps;
+      for (i = 0, len = ref.length; i < len; i++) {
+        changeOp = ref[i];
+        this.stream.subscribe(this.toSubject(table, changeOp), source, onSubscribe);
       }
     }
   }
+
+  // SQL rowops
+  get(table, id, callback) {} // Get an object from table with id
+
+  add(table, id, obj) {} // Post an object into table with id
+
+  put(table, id, obj) {} // Put an object into table with id
+
+  del(table, id) {} // Delete  an object from table with id
+
+  
+    // SQL tables with multiple objects (rows)    
+  select(table, where = Store.where, callback) {} // Get an object from table with id
+
+  insert(table, objs) {} // Insert objects into table with unique id
+
+  update(table, objs) {} // # Update objects into table mapped by id
+
+  remove(table, where = Store.where) {} // Delete objects from table with where clause
+
+  
+    // Table DDL (Data Definition Language)
+  open(table) {} // Create a table with an optional schema
+
+  show(table) {} // Show all table names
+
+  drop(table) {} // Drop the entire @table - good for testing
+
+  change(table, id = 'None') {}
+
+  // REST Api  CRUD + Subscribe for objectect records
+  batch(name, objs, callback) {} // Batch populate a set of objects from various sources
 
   batchComplete(objs) {
     var key, obj;
@@ -100,260 +101,6 @@ Store = class Store {
       }
     }
     return true;
-  }
-
-  get(src, table, id, callback) { // Get an object from table with id
-    switch (src) {
-      case 'rest':
-        if (this.rest != null) {
-          this.rest.get(table, id, callback);
-        }
-        break;
-      case 'fire':
-        if (this.fire != null) {
-          this.fire.get(table, id, callback);
-        }
-        break;
-      case 'cloud':
-        if (this.cloud != null) {
-          this.cloud.get(table, id, callback);
-        }
-        break;
-      case 'index':
-        if (this.index != null) {
-          this.index.get(table, id, callback);
-        }
-        break;
-      case 'local':
-        if (this.local != null) {
-          this.local.get(table, id, callback);
-        }
-        break;
-      case 'memory':
-        if (this.memory != null) {
-          this.memory.get(table, id, callback);
-        }
-    }
-  }
-
-  add(table, id, object) { // Post an object into table with id
-    if (this.rest != null) {
-      this.rest.add(table, id, object);
-    }
-    if (this.fire != null) {
-      this.fire.add(table, id, object);
-    }
-    if (this.cloud != null) {
-      this.cloud.add(table, id, object);
-    }
-    if (this.index != null) {
-      this.index.add(table, id, object);
-    }
-    if (this.local != null) {
-      this.local.add(table, id, object);
-    }
-    if (this.memory != null) {
-      this.memory.add(table, id, object);
-    }
-    if (this.pipe != null) {
-      this.pipe.add(table, id, object);
-    }
-  }
-
-  put(table, id, object) { // Put an object into table with id
-    if (this.rest != null) {
-      this.rest.put(table, id, object);
-    }
-    if (this.fire != null) {
-      this.fire.put(table, id, object);
-    }
-    if (this.index != null) {
-      this.index.put(table, id, object);
-    }
-    if (this.local != null) {
-      this.local.put(table, id, object);
-    }
-    if (this.memory != null) {
-      this.memory.put(table, id, object);
-    }
-    if (this.pipe != null) {
-      this.pipe.put(table, id, object);
-    }
-  }
-
-  del(table, id) { // Delete  an object from table with id
-    if (this.rest != null) {
-      this.rest.del(table, id);
-    }
-    if (this.fire != null) {
-      this.fire.del(table, id);
-    }
-    if (this.index != null) {
-      this.index.del(table, id);
-    }
-    if (this.local != null) {
-      this.local.del(table, id);
-    }
-    if (this.memory != null) {
-      this.memory.del(table, id);
-    }
-    if (this.pipe != null) {
-      this.pipe.del(table, id);
-    }
-  }
-
-  // SQL tables with multiple objects (rows)    
-  select(src, table, where = Store.where, callback = null) { // Get an object from table with id
-    switch (src) {
-      case 'rest':
-        if (this.rest != null) {
-          this.rest.select(table, where, callback);
-        }
-        break;
-      case 'fire':
-        if (this.fire != null) {
-          this.fire.select(table, where, callback);
-        }
-        break;
-      case 'index':
-        if (this.index != null) {
-          this.index.select(table, where, callback);
-        }
-        break;
-      case 'local':
-        if (this.local != null) {
-          this.local.select(table, where, callback);
-        }
-        break;
-      case 'memory':
-        if (this.memory != null) {
-          this.memory.select(table, where, callback);
-        }
-    }
-  }
-
-  insert(table, objects) { // Insert objects into table with unique id
-    if (this.rest != null) {
-      this.rest.insert(table, objects);
-    }
-    if (this.fire != null) {
-      this.fire.insert(table, objects);
-    }
-    if (this.index != null) {
-      this.index.insert(table, objects);
-    }
-    if (this.local != null) {
-      this.local.insert(table, objects);
-    }
-    if (this.memory != null) {
-      this.memory.insert(table, objects);
-    }
-    if (this.pipe != null) {
-      this.pipe.insert(table, objects);
-    }
-  }
-
-  update(table, objects) { // # Update objects into table mapped by id
-    if (this.rest != null) {
-      this.rest.update(table, objects);
-    }
-    if (this.fire != null) {
-      this.fire.update(table, objects);
-    }
-    if (this.index != null) {
-      this.index.update(table, objects);
-    }
-    if (this.local != null) {
-      this.local.update(table, objects);
-    }
-    if (this.memory != null) {
-      this.memory.update(table, objects);
-    }
-    if (this.pipe != null) {
-      this.pipe.update(table, objects);
-    }
-  }
-
-  remove(table, where = Store.where) { // Delete objects from table with where clause
-    if (this.rest != null) {
-      this.rest.remove(table, where);
-    }
-    if (this.fire != null) {
-      this.fire.remove(table, where);
-    }
-    if (this.index != null) {
-      this.index.remove(table, where);
-    }
-    if (this.local != null) {
-      this.local.remove(table, where);
-    }
-    if (this.memory != null) {
-      this.memory.remove(table, where);
-    }
-    if (this.pipe != null) {
-      this.pipe.remove(table, where);
-    }
-  }
-
-  // Table DDL (Data Definition Language)  
-  show(callback = null) { // Show all table names
-    var keys;
-    keys = Object.keys(this.tables);
-    if (callback != null) {
-      callback(keys);
-    } else if (this.pipe != null) {
-      this.pipe.results(this.dbName, 'show', keys);
-    }
-  }
-
-  open(table) { // Create a table with an optional schema
-    if (this.tables[table] == null) {
-      this.tables[table] = {};
-      if (this.rest != null) {
-        this.rest.open(table);
-      }
-      if (this.fire != null) {
-        this.fire.open(table);
-      }
-      if (this.index != null) {
-        this.index.open(table);
-      }
-      if (this.local != null) {
-        this.local.open(table);
-      }
-      if (this.pipe != null) {
-        this.pipe.open(table);
-      }
-    } else {
-      this.onerror(table, 'open', {
-        error: 'Store table already exists'
-      });
-    }
-  }
-
-  drop(table) { // Drop the entire @table - good for testing
-    if (this.rest != null) {
-      this.rest.drop(table);
-    }
-    if (this.fire != null) {
-      this.fire.drop(table);
-    }
-    if (this.index != null) {
-      this.index.drop(table);
-    }
-    if (this.local != null) {
-      this.local.drop(table);
-    }
-    if (this.pipe != null) {
-      this.pipe.drop(table);
-    }
-    if (this.tables[table] != null) {
-      delete this.tables[table];
-    } else {
-      this.onerror(table, 'drop', {
-        error: 'Store missing table'
-      });
-    }
   }
 
   copyTable(src, des, table, where = Store.where) {
@@ -375,7 +122,7 @@ Store = class Store {
   }
 
   // Utilities
-  toObjs(results, where, keyProp = 'id') {
+  toObjects(results, where, keyProp = 'id') {
     var i, key, len, obj, objs, row;
     if (this.isArray(results)) {
       objs = {};
@@ -401,11 +148,21 @@ Store = class Store {
     }
   }
 
+  toArray(objs) {
+    return Util.toArray(objs);
+  }
+
   isArray(a) {
-    return a !== null && typeof a !== "undefined" && typeof a !== "string" && (a.length != null) && a.length > 0;
+    return Util.isArray(a);
+  }
+
+  isStr(s) {
+    return Util.isStr(s);
   }
 
 };
+
+Store.changeOps = ['change', 'add', 'put', 'del', 'insert', 'update', 'remove'];
 
 // RDUDC            Retrieve  Create    Update    Delete   Change
 Store.restOps = ['get', 'add', 'put', 'del', 'batch'];

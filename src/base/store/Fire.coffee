@@ -1,13 +1,11 @@
 
-import firebase from '../../../pub/lib/store/firebase-app.esm.js'      # Firebase core (required)
-import               '../../../pub/lib/store/firebase-database.esm.js' # Realtime Database
-import               '../../../pub/lib/store/firebase-auth.esm.js'     # Authentication
+import Store    from '../util/Store.js'
+import firebase from '@firebase'      # Firebase core (required)
 
-class Fire
+class Fire extends Store
 
-  constructor:( @store ) ->
-    @dbName  = @store.dbName
-    @tables  = @store.tables
+  constructor:( dbName, tables, stream ) ->
+    super(      dbName, tables, stream )
     @keyProp = 'id'
     @fb      = @init( @config("augm-d4b3c") )
     #@auth() # Anonomous logins have to be enabled
@@ -45,13 +43,13 @@ class Fire
       .then( (snapshot) =>
         if snapshot? and snapshot.val()?
           obj.result = snapshot.val()
-          if @store.batchComplete( objs )
+          if @batchComplete( objs )
             if callback?
                callback( objs )
             else
-               @store.results( name, 'batch', objs ) )
+               @results( name, 'batch', objs ) )
       .catch( (error) =>
-        @store.onerror( obj.table, 'batch', error ) )
+        @onerror( obj.table, 'batch', error ) )
     return
 
   # Have too clarify id with snapshot.key
@@ -65,9 +63,9 @@ class Fire
             if callback?
                callback( val )
             else
-               @store.results( table, 'change', val, key ) )
+               @results( table, 'change', val, key ) )
       .catch( (error) =>
-        @store.onerror( table, 'change', error ) )
+        @onerror( table, 'change', error ) )
     return    
 
   get:( table, id, callback ) ->
@@ -77,61 +75,61 @@ class Fire
             if callback?
                callback( snapshot.val() )
             else
-               @store.results( table, 'get', snapshot.val(), id ) )
+               @results( table, 'get', snapshot.val(), id ) )
       .catch( (error) =>
-        @store.onerror( table, 'get', error, id ) )
+        @onerror( table, 'get', error, id ) )
     return
 
   add:( table, id, object  ) ->
     @fd.ref(table+'/'+id).set( object )
        .catch( (error) =>
-         @store.onerror( table, 'add', error, id ) )
+         @onerror( table, 'add', error, id ) )
     return
 
   # Same as add
   put:( table, id,  object ) ->
     @fd.ref(table+'/'+id).set( object )
        .catch( (error) =>
-         @store.onerror( table, 'put', error, id ) )
+         @onerror( table, 'put', error, id ) )
     return
 
   del:( table, id ) ->
     @fd.ref(table+'/'+id).remove()
        .catch( (error) =>
-         @store.onerror( table, 'del', error, id ) )
+         @onerror( table, 'del', error, id ) )
     return
 
   select:( table, where, callback=null ) ->
     @fd.ref(table).once('value')
        .then( (snapshot) =>
         if snapshot? and snapshot.val()?
-          objs = @store.toObjs( snapshot.val(), where, @keyProp )
+          objs = @toObjs( snapshot.val(), where, @keyProp )
           if callback?
              callback( objs )
           else
-             @store.results( table, 'select', objs ) )
+             @results( table, 'select', objs ) )
     return
 
   insert:( table, objects ) ->
     @fd.ref(table).set( objects )
        .catch( (error) =>
-         @store.onerror( table, 'insert', error ) )
+         @onerror( table, 'insert', error ) )
     return
 
   update:( table, objects ) ->
     @fd.ref(table).update( objects )
        .catch( (error) =>
-         @store.onerror( table, 'update', error ) )
+         @onerror( table, 'update', error ) )
     return
 
   remove:( table, where ) ->
     @fd.ref(table).once('value')
       .then( (snapshot) =>
       if snapshot? and snapshot.val()?
-        objs = @store.toObjs( snapshot.val(), where, @keyProp )
+        objs = @toObjs( snapshot.val(), where, @keyProp )
         for own key, obj of objs
           @del( table, key ) # @fd.ref(table+'/'+key).remove()
-        @store.results( table, 'select', objs ) )
+        @results( table, 'select', objs ) )
     return
 
   range:( table, beg, end ) ->
@@ -139,9 +137,9 @@ class Fire
        .then( (snapshot) =>
           if snapshot? and snapshot.val()?
             objs = @toObjects( snapshot.val() )
-            @store.results( table, 'range', objs ) )
+            @results( table, 'range', objs ) )
        .catch( (error) =>
-         @store.onerror( table, 'range', error ) )
+         @onerror( table, 'range', error ) )
     return
 
   openTables:( tables ) ->
@@ -156,21 +154,21 @@ class Fire
     @fd.root().set(table) if not ref
     # @fd.ref(table).set( {} )
     #    .catch( (error) =>
-    #      @store.onerror( table, 'open', error ) )
+    #      @onerror( table, 'open', error ) )
     return
 
   # ref.remove() is Dangerous and has removed all tables in Firebase
   drop:( table ) ->
     @fd.ref(table).remove()
       .catch( (error) =>
-        @store.onerror( table, 'drop', error ) )
+        @onerror( table, 'drop', error ) )
     return
 
   # Sign Anonymously
   auth:( ) ->
     @fb.auth().signInAnonymously()
        .catch( (error) =>
-         @store.onerror( 'auth', 'auth', error ) )
+         @onerror( 'auth', 'auth', error ) )
     return
 
 Fire.EventType  = { get:"value", add:"child_added", put:"child_changed", del:"child_removed" }

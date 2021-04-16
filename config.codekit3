@@ -9,6 +9,14 @@
   ],
   "creatorBuild" : "34127",
   "files" : {
+    "\/.firebase\/hosting.ZGlzdA.cache" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/.firebase\/hosting.ZGlzdA.cache",
+      "oF" : 0
+    },
     "\/.firebaserc" : {
       "cB" : 0,
       "ft" : 8192,
@@ -2618,18 +2626,18 @@
       "q" : 100,
       "rq" : 75
     },
-    "\/dist\/assets\/index.76bab4cb.js" : {
+    "\/dist\/assets\/index.1d094692.js" : {
       "bF" : 0,
       "ft" : 64,
       "ma" : 0,
       "mi" : 0,
       "oA" : 1,
-      "oAP" : "\/dist\/assets\/index.76bab4cb-min.js",
+      "oAP" : "\/dist\/assets\/index.1d094692-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
     },
-    "\/dist\/assets\/index.613ede5b.css" : {
+    "\/dist\/assets\/index.7fc33a49.css" : {
       "aP" : 1,
       "bl" : 0,
       "ci" : 0,
@@ -2637,7 +2645,7 @@
       "ft" : 16,
       "ma" : 0,
       "oA" : 1,
-      "oAP" : "\/dist\/assets\/index.613ede5b-min.css",
+      "oAP" : "\/dist\/assets\/index.7fc33a49-min.css",
       "oF" : 0,
       "pg" : 0
     },
@@ -4856,6 +4864,28 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/pub\/base\/store\/Pouch.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/base\/store\/Pouch-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/pub\/base\/store\/PouchDB.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/base\/store\/PouchDB-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/pub\/base\/store\/Rest.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -4974,6 +5004,17 @@
       "oA" : 1,
       "oAP" : "\/pub\/base\/util\/Worker.orig-min.js",
       "oF" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/pub\/data\/appl\/Data.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/data\/appl\/Data-min.js",
+      "oF" : 0,
       "sC" : 0,
       "tS" : 0
     },
@@ -5309,25 +5350,14 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/src\/augm\/geom\/Style.coffee" : {
+    "\/src\/augm\/geom\/lib\/Style.coffee" : {
       "ft" : 32,
       "ma" : 0,
       "mi" : 0,
       "oA" : 0,
-      "oAP" : "\/src\/geom\/Style.js",
+      "oAP" : "\/pub\/augm\/geom\/lib\/Style.js",
       "oF" : 2,
       "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/augm\/geom\/Style.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/augm\/geom\/Style-min.js",
-      "oF" : 0,
       "sC" : 0,
       "tS" : 0
     },
@@ -5828,17 +5858,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/src\/base\/store\/Fire.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/base\/store\/Fire-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/src\/base\/store\/Index.coffee" : {
       "ft" : 32,
       "ma" : 0,
@@ -5847,17 +5866,6 @@
       "oAP" : "\/pub\/base\/store\/Index.js",
       "oF" : 0,
       "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/store\/Index.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/base\/store\/Index-min.js",
-      "oF" : 0,
       "sC" : 0,
       "tS" : 0
     },
@@ -5872,17 +5880,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/src\/base\/store\/Local.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/base\/store\/Local-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/src\/base\/store\/Memory.coffee" : {
       "ft" : 32,
       "ma" : 0,
@@ -5894,36 +5891,14 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/src\/base\/store\/Memory.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/base\/store\/Memory-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/store\/Pipe.coffee" : {
+    "\/src\/base\/store\/Pouch.coffee" : {
       "ft" : 32,
       "ma" : 0,
       "mi" : 0,
       "oA" : 0,
-      "oAP" : "\/pub\/base\/store\/Pipe.js",
+      "oAP" : "\/pub\/base\/store\/Pouch.js",
       "oF" : 0,
       "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/store\/Pipe.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/base\/store\/Pipe-min.js",
-      "oF" : 0,
       "sC" : 0,
       "tS" : 0
     },
@@ -5938,17 +5913,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/src\/base\/store\/Rest.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/base\/store\/Rest-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/src\/base\/store\/Store.coffee" : {
       "ft" : 32,
       "ma" : 0,
@@ -5957,39 +5921,6 @@
       "oAP" : "\/pub\/base\/store\/Store.js",
       "oF" : 0,
       "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/store\/Store.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/base\/store\/Store-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/store\/Table.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/store\/Table.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/store\/Table.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/base\/store\/Table-min.js",
-      "oF" : 0,
       "sC" : 0,
       "tS" : 0
     },
@@ -6070,16 +6001,35 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/src\/geom\/Style.js" : {
+    "\/src\/data\/appl\/Data.coffee" : {
+      "ft" : 32,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/data\/appl\/Data.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/src\/data\/appl\/data.config.js" : {
       "bF" : 0,
       "ft" : 64,
       "ma" : 0,
       "mi" : 0,
       "oA" : 1,
-      "oAP" : "\/src\/geom\/Style-min.js",
+      "oAP" : "\/src\/data\/appl\/data.config-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
+    },
+    "\/src\/data\/appl\/data.html" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/src\/data\/appl\/data.html",
+      "oF" : 0
     },
     "\/src\/jitt\/appl\/Jitt.coffee" : {
       "ft" : 32,
