@@ -287,7 +287,7 @@ Util = class Util {
   }
 
   static isStr(s) {
-    return Util.isDef(s) && typeof s === "string" && s.length > 0;
+    return Util.isDef(s) && typeof s === "string" && s.length > 0 && s !== 'None';
   }
 
   static isntStr(s) {
@@ -797,39 +797,6 @@ Util = class Util {
       }
       return array;
     }
-  }
-
-  
-    // Not working
-  static toArray2(objects, whereIn = null, keyField = 'id') {
-    var array, j, key, len1, object, where;
-    where = whereIn != null ? whereIn : function() {
-      return true;
-    };
-    array = [];
-    if (Util.isArray(objects)) {
-      for (j = 0, len1 = array.length; j < len1; j++) {
-        object = array[j];
-        if (!(where(object))) {
-          continue;
-        }
-        if ((object['id'] != null) && keyField !== 'id') {
-          object[keyField] = object['id'];
-        }
-        array.push(object);
-      }
-    } else {
-      for (key in objects) {
-        if (!hasProp.call(objects, key)) continue;
-        object = objects[key];
-        if (!(where(key, object))) {
-          continue;
-        }
-        object[keyField] = key;
-        array.push(object);
-      }
-    }
-    return array;
   }
 
   static toObjects(rows, whereIn = null, keyField = 'id') {

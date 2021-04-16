@@ -1,6 +1,6 @@
 
 import Datb   from '../../base/util/Data.js'
-import Build  from '../../base/util/Build.js'
+#mport Build  from '../../base/util/Build.js'
 import Stream from '../../base/util/Stream.js'
 import Nav    from '../../base/nav/Nav.js'
 import Touch  from '../../base/nav/Touch.js'
@@ -10,7 +10,7 @@ import Mix    from '../../base/nav/Mix.js'
 
 import { createApp }    from 'vue'    #
 import { createRouter, createWebHistory } from 'vue-router'
-import Home             from '../../../vue/muse/appl/Muse.vue';
+import Home             from '../../../vue/data/appl/Data.vue';
 
 import PrinJson from '../../../data/muse/Prin.json'
 import RowsJson from '../../../data/muse/Rows.json'
@@ -69,12 +69,10 @@ class Data
   }
 
   Data.routes = [
-    { path: '/',     name:'Home', components:{ Home: Home      } },
-    { path: '/Prin', name:'Prin', components:{ Prin: Home.Prin } },
-    { path: '/Comp', name:'Comp', components:{ Comp: Home.Comp } },
-    { path: '/Prac', name:'Prac', components:{ Prac: Home.Prac } },
-    { path: '/Disp', name:'Disp', components:{ Disp: Home.Disp } },
-    { path: '/Cube', name:'Cube', components:{ Cube: Home.Cube } }
+    { path: '/',        name:'Home',    components:{ Home:    Home         } },
+    { path: '/Grid',    name:'Grid',    components:{ Grid:    Home.Grid    } },
+    { path: '/Query',   name:'Query',   components:{ Query:   Home.Query   } },
+    { path: '/DataSet', name:'DataSet', components:{ DataSet: Home.DataSet } }
   ]
 
   Data.routeNames = Data.createRouteNames( Data.routes )
@@ -82,17 +80,14 @@ class Data
   # Toc.vue components and routes with no west or east directions
   Data.komps = {
     Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
-    north:"Cube", prev:"Cube", south:"Prin",  next:"Prin"  }
-    Prin:{ title:'Prin', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",
-    north:"Home", prev:"Home", south:"Info",  next:"Info" }
-    Info:{ title:'Info', key:'Info', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-th",
-    north:"Prin", prev:"Prin", south:"Know",  next:"Know" }
-    Know:{ title:'Know', key:'Know', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-university",
-    north:"Info", prev:"Info", south:"Wise",  next:"Wise" }
-    Wise:{ title:'Wise', key:'Wise', route:'Comp', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor",
-    north:"Know", prev:"Know", south:"Home",  next:"Home" }
-    Cube:{ title:'Cube', key:'Cube', route:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes",
-    north:"Wise", prev:"Wise", south:"Wise",  next:"Home"  } }
+    north:"Quel", prev:"Quel", south:"Grid",  next:"Grid"  }
+    Grid:{ title:'Grid', key:'Grid', route:'Grid', pracs:{}, ikw:true,  icon:"fas fa-th",
+    north:"Home", prev:"Home", south:"Quel",  next:"Quel" }
+    Query:{ title:'Query', key:'Query', route:'Query', pracs:{}, ikw:true,  icon:"fas fa-circle",
+    north:"Grid", prev:"Grid", south:"DataSet",  next:"DataSet" }
+    DataSet:{ title:'Data Set', key:'DataSet', route:'DataSet', pracs:{}, ikw:true,  icon:"fas fa-circle",
+    north:"Query", prev:"Query", south:"Home",  next:"Home" }
+  }
 
   # 2. Initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
   Data.init =   ( batch ) ->
@@ -104,11 +99,11 @@ class Data
     Data.mix    = new Mix(   Data, Data.routeNames )
     Data.nav    = new Nav(   Data.stream, batch, Data.routes, Data.routeNames, Data.komps, true )
     Data.touch  = new Touch( Data.stream, Data.nav )
-    Data.build  = new Build( batch, Data.komps )
+    #ata.build  = new Build( batch, Data.komps )
     #use.cache  = new Cache( Muse.stream )
     Datb.buildInnov( batch, 'Data',   'Info' )
     Datb.mergePracs( batch, 'Prin', ['Info','Know','Wise'] ) # 'Data'
-    Data.mergeCols()
+    #ata.mergeCols()
     try            # A lot can go wrong with vue3 initialization so trap errors
       Data.vue3()
     catch error
@@ -143,10 +138,10 @@ class Data
     routeNames
 
   # Merges principles and innovations into comp practices
-  Data.mergeCols = ( ) ->
-    Data.build.dimDisps() # Add disps to every dim - dimension
-    Data.build.colPracs() # Add pracs to every col
-    return
+  # Data.mergeCols = ( ) ->
+  #  Data.build.dimDisps() # Add disps to every dim - dimension
+  #  Data.build.colPracs() # Add pracs to every col
+  #  return
 
   # Log practices for diagnostics
   Data.logPracs = ( compk ) ->

@@ -1,7 +1,7 @@
 
-import Util from '../util/Util.js'
+import Util from '../../base/util/Util.js'
 
-class TabuComp
+class Search
 
   constructor:() ->
 
@@ -44,4 +44,4 @@ class TabuComp
     rows
 
 
-export default TabuComp
+export default Search

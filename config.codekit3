@@ -2276,123 +2276,6 @@
       "oO" : 0,
       "oS" : 1
     },
-    "\/dist\/assets\/1.fc487955.png" : {
-      "ft" : 32768,
-      "iS" : 7389,
-      "oA" : 0,
-      "oAP" : "\/dist\/assets\/1.fc487955.png",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
-      "oT" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 100,
-      "rq" : 75
-    },
-    "\/dist\/assets\/2.205ad8a0.png" : {
-      "ft" : 32768,
-      "iS" : 7313,
-      "oA" : 0,
-      "oAP" : "\/dist\/assets\/2.205ad8a0.png",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
-      "oT" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 100,
-      "rq" : 75
-    },
-    "\/dist\/assets\/3.4d04d4d4.png" : {
-      "ft" : 32768,
-      "iS" : 7530,
-      "oA" : 0,
-      "oAP" : "\/dist\/assets\/3.4d04d4d4.png",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
-      "oT" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 100,
-      "rq" : 75
-    },
-    "\/dist\/assets\/4.a12eb19d.png" : {
-      "ft" : 32768,
-      "iS" : 7385,
-      "oA" : 0,
-      "oAP" : "\/dist\/assets\/4.a12eb19d.png",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
-      "oT" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 100,
-      "rq" : 75
-    },
-    "\/dist\/assets\/5.285ea724.png" : {
-      "ft" : 32768,
-      "iS" : 7398,
-      "oA" : 0,
-      "oAP" : "\/dist\/assets\/5.285ea724.png",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
-      "oT" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 100,
-      "rq" : 75
-    },
-    "\/dist\/assets\/6.7207c00d.png" : {
-      "ft" : 32768,
-      "iS" : 7421,
-      "oA" : 0,
-      "oAP" : "\/dist\/assets\/6.7207c00d.png",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
-      "oT" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 100,
-      "rq" : 75
-    },
-    "\/dist\/assets\/7.b5a84dc6.png" : {
-      "ft" : 32768,
-      "iS" : 7432,
-      "oA" : 0,
-      "oAP" : "\/dist\/assets\/7.b5a84dc6.png",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
-      "oT" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 100,
-      "rq" : 75
-    },
-    "\/dist\/assets\/8.3639a9ef.png" : {
-      "ft" : 32768,
-      "iS" : 7405,
-      "oA" : 0,
-      "oAP" : "\/dist\/assets\/8.3639a9ef.png",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
-      "oT" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 100,
-      "rq" : 75
-    },
-    "\/dist\/assets\/9.ac7bd647.png" : {
-      "ft" : 32768,
-      "iS" : 7513,
-      "oA" : 0,
-      "oAP" : "\/dist\/assets\/9.ac7bd647.png",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
-      "oT" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 100,
-      "rq" : 75
-    },
     "\/dist\/assets\/android-chrome-192x192.png" : {
       "ft" : 32768,
       "iS" : 4502,
@@ -2428,45 +2311,6 @@
       "oIPL" : 0,
       "opt" : 0,
       "oT" : 1,
-      "ou" : "lpckwebp-none",
-      "q" : 100,
-      "rq" : 75
-    },
-    "\/dist\/assets\/AutoDrip.696c56bc.jpg" : {
-      "ft" : 16384,
-      "iS" : 53424,
-      "jF" : 0,
-      "oA" : 0,
-      "oAP" : "\/dist\/assets\/AutoDrip.696c56bc.jpg",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
-      "ou" : "lpckwebp-none",
-      "q" : 100,
-      "rq" : 75
-    },
-    "\/dist\/assets\/ColdBrew.554e10d1.jpg" : {
-      "ft" : 16384,
-      "iS" : 4285,
-      "jF" : 0,
-      "oA" : 0,
-      "oAP" : "\/dist\/assets\/ColdBrew.554e10d1.jpg",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
-      "ou" : "lpckwebp-none",
-      "q" : 100,
-      "rq" : 75
-    },
-    "\/dist\/assets\/Expresso.ffad7806.jpg" : {
-      "ft" : 16384,
-      "iS" : 55242,
-      "jF" : 0,
-      "oA" : 0,
-      "oAP" : "\/dist\/assets\/Expresso.ffad7806.jpg",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
       "ou" : "lpckwebp-none",
       "q" : 100,
       "rq" : 75
@@ -2613,31 +2457,18 @@
       "oAP" : "\/dist\/assets\/favicon.ico",
       "oF" : 0
     },
-    "\/dist\/assets\/FrenchPress.613e24e9.jpg" : {
-      "ft" : 16384,
-      "iS" : 4641,
-      "jF" : 0,
-      "oA" : 0,
-      "oAP" : "\/dist\/assets\/FrenchPress.613e24e9.jpg",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
-      "ou" : "lpckwebp-none",
-      "q" : 100,
-      "rq" : 75
-    },
-    "\/dist\/assets\/index.1d094692.js" : {
+    "\/dist\/assets\/index.3403e044.js" : {
       "bF" : 0,
       "ft" : 64,
       "ma" : 0,
       "mi" : 0,
       "oA" : 1,
-      "oAP" : "\/dist\/assets\/index.1d094692-min.js",
+      "oAP" : "\/dist\/assets\/index.3403e044-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
     },
-    "\/dist\/assets\/index.7fc33a49.css" : {
+    "\/dist\/assets\/index.e704e5f7.css" : {
       "aP" : 1,
       "bl" : 0,
       "ci" : 0,
@@ -2645,7 +2476,7 @@
       "ft" : 16,
       "ma" : 0,
       "oA" : 1,
-      "oAP" : "\/dist\/assets\/index.7fc33a49-min.css",
+      "oAP" : "\/dist\/assets\/index.e704e5f7-min.css",
       "oF" : 0,
       "pg" : 0
     },
@@ -2694,26 +2525,13 @@
       "oAP" : "\/dist\/assets\/Roboto-Regular.79e85140.ttf",
       "oF" : 0
     },
-    "\/dist\/assets\/SyphonPot.b5d28b49.jpg" : {
-      "ft" : 16384,
-      "iS" : 4246,
-      "jF" : 0,
-      "oA" : 0,
-      "oAP" : "\/dist\/assets\/SyphonPot.b5d28b49.jpg",
-      "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
-      "ou" : "lpckwebp-none",
-      "q" : 100,
-      "rq" : 75
-    },
-    "\/dist\/assets\/vendor.6a39cb3c.js" : {
+    "\/dist\/assets\/vendor.a6a8583e.js" : {
       "bF" : 0,
       "ft" : 64,
       "ma" : 0,
       "mi" : 0,
       "oA" : 1,
-      "oAP" : "\/dist\/assets\/vendor.6a39cb3c-min.js",
+      "oAP" : "\/dist\/assets\/vendor.a6a8583e-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
@@ -4710,28 +4528,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/pub\/base\/grid\/Demo.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/base\/grid\/Demo-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/pub\/base\/grid\/TabuComp.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/base\/grid\/TabuComp-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/pub\/base\/nav\/Dir.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -5014,6 +4810,61 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/pub\/data\/appl\/Data-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/pub\/data\/dataset\/DataMgr.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/data\/dataset\/DataMgr-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/pub\/data\/grid\/Demo.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/data\/grid\/Demo-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/pub\/data\/grid\/Tabu.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/data\/grid\/Tabu-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/pub\/data\/quel\/Query.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/data\/quel\/Query-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/pub\/data\/query\/Search.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/data\/query\/Search-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
@@ -5792,28 +5643,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/src\/base\/grid\/Demo.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/grid\/Demo.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/grid\/TabuComp.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/grid\/TabuComp.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/src\/base\/nav\/Mix.coffee" : {
       "ft" : 32,
       "ma" : 0,
@@ -6030,6 +5859,50 @@
       "oA" : 1,
       "oAP" : "\/src\/data\/appl\/data.html",
       "oF" : 0
+    },
+    "\/src\/data\/dataset\/DataMgr.coffee" : {
+      "ft" : 32,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/data\/dataset\/DataMgr.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/src\/data\/grid\/Demo.coffee" : {
+      "ft" : 32,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/data\/grid\/Demo.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/src\/data\/grid\/Tabu.coffee" : {
+      "ft" : 32,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/data\/grid\/Tabu.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/src\/data\/query\/Search.coffee" : {
+      "ft" : 32,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/data\/query\/Search.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
     },
     "\/src\/jitt\/appl\/Jitt.coffee" : {
       "ft" : 32,
@@ -6623,6 +6496,74 @@
       "oAP" : "\/pub\/vue\/base\/talk\/Talk.js",
       "oF" : 1
     },
+    "\/vue\/data\/appl\/Data.vue" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/vue\/data\/appl\/Data.js",
+      "oF" : 0
+    },
+    "\/vue\/data\/dataset\/DataSet.vue" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/vue\/data\/dataset\/DataSet.js",
+      "oF" : 0
+    },
+    "\/vue\/data\/dataset\/tabulator_midnight.css" : {
+      "aP" : 1,
+      "bl" : 0,
+      "ci" : 0,
+      "co" : 0,
+      "ft" : 16,
+      "ma" : 0,
+      "oA" : 1,
+      "oAP" : "\/vue\/data\/dataset\/tabulator_midnight-min.css",
+      "oF" : 0,
+      "pg" : 0
+    },
+    "\/vue\/data\/grid\/Grid.vue" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/vue\/data\/grid\/Grid.js",
+      "oF" : 1
+    },
+    "\/vue\/data\/grid\/tabulator_midnight.css" : {
+      "aP" : 1,
+      "bl" : 0,
+      "ci" : 0,
+      "co" : 0,
+      "ft" : 16,
+      "ma" : 0,
+      "oA" : 1,
+      "oAP" : "\/vue\/data\/grid\/tabulator_midnight-min.css",
+      "oF" : 1,
+      "pg" : 0
+    },
+    "\/vue\/data\/query\/Query.vue" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/vue\/data\/query\/Query.js",
+      "oF" : 0
+    },
+    "\/vue\/data\/query\/tabulator_midnight.css" : {
+      "aP" : 1,
+      "bl" : 0,
+      "ci" : 0,
+      "co" : 0,
+      "ft" : 16,
+      "ma" : 0,
+      "oA" : 1,
+      "oAP" : "\/vue\/data\/query\/tabulator_midnight-min.css",
+      "oF" : 0,
+      "pg" : 0
+    },
     "\/vue\/jitt\/appl\/Jitt.vue" : {
       "cB" : 0,
       "ft" : 8192,
@@ -6828,34 +6769,6 @@
       "oA" : 1,
       "oAP" : "\/pub\/vue\/muse\/disp\/Disp.js",
       "oF" : 1
-    },
-    "\/vue\/muse\/grid\/Grid.vue" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/vue\/muse\/grid\/Grid.js",
-      "oF" : 1
-    },
-    "\/vue\/muse\/grid\/Tabu.vue" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/vue\/muse\/grid\/Tabu.js",
-      "oF" : 1
-    },
-    "\/vue\/muse\/grid\/tabulator_midnight.css" : {
-      "aP" : 1,
-      "bl" : 0,
-      "ci" : 0,
-      "co" : 0,
-      "ft" : 16,
-      "ma" : 0,
-      "oA" : 1,
-      "oAP" : "\/vue\/muse\/grid\/tabulator_midnight-min.css",
-      "oF" : 1,
-      "pg" : 0
     },
     "\/vue\/muse\/prac\/Desc.vue" : {
       "cB" : 0,

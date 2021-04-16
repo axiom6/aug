@@ -4,9 +4,8 @@
     <b-tabs :route="routKey" :pages="tabPages(routKey)" position="left" ></b-tabs>
     <b-tabs :route="compKey" :pages="tabPages(compKey)" position="right" isInov="true" v-if="hasInov()"></b-tabs>
     <div   class="comp-comp">
-      <p-grid    v-if="nav.isShow('Comp','Grid')" :key="compIdx" :compKey="compKey" :inovKey="inovKey"></p-grid>
-      <template v-if="!nav.isShow('Comp','Grid')" :key="compIdx" v-for="pracObj in compObj">
-        <div :class="pracObj.dir">
+      <template  :key="compIdx" v-for="pracObj in compObj">
+        <div :class="pracObj['dir']">
           <p-sign   v-if="nav.isShow('Comp','Sign')" :pracObj="pracObj"></p-sign>
           <p-dirs   v-if="nav.isShow('Comp','Dirs')" :pracObj="pracObj"></p-dirs>
           <p-desc   v-if="nav.isShow('Comp','Desc')" :pracObj="pracObj"></p-desc>
@@ -16,7 +15,7 @@
           </template>
         </div>
       </template>
-      <template v-if="!nav.isShow('Comp','Grid')" v-for="row in myRows">
+      <template v-for="row in myRows">
         <div v-show="isRows()" :class="row.dir">
           <p-sign :pracObj="row"></p-sign>
         </div>
@@ -32,12 +31,11 @@ import Sign from './Sign.vue';
 import Dirs from './Dirs.vue';
 import Conn from './Conn.vue';
 import Desc from './Desc.vue';
-import Grid from '../grid/Tabu.vue';
 import { ref, inject, onMounted } from 'vue';
 
 let Comp = {
 
-  components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc, 'p-grid':Grid },
+  components:{ 'b-tabs':Tabs, 'p-sign':Sign, 'p-dirs':Dirs, 'p-conn':Conn, 'p-desc':Desc },
 
   setup( {} ) {
 
@@ -56,10 +54,8 @@ let Comp = {
     let Comp = {
       Sign:{ title:'Prac', key:'Sign', show:true  },
       Dirs:{ title:'Dirs', key:'Dirs', show:false },
-      Grid:{ title:'Grid', key:'Dirs', show:false },
       Conn:{ title:'Conn', key:'Conn', show:false },
-      Desc:{ title:'Desc', key:'Desc', show:false },
-      Grid:{ title:'Grid', key:'Grid', show:false } };
+      Desc:{ title:'Desc', key:'Desc', show:false } };
     let Info = {
       Info:{ title:'Core', key:"Info", show:true,  icon:"fas fa-th"},
       Soft:{ title:'Soft', key:"Soft", show:false, icon:"fas fa-codepen"},
@@ -106,8 +102,8 @@ let Comp = {
       return true; }
 
     const onRows = function () {
-      const pages    = tabPages('Comp', 'Rows');
-      const pageKey  = 'Sign';
+    //const pages    = tabPages('Comp', 'Rows');
+    //const pageKey  = 'Sign';
       const myKey    =  compKey.value;
       let   page     = Info;
       if( myKey==='Know') { page = Know; }

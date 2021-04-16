@@ -1,44 +1,42 @@
 
 
 <template>
-  <div ref="gridElem" class="comp-grid-pane"></div>
+  <div ref="elem" class="comp-grid-pane"></div>
 </template>
 
 <script type="module">
 
   import Tabulator from 'tabulator-tables'
   import {nextTick, onMounted, ref, inject } from "vue";
-  //port Demo     from '../../pub/base/grid/Demo.js'
-  import TabuComp from '../../../pub/base/grid/TabuComp.js'
+  import DataMgr from '../../../pub/data/dataset/DataMgr.js'
 
-let Tabu = {
+let Store = {
 
   props: { compKey:String, inovKey:String },
   
   setup(props) {
 
-    const mix      = inject('mix');
-    //nst demo     = new Demo();
-    const tabuComp = new TabuComp();
-    const gridElem = ref(null);
-    let   table    = null;
-
-    // console.log( 'Tabu.vue.setup()', { compKey:props.compKey, inovKey:props.inovKey, props:props } );
+    const mix   = inject('mix');
+    const dataMgr = new DataMgr();
+    const elem  = ref(null);
+    let   table = null;
+    const compKey   = 'Info';
+    const inovKey   = 'Info';
 
     onMounted( function () {
       nextTick( function() {
-        const pracs = mix.inovObject( props.compKey, props.inovKey );
-        table       = new Tabulator( gridElem.value, tabuComp.opts(pracs) );
-        let pageSize = table.getPageSize();
-     // console.log( 'Tabu.vue.onMounted()', { pageSize:pageSize } );
+        const pracs  = mix.inovObject( compKey, inovKey );
+        table        = new Tabulator( elem['value'], dataMgr.opts(pracs) );
+     // let pageSize = table.getPageSize();
+     // console.log( 'Grid.vue.onMounted()', { pageSize:pageSize } );
         table.setPageSize(13);
 
       } ); } );
 
-    return { gridElem }; }
+    return { elem }; }
 
 }
-export default Tabu;
+export default Store;
 
 </script>
 

@@ -1,8 +1,8 @@
-var TabuComp;
+var Tabu;
 
-import Util from '../util/Util.js';
+import Util from '../../base/util/Util.js';
 
-TabuComp = class TabuComp {
+Tabu = class Tabu {
   constructor() {}
 
   cols() {
@@ -81,4 +81,4 @@ TabuComp = class TabuComp {
 
 };
 
-export default TabuComp;
+export default Tabu;

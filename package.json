@@ -14,7 +14,7 @@
     "augm": "node src/augm/appl/augm.config.js && firebase use augm",
     "muse": "node src/muse/appl/muse.config.js && firebase use muse",
     "jitt": "node src/jitt/appl/jitt.config.js && firebase use jitt",
-    "data": "node src/data/appl/data.config.js",
+    "data": "node src/data/appl/data.config.js && firebase use data-muse",
     "deploy": "firebase deploy",
     "gram": "src/augm/math/par/gram.sh",
     "test": "node --experimental-modules -r esm  pub/math/test/Run.js"

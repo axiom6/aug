@@ -17,7 +17,7 @@
 
       const mix    = inject('mix');
       const elem   = null;
-      const rviews = mix.routeNames()
+      const rviews = mix.routeNames();
 
       const show = function() {
         return this.$route.name===null }
