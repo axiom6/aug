@@ -4,8 +4,8 @@ import firebase from '@firebase'      # Firebase core (required)
 
 class Fire extends Store
 
-  constructor:( dbName, tables, stream ) ->
-    super(      dbName, tables, stream )
+  constructor:() ->
+    super()
     @keyProp = 'id'
     @fb      = @init( @config("augm-d4b3c") )
     #@auth() # Anonomous logins have to be enabled
@@ -37,20 +37,6 @@ class Fire extends Store
     #console.log( 'firebase', firebase )
     firebase.initializeApp(config)
     firebase
-
-  batch:( name, obj, objs, callback=null ) ->
-    @fd.ref(table).once('value' )
-      .then( (snapshot) =>
-        if snapshot? and snapshot.val()?
-          obj.result = snapshot.val()
-          if @batchComplete( objs )
-            if callback?
-               callback( objs )
-            else
-               @results( name, 'batch', objs ) )
-      .catch( (error) =>
-        @onerror( obj.table, 'batch', error ) )
-    return
 
   # Have too clarify id with snapshot.key
   change:( table, id='none', callback=null, Event='put' ) ->

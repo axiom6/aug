@@ -2,12 +2,11 @@ import Store  from '../util/Store.js'
 
 class Local extends Store
 
-  constructor:( dbName, tables, stream ) ->
-    super(      dbName, tables, stream )
+  constructor:() ->
     @tableIds = {}
 
   key:( table, id ) ->
-    @dbName + table + id
+    table + id
 
   obj:( table, id ) ->
     str = localStorage.getItem( @key(table,id) )
@@ -20,18 +19,6 @@ class Local extends Store
   delId:( table, id ) ->
     @tableIds[table] = [] if not @tableIds[table]?
     @tableIds[table].push(id)
-
-  batch:( name, obj, objs, callback=null ) ->
-    onBatch = (result) =>
-      obj.result = result
-      if @batchComplete( objs )
-        if callback?
-           callback( objs )
-        else
-           @results( name, 'batch', objs )
-    where = () -> true
-    @select( obj.table, where, onBatch )
-    return
 
   get:( table, id, callback=null, op='get' ) ->
     obj = @obj( table, id )

@@ -69,24 +69,24 @@ class Data
   }
 
   Data.routes = [
-    { path: '/',        name:'Home',    components:{ Home:    Home         } },
-    { path: '/Grid',    name:'Grid',    components:{ Grid:    Home.Grid    } },
-    { path: '/Query',   name:'Query',   components:{ Query:   Home.Query   } },
-    { path: '/DataSet', name:'DataSet', components:{ DataSet: Home.DataSet } }
+    { path:'/',      name:'Home',  components:{ Home:  Home       } },
+    { path:'/Store', name:'Store', components:{ Store: Home.Store } },
+    { path:'/Table', name:'Table', components:{ Table: Home.Table } },
+    { path:'/Query', name:'Query', components:{ Query: Home.Query } }
   ]
 
   Data.routeNames = Data.createRouteNames( Data.routes )
 
   # Toc.vue components and routes with no west or east directions
   Data.komps = {
-    Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
-    north:"Quel", prev:"Quel", south:"Grid",  next:"Grid"  }
-    Grid:{ title:'Grid', key:'Grid', route:'Grid', pracs:{}, ikw:true,  icon:"fas fa-th",
-    north:"Home", prev:"Home", south:"Quel",  next:"Quel" }
-    Query:{ title:'Query', key:'Query', route:'Query', pracs:{}, ikw:true,  icon:"fas fa-circle",
-    north:"Grid", prev:"Grid", south:"DataSet",  next:"DataSet" }
-    DataSet:{ title:'Data Set', key:'DataSet', route:'DataSet', pracs:{}, ikw:true,  icon:"fas fa-circle",
-    north:"Query", prev:"Query", south:"Home",  next:"Home" }
+    Home:{ title:'Home',   key:'Home',  route:'Home',  pracs:{}, ikw:false, icon:"fas fa-home",
+    north:"Query", prev:"Query", south:"Store",  next:"Store"  }
+    Store:{ title:'Store', key:'Store', route:'Store', pracs:{}, ikw:true,  icon:"fas fa-cubes",
+    north:"Home", prev:"Home", south:"Table",  next:"Table" }
+    Table:{ title:'Table', key:'Table', route:'Table', pracs:{}, ikw:true,  icon:"fas fa-table",
+    north:"Store", prev:"Store", south:"Query",  next:"Query" }
+    Query:{ title:'Query', key:'Query', route:'Query', pracs:{}, ikw:true,  icon:"fas fa-question-circle",
+    north:"Table", prev:"Table", south:"Home",  next:"Home" }
   }
 
   # 2. Initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.

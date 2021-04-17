@@ -3,8 +3,9 @@ import Store  from '../util/Store.js'
 
 class Rest extends Store
 
-  constructor:( dbName, tables, stream, @baseUrl ) ->
-    super(      dbName, tables, stream )
+  constructor:( baseUrl ) ->
+    super()
+    @baseUtl = baseUrl
     @key  = "id"
 
   # Rest
@@ -32,23 +33,6 @@ class Rest extends Store
     obj.referrer = 'no-referrer'        # no-referrer, *client
     obj.headers  = { 'Content-Type': 'application/json' }
     obj
-
-  batch:( name, obj, objs, callback=null ) ->
-    url = @baseUrl + obj.url
-    settings  = @config( 'get' )
-    fetch( url, settings )
-      .then( (response) =>
-        response.json() )
-      .then( (data) =>
-        obj['result'] = data
-        if @batchComplete(objs)
-          if callback?
-             callback(objs)
-          else
-             @results( name, 'batch', objs, id ) )
-      .catch( (error) =>
-        @onerror( obj.table, 'batch', @toError(url,error) ) )
-    return
 
   rest:( op, table, id, object=null, path, callback=null ) ->
     url       = @baseUrl + path

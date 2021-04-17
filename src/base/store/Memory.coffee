@@ -2,22 +2,8 @@ import Store  from '../util/Store.js'
 
 class Memory extends Store
 
-  constructor:( dbName, tables, stream ) ->
-    super(      dbName, tables, stream )
-    @dbName    = @dbName
-
-
-  batch:( name, obj, objs, callback=null ) ->
-    onBatch = (result) =>
-      obj.result = result
-      if @batchComplete( objs )
-        if callback?
-           callback( objs )
-        else
-           @results( name, 'batch', objs )
-    where = () -> true
-    @select( obj.table, where, onBatch )
-    return
+  constructor:() ->
+    super()
 
   add:( tn, id, object )    ->
     @table(tn)[id] = object

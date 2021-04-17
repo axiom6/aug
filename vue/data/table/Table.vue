@@ -8,25 +8,29 @@
 
   import Tabulator from 'tabulator-tables'
   import {nextTick, onMounted, ref, inject } from "vue";
-  import DataMgr from '../../../pub/data/dataset/DataMgr.js'
+  //port Demo from '../../../pub/data/table/Demo.js'
+  import Tabu from '../../../pub/data/table/Tabu.js'
 
-let Store = {
+let Table = {
 
   props: { compKey:String, inovKey:String },
   
   setup(props) {
 
     const mix   = inject('mix');
-    const dataMgr = new DataMgr();
+    //nst demo  = new Demo();
+    const tabu  = new Tabu();
     const elem  = ref(null);
     let   table = null;
     const compKey   = 'Info';
     const inovKey   = 'Info';
 
+    // console.log( 'Grid.vue.setup()', { compKey:props.compKey, inovKey:props.inovKey, props:props } );
+
     onMounted( function () {
       nextTick( function() {
         const pracs  = mix.inovObject( compKey, inovKey );
-        table        = new Tabulator( elem['value'], dataMgr.opts(pracs) );
+        table        = new Tabulator( elem['value'], tabu.opts(pracs) );
      // let pageSize = table.getPageSize();
      // console.log( 'Grid.vue.onMounted()', { pageSize:pageSize } );
         table.setPageSize(13);
@@ -36,7 +40,7 @@ let Store = {
     return { elem }; }
 
 }
-export default Store;
+export default Table;
 
 </script>
 

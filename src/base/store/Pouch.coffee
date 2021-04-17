@@ -11,8 +11,8 @@ class Pouch extends Store
 
   # adapter: One of 'idb', 'leveldb', or 'http'.
 
-  constructor:( dbName, tables, stream, @opts ) ->
-    super(      dbName, tables, stream )
+  constructor:( @opts={} ) ->
+    super()
     @tableDBs = {}
 
   db:( table, id='None', obj=null ) ->
@@ -118,18 +118,6 @@ class Pouch extends Store
       .on( 'change',   (change)   => @results( table, 'change', change   ) )
       .on( 'complete', (complete) => @results( table, 'change', complete ) )
       .on( 'error',    (error)    => @onerror( table, 'change', error    ) )
-    return
-
-  batch:( name, obj, objs, callback=null ) ->
-    onBatch = (result) =>
-      obj.result = result
-      if @batchComplete( objs )
-        if callback?
-           callback( objs )
-        else
-           @results( name, 'batch', objs )
-    where = () -> true
-    @select( obj.table, where, onBatch )
     return
 
   close:( table ) ->

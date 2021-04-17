@@ -6,8 +6,8 @@ import Store from '../util/Store.js';
 import firebase from '@firebase';
 
 Fire = class Fire extends Store {
-  constructor(dbName, tables, stream) {
-    super(dbName, tables, stream);
+  constructor() {
+    super();
     this.keyProp = 'id';
     this.fb = this.init(this.config("augm-d4b3c"));
     //@auth() # Anonomous logins have to be enabled
@@ -42,23 +42,6 @@ Fire = class Fire extends Store {
     //console.log( 'firebase', firebase )
     firebase.initializeApp(config);
     return firebase;
-  }
-
-  batch(name, obj, objs, callback = null) {
-    this.fd.ref(table).once('value').then((snapshot) => {
-      if ((snapshot != null) && (snapshot.val() != null)) {
-        obj.result = snapshot.val();
-        if (this.batchComplete(objs)) {
-          if (callback != null) {
-            return callback(objs);
-          } else {
-            return this.results(name, 'batch', objs);
-          }
-        }
-      }
-    }).catch((error) => {
-      return this.onerror(obj.table, 'batch', error);
-    });
   }
 
   // Have too clarify id with snapshot.key

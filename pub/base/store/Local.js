@@ -4,13 +4,13 @@ var Local,
 import Store from '../util/Store.js';
 
 Local = class Local extends Store {
-  constructor(dbName, tables, stream) {
-    super(dbName, tables, stream);
+  constructor() {
+    super();
     this.tableIds = {};
   }
 
   key(table, id) {
-    return this.dbName + table + id;
+    return table + id;
   }
 
   obj(table, id) {

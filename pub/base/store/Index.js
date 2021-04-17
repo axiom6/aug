@@ -5,9 +5,10 @@ var Index,
 import Store from '../util/Store.js';
 
 Index = class Index extends Store {
-  constructor(dbName, tables, stream) {
-    super(dbName, tables, stream);
+  constructor(dbName) {
+    super();
     this.insert = this.insert.bind(this);
+    this.dbName = dbName;
     this.keyPath = 'id';
     window.indexedDB.deleteDatabase(this.dbName);
   }
@@ -96,24 +97,6 @@ Index = class Index extends Store {
     localStorage.setItem('IndexDbVersion', dbVersionStr);
     console.log('Index() version', dbVersionStr, dbVersionInt);
     return dbVersionInt;
-  }
-
-  batch(name, obj, objs, callback = null) {
-    var onBatch, where;
-    onBatch = (result) => {
-      obj.result = result;
-      if (this.batchComplete(objs)) {
-        if (callback != null) {
-          return callback(objs);
-        } else {
-          return this.results(name, 'batch', objs);
-        }
-      }
-    };
-    where = function() {
-      return true;
-    };
-    this.select(obj.table, where, onBatch);
   }
 
   get(table, id, callback, op = 'get') {

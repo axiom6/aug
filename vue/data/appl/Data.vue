@@ -28,15 +28,17 @@
         mix.publish( 'Tocs', 'Close' ); } ) }
   }
 
-  import Dash  from   '../../base/dash/Dash.vue';
-  import Grid  from   '../grid/Grid.vue';
-  import Query from   '../query/Query.vue';
-  import DataSet from '../dataset/DataSet.vue';
+  import Dash  from '../../base/dash/Dash.vue';
+  import Store from '../store/Store.vue';
+  import Table from '../table/Table.vue';
+  import Query from '../query/Query.vue';
+
   
-  Home.Dash    = Dash;
-  Home.Grid    = Grid;
-  Home.Query   = Query;
-  Home.DataSet = DataSet;
+  Home.Dash  = Dash;
+  Home.Store = Store;
+  Home.Table = Table;
+  Home.Query = Query;
+
   
   export default Home;
   

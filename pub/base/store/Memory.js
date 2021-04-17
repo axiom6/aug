@@ -4,27 +4,8 @@ var Memory,
 import Store from '../util/Store.js';
 
 Memory = class Memory extends Store {
-  constructor(dbName, tables, stream) {
-    super(dbName, tables, stream);
-    this.dbName = this.dbName;
-  }
-
-  batch(name, obj, objs, callback = null) {
-    var onBatch, where;
-    onBatch = (result) => {
-      obj.result = result;
-      if (this.batchComplete(objs)) {
-        if (callback != null) {
-          return callback(objs);
-        } else {
-          return this.results(name, 'batch', objs);
-        }
-      }
-    };
-    where = function() {
-      return true;
-    };
-    this.select(obj.table, where, onBatch);
+  constructor() {
+    super();
   }
 
   add(tn, id, object) {

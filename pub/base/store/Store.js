@@ -3,25 +3,16 @@ var Store,
 
 import Util from '../util/Util.js';
 
-Store = class Store {
-  constructor(dbName, tables) {
-    this.dbName = dbName;
-    this.tables = tables;
-  }
+import Data from '../appl/Data.js';
 
-  table(tn) {
-    if (this.tables[tn] == null) {
-      this.open(table);
-    }
-    return this.tables[tn];
+Store = class Store {
+  constructor() {
+    this.stream = Data.stream;
+    this.srouce = this.constructor.name;
   }
 
   toSubject(table, op) {
-    if (table != null) {
-      return this.dbName + ':' + table + ':' + op;
-    } else {
-      return this.dbName + ':' + op;
-    }
+    return table + ':' + op;
   }
 
   publish(table, op, result, id = null) {
@@ -38,7 +29,6 @@ Store = class Store {
 
   onerror(table, op, error, id = 'none') {
     console.error('Store.onerror', {
-      dbName: this.dbName,
       table: table,
       op: op,
       error: error,
@@ -89,18 +79,45 @@ Store = class Store {
   change(table, id = 'None') {}
 
   // REST Api  CRUD + Subscribe for objectect records
-  batch(name, objs, callback) {} // Batch populate a set of objects from various sources
 
-  batchComplete(objs) {
-    var key, obj;
-    for (key in objs) {
-      if (!hasProp.call(objs, key)) continue;
-      obj = objs[key];
-      if (!obj['result']) {
+    // A set is Table:{ url:'muse/Prin.json', result:json }
+  batch(sets, callback) {
+    var set, table;
+    for (table in sets) {
+      if (!hasProp.call(sets, table)) continue;
+      set = sets[table];
+      this.batchSelect(table, set, sets, callback);
+    }
+  }
+
+  batchComplete(sets) {
+    var set, table;
+    for (table in sets) {
+      if (!hasProp.call(sets, table)) continue;
+      set = sets[table];
+      if (set['result'] == null) {
         return false;
       }
     }
     return true;
+  }
+
+  batchSelect(table, set, sets, callback = null) {
+    var onBatch, where;
+    onBatch = (result) => {
+      set.result = result;
+      if (this.batchComplete(sets)) {
+        if (callback != null) {
+          return callback(sets);
+        } else {
+          return this.results(table, 'batch', sets);
+        }
+      }
+    };
+    where = function() {
+      return true;
+    };
+    this.select(table, where, onBatch); // Calls the derived Store
   }
 
   copyTable(src, des, table, where = Store.where) {
@@ -165,11 +182,18 @@ Store = class Store {
 Store.changeOps = ['change', 'add', 'put', 'del', 'insert', 'update', 'remove'];
 
 // RDUDC            Retrieve  Create    Update    Delete   Change
-Store.restOps = ['get', 'add', 'put', 'del', 'batch'];
+Store.restOps = [
+  'get',
+  'add',
+  'put',
+  'del' //batch
+];
 
 Store.sqlOps = ['select', 'insert', 'update', 'remove'];
 
 Store.tableOps = ['show', 'open', 'drop'];
+
+Store.allOps = Store.restOps.concat(Store.sqlOps, Store.tableOps);
 
 // Dafaults for empty arguments
 Store.where = function() {

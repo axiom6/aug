@@ -131,6 +131,14 @@
       "oAP" : "\/aug.iml",
       "oF" : 1
     },
+    "\/build\/.gitignore" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/build\/.gitignore",
+      "oF" : 0
+    },
     "\/css\/base\/btn.css" : {
       "aP" : 1,
       "bl" : 0,
@@ -4814,50 +4822,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/pub\/data\/dataset\/DataMgr.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/data\/dataset\/DataMgr-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/pub\/data\/grid\/Demo.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/data\/grid\/Demo-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/pub\/data\/grid\/Tabu.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/data\/grid\/Tabu-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/pub\/data\/quel\/Query.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/data\/quel\/Query-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/pub\/data\/query\/Search.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -4865,6 +4829,61 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/pub\/data\/query\/Search-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/pub\/data\/store\/Manager.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/data\/store\/Manager-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/pub\/data\/table\/Demo.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/data\/table\/Demo-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/pub\/data\/table\/Tabu.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/data\/table\/Tabu-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/pub\/geom\/2D\/Basics.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/geom\/2D\/Basics-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/pub\/geom\/2D\/Graph.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/geom\/2D\/Graph-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
@@ -5860,45 +5879,45 @@
       "oAP" : "\/src\/data\/appl\/data.html",
       "oF" : 0
     },
-    "\/src\/data\/dataset\/DataMgr.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/data\/dataset\/DataMgr.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/data\/grid\/Demo.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/data\/grid\/Demo.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/data\/grid\/Tabu.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/data\/grid\/Tabu.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/src\/data\/query\/Search.coffee" : {
       "ft" : 32,
       "ma" : 0,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/data\/query\/Search.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/src\/data\/store\/Manager.coffee" : {
+      "ft" : 32,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/data\/store\/Manager.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/src\/data\/table\/Demo.coffee" : {
+      "ft" : 32,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/data\/table\/Demo.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/src\/data\/table\/Tabu.coffee" : {
+      "ft" : 32,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/data\/table\/Tabu.js",
       "oF" : 0,
       "oS" : 1,
       "sC" : 0,
@@ -6504,46 +6523,6 @@
       "oAP" : "\/pub\/vue\/data\/appl\/Data.js",
       "oF" : 0
     },
-    "\/vue\/data\/dataset\/DataSet.vue" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/vue\/data\/dataset\/DataSet.js",
-      "oF" : 0
-    },
-    "\/vue\/data\/dataset\/tabulator_midnight.css" : {
-      "aP" : 1,
-      "bl" : 0,
-      "ci" : 0,
-      "co" : 0,
-      "ft" : 16,
-      "ma" : 0,
-      "oA" : 1,
-      "oAP" : "\/vue\/data\/dataset\/tabulator_midnight-min.css",
-      "oF" : 0,
-      "pg" : 0
-    },
-    "\/vue\/data\/grid\/Grid.vue" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/vue\/data\/grid\/Grid.js",
-      "oF" : 1
-    },
-    "\/vue\/data\/grid\/tabulator_midnight.css" : {
-      "aP" : 1,
-      "bl" : 0,
-      "ci" : 0,
-      "co" : 0,
-      "ft" : 16,
-      "ma" : 0,
-      "oA" : 1,
-      "oAP" : "\/vue\/data\/grid\/tabulator_midnight-min.css",
-      "oF" : 1,
-      "pg" : 0
-    },
     "\/vue\/data\/query\/Query.vue" : {
       "cB" : 0,
       "ft" : 8192,
@@ -6562,6 +6541,46 @@
       "oA" : 1,
       "oAP" : "\/vue\/data\/query\/tabulator_midnight-min.css",
       "oF" : 0,
+      "pg" : 0
+    },
+    "\/vue\/data\/store\/Store.vue" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/vue\/data\/store\/Store.js",
+      "oF" : 0
+    },
+    "\/vue\/data\/store\/tabulator_midnight.css" : {
+      "aP" : 1,
+      "bl" : 0,
+      "ci" : 0,
+      "co" : 0,
+      "ft" : 16,
+      "ma" : 0,
+      "oA" : 1,
+      "oAP" : "\/vue\/data\/store\/tabulator_midnight-min.css",
+      "oF" : 0,
+      "pg" : 0
+    },
+    "\/vue\/data\/table\/Table.vue" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/vue\/data\/table\/Table.js",
+      "oF" : 1
+    },
+    "\/vue\/data\/table\/tabulator_midnight.css" : {
+      "aP" : 1,
+      "bl" : 0,
+      "ci" : 0,
+      "co" : 0,
+      "ft" : 16,
+      "ma" : 0,
+      "oA" : 1,
+      "oAP" : "\/vue\/data\/table\/tabulator_midnight-min.css",
+      "oF" : 1,
       "pg" : 0
     },
     "\/vue\/jitt\/appl\/Jitt.vue" : {

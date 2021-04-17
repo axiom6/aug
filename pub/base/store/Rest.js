@@ -3,9 +3,9 @@ var Rest;
 import Store from '../util/Store.js';
 
 Rest = class Rest extends Store {
-  constructor(dbName, tables, stream, baseUrl) {
-    super(dbName, tables, stream);
-    this.baseUrl = baseUrl;
+  constructor(baseUrl) {
+    super();
+    this.baseUtl = baseUrl;
     this.key = "id";
   }
 
@@ -64,26 +64,6 @@ Rest = class Rest extends Store {
       'Content-Type': 'application/json'
     };
     return obj;
-  }
-
-  batch(name, obj, objs, callback = null) {
-    var settings, url;
-    url = this.baseUrl + obj.url;
-    settings = this.config('get');
-    fetch(url, settings).then((response) => {
-      return response.json();
-    }).then((data) => {
-      obj['result'] = data;
-      if (this.batchComplete(objs)) {
-        if (callback != null) {
-          return callback(objs);
-        } else {
-          return this.results(name, 'batch', objs, id);
-        }
-      }
-    }).catch((error) => {
-      return this.onerror(obj.table, 'batch', this.toError(url, error));
-    });
   }
 
   rest(op, table, id, object = null, path, callback = null) {

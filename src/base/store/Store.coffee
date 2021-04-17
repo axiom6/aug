@@ -1,17 +1,15 @@
 
-import Util    from '../util/Util.js'
+import Util from '../util/Util.js'
+import Data from '../appl/Data.js'
 
 class Store
 
-  constructor:( @dbName, @tables ) ->
-
-  table:(tn) ->
-    if not @tables[tn]?
-       @open( table )
-    @tables[tn]
+  constructor:() ->
+    @stream = Data.stream
+    @srouce = @constructor.name
 
   toSubject:( table, op ) ->
-    if table? then @dbName + ':' + table + ':' + op else @dbName + ':' + op
+    table + ':' + op
 
   publish:( table, op, result, id=null ) ->
     obj = if id? then { "#{id}":result } else result
@@ -23,7 +21,7 @@ class Store
     return
 
   onerror:( table, op, error, id='none' ) ->
-    console.error( 'Store.onerror', { dbName:@dbName, table:table, op:op, error:error, id:id } )
+    console.error( 'Store.onerror', { table:table, op:op, error:error, id:id } )
     return
 
   subscribe:( table, op, source, onSubscribe  ) ->
@@ -54,13 +52,28 @@ class Store
 
   # REST Api  CRUD + Subscribe for objectect records
 
-  batch:( name, objs, callback )  -> # Batch populate a set of objects from various sources
+  # A set is Table:{ url:'muse/Prin.json', result:json }
+  batch:( sets, callback ) ->
+    for  own table, set of sets
+      @batchSelect( table, set, sets, callback )
     return
 
-  batchComplete:( objs ) ->
-    for own key, obj of objs
-      return false if not obj['result']
+  batchComplete:( sets ) ->
+    for own table, set of sets
+      return false if not set['result']?
     true
+
+  batchSelect:( table, set, sets, callback=null ) ->
+    onBatch = (result) =>
+      set.result = result
+      if @batchComplete( sets )
+        if callback?
+           callback( sets )
+        else
+           @results( table, 'batch', sets )
+    where = () -> true
+    @select( table, where, onBatch ) # Calls the derived Store
+    return   
 
   copyTable:( src, des, table, where=Store.where ) ->
     callback = (results) ->
@@ -95,9 +108,10 @@ class Store
 Store.changeOps = ['change','add','put','del','insert','update','remove']
 
 # RDUDC            Retrieve  Create    Update    Delete   Change
-Store.restOps  = [ 'get',    'add',    'put',    'del', 'batch' ]
+Store.restOps  = [ 'get',    'add',    'put',    'del'    ]  #batch
 Store.sqlOps   = [ 'select', 'insert', 'update', 'remove' ]
 Store.tableOps = [ 'show',   'open',             'drop'   ]
+Store.allOps   = Store.restOps.concat( Store.sqlOps, Store.tableOps )
 
 # Dafaults for empty arguments
 Store.where  = () -> true # Default where clause filter that returns true to access all records

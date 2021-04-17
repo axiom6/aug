@@ -3,8 +3,9 @@ import Store  from '../util/Store.js'
 
 class Index extends Store
 
-  constructor:( dbName, tables, stream ) ->
-    super(      dbName, tables, stream )
+  constructor:( dbName ) ->
+    super()
+    @dbName = dbName
     @keyPath   = 'id'
     window.indexedDB.deleteDatabase( @dbName )
 
@@ -68,18 +69,6 @@ class Index extends Store
     localStorage.setItem('IndexDbVersion',dbVersionStr)
     console.log( 'Index() version', dbVersionStr, dbVersionInt )
     dbVersionInt
-
-  batch:( name, obj, objs, callback=null ) ->
-    onBatch = (result) =>
-      obj.result = result
-      if @batchComplete( objs )
-        if callback?
-           callback( objs )
-        else
-           @results( name, 'batch', objs )
-    where = () -> true
-    @select( obj.table, where, onBatch )
-    return
 
   get:( table, id, callback, op='get' ) ->
     txo = @txo( table, 'readonly' )
