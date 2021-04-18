@@ -12,20 +12,53 @@ import Index from '../../base/store/Index.js';
 
 import Pouch from '../../base/store/Pouch.js';
 
-//mport Fire from '../../base/store/Fire.js'
+import Fire from '../../base/store/Fire.js';
+
+import Rest from '../../base/store/Rest.js';
+
 Manager = class Manager {
   constructor() {
-    var index, local, memory, pouch;
-    //ire    = new Fire()
     this.onSubscribe = this.onSubscribe.bind(this);
     this.dbName = 'Test';
     this.tables;
     this.mix = Data.mix;
     this.stream = Data.stream;
-    memory = new Memory();
-    local = new Local();
-    index = new Index();
-    pouch = new Pouch();
+  }
+
+  test(name) {
+    var id, obj, objs, store, table;
+    store = (function() {
+      switch (name) {
+        case 'Local':
+          return new Local();
+        case 'Index':
+          return new Index();
+        case 'Pouch':
+          return new Pouch();
+        case 'Fire':
+          return new Fire();
+        case 'Rest':
+          return new Rest();
+        default:
+          return new Memory();
+      }
+    })();
+    id = 'Involve';
+    table = 'Prac';
+    obj = {
+      id: "Involve",
+      type: "pane",
+      "hsv": [195, 90, 60],
+      "column": "Embrace",
+      "row": "Learn",
+      "plane": "Know",
+      "icon": "fas fa-users",
+      "cells": [5, 12, 7, 12],
+      "dir": "nw",
+      "neg": "Greed"
+    };
+    objs = this.mix.inovObject('Info', 'Info');
+    this.suite(store, table, id, obj, objs);
   }
 
   onSubscribe(obj) {

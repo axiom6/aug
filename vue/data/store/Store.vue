@@ -3,35 +3,30 @@
 <template>
   <div   class="store-pane">
     <div class="store-name"  ><div class="store-title">Store</div></div>
-    <div class="store-memory"><div class="store-title">Memory</div></div>
-    <div class="store-local" ><div class="store-title">Local</div></div>
-    <div class="store-index" ><div class="store-title">Index</div></div>
-    <div class="store-pouch" ><div class="store-title">Pouch</div></div>
-    <div class="store-fire"  ><div class="store-title">Fire</div></div>
+    <div class="store-memory"><div class="store-title" @click="doTest('Memory')">Memory</div></div>
+    <div class="store-local" ><div class="store-title" @click="doTest('Local')" >Local</div></div>
+    <div class="store-index" ><div class="store-title" @click="doTest('Index')" >Index</div></div>
+    <div class="store-pouch" ><div class="store-title" @click="doTest('Pouch')" >Pouch</div></div>
+    <div class="store-fire"  ><div class="store-title" @click="doTest('Fire')"  >Fire</div></div>
   </div>
 </template>
 
 <script type="module">
 
   import {nextTick, onMounted, inject } from "vue";
-//import Manager from '../../../pub/data/store/Manager.js'
+  import Manager from '../../../pub/data/store/Manager.js'
 
 let Store = {
   
   setup() {
 
     const mix     = inject('mix');
-  //const manager = new Manager( mix );
-  //let   table   = null;
-    const compKey = 'Info';
-    const inovKey = 'Info';
+    const manager = new Manager( mix );
 
-    onMounted( function () {
-      nextTick( function() {
-        const pracs  = mix.inovObject( compKey, inovKey );
-      } ); } );
+    const doTest = function( name ) {
+      manager.test( name ); }
 
-    return { }; }
+    return { doTest }; }
 
 }
 export default Store;

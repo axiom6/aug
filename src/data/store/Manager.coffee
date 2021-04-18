@@ -5,7 +5,8 @@ import Memory from '../../base/store/Memory.js'
 import Local  from '../../base/store/Local.js'
 import Index  from '../../base/store/Index.js'
 import Pouch  from '../../base/store/Pouch.js'
-#mport Fire from '../../base/store/Fire.js'
+import Fire   from '../../base/store/Fire.js'
+import Rest   from '../../base/store/Rest.js'
 
 class Manager
 
@@ -14,11 +15,23 @@ class Manager
     @tables
     @mix    = Data.mix
     @stream = Data.stream
-    memory  = new Memory()
-    local   = new Local()
-    index   = new Index()
-    pouch   = new Pouch()
-    #ire    = new Fire()
+
+  test:( name ) ->
+    store = switch name
+      when 'Local' then new Local()
+      when 'Index' then new Index()
+      when 'Pouch' then new Pouch()
+      when 'Fire'  then new Fire()
+      when 'Rest'  then new Rest()
+      else              new Memory()
+    id    = 'Involve'
+    table = 'Prac'
+    obj   = { id:"Involve", type:"pane", "hsv":[195,90,60],"column":"Embrace",
+    "row":"Learn","plane":"Know","icon":"fas fa-users",
+    "cells":[5,12,7,12], "dir":"nw", "neg":"Greed" }
+    objs  = @mix.inovObject( 'Info', 'Info' )
+    @suite( store, table, id, obj, objs )
+    return
 
   onSubscribe:( obj ) =>
     console.log( 'Mgr', obj )
