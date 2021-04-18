@@ -1,6 +1,6 @@
 var Rest;
 
-import Store from '../util/Store.js';
+import Store from './Store.js';
 
 Rest = class Rest extends Store {
   constructor(baseUrl) {

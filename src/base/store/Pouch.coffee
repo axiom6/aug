@@ -1,7 +1,15 @@
 
 
-import Store   from '../util/Store.js'
-import PouchDB from 'pouchdb'
+import Store        from './Store.js'
+import * as PouchDB from 'pouchdb'
+#`var global = window`
+#(window as any).global = window
+#window.PouchDB = PouchDB
+#import PouchDB from 'pouchdb'
+import * as PouchDBFind from 'pouchdb/dist/pouchdb.find';
+#PouchDB.plugin(PouchDBFind);
+#(window as any).global = window;
+#mport * as PouchDBUpsert from 'pouchdb-upsert/dist/pouchdb.upsert';
 
 
 class Pouch extends Store

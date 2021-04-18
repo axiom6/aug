@@ -1,6 +1,6 @@
 
-import Store    from '../util/Store.js'
-import firebase from '@firebase'      # Firebase core (required)
+import Store    from './Store.js'
+import firebase from 'firebase/app'      # Firebase core (required)
 
 class Fire extends Store
 

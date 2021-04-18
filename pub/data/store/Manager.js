@@ -2,15 +2,11 @@ var Manager;
 
 import Data from '../appl/Data.js';
 
-import Store from '../../base/store/Store.js';
-
 import Memory from '../../base/store/Memory.js';
 
 import Local from '../../base/store/Local.js';
 
 import Index from '../../base/store/Index.js';
-
-import Pouch from '../../base/store/Pouch.js';
 
 import Fire from '../../base/store/Fire.js';
 
@@ -18,7 +14,6 @@ import Rest from '../../base/store/Rest.js';
 
 Manager = class Manager {
   constructor() {
-    this.onSubscribe = this.onSubscribe.bind(this);
     this.dbName = 'Test';
     this.tables;
     this.mix = Data.mix;
@@ -26,15 +21,14 @@ Manager = class Manager {
   }
 
   test(name) {
-    var id, obj, objs, store, table;
+    var store;
     store = (function() {
       switch (name) {
         case 'Local':
           return new Local();
         case 'Index':
           return new Index();
-        case 'Pouch':
-          return new Pouch();
+        //hen 'Pouch' then new Pouch()
         case 'Fire':
           return new Fire();
         case 'Rest':
@@ -43,9 +37,55 @@ Manager = class Manager {
           return new Memory();
       }
     })();
-    id = 'Involve';
-    table = 'Prac';
-    obj = {
+    this.suite(store);
+  }
+
+  subscribe(table, op, store) {
+    var onSubscribe;
+    onSubscribe = (obj) => {
+      return console.log('Mgr', {
+        table: table,
+        op: op,
+        source: store.source,
+        obj: obj
+      });
+    };
+    store.subscribe(table, op, store.source, onSubscribe);
+  }
+
+  suite(store) {
+    var key, prac, ref;
+    this.data();
+    this.subscribe('Prac', 'add', store);
+    this.subscribe('Prac', 'get', store);
+    this.subscribe('Prac', 'put', store);
+    this.subscribe('Prac', 'del', store);
+    store.add('Prac', '0', this.prac);
+    store.get('Prac', '0');
+    this.prac.type = 'view';
+    store.put('Prac', '0', this.prac);
+    store.del('Prac', '0');
+    this.subscribe('Pracs', 'insert', store);
+    this.subscribe('Pracs', 'select', store);
+    this.subscribe('Pracs', 'update', store);
+    this.subscribe('Pracs', 'remove', store);
+    store.insert('Pracs', this.pracs);
+    store.select('Pracs', function(obj) {
+      return true;
+    });
+    ref = this.pracs;
+    for (key in ref) {
+      prac = ref[key];
+      prac.type = 'view';
+    }
+    store.update('Pracs', this.pracs);
+    store.remove('Pracs', function(obj) {
+      return true;
+    });
+  }
+
+  data() {
+    this.prac = {
       id: "Involve",
       type: "pane",
       "hsv": [195, 90, 60],
@@ -57,35 +97,91 @@ Manager = class Manager {
       "dir": "nw",
       "neg": "Greed"
     };
-    objs = this.mix.inovObject('Info', 'Info');
-    this.suite(store, table, id, obj, objs);
-  }
-
-  onSubscribe(obj) {
-    console.log('Mgr', obj);
+    this.pracs = this.mix.inovObject('Info', 'Info');
+    return this.kit = {
+      "_id": "mittens",
+      "name": "Mittens",
+      "occupation": "kitten",
+      "age": 3,
+      "hobbies": ["playing with balls of yarn", "chasing laser pointers", "lookin' hella cute"]
+    };
   }
 
   subscribes(table, store) {
-    var i, len, op, ref, results;
-    ref = Store.allOps;
-    results = [];
-    for (i = 0, len = ref.length; i < len; i++) {
-      op = ref[i];
-      results.push(store.subscribe(table, op, store.source, this.onSubscribe));
-    }
-    return results;
-  }
-
-  suite(store, table, id, obj, objs) {
-    subscribes(table, store);
-    store.add(table, id, obj);
-    store.get(table, id);
-    store.put(table, id, obj);
-    store.del(table, id);
-    store.insert(table, objs);
-    store.select(table);
-    store.update(table, objs);
-    store.remove(table);
+    var onSubscribe;
+    onSubscribe = {};
+    onSubscribe['add'] = (obj) => {
+      return console.log('Mgr', {
+        table: table,
+        op: 'add',
+        source: store.source,
+        obj: obj
+      });
+    };
+    onSubscribe['get'] = (obj) => {
+      return console.log('Mgr', {
+        table: table,
+        op: 'get',
+        source: store.source,
+        obj: obj
+      });
+    };
+    onSubscribe['put'] = (obj) => {
+      return console.log('Mgr', {
+        table: table,
+        op: 'put',
+        source: store.source,
+        obj: obj
+      });
+    };
+    onSubscribe['del'] = (obj) => {
+      return console.log('Mgr', {
+        table: table,
+        op: 'del',
+        source: store.source,
+        obj: obj
+      });
+    };
+    onSubscribe['insert'] = (obj) => {
+      return console.log('Mgr', {
+        table: table,
+        op: 'insert',
+        source: store.source,
+        obj: obj
+      });
+    };
+    onSubscribe['select'] = (obj) => {
+      return console.log('Mgr', {
+        table: table,
+        op: 'select',
+        source: store.source,
+        obj: obj
+      });
+    };
+    onSubscribe['update'] = (obj) => {
+      return console.log('Mgr', {
+        table: table,
+        op: 'update',
+        source: store.source,
+        obj: obj
+      });
+    };
+    onSubscribe['remove'] = (obj) => {
+      return console.log('Mgr', {
+        table: table,
+        op: 'remove',
+        source: store.source,
+        obj: obj
+      });
+    };
+    store.subscribe(table, 'add', store.source, onSubscribe['add']);
+    store.subscribe(table, 'get', store.source, onSubscribe['get']);
+    store.subscribe(table, 'put', store.source, onSubscribe['put']);
+    store.subscribe(table, 'del', store.source, onSubscribe['del']);
+    store.subscribe(table, 'insert', store.source, onSubscribe['insert']);
+    store.subscribe(table, 'select', store.source, onSubscribe['select']);
+    store.subscribe(table, 'update', store.source, onSubscribe['update']);
+    store.subscribe(table, 'remove', store.source, onSubscribe['remove']);
   }
 
 };

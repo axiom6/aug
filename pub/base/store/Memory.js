@@ -1,25 +1,36 @@
 var Memory,
   hasProp = {}.hasOwnProperty;
 
-import Store from '../util/Store.js';
+import Store from './Store.js';
 
 Memory = class Memory extends Store {
   constructor() {
     super();
+    this.tables = {};
   }
 
-  add(tn, id, object) {
-    this.table(tn)[id] = object;
+  table(t) {
+    if (this.tables[t] != null) {
+      return this.tables[t];
+    } else {
+      this.tables[t] = {};
+      return this.tables[t];
+    }
+  }
+
+  add(tn, id, obj) {
+    this.table(tn)[id] = obj;
+    this.results(tn, 'add', obj, id);
   }
 
   get(tn, id, callback) {
-    var object;
-    object = this.table(tn)[id];
-    if (object != null) {
+    var obj;
+    obj = this.table(tn)[id];
+    if (obj != null) {
       if (callback != null) {
-        callback(object);
+        callback(obj);
       } else {
-        this.results(tn, 'get', object, id);
+        this.results(tn, 'get', obj, id);
       }
     } else {
       this.onerror(tn, 'get', {
@@ -28,15 +39,17 @@ Memory = class Memory extends Store {
     }
   }
 
-  put(tn, id, object) {
-    this.table(tn)[id] = object;
+  put(tn, id, obj) {
+    this.table(tn)[id] = obj;
+    this.results(tn, 'put', obj, id);
   }
 
   del(tn, id) {
-    var object;
-    object = this.table(tn)[id];
-    if (object != null) {
+    var obj;
+    obj = this.table(tn)[id];
+    if (obj != null) {
       delete this.table(tn)[id];
+      this.results(tn, 'del', obj, id);
     } else {
       this.onerror(tn, 'get', {
         error: 'Memory object not found'
@@ -44,37 +57,46 @@ Memory = class Memory extends Store {
     }
   }
 
-  insert(tn, objects) {
+  insert(tn, objs) {
     var key, obj, table;
     table = this.table(tn);
-    for (key in objects) {
-      if (!hasProp.call(objects, key)) continue;
-      obj = objects[key];
+    for (key in objs) {
+      if (!hasProp.call(objs, key)) continue;
+      obj = objs[key];
       table[key] = obj;
     }
+    this.results(tn, 'insert', objs);
   }
 
   select(tn, where, callback = null) {
-    var objects, table;
+    var key, obj, objs, table;
     table = this.table(tn);
-    objects = this.filter(table, where);
+    objs = {};
+    for (key in table) {
+      obj = table[key];
+      if (where(obj)) {
+        objs[key] = obj;
+      }
+    }
     if (callback != null) {
-      callback(objects);
+      callback(objs);
     } else {
-      this.results(tn, 'select', objects);
+      this.results(tn, 'select', objs);
     }
   }
 
-  update(tn, objects) {
+  update(tn, objs) {
     var key, obj, table;
     table = this.table(tn);
-    for (key in objects) {
-      if (!hasProp.call(objects, key)) continue;
-      obj = objects[key];
+    for (key in objs) {
+      if (!hasProp.call(objs, key)) continue;
+      obj = objs[key];
       table[key] = obj;
     }
+    this.results(tn, 'update', objs);
   }
 
+  //console.log( tn, 'update2', objs )
   remove(tn, where) {
     var key, obj, objs, table;
     table = this.table(tn);
@@ -88,9 +110,10 @@ Memory = class Memory extends Store {
       objs[key] = obj;
       delete table[key];
     }
-    this.results(table, 'remove', objs);
+    this.results(tn, 'remove', objs);
   }
 
+  //console.log( tn, 'remove2', objs )
   open(tn) {
     if (tn === false) { // Nothing to do. Handled by store
       ({});

@@ -1,7 +1,7 @@
 var Local,
   hasProp = {}.hasOwnProperty;
 
-import Store from '../util/Store.js';
+import Store from './Store.js';
 
 Local = class Local extends Store {
   constructor() {
@@ -35,24 +35,6 @@ Local = class Local extends Store {
       this.tableIds[table] = [];
     }
     return this.tableIds[table].push(id);
-  }
-
-  batch(name, obj, objs, callback = null) {
-    var onBatch, where;
-    onBatch = (result) => {
-      obj.result = result;
-      if (this.batchComplete(objs)) {
-        if (callback != null) {
-          return callback(objs);
-        } else {
-          return this.results(name, 'batch', objs);
-        }
-      }
-    };
-    where = function() {
-      return true;
-    };
-    this.select(obj.table, where, onBatch);
   }
 
   get(table, id, callback = null, op = 'get') {

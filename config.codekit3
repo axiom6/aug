@@ -4657,17 +4657,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/pub\/base\/store\/Pipe.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/base\/store\/Pipe-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/pub\/base\/store\/Pouch.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -4675,17 +4664,6 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/pub\/base\/store\/Pouch-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/pub\/base\/store\/PouchDB.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/base\/store\/PouchDB-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
@@ -4708,17 +4686,6 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/pub\/base\/store\/Store-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/pub\/base\/store\/Table.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/base\/store\/Table-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0

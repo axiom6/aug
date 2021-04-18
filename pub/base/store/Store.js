@@ -3,14 +3,15 @@ var Store,
 
 import Util from '../util/Util.js';
 
-import Data from '../appl/Data.js';
+import Data from '../../data/appl/Data.js';
 
 Store = class Store {
   constructor() {
     this.stream = Data.stream;
-    this.srouce = this.constructor.name;
+    this.source = this.constructor.name;
   }
 
+  //console.log( 'Store()', { source:@source } )
   toSubject(table, op) {
     return table + ':' + op;
   }

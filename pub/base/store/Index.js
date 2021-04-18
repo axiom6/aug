@@ -2,7 +2,7 @@ var Index,
   hasProp = {}.hasOwnProperty,
   boundMethodCheck = function(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new Error('Bound instance method accessed before binding'); } };
 
-import Store from '../util/Store.js';
+import Store from './Store.js';
 
 Index = class Index extends Store {
   constructor(dbName) {

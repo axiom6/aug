@@ -1,8 +1,9 @@
-import Store  from '../util/Store.js'
+import Store  from './Store.js'
 
 class Local extends Store
 
   constructor:() ->
+    super()
     @tableIds = {}
 
   key:( table, id ) ->

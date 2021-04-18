@@ -1,12 +1,13 @@
 
 import Util from '../util/Util.js'
-import Data from '../appl/Data.js'
+import Data from '../../data/appl/Data.js'
 
 class Store
 
   constructor:() ->
     @stream = Data.stream
-    @srouce = @constructor.name
+    @source = @constructor.name
+    #console.log( 'Store()', { source:@source } )
 
   toSubject:( table, op ) ->
     table + ':' + op

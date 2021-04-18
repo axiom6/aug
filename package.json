@@ -30,6 +30,7 @@
     "pegjs-backtrace": "^0.2.0",
     "postcss": "^8.2.7",
     "pouchdb": "^7.2.2",
+    "pouchdb-upsert": "^2.2.0",
     "rollup": "^2.40.0",
     "rollup-plugin-coffee-script": "^2.0.0",
     "rollup-plugin-less": "^1.1.3",

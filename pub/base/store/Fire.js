@@ -1,9 +1,9 @@
 var Fire,
   hasProp = {}.hasOwnProperty;
 
-import Store from '../util/Store.js';
+import Store from './Store.js';
 
-import firebase from '@firebase';
+import firebase from 'firebase/app';
 
 Fire = class Fire extends Store {
   constructor() {
