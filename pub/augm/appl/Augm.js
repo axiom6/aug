@@ -2,7 +2,7 @@ var Augm;
 
 import Load from './Load.js';
 
-import Data from '../../base/util/Data.js';
+import Access from '../../base/util/Access.js';
 
 import Stream from '../../base/util/Stream.js';
 
@@ -73,7 +73,7 @@ Augm = (function() {
       for (key in ref) {
         val = ref[key];
         if ((val.refine != null) && val.refine) {
-          val.data = Data.refine(val.data);
+          val.data = Access.refine(val.data);
         }
       }
       Augm.init(Augm.Batch);

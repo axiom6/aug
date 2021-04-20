@@ -1,9 +1,9 @@
-var Data,
+var Access,
   hasProp = {}.hasOwnProperty;
 
 import Util from './Util.js';
 
-Data = class Data {
+Access = class Access {
   static refine(data) {
     var akey, area, base, bkey, disp, dkey, ikey, item, pkey, prac;
     data.pracs = {};
@@ -13,8 +13,8 @@ Data = class Data {
         continue;
       }
       data.pracs[pkey] = prac;
-      prac.data = data;
       if (prac['name'] == null) {
+        //prac.data        = data
         prac['name'] = pkey;
       }
       prac.disps = {};
@@ -96,7 +96,7 @@ Data = class Data {
       innvs[key] = Object.assign({}, pracs[key]);
       innvs[key].plane = innv;
     }
-    Data.refine(innvs);
+    Access.refine(innvs);
   }
 
   // ---- Read JSON with batch async
@@ -124,7 +124,7 @@ Data = class Data {
   // "Access-Control-Request-Headers": "*", "Access-Control-Request-Method": "*"
   static batchJSON(obj, batch, callback, refine = null) {
     var opt, url;
-    url = Data.toUrl(obj.url);
+    url = Access.toUrl(obj.url);
     opt = {
       mode: 'no-cors',
       headers: {
@@ -135,7 +135,7 @@ Data = class Data {
       return response.json();
     }).then((data) => {
       obj['data'] = Util.isFunc(refine) ? refine(data) : data;
-      if (Data.batchComplete(batch)) {
+      if (Access.batchComplete(batch)) {
         return callback(batch);
       }
     }).catch((error) => {
@@ -148,7 +148,7 @@ Data = class Data {
 
   static asyncJSON(urla, callback) {
     var url;
-    url = Data.toUrl(urla);
+    url = Access.toUrl(urla);
     // console.log( 'Data.asyncJSON()', urla, url )
     fetch(url).then((response) => {
       return response.json();
@@ -169,11 +169,11 @@ Data = class Data {
   static toUrl(url) {
     // console.log( 'Data.toUrl', { url:url, local:Data.local, serve:Data.serve, href:window.location.href })
     if (window.location.href.includes('3000')) {
-      return Data.local + url;
+      return Access.local + url;
     } else if (window.location.href.includes('5000')) {
-      return Data.serve + url;
+      return Access.serve + url;
     } else {
-      return Data.hosted + url;
+      return Access.hosted + url;
     }
   }
 
@@ -181,9 +181,9 @@ Data = class Data {
     // ------ Quick JSON read ------
   static read(url, callback) {
     if (Util.isObj(url)) {
-      Data.readFile(url, callback);
+      Access.readFile(url, callback);
     } else {
-      Data.asynsJson(url, callback);
+      Access.asynsJson(url, callback);
     }
   }
 
@@ -215,12 +215,12 @@ Data = class Data {
 
 };
 
-Data.local = "../pub/data/";
+Access.local = "../pub/data/";
 
-Data.serve = "../data/";
+Access.serve = "../data/";
 
-Data.hosted = "./data/";
+Access.hosted = "./data/";
 
-Data.cssDir = 'css/'; // /css in /pub
+Access.cssDir = 'css/'; // /css in /pub
 
-export default Data;
+export default Access;

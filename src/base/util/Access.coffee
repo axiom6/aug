@@ -2,13 +2,13 @@
 
 import Util from './Util.js'
 
-class Data
+class Access
 
   @refine:( data ) ->
     data.pracs = {}
     for pkey, prac of data when Util.isChild(pkey)
       data.pracs[pkey] = prac
-      prac.data        = data
+      #prac.data        = data
       prac['name']     = pkey if not prac['name']?
       prac.disps = {}
       for dkey, disp of prac  when Util.isChild(dkey)
@@ -49,7 +49,7 @@ class Data
     for key in ['Team','Discover','Adapt','Benefit','Change','Govern']
       innvs[key] = Object.assign( {}, pracs[key] )
       innvs[key].plane = innv
-    Data.refine( innvs )
+    Access.refine( innvs )
     return
 
   # ---- Read JSON with batch async
@@ -67,20 +67,20 @@ class Data
   # "Access-Control-Request-Headers": "*", "Access-Control-Request-Method": "*"
 
   @batchJSON:( obj, batch, callback, refine=null ) ->
-    url = Data.toUrl(obj.url)
+    url = Access.toUrl(obj.url)
     opt = { mode:'no-cors', headers:{ 'Content-Type':'application/json' } }
     fetch( url, opt )
       .then( (response) =>
         return response.json() )
       .then( (data) =>
         obj['data']     = if Util.isFunc(refine) then refine( data ) else data
-        callback( batch ) if Data.batchComplete( batch ) )
+        callback( batch ) if Access.batchComplete( batch ) )
       .catch( (error) =>
         console.error( "Data.batchJSON()", { url:url, error:error } ) )
     return
 
   @asyncJSON:( urla, callback ) ->
-    url = Data.toUrl(urla)
+    url = Access.toUrl(urla)
     # console.log( 'Data.asyncJSON()', urla, url )
     fetch( url )
       .then( (response) =>
@@ -96,17 +96,17 @@ class Data
 
   @toUrl:(url) ->
     # console.log( 'Data.toUrl', { url:url, local:Data.local, serve:Data.serve, href:window.location.href })
-    if      window.location.href.includes('3000') then Data.local+url
-    else if window.location.href.includes('5000') then Data.serve+url
-    else                                               Data.hosted+url
+    if      window.location.href.includes('3000') then Access.local+url
+    else if window.location.href.includes('5000') then Access.serve+url
+    else                                               Access.hosted+url
            
   # ------ Quick JSON read ------
 
   @read:( url, callback ) ->
     if Util.isObj( url )
-      Data.readFile(  url, callback )
+      Access.readFile(  url, callback )
     else
-      Data.asynsJson( url, callback )
+      Access.asynsJson( url, callback )
     return
 
   @readFile:( fileObj, doJson ) ->
@@ -127,10 +127,10 @@ class Data
     document.body.removeChild(downloadLink)
     return
 
-Data.local   =  "../pub/data/"
-Data.serve   =  "../data/"
-Data.hosted  =  "./data/"
-Data.cssDir  = 'css/'  # /css in /pub
+Access.local   =  "../pub/data/"
+Access.serve   =  "../data/"
+Access.hosted  =  "./data/"
+Access.cssDir  = 'css/'  # /css in /pub
 
 
-export default Data
+export default Access

@@ -1,7 +1,6 @@
 
-import Util from '../../base/util/Util.js'
-import Data from '../../base/util/Data.js'
-import Vis  from '../../base/draw/Vis.js'
+import Util   from '../../base/util/Util.js'
+import Vis    from '../../base/draw/Vis.js'
 
 
 class Radar
@@ -40,8 +39,8 @@ class Radar
       { name:"Access", radius:@r80 }     #   C     70-79%
       { name:"Hold",   radius:@r100 } ]  #   D     60-69%
 
-    # Data.asyncJSON( 'draw/Quad.json', (quads) => @doQuads(quads) ) if @isRadar()
-    # Data.asyncJSON( 'draw/Tech.json', (techs) => @doTechs(techs) ) if @isRadar()
+    # Access.asyncJSON( 'draw/Quad.json', (quads) => @doQuads(quads) ) if @isRadar()
+    # Access.asyncJSON( 'draw/Tech.json', (techs) => @doTechs(techs) ) if @isRadar()
     @doQuads( @mix.data('Quad') ) if @isRadar()
     @doTechs( @mix.data('Tech') ) if @isRadar()
     return

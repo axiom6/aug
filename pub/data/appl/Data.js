@@ -1,6 +1,6 @@
 var Data;
 
-import Datb from '../../base/util/Data.js';
+import Access from '../../base/util/Access.js';
 
 import Stream from '../../base/util/Stream.js';
 
@@ -39,6 +39,8 @@ import ScieJson from '../../../data/inno/Scie.json';
 
 import MathJson from '../../../data/inno/Math.json';
 
+import HuesJson from '../../../data/draw/Hues.json';
+
 Data = (function() {
   class Data {
     static start() {
@@ -48,7 +50,7 @@ Data = (function() {
       for (key in ref) {
         val = ref[key];
         if ((val.refine != null) && val.refine) {
-          val.data = Datb.refine(val.data);
+          val.data = Access.refine(val.data);
         }
       }
       Data.init(Data.Batch);
@@ -86,8 +88,8 @@ Data = (function() {
       Data.touch = new Touch(Data.stream, Data.nav);
       //ata.build  = new Build( batch, Data.komps )
       //use.cache  = new Cache( Muse.stream )
-      Datb.buildInnov(batch, 'Data', 'Info');
-      Datb.mergePracs(batch, 'Prin', [
+      Access.buildInnov(batch, 'Data', 'Info');
+      Access.mergePracs(batch, 'Prin', [
         'Info',
         'Know',
         'Wise' // 'Data'
@@ -193,6 +195,11 @@ Data = (function() {
       url: 'inno/Math.json',
       data: MathJson,
       refine: true
+    },
+    Hues: {
+      url: 'draw/Hues.json',
+      data: HuesJson,
+      refine: false
     }
   };
 

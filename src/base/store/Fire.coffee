@@ -1,163 +1,128 @@
 
 import Store    from './Store.js'
-import firebase from 'firebase/app'      # Firebase core (required)
+import firebase from 'firebase'      # Firebase core (required)
 
 class Fire extends Store
 
-  constructor:() ->
-    super()
+  constructor:( dbName ) ->
+    super( dbName )
     @keyProp = 'id'
-    @fb      = @init( @config("augm-d4b3c") )
+    @init( @config() )
     #@auth() # Anonomous logins have to be enabled
-    @fd      = @fb.database()
-    #@openTables( @tables )
+    @fd = firebase.database()
 
-  config:( projectId ) -> {
-    projectId:         projectId,
-    apiKey:            "AIzaSyD4Py9oML_Y77ze9bGX0I8s9hqndKkBVjY",
-    authDomain:        "#{projectId}.firebaseapp.com",
-    databaseURL:       "https://#{projectId}.firebaseio.com",
-    storageBucket:     "#{projectId}.appspot.com",
-    messagingSenderId: "341294405322",
-    appID:             "1:341294405322:web:06369c7823ccc079" }
-
-  ###
-  firebase.initializeApp({
-    "apiKey": "AIzaSyD4Py9oML_Y77ze9bGX0I8s9hqndKkBVjY",
-    "databaseURL": "https://augm-d4b3c.firebaseio.com",
-    "storageBucket": "augm-d4b3c.appspot.com",
-    "authDomain": "augm-d4b3c.firebaseapp.com",
-    "messagingSenderId": "341294405322",
-    "projectId": "augm-d4b3c",
-    "appId": "1:341294405322:web:06369c7823ccc079"
-  });
-  ###
+  # https://console.firebase.google.com/project/data-muse/overview
+  config:() -> {
+    apiKey: "AIzaSyDuWZIanBoKVZiPTcxDMQ9HyC2Ak3cr7j8",
+    authDomain: "data-muse.firebaseapp.com",
+    databaseURL: "https://data-muse-default-rtdb.firebaseio.com",
+    projectId: "data-muse",
+    storageBucket: "data-muse.appspot.com",
+    messagingSenderId: "782871064051",
+    appId: "1:782871064051:web:a4914c83e898b45e7c7686"
+  }
 
   init:( config ) ->
-    #console.log( 'firebase', firebase )
     firebase.initializeApp(config)
-    firebase
+    return
 
-  # Have too clarify id with snapshot.key
-  change:( table, id='none', callback=null, Event='put' ) ->
-    path  = if id is 'none' then table else table + '/' + id
-    @fd.ref(path).on( Fire.EventType[Event], onChange )
-       .then( (snapshot) =>
-          if snapshot?
-            key = snapshot.key
-            val = snapshot.val()
-            if callback?
-               callback( val )
-            else
-               @results( table, 'change', val, key ) )
-      .catch( (error) =>
-        @onerror( table, 'change', error ) )
-    return    
+  add:( table, id, obj ) ->
+    @fd.ref(table+'/'+id).set( obj )
+       .then(  (snaps) => @results( table, 'add', obj,   id ) )
+       .catch( (error) => @onerror( table, 'add', error, id ) )
+    return
 
   get:( table, id, callback ) ->
     @fd.ref(table+'/'+id).once('value' )
-       .then( (snapshot) =>
-          if snapshot? and snapshot.val()?
-            if callback?
-               callback( snapshot.val() )
-            else
-               @results( table, 'get', snapshot.val(), id ) )
-      .catch( (error) =>
-        @onerror( table, 'get', error, id ) )
+       .then(  (snaps) => @firemsg( table, 'get', snaps,  id, null, callback ) )
+       .catch( (error) => @onerror( table,     'get', error, id ) )
     return
 
-  add:( table, id, object  ) ->
-    @fd.ref(table+'/'+id).set( object )
-       .catch( (error) =>
-         @onerror( table, 'add', error, id ) )
-    return
-
-  # Same as add
-  put:( table, id,  object ) ->
-    @fd.ref(table+'/'+id).set( object )
-       .catch( (error) =>
-         @onerror( table, 'put', error, id ) )
+  put:( table, id,  obj ) ->    # Same as add
+    @fd.ref(table+'/'+id).set( obj )
+       .then(  (snaps) => @results( table, 'put', obj,   id ) )
+       .catch( (error) => @onerror( table, 'put', error, id ) )
     return
 
   del:( table, id ) ->
     @fd.ref(table+'/'+id).remove()
-       .catch( (error) =>
-         @onerror( table, 'del', error, id ) )
+       .then(  (snaps) => @firemsg( table,'del', snaps, id ) )
+       .catch( (error) => @onerror( table,    'del', error, id ) )
     return
 
   select:( table, where, callback=null ) ->
     @fd.ref(table).once('value')
-       .then( (snapshot) =>
-        if snapshot? and snapshot.val()?
-          objs = @toObjs( snapshot.val(), where, @keyProp )
-          if callback?
-             callback( objs )
-          else
-             @results( table, 'select', objs ) )
+       .then(  (snaps) => @firemsg( table, 'select', snaps, @keyProp, where, callback ) )
+       .catch( (error) => @onerror( table,     'select', error ) )
     return
 
-  insert:( table, objects ) ->
-    @fd.ref(table).set( objects )
-       .catch( (error) =>
-         @onerror( table, 'insert', error ) )
+  insert:( table, objs) ->
+    @fd.ref(table).set( objs )
+       .then(  (snaps) => @results( table, 'insert', objs  ) )
+       .catch( (error) => @onerror( table, 'insert', error ) )
     return
 
-  update:( table, objects ) ->
-    @fd.ref(table).update( objects )
-       .catch( (error) =>
-         @onerror( table, 'update', error ) )
+  update:( table, objs ) ->
+    @fd.ref(table).update( objs )
+       .then(  (snaps) => @results( table, 'update', objs   ) )
+       .catch( (error) => @onerror( table, 'update', error  ) )
     return
 
-  remove:( table, where ) ->
+  remove:( table, where) ->
     @fd.ref(table).once('value')
-      .then( (snapshot) =>
-      if snapshot? and snapshot.val()?
-        objs = @toObjs( snapshot.val(), where, @keyProp )
-        for own key, obj of objs
-          @del( table, key ) # @fd.ref(table+'/'+key).remove()
-        @results( table, 'select', objs ) )
-    return
-
-  range:( table, beg, end ) ->
-    @fd.ref(table).orderByKey().startAt(beg).endAt(end).once('value' )
-       .then( (snapshot) =>
-          if snapshot? and snapshot.val()?
-            objs = @toObjects( snapshot.val() )
-            @results( table, 'range', objs ) )
-       .catch( (error) =>
-         @onerror( table, 'range', error ) )
-    return
-
-  openTables:( tables ) ->
-    for own table, obj of tables
-      open( table )
-    return
-
-  # Need to learn what opening a table means in firebase
-  # Problem with Firebase sending a socket.io to url/Prac to Intellij server that becomes a 404
-  open:( table ) ->
-    ref = @fd.ref(table)
-    @fd.root().set(table) if not ref
-    # @fd.ref(table).set( {} )
-    #    .catch( (error) =>
-    #      @onerror( table, 'open', error ) )
+       .then( (snaps) =>
+          if @isSnaps(snaps)
+            objs = @toObjects( snaps.val(), where, @keyProp )
+            for own key, obj of objs when where(obj)
+              @del( table, key ) # @fd.ref(table+'/'+key).remove()
+            @results( table, 'remove', objs ) )
+        .catch( (error) => @onerror( table, 'remove', error ) )
     return
 
   # ref.remove() is Dangerous and has removed all tables in Firebase
   drop:( table ) ->
     @fd.ref(table).remove()
-      .catch( (error) =>
-        @onerror( table, 'drop', error ) )
+       .then(  (snaps) => @firemsg( table, 'drop', snaps ) )
+       .catch( (error) => @onerror( table,     'drop', error ) )
     return
 
-  # Sign Anonymously
+  # Have too clarify id with snapshot.key
+  change:( table, id='none', callback=null, Event='put' ) ->
+    path  = if id is 'none' then table else table + '/' + id
+    @fd.ref(path).on( Fire.EventType[Event] ) # , onChange
+       .then(  (snaps) => @firemsg( table, 'change', snaps,null, @keyProp, callback ) )
+       .catch( (error) => @onerror( table,     'change', error ) )
+    return
+
+  range:( table, beg, end ) ->
+    @fd.ref(table).orderByKey().startAt(beg).endAt(end).once('value' )
+      .then( (snaps) => @firemsg( table, 'range', snaps ) )
+      .catch( (error) =>@onerror( table, 'range', error ) )
+    return
+
+  firemsg:( table, op, snaps, id='None',  query=null, callback=null ) ->
+    where = if query? then query else (obj)->true
+    objs  = if @isSnaps(snaps) then @toObjects( snaps.val(), where, @keyProp ) else snaps
+    if callback? then callback(objs) else @results( table, op, objs, id )
+    return
+
+
+  isSnaps:( snaps ) ->
+    snaps? and snaps.val? and snaps.key?
+
+# Sign Anonymously
   auth:( ) ->
     @fb.auth().signInAnonymously()
-       .catch( (error) =>
-         @onerror( 'auth', 'auth', error ) )
+       .then ( (creds) => @results( 'auth', 'auth', creds ) )
+       .catch( (error)             => @onerror( 'auth', 'auth', error ) )
     return
 
 Fire.EventType  = { get:"value", add:"child_added", put:"child_changed", del:"child_removed" }
 
 export default Fire
+
+###
+  console.log( 'Fire.firemsg(snaps)', { table:table, op:op, snaps:snaps.val() } ) if op is 'select'
+  console.log( 'Fire.firemsg(objs )', { table:table, op:op, objs:objs         } ) if op is 'select'
+###
 

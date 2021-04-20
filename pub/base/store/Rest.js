@@ -3,9 +3,9 @@ var Rest;
 import Store from './Store.js';
 
 Rest = class Rest extends Store {
-  constructor(baseUrl) {
-    super();
-    this.baseUtl = baseUrl;
+  constructor(dbName, baseUrl) {
+    super(dbName);
+    this.baseUrl = baseUrl;
     this.key = "id";
   }
 

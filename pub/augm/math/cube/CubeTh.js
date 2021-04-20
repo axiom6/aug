@@ -2,7 +2,7 @@ var CubeTh;
 
 import Util from '../../../base/util/Util.js';
 
-import Data from '../../../base/util/Data.js';
+import Access from '../../../base/util/Access.js';
 
 import Build from '../../../base/util/Build.js';
 
@@ -18,8 +18,8 @@ import {
 
 CubeTh = class CubeTh {
   static load() {
-    Data.local = "http://localhost:63342/aug/app/data/";
-    Data.hosted = "https://ui-48413.firebaseapp.com/";
+    Access.local = "http://localhost:63342/aug/app/data/";
+    Access.hosted = "https://ui-48413.firebaseapp.com/";
     CubeTh.FontUrl = "../../css/font/helvetiker_regular.typeface.json";
     CubeTh.Batch = {
       Info: {
@@ -43,7 +43,7 @@ CubeTh = class CubeTh {
         type: 'Spec'
       }
     };
-    Data.batchRead(CubeTh.Batch, CubeTh.init);
+    Access.batchRead(CubeTh.Batch, CubeTh.init);
   }
 
   static init(batch) {

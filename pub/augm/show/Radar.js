@@ -2,8 +2,6 @@ var Radar;
 
 import Util from '../../base/util/Util.js';
 
-import Data from '../../base/util/Data.js';
-
 import Vis from '../../base/draw/Vis.js';
 
 Radar = class Radar {
@@ -90,8 +88,8 @@ Radar = class Radar {
     ];
     if (this.isRadar()) {
       
-      // Data.asyncJSON( 'draw/Quad.json', (quads) => @doQuads(quads) ) if @isRadar()
-      // Data.asyncJSON( 'draw/Tech.json', (techs) => @doTechs(techs) ) if @isRadar()
+      // Access.asyncJSON( 'draw/Quad.json', (quads) => @doQuads(quads) ) if @isRadar()
+      // Access.asyncJSON( 'draw/Tech.json', (techs) => @doTechs(techs) ) if @isRadar()
       this.doQuads(this.mix.data('Quad'));
     }
     if (this.isRadar()) {

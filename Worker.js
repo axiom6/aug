@@ -377,10 +377,10 @@ Worker.cacheObjsMuse = {
     status: 0,
     url: '/pub/base/util/Util.js'
   },
-  DataJS: {
-    name: 'DataJS',
+  AccessJS: {
+    name: 'AccessJS',
     status: 0,
-    url: '/pub/base/util/Data.js'
+    url: '/pub/base/util/Access.js'
   },
   VisJS: {
     name: 'VisJS',

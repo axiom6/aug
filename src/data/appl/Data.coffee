@@ -1,5 +1,5 @@
 
-import Datb   from '../../base/util/Data.js'
+import Access from '../../base/util/Access.js'
 #mport Build  from '../../base/util/Build.js'
 import Stream from '../../base/util/Stream.js'
 import Nav    from '../../base/nav/Nav.js'
@@ -21,6 +21,7 @@ import SoftJson from '../../../data/inno/Soft.json'
 import DataJson from '../../../data/inno/Data.json'
 import ScieJson from '../../../data/inno/Scie.json'
 import MathJson from '../../../data/inno/Math.json'
+import HuesJson from '../../../data/draw/Hues.json'
 
 
 class Data
@@ -36,7 +37,7 @@ class Data
   Data.start = () ->
     Data.addToHead()
     for key, val of Data.Batch when val.refine? and val.refine
-      val.data = Datb.refine(val.data)
+      val.data = Access.refine(val.data)
     Data.init( Data.Batch )
     return
 
@@ -66,6 +67,7 @@ class Data
     Data:     { url:'inno/Data.json', data:DataJson, refine:true }
     Scie:     { url:'inno/Scie.json', data:ScieJson, refine:true }
     Math:     { url:'inno/Math.json', data:MathJson, refine:true }
+    Hues:     { url:'draw/Hues.json', data:HuesJson, refine:false }
   }
 
   Data.routes = [
@@ -101,8 +103,8 @@ class Data
     Data.touch  = new Touch( Data.stream, Data.nav )
     #ata.build  = new Build( batch, Data.komps )
     #use.cache  = new Cache( Muse.stream )
-    Datb.buildInnov( batch, 'Data',   'Info' )
-    Datb.mergePracs( batch, 'Prin', ['Info','Know','Wise'] ) # 'Data'
+    Access.buildInnov( batch, 'Data',   'Info' )
+    Access.mergePracs( batch, 'Prin', ['Info','Know','Wise'] ) # 'Data'
     #ata.mergeCols()
     try            # A lot can go wrong with vue3 initialization so trap errors
       Data.vue3()

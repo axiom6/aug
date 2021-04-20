@@ -3,9 +3,9 @@ import Store  from './Store.js'
 
 class Rest extends Store
 
-  constructor:( baseUrl ) ->
-    super()
-    @baseUtl = baseUrl
+  constructor:( dbName, baseUrl ) ->
+    super( dbName )
+    @baseUrl = baseUrl
     @key  = "id"
 
   # Rest
@@ -21,7 +21,7 @@ class Rest extends Store
   remove:( table, where   )         -> @sql( 'remove', table, where,   '',null, )
 
   # Table - only partially implemented
-  open:( table )  -> @opTable( 'open', table )
+  show:() ->
   drop:( table )  -> @opTable( 'drop', table )
 
   config:( op ) ->
@@ -106,7 +106,8 @@ class Rest extends Store
     switch op
       when 'add',   'get',    'put',    'del'    then @baseUrl + '/' + table + '/' + id + params
       when 'insert','select', 'update', 'remove' then @baseUrl + '/' + table            + params
-      when 'open',  'show',   'make',   'drop'   then @baseUrl + '/' + table  # No Params
+      when 'drop'                                then @baseUrl + '/' + table            # No Params
+      when 'show',                               then @baseUrl + '/'                    # No Params
       else
         console.error( 'Rest.urlRest() Unknown op', op )
         @baseUrl + '/' + table + '/' + id + params

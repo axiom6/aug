@@ -1,6 +1,6 @@
 var Jitter;
 
-import Data from '../../base/util/Data.js';
+import Access from '../../base/util/Access.js';
 
 import Stream from '../../base/util/Stream.js';
 
@@ -50,7 +50,7 @@ Jitter = (function() {
       for (key in ref) {
         val = ref[key];
         if ((val.refine != null) && val.refine) {
-          val.data = Data.refine(val.data);
+          val.data = Access.refine(val.data);
         }
       }
       Jitter.init(Jitter.Batch);

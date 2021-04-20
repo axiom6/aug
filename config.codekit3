@@ -92,8 +92,8 @@
       "oA" : 0,
       "oAP" : "\/assets\/landscape.png",
       "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
+      "oIPL" : 1,
+      "opt" : 1,
       "oT" : 1,
       "ou" : "lpckwebp-none",
       "q" : 100,
@@ -116,8 +116,8 @@
       "oA" : 0,
       "oAP" : "\/assets\/portrait.png",
       "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
+      "oIPL" : 1,
+      "opt" : 1,
       "oT" : 1,
       "ou" : "lpckwebp-none",
       "q" : 100,
@@ -130,14 +130,6 @@
       "oA" : 1,
       "oAP" : "\/aug.iml",
       "oF" : 1
-    },
-    "\/build\/.gitignore" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/build\/.gitignore",
-      "oF" : 0
     },
     "\/css\/base\/btn.css" : {
       "aP" : 1,
@@ -2284,14 +2276,22 @@
       "oO" : 0,
       "oS" : 1
     },
+    "\/database.rules.json" : {
+      "ft" : 524288,
+      "oA" : 1,
+      "oAP" : "\/database.rules-min.json",
+      "oF" : 0,
+      "oO" : 0,
+      "oS" : 1
+    },
     "\/dist\/assets\/android-chrome-192x192.png" : {
       "ft" : 32768,
       "iS" : 4502,
       "oA" : 0,
       "oAP" : "\/dist\/assets\/android-chrome-192x192.png",
       "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
+      "oIPL" : 1,
+      "opt" : 1,
       "oT" : 1,
       "ou" : "lpckwebp-none",
       "q" : 100,
@@ -2303,8 +2303,8 @@
       "oA" : 0,
       "oAP" : "\/dist\/assets\/android-chrome-512x512.png",
       "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
+      "oIPL" : 1,
+      "opt" : 1,
       "oT" : 1,
       "ou" : "lpckwebp-none",
       "q" : 100,
@@ -2316,8 +2316,8 @@
       "oA" : 0,
       "oAP" : "\/dist\/assets\/apple-touch-icon.png",
       "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
+      "oIPL" : 1,
+      "opt" : 1,
       "oT" : 1,
       "ou" : "lpckwebp-none",
       "q" : 100,
@@ -2494,8 +2494,8 @@
       "oA" : 0,
       "oAP" : "\/dist\/assets\/landscape.png",
       "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
+      "oIPL" : 1,
+      "opt" : 1,
       "oT" : 1,
       "ou" : "lpckwebp-none",
       "q" : 100,
@@ -2518,8 +2518,8 @@
       "oA" : 0,
       "oAP" : "\/dist\/assets\/portrait.png",
       "oF" : 0,
-      "oIPL" : 0,
-      "opt" : 0,
+      "oIPL" : 1,
+      "opt" : 1,
       "oT" : 1,
       "ou" : "lpckwebp-none",
       "q" : 100,
@@ -2570,6 +2570,14 @@
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
+    },
+    "\/firebase-debug.log" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/firebase-debug.log",
+      "oF" : 0
     },
     "\/firebase.json" : {
       "ft" : 524288,
@@ -4690,6 +4698,17 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/pub\/base\/util\/Access.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/base\/util\/Access-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/pub\/base\/util\/Build.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -4708,17 +4727,6 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/pub\/base\/util\/Cache-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/pub\/base\/util\/Data.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/base\/util\/Data-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
@@ -5739,6 +5747,17 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/src\/base\/util\/Access.coffee" : {
+      "ft" : 32,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/base\/util\/Access.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/src\/base\/util\/Build.coffee" : {
       "ft" : 32,
       "ma" : 0,
@@ -5756,17 +5775,6 @@
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/base\/util\/Cache.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/util\/Data.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/util\/Data.js",
       "oF" : 0,
       "oS" : 1,
       "sC" : 0,
@@ -6518,18 +6526,6 @@
       "oAP" : "\/pub\/vue\/data\/store\/Store.js",
       "oF" : 0
     },
-    "\/vue\/data\/store\/tabulator_midnight.css" : {
-      "aP" : 1,
-      "bl" : 0,
-      "ci" : 0,
-      "co" : 0,
-      "ft" : 16,
-      "ma" : 0,
-      "oA" : 1,
-      "oAP" : "\/vue\/data\/store\/tabulator_midnight-min.css",
-      "oF" : 0,
-      "pg" : 0
-    },
     "\/vue\/data\/table\/Table.vue" : {
       "cB" : 0,
       "ft" : 8192,
@@ -6850,7 +6846,7 @@
     "displayValueWasSetByUser" : 1,
     "iconImageName" : "\/assets\/apple-touch-icon.png",
     "iconImageWasSetByUser" : 0,
-    "lastBuiltDate" : 639703028.019979
+    "lastBuiltDate" : 640432674.12511003
   },
   "projectSettings" : {
     "abortBuildOnError" : 1,

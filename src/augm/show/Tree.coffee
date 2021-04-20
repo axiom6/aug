@@ -1,7 +1,6 @@
 
-import Util from '../../base/util/Util.js'
-import Data from '../../base/util/Data.js'
-import Vis  from '../../base/draw/Vis.js'
+import Util   from '../../base/util/Util.js'
+import Vis    from '../../base/draw/Vis.js'
 
 class Tree
 
@@ -21,7 +20,7 @@ class Tree
     @tree.size([@r,@r]) # size([@w,@h])
     @tree.separation( (a,b) => ( if a.parent is b.parent then 5 else 10 ) / a.depth )
     @g.attr("transform", "translate(" + @w*0.5 + "," + @h*0.5 + ")")
-    # Data.asyncJSON( 'draw/Prin.json', (data) => @doRadial(data,@g) )
+    # Access.asyncJSON( 'draw/Prin.json', (data) => @doRadial(data,@g) )
     @doRadial( @mix.data('Tree'), @g )
 
   treeArrange:( arrange ) ->

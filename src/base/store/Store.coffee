@@ -4,7 +4,7 @@ import Data from '../../data/appl/Data.js'
 
 class Store
 
-  constructor:() ->
+  constructor:( @dbName ) ->
     @stream = Data.stream
     @source = @constructor.name
     #console.log( 'Store()', { source:@source } )
@@ -12,9 +12,9 @@ class Store
   toSubject:( table, op ) ->
     table + ':' + op
 
+  # id gets lost
   publish:( table, op, result, id=null ) ->
-    obj = if id? then { "#{id}":result } else result
-    @stream.publish( @toSubject(table,op), obj )
+    @stream.publish( @toSubject(table,op), result )
     return
 
   results:  ( table, op, result, id=null ) ->
@@ -27,7 +27,8 @@ class Store
 
   subscribe:( table, op, source, onSubscribe  ) ->
     if op isnt 'change'
-      @stream.subscribe( @toSubject(table,op), source, onSubscribe )
+      if not @stream.hasSubject( @toSubject(table,op) )
+        @stream.subscribe( @toSubject(table,op), source, onSubscribe )
     else
       for changeOp in Store.changeOps
         @stream.subscribe( @toSubject(table,changeOp), source, onSubscribe )
@@ -46,8 +47,7 @@ class Store
   remove:( table, where=Store.where ) -> # Delete objects from table with where clause
 
   # Table DDL (Data Definition Language)
-  open:(   table ) -> # Create a table with an optional schema
-  show:(   table ) -> # Show all table names
+  show:(         ) -> # Show all table names
   drop:(   table ) -> # Drop the entire @table - good for testing
   change:( table, id='None' ) ->
 
@@ -91,14 +91,12 @@ class Store
   toObjects:( results, where, keyProp='id' ) ->
     if @isArray(results)
       objs = {}
-      for row in results when where(obj)
+      for row in results when where(row)
         objs[row[keyProp]] = row
       objs
-    else if where({}) # Checks if where = (obj) -> true
-      results
     else
       objs = {}
-      for own key,   obj of results when where(obj)
+      for own key, obj of results when where(obj)
          objs[key] = obj
       objs
 

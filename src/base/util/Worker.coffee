@@ -178,7 +178,7 @@ Worker.cacheObjsMuse = {
   Stream:       { name:'Stream',       status:0, url:'/pub/base/util/Stream.js'  }
   Cache:        { name:'Cache',        status:0, url:'/pub/base/util/Cache.js'   }
   UtilJS:       { name:'UtilJS',       status:0, url:'/pub/base/util/Util.js'    }
-  DataJS:       { name:'DataJS',       status:0, url:'/pub/base/util/Data.js'    }
+  AccessJS:     { name:'AccessJS',     status:0, url:'/pub/base/util/Access.js'  }
   VisJS:        { name:'VisJS',        status:0, url:'/pub/base/draw/Vis.js'     }
   NavJS:        { name:'NavJS',        status:0, url:'/pub/base/nav/Nav.js'      }
   BuildJS:      { name:'BuildJS',      status:0, url:'/pub/muse/conn/Build.js'   }

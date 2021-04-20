@@ -1,27 +1,21 @@
 var Index,
-  hasProp = {}.hasOwnProperty,
-  boundMethodCheck = function(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new Error('Bound instance method accessed before binding'); } };
+  hasProp = {}.hasOwnProperty;
 
 import Store from './Store.js';
 
 Index = class Index extends Store {
   constructor(dbName) {
     super();
-    this.insert = this.insert.bind(this);
+    this.db = null;
     this.dbName = dbName;
+    this.dbVersion = 1;
     this.keyPath = 'id';
     window.indexedDB.deleteDatabase(this.dbName);
   }
 
-  async initDB() {
-    async function open(that) {
-      return await that.openDB( that.dbName, that.version() ) };
-    this.db = (await open(this));
-  }
-
-  // console.log( 'Index.initDB()', @db.name, @db.version )
-  openDB(dbName, dbVersion) {
+  openDB(dbName, dbVersion, tables) {
     var dbp;
+    // @db.close() if @db?
     dbp = new Promise((resolve, reject) => {
       var request;
       request = window.indexedDB.open(dbName, dbVersion);
@@ -29,79 +23,79 @@ Index = class Index extends Store {
         var upDb, upTxn;
         upDb = event.target['result'];
         upTxn = event.target['transaction'];
-        this.openStores(upDb, true);
-        // console.log( 'Index.openDB()', 'upgrade', dbName, upDb.objectStoreNames )
+        this.openStores(upDb, tables);
+        // console.log( 'Index.openDB()', 'upgrade', @dbName, upDb.objectStoreNames )
         upTxn.complete;
       };
       request.onsuccess = (event) => {
         var db;
         db = event.target['result'];
-        this.openStores(db, false);
-        // console.log( 'Index.openDB()', 'open',    dbName, db.objectStoreNames )
+        // console.log( 'Index.openDB()', 'open', @dbName )
         resolve(db);
       };
       request.onblocked = () => { // event
-        this.onerror(dbName, 'open', {
+        this.onerror(dbName, 'Index.openDB()', {
           cause: 'Index.openDB() onblocked',
           error: request.error
         });
-        reject();
+        reject('Request blocked');
       };
       return request.onerror = () => {
-        this.onerror(dbName, 'open', {
+        this.onerror(dbName, 'Index.openDB()', {
           cause: 'Index.openDB() onerror',
           error: request.error
         });
-        reject();
+        reject('Request error');
       };
     });
     return dbp;
   }
 
-  openStores(db, isUpgrade) {
-    var obj, ref, table;
-    ref = this.tables;
-    for (table in ref) {
-      if (!hasProp.call(ref, table)) continue;
-      obj = ref[table];
-      this.openStore(db, table, isUpgrade);
+  openStores(upDb, tables) {
+    var i, len, table;
+    for (i = 0, len = tables.length; i < len; i++) {
+      table = tables[i];
+      this.openStore(upDb, table);
     }
   }
 
-  contains(db, table) {
-    return db.objectStoreNames.contains(table);
+  contains(upDb, table) {
+    return upDb.objectStoreNames.contains(table);
   }
 
-  openStore(db, table, isUpgrade) {
-    if (isUpgrade && !this.contains(db, table)) {
-      db.createObjectStore(table, {
+  openStore(upDb, table) {
+    if (!this.contains(upDb, table)) {
+      upDb.createObjectStore(table, {
         keyPath: this.keyPath
       });
     }
   }
 
+  // Need to better handle a missing objectStore
   // st.createIndex( @keyPath, @keyPath, { unique: true } )
   txo(table, mode = "readwrite") {
     var sto, txn;
-    txn = this.db.transaction(table, mode);
-    sto = txn.objectStore(table);
-    return sto;
+    if (this.contains(this.db, table)) {
+      txn = this.db.transaction(table, mode);
+      sto = txn.objectStore(table);
+      return sto;
+    } else {
+      console.error('Index.txo() missing ObjectStore for', table);
+      //hrow new Error('Index.txo() missing ObjectStore for ' + table ) # May not be necessary
+      return null;
+    }
   }
 
-  version() {
-    var dbVersionInt, dbVersionStr;
-    localStorage.setItem('IndexDbVersion', '0');
-    dbVersionStr = localStorage.getItem('IndexDbVersion');
-    dbVersionInt = dbVersionStr != null ? parseInt(dbVersionStr) + 1 : 1;
-    dbVersionStr = dbVersionInt.toString();
-    localStorage.setItem('IndexDbVersion', dbVersionStr);
-    console.log('Index() version', dbVersionStr, dbVersionInt);
-    return dbVersionInt;
+  add(table, id, obj) {
+    var txo;
+    txo = this.txo(table);
+    txo.add(obj);
+    this.results(table, 'add', obj, id);
   }
 
   get(table, id, callback, op = 'get') {
     var req, txo;
-    txo = this.txo(table, 'readonly');
+    txo = this.txo(table);
     req = txo.get(id);
     req.onsuccess = () => {
       if (callback != null) {
@@ -117,47 +111,44 @@ Index = class Index extends Store {
     };
   }
 
-  add(table, id, object) {
+  put(table, id, obj) {
     var txo;
     txo = this.txo(table);
-    txo.add(object); // txn.complete
-  }
-
-  put(table, id, object) {
-    var txo;
-    txo = this.txo(table);
-    txo.put(object);
+    txo.put(obj);
+    this.results(table, 'put', obj, id);
   }
 
   del(table, id) {
     var txo;
     txo = this.txo(table);
     txo['delete'](id);
+    this.results(table, 'del', {}, id); // Latee with obj
   }
 
-  insert(table, objects) {
-    var id, object, txo;
-    boundMethodCheck(this, Index);
+  insert(table, objs) {
+    var id, obj, txo;
     txo = this.txo(table);
-    for (id in objects) {
-      if (!hasProp.call(objects, id)) continue;
-      object = objects[id];
-      txo.add(object);
+    for (id in objs) {
+      if (!hasProp.call(objs, id)) continue;
+      obj = objs[id];
+      txo.add(obj);
     }
+    this.results(table, 'insert', objs);
   }
 
   select(table, where, callback = null) {
     this.traverse(table, where, callback, 'select');
   }
 
-  update(table, objects) {
-    var id, object, txo;
+  update(table, objs) {
+    var id, obj, txo;
     txo = this.txo(table);
-    for (id in objects) {
-      if (!hasProp.call(objects, id)) continue;
-      object = objects[id];
-      txo.put(object);
+    for (id in objs) {
+      if (!hasProp.call(objs, id)) continue;
+      obj = objs[id];
+      txo.put(obj);
     }
+    this.results(table, 'update', objs);
   }
 
   remove(table, where) {
@@ -195,22 +186,67 @@ Index = class Index extends Store {
     };
   }
 
-  open(table) {
-    if (this.db != null) {
-      this.openStore(this.db, table);
-    } else {
-      this.onerror(table, 'open', '@db null for IndexedDB');
+  show() {
+    var key, ref, table, tables;
+    tables = [];
+    ref = this.db.objectStoreNames;
+    for (key in ref) {
+      if (!hasProp.call(ref, key)) continue;
+      table = ref[key];
+      tables.push(table);
     }
+    this.results(this.dbName, 'show', tables);
   }
 
   drop(table) {
-    if (this.db != null) {
+    var error;
+    try {
       this.db.deleteObjectStore(table);
-    } else {
-      this.onerror(table, 'drop', '@db null for IndexedDB');
+      this.results(table, 'drop', {});
+    } catch (error1) {
+      error = error1;
+      this.onerror(table, 'drop', error);
     }
   }
 
 };
 
 export default Index;
+
+/*
+  addTable:( table, id, obj ) ->
+    if not @contains( @db, table )
+      @openDB( @dbName, @dbVersion, [table] )
+        .then( (db) =>
+           @db = db
+           @addHas( table, id, obj )
+           return )
+        .catch( (error) =>
+           @onerror( table, 'addTable', error )
+           return )
+    else
+      @addHas( table, id, obj )
+    return
+
+  initDB:() ->
+    `function open(that) {
+      return await that.openDB( that.dbName, that.version() ) }`
+    @db = open(@)
+    console.log( 'Index.initDB()', @db.name, @db.version )
+    return
+
+  openDatabase:() ->
+    request = @indexedDB.open( @dbName, @dbVersion ) # request = @indexedDB.IDBFactory.open( database, @dbVersion )
+    request.onupgradeneeded = ( event ) =>
+      @dbs = event.target.result
+      @objectStoreNames = @dbs['objectStoreNames']
+      @createObjectStores()
+      console.log( 'Store.IndexedDB', 'upgrade', @dbName, @objectStoreNames )
+    request.onsuccess = ( event ) =>
+      @dbs = event.target.result
+      console.log( 'Store.IndexedDB', 'open',    @dbName, @objectStoreNames )
+      @publish( 'none', 'open', 'none', @dbs.objectStoreNames )
+    request.onerror   = () =>
+      console.error( 'Store.IndexedDB.openDatabase() unable to open', { database:@dbName, error:request.error } )
+      @onError( 'none', 'open', 'none', @dbName, { error:request.error } )
+*/

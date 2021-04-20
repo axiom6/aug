@@ -2,8 +2,8 @@ import Store  from './Store.js'
 
 class Memory extends Store
 
-  constructor:() ->
-    super()
+  constructor:( dbName ) ->
+    super( dbName )
     @tables = {}
 
   table:( t ) ->
@@ -69,22 +69,24 @@ class Memory extends Store
     #console.log( tn, 'update2', objs )
     return
 
-  remove:( tn, where ) ->
+  remove:( tn, where, op='remove' ) ->
     table = @table(tn)
     objs  = {}
     for own key,  obj of table when where(obj)
       objs[key] = obj
       delete table[key]
-    @results( tn, 'remove', objs )
-    #console.log( tn, 'remove2', objs )
+    @results( tn, op, objs )
     return
 
-  open:( tn ) ->
-    if tn is false then {} # Nothing to do. Handled by store
+  show:() ->
+    tables = []
+    for own key, table of @tables
+      tables.push( key )
+    @results( @dbName, 'show', tables )
     return
 
   drop:( tn ) ->
-    if tn is false then {} # Nothing to do. Handled by store
+    #remove( tn, (obj)->true, op='drop' )
     return
 
 export default Memory

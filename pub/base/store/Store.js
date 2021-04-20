@@ -6,7 +6,8 @@ import Util from '../util/Util.js';
 import Data from '../../data/appl/Data.js';
 
 Store = class Store {
-  constructor() {
+  constructor(dbName) {
+    this.dbName = dbName;
     this.stream = Data.stream;
     this.source = this.constructor.name;
   }
@@ -16,12 +17,9 @@ Store = class Store {
     return table + ':' + op;
   }
 
+  // id gets lost
   publish(table, op, result, id = null) {
-    var obj;
-    obj = id != null ? {
-      [`${id}`]: result
-    } : result;
-    this.stream.publish(this.toSubject(table, op), obj);
+    this.stream.publish(this.toSubject(table, op), result);
   }
 
   results(table, op, result, id = null) {
@@ -40,7 +38,9 @@ Store = class Store {
   subscribe(table, op, source, onSubscribe) {
     var changeOp, i, len, ref;
     if (op !== 'change') {
-      this.stream.subscribe(this.toSubject(table, op), source, onSubscribe);
+      if (!this.stream.hasSubject(this.toSubject(table, op))) {
+        this.stream.subscribe(this.toSubject(table, op), source, onSubscribe);
+      }
     } else {
       ref = Store.changeOps;
       for (i = 0, len = ref.length; i < len; i++) {
@@ -71,9 +71,7 @@ Store = class Store {
 
   
     // Table DDL (Data Definition Language)
-  open(table) {} // Create a table with an optional schema
-
-  show(table) {} // Show all table names
+  show() {} // Show all table names
 
   drop(table) {} // Drop the entire @table - good for testing
 
@@ -146,13 +144,11 @@ Store = class Store {
       objs = {};
       for (i = 0, len = results.length; i < len; i++) {
         row = results[i];
-        if (where(obj)) {
+        if (where(row)) {
           objs[row[keyProp]] = row;
         }
       }
       return objs;
-    } else if (where({})) { // Checks if where = (obj) -> true
-      return results;
     } else {
       objs = {};
       for (key in results) {

@@ -2,8 +2,6 @@ var Tree;
 
 import Util from '../../base/util/Util.js';
 
-import Data from '../../base/util/Data.js';
-
 import Vis from '../../base/draw/Vis.js';
 
 Tree = class Tree {
@@ -42,7 +40,7 @@ Tree = class Tree {
       return (a.parent === b.parent ? 5 : 10) / a.depth;
     });
     this.g.attr("transform", "translate(" + this.w * 0.5 + "," + this.h * 0.5 + ")");
-    // Data.asyncJSON( 'draw/Prin.json', (data) => @doRadial(data,@g) )
+    // Access.asyncJSON( 'draw/Prin.json', (data) => @doRadial(data,@g) )
     return this.doRadial(this.mix.data('Tree'), this.g);
   }
 

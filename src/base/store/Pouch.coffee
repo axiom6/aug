@@ -6,7 +6,7 @@ import * as PouchDB from 'pouchdb'
 #(window as any).global = window
 #window.PouchDB = PouchDB
 #import PouchDB from 'pouchdb'
-import * as PouchDBFind from 'pouchdb/dist/pouchdb.find';
+#import * as PouchDBFind from 'pouchdb/dist/pouchdb.find';
 #PouchDB.plugin(PouchDBFind);
 #(window as any).global = window;
 #mport * as PouchDBUpsert from 'pouchdb-upsert/dist/pouchdb.upsert';
@@ -19,8 +19,8 @@ class Pouch extends Store
 
   # adapter: One of 'idb', 'leveldb', or 'http'.
 
-  constructor:( @opts={} ) ->
-    super()
+  constructor:( dbName ) ->
+    super( dbName )
     @tableDBs = {}
 
   db:( table, id='None', obj=null ) ->
@@ -76,7 +76,7 @@ class Pouch extends Store
     db.allDocs( { include_docs:true } )
       .then(  (results) =>
         objs = @toSelectObjects( table, results.rows, where )
-        if callback? then callback(result) else @results( table, 'select', objs ) )
+        if callback? then callback(objs) else @results( table, 'select', objs ) )
       .catch( (error)  =>
         @onerror( table, 'select', error  ) )
     return
@@ -98,12 +98,14 @@ class Pouch extends Store
       .catch( (error)  => @onerror( table, 'remove', error  ) )
     return
 
-  open:( table ) ->
-    db = @db( table )
-    @results( table, 'open', db )
+  show:() ->
+    tables = []
+    for own key, table of @tableDBs
+      tables.push( key )
+    @results( @dbName, 'show', tables )
     return
 
-  show:( table ) ->
+  info:( table ) ->
     db = @db( table )
     db.info()
       .then(  (result) => @results( table, 'show', result ) )

@@ -1,6 +1,6 @@
 
 import Util   from '../util/Util.js'
-import Data   from '../util/Data.js'
+import Access   from '../util/Access.js'
 
 class Build
 
@@ -404,7 +404,7 @@ class Build
           htm  += """        <tr><td>#{plane}:</td><td>#{dim}</td><td>#{learn.name}</td><td>#{doit.name}</td><td>#{share.name}</td></tr>\n"""
         htm += """      </tbody>\n    </table>\n"""
     htm += """  </body>\n</html>\n"""
-    Data.saveHtml( name, htm )
+    Access.saveHtml( name, htm )
     return
 
 

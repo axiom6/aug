@@ -4,8 +4,8 @@ var Memory,
 import Store from './Store.js';
 
 Memory = class Memory extends Store {
-  constructor() {
-    super();
+  constructor(dbName) {
+    super(dbName);
     this.tables = {};
   }
 
@@ -97,7 +97,7 @@ Memory = class Memory extends Store {
   }
 
   //console.log( tn, 'update2', objs )
-  remove(tn, where) {
+  remove(tn, where, op = 'remove') {
     var key, obj, objs, table;
     table = this.table(tn);
     objs = {};
@@ -110,22 +110,24 @@ Memory = class Memory extends Store {
       objs[key] = obj;
       delete table[key];
     }
-    this.results(tn, 'remove', objs);
+    this.results(tn, op, objs);
   }
 
-  //console.log( tn, 'remove2', objs )
-  open(tn) {
-    if (tn === false) { // Nothing to do. Handled by store
-      ({});
+  show() {
+    var key, ref, table, tables;
+    tables = [];
+    ref = this.tables;
+    for (key in ref) {
+      if (!hasProp.call(ref, key)) continue;
+      table = ref[key];
+      tables.push(key);
     }
+    this.results(this.dbName, 'show', tables);
   }
 
-  drop(tn) {
-    if (tn === false) { // Nothing to do. Handled by store
-      ({});
-    }
-  }
+  drop(tn) {}
 
 };
 
+//remove( tn, (obj)->true, op='drop' )
 export default Memory;

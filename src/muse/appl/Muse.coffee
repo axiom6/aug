@@ -1,5 +1,5 @@
 
-import Data   from '../../base/util/Data.js'
+import Access from '../../base/util/Access.js'
 import Build  from '../../base/util/Build.js'
 import Stream from '../../base/util/Stream.js'
 import Nav    from '../../base/nav/Nav.js'
@@ -36,7 +36,7 @@ class Muse
   Muse.start = () ->
     Muse.addToHead()
     for key, val of Muse.Batch when val.refine? and val.refine
-      val.data = Data.refine(val.data)
+      val.data = Access.refine(val.data)
     Muse.init( Muse.Batch )
     return
 
@@ -106,8 +106,8 @@ class Muse
     Muse.touch  = new Touch( Muse.stream, Muse.nav )
     Muse.build  = new Build( batch, Muse.komps )
     #use.cache  = new Cache( Muse.stream )
-    Data.buildInnov( batch, 'Data',   'Info' )
-    Data.mergePracs( batch, 'Prin', ['Info','Know','Wise'] ) # 'Data'
+    Access.buildInnov( batch, 'Data',   'Info' )
+    Access.mergePracs( batch, 'Prin', ['Info','Know','Wise'] ) # 'Data'
     Muse.mergeCols()
     try            # A lot can go wrong with vue3 initialization so trap errors
       Muse.vue3()

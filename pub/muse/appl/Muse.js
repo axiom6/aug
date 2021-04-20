@@ -1,6 +1,6 @@
 var Muse;
 
-import Data from '../../base/util/Data.js';
+import Access from '../../base/util/Access.js';
 
 import Build from '../../base/util/Build.js';
 
@@ -50,7 +50,7 @@ Muse = (function() {
       for (key in ref) {
         val = ref[key];
         if ((val.refine != null) && val.refine) {
-          val.data = Data.refine(val.data);
+          val.data = Access.refine(val.data);
         }
       }
       Muse.init(Muse.Batch);
@@ -88,8 +88,8 @@ Muse = (function() {
       Muse.touch = new Touch(Muse.stream, Muse.nav);
       Muse.build = new Build(batch, Muse.komps);
       //use.cache  = new Cache( Muse.stream )
-      Data.buildInnov(batch, 'Data', 'Info');
-      Data.mergePracs(batch, 'Prin', [
+      Access.buildInnov(batch, 'Data', 'Info');
+      Access.mergePracs(batch, 'Prin', [
         'Info',
         'Know',
         'Wise' // 'Data'

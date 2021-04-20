@@ -13,11 +13,15 @@ import Fire from '../../base/store/Fire.js';
 import Rest from '../../base/store/Rest.js';
 
 Manager = class Manager {
-  constructor() {
+  constructor(mix) {
+    this.mix = mix;
     this.dbName = 'Test';
-    this.tables;
-    this.mix = Data.mix;
+    this.tables = ['Prac', 'Hues'];
+    this.baseUrl = 'http:localhost:3000'; // Placeholder
     this.stream = Data.stream;
+    this.prac = null;
+    this.hues = null;
+    this.kit = null;
   }
 
   test(name) {
@@ -25,19 +29,33 @@ Manager = class Manager {
     store = (function() {
       switch (name) {
         case 'Local':
-          return new Local();
+          return new Local(this.dbName);
         case 'Index':
-          return new Index();
-        //hen 'Pouch' then new Pouch()
-        case 'Fire':
-          return new Fire();
+          return this.openIndex(this.dbName, ['Hues']); // 'Prac',
         case 'Rest':
-          return new Rest();
+          return new Rest(this.dbName, this.baseUrl);
+        //hen 'Pouch' then new Pouch(  @dbName )
+        case 'Fire':
+          return new Fire(this.dbName);
         default:
-          return new Memory();
+          return new Memory(this.dbName);
       }
-    })();
-    this.suite(store);
+    }).call(this);
+    if (name !== 'Index') {
+      this.suite(store);
+    }
+  }
+
+  openIndex(dbName, tables) {
+    var idb;
+    idb = new Index(dbName, ['Prac', 'Hues']);
+    idb.openDB(idb.dbName, idb.dbVersion, tables).then((db) => {
+      idb.db = db;
+      this.suite(idb);
+    }).catch((error) => {
+      idb.onerror(tables, 'openDB', error);
+    });
+    return idb;
   }
 
   subscribe(table, op, store) {
@@ -54,34 +72,28 @@ Manager = class Manager {
   }
 
   suite(store) {
-    var key, prac, ref;
+    console.log('Manager.suite()', store.source);
     this.data();
     this.subscribe('Prac', 'add', store);
     this.subscribe('Prac', 'get', store);
     this.subscribe('Prac', 'put', store);
     this.subscribe('Prac', 'del', store);
-    store.add('Prac', '0', this.prac);
-    store.get('Prac', '0');
-    this.prac.type = 'view';
-    store.put('Prac', '0', this.prac);
-    store.del('Prac', '0');
-    this.subscribe('Pracs', 'insert', store);
-    this.subscribe('Pracs', 'select', store);
-    this.subscribe('Pracs', 'update', store);
-    this.subscribe('Pracs', 'remove', store);
-    store.insert('Pracs', this.pracs);
-    store.select('Pracs', function(obj) {
+    store.add('Prac', this.prac.id, this.prac);
+    store.get('Prac', this.prac.id);
+    store.put('Prac', this.prac.id, this.prac);
+    //tore.del( 'Prac', @prac.id )
+    this.subscribe('Hues', 'insert', store);
+    this.subscribe('Hues', 'select', store);
+    this.subscribe('Hues', 'update', store);
+    this.subscribe('Hues', 'remove', store);
+    store.insert('Hues', this.hues);
+    store.select('Hues', function(obj) {
       return true;
     });
-    ref = this.pracs;
-    for (key in ref) {
-      prac = ref[key];
-      prac.type = 'view';
-    }
-    store.update('Pracs', this.pracs);
-    store.remove('Pracs', function(obj) {
-      return true;
-    });
+    store.update('Hues', this.hues);
+    //tore.remove( 'Hues', (obj) -> true )
+    this.subscribe('Test', 'show', store);
+    store.show();
   }
 
   data() {
@@ -97,7 +109,8 @@ Manager = class Manager {
       "dir": "nw",
       "neg": "Greed"
     };
-    this.pracs = this.mix.inovObject('Info', 'Info');
+    this.hues = this.mix.data('Hues');
+    // console.log( 'Manager.data(@pracs)', @mix, @hues )
     return this.kit = {
       "_id": "mittens",
       "name": "Mittens",

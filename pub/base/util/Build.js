@@ -3,7 +3,7 @@ var Build,
 
 import Util from '../util/Util.js';
 
-import Data from '../util/Data.js';
+import Access from '../util/Access.js';
 
 Build = class Build {
   // ---- Class Methods for Practices ----
@@ -788,7 +788,7 @@ Build = class Build {
       }
     }
     htm += `  </body>\n</html>\n`;
-    Data.saveHtml(name, htm);
+    Access.saveHtml(name, htm);
   }
 
 };

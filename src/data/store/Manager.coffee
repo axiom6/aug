@@ -9,22 +9,40 @@ import Rest   from '../../base/store/Rest.js'
 
 class Manager
 
-  constructor:() ->
-    @dbName = 'Test'
-    @tables
-    @mix    = Data.mix
-    @stream = Data.stream
+  constructor:( @mix ) ->
+    @dbName  = 'Test'
+    @tables  = ['Prac','Hues']
+    @baseUrl = 'http:localhost:3000' # Placeholder
+    @stream  = Data.stream
+    @prac    = null
+    @hues    = null
+    @kit     = null
 
   test:( name ) ->
+
     store = switch name
-      when 'Local' then new Local()
-      when 'Index' then new Index()
-      #hen 'Pouch' then new Pouch()
-      when 'Fire'  then new Fire()
-      when 'Rest'  then new Rest()
-      else              new Memory()
-    @suite( store )
+      when 'Local' then new Local(  @dbName )
+      when 'Index' then @openIndex( @dbName, ['Hues'] )  # 'Prac',
+      when 'Rest'  then new Rest(   @dbName, @baseUrl )
+      #hen 'Pouch' then new Pouch(  @dbName )
+      when 'Fire'  then new Fire(   @dbName )
+      else              new Memory( @dbName )
+
+    @suite( store ) if name isnt 'Index'
+
     return
+
+  openIndex:( dbName, tables ) ->
+    idb = new Index(dbName, ['Prac','Hues'] )
+    idb.openDB( idb.dbName, idb.dbVersion, tables )
+       .then(  (db) =>
+          idb.db   = db
+          @suite( idb )
+          return )
+       .catch( (error) =>
+         idb.onerror( tables, 'openDB', error )
+         return )
+    idb
 
   subscribe:( table, op, store ) ->
     onSubscribe = ( obj ) =>
@@ -32,8 +50,9 @@ class Manager
     store.subscribe( table, op, store.source, onSubscribe )
     return
 
-
   suite:( store ) ->
+
+    console.log( 'Manager.suite()', store.source )
 
     @data()
 
@@ -42,22 +61,23 @@ class Manager
     @subscribe( 'Prac', 'put', store )
     @subscribe( 'Prac', 'del', store )
 
-    store.add(   'Prac', '0', @prac )
-    store.get(   'Prac', '0' )
-    @prac.type = 'view'
-    store.put(   'Prac', '0', @prac )
-    store.del(   'Prac', '0' )
+    store.add( 'Prac', @prac.id, @prac )
+    store.get( 'Prac', @prac.id )
+    store.put( 'Prac', @prac.id, @prac )
+    #tore.del( 'Prac', @prac.id )
 
-    @subscribe( 'Pracs', 'insert', store )
-    @subscribe( 'Pracs', 'select', store )
-    @subscribe( 'Pracs', 'update', store )
-    @subscribe( 'Pracs', 'remove', store )
+    @subscribe( 'Hues', 'insert', store )
+    @subscribe( 'Hues', 'select', store )
+    @subscribe( 'Hues', 'update', store )
+    @subscribe( 'Hues', 'remove', store )
 
-    store.insert( 'Pracs', @pracs )
-    store.select( 'Pracs', (obj) -> true )
-    prac.type = 'view' for key, prac of @pracs
-    store.update( 'Pracs', @pracs )
-    store.remove( 'Pracs', (obj) -> true )
+    store.insert( 'Hues', @hues )
+    store.select( 'Hues', (obj) -> true )
+    store.update( 'Hues', @hues )
+    #tore.remove( 'Hues', (obj) -> true )
+
+    @subscribe( 'Test', 'show', store )
+    store.show()
     return
 
   data:() ->
@@ -66,7 +86,8 @@ class Manager
     "row":"Learn","plane":"Know","icon":"fas fa-users",
     "cells":[5,12,7,12], "dir":"nw", "neg":"Greed" }
 
-    @pracs  = @mix.inovObject( 'Info', 'Info' )
+    @hues  = @mix.data( 'Hues' )
+    # console.log( 'Manager.data(@pracs)', @mix, @hues )
 
     @kit = { "_id": "mittens", "name": "Mittens", "occupation": "kitten", "age": 3,
     "hobbies": [ "playing with balls of yarn", "chasing laser pointers", "lookin' hella cute" ] }

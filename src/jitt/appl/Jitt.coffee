@@ -1,5 +1,5 @@
 
-import Data    from '../../base/util/Data.js'
+import Access  from '../../base/util/Access.js'
 import Stream  from '../../base/util/Stream.js'
 import Touch   from '../../base/nav/Touch.js'
 #mport Cache   from '../../base/util/Cache.js'
@@ -35,7 +35,7 @@ class Jitter
   Jitter.start = () ->
     # Data.batchRead( Jitter.Batch, Jitter.init, Data.refine )
     for key, val of Jitter.Batch when val.refine? and val.refine
-      val.data = Data.refine(val.data)
+      val.data = Access.refine(val.data)
     Jitter.init( Jitter.Batch )
     return
 

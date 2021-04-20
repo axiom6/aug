@@ -2,53 +2,63 @@ import Store  from './Store.js'
 
 class Local extends Store
 
-  constructor:() ->
-    super()
+  constructor:( dbName ) ->
+    super( dbName )
     @tableIds = {}
 
   key:( table, id ) ->
-    table + id
+    @dbName + table + id
 
   obj:( table, id ) ->
     str = localStorage.getItem( @key(table,id) )
-    if str? then JSON.parse(str) else null
+    # console.log( 'Local.obj()', str )
+    if str? then JSON.parse(str) else {}
 
-  addId:( table, id ) ->
+  addId:( table, id, obj ) ->
+    obj.id = id
     @tableIds[table] = [] if not @tableIds[table]?
     @tableIds[table].push(id)
+    return
 
   delId:( table, id ) ->
     @tableIds[table] = [] if not @tableIds[table]?
     @tableIds[table].push(id)
+    return
 
-  get:( table, id, callback=null, op='get' ) ->
+  add:(     table, id, obj, silent=false  )    ->
+    @addId( table, id, obj )
+    localStorage.setItem( @key(table,id), JSON.stringify(obj) )
+    @results( table, 'add', obj, id ) if not silent
+    return
+
+  get:( table, id, callback=null, op='get', silent=false ) ->
     obj = @obj( table, id )
     if obj?
       if callback?
          callback( obj )
       else
-         @results( table, op, obj, id )
+         @results( table, op, obj, id ) if not silent
     else
       @onerror( table, op, { error:"Local get error"}, id )
     return
 
-  add:(     table, id, obj  )    ->
-    @addId( table, id )
+  put:(     table, id, obj, silent=false  ) ->
+    @addId( table, id, obj )
     localStorage.setItem( @key(table,id), JSON.stringify(obj) )
+    @results( table, 'put', obj, id ) if not silent
     return
 
-  put:( table, id, obj ) ->
-    localStorage.setItem( @key(table,id), JSON.stringify(obj) )
-    return
-
-  del:(     table, id ) ->
+  del:(     table, id, silent=false  ) ->
     @delId( table, id )
+    obj = @obj( table, id )
     localStorage.removeItem( @key(table,id) )
+    @results( table, 'del', obj, id )  if not silent
     return
 
   insert:( table, objs ) ->
     for own key, obj of objs
-      @add( table, key, obj )
+      @add( table, key, obj, true )
+    @results( table, 'insert', objs )
     return
 
   select:( table, where, callback=null, op='select' ) ->
@@ -56,7 +66,7 @@ class Local extends Store
     ids  =  @tableIds[table]
     for id in ids
       obj = @obj( table, id )
-      objs[key] = obj if obj? and where(obj)
+      objs[id] = obj if obj? and where(obj)
     if callback?
       callback( objs )
     else
@@ -65,27 +75,48 @@ class Local extends Store
 
   update:( table, objs ) ->
     for own key, obj of objs
-      @put( table, key, obj )
+      @put( table, key, obj, true )
+    @results( table, 'update', objs )
     return
 
-  remove:( table, where ) ->
+  remove:( table, where, silent=false  ) ->
     ids  =  @tableIds[table]
     objs = {}
     for id in ids
       obj = @obj( table, id )
       if obj? and where(obj)
-        @del( table, id )
+        @del( table, id, true )
         objs[id] = obj
-    @results( table, 'remove', objs )
+    @results( table, 'remove', objs ) if not silent
     return
 
-  # Nothing to do until we get ids
-  open:( table ) ->
-    if table is false then {}
+  show:() ->
+    tables = []
+    ptn = /([A-Z][a-z]*)([A-Z][a-z]*)([A-Z][a-z]*)/
+    for i in  [0...localStorage.length]
+      item = localStorage.key(i)
+      if item.startsWith( @dbName )
+         match = ptn.exec( item )
+         # console.log( 'Local.show()', match[1], match[2], match[3] )
+         table = match[2]
+         tables.push( table ) if not tables.includes(table)
+    @results( @dbName, 'show', tables )
     return
 
   drop:( table ) ->
-    @remove( table, (obj)->true )
+    @remove( table, ((obj)->true), true )
+    @results( table, 'drop', {} )
     return
 
 export default Local
+
+###
+  version:() ->
+    localStorage.setItem('IndexDbVersion','0')
+    dbVersionStr = localStorage.getItem('IndexDbVersion')
+    dbVersionInt = if dbVersionStr? then parseInt(dbVersionStr)+1 else 1
+    dbVersionStr = dbVersionInt.toString()
+    localStorage.setItem('IndexDbVersion',dbVersionStr)
+    console.log( 'Index() version', dbVersionStr, dbVersionInt )
+    dbVersionInt
+###

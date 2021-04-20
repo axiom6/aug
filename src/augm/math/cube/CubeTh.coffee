@@ -1,5 +1,5 @@
 import Util          from '../../../base/util/Util.js'
-import Data          from '../../../base/util/Data.js'
+import Access        from '../../../base/util/Access.js'
 import Build         from '../../../base/util/Build.js'
 import Cube3D        from './Cube3D.js'
 import Rect          from './Rect.js'
@@ -9,8 +9,8 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 class CubeTh
 
   @load:() ->
-    Data.local   = "http://localhost:63342/aug/app/data/"
-    Data.hosted  = "https://ui-48413.firebaseapp.com/"
+    Access.local   = "http://localhost:63342/aug/app/data/"
+    Access.hosted  = "https://ui-48413.firebaseapp.com/"
     CubeTh.FontUrl = "../../css/font/helvetiker_regular.typeface.json"
     CubeTh.Batch =
       Info: { url:'muse/Info.json', data:null, type:'Pack' }
@@ -18,7 +18,7 @@ class CubeTh
       Wise: { url:'muse/Wise.json', data:null, type:'Pack' }
       Font: { url:CubeTh.FontUrl,   data:null, type:'Spec' }
 
-    Data.batchRead( CubeTh.Batch, CubeTh.init )
+    Access.batchRead( CubeTh.Batch, CubeTh.init )
     return
 
   @init:( batch ) ->

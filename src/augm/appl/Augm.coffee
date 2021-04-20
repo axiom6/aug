@@ -1,7 +1,7 @@
 
 
 import Load    from './Load.js'
-import Data    from '../../base/util/Data.js'
+import Access  from '../../base/util/Access.js'
 import Stream  from '../../base/util/Stream.js'
 import Nav     from '../../base/nav/Nav.js'
 import Mix     from '../../base/nav/Mix.js'
@@ -106,7 +106,7 @@ class Augm
     Augm.routeNames = Augm.createRouteNames( Augm.routes )
     Augm.addToHead()
     for key, val of Augm.Batch when val.refine? and val.refine
-      val.data = Data.refine(val.data)
+      val.data = Access.refine(val.data)
     Augm.init( Augm.Batch )
     return
 

@@ -5,14 +5,19 @@ import Store from './Store.js';
 
 import * as PouchDB from 'pouchdb';
 
-import * as PouchDBFind from 'pouchdb/dist/pouchdb.find';
-
 Pouch = (function() {
+  //`var global = window`
+  //(window as any).global = window
+  //window.PouchDB = PouchDB
+  //import PouchDB from 'pouchdb'
+  //import * as PouchDBFind from 'pouchdb/dist/pouchdb.find';
+  //PouchDB.plugin(PouchDBFind);
+  //(window as any).global = window;
+  //mport * as PouchDBUpsert from 'pouchdb-upsert/dist/pouchdb.upsert';
   class Pouch extends Store {
     // adapter: One of 'idb', 'leveldb', or 'http'.
-    constructor(opts1 = {}) {
-      super();
-      this.opts = opts1;
+    constructor(dbName) {
+      super(dbName);
       this.tableDBs = {};
     }
 
@@ -96,7 +101,7 @@ Pouch = (function() {
         var objs;
         objs = this.toSelectObjects(table, results.rows, where);
         if (callback != null) {
-          return callback(result);
+          return callback(objs);
         } else {
           return this.results(table, 'select', objs);
         }
@@ -128,13 +133,19 @@ Pouch = (function() {
       });
     }
 
-    open(table) {
-      var db;
-      db = this.db(table);
-      this.results(table, 'open', db);
+    show() {
+      var key, ref, table, tables;
+      tables = [];
+      ref = this.tableDBs;
+      for (key in ref) {
+        if (!hasProp.call(ref, key)) continue;
+        table = ref[key];
+        tables.push(key);
+      }
+      this.results(this.dbName, 'show', tables);
     }
 
-    show(table) {
+    info(table) {
       var db;
       db = this.db(table);
       db.info().then((result) => {
