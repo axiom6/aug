@@ -6,58 +6,129 @@ class Rest extends Store
   constructor:( dbName, baseUrl ) ->
     super( dbName )
     @baseUrl = baseUrl
-    @key  = "id"
 
-  # Rest
-  get:( table, id, callback, path )  -> @rest( 'get',    table, id,null, path, callback )
-  add:( table, id, object,   path )  -> @rest( 'add',    table, id, object,    path )
-  put:( table, id, object,   path )  -> @rest( 'put',    table, id, object,    path )
-  del:( table, id,           path )  -> @rest( 'del',    table, id,null, path )
+  get:( table           ) -> @getter( table )
+  cet:( table, id, call ) -> @rest( 'get',  table, id,null, call )
+  add:( table, id, obj  ) -> @rest( 'add',  table, id, obj    )
+  put:( table, id, obj  ) -> @rest( 'put',  table, id, obj    )
+  del:( table, id       ) -> @rest( 'del',  table, id,null )
 
-  # Sql
-  select:( table, where, callback ) -> @sql( 'select', table, where,   '',null, callback )
-  insert:( table, objects )         -> @sql( 'insert', table,{}, '', objects,    )
-  update:( table, objects )         -> @sql( 'update', table,{}, '', objects,    )
-  remove:( table, where   )         -> @sql( 'remove', table, where,   '',null, )
+  select:( table, where, call ) -> @rest( 'select', table,'None', null, where, call )
+  insert:( table, objs )        -> @rest( 'insert', table,'None', objs )
+  update:( table, objs )        -> @rest( 'update', table,'None', objs )
+  remove:( table, where )       -> @rest( 'remove', table,'None', null, where )
 
-  # Table - only partially implemented
-  show:() ->
-  drop:( table )  -> @opTable( 'drop', table )
+  drop:(   table )              -> @rest( 'drop',   table,'None' )
+  show:()                       -> @rest( 'show','_all_dbs','None' ) # '_all_dbs' for couch
 
-  config:( op ) ->
-    obj = {}
-    obj.method   = @restOp(op)          # *GET, POST, PUT, DELETE
-    obj.mode     = 'cors'               # no-cors, cors, *same-origin
-    obj.cache    = 'no-cache'           # *default, no-cache, reload, force-cache, only-if-cached
-    obj.redirect = 'follow'             # manual, *follow, error
-    obj.referrer = 'no-referrer'        # no-referrer, *client
-    obj.headers  = { 'Content-Type': 'application/json' }
-    obj
-
-  rest:( op, table, id, object=null, path, callback=null ) ->
-    url       = @baseUrl + path
-    settings  = @config( op )
+  rest:( op, table, id, obj=null, where=null, callback=null ) ->
+    url       = @urlRest( op, table )
+    json      = if obj? then JSON.stringify(obj) else null
+    settings  = @config( op, json )
     fetch( url, settings )
       .then( (response) =>
         response.json() )
       .then( (data) =>
-        result = @restResult( object, data )
-        if callback?
-           callback(result)
-        else
-           @results( table, op, result, id ) )
+        result = @restRestResult( op, obj, data, where )
+        if callback? then callback(result) else @results( table, op, result, id ) )
       .catch( (error) =>
-        @onerror( table, op, @toError(url,error), id ) )
+        @onerror( table, op, error, id ) )
     return
 
-  sql:( op, table, where, objects=null, callback=null ) ->
+  getter:( table ) ->
+    url = @urlRest( 'get', table )
+    fetch( url, {
+      method: 'GET',
+      mode:'no-cors',
+      credentials: 'same-origin',
+      redirect: 'follow',
+      agent: null,
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'Basic ' + btoa('admin:athena') } } )
+    return
+
+  config:( op, json ) ->
+    obj = {}                            # 'Access-Control-Allow-Origin'  http://localhost:3000
+    obj.method   = @restOp(op)          # *GET, POST, PUT, DELETE
+    obj.body     = json if json?
+    obj.mode     = 'no-cors'               # no-cors, cors, *same-origin
+    obj.credentials = 'include'         # 'same-origin'
+    obj.cache    = 'no-cache'           # *default, no-cache, reload, force-cache, only-if-cached
+    obj.redirect = 'follow'             # manual, *follow, error
+    obj.referrer = 'no-referrer'        # no-referrer, *client
+    obj.headers  = {
+      "Authorization": 'Basic ' + "admin" + ":" + "athena",
+      "Content-Type":"application/json", "Access-Control-Allow-Origin":"*",
+      "Access-Control-Allow-Credentials":true, "Access-Control-Allow-Methods":"*", "Origin":"http://localhost:3000" }
+    obj
+
+  config2:( op, json ) ->
+    obj = {}                            # 'Access-Control-Allow-Origin'  http://localhost:3000
+    obj.method   = @restOp(op)          # *GET, POST, PUT, DELETE
+    obj.body     = json if json?
+    # console.log( 'Rest.config()', obj.body ) if op is 'add'
+    obj.mode     = 'cors'               # no-cors, cors, *same-origin
+    obj.credentials = 'include'         # 'same-origin'
+    obj.cache    = 'no-cache'           # *default, no-cache, reload, force-cache, only-if-cached
+    obj.redirect = 'follow'             # manual, *follow, error
+    obj.referrer = 'no-referrer'        # no-referrer, *client
+    obj.headers  = {
+      "Authorization": 'Basic ' + "admin" + ":" + "athena",
+      "Content-Type":"application/json", "Access-Control-Allow-Origin":"*",
+      "Access-Control-Allow-Credentials":true, "Access-Control-Allow-Methods":"*", "Origin":"http://localhost:3000" }
+    obj
+
+  restResult:( op, obj, data=null, where ) ->  # obj can also be objs
+    result = {}
+    result = data                      if data? and ( op is 'get'    or op is 'del'    )
+    result = obj                       if obj?  and ( op is 'add'    or op is 'put'    )
+    result = obj                       if obj?  and ( op is 'insert' or op is 'update' )
+    result = @toObjects( data, where ) if data? and ( op is 'select' or op is 'remove' )
+    result = data                      if data? and ( op is 'show'   or op is 'drop'   )
+    result
+
+  urlRest:( op, table ) ->
+    switch op
+      when 'add', 'get', 'put', 'del'   then @baseUrl + '/' + table
+      when 'insert', 'update', 'remove' then @baseUrl + '/' + table + '?batch=ok'
+      when 'drop',   'select'           then @baseUrl + '/' + table
+      when 'show'
+      else
+        console.error( 'Rest.urlRest() Unknown op', op )
+        @baseUrl + '/' + table
+
+  urlRestDB:( op, table ) ->
+    switch op
+      when 'add', 'get', 'put', 'del'   then @baseUrl + '/' + @dbName + '/' + table
+      when 'insert', 'update', 'remove' then @baseUrl + '/' + @dbName + '/' + table + '?batch=ok'
+      when 'drop',   'select'           then @baseUrl + '/' + @dbName + '/' + table
+      when 'show'
+      else
+        console.error( 'Rest.urlRest() Unknown op', op )
+        @baseUrl + '/' + table
+
+  restOp:( op ) ->
+    switch op
+      when 'add', 'insert'         then 'POST'
+      when 'get', 'select', 'show' then 'GET'
+      when 'put', 'update'         then 'PUT'
+      when 'del', 'remove', 'drop' then 'DELETE'
+      else
+        console.error( 'Rest.restOp() Unknown op', op )
+        'GET'
+
+export default Rest
+
+###
+  sql:( op, table, where, objs=null, callback=null ) ->
     url       = @urlRest( op, table,'' )
     settings  = @config( op )
     fetch( url, settings )
       .then( (response) =>
         response.json() )
       .then( (data) =>
-        result = @restResult( objects, data, where )
+        result = @restResult( objs, data, where )
         if callback?
            callback(result)
         else
@@ -66,7 +137,7 @@ class Rest extends Store
         @onerror( table, op, @toError(url,error) ) )
     return
 
-  # Only for open and drop. Needs to be thought out
+    # Only for open and drop. Needs to be thought out
   opTable:( op, table ) ->
     url       = @urlRest( op, t,'' )
     settings  = @config( op )
@@ -80,20 +151,6 @@ class Rest extends Store
         @onerror( table, op, @toError(url,error) ) )
     return
 
-  restResult:( object, data=null, where=()->true ) ->  # object can also be objects
-    ###
-    result = {}
-    result = @toObject(data)                 if data?   and ( op is 'get'  )
-    result = @toKeysJson(data)               if data?   and ( op is 'show' )
-    result = object                          if object? and ( op is 'add' or op is 'put' )
-    result = Util.toObjects(data,where,@key) if data?   and ( op is 'select' or op is 'remove' )
-    result = object                          if object? and ( op is 'insert' or op is 'update' )
-    result = if op is 'show' then @toKeysJson(data) else {}  
-    ###
-    if where is false then {}
-    result = data
-    result
-
   toError:( url, error=null, where=null, options=null ) ->
     obj         = { }
     obj.url     = url
@@ -101,25 +158,4 @@ class Rest extends Store
     obj.where   = where   if where?
     obj.options = options if options?
     obj
-
-  urlRest:( op, table, id='', params='' ) ->
-    switch op
-      when 'add',   'get',    'put',    'del'    then @baseUrl + '/' + table + '/' + id + params
-      when 'insert','select', 'update', 'remove' then @baseUrl + '/' + table            + params
-      when 'drop'                                then @baseUrl + '/' + table            # No Params
-      when 'show',                               then @baseUrl + '/'                    # No Params
-      else
-        console.error( 'Rest.urlRest() Unknown op', op )
-        @baseUrl + '/' + table + '/' + id + params
-
-  restOp:( op ) ->
-    switch op
-      when 'add', 'insert', 'open' then 'POST'
-      when 'get', 'select', 'show' then 'GET'
-      when 'put', 'update', 'make' then 'PUT'
-      when 'del', 'remove', 'drop' then 'DELETE'
-      else
-        console.error( 'Rest.restOp() Unknown op', op )
-        'GET'
-
-export default Rest
+###

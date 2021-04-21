@@ -10,9 +10,9 @@ Store = class Store {
     this.dbName = dbName;
     this.stream = Data.stream;
     this.source = this.constructor.name;
+    this.keyProp = "_id";
   }
 
-  //console.log( 'Store()', { source:@source } )
   toSubject(table, op) {
     return table + ':' + op;
   }
@@ -138,14 +138,17 @@ Store = class Store {
   }
 
   // Utilities
-  toObjects(results, where, keyProp = 'id') {
-    var i, key, len, obj, objs, row;
+  toObjects(results, query) {
+    var i, key, len, obj, objs, row, where;
+    where = query != null ? query : function(obj) {
+      return true;
+    };
     if (this.isArray(results)) {
       objs = {};
       for (i = 0, len = results.length; i < len; i++) {
         row = results[i];
         if (where(row)) {
-          objs[row[keyProp]] = row;
+          objs[row[this.keyProp]] = row;
         }
       }
       return objs;

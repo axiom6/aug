@@ -15,7 +15,7 @@ class Local extends Store
     if str? then JSON.parse(str) else {}
 
   addId:( table, id, obj ) ->
-    obj.id = id
+    obj._id = id
     @tableIds[table] = [] if not @tableIds[table]?
     @tableIds[table].push(id)
     return

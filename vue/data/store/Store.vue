@@ -6,8 +6,8 @@
     <div class="store-memory"><div class="store-title" @click="doTest('Memory')">Memory</div></div>
     <div class="store-local" ><div class="store-title" @click="doTest('Local')" >Local</div></div>
     <div class="store-index" ><div class="store-title" @click="doTest('Index')" >Index</div></div>
-    <div class="store-pouch" ><div class="store-title" @click="doTest('Pouch')" >Pouch</div></div>
     <div class="store-fire"  ><div class="store-title" @click="doTest('Fire')"  >Fire</div></div>
+    <div class="store-rest" ><div class="store-title"  @click="doTest('Rest')"  >Rest</div></div>
   </div>
 </template>
 
@@ -49,9 +49,9 @@ export default Store;
     font-size:3*@storeFS; color:@theme-fore; display:grid; border:@theme-fore solid 1px; }
   .store-index  { position:absolute; left:0;  top:46%; width:100%; height:18%;
     font-size:3*@storeFS; color:@theme-fore; display:grid; border:@theme-fore solid 1px; }
-  .store-pouch  { position:absolute; left:0;  top:64%; width:100%; height:18%;
+  .store-fire   { position:absolute; left:0;  top:64%; width:100%; height:18%;
     font-size:3*@storeFS; color:@theme-fore; display:grid; border:@theme-fore solid 1px; }
-  .store-fire   { position:absolute; left:0;  top:82%; width:100%; height:18%;
+  .store-rest   { position:absolute; left:0;  top:82%; width:100%; height:18%;
     font-size:3*@storeFS; color:@theme-fore; display:grid; border:@theme-fore solid 1px; }
 }
   .store-title { justify-self:center; align-self:center; }

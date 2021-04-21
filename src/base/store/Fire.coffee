@@ -6,7 +6,6 @@ class Fire extends Store
 
   constructor:( dbName ) ->
     super( dbName )
-    @keyProp = 'id'
     @init( @config() )
     #@auth() # Anonomous logins have to be enabled
     @fd = firebase.database()
@@ -72,7 +71,7 @@ class Fire extends Store
     @fd.ref(table).once('value')
        .then( (snaps) =>
           if @isSnaps(snaps)
-            objs = @toObjects( snaps.val(), where, @keyProp )
+            objs = @toObjects( snaps.val(), where )
             for own key, obj of objs when where(obj)
               @del( table, key ) # @fd.ref(table+'/'+key).remove()
             @results( table, 'remove', objs ) )
@@ -102,7 +101,7 @@ class Fire extends Store
 
   firemsg:( table, op, snaps, id='None',  query=null, callback=null ) ->
     where = if query? then query else (obj)->true
-    objs  = if @isSnaps(snaps) then @toObjects( snaps.val(), where, @keyProp ) else snaps
+    objs  = if @isSnaps(snaps) then @toObjects( snaps.val(), where ) else snaps
     if callback? then callback(objs) else @results( table, op, objs, id )
     return
 

@@ -3,16 +3,16 @@ import Data   from '../appl/Data.js'
 import Memory from '../../base/store/Memory.js'
 import Local  from '../../base/store/Local.js'
 import Index  from '../../base/store/Index.js'
-#mport Pouch  from '../../base/store/Pouch.js'
-import Fire   from '../../base/store/Fire.js'
+#mport Fire   from '../../base/store/Fire.js'
 import Rest   from '../../base/store/Rest.js'
 
 class Manager
 
   constructor:( @mix ) ->
-    @dbName  = 'Test'
+    @dbName  = 'test1'
     @tables  = ['Prac','Hues']
-    @baseUrl = 'http:localhost:3000' # Placeholder
+    @credUrl = 'http://admin:athena@127.0.0.1:5984' # Admin host to couchdb
+    @baseUrl = 'http://127.0.0.1:5984'              # Admin host to couchdb
     @stream  = Data.stream
     @prac    = null
     @hues    = null
@@ -24,8 +24,7 @@ class Manager
       when 'Local' then new Local(  @dbName )
       when 'Index' then @openIndex( @dbName, ['Hues'] )  # 'Prac',
       when 'Rest'  then new Rest(   @dbName, @baseUrl )
-      #hen 'Pouch' then new Pouch(  @dbName )
-      when 'Fire'  then new Fire(   @dbName )
+      #hen 'Fire'  then new Fire(   @dbName )
       else              new Memory( @dbName )
 
     @suite( store ) if name isnt 'Index'
@@ -56,70 +55,40 @@ class Manager
 
     @data()
 
-    @subscribe( 'Prac', 'add', store )
-    @subscribe( 'Prac', 'get', store )
-    @subscribe( 'Prac', 'put', store )
-    @subscribe( 'Prac', 'del', store )
+    @subscribe( 'prac',  'add',  store )
+    @subscribe( 'prac',  'get',  store )
+    @subscribe( 'prac',  'put',  store )
+    @subscribe( 'prac',  'del',  store )
+    @subscribe( 'pest1', 'show', store )
 
-    store.add( 'Prac', @prac.id, @prac )
-    store.get( 'Prac', @prac.id )
-    store.put( 'Prac', @prac.id, @prac )
-    #tore.del( 'Prac', @prac.id )
+    #tore.show()
 
-    @subscribe( 'Hues', 'insert', store )
-    @subscribe( 'Hues', 'select', store )
-    @subscribe( 'Hues', 'update', store )
-    @subscribe( 'Hues', 'remove', store )
+    #tore.add( 'prac', @prac._id, @prac )
+    store.get( 'prac', @prac._id )
+    #tore.put( 'prac', @prac._id, @prac )
+    #tore.del( 'prac', @prac._id )
 
-    store.insert( 'Hues', @hues )
-    store.select( 'Hues', (obj) -> true )
-    store.update( 'Hues', @hues )
-    #tore.remove( 'Hues', (obj) -> true )
+    @subscribe( 'hues', 'insert', store )
+    @subscribe( 'hues', 'select', store )
+    @subscribe( 'hues', 'update', store )
+    @subscribe( 'hues', 'remove', store )
 
-    @subscribe( 'Test', 'show', store )
-    store.show()
+    #tore.insert( 'hues', @hues )
+    #tore.select( 'hues', (obj) -> true )
+    #tore.update( 'hues', @hues )
+    #tore.remove( 'hues', (obj) -> true )
     return
 
   data:() ->
 
-    @prac = { id:"Involve", type:"pane", "hsv":[195,90,60],"column":"Embrace",
+    @prac = { "_id":"Involve", "type":"pane", "hsv":[195,90,60],"column":"Embrace",
     "row":"Learn","plane":"Know","icon":"fas fa-users",
     "cells":[5,12,7,12], "dir":"nw", "neg":"Greed" }
 
     @hues  = @mix.data( 'Hues' )
     # console.log( 'Manager.data(@pracs)', @mix, @hues )
 
-    @kit = { "_id": "mittens", "name": "Mittens", "occupation": "kitten", "age": 3,
+    @kit = { "_id":"mittens", "name": "Mittens", "occupation": "kitten", "age": 3,
     "hobbies": [ "playing with balls of yarn", "chasing laser pointers", "lookin' hella cute" ] }
-
-
-  subscribes:( table, store ) ->
-    onSubscribe = {}
-    onSubscribe['add'] = ( obj ) =>
-      console.log( 'Mgr', { table:table, op:'add', source:store.source, obj:obj } )
-    onSubscribe['get'] = ( obj ) =>
-      console.log( 'Mgr', { table:table, op:'get', source:store.source, obj:obj } )
-    onSubscribe['put'] = ( obj ) =>
-      console.log( 'Mgr', { table:table, op:'put', source:store.source, obj:obj } )
-    onSubscribe['del'] = ( obj ) =>
-      console.log( 'Mgr', { table:table, op:'del', source:store.source, obj:obj } )
-    onSubscribe['insert'] = ( obj ) =>
-      console.log( 'Mgr', { table:table, op:'insert', source:store.source, obj:obj } )
-    onSubscribe['select'] = ( obj ) =>
-      console.log( 'Mgr', { table:table, op:'select', source:store.source, obj:obj } )
-    onSubscribe['update'] = ( obj ) =>
-      console.log( 'Mgr', { table:table, op:'update', source:store.source, obj:obj } )
-    onSubscribe['remove'] = ( obj ) =>
-      console.log( 'Mgr', { table:table, op:'remove', source:store.source, obj:obj } )
-    store.subscribe( table, 'add',    store.source, onSubscribe['add']    )
-    store.subscribe( table, 'get',    store.source, onSubscribe['get']    )
-    store.subscribe( table, 'put',    store.source, onSubscribe['put']    )
-    store.subscribe( table, 'del',    store.source, onSubscribe['del']    )
-    store.subscribe( table, 'insert', store.source, onSubscribe['insert'] )
-    store.subscribe( table, 'select', store.source, onSubscribe['select'] )
-    store.subscribe( table, 'update', store.source, onSubscribe['update'] )
-    store.subscribe( table, 'remove', store.source, onSubscribe['remove'] )
-    return
-
 
 export default Manager

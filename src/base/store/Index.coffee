@@ -8,7 +8,6 @@ class Index extends Store
     @db        = null
     @dbName    = dbName
     @dbVersion = 1
-    @keyPath   = 'id'
     window.indexedDB.deleteDatabase( @dbName )
 
   openDB:( dbName, dbVersion, tables ) ->
@@ -48,8 +47,8 @@ class Index extends Store
 
   openStore:( upDb, table ) ->
     if not @contains( upDb, table )
-      upDb.createObjectStore( table, { keyPath:@keyPath } )
-      # st.createIndex( @keyPath, @keyPath, { unique: true } )
+      upDb.createObjectStore( table, { keyProp:@keyProp } )
+      # st.createIndex( @keyProp, @keyProp, { unique: true } )
     return
 
   # Need to better handle a missing objectStore

@@ -1,0 +1,3 @@
+{ "_id":"Involve", "type":"pane", "hsv":[195,90,60],"column":"Embrace",
+  "row":"Learn","plane":"Know","icon":"fas fa-users",
+  "cells":[5,12,7,12], "dir":"nw", "neg":"Greed" }

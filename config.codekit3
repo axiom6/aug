@@ -2571,18 +2571,18 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/firebase-debug.log" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/firebase-debug.log",
-      "oF" : 0
-    },
     "\/firebase.json" : {
       "ft" : 524288,
       "oA" : 1,
       "oAP" : "\/firebase-min.json",
+      "oF" : 0,
+      "oO" : 0,
+      "oS" : 1
+    },
+    "\/Hues.json" : {
+      "ft" : 524288,
+      "oA" : 1,
+      "oAP" : "\/Hues-min.json",
       "oF" : 0,
       "oO" : 0,
       "oS" : 1
@@ -3906,6 +3906,14 @@
       "oAP" : "\/plan.txt",
       "oF" : 1
     },
+    "\/Prac.json" : {
+      "ft" : 524288,
+      "oA" : 1,
+      "oAP" : "\/Prac-min.json",
+      "oF" : 0,
+      "oO" : 0,
+      "oS" : 1
+    },
     "\/pub\/augm\/appl\/Augm.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -4661,17 +4669,6 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/pub\/base\/store\/Memory-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/pub\/base\/store\/Pouch.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/base\/store\/Pouch-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
@@ -5670,6 +5667,14 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/src\/base\/store\/couch.txt" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/base\/store\/couch.txt",
+      "oF" : 0
+    },
     "\/src\/base\/store\/Fire.coffee" : {
       "ft" : 32,
       "ma" : 0,
@@ -5709,17 +5714,6 @@
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/base\/store\/Memory.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/store\/Pouch.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/store\/Pouch.js",
       "oF" : 0,
       "oS" : 1,
       "sC" : 0,

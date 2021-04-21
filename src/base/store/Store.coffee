@@ -5,9 +5,9 @@ import Data from '../../data/appl/Data.js'
 class Store
 
   constructor:( @dbName ) ->
-    @stream = Data.stream
-    @source = @constructor.name
-    #console.log( 'Store()', { source:@source } )
+    @stream  = Data.stream
+    @source  = @constructor.name
+    @keyProp = "_id"
 
   toSubject:( table, op ) ->
     table + ':' + op
@@ -88,11 +88,12 @@ class Store
     return
 
   # Utilities
-  toObjects:( results, where, keyProp='id' ) ->
+  toObjects:( results, query ) ->
+    where = if query? then query else (obj)->true
     if @isArray(results)
       objs = {}
       for row in results when where(row)
-        objs[row[keyProp]] = row
+        objs[row[@keyProp]] = row
       objs
     else
       objs = {}

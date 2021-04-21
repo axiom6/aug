@@ -16,6 +16,9 @@
     "jitt": "node src/jitt/appl/jitt.config.js && firebase use jitt",
     "data": "node src/data/appl/data.config.js && firebase use data-muse",
     "deploy": "firebase deploy",
+    "couchbeg": "/usr/local/etc/rc.d/couchdb start",
+    "couchend": "/usr/local/etc/rc.d/couchdb stop",
+    "couchlog": "/usr/local/etc/rc.d/couchdb status",
     "gram": "src/augm/math/par/gram.sh",
     "test": "node --experimental-modules -r esm  pub/math/test/Run.js"
   },
