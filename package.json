@@ -16,9 +16,6 @@
     "jitt": "node src/jitt/appl/jitt.config.js && firebase use jitt",
     "data": "node src/data/appl/data.config.js && firebase use data-muse",
     "deploy": "firebase deploy",
-    "couchbeg": "/usr/local/etc/rc.d/couchdb start",
-    "couchend": "/usr/local/etc/rc.d/couchdb stop",
-    "couchlog": "/usr/local/etc/rc.d/couchdb status",
     "gram": "src/augm/math/par/gram.sh",
     "test": "node --experimental-modules -r esm  pub/math/test/Run.js"
   },
@@ -32,8 +29,6 @@
     "pegjs": "^0.10.0",
     "pegjs-backtrace": "^0.2.0",
     "postcss": "^8.2.7",
-    "pouchdb": "^7.2.2",
-    "pouchdb-browser": "^7.2.2",
     "rollup": "^2.40.0",
     "rollup-plugin-coffee-script": "^2.0.0",
     "rollup-plugin-less": "^1.1.3",

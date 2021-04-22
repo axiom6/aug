@@ -1,4 +1,5 @@
-var Rest;
+var Rest,
+  hasProp = {}.hasOwnProperty;
 
 import Store from './Store.js';
 
@@ -6,136 +7,120 @@ Rest = class Rest extends Store {
   constructor(dbName, baseUrl) {
     super(dbName);
     this.baseUrl = baseUrl;
-  }
-
-  get(table) {
-    return this.getter(table);
-  }
-
-  cet(table, id, call) {
-    return this.rest('get', table, id, null, call);
+    this.username = 'admin';
+    this.password = 'athena';
   }
 
   add(table, id, obj) {
-    return this.rest('add', table, id, obj);
+    this.put(table, id, obj, 'add');
   }
 
-  put(table, id, obj) {
-    return this.rest('put', table, id, obj);
+  get(table, id, call) {
+    this.rest('get', table, id, null, null, call);
+  }
+
+  put(table, id, obj, op = 'put') {
+    this.rest(op, table, id, obj);
   }
 
   del(table, id) {
-    return this.rest('del', table, id, null);
+    this.rest('del', table, id, null);
   }
 
   select(table, where, call) {
-    return this.rest('select', table, 'None', null, where, call);
+    var docs;
+    docs = {
+      "docs": [
+        {
+          "id": table
+        },
+        {
+          "id": 'pracInvolve'
+        }
+      ]
+    };
+    this.rest('select', table, 'None', docs, where, call);
   }
 
   insert(table, objs) {
-    return this.rest('insert', table, 'None', objs);
+    var docs, key, obj;
+    docs = [];
+    for (key in objs) {
+      if (!hasProp.call(objs, key)) continue;
+      obj = objs[key];
+      obj['id'] = key;
+      obj['_id'] = this.toDocId(table, key);
+      docs.push(obj);
+    }
+    console.log('Rest.insert()', {
+      "docs": docs
+    });
+    this.rest('insert', table, 'None', {
+      "docs": docs
+    });
   }
 
   update(table, objs) {
-    return this.rest('update', table, 'None', objs);
+    var key, obj;
+    for (key in objs) {
+      if (!hasProp.call(objs, key)) continue;
+      obj = objs[key];
+      this.put(table, key, obj, 'update');
+    }
   }
 
   remove(table, where) {
-    return this.rest('remove', table, 'None', null, where);
+    this.rest('remove', table, 'None', null, where);
   }
 
   drop(table) {
-    return this.rest('drop', table, 'None');
+    this.rest('drop', table, 'None');
   }
 
   show() {
-    return this.rest('show', '_all_dbs', 'None'); // '_all_dbs' for couch
+    this.rest('show', this.dbName, 'None'); // Shows all docs in db
   }
 
   rest(op, table, id, obj = null, where = null, callback = null) {
     var json, settings, url;
-    url = this.urlRest(op, table);
+    url = this.urlRest(op, table, id);
     json = obj != null ? JSON.stringify(obj) : null;
     settings = this.config(op, json);
     fetch(url, settings).then((response) => {
       return response.json();
     }).then((data) => {
       var result;
-      result = this.restRestResult(op, obj, data, where);
+      result = this.restResult(op, table, obj, data, where);
       if (callback != null) {
         return callback(result);
       } else {
-        return this.results(table, op, result, id);
+        return this.results(table, op, result);
       }
     }).catch((error) => {
       return this.onerror(table, op, error, id);
     });
   }
 
-  getter(table) {
-    var url;
-    url = this.urlRest('get', table);
-    fetch(url, {
-      method: 'GET',
-      mode: 'no-cors',
-      credentials: 'same-origin',
-      redirect: 'follow',
-      agent: null,
-      headers: {
-        "Content-Type": "application/json",
-        'Authorization': 'Basic ' + btoa('admin:athena')
-      }
-    });
+  headers() {
+    return {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Basic " + btoa(this.username + ":" + this.password)
+    };
   }
 
   config(op, json) {
     var obj;
-    obj = {}; // 'Access-Control-Allow-Origin'  http://localhost:3000
-    obj.method = this.restOp(op); // *GET, POST, PUT, DELETE
+    obj = {};
+    obj.method = this.restOp(op);
     if (json != null) {
       obj.body = json;
     }
-    obj.mode = 'no-cors'; // no-cors, cors, *same-origin
-    obj.credentials = 'include'; // 'same-origin'
-    obj.cache = 'no-cache'; // *default, no-cache, reload, force-cache, only-if-cached
-    obj.redirect = 'follow'; // manual, *follow, error
-    obj.referrer = 'no-referrer'; // no-referrer, *client
-    obj.headers = {
-      "Authorization": 'Basic ' + "admin" + ":" + "athena",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials": true,
-      "Access-Control-Allow-Methods": "*",
-      "Origin": "http://localhost:3000"
-    };
+    obj.headers = this.headers();
     return obj;
   }
 
-  config2(op, json) {
-    var obj;
-    obj = {}; // 'Access-Control-Allow-Origin'  http://localhost:3000
-    obj.method = this.restOp(op); // *GET, POST, PUT, DELETE
-    if (json != null) {
-      obj.body = json;
-    }
-    // console.log( 'Rest.config()', obj.body ) if op is 'add'
-    obj.mode = 'cors'; // no-cors, cors, *same-origin
-    obj.credentials = 'include'; // 'same-origin'
-    obj.cache = 'no-cache'; // *default, no-cache, reload, force-cache, only-if-cached
-    obj.redirect = 'follow'; // manual, *follow, error
-    obj.referrer = 'no-referrer'; // no-referrer, *client
-    obj.headers = {
-      "Authorization": 'Basic ' + "admin" + ":" + "athena",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials": true,
-      "Access-Control-Allow-Methods": "*",
-      "Origin": "http://localhost:3000"
-    };
-    return obj;
-  }
-
-  restResult(op, obj, data = null, where) { // obj can also be objs
+  restResult(op, table, obj, data = null, where) { // obj can also be objs
     var result;
     result = {};
     if ((data != null) && (op === 'get' || op === 'del')) {
@@ -145,10 +130,10 @@ Rest = class Rest extends Store {
       result = obj;
     }
     if ((obj != null) && (op === 'insert' || op === 'update')) {
-      result = obj;
+      result = this.insertObjs(table, obj, data);
     }
     if ((data != null) && (op === 'select' || op === 'remove')) {
-      result = this.toObjects(data, where);
+      result = this.tableObjs(table, obj, data, where);
     }
     if ((data != null) && (op === 'show' || op === 'drop')) {
       result = data;
@@ -156,44 +141,88 @@ Rest = class Rest extends Store {
     return result;
   }
 
-  urlRest(op, table) {
-    switch (op) {
-      case 'add':
-      case 'get':
-      case 'put':
-      case 'del':
-        return this.baseUrl + '/' + table;
-      case 'insert':
-      case 'update':
-      case 'remove':
-        return this.baseUrl + '/' + table + '?batch=ok';
-      case 'drop':
-      case 'select':
-        return this.baseUrl + '/' + table;
-      case 'show':
-        break;
-      default:
-        console.error('Rest.urlRest() Unknown op', op);
-        return this.baseUrl + '/' + table;
+  insertObjs(table, iObj, results) {
+    var i, key, len, oObj, row;
+    oObj = {};
+    for (i = 0, len = results.length; i < len; i++) {
+      row = results[i];
+      key = this.frDocId(row.id).id;
+      oObj[key] = iObj[key];
+      oObj[key].ok = row.ok;
+      oObj[key].rev = row.rev;
+    }
+    return oObj;
+  }
+
+  tableObjs(table, objsIn, results, query) {
+    var i, key, len, obj, objsOp, row, where;
+    where = query != null ? query : function(obj) {
+      return true;
+    };
+    if (this.isArray(results)) {
+      objsOp = {};
+      for (i = 0, len = results.length; i < len; i++) {
+        row = results[i];
+        if (this.whereTable(table, row, where)) {
+          objsOp[row[this.keyProp]] = row;
+        }
+      }
+      return objsOp;
+    } else {
+      objsOp = {};
+      for (key in results) {
+        if (!hasProp.call(results, key)) continue;
+        obj = results[key];
+        if (this.whereTable(table, row, where)) {
+          objsOp[key] = obj;
+        }
+      }
+      return objsOp;
     }
   }
 
-  urlRestDB(op, table) {
+  toDocId(table, id) {
+    return table + id;
+  }
+
+  frDocId(docId) {
+    var match, ptn;
+    ptn = /([a-z]+)([A-Z][a-z]*)/;
+    match = ptn.exec(docId);
+    if (match != null) {
+      return {
+        table: match[1],
+        id: match[2]
+      };
+    } else {
+      return 'prac';
+    }
+  }
+
+  whereTable(obj, table, where) {
+    var tableId;
+    tableId = this.frDocId(obj.id);
+    return tableId.table === table && where(obj);
+  }
+
+  urlRest(op, table, id) {
     switch (op) {
       case 'add':
       case 'get':
       case 'put':
       case 'del':
-        return this.baseUrl + '/' + this.dbName + '/' + table;
-      case 'insert':
+        return this.baseUrl + '/' + this.dbName + '/' + this.toDocId(table, id);
       case 'update':
       case 'remove':
         return this.baseUrl + '/' + this.dbName + '/' + table + '?batch=ok';
-      case 'drop':
+      case 'insert':
+        return this.baseUrl + '/' + this.dbName + '/' + '_bulk_docs';
       case 'select':
-        return this.baseUrl + '/' + this.dbName + '/' + table;
+        return this.baseUrl + '/' + this.dbName + '/' + '_bulk_get';
+      case 'drop':
+        return this.baseUrl + '/' + this.dbName + '/' + this.toDocId(table, id); // Not yet complete
       case 'show':
-        break;
+        return this.baseUrl + '/' + this.dbName + '/' + '_all_docs';
       default:
         console.error('Rest.urlRest() Unknown op', op);
         return this.baseUrl + '/' + table;
@@ -203,12 +232,13 @@ Rest = class Rest extends Store {
   restOp(op) {
     switch (op) {
       case 'add':
-      case 'insert':
-        return 'POST';
+        return 'PUT';
       case 'get':
-      case 'select':
       case 'show':
         return 'GET';
+      case 'select':
+      case 'insert':
+        return 'POST';
       case 'put':
       case 'update':
         return 'PUT';
@@ -227,6 +257,34 @@ Rest = class Rest extends Store {
 export default Rest;
 
 /*
+  <!--script type="text/javascript">var global = window;</script-->
+  <!--script type="text/typescript">(window as any).global = window;</script-->
+
+  config:( op, json ) ->
+    obj = {}                            # 'Access-Control-Allow-Origin'  http://localhost:3000
+    obj.method   = @restOp(op)          # *GET, POST, PUT, DELETE
+    obj.body     = json if json?
+    obj.mode     = 'no-cors'               # no-cors, cors, *same-origin
+    obj.credentials = 'include'         # 'same-origin'
+    obj.cache    = 'no-cache'           # *default, no-cache, reload, force-cache, only-if-cached
+    obj.redirect = 'follow'             # manual, *follow, error
+    obj.referrer = 'no-referrer'        # no-referrer, *client
+    obj.headers  = @headers()
+    obj
+
+  getter:( table ) ->
+    url = @urlRest( 'get', table )
+    fetch( url, {
+      method: 'GET',
+      mode:'no-cors',
+      credentials: 'same-origin',
+      redirect: 'follow',
+      agent: null,
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': 'Basic ' + btoa('admin:athena') } } )
+    return
+
   sql:( op, table, where, objs=null, callback=null ) ->
     url       = @urlRest( op, table,'' )
     settings  = @config( op )

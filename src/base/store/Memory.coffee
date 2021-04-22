@@ -15,7 +15,7 @@ class Memory extends Store
 
   add:( tn, id, obj )    ->
     @table(tn)[id] = obj
-    @results( tn, 'add', obj, id )
+    @results( tn, 'add', obj )
     return
 
   get:( tn, id, callback ) ->
@@ -24,21 +24,21 @@ class Memory extends Store
       if callback?
          callback( obj )
       else
-         @results( tn, 'get', obj, id )
+         @results( tn, 'get', obj )
     else
       @onerror( tn, 'get', { error:'Memory object no found'}, id )
     return
 
   put:( tn, id,  obj ) ->
     @table(tn)[id] = obj
-    @results( tn, 'put', obj, id )
+    @results( tn, 'put', obj )
     return
 
   del:( tn, id ) ->
     obj  = @table(tn)[id]
     if obj?
       delete @table(tn)[id]
-      @results( tn, 'del', obj, id )
+      @results( tn, 'del', obj )
     else
       @onerror( tn, 'get', { error:'Memory object not found'}, id )
     return
@@ -66,7 +66,6 @@ class Memory extends Store
     for own key,   obj of objs
       table[key] = obj
     @results( tn, 'update', objs )
-    #console.log( tn, 'update2', objs )
     return
 
   remove:( tn, where, op='remove' ) ->

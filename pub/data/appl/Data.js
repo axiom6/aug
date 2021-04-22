@@ -45,7 +45,6 @@ Data = (function() {
   class Data {
     static start() {
       var key, ref, val;
-      //`(window as any).global = window`
       Data.addToHead();
       ref = Data.Batch;
       for (key in ref) {

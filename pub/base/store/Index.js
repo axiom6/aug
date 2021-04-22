@@ -9,7 +9,6 @@ Index = class Index extends Store {
     this.db = null;
     this.dbName = dbName;
     this.dbVersion = 1;
-    this.keyPath = 'id';
     window.indexedDB.deleteDatabase(this.dbName);
   }
 
@@ -66,13 +65,13 @@ Index = class Index extends Store {
   openStore(upDb, table) {
     if (!this.contains(upDb, table)) {
       upDb.createObjectStore(table, {
-        keyPath: this.keyPath
+        keyProp: this.keyProp
       });
     }
   }
 
   // Need to better handle a missing objectStore
-  // st.createIndex( @keyPath, @keyPath, { unique: true } )
+  // st.createIndex( @keyProp, @keyProp, { unique: true } )
   txo(table, mode = "readwrite") {
     var sto, txn;
     if (this.contains(this.db, table)) {
@@ -90,7 +89,7 @@ Index = class Index extends Store {
     var txo;
     txo = this.txo(table);
     txo.add(obj);
-    this.results(table, 'add', obj, id);
+    this.results(table, 'add', obj);
   }
 
   get(table, id, callback, op = 'get') {
@@ -103,11 +102,11 @@ Index = class Index extends Store {
           [`${id}`]: req.result
         });
       } else {
-        return this.results(table, op, req.result, id);
+        return this.results(table, op, req.result);
       }
     };
     req.onerror = (error) => {
-      return this.onerror(table, op, error, id);
+      return this.onerror(table, op, error);
     };
   }
 
@@ -115,14 +114,14 @@ Index = class Index extends Store {
     var txo;
     txo = this.txo(table);
     txo.put(obj);
-    this.results(table, 'put', obj, id);
+    this.results(table, 'put', obj);
   }
 
   del(table, id) {
     var txo;
     txo = this.txo(table);
     txo['delete'](id);
-    this.results(table, 'del', {}, id); // Latee with obj
+    this.results(table, 'del', {}); // Latee with obj
   }
 
   insert(table, objs) {

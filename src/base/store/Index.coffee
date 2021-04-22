@@ -65,7 +65,7 @@ class Index extends Store
   add:( table, id, obj ) ->
     txo = @txo( table )
     txo.add( obj )
-    @results( table, 'add', obj, id )
+    @results( table, 'add', obj )
     return
 
   get:( table, id, callback, op='get' ) ->
@@ -75,21 +75,21 @@ class Index extends Store
       if callback?
          callback( { "#{id}":req.result } )
       else
-         @results( table, op, req.result, id )
+         @results( table, op, req.result )
     req.onerror = (error) =>
-      @onerror( table, op, error, id )
+      @onerror( table, op, error )
     return
 
   put:( table, id, obj ) ->
     txo = @txo( table )
     txo.put( obj )
-    @results( table, 'put', obj, id )
+    @results( table, 'put', obj )
     return
 
   del:( table, id ) ->
     txo = @txo( table )
     txo['delete']( id )
-    @results( table, 'del', {}, id ) # Latee with obj
+    @results( table, 'del', {} ) # Latee with obj
     return
 
   insert:( table, objs ) ->

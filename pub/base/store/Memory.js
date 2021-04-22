@@ -20,7 +20,7 @@ Memory = class Memory extends Store {
 
   add(tn, id, obj) {
     this.table(tn)[id] = obj;
-    this.results(tn, 'add', obj, id);
+    this.results(tn, 'add', obj);
   }
 
   get(tn, id, callback) {
@@ -30,7 +30,7 @@ Memory = class Memory extends Store {
       if (callback != null) {
         callback(obj);
       } else {
-        this.results(tn, 'get', obj, id);
+        this.results(tn, 'get', obj);
       }
     } else {
       this.onerror(tn, 'get', {
@@ -41,7 +41,7 @@ Memory = class Memory extends Store {
 
   put(tn, id, obj) {
     this.table(tn)[id] = obj;
-    this.results(tn, 'put', obj, id);
+    this.results(tn, 'put', obj);
   }
 
   del(tn, id) {
@@ -49,7 +49,7 @@ Memory = class Memory extends Store {
     obj = this.table(tn)[id];
     if (obj != null) {
       delete this.table(tn)[id];
-      this.results(tn, 'del', obj, id);
+      this.results(tn, 'del', obj);
     } else {
       this.onerror(tn, 'get', {
         error: 'Memory object not found'
@@ -96,7 +96,6 @@ Memory = class Memory extends Store {
     this.results(tn, 'update', objs);
   }
 
-  //console.log( tn, 'update2', objs )
   remove(tn, where, op = 'remove') {
     var key, obj, objs, table;
     table = this.table(tn);

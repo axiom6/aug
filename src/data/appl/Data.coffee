@@ -35,7 +35,6 @@ class Data
   # Called by muse.html to kick things off
   # 1. Read in all the JSON config files in Muse.Batch. Call Muse.init() when complete.
   Data.start = () ->
-    #`(window as any).global = window`
     Data.addToHead()
     for key, val of Data.Batch when val.refine? and val.refine
       val.data = Access.refine(val.data)

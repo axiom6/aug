@@ -4673,6 +4673,28 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/pub\/base\/store\/Nano.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/base\/store\/Nano-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/pub\/base\/store\/Pouch.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/base\/store\/Pouch-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/pub\/base\/store\/Rest.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -5667,13 +5689,16 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/src\/base\/store\/couch.txt" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
+    "\/src\/base\/store\/Couch.coffee" : {
+      "ft" : 32,
+      "ma" : 0,
+      "mi" : 0,
       "oA" : 0,
-      "oAP" : "\/src\/base\/store\/couch.txt",
-      "oF" : 0
+      "oAP" : "\/pub\/base\/store\/Couch.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
     },
     "\/src\/base\/store\/Fire.coffee" : {
       "ft" : 32,
@@ -5714,28 +5739,6 @@
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/base\/store\/Memory.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/store\/Pouch.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/store\/Pouch.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/store\/Rest.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/store\/Rest.js",
       "oF" : 0,
       "oS" : 1,
       "sC" : 0,

@@ -25,7 +25,7 @@ Local = class Local extends Store {
   }
 
   addId(table, id, obj) {
-    obj.id = id;
+    obj._id = id;
     if (this.tableIds[table] == null) {
       this.tableIds[table] = [];
     }
@@ -43,7 +43,7 @@ Local = class Local extends Store {
     this.addId(table, id, obj);
     localStorage.setItem(this.key(table, id), JSON.stringify(obj));
     if (!silent) {
-      this.results(table, 'add', obj, id);
+      this.results(table, 'add', obj);
     }
   }
 
@@ -55,7 +55,7 @@ Local = class Local extends Store {
         callback(obj);
       } else {
         if (!silent) {
-          this.results(table, op, obj, id);
+          this.results(table, op, obj);
         }
       }
     } else {
@@ -69,7 +69,7 @@ Local = class Local extends Store {
     this.addId(table, id, obj);
     localStorage.setItem(this.key(table, id), JSON.stringify(obj));
     if (!silent) {
-      this.results(table, 'put', obj, id);
+      this.results(table, 'put', obj);
     }
   }
 
@@ -79,7 +79,7 @@ Local = class Local extends Store {
     obj = this.obj(table, id);
     localStorage.removeItem(this.key(table, id));
     if (!silent) {
-      this.results(table, 'del', obj, id);
+      this.results(table, 'del', obj);
     }
   }
 

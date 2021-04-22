@@ -4,8 +4,7 @@ import Memory from '../../base/store/Memory.js'
 import Local  from '../../base/store/Local.js'
 import Index  from '../../base/store/Index.js'
 import Fire   from '../../base/store/Fire.js'
-import Pouch  from '../../base/store/Pouch.js'
-import Rest   from '../../base/store/Rest.js'
+import Couch  from '../../base/store/Couch.js'
 
 class Manager
 
@@ -25,8 +24,7 @@ class Manager
       when 'Local' then new Local(  @dbName )
       when 'Index' then @openIndex( @dbName, ['Hues'] )  # 'Prac',
       when 'Fire'  then new Fire(   @dbName )
-      when 'Pouch' then new Pouch(  @dbName )
-      when 'Rest'  then new Rest(   @dbName, @baseUrl )
+      when 'Couch' then new Couch(  @dbName, @baseUrl )
       else              new Memory( @dbName )
 
     @suite( store ) if name isnt 'Index'
@@ -61,9 +59,9 @@ class Manager
     @subscribe( 'prac',  'get',  store )
     @subscribe( 'prac',  'put',  store )
     @subscribe( 'prac',  'del',  store )
-    @subscribe( 'pest1', 'show', store )
+    @subscribe( @dbName, 'show', store )
 
-    #tore.show()
+    store.show()
 
     #tore.add( 'prac', @prac._id, @prac )
     store.get( 'prac', @prac._id )
@@ -71,12 +69,12 @@ class Manager
     #tore.del( 'prac', @prac._id )
 
     @subscribe( 'hues', 'insert', store )
-    @subscribe( 'hues', 'select', store )
+    @subscribe( 'prac', 'select', store )
     @subscribe( 'hues', 'update', store )
     @subscribe( 'hues', 'remove', store )
 
     #tore.insert( 'hues', @hues )
-    #tore.select( 'hues', (obj) -> true )
+    #tore.select( 'prac', (obj) -> true )
     #tore.update( 'hues', @hues )
     #tore.remove( 'hues', (obj) -> true )
     return

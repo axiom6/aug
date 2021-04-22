@@ -10,9 +10,7 @@ import Index from '../../base/store/Index.js';
 
 import Fire from '../../base/store/Fire.js';
 
-import Pouch from '../../base/store/Pouch.js';
-
-import Rest from '../../base/store/Rest.js';
+import Couch from '../../base/store/Couch.js';
 
 Manager = class Manager {
   constructor(mix) {
@@ -37,10 +35,8 @@ Manager = class Manager {
           return this.openIndex(this.dbName, ['Hues']); // 'Prac',
         case 'Fire':
           return new Fire(this.dbName);
-        case 'Pouch':
-          return new Pouch(this.dbName);
-        case 'Rest':
-          return new Rest(this.dbName, this.baseUrl);
+        case 'Couch':
+          return new Couch(this.dbName, this.baseUrl);
         default:
           return new Memory(this.dbName);
       }
@@ -82,21 +78,20 @@ Manager = class Manager {
     this.subscribe('prac', 'get', store);
     this.subscribe('prac', 'put', store);
     this.subscribe('prac', 'del', store);
-    this.subscribe('pest1', 'show', store);
-    //tore.show()
-
+    this.subscribe(this.dbName, 'show', store);
+    store.show();
     //tore.add( 'prac', @prac._id, @prac )
     store.get('prac', this.prac._id);
     //tore.put( 'prac', @prac._id, @prac )
     //tore.del( 'prac', @prac._id )
     this.subscribe('hues', 'insert', store);
-    this.subscribe('hues', 'select', store);
+    this.subscribe('prac', 'select', store);
     this.subscribe('hues', 'update', store);
     this.subscribe('hues', 'remove', store);
   }
 
   //tore.insert( 'hues', @hues )
-  //tore.select( 'hues', (obj) -> true )
+  //tore.select( 'prac', (obj) -> true )
   //tore.update( 'hues', @hues )
   //tore.remove( 'hues', (obj) -> true )
   data() {

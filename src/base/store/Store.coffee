@@ -13,12 +13,12 @@ class Store
     table + ':' + op
 
   # id gets lost
-  publish:( table, op, result, id=null ) ->
+  publish:( table, op, result ) ->
     @stream.publish( @toSubject(table,op), result )
     return
 
-  results:  ( table, op, result, id=null ) ->
-    @publish( table, op, result, id )
+  results:  ( table, op, result ) ->
+    @publish( table, op, result )
     return
 
   onerror:( table, op, error, id='none' ) ->

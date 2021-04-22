@@ -28,7 +28,7 @@ class Local extends Store
   add:(     table, id, obj, silent=false  )    ->
     @addId( table, id, obj )
     localStorage.setItem( @key(table,id), JSON.stringify(obj) )
-    @results( table, 'add', obj, id ) if not silent
+    @results( table, 'add', obj ) if not silent
     return
 
   get:( table, id, callback=null, op='get', silent=false ) ->
@@ -37,7 +37,7 @@ class Local extends Store
       if callback?
          callback( obj )
       else
-         @results( table, op, obj, id ) if not silent
+         @results( table, op, obj ) if not silent
     else
       @onerror( table, op, { error:"Local get error"}, id )
     return
@@ -45,14 +45,14 @@ class Local extends Store
   put:(     table, id, obj, silent=false  ) ->
     @addId( table, id, obj )
     localStorage.setItem( @key(table,id), JSON.stringify(obj) )
-    @results( table, 'put', obj, id ) if not silent
+    @results( table, 'put', obj ) if not silent
     return
 
   del:(     table, id, silent=false  ) ->
     @delId( table, id )
     obj = @obj( table, id )
     localStorage.removeItem( @key(table,id) )
-    @results( table, 'del', obj, id )  if not silent
+    @results( table, 'del', obj )  if not silent
     return
 
   insert:( table, objs ) ->

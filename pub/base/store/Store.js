@@ -18,12 +18,12 @@ Store = class Store {
   }
 
   // id gets lost
-  publish(table, op, result, id = null) {
+  publish(table, op, result) {
     this.stream.publish(this.toSubject(table, op), result);
   }
 
-  results(table, op, result, id = null) {
-    this.publish(table, op, result, id);
+  results(table, op, result) {
+    this.publish(table, op, result);
   }
 
   onerror(table, op, error, id = 'none') {

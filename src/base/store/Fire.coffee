@@ -27,32 +27,32 @@ class Fire extends Store
 
   add:( table, id, obj ) ->
     @fd.ref(table+'/'+id).set( obj )
-       .then(  (snaps) => @results( table, 'add', obj,   id ) )
-       .catch( (error) => @onerror( table, 'add', error, id ) )
+       .then(  (snaps) => @results( table, 'add', obj   ) )
+       .catch( (error) => @onerror( table, 'add', error ) )
     return
 
   get:( table, id, callback ) ->
     @fd.ref(table+'/'+id).once('value' )
        .then(  (snaps) => @firemsg( table, 'get', snaps,  id, null, callback ) )
-       .catch( (error) => @onerror( table,     'get', error, id ) )
+       .catch( (error) => @onerror( table,     'get', error ) )
     return
 
   put:( table, id,  obj ) ->    # Same as add
     @fd.ref(table+'/'+id).set( obj )
-       .then(  (snaps) => @results( table, 'put', obj,   id ) )
-       .catch( (error) => @onerror( table, 'put', error, id ) )
+       .then(  (snaps) => @results( table, 'put', obj   ) )
+       .catch( (error) => @onerror( table, 'put', error ) )
     return
 
   del:( table, id ) ->
     @fd.ref(table+'/'+id).remove()
        .then(  (snaps) => @firemsg( table,'del', snaps, id ) )
-       .catch( (error) => @onerror( table,    'del', error, id ) )
+       .catch( (error) => @onerror( table,    'del', error ) )
     return
 
   select:( table, where, callback=null ) ->
     @fd.ref(table).once('value')
        .then(  (snaps) => @firemsg( table, 'select', snaps, @keyProp, where, callback ) )
-       .catch( (error) => @onerror( table,     'select', error ) )
+       .catch( (error) => @onerror( table, 'select', error ) )
     return
 
   insert:( table, objs) ->
@@ -82,15 +82,15 @@ class Fire extends Store
   drop:( table ) ->
     @fd.ref(table).remove()
        .then(  (snaps) => @firemsg( table, 'drop', snaps ) )
-       .catch( (error) => @onerror( table,     'drop', error ) )
+       .catch( (error) => @onerror( table, 'drop', error ) )
     return
 
   # Have too clarify id with snapshot.key
   change:( table, id='none', callback=null, Event='put' ) ->
     path  = if id is 'none' then table else table + '/' + id
     @fd.ref(path).on( Fire.EventType[Event] ) # , onChange
-       .then(  (snaps) => @firemsg( table, 'change', snaps,null, @keyProp, callback ) )
-       .catch( (error) => @onerror( table,     'change', error ) )
+       .then(  (snaps) => @firemsg( table, 'change', snaps,null, callback ) )
+       .catch( (error) => @onerror( table, 'change', error ) )
     return
 
   range:( table, beg, end ) ->
@@ -99,10 +99,10 @@ class Fire extends Store
       .catch( (error) =>@onerror( table, 'range', error ) )
     return
 
-  firemsg:( table, op, snaps, id='None',  query=null, callback=null ) ->
+  firemsg:( table, op, snaps, query=null, callback=null ) ->
     where = if query? then query else (obj)->true
     objs  = if @isSnaps(snaps) then @toObjects( snaps.val(), where ) else snaps
-    if callback? then callback(objs) else @results( table, op, objs, id )
+    if callback? then callback(objs) else @results( table, op, objs )
     return
 
 
@@ -113,7 +113,7 @@ class Fire extends Store
   auth:( ) ->
     @fb.auth().signInAnonymously()
        .then ( (creds) => @results( 'auth', 'auth', creds ) )
-       .catch( (error)             => @onerror( 'auth', 'auth', error ) )
+       .catch( (error) => @onerror( 'auth', 'auth', error ) )
     return
 
 Fire.EventType  = { get:"value", add:"child_added", put:"child_changed", del:"child_removed" }

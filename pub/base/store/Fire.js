@@ -8,7 +8,6 @@ import firebase from 'firebase';
 Fire = class Fire extends Store {
   constructor(dbName) {
     super(dbName);
-    this.keyProp = 'id';
     this.init(this.config());
     //@auth() # Anonomous logins have to be enabled
     this.fd = firebase.database();
@@ -33,9 +32,9 @@ Fire = class Fire extends Store {
 
   add(table, id, obj) {
     this.fd.ref(table + '/' + id).set(obj).then((snaps) => {
-      return this.results(table, 'add', obj, id);
+      return this.results(table, 'add', obj);
     }).catch((error) => {
-      return this.onerror(table, 'add', error, id);
+      return this.onerror(table, 'add', error);
     });
   }
 
@@ -43,15 +42,15 @@ Fire = class Fire extends Store {
     this.fd.ref(table + '/' + id).once('value').then((snaps) => {
       return this.firemsg(table, 'get', snaps, id, null, callback);
     }).catch((error) => {
-      return this.onerror(table, 'get', error, id);
+      return this.onerror(table, 'get', error);
     });
   }
 
   put(table, id, obj) { // Same as add
     this.fd.ref(table + '/' + id).set(obj).then((snaps) => {
-      return this.results(table, 'put', obj, id);
+      return this.results(table, 'put', obj);
     }).catch((error) => {
-      return this.onerror(table, 'put', error, id);
+      return this.onerror(table, 'put', error);
     });
   }
 
@@ -59,7 +58,7 @@ Fire = class Fire extends Store {
     this.fd.ref(table + '/' + id).remove().then((snaps) => {
       return this.firemsg(table, 'del', snaps, id);
     }).catch((error) => {
-      return this.onerror(table, 'del', error, id);
+      return this.onerror(table, 'del', error);
     });
   }
 
@@ -91,7 +90,7 @@ Fire = class Fire extends Store {
     this.fd.ref(table).once('value').then((snaps) => {
       var key, obj, objs;
       if (this.isSnaps(snaps)) {
-        objs = this.toObjects(snaps.val(), where, this.keyProp);
+        objs = this.toObjects(snaps.val(), where);
         for (key in objs) {
           if (!hasProp.call(objs, key)) continue;
           obj = objs[key];
@@ -120,7 +119,7 @@ Fire = class Fire extends Store {
     var path;
     path = id === 'none' ? table : table + '/' + id;
     this.fd.ref(path).on(Fire.EventType[Event]).then((snaps) => {
-      return this.firemsg(table, 'change', snaps, null, this.keyProp, callback);
+      return this.firemsg(table, 'change', snaps, null, callback);
     }).catch((error) => {
       return this.onerror(table, 'change', error);
     });
@@ -134,16 +133,16 @@ Fire = class Fire extends Store {
     });
   }
 
-  firemsg(table, op, snaps, id = 'None', query = null, callback = null) {
+  firemsg(table, op, snaps, query = null, callback = null) {
     var objs, where;
     where = query != null ? query : function(obj) {
       return true;
     };
-    objs = this.isSnaps(snaps) ? this.toObjects(snaps.val(), where, this.keyProp) : snaps;
+    objs = this.isSnaps(snaps) ? this.toObjects(snaps.val(), where) : snaps;
     if (callback != null) {
       callback(objs);
     } else {
-      this.results(table, op, objs, id);
+      this.results(table, op, objs);
     }
   }
 
