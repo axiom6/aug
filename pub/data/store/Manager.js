@@ -8,6 +8,10 @@ import Local from '../../base/store/Local.js';
 
 import Index from '../../base/store/Index.js';
 
+import Fire from '../../base/store/Fire.js';
+
+import Pouch from '../../base/store/Pouch.js';
+
 import Rest from '../../base/store/Rest.js';
 
 Manager = class Manager {
@@ -31,10 +35,13 @@ Manager = class Manager {
           return new Local(this.dbName);
         case 'Index':
           return this.openIndex(this.dbName, ['Hues']); // 'Prac',
+        case 'Fire':
+          return new Fire(this.dbName);
+        case 'Pouch':
+          return new Pouch(this.dbName);
         case 'Rest':
           return new Rest(this.dbName, this.baseUrl);
         default:
-          //hen 'Fire'  then new Fire(   @dbName )
           return new Memory(this.dbName);
       }
     }).call(this);

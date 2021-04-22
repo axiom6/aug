@@ -28,3 +28,5 @@ Date	Wed, 21 Apr 2021 03:39:00 GMT
 Server	CouchDB/3.1.1 (Erlang OTP/22)
 X-Couch-Request-ID	32e05b28bd
 X-CouchDB-Body-Time	0
+
+curl -X PUT $CRED/test1/prac/1 -d '{"name":"prac"}'

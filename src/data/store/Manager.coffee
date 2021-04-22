@@ -3,7 +3,8 @@ import Data   from '../appl/Data.js'
 import Memory from '../../base/store/Memory.js'
 import Local  from '../../base/store/Local.js'
 import Index  from '../../base/store/Index.js'
-#mport Fire   from '../../base/store/Fire.js'
+import Fire   from '../../base/store/Fire.js'
+import Pouch  from '../../base/store/Pouch.js'
 import Rest   from '../../base/store/Rest.js'
 
 class Manager
@@ -23,8 +24,9 @@ class Manager
     store = switch name
       when 'Local' then new Local(  @dbName )
       when 'Index' then @openIndex( @dbName, ['Hues'] )  # 'Prac',
+      when 'Fire'  then new Fire(   @dbName )
+      when 'Pouch' then new Pouch(  @dbName )
       when 'Rest'  then new Rest(   @dbName, @baseUrl )
-      #hen 'Fire'  then new Fire(   @dbName )
       else              new Memory( @dbName )
 
     @suite( store ) if name isnt 'Index'
