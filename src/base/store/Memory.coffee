@@ -84,6 +84,9 @@ class Memory extends Store
     @results( @dbName, 'show', tables )
     return
 
+  open:( table ) ->
+    @results( table, 'open', {} )
+
   drop:( tn ) ->
     #remove( tn, (obj)->true, op='drop' )
     return

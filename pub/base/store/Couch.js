@@ -39,7 +39,7 @@ Couch = class Couch extends Store {
       callback: callback,
       ops2: 'select'
     };
-    this.rest('find', table, 'None', this.tableSelect(table), opts);
+    this.rest('find', table, 'None', this.query, opts);
   }
 
   insert(table, objs) {
@@ -65,29 +65,23 @@ Couch = class Couch extends Store {
       where: where,
       ops2: 'remove'
     };
-    this.rest('find', table, 'None', this.tableSelect(table), opts);
-  }
-
-  drop(table) {
-    var opts;
-    opts = {
-      ops2: 'drop'
-    };
-    this.rest('find', table, 'None', this.tableSelect(table), opts);
+    this.rest('find', table, 'None', this.query, opts);
   }
 
   show() {
     this.rest('show', this.dbName, 'None', null, {}); // Shows all docs in db
   }
 
-  tableSelector(table) {
-    return {
-      "selector": {
-        "_table": {
-          "$eq": table
-        }
-      }
-    };
+  open(table) {
+    this.rest('open', table, 'None', null, {});
+  }
+
+  drop(table) {
+    this.rest('drop', table, 'None', null, {});
+  }
+
+  query() {
+    return {};
   }
 
   rest(op1, table, id, obj, opts) {
@@ -133,29 +127,8 @@ Couch = class Couch extends Store {
     return obj;
   }
 
-  restResult(op, table, obj, data = null, where) { // obj can also be objs
-    var result;
-    result = {};
-    if ((data != null) && (op === 'get' || op === 'del')) {
-      result = data;
-    }
-    if ((obj != null) && (op === 'add' || op === 'put')) {
-      result = obj;
-    }
-    if ((obj != null) && (op === 'insert' || op === 'update')) {
-      result = this.insertObjs(table, obj, data);
-    }
-    if ((data != null) && (op === 'select' || op === 'remove')) {
-      result = this.tableObjs(table, obj, data, where);
-    }
-    if ((data != null) && (op === 'show' || op === 'drop')) {
-      result = data;
-    }
-    return result;
-  }
-
-  findDocs(op, table, iDocs, where, call) {
-    var i, iDoc, len, oDocs, query, ref;
+  findDocs(op, table, iDocs, where, callback) {
+    var i, iDoc, len, oDocs, opts, ref;
     oDocs = {
       "docs": []
     };
@@ -170,15 +143,18 @@ Couch = class Couch extends Store {
       }
       oDocs.docs.push(iDoc);
     }
-    query = function(obj) {
-      return true;
+    opts = {
+      where: (function(obj) {
+        return true;
+      }),
+      callback: callback
     };
-    this.rest(op, table, 'None', oDocs, query, call);
+    this.rest(op, table, 'None', oDocs, opts);
   }
 
   setCouchProps(table, id, obj, rev = null, ok = null) {
     obj['id'] = id;
-    obj['_id'] = this.toDocId(table, id);
+    obj['_id'] = id;
     obj['_table'] = table;
     if (rev != null) {
       obj['_rev'] = rev;
@@ -206,7 +182,7 @@ Couch = class Couch extends Store {
     oObj = {};
     for (i = 0, len = results.length; i < len; i++) {
       row = results[i];
-      id = this.frDocId(row.id).id;
+      id = row.id;
       oObj[id] = iObj[key];
       oObj[id] = this.setCouchProps(table, id, oObj[id], row.rev, row.ok);
     }
@@ -222,7 +198,7 @@ Couch = class Couch extends Store {
       objsOp = {};
       for (i = 0, len = results.length; i < len; i++) {
         row = results[i];
-        if (this.whereTable(table, row, where)) {
+        if (where(row)) {
           objsOp[row[this.keyProp]] = row;
         }
       }
@@ -232,7 +208,7 @@ Couch = class Couch extends Store {
       for (key in results) {
         if (!hasProp.call(results, key)) continue;
         obj = results[key];
-        if (this.whereTable(table, row, where)) {
+        if (where(row)) {
           objsOp[key] = obj;
         }
       }
@@ -240,28 +216,25 @@ Couch = class Couch extends Store {
     }
   }
 
-  toDocId(table, id) {
-    return table + id;
-  }
-
-  frDocId(docId) {
-    var match, ptn;
-    ptn = /([a-z]+)([A-Z][a-z]*)/;
-    match = ptn.exec(docId);
-    if (match != null) {
-      return {
-        table: match[1],
-        id: match[2]
-      };
-    } else {
-      return 'prac';
+  restResult(op, table, obj, data = null, where) { // obj can also be objs
+    var result;
+    result = {};
+    if ((data != null) && (op === 'get' || op === 'del')) {
+      result = data;
     }
-  }
-
-  whereTable(obj, table, where) {
-    var tableId;
-    tableId = this.frDocId(obj.id);
-    return tableId.table === table && where(obj);
+    if ((obj != null) && (op === 'add' || op === 'put')) {
+      result = obj;
+    }
+    if ((obj != null) && (op === 'insert' || op === 'update')) {
+      result = this.insertObjs(table, obj, data);
+    }
+    if ((data != null) && (op === 'select' || op === 'remove')) {
+      result = this.tableObjs(table, obj, data, where);
+    }
+    if ((data != null) && (op === 'show' || op === 'drop')) {
+      result = data;
+    }
+    return result;
   }
 
   urlRest(op, table, id) {
@@ -270,18 +243,18 @@ Couch = class Couch extends Store {
       case 'get':
       case 'put':
       case 'del':
-        return this.baseUrl + '/' + this.dbName + '/' + this.toDocId(table, id);
+        return this.baseUrl + '/' + table + '/' + id;
       case 'remove':
-        return this.baseUrl + '/' + this.dbName + '/' + table + '?batch=ok';
+      case 'open':
+      case 'drop':
+        return this.baseUrl + '/' + table;
       case 'insert':
       case 'update':
-        return this.baseUrl + '/' + this.dbName + '/' + '_bulk_docs';
+        return this.baseUrl + '/' + table + '/' + '_bulk_docs';
       case 'select':
-        return this.baseUrl + '/' + this.dbName + '/' + '_bulk_get';
-      case 'drop':
-        return this.baseUrl + '/' + this.dbName + '/' + this.toDocId(table, id); // Not yet complete
+        return this.baseUrl + '/' + table + '/' + '_bulk_get';
       case 'show':
-        return this.baseUrl + '/' + this.dbName + '/' + '_all_docs';
+        return this.baseUrl + '/' + table + '/' + '_all_docs';
       default:
         console.error('Rest.urlRest() Unknown op', op);
         return this.baseUrl + '/' + table;
@@ -292,6 +265,7 @@ Couch = class Couch extends Store {
     switch (op) {
       case 'add':
       case 'put':
+      case 'open':
         return 'PUT';
       case 'get':
       case 'show':
@@ -314,71 +288,3 @@ Couch = class Couch extends Store {
 };
 
 export default Couch;
-
-/*
-  <!--script type="text/javascript">var global = window;</script-->
-  <!--script type="text/typescript">(window as any).global = window;</script-->
-
-  config:( op, json ) ->
-    obj = {}                            # 'Access-Control-Allow-Origin'  http://localhost:3000
-    obj.method   = @restOp(op)          # *GET, POST, PUT, DELETE
-    obj.body     = json if json?
-    obj.mode     = 'no-cors'               # no-cors, cors, *same-origin
-    obj.credentials = 'include'         # 'same-origin'
-    obj.cache    = 'no-cache'           # *default, no-cache, reload, force-cache, only-if-cached
-    obj.redirect = 'follow'             # manual, *follow, error
-    obj.referrer = 'no-referrer'        # no-referrer, *client
-    obj.headers  = @headers()
-    obj
-
-  getter:( table ) ->
-    url = @urlRest( 'get', table )
-    fetch( url, {
-      method: 'GET',
-      mode:'no-cors',
-      credentials: 'same-origin',
-      redirect: 'follow',
-      agent: null,
-      headers: {
-        "Content-Type": "application/json",
-        'Authorization': 'Basic ' + btoa('admin:athena') } } )
-    return
-
-  sql:( op, table, where, objs=null, callback=null ) ->
-    url       = @urlRest( op, table,'' )
-    settings  = @config( op )
-    fetch( url, settings )
-      .then( (response) =>
-        response.json() )
-      .then( (data) =>
-        result = @restResult( objs, data, where )
-        if callback?
-           callback(result)
-        else
-           @results( table, op, result ) )
-      .catch( (error) =>
-        @onerror( table, op, @toError(url,error) ) )
-    return
-
- * Only for open and drop. Needs to be thought out
-  opTable:( op, table ) ->
-    url       = @urlRest( op, t,'' )
-    settings  = @config( op )
-    fetch( url, settings )
-      .then( (response) =>
-        response.json() )
-      .then( (data) =>
-        result = @restResult( null, data )
-        @results( table, op, result ) )
-      .catch( (error) =>
-        @onerror( table, op, @toError(url,error) ) )
-    return
-
-  toError:( url, error=null, where=null, options=null ) ->
-    obj         = { }
-    obj.url     = url
-    obj.error   = error   if error?
-    obj.where   = where   if where?
-    obj.options = options if options?
-    obj
- */

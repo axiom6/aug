@@ -29,7 +29,7 @@ class Couch extends Store
 
   select:( table,  where, callback ) ->
     opts = { where:where, callback:callback, ops2:'select' }
-    @rest( 'find', table, 'None', @tableSelect(table), opts )
+    @rest( 'find', table, 'None', @query, opts )
     return
 
   insert:( table, objs )  ->
@@ -45,20 +45,23 @@ class Couch extends Store
 
   remove:( table, where ) ->
     opts = { where:where, ops2:'remove' }
-    @rest( 'find', table, 'None', @tableSelect(table), opts )
-    return
-
-  drop:( table ) ->
-    opts = { ops2:'drop' }
-    @rest( 'find', table, 'None', @tableSelect(table), opts )
+    @rest( 'find', table, 'None', @query, opts )
     return
 
   show:() ->
     @rest( 'show', @dbName,'None', null, {} ) # Shows all docs in db
     return
 
-  tableSelector:( table ) ->
-    { "selector":{ "_table": { "$eq": table } } }
+  open:( table ) ->
+    @rest( 'open', table, 'None', null, {} )
+    return
+
+  drop:( table ) ->
+    @rest( 'drop', table, 'None', null, {} )
+    return
+
+  query:() ->
+    {}
 
   rest:( op1, table, id, obj, opts ) ->
     url       = @urlRest( op1, table, id )
@@ -89,27 +92,19 @@ class Couch extends Store
     obj.headers  = @headers()
     obj
 
-  restResult:( op, table, obj, data=null, where ) ->  # obj can also be objs
-    result = {}
-    result = data                      if data? and ( op is 'get'    or op is 'del'    )
-    result = obj                       if obj?  and ( op is 'add'    or op is 'put'    )
-    result = @insertObjs( table, obj, data )        if obj?  and ( op is 'insert' or op is 'update' )
-    result = @tableObjs(  table, obj, data, where ) if data? and ( op is 'select' or op is 'remove' )
-    result = data                      if data? and ( op is 'show'   or op is 'drop'   )
-    result
 
-  findDocs:( op, table, iDocs, where, call ) ->
+  findDocs:( op, table, iDocs, where, callback ) ->
     oDocs = { "docs": [] }
     for iDoc in iDocs.docs when where(iDoc)
       iDoc['_deleted'] = true if op is 'remove' or op is 'drop'
       oDocs.docs.push( iDoc )
-    query = (obj)->true
-    @rest( op, table,'None', oDocs, query, call )
+    opts = { where:((obj)->true), callback:callback }
+    @rest( op, table,'None', oDocs, opts )
     return
 
   setCouchProps:( table, id, obj, rev=null, ok=null ) ->
     obj[ 'id']    = id
-    obj['_id']    = @toDocId( table, id )
+    obj['_id']    = id
     obj['_table'] = table
     obj['_rev']   = rev if rev?
     obj.ok        = ok  if ok?
@@ -125,7 +120,7 @@ class Couch extends Store
   insertObjs:( table, iObj, results ) ->
     oObj = {}
     for row in results
-      id = @frDocId(row.id).id
+      id       = row.id
       oObj[id] = iObj[key]
       oObj[id] = @setCouchProps( table, id, oObj[id], row.rev, row.ok )
     oObj
@@ -134,42 +129,38 @@ class Couch extends Store
     where = if query? then query else (obj)->true
     if @isArray(results)
       objsOp = {}
-      for row in results when @whereTable(table,row,where)
+      for row in results when where(row)
         objsOp[row[@keyProp]] = row
       objsOp
     else
       objsOp = {}
-      for own key, obj of results when @whereTable(table,row,where)
+      for own key, obj of results when where(row)
         objsOp[key] = obj
       objsOp
 
-  toDocId:( table, id ) ->
-    table + id
-
-  frDocId:( docId ) ->
-    ptn   = /([a-z]+)([A-Z][a-z]*)/
-    match = ptn.exec( docId )
-    if match? then {table:match[1],id:match[2]} else 'prac'
-
-  whereTable:( obj, table, where ) ->
-    tableId = @frDocId( obj.id )
-    tableId.table is table and where(obj)
+  restResult:( op, table, obj, data=null, where ) ->  # obj can also be objs
+    result = {}
+    result = data                      if data? and ( op is 'get'    or op is 'del'    )
+    result = obj                       if obj?  and ( op is 'add'    or op is 'put'    )
+    result = @insertObjs( table, obj, data )        if obj?  and ( op is 'insert' or op is 'update' )
+    result = @tableObjs(  table, obj, data, where ) if data? and ( op is 'select' or op is 'remove' )
+    result = data                      if data? and ( op is 'show'   or op is 'drop'   )
+    result
 
   urlRest:( op, table, id ) ->
     switch op
-      when 'add','get','put','del' then @baseUrl + '/' + @dbName + '/' + @toDocId(table,id)
-      when 'remove'                then @baseUrl + '/' + @dbName + '/' + table + '?batch=ok'
-      when 'insert', 'update'      then @baseUrl + '/' + @dbName + '/' + '_bulk_docs'
-      when 'select'                then @baseUrl + '/' + @dbName + '/' + '_bulk_get'
-      when 'drop'                  then @baseUrl + '/' + @dbName + '/' + @toDocId(table,id) # Not yet complete
-      when 'show'                  then @baseUrl + '/' + @dbName + '/' + '_all_docs'
+      when 'add','get','put','del' then @baseUrl + '/' + table + '/' + id
+      when 'remove','open','drop'  then @baseUrl + '/' + table
+      when 'insert','update'       then @baseUrl + '/' + table + '/' + '_bulk_docs'
+      when 'select'                then @baseUrl + '/' + table + '/' + '_bulk_get'
+      when 'show'                  then @baseUrl + '/' + table + '/' + '_all_docs'
       else
         console.error( 'Rest.urlRest() Unknown op', op )
         @baseUrl + '/' + table
 
   restOp:( op ) ->
     switch op
-      when 'add', 'put'                      then 'PUT'
+      when 'add', 'put', 'open'              then 'PUT'
       when 'get', 'show'                     then 'GET'
       when 'select','insert','update','find' then 'POST'
       when 'del', 'remove', 'drop'           then 'DELETE'
@@ -178,72 +169,3 @@ class Couch extends Store
         'GET'
 
 export default Couch
-
-###
-  <!--script type="text/javascript">var global = window;</script-->
-  <!--script type="text/typescript">(window as any).global = window;</script-->
-
-  config:( op, json ) ->
-    obj = {}                            # 'Access-Control-Allow-Origin'  http://localhost:3000
-    obj.method   = @restOp(op)          # *GET, POST, PUT, DELETE
-    obj.body     = json if json?
-    obj.mode     = 'no-cors'               # no-cors, cors, *same-origin
-    obj.credentials = 'include'         # 'same-origin'
-    obj.cache    = 'no-cache'           # *default, no-cache, reload, force-cache, only-if-cached
-    obj.redirect = 'follow'             # manual, *follow, error
-    obj.referrer = 'no-referrer'        # no-referrer, *client
-    obj.headers  = @headers()
-    obj
-
-  getter:( table ) ->
-    url = @urlRest( 'get', table )
-    fetch( url, {
-      method: 'GET',
-      mode:'no-cors',
-      credentials: 'same-origin',
-      redirect: 'follow',
-      agent: null,
-      headers: {
-        "Content-Type": "application/json",
-        'Authorization': 'Basic ' + btoa('admin:athena') } } )
-    return
-
-
-  sql:( op, table, where, objs=null, callback=null ) ->
-    url       = @urlRest( op, table,'' )
-    settings  = @config( op )
-    fetch( url, settings )
-      .then( (response) =>
-        response.json() )
-      .then( (data) =>
-        result = @restResult( objs, data, where )
-        if callback?
-           callback(result)
-        else
-           @results( table, op, result ) )
-      .catch( (error) =>
-        @onerror( table, op, @toError(url,error) ) )
-    return
-
-    # Only for open and drop. Needs to be thought out
-  opTable:( op, table ) ->
-    url       = @urlRest( op, t,'' )
-    settings  = @config( op )
-    fetch( url, settings )
-      .then( (response) =>
-        response.json() )
-      .then( (data) =>
-        result = @restResult( null, data )
-        @results( table, op, result ) )
-      .catch( (error) =>
-        @onerror( table, op, @toError(url,error) ) )
-    return
-
-  toError:( url, error=null, where=null, options=null ) ->
-    obj         = { }
-    obj.url     = url
-    obj.error   = error   if error?
-    obj.where   = where   if where?
-    obj.options = options if options?
-    obj
-###

@@ -78,6 +78,12 @@ class Fire extends Store
         .catch( (error) => @onerror( table, 'remove', error ) )
     return
 
+  show:() ->
+    @results( @dbName, 'show', {} )
+
+  open:( table ) ->
+    @results( table, 'open', {} )
+
   # ref.remove() is Dangerous and has removed all tables in Firebase
   drop:( table ) ->
     @fd.ref(table).remove()
@@ -104,7 +110,6 @@ class Fire extends Store
     objs  = if @isSnaps(snaps) then @toObjects( snaps.val(), where ) else snaps
     if callback? then callback(objs) else @results( table, op, objs )
     return
-
 
   isSnaps:( snaps ) ->
     snaps? and snaps.val? and snaps.key?

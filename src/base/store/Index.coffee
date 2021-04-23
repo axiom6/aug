@@ -138,6 +138,9 @@ class Index extends Store
     @results( @dbName, 'show', tables )
     return
 
+  open:( table ) ->
+    @results( table, 'open', {} )
+
   drop:( table ) ->
     try
       @db.deleteObjectStore(table)

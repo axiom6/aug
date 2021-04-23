@@ -197,6 +197,10 @@ Index = class Index extends Store {
     this.results(this.dbName, 'show', tables);
   }
 
+  open(table) {
+    return this.results(table, 'open', {});
+  }
+
   drop(table) {
     var error;
     try {

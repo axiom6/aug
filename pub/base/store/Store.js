@@ -73,6 +73,8 @@ Store = class Store {
     // Table DDL (Data Definition Language)
   show() {} // Show all table names
 
+  open(table) {} // Create a new table. For now only reallt used by CouchDB
+
   drop(table) {} // Drop the entire @table - good for testing
 
   change(table, id = 'None') {}

@@ -90,6 +90,9 @@ class Local extends Store
     @results( table, 'remove', objs ) if not silent
     return
 
+  open:( table ) ->
+    @results( table, 'open', {} )
+
   show:() ->
     tables = []
     ptn = /([A-Z][a-z]*)([A-Z][a-z]*)([A-Z][a-z]*)/

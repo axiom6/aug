@@ -138,6 +138,10 @@ Local = class Local extends Store {
     }
   }
 
+  open(table) {
+    return this.results(table, 'open', {});
+  }
+
   show() {
     var i, item, j, match, ptn, ref, table, tables;
     tables = [];
