@@ -4629,6 +4629,17 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/pub\/base\/store\/Couch.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/pub\/base\/store\/Couch-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/pub\/base\/store\/Fire.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -4669,28 +4680,6 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/pub\/base\/store\/Memory-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/pub\/base\/store\/Nano.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/base\/store\/Nano-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/pub\/base\/store\/Pouch.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/pub\/base\/store\/Pouch-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0

@@ -13,69 +13,68 @@ class Couch extends Store
     @put( table, id, obj, 'add' )
     return
 
-  get:( table, id, call ) ->
-    @rest( 'get', table, id, null, null, call )
+  get:( table, id, callback ) ->
+    opts = { callback:callback }
+    @rest( 'get', table, id, null, opts )
     return
 
   put:( table, id, obj, op='put' ) ->
     obj = @setCouchProps( table, id, obj )
-    @rest( op, table, id, obj )
+    @rest( op, table, id, obj, {} )
     return
 
   del:( table, id ) ->
-    @rest( 'del', table, id,null )
+    @rest( 'del', table, id, null, {} )
     return
 
-  select:( table, where, call ) ->
-    docs = { "docs": [ { "id": table }, { "id": 'pracInvolve' } ] }
-    @rest( 'select', table,'None', docs, where, call )
+  select:( table,  where, callback ) ->
+    opts = { where:where, callback:callback, ops2:'select' }
+    @rest( 'find', table, 'None', @tableSelect(table), opts )
     return
 
   insert:( table, objs )  ->
     docs = @insertDocs( table, objs )
-    console.log( 'Rest.insert()',   { "docs":docs } )
-    @rest( 'insert', table, 'None', { "docs":docs } )
+    #onsole.log( 'Rest.insert()',   { "docs":docs } )
+    @rest( 'insert', table, 'None', { "docs":docs }, {} )
     return
 
   update:( table, objs )  ->
     docs = @insertDocs( table, objs )
-    @rest( 'update', table, 'None', { "docs":docs } )
+    @rest( 'update', table, 'None', { "docs":docs }, {} )
     return
 
   remove:( table, where ) ->
-    @rest( 'remove', table,'None', null, where )
+    opts = { where:where, ops2:'remove' }
+    @rest( 'find', table, 'None', @tableSelect(table), opts )
     return
 
   drop:( table ) ->
-    @rest( 'drop',   table,'None' )
+    opts = { ops2:'drop' }
+    @rest( 'find', table, 'None', @tableSelect(table), opts )
     return
 
   show:() ->
-    @rest( 'show', @dbName,'None' ) # Shows all docs in db
+    @rest( 'show', @dbName,'None', null, {} ) # Shows all docs in db
     return
 
-  find:( table ) ->
-      doc =  { "selector":{ "_table": { "$eq": table } } }
-      url       = @urlRest( op, table, 'None' )
-      settings  = @config( op, doc )
-      fetch( url, settings )
-        .then( (response) =>
-          response.json() )
-        .then( (data) =>
-        .catch( (error) => @onerror( table, 'find', error ) )
+  tableSelector:( table ) ->
+    { "selector":{ "_table": { "$eq": table } } }
 
-  rest:( op, table, id, obj=null, where=null, callback=null ) ->
-    url       = @urlRest( op, table, id )
+  rest:( op1, table, id, obj, opts ) ->
+    url       = @urlRest( op1, table, id )
     json      = if obj? then JSON.stringify(obj) else null
-    settings  = @config( op, json )
+    settings  = @config( op1, json )
     fetch( url, settings )
       .then( (response) =>
         response.json() )
       .then( (data) =>
-        result = @restResult( op, table, obj, data, where )
-        if callback? then callback(result) else @results( table, op, result ) )
+        if op1 is 'find'
+          @findDocs( opts.ops2, table, data, opts.where, opts.callback )
+        else
+          result = @restResult( op1, table, obj, data, opts.where )
+          if opts.callback? then opts.callback(result) else @results( table, op1, result ) )
       .catch( (error) =>
-        @onerror( table, op, error ) )
+        @onerror( table, op1, error ) )
     return
 
   headers:() -> {
@@ -98,6 +97,15 @@ class Couch extends Store
     result = @tableObjs(  table, obj, data, where ) if data? and ( op is 'select' or op is 'remove' )
     result = data                      if data? and ( op is 'show'   or op is 'drop'   )
     result
+
+  findDocs:( op, table, iDocs, where, call ) ->
+    oDocs = { "docs": [] }
+    for iDoc in iDocs.docs when where(iDoc)
+      iDoc['_deleted'] = true if op is 'remove' or op is 'drop'
+      oDocs.docs.push( iDoc )
+    query = (obj)->true
+    @rest( op, table,'None', oDocs, query, call )
+    return
 
   setCouchProps:( table, id, obj, rev=null, ok=null ) ->
     obj[ 'id']    = id
