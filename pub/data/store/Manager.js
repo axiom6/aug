@@ -72,12 +72,11 @@ Manager = class Manager {
   }
 
   suite(store) {
-    var where;
     console.log('Manager.suite()', store.source);
     this.data();
     this.subscribe('prac', 'add', store);
     this.subscribe('prac', 'get', store);
-    this.subscribe('prac', 'put', store);
+    this.subscribe('hues', 'put', store);
     this.subscribe('prac', 'del', store);
     this.subscribe(this.dbName, 'show', store);
     this.subscribe('hues', 'open', store);
@@ -87,21 +86,24 @@ Manager = class Manager {
     store.show();
     //tore.add( 'prac', @prac.id, @prac )
     //tore.get( 'prac', @prac.id )
-    //tore.put( 'prac', @prac.id, @prac )
+    this.hues['Green'].column = 'Embrace';
+    this.hues['Green']._rev = "3-3ec7f175f1d3920f3d02c7d16c4a6737";
+    //store.put( 'hues', 'Green', @hues['Green'] )
     //tore.del( 'prac', @prac.id )
     this.subscribe('hues', 'insert', store);
     this.subscribe('hues', 'select', store);
     this.subscribe('hues', 'update', store);
     this.subscribe('hues', 'remove', store);
-    //tore.insert( 'hues', @hues )
-    //tore.select( 'hues', (obj) -> true )
-    //tore.update( 'hues', @hues )
-    where = function(obj) {
-      return obj.column === 'Embrace';
-    };
-    store.remove('hues', where);
   }
 
+  //tore.insert( 'hues', @hues )
+  //tore.select( 'hues', (obj) -> true )
+  //@hues['Green'].column  = 'Embrace'
+  //@hues['Orange'].column = 'Embrace'
+  //@hues['Violet'].column = 'Embrace'
+  //tore.update( 'hues', @hues )
+  //here = (obj) -> obj.column is 'Embrace'
+  //tore.remove( 'hues', where )
   data() {
     this.prac = {
       "_id": "Involve",

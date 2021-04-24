@@ -57,7 +57,7 @@ class Manager
 
     @subscribe( 'prac',  'add',  store )
     @subscribe( 'prac',  'get',  store )
-    @subscribe( 'prac',  'put',  store )
+    @subscribe( 'hues',  'put',  store )
     @subscribe( 'prac',  'del',  store )
     @subscribe( @dbName, 'show', store )
     @subscribe( 'hues',  'open', store )
@@ -70,7 +70,9 @@ class Manager
 
     #tore.add( 'prac', @prac.id, @prac )
     #tore.get( 'prac', @prac.id )
-    #tore.put( 'prac', @prac.id, @prac )
+    @hues['Green'].column  = 'Embrace'
+    @hues['Green']._rev    = "3-3ec7f175f1d3920f3d02c7d16c4a6737"
+    #store.put( 'hues', 'Green', @hues['Green'] )
     #tore.del( 'prac', @prac.id )
 
     @subscribe( 'hues', 'insert', store )
@@ -80,9 +82,12 @@ class Manager
 
     #tore.insert( 'hues', @hues )
     #tore.select( 'hues', (obj) -> true )
+    #@hues['Green'].column  = 'Embrace'
+    #@hues['Orange'].column = 'Embrace'
+    #@hues['Violet'].column = 'Embrace'
     #tore.update( 'hues', @hues )
-    where = (obj) -> obj.column is 'Embrace'
-    store.remove( 'hues', where )
+    #here = (obj) -> obj.column is 'Embrace'
+    #tore.remove( 'hues', where )
     return
 
   data:() ->

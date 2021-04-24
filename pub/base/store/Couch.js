@@ -333,7 +333,6 @@ Couch = class Couch extends Store {
 
   restOp(op) {
     switch (op) {
-      case 'put':
       case 'open':
         return 'PUT';
       case 'get':
@@ -345,6 +344,7 @@ Couch = class Couch extends Store {
       case 'remove':
       case 'find':
       case 'add':
+      case 'put':
         return 'POST';
       case 'del':
       case 'drop':

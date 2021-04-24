@@ -194,10 +194,10 @@ class Couch extends Store
 
   restOp:( op ) ->
     switch op
-      when 'put', 'open'          then 'PUT'
-      when 'get', 'select','show' then 'GET'
-      when 'insert','update','remove','find','add' then 'POST'
-      when 'del', 'drop'          then 'DELETE'
+      when 'open'                                        then 'PUT'
+      when 'get', 'select','show'                        then 'GET'
+      when 'insert','update','remove','find','add','put' then 'POST'
+      when 'del', 'drop'                                 then 'DELETE'
       else
         console.error( 'Rest.restOp() Unknown op', op )
         'GET'
