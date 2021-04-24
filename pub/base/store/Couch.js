@@ -11,6 +11,7 @@ Couch = class Couch extends Store {
     this.password = 'athena';
   }
 
+  // obj: {error: "not_found", reason: "missing"}
   add(table, id, obj) {
     this.put(table, id, obj, 'add');
   }
@@ -33,55 +34,80 @@ Couch = class Couch extends Store {
   }
 
   select(table, where, callback) {
-    var opts;
+    var opts, selector;
+    selector = this.findSelect(table);
     opts = {
       where: where,
       callback: callback,
-      ops2: 'select'
+      op2: "select"
     };
-    this.rest('find', table, 'None', this.query, opts);
+    this.rest('find', table, 'None', selector, opts);
   }
 
   insert(table, objs) {
-    var docs;
+    var docs, opts;
     docs = this.insertDocs(table, objs);
-    //onsole.log( 'Rest.insert()',   { "docs":docs } )
+    opts = {
+      objs: objs
+    };
     this.rest('insert', table, 'None', {
       "docs": docs
-    }, {});
+    }, opts);
   }
 
   update(table, objs) {
-    var docs;
+    var docs, opts;
     docs = this.insertDocs(table, objs);
+    opts = {
+      objs: objs
+    };
     this.rest('update', table, 'None', {
       "docs": docs
-    }, {});
+    }, opts);
   }
 
   remove(table, where) {
-    var opts;
+    var opts, selector;
+    selector = this.findSelect(table);
     opts = {
       where: where,
-      ops2: 'remove'
+      op2: 'remove'
     };
-    this.rest('find', table, 'None', this.query, opts);
+    this.rest('find', table, 'None', selector, opts);
   }
 
   show() {
     this.rest('show', this.dbName, 'None', null, {}); // Shows all docs in db
   }
 
+  // consider 412 status when opening an existing table
   open(table) {
     this.rest('open', table, 'None', null, {});
   }
 
+  // look at response obj: {ok: true}
   drop(table) {
     this.rest('drop', table, 'None', null, {});
   }
 
-  query() {
-    return {};
+  queryPrac() {
+    return {
+      "selector": {
+        "plane": {
+          "$eq": "Know"
+        }
+      }
+    };
+  }
+
+  findSelect(table) {
+    return {
+      "selector": {
+        "table": {
+          "$eq": table
+        }
+      }
+    };
   }
 
   rest(op1, table, id, obj, opts) {
@@ -90,13 +116,20 @@ Couch = class Couch extends Store {
     json = obj != null ? JSON.stringify(obj) : null;
     settings = this.config(op1, json);
     fetch(url, settings).then((response) => {
-      return response.json();
-    }).then((data) => {
-      var result;
-      if (op1 === 'find') {
-        return this.findDocs(opts.ops2, table, data, opts.where, opts.callback);
+      if (!response.ok) {
+        return this.onerror(table, op1, response.statusText);
       } else {
-        result = this.restResult(op1, table, obj, data, opts.where);
+        return response.json();
+      }
+    }).then((data) => {
+      var objs, result;
+      if (op1 === 'find' && opts.op2 === 'select') {
+        return this.selectDocs(table, data, opts.where, opts.callback);
+      } else if (op1 === 'find') {
+        return this.findDocs(opts.op2, table, data, opts.where, opts.callback);
+      } else {
+        objs = opts.objs != null ? opts.objs : obj;
+        result = this.restResult(op1, table, objs, data, opts.where);
         if (opts.callback != null) {
           return opts.callback(result);
         } else {
@@ -127,35 +160,63 @@ Couch = class Couch extends Store {
     return obj;
   }
 
-  findDocs(op, table, iDocs, where, callback) {
-    var i, iDoc, len, oDocs, opts, ref;
+  findDocs(op, table, data, where, callback) {
+    var dObjs, doc, i, len, oDocs, opts, ref;
     oDocs = {
       "docs": []
     };
-    ref = iDocs.docs;
+    dObjs = {};
+    ref = data.docs;
     for (i = 0, len = ref.length; i < len; i++) {
-      iDoc = ref[i];
-      if (!(where(iDoc))) {
+      doc = ref[i];
+      if (!(where(doc))) {
         continue;
       }
-      if (op === 'remove' || op === 'drop') {
-        iDoc['_deleted'] = true;
+      if (op === 'remove') {
+        doc['_deleted'] = true;
       }
-      oDocs.docs.push(iDoc);
+      doc = this.setCouchProps(table, doc.id, doc, doc._rev, true);
+      oDocs.docs.push(doc);
+      dObjs[doc.id] = doc;
     }
+    // console.log('Couch.findDocs()', { data:data, oDocs:oDocs, dObjs:dObjs } )
     opts = {
       where: (function(obj) {
         return true;
       }),
-      callback: callback
+      callback: callback,
+      objs: dObjs
     };
-    this.rest(op, table, 'None', oDocs, opts);
+    if (op === 'remove') {
+      this.rest(op, table, 'None', oDocs, opts);
+    } else if (op === 'select') {
+      this.results(table, 'select', oDocs);
+    }
+  }
+
+  selectDocs(table, docs, where, callback) {
+    var doc, i, len, ref, results;
+    results = {};
+    ref = docs.docs;
+    for (i = 0, len = ref.length; i < len; i++) {
+      doc = ref[i];
+      if (!(where(doc))) {
+        continue;
+      }
+      doc = this.setCouchProps(table, doc.id, doc, doc._rev, true);
+      results[doc.id] = doc;
+    }
+    if (callback != null) {
+      callback(results);
+    } else {
+      this.results(table, 'select', results);
+    }
   }
 
   setCouchProps(table, id, obj, rev = null, ok = null) {
     obj['id'] = id;
     obj['_id'] = id;
-    obj['_table'] = table;
+    obj['table'] = table;
     if (rev != null) {
       obj['_rev'] = rev;
     }
@@ -171,33 +232,36 @@ Couch = class Couch extends Store {
     for (key in objs) {
       if (!hasProp.call(objs, key)) continue;
       obj = objs[key];
-      obj = this.setCouchProps(table, id, obj, null, null);
+      obj = this.setCouchProps(table, key, obj, null, null);
       docs.push(obj);
     }
     return docs;
   }
 
-  insertObjs(table, iObj, results) {
-    var i, id, len, oObj, row;
-    oObj = {};
-    for (i = 0, len = results.length; i < len; i++) {
-      row = results[i];
+  insertObjs(table, objs, data) {
+    var i, id, len, results, row;
+    // console.log('Couch.insertObjs()', { objs:objs, data:data } )
+    results = {};
+    for (i = 0, len = data.length; i < len; i++) {
+      row = data[i];
       id = row.id;
-      oObj[id] = iObj[key];
-      oObj[id] = this.setCouchProps(table, id, oObj[id], row.rev, row.ok);
+      results[id] = objs[id];
+      // console.log('Couch.insertObjs()', { id:id, result:results[id], obj:objs[id] } )
+      results[id] = this.setCouchProps(table, id, results[id], row.rev, row.ok);
     }
-    return oObj;
+    return results;
   }
 
-  tableObjs(table, objsIn, results, query) {
-    var i, key, len, obj, objsOp, row, where;
+  tableObjs(table, results, query) {
+    var i, key, len, obj, objsOp, ref, row, where;
     where = query != null ? query : function(obj) {
       return true;
     };
-    if (this.isArray(results)) {
+    if (this.isArray(results.rows)) {
       objsOp = {};
-      for (i = 0, len = results.length; i < len; i++) {
-        row = results[i];
+      ref = results.rows;
+      for (i = 0, len = ref.length; i < len; i++) {
+        row = ref[i];
         if (where(row)) {
           objsOp[row[this.keyProp]] = row;
         }
@@ -216,7 +280,7 @@ Couch = class Couch extends Store {
     }
   }
 
-  restResult(op, table, obj, data = null, where) { // obj can also be objs
+  restResult(op, table, obj, data, where) { // obj can also be objs
     var result;
     result = {};
     if ((data != null) && (op === 'get' || op === 'del')) {
@@ -225,11 +289,14 @@ Couch = class Couch extends Store {
     if ((obj != null) && (op === 'add' || op === 'put')) {
       result = obj;
     }
-    if ((obj != null) && (op === 'insert' || op === 'update')) {
+    if ((data != null) && (obj != null) && (op === 'insert' || op === 'update')) {
       result = this.insertObjs(table, obj, data);
     }
-    if ((data != null) && (op === 'select' || op === 'remove')) {
-      result = this.tableObjs(table, obj, data, where);
+    if ((data != null) && (op === 'select')) {
+      result = this.tableObjs(table, data, where);
+    }
+    if ((obj != null) && (op === 'remove')) {
+      result = obj;
     }
     if ((data != null) && (op === 'show' || op === 'drop')) {
       result = data;
@@ -240,43 +307,46 @@ Couch = class Couch extends Store {
   urlRest(op, table, id) {
     switch (op) {
       case 'add':
-      case 'get':
       case 'put':
+        return this.baseUrl + '/' + table + '?batch=ok';
+      case 'get':
       case 'del':
         return this.baseUrl + '/' + table + '/' + id;
-      case 'remove':
       case 'open':
       case 'drop':
         return this.baseUrl + '/' + table;
       case 'insert':
       case 'update':
+      case 'remove':
         return this.baseUrl + '/' + table + '/' + '_bulk_docs';
       case 'select':
-        return this.baseUrl + '/' + table + '/' + '_bulk_get';
-      case 'show':
         return this.baseUrl + '/' + table + '/' + '_all_docs';
+      case 'find':
+        return this.baseUrl + '/' + table + '/' + '_find';
+      case 'show':
+        return this.baseUrl + '/' + '_all_dbs';
       default:
-        console.error('Rest.urlRest() Unknown op', op);
+        console.error('Rest.urlRest() Unknown op', op, id);
         return this.baseUrl + '/' + table;
     }
   }
 
   restOp(op) {
     switch (op) {
-      case 'add':
       case 'put':
       case 'open':
         return 'PUT';
       case 'get':
+      case 'select':
       case 'show':
         return 'GET';
-      case 'select':
       case 'insert':
       case 'update':
+      case 'remove':
       case 'find':
+      case 'add':
         return 'POST';
       case 'del':
-      case 'remove':
       case 'drop':
         return 'DELETE';
       default:

@@ -60,28 +60,34 @@ class Manager
     @subscribe( 'prac',  'put',  store )
     @subscribe( 'prac',  'del',  store )
     @subscribe( @dbName, 'show', store )
+    @subscribe( 'hues',  'open', store )
+
+    #tore.drop( 'demo')
+
+    #tore.open( 'hues')
 
     store.show()
 
-    #tore.add( 'prac', @prac._id, @prac )
-    store.get( 'prac', @prac._id )
-    #tore.put( 'prac', @prac._id, @prac )
-    #tore.del( 'prac', @prac._id )
+    #tore.add( 'prac', @prac.id, @prac )
+    #tore.get( 'prac', @prac.id )
+    #tore.put( 'prac', @prac.id, @prac )
+    #tore.del( 'prac', @prac.id )
 
     @subscribe( 'hues', 'insert', store )
-    @subscribe( 'prac', 'select', store )
+    @subscribe( 'hues', 'select', store )
     @subscribe( 'hues', 'update', store )
     @subscribe( 'hues', 'remove', store )
 
     #tore.insert( 'hues', @hues )
-    #tore.select( 'prac', (obj) -> true )
+    #tore.select( 'hues', (obj) -> true )
     #tore.update( 'hues', @hues )
-    #tore.remove( 'hues', (obj) -> true )
+    where = (obj) -> obj.column is 'Embrace'
+    store.remove( 'hues', where )
     return
 
   data:() ->
 
-    @prac = { "_id":"Involve", "type":"pane", "hsv":[195,90,60],"column":"Embrace",
+    @prac = { "_id":"Involve", "id":"Involve", "table":"prac","type":"pane", "hsv":[195,90,60],"column":"Embrace",
     "row":"Learn","plane":"Know","icon":"fas fa-users",
     "cells":[5,12,7,12], "dir":"nw", "neg":"Greed" }
 

@@ -9,6 +9,7 @@ class Couch extends Store
     @username = 'admin'
     @password = 'athena'
 
+  # obj: {error: "not_found", reason: "missing"}
   add:( table, id, obj ) ->
     @put( table, id, obj, 'add' )
     return
@@ -28,53 +29,67 @@ class Couch extends Store
     return
 
   select:( table,  where, callback ) ->
-    opts = { where:where, callback:callback, ops2:'select' }
-    @rest( 'find', table, 'None', @query, opts )
+    selector  = @findSelect( table )
+    opts = { where:where, callback:callback, op2:"select" }
+    @rest( 'find', table, 'None', selector, opts )
     return
 
   insert:( table, objs )  ->
     docs = @insertDocs( table, objs )
-    #onsole.log( 'Rest.insert()',   { "docs":docs } )
-    @rest( 'insert', table, 'None', { "docs":docs }, {} )
+    opts = { objs:objs }
+    @rest( 'insert', table, 'None', { "docs":docs }, opts )
     return
 
   update:( table, objs )  ->
     docs = @insertDocs( table, objs )
-    @rest( 'update', table, 'None', { "docs":docs }, {} )
+    opts = { objs:objs }
+    @rest( 'update', table, 'None', { "docs":docs }, opts )
     return
 
   remove:( table, where ) ->
-    opts = { where:where, ops2:'remove' }
-    @rest( 'find', table, 'None', @query, opts )
+    selector  = @findSelect( table )
+    opts = { where:where, op2:'remove' }
+    @rest( 'find', table, 'None', selector, opts )
     return
 
   show:() ->
     @rest( 'show', @dbName,'None', null, {} ) # Shows all docs in db
     return
 
+  # consider 412 status when opening an existing table
   open:( table ) ->
     @rest( 'open', table, 'None', null, {} )
     return
 
+  # look at response obj: {ok: true}
   drop:( table ) ->
     @rest( 'drop', table, 'None', null, {} )
     return
 
-  query:() ->
-    {}
+  queryPrac:( ) ->
+    { "selector":{ "plane": { "$eq":"Know" } } }
+
+  findSelect:( table ) ->
+    { "selector":{ "table": { "$eq": table } } }
 
   rest:( op1, table, id, obj, opts ) ->
     url       = @urlRest( op1, table, id )
     json      = if obj? then JSON.stringify(obj) else null
     settings  = @config( op1, json )
     fetch( url, settings )
-      .then( (response) =>
-        response.json() )
-      .then( (data) =>
-        if op1 is 'find'
-          @findDocs( opts.ops2, table, data, opts.where, opts.callback )
+      .then(  (response) =>
+        if not response.ok
+          @onerror( table, op1, response.statusText )
         else
-          result = @restResult( op1, table, obj, data, opts.where )
+          response.json() )
+      .then( (data) =>
+        if op1 is 'find' and opts.op2 is 'select'
+          @selectDocs( table, data, opts.where, opts.callback )
+        else if op1 is 'find'
+          @findDocs( opts.op2, table, data, opts.where, opts.callback )
+        else
+          objs = if opts.objs? then opts.objs else obj
+          result = @restResult( op1, table, objs, data, opts.where )
           if opts.callback? then opts.callback(result) else @results( table, op1, result ) )
       .catch( (error) =>
         @onerror( table, op1, error ) )
@@ -92,20 +107,34 @@ class Couch extends Store
     obj.headers  = @headers()
     obj
 
-
-  findDocs:( op, table, iDocs, where, callback ) ->
+  findDocs:( op, table, data, where, callback ) ->
     oDocs = { "docs": [] }
-    for iDoc in iDocs.docs when where(iDoc)
-      iDoc['_deleted'] = true if op is 'remove' or op is 'drop'
-      oDocs.docs.push( iDoc )
-    opts = { where:((obj)->true), callback:callback }
-    @rest( op, table,'None', oDocs, opts )
+    dObjs = {}
+    for doc in data.docs when where(doc)
+      doc['_deleted'] = true if op is 'remove'
+      doc = @setCouchProps( table, doc.id, doc, doc._rev, true )
+      oDocs.docs.push( doc )
+      dObjs[doc.id] =  doc
+    # console.log('Couch.findDocs()', { data:data, oDocs:oDocs, dObjs:dObjs } )
+    opts = { where:((obj)->true), callback:callback, objs:dObjs }
+    if op is 'remove'
+      @rest( op, table,'None', oDocs, opts )
+    else if op is 'select'
+      @results( table, 'select', oDocs )
+    return
+
+  selectDocs:( table, docs, where, callback ) ->
+    results = {}
+    for doc in docs.docs when where(doc)
+      doc = @setCouchProps( table, doc.id, doc, doc._rev, true )
+      results[doc.id] = doc
+    if callback? then callback(results) else @results( table, 'select', results )
     return
 
   setCouchProps:( table, id, obj, rev=null, ok=null ) ->
     obj[ 'id']    = id
     obj['_id']    = id
-    obj['_table'] = table
+    obj['table']  = table
     obj['_rev']   = rev if rev?
     obj.ok        = ok  if ok?
     obj
@@ -113,23 +142,25 @@ class Couch extends Store
   insertDocs:( table, objs ) ->
     docs = []
     for own key, obj of objs
-      obj = @setCouchProps( table, id, obj, null, null )
+      obj = @setCouchProps( table, key, obj, null, null )
       docs.push( obj )
     docs
 
-  insertObjs:( table, iObj, results ) ->
-    oObj = {}
-    for row in results
-      id       = row.id
-      oObj[id] = iObj[key]
-      oObj[id] = @setCouchProps( table, id, oObj[id], row.rev, row.ok )
-    oObj
+  insertObjs:( table, objs, data ) ->
+    # console.log('Couch.insertObjs()', { objs:objs, data:data } )
+    results = {}
+    for row in data
+      id         = row.id
+      results[id] = objs[id]
+      # console.log('Couch.insertObjs()', { id:id, result:results[id], obj:objs[id] } )
+      results[id] = @setCouchProps( table, id, results[id], row.rev, row.ok )
+    results
 
-  tableObjs:( table, objsIn, results, query ) ->
+  tableObjs:( table, results, query ) ->
     where = if query? then query else (obj)->true
-    if @isArray(results)
+    if @isArray(results.rows)
       objsOp = {}
-      for row in results when where(row)
+      for row in results.rows when where(row)
         objsOp[row[@keyProp]] = row
       objsOp
     else
@@ -138,32 +169,35 @@ class Couch extends Store
         objsOp[key] = obj
       objsOp
 
-  restResult:( op, table, obj, data=null, where ) ->  # obj can also be objs
+  restResult:( op, table, obj, data, where ) ->  # obj can also be objs
     result = {}
-    result = data                      if data? and ( op is 'get'    or op is 'del'    )
-    result = obj                       if obj?  and ( op is 'add'    or op is 'put'    )
-    result = @insertObjs( table, obj, data )        if obj?  and ( op is 'insert' or op is 'update' )
-    result = @tableObjs(  table, obj, data, where ) if data? and ( op is 'select' or op is 'remove' )
-    result = data                      if data? and ( op is 'show'   or op is 'drop'   )
+    result = data                              if data? and ( op is 'get'    or op is 'del'    )
+    result = obj                               if obj?  and ( op is 'add'    or op is 'put'    )
+    result = @insertObjs( table, obj, data )   if data? and obj?  and ( op is 'insert' or op is 'update' )
+    result = @tableObjs(  table, data, where ) if data? and ( op is 'select' )
+    result = obj                               if obj?  and ( op is 'remove' )
+    result = data                              if data? and ( op is 'show'   or op is 'drop'   )
     result
 
   urlRest:( op, table, id ) ->
     switch op
-      when 'add','get','put','del' then @baseUrl + '/' + table + '/' + id
-      when 'remove','open','drop'  then @baseUrl + '/' + table
-      when 'insert','update'       then @baseUrl + '/' + table + '/' + '_bulk_docs'
-      when 'select'                then @baseUrl + '/' + table + '/' + '_bulk_get'
-      when 'show'                  then @baseUrl + '/' + table + '/' + '_all_docs'
+      when 'add','put'                then @baseUrl + '/' + table + '?batch=ok'
+      when 'get','del'                then @baseUrl + '/' + table + '/' + id
+      when 'open','drop'              then @baseUrl + '/' + table
+      when 'insert','update','remove' then @baseUrl + '/' + table + '/' + '_bulk_docs'
+      when 'select'                   then @baseUrl + '/' + table + '/' + '_all_docs'
+      when 'find'                     then @baseUrl + '/' + table + '/' + '_find'
+      when 'show'                     then @baseUrl + '/' + '_all_dbs'
       else
-        console.error( 'Rest.urlRest() Unknown op', op )
+        console.error( 'Rest.urlRest() Unknown op', op, id )
         @baseUrl + '/' + table
 
   restOp:( op ) ->
     switch op
-      when 'add', 'put', 'open'              then 'PUT'
-      when 'get', 'show'                     then 'GET'
-      when 'select','insert','update','find' then 'POST'
-      when 'del', 'remove', 'drop'           then 'DELETE'
+      when 'put', 'open'          then 'PUT'
+      when 'get', 'select','show' then 'GET'
+      when 'insert','update','remove','find','add' then 'POST'
+      when 'del', 'drop'          then 'DELETE'
       else
         console.error( 'Rest.restOp() Unknown op', op )
         'GET'

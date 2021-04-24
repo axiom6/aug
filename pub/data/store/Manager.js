@@ -72,6 +72,7 @@ Manager = class Manager {
   }
 
   suite(store) {
+    var where;
     console.log('Manager.suite()', store.source);
     this.data();
     this.subscribe('prac', 'add', store);
@@ -79,24 +80,33 @@ Manager = class Manager {
     this.subscribe('prac', 'put', store);
     this.subscribe('prac', 'del', store);
     this.subscribe(this.dbName, 'show', store);
+    this.subscribe('hues', 'open', store);
+    //tore.drop( 'demo')
+
+    //tore.open( 'hues')
     store.show();
-    //tore.add( 'prac', @prac._id, @prac )
-    store.get('prac', this.prac._id);
-    //tore.put( 'prac', @prac._id, @prac )
-    //tore.del( 'prac', @prac._id )
+    //tore.add( 'prac', @prac.id, @prac )
+    //tore.get( 'prac', @prac.id )
+    //tore.put( 'prac', @prac.id, @prac )
+    //tore.del( 'prac', @prac.id )
     this.subscribe('hues', 'insert', store);
-    this.subscribe('prac', 'select', store);
+    this.subscribe('hues', 'select', store);
     this.subscribe('hues', 'update', store);
     this.subscribe('hues', 'remove', store);
+    //tore.insert( 'hues', @hues )
+    //tore.select( 'hues', (obj) -> true )
+    //tore.update( 'hues', @hues )
+    where = function(obj) {
+      return obj.column === 'Embrace';
+    };
+    store.remove('hues', where);
   }
 
-  //tore.insert( 'hues', @hues )
-  //tore.select( 'prac', (obj) -> true )
-  //tore.update( 'hues', @hues )
-  //tore.remove( 'hues', (obj) -> true )
   data() {
     this.prac = {
       "_id": "Involve",
+      "id": "Involve",
+      "table": "prac",
       "type": "pane",
       "hsv": [195, 90, 60],
       "column": "Embrace",

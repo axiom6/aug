@@ -7,7 +7,7 @@
     <div class="store-local" ><div class="store-title" @click="doTest('Local')" >Local</div></div>
     <div class="store-index" ><div class="store-title" @click="doTest('Index')" >Index</div></div>
     <div class="store-fire"  ><div class="store-title" @click="doTest('Fire')"  >Fire</div></div>
-    <div class="store-couch" ><div class="store-title" @click="doTest('Couch')" >Rest</div></div>
+    <div class="store-couch" ><div class="store-title" @click="doTest('Couch')" >Couch</div></div>
   </div>
 </template>
 
