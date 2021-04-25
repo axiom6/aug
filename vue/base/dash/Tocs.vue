@@ -102,7 +102,7 @@
   
   @import '../../../css/themes/theme.less';
 
-  @tocsFS:2.5*@themeFS;
+  @tocsFS:2.2*@themeFS;
   @tocs-back-comp:#333;
   @tocs-back-prac:#444; // Not used yet
   @tocs-back-disp:#555; // Not used yet

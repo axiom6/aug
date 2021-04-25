@@ -1,6 +1,6 @@
 
-import Util     from '../../../base/util/Util.js'
-import Vis      from '../../../base/draw/Vis.js'
+import Util     from '../../base/util/Util.js'
+import Vis      from '../../base/draw/Vis.js'
 
 class Color
 

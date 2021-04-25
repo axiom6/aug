@@ -1,8 +1,8 @@
 var Box;
 
-import Util from '../../../base/util/Util.js';
+import Util from '../../base/util/Util.js';
 
-import Vis from '../../../base/draw/Vis.js';
+import Vis from '../../base/draw/Vis.js';
 
 import MBox from './MBox.js';
 

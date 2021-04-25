@@ -12,7 +12,7 @@ Load = class Load {
       case 'Draw':
         return this.lazy('../../../vue/augm/draw/Draw.vue');
       case 'Hues':
-        return this.lazy('../../../vue/augm/draw/Hues.vue');
+        return this.lazy('../../../vue/augm/mbox/Hues.vue');
       case 'Cube':
         return this.lazy('../../../vue/augm/cube/Cube.vue');
       case 'Wood':

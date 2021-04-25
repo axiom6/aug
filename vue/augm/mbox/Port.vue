@@ -6,7 +6,7 @@
 <script type="module">
 
 import { ref, nextTick, onMounted } from "vue";
-import Box from "../../../pub/augm/math/mbox/Box.js";
+import Box from "../../../pub/augm/mbox/Box.js";
 
 let Port = {
 

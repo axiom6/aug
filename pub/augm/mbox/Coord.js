@@ -1,8 +1,8 @@
 var Coord;
 
-import Util from '../../../base/util/Util.js';
+import Util from '../../base/util/Util.js';
 
-import Vis from '../../../base/draw/Vis.js';
+import Vis from '../../base/draw/Vis.js';
 
 Coord = class Coord {
   constructor(mbox, width1, height, depth = 10) {

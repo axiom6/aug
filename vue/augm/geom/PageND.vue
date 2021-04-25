@@ -6,7 +6,7 @@
 <script type="module">
 
 import { ref, nextTick, onMounted, inject } from "vue";
-import Style from "../../../src/augm/geom/Style.js";
+import Style from "../../../pub/augm/geom/lib/Style.js";
 
 let PageND = {
 

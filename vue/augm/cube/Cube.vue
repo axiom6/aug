@@ -11,7 +11,7 @@
   // this Cube.vue ends the warning messages. CoffeeScript import of original
   // CoffeeScript does not produce warning messages.
   import Build  from '../../../pub/base/util/Build.js'
-  import CubeTh from '../../../pub/augm/math/cube/CubeTh.js'
+  import CubeTh from '../../../pub/augm/cube/CubeTh.js'
   import { inject, onMounted } from 'vue';
   
   let Cube = {

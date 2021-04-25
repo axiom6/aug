@@ -1,10 +1,10 @@
 var CubeTh;
 
-import Util from '../../../base/util/Util.js';
+import Util from '../../base/util/Util.js';
 
-import Access from '../../../base/util/Access.js';
+import Access from '../../base/util/Access.js';
 
-import Build from '../../../base/util/Build.js';
+import Build from '../../base/util/Build.js';
 
 import Cube3D from './Cube3D.js';
 

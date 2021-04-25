@@ -6,7 +6,7 @@ import MathND from '../../../vue/augm/math/MathND.vue';
 
 import Draw from '../../../vue/augm/draw/Draw.vue';
 
-import Hues from '../../../vue/augm/draw/Hues.vue';
+import Hues from '../../../vue/augm/mbox/Hues.vue';
 
 import Cube from '../../../vue/augm/cube/Cube.vue';
 

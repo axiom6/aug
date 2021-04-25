@@ -7,7 +7,7 @@
         <template v-for="pracObj in plane.compObj">
           <div class="cube-pract" :style="stylePract(plane,pracObj)">
             <!--p-sign :pracObj="pracObj"></p-sign-->
-            <p-icon  :icon="pracObj.icon" :name="pracObj.name" :size="2.7" ></p-icon>
+            <p-icon  :icon="pracObj.icon" :name="pracObj.name" :size="2.5" ></p-icon>
           </div>
         </template>
       </div>
@@ -68,7 +68,7 @@
   
   @import '../../../css/themes/theme.less';
   
-  @ikwFS:2.0*@themeFS;
+  @ikwFS:1.7*@themeFS;
 
   .cube-pane { position:absolute; left:0; top:0; width:100%; height:100%;
     .cube-plane { font-size:@ikwFS;  border-radius:2.0*@ikwFS; // border:@theme-fore solid 2px;

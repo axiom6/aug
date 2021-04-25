@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "data-muse"
+    "default": "data-muse",
+    "jitt": "jitter-48413",
+    "muse": "muse-ad352",
+    "augm": "augm-visual",
+    "data": "data-muse"
   }
 }

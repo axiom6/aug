@@ -1,8 +1,8 @@
 var Color;
 
-import Util from '../../../base/util/Util.js';
+import Util from '../../base/util/Util.js';
 
-import Vis from '../../../base/draw/Vis.js';
+import Vis from '../../base/draw/Vis.js';
 
 Color = class Color {
   constructor(mbox) {

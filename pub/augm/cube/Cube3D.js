@@ -1,6 +1,6 @@
 var Cube3D;
 
-import Vis from '../../../base/draw/Vis.js';
+import Vis from '../../base/draw/Vis.js';
 
 import * as THREE from 'three';
 
