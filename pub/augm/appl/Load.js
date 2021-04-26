@@ -1,31 +1,57 @@
 var Load;
 
+import GeomND from '../../../vue/augm/geom/GeomND.vue';
+
+import MathND from '../../../vue/augm/math/MathND.vue';
+
+import Draw from '../../../vue/augm/draw/Draw.vue';
+
+import Hues from '../../../vue/augm/mbox/Hues.vue';
+
+import Cube from '../../../vue/augm/cube/Cube.vue';
+
+import Wood from '../../../vue/augm/wood/Wood.vue';
+
+import Home from '../../../vue/augm/appl/Augm.vue';
+
 Load = class Load {
-  constructor() {}
+  constructor() {
+    this.addScript("/assets/mathbox-bundle.js");
+  }
 
   load(name) {
     switch (name) {
       case 'GeomND':
-        return this.lazy('../../../vue/augm/geom/GeomND.vue');
+        return GeomND;
       case 'MathND':
-        return this.lazy('../../../vue/augm/math/MathND.vue');
+        return MathND;
       case 'Draw':
-        return this.lazy('../../../vue/augm/draw/Draw.vue');
+        return Draw;
       case 'Hues':
-        return this.lazy('../../../vue/augm/mbox/Hues.vue');
+        return Hues;
       case 'Cube':
-        return this.lazy('../../../vue/augm/cube/Cube.vue');
+        return Cube;
       case 'Wood':
-        return this.lazy('../../../vue/augm/wood/Wood.vue');
+        return Wood;
       default:
-        return this.lazy('../../../vue/augm/appl/Home.vue');
+        return Home;
     }
   }
 
-  lazy(path) {
-    return function() {
-      return import( /* @vite-ignore */ path );
-    };
+  addScript(src) {
+    var i, len, script, scripts, scriptx;
+    scripts = document.getElementsByTagName('script');
+    for (i = 0, len = scripts.length; i < len; i++) {
+      scriptx = scripts[i];
+      // console.log( 'Mods.addScript() scriptx src', scriptx.src )
+      if (scriptx.src.includes(src)) {
+        return;
+      }
+    }
+    // console.log( 'Mods.addScript() adding', src )
+    script = document.createElement('script');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
   }
 
 };
