@@ -1,12 +1,11 @@
 <template>
-  <div class="gauge=pane" ref="elem"></div>
+  <div class="gauge-pane" ref="elem"></div>
 </template>
 <script>
 
 import { ref, onMounted, nextTick } from "vue";
 import SvgMgr    from '../../../pub/base/draw/SvgMgr.js'
 import drawGauge from './GaugeD3.js'
-
 
 let Gauge = {
   
@@ -19,7 +18,6 @@ let Gauge = {
     let svgMgr = null;
     
   onMounted( function () {
-    console.log( 'Gauge.mounted' );
     nextTick( function() {
       svgMgr = new SvgMgr( 'Gauge', elem['value'], "Comp" )
       opts.gaugeRadius = 0.5 * Math.min( svgMgr.size.w, svgMgr.size.h );

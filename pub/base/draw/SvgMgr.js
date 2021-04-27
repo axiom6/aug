@@ -21,9 +21,9 @@ SvgMgr = class SvgMgr {
     this.svg.attr("id", this.svgId).attr("width", this.size.w).attr("height", this.size.h).attr("xmlns", "http://www.w3.org/2000/svg");
     this.defs = this.svg.append("svg:defs");
     this.g = this.svg.append("svg:g").attr("id", this.gId); // All transforms are applied to g
+    window.onresize = this.resize;
   }
 
-  // window.onresize = @resize
   htmlId(name, type, ext = '') {
     return name + type + ext;
   }

@@ -7,7 +7,7 @@
 
 <script type="module">
 
-import { onMounted, inject } from "vue";
+import { ref,onMounted, inject } from "vue";
 import Gauge from './Gauge.vue';
 
 let Page = {
@@ -19,14 +19,13 @@ let Page = {
   setup( props ) {
 
     const mix     = inject('mix');
-    let   pageKey = 'Gauge';
+    let   pageKey = ref('None');
 
     const onNav = (obj) => {
-      pageKey = obj.pageKey;
-      console.log( 'tool/onNav()', pageKey ); }
+      pageKey.value = obj.pageKey; }
 
     const show = (name) => {
-        return name === pageKey; }
+        return name === pageKey.value; }
 
     onMounted(  () => {
       mix.subscribe( 'Nav', 'ToolPage.vue'+props.page.key, (obj) => {

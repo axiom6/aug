@@ -25,7 +25,6 @@
     "d3-sankey": "^0.12.3",
     "firebase": "^6.1.1",
     "ganja.js": "^1.0.194",
-    "jqwidgets-scripts": "^12.0.4",
     "pegjs": "^0.10.0",
     "pegjs-backtrace": "^0.2.0",
     "postcss": "^8.2.7",

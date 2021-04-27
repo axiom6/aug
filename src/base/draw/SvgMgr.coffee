@@ -17,7 +17,7 @@ class SvgMgr
         .attr("xmlns","http://www.w3.org/2000/svg")
     @defs = @svg.append("svg:defs")
     @g    = @svg.append("svg:g").attr("id",@gId) # All transforms are applied to g
-    # window.onresize = @resize
+    window.onresize = @resize
 
   htmlId:( name, type, ext='' ) ->
     name + type + ext
