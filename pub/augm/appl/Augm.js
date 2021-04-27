@@ -27,6 +27,8 @@ import GeomJson from '../../../data/augm/Geom.json';
 
 import DataJson from '../../../data/augm/Data.json';
 
+import ToolJson from '../../../data/augm/Tool.json';
+
 import PrinJson from '../../../data/muse/Prin.json';
 
 import RowsJson from '../../../data/muse/Rows.json';
@@ -189,6 +191,11 @@ Augm = (function() {
       data: PrinJson,
       refine: true
     },
+    Tool: {
+      url: 'augm/Tool.json',
+      data: ToolJson,
+      refine: true
+    },
     Rows: {
       url: 'muse/Rows.json',
       data: RowsJson,
@@ -251,7 +258,7 @@ Augm = (function() {
       }
     },
     {
-      path: '/augm/math',
+      path: '/math',
       name: 'Math',
       components: {
         Math: Home.Math
@@ -286,6 +293,29 @@ Augm = (function() {
       components: {
         Hues: loader.load('Hues')
       }
+    },
+    {
+      path: '/tool',
+      name: 'Tool',
+      components: {
+        Tool: Home.Tool
+      },
+      children: [
+        {
+          path: 'Gauges',
+          name: 'Gauges',
+          components: {
+            Gauges: loader.load('Tools')
+          }
+        },
+        {
+          path: 'Widget',
+          name: 'Widget',
+          components: {
+            Widget: loader.load('Tools')
+          }
+        }
+      ]
     },
     {
       path: '/cube',
@@ -356,7 +386,6 @@ Augm = (function() {
       next: "Geom",
       prev: "Home"
     },
-    //Data:{ title:'Data', key:'Data', route:'Data', pracs:{}, ikw:true,  icon:"fas fa-database"     }
     Draw: {
       title: 'Draw',
       key: 'Draw',
@@ -364,12 +393,12 @@ Augm = (function() {
       pracs: {},
       ikw: false,
       icon: "fas fa-draw-polygon",
-      west: "Note",
-      north: "Note",
+      west: "Math",
+      north: "Math",
       east: "Hues",
       south: "Hues",
       next: "Hues",
-      prev: "Note"
+      prev: "Math"
     },
     Hues: {
       title: 'Hues',
@@ -380,10 +409,24 @@ Augm = (function() {
       icon: "fas fa-palette",
       west: "Draw",
       north: "Draw",
+      east: "Tool",
+      south: "Tool",
+      next: "Tool",
+      prev: "Draw"
+    },
+    Tool: {
+      title: 'Tool',
+      key: 'Tool',
+      route: 'Tool',
+      pracs: {},
+      ikw: false,
+      icon: "fas fa-wrench",
+      west: "Hues",
+      north: "Hues",
       east: "Cube",
       south: "Cube",
       next: "Cube",
-      prev: "Draw"
+      prev: "Hues"
     },
     Cube: {
       title: 'Cube',

@@ -1,0 +1,4 @@
+{
+  "Gauges" : { "name":"Gauges", "icon":"fas fa-chart-area", "hsv":[90,90,90] },
+  "Widget" : { "name":"Widget", "icon":"fas fa-cubes",      "hsv":[30,60,90] }
+}

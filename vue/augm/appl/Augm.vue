@@ -8,9 +8,9 @@
       </div>
     </div>
     <div   class="home-midd">
-      <div class="home-btns">
-        <h-btn name="Button" v-bind:position="[45,45,10,10]" background="red"></h-btn>
-      </div>
+      <!--div class="home-btns">
+        <h-btn name="Button" v-bind:position="[45,45,10,10]" .background="'red'"></h-btn>
+      </div-->
     </div>
     <div class="home-foot">
       <div>
@@ -29,6 +29,7 @@
   import Math from '../math/Math.vue';
   import Geom from '../geom/Geom.vue';
   import Data from '../data/Data.vue';
+  import Tool from '../tool/Tool.vue';
   
   let Home = {
     
@@ -49,6 +50,7 @@
   Home.Math = Math;
   Home.Geom = Geom;
   Home.Data = Data;
+  Home.Tool = Tool;
 
   export default Home;
 

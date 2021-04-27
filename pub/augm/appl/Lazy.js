@@ -13,12 +13,14 @@ Load = class Load {
         return this.lazy('../../../vue/augm/draw/Draw.vue');
       case 'Hues':
         return this.lazy('../../../vue/augm/mbox/Hues.vue');
+      case 'Tools':
+        return this.lazy('../../../vue/augm/tool/Tools.vue');
       case 'Cube':
         return this.lazy('../../../vue/augm/cube/Cube.vue');
       case 'Wood':
         return this.lazy('../../../vue/augm/wood/Wood.vue');
       default:
-        return this.lazy('../../../vue/augm/appl/Home.vue');
+        return this.lazy('../../../vue/augm/appl/Augm.vue');
     }
   }
 

@@ -8,6 +8,8 @@ import Draw from '../../../vue/augm/draw/Draw.vue';
 
 import Hues from '../../../vue/augm/mbox/Hues.vue';
 
+import Tools from '../../../vue/augm/tool/Tools.vue';
+
 import Cube from '../../../vue/augm/cube/Cube.vue';
 
 import Wood from '../../../vue/augm/wood/Wood.vue';
@@ -29,6 +31,8 @@ Load = class Load {
         return Draw;
       case 'Hues':
         return Hues;
+      case 'Tools':
+        return Tools;
       case 'Cube':
         return Cube;
       case 'Wood':

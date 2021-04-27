@@ -3,6 +3,7 @@ import GeomND  from '../../../vue/augm/geom/GeomND.vue'
 import MathND  from '../../../vue/augm/math/MathND.vue'
 import Draw    from '../../../vue/augm/draw/Draw.vue'
 import Hues    from '../../../vue/augm/mbox/Hues.vue'
+import Tools   from '../../../vue/augm/tool/Tools.vue'
 import Cube    from '../../../vue/augm/cube/Cube.vue'
 import Wood    from '../../../vue/augm/wood/Wood.vue'
 import Home    from '../../../vue/augm/appl/Augm.vue'
@@ -18,6 +19,7 @@ class Load
       when 'MathND' then MathND
       when 'Draw'   then Draw
       when 'Hues'   then Hues
+      when 'Tools'  then Tools
       when 'Cube'   then Cube
       when 'Wood'   then Wood
       else               Home

@@ -20,12 +20,12 @@ let PageND = {
 
     const create = function() {
        nextTick( function() {
-         window['Geom'][props.page.key] = new Style( elem.value );
+         window['Geom'][props.page.key] = new Style( elem['value'] );
          props.page.obj.ga(); } ) }
 
     const remove = function() {
       nextTick( function() {
-        let dom = elem.value;
+        let dom = elem['value'];
         while( mix.isDef(dom) && mix.isDef(dom.firstChild) ) {
           dom.removeChild(dom.firstChild); } } ) }
 

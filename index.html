@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <title>Jitter</title>
+   <title>Augm</title>
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="Description" content="Mobile App Demo">
+   <meta name="Description" content="Augments your Daily Life">
    <meta name="theme-color" content="#f00">
    <meta name="apple-mobile-web-app-capable"          content="yes">
    <meta name="apple-mobile-web-app-status-bar-style" content="default">
    <meta name="apple-mobile-web-app-title"            content="Augm">
    <meta name="msapplication-TileImage"               content="msapplication-icon-144x144.png"><!--check on this -->
    <meta name="msapplication-TileColor"               content="#000">
-   <link href="https://jits-d4b3c.firebaseapp.com/app/jitter/jitter.html" rel="canonical">
-   <link href="manifest.json"  rel="manifest" crossorigin="use-credentials">
-   <link href="css/icons/favicon.ico" rel="icon">
-   <link href="css/icons/apple-touch-icon.png" rel="apple-touch-icon">
-  </head>
-    <body>
-      <j-jitter>
-        <div  style="display:grid; background:black; position:absolute; width:100%; height:100%;">
-          <h1 style="justify-self:center; align-self:center; color:wheat; font-size:3em;">Welcome to the Mobile App Demo</h1>
-        </div>
-      </j-jitter>
-      <script type="module">
-        import Jitter from './pub/jitt/appl/Jitt.js';
-        Jitter.start();
-      </script>
-    </body>
-  </html>
+  <link href="/assets/apple-touch-icon.png"  rel="apple-touch-icon">
+  <link href="/assets/favicon.ico"           rel="icon">
+  <!--script src="/vue/draw/augm/mathbox-bundle.js"></script-->
+</head>
+  <body>
+    <div id="augm">
+      <div  style="display:grid; background:black; position:absolute; width:100%; height:100%;">
+        <h1 style="justify-self:center; align-self:center; color:wheat; font-size:3em;">Welcome to Augmentation</h1>
+      </div>
+    </div>
+    <script type="module">
+      import Augm from './pub/augm/appl/Augm.js';
+      Augm.start();
+    </script>
+  </body>
+</html>

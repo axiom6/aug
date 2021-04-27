@@ -1,4 +1,4 @@
 {
   "Geom2D" : { "name":"Geom2D", "icon":"fas fa-chart-area", "hsv":[90,90,90] },
   "Geom3D" : { "name":"Geom3D", "icon":"fas fa-cubes",      "hsv":[30,60,90] }
-  }
+}

@@ -16,6 +16,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import MathJson from '../../../data/augm/Math.json'
 import GeomJson from '../../../data/augm/Geom.json'
 import DataJson from '../../../data/augm/Data.json'
+import ToolJson from '../../../data/augm/Tool.json'
 import PrinJson from '../../../data/muse/Prin.json'
 import RowsJson from '../../../data/muse/Rows.json'
 import InfoJson from '../../../data/muse/Info.json'
@@ -43,6 +44,7 @@ class Augm
     Geom:   { url:'augm/Geom.json',     data:GeomJson, refine:true }
     Data:   { url:'augm/Data.json',     data:DataJson, refine:true }
     Prin:   { url:'muse/Prin.json',     data:PrinJson, refine:true }
+    Tool:   { url:'augm/Tool.json',     data:ToolJson, refine:true }
     Rows:   { url:'muse/Rows.json',     data:RowsJson, refine:true }
     Info:   { url:'muse/Info.json',     data:InfoJson, refine:true }
     Know:   { url:'muse/Know.json',     data:KnowJson, refine:true }
@@ -58,14 +60,17 @@ class Augm
   loader = new Load()
 
   Augm.routes = [
-    { path: '/',     name:'Home',   components:{ Home:   Home } },
-    { path: '/augm/math', name:'Math',   components:{ Math:   Home.Math }, children: [
-      { path:'ML',   name:'MathML', components:{ MathML: loader.load('MathND') } },
-      { path:'EQ',   name:'MathEQ', components:{ MathEQ: loader.load('MathND') } } ] },
-    { path: '/draw', name:'Draw',   components:{ Draw:   loader.load('Draw') } },
-    { path: '/hues', name:'Hues',   components:{ Hues:   loader.load('Hues') } },
-    { path: '/cube', name:'Cube',   components:{ Cube:   loader.load('Cube') } },
-    { path: '/wood', name:'Wood',   components:{ Wood:   loader.load('Wood') } } ]
+    { path: '/',       name:'Home',   components:{ Home:   Home } },
+    { path: '/math',   name:'Math',   components:{ Math:   Home.Math }, children: [
+      { path:'ML',     name:'MathML', components:{ MathML: loader.load('MathND') } },
+      { path:'EQ',     name:'MathEQ', components:{ MathEQ: loader.load('MathND') } } ] },
+    { path: '/draw',   name:'Draw',   components:{ Draw:   loader.load('Draw') } },
+    { path: '/hues',   name:'Hues',   components:{ Hues:   loader.load('Hues') } },
+    { path: '/tool',   name:'Tool',   components:{ Tool:   Home.Tool }, children: [
+      { path:'Gauges', name:'Gauges', components:{ Gauges: loader.load('Tools') } },
+      { path:'Widget', name:'Widget', components:{ Widget: loader.load('Tools') } } ] },
+    { path: '/cube',   name:'Cube',   components:{ Cube:   loader.load('Cube') } },
+    { path: '/wood',   name:'Wood',   components:{ Wood:   loader.load('Wood') } } ]
 
   Augm.geomRoute =
     { path: '/augm/geom', name:'Geom',   components:{ Geom:   Home.Geom }, children: [
@@ -77,11 +82,12 @@ class Augm
     west:"Wood", north:"Wood", east:"Math", south:"Math", next:"Math", prev:"Wood" }
     Math:{ title:'Math', key:'Math', route:'Math', pracs:{}, ikw:true,  icon:"fas fa-bezier-curve",
     west:"Home", north:"Home", east:"Geom", south:"Geom", next:"Geom", prev:"Home" }
-    #Data:{ title:'Data', key:'Data', route:'Data', pracs:{}, ikw:true,  icon:"fas fa-database"     }
     Draw:{ title:'Draw', key:'Draw', route:'Draw', pracs:{}, ikw:false, icon:"fas fa-draw-polygon",
-    west:"Note", north:"Note", east:"Hues", south:"Hues", next:"Hues", prev:"Note" }
+    west:"Math", north:"Math", east:"Hues", south:"Hues", next:"Hues", prev:"Math" }
     Hues:{ title:'Hues', key:'Hues', route:'Hues', pracs:{}, ikw:false, icon:"fas fa-palette",
-    west:"Draw", north:"Draw", east:"Cube", south:"Cube", next:"Cube", prev:"Draw" }
+    west:"Draw", north:"Draw", east:"Tool", south:"Tool", next:"Tool", prev:"Draw" }
+    Tool:{ title:'Tool', key:'Tool', route:'Tool', pracs:{}, ikw:false, icon:"fas fa-wrench",
+    west:"Hues", north:"Hues", east:"Cube", south:"Cube", next:"Cube", prev:"Hues" }
     Cube:{ title:'Cube', key:'Cube', route:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes",
     west:"Hues", north:"Hues", east:"Wood", south:"Wood", next:"Wood", prev:"Hues" }
     Wood:{ title:'Wood', key:'Wood', route:'Wood', pracs:{}, ikw:false, icon:"fas fa-tree",
