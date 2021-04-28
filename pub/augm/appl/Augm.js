@@ -302,14 +302,14 @@ Augm = (function() {
       },
       children: [
         {
-          path: 'Gauges',
+          path: 'gauges',
           name: 'Gauges',
           components: {
             Gauges: loader.load('Tools')
           }
         },
         {
-          path: 'Widget',
+          path: 'widget',
           name: 'Widget',
           components: {
             Widget: loader.load('Tools')

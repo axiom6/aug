@@ -2,8 +2,8 @@
 <template>
   <div class="tool-pane">
     <h1 v-show="myRoute()">Gauges and Widges</h1>
-    <router-view name="Gauges"></router-view>
-    <router-view name="Widget"></router-view>
+    <router-view :name="'Gauges'"></router-view>
+    <router-view :name="'Widget'"></router-view>
   </div>
 </template>
 

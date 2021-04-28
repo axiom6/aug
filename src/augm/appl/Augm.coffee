@@ -10,8 +10,7 @@ import Home    from '../../../vue/augm/appl/Augm.vue'
 import { createApp }    from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
-#mport Cache   from '../base/util/Cache.js'
-#mport Test    from './Test.js'
+#mport Cache   from '../../base/util/Cache.js'
 
 import MathJson from '../../../data/augm/Math.json'
 import GeomJson from '../../../data/augm/Geom.json'
@@ -67,8 +66,8 @@ class Augm
     { path: '/draw',   name:'Draw',   components:{ Draw:   loader.load('Draw') } },
     { path: '/hues',   name:'Hues',   components:{ Hues:   loader.load('Hues') } },
     { path: '/tool',   name:'Tool',   components:{ Tool:   Home.Tool }, children: [
-      { path:'Gauges', name:'Gauges', components:{ Gauges: loader.load('Tools') } },
-      { path:'Widget', name:'Widget', components:{ Widget: loader.load('Tools') } } ] },
+      { path:'gauges', name:'Gauges', components:{ Gauges: loader.load('Tools') } },
+      { path:'widget', name:'Widget', components:{ Widget: loader.load('Tools') } } ] },
     { path: '/cube',   name:'Cube',   components:{ Cube:   loader.load('Cube') } },
     { path: '/wood',   name:'Wood',   components:{ Wood:   loader.load('Wood') } } ]
 

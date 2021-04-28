@@ -53,6 +53,14 @@
       "oAP" : "\/aug.iml",
       "oF" : 1
     },
+    "\/binding.gyp" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/binding.gyp",
+      "oF" : 0
+    },
     "\/build" : {
       "ft" : 65536,
       "oA" : 1,

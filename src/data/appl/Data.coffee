@@ -4,7 +4,7 @@ import Access from '../../base/util/Access.js'
 import Stream from '../../base/util/Stream.js'
 import Nav    from '../../base/nav/Nav.js'
 import Touch  from '../../base/nav/Touch.js'
-#mport Cache  from '../../base/util/Cache.js'
+import Cache  from '../../base/util/Cache.js'
 import Mix    from '../../base/nav/Mix.js'
 
 
@@ -102,7 +102,7 @@ class Data
     Data.nav    = new Nav(   Data.stream, batch, Data.routes, Data.routeNames, Data.komps, true )
     Data.touch  = new Touch( Data.stream, Data.nav )
     #ata.build  = new Build( batch, Data.komps )
-    #use.cache  = new Cache( Muse.stream )
+    Data.cache  = new Cache( Data.stream )
     Access.buildInnov( batch, 'Data',   'Info' )
     Access.mergePracs( batch, 'Prin', ['Info','Know','Wise'] ) # 'Data'
     #ata.mergeCols()

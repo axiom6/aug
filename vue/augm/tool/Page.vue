@@ -2,6 +2,7 @@
 <template>
   <div :class="'tool-page-pane'" >
     <t-gauge v-if="show('Gauge')"></t-gauge>
+    <t-dnd   v-if="show('Dnd')"  ></t-dnd>
   </div>
 </template>
 
@@ -9,12 +10,13 @@
 
 import { ref,onMounted, inject } from "vue";
 import Gauge from './Gauge.vue';
+//import DnD   from './DnD.vue';
 
 let Page = {
 
   props: { page:Object },
 
-  components: { 't-gauge':Gauge },
+  components: { 't-gauge':Gauge, 't-dnd':Gauge },
 
   setup( props ) {
 

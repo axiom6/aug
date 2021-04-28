@@ -2,8 +2,8 @@
 <template>
   <div class="geom-pane">
     <h1 v-show="myRoute()">Geometric Algebra</h1>
-    <router-view name="Geom2D"></router-view>
-    <router-view name="Geom3D"></router-view>
+    <router-view :name="'Geom2D'"></router-view>
+    <router-view :name="'Geom3D'"></router-view>
   </div>
 </template>
 

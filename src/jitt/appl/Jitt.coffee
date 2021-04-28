@@ -2,7 +2,7 @@
 import Access  from '../../base/util/Access.js'
 import Stream  from '../../base/util/Stream.js'
 import Touch   from '../../base/nav/Touch.js'
-#mport Cache   from '../../base/util/Cache.js'
+import Cache   from '../../base/util/Cache.js'
 import Mix     from '../../base/nav/Mix.js'
 import Nav     from '../../base/nav/Nav.js'
 
@@ -84,7 +84,7 @@ class Jitter
     Jitter.mix     = new Mix(   Jitter, Jitter.routeNames )
     Jitter.nav     = new Nav(   Jitter.stream, batch, Jitter.routes, Jitter.routeNames, Jitter.komps, true )
     Jitter.touch   = new Touch( Jitter.stream, Jitter.nav )
-    #itter.cache   = new Cache( Jitter.stream )
+    Jitter.cache   = new Cache( Jitter.stream )
     Jitter.vue()
     return
 

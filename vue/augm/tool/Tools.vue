@@ -25,9 +25,9 @@
       const nav   = inject('nav');
       const pages = {
         Gauges: {
-          Gauge:   { title:'Gauge',   key:'Gauge'   } },
+          Gauge:   { title:'Gauge', key:'Gauge' } },
         Widget: {
-          ToolBar: { title:'ToolBar', key:'ToolBar' } } }
+          DnD:     { title:'DnD',   key:'DnD'   } } }
 
       const page     = ref(null);
       const pagesKey = ref(null);
