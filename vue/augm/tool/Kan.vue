@@ -2,18 +2,18 @@
 <template>
   <div class="kan-pane">
 
-    <div id="Initiate" ref="Initiate" class="initiate" @drop="onDrop($event)"
+    <div class="initiate" @drop="onDrop($event)"
         @dragenter.prevent @dragover.prevent><p class="title">Initiate</p>
-      <div id="Architect" ref="Architect" class="drag" draggable="true"
+      <div class="drag" draggable="true"
         @dragstart="onDrag($event)"><p class="text">Architect</p></div>
-      <div id="Design"    ref="Design" class="drag" draggable="true"
+      <div class="drag" draggable="true"
         @dragstart="onDrag($event)"><p class="text">Design</p></div>
-      <div id="Construct" ref="Construct" class="drag" draggable="true"
+      <div class="drag" draggable="true"
         @dragstart="onDrag($event)"><p class="text">Construct</p></div>
     </div>
-    <div id="Progress" ref="Progress" class="progress" @drop="onDrop($event)"
+    <div class="progress" @drop="onDrop($event)"
         @dragenter.prevent @dragover.prevent><p class="title">Progress</p></div>
-    <div id="Finished" ref="Finished" class="finished" @drop="onDrop($event)"
+    <div class="finished" @drop="onDrop($event)"
         @dragenter.prevent @dragover.prevent><p class="title">Finished</p></div>
 
   </div>
@@ -21,39 +21,28 @@
 
 <script>
 
-import { inject, ref } from 'vue';
+import { inject } from 'vue';
 
 let Kan = {
 
 setup() {
 
   const mix = inject('mix');
+  let childDrag = null;
 
   const onDrag = function(event) {
     event.dataTransfer.effectAllowed='move';
-    let cid = event.target.getAttribute('id');
-    let pid = event.target.parentNode.getAttribute('id');
-    console.log( 'DnD.onDrag()', { cid:cid, pid:pid } );
-    event.dataTransfer.setData("cid", cid );
-    event.dataTransfer.setData("pid", pid );
+    childDrag = event.target;
     event.dataTransfer.setDragImage(event.target,0,0);
     return true; }
   
   const onDrop = function(event)  {
-    let cid      = event.dataTransfer.getData("cid");
-    let pid      = event.dataTransfer.getData("pid");
-    let tid      = event.target.getAttribute('id');
-    let child    = document.getElementById(cid);
-    let parent   = document.getElementById(pid);
-    let isParent = mix.isDef(parent)
-    let isSame   = parent.isSameNode(child.parentNode)
-    if( isParent ) {
-      child = child.parentNode.removeChild( child );
-      event.target.appendChild(   child );
-      console.log( 'DnD.onDrop() success', { cid:cid, pid:pid, tid:tid } ); }
+    if( mix.isDef(childDrag) ) {
+        childDrag = childDrag.parentNode.removeChild( childDrag );
+        event.target.appendChild( childDrag );
+        console.log( 'DnD.onDrop() success' ); }
     else {
-      console.log( 'DnD.onDrop() failure', { cid:cid, pid:pid, tid:tid, isParent:isParent, isSame:isSame } ); }
-
+      console.log( 'DnD.onDrop() failure' ); }
     event.stopPropagation();
     return false; }
 
