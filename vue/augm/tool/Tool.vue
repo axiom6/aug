@@ -1,6 +1,6 @@
 
 <template>
-  <div class="tool-pane">
+  <div class="tool-pane" ref="Tool">
     <h1 v-show="myRoute()">Gauges and Widges</h1>
     <router-view :name="'Gauges'"></router-view>
     <router-view :name="'Widget'"></router-view>

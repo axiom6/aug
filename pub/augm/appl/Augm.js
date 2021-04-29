@@ -302,14 +302,14 @@ Augm = (function() {
       },
       children: [
         {
-          path: 'gauges',
+          path: 'Gauges',
           name: 'Gauges',
           components: {
             Gauges: loader.load('Tools')
           }
         },
         {
-          path: 'widget',
+          path: 'Widget',
           name: 'Widget',
           components: {
             Widget: loader.load('Tools')
@@ -334,7 +334,7 @@ Augm = (function() {
   ];
 
   Augm.geomRoute = {
-    path: '/augm/geom',
+    path: '/geom',
     name: 'Geom',
     components: {
       Geom: Home.Geom

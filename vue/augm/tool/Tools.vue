@@ -12,7 +12,7 @@
 
   import { inject, ref, onMounted, onBeforeMount } from "vue";
   import Tabs  from '../../base/elem/Tabs.vue';
-  import Page  from './Page.vue'
+  import Page  from './Page.vue';
 
 
   let Tools = {
@@ -27,7 +27,8 @@
         Gauges: {
           Gauge:   { title:'Gauge', key:'Gauge' } },
         Widget: {
-          DnD:     { title:'DnD',   key:'DnD'   } } }
+          DnD:     { title:'DnD',   key:'DnD' },
+          Kan:     { title:'Kan',   key:'Kan' } } }
 
       const page     = ref(null);
       const pagesKey = ref(null);

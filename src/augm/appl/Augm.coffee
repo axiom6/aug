@@ -66,13 +66,13 @@ class Augm
     { path: '/draw',   name:'Draw',   components:{ Draw:   loader.load('Draw') } },
     { path: '/hues',   name:'Hues',   components:{ Hues:   loader.load('Hues') } },
     { path: '/tool',   name:'Tool',   components:{ Tool:   Home.Tool }, children: [
-      { path:'gauges', name:'Gauges', components:{ Gauges: loader.load('Tools') } },
-      { path:'widget', name:'Widget', components:{ Widget: loader.load('Tools') } } ] },
+      { path:'Gauges', name:'Gauges', components:{ Gauges: loader.load('Tools') } },
+      { path:'Widget', name:'Widget', components:{ Widget: loader.load('Tools') } } ] },
     { path: '/cube',   name:'Cube',   components:{ Cube:   loader.load('Cube') } },
     { path: '/wood',   name:'Wood',   components:{ Wood:   loader.load('Wood') } } ]
 
   Augm.geomRoute =
-    { path: '/augm/geom', name:'Geom',   components:{ Geom:   Home.Geom }, children: [
+    { path: '/geom', name:'Geom',   components:{ Geom:   Home.Geom }, children: [
       { path:'2D',   name:'Geom2D', components:{ Geom2D: loader.load('GeomND') } },
       { path:'3D',   name:'Geom3D', components:{ Geom3D: loader.load('GeomND') } } ] }
 

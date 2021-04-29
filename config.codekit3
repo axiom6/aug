@@ -493,6 +493,14 @@
       "oAP" : "\/dist",
       "oF" : 0
     },
+    "\/DnD.html" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/DnD.html",
+      "oF" : 0
+    },
     "\/firebase.json" : {
       "ft" : 524288,
       "oA" : 1,
@@ -2949,7 +2957,7 @@
     "displayValueWasSetByUser" : 1,
     "iconImageName" : "\/dist\/assets\/apple-touch-icon.png",
     "iconImageWasSetByUser" : 0,
-    "lastBuiltDate" : 641041304.95464206
+    "lastBuiltDate" : 641340940.69736195
   },
   "projectSettings" : {
     "abortBuildOnError" : 1,

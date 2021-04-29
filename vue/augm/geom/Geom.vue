@@ -1,6 +1,6 @@
 
 <template>
-  <div class="geom-pane">
+  <div class="geom-pane" ref="Geom">
     <h1 v-show="myRoute()">Geometric Algebra</h1>
     <router-view :name="'Geom2D'"></router-view>
     <router-view :name="'Geom3D'"></router-view>
