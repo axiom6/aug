@@ -15,6 +15,8 @@
 
     setup() {
 
+      window.KanOnHasMounted = false;
+
       const mix   = inject('mix');
 
       const myRoute =function() {

@@ -27,8 +27,9 @@
         Gauges: {
           Gauge:   { title:'Gauge', key:'Gauge' } },
         Widget: {
-          DnD:     { title:'DnD',   key:'DnD' },
-          Kan:     { title:'Kan',   key:'Kan' } } }
+          DnD:     { title:'DnD',   key:'DnD'   },
+          Kan:     { title:'Kan',   key:'Kan'   },
+          KanOn:   { title:'KanOn', key:'KanOn' } } }
 
       const page     = ref(null);
       const pagesKey = ref(null);
@@ -38,6 +39,7 @@
         return pages[pagesKey.value]; }
 
       const onNav = function(obj) {
+        console.log( 'Tools.onNav()', { route:obj.route, pageKeys:pageKeys } );
         if( mix.inArray(   obj.route, pageKeys ) ) {
           pagesKey.value = obj.route; } }
 

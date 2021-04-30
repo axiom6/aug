@@ -19,6 +19,7 @@ let Gauge = {
     
   onMounted( function () {
     nextTick( function() {
+      // console.log( 'Gauge.onMounted()', elem['value'] );
       svgMgr = new SvgMgr( 'Gauge', elem['value'], "Comp" )
       opts.gaugeRadius = 0.5 * Math.min( svgMgr.size.w, svgMgr.size.h );
       drawGauge( opts, svgMgr.g ) ;

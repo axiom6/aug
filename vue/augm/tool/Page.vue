@@ -4,6 +4,7 @@
     <t-gauge v-if="show('Gauge')"></t-gauge>
     <t-dnd   v-if="show('DnD')"  ></t-dnd>
     <t-kan   v-if="show('Kan')"  ></t-kan>
+    <t-kanon v-if="show('KanOn')"></t-kanon>
   </div>
 </template>
 
@@ -13,12 +14,13 @@ import { ref,onMounted, inject } from "vue";
 import Gauge from './Gauge.vue';
 import DnD   from './DnD.vue';
 import Kan   from './Kan.vue';
+import KanOn from './KanOn.vue';
 
 let Page = {
 
   props: { page:Object },
 
-  components: { 't-gauge':Gauge, 't-dnd':DnD, 't-kan':Kan },
+  components: { 't-gauge':Gauge, 't-dnd':DnD, 't-kan':Kan, 't-kanon':KanOn },
 
   setup( props ) {
 
@@ -26,10 +28,11 @@ let Page = {
     let   pageKey = ref('None');
 
     const onNav = (obj) => {
-      pageKey.value = obj.pageKey; }
+      if( mix.inArray(obj.pageKey,['Gauge','Dnd','Kan','KanOn'] ) ) {
+        pageKey.value = obj.pageKey; } }
 
     const show = (name) => {
-        return name === pageKey.value; }
+      return name === pageKey.value; }
 
     onMounted(  () => {
       mix.subscribe( 'Nav', 'ToolPage.vue'+props.page.key, (obj) => {
