@@ -1,9 +1,10 @@
 {
   "projects": {
-    "default": "jitter-48413",
+    "default": "exit-muse",
     "jitt": "jitter-48413",
     "muse": "muse-ad352",
     "augm": "augm-visual",
-    "data": "data-muse"
+    "data": "data-muse",
+    "exit": "exit-muse"
   }
 }
