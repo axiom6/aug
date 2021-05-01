@@ -1,4 +1,5 @@
 
+import $           from 'jquery'
 import Util        from '../util/Util.js'
 import WeatherUC   from '../uc/WeatherUC.js'
 import AdvisoryUC  from '../uc/AdvisoryUC.js'

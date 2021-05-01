@@ -1,5 +1,7 @@
 var NavigateUI;
 
+import $ from 'jquery';
+
 import Util from '../util/Util.js';
 
 NavigateUI = class NavigateUI {

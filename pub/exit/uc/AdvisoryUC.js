@@ -1,5 +1,7 @@
 var AdvisoryUC;
 
+import $ from 'jquery';
+
 import Util from '../util/Util.js';
 
 AdvisoryUC = class AdvisoryUC {

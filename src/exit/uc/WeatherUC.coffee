@@ -1,4 +1,5 @@
 
+import $     from 'jquery'
 import Util  from '../util/Util.js'
 
 class WeatherUC

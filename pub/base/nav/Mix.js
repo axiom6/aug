@@ -526,6 +526,7 @@ Mix = class Mix {
       hw.r = Math.min(hw.ew / hw.iw, hw.eh / hw.ih);
       img.width = hw.iw * hw.r;
       img.height = hw.ih * hw.r;
+      img.alt = 'alt';
       if (elem.children[0] != null) {
         // console.log( 'Mix.appendImgsHW()', hw:hw, { w:img.width, h:img.height } )
         elem.children[0].remove();

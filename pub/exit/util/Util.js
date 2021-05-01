@@ -4,6 +4,8 @@ var Util,
   indexOf = [].indexOf,
   hasProp = {}.hasOwnProperty;
 
+import $ from 'jquery';
+
 Util = (function() {
   class Util {
     static element($elem) {
@@ -19,7 +21,7 @@ Util = (function() {
     }
 
     static isJQueryElem($elem) {
-      return (typeof $ !== "undefined" && $ !== null) && ($elem != null) && ($elem instanceof $ || indexOf.call(Object($elem), 'jquery') >= 0);
+      return ($ != null) && ($elem != null) && ($elem instanceof $ || indexOf.call(Object($elem), 'jquery') >= 0);
     }
 
     // ------ Modules ------
@@ -220,7 +222,6 @@ Util = (function() {
     }
 
     // Log Error and arguments through console and Gritter
-    //@gritter( { title:'Log', time:2000 }, str )
     static error() {
       var str;
       str = Util.toStrArgs('Error:', arguments);
@@ -228,7 +229,6 @@ Util = (function() {
     }
 
     // Log Warning and arguments through console and Gritter
-    // @gritter( { title:'Error', sticky:true }, str ) if window['$']? and $['gritter']?
     // Util.trace( 'Trace:' )
     static warn() {
       var str;
@@ -236,7 +236,6 @@ Util = (function() {
       Util.consoleLog(str);
     }
 
-    // @gritter( { title:'Warning', sticky:true }, str ) if window['$']? and $['gritter']?
     static toError() {
       var str;
       str = Util.toStrArgs('Error:', arguments);
@@ -250,8 +249,6 @@ Util = (function() {
       Util.consoleLog(str);
     }
 
-    // Log arguments through gritter if it exists
-    //@gritter( { title:'Log', time:2000 }, str )
     static called() {
       var str;
       str = Util.toStrArgs('', arguments);
@@ -260,17 +257,6 @@ Util = (function() {
         title: 'Called',
         time: 2000
       }, str);
-    }
-
-    static gritter(opts, ...args) {
-      var str;
-      if (!(Util.hasGlobal('$', false) && ($['gritter'] != null))) {
-        return;
-      }
-      str = Util.toStrArgs('', args);
-      opts.title = opts.title != null ? opts.title : 'Gritter';
-      opts.text = str;
-      $.gritter.add(opts);
     }
 
     static consoleLog(str) {
@@ -454,7 +440,7 @@ Util = (function() {
     }
 
     static isJQuery($e) {
-      return Util.hasGlobal('$') && ($e != null) && ($e instanceof $ || indexOf.call(Object($e), 'jquery') >= 0) && $e.length > 0;
+      return Util.isDef('$') && ($e != null) && ($e instanceof $ || indexOf.call(Object($e), 'jquery') >= 0) && $e.length > 0;
     }
 
     // ------ Converters ------

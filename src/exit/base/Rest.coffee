@@ -1,5 +1,6 @@
 
-import Util    from '../util/Util.js'
+import $    from 'jquery'
+import Util from '../util/Util.js'
 
 class Rest
 

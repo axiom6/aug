@@ -1,6 +1,8 @@
 var WeatherUC,
   hasProp = {}.hasOwnProperty;
 
+import $ from 'jquery';
+
 import Util from '../util/Util.js';
 
 WeatherUC = (function() {

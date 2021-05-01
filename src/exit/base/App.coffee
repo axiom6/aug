@@ -1,4 +1,5 @@
 
+import $             from 'jquery'
 import Util          from '../util/Util.js'
 import Stream        from '../util/Stream.js'
 import Rest          from '../base/Rest.js'

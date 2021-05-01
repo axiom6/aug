@@ -1,5 +1,7 @@
 var DealsUC;
 
+import $ from 'jquery';
+
 import Util from '../util/Util.js';
 
 DealsUC = class DealsUC {
@@ -10,7 +12,7 @@ DealsUC = class DealsUC {
     this.land = land;
     this.etaHoursMins = '?';
     this.uom = 'em';
-    Util.noop(this.iAmExiting, this.enableIamExitingClick);
+    Util.noop(this.iAmExiting);
   }
 
   ready() {
@@ -129,13 +131,6 @@ DealsUC = class DealsUC {
 
   iAmExiting(dataId) {
     return `<div style="margin-top:0.5em;"><span dataid="${dataId}" style="font-size:0.9em; padding:0.3em; background-color:#658552; color:white;">I'M EXITING</span></div></div>`;
-  }
-
-  enableIamExitingClick(dataId, gritterId) {
-    return $(`[dataid=${dataId}]`).click(function() {
-      Util.dbg("I'M EXITING");
-      return $.gritter.remove(gritterId);
-    });
   }
 
 };

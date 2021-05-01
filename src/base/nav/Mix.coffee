@@ -300,6 +300,7 @@ class Mix
       hw.r  = Math.min( hw.ew/hw.iw, hw.eh/hw.ih )
       img.width  = hw.iw * hw.r
       img.height = hw.ih * hw.r
+      img.alt    = 'alt'
       # console.log( 'Mix.appendImgsHW()', hw:hw, { w:img.width, h:img.height } )
       elem.children[0].remove() if elem.children[0]?
       elem.append( img )

@@ -1,5 +1,7 @@
 var TripUI;
 
+import $ from 'jquery';
+
 import Util from '../util/Util.js';
 
 import WeatherUC from '../uc/WeatherUC.js';

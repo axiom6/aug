@@ -1,6 +1,7 @@
 
 # Static method utilities       - Util is a global without a functional wrapper
 # coffee -c -bare Util.coffee   - prevents function wrap to put Util in global namespace
+import $  from 'jquery'
 
 class Util
 
@@ -150,14 +151,12 @@ class Util
     return if not Util.debug
     str = Util.toStrArgs( '', arguments )
     Util.consoleLog( str )
-    #@gritter( { title:'Log', time:2000 }, str )
     return
 
   # Log Error and arguments through console and Gritter
   @error:() ->
     str  = Util.toStrArgs( 'Error:', arguments )
     Util.consoleLog( str )
-    # @gritter( { title:'Error', sticky:true }, str ) if window['$']? and $['gritter']?
     # Util.trace( 'Trace:' )
     return
 
@@ -165,7 +164,6 @@ class Util
   @warn:() ->
     str  = Util.toStrArgs( 'Warning:', arguments )
     Util.consoleLog( str )
-    # @gritter( { title:'Warning', sticky:true }, str ) if window['$']? and $['gritter']?
     return
 
   @toError:() ->
@@ -176,22 +174,12 @@ class Util
   @log:() ->
     str = Util.toStrArgs( '', arguments )
     Util.consoleLog( str )
-    #@gritter( { title:'Log', time:2000 }, str )
     return
 
-  # Log arguments through gritter if it exists
   @called:() ->
     str = Util.toStrArgs( '', arguments )
     Util.consoleLog( str )
     @gritter( { title:'Called', time:2000 }, str )
-    return
-
-  @gritter:( opts, args... ) ->
-    return if not ( Util.hasGlobal('$',false)  and $['gritter']? )
-    str = Util.toStrArgs( '', args )
-    opts.title = if opts.title? then opts.title else 'Gritter'
-    opts.text  = str
-    $.gritter.add( opts )
     return
 
   @consoleLog:( str ) ->
@@ -285,7 +273,7 @@ class Util
       false
 
   @isJQuery:( $e ) ->
-    Util.hasGlobal('$') and $e? and ( $e instanceof $ || 'jquery' in Object($e) ) and $e.length > 0
+    Util.isDef('$') and $e? and ( $e instanceof $ || 'jquery' in Object($e) ) and $e.length > 0
 
   # ------ Converters ------
 

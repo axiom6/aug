@@ -1,5 +1,7 @@
 var GoUI;
 
+import $ from 'jquery';
+
 import Util from '../util/Util.js';
 
 import BannerUC from '../uc/BannerUC.js';

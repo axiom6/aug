@@ -1,4 +1,5 @@
 
+import $          from 'jquery'
 import Util       from '../util/Util.js'
 import BannerUC   from '../uc/BannerUC.js'
 import DealsUC    from '../uc/DealsUC.js'

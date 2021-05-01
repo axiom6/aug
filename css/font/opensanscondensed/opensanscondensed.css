@@ -1,0 +1,27 @@
+/* open-sans-condensed-cyrillic-ext-300-normal*/
+@font-face {
+  font-family: 'Open Sans Condensed';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: local('Open Sans Condensed'), url(OpenSansCondensed-Light.ttf) format('truetype');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+@font-face {
+  font-family: 'Open Sans Condensed';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: local('Open Sans Condensed Bold'), url(OpenSansCondensed-Bold.ttf) format('truetype');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+@font-face {
+  font-family: 'Open Sans Condensed';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: local('Open Sans Condensed Italic'), url(OpenSansCondensed-LightItalic.ttf) format('truetype');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}

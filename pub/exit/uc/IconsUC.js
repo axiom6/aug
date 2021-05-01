@@ -1,5 +1,7 @@
 var IconsUC;
 
+import $ from 'jquery';
+
 import Util from '../util/Util.js';
 
 IconsUC = class IconsUC {

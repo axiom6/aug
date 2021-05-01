@@ -1,5 +1,9 @@
 var DriveBarUC;
 
+import $ from 'jquery';
+
+import * as d3 from 'd3';
+
 import Util from '../util/Util.js';
 
 DriveBarUC = class DriveBarUC {

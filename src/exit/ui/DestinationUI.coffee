@@ -1,4 +1,5 @@
 
+import $           from 'jquery'
 import Util        from '../util/Util.js'
 import Data        from '../base/Data.js'
 import ThresholdUC from '../uc/ThresholdUC.js'

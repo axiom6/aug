@@ -1,4 +1,5 @@
 
+import $         from 'jquery'
 import Util      from '../util/Util.js'
 import IconsUC   from '../uc/IconsUC.js'
 

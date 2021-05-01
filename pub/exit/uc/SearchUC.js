@@ -1,5 +1,7 @@
 var SearchUC;
 
+import $ from 'jquery';
+
 import Util from '../util/Util.js';
 
 SearchUC = class SearchUC {

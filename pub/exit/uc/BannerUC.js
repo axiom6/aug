@@ -1,5 +1,7 @@
 var BannerUC;
 
+import $ from 'jquery';
+
 import Util from '../util/Util.js';
 
 BannerUC = class BannerUC {

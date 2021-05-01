@@ -1,4 +1,5 @@
 
+import $     from 'jquery'
 import Util  from '../util/Util.js'
 
 class DealsUC
@@ -6,7 +7,7 @@ class DealsUC
   constructor:( @stream, @role, @port, @land ) ->
     @etaHoursMins = '?'
     @uom = 'em'
-    Util.noop( @iAmExiting, @enableIamExitingClick )
+    Util.noop( @iAmExiting )
 
   ready:() ->
     @$ = $( @html() )
@@ -87,9 +88,5 @@ class DealsUC
   iAmExiting:( dataId ) ->
     """<div style="margin-top:0.5em;"><span dataid="#{dataId}" style="font-size:0.9em; padding:0.3em; background-color:#658552; color:white;">I'M EXITING</span></div></div>"""
 
-  enableIamExitingClick:( dataId, gritterId ) ->
-    $("[dataid=#{dataId}]").click( () ->
-      Util.dbg( "I'M EXITING" )
-      $.gritter.remove( gritterId ) )
 
 `export default DealsUC`

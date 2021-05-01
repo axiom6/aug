@@ -1,5 +1,7 @@
 var DealsUI;
 
+import $ from 'jquery';
+
 import Util from '../util/Util.js';
 
 import SearchUC from '../uc/SearchUC.js';
