@@ -17,7 +17,7 @@ class Stream
     subject  = @getSubject( subjectName, false )
     subject['subscribers'][subscriberName] = onCallback
     if @isInfo( subjectName, 'subscribe' )
-      console.info( 'Strean.subscribe()', { subject:subjectName, subscriber:subscriberName } )
+      console.info( 'Stream.subscribe()', { subject:subjectName, subscriber:subscriberName } )
     return
 
   publish:( subjectName, object ) ->
@@ -64,9 +64,9 @@ class Stream
       if @hasSubscriber( subjectName, subscriberName )
         delete @subjects[subjectName].subscribers[subscriberName]
       else
-        console.error( 'Strean.unsubscribe() unknown subscriber', { subject:subjectName, subscriber:subscriberName } )
+        console.log( 'Strean.unsubscribe() unknown subscriber', { subject:subjectName, subscriber:subscriberName } )
     else
-      console.error( 'Strean.unsubscribe() unknown subject', { subject:subjectName, subscriber:subscriberName } )
+      console.log( 'Strean.unsubscribe() unknown subject', { subject:subjectName, subscriber:subscriberName } )
 
     if @isInfo( subjectName, 'subscribe' )
       console.info( 'Stream.unsubscribe()', { subject:subjectName, subscriber:subscriberName } )

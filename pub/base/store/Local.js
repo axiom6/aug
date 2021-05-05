@@ -6,17 +6,16 @@ import Store from './Store.js';
 Local = class Local extends Store {
   constructor(dbName) {
     super(dbName);
-    this.tableIds = {};
+    this.memory = {};
   }
 
-  key(table, id) {
-    return this.dbName + table + id;
+  tableId(table, id) {
+    return table + id;
   }
 
   obj(table, id) {
     var str;
-    str = localStorage.getItem(this.key(table, id));
-    // console.log( 'Local.obj()', str )
+    str = localStorage.getItem(this.tableId(table, id));
     if (str != null) {
       return JSON.parse(str);
     } else {
@@ -26,22 +25,24 @@ Local = class Local extends Store {
 
   addId(table, id, obj) {
     obj._id = id;
-    if (this.tableIds[table] == null) {
-      this.tableIds[table] = [];
+    if (!((this.tables[table] != null) && (this.tables[table][this.source] != null))) {
+      this.openTable(table);
     }
-    this.tableIds[table].push(id);
+    if (this.memory[table] == null) {
+      this.memory[table] = {};
+    }
+    this.memory[table][id] = obj;
   }
 
   delId(table, id) {
-    if (this.tableIds[table] == null) {
-      this.tableIds[table] = [];
+    if ((this.memory[table] != null) && (this.memory[table][id] != null)) {
+      delete this.memory[table][id];
     }
-    this.tableIds[table].push(id);
   }
 
   add(table, id, obj, silent = false) {
     this.addId(table, id, obj);
-    localStorage.setItem(this.key(table, id), JSON.stringify(obj));
+    localStorage.setItem(this.tableId(table, id), JSON.stringify(obj));
     if (!silent) {
       this.results(table, 'add', obj);
     }
@@ -67,7 +68,7 @@ Local = class Local extends Store {
 
   put(table, id, obj, silent = false) {
     this.addId(table, id, obj);
-    localStorage.setItem(this.key(table, id), JSON.stringify(obj));
+    localStorage.setItem(this.tableId(table, id), JSON.stringify(obj));
     if (!silent) {
       this.results(table, 'put', obj);
     }
@@ -77,7 +78,7 @@ Local = class Local extends Store {
     var obj;
     this.delId(table, id);
     obj = this.obj(table, id);
-    localStorage.removeItem(this.key(table, id));
+    localStorage.removeItem(this.tableId(table, id));
     if (!silent) {
       this.results(table, 'del', obj);
     }
@@ -94,11 +95,15 @@ Local = class Local extends Store {
   }
 
   select(table, where, callback = null, op = 'select') {
-    var id, ids, j, len, obj, objs;
+    var entry, id, obj, objs, ref;
     objs = {};
-    ids = this.tableIds[table];
-    for (j = 0, len = ids.length; j < len; j++) {
-      id = ids[j];
+    ref = this.memory[table];
+    for (id in ref) {
+      if (!hasProp.call(ref, id)) continue;
+      entry = ref[id];
+      if (!(this.memory[table] != null)) {
+        continue;
+      }
       obj = this.obj(table, id);
       if ((obj != null) && where(obj)) {
         objs[id] = obj;
@@ -121,50 +126,40 @@ Local = class Local extends Store {
     this.results(table, 'update', objs);
   }
 
-  remove(table, where, silent = false) {
-    var id, ids, j, len, obj, objs;
-    ids = this.tableIds[table];
+  remove(table, where, op = 'remove') {
+    var entry, id, obj, objs, ref;
     objs = {};
-    for (j = 0, len = ids.length; j < len; j++) {
-      id = ids[j];
+    ref = this.memory[table];
+    for (id in ref) {
+      if (!hasProp.call(ref, id)) continue;
+      entry = ref[id];
+      if (!(this.memory[table] != null)) {
+        continue;
+      }
       obj = this.obj(table, id);
       if ((obj != null) && where(obj)) {
         this.del(table, id, true);
         objs[id] = obj;
       }
     }
-    if (!silent) {
-      this.results(table, 'remove', objs);
-    }
-  }
-
-  open(table) {
-    return this.results(table, 'open', {});
+    this.results(table, op, objs);
   }
 
   show() {
-    var i, item, j, match, ptn, ref, table, tables;
-    tables = [];
-    ptn = /([A-Z][a-z]*)([A-Z][a-z]*)([A-Z][a-z]*)/;
-    for (i = j = 0, ref = localStorage.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
-      item = localStorage.key(i);
-      if (item.startsWith(this.dbName)) {
-        match = ptn.exec(item);
-        // console.log( 'Local.show()', match[1], match[2], match[3] )
-        table = match[2];
-        if (!tables.includes(table)) {
-          tables.push(table);
-        }
-      }
-    }
-    this.results(this.dbName, 'show', tables);
+    return this.showTables();
+  }
+
+  open(table) {
+    this.openTable(table);
   }
 
   drop(table) {
-    this.remove(table, (function(obj) {
+    var where;
+    this.dropTable(table);
+    where = function(obj) {
       return true;
-    }), true);
-    this.results(table, 'drop', {});
+    };
+    this.remove(table, where, 'drop');
   }
 
 };
@@ -172,6 +167,8 @@ Local = class Local extends Store {
 export default Local;
 
 /*
+ * console.log( 'Local.obj()', str )
+
   version:() ->
     localStorage.setItem('IndexDbVersion','0')
     dbVersionStr = localStorage.getItem('IndexDbVersion')
@@ -180,4 +177,4 @@ export default Local;
     localStorage.setItem('IndexDbVersion',dbVersionStr)
     console.log( 'Index() version', dbVersionStr, dbVersionInt )
     dbVersionInt
-*/
+ */

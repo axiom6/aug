@@ -4,30 +4,29 @@ class Local extends Store
 
   constructor:( dbName ) ->
     super( dbName )
-    @tableIds = {}
+    @memory = {}
 
-  key:( table, id ) ->
-    @dbName + table + id
+  tableId:( table,  id ) ->
+            table + id
 
   obj:( table, id ) ->
-    str = localStorage.getItem( @key(table,id) )
-    # console.log( 'Local.obj()', str )
+    str = localStorage.getItem( @tableId(table,id) )
     if str? then JSON.parse(str) else {}
 
   addId:( table, id, obj ) ->
     obj._id = id
-    @tableIds[table] = [] if not @tableIds[table]?
-    @tableIds[table].push(id)
+    @openTable( table )     if not ( @tables[table]? and @tables[table][@source]? )
+    @memory[table]     = {} if not @memory[table]?
+    @memory[table][id] = obj
     return
 
   delId:( table, id ) ->
-    @tableIds[table] = [] if not @tableIds[table]?
-    @tableIds[table].push(id)
+    delete @memory[table][id] if @memory[table]? and @memory[table][id]?
     return
 
   add:(     table, id, obj, silent=false  )    ->
     @addId( table, id, obj )
-    localStorage.setItem( @key(table,id), JSON.stringify(obj) )
+    localStorage.setItem( @tableId(table,id), JSON.stringify(obj) )
     @results( table, 'add', obj ) if not silent
     return
 
@@ -44,14 +43,14 @@ class Local extends Store
 
   put:(     table, id, obj, silent=false  ) ->
     @addId( table, id, obj )
-    localStorage.setItem( @key(table,id), JSON.stringify(obj) )
+    localStorage.setItem( @tableId(table,id), JSON.stringify(obj) )
     @results( table, 'put', obj ) if not silent
     return
 
   del:(     table, id, silent=false  ) ->
     @delId( table, id )
     obj = @obj( table, id )
-    localStorage.removeItem( @key(table,id) )
+    localStorage.removeItem( @tableId(table,id) )
     @results( table, 'del', obj )  if not silent
     return
 
@@ -63,9 +62,8 @@ class Local extends Store
 
   select:( table, where, callback=null, op='select' ) ->
     objs =  {}
-    ids  =  @tableIds[table]
-    for id in ids
-      obj = @obj( table, id )
+    for own id, entry of @memory[table] when @memory[table]?
+      obj      = @obj( table, id )
       objs[id] = obj if obj? and where(obj)
     if callback?
       callback( objs )
@@ -79,41 +77,34 @@ class Local extends Store
     @results( table, 'update', objs )
     return
 
-  remove:( table, where, silent=false  ) ->
-    ids  =  @tableIds[table]
+  remove:( table, where, op='remove'  ) ->
     objs = {}
-    for id in ids
+    for own id, entry of @memory[table] when @memory[table]?
       obj = @obj( table, id )
       if obj? and where(obj)
         @del( table, id, true )
         objs[id] = obj
-    @results( table, 'remove', objs ) if not silent
+    @results( table, op, objs )
     return
 
-  open:( table ) ->
-    @results( table, 'open', {} )
-
   show:() ->
-    tables = []
-    ptn = /([A-Z][a-z]*)([A-Z][a-z]*)([A-Z][a-z]*)/
-    for i in  [0...localStorage.length]
-      item = localStorage.key(i)
-      if item.startsWith( @dbName )
-         match = ptn.exec( item )
-         # console.log( 'Local.show()', match[1], match[2], match[3] )
-         table = match[2]
-         tables.push( table ) if not tables.includes(table)
-    @results( @dbName, 'show', tables )
+    @showTables()
+
+  open:( table ) ->
+    @openTable( table )
     return
 
   drop:( table ) ->
-    @remove( table, ((obj)->true), true )
-    @results( table, 'drop', {} )
+    @dropTable( table )
+    where = (obj) -> true
+    @remove( table, where, 'drop' )
     return
 
 export default Local
 
 ###
+      # console.log( 'Local.obj()', str )
+
   version:() ->
     localStorage.setItem('IndexDbVersion','0')
     dbVersionStr = localStorage.getItem('IndexDbVersion')

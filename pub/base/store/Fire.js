@@ -106,15 +106,16 @@ Fire = class Fire extends Store {
   }
 
   show() {
-    return this.results(this.dbName, 'show', {});
+    this.showTables();
   }
 
   open(table) {
-    return this.results(table, 'open', {});
+    this.openTable(table);
   }
 
   // ref.remove() is Dangerous and has removed all tables in Firebase
   drop(table) {
+    this.dropTable(table);
     this.fd.ref(table).remove().then((snaps) => {
       return this.firemsg(table, 'drop', snaps);
     }).catch((error) => {

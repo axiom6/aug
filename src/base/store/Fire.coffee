@@ -79,13 +79,16 @@ class Fire extends Store
     return
 
   show:() ->
-    @results( @dbName, 'show', {} )
+    @showTables()
+    return
 
   open:( table ) ->
-    @results( table, 'open', {} )
+    @openTable( table )
+    return
 
   # ref.remove() is Dangerous and has removed all tables in Firebase
   drop:( table ) ->
+    @dropTable( table )
     @fd.ref(table).remove()
        .then(  (snaps) => @firemsg( table, 'drop', snaps ) )
        .catch( (error) => @onerror( table, 'drop', error ) )

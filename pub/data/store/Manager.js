@@ -14,15 +14,16 @@ import Couch from '../../base/store/Couch.js';
 
 Manager = class Manager {
   constructor(mix) {
+    this.subscribe = this.subscribe.bind(this);
     this.mix = mix;
     this.dbName = 'test1';
-    this.tables = ['Prac', 'Hues'];
-    this.credUrl = 'http://admin:athena@127.0.0.1:5984'; // Admin host to couchdb
-    this.baseUrl = 'http://127.0.0.1:5984'; // Admin host to couchdb
+    this.credsUrl = 'http://admin:athena@127.0.0.1:5984'; // Admin host to couchdb
+    this.couchUrl = 'http://127.0.0.1:5984'; // Admin host to couchdb
     this.stream = Data.stream;
     this.prac = null;
     this.hues = null;
     this.kit = null;
+    this.lastSource = null;
   }
 
   test(name) {
@@ -32,42 +33,64 @@ Manager = class Manager {
         case 'Local':
           return new Local(this.dbName);
         case 'Index':
-          return this.openIndex(this.dbName, ['Hues']); // 'Prac',
+          return new Index(this.dbName);
         case 'Fire':
           return new Fire(this.dbName);
         case 'Couch':
-          return new Couch(this.dbName, this.baseUrl);
+          return new Couch(this.dbName, this.couchUrl);
         default:
           return new Memory(this.dbName);
       }
     }).call(this);
+    store.openTable('prac');
+    store.openTable('hues');
+    if (name === 'Index') {
+      this.openIndex(store);
+    }
     if (name !== 'Index') {
       this.suite(store);
     }
   }
 
-  openIndex(dbName, tables) {
-    var idb;
-    idb = new Index(dbName, ['Prac', 'Hues']);
-    idb.openDB(idb.dbName, idb.dbVersion, tables).then((db) => {
+  openIndex(idb) {
+    idb.openDB(idb.dbName, idb.dbVersion).then((db) => {
       idb.db = db;
       this.suite(idb);
     }).catch((error) => {
-      idb.onerror(tables, 'openDB', error);
+      idb.onerror(idb.tables, 'openDB', error);
     });
-    return idb;
   }
 
   subscribe(table, op, store) {
     var onSubscribe;
     onSubscribe = (obj) => {
-      return console.log('Mgr', {
+      var whereD, whereS;
+      console.log('Mgr', {
         table: table,
         op: op,
         source: store.source,
         obj: obj
       });
+      whereS = function(obj) {
+        return true;
+      };
+      whereD = function(obj) {
+        return obj.column === 'Embrace';
+      };
+      switch (op) {
+        case 'add':
+          return store.get(table, obj.id);
+        case 'put':
+          return store.del(table, obj.id);
+        case 'insert':
+          return store.select(table, whereS);
+        case 'update':
+          return store.remove(table, whereD);
+      }
     };
+    if (this.lastSource != null) {
+      store.unsubscribe(table, op, this.lastSource);
+    }
     store.subscribe(table, op, store.source, onSubscribe);
   }
 
@@ -76,34 +99,33 @@ Manager = class Manager {
     this.data();
     this.subscribe('prac', 'add', store);
     this.subscribe('prac', 'get', store);
-    this.subscribe('hues', 'put', store);
+    this.subscribe('prac', 'put', store);
     this.subscribe('prac', 'del', store);
-    this.subscribe(this.dbName, 'show', store);
-    this.subscribe('hues', 'open', store);
-    //tore.drop( 'demo')
-
-    //tore.open( 'hues')
-    store.show();
-    //tore.add( 'prac', @prac.id, @prac )
-    //tore.get( 'prac', @prac.id )
-    this.hues['Green'].column = 'Embrace';
-    this.hues['Green']._rev = "3-3ec7f175f1d3920f3d02c7d16c4a6737";
-    //store.put( 'hues', 'Green', @hues['Green'] )
-    //tore.del( 'prac', @prac.id )
     this.subscribe('hues', 'insert', store);
     this.subscribe('hues', 'select', store);
     this.subscribe('hues', 'update', store);
     this.subscribe('hues', 'remove', store);
+    this.subscribe('Tables', 'show', store);
+    this.subscribe('prac', 'open', store);
+    this.subscribe('prac', 'drop', store);
+    //tore.drop( 'demo')
+    //tore.open( 'hues')
+    store.show();
+    store.add('prac', this.prac.id, this.prac);
+    //tore.get( 'prac', @prac.id )         # Called after add
+    store.put('prac', this.prac.id, this.prac);
+    //tore.del( 'prac', @prac.id )         # Called after put
+    store.insert('hues', this.hues);
+    //tore.select( 'hues', (obj) -> true ) # Called after insert
+    this.hues['Green'].column = 'Embrace';
+    this.hues['Orange'].column = 'Embrace';
+    this.hues['Violet'].column = 'Embrace';
+    store.update('hues', this.hues);
+    //here = (obj) -> obj.column is 'Embrace'  # Called after update
+    //tore.remove( 'hues', where )
+    this.lastSource = store.source;
   }
 
-  //tore.insert( 'hues', @hues )
-  //tore.select( 'hues', (obj) -> true )
-  //@hues['Green'].column  = 'Embrace'
-  //@hues['Orange'].column = 'Embrace'
-  //@hues['Violet'].column = 'Embrace'
-  //tore.update( 'hues', @hues )
-  //here = (obj) -> obj.column is 'Embrace'
-  //tore.remove( 'hues', where )
   data() {
     this.prac = {
       "_id": "Involve",

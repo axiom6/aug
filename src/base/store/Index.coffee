@@ -10,14 +10,14 @@ class Index extends Store
     @dbVersion = 1
     window.indexedDB.deleteDatabase( @dbName )
 
-  openDB:( dbName, dbVersion, tables ) ->
+  openDB:( dbName, dbVersion ) ->
     # @db.close() if @db?
     dbp = new Promise( ( resolve, reject ) =>
       request = window.indexedDB.open( dbName, dbVersion )
       request.onupgradeneeded = ( event ) =>
         upDb  = event.target['result']
         upTxn = event.target['transaction']
-        @openStores( upDb, tables )
+        @openStores( upDb )
         # console.log( 'Index.openDB()', 'upgrade', @dbName, upDb.objectStoreNames )
         upTxn.complete
         return
@@ -37,9 +37,10 @@ class Index extends Store
     )
     dbp
 
-  openStores:( upDb, tables ) ->
-    for table in tables
-      @openStore( upDb, table )
+  openStores:( upDb ) ->
+    for own table, list of @tables
+      for own key, obj of list when key is 'Index'
+        @openStore( upDb, table )
     return
 
   contains:( upDb, table ) ->

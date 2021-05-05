@@ -6,6 +6,7 @@ import Nav    from '../../base/nav/Nav.js'
 import Touch  from '../../base/nav/Touch.js'
 #mport Cache  from '../../base/util/Cache.js'
 import Mix    from '../../base/nav/Mix.js'
+import MuseLD from './MuseLD.js'
 
 
 import { createApp }    from 'vue'    #
@@ -34,14 +35,15 @@ class Muse
   # Called by muse.html to kick things off
   # 1. Read in all the JSON config files in Muse.Batch. Call Muse.init() when complete.
   Muse.start = () ->
-    Muse.addToHead()
+    museLD = new MuseLD()
+    Muse.addToHead(museLD)
     for key, val of Muse.Batch when val.refine? and val.refine
       val.data = Access.refine(val.data)
     Muse.init( Muse.Batch )
     return
 
   # Add these <link> tags to <head> because vite build makes a mess of them
-  Muse.addToHead = () ->
+  Muse.addToHead = (museLD) ->
     # manifest = """<link href="manifest.json"  rel="manifest" crossorigin="use-credentials">"""
     # siteLink = """<link href="https://vit-muse.web.app/" rel="canonical">"""
     maniElem                = document.createElement('link')
@@ -52,8 +54,13 @@ class Muse
     # console.log( 'Location', window.location.href )
     siteElem.href        =   window.location.href # "https://vit-muse.web.app/" if window.location.contains('vit-muse')
     siteElem.rel         = "canonical"
-    document.getElementsByTagName("head")[0].appendChild(maniElem);
-    document.getElementsByTagName("head")[0].appendChild(siteElem);
+    jsonLDel             = document.createElement('script')
+    jsonLDel.type        ="application/ld+json"
+    jsonLDel.text        = museLD.jsonLDStr
+    head                 = document.getElementsByTagName("head")[0]
+    head.appendChild(maniElem)
+    head.appendChild(siteElem)
+    head.appendChild(jsonLDel)
     return
 
   Muse.Batch = {

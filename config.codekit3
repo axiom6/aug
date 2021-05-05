@@ -2137,6 +2137,17 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/src\/base\/sem\/JsonLD.coffee" : {
+      "ft" : 32,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/base\/sem\/JsonLD.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/src\/base\/store\/Couch.coffee" : {
       "ft" : 32,
       "ma" : 0,
@@ -2718,6 +2729,25 @@
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
+    },
+    "\/src\/muse\/appl\/MuseLD.coffee" : {
+      "ft" : 32,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/muse\/appl\/MuseLD.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/src\/muse\/appl\/MuseLD.json" : {
+      "ft" : 524288,
+      "oA" : 1,
+      "oAP" : "\/src\/muse\/appl\/MuseLD-min.json",
+      "oF" : 0,
+      "oO" : 0,
+      "oS" : 1
     },
     "\/src\/muse\/conn\/Chord.coffee" : {
       "ft" : 32,

@@ -27,7 +27,7 @@ Stream = class Stream {
     subject = this.getSubject(subjectName, false);
     subject['subscribers'][subscriberName] = onCallback;
     if (this.isInfo(subjectName, 'subscribe')) {
-      console.info('Strean.subscribe()', {
+      console.info('Stream.subscribe()', {
         subject: subjectName,
         subscriber: subscriberName
       });
@@ -118,13 +118,13 @@ Stream = class Stream {
       if (this.hasSubscriber(subjectName, subscriberName)) {
         delete this.subjects[subjectName].subscribers[subscriberName];
       } else {
-        console.error('Strean.unsubscribe() unknown subscriber', {
+        console.log('Strean.unsubscribe() unknown subscriber', {
           subject: subjectName,
           subscriber: subscriberName
         });
       }
     } else {
-      console.error('Strean.unsubscribe() unknown subject', {
+      console.log('Strean.unsubscribe() unknown subject', {
         subject: subjectName,
         subscriber: subscriberName
       });

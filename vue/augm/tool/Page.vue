@@ -5,6 +5,7 @@
     <t-dnd   v-if="show('DnD')"  ></t-dnd>
     <t-kan   v-if="show('Kan')"  ></t-kan>
     <t-kanon v-if="show('KanOn')"></t-kanon>
+    <t-kanjq v-if="show('KanJQ')"></t-kanjq>
   </div>
 </template>
 
@@ -15,12 +16,13 @@ import Gauge from './Gauge.vue';
 import DnD   from './DnD.vue';
 import Kan   from './Kan.vue';
 import KanOn from './KanOn.vue';
+import KanJQ from './KanJQ.vue';
 
 let Page = {
 
   props: { page:Object },
 
-  components: { 't-gauge':Gauge, 't-dnd':DnD, 't-kan':Kan, 't-kanon':KanOn },
+  components: { 't-gauge':Gauge, 't-dnd':DnD, 't-kan':Kan, 't-kanon':KanOn, 't-kanjq':KanJQ },
 
   setup( props ) {
 
@@ -28,7 +30,7 @@ let Page = {
     let   pageKey = ref('None');
 
     const onNav = (obj) => {
-      if( mix.inArray(obj.pageKey,['Gauge','Dnd','Kan','KanOn'] ) ) {
+      if( mix.inArray(obj.pageKey,['Gauge','Dnd','Kan','KanOn','KanJQ'] ) ) {
         pageKey.value = obj.pageKey; } }
 
     const show = (name) => {

@@ -27,9 +27,9 @@
         Gauges: {
           Gauge:   { title:'Gauge', key:'Gauge' } },
         Widget: {
-          DnD:     { title:'DnD',   key:'DnD'   },
           Kan:     { title:'Kan',   key:'Kan'   },
-          KanOn:   { title:'KanOn', key:'KanOn' } } }
+          KanOn:   { title:'KanOn', key:'KanOn' },
+          KanJQ:   { title:'KanJQ', key:'KanJQ' } } }
 
       const page     = ref(null);
       const pagesKey = ref(null);
@@ -68,3 +68,14 @@
      background-color:@theme-back; display:grid; font-size:@geomNDFS; }
 
 </style>
+
+<!--
+  <template>
+    <div class="tools-pane">
+      <d-tabs :route="pagesKey" :pages="toPages()"></d-tabs>
+      <template v-for="page in toPages(pagesKey)" :key="page.key">
+        <t-page :page="page" class="tools-page"></t-page>
+      </template>
+    </div>
+  </template>
+-->

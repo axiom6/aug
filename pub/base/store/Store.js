@@ -11,6 +11,7 @@ Store = class Store {
     this.stream = Data.stream;
     this.source = this.constructor.name;
     this.keyProp = "_id";
+    this.tables = this.getTables();
   }
 
   toSubject(table, op) {
@@ -50,6 +51,10 @@ Store = class Store {
     }
   }
 
+  unsubscribe(table, op, source) {
+    this.stream.unsubscribe(this.toSubject(table, op), source);
+  }
+
   // SQL rowops
   get(table, id, callback) {} // Get an object from table with id
 
@@ -71,13 +76,62 @@ Store = class Store {
 
   
     // Table DDL (Data Definition Language)
-  show() {} // Show all table names
+  show() {
+    var key, ref, shows, table;
+    shows = {};
+    ref = this.table;
+    for (key in ref) {
+      if (!hasProp.call(ref, key)) continue;
+      table = ref[key];
+      if (this.source === table.source) {
+        shows[key] = table;
+      }
+    }
+    this.results('Shows', 'show', shows);
+  }
 
-  open(table) {} // Create a new table. For now only reallt used by CouchDB
+  open(table) {}
 
-  drop(table) {} // Drop the entire @table - good for testing
+  drop(table) {}
 
   change(table, id = 'None') {}
+
+  getTables() {
+    var str;
+    str = localStorage.getItem('Tables');
+    if (str != null) {
+      return JSON.parse(str);
+    } else {
+      return {};
+    }
+  }
+
+  showTables() {
+    this.results('Tables', 'show', this.tables);
+  }
+
+  openTable(table) { // Create a new table. For now only reallt used by CouchDB
+    var json;
+    if (!this.tables[table]) {
+      this.tables[table] = {};
+    }
+    if (this.tables[table][this.source] == null) {
+      this.tables[table][this.source] = {};
+      json = JSON.stringify(this.tables);
+      localStorage.setItem('Tables', json);
+    }
+    this.results(table, 'open', table + this.source);
+  }
+
+  dropTable(table) { // Drop the entire @table - good for testing
+    var json;
+    if (this.tables[table][this.source] != null) {
+      delete this.tables[table + this.source];
+      json = JSON.stringify(this.tables);
+      localStorage.setItem('Tables', json);
+    }
+    this.results(table, 'drop', table + this.source);
+  }
 
   // REST Api  CRUD + Subscribe for objectect records
 

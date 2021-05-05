@@ -12,7 +12,7 @@ Index = class Index extends Store {
     window.indexedDB.deleteDatabase(this.dbName);
   }
 
-  openDB(dbName, dbVersion, tables) {
+  openDB(dbName, dbVersion) {
     var dbp;
     // @db.close() if @db?
     dbp = new Promise((resolve, reject) => {
@@ -22,7 +22,7 @@ Index = class Index extends Store {
         var upDb, upTxn;
         upDb = event.target['result'];
         upTxn = event.target['transaction'];
-        this.openStores(upDb, tables);
+        this.openStores(upDb);
         // console.log( 'Index.openDB()', 'upgrade', @dbName, upDb.objectStoreNames )
         upTxn.complete;
       };
@@ -50,11 +50,19 @@ Index = class Index extends Store {
     return dbp;
   }
 
-  openStores(upDb, tables) {
-    var i, len, table;
-    for (i = 0, len = tables.length; i < len; i++) {
-      table = tables[i];
-      this.openStore(upDb, table);
+  openStores(upDb) {
+    var key, list, obj, ref, table;
+    ref = this.tables;
+    for (table in ref) {
+      if (!hasProp.call(ref, table)) continue;
+      list = ref[table];
+      for (key in list) {
+        if (!hasProp.call(list, key)) continue;
+        obj = list[key];
+        if (key === 'Index') {
+          this.openStore(upDb, table);
+        }
+      }
     }
   }
 

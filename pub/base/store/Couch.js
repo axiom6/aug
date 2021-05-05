@@ -77,16 +77,19 @@ Couch = class Couch extends Store {
   }
 
   show() {
-    this.rest('show', this.dbName, 'None', null, {}); // Shows all docs in db
+    this.showTables();
   }
 
   // consider 412 status when opening an existing table
+  // @rest( 'show', @dbName,'None', null, {} ) # Shows all docs in db
   open(table) {
+    this.openTable(table);
     this.rest('open', table, 'None', null, {});
   }
 
   // look at response obj: {ok: true}
   drop(table) {
+    this.dropTable(table);
     this.rest('drop', table, 'None', null, {});
   }
 

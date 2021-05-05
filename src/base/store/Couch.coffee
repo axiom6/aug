@@ -53,16 +53,19 @@ class Couch extends Store
     return
 
   show:() ->
-    @rest( 'show', @dbName,'None', null, {} ) # Shows all docs in db
+    @showTables()
+    # @rest( 'show', @dbName,'None', null, {} ) # Shows all docs in db
     return
 
   # consider 412 status when opening an existing table
   open:( table ) ->
+    @openTable( table )
     @rest( 'open', table, 'None', null, {} )
     return
 
   # look at response obj: {ok: true}
   drop:( table ) ->
+    @dropTable( table )
     @rest( 'drop', table, 'None', null, {} )
     return
 

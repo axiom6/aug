@@ -6,15 +6,16 @@ import Store from './Store.js';
 Memory = class Memory extends Store {
   constructor(dbName) {
     super(dbName);
-    this.tables = {};
+    this.memory = {};
   }
 
-  table(t) {
-    if (this.tables[t] != null) {
-      return this.tables[t];
+  table(tn) {
+    if (this.memory[tn] != null) {
+      return this.memory[tn];
     } else {
-      this.tables[t] = {};
-      return this.tables[t];
+      this.openTable(tn);
+      this.memory[tn] = {};
+      return this.memory[tn];
     }
   }
 
@@ -23,9 +24,9 @@ Memory = class Memory extends Store {
     this.results(tn, 'add', obj);
   }
 
-  get(tn, id, callback) {
+  get(tn, id, callback = null) {
     var obj;
-    obj = this.table(tn)[id];
+    obj = this.table(tn)[id] != null ? this.table(tn)[id] : {};
     if (obj != null) {
       if (callback != null) {
         callback(obj);
@@ -34,7 +35,7 @@ Memory = class Memory extends Store {
       }
     } else {
       this.onerror(tn, 'get', {
-        error: 'Memory object no found'
+        error: 'Memory object not found'
       }, id);
     }
   }
@@ -113,24 +114,22 @@ Memory = class Memory extends Store {
   }
 
   show() {
-    var key, ref, table, tables;
-    tables = [];
-    ref = this.tables;
-    for (key in ref) {
-      if (!hasProp.call(ref, key)) continue;
-      table = ref[key];
-      tables.push(key);
-    }
-    this.results(this.dbName, 'show', tables);
+    this.showTables();
   }
 
   open(table) {
-    return this.results(table, 'open', {});
+    this.openTable(table);
   }
 
-  drop(tn) {}
+  drop(table) {
+    this.dropTable(table);
+  }
 
 };
 
-//remove( tn, (obj)->true, op='drop' )
 export default Memory;
+
+/*
+  console.log( 'Memory.get', { table:tn, id:id, obj:obj } )
+  console.log( 'Memory.add', { table:tn, id:id, obj:@table(tn)[id] } )
+*/

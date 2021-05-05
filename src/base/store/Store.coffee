@@ -8,6 +8,7 @@ class Store
     @stream  = Data.stream
     @source  = @constructor.name
     @keyProp = "_id"
+    @tables  = @getTables()
 
   toSubject:( table, op ) ->
     table + ':' + op
@@ -34,6 +35,10 @@ class Store
         @stream.subscribe( @toSubject(table,changeOp), source, onSubscribe )
     return
 
+  unsubscribe:( table, op, source  ) ->
+    @stream.unsubscribe( @toSubject(table,op), source )
+    return
+
   # SQL rowops
   get:( table, id, callback ) ->  # Get an object from table with id
   add:( table, id, obj )      -> # Post an object into table with id
@@ -47,10 +52,43 @@ class Store
   remove:( table, where=Store.where ) -> # Delete objects from table with where clause
 
   # Table DDL (Data Definition Language)
-  show:(         ) -> # Show all table names
-  open:(   table ) -> # Create a new table. For now only reallt used by CouchDB
-  drop:(   table ) -> # Drop the entire @table - good for testing
+  show:() ->
+    shows = {}
+    for own key,table of @table when @source is table.source
+      shows[key] = table
+    @results( 'Shows', 'show', shows )
+    return
+
+  open:( table ) ->
+
+  drop:( table ) ->
+
   change:( table, id='None' ) ->
+
+  getTables:() ->
+    str = localStorage.getItem( 'Tables' )
+    if str? then JSON.parse(str) else {}
+
+  showTables:() ->
+    @results( 'Tables', 'show', @tables )
+    return
+
+  openTable:( table ) -> # Create a new table. For now only reallt used by CouchDB
+    @tables[table] = {} if not @tables[table]
+    if not @tables[table][@source]?
+      @tables[table][@source] = {}
+      json = JSON.stringify( @tables )
+      localStorage.setItem( 'Tables', json )
+    @results( table, 'open', table+@source )
+    return
+
+  dropTable:( table ) -> # Drop the entire @table - good for testing
+    if @tables[table][@source]?
+      delete @tables[table+@source]
+      json = JSON.stringify( @tables )
+      localStorage.setItem( 'Tables', json )
+    @results( table, 'drop', table+@source )
+    return
 
   # REST Api  CRUD + Subscribe for objectect records
 

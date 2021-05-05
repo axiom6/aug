@@ -1,6 +1,6 @@
 
 <template>
-  <div ref="DnDStart" class="kan-pane" :key="DnDIndex">
+  <div ref="DnDStart" class="kan-pane">
     <div class="initiate" droppable="true"><p class="name">Initiate</p>
       <div class="drag"   draggable="true"><p class="text">Architect</p></div>
       <div class="drag"   draggable="true"><p class="text">Design</p></div>
@@ -13,42 +13,38 @@
 
 <script>
 
-import {inject, ref, onMounted, nextTick, resolveComponent } from 'vue';  // , watch
+import { inject, ref, onMounted, nextTick } from 'vue';
+import $ from 'jquery';
 
-let KanOn = {
+let KanJQ = {
 
 setup() {
 
   const mix      = inject('mix');
-  const DnDStart = ref(null);
-  const DnDIndex = ref(0     );
   let childDrag  = null;
+  let DnDStart   = ref(null);
 
   // @click="traverseEvent($event)"
   const traverseEvent = ( event ) => {
     traverse( event.target ); }
 
-  const traverse = (elem) => {
+  const traverse = ($elem) => {
+    if( $elem.attr('draggable') ) {
+      addDragListeners( $elem ); }
+    if( $elem.attr('droppable') ) {
+      addDropListeners( $elem ); }
+    $elem.children().each( (index,child) =>
+      traverse( $(child) ) ) }
 
-    if( elem instanceof HTMLElement ) { // is DOM Element       mix.isDef(elem.nodeType) && elem.nodeType === 1
-      if( elem['draggable'] ) {
-        addDragListeners( elem ); }
-      if( elem.hasAttribute('droppable') ) {
-        addDropListeners( elem ); }
-      resolveComponent( elem );
-      let childs = elem.children;
-      for( let i = 0; i < childs.length; i++ ) {
-        traverse( childs[i] ); } } }
+  const addDragListeners = ($elem) => {
+    $elem.on("dragstart", onDrag );
+    console.log( 'KanJQ.addDrag() success', $elem ); }
 
-  const addDragListeners = (elem) => {
-    elem.addEventListener("dragstart",      onDrag  );
-    console.log( 'KanOn.addDrag() success', elem ); }
-
-  const addDropListeners = (elem) => {
-    elem.addEventListener("drop",      onDrop  );
-    elem.addEventListener("dragenter", onEnter );
-    elem.addEventListener("dragover",  onOver  );
-    console.log( 'KanOn.addDrop() success', elem ); }
+  const addDropListeners = ($elem) => {
+    $elem.on("drop",      onDrop  );
+    $elem.on("dragenter", onEnter );
+    $elem.on("dragover",  onOver  );
+    console.log( 'KanJQ.addDrop() success', $elem ); }
 
   const onDrag = (event) => {
     event.preventDefault();
@@ -62,9 +58,9 @@ setup() {
     if( mix.isDef(childDrag) ) {
         childDrag = childDrag.parentNode.removeChild( childDrag );
         event.target.appendChild( childDrag );
-        console.log( 'KanOn.onDrop() success' ); }
+        console.log( 'KanJQ.onDrop() success' ); }
     else {
-        console.log( 'KanOn.onDrop() failure' ); }
+        console.log( 'KanJQ.onDrop() failure' ); }
     event.stopPropagation(); }
 
   const onEnter = function(event)  {
@@ -73,18 +69,17 @@ setup() {
   const onOver = function(event)  {
     event.preventDefault(); }
 
-  onMounted( function() {
+  onMounted(  function() {
     if( window.KanOnHasMounted ) { return; }
     window.KanOnHasMounted = true;
     nextTick( function() {
-      let start = DnDStart['value'];
-        traverse( start  );
-        DnDIndex.value++; } ) } )
+      let $start = $(DnDStart['value']);
+      traverse( $start );  } ) } )
 
-  return { DnDStart, DnDIndex, traverseEvent } } // , onDrag, onDrop, onEnter, onOver
+  return { DnDStart, traverseEvent } } // , onDrag, onDrop, onEnter, onOver
 }
 
-export default KanOn;
+export default KanJQ;
 
 </script>
 

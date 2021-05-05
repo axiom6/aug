@@ -9,44 +9,55 @@ import Couch  from '../../base/store/Couch.js'
 class Manager
 
   constructor:( @mix ) ->
-    @dbName  = 'test1'
-    @tables  = ['Prac','Hues']
-    @credUrl = 'http://admin:athena@127.0.0.1:5984' # Admin host to couchdb
-    @baseUrl = 'http://127.0.0.1:5984'              # Admin host to couchdb
-    @stream  = Data.stream
-    @prac    = null
-    @hues    = null
-    @kit     = null
+    @dbName     = 'test1'
+    @credsUrl   = 'http://admin:athena@127.0.0.1:5984' # Admin host to couchdb
+    @couchUrl   = 'http://127.0.0.1:5984'              # Admin host to couchdb
+    @stream     = Data.stream
+    @prac       = null
+    @hues       = null
+    @kit        = null
+    @lastSource = null
 
   test:( name ) ->
 
     store = switch name
       when 'Local' then new Local(  @dbName )
-      when 'Index' then @openIndex( @dbName, ['Hues'] )  # 'Prac',
+      when 'Index' then new Index(  @dbName )
       when 'Fire'  then new Fire(   @dbName )
-      when 'Couch' then new Couch(  @dbName, @baseUrl )
+      when 'Couch' then new Couch(  @dbName, @couchUrl )
       else              new Memory( @dbName )
 
+    store.openTable( 'prac')
+    store.openTable( 'hues')
+    @openIndex( store ) if name is 'Index'
     @suite( store ) if name isnt 'Index'
 
     return
 
-  openIndex:( dbName, tables ) ->
-    idb = new Index(dbName, ['Prac','Hues'] )
-    idb.openDB( idb.dbName, idb.dbVersion, tables )
+  openIndex:( idb ) ->
+    idb.openDB( idb.dbName, idb.dbVersion )
        .then(  (db) =>
           idb.db   = db
           @suite( idb )
           return )
        .catch( (error) =>
-         idb.onerror( tables, 'openDB', error )
+         idb.onerror( idb.tables, 'openDB', error )
          return )
-    idb
+    return
 
-  subscribe:( table, op, store ) ->
+  subscribe:( table, op, store ) =>
     onSubscribe = ( obj ) =>
       console.log( 'Mgr', { table:table, op:op, source:store.source, obj:obj } )
-    store.subscribe( table, op, store.source, onSubscribe )
+      whereS = (obj) -> true
+      whereD = (obj) -> obj.column is 'Embrace'
+      switch op
+        when 'add'    then store.get(    table, obj.id )
+        when 'put'    then store.del(    table, obj.id )
+        when 'insert' then store.select( table, whereS )
+        when 'update' then store.remove( table, whereD )
+
+    store.unsubscribe( table, op, @lastSource ) if @lastSource?
+    store.subscribe(   table, op, store.source, onSubscribe )
     return
 
   suite:( store ) ->
@@ -55,39 +66,40 @@ class Manager
 
     @data()
 
-    @subscribe( 'prac',  'add',  store )
-    @subscribe( 'prac',  'get',  store )
-    @subscribe( 'hues',  'put',  store )
-    @subscribe( 'prac',  'del',  store )
-    @subscribe( @dbName, 'show', store )
-    @subscribe( 'hues',  'open', store )
-
-    #tore.drop( 'demo')
-
-    #tore.open( 'hues')
-
-    store.show()
-
-    #tore.add( 'prac', @prac.id, @prac )
-    #tore.get( 'prac', @prac.id )
-    @hues['Green'].column  = 'Embrace'
-    @hues['Green']._rev    = "3-3ec7f175f1d3920f3d02c7d16c4a6737"
-    #store.put( 'hues', 'Green', @hues['Green'] )
-    #tore.del( 'prac', @prac.id )
+    @subscribe( 'prac',   'add',  store )
+    @subscribe( 'prac',   'get',  store )
+    @subscribe( 'prac',   'put',  store )
+    @subscribe( 'prac',   'del',  store )
 
     @subscribe( 'hues', 'insert', store )
     @subscribe( 'hues', 'select', store )
     @subscribe( 'hues', 'update', store )
     @subscribe( 'hues', 'remove', store )
 
-    #tore.insert( 'hues', @hues )
-    #tore.select( 'hues', (obj) -> true )
-    #@hues['Green'].column  = 'Embrace'
-    #@hues['Orange'].column = 'Embrace'
-    #@hues['Violet'].column = 'Embrace'
-    #tore.update( 'hues', @hues )
-    #here = (obj) -> obj.column is 'Embrace'
+    @subscribe( 'Tables', 'show', store )
+    @subscribe( 'prac',   'open', store )
+    @subscribe( 'prac',   'drop', store )
+
+    #tore.drop( 'demo')
+    #tore.open( 'hues')
+    store.show()
+
+    store.add( 'prac', @prac.id, @prac )
+    #tore.get( 'prac', @prac.id )         # Called after add
+    store.put( 'prac', @prac.id, @prac )
+    #tore.del( 'prac', @prac.id )         # Called after put
+
+    store.insert( 'hues', @hues )
+    #tore.select( 'hues', (obj) -> true ) # Called after insert
+
+    @hues['Green'].column  = 'Embrace'
+    @hues['Orange'].column = 'Embrace'
+    @hues['Violet'].column = 'Embrace'
+    store.update( 'hues', @hues )
+
+    #here = (obj) -> obj.column is 'Embrace'  # Called after update
     #tore.remove( 'hues', where )
+    @lastSource = store.source
     return
 
   data:() ->

@@ -4,29 +4,31 @@ class Memory extends Store
 
   constructor:( dbName ) ->
     super( dbName )
-    @tables = {}
+    @memory = {}
 
-  table:( t ) ->
-    if @tables[t]?
-       @tables[t]
+  table:( tn ) ->
+    if @memory[tn]?
+       @memory[tn]
     else
-       @tables[t] = {}
-       @tables[t]
+       @openTable(tn)
+       @memory[tn] = {}
+       @memory[tn]
 
   add:( tn, id, obj )    ->
     @table(tn)[id] = obj
+
     @results( tn, 'add', obj )
     return
 
-  get:( tn, id, callback ) ->
-    obj = @table(tn)[id]
+  get:( tn, id, callback=null ) ->
+    obj = if @table(tn)[id]? then @table(tn)[id] else {}
     if obj?
       if callback?
          callback( obj )
       else
          @results( tn, 'get', obj )
     else
-      @onerror( tn, 'get', { error:'Memory object no found'}, id )
+      @onerror( tn, 'get', { error:'Memory object not found'}, id )
     return
 
   put:( tn, id,  obj ) ->
@@ -78,17 +80,20 @@ class Memory extends Store
     return
 
   show:() ->
-    tables = []
-    for own key, table of @tables
-      tables.push( key )
-    @results( @dbName, 'show', tables )
+    @showTables()
     return
 
   open:( table ) ->
-    @results( table, 'open', {} )
+    @openTable( table )
+    return
 
-  drop:( tn ) ->
-    #remove( tn, (obj)->true, op='drop' )
+  drop:( table ) ->
+    @dropTable( table )
     return
 
 export default Memory
+
+###
+  console.log( 'Memory.get', { table:tn, id:id, obj:obj } )
+  console.log( 'Memory.add', { table:tn, id:id, obj:@table(tn)[id] } )
+###

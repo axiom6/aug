@@ -12,6 +12,8 @@ import Touch from '../../base/nav/Touch.js';
 
 import Mix from '../../base/nav/Mix.js';
 
+import MuseLD from './MuseLD.js';
+
 import {
   createApp
 } from 'vue';
@@ -44,8 +46,9 @@ import MathJson from '../../../data/inno/Math.json';
 Muse = (function() {
   class Muse {
     static start() {
-      var key, ref, val;
-      Muse.addToHead();
+      var key, museLD, ref, val;
+      museLD = new MuseLD();
+      Muse.addToHead(museLD);
       ref = Muse.Batch;
       for (key in ref) {
         val = ref[key];
@@ -56,8 +59,8 @@ Muse = (function() {
       Muse.init(Muse.Batch);
     }
 
-    static addToHead() {
-      var maniElem, siteElem;
+    static addToHead(museLD) {
+      var head, jsonLDel, maniElem, siteElem;
       // manifest = """<link href="manifest.json"  rel="manifest" crossorigin="use-credentials">"""
       // siteLink = """<link href="https://vit-muse.web.app/" rel="canonical">"""
       maniElem = document.createElement('link');
@@ -68,8 +71,13 @@ Muse = (function() {
       // console.log( 'Location', window.location.href )
       siteElem.href = window.location.href; // "https://vit-muse.web.app/" if window.location.contains('vit-muse')
       siteElem.rel = "canonical";
-      document.getElementsByTagName("head")[0].appendChild(maniElem);
-      document.getElementsByTagName("head")[0].appendChild(siteElem);
+      jsonLDel = document.createElement('script');
+      jsonLDel.type = "application/ld+json";
+      jsonLDel.text = museLD.jsonLDStr;
+      head = document.getElementsByTagName("head")[0];
+      head.appendChild(maniElem);
+      head.appendChild(siteElem);
+      head.appendChild(jsonLDel);
     }
 
     static init(batch) {
