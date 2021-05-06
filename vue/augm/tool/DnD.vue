@@ -1,65 +1,61 @@
-
 <template>
-  <div class="dnd-pane">
-    <h2>Drag and drop HTML5 demo</h2>
-    <div>Try to move the purple box into the pink box.</div>
-    <div id="boxA" class="drag" draggable="true" @dragstart="onDrag($event)"><p>Drag</p></div>
-    <div id="boxB" class="drop" @drop="onDrop($event)" @dragenter.prevent @dragover.prevent>Drop</div>
+  <div ref="DnDStart" class="dnd-pane">
+
+    <div class="initiate" @drop="onDrop($event)"
+        @dragenter.prevent @dragover.prevent><p class="name">Initiate</p>
+      <div class="drag" draggable="true"
+          @dragstart="onDrag($event)"><p class="text">Architect</p></div>
+      <div class="drag" draggable="true"
+          @dragstart="onDrag($event)"><p class="text">Design</p></div>
+      <div class="drag" draggable="true"
+          @dragstart="onDrag($event)"><p class="text">Construct</p></div>
+    </div>
+    <div class="progress" @drop="onDrop($event)"
+        @dragenter.prevent @dragover.prevent><p class="name">Progress</p></div>
+    <div class="finished" @drop="onDrop($event)"
+        @dragenter.prevent @dragover.prevent><p class="name">Finished</p></div>
+
   </div>
 </template>
 
-<script>
+<script type="module">
 
-let DnD = {
+import { ref } from 'vue';
 
-setup() {
+  let DnD = {
 
-  const onDrag = function(event) {
-    event.dataTransfer.effectAllowed='move';
-    let id = event.target.getAttribute('id');
-    console.log( 'DnD.onDrag()', id );
-    event.dataTransfer.setData("id", id );
-    event.dataTransfer.setDragImage(event.target,0,0);
-    return true; }
+    setup() {
 
-  const onDrop = function(event)  {
-    let id = event.dataTransfer.getData("id");
-    console.log( 'DnD.onDrop()', id );
-    event.target.appendChild(document.getElementById(id));
-    event.stopPropagation();
-    return false; }
+      const DnDStart  = ref(null);
+      let   childDrag = null;
 
-  return { onDrag, onDrop } }
-}
+      const onDrag = function(event) {
+        event.dataTransfer.effectAllowed='move';
+        childDrag = event.target;
+        event.dataTransfer.setDragImage(event.target,0,0); }
 
-export default DnD;
+      const onDrop = function(event)  {
+        childDrag = childDrag.parentNode.removeChild( childDrag );
+        event.target.appendChild( childDrag );
+        event.stopPropagation(); }
+
+      return { onDrag, onDrop, DnDStart } }
+  }
+
+  export default DnD;
 
 </script>
 
 <style lang="less">
-
 @import '../../../css/themes/theme.less';
-
-@dndFS:@themeFS;
-
+@dndFS:@themeFS*2.0;
 .dnd-pane { position:absolute; left:0; top:0; width:100%; height:100%;
   color:@theme-fore; background-color:@theme-back; font-size:@dndFS;
-
-  .drag { background-color:pink;   position:absolute; left:10%; top:20%; width:20%; height:20%; color:black; }
-  .drop { background-color:purple; position:absolute; left:40%; top:20%; width:30%; height:30%;}
+  .drag     { background-color:black; width:80%; height:20%; margin:10%;color:wheat; display:grid; }
+  .text     {  color:wheat; justify-self:center; align-self:center; }
+  .initiate { background-color:gold;  position:absolute; left: 6%; top:10%; width:24%; height:80%; color:black; }
+  .progress { background-color:brown; position:absolute; left:36%; top:10%; width:24%; height:80%; color:black; }
+  .finished { background-color:tan;   position:absolute; left:70%; top:10%; width:24%; height:80%; color:black; }
+  .name     { text-align:center; margin-top:3%; }
 }
-
 </style>
-
-<!--
-    <div id="boxB" class="drop"
-        @ondragenter="dragEnter(e)" @drop="onDrop(e)" @ondragover="dragOver(e)">Drop</div>
-
-  const dragEnter = (event) => {
-    event.preventDefault();
-    return true; }
-
-  const dragOver = (event) => {
-    event.preventDefault();
-    return false; }
--->

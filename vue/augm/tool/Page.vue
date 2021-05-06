@@ -3,9 +3,6 @@
   <div :class="'tool-page-pane'" >
     <t-gauge v-if="show('Gauge')"></t-gauge>
     <t-dnd   v-if="show('DnD')"  ></t-dnd>
-    <t-kan   v-if="show('Kan')"  ></t-kan>
-    <t-kanon v-if="show('KanOn')"></t-kanon>
-    <t-kanjq v-if="show('KanJQ')"></t-kanjq>
   </div>
 </template>
 
@@ -14,15 +11,12 @@
 import { ref,onMounted, inject } from "vue";
 import Gauge from './Gauge.vue';
 import DnD   from './DnD.vue';
-import Kan   from './Kan.vue';
-import KanOn from './KanOn.vue';
-import KanJQ from './KanJQ.vue';
 
 let Page = {
 
   props: { page:Object },
 
-  components: { 't-gauge':Gauge, 't-dnd':DnD, 't-kan':Kan, 't-kanon':KanOn, 't-kanjq':KanJQ },
+  components: { 't-gauge':Gauge, 't-dnd':DnD },
 
   setup( props ) {
 
@@ -30,7 +24,7 @@ let Page = {
     let   pageKey = ref('None');
 
     const onNav = (obj) => {
-      if( mix.inArray(obj.pageKey,['Gauge','Dnd','Kan','KanOn','KanJQ'] ) ) {
+      if( mix.inArray(obj.pageKey,['Gauge','DnD'] ) ) {
         pageKey.value = obj.pageKey; } }
 
     const show = (name) => {

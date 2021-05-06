@@ -27,9 +27,7 @@
         Gauges: {
           Gauge:   { title:'Gauge', key:'Gauge' } },
         Widget: {
-          Kan:     { title:'Kan',   key:'Kan'   },
-          KanOn:   { title:'KanOn', key:'KanOn' },
-          KanJQ:   { title:'KanJQ', key:'KanJQ' } } }
+          DnD:     { title:'DnD',   key:'DnD'   } } }
 
       const page     = ref(null);
       const pagesKey = ref(null);
