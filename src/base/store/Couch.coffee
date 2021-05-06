@@ -10,7 +10,7 @@ class Couch extends Store
     @password = 'athena'
 
   # obj: {error: "not_found", reason: "missing"}
-  add:( table, id, obj ) ->
+  add:(   table, id, obj ) ->
     @put( table, id, obj, 'add' )
     return
 
@@ -25,8 +25,13 @@ class Couch extends Store
     return
 
   del:( table, id ) ->
-    @rest( 'del', table, id, null, {} )
+    where     = (obj)->true
+    selector  = @findId( table, id )
+    opts = { where:where, op2:'del' }
+    @rest( 'find', table, id, selector, opts )
     return
+
+
 
   select:( table,  where, callback ) ->
     selector  = @findSelect( table )
@@ -48,7 +53,7 @@ class Couch extends Store
 
   remove:( table, where ) ->
     selector  = @findSelect( table )
-    opts = { where:where, op2:'remove' }
+    opts = { where:where, op2:'del' }
     @rest( 'find', table, 'None', selector, opts )
     return
 
@@ -73,7 +78,10 @@ class Couch extends Store
     { "selector":{ "plane": { "$eq":"Know" } } }
 
   findSelect:( table ) ->
-    { "selector":{ "table": { "$eq": table } } }
+    { "selector":{ "table": { "$eq": table.toLowerCase() } } }
+
+  findId:( table, id ) ->
+    { "selector":{ "table": { "$eq": table.toLowerCase() }, "_id": { "$eq": id } } }
 
   rest:( op1, table, id, obj, opts ) ->
     url       = @urlRest( op1, table, id )
@@ -91,9 +99,11 @@ class Couch extends Store
         else if op1 is 'find'
           @findDocs( opts.op2, table, data, opts.where, opts.callback )
         else
-          objs = if opts.objs? then opts.objs else obj
-          result = @restResult( op1, table, objs, data, opts.where )
-          if opts.callback? then opts.callback(result) else @results( table, op1, result ) )
+          obj1 = if obj? then obj else {}
+          objs = if opts.objs? then opts.objs else obj1
+          op   = if opts.op2 is 'del' then 'del' else op1
+          result = @restResult( op, table, objs, data, opts.where )
+          if opts.callback? then opts.callback(result) else @results( table, op, result ) )
       .catch( (error) =>
         @onerror( table, op1, error ) )
     return
@@ -114,14 +124,17 @@ class Couch extends Store
     oDocs = { "docs": [] }
     dObjs = {}
     for doc in data.docs when where(doc)
-      doc['_deleted'] = true if op is 'remove'
+      doc['_deleted'] = true if op is 'remove' or op is 'del'
       doc = @setCouchProps( table, doc.id, doc, doc._rev, true )
       oDocs.docs.push( doc )
       dObjs[doc.id] =  doc
     # console.log('Couch.findDocs()', { data:data, oDocs:oDocs, dObjs:dObjs } )
-    opts = { where:((obj)->true), callback:callback, objs:dObjs }
     if op is 'remove'
+      opts = { where:((obj)->true), callback:callback, objs:dObjs }
       @rest( op, table,'None', oDocs, opts )
+    else if op is 'del'
+      opts = { where:((obj)->true), callback:callback, objs:dObjs, op2:"del" }
+      @rest( 'remove', table,'None', oDocs, opts )
     else if op is 'select'
       @results( table, 'select', oDocs )
     return
@@ -131,13 +144,14 @@ class Couch extends Store
     for doc in docs.docs when where(doc)
       doc = @setCouchProps( table, doc.id, doc, doc._rev, true )
       results[doc.id] = doc
+    # console.log( 'Couch.selectDocs', { table:table, docs:docs, results:results } )
     if callback? then callback(results) else @results( table, 'select', results )
     return
 
   setCouchProps:( table, id, obj, rev=null, ok=null ) ->
     obj[ 'id']    = id
     obj['_id']    = id
-    obj['table']  = table
+    obj['table']  = table.toLowerCase()
     obj['_rev']   = rev if rev?
     obj.ok        = ok  if ok?
     obj
@@ -174,26 +188,27 @@ class Couch extends Store
 
   restResult:( op, table, obj, data, where ) ->  # obj can also be objs
     result = {}
-    result = data                              if data? and ( op is 'get'    or op is 'del'    )
+    result = data                              if data? and   op is 'get'
     result = obj                               if obj?  and ( op is 'add'    or op is 'put'    )
     result = @insertObjs( table, obj, data )   if data? and obj?  and ( op is 'insert' or op is 'update' )
     result = @tableObjs(  table, data, where ) if data? and ( op is 'select' )
-    result = obj                               if obj?  and ( op is 'remove' )
-    result = data                              if data? and ( op is 'show'   or op is 'drop'   )
+    result = obj                               if obj?  and ( op is 'remove' or op is 'del'  )
+    result = data                              if data? and ( op is 'show'   or op is 'drop' )
     result
 
   urlRest:( op, table, id ) ->
+    tableLC = table.toLowerCase()
     switch op
-      when 'add','put'                then @baseUrl + '/' + table + '?batch=ok'
-      when 'get','del'                then @baseUrl + '/' + table + '/' + id
-      when 'open','drop'              then @baseUrl + '/' + table
-      when 'insert','update','remove' then @baseUrl + '/' + table + '/' + '_bulk_docs'
-      when 'select'                   then @baseUrl + '/' + table + '/' + '_all_docs'
-      when 'find'                     then @baseUrl + '/' + table + '/' + '_find'
+      when 'add','put'                then @baseUrl + '/' + tableLC + '?batch=ok'
+      when 'get','del'                then @baseUrl + '/' + tableLC + '/' + id
+      when 'open','drop'              then @baseUrl + '/' + tableLC
+      when 'insert','update','remove' then @baseUrl + '/' + tableLC + '/' + '_bulk_docs'
+      when 'select'                   then @baseUrl + '/' + tableLC + '/' + '_all_docs'
+      when 'find'                     then @baseUrl + '/' + tableLC + '/' + '_find'
       when 'show'                     then @baseUrl + '/' + '_all_dbs'
       else
         console.error( 'Rest.urlRest() Unknown op', op, id )
-        @baseUrl + '/' + table
+        @baseUrl + '/' + tableLC
 
   restOp:( op ) ->
     switch op
@@ -206,3 +221,11 @@ class Couch extends Store
         'GET'
 
 export default Couch
+
+###
+  del2:( table, id ) ->
+    # obj = {_id: "Involve", _rev: "1-afa975e535c8308069eaf575eb7e01d0", id: "Involve", table: "prac", type: "pane" }
+    #idRev = id + '?rev=' + "1-afa975e535c8308069eaf575eb7e01d0"
+    @rest( 'del', table, id, null )
+    return
+###

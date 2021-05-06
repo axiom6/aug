@@ -34,15 +34,15 @@ Fire = class Fire extends Store {
     this.fd.ref(table + '/' + id).set(obj).then((snaps) => {
       return this.results(table, 'add', obj);
     }).catch((error) => {
-      return this.onerror(table, 'add', error);
+      return this.onerror(table, 'add', error, id);
     });
   }
 
   get(table, id, callback) {
     this.fd.ref(table + '/' + id).once('value').then((snaps) => {
-      return this.firemsg(table, 'get', snaps, id, null, callback);
+      return this.firemsg(table, 'get', snaps, null, callback);
     }).catch((error) => {
-      return this.onerror(table, 'get', error);
+      return this.onerror(table, 'get', error, id);
     });
   }
 
@@ -50,21 +50,21 @@ Fire = class Fire extends Store {
     this.fd.ref(table + '/' + id).set(obj).then((snaps) => {
       return this.results(table, 'put', obj);
     }).catch((error) => {
-      return this.onerror(table, 'put', error);
+      return this.onerror(table, 'put', error, id);
     });
   }
 
   del(table, id) {
-    this.fd.ref(table + '/' + id).remove().then((snaps) => {
-      return this.firemsg(table, 'del', snaps, id);
+    this.fd.ref(table + '/' + id).remove().then(() => {
+      return this.firemsg(table, 'del', {});
     }).catch((error) => {
-      return this.onerror(table, 'del', error);
+      return this.onerror(table, 'del', error, id);
     });
   }
 
   select(table, where, callback = null) {
     this.fd.ref(table).once('value').then((snaps) => {
-      return this.firemsg(table, 'select', snaps, this.keyProp, where, callback);
+      return this.firemsg(table, 'select', snaps, where, callback);
     }).catch((error) => {
       return this.onerror(table, 'select', error);
     });

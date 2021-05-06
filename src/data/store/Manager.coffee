@@ -13,10 +13,11 @@ class Manager
     @credsUrl   = 'http://admin:athena@127.0.0.1:5984' # Admin host to couchdb
     @couchUrl   = 'http://127.0.0.1:5984'              # Admin host to couchdb
     @stream     = Data.stream
-    @prac       = null
-    @hues       = null
-    @kit        = null
-    @lastSource = null
+    @Prac       = null
+    @Hues       = null
+    @Kit        = null
+    @source     = null
+
 
   test:( name ) ->
 
@@ -27,10 +28,11 @@ class Manager
       when 'Couch' then new Couch(  @dbName, @couchUrl )
       else              new Memory( @dbName )
 
-    store.openTable( 'prac')
-    store.openTable( 'hues')
-    @openIndex( store ) if name is 'Index'
-    @suite( store ) if name isnt 'Index'
+    @source = store.source
+    store.openTable( 'Prac')
+    store.openTable( 'Hues')
+    @openIndex( store ) if name is   'Index'
+    @suite( store )     if name isnt 'Index'
 
     return
 
@@ -47,7 +49,7 @@ class Manager
 
   subscribe:( table, op, store ) =>
     onSubscribe = ( obj ) =>
-      console.log( 'Mgr', { table:table, op:op, source:store.source, obj:obj } )
+      console.log( 'Mgr', { table:table, op:op, source:@source, obj:obj } )
       whereS = (obj) -> true
       whereD = (obj) -> obj.column is 'Embrace'
       switch op
@@ -56,7 +58,7 @@ class Manager
         when 'insert' then store.select( table, whereS )
         when 'update' then store.remove( table, whereD )
 
-    store.unsubscribe( table, op, @lastSource ) if @lastSource?
+    #tore.unsubscribe( table, op, @lastSource ) if @lastSource?
     store.subscribe(   table, op, store.source, onSubscribe )
     return
 
@@ -66,52 +68,50 @@ class Manager
 
     @data()
 
-    @subscribe( 'prac',   'add',  store )
-    @subscribe( 'prac',   'get',  store )
-    @subscribe( 'prac',   'put',  store )
-    @subscribe( 'prac',   'del',  store )
+    @subscribe( 'Prac',   'add',  store )
+    @subscribe( 'Prac',   'get',  store )
+    @subscribe( 'Prac',   'put',  store )
+    @subscribe( 'Prac',   'del',  store )
 
-    @subscribe( 'hues', 'insert', store )
-    @subscribe( 'hues', 'select', store )
-    @subscribe( 'hues', 'update', store )
-    @subscribe( 'hues', 'remove', store )
+    @subscribe( 'Hues', 'insert', store )
+    @subscribe( 'Hues', 'select', store )
+    @subscribe( 'Hues', 'update', store )
+    @subscribe( 'Hues', 'remove', store )
 
     @subscribe( 'Tables', 'show', store )
-    @subscribe( 'prac',   'open', store )
-    @subscribe( 'prac',   'drop', store )
+    @subscribe( 'Prac',   'open', store )
+    @subscribe( 'Prac',   'drop', store )
 
-    #tore.drop( 'demo')
-    #tore.open( 'hues')
     store.show()
 
-    store.add( 'prac', @prac.id, @prac )
-    #tore.get( 'prac', @prac.id )         # Called after add
-    store.put( 'prac', @prac.id, @prac )
-    #tore.del( 'prac', @prac.id )         # Called after put
+    store.add( 'Prac', @Prac.id, @Prac )
+    #tore.get( 'Prac', @Prac.id )         # Called after add
+    store.put( 'Prac', @Prac.id, @Prac )
+    #tore.del( 'Prac', @Prac.id )         # Called after put
 
-    store.insert( 'hues', @hues )
-    #tore.select( 'hues', (obj) -> true ) # Called after insert
+    store.insert( 'Hues', @Hues )
+    #tore.select( 'Hues', (obj) -> true ) # Called after insert
 
-    @hues['Green'].column  = 'Embrace'
-    @hues['Orange'].column = 'Embrace'
-    @hues['Violet'].column = 'Embrace'
-    store.update( 'hues', @hues )
+    @Hues['Green'].column  = 'Embrace'
+    @Hues['Orange'].column = 'Embrace'
+    @Hues['Violet'].column = 'Embrace'
+    store.update( 'Hues', @Hues )
 
     #here = (obj) -> obj.column is 'Embrace'  # Called after update
-    #tore.remove( 'hues', where )
-    @lastSource = store.source
+    #tore.remove( 'Hues', where )
+    #console.log( "Manager.test()", { subjects:store.stream.subjects } )
     return
 
   data:() ->
 
-    @prac = { "_id":"Involve", "id":"Involve", "table":"prac","type":"pane", "hsv":[195,90,60],"column":"Embrace",
+    @Prac = { "_id":"Involve", "id":"Involve", "table":"prac","type":"pane", "hsv":[195,90,60],"column":"Embrace",
     "row":"Learn","plane":"Know","icon":"fas fa-users",
     "cells":[5,12,7,12], "dir":"nw", "neg":"Greed" }
 
-    @hues  = @mix.data( 'Hues' )
-    # console.log( 'Manager.data(@pracs)', @mix, @hues )
+    @Hues  = @mix.data( 'Hues' )
+    # console.log( 'Manager.data(@Pracs)', @mix, @Hues )
 
-    @kit = { "_id":"mittens", "name": "Mittens", "occupation": "kitten", "age": 3,
+    @Kit = { "_id":"mittens", "name": "Mittens", "occupation": "kitten", "age": 3,
     "hobbies": [ "playing with balls of yarn", "chasing laser pointers", "lookin' hella cute" ] }
 
 export default Manager

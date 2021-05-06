@@ -24,16 +24,22 @@ Store = class Store {
   }
 
   results(table, op, result) {
-    this.publish(table, op, result);
+    var obj;
+    obj = result != null ? result : {};
+    this.publish(table, op, obj);
   }
 
   onerror(table, op, error, id = 'none') {
-    console.error('Store.onerror', {
+    var msg;
+    msg = {
       table: table,
       op: op,
-      error: error,
-      id: id
-    });
+      error: error
+    };
+    if (id !== 'none') {
+      msg.id = id;
+    }
+    console.error('Store.onerror', msg);
   }
 
   subscribe(table, op, source, onSubscribe) {
@@ -119,6 +125,9 @@ Store = class Store {
       this.tables[table][this.source] = {};
       json = JSON.stringify(this.tables);
       localStorage.setItem('Tables', json);
+      if (this.source === 'Couch') {
+        this.open(table);
+      }
     }
     this.results(table, 'open', table + this.source);
   }

@@ -48,7 +48,7 @@ class Index extends Store
 
   openStore:( upDb, table ) ->
     if not @contains( upDb, table )
-      upDb.createObjectStore( table, { keyProp:@keyProp } )
+      upDb.createObjectStore( table, { keyPath:@keyProp } )
       # st.createIndex( @keyProp, @keyProp, { unique: true } )
     return
 
@@ -69,14 +69,14 @@ class Index extends Store
     @results( table, 'add', obj )
     return
 
-  get:( table, id, callback, op='get' ) ->
+  get:( table, id, callback=null, op='get' ) ->
     txo = @txo( table )
     req = txo.get( id )
     req.onsuccess = () =>
       if callback?
-         callback( { "#{id}":req.result } )
+         callback( req.result )
       else
-         @results( table, op, req.result )
+         @results( table, op, obj )
     req.onerror = (error) =>
       @onerror( table, op, error )
     return
@@ -122,8 +122,8 @@ class Index extends Store
     req.onsuccess = () =>
       objs = {}
       for own key, obj of req.result when where(obj)
-        objs[obj.id] = obj
-        txo['delete'](obj.id) if op is 'remove'
+        objs[obj[@keyProp]] = obj
+        txo['delete'](@keyProp) if op is 'remove'
       if callback?
          callback(objs)
       else

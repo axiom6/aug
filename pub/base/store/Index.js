@@ -73,7 +73,7 @@ Index = class Index extends Store {
   openStore(upDb, table) {
     if (!this.contains(upDb, table)) {
       upDb.createObjectStore(table, {
-        keyProp: this.keyProp
+        keyPath: this.keyProp
       });
     }
   }
@@ -100,17 +100,15 @@ Index = class Index extends Store {
     this.results(table, 'add', obj);
   }
 
-  get(table, id, callback, op = 'get') {
+  get(table, id, callback = null, op = 'get') {
     var req, txo;
     txo = this.txo(table);
     req = txo.get(id);
     req.onsuccess = () => {
       if (callback != null) {
-        return callback({
-          [`${id}`]: req.result
-        });
+        return callback(req.result);
       } else {
-        return this.results(table, op, req.result);
+        return this.results(table, op, obj);
       }
     };
     req.onerror = (error) => {
@@ -177,9 +175,9 @@ Index = class Index extends Store {
         if (!(where(obj))) {
           continue;
         }
-        objs[obj.id] = obj;
+        objs[obj[this.keyProp]] = obj;
         if (op === 'remove') {
-          txo['delete'](obj.id);
+          txo['delete'](this.keyProp);
         }
       }
       if (callback != null) {

@@ -20,10 +20,10 @@ Manager = class Manager {
     this.credsUrl = 'http://admin:athena@127.0.0.1:5984'; // Admin host to couchdb
     this.couchUrl = 'http://127.0.0.1:5984'; // Admin host to couchdb
     this.stream = Data.stream;
-    this.prac = null;
-    this.hues = null;
-    this.kit = null;
-    this.lastSource = null;
+    this.Prac = null;
+    this.Hues = null;
+    this.Kit = null;
+    this.source = null;
   }
 
   test(name) {
@@ -42,8 +42,9 @@ Manager = class Manager {
           return new Memory(this.dbName);
       }
     }).call(this);
-    store.openTable('prac');
-    store.openTable('hues');
+    this.source = store.source;
+    store.openTable('Prac');
+    store.openTable('Hues');
     if (name === 'Index') {
       this.openIndex(store);
     }
@@ -68,7 +69,7 @@ Manager = class Manager {
       console.log('Mgr', {
         table: table,
         op: op,
-        source: store.source,
+        source: this.source,
         obj: obj
       });
       whereS = function(obj) {
@@ -88,46 +89,42 @@ Manager = class Manager {
           return store.remove(table, whereD);
       }
     };
-    if (this.lastSource != null) {
-      store.unsubscribe(table, op, this.lastSource);
-    }
+    //tore.unsubscribe( table, op, @lastSource ) if @lastSource?
     store.subscribe(table, op, store.source, onSubscribe);
   }
 
   suite(store) {
     console.log('Manager.suite()', store.source);
     this.data();
-    this.subscribe('prac', 'add', store);
-    this.subscribe('prac', 'get', store);
-    this.subscribe('prac', 'put', store);
-    this.subscribe('prac', 'del', store);
-    this.subscribe('hues', 'insert', store);
-    this.subscribe('hues', 'select', store);
-    this.subscribe('hues', 'update', store);
-    this.subscribe('hues', 'remove', store);
+    this.subscribe('Prac', 'add', store);
+    this.subscribe('Prac', 'get', store);
+    this.subscribe('Prac', 'put', store);
+    this.subscribe('Prac', 'del', store);
+    this.subscribe('Hues', 'insert', store);
+    this.subscribe('Hues', 'select', store);
+    this.subscribe('Hues', 'update', store);
+    this.subscribe('Hues', 'remove', store);
     this.subscribe('Tables', 'show', store);
-    this.subscribe('prac', 'open', store);
-    this.subscribe('prac', 'drop', store);
-    //tore.drop( 'demo')
-    //tore.open( 'hues')
+    this.subscribe('Prac', 'open', store);
+    this.subscribe('Prac', 'drop', store);
     store.show();
-    store.add('prac', this.prac.id, this.prac);
-    //tore.get( 'prac', @prac.id )         # Called after add
-    store.put('prac', this.prac.id, this.prac);
-    //tore.del( 'prac', @prac.id )         # Called after put
-    store.insert('hues', this.hues);
-    //tore.select( 'hues', (obj) -> true ) # Called after insert
-    this.hues['Green'].column = 'Embrace';
-    this.hues['Orange'].column = 'Embrace';
-    this.hues['Violet'].column = 'Embrace';
-    store.update('hues', this.hues);
-    //here = (obj) -> obj.column is 'Embrace'  # Called after update
-    //tore.remove( 'hues', where )
-    this.lastSource = store.source;
+    store.add('Prac', this.Prac.id, this.Prac);
+    //tore.get( 'Prac', @Prac.id )         # Called after add
+    store.put('Prac', this.Prac.id, this.Prac);
+    //tore.del( 'Prac', @Prac.id )         # Called after put
+    store.insert('Hues', this.Hues);
+    //tore.select( 'Hues', (obj) -> true ) # Called after insert
+    this.Hues['Green'].column = 'Embrace';
+    this.Hues['Orange'].column = 'Embrace';
+    this.Hues['Violet'].column = 'Embrace';
+    store.update('Hues', this.Hues);
   }
 
+  //here = (obj) -> obj.column is 'Embrace'  # Called after update
+  //tore.remove( 'Hues', where )
+  //console.log( "Manager.test()", { subjects:store.stream.subjects } )
   data() {
-    this.prac = {
+    this.Prac = {
       "_id": "Involve",
       "id": "Involve",
       "table": "prac",
@@ -141,9 +138,9 @@ Manager = class Manager {
       "dir": "nw",
       "neg": "Greed"
     };
-    this.hues = this.mix.data('Hues');
-    // console.log( 'Manager.data(@pracs)', @mix, @hues )
-    return this.kit = {
+    this.Hues = this.mix.data('Hues');
+    // console.log( 'Manager.data(@Pracs)', @mix, @Hues )
+    return this.Kit = {
       "_id": "mittens",
       "name": "Mittens",
       "occupation": "kitten",

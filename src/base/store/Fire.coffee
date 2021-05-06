@@ -28,30 +28,30 @@ class Fire extends Store
   add:( table, id, obj ) ->
     @fd.ref(table+'/'+id).set( obj )
        .then(  (snaps) => @results( table, 'add', obj   ) )
-       .catch( (error) => @onerror( table, 'add', error ) )
+       .catch( (error) => @onerror( table, 'add', error, id ) )
     return
 
   get:( table, id, callback ) ->
     @fd.ref(table+'/'+id).once('value' )
-       .then(  (snaps) => @firemsg( table, 'get', snaps,  id, null, callback ) )
-       .catch( (error) => @onerror( table,     'get', error ) )
+       .then(  (snaps) => @firemsg( table, 'get', snaps, null, callback ) )
+       .catch( (error) => @onerror( table, 'get', error, id ) )
     return
 
   put:( table, id,  obj ) ->    # Same as add
     @fd.ref(table+'/'+id).set( obj )
        .then(  (snaps) => @results( table, 'put', obj   ) )
-       .catch( (error) => @onerror( table, 'put', error ) )
+       .catch( (error) => @onerror( table, 'put', error, id ) )
     return
 
   del:( table, id ) ->
     @fd.ref(table+'/'+id).remove()
-       .then(  (snaps) => @firemsg( table,'del', snaps, id ) )
-       .catch( (error) => @onerror( table,    'del', error ) )
+       .then(  ()      => @firemsg( table,'del', {} ) )
+       .catch( (error) => @onerror( table,    'del', error, id ) )
     return
 
   select:( table, where, callback=null ) ->
     @fd.ref(table).once('value')
-       .then(  (snaps) => @firemsg( table, 'select', snaps, @keyProp, where, callback ) )
+       .then(  (snaps) => @firemsg( table, 'select', snaps, where, callback ) )
        .catch( (error) => @onerror( table, 'select', error ) )
     return
 
@@ -98,7 +98,7 @@ class Fire extends Store
   change:( table, id='none', callback=null, Event='put' ) ->
     path  = if id is 'none' then table else table + '/' + id
     @fd.ref(path).on( Fire.EventType[Event] ) # , onChange
-       .then(  (snaps) => @firemsg( table, 'change', snaps,null, callback ) )
+       .then(  (snaps) => @firemsg( table, 'change', snaps, null, callback ) )
        .catch( (error) => @onerror( table, 'change', error ) )
     return
 

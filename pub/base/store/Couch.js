@@ -30,7 +30,16 @@ Couch = class Couch extends Store {
   }
 
   del(table, id) {
-    this.rest('del', table, id, null, {});
+    var opts, selector, where;
+    where = function(obj) {
+      return true;
+    };
+    selector = this.findId(table, id);
+    opts = {
+      where: where,
+      op2: 'del'
+    };
+    this.rest('find', table, id, selector, opts);
   }
 
   select(table, where, callback) {
@@ -71,7 +80,7 @@ Couch = class Couch extends Store {
     selector = this.findSelect(table);
     opts = {
       where: where,
-      op2: 'remove'
+      op2: 'del'
     };
     this.rest('find', table, 'None', selector, opts);
   }
@@ -107,7 +116,20 @@ Couch = class Couch extends Store {
     return {
       "selector": {
         "table": {
-          "$eq": table
+          "$eq": table.toLowerCase()
+        }
+      }
+    };
+  }
+
+  findId(table, id) {
+    return {
+      "selector": {
+        "table": {
+          "$eq": table.toLowerCase()
+        },
+        "_id": {
+          "$eq": id
         }
       }
     };
@@ -125,18 +147,20 @@ Couch = class Couch extends Store {
         return response.json();
       }
     }).then((data) => {
-      var objs, result;
+      var obj1, objs, op, result;
       if (op1 === 'find' && opts.op2 === 'select') {
         return this.selectDocs(table, data, opts.where, opts.callback);
       } else if (op1 === 'find') {
         return this.findDocs(opts.op2, table, data, opts.where, opts.callback);
       } else {
-        objs = opts.objs != null ? opts.objs : obj;
-        result = this.restResult(op1, table, objs, data, opts.where);
+        obj1 = obj != null ? obj : {};
+        objs = opts.objs != null ? opts.objs : obj1;
+        op = opts.op2 === 'del' ? 'del' : op1;
+        result = this.restResult(op, table, objs, data, opts.where);
         if (opts.callback != null) {
           return opts.callback(result);
         } else {
-          return this.results(table, op1, result);
+          return this.results(table, op, result);
         }
       }
     }).catch((error) => {
@@ -175,7 +199,7 @@ Couch = class Couch extends Store {
       if (!(where(doc))) {
         continue;
       }
-      if (op === 'remove') {
+      if (op === 'remove' || op === 'del') {
         doc['_deleted'] = true;
       }
       doc = this.setCouchProps(table, doc.id, doc, doc._rev, true);
@@ -183,15 +207,25 @@ Couch = class Couch extends Store {
       dObjs[doc.id] = doc;
     }
     // console.log('Couch.findDocs()', { data:data, oDocs:oDocs, dObjs:dObjs } )
-    opts = {
-      where: (function(obj) {
-        return true;
-      }),
-      callback: callback,
-      objs: dObjs
-    };
     if (op === 'remove') {
+      opts = {
+        where: (function(obj) {
+          return true;
+        }),
+        callback: callback,
+        objs: dObjs
+      };
       this.rest(op, table, 'None', oDocs, opts);
+    } else if (op === 'del') {
+      opts = {
+        where: (function(obj) {
+          return true;
+        }),
+        callback: callback,
+        objs: dObjs,
+        op2: "del"
+      };
+      this.rest('remove', table, 'None', oDocs, opts);
     } else if (op === 'select') {
       this.results(table, 'select', oDocs);
     }
@@ -209,6 +243,7 @@ Couch = class Couch extends Store {
       doc = this.setCouchProps(table, doc.id, doc, doc._rev, true);
       results[doc.id] = doc;
     }
+    // console.log( 'Couch.selectDocs', { table:table, docs:docs, results:results } )
     if (callback != null) {
       callback(results);
     } else {
@@ -219,7 +254,7 @@ Couch = class Couch extends Store {
   setCouchProps(table, id, obj, rev = null, ok = null) {
     obj['id'] = id;
     obj['_id'] = id;
-    obj['table'] = table;
+    obj['table'] = table.toLowerCase();
     if (rev != null) {
       obj['_rev'] = rev;
     }
@@ -286,7 +321,7 @@ Couch = class Couch extends Store {
   restResult(op, table, obj, data, where) { // obj can also be objs
     var result;
     result = {};
-    if ((data != null) && (op === 'get' || op === 'del')) {
+    if ((data != null) && op === 'get') {
       result = data;
     }
     if ((obj != null) && (op === 'add' || op === 'put')) {
@@ -298,7 +333,7 @@ Couch = class Couch extends Store {
     if ((data != null) && (op === 'select')) {
       result = this.tableObjs(table, data, where);
     }
-    if ((obj != null) && (op === 'remove')) {
+    if ((obj != null) && (op === 'remove' || op === 'del')) {
       result = obj;
     }
     if ((data != null) && (op === 'show' || op === 'drop')) {
@@ -308,29 +343,31 @@ Couch = class Couch extends Store {
   }
 
   urlRest(op, table, id) {
+    var tableLC;
+    tableLC = table.toLowerCase();
     switch (op) {
       case 'add':
       case 'put':
-        return this.baseUrl + '/' + table + '?batch=ok';
+        return this.baseUrl + '/' + tableLC + '?batch=ok';
       case 'get':
       case 'del':
-        return this.baseUrl + '/' + table + '/' + id;
+        return this.baseUrl + '/' + tableLC + '/' + id;
       case 'open':
       case 'drop':
-        return this.baseUrl + '/' + table;
+        return this.baseUrl + '/' + tableLC;
       case 'insert':
       case 'update':
       case 'remove':
-        return this.baseUrl + '/' + table + '/' + '_bulk_docs';
+        return this.baseUrl + '/' + tableLC + '/' + '_bulk_docs';
       case 'select':
-        return this.baseUrl + '/' + table + '/' + '_all_docs';
+        return this.baseUrl + '/' + tableLC + '/' + '_all_docs';
       case 'find':
-        return this.baseUrl + '/' + table + '/' + '_find';
+        return this.baseUrl + '/' + tableLC + '/' + '_find';
       case 'show':
         return this.baseUrl + '/' + '_all_dbs';
       default:
         console.error('Rest.urlRest() Unknown op', op, id);
-        return this.baseUrl + '/' + table;
+        return this.baseUrl + '/' + tableLC;
     }
   }
 
@@ -361,3 +398,11 @@ Couch = class Couch extends Store {
 };
 
 export default Couch;
+
+/*
+  del2:( table, id ) ->
+ * obj = {_id: "Involve", _rev: "1-afa975e535c8308069eaf575eb7e01d0", id: "Involve", table: "prac", type: "pane" }
+    #idRev = id + '?rev=' + "1-afa975e535c8308069eaf575eb7e01d0"
+    @rest( 'del', table, id, null )
+    return
+ */

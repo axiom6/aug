@@ -19,11 +19,14 @@ class Store
     return
 
   results:  ( table, op, result ) ->
-    @publish( table, op, result )
+    obj = if result? then result else {}
+    @publish( table, op, obj )
     return
 
   onerror:( table, op, error, id='none' ) ->
-    console.error( 'Store.onerror', { table:table, op:op, error:error, id:id } )
+    msg    =  { table:table, op:op, error:error }
+    msg.id = id if id isnt 'none'
+    console.error( 'Store.onerror', msg )
     return
 
   subscribe:( table, op, source, onSubscribe  ) ->
@@ -79,6 +82,7 @@ class Store
       @tables[table][@source] = {}
       json = JSON.stringify( @tables )
       localStorage.setItem( 'Tables', json )
+      @open( table ) if @source is 'Couch'
     @results( table, 'open', table+@source )
     return
 
