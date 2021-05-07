@@ -57,7 +57,6 @@ class Nav
   doRoute:( obj ) ->
     # console.log( 'Nav.doRoute()', { objRoute:obj.route, routeLast:@routeLast})
     return if obj.route is 'None' or obj.route is @routeLast or @isInov(obj.route)
-    # console.log( 'Nav.doRoute()', { routeNames:@routeNames } )
     if obj.route? and @inArray(obj.route,@routeNames )
       if @router?
         @router.push( name:obj.route )

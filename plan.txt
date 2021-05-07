@@ -1,43 +1,21 @@
 
-0. Work
-   a. Talk sectObj to pageObj
-   b. Review nav().getPageDef() in Comp.vue
-   b. Ref reset when returning to Geom Draw Hue for Augm
-   c. Tabs.doPage() not working for tab defaults
-   d. Change Inov name?
-   
-1. Tasks
-   a. Apple ID for App store
-   b. Groom
+JsonLD
+  1. Standardize Schema
+  2. Generate Routes from Prin Info Know and Wise Jsons
+  3. Update router-views
+  4. Traversable rounter links in JsonLD
+  5. MetroFoot JsonLD
 
-2. Write
-   a. Talks: Principles  Perspectives Connections
-             Information Knowledge    Wisdom
-             Software    DataScience  Nature
-   b. Descs: Clean Up Info.json Know.json Wise.json
-   c. Lands: Pages: Home Prin Info Know Wise
+DnD
+  1. Deal with duplicate mounts
+  2. Persist container status
+  3. Transfer data
+  4. Design for Muse Disp Prac and Comp
+  5. Wide deployment
 
-3. Fix
-   a. Resize
-   b. Streamline builds
-   c. Augm url startup in Firefox
-   d. Wood has an unaccounted gray area
-   e. svg urls in /vue/svg and /app/svg - moved from css/svg
-
-4. Augm
-   a. MathML browser compatibility
-   b. Geom Data(out) Note Draw Hues Cube
-   c. Data pulled out. Need to review Fire
-   d. Landing Pages for Home Math Geom Note Draw Hues
-
-5. Test Suite
-   a. Test Jitter Main
-   b. Revisit page key from Base to Info
-   c. Review hacks in: Tocs
-   d. Route url path init bug
-   e. Consolidate Muse?
-
-https://main-4a9c7.firebaseapp.com/app/main.html
-https://augm-d4b3c.firebaseapp.com/app/augm.html
-https://muse-b90e1.firebaseapp.com/app/muse.html
-https://is.gd/KO7klq
+Augm Modules
+  1. Replace MathBox
+  2. Replace Ganja
+  3. Three.js plot interface
+  4. Three.js geom interface
+  5. d3 interface

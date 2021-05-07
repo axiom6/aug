@@ -35,7 +35,9 @@ class Muse
   # Called by muse.html to kick things off
   # 1. Read in all the JSON config files in Muse.Batch. Call Muse.init() when complete.
   Muse.start = () ->
-    museLD = new MuseLD()
+    museLD   = new MuseLD( Home )
+    # routesLD = museLD.toRoutes()
+    # console.log( 'MuseLD.toRoutes()', routesLD )
     Muse.addToHead(museLD)
     for key, val of Muse.Batch when val.refine? and val.refine
       val.data = Access.refine(val.data)
@@ -52,12 +54,12 @@ class Muse
     maniElem['crossorigin'] = "use-credentials"
     siteElem = document.createElement('link')
     # console.log( 'Location', window.location.href )
-    siteElem.href        =   window.location.href # "https://vit-muse.web.app/" if window.location.contains('vit-muse')
-    siteElem.rel         = "canonical"
-    jsonLDel             = document.createElement('script')
-    jsonLDel.type        ="application/ld+json"
-    jsonLDel.text        = museLD.jsonLDStr
-    head                 = document.getElementsByTagName("head")[0]
+    siteElem.href = window.location.href # "https://vit-muse.web.app/" if window.location.contains('vit-muse')
+    siteElem.rel  = "canonical"
+    jsonLDel      = document.createElement('script')
+    jsonLDel.type = "application/ld+json"
+    jsonLDel.text = museLD.jsonLDStr
+    head          = document.getElementsByTagName("head")[0]
     head.appendChild(maniElem)
     head.appendChild(siteElem)
     head.appendChild(jsonLDel)
@@ -72,19 +74,58 @@ class Muse
     Soft:     { url:'inno/Soft.json', data:SoftJson, refine:true }
     Data:     { url:'inno/Data.json', data:DataJson, refine:true }
     Scie:     { url:'inno/Scie.json', data:ScieJson, refine:true }
-    Math:     { url:'inno/Math.json', data:MathJson, refine:true }
-  }
+    Math:     { url:'inno/Math.json', data:MathJson, refine:true } }
 
-  Muse.routes = [
+  Muse.routes1 = [
     { path: '/',     name:'Home', components:{ Home: Home      } },
     { path: '/Prin', name:'Prin', components:{ Prin: Home.Prin } },
     { path: '/Comp', name:'Comp', components:{ Comp: Home.Comp } },
     { path: '/Prac', name:'Prac', components:{ Prac: Home.Prac } },
     { path: '/Disp', name:'Disp', components:{ Disp: Home.Disp } },
-    { path: '/Cube', name:'Cube', components:{ Cube: Home.Cube } }
-  ]
+    { path: '/Cube', name:'Cube', components:{ Cube: Home.Cube } } ]
 
-  Muse.routeNames = Muse.createRouteNames( Muse.routes )
+  Muse.routes = [
+    { path:"/",     name:"Home", components:{ Home:Home      } },
+    { path:"/Comp", name:"Comp", components:{ Comp:Home.Comp } },
+    { path:'/Prac', name:'Prac', components:{ Prac:Home.Prac } },
+    { path:"/Principles", name:"Prin", components:{ "Prin": Home.Prin }, "children":[
+      { path:"Embrace",   name:"Embrace",   components:{ "Embrace":  Home.Prac } },
+      { path:"Innovate",  name:"Innovate",  components:{ "Innovate": Home.Prac } },
+      { path:"Encourage", name:"Encourage", components:{ "Encourage":Home.Prac } } ] },
+    { path:"/Information", name:"Info", components:{ "Info":Home.Comp }, "children":[
+      { path:"Team",    name:"Team", components:{ "Team":   Home.Prac} },
+      { path:"Domain",  name:"Domain", components:{ "Domain": Home.Prac } },
+      { path:"Relate",  name:"Relate", components:{ "Relate": Home.Prac } },
+      { path:"Adapt",   name:"Adapt", components:{ "Adapt":  Home.Prac } },
+      { path:"Tech",    name:"Tech", components:{ "Tech":   Home.Prac } },
+      { path:"Benefit", name:"Benefit", components:{ "Benefit":Home.Prac } },
+      { path:"Change",  name:"Change", components:{ "Change": Home.Prac } },
+      { path:"Deliver", name:"Deliver", components:{ "Deliver":Home.Prac } },
+      { path:"Govern",  name:"Govern", components:{ "Govern": Home.Prac } } ] },
+    { path:"/Knowledge", name:"Know", components:{   "Know":Home.Comp }, "children":[
+      { path:"Involve",    name:"Involve", components:{ "Involve":   Home.Prac } },
+      { path:"Discover",   name:"Discover", components:{ "Discover":  Home.Prac } },
+      { path:"Understand", name:"Understand", components:{ "Understand":Home.Prac } },
+      { path:"Conduct",    name:"Conduct", components:{ "Conduct":   Home.Prac } },
+      { path:"Cognition",  name:"Cognition", components:{ "Cognition": Home.Prac } },
+      { path:"Reason",     name:"Reason", components:{ "Reason":    Home.Prac } },
+      { path:"Evolve",     name:"Evolve", components:{ "Evolve":    Home.Prac } },
+      { path:"Educate",    name:"Educate", components:{ "Educate":   Home.Prac } },
+      { path:"Culture",    name:"Culture", components:{ "Culture":   Home.Prac } } ] },
+    { path:"/Wisdom", name:"Wise", components:{   "Wise":Home.Comp }, "children":[
+      { path:"Trust",     name:"Trust", components:{ "Trust":    Home.Prac } },
+      { path:"Nature",    name:"Nature", components:{ "Nature":   Home.Prac } },
+      { path:"Truth",     name:"Truth", components:{ "Truth":    Home.Prac } },
+      { path:"Aware",     name:"Aware", components:{ "Aware":    Home.Prac } },
+      { path:"Create",    name:"Create", components:{ "Create":   Home.Prac } },
+      { path:"Mind",      name:"Mind", components:{ "Mind":     Home.Prac } },
+      { path:"Emerge",    name:"Emerge", components:{ "Emerge":   Home.Prac } },
+      { path:"Inspire",   name:"Inspire", components:{ "Inspire":  Home.Prac } },
+      { path:"Actualize", name:"Actualize", components:{ "Actualize":Home.Prac } } ] },
+    { path:"/Cube", name:"Cube", components:{ Cube:Home.Cube } } ]
+
+  #Muse.createRouteNames( Muse.routes )
+  Muse.routeNames = ["Home","Prin","Comp","Info","Know","Wise","Prac","Cube"]
 
   # Toc.vue components and routes with no west or east directions
   Muse.komps = {

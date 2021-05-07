@@ -16,11 +16,11 @@
     setup() {
 
       const mix    = inject('mix');
-      const elem   = null;
+   // const elem   = null;
       const rviews = mix.routeNames();
 
-      const show = function() {
-        return this.$route.name===null }
+   // const show = function() {
+   //   return this.$route.name===null }
 
       onMounted( function () {
         nextTick( function() {  // Enable touch events inside all views

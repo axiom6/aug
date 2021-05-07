@@ -101,7 +101,6 @@ Nav = class Nav {
     if (obj.route === 'None' || obj.route === this.routeLast || this.isInov(obj.route)) {
       return;
     }
-    // console.log( 'Nav.doRoute()', { routeNames:@routeNames } )
     if ((obj.route != null) && this.inArray(obj.route, this.routeNames)) {
       if (this.router != null) {
         this.router.push({

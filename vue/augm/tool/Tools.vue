@@ -3,7 +3,7 @@
   <div class="tools-pane">
     <d-tabs :route="pagesKey" :pages="toPages()"></d-tabs>
     <template v-for="page in toPages(pagesKey)" :key="page.key">
-      <t-page :page="page" class="tools-page"></t-page>
+      <t-page v-if="show(pagesKey)" :page="page" class="tools-page"></t-page>
     </template>
   </div>
 </template>
@@ -33,6 +33,9 @@
       const pagesKey = ref(null);
       const pageKeys = Object.keys(pages);
 
+      const show = (pagesArg) => {
+        return pagesArg === pagesKey.value; }
+
       const toPages = function() {
         return pages[pagesKey.value]; }
 
@@ -48,7 +51,7 @@
         mix.subscribe(  'Nav', 'Tools.vue', (obj) => {
           onNav(obj); } ) } )
 
-      return { pagesKey, page, toPages }; }
+      return { pagesKey, page, toPages, show }; }
   }
   export default Tools;
 
@@ -66,14 +69,3 @@
      background-color:@theme-back; display:grid; font-size:@geomNDFS; }
 
 </style>
-
-<!--
-  <template>
-    <div class="tools-pane">
-      <d-tabs :route="pagesKey" :pages="toPages()"></d-tabs>
-      <template v-for="page in toPages(pagesKey)" :key="page.key">
-        <t-page :page="page" class="tools-page"></t-page>
-      </template>
-    </div>
-  </template>
--->

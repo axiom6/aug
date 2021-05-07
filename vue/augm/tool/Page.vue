@@ -22,15 +22,18 @@ let Page = {
 
     const mix     = inject('mix');
     let   pageKey = ref('None');
+    let   mounts  = {}
 
     const onNav = (obj) => {
       if( mix.inArray(obj.pageKey,['Gauge','DnD'] ) ) {
         pageKey.value = obj.pageKey; } }
 
     const show = (name) => {
-      return name === pageKey.value; }
+      return name === pageKey.value }
 
     onMounted(  () => {
+      mounts[props.page.key] = true;
+      console.log( 'Page.onMounted()', props.page.key );
       mix.subscribe( 'Nav', 'ToolPage.vue'+props.page.key, (obj) => {
         onNav(obj); } ) } )
 
