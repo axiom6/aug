@@ -3,6 +3,7 @@ var Nav,
 
 import Build from '../util/Build.js';
 
+//mport { NavigationFailureType, isNavigationFailure } from 'vue-router'
 Nav = class Nav {
   constructor(stream, batch, routes, routeNames, komps1, isMuse = false) {
     this.tap = this.tap.bind(this);
@@ -96,15 +97,24 @@ Nav = class Nav {
     }
   }
 
+  // if isNavigationFailure( failure, NavigationFailureType.redirected )
+  //   console.log( 'Nav.doRoute() did not finish', failure.to.path, failure.from.path ) )
   doRoute(obj) {
     // console.log( 'Nav.doRoute()', { objRoute:obj.route, routeLast:@routeLast})
-    if (obj.route === 'None' || obj.route === this.routeLast || this.isInov(obj.route)) {
+    if (obj.route === 'None' || obj.route === this.routeLast) { // or @isInov(obj.route)
       return;
     }
     if ((obj.route != null) && this.inArray(obj.route, this.routeNames)) {
       if (this.router != null) {
         this.router.push({
           name: obj.route
+        }).then(console.log('Nav.doRoute() success', {
+          route: obj.route
+        })).catch((failure) => {
+          return console.log('Nav.doRoute() failure', {
+            route: obj.route,
+            failure: failure
+          });
         });
       } else {
         console.error('Nav.doRoute() router not set');
@@ -422,7 +432,7 @@ Nav = class Nav {
     return 'None';
   }
 
-  hasPages(route, logNot = true) {
+  hasPages(route) { // , logNot=true
     var has;
     has = this.isDef(this.pages[route]) && this.isDef(this.pages[route].pages) && this.pages[route].keys.length > 0;
     // console.log( 'Nav.hasPages()', { route:route, has:has, pages:@pages } ) if not has and logNot

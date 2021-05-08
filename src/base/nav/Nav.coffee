@@ -1,5 +1,6 @@
 
 import Build from '../util/Build.js'
+#mport { NavigationFailureType, isNavigationFailure } from 'vue-router'
 
 class Nav
 
@@ -54,12 +55,19 @@ class Nav
       @[key] = val
     return
 
+  # if isNavigationFailure( failure, NavigationFailureType.redirected )
+  #   console.log( 'Nav.doRoute() did not finish', failure.to.path, failure.from.path ) )
+
   doRoute:( obj ) ->
     # console.log( 'Nav.doRoute()', { objRoute:obj.route, routeLast:@routeLast})
-    return if obj.route is 'None' or obj.route is @routeLast or @isInov(obj.route)
-    if obj.route? and @inArray(obj.route,@routeNames )
+    return if obj.route is 'None' or obj.route is @routeLast # or @isInov(obj.route)
+    if obj.route? and @inArray( obj.route, @routeNames )
       if @router?
-        @router.push( name:obj.route )
+        @router.push( { name:obj.route } )
+          .then(
+            console.log( 'Nav.doRoute() success', { route:obj.route } ) )
+          .catch( (failure) =>
+            console.log( 'Nav.doRoute() failure', { route:obj.route, failure:failure } ) )
       else
         console.error( 'Nav.doRoute() router not set' )
       @routeLast = obj.route
@@ -261,7 +269,7 @@ class Nav
       return key if page.show
     'None'
 
-  hasPages:( route, logNot=true ) ->
+  hasPages:( route ) ->  # , logNot=true
     has = @isDef(@pages[route]) and @isDef(@pages[route].pages) and @pages[route].keys.length > 0
     # console.log( 'Nav.hasPages()', { route:route, has:has, pages:@pages } ) if not has and logNot
     has

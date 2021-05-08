@@ -18,6 +18,7 @@
       const mix    = inject('mix');
    // const elem   = null;
       const rviews = mix.routeNames();
+      console.log( 'View.setuo()', rviews );
 
    // const show = function() {
    //   return this.$route.name===null }

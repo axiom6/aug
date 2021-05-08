@@ -144,11 +144,18 @@ Muse = (function() {
     }
 
     static createRouteNames(routes) {
-      var i, len, route, routeNames;
+      var child, i, j, len, len1, ref, route, routeNames;
       routeNames = [];
       for (i = 0, len = routes.length; i < len; i++) {
         route = routes[i];
         routeNames.push(route.name);
+        if (route.children != null) {
+          ref = route.children;
+          for (j = 0, len1 = ref.length; j < len1; j++) {
+            child = ref[j];
+            routeNames.push(child.name);
+          }
+        }
       }
       return routeNames;
     }
@@ -212,51 +219,8 @@ Muse = (function() {
     }
   };
 
-  Muse.routes1 = [
-    {
-      path: '/',
-      name: 'Home',
-      components: {
-        Home: Home
-      }
-    },
-    {
-      path: '/Prin',
-      name: 'Prin',
-      components: {
-        Prin: Home.Prin
-      }
-    },
-    {
-      path: '/Comp',
-      name: 'Comp',
-      components: {
-        Comp: Home.Comp
-      }
-    },
-    {
-      path: '/Prac',
-      name: 'Prac',
-      components: {
-        Prac: Home.Prac
-      }
-    },
-    {
-      path: '/Disp',
-      name: 'Disp',
-      components: {
-        Disp: Home.Disp
-      }
-    },
-    {
-      path: '/Cube',
-      name: 'Cube',
-      components: {
-        Cube: Home.Cube
-      }
-    }
-  ];
-
+  //{ path:"/Comp", name:"Comp", components:{ Comp:Home.Comp } },
+  //{ path:'/Prac', name:'Prac', components:{ Prac:Home.Prac } },
   Muse.routes = [
     {
       path: "/",
@@ -266,45 +230,31 @@ Muse = (function() {
       }
     },
     {
-      path: "/Comp",
-      name: "Comp",
-      components: {
-        Comp: Home.Comp
-      }
-    },
-    {
-      path: '/Prac',
-      name: 'Prac',
-      components: {
-        Prac: Home.Prac
-      }
-    },
-    {
       path: "/Principles",
       name: "Prin",
       components: {
-        "Prin": Home.Prin
+        Prin: Home.Prin
       },
-      "children": [
+      children: [
         {
           path: "Embrace",
           name: "Embrace",
           components: {
-            "Embrace": Home.Prac
+            Embrace: Home.Prac
           }
         },
         {
           path: "Innovate",
           name: "Innovate",
           components: {
-            "Innovate": Home.Prac
+            Innovate: Home.Prac
           }
         },
         {
           path: "Encourage",
           name: "Encourage",
           components: {
-            "Encourage": Home.Prac
+            Encourage: Home.Prac
           }
         }
       ]
@@ -313,70 +263,70 @@ Muse = (function() {
       path: "/Information",
       name: "Info",
       components: {
-        "Info": Home.Comp
+        Info: Home.Comp
       },
-      "children": [
+      children: [
         {
           path: "Team",
           name: "Team",
-          components: {
-            "Team": Home.Prac
+          component: {
+            Team: Home.Prac
           }
         },
         {
           path: "Domain",
           name: "Domain",
           components: {
-            "Domain": Home.Prac
+            Domain: Home.Prac
           }
         },
         {
           path: "Relate",
           name: "Relate",
           components: {
-            "Relate": Home.Prac
+            Relate: Home.Prac
           }
         },
         {
           path: "Adapt",
           name: "Adapt",
           components: {
-            "Adapt": Home.Prac
+            Adapt: Home.Prac
           }
         },
         {
           path: "Tech",
           name: "Tech",
           components: {
-            "Tech": Home.Prac
+            Tech: Home.Prac
           }
         },
         {
           path: "Benefit",
           name: "Benefit",
           components: {
-            "Benefit": Home.Prac
+            Benefit: Home.Prac
           }
         },
         {
           path: "Change",
           name: "Change",
           components: {
-            "Change": Home.Prac
+            Change: Home.Prac
           }
         },
         {
           path: "Deliver",
           name: "Deliver",
           components: {
-            "Deliver": Home.Prac
+            Deliver: Home.Prac
           }
         },
         {
           path: "Govern",
           name: "Govern",
           components: {
-            "Govern": Home.Prac
+            Govern: Home.Prac
           }
         }
       ]
@@ -385,70 +335,70 @@ Muse = (function() {
       path: "/Knowledge",
       name: "Know",
       components: {
-        "Know": Home.Comp
+        Know: Home.Comp
       },
-      "children": [
+      children: [
         {
           path: "Involve",
           name: "Involve",
           components: {
-            "Involve": Home.Prac
+            Involve: Home.Prac
           }
         },
         {
           path: "Discover",
           name: "Discover",
           components: {
-            "Discover": Home.Prac
+            Discover: Home.Prac
           }
         },
         {
           path: "Understand",
           name: "Understand",
           components: {
-            "Understand": Home.Prac
+            Understand: Home.Prac
           }
         },
         {
           path: "Conduct",
           name: "Conduct",
           components: {
-            "Conduct": Home.Prac
+            Conduct: Home.Prac
           }
         },
         {
           path: "Cognition",
           name: "Cognition",
           components: {
-            "Cognition": Home.Prac
+            Cognition: Home.Prac
           }
         },
         {
           path: "Reason",
           name: "Reason",
           components: {
-            "Reason": Home.Prac
+            Reason: Home.Prac
           }
         },
         {
           path: "Evolve",
           name: "Evolve",
           components: {
-            "Evolve": Home.Prac
+            Evolve: Home.Prac
           }
         },
         {
           path: "Educate",
           name: "Educate",
           components: {
-            "Educate": Home.Prac
+            Educate: Home.Prac
           }
         },
         {
           path: "Culture",
           name: "Culture",
           components: {
-            "Culture": Home.Prac
+            Culture: Home.Prac
           }
         }
       ]
@@ -457,70 +407,70 @@ Muse = (function() {
       path: "/Wisdom",
       name: "Wise",
       components: {
-        "Wise": Home.Comp
+        Wise: Home.Comp
       },
-      "children": [
+      children: [
         {
           path: "Trust",
           name: "Trust",
           components: {
-            "Trust": Home.Prac
+            Trust: Home.Prac
           }
         },
         {
           path: "Nature",
           name: "Nature",
           components: {
-            "Nature": Home.Prac
+            Nature: Home.Prac
           }
         },
         {
           path: "Truth",
           name: "Truth",
           components: {
-            "Truth": Home.Prac
+            Truth: Home.Prac
           }
         },
         {
           path: "Aware",
           name: "Aware",
           components: {
-            "Aware": Home.Prac
+            Aware: Home.Prac
           }
         },
         {
           path: "Create",
           name: "Create",
           components: {
-            "Create": Home.Prac
+            Create: Home.Prac
           }
         },
         {
           path: "Mind",
           name: "Mind",
           components: {
-            "Mind": Home.Prac
+            Mind: Home.Prac
           }
         },
         {
           path: "Emerge",
           name: "Emerge",
           components: {
-            "Emerge": Home.Prac
+            Emerge: Home.Prac
           }
         },
         {
           path: "Inspire",
           name: "Inspire",
           components: {
-            "Inspire": Home.Prac
+            Inspire: Home.Prac
           }
         },
         {
           path: "Actualize",
           name: "Actualize",
           components: {
-            "Actualize": Home.Prac
+            Actualize: Home.Prac
           }
         }
       ]
@@ -534,9 +484,9 @@ Muse = (function() {
     }
   ];
 
-  //Muse.createRouteNames( Muse.routes )
-  Muse.routeNames = ["Home", "Prin", "Comp", "Info", "Know", "Wise", "Prac", "Cube"];
+  Muse.routeNames = Muse.createRouteNames(Muse.routes); // For router-links in View.vue
 
+  
   // Toc.vue components and routes with no west or east directions
   Muse.komps = {
     Home: {
@@ -566,7 +516,7 @@ Muse = (function() {
     Info: {
       title: 'Info',
       key: 'Info',
-      route: 'Comp',
+      route: 'Info',
       pracs: {},
       ikw: true,
       icon: "fas fa-th",
@@ -578,7 +528,7 @@ Muse = (function() {
     Know: {
       title: 'Know',
       key: 'Know',
-      route: 'Comp',
+      route: 'Know',
       pracs: {},
       ikw: true,
       icon: "fas fa-university",
@@ -590,7 +540,7 @@ Muse = (function() {
     Wise: {
       title: 'Wise',
       key: 'Wise',
-      route: 'Comp',
+      route: 'Wise',
       pracs: {},
       ikw: true,
       icon: "fab fa-tripadvisor",
@@ -618,3 +568,13 @@ Muse = (function() {
 }).call(this);
 
 export default Muse;
+
+/*
+  Muse.routes1 = [
+    { path: '/',     name:'Home', components:{ Home: Home      } },
+    { path: '/Prin', name:'Prin', components:{ Prin: Home.Prin } },
+    { path: '/Comp', name:'Comp', components:{ Comp: Home.Comp } },
+    { path: '/Prac', name:'Prac', components:{ Prac: Home.Prac } },
+    { path: '/Disp', name:'Disp', components:{ Disp: Home.Disp } },
+    { path: '/Cube', name:'Cube', components:{ Cube: Home.Cube } } ]
+*/

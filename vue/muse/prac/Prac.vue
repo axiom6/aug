@@ -1,7 +1,7 @@
 
 <template>
   <div   class="prac-pane">
-    <b-tabs :route="route" :pages="pages"></b-tabs>
+    <b-tabs :route="'Prac'" :pages="pages"></b-tabs>
     <div class="prac-prac" :key="pracIdx">
       <p-dirs v-show="nav.isShow('Prac','Dirs')" :pracObj="pracObj"></p-dirs>
       <p-conn   v-if="nav.isShow('Prac','Conn')" :pracObj="pracObj" level="Prac"></p-conn>
@@ -27,7 +27,6 @@
       const mix     = inject( 'mix' );
       const nav     = inject( 'nav' );
       const debug   = false;
-      const route   = "Prac";
       const pracObj = ref(null);
       const pracIdx = ref(0   );
       
@@ -41,14 +40,17 @@
         pracIdx.value++;
         if( debug ) {
           console.log( 'Prac.onPrac()', { pracIdx:pracIdx.value, pracObj:pracObj.value, pracKey:obj.pracKey } ); } }
-             
+
       const onNav = function( obj ) {
-        if( nav.isMyNav( obj, route ) ) {
-          // console.log( 'Prac.onNav() obj', { obj:obj } );
-          onPrac( obj ); } }
+        console.log( 'Prac.onNav()', obj.route )
+        onPrac( obj ); }
+
+    //const onNav = function( obj ) {
+    //  if( nav.isMyNav( obj, 'Prac' ) ) {
+    //    onPrac( obj ); } }
 
       onBeforeMount( function () {
-        nav.setPages( route, pages );
+        nav.setPages( 'Prac', pages );
         let obj = {}
         obj.compKey = nav.compKey;
         obj.pracKey = nav.pracKey;
@@ -56,12 +58,11 @@
         onPrac( obj );  } )
 
       onMounted( function () {
-        // console.log( 'Prac.mounted()', { route:route } );
-
+        console.log( 'Prac.onMounted()')
         mix.subscribe(  "Nav", 'Prac.vue', (obj) => {
           onNav(obj); } ); } )
       
-    return { route, pracObj, pracIdx, pages, nav }; }
+    return { pracObj, pracIdx, pages, nav }; }
   }
   
   export default Prac;

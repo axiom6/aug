@@ -19,7 +19,7 @@
       const nav = inject( 'nav' );
 
       const doPrac = function (pracKey) {
-          let obj = { route:"Prac", pracKey:pracKey };
+          let obj = { route:pracKey, pracKey:pracKey, source:'Sign' };
           nav.pub( obj ); }
 
     return { doPrac }; }

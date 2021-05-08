@@ -76,56 +76,48 @@ class Muse
     Scie:     { url:'inno/Scie.json', data:ScieJson, refine:true }
     Math:     { url:'inno/Math.json', data:MathJson, refine:true } }
 
-  Muse.routes1 = [
-    { path: '/',     name:'Home', components:{ Home: Home      } },
-    { path: '/Prin', name:'Prin', components:{ Prin: Home.Prin } },
-    { path: '/Comp', name:'Comp', components:{ Comp: Home.Comp } },
-    { path: '/Prac', name:'Prac', components:{ Prac: Home.Prac } },
-    { path: '/Disp', name:'Disp', components:{ Disp: Home.Disp } },
-    { path: '/Cube', name:'Cube', components:{ Cube: Home.Cube } } ]
+  #{ path:"/Comp", name:"Comp", components:{ Comp:Home.Comp } },
+  #{ path:'/Prac', name:'Prac', components:{ Prac:Home.Prac } },
 
   Muse.routes = [
-    { path:"/",     name:"Home", components:{ Home:Home      } },
-    { path:"/Comp", name:"Comp", components:{ Comp:Home.Comp } },
-    { path:'/Prac', name:'Prac', components:{ Prac:Home.Prac } },
-    { path:"/Principles", name:"Prin", components:{ "Prin": Home.Prin }, "children":[
-      { path:"Embrace",   name:"Embrace",   components:{ "Embrace":  Home.Prac } },
-      { path:"Innovate",  name:"Innovate",  components:{ "Innovate": Home.Prac } },
-      { path:"Encourage", name:"Encourage", components:{ "Encourage":Home.Prac } } ] },
-    { path:"/Information", name:"Info", components:{ "Info":Home.Comp }, "children":[
-      { path:"Team",    name:"Team", components:{ "Team":   Home.Prac} },
-      { path:"Domain",  name:"Domain", components:{ "Domain": Home.Prac } },
-      { path:"Relate",  name:"Relate", components:{ "Relate": Home.Prac } },
-      { path:"Adapt",   name:"Adapt", components:{ "Adapt":  Home.Prac } },
-      { path:"Tech",    name:"Tech", components:{ "Tech":   Home.Prac } },
-      { path:"Benefit", name:"Benefit", components:{ "Benefit":Home.Prac } },
-      { path:"Change",  name:"Change", components:{ "Change": Home.Prac } },
-      { path:"Deliver", name:"Deliver", components:{ "Deliver":Home.Prac } },
-      { path:"Govern",  name:"Govern", components:{ "Govern": Home.Prac } } ] },
-    { path:"/Knowledge", name:"Know", components:{   "Know":Home.Comp }, "children":[
-      { path:"Involve",    name:"Involve", components:{ "Involve":   Home.Prac } },
-      { path:"Discover",   name:"Discover", components:{ "Discover":  Home.Prac } },
-      { path:"Understand", name:"Understand", components:{ "Understand":Home.Prac } },
-      { path:"Conduct",    name:"Conduct", components:{ "Conduct":   Home.Prac } },
-      { path:"Cognition",  name:"Cognition", components:{ "Cognition": Home.Prac } },
-      { path:"Reason",     name:"Reason", components:{ "Reason":    Home.Prac } },
-      { path:"Evolve",     name:"Evolve", components:{ "Evolve":    Home.Prac } },
-      { path:"Educate",    name:"Educate", components:{ "Educate":   Home.Prac } },
-      { path:"Culture",    name:"Culture", components:{ "Culture":   Home.Prac } } ] },
-    { path:"/Wisdom", name:"Wise", components:{   "Wise":Home.Comp }, "children":[
-      { path:"Trust",     name:"Trust", components:{ "Trust":    Home.Prac } },
-      { path:"Nature",    name:"Nature", components:{ "Nature":   Home.Prac } },
-      { path:"Truth",     name:"Truth", components:{ "Truth":    Home.Prac } },
-      { path:"Aware",     name:"Aware", components:{ "Aware":    Home.Prac } },
-      { path:"Create",    name:"Create", components:{ "Create":   Home.Prac } },
-      { path:"Mind",      name:"Mind", components:{ "Mind":     Home.Prac } },
-      { path:"Emerge",    name:"Emerge", components:{ "Emerge":   Home.Prac } },
-      { path:"Inspire",   name:"Inspire", components:{ "Inspire":  Home.Prac } },
-      { path:"Actualize", name:"Actualize", components:{ "Actualize":Home.Prac } } ] },
+    { path:"/",     name:"Home", components:{ Home:Home } },
+    { path:"/Principles",  name:"Prin", components:{ Prin: Home.Prin }, children:[
+      { path:"Embrace",    name:"Embrace",   components:{ Embrace:  Home.Prac } },
+      { path:"Innovate",   name:"Innovate",  components:{ Innovate: Home.Prac } },
+      { path:"Encourage",  name:"Encourage", components:{ Encourage:Home.Prac } } ] },
+    { path:"/Information", name:"Info",     components:{ Info:Home.Comp }, children:[
+      { path:"Team",    name:"Team",     component:{  Team:   Home.Prac } },
+      { path:"Domain",  name:"Domain",   components:{ Domain: Home.Prac } },
+      { path:"Relate",  name:"Relate",   components:{ Relate: Home.Prac } },
+      { path:"Adapt",   name:"Adapt",    components:{ Adapt:  Home.Prac } },
+      { path:"Tech",    name:"Tech",     components:{ Tech:   Home.Prac } },
+      { path:"Benefit", name:"Benefit",  components:{ Benefit:Home.Prac } },
+      { path:"Change",  name:"Change",   components:{ Change: Home.Prac } },
+      { path:"Deliver", name:"Deliver",  components:{ Deliver:Home.Prac } },
+      { path:"Govern",  name:"Govern",   components:{ Govern: Home.Prac } } ] },
+    { path:"/Knowledge", name:"Know",    components:{ Know:Home.Comp }, children:[
+      { path:"Involve",    name:"Involve",    components:{ Involve:   Home.Prac } },
+      { path:"Discover",   name:"Discover",   components:{ Discover:  Home.Prac } },
+      { path:"Understand", name:"Understand", components:{ Understand:Home.Prac } },
+      { path:"Conduct",    name:"Conduct",    components:{ Conduct:   Home.Prac } },
+      { path:"Cognition",  name:"Cognition",  components:{ Cognition: Home.Prac } },
+      { path:"Reason",     name:"Reason",     components:{ Reason:    Home.Prac } },
+      { path:"Evolve",     name:"Evolve",     components:{ Evolve:    Home.Prac } },
+      { path:"Educate",    name:"Educate",    components:{ Educate:   Home.Prac } },
+      { path:"Culture",    name:"Culture",    components:{ Culture:   Home.Prac } } ] },
+    { path:"/Wisdom", name:"Wise", components:{ Wise:Home.Comp }, children:[
+      { path:"Trust",     name:"Trust",     components:{ Trust:    Home.Prac } },
+      { path:"Nature",    name:"Nature",    components:{ Nature:   Home.Prac } },
+      { path:"Truth",     name:"Truth",     components:{ Truth:    Home.Prac } },
+      { path:"Aware",     name:"Aware",     components:{ Aware:    Home.Prac } },
+      { path:"Create",    name:"Create",    components:{ Create:   Home.Prac } },
+      { path:"Mind",      name:"Mind",      components:{ Mind:     Home.Prac } },
+      { path:"Emerge",    name:"Emerge",    components:{ Emerge:   Home.Prac } },
+      { path:"Inspire",   name:"Inspire",   components:{ Inspire:  Home.Prac } },
+      { path:"Actualize", name:"Actualize", components:{ Actualize:Home.Prac } } ] },
     { path:"/Cube", name:"Cube", components:{ Cube:Home.Cube } } ]
 
-  #Muse.createRouteNames( Muse.routes )
-  Muse.routeNames = ["Home","Prin","Comp","Info","Know","Wise","Prac","Cube"]
+  Muse.routeNames = Muse.createRouteNames( Muse.routes ) # For router-links in View.vue
 
   # Toc.vue components and routes with no west or east directions
   Muse.komps = {
@@ -133,11 +125,11 @@ class Muse
     north:"Cube", prev:"Cube", south:"Prin",  next:"Prin"  }
     Prin:{ title:'Prin', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",
     north:"Home", prev:"Home", south:"Info",  next:"Info" }
-    Info:{ title:'Info', key:'Info', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-th",
+    Info:{ title:'Info', key:'Info', route:'Info', pracs:{}, ikw:true,  icon:"fas fa-th",
     north:"Prin", prev:"Prin", south:"Know",  next:"Know" }
-    Know:{ title:'Know', key:'Know', route:'Comp', pracs:{}, ikw:true,  icon:"fas fa-university",
+    Know:{ title:'Know', key:'Know', route:'Know', pracs:{}, ikw:true,  icon:"fas fa-university",
     north:"Info", prev:"Info", south:"Wise",  next:"Wise" }
-    Wise:{ title:'Wise', key:'Wise', route:'Comp', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor",
+    Wise:{ title:'Wise', key:'Wise', route:'Wise', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor",
     north:"Know", prev:"Know", south:"Home",  next:"Home" }
     Cube:{ title:'Cube', key:'Cube', route:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes",
     north:"Wise", prev:"Wise", south:"Wise",  next:"Home"  } }
@@ -188,6 +180,9 @@ class Muse
     routeNames = []
     for route in routes
       routeNames.push( route.name )
+      if route.children?
+        for child in route.children
+          routeNames.push( child.name )
     routeNames
 
   # Merges principles and innovations into comp practices
@@ -202,3 +197,13 @@ class Muse
     return
 
 export default Muse
+
+###
+  Muse.routes1 = [
+    { path: '/',     name:'Home', components:{ Home: Home      } },
+    { path: '/Prin', name:'Prin', components:{ Prin: Home.Prin } },
+    { path: '/Comp', name:'Comp', components:{ Comp: Home.Comp } },
+    { path: '/Prac', name:'Prac', components:{ Prac: Home.Prac } },
+    { path: '/Disp', name:'Disp', components:{ Disp: Home.Disp } },
+    { path: '/Cube', name:'Cube', components:{ Cube: Home.Cube } } ]
+###

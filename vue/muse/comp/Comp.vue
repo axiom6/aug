@@ -1,7 +1,7 @@
 
 <template>
   <div class="comp-pane">
-    <b-tabs :route="routKey" :pages="tabPages(routKey)" position="left" ></b-tabs>
+    <b-tabs :route="'Comp'"  :pages="tabPages('Comp')"  position="left" ></b-tabs>
     <b-tabs :route="compKey" :pages="tabPages(compKey)" position="right" isInov="true" v-if="hasInov()"></b-tabs>
     <div   class="comp-comp">
       <template  :key="compIdx" v-for="pracObj in compObj">
@@ -41,7 +41,6 @@ let Comp = {
 
     const mix       = inject( 'mix' );
     const nav       = inject( 'nav' );
-    const routKey   = ref('Comp'); // Same ref but show attr changes
     const compKey   = ref('Info');
     const inovKey   = ref('Info');
     let   compObj   = ref({}    );
@@ -49,7 +48,7 @@ let Comp = {
     let   compIdx   = ref(0     );
     const debug     = false;
     const inovComps = ['Info','Know','Wise'];
-    const routes    = ['Comp','Info','Know','Wise'];
+    const routes    = ['Info','Know','Wise'];
 
     let Comp = {
       Sign:{ title:'Prac', key:'Sign', show:true  },
@@ -102,8 +101,6 @@ let Comp = {
       return true; }
 
     const onRows = function () {
-    //const pages    = tabPages('Comp', 'Rows');
-    //const pageKey  = 'Sign';
       const myKey    =  compKey.value;
       let   page     = Info;
       if( myKey==='Know') { page = Know; }
@@ -121,14 +118,14 @@ let Comp = {
         console.log( 'Comp.hasInov()', { has:has, compKey:compKey.value, inovComps:inovComps } ); }
       return has; }
 
-    nav.setPages( routKey.value, Comp );
-    onComp({ route:routKey.value, compKey:nav.compKey, inovKey:nav.inovKey } );
+    nav.setPages( 'Comp', Comp );
+    onComp({ compKey:nav.compKey, inovKey:nav.inovKey } );
 
     onMounted( function () {
       mix.subscribe('Nav', 'Comp.vue', (obj) => { onNav(obj); } ); } )
 
 
-    return { routKey,compKey,inovKey,compObj,compIdx,pracObj,tabPages,hasInov,isDim,isRows,myRows,nav }; }
+    return { compKey,inovKey,compObj,compIdx,pracObj,tabPages,hasInov,isDim,isRows,myRows,nav }; }
 }
 
 export default Comp;

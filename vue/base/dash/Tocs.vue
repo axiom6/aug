@@ -48,7 +48,7 @@
         pub( obj ); }
       const doPrac = function(pracArg) {
         pracKey.value = pracArg;
-        let route    = toRoute('Prac', pracArg );
+        let route     = toRoute('Prac', pracArg );
         pub( { route:route, pracKey:pracArg, source:'Toc' } ); }
       const doDisp = function(dispArg) {
         dispKey.value = dispArg;
@@ -72,7 +72,8 @@
       const style = function( ikwObj ) {
         return mix.styleObj(ikwObj); }
       const toRoute = function( level, routeArg ) {
-        let route = mix.isMuse()   ? level  : routeArg;
+    //let route = mix.isMuse()   ? level  : routeArg;
+        let route = routeArg;
             route = compKey.value==='Talk' ? 'Talk' : route;
             return route; }
       const tocPracs = function(compArg,inovArg) {
