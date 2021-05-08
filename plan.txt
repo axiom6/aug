@@ -1,8 +1,8 @@
 
 JsonLD
   1. Standardize Schema
-  2. Generate Routes from Prin Info Know and Wise Jsons
-  3. Update router-views
+  2. Debug Routes from Prin Info Know and Wise Jsons
+  3. Debug router-views
   4. Traversable rounter links in JsonLD
   5. MetroFoot JsonLD
 
@@ -19,3 +19,7 @@ Augm Modules
   3. Three.js plot interface
   4. Three.js geom interface
   5. d3 interface
+  6. Slim down Roboto font css
+
+Touch
+  1. Get working again

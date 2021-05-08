@@ -42,13 +42,9 @@
           console.log( 'Prac.onPrac()', { pracIdx:pracIdx.value, pracObj:pracObj.value, pracKey:obj.pracKey } ); } }
 
       const onNav = function( obj ) {
-        console.log( 'Prac.onNav()', obj.route )
+        //console.log( 'Prac.onNav()', obj.route )
         onPrac( obj ); }
-
-    //const onNav = function( obj ) {
-    //  if( nav.isMyNav( obj, 'Prac' ) ) {
-    //    onPrac( obj ); } }
-
+      
       onBeforeMount( function () {
         nav.setPages( 'Prac', pages );
         let obj = {}
@@ -58,7 +54,7 @@
         onPrac( obj );  } )
 
       onMounted( function () {
-        console.log( 'Prac.onMounted()')
+        // console.log( 'Prac.onMounted()')
         mix.subscribe(  "Nav", 'Prac.vue', (obj) => {
           onNav(obj); } ); } )
       
@@ -83,6 +79,10 @@
 </style>
 
 <!--
+    //const onNav = function( obj ) {
+    //  if( nav.isMyNav( obj, 'Prac' ) ) {
+    //    onPrac( obj ); } }
+
 if( !mix.isDef(pracObj.value) || pracObj.value.name !== obj.pracKey ) {
 -->
 

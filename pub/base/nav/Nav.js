@@ -108,9 +108,8 @@ Nav = class Nav {
       if (this.router != null) {
         this.router.push({
           name: obj.route
-        }).then(console.log('Nav.doRoute() success', {
-          route: obj.route
-        })).catch((failure) => {
+        // console.log( 'Nav.doRoute() success', { route:obj.route } ) )
+        }).then().catch((failure) => {
           return console.log('Nav.doRoute() failure', {
             route: obj.route,
             failure: failure

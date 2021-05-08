@@ -64,8 +64,8 @@ class Nav
     if obj.route? and @inArray( obj.route, @routeNames )
       if @router?
         @router.push( { name:obj.route } )
-          .then(
-            console.log( 'Nav.doRoute() success', { route:obj.route } ) )
+          .then()
+            # console.log( 'Nav.doRoute() success', { route:obj.route } ) )
           .catch( (failure) =>
             console.log( 'Nav.doRoute() failure', { route:obj.route, failure:failure } ) )
       else
