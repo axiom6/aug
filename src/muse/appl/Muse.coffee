@@ -6,13 +6,14 @@ import Nav    from '../../base/nav/Nav.js'
 import Touch  from '../../base/nav/Touch.js'
 #mport Cache  from '../../base/util/Cache.js'
 import Mix    from '../../base/nav/Mix.js'
-#mport MuseLD from './MuseLD.js'
+
 
 
 import { createApp }    from 'vue'    #
 import { createRouter, createWebHistory } from 'vue-router'
 import Home             from '../../../vue/muse/appl/Muse.vue';
 
+#mport MuseLD   from './MuseLD.js'
 #mport MuseLink from './MuseLD.json'
 import PrinJson from '../../../data/muse/Prin.json'
 import RowsJson from '../../../data/muse/Rows.json'

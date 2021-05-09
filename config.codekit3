@@ -2749,28 +2749,6 @@
       "oO" : 0,
       "oS" : 1
     },
-    "\/src\/muse\/appl\/Routes.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/muse\/appl\/Routes-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/muse\/appl\/Routes2.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/muse\/appl\/Routes2-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/src\/muse\/conn\/Chord.coffee" : {
       "ft" : 32,
       "ma" : 0,
