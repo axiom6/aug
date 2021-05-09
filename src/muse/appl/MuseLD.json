@@ -1,1933 +1,202 @@
 {
   "@context": {
-    "principles": "http://example.com/principles",
-    "refinements": "http://example.com/refinements",
-    "information": "http://example.com/information",
-    "knowledge": "http://example.com/knowledge",
-    "wisdom": "http://example.com/wisdom"
+    "Prin": "https://muse-ad352.web.app/Prin",
+    "Info": "https://muse-ad352.web.app/Info"
   },
-  "principles": {
+  "Prin": {
     "Embrace": {
       "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
+        "@type":       "https://muse-ad352.web.app/Prin",
+        "name":        "https://muse-ad352.web.app/Prin/name",
+        "column":      "https://muse-ad352.web.app/Prin/column",
+        "row":         "https://muse-ad352.web.app/Prin/row",
+        "plane":       "https://muse-ad352.web.app/Prin/plane",
+        "description": "https://muse-ad352.web.app/Prin/description"
       },
-      "@type": "Practice",
-      "name": "Embrace",
+      "@type":  "Practice",
+      "name":   "Embrace",
       "column": "Embrace",
-      "row": "Dim",
-      "plane": "Prin",
-      "description": "Creative interaction and guidance that empowers active change",
-      "disciplines": {
-        "Interact": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Interact",
-          "description": "Dependable participation through spontaneous interactions"
-        },
-        "Guide": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Guide",
-          "description": "Clarity and commitment for sustaining correct behavior."
-        },
-        "Facilitate": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Facilitate",
-          "description": "Getting in touch"
-        },
-        "Freedom": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Freedom",
-          "description": "Individual freedom and liberty"
-        }
-      }
+      "row":    "Dim",
+      "plane":  "Prin",
+      "description": "Creative interaction and guidance that empowers active change"
     },
     "Innovate": {
       "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
+        "@type":       "https://muse-ad352.web.app/Prin/Innovate",
+        "name":        "https://muse-ad352.web.app/Prin/Innovate/name",
+        "column":      "https://muse-ad352.web.app/Prin/Innovate/column",
+        "row":         "https://muse-ad352.web.app/Prin/Innovate/row",
+        "plane":       "https://muse-ad352.web.app/Prin/Innovate/plane",
+        "description": "https://muse-ad352.web.app/Prin/Innovate/description"
       },
       "@type": "Practice",
       "name": "Innovate",
       "column": "Innovate",
       "row": "Dim",
       "plane": "Prin",
-      "description": "The space for adjacent connections where ideas flow, interact, evolve, grow and converge in novel ways.",
-      "disciplines": {
-        "Engage": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Engage",
-          "description": "Our innovations engage at every level"
-        },
-        "Invent": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Invent",
-          "description": "Combine concepts to create something new by seeing beyond"
-        },
-        "Distill": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Distill",
-          "description": "To get to the essential meaning or ideas from information, thoughts,  and conscience experience"
-        },
-        "Connect": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Connect",
-          "description": "Chance favors the connected mind with serendipitous inventions."
-        }
-      }
+      "description": "The space for adjacent connections where ideas flow, interact, evolve, grow and converge in novel ways."
     },
     "Encourage": {
       "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
+        "@type":       "https://muse-ad352.web.app/Prin/Encourage",
+        "name":        "https://muse-ad352.web.app/Prin/Encourage/name",
+        "column":      "https://muse-ad352.web.app/Prin/Encourage/column",
+        "row":         "https://muse-ad352.web.app/Prin/Encourage/row",
+        "plane":       "https://muse-ad352.web.app/Prin/Encourage/plane",
+        "description": "https://muse-ad352.web.app/Prin/Encourage/description"
       },
       "@type": "Practice",
       "name": "Encourage",
       "column": "Encourage",
       "row": "Dim",
       "plane": "Prin",
-      "description": "Augmentation informed by Innovation, enhanced with strong Intent, Ethics and Reflection",
-      "disciplines": {
-        "Augment": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Augment",
-          "description": "Capability to approach a complex problem situation, to gain comprehension and to derive solutions"
-        },
-        "Intent": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Intent",
-          "description": "Lead others to more abstract goals"
-        },
-        "Ethics": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Ethics",
-          "description": "The capacity to think critically about and act on moral values."
-        },
-        "Reflect": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Reflect",
-          "description": "Think deeply or carefully about"
-        }
-      }
+      "description": "Augmentation informed by Innovation, enhanced with strong Intent, Ethics and Reflection"
     }
   },
-  "refinements": {
-    "Learn": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Learn",
-      "column": "Row",
-      "row": "Learn",
-      "plane": "Info",
-      "description": "Tactics for colaboration and adapting to change. 'Learning over Expertise'[Cynefin]",
-      "disciplines": {
-        "Respond": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Respond",
-          "description": "Initial contact"
-        },
-        "Regard": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Regard",
-          "description": "Our principles that guide daily decions"
-        },
-        "Convey": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Convey",
-          "description": ""
-        },
-        "Forward": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Forward",
-          "description": "Successive refinement"
-        }
-      }
-    },
-    "Do": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Do",
-      "column": "Row",
-      "row": "Do",
-      "plane": "Info",
-      "description": "Product, technology and delivery lifecycle. 'Doing over Saying'.[Cynefin]",
-      "disciplines": {
-        "Recieve": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Recieve",
-          "description": "High touch"
-        },
-        "Absorb": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Absorb",
-          "description": ""
-        },
-        "Organize": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Organize",
-          "description": "Data Science and stores"
-        },
-        "Package": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Package",
-          "description": ""
-        }
-      }
-    },
-    "Share": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Share",
-      "column": "Row",
-      "row": "Share",
-      "plane": "Info",
-      "description": "Discovery, benefits governed by principles. 'Value Ecosystem over Value Chain'.[Cynefin]",
-      "disciplines": {
-        "Answer": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Answer",
-          "description": "Makes Data Science results encouraging"
-        },
-        "Clarify": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Clarify",
-          "description": ""
-        },
-        "Archive": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Archive",
-          "description": ""
-        },
-        "Protect": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Protect",
-          "description": ""
-        }
-      }
-    }
-  },
-  "information": {
+  "info": {
     "Team": {
       "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
+        "@type":       "https://muse-ad352.web.app/Info/Team",
+        "name":        "https://muse-ad352.web.app/Info/Team/name",
+        "column":      "https://muse-ad352.web.app/Info/Team/column",
+        "row":         "https://muse-ad352.web.app/Info/Team/row",
+        "plane":       "https://muse-ad352.web.app/Info/Team/plane",
+        "description": "https://muse-ad352.web.app/Info/Team/description"
       },
       "@type": "Practice",
       "name": "Team",
       "column": "Embrace",
       "row": "Learn",
       "plane": "Info",
-      "description": "We put a clear emphasis on self-managing teams that are empowered to make their own decisions",
-      "disciplines": {
-        "Collab": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Collab",
-          "description": "Communal friendship over agendas"
-        },
-        "Expertise": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Expertise",
-          "description": "Team members iterate through core technology and project groups"
-        },
-        "Empower": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Empower",
-          "description": "We have the freedom to take risks without feeling insecure or embarrassed"
-        },
-        "Activity": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Activity",
-          "description": "We value anticipation"
-        }
-      }
+      "description": "We put a clear emphasis on self-managing teams that are empowered to make their own decisions"
     },
     "Domain": {
       "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
+        "@type":       "https://muse-ad352.web.app/Info/Domain",
+        "name":        "https://muse-ad352.web.app/Info/Domain/name",
+        "column":      "https://muse-ad352.web.app/Info/Domain/column",
+        "row":         "https://muse-ad352.web.app/Info/Domain/row",
+        "plane":       "https://muse-ad352.web.app/Info/Domain/plane",
+        "description": "https://muse-ad352.web.app/Info/Domain/description"
       },
       "@type": "Practice",
       "name": "Domain",
       "column": "Innovate",
       "row": "Learn",
       "plane": "Info",
-      "description": "We Entitle our Team and our customers. Propose new initiatives for our Portfolio. Acquire data to explore Insights",
-      "disciplines": {
-        "Entitle": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Entitle",
-          "description": "Empowerment by the secure allocation of resources by roles"
-        },
-        "Propose": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Propose",
-          "description": "Ideas for new services"
-        },
-        "Gather": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Gather",
-          "description": ""
-        },
-        "Portfolio": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Portfolio",
-          "description": "The entire suite of products and services"
-        }
-      }
+      "description": "We Entitle our Team and our customers. Propose new initiatives for our Portfolio. Acquire data to explore Insights"
     },
     "Relate": {
       "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
+        "@type":       "https://muse-ad352.web.app/Info/Relate",
+        "name":        "https://muse-ad352.web.app/Info/Relate/name",
+        "column":      "https://muse-ad352.web.app/Info/Relate/column",
+        "row":         "https://muse-ad352.web.app/Info/Relate/row",
+        "plane":       "https://muse-ad352.web.app/Info/Relate/plane",
+        "description": "https://muse-ad352.web.app/Info/Relate/description"
       },
       "@type": "Practice",
       "name": "Relate",
       "column": "Encourage",
       "row": "Learn",
       "plane": "Info",
-      "description": "Gaining Insight to articulate an ethical Vision for defining a Strategy to learn about our Market and ourselves.",
-      "disciplines": {
-        "Insight": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Insight",
-          "description": "Exploratory Data Science for indictative results"
-        },
-        "Mission": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Mission",
-          "description": "The working concepts that need to be assessed by Benefit"
-        },
-        "Vision": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Vision",
-          "description": "Our shared view the we communicate to everyone"
-        },
-        "Relation": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Relation",
-          "description": "Our colleagues and customers that we serve"
-        }
-      }
+      "description": "Gaining Insight to articulate an ethical Vision for defining a Strategy to learn about our Market and ourselves."
     },
     "Adapt": {
       "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
+        "@type":       "https://muse-ad352.web.app/Info/Adapt",
+        "name":        "https://muse-ad352.web.app/Info/Adapt/name",
+        "column":      "https://muse-ad352.web.app/Info/Adapt/column",
+        "row":         "https://muse-ad352.web.app/Info/Adapt/row",
+        "plane":       "https://muse-ad352.web.app/Info/Adapt/plane",
+        "description": "https://muse-ad352.web.app/Info/Adapt/description"
       },
       "@type": "Practice",
       "name": "Adapt",
       "column": "Embrace",
       "row": "Do",
       "plane": "Info",
-      "description": "Feature Status is traced and linked to Components and Test criteria that Directs Technology activities",
-      "disciplines": {
-        "Feature": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Feature",
-          "description": "Outline of concrete business requirements aligned to technology"
-        },
-        "Status": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Status",
-          "description": "Accomplishments, Concerns, Plans and Issues"
-        },
-        "Craft": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Craft",
-          "description": "Technology guidance and parameter tuning"
-        },
-        "Module": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Module",
-          "description": "Technology traced by: UI, Service, Database & Cloud tiers"
-        }
-      }
+      "description": "Feature Status is traced and linked to Components and Test criteria that Directs Technology activities"
     },
     "Tech": {
       "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
+        "@type":       "https://muse-ad352.web.app/Info/Tech",
+        "name":        "https://muse-ad352.web.app/Info/Tech/name",
+        "column":      "https://muse-ad352.web.app/Info/Tech/column",
+        "row":         "https://muse-ad352.web.app/Info/Tech/row",
+        "plane":       "https://muse-ad352.web.app/Info/Tech/plane",
+        "description": "https://muse-ad352.web.app/Info/Tech/description"
       },
       "@type": "Practice",
       "name": "Tech",
       "column": "Innovate",
       "row": "Do",
       "plane": "Info",
-      "description": "Components by UX, Service, Data and Cloud tiers. Support Data Science Models that are Interpreted in Benefit",
-      "disciplines": {
-        "UX": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "UX",
-          "description": "Applications and tools on the Cloud"
-        },
-        "Service": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Service",
-          "description": "Integrated functionality for applications with REST interfaces"
-        },
-        "Database": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Database",
-          "description": "Operational data modeled by Machine Leaning Techniques"
-        },
-        "Cloud": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Cloud",
-          "description": "Message driven services in the cloud"
-        }
-      }
+      "description": "Components by UX, Service, Data and Cloud tiers. Support Data Science Models that are Interpreted in Benefit"
     },
     "Benefit": {
       "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
+        "@type":       "https://muse-ad352.web.app/Info/Benefit",
+        "name":        "https://muse-ad352.web.app/Info/Benefit/name",
+        "column":      "https://muse-ad352.web.app/Info/Benefit/column",
+        "row":         "https://muse-ad352.web.app/Info/Benefit/row",
+        "plane":       "https://muse-ad352.web.app/Info/Benefit/plane",
+        "description": "https://muse-ad352.web.app/Info/Benefit/description"
       },
       "@type": "Practice",
       "name": "Benefit",
       "column": "Encourage",
       "row": "Do",
       "plane": "Info",
-      "description": "Interpret Discovery with Data Science. Establishes and Reviews with reference Design. Realizes Benefits.",
-      "disciplines": {
-        "Interpret": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Interpret",
-          "description": "Builds meaning by verifying assumptions, patterns and risk"
-        },
-        "Design": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Design",
-          "description": "Design Patterns for a reference architecture"
-        },
-        "Realize": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Realize",
-          "description": "Mitigates uncertainty for Teams, Product and Discoveries"
-        },
-        "Review": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Review",
-          "description": "The oversight of business and technical solutions and guidelines"
-        }
-      }
+      "description": "Interpret Discovery with Data Science. Establishes and Reviews with reference Design. Realizes Benefits."
     },
     "Change": {
       "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
+        "@type":       "https://muse-ad352.web.app/Info/Change",
+        "name":        "https://muse-ad352.web.app/Info/Change/name",
+        "column":      "https://muse-ad352.web.app/Info/Change/column",
+        "row":         "https://muse-ad352.web.app/Info/Change/row",
+        "plane":       "https://muse-ad352.web.app/Info/Change/plane",
+        "description": "https://muse-ad352.web.app/Info/Change/description"
       },
       "@type": "Practice",
       "name": "Change",
       "column": "Embrace",
       "row": "Share",
       "plane": "Info",
-      "description": "Assesses impacts. Proves Components to continuously Deploy by transforming changes into evolutionary architecture.",
-      "disciplines": {
-        "Impact": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Impact",
-          "description": "Addresses new and updated deployments and disruptions"
-        },
-        "Test": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Test",
-          "description": "Insures that components perform to Feature specifications"
-        },
-        "Leverage": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Leverage",
-          "description": "Quality, defect and risk measures at many levels and types"
-        },
-        "Deploy": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Deploy",
-          "description": "Continously installs new components to the Cloud"
-        }
-      }
+      "description": "Assesses impacts. Proves Components to continuously Deploy by transforming changes into evolutionary architecture."
     },
     "Deliver": {
       "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
+        "@type":       "https://muse-ad352.web.app/Info/Deliver",
+        "name":        "https://muse-ad352.web.app/Info/Deliver/name",
+        "column":      "https://muse-ad352.web.app/Info/Deliver/column",
+        "row":         "https://muse-ad352.web.app/Info/Deliver/row",
+        "plane":       "https://muse-ad352.web.app/Info/Deliver/plane",
+        "description": "https://muse-ad352.web.app/Info/Deliver/description"
       },
       "@type": "Practice",
       "name": "Deliver",
       "column": "Innovate",
       "row": "Share",
       "plane": "Info",
-      "description": "Delivers product via a Secured cloud Network with Support and simulation.",
-      "disciplines": {
-        "Support": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Support",
-          "description": "Customer care, help desk, privileges, document and educate"
-        },
-        "Network": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Network",
-          "description": "Switches, routers, computers provisiond in secure zones"
-        },
-        "Ware": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Ware",
-          "description": "Historical data with asset queries and simulations"
-        },
-        "Secure": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Secure",
-          "description": "Defense in depth, response, pull proxies and encrypted data"
-        }
-      }
+      "description": "Delivers product via a Secured cloud Network with Support and simulation."
     },
     "Govern": {
       "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
+        "@type":       "https://muse-ad352.web.app/Info/Govern",
+        "name":        "https://muse-ad352.web.app/Info/Govern/name",
+        "column":      "https://muse-ad352.web.app/Info/Govern/column",
+        "row":         "https://muse-ad352.web.app/Info/Govern/row",
+        "plane":       "https://muse-ad352.web.app/Info/Govern/plane",
+        "description": "https://muse-ad352.web.app/Info/Govern/description"
       },
       "@type": "Practice",
       "name": "Govern",
       "column": "Encourage",
       "row": "Share",
       "plane": "Info",
-      "description": "Enables careful Advice for Maturity, Assets and with the intent of being a positive influence on society.",
-      "disciplines": {
-        "Advise": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Advise",
-          "description": "A thought out rational decision making process"
-        },
-        "Maturity": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Maturity",
-          "description": "Identifies opportunities and resources for improvement"
-        },
-        "Influence": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Influence",
-          "description": "Provides required reports and issues for legal audits"
-        },
-        "Asset": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Asset",
-          "description": "Manages the allocation of personnel, finances and assets"
-        }
-      }
-    }
-  },
-  "knowledge": {
-    "Involve": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Involve",
-      "column": "Embrace",
-      "row": "Learn",
-      "plane": "Know",
-      "description": "Living and working in communities",
-      "disciplines": {
-        "Art": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Art",
-          "description": ""
-        },
-        "Depict": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Depict",
-          "description": ""
-        },
-        "Study": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Study",
-          "description": ""
-        },
-        "Perform": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Perform",
-          "description": ""
-        }
-      }
-    },
-    "Discover": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Discover",
-      "column": "Innovate",
-      "row": "Learn",
-      "plane": "Know",
-      "description": "Uncovering meaning as the result of a successful inquiry",
-      "disciplines": {
-        "Observe": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Observe",
-          "description": ""
-        },
-        "Theory": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Theory",
-          "description": ""
-        },
-        "Research": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Research",
-          "description": ""
-        },
-        "Apply": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Apply",
-          "description": ""
-        }
-      }
-    },
-    "Understand": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Understand",
-      "column": "Encourage",
-      "row": "Learn",
-      "plane": "Know",
-      "description": "The ability to make and explain inferences based on experience and contemplation",
-      "disciplines": {
-        "Paradigm": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Paradigm",
-          "description": ""
-        },
-        "Philosophy": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Philosophy",
-          "description": "Philosophy"
-        },
-        "Moral": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Moral",
-          "description": ""
-        },
-        "History": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "History",
-          "description": ""
-        }
-      }
-    },
-    "Conduct": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Conduct",
-      "column": "Embrace",
-      "row": "Do",
-      "plane": "Know",
-      "description": "The process of arranging, directing, adjusting and promoting activities for desired effect",
-      "disciplines": {
-        "Adjust": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Adjust",
-          "description": ""
-        },
-        "Promote": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Promote",
-          "description": ""
-        },
-        "Direct": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Direct",
-          "description": ""
-        },
-        "Arrange": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Arrange",
-          "description": ""
-        }
-      }
-    },
-    "Cognition": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Cognition",
-      "column": "Innovate",
-      "row": "Do",
-      "plane": "Know",
-      "description": "Composing, transforming, expressing and preserving knowledge",
-      "disciplines": {
-        "Express": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Express",
-          "description": ""
-        },
-        "Transform": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Transform",
-          "description": ""
-        },
-        "Compose": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Compose",
-          "description": ""
-        },
-        "Preserve": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Preserve",
-          "description": ""
-        }
-      }
-    },
-    "Reason": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Reason",
-      "column": "Encourage",
-      "row": "Do",
-      "plane": "Know",
-      "description": "Rationalising and justifying pragmatic concepts",
-      "disciplines": {
-        "Rationale": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Rationale",
-          "description": ""
-        },
-        "Pragmatic": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Pragmatic",
-          "description": "Conscience"
-        },
-        "Justice": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Justice",
-          "description": ""
-        },
-        "Concept": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Concept",
-          "description": ""
-        }
-      }
-    },
-    "Evolve": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Evolve",
-      "column": "Embrace",
-      "row": "Share",
-      "plane": "Know",
-      "description": "Gradual improvment over lifecycle through adaptation, transmission, fitness and genetics",
-      "disciplines": {
-        "Adaptation": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Adaptation",
-          "description": ""
-        },
-        "Fitness": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Fitness",
-          "description": ""
-        },
-        "Genetics": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Genetics",
-          "description": ""
-        },
-        "Transmit": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Transmit",
-          "description": ""
-        }
-      }
-    },
-    "Educate": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Educate",
-      "column": "Innovate",
-      "row": "Share",
-      "plane": "Know",
-      "description": "Promote learning through teaching courses, imparting wisdom and communial well being",
-      "disciplines": {
-        "Teach": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Teach",
-          "description": ""
-        },
-        "Course": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Course",
-          "description": ""
-        },
-        "Impart": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Impart",
-          "description": ""
-        },
-        "Discuss": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Discuss",
-          "description": ""
-        }
-      }
-    },
-    "Culture": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Culture",
-      "column": "Encourage",
-      "row": "Share",
-      "plane": "Know",
-      "description": "The shared intellect, beliefs, mutual respect and authentic experiences of a society",
-      "disciplines": {
-        "Intellect": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Intellect",
-          "description": ""
-        },
-        "Authentic": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Authentic",
-          "description": ""
-        },
-        "Respect": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Respect",
-          "description": ""
-        },
-        "Belief": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Belief",
-          "description": ""
-        }
-      }
-    }
-  },
-  "wisdom": {
-    "Trust": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Trust",
-      "column": "Embrace",
-      "row": "Learn",
-      "plane": "Wise",
-      "description": "Firm belief in the reliability, accuracy, ability, or strength of someone or something",
-      "disciplines": {
-        "Initiate": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Initiate",
-          "description": ""
-        },
-        "Identity": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Identity",
-          "description": ""
-        },
-        "Chain": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Chain",
-          "description": ""
-        },
-        "Confide": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Confide",
-          "description": ""
-        }
-      }
-    },
-    "Nature": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Nature",
-      "column": "Innovate",
-      "row": "Learn",
-      "plane": "Wise",
-      "description": "The phenomena of collective life",
-      "disciplines": {
-        "Habitat": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Habitat",
-          "description": ""
-        },
-        "Complex": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Complex",
-          "description": ""
-        },
-        "Brain": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Brain",
-          "description": ""
-        },
-        "Flow": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Flow",
-          "description": ""
-        }
-      }
-    },
-    "Truth": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Truth",
-      "column": "Encourage",
-      "row": "Learn",
-      "plane": "Wise",
-      "description": "In accordance with fact and reality",
-      "disciplines": {
-        "Innate": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Innate",
-          "description": ""
-        },
-        "Discern": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Discern",
-          "description": ""
-        },
-        "Empathy": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Empathy",
-          "description": ""
-        },
-        "Ground": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Ground",
-          "description": ""
-        }
-      }
-    },
-    "Aware": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Aware",
-      "column": "Embrace",
-      "row": "Do",
-      "plane": "Wise",
-      "description": "Ongoing perception of facts, situationa and scenarios",
-      "disciplines": {
-        "Sense": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Sense",
-          "description": ""
-        },
-        "Feeling": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Feeling",
-          "description": ""
-        },
-        "Empirical": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Empirical",
-          "description": ""
-        },
-        "Proceed": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Proceed",
-          "description": ""
-        }
-      }
-    },
-    "Create": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Create",
-      "column": "Innovate",
-      "row": "Do",
-      "plane": "Wise",
-      "description": "Forming something with aesthetic oringinal value through play and channeling",
-      "disciplines": {
-        "Play": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Play",
-          "description": ""
-        },
-        "Originate": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Originate",
-          "description": ""
-        },
-        "Aesthetic": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Aesthetic",
-          "description": ""
-        },
-        "Channel": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Channel",
-          "description": ""
-        }
-      }
-    },
-    "Mind": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Mind",
-      "column": "Encourage",
-      "row": "Do",
-      "plane": "Wise",
-      "description": "Our efforts to expand thoughts, emotions and ideals",
-      "disciplines": {
-        "Thought": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Thought",
-          "description": ""
-        },
-        "Emotion": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Emotion",
-          "description": ""
-        },
-        "Ideal": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Ideal",
-          "description": ""
-        },
-        "Expand": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Expand",
-          "description": ""
-        }
-      }
-    },
-    "Emerge": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Emerge",
-      "column": "Embrace",
-      "row": "Share",
-      "plane": "Wise",
-      "description": "The novelty that occures when parts interact with positive feedback in a wider whole with order and cohesion",
-      "disciplines": {
-        "Novel": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Novel",
-          "description": ""
-        },
-        "Order": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Order",
-          "description": ""
-        },
-        "Cohesion": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Cohesion",
-          "description": ""
-        },
-        "Feedback": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Feedback",
-          "description": ""
-        }
-      }
-    },
-    "Inspire": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Inspire",
-      "column": "Innovate",
-      "row": "Share",
-      "plane": "Wise",
-      "description": "Nurturing identity and imagination to facilitate revealation",
-      "disciplines": {
-        "Nurture": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Nurture",
-          "description": ""
-        },
-        "Imagine": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Imagine",
-          "description": ""
-        },
-        "Reveal": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Reveal",
-          "description": ""
-        },
-        "Identify": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Identify",
-          "description": ""
-        }
-      }
-    },
-    "Actualize": {
-      "@context": {
-        "@type": "http://example.com/",
-        "name": "http://example.com/name",
-        "column": "http://example.com/column",
-        "row": "http://example.com/row",
-        "plane": "http://example.com/plane",
-        "description": "http://example.com/description"
-      },
-      "@type": "Practice",
-      "name": "Actualize",
-      "column": "Encourage",
-      "row": "Share",
-      "plane": "Wise",
-      "description": "A high level of development where full potential is achieved",
-      "disciplines": {
-        "Realistic": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Realistic",
-          "description": ""
-        },
-        "Journey": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Journey",
-          "description": ""
-        },
-        "Bond": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Bond",
-          "description": ""
-        },
-        "Peak": {
-          "@context": {
-            "@type": "http://example.com/",
-            "name": "http://example.com/name",
-            "description": "http://example.com/description"
-          },
-          "@type": "Discipline",
-          "name": "Peak",
-          "description": ""
-        }
-      }
+      "description": "Enables careful Advice for Maturity, Assets and with the intent of being a positive influence on society."
     }
   }
 }
