@@ -33,10 +33,26 @@ class Jitter
   # Called by muse.html to kick things off
   # 1. Read in all the JSON config files in Jitter.Batch. Call Jitter.init() when complete.
   Jitter.start = () ->
-    # Data.batchRead( Jitter.Batch, Jitter.init, Data.refine )
+    Jitter.addToHead()
     for key, val of Jitter.Batch when val.refine? and val.refine
       val.data = Access.refine(val.data)
     Jitter.init( Jitter.Batch )
+    return
+
+  # Add these <link> tags to <head> because vite build makes a mess of them
+  Jitter.addToHead = () ->
+    # manifest = """<link href="manifest.json"  rel="manifest" crossorigin="use-credentials">"""
+    # siteLink = """<link href="https://vit-muse.web.app/" rel="canonical">"""
+    maniElem                = document.createElement('link')
+    maniElem.href           = "manifest.json"
+    maniElem.rel            = "manifest"
+    maniElem['crossorigin'] = "use-credentials"
+    siteElem      = document.createElement('link')
+    siteElem.href = window.location.href
+    siteElem.rel  = "canonical"
+    head          = document.getElementsByTagName("head")[0]
+    head.appendChild(maniElem)
+    head.appendChild(siteElem)
     return
 
   Jitter.Batch = {
@@ -47,12 +63,12 @@ class Jitter
   # Vue Router Routes
   Jitter.routes = [
     { path: '/',       name:'Home',   components:{ Home:   Home    } }
-    { path: '/flavor', name:'Flavor', components:{ Flavor: Flavor  } }
-    { path: '/roast',  name:'Roast',  components:{ Roast:  Roast   } }
-    { path: '/brew',   name:'Brew',   components:{ Brew:   Brew    } }
-    { path: '/drink',  name:'Drink',  components:{ Brew:   Drink   } }
-    { path: '/body',   name:'Body',   components:{ Body:   Body    } }
-    { path: '/done',   name:'Done',   components:{ Done:   Done    } } ]
+    { path: '/Flavor', name:'Flavor', components:{ Flavor: Flavor  } }
+    { path: '/Roast',  name:'Roast',  components:{ Roast:  Roast   } }
+    { path: '/Brew',   name:'Brew',   components:{ Brew:   Brew    } }
+    { path: '/Drink',  name:'Drink',  components:{ Brew:   Drink   } }
+    { path: '/Body',   name:'Body',   components:{ Body:   Body    } }
+    { path: '/Done',   name:'Done',   components:{ Done:   Done    } } ]
 
   # Toc.vue components and route Nav() directions
   Jitter.komps = {

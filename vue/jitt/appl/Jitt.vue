@@ -31,10 +31,9 @@
 
     setup() {
       const nav     = inject('nav');
-      const doneBtn = inject('doneBtn');
       const route   = function (comp) {
         nav.doRoute({route: comp}); }
-      return { route, doneBtn }; }
+      return { route }; }
   }
 
   Home.Dash = Dash;

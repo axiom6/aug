@@ -31,6 +31,8 @@
 
 <!--
 
+<router-view :key="$route.fullPath" />
+
    // const elem   = null;
 
 import { inject, onMounted, nextTick } from 'vue';

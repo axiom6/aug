@@ -47,8 +47,8 @@ Jitter = (function() {
   class Jitter {
     static start() {
       var key, ref, val;
+      Jitter.addToHead();
       ref = Jitter.Batch;
-      // Data.batchRead( Jitter.Batch, Jitter.init, Data.refine )
       for (key in ref) {
         val = ref[key];
         if ((val.refine != null) && val.refine) {
@@ -56,6 +56,22 @@ Jitter = (function() {
         }
       }
       Jitter.init(Jitter.Batch);
+    }
+
+    static addToHead() {
+      var head, maniElem, siteElem;
+      // manifest = """<link href="manifest.json"  rel="manifest" crossorigin="use-credentials">"""
+      // siteLink = """<link href="https://vit-muse.web.app/" rel="canonical">"""
+      maniElem = document.createElement('link');
+      maniElem.href = "manifest.json";
+      maniElem.rel = "manifest";
+      maniElem['crossorigin'] = "use-credentials";
+      siteElem = document.createElement('link');
+      siteElem.href = window.location.href;
+      siteElem.rel = "canonical";
+      head = document.getElementsByTagName("head")[0];
+      head.appendChild(maniElem);
+      head.appendChild(siteElem);
     }
 
     static init(batch) {
@@ -155,42 +171,42 @@ Jitter = (function() {
       }
     },
     {
-      path: '/flavor',
+      path: '/Flavor',
       name: 'Flavor',
       components: {
         Flavor: Flavor
       }
     },
     {
-      path: '/roast',
+      path: '/Roast',
       name: 'Roast',
       components: {
         Roast: Roast
       }
     },
     {
-      path: '/brew',
+      path: '/Brew',
       name: 'Brew',
       components: {
         Brew: Brew
       }
     },
     {
-      path: '/drink',
+      path: '/Drink',
       name: 'Drink',
       components: {
         Brew: Drink
       }
     },
     {
-      path: '/body',
+      path: '/Body',
       name: 'Body',
       components: {
         Body: Body
       }
     },
     {
-      path: '/done',
+      path: '/Done',
       name: 'Done',
       components: {
         Done: Done

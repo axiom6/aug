@@ -180,8 +180,4 @@ class Augm
           routeNames.push( child.name )
     routeNames
 
-
-
-
-
 export default Augm

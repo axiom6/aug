@@ -1,10 +1,7 @@
 
 JsonLD
   1. Standardize Schema
-  2. Debug Routes from Prin Info Know and Wise Jsons
-  3. Debug router-views
-  4. Traversable rounter links in JsonLD
-  5. MetroFoot JsonLD
+  2. MetroFoot JsonLD
 
 DnD
   1. Deal with duplicate mounts
