@@ -44,6 +44,7 @@ Nav = class Nav {
     this.keyEvents();
   }
 
+  //@routeChange()
   pub(msg) {
     var obj;
     if (this.msgOK(msg)) {
@@ -123,6 +124,28 @@ Nav = class Nav {
     } else {
       console.error('Nav.doRoute() undefined or unnamed route', obj.route);
     }
+  }
+
+  routeOK(path) {
+    var i, len1, ref, route;
+    ref = this.routeNames;
+    for (i = 0, len1 = ref.length; i < len1; i++) {
+      route = ref[i];
+      if (path === route) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // Not working
+  routeChange() {
+    window.addEventListener('popstate', (event) => {
+      console.log('Nav.routeChange', window.location.pathname, event);
+      if (this.routeOK(window.location.pathname)) {
+        return this.doRoute(window.location.pathname);
+      }
+    });
   }
 
   hasCompKey(compKey, dir = null) {

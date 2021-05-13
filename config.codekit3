@@ -93,14 +93,6 @@
       "oAP" : "\/dist",
       "oF" : 0
     },
-    "\/firebase-debug.log" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/firebase-debug.log",
-      "oF" : 0
-    },
     "\/firebase.json" : {
       "ft" : 524288,
       "oA" : 1,
@@ -146,6 +138,50 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/node_modules\/@vitejs\/plugin-vue\/dist\/index-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/node_modules\/@vue\/reactivity\/dist\/reactivity.esm-bundler.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/node_modules\/@vue\/reactivity\/dist\/reactivity.esm-bundler-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/node_modules\/@vue\/runtime-core\/dist\/runtime-core.esm-bundler.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/node_modules\/@vue\/runtime-core\/dist\/runtime-core.esm-bundler-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/node_modules\/@vue\/runtime-dom\/dist\/runtime-dom.esm-bundler.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/node_modules\/@vue\/runtime-dom\/dist\/runtime-dom.esm-bundler-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/node_modules\/@vue\/shared\/dist\/shared.esm-bundler.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/node_modules\/@vue\/shared\/dist\/shared.esm-bundler-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
@@ -1404,6 +1440,28 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/node_modules\/vue-router\/dist\/vue-router.esm-bundler.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/node_modules\/vue-router\/dist\/vue-router.esm-bundler-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/node_modules\/vue\/dist\/vue.runtime.esm-bundler.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/node_modules\/vue\/dist\/vue.runtime.esm-bundler-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/package-lock.json" : {
       "ft" : 524288,
       "oA" : 1,
@@ -1452,6 +1510,30 @@
       "pME" : 1,
       "rFN" : 0,
       "uCM" : 0
+    },
+    "\/sem\/MetroFoot.json" : {
+      "ft" : 524288,
+      "oA" : 1,
+      "oAP" : "\/sem\/MetroFoot-min.json",
+      "oF" : 0,
+      "oO" : 0,
+      "oS" : 1
+    },
+    "\/sem\/MetroFoot1.json" : {
+      "ft" : 524288,
+      "oA" : 1,
+      "oAP" : "\/sem\/MetroFoot1-min.json",
+      "oF" : 0,
+      "oO" : 0,
+      "oS" : 1
+    },
+    "\/sem\/MuseLD.json" : {
+      "ft" : 524288,
+      "oA" : 1,
+      "oAP" : "\/sem\/MuseLD-min.json",
+      "oF" : 0,
+      "oO" : 0,
+      "oS" : 1
     },
     "\/src\/augm\/appl\/Augm.coffee" : {
       "ft" : 32,
@@ -2831,6 +2913,47 @@
       "oAP" : "\/pub\/muse\/conn\/Shapes.js",
       "oF" : 0,
       "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/src\/rout\/index.html" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/src\/rout\/index.html",
+      "oF" : 0
+    },
+    "\/src\/rout\/rout.config.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/src\/rout\/rout.config-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/src\/rout\/Route.coffee" : {
+      "ft" : 32,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/src\/rout\/Route.js",
+      "oF" : 2,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/src\/rout\/Route.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/src\/rout\/Route-min.js",
+      "oF" : 0,
       "sC" : 0,
       "tS" : 0
     },

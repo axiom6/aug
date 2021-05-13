@@ -71,6 +71,5 @@ build/Release
 # dotenv environment variables file
 .env
 /zzz/
+
 /zzz/
-/zzz/
-/zzz/firebase/

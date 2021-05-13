@@ -26,6 +26,7 @@ class Nav
     @imgsNum    = 0
     @pages      = {}
     @keyEvents()
+    #@routeChange()
 
 
   pub:( msg ) ->
@@ -74,6 +75,19 @@ class Nav
       @route     = obj.route
     else
       console.error( 'Nav.doRoute() undefined or unnamed route', obj.route )
+    return
+
+  routeOK:( path ) ->
+    for route in @routeNames when path is route
+      return true
+    false
+
+  # Not working
+  routeChange:() ->
+    window.addEventListener( 'popstate', (event) =>
+      console.log( 'Nav.routeChange', window.location.pathname, event )
+      if @routeOK( window.location.pathname )
+         @doRoute( window.location.pathname ) )
     return
 
   hasCompKey:( compKey, dir=null ) ->

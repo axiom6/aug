@@ -1,0 +1,109 @@
+{
+  "@context": {
+    "@vocab": "http://schema.org/"
+  },
+  "@graph": [
+    {
+      "@id": "https://www.metrofoot.org/c5f332cfe0a5870f99aa10a8b65447eb0a6fa848",
+      "@type": "Organization",
+      "url": "https://www.metrofoot.org",
+      "logo": "https://sa1s3optim.patientpop.com/assets/images/provider/photos/1743443.png",
+      "sameAs": [],
+      "name": [
+        "Metropolitan Foot and Ankle Specialists",
+        "Thomas J. Savage, DPM",
+        "Jay H. Dworkin, DPM, PC",
+        "Phillip M. Savage, DPM"
+      ],
+      "telephone": "+1 303-500-5846",
+      "openingHours": [
+        "MON 07:30:00-17:00:00",
+        "TUE 07:30:00-17:00:00",
+        "WED 08:00:00-17:00:00",
+        "THU 07:30:00-17:00:00",
+        "FRI 08:00:00-16:00:00"
+      ],
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+1 303-500-5846",
+          "contactType": "reservations"
+        },
+        {
+          "@type": "ContactPoint",
+          "telephone": "+1 303-923-3369",
+          "contactType": "customer service"
+        }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1421 South Potomac Street Suite 120",
+        "addressLocality": "Aurora",
+        "addressRegion": "CO",
+        "postalCode": "80012",
+        "addressCountry": "USA" }
+    },
+    {
+      "@id": "https://www.metrofoot.org/provider/thomas-j-savage-dpm",
+      "@type": "Podiatrist",
+      "parentOrganization": {
+        "@id": "https://www.metrofoot.org",
+        "name" : "Metropolitan Foot and Ankle Specialists"},
+      "name": "Thomas J. Savage, DPM",
+      "description": "Strives to provide high-quality, safe, and effective treatments that address each patient’s needs.",
+      "image": "https://sa1s3optim.patientpop.com/assets/images/provider/photos/1738056.png"
+    },
+    {
+      "@id": "https://www.metrofoot.org/provider/jay-h-dworkin-dpm-pc",
+      "@type": "Podiatrist",
+      "parentOrganization": {
+        "@id": "https://www.metrofoot.org",
+        "name" : "Metropolitan Foot and Ankle Specialists"},
+      "name": "Jay H. Dworkin, DPM, PC",
+      "description": "",
+      "image": "https://sa1s3optim.patientpop.com/assets/images/provider/photos/1738064.png"
+    },
+    {
+      "@id": "https://www.metrofoot.org/provider/phillip-m-savage-dpm",
+      "@type": "Podiatrist",
+      "parentOrganization": {
+        "@id": "https://www.metrofoot.org",
+        "name" : "Metropolitan Foot and Ankle Specialists"},
+      "name": "Phillip M. Savage, DPM",
+      "description": "A vast array of conservative and surgical treatments",
+      "image": "https://sa1s3optim.patientpop.com/assets/images/provider/photos/2049346.jpg"
+    },
+    {
+      "@id": "https://www.metrofoot.org/contents/team",
+      "@type": "Team",
+      "parentOrganization": {
+        "@id": "https://www.metrofoot.org",
+        "name" : "Metropolitan Foot and Ankle Specialists"},
+      "name": [
+        "Sara Schmunk – Office Manager",
+        "Yessica Martinez – Medical Assistant",
+        "Cathy Gonzalez – Medical Assistant" ],
+      "description": "",
+      "image":[
+        "https://sa1s3optim.patientpop.com/assets/images/provider/photos/1736505.jpeg",
+        "https://sa1s3optim.patientpop.com/assets/images/provider/photos/1736507.jpeg",
+        "https://sa1s3optim.patientpop.com/assets/images/provider/photos/1736508.jpeg" ]
+    },
+    { "@type":"Service","@id": "https://www.metrofoot.org/services", "serviceType": "Podiatry", "additionalType": "https://en.wikipedia.org/wiki/Podiatry" },
+    { "@type":"Service","@id": "https://www.metrofoot.org/services/heel-pain", "name":"Heel Pain","description": "" },
+    { "@type":"Service","@id": "https://www.metrofoot.org/services/achilles-tendonitis", "name":"Achilles Tendonitis","description": "" },
+    { "@type":"Service","@id": "https://www.metrofoot.org/services/ankle-injuries", "name":"Ankle Injuries","description": "" },
+    { "@type":"Service","@id": "https://www.metrofoot.org/services/ingrown-toenails", "name":"Ingrown Toenails","description": "" },
+    { "@type":"Service","@id": "https://www.metrofoot.org/services/arch-pain", "name":"Arch Pain","description": "" },
+    { "@type":"Service","@id": "https://www.metrofoot.org/services/neuroma", "name":"Neuroma","description": "" },
+    { "@type":"Service","@id": "https://www.metrofoot.org/services/orthotics", "name":"Orthotics","description": "" },
+    { "@type":"Service","@id": "https://www.metrofoot.org/services/bunions", "name":"Bunions","description": "" },
+    { "@type":"Service","@id": "https://www.metrofoot.org/services/plantar-fasciitis", "name":"Plantar Fasciitis","description": "" },
+    { "@type":"Service","@id": "https://www.metrofoot.org/services/sports-medicine", "name":"Sports Medicine","description": "" },
+    { "@type":"Service","@id": "https://www.metrofoot.org/services/foot-and-ankle-surgery", "name":"Foot and Ankle Surgery","description": "" },
+    { "@type":"Service","@id": "https://www.metrofoot.org/services/fractures", "name":"Fractures","description": "" },
+    { "@type":"Service","@id": "https://www.metrofoot.org/services/gout", "name":"Gout","description": "" },
+    { "@type":"Service","@id": "https://www.metrofoot.org/services/hammer-toes", "name":"Hammer Toes","description": "" },
+    { "@type":"Service","@id": "https://www.metrofoot.org/services/calluses", "name":"Calluses","description": "" }
+  ]
+}
