@@ -2924,6 +2924,14 @@
       "oAP" : "\/src\/rout\/index.html",
       "oF" : 0
     },
+    "\/src\/rout\/Link.vue" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/src\/rout\/Link.js",
+      "oF" : 0
+    },
     "\/src\/rout\/rout.config.js" : {
       "bF" : 0,
       "ft" : 64,

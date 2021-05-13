@@ -9,53 +9,57 @@ import {
   createWebHistory
 } from 'vue-router';
 
+import Link from '/src/rout/Link.vue';
+
 Route = (function() {
+  var Home, Info, Know, Wise;
+
   class Route {
     static start() {
       var app;
-      app = createApp(Route.Home);
+      app = createApp(Link);
       app.use(Route.router);
       return app.mount('#app');
     }
 
   };
 
-  Route.Home = {
-    template: '<div>Home</div>'
+  Home = {
+    template: "<div>Home</div>"
   };
 
-  Route.Info = {
-    template: '<div>Info</div>'
+  Info = {
+    template: "<div>Info</div>"
   };
 
-  Route.Know = {
-    template: '<div>Know</div>'
+  Know = {
+    template: "<div>Know</div>"
   };
 
-  Route.Wise = {
-    template: '<div>Wise</div>'
+  Wise = {
+    template: "<div>Wise</div>"
   };
 
   Route.routes = [
     {
       path: '/',
       name: 'Home',
-      component: Route.Home
+      component: Home
     },
     {
       path: '/Info',
       name: 'Info',
-      component: Route.Info
+      component: Info
     },
     {
       path: '/Know',
       name: 'Know',
-      component: Route.Know
+      component: Know
     },
     {
       path: '/Wise',
       name: 'Wise',
-      component: Route.Wise
+      component: Wise
     }
   ];
 

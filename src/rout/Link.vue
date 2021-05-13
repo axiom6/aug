@@ -1,0 +1,54 @@
+
+<template>
+  <div   class="main-pane">
+    <div class="link-pane">
+      <h1>Routing</h1>
+      <ul>
+        <li><router-link :to="'/'"    >Home</router-link></li>
+        <li><router-link :to="'/Info'">Info</router-link></li>
+        <li><router-link :to="'/Know'">Know</router-link></li>
+        <li><router-link :to="'/Wise'">Wise</router-link></li>
+
+      </ul>
+    </div>
+    <div class="view-pane">
+      <router-view></router-view>
+    </div>
+  </div>
+</template>
+
+<script type="module">
+
+import { onMounted } from 'vue';
+
+  let Link = {
+
+    setup() {
+
+      onMounted( function () {
+        console.log( 'Link.onMounted' ); } )
+
+    return {} }
+  }
+
+export default Link;
+
+</script>
+
+<style>
+
+  .main-pane { position:absolute; top:0;   left:0; width:100%; height:100%; }
+  .link-pane { position:absolute; top:0;   left:0; width:100%; height: 20%; }
+  .view-pane { position:absolute; top:20%; left:0; width:100%; height: 80%; }
+
+</style>
+
+<!--li><router-link :to="{ name:'Home' }">Home</router-link></li>
+   <li><router-link :to="{ name:'Info' }">Info</router-link></li>
+   <li><router-link :to="{ name:'Know' }">Know</router-link></li>
+   <li><router-link :to="{ name:'Wise' }">Wise</router-link></li-->
+
+<!--router-view :name="'Home'"></router-view>
+   <router-view :name="'Info'"></router-view>
+   <router-view :name="'Know'"></router-view>
+   <router-view :name="'Wise'"></router-view-->

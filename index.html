@@ -8,23 +8,12 @@
 </head>
 <body style="background:black; color:wheat; width:100%; height:600px;">
 
-<div id="app">
-  <h1>Routing</h1>
-  <ul>
-    <li><router-link to="/"    >Home</router-link></li>
-    <li><router-link to="/Info">Info</router-link></li>
-    <li><router-link to="/Know">Know</router-link></li>
-    <li><router-link to="/Wise">Wise</router-link></li>
-  </ul>
-  <router-view name="Home"></router-view>
-  <router-view name="Info"></router-view>
-  <router-view name="Know"></router-view>
-  <router-view name="Wise"></router-view>
-</div>
+  <div id="app"></div>
 
-<script type="module">
-  import Route from '/src/rout/Route.js'
-  Route.start();
-</script>
+  <script type="module">
+    import Route from '/src/rout/Route.js'
+    Route.start();
+  </script>
+
 </body>
 </html>
