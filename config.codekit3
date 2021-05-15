@@ -93,6 +93,14 @@
       "oAP" : "\/dist",
       "oF" : 0
     },
+    "\/firebase-debug.log" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/firebase-debug.log",
+      "oF" : 0
+    },
     "\/firebase.json" : {
       "ft" : 524288,
       "oA" : 1,
@@ -2916,12 +2924,63 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/src\/named\/index.html" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/src\/named\/index.html",
+      "oF" : 0
+    },
+    "\/src\/named\/Named.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/src\/named\/Named-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/src\/named\/Namev.vue" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/src\/named\/Namev.js",
+      "oF" : 0
+    },
+    "\/src\/rout\/Home.vue" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/src\/rout\/Home.js",
+      "oF" : 0
+    },
     "\/src\/rout\/index.html" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 1,
       "oAP" : "\/src\/rout\/index.html",
+      "oF" : 0
+    },
+    "\/src\/rout\/Info.vue" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/src\/rout\/Info.js",
+      "oF" : 0
+    },
+    "\/src\/rout\/Know.vue" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/src\/rout\/Know.js",
       "oF" : 0
     },
     "\/src\/rout\/Link.vue" : {
@@ -2964,6 +3023,33 @@
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
+    },
+    "\/src\/rout\/View.vue" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/src\/rout\/View.js",
+      "oF" : 0
+    },
+    "\/src\/rout\/vite.multiples.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/src\/rout\/vite.multiples-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/src\/rout\/Wise.vue" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/src\/rout\/Wise.js",
+      "oF" : 0
     },
     "\/vite.config.js" : {
       "bF" : 0,

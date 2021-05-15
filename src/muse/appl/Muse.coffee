@@ -10,7 +10,7 @@ import Mix    from '../../base/nav/Mix.js'
 
 
 import { createApp }    from 'vue'    #
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 import Home             from '../../../vue/muse/appl/Muse.vue';
 
 #mport MuseLD   from './MuseLD.js'
@@ -176,7 +176,7 @@ class Muse
 
   # Vue Router Routes
   Muse.router = ( routes ) ->
-    createRouter( { routes:routes, history:createWebHistory() } )
+    createRouter( { routes:routes, history:createWebHashHistory() } )
 
   Muse.createRouteNames = ( routes ) ->
     routeNames = []

@@ -6,65 +6,64 @@ import {
 
 import {
   createRouter,
-  createWebHistory
+  createWebHashHistory
 } from 'vue-router';
 
 import Link from '/src/rout/Link.vue';
 
-Route = (function() {
-  var Home, Info, Know, Wise;
+import Home from '/src/rout/Home.vue';
 
+import Info from '/src/rout/Info.vue';
+
+import Know from '/src/rout/Know.vue';
+
+import Wise from '/src/rout/Wise.vue';
+
+Route = (function() {
   class Route {
     static start() {
       var app;
       app = createApp(Link);
+      app.provide('router', Route.router);
       app.use(Route.router);
       return app.mount('#app');
     }
 
   };
 
-  Home = {
-    template: "<div>Home</div>"
-  };
-
-  Info = {
-    template: "<div>Info</div>"
-  };
-
-  Know = {
-    template: "<div>Know</div>"
-  };
-
-  Wise = {
-    template: "<div>Wise</div>"
-  };
-
   Route.routes = [
     {
       path: '/',
       name: 'Home',
-      component: Home
+      components: {
+        Home: Home
+      }
     },
     {
       path: '/Info',
       name: 'Info',
-      component: Info
+      components: {
+        Info: Info
+      }
     },
     {
       path: '/Know',
       name: 'Know',
-      component: Know
+      components: {
+        Know: Know
+      }
     },
     {
       path: '/Wise',
       name: 'Wise',
-      component: Wise
+      components: {
+        Wise: Wise
+      }
     }
   ];
 
   Route.router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes: Route.routes
   });
 
@@ -73,3 +72,16 @@ Route = (function() {
 }).call(this);
 
 export default Route;
+
+/*
+  Route.routes = [
+    { path:'/',     name:'Home', components:{ Home:Home } },
+    { path:'/Info', name:'Info', components:{ Info:Info } },
+    { path:'/Know', name:'Know', components:{ Know:Know } },
+    { path:'/Wise', name:'Wise', components:{ Wise:Wise } } ]
+
+  Home = { template:"<div>Home</div>" }
+  Info = { template:"<div>Info</div>" }
+  Know = { template:"<div>Know</div>" }
+  Wise = { template:"<div>Wise</div>" }
+*/

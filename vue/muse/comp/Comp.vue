@@ -51,20 +51,20 @@ let Comp = {
     const routes    = ['Info','Know','Wise'];
 
     let Comp = {
-      Sign:{ title:'Prac', key:'Sign', show:true  },
-      Dirs:{ title:'Dirs', key:'Dirs', show:false },
-      Conn:{ title:'Conn', key:'Conn', show:false },
-      Desc:{ title:'Desc', key:'Desc', show:false } };
+      Sign:{ title:'Icon',  key:'Sign', show:true  },
+      Dirs:{ title:'Area',  key:'Dirs', show:false },
+      Conn:{ title:'Graph', key:'Conn', show:false },
+      Desc:{ title:'Text',  key:'Desc', show:false } };
     let Info = {
       Info:{ title:'Core', key:"Info", show:true,  icon:"fas fa-th"},
       Soft:{ title:'Soft', key:"Soft", show:false, icon:"fas fa-codepen"},
       Data:{ title:'Data', key:"Data", show:false, icon:"fas fa-table"} };
     let Know = {
-      Know:{ title:'Knowledge', key:"Know", show:true,  icon:"fas fa-university"},
-      Scie:{ title:'Science',   key:"Scie", show:false, icon:"fas fa-flask" },
-      Math:{ title:'Math',      key:"Math", show:false, icon:"fas fa-calculator"} };
+      Know:{ title:'Know',    key:"Know", show:true,  icon:"fas fa-university"},
+      Scie:{ title:'Science', key:"Scie", show:false, icon:"fas fa-flask" },
+      Math:{ title:'Math',    key:"Math", show:false, icon:"fas fa-calculator"} };
     let Wise = {
-      Wise:{ title:'Wisdom',    key:"Wise", show:true, icon:"fas fa-tripadvisor"} };
+      Wise:{ title:'Wise',    key:"Wise", show:true, icon:"fas fa-tripadvisor"} };
     let Rows = {
       Plane:{ name:'Info',  dir:'cm', icon:"fas fa-th" },
       Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap"},

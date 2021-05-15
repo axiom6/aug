@@ -31,9 +31,9 @@
       const pracIdx = ref(0   );
       
       const pages = {
-        Dirs: { title:'Disciplines',  key:'Dirs', show:true  },
-        Conn: { title:'Connections',  key:'Conn', show:false },
-        Desc: { title:'Descriptions', key:'Desc', show:false } };
+        Dirs: { title:'Area',  key:'Dirs', show:true  },
+        Conn: { title:'Graph', key:'Conn', show:false },
+        Desc: { title:'Text',  key:'Desc', show:false } };
 
       const onPrac = function( obj ) {
         pracObj.value = mix.pracObject( obj.compKey, obj.inovKey, obj.pracKey );

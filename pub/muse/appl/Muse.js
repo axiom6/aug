@@ -18,7 +18,7 @@ import {
 
 import {
   createRouter,
-  createWebHistory
+  createWebHashHistory
 } from 'vue-router';
 
 import Home from '../../../vue/muse/appl/Muse.vue';
@@ -136,7 +136,7 @@ Muse = (function() {
     static router(routes) {
       return createRouter({
         routes: routes,
-        history: createWebHistory()
+        history: createWebHashHistory()
       });
     }
 

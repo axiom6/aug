@@ -3,6 +3,7 @@ import vue            from '@vitejs/plugin-vue';
 import LessRollup     from 'rollup-plugin-less';
 import CoffeeRollup   from 'rollup-plugin-coffee-script';
 const { promises: fs } = require("fs");
+//const path             = require("path");
 
 export default  ( { command, mode } ) => {
 
@@ -15,9 +16,10 @@ export default  ( { command, mode } ) => {
     console.log( 'vite.config.js serve', { command:command, mode:mode } );
     if( mode === 'development' ) {
       fs.copyFile( 'pub/augm/appl/Lazy.js', 'pub/augm/appl/Load.js' ); }
-    return defineConfig({
+    return defineConfig( {
       plugins: [vue()],
-      build: { rollupOptions:{ plugins:CoffeeRollup() } } } ); }
+      build: { rollupOptions:{
+        plugins:CoffeeRollup() } } } ); }
   else {
     console.log( 'vite.config.js dev?', { command:command, mode:mode } );
     fs.copyFile( 'pub/augm/appl/Lazy.js',   'pub/augm/appl/Load.js' );
