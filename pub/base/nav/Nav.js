@@ -36,11 +36,14 @@ Nav = class Nav {
     this.pracKey = 'None';
     this.dispKey = 'None';
     this.pageKey = 'None';
-    this.inovKey = 'None'; // Only used by Tabs to Tocs
+    this.inovKey = 'None'; // Only used by Tabs to Tocs.vue and Comp.vue
+    this.warnMsg = 'None';
+    this.debug = false;
     this.pages = {};
     this.museLevels = ['Comp', 'Prac', 'Disp'];
     this.museComps = ['Info', 'Know', 'Wise', 'Prin', 'Cube'];
     this.museInovs = ['Info', 'Know', 'Wise', 'Soft', 'Data', 'Scie', 'Math'];
+    this.inovComps = ['Info', 'Know', 'Wise'];
     this.keyEvents();
     this.routeChange();
   }
@@ -65,25 +68,28 @@ Nav = class Nav {
   }
 
   toObj(msg) {
-    var pagesName;
+    var obj;
     this.set(msg);
     if (msg.source == null) {
       this.source = 'None';
     }
-    pagesName = this.inArray(this.compKey, this.museComps) ? 'Comp' : this.compKey;
-    this.pageKey = this.inArray(this.compKey, this.museComps) && this.pageKey !== 'None' ? this.pageKey : this.getPageKey(pagesName, true);
-    return {
+    this.inovKey = this.getInovKey(this.compKey);
+    obj = {
       source: this.source,
       route: this.route,
       level: this.level,
       compKey: this.compKey,
-      inovKey: this.inovKey,
-      pageKey: this.pageKey,
       pracKey: this.pracKey,
+      pageKey: this.pageKey,
+      inovKey: this.inovKey,
       dispKey: this.dispKey,
       choice: this.choice,
       checked: this.checked
     };
+    if (this.warnMsg !== 'None') {
+      obj.warnMsg = this.warnMsg;
+    }
+    return obj;
   }
 
   set(msg) {
@@ -96,7 +102,12 @@ Nav = class Nav {
   }
 
   doRoute(obj) {
-    // console.log( 'Nav.doRoute()', { objRoute:obj.route, routeLast:@routeLast})
+    if (this.debug) {
+      console.log('Nav.doRoute()', {
+        objRoute: obj.route,
+        routeLast: this.routeLast
+      });
+    }
     if (obj.source === 'Tabs' || obj.route === 'None' || obj.route === this.routeLast) { // or @isInov(obj.route)
       return;
     }
@@ -104,8 +115,9 @@ Nav = class Nav {
       if (this.router != null) {
         this.router.push({
           name: obj.route
-        // console.log( 'Nav.doRoute() success', { route:obj.route } ) )
-        }).then().catch((failure) => {
+        }).then(this.debug ? console.log('Nav.doRoute() success', {
+          route: obj.route
+        }) : void 0).catch((failure) => {
           return console.log('Nav.doRoute() failure', {
             route: obj.route,
             failure: failure
@@ -315,7 +327,7 @@ Nav = class Nav {
     var msg, pageKey;
     msg = {};
     msg.source = `${'Nav.dirPage'}(${dir})`;
-    pageKey = this.hasActivePageDir(this.route, dir) ? this.movePage(this.pages[this.route], dir) : 'None';
+    pageKey = this.hasPages(this.route) ? this.movePage(this.pages[this.route], dir) : 'None';
     if (pageKey !== 'None') {
       this.setPageKey(this.route, pageKey);
     } else {
@@ -360,8 +372,6 @@ Nav = class Nav {
   isShow(pagesName, pageKey) {
     var pageNav;
     pageNav = this.getPageKey(pagesName, false);
-    // pageNav = if pageNav is 'None' then @getPageDef(@pages[@pagesName].pages) else pageNav
-    // console.log( 'Nav.isShow()', { pageKey:pageKey, pageNav:pageNav, equals:pageKey===pageNav } );
     return pageKey === pageNav;
   }
 
@@ -375,18 +385,22 @@ Nav = class Nav {
     this.pages[pagesName].keys = Object.keys(pages);
   }
 
-  //pageKey                = @getPageKey( pagesName, false ) # Check
-  // console.log( 'Nav.setPages()', { pagesName:pagesName, has:@hasPages(pagesName), pages:@pages[pagesName] } )
-  setPageKey(pagesName, pageKey) {
-    var key, page, ref;
-    if (!this.hasPages(pagesName)) {
-      return;
+  getPages(pagesName) {
+    if (this.hasPages(pagesName, true)) {
+      return this.pages[pagesName].pages;
+    } else {
+      return {};
     }
+  }
+
+  setPageKey(pagesName, pageKey, propPages) {
+    var key, page, ref;
     ref = this.pages[pagesName].pages;
     for (key in ref) {
       if (!hasProp.call(ref, key)) continue;
       page = ref[key];
-      page.show = key === pageKey;
+      page.show = key === pageKey; // Update nav pages
+      propPages[key].show = key === pageKey; // Also update the propPages in Tabs.vue because it is a copy
     }
   }
 
@@ -406,28 +420,14 @@ Nav = class Nav {
     return 'None';
   }
 
-  getPageDef(pages) {
-    var key, page;
-    for (key in pages) {
-      if (!hasProp.call(pages, key)) continue;
-      page = pages[key];
-      if (page.show) {
-        return key;
-      }
+  getInovKey(pagesName) {
+    if (this.inArray(pagesName, this.inovComps)) {
+      return this.getPageKey(pagesName);
+    } else {
+      return 'None';
     }
-    return 'None';
   }
 
-  hasPage(pages, pageKey) {
-    // console.log( 'Nav.hasPage()', { pageKey:pageKey, pages:pages, has:pages[pageKey]? } );
-    return pages[pageKey] != null;
-  }
-
-  /*
-    for own key, page of pages
-      return true if key is pageKey
-    false
-  */
   hasPages(pagesName, log = false) {
     var has;
     has = this.isDef(this.pages[pagesName]) && this.isDef(this.pages[pagesName].pages) && this.pages[pagesName].keys.length > 0;
@@ -441,28 +441,18 @@ Nav = class Nav {
     return has;
   }
 
-  hasPageKey(pagesName, pageKey) {
-    return this.isDef(pageKey) && this.hasPages(pagesName) && (this.pages[pagesName].pages[pageKey] != null);
-  }
-
-  hasActivePage(pagesName) {
-    var key, page, ref;
-    if (!this.hasPages(pagesName)) {
-      return false;
-    }
-    ref = this.pages[pagesName].pages;
-    for (key in ref) {
-      if (!hasProp.call(ref, key)) continue;
-      page = ref[key];
-      if (page.show) {
-        return true;
+  logAllPages() {
+    var key, page, pagesKey, pagesObj, ref;
+    ref = this.pages;
+    for (pagesKey in ref) {
+      if (!hasProp.call(ref, pagesKey)) continue;
+      pagesObj = ref[pagesKey];
+      for (key in pagesObj) {
+        if (!hasProp.call(pagesObj, key)) continue;
+        page = pagesObj[key];
+        console.log(page);
       }
     }
-    return false;
-  }
-
-  hasActivePageDir(pagesName, dir) {
-    return this.hasActivePage(pagesName) && (dir === 'west' || dir === 'east');
   }
 
   isMyNav(obj, level, routes = null, checkPageKey = false) {
@@ -470,7 +460,7 @@ Nav = class Nav {
       return obj.level === level;
     } else {
       if (checkPageKey) {
-        return obj.level === level && this.inArray(obj.route, routes) && this.hasPageKey(routes[0], obj.pageKey);
+        return obj.level === level && this.inArray(obj.route, routes) && this.hasPages(obj.pageKey, true);
       } else {
         return obj.level === level && this.inArray(obj.route, routes);
       }

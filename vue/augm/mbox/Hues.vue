@@ -39,11 +39,9 @@
 
       const onNav = function(obj) {
         if( nav.isMyNav( obj,'Prac',[compKey],true) ) {
-            nav.setPageKey( route, obj.pageKey );
             pageIdx.value++; } } // console.log( 'Darw.onNav()', pages );
 
       onMounted( function () {
-        nav.setPages( compKey, pages );
         mix.subscribe(  'Nav', 'Hues', (obj) => {
           onNav(obj); } ); } )
 

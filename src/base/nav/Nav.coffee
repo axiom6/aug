@@ -20,11 +20,14 @@ class Nav
     @pracKey    = 'None'
     @dispKey    = 'None'
     @pageKey    = 'None'
-    @inovKey    = 'None' # Only used by Tabs to Tocs
+    @inovKey    = 'None' # Only used by Tabs to Tocs.vue and Comp.vue
+    @warnMsg    = 'None'
+    @debug      = false
     @pages      = {}
     @museLevels = ['Comp','Prac','Disp']
     @museComps  = ['Info','Know','Wise','Prin','Cube']
     @museInovs  = ['Info','Know','Wise','Soft','Data','Scie','Math']
+    @inovComps  = ['Info','Know','Wise']
     @keyEvents()
     @routeChange()
 
@@ -44,10 +47,11 @@ class Nav
   toObj:( msg ) ->
     @set( msg )
     @source   = 'None' if not msg.source?
-    pagesName = if @inArray(@compKey,@museComps) then 'Comp'                            else @compKey
-    @pageKey  = if @inArray(@compKey,@museComps) and @pageKey isnt 'None' then @pageKey else @getPageKey(pagesName,true)
-    { source:@source, route:@route, level:@level, compKey:@compKey, inovKey:@inovKey, pageKey:@pageKey,
-    pracKey:@pracKey, dispKey:@dispKey, choice:@choice, checked:@checked }
+    @inovKey  = @getInovKey( @compKey )
+    obj = { source:@source, route:@route, level:@level, compKey:@compKey,  pracKey:@pracKey, pageKey:@pageKey,
+    inovKey:@inovKey, dispKey:@dispKey, choice:@choice, checked:@checked }
+    obj.warnMsg = @warnMsg if @warnMsg isnt 'None'
+    obj
 
   set:( msg ) ->
     for own key, val of msg
@@ -55,13 +59,13 @@ class Nav
     return
 
   doRoute:( obj ) ->
-    # console.log( 'Nav.doRoute()', { objRoute:obj.route, routeLast:@routeLast})
+    if @debug then console.log( 'Nav.doRoute()', { objRoute:obj.route, routeLast:@routeLast})
     return if obj.source is 'Tabs' or obj.route is 'None' or obj.route is @routeLast # or @isInov(obj.route)
     if obj.route? and @inArray( obj.route, @routeNames )
       if @router?
         @router.push( { name:obj.route } )
-          .then()
-            # console.log( 'Nav.doRoute() success', { route:obj.route } ) )
+          .then(
+            if @debug then console.log( 'Nav.doRoute() success', { route:obj.route } ) )
           .catch( (failure) =>
             console.log( 'Nav.doRoute() failure', { route:obj.route, failure:failure } ) )
       else
@@ -197,7 +201,7 @@ class Nav
   dirPage:( dir ) ->
     msg = {}
     msg.source = "#{'Nav.dirPage'}(#{dir})"
-    pageKey = if @hasActivePageDir(@route,dir) then @movePage(@pages[@route],dir) else 'None'
+    pageKey = if @hasPages(@route) then @movePage(@pages[@route],dir) else 'None'
     if pageKey isnt 'None'
       @setPageKey( @route, pageKey )
       # @pub( msg )
@@ -225,8 +229,6 @@ class Nav
 
   isShow:( pagesName, pageKey ) ->
     pageNav = @getPageKey( pagesName, false )
-    # pageNav = if pageNav is 'None' then @getPageDef(@pages[@pagesName].pages) else pageNav
-    # console.log( 'Nav.isShow()', { pageKey:pageKey, pageNav:pageNav, equals:pageKey===pageNav } );
     pageKey is pageNav
 
   # An important indicator of when Comps and Tabs are instanciated
@@ -235,16 +237,15 @@ class Nav
     @pages[pagesName]       = {}
     @pages[pagesName].pages = pages
     @pages[pagesName].keys  = Object.keys(pages)
-    #pageKey                = @getPageKey( pagesName, false ) # Check
-    # console.log( 'Nav.setPages()', { pagesName:pagesName, has:@hasPages(pagesName), pages:@pages[pagesName] } )
     return
 
-  setPageKey:( pagesName, pageKey ) ->
-    if not @hasPages(pagesName)
-      # console.log( 'Nav.setPageKey()', { pagesName:pagesName, pageKey:pageKey, has:@hasPages(pagesName) } )
-      return
+  getPages:( pagesName ) ->
+    if@hasPages(pagesName,true) then @pages[pagesName].pages else {}
+
+  setPageKey:( pagesName, pageKey, propPages ) ->
     for own key, page  of @pages[pagesName].pages
-      page.show = key  is pageKey
+      page.show           = key is pageKey  # Update nav pages
+      propPages[key].show = key is pageKey  # Also update the propPages in Tabs.vue because it is a copy
     return
 
   getPageKey:( pagesName, log=false ) ->
@@ -253,43 +254,27 @@ class Nav
       return key if page.show
     'None'
 
-  getPageDef:( pages ) ->
-    for own  key,   page  of pages
-      return key if page.show
-    'None'
+  getInovKey:(  pagesName ) ->
+    if @inArray(pagesName,@inovComps) then @getPageKey(pagesName) else 'None'
 
-  hasPage:( pages, pageKey ) ->
-    # console.log( 'Nav.hasPage()', { pageKey:pageKey, pages:pages, has:pages[pageKey]? } );
-    pages[pageKey]?
-    ###
-      for own key, page of pages
-        return true if key is pageKey
-      false
-    ###
 
   hasPages:( pagesName, log=false ) ->
     has = @isDef(@pages[pagesName]) and @isDef(@pages[pagesName].pages) and @pages[pagesName].keys.length > 0
     console.log( 'Nav.hasPages()', { pagesName:pagesName, has:has, pages:@pages } ) if not has and log
     has
 
-  hasPageKey:( pagesName, pageKey ) ->
-    @isDef(pageKey) and @hasPages(pagesName) and @pages[pagesName].pages[pageKey]?
-
-  hasActivePage:( pagesName ) ->
-    return false    if    not @hasPages(pagesName)
-    for own  key,    page  of @pages[pagesName].pages
-      return true if page.show
-    false
-
-  hasActivePageDir:( pagesName, dir ) ->
-     @hasActivePage( pagesName ) and ( dir is 'west' or dir is 'east' )
+  logAllPages:() ->
+    for own pagesKey, pagesObj of @pages
+      for own key, page of pagesObj
+        console.log( page )
+    return
 
   isMyNav:( obj, level, routes=null, checkPageKey=false ) ->
     if not routes?
       obj.level is level
     else
       if checkPageKey
-        obj.level is level and @inArray(obj.route,routes) and @hasPageKey(routes[0],obj.pageKey)
+        obj.level is level and @inArray(obj.route,routes) and @hasPages(obj.pageKey,true)
       else
         obj.level is level and @inArray(obj.route,routes)
 

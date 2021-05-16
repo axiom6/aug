@@ -39,13 +39,11 @@
 
       const onNav = function(obj) {
         if( nav.isMyNav(obj,'Prac',[compKey],true) ) {
-            nav.setPageKey( compKey, obj.pageKey );
             showH1.value = false;
             pageIdx.value++; } } // console.log( 'Darw.onNav()', pages );
 
       onMounted( function () {
         showH1.value  = true;
-        nav.setPages( compKey, pages );
         mix.subscribe(  'Nav', 'Draw', (obj) => {
           onNav(obj); } ); } )
 
