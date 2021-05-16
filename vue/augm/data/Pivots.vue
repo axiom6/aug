@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <d-tabs :route="route" :pages="pages" defn="None"></d-tabs>
+    <d-tabs :compKey="compKey" :pages="pages" defn="None"></d-tabs>
     <div class="page">
       <h1       v-if="isPageKey('None')">Pivots</h1>
       <p_pivot1 v-if="pages['Pivot1'].show"></p_pivot1>
@@ -22,7 +22,7 @@
     components:{ 'd-tabs':Tabs, 'p_pivot1':Pivot1, 'p_pivot2':Pivot2 },
 
     data() {
-      return { route:'Pivots', pageKey:'None',
+      return { compKey:'Pivots', pageKey:'None',
         pages:{
           Table1: { title:'Pivot1', key:'Pivot1', created:false, show:false },
           Table2: { title:'Pivot2', key:'Pivot2', created:false, show:false } } } },
@@ -33,7 +33,7 @@
         return this.pageKey === pageKey; },
 
       onNav: function(obj) {
-        if( this.nav.isMyNav( obj, this.route ) ) {
+        if( this.nav.isMyNav(obj,'Prac',[this.compKey]) ) {
           this.pageKey = this.nav.getPageKey('Pivots');
           if( this.pageKey !== 'None' ) {
               this.create( this.pageKey ); } } },
@@ -49,8 +49,8 @@
     mounted: function () {
       this.mix = inject('mix');
       this.nav = inject('nav');
-      this.nav.setPages( this.route, this.pages );
-      this.mix.subscribe( 'Nav', 'Pivots.vue', (obj) => {
+      this.nav.setPages( this.compKey, this.pages );
+      this.mix.subscribe( 'Nav', 'Pivots', (obj) => {
           this.onNav( obj ); } ); }
 
   }

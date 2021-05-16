@@ -39,7 +39,7 @@ let PageND = {
          remove(); } }
 
     onMounted( function () {
-      mix.subscribe( 'Nav', 'PageND.vue'+props.page.key, (obj) => {
+      mix.subscribe( 'Nav', 'PageND'+props.page.key, (obj) => {
         onNav(obj); } ) } )
 
     return { show, elem }; }

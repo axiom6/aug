@@ -26,11 +26,10 @@
       
       doTalk: function(talkKey) {
         this.nav.pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None',
-          presKey:'None', imgsNum:0, imgsIdx:0 } );
-        this.nav.dirsNavd('Init'); },
+          presKey:'None', imgsNum:0, imgsIdx:0 } ); }, // this.nav.dirsNavd('Init');
 
       onNav: function (obj) {
-        if( this.nav.isMyNav( obj, 'Talk' ) ) {
+        if( this.nav.isMyNav(obj,'Prac',['Talk']) ) {
             this.onSect( obj.pracKey, obj.dispKey, obj.presKey, obj.imgsIdx ); } },
 
       onSect: function( talkKey, sectKey, presKey, imgsIdx ) {
@@ -50,7 +49,7 @@
       this.talkObjs = this.mix.compObject('Talk'); },
 
     mounted: function () {
-      this.mix.subscribe(  "Nav", 'Talk.vue', (obj) => {
+      this.mix.subscribe(  "Nav", 'Talk', (obj) => {
         this.onNav( obj ); } ); }
     
   }

@@ -2,8 +2,8 @@
 
 <template>
   <div class="hues-pane">
-    <d-tabs :route="route" :pages="pages"></d-tabs>
-    <h1 v-if="route==='Draw'">Mathbox Colors</h1>
+    <d-tabs :compKey="compKey" :pages="pages"></d-tabs>
+    <h1 v-if="compKey==='Draw'">Mathbox Colors</h1>
     <template v-for="page in pages" :key="pageIdx">
       <d-port v-if="page.show" :page="page" class="port-pane"></d-port>
     </template>
@@ -24,7 +24,7 @@
 
       const mix     = inject('mix');
       const nav     = inject('nav');
-      const route   = 'Hues';
+      const compKey = 'Hues';
       const pageIdx = ref(0);
       const page    = ref(null);
       const pages   = {
@@ -38,16 +38,16 @@
       mix.addScript( "/assets/mathbox-bundle.js" )
 
       const onNav = function(obj) {
-        if( nav.isMyNav( obj, route ) && nav.hasPageKey( route, obj.pageKey ) ) {
+        if( nav.isMyNav( obj,'Prac',[compKey],true) ) {
             nav.setPageKey( route, obj.pageKey );
             pageIdx.value++; } } // console.log( 'Darw.onNav()', pages );
 
       onMounted( function () {
-        nav.setPages( route, pages );
-        mix.subscribe(  'Nav', 'Hues.vue', (obj) => {
+        nav.setPages( compKey, pages );
+        mix.subscribe(  'Nav', 'Hues', (obj) => {
           onNav(obj); } ); } )
 
-    return { route, pages, page, pageIdx }; }
+    return { compKey, pages, page, pageIdx }; }
   }
   export default Hues;
   

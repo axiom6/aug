@@ -2,7 +2,7 @@
 
 <template>
   <div class="math-nd-pane">
-    <d-tabs :route="route" :pages="toPages()"></d-tabs>
+    <d-tabs :compKey="compKey" :pages="toPages()"></d-tabs>
     <div class="math-nd-comp">
       <template v-for="exp in exps">
         <m-exp :exp="exp"></m-exp>
@@ -25,11 +25,11 @@
     components:{ 'd-tabs':Tabs, 'm-exp':PageExp },
     
     setup() {
-      const mix   = inject('mix');
-      const nav   = inject('nav');
-      const route = ref(nav.route);
-      const exps  = ref({ } );
-      const pages = {
+      const mix     = inject('mix');
+      const nav     = inject('nav');
+      const compKey = ref(nav.route);
+      const exps    = ref({ } );
+      const pages   = {
         MathEQ: {         
           Differ: { title:'Differ', key:'Differ', create:Differ, obj:null, show:false },
           Solves: { title:'Solves', key:'Solves', create:Solves, obj:null, show:false } },
@@ -37,8 +37,8 @@
           Basics: { title:'Basics', key:'Basics', create:Basics, obj:null, show:false } } };
 
       const toPages = function() {
-        // console.log( 'MathND.toPages()', { route:route.value, paged:pages[route.value] } );
-        return mix.isDef(pages[route.value]) ? pages[route.value] : {}; }
+        // console.log( 'MathND.toPages()', { compKey:compKey.value, paged:pages[compKey.value] } );
+        return mix.isDef(pages[compKey.value]) ? pages[compKey.value] : {}; }
 
       const hasPages = function( name, pageKey ) {
         return mix.isDef(pages[name]) && mix.isDef(pages[name][pageKey]); }
@@ -46,7 +46,7 @@
       const onNav = function(obj) {
         // console.log( 'MathND.onNav()', obj );
         if( hasPages( obj.route, obj.pageKey ) ) {
-          route.value = obj.route
+          compKey.value = obj.route
           let page    = pages[obj.route][obj.pageKey];
           exps.value = createExps( page ); } }
        //else {
@@ -72,10 +72,10 @@
         return `r${row}c${col}`; }
 
     onMounted( function () {
-      mix.subscribe( 'Nav', 'MathND.vue', (obj) => {
+      mix.subscribe( 'Nav', 'MathND', (obj) => {
           onNav( obj ); } ); } )
 
-      return { route, exps, toPages }; }
+      return { compKey, exps, toPages }; }
   }
   
 export default MathND;

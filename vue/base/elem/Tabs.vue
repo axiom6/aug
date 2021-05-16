@@ -1,7 +1,7 @@
 
 <template>
   <div class="tabs-pane" :style="stylePos()">
-    <template v-for="pageObj in pages">
+    <template :key="tabsIdx" v-for="pageObj in pages">
       <div :class="classTab(pageObj.key)" @click="doPage(pageObj.key)">{{pageObj.title}}</div>
     </template>
   </div>
@@ -9,50 +9,78 @@
 
 <script type="module">
 
-import {inject, onMounted, ref} from 'vue';
+import { inject, ref, onMounted } from 'vue';
 
   let Tabs = {
 
-    props: { route:String, pages:Object, position:{  type:String, default:'full' },
-             isInov:{ type:Boolean, default:false } },
+    props: { compKey:String, pages:Object, position:{  type:String, default:'full' },
+             isInov:{ type:Boolean, default:false }, isComp:{ type:Boolean, default:false }  },
 
-    setup( props ) {
+    setup(props) {
 
-      const mix = inject( 'mix' );
-      const nav = inject( 'nav' );
+      const mix     = inject('mix');
+      const nav     = inject('nav');
 
-      nav.setPages( props.route, props.pages );
+      const pagesName = () => {
+        if(      props.isComp ) { return 'CompPages';           }
+        else if( props.isInov ) { return props.compKey+'Inovs'; }
+        else                    { return props.compKey;         } }
 
-      const pageKey   = ref( nav.getPageKey(props.route) );
-      const pageObj   = null;
-      const positions = { left:{  left:0,     width: '60%' },
-                          right:{ left:'60%', width: '40%' },
-                           full:{ left:0,     width:'100%' } };
+      const getPageKey = () => {
 
-      const isPage = function (pageArg) {
-        return mix.isDef(props.route) && mix.isDef(pageArg); }
-      const onPage = function (pageArg) {
-        pageKey.value = pageArg;
-        if( isPage( pageArg ) ) {
-          //console.log( 'Tabs.onPage()', { pageKey:pageKey.value, pageArg:pageArg } )
-          nav.setPageKey( props.route, pageArg ); }
+        if( props.isComp && nav.inArray(nav.level,nav.museLevels) && nav.pageKey!=='None' ) {
+          return nav.pageKey; }
         else {
-          console.log( 'Tabs.onPage() bad pageKey', { route:props.route, pageKey:pageArg } ); } }
-      const doPage = function (pageArg) {
-        if( isPage(pageArg) ) {
-            onPage(pageArg) ;
-            let obj = { source:'Tabs',route:props.route, pageKey:pageArg }
-            if( props.isInov ) { obj.inovKey = pageArg; }
-            nav.pub(obj); } }
-      const stylePos = function () {
+          return nav.getPageDef(props.pages); } }
+
+      let   tabsIdx = ref(0);
+      const source  = props.isInov ? 'TabsInov'+props.compKey : 'TabsNorm'+props.compKey
+      nav.setPages( pagesName(), props.pages );
+      const pageKey = ref(getPageKey());
+      console.log( 'Tabs.getPageKey()', { pageKey:pageKey.value, pageNav:nav.pageKey, isComp:props.isComp,
+        isLevel:nav.inArray(nav.level,nav.museLevels) } );
+      const pageObj = ref(null);
+
+      const positions = {
+        left: {left: 0, width: '60%'},
+        right: {left: '60%', width: '40%'},
+        full: {left: 0, width: '100%'} };
+      
+      const onPage = (pageArg) => {
+        if( nav.hasPage(props.pages,pageArg) ) {
+          pageKey.value = pageArg;
+          nav.setPageKey( pagesName, pageArg );
+          tabsIdx.value++; }
+        else {
+          console.log( 'Tabs.onPage() pageKey not in pages', { source:source, pageKey:pageArg, pages:props.pages } ) } }
+
+      const doPage = (pageArg) => {
+        onPage(pageArg);
+        let obj = { source:'Tabs', compKey:props.compKey };
+        if( props.isInov ) {
+          obj.inovKey = pageArg; }
+        else {
+          obj.pageKey = pageArg; }
+        nav.pub(obj); }
+
+      const stylePos = () =>  {
         return positions[props.position]; }
-      const classTab = function (pageArg) {
-        // console.log( 'Tabs.classTab', { pageKey:pageKey.value, pageArg:pageArg } )
-        return pageKey.value===pageArg ? 'tabs-tab-active' : 'tabs-tab'; }
 
-    return { pageObj, doPage, classTab, stylePos } }
+      const classTab = (pageArg) => {
+        console.log( 'Tabs.classTab', { source:source, pageKey:pageKey.value, pageArg:pageArg } )
+        return pageKey.value === pageArg ? 'tabs-tab-active' : 'tabs-tab'; }
 
-    }
+      const onNav = (obj) => {
+        if( obj.source!==source && obj.pageKey!==pageKey.value ) {
+           let pageArg = props.isInov ? obj.inovKey : obj.pageKey;
+           onPage( pageArg ); } }
+
+      onMounted( () => {
+        mix.subscribe(  "Nav", source, (obj) => {
+          onNav(obj); } ) } )
+
+      return { pageObj, tabsIdx, doPage, classTab, stylePos } }
+  }
 
   export default Tabs;
   
@@ -76,18 +104,36 @@ import {inject, onMounted, ref} from 'vue';
 </style>
 
 <!--
+  console.log( 'Tabs.setup()', { pageKey:pageKey.value } );
 
-border-left: @theme-fore solid thin;
-      border-top:@theme-fore solid thin; border-right:@theme-fore solid thin;
-      const init = function ()  {
-        nav.setPages(props.route,props.pages); // Will only set pages if needed
-        let pageArg = nav.getPageKey(props.route);
-        console.log( 'Tabs.init()', { route:props.route, pageKey:pageKey.value, pages:props.pages } );
-        onPage(pageArg); }
+  console.log( 'Tabs.onNav()', { source:obj.source, compKey:props.compKey, isInov:props.isInov,
+    has:nav.hasPage(props.pages,obj.pageKey), tabPageKey:pageKey.value, objPageKey:obj.pageKey } );
 
-      onMounted( function() {
-        mix.subscribe(  "Nav", 'Tabs.vue.'+props.route, (obj) => {
-          if( obj.source !== 'Tabs'  ) {
-            nextTick( function() {
-              init(); } ) } } ) } )
+  console.log('Tabs.onPage()', { compKey:props.compKey, pageArg:pageArg, source:source } );
+
+  const isPage = (pageArg) => {
+    return mix.isDef(props.compKey) && mix.isDef(pageArg); }
+
+  const onPage = (pageArg) => {
+    pageKey.value = pageArg;
+    if( isPage(pageArg) ) {
+      console.log('Tabs.onPage()', { compKey:props.compKey, pageArg:pageArg, source:source } );
+      nav.setPageKey( props.compKey, pageArg );
+      tabsIdx.value++; }
+    else {
+      console.log('Tabs.onPage() bad pageKey', { compKey:props.compKey, pageKey:pageArg } ); } }
+
+  border-left: @theme-fore solid thin;
+        border-top:@theme-fore solid thin; border-right:@theme-fore solid thin;
+        const init = function ()  {
+          nav.setPages(props.compKey,props.pages); // Will only set pages if needed
+          let pageArg = nav.getPageKey(props.compKey);
+          console.log( 'Tabs.init()', { compKey:props.compKey, pageKey:pageKey.value, pages:props.pages } );
+          onPage(pageArg); }
+
+        onMounted( function() {
+          mix.subscribe(  "Nav", 'Tabs.'+props.compKey, (obj) => {
+            if( obj.source !== 'Tabs'  ) {
+              nextTick( function() {
+                init(); } ) } } ) } )
 -->

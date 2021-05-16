@@ -34,7 +34,7 @@ let Page = {
     onMounted(  () => {
       mounts[props.page.key] = true;
       console.log( 'Page.onMounted()', props.page.key );
-      mix.subscribe( 'Nav', 'ToolPage.vue'+props.page.key, (obj) => {
+      mix.subscribe( 'Nav', 'ToolPage'+props.page.key, (obj) => {
         onNav(obj); } ) } )
 
     return { show }; }

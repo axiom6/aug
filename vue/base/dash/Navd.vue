@@ -38,7 +38,7 @@
             dirs[keyn] = dirsa[keyn]; } }
 
       onMounted( function () {
-        mix.subscribe(  "Navd", 'Navd.vue', (dirs) => {
+        mix.subscribe(  "Navd", 'Navd', (dirs) => {
           onDirs( dirs ); } ); } )
 
     return{ doDir, style }; }

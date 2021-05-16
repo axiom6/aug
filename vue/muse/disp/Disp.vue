@@ -1,7 +1,7 @@
 
 <template>
   <div class="disp-pane">
-    <d-tabs :route="'Disp'" :pages="pages"></d-tabs>
+    <d-tabs :compKey="'Disp'" :pages="pages"></d-tabs>
     <div :key="dispIdx">
       <d-desc v-if="nav.isShow('Disp','Desc')" :dispObj="dispObj" :from="'Disp'"></d-desc>
       <d-dims v-if="nav.isShow('Disp','Dims')" :dispObj="dispObj" :from="'Disp'"></d-dims>
@@ -45,7 +45,7 @@
       }
 
       const onNav =  function (obj) {
-        if( nav.isMyNav( obj, 'Disp' ) ) {
+        if( nav.isMyNav(obj,'Disp') ) {
             onDisp( obj ); } }
 
       onBeforeMount( function () {
@@ -55,11 +55,11 @@
         obj.pracKey = nav.pracKey;
         obj.inovKey = nav.inovKey;
         obj.dispKey = nav.dispKey;
-        obj.pageKey = nav.getPageKey( 'Disp', false );
+        obj.pageKey = nav.getPageKey('Disp');
         onDisp( obj );  } )
 
       onMounted( function () {
-        mix.subscribe(  "Nav", 'Disp.vue', (obj) => {
+        mix.subscribe(  "Nav", 'Disp', (obj) => {
           onNav(obj); } ); } )
 
     return { pages, dispObj, dispIdx, nav } }

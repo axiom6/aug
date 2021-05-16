@@ -32,7 +32,7 @@
       onMenu: function( obj )  {
         console.log(  'Menu.onMenu()', obj ); } },
     mounted: function () {
-      this.mix.subscribe( 'Menu', 'Menu.vue', this.onMenu ) } };
+      this.mix.subscribe( 'Menu', 'Menu', this.onMenu ) } };
   
 </script>
 

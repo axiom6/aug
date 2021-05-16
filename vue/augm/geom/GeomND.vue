@@ -1,7 +1,7 @@
 
 <template>
   <div class="geom-nd-pane">
-    <d-tabs :route="pagesKey" :pages="toPages()"></d-tabs>
+    <d-tabs :compKey="pagesKey" :pages="toPages()"></d-tabs>
     <template v-for="page in toPages(pagesKey)" :key="page.key">
       <g-page :page="page" class="geom-nd-page"></g-page>
     </template>
@@ -58,7 +58,7 @@
         pagesKey.value = mix.inArray(nav.route,pageKeys) ? nav.route : 'Geom2D'; } )
 
       onMounted( function () {
-        mix.subscribe(  'Nav', 'GeomND.vue', (obj) => {
+        mix.subscribe(  'Nav', 'GeomND', (obj) => {
           onNav(obj); } ) } )
 
       return { pagesKey, page, toPages }; }

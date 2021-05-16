@@ -53,14 +53,6 @@
       "oAP" : "\/aug.iml",
       "oF" : 1
     },
-    "\/binding.gyp" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/binding.gyp",
-      "oF" : 0
-    },
     "\/build" : {
       "ft" : 65536,
       "oA" : 1,
@@ -91,14 +83,6 @@
       "ft" : 65536,
       "oA" : 1,
       "oAP" : "\/dist",
-      "oF" : 0
-    },
-    "\/firebase-debug.log" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/firebase-debug.log",
       "oF" : 0
     },
     "\/firebase.json" : {
@@ -1490,9 +1474,9 @@
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
-      "oA" : 0,
+      "oA" : 1,
       "oAP" : "\/plan.txt",
-      "oF" : 0
+      "oF" : 1
     },
     "\/pub" : {
       "ft" : 65536,

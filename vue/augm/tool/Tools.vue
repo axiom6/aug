@@ -1,7 +1,7 @@
 
 <template>
   <div class="tools-pane">
-    <d-tabs :route="pagesKey" :pages="toPages()"></d-tabs>
+    <d-tabs :compKey="pagesKey" :pages="toPages()"></d-tabs>
     <template v-for="page in toPages(pagesKey)" :key="page.key">
       <t-page v-if="show(pagesKey)" :page="page" class="tools-page"></t-page>
     </template>
@@ -48,7 +48,7 @@
         pagesKey.value = mix.inArray(nav.route,pageKeys) ? nav.route : 'Gauges'; } )
 
       onMounted( function () {
-        mix.subscribe(  'Nav', 'Tools.vue', (obj) => {
+        mix.subscribe(  'Nav', 'Tools', (obj) => {
           onNav(obj); } ) } )
 
       return { pagesKey, page, toPages, show }; }

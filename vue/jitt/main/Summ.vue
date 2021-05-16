@@ -50,7 +50,7 @@
         return props.route !== 'None'; }
 
       onMounted( function () {
-        mix.subscribe( 'Nav', 'Summ.vue', (obj) => { onChoices(obj); } );
+        mix.subscribe( 'Nav', 'Summ', (obj) => { onChoices(obj); } );
           onChoices( { route:props.name, choice:'init', checked:false } ); } )
 
         return { c0, c1, c2, isRouted }; },

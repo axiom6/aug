@@ -44,16 +44,16 @@
         let  route    = komps[kompKey].route;
         compKey.value = kompKey;
         inovKey.value = nav.inovKey;
-        let obj = { route:route, compKey:compKey.value, source:'Toc' };
+        let obj = { route:route, level:'Comp', compKey:compKey.value, source:'Toc' };
         pub( obj ); }
       const doPrac = function(pracArg) {
         pracKey.value = pracArg;
         let route     = toRoute('Prac', pracArg );
-        pub( { route:route, pracKey:pracArg, source:'Toc' } ); }
+        pub( { route:route, level:'Prac', pracKey:pracArg, source:'Toc' } ); }
       const doDisp = function(dispArg) {
         dispKey.value = dispArg;
         let route    = toRoute('Disp', dispArg );
-        pub( { route:route, dispKey:dispArg, source:'Toc' } ); }
+        pub( { route:route, level:'Disp', dispKey:dispArg, source:'Toc' } ); }
       const pub = function(obj) {
         nav.dirTabs = false;
         nav.pub(obj); }
