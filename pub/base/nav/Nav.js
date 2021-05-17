@@ -147,10 +147,34 @@ Nav = class Nav {
 
   // Not working
   routeChange() {
-    window.addEventListener('popstate', (event) => {
-      console.log('Nav.routeChange', window.location.pathname, event);
-      if (this.routeOK(window.location.pathname)) {
-        return this.doRoute(window.location.pathname);
+    window.addEventListener('popstate', () => { // event
+      var compKey, level, pracKey, split;
+      compKey = window.location.hash.substring(2);
+      pracKey = 'None';
+      level = "Comp";
+      if (compKey.includes('/')) {
+        split = compKey.split('/');
+        compKey = split[0];
+        pracKey = split[1];
+        level = "Prac";
+      }
+      if (this.routeOK(compKey)) {
+        this.pub({
+          source: "Loc",
+          route: compKey,
+          level: 'Comp',
+          compKey: compKey,
+          pracKey: 'None'
+        });
+        if (level === 'Prac') {
+          return this.pub({
+            source: "Loc",
+            route: compKey,
+            level: 'Prac',
+            compKey: compKey,
+            pracKey: pracKey
+          });
+        }
       }
     });
   }

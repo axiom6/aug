@@ -83,10 +83,19 @@ class Nav
 
   # Not working
   routeChange:() ->
-    window.addEventListener( 'popstate', (event) =>
-      console.log( 'Nav.routeChange', window.location.pathname, event )
-      if @routeOK( window.location.pathname )
-         @doRoute( window.location.pathname ) )
+    window.addEventListener( 'popstate', () => # event
+      compKey = window.location.hash.substring(2)
+      pracKey = 'None'
+      level   = "Comp"
+      if compKey.includes('/')
+        split   = compKey.split('/')
+        compKey = split[0]
+        pracKey = split[1]
+        level   = "Prac"
+      if @routeOK( compKey )
+        @pub( { source:"Loc", route:compKey, level:'Comp', compKey:compKey, pracKey:'None'  } )
+        @pub( { source:"Loc", route:compKey, level:'Prac', compKey:compKey, pracKey:pracKey } ) if level is 'Prac'
+    )
     return
 
   hasCompKey:( compKey, dir=null ) ->

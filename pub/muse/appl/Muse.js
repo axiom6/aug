@@ -23,6 +23,8 @@ import {
 
 import Home from '../../../vue/muse/appl/Muse.vue';
 
+import MuseLD from '../../../src/muse/appl/MuseLD.json';
+
 import PrinJson from '../../../data/muse/Prin.json';
 
 import RowsJson from '../../../data/muse/Rows.json';
@@ -60,7 +62,7 @@ Muse = (function() {
     }
 
     static addToHead() {
-      var head, maniElem, siteElem;
+      var head, jsonLD, maniElem, siteElem;
       // manifest = """<link href="manifest.json"  rel="manifest" crossorigin="use-credentials">"""
       // siteLink = """<link href="https://vit-muse.web.app/" rel="canonical">"""
       maniElem = document.createElement('link');
@@ -71,12 +73,13 @@ Muse = (function() {
       // console.log( 'Location', window.location.href )
       siteElem.href = window.location.href; // "https://vit-muse.web.app/" if window.location.contains('vit-muse')
       siteElem.rel = "canonical";
-      //sonLDem      = document.createElement('script')
-      //sonLDem.type = "application/ld+json"
-      //sonLDem.text = MuseLink
+      jsonLD = document.createElement('script');
+      jsonLD.type = "application/ld+json";
+      jsonLD.text = JSON.stringify(MuseLD);
       head = document.getElementsByTagName("head")[0];
       head.appendChild(maniElem);
       head.appendChild(siteElem);
+      head.appendChild(jsonLD);
     }
 
     static init(batch) {
@@ -168,7 +171,6 @@ Muse = (function() {
 
   };
 
-  //ead.appendChild(jsonLDem)
   Muse.Batch = {
     Prin: {
       url: 'muse/Prin.json',

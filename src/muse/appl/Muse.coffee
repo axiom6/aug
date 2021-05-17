@@ -7,14 +7,12 @@ import Touch  from '../../base/nav/Touch.js'
 #mport Cache  from '../../base/util/Cache.js'
 import Mix    from '../../base/nav/Mix.js'
 
-
-
 import { createApp }    from 'vue'    #
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home             from '../../../vue/muse/appl/Muse.vue';
 
-#mport MuseLD   from './MuseLD.js'
-#mport MuseLink from './MuseLD.json'
+#mport MuseLDjs from './MuseLD.js'
+import MuseLD   from '../../../src/muse/appl/MuseLD.json'
 import PrinJson from '../../../data/muse/Prin.json'
 import RowsJson from '../../../data/muse/Rows.json'
 import InfoJson from '../../../data/muse/Info.json'
@@ -24,7 +22,6 @@ import SoftJson from '../../../data/inno/Soft.json'
 import DataJson from '../../../data/inno/Data.json'
 import ScieJson from '../../../data/inno/Scie.json'
 import MathJson from '../../../data/inno/Math.json'
-
 
 class Muse
 
@@ -58,13 +55,13 @@ class Muse
     # console.log( 'Location', window.location.href )
     siteElem.href = window.location.href # "https://vit-muse.web.app/" if window.location.contains('vit-muse')
     siteElem.rel  = "canonical"
-    #sonLDem      = document.createElement('script')
-    #sonLDem.type = "application/ld+json"
-    #sonLDem.text = MuseLink
+    jsonLD        = document.createElement('script')
+    jsonLD.type   = "application/ld+json"
+    jsonLD.text   = JSON.stringify(MuseLD)
     head          = document.getElementsByTagName("head")[0]
     head.appendChild(maniElem)
     head.appendChild(siteElem)
-    #ead.appendChild(jsonLDem)
+    head.appendChild(jsonLD)
     return
 
   Muse.Batch = {
