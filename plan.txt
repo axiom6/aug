@@ -1,7 +1,9 @@
 
 Debug
-  1. Update Comp Tabs and Inov Tabs
-  2. Scroll Tocs
+  1. Get Touch working again
+  2. Work on Directions
+  3. Scroll Tocs   on Mobile
+  4. Refine orient on Mobile
 
 JsonLD
   1. Standardize Schema
@@ -23,5 +25,3 @@ Augm Modules
   5. d3 interface
   6. Slim down Roboto font css
 
-Touch
-  1. Get working again

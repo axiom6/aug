@@ -4,7 +4,7 @@ import Build from '../util/Build.js'
 
 class Nav
 
-  constructor:( @stream, @batch,  @routes, @routeNames, @komps, @isMuse=false ) ->
+  constructor:( @stream, @batch, @routes, @routeNames, @komps, @isMuse=false ) ->
     @dirs       = { west:true, east:true, north:true, south:true, prev:true, next:true }
     @navs       = @addInovToNavs( @komps )
     @touch      =  null
@@ -24,17 +24,21 @@ class Nav
     @warnMsg    = 'None'
     @debug      = false
     @pages      = {}
+    @replays    = {}
     @museLevels = ['Comp','Prac','Disp']
     @museComps  = ['Info','Know','Wise','Prin','Cube']
     @museInovs  = ['Info','Know','Wise','Soft','Data','Scie','Math']
     @inovComps  = ['Info','Know','Wise']
     @keyEvents()
-    @routeChange()
+    @routeListen()
 
-  pub:( msg ) ->
+  pub:( msg, isReplay=false ) ->
     if @msgOK(msg)
       obj = @toObj( msg )
       console.log('Nav.pub()', obj )
+      if not isReplay and obj.compKey isnt 'Test'
+        objName = obj.compKey + ':' + obj.pracKey + ':'  + obj.pageKey + ':' + obj.inovKey
+        @replays[objName] = obj
       @doRoute( obj ) # Creates route if necessary to publish to
       @stream.publish( 'Nav',  obj )
     return
@@ -47,7 +51,8 @@ class Nav
   toObj:( msg ) ->
     @set( msg )
     @source   = 'None' if not msg.source?
-    @inovKey  = @getInovKey( @compKey )
+    @pracKey  = 'None' if @level is 'Comp'
+    @inovKey  = if msg.inovKey? then msg.inovKey else @getInovKey( @compKey )
     obj = { source:@source, route:@route, level:@level, compKey:@compKey,  pracKey:@pracKey, pageKey:@pageKey,
     inovKey:@inovKey, dispKey:@dispKey, choice:@choice, checked:@checked }
     obj.warnMsg = @warnMsg if @warnMsg isnt 'None'
@@ -81,22 +86,62 @@ class Nav
       return true
     false
 
-  # Not working
   routeChange:() ->
-    window.addEventListener( 'popstate', () => # event
-      compKey = window.location.hash.substring(2)
+    hash   = window.location.hash.substring(2)
+    path   = hash
+    query  = ""
+    objQue = {}
+
+    if hash.includes('?')
+      split  = hash.split('?')
+      path   = split[0]
+      query  = split[1]
+      objQue = @parseQuery( query )
+
+    if @inArray( path, @museComps )
+      compKey = path
       pracKey = 'None'
-      level   = "Comp"
-      if compKey.includes('/')
-        split   = compKey.split('/')
-        compKey = split[0]
-        pracKey = split[1]
-        level   = "Prac"
+      console.log( 'Nav.routeChange()', { level:'Comp', compKey:compKey, pracKey:pracKey, query:query, objQue:objQue } )
       if @routeOK( compKey )
+        obj = { source:"Loc", route:compKey, level:'Comp', compKey:compKey, pracKey:pracKey }
+        obj.pageKey = objQue.page if objQue.page?
+        obj.inovKey = objQue.inov if objQue.inov?
+        @pub( obj )
+    else
+      pracKey = path
+      compKey = @build.getPlane( pracKey )
+      console.log( 'Nav.routeChange()', { level:'Prac', compKey:compKey, pracKey:pracKey, query:query } )
+      if @routeOK( pracKey )
         @pub( { source:"Loc", route:compKey, level:'Comp', compKey:compKey, pracKey:'None'  } )
-        @pub( { source:"Loc", route:compKey, level:'Prac', compKey:compKey, pracKey:pracKey } ) if level is 'Prac'
-    )
+        obj = { source:"Loc", route:compKey, level:'Prac', compKey:compKey, pracKey:pracKey }
+        obj.pageKey = objQue.page if objQue.page?
+        obj.inovKey = objQue.inov if objQue.inov?
+        @pub( obj )
+        
     return
+
+  routeListen:() ->
+    window.addEventListener( 'popstate', (event) => @routeChange(event) )
+    return
+
+  parseQuery:( query ) ->
+    obj = {}
+    if query.includes('&')
+      pairs = query.split('&')
+      for pair in pairs
+        obj = @parsePair( pair, obj )
+    else
+      obj = @parsePair( query, obj )
+    obj
+
+  parsePair:( pair, obj ) ->
+    if pair.includes('=')
+      split = pair.split('=')
+      obj[split[0]] = split[1]
+    else
+      console.log( 'Nav.parsePair(), missing =', pair )
+      obj[pair] = ""
+    obj
 
   hasCompKey:( compKey, dir=null ) ->
     has = compKey? and @navs? and @navs[compKey]?
@@ -314,6 +359,10 @@ class Nav
   inArray:(e,a) ->
     @isArray(a) and a.indexOf(e) > -1
 
+  # Call as await sleep(2000) inside an asych function
+  sleep:(ms) ->
+    new Promise( (resolve) => setTimeout( resolve, ms ) )
+
   # --- Innovate --- Inov in one place
 
   # Across the board Inov detector for compKey pageKey and route
@@ -337,7 +386,22 @@ class Nav
 export default Nav
 
 ###
-    prevImg:() ->
+  routeChange:() ->
+    window.addEventListener( 'popstate', () => # event
+      compKey = window.location.hash.substring(2)
+      pracKey = 'None'
+      level   = "Comp"
+      if compKey.includes('/')
+        split   = compKey.split('/')
+        compKey = split[0]
+        pracKey = split[1]
+        level   = "Prac"
+      if @routeOK( compKey )
+        @pub( { source:"Loc", route:compKey, level:'Comp', compKey:compKey, pracKey:'None'  } )
+        @pub( { source:"Loc", route:compKey, level:'Prac', compKey:compKey, pracKey:pracKey } ) if level is 'Prac' )
+    return
+
+  prevImg:() ->
     if @imgsIdx > 0 then @imgsIdx-1 else @imgsNum-1
 
   nextImg:() ->

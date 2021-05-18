@@ -24,7 +24,8 @@ let Store = {
     const manager = new Manager( mix );
 
     const doTest = function( name ) {
-      manager.test( name ); }
+      manager.test( name );
+    }
 
     return { doTest }; }
 

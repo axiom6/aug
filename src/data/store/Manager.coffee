@@ -1,5 +1,4 @@
 
-import Data   from '../appl/Data.js'
 import Memory from '../../base/store/Memory.js'
 import Local  from '../../base/store/Local.js'
 import Index  from '../../base/store/Index.js'
@@ -12,27 +11,29 @@ class Manager
     @dbName     = 'test1'
     @credsUrl   = 'http://admin:athena@127.0.0.1:5984' # Admin host to couchdb
     @couchUrl   = 'http://127.0.0.1:5984'              # Admin host to couchdb
-    @stream     = Data.stream
+    @stream     = mix.stream()
     @Prac       = null
     @Hues       = null
     @Kit        = null
     @source     = null
 
-
   test:( name ) ->
 
-    store = switch name
-      when 'Local' then new Local(  @dbName )
-      when 'Index' then new Index(  @dbName )
-      when 'Fire'  then new Fire(   @dbName )
-      when 'Couch' then new Couch(  @dbName, @couchUrl )
-      else              new Memory( @dbName )
+    @store = switch name
+      when 'Local'  then new Local(  @stream, @dbName )
+      when 'Index'  then new Index(  @stream, @dbName )
+      when 'Fire'   then new Fire(   @stream, @dbName )
+      when 'Couch'  then new Couch(  @stream, @dbName, @couchUrl )
+      when 'Memory' then new Memory( @stream, @dbName )
+      else
+        console.error( 'Manager.test() unknown name', name )
+        null
 
-    @source = store.source
-    store.openTable( 'Prac')
-    store.openTable( 'Hues')
-    @openIndex( store ) if name is   'Index'
-    @suite( store )     if name isnt 'Index'
+    @source = @store.source
+    @store.openTable( 'Prac')
+    @store.openTable( 'Hues')
+    @openIndex( @store ) if name is   'Index'
+    @suite()             if name isnt 'Index'
 
     return
 
@@ -47,59 +48,58 @@ class Manager
          return )
     return
 
-  subscribe:( table, op, store ) =>
+  subscribe:( table, op ) =>
     onSubscribe = ( obj ) =>
       console.log( 'Mgr', { table:table, op:op, source:@source, obj:obj } )
       whereS = (obj) -> true
       whereD = (obj) -> obj.column is 'Embrace'
       switch op
-        when 'add'    then store.get(    table, obj.id )
-        when 'put'    then store.del(    table, obj.id )
-        when 'insert' then store.select( table, whereS )
-        when 'update' then store.remove( table, whereD )
+        when 'add'    then @store.get(    table, obj.id )
+        when 'put'    then @store.del(    table, obj.id )
+        when 'insert' then @store.select( table, whereS )
+        when 'update' then @store.remove( table, whereD )
 
-    #tore.unsubscribe( table, op, @lastSource ) if @lastSource?
-    store.subscribe(   table, op, store.source, onSubscribe )
+    @store.subscribe(   table, op, @store.source, onSubscribe )
     return
 
-  suite:( store ) ->
+  suite:() ->
 
-    console.log( 'Manager.suite()', store.source )
+    console.log( 'Manager.suite()', @store.source )
 
     @data()
 
-    @subscribe( 'Prac',   'add',  store )
-    @subscribe( 'Prac',   'get',  store )
-    @subscribe( 'Prac',   'put',  store )
-    @subscribe( 'Prac',   'del',  store )
+    @subscribe( 'Prac',   'add' )
+    @subscribe( 'Prac',   'get' )
+    @subscribe( 'Prac',   'put' )
+    @subscribe( 'Prac',   'del' )
 
-    @subscribe( 'Hues', 'insert', store )
-    @subscribe( 'Hues', 'select', store )
-    @subscribe( 'Hues', 'update', store )
-    @subscribe( 'Hues', 'remove', store )
+    @subscribe( 'Hues', 'insert' )
+    @subscribe( 'Hues', 'select' )
+    @subscribe( 'Hues', 'update' )
+    @subscribe( 'Hues', 'remove' )
 
-    @subscribe( 'Tables', 'show', store )
-    @subscribe( 'Prac',   'open', store )
-    @subscribe( 'Prac',   'drop', store )
+    @subscribe( 'Tables', 'show' )
+    @subscribe( 'Prac',   'open' )
+    @subscribe( 'Prac',   'drop' )
 
-    store.show()
+    @store.show()
 
-    store.add( 'Prac', @Prac.id, @Prac )
+    @store.add( 'Prac', @Prac.id, @Prac )
     #tore.get( 'Prac', @Prac.id )         # Called after add
-    store.put( 'Prac', @Prac.id, @Prac )
+    @store.put( 'Prac', @Prac.id, @Prac )
     #tore.del( 'Prac', @Prac.id )         # Called after put
 
-    store.insert( 'Hues', @Hues )
+    @store.insert( 'Hues', @Hues )
     #tore.select( 'Hues', (obj) -> true ) # Called after insert
 
     @Hues['Green'].column  = 'Embrace'
     @Hues['Orange'].column = 'Embrace'
     @Hues['Violet'].column = 'Embrace'
-    store.update( 'Hues', @Hues )
+    @store.update( 'Hues', @Hues )
 
     #here = (obj) -> obj.column is 'Embrace'  # Called after update
     #tore.remove( 'Hues', where )
-    #console.log( "Manager.test()", { subjects:store.stream.subjects } )
+    #console.log( "Manager.test()", { subjects:@store.stream.subjects } )
     return
 
   data:() ->

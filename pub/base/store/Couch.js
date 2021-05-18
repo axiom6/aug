@@ -4,8 +4,8 @@ var Couch,
 import Store from './Store.js';
 
 Couch = class Couch extends Store {
-  constructor(dbName, baseUrl) {
-    super(dbName);
+  constructor(stream, dbName, baseUrl) {
+    super(stream, dbName);
     this.baseUrl = baseUrl;
     this.username = 'admin';
     this.password = 'athena';

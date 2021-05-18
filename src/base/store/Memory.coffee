@@ -1,9 +1,15 @@
 import Store  from './Store.js'
 
+something = () ->
+  console.error( 'Memory.something()')
+  return
+
+something()
+
 class Memory extends Store
 
-  constructor:( dbName ) ->
-    super( dbName )
+  constructor:( stream, dbName ) ->
+    super(      stream, dbName )
     @memory = {}
 
   table:( tn ) ->
@@ -14,9 +20,9 @@ class Memory extends Store
        @memory[tn] = {}
        @memory[tn]
 
-  add:( tn, id, obj )    ->
-    @table(tn)[id] = obj
+  add:( tn, id, obj ) ->
 
+    @table(tn)[id] = obj
     @results( tn, 'add', obj )
     return
 
@@ -92,8 +98,3 @@ class Memory extends Store
     return
 
 export default Memory
-
-###
-  console.log( 'Memory.get', { table:tn, id:id, obj:obj } )
-  console.log( 'Memory.add', { table:tn, id:id, obj:@table(tn)[id] } )
-###

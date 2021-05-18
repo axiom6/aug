@@ -4,8 +4,8 @@ var Local,
 import Store from './Store.js';
 
 Local = class Local extends Store {
-  constructor(dbName) {
-    super(dbName);
+  constructor(stream, dbName) {
+    super(stream, dbName);
     this.memory = {};
   }
 

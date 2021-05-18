@@ -20,7 +20,7 @@
       const myRoute =function() {
         return mix.isRoute('Geom'); }
 
-    return { myRoute, }; }
+    return { myRoute }; }
   }
 
   export default Geom;

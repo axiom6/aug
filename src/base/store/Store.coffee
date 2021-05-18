@@ -1,14 +1,14 @@
 
 import Util from '../util/Util.js'
-import Data from '../../data/appl/Data.js'
 
 class Store
 
-  constructor:( @dbName ) ->
-    @stream  = Data.stream
-    @source  = @constructor.name
-    @keyProp = "_id"
-    @tables  = @getTables()
+  constructor:( stream, dbName ) ->
+    @stream   = stream
+    @dbName   = dbName
+    @source   = @constructor.name
+    @keyProp  = "_id"
+    @tables   = @getTables()
 
   toSubject:( table, op ) ->
     table + ':' + op

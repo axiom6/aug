@@ -1,7 +1,5 @@
 var Manager;
 
-import Data from '../appl/Data.js';
-
 import Memory from '../../base/store/Memory.js';
 
 import Local from '../../base/store/Local.js';
@@ -13,13 +11,13 @@ import Fire from '../../base/store/Fire.js';
 import Couch from '../../base/store/Couch.js';
 
 Manager = class Manager {
-  constructor(mix) {
+  constructor(mix1) {
     this.subscribe = this.subscribe.bind(this);
-    this.mix = mix;
+    this.mix = mix1;
     this.dbName = 'test1';
     this.credsUrl = 'http://admin:athena@127.0.0.1:5984'; // Admin host to couchdb
     this.couchUrl = 'http://127.0.0.1:5984'; // Admin host to couchdb
-    this.stream = Data.stream;
+    this.stream = mix.stream();
     this.Prac = null;
     this.Hues = null;
     this.Kit = null;
@@ -27,29 +25,31 @@ Manager = class Manager {
   }
 
   test(name) {
-    var store;
-    store = (function() {
+    this.store = (function() {
       switch (name) {
         case 'Local':
-          return new Local(this.dbName);
+          return new Local(this.stream, this.dbName);
         case 'Index':
-          return new Index(this.dbName);
+          return new Index(this.stream, this.dbName);
         case 'Fire':
-          return new Fire(this.dbName);
+          return new Fire(this.stream, this.dbName);
         case 'Couch':
-          return new Couch(this.dbName, this.couchUrl);
+          return new Couch(this.stream, this.dbName, this.couchUrl);
+        case 'Memory':
+          return new Memory(this.stream, this.dbName);
         default:
-          return new Memory(this.dbName);
+          console.error('Manager.test() unknown name', name);
+          return null;
       }
     }).call(this);
-    this.source = store.source;
-    store.openTable('Prac');
-    store.openTable('Hues');
+    this.source = this.store.source;
+    this.store.openTable('Prac');
+    this.store.openTable('Hues');
     if (name === 'Index') {
-      this.openIndex(store);
+      this.openIndex(this.store);
     }
     if (name !== 'Index') {
-      this.suite(store);
+      this.suite();
     }
   }
 
@@ -62,7 +62,7 @@ Manager = class Manager {
     });
   }
 
-  subscribe(table, op, store) {
+  subscribe(table, op) {
     var onSubscribe;
     onSubscribe = (obj) => {
       var whereD, whereS;
@@ -80,49 +80,48 @@ Manager = class Manager {
       };
       switch (op) {
         case 'add':
-          return store.get(table, obj.id);
+          return this.store.get(table, obj.id);
         case 'put':
-          return store.del(table, obj.id);
+          return this.store.del(table, obj.id);
         case 'insert':
-          return store.select(table, whereS);
+          return this.store.select(table, whereS);
         case 'update':
-          return store.remove(table, whereD);
+          return this.store.remove(table, whereD);
       }
     };
-    //tore.unsubscribe( table, op, @lastSource ) if @lastSource?
-    store.subscribe(table, op, store.source, onSubscribe);
+    this.store.subscribe(table, op, this.store.source, onSubscribe);
   }
 
-  suite(store) {
-    console.log('Manager.suite()', store.source);
+  suite() {
+    console.log('Manager.suite()', this.store.source);
     this.data();
-    this.subscribe('Prac', 'add', store);
-    this.subscribe('Prac', 'get', store);
-    this.subscribe('Prac', 'put', store);
-    this.subscribe('Prac', 'del', store);
-    this.subscribe('Hues', 'insert', store);
-    this.subscribe('Hues', 'select', store);
-    this.subscribe('Hues', 'update', store);
-    this.subscribe('Hues', 'remove', store);
-    this.subscribe('Tables', 'show', store);
-    this.subscribe('Prac', 'open', store);
-    this.subscribe('Prac', 'drop', store);
-    store.show();
-    store.add('Prac', this.Prac.id, this.Prac);
+    this.subscribe('Prac', 'add');
+    this.subscribe('Prac', 'get');
+    this.subscribe('Prac', 'put');
+    this.subscribe('Prac', 'del');
+    this.subscribe('Hues', 'insert');
+    this.subscribe('Hues', 'select');
+    this.subscribe('Hues', 'update');
+    this.subscribe('Hues', 'remove');
+    this.subscribe('Tables', 'show');
+    this.subscribe('Prac', 'open');
+    this.subscribe('Prac', 'drop');
+    this.store.show();
+    this.store.add('Prac', this.Prac.id, this.Prac);
     //tore.get( 'Prac', @Prac.id )         # Called after add
-    store.put('Prac', this.Prac.id, this.Prac);
+    this.store.put('Prac', this.Prac.id, this.Prac);
     //tore.del( 'Prac', @Prac.id )         # Called after put
-    store.insert('Hues', this.Hues);
+    this.store.insert('Hues', this.Hues);
     //tore.select( 'Hues', (obj) -> true ) # Called after insert
     this.Hues['Green'].column = 'Embrace';
     this.Hues['Orange'].column = 'Embrace';
     this.Hues['Violet'].column = 'Embrace';
-    store.update('Hues', this.Hues);
+    this.store.update('Hues', this.Hues);
   }
 
   //here = (obj) -> obj.column is 'Embrace'  # Called after update
   //tore.remove( 'Hues', where )
-  //console.log( "Manager.test()", { subjects:store.stream.subjects } )
+  //console.log( "Manager.test()", { subjects:@store.stream.subjects } )
   data() {
     this.Prac = {
       "_id": "Involve",

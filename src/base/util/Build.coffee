@@ -6,6 +6,8 @@ class Build
 
   # ---- Class Methods for Practices ----
 
+  @planes = ['Info', 'Know','Wise']
+
   @create:( data, type ) ->
     switch type
       when 'Pack' then Build.createPacks( data )
@@ -33,13 +35,13 @@ class Build
 
   @colPractices:( batch ) ->
     prin = batch.Prin.data['Prin']
-    for plane in ['Info', 'Know','Wise']
+    for plane in Build.planes
       batch[plane].data['Prin'] = prin
     return
 
   @rowPractices:( batch ) ->
     rows = batch.Rows.data['Rows']
-    for plane in ['Info','Know','Wise']
+    for plane in Build.planes
       batch[plane].data['Rows'] = rows
     return
 
@@ -80,7 +82,14 @@ class Build
   constructor:( @batch, @komps=null ) ->
     #@Spec   = @batch.Muse.data
     @None    = { name:"None" }
-    Util.noop( @toGroups, @setAdjacents, Build.copyAtt  )
+    Util.noop( @toGroups, @setAdjacents )
+
+  getPlane:( pracKey ) ->
+    for plane in Build.planes
+      pracs = @batch[plane].data
+      for own pkey, prac of pracs when Util.isChild(pkey)
+        return plane if pracKey is pkey
+    'None'
 
   getSpecs:(  plane ) ->
     if @batch[plane]?
@@ -244,7 +253,7 @@ class Build
     console.error( 'Prac.getPractice() practice not found for', { column:column, row:row, plane:plane } )
     null # Landmine
 
-  getPracticeStudy:( row, column, dir ) ->
+  getPracticeStudy:( row, column, plane, dir ) ->
     practice = @getPractice( row, column, plane )
     study    = @getDir( practice, dir )
     study
@@ -282,7 +291,7 @@ class Build
     console.log( '----- End Log Planes ------' )
     return
 
-  logBatch:( batch, comps ) ->  # ['Info','Know','Wise']
+  logBatch:( batch, comps ) ->  # Build.planes
     console.log( '----- Beg Log Batch  ------' )
     for comp in comps
       console.log( "Comp: ", comp )
@@ -315,7 +324,7 @@ class Build
 
   dimDisps:() ->
     for col in ['Embrace','Innovate','Encourage']
-      planes = if col is  'Innovate' then ['Info','Know','Wise'] else ['Info','Know','Wise'] # 'Data',
+      planes = if col is  'Innovate' then Build.planes else Build.planes # 'Data',
       for dir in ['west','north','east','south']
         dim  = @getDim(col,dir)
         dim.column = col
@@ -334,7 +343,7 @@ class Build
 
   colPracs:() ->
     for cname in ['Embrace','Innovate','Encourage']
-      planes = if cname is  'Innovate' then ['Info','Know','Wise'] else ['Info','Know','Wise'] # 'Data',
+      planes = if cname is  'Innovate' then Build.planes else Build.planes # 'Data',
       col = @getCol(cname)
       col.dims = []
       for plane in planes
@@ -352,7 +361,7 @@ class Build
       for dir in ['west','north','east','south' ]
         dim  = @getDim(cname,dir)
         console.log( '  ', dim.name, '------' ) # Learn', 'Do', 'Share ', dir )
-        for plane in [ 'Info',  'Know', 'Wise' ]
+        for plane in Build.planes
           lprac = @getPractice( 'Learn', cname, plane )
           dprac = @getPractice( 'Do',    cname, plane )
           sprac = @getPractice( 'Share', cname, plane )
@@ -366,11 +375,11 @@ class Build
   logAsTable:() ->
     console.log( '----- Beg Log As Table  ------' )
     for cname in ['Embrace','Innovate','Encourage']
-      console.log( col )
+      console.log( cname )
       obj = {}
       for dir in ['west','north','east','south' ]
         dim  = @getDim(cname,dir)
-        for plane in [ 'Info',  'Know', 'Wise' ]
+        for plane in Build.planes
           lprac = @getPractice( 'Learn', cname, plane )
           dprac = @getPractice( 'Do',    cname, plane )
           sprac = @getPractice( 'Share', cname, plane )
@@ -393,7 +402,7 @@ class Build
         dim  = @getDim(col,dir)
         htm += """    <table>\n      <thead>\n        """
         htm += """<tr><th>Plane</th><th>#{dim}</th><th>Learn</th><th>Do</th><th>Share</th></tr>\n      </thead>\n      <tbody>\n"""
-        for plane in [ 'Info',  'Know', 'Wise' ]
+        for plane in Build.planes
 
           lprac = @getPractice( 'Learn', col, plane )
           dprac = @getPractice( 'Do',    col, plane )
@@ -406,7 +415,5 @@ class Build
     htm += """  </body>\n</html>\n"""
     Access.saveHtml( name, htm )
     return
-
-
 
 export default Build

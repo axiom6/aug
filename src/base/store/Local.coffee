@@ -2,8 +2,8 @@ import Store  from './Store.js'
 
 class Local extends Store
 
-  constructor:( dbName ) ->
-    super( dbName )
+  constructor:( stream, dbName ) ->
+    super(      stream, dbName )
     @memory = {}
 
   tableId:( table,  id ) ->

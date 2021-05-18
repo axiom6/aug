@@ -43,6 +43,8 @@ import ScieJson from '../../../data/inno/Scie.json';
 
 import MathJson from '../../../data/inno/Math.json';
 
+import TestJson from '../../../data/muse/Test.json';
+
 Muse = (function() {
   class Muse {
     static start() {
@@ -119,6 +121,7 @@ Muse = (function() {
       Muse.app.provide('mix', Muse.mix);
       Muse.app.provide('nav', Muse.nav);
       router = Muse.router(Muse.routes);
+      //outer.beforeEach( (to,from) => return false; )
       Muse.app.use(router);
       Muse.nav.router = router;
       Muse.app.mount('#muse');
@@ -216,6 +219,11 @@ Muse = (function() {
       url: 'inno/Math.json',
       data: MathJson,
       refine: true
+    },
+    Test: {
+      url: 'muse/Test.json',
+      data: TestJson,
+      refine: true
     }
   };
 
@@ -237,21 +245,21 @@ Muse = (function() {
       }
     },
     {
-      path: "/Prin/Embrace",
+      path: "/Embrace",
       name: "Embrace",
       components: {
         Embrace: Home.Prac
       }
     },
     {
-      path: "/Prin/Innovate",
+      path: "/Innovate",
       name: "Innovate",
       components: {
         Innovate: Home.Prac
       }
     },
     {
-      path: "/Prin/Encourage",
+      path: "/Encourage",
       name: "Encourage",
       components: {
         Encourage: Home.Prac
@@ -265,63 +273,63 @@ Muse = (function() {
       }
     },
     {
-      path: "/Info/Team",
+      path: "/Team",
       name: "Team",
       components: {
         Team: Home.Prac
       }
     },
     {
-      path: "/Info/Domain",
+      path: "/Domain",
       name: "Domain",
       components: {
         Domain: Home.Prac
       }
     },
     {
-      path: "/Info/Relate",
+      path: "/Relate",
       name: "Relate",
       components: {
         Relate: Home.Prac
       }
     },
     {
-      path: "/Info/Adapt",
+      path: "/Adapt",
       name: "Adapt",
       components: {
         Adapt: Home.Prac
       }
     },
     {
-      path: "/Info/Tech",
+      path: "/Tech",
       name: "Tech",
       components: {
         Tech: Home.Prac
       }
     },
     {
-      path: "/Info/Benefit",
+      path: "/Benefit",
       name: "Benefit",
       components: {
         Benefit: Home.Prac
       }
     },
     {
-      path: "/Info/Change",
+      path: "/Change",
       name: "Change",
       components: {
         Change: Home.Prac
       }
     },
     {
-      path: "/Info/Deliver",
+      path: "/Deliver",
       name: "Deliver",
       components: {
         Deliver: Home.Prac
       }
     },
     {
-      path: "/Info/Govern",
+      path: "/Govern",
       name: "Govern",
       components: {
         Govern: Home.Prac
@@ -335,63 +343,63 @@ Muse = (function() {
       }
     },
     {
-      path: "/Know/Involve",
+      path: "/Involve",
       name: "Involve",
       components: {
         Involve: Home.Prac
       }
     },
     {
-      path: "/Know/Discover",
+      path: "/Discover",
       name: "Discover",
       components: {
         Discover: Home.Prac
       }
     },
     {
-      path: "/Know/Understand",
+      path: "/Understand",
       name: "Understand",
       components: {
         Understand: Home.Prac
       }
     },
     {
-      path: "/Know/Conduct",
+      path: "/Conduct",
       name: "Conduct",
       components: {
         Conduct: Home.Prac
       }
     },
     {
-      path: "/Know/Cognition",
+      path: "/Cognition",
       name: "Cognition",
       components: {
         Cognition: Home.Prac
       }
     },
     {
-      path: "/Know/Reason",
+      path: "/Reason",
       name: "Reason",
       components: {
         Reason: Home.Prac
       }
     },
     {
-      path: "/Know/Evolve",
+      path: "/Evolve",
       name: "Evolve",
       components: {
         Evolve: Home.Prac
       }
     },
     {
-      path: "/Know/Educate",
+      path: "/Educate",
       name: "Educate",
       components: {
         Educate: Home.Prac
       }
     },
     {
-      path: "/Know/Culture",
+      path: "/Culture",
       name: "Culture",
       components: {
         Culture: Home.Prac
@@ -405,63 +413,63 @@ Muse = (function() {
       }
     },
     {
-      path: "/Wise/Trust",
+      path: "/Trust",
       name: "Trust",
       components: {
         Trust: Home.Prac
       }
     },
     {
-      path: "/Wise/Nature",
+      path: "/Nature",
       name: "Nature",
       components: {
         Nature: Home.Prac
       }
     },
     {
-      path: "/Wise/Truth",
+      path: "/Truth",
       name: "Truth",
       components: {
         Truth: Home.Prac
       }
     },
     {
-      path: "/Wise/Aware",
+      path: "/Aware",
       name: "Aware",
       components: {
         Aware: Home.Prac
       }
     },
     {
-      path: "/Wise/Create",
+      path: "/Create",
       name: "Create",
       components: {
         Create: Home.Prac
       }
     },
     {
-      path: "/Wise/Mind",
+      path: "/Mind",
       name: "Mind",
       components: {
         Mind: Home.Prac
       }
     },
     {
-      path: "/Wise/Emerge",
+      path: "/Emerge",
       name: "Emerge",
       components: {
         Emerge: Home.Prac
       }
     },
     {
-      path: "/Wise/Inspire",
+      path: "/Inspire",
       name: "Inspire",
       components: {
         Inspire: Home.Prac
       }
     },
     {
-      path: "/Wise/Actualize",
+      path: "/Actualize",
       name: "Actualize",
       components: {
         Actualize: Home.Prac
@@ -472,6 +480,27 @@ Muse = (function() {
       name: "Cube",
       components: {
         Cube: Home.Cube
+      }
+    },
+    {
+      path: "/Test",
+      name: "Test",
+      components: {
+        Cube: Home.Test
+      }
+    },
+    {
+      path: '/Replay',
+      name: 'Replay',
+      components: {
+        Replay: Home.Replay
+      }
+    },
+    {
+      path: '/Result',
+      name: 'Result',
+      components: {
+        Result: Home.Result
       }
     }
   ];
@@ -488,8 +517,8 @@ Muse = (function() {
       pracs: {},
       ikw: false,
       icon: "fas fa-home",
-      north: "Cube",
-      prev: "Cube",
+      north: "Test",
+      prev: "Test",
       south: "Prin",
       next: "Prin"
     },
@@ -551,6 +580,18 @@ Muse = (function() {
       north: "Wise",
       prev: "Wise",
       south: "Wise",
+      next: "Test"
+    },
+    Test: {
+      title: 'Test',
+      key: 'Test',
+      route: 'Test',
+      pracs: {},
+      ikw: false,
+      icon: "fas fa-stethoscope",
+      north: "Cube",
+      prev: "Cube",
+      south: "Cube",
       next: "Home"
     }
   };

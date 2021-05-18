@@ -6,8 +6,8 @@ import Store from './Store.js';
 import firebase from 'firebase';
 
 Fire = class Fire extends Store {
-  constructor(dbName) {
-    super(dbName);
+  constructor(stream, dbName) {
+    super(stream, dbName);
     this.init(this.config());
     //@auth() # Anonomous logins have to be enabled
     this.fd = firebase.database();

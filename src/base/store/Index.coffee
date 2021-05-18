@@ -3,10 +3,9 @@ import Store  from './Store.js'
 
 class Index extends Store
 
-  constructor:( dbName ) ->
-    super()
+  constructor:( stream, dbName ) ->
+    super(      stream, dbName )
     @db        = null
-    @dbName    = dbName
     @dbVersion = 1
     window.indexedDB.deleteDatabase( @dbName )
 
@@ -76,7 +75,7 @@ class Index extends Store
       if callback?
          callback( req.result )
       else
-         @results( table, op, obj )
+         @results( table, op, req.result )
     req.onerror = (error) =>
       @onerror( table, op, error )
     return

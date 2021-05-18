@@ -4,10 +4,9 @@ var Index,
 import Store from './Store.js';
 
 Index = class Index extends Store {
-  constructor(dbName) {
-    super();
+  constructor(stream, dbName) {
+    super(stream, dbName);
     this.db = null;
-    this.dbName = dbName;
     this.dbVersion = 1;
     window.indexedDB.deleteDatabase(this.dbName);
   }
@@ -108,7 +107,7 @@ Index = class Index extends Store {
       if (callback != null) {
         return callback(req.result);
       } else {
-        return this.results(table, op, obj);
+        return this.results(table, op, req.result);
       }
     };
     req.onerror = (error) => {

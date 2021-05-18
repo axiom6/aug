@@ -3,8 +3,8 @@ import Store  from './Store.js'
 
 class Couch extends Store
 
-  constructor:( dbName, baseUrl ) ->
-    super( dbName )
+  constructor:( stream, dbName, baseUrl ) ->
+    super(      stream, dbName )
     @baseUrl  = baseUrl
     @username = 'admin'
     @password = 'athena'

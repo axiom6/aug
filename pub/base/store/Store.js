@@ -3,12 +3,10 @@ var Store,
 
 import Util from '../util/Util.js';
 
-import Data from '../../data/appl/Data.js';
-
 Store = class Store {
-  constructor(dbName) {
+  constructor(stream, dbName) {
+    this.stream = stream;
     this.dbName = dbName;
-    this.stream = Data.stream;
     this.source = this.constructor.name;
     this.keyProp = "_id";
     this.tables = this.getTables();

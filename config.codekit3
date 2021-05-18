@@ -2304,6 +2304,17 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/src\/base\/test\/TestMgr.coffee" : {
+      "ft" : 32,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/base\/test\/TestMgr.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/src\/base\/util\/Access.coffee" : {
       "ft" : 32,
       "ma" : 0,
@@ -3101,7 +3112,7 @@
     "displayValueWasSetByUser" : 1,
     "iconImageName" : "brackets_purple",
     "iconImageWasSetByUser" : 0,
-    "lastBuiltDate" : 641572569.62437904
+    "lastBuiltDate" : 643008067.51878297
   },
   "projectSettings" : {
     "abortBuildOnError" : 1,

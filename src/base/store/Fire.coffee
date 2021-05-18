@@ -4,8 +4,8 @@ import firebase from 'firebase'      # Firebase core (required)
 
 class Fire extends Store
 
-  constructor:( dbName ) ->
-    super( dbName )
+  constructor:( stream, dbName ) ->
+    super(      stream, dbName )
     @init( @config() )
     #@auth() # Anonomous logins have to be enabled
     @fd = firebase.database()

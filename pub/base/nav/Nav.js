@@ -40,19 +40,24 @@ Nav = class Nav {
     this.warnMsg = 'None';
     this.debug = false;
     this.pages = {};
+    this.replays = {};
     this.museLevels = ['Comp', 'Prac', 'Disp'];
     this.museComps = ['Info', 'Know', 'Wise', 'Prin', 'Cube'];
     this.museInovs = ['Info', 'Know', 'Wise', 'Soft', 'Data', 'Scie', 'Math'];
     this.inovComps = ['Info', 'Know', 'Wise'];
     this.keyEvents();
-    this.routeChange();
+    this.routeListen();
   }
 
-  pub(msg) {
-    var obj;
+  pub(msg, isReplay = false) {
+    var obj, objName;
     if (this.msgOK(msg)) {
       obj = this.toObj(msg);
       console.log('Nav.pub()', obj);
+      if (!isReplay && obj.compKey !== 'Test') {
+        objName = obj.compKey + ':' + obj.pracKey + ':' + obj.pageKey + ':' + obj.inovKey;
+        this.replays[objName] = obj;
+      }
       this.doRoute(obj); // Creates route if necessary to publish to
       this.stream.publish('Nav', obj);
     }
@@ -73,7 +78,10 @@ Nav = class Nav {
     if (msg.source == null) {
       this.source = 'None';
     }
-    this.inovKey = this.getInovKey(this.compKey);
+    if (this.level === 'Comp') {
+      this.pracKey = 'None';
+    }
+    this.inovKey = msg.inovKey != null ? msg.inovKey : this.getInovKey(this.compKey);
     obj = {
       source: this.source,
       route: this.route,
@@ -145,20 +153,54 @@ Nav = class Nav {
     return false;
   }
 
-  // Not working
   routeChange() {
-    window.addEventListener('popstate', () => { // event
-      var compKey, level, pracKey, split;
-      compKey = window.location.hash.substring(2);
+    var compKey, hash, obj, objQue, path, pracKey, query, split;
+    hash = window.location.hash.substring(2);
+    path = hash;
+    query = "";
+    objQue = {};
+    if (hash.includes('?')) {
+      split = hash.split('?');
+      path = split[0];
+      query = split[1];
+      objQue = this.parseQuery(query);
+    }
+    if (this.inArray(path, this.museComps)) {
+      compKey = path;
       pracKey = 'None';
-      level = "Comp";
-      if (compKey.includes('/')) {
-        split = compKey.split('/');
-        compKey = split[0];
-        pracKey = split[1];
-        level = "Prac";
-      }
+      console.log('Nav.routeChange()', {
+        level: 'Comp',
+        compKey: compKey,
+        pracKey: pracKey,
+        query: query,
+        objQue: objQue
+      });
       if (this.routeOK(compKey)) {
+        obj = {
+          source: "Loc",
+          route: compKey,
+          level: 'Comp',
+          compKey: compKey,
+          pracKey: pracKey
+        };
+        if (objQue.page != null) {
+          obj.pageKey = objQue.page;
+        }
+        if (objQue.inov != null) {
+          obj.inovKey = objQue.inov;
+        }
+        this.pub(obj);
+      }
+    } else {
+      pracKey = path;
+      compKey = this.build.getPlane(pracKey);
+      console.log('Nav.routeChange()', {
+        level: 'Prac',
+        compKey: compKey,
+        pracKey: pracKey,
+        query: query
+      });
+      if (this.routeOK(pracKey)) {
         this.pub({
           source: "Loc",
           route: compKey,
@@ -166,17 +208,55 @@ Nav = class Nav {
           compKey: compKey,
           pracKey: 'None'
         });
-        if (level === 'Prac') {
-          return this.pub({
-            source: "Loc",
-            route: compKey,
-            level: 'Prac',
-            compKey: compKey,
-            pracKey: pracKey
-          });
+        obj = {
+          source: "Loc",
+          route: compKey,
+          level: 'Prac',
+          compKey: compKey,
+          pracKey: pracKey
+        };
+        if (objQue.page != null) {
+          obj.pageKey = objQue.page;
         }
+        if (objQue.inov != null) {
+          obj.inovKey = objQue.inov;
+        }
+        this.pub(obj);
       }
+    }
+  }
+
+  routeListen() {
+    window.addEventListener('popstate', (event) => {
+      return this.routeChange(event);
     });
+  }
+
+  parseQuery(query) {
+    var i, len1, obj, pair, pairs;
+    obj = {};
+    if (query.includes('&')) {
+      pairs = query.split('&');
+      for (i = 0, len1 = pairs.length; i < len1; i++) {
+        pair = pairs[i];
+        obj = this.parsePair(pair, obj);
+      }
+    } else {
+      obj = this.parsePair(query, obj);
+    }
+    return obj;
+  }
+
+  parsePair(pair, obj) {
+    var split;
+    if (pair.includes('=')) {
+      split = pair.split('=');
+      obj[split[0]] = split[1];
+    } else {
+      console.log('Nav.parsePair(), missing =', pair);
+      obj[pair] = "";
+    }
+    return obj;
   }
 
   hasCompKey(compKey, dir = null) {
@@ -528,6 +608,13 @@ Nav = class Nav {
     return this.isArray(a) && a.indexOf(e) > -1;
   }
 
+  // Call as await sleep(2000) inside an asych function
+  sleep(ms) {
+    return new Promise((resolve) => {
+      return setTimeout(resolve, ms);
+    });
+  }
+
   // --- Innovate --- Inov in one place
 
     // Across the board Inov detector for compKey pageKey and route
@@ -568,7 +655,22 @@ Nav = class Nav {
 export default Nav;
 
 /*
-    prevImg:() ->
+  routeChange:() ->
+    window.addEventListener( 'popstate', () => # event
+      compKey = window.location.hash.substring(2)
+      pracKey = 'None'
+      level   = "Comp"
+      if compKey.includes('/')
+        split   = compKey.split('/')
+        compKey = split[0]
+        pracKey = split[1]
+        level   = "Prac"
+      if @routeOK( compKey )
+        @pub( { source:"Loc", route:compKey, level:'Comp', compKey:compKey, pracKey:'None'  } )
+        @pub( { source:"Loc", route:compKey, level:'Prac', compKey:compKey, pracKey:pracKey } ) if level is 'Prac' )
+    return
+
+  prevImg:() ->
     if @imgsIdx > 0 then @imgsIdx-1 else @imgsNum-1
 
   nextImg:() ->

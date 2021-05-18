@@ -28,19 +28,25 @@
         mix.publish( 'Tocs', 'Close' ); } ) }
   }
 
-  import Dash from '../../base/dash/Dash.vue';
-  import Cube from '../comp/Cube.vue';
-  import Prin from '../prin/Prin.vue';
-  import Comp from '../comp/Comp.vue';
-  import Prac from '../prac/Prac.vue';
-  import Disp from '../disp/Disp.vue';
+  import Dash   from '../../base/dash/Dash.vue';
+  import Cube   from '../comp/Cube.vue';
+  import Prin   from '../prin/Prin.vue';
+  import Comp   from '../comp/Comp.vue';
+  import Prac   from '../prac/Prac.vue';
+  import Disp   from '../disp/Disp.vue';
+  import Test   from '../../base/test/Test.vue';
+  import Replay from '../../base/test/Replay.vue';
+  import Result from '../../base/test/Result.vue';
   
-  Home.Dash = Dash;
-  Home.Cube = Cube;
-  Home.Prin = Prin;
-  Home.Comp = Comp;
-  Home.Prac = Prac;
-  Home.Disp = Disp;
+  Home.Dash   = Dash;
+  Home.Cube   = Cube;
+  Home.Prin   = Prin;
+  Home.Comp   = Comp;
+  Home.Prac   = Prac;
+  Home.Disp   = Disp;
+  Home.Test   = Test;
+  Home.Replay = Replay;
+  Home.Result = Result;
   
   export default Home;
   
