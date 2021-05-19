@@ -6,10 +6,10 @@
     <div   class="comp-comp">
       <template  :key="compIdx" v-for="pracObj in compObj">
         <div :class="pracObj['dir']">
-          <p-sign   v-if="nav.isShow('Comp','Sign')" :pracObj="pracObj"></p-sign>
-          <p-dirs   v-if="nav.isShow('Comp','Dirs')" :pracObj="pracObj"></p-dirs>
-          <p-desc   v-if="nav.isShow('Comp','Desc')" :pracObj="pracObj"></p-desc>
-          <template v-if="nav.isShow('Comp','Conn')">
+          <p-sign   v-if="nav.isShow('Comp','Icons')"  :pracObj="pracObj"></p-sign>
+          <p-dirs   v-if="nav.isShow('Comp','Topics')" :pracObj="pracObj"></p-dirs>
+          <p-desc   v-if="nav.isShow('Comp','Texts')"  :pracObj="pracObj"></p-desc>
+          <template v-if="nav.isShow('Comp','Graphs')">
             <p-conn v-if="!isDim(pracObj)" :pracObj="pracObj" level="Comp"></p-conn>
             <p-sign v-if=" isDim(pracObj)" :pracObj="pracObj"></p-sign>
           </template>
@@ -48,43 +48,12 @@ let Comp = {
     let   compIdx   = ref(0     );
     const debug     = false;
     const inovComps = ['Info','Know','Wise'];
-    const routes    = ['Info','Know','Wise'];
+    const myRows    = ref( nav.pages['Rows'] );
 
-    let Comp = {
-      Sign:{ title:'Icons',  key:'Sign', show:true  },
-      Dirs:{ title:'Topics', key:'Dirs', show:false },
-      Conn:{ title:'Graphs', key:'Conn', show:false },
-      Desc:{ title:'Texts',  key:'Desc', show:false } };
-    let Info = {
-      Core:{ title:'Core', key:"Core", show:true,  icon:"fas fa-th"},
-      Soft:{ title:'Soft', key:"Soft", show:false, icon:"fas fa-codepen"},
-      Data:{ title:'Data', key:"Data", show:false, icon:"fas fa-table"} };
-    let Know  = {
-      Core:{ title:'Core',    key:"Core", show:true,  icon:"fas fa-university"},
-      Scie:{ title:'Science', key:"Scie", show:false, icon:"fas fa-flask" },
-      Math:{ title:'Math',    key:"Math", show:false, icon:"fas fa-calculator"} };
-    let Wise = {
-      Core:{ title:'Core',    key:"Core", show:true, icon:"fas fa-tripadvisor"} };
-    let Rows = {
-      Plane:{ name:'Info',  dir:'cm', icon:"fas fa-th" },
-      Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap"},
-      Do:{    name:'Do',    dir:'do', icon:"fas fa-cog"},
-      Share:{ name:'Share', dir:'sh', icon:"fas fa-share-alt-square"} };
+    const tabPages =  (compArg) => {
+      return nav.pages[compArg]; }
 
-    const myRows  = ref( Rows );
-
-    const tabPages = function( compArg ) {
-      let pages = Comp;
-      switch( compArg ) {
-        case 'Comp': pages = Comp; break;
-        case 'Info': pages = Info; break;
-        case 'Know': pages = Know; break;
-        case 'Wise': pages = Wise; break;
-        case 'Rows': pages = Rows; break; }
-      if( debug ) { console.log( 'Comp.tabPages()', { compArg:compArg, pages:pages } ); }
-      return pages; }
-
-    const onComp = function (obj) {
+    const onComp = (obj) => {
       compKey.value = obj.compKey;
       inovKey.value = obj.inovKey;
       onRows();
@@ -93,34 +62,34 @@ let Comp = {
       if( debug ) { console.log( 'Comp.onComp()', compObj.value ); }
     }
 
-    const isDim = function( pracArg ) {
+    const isDim = (pracArg) => {
       return pracArg.row === "Dim"; }
 
-    const isRows = function () {
+    const isRows = () => {
       return true; }
 
-    const onRows = function () {
+    const onRows = () => {
       const myKey = compKey.value;
-      let                   page = Info;
-      if( myKey==='Know') { page = Know; }
-      if( myKey==='Wise') { page = Wise; }
+      let                   page = nav.pages['Info'];
+      if( myKey==='Know') { page = nav.pages['Know']; }
+      if( myKey==='Wise') { page = nav.pages['Wise']; }
       if( mix.inArray( myKey, inovComps ) ) {
-        myRows.value['Plane'].name = myKey;
-        myRows.value['Plane'].icon = page['Core'].icon; }  }
+        myRows['value']['Plane'].name = myKey;
+        myRows['value']['Plane'].icon = page['Core'].icon; }  }
 
-    const onNav = function (obj) {
-      if( nav.isMyNav(obj,'Comp',routes) ) {
+    const onNav = (obj) => {
+      if( nav.isMyNav(obj,'Comp') ) {
         onComp(obj); } }
 
-    const hasInov = function () {
+    const hasInov = () => {
       let has = mix.inArray( compKey.value, inovComps );
       if( debug ) { console.log( 'Comp.hasInov()', { has:has, compKey:compKey.value, inovComps:inovComps } ); }
       return has; }
 
-    nav.setPages( 'Comp', Comp );
+    // nav.setPages( 'Comp', Comp );
     onComp({ compKey:nav.compKey, inovKey:nav.inovKey } );
 
-    onMounted( function () {
+    onMounted( () => {
       mix.subscribe('Nav', 'Comp', (obj) => { onNav(obj); } ); } )
 
 
@@ -164,6 +133,17 @@ export default Comp;
 </style>
 
 <!--
+    const tabPages = (compArg) => {
+      let pages = Comp;
+      switch( compArg ) {
+        case 'Comp': pages = Comp; break;
+        case 'Info': pages = Info; break;
+        case 'Know': pages = Know; break;
+        case 'Wise': pages = Wise; break;
+        case 'Rows': pages = Rows; break; }
+      if( debug ) { console.log( 'Comp.tabPages()', { compArg:compArg, pages:pages } ); }
+      return pages; }
+
 routKey.value
 -->
 

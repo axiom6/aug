@@ -5,14 +5,13 @@ import Build from '../util/Build.js';
 
 //mport { NavigationFailureType, isNavigationFailure } from 'vue-router'
 Nav = class Nav {
-  constructor(stream, batch, routes1, routeNames, komps1, isMuse = false) {
+  constructor(stream, batch, komps1, pages1, isMuse = false) { // @routes, @routeNames,
     this.tap = this.tap.bind(this);
     this.dir = this.dir.bind(this);
     this.stream = stream;
     this.batch = batch;
-    this.routes = routes1;
-    this.routeNames = routeNames;
     this.komps = komps1;
+    this.pages = pages1;
     this.isMuse = isMuse;
     this.dirs = {
       west: true,
@@ -25,7 +24,7 @@ Nav = class Nav {
     this.navs = this.addInovToNavs(this.komps);
     this.touch = null;
     this.build = new Build(this.batch);
-    this.router = null;
+    //router     =  null
     this.source = 'None';
     this.route = 'Home';
     this.routeLast = 'None';
@@ -38,27 +37,29 @@ Nav = class Nav {
     this.pageKey = 'None';
     this.inovKey = 'None'; // Only used by Tabs to Tocs.vue and Comp.vue
     this.warnMsg = 'None';
-    this.debug = false;
-    this.pages = {};
+    this.debug = true;
     this.replays = {};
+    this.url = 'None';
+    this.ignoreUrl = false;
     this.museLevels = ['Comp', 'Prac', 'Disp'];
-    this.museComps = ['Info', 'Know', 'Wise', 'Prin', 'Cube'];
+    this.museComps = ['Home', 'Prin', 'Info', 'Know', 'Wise', 'Cube', 'Test'];
     this.museInovs = ['Info', 'Know', 'Wise', 'Soft', 'Data', 'Scie', 'Math'];
-    this.inovComps = ['Info', 'Know', 'Wise'];
+    this.musePlanes = ['Info', 'Know', 'Wise'];
     this.keyEvents();
-    this.routeListen();
   }
 
+  // @routeListen()
   pub(msg, isReplay = false) {
     var obj, objName;
     if (this.msgOK(msg)) {
       obj = this.toObj(msg);
+      this.url = this.toUrl(obj);
       console.log('Nav.pub()', obj);
       if (!isReplay && obj.compKey !== 'Test') {
         objName = obj.compKey + ':' + obj.pracKey + ':' + obj.pageKey + ':' + obj.inovKey;
         this.replays[objName] = obj;
       }
-      this.doRoute(obj); // Creates route if necessary to publish to
+      //@doRoute( obj ) # Creates route if necessary to publish to
       this.stream.publish('Nav', obj);
     }
   }
@@ -73,15 +74,17 @@ Nav = class Nav {
   }
 
   toObj(msg) {
-    var obj;
+    var obj, pagesName;
     this.set(msg);
+    pagesName = this.inArray(this.compKey, this.musePlanes) ? this.level : this.compKey;
     if (msg.source == null) {
       this.source = 'None';
     }
     if (this.level === 'Comp') {
       this.pracKey = 'None';
     }
-    this.inovKey = msg.inovKey != null ? msg.inovKey : this.getInovKey(this.compKey);
+    this.pageKey = this.getPageKey(pagesName);
+    this.inovKey = this.getInovKey(this.compKey);
     obj = {
       source: this.source,
       route: this.route,
@@ -109,53 +112,38 @@ Nav = class Nav {
     }
   }
 
-  doRoute(obj) {
+  toUrl(msg) {
+    var url;
+    url = window.location.href;
+    url += msg.compKey;
+    if (msg.pracKey !== 'None') {
+      url += '/' + msg.pracKey;
+    }
+    if (msg.dispKey !== 'None') {
+      url += '/' + msg.dispKey;
+    }
+    if (msg.pageKey !== 'None') {
+      url += '?' + 'page=' + msg.pageKey;
+    }
+    if (msg.inovKey !== 'None' && msg.level === 'Comp') {
+      url += '&' + 'inovate=' + msg.inovKey;
+    }
     if (this.debug) {
-      console.log('Nav.doRoute()', {
-        objRoute: obj.route,
-        routeLast: this.routeLast
-      });
+      console.log('Nav.toUrl()', url);
     }
-    if (obj.source === 'Tabs' || obj.route === 'None' || obj.route === this.routeLast) { // or @isInov(obj.route)
-      return;
-    }
-    if ((obj.route != null) && this.inArray(obj.route, this.routeNames)) {
-      if (this.router != null) {
-        this.router.push({
-          name: obj.route
-        }).then(this.debug ? console.log('Nav.doRoute() success', {
-          route: obj.route
-        }) : void 0).catch((failure) => {
-          return console.log('Nav.doRoute() failure', {
-            route: obj.route,
-            failure: failure
-          });
-        });
-      } else {
-        console.error('Nav.doRoute() router not set');
-      }
-      this.routeLast = obj.route;
-      this.route = obj.route;
-    } else {
-      console.error('Nav.doRoute() undefined or unnamed route', obj.route);
-    }
-  }
-
-  routeOK(path) {
-    var i, len1, ref, route;
-    ref = this.routeNames;
-    for (i = 0, len1 = ref.length; i < len1; i++) {
-      route = ref[i];
-      if (path === route) {
-        return true;
-      }
-    }
-    return false;
+    this.ignoreUrl = true;
+    // window.location.href = url
+    return url;
   }
 
   routeChange() {
     var compKey, hash, obj, objQue, path, pracKey, query, split;
-    hash = window.location.hash.substring(2);
+    if (this.ignoreUrl) {
+      this.ignoreUrl = false;
+      return;
+    }
+    hash = window.location.hash; 
+    // .substring(2)
     path = hash;
     query = "";
     objQue = {};
@@ -175,22 +163,20 @@ Nav = class Nav {
         query: query,
         objQue: objQue
       });
-      if (this.routeOK(compKey)) {
-        obj = {
-          source: "Loc",
-          route: compKey,
-          level: 'Comp',
-          compKey: compKey,
-          pracKey: pracKey
-        };
-        if (objQue.page != null) {
-          obj.pageKey = objQue.page;
-        }
-        if (objQue.inov != null) {
-          obj.inovKey = objQue.inov;
-        }
-        this.pub(obj);
+      obj = {
+        source: "Loc",
+        route: compKey,
+        level: 'Comp',
+        compKey: compKey,
+        pracKey: pracKey
+      };
+      if (objQue.page != null) {
+        obj.pageKey = objQue.page;
       }
+      if (objQue.inov != null) {
+        obj.inovKey = objQue.inov;
+      }
+      this.pub(obj);
     } else {
       pracKey = path;
       compKey = this.build.getPlane(pracKey);
@@ -200,29 +186,27 @@ Nav = class Nav {
         pracKey: pracKey,
         query: query
       });
-      if (this.routeOK(pracKey)) {
-        this.pub({
-          source: "Loc",
-          route: compKey,
-          level: 'Comp',
-          compKey: compKey,
-          pracKey: 'None'
-        });
-        obj = {
-          source: "Loc",
-          route: compKey,
-          level: 'Prac',
-          compKey: compKey,
-          pracKey: pracKey
-        };
-        if (objQue.page != null) {
-          obj.pageKey = objQue.page;
-        }
-        if (objQue.inov != null) {
-          obj.inovKey = objQue.inov;
-        }
-        this.pub(obj);
+      this.pub({
+        source: "Loc",
+        route: compKey,
+        level: 'Comp',
+        compKey: compKey,
+        pracKey: 'None'
+      });
+      obj = {
+        source: "Loc",
+        route: compKey,
+        level: 'Prac',
+        compKey: compKey,
+        pracKey: pracKey
+      };
+      if (objQue.page != null) {
+        obj.pageKey = objQue.page;
       }
+      if (objQue.inov != null) {
+        obj.inovKey = objQue.inov;
+      }
+      this.pub(obj);
     }
   }
 
@@ -442,6 +426,7 @@ Nav = class Nav {
     }
   }
 
+  // Need to int page.keys = Object.keys(pages)
   movePage(page, dir) {
     var idx, len, ndx, pageKey;
     pageKey = this.getPageKey(this.route);
@@ -484,14 +469,12 @@ Nav = class Nav {
     if (this.hasPages(pagesName, false)) {
       return;
     }
-    this.pages[pagesName] = {};
-    this.pages[pagesName].pages = pages;
-    this.pages[pagesName].keys = Object.keys(pages);
+    this.pages[pagesName] = pages;
   }
 
   getPages(pagesName) {
     if (this.hasPages(pagesName, true)) {
-      return this.pages[pagesName].pages;
+      return this.pages[pagesName];
     } else {
       return {};
     }
@@ -499,12 +482,19 @@ Nav = class Nav {
 
   setPageKey(pagesName, pageKey, propPages) {
     var key, page, ref;
-    ref = this.pages[pagesName].pages;
+    ref = this.pages[pagesName];
     for (key in ref) {
       if (!hasProp.call(ref, key)) continue;
       page = ref[key];
       page.show = key === pageKey; // Update nav pages
-      propPages[key].show = key === pageKey; // Also update the propPages in Tabs.vue because it is a copy
+      if (propPages[key] != null) {
+        propPages[key].show = key === pageKey; // Also update the propPages in Tabs.vue because it is a copy
+      } else {
+        console.log('Nav.setPageKey() missing propPages key', {
+          key: key,
+          propPages: propPages
+        });
+      }
     }
   }
 
@@ -513,7 +503,7 @@ Nav = class Nav {
     if (!this.hasPages(pagesName, log)) {
       return 'None';
     }
-    ref = this.pages[pagesName].pages;
+    ref = this.pages[pagesName];
     for (key in ref) {
       if (!hasProp.call(ref, key)) continue;
       page = ref[key];
@@ -525,7 +515,7 @@ Nav = class Nav {
   }
 
   getInovKey(pagesName) {
-    if (this.inArray(pagesName, this.inovComps)) {
+    if (this.inArray(pagesName, this.musePlanes)) {
       return this.getPageKey(pagesName);
     } else {
       return 'None';
@@ -534,7 +524,7 @@ Nav = class Nav {
 
   hasPages(pagesName, log = false) {
     var has;
-    has = this.isDef(this.pages[pagesName]) && this.isDef(this.pages[pagesName].pages) && this.pages[pagesName].keys.length > 0;
+    has = this.isDef(this.pages[pagesName]) && this.isDef(this.pages[pagesName]);
     if (!has && log) {
       console.log('Nav.hasPages()', {
         pagesName: pagesName,
@@ -559,15 +549,11 @@ Nav = class Nav {
     }
   }
 
-  isMyNav(obj, level, routes = null, checkPageKey = false) {
-    if (routes == null) {
-      return obj.level === level;
+  isMyNav(obj, level, checkPageKey = false) { // @routes, @routeNames,
+    if (checkPageKey) {
+      return obj.level === level && this.hasPages(obj.pageKey, true);
     } else {
-      if (checkPageKey) {
-        return obj.level === level && this.inArray(obj.route, routes) && this.hasPages(obj.pageKey, true);
-      } else {
-        return obj.level === level && this.inArray(obj.route, routes);
-      }
+      return obj.level === level;
     }
   }
 
@@ -608,7 +594,7 @@ Nav = class Nav {
     return this.isArray(a) && a.indexOf(e) > -1;
   }
 
-  // Call as await sleep(2000) inside an asych function
+  // Called as await sleep(2000) inside an asych function
   sleep(ms) {
     return new Promise((resolve) => {
       return setTimeout(resolve, ms);
@@ -655,6 +641,40 @@ Nav = class Nav {
 export default Nav;
 
 /*
+ * An important indicator of when Comps and Tabs are instanciated
+  setPages:( pagesName, pages ) ->
+    return if @hasPages(pagesName,false )
+    @pages[pagesName]       = {}
+    @pages[pagesName].pages = pages
+    @pages[pagesName].keys  = Object.keys(pages)
+    return
+
+    @pageKey  = if not msg.pageKey? or msg.pageKey is 'None' then @getPageKey(@level)   else msg.pageKey
+    @inovKey  = if not msg.inovKey? or msg.inovKey is 'None' then @getInovKey(@compKey) else msg.inovKey
+
+  doRoute:( obj ) ->
+    if @debug then console.log( 'Nav.doRoute()', { objRoute:obj.route, routeLast:@routeLast})
+    return if obj.source is 'Tabs' or obj.route is 'None' or obj.route is @routeLast # or @isInov(obj.route)
+    if obj.route? and @inArray( obj.route, @routeNames )
+      if @router?
+        @router.push( { name:obj.route } )
+          .then(
+            if @debug then console.log( 'Nav.doRoute() success', { route:obj.route } ) )
+          .catch( (failure) =>
+            console.log( 'Nav.doRoute() failure', { route:obj.route, failure:failure } ) )
+      else
+        console.error( 'Nav.doRoute() router not set' )
+      @routeLast = obj.route
+      @route     = obj.route
+    else
+      console.error( 'Nav.doRoute() undefined or unnamed route', obj.route )
+    return
+
+  routeOK:( path ) ->
+    for route in @routeNames when path is route
+      return true
+    false
+
   routeChange:() ->
     window.addEventListener( 'popstate', () => # event
       compKey = window.location.hash.substring(2)
@@ -675,4 +695,4 @@ export default Nav;
 
   nextImg:() ->
     if @imgsIdx < @imgsNum-1 then @imgsIdx+1 else 0
-*/
+ */

@@ -3,8 +3,8 @@
   <div class="disp-pane">
     <d-tabs :compKey="'Disp'" :pages="pages"></d-tabs>
     <div :key="dispIdx">
-      <d-desc v-if="nav.isShow('Disp','Desc')" :dispObj="dispObj" :from="'Disp'"></d-desc>
-      <d-dims v-if="nav.isShow('Disp','Dims')" :dispObj="dispObj" :from="'Disp'"></d-dims>
+      <d-dims v-if="nav.isShow('Disp','Topics')" :dispObj="dispObj" :from="'Disp'"></d-dims>
+      <d-desc v-if="nav.isShow('Disp','Texts')"  :dispObj="dispObj" :from="'Disp'"></d-desc>
     </div>
   </div>
 </template>
@@ -27,16 +27,14 @@
       const dispObj = ref(null);
       const dispIdx = ref(0);
       const debug   = false;
-      const pages   = {
-        Desc: { title:'Descriptions', key:'Desc', show:true  },
-        Dims: { title:'Disciplines',  key:'Dims', show:false } };
+      const pages   = nav.pages['Disp']
 
       const onDisp = function( obj ) {
         dispObj.value = mix.dispObject( obj.compKey, obj.inovKey, obj.pracKey, obj.dispKey );
         dispIdx.value++;
         if( mix.isDef(dispObj.value) ) {
           if( debug ) {
-            console.log('Disp.onDisp()', { pageKey:obj.pageKey, dims:pages['Dims'].show, desc:pages['Desc'].show } );
+            console.log('Disp.onDisp()', { pageKey:obj.pageKey, dims:pages['Topics'].show, desc:pages['Texts'].show } );
             console.log('Disp.onDisp()',
                 { comp:obj.compKey, inov:obj.inovKey, prac:obj.pracKey, disp:obj.dispKey, dispObj:dispObj.value } ); } }
         else {
@@ -49,7 +47,7 @@
             onDisp( obj ); } }
 
       onBeforeMount( function () {
-        nav.setPages( 'Disp', pages );
+        // nav.setPages( 'Disp', pages );
         let obj = {}
         obj.compKey = nav.compKey;
         obj.pracKey = nav.pracKey;

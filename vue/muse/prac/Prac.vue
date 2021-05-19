@@ -3,9 +3,9 @@
   <div   class="prac-pane">
     <b-tabs :compKey="'Prac'" :pages="pages"></b-tabs>
     <div class="prac-prac" :key="pracIdx">
-      <p-dirs v-show="nav.isShow('Prac','Dirs')" :pracObj="pracObj"></p-dirs>
-      <p-conn   v-if="nav.isShow('Prac','Conn')" :pracObj="pracObj" level="Prac"></p-conn>
-      <p-desc v-show="nav.isShow('Prac','Desc')" :pracObj="pracObj"></p-desc>
+      <p-dirs v-show="nav.isShow('Prac','Topics')" :pracObj="pracObj"></p-dirs>
+      <p-conn   v-if="nav.isShow('Prac','Graphs')" :pracObj="pracObj" level="Prac"></p-conn>
+      <p-desc v-show="nav.isShow('Prac','Texts')"  :pracObj="pracObj"></p-desc>
     </div>
   </div>
 </template>
@@ -30,10 +30,7 @@
       const pracObj = ref(null);
       const pracIdx = ref(0   );
       
-      const pages = {
-        Dirs: { title:'Topics', key:'Dirs', show:true  },
-        Conn: { title:'Graph',  key:'Conn', show:false },
-        Desc: { title:'Text',   key:'Desc', show:false } };
+      const pages = nav.pages['Prac']
 
       const onPrac = (obj) => {
         pracObj.value = mix.pracObject( obj.compKey, obj.inovKey, obj.pracKey );
@@ -57,7 +54,7 @@
       }
 
       onBeforeMount( () => {
-        nav.setPages( 'Prac', pages );
+        // nav.setPages( 'Prac', pages );
         let obj = {}
         obj.compKey = nav.compKey;
         obj.pracKey = toPracKey(nav.pracKey);

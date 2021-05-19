@@ -16,12 +16,8 @@ let Replay = {
     const nav     = inject('nav');
     const testMgr = new TestMgr(nav);
 
-    const doReplay = async () => {
-      for( const [key,obj] of Object.entries(nav.replays) ) {
-        await nav.sleep( 1000 );
-        if( key===false ) {}
-        obj.source = 'Replay'
-        nav.pub( obj, true ); } } // console.log( key, obj );
+    const doReplay = () => {
+      testMgr.doReplay(); }
 
     const opReplay = () => {
       testMgr.saveReplay( 'Test', 'Muse'); }
@@ -49,8 +45,11 @@ export default Replay;
 </style>
 
 <!--
-    try {
-      local  = new  Local('Test'); }
-    catch (error) {
-      console.error( 'Replay new Local()', error ); }
+    const doReplay = async () => {
+      for( const [key,obj] of Object.entries(nav.replays) ) {
+        await nav.sleep( 1000 );
+        if( key===false ) {}
+        obj.source = 'Replay'
+        nav.pub( obj, true ); } } // console.log( key, obj );
+
 -->

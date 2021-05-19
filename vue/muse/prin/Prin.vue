@@ -5,8 +5,8 @@
     <div class="prin-comp">
         <template v-for="pracObj in compObj" :key="compIdx">
           <div   :class="pracObj['dir']" :ref="pracObj['name']">
-            <p-sign v-show="nav.isShow('Prin','Sign')" :pracObj="pracObj"></p-sign>
-            <p-dirs v-show="nav.isShow('Prin','Dirs')" :pracObj="pracObj"></p-dirs>
+            <p-sign v-show="nav.isShow('Prin','Icons')"  :pracObj="pracObj"></p-sign>
+            <p-dirs v-show="nav.isShow('Prin','Topics')" :pracObj="pracObj"></p-dirs>
           </div>
         </template>
       </div>
@@ -26,24 +26,21 @@
 
     setup() {
 
-      const mix = inject( 'mix' );
-      const nav = inject( 'nav' );
-    
+      const mix     = inject( 'mix' );
+      const nav     = inject( 'nav' );
       const compKey = 'Prin'
       const compObj = ref(null );
       const pracObj = ref(null );
       const compIdx = ref(0    );
-      const pages = {
-        Sign: { title:'Icons',  key:'Sign', show:true  },
-        Dirs: { title:'Topics', key:'Dirs', show:false } };
+      const pages   = nav.pages['Prin']
 
       const onComp = function( compKey ) {
-        nav.setPages( compKey, pages );
+        // nav.setPages( compKey, pages );
         compObj.value = mix.compObject(compKey);
         compIdx.value++; }
 
       const onNav = (obj) => {
-        if( nav.isMyNav(obj,'Comp',[compKey]) ) {
+        if( nav.isMyNav(obj,'Comp') ) {
           onComp( obj.compKey ); } }
 
       onBeforeMount( function() {

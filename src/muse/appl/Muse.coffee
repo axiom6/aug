@@ -8,8 +8,9 @@ import Touch  from '../../base/nav/Touch.js'
 import Mix    from '../../base/nav/Mix.js'
 
 import { createApp }    from 'vue'    #
-import { createRouter, createWebHashHistory } from 'vue-router'
-import Home             from '../../../vue/muse/appl/Muse.vue';
+
+import Home             from '../../../vue/muse/appl/Home.vue';
+import Dash             from '../../../vue/muse/appl/Dash.vue';
 
 #mport MuseLDjs from './MuseLD.js'
 import MuseLD   from '../../../src/muse/appl/MuseLD.json'
@@ -80,6 +81,127 @@ class Muse
   #{ path:"/Comp", name:"Comp", components:{ Comp:Home.Comp } },
   #{ path:'/Prac', name:'Prac', components:{ Prac:Home.Prac } },
 
+  # Toc.vue components and routes with no west or east directions
+  Muse.komps = {
+    Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
+    north:"Test", prev:"Test", south:"Prin",  next:"Prin"  }
+    Prin:{ title:'Prin', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",
+    north:"Home", prev:"Home", south:"Info",  next:"Info" }
+    Info:{ title:'Info', key:'Info', route:'Info', pracs:{}, ikw:true,  icon:"fas fa-th",
+    north:"Prin", prev:"Prin", south:"Know",  next:"Know" }
+    Know:{ title:'Know', key:'Know', route:'Know', pracs:{}, ikw:true,  icon:"fas fa-university",
+    north:"Info", prev:"Info", south:"Wise",  next:"Wise" }
+    Wise:{ title:'Wise', key:'Wise', route:'Wise', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor",
+    north:"Know", prev:"Know", south:"Home",  next:"Home" }
+    Cube:{ title:'Cube', key:'Cube', route:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes",
+    north:"Wise", prev:"Wise", south:"Wise",  next:"Test"  }
+    Test:{ title:'Test', key:'Test', route:'Test', pracs:{}, ikw:false, icon:"fas fa-stethoscope",
+    north:"Cube", prev:"Cube", south:"Cube",  next:"Home"  } }
+
+  # 2. Initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
+  Muse.init =   ( batch ) ->
+    Muse.Batch  = batch # Not necessary here, but assigned for compatibilitry
+    Muse.myName = 'Muse'
+    subjects    = ["Nav"]
+    infoSpec    = { subscribe:false, publish:false, subjects:subjects}
+    Muse.stream = new Stream( subjects, infoSpec )
+    Muse.mix    = new Mix(   Muse )
+    Muse.nav    = new Nav(   Muse.stream, batch, Muse.komps, Muse.pages, true )
+    Muse.touch  = new Touch( Muse.stream, Muse.nav )
+    Muse.build  = new Build( batch, Muse.komps )
+    #use.cache  = new Cache( Muse.stream )
+    Access.buildInnov( batch, 'Data',   'Info' )
+    Access.mergePracs( batch, 'Prin', ['Info','Know','Wise'] ) # 'Data'
+    Muse.mergeCols()
+    try            # A lot can go wrong with vue3 initialization so trap errors
+      Muse.vue3()
+    catch error
+      console.error( 'Muse.vue3 app.use error', error )
+    return
+
+  Muse.vue3 = () ->
+    Muse.app = createApp( Dash )
+    Muse.app.provide('mix',  Muse.mix )
+    Muse.app.provide('nav',  Muse.nav )
+    Muse.app.mount('#muse')
+    Muse.nav.pub( { source:"Muse", route:"Home", level:"Comp", compKey:"Home" } )
+    return
+
+  # Lazy loader with dynamic import()
+  Muse.lazy = (name) ->
+    path = "../../#{name}.js"
+    if path is false then {}
+    return `import( /* @vite-ignore */ path )`
+
+  # Merges principles and innovations into comp practices
+  Muse.mergeCols = ( ) ->
+    Muse.build.dimDisps() # Add disps to every dim - dimension
+    Muse.build.colPracs() # Add pracs to every col
+    return
+
+  # Log practices for diagnostics
+  Muse.logPracs = ( compk ) ->
+    console.log( 'Muse.pracs', Muse.Batch[compk].data[compk].pracs )
+    return
+
+  Muse.pages = {
+    Comp: {
+      Icons:{  title:'Icons',  key:'Icons',  show:true  },
+      Topics:{ title:'Topics', key:'Topics', show:false },
+      Graphs:{ title:'Graphs', key:'Graphs', show:false },
+      Texts:{  title:'Texts',  key:'Texts',  show:false } }
+    Prac: {
+      Topics: { title:'Topics', key:'Topics', show:true  },
+      Graphs: { title:'Graphs', key:'Graphs', show:false },
+      Texts:  { title:'Texts',  key:'Texts',  show:false } }
+    Disp: {
+      Topics: { title:'Topics', key:'Topics', show:true  },
+      Texts:  { title:'Texts',  key:'Texts',  show:false } }
+    Info: {
+      Core:{ title:'Core', key:"Core", show:true,  icon:"fas fa-th"},
+      Soft:{ title:'Soft', key:"Soft", show:false, icon:"fas fa-codepen"},
+      Data:{ title:'Data', key:"Data", show:false, icon:"fas fa-table"} }
+    Know: {
+      Core:{    title:'Core',    key:"Core",    show:true,  icon:"fas fa-university"},
+      Science:{ title:'Science', key:"Science", show:false, icon:"fas fa-flask" },
+      Math:{    title:'Math',    key:"Math",    show:false, icon:"fas fa-calculator"} }
+    Wise: {
+      Core:{ title:'Core', key:"Core", show:true, icon:"fas fa-tripadvisor"} }
+    Rows: {
+      Plane:{ name:'Info',  dir:'cm', icon:"fas fa-th" },
+      Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap"},
+      Do:{    name:'Do',    dir:'do', icon:"fas fa-cog"},
+      Share:{ name:'Share', dir:'sh', icon:"fas fa-share-alt-square"} }
+    Prin:{
+      Icons:  { title:'Icons',  key:'Icons',  show:true  },
+      Topics: { title:'Topics', key:'Topics', show:false } }
+  }
+
+export default Muse
+
+###
+import { createRouter, createWebHashHistory } from 'vue-router'
+
+  Muse.vue3 = () ->
+    Muse.app = createApp( Dash )
+    Muse.app.provide('mix',  Muse.mix )
+    Muse.app.provide('nav',  Muse.nav )
+    router = Muse.router( Muse.routes )
+    router.beforeEach( (to,from) => false )
+    Muse.app.use(        router )
+    Muse.nav.router    = router
+    Muse.app.mount('#muse')
+    Muse.nav.doRoute( { route:'Home' } )
+    return
+
+  # Vue Router Routes
+  Muse.mix    = new Mix(   Muse, Muse.routeNames )
+  Muse.nav    = new Nav(   Muse.stream, batch, Muse.routes, Muse.routeNames, Muse.komps, true )
+
+  Muse.router = ( routes ) ->
+    createRouter( { routes:routes, history:createWebHashHistory() } )
+
+
   Muse.routes = [
     {   path:"/",           name:"Home",       components:{ Home:      Home      } },
     {   path:"/Prin",       name:"Prin",       components:{ Prin:      Home.Prin } },
@@ -122,68 +244,6 @@ class Muse
       { path:'/Result',     name:'Result',     components:{ Result:    Home.Result } }
 ]
 
-  Muse.routeNames = Muse.createRouteNames( Muse.routes ) # For router-links in View.vue
-
-  # Toc.vue components and routes with no west or east directions
-  Muse.komps = {
-    Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
-    north:"Test", prev:"Test", south:"Prin",  next:"Prin"  }
-    Prin:{ title:'Prin', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",
-    north:"Home", prev:"Home", south:"Info",  next:"Info" }
-    Info:{ title:'Info', key:'Info', route:'Info', pracs:{}, ikw:true,  icon:"fas fa-th",
-    north:"Prin", prev:"Prin", south:"Know",  next:"Know" }
-    Know:{ title:'Know', key:'Know', route:'Know', pracs:{}, ikw:true,  icon:"fas fa-university",
-    north:"Info", prev:"Info", south:"Wise",  next:"Wise" }
-    Wise:{ title:'Wise', key:'Wise', route:'Wise', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor",
-    north:"Know", prev:"Know", south:"Home",  next:"Home" }
-    Cube:{ title:'Cube', key:'Cube', route:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes",
-    north:"Wise", prev:"Wise", south:"Wise",  next:"Test"  }
-    Test:{ title:'Test', key:'Test', route:'Test', pracs:{}, ikw:false, icon:"fas fa-stethoscope",
-    north:"Cube", prev:"Cube", south:"Cube",  next:"Home"  } }
-
-  # 2. Initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
-  Muse.init =   ( batch ) ->
-    Muse.Batch  = batch # Not necessary here, but assigned for compatibilitry
-    Muse.myName = 'Muse'
-    subjects    = ["Nav"]
-    infoSpec    = { subscribe:false, publish:false, subjects:subjects}
-    Muse.stream = new Stream( subjects, infoSpec )
-    Muse.mix    = new Mix(   Muse, Muse.routeNames )
-    Muse.nav    = new Nav(   Muse.stream, batch, Muse.routes, Muse.routeNames, Muse.komps, true )
-    Muse.touch  = new Touch( Muse.stream, Muse.nav )
-    Muse.build  = new Build( batch, Muse.komps )
-    #use.cache  = new Cache( Muse.stream )
-    Access.buildInnov( batch, 'Data',   'Info' )
-    Access.mergePracs( batch, 'Prin', ['Info','Know','Wise'] ) # 'Data'
-    Muse.mergeCols()
-    try            # A lot can go wrong with vue3 initialization so trap errors
-      Muse.vue3()
-    catch error
-      console.error( 'Muse.vue3 app.use error', error )
-    return
-
-  Muse.vue3 = () ->
-    Muse.app = createApp( Home.Dash   )
-    Muse.app.provide('mix',  Muse.mix )
-    Muse.app.provide('nav',  Muse.nav )
-    router = Muse.router( Muse.routes )
-    #outer.beforeEach( (to,from) => return false; )
-    Muse.app.use(        router )
-    Muse.nav.router    = router
-    Muse.app.mount('#muse')
-    Muse.nav.doRoute( { route:'Home' } )
-    return
-
-  # Lazy loader with dynamic import()
-  Muse.lazy = (name) ->
-    path = "../../#{name}.js"
-    if path is false then {}
-    return `import( /* @vite-ignore */ path )`
-
-  # Vue Router Routes
-  Muse.router = ( routes ) ->
-    createRouter( { routes:routes, history:createWebHashHistory() } )
-
   Muse.createRouteNames = ( routes ) ->
     routeNames = []
     for route in routes
@@ -193,20 +253,8 @@ class Muse
           routeNames.push( child.name )
     routeNames
 
-  # Merges principles and innovations into comp practices
-  Muse.mergeCols = ( ) ->
-    Muse.build.dimDisps() # Add disps to every dim - dimension
-    Muse.build.colPracs() # Add pracs to every col
-    return
+  Muse.routeNames = Muse.createRouteNames( Muse.routes ) # For router-links in View.vue
 
-  # Log practices for diagnostics
-  Muse.logPracs = ( compk ) ->
-    console.log( 'Muse.pracs', Muse.Batch[compk].data[compk].pracs )
-    return
-
-export default Muse
-
-###
   Muse.routes = [
     { path:"/",     name:"Home", components:{ Home:Home } },
     { path:"/Principles",  name:"Prin", components:{ Prin: Home.Prin }, children:[

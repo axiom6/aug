@@ -6,9 +6,8 @@ import Util from '../util/Util.js';
 import Vis from '../../base/draw/Vis.js';
 
 Mix = class Mix {
-  constructor(Main, routeNames) {
+  constructor(Main) {
     Mix.Main = Main;
-    Mix.routeNames = routeNames;
   }
 
   // Util
@@ -223,10 +222,6 @@ Mix = class Mix {
     return Mix.Main.komps;
   }
 
-  routeNames() {
-    return Mix.routeNames;
-  }
-
   subset(compk, filter) {
     var filts, key, prac, ref;
     filts = {};
@@ -276,7 +271,7 @@ Mix = class Mix {
     obj = {};
     if (Mix.Main.Batch[compKey] != null) {
       obj = Mix.Main.Batch[compKey].data.pracs;
-    } else {
+    } else if (compKey !== 'Home' && compKey !== 'Cube') {
       console.error('Mix.compObject() bad compKey', compKey);
     }
     return obj;

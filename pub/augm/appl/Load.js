@@ -20,7 +20,7 @@ Load = class Load {
       case 'Wood':
         return this.lazy('../../../vue/augm/wood/Wood.vue');
       default:
-        return this.lazy('../../../vue/augm/appl/Appl.vue');
+        return this.lazy('../../../vue/augm/appl/Augm.vue');
     }
   }
 

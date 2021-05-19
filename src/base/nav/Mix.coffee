@@ -4,9 +4,8 @@ import Vis  from '../../base/draw/Vis.js'
 
 class Mix
 
-  constructor:( Main, routeNames ) ->
-    Mix.Main       = Main
-    Mix.routeNames = routeNames
+  constructor:( Main ) ->
+    Mix.Main =  Main
 
   # Util
   isDef: (d) ->
@@ -125,8 +124,6 @@ class Mix
     Mix.Main.Batch[compk].data.comps
   kompsTocs: () ->   # For Tocs.vue
     Mix.Main.komps
-  routeNames: () ->
-    Mix.routeNames
   subset: (compk, filter) ->
     filts = {}
     for own key, prac of @pracs(compk) when filter(prac)
@@ -150,8 +147,8 @@ class Mix
     obj = {}
     if       Mix.Main.Batch[compKey]?
        obj = Mix.Main.Batch[compKey].data.pracs
-    else
-       console.error( 'Mix.compObject() bad compKey', compKey )
+    else if compKey isnt 'Home' and compKey isnt 'Cube'
+      console.error( 'Mix.compObject() bad compKey', compKey )
     obj
 
   inovObject:( compKey, inovKey ) ->

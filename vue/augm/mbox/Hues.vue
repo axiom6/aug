@@ -38,7 +38,7 @@
       mix.addScript( "/assets/mathbox-bundle.js" )
 
       const onNav = function(obj) {
-        if( nav.isMyNav( obj,'Prac',[compKey],true) ) {
+        if( nav.isMyNav( obj,'Prac' ) ) {
             pageIdx.value++; } } // console.log( 'Darw.onNav()', pages );
 
       onMounted( function () {

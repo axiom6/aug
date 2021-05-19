@@ -29,7 +29,7 @@
           presKey:'None', imgsNum:0, imgsIdx:0 } ); }, // this.nav.dirsNavd('Init');
 
       onNav: function (obj) {
-        if( this.nav.isMyNav(obj,'Prac',['Talk']) ) {
+        if( this.nav.isMyNav(obj,'Prac') ) {
             this.onSect( obj.pracKey, obj.dispKey, obj.presKey, obj.imgsIdx ); } },
 
       onSect: function( talkKey, sectKey, presKey, imgsIdx ) {

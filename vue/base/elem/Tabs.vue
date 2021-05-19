@@ -22,7 +22,7 @@ import { inject, ref } from 'vue';
       const tabsIdx = ref(0);
       const pageObj = ref(null);
       let   compKey = props.isComp ? 'Comp' : props.compKey;
-      nav.setPages( compKey, props.pages );
+      // nav.setPages( compKey, props.pages );
       const pageKey = ref( nav.getPageKey( compKey, true ) );
       const debug   = false;
       if( debug ) { console.log( 'Tabs.setup()', {pageKey:pageKey.value,compKey:compKey,pages:nav.getPages(compKey)}); }
@@ -35,6 +35,7 @@ import { inject, ref } from 'vue';
       const onPage = (pageArg) => {
         if( nav.hasPages( compKey,true) ) {
           pageKey.value = pageArg;
+          if( debug ) { console.log( 'Tabs.onPage()', { compKey:compKey, pageKey:pageArg, pages:props.pages } ); }
           nav.setPageKey( compKey, pageArg, props.pages );
           tabsIdx.value++; }
         else {
@@ -51,7 +52,7 @@ import { inject, ref } from 'vue';
         return positions[props.position]; }
 
       const classTab = (pageArg) => {
-        if( debug ) { console.log( 'Tabs.classTab', { pageKey:pageKey.value, pageArg:pageArg } ) }
+        // if( debug ) { console.log( 'Tabs.classTab', { pageKey:pageKey.value, pageArg:pageArg } ) }
         return pageKey.value === pageArg ? 'tabs-tab-active' : 'tabs-tab'; }
 
       return { pageObj, tabsIdx, doPage, classTab, stylePos } }

@@ -1,5 +1,9 @@
 
 Debug
+  1. Fix Science inov with mix.compObject()
+  2. Set location.href loop
+
+Features
   1. Get Touch working again
   2. Work on Directions
   3. Scroll Tocs   on Mobile

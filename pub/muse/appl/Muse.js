@@ -16,12 +16,9 @@ import {
   createApp
 } from 'vue';
 
-import {
-  createRouter,
-  createWebHashHistory
-} from 'vue-router';
+import Home from '../../../vue/muse/appl/Home.vue';
 
-import Home from '../../../vue/muse/appl/Muse.vue';
+import Dash from '../../../vue/muse/appl/Dash.vue';
 
 import MuseLD from '../../../src/muse/appl/MuseLD.json';
 
@@ -95,8 +92,8 @@ Muse = (function() {
         subjects: subjects
       };
       Muse.stream = new Stream(subjects, infoSpec);
-      Muse.mix = new Mix(Muse, Muse.routeNames);
-      Muse.nav = new Nav(Muse.stream, batch, Muse.routes, Muse.routeNames, Muse.komps, true);
+      Muse.mix = new Mix(Muse);
+      Muse.nav = new Nav(Muse.stream, batch, Muse.komps, Muse.pages, true);
       Muse.touch = new Touch(Muse.stream, Muse.nav);
       Muse.build = new Build(batch, Muse.komps);
       //use.cache  = new Cache( Muse.stream )
@@ -116,17 +113,15 @@ Muse = (function() {
     }
 
     static vue3() {
-      var router;
-      Muse.app = createApp(Home.Dash);
+      Muse.app = createApp(Dash);
       Muse.app.provide('mix', Muse.mix);
       Muse.app.provide('nav', Muse.nav);
-      router = Muse.router(Muse.routes);
-      //outer.beforeEach( (to,from) => return false; )
-      Muse.app.use(router);
-      Muse.nav.router = router;
       Muse.app.mount('#muse');
-      Muse.nav.doRoute({
-        route: 'Home'
+      Muse.nav.pub({
+        source: "Muse",
+        route: "Home",
+        level: "Comp",
+        compKey: "Home"
       });
     }
 
@@ -137,30 +132,6 @@ Muse = (function() {
         ({});
       }
       return import( /* @vite-ignore */ path );
-    }
-
-    static router(routes) {
-      return createRouter({
-        routes: routes,
-        history: createWebHashHistory()
-      });
-    }
-
-    static createRouteNames(routes) {
-      var child, i, j, len, len1, ref, route, routeNames;
-      routeNames = [];
-      for (i = 0, len = routes.length; i < len; i++) {
-        route = routes[i];
-        routeNames.push(route.name);
-        if (route.children != null) {
-          ref = route.children;
-          for (j = 0, len1 = ref.length; j < len1; j++) {
-            child = ref[j];
-            routeNames.push(child.name);
-          }
-        }
-      }
-      return routeNames;
     }
 
     static mergeCols() {
@@ -229,285 +200,7 @@ Muse = (function() {
 
   //{ path:"/Comp", name:"Comp", components:{ Comp:Home.Comp } },
   //{ path:'/Prac', name:'Prac', components:{ Prac:Home.Prac } },
-  Muse.routes = [
-    {
-      path: "/",
-      name: "Home",
-      components: {
-        Home: Home
-      }
-    },
-    {
-      path: "/Prin",
-      name: "Prin",
-      components: {
-        Prin: Home.Prin
-      }
-    },
-    {
-      path: "/Embrace",
-      name: "Embrace",
-      components: {
-        Embrace: Home.Prac
-      }
-    },
-    {
-      path: "/Innovate",
-      name: "Innovate",
-      components: {
-        Innovate: Home.Prac
-      }
-    },
-    {
-      path: "/Encourage",
-      name: "Encourage",
-      components: {
-        Encourage: Home.Prac
-      }
-    },
-    {
-      path: "/Info",
-      name: "Info",
-      components: {
-        Info: Home.Comp
-      }
-    },
-    {
-      path: "/Team",
-      name: "Team",
-      components: {
-        Team: Home.Prac
-      }
-    },
-    {
-      path: "/Domain",
-      name: "Domain",
-      components: {
-        Domain: Home.Prac
-      }
-    },
-    {
-      path: "/Relate",
-      name: "Relate",
-      components: {
-        Relate: Home.Prac
-      }
-    },
-    {
-      path: "/Adapt",
-      name: "Adapt",
-      components: {
-        Adapt: Home.Prac
-      }
-    },
-    {
-      path: "/Tech",
-      name: "Tech",
-      components: {
-        Tech: Home.Prac
-      }
-    },
-    {
-      path: "/Benefit",
-      name: "Benefit",
-      components: {
-        Benefit: Home.Prac
-      }
-    },
-    {
-      path: "/Change",
-      name: "Change",
-      components: {
-        Change: Home.Prac
-      }
-    },
-    {
-      path: "/Deliver",
-      name: "Deliver",
-      components: {
-        Deliver: Home.Prac
-      }
-    },
-    {
-      path: "/Govern",
-      name: "Govern",
-      components: {
-        Govern: Home.Prac
-      }
-    },
-    {
-      path: "/Know",
-      name: "Know",
-      components: {
-        Know: Home.Comp
-      }
-    },
-    {
-      path: "/Involve",
-      name: "Involve",
-      components: {
-        Involve: Home.Prac
-      }
-    },
-    {
-      path: "/Discover",
-      name: "Discover",
-      components: {
-        Discover: Home.Prac
-      }
-    },
-    {
-      path: "/Understand",
-      name: "Understand",
-      components: {
-        Understand: Home.Prac
-      }
-    },
-    {
-      path: "/Conduct",
-      name: "Conduct",
-      components: {
-        Conduct: Home.Prac
-      }
-    },
-    {
-      path: "/Cognition",
-      name: "Cognition",
-      components: {
-        Cognition: Home.Prac
-      }
-    },
-    {
-      path: "/Reason",
-      name: "Reason",
-      components: {
-        Reason: Home.Prac
-      }
-    },
-    {
-      path: "/Evolve",
-      name: "Evolve",
-      components: {
-        Evolve: Home.Prac
-      }
-    },
-    {
-      path: "/Educate",
-      name: "Educate",
-      components: {
-        Educate: Home.Prac
-      }
-    },
-    {
-      path: "/Culture",
-      name: "Culture",
-      components: {
-        Culture: Home.Prac
-      }
-    },
-    {
-      path: "/Wise",
-      name: "Wise",
-      components: {
-        Wise: Home.Comp
-      }
-    },
-    {
-      path: "/Trust",
-      name: "Trust",
-      components: {
-        Trust: Home.Prac
-      }
-    },
-    {
-      path: "/Nature",
-      name: "Nature",
-      components: {
-        Nature: Home.Prac
-      }
-    },
-    {
-      path: "/Truth",
-      name: "Truth",
-      components: {
-        Truth: Home.Prac
-      }
-    },
-    {
-      path: "/Aware",
-      name: "Aware",
-      components: {
-        Aware: Home.Prac
-      }
-    },
-    {
-      path: "/Create",
-      name: "Create",
-      components: {
-        Create: Home.Prac
-      }
-    },
-    {
-      path: "/Mind",
-      name: "Mind",
-      components: {
-        Mind: Home.Prac
-      }
-    },
-    {
-      path: "/Emerge",
-      name: "Emerge",
-      components: {
-        Emerge: Home.Prac
-      }
-    },
-    {
-      path: "/Inspire",
-      name: "Inspire",
-      components: {
-        Inspire: Home.Prac
-      }
-    },
-    {
-      path: "/Actualize",
-      name: "Actualize",
-      components: {
-        Actualize: Home.Prac
-      }
-    },
-    {
-      path: "/Cube",
-      name: "Cube",
-      components: {
-        Cube: Home.Cube
-      }
-    },
-    {
-      path: "/Test",
-      name: "Test",
-      components: {
-        Cube: Home.Test
-      }
-    },
-    {
-      path: '/Replay',
-      name: 'Replay',
-      components: {
-        Replay: Home.Replay
-      }
-    },
-    {
-      path: '/Result',
-      name: 'Result',
-      components: {
-        Result: Home.Result
-      }
-    }
-  ];
 
-  Muse.routeNames = Muse.createRouteNames(Muse.routes); // For router-links in View.vue
-
-  
   // Toc.vue components and routes with no west or east directions
   Muse.komps = {
     Home: {
@@ -596,6 +289,142 @@ Muse = (function() {
     }
   };
 
+  Muse.pages = {
+    Comp: {
+      Icons: {
+        title: 'Icons',
+        key: 'Icons',
+        show: true
+      },
+      Topics: {
+        title: 'Topics',
+        key: 'Topics',
+        show: false
+      },
+      Graphs: {
+        title: 'Graphs',
+        key: 'Graphs',
+        show: false
+      },
+      Texts: {
+        title: 'Texts',
+        key: 'Texts',
+        show: false
+      }
+    },
+    Prac: {
+      Topics: {
+        title: 'Topics',
+        key: 'Topics',
+        show: true
+      },
+      Graphs: {
+        title: 'Graphs',
+        key: 'Graphs',
+        show: false
+      },
+      Texts: {
+        title: 'Texts',
+        key: 'Texts',
+        show: false
+      }
+    },
+    Disp: {
+      Topics: {
+        title: 'Topics',
+        key: 'Topics',
+        show: true
+      },
+      Texts: {
+        title: 'Texts',
+        key: 'Texts',
+        show: false
+      }
+    },
+    Info: {
+      Core: {
+        title: 'Core',
+        key: "Core",
+        show: true,
+        icon: "fas fa-th"
+      },
+      Soft: {
+        title: 'Soft',
+        key: "Soft",
+        show: false,
+        icon: "fas fa-codepen"
+      },
+      Data: {
+        title: 'Data',
+        key: "Data",
+        show: false,
+        icon: "fas fa-table"
+      }
+    },
+    Know: {
+      Core: {
+        title: 'Core',
+        key: "Core",
+        show: true,
+        icon: "fas fa-university"
+      },
+      Science: {
+        title: 'Science',
+        key: "Science",
+        show: false,
+        icon: "fas fa-flask"
+      },
+      Math: {
+        title: 'Math',
+        key: "Math",
+        show: false,
+        icon: "fas fa-calculator"
+      }
+    },
+    Wise: {
+      Core: {
+        title: 'Core',
+        key: "Core",
+        show: true,
+        icon: "fas fa-tripadvisor"
+      }
+    },
+    Rows: {
+      Plane: {
+        name: 'Info',
+        dir: 'cm',
+        icon: "fas fa-th"
+      },
+      Learn: {
+        name: 'Learn',
+        dir: 'le',
+        icon: "fas fa-graduation-cap"
+      },
+      Do: {
+        name: 'Do',
+        dir: 'do',
+        icon: "fas fa-cog"
+      },
+      Share: {
+        name: 'Share',
+        dir: 'sh',
+        icon: "fas fa-share-alt-square"
+      }
+    },
+    Prin: {
+      Icons: {
+        title: 'Icons',
+        key: 'Icons',
+        show: true
+      },
+      Topics: {
+        title: 'Topics',
+        key: 'Topics',
+        show: false
+      }
+    }
+  };
+
   return Muse;
 
 }).call(this);
@@ -603,6 +432,80 @@ Muse = (function() {
 export default Muse;
 
 /*
+import { createRouter, createWebHashHistory } from 'vue-router'
+
+  Muse.vue3 = () ->
+    Muse.app = createApp( Dash )
+    Muse.app.provide('mix',  Muse.mix )
+    Muse.app.provide('nav',  Muse.nav )
+    router = Muse.router( Muse.routes )
+    router.beforeEach( (to,from) => false )
+    Muse.app.use(        router )
+    Muse.nav.router    = router
+    Muse.app.mount('#muse')
+    Muse.nav.doRoute( { route:'Home' } )
+    return
+
+ * Vue Router Routes
+  Muse.mix    = new Mix(   Muse, Muse.routeNames )
+  Muse.nav    = new Nav(   Muse.stream, batch, Muse.routes, Muse.routeNames, Muse.komps, true )
+
+  Muse.router = ( routes ) ->
+    createRouter( { routes:routes, history:createWebHashHistory() } )
+
+  Muse.routes = [
+    {   path:"/",           name:"Home",       components:{ Home:      Home      } },
+    {   path:"/Prin",       name:"Prin",       components:{ Prin:      Home.Prin } },
+      { path:"/Embrace",    name:"Embrace",    components:{ Embrace:   Home.Prac } },
+      { path:"/Innovate",   name:"Innovate",   components:{ Innovate:  Home.Prac } },
+      { path:"/Encourage",  name:"Encourage",  components:{ Encourage: Home.Prac } },
+    {   path:"/Info",       name:"Info",       components:{ Info:      Home.Comp } },
+      { path:"/Team",       name:"Team",       components:{ Team:      Home.Prac } },
+      { path:"/Domain",     name:"Domain",     components:{ Domain:    Home.Prac } },
+      { path:"/Relate",     name:"Relate",     components:{ Relate:    Home.Prac } },
+      { path:"/Adapt",      name:"Adapt",      components:{ Adapt:     Home.Prac } },
+      { path:"/Tech",       name:"Tech",       components:{ Tech:      Home.Prac } },
+      { path:"/Benefit",    name:"Benefit",    components:{ Benefit:   Home.Prac } },
+      { path:"/Change",     name:"Change",     components:{ Change:    Home.Prac } },
+      { path:"/Deliver",    name:"Deliver",    components:{ Deliver:   Home.Prac } },
+      { path:"/Govern",     name:"Govern",     components:{ Govern:    Home.Prac } },
+    {   path:"/Know",       name:"Know",       components:{ Know:      Home.Comp } },
+      { path:"/Involve",    name:"Involve",    components:{ Involve:   Home.Prac } },
+      { path:"/Discover",   name:"Discover",   components:{ Discover:  Home.Prac } },
+      { path:"/Understand", name:"Understand", components:{ Understand:Home.Prac } },
+      { path:"/Conduct",    name:"Conduct",    components:{ Conduct:   Home.Prac } },
+      { path:"/Cognition",  name:"Cognition",  components:{ Cognition: Home.Prac } },
+      { path:"/Reason",     name:"Reason",     components:{ Reason:    Home.Prac } },
+      { path:"/Evolve",     name:"Evolve",     components:{ Evolve:    Home.Prac } },
+      { path:"/Educate",    name:"Educate",    components:{ Educate:   Home.Prac } },
+      { path:"/Culture",    name:"Culture",    components:{ Culture:   Home.Prac } },
+    {   path:"/Wise",       name:"Wise",       components:{ Wise:      Home.Comp } },
+      { path:"/Trust",      name:"Trust",      components:{ Trust:     Home.Prac } },
+      { path:"/Nature",     name:"Nature",     components:{ Nature:    Home.Prac } },
+      { path:"/Truth",      name:"Truth",      components:{ Truth:     Home.Prac } },
+      { path:"/Aware",      name:"Aware",      components:{ Aware:     Home.Prac } },
+      { path:"/Create",     name:"Create",     components:{ Create:    Home.Prac } },
+      { path:"/Mind",       name:"Mind",       components:{ Mind:      Home.Prac } },
+      { path:"/Emerge",     name:"Emerge",     components:{ Emerge:    Home.Prac } },
+      { path:"/Inspire",    name:"Inspire",    components:{ Inspire:   Home.Prac } },
+      { path:"/Actualize",  name:"Actualize",  components:{ Actualize: Home.Prac } },
+    {   path:"/Cube",       name:"Cube",       components:{ Cube:      Home.Cube } },
+    {   path:"/Test",       name:"Test",       components:{ Cube:      Home.Test } },
+      { path:'/Replay',     name:'Replay',     components:{ Replay:    Home.Replay } },
+      { path:'/Result',     name:'Result',     components:{ Result:    Home.Result } }
+]
+
+  Muse.createRouteNames = ( routes ) ->
+    routeNames = []
+    for route in routes
+      routeNames.push( route.name )
+      if route.children?
+        for child in route.children
+          routeNames.push( child.name )
+    routeNames
+
+  Muse.routeNames = Muse.createRouteNames( Muse.routes ) # For router-links in View.vue
+
   Muse.routes = [
     { path:"/",     name:"Home", components:{ Home:Home } },
     { path:"/Principles",  name:"Prin", components:{ Prin: Home.Prin }, children:[
@@ -648,4 +551,4 @@ export default Muse;
     { path: '/Prac', name:'Prac', components:{ Prac: Home.Prac } },
     { path: '/Disp', name:'Disp', components:{ Disp: Home.Disp } },
     { path: '/Cube', name:'Cube', components:{ Cube: Home.Cube } } ]
-*/
+ */
