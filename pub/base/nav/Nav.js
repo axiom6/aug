@@ -37,7 +37,7 @@ Nav = class Nav {
     this.pageKey = 'None';
     this.inovKey = 'None'; // Only used by Tabs to Tocs.vue and Comp.vue
     this.warnMsg = 'None';
-    this.debug = true;
+    this.debug = false;
     this.replays = {};
     this.url = 'None';
     this.ignoreUrl = false;
@@ -114,8 +114,8 @@ Nav = class Nav {
 
   toUrl(msg) {
     var url;
-    url = window.location.href;
-    url += msg.compKey;
+    url = window.location.protocol + '//' + window.location.host;
+    url += '/' + msg.compKey;
     if (msg.pracKey !== 'None') {
       url += '/' + msg.pracKey;
     }
@@ -131,8 +131,7 @@ Nav = class Nav {
     if (this.debug) {
       console.log('Nav.toUrl()', url);
     }
-    this.ignoreUrl = true;
-    // window.location.href = url
+    window.history.pushState({}, '', url);
     return url;
   }
 
@@ -641,6 +640,33 @@ Nav = class Nav {
 export default Nav;
 
 /*
+  toUrl:( msg ) ->
+    state = {}
+    url  = window.location.protocol + '//:' + window.location.host
+    url += '/' + msg.compKey
+    url += '/' + msg.pracKey if msg.pracKey isnt 'None'
+    url += '/' + msg.dispKey if msg.dispKey isnt 'None'
+    state.page     = msg.pageKey if msg.pageKey isnt 'None'
+    state.innovate = msg.inovKey if msg.inovKey isnt 'None' and msg.level is 'Comp'
+    @ignoreUrl = true
+    window.history.pushState( state, '', url )
+    url += '?' + 'page='    + msg.pageKey if msg.pageKey isnt 'None'
+    url += '&' + 'inovate=' + msg.inovKey if msg.inovKey isnt 'None' and msg.level is 'Comp'
+    console.log( 'Nav.toUrl()', url ) if @debug
+    url
+
+  toUrl:( msg ) ->
+    url  = window.location.href
+    url +=       msg.compKey
+    url += '/' + msg.pracKey if msg.pracKey isnt 'None'
+    url += '/' + msg.dispKey if msg.dispKey isnt 'None'
+    url += '?' + 'page='    + msg.pageKey if msg.pageKey isnt 'None'
+    url += '&' + 'inovate=' + msg.inovKey if msg.inovKey isnt 'None' and msg.level is 'Comp'
+    console.log( 'Nav.toUrl()', url ) if @debug
+    @ignoreUrl = true
+    window.history.pushState( state, '', url )
+    url
+
  * An important indicator of when Comps and Tabs are instanciated
   setPages:( pagesName, pages ) ->
     return if @hasPages(pagesName,false )
