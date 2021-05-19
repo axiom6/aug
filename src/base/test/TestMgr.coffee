@@ -3,7 +3,7 @@ import Local  from '../store/Local.js'
 
 class TestMgr
 
-  constructor:( @nav ) ->
+  constructor:( @nav, @appName ) ->
     @dbName = 'Test'
     @local  = new Local( @nav.stream, @dbName )
 
@@ -12,10 +12,24 @@ class TestMgr
       await @nav.sleep( 1000 )
       obj.source = 'Replay'
       @nav.pub( obj, true )
+    @local.add( @dbName, @appName, @nav.replays )
     return
 
-  saveReplay:( id ) ->
-    @local.add( @dbName, id, @nav.replays )
+  doUrlMsg:() ->
+    urls = [
+      'http://localhost:3000/Home'
+      'http://localhost:3000/Prin'
+      'http://localhost:3000/Prin/Embrace'
+      'http://localhost:3000/Info'
+      'http://localhost:3000/Info?page=Topics'
+      'http://localhost:3000/Info?page=Topics&innovate=Soft'
+      'http://localhost:3000/Info/Team'
+      'http://localhost:3000/Info/Team/Collab'
+      'http://localhost:3000/Info/Team/Collab?page=Topics'
+      'http://localhost:3000/Info/Team?page=Graphs'
+      'http://localhost:3000/Cube' ]
+    for url in urls
+      @nav.toMsg( url )
     return
 
 export default TestMgr

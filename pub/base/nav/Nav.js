@@ -24,7 +24,6 @@ Nav = class Nav {
     this.navs = this.addInovToNavs(this.komps);
     this.touch = null;
     this.build = new Build(this.batch);
-    //router     =  null
     this.source = 'None';
     this.route = 'Home';
     this.routeLast = 'None';
@@ -40,15 +39,14 @@ Nav = class Nav {
     this.debug = false;
     this.replays = {};
     this.url = 'None';
-    this.ignoreUrl = false;
     this.museLevels = ['Comp', 'Prac', 'Disp'];
     this.museComps = ['Home', 'Prin', 'Info', 'Know', 'Wise', 'Cube', 'Test'];
     this.museInovs = ['Info', 'Know', 'Wise', 'Soft', 'Data', 'Scie', 'Math'];
     this.musePlanes = ['Info', 'Know', 'Wise'];
     this.keyEvents();
+    this.routeListen();
   }
 
-  // @routeListen()
   pub(msg, isReplay = false) {
     var obj, objName;
     if (this.msgOK(msg)) {
@@ -59,7 +57,6 @@ Nav = class Nav {
         objName = obj.compKey + ':' + obj.pracKey + ':' + obj.pageKey + ':' + obj.inovKey;
         this.replays[objName] = obj;
       }
-      //@doRoute( obj ) # Creates route if necessary to publish to
       this.stream.publish('Nav', obj);
     }
   }
@@ -135,111 +132,55 @@ Nav = class Nav {
     return url;
   }
 
-  routeChange() {
-    var compKey, hash, obj, objQue, path, pracKey, query, split;
-    if (this.ignoreUrl) {
-      this.ignoreUrl = false;
-      return;
+  // str arg is a test mode used in TestMgr.coffee
+  toMsg(str = null) {
+    var href, innovate, obj, page, paths, url;
+    obj = {};
+    href = str != null ? str : document.location.href;
+    url = new URL(href);
+    page = url.searchParams.get("page");
+    innovate = url.searchParams.get("innovate");
+    paths = url.pathname.split('/');
+    obj.source = 'Url';
+    obj.compKey = paths[1] != null ? paths[1] : 'None';
+    obj.pracKey = paths[2] != null ? paths[2] : 'None';
+    obj.dispKey = paths[3] != null ? paths[3] : 'None';
+    obj.pageKey = page != null ? page : 'None';
+    obj.inovKey = innovate != null ? innovate : 'None';
+    if (str != null) {
+      console.log('Nav.toMsg()', {
+        url: str,
+        obj,
+        obj
+      });
     }
-    hash = window.location.hash; 
-    // .substring(2)
-    path = hash;
-    query = "";
-    objQue = {};
-    if (hash.includes('?')) {
-      split = hash.split('?');
-      path = split[0];
-      query = split[1];
-      objQue = this.parseQuery(query);
-    }
-    if (this.inArray(path, this.museComps)) {
-      compKey = path;
-      pracKey = 'None';
-      console.log('Nav.routeChange()', {
-        level: 'Comp',
-        compKey: compKey,
-        pracKey: pracKey,
-        query: query,
-        objQue: objQue
-      });
-      obj = {
-        source: "Loc",
-        route: compKey,
-        level: 'Comp',
-        compKey: compKey,
-        pracKey: pracKey
-      };
-      if (objQue.page != null) {
-        obj.pageKey = objQue.page;
-      }
-      if (objQue.inov != null) {
-        obj.inovKey = objQue.inov;
-      }
-      this.pub(obj);
-    } else {
-      pracKey = path;
-      compKey = this.build.getPlane(pracKey);
-      console.log('Nav.routeChange()', {
-        level: 'Prac',
-        compKey: compKey,
-        pracKey: pracKey,
-        query: query
-      });
-      this.pub({
-        source: "Loc",
-        route: compKey,
-        level: 'Comp',
-        compKey: compKey,
-        pracKey: 'None'
-      });
-      obj = {
-        source: "Loc",
-        route: compKey,
-        level: 'Prac',
-        compKey: compKey,
-        pracKey: pracKey
-      };
-      if (objQue.page != null) {
-        obj.pageKey = objQue.page;
-      }
-      if (objQue.inov != null) {
-        obj.inovKey = objQue.inov;
-      }
-      this.pub(obj);
+    return obj;
+  }
+
+  urlChanged(event) {
+    var obj;
+    event.preventDefault(); // Not really needed
+    //indow.location.reload(false)
+    obj = toMsg();
+    this.pub(obj);
+  }
+
+  urlPrevent(event) {
+    //window.stop()
+    //window.location.reload(false)
+    document.execCommand('Stop');
+    if (this.debug) {
+      console.log('Mav.urlPrevent()', event);
     }
   }
 
   routeListen() {
-    window.addEventListener('popstate', (event) => {
-      return this.routeChange(event);
+    window.addEventListener('beforeunload', (event) => {
+      return this.urlPrevent(event);
     });
-  }
-
-  parseQuery(query) {
-    var i, len1, obj, pair, pairs;
-    obj = {};
-    if (query.includes('&')) {
-      pairs = query.split('&');
-      for (i = 0, len1 = pairs.length; i < len1; i++) {
-        pair = pairs[i];
-        obj = this.parsePair(pair, obj);
-      }
-    } else {
-      obj = this.parsePair(query, obj);
-    }
-    return obj;
-  }
-
-  parsePair(pair, obj) {
-    var split;
-    if (pair.includes('=')) {
-      split = pair.split('=');
-      obj[split[0]] = split[1];
-    } else {
-      console.log('Nav.parsePair(), missing =', pair);
-      obj[pair] = "";
-    }
-    return obj;
+    window.addEventListener('popstate', (event) => {
+      return this.urlChanged(event);
+    });
   }
 
   hasCompKey(compKey, dir = null) {
@@ -638,87 +579,3 @@ Nav = class Nav {
 };
 
 export default Nav;
-
-/*
-  toUrl:( msg ) ->
-    state = {}
-    url  = window.location.protocol + '//:' + window.location.host
-    url += '/' + msg.compKey
-    url += '/' + msg.pracKey if msg.pracKey isnt 'None'
-    url += '/' + msg.dispKey if msg.dispKey isnt 'None'
-    state.page     = msg.pageKey if msg.pageKey isnt 'None'
-    state.innovate = msg.inovKey if msg.inovKey isnt 'None' and msg.level is 'Comp'
-    @ignoreUrl = true
-    window.history.pushState( state, '', url )
-    url += '?' + 'page='    + msg.pageKey if msg.pageKey isnt 'None'
-    url += '&' + 'inovate=' + msg.inovKey if msg.inovKey isnt 'None' and msg.level is 'Comp'
-    console.log( 'Nav.toUrl()', url ) if @debug
-    url
-
-  toUrl:( msg ) ->
-    url  = window.location.href
-    url +=       msg.compKey
-    url += '/' + msg.pracKey if msg.pracKey isnt 'None'
-    url += '/' + msg.dispKey if msg.dispKey isnt 'None'
-    url += '?' + 'page='    + msg.pageKey if msg.pageKey isnt 'None'
-    url += '&' + 'inovate=' + msg.inovKey if msg.inovKey isnt 'None' and msg.level is 'Comp'
-    console.log( 'Nav.toUrl()', url ) if @debug
-    @ignoreUrl = true
-    window.history.pushState( state, '', url )
-    url
-
- * An important indicator of when Comps and Tabs are instanciated
-  setPages:( pagesName, pages ) ->
-    return if @hasPages(pagesName,false )
-    @pages[pagesName]       = {}
-    @pages[pagesName].pages = pages
-    @pages[pagesName].keys  = Object.keys(pages)
-    return
-
-    @pageKey  = if not msg.pageKey? or msg.pageKey is 'None' then @getPageKey(@level)   else msg.pageKey
-    @inovKey  = if not msg.inovKey? or msg.inovKey is 'None' then @getInovKey(@compKey) else msg.inovKey
-
-  doRoute:( obj ) ->
-    if @debug then console.log( 'Nav.doRoute()', { objRoute:obj.route, routeLast:@routeLast})
-    return if obj.source is 'Tabs' or obj.route is 'None' or obj.route is @routeLast # or @isInov(obj.route)
-    if obj.route? and @inArray( obj.route, @routeNames )
-      if @router?
-        @router.push( { name:obj.route } )
-          .then(
-            if @debug then console.log( 'Nav.doRoute() success', { route:obj.route } ) )
-          .catch( (failure) =>
-            console.log( 'Nav.doRoute() failure', { route:obj.route, failure:failure } ) )
-      else
-        console.error( 'Nav.doRoute() router not set' )
-      @routeLast = obj.route
-      @route     = obj.route
-    else
-      console.error( 'Nav.doRoute() undefined or unnamed route', obj.route )
-    return
-
-  routeOK:( path ) ->
-    for route in @routeNames when path is route
-      return true
-    false
-
-  routeChange:() ->
-    window.addEventListener( 'popstate', () => # event
-      compKey = window.location.hash.substring(2)
-      pracKey = 'None'
-      level   = "Comp"
-      if compKey.includes('/')
-        split   = compKey.split('/')
-        compKey = split[0]
-        pracKey = split[1]
-        level   = "Prac"
-      if @routeOK( compKey )
-        @pub( { source:"Loc", route:compKey, level:'Comp', compKey:compKey, pracKey:'None'  } )
-        @pub( { source:"Loc", route:compKey, level:'Prac', compKey:compKey, pracKey:pracKey } ) if level is 'Prac' )
-    return
-
-  prevImg:() ->
-    if @imgsIdx > 0 then @imgsIdx-1 else @imgsNum-1
-
-  nextImg:() ->
-    if @imgsIdx < @imgsNum-1 then @imgsIdx+1 else 0
- */

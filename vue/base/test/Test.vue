@@ -2,8 +2,6 @@
 <template>
   <div class="test-pane" ref="Test">
     <h1 v-show="myRoute()">Test Replay and Result</h1>
- <!--router-view :name="'Replay'"></router-view>
-    <router-view :name="'Result'"></router-view-->
   </div>
 </template>
 

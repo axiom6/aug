@@ -9,7 +9,6 @@ class Nav
     @navs       = @addInovToNavs( @komps )
     @touch      =  null
     @build      =  new Build( @batch )
-    #router     =  null
     @source     = 'None'
     @route      = 'Home'
     @routeLast  = 'None'
@@ -25,13 +24,12 @@ class Nav
     @debug      =  false
     @replays    = {}
     @url        = 'None'
-    @ignoreUrl  = false
     @museLevels = ['Comp','Prac','Disp']
     @museComps  = ['Home','Prin','Info','Know','Wise','Cube','Test']
     @museInovs  = ['Info','Know','Wise','Soft','Data','Scie','Math']
     @musePlanes = ['Info','Know','Wise']
     @keyEvents()
-    # @routeListen()
+    @routeListen()
 
   pub:( msg, isReplay=false ) ->
     if @msgOK(msg)
@@ -41,7 +39,6 @@ class Nav
       if not isReplay and obj.compKey isnt 'Test'
         objName = obj.compKey + ':' + obj.pracKey + ':'  + obj.pageKey + ':' + obj.inovKey
         @replays[objName] = obj
-      #@doRoute( obj ) # Creates route if necessary to publish to
       @stream.publish( 'Nav',  obj )
     return
 
@@ -78,64 +75,42 @@ class Nav
     window.history.pushState( {}, '', url )
     url
 
-  routeChange:() ->
-    if @ignoreUrl
-       @ignoreUrl = false
-       return
-    hash   = window.location.hash #
-    # .substring(2)
-    path   = hash
-    query  = ""
-    objQue = {}
+  # str arg is a test mode used in TestMgr.coffee
+  toMsg:( str=null ) ->
+    obj         = {}
+    href        = if str? then str else document.location.href
+    url         = new URL(href)
+    page        = url.searchParams.get("page")
+    innovate    = url.searchParams.get("innovate")
+    paths       = url.pathname.split('/')
+    obj.source  = 'Url'
+    obj.compKey = if paths[1]? then paths[1] else 'None'
+    obj.pracKey = if paths[2]? then paths[2] else 'None'
+    obj.dispKey = if paths[3]? then paths[3] else 'None'
+    obj.pageKey = if page?     then page     else 'None'
+    obj.inovKey = if innovate? then innovate else 'None'
+    console.log( 'Nav.toMsg()', { url:str, obj,obj } ) if str?
+    obj
 
-    if hash.includes('?')
-      split  = hash.split('?')
-      path   = split[0]
-      query  = split[1]
-      objQue = @parseQuery( query )
+  urlChanged:( event ) ->
+    event.preventDefault() # Not really needed
+    #indow.location.reload(false)
+    obj = toMsg()
+    @pub( obj )
+    return
 
-    if @inArray( path, @museComps )
-      compKey = path
-      pracKey = 'None'
-      console.log( 'Nav.routeChange()',  { level:'Comp', compKey:compKey, pracKey:pracKey, query:query, objQue:objQue } )
-      obj = { source:"Loc", route:compKey, level:'Comp', compKey:compKey, pracKey:pracKey }
-      obj.pageKey = objQue.page if objQue.page?
-      obj.inovKey = objQue.inov if objQue.inov?
-      @pub( obj )
-    else
-      pracKey = path
-      compKey = @build.getPlane( pracKey )
-      console.log( 'Nav.routeChange()',  { level:'Prac', compKey:compKey, pracKey:pracKey, query:query } )
-      @pub( { source:"Loc", route:compKey, level:'Comp', compKey:compKey, pracKey:'None'  } )
-      obj = { source:"Loc", route:compKey, level:'Prac', compKey:compKey, pracKey:pracKey }
-      obj.pageKey = objQue.page if objQue.page?
-      obj.inovKey = objQue.inov if objQue.inov?
-      @pub( obj )
-        
+  urlPrevent:( event ) ->
+    #window.stop()
+    #window.location.reload(false)
+    document.execCommand('Stop')
+    console.log( 'Mav.urlPrevent()', event ) if @debug
+
     return
 
   routeListen:() ->
-    window.addEventListener( 'popstate', (event) => @routeChange(event) )
+    window.addEventListener( 'beforeunload', (event) => @urlPrevent(event) )
+    window.addEventListener( 'popstate',     (event) => @urlChanged(event) )
     return
-
-  parseQuery:( query ) ->
-    obj = {}
-    if query.includes('&')
-      pairs = query.split('&')
-      for pair in pairs
-        obj = @parsePair( pair, obj )
-    else
-      obj = @parsePair( query, obj )
-    obj
-
-  parsePair:( pair, obj ) ->
-    if pair.includes('=')
-      split = pair.split('=')
-      obj[split[0]] = split[1]
-    else
-      console.log( 'Nav.parsePair(), missing =', pair )
-      obj[pair] = ""
-    obj
 
   hasCompKey:( compKey, dir=null ) ->
     has = compKey? and @navs? and @navs[compKey]?
@@ -378,87 +353,3 @@ class Nav
 
 export default Nav
 
-###
-  toUrl:( msg ) ->
-    state = {}
-    url  = window.location.protocol + '//:' + window.location.host
-    url += '/' + msg.compKey
-    url += '/' + msg.pracKey if msg.pracKey isnt 'None'
-    url += '/' + msg.dispKey if msg.dispKey isnt 'None'
-    state.page     = msg.pageKey if msg.pageKey isnt 'None'
-    state.innovate = msg.inovKey if msg.inovKey isnt 'None' and msg.level is 'Comp'
-    @ignoreUrl = true
-    window.history.pushState( state, '', url )
-    url += '?' + 'page='    + msg.pageKey if msg.pageKey isnt 'None'
-    url += '&' + 'inovate=' + msg.inovKey if msg.inovKey isnt 'None' and msg.level is 'Comp'
-    console.log( 'Nav.toUrl()', url ) if @debug
-    url
-
-  toUrl:( msg ) ->
-    url  = window.location.href
-    url +=       msg.compKey
-    url += '/' + msg.pracKey if msg.pracKey isnt 'None'
-    url += '/' + msg.dispKey if msg.dispKey isnt 'None'
-    url += '?' + 'page='    + msg.pageKey if msg.pageKey isnt 'None'
-    url += '&' + 'inovate=' + msg.inovKey if msg.inovKey isnt 'None' and msg.level is 'Comp'
-    console.log( 'Nav.toUrl()', url ) if @debug
-    @ignoreUrl = true
-    window.history.pushState( state, '', url )
-    url
-
-  # An important indicator of when Comps and Tabs are instanciated
-  setPages:( pagesName, pages ) ->
-    return if @hasPages(pagesName,false )
-    @pages[pagesName]       = {}
-    @pages[pagesName].pages = pages
-    @pages[pagesName].keys  = Object.keys(pages)
-    return
-
-
-    @pageKey  = if not msg.pageKey? or msg.pageKey is 'None' then @getPageKey(@level)   else msg.pageKey
-    @inovKey  = if not msg.inovKey? or msg.inovKey is 'None' then @getInovKey(@compKey) else msg.inovKey
-
-  doRoute:( obj ) ->
-    if @debug then console.log( 'Nav.doRoute()', { objRoute:obj.route, routeLast:@routeLast})
-    return if obj.source is 'Tabs' or obj.route is 'None' or obj.route is @routeLast # or @isInov(obj.route)
-    if obj.route? and @inArray( obj.route, @routeNames )
-      if @router?
-        @router.push( { name:obj.route } )
-          .then(
-            if @debug then console.log( 'Nav.doRoute() success', { route:obj.route } ) )
-          .catch( (failure) =>
-            console.log( 'Nav.doRoute() failure', { route:obj.route, failure:failure } ) )
-      else
-        console.error( 'Nav.doRoute() router not set' )
-      @routeLast = obj.route
-      @route     = obj.route
-    else
-      console.error( 'Nav.doRoute() undefined or unnamed route', obj.route )
-    return
-
-  routeOK:( path ) ->
-    for route in @routeNames when path is route
-      return true
-    false
-
-  routeChange:() ->
-    window.addEventListener( 'popstate', () => # event
-      compKey = window.location.hash.substring(2)
-      pracKey = 'None'
-      level   = "Comp"
-      if compKey.includes('/')
-        split   = compKey.split('/')
-        compKey = split[0]
-        pracKey = split[1]
-        level   = "Prac"
-      if @routeOK( compKey )
-        @pub( { source:"Loc", route:compKey, level:'Comp', compKey:compKey, pracKey:'None'  } )
-        @pub( { source:"Loc", route:compKey, level:'Prac', compKey:compKey, pracKey:pracKey } ) if level is 'Prac' )
-    return
-
-  prevImg:() ->
-    if @imgsIdx > 0 then @imgsIdx-1 else @imgsNum-1
-
-  nextImg:() ->
-    if @imgsIdx < @imgsNum-1 then @imgsIdx+1 else 0
-###
