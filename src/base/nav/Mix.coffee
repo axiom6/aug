@@ -11,9 +11,11 @@ class Mix
   isDef: (d) ->
     d isnt null and typeof (d) isnt 'undefined' and d isnt 'None'
   isStr: (s) ->
-    @isDef(s) and typeof (s) == "string" and s.length > 0
+    @isDef(s) and typeof (s) is "string" and s.length > 0
+  isFunc:(f) ->
+    @isDef(f) and typeof(f) is "function"
   isArray: (a) ->
-    @isDef(a) and typeof (a) != "string" and a.length? and a.length > 0
+    @isDef(a) and typeof (a) isnt "string" and a.length? and a.length > 0
   inArray: (e, a) ->
     @isArray(a) and a.indexOf(e) > -1
   inObject:( name, obj ) ->

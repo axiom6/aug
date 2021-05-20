@@ -1,17 +1,20 @@
 <template>
   <div class="replay-pane" ref="Replay">
-    <h1>Publish Messages</h1>
-    <div class="replay-replay" @click="doReplay()">Replay</div>
-    <div class="replay-urlmsg" @click="doUrlMsg()">UrlMsg</div>
+    <h1>Replay Messages</h1>
+      <h-btn name="Replay" :doPub="doReplay" :position="[20,20,20,10]" :background="'blue'"></h-btn>
+      <h-btn name="UrlMsg" :doPub="doUrlMsg" :position="[60,20,20,10]" :background="'blue'"></h-btn>
   </div>
 </template>
 
 <script type="module">
 
 import { inject } from 'vue';
+import Btn        from '../../base/elem/Btn.vue'
 import TestMgr    from '../../../pub/base/test/TestMgr.js'
 
 let Replay = {
+
+  components: { 'h-btn':Btn },
 
   setup() {
 

@@ -3,7 +3,6 @@
    <div class="btn-nice" :style="styleBtn()" ref="elem" @click="pubBtn()">
      <i    class="btn-image fas fa-mug-hot"></i>
      <span class="btn-label">{{name}}</span>
-
    </div>
 </template>
 
@@ -13,7 +12,7 @@ import { inject, ref, onMounted } from 'vue';
 
 let Btn = {
 
-  props: { name:String, position:Array, background:String },
+  props: { name:String, position:Array, background:String, doPub:Function },
 
   setup( props ) {
 
@@ -26,7 +25,10 @@ let Btn = {
        background:props.background } }
 
     const pubBtn = function () {
-      mix.publish( { pageKey:props.name } ); }
+      if( mix.isFunc(props.doPub) ) {
+        props.doPub(); }
+      else {
+        mix.publish( { pageKey:props.name } ); } }
 
     onMounted( function () {
       } )
@@ -46,7 +48,7 @@ export default Btn;
   @btn-unit:1vmin;
   @btn-size:              @btn-unit*6;
   @btn-size-before:       @btn-unit*4;
-  @btn-font-size:         @btn-unit*1.9;
+  @btn-font-size:         @btn-unit*4.0;
   @btn-font-size-before:  @btn-font-size*0.7;
   @btn-line-height:       @btn-unit*4;
   @btn-pad:               @btn-unit*2;

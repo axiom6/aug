@@ -37,10 +37,9 @@
       const viewIdx = ref(0);
       let   level   = 'Comp'
       let   module  = 'Home'
-      let   debug   = true
+      let   debug   = false
 
       const show = ( levelArg, moduleArg ) => {
-
         return level===levelArg && module===moduleArg; }
 
       const onNav = (obj) => {

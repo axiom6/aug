@@ -19,6 +19,10 @@ Mix = class Mix {
     return this.isDef(s) && typeof s === "string" && s.length > 0;
   }
 
+  isFunc(f) {
+    return this.isDef(f) && typeof f === "function";
+  }
+
   isArray(a) {
     return this.isDef(a) && typeof a !== "string" && (a.length != null) && a.length > 0;
   }
