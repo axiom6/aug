@@ -1,33 +1,39 @@
 {
-  "@context": "http://schema.org",
-  "@type":"WebSite",
+  "@context": {
+    "Site":        "https://muse-ad352.web.app/Defs/#Site",
+    "IKW":         "https://muse-ad352.web.app/Defs/#IKW",
+    "Practice":    "https://muse-ad352.web.app/Defs/#Practice",
+    "Discipline":  "https://muse-ad352.web.app/Defs/#Discipline",
+    "name":        "https://muse-ad352.web.app/Defs/#name",
+    "column":      "https://muse-ad352.web.app/Defs/#column",
+    "row":         "https://muse-ad352.web.app/Defs/#row",
+    "plane":       "https://muse-ad352.web.app/Defs/#plane",
+    "description": "https://muse-ad352.web.app/Defs/#description"
+  },
+  "@type":"Site",
   "@graph": [
     {
-      "@context": {
-        "@type":"https://localhost:3000/Prin" },
+      "@type": "IKW",
+      "@id":   "https://muse-ad352.web.app/Prin",
+      "name" : "Prin",
       "@graph": [
         {
-          "@context": {
-            "@type":       "https://localhost:3000/Prin/Embrace" },
-          "@type":  "Service",
+          "@type":  "Practice",
+          "@id":    "https://muse-ad352.web.app/Prin/Embrace",
           "name":   "Embrace",
           "column": "Embrace",
           "row":    "Dim",
           "plane":  "Prin",
           "description": "Creative interaction and guidance that empowers active change" },
         {
-          "@context": {
-            "@type":       "https://localhost:3000/Prin/Innovate" },
-          "@type": "Service",
+          "@type": "Practice",
           "name": "Innovate",
           "column": "Innovate",
           "row": "Dim",
           "plane": "Prin",
           "description": "The space for adjacent connections where ideas flow, interact, evolve, grow and converge in novel ways." },
         {
-          "@context": {
-            "@type":       "https://localhost:3000/Prin/Encourage" },
-          "@type": "Service",
+          "@type": "Practice",
           "name": "Encourage",
           "column": "Encourage",
           "row": "Dim",
@@ -35,14 +41,13 @@
           "description": "Augmentation informed by Innovation, enhanced with strong Intent, Ethics and Reflection" }
       ] },
     {
-      "@context": {
-        "@type": "https://localhost:3000/Info",
-      },
+      "@type": "IKW",
+      "@id":   "https://muse-ad352.web.app/Info",
+      "name" : "Info",
       "@graph": [
         {
-          "@context": {
-            "@type": "https://localhost:3000/Info/Team" },
-          "@type": "Service",
+          "@type": "Practice",
+          "@id":    "https://muse-ad352.web.app/Info/Team",
           "name": "Team",
           "column": "Embrace",
           "row": "Learn",
@@ -50,9 +55,8 @@
           "description": "We put a clear emphasis on self-managing teams that are empowered to make their own decisions"
         },
         {
-          "@context": {
-            "@type": "https://localhost:3000/Info/Domain" },
-          "@type": "Service",
+          "@type": "Practice",
+          "@id":    "https://muse-ad352.web.app/Info/Domain",
           "name": "Domain",
           "column": "Innovate",
           "row": "Learn",
@@ -60,9 +64,8 @@
           "description": "We Entitle our Team and our customers. Propose new initiatives for our Portfolio. Acquire data to explore Insights"
         },
         {
-          "@context": {
-            "@type": "https://localhost:3000/Info/Relate" },
-          "@type": "Service",
+          "@type": "Practice",
+          "@id":    "https://muse-ad352.web.app/Info/Relate",
           "name": "Relate",
           "column": "Encourage",
           "row": "Learn",
@@ -70,9 +73,8 @@
           "description": "Gaining Insight to articulate an ethical Vision for defining a Strategy to learn about our Market and ourselves."
         },
         {
-          "@context": {
-            "@type": "https://localhost:3000/Info/Adapt" },
-          "@type": "Service",
+          "@type": "Practice",
+          "@id":    "https://muse-ad352.web.app/Info/Adapt",
           "name": "Adapt",
           "column": "Embrace",
           "row": "Do",
@@ -80,9 +82,8 @@
           "description": "Feature Status is traced and linked to Components and Test criteria that Directs Technology activities"
         },
         {
-          "@context": {
-            "@type": "https://localhost:3000/Info/Tech" },
-          "@type": "Service",
+          "@type": "Practice",
+          "@id":    "https://muse-ad352.web.app/Info/Tech",
           "name": "Tech",
           "column": "Innovate",
           "row": "Do",
@@ -90,9 +91,8 @@
           "description": "Components by UX, Service, Data and Cloud tiers. Support Data Science Models that are Interpreted in Benefit"
         },
         {
-          "@context": {
-            "@type": "https://localhost:3000/Info/Benefit" },
-          "@type": "Service",
+          "@type": "Practice",
+          "@id":    "https://muse-ad352.web.app/Info/Benefit",
           "name": "Benefit",
           "column": "Encourage",
           "row": "Do",
@@ -100,9 +100,8 @@
           "description": "Interpret Discovery with Data Science. Establishes and Reviews with reference Design. Realizes Benefits."
         },
         {
-          "@context": {
-            "@type": "https://localhost:3000/Info/Change" },
-          "@type": "Service",
+          "@type": "Practice",
+          "@id":    "https://muse-ad352.web.app/Info/Change",
           "name": "Change",
           "column": "Embrace",
           "row": "Share",
@@ -110,9 +109,8 @@
           "description": "Assesses impacts. Proves Components to continuously Deploy by transforming changes into evolutionary architecture."
         },
         {
-          "@context": {
-            "@type": "https://localhost:3000/Info/Deliver" },
-          "@type": "Service",
+          "@type": "Practice",
+          "@id":    "https://muse-ad352.web.app/Info/Deliver",
           "name": "Deliver",
           "column": "Innovate",
           "row": "Share",
@@ -120,9 +118,8 @@
           "description": "Delivers product via a Secured cloud Network with Support and simulation."
         },
         {
-          "@context": {
-            "@type": "https://localhost:3000/Info/Govern" },
-          "@type": "Service",
+          "@type": "Practice",
+          "@id":    "https://muse-ad352.web.app/Info/Govern",
           "name": "Govern",
           "column": "Encourage",
           "row": "Share",

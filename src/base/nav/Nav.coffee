@@ -66,7 +66,7 @@ class Nav
 
   toUrl:( msg ) ->
     url  = window.location.protocol + '//' + window.location.host
-    url += '/' + msg.compKey
+    url += if msg.compKey is 'Home' then '/' else '/' + msg.compKey
     url += '/' + msg.pracKey if msg.pracKey isnt 'None'
     url += '/' + msg.dispKey if msg.dispKey isnt 'None'
     url += '?' + 'page='    + msg.pageKey if msg.pageKey isnt 'None'

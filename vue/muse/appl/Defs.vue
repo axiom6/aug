@@ -1,27 +1,39 @@
 
 <template>
-  <div class="cube-pane">
+  <div class="defs-pane">
     <template v-for="plane in planes">
-      <div   class="cube-plane" :style="stylePlane(plane)">
-        <!--div class="cube-plane-icon"><p-icon  :icon="plane.icon" :name="plane.name" :size="2.5" ></p-icon></div-->
+      <div   class="defs-plane" :style="stylePlane(plane)">
         <template v-for="pracObj in plane.compObj">
-          <div class="cube-pract" :style="stylePract(plane,pracObj)">
-            <!--p-sign :pracObj="pracObj"></p-sign-->
-            <p-icon  :icon="pracObj.icon" :name="pracObj.name" :size="2.5" ></p-icon>
+          <div class="defs-pract" :style="stylePract(plane,pracObj)">
+            <p-icon  :icon="pracObj.icon" :name="pracObj.name" :size="2.0" ></p-icon>
           </div>
         </template>
       </div>
     </template>
   </div>
+  <div     class="defs-defs">
+    <div   class="defs-west">
+      <div class="defs-term" id="IKW">IKW</div>
+      <div class="defs-term" id="Practice">Practice</div>
+      <div class="defs-term" id="Discipline">Discipline</div>
+    </div>
+    <div   class="defs-east">
+      <div class="defs-term" id="name">name</div>
+      <div class="defs-term" id="column">column</div>
+      <div class="defs-term" id="row">row</div>
+      <div class="defs-term" id="plane">plane</div>
+      <div class="defs-term" id="description">description</div>
+    </div>
+  </div>
 </template>
 
 <script type="module">
   
-  import Sign from './Sign.vue';
+  import Sign from '../comp/Sign.vue';
   import Icon from '../../base/elem/Icon.vue';
   import {ref, onBeforeMount, inject } from "vue";
   
-  let Cube = {
+  let Defs = {
 
     components:{ 'p-icon':Icon, 'p-sign':Sign },
 
@@ -60,7 +72,7 @@
     
   }
   
-  export default Cube;
+  export default Defs;
   
 </script>
 
@@ -68,15 +80,18 @@
   
   @import '../../../css/themes/theme.less';
   
-  @ikwFS:1.7*@themeFS;
+  @ikwFS:1.3*@themeFS;
+  @defFS:1.7*@themeFS;
 
-  .cube-pane { position:absolute; left:0; top:0; width:100%; height:100%;
-    .cube-plane { font-size:@ikwFS;  border-radius:2.0*@ikwFS; // border:@theme-fore solid 2px;
+  .defs-pane { position:absolute; left:0; top:0; width:100%; height:70%;
+    .defs-plane { font-size:@ikwFS;  border-radius:2.0*@ikwFS; // border:@theme-fore solid 2px;
                   color:@theme-fore; background-color:transparent; }
-    .cube-pract { font-size:@ikwFS;  border-radius:2.0*@ikwFS;    border:@theme-fore solid 2px;
+    .defs-pract { font-size:@ikwFS;  border-radius:2.0*@ikwFS;    border:@theme-fore solid 2px;
                   color:@theme-fore; background-color:@theme-gray; }
-    .cube-plane-icon { position:absolute; left:0; top:0; width:100%; height:10%; font-size:@ikwFS; }
-    
-  }
+    .defs-plane-icon { position:absolute; left:0; top:0; width:100%; height:10%; font-size:@defFS; }  }
+  .defs-defs {   position:absolute; left:0;   top:70%; width:100%; height:30%; font-size:@ikwFS; color:@theme-fore;
+    .defs-west { position:absolute; left:0;   top:0;   width: 50%; height:100%;}
+    .defs-east { position:absolute; left:50%; top:0;   width: 50%; height:100%;}
+    .defs-term {} }
 
 </style>

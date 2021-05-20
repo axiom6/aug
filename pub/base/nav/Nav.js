@@ -112,7 +112,7 @@ Nav = class Nav {
   toUrl(msg) {
     var url;
     url = window.location.protocol + '//' + window.location.host;
-    url += '/' + msg.compKey;
+    url += msg.compKey === 'Home' ? '/' : '/' + msg.compKey;
     if (msg.pracKey !== 'None') {
       url += '/' + msg.pracKey;
     }

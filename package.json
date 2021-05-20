@@ -15,7 +15,6 @@
     "jitt": "node src/jitt/appl/jitt.config.js && firebase use jitt",
     "data": "node src/data/appl/data.config.js && firebase use data",
     "exit": "node src/exit/appl/exit.config.js && firebase use exit",
-    "rout": "node src/rout/rout.config.js",
     "deploy": "firebase deploy",
     "gram": "src/augm/math/par/gram.sh",
     "test": "node --experimental-modules -r esm  pub/math/test/Run.js"
@@ -28,7 +27,6 @@
     "d3-tip": "^0.9.1",
     "firebase": "^8.4.2",
     "ganja.js": "^1.0.194",
-    "jquery": "^3.6.0",
     "pegjs": "^0.10.0",
     "pegjs-backtrace": "^0.2.0",
     "postcss": "^8.2.7",
@@ -38,7 +36,6 @@
     "tabulator-tables": "^4.9.3",
     "three": "^0.128.0",
     "vue": "^3.0.11",
-    "vue-drag-drop": "^1.1.4",
     "vue-router": "^4.0.6"
   },
   "devDependencies": {

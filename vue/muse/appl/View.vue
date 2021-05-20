@@ -6,7 +6,7 @@
     <v-comp   v-if="show('Comp','Comp')"   :key="viewIdx"></v-comp>
     <v-prac   v-if="show('Prac','Prac')"   :key="viewIdx"></v-prac>
     <v-disp   v-if="show('Disp','Disp')"   :key="viewIdx"></v-disp>
-    <v-cube   v-if="show('Comp','Cube')"   :key="viewIdx"></v-cube>
+    <v-defs   v-if="show('Comp','Defs')"   :key="viewIdx"></v-defs>
     <v-test   v-if="show('Comp','Test')"   :key="viewIdx"></v-test>
     <v-replay v-if="show('Prac','Replay')" :key="viewIdx"></v-replay>
     <v-result v-if="show('Prac','Result')" :key="viewIdx"></v-result>
@@ -21,7 +21,7 @@
   import Comp   from '../../muse/comp/Comp.vue'
   import Prac   from '../../muse/prac/Prac.vue'
   import Disp   from '../../muse/disp/Disp.vue'
-  import Cube   from '../../muse/comp/Cube.vue'
+  import Defs   from './Defs.vue'
   import Test   from '../../base/test/Test.vue'
   import Replay from '../../base/test/Replay.vue';
   import Result from '../../base/test/Result.vue';
@@ -29,7 +29,7 @@
   let View = {
 
     components:{ 'v-home':Home, 'v-prin':Prin, 'v-comp':Comp, 'v-prac':Prac, 'v-disp':Disp,
-      'v-cube':Cube, 'v-test':Test, 'v-replay':Replay, 'v-result':Result },
+      'v-defs':Defs, 'v-test':Test, 'v-replay':Replay, 'v-result':Result },
 
     setup() {
       const mix     = inject('mix');

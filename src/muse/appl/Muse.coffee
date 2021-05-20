@@ -49,13 +49,14 @@ class Muse
   Muse.addToHead = () ->
     # manifest = """<link href="manifest.json"  rel="manifest" crossorigin="use-credentials">"""
     # siteLink = """<link href="https://vit-muse.web.app/" rel="canonical">"""
+    # https://muse-ad352.web.app
     maniElem                = document.createElement('link')
     maniElem.href           = "manifest.json"
     maniElem.rel            = "manifest"
     maniElem['crossorigin'] = "use-credentials"
     siteElem = document.createElement('link')
     # console.log( 'Location', window.location.href )
-    siteElem.href = window.location.href # "https://vit-muse.web.app/" if window.location.contains('vit-muse')
+    siteElem.href = window.location.href
     siteElem.rel  = "canonical"
     jsonLD        = document.createElement('script')
     jsonLD.type   = "application/ld+json"
@@ -78,9 +79,6 @@ class Muse
     Math: { url:'inno/Math.json', data:MathJson, refine:true }
     Test: { url:'muse/Test.json', data:TestJson, refine:true } }
 
-  #{ path:"/Comp", name:"Comp", components:{ Comp:Home.Comp } },
-  #{ path:'/Prac', name:'Prac', components:{ Prac:Home.Prac } },
-
   # Toc.vue components and routes with no west or east directions
   Muse.komps = {
     Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
@@ -92,11 +90,11 @@ class Muse
     Know:{ title:'Know', key:'Know', route:'Know', pracs:{}, ikw:true,  icon:"fas fa-university",
     north:"Info", prev:"Info", south:"Wise",  next:"Wise" }
     Wise:{ title:'Wise', key:'Wise', route:'Wise', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor",
-    north:"Know", prev:"Know", south:"Home",  next:"Home" }
-    Cube:{ title:'Cube', key:'Cube', route:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes",
-    north:"Wise", prev:"Wise", south:"Wise",  next:"Test"  }
+    north:"Know", prev:"Know", south:"Defs",  next:"Defs" }
+    Defs:{ title:'Defs', key:'Defs', route:'Defs', pracs:{}, ikw:false, icon:"fas fa-cubes",
+    north:"Wise", prev:"Wise", south:"Test",  next:"Test"  }
     Test:{ title:'Test', key:'Test', route:'Test', pracs:{}, ikw:false, icon:"fas fa-stethoscope",
-    north:"Cube", prev:"Cube", south:"Cube",  next:"Home"  } }
+    north:"Defs", prev:"Defs", south:"Home",  next:"Home"  } }
 
   # 2. Initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
   Muse.init =   ( batch ) ->

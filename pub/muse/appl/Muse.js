@@ -64,13 +64,14 @@ Muse = (function() {
       var head, jsonLD, maniElem, siteElem;
       // manifest = """<link href="manifest.json"  rel="manifest" crossorigin="use-credentials">"""
       // siteLink = """<link href="https://vit-muse.web.app/" rel="canonical">"""
+      // https://muse-ad352.web.app
       maniElem = document.createElement('link');
       maniElem.href = "manifest.json";
       maniElem.rel = "manifest";
       maniElem['crossorigin'] = "use-credentials";
       siteElem = document.createElement('link');
       // console.log( 'Location', window.location.href )
-      siteElem.href = window.location.href; // "https://vit-muse.web.app/" if window.location.contains('vit-muse')
+      siteElem.href = window.location.href;
       siteElem.rel = "canonical";
       jsonLD = document.createElement('script');
       jsonLD.type = "application/ld+json";
@@ -198,9 +199,6 @@ Muse = (function() {
     }
   };
 
-  //{ path:"/Comp", name:"Comp", components:{ Comp:Home.Comp } },
-  //{ path:'/Prac', name:'Prac', components:{ Prac:Home.Prac } },
-
   // Toc.vue components and routes with no west or east directions
   Muse.komps = {
     Home: {
@@ -260,19 +258,19 @@ Muse = (function() {
       icon: "fab fa-tripadvisor",
       north: "Know",
       prev: "Know",
-      south: "Home",
-      next: "Home"
+      south: "Defs",
+      next: "Defs"
     },
-    Cube: {
-      title: 'Cube',
-      key: 'Cube',
-      route: 'Cube',
+    Defs: {
+      title: 'Defs',
+      key: 'Defs',
+      route: 'Defs',
       pracs: {},
       ikw: false,
       icon: "fas fa-cubes",
       north: "Wise",
       prev: "Wise",
-      south: "Wise",
+      south: "Test",
       next: "Test"
     },
     Test: {
@@ -282,9 +280,9 @@ Muse = (function() {
       pracs: {},
       ikw: false,
       icon: "fas fa-stethoscope",
-      north: "Cube",
-      prev: "Cube",
-      south: "Cube",
+      north: "Defs",
+      prev: "Defs",
+      south: "Home",
       next: "Home"
     }
   };
