@@ -1,0 +1,128 @@
+{
+  "@context": "https://schema.org",
+  "@type" :"Course",
+  "@id":   "https://muse-ad352.web.app",
+  "name" : "Humanistic Practices",
+  "description": "Humanistic Practicess for Information, Knowledge and Wisdom",
+  "provider": {
+    "@type": "Organization",
+    "name": "Axiom Architectures LLC" },
+  "@graph": [
+    {
+      "@type": "Course",
+      "@id":   "https://muse-ad352.web.app/Prin",
+      "name" : "Principles",
+      "description": "Twelve core principle group under Embrace, Innovate and Encourage",
+      "provider": {
+        "@type": "Organization",
+        "name": "Axiom Architectures LLC" },
+      "@graph": [
+        {
+          "@type":  "Course",
+          "@id":    "https://muse-ad352.web.app/Prin/Embrace",
+          "name":   "Embrace",
+          "description": "Creative interaction and guidance that empowers active change",
+          "provider": {
+            "@type": "Organization",
+            "name": "Axiom Architectures LLC" } },
+        {
+          "@type": "Course",
+          "@id":    "https://muse-ad352.web.app/Prin/Innovate",
+          "name": "Innovate",
+          "description": "The space for adjacent connections where ideas flow, interact, evolve, grow and converge in novel ways.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Axiom Architectures LLC" } },
+        {
+          "@type": "Course",
+          "@id":    "https://muse-ad352.web.app/Prin/Encourage",
+          "name": "Encourage",
+          "description": "Augmentation informed by Innovation, enhanced with strong Intent, Ethics and Reflection",
+          "provider": {
+            "@type": "Organization",
+            "name": "Axiom Architectures LLC" } }
+      ] },
+    {
+      "@type": "Course",
+      "@id":   "https://muse-ad352.web.app/Info",
+      "name" : "Infomation",
+      "description": "Nine Practices",
+      "provider": {
+        "@type": "Organization",
+        "name": "Axiom Architectures LLC" },
+      "@graph": [
+        {
+          "@type": "Course",
+          "@id":    "https://muse-ad352.web.app/Info/Team",
+          "name": "Team",
+          "description": "We put a clear emphasis on self-managing teams that are empowered to make their own decisions",
+          "provider": {
+            "@type": "Organization",
+            "name": "Axiom Architectures LLC" } },
+        {
+          "@type": "Course",
+          "@id":    "https://muse-ad352.web.app/Info/Domain",
+          "name": "Domain",
+          "description": "We Entitle our Team and our customers. Propose new initiatives for our Portfolio. Acquire data to explore Insights",
+          "provider": {
+            "@type": "Organization",
+            "name": "Axiom Architectures LLC" } },
+        {
+          "@type": "Course",
+          "@id":    "https://muse-ad352.web.app/Info/Relate",
+          "name": "Relate",
+          "description": "Gaining Insight to articulate an ethical Vision for defining a Strategy to learn about our Market and ourselves.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Axiom Architectures LLC" } },
+        {
+          "@type": "Course",
+          "@id":    "https://muse-ad352.web.app/Info/Adapt",
+          "name": "Adapt",
+          "description": "Feature Status is traced and linked to Components and Test criteria that Directs Technology activities",
+          "provider": {
+            "@type": "Organization",
+            "name": "Axiom Architectures LLC" } },
+        {
+          "@type": "Course",
+          "@id":    "https://muse-ad352.web.app/Info/Tech",
+          "name": "Tech",
+          "description": "Components by UX, Service, Data and Cloud tiers. Support Data Science Models that are Interpreted in Benefit",
+          "provider": {
+            "@type": "Organization",
+            "name": "Axiom Architectures LLC" } },
+        {
+          "@type": "Course",
+          "@id":    "https://muse-ad352.web.app/Info/Benefit",
+          "name": "Benefit",
+          "description": "Interpret Discovery with Data Science. Establishes and Reviews with reference Design. Realizes Benefits.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Axiom Architectures LLC" } },
+        {
+          "@type": "Course",
+          "@id":    "https://muse-ad352.web.app/Info/Change",
+          "name": "Change",
+          "description": "Assesses impacts. Proves Components to continuously Deploy by transforming changes into evolutionary architecture.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Axiom Architectures LLC" } },
+        {
+          "@type": "Course",
+          "@id":    "https://muse-ad352.web.app/Info/Deliver",
+          "name": "Deliver",
+          "description": "Delivers product via a Secured cloud Network with Support and simulation.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Axiom Architectures LLC" } },
+        {
+          "@type": "Course",
+          "@id":    "https://muse-ad352.web.app/Info/Govern",
+          "name": "Govern",
+          "description": "Enables careful Advice for Maturity, Assets and with the intent of being a positive influence on society.",
+          "provider": {
+            "@type": "Organization",
+            "name": "Axiom Architectures LLC" } }
+      ]
+    } ]
+}
