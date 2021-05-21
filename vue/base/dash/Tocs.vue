@@ -41,19 +41,16 @@
       const myKomp = function(kompArg) {
         return kompArg===compKey.value && mix.isBatch(compKey.value) }
       const doComp = function(kompKey) {
-        let  route    = komps[kompKey].route;
         compKey.value = kompKey;
         inovKey.value = nav.inovKey;
-        let obj = { route:route, level:'Comp', compKey:compKey.value, source:'Toc' };
+        let obj = { level:'Comp', compKey:compKey.value, source:'Toc' };
         pub( obj ); }
       const doPrac = function(pracArg) {
         pracKey.value = pracArg;
-        let route     = toRoute('Prac', pracArg );
-        pub( { route:route, level:'Prac', pracKey:pracArg, source:'Toc' } ); }
+        pub( { level:'Prac', pracKey:pracArg, source:'Toc' } ); }
       const doDisp = function(dispArg) {
         dispKey.value = dispArg;
-        let route    = toRoute('Disp', dispArg );
-        pub( { route:route, level:'Disp', dispKey:dispArg, source:'Toc' } ); }
+        pub( { level:'Disp', dispKey:dispArg, source:'Toc' } ); }
       const pub = function(obj) {
         nav.dirTabs = false;
         nav.pub(obj); }
@@ -71,11 +68,6 @@
                                : { backgroundColor:'#333',  color:'wheat', borderRadius:'0 24px 24px 0' }; }
       const style = function( ikwObj ) {
         return mix.styleObj(ikwObj); }
-      const toRoute = function( level, routeArg ) {
-    //let route = mix.isMuse()   ? level  : routeArg;
-        let route = routeArg;
-            route = compKey.value==='Talk' ? 'Talk' : route;
-            return route; }
       const tocPracs = function(compArg,inovArg) {
         let pracs = compArg !== 'Cube' ? mix.inovObject(compArg,inovArg) : {};
         // console.log( 'Tocs.tocPracs()', { compArg:compArg, inovArg:inovArg, pracs:pracs } );

@@ -47,11 +47,11 @@
         return props.dispObj.column==="Innovate" ? 'dd-4x4' : 'dd-4x3'; }
 
       const doDisp =  function (dispKey) {
-        let obj = { route:"Disp", source:'Dims.doDisp()', dispKey:dispKey };
+        let obj = { level:"Disp", source:'Dims.doDisp()', dispKey:dispKey };
         nav.pub( obj ); }
 
       const doPrac = function (pracKey) {
-        let obj = { route:"Prac", source:'Dims.doPrac()', pracKey:pracKey };
+        let obj = { level:"Prac", source:'Dims.doPrac()', pracKey:pracKey };
         nav.pub( obj ); }
 
       const dispClass = function() {

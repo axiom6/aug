@@ -32,7 +32,7 @@
         nav.pub( { pracKey:pracKey } ); }
 
       const clConn = function() {
-        return nav.route === 'Prac' ? 'conn-prac' : 'conn-comp'; }
+        return nav.level === 'Prac' ? 'conn-prac' : 'conn-comp'; }
 
       const createConnect = function( stream, pracObj ) {
         nextTick( function() {

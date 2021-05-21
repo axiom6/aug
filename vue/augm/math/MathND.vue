@@ -45,9 +45,9 @@
       
       const onNav = function(obj) {
         // console.log( 'MathND.onNav()', obj );
-        if( hasPages( obj.route, obj.pageKey ) ) {
-          compKey.value = obj.route
-          let page    = pages[obj.route][obj.pageKey];
+        if( hasPages( obj.compKey, obj.pageKey ) ) {
+          compKey.value = obj.compKey
+          let page    = pages[obj.compKey][obj.pageKey];
           exps.value = createExps( page ); } }
        //else {
        //  console.log( 'MathND.onNav() unknown route or pageKey', obj );

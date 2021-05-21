@@ -46,15 +46,16 @@ Muse = (function() {
   class Muse {
     static start() {
       var key, ref, val;
-      //useLD   = new MuseLD( Home )
-      // routesLD = museLD.toRoutes()
-      // console.log( 'MuseLD.toRoutes()', routesLD )
       Muse.addToHead();
       ref = Muse.Batch;
       for (key in ref) {
         val = ref[key];
-        if ((val.refine != null) && val.refine) {
-          val.data = Access.refine(val.data);
+        if (!((val.refine != null) && val.refine)) {
+          continue;
+        }
+        val.data = Access.refine(val.data);
+        if (Muse.debug) {
+          console.log('Muse.init()', key);
         }
       }
       Muse.init(Muse.Batch);
@@ -146,6 +147,16 @@ Muse = (function() {
 
   };
 
+  // Initialization is accomplished in 3 steps:
+  // 1. Read in all the JSON config files in Muse.Batch. Call Muse.init() when complete.
+  // 2. Muse.init() initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
+  // 3. Muse.vue() launches Vue with Home page and a Toc for Prin Info Know and Wise practices
+  // Data.batchRead( Muse.Batch, Muse.init, Data.refine )
+
+  // Called by muse.html to kick things off
+  // 1. Read in all the JSON config files in Muse.Batch. Call Muse.init() when complete.
+  Muse.debug = false;
+
   Muse.Batch = {
     Prin: {
       url: 'muse/Prin.json',
@@ -182,7 +193,7 @@ Muse = (function() {
       data: DataJson,
       refine: true
     },
-    Scie: {
+    Science: {
       url: 'inno/Scie.json',
       data: ScieJson,
       refine: true
@@ -204,7 +215,6 @@ Muse = (function() {
     Home: {
       title: 'Home',
       key: 'Home',
-      route: 'Home',
       pracs: {},
       ikw: false,
       icon: "fas fa-home",
@@ -216,7 +226,6 @@ Muse = (function() {
     Prin: {
       title: 'Prin',
       key: 'Prin',
-      route: 'Prin',
       pracs: {},
       ikw: true,
       icon: "fas fa-balance-scale",
@@ -228,7 +237,6 @@ Muse = (function() {
     Info: {
       title: 'Info',
       key: 'Info',
-      route: 'Info',
       pracs: {},
       ikw: true,
       icon: "fas fa-th",
@@ -240,7 +248,6 @@ Muse = (function() {
     Know: {
       title: 'Know',
       key: 'Know',
-      route: 'Know',
       pracs: {},
       ikw: true,
       icon: "fas fa-university",
@@ -252,7 +259,6 @@ Muse = (function() {
     Wise: {
       title: 'Wise',
       key: 'Wise',
-      route: 'Wise',
       pracs: {},
       ikw: true,
       icon: "fab fa-tripadvisor",
@@ -264,7 +270,6 @@ Muse = (function() {
     Defs: {
       title: 'Defs',
       key: 'Defs',
-      route: 'Defs',
       pracs: {},
       ikw: false,
       icon: "fas fa-cubes",
@@ -276,7 +281,6 @@ Muse = (function() {
     Test: {
       title: 'Test',
       key: 'Test',
-      route: 'Test',
       pracs: {},
       ikw: false,
       icon: "fas fa-stethoscope",

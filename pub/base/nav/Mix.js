@@ -8,6 +8,7 @@ import Vis from '../../base/draw/Vis.js';
 Mix = class Mix {
   constructor(Main) {
     Mix.Main = Main;
+    this.debug = false;
   }
 
   // Util
@@ -275,7 +276,7 @@ Mix = class Mix {
     obj = {};
     if (Mix.Main.Batch[compKey] != null) {
       obj = Mix.Main.Batch[compKey].data.pracs;
-    } else if (compKey !== 'Home' && compKey !== 'Cube') {
+    } else if (compKey !== 'Home' && compKey !== 'Defs') {
       console.error('Mix.compObject() bad compKey', compKey);
     }
     return obj;
@@ -288,7 +289,12 @@ Mix = class Mix {
       compPracs = this.pracs(compKey);
       if (this.isDef(inovKey) && inovKey !== compKey && this.isBatch(inovKey)) {
         inovPracs = this.pracs(inovKey);
-// console.log( 'Mix.inovObject() inovPracs', inovPracs )
+        if (this.debug) {
+          console.log('Mix.inovObject() inovPracs', {
+            inovKey: inovKey,
+            inovPracs: inovPracs
+          });
+        }
         for (key in compPracs) {
           prac = compPracs[key];
           if (prac.column === 'Innovate' && prac.row !== 'Dim') {

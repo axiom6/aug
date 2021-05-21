@@ -44,10 +44,10 @@
       const onPrac = function() {
         pracIdx.value++; } // console.log( { pracObj:this.pracObj } );
       const doPrac = function (pracKey) {
-        let obj = { route:"Prac", pracKey:pracKey };
+        let obj = { level:"Prac", pracKey:pracKey };
         nav.pub( obj ); }
       const doDisp = function (dispKey) {
-        let obj = { route:"Disp", compObj:nav.compKey, pracKey:props.pracObj.name, dispKey:dispKey };
+        let obj = { level:"Disp", compObj:nav.compKey, pracKey:props.pracObj.name, dispKey:dispKey };
         nav.pub( obj ); }
       const style = function( ikwObj ) {
         return mix.styleObj(ikwObj); }

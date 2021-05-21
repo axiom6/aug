@@ -35,15 +35,13 @@
 
       const pubBtn = function (btn) {
         let checked = mix.isDef(btn.checked) ? btn.checked : false;
-        // console.log( 'Btn', {route:props.name,choice:btn.name,checked:btn.checked.value } );
         if( btn.type==='choice' ) {
           btn.checked.value = !btn.checked.value;
           checked = btn.checked.value;
           mix.choose( props.name, btn.name, btn.checked.value );
           nav.pub( { source:'Btns.vue', route:props.name, choice:btn.name, checked:checked } ); }
-        else if( btn.type==='route' ) {
-             nav.doRoute( { route:props.name } ); }
-          // nav.pub( { source:'Btns.vue', route:props.name, choice:btn.name, checked:checked } ); }
+        else if( btn.type==='pub' ) {
+             nav.pub( { pageKey:props.name } ); } // Need to determine what to publish on Nav here
         else {
           console.log( 'Btn.pubBtn() unknown btn.type', btn.type ) } }
       const aspect = function() {  // Only call in mounted

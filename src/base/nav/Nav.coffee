@@ -10,18 +10,17 @@ class Nav
     @touch      =  null
     @build      =  new Build( @batch )
     @source     = 'None'
-    @route      = 'Home'
-    @routeLast  = 'None'
-    @choice     = 'None'
-    @checked    = false
+
     @level      = 'None' # set to either Comp Prac or Disp by Tocs.vue
     @compKey    = 'Home' # Also specifies current plane
     @pracKey    = 'None'
     @dispKey    = 'None'
     @pageKey    = 'None'
     @inovKey    = 'None' # Only used by Tabs to Tocs.vue and Comp.vue
+    @choice     = 'None'
+    @checked    = false
     @warnMsg    = 'None'
-    @debug      =  false
+    @debug      =  true
     @replays    = {}
     @url        = 'None'
     @museLevels = ['Comp','Prac','Disp']
@@ -29,7 +28,7 @@ class Nav
     @museInovs  = ['Info','Know','Wise','Soft','Data','Scie','Math']
     @musePlanes = ['Info','Know','Wise']
     @keyEvents()
-    @routeListen()
+    @urlListen()
 
   pub:( msg, isReplay=false ) ->
     if @msgOK(msg)
@@ -54,8 +53,10 @@ class Nav
     @pracKey  = 'None' if @level is 'Comp'
     @pageKey  = @getPageKey( pagesName )
     @inovKey  = @getInovKey( @compKey  )
-    obj = { source:@source, route:@route, level:@level, compKey:@compKey,  pracKey:@pracKey, pageKey:@pageKey,
-    inovKey:@inovKey, dispKey:@dispKey, choice:@choice, checked:@checked }
+    obj = { source:@source, level:@level, compKey:@compKey,  pracKey:@pracKey, pageKey:@pageKey,
+    inovKey:@inovKey, dispKey:@dispKey }
+    obj.choice  = @choice  if not @isMuse
+    obj.checked = @checked if not @isMuse
     obj.warnMsg = @warnMsg if @warnMsg isnt 'None'
     obj
 
@@ -89,25 +90,26 @@ class Nav
     obj.dispKey = if paths[3]? then paths[3] else 'None'
     obj.pageKey = if page?     then page     else 'None'
     obj.inovKey = if innovate? then innovate else 'None'
-    console.log( 'Nav.toMsg()', { url:str, obj,obj } ) if str?
+    console.log( 'Nav.toMsg()', { url:str,  obj,obj } ) if str?
+    console.log( 'Nav.toMsg()', { url:href, obj,obj } ) if @debug
     obj
 
   urlChanged:( event ) ->
-    event.preventDefault() # Not really needed
-    #indow.location.reload(false)
+    #vent.preventDefault() # Not really needed
+    console.log( 'Mav.urlChanged()', event ) # if @debug
+    window.stop()
     obj = toMsg()
     @pub( obj )
     return
 
   urlPrevent:( event ) ->
-    #window.stop()
-    #window.location.reload(false)
-    document.execCommand('Stop')
-    console.log( 'Mav.urlPrevent()', event ) if @debug
-
+    # await window.stop()
+    # window.location.reload(false)
+    # document.execCommand('Stop')
+    console.log( 'Mav.urlPrevent()', event ) # if @debug
     return
 
-  routeListen:() ->
+  urlListen:() ->
     window.addEventListener( 'beforeunload', (event) => @urlPrevent(event) )
     window.addEventListener( 'popstate',     (event) => @urlChanged(event) )
     return
@@ -156,18 +158,12 @@ class Nav
     msg.source = "#{'Nav.dirComp'}(#{dir})"
     if @hasCompKey( @compKey, dir )
       msg.compKey = @adjCompKey( @compKey,dir )
-      msg.route   = @toRoute( msg.compKey )
-      @doRoute( { route:msg.route } )
       @pub( msg )
     else if @hasActivePageDir( @route, dir )
       @dirPage( dir )
     else
       @log( msg, warnMsg:"Missing adjacent component for #{dir} #{@compKey}" )
     return
-
-  # Map compKeys to a single Comp route for Muse
-  toRoute:( compKey ) ->
-    if @isMuse and @inArray(compKey,@museComps) then 'Comp' else compKey
 
   dirPrac:( dir ) ->
     msg = {}
@@ -234,7 +230,7 @@ class Nav
 
   # Need to int page.keys = Object.keys(pages)
   movePage:( page, dir  ) ->
-    pageKey  = @getPageKey( @route )
+    pageKey  = @getPageKey( @compKey )
     len      = page.keys.length
     if pageKey isnt 'None'
       idx = page.keys.indexOf(pageKey)

@@ -39,7 +39,7 @@
       const dispObj = ref(null);
 
       const doPrac = function (pracKey) {
-        let obj = { route:"Prac", pracKey:pracKey };
+        let obj = { level:"Prac", pracKey:pracKey };
         nav.pub( obj ); }
 
       const doDisp = function (pracKey,dispKey) {

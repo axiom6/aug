@@ -6,6 +6,7 @@ class Mix
 
   constructor:( Main ) ->
     Mix.Main =  Main
+    @debug = false
 
   # Util
   isDef: (d) ->
@@ -149,7 +150,7 @@ class Mix
     obj = {}
     if       Mix.Main.Batch[compKey]?
        obj = Mix.Main.Batch[compKey].data.pracs
-    else if compKey isnt 'Home' and compKey isnt 'Cube'
+    else if compKey isnt 'Home' and compKey isnt 'Defs'
       console.error( 'Mix.compObject() bad compKey', compKey )
     obj
 
@@ -159,7 +160,7 @@ class Mix
       compPracs = @pracs(compKey)
       if @isDef(inovKey) and inovKey isnt compKey and @isBatch(inovKey)
         inovPracs = @pracs(inovKey)
-        # console.log( 'Mix.inovObject() inovPracs', inovPracs )
+        console.log( 'Mix.inovObject() inovPracs', { inovKey:inovKey, inovPracs:inovPracs } ) if @debug
         for key, prac of compPracs
           if prac.column is 'Innovate' and prac.row isnt 'Dim'
             inovPrac = @getPrac(inovPracs,prac.row,prac.column,inovKey)

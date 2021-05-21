@@ -20,7 +20,7 @@
 
       const doDisc = function (dispKey) {
         // console.log( 'Disc.doDisp()', { dispKey:dispKey, dispObj:props.dispObj } );
-        let obj = { source:'Disc.doDisp()', route:"Disp", dispKey:dispKey };
+        let obj = { source:'Disc.doDisp()', level:"Disp", dispKey:dispKey };
         nav.pub( obj ); }
 
     return { doDisc }; }

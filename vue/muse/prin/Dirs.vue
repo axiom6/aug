@@ -41,11 +41,11 @@
       const ddObj   = ref(null);
 
       const doPrac = function (pracKey) {
-        let obj = { route:"Prac", pracKey:pracKey };
+        let obj = { level:"Prac", pracKey:pracKey };
         nav.pub( obj ); }
 
       const doDisp = function (pracKey,dispKey) {
-        let obj = { route:"Disp", pracKey:pracKey, dispKey:dispKey };
+        let obj = { level:"Disp", pracKey:pracKey, dispKey:dispKey };
         nav.pub( obj ); }
 
       const style = function( ikwObj ) {

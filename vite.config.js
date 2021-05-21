@@ -4,8 +4,9 @@ import LessRollup     from 'rollup-plugin-less';
 import CoffeeRollup   from 'rollup-plugin-coffee-script';
 const { promises: fs } = require("fs");
 //const path             = require("path");
+//server: { hmr: { overlay:false } },
 
-export default  ( { command, mode } ) => {
+export default ( { command, mode } ) => {
 
   if( command === 'build' ) {
     console.log( 'vite.config.js build', { command:command, mode:mode } );
@@ -18,12 +19,13 @@ export default  ( { command, mode } ) => {
       fs.copyFile( 'pub/augm/appl/Lazy.js', 'pub/augm/appl/Load.js' ); }
     return defineConfig( {
       plugins: [vue()],
-      build: { rollupOptions:{
-        plugins:CoffeeRollup() } } } ); }
+      build:  { rollupOptions:{
+          plugins:CoffeeRollup() } } } ); }
   else {
     console.log( 'vite.config.js dev?', { command:command, mode:mode } );
     fs.copyFile( 'pub/augm/appl/Lazy.js',   'pub/augm/appl/Load.js' );
-    return defineConfig({
+    return defineConfig( {
       plugins: [vue()],
       build: { rollupOptions:{ plugins:LessRollup() } } } ); }
-}
+};
+

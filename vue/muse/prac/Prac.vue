@@ -39,7 +39,6 @@
           console.log( 'Prac.onPrac()', { pracIdx:pracIdx.value, pracObj:pracObj.value, pracKey:obj.pracKey } ); } }
 
       const onNav = (obj) => {
-        //console.log( 'Prac.onNav()', obj.route )
         if( nav.isMyNav(obj,'Prac') ) {
           onPrac(obj); } }
 

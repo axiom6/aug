@@ -1,6 +1,6 @@
 
 <template>
-  <div   class="navb-rect" @click="doRoute()">
+  <div   class="navb-rect" @click="doComp()">
     <div class="navb-name">{{title}}</div>
   </div>
 </template>
@@ -11,16 +11,16 @@
 
   let Navb = {
 
-    props: { title:String, route:String },
+    props: { title:String, compKey:String },
 
     setup( props ) {
 
       const nav     = inject('nav');
 
-      const doRoute = function () {
-        nav.doRoute( { route:props.route } ); }
+      const doComp = function () {
+        nav.pub( { compKey:props.compKey } ); }
 
-    return { doRoute }; }
+    return { doComp }; }
   }
 
 export default Navb;

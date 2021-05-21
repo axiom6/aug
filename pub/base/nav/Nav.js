@@ -25,18 +25,16 @@ Nav = class Nav {
     this.touch = null;
     this.build = new Build(this.batch);
     this.source = 'None';
-    this.route = 'Home';
-    this.routeLast = 'None';
-    this.choice = 'None';
-    this.checked = false;
     this.level = 'None'; // set to either Comp Prac or Disp by Tocs.vue
     this.compKey = 'Home'; // Also specifies current plane
     this.pracKey = 'None';
     this.dispKey = 'None';
     this.pageKey = 'None';
     this.inovKey = 'None'; // Only used by Tabs to Tocs.vue and Comp.vue
+    this.choice = 'None';
+    this.checked = false;
     this.warnMsg = 'None';
-    this.debug = false;
+    this.debug = true;
     this.replays = {};
     this.url = 'None';
     this.museLevels = ['Comp', 'Prac', 'Disp'];
@@ -44,7 +42,7 @@ Nav = class Nav {
     this.museInovs = ['Info', 'Know', 'Wise', 'Soft', 'Data', 'Scie', 'Math'];
     this.musePlanes = ['Info', 'Know', 'Wise'];
     this.keyEvents();
-    this.routeListen();
+    this.urlListen();
   }
 
   pub(msg, isReplay = false) {
@@ -84,16 +82,19 @@ Nav = class Nav {
     this.inovKey = this.getInovKey(this.compKey);
     obj = {
       source: this.source,
-      route: this.route,
       level: this.level,
       compKey: this.compKey,
       pracKey: this.pracKey,
       pageKey: this.pageKey,
       inovKey: this.inovKey,
-      dispKey: this.dispKey,
-      choice: this.choice,
-      checked: this.checked
+      dispKey: this.dispKey
     };
+    if (!this.isMuse) {
+      obj.choice = this.choice;
+    }
+    if (!this.isMuse) {
+      obj.checked = this.checked;
+    }
     if (this.warnMsg !== 'None') {
       obj.warnMsg = this.warnMsg;
     }
@@ -154,27 +155,33 @@ Nav = class Nav {
         obj
       });
     }
+    if (this.debug) {
+      console.log('Nav.toMsg()', {
+        url: href,
+        obj,
+        obj
+      });
+    }
     return obj;
   }
 
   urlChanged(event) {
     var obj;
-    event.preventDefault(); // Not really needed
-    //indow.location.reload(false)
+    //vent.preventDefault() # Not really needed
+    console.log('Mav.urlChanged()', event); // if @debug
+    window.stop();
     obj = toMsg();
     this.pub(obj);
   }
 
   urlPrevent(event) {
-    //window.stop()
-    //window.location.reload(false)
-    document.execCommand('Stop');
-    if (this.debug) {
-      console.log('Mav.urlPrevent()', event);
-    }
+    // await window.stop()
+    // window.location.reload(false)
+    // document.execCommand('Stop')
+    console.log('Mav.urlPrevent()', event); // if @debug
   }
 
-  routeListen() {
+  urlListen() {
     window.addEventListener('beforeunload', (event) => {
       return this.urlPrevent(event);
     });
@@ -260,10 +267,6 @@ Nav = class Nav {
     msg.source = `${'Nav.dirComp'}(${dir})`;
     if (this.hasCompKey(this.compKey, dir)) {
       msg.compKey = this.adjCompKey(this.compKey, dir);
-      msg.route = this.toRoute(msg.compKey);
-      this.doRoute({
-        route: msg.route
-      });
       this.pub(msg);
     } else if (this.hasActivePageDir(this.route, dir)) {
       this.dirPage(dir);
@@ -271,15 +274,6 @@ Nav = class Nav {
       this.log(msg, {
         warnMsg: `Missing adjacent component for ${dir} ${this.compKey}`
       });
-    }
-  }
-
-  // Map compKeys to a single Comp route for Muse
-  toRoute(compKey) {
-    if (this.isMuse && this.inArray(compKey, this.museComps)) {
-      return 'Comp';
-    } else {
-      return compKey;
     }
   }
 
@@ -369,7 +363,7 @@ Nav = class Nav {
   // Need to int page.keys = Object.keys(pages)
   movePage(page, dir) {
     var idx, len, ndx, pageKey;
-    pageKey = this.getPageKey(this.route);
+    pageKey = this.getPageKey(this.compKey);
     len = page.keys.length;
     if (pageKey !== 'None') {
       idx = page.keys.indexOf(pageKey);

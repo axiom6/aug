@@ -34,13 +34,12 @@ class Muse
 
   # Called by muse.html to kick things off
   # 1. Read in all the JSON config files in Muse.Batch. Call Muse.init() when complete.
+  Muse.debug = false
   Muse.start = () ->
-    #useLD   = new MuseLD( Home )
-    # routesLD = museLD.toRoutes()
-    # console.log( 'MuseLD.toRoutes()', routesLD )
     Muse.addToHead()
     for key, val of Muse.Batch when val.refine? and val.refine
       val.data = Access.refine(val.data)
+      console.log( 'Muse.init()', key ) if Muse.debug
     Muse.init( Muse.Batch )
     return
 
@@ -67,32 +66,32 @@ class Muse
     return
 
   Muse.Batch = {
-    Prin: { url:'muse/Prin.json', data:PrinJson, refine:true }
-    Rows: { url:'muse/Rows.json', data:RowsJson, refine:true }
-    Info: { url:'muse/Info.json', data:InfoJson, refine:true }
-    Know: { url:'muse/Know.json', data:KnowJson, refine:true }
-    Wise: { url:'muse/Wise.json', data:WiseJson, refine:true }
-    Soft: { url:'inno/Soft.json', data:SoftJson, refine:true }
-    Data: { url:'inno/Data.json', data:DataJson, refine:true }
-    Scie: { url:'inno/Scie.json', data:ScieJson, refine:true }
-    Math: { url:'inno/Math.json', data:MathJson, refine:true }
-    Test: { url:'muse/Test.json', data:TestJson, refine:true } }
+    Prin:    { url:'muse/Prin.json', data:PrinJson, refine:true }
+    Rows:    { url:'muse/Rows.json', data:RowsJson, refine:true }
+    Info:    { url:'muse/Info.json', data:InfoJson, refine:true }
+    Know:    { url:'muse/Know.json', data:KnowJson, refine:true }
+    Wise:    { url:'muse/Wise.json', data:WiseJson, refine:true }
+    Soft:    { url:'inno/Soft.json', data:SoftJson, refine:true }
+    Data:    { url:'inno/Data.json', data:DataJson, refine:true }
+    Science: { url:'inno/Scie.json', data:ScieJson, refine:true }
+    Math:    { url:'inno/Math.json', data:MathJson, refine:true }
+    Test:    { url:'muse/Test.json', data:TestJson, refine:true } }
 
   # Toc.vue components and routes with no west or east directions
   Muse.komps = {
-    Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
+    Home:{ title:'Home', key:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
     north:"Test", prev:"Test", south:"Prin",  next:"Prin"  }
-    Prin:{ title:'Prin', key:'Prin', route:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",
+    Prin:{ title:'Prin', key:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",
     north:"Home", prev:"Home", south:"Info",  next:"Info" }
-    Info:{ title:'Info', key:'Info', route:'Info', pracs:{}, ikw:true,  icon:"fas fa-th",
+    Info:{ title:'Info', key:'Info', pracs:{}, ikw:true,  icon:"fas fa-th",
     north:"Prin", prev:"Prin", south:"Know",  next:"Know" }
-    Know:{ title:'Know', key:'Know', route:'Know', pracs:{}, ikw:true,  icon:"fas fa-university",
+    Know:{ title:'Know', key:'Know', pracs:{}, ikw:true,  icon:"fas fa-university",
     north:"Info", prev:"Info", south:"Wise",  next:"Wise" }
-    Wise:{ title:'Wise', key:'Wise', route:'Wise', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor",
+    Wise:{ title:'Wise', key:'Wise', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor",
     north:"Know", prev:"Know", south:"Defs",  next:"Defs" }
-    Defs:{ title:'Defs', key:'Defs', route:'Defs', pracs:{}, ikw:false, icon:"fas fa-cubes",
+    Defs:{ title:'Defs', key:'Defs', pracs:{}, ikw:false, icon:"fas fa-cubes",
     north:"Wise", prev:"Wise", south:"Test",  next:"Test"  }
-    Test:{ title:'Test', key:'Test', route:'Test', pracs:{}, ikw:false, icon:"fas fa-stethoscope",
+    Test:{ title:'Test', key:'Test', pracs:{}, ikw:false, icon:"fas fa-stethoscope",
     north:"Defs", prev:"Defs", south:"Home",  next:"Home"  } }
 
   # 2. Initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.

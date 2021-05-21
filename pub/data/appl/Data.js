@@ -188,7 +188,7 @@ Data = (function() {
       data: DataJson,
       refine: true
     },
-    Scie: {
+    Science: {
       url: 'inno/Scie.json',
       data: ScieJson,
       refine: true

@@ -1,7 +1,8 @@
 
 Debug
-  1. Fix Science inov with mix.compObject()
-  2. Set location.href loop
+  1. Crawl URLs
+  2. Remove router in Augm Data Jitt
+  3. Look into vite.config.js
 
 Features
   1. Get Touch working again

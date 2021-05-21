@@ -2,7 +2,7 @@
 <template>
   <div   class="summ-pane">
     <div v-if="isRouted()" class="summ-route">
-      <h-navb :title="name" :route="name"></h-navb>
+      <h-navb :title="name" :compKey="name"></h-navb>
     </div>
     <div v-if="!isRouted()" class="summ-name">{{name}}</div>
     <div class="summ-choices">
@@ -22,7 +22,7 @@
 
     components: { 'h-navb':Navb },
 
-    props: { name:String, route:{ type:String, default:'None' } },
+    props: { name:String, compKey:{ type:String, default:'None' } },
 
     setup( props ) {
 
@@ -33,7 +33,7 @@
       const debug = false;
 
       const onChoices = function( obj ) {
-        if( obj.route === props.name ) {
+        if( obj.compKey === props.compKey ) {
           let choices = mix.choices( props.name )
           if( debug ) {
             console.log( 'Summ.onChoices()', choices, obj ); }
@@ -47,7 +47,7 @@
         else if( idx===2 ) c2.value  = choice; }
 
       const isRouted = function() {
-        return props.route !== 'None'; }
+        return props.compKey !== 'None'; }
 
       onMounted( function () {
         mix.subscribe( 'Nav', 'Summ', (obj) => { onChoices(obj); } );
