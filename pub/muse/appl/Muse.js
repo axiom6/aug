@@ -97,7 +97,7 @@ Muse = (function() {
       };
       Muse.stream = new Stream(subjects, infoSpec);
       Muse.mix = new Mix(Muse);
-      Muse.nav = new Nav(Muse.stream, batch, Muse.komps, Muse.pages, true);
+      Muse.nav = new Nav(Muse.stream, Muse.mix, batch, Muse.komps, Muse.pages, true);
       Muse.touch = new Touch(Muse.stream, Muse.nav);
       Muse.build = new Build(batch, Muse.komps);
       //use.cache  = new Cache( Muse.stream )

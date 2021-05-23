@@ -48,7 +48,7 @@
       const onNav = (obj) => {
         level  = obj.level;
         module = obj.compKey;
-        if( nav.inArray(obj.compKey,nav.musePlanes) ) { module = level;       }
+        if( mix.inArray(obj.compKey,nav.musePlanes) ) { module = level;       }
         else if( obj.compKey==='Prin'               ) { module = level==='Comp' ? 'Prin' : 'Prac'; }
         else if( level==='Prac'                     ) { module = obj.pracKey; }
         viewIdx.value++;

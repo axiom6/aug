@@ -2120,6 +2120,17 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/src\/base\/nav\/Dir.coffee" : {
+      "ft" : 32,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/base\/nav\/Dir.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/src\/base\/nav\/Mix.coffee" : {
       "ft" : 32,
       "ma" : 0,
@@ -2735,17 +2746,6 @@
       "oAP" : "\/pub\/muse\/appl\/Crawl.js",
       "oF" : 0,
       "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/muse\/appl\/firebase.redirect.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/muse\/appl\/firebase.redirect-min.js",
-      "oF" : 0,
       "sC" : 0,
       "tS" : 0
     },

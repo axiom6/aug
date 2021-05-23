@@ -1,8 +1,8 @@
 <template>
   <div class="replay-pane" ref="Replay">
     <h1>Replay Messages</h1>
-      <h-btn name="Replay" :doPub="doReplay" :position="[20,20,20,10]" :background="'blue'"></h-btn>
-      <h-btn name="UrlMsg" :doPub="doUrlMsg" :position="[60,20,20,10]" :background="'blue'"></h-btn>
+      <h-btn name="Pubs" :doPub="doPubs" :position="[20,20,20,10]" :background="'blue'"></h-btn>
+      <h-btn name="Urls" :doPub="doUrls" :position="[60,20,20,10]" :background="'blue'"></h-btn>
   </div>
 </template>
 
@@ -21,13 +21,13 @@ let Replay = {
     const nav     = inject('nav');
     const testMgr = new TestMgr( nav, 'Muse' );
 
-    const doReplay = () => {
-      testMgr.doReplay(); }
+    const doPubs = () => {
+      testMgr.doPubs( nav.pubs ); }
 
-    const doUrlMsg = () => {
-      testMgr.doUrlMsg(); }
+    const doUrls = () => {
+      testMgr.doUrls( nav.urls ); }
 
-    return { doReplay, doUrlMsg }; }
+    return { doPubs, doUrls }; }
 }
 
 export default Replay;
