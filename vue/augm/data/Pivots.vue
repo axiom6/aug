@@ -49,7 +49,7 @@
     mounted: function () {
       this.mix = inject('mix');
       this.nav = inject('nav');
-      this.nav.setPages( this.compKey, this.pages );
+    //this.nav.setPages( this.compKey, this.pages );
       this.mix.subscribe( 'Nav', 'Pivots', (obj) => {
           this.onNav( obj ); } ); }
 

@@ -9,7 +9,7 @@
 
 <script type="module">
 
-import { inject, ref } from 'vue';
+import { inject, ref, onMounted } from 'vue';
 
   let Tabs = {
 
@@ -18,6 +18,7 @@ import { inject, ref } from 'vue';
 
     setup(props) {
 
+      const mix     = inject('mix');
       const nav     = inject('nav');
       const tabsIdx = ref(0);
       const pageObj = ref(null);
@@ -53,6 +54,11 @@ import { inject, ref } from 'vue';
       const classTab = (pageArg) => {
         // if( debug ) { console.log( 'Tabs.classTab', { pageKey:pageKey.value, pageArg:pageArg } ) }
         return pageKey.value === pageArg ? 'tabs-tab-active' : 'tabs-tab'; }
+
+      onMounted( () => {  // obj is tab obj and not a complete pub obj
+        mix.subscribe('Tab', 'Tabs', (obj) => {
+          if( compKey===obj.compKey ) {
+            onPage(obj.pageKey); } } ); } )
 
       return { pageObj, tabsIdx, doPage, classTab, stylePos } }
   }

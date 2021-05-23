@@ -89,7 +89,7 @@ Muse = (function() {
       var error, infoSpec, subjects;
       Muse.Batch = batch; // Not necessary here, but assigned for compatibilitry
       Muse.myName = 'Muse';
-      subjects = ["Nav"];
+      subjects = ["Nav", "Tab"];
       infoSpec = {
         subscribe: false,
         publish: false,
@@ -121,7 +121,7 @@ Muse = (function() {
       Muse.app.provide('mix', Muse.mix);
       Muse.app.provide('nav', Muse.nav);
       Muse.app.mount('#muse');
-      Muse.nav.pub(Muse.nav.toPub(Muse.href));
+      Muse.nav.pub(Muse.nav.toPub(Muse.href), true);
     }
 
     static lazy(name) {

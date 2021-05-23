@@ -100,7 +100,7 @@ class Muse
   Muse.init =   ( batch ) ->
     Muse.Batch  = batch # Not necessary here, but assigned for compatibilitry
     Muse.myName = 'Muse'
-    subjects    = ["Nav"]
+    subjects    = ["Nav","Tab"]
     infoSpec    = { subscribe:false, publish:false, subjects:subjects}
     Muse.stream = new Stream( subjects, infoSpec )
     Muse.mix    = new Mix(   Muse )
@@ -122,7 +122,7 @@ class Muse
     Muse.app.provide('mix',  Muse.mix )
     Muse.app.provide('nav',  Muse.nav )
     Muse.app.mount('#muse')
-    Muse.nav.pub( Muse.nav.toPub(Muse.href) )
+    Muse.nav.pub( Muse.nav.toPub(Muse.href), true )
     return
 
   # Lazy loader with dynamic import()
@@ -141,7 +141,6 @@ class Muse
   Muse.logPracs = ( compk ) ->
     console.log( 'Muse.pracs', Muse.Batch[compk].data[compk].pracs )
     return
-
 
   Muse.pages = {
     Comp: {
@@ -171,10 +170,11 @@ class Muse
       Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap"},
       Do:{    name:'Do',    dir:'do', icon:"fas fa-cog"},
       Share:{ name:'Share', dir:'sh', icon:"fas fa-share-alt-square"} }
-    Prin:{
+    Prin: {
       Icons:  { title:'Icons',  key:'Icons',  show:true  },
       Topics: { title:'Topics', key:'Topics', show:false } }
   }
+
 
 export default Muse
 

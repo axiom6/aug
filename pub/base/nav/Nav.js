@@ -34,9 +34,10 @@ Nav = class Nav {
     this.choice = 'None';
     this.checked = false;
     this.warnMsg = 'None';
-    this.debug = true;
+    this.debug = false;
     this.replays = [];
     this.url = 'None';
+    this.tabs = {};
     this.museLevels = ['Comp', 'Prac', 'Disp'];
     this.museComps = ['Home', 'Prin', 'Info', 'Know', 'Wise', 'Cube', 'Test'];
     this.museInovs = ['Info', 'Know', 'Wise', 'Soft', 'Data', 'Scie', 'Math'];
@@ -47,31 +48,19 @@ Nav = class Nav {
   //urlListen()
   pub(msg, isReplay = false) {
     var obj;
-    if (this.msgOK(msg)) {
-      obj = this.toObj(msg);
-      this.url = this.toUrl(obj);
-      console.log('Nav.pub()', obj);
-      if (!isReplay && obj.compKey !== 'Test') {
-        this.replays.push(obj);
-      }
-      this.stream.publish('Nav', obj);
+    obj = this.toObj(msg, isReplay);
+    this.url = this.toUrl(obj);
+    console.log('Nav.pub()', obj);
+    if (!isReplay && obj.compKey !== 'Test') {
+      this.replays.push(obj);
     }
+    this.stream.publish('Nav', obj);
   }
 
-  msgOK(msg) {
-    var ok;
-    ok = true;
-    if (!this.isDef(msg)) { // if @isMuse and msg.compKey? and not @hasCompKey(msg.compKey)
-      ok = false;
-    }
-    return ok;
-  }
-
-  toObj(msg) {
+  toObj(msg, isReplay) {
     var obj;
-    this.set(msg);
+    this.set(msg, isReplay);
     if (msg.source == null) {
-      // @setPageKey( @getPagesName(msg), msg.pageKey, {} ) if msg.pageKey isnt 'None'
       this.source = 'None';
     }
     if (this.level === 'Comp') {
@@ -101,8 +90,31 @@ Nav = class Nav {
     return obj;
   }
 
-  set(msg) {
-    var key, val;
+  set(msg, isReplay) {
+    var compKey, key, val;
+    if (isReplay) {
+      if (msg.pageKey !== 'None') {
+        compKey = this.getPagesName(msg);
+        this.setPageKey(compKey, msg.pageKey, {}); // Short message on 'Tab' subject
+        this.stream.publish('Tab', {
+          compKey: compKey,
+          pageKey: msg.pageKey
+        });
+      }
+      if (msg.inovKey !== 'None') {
+        this.setPageKey(msg.compKey, msg.inovKey, {}); // Short message on 'Tab' subject
+        this.stream.publish('Tab', {
+          compKey: msg.compKey,
+          pageKey: msg.inovKey
+        });
+        if (this.debug) {
+          console.log('Nav.set()', {
+            compKey: msg.compKey,
+            inovKey: msg.inovKey
+          });
+        }
+      }
+    }
     for (key in msg) {
       if (!hasProp.call(msg, key)) continue;
       val = msg[key];
@@ -126,7 +138,7 @@ Nav = class Nav {
       url += '?' + 'page=' + page;
     }
     if (inov !== 'None') {
-      url += '&' + 'inovate=' + inov;
+      url += '&' + 'innovate=' + inov;
     }
     // console.log( 'Nav.toUrl()', url ) if @debug
     window.history.pushState({}, '', url);
@@ -160,7 +172,6 @@ Nav = class Nav {
     }
   }
 
-  // str arg is a test mode used in TestMgr.coffee
   toPub(href) {
     var innovate, obj, page, paths, url;
     obj = {};

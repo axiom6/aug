@@ -19,9 +19,10 @@ class Nav
     @choice     = 'None'
     @checked    = false
     @warnMsg    = 'None'
-    @debug      =  true
+    @debug      =  false
     @replays    = []
     @url        = 'None'
+    @tabs       = {}
     @museLevels = ['Comp','Prac','Disp']
     @museComps  = ['Home','Prin','Info','Know','Wise','Cube','Test']
     @museInovs  = ['Info','Know','Wise','Soft','Data','Scie','Math']
@@ -30,22 +31,15 @@ class Nav
     #urlListen()
 
   pub:( msg, isReplay=false ) ->
-    if @msgOK(msg)
-      obj  = @toObj( msg )
-      @url = @toUrl( obj )
-      console.log('Nav.pub()', obj )
-      @replays.push(obj) if not isReplay and obj.compKey isnt 'Test'
-      @stream.publish( 'Nav',  obj )
+    obj  = @toObj( msg, isReplay )
+    @url = @toUrl( obj )
+    console.log('Nav.pub()', obj )
+    @replays.push(obj) if not isReplay and obj.compKey isnt 'Test'
+    @stream.publish( 'Nav',  obj )
     return
 
-  msgOK:( msg ) ->
-    ok = true
-    ok = false if not @isDef(msg) # if @isMuse and msg.compKey? and not @hasCompKey(msg.compKey)
-    ok
-
-  toObj:( msg ) ->
-    @set( msg )
-    # @setPageKey( @getPagesName(msg), msg.pageKey, {} ) if msg.pageKey isnt 'None'
+  toObj:( msg, isReplay ) ->
+    @set( msg, isReplay )
     @source   = 'None' if not msg.source?
     @pracKey  = 'None' if @level is   'Comp'
     @dispKey  = 'None' if @level isnt 'Disp'
@@ -57,7 +51,16 @@ class Nav
     obj.warnMsg = @warnMsg if @warnMsg isnt 'None'
     obj
 
-  set:( msg ) ->
+  set:( msg, isReplay ) ->
+    if isReplay
+       if msg.pageKey isnt 'None'
+          compKey = @getPagesName(msg)
+          @setPageKey( compKey, msg.pageKey, {} ) # Short message on 'Tab' subject
+          @stream.publish( 'Tab', { compKey:compKey, pageKey:msg.pageKey } )
+       if msg.inovKey isnt 'None'
+         @setPageKey( msg.compKey, msg.inovKey, {} ) # Short message on 'Tab' subject
+         @stream.publish( 'Tab',   { compKey:msg.compKey, pageKey:msg.inovKey } )
+         console.log( 'Nav.set()', { compKey:msg.compKey, inovKey:msg.inovKey } ) if @debug
     for own key, val of msg
       @[key] = val
     return
@@ -69,18 +72,18 @@ class Nav
     url += if    obj.compKey is 'Home' then '' else '/' + obj.compKey
     url += '/' + obj.pracKey if obj.pracKey isnt 'None'
     url += '/' + obj.dispKey if obj.dispKey isnt 'None'
-    url += '?' + 'page='    + page  if page isnt 'None'
-    url += '&' + 'inovate=' + inov  if inov isnt 'None'
+    url += '?' + 'page='     + page  if page isnt 'None'
+    url += '&' + 'innovate=' + inov  if inov isnt 'None'
     # console.log( 'Nav.toUrl()', url ) if @debug
     window.history.pushState( {}, '', url )
     url
 
   getPagesName:( obj ) ->
-     pagesName = 'None'
-     pagesName = obj.level if @inArray(obj.compKey,@musePlanes)
-     pagesName = 'Prin' if obj.compKey is 'Prin' and obj.level is 'Comp'
-     pagesName = 'Prac' if obj.compKey is 'Prin' and obj.level is 'Prac'
-     pagesName
+    pagesName = 'None'
+    pagesName = obj.level   if @inArray(obj.compKey,@musePlanes)
+    pagesName = 'Prin' if obj.compKey is 'Prin' and obj.level is 'Comp'
+    pagesName = 'Prac' if obj.compKey is 'Prin' and obj.level is 'Prac'
+    pagesName
 
   objPage:( obj ) ->
     @getPageKey( @getPagesName(obj) )
@@ -88,7 +91,6 @@ class Nav
   objInov:( obj ) ->
     if @inArray(obj.compKey,@musePlanes) then @getPageKey(obj.compKey) else 'None'
 
-# str arg is a test mode used in TestMgr.coffee
   toPub:( href ) ->
     obj         = {}
     url         = new URL(href)
