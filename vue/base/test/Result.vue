@@ -1,23 +1,16 @@
 <template>
   <div class="result-pane" ref="Result">
-    <h1 v-show="myRoute()">Test Results</h1>
+    <h1>Test Results</h1>
   </div>
 </template>
 
 <script type="module">
 
-import { inject } from 'vue';
-
 let Result = {
 
   setup() {
 
-    const mix = inject('mix');
-
-    const myRoute = function() {
-      return mix.isRoute('Result'); }
-
-    return { myRoute }; }
+  return {}; }
 }
 
 export default Result;

@@ -5,7 +5,7 @@ import Build from '../util/Build.js';
 
 //mport { NavigationFailureType, isNavigationFailure } from 'vue-router'
 Nav = class Nav {
-  constructor(stream, batch, komps1, pages1, isMuse = false) { // @routes, @routeNames,
+  constructor(stream, batch, komps1, pages1, isMuse = false) {
     this.tap = this.tap.bind(this);
     this.dir = this.dir.bind(this);
     this.stream = stream;
@@ -35,25 +35,24 @@ Nav = class Nav {
     this.checked = false;
     this.warnMsg = 'None';
     this.debug = true;
-    this.replays = {};
+    this.replays = [];
     this.url = 'None';
     this.museLevels = ['Comp', 'Prac', 'Disp'];
     this.museComps = ['Home', 'Prin', 'Info', 'Know', 'Wise', 'Cube', 'Test'];
     this.museInovs = ['Info', 'Know', 'Wise', 'Soft', 'Data', 'Scie', 'Math'];
     this.musePlanes = ['Info', 'Know', 'Wise'];
     this.keyEvents();
-    this.urlListen();
   }
 
+  //urlListen()
   pub(msg, isReplay = false) {
-    var obj, objName;
+    var obj;
     if (this.msgOK(msg)) {
       obj = this.toObj(msg);
       this.url = this.toUrl(obj);
       console.log('Nav.pub()', obj);
       if (!isReplay && obj.compKey !== 'Test') {
-        objName = obj.compKey + ':' + obj.pracKey + ':' + obj.pageKey + ':' + obj.inovKey;
-        this.replays[objName] = obj;
+        this.replays.push(obj);
       }
       this.stream.publish('Nav', obj);
     }
@@ -62,33 +61,34 @@ Nav = class Nav {
   msgOK(msg) {
     var ok;
     ok = true;
-    if (this.isMuse && (msg.compKey != null) && !this.hasCompKey(msg.compKey)) {
+    if (!this.isDef(msg)) { // if @isMuse and msg.compKey? and not @hasCompKey(msg.compKey)
       ok = false;
     }
     return ok;
   }
 
   toObj(msg) {
-    var obj, pagesName;
+    var obj;
     this.set(msg);
-    pagesName = this.inArray(this.compKey, this.musePlanes) ? this.level : this.compKey;
     if (msg.source == null) {
+      // @setPageKey( @getPagesName(msg), msg.pageKey, {} ) if msg.pageKey isnt 'None'
       this.source = 'None';
     }
     if (this.level === 'Comp') {
       this.pracKey = 'None';
     }
-    this.pageKey = this.getPageKey(pagesName);
-    this.inovKey = this.getInovKey(this.compKey);
+    if (this.level !== 'Disp') {
+      this.dispKey = 'None';
+    }
     obj = {
       source: this.source,
       level: this.level,
       compKey: this.compKey,
       pracKey: this.pracKey,
-      pageKey: this.pageKey,
-      inovKey: this.inovKey,
       dispKey: this.dispKey
     };
+    obj.pageKey = this.objPage(obj);
+    obj.inovKey = this.objInov(obj);
     if (!this.isMuse) {
       obj.choice = this.choice;
     }
@@ -110,84 +110,80 @@ Nav = class Nav {
     }
   }
 
-  toUrl(msg) {
-    var url;
+  toUrl(obj) {
+    var inov, page, url;
+    page = this.objPage(obj);
+    inov = this.objInov(obj);
     url = window.location.protocol + '//' + window.location.host;
-    url += msg.compKey === 'Home' ? '/' : '/' + msg.compKey;
-    if (msg.pracKey !== 'None') {
-      url += '/' + msg.pracKey;
+    url += obj.compKey === 'Home' ? '' : '/' + obj.compKey;
+    if (obj.pracKey !== 'None') {
+      url += '/' + obj.pracKey;
     }
-    if (msg.dispKey !== 'None') {
-      url += '/' + msg.dispKey;
+    if (obj.dispKey !== 'None') {
+      url += '/' + obj.dispKey;
     }
-    if (msg.pageKey !== 'None') {
-      url += '?' + 'page=' + msg.pageKey;
+    if (page !== 'None') {
+      url += '?' + 'page=' + page;
     }
-    if (msg.inovKey !== 'None' && msg.level === 'Comp') {
-      url += '&' + 'inovate=' + msg.inovKey;
+    if (inov !== 'None') {
+      url += '&' + 'inovate=' + inov;
     }
-    if (this.debug) {
-      console.log('Nav.toUrl()', url);
-    }
+    // console.log( 'Nav.toUrl()', url ) if @debug
     window.history.pushState({}, '', url);
     return url;
   }
 
+  getPagesName(obj) {
+    var pagesName;
+    pagesName = 'None';
+    if (this.inArray(obj.compKey, this.musePlanes)) {
+      pagesName = obj.level;
+    }
+    if (obj.compKey === 'Prin' && obj.level === 'Comp') {
+      pagesName = 'Prin';
+    }
+    if (obj.compKey === 'Prin' && obj.level === 'Prac') {
+      pagesName = 'Prac';
+    }
+    return pagesName;
+  }
+
+  objPage(obj) {
+    return this.getPageKey(this.getPagesName(obj));
+  }
+
+  objInov(obj) {
+    if (this.inArray(obj.compKey, this.musePlanes)) {
+      return this.getPageKey(obj.compKey);
+    } else {
+      return 'None';
+    }
+  }
+
   // str arg is a test mode used in TestMgr.coffee
-  toMsg(str = null) {
-    var href, innovate, obj, page, paths, url;
+  toPub(href) {
+    var innovate, obj, page, paths, url;
     obj = {};
-    href = str != null ? str : document.location.href;
     url = new URL(href);
     page = url.searchParams.get("page");
     innovate = url.searchParams.get("innovate");
     paths = url.pathname.split('/');
     obj.source = 'Url';
-    obj.compKey = paths[1] != null ? paths[1] : 'None';
-    obj.pracKey = paths[2] != null ? paths[2] : 'None';
-    obj.dispKey = paths[3] != null ? paths[3] : 'None';
+    obj.compKey = this.isStr(paths[1]) ? paths[1] : 'Home';
+    obj.pracKey = this.isStr(paths[2]) ? paths[2] : 'None';
+    obj.dispKey = this.isStr(paths[3]) ? paths[3] : 'None';
     obj.pageKey = page != null ? page : 'None';
     obj.inovKey = innovate != null ? innovate : 'None';
-    if (str != null) {
-      console.log('Nav.toMsg()', {
-        url: str,
-        obj,
-        obj
-      });
-    }
+    obj.level = obj.dispKey !== 'None' ? 'Disp' : obj.pracKey !== 'None' ? 'Prac' : 'Comp';
     if (this.debug) {
-      console.log('Nav.toMsg()', {
+      console.log('Nav.toPub()', {
         url: href,
         obj,
-        obj
+        obj,
+        paths: paths
       });
     }
     return obj;
-  }
-
-  urlChanged(event) {
-    var obj;
-    //vent.preventDefault() # Not really needed
-    console.log('Mav.urlChanged()', event); // if @debug
-    window.stop();
-    obj = toMsg();
-    this.pub(obj);
-  }
-
-  urlPrevent(event) {
-    // await window.stop()
-    // window.location.reload(false)
-    // document.execCommand('Stop')
-    console.log('Mav.urlPrevent()', event); // if @debug
-  }
-
-  urlListen() {
-    window.addEventListener('beforeunload', (event) => {
-      return this.urlPrevent(event);
-    });
-    window.addEventListener('popstate', (event) => {
-      return this.urlChanged(event);
-    });
   }
 
   hasCompKey(compKey, dir = null) {
@@ -416,18 +412,16 @@ Nav = class Nav {
 
   setPageKey(pagesName, pageKey, propPages) {
     var key, page, ref;
+    if (pageKey === 'None') {
+      return;
+    }
     ref = this.pages[pagesName];
     for (key in ref) {
       if (!hasProp.call(ref, key)) continue;
       page = ref[key];
       page.show = key === pageKey; // Update nav pages
       if (propPages[key] != null) {
-        propPages[key].show = key === pageKey; // Also update the propPages in Tabs.vue because it is a copy
-      } else {
-        console.log('Nav.setPageKey() missing propPages key', {
-          key: key,
-          propPages: propPages
-        });
+        propPages[key].show = key === pageKey;
       }
     }
   }
@@ -458,7 +452,7 @@ Nav = class Nav {
 
   hasPages(pagesName, log = false) {
     var has;
-    has = this.isDef(this.pages[pagesName]) && this.isDef(this.pages[pagesName]);
+    has = this.isDef(this.pages[pagesName]);
     if (!has && log) {
       console.log('Nav.hasPages()', {
         pagesName: pagesName,
@@ -573,3 +567,82 @@ Nav = class Nav {
 };
 
 export default Nav;
+
+/*
+
+  setPageKey:( pagesName, pageKey, propPages ) ->
+    return if pageKey is 'None'
+    for own key, page  of @pages[pagesName]
+      page.show           = key is pageKey  # Update nav pages
+      if propPages[key]?
+         propPages[key].show = key is pageKey  # Also update the propPages in Tabs.vue because it is a copy
+      else
+        console.log( 'Nav.setPageKey() missing propPages key', { key:key, propPages:propPages } )
+    return
+
+  toObj:( msg ) ->
+    @set( msg )
+    pagesName = if @inArray(@compKey,@musePlanes) then @level else @compKey
+    @source   = 'None' if not msg.source?
+    @pracKey  = 'None' if @level is 'Comp'
+    @pageKey  = @getPageKey( pagesName )
+    @inovKey  = @getInovKey( @compKey  )
+    obj = { source:@source, level:@level, compKey:@compKey,  pracKey:@pracKey, pageKey:@pageKey,
+    inovKey:@inovKey, dispKey:@dispKey }
+    obj.choice  = @choice  if not @isMuse
+    obj.checked = @checked if not @isMuse
+    obj.warnMsg = @warnMsg if @warnMsg isnt 'None'
+    obj
+
+  msg.inovKey if msg.inovKey isnt 'None' and msg.level is 'Comp'
+
+  urlChanged:( event ) ->
+    #vent.preventDefault() # Not really needed
+    console.log( 'Mav.urlChanged()', event ) # if @debug
+    window.stop()
+    obj = toPub()
+    @pub( obj )
+    return
+
+  urlPrevent:( event ) ->
+ * await window.stop()
+ * window.location.reload(false)
+ * document.execCommand('Stop')
+    console.log( 'Mav.urlPrevent()', event ) # if @debug
+    return
+
+  urlListen:() ->
+    window.addEventListener( 'beforeunload', (event) => @urlPrevent(event) )
+    window.addEventListener( 'popstate',     (event) => @urlChanged(event) )
+    return
+
+  toPub:( href ) ->
+    obj         = {}
+    url         = new URL(href)
+    page        = url.searchParams.get("page")
+    innovate    = url.searchParams.get("innovate")
+    hashs1      =  url.hash.split('#')
+    hashs2      = hashs1[1].split('?')
+    hashs3      = hashs2[0].split('/')
+    obj.source  = 'Url'
+    obj.compKey = if hashs3[0]? then hashs3[0] else 'None'
+    obj.pracKey = if hashs3[1]? then hashs3[1] else 'None'
+    obj.dispKey = if hashs3[2]? then hashs3[2] else 'None'
+    obj.pageKey = if page?      then page      else 'None'
+    obj.inovKey = if innovate?  then innovate  else 'None'
+    obj.level =
+      if      obj.dispKey isnt 'None' then 'Disp'
+      else if obj.pracKey isnt 'None' then 'Prac'
+      else                                 'Comp'
+    console.log( 'Nav.toPub()', { url:href, obj,obj, hash:url.hash, hashs1:hashs1, hashs2:hashs2, hashs3:hashs3 } ) if @debug
+    obj
+
+   <script>
+     console.log("Listens", window.location.href );
+     window.addEventListener( 'beforeunload', () => {
+       console.log("Prevent", window.location.href );
+       window.location.reload(false); } );
+     window.addEventListener( 'popstate',     () => {
+       console.log("Changed", window.location.href ); } );
+   </script>
+ */

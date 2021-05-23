@@ -187,20 +187,6 @@ Mix = class Mix {
     return Mix.Main.nav != null;
   }
 
-  navRoute() {
-    if (this.isNav()) {
-      return this.nav().route;
-    } else if (this.isDir()) {
-      return this.dir().route;
-    } else {
-      return 'None';
-    }
-  }
-
-  isRoute(route) {
-    return route === this.navRoute();
-  }
-
   // Batch
   isBatch(compk) {
     return Mix.Main.Batch[compk] != null;
@@ -307,7 +293,7 @@ Mix = class Mix {
       } else {
         pracs = compPracs;
       }
-    } else if (compKey !== "Home" && compKey !== "Cube") {
+    } else if (compKey !== "Home" && compKey !== "Defs") {
       console.error('Mix.inovObject() bad compKey or inovKey', {
         compKey: compKey,
         inovKey: inovKey

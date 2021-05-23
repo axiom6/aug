@@ -44,8 +44,10 @@ import TestJson from '../../../data/muse/Test.json';
 
 Muse = (function() {
   class Muse {
-    static start() {
+    static start(href) {
       var key, ref, val;
+      console.log("Muse.start()", href);
+      Muse.href = href;
       Muse.addToHead();
       ref = Muse.Batch;
       for (key in ref) {
@@ -119,12 +121,7 @@ Muse = (function() {
       Muse.app.provide('mix', Muse.mix);
       Muse.app.provide('nav', Muse.nav);
       Muse.app.mount('#muse');
-      Muse.nav.pub({
-        source: "Muse",
-        route: "Home",
-        level: "Comp",
-        compKey: "Home"
-      });
+      Muse.nav.pub(Muse.nav.toPub(Muse.href));
     }
 
     static lazy(name) {

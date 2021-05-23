@@ -22,15 +22,14 @@ import { inject, ref } from 'vue';
       const tabsIdx = ref(0);
       const pageObj = ref(null);
       let   compKey = props.isComp ? 'Comp' : props.compKey;
-      // nav.setPages( compKey, props.pages );
       const pageKey = ref( nav.getPageKey( compKey, true ) );
       const debug   = false;
       if( debug ) { console.log( 'Tabs.setup()', {pageKey:pageKey.value,compKey:compKey,pages:nav.getPages(compKey)}); }
 
       const positions = {
-        left: {left: 0, width: '60%'},
-        right: {left: '60%', width: '40%'},
-        full: {left: 0, width: '100%'} };
+        left:  { left:0,     width: '60%'  },
+        right: { left:'60%', width: '40%'  },
+        full:  { left:0,     width: '100%' } };
       
       const onPage = (pageArg) => {
         if( nav.hasPages( compKey,true) ) {
@@ -43,7 +42,7 @@ import { inject, ref } from 'vue';
 
       const doPage = (pageArg) => {
         onPage(pageArg);
-        let obj = { source:'Tabs', compKey:props.compKey }; // Using prop.compKey
+        let obj = { source:'Tabs' }; // Using prop.compKey
         if( props.isInov ) { obj.inovKey = pageArg; } else { obj.pageKey = pageArg; }
         if( debug ) { console.log( 'Tabs.doPage()', obj ); }
         nav.pub(obj); }

@@ -40,16 +40,19 @@
       let   debug   = false
 
       const show = ( levelArg, moduleArg ) => {
-        return level===levelArg && module===moduleArg; }
+        let isShow = level===levelArg && module===moduleArg;
+        if( debug ) { console.log( 'View.show()',
+            { isShow:isShow, level:level, module:module, levelArg:levelArg, moduleArg:moduleArg } ); }
+        return isShow; }
 
       const onNav = (obj) => {
-        level = obj.level;
-        if( level==='Prac' ) {
-          module = obj.compKey==='Prac' ? 'Prac' : obj.pracKey; }
-        else {
-          module = nav.inArray(obj.compKey,nav.musePlanes) ? level : obj.compKey; }
+        level  = obj.level;
+        module = obj.compKey;
+        if( nav.inArray(obj.compKey,nav.musePlanes) ) { module = level;       }
+        else if( obj.compKey==='Prin'               ) { module = level==='Comp' ? 'Prin' : 'Prac'; }
+        else if( level==='Prac'                     ) { module = obj.pracKey; }
         viewIdx.value++;
-        if( debug ) { console.log( 'View.onNav()', { level:level, module:module } ); } }
+        if( debug ) { console.log( 'View.onNav()', { level:level, module:module, obj:obj } ); } }
 
       onMounted( () => {
         mix.subscribe('Nav', 'View', (obj) => { onNav(obj); } ); } )

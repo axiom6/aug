@@ -107,10 +107,6 @@ class Mix
     Mix.Main.touch
   isNav: () ->
     Mix.Main.nav?
-  navRoute: () ->
-    if @isNav() then @nav().route else if @isDir() then @dir().route else 'None'
-  isRoute: (route) ->
-    route is @navRoute()
 
   # Batch
   isBatch:(compk) ->
@@ -169,7 +165,7 @@ class Mix
             pracs[key] = prac
       else
         pracs = compPracs
-    else if compKey isnt "Home" and compKey isnt "Cube"
+    else if compKey isnt "Home" and compKey isnt "Defs"
       console.error('Mix.inovObject() bad compKey or inovKey', { compKey:compKey, inovKey:inovKey } )
     pracs
 

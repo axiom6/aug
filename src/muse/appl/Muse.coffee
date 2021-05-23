@@ -35,7 +35,9 @@ class Muse
   # Called by muse.html to kick things off
   # 1. Read in all the JSON config files in Muse.Batch. Call Muse.init() when complete.
   Muse.debug = false
-  Muse.start = () ->
+  Muse.start = (href) ->
+    console.log( "Muse.start()", href )
+    Muse.href = href
     Muse.addToHead()
     for key, val of Muse.Batch when val.refine? and val.refine
       val.data = Access.refine(val.data)
@@ -120,7 +122,7 @@ class Muse
     Muse.app.provide('mix',  Muse.mix )
     Muse.app.provide('nav',  Muse.nav )
     Muse.app.mount('#muse')
-    Muse.nav.pub( { source:"Muse", route:"Home", level:"Comp", compKey:"Home" } )
+    Muse.nav.pub( Muse.nav.toPub(Muse.href) )
     return
 
   # Lazy loader with dynamic import()
@@ -139,6 +141,7 @@ class Muse
   Muse.logPracs = ( compk ) ->
     console.log( 'Muse.pracs', Muse.Batch[compk].data[compk].pracs )
     return
+
 
   Muse.pages = {
     Comp: {

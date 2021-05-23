@@ -1,5 +1,4 @@
-var TestMgr,
-  hasProp = {}.hasOwnProperty;
+var TestMgr;
 
 import Local from '../store/Local.js';
 
@@ -13,12 +12,11 @@ TestMgr = class TestMgr {
   }
 
   async doReplay() { // CoffeeScript implicitly makes doReplay()
-    var key, obj, ref;
+    var i, len, obj, ref;
     ref = this.nav.replays;
-    //  async when in encounters await
-    for (key in ref) {
-      if (!hasProp.call(ref, key)) continue;
-      obj = ref[key];
+    //   async when in encounters await
+    for (i = 0, len = ref.length; i < len; i++) {
+      obj = ref[i];
       await this.nav.sleep(1000);
       obj.source = 'Replay';
       this.nav.pub(obj, true);

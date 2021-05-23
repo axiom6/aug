@@ -7,8 +7,8 @@ class TestMgr
     @dbName = 'Test'
     @local  = new Local( @nav.stream, @dbName )
 
-  doReplay:() =>                      # CoffeeScript implicitly makes doReplay()
-    for own key,obj of @nav.replays   #  async when in encounters await
+  doReplay:() =>              # CoffeeScript implicitly makes doReplay()
+    for obj in @nav.replays   #   async when in encounters await
       await @nav.sleep( 1000 )
       obj.source = 'Replay'
       @nav.pub( obj, true )
