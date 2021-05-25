@@ -47,14 +47,14 @@
 
       const create = (page) => {
         if( page.obj===null ) {
-          if(      page.key==='Graph'  ) { page.obj = Graph;  }
-          else if( page.key==='Basics' ) { page.obj = Basics; }
-          else if( page.key==='Grids'  ) { page.obj = Grids;  }
-          else if( page.key==='Isomet' ) { page.obj = Isomet; }
-          else if( page.key==='Play'   ) { page.obj = Play;   }
-          else if( page.key==='Isohed' ) { page.obj = Isohed; }
-          else if( page.key==='Torus'  ) { page.obj = Torus;  }
-          else if( page.key==='Sphere' ) { page.obj = Sphere; } } }
+          if(      page.key==='Graph'  ) { page.obj = new Graph();  }
+          else if( page.key==='Basics' ) { page.obj = new Basics(); }
+          else if( page.key==='Grids'  ) { page.obj = new Grids();  }
+          else if( page.key==='Isomet' ) { page.obj = new Isomet(); }
+          else if( page.key==='Play'   ) { page.obj = new Play();   }
+          else if( page.key==='Isohed' ) { page.obj = new Isohed(); }
+          else if( page.key==='Torus'  ) { page.obj = new Torus();  }
+          else if( page.key==='Sphere' ) { page.obj = new Sphere(); } } }
 
       onMounted( function () {
         mix.subscribe(  'Nav', 'GeomND', (obj) => {

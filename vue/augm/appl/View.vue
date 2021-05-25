@@ -24,25 +24,25 @@
 <script type="module">
 
   import { inject, ref, onMounted } from 'vue';
-  import Home   from './Home.vue'
-  import Math   from '../math/Math.vue';
-  import MathND from '../math/MathND.vue';
-  import Draw   from '../draw/Draw.vue';
-  import Hues   from '../mbox/Hues.vue';
-  import Tool   from '../tool/Tool.vue';
-  import Tools  from '../tool/Tools.vue';
-  import Cube   from '../cube/Cube.vue';
-  import Wood   from '../wood/Wood.vue';
-  import Geom   from '../geom/Geom.vue';
-  import GeomND from '../geom/GeomND.vue';
-  import Test   from '../../base/test/Test.vue';
-  import Replay from '../../base/test/Replay.vue';
-  import Result from '../../base/test/Result.vue';
+  import Home     from './Home.vue'
+  import Math     from '../math/Math.vue';
+  import MathTabs from '../math/MathTabs.vue';
+  import Draw     from '../draw/Draw.vue';
+  import Hues     from '../mbox/Hues.vue';
+  import Tool     from '../tool/Tool.vue';
+  import Tools    from '../tool/Tools.vue';
+  import Cube     from '../cube/Cube.vue';
+  import Wood     from '../wood/Wood.vue';
+  import Geom     from '../geom/Geom.vue';
+  import GeomND   from '../geom/GeomND.vue';
+  import Test     from '../../base/test/Test.vue';
+  import Replay   from '../../base/test/Replay.vue';
+  import Result   from '../../base/test/Result.vue';
 
 
   let View = {
 
-    components:{ 'v-home':Home, 'v-math':Math,     'v-mathEQ':MathND, 'v-mathML':MathND, 'v-draw':Draw,
+    components:{ 'v-home':Home, 'v-math':Math,     'v-mathEQ':MathTabs, 'v-mathML':MathTabs, 'v-draw':Draw,
                  'v-hues':Hues, 'v-tool':Tool,     'v-tools':Tools,    'v-cube':Cube,     'v-wood':Wood,
                  'v-geom':Geom, 'v-geom2D':GeomND, 'v-geom3D':GeomND, 'v-test':Test,   'v-replay':Replay,
                  'v-result':Result },

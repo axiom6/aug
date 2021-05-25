@@ -1,20 +1,20 @@
 
 <template>
-  <div :class="exp.klass" ref="elem" ></div>
+  <div :class="exp.klass" ref="elem"></div>
 </template>
 
 <script type="module">
 
 import { ref, nextTick, onMounted } from "vue";
 
-let PageExp = {
+let MathExp = {
 
   props: { exp:Object },
 
   setup( props ) {
 
     const elem = ref(null);
-    const debug = true;
+    const debug = false;
 
     const mathML = () => {
       nextTick( () =>  {
@@ -28,6 +28,6 @@ let PageExp = {
   return { elem } }
 }
 
-  export default PageExp;
+  export default MathExp;
 
 </script>

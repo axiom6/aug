@@ -14,9 +14,10 @@ let PageND = {
 
   setup( props ) {
 
-    const mix  = inject('mix');
-    const show = ref(false);
-    const elem = ref(null );
+    const mix   = inject('mix');
+    const show  = ref(false);
+    const elem  = ref(null );
+    const debug = true;
 
     const create = function() {
        nextTick( function() {
@@ -30,7 +31,7 @@ let PageND = {
           dom.removeChild(dom.firstChild); } } ) }
 
     const onNav = function(obj) {
-      // console.log( 'PageND.onNav()', { key:props.page.key }, obj );
+      if( debug ) { console.log( 'PageND.onNav()', { key:props.page.key }, obj ); }
       if( props.page.key === obj.pageKey ) {
         show.value = true;
         create(); }
