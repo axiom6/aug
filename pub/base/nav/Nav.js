@@ -6,14 +6,13 @@ import Build from '../util/Build.js';
 import Dir from './Dir.js';
 
 Nav = class Nav {
-  constructor(stream, mix, batch, komps1, pages1, isMuse = false) {
+  constructor(stream, mix, batch, komps1, pages1) {
     this.toPub = this.toPub.bind(this);
     this.stream = stream;
     this.mix = mix;
     this.batch = batch;
     this.komps = komps1;
     this.pages = pages1;
-    this.isMuse = isMuse;
     this.dirs = {
       west: true,
       east: true,
@@ -81,10 +80,10 @@ Nav = class Nav {
     };
     obj.pageKey = this.objPage(obj);
     obj.inovKey = this.objInov(obj);
-    if (!this.isMuse) {
+    if (this.mix.isApp('Jitter')) {
       obj.choice = this.choice;
     }
-    if (!this.isMuse) {
+    if (this.mix.isApp('Jitter')) {
       obj.checked = this.checked;
     }
     if (this.warnMsg !== 'None') {
@@ -176,20 +175,35 @@ Nav = class Nav {
   getPagesKey(obj) {
     var pagesKey;
     pagesKey = 'None';
-    if (this.mix.inArray(obj.compKey, this.musePlanes)) {
-      pagesKey = obj.level;
-    }
-    if (obj.compKey === 'Prin' && obj.level === 'Comp') {
-      pagesKey = 'Prin';
-    }
-    if (obj.compKey === 'Prin' && obj.level === 'Prac') {
-      pagesKey = 'Prac';
+    if (this.mix.isApp('Muse')) {
+      if (this.mix.inArray(obj.compKey, this.musePlanes)) {
+        pagesKey = obj.level;
+      }
+      if (obj.compKey === 'Prin' && obj.level === 'Comp') {
+        pagesKey = 'Prin';
+      }
+      if (obj.compKey === 'Prin' && obj.level === 'Prac') {
+        pagesKey = 'Prac';
+      }
+    } else {
+      pagesKey = (function() {
+        switch (obj.level) {
+          case 'Comp':
+            return obj.compKey;
+          case 'Prac':
+            return obj.pracKey;
+          case 'Disp':
+            return obj.dispKey;
+          default:
+            return obj.compKey;
+        }
+      })();
     }
     return pagesKey;
   }
 
   objPage(obj) {
-    return this.getPageKey(this.getPagesKey(obj));
+    return this.getPageKey(this.getPagesKey(obj), false);
   }
 
   objInov(obj) {
@@ -307,7 +321,7 @@ Nav = class Nav {
 
   addInovToNavs(komps) {
     var navs;
-    if (!this.isMuse) {
+    if (!this.mix.isApp('Muse')) {
       return komps != null;
     }
     navs = Object.assign({}, komps);

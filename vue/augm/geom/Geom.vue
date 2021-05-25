@@ -1,26 +1,17 @@
 
 <template>
   <div class="geom-pane" ref="Geom">
-    <h1 v-show="myRoute()">Geometric Algebra</h1>
-    <router-view :name="'Geom2D'"></router-view>
-    <router-view :name="'Geom3D'"></router-view>
+    <h1>Geometric Algebra</h1>
   </div>
 </template>
 
 <script type="module">
 
-  import { inject } from 'vue';
-
   let Geom = {
 
     setup() {
 
-      const mix   = inject('mix');
-
-      const myRoute =function() {
-        return mix.isRoute('Geom'); }
-
-    return { myRoute }; }
+    return {}; }
   }
 
   export default Geom;

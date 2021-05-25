@@ -14,12 +14,15 @@ let PageExp = {
   setup( props ) {
 
     const elem = ref(null);
+    const debug = true;
 
-    const mathML = function () {
-      nextTick( function() {
-        elem.value.innerHTML = props.exp.mathML; } ) }
+    const mathML = () => {
+      nextTick( () =>  {
+        if( debug ) { console.log( 'PageExp.mathMl()'   ); } // , props.exp.mathML
+        elem['value'].innerHTML = props.exp.mathML; } ) }
 
-     onMounted( function() {
+     onMounted( () =>  {
+       if( debug ) { console.log( 'PageExp.onMounted()' ); }  // , props.exp.mathML
        mathML(); } )
 
   return { elem } }

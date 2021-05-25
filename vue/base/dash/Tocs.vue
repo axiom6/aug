@@ -83,7 +83,7 @@
       mix.subscribe( 'Nav', 'Tocs.vue', (obj) => {
         onNav(obj); } ); } )
         
-  return { komps, myKomp, doComp, compKey, inovKey, style, styleComp, doPrac, doDisp, tocPracs }; }
+  return { komps, myKomp, doComp, compKey, pracKey, inovKey, style, styleComp, doPrac, doDisp, tocPracs }; }
   
   }
   

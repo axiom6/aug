@@ -86,7 +86,7 @@ Data = (function() {
       };
       Data.stream = new Stream(subjects, infoSpec);
       Data.mix = new Mix(Data, Data.routeNames);
-      Data.nav = new Nav(Data.stream, batch, Data.routes, Data.routeNames, Data.komps, true);
+      Data.nav = new Nav(Data.stream, batch, Data.routes, Data.routeNames, Data.komps);
       Data.touch = new Touch(Data.stream, Data.nav);
       //ata.build  = new Build( batch, Data.komps )
       Data.cache = new Cache(Data.stream);
@@ -151,6 +151,8 @@ Data = (function() {
     }
 
   };
+
+  Data.appName = 'Data';
 
   Data.Batch = {
     Prin: {

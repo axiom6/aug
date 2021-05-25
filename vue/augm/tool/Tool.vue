@@ -1,28 +1,17 @@
 
 <template>
   <div class="tool-pane" ref="Tool">
-    <h1 v-show="myRoute()">Gauges and Widges</h1>
-    <router-view :name="'Gauges'"></router-view>
-    <router-view :name="'Widget'"></router-view>
+    <h1>Gauges and Widges</h1>
   </div>
 </template>
 
 <script type="module">
 
-  import { inject } from 'vue';
-
   let Tool = {
 
     setup() {
 
-      window.KanOnHasMounted = false;
-
-      const mix   = inject('mix');
-
-      const myRoute =function() {
-        return mix.isRoute('Tool'); }
-
-    return { myRoute, }; }
+    return {}; }
   }
 
   export default Tool;

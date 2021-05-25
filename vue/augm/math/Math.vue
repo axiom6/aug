@@ -1,29 +1,17 @@
 
 <template>
   <div class="math-pane" ref="Math">
-    <h1 v-show="myRoute()">Mathematics</h1>
-    <router-view :name="'MathML'"></router-view>
-    <router-view :name="'MathEQ'"></router-view>
+    <h1>Mathematics</h1>
   </div>
 </template>
 
 <script type="module">
 
-import { inject, onMounted } from 'vue';
-
   let Math = {
 
     setup() {
 
-      const nav = inject('nav');
-
-      const myRoute = function() {
-        return nav.route === 'Math'; }
-
-    // onMounted( function () {
-    //   console.log( 'Math.onMounted()' ); } )
-
-    return { myRoute }; }
+    return {}; }
     
   }
   export default Math;

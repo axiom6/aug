@@ -68,9 +68,9 @@ class Mix
 
   # Main
   app: () ->
-    Mix.Main.myName
-  isMuse: () ->
-    'Muse' is @app()
+    Mix.Main.appName
+  isApp: ( appName ) ->
+    Mix.Main.appName is appName
   subscribe: (subject, source, onMethod) ->
     Mix.Main['stream'].subscribe(subject, source, onMethod)
     return

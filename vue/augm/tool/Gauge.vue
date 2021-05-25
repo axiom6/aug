@@ -10,7 +10,8 @@ import drawGauge from './GaugeD3.js'
 let Gauge = {
   
   setup() {
-    const elem = ref(null);
+    const elem  = ref(null);
+    const debug =  false
     let   opts = { gaugeRadius:160, minVal:0, maxVal:100, needleVal:Math.round(30),
       tickSpaceMinVal:1, tickSpaceMajVal:10, divID:"gaugeBox", gaugeUnits:"%",
       pivotCol:'wheat',  innerCol:'black', tickColMaj:'wheat', tickColMin:'wheat',
@@ -19,7 +20,7 @@ let Gauge = {
     
   onMounted( function () {
     nextTick( function() {
-      // console.log( 'Gauge.onMounted()', elem['value'] );
+      if( debug ) { console.log( 'Gauge.onMounted()', elem['value'] ); }
       svgMgr = new SvgMgr( 'Gauge', elem['value'], "Comp" )
       opts.gaugeRadius = 0.5 * Math.min( svgMgr.size.w, svgMgr.size.h );
       drawGauge( opts, svgMgr.g ) ;

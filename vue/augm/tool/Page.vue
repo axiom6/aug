@@ -8,7 +8,7 @@
 
 <script type="module">
 
-import { ref,onMounted, inject } from "vue";
+//port { ref,onMounted, inject } from "vue";
 import Gauge from './Gauge.vue';
 import DnD   from './DnD.vue';
 
@@ -20,22 +20,11 @@ let Page = {
 
   setup( props ) {
 
-    const mix     = inject('mix');
-    let   pageKey = ref('None');
-    let   mounts  = {}
-
-    const onNav = (obj) => {
-      if( mix.inArray(obj.pageKey,['Gauge','DnD'] ) ) {
-        pageKey.value = obj.pageKey; } }
+    const debug   = false;
 
     const show = (name) => {
-      return name === pageKey.value }
-
-    onMounted(  () => {
-      mounts[props.page.key] = true;
-      console.log( 'Page.onMounted()', props.page.key );
-      mix.subscribe( 'Nav', 'ToolPage'+props.page.key, (obj) => {
-        onNav(obj); } ) } )
+      if( debug ) { console.log( 'Page.show()', { name:name, pageKey:props.page.key } ); }
+      return name === props.page.key }
 
     return { show }; }
 }

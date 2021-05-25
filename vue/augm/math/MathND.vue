@@ -2,9 +2,9 @@
 
 <template>
   <div class="math-nd-pane">
-    <d-tabs :compKey="compKey" :pages="toPages()"></d-tabs>
+    <d-tabs :compKey="pracKey" :pages="toPages()"></d-tabs>
     <div class="math-nd-comp">
-      <template v-for="exp in exps">
+      <template v-for="exp in exps" :key="expsIdx">
         <m-exp :exp="exp"></m-exp>
       </template>
     </div>
@@ -16,9 +16,9 @@
   import { inject, ref, onMounted } from 'vue';
   import Tabs    from '../../base/elem/Tabs.vue';
   import PageExp from './PageExp.vue';
-  import Differ from '../../../pub/augm/math/doc/Differ.js';
-  import Solves from '../../../pub/augm/math/doc/Solves.js';
-  import Basics from '../../../pub/augm/math/doc/Basics.js';
+  import Differ  from '../../../pub/augm/math/doc/Differ.js';
+  import Solves  from '../../../pub/augm/math/doc/Solves.js';
+  import Basics  from '../../../pub/augm/math/doc/Basics.js';
 
   let MathND = {
 
@@ -27,40 +27,33 @@
     setup() {
       const mix     = inject('mix');
       const nav     = inject('nav');
-      const compKey = ref(nav.route);
-      const exps    = ref({ } );
-      const pages   = {
-        MathEQ: {         
-          Differ: { title:'Differ', key:'Differ', create:Differ, obj:null, show:false },
-          Solves: { title:'Solves', key:'Solves', create:Solves, obj:null, show:false } },
-        MathML: {
-          Basics: { title:'Basics', key:'Basics', create:Basics, obj:null, show:false } } };
+      const pracKey = ref(nav.pracKey);
+      const exps    = ref( null );
+      const expsIdx = ref( 0  );
+      const debug   = true;
 
       const toPages = function() {
-        // console.log( 'MathND.toPages()', { compKey:compKey.value, paged:pages[compKey.value] } );
-        return mix.isDef(pages[compKey.value]) ? pages[compKey.value] : {}; }
-
-      const hasPages = function( name, pageKey ) {
-        return mix.isDef(pages[name]) && mix.isDef(pages[name][pageKey]); }
+        return nav.pages[pracKey.value]; }
       
       const onNav = function(obj) {
-        // console.log( 'MathND.onNav()', obj );
-        if( hasPages( obj.compKey, obj.pageKey ) ) {
-          compKey.value = obj.compKey
-          let page    = pages[obj.compKey][obj.pageKey];
-          exps.value = createExps( page ); } }
-       //else {
-       //  console.log( 'MathND.onNav() unknown route or pageKey', obj );
+        if( obj.compKey==='Math' && obj.pageKey!=='None' && ( obj.pracKey==='MathML' || obj.pracKey==='MathEQ') ) {
+          pracKey.value = obj.pracKey
+          let page   = nav.pages[obj.pracKey][obj.pageKey];
+          exps.value = createExps( page );
+          expsIdx.value++; } }
 
       const createExps = function( page ) {
-        if( page.obj===null ) {
-            page.obj = new page.create(); }
-        let expsa = page.obj.math();
+        if(        page.obj===null    ) {
+          if(      page.key==='Differ') { page.obj = new Differ(); }
+          else if( page.key==='Solves') { page.obj = new Solves(); }
+          else if( page.key==='Basics') { page.obj = new Basics(); } }
+        let expsa = page['obj'].math();
         let i    = 0;
         for( let key in expsa ) {
           let exp   = expsa[key];
           exp.klass = klass(i);
           i++; }
+        if( debug ) { console.log( 'MathND.createExp()', { obj:page.obj, exps:expsa } ) }
         return expsa; }
 
       // Generate a row column layout class
@@ -72,10 +65,11 @@
         return `r${row}c${col}`; }
 
     onMounted( function () {
+      //exps.value = createExps(nav.pages['MathML']['Basics']);
       mix.subscribe( 'Nav', 'MathND', (obj) => {
           onNav( obj ); } ); } )
 
-      return { compKey, exps, toPages }; }
+      return { pracKey, exps, expsIdx, toPages }; }
   }
   
 export default MathND;

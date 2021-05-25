@@ -2,9 +2,9 @@
 
 <template>
   <div class="hues-pane">
-    <d-tabs :compKey="compKey" :pages="pages"></d-tabs>
+    <d-tabs :compKey="compKey" :pages="toPages()"></d-tabs>
     <h1 v-if="compKey==='Draw'">Mathbox Colors</h1>
-    <template v-for="page in pages" :key="pageIdx">
+    <template v-for="page in toPages()" :key="pageIdx">
       <d-port v-if="page.show" :page="page" class="port-pane"></d-port>
     </template>
     </div>
@@ -27,25 +27,20 @@
       const compKey = 'Hues';
       const pageIdx = ref(0);
       const page    = ref(null);
-      const pages   = {
-        Color:   { title:'Color',   key:'Color',   show:false },
-        Rgbs:    { title:'Rgbs',    key:'Rgbs',    show:false },
-        Polar:   { title:'Polar',   key:'Polar',   show:false },
-        Vecs:    { title:'Vecs',    key:'Vecs',    show:false },
-        Sphere:  { title:'Sphere',  key:'Sphere',  show:false },
-        Regress: { title:'Regress', key:'Regress', show:false } };
-
       mix.addScript( "/assets/mathbox-bundle.js" )
 
-      const onNav = function(obj) {
+      const toPages = () => {
+        return nav.pages['Hues']; }
+
+      const onNav = (obj) => {
         if( nav.isMyNav( obj,'Prac' ) ) {
             pageIdx.value++; } } // console.log( 'Darw.onNav()', pages );
 
-      onMounted( function () {
+      onMounted( () => {
         mix.subscribe(  'Nav', 'Hues', (obj) => {
           onNav(obj); } ); } )
 
-    return { compKey, pages, page, pageIdx }; }
+    return { compKey, toPages, page, pageIdx }; }
   }
   export default Hues;
   

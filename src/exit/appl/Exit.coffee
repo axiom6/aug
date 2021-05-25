@@ -22,6 +22,8 @@ import SegmentsWestJson   from '../../../data/exit/SegmentsWest.json'
 
 class Exit
 
+  Exit.appName = 'Exit'
+
   # Initialization is accomplished in 3 steps:
   # 1. Read in all the JSON config files in Muse.Batch. Call Muse.init() when complete.
   # 2. Muse.init() initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.

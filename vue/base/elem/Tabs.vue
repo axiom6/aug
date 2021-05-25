@@ -35,8 +35,8 @@ import { inject, ref, onMounted } from 'vue';
       const onPage = (pageArg) => {
         if( nav.hasPages( compKey,true) ) {
           pageKey.value = pageArg;
-          if( debug ) { console.log( 'Tabs.onPage()', { compKey:compKey, pageKey:pageArg, pages:props.pages } ); }
           nav.setPageKey( compKey, pageArg, props.pages );
+          if( debug ) { console.log( 'Tabs.onPage()', { compKey:compKey, pageKey:pageArg, pages:props.pages } ); }
           tabsIdx.value++; }
         else {
           console.log( 'Tabs.onPage() missing pageKey', { pageKey:pageArg, pages:nav.getPages(compKey) } ) } }

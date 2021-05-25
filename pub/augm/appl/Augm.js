@@ -1,6 +1,5 @@
+//mport Load    from './Load.js'
 var Augm;
-
-import Load from './Load.js';
 
 import Access from '../../base/util/Access.js';
 
@@ -10,16 +9,11 @@ import Nav from '../../base/nav/Nav.js';
 
 import Mix from '../../base/nav/Mix.js';
 
-import Home from '../../../vue/augm/appl/Augm.vue';
+import Dash from '../../../vue/augm/appl/Dash.vue';
 
 import {
   createApp
 } from 'vue';
-
-import {
-  createRouter,
-  createWebHistory
-} from 'vue-router';
 
 import MathJson from '../../../data/augm/Math.json';
 
@@ -54,35 +48,14 @@ import ChoiceJson from '../../../data/jitter/Choice.json';
 import FontJson from "../../../css/font/three/helvetiker_regular.typeface.json";
 
 Augm = (function() {
-  var loader;
-
   //mport DataInov from   '../../../data/inno/Data.json'
   //mport MachInov from   '../../../data/inno/Mach.json'
   //mport MathInov from   '../../../data/inno/Math.json'
   //mport ScieJson from   '../../../data/inno/Scie.json'
   //mport SoftInov from   '../../../data/inno/Soft.json'
   class Augm {
-    static start() {
-      var key, ref, val;
-      // console.log( 'Augm.start() env', process.env.NODE_ENV )
-      if (process.env.NODE_ENV === 'development') {
-        Augm.routes.push(Augm.geomRoute);
-        Augm.komps.Geom = Augm.geomKomp;
-      }
-      Augm.routeNames = Augm.createRouteNames(Augm.routes);
-      Augm.addToHead();
-      ref = Augm.Batch;
-      for (key in ref) {
-        val = ref[key];
-        if ((val.refine != null) && val.refine) {
-          val.data = Access.refine(val.data);
-        }
-      }
-      Augm.init(Augm.Batch);
-    }
-
     static addToHead() {
-      var maniElem, siteElem;
+      var head, maniElem, siteElem;
       // manifest   = """<link href="manifest.json"  rel="manifest" crossorigin="use-credentials">"""
       // siteLink   = """<link href="https://vit-muse.web.app/" rel="canonical">"""
       // mboxScript = """<script src="/lib/mbox/augm/mathbox-bundle.js"></script>"""
@@ -93,44 +66,42 @@ Augm = (function() {
       siteElem = document.createElement('link');
       siteElem.href = window.location.href;
       siteElem.rel = "canonical";
-      document.getElementsByTagName("head")[0].appendChild(maniElem);
-      document.getElementsByTagName("head")[0].appendChild(siteElem);
+      //jsonLD        = document.createElement('script')
+      //jsonLD.type   = "application/ld+json"
+      //jsonLD.text   = JSON.stringify(MuseLD)
+      head = document.getElementsByTagName("head")[0];
+      head.appendChild(maniElem);
+      head.appendChild(siteElem);
     }
 
     static init(batch) {
       var error, streamLog, subjects;
       Augm.Batch = batch; // Not necessary here, but assigned for compatibilitry
       window['Geom'] = {};
-      subjects = ["Nav"];
+      subjects = ["Nav", "Tab"];
       streamLog = {
         subscribe: false,
         publish: false,
         subjects: subjects
       };
       Augm.stream = new Stream(subjects, streamLog);
-      Augm.mix = new Mix(Augm, Augm.routeNames);
-      Augm.nav = new Nav(Augm.stream, batch, Augm.routes, Augm.routeNames, Augm.komps, false);
+      Augm.mix = new Mix(Augm);
+      Augm.nav = new Nav(Augm.stream, Augm.mix, batch, Augm.komps, Augm.pages);
       try {
         //ugm.cache  = new Cache( Augm.stream )
-        Augm.vue();
+        Augm.vue3();
       } catch (error1) {
         error = error1;
         console.error('Augm.vue app.use error', error);
       }
     }
 
-    static vue() {
-      var router;
-      Augm.app = createApp(Home.Dash);
+    static vue3() {
+      Augm.app = createApp(Dash);
       Augm.app.provide('mix', Augm.mix);
       Augm.app.provide('nav', Augm.nav);
-      router = Augm.router(Augm.routes);
-      Augm.app.use(router);
-      Augm.nav.router = router;
       Augm.app.mount('#augm');
-      Augm.nav.doRoute({
-        route: 'Home'
-      });
+      Augm.nav.pub(Augm.nav.toPub(Augm.href), true);
     }
 
     static lazy(name) {
@@ -144,31 +115,9 @@ Augm = (function() {
       };
     }
 
-    static router(routes) {
-      return createRouter({
-        routes: routes,
-        history: createWebHistory()
-      });
-    }
-
-    static createRouteNames(routes) {
-      var child, i, j, len, len1, ref, route, routeNames;
-      routeNames = [];
-      for (i = 0, len = routes.length; i < len; i++) {
-        route = routes[i];
-        routeNames.push(route.name);
-        if (route.children != null) {
-          ref = route.children;
-          for (j = 0, len1 = ref.length; j < len1; j++) {
-            child = ref[j];
-            routeNames.push(child.name);
-          }
-        }
-      }
-      return routeNames;
-    }
-
   };
+
+  Augm.appName = 'Augm';
 
   Augm.Batch = {
     Math: {
@@ -245,116 +194,6 @@ Augm = (function() {
       url: '',
       data: FontJson
     }
-  };
-
-  loader = new Load();
-
-  Augm.routes = [
-    {
-      path: '/',
-      name: 'Home',
-      components: {
-        Home: Home
-      }
-    },
-    {
-      path: '/math',
-      name: 'Math',
-      components: {
-        Math: Home.Math
-      },
-      children: [
-        {
-          path: 'ML',
-          name: 'MathML',
-          components: {
-            MathML: loader.load('MathND')
-          }
-        },
-        {
-          path: 'EQ',
-          name: 'MathEQ',
-          components: {
-            MathEQ: loader.load('MathND')
-          }
-        }
-      ]
-    },
-    {
-      path: '/draw',
-      name: 'Draw',
-      components: {
-        Draw: loader.load('Draw')
-      }
-    },
-    {
-      path: '/hues',
-      name: 'Hues',
-      components: {
-        Hues: loader.load('Hues')
-      }
-    },
-    {
-      path: '/tool',
-      name: 'Tool',
-      components: {
-        Tool: Home.Tool
-      },
-      children: [
-        {
-          path: 'Gauges',
-          name: 'Gauges',
-          components: {
-            Gauges: loader.load('Tools')
-          }
-        },
-        {
-          path: 'Widget',
-          name: 'Widget',
-          components: {
-            Widget: loader.load('Tools')
-          }
-        }
-      ]
-    },
-    {
-      path: '/cube',
-      name: 'Cube',
-      components: {
-        Cube: loader.load('Cube')
-      }
-    },
-    {
-      path: '/wood',
-      name: 'Wood',
-      components: {
-        Wood: loader.load('Wood')
-      }
-    }
-  ];
-
-  Augm.geomRoute = {
-    path: '/geom',
-    name: 'Geom',
-    components: {
-      Geom: Home.Geom
-    },
-    children: [
-      {
-        path: '2D',
-        name: 'Geom2D',
-        components: {
-          Geom2D: loader.load('GeomND')
-        }
-      },
-      {
-        path: '3D',
-        name: 'Geom3D',
-        components: {
-          Geom3D: loader.load('GeomND')
-        }
-      }
-    ]
   };
 
   Augm.komps = {
@@ -451,32 +290,278 @@ Augm = (function() {
       icon: "fas fa-tree",
       west: "Cube",
       north: "Cube",
-      east: "Home",
-      south: "Home",
-      next: "Home",
+      east: "Geom",
+      south: "Geom",
+      next: "Geom",
       prev: "Cube"
+    },
+    Geom: {
+      title: 'Geom',
+      key: 'Geom',
+      route: 'Geom',
+      pracs: {},
+      ikw: true,
+      icon: "fas fa-shapes",
+      west: "Wood",
+      north: "Wood",
+      east: "Wood",
+      south: "Test",
+      next: "Test",
+      prev: "Geom"
+    },
+    Test: {
+      title: 'Test',
+      key: 'Test',
+      pracs: {},
+      ikw: false,
+      icon: "fas fa-stethoscope",
+      north: "Geom",
+      prev: "Geom",
+      south: "Home",
+      next: "Home"
     }
   };
 
-  Augm.geomKomp = {
-    title: 'Geom',
-    key: 'Geom',
-    route: 'Geom',
-    pracs: {},
-    ikw: true,
-    icon: "fas fa-shapes",
-    west: "Math",
-    north: "Math",
-    east: "Note",
-    south: "Note",
-    next: "Note",
-    prev: "Math"
+  // Initialization is accomplished in 3 steps:
+  // 1. Read in all the JSON config files in Augm.Batch. Call Augm.init() when complete.
+  // 2. Augm.init() initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
+  // 3. Augm.vue() launches Vue with Home page and a Toc for Prin Info Know and Wise practices
+
+  // Called by muse.html to kick things off
+  // 1. Read in all the JSON config files in Augm.Batch. Call Augm.init() when complete.
+  Augm.geomKomp = Augm.start = function(href) {
+    var key, ref, val;
+    console.log("Augm.start()", href);
+    Augm.href = href;
+    Augm.addToHead();
+    ref = Augm.Batch;
+    for (key in ref) {
+      val = ref[key];
+      if ((val.refine != null) && val.refine) {
+        val.data = Access.refine(val.data);
+      }
+    }
+    Augm.init(Augm.Batch);
   };
 
+  //ead.appendChild(jsonLD)
   Augm.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json";
+
+  Augm.pages = {
+    MathML: {
+      Basics: {
+        title: 'Basics',
+        key: 'Basics',
+        obj: null,
+        show: false
+      }
+    },
+    MathEQ: {
+      Differ: {
+        title: 'Differ',
+        key: 'Differ',
+        obj: null,
+        show: false
+      },
+      Solves: {
+        title: 'Solves',
+        key: 'Solves',
+        obj: null,
+        show: false
+      }
+    },
+    Draw: {
+      Axes: {
+        title: 'Axes',
+        key: 'Axes',
+        obj: null,
+        show: false
+      },
+      Flavor: {
+        title: 'Flavor',
+        key: 'Flavor',
+        obj: null,
+        show: false
+      },
+      Chord: {
+        title: 'Chord',
+        key: 'Chord',
+        obj: null,
+        show: false
+      },
+      Link: {
+        title: 'Link',
+        key: 'Link',
+        obj: null,
+        show: false
+      },
+      Radar: {
+        title: 'Radar',
+        key: 'Radar',
+        obj: null,
+        show: false
+      },
+      Hue: {
+        title: 'Hue',
+        key: 'Hue',
+        obj: null,
+        show: false
+      },
+      Tree: {
+        title: 'Tree',
+        key: 'Tree',
+        obj: null,
+        show: false
+      }
+    },
+    Hues: {
+      Color: {
+        title: 'Color',
+        key: 'Color',
+        show: false
+      },
+      Rgbs: {
+        title: 'Rgbs',
+        key: 'Rgbs',
+        show: false
+      },
+      Polar: {
+        title: 'Polar',
+        key: 'Polar',
+        show: false
+      },
+      Vecs: {
+        title: 'Vecs',
+        key: 'Vecs',
+        show: false
+      },
+      Sphere: {
+        title: 'Sphere',
+        key: 'Sphere',
+        show: false
+      },
+      Regress: {
+        title: 'Regress',
+        key: 'Regress',
+        show: false
+      }
+    },
+    Gauges: {
+      Gauge: {
+        title: 'Gauge',
+        key: 'Gauge'
+      }
+    },
+    Widget: {
+      DnD: {
+        title: 'DnD',
+        key: 'DnD'
+      }
+    },
+    Geom2D: {
+      Graph: {
+        title: 'Graph',
+        key: 'Graph',
+        obj: null
+      },
+      Basics: {
+        title: 'Basics',
+        key: 'Basics',
+        obj: null
+      }
+    },
+    Geom3D: {
+      Grids: {
+        title: 'Grids',
+        key: 'Grids',
+        obj: null
+      },
+      Isomet: {
+        title: 'Isomet',
+        key: 'Isomet',
+        obj: null
+      },
+      Play: {
+        title: 'Play',
+        key: 'Play',
+        obj: null
+      },
+      Isohed: {
+        title: 'Isohed',
+        key: 'Isohed',
+        obj: null
+      },
+      Torus: {
+        title: 'Torus',
+        key: 'Torus',
+        obj: null
+      },
+      Sphere: {
+        title: 'Sphere',
+        key: 'Sphere',
+        obj: null
+      }
+    },
+    Tables: {
+      Table1: {
+        title: 'Table1',
+        key: 'Table1',
+        created: false,
+        show: false
+      },
+      Table2: {
+        title: 'Table2',
+        key: 'Table2',
+        created: false,
+        show: false
+      }
+    },
+    Pivots: {
+      Table1: {
+        title: 'Pivot1',
+        key: 'Pivot1',
+        created: false,
+        show: false
+      },
+      Table2: {
+        title: 'Pivot2',
+        key: 'Pivot2',
+        created: false,
+        show: false
+      }
+    }
+  };
 
   return Augm;
 
 }).call(this);
 
 export default Augm;
+
+/*
+ * console.log( 'Augm.start() env', process.env.NODE_ENV )
+    if process.env.NODE_ENV is 'development'
+      Augm.routes.push( Augm.geomRoute )
+      Augm.komps.Geom = Augm.geomKomp
+    Augm.routeNames = Augm.createRouteNames( Augm.routes )
+
+    loader = new Load()
+
+  Augm.routes = [
+    { path: '/',       name:'Home',   components:{ Home:   Home } },
+    { path: '/math',   name:'Math',   components:{ Math:   Home.Math }, children: [
+      { path:'ML',     name:'MathML', components:{ MathML: loader.load('MathND') } },
+      { path:'EQ',     name:'MathEQ', components:{ MathEQ: loader.load('MathND') } } ] },
+    { path: '/draw',   name:'Draw',   components:{ Draw:   loader.load('Draw') } },
+    { path: '/hues',   name:'Hues',   components:{ Hues:   loader.load('Hues') } },
+    { path: '/tool',   name:'Tool',   components:{ Tool:   Home.Tool }, children: [
+      { path:'Gauges', name:'Gauges', components:{ Gauges: loader.load('Tools') } },
+      { path:'Widget', name:'Widget', components:{ Widget: loader.load('Tools') } } ] },
+    { path: '/cube',   name:'Cube',   components:{ Cube:   loader.load('Cube') } },
+    { path: '/wood',   name:'Wood',   components:{ Wood:   loader.load('Wood') } } ]
+
+  Augm.geomRoute =
+    { path: '/geom', name:'Geom',   components:{ Geom:   Home.Geom }, children: [
+      { path:'2D',   name:'Geom2D', components:{ Geom2D: loader.load('GeomND') } },
+      { path:'3D',   name:'Geom3D', components:{ Geom3D: loader.load('GeomND') } } ] }
+ */

@@ -4,7 +4,7 @@ import Dir   from './Dir.js'
 
 class Nav
 
-  constructor:( @stream, @mix, @batch, @komps, @pages, @isMuse=false ) ->
+  constructor:( @stream, @mix, @batch, @komps, @pages ) ->
     @dirs       = { west:true, east:true, north:true, south:true, prev:true, next:true }
     @navs       = @addInovToNavs( @komps )
     @touch      =  null
@@ -46,8 +46,8 @@ class Nav
     obj = { source:@source, level:@level, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey }
     obj.pageKey = @objPage( obj )
     obj.inovKey = @objInov( obj )
-    obj.choice  = @choice  if not @isMuse
-    obj.checked = @checked if not @isMuse
+    obj.choice  = @choice  if @mix.isApp('Jitter')
+    obj.checked = @checked if @mix.isApp('Jitter')
     obj.warnMsg = @warnMsg if @warnMsg isnt 'None'
     obj
 
@@ -99,13 +99,20 @@ class Nav
 
   getPagesKey:( obj ) ->
     pagesKey = 'None'
-    pagesKey = obj.level   if @mix.inArray(obj.compKey,@musePlanes)
-    pagesKey = 'Prin' if obj.compKey is 'Prin' and obj.level is 'Comp'
-    pagesKey = 'Prac' if obj.compKey is 'Prin' and obj.level is 'Prac'
+    if @mix.isApp('Muse')
+      pagesKey = obj.level if @mix.inArray(obj.compKey,@musePlanes)
+      pagesKey = 'Prin' if obj.compKey is 'Prin' and obj.level is 'Comp'
+      pagesKey = 'Prac' if obj.compKey is 'Prin' and obj.level is 'Prac'
+    else
+      pagesKey = switch obj.level
+        when 'Comp' then obj.compKey
+        when 'Prac' then obj.pracKey
+        when 'Disp' then obj.dispKey
+        else             obj.compKey
     pagesKey
 
   objPage:( obj ) ->
-    @getPageKey( @getPagesKey(obj) )
+    @getPageKey( @getPagesKey(obj), false )
 
   objInov:( obj ) ->
     if @mix.inArray(obj.compKey,@musePlanes) then @getPageKey(obj.compKey) else 'None'
@@ -167,7 +174,7 @@ class Nav
     @mix.inArray( compKey, @museInovs )
 
   addInovToNavs:( komps ) ->
-    return komps? if not @isMuse
+    return komps? if not @mix.isApp('Muse')
     navs = Object.assign( {}, komps )
     #avs = @insInov( navs, @museInovs )
     navs

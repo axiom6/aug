@@ -1,8 +1,8 @@
 
 <template>
   <div class="geom-nd-pane">
-    <d-tabs :compKey="pagesKey" :pages="toPages()"></d-tabs>
-    <template v-for="page in toPages(pagesKey)" :key="page.key">
+    <d-tabs :compKey="compKey" :pages="toPages()"></d-tabs>
+    <template v-for="page in toPages(pageKey)" :key="page.key">
       <g-page :page="page" class="geom-nd-page"></g-page>
     </template>
   </div>
@@ -10,7 +10,7 @@
 
 <script type="module">
 
-  import { inject, ref, onMounted, onBeforeMount } from "vue";
+  import { inject, ref, onMounted } from "vue";
   import Tabs    from '../../base/elem/Tabs.vue';
   import PageND  from './PageND.vue'
   import Graph   from "../../../src/augm/geom/2D/Graph.js";
@@ -28,40 +28,39 @@
 
     setup() {
 
-      const mix   = inject('mix');
-      const nav   = inject('nav');
-      const pages = {
-        Geom2D: {
-          Graph:  { title:'Graph',   key:'Graph',    obj:Graph   },
-          Basics: { title:'Basics',  key:'Basics',   obj:Basics  } },
-        Geom3D: {
-          Grids:   { title:'Grids',   key:'Grids',   obj:Grids   },
-          Isomet:  { title:'Isomet',  key:'Isomet',  obj:Isomet  },
-          Play:    { title:'Play',    key:'Play',    obj:Play    },
-          Isohed:  { title:'Isohed',  key:'Isohed',  obj:Isohed  },
-          Torus:   { title:'Torus',   key:'Torus',   obj:Torus   },
-          Sphere:  { title:'Sphere',  key:'Sphere',  obj:Sphere  } } }
-
+      const mix      = inject('mix');
+      const nav      = inject('nav');
       const page     = ref(null);
-      const pagesKey = ref(null);
-      const pageKeys = Object.keys(pages);
+      const compKey  = ref('Geom2D');
+      const pageKey  = ref('Graph');
+      const compKeys = ['Geom2D','Deom3D'];
 
       const toPages = function() {
-        // console.log( 'GeomND.toPages()', { pagesKey:pagesKey.value, paged:pages[pagesKey.value] } );
-        return pages[pagesKey.value]; }
+        return nav.pages[compKey.value]; }
 
       const onNav = function(obj) {
-        if( mix.inArray(   obj.route, pageKeys ) ) {
-          pagesKey.value = obj.route; } }
+        if( mix.inArray(  obj.pracKey, compKeys ) ) {
+          compKey.value = obj.pracKey;
+          pageKey.value = obj.pageKey;
+          page.value    = nav.pages[compKey.value][pageKey.value];
+          create(page); } }
 
-      onBeforeMount( function () {
-        pagesKey.value = mix.inArray(nav.route,pageKeys) ? nav.route : 'Geom2D'; } )
+      const create = (page) => {
+        if( page.obj===null ) {
+          if(      page.key==='Graph'  ) { page.obj = Graph;  }
+          else if( page.key==='Basics' ) { page.obj = Basics; }
+          else if( page.key==='Grids'  ) { page.obj = Grids;  }
+          else if( page.key==='Isomet' ) { page.obj = Isomet; }
+          else if( page.key==='Play'   ) { page.obj = Play;   }
+          else if( page.key==='Isohed' ) { page.obj = Isohed; }
+          else if( page.key==='Torus'  ) { page.obj = Torus;  }
+          else if( page.key==='Sphere' ) { page.obj = Sphere; } } }
 
       onMounted( function () {
         mix.subscribe(  'Nav', 'GeomND', (obj) => {
           onNav(obj); } ) } )
 
-      return { pagesKey, page, toPages }; }
+      return { compKey, pageKey, toPages }; }
   }
   export default GeomND;
 

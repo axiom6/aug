@@ -146,6 +146,8 @@ Exit = (function() {
 
   };
 
+  Exit.appName = 'Exit';
+
   Exit.Batch = {
     East: {
       url: 'muse/Prin.json',

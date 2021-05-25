@@ -13,7 +13,8 @@
 </template>
 
 <script>
-  export default { };
+  let Wood = {}
+  export default Wood;
 
 </script>
 

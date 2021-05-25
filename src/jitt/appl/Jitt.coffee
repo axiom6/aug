@@ -25,6 +25,8 @@ import Done    from '../../../vue/jitt/main/Done.vue'
 
 class Jitter
 
+  Jitter.appName = 'Jitter'
+
   # Initialization is accomplished in 3 steps:
   # 1. Read in all the JSON config files in Jitter.Batch. Call Jitter.init() when complete.
   # 2. Jitter.init() initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.

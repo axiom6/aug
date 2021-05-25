@@ -1,57 +1,49 @@
 
 <template>
   <div class="tools-pane">
-    <d-tabs :compKey="pagesKey" :pages="toPages()"></d-tabs>
-    <template v-for="page in toPages(pagesKey)" :key="page.key">
-      <t-page v-if="show(pagesKey)" :page="page" class="tools-page"></t-page>
+    <d-tabs :compKey="pracKey" :pages="toPages()"></d-tabs>
+    <template v-for="page in toPages()" :key="page">
+      <t-page v-if="show(pageKey)" :page="page" class="tools-page"></t-page>
     </template>
   </div>
 </template>
 
 <script type="module">
 
-  import { inject, ref, onMounted, onBeforeMount } from "vue";
+  import { inject, ref, onMounted } from "vue";
   import Tabs  from '../../base/elem/Tabs.vue';
   import Page  from './Page.vue';
-
 
   let Tools = {
 
     components:{ 'd-tabs':Tabs, 't-page':Page },
 
-    setup() {
+    props: { pracKey:String },
 
-      const mix   = inject('mix');
-      const nav   = inject('nav');
-      const pages = {
-        Gauges: {
-          Gauge:   { title:'Gauge', key:'Gauge' } },
-        Widget: {
-          DnD:     { title:'DnD',   key:'DnD'   } } }
+    setup( props ) {
 
+      const mix      = inject('mix');
+      const nav      = inject('nav');
+      const debug    = true
+      const pageKey  = ref(null);
       const page     = ref(null);
-      const pagesKey = ref(null);
-      const pageKeys = Object.keys(pages);
-
-      const show = (pagesArg) => {
-        return pagesArg === pagesKey.value; }
+      
+      const show = (pageArg) => {
+        return pageArg === pageKey.value; }
 
       const toPages = function() {
-        return pages[pagesKey.value]; }
+        return nav.pages[props.pracKey]; }
 
       const onNav = function(obj) {
-        console.log( 'Tools.onNav()', { route:obj.route, pageKeys:pageKeys } );
-        if( mix.inArray(   obj.route, pageKeys ) ) {
-          pagesKey.value = obj.route; } }
-
-      onBeforeMount( function () {
-        pagesKey.value = mix.inArray(nav.route,pageKeys) ? nav.route : 'Gauges'; } )
+        if( obj.compKey==='Tool' && obj.pageKey!=='None' && obj.pracKey===props.pracKey ) {
+          if(debug) { console.log( 'Tools.onNav()', { compKey:obj.compKey, pracKey:props.pracKey, pageKey:obj.pageKey } ); }
+          pageKey.value = obj.pageKey; } }
 
       onMounted( function () {
         mix.subscribe(  'Nav', 'Tools', (obj) => {
           onNav(obj); } ) } )
 
-      return { pagesKey, page, toPages, show }; }
+      return { pageKey, page, toPages, show }; }
   }
   export default Tools;
 
@@ -69,3 +61,8 @@
      background-color:@theme-back; display:grid; font-size:@geomNDFS; }
 
 </style>
+
+<!--
+      onBeforeMount( function () {
+        pageKey.value = mix.inArray(nav.route,pageKeys) ? nav.pageKey : 'Gauges'; } )
+-->

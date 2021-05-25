@@ -97,7 +97,7 @@ Muse = (function() {
       };
       Muse.stream = new Stream(subjects, infoSpec);
       Muse.mix = new Mix(Muse);
-      Muse.nav = new Nav(Muse.stream, Muse.mix, batch, Muse.komps, Muse.pages, true);
+      Muse.nav = new Nav(Muse.stream, Muse.mix, batch, Muse.komps, Muse.pages);
       Muse.touch = new Touch(Muse.stream, Muse.nav);
       Muse.build = new Build(batch, Muse.komps);
       //use.cache  = new Cache( Muse.stream )
@@ -143,6 +143,8 @@ Muse = (function() {
     }
 
   };
+
+  Muse.appName = 'Muse';
 
   // Initialization is accomplished in 3 steps:
   // 1. Read in all the JSON config files in Muse.Batch. Call Muse.init() when complete.

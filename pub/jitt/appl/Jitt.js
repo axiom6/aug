@@ -137,6 +137,8 @@ Jitter = (function() {
 
   };
 
+  Jitter.appName = 'Jitter';
+
   Jitter.Batch = {
     Choice: {
       url: 'jitter/Choice.json',

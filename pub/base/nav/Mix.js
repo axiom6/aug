@@ -116,11 +116,11 @@ Mix = class Mix {
 
   // Main
   app() {
-    return Mix.Main.myName;
+    return Mix.Main.appName;
   }
 
-  isMuse() {
-    return 'Muse' === this.app();
+  isApp(appName) {
+    return Mix.Main.appName === appName;
   }
 
   subscribe(subject, source, onMethod) {

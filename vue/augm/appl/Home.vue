@@ -25,11 +25,8 @@
   import { inject, onMounted } from 'vue';
   import Btn  from '../../base/elem/Btn.vue';
 //import Btns from '../../base/elem/Btns.vue';
-  import Dash from '../../base/dash/Dash.vue';
-  import Math from '../math/Math.vue';
-  import Geom from '../geom/Geom.vue';
-  import Data from '../data/Data.vue';
-  import Tool from '../tool/Tool.vue';
+  import Dash from './Dash.vue';
+
   
   let Home = {
     
@@ -45,12 +42,6 @@
 
     return { pos }; }
   }
-
-  Home.Dash = Dash;
-  Home.Math = Math;
-  Home.Geom = Geom;
-  Home.Data = Data;
-  Home.Tool = Tool;
 
   export default Home;
 

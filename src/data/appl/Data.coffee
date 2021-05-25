@@ -26,6 +26,8 @@ import HuesJson from '../../../data/draw/Hues.json'
 
 class Data
 
+  Data.appName = 'Data'
+
   # Initialization is accomplished in 3 steps:
   # 1. Read in all the JSON config files in Muse.Batch. Call Muse.init() when complete.
   # 2. Muse.init() initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
@@ -99,7 +101,7 @@ class Data
     infoSpec    = { subscribe:false, publish:false, subjects:subjects}
     Data.stream = new Stream( subjects, infoSpec )
     Data.mix    = new Mix(   Data, Data.routeNames )
-    Data.nav    = new Nav(   Data.stream, batch, Data.routes, Data.routeNames, Data.komps, true )
+    Data.nav    = new Nav(   Data.stream, batch, Data.routes, Data.routeNames, Data.komps )
     Data.touch  = new Touch( Data.stream, Data.nav )
     #ata.build  = new Build( batch, Data.komps )
     Data.cache  = new Cache( Data.stream )
