@@ -2,7 +2,7 @@
 <template>
   <div class="geom-nd-pane">
     <d-tabs :compKey="pracKey" :pages="toPages()"></d-tabs>
-    <template v-for="page in toPages()" :key="page.key">
+    <template v-for="page in toPages()" :key="pageIdx">
       <g-page v-if="show(page.key)" :page="page" class="geom-nd-page"></g-page>
     </template>
   </div>
@@ -30,29 +30,28 @@
 
     setup( props ) {
 
-      const mix      = inject('mix');
-      const nav      = inject('nav');
-      const page     = ref(null);
-      const pageKey  = ref('None');
-      const debug    = true;
+      const mix     = inject('mix');
+      const nav     = inject('nav');
+      const page    = ref(null);
+      const pageIdx = ref(0)
+      const debug   = true;
+      let   pageKey = 'None'
 
       const toPages = function() {
-        return nav.pages[props.pracKey]; }
+        return nav.getTabs(props.pracKey); }
 
       const show = ( pageArg ) => {
-        return pageKey.value === pageArg; }
+        return pageKey === pageArg; }
 
       const onNav = (obj) => {
-        if( debug ) { console.log( 'GeomND.onNav()', obj ); }
-        if( props.pracKey === obj.pracKey && mix.isDef(obj.pageKey) ) {
-          pageKey.value  = obj.pageKey;
-          page.value     = nav.pages[props.pracKey][pageKey.value];
-          page.value.obj = create(page.value); }
-        else if( !mix.isDef(obj.pageKey) ) {
-          console.log( 'GeomND.onNav() pageKey None', obj ); } }
+        if( props.pracKey===obj.pracKey && nav.hasPage(props.pracKey,obj.pageKey) ) {
+          pageKey        = obj.pageKey
+          page.value     = nav.getPage(props.pracKey,obj.pageKey);
+          page.value.obj = create(page.value);
+          pageIdx.value++;
+          if( debug ) { console.log( 'GeomND.onNav()', { obj:obj, page:page, pages:nav.getTabs(props.pracKey) } ); } } }
 
       const create = (page) => {
-        if( debug ) { console.log( 'GeomND.create()', { page:page.value } ); }
         if( mix.isDef(page.obj) ) {
           return page.obj; }
         else {
@@ -66,15 +65,14 @@
           else if( page.key==='Sphere' ) { return Sphere; }
           else                           { return Graph;  } } }
 
-      if( debug ) { console.log( 'GeomND.subscribe() in setup()', { pracKey:props.pracKey, pageKey:pageKey.value } ); }
-    //if( mix.isDef(pageKey.value) ) { onNav( { pageKey:pageKey.value } ); }
-      mix.subscribe(  'Nav', 'GeomND', (obj) => {
-        onNav(obj); } )
-
       onMounted( () => {
-        if( debug ) { console.log( 'GeomND.onMounted()', { pracKey:props.pracKey, pageKey:pageKey.value } ); } } )
+        let pageNav = nav.getPageKey(props.pracKey);
+        if( debug ) { console.log( 'GeomND.onMounted()', { pracKey:props.pracKey, pageKey:pageNav } ); }
+        onNav( { pracKey:nav.pracKey, pageKey:pageNav } ); // Nav can set pageKey if show is true in pages
+        mix.subscribe(  'Nav', 'GeomND', (obj) => {        //   also onNav() chacks for valid tabs and pages
+          onNav(obj); } ) } )
 
-      return { show, page, toPages }; }
+      return { show, page, pageIdx, toPages }; }
   }
   export default GeomND;
 
@@ -92,3 +90,10 @@
      background-color:@theme-back; display:grid; font-size:@geomNDFS; }
 
 </style>
+
+<!--
+if( debug ) { console.log( 'GeomND.onNav()', obj ); }
+
+        else if( !mix.isDef(obj.pageKey) ) {
+          console.log( 'GeomND.onNav() pageKey None', obj ); }
+-->

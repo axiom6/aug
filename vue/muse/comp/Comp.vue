@@ -48,10 +48,10 @@ let Comp = {
     let   compIdx   = ref(0     );
     const debug     = false;
     const inovComps = ['Info','Know','Wise'];
-    const myRows    = ref( nav.pages['Rows'] );
+    const myRows    = ref( nav.getTabs('Rows') );
 
-    const tabPages =  (compArg) => {
-      return nav.pages[compArg]; }
+    const tabPages =    (compArg) => {
+      return nav.getTabs(compArg); }
 
     const onComp = (obj) => {
       compKey.value = obj.compKey;
@@ -70,9 +70,9 @@ let Comp = {
 
     const onRows = () => {
       const myKey = compKey.value;
-      let                   page = nav.pages['Info'];
-      if( myKey==='Know') { page = nav.pages['Know']; }
-      if( myKey==='Wise') { page = nav.pages['Wise']; }
+      let                   page = nav.getTabs('Info');
+      if( myKey==='Know') { page = nav.getTabs('Know'); }
+      if( myKey==='Wise') { page = nav.getTabs('Wise'); }
       if( mix.inArray( myKey, inovComps ) ) {
         myRows['value']['Plane'].name = myKey;
         myRows['value']['Plane'].icon = page['Core'].icon; }  }

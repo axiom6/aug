@@ -12,7 +12,7 @@ class Nav
     @dir        =  new Dir( @ )
     @source     = 'None'
     @level      = 'None' # set to either Comp Prac or Disp by Tocs.vue
-    @compKey    = 'Home' # Also specifies current plane
+    @compKey    = 'None'
     @pracKey    = 'None'
     @dispKey    = 'None'
     @pageKey    = 'None'
@@ -20,7 +20,7 @@ class Nav
     @choice     = 'None'
     @checked    = false
     @warnMsg    = 'None'
-    @debug      =  false
+    @debug      =  true
     @pubs       = []
     @urls       = []
     @tabs       = {}
@@ -30,16 +30,26 @@ class Nav
     @musePlanes = ['Info','Know','Wise']
 
   pub:( msg, isReplay=false ) ->
-    obj = @toObj( msg, isReplay )
+    changeView = @viewChange( msg )
+    obj = @toObj( msg )
     url = @toUrl( obj )
     console.log('Nav.pub()', obj )
     @pubs.push(obj) if not isReplay and obj.compKey isnt 'Test'
     @urls.push(url) if not isReplay and obj.compKey isnt 'Test'
+    @stream.publish( 'View', obj ) if changeView
     @stream.publish( 'Nav',  obj )
     return
 
-  toObj:( msg, isReplay ) ->
-    @set( msg, isReplay )
+  viewChange:( obj ) ->
+    obj.compKey = @compKey if not @mix.isDef(obj.compKey)
+    obj.pracKey = @pracKey if not @mix.isDef(obj.pracKey)
+    change = not ( obj.compKey is @compKey and obj.pracKey is @pracKey )
+    console.log( 'Nav.viewChange()', { change:change, compObj:obj.compKey, compNav:@compKey,
+    pracObj:obj.pracKey, pracNav:@pracKey } ) if @debug and change
+    change
+
+  toObj:( msg ) ->
+    @set( msg )
     @source   = 'None' if not msg.source?
     @pracKey  = 'None' if @level is   'Comp'
     @dispKey  = 'None' if @level isnt 'Disp'
@@ -49,20 +59,29 @@ class Nav
     obj.choice  = @choice  if @mix.isApp('Jitter')
     obj.checked = @checked if @mix.isApp('Jitter')
     obj.warnMsg = @warnMsg if @warnMsg isnt 'None'
+    @tab( obj ) # Publisn pageKey and inovKey to tabs
     obj
 
-  set:( msg, isReplay ) ->
-    if isReplay
-       if msg.pageKey isnt 'None'
-          compKey = @getPagesKey(msg)
-          @setPageKey( compKey, msg.pageKey, {} ) # Short message on 'Tab' subject
-          @stream.publish( 'Tab', { compKey:compKey, pageKey:msg.pageKey } )
-       if msg.inovKey isnt 'None'
-         @setPageKey( msg.compKey, msg.inovKey, {} ) # Short message on 'Tab' subject
-         @stream.publish( 'Tab',   { compKey:msg.compKey, pageKey:msg.inovKey } )
-         console.log( 'Nav.set()', { compKey:msg.compKey, inovKey:msg.inovKey } ) if @debug
+  set:( msg ) ->
     for own key, val of msg
       @[key] = val
+    return
+
+  tab:( obj ) ->
+
+    if @mix.isDef(obj.pageKey)
+      @pageKye  = obj.pageKey
+      tabsKey   = @getTabsKey(obj)
+      @setPageKey( tabsKey, obj.pageKey, {} ) # Short message on 'Tab' subject
+      @stream.publish( 'Tab',           { compKey:tabsKey, pageKey:obj.pageKey } )
+      console.log( 'Nav.set() pageKey', { compKey:tabsKey, pageKey:obj.pageKey } ) if @debug
+
+    if @mix.isDef(obj.inovKey)
+      @inovKey  = obj.inovKey
+      @setPageKey( obj.compKey, obj.inovKey, {} ) # Short message on 'Tab' subject
+      @stream.publish( 'Tab',   { compKey:obj.compKey, pageKey:obj.inovKey } )
+      console.log( 'Nav.set() inovKey', { compKey:obj.compKey, inovKey:obj.inovKey } ) if @debug
+
     return
 
   toUrl:( obj ) ->
@@ -97,63 +116,81 @@ class Nav
     console.log( 'Nav.toPub()', { url:href, obj,obj, paths:paths } ) if @debug
     obj
 
-  getPagesKey:( obj ) ->
-    pagesKey = 'None'
+  getTabsKey:( obj ) ->
+    tabsKey = 'None'
     if @mix.isApp('Muse')
-      pagesKey = obj.level if @mix.inArray(obj.compKey,@musePlanes)
-      pagesKey = 'Prin' if obj.compKey is 'Prin' and obj.level is 'Comp'
-      pagesKey = 'Prac' if obj.compKey is 'Prin' and obj.level is 'Prac'
+      tabsKey = obj.level if @mix.inArray(obj.compKey,@musePlanes)
+      tabsKey = 'Prin' if obj.compKey is 'Prin' and obj.level is 'Comp'
+      tabsKey = 'Prac' if obj.compKey is 'Prin' and obj.level is 'Prac'
     else
-      pagesKey = switch obj.level
+      tabsKey = switch obj.level
         when 'Comp' then obj.compKey
         when 'Prac' then obj.pracKey
         when 'Disp' then obj.dispKey
         else             obj.compKey
-    pagesKey
+    tabsKey
 
   objPage:( obj ) ->
-    @getPageKey( @getPagesKey(obj), false )
+    @getPageKey( @getTabsKey(obj), false )
 
   objInov:( obj ) ->
     if @mix.inArray(obj.compKey,@musePlanes) then @getPageKey(obj.compKey) else 'None'
 
-  isShow:( pagesKey, pageKey ) ->
-    pageNav = @getPageKey( pagesKey, false )
+  isShow:( tabsKey, pageKey ) ->
+    pageNav = @getPageKey( tabsKey, false )
     pageKey is pageNav
 
   # An important indicator of when Comps and Tabs are instanciated
-  setPages:( pagesKey, pages ) ->
-    return if @hasPages(pagesKey,false )
-    @pages[pagesKey] = pages
+  setTabs:( tabsKey, pages ) ->
+    return if @hasTabs(tabsKey,false )
+    @pages[tabsKey] = pages
     return
 
-  getPages:( pagesKey ) ->
-    if@hasPages(pagesKey,true) then @pages[pagesKey] else {}
+  getTabs:( tabsKey ) ->
+    if @hasTabs(tabsKey,true) then @pages[tabsKey] else {}
 
-  setPageKey:( pagesKey, pageKey, propPages ) ->
+  setPageKey:( tabsKey, pageKey, propTabs ) ->
     return if pageKey is 'None'
-    for own key, page  of @pages[pagesKey]
+    for own key, page  of @pages[tabsKey]
       page.show           = key is pageKey  # Update nav pages
-      propPages[key].show = key is pageKey  if propPages[key]? # Also update Tabs.vue propPages because it is a copy
+      propTabs[key].show = key is pageKey  if propTabs[key]? # Also update Tabs.vue propTabs because it is a copy
     return
 
-  getPageKey:( pagesKey, log=false ) ->
-    return 'None' if not  @hasPages(pagesKey,log)
-    for own  key,   page  of @pages[pagesKey]
+  getPageKey:( tabsKey, log=false ) ->
+    return 'None' if not  @hasTabs(tabsKey,log)
+    for own  key,   page  of @pages[tabsKey]
       return key if page.show
     'None'
 
-  getInovKey:( pagesKey ) ->
-    if @mix.inArray(pagesKey,@musePlanes) then @getPageKey(pagesKey) else 'None'
+  hasPage:( tabsKey, pageKey, log=true ) ->
+    if    @mix.isDef(tabsKey) and @hasTabs(tabsKey)
+       if @mix.isDef(pageKey) and @pages[tabsKey][pageKey]?
+         true
+       else
+         console.log( 'Nav.hasPage() bad pageKey', { tabsKey:tabsKey, pageKey:pageKey, pages:getTabs:(tabsKey) } ) if log
+         false
+    else
+      console.log( 'Nav.hasPage() bad tabsKey',    { tabsKey:tabsKey, pageKey:pageKey } ) if log
+      false
 
-  hasPages:( pagesKey, log=false ) ->
-    has = @mix.isDef(@pages[pagesKey])
-    console.log( 'Nav.hasPages()', { pagesKey:pagesKey, has:has, pages:@pages } ) if not has and log
+  getPage:( tabsKey, pageKey, log=false ) ->
+    if @hasTabs(tabsKey,log) and @pages[tabsKey][pageKey]?
+      @pages[tabsKey][pageKey]
+    else
+      console.error( 'Nav.getPage() bad page', { tabsKey:tabsKey, pageKey:pageKey } )
+      'None'
+
+  getInovKey:( tabsKey ) ->
+    if @mix.inArray(tabsKey,@musePlanes) then @getPageKey(tabsKey) else 'None'
+
+  hasTabs:( tabsKey, log=false ) ->
+    has = @mix.isDef(tabsKey) and @mix.isDef(@pages[tabsKey])
+    console.log( 'Nav.hasTabs()', { tabsKey:tabsKey, has:has, pages:@pages } ) if not has and log
     has
 
   isMyNav:( obj, level, checkPageKey=false ) ->  # @routes, @routeNames,
     if checkPageKey
-      obj.level is level and @hasPages(obj.pageKey,true)
+      obj.level is level and @hasTabs(obj.pageKey,true)
     else
       obj.level is level
 
@@ -188,3 +225,20 @@ class Nav
     navs
 
 export default Nav
+
+###
+  set:( msg, isReplay ) ->
+    if isReplay
+       if msg.pageKey isnt 'None'
+          tabsKey = @getTabsKey(msg)
+          @setPageKey( tabsKey, msg.pageKey, {} ) # Short message on 'Tab' subject
+          @stream.publish( 'Tab',           { compKey:tabsKey, pageKey:msg.pageKey } )
+          console.log( 'Nav.set() pageKey', { compKey:tabsKey, pageKey:msg.pageKey } ) if @debug
+       if msg.inovKey isnt 'None'
+         @setPageKey( msg.compKey, msg.inovKey, {} ) # Short message on 'Tab' subject
+         @stream.publish( 'Tab',   { compKey:msg.compKey, pageKey:msg.inovKey } )
+         console.log( 'Nav.set() inovKey', { compKey:msg.compKey, inovKey:msg.inovKey } ) if @debug
+    for own key, val of msg
+      @[key] = val
+    return
+###

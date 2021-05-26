@@ -30,7 +30,7 @@
       const page    = ref(null);
 
       const toPages = function() {
-        return nav.pages['Draw']; }
+        return nav.getTabs('Draw'); }
 
       const onNav = function(obj) {
         if( obj.compKey==='Draw' ) {

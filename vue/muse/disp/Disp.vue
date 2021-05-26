@@ -27,7 +27,7 @@
       const dispObj = ref(null);
       const dispIdx = ref(0);
       const debug   = false;
-      const pages   = nav.pages['Disp']
+      const pages   = nav.getTabs('Disp')
 
       const onDisp = function( obj ) {
         dispObj.value = mix.dispObject( obj.compKey, obj.inovKey, obj.pracKey, obj.dispKey );

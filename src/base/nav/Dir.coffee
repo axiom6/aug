@@ -97,7 +97,7 @@ class Dir
   dirPage:( dir ) ->
     msg = {}
     msg.source = "#{'Nav.dirPage'}(#{dir})"
-    pageKey = if @hasPages(@route) then @movePage(@nav.pages[@route],dir) else 'None'
+    pageKey = if @hasTabs(@route) then @movePage(@nav.pages[@route],dir) else 'None'
     if pageKey isnt 'None'
       @nav.setPageKey( @route, pageKey )
   # @pub( msg )

@@ -30,7 +30,7 @@
       mix.addScript( "/assets/mathbox-bundle.js" )
 
       const toPages = () => {
-        return nav.pages['Hues']; }
+        return nav.getTabs('Hues'); }
 
       const onNav = (obj) => {
         if( nav.isMyNav( obj,'Prac' ) ) {

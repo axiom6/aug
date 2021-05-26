@@ -32,7 +32,7 @@
         return pageArg === pageKey.value; }
 
       const toPages = function() {
-        return nav.pages[props.pracKey]; }
+        return nav.getTabs(props.pracKey); }
 
       const onNav = function(obj) {
         if( obj.compKey==='Tool' && obj.pageKey!=='None' && obj.pracKey===props.pracKey ) {

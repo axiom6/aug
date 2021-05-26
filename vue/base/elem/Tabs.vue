@@ -25,7 +25,7 @@ import { inject, ref, onMounted } from 'vue';
       let   compKey = props.isComp ? 'Comp' : props.compKey;
       const pageKey = ref( nav.getPageKey( compKey, true ) );
       const debug   = false;
-      if( debug ) { console.log( 'Tabs.setup()', {pageKey:pageKey.value,compKey:compKey,pages:nav.getPages(compKey)}); }
+      if( debug ) { console.log( 'Tabs.setup()', {pageKey:pageKey.value,compKey:compKey,pages:nav.getTabs(compKey)}); }
 
       const positions = {
         left:  { left:0,     width: '60%'  },
@@ -33,13 +33,13 @@ import { inject, ref, onMounted } from 'vue';
         full:  { left:0,     width: '100%' } };
       
       const onPage = (pageArg) => {
-        if( nav.hasPages( compKey,true) ) {
+        if( nav.hasTabs( compKey,true) ) {
           pageKey.value = pageArg;
           nav.setPageKey( compKey, pageArg, props.pages );
           if( debug ) { console.log( 'Tabs.onPage()', { compKey:compKey, pageKey:pageArg, pages:props.pages } ); }
           tabsIdx.value++; }
         else {
-          console.log( 'Tabs.onPage() missing pageKey', { pageKey:pageArg, pages:nav.getPages(compKey) } ) } }
+          console.log( 'Tabs.onPage() missing pageKey', { pageKey:pageArg, pages:nav.getTabs(compKey) } ) } }
 
       const doPage = (pageArg) => {
         onPage(pageArg);

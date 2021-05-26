@@ -27,7 +27,7 @@ Nav = class Nav {
     this.dir = new Dir(this);
     this.source = 'None';
     this.level = 'None'; // set to either Comp Prac or Disp by Tocs.vue
-    this.compKey = 'Home'; // Also specifies current plane
+    this.compKey = 'None';
     this.pracKey = 'None';
     this.dispKey = 'None';
     this.pageKey = 'None';
@@ -35,7 +35,7 @@ Nav = class Nav {
     this.choice = 'None';
     this.checked = false;
     this.warnMsg = 'None';
-    this.debug = false;
+    this.debug = true;
     this.pubs = [];
     this.urls = [];
     this.tabs = {};
@@ -46,8 +46,9 @@ Nav = class Nav {
   }
 
   pub(msg, isReplay = false) {
-    var obj, url;
-    obj = this.toObj(msg, isReplay);
+    var changeView, obj, url;
+    changeView = this.viewChange(msg);
+    obj = this.toObj(msg);
     url = this.toUrl(obj);
     console.log('Nav.pub()', obj);
     if (!isReplay && obj.compKey !== 'Test') {
@@ -56,12 +57,36 @@ Nav = class Nav {
     if (!isReplay && obj.compKey !== 'Test') {
       this.urls.push(url);
     }
+    if (changeView) {
+      this.stream.publish('View', obj);
+    }
     this.stream.publish('Nav', obj);
   }
 
-  toObj(msg, isReplay) {
+  viewChange(obj) {
+    var change;
+    if (!this.mix.isDef(obj.compKey)) {
+      obj.compKey = this.compKey;
+    }
+    if (!this.mix.isDef(obj.pracKey)) {
+      obj.pracKey = this.pracKey;
+    }
+    change = !(obj.compKey === this.compKey && obj.pracKey === this.pracKey);
+    if (this.debug && change) {
+      console.log('Nav.viewChange()', {
+        change: change,
+        compObj: obj.compKey,
+        compNav: this.compKey,
+        pracObj: obj.pracKey,
+        pracNav: this.pracKey
+      });
+    }
+    return change;
+  }
+
+  toObj(msg) {
     var obj;
-    this.set(msg, isReplay);
+    this.set(msg);
     if (msg.source == null) {
       this.source = 'None';
     }
@@ -89,38 +114,49 @@ Nav = class Nav {
     if (this.warnMsg !== 'None') {
       obj.warnMsg = this.warnMsg;
     }
+    this.tab(obj); // Publisn pageKey and inovKey to tabs
     return obj;
   }
 
-  set(msg, isReplay) {
-    var compKey, key, val;
-    if (isReplay) {
-      if (msg.pageKey !== 'None') {
-        compKey = this.getPagesKey(msg);
-        this.setPageKey(compKey, msg.pageKey, {}); // Short message on 'Tab' subject
-        this.stream.publish('Tab', {
-          compKey: compKey,
-          pageKey: msg.pageKey
-        });
-      }
-      if (msg.inovKey !== 'None') {
-        this.setPageKey(msg.compKey, msg.inovKey, {}); // Short message on 'Tab' subject
-        this.stream.publish('Tab', {
-          compKey: msg.compKey,
-          pageKey: msg.inovKey
-        });
-        if (this.debug) {
-          console.log('Nav.set()', {
-            compKey: msg.compKey,
-            inovKey: msg.inovKey
-          });
-        }
-      }
-    }
+  set(msg) {
+    var key, val;
     for (key in msg) {
       if (!hasProp.call(msg, key)) continue;
       val = msg[key];
       this[key] = val;
+    }
+  }
+
+  tab(obj) {
+    var tabsKey;
+    if (this.mix.isDef(obj.pageKey)) {
+      this.pageKye = obj.pageKey;
+      tabsKey = this.getTabsKey(obj);
+      this.setPageKey(tabsKey, obj.pageKey, {}); // Short message on 'Tab' subject
+      this.stream.publish('Tab', {
+        compKey: tabsKey,
+        pageKey: obj.pageKey
+      });
+      if (this.debug) {
+        console.log('Nav.set() pageKey', {
+          compKey: tabsKey,
+          pageKey: obj.pageKey
+        });
+      }
+    }
+    if (this.mix.isDef(obj.inovKey)) {
+      this.inovKey = obj.inovKey;
+      this.setPageKey(obj.compKey, obj.inovKey, {}); // Short message on 'Tab' subject
+      this.stream.publish('Tab', {
+        compKey: obj.compKey,
+        pageKey: obj.inovKey
+      });
+      if (this.debug) {
+        console.log('Nav.set() inovKey', {
+          compKey: obj.compKey,
+          inovKey: obj.inovKey
+        });
+      }
     }
   }
 
@@ -172,21 +208,21 @@ Nav = class Nav {
     return obj;
   }
 
-  getPagesKey(obj) {
-    var pagesKey;
-    pagesKey = 'None';
+  getTabsKey(obj) {
+    var tabsKey;
+    tabsKey = 'None';
     if (this.mix.isApp('Muse')) {
       if (this.mix.inArray(obj.compKey, this.musePlanes)) {
-        pagesKey = obj.level;
+        tabsKey = obj.level;
       }
       if (obj.compKey === 'Prin' && obj.level === 'Comp') {
-        pagesKey = 'Prin';
+        tabsKey = 'Prin';
       }
       if (obj.compKey === 'Prin' && obj.level === 'Prac') {
-        pagesKey = 'Prac';
+        tabsKey = 'Prac';
       }
     } else {
-      pagesKey = (function() {
+      tabsKey = (function() {
         switch (obj.level) {
           case 'Comp':
             return obj.compKey;
@@ -199,11 +235,11 @@ Nav = class Nav {
         }
       })();
     }
-    return pagesKey;
+    return tabsKey;
   }
 
   objPage(obj) {
-    return this.getPageKey(this.getPagesKey(obj), false);
+    return this.getPageKey(this.getTabsKey(obj), false);
   }
 
   objInov(obj) {
@@ -214,50 +250,50 @@ Nav = class Nav {
     }
   }
 
-  isShow(pagesKey, pageKey) {
+  isShow(tabsKey, pageKey) {
     var pageNav;
-    pageNav = this.getPageKey(pagesKey, false);
+    pageNav = this.getPageKey(tabsKey, false);
     return pageKey === pageNav;
   }
 
   // An important indicator of when Comps and Tabs are instanciated
-  setPages(pagesKey, pages) {
-    if (this.hasPages(pagesKey, false)) {
+  setTabs(tabsKey, pages) {
+    if (this.hasTabs(tabsKey, false)) {
       return;
     }
-    this.pages[pagesKey] = pages;
+    this.pages[tabsKey] = pages;
   }
 
-  getPages(pagesKey) {
-    if (this.hasPages(pagesKey, true)) {
-      return this.pages[pagesKey];
+  getTabs(tabsKey) {
+    if (this.hasTabs(tabsKey, true)) {
+      return this.pages[tabsKey];
     } else {
       return {};
     }
   }
 
-  setPageKey(pagesKey, pageKey, propPages) {
+  setPageKey(tabsKey, pageKey, propTabs) {
     var key, page, ref;
     if (pageKey === 'None') {
       return;
     }
-    ref = this.pages[pagesKey];
+    ref = this.pages[tabsKey];
     for (key in ref) {
       if (!hasProp.call(ref, key)) continue;
       page = ref[key];
       page.show = key === pageKey; // Update nav pages
-      if (propPages[key] != null) {
-        propPages[key].show = key === pageKey;
+      if (propTabs[key] != null) {
+        propTabs[key].show = key === pageKey;
       }
     }
   }
 
-  getPageKey(pagesKey, log = false) {
+  getPageKey(tabsKey, log = false) {
     var key, page, ref;
-    if (!this.hasPages(pagesKey, log)) {
+    if (!this.hasTabs(tabsKey, log)) {
       return 'None';
     }
-    ref = this.pages[pagesKey];
+    ref = this.pages[tabsKey];
     for (key in ref) {
       if (!hasProp.call(ref, key)) continue;
       page = ref[key];
@@ -268,20 +304,59 @@ Nav = class Nav {
     return 'None';
   }
 
-  getInovKey(pagesKey) {
-    if (this.mix.inArray(pagesKey, this.musePlanes)) {
-      return this.getPageKey(pagesKey);
+  hasPage(tabsKey, pageKey, log = true) {
+    if (this.mix.isDef(tabsKey) && this.hasTabs(tabsKey)) {
+      if (this.mix.isDef(pageKey) && (this.pages[tabsKey][pageKey] != null)) {
+        return true;
+      } else {
+        if (log) {
+          console.log('Nav.hasPage() bad pageKey', {
+            tabsKey: tabsKey,
+            pageKey: pageKey,
+            pages: {
+              getTabs: tabsKey
+            }
+          });
+        }
+        return false;
+      }
+    } else {
+      if (log) {
+        console.log('Nav.hasPage() bad tabsKey', {
+          tabsKey: tabsKey,
+          pageKey: pageKey
+        });
+      }
+      return false;
+    }
+  }
+
+  getPage(tabsKey, pageKey, log = false) {
+    if (this.hasTabs(tabsKey, log) && (this.pages[tabsKey][pageKey] != null)) {
+      return this.pages[tabsKey][pageKey];
+    } else {
+      console.error('Nav.getPage() bad page', {
+        tabsKey: tabsKey,
+        pageKey: pageKey
+      });
+      return 'None';
+    }
+  }
+
+  getInovKey(tabsKey) {
+    if (this.mix.inArray(tabsKey, this.musePlanes)) {
+      return this.getPageKey(tabsKey);
     } else {
       return 'None';
     }
   }
 
-  hasPages(pagesKey, log = false) {
+  hasTabs(tabsKey, log = false) {
     var has;
-    has = this.mix.isDef(this.pages[pagesKey]);
+    has = this.mix.isDef(tabsKey) && this.mix.isDef(this.pages[tabsKey]);
     if (!has && log) {
-      console.log('Nav.hasPages()', {
-        pagesKey: pagesKey,
+      console.log('Nav.hasTabs()', {
+        tabsKey: tabsKey,
         has: has,
         pages: this.pages
       });
@@ -291,7 +366,7 @@ Nav = class Nav {
 
   isMyNav(obj, level, checkPageKey = false) { // @routes, @routeNames,
     if (checkPageKey) {
-      return obj.level === level && this.hasPages(obj.pageKey, true);
+      return obj.level === level && this.hasTabs(obj.pageKey, true);
     } else {
       return obj.level === level;
     }
@@ -350,3 +425,20 @@ Nav = class Nav {
 };
 
 export default Nav;
+
+/*
+  set:( msg, isReplay ) ->
+    if isReplay
+       if msg.pageKey isnt 'None'
+          tabsKey = @getTabsKey(msg)
+          @setPageKey( tabsKey, msg.pageKey, {} ) # Short message on 'Tab' subject
+          @stream.publish( 'Tab',           { compKey:tabsKey, pageKey:msg.pageKey } )
+          console.log( 'Nav.set() pageKey', { compKey:tabsKey, pageKey:msg.pageKey } ) if @debug
+       if msg.inovKey isnt 'None'
+         @setPageKey( msg.compKey, msg.inovKey, {} ) # Short message on 'Tab' subject
+         @stream.publish( 'Tab',   { compKey:msg.compKey, pageKey:msg.inovKey } )
+         console.log( 'Nav.set() inovKey', { compKey:msg.compKey, inovKey:msg.inovKey } ) if @debug
+    for own key, val of msg
+      @[key] = val
+    return
+*/

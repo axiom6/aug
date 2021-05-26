@@ -43,7 +43,7 @@
         if( obj.compKey==='Math' && obj.pageKey!=='None' && ( obj.pracKey==='MathML' || obj.pracKey==='MathEQ') ) {
           pracKey.value = obj.pracKey;
           pageKey.value = obj.pageKey;
-          //let page    = nav.pages[obj.pracKey][obj.pageKey];
+          //let page    = getPages(obj.pracKey,obj.pageKey);
           //exps.value  = createExps( page );
           expsIdx.value++; } }
 
@@ -69,9 +69,9 @@
         let col  = mod + 1;
         return `r${row}c${col}`; }
 
-      const basicsExps = createExps(nav.pages['MathML']['Basics']);
-      const solvesExps = createExps(nav.pages['MathEQ']['Solves']);
-      const differExps = createExps(nav.pages['MathEQ']['Differ']);
+      const basicsExps = createExps(nav.getPage('MathML','Basics'));
+      const solvesExps = createExps(nav.getPage('MathEQ','Solves'));
+      const differExps = createExps(nav.getPage('MathEQ','Differ'));
 
     onMounted( function () {
       mix.subscribe( 'Nav', 'MathND', (obj) => {
