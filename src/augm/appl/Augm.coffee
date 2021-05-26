@@ -171,19 +171,19 @@ class Augm
       Sphere:  { title:'Sphere',  key:'Sphere',  show:false },
       Regress: { title:'Regress', key:'Regress', show:false } }
     Gauges: {
-      Gauge:   { title:'Gauge', key:'Gauge' } }
+      Gauge:   { title:'Gauge', key:'Gauge', show:true } }
     Widget: {
-      DnD:     { title:'DnD',   key:'DnD'   } }
+      DnD:     { title:'DnD',   key:'DnD', show:true   } }
     Geom2D: {
-      Graph:  { title:'Graph',   key:'Graph',    obj:null },
-      Basics: { title:'Basics',  key:'Basics',   obj:null } },
+      Graph:  { title:'Graph',   key:'Graph',    obj:null, show:true  },
+      Basics: { title:'Basics',  key:'Basics',   obj:null, show:false } },
     Geom3D: {
-      Grids:   { title:'Grids',   key:'Grids',   obj:null },
-      Isomet:  { title:'Isomet',  key:'Isomet',  obj:null },
-      Play:    { title:'Play',    key:'Play',    obj:null },
-      Isohed:  { title:'Isohed',  key:'Isohed',  obj:null },
-      Torus:   { title:'Torus',   key:'Torus',   obj:null },
-      Sphere:  { title:'Sphere',  key:'Sphere',  obj:null } }
+      Grids:   { title:'Grids',   key:'Grids',   obj:null, show:true },
+      Isomet:  { title:'Isomet',  key:'Isomet',  obj:null, show:false },
+      Play:    { title:'Play',    key:'Play',    obj:null, show:false },
+      Isohed:  { title:'Isohed',  key:'Isohed',  obj:null, show:false },
+      Torus:   { title:'Torus',   key:'Torus',   obj:null, show:false },
+      Sphere:  { title:'Sphere',  key:'Sphere',  obj:null, show:false } }
     Tables: {
       Table1: { title:'Table1', key:'Table1', created:false, show:false },
       Table2: { title:'Table2', key:'Table2', created:false, show:false } }

@@ -1,9 +1,9 @@
 
 <template>
   <div class="geom-nd-pane">
-    <d-tabs :compKey="compKey" :pages="toPages()"></d-tabs>
-    <template v-for="page in toPages(pageKey)" :key="page.key">
-      <g-page :page="page" class="geom-nd-page"></g-page>
+    <d-tabs :compKey="pracKey" :pages="toPages()"></d-tabs>
+    <template v-for="page in toPages()" :key="page.key">
+      <g-page v-if="show(page.key)" :page="page" class="geom-nd-page"></g-page>
     </template>
   </div>
 </template>
@@ -26,41 +26,55 @@
 
     components:{ 'd-tabs':Tabs, 'g-page':PageND },
 
-    setup() {
+    props: { pracKey:String },
+
+    setup( props ) {
 
       const mix      = inject('mix');
       const nav      = inject('nav');
       const page     = ref(null);
-      const compKey  = ref('Geom2D');
-      const pageKey  = ref('Graph');
-      const compKeys = ['Geom2D','Deom3D'];
+      const pageKey  = ref('None');
+      const debug    = true;
 
       const toPages = function() {
-        return nav.pages[compKey.value]; }
+        return nav.pages[props.pracKey]; }
 
-      const onNav = function(obj) {
-        if( mix.inArray(  obj.pracKey, compKeys ) ) {
-          compKey.value = obj.pracKey;
-          pageKey.value = obj.pageKey;
-          page.value    = nav.pages[compKey.value][pageKey.value];
-          create(page); } }
+      const show = ( pageArg ) => {
+        return pageKey.value === pageArg; }
+
+      const onNav = (obj) => {
+        if( debug ) { console.log( 'GeomND.onNav()', obj ); }
+        if( props.pracKey === obj.pracKey && mix.isDef(obj.pageKey) ) {
+          pageKey.value  = obj.pageKey;
+          page.value     = nav.pages[props.pracKey][pageKey.value];
+          page.value.obj = create(page.value); }
+        else if( !mix.isDef(obj.pageKey) ) {
+          console.log( 'GeomND.onNav() pageKey None', obj ); } }
 
       const create = (page) => {
-        if( page.obj===null ) {
-          if(      page.key==='Graph'  ) { page.obj = new Graph();  }
-          else if( page.key==='Basics' ) { page.obj = new Basics(); }
-          else if( page.key==='Grids'  ) { page.obj = new Grids();  }
-          else if( page.key==='Isomet' ) { page.obj = new Isomet(); }
-          else if( page.key==='Play'   ) { page.obj = new Play();   }
-          else if( page.key==='Isohed' ) { page.obj = new Isohed(); }
-          else if( page.key==='Torus'  ) { page.obj = new Torus();  }
-          else if( page.key==='Sphere' ) { page.obj = new Sphere(); } } }
+        if( debug ) { console.log( 'GeomND.create()', { page:page.value } ); }
+        if( mix.isDef(page.obj) ) {
+          return page.obj; }
+        else {
+          if(      page.key==='Graph'  ) { return Graph;  }
+          else if( page.key==='Basics' ) { return Basics; }
+          else if( page.key==='Grids'  ) { return Grids;  }
+          else if( page.key==='Isomet' ) { return Isomet; }
+          else if( page.key==='Play'   ) { return Play;   }
+          else if( page.key==='Isohed' ) { return Isohed; }
+          else if( page.key==='Torus'  ) { return Torus;  }
+          else if( page.key==='Sphere' ) { return Sphere; }
+          else                           { return Graph;  } } }
 
-      onMounted( function () {
-        mix.subscribe(  'Nav', 'GeomND', (obj) => {
-          onNav(obj); } ) } )
+      if( debug ) { console.log( 'GeomND.subscribe() in setup()', { pracKey:props.pracKey, pageKey:pageKey.value } ); }
+    //if( mix.isDef(pageKey.value) ) { onNav( { pageKey:pageKey.value } ); }
+      mix.subscribe(  'Nav', 'GeomND', (obj) => {
+        onNav(obj); } )
 
-      return { compKey, pageKey, toPages }; }
+      onMounted( () => {
+        if( debug ) { console.log( 'GeomND.onMounted()', { pracKey:props.pracKey, pageKey:pageKey.value } ); } } )
+
+      return { show, page, toPages }; }
   }
   export default GeomND;
 

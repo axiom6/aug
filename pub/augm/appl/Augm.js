@@ -449,57 +449,67 @@ Augm = (function() {
     Gauges: {
       Gauge: {
         title: 'Gauge',
-        key: 'Gauge'
+        key: 'Gauge',
+        show: true
       }
     },
     Widget: {
       DnD: {
         title: 'DnD',
-        key: 'DnD'
+        key: 'DnD',
+        show: true
       }
     },
     Geom2D: {
       Graph: {
         title: 'Graph',
         key: 'Graph',
-        obj: null
+        obj: null,
+        show: true
       },
       Basics: {
         title: 'Basics',
         key: 'Basics',
-        obj: null
+        obj: null,
+        show: false
       }
     },
     Geom3D: {
       Grids: {
         title: 'Grids',
         key: 'Grids',
-        obj: null
+        obj: null,
+        show: true
       },
       Isomet: {
         title: 'Isomet',
         key: 'Isomet',
-        obj: null
+        obj: null,
+        show: false
       },
       Play: {
         title: 'Play',
         key: 'Play',
-        obj: null
+        obj: null,
+        show: false
       },
       Isohed: {
         title: 'Isohed',
         key: 'Isohed',
-        obj: null
+        obj: null,
+        show: false
       },
       Torus: {
         title: 'Torus',
         key: 'Torus',
-        obj: null
+        obj: null,
+        show: false
       },
       Sphere: {
         title: 'Sphere',
         key: 'Sphere',
-        obj: null
+        obj: null,
+        show: false
       }
     },
     Tables: {

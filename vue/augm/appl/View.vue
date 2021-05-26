@@ -1,23 +1,23 @@
 
 <template>
   <div class="view-pane">
-    <v-home   v-if="show('Home')"   :key="viewIdx"></v-home>
-    <v-math   v-if="show('Math')"   :key="viewIdx"></v-math>
-    <v-mathEQ v-if="show('MathEQ')" :key="viewIdx"></v-mathEQ>
-    <v-mathML v-if="show('MathML')" :key="viewIdx"></v-mathML>
-    <v-draw   v-if="show('Draw')"   :key="viewIdx"></v-draw>
-    <v-hues   v-if="show('Hues')"   :key="viewIdx"></v-hues>
-    <v-tool   v-if="show('Tool')"   :key="viewIdx"></v-tool>
-    <v-tools  v-if="show('Gauges')" :key="viewIdx" :pracKey="'Gauges'"></v-tools>
-    <v-tools  v-if="show('Widget')" :key="viewIdx" :pracKey="'Widget'"></v-tools>
-    <v-cube   v-if="show('Cube')"   :key="viewIdx"></v-cube>
-    <v-wood   v-if="show('Wood')"   :key="viewIdx"></v-wood>
-    <v-geom   v-if="show('Geom')"   :key="viewIdx"></v-geom>
-    <v-geom2D v-if="show('Geom2D')" :key="viewIdx"></v-geom2D>
-    <v-geom3D v-if="show('Geom3D')" :key="viewIdx"></v-geom3D>
-    <v-test   v-if="show('Test')"   :key="viewIdx"></v-test>
-    <v-replay v-if="show('Test')"   :key="viewIdx"></v-replay>
-    <v-result v-if="show('Test')"   :key="viewIdx"></v-result>
+    <v-home     v-if="show('Home')"   :key="viewIdx"></v-home>
+    <v-math     v-if="show('Math')"   :key="viewIdx"></v-math>
+    <v-mathEQ   v-if="show('MathEQ')" :key="viewIdx" :pracKey="'MathEQ'"></v-mathEQ>
+    <v-mathML   v-if="show('MathML')" :key="viewIdx" :pracKey="'MathML'"></v-mathML>
+    <v-draw     v-if="show('Draw')"   :key="viewIdx"></v-draw>
+    <v-hues     v-if="show('Hues')"   :key="viewIdx"></v-hues>
+    <v-tool     v-if="show('Tool')"   :key="viewIdx"></v-tool>
+    <v-tools    v-if="show('Gauges')" :key="viewIdx" :pracKey="'Gauges'"></v-tools>
+    <v-tools    v-if="show('Widget')" :key="viewIdx" :pracKey="'Widget'"></v-tools>
+    <v-cube     v-if="show('Cube')"   :key="viewIdx"></v-cube>
+    <v-wood     v-if="show('Wood')"   :key="viewIdx"></v-wood>
+    <v-geom     v-if="show('Geom')"   :key="viewIdx"></v-geom>
+    <v-geom2D   v-if="show('Geom2D')" :key="viewIdx" :pracKey="'Geom2D'"></v-geom2D>
+    <v-geom3D   v-if="show('Geom3D')" :key="viewIdx" :pracKey="'Geom3D'"></v-geom3D>
+    <v-test     v-if="show('Test')"   :key="viewIdx"></v-test>
+    <v-replay   v-if="show('Test')"   :key="viewIdx"></v-replay>
+    <v-result   v-if="show('Test')"   :key="viewIdx"></v-result>
   </div>
 </template>
 

@@ -5,7 +5,7 @@
 
 <script type="module">
 
-import { ref, nextTick, onMounted } from "vue"; // , inject
+import { ref, nextTick, onMounted, inject } from "vue";
 import Style from "../../../pub/augm/geom/lib/Style.js";
 
 let PageND = {
@@ -14,7 +14,8 @@ let PageND = {
 
   setup( props ) {
 
-  //const mix   = inject('mix');
+    const mix   = inject('mix');
+
     const elem  = ref(null );
     const debug = true;
 
@@ -23,9 +24,22 @@ let PageND = {
          window['Geom'][props.page.key] = new Style( elem['value'] );
          props.page.obj.ga(); } ) }
 
+    const remove = () => {
+      if( mix.isDef(props.page.obj) )
+      nextTick( () => {
+        let dom = elem['value'];
+        while( mix.isDef(dom) && mix.isDef(dom.firstChild) ) {
+          dom.removeChild(dom.firstChild); } } ) }
+
+    const onNav = (obj) => {
+      if( debug ) { console.log( 'PageND.onNav()', { key:props.page.key }, obj ); }
+      if( props.page.key === obj.pageKey ) { create(); }
+      else                                 { remove(); } }
+
     onMounted( () => {
-      create();
-      if( debug ) { console.log( 'PageND.onMounted()', { page:props.page } ); } } )
+      if( debug ) { console.log( 'PageND.onMounted()', { page:props.page } ); }
+      mix.subscribe( 'Nav', 'PageND'+props.page.key, (obj) => {
+        onNav(obj); } ) } )
 
     return { elem }; }
 }
@@ -46,14 +60,6 @@ export default PageND;
 </style>
 
 <!--
-    const remove = () => {
-      if( mix.isDef(props.page.obj) ) {
-        nextTick( () => {
-          let dom = elem['value'];
-          while( mix.isDef(dom) && mix.isDef(dom.firstChild) ) {
-            dom.removeChild(dom.firstChild); } } ) } }
-
-
 v-if="show"
 const show  = ref(false);
 show.value = true;
