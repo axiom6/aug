@@ -32,7 +32,7 @@
       const debug   = false;
 
       const toPages = () => {
-        return nav.pages[pracKey.value]; }
+        return nav.pages[props.pracKey]; }
 
       const show = ( pageArg ) => {
         return pageKey === pageArg; }
@@ -44,10 +44,8 @@
           page.value.obj = mathMgr.createExps(page.value);
           expsIdx.value++; } }
 
-    onMounted( () => {
-      let pageNav = nav.getPageKey(props.pracKey);       // Here we want to respond to the last Nav.pub(obj)
-      if( debug ) { console.log( 'MathND.onMounted()', { pracKey:props.pracKey, pageKey:pageNav } ); }
-      onNav( { pracKey:nav.pracKey, pageKey:pageNav } ); // Nav can set pageKey if show is true in pages
+    onMounted( () => { // Follow up with the last Nav.pub(obj) that mounted this vue component
+      onNav( { pracKey:props.pracKey, pageKey:nav.getPageKey(props.pracKey) } );
       mix.subscribe( 'Nav', 'MathND', (obj) => {
           onNav( obj ); } ); } )
 

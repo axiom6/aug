@@ -24,11 +24,7 @@ let PageND = {
          props.page.obj.ga(); } ) }
 
     const remove = () => {
-      if( mix.isDef(props.page.obj) )
-      nextTick( () => {
-        let dom = elem['value'];
-        while( mix.isDef(dom) && mix.isDef(dom.firstChild) ) {
-          dom.removeChild(dom.firstChild); } } ) }
+      mix.removeElem( elem['value'], nextTick ); }
 
     const onNav = (obj) => {
       if( debug ) { console.log( 'PageND.onNav()', { key:props.page.key }, obj ); }
@@ -59,6 +55,13 @@ export default PageND;
 </style>
 
 <!--
+    const remove = () => {
+      if( mix.isDef(props.page.obj) )
+      nextTick( () => {
+        let dom = elem['value'];
+        while( mix.isDef(dom) && mix.isDef(dom.firstChild) ) {
+          dom.removeChild(dom.firstChild); } } ) }
+
 v-if="show"
 const show  = ref(false);
 show.value = true;

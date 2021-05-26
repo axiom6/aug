@@ -5,7 +5,7 @@
 
 <script type="module">
 
-import {ref, nextTick, onMounted, inject} from "vue";
+import {ref, nextTick, onMounted, inject, onUnmounted} from "vue";
 import D3D  from '../../../pub/augm/show/D3D.js'
 
 let Pane = {
@@ -17,13 +17,16 @@ let Pane = {
     const mix  = inject('mix');
     const elem = ref(null);
 
-    const create =function() {
+    const create = () => {
       nextTick( function() {
-          props.page.obj = D3D.create( props.page.key, elem.value, mix ); } ) }
+          props.page.obj = D3D.create( props.page.key, elem['value'], mix ); } ) }
 
-    onMounted( function() {
+    onMounted( () => {
       if( props.page.show ) {
         create(); } } )
+
+    onUnmounted( () => {
+      mix.removeElem( elem['value'], nextTick ) ; } )
 
     return { elem } }
 }

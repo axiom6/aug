@@ -3,13 +3,15 @@
 </template>
 <script>
 
-import { ref, onMounted, nextTick } from "vue";
+import { ref, inject, onMounted, nextTick, onUnmounted } from "vue";
 import SvgMgr    from '../../../pub/base/draw/SvgMgr.js'
 import drawGauge from './GaugeD3.js'
 
 let Gauge = {
   
   setup() {
+
+    const mix   = inject('mix');
     const elem  = ref(null);
     const debug =  false
     let   opts = { gaugeRadius:160, minVal:0, maxVal:100, needleVal:Math.round(30),
@@ -18,13 +20,15 @@ let Gauge = {
       outerEdgeCol:'wheat', unitsLabelCol:'wheat', tickLabelCol:'wheat', needleCol:'wheat' };
     let svgMgr = null;
     
-  onMounted( function () {
-    nextTick( function() {
+  onMounted(  () => {
+    nextTick( () => {
       if( debug ) { console.log( 'Gauge.onMounted()', elem['value'] ); }
       svgMgr = new SvgMgr( 'Gauge', elem['value'], "Comp" )
       opts.gaugeRadius = 0.5 * Math.min( svgMgr.size.w, svgMgr.size.h );
-      drawGauge( opts, svgMgr.g ) ;
-    } ) } )
+      drawGauge( opts, svgMgr.g ); } ) } )
+
+  onUnmounted( () => {
+    mix.removeElem( elem['value'], nextTick ) ; } )
 
   return { elem } }
 

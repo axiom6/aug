@@ -3,7 +3,7 @@
 <template>
   <div class="draw-pane">
     <d-tabs :compKey="compKey" :pages="toPages()"></d-tabs>
-    <h1 v-if="showH1">Drawings in D3</h1>
+    <!--h1 v-if="showH1">Drawings in D3</h1-->
     <template v-for="page in toPages()" :key="pageIdx">
       <d-pane  v-if="page.show" :page="page" class="pane-pane"></d-pane>
     </template>
@@ -29,15 +29,15 @@
       const pageIdx = ref(0);
       const page    = ref(null);
 
-      const toPages = function() {
+      const toPages = () => {
         return nav.getTabs('Draw'); }
 
-      const onNav = function(obj) {
+      const onNav = (obj) => {
         if( obj.compKey==='Draw' ) {
             showH1.value = false;
             pageIdx.value++; } }
 
-      onMounted( function () {
+      onMounted( () => {
         showH1.value  = true;
         mix.subscribe(  'Nav', 'Draw', (obj) => {
           onNav(obj); } ); } )

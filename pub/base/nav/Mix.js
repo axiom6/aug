@@ -164,8 +164,8 @@ Mix = class Mix {
     }
     // console.log( 'Mix.addScript() adding', src )
     script = document.createElement('script');
+    document.head.appendChild(script);
     script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
   }
 
   // Nav
@@ -436,8 +436,18 @@ Mix = class Mix {
     return pageKey === 'Info' || pageKey === 'Data'; // @app() is 'Muse' and
   }
 
-  
-    // Choice
+  removeElem(elem, nextTick) {
+    nextTick(() => {
+      var results;
+      results = [];
+      while (this.isDef(elem) && this.isDef(elem.firstChild)) {
+        results.push(elem.removeChild(elem.firstChild));
+      }
+      return results;
+    });
+  }
+
+  // Choice
   choice() {
     return Mix.Main.Batch.Choice.data;
   }

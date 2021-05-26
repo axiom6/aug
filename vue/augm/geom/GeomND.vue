@@ -45,10 +45,8 @@
           pageIdx.value++;
           if( debug ) { console.log( 'GeomND.onNav()', { obj:obj, page:page, pages:nav.getTabs(props.pracKey) } ); } } }
 
-      onMounted( () => {
-        let pageNav = nav.getPageKey(props.pracKey);       // Here we want to respond to the last Nav.pub(obj)
-        if( debug ) { console.log( 'GeomND.onMounted()', { pracKey:props.pracKey, pageKey:pageNav } ); }
-        onNav( { pracKey:nav.pracKey, pageKey:pageNav } ); // Nav can set pageKey if show is true in pages
+      onMounted( () => { // Follow up with the last Nav.pub(obj) that mounted this vue component
+        onNav( { pracKey:props.pracKey, pageKey:nav.getPageKey(props.pracKey) } );
         mix.subscribe(  'Nav', 'GeomND', (obj) => {        //   also onNav() chacks for valid tabs and pages
           onNav(obj); } ) } )
 

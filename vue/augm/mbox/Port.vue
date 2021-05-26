@@ -5,7 +5,7 @@
 
 <script type="module">
 
-import { ref, nextTick, onMounted } from "vue";
+import { ref, inject, nextTick, onMounted, onUnmounted} from "vue";
 import Box from "../../../pub/augm/mbox/Box.js";
 
 let Port = {
@@ -14,15 +14,19 @@ let Port = {
 
   setup( props ) {
 
+    const mix  = inject('mix');
     const elem = ref(null);
 
     const doApp = function( pageKey ) {
       nextTick( function() {
-          Box.doApp( pageKey, elem.value ); } ) }
+          Box.doApp( pageKey, elem['value'] ); } ) }
 
     onMounted( function() {
       if(      props.page.show ) {
         doApp( props.page.key  ); } } )
+
+    onUnmounted( () => {
+      mix.removeElem( elem['value'], nextTick ) ; } )
 
     return { elem } }
 }

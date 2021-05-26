@@ -89,7 +89,7 @@ Muse = (function() {
       var error, infoSpec, subjects;
       Muse.Batch = batch; // Not necessary here, but assigned for compatibilitry
       Muse.myName = 'Muse';
-      subjects = ["Nav", "Tab"];
+      subjects = ["Nav", "Tab", "View"];
       infoSpec = {
         subscribe: false,
         publish: false,

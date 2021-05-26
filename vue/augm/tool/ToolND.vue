@@ -24,7 +24,7 @@
 
       const mix      = inject('mix');
       const nav      = inject('nav');
-      const debug    = true
+      const debug    = false
 
       const pageIdx  = ref(0)
       const page     = ref(null);
@@ -38,13 +38,12 @@
 
       const onNav = function(obj) {
         if( props.pracKey===obj.pracKey && nav.hasPage(props.pracKey,obj.pageKey) ) {
-          if(debug) { console.log( 'Tools.onNav()', { compKey:obj.compKey, pracKey:props.pracKey, pageKey:obj.pageKey } ); }
-          pageKey = obj.pageKey; } }
+          if(debug) { console.log( 'Tools.onNav()', { pracKey:props.pracKey, pageKey:obj.pageKey } ); }
+          pageKey = obj.pageKey;
+          pageIdx.value++; } }
 
-      onMounted( function () {
-        let pageNav = nav.getPageKey(props.pracKey);       // Here we want to respond to the last Nav.pub(obj)
-        if( debug ) { console.log( 'ToolND.onMounted()', { pracKey:props.pracKey, pageKey:pageNav } ); }
-        onNav( { pracKey:nav.pracKey, pageKey:pageNav } ); // Nav can set pageKey if show is true in pages
+      onMounted( function () { // Follow up with the last Nav.pub(obj) that mounted this vue component
+        onNav( { pracKey:props.pracKey, pageKey:nav.getPageKey(props.pracKey) } );
         mix.subscribe(  'Nav', 'ToolND', (obj) => {
           onNav(obj); } ) } )
 

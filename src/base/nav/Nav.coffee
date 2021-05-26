@@ -20,7 +20,7 @@ class Nav
     @choice     = 'None'
     @checked    = false
     @warnMsg    = 'None'
-    @debug      =  true
+    @debug      =  false
     @pubs       = []
     @urls       = []
     @tabs       = {}

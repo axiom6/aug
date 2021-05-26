@@ -30,13 +30,14 @@
       mix.addScript( "/assets/mathbox-bundle.js" )
 
       const toPages = () => {
-        return nav.getTabs('Hues'); }
+        return nav.getTabs(compKey); }
 
       const onNav = (obj) => {
-        if( nav.isMyNav( obj,'Prac' ) ) {
+        if( obj.compKey===compKey ) {
             pageIdx.value++; } } // console.log( 'Darw.onNav()', pages );
 
-      onMounted( () => {
+      onMounted( () => { // Follow up with the last Nav.pub(obj) that mounted this vue component
+        onNav( { compKey:compKey, pageKey:nav.getPageKey(compKey) } );
         mix.subscribe(  'Nav', 'Hues', (obj) => {
           onNav(obj); } ); } )
 

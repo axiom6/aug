@@ -93,9 +93,10 @@ class Mix
       # console.log( 'Mix.addScript() scriptx src', scriptx.src )
       return if scriptx.src.includes(src)
     # console.log( 'Mix.addScript() adding', src )
-    script     = document.createElement('script')
+    script = document.createElement('script')
+    document.head.appendChild(script)
     script.src = src
-    document.getElementsByTagName("head")[0].appendChild(script)
+
     return
 
   # Nav
@@ -245,6 +246,12 @@ class Mix
 
   isPageKeyComp: (pageKey) ->
     pageKey is 'Info' or pageKey is 'Data' # @app() is 'Muse' and
+
+  removeElem:( elem, nextTick ) ->
+    nextTick( () =>
+      while @isDef(elem) and @isDef(elem.firstChild)
+        elem.removeChild(elem.firstChild) )
+    return
 
 # Choice
   choice: () ->

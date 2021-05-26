@@ -8,9 +8,8 @@
 
 <script type="module">
 
-//port { ref,onMounted, inject } from "vue";
-import Gauge from './Gauge.vue';
-import DnD   from './DnD.vue';
+import Gauge      from './Gauge.vue';
+import DnD        from './DnD.vue';
 
 let Page = {
 
@@ -20,7 +19,7 @@ let Page = {
 
   setup( props ) {
 
-    const debug   = false;
+    const debug = false;
 
     const show = (name) => {
       if( debug ) { console.log( 'Page.show()', { name:name, pageKey:props.page.key } ); }

@@ -14,7 +14,7 @@ let PageND = {
 
   setup( props ) {
 
-  //const mix   = inject('mix');
+  const mix   = inject('mix');
     const elem  = ref(null );
     const debug = true;
 
@@ -22,6 +22,9 @@ let PageND = {
        nextTick( () => {
          window['Geom'][props.page.key] = new Style( elem['value'] );
          props.page.obj.ga(); } ) }
+
+    const remove = () => {
+      mix.removeElem( elem['value'], nextTick ); }
 
     onMounted( () => {
       create();

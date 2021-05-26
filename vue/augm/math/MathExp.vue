@@ -5,7 +5,7 @@
 
 <script type="module">
 
-import { ref, nextTick, onMounted } from "vue";
+import { ref, inject, nextTick, onMounted, onUnmounted} from "vue";
 
 let MathExp = {
 
@@ -13,7 +13,8 @@ let MathExp = {
 
   setup( props ) {
 
-    const elem = ref(null);
+    const mix   = inject('mix')
+    const elem  = ref(null);
     const debug = false;
 
     const mathML = () => {
@@ -24,6 +25,9 @@ let MathExp = {
      onMounted( () =>  {
        if( debug ) { console.log( 'PageExp.onMounted()' ); }  // , props.exp.mathML
        mathML(); } )
+
+    onUnmounted( () => {
+      mix.removeElem( elem['value'], nextTick ) ; } )
 
   return { elem } }
 }

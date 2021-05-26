@@ -12,7 +12,7 @@
   // CoffeeScript does not produce warning messages.
   import Build  from '../../../pub/base/util/Build.js'
   import CubeTh from '../../../pub/augm/cube/CubeTh.js'
-  import { inject, onMounted } from 'vue';
+  import { inject, onMounted, onUnmounted, nextTick } from 'vue';
   
   let Cube = {
 
@@ -20,10 +20,14 @@
 
       const mix    = inject('mix');
       const build  = new Build(  mix.batch() );
+      let   cubeTh = {}
 
-      onMounted( function () {
-        const cubeTh = new CubeTh( build, "CubeTh", false );
+      onMounted( () => {
+        cubeTh = new CubeTh( build, "CubeTh", false );
         cubeTh.animate(); } )
+
+      onUnmounted( () => {
+        mix.removeElem( cubeTh.parElem, nextTick ) ; } )
       
     return {}; }
   }

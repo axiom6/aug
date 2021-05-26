@@ -35,7 +35,7 @@ Nav = class Nav {
     this.choice = 'None';
     this.checked = false;
     this.warnMsg = 'None';
-    this.debug = true;
+    this.debug = false;
     this.pubs = [];
     this.urls = [];
     this.tabs = {};
@@ -71,14 +71,19 @@ Nav = class Nav {
     if (!this.mix.isDef(obj.pracKey)) {
       obj.pracKey = this.pracKey;
     }
-    change = !(obj.compKey === this.compKey && obj.pracKey === this.pracKey);
+    if (!this.mix.isDef(obj.dispKey)) {
+      obj.dispKey = this.dispKey;
+    }
+    change = !(obj.compKey === this.compKey && obj.pracKey === this.pracKey && obj.dispKey === this.dispKey);
     if (this.debug && change) {
       console.log('Nav.viewChange()', {
         change: change,
         compObj: obj.compKey,
         compNav: this.compKey,
         pracObj: obj.pracKey,
-        pracNav: this.pracKey
+        pracNav: this.pracKey,
+        dispObj: obj.dispKey,
+        dispNav: this.dispKey
       });
     }
     return change;

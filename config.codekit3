@@ -1437,30 +1437,6 @@
       "rFN" : 0,
       "uCM" : 0
     },
-    "\/sem\/MetroFoot.json" : {
-      "ft" : 524288,
-      "oA" : 1,
-      "oAP" : "\/sem\/MetroFoot-min.json",
-      "oF" : 0,
-      "oO" : 0,
-      "oS" : 1
-    },
-    "\/sem\/MetroFoot1.json" : {
-      "ft" : 524288,
-      "oA" : 1,
-      "oAP" : "\/sem\/MetroFoot1-min.json",
-      "oF" : 0,
-      "oO" : 0,
-      "oS" : 1
-    },
-    "\/sem\/MuseLD.json" : {
-      "ft" : 524288,
-      "oA" : 1,
-      "oAP" : "\/sem\/MuseLD-min.json",
-      "oF" : 0,
-      "oO" : 0,
-      "oS" : 1
-    },
     "\/src\/augm\/appl\/Augm.coffee" : {
       "ft" : 32,
       "ma" : 0,
