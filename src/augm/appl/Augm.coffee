@@ -122,7 +122,7 @@ class Augm
   Augm.init =   ( batch ) ->
     Augm.Batch  = batch # Not necessary here, but assigned for compatibilitry
     window['Geom'] = {} # May still be needed by Ganjs
-    subjects    = ["Nav","Tab"]
+    subjects    = ["Nav","Tab","View"]
     streamLog   = { subscribe:false, publish:false, subjects:subjects }
     Augm.stream = new Stream( subjects, streamLog )
     Augm.mix    = new Mix( Augm )
@@ -151,12 +151,12 @@ class Augm
 
   Augm.pages = {
     MathML: {
-      Basics: { title:'Basics', key:'Basics', obj:null, show:false } }
+      Basics: { title:'Basics', key:'Basics', obj:null, show:true  } }
     MathEQ: {
-      Differ: { title:'Differ', key:'Differ', obj:null, show:false },
+      Differ: { title:'Differ', key:'Differ', obj:null, show:true  },
       Solves: { title:'Solves', key:'Solves', obj:null, show:false } }
     Draw: {
-      Axes:   { title:'Axes',   key:'Axes',   obj:null, show:false },
+      Axes:   { title:'Axes',   key:'Axes',   obj:null, show:true  },
       Flavor: { title:'Flavor', key:'Flavor', obj:null, show:false },
       Chord:  { title:'Chord',  key:'Chord',  obj:null, show:false },
       Link:   { title:'Link',   key:'Link',   obj:null, show:false },
@@ -164,7 +164,7 @@ class Augm
       Hue:    { title:'Hue',    key:'Hue',    obj:null, show:false },
       Tree:   { title:'Tree',   key:'Tree',   obj:null, show:false } }
     Hues:   {
-      Color:   { title:'Color',   key:'Color',   show:false },
+      Color:   { title:'Color',   key:'Color',   show:true  },
       Rgbs:    { title:'Rgbs',    key:'Rgbs',    show:false },
       Polar:   { title:'Polar',   key:'Polar',   show:false },
       Vecs:    { title:'Vecs',    key:'Vecs',    show:false },
@@ -173,7 +173,7 @@ class Augm
     Gauges: {
       Gauge:   { title:'Gauge', key:'Gauge', show:true } }
     Widget: {
-      DnD:     { title:'DnD',   key:'DnD', show:true   } }
+      DnD:     { title:'DnD',   key:'DnD',  show:true   } }
     Geom2D: {
       Graph:  { title:'Graph',   key:'Graph',    obj:null, show:true  },
       Basics: { title:'Basics',  key:'Basics',   obj:null, show:false } },

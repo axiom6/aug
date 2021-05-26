@@ -102,7 +102,7 @@ class Muse
   Muse.init =   ( batch ) ->
     Muse.Batch  = batch # Not necessary here, but assigned for compatibilitry
     Muse.myName = 'Muse'
-    subjects    = ["Nav","Tab"]
+    subjects    = ["Nav","Tab","View"]
     infoSpec    = { subscribe:false, publish:false, subjects:subjects}
     Muse.stream = new Stream( subjects, infoSpec )
     Muse.mix    = new Mix(   Muse )

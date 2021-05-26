@@ -55,7 +55,7 @@
         if( debug ) { console.log( 'View.onNav()', { level:level, module:module, obj:obj } ); } }
 
       onMounted( () => {
-        mix.subscribe('Nav', 'View', (obj) => { onNav(obj); } ); } )
+        mix.subscribe('View', 'View', (obj) => { onNav(obj); } ); } )
 
       return { show, viewIdx }; }
     }

@@ -2,8 +2,8 @@
 <template>
   <div class="tools-pane">
     <d-tabs :compKey="pracKey" :pages="toPages()"></d-tabs>
-    <template v-for="page in toPages()" :key="page">
-      <t-page v-if="show(pageKey)" :page="page" class="tools-page"></t-page>
+    <template v-for="page in toPages()" :key="pageIdx">
+      <t-page v-if="show(page.key)" :page="page" class="tools-page"></t-page>
     </template>
   </div>
 </template>
@@ -14,7 +14,7 @@
   import Tabs  from '../../base/elem/Tabs.vue';
   import Page  from './Page.vue';
 
-  let Tools = {
+  let ToolND = {
 
     components:{ 'd-tabs':Tabs, 't-page':Page },
 
@@ -25,27 +25,32 @@
       const mix      = inject('mix');
       const nav      = inject('nav');
       const debug    = true
-      const pageKey  = ref(null);
+
+      const pageIdx  = ref(0)
       const page     = ref(null);
+      let   pageKey  = 'None';
       
       const show = (pageArg) => {
-        return pageArg === pageKey.value; }
+        return pageArg === pageKey; }
 
       const toPages = function() {
         return nav.getTabs(props.pracKey); }
 
       const onNav = function(obj) {
-        if( obj.compKey==='Tool' && obj.pageKey!=='None' && obj.pracKey===props.pracKey ) {
+        if( props.pracKey===obj.pracKey && nav.hasPage(props.pracKey,obj.pageKey) ) {
           if(debug) { console.log( 'Tools.onNav()', { compKey:obj.compKey, pracKey:props.pracKey, pageKey:obj.pageKey } ); }
-          pageKey.value = obj.pageKey; } }
+          pageKey = obj.pageKey; } }
 
       onMounted( function () {
-        mix.subscribe(  'Nav', 'Tools', (obj) => {
+        let pageNav = nav.getPageKey(props.pracKey);       // Here we want to respond to the last Nav.pub(obj)
+        if( debug ) { console.log( 'ToolND.onMounted()', { pracKey:props.pracKey, pageKey:pageNav } ); }
+        onNav( { pracKey:nav.pracKey, pageKey:pageNav } ); // Nav can set pageKey if show is true in pages
+        mix.subscribe(  'Nav', 'ToolND', (obj) => {
           onNav(obj); } ) } )
 
-      return { pageKey, page, toPages, show }; }
+      return { pageIdx, page, toPages, show }; }
   }
-  export default Tools;
+  export default ToolND;
 
 </script>
 
@@ -61,8 +66,3 @@
      background-color:@theme-back; display:grid; font-size:@geomNDFS; }
 
 </style>
-
-<!--
-      onBeforeMount( function () {
-        pageKey.value = mix.inArray(nav.route,pageKeys) ? nav.pageKey : 'Gauges'; } )
--->

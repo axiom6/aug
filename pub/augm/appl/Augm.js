@@ -78,7 +78,7 @@ Augm = (function() {
       var error, streamLog, subjects;
       Augm.Batch = batch; // Not necessary here, but assigned for compatibilitry
       window['Geom'] = {};
-      subjects = ["Nav", "Tab"];
+      subjects = ["Nav", "Tab", "View"];
       streamLog = {
         subscribe: false,
         publish: false,
@@ -353,7 +353,7 @@ Augm = (function() {
         title: 'Basics',
         key: 'Basics',
         obj: null,
-        show: false
+        show: true
       }
     },
     MathEQ: {
@@ -361,7 +361,7 @@ Augm = (function() {
         title: 'Differ',
         key: 'Differ',
         obj: null,
-        show: false
+        show: true
       },
       Solves: {
         title: 'Solves',
@@ -375,7 +375,7 @@ Augm = (function() {
         title: 'Axes',
         key: 'Axes',
         obj: null,
-        show: false
+        show: true
       },
       Flavor: {
         title: 'Flavor',
@@ -418,7 +418,7 @@ Augm = (function() {
       Color: {
         title: 'Color',
         key: 'Color',
-        show: false
+        show: true
       },
       Rgbs: {
         title: 'Rgbs',

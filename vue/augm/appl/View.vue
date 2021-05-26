@@ -8,8 +8,8 @@
     <v-draw     v-if="show('Draw')"   :key="viewIdx"></v-draw>
     <v-hues     v-if="show('Hues')"   :key="viewIdx"></v-hues>
     <v-tool     v-if="show('Tool')"   :key="viewIdx"></v-tool>
-    <v-tools    v-if="show('Gauges')" :key="viewIdx" :pracKey="'Gauges'"></v-tools>
-    <v-tools    v-if="show('Widget')" :key="viewIdx" :pracKey="'Widget'"></v-tools>
+    <v-toolND   v-if="show('Gauges')" :key="viewIdx" :pracKey="'Gauges'"></v-toolND>
+    <v-toolND   v-if="show('Widget')" :key="viewIdx" :pracKey="'Widget'"></v-toolND>
     <v-cube     v-if="show('Cube')"   :key="viewIdx"></v-cube>
     <v-wood     v-if="show('Wood')"   :key="viewIdx"></v-wood>
     <v-geom     v-if="show('Geom')"   :key="viewIdx"></v-geom>
@@ -26,11 +26,11 @@
   import { inject, ref, onMounted } from 'vue';
   import Home     from './Home.vue'
   import Math     from '../math/Math.vue';
-  import MathTabs from '../math/MathTabs.vue';
+  import MathND from '../math/MathND.vue';
   import Draw     from '../draw/Draw.vue';
   import Hues     from '../mbox/Hues.vue';
   import Tool     from '../tool/Tool.vue';
-  import Tools    from '../tool/Tools.vue';
+  import ToolND   from '../tool/ToolND.vue';
   import Cube     from '../cube/Cube.vue';
   import Wood     from '../wood/Wood.vue';
   import Geom     from '../geom/Geom.vue';
@@ -42,8 +42,8 @@
 
   let View = {
 
-    components:{ 'v-home':Home, 'v-math':Math,     'v-mathEQ':MathTabs, 'v-mathML':MathTabs, 'v-draw':Draw,
-                 'v-hues':Hues, 'v-tool':Tool,     'v-tools':Tools,    'v-cube':Cube,     'v-wood':Wood,
+    components:{ 'v-home':Home, 'v-math':Math,     'v-mathEQ':MathND, 'v-mathML':MathND, 'v-draw':Draw,
+                 'v-hues':Hues, 'v-tool':Tool,     'v-toolND':ToolND, 'v-cube':Cube,     'v-wood':Wood,
                  'v-geom':Geom, 'v-geom2D':GeomND, 'v-geom3D':GeomND, 'v-test':Test,   'v-replay':Replay,
                  'v-result':Result },
 

@@ -43,9 +43,10 @@ class Nav
   viewChange:( obj ) ->
     obj.compKey = @compKey if not @mix.isDef(obj.compKey)
     obj.pracKey = @pracKey if not @mix.isDef(obj.pracKey)
-    change = not ( obj.compKey is @compKey and obj.pracKey is @pracKey )
+    obj.dispKey = @dispKey if not @mix.isDef(obj.dispKey)
+    change = not ( obj.compKey is @compKey and obj.pracKey is @pracKey and obj.dispKey is @dispKey )
     console.log( 'Nav.viewChange()', { change:change, compObj:obj.compKey, compNav:@compKey,
-    pracObj:obj.pracKey, pracNav:@pracKey } ) if @debug and change
+    pracObj:obj.pracKey, pracNav:@pracKey, dispObj:obj.dispKey, dispNav:@dispKey, } ) if @debug and change
     change
 
   toObj:( msg ) ->

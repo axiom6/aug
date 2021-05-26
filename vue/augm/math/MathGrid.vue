@@ -1,11 +1,11 @@
 
 
 <template>
-    <div class="math-grid-comp">
-      <template v-for="exp in exps">
-        <m-mathExp :exp="exp"></m-mathExp>
-      </template>
-    </div>
+  <div class="math-grid-comp">
+    <template v-for="exp in exps">
+      <m-mathExp :exp="exp"></m-mathExp>
+    </template>
+  </div>
 </template>
 
 <script type="module">

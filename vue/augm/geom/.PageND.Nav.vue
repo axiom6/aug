@@ -15,9 +15,8 @@ let PageND = {
   setup( props ) {
 
     const mix   = inject('mix');
-
     const elem  = ref(null );
-    const debug = true;
+    const debug = false;
 
     const create = () => {
        nextTick( () => {
