@@ -17831,7 +17831,7 @@ THREE.ShaderLib = {
 
 THREE.WebGLRenderer = function ( parameters ) {
 
-	console.log( 'THREE.WebGLRenderer', THREE.REVISION );
+	// console.log( 'THREE.WebGLRenderer', THREE.REVISION );
 
 	parameters = parameters || {};
 
@@ -28283,7 +28283,7 @@ THREE.Path.prototype.getSpacedPoints = function ( divisions, closedPath ) {
 THREE.Path.prototype.getPoints = function( divisions, closedPath ) {
 
 	if (this.useSpacedPoints) {
-		console.log('tata');
+		// console.log('tata');
 		return this.getSpacedPoints( divisions, closedPath );
 	}
 
@@ -45022,7 +45022,7 @@ THREE.Bootstrap.registerPlugin('vr', {
     three.VR.hmd      = hmd;
     three.VR.sensor   = sensor;
 
-    console.log("THREE.VRRenderer", hmd.deviceName);
+    // console.log("THREE.VRRenderer", hmd.deviceName);
   },
 
   change: function (event, three) {
@@ -52540,7 +52540,8 @@ prettyPrint = function(markup, level) {
     level = 'info';
   }
   markup = prettyMarkup(markup);
-  return console[level].apply(console, markup);
+  // console[level].apply(console, markup);
+  return
 };
 
 prettyMarkup = function(markup) {
@@ -53790,7 +53791,7 @@ THREE.Bootstrap.registerPlugin('mathbox', {
           _this.context.setWarmup(_this.options.warmup);
           _this.pending = 0;
           _this.warm = !_this.options.warmup;
-          console.log('MathBox²', MathBox.version);
+          // console.log('MathBox²', MathBox.version);
           return three.trigger({
             type: 'mathbox/init',
             version: MathBox.version,
@@ -53857,7 +53858,8 @@ THREE.Bootstrap.registerPlugin('mathbox', {
       return out.join(',');
     };
     info = three.renderer.info.render;
-    return console.log('Geometry  ', fmt(info.faces) + ' faces  ', fmt(info.vertices) + ' vertices  ', fmt(info.calls) + ' draw calls  ');
+    // console.log('Geometry  ', fmt(info.faces) + ' faces  ', fmt(info.vertices) + ' vertices  ', fmt(info.calls) + ' draw calls  ');
+    return
   },
   resize: function(event, three) {
     var ref1;
@@ -69248,7 +69250,7 @@ tick = function() {
   return function(label) {
     var delta;
     delta = +new Date() - now;
-    console.log(label, delta + " ms");
+    // console.log(label, delta + " ms");
     return delta;
   };
 };
@@ -69425,7 +69427,7 @@ tick = function() {
   return function(label) {
     var delta;
     delta = +new Date() - now;
-    console.log(label, delta + " ms");
+    // console.log(label, delta + " ms");
     return delta;
   };
 };
@@ -72082,9 +72084,9 @@ API = (function() {
   API.prototype.debug = function() {
     var getName, info, j, len, name, ref, shader, shaders;
     info = this.inspect();
-    console.log('Renderables: ', info.renderables);
-    console.log('Renders: ', info.renders);
-    console.log('Shaders: ', info.shaders);
+    // console.log('Renderables: ', info.renderables);
+    // console.log('Renders: ', info.renders);
+    // console.log('Shaders: ', info.shaders);
     getName = function(owner) {
       return owner.constructor.toString().match('function +([^(]*)')[1];
     };
@@ -73591,7 +73593,8 @@ prettyPrint = function(markup, level) {
     level = 'info';
   }
   markup = prettyMarkup(markup);
-  return console[level].apply(console, markup);
+  // console[level].apply(console, markup);
+  return
 };
 
 prettyMarkup = function(markup) {
@@ -75188,7 +75191,7 @@ Block = (function() {
 
   Block.prototype._link = function(module, layout, depth) {
     var block, ext, i, key, len, orig, outlet, parent, ref, ref1, ref2, results;
-    debug && console.log('block::_link', this.toString(), module.namespace);
+    // debug && console.log('block::_link', this.toString(), module.namespace);
     ref = module.symbols;
     results = [];
     for (i = 0, len = ref.length; i < len; i++) {
@@ -75209,7 +75212,7 @@ Block = (function() {
       if (!block) {
         throw new OutletError("Missing connection on " + (this._info(ext.name)));
       }
-      debug && console.log('callback -> ', this.toString(), ext.name, outlet);
+      // debug && console.log('callback -> ', this.toString(), ext.name, outlet);
       block.callback(layout, depth + 1, key, ext, outlet.input);
       results.push(block != null ? block["export"](layout, depth + 1) : void 0);
     }
@@ -75218,7 +75221,7 @@ Block = (function() {
 
   Block.prototype._trace = function(module, layout, depth) {
     var arg, i, len, outlet, ref, ref1, results;
-    debug && console.log('block::_trace', this.toString(), module.namespace);
+    // debug && console.log('block::_trace', this.toString(), module.namespace);
     ref = module.main.signature;
     results = [];
     for (i = 0, len = ref.length; i < len; i++) {
@@ -76202,7 +76205,7 @@ tick = function() {
   return function(label) {
     var delta;
     delta = +new Date() - now;
-    console.log(label, delta + " ms");
+    // console.log(label, delta + " ms");
     return delta;
   };
 };
@@ -76367,7 +76370,7 @@ tick = function() {
   return function(label) {
     var delta;
     delta = +new Date() - now;
-    console.log(label, delta + " ms");
+    // console.log(label, delta + " ms");
     return delta;
   };
 };
@@ -77283,7 +77286,8 @@ debug = false;
 
 walk = function(map, collect, node, indent) {
   var child, i, j, len, recurse, ref, ref1, ref2;
-  debug && console.log(indent, node.type, (ref = node.token) != null ? ref.data : void 0, (ref1 = node.token) != null ? ref1.type : void 0);
+  // debug && console.log(indent, node.type, (ref = node.token) != null ? ref.data : void 0, (ref1 = node.token) !=
+  // null ? ref1.type : void 0);
   recurse = map(node, collect);
   if (recurse) {
     ref2 = node.children;
@@ -77301,7 +77305,7 @@ tick = function() {
   return function(label) {
     var delta;
     delta = +new Date() - now;
-    console.log(label, delta + " ms");
+    // console.log(label, delta + " ms");
     return delta;
   };
 };
@@ -78203,7 +78207,7 @@ Layout = (function() {
   };
 
   Layout.prototype.visit = function(namespace) {
-    debug && console.log('Visit', namespace, !this.visits[namespace]);
+    // debug && console.log('Visit', namespace, !this.visits[namespace]);
     if (this.visits[namespace]) {
       return false;
     }
@@ -79697,7 +79701,7 @@ function parser() {
       for(var i = 0, len = this.length - 1; i < len; ++i) {
         pad += ' |'
       }
-      console.log(pad, '\\'+_node.type, _node.token.data)
+      // console.log(pad, '\\'+_node.type, _node.token.data)
     }
 
     if(add_child && node !== _node) node.children.push(_node)
@@ -79716,7 +79720,7 @@ function parser() {
       for(var i = 0, len = this.length; i < len; ++i) {
         pad += ' |'
       }
-      console.log(pad, '/'+_node.type)
+      // console.log(pad, '/'+_node.type)
     }
 
     if(check.length) { 
@@ -79918,7 +79922,7 @@ function parser() {
       }
 
       if(token.type !== 'ident') {
-        console.log(token);
+        // console.log(token);
         return unexpected('expected identifier, got '+token.data)
       }
 

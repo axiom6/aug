@@ -14,16 +14,15 @@ let Port = {
 
   setup( props ) {
 
-    const mix  = inject('mix');
-    const elem = ref(null);
+    const mix   = inject('mix');
+    const elem  = ref(null);
+    const debug = false;
 
-    const doApp = function( pageKey ) {
-      nextTick( function() {
-          Box.doApp( pageKey, elem['value'] ); } ) }
-
-    onMounted( function() {
-      if(      props.page.show ) {
-        doApp( props.page.key  ); } } )
+    onMounted( () => {
+      if( props.page.show ) {
+        nextTick( () => {
+          if(debug) { console.log( 'Port.onMounted', props.page ); }
+          Box.doApp( props.page.key, elem['value'] ); } ) } } )
 
     onUnmounted( () => {
       mix.removeElem( elem['value'], nextTick ) ; } )

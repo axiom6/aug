@@ -1,5 +1,5 @@
 
-import Util     from '../../base/util/Util.js'
+#mport Util     from '../../base/util/Util.js'
 import Vis      from '../../base/draw/Vis.js'
 import MBox     from './MBox.js'
 import Coord    from './Coord.js'
@@ -7,12 +7,6 @@ import Color    from './Color.js'
 import MRegress from './Regress.js'
 
 class  Box
-
-  @init = () ->
-     Util.ready ->
-       elem = document.querySelector('#App')
-       Box.doApp('Color', elem )
-       return
 
   @doApp:( name, elem ) ->
     switch name
@@ -22,7 +16,7 @@ class  Box
       when 'Vecs'     then Box.doVecs(     elem, 'hsv' )
       when 'Sphere'   then Box.doSphere(   elem )
       when 'Regress'  then Box.doRegress(  elem )
-      when 'Color'    then Box.doColor(    elem )
+      else                 Box.doColor(    elem )
     return
 
   @doRgbs:( elem ) ->
@@ -87,6 +81,13 @@ class  Box
       for c   in [0,20,40,60,80,100]
         console.log( 'RgbHsv', { hue:hue, c:c, s:s }, Vis.toRgbHsv( hue, c, s ) )
 
-# Box.init()
+  ###
+  @init = () ->
+    Util.ready ->
+      elem = document.querySelector('#App')
+      Box.doApp('Color', elem )
+      return
+   Box.init()
+  ###
 
 export default Box

@@ -42,8 +42,8 @@
           pageKey        = obj.pageKey
           page.value     = nav.getPage(props.pracKey,obj.pageKey);
           page.value.obj = geomMgr.createPageObj(page.value);
-          pageIdx.value++;
-          if( debug ) { console.log( 'GeomND.onNav()', { obj:obj, page:page, pages:nav.getTabs(props.pracKey) } ); } } }
+          if( debug ) { console.log( 'GeomND.onNav()', { obj:obj, page:page, pages:nav.getTabs(props.pracKey) } ); }
+          pageIdx.value++; } }
 
       onMounted( () => { // Follow up with the last Nav.pub(obj) that mounted this vue component
         onNav( { pracKey:props.pracKey, pageKey:nav.getPageKey(props.pracKey) } );

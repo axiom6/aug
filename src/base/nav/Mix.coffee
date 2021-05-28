@@ -87,16 +87,34 @@ class Mix
     sc * fs + 'vmin'
   fontSizeCss: (scale) ->
     {fontSize: @fontSize(scale)}
-  addScript:( src ) ->     
-    scripts    = document.getElementsByTagName('script');
-    for scriptx in scripts
-      # console.log( 'Mix.addScript() scriptx src', scriptx.src )
-      return if scriptx.src.includes(src)
-    # console.log( 'Mix.addScript() adding', src )
-    script = document.createElement('script')
-    document.head.appendChild(script)
-    script.src = src
 
+  # Not working with MatnBox
+  promiseScript:(src) ->
+    new Promise( (resolve) =>
+      scripts    = document.getElementsByTagName('script');
+      for scriptx in scripts
+        # console.log( 'Mix.addScript() scriptx src', scriptx.src )
+        return if scriptx.src.includes(src)
+      # console.log( 'Mix.addScript() adding', src )
+      script = document.createElement('script')
+      document.head.appendChild(script)
+      script.async = false
+      script.defer = false
+      script.src = src
+      resolve )
+
+  # Not working with MatnBox. With CoffeeScript await make addScript() async
+  addScript:( src ) ->
+    await @promiseScript(src)
+    return
+
+  delScript:( src ) ->
+    scripts    = document.getElementsByTagName('script');
+    for  script in scripts
+      if script.src.includes(src)
+        console.log( 'Mix.delScript()', script.src ) if @debug
+        document.head.removeChild(script)
+        return
     return
 
   # Nav

@@ -5,7 +5,7 @@
 
 <script type="module">
 
-import { ref, nextTick, onMounted } from "vue"; // , inject
+import {ref, inject, nextTick, onMounted, onUnmounted} from "vue"; // , inject
 import Style from "../../../pub/augm/geom/lib/Style.js";
 
 let PageND = {
@@ -14,21 +14,19 @@ let PageND = {
 
   setup( props ) {
 
-  const mix   = inject('mix');
-    const elem  = ref(null );
-    const debug = true;
+    const mix   = inject('mix');
+    const elem  = ref(null);
 
     const create = () => {
        nextTick( () => {
          window['Geom'][props.page.key] = new Style( elem['value'] );
          props.page.obj.ga(); } ) }
 
-    const remove = () => {
-      mix.removeElem( elem['value'], nextTick ); }
-
     onMounted( () => {
-      create();
-      if( debug ) { console.log( 'PageND.onMounted()', { page:props.page } ); } } )
+      create(); } )
+
+    onUnmounted( () => {
+      mix.removeElem( elem['value'], nextTick ) ; } )
 
     return { elem }; }
 }

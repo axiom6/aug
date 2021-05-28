@@ -418,12 +418,12 @@ Augm = (function() {
       Color: {
         title: 'Color',
         key: 'Color',
-        show: true
+        show: false // No default because Hues needs
       },
       Rgbs: {
         title: 'Rgbs',
         key: 'Rgbs',
-        show: false
+        show: false //   time to load MathBox script
       },
       Polar: {
         title: 'Polar',

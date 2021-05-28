@@ -5,14 +5,14 @@
     <d-tabs :compKey="compKey" :pages="toPages()"></d-tabs>
     <h1 v-if="compKey==='Draw'">Mathbox Colors</h1>
     <template v-for="page in toPages()" :key="pageIdx">
-      <d-port v-if="page.show" :page="page" class="port-pane"></d-port>
+      <d-port v-if="show(page.key)" :page="page" class="port-pane"></d-port>
     </template>
     </div>
 </template>
 
 <script type="module">
 
- import { inject, ref, onMounted } from 'vue';
+import {inject, ref, onMounted, onUnmounted } from 'vue';
  import Tabs from '../../base/elem/Tabs.vue';
  import Port from './Port.vue'
 
@@ -22,26 +22,37 @@
 
     setup() {
 
-      const mix     = inject('mix');
-      const nav     = inject('nav');
-      const compKey = 'Hues';
-      const pageIdx = ref(0);
-      const page    = ref(null);
-      mix.addScript( "/assets/mathbox-bundle.js" )
+      const mix       = inject('mix');
+      const nav       = inject('nav');
+      const compKey   = 'Hues';
+      const pageIdx   = ref(0);
+      const page      = ref(null);
+      let   pageKey   = 'None'
+      const debug     = false;
+      const scriptSrc = "/assets/mathbox-bundle.js"
+      mix.addScript( scriptSrc );
 
       const toPages = () => {
         return nav.getTabs(compKey); }
 
+      const show = ( pageArg ) => {
+        return pageKey === pageArg; }
+
       const onNav = (obj) => {
-        if( obj.compKey===compKey ) {
-            pageIdx.value++; } } // console.log( 'Darw.onNav()', pages );
+        if( obj.compKey===compKey && mix.isDef(obj.pageKey) && nav.hasPage(compKey,obj.pageKey) ) {
+            if(debug) { console.log( 'Hues.onNav()', obj ); }
+            pageKey = obj.pageKey;
+            pageIdx.value++; } }
 
       onMounted( () => { // Follow up with the last Nav.pub(obj) that mounted this vue component
         onNav( { compKey:compKey, pageKey:nav.getPageKey(compKey) } );
         mix.subscribe(  'Nav', 'Hues', (obj) => {
           onNav(obj); } ); } )
 
-    return { compKey, toPages, page, pageIdx }; }
+      onUnmounted( () => {
+        mix.delScript( scriptSrc ); } )
+
+    return { compKey, toPages, page, pageIdx, show }; }
   }
   export default Hues;
   

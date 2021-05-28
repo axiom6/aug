@@ -15,7 +15,6 @@
 <script>
   let Wood = {}
   export default Wood;
-
 </script>
 
 <style lang="less">

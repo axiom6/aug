@@ -152,20 +152,46 @@ Mix = class Mix {
     };
   }
 
-  addScript(src) {
-    var i, len, script, scripts, scriptx;
+  // Not working with MatnBox
+  promiseScript(src) {
+    return new Promise((resolve) => {
+      var i, len, script, scripts, scriptx;
+      scripts = document.getElementsByTagName('script');
+      for (i = 0, len = scripts.length; i < len; i++) {
+        scriptx = scripts[i];
+        // console.log( 'Mix.addScript() scriptx src', scriptx.src )
+        if (scriptx.src.includes(src)) {
+          return;
+        }
+      }
+      // console.log( 'Mix.addScript() adding', src )
+      script = document.createElement('script');
+      document.head.appendChild(script);
+      script.async = false;
+      script.defer = false;
+      script.src = src;
+      return resolve;
+    });
+  }
+
+  // Not working with MatnBox. With CoffeeScript await make addScript() async
+  async addScript(src) {
+    await this.promiseScript(src);
+  }
+
+  delScript(src) {
+    var i, len, script, scripts;
     scripts = document.getElementsByTagName('script');
     for (i = 0, len = scripts.length; i < len; i++) {
-      scriptx = scripts[i];
-      // console.log( 'Mix.addScript() scriptx src', scriptx.src )
-      if (scriptx.src.includes(src)) {
+      script = scripts[i];
+      if (script.src.includes(src)) {
+        if (this.debug) {
+          console.log('Mix.delScript()', script.src);
+        }
+        document.head.removeChild(script);
         return;
       }
     }
-    // console.log( 'Mix.addScript() adding', src )
-    script = document.createElement('script');
-    document.head.appendChild(script);
-    script.src = src;
   }
 
   // Nav

@@ -1,6 +1,5 @@
+//mport Util     from '../../base/util/Util.js'
 var Box;
-
-import Util from '../../base/util/Util.js';
 
 import Vis from '../../base/draw/Vis.js';
 
@@ -13,14 +12,6 @@ import Color from './Color.js';
 import MRegress from './Regress.js';
 
 Box = class Box {
-  static init() {
-    return Util.ready(function() {
-      var elem;
-      elem = document.querySelector('#App');
-      Box.doApp('Color', elem);
-    });
-  }
-
   static doApp(name, elem) {
     switch (name) {
       case 'Color':
@@ -41,7 +32,7 @@ Box = class Box {
       case 'Regress':
         Box.doRegress(elem);
         break;
-      case 'Color':
+      default:
         Box.doColor(elem);
     }
   }
@@ -152,5 +143,12 @@ Box = class Box {
 
 };
 
-// Box.init()
+/*
+@init = () ->
+  Util.ready ->
+    elem = document.querySelector('#App')
+    Box.doApp('Color', elem )
+    return
+ Box.init()
+*/
 export default Box;

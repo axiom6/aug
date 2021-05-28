@@ -164,8 +164,8 @@ class Augm
       Hue:    { title:'Hue',    key:'Hue',    obj:null, show:false },
       Tree:   { title:'Tree',   key:'Tree',   obj:null, show:false } }
     Hues:   {
-      Color:   { title:'Color',   key:'Color',   show:true  },
-      Rgbs:    { title:'Rgbs',    key:'Rgbs',    show:false },
+      Color:   { title:'Color',   key:'Color',   show:false }, # No default because Hues needs
+      Rgbs:    { title:'Rgbs',    key:'Rgbs',    show:false }, #   time to load MathBox script
       Polar:   { title:'Polar',   key:'Polar',   show:false },
       Vecs:    { title:'Vecs',    key:'Vecs',    show:false },
       Sphere:  { title:'Sphere',  key:'Sphere',  show:false },
@@ -178,7 +178,7 @@ class Augm
       Graph:  { title:'Graph',   key:'Graph',    obj:null, show:true  },
       Basics: { title:'Basics',  key:'Basics',   obj:null, show:false } },
     Geom3D: {
-      Grids:   { title:'Grids',   key:'Grids',   obj:null, show:true },
+      Grids:   { title:'Grids',   key:'Grids',   obj:null, show:true  },
       Isomet:  { title:'Isomet',  key:'Isomet',  obj:null, show:false },
       Play:    { title:'Play',    key:'Play',    obj:null, show:false },
       Isohed:  { title:'Isohed',  key:'Isohed',  obj:null, show:false },
