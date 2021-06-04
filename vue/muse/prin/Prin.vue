@@ -3,7 +3,7 @@
   <div class="prin-pane">
     <b-tabs :compKey="compKey" :pages="pages"></b-tabs>
     <div class="prin-comp">
-        <template v-for="pracObj in compObj" :key="compIdx">
+        <template v-for="pracObj in compObj" :key="pracKeyIdx(pracObj)">
           <div   :class="pracObj['dir']" :ref="pracObj['name']">
             <p-sign v-show="nav.isShow('Prin','Icons')"  :pracObj="pracObj"></p-sign>
             <p-dirs v-show="nav.isShow('Prin','Topics')" :pracObj="pracObj"></p-dirs>
@@ -31,13 +31,16 @@
       const compKey = 'Prin'
       const compObj = ref(null );
       const pracObj = ref(null );
-      const compIdx = ref(0    );
+      const pracIdx = ref(0    );
       const pages   = nav.pages['Prin']
+
+      const pracKeyIdx = ( pracArg ) => {
+        return pracArg.name + pracIdx.value; }
 
       const onComp = function( compKey ) {
         // nav.setPages( compKey, pages );
         compObj.value = mix.compObject(compKey);
-        compIdx.value++; }
+        pracIdx.value++; }
 
       const onNav = (obj) => {
         if( nav.isMyNav(obj,'Comp') ) {
@@ -50,7 +53,7 @@
         mix.subscribe( 'Nav', 'Prin', (obj) => {
           onNav(obj); } ); } )
 
-    return { compKey, pages, pracObj, compObj, compIdx, nav }; }
+    return { compKey, pages, pracObj, compObj, pracKeyIdx, nav }; }
   }
   
   export default Prin;

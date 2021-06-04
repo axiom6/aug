@@ -1,15 +1,15 @@
 
 <template>
   <div class="comp-pane">
-    <b-tabs :compKey="compKey" :pages="tabPages('Comp')"  position="left"  isComp="true"></b-tabs>
-    <b-tabs :compKey="compKey" :pages="tabPages(compKey)" position="right" isInov="true" v-if="hasInov()"></b-tabs>
+    <b-tabs :compKey="compKey" :pages="tabPages('Comp')"  position="left"  :isComp="soTrue()"></b-tabs>
+    <b-tabs :compKey="compKey" :pages="tabPages(compKey)" position="right" :isInov="soTrue()" v-if="hasInov()"></b-tabs>
     <div   class="comp-comp">
-      <template  :key="compIdx" v-for="pracObj in compObj">
+      <template   v-for="pracObj in compObj" :key="pracKeyIdx(pracObj)">
         <div :class="pracObj['dir']">
-          <p-sign   v-if="nav.isShow('Comp','Icons')"  :pracObj="pracObj"></p-sign>
-          <p-dirs   v-if="nav.isShow('Comp','Topics')" :pracObj="pracObj"></p-dirs>
-          <p-desc   v-if="nav.isShow('Comp','Texts')"  :pracObj="pracObj"></p-desc>
-          <template v-if="nav.isShow('Comp','Graphs')">
+          <p-sign   v-if="isShow('Icons')"  :pracObj="pracObj"></p-sign>
+          <p-dirs   v-if="isShow('Topics')" :pracObj="pracObj"></p-dirs>
+          <p-desc   v-if="isShow('Texts')"  :pracObj="pracObj"></p-desc>
+          <template v-if="isShow('Graphs')">
             <p-conn v-if="!isDim(pracObj)" :pracObj="pracObj" level="Comp"></p-conn>
             <p-sign v-if=" isDim(pracObj)" :pracObj="pracObj"></p-sign>
           </template>
@@ -42,25 +42,39 @@ let Comp = {
     const mix       = inject('mix');
     const nav       = inject('nav');
     const compKey   = ref('Info');
+    const pageKey   = ref(nav.getPageKey('Comp'));
     const inovKey   = ref('Info');
     let   compObj   = ref({}    );
     let   pracObj   = ref({}    );
-    let   compIdx   = ref(0     );
+    let   pracIdx   = 0;
     const debug     = false;
     const inovComps = ['Info','Know','Wise'];
     const myRows    = ref( nav.getTabs('Rows') );
+    if( debug ) { console.log( 'Comp.setup()', { pageKey:pageKey.value } ); }
 
     const tabPages =    (compArg) => {
       return nav.getTabs(compArg); }
 
+    const soTrue = () => {
+      return true; }
+
+    const pracKeyIdx = ( pracObj ) => {
+      return pracObj.name + pracIdx; }
+
+    const isShow = ( pageArg ) => {
+      if( debug ) { console.log( 'Comp.isShow()',
+          { pageKey:pageKey.value, pageArg:pageArg, isEq:pageArg===pageKey } ); }
+      return pageArg===pageKey.value; }
+
     const onComp = (obj) => {
       compKey.value = obj.compKey;
+      pageKey.value = obj.pageKey;
       inovKey.value = obj.inovKey;
       onRows();
       compObj.value = mix.inovObject( compKey.value, inovKey.value );
-      compIdx.value++;
-      if( debug ) { console.log( 'Comp.onComp()', compObj.value ); }
-    }
+      pracIdx++;
+      if( debug ) { console.log( 'Comp.onComp()',
+          { obj:obj, pageKey:pageKey.value, pageObj:obj.pageKey, compObj:compObj.value } ); } }
 
     const isDim = (pracArg) => {
       return pracArg.row === "Dim"; }
@@ -87,13 +101,13 @@ let Comp = {
       return has; }
 
     // nav.setPages( 'Comp', Comp );
-    onComp({ compKey:nav.compKey, inovKey:nav.inovKey } );
+    onComp({ compKey:nav.compKey, pageKey:nav.getPageKey('Comp'), inovKey:nav.inovKey } );
 
     onMounted( () => {
       mix.subscribe('Nav', 'Comp', (obj) => { onNav(obj); } ); } )
 
 
-    return { compKey,inovKey,compObj,compIdx,pracObj,tabPages,hasInov,isDim,isRows,myRows,nav }; }
+    return { compKey,compObj,pracKeyIdx,pracObj,tabPages,hasInov,isDim,isRows,myRows,isShow, soTrue }; }
 }
 
 export default Comp;

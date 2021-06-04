@@ -7,12 +7,12 @@ import Vis from '../../base/draw/Vis.js';
 MBox = class MBox {
   constructor(elem) {
     var THREE, mathBox;
-    this.debug = false;
-    THREE = window['THREE'];
-    mathBox = window['mathBox'];
+    this.debug = true;
     if (this.debug) {
       console.log('MBox()', window);
     }
+    THREE = window['THREE'];
+    mathBox = window['mathBox'];
     this.mathbox = mathBox({
       element: elem,
       plugins: ['core', 'controls', 'cursor', 'stats'],

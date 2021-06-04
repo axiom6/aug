@@ -1,7 +1,7 @@
 
 <template>
   <div class="tabs-pane" :style="stylePos()">
-    <template :key="tabsIdx" v-for="pageObj in pages">
+    <template v-for="pageObj in pages" :key="pageKeyIdx(pageObj)">
       <div :class="classTab(pageObj.key)" @click="doPage(pageObj.key)">{{pageObj.title}}</div>
     </template>
   </div>
@@ -20,7 +20,7 @@ import { inject, ref, onMounted } from 'vue';
 
       const mix     = inject('mix');
       const nav     = inject('nav');
-      const tabsIdx = ref(0);
+      let   tabsIdx = 0;
       const pageObj = ref(null);
       let   compKey = props.isComp ? 'Comp' : props.compKey;
       const pageKey = ref( nav.getPageKey( compKey, true ) );
@@ -31,13 +31,16 @@ import { inject, ref, onMounted } from 'vue';
         left:  { left:0,     width: '60%'  },
         right: { left:'60%', width: '40%'  },
         full:  { left:0,     width: '100%' } };
-      
+
+      const pageKeyIdx = ( pageObj ) => {
+        return pageObj.key + tabsIdx; }
+
       const onPage = (pageArg) => {
         if( nav.hasTabs( compKey,true) ) {
           pageKey.value = pageArg;
           nav.setPageKey( compKey, pageArg, props.pages );
           if( debug ) { console.log( 'Tabs.onPage()', { compKey:compKey, pageKey:pageArg, pages:props.pages } ); }
-          tabsIdx.value++; }
+          tabsIdx++; }
         else {
           console.log( 'Tabs.onPage() missing pageKey', { pageKey:pageArg, pages:nav.getTabs(compKey) } ) } }
 
@@ -60,7 +63,7 @@ import { inject, ref, onMounted } from 'vue';
           if( compKey===obj.compKey ) {
             onPage(obj.pageKey); } } ); } )
 
-      return { pageObj, tabsIdx, doPage, classTab, stylePos } }
+      return { pageObj, pageKeyIdx, doPage, classTab, stylePos } }
   }
 
   export default Tabs;

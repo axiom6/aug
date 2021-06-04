@@ -16,8 +16,8 @@
     <v-geom2D   v-if="show('Geom2D')" :key="viewIdx" :pracKey="'Geom2D'"></v-geom2D>
     <v-geom3D   v-if="show('Geom3D')" :key="viewIdx" :pracKey="'Geom3D'"></v-geom3D>
     <v-test     v-if="show('Test')"   :key="viewIdx"></v-test>
-    <v-replay   v-if="show('Test')"   :key="viewIdx"></v-replay>
-    <v-result   v-if="show('Test')"   :key="viewIdx"></v-result>
+    <v-replay   v-if="show('Replay')" :key="viewIdx"></v-replay>
+    <v-result   v-if="show('Result')" :key="viewIdx"></v-result>
   </div>
 </template>
 

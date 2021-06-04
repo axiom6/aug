@@ -5,10 +5,10 @@ import Vis  from '../../base/draw/Vis.js'
 class MBox
 
   constructor:( elem ) ->
-    @debug  = false
+    @debug  = true
+    console.log( 'MBox()', window ) if @debug
     THREE   = window['THREE']
     mathBox = window['mathBox']
-    console.log( 'MBox()', window ) if @debug
     @mathbox  = mathBox( {
       element:elem,
       plugins:['core','controls','cursor', 'stats'],
