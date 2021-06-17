@@ -1,7 +1,7 @@
 var Embrace,
   hasProp = {}.hasOwnProperty;
 
-import Vis from "../../base/draw/Vis.js";
+import Vis from "../../../lib/pub/base/draw/Vis.js";
 
 Embrace = class Embrace {
   constructor(spec, shapes, build) {
@@ -71,3 +71,5 @@ Embrace = class Embrace {
 };
 
 export default Embrace;
+
+//# sourceMappingURL=Embrace.js.map

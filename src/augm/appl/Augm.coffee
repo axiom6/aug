@@ -1,15 +1,15 @@
 
 
 #mport Load    from './Load.js'
-import Access  from '../../base/util/Access.js'
-import Stream  from '../../base/util/Stream.js'
-import Nav     from '../../base/nav/Nav.js'
-import Mix     from '../../base/nav/Mix.js'
+import Access  from '../../../lib/pub/base/util/Access.js'
+import Stream  from '../../../lib/pub/base/util/Stream.js'
+import Nav     from '../../../lib/pub/base/nav/Nav.js'
+import Mix     from '../../../lib/pub/base/nav/Mix.js'
 import Dash    from '../../../vue/augm/appl/Dash.vue'
 
 import { createApp }    from 'vue'
 
-#mport Cache   from '../../base/util/Cache.js'
+#mport Cache   from '../../../lib/pub/base/util/Cache.js'
 
 import MathJson from '../../../data/augm/Math.json'
 import GeomJson from '../../../data/augm/Geom.json'

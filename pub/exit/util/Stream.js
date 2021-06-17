@@ -213,3 +213,5 @@ Stream = class Stream {
 };
 
 export default Stream;
+
+//# sourceMappingURL=Stream.js.map

@@ -1,7 +1,7 @@
 
 import * as d3 from 'd3'
-import Util    from '../../base/util/Util.js'
-import Vis     from '../../base/draw/Vis.js'
+import Util    from '../../../lib/pub/base/util/Util.js'
+import Vis     from '../../../lib/pub/base/draw/Vis.js'
 
 class Innovate
 

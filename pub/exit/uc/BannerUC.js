@@ -75,3 +75,5 @@ BannerUC = class BannerUC {
 };
 
 export default BannerUC;
+
+//# sourceMappingURL=BannerUC.js.map

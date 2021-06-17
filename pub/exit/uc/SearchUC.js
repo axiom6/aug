@@ -46,3 +46,5 @@ SearchUC = class SearchUC {
 };
 
 export default SearchUC;
+
+//# sourceMappingURL=SearchUC.js.map

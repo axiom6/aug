@@ -149,3 +149,5 @@ Demo = class Demo {
 };
 
 export default Demo;
+
+//# sourceMappingURL=Demo.js.map

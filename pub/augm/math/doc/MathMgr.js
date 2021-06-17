@@ -62,3 +62,5 @@ MathMgr = class MathMgr {
 };
 
 export default MathMgr;
+
+//# sourceMappingURL=MathMgr.js.map

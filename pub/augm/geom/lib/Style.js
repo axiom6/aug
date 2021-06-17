@@ -25,3 +25,5 @@ Style = class Style {
 };
 
 export default Style;
+
+//# sourceMappingURL=Style.js.map

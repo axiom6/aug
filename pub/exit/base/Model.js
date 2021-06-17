@@ -300,3 +300,5 @@ Model = class Model {
 };
 
 export default Model;
+
+//# sourceMappingURL=Model.js.map

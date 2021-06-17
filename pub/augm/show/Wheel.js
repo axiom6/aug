@@ -490,3 +490,5 @@ Wheel = class Wheel {
 };
 
 export default Wheel;
+
+//# sourceMappingURL=Wheel.js.map

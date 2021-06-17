@@ -156,3 +156,5 @@ xfade: (opacity) =>
 
  */
 export default Chord;
+
+//# sourceMappingURL=Chord.js.map

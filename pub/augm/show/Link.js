@@ -1,8 +1,8 @@
 var Link;
 
-import Util from '../../base/util/Util.js';
+import Util from '../../../lib/pub/base/util/Util.js';
 
-import Vis from '../../base/draw/Vis.js';
+import Vis from '../../../lib/pub/base/draw/Vis.js';
 
 Link = class Link {
   constructor(svgMgr) {
@@ -266,3 +266,5 @@ Link = class Link {
 Link.pts1 = [[200, 40], [200, 60], [200, 80], [200, 100], [200, 120], [200, 140], [200, 160]];
 
 export default Link;
+
+//# sourceMappingURL=Link.js.map

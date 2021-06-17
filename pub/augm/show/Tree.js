@@ -1,8 +1,8 @@
 var Tree;
 
-import Util from '../../base/util/Util.js';
+import Util from '../../../lib/pub/base/util/Util.js';
 
-import Vis from '../../base/draw/Vis.js';
+import Vis from '../../../lib/pub/base/draw/Vis.js';
 
 Tree = class Tree {
   constructor(svgMgr, mix) {
@@ -148,3 +148,5 @@ Tree = class Tree {
 };
 
 export default Tree;
+
+//# sourceMappingURL=Tree.js.map

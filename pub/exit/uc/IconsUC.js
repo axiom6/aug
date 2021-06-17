@@ -105,3 +105,5 @@ IconsUC = class IconsUC {
 };
 
 export default IconsUC;
+
+//# sourceMappingURL=IconsUC.js.map

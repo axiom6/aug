@@ -1,6 +1,6 @@
 var Encourage;
 
-import Vis from "../../base/draw/Vis.js";
+import Vis from "../../../lib/pub/base/draw/Vis.js";
 
 Encourage = class Encourage {
   constructor(spec, shapes, build) {
@@ -64,3 +64,5 @@ Encourage = class Encourage {
 };
 
 export default Encourage;
+
+//# sourceMappingURL=Encourage.js.map

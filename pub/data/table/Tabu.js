@@ -1,6 +1,6 @@
 var Tabu;
 
-import Util from '../../base/util/Util.js';
+import Util from '../../../lib/pub/base/util/Util.js';
 
 Tabu = class Tabu {
   constructor() {}
@@ -82,3 +82,5 @@ Tabu = class Tabu {
 };
 
 export default Tabu;
+
+//# sourceMappingURL=Tabu.js.map

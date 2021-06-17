@@ -1,8 +1,8 @@
 var Rect;
 
-import Util from '../../base/util/Util.js';
+import Util from '../../../lib/pub/base/util/Util.js';
 
-import Vis from '../../base/draw/Vis.js';
+import Vis from '../../../lib/pub/base/draw/Vis.js';
 
 import * as THREE from 'three';
 
@@ -73,3 +73,5 @@ Rect = class Rect {
 Rect.matrix = new THREE.Matrix4();
 
 export default Rect;
+
+//# sourceMappingURL=Rect.js.map

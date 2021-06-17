@@ -339,3 +339,5 @@ Spatial = (function() {
 }).call(this);
 
 export default Spatial;
+
+//# sourceMappingURL=Spatial.js.map

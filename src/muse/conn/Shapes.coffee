@@ -1,6 +1,6 @@
 
-import Util    from '../../base/util/Util.js'
-import Vis     from '../../base/draw/Vis.js'
+import Util    from '../../../lib/pub/base/util/Util.js'
+import Vis     from '../../../lib/pub/base/draw/Vis.js'
 import Convey  from './Convey.js'
 import * as d3 from 'd3' # '../../../pub/lib/d3/d3.5.9.0.esm.js';
 

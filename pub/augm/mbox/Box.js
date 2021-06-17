@@ -1,7 +1,7 @@
-//mport Util     from '../../base/util/Util.js'
+//mport Util     from '../../../lib/pub/base/util/Util.js'
 var Box;
 
-import Vis from '../../base/draw/Vis.js';
+import Vis from '../../../lib/pub/base/draw/Vis.js';
 
 import MBox from './MBox.js';
 
@@ -152,3 +152,5 @@ Box = class Box {
  Box.init()
 */
 export default Box;
+
+//# sourceMappingURL=Box.js.map

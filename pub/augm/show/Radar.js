@@ -1,8 +1,8 @@
 var Radar;
 
-import Util from '../../base/util/Util.js';
+import Util from '../../../lib/pub/base/util/Util.js';
 
-import Vis from '../../base/draw/Vis.js';
+import Vis from '../../../lib/pub/base/draw/Vis.js';
 
 Radar = class Radar {
   constructor(svgMgr, name2, mix) {
@@ -394,3 +394,5 @@ Radar = class Radar {
 };
 
 export default Radar;
+
+//# sourceMappingURL=Radar.js.map

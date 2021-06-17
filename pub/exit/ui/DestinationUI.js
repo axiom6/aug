@@ -125,3 +125,5 @@ DestinationUI = class DestinationUI {
 };
 
 export default DestinationUI;
+
+//# sourceMappingURL=DestinationUI.js.map

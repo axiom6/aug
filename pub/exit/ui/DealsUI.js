@@ -129,3 +129,5 @@ DealsUI = (function() {
 }).call(this);
 
 export default DealsUI;
+
+//# sourceMappingURL=DealsUI.js.map

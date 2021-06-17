@@ -76,3 +76,5 @@ Chord = class Chord {
 };
 
 export default Chord;
+
+//# sourceMappingURL=Chord.js.map

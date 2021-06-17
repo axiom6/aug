@@ -2367,3 +2367,5 @@ Data = (function() {
 }).call(this);
 
 export default Data;
+
+//# sourceMappingURL=Data.js.map

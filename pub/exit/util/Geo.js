@@ -473,3 +473,5 @@ Geo = class Geo {
 };
 
 export default Geo;
+
+//# sourceMappingURL=Geo.js.map

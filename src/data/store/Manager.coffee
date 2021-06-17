@@ -1,9 +1,9 @@
 
-import Memory from '../../base/store/Memory.js'
-import Local  from '../../base/store/Local.js'
-import Index  from '../../base/store/Index.js'
-import Fire   from '../../base/store/Fire.js'
-import Couch  from '../../base/store/Couch.js'
+import Memory from '../../../lib/pub/base/store/Memory.js'
+import Local  from '../../../lib/pub/base/store/Local.js'
+import Index  from '../../../lib/pub/base/store/Index.js'
+import Fire   from '../../../lib/pub/base/store/Fire.js'
+import Couch  from '../../../lib/pub/base/store/Couch.js'
 
 class Manager
 

@@ -461,3 +461,5 @@ Visual = class Visual {
 };
 
 export default Visual;
+
+//# sourceMappingURL=Visual.js.map

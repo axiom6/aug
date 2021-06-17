@@ -1,8 +1,8 @@
 var Connect;
 
-import SvgMgr from '../../base/draw/SvgMgr.js';
+import SvgMgr from '../../../lib/pub/base/draw/SvgMgr.js';
 
-import Build from '../../base/util/Build.js';
+import Build from '../../../lib/pub/base/util/Build.js';
 
 import Shapes from './Shapes.js';
 
@@ -50,3 +50,5 @@ Connect = class Connect {
 };
 
 export default Connect;
+
+//# sourceMappingURL=Connect.js.map

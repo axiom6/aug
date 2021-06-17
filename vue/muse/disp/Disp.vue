@@ -11,7 +11,7 @@
 
 <script type="module">
 
-  import Tabs from '../../base/elem/Tabs.vue';
+  import Tabs from '../../../lib/vue/base/elem/Tabs.vue';
   import Dims from '../prac/Dims.vue';
   import Desc from './Desc.vue';
   import { inject, ref, onBeforeMount, onMounted } from 'vue'

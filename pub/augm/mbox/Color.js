@@ -1,8 +1,8 @@
 var Color;
 
-import Util from '../../base/util/Util.js';
+import Util from '../../../lib/pub/base/util/Util.js';
 
-import Vis from '../../base/draw/Vis.js';
+import Vis from '../../../lib/pub/base/draw/Vis.js';
 
 Color = class Color {
   constructor(mbox) {
@@ -341,3 +341,5 @@ Color = class Color {
 };
 
 export default Color;
+
+//# sourceMappingURL=Color.js.map

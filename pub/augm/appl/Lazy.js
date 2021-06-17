@@ -33,3 +33,5 @@ Load = class Load {
 };
 
 export default Load;
+
+//# sourceMappingURL=Lazy.js.map

@@ -1,6 +1,6 @@
 var MuseLD;
 
-import Util from '../../base/util/Util.js';
+import Util from '../../../lib/pub/base/util/Util.js';
 
 import Prin from '../../../data/muse/Prin.json';
 
@@ -199,3 +199,5 @@ MuseLD = class MuseLD {
 };
 
 export default MuseLD;
+
+//# sourceMappingURL=MuseLD.js.map

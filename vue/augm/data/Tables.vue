@@ -13,7 +13,7 @@
 <script type="module">
 
   import { inject } from 'vue';
-  import Tabs   from '../../base/elem/Tabs.vue';
+  import Tabs   from '../../../lib/vue/base/elem/Tabs.vue';
   import Table1 from './Table1.vue';
   import Table2 from './Table2.vue';
   

@@ -2,9 +2,9 @@ var MathML;
 
 import {
   match
-} from '../../../base/util/Match.js';
+} from '../../../../lib/pub/base/util/Match.js';
 
-import Latex from '../../../base/draw/Latex.js';
+import Latex from '../../../../lib/pub/base/draw/Latex.js';
 
 import A from '../adt/Adt.js';
 
@@ -409,3 +409,5 @@ MathML = class MathML {
 };
 
 export default MathML;
+
+//# sourceMappingURL=MathML.js.map

@@ -60,3 +60,5 @@ TripUI = class TripUI {
 };
 
 export default TripUI;
+
+//# sourceMappingURL=TripUI.js.map

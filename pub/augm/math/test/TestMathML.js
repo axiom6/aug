@@ -306,3 +306,5 @@ TestMathML = (function() {
 //mathML.markup( Suma, 'Suma' )
 //mathML.markup( Sums, 'Sums' )
 export default TestMathML;
+
+//# sourceMappingURL=TestMathML.js.map

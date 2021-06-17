@@ -3,7 +3,7 @@
 <template>
   <div class="math-tabs-pane">
     <d-tabs :compKey="pracKey" :pages="toPages()"></d-tabs>
-      <template v-for="page in toPages()" :key="expsIdx">
+      <template v-for="page in toPages()" :key="pageKeyIdx(page.key)">
         <m-math-grid v-if="show(page.key)" :exps="page.obj" class="math-tabs-comp"></m-math-grid>
       </template>
   </div>
@@ -12,7 +12,7 @@
 <script type="module">
 
   import { inject, ref, onMounted } from 'vue';
-  import Tabs     from '../../base/elem/Tabs.vue';
+  import Tabs     from '../../../lib/vue/base/elem/Tabs.vue';
   import MathGrid from './MathGrid.vue';
   import MathMgr  from "../../../pub/augm/math/doc/MathMgr";
 
@@ -27,29 +27,33 @@
       const nav     = inject('nav');
       const page    = ref(null);
       let   pageKey = 'None';
-      const expsIdx = ref( 0  );
+      let   pageIdx = 0;
       const mathMgr = new MathMgr();
-      const debug   = false;
+    //const debug   = false;
 
       const toPages = () => {
         return nav.pages[props.pracKey]; }
 
       const show = ( pageArg ) => {
         return pageKey === pageArg; }
-      
+
+      const pageKeyIdx = ( pageArg ) => {
+        return pageArg + pageIdx; }
+
       const onNav = (obj) => {
         if( props.pracKey===obj.pracKey && nav.hasPage(props.pracKey,obj.pageKey) ) {
           pageKey        = obj.pageKey;
           page.value     = nav.getPage(props.pracKey,obj.pageKey);
           page.value.obj = mathMgr.createExps(page.value);
-          expsIdx.value++; } }
+          pageIdx++; } }
+
 
     onMounted( () => { // Follow up with the last Nav.pub(obj) that mounted this vue component
       onNav( { pracKey:props.pracKey, pageKey:nav.getPageKey(props.pracKey) } );
       mix.subscribe( 'Nav', 'MathND', (obj) => {
           onNav( obj ); } ); } )
 
-      return { show, expsIdx, toPages }; }
+      return { show, pageKeyIdx, toPages }; }
   }
   
 export default MathND;

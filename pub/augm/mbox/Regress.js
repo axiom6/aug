@@ -1,6 +1,6 @@
 var Regress;
 
-import Util from '../../base/util/Util.js';
+import Util from '../../../lib/pub/base/util/Util.js';
 
 import Coord from './Coord.js';
 
@@ -122,3 +122,5 @@ Regress = class Regress {
 };
 
 export default Regress;
+
+//# sourceMappingURL=Regress.js.map

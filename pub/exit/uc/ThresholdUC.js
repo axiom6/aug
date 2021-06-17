@@ -49,3 +49,5 @@ ThresholdUC = class ThresholdUC {
 };
 
 export default ThresholdUC;
+
+//# sourceMappingURL=ThresholdUC.js.map

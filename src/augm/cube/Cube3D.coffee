@@ -1,6 +1,6 @@
 
 
-import Vis        from '../../base/draw/Vis.js'
+import Vis        from '../../../lib/pub/base/draw/Vis.js'
 import * as THREE from 'three'
 
 class Cube3D
@@ -12,8 +12,8 @@ class Cube3D
     box.applyMatrix( Cube3D.matrix )
     Cube3D.matrix.makeTranslation( @xyz[0], @xyz[1], @xyz[2] )
     box.applyMatrix( Cube3D.matrix )
-    rgb = Vis.toRgbHsv(  @hsv[0], @hsv[1], @hsv[2] )
-    col = new THREE.Color( @colorRgb( rgb ) )                    # blemding:THREE
+    hex = Vis.hex(  @hsv, 'ysv' )
+    col = new THREE.Color( hex )                    # blemding:THREE
     mat = new THREE.MeshPhongMaterial( { color:col, opacity:@opacity, transparent:true, side:THREE.BackSide } )
     @mesh = new THREE.Mesh( box, mat )
     @mesh.name  = @title

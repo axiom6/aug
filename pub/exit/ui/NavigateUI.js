@@ -51,3 +51,5 @@ NavigateUI = class NavigateUI {
 };
 
 export default NavigateUI;
+
+//# sourceMappingURL=NavigateUI.js.map

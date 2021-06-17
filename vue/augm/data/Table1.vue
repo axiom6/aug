@@ -11,8 +11,9 @@
 </template>
 
 <script type="module">
-  
-  import Table from '../../../pub/base/store/Table.js'
+
+  // Table.js is gpne
+  import Table from '../../../../lib/pub/base/store/Table.js'
   
   let Table1 = {
     

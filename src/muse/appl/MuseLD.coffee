@@ -1,5 +1,5 @@
 
-import Util from '../../base/util/Util.js'
+import Util from '../../../lib/pub/base/util/Util.js'
 import Prin from '../../../data/muse/Prin.json'
 import Rows from '../../../data/muse/Rows.json'
 import Info from '../../../data/muse/Info.json'

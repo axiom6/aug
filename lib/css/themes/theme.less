@@ -1,0 +1,63 @@
+
+// --- Color ---
+
+@theme-fore:wheat;
+@theme-back:black;
+@theme-high:black; // Highlight font color
+@theme-hove:tan;
+@theme-dark:black;
+@theme-gray:#333;
+
+// --- Position ---
+
+@theme-navd-width: 12%;
+@theme-navd-height:14%;
+@theme-view-width: 88%;
+@theme-view-height:86%;
+@theme-tabs-width: 50%;
+@theme-tabs-height: 7%;
+
+.theme-btns { color:black; background:wheat }
+.theme-dash { color:black; background:wheat }
+.theme-tocs { color:black; background:wheat }
+
+// -- Grid Justify and Aligh ---
+
+.themeCenterStretch() { display:grid; justify-items:center; align-items:center; text-align:center;
+  align-self:stretch; justify-self:stretch; }
+.themeCenterItems()   { display:grid; justify-items:center; align-items:center; text-align:center; }
+.themeCenterSelf()    { display:grid; justify-self: center; align-self: center; text-align:center; }
+.themeLeftSelf()      { display:grid; justify-self: start;  align-self: center; text-align:left;   }
+
+// -- Font Size ---
+
+@themeFS:2vmin;
+@theme-font-family:Roboto, sans-serif;
+
+// --- Elements ---
+
+.theme-h1 { font-size:4.00*@themeFS; margin:1.000*@themeFS 0 1.000*@themeFS 0; .themeCenterSelf(); }
+.theme-h2 { font-size:3.20*@themeFS; margin:0.800*@themeFS 0 0.800*@themeFS 0; .themeCenterSelf(); }
+.theme-h3 { font-size:2.56*@themeFS; margin:0.640*@themeFS 0 0.640*@themeFS 0; .themeCenterSelf(); }
+.theme-h4 { font-size:2.00*@themeFS; margin:0.512*@themeFS 0 0.512*@themeFS 0; .themeCenterSelf(); }
+.theme-h5 { font-size:1.60*@themeFS; margin:0.410*@themeFS 0 0.410*@themeFS 0; .themeCenterSelf(); }
+.theme-h6 { font-size:1.28*@themeFS; margin:0.328*@themeFS 0 0.328*@themeFS 0; .themeCenterSelf(); }
+.theme-p  { font-size:1.00*@themeFS; margin:0.262*@themeFS 0 0.262*@themeFS 0; .themeLeftSelf();   }
+// <pre> <code>
+
+.theme-article { position:absolute; left:0; top: 0;  width:100%; height:100%; }
+.theme-header  { position:absolute; left:0; top: 0;  width:100%; height: 20%; }
+.theme-section { position:absolute; left:0; top:20%; width:100%; height: 60%; }
+.theme-footer  { position:absolute; left:0; top:80%; width:100%; height: 20%; }
+// <aside> <nav>
+
+@mg:0.125*@themeFS; // Consider <ol>
+
+.theme-ul { font-size:2.00*@themeFS; padding:0; margin:0; list-style:none; font-weight:bold;
+  li  { margin:@mg @mg @mg @mg;
+    ul{ font-size:1.75*@themeFS;; padding:0; margin:0; list-style:none;
+      li { padding-left:0.50*@themeFS; margin:@mg @mg @mg @mg;
+        ul{ font-size:1.50*@themeFS;; padding:0; margin:0; list-style:none;
+          li { padding-left:0.50*@themeFS; margin:@mg @mg @mg @mg; } } } } } }
+
+// top | right | bottom | left

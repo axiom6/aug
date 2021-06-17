@@ -1,6 +1,6 @@
 
-#mport Util     from '../../base/util/Util.js'
-import Vis      from '../../base/draw/Vis.js'
+#mport Util     from '../../../lib/pub/base/util/Util.js'
+import Vis      from '../../../lib/pub/base/draw/Vis.js'
 import MBox     from './MBox.js'
 import Coord    from './Coord.js'
 import Color    from './Color.js'

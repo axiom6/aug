@@ -15,7 +15,7 @@
 
 <script type="module">
 
-  import Tabs from '../../base/elem/Tabs.vue';
+  import Tabs from '../../../lib/vue/base/elem/Tabs.vue';
   import Sign from './Sign.vue';
   import Dirs from './Dirs.vue';
   import { inject, ref, onMounted, onBeforeMount } from 'vue'

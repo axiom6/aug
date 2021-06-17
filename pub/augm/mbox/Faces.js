@@ -49,3 +49,5 @@ Faces = class Faces {
 };
 
 export default Faces;
+
+//# sourceMappingURL=Faces.js.map

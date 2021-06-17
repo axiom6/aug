@@ -1,12 +1,12 @@
 var Cube3D;
 
-import Vis from '../../base/draw/Vis.js';
+import Vis from '../../../lib/pub/base/draw/Vis.js';
 
 import * as THREE from 'three';
 
 Cube3D = class Cube3D {
   constructor(plane, row, col1, title, xyz, whd, hsv, opacity, font) {
-    var box, col, dx, dy, face, mat, mats, name, obj, rgb, side, text;
+    var box, col, dx, dy, face, hex, mat, mats, name, obj, side, text;
     this.plane = plane;
     this.row = row;
     this.col = col1;
@@ -22,8 +22,8 @@ Cube3D = class Cube3D {
     box.applyMatrix(Cube3D.matrix);
     Cube3D.matrix.makeTranslation(this.xyz[0], this.xyz[1], this.xyz[2]);
     box.applyMatrix(Cube3D.matrix);
-    rgb = Vis.toRgbHsv(this.hsv[0], this.hsv[1], this.hsv[2]);
-    col = new THREE.Color(this.colorRgb(rgb)); // blemding:THREE
+    hex = Vis.hex(this.hsv, 'ysv');
+    col = new THREE.Color(hex); // blemding:THREE
     mat = new THREE.MeshPhongMaterial({
       color: col,
       opacity: this.opacity,
@@ -76,3 +76,5 @@ Cube3D = class Cube3D {
 Cube3D.matrix = new THREE.Matrix4();
 
 export default Cube3D;
+
+//# sourceMappingURL=Cube3D.js.map

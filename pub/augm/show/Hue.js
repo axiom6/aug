@@ -1,10 +1,10 @@
 var Hue;
 
-import Util from '../../base/util/Util.js';
+import Util from '../../../lib/pub/base/util/Util.js';
 
-import Vis from '../../base/draw/Vis.js';
+import Vis from '../../../lib/pub/base/draw/Vis.js';
 
-import Palettes from '../../base/draw/Palettes.js';
+import Palettes from '../../../lib/pub/base/draw/Palettes.js';
 
 import Radar from './Radar.js';
 
@@ -297,3 +297,5 @@ Hue = class Hue extends Radar {
 };
 
 export default Hue;
+
+//# sourceMappingURL=Hue.js.map

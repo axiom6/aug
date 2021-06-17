@@ -61,3 +61,5 @@ Load = class Load {
 };
 
 export default Load;
+
+//# sourceMappingURL=Mods.js.map

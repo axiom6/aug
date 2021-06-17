@@ -202,3 +202,5 @@ Trip = (function() {
 }).call(this);
 
 export default Trip;
+
+//# sourceMappingURL=Trip.js.map

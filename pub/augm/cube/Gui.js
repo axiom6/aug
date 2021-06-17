@@ -1,6 +1,6 @@
 var Gui;
 
-import Util from '../../base/util/Util.js';
+import Util from '../../../lib/pub/base/util/Util.js';
 
 Gui = class Gui {
   constructor(act, elem, fun) {
@@ -132,3 +132,5 @@ Gui = class Gui {
 };
 
 export default Gui;
+
+//# sourceMappingURL=Gui.js.map

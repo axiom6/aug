@@ -30,3 +30,5 @@ Simulate = class Simulate {
 };
 
 export default Simulate;
+
+//# sourceMappingURL=Simulate.js.map

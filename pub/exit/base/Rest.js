@@ -427,3 +427,5 @@ Rest = class Rest {
  * """https://api.forecast.io/forecast/#{key}/#{loc.lat},#{loc.lon},#{loc.time}"""
  */
 export default Rest;
+
+//# sourceMappingURL=Rest.js.map

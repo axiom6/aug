@@ -1,0 +1,7 @@
+.snap {
+  overflow-x: auto;
+  scroll-padding: 0.1rem;
+  scroll-snap-align: start;
+  scroll-snap-type: both mandatory;
+}
+/*# sourceMappingURL=mobile.css.map */

@@ -53,12 +53,6 @@
       "oAP" : "\/aug.iml",
       "oF" : 1
     },
-    "\/build" : {
-      "ft" : 65536,
-      "oA" : 1,
-      "oAP" : "\/build",
-      "oF" : 0
-    },
     "\/css" : {
       "ft" : 65536,
       "oA" : 1,
@@ -85,6 +79,14 @@
       "oAP" : "\/dist",
       "oF" : 0
     },
+    "\/firebase-debug.log" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/firebase-debug.log",
+      "oF" : 0
+    },
     "\/firebase.json" : {
       "ft" : 524288,
       "oA" : 1,
@@ -99,6 +101,381 @@
       "hM" : 0,
       "oA" : 1,
       "oAP" : "\/index.html",
+      "oF" : 0
+    },
+    "\/lib\/css" : {
+      "ft" : 65536,
+      "oA" : 1,
+      "oAP" : "\/lib\/css",
+      "oF" : 0
+    },
+    "\/lib\/pub" : {
+      "ft" : 65536,
+      "oA" : 1,
+      "oAP" : "\/lib\/pub",
+      "oF" : 0
+    },
+    "\/lib\/src\/base\/draw\/FontAwe.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/draw\/FontAwe.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/draw\/Latex.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/draw\/Latex.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/draw\/Palettes.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/draw\/Palettes.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/draw\/SvgMgr.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/draw\/SvgMgr.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/draw\/Vis-unit.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/draw\/Vis-unit.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/draw\/Vis.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/draw\/Vis.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/nav\/Dir.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/nav\/Dir.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/nav\/Mix.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/nav\/Mix.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/nav\/Nav.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/nav\/Nav.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/nav\/Runner.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/nav\/Runner.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/nav\/Touch.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/nav\/Touch.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/sem\/JsonLD.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/sem\/JsonLD.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/store\/Couch.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/store\/Couch.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/store\/Fire.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/store\/Fire.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/store\/Index.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/store\/Index.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/store\/Local.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/store\/Local.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/store\/Memory.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/store\/Memory.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/store\/Store.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/store\/Store.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/util\/Access.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/util\/Access.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/util\/Build.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/util\/Build.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/util\/Cache.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/util\/Cache.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/util\/Match-min.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/src\/base\/util\/Match-min-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/util\/Match.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/src\/base\/util\/Match-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/util\/Snippets.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/util\/Snippets.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/util\/Stream.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/util\/Stream.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/util\/Util.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/util\/Util.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/base\/util\/Worker.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/util\/Worker.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/test\/bdd.txt" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/src\/test\/bdd.txt",
+      "oF" : 0
+    },
+    "\/lib\/src\/test\/Config.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/src\/test\/Config-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/test\/Initial.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/test\/Initial.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/test\/Initial.html" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/src\/test\/Initial.html",
+      "oF" : 0
+    },
+    "\/lib\/src\/test\/Tester-unit.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/test\/Tester-unit.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/test\/Tester.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/test\/Tester.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/vue" : {
+      "ft" : 65536,
+      "oA" : 1,
+      "oAP" : "\/lib\/vue",
       "oF" : 0
     },
     "\/LICENSE" : {
@@ -1439,7 +1816,7 @@
     },
     "\/src\/augm\/appl\/Augm.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/appl\/Augm.js",
@@ -1469,7 +1846,7 @@
     },
     "\/src\/augm\/appl\/Lazy.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/appl\/Lazy.js",
@@ -1480,7 +1857,7 @@
     },
     "\/src\/augm\/appl\/Load.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/appl\/Load.js",
@@ -1491,7 +1868,7 @@
     },
     "\/src\/augm\/appl\/Mods.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/appl\/Mods.js",
@@ -1502,7 +1879,7 @@
     },
     "\/src\/augm\/cube\/Cube3D.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/cube\/Cube3D.js",
@@ -1513,7 +1890,7 @@
     },
     "\/src\/augm\/cube\/CubeTh.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/cube\/CubeTh.js",
@@ -1524,7 +1901,7 @@
     },
     "\/src\/augm\/cube\/Gui.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/cube\/Gui.js",
@@ -1535,7 +1912,7 @@
     },
     "\/src\/augm\/cube\/Rect.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/cube\/Rect.js",
@@ -1689,7 +2066,7 @@
     },
     "\/src\/augm\/geom\/lib\/GeomMgr.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/geom\/lib\/GeomMgr.js",
@@ -1700,7 +2077,7 @@
     },
     "\/src\/augm\/geom\/lib\/Style.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/geom\/lib\/Style.js",
@@ -1711,7 +2088,7 @@
     },
     "\/src\/augm\/math\/adt\/Adt.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/math\/adt\/Adt.js",
@@ -1722,7 +2099,7 @@
     },
     "\/src\/augm\/math\/adt\/Ptn.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/math\/adt\/Ptn.js",
@@ -1733,7 +2110,7 @@
     },
     "\/src\/augm\/math\/doc\/Basics.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/math\/doc\/Basics.js",
@@ -1744,7 +2121,7 @@
     },
     "\/src\/augm\/math\/doc\/Differ.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/math\/doc\/Differ.js",
@@ -1755,7 +2132,7 @@
     },
     "\/src\/augm\/math\/doc\/MathMgr.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/math\/doc\/MathMgr.js",
@@ -1766,7 +2143,7 @@
     },
     "\/src\/augm\/math\/doc\/Solves.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/math\/doc\/Solves.js",
@@ -1777,7 +2154,7 @@
     },
     "\/src\/augm\/math\/geo\/Basic.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/math\/geo\/Basic.js",
@@ -1788,7 +2165,7 @@
     },
     "\/src\/augm\/math\/geo\/GA.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/math\/geo\/GA.js",
@@ -1799,7 +2176,7 @@
     },
     "\/src\/augm\/math\/geo\/Op.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/math\/geo\/Op.js",
@@ -1834,7 +2211,7 @@
     },
     "\/src\/augm\/math\/ptn\/DiffEQ.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/math\/ptn\/DiffEQ.js",
@@ -1845,7 +2222,7 @@
     },
     "\/src\/augm\/math\/ptn\/MathML.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/math\/ptn\/MathML.js",
@@ -1867,7 +2244,7 @@
     },
     "\/src\/augm\/math\/test\/TestDiffEQ.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/math\/test\/TestDiffEQ.js",
@@ -1878,7 +2255,7 @@
     },
     "\/src\/augm\/math\/test\/TestMatch.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/math\/test\/TestMatch.js",
@@ -1889,7 +2266,7 @@
     },
     "\/src\/augm\/math\/test\/TestMathML.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/math\/test\/TestMathML.js",
@@ -1900,7 +2277,7 @@
     },
     "\/src\/augm\/mbox\/Box.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/mbox\/Box.js",
@@ -1911,7 +2288,7 @@
     },
     "\/src\/augm\/mbox\/Color.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/mbox\/Color.js",
@@ -1922,7 +2299,7 @@
     },
     "\/src\/augm\/mbox\/Coord.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/mbox\/Coord.js",
@@ -1933,7 +2310,7 @@
     },
     "\/src\/augm\/mbox\/Faces.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/mbox\/Faces.js",
@@ -1944,7 +2321,7 @@
     },
     "\/src\/augm\/mbox\/MBox.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/mbox\/MBox.js",
@@ -1955,7 +2332,7 @@
     },
     "\/src\/augm\/mbox\/Regress.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/mbox\/Regress.js",
@@ -1966,7 +2343,7 @@
     },
     "\/src\/augm\/show\/Axes.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/show\/Axes.js",
@@ -1977,7 +2354,7 @@
     },
     "\/src\/augm\/show\/Chord.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/show\/Chord.js",
@@ -1988,7 +2365,7 @@
     },
     "\/src\/augm\/show\/D3D.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/show\/D3D.js",
@@ -1999,7 +2376,7 @@
     },
     "\/src\/augm\/show\/Hue.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/show\/Hue.js",
@@ -2010,7 +2387,7 @@
     },
     "\/src\/augm\/show\/Link.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/show\/Link.js",
@@ -2021,7 +2398,7 @@
     },
     "\/src\/augm\/show\/Radar.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/show\/Radar.js",
@@ -2032,7 +2409,7 @@
     },
     "\/src\/augm\/show\/Tree.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/show\/Tree.js",
@@ -2043,7 +2420,7 @@
     },
     "\/src\/augm\/show\/Wheel.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/augm\/show\/Wheel.js",
@@ -2052,273 +2429,9 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/src\/base\/draw\/FontAwe.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/draw\/FontAwe.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/draw\/Latex.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/draw\/Latex.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/draw\/Palettes.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/draw\/Palettes.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/draw\/SvgMgr.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/draw\/SvgMgr.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/draw\/Vis.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/draw\/Vis.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/nav\/Dir.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/nav\/Dir.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/nav\/Mix.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/nav\/Mix.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/nav\/Nav.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/nav\/Nav.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/nav\/Touch.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/nav\/Touch.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/sem\/JsonLD.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/sem\/JsonLD.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/store\/Couch.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/store\/Couch.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/store\/Fire.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/store\/Fire.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/store\/Index.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/store\/Index.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/store\/Local.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/store\/Local.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/store\/Memory.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/store\/Memory.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/store\/Store.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/store\/Store.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/test\/TestMgr.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/test\/TestMgr.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/util\/Access.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/util\/Access.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/util\/Build.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/util\/Build.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/util\/Cache.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/util\/Cache.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/util\/Match.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/util\/Match-min.js",
-      "oF" : 2,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/util\/Stream.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/util\/Stream.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/util\/Util.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/base\/util\/Util.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/base\/util\/Worker.coffee" : {
-      "ft" : 32,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/Worker.js",
-      "oF" : 2,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/src\/data\/appl\/Data.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/data\/appl\/Data.js",
@@ -2348,7 +2461,7 @@
     },
     "\/src\/data\/query\/Search.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/data\/query\/Search.js",
@@ -2359,7 +2472,7 @@
     },
     "\/src\/data\/store\/Manager.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/data\/store\/Manager.js",
@@ -2370,7 +2483,7 @@
     },
     "\/src\/data\/table\/Demo.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/data\/table\/Demo.js",
@@ -2381,7 +2494,7 @@
     },
     "\/src\/data\/table\/Tabu.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/data\/table\/Tabu.js",
@@ -2392,7 +2505,7 @@
     },
     "\/src\/exit\/appl\/Exit.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/appl\/Exit.js",
@@ -2422,7 +2535,7 @@
     },
     "\/src\/exit\/base\/App.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/base\/App.js",
@@ -2433,7 +2546,7 @@
     },
     "\/src\/exit\/base\/Data.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/base\/Data.js",
@@ -2444,7 +2557,7 @@
     },
     "\/src\/exit\/base\/Model.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/base\/Model.js",
@@ -2455,7 +2568,7 @@
     },
     "\/src\/exit\/base\/Rest.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/base\/Rest.js",
@@ -2466,7 +2579,7 @@
     },
     "\/src\/exit\/base\/Simulate.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/base\/Simulate.js",
@@ -2477,7 +2590,7 @@
     },
     "\/src\/exit\/base\/Spatial.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/base\/Spatial.js",
@@ -2488,7 +2601,7 @@
     },
     "\/src\/exit\/base\/Trip.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/base\/Trip.js",
@@ -2499,7 +2612,7 @@
     },
     "\/src\/exit\/uc\/AdvisoryUC.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/uc\/AdvisoryUC.js",
@@ -2510,7 +2623,7 @@
     },
     "\/src\/exit\/uc\/BannerUC.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/uc\/BannerUC.js",
@@ -2521,7 +2634,7 @@
     },
     "\/src\/exit\/uc\/DealsUC.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/uc\/DealsUC.js",
@@ -2532,7 +2645,7 @@
     },
     "\/src\/exit\/uc\/DriveBarUC.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/uc\/DriveBarUC.js",
@@ -2543,7 +2656,7 @@
     },
     "\/src\/exit\/uc\/IconsUC.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/uc\/IconsUC.js",
@@ -2554,7 +2667,7 @@
     },
     "\/src\/exit\/uc\/SearchUC.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/uc\/SearchUC.js",
@@ -2565,7 +2678,7 @@
     },
     "\/src\/exit\/uc\/ThresholdUC.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/uc\/ThresholdUC.js",
@@ -2576,7 +2689,7 @@
     },
     "\/src\/exit\/uc\/WeatherUC.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/uc\/WeatherUC.js",
@@ -2587,7 +2700,7 @@
     },
     "\/src\/exit\/ui\/DealsUI.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/ui\/DealsUI.js",
@@ -2598,7 +2711,7 @@
     },
     "\/src\/exit\/ui\/DestinationUI.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/ui\/DestinationUI.js",
@@ -2609,7 +2722,7 @@
     },
     "\/src\/exit\/ui\/GoUI.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/ui\/GoUI.js",
@@ -2620,7 +2733,7 @@
     },
     "\/src\/exit\/ui\/NavigateUI.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/ui\/NavigateUI.js",
@@ -2631,7 +2744,7 @@
     },
     "\/src\/exit\/ui\/TripUI.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/ui\/TripUI.js",
@@ -2642,7 +2755,7 @@
     },
     "\/src\/exit\/ui\/UI.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/ui\/UI.js",
@@ -2653,7 +2766,7 @@
     },
     "\/src\/exit\/util\/Geo.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/util\/Geo.js",
@@ -2664,7 +2777,7 @@
     },
     "\/src\/exit\/util\/Stream.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/util\/Stream.js",
@@ -2675,7 +2788,7 @@
     },
     "\/src\/exit\/util\/Util.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/util\/Util.js",
@@ -2686,7 +2799,7 @@
     },
     "\/src\/exit\/util\/Visual.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/exit\/util\/Visual.js",
@@ -2705,7 +2818,7 @@
     },
     "\/src\/jitt\/appl\/Jitt.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/jitt\/appl\/Jitt.js",
@@ -2727,7 +2840,7 @@
     },
     "\/src\/muse\/appl\/Crawl.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/muse\/appl\/Crawl.js",
@@ -2746,7 +2859,7 @@
     },
     "\/src\/muse\/appl\/Muse.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/muse\/appl\/Muse.js",
@@ -2768,7 +2881,7 @@
     },
     "\/src\/muse\/appl\/MuseLD.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/muse\/appl\/MuseLD.js",
@@ -2795,7 +2908,7 @@
     },
     "\/src\/muse\/conn\/Chord.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/muse\/conn\/Chord.js",
@@ -2806,7 +2919,7 @@
     },
     "\/src\/muse\/conn\/Connect.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/muse\/conn\/Connect.js",
@@ -2817,7 +2930,7 @@
     },
     "\/src\/muse\/conn\/Convey.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/muse\/conn\/Convey.js",
@@ -2828,7 +2941,7 @@
     },
     "\/src\/muse\/conn\/Embrace.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/muse\/conn\/Embrace.js",
@@ -2839,7 +2952,7 @@
     },
     "\/src\/muse\/conn\/Encourage.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/muse\/conn\/Encourage.js",
@@ -2850,7 +2963,7 @@
     },
     "\/src\/muse\/conn\/Innovate.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/muse\/conn\/Innovate.js",
@@ -2861,7 +2974,7 @@
     },
     "\/src\/muse\/conn\/Shapes.coffee" : {
       "ft" : 32,
-      "ma" : 0,
+      "ma" : 1,
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/muse\/conn\/Shapes.js",
@@ -2888,6 +3001,17 @@
       "mi" : 0,
       "oA" : 1,
       "oAP" : "\/vite.copy-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/vite.lib.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/vite.lib-min.js",
       "oF" : 0,
       "sC" : 0,
       "tS" : 0
@@ -2928,7 +3052,7 @@
     "displayValueWasSetByUser" : 1,
     "iconImageName" : "brackets_purple",
     "iconImageWasSetByUser" : 0,
-    "lastBuiltDate" : 643008067.51878297
+    "lastBuiltDate" : 645662852.32211494
   },
   "projectSettings" : {
     "abortBuildOnError" : 1,
@@ -4707,7 +4831,7 @@
       "autoOutputPathStyle" : 3,
       "minifierStyle" : 0,
       "outputStyle" : 1,
-      "sourceMapStyle" : 0,
+      "sourceMapStyle" : 1,
       "syntaxCheckerStyle" : 0,
       "transpilerStyle" : 0
     },
@@ -5016,7 +5140,7 @@
       "ENVIRONMENT:::$NODE_ENV"
     ],
     "rollupTreeshakingEnabled" : 1,
-    "skippedFoldersString" : "\/dist,\/storage\/framework\/sessions,\/css\/icons,_logs,\/css\/phone,\/css\/brew,\/build,cache,_cache,\/css\/know,\/assets,\/css,node_modules,\/vue,.idea,\/css\/muse,\/css\/font,\/data,\/css\/obs,\/pub,\/css\/base,\/css\/math,log,logs,\/zzz,\/css\/roast",
+    "skippedFoldersString" : "\/css\/icons,_logs,\/css\/roast,\/css\/phone,_cache,\/css\/math,\/css\/font,\/css,\/zzz,\/data,log,.idea,\/lib\/vue,\/assets,\/vue,\/storage\/framework\/sessions,\/css\/obs,\/build,\/css\/brew,\/pub,logs,\/css\/know,cache,\/css\/muse,\/css\/base,\/lib\/css,\/dist,node_modules,\/lib\/pub",
     "sourceFolderName" : "source",
     "susyVersion" : 3,
     "tsAllowSyntheticDefaultImports" : 0,

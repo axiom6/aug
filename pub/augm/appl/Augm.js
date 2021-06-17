@@ -1,13 +1,13 @@
 //mport Load    from './Load.js'
 var Augm;
 
-import Access from '../../base/util/Access.js';
+import Access from '../../../lib/pub/base/util/Access.js';
 
-import Stream from '../../base/util/Stream.js';
+import Stream from '../../../lib/pub/base/util/Stream.js';
 
-import Nav from '../../base/nav/Nav.js';
+import Nav from '../../../lib/pub/base/nav/Nav.js';
 
-import Mix from '../../base/nav/Mix.js';
+import Mix from '../../../lib/pub/base/nav/Mix.js';
 
 import Dash from '../../../vue/augm/appl/Dash.vue';
 
@@ -575,3 +575,5 @@ export default Augm;
       { path:'2D',   name:'Geom2D', components:{ Geom2D: loader.load('GeomND') } },
       { path:'3D',   name:'Geom3D', components:{ Geom3D: loader.load('GeomND') } } ] }
  */
+
+//# sourceMappingURL=Augm.js.map

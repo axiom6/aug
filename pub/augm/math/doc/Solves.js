@@ -118,3 +118,5 @@ Solves = class Solves {
 };
 
 export default Solves;
+
+//# sourceMappingURL=Solves.js.map

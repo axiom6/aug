@@ -42,3 +42,5 @@ GA = class GA {
 };
 
 export default GA;
+
+//# sourceMappingURL=GA.js.map

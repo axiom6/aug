@@ -1,16 +1,16 @@
 var Jitter;
 
-import Access from '../../base/util/Access.js';
+import Access from '../../../lib/pub/base/util/Access.js';
 
-import Stream from '../../base/util/Stream.js';
+import Stream from '../../../lib/pub/base/util/Stream.js';
 
-import Touch from '../../base/nav/Touch.js';
+import Touch from '../../../lib/pub/base/nav/Touch.js';
 
-import Cache from '../../base/util/Cache.js';
+import Cache from '../../../lib/pub/base/util/Cache.js';
 
-import Mix from '../../base/nav/Mix.js';
+import Mix from '../../../lib/pub/base/nav/Mix.js';
 
-import Nav from '../../base/nav/Nav.js';
+import Nav from '../../../lib/pub/base/nav/Nav.js';
 
 import {
   createApp
@@ -304,3 +304,5 @@ Jitter = (function() {
 }).call(this);
 
 export default Jitter;
+
+//# sourceMappingURL=Jitt.js.map

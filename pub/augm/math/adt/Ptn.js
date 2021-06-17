@@ -3,7 +3,7 @@ var Ptn;
 import {
   _,
   REST
-} from '../../../base/util/Match.js';
+} from '../../../../lib/pub/base/util/Match.js';
 
 import Ascii from '../par/Ascii.esm.js';
 
@@ -101,3 +101,5 @@ Ptn = class Ptn {
 };
 
 export default Ptn;
+
+//# sourceMappingURL=Ptn.js.map

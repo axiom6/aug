@@ -5,7 +5,7 @@ var TestMatch;
 import {
   match,
   _
-} from '../../base/util/Match.js';
+} from '../../../lib/pub/base/util/Match.js';
 
 TestMatch = class TestMatch {
   static doExp() {
@@ -119,3 +119,5 @@ TestMatch = class TestMatch {
 TestMatch.doExp();
 
 export default TestMatch;
+
+//# sourceMappingURL=TestMatch.js.map

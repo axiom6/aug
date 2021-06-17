@@ -45,3 +45,5 @@ AdvisoryUC = class AdvisoryUC {
 };
 
 export default AdvisoryUC;
+
+//# sourceMappingURL=AdvisoryUC.js.map

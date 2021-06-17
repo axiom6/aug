@@ -286,3 +286,5 @@ Adt.Calculus = [Adt.Fun, Adt.D, Adt.Int, Adt.DefInt, Adt.Sum, Adt.Sub, Adt.Sus, 
 Adt.Fringe = [Adt.Latex, Adt.Sim, Adt.Not, Adt.Msg, Adt.Unk];
 
 export default Adt;
+
+//# sourceMappingURL=Adt.js.map

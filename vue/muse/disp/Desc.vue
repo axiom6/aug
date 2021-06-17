@@ -9,8 +9,8 @@
 
 <script type="module">
   
-  import Icon from "../../base/elem/Icon.vue";
-  import Area from "../../base/elem/Area.vue";
+  import Icon from "../../../lib/vue/base/elem/Icon.vue";
+  import Area from "../../../lib/vue/base/elem/Area.vue";
   import { inject, ref } from 'vue';
 
   let Desc = {

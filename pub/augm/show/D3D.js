@@ -1,6 +1,6 @@
 var D3D;
 
-import SvgMgr from '../../base/draw/SvgMgr.js';
+import SvgMgr from '../../../lib/pub/base/draw/SvgMgr.js';
 
 import Wheel from './Wheel.js';
 
@@ -51,3 +51,5 @@ D3D = class D3D {
 };
 
 export default D3D;
+
+//# sourceMappingURL=D3D.js.map

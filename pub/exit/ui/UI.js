@@ -228,3 +228,5 @@ UI = (function() {
 }).call(this);
 
 export default UI;
+
+//# sourceMappingURL=UI.js.map

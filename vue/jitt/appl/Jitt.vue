@@ -22,8 +22,8 @@
   import { inject, ref } from 'vue';
   import Summ            from '../main/Summ.vue';
   import Dash            from '../main/Dash.vue';
-  import Btns            from '../../base/elem/Btns.vue';
-  import Navb            from '../../base/elem/Navb.vue';
+  import Btns            from '../../../lib/vue/base/elem/Btns.vue';
+  import Navb            from '../../../lib/vue/base/elem/Navb.vue';
   
   let Home = {
 

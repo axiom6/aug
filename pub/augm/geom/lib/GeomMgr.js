@@ -52,3 +52,5 @@ GeomMgr = class GeomMgr {
 };
 
 export default GeomMgr;
+
+//# sourceMappingURL=GeomMgr.js.map

@@ -15,3 +15,5 @@ Basis = class Basis {
   constructor() {}
 
 };
+
+//# sourceMappingURL=Basic.js.map

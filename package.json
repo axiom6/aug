@@ -6,19 +6,18 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite serve",
-    "build": "vite build && node vite.copy.js",
-    "serve": "vite preview",
-    "vhelp": "vite --help",
-    "copy": "node vite.copy.js",
-    "augm": "node src/augm/appl/augm.config.js && firebase use augm",
-    "muse": "node src/muse/appl/muse.config.js && firebase use muse",
-    "jitt": "node src/jitt/appl/jitt.config.js && firebase use jitt",
-    "data": "node src/data/appl/data.config.js && firebase use data",
-    "exit": "node src/exit/appl/exit.config.js && firebase use exit",
-    "crawl": "node pub/muse/appl/Crawl.js",
+    "unit":   "node lib/pub/test/config.js",
+    "lib":    "node vite.lib.js",
+    "build":  "vite build && node vite.copy.js",
+    "serve":  "vite preview",
+    "augm":   "node src/augm/appl/augm.config.js && firebase use augm",
+    "muse":   "node src/muse/appl/muse.config.js && firebase use muse",
+    "jitt":   "node src/jitt/appl/jitt.config.js && firebase use jitt",
+    "data":   "node src/data/appl/data.config.js && firebase use data",
+    "exit":   "node src/exit/appl/exit.config.js && firebase use exit",
+    "crawl":  "node pub/muse/appl/Crawl.js",
     "deploy": "firebase deploy",
-    "gram": "src/augm/math/par/gram.sh",
-    "test": "node --experimental-modules -r esm  pub/math/test/Run.js"
+    "gram": "src/augm/math/par/gram.sh"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
@@ -37,14 +36,15 @@
     "vue-router": "^4.0.6"
   },
   "devDependencies": {
+    "@vitejs/plugin-vue": "^1.1.5",
+    "@vue/compiler-sfc": "^3.0.4",
     "cheerio": "^1.0.0-rc.9",
+    "jest": "^27.0.4",
     "node-fetch": "^2.6.1",
     "postcss": "^8.2.7",
     "rollup": "^2.40.0",
     "rollup-plugin-coffee-script": "^2.0.0",
     "rollup-plugin-less": "^1.1.3",
-    "@vitejs/plugin-vue": "^1.1.5",
-    "@vue/compiler-sfc": "^3.0.4",
     "vite": "^2.0.5",
     "vite-plugin-resolve-externals": "^0.1.0",
     "zombie": "^6.1.4"

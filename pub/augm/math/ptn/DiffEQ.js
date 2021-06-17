@@ -2,7 +2,7 @@ var DiffEQ;
 
 import {
   match
-} from '../../../base/util/Match.js';
+} from '../../../../lib/pub/base/util/Match.js';
 
 import A from '../adt/Adt.js';
 
@@ -387,3 +387,5 @@ DiffEQ = class DiffEQ {
 };
 
 export default DiffEQ;
+
+//# sourceMappingURL=DiffEQ.js.map

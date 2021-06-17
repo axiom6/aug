@@ -119,3 +119,5 @@ Basics = class Basics {
 };
 
 export default Basics;
+
+//# sourceMappingURL=Basics.js.map

@@ -1,6 +1,6 @@
 var Search;
 
-import Util from '../../base/util/Util.js';
+import Util from '../../../lib/pub/base/util/Util.js';
 
 Search = class Search {
   constructor() {}
@@ -82,3 +82,5 @@ Search = class Search {
 };
 
 export default Search;
+
+//# sourceMappingURL=Search.js.map

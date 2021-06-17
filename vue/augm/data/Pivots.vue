@@ -13,7 +13,7 @@
 <script type="module">
 
   import { inject } from 'vue';
-  import Tabs   from '../../base/elem/Tabs.vue';
+  import Tabs   from '../../../lib/vue/base/elem/Tabs.vue';
   import Pivot1 from './Pivot1.vue';
   import Pivot2 from './Pivot2.vue';
 

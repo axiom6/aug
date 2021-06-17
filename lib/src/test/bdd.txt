@@ -1,0 +1,115 @@
+
+test('Page should load and display the correct title', async t => {
+  const actual = Selector('h1').innerText;
+  const expected = 'TDD DAY 2019';
+  await t.expect(actual).eql(expected);
+  
+
+const getLocation = ClientFunction(() => window.location.href);
+
+test('Register button should navigate to registration page',
+async t => {
+  // Flexible selectors let us select arbitrary things on the page,
+  // regardless of how the page was marked up.
+  const registerButton = Selector('span').withText('REGISTER NOW');
+  const expected =
+    'https://zoom.us/webinar/register/WN_rYdjYdXFTPiHCsiWsnq0jA';  // Wait for the button click navigation
+  await t.click(registerButton);  // Now check the location.
+  await t.expect(getLocation())
+    .eql(expected);
+});
+
+Title
+    An explicit title.
+
+Narrative
+    A short introductory section with the following structure:
+
+        As a: the person or role who will benefit from the feature;
+        I want: the feature; so that: the benefit or value of the feature.
+
+Acceptance criteria
+    A description of each specific scenario of the narrative with the following structure:
+
+        Given: the initial context at the beginning of the scenario, in one or more clauses;
+        When: the event that triggers the scenario;
+        Then: the expected outcome, in one or more clauses.
+
+[Title Returns] Returns and exchanges go to inventory.
+
+[Context Store Owner] As a store owner
+  [I want] to add items back to inventory when they are returned or exchanged,
+  [so that] I can track inventory.
+
+[Scenario Customer Refund] A refund should be credited to a customer when they return items.
+  Given: that a customer previously bought a black sweater from me.
+  when: they return the black sweater.
+  then: I should credit their account,
+    or:   provide cash.
+
+[Scenario Adding Inventory] Items returned for refund should be added to inventory.
+  Given: that a customer previously bought a black sweater from me
+    and:  I have three black sweaters in inventory,
+  when: they return the black sweater for a refund,
+  then: I should have four black sweaters in inventory.
+
+[Scenario Returning Inventory] Exchanged items should be returned to inventory.
+  Given: that a customer previously bought a blue garment from me
+    and: I have two blue garments in inventory
+    and: three black garments in inventory,
+  when: they exchange the blue garment for a black garment,
+  then: I should have three blue garments in inventory
+    and: two black garments in inventory.
+
+------
+
+private Game game;
+private StringRenderer renderer;
+
+@Given("a $width by $height game")
+public void theGameIsRunning(int width, int height) {
+    game = new Game(width, height);
+    renderer = new StringRenderer();
+    game.setObserver(renderer);
+}
+
+@When("I toggle the cell at ($column, $row)")
+public void iToggleTheCellAt(int column, int row) {
+    game.toggleCellAt(column, row);
+}
+
+@Then("the grid should look like $grid")
+public void theGridShouldLookLike(String grid) {
+    assertThat(renderer.asString(), equalTo(grid));
+}
+
+--------------------
+
+Specification: Stack
+
+When: a new stack is created
+Then: it is empty
+
+When: an element is added to the stack
+Then: that element is at the top of the stack
+
+When: a stack has N elements
+  And: element E is on top of the stack
+Then: a pop operation returns E
+  And: the new size of the stack is N-1
+
+--------------------
+
+describe Hash do
+  let(:hash) { Hash[:hello, 'world'] }
+
+  it { expect(Hash.new).to eq({}) }
+
+  it "hashes the correct information in a key" do
+    expect(hash[:hello]).to eq('world')
+  end
+
+  it 'includes key' do
+    hash.keys.include?(:hello).should be true
+  end
+end

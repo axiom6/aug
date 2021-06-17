@@ -6,7 +6,7 @@ import {
   sankey
 } from 'd3-sankey';
 
-import Vis from '../../base/draw/Vis.js';
+import Vis from '../../../lib/pub/base/draw/Vis.js';
 
 Convey = class Convey {
   constructor(shapes, defs, g, x, y, w, h) {
@@ -108,3 +108,5 @@ Convey = class Convey {
 Convey.Id = 0;
 
 export default Convey;
+
+//# sourceMappingURL=Convey.js.map

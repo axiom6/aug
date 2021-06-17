@@ -26,7 +26,7 @@
   import { inject, ref, onMounted } from 'vue';
   import Home     from './Home.vue'
   import Math     from '../math/Math.vue';
-  import MathND from '../math/MathND.vue';
+  import MathND   from '../math/MathND.vue';
   import Draw     from '../draw/Draw.vue';
   import Hues     from '../mbox/Hues.vue';
   import Tool     from '../tool/Tool.vue';
@@ -35,9 +35,9 @@
   import Wood     from '../wood/Wood.vue';
   import Geom     from '../geom/Geom.vue';
   import GeomND   from '../geom/GeomND.vue';
-  import Test     from '../../base/test/Test.vue';
-  import Replay   from '../../base/test/Replay.vue';
-  import Result   from '../../base/test/Result.vue';
+  import Test     from '../../../lib/vue/base/test/Test.vue';
+  import Replay   from '../../../lib/vue/base/test/Replay.vue';
+  import Result   from '../../../lib/vue/base/test/Result.vue';
 
 
   let View = {

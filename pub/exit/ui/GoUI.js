@@ -65,3 +65,5 @@ GoUI = class GoUI {
 };
 
 export default GoUI;
+
+//# sourceMappingURL=GoUI.js.map

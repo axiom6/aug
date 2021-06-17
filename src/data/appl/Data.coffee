@@ -1,11 +1,11 @@
 
-import Access from '../../base/util/Access.js'
-#mport Build  from '../../base/util/Build.js'
-import Stream from '../../base/util/Stream.js'
-import Nav    from '../../base/nav/Nav.js'
-import Touch  from '../../base/nav/Touch.js'
-import Cache  from '../../base/util/Cache.js'
-import Mix    from '../../base/nav/Mix.js'
+import Access from '../../../lib/pub/base/util/Access.js'
+#mport Build  from '../../../lib/pub/base/util/Build.js'
+import Stream from '../../../lib/pub/base/util/Stream.js'
+import Nav    from '../../../lib/pub/base/nav/Nav.js'
+import Touch  from '../../../lib/pub/base/nav/Touch.js'
+import Cache  from '../../../lib/pub/base/util/Cache.js'
+import Mix    from '../../../lib/pub/base/nav/Mix.js'
 
 
 import { createApp }    from 'vue'    #

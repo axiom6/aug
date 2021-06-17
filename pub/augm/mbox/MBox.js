@@ -1,8 +1,8 @@
 var MBox;
 
-import Util from '../../base/util/Util.js';
+import Util from '../../../lib/pub/base/util/Util.js';
 
-import Vis from '../../base/draw/Vis.js';
+import Vis from '../../../lib/pub/base/draw/Vis.js';
 
 MBox = class MBox {
   constructor(elem) {
@@ -203,3 +203,5 @@ MBox = class MBox {
 };
 
 export default MBox;
+
+//# sourceMappingURL=MBox.js.map
