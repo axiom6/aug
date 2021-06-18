@@ -25,7 +25,7 @@ class Vis
   #      hue 360, saturation 100, lightness 100
   #      'hsl' has red=0deg, green=120deg and blue=240deg
 
-  @rgb:( arg, type="rgb", scale=1 ) ->
+  @rgb:( arg, type="ysv", scale=1 ) ->
     rgb = { r:255, g:255, b:255 } # default is white
     if Util.isArray(arg)
       rgb = switch type
@@ -43,6 +43,11 @@ class Vis
       rgb = { r:(arg & 0xFF0000) >> 16,   g:(arg & 0x00FF00) >> 8,  b:arg & 0x0000FF }
     Vis.round(rgb)
 
+  # Returns an rgb array with an alpha 1
+  @rgba:( arg, type="ysv", scale=1 ) ->
+    rgb = Vis.rgb( arg, type, scale )
+    [ rgb.r, rgb.g, rgb.b,1 ]
+
   # Returns a number that is interpreted as hex like 0xFFFFFF
   #   Recommended for most libraries like Three.js
   @hex:( arg, type="rgb", scale=1 ) ->
@@ -50,7 +55,7 @@ class Vis
     rgb.r * 65536 + rgb.g * 256 + rgb.b # 65536 is 16 to the fourth power and 256 is 16 squared
 
   # Returns a number in hex format like '0xFFFFFF'. Go for debugging
-  @str:( arg, type="rgb", scale=1 ) ->
+  @str:( arg, type="ysv", scale=1 ) ->
     rgb  = Vis.rgb( arg, type, scale )
     str  = '0x'
     str += if rgb.r is 0 then '00' else Vis.strHex(rgb.r).toUpperCase()
@@ -58,10 +63,30 @@ class Vis
     str += if rgb.b is 0 then '00' else Vis.strHex(rgb.b).toUpperCase()
     str
 
-  # returns a css string in rgb format
-  @css:( arg, type="rgb", scale=1  ) ->
+  # Key algorithm from HCI for converting RGB to HCS  h 360 c 100 s 100 a special color system
+  @hsv:( arg, type="ysv", scale=1 ) =>
+    rgb  = Vis.rgb( arg, type, scale )
+    R = rgb.r
+    G = rgb.g
+    B = rgb.b
+    sum = R + G + B
+    r = R/sum; g = G/sum; b = B/sum
+    s = sum / 3
+    c = if R is G and G is B then 0 else 1 - 3 * Math.min(r,g,b) # Center Grayscale
+    a = Vis.deg( Math.acos( ( r - 0.5*(g+b) ) / Math.sqrt((r-g)*(r-g)+(r-b)*(g-b)) ) )
+    h = if b <= g then a else 360 - a
+    h = 0 if c is 0
+    H = if type is 'ysc' then Vis.ysvHue(h) else h
+    [ H, c*100, s/2.55 ]
+
+# returns a css string in rgb format
+  @css:( arg, type="ysv", scale=1  ) ->
     rgb  = Vis.rgb( arg, type, scale )
     """rgb(#{rgb.r},#{rgb.g},#{rgb.b})"""
+
+  # Need to chech output format
+  @sphere:( hue, phi, rad ) ->
+    Vis.rgba( [Vis.rot(hue,90), 100*Vis.sin(phi), 100*rad ] )
     
   @strHex:( num ) ->
     `num.toString(16)` # Uses ` ` to fake out CoffeeScript code inspector

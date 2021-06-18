@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "Vis-unit.js",
+  "sourceRoot": "../../../src/base/draw",
+  "sources": [
+    "Vis-unit.coffee"
+  ],
+  "names": [],
+  "mappings": "AACA,OAAA;EAAS,IAAT;CAAA,MAAA;;AACA,OAAS,GAAT,MAAA;;AAEA,IAAA,CAAA,CAAM,CAAC,QAAP,CAAgB,KAAhB,EAAuB,KAAvB;;AACA,IAAA,CAAM,mBAAN,EAAsC,GAAG,CAAC,GAAJ,CAAQ,QAAR,CAAtC,EAAyD;EAAC,CAAA,EAAE,GAAH;EAAO,CAAA,EAAE,GAAT;EAAa,CAAA,EAAE;AAAf,CAAzD;;AACA,IAAA,CAAM,8BAAN,EAAsC,GAAG,CAAC,GAAJ,CAAQ;EAAC,CAAA,EAAE,GAAH;EAAO,CAAA,EAAE,GAAT;EAAa,CAAA,EAAE;AAAf,CAAR,CAAtC,EAAqE,QAArE,EALA;;AAMA,IAAA,CAAM,8BAAN,EAAsC,GAAG,CAAC,GAAJ,CAAQ;EAAC,CAAA,EAAE,GAAH;EAAO,CAAA,EAAE,GAAT;EAAa,CAAA,EAAE;AAAf,CAAR,CAAtC,EAAoE,UAApE;;AACA,IAAA,CAAM,wBAAN,EAAsC,GAAG,CAAC,GAAJ,CAAQ,CAAC,GAAD,EAAK,GAAL,EAAS,GAAT,CAAR,CAAtC,EAAqE,QAArE,EAPA;;AAQA,IAAA,CAAM,wBAAN,EAAsC,GAAG,CAAC,GAAJ,CAAQ,CAAC,GAAD,EAAK,GAAL,EAAS,GAAT,CAAR,CAAtC,EAAoE,UAApE;;AAEA,IAAA,CAAA,CAAM,CAAC,QAAP,CAAgB,KAAhB,EAAuB,KAAvB;;AACA,IAAA,CAAM,8BAAN,EAAsC,GAAG,CAAC,GAAJ,CAAQ,CAAG,CAAH,EAAK,GAAL,EAAS,GAAT,CAAR,EAAsB,KAAtB,CAAtC,EAAqE,QAArE,EAXA;;AAYA,IAAA,CAAM,8BAAN,EAAsC,GAAG,CAAC,GAAJ,CAAQ,CAAG,CAAH,EAAK,GAAL,EAAS,GAAT,CAAR,EAAsB,KAAtB,CAAtC,EAAoE,UAApE;;AACA,IAAA,CAAM,8BAAN,EAAsC,GAAG,CAAC,GAAJ,CAAQ,CAAG,CAAH,EAAK,GAAL,EAAS,GAAT,CAAR,EAAsB,KAAtB,CAAtC,EAAqE,QAArE,EAbA;;AAcA,IAAA,CAAM,8BAAN,EAAsC,GAAG,CAAC,GAAJ,CAAQ,CAAG,CAAH,EAAK,GAAL,EAAS,GAAT,CAAR,EAAsB,KAAtB,CAAtC,EAAoE,UAApE;;AAEA,IAAA,CAAA,CAAM,CAAC,OAAP,CAAe,KAAf",
+  "sourcesContent": [
+    "\nimport { unit } from '../../test/Tester.js'\nimport   Vis    from './Vis.js'\n\nunit().describe(\"Vis\", \"rgb\")\nunit( \"Vis.rgb(0xFFFFFF)\",            Vis.rgb(0xFFFFFF), {r:255,g:255,b:255}   )\nunit( \"Vis.hex({r:255,g:255,b:255})\", Vis.hex({r:255,g:255,b:255}),  0xFFFFFF  ) # Appears as 16777215 in decimal\nunit( \"Vis.str({r:255,g:255,b:255})\", Vis.str({r:255,g:255,b:255}), \"0xFFFFFF\" )\nunit( \"Vis.hex([255,255,255])\",       Vis.hex([255,255,255]),        0xFFFFFF  ) # Appears as 16777215 in decimal\nunit( \"Vis.str([255,255,255])\",       Vis.str([255,255,255]),       \"0xFFFFFF\" )\n\nunit().describe(\"Vis\", \"ysv\")\nunit( \"Vis.hex([  0,100,100],'ysv')\", Vis.hex([  0,100,100],'ysv'),  0xFFFFFF  ) # Appears as 16777215 in decimal\nunit( \"Vis.str([  0,100,100],'ysv')\", Vis.str([  0,100,100],'ysv'), \"0xFFFFFF\" )\nunit( \"Vis.hex([  0,  0,  0],'ysv')\", Vis.hex([  0,100,100],'ysv'),  0x000000  ) # Appears as 0        in decimal\nunit( \"Vis.str([  0,  0,  0],'ysv')\", Vis.str([  0,100,100],'ysv'), \"0x000000\" )\n\nunit().summary(\"Vis\")"
+  ]
+}

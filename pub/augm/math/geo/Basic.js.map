@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "Basic.js",
+  "sourceRoot": "../../../../src/augm/math/geo",
+  "sources": [
+    "Basic.coffee"
+  ],
+  "names": [],
+  "mappings": "AACA,IAAA;;AAAM,QAAN,MAAA,MAAA,CAAA;;;;;;;;;;;;EAaE,WAAY,CAAA,CAAA,EAAA;;AAbd",
+  "sourcesContent": [
+    "\nclass Basis\n  \n  # signature  default basis names\n  # 1,0,1   1,e0,e1,e01\n  # 1,1,0   1,e1,e2,e12\n  # 2,0,0   1,e1,e2,e12\n  # 2,1,0   1,e1,e2,e3,e12,e13,e23,e123\n  # 2,0,1   1,e0,e1,e2,e01,e02,e12,e012\n  # 3,0,0   1,e1,e2,e3,e12,e13,e23,e123\n  # 3,0,1   1,e0,e1,e2,e3,e01,e02,e03,e12,e13,e23,e012,e013,e023,e123,e0123\n  # 3,1,0   1,e1,e2,e3,e4,e12,e13,e14,e23,e24,e34,e123,e124,e134,e234,e1234\n  # 4,0,0   1,e1,e2,e3,e4,e12,e13,e14,e23,e24,e34,e123,e124,e134,e234,e1234\n  \n  constructor:() ->"
+  ]
+}

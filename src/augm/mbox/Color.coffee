@@ -85,8 +85,8 @@ class Color
   scsPts:( colors ) ->
     pts = []
     for key, color of colors
-      pts.push( [ Vis.toRadian(color.hue-2), color.c, 100-color.s, 1 ] )
-      pts.push( [ Vis.toRadian(color.hue+2), color.c, 100-color.s, 1 ] )
+      pts.push( [ Vis.rad(color.hue-2), color.c, 100-color.s, 1 ] )
+      pts.push( [ Vis.rad(color.hue+2), color.c, 100-color.s, 1 ] )
     pts
 
   scsRgbs:( colors ) ->
@@ -103,12 +103,12 @@ class Color
     for hue   in [0...360] by 15
       for c   in [0,10,20,30,40,50,60,70,80,90,100]
         for s in [0,10,20,30,40,50,60,70,80,90,100]
-          hcss.push( [ Vis.toRadian(hue-3), c, s, 1 ] )
-          hcss.push( [ Vis.toRadian(hue  ), c, s, 1 ] )
-          hcss.push( [ Vis.toRadian(hue+3), c, s, 1 ] )
-          rgbs.push( Vis.toRgbHcs(  hue,  c, s, true ) )
-          rgbs.push( Vis.toRgbHcs2( hue,  c, s, true ) )
-          rgbs.push( Vis.toRgbHsv(  hue,  c, s, true ) )
+          hcss.push( [ Vis.rad(hue-3), c, s, 1 ] )
+          hcss.push( [ Vis.rad(hue  ), c, s, 1 ] )
+          hcss.push( [ Vis.rad(hue+3), c, s, 1 ] )
+          rgbs.push( Vis.rgba( [hue, c, s ] ) )
+          rgbs.push( Vis.rgba( [hue, c, s ] ) )
+          rgbs.push( Vis.rgba( [hue, c, s ] ) )
     [hcss,rgbs]
 
   genVecs:() ->
@@ -117,8 +117,8 @@ class Color
     for hue   in [0...360] by 15
       for c   in [0,10,20,30,40,50,60,70,80,90,100]
         for s in [0,10,20,30,40,50,60,70,80,90,100]
-          hcss.push( [ Vis.toRadian(hue  ), c, s, 1 ] )
-          rgbs.push( Vis.toRgbHsv(  hue,  c, s, true ) )
+          hcss.push( [Vis.rad( hue), c, s, 1 ] )
+          rgbs.push(  Vis.rgba([hue,  c, s ] ) )
     [hcss,rgbs]
 
   genVecsRgb:( see ) ->
@@ -129,17 +129,17 @@ class Color
       for r     in [0..255] by 15
         for g   in [0..255] by 15
           for b in [0..255] by 15
-            [h, c, s ] = Vis.toHcvRgb( r, g, b )
+            [h, c, s ] = Vis.hcv( { r:r, g:g, b:b } )
             if h%15 <= 2 or h%15 >= 13
-              ss         = Vis.sScale( h, c, s )
-              hcss.push( [ Vis.toRadian(h-2,false), c, ss, 1 ] )
+              ss         = @sScale( h, c, s )
+              hcss.push( [ Vis.rad(h-2), c, ss, 1 ] )
               rgbs.push( [ r*sf, g*sf, b*sf, 1 ] )
     if see is 'two' or see is 'hsv'
       for hue   in [0...360] by 15
         for c   in [0,16,32,48,64,80,100]
           for s in [0,16,32,48,64,80,100]
-            hcss.push( [ Vis.toRadian(hue+2), c, s, 1 ] )
-            rgbs.push( Vis.toRgbHsvSigmoidal( hue,  c, s, false ) )
+            hcss.push( [ Vis.rad(hue+2), c, s, 1 ] )
+            rgbs.push(   Vis.rgba( [hue,  c, s] ) )
     [hcss,rgbs]
 
   # console.log( 'gpr', { r:r, g:g, b:b, hue:hue, c:Math.round(c), s:Math.round(s) } ) if c is 0
@@ -152,9 +152,9 @@ class Color
       for g   in [0..255] by 15
         for b in [0..255] by 15
           h = 0; c = 0; s = 0;
-          [h, c, s ] = Vis.toHcsRgb( r, g, b ) # Hcs is a special color system
-          ss         = if scale then Vis.sScale( h, c, s ) else s
-          hcss.push( [ Vis.toRadian(h,false), c, ss, 1 ] )
+          [h, c, s ] = Vis.hsv( r, g, b ) # Hcs is a special color system
+          ss         = if scale then @sScale( h, c, s ) else s
+          hcss.push( [ Vis.rad(h), c, ss, 1 ] )
           rgbs.push( [ r*sf, g*sf, b*sf, 1 ] )
     [hcss,rgbs]
 
@@ -185,5 +185,23 @@ class Color
     gd = if g isnt 0 then g else -G
     bd = if b isnt 0 then b else -B
     [pc(R/rd),pc(G/gd),pc(B/bd)]
+
+  sScale:( hue, c, s ) ->
+    ss   = 1.0
+    m60  = hue %  60
+    m120 = hue % 120
+    s60  = m60 /  60
+    ch   = c   / 100
+    ss = if m120 < 60 then 3.0 - 1.5 * s60 else 1.5 + 1.5 * s60
+    s * (1-ch) + s * ch * ss
+
+  sScaleCf:( hue, c, s ) ->
+    ss   = @sScale( hue, c, s )
+    m60  = hue %  60
+    m120 = hue % 120
+    cosu = (1-Vis.cos(   m60))*100.00
+    cosd = (1-Vis.cos(60-m60))*100.00
+    cf = if m120 < 60 then cosu else cosd
+    ss - cf
 
 export default Color

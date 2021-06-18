@@ -38,7 +38,7 @@ class Innovate
     y  = if size.level is 'Comp' then  t*2.1  else 18*size.scaleFont
     uc = Vis.unicode( @spec.icon )
     # console.log( 'Innovate.rings()', { t:t, wr:wr, hr:hr, xt:xt, yt:yt } )
-    colorRing = Vis.toRgbHsvStr( [70,55,70] )
+    colorRing = Vis.str( [70,55,70] )
     colorBack = 'rgba(97, 56, 77, 1.0 )'
     h2 = Math.max(size.h-t*2,t)
     h5 = Math.max(size.h-t*5,t)

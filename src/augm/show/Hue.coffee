@@ -75,7 +75,7 @@ class Hue extends Radar
     for hue in [0...360] by dh
       for r in [r1...r2] by dr
         sat = 0.3 + (r-r1) / (r2-r1) * 0.7
-        @wedge( Vis.rgbCss( Vis.hsvToRgb({h:hue,s:sat,v:1}) ), g, r, r+dr, hue-dh/2, hue+dh/2 )
+        @wedge( Vis.hex( [hue,sat*100,100] ), g, r, r+dr, hue-dh/2, hue+dh/2 )
     @grid( dh, dr, -dh/2, 360-dh/2 )
     return
 

@@ -64,7 +64,7 @@ class Mix
     style
 
   toRgbaHsv: (hsv) ->
-    Vis.toRgbaHsv(hsv)
+    Vis.rgb(hsv,'ysv')
 
   # Main
   app: () ->

@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "Op.js",
+  "sourceRoot": "../../../../src/augm/math/geo",
+  "sources": [
+    "Op.coffee"
+  ],
+  "names": [],
+  "mappings": "AACA,IAAA;;AAAM;EAAN,MAAA,GAAA,CAAA;;;;;;;;;;;;;;;;;;;;IAsBE,WAAY,CAAE,GAAF,CAAA,EAAA;;IAEZ,GAAI,CAAE,CAAF,EAAK,CAAL,CAAA;aAAY,CAAA,GAAI;IAAhB;;IACJ,GAAI,CAAE,CAAF,EAAK,CAAL,CAAA;aAAY,CAAA,GAAI;IAAhB;;IACJ,GAAI,CAAE,CAAF,EAAK,CAAL,CAAA;aAAY,CAAA,GAAI,EAAhB;IAAA;;IACJ,GAAI,CAAE,CAAF,EAAK,CAAL,CAAA;aAAY,CAAA,GAAI;IAAhB;;IACJ,GAAI,CAAE,CAAF,EAAK,CAAL,CAAA;aAAY,CAAA,IAAK;IAAjB;;IAEJ,GAAI,CAAI,CAAJ,EAAO,CAAP,CAAA;aAAc,CAAA,CAAE,CAAE,CAAJ;IAAd;;IACJ,KAAM,CAAE,CAAF,EAAK,CAAL,CAAA;aAAY,CAAA,GAAI;IAAhB;;IACN,GAAI,CAAI,CAAJ,EAAO,CAAP,CAAA;aAAc,CAAA,GAAI;IAAlB;;IAEJ,IAAK,CAAE,CAAF,CAAA;aAAgB;IAAhB;;IACL,OAAQ,CAAE,CAAF,CAAA;aAAa;IAAb;;IACR,SAAU,CAAE,CAAF,CAAA;aAAW;IAAX;;IACV,OAAQ,CAAE,CAAF,CAAA;aAAa;IAAb;;IACR,QAAS,CAAE,CAAF,CAAA;aAAY;IAAZ;;IAGT,OAAQ,CAAE,CAAF,EAAK,CAAL,CAAA;aAAa,CAAA,GAAI,CAAJ,GAAQ,IAAC,CAAA,SAAD,CAAW,CAAX;IAArB;;IACR,MAAO,CAAE,CAAF,EAAK,CAAL,CAAA;aAAc,CAAA,GAAI,CAAJ,GAAQ,IAAC,CAAA,SAAD,CAAW,CAAX;IAAtB;;IACP,SAAU,CAAE,CAAF,CAAA;aAAW;IAAX;;IACV,KAAM,CAAE,CAAF,CAAA;aAAe;IAAf;;EA5CR;;EAwCE;;EAAM,CAAA,QAAA,CAAE,CAAF,CAAA;WAAe;EAAf,CAAA;;;;;;AAOR,OAAA,QAAe",
+  "sourcesContent": [
+    "\nclass Op\n\n  #\n  # Precedence\tInline JS\tAsciiMath\tObject Oriented\tFunctional\n  # 5\tx.Involute\ttilde(x)\tx.Involute\tA.Involute(x)\n  # 5\tx.Reverse\tddot(x)\tx.Reverse\tA.Reverse(x)\n  # 5\t~x\that(x)\tx.Conjugate\tA.Conjugate(x)\n  # 5\t!x\tbar(x)\tx.Dual\tA.Dual(x)\n  # 4 rtl\tx**-1\tx^-1\tx.Inverse\tA.Inverse(x)\n  # 4 rtl\tx**y\tx^y\tx.Pow(y)\tA.Pow(x,y)\n  # 3\tx^y\tx^^y\tx.Wedge(y)\tA.Wedge(x,y)\n  # 3\tx<<y\tx*y\tx.Dot(y)\tA.Dot(x,y)\n  # 3\tx&y\tbar(bar(x)^^bar(y))\tx.Vee(y)\tA.Vee(x,y)\n  # 3\tx>>>y\tx ** y ** hat(x)\tx.Mul(y).Mul(x.Conjugate)\tA.sw(x,y)\n  # 2\tx*y\tx**y\tx.Mul(y)\tA.Mul(x,y)\n  # 2\tx/y\tx/y\tx.Div(y)\tA.Div(x,y)\n  # 1\tx-y\tx-y\tx.Sub(y)\tA.Sub(x,y)\n  # 1\tx+y\tx+y\tx.Add(y)\tA.Add(x,y)\n  # 1e1\t1e_1\tnew A([0,1])\tA.Vector(1)\n  # 2e2\t2e_2\tnew A([0,0,2,0])\tA.Vector(0,2)\n  # 2e12\t2e_12\tnew A([0,0,0,2])\tA.Bivector(2)\n\n  constructor:( arg ) ->\n\n  add:( u, v ) -> u + v\n  sub:( u, v ) -> u - v\n  mul:( u, v ) -> u * v     # Scalar and geometric product\n  div:( u, v ) -> u / v\n  pow:( u, v ) -> u ** v\n\n  dot:(   u, v ) -> u ~ v\n  wedge:( u, v ) -> u ^ v\n  vee:(   u, v ) -> u & v\n\n  dual:( u )        -> u\n  inverse:( u )     -> u\n  conjugate:( u )   -> u\n  reverse:( u )     -> u\n  involute:( u )    -> u\n\n  rotor;( u )       -> u\n  reflect:( u, v )  -> u * v * @conjugate(u)\n  rotate:( u, v )   -> u * v * @conjugate(u)\n  magnitude:( u )   -> u\n  grade:( u )       -> u\n\n\nexport default Op"
+  ]
+}

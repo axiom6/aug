@@ -51,7 +51,7 @@ MBox = class MBox {
   toRad(i, n) {
     var hue;
     hue = (i * 360 / n) % 360;
-    return Vis.toRadian(hue);
+    return Vis.rad(hue);
   }
 
   toHue(i, n) {

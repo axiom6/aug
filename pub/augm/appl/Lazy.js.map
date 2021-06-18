@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "Lazy.js",
+  "sourceRoot": "../../../src/augm/appl",
+  "sources": [
+    "Lazy.coffee"
+  ],
+  "names": [],
+  "mappings": "AACA,IAAA;;AAAM,OAAN,MAAA,KAAA;EAEE,WAAY,CAAA,CAAA,EAAA;;EAEZ,IAAK,CAAE,IAAF,CAAA;AACI,YAAQ,IAAR;AAAA,WACA,QADA;eACc,IAAC,CAAA,IAAD,CAAM,mCAAN;AADd,WAEA,QAFA;eAEc,IAAC,CAAA,IAAD,CAAM,mCAAN;AAFd,WAGA,MAHA;eAGc,IAAC,CAAA,IAAD,CAAM,iCAAN;AAHd,WAIA,MAJA;eAIc,IAAC,CAAA,IAAD,CAAM,iCAAN;AAJd,WAKA,OALA;eAKc,IAAC,CAAA,IAAD,CAAM,kCAAN;AALd,WAMA,MANA;eAMc,IAAC,CAAA,IAAD,CAAM,iCAAN;AANd,WAOA,MAPA;eAOc,IAAC,CAAA,IAAD,CAAM,iCAAN;AAPd;eAQc,IAAC,CAAA,IAAD,CAAM,iCAAN;AARd;EADJ;;EAWL,IAAK,CAAE,IAAF,CAAA;WAAY,QAAA,CAAA,CAAA;AACf,aAAO;IADQ;EAAZ;;AAfP;;AAkBA,OAAA,QAAe",
+  "sourcesContent": [
+    "\nclass Load\n\n  constructor:() ->\n\n  load:( name ) ->\n    return switch( name )\n      when 'GeomND' then @lazy('../../../vue/augm/geom/GeomND.vue')\n      when 'MathND' then @lazy('../../../vue/augm/math/MathND.vue')\n      when 'Draw'   then @lazy('../../../vue/augm/draw/Draw.vue')\n      when 'Hues'   then @lazy('../../../vue/augm/mbox/Hues.vue')\n      when 'Tools'  then @lazy('../../../vue/augm/tool/Tools.vue')\n      when 'Cube'   then @lazy('../../../vue/augm/cube/Cube.vue')\n      when 'Wood'   then @lazy('../../../vue/augm/wood/Wood.vue')\n      else               @lazy('../../../vue/augm/appl/Augm.vue')\n\n  lazy:( path ) -> () ->\n    return `import( /* @vite-ignore */ path )`\n\nexport default Load"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "GeomMgr.js",
+  "sourceRoot": "../../../../src/augm/geom/lib",
+  "sources": [
+    "GeomMgr.coffee"
+  ],
+  "names": [],
+  "mappings": "AACA,IAAA;;AAAA,OAAO,KAAP,MAAA;;AACA,OAAO,MAAP,MAAA;;AACA,OAAO,KAAP,MAAA;;AACA,OAAO,MAAP,MAAA;;AACA,OAAO,IAAP,MAAA;;AACA,OAAO,MAAP,MAAA;;AACA,OAAO,KAAP,MAAA;;AACA,OAAO,MAAP,MAAA;;AAEM,UAAN,MAAA,QAAA;EAEE,WAAY,CAAA,CAAA,EAAA;;EAEZ,aAAc,CAAE,IAAF,CAAA;IACZ,IAAmB,gBAAnB;AAAA,aAAO,IAAI,CAAC,IAAZ;;AACA,YAAO,IAAI,CAAC,GAAZ;AAAA,WACO,OADP;eACqB;AADrB,WAEO,QAFP;eAEqB;AAFrB,WAGO,OAHP;eAGqB;AAHrB,WAIO,QAJP;eAIqB;AAJrB,WAKO,MALP;eAKqB;AALrB,WAMO,QANP;eAMqB;AANrB,WAOO,OAPP;eAOqB;AAPrB,WAQO,QARP;eAQqB;AARrB;QAUI,OAAO,CAAC,GAAR,CAAa,sCAAb,EAAqD;UAAE,OAAA,EAAQ,IAAI,CAAC,GAAf;UAAoB,IAAA,EAAK;QAAzB,CAArD;eACA;AAXJ;EAFY;;AAJhB;;AAmBA,OAAA,QAAe",
+  "sourcesContent": [
+    "\nimport Graph  from \"../../../../src/augm/geom/2D/Graph.js\"\nimport Basics from \"../../../../src/augm/geom/2D/Basics.js\"\nimport Grids  from \"../../../../src/augm/geom/3D/Grids.js\"\nimport Isomet from \"../../../../src/augm/geom/3D/Isomet.js\"\nimport Play   from \"../../../../src/augm/geom/3D/Play.js\"\nimport Isohed from \"../../../../src/augm/geom/3D/Isohed.js\"\nimport Torus  from \"../../../../src/augm/geom/3D/Torus.js\"\nimport Sphere from \"../../../../src/augm/geom/4D/Sphere.js\"\n\nclass GeomMgr\n\n  constructor:() ->\n\n  createPageObj:( page ) ->\n    return page.obj if page.obj?\n    switch page.key\n      when 'Graph'  then Graph\n      when 'Basics' then Basics\n      when 'Grids'  then Grids\n      when 'Isomet' then Isomet\n      when 'Play'   then Play\n      when 'Isohed' then Isohed\n      when 'Torus'  then Torus\n      when 'Sphere' then Sphere\n      else\n        console.log( 'GeomMgr.createPageObj() bad page.key', { pageKey:page.key, page:page } )\n        Graph\n\nexport default GeomMgr"
+  ]
+}

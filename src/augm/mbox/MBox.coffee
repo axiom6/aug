@@ -35,7 +35,7 @@ class MBox
 
   toRad:( i, n ) ->
     hue = ( i * 360/n) % 360
-    Vis.toRadian( hue )
+    Vis.rad( hue )
 
   toHue:( i, n ) ->
     h = ( i * 360/n) % 360

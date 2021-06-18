@@ -68,7 +68,7 @@ class SvgMgr
     return
 
   toFill:( hsv ) ->
-    Vis.toRgbHsvStr( hsv )
+    Vis.str( hsv, 'ysv' )
 
   clearSvg:() ->
     @svg.selectAll("*").remove()

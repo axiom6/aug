@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "Mods.js",
+  "sourceRoot": "../../../src/augm/appl",
+  "sources": [
+    "Mods.coffee"
+  ],
+  "names": [],
+  "mappings": "AACA,IAAA;;AAAA,OAAO,MAAP,MAAA;;AACA,OAAO,MAAP,MAAA;;AACA,OAAO,IAAP,MAAA;;AACA,OAAO,IAAP,MAAA;;AACA,OAAO,KAAP,MAAA;;AACA,OAAO,IAAP,MAAA;;AACA,OAAO,IAAP,MAAA;;AACA,OAAO,IAAP,MAAA;;AAEM,OAAN,MAAA,KAAA;EAEE,WAAY,CAAA,CAAA;IACV,IAAC,CAAA,SAAD,CAAW,2BAAX;EADU;;EAGZ,IAAK,CAAE,IAAF,CAAA;AACI,YAAQ,IAAR;AAAA,WACA,QADA;eACc;AADd,WAEA,QAFA;eAEc;AAFd,WAGA,MAHA;eAGc;AAHd,WAIA,MAJA;eAIc;AAJd,WAKA,OALA;eAKc;AALd,WAMA,MANA;eAMc;AANd,WAOA,MAPA;eAOc;AAPd;eAQc;AARd;EADJ;;EAWL,SAAU,CAAE,GAAF,CAAA;AACZ,QAAA,CAAA,EAAA,GAAA,EAAA,MAAA,EAAA,OAAA,EAAA;IAAI,OAAA,GAAa,QAAQ,CAAC,oBAAT,CAA8B,QAA9B;IACb,KAAA,yCAAA;2BAAA;;MAEE,IAAU,OAAO,CAAC,GAAG,CAAC,QAAZ,CAAqB,GAArB,CAAV;AAAA,eAAA;;IAFF,CADJ;;IAKI,MAAA,GAAa,QAAQ,CAAC,aAAT,CAAuB,QAAvB;IACb,MAAM,CAAC,GAAP,GAAa;IACb,QAAQ,CAAC,oBAAT,CAA8B,MAA9B,CAAqC,CAAC,CAAD,CAAG,CAAC,WAAzC,CAAqD,MAArD;EARQ;;AAhBZ;;AA2BA,OAAA,QAAe",
+  "sourcesContent": [
+    "\nimport GeomND  from '../../../vue/augm/geom/GeomND.vue'\nimport MathND  from '../../../vue/augm/math/MathND.vue'\nimport Draw    from '../../../vue/augm/draw/Draw.vue'\nimport Hues    from '../../../vue/augm/mbox/Hues.vue'\nimport Tools   from '../../../vue/augm/tool/Tools.vue'\nimport Cube    from '../../../vue/augm/cube/Cube.vue'\nimport Wood    from '../../../vue/augm/wood/Wood.vue'\nimport Home    from '../../../vue/augm/appl/Augm.vue'\n\nclass Load\n\n  constructor:() ->\n    @addScript(\"/assets/mathbox-bundle.js\")\n\n  load:( name ) ->\n    return switch( name )\n      when 'GeomND' then GeomND\n      when 'MathND' then MathND\n      when 'Draw'   then Draw\n      when 'Hues'   then Hues\n      when 'Tools'  then Tools\n      when 'Cube'   then Cube\n      when 'Wood'   then Wood\n      else               Home\n\n  addScript:( src ) ->   \n    scripts    = document.getElementsByTagName('script');\n    for scriptx in scripts\n      # console.log( 'Mods.addScript() scriptx src', scriptx.src )\n      return if scriptx.src.includes(src)\n    # console.log( 'Mods.addScript() adding', src )\n    script     = document.createElement('script')\n    script.src = src\n    document.getElementsByTagName(\"head\")[0].appendChild(script)\n    return\n\nexport default Load"
+  ]
+}

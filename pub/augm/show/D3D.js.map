@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "D3D.js",
+  "sourceRoot": "../../../src/augm/show",
+  "sources": [
+    "D3D.coffee"
+  ],
+  "names": [],
+  "mappings": "AACA,IAAA;;AAAA,OAAO,MAAP,MAAA;;AACA,OAAO,KAAP,MAAA;;AACA,OAAO,IAAP,MAAA;;AACA,OAAO,KAAP,MAAA;;AACA,OAAO,IAAP,MAAA;;AACA,OAAO,KAAP,MAAA;;AACA,OAAO,IAAP,MAAA;;AACA,OAAO,GAAP,MAAA;;AAEM,MAAN,MAAA,IAAA;EAEiB,OAAX,QAAW,CAAE,MAAF,EAAU,OAAV,CAAA;IACb,OAAO,CAAC,GAAR,CAAa,gBAAb,EAA+B;MAAE,MAAA,EAAO,MAAT;MAAiB,OAAA,EAAQ;IAAzB,CAA/B;EADa;;EAIF,OAAT,MAAS,CAAE,IAAF,EAAQ,IAAR,EAAc,GAAd,CAAA;AACf,QAAA;IAAI,MAAA,GAAS,IAAI,MAAJ,CAAY,IAAZ,EAAkB,IAAlB,EAAwB,MAAxB;AACT,YAAO,IAAP;AAAA,WACO,QADP;eACsB,IAAI,KAAJ,CAAY,MAAZ,EAAoB,GAAG,CAAC,QAAxB,EAAkC,GAAlC,EAAuC,KAAvC;AADtB,WAEO,MAFP;eAEsB,IAAI,IAAJ,CAAY,MAAZ;AAFtB,WAGO,OAHP;eAGsB,IAAI,KAAJ,CAAY,MAAZ;AAHtB,WAIO,MAJP;eAIsB,IAAI,IAAJ,CAAY,MAAZ;AAJtB,WAKO,OALP;eAKsB,IAAI,KAAJ,CAAY,MAAZ,EAAoB,OAApB,EAA6B,GAA7B;AALtB,WAMO,MANP;eAMsB,IAAI,IAAJ,CAAY,MAAZ,EAAoB,GAApB;AANtB,WAOO,KAPP;eAOsB,IAAI,GAAJ,CAAY,MAAZ,EAAoB,KAApB;AAPtB;QASI,OAAO,CAAC,KAAR,CAAe,gCAAf,EAAiD,IAAjD;eACA,IAAI,IAAJ,CAAU,MAAV;AAVJ;EAFW;;AANf;;AAoBA,OAAA,QAAe",
+  "sourcesContent": [
+    "\nimport SvgMgr   from '../../../lib/pub/base/draw/SvgMgr.js'\nimport Wheel    from './Wheel.js'\nimport Axes     from './Axes.js'\nimport Chord    from './Chord.js'\nimport Link     from './Link.js'\nimport Radar    from './Radar.js'\nimport Tree     from './Tree.js'\nimport Hue      from './Hue.js'\n\nclass D3D\n\n  D3D.onChoice = ( choice, checked ) ->\n    console.log( 'D3D.onChoice()', { choice:choice, checked:checked } )\n    return\n    \n  D3D.create = ( name, elem, mix ) ->\n    svgMgr = new SvgMgr( name, elem, 'Comp' )\n    switch name\n      when 'Flavor'  then new Wheel(  svgMgr, D3D.onChoice, mix, false )\n      when 'Axes'    then new Axes(   svgMgr )\n      when 'Chord'   then new Chord(  svgMgr )\n      when 'Link'    then new Link(   svgMgr )\n      when 'Radar'   then new Radar(  svgMgr, 'Radar', mix )\n      when 'Tree'    then new Tree(   svgMgr, mix )\n      when 'Hue'     then new Hue(    svgMgr, 'Hue' )\n      else\n        console.error( 'Draw.create(name) unknown name', name )\n        new Axes( svgMgr )\n\nexport default D3D"
+  ]
+}

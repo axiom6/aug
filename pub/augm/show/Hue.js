@@ -247,11 +247,7 @@ Hue = class Hue extends Radar {
     for (hue = i = 0, ref = dh; ref !== 0 && (ref > 0 ? i < 360 : i > 360); hue = i += ref) {
       for (r = j = ref1 = r1, ref2 = r2, ref3 = dr; ref3 !== 0 && (ref3 > 0 ? j < ref2 : j > ref2); r = j += ref3) {
         sat = 0.3 + (r - r1) / (r2 - r1) * 0.7;
-        this.wedge(Vis.rgbCss(Vis.hsvToRgb({
-          h: hue,
-          s: sat,
-          v: 1
-        })), g, r, r + dr, hue - dh / 2, hue + dh / 2);
+        this.wedge(Vis.hex([hue, sat * 100, 100]), g, r, r + dr, hue - dh / 2, hue + dh / 2);
       }
     }
     this.grid(dh, dr, -dh / 2, 360 - dh / 2);

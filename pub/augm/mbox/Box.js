@@ -50,8 +50,8 @@ Box = class Box {
     mbox = new MBox(elem);
     coord = new Coord(mbox, 8, 20, 20);
     view = coord.polar();
-    coord.cylVolume(view, Vis.toRgbHsv);
-    return coord.cylSurface(view, Vis.toRgbHsv, mbox.sin06F);
+    coord.cylVolume(view, Vis.rgba);
+    return coord.cylSurface(view, Vis.rgba, mbox.sin06F);
   }
 
   static doRegress(elem) {
@@ -66,7 +66,7 @@ Box = class Box {
     mbox = new MBox(elem);
     coord = new Coord(mbox, 12, 60, 10);
     view = coord.sphere();
-    return coord.sphVolume(view, Vis.toRgbSphere);
+    return coord.sphVolume(view, Vis.sphere);
   }
 
   static doHcs(elem) {
@@ -76,7 +76,7 @@ Box = class Box {
     color = new Color(mbox);
     view = coord.polar();
     color.genWithHcs(coord, view);
-    return coord.cylSurface(view, Vis.toRgbHsv, mbox.sin06F);
+    return coord.cylSurface(view, Vis.rgba, mbox.sin06F);
   }
 
   static doVecs(elem, see) {
@@ -117,7 +117,7 @@ Box = class Box {
         hue: hue,
         c: c,
         s: s
-      }, Vis.toRgbHsv(hue, c, s));
+      }, Vis.rgba([hue, c, s]));
     }
     ref1 = [0, 60, 120, 180, 240, 300];
     results = [];
@@ -133,7 +133,7 @@ Box = class Box {
             hue: hue,
             c: c,
             s: s
-          }, Vis.toRgbHsv(hue, c, s)));
+          }, Vis.rgba([hue, c, s])));
         }
         return results1;
       })());

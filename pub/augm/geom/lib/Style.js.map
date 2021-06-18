@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "Style.js",
+  "sourceRoot": "../../../../src/augm/geom/lib",
+  "sources": [
+    "Style.coffee"
+  ],
+  "names": [],
+  "mappings": "AAGA,IAAA;;AAAM,QAAN,MAAA,MAAA;EAEE,WAAY,CAAE,IAAF,CAAA;QAKZ,CAAA,cAAA,CAAA;IAJE,IAAC,CAAA,IAAD,GAAU;IACV,IAAC,CAAA,KAAD,GAAU,IAAI,CAAC,aAAD;IACd,IAAC,CAAA,MAAD,GAAU,IAAI,CAAC,cAAD;EAHJ;;EAKZ,OAAQ,CAAE,GAAF,EAAO,KAAP,CAAA;AAEV,QAAA,OAAA,EAAA;IAAI,IAAiB,GAAA,KAAO,SAAxB;MAAA,IAAC,CAAA,KAAD,GAAS,KAAT;;IACA,KAAA,GAAQ,CAAA,MAAA,CAAA,CAAS,IAAC,CAAA,KAAV,CAAA,WAAA,CAAA,CAA6B,IAAC,CAAA,MAA9B,CAAA,uBAAA;IACR,KAAK,CAAC,YAAN,CAAoB,OAApB,EAA6B,KAA7B;IAEA,IAAG,KAAK,CAAC,OAAN,KAAiB,QAApB;MACE,OAAA,GAAU,KAAK,CAAC,UAAN,CAAiB,OAAjB;MACV,OAAO,CAAC,SAAR,GAAoB,UAFtB;;IAIA,IAAC,CAAA,IAAI,CAAC,WAAN,CAAmB,KAAnB;EAVM;;AAPV;;AAoBA,OAAA,QAAe",
+  "sourcesContent": [
+    "\n\n\nclass Style\n\n  constructor:( elem ) ->\n    @elem   = elem\n    @width  = elem['clientWidth' ];\n    @height = elem['clientHeight'];\n\n  process:( key, graph ) =>\n\n    @width * 0.25 if key is 'Objects'\n    style = \"width:#{@width}px; height:#{@height}px; background:#000000;\"\n    graph.setAttribute( 'style', style )\n\n    if graph.tagName is 'CANVAS'\n      context = graph.getContext('webgl')\n      context.fillStyle = '#000000'\n\n    @elem.appendChild( graph )\n    return\n\nexport default Style\n"
+  ]
+}

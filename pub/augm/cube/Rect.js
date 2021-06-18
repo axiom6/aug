@@ -8,7 +8,7 @@ import * as THREE from 'three';
 
 Rect = class Rect {
   constructor(plane, row, col1, title, xyz, wh, hsv, opacity, font, fontColor) {
-    var col, dx, dy, face, mat, mats, obj, offsetY, rec, rgb, side, text;
+    var col, dx, dy, face, mat, mats, obj, offsetY, rec, side, text;
     this.plane = plane;
     this.row = row;
     this.col = col1;
@@ -21,8 +21,7 @@ Rect = class Rect {
     this.fontColor = fontColor;
     rec = new THREE.PlaneGeometry(this.wh[0], this.wh[1]);
     rec.translate(this.xyz[0], this.xyz[1], this.xyz[2]);
-    rgb = Vis.toRgbHsv(this.hsv[0], this.hsv[1], this.hsv[2]);
-    col = new THREE.Color(this.colorRgb(rgb));
+    col = Vis.hex(this.hsv);
     mat = new THREE.MeshBasicMaterial({
       color: col,
       opacity: this.opacity,

@@ -36,7 +36,7 @@ Shapes = class Shapes {
     hsv = darken ? [hsv[0], hsv[1], hsv[2] * 0.75] : hsv; // [hsv[0],60,30]
     // console.log( 'Shapes.toFill()', studyPrac.hsv, hsv ) if darken
     if ((studyPrac.hsv != null) && studyPrac.hsv.length === 3) {
-      return Vis.toRgbHsvStr(hsv);
+      return Vis.str(hsv);
     } else {
       console.error('Shapes.toFill() unknown fill code', {
         name: studyPrac.name,
@@ -345,7 +345,7 @@ Shapes = class Shapes {
     h = size.level === 'Comp' ? size.ringSize * 0.55 : size.ringSize * 1.3;
     x0 = size.xc - w * 0.5;
     y0 = dir === 'south' ? size.h - h : 0;
-    fill = Vis.toRgbHsvStr(hsv);
+    fill = Vis.str(hsv);
     this.rect(g, x0, y0, w, h, fill, 'none');
   }
 

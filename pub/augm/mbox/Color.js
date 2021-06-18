@@ -177,8 +177,8 @@ Color = class Color {
     pts = [];
     for (key in colors) {
       color = colors[key];
-      pts.push([Vis.toRadian(color.hue - 2), color.c, 100 - color.s, 1]);
-      pts.push([Vis.toRadian(color.hue + 2), color.c, 100 - color.s, 1]);
+      pts.push([Vis.rad(color.hue - 2), color.c, 100 - color.s, 1]);
+      pts.push([Vis.rad(color.hue + 2), color.c, 100 - color.s, 1]);
     }
     return pts;
   }
@@ -206,12 +206,12 @@ Color = class Color {
         ref1 = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
         for (l = 0, len1 = ref1.length; l < len1; l++) {
           s = ref1[l];
-          hcss.push([Vis.toRadian(hue - 3), c, s, 1]);
-          hcss.push([Vis.toRadian(hue), c, s, 1]);
-          hcss.push([Vis.toRadian(hue + 3), c, s, 1]);
-          rgbs.push(Vis.toRgbHcs(hue, c, s, true));
-          rgbs.push(Vis.toRgbHcs2(hue, c, s, true));
-          rgbs.push(Vis.toRgbHsv(hue, c, s, true));
+          hcss.push([Vis.rad(hue - 3), c, s, 1]);
+          hcss.push([Vis.rad(hue), c, s, 1]);
+          hcss.push([Vis.rad(hue + 3), c, s, 1]);
+          rgbs.push(Vis.rgba([hue, c, s]));
+          rgbs.push(Vis.rgba([hue, c, s]));
+          rgbs.push(Vis.rgba([hue, c, s]));
         }
       }
     }
@@ -229,8 +229,8 @@ Color = class Color {
         ref1 = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
         for (l = 0, len1 = ref1.length; l < len1; l++) {
           s = ref1[l];
-          hcss.push([Vis.toRadian(hue), c, s, 1]);
-          rgbs.push(Vis.toRgbHsv(hue, c, s, true));
+          hcss.push([Vis.rad(hue), c, s, 1]);
+          rgbs.push(Vis.rgba([hue, c, s]));
         }
       }
     }
@@ -246,10 +246,14 @@ Color = class Color {
       for (r = j = 0; j <= 255; r = j += 15) {
         for (g = k = 0; k <= 255; g = k += 15) {
           for (b = l = 0; l <= 255; b = l += 15) {
-            [h, c, s] = Vis.toHcvRgb(r, g, b);
+            [h, c, s] = Vis.hcv({
+              r: r,
+              g: g,
+              b: b
+            });
             if (h % 15 <= 2 || h % 15 >= 13) {
-              ss = Vis.sScale(h, c, s);
-              hcss.push([Vis.toRadian(h - 2, false), c, ss, 1]);
+              ss = this.sScale(h, c, s);
+              hcss.push([Vis.rad(h - 2), c, ss, 1]);
               rgbs.push([r * sf, g * sf, b * sf, 1]);
             }
           }
@@ -264,8 +268,8 @@ Color = class Color {
           ref1 = [0, 16, 32, 48, 64, 80, 100];
           for (p = 0, len1 = ref1.length; p < len1; p++) {
             s = ref1[p];
-            hcss.push([Vis.toRadian(hue + 2), c, s, 1]);
-            rgbs.push(Vis.toRgbHsvSigmoidal(hue, c, s, false));
+            hcss.push([Vis.rad(hue + 2), c, s, 1]);
+            rgbs.push(Vis.rgba([hue, c, s]));
           }
         }
       }
@@ -286,9 +290,9 @@ Color = class Color {
           h = 0;
           c = 0;
           s = 0;
-          [h, c, s] = Vis.toHcsRgb(r, g, b); // Hcs is a special color system
-          ss = scale ? Vis.sScale(h, c, s) : s;
-          hcss.push([Vis.toRadian(h, false), c, ss, 1]);
+          [h, c, s] = Vis.hsv(r, g, b); // Hcs is a special color system
+          ss = scale ? this.sScale(h, c, s) : s;
+          hcss.push([Vis.rad(h), c, ss, 1]);
           rgbs.push([r * sf, g * sf, b * sf, 1]);
         }
       }
@@ -336,6 +340,28 @@ Color = class Color {
     gd = g !== 0 ? g : -G;
     bd = b !== 0 ? b : -B;
     return [pc(R / rd), pc(G / gd), pc(B / bd)];
+  }
+
+  sScale(hue, c, s) {
+    var ch, m120, m60, s60, ss;
+    ss = 1.0;
+    m60 = hue % 60;
+    m120 = hue % 120;
+    s60 = m60 / 60;
+    ch = c / 100;
+    ss = m120 < 60 ? 3.0 - 1.5 * s60 : 1.5 + 1.5 * s60;
+    return s * (1 - ch) + s * ch * ss;
+  }
+
+  sScaleCf(hue, c, s) {
+    var cf, cosd, cosu, m120, m60, ss;
+    ss = this.sScale(hue, c, s);
+    m60 = hue % 60;
+    m120 = hue % 120;
+    cosu = (1 - Vis.cos(m60)) * 100.00;
+    cosd = (1 - Vis.cos(60 - m60)) * 100.00;
+    cf = m120 < 60 ? cosu : cosd;
+    return ss - cf;
   }
 
 };

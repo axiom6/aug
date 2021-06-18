@@ -29,7 +29,7 @@ class Shapes
     hsv = if darken then [hsv[0],hsv[1],hsv[2]*0.75] else hsv # [hsv[0],60,30]
     # console.log( 'Shapes.toFill()', studyPrac.hsv, hsv ) if darken
     if studyPrac.hsv?  and studyPrac.hsv.length is 3
-      Vis.toRgbHsvStr( hsv )
+      Vis.str( hsv )
     else
       console.error( 'Shapes.toFill() unknown fill code', { name:studyPrac.name, fill:studyPrac.fill, spec:studyPrac } )
       '#888888'
@@ -269,7 +269,7 @@ class Shapes
     h    = if size.level is 'Comp' then size.ringSize * 0.55 else size.ringSize * 1.3
     x0   = size.xc  -  w * 0.5
     y0   = if dir is 'south' then size.h  - h else 0
-    fill = Vis.toRgbHsvStr( hsv )
+    fill = Vis.str( hsv )
     @rect( g, x0, y0, w, h, fill, 'none' )
     return
 

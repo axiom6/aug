@@ -503,9 +503,9 @@ Coord = class Coord {
       channels: 4 
     };
     obj.expr = (emit, ang1, ang2, rad, i, j) => {
-      var b, g, r;
+      var a, b, g, r;
       if (j * 360 / this.height <= 180) {
-        [r, g, b] = Vis.toRgbHsv(i * 360 / this.width, j * 360 / this.height, rad);
+        [r, g, b, a] = Vis.rgba([i * 360 / this.width, j * 360 / this.height, rad]);
         return emit(r, g, b, 1);
       } else {
         return emit(0, 0, 0, 0);

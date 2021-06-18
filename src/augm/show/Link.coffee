@@ -36,7 +36,7 @@ class Link
     e1  = a1 + @da * n2 + 1
     b1 += 360 if a1 is 0
     e1 += 360 if a1 is 0
-    @radiate( @g, x1, y1, r1, b1, e1, @da, false, @rgb(fill) )
+    @radiate( @g, x1, y1, r1, b1, e1, @da, false, Vis.css([fill,90,90],'ysv') )
     return
 
   linkEnd:( x2, y2, a2, r2, n, fill ) ->
@@ -45,7 +45,7 @@ class Link
     e2 = a2 + @da * n2 + 1
     b2 += 360 if a2 is 0
     e2 += 360 if a2 is 0
-    @radiate( @g, x2, y2, r2, b2, e2, @da, false, @rgb(fill) )
+    @radiate( @g, x2, y2, r2, b2, e2, @da, false, Vis.css([fill,90,90],'ysv') )
     return
 
   link2:( x1, y1, x2, y2, n, fill ) ->
@@ -57,19 +57,15 @@ class Link
     a2 = Vis.angleSvg( x1-x2, y1-y2 )
     b2 = a2 - @da * n2
     e2 = a2 + @da * n2 + 1
-    @radiate( @g, x1, y1, r, b1, e1, @da, false, @rgb(fill) )
-    @radiate( @g, x2, y2, r, b2, e2, @da, false, @rgb(fill) )
+    @radiate( @g, x1, y1, r, b1, e1, @da, false, Vis.css([fill,90,90],'ysv') )
+    @radiate( @g, x2, y2, r, b2, e2, @da, false, Vis.css([fill,90,90],'ysv') )
     return
-
-  rgb:( fill ) ->
-    hsv = [fill,90,90]
-    @drew.toFill(hsv) #  Color.Prac[fill].rgba
 
 
   strokeOpp:( ang ) =>
     hue = 180-ang
     hue = 360+hue if hue < 0
-    [Vis.hslCss(  { h:hue, s:0.5, l:0.8 } ), hue ]
+    [Vis.css( [hue,50,80] ), hue ]
 
   inEast:(  ang ) -> (  0 <= ang and ang <=  45 ) or ( 315 <= ang and ang <= 360 )
   inNorth:( ang ) ->   45 <  ang and ang <  134
@@ -125,7 +121,7 @@ class Link
       stroke = toHue
       if Util.isFunc(toHue)
         hue    = toHue(ang)
-        stroke = Vis.hslCss( { h:hue, s:0.5, l:0.8 } )
+        stroke = Vis.css( [hue, 50, 80 ] )
       @path( g, stroke, ang, hue, @cubic( x0, y0, x1, y1, x2, y2, x, yy ) )
     return
 

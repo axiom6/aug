@@ -47,7 +47,7 @@ Link = class Link {
     if (a1 === 0) {
       e1 += 360;
     }
-    this.radiate(this.g, x1, y1, r1, b1, e1, this.da, false, this.rgb(fill));
+    this.radiate(this.g, x1, y1, r1, b1, e1, this.da, false, Vis.css([fill, 90, 90], 'ysv'));
   }
 
   linkEnd(x2, y2, a2, r2, n, fill) {
@@ -61,7 +61,7 @@ Link = class Link {
     if (a2 === 0) {
       e2 += 360;
     }
-    this.radiate(this.g, x2, y2, r2, b2, e2, this.da, false, this.rgb(fill));
+    this.radiate(this.g, x2, y2, r2, b2, e2, this.da, false, Vis.css([fill, 90, 90], 'ysv'));
   }
 
   link2(x1, y1, x2, y2, n, fill) {
@@ -74,14 +74,8 @@ Link = class Link {
     a2 = Vis.angleSvg(x1 - x2, y1 - y2);
     b2 = a2 - this.da * n2;
     e2 = a2 + this.da * n2 + 1;
-    this.radiate(this.g, x1, y1, r, b1, e1, this.da, false, this.rgb(fill));
-    this.radiate(this.g, x2, y2, r, b2, e2, this.da, false, this.rgb(fill));
-  }
-
-  rgb(fill) {
-    var hsv;
-    hsv = [fill, 90, 90];
-    return this.drew.toFill(hsv); //  Color.Prac[fill].rgba
+    this.radiate(this.g, x1, y1, r, b1, e1, this.da, false, Vis.css([fill, 90, 90], 'ysv'));
+    this.radiate(this.g, x2, y2, r, b2, e2, this.da, false, Vis.css([fill, 90, 90], 'ysv'));
   }
 
   strokeOpp(ang) {
@@ -90,14 +84,7 @@ Link = class Link {
     if (hue < 0) {
       hue = 360 + hue;
     }
-    return [
-      Vis.hslCss({
-        h: hue,
-        s: 0.5,
-        l: 0.8
-      }),
-      hue
-    ];
+    return [Vis.css([hue, 50, 80]), hue];
   }
 
   inEast(ang) {
@@ -191,11 +178,7 @@ Link = class Link {
       stroke = toHue;
       if (Util.isFunc(toHue)) {
         hue = toHue(ang);
-        stroke = Vis.hslCss({
-          h: hue,
-          s: 0.5,
-          l: 0.8
-        });
+        stroke = Vis.css([hue, 50, 80]);
       }
       this.path(g, stroke, ang, hue, this.cubic(x0, y0, x1, y1, x2, y2, x, yy));
     }

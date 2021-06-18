@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "MathMgr.js",
+  "sourceRoot": "../../../../src/augm/math/doc",
+  "sources": [
+    "MathMgr.coffee"
+  ],
+  "names": [],
+  "mappings": "AACA,IAAA,OAAA;EAAA;;AAAA,OAAO,MAAP,MAAA;;AACA,OAAO,MAAP,MAAA;;AACA,OAAO,MAAP,MAAA;;AAEM,UAAN,MAAA,QAAA;EAEE,WAAY,CAAA,CAAA;IACV,IAAC,CAAA,KAAD,GAAS;EADC;;EAGZ,UAAW,CAAE,IAAF,CAAA;AACb,QAAA,GAAA,EAAA,KAAA,EAAA,CAAA,EAAA,GAAA;;IACI,IAAI,CAAC,GAAL,GAAW,IAAC,CAAA,SAAD,CAAW,IAAI,CAAC,GAAhB;IACX,KAAA,GAAW,IAAI,CAAC,GAAG,CAAC,IAAT,CAAA;IACX,CAAA,GAAI;IACJ,KAAA,YAAA;;;MACE,GAAG,CAAC,KAAJ,GAAY,IAAC,CAAA,KAAD,CAAO,CAAP;MACZ,CAAA;IAFF;IAGA,IAAqE,IAAC,CAAA,KAAtE;MAAA,OAAO,CAAC,GAAR,CAAa,oBAAb,EAAmC;QAAE,GAAA,EAAI,IAAI,CAAC,GAAX;QAAgB,IAAA,EAAK;MAArB,CAAnC,EAAA;;WACA;EATS;;EAWX,SAAU,CAAE,GAAF,CAAA;AACR,YAAO,GAAP;AAAA,WACO,QADP;eACsB,IAAI,MAAJ,CAAA;AADtB,WAEO,QAFP;eAEsB,IAAI,MAAJ,CAAA;AAFtB,WAGO,QAHP;eAGsB,IAAI,MAAJ,CAAA;AAHtB;QAKI,OAAO,CAAC,GAAR,CAAa,mCAAb,EAAkD;UAAE,GAAA,EAAI;QAAN,CAAlD;eACA,IAAI,MAAJ,CAAA;AANJ;EADQ,CAdZ;;;EAwBE,KAAO,CAAE,CAAF,CAAA;AACT,QAAA,GAAA,EAAA,GAAA,EAAA,IAAA,EAAA;IAAI,IAAA,GAAO;IACP,GAAA,GAAO,CAAA,GAAU;IACjB,GAAA,GAAO,CAAC,CAAA,GAAE,GAAH,CAAA,GAAU,IAAV,GAAiB;IACxB,GAAA,GAAO,GAAA,GAAM;WACb,CAAA,CAAA,CAAA,CAAI,GAAJ,CAAA,CAAA,CAAA,CAAW,GAAX,CAAA;EALK;;AA1BT;;AAiCA,OAAA,QAAe",
+  "sourcesContent": [
+    "\nimport Differ   from './Differ.js';\nimport Solves   from './Solves.js';\nimport Basics   from './Basics.js';\n\nclass MathMgr\n\n  constructor:() ->\n    @debug = false\n\n  createExps:( page ) ->\n    # page.obj = if not page.obj? then @buildExps(page.key) else page.obj # flaky but not sure why\n    page.obj = @buildExps(page.key)\n    expsa    = page.obj.math()\n    i = 0\n    for own key, exp of expsa\n      exp.klass = @klass(i)\n      i++\n    console.log( 'MathND.createExp()', { obj:page.obj, exps:expsa } ) if @debug\n    expsa\n\n  buildExps:( key ) ->\n    switch key\n      when 'Basics'  then new Basics()\n      when 'Differ'  then new Differ()\n      when 'Solves'  then new Solves()\n      else\n        console.log( 'MathMgr.createExps() bad page.key', { key:key } )\n        new Basics()\n\n # Generate a row column layout class\n  klass: ( i ) ->\n    ncol = 3\n    mod  = i       % ncol\n    row  = (i-mod) / ncol + 1\n    col  = mod + 1\n    \"r#{row}c#{col}\"\n\nexport default MathMgr"
+  ]
+}

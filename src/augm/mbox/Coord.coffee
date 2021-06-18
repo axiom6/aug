@@ -203,7 +203,7 @@ class Coord
     obj =  { id:'domeColors', width:@width, height:@height, depth:@depth, channels:4 } #
     obj.expr  = ( emit, ang1, ang2, rad, i, j ) =>
       if j*360/@height <= 180
-        [r,g,b] = Vis.toRgbHsv( i*360/@width, j*360/@height, rad )
+        [r,g,b,a] = Vis.rgba( [i*360/@width, j*360/@height, rad ] )
         emit( r, g, b, 1 )
       else
         emit( 0, 0, 0, 0 )

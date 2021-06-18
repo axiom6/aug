@@ -7,7 +7,7 @@ class Palettes
 
     for group in Palettes.groupRgbs
       for color in group
-        color.rgb = Vis.cssRgb(color.hex)
+        color.rgb = Vis.rgb(color.hex)
     return
 
   @findColor:( name ) ->
@@ -47,7 +47,7 @@ class Palettes
     array = []
     for group in Palettes.groups
       for color in group
-        hsv = Vis.toHsvHex( color.hex )
+        hsv = Vis.hsv( color.hex )
         hsv[i] = Math.round(hsv[i]) for i in [0...3]
         str = """[#{hsv[0]},#{hsv[1]},#{hsv[2]}],"#{color.code}","#{color.hex}"\n """
         array.push(str)
