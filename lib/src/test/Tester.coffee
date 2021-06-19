@@ -247,7 +247,7 @@ class Tester
 
   objsEq:( result, expect, status, level ) ->
     for own key, obj of expect
-      if not  result[key]
+      if not  result[key]?
         status.assert.pass  = false
         status.assert.text  = "-- Failed -- Result key:#{key} is missing for " + status.assert.text
         status.expect.text  = "Expect type is #{@type(result)} with value #{expect}" # Does no work on objects

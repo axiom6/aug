@@ -238,7 +238,7 @@ Color = class Color {
   }
 
   genVecsRgb(see) {
-    var b, c, g, h, hcss, hue, j, k, l, len, len1, m, o, p, r, ref, ref1, rgbs, s, sf, ss;
+    var b, g, h, hcss, hue, j, k, l, len, len1, m, o, p, r, ref, ref1, rgbs, s, sf, v, vv;
     hcss = [];
     rgbs = [];
     sf = 1 / 255;
@@ -246,14 +246,14 @@ Color = class Color {
       for (r = j = 0; j <= 255; r = j += 15) {
         for (g = k = 0; k <= 255; g = k += 15) {
           for (b = l = 0; l <= 255; b = l += 15) {
-            [h, c, s] = Vis.hcv({
+            [h, s, v] = Vis.hsv({
               r: r,
               g: g,
               b: b
             });
             if (h % 15 <= 2 || h % 15 >= 13) {
-              ss = this.sScale(h, c, s);
-              hcss.push([Vis.rad(h - 2), c, ss, 1]);
+              vv = this.sScale(h, s, v);
+              hcss.push([Vis.rad(h - 2), s, vv, 1]);
               rgbs.push([r * sf, g * sf, b * sf, 1]);
             }
           }
@@ -264,12 +264,12 @@ Color = class Color {
       for (hue = m = 0; m < 360; hue = m += 15) {
         ref = [0, 16, 32, 48, 64, 80, 100];
         for (o = 0, len = ref.length; o < len; o++) {
-          c = ref[o];
+          s = ref[o];
           ref1 = [0, 16, 32, 48, 64, 80, 100];
           for (p = 0, len1 = ref1.length; p < len1; p++) {
-            s = ref1[p];
-            hcss.push([Vis.rad(hue + 2), c, s, 1]);
-            rgbs.push(Vis.rgba([hue, c, s]));
+            v = ref1[p];
+            hcss.push([Vis.rad(hue + 2), s, v, 1]);
+            rgbs.push(Vis.rgba([hue, s, v]));
           }
         }
       }
@@ -280,7 +280,7 @@ Color = class Color {
   // console.log( 'gpr', { r:r, g:g, b:b, hue:hue, c:Math.round(c), s:Math.round(s) } ) if c is 0
   // hRygb = h # @hueRygb( hue )
   genPolarRgb(scale = false) {
-    var b, c, g, h, hcss, j, k, l, r, rgbs, s, sf, ss;
+    var b, g, h, hcss, j, k, l, r, rgbs, s, sf, v, vv;
     hcss = [];
     rgbs = [];
     sf = 1 / 255;
@@ -288,11 +288,11 @@ Color = class Color {
       for (g = k = 0; k <= 255; g = k += 15) {
         for (b = l = 0; l <= 255; b = l += 15) {
           h = 0;
-          c = 0;
           s = 0;
-          [h, c, s] = Vis.hsv(r, g, b); // Hcs is a special color system
-          ss = scale ? this.sScale(h, c, s) : s;
-          hcss.push([Vis.rad(h), c, ss, 1]);
+          v = 0;
+          [h, s, v] = Vis.hsv(r, g, b); // Hsv is a special color system
+          vv = scale ? this.sScale(h, s, v) : v;
+          hcss.push([Vis.rad(h), s, vv, 1]);
           rgbs.push([r * sf, g * sf, b * sf, 1]);
         }
       }

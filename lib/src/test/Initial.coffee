@@ -29,10 +29,13 @@ class Initial
     tester.setOptions( { testing:true, logToConsoie:true, archive:true, verbose:false, debug:false } )
     tester.injectStream( Initial.stream )
     tester.injectNav(    Initial.nav    )
-    if tester.inViteJS                       # Can't pass glob pattern "/pub/**/*-unit.js" i.e.   into
+    tester.runUnitTestModulesFromPaths( ["/lib/pub/base/draw/Vis-unit.js"] )
+    ###
+    if tester.inViteJS                       # Can't pass glob pattern "/pub/xx/x-unit.js" i.e.   into
        tester.runUnitTestModulesWithViteJS() #  the ViteJS import.meta.glob()
     else
-       tester.runUnitTestModulesFromPaths( ["/pub/base/test/Tester-unit.js", "/pub/base/draw/Vis-unit.js"] )
+       tester.runUnitTestModulesFromPaths( ["/lib/pub/base/test/Tester-unit.js", "/lib/pub/base/draw/Vis-unit.js"] )
+    ###
     return
 
 export default Initial

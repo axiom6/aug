@@ -59,12 +59,12 @@ class Mix
           when 'south' then [60, 90, 90]
           else
             [30, 90, 90]
-    style = {backgroundColor: Vis.hex(hsv,'ysv')}
+    style = {backgroundColor: Vis.hex(hsv)}
     style['fontSize'] = fontSize + 'rem' if fontSize
     style
 
   toRgbaHsv: (hsv) ->
-    Vis.rgb(hsv,'ysv')
+    Vis.rgb(hsv)
 
   # Main
   app: () ->

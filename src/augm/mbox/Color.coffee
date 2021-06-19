@@ -129,17 +129,17 @@ class Color
       for r     in [0..255] by 15
         for g   in [0..255] by 15
           for b in [0..255] by 15
-            [h, c, s ] = Vis.hcv( { r:r, g:g, b:b } )
+            [h, s, v ] = Vis.hsv( { r:r, g:g, b:b } )
             if h%15 <= 2 or h%15 >= 13
-              ss         = @sScale( h, c, s )
-              hcss.push( [ Vis.rad(h-2), c, ss, 1 ] )
+              vv         = @sScale( h, s, v )
+              hcss.push( [ Vis.rad(h-2), s, vv, 1 ] )
               rgbs.push( [ r*sf, g*sf, b*sf, 1 ] )
     if see is 'two' or see is 'hsv'
       for hue   in [0...360] by 15
-        for c   in [0,16,32,48,64,80,100]
-          for s in [0,16,32,48,64,80,100]
-            hcss.push( [ Vis.rad(hue+2), c, s, 1 ] )
-            rgbs.push(   Vis.rgba( [hue,  c, s] ) )
+        for s   in [0,16,32,48,64,80,100]
+          for v in [0,16,32,48,64,80,100]
+            hcss.push( [ Vis.rad(hue+2), s, v, 1 ] )
+            rgbs.push(   Vis.rgba( [hue, s, v] ) )
     [hcss,rgbs]
 
   # console.log( 'gpr', { r:r, g:g, b:b, hue:hue, c:Math.round(c), s:Math.round(s) } ) if c is 0
@@ -151,10 +151,10 @@ class Color
     for r     in [0..255] by 15
       for g   in [0..255] by 15
         for b in [0..255] by 15
-          h = 0; c = 0; s = 0;
-          [h, c, s ] = Vis.hsv( r, g, b ) # Hcs is a special color system
-          ss         = if scale then @sScale( h, c, s ) else s
-          hcss.push( [ Vis.rad(h), c, ss, 1 ] )
+          h = 0; s = 0; v = 0;
+          [h, s, v ] = Vis.hsv( r, g, b ) # Hsv is a special color system
+          vv         = if scale then @sScale( h, s, v ) else v
+          hcss.push( [ Vis.rad(h), s, vv, 1 ] )
           rgbs.push( [ r*sf, g*sf, b*sf, 1 ] )
     [hcss,rgbs]
 

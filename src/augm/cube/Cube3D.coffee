@@ -12,7 +12,7 @@ class Cube3D
     box.applyMatrix( Cube3D.matrix )
     Cube3D.matrix.makeTranslation( @xyz[0], @xyz[1], @xyz[2] )
     box.applyMatrix( Cube3D.matrix )
-    hex = Vis.hex(  @hsv, 'ysv' )
+    hex = Vis.hex(  @hsv )
     col = new THREE.Color( hex )                    # blemding:THREE
     mat = new THREE.MeshPhongMaterial( { color:col, opacity:@opacity, transparent:true, side:THREE.BackSide } )
     @mesh = new THREE.Mesh( box, mat )
