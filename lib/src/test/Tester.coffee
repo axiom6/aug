@@ -270,27 +270,50 @@ class Tester
     status.assert.pass  = true
     return status
 
-  # Need to understand type() more
-  # We many want to consider class types and unknowns
-  type: do () ->
-    classToType = {}
-    for name in "Boolean Number String Function Object Array Date RegExp Undefined Null".split(" ")
-      classToType["[object " + name + "]"] = name.toLowerCase()
+  isNul:(d)       =>  @type(d) is   'null'
+  isUnd:(d)       =>  @type(d) is   'undefined'
+  isDef:(d)       =>  @type(d) isnt 'null' and @type(d) isnt 'undefined'
+  isNot:(d)       =>  not @isDef(d)
+  isStr:(s)       =>  @isDef(s) and @type(s) is "string" and s.length > 0 and s isnt 'None'
+  inStr:(s,e)     =>  @isStr(s) and s.indexOf(e) > -1
+  isNum:(n)       =>  @isDef(n) and @type(n) is "number"
+  isNaN:(n)       =>  @isNum(n) and Number.isNaN(n)
+  isObj:(o)       =>  @isDef(o) and @type(o) is "object"
+  inObj:(o,k)     =>  @isObj(o) and @isDef(o[k]) and o.hasOwnProperty(k)
+  toKeys:(o)      =>  if @isObj(o) then Object.keys(o) else []
+  isVal:(v)       =>  @type(v) is "number" or @type(v) is "string" or typeof(v) is "boolean"
+  isFunc:(f)      =>  @isDef(f) and @type(f) is "function"
+  isSym:(s)       =>  @isDef(s) and @type(s) is "symbol"
+  isEvent:(e)     =>  @isDef(e) and @type(e) is "event"
+  isArray:(a)     =>  @isDef(a) and @type(a) is "array" and a.length? and a.length > 0
+  inArray:(a,e)   =>  @isArray(a) and a.includes(e)
+  inRange:(a,i)   =>  @isArray(a) and 0 <= i and i < a.length
+  atIndex:(a,e)   =>  if @isArray(a) then a.indexOf(e) else -1
+  head:(a)        =>  if @isArray(a) then a[0]          else null
+  tail:(a)        =>  if @isArray(a) then a[a.length-1] else null
+  time:()         =>  new Date().getTime()
+  hasInteger:(s)  => @isStr(s) and /^\s*(\+|-)?\d+\s*$/.test(s)
+  hasFloat:(s)    => @isStr(s) and /^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$/.test(s)
+  hasCurrency:(s) => @isStr(s) and /^\s*(\+|-)?((\d+(\.\d\d)?)|(\.\d\d))\s*$/.test(s)
+  hasEmail:(s)    => @isStr(s) and /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/.test(s)
 
-    (obj) ->
-      strType = Object::toString.call(obj)
-      classToType[strType] or "object"
+  # Check if an object or array or string is empty
+  isEmpty:(e) =>
+    return false if @isNot(e)
+    switch @type(e)
+      when 'object' then Object.getOwnPropertyNames(e).length is 0
+      when 'array'  then e.length is 0
+      when 'string' then e.length is 0
+      else               false
 
-  isNul:(d) =>  @type(d) is   'null'
-  isUnd:(d) =>  @type(d) is   'undefined'
-  isDef:(d) =>  @type(d) isnt 'null' and @type(d) isnt 'undefined'
-  isNot:(d) =>  not @isDef(d)
-  isStr:(s) =>  @isDef(s) and @type(s) is "string" and s.length > 0 and s isnt 'None'
-  isNum:(n) =>  @isDef(n) and @type(n) is "number"
-  isNaN:(n) =>  @isNum(n) and Number.isNaN(n)
-  isObj:(o) =>  @isDef(o) and @type(o) is "object"
-  isVal:(v) =>  @type(v) is "number" or @type(v) is "string" or typeof(v) is "boolean"
-  isArr:(a) =>  @isDef(a) and @type(a) is "array" and a.length? and a.length > 0
+  # Checks for offical child key which starts with capital letter and isnt an _ or $
+  isChild: (key) =>
+    a = key.charAt(0)
+    b = key.charAt(key.length - 1)
+    a is a.toUpperCase() and a isnt '$' and b isnt '_'
+
+  isElement:(e)   =>
+    @isDef(e) and @type(e) is 'element' and @isDef(e['clientHeight']) and  e['clientHeight'] > 0
 
   textResult:( status ) ->
     "Result type is #{status.result.type} with value"
@@ -307,6 +330,36 @@ class Tester
   line:() ->
     console.log( 'Tester.line()', @error )
     return
+
+  # Need to understand type() more and optimize performance
+  # We many want to consider class types and   unknowns
+  type1:(obj) =>
+    key = Object::toString.call(obj).toLowerCase()
+    Tester.typeObjects[key] or "object"
+
+  type: do () =>
+    classToType = {}
+
+    for name in ["Boolean", "Number", "String", "Function", "Object", "Array", "Date",
+      "RegExp", "Symbol", "Event", "Element", "Undefined", "Null"]
+      classToType["[object " + name + "]"] = name.toLowerCase()
+
+    (obj) ->
+      strType = Object::toString.call(obj)
+      classToType[strType] or "object"
+
+Tester.types = ["Boolean", "Number", "String", "Function", "Object", "Array", "Date",
+  "RegExp", "Symbol", "Event", "Element", "Undefined", "Null"]
+
+Tester.typeVal = (key) =>
+  ["[object " + key + "]"]
+
+Tester.typeObjects = {
+  "boolean": Tester.typeVal("Boolean"),  "number":Tester.typeVal("Number"),   "string":Tester.typeVal("String"),
+  "function":Tester.typeVal("Function"), "object":Tester.typeVal("Object"),   "array": Tester.typeVal("Array"),
+  "date":    Tester.typeVal("Date"),     "regexp":Tester.typeVal("RegExp"),   "symbol":Tester.typeVal("Symbol"),
+  "event":   Tester.typeVal("Event"),    "element":Tester.typeVal("Element"), "undefined":Tester.typeVal("Undefined"),
+  "null":    Tester.typeVal("Null") }
 
 export tester = new Tester()
 test    = tester.test

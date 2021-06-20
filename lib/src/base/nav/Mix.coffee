@@ -1,6 +1,7 @@
 
-import Util from '../util/Util.js'
-import Vis  from '../../base/draw/Vis.js'
+import Util       from '../util/Util.js'
+import { tester } from '../../test/Tester.js'
+import Vis        from '../../base/draw/Vis.js'
 
 class Mix
 
@@ -8,29 +9,37 @@ class Mix
     Mix.Main =  Main
     @debug = false
 
-  # Util
-  isDef: (d) ->
-    d isnt null and typeof (d) isnt 'undefined' and d isnt 'None'
-  isStr: (s) ->
-    @isDef(s) and typeof (s) is "string" and s.length > 0
-  isFunc:(f) ->
-    @isDef(f) and typeof(f) is "function"
-  isArray: (a) ->
-    @isDef(a) and typeof (a) isnt "string" and a.length? and a.length > 0
-  inArray: (e, a) ->
-    @isArray(a) and a.indexOf(e) > -1
-  inObject:( name, obj ) ->
-    for own key,val of obj
-      return true if key is name
-    false
-  isChild: (key) ->
-    a = key.charAt(0)
-    b = key.charAt(key.length - 1)
-    a is a.toUpperCase() and a isnt '$' and b isnt '_'
-  keys: (obj) ->
-    Object.keys(obj)
-  hasElem: (elem) ->
-    elem? and elem['clientHeight']? and elem['clientHeight'] > 0
+  # tester instance for the best assertions
+  isNul:(d)       =>  tester.isNul(d)
+  isUnd:(d)       =>  tester.isUnd(d)
+  isDef:(d)       =>  tester.isDef(d)
+  isNot:(d)       =>  tester.isNot(d)
+  isStr:(s)       =>  tester.isStr(s)
+  inStr:(s,e)     =>  tester.inStr(s,e)
+  isNum:(n)       =>  tester.isNum(n)
+  isNaN:(n)       =>  tester.isNaN(n)
+  isObj:(o)       =>  tester.isObj(0)
+  inObj:(o,k)     =>  tester.inObj(o,k)
+  toKeys:(o)      =>  tester.toKeys(o)
+  isVal:(v)       =>  tester.isVal(v)
+  isFunc:(f)      =>  tester.isFunc(f)
+  isSym:(s)       =>  tester.isSym(s)
+  isEvent:(e)     =>  tester.isEvent(e)
+  isArray:(a)     =>  tester.isArray(a)
+  inArray:(a,e)   =>  tester.inArray(a,e)
+  inRange:(a,i)   =>  tester.inRange(a,i)
+  atIndex:(a,e)   =>  tester.atIndex(a,e)
+  head:(a)        =>  tester.head(a)
+  tail:(a)        =>  tester.tail(a)
+  time:()         =>  tester.time()
+  hasInteger:(s)  =>  tester.hasInteger(s)
+  hasFloat:(s)    =>  tester.hasInteger(s)
+  hasCurrency:(s) =>  tester.hasInteger(s)
+  hasEmail:(s)    =>  tester.Email(s)
+  isChild:(key)   => tester.isChild(key)
+  isElement:(e)   => tester.isElement(e)
+    
+
   getElem: ($refs, name) ->  # Not called
     elem = $refs[name]
     console.log('Mix.getElem() $refs[name]   ', $refs, elem, name)

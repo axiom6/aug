@@ -28,8 +28,8 @@ class Initial
     # Tester does the { test, unit, log, tester } exports
     tester.setOptions( { testing:true, logToConsoie:true, archive:true, verbose:false, debug:false } )
     tester.injectStream( Initial.stream )
-    tester.injectNav(    Initial.nav    )
-    tester.runUnitTestModulesFromPaths( ["/lib/pub/base/draw/Vis-unit.js"] )
+    tester.injectNav(    Initial.nav    ) #"/lib/pub/base/draw/Vis-unit.js"
+    tester.runUnitTestModulesFromPaths(   ["/lib/pub/test/Tester-unit.js"] )
     ###
     if tester.inViteJS                       # Can't pass glob pattern "/pub/xx/x-unit.js" i.e.   into
        tester.runUnitTestModulesWithViteJS() #  the ViteJS import.meta.glob()
