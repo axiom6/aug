@@ -9,11 +9,16 @@ class Tester
     @archive        = true
     @verbose        = false
     @debug          = false
-    @inViteJS       = @isDef(`import.meta.env`)
+    @inViteJS       = true # @isDef(`import.meta.env`)
 
+    @log          = console.log
     @module       = ""
     @suite        = ""
     @text         = null # set by test() that is passed inside eq() and sent to run()
+    @statusMsg    = ""
+    @sent         = false
+    @code         = ""
+    @called       = ""
     @passed       = []
     @failed       = []
     @nav          = null
@@ -51,6 +56,7 @@ class Tester
 
   unit:(  text, result, expect ) =>   # unit(...) is always @testing
     return @ if arguments.length == 0 # or not @testing -
+    @called = "unit"
     @run( text, result, expect )      # unit() is actually a synonym for run()
 
   unitLine:(  text, result, expect, error = new Error() ) =>   # unit(...) is always @testing
@@ -70,15 +76,17 @@ class Tester
 
   test:( text, closure ) =>
     return @ if arguments.length == 0 or not @testing
-    @text  = text     # @text is latter referenced inside eq()
+    @text   = text     # @text is latter referenced inside eq()
+    @code   = ""
+    @called = "test"
     @func( closure )
     @
 
   func:( closure ) =>
     str    = closure.toString()
     tokens = str.split("return t.")
-    eqCall = if tokens[1]? then tokens[1].substring( 0, tokens[1].length-3 ) else "?"
-    console.log( eqCall, closure, str, tokens[1] )
+    @code = if tokens[1]? then tokens[1].substring( 0, tokens[1].length-3 ) else ""
+    console.log( @code, closure, str, tokens[1] ) if @logToConsole and @verbose
 
   eq:( result, expect ) =>
     console.log( "Tester.eq()", { text:@text, result:result, expect:expect } ) if @debug
@@ -187,7 +195,7 @@ class Tester
     expectValue = if expectType isnt 'function' then expect else '? function(args...) ?'
     module      = text.split('.')[0]
     {
-      assert:{ text:text, pass:true, module:module }
+      assert:{ text:text, pass:true, module:module, code:"" }
       result:{ text:"", type:resultType, value:resultValue }
       expect:{ text:"", type:expectType, value:expectValue }
     }
@@ -226,11 +234,13 @@ class Tester
     # Update status at only level 0
     if status.assert.pass and level is 0
        status.assert.text = "-- Passed -- " + status.assert.text
+       status.assert.code = @code
        status.result.text = @textResult( status, result )
        status.expect.text = @textExpect( status, expect )
        @passed.push( status )
     else if level is 0
        status.assert.text = "-- Failed -- " + status.assert.text
+       status.assert.code = @
        status.result.text = @textResult( status, result )
        status.expect.text = @textExpect( status, expect )
        @failed.push( status )
@@ -238,12 +248,20 @@ class Tester
 
   report:( status ) ->
     @stream.publish( status ) if @isDef(@stream)
-    if @logToConsole
-       eq = if status.assert.pass then ' = ' else ' != '
-       console.log(         status.assert.text + eq, status.expect.value )
-       console.log( "   " + status.result.text, status.result.value ) if @verbose or not status.assert.pass
-       console.log( "   " + status.expect.text, status.expect.value ) if @verbose or not status.assert.pass
+    eq = if status.assert.pass then ' =  ' else ' != '
+    @statusMsg  =      """#{status.assert.text} #{eq} #{status.expect.value}"""
+    @statusMsg += """"\n  #{status.result.text} #{status.result.value}""" if @verbose or not status.assert.pass
+    @statusMsg += """"\n  #{status.expect.text} #{status.expect.value}""" if @verbose or not status.assert.pass
+    @statusMsg += "\n"+@code                          if @isStr(@code) and ( @verbose or not status.assert.pass )
+    console.log( @statusMsg ) # if @called is "test" or ( @logToConsole and not @sent )
+    @sent  = false
+    @code   = ""
+    @called = ""
     return
+
+  status:() ->
+    @sent = true
+    @statusMsg
 
   objsEq:( result, expect, status, level ) ->
     for own key, obj of expect
@@ -270,22 +288,21 @@ class Tester
     status.assert.pass  = true
     return status
 
-  isNul:(d)       =>  @type(d) is   'null'
-  isUnd:(d)       =>  @type(d) is   'undefined'
+  isType:(v,t)    =>  @type(v) is t
+  isNull:(d)      =>  @isType(d,'null')
+  isUndef:(d)     =>  @isType(d,'undefined')
   isDef:(d)       =>  @type(d) isnt 'null' and @type(d) isnt 'undefined'
   isNot:(d)       =>  not @isDef(d)
-  isStr:(s)       =>  @isDef(s) and @type(s) is "string" and s.length > 0 and s isnt 'None'
+  isStr:(s)       =>  @isType(s,"string") and s.length > 0 and s isnt 'None'
   inStr:(s,e)     =>  @isStr(s) and s.indexOf(e) > -1
-  isNum:(n)       =>  @isDef(n) and @type(n) is "number"
+  isNum:(n)       =>  @isType(n,"number")
   isNaN:(n)       =>  @isNum(n) and Number.isNaN(n)
-  isObj:(o)       =>  @isDef(o) and @type(o) is "object"
+  isObj:(o)       =>  @isType(o,"object")
   inObj:(o,k)     =>  @isObj(o) and @isDef(o[k]) and o.hasOwnProperty(k)
   toKeys:(o)      =>  if @isObj(o) then Object.keys(o) else []
-  isVal:(v)       =>  @type(v) is "number" or @type(v) is "string" or typeof(v) is "boolean"
-  isFunc:(f)      =>  @isDef(f) and @type(f) is "function"
-  isSym:(s)       =>  @isDef(s) and @type(s) is "symbol"
-  isEvent:(e)     =>  @isDef(e) and @type(e) is "event"
-  isArray:(a)     =>  @isDef(a) and @type(a) is "array" and a.length? and a.length > 0
+  isVal:(v)       =>  @isType(v,"number") or @isType(v,"string") or @isType(v,"boolean")
+  isFunc:(f)      =>  @isType(f,"function")
+  isArray:(a)     =>  @isType(a,"array") and a.length? and a.length > 0
   inArray:(a,e)   =>  @isArray(a) and a.includes(e)
   inRange:(a,i)   =>  @isArray(a) and 0 <= i and i < a.length
   atIndex:(a,e)   =>  if @isArray(a) then a.indexOf(e) else -1
@@ -300,7 +317,7 @@ class Tester
   # Check if an object or array or string is empty
   isEmpty:(e) =>
     return false if @isNot(e)
-    switch @type(e)
+    switch @isType(e)
       when 'object' then Object.getOwnPropertyNames(e).length is 0
       when 'array'  then e.length is 0
       when 'string' then e.length is 0
@@ -312,54 +329,38 @@ class Tester
     b = key.charAt(key.length - 1)
     a is a.toUpperCase() and a isnt '$' and b isnt '_'
 
-  isElement:(e)   =>
-    @isDef(e) and @type(e) is 'element' and @isDef(e['clientHeight']) and  e['clientHeight'] > 0
-
   textResult:( status ) ->
     "Result type is #{status.result.type} with value"
 
   textExpect:( status ) ->
     "Expect type is #{status.expect.type} with value"
 
-  # Will full implement later
-  log:( msg, args... ) ->
-    return if not @debug
-    console.log( msg, args )
-    return
-
   line:() ->
     console.log( 'Tester.line()', @error )
     return
 
-  # Need to understand type() more and optimize performance
-  # We many want to consider class types and   unknowns
-  type1:(obj) =>
-    key = Object::toString.call(obj).toLowerCase()
-    Tester.typeObjects[key] or "object"
+  # Will full implement later
+  logStatus:( msg, args... ) ->
+    return if not @debug
+    console.log( msg, args )
+    return
 
-  type: do () =>
-    classToType = {}
+  # Follow a typeof() convention by returning types in   lower case
+  # For basic types returned are boolean number string function object array date regexp undefined null
+  type:(val,lowerCase=true) =>
+    str = Object::toString.call(val)
+    tok = str.split(' ')[1]
+    typ = tok.substring(0,tok.length-1)
+    if lowerCase then typ.toLowerCase() else typ
 
-    for name in ["Boolean", "Number", "String", "Function", "Object", "Array", "Date",
-      "RegExp", "Symbol", "Event", "Element", "Undefined", "Null"]
-      classToType["[object " + name + "]"] = name.toLowerCase()
-
-    (obj) ->
-      strType = Object::toString.call(obj)
-      classToType[strType] or "object"
-
-Tester.types = ["Boolean", "Number", "String", "Function", "Object", "Array", "Date",
-  "RegExp", "Symbol", "Event", "Element", "Undefined", "Null"]
-
-Tester.typeVal = (key) =>
-  ["[object " + key + "]"]
-
-Tester.typeObjects = {
-  "boolean": Tester.typeVal("Boolean"),  "number":Tester.typeVal("Number"),   "string":Tester.typeVal("String"),
-  "function":Tester.typeVal("Function"), "object":Tester.typeVal("Object"),   "array": Tester.typeVal("Array"),
-  "date":    Tester.typeVal("Date"),     "regexp":Tester.typeVal("RegExp"),   "symbol":Tester.typeVal("Symbol"),
-  "event":   Tester.typeVal("Event"),    "element":Tester.typeVal("Element"), "undefined":Tester.typeVal("Undefined"),
-  "null":    Tester.typeVal("Null") }
+  klass:(val) =>
+    typ = @type(val,false) # Uppercase to screen for Null and Undefined
+    switch typ
+      when 'Null'      then 'Null'
+      when 'Undefined' then 'Undefined'
+      when "Function"  then val.name
+      when "Object"    then val.constructor.name
+      else                  typ
 
 export tester = new Tester()
 test    = tester.test
@@ -368,27 +369,77 @@ log     = tester.log
 
 export { test, unit, log }
 
-
 ###
 
-  # -- bdd -- Behavion Driven Design like Jasmine --
-  # Imports: import { bdd }     from "../test/Tester.js"
-  #          import Calculator  from "../calculator/Calculator.js"
-  #          const  calculator = new Calculator()
-  # Specify: bdd( text, closure )
-  # Example: bdd( 'can add two positive numbers', =>
-  #      result = calculator.add( 2, 3 )
-  #      bdd().expect(result).toBe( 5 )
+  type:(val,lowerCase=true) =>
+    str = Object::toString.call(val)
+    tok = str.split(' ')[1]
+    typ = tok.substring(0,tok.length-1)
+    if if lowerCase then typ.toLowerCase() else type
 
-  status.assert.text = "-- Passed -- #{status.result.type}s are equal for " + status.assert.text
-  status.assert.text = "-- Failed -- #{status.result.type}s are not equal for " + status.assert.text
 
-  expect:( result ) ->
-    @result = result
-    @
+  klass:(val) =>
+    typ = "Unknown"
+    try
+      typ = val.constructor.name
+    catch error
+      console.log( "Tester.class(val) name error", { val:val, error:error } )
+      typ = @type(val,false)
+    typ
 
-  toBe:( expect ) =>
-    @expect = expect
-    @
+  type:(val) =>
+    str = Object::toString.call(val).toLowerCase()
+    tok = str.split(' ')[1]
+    typ = tok.substring(0,tok.length-1)
+    # console.log( "Tester.type(val)", { val:val, str:str, tok:tok, typ:typ } )
+    typ
+
+  # Tester.types = ['Boolean','Number','String','Function','Object','Array','Date','RegExp','Undefined','Null']
+
+  # Experimental
+  # Return basic and class types in their original camel case
+  # Instances are return as Object
+  typeClass:(val) =>
+    typ = "Unknown"
+    try
+      typ = Object::toString.call(val)
+      typ = typ.split(' ')[1].substring(0,typ.length-1)
+    catch error
+      console.error( 'Tester.klass(val) call(val) error', { val:val, error:error } )
+    typ
+
+
+  type: do () =>
+    classToType = {}
+
+    for name in ["Boolean", "Number", "String", "Function", "Object", "Array", "Date",
+      "RegExp", "Symbol", "Event", "Element", "Undefined", "Null"]
+      classToType["[object " + name + "]"] = name.toLowerCase()
+
+    (val) ->
+      key = Object::toString.call(val)
+      typ = classToType[key] or "object"
+      console.log( "Tester.type()", { key:key, val:val, typ:typ } )
+      typ
+
+# -- bdd -- Behavion Driven Design like Jasmine --
+# Imports: import { bdd }     from "../test/Tester.js"
+#          import Calculator  from "../calculator/Calculator.js"
+#          const  calculator = new Calculator()
+# Specify: bdd( text, closure )
+# Example: bdd( 'can add two positive numbers', =>
+#      result = calculator.add( 2, 3 )
+#      bdd().expect(result).toBe( 5 )
+
+status.assert.text = "-- Passed -- #{status.result.type}s are equal for " + status.assert.text
+status.assert.text = "-- Failed -- #{status.result.type}s are not equal for " + status.assert.text
+
+expect:( result ) ->
+@result = result
+@
+
+toBe:( expect ) =>
+@expect = expect
+@
 
 ###

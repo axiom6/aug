@@ -412,6 +412,17 @@
       "oAP" : "\/lib\/src\/test\/bdd.txt",
       "oF" : 0
     },
+    "\/lib\/src\/test\/chain.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/src\/test\/chain-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/lib\/src\/test\/Config.js" : {
       "bF" : 0,
       "ft" : 64,

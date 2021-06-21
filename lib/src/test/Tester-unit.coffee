@@ -1,5 +1,10 @@
 
 import { unit, test, tester } from './Tester.js'     # Only importing tester to unit test it
+import Stream from "../base/util/Stream.js"
+import Mix    from "../base/nav/Mix.js"
+import Nav    from "../base/nav/Nav.js"
+import Vis    from '../base/draw/Vis.js'
+
 
 # In this context all unit tests are executed immediately when this module is either
 #   dynaically  imported i.e module = import(path) - recommended
@@ -10,55 +15,81 @@ import { unit, test, tester } from './Tester.js'     # Only importing tester to 
 #   JavaScript .js
 
 
-
-test().describe('tester-unit.js', 'unit tests' )
-
-#Type tests ["Boolean", "Number", "String", "Function", "Object", "Array",
-#  "RegExp", "Date", "Symbol", "Event", "Element", "Undefined", "Null"]
+t = tester
+test().describe('t-unit.js', 'unit tests' )
 
 func  = () ->
 undef = undefined # Not sure how to test for undefined
 
-unit( "tester.type(true)",          tester.type(true),          'boolean'   )
-unit( "tester.type(123)",           tester.type(123),           'number'    )
-unit( "tester.type('123')",         tester.type('123'),         'string'    )
-unit( "tester.type(func)",          tester.type(func),          'function'  )
-unit( "tester.type({a:'a'})",       tester.type({a:'a'}),       'object'    )
-unit( "tester.type([1,2,3]",        tester.type([1,2,3]),       'array'     )
-unit( "tester.type(/x/)",           tester.type(/x/),           'regexp'    )
-unit( "tester.type(new Date())",    tester.type(new Date()),    'date'      )
-#nit( "tester.type(new Event())",   tester.type(new Event()),   'event'     )
-#nit( "tester.type(new Element())", tester.type(new Element()), 'element'   )
-unit( "tester.type(undef)",         tester.type(undef),         'undefined' )
-unit( "tester.type(null)",          tester.type(null),          'null'      )
+class Main
+  @init = () =>
+
+subjects   = ["Nav","Test"]
+streamLog  = { subscribe:false, publish:false, subjects:subjects }
+stream     = new Stream( subjects, streamLog )
+mix        = new Mix( Main )
+nav        = new Nav( stream, mix )
+
+unit( "t.type(true)",       t.type(true),          'boolean'   )
+unit( "t.type(123)",        t.type(123),           'number'    )
+unit( "t.type('123')",      t.type('123'),         'string'    )
+unit( "t.type(func)",       t.type(func),          'function'  )
+unit( "t.type({a:'a'})",    t.type({a:'a'}),       'object'    )
+unit( "t.type([1,2,3]",     t.type([1,2,3]),       'array'     )
+unit( "t.type(/x/)",        t.type(/x/),           'regexp'    )
+unit( "t.type(new Date())", t.type(new Date()),    'date'      )
+unit( "t.type(undef)",      t.type(undef),         'undefined' )
+unit( "t.type(null)",       t.type(null),          'null'      )
+
+unit( "t.type(stream)",     t.type(stream),        'object'    )
+unit( "t.type(Stream)",     t.type(Stream),        'function'  )
+unit( "t.type(tester)",     t.type(tester),        'object'    )
+unit( "t.type(Vis)",        t.type(Vis),           'function'  )
+
+unit( "t.klass(true)",       t.klass(true),        'Boolean'   )
+unit( "t.klass(123)",        t.klass(123),         'Number'    )
+unit( "t.klass('123')",      t.klass('123'),       'String'    )
+unit( "t.klass(func)",       t.klass(func),        'func'      )
+unit( "t.klass({a:'a'})",    t.klass({a:'a'}),     'Object'    )
+unit( "t.klass([1,2,3]",     t.klass([1,2,3]),     'Array'     )
+unit( "t.klass(/x/)",        t.klass(/x/),         'RegExp'    )
+unit( "t.klass(new Date())", t.klass(new Date()),  'Date'      )
+unit( "t.klass(undef)",      t.klass(undef),       'Undefined' )
+unit( "t.klass(null)",       t.klass(null),        'Null'      )
+
+unit( "t.klass(stream)",     t.klass(stream),      'Stream'     )
+unit( "t.klass(Stream)",     t.klass(Stream),      'Stream'     )
+unit( "t.klass(tester)",     t.klass(tester),      'Tester'     )
+unit( "t.klass(tester)",     t.klass(tester.type), 'bound type' )
+unit( "t.klass(Vis)",        t.klass(Vis),         'Vis'        )
+
 
 # Positive true tests
-
-unit( "tester.isNul(null)",    tester.isNul(null),    true  )
-unit( "tester.isUnd(xxxx)",    tester.isUnd(undef),   true  )
-unit( "tester.isNot(null)",    tester.isNot(null),    true  )
-unit( "tester.isStr('abc')",   tester.isStr('abc'),   true  )
-unit( "tester.isNum(12345)",   tester.isNum(12345),   true  )
-unit( "tester.isNaN(NaN)",     tester.isNaN(NaN),     true  )
-unit( "tester.isObj({a:'a'})", tester.isObj({a:'a'}), true  )
-unit( "tester.isVal( 123 )",   tester.isVal( 123 ),   true  )
-unit( "tester.isVal('123')",   tester.isVal('123'),   true  )
-unit( "tester.isVal(true)",    tester.isVal(true),    true  )
-unit( "tester.isVal(false)",   tester.isVal(false),   true  )
-unit( "tester.isArr([1,2,3])", tester.isArray([1,2,3]), true  )
+unit( "t.isNull(null)",     t.isNull(null),     true  )
+unit( "t.isUndef(xxxx)",    t.isUndef(undef),   true  )
+unit( "t.isNot(null)",      t.isNot(null),      true  )
+unit( "t.isStr('abc')",     t.isStr('abc'),     true  )
+unit( "t.isNum(12345)",     t.isNum(12345),     true  )
+unit( "t.isNaN(NaN)",       t.isNaN(NaN),       true  )
+unit( "t.isObj({a:'a'})",   t.isObj({a:'a'}),   true  )
+unit( "t.isVal( 123 )",     t.isVal( 123 ),     true  )
+unit( "t.isVal('123')",     t.isVal('123'),     true  )
+unit( "t.isVal(true)",      t.isVal(true),      true  )
+unit( "t.isVal(false)",     t.isVal(false),     true  )
+unit( "t.isArray([1,2,3])", t.isArray([1,2,3]), true  )
 
 # Negative true tests
-unit( "tester.isNul('abc')",   tester.isNul('abc'),   false )
-unit( "tester.isUnd(12345)",   tester.isUnd(12345),   false )
-unit( "tester.isNot({a:'a'}",  tester.isNot({a:'a'}), false )
-unit( "tester.isStr( 123 )",   tester.isStr( 123 ),   false )
-unit( "tester.isNum('123')",   tester.isNum('123'),   false )
-unit( "tester.isNaN( 123 )",   tester.isNaN( 123 ),   false )
-unit( "tester.isObj(123)",     tester.isObj(123),     false )
-unit( "tester.isVal({a:'a'})", tester.isVal({a:'a'}), false )
-unit( "tester.isVal([1,2,3])", tester.isVal([1,2,3]), false )
-unit( "tester.isVal([1,2,3])", tester.isVal([1,2,3]), false )
-unit( "tester.isArr({a:'a'})", tester.isArray({a:'a'}), false )
+unit( "t.isNull('abc')",    t.isNull('abc'),    false )
+unit( "t.isUndef(12345)",   t.isUndef(12345),   false )
+unit( "t.isNot({a:'a'}",    t.isNot({a:'a'}),   false )
+unit( "t.isStr( 123 )",     t.isStr( 123 ),     false )
+unit( "t.isNum('123')",     t.isNum('123'),     false )
+unit( "t.isNaN( 123 )",     t.isNaN( 123 ),     false )
+unit( "t.isObj(123)",       t.isObj(123),       false )
+unit( "t.isVal({a:'a'})",   t.isVal({a:'a'}),   false )
+unit( "t.isVal([1,2,3])",   t.isVal([1,2,3]),   false )
+unit( "t.isVal([1,2,3])",   t.isVal([1,2,3]),   false )
+unit( "t.isArray({a:'a'})", t.isArray({a:'a'}), false ).log( unit().status() )
 
 five = () ->
   5
@@ -70,12 +101,12 @@ test(  "five() = 5", (t) ->
   t.eq( five(),  5 ) )
 
 test(  "add(2,3) = 5", (t) ->
-  t.eq( add(2,3),  5 ) )
+  t.eq( add(2,3),  5 ) ).log( test().status() )
 
 test(  "tester.type(123)", (t) ->
   t.eq( tester.type(123),  'number' ) )
-
-unit().summary('tester')
+  
+unit().summary('t')
 
 
 
