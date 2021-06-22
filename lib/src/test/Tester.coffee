@@ -4,27 +4,34 @@ class Tester
   constructor:() ->
 
     # Key settings that are reconfigured through setOptions( options )
-    @testing        = true
-    @logToConsole   = true
-    @archive        = true
-    @verbose        = false
-    @debug          = false
+    @testing      = true  # When false all testing is turned which allows tests to remain in code
+    @logToConsole = true  # Contols logging to console
+    @archive      = true  # When true archived test status object to localStorage TestsPassed and TestFail
+    @verbose      = false # Adds addition and sometimes mind numbing detail to testStatus objects
+    @debug        = false # Turns on debugs call to console.log(...)
+
+    # When true Tester leverage addiion ViteJS capabilies
     @inViteJS       = true # @isDef(`import.meta.env`)
 
+    # Short hand in @test closures and chained calls that reference codes in modules being tested
     @log          = console.log
-    @module       = ""
+    @error        = console.error
+
+    # Set by @describe()
+    @description  = ""
     @suite        = ""
+
+    # Test status values
     @text         = null # set by test() that is passed inside eq() and sent to run()
-    @statusMsg    = ""
-    @sent         = false
+    @statusText   = ""
+    @statusCalled = false
     @code         = ""
-    @called       = ""
     @passed       = []
     @failed       = []
-    @nav          = null
+
+    # optional instance for publishing each test status object to to UIs that subscripe to stream
+    # set by @injectStream(stream) which enforces that it have @klass 'Stream'
     @stream       = null
-    @mix          = null
-    @batch        = null
 
   setOptions:( options ) ->
     @testing        = if options.testing?        then options.testing        else true
@@ -33,36 +40,6 @@ class Tester
     @verbose        = if options.verbose?        then options.verbose        else false
     @debug          = if options.debug?          then options.debug          else false
     return
-
-  injectStream:( stream ) ->
-    return
-    @stream  = stream
-    return
-
-  injectNav:(  nav ) ->
-    return
-    @nav     = nav
-    @stream  = nav.stream
-    @mix     = nav.mix
-    @batch   = nav.batch
-    return
-
-  # -- unit -- For invoking the result argument immediately in a module-unit.js file
-  #
-  # Imports: import { unit } from "../test/Tester.js"
-  #          import Vis      from "../draw/Vis.js"
-  # Specify: unit( text, result, expect )
-  # Example: unit( "can convert hex color to rgb object",  Vis.rgb(0xFFFFFF), {r:255,g:255,b:255} )
-
-  unit:(  text, result, expect ) =>   # unit(...) is always @testing
-    return @ if arguments.length == 0 # or not @testing -
-    @called = "unit"
-    @run( text, result, expect )      # unit() is actually a synonym for run()
-
-  unitLine:(  text, result, expect, error = new Error() ) =>   # unit(...) is always @testing
-    return @ if arguments.length == 0 # or not @testing -
-    @line( error )
-    @run( text, result, expect )      # unit() is actually a synonym for run()
 
   # -- test -- Pass a closeure in the form of  (t) => { code... }
   # Modeled like the Ava JavaScipt test framework
@@ -75,37 +52,44 @@ class Tester
   #     t.eq( add(2,3), 5 ) )
 
   test:( text, closure ) =>
-    return @ if arguments.length == 0 or not @testing
-    @text   = text     # @text is latter referenced inside eq()
-    @code   = ""
-    @called = "test"
-    @func( closure )
+    return @ if arguments.length is 0 or not @testing
+    @text     = text               # @text is latter referenced inside eq()
+    @code     = closure.toString() # @code is latter referenced inside eq()
+    closure(@)
     @
 
-  func:( closure ) =>
-    str    = closure.toString()
-    tokens = str.split("return t.")
-    @code = if tokens[1]? then tokens[1].substring( 0, tokens[1].length-3 ) else ""
-    console.log( @code, closure, str, tokens[1] ) if @logToConsole and @verbose
+  # -- unit -- For invoking the result argument immediately in a module-unit.js file
+  #
+  # Imports: import { unit } from "../test/Tester.js"
+  #          import Vis      from "../draw/Vis.js"
+  # Specify: unit( text, result, expect )
+  # Example: unit( "can convert hex color to rgb object",  Vis.rgb(0xFFFFFF), {r:255,g:255,b:255} )
+
+  unit:(  text, result, expect ) =>   # unit(...) is always @testing
+    return @ if arguments.length is 0 # or not @testing -
+    @text   = text
+    @code   = ""
+    @run( text, result, expect )
+    @status( true )
+    @
 
   eq:( result, expect ) =>
-    console.log( "Tester.eq()", { text:@text, result:result, expect:expect } ) if @debug
-    @run( @text, result, expect )  # @text is set by test()
+    @run( @text, result, expect, @code )  # @text and @code are set by @test() and @unit()
 
-  run:( text, result, expect ) =>
+  run:( text, result, expect, code ) =>
     return @ if arguments.length == 0 or not @testing
     console.log( "Tester.run()", { text:text, result:result, expect:expect } ) if @debug
     if @isNot(text) or @isNot(result) or @isNot(expect)
       console.error( "Tester.run() undefine arg(s)", { text:text, result:result, expect:expect } )
       return @
-    status = @initStatus( result, expect, text   )
-    status = @assert(     result, expect, status )
-    @report( status )
+    status = @initStatus( result, expect, text, code )
+    status = @assert(     result, expect, status     )
+    @report( status, result, expect )
     @ # Provides access to tester instance for chaining
 
-  describe:(  module, suite=null ) =>
-    @module = module
-    @suite  = if suite? then suite else null
+  describe:( description, suite=null ) =>
+    @description = description
+    @suite       = if suite? then suite else null
     @
 
   summary:( module=null ) =>
@@ -115,7 +99,7 @@ class Tester
       ++passCount for pass in @passed when pass.assert.module is module
       ++failCount for fail in @failed when fail.assert.module is module
       fullCount = passCount + failCount
-      console.log( '-- Summary - for', module )
+      console.log( "-- Summary - for", module )
       console.log( '   ', @pad(passCount,fullCount) + ' tests passed' )
       console.log( '   ', @pad(failCount,fullCount) + ' tests failed' )
       console.log( '   ', @pad(fullCount,fullCount) + ' tests total'  )
@@ -126,8 +110,8 @@ class Tester
       console.log( '   ', @pad(@failed.length,fullCount) + ' tests failed' )
       console.log( '   ', @pad(fullCount,     fullCount) + ' tests total'  )
       if @archive
-         @archiveLocal(  @failed,     @passed )  # Good place to archive with all tests complete
-         @reviewsLocal( { failed:true, passed:false } )
+         @archiveLocal(  @failed,      @passed )  # Good place to archive with all tests complete
+         @reviewsLocal( { failed:false, passed:false } )
     @
 
   archiveLocal:( failed, passed ) =>
@@ -136,19 +120,16 @@ class Tester
     return
 
   reviewsLocal:( reviewFailed, reviewPassed ) ->
-
     if reviewFailed
       failLocals = localStorage.getItem( 'TestsFailed' )
       if failLocals?
         failStatuses = JSON.parse( failLocals )
         console.log( failStatus ) for failStatus in failStatuses
-
     if reviewPassed
       passLocals = localStorage.getItem( 'TestsPassed' )
       if passLocals?
         passStatuses = JSON.parse( passLocals )
         console.log( passStatus ) for passStatus in passStatuses
-
     return
 
   # At present this is vite.js dependent with import.meta.glob() and its dynamic await importer
@@ -188,16 +169,14 @@ class Tester
   numDigits:( n ) ->
     Math.max( Math.floor( Math.log10( Math.abs(n) ) ), 0 ) + 1
 
-  initStatus:( result, expect, text ) ->
+  initStatus:( result, expect, text, code ) ->
     resultType  = @type(result)
     expectType  = @type(expect)
-    resultValue = if resultType isnt 'function' then result else '? function(args...) ?'
-    expectValue = if expectType isnt 'function' then expect else '? function(args...) ?'
     module      = text.split('.')[0]
     {
-      assert:{ text:text, pass:true, module:module, code:"" }
-      result:{ text:"", type:resultType, value:resultValue }
-      expect:{ text:"", type:expectType, value:expectValue }
+      assert:{ text:text, pass:true, module:module, code:code }
+      result:{ text:"", type:resultType, value:result }
+      expect:{ text:"", type:expectType, value:expect }
     }
 
   assert:( result, expect, status, level=0 ) =>
@@ -205,7 +184,7 @@ class Tester
     # Define checks
     if @isNot(result) or @isNot(expect)
        status.assert.pass = false
-       status.assert.text = "-- Failed -- because of null or undefined values fot" + status.assert.text
+       status.assert.text = "-- Failed -- because of null or undefined values for" + status.assert.text
        status.result.text = @textResult( status, result )
        status.expect.text = @textExpect( status, expect )
        @failed.push( status )
@@ -240,29 +219,41 @@ class Tester
        @passed.push( status )
     else if level is 0
        status.assert.text = "-- Failed -- " + status.assert.text
-       status.assert.code = @
+       status.assert.code = @code
        status.result.text = @textResult( status, result )
        status.expect.text = @textExpect( status, expect )
        @failed.push( status )
     status
 
-  report:( status ) ->
+  report:( status, result, expect ) ->
     @stream.publish( status ) if @isDef(@stream)
-    eq = if status.assert.pass then ' =  ' else ' != '
-    @statusMsg  =      """#{status.assert.text} #{eq} #{status.expect.value}"""
-    @statusMsg += """"\n  #{status.result.text} #{status.result.value}""" if @verbose or not status.assert.pass
-    @statusMsg += """"\n  #{status.expect.text} #{status.expect.value}""" if @verbose or not status.assert.pass
-    @statusMsg += "\n"+@code                          if @isStr(@code) and ( @verbose or not status.assert.pass )
-    console.log( @statusMsg ) # if @called is "test" or ( @logToConsole and not @sent )
-    @sent  = false
-    @code   = ""
-    @called = ""
+    eq = if status.assert.pass then 'is' else 'not'
+    @statusText  =       """#{status.assert.text} #{eq} #{expect} """
+    @statusText += """"\n   #{@textResult( status, result ) }""" if @verbose or not status.assert.pass
+    @statusText += """"\n   #{@textExpect( status, expect ) }""" if @verbose or not status.assert.pass
+    @statusText += "\n"+@code                if @isStr(@code) and ( @verbose or not status.assert.pass )
+    @statusCalled  = false
     return
 
-  status:() ->
-    @sent = true
-    @statusMsg
+  # Need to work on another way to console.log( @statusText ) when @status is not called in a unit test
+  status:( wait=null) ->
+    if @isNull(wait)
+      @statusCalled = true
+    else if @logToConsole
+      # @sleep( 1000 ).then( console.log( @statusText )  )
+      console.log( @statusText ) if not @statusCalled
+    @statusText
 
+  sleep:(ms) ->
+    new Promise( (resolve) => setTimeout( resolve, ms ) )
+
+  textResult:( status, result ) ->
+    """Result type is #{status.result.type} with value #{result}"""
+
+  textExpect:( status, expect ) ->
+    """Expect type is #{status.expect.type} with value #{expect}"""
+
+  # Deep object equality assertion
   objsEq:( result, expect, status, level ) ->
     for own key, obj of expect
       if not  result[key]?
@@ -276,6 +267,7 @@ class Tester
     status.assert.pass  = true
     return status
 
+  # Deep array equality assertion
   arrsEq:( result, expect, status, level ) ->
     if result.length isnt expect.length
       status.assert.pass = false
@@ -288,6 +280,7 @@ class Tester
     status.assert.pass  = true
     return status
 
+  # Type Assertions that leverage @type(arg) the improved typeof(arg)
   isType:(v,t)    =>  @type(v) is t
   isNull:(d)      =>  @isType(d,'null')
   isUndef:(d)     =>  @isType(d,'undefined')
@@ -329,11 +322,75 @@ class Tester
     b = key.charAt(key.length - 1)
     a is a.toUpperCase() and a isnt '$' and b isnt '_'
 
-  textResult:( status ) ->
-    "Result type is #{status.result.type} with value"
+  # A big improvement over typeof() that follows the convention by returning types in lower case by default
+  # For basic types returned are boolean number string function object array date regexp undefined null
+  type:(val,lowerCase=true) =>
+    str = Object::toString.call(val)
+    tok = str.split(' ')[1]
+    typ = tok.substring(0,tok.length-1)
+    if lowerCase then typ.toLowerCase() else typ
 
-  textExpect:( status ) ->
-    "Expect type is #{status.expect.type} with value"
+  # A more detail type that returns basic types, class, object and function name in upper case
+  klass:(val) =>
+    typ = @type(val,false) # Start with basic type to catch 'Null' and 'Undefined'
+    switch typ
+      when 'Null'      then 'Null'
+      when 'Undefined' then 'Undefined'
+      when "Function"  then val.name
+      when "Object"    then val.constructor.name
+      else                  typ
+
+  # Stream is an optional libary for publising statusObject to UIs like RxJS
+  injectStream:( stream ) ->
+    type = @klass(stream)
+    if type is "Stream"
+      @stream  = stream
+    else
+      console.error( "Tester.injectStream( stream ) stream klass must be 'Stream not", type )
+    return
+
+# -- ES6 exports for single tester instance and its test() and unit() methods
+
+# This construct only instanciates tester once on its first import
+#   subseqent imports get this single instance that holds all testing state
+export tester = new Tester()
+test = tester.test
+unit = tester.unit
+export { test, unit }
+
+###
+    resultValue = if resultType isnt 'function' then result else '? function(args...) ?'
+    expectValue = if expectType isnt 'function' then expect else '? function(args...) ?'
+
+  injectNav:(  nav ) ->
+    return
+    @nav     = nav
+    @stream  = nav.stream
+    @mix     = nav.mix
+    @batch   = nav.batch
+    return
+
+  toFunc:( closure ) =>
+    @code = @codeClosure( closure )
+    cstr = closure.toString()
+    toks = cstr.split( "return ")
+    body = toks[1].substring( 0, toks[1].length-3 )  # Removes trailing ;
+    body = body + ".log( t.status() );"
+    func = new Function( "t", body ) # "func = function(t) {" + body + "}"
+    console.log( { cstr:cstr, body:body, fstr:func.toString(), ftype:@type(func) } ) if @debug
+    func
+
+  toCode:( closure ) =>
+    str  = closure.toString()
+    toks = str.split("return t.")
+    code = if toks[1]? then toks[1].substring( 0, toks[1].length-3 ) else ""
+    console.log( "Tester.codeClosure(closure)", { code:code, closur:closure } ) if @debug
+    code
+
+  unitLine:(  text, result, expect, error = new Error() ) =>
+    return @ if arguments.length == 0 # or not @testing -
+    @line( error )
+    @run( text, result, expect )      # unit() is actually a synonym for run()
 
   line:() ->
     console.log( 'Tester.line()', @error )
@@ -344,32 +401,6 @@ class Tester
     return if not @debug
     console.log( msg, args )
     return
-
-  # Follow a typeof() convention by returning types in   lower case
-  # For basic types returned are boolean number string function object array date regexp undefined null
-  type:(val,lowerCase=true) =>
-    str = Object::toString.call(val)
-    tok = str.split(' ')[1]
-    typ = tok.substring(0,tok.length-1)
-    if lowerCase then typ.toLowerCase() else typ
-
-  klass:(val) =>
-    typ = @type(val,false) # Uppercase to screen for Null and Undefined
-    switch typ
-      when 'Null'      then 'Null'
-      when 'Undefined' then 'Undefined'
-      when "Function"  then val.name
-      when "Object"    then val.constructor.name
-      else                  typ
-
-export tester = new Tester()
-test    = tester.test
-unit    = tester.unit
-log     = tester.log
-
-export { test, unit, log }
-
-###
 
   type:(val,lowerCase=true) =>
     str = Object::toString.call(val)

@@ -28,7 +28,7 @@ class Vis
     if tester.isObj(arg)
       rgb   = arg
       rgb.a = if arg.a? then arg.a else 1.0
-    else if tester.isArr(arg)
+    else if tester.isArray(arg)
       isRYGB = arg.length is 3  # 3 implies RYGB hue while 4 implies RGB hue
       rgb   = Vis.rgbHsv( arg[0], arg[1], arg[2], isRYGB )
       rgb.a = if arg.length is 4 then arg[3] else 1.0

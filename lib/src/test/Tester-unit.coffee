@@ -5,18 +5,38 @@ import Mix    from "../base/nav/Mix.js"
 import Nav    from "../base/nav/Nav.js"
 import Vis    from '../base/draw/Vis.js'
 
-
 # In this context all unit tests are executed immediately when this module is either
 #   dynaically  imported i.e module = import(path) - recommended
 # or statically imported i.e inport module from path
 
-# Module.js transpiled from Module.coffee will dynamically import this module
-#   using a glob pattern like "/src/**/*-unit.js"  or "/pub/**/*-unit.js" for transpiled
-#   JavaScript .js
+# runUnitTestModulesFromPaths:( paths ) will dynamically import this module
+#   with paths = ["/lib/pub/test/Tester-unit.js"]
+# For glob file patterns running in ViteJS there is
+# runUnitTestModulesWithViteJS:() will dynamically import this module
+#   using a glob pattern like "/src/**/*-unit.js"  or "/pub/**/*-unit.js"
 
+# t = tester
+test().describe('Tester-unit.js', 'unit tests' )
 
-t = tester
-test().describe('t-unit.js', 'unit tests' )
+unit( "Tester.type(true)",  tester.type(true), 'boolean' ).log( unit().status() )
+
+five = () ->
+  5
+
+add  = ( a, b ) ->
+  a + b
+
+test(  "Tester.five() = 5", (t) ->
+  t.eq( five(), 5 ).log( t.status() )  )
+
+test(  "Tester.add(2,3) = 5", (t) ->
+  t.eq( add(2,3), 5 ).log( t.status() ) )
+
+test(  "Tester.type(123)", (t) ->
+  t.eq( tester.type(123), 'number' ).error( t.status() ) )
+
+test().summary('Tester')
+
 
 func  = () ->
 undef = undefined # Not sure how to test for undefined
@@ -29,6 +49,7 @@ streamLog  = { subscribe:false, publish:false, subjects:subjects }
 stream     = new Stream( subjects, streamLog )
 mix        = new Mix( Main )
 nav        = new Nav( stream, mix )
+t          = tester
 
 unit( "t.type(true)",       t.type(true),          'boolean'   )
 unit( "t.type(123)",        t.type(123),           'number'    )
@@ -63,7 +84,6 @@ unit( "t.klass(tester)",     t.klass(tester),      'Tester'     )
 unit( "t.klass(tester)",     t.klass(tester.type), 'bound type' )
 unit( "t.klass(Vis)",        t.klass(Vis),         'Vis'        )
 
-
 # Positive true tests
 unit( "t.isNull(null)",     t.isNull(null),     true  )
 unit( "t.isUndef(xxxx)",    t.isUndef(undef),   true  )
@@ -88,25 +108,11 @@ unit( "t.isNaN( 123 )",     t.isNaN( 123 ),     false )
 unit( "t.isObj(123)",       t.isObj(123),       false )
 unit( "t.isVal({a:'a'})",   t.isVal({a:'a'}),   false )
 unit( "t.isVal([1,2,3])",   t.isVal([1,2,3]),   false )
-unit( "t.isVal([1,2,3])",   t.isVal([1,2,3]),   false )
-unit( "t.isArray({a:'a'})", t.isArray({a:'a'}), false ).log( unit().status() )
-
-five = () ->
-  5
-
-add  = ( a, b ) ->
-  a + b
-
-test(  "five() = 5", (t) ->
-  t.eq( five(),  5 ) )
-
-test(  "add(2,3) = 5", (t) ->
-  t.eq( add(2,3),  5 ) ).log( test().status() )
-
-test(  "tester.type(123)", (t) ->
-  t.eq( tester.type(123),  'number' ) )
+unit( "t.isVal([1,2,3])",   t.isVal([1,2,3]),   true  )
+unit( "t.isArray({a:'a'})", t.isArray({a:'a'}), true  )
   
 unit().summary('t')
+
 
 
 

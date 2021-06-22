@@ -2,8 +2,6 @@
 import { tester } from './Tester.js'
 
 import Stream from '../base/util/Stream.js'
-import Mix    from '../base/nav/Mix.js'
-import Nav    from '../base/nav/Nav.js'
 
 # git remote set-url origin 'https://axiom-muse:Axiom66#@github.com/axiom6-muse/viz.git'
 
@@ -19,17 +17,15 @@ class Initial
     return
 
   Initial.init =   () ->
-    subjects              = ["Nav","Test"]
-    streamLog             = { subscribe:false, publish:false, subjects:subjects }
-    Initial.stream     = new Stream( subjects, streamLog )
-    Initial.mix        = new Mix( Initial )
-    Initial.nav        = new Nav( Initial.stream, Initial.mix )
+    subjects        = ["Nav","Test"]
+    streamLog       = { subscribe:false, publish:false, subjects:subjects }
+    Initial.stream  = new Stream( subjects, streamLog )
 
     # Tester does the { test, unit, log, tester } exports
     tester.setOptions( { testing:true, logToConsoie:true, archive:true, verbose:false, debug:false } )
     tester.injectStream( Initial.stream )
-    tester.injectNav(    Initial.nav    ) #"/lib/pub/base/draw/Vis-unit.js"
-    tester.runUnitTestModulesFromPaths(   ["/lib/pub/test/Tester-unit.js"] )
+    paths = ["/lib/pub/test/Tester-unit.js","/lib/pub/base/draw/Vis-unit.js"]
+    tester.runUnitTestModulesFromPaths( paths )
     ###
     if tester.inViteJS                       # Can't pass glob pattern "/pub/xx/x-unit.js" i.e.   into
        tester.runUnitTestModulesWithViteJS() #  the ViteJS import.meta.glob()
