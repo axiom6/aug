@@ -3,10 +3,11 @@ import { unit } from '../../test/Tester.js'
 import   Vis    from './Vis.js'
 
 unit().describe("Vis", "rgb")
+
 unit( "Vis.rgb(0xFFFFFF)",            Vis.rgb(0xFFFFFF), {r:255,g:255,b:255, a:1.0 }   )
 unit( "Vis.hex({r:255,g:255,b:255})", Vis.hex({r:255,g:255,b:255}),  0xFFFFFF  ) # Appears as 16777215 in decimal
 unit( "Vis.str({r:255,g:255,b:255})", Vis.str({r:255,g:255,b:255}), "0xFFFFFF" )
-
+console.log( unit().status() )
 
 unit().describe("Vis", "ysv")
 unit( "Vis.strHex(255)", Vis.strHex(255), "FF" )
@@ -38,4 +39,5 @@ unit( "Vis.str([225,100,100]) cyan",    Vis.str([225,100,100]), "0x00FFFF" )
 unit( "Vis.str([270,100,100]) blue",    Vis.str([270,100,100]), "0x0000FF" )
 unit( "Vis.str([315,100,100]) magenta", Vis.str([315,100,100]), "0xFF00FF" )
 
-unit().summary("Vis")
+# Log the current block of tests and then the summary for 'Vis'
+console.log( unit().summary('Vis') )

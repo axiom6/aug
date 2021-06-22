@@ -8,7 +8,7 @@ import Stream from '../base/util/Stream.js'
 class Initial
 
   Initial.appName = 'Initial'
-  Initial.debug   = true
+  Initial.debug   = false
 
   Initial.start = (href) ->
     console.log( "Initial.start()", href )
@@ -21,17 +21,31 @@ class Initial
     streamLog       = { subscribe:false, publish:false, subjects:subjects }
     Initial.stream  = new Stream( subjects, streamLog )
 
-    # Tester does the { test, unit, log, tester } exports
+    # Tester exports { test, unit, tester }
     tester.setOptions( { testing:true, logToConsoie:true, archive:true, verbose:false, debug:false } )
     tester.injectStream( Initial.stream )
-    paths = ["/lib/pub/test/Tester-unit.js","/lib/pub/base/draw/Vis-unit.js"]
-    tester.runUnitTestModulesFromPaths( paths )
-    ###
-    if tester.inViteJS                       # Can't pass glob pattern "/pub/xx/x-unit.js" i.e.   into
-       tester.runUnitTestModulesWithViteJS() #  the ViteJS import.meta.glob()
+    inViteJS = tester.isDef(`import.meta.env`)
+    if inViteJS
+      Initial.runUnitTestsViteJS() # Can't pass glob pattern "/pub/**/*-unit.js"
     else
-       tester.runUnitTestModulesFromPaths( ["/lib/pub/base/test/Tester-unit.js", "/lib/pub/base/draw/Vis-unit.js"] )
-    ###
+      paths = ["/lib/pub/test/Tester-unit.js","/lib/pub/base/draw/Vis-unit.js"]
+      tester.runUnitTests( paths )
     return
+
+  # This is vite.js dependent with import.meta.glob() and its dynamic await importer
+  # Can't pass glob patterns like "/pub/xx/x-unit.js"
+  Initial.runUnitTestsViteJS = () ->
+    globPtn = "/lib/**/*-unit.js"
+    modules = `import.meta.glob("/lib/**/*-unit.js")` # vite.js dependent with nack tics for non standard import
+    console.log( "Tester.runUnitTestsViteJS()", modules, globPtn ) if @debug
+    count = 0
+    total = Object.keys(modules).length
+    for own path, importer of modules
+      modules[path]().then( (importer) =>
+        console.log( path,   importer ) if @debug
+        await importer
+        count++
+        tester.log( tester.summary() ) if count is total
+        return )
 
 export default Initial

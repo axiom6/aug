@@ -3,28 +3,26 @@ class Tester
 
   constructor:() ->
 
-    # Key settings that are reconfigured through setOptions( options )
-    @testing      = true  # When false all testing is turned which allows tests to remain in code
-    @logToConsole = true  # Contols logging to console
-    @archive      = true  # When true archived test status object to localStorage TestsPassed and TestFail
-    @verbose      = false # Adds addition and sometimes mind numbing detail to testStatus objects
-    @debug        = false # Turns on debugs call to console.log(...)
+    # Key settings that can be reconfigured through setOptions( options )
+    @testing = true  # When false all testing is turned which allows tests to remain in code
+    @archive = true  # When true archives test status object to localStorage TestsPassed and TestFail
+    @verbose = false # Adds addition and sometimes mind numbing detail to testStatus objects
+    @debug   = false # Turns on debugs call to console.log(...)
 
-    # When true Tester leverage addiion ViteJS capabilies
-    @inViteJS       = true # @isDef(`import.meta.env`)
+    # Short hand for logging in a chained call i.e test(...).log( test().status )
+    #  it is important that @log and @error be called in the modules being tested
+    #  for viewing the code being tested rather that viewing code in the Tester itself
+    @log   = console.log
+    @error = console.error
 
-    # Short hand in @test closures and chained calls that reference codes in modules being tested
-    @log          = console.log
-    @error        = console.error
+    # Set by @describe( description, suite )
+    @description = ""
+    @suite       = ""
 
-    # Set by @describe()
-    @description  = ""
-    @suite        = ""
-
-    # Test status values
+    # Accummulate test status state
     @text         = null # set by test() that is passed inside eq() and sent to run()
     @statusText   = ""
-    @statusCalled = false
+    @statusClear  = true
     @code         = ""
     @passed       = []
     @failed       = []
@@ -34,11 +32,10 @@ class Tester
     @stream       = null
 
   setOptions:( options ) ->
-    @testing        = if options.testing?        then options.testing        else true
-    @logToConsole   = if options.logToConsole?   then options.logToConsole   else true
-    @archive        = if options.archive?        then options.archive        else true
-    @verbose        = if options.verbose?        then options.verbose        else false
-    @debug          = if options.debug?          then options.debug          else false
+    @testing = if options.testing?        then options.testing        else true
+    @archive = if options.archive?        then options.archive        else true
+    @verbose = if options.verbose?        then options.verbose        else false
+    @debug   = if options.debug?          then options.debug          else false
     return
 
   # -- test -- Pass a closeure in the form of  (t) => { code... }
@@ -70,7 +67,6 @@ class Tester
     @text   = text
     @code   = ""
     @run( text, result, expect )
-    @status( true )
     @
 
   eq:( result, expect ) =>
@@ -92,39 +88,18 @@ class Tester
     @suite       = if suite? then suite else null
     @
 
-  summary:( module=null ) =>
-    if module?
-      passCount = 0
-      failCount = 0
-      ++passCount for pass in @passed when pass.assert.module is module
-      ++failCount for fail in @failed when fail.assert.module is module
-      fullCount = passCount + failCount
-      console.log( "-- Summary - for", module )
-      console.log( '   ', @pad(passCount,fullCount) + ' tests passed' )
-      console.log( '   ', @pad(failCount,fullCount) + ' tests failed' )
-      console.log( '   ', @pad(fullCount,fullCount) + ' tests total'  )
-    else
-      fullCount = @passed.length + @failed.length
-      console.log( '-- Summary - for all tests' )
-      console.log( '   ', @pad(@passed.length,fullCount) + ' tests passed' )
-      console.log( '   ', @pad(@failed.length,fullCount) + ' tests failed' )
-      console.log( '   ', @pad(fullCount,     fullCount) + ' tests total'  )
-      if @archive
-         @archiveLocal(  @failed,      @passed )  # Good place to archive with all tests complete
-         @reviewsLocal( { failed:false, passed:false } )
-    @
-
   archiveLocal:( failed, passed ) =>
     localStorage.setItem( 'TestsFailed', JSON.stringify( failed ) )
     localStorage.setItem( 'TestsPassed', JSON.stringify( passed ) )
     return
 
   reviewsLocal:( reviewFailed, reviewPassed ) ->
+    return if not @debug
     if reviewFailed
       failLocals = localStorage.getItem( 'TestsFailed' )
       if failLocals?
         failStatuses = JSON.parse( failLocals )
-        console.log( failStatus ) for failStatus in failStatuses
+        console.log( failStatus ) for failStatus in failStatuses when( @debug )
     if reviewPassed
       passLocals = localStorage.getItem( 'TestsPassed' )
       if passLocals?
@@ -132,27 +107,12 @@ class Tester
         console.log( passStatus ) for passStatus in passStatuses
     return
 
-  # At present this is vite.js dependent with import.meta.glob() and its dynamic await importer
-  runUnitTestModulesWithViteJS:() =>
-    globPtn = "/lib/**/*-unit.js"
-    modules = `import.meta.glob("/lib/**/*-unit.js")` # vite.js dependent with nack tics for non standard import
-    console.log( "Tester.runUnitTestModulesWithViteJS()", modules, globPtn ) if @debug
-    count = 0
-    total = Object.keys(modules).length
-    for own path, importer of modules
-      modules[path]().then( (importer) =>
-        console.log( path,   importer ) if @debug
-        await importer
-        count++
-        @summary() if count is total
-        return )
-
-  runUnitTestModulesFromPaths:( paths ) =>
-    console.log( "Tester.runUnitTestModulesFromPaths()", paths ) if @debug
+  runUnitTests:( paths ) =>
+    console.log( "Tester.runUnitTests()", paths ) if @debug
     count = 0
     total = paths.length
     for path in paths
-        console.log( "Tester.runUnitTestModulesFromPaths()", path ) if @debug
+        console.log( "Tester.runUnitTests()", path ) if @debug
         await `import( path /* @vite-ignore */ )`
         count++
         @summary() if count is total
@@ -228,24 +188,40 @@ class Tester
   report:( status, result, expect ) ->
     @stream.publish( status ) if @isDef(@stream)
     eq = if status.assert.pass then 'is' else 'not'
-    @statusText  =       """#{status.assert.text} #{eq} #{expect} """
-    @statusText += """"\n   #{@textResult( status, result ) }""" if @verbose or not status.assert.pass
-    @statusText += """"\n   #{@textExpect( status, expect ) }""" if @verbose or not status.assert.pass
-    @statusText += "\n"+@code                if @isStr(@code) and ( @verbose or not status.assert.pass )
-    @statusCalled  = false
+    @statusText  = "" if @statusClear
+    @statusText += """\n#{status.assert.text} #{eq} #{expect}"""
+    @statusText += """\n   #{@textResult( status, result )}""" if @verbose or not status.assert.pass
+    @statusText += """\n   #{@textExpect( status, expect )}""" if @verbose or not status.assert.pass
+    @statusText += "\n"+@code              if @isStr(@code) and ( @verbose or not status.assert.pass )
+    @statusClear = false
     return
 
-  # Need to work on another way to console.log( @statusText ) when @status is not called in a unit test
-  status:( wait=null) ->
-    if @isNull(wait)
-      @statusCalled = true
-    else if @logToConsole
-      # @sleep( 1000 ).then( console.log( @statusText )  )
-      console.log( @statusText ) if not @statusCalled
+  status:() ->
+    @statusClear = true
     @statusText
 
-  sleep:(ms) ->
-    new Promise( (resolve) => setTimeout( resolve, ms ) )
+  summary:( module=null ) =>
+    summaryText = @status() # Prepend any test statuses
+    if module?
+      passCount = 0
+      failCount = 0
+      ++passCount for pass in @passed when pass.assert.module is module
+      ++failCount for fail in @failed when fail.assert.module is module
+      fullCount = passCount + failCount
+      summaryText += """\n\n-- Summary - for #{module}"""
+      summaryText += """\n   #{@pad(passCount,fullCount)} tests passed"""
+      summaryText += """\n   #{@pad(failCount,fullCount)} tests failed"""
+      summaryText += """\n   #{@pad(fullCount,fullCount)} tests total"""
+    else
+      fullCount = @passed.length + @failed.length
+      summaryText += """\n\n-- Summary - for all tests"""
+      summaryText += """\n   #{@pad(@passed.length,fullCount)} tests passed"""
+      summaryText += """\n   #{@pad(@failed.length,fullCount)} tests failed"""
+      summaryText += """\n   #{@pad(fullCount,     fullCount)} tests total"""
+      if @archive
+        @archiveLocal(  @failed,      @passed )  # Good place to archive with all tests complete
+        @reviewsLocal( { failed:false, passed:false } )
+    summaryText
 
   textResult:( status, result ) ->
     """Result type is #{status.result.type} with value #{result}"""
@@ -302,10 +278,10 @@ class Tester
   head:(a)        =>  if @isArray(a) then a[0]          else null
   tail:(a)        =>  if @isArray(a) then a[a.length-1] else null
   time:()         =>  new Date().getTime()
-  hasInteger:(s)  => @isStr(s) and /^\s*(\+|-)?\d+\s*$/.test(s)
-  hasFloat:(s)    => @isStr(s) and /^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$/.test(s)
-  hasCurrency:(s) => @isStr(s) and /^\s*(\+|-)?((\d+(\.\d\d)?)|(\.\d\d))\s*$/.test(s)
-  hasEmail:(s)    => @isStr(s) and /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/.test(s)
+  hasInteger:(s)  =>  @isStr(s) and /^\s*(\+|-)?\d+\s*$/.test(s)
+  hasFloat:(s)    =>  @isStr(s) and /^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$/.test(s)
+  hasCurrency:(s) =>  @isStr(s) and /^\s*(\+|-)?((\d+(\.\d\d)?)|(\.\d\d))\s*$/.test(s)
+  hasEmail:(s)    =>  @isStr(s) and /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/.test(s)
 
   # Check if an object or array or string is empty
   isEmpty:(e) =>
@@ -322,8 +298,9 @@ class Tester
     b = key.charAt(key.length - 1)
     a is a.toUpperCase() and a isnt '$' and b isnt '_'
 
-  # A big improvement over typeof() that follows the convention by returning types in lower case by default
-  # For basic types returned are boolean number string function object array date regexp undefined null
+  # An improved typeof() that follows the convention by returning types in lower case
+  # by default. The basic types returned are:
+  # boolean number string function object array date regexp undefined null
   type:(val,lowerCase=true) =>
     str = Object::toString.call(val)
     tok = str.split(' ')[1]
@@ -346,131 +323,27 @@ class Tester
     if type is "Stream"
       @stream  = stream
     else
-      console.error( "Tester.injectStream( stream ) stream klass must be 'Stream not", type )
+      console.error( "Tester.injectStream( stream ) stream klass must be 'Stream' not", type )
     return
 
 # -- ES6 exports for single tester instance and its test() and unit() methods
-
-# This construct only instanciates tester once on its first import
-#   subseqent imports get this single instance that holds all testing state
+#   tester is instanciates once on its first import subseqent imports
+#   get this single instance that holds all testing state
 export tester = new Tester()
 test = tester.test
 unit = tester.unit
 export { test, unit }
 
 ###
-    resultValue = if resultType isnt 'function' then result else '? function(args...) ?'
-    expectValue = if expectType isnt 'function' then expect else '? function(args...) ?'
+  # Need to work on another way to log( @statusText ) when @status is not called in a unit test
+  status:( wait=null) ->
+    if @isNull(wait)
+      @statusCalled = true
+    else if @logToConsole
+      @sleep( 2000 ).then( console.log( @statusText )  ) if not @statusCalled
+      # console.log( @statusText )                       if not @statusCalled
+    @statusText
 
-  injectNav:(  nav ) ->
-    return
-    @nav     = nav
-    @stream  = nav.stream
-    @mix     = nav.mix
-    @batch   = nav.batch
-    return
-
-  toFunc:( closure ) =>
-    @code = @codeClosure( closure )
-    cstr = closure.toString()
-    toks = cstr.split( "return ")
-    body = toks[1].substring( 0, toks[1].length-3 )  # Removes trailing ;
-    body = body + ".log( t.status() );"
-    func = new Function( "t", body ) # "func = function(t) {" + body + "}"
-    console.log( { cstr:cstr, body:body, fstr:func.toString(), ftype:@type(func) } ) if @debug
-    func
-
-  toCode:( closure ) =>
-    str  = closure.toString()
-    toks = str.split("return t.")
-    code = if toks[1]? then toks[1].substring( 0, toks[1].length-3 ) else ""
-    console.log( "Tester.codeClosure(closure)", { code:code, closur:closure } ) if @debug
-    code
-
-  unitLine:(  text, result, expect, error = new Error() ) =>
-    return @ if arguments.length == 0 # or not @testing -
-    @line( error )
-    @run( text, result, expect )      # unit() is actually a synonym for run()
-
-  line:() ->
-    console.log( 'Tester.line()', @error )
-    return
-
-  # Will full implement later
-  logStatus:( msg, args... ) ->
-    return if not @debug
-    console.log( msg, args )
-    return
-
-  type:(val,lowerCase=true) =>
-    str = Object::toString.call(val)
-    tok = str.split(' ')[1]
-    typ = tok.substring(0,tok.length-1)
-    if if lowerCase then typ.toLowerCase() else type
-
-
-  klass:(val) =>
-    typ = "Unknown"
-    try
-      typ = val.constructor.name
-    catch error
-      console.log( "Tester.class(val) name error", { val:val, error:error } )
-      typ = @type(val,false)
-    typ
-
-  type:(val) =>
-    str = Object::toString.call(val).toLowerCase()
-    tok = str.split(' ')[1]
-    typ = tok.substring(0,tok.length-1)
-    # console.log( "Tester.type(val)", { val:val, str:str, tok:tok, typ:typ } )
-    typ
-
-  # Tester.types = ['Boolean','Number','String','Function','Object','Array','Date','RegExp','Undefined','Null']
-
-  # Experimental
-  # Return basic and class types in their original camel case
-  # Instances are return as Object
-  typeClass:(val) =>
-    typ = "Unknown"
-    try
-      typ = Object::toString.call(val)
-      typ = typ.split(' ')[1].substring(0,typ.length-1)
-    catch error
-      console.error( 'Tester.klass(val) call(val) error', { val:val, error:error } )
-    typ
-
-
-  type: do () =>
-    classToType = {}
-
-    for name in ["Boolean", "Number", "String", "Function", "Object", "Array", "Date",
-      "RegExp", "Symbol", "Event", "Element", "Undefined", "Null"]
-      classToType["[object " + name + "]"] = name.toLowerCase()
-
-    (val) ->
-      key = Object::toString.call(val)
-      typ = classToType[key] or "object"
-      console.log( "Tester.type()", { key:key, val:val, typ:typ } )
-      typ
-
-# -- bdd -- Behavion Driven Design like Jasmine --
-# Imports: import { bdd }     from "../test/Tester.js"
-#          import Calculator  from "../calculator/Calculator.js"
-#          const  calculator = new Calculator()
-# Specify: bdd( text, closure )
-# Example: bdd( 'can add two positive numbers', =>
-#      result = calculator.add( 2, 3 )
-#      bdd().expect(result).toBe( 5 )
-
-status.assert.text = "-- Passed -- #{status.result.type}s are equal for " + status.assert.text
-status.assert.text = "-- Failed -- #{status.result.type}s are not equal for " + status.assert.text
-
-expect:( result ) ->
-@result = result
-@
-
-toBe:( expect ) =>
-@expect = expect
-@
-
+  sleep:(ms) ->
+    new Promise( (resolve) => setTimeout( resolve, ms ) )
 ###
