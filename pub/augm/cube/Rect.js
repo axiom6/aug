@@ -1,7 +1,5 @@
 var Rect;
 
-import Util from '../../../lib/pub/base/util/Util.js';
-
 import Vis from '../../../lib/pub/base/draw/Vis.js';
 
 import * as THREE from 'three';
@@ -49,7 +47,7 @@ Rect = class Rect {
       color: this.fontColor
     });
     mats = [face, side];
-    offsetY = !Util.inString(this.title, '\n');
+    offsetY = !Vis.inStr(this.title, '\n');
     dx = 0.5 * (text.boundingBox.max.x - text.boundingBox.min.x);
     dy = offsetY ? 0.5 * (text.boundingBox.max.y - text.boundingBox.min.y) : 0;
     Rect.matrix.makeTranslation(this.xyz[0] - dx, this.xyz[1] - dy, this.xyz[2]);

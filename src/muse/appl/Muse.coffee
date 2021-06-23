@@ -1,11 +1,12 @@
 
-import Access from '../../../lib/pub/base/util/Access.js'
-import Build  from '../../../lib/pub/base/util/Build.js'
-import Stream from '../../../lib/pub/base/util/Stream.js'
-import Nav    from '../../../lib/pub/base/nav/Nav.js'
-import Touch  from '../../../lib/pub/base/nav/Touch.js'
-#mport Cache  from '../../../lib/pub/base/util/Cache.js'
-import Mix    from '../../../lib/pub/base/nav/Mix.js'
+import { tester } from  '../../../lib/pub/test/Tester.js'
+import Access     from '../../../lib/pub/base/util/Access.js'
+import Build      from '../../../lib/pub/base/util/Build.js'
+import Stream     from '../../../lib/pub/base/util/Stream.js'
+import Nav        from '../../../lib/pub/base/nav/Nav.js'
+import Touch      from '../../../lib/pub/base/nav/Touch.js'
+#mport Cache      from '../../../lib/pub/base/util/Cache.js'
+import Mix        from '../../../lib/pub/base/nav/Mix.js'
 
 import { createApp }    from 'vue'    #
 
@@ -110,6 +111,7 @@ class Muse
     Muse.touch  = new Touch( Muse.stream, Muse.nav )
     Muse.build  = new Build( batch, Muse.komps )
     #use.cache  = new Cache( Muse.stream )
+    tester.setOptions( { testing:true, archive:true, verbose:false, debug:false } )
     Access.buildInnov( batch, 'Data',   'Info' )
     Access.mergePracs( batch, 'Prin', ['Info','Know','Wise'] ) # 'Data'
     Muse.mergeCols()

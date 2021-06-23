@@ -1,5 +1,4 @@
 
-import Util    from '../../../lib/pub/base/util/Util.js'
 import Vis     from '../../../lib/pub/base/draw/Vis.js'
 import Convey  from './Convey.js'
 import * as d3 from 'd3' # '../../../pub/lib/d3/d3.5.9.0.esm.js';
@@ -41,17 +40,17 @@ class Shapes
     studies
 
   key:( prac, dir ) ->
-    for key, study of prac when Util.isChild(key) and study.dir is dir
+    for key, study of prac when Vis.isChild(key) and study.dir is dir
       return key
     '???'
 
   obj:( prac, dir ) ->
-    for key, study of prac when Util.isChild(key) and study.dir is dir
+    for key, study of prac when Vis.isChild(key) and study.dir is dir
       return study
     {}
 
   htmlId:( pracName, contentName ) ->
-    Util.getHtmlId( pracName, 'Info', contentName ) # @ui.plane.id
+    Vis.getHtmlId( pracName, 'Info', contentName ) # @ui.plane.id
 
   size:( obj ) ->
     if obj? then Object.keys(obj).length else 0
@@ -114,7 +113,7 @@ class Shapes
     return
 
   wedgeText:( g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize, level='None' ) ->
-    Util.noop( wedgeId )
+    Vis.noop( wedgeId )
     th = 14
     at = (a1+a2)/2
     rt = (r1+r2)/2

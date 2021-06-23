@@ -1,6 +1,10 @@
 //mport Load    from './Load.js'
 var Augm;
 
+import {
+  tester
+} from '../../../lib/pub/test/Tester.js';
+
 import Access from '../../../lib/pub/base/util/Access.js';
 
 import Stream from '../../../lib/pub/base/util/Stream.js';
@@ -58,7 +62,6 @@ Augm = (function() {
       var head, maniElem, siteElem;
       // manifest   = """<link href="manifest.json"  rel="manifest" crossorigin="use-credentials">"""
       // siteLink   = """<link href="https://vit-muse.web.app/" rel="canonical">"""
-      // mboxScript = """<script src="/lib/mbox/augm/mathbox-bundle.js"></script>"""
       maniElem = document.createElement('link');
       maniElem.href = "manifest.json";
       maniElem.rel = "manifest";
@@ -87,8 +90,14 @@ Augm = (function() {
       Augm.stream = new Stream(subjects, streamLog);
       Augm.mix = new Mix(Augm);
       Augm.nav = new Nav(Augm.stream, Augm.mix, batch, Augm.komps, Augm.pages);
+      //ugm.cache  = new Cache( Augm.stream )
+      tester.setOptions({
+        testing: true,
+        archive: false,
+        verbose: false,
+        debug: false
+      });
       try {
-        //ugm.cache  = new Cache( Augm.stream )
         Augm.vue3();
       } catch (error1) {
         error = error1;

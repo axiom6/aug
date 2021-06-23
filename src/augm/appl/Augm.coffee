@@ -1,11 +1,12 @@
 
 
 #mport Load    from './Load.js'
-import Access  from '../../../lib/pub/base/util/Access.js'
-import Stream  from '../../../lib/pub/base/util/Stream.js'
-import Nav     from '../../../lib/pub/base/nav/Nav.js'
-import Mix     from '../../../lib/pub/base/nav/Mix.js'
-import Dash    from '../../../vue/augm/appl/Dash.vue'
+import { tester } from  '../../../lib/pub/test/Tester.js'
+import Access     from  '../../../lib/pub/base/util/Access.js'
+import Stream     from '../../../lib/pub/base/util/Stream.js'
+import Nav        from '../../../lib/pub/base/nav/Nav.js'
+import Mix        from '../../../lib/pub/base/nav/Mix.js'
+import Dash       from '../../../vue/augm/appl/Dash.vue'
 
 import { createApp }    from 'vue'
 
@@ -99,7 +100,6 @@ class Augm
   Augm.addToHead = () ->
   # manifest   = """<link href="manifest.json"  rel="manifest" crossorigin="use-credentials">"""
   # siteLink   = """<link href="https://vit-muse.web.app/" rel="canonical">"""
-  # mboxScript = """<script src="/lib/mbox/augm/mathbox-bundle.js"></script>"""
     maniElem       = document.createElement('link')
     maniElem.href  = "manifest.json"
     maniElem.rel   = "manifest"
@@ -128,6 +128,7 @@ class Augm
     Augm.mix    = new Mix( Augm )
     Augm.nav    = new Nav( Augm.stream, Augm.mix, batch, Augm.komps, Augm.pages )
     #ugm.cache  = new Cache( Augm.stream )
+    tester.setOptions( { testing:true, archive:false, verbose:false, debug:false } )
     try
       Augm.vue3()
     catch error

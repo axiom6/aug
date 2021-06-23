@@ -1,7 +1,5 @@
 var Tree;
 
-import Util from '../../../lib/pub/base/util/Util.js';
-
 import Vis from '../../../lib/pub/base/draw/Vis.js';
 
 Tree = class Tree {

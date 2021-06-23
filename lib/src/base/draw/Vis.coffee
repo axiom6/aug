@@ -71,13 +71,13 @@ class Vis
     B = rgb.b
     sum = R + G + B
     r = R/sum; g = G/sum; b = B/sum
-    s = sum / 3
-    c = if R is G and G is B then 0 else 1 - 3 * Math.min(r,g,b) # Center Grayscale
+    v = sum / 3
+    s = if R is G and G is B then 0 else 1 - 3 * Math.min(r,g,b) # Center Grayscale
     a = Vis.deg( Math.acos( ( r - 0.5*(g+b) ) / Math.sqrt((r-g)*(r-g)+(r-b)*(g-b)) ) )
     h = if b <= g then a else 360 - a
-    h = 0 if c is 0
+    h = 0 if s is 0
     H = if toRYGB then Vis.rygbHue(h) else h
-    [ H, c*100, s/2.55 ]
+    [ H, s*100, v/2.55 ]
 
   @hsv:( arg ) ->
     Vis.cyl( arg, false )
@@ -205,6 +205,49 @@ class Vis
   @ceil:(  x, dx )          ->  dr = Math.round(dx); Math.ceil(  x / dr ) * dr
   @within:( beg, deg, end ) -> beg   <= deg and deg <= end # Closed interval with <=
   @isZero:( v )             -> -0.01 <  v   and v   <  0.01
+  @inStr:( s, e )           -> tester.inStr( s, e )
+  @isChild:( key )          -> tester.isChild( key )
+  @isFunc:(  f   )          -> tester.isFunc( f )
+
+  @toInt:( arg ) ->
+    switch tester.type(arg)
+      when 'number' then Math.floor(arg)
+      when 'string' then  parseInt(arg)
+      else 0
+
+  # Return a number with fixed decimal places
+  @toFixed:( arg, dec=2 ) ->
+    num = switch typeof(arg)
+      when 'number' then arg
+      when 'string' then parseFloat(arg)
+      else 0
+    num.toFixed(dec)
+
+  @noop:( ...args ) ->
+    if args then false
+    return
+
+  @hasGlobal:( global, issue=true ) ->
+    has = window[global]?
+    console.error( "Vis.hasGlobal() #{global} not present" )  if not has and issue
+    has
+
+  @getGlobal:( global, issue=true ) ->
+    if Vis.hasGlobal( global, issue ) then window[global] else null
+
+  @ready:( fn ) ->
+    switch fn
+     when  not tester.isFunc( fn )  then return               # Sanity check
+     when  Vis.skipReady            then fn()
+     when  document.readyState is 'complete' then fn() # If document is already loaded, run method
+     else  document.addEventListener( 'DOMContentLoaded', fn, false )
+    return
+
+  @getHtmlId:( name, type='', ext='' ) ->
+    id = name + type + ext + Vis['uniqueIdExt']
+    id.replace( /[ \.]/g, "" )
+
+  @cssNameType:( name, type='' ) -> name + type
 
   # --- Css Transforms ---  
 
@@ -232,6 +275,10 @@ class Vis
       console.error( 'Vis.unicode() missing icon in Vis.FontAwesomeUnicodes for', icon )
       uc = "\uf111" # Circle
     uc
+
+Vis.skipReady     =  false
+Vis.time          =  0
+Util.uniqueIdExt  = ''
 
 export default Vis
 

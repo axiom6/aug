@@ -1,5 +1,9 @@
 var Data;
 
+import {
+  tester
+} from '../../../lib/pub/test/Tester.js';
+
 import Access from '../../../lib/pub/base/util/Access.js';
 
 import Stream from '../../../lib/pub/base/util/Stream.js';
@@ -90,6 +94,12 @@ Data = (function() {
       Data.touch = new Touch(Data.stream, Data.nav);
       //ata.build  = new Build( batch, Data.komps )
       Data.cache = new Cache(Data.stream);
+      tester.setOptions({
+        testing: true,
+        archive: false,
+        verbose: false,
+        debug: false
+      });
       Access.buildInnov(batch, 'Data', 'Info');
       Access.mergePracs(batch, 'Prin', [
         'Info',

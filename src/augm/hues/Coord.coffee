@@ -1,5 +1,4 @@
 
-import Util     from '../../../lib/pub/base/util/Util.js'
 import Vis      from '../../../lib/pub/base/draw/Vis.js'
 
 class Coord
@@ -61,7 +60,7 @@ class Coord
   angPolar:( ) ->
     obj = { id:"angPolar", axes:[1,2], width:13, height:1, items:2, channels:3 }
     obj.expr =  ( emit, a, r ) =>
-      Util.noop( r )
+      Vis.noop( r )
       emit( 0, 0, 1 )
       emit( a, 1, 1 )
       return

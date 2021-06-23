@@ -1,4 +1,4 @@
-import Util          from '../../../lib/pub/base/util/Util.js'
+import Vis           from '../../../lib/pub/base/draw/Vis.js'
 import Access        from '../../../lib/pub/base/util/Access.js'
 import Build         from '../../../lib/pub/base/util/Build.js'
 import Cube3D        from './Cube3D.js'
@@ -22,7 +22,7 @@ class CubeTh
     return
 
   @init:( batch ) ->
-    Util.ready ->
+    Vis.ready ->
       build = new Build( batch )
       th    = new CubeTh( build, 'CubeTh', false )
       th.animate()
@@ -71,16 +71,16 @@ class CubeTh
   onSelect:( topic ) =>
     # console.log( 'CubeTh.onCube()', name )
     switch   topic.name
-      when 'Cube'         then Util.noop()
-      when 'Planes'       then Util.noop()
+      when 'Cube'         then Vis.noop()
+      when 'Planes'       then Vis.noop()
       when 'Information'  then @traversals.info()
       when 'Knowledge'    then @traversals.know()
       when 'Wisdom'       then @traversals.wise()
-      when 'Dimensions'   then Util.noop()
+      when 'Dimensions'   then Vis.noop()
       when 'Embrace'      then @traversals.embrace()
       when 'Innovate'     then @traversals.innovate()
       when 'Encourage'    then @traversals.encourage()
-      when 'Perspectives' then Util.noop()
+      when 'Perspectives' then Vis.noop()
       when 'Learn'        then @traversals.learn()
       when 'Do'           then @traversals.doDo()
       when 'Share'        then @traversals.share()
@@ -150,7 +150,7 @@ class CubeTh
             [sp.cubeWidth,sp.cubeHeight,sp.cubeDepth],practice['hsv'], 0.6, @fontPrac )
           pracGroup = new THREE.Group()
           pracGroup.add( pracCube.mesh  )
-          for key, study of practice when Util.isChild(key)
+          for key, study of practice when Vis.isChild(key)
             x = col.x + sp.sx[study.dir]
             y = row.y + sp.sy[study.dir]
             z = plane.z
@@ -183,7 +183,7 @@ class CubeTh
         z = plane.z
         studyCube = new Rect( plane, 'Dim', col.name, col.name, [x,y,z], [sp.cw,sp.ch], [0,0,0], 0.0, @fontPrac, 0xFFFFFF )
         pracGroup.add( studyCube.mesh  )
-        for key, study of practice when Util.isChild(key)
+        for key, study of practice when Vis.isChild(key)
           x = col.x + sp.cx[study.dir]
           y = sp.yc + sp.cy[study.dir]
           z = plane.z
@@ -326,7 +326,7 @@ class CubeTh
     act       = @createAct( group )
     traverals = @createTraversals( act )
 
-    dat = Util.getGlobal('dat')
+    dat = Vis.getGlobal('dat')
     gui = dat.GUI( { autoPlace: false } )
     guiElem.appendChild( gui.domElement )
 

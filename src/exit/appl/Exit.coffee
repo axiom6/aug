@@ -1,10 +1,11 @@
 
-import Access from '../../../lib/pub/base/util/Access.js'
-import Stream from '../../../lib/pub/base/util/Stream.js'
-import Nav    from '../../../lib/pub/base/nav/Nav.js'
-import Touch  from '../../../lib/pub/base/nav/Touch.js'
-import Cache  from '../../../lib/pub/base/util/Cache.js'
-import Mix    from '../../../lib/pub/base/nav/Mix.js'
+import { tester } from  '../../../lib/pub/test/Tester.js'
+import Access     from '../../../lib/pub/base/util/Access.js'
+import Stream     from '../../../lib/pub/base/util/Stream.js'
+import Nav        from '../../../lib/pub/base/nav/Nav.js'
+import Touch      from '../../../lib/pub/base/nav/Touch.js'
+import Cache      from '../../../lib/pub/base/util/Cache.js'
+import Mix        from '../../../lib/pub/base/nav/Mix.js'
 
 
 import { createApp }    from 'vue'    #
@@ -18,7 +19,6 @@ import ForcastsJson       from '../../../data/exit/Forcasts.json'
 import I70MilePostsJson   from '../../../data/exit/I70MilePosts.json'
 import SegmentsEastJson   from '../../../data/exit/SegmentsEast.json'
 import SegmentsWestJson   from '../../../data/exit/SegmentsWest.json'
-
 
 class Exit
 
@@ -98,6 +98,8 @@ class Exit
     Exit.touch  = new Touch( Exit.stream, Exit.nav )
     #ata.build  = new Build( batch, Data.komps )
     Exit.cache  = new Cache( Exit.stream )
+    tester.setOptions( { testing:true, archive:true, verbose:false, debug:false } )
+    tester.setOptions( { testing:true, archive:false, verbose:false, debug:false } )
     Access.buildInnov( batch, 'Data',   'Info' )
     Access.mergePracs( batch, 'Prin', ['Info','Know','Wise'] ) # 'Data'
     #ata.mergeCols()

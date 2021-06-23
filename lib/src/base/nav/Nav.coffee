@@ -168,10 +168,10 @@ class Nav
        if @mix.isDef(pageKey) and @pages[tabsKey][pageKey]?
          true
        else
-         console.log( 'Nav.hasPage() bad pageKey', { tabsKey:tabsKey, pageKey:pageKey, pages:getTabs:(tabsKey) } ) if log
+         console.log( 'Nav.hasPage() bad pageKey', { tabsKey:tabsKey, pageKey:pageKey, pages:getTabs:(tabsKey) } ) if log and pageKey isnt 'None'
          false
     else
-      console.log( 'Nav.hasPage() bad tabsKey',    { tabsKey:tabsKey, pageKey:pageKey } ) if log
+      console.log( 'Nav.hasPage() bad tabsKey',    { tabsKey:tabsKey, pageKey:pageKey } ) if log and pageKey isnt 'None'
       false
 
   getPage:( tabsKey, pageKey, log=false ) ->

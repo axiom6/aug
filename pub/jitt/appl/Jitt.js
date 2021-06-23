@@ -1,5 +1,9 @@
 var Jitter;
 
+import {
+  tester
+} from '../../../lib/pub/test/Tester.js';
+
 import Access from '../../../lib/pub/base/util/Access.js';
 
 import Stream from '../../../lib/pub/base/util/Stream.js';
@@ -89,6 +93,12 @@ Jitter = (function() {
       Jitter.nav = new Nav(Jitter.stream, batch, Jitter.routes, Jitter.routeNames, Jitter.komps, true);
       Jitter.touch = new Touch(Jitter.stream, Jitter.nav);
       Jitter.cache = new Cache(Jitter.stream);
+      tester.setOptions({
+        testing: true,
+        archive: true,
+        verbose: false,
+        debug: false
+      });
       Jitter.vue();
     }
 

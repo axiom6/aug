@@ -1,6 +1,5 @@
 
 import * as d3 from 'd3'
-import Util    from '../../../lib/pub/base/util/Util.js'
 import Vis     from '../../../lib/pub/base/draw/Vis.js'
 
 class Innovate
@@ -15,7 +14,7 @@ class Innovate
     @stroke = 'black'
 
   drawSvg:( g, size, defs ) ->
-    Util.noop( defs )
+    Vis.noop( defs )
     @lay       = @shapes.layout( size, @spec.column, @shapes.size(@studies), @shapes.size(@studies) )
     @rings( g, size )
     switch @spec.row

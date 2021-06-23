@@ -1,5 +1,4 @@
 
-import Util   from '../../../lib/pub/base/util/Util.js'
 import Vis    from '../../../lib/pub/base/draw/Vis.js'
 
 
@@ -198,7 +197,7 @@ class Radar
   doDragBeg:( tech ) ->
     #d3.select(tech.dot).attr("fill","yellow")
     @d3.select("circle#"+@techId(tech)).attr("fill","yellow")
-    # Util.log("beg", @techTitle(tech) ); # d3.select(circle).attr("fill","yellow")
+    # console.log("beg", @techTitle(tech) ); # d3.select(circle).attr("fill","yellow")
     return
 
   # Respond to mouse drag by updating the tech grade angle and status

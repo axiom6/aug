@@ -1,6 +1,6 @@
 var CubeTh;
 
-import Util from '../../../lib/pub/base/util/Util.js';
+import Vis from '../../../lib/pub/base/draw/Vis.js';
 
 import Access from '../../../lib/pub/base/util/Access.js';
 
@@ -47,7 +47,7 @@ CubeTh = class CubeTh {
   }
 
   static init(batch) {
-    return Util.ready(function() {
+    return Vis.ready(function() {
       var build, th;
       build = new Build(batch);
       th = new CubeTh(build, 'CubeTh', false);
@@ -106,10 +106,10 @@ CubeTh = class CubeTh {
     // console.log( 'CubeTh.onCube()', name )
     switch (topic.name) {
       case 'Cube':
-        Util.noop();
+        Vis.noop();
         break;
       case 'Planes':
-        Util.noop();
+        Vis.noop();
         break;
       case 'Information':
         this.traversals.info();
@@ -121,7 +121,7 @@ CubeTh = class CubeTh {
         this.traversals.wise();
         break;
       case 'Dimensions':
-        Util.noop();
+        Vis.noop();
         break;
       case 'Embrace':
         this.traversals.embrace();
@@ -133,7 +133,7 @@ CubeTh = class CubeTh {
         this.traversals.encourage();
         break;
       case 'Perspectives':
-        Util.noop();
+        Vis.noop();
         break;
       case 'Learn':
         this.traversals.learn();
@@ -287,7 +287,7 @@ CubeTh = class CubeTh {
           pracGroup.add(pracCube.mesh);
           for (key in practice) {
             study = practice[key];
-            if (!(Util.isChild(key))) {
+            if (!(Vis.isChild(key))) {
               continue;
             }
             x = col.x + sp.sx[study.dir];
@@ -364,7 +364,7 @@ CubeTh = class CubeTh {
         pracGroup.add(studyCube.mesh);
         for (key in practice) {
           study = practice[key];
-          if (!(Util.isChild(key))) {
+          if (!(Vis.isChild(key))) {
             continue;
           }
           x = col.x + sp.cx[study.dir];
@@ -692,7 +692,7 @@ CubeTh = class CubeTh {
     var act, dat, f1, f2, f3, f4, f5, f6, gui, traverals;
     act = this.createAct(group);
     traverals = this.createTraversals(act);
-    dat = Util.getGlobal('dat');
+    dat = Vis.getGlobal('dat');
     gui = dat.GUI({
       autoPlace: false
     });

@@ -22,11 +22,14 @@ class Initial
     Initial.stream  = new Stream( subjects, streamLog )
 
     # Tester exports { test, unit, tester }
-    tester.setOptions( { testing:true, logToConsoie:true, archive:true, verbose:false, debug:false } )
+    tester.setOptions( { testing:true, archive:true, verbose:false, debug:false } )
     tester.injectStream( Initial.stream )
     inViteJS = tester.isDef(`import.meta.env`)
     if inViteJS
-      Initial.runUnitTestsViteJS() # Can't pass glob pattern "/pub/**/*-unit.js"
+      modulesLib = `import.meta.glob("/lib/**/*-unit.js")`
+      Initial.runUnitTestsViteJS( modulesLib )
+      modulesPub = `import.meta.glob("/pub/**/*-unit.js")`
+      Initial.runUnitTestsViteJS( modulesPub )
     else
       paths = ["/lib/pub/test/Tester-unit.js","/lib/pub/base/draw/Vis-unit.js"]
       tester.runUnitTests( paths )
@@ -34,9 +37,8 @@ class Initial
 
   # This is vite.js dependent with import.meta.glob() and its dynamic await importer
   # Can't pass glob patterns like "/pub/xx/x-unit.js"
-  Initial.runUnitTestsViteJS = () ->
+  Initial.runUnitTestsViteJS = ( modules ) ->
     globPtn = "/lib/**/*-unit.js"
-    modules = `import.meta.glob("/lib/**/*-unit.js")` # vite.js dependent with nack tics for non standard import
     console.log( "Tester.runUnitTestsViteJS()", modules, globPtn ) if @debug
     count = 0
     total = Object.keys(modules).length

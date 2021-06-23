@@ -28,7 +28,7 @@
   import Math     from '../math/Math.vue';
   import MathND   from '../math/MathND.vue';
   import Draw     from '../draw/Draw.vue';
-  import Hues     from '../mbox/Hues.vue';
+  import Hues     from '../hues/Hues.vue';
   import Tool     from '../tool/Tool.vue';
   import ToolND   from '../tool/ToolND.vue';
   import Cube     from '../cube/Cube.vue';

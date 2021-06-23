@@ -1,5 +1,9 @@
 var Muse;
 
+import {
+  tester
+} from '../../../lib/pub/test/Tester.js';
+
 import Access from '../../../lib/pub/base/util/Access.js';
 
 import Build from '../../../lib/pub/base/util/Build.js';
@@ -101,6 +105,12 @@ Muse = (function() {
       Muse.touch = new Touch(Muse.stream, Muse.nav);
       Muse.build = new Build(batch, Muse.komps);
       //use.cache  = new Cache( Muse.stream )
+      tester.setOptions({
+        testing: true,
+        archive: true,
+        verbose: false,
+        debug: false
+      });
       Access.buildInnov(batch, 'Data', 'Info');
       Access.mergePracs(batch, 'Prin', [
         'Info',

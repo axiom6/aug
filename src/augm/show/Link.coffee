@@ -1,6 +1,5 @@
 
 
-import Util from '../../../lib/pub/base/util/Util.js'
 import Vis  from '../../../lib/pub/base/draw/Vis.js'
 
 class Link
@@ -119,7 +118,7 @@ class Link
         y2  = (y0*pc+yy*(1-pc))
       hue    = 0
       stroke = toHue
-      if Util.isFunc(toHue)
+      if Vis.isFunc(toHue)
         hue    = toHue(ang)
         stroke = Vis.css( [hue, 50, 80 ] )
       @path( g, stroke, ang, hue, @cubic( x0, y0, x1, y1, x2, y2, x, yy ) )

@@ -4,7 +4,7 @@
   <div class="hues-pane">
     <d-tabs :compKey="compKey" :pages="toPages()"></d-tabs>
     <h1 v-if="compKey==='Draw'">Mathbox Colors</h1>
-    <template v-for="page in toPages()" :key="pageIdx">
+    <template v-for="page in toPages()" :key="keyIdx(page.key,pageIdx)">
       <d-port v-if="show(page.key)" :page="page" class="port-pane"></d-port>
     </template>
     </div>
@@ -13,8 +13,8 @@
 <script type="module">
 
 import {inject, ref, onMounted, onUnmounted } from 'vue';
- import Tabs from '../../../lib/vue/base/elem/Tabs.vue';
- import Port from './Port.vue'
+import Tabs from '../../../lib/vue/base/elem/Tabs.vue';
+import Port from './Port.vue'
 
  let Hues = {
 
@@ -31,6 +31,9 @@ import {inject, ref, onMounted, onUnmounted } from 'vue';
       const debug     = false;
       const scriptSrc = "/assets/mathbox-bundle.js"
       mix.addScript( scriptSrc );
+
+      const keyIdx = ( key, idx ) => {
+         return key + idx; }
 
       const toPages = () => {
         return nav.getTabs(compKey); }
@@ -52,7 +55,7 @@ import {inject, ref, onMounted, onUnmounted } from 'vue';
       onUnmounted( () => {
         mix.delScript( scriptSrc ); } )
 
-    return { compKey, toPages, page, pageIdx, show }; }
+    return { compKey, toPages, page, pageIdx, keyIdx, show }; }
   }
   export default Hues;
   

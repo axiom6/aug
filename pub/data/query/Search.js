@@ -1,6 +1,6 @@
 var Search;
 
-import Util from '../../../lib/pub/base/util/Util.js';
+import Vis from '../../../lib/pub/base/draw/Vis.js';
 
 Search = class Search {
   constructor() {}
@@ -53,7 +53,7 @@ Search = class Search {
     rows = [];
     for (pkey in pracs) {
       prac = pracs[pkey];
-      if (!(Util.isChild(pkey) && prac.plane !== 'Prin')) {
+      if (!(Vis.isChild(pkey) && prac.plane !== 'Prin')) {
         continue;
       }
       if (prac['name'] == null) {

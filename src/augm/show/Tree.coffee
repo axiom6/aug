@@ -1,5 +1,4 @@
 
-import Util   from '../../../lib/pub/base/util/Util.js'
 import Vis    from '../../../lib/pub/base/draw/Vis.js'
 
 class Tree

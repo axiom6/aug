@@ -1,8 +1,14 @@
 
 Debug
-  1. Crawl URLs
-  2. Remove router in Augm Data Jitt
-  3. Look into vite.config.js
+  1. Bad pageJey in Nav
+  2. Colors in Hues / Color / Polar / Vec / Sphere
+     Good   in Hues / Rgbs  / Regress
+  3. Warnings from MathBox
+     mathbox-bundle.js:45971 [Violation] Added non-passive event listener to a scroll-blocking 'mousewheel' event.
+     Consider marking event handler as 'passive' to make the page more responsive.
+     [Violation] 'requestAnimationFrame' handler took 55ms
+
+
 
 Features
   1. Get Touch working again

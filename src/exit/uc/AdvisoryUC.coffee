@@ -1,6 +1,6 @@
 
 import $    from 'jquery'
-import Util from '../util/Util.js'
+import Vis  from '../../../lib/pub/base/draw/Vis.js'
 
 class AdvisoryUC
 
@@ -24,6 +24,6 @@ class AdvisoryUC
     Util.cssPosition( @$, screen, @port, @land )
 
   html:() ->
-    """<div id="#{Util.id('AdvisoryUC',@role)}" class="#{Util.css('AdvisoryUC')}"></div>"""
+    """<div id="#{Vis.htmlId('AdvisoryUC',@role)}" class="#{Vis.cssNameType('AdvisoryUC')}"></div>"""
 
 `export default AdvisoryUC`

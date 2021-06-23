@@ -1,7 +1,5 @@
 var Tabu;
 
-import Util from '../../../lib/pub/base/util/Util.js';
-
 Tabu = class Tabu {
   constructor() {}
 

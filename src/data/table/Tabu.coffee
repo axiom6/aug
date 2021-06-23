@@ -1,6 +1,4 @@
 
-import Util from '../../../lib/pub/base/util/Util.js'
-
 class Tabu
 
   constructor:() ->

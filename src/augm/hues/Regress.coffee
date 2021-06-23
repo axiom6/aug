@@ -1,5 +1,5 @@
 
-import Util  from '../../../lib/pub/base/util/Util.js'
+import Vis   from '../../../lib/pub/base/draw/Vis.js'
 import Coord from './Coord.js'
 
 class Regress
@@ -15,7 +15,6 @@ class Regress
     @y = @toArray( @data02(), 1 )
     @n = Math.min( @x.length, @y.length )
     [slope,yInter] = @slopeYInter( @n, @x, @y )
-    Util.alert( { slope:slope, yInter:yInter } )
     @view  = @coord.cartesian( [[0,4],[0,500],[0,4]] )
     points = @view.area( @areaRegress( @n, @x, @y )   )
     @view.surface( { points:points, color:0x5090FF, shaded:true, opacity:1.0, lineX:true, lineY:true, width:2 } )
@@ -23,7 +22,7 @@ class Regress
   areaRegress:( n, x, y ) ->
     obj =  { id:'areaRegress', width:@width, height:@height, axes:[1,3], channels:3 }
     obj.expr = ( emit, slope, yInter, i, j ) =>
-      Util.noop( i, j )
+      Vis.noop( i, j )
       emit( slope, @rss( n, x, y, slope, yInter ), yInter )
     obj
 
@@ -32,7 +31,7 @@ class Regress
     for i in [0...n]
       term = y[i] - yInter - slope*x[i]
       sum  = sum  + term * term
-    #console.log( Util.toFixed(sum,1), Util.toFixed(slope,1), Util.toFixed(yInter,1) )
+    #console.log( Vis.toFixed(sum,1), Vis.toFixed(slope,1), Vis.toFixed(yInter,1) )
     sum
 
   data01:() ->

@@ -1,8 +1,6 @@
 var Shapes,
   hasProp = {}.hasOwnProperty;
 
-import Util from '../../../lib/pub/base/util/Util.js';
-
 import Vis from '../../../lib/pub/base/draw/Vis.js';
 
 import Convey from './Convey.js';
@@ -62,7 +60,7 @@ Shapes = class Shapes {
     var key, study;
     for (key in prac) {
       study = prac[key];
-      if (Util.isChild(key) && study.dir === dir) {
+      if (Vis.isChild(key) && study.dir === dir) {
         return key;
       }
     }
@@ -73,7 +71,7 @@ Shapes = class Shapes {
     var key, study;
     for (key in prac) {
       study = prac[key];
-      if (Util.isChild(key) && study.dir === dir) {
+      if (Vis.isChild(key) && study.dir === dir) {
         return study;
       }
     }
@@ -81,7 +79,7 @@ Shapes = class Shapes {
   }
 
   htmlId(pracName, contentName) {
-    return Util.getHtmlId(pracName, 'Info', contentName); // @ui.plane.id
+    return Vis.getHtmlId(pracName, 'Info', contentName); // @ui.plane.id
   }
 
   size(obj) {
@@ -158,7 +156,7 @@ Shapes = class Shapes {
 
   wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize, level = 'None') {
     var as, at, path, rt, sc, th, x, y;
-    Util.noop(wedgeId);
+    Vis.noop(wedgeId);
     th = 14;
     at = (a1 + a2) / 2;
     rt = (r1 + r2) / 2;

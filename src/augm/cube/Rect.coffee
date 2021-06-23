@@ -1,4 +1,4 @@
-import Util       from '../../../lib/pub/base/util/Util.js'
+
 import Vis        from '../../../lib/pub/base/draw/Vis.js'
 import * as THREE from 'three'
 
@@ -24,7 +24,7 @@ class Rect
     side = new THREE.MeshBasicMaterial( { color: @fontColor } )
 
     mats = [face,side]
-    offsetY = not Util.inString( @title, '\n' )
+    offsetY = not Vis.inStr( @title, '\n' )
     dx   = 0.5 * ( text.boundingBox.max.x - text.boundingBox.min.x )
     dy   = if offsetY then 0.5 * ( text.boundingBox.max.y - text.boundingBox.min.y ) else 0
     Rect.matrix.makeTranslation( @xyz[0]-dx, @xyz[1]-dy, @xyz[2]   )

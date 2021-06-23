@@ -2,8 +2,6 @@ var Innovate;
 
 import * as d3 from 'd3';
 
-import Util from '../../../lib/pub/base/util/Util.js';
-
 import Vis from '../../../lib/pub/base/draw/Vis.js';
 
 Innovate = class Innovate {
@@ -24,7 +22,7 @@ Innovate = class Innovate {
 
   drawSvg(g, size, defs) {
     var key, ref, study;
-    Util.noop(defs);
+    Vis.noop(defs);
     this.lay = this.shapes.layout(size, this.spec.column, this.shapes.size(this.studies), this.shapes.size(this.studies));
     this.rings(g, size);
     switch (this.spec.row) {

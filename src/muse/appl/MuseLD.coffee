@@ -1,5 +1,5 @@
 
-import Util from '../../../lib/pub/base/util/Util.js'
+import { tester } from '../../../lib/pub/base/util/Util.js'
 import Prin from '../../../data/muse/Prin.json'
 import Rows from '../../../data/muse/Rows.json'
 import Info from '../../../data/muse/Info.json'
@@ -35,7 +35,7 @@ class MuseLD
     jsonLD
 
   isChild:( key ) ->
-    Util.isChild(key)
+    tester.isChild(key)
     
   toPracLD:( pkey, prac, site ) ->
     pracLD              = {}

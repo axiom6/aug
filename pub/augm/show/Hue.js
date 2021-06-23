@@ -1,7 +1,5 @@
 var Hue;
 
-import Util from '../../../lib/pub/base/util/Util.js';
-
 import Vis from '../../../lib/pub/base/draw/Vis.js';
 
 import Palettes from '../../../lib/pub/base/draw/Palettes.js';
@@ -255,7 +253,7 @@ Hue = class Hue extends Radar {
 
   paletteWedges(dh, dr, r1, r2) {
     var c, g, i, j, len, len1, palette, r, ref, ref1;
-    Util.noop(r2);
+    Vis.noop(r2);
     g = this.g.selectAll("g").append("svg:g");
     ref = this.palettes;
     for (i = 0, len = ref.length; i < len; i++) {

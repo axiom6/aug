@@ -2,7 +2,7 @@ var AdvisoryUC;
 
 import $ from 'jquery';
 
-import Util from '../util/Util.js';
+import Vis from '../../../lib/pub/base/draw/Vis.js';
 
 AdvisoryUC = class AdvisoryUC {
   constructor(stream, role, port, land) {
@@ -39,7 +39,7 @@ AdvisoryUC = class AdvisoryUC {
   }
 
   html() {
-    return `<div id="${Util.id('AdvisoryUC', this.role)}" class="${Util.css('AdvisoryUC')}"></div>`;
+    return `<div id="${Vis.htmlId('AdvisoryUC', this.role)}" class="${Vis.cssNameType('AdvisoryUC')}"></div>`;
   }
 
 };

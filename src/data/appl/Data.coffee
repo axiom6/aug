@@ -1,12 +1,12 @@
 
-import Access from '../../../lib/pub/base/util/Access.js'
-#mport Build  from '../../../lib/pub/base/util/Build.js'
-import Stream from '../../../lib/pub/base/util/Stream.js'
-import Nav    from '../../../lib/pub/base/nav/Nav.js'
-import Touch  from '../../../lib/pub/base/nav/Touch.js'
-import Cache  from '../../../lib/pub/base/util/Cache.js'
-import Mix    from '../../../lib/pub/base/nav/Mix.js'
-
+import { tester } from  '../../../lib/pub/test/Tester.js'
+import Access from      '../../../lib/pub/base/util/Access.js'
+#mport Build  from      '../../../lib/pub/base/util/Build.js'
+import Stream from      '../../../lib/pub/base/util/Stream.js'
+import Nav    from      '../../../lib/pub/base/nav/Nav.js'
+import Touch  from      '../../../lib/pub/base/nav/Touch.js'
+import Cache  from      '../../../lib/pub/base/util/Cache.js'
+import Mix    from      '../../../lib/pub/base/nav/Mix.js'
 
 import { createApp }    from 'vue'    #
 import { createRouter, createWebHistory } from 'vue-router'
@@ -105,6 +105,7 @@ class Data
     Data.touch  = new Touch( Data.stream, Data.nav )
     #ata.build  = new Build( batch, Data.komps )
     Data.cache  = new Cache( Data.stream )
+    tester.setOptions( { testing:true, archive:false, verbose:false, debug:false } )
     Access.buildInnov( batch, 'Data',   'Info' )
     Access.mergePracs( batch, 'Prin', ['Info','Know','Wise'] ) # 'Data'
     #ata.mergeCols()

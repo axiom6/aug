@@ -1,5 +1,4 @@
 
-#mport Util     from '../../../lib/pub/base/util/Util.js'
 import Vis      from '../../../lib/pub/base/draw/Vis.js'
 import MBox     from './MBox.js'
 import Coord    from './Coord.js'
@@ -83,7 +82,7 @@ class  Box
 
   ###
   @init = () ->
-    Util.ready ->
+    Vis.ready ->
       elem = document.querySelector('#App')
       Box.doApp('Color', elem )
       return

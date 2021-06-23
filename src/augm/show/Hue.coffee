@@ -1,5 +1,4 @@
 
-import Util     from '../../../lib/pub/base/util/Util.js'
 import Vis      from '../../../lib/pub/base/draw/Vis.js'
 import Palettes from '../../../lib/pub/base/draw/Palettes.js'
 import Radar    from './Radar.js'
@@ -80,7 +79,7 @@ class Hue extends Radar
     return
 
   paletteWedges:( dh, dr, r1, r2 ) ->
-    Util.noop(r2)
+    Vis.noop(r2)
     g = @g.selectAll("g").append("svg:g")
     for palette in @palettes
       r = r1

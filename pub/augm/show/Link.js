@@ -1,7 +1,5 @@
 var Link;
 
-import Util from '../../../lib/pub/base/util/Util.js';
-
 import Vis from '../../../lib/pub/base/draw/Vis.js';
 
 Link = class Link {
@@ -176,7 +174,7 @@ Link = class Link {
       }
       hue = 0;
       stroke = toHue;
-      if (Util.isFunc(toHue)) {
+      if (Vis.isFunc(toHue)) {
         hue = toHue(ang);
         stroke = Vis.css([hue, 50, 80]);
       }

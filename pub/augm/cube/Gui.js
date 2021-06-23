@@ -1,41 +1,41 @@
 var Gui;
 
-import Util from '../../../lib/pub/base/util/Util.js';
+import Vis from '../../../lib/pub/base/draw/Vis.js';
 
 Gui = class Gui {
   constructor(act, elem, fun) {
     this.act = act;
     this.elem = elem;
     this.fun = fun;
-    this.dat = Util.getGlobal('dat');
+    this.dat = Vis.getGlobal('dat');
     this.gui = new this.dat.GUI({
       autoPlace: false
     });
     this.elem.appendChild(this.gui.domElement);
     this.gui.remember(this.act);
     this.fun.slide = function() {
-      return Util.noop();
+      return Vis.noop();
     };
     this.fun.select = function() {
-      return Util.noop();
+      return Vis.noop();
     };
     this.fun.num = function() {
-      return Util.noop();
+      return Vis.noop();
     };
     this.fun.str = function() {
-      return Util.noop();
+      return Vis.noop();
     };
     this.fun.color0 = function() {
-      return Util.noop();
+      return Vis.noop();
     };
     this.fun.color1 = function() {
-      return Util.noop();
+      return Vis.noop();
     };
     this.fun.color2 = function() {
-      return Util.noop();
+      return Vis.noop();
     };
     this.fun.color3 = function() {
-      return Util.noop();
+      return Vis.noop();
     };
     this.planes();
     this.rows();

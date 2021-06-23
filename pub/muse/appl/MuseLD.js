@@ -1,6 +1,8 @@
 var MuseLD;
 
-import Util from '../../../lib/pub/base/util/Util.js';
+import {
+  tester
+} from '../../../lib/pub/base/util/Util.js';
 
 import Prin from '../../../data/muse/Prin.json';
 
@@ -45,7 +47,7 @@ MuseLD = class MuseLD {
   }
 
   isChild(key) {
-    return Util.isChild(key);
+    return tester.isChild(key);
   }
 
   toPracLD(pkey, prac, site) {

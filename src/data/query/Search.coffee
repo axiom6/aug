@@ -1,5 +1,5 @@
 
-import Util from '../../../lib/pub/base/util/Util.js'
+import Vis  from '../../../lib/pub/base/draw/Vis.js'
 
 class Search
 
@@ -30,7 +30,7 @@ class Search
 
   toTabuRows:( pracs ) ->
     rows = []
-    for pkey, prac of pracs when Util.isChild(pkey) and prac.plane isnt 'Prin'
+    for pkey, prac of pracs when Vis.isChild(pkey) and prac.plane isnt 'Prin'
       prac['name']      = pkey if not prac['name']?
       prac['_children'] = []
       rows.push( prac )
