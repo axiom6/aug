@@ -7,10 +7,19 @@ Debug
      mathbox-bundle.js:45971 [Violation] Added non-passive event listener to a scroll-blocking 'mousewheel' event.
      Consider marking event handler as 'passive' to make the page more responsive.
      [Violation] 'requestAnimationFrame' handler took 55ms
+  4. Remove some of the junk added to Vis
+  5. Look into cicular JSON bug in Tester.reviewsLocal()
+  6. Multiple summaries published
 
+Features One
+  1. Logging status
+     a. One
+     b. Group
+     c. Summary
+  2. Incorporate Describe
+  3. Put Summary into Initial.html
 
-
-Features
+Features Two
   1. Get Touch working again
   2. Work on Directions
   3. Scroll Tocs   on Mobile

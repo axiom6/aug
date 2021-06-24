@@ -371,6 +371,17 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/lib\/src\/base\/util\/Stream-unit.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/base\/util\/Stream-unit.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/lib\/src\/base\/util\/Stream.coffee" : {
       "ft" : 32,
       "ma" : 1,
@@ -417,9 +428,9 @@
       "ft" : 64,
       "ma" : 0,
       "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/lib\/src\/test\/Config-min.js",
-      "oF" : 0,
+      "oA" : 2,
+      "oAP" : "\/lib\/pub\/test\/Config.js",
+      "oF" : 3,
       "sC" : 0,
       "tS" : 0
     },
@@ -438,9 +449,9 @@
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
-      "oA" : 1,
-      "oAP" : "\/lib\/src\/test\/Initial.html",
-      "oF" : 0
+      "oA" : 2,
+      "oAP" : "\/lib\/pub\/test\/Initial.html",
+      "oF" : 3
     },
     "\/lib\/src\/test\/Tester-unit.coffee" : {
       "ft" : 32,

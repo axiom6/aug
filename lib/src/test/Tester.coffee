@@ -3,11 +3,16 @@ class Tester
 
   constructor:() ->
 
+    @stream = null # Optional streaming publisher module that is set by @injectStream( stream )
+
     # Key settings that can be reconfigured through setOptions( options )
-    @testing = true  # When false all testing is turned which allows tests to remain in code
-    @archive = true  # When true archives test status object to localStorage TestsPassed and TestFail
-    @verbose = false # Adds addition and sometimes mind numbing detail to testStatus objects
-    @debug   = false # Turns on debugs call to console.log(...)
+    @testing        = true          # When false all testing is turned which allows tests to remain in code
+    @archive        = true          # When true archives test status object to localStorage TestsPassed and TestFail
+    @verbose        = false         # Adds addition and sometimes mind numbing detail to testStatus objects
+    @debug          = false         # Turns on debugs call to console.log(...)
+    @statusSubject  = "TestStatus"  # Subject for publishing each test status object
+    @stringSubject  = "TestString"  # Subject for publishing each test status string
+    @summarySubject = "TestSummary" # Subject for publishing module and final summaries
 
     # Short hand for logging in a chained call i.e test(...).log( test().status )
     #  it is important that @log and @error be called in the modules being tested
@@ -23,6 +28,8 @@ class Tester
     @text         = null # set by test() that is passed inside eq() and sent to run()
     @statusText   = ""
     @statusClear  = true
+    @blockText    = ""
+    @blockClear   = true
     @code         = ""
     @passed       = []
     @failed       = []
@@ -32,10 +39,13 @@ class Tester
     @stream       = null
 
   setOptions:( options ) ->
-    @testing = if options.testing?        then options.testing        else true
-    @archive = if options.archive?        then options.archive        else true
-    @verbose = if options.verbose?        then options.verbose        else false
-    @debug   = if options.debug?          then options.debug          else false
+    @testing        = if options.testing?        then options.testing        else true
+    @archive        = if options.archive?        then options.archive        else true
+    @verbose        = if options.verbose?        then options.verbose        else false
+    @debug          = if options.debug?          then options.debug          else false
+    @statusSubject  = if options.statusSubject?  then options.statusSubject  else "TestStatus"
+    @stringSubject  = if options.stringSubject?  then options.stringSubject  else "TestString"
+    @summarySubject = if options.summarySubject? then options.summarySubject else "TestSummary"
     return
 
   # -- test -- Pass a closeure in the form of  (t) => { code... }
@@ -66,20 +76,27 @@ class Tester
     return @ if arguments.length is 0 # or not @testing -
     @text   = text
     @code   = ""
-    @run( text, result, expect )
+    @run( text, result, expect, "eq", @code )
     @
 
   eq:( result, expect ) =>
-    @run( @text, result, expect, @code )  # @text and @code are set by @test() and @unit()
+    @run( @text, result, expect, "eq", @code )
 
-  run:( text, result, expect, code ) =>
+  # This could be a very stupid feature with op = 'neq'
+  neq:( result, expect ) =>
+    @run( @text, result, expect, "neq", @code )
+
+  run:( text, result, expect, op, code ) =>
     return @ if arguments.length == 0 or not @testing
-    console.log( "Tester.run()", { text:text, result:result, expect:expect } ) if @debug
-    if @isNot(text) or @isNot(result) or @isNot(expect)
-      console.error( "Tester.run() undefine arg(s)", { text:text, result:result, expect:expect } )
+    console.log( "Tester.run()", { text:text, result:result, expect:expect, op:op } ) if  @debug
+    ###
+    if @isNot(text) or @isNot(result) or @isNot(expect)  or @isNot(op)
+      console.error( "Tester.run() undefine arg(s)", { text:text, result:result, expect:expect, op:op } )
       return @
-    status = @initStatus( result, expect, text, code )
-    status = @assert(     result, expect, status     )
+    ###
+    status = @initStatus( result, expect, text, op, code )
+    status = @assert(     result, expect, status )
+    status.assert.pass = if op is 'eq' then status.assert.pass else not status.assert.pass
     @report( status, result, expect )
     @ # Provides access to tester instance for chaining
 
@@ -88,24 +105,7 @@ class Tester
     @suite       = if suite? then suite else null
     @
 
-  archiveLocal:( failed, passed ) =>
-    localStorage.setItem( 'TestsFailed', JSON.stringify( failed ) )
-    localStorage.setItem( 'TestsPassed', JSON.stringify( passed ) )
-    return
 
-  reviewsLocal:( reviewFailed, reviewPassed ) ->
-    return if not @debug
-    if reviewFailed
-      failLocals = localStorage.getItem( 'TestsFailed' )
-      if failLocals?
-        failStatuses = JSON.parse( failLocals )
-        console.log( failStatus ) for failStatus in failStatuses when( @debug )
-    if reviewPassed
-      passLocals = localStorage.getItem( 'TestsPassed' )
-      if passLocals?
-        passStatuses = JSON.parse( passLocals )
-        console.log( passStatus ) for passStatus in passStatuses
-    return
 
   runUnitTests:( paths ) =>
     console.log( "Tester.runUnitTests()", paths ) if @debug
@@ -129,17 +129,21 @@ class Tester
   numDigits:( n ) ->
     Math.max( Math.floor( Math.log10( Math.abs(n) ) ), 0 ) + 1
 
-  initStatus:( result, expect, text, code ) ->
+  initStatus:( result, expect, text, op, code ) ->
     resultType  = @type(result)
     expectType  = @type(expect)
     module      = text.split('.')[0]
     {
-      assert:{ text:text, pass:true, module:module, code:code }
+      assert:{ text:text, pass:true, module:module, op:op, code:code }
       result:{ text:"", type:resultType, value:result }
       expect:{ text:"", type:expectType, value:expect }
     }
 
   assert:( result, expect, status, level=0 ) =>
+
+    # Set types
+    resultType  = @type(result)
+    expectType  = @type(expect)
 
     # Define checks
     if @isNot(result) or @isNot(expect)
@@ -151,7 +155,7 @@ class Tester
        return status
 
     # Type checks
-    if status.result.type isnt status.expect.type
+    if resultType isnt expectType
        status.assert.pass = false
        status.assert.text = "-- Failed -- Result type does match Expect tyoe for " + status.assert.text
        status.result.text = @textResult( status, result )
@@ -161,7 +165,7 @@ class Tester
 
     # String, Number, Object and Array check
     # May want to factor in unknowns
-    switch status.result.type
+    switch resultType
       when 'string'   then status.assert.pass = result is expect
       when 'number'   then status.assert.pass = result is expect
       when 'boolean'  then status.assert.pass = result is expect
@@ -186,29 +190,39 @@ class Tester
     status
 
   report:( status, result, expect ) ->
-    @stream.publish( status ) if @isDef(@stream)
     eq = if status.assert.pass then 'is' else 'not'
-    @statusText  = "" if @statusClear
-    @statusText += """\n#{status.assert.text} #{eq} #{expect}"""
+    @blockText   = "" if @blockClear
+    @statusText  = ""
+    @statusText += """\n#{status.assert.text} #{eq} #{@toStr(expect)}"""
     @statusText += """\n   #{@textResult( status, result )}""" if @verbose or not status.assert.pass
     @statusText += """\n   #{@textExpect( status, expect )}""" if @verbose or not status.assert.pass
-    @statusText += "\n"+@code              if @isStr(@code) and ( @verbose or not status.assert.pass )
+    #statusText += "\n"+@code              if @isStr(@code) and ( @verbose or not status.assert.pass )
+    @blockText  += @statusText if not @statusClear
     @statusClear = false
+    @blockClear  = false
+
+    if @isDef(@stream)
+      @stream.publish( @statusSubject, status )  if @stream.hasSubscribers( @statusSubject )
+      @stream.publish( @stringSubject, status )  if @stream.hasSubscribers( @stringSubject )
     return
 
   status:() ->
     @statusClear = true
     @statusText
 
+  block:() ->
+    @blockClear = true
+    @blockText
+
   summary:( module=null ) =>
-    summaryText = @status() # Prepend any test statuses
+    summaryText = ""
     if module?
       passCount = 0
       failCount = 0
       ++passCount for pass in @passed when pass.assert.module is module
       ++failCount for fail in @failed when fail.assert.module is module
       fullCount = passCount + failCount
-      summaryText += """\n\n-- Summary - for #{module}"""
+      summaryText += """\n\n-- Summary - for #{module}-unit.coffee"""
       summaryText += """\n   #{@pad(passCount,fullCount)} tests passed"""
       summaryText += """\n   #{@pad(failCount,fullCount)} tests failed"""
       summaryText += """\n   #{@pad(fullCount,fullCount)} tests total"""
@@ -218,16 +232,24 @@ class Tester
       summaryText += """\n   #{@pad(@passed.length,fullCount)} tests passed"""
       summaryText += """\n   #{@pad(@failed.length,fullCount)} tests failed"""
       summaryText += """\n   #{@pad(fullCount,     fullCount)} tests total"""
-      if @archive
-        @archiveLocal(  @failed,      @passed )  # Good place to archive with all tests complete
-        @reviewsLocal( { failed:false, passed:false } )
+
+    if @isDef(@stream) and @stream.hasSubscribers( @summarySubject )
+      @stream.publish( @summarySubject, summaryText )
+
+    summaryText = @block() + summaryText # Prepend any block statuses
+
+    # Archive since all tests are complete
+    if @archive
+      @archiveLocal(  @failed,      @passed )
+      @reviewsLocal( { failed:false, passed:false } )
+      
     summaryText
 
   textResult:( status, result ) ->
-    """Result type is #{status.result.type} with value #{result}"""
+    """Result type is #{status.result.type} with value #{@toStr(result)}"""
 
   textExpect:( status, expect ) ->
-    """Expect type is #{status.expect.type} with value #{expect}"""
+    """Expect type is #{status.expect.type} with value #{@toStr(expect)}"""
 
   # Deep object equality assertion
   objsEq:( result, expect, status, level ) ->
@@ -235,7 +257,7 @@ class Tester
       if not  result[key]?
         status.assert.pass  = false
         status.assert.text  = "-- Failed -- Result key:#{key} is missing for " + status.assert.text
-        status.expect.text  = "Expect type is #{@type(result)} with value #{expect}" # Does no work on objects
+        status.expect.text  = "Expect type is #{@type(result)} with value #{@toStr(expect)}"
         status.result.text  = "Result key:#{key} is missing"
         return status
       else
@@ -283,6 +305,28 @@ class Tester
   hasCurrency:(s) =>  @isStr(s) and /^\s*(\+|-)?((\d+(\.\d\d)?)|(\.\d\d))\s*$/.test(s)
   hasEmail:(s)    =>  @isStr(s) and /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/.test(s)
 
+  # Converters
+  toStr:( value, enclose=false ) =>
+    str = ""
+    switch @type(value)
+      when 'object'
+        str += "{ "
+        for own key, val of value
+          str += key+":"+@toStr(val,true)+", "
+        str = str.substring( 0, str.length-2 ) # remove trailing comma and space
+        str += " }"
+      when 'array'
+        str += "[ "
+        for val in value
+          str += @toStr(val,true)+", "
+        str = str.substring( 0, str.length-2 ) # remove trailing comma  and space
+        str += " ]"
+      when 'string'
+        str = if enclose then '"'+value+'"' else value
+      else str = value.toString()
+    console.log( "Tester.toStr(val)", { type:@type(value), value:value, str:str } ) if enclose and @debug
+    str
+
   # Check if an object or array or string is empty
   isEmpty:(e) =>
     return false if @isNot(e)
@@ -324,6 +368,27 @@ class Tester
       @stream  = stream
     else
       console.error( "Tester.injectStream( stream ) stream klass must be 'Stream' not", type )
+    return
+
+  archiveLocal:( failed, passed ) =>
+    localStorage.setItem( 'TestsFailed', JSON.stringify( failed ) )
+    localStorage.setItem( 'TestsPassed', JSON.stringify( passed ) )
+    return
+
+  reviewsLocal:( reviewFailed, reviewPassed ) ->
+    return if not @debug
+    if reviewFailed
+      failLocals = localStorage.getItem( 'TestsFailed' )
+      if failLocals?
+        failStatuses = JSON.parse( failLocals )
+        for failStatus in failStatuses
+          console.log( failStatus )
+    if reviewPassed
+      passLocals = localStorage.getItem( 'TestsPassed' )
+      if passLocals?
+        passStatuses = JSON.parse( passLocals )
+        for passStatus in passStatuses
+          console.log( passStatus )
     return
 
 # -- ES6 exports for single tester instance and its test() and unit() methods

@@ -15,11 +15,14 @@
   <link  href="/assets/apple-touch-icon.png"  rel="apple-touch-icon">
   <link  href="/assets/favicon.ico"           rel="icon">
 </head>
-<body style="margin:0;">
-<div id="tester" style="background:black; position:absolute; width:100%; height:100%;">
+<body style="padding:0; margin:0;">
+<div id="tester" style="background:black; position:absolute; width:100%; height:100%; display:grid; overflow:auto;">
+    <div id="summary" style="color:wheat; font-size:6vmin; justify-self:center; align-self:center; text-align:center;">
+      Unit Tests:
+    </div>
 </div>
 <script type="module">
-  import Initial from './pub/base/test/Initial.js'
+  import Initial from './lib/pub/test/Initial.js'
   Initial.start(window.location.href);
 </script>
 </body>

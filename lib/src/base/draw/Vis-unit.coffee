@@ -7,7 +7,6 @@ unit().describe("Vis", "rgb")
 unit( "Vis.rgb(0xFFFFFF)",            Vis.rgb(0xFFFFFF), {r:255,g:255,b:255, a:1.0 }   )
 unit( "Vis.hex({r:255,g:255,b:255})", Vis.hex({r:255,g:255,b:255}),  0xFFFFFF  ) # Appears as 16777215 in decimal
 unit( "Vis.str({r:255,g:255,b:255})", Vis.str({r:255,g:255,b:255}), "0xFFFFFF" )
-console.log( unit().status() )
 
 unit().describe("Vis", "ysv")
 unit( "Vis.strHex(255)", Vis.strHex(255), "FF" )
@@ -31,9 +30,9 @@ unit( "Vis.str([  0,  0, 50]) gray",    Vis.str([  0,  0, 50]), "0x808080" )
 unit( "Vis.str([  0,  0,100]) white",   Vis.str([  0,  0,100]), "0xFFFFFF" )
 
 unit( "Vis.str([  0,100,100]) red",     Vis.str([  0,100,100]), "0xFF0000" )
-unit( "Vis.str([ 45,100,100]) orange",  Vis.str([ 45,100,100]), "0xFF8000" ) # ???
+unit( "Vis.str([ 45,100,100]) orange",  Vis.str([ 45,100,100]), "0xFF8000" )
 unit( "Vis.str([ 90,100,100]) yellow",  Vis.str([ 90,100,100]), "0xFFFF00" )
-unit( "Vis.str([135,100,100]) lime",    Vis.str([135,100,100]), "0x80FF00" ) # ???
+unit( "Vis.str([135,100,100]) lime",    Vis.str([135,100,100]), "0x80FF00" )
 unit( "Vis.str([180,100,100]) green",   Vis.str([180,100,100]), "0x00FF00" )
 unit( "Vis.str([225,100,100]) cyan",    Vis.str([225,100,100]), "0x00FFFF" )
 unit( "Vis.str([270,100,100]) blue",    Vis.str([270,100,100]), "0x0000FF" )

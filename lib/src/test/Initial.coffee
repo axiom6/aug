@@ -17,37 +17,54 @@ class Initial
     return
 
   Initial.init =   () ->
-    subjects        = ["Nav","Test"]
+    subjects        = ["TestStatus","TestString","TestSummary"]
     streamLog       = { subscribe:false, publish:false, subjects:subjects }
     Initial.stream  = new Stream( subjects, streamLog )
 
-    # Tester exports { test, unit, tester }
-    tester.setOptions( { testing:true, archive:true, verbose:false, debug:false } )
+    # For illustration purposes, because we are just resseting the defaults
+    tester.setOptions( { testing:true, archive:true, verbose:false, debug:false,
+    statusSubject:"TestStatus", stringSubject:"TestString", summarySubject:"TestSummary" } )
+
     tester.injectStream( Initial.stream )
+    Initial.stream.subscribe( 'TestSummary', "Initial", (summary) => Initial.onSummary(summary) )
     inViteJS = tester.isDef(`import.meta.env`)
     if inViteJS
       modulesLib = `import.meta.glob("/lib/**/*-unit.js")`
-      Initial.runUnitTestsViteJS( modulesLib )
       modulesPub = `import.meta.glob("/pub/**/*-unit.js")`
+      Initial.total = tester.toKeys(modulesLib).length + tester.toKeys(modulesPub).length
+      Initial.count = 0
+      Initial.summaryPublished = false
+      Initial.runUnitTestsViteJS( modulesLib )
       Initial.runUnitTestsViteJS( modulesPub )
     else
-      paths = ["/lib/pub/test/Tester-unit.js","/lib/pub/base/draw/Vis-unit.js"]
+      paths = ["/lib/pub/base/util/Stream-unit.js","/lib/pub/test/Tester-unit.js","/lib/pub/base/draw/Vis-unit.js"]
       tester.runUnitTests( paths )
     return
 
   # This is vite.js dependent with import.meta.glob() and its dynamic await importer
   # Can't pass glob patterns like "/pub/xx/x-unit.js"
   Initial.runUnitTestsViteJS = ( modules ) ->
-    globPtn = "/lib/**/*-unit.js"
-    console.log( "Tester.runUnitTestsViteJS()", modules, globPtn ) if @debug
-    count = 0
-    total = Object.keys(modules).length
+    console.log( "Tester.runUnitTestsViteJS()", { modules:modules, glob:"/lib/**/*-unit.js" } ) if @debug
     for own path, importer of modules
       modules[path]().then( (importer) =>
         console.log( path,   importer ) if @debug
         await importer
-        count++
-        tester.log( tester.summary() ) if count is total
+        Initial.count++
+        if Initial.count is Initial.total and not Initial.summaryPublished
+           Initial.summaryPublished = true
+           Initial.stream.publish( "TestSummay", tester.summary() )
+           tester.log( tester.summary() )
         return )
+
+  Initial.onSummary = (summary) =>
+    # console.log( "Initial.onSummary(summary)", summary )
+    sum       = document.getElementById('summary')
+    lines     = summary.split( "\n" )
+    for line in lines
+      div = document.createElement( 'div' )
+      div.style = "font-size:3vmin;"
+      div.append( line )
+      sum.append( div  )
+    return
 
 export default Initial

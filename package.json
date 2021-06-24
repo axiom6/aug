@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite serve",
-    "unit":   "node lib/pub/test/config.js",
+    "unit":   "node lib/src/test/Config.js",
     "pull":   "node pull.js",
     "push":   "node push.js",
     "build":  "vite build && node vite.copy.js",

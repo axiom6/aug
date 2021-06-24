@@ -93,6 +93,12 @@ class Stream
   hasSubscriber:( subjectName, subscriberName ) ->
     @hasSubject(  subjectName ) and @subjects[subjectName]['subscribers'][subscriberName]?
 
+  hasSubscribers:( subjectName ) ->
+    @hasSubject(   subjectName ) and not @isObjectEmpty( @subjects[subjectName]['subscribers'] )
+
+  isObjectEmpty:( obj ) ->
+    typeof(obj) is 'object' and Object.getOwnPropertyNames(obj).length is 0
+
   # Get a subject by name. Create a new one if need with a warning
   getSubject:( subjectName, warn=true ) ->
     if not @hasSubject(subjectName)
