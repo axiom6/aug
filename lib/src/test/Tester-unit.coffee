@@ -16,8 +16,6 @@ import Vis    from '../base/draw/Vis.js'
 # t = tester
 test().describe('Tester-unitester.js', 'unit tests' )
 
-unit( "Tester.type(true)",  tester.type(true), 'boolean' )
-
 five = () ->
   5
 
@@ -111,13 +109,19 @@ unit( "Tester.isVal([1,2,3])",   tester.isVal([1,2,3]),   false )
 unit( "Tester.isVal([1,2,3])",   tester.isVal([1,2,3]),   true  )
 unit( "Tester.isArray({a:'a'})", tester.isArray({a:'a'}), true  )
 
-test( 'Tester.eq( {a:"a"},{a:"a"})', (t) -> t.eq(  {a:"a"}, {a:"a"} ) )
-test( 'Tester.neq({a:"a"},{a:"b"})', (t) -> t.neq( {a:"a"}, {a:"b"} ) )
+test( 'Tester.eq( {a:"a"})', (t) -> t.eq(  {a:"a"}, {a:"a"} ) )
+test( 'Tester.eq( {a:"a"})', (t) -> t.eq(  {a:"a"}, {a:"b"} ) )
+test( 'Tester.eq( {a:"a"})', (t) -> t.eq(  {a:"a"}, {b:"a"} ) )
+
+test( "Tester.eq([1,2,3])",  (t) -> t.eq([1,2,3],[1,2,3]    ) )
+test( "Tester.eq([1,2,3])",  (t) -> t.eq([1,2,3],[1,2,3,4]  ) )
+
+test( 'Tester.eq( (x) ->, (y) -> ) )', (t) -> t.eq(  (x) ->, (y) -> ) )
 
 # String conversions
 unit( 'Tester.toStr({ a:"a", b:"b" })',  tester.toStr({ a:"a", b:"b" }), '{ a:"a", b:"b" }' )
 unit( 'Tester.toStr([ 1, 2, 3 ])',       tester.toStr([ 1, 2, 3 ]),      '[ 1, 2, 3 ]'      )
-unit( 'Tester.toStr([ "1", "2", "3" ])', tester.toStr([ "1", "2", "3" ]),  '[ "1", "2", "3" ]'      )
+unit( 'Tester.toStr([ "1", "2", "3" ])', tester.toStr([ "1", "2", "3" ]),  '[ "1", "2", "3" ]'  )
 
 # Log the current block of tests and then the summary for 't'
 console.log( unit().summary('Tester') )

@@ -21,6 +21,7 @@ class Stream
     return
 
   publish:( subjectName, object ) ->
+    return if not @hasSubscribers( subjectName )  # May not be necessary
     subject = @getSubject( subjectName, false )
     for own subscriberName, onCallback of subject['subscribers']
       onCallback( object )

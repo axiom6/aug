@@ -423,36 +423,6 @@
       "oAP" : "\/lib\/src\/test\/bdd.txt",
       "oF" : 0
     },
-    "\/lib\/src\/test\/Config.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 2,
-      "oAP" : "\/lib\/pub\/test\/Config.js",
-      "oF" : 3,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/lib\/src\/test\/Initial.coffee" : {
-      "ft" : 32,
-      "ma" : 1,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/lib\/pub\/test\/Initial.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/lib\/src\/test\/Initial.html" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 2,
-      "oAP" : "\/lib\/pub\/test\/Initial.html",
-      "oF" : 3
-    },
     "\/lib\/src\/test\/Tester-unit.coffee" : {
       "ft" : 32,
       "ma" : 1,
@@ -474,6 +444,36 @@
       "oS" : 1,
       "sC" : 0,
       "tS" : 0
+    },
+    "\/lib\/src\/test\/UnitTester.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/test\/UnitTester.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/test\/UnitTester.config.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 2,
+      "oAP" : "\/lib\/pub\/test\/Config.js",
+      "oF" : 3,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/test\/UnitTester.html" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/lib\/pub\/test\/Initial.html",
+      "oF" : 3
     },
     "\/lib\/vue" : {
       "ft" : 65536,

@@ -7,6 +7,7 @@ class Tester
 
     # Key settings that can be reconfigured through setOptions( options )
     @testing        = true          # When false all testing is turned which allows tests to remain in code
+    @logToConsole   = true
     @archive        = true          # When true archives test status object to localStorage TestsPassed and TestFail
     @verbose        = false         # Adds addition and sometimes mind numbing detail to testStatus objects
     @debug          = false         # Turns on debugs call to console.log(...)
@@ -31,6 +32,7 @@ class Tester
     @blockText    = ""
     @blockClear   = true
     @code         = ""
+    @modules      = {}
     @passed       = []
     @failed       = []
 
@@ -40,6 +42,7 @@ class Tester
 
   setOptions:( options ) ->
     @testing        = if options.testing?        then options.testing        else true
+    @logToConsole   = if options.logToConsole?   then options.logToConsole   else true
     @archive        = if options.archive?        then options.archive        else true
     @verbose        = if options.verbose?        then options.verbose        else false
     @debug          = if options.debug?          then options.debug          else false
@@ -82,10 +85,6 @@ class Tester
   eq:( result, expect ) =>
     @run( @text, result, expect, "eq", @code )
 
-  # This could be a very stupid feature with op = 'neq'
-  neq:( result, expect ) =>
-    @run( @text, result, expect, "neq", @code )
-
   run:( text, result, expect, op, code ) =>
     return @ if arguments.length == 0 or not @testing
     console.log( "Tester.run()", { text:text, result:result, expect:expect, op:op } ) if  @debug
@@ -96,7 +95,6 @@ class Tester
     ###
     status = @initStatus( result, expect, text, op, code )
     status = @assert(     result, expect, status )
-    status.assert.pass = if op is 'eq' then status.assert.pass else not status.assert.pass
     @report( status, result, expect )
     @ # Provides access to tester instance for chaining
 
@@ -104,19 +102,6 @@ class Tester
     @description = description
     @suite       = if suite? then suite else null
     @
-
-
-
-  runUnitTests:( paths ) =>
-    console.log( "Tester.runUnitTests()", paths ) if @debug
-    count = 0
-    total = paths.length
-    for path in paths
-        console.log( "Tester.runUnitTests()", path ) if @debug
-        await `import( path /* @vite-ignore */ )`
-        count++
-        @summary() if count is total
-    return
 
   pad:( n, m ) ->
     len = @numDigits( n )
@@ -134,11 +119,14 @@ class Tester
     expectType  = @type(expect)
     module      = text.split('.')[0]
     {
-      assert:{ text:text, pass:true, module:module, op:op, code:code }
+      assert:{ text:text, pass:true, module:module, op:op, code:code, info:"", exam:false }
       result:{ text:"", type:resultType, value:result }
       expect:{ text:"", type:expectType, value:expect }
     }
 
+  # Performs all assertions even a deep equal on objects and arrays
+  #   Strong type checking with @type(val) so asserions are only test when types match
+  #   Skips over @type(val) = "function"
   assert:( result, expect, status, level=0 ) =>
 
     # Set types
@@ -148,23 +136,28 @@ class Tester
     # Define checks
     if @isNot(result) or @isNot(expect)
        status.assert.pass = false
-       status.assert.text = "-- Failed -- because of null or undefined values for" + status.assert.text
+       status.assert.info = " null or undefined values"
        status.result.text = @textResult( status, result )
        status.expect.text = @textExpect( status, expect )
        @failed.push( status )
        return status
 
     # Type checks
-    if resultType isnt expectType
+    if resultType isnt expectType or ( resultType is "function" or expectType is "function" )
        status.assert.pass = false
-       status.assert.text = "-- Failed -- Result type does match Expect tyoe for " + status.assert.text
+       status.assert.text = if resultType isnt expectType
+         "-- Failed -- " + status.assert.text + " types do not match"
+       else
+         "-- Failed -- " + status.assert.text + " both types are functions"
        status.result.text = @textResult( status, result )
        status.expect.text = @textExpect( status, expect )
        @failed.push( status )
        return status
 
-    # String, Number, Object and Array check
+    # string, number, boolean, object, array and check
     # May want to factor in unknowns
+    if level > 0 and resultType is 'string'
+      console.log( 'assert()', { resultType:resultType, result:result, expect:expect } )
     switch resultType
       when 'string'   then status.assert.pass = result is expect
       when 'number'   then status.assert.pass = result is expect
@@ -172,16 +165,18 @@ class Tester
       when 'object'   then status = @objsEq( result, expect, status, level )
       when 'array'    then status = @arrsEq( result, expect, status, level )
       when 'function' then status.assert.pass = true   # Indicates a skip over when in a recursion
-      else                 status.assert.pass = false
+      else                 status.assert.pass = false  # Unknown type for comparision
 
-    # Update status at only level 0
-    if status.assert.pass and level is 0
+    # Update pass status only  at level 0
+    if status.assert.pass and level is 0  and not status.assert.exam
+       status.assert.exam = true
        status.assert.text = "-- Passed -- " + status.assert.text
        status.assert.code = @code
        status.result.text = @textResult( status, result )
        status.expect.text = @textExpect( status, expect )
        @passed.push( status )
-    else if level is 0
+    else if not status.assert.pass and not status.assert.exam
+       status.assert.exam = true
        status.assert.text = "-- Failed -- " + status.assert.text
        status.assert.code = @code
        status.result.text = @textResult( status, result )
@@ -189,11 +184,45 @@ class Tester
        @failed.push( status )
     status
 
+  textResult:( status, result ) ->
+    """Result type is #{status.result.type} with value #{@toStr(result)}"""
+
+  textExpect:( status, expect ) ->
+    """Expect type is #{status.expect.type} with value #{@toStr(expect)}"""
+
+  # Deep object equality assertion
+  objsEq:( result, expect, status, level ) ->
+    for own key, obj of expect
+      if not  result[key]?
+        status.assert.pass  = false
+        status.assert.info  = " result key '#{key}' is missing"
+        status.result.text  = @textResult( status, result )
+        status.expect.text  = @textExpect( status, expect )
+        return status
+      else
+        status = @assert( result[key], expect[key], status, ++level )
+    status.assert.pass  = true
+    return status
+
+  # Deep array equality assertion
+  arrsEq:( result, expect, status, level ) ->
+    if result.length isnt expect.length
+      status.assert.pass = false
+      status.assert.info = " different array lengths"
+      status.result.text = "Result length is #{result.length} with value " + @toStr(result)
+      status.expect.text = "Expect length is #{expect.length} with value " + @toStr(expect)
+      return status
+    for i in [0...expect.length]
+      status = @assert( result[i], expect[i], status, ++level )
+    status.assert.pass  = true
+    return status
+
   report:( status, result, expect ) ->
     eq = if status.assert.pass then 'is' else 'not'
     @blockText   = "" if @blockClear
-    @statusText  = ""
-    @statusText += """\n#{status.assert.text} #{eq} #{@toStr(expect)}"""
+    @statusText  = """\n#{status.assert.text} """
+    @statusText += """#{eq} #{@toStr(expect)}""" if status.result.type isnt "function"
+    @statusText += status.assert.info if @isStr(status.assert.info)
     @statusText += """\n   #{@textResult( status, result )}""" if @verbose or not status.assert.pass
     @statusText += """\n   #{@textExpect( status, expect )}""" if @verbose or not status.assert.pass
     #statusText += "\n"+@code              if @isStr(@code) and ( @verbose or not status.assert.pass )
@@ -202,8 +231,8 @@ class Tester
     @blockClear  = false
 
     if @isDef(@stream)
-      @stream.publish( @statusSubject, status )  if @stream.hasSubscribers( @statusSubject )
-      @stream.publish( @stringSubject, status )  if @stream.hasSubscribers( @stringSubject )
+      @stream.publish( @statusSubject, status )
+      @stream.publish( @stringSubject, status )
     return
 
   status:() ->
@@ -214,7 +243,25 @@ class Tester
     @blockClear = true
     @blockText
 
+  runUnitTests:( paths ) =>
+    for path in paths
+      modulePath = @path( path )
+      console.log( "\n-- Started Unit Testing for: #{modulePath.name} in #{modulePath.path}" ) if @logToConsole
+      await `import( path /* @vite-ignore */ )`
+    @summary()
+    return
+
+  path:( path ) ->
+    dirs   = path.split("/")
+    module = @tail(dirs).split("-")[0]
+    @modules[module] = { name:module, path:path }
+    console.log( 'Tester.path(path)', { path:path, dirs:dirs, module:module } ) if @debug
+    @modules[module]
+
   summary:( module=null ) =>
+    path = if module? and @modules[module]? then @modules[module].path else "?"
+    if @debug
+      console.log( 'Tester.summary(module)', { module:module, modules:@modules, key:@modules[module], path:path } )
     summaryText = ""
     if module?
       passCount = 0
@@ -222,7 +269,7 @@ class Tester
       ++passCount for pass in @passed when pass.assert.module is module
       ++failCount for fail in @failed when fail.assert.module is module
       fullCount = passCount + failCount
-      summaryText += """\n\n-- Summary - for #{module}-unit.coffee"""
+      summaryText += """\n\n-- Summary - for #{module} in #{path}"""
       summaryText += """\n   #{@pad(passCount,fullCount)} tests passed"""
       summaryText += """\n   #{@pad(failCount,fullCount)} tests failed"""
       summaryText += """\n   #{@pad(fullCount,fullCount)} tests total"""
@@ -244,39 +291,6 @@ class Tester
       @reviewsLocal( { failed:false, passed:false } )
       
     summaryText
-
-  textResult:( status, result ) ->
-    """Result type is #{status.result.type} with value #{@toStr(result)}"""
-
-  textExpect:( status, expect ) ->
-    """Expect type is #{status.expect.type} with value #{@toStr(expect)}"""
-
-  # Deep object equality assertion
-  objsEq:( result, expect, status, level ) ->
-    for own key, obj of expect
-      if not  result[key]?
-        status.assert.pass  = false
-        status.assert.text  = "-- Failed -- Result key:#{key} is missing for " + status.assert.text
-        status.expect.text  = "Expect type is #{@type(result)} with value #{@toStr(expect)}"
-        status.result.text  = "Result key:#{key} is missing"
-        return status
-      else
-        status = @assert( result[key], expect[key], status, ++level )
-    status.assert.pass  = true
-    return status
-
-  # Deep array equality assertion
-  arrsEq:( result, expect, status, level ) ->
-    if result.length isnt expect.length
-      status.assert.pass = false
-      status.assert.text = "-- Failed -- Different array lengths fot" + status.assert.text
-      status.result.text = "Result length is #{result.length} value is"
-      status.expect.text = "Expect length is #{expect.length} value is"
-      return status
-    for i in [0...expect.length]
-      status = @assert( result[i], expect[i], status, ++level )
-    status.assert.pass  = true
-    return status
 
   # Type Assertions that leverage @type(arg) the improved typeof(arg)
   isType:(v,t)    =>  @type(v) is t
@@ -309,21 +323,24 @@ class Tester
   toStr:( value, enclose=false ) =>
     str = ""
     switch @type(value)
-      when 'object'
+      when 'string'
+        str = if enclose then '"'+value+'"' else value
+      when 'function'
+        str = "?"
+      when 'object' # This combination of travesal and recursion is cleaner than JSON.stringify()
         str += "{ "
         for own key, val of value
           str += key+":"+@toStr(val,true)+", "
         str = str.substring( 0, str.length-2 ) # remove trailing comma and space
         str += " }"
-      when 'array'
+      when 'array'  # This combination of travesal and recursion is cleaner than JSON.stringify()
         str += "[ "
         for val in value
           str += @toStr(val,true)+", "
         str = str.substring( 0, str.length-2 ) # remove trailing comma  and space
         str += " ]"
-      when 'string'
-        str = if enclose then '"'+value+'"' else value
-      else str = value.toString()
+      else
+        str = value.toString()
     console.log( "Tester.toStr(val)", { type:@type(value), value:value, str:str } ) if enclose and @debug
     str
 
@@ -382,13 +399,13 @@ class Tester
       if failLocals?
         failStatuses = JSON.parse( failLocals )
         for failStatus in failStatuses
-          console.log( failStatus )
+          console.log( failStatus ) if @logToConsole
     if reviewPassed
       passLocals = localStorage.getItem( 'TestsPassed' )
       if passLocals?
         passStatuses = JSON.parse( passLocals )
         for passStatus in passStatuses
-          console.log( passStatus )
+          console.log( passStatus ) if @logToConsole
     return
 
 # -- ES6 exports for single tester instance and its test() and unit() methods
@@ -398,17 +415,3 @@ export tester = new Tester()
 test = tester.test
 unit = tester.unit
 export { test, unit }
-
-###
-  # Need to work on another way to log( @statusText ) when @status is not called in a unit test
-  status:( wait=null) ->
-    if @isNull(wait)
-      @statusCalled = true
-    else if @logToConsole
-      @sleep( 2000 ).then( console.log( @statusText )  ) if not @statusCalled
-      # console.log( @statusText )                       if not @statusCalled
-    @statusText
-
-  sleep:(ms) ->
-    new Promise( (resolve) => setTimeout( resolve, ms ) )
-###
