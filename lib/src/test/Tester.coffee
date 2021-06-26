@@ -11,6 +11,7 @@ class Tester
     @archive        = true          # When true archives test status object to localStorage TestsPassed and TestFail
     @verbose        = false         # Adds addition and sometimes mind numbing detail to testStatus objects
     @debug          = false         # Turns on debugs call to console.log(...)
+    @schemaKey      = "schema"      # Specifies the key in a JSON file to look up its validating schema in JSON
     @statusSubject  = "TestStatus"  # Subject for publishing each test status object
     @stringSubject  = "TestString"  # Subject for publishing each test status string
     @summarySubject = "TestSummary" # Subject for publishing module and final summaries
@@ -46,6 +47,7 @@ class Tester
     @archive        = if options.archive?        then options.archive        else true
     @verbose        = if options.verbose?        then options.verbose        else false
     @debug          = if options.debug?          then options.debug          else false
+    @schemaKey      = if options.schemaKey?      then options.schemaKey      else "schema"
     @statusSubject  = if options.statusSubject?  then options.statusSubject  else "TestStatus"
     @stringSubject  = if options.stringSubject?  then options.stringSubject  else "TestString"
     @summarySubject = if options.summarySubject? then options.summarySubject else "TestSummary"
@@ -60,13 +62,12 @@ class Tester
   #     a + b
   #   test('2 + 3 = 5', (t) ->
   #     t.eq( add(2,3), 5 ) )
-
   test:( text, closure ) =>
     return @ if arguments.length is 0 or not @testing
     @text     = text               # @text is latter referenced inside eq()
     @code     = closure.toString() # @code is latter referenced inside eq()
     closure(@)
-    @
+    @  # returns tester instance for chaining
 
   # -- unit -- For invoking the result argument immediately in a module-unit.js file
   #
@@ -74,148 +75,212 @@ class Tester
   #          import Vis      from "../draw/Vis.js"
   # Specify: unit( text, result, expect )
   # Example: unit( "can convert hex color to rgb object",  Vis.rgb(0xFFFFFF), {r:255,g:255,b:255} )
-
-  unit:(  text, result, expect ) =>   # unit(...) is always @testing
-    return @ if arguments.length is 0 # or not @testing -
+  unit:( text, result, expect ) =>   # unit(...) is always @testing
+    return @ if arguments.length is 0 or not @testing
     @text   = text
     @code   = ""
-    @run( text, result, expect, "eq", @code )
-    @
+    @run( result, expect, "eq" ) # returns tester instance for chaining
+
+  # Validate and diagnose a result that fits a schema both of type 'object' or 'array'
+  #  Very usefull for a result originating from a'.json' file and parsed by JSON.parse(...)
+  #  Very usefull for a schema originating from a'.json' file and parsed by JSON.parse(...)
+  fits:( text, result, schema ) =>
+    return @ if arguments.length is 0 or not @testing
+    @text   = text
+    @code   = ""
+    if @debug
+      console.log( "Tester.fits(result,schema)", { type:@type(result), result:result, schema:schema, status:status } )
+    @run( result, schema, "schema" )  # returns tester for chaining  is expect = @toSchema( expect, op ) needed?
 
   eq:( result, expect ) =>
-    @run( @text, result, expect, "eq", @code )
+    @run( result, expect, "eq" )
 
-  run:( text, result, expect, op, code ) =>
-    return @ if arguments.length == 0 or not @testing
+  run:( text, result, expect, op ) =>
+    return @ not @testing
     console.log( "Tester.run()", { text:text, result:result, expect:expect, op:op } ) if  @debug
-    ###
-    if @isNot(text) or @isNot(result) or @isNot(expect)  or @isNot(op)
-      console.error( "Tester.run() undefine arg(s)", { text:text, result:result, expect:expect, op:op } )
-      return @
-    ###
-    status = @initStatus( result, expect, text, op, code )
-    status = @assert(     result, expect, status )
-    @report( status, result, expect )
-    @ # Provides access to tester instance for chaining
+    status = @initStatus( result, expect, op )
+    status = @assert(     result, expect, op, status )
+    @report(              result, expect, op, status )
+    @    # returns tester instance for chaining
 
   describe:( description, suite=null ) =>
     @description = description
     @suite       = if suite? then suite else null
     @
 
-  pad:( n, m ) ->
-    len = @numDigits( n )
-    tot = @numDigits( m )
-    str = n.toString()
-    for i in [len...tot]
-      str = ' ' + str
-    str
-
-  numDigits:( n ) ->
-    Math.max( Math.floor( Math.log10( Math.abs(n) ) ), 0 ) + 1
-
-  initStatus:( result, expect, text, op, code ) ->
-    resultType  = @type(result)
-    expectType  = @type(expect)
-    module      = text.split('.')[0]
+  initStatus:( result, expect, op ) ->
+    module = text.split('.')[0]
+    eType  = if op is "schema" then "schema" else @type(expect)
     {
-      assert:{ text:text, pass:true, module:module, op:op, code:code, info:"", exam:false }
-      result:{ text:"", type:resultType, value:result }
-      expect:{ text:"", type:expectType, value:expect }
+      assert:{ text:@text, pass:true, module:module, op:op, code:@code, info:"" }
+      result:{ text:"", type:@type(result), value:result }
+      expect:{ text:"", type:eType,         value:expect }
     }
 
   # Performs all assertions even a deep equal on objects and arrays
   #   Strong type checking with @type(val) so asserions are only test when types match
   #   Skips over @type(val) = "function"
-  assert:( result, expect, status, level=0 ) =>
+  assert:( result, expect, status, op, level=0, key=null, index=null ) ->
 
-    # Set types
-    resultType  = @type(result)
-    expectType  = @type(expect)
+    # Covert expect to a schema object if op is schema
+    expect = @toSchema(expect,op)
 
-    # Define checks
-    if @isNot(result) or @isNot(expect)
-       status.assert.pass = false
-       status.assert.info = " null or undefined values"
-       status.result.text = @textResult( status, result )
-       status.expect.text = @textExpect( status, expect )
-       @failed.push( status )
-       return status
+    # Check values and types
+    status = @checkValuesTypes( result, expect, status, op, key, index )
 
-    # Type checks
-    if resultType isnt expectType or ( resultType is "function" or expectType is "function" )
-       status.assert.pass = false
-       status.assert.text = if resultType isnt expectType
-         "-- Failed -- " + status.assert.text + " types do not match"
-       else
-         "-- Failed -- " + status.assert.text + " both types are functions"
-       status.result.text = @textResult( status, result )
-       status.expect.text = @textExpect( status, expect )
-       @failed.push( status )
-       return status
+    # Perform all comparisions
+    if status.assert.pass
+       status = switch @type(result)
+         when 'string','number','boolean' then @valuesEq(   result, expect, status, op )
+         when 'object'                    then @objectsEq(  result, expect, status, op, level )
+         when 'array'                     then @arraysEq(   result, expect, status, op, level )
+         else                                  @unknownsEq( result, expect, status )  # just a fallback
+       @examine( status.assert.pass, result, expect, status, op, "", key, index )
 
-    # string, number, boolean, object, array and check
-    # May want to factor in unknowns
-    if level > 0 and resultType is 'string'
-      console.log( 'assert()', { resultType:resultType, result:result, expect:expect } )
-    switch resultType
-      when 'string'   then status.assert.pass = result is expect
-      when 'number'   then status.assert.pass = result is expect
-      when 'boolean'  then status.assert.pass = result is expect
-      when 'object'   then status = @objsEq( result, expect, status, level )
-      when 'array'    then status = @arrsEq( result, expect, status, level )
-      when 'function' then status.assert.pass = true   # Indicates a skip over when in a recursion
-      else                 status.assert.pass = false  # Unknown type for comparision
-
-    # Update pass status only  at level 0
-    if status.assert.pass and level is 0  and not status.assert.exam
-       status.assert.exam = true
-       status.assert.text = "-- Passed -- " + status.assert.text
-       status.assert.code = @code
-       status.result.text = @textResult( status, result )
-       status.expect.text = @textExpect( status, expect )
-       @passed.push( status )
-    else if not status.assert.pass and not status.assert.exam
-       status.assert.exam = true
-       status.assert.text = "-- Failed -- " + status.assert.text
-       status.assert.code = @code
-       status.result.text = @textResult( status, result )
-       status.expect.text = @textExpect( status, expect )
-       @failed.push( status )
+    # Store status in @passed and @failed arrays
+    if level is 0
+       @passed.push(status) if     status.assert.pass
+       @failed.push(status) if not status.assert.pass
     status
 
-  textResult:( status, result ) ->
-    """Result type is #{status.result.type} with value #{@toStr(result)}"""
+  # Generates informative text in status
+  examine:( pass, result, expect, status, op, info, key, index ) ->
+    expect = if op is "schema" and not isSchema(expect) then @toSchema(expect,op) else expect
+    value  = if op is "schema" then expect.value else expect
+    eType  = if op is "schema" then expect.type  else @type(expect)
+    prefix = if pass then "-- Passed -- " else "-- Failed -- "
+    status.assert.text   = prefix + status.assert.text
+    status.assert.pass   = pass and status.assert.pass # Asserts a previous status.assert.pass is false
+    status.assert.info  += info
+    status.assert.code   = if @isStr(@code) then @code else ""
+    status.result.text  += @textValue( "Result", @type(result), result, key, index )
+    status.expect.text  += @textValue( "Expect", eType,         value,  key, index )
+    status
 
-  textExpect:( status, expect ) ->
-    """Expect type is #{status.expect.type} with value #{@toStr(expect)}"""
+  # Convert expect to a schema object if op is schema
+  isSchema:( v ) ->
+    v.op? and v.type? and v.value? and v.range? and v.op? and v.size?
 
-  # Deep object equality assertion
-  objsEq:( result, expect, status, level ) ->
-    for own key, obj of expect
-      if not  result[key]?
-        status.assert.pass  = false
-        status.assert.info  = " result key '#{key}' is missing"
-        status.result.text  = @textResult( status, result )
-        status.expect.text  = @textExpect( status, expect )
-        return status
+  toSchema:( expect,   op ) ->
+    return   expect if op isnt "schema"
+    schema = { opt:false, type:"unknown", value:"any", range:"any", op:"eq", size:"any" }
+    switch @type(expect)
+      when "string"
+        schema.opt  = @tail(expect,"?") is "?"
+        schema.type = expect   # @tail(expect,"?") removed the trailing '?'
+      when "object"
+        schema.opt   = if @isBoolean(expect.opt)  then expect.opt  else  false
+        schema.type  = if @isString(expect.type)  then expect.type else "string"
+        schema.value = if expect.value?           then expect.value else "any"
+        schema.range = if @isArray(expect.range)  then expect.range else "any"
+        schema.size  = if @isNum(  expect.size )  then expect.size  else "any"
+        schema.op    = if expect.op?    then expect.op    else "eq"
+    schema
+
+  checkValuesTypes:( result, expect, status, op, key, index ) ->
+    rType =                          @type(result)
+    eType = if op isnt "schema" then @type(expect) else expect.type
+    types = ["string","number","boolean","object","array"]
+    info  = switch
+      when @isNot(result)
+        " Result of #{rType} is not defined\nExpect is type '#{eType}"
+      when @isNot(expect)
+        " Expect of #{eType} is not defined\nResult is type '#{rType}"
+      when rType isnt eType
+        " Types do not match\nResult type is '#{rType}'\nExpect type is '#{eType}'"
+      when rType is "function"
+        " Result type is 'function'\nExpect type is '#{eType}'"
+      when eType is "function"
+        " Expect type is 'function'\nResult type is '#{rType}'"
+      when not @inArray(rType,types)
+        " Result is type '#{rType}' an unknown type\nExpect is type '#{eType}'"
+      when not @inArray(eType,types)
+        " Result is type '#{rType}'\nExpect is type '#{eType}' an unknown type"
       else
-        status = @assert( result[key], expect[key], status, ++level )
-    status.assert.pass  = true
-    return status
+        ""
+    if @isStr(info)
+      @examine( false, result, expect, status, op, info, key, index )
+    else
+      status
+
+  # Equality check for "string","number","boolean" types
+  valuesEq:( result, expect, status, op ) ->
+    value = if op is "schema" then expect.value else expect
+    op    = if op is "schema" and expect.range isnt "any" then 'range' else expect.op
+    status.assert.pass = switch
+      when value is "any" then true
+      when op is "range"
+        range = expect.range
+        if range.length is 2 then range[0]          <= value and value <= range[1] # range[0] is min range[1] is max
+        if range.length is 3 then range[0]-range[2] <= value and value <= range[1]-range[2] # range[2] is a tolerance
+      when op is "eq"     then result is   value
+      when op is "le"     then result <=   value
+      when op is "lt"     then result <    value
+      when op is "ge"     then result >=   value
+      when op is "lt"     then result >    value
+      when op is "neq"    then result isnt value
+      else                     false
+    status
+
+  # Just a fallback when types are not fully screened
+  unknownsEq:( result, expect, status ) ->
+    status.assert.pass  = false
+    status.assert.info += "unknown types for comparision"
+    status
+
+  textValue:( name, value, key, index ) ->
+    ref   = " "
+    ref   " at key:#{key} "      if @isStr(key)
+    ref = " at index: #{index} " if @isNum(index)
+    "#{name}#{ref}where type is #{@type(value)} and value is #{@toStr(value)}"
+
+  # Deep object equality assertion where all matching keys are examined
+  objectsEq:( result, expect, status, op, level ) ->
+
+    # Check that the expect object has all the keys that the result object has
+    for own key, val of result when expect[key]?
+      status = @examine( false, val, expect[key], status, op, "missing expect", key, null )
+
+    # Check that the result object has all the keys that the expect object has
+    for own key, val of expect when result[key]?
+      status = @examine( false, result[key], val, status, op, "missing result", key, null )
+
+    # Assert each value for the set of keys that result and expect objects share in common
+    for own key, obj of expect when result[key]? and expect[key]?
+      status = @assert( result[key], val, status, op, ++level, key, null )
+    status
 
   # Deep array equality assertion
-  arrsEq:( result, expect, status, level ) ->
-    if result.length isnt expect.length
-      status.assert.pass = false
-      status.assert.info = " different array lengths"
-      status.result.text = "Result length is #{result.length} with value " + @toStr(result)
-      status.expect.text = "Expect length is #{expect.length} with value " + @toStr(expect)
-      return status
-    for i in [0...expect.length]
-      status = @assert( result[i], expect[i], status, ++level )
-    status.assert.pass  = true
-    return status
+  arraysEq:( result, expect, status, op, level ) ->
+    value = expect
+
+    # Check against the schema when present
+    if op is "schema"
+      value = expect.value
+      if value is 'any'
+         status.assert.pass = true
+         return status
+      else if value.size isnt "any" and result.length > value.size
+         info   = " Result length exceeds the maximum size #{value.size}"
+         info  += " Result length is #{result.length}"
+         info  += " Size is #{value.size}"
+         return @examine( false, result, expect, status, op, info, null, null )
+      else if not @isArray(value)
+         return status
+
+    # Examine the array lengths
+    if result.length isnt value.length
+      info   = " different array lengths"
+      info  += " Result length is #{result.length}"
+      info  += " Expect length is #{value.length}"
+      status = @examine( false, result, expect, status, op, info, null, null )
+
+    # Assert each value within the minimum length of the result and expect arrays
+    length = Math.min( result.length, expect.length )
+    for i in [0...length]
+      status = @assert( result[i], expect[i], status, op, ++level, null, i )
+
+    status
 
   report:( status, result, expect ) ->
     eq = if status.assert.pass then 'is' else 'not'
@@ -308,16 +373,71 @@ class Tester
   isVal:(v)       =>  @isType(v,"number") or @isType(v,"string") or @isType(v,"boolean")
   isFunc:(f)      =>  @isType(f,"function")
   isArray:(a)     =>  @isType(a,"array") and a.length? and a.length > 0
+  isBoolean:(v)   =>  @isType(a,"array")
   inArray:(a,e)   =>  @isArray(a) and a.includes(e)
   inRange:(a,i)   =>  @isArray(a) and 0 <= i and i < a.length
   atIndex:(a,e)   =>  if @isArray(a) then a.indexOf(e) else -1
-  head:(a)        =>  if @isArray(a) then a[0]          else null
-  tail:(a)        =>  if @isArray(a) then a[a.length-1] else null
   time:()         =>  new Date().getTime()
   hasInteger:(s)  =>  @isStr(s) and /^\s*(\+|-)?\d+\s*$/.test(s)
   hasFloat:(s)    =>  @isStr(s) and /^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$/.test(s)
   hasCurrency:(s) =>  @isStr(s) and /^\s*(\+|-)?((\d+(\.\d\d)?)|(\.\d\d))\s*$/.test(s)
   hasEmail:(s)    =>  @isStr(s) and /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/.test(s)
+
+  head:(v,action=false) ->
+    pop = null
+    switch @type(v)
+      when 'array'
+        switch @type(action)
+          when 'boolean'
+            pop = v[0]
+            v   = v.shift() if action
+      when 'string'
+        switch @type(action)
+          when 'boolean'
+            pop = v.charAt(0)
+            v   = v.substring(1) if action
+          when 'string' and v.startsWith(action)
+            pop = action
+            v   = v.substring(action.length)
+          when 'number'
+            pop = v.charAt(action)
+            v   = v.shift() if action
+    pop
+
+  tail:(v,action=false) ->
+    pop = null
+    switch @type(v)
+      when 'array'
+        pop = v[v.length-1]
+        v   = v.pop() if @isType(action,"boolean") and action
+      when 'string'
+        switch @type(action)
+          when 'boolean'
+            pop = v.charAt(v.length-1)
+            v   = v.substring( 0, v.length-1 ) if action
+          when 'string' and v.endsWith(action)
+            pop = action
+            v   = v.substring(0,v.length-action.length)
+    pop
+
+  # Unlike the built in Array v.slice(beg,end) where beg is a zero-based index and end
+
+  # Here beg starts at 1 and end includes the last position or is set to beg if ommitted
+  #  an array slice( ['a','b','c'], 1, 2 ) returns ['a','b']
+  #  an array slice( ['a','b','c'], 2    ) returns ['b']
+  #  a string slice( ['abc'],       1, 2 ) returns   'ab'
+  #  a string slice( ['abc'],       2    ) returns   'b'
+  # where with Array.slice() it is open
+  slice:( v, beg, end=null, remove=false ) ->
+    end if @isDef(end) then end else beg
+    pop = null
+    switch @type(v)
+      when 'array'
+        pop = if remove then v.splice(beg-1,end+1) else v.slice(beg-1,end+1)
+      when 'string'
+        pop = v.splice(beg-1,end+1)
+        v   = v.substring(0,beg-1) + v.substring(end+1) if remove
+    pop
 
   # Converters
   toStr:( value, enclose=false ) =>
@@ -359,6 +479,17 @@ class Tester
     b = key.charAt(key.length - 1)
     a is a.toUpperCase() and a isnt '$' and b isnt '_'
 
+  pad:( n, m ) ->
+    len = @numDigits( n )
+    tot = @numDigits( m )
+    str = n.toString()
+    for i in [len...tot]
+      str = ' ' + str
+    str
+
+  numDigits:( n ) ->
+    Math.max( Math.floor( Math.log10( Math.abs(n) ) ), 0 ) + 1
+
   # An improved typeof() that follows the convention by returning types in lower case
   # by default. The basic types returned are:
   # boolean number string function object array date regexp undefined null
@@ -367,6 +498,9 @@ class Tester
     tok = str.split(' ')[1]
     typ = tok.substring(0,tok.length-1)
     if lowerCase then typ.toLowerCase() else typ
+
+  scheme:( val,op='eq' ) =>
+    if op is 'schema' then 'schema' else @type(val)
 
   # A more detail type that returns basic types, class, object and function name in upper case
   klass:(val) =>
@@ -414,4 +548,23 @@ class Tester
 export tester = new Tester()
 test = tester.test
 unit = tester.unit
-export { test, unit }
+fits = tester.unit
+export { test, unit, fits }
+
+###
+  # Validate and diagnose a result that fits a schema both of type 'object' or 'array'
+  #  Very usefull for a result originating from a'.json' file and parsed by JSON.parse(...)
+  #  Very usefull for a schema originating from a'.json' file and parsed by JSON.parse(...)
+  fits2:( text, result, schema ) =>
+    return @ if arguments.length is 0 or not @testing
+    @text   = text
+    @code   = ""
+    status = @initStatus( result, schema, text, 'schema', "" )
+    status = switch @type(result)
+      when 'object' then @objectsEq( result, schema, status, level )
+      when 'array'  then @arraysEq(  result, schema, status, level )
+      else               @assert(    result, schema, status )
+    if @debug
+      console.log( "Tester.fits(result,schema)", { type:@type(result), result:result, schema:schema, status:status } )
+    @
+###
