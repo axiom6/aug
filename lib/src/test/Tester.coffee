@@ -186,6 +186,17 @@ class Tester
         " Result of #{rType} is not defined\nExpect is type '#{eType}"
       when @isNot(expect)
         " Expect of #{eType} is not defined\nResult is type '#{rType}"
+      when op is 'schema'
+        if eType is 'any'
+          ""
+        else if etype includes("|")
+          eTypes = eType.split("|")
+          if @inArray(rType,eTypes)
+            ""
+          else
+            " Result type is '#{rType}' that is not in\nExpect schema types '#{eType}'"
+        else if rType isnt eType
+          " Result type is '#{rType}'\nExpect type is '#{eType}' from schema"
       when rType isnt eType
         " Types do not match\nResult type is '#{rType}'\nExpect type is '#{eType}'"
       when rType is "function"
@@ -193,7 +204,7 @@ class Tester
       when eType is "function"
         " Expect type is 'function'\nResult type is '#{rType}'"
       when not @inArray(rType,types)
-        " Result is type '#{rType}' an unknown type\nExpect is type '#{eType}'"
+        " Result is type '#{rType}' an unknown type is type '#{eType}'"
       when not @inArray(eType,types)
         " Result is type '#{rType}'\nExpect is type '#{eType}' an unknown type"
       else
