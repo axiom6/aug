@@ -138,8 +138,9 @@ class Augm
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Augm.vue3 = () ->
     Augm.app = createApp( Dash  )
-    Augm.app.provide('mix', Augm.mix )
-    Augm.app.provide('nav', Augm.nav )
+    Augm.app.provide('tester', tester   )
+    Augm.app.provide('mix',    Augm.mix )
+    Augm.app.provide('nav',    Augm.nav )
     Augm.app.mount('#augm')
     Augm.nav.pub( Augm.nav.toPub(Augm.href), true )
     return

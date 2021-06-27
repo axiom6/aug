@@ -1,0 +1,4 @@
+{
+  "Replay" : { "name":"string:Replay",  "icon":"string", "hsv":"array:[[0,360],[0.100],[0.100]]" },
+  "Result" : { "name":"string:Result",  "icon":"string", "hsv":"array:[[0,360],[0.100],[0.100]]" }
+}

@@ -111,9 +111,10 @@ class Jitter
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Jitter.vue = () ->
     Jitter.app = createApp( Home.Dash   )
-    Jitter.app.provide('app',     Jitter.app     )
-    Jitter.app.provide('mix',     Jitter.mix     )
-    Jitter.app.provide('nav',     Jitter.nav     )
+    Jitter.app.provide('app',    Jitter.app )
+    Jitter.app.provide('mix',    Jitter.mix )
+    Jitter.app.provide('nav',    Jitter.nav )
+    Jitter.app.provide('tester', tester     )
     router = Jitter.router( Jitter.routes )
     Jitter.app.use(        router )
     Jitter.nav.router    = router

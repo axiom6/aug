@@ -123,8 +123,9 @@ class Muse
 
   Muse.vue3 = () ->
     Muse.app = createApp( Dash )
-    Muse.app.provide('mix',  Muse.mix )
-    Muse.app.provide('nav',  Muse.nav )
+    Muse.app.provide('mix',   Muse.mix )
+    Muse.app.provide('nav',   Muse.nav )
+    Muse.app.provide('tester', tester  )
     Muse.app.mount('#muse')
     Muse.nav.pub( Muse.nav.toPub(Muse.href), true )
     return

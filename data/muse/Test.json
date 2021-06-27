@@ -1,4 +1,5 @@
 {
+  "schema" : "../../../data/muse/Test-schema.json",
   "Replay" : { "name":"Replay", "icon":"fas fa-spinner",         "hsv":[90,90,90] },
   "Result" : { "name":"Result", "icon":"fas fa-question-circle", "hsv":[30,60,90] }
 }

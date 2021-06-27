@@ -1,7 +1,7 @@
 
-import Util       from '../util/Util.js'
-import { tester } from '../../test/Tester.js'
-import Vis        from '../../base/draw/Vis.js'
+import Util            from '../util/Util.js'
+import { tester as t } from '../../test/Tester.js'
+import Vis             from '../../base/draw/Vis.js'
 
 class Mix
 
@@ -9,36 +9,16 @@ class Mix
     Mix.Main =  Main
     @debug = false
 
-  # tester instance for the best assertions
-  isNul:(d)       =>  tester.isNul(d)
-  isUnd:(d)       =>  tester.isUnd(d)
-  isDef:(d)       =>  tester.isDef(d)
-  isNot:(d)       =>  tester.isNot(d)
-  isStr:(s)       =>  tester.isStr(s)
-  inStr:(s,e)     =>  tester.inStr(s,e)
-  isNum:(n)       =>  tester.isNum(n)
-  isNaN:(n)       =>  tester.isNaN(n)
-  isObj:(o)       =>  tester.isObj(0)
-  inObj:(o,k)     =>  tester.inObj(o,k)
-  toKeys:(o)      =>  tester.toKeys(o)
-  isVal:(v)       =>  tester.isVal(v)
-  isFunc:(f)      =>  tester.isFunc(f)
-  isSym:(s)       =>  tester.isSym(s)
-  isEvent:(e)     =>  tester.isEvent(e)
-  isArray:(a)     =>  tester.isArray(a)
-  inArray:(a,e)   =>  tester.inArray(a,e)
-  inRange:(a,i)   =>  tester.inRange(a,i)
-  atIndex:(a,e)   =>  tester.atIndex(a,e)
-  head:(a)        =>  tester.head(a)
-  tail:(a)        =>  tester.tail(a)
-  time:()         =>  tester.time()
-  hasInteger:(s)  =>  tester.hasInteger(s)
-  hasFloat:(s)    =>  tester.hasInteger(s)
-  hasCurrency:(s) =>  tester.hasInteger(s)
-  hasEmail:(s)    =>  tester.Email(s)
-  isChild:(key)   => tester.isChild(key)
-  isElement:(e)   => tester.isElement(e)
-    
+  # A subset of tester assertions to be remove eventually
+  isDef: (d)         -> t.isDef(d)
+  isStr: (s)         -> t.isStr(s)
+  isFunc:(f)         -> t.isFunc(f)
+  isArray:(a)        -> t.isArray(a)
+  inArray: (e,a)     -> t.inArray(e,a)
+  inObject:(key,obj) -> t.inObj(key,obj)
+  isChild:(key)      -> t.isChild(key,obj)
+  keys: (obj) ->     -> t.keys(obj)
+  hasElem: (elem)    -> elem? and elem['clientHeight']? and elem['clientHeight'] > 0
 
   getElem: ($refs, name) ->  # Not called
     elem = $refs[name]
@@ -57,10 +37,10 @@ class Mix
 
   styleObj: (ikwObj, fontSize = undefined) ->
     hsv = [30, 90, 90]
-    if @isDef(ikwObj)
-      if @isDef(ikwObj.hsv)
+    if   t.isDef(ikwObj)
+      if t.isDef(ikwObj.hsv)
         hsv = ikwObj.hsv
-      else if @isDef(ikwObj.dir)
+      else if t.isDef(ikwObj.dir)
         hsv = switch ikwObj.dir
           when 'west'  then [195, 90, 70]
           when 'north' then [90, 90, 90]

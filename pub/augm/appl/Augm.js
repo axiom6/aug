@@ -107,6 +107,7 @@ Augm = (function() {
 
     static vue3() {
       Augm.app = createApp(Dash);
+      Augm.app.provide('tester', tester);
       Augm.app.provide('mix', Augm.mix);
       Augm.app.provide('nav', Augm.nav);
       Augm.app.mount('#augm');

@@ -88,8 +88,8 @@ class Tester
     return @ if arguments.length is 0 or not @testing
     @text   = text
     @code   = ""
-    if @debug
-      console.log( "Tester.fits(result,schema)", { type:@type(result), result:result, schema:schema, status:status } )
+    # if @debug
+    #  console.log( "Tester.fits(result,schema)", { type:@type(result), result:result, schema:schema, status:status } )
     @run( result, schema, "schema" )  # returns tester for chaining  is expect = @toSchema( expect, op ) needed?
 
   eq:( result, expect ) =>
@@ -145,7 +145,7 @@ class Tester
 
   # Generates informative text in status
   examine:( pass, result, expect, status, op, info, key, index ) ->
-    expect = if op is "schema" and not isSchema(expect) then @toSchema(expect,op) else expect
+    expect = if op is "schema" and not @isSchema(expect) then @toSchema(expect,op) else expect
     value  = if op is "schema" then expect.value else expect
     eType  = if op is "schema" then expect.type  else @type(expect)
     prefix = if pass then "-- Passed -- " else "-- Failed -- "
@@ -161,21 +161,76 @@ class Tester
   isSchema:( v ) ->
     v.op? and v.type? and v.value? and v.range? and v.op? and v.size?
 
+  # Format "type:ranges or value:length:oper?"
+  # Examples:
+  #   "array:[[0,360],[0,100],[0,100]]:eq?"
+  #   { type:"array", ranges:[[0,360],[0,100],[0,100]], oper:"eq", opt="?" }
+  #   "array:[0,255]" } # Range is applies to all array values
+  #   { type:"array", ranges:[0,255]
+  #   "object:{r:[0,255],g:[0,255],b:[0,255]}
+  #   "string:James"
+  #   "number:[0,100]"
+  #   "boolean"
   toSchema:( expect,   op ) ->
     return   expect if op isnt "schema"
-    schema = { opt:false, type:"unknown", value:"any", range:"any", op:"eq", size:"any" }
+    schema = { type:"any", ranges:['any'], value:"any", length:"any", oper:"eq", opt:"1" }
     switch @type(expect)
       when "string"
-        schema.opt  = @tail(expect,"?") is "?"
-        schema.type = expect   # @tail(expect,"?") removed the trailing '?'
+        schema = @parseSchema( expect, schema )
+
       when "object"
-        schema.opt   = if @isBoolean(expect.opt)  then expect.opt  else  false
-        schema.type  = if @isString(expect.type)  then expect.type else "string"
-        schema.value = if expect.value?           then expect.value else "any"
-        schema.range = if @isArray(expect.range)  then expect.range else "any"
-        schema.size  = if @isNum(  expect.size )  then expect.size  else "any"
-        schema.op    = if expect.op?    then expect.op    else "eq"
+        schema.opt    = if expect.opt is "?"        then expect.opt    else  "1" # "1" implies key required
+        schema.type   = if @isStr(expect.type)      then expect.type   else  "any"
+        schema.value  = if expect.value?            then expect.value  else  "any"
+        schema.ranges = if @isArray(expect.ranges ) then expect.ranges else ["any"]
+        schema.length = if @isNum(  expect.length ) then expect.length else  "any"
+        schema.oper   = if @isStr(  expect.oper   ) then expect.oper   else  "eq"
     schema
+
+  # parseSchemaStr
+  parseSchema:( expect, schema ) ->
+    schema.opt  = if @tail(expect,"?",true) is "?" then "?" else "1" # @tail() pops the '?'
+    splits      = expect.split(":")
+    length      = splits.length
+    schema.type = if length >= 1 then splits[0]
+    if length >= 1
+      if splits[1][0] is "["
+        schema.ranges = @toRanges( splits[1] )
+        schema.value  = "any"
+      else if splits[1].includes("|")
+        schema.ranges = @toEnums( splits[1] )
+        schema.value  = "any"
+      else
+        schema.ranges = "any"
+        schema.value  = @toType( splits[1], schema.type )
+      schema.length    = if length >= 2 then @toInt( splits[2] ) else "any"
+      schema.oper      = if length >= 3 then @toStr( splits[3] ) else "eq"
+      schema
+
+  # Range parser for @toSchema(expect,op)
+  toRanges:( splits ) =>
+    ranges = []
+    for split in splits
+      switch @type(split)
+        when 'string'
+          for split in splits
+            if @head(split,"[[",false) is '[[' and @tail(split,"]]",false) is "]]"
+              strs = @toArray(split)
+              for str in strs
+                ranges.push[@toArray(str)]
+              return ranges
+            else if @head(split) is '[' and @tail(split) is "]"
+              ranges.push[@toArray(split)]
+              return ranges
+        when 'array'
+          if @isArray(split[0])
+            for array in split
+              ranges.push(array)
+            return ranges
+          else
+            ranges.push[split]
+            return ranges
+    ranges
 
   checkValuesTypes:( result, expect, status, op, key, index ) ->
     rType =                          @type(result)
@@ -216,22 +271,55 @@ class Tester
 
   # Equality check for "string","number","boolean" types
   valuesEq:( result, expect, status, op ) ->
-    value = if op is "schema" then expect.value else expect
-    op    = if op is "schema" and expect.range isnt "any" then 'range' else expect.op
-    status.assert.pass = switch
+
+    value = expect
+    if op is "schema"
+      value  = expect.value
+      ranges = expect.ranges
+      oper   = switch
+        when ranges is "any" then "eq"
+        when @isArray(ranges)
+          if @isArray(ranges[0]) then "ranges" else "range"
+
+    status.assert.pass = switch oper
       when value is "any" then true
-      when op is "range"
-        range = expect.range
-        if range.length is 2 then range[0]          <= value and value <= range[1] # range[0] is min range[1] is max
-        if range.length is 3 then range[0]-range[2] <= value and value <= range[1]-range[2] # range[2] is a tolerance
-      when op is "eq"     then result is   value
-      when op is "le"     then result <=   value
-      when op is "lt"     then result <    value
-      when op is "ge"     then result >=   value
-      when op is "lt"     then result >    value
-      when op is "neq"    then result isnt value
-      else                     false
+      when op is "range" then @inRange( result, ranges )
+      when op is "ranges" and @isArray( result )
+        pass   = true
+        length = Math.min( result.length, ranges.length )
+        for i in [0...length]
+          if @isArray(result[i]) and @isArray(ranges[i])
+            pass = pass and @inRange( result[i], ranges[i] )
+        pass
+      when "eq" then result is   value
+      when "le" then result <=   value
+      when "lt" then result <    value
+      when "ge" then result >=   value
+      when "lt" then result >    value
+      when "ne" then result isnt value
+      else           false
     status
+
+  # if range.length = 3 min=range[0], max=range[1] and tol=range[2]
+  # if range.length = 2 min=range[0], max=range[1] and tol=0
+  # if range.length = 1 min=0,        max=range[0] and  tol=0
+  @inRange:( result, range ) ->
+    pass  = true
+    rType = @type(result)
+    if @inArray(rType,["string","number"])
+      len = range.length
+      min = 0
+      max = range[0]
+      tol = 0
+      if len >= 2
+        min = range[0]
+        max = range[1]
+        tol = range[2] if len is 3
+      pass = pass and ( min-tol <= result and result <= max+tol )
+    else if rType is 'array' and @inArray(@type(result[0]),["string","number"])
+      for val in result
+        pass = pass and @inRange( val, range )
+    pass
 
   # Just a fallback when types are not fully screened
   unknownsEq:( result, expect, status ) ->
@@ -249,11 +337,11 @@ class Tester
   objectsEq:( result, expect, status, op, level ) ->
 
     # Check that the expect object has all the keys that the result object has
-    for own key, val of result when expect[key]?
+    for own key, val of result when  expect[key]?
       status = @examine( false, val, expect[key], status, op, "missing expect", key, null )
 
     # Check that the result object has all the keys that the expect object has
-    for own key, val of expect when result[key]?
+    for own key, val of expect when ( result[key]? or ( op is "schema" and val.opt is "1" ) )
       status = @examine( false, result[key], val, status, op, "missing result", key, null )
 
     # Assert each value for the set of keys that result and expect objects share in common
@@ -386,33 +474,25 @@ class Tester
   isArray:(a)     =>  @isType(a,"array") and a.length? and a.length > 0
   isBoolean:(v)   =>  @isType(a,"array")
   inArray:(a,e)   =>  @isArray(a) and a.includes(e)
-  inRange:(a,i)   =>  @isArray(a) and 0 <= i and i < a.length
   atIndex:(a,e)   =>  if @isArray(a) then a.indexOf(e) else -1
   time:()         =>  new Date().getTime()
-  hasInteger:(s)  =>  @isStr(s) and /^\s*(\+|-)?\d+\s*$/.test(s)
-  hasFloat:(s)    =>  @isStr(s) and /^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$/.test(s)
-  hasCurrency:(s) =>  @isStr(s) and /^\s*(\+|-)?((\d+(\.\d\d)?)|(\.\d\d))\s*$/.test(s)
-  hasEmail:(s)    =>  @isStr(s) and /^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/.test(s)
 
-  head:(v,action=false) ->
-    pop = null
+  head:(v,action=false,pop=false) ->
+    val = null
     switch @type(v)
       when 'array'
         switch @type(action)
           when 'boolean'
-            pop = v[0]
+            val = v[0]
             v   = v.shift() if action
       when 'string'
         switch @type(action)
           when 'boolean'
-            pop = v.charAt(0)
+            val = v.charAt(0)
             v   = v.substring(1) if action
           when 'string' and v.startsWith(action)
-            pop = action
-            v   = v.substring(action.length)
-          when 'number'
-            pop = v.charAt(action)
-            v   = v.shift() if action
+            val = action
+            v   = v.substring(action.length) if pop
     pop
 
   tail:(v,action=false) ->
@@ -450,7 +530,34 @@ class Tester
         v   = v.substring(0,beg-1) + v.substring(end+1) if remove
     pop
 
+  isFloat:( val ) ->
+    switch @type(val)
+      when "number" then true
+      when "string"
+        regex = /^-?\d+(?:[.,]\d*?)?$/
+        regex.test(val)
+      else false
+
+  isInt:( val ) ->
+    switch @type(val)
+      when "number" then true
+      when "string"
+        regex = /^-?\d+$/
+        regex.test(val)
+      else false
+
   # Converters
+    toType:( val, type ) ->
+      switch type
+        when "string"  then @toStr(     val )
+        when "number"  then @toNum(     val )
+        when "boolean" then @toBoolean( val )
+        when "array"   then @toArray(   val )
+        when "object"  then @toObj(     val )
+        else
+          console.error( "Tester.toType(type,val) unknown type", { type:type, val:val } )
+          null
+
   toStr:( value, enclose=false ) =>
     str = ""
     switch @type(value)
@@ -474,6 +581,96 @@ class Tester
         str = value.toString()
     console.log( "Tester.toStr(val)", { type:@type(value), value:value, str:str } ) if enclose and @debug
     str
+
+  toNum:( arg ) ->
+    switch @type(arg)
+      when 'string' and @isFloat(arg) then @toFloat(arg)
+      when 'string' and @isInt(arg)   then @toInt(arg)
+      when 'number'
+        if Number.isInteger(arg) then @toInt(arg) else @toFloat(arg)
+      else NaN
+
+  toFloat:( arg ) ->
+    switch @type(arg)
+      when 'number' then arg
+      when 'string' then parseFloat(arg)
+      else NaN
+
+  toInt:( arg ) ->
+    switch @type(arg)
+      when 'number' then Math.round(arg)
+      when 'string' then   parseInt(arg)
+      else NaN
+
+  # Return a number with fixed decimal places
+  toFixed:( arg, dec=2 ) ->
+    num = switch @type(arg)
+      when 'number' then arg
+      when 'string' then parseFloat(arg)
+    num.toFixed(dec)
+
+  toBoolean:( arg ) ->
+    bool = switch @type(arg)
+      when 'boolean' then arg
+      when 'string'
+        switch arg 
+          when "true"  then  true
+          when "false" then false
+          else              false
+      when 'number' then arg isnt 0
+      else false
+    bool
+
+  toArray:( value, type, sep="|" ) =>
+    switch @type(value)
+      when 'string'
+        if @head(value) is "[" and @tail(value) is "]" # Strip off brackets
+          value = @slice(value,2,value.length-1)
+        array = []
+
+        strs  = @slice(value,2,value.length-1).split(sep)
+        for str in strs
+          array.push( @toType( str, type ) )
+        array
+      when 'array'
+        value
+      else
+        null
+
+  toObj:( arg ) =>
+    obj  = {}
+    type = @type(arg)
+    switch type
+      when 'object' then obj = arg
+      when 'array'  then obj[i] = arg[i] for i in [0...arg.length]
+      when 'number','boolean','function'
+        obj[type] = arg
+      when 'string'
+        obj = arg.split(',')
+                 .map( (x) => x.split(':').map( (y) => y.trim() ) )
+                 .reduce( (a,x) => a[x[0]] = x[1]; a {} )
+      else obj
+
+    # const obj = 'foo: 1, bar: 2'
+    toObj2:( arg ) ->
+      arg.split(',') # split into ['foo: 1', 'bar: 2']
+         .map(  (keyVal) =>             # go over each keyVal value in that array
+            return keyVal.split(':')    #  split into ['foo', '1'] and on the next loop ['bar', '2']
+            .map( (y) => y.trim() ) )   # loop over each value in each array and remove trailing whitespace
+        .reduce( (acc,curr) =>          # reduce() takes a func and a beginning object, we're making fresh object
+            acc[curr[0]] = curr[1]; acc {} )
+        # accumulator starts at the beginning obj, in our case {}, and "accumulates" values to it
+        # since reduce() works like map() in the sense it iterates over an array, and it can be chained upon things like map(),
+        # first time through it would say "okay accumulator, accumulate currentValue[0] (which is 'foo') = currentValue[1] (which is '1')
+        # so first time reduce runs, it starts with empty object {} and assigns {foo: '1'} to it
+        # second time through, it "accumulates" {bar: '2'} to it. so now we have {foo: '1', bar: '2'}
+        #  return when there are no more things in the array to iterate over,
+
+  toCap:( str ) ->
+    str.charAt(0).toUpperCase() + str.substring(1)
+
+  unCap:( str ) ->
+    str.charAt(0).toLowerCase() + str.substring(1)
 
   # Check if an object or array or string is empty
   isEmpty:(e) =>

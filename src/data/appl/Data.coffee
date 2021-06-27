@@ -119,6 +119,7 @@ class Data
     Data.app = createApp( Home.Dash   )
     Data.app.provide('mix',  Data.mix )
     Data.app.provide('nav',  Data.nav )
+    Data.app.provide('tester', tester )
     router = Data.router( Data.routes )
     Data.app.use(        router )
     Data.nav.router    = router

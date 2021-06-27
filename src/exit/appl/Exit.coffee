@@ -113,6 +113,7 @@ class Exit
     Exit.app = createApp( Home.Dash   )
     Exit.app.provide('mix',  Exit.mix )
     Exit.app.provide('nav',  Exit.nav )
+    Exit.app.provide('tester', tester )
     router = Exit.router( Exit.routes )
     Exit.app.use(        router )
     Exit.nav.router    = router
