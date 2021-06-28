@@ -1,0 +1,9 @@
+{
+  "Import:Types":"Types.json",
+  "Prac" :{ "type":"Prac:Object(9)", "hsv":"type:hsv", "column":"string:Embrace|Innovate|Encourage",
+    "row":"string:Learn|Do|Share","plane":"type:plane", "icon":"string","cells":"type:cells",
+    "dir":"type:dir", "neg":"string?", "ref":"string?", "desc":"string",
+    "Disp": { "type":"Disp:Object(4)", "dir":"type:dir", "icon":"fas fa-users","hsv":"array(int,3):[360,100,100]",
+      "desc":"string",  "ref":"string?", "topics":"string?",
+      "Area" : { "type":"Area:Object(3)", "icon":"string", "desc":"string", "ref":"string?" } } }
+}

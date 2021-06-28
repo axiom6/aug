@@ -134,10 +134,10 @@ class Tester
     # Perform all comparisions
     if status.assert.pass
        status = switch @type(result)
-         when "string","number","boolean" then @valuesEq(   result, expect, status, op )
-         when "object"                    then @objectsEq(  result, expect, status, op, level )
-         when "array"                     then @arraysEq(   result, expect, status, op, level )
-         else                                  @unknownsEq( result, expect, status )  # just a fallback
+         when "string","int","float","boolean" then @valuesEq(   result, expect, status, op )
+         when "object"                         then @objectsEq(  result, expect, status, op, level )
+         when "array"                          then @arraysEq(   result, expect, status, op, level )
+         else                                       @unknownsEq( result, expect, status )  # just a fallback
        @examine( status.assert.pass, result, expect, status, op, "", key, index )
 
     # Store status in @passed and @failed arrays
@@ -162,7 +162,10 @@ class Tester
 
   # Convert expect to a schema object if op is schema
   isSchema:( v ) ->
-    v.op? and v.type? and v.value? and v.range? and v.op? and v.size?
+    v.cardinality? and v.type? and v.value? and v.range? and v.oper?
+
+  # Cardinality ? = optional 1 = required * = 0 to many + = 1 to many min:max is a range
+    Tester.cardinalityEnums = ["?","1","*","+","min:max"]
 
   # Format "type:ranges or value:length:oper?"
   # Examples:
@@ -174,20 +177,28 @@ class Tester
   #   "string:James"
   #   "number:[0,100]"
   #   "boolean"
-  toSchema:( expect,   op ) ->
-    return   expect if op isnt "schema"
-    schema = { type:"any", ranges:["any"], value:"any", length:"any", oper:"eq", opt:"1" }
-    switch @type(expect)
+
+
+
+  toSchema:( expect, op ) ->
+
+    expectType = @type(expect)
+    schema     = { cardinaly:"1", type:"any", range:["any"], value:"any", oper:"eq",  }
+
+    switch expectType
+      when "schema","stringRange","intRange","floatRange"
+        schema.cardinaly  = "1" # "1" implies key required
+        schema.type       = op  # ???
+        schema.value      = expect
+        schema.range      = if @isArray(  expect  ) then expect else ["any"] # ???
+        schema.oper       = op
       when "string"
         schema = @parseSchema( expect, schema )
-
       when "object"
-        schema.opt    = if expect.opt is "?"        then expect.opt    else  "1" # "1" implies key required
-        schema.type   = if @isString(expect.type)      then expect.type   else  "any"
-        schema.value  = if expect.value?            then expect.value  else  "any"
-        schema.ranges = if @isArray(expect.ranges ) then expect.ranges else ["any"]
-        schema.length = if @isNumber(  expect.length ) then expect.length else  "any"
-        schema.oper   = if @isString(  expect.oper   ) then expect.oper   else  "eq"
+        schema.cardinaly  = if expect.opt is "?"           then expect.opt    else  "1" # "1" implies key required
+        schema.type       = if @isString( expect.type   )  then expect.type   else  "any"
+        schema.value      = if expect.value?               then expect.value  else  "any"
+        schema.range      = if @isArray(   expect.range  ) then expect.ranges else ["any"]
     schema
 
   # parseSchemaStr
@@ -235,6 +246,8 @@ class Tester
             return ranges
     ranges
 
+
+
   checkValuesTypes:( result, expect, status, op, key, index ) ->
     rType =                          @type(result)
     eType = if op isnt "schema" then @type(expect) else expect.type
@@ -272,38 +285,31 @@ class Tester
     else
       status
 
-  # Equality check for "string","number","boolean" types
+  # Equality check for Tester.opEnums[]
+  Tester.opEnums = ["schema","stringRange","intRange","floatRange","eq","le","lt","ge","gt","ne"]
   valuesEq:( result, expect, status, op ) ->
-
     value = expect
-    if op is "schema"
-      value  = expect.value
-      ranges = expect.ranges
-      oper   = switch
-        when ranges is "any" then "eq"
-        when @isArray(ranges)
-          if @isArray(ranges[0]) then "ranges" else "range"
+    range = []
+    if @inArray( op, ["schema","stringRange","intRange","floatRange"] )
+      value = expect.value
+      range = expect.range
+    return true if value is "any"
 
-    status.assert.pass = switch oper
-      when value is "any" then true
-      when op is "range" then @inRange( result, ranges )
-      when op is "ranges" and @isArray( result )
-        pass   = true
-        length = Math.min( result.length, ranges.length )
-        for i in [0...length]
-          if @isArray(result[i]) and @isArray(ranges[i])
-            pass = pass and @inRange( result[i], ranges[i] )
-        pass
+    pass = switch op
+      when "stringRange" then @inStringRange( result, range )
+      when "intRange"    then @inIntRange(    result, range )
+      when "floatRange"  then @inFloatRange(  result, range )
       when "eq" then result is   value
       when "le" then result <=   value
       when "lt" then result <    value
       when "ge" then result >=   value
-      when "lt" then result >    value
+      when "gt" then result >    value
       when "ne" then result isnt value
       else           false
+    status.assert.pass = pass
     status
 
-  # Just a fallback when types are not fully screened
+  # Just a fallback when types are not fully  screened
   unknownsEq:( result, expect, status ) ->
     status.assert.pass  = false
     status.assert.info += "unknown types for comparision"
@@ -483,10 +489,6 @@ class Tester
   inString:(e,s)  ->  @isString(s) and s.includes(e)
   inArray:( e,a)  ->  @isArray(a)  and a.includes(e)
   inObject:(k,o)  ->  @isObject(o) and @isDef(o[k]) and o.hasOwnProperty(k)
-  
-  inRange:(i,r)     ->  @isRange(r)     and @isType(i,"int")    and r[0]      <= i and i <= r[1]
-  inTolerance:(f,t) ->  @isTolerance(t) and @isType(f,"float")  and t[0]-t[2] <= f and f <= t[1]+t[2]
-  inBetween:(s,b)   ->  @isBetween(r)   and @isType(s,"string") and b[0]-b[2] <= s and s <= b[1]+b[2]
 
   toKeys:(o)      ->  if @isObject(o) then Object.keys(o) else []
   time:()         ->  new Date().getTime()
@@ -580,12 +582,12 @@ class Tester
           str += @toString(arg)+", "
         str = str.substring( 0, str.length-2 ) # remove trailing comma  and space
         str += " ]"
-      when "function"   then @toInfo( "toString(arg)", arg, "function", "string", "?function?", "?function?" )
+      when "function"   then @toInfo( "toString(arg)", "unable to convert", arg, "function", "string", "?function?", "?function?" )
       when "null"       then "null"
       when "undefined"  then "undefined"
       when "bigint"     then arg.toString()
       when "symbol"     then arg.toString()   # return of arg.toString() could be a hail mary
-      else  @toInfo( "toString(arg)", arg, type, "string", arg.toString(), arg.toString() )
+      else  @toInfo( "toString(arg)", "unable to convert", arg, type, "string", arg.toString(), arg.toString() )
     if type isnt ( "object" or "array" ) and enc.length > 0 then @enclose(str,enc) else str
 
   toFloat:( arg ) ->
@@ -595,8 +597,8 @@ class Tester
       when "int"   then parseFloat(arg.toFixed(1)) # Coerces an 'int' like '1' to a 'float' like '1.0'
       when "string"
         if @isStringFloat(arg)  then parseFloat(arg)
-        else @toInfo( "toFloat(arg)", arg, "string", "float", "NaN", NaN )
-      else   @toInfo( "toFloat(arg)", arg,   type,   "float", "NaN", NaN )
+        else @toInfo( "toFloat(arg)", "unable to convert", arg, "string", "float", "NaN", NaN )
+      else   @toInfo( "toFloat(arg)", "unable to convert", arg,   type,   "float", "NaN", NaN )
 
   toInt:( arg ) ->
     type = @type(arg)
@@ -605,12 +607,8 @@ class Tester
       when "float"  then Math.round(arg)
       when "string"
         if @isStringInt(arg)  then parseInt(arg)
-        else @toInfo( "toInt(arg)", arg, "string", "int", "NaN", NaN )
-      else   @toInfo( "toInt(arg)", arg,   type,   "int", "NaN", NaN )
-
-  toInfo:( method, arg, type, typeTo, retnStr, retn ) ->
-    @info += "\n  Tester.#{method} unable to convert #{@toString(arg)} of '#{type}' to'#{typeTo}' returning #{retnStr}"
-    retn
+        else @toInfo( "toInt(arg)", "unable to convert", arg, "string", "int", "NaN", NaN )
+      else   @toInfo( "toInt(arg)", "unable to convert", arg,   type,   "int", "NaN", NaN )
 
   toBoolean:( arg ) ->
     type = @type(arg)
@@ -620,10 +618,10 @@ class Tester
         switch arg 
           when "true"  then  true
           when "false" then false
-          else @toInfo( "toBoolean(arg)", arg, type, "boolean", "false", false )
+          else @toInfo( "toBoolean(arg)", "unable to convert", arg, type, "boolean", "false", false )
       when "int"   then arg isnt 0   # check 0   false may not be a convention
       when "float" then arg isnt 0.0 # check 0.0 false may not be a convention
-      else     @toInfo( "toBoolean(arg)", arg, type, "boolean", "false", false )
+      else     @toInfo( "toBoolean(arg)", "unable to convert", arg, type, "boolean", "false", false )
 
   toArray:( arg, type, sep="," ) ->
     type = @type(arg)
@@ -638,45 +636,72 @@ class Tester
         for str in strs
           array.push( @toType( str, type ) )
         array
-      else @toInfo( "toArray(arg)", arg, type, "array", "[]", [] )
+      else @toInfo( "toArray(arg)", "unable to convert", arg, type, "array", "[]", [] )
 
   toObject:( arg ) ->
     obj  = {}
     type = @type(arg)
     switch type
-      when "object" then obj = arg
-      when "array"  then obj[i] = arg[i] for i in [0...arg.length]
-      when "number","boolean","function"
+      when "object"
+        obj = arg
+      when "array"
+        obj[i] = arg[i] for i in [0...arg.length]
+      when "int","float","boolean","function"
         obj[type] = arg
       when "string"
         obj = arg.split(",")
                  .map( (keyVal) => keyVal.split(":").map( (arg) => arg.trim() ) )
                  .reduce( (acc,cur) => acc[cur[0]] = cur[1]; acc {} )  # acc accumulator cur current
-      else @toInfo( "toObject(arg)", arg, type, "object", "{}", {} )
+      else
+        @toInfo( "toObject(arg)", "unable to convert", arg, type, "object", "{}", {} )
+    obj
 
   # -- Assertion for range with type='int', tolerane with type='float' and 'between' with type='string'
-  isRange:(r)       ->   @isArray(r,"int")    and r.length is 2 and r[0]      <= r[1]       # For 'int'
-  isWithin:(w)   ->   @isArray(r,"float")  and w.length is 3 and w[0]-w[2] <= w[1]+w[2]  # For 'float' w[2] is tol
-  isBetween:(b)     ->   @isArray(r,"string") and r.length is 2 and r[0]      <= r[1]       # For 'string'
+  isRange:(range,type)   ->
+    switch type
+      when 'string' then @isStringRamge(range)
+      when 'int'    then @isIntRange(range)
+      when 'float'  then @isFloatRange(range)   # Need to verify these args with @toInfo(args...)
+      else  @toInfo( "isRange(arg)", "unknown range type", range, type, "", "false", false )
 
-  toRange:(arg) ->
+  isStringRamge:(r) ->
+    @isArray(r,"string") and r.length is 2 and r[0]      <= r[1]       # For 'string'
+  isIntRange:(r)    ->
+    @isArray(r,"int")    and r.length is 2 and r[0]      <= r[1]       # For 'int'
+  isFloatRange:(r)  ->
+    @isArray(r,"float")  and r.length is 3 and r[0]-r[2] <= r[1]+r[2]  # For 'float' r[2] is tol
+
+  toStringRange:(arg) ->
+    type = @type(arg)
+    zero = ""                  # is "" the monoid zero or the sortable for string?
+    if @isWithin(arg) then arg # the 2 strings [min,max] are present and even verified
+    else if type is "string" then [zero,arg]
+    else if @isArray(arg,'string') and arg.length is 1 then [zero,arg[0]]
+    else @toInfo( "toStringRamge(arg)", "unable to create range for", arg, type, "stringRamge", "[]", [] )
+
+  # unable to convert
+  toInfo:( method, text, arg, type, typeTo, retnStr, retn ) ->
+    @info += "\n  Tester.#{method} #{text} #{@toString(arg)} of '#{type}' to'#{typeTo}' returning #{retnStr}"
+    retn
+
+  ###
+    toStatus:( pass, text, method, result, type, range, retnStr, retn ) ->
+          prefix = if pass then "-- Passed -- " else "-- Failed -- "
+          @statusText += @textValue:( "Result", result, null, null )
+          @statusText += @textValue:( "Expect", range,  null, null )  # Get @textValue(...) to report on expect ranges
+          passEnum
+      retn
+    ###
+  toIntRange:(arg) ->
     type = @type(arg)
     zero = 0                  #  0 is the default minimum
     if @isRange(arg) then arg # the 2 int [min,max] are present and even verified
     else if type is "int"    then [zero,arg]
     else if type is "float"  then [zero,@toInt(arg)]
     else if @isArray(arg,'int') and arg.length is 1 then [zero,arg[0]]
-    else @toInfo( "toRange(arg)", arg, type, "range", "[]", [] )
+    else @toInfo( "toIntRange(arg)", "unable to create range for", arg, type, "intRange", "[]", [] )
 
-  toWithin:(arg) ->
-    type = @type(arg)
-    zero = ""                  # is "" the monoid zero or the sortable for string?
-    if @isWithin(arg) then arg # the 2 strings [min,max] are present and even verified
-    else if type is "string" then [zero,arg]
-    else if @isArray(arg,'string') and arg.length is 1 then [zero,arg[0]]
-    else @toInfo( "toWithin(arg)", arg, type, "within", "[]", [] )
-
-  toBetween:(arg) ->
+  toFloatRange:(arg) ->
     type      = @type(arg)
     zero      = 0.0        #  0.0   is the default minimum
     tolerance = 0.001 #  0.001 is the default tokerance multiplier of the max value
@@ -687,9 +712,48 @@ class Tester
     else if @isArray(arg,'float')
       if      arg.length is 1 then [zero,  arg[0],flt*tolerance]
       else if arg.length is 2 then [arg[0],arg[1],flt*tolerance]
-    else @toInfo( "toBetween(arg)", arg, type, "between", "[]", [] )
+    else @toInfo( "toFloatRange(arg)", "unable to create range for", arg, type, "floatRange", "[]", [] )
 
-  # Return a number with a fixed number of decimal places
+  inRange:(result,range) ->
+    type      = @type(result)
+    typeRange =  type+"Range"
+    pass = @isRange(range)
+    if not pass
+      return @toInfo( "inRamge()", result, type, type+"Range", "false", false )
+
+    switch type
+      when "string" then @inStringRange( result, range )
+      when "int"    then @inIntRange(    result, range )
+      when "float"  then @inFloatRange(  result, range )
+      when "array"
+        pass   = true
+        if range.length is 1
+          for i in [0...result.length]
+            if @isArray(result[i])
+              pass = pass and @inRange( result[i], range )
+        else
+          len1 = result.length
+          len2 = range.length
+          if len1 > range.length
+            @toInfo( "inRange()", "not enough range tests #{len2} for result so only will be #{len1} tests on result",
+              result, type, typeRange, "false", false )
+          else if result.length < range.length
+            @toInfo( "inRange()", "OK, biet more range tests #{len2} than needed for result #{len1}",
+              result, type, typeRange, "false", false )
+          min = Math.min( len1, len2 )
+          for i in [0...min]
+            if @isArray(result[i]) and @isArray(range[i])
+              pass = pass and @inRange( result[i], range[i] )
+      else @toInfo( "inRamge()", "unknown range type", result, type, typeRange, "false", false )
+    pass
+
+  # Here we assume that all value types and range type [string,int,float] have been veriiied
+  #   range[0] is min range[1] is max and range[2] is the +- tolerance for floats
+  inStringRange:( string, range )  -> range[0]          <= string and string <= range[1]
+  inIntRange:(    int,    range )  -> range[0]          <= int    and int    <= range[1]
+  inFloatRange:(  float,  range )  -> range[0]-range[2] <= float  and float  <= range[1]+range[2]
+
+# Return a number with a fixed number of decimal places
   toFixed:( arg, dec=2 ) ->
     num = switch @type(arg)
       when "int","float" then arg
@@ -773,8 +837,8 @@ class Tester
 
   # An improved typeof() that follows the convention by returning types in lower case by default.
   # The basic types similar to typeof() returned are:
-  Tester.types   = ["string","int","float","boolean","array","object","regex","date","function","bigint","symbol","null","undefined"]
-  Tester.typeofs = ["string",  "number",   "boolean",        "object",               "function","bigint","symbol","null","undefined"]
+  Tester.typeEnums   = ["string","int","float","boolean","array","object","regex","date","function","bigint","symbol","null","undefined"]
+  Tester.typeofEnums = ["string",  "number",   "boolean",        "object",               "function","bigint","symbol","null","undefined"]
   type:(arg,lowerCase=true) ->
     str = Object::toString.call(arg)
     tok = str.split(" ")[1]
@@ -846,8 +910,6 @@ class Tester
         for passStatus in passStatuses
           console.log( passStatus ) if @logToConsole
     return
-
-
 
 # -- ES6 exports for single tester instance and its test() and unit() methods
 #   tester is instanciates once on its first import subseqent imports
