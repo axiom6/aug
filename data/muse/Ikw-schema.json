@@ -1,0 +1,14 @@
+{
+  "type:hsv":    "array(int,3):[360,100,100]",
+  "type:column": "string:Embrace|Innovate|Encourage",
+  "type:row":    "string:Learn|Do|Share",
+  "type:plane":  "string:Info|Know|Wise",
+  "type:cells":  "array(int,4):[[1.12]]",
+  "type:dir":    "string:nw|north|ne|west|cen|east|sw|south|se",
+  "type:prac" :{ "type":"prac", "hsv":"type:hsv", "column":"string:Embrace|Innovate|Encourage",
+    "row":"string:Learn|Do|Share","plane":"type:plane", "icon":"string","cells":"type:cells",
+    "dir":"type:dir", "neg":"string?", "ref":"string?", "desc":"string",
+    "type:disp": { "type":"disp", "dir":"west", "icon":"fas fa-users","hsv":"array(int,3):[360,100,100]",
+      "desc":"string",  "ref":"string?", "topics":"string?",
+      "type:area" : { "type":"area", "icon":"string", "desc":"string", "ref":"string?" } } }
+}

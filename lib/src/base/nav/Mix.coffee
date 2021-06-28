@@ -11,11 +11,11 @@ class Mix
 
   # A subset of tester assertions to be remove eventually
   isDef: (d)         -> t.isDef(d)
-  isStr: (s)         -> t.isStr(s)
-  isFunc:(f)         -> t.isFunc(f)
+  isString: (s)      -> t.isString(s)
+  isFunction:(f)     -> t.isFunction(f)
   isArray:(a)        -> t.isArray(a)
   inArray: (e,a)     -> t.inArray(e,a)
-  inObject:(key,obj) -> t.inObj(key,obj)
+  inObject:(key,obj) -> t.inObject(key,obj)
   isChild:(key)      -> t.isChild(key,obj)
   keys: (obj) ->     -> t.keys(obj)
   hasElem: (elem)    -> elem? and elem['clientHeight']? and elem['clientHeight'] > 0
@@ -162,7 +162,7 @@ class Mix
     pracs = {}
     if @isBatch(compKey)
       compPracs = @pracs(compKey)
-      if @isDef(inovKey) and inovKey isnt compKey and @isBatch(inovKey)
+      if t.isDef(inovKey) and inovKey isnt compKey and @isBatch(inovKey)
         inovPracs = @pracs(inovKey)
         console.log( 'Mix.inovObject() inovPracs', { inovKey:inovKey, inovPracs:inovPracs } ) if @debug
         for key, prac of compPracs
@@ -255,7 +255,7 @@ class Mix
     pageKey is 'Info' or pageKey is 'Data' # @app() is 'Muse' and
 
   removeElem:( elem ) ->
-    while @isDef(elem) and @isDef(elem.firstChild)
+    while t.isDef(elem) and t.isDef(elem.firstChild)
       elem.removeChild(elem.firstChild)
     return
 

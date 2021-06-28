@@ -25,7 +25,7 @@ class Vis
   #   When arg is a number the range expressed hex is 0x000000 to 0xFFFFFF
   @rgb:( arg ) ->
     rgb = { r:255, g:255, b:255, a:1.0 } # default is white with alpha = 1.0 opaque
-    if tester.isObj(arg)
+    if tester.isObject(arg)
       rgb   = arg
       rgb.a = if arg.a? then arg.a else 1.0
     else if tester.isArray(arg)
@@ -33,7 +33,7 @@ class Vis
       rgb   = Vis.rgbHsv( arg[0], arg[1], arg[2], isRYGB )
       rgb.a = if arg.length is 4 then arg[3] else 1.0
       console.log( 'Vis.rgb()', { arg:arg, rgb:rgb, isRYGB:isRYGB } ) if @debug
-    else if tester.isNum(arg)
+    else if tester.isNumber(arg)
       rgb = { r:(arg & 0xFF0000) >> 16,   g:(arg & 0x00FF00) >> 8,  b:arg & 0x0000FF }
       rgb.a = 1.0
     Vis.round(rgb)
@@ -205,27 +205,12 @@ class Vis
   @ceil:(  x, dx )          ->  dr = Math.round(dx); Math.ceil(  x / dr ) * dr
   @within:( beg, deg, end ) -> beg   <= deg and deg <= end # Closed interval with <=
   @isZero:( v )             -> -0.01 <  v   and v   <  0.01
-  @inStr:( s, e )           -> tester.inStr( s, e )
+  @inString:( s, e )        -> tester.inString( s, e )
   @isChild:( key )          -> tester.isChild( key )
-  @isFunc:(  f   )          -> tester.isFunc( f )
-
-  @toInt:( arg ) ->
-    switch tester.type(arg)
-      when 'number' then Math.floor(arg)
-      when 'string' then  parseInt(arg)
-      else 0
-
-  # Return a number with fixed decimal places
-  @toFixed:( arg, dec=2 ) ->
-    num = switch typeof(arg)
-      when 'number' then arg
-      when 'string' then parseFloat(arg)
-      else 0
-    num.toFixed(dec)
-
-  @noop:( ...args ) ->
-    if args then false
-    return
+  @isFunction:(  f   )      -> tester.isFunction( f )
+  @toInt:(arg)              -> tester.toInt(arg)
+  @toFixed:(arg.dec)        -> tester.toInt(arg.dec)
+  @noop:(args...)           -> tester.noop(args)
 
   @hasGlobal:( global, issue=true ) ->
     has = window[global]?
@@ -237,7 +222,7 @@ class Vis
 
   @ready:( fn ) ->
     switch fn
-     when  not tester.isFunc( fn )  then return               # Sanity check
+     when  not @isFunction( fn )  then return               # Sanity check
      when  Vis.skipReady            then fn()
      when  document.readyState is 'complete' then fn() # If document is already loaded, run method
      else  document.addEventListener( 'DOMContentLoaded', fn, false )
