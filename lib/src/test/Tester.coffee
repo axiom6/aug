@@ -27,12 +27,15 @@ class Tester
     @suite       = ""
 
     # Accummulate test status state
-    @text         = null # set by test() that is passed inside eq() and sent to run()
+    @textText     = "" # set by test() that is passed inside eq() and sent to run()
+    @infoText     = ""
+    @codeText     = ""
     @statusText   = ""
     @statusClear  = true
     @blockText    = ""
     @blockClear   = true
-    @code         = ""
+
+    # Accumulated status objects
     @modules      = {}
     @passed       = []
     @failed       = []
@@ -607,7 +610,7 @@ class Tester
       else   @toInfo( "toInt(arg)", arg,   type,   "int", NaN )
 
   toInfo:( method, arg, type, typeTo, retn ) ->
-    @info += "\n  Tester.#{method} unable to convert #{@toString(arg)} of '#{type}' to'#{typeTo}' returning '#{@toString(retn)}'"
+    @infoText += "\n  Tester.#{method} unable to convert #{@toString(arg)} of '#{type}' to'#{typeTo}' returning '#{@toString(retn)}'"
     retn
 
   toBoolean:( arg ) ->
@@ -658,13 +661,12 @@ class Tester
   isBetween:(b)     ->   @isArray(r,"string") and r.length is 2 and r[0]      <= r[1]       # For 'string'
 
   toRange:(arg) ->
-    if      @isRange(arg)                           then arg
-    else if @isArray(arg,'int') and arg.length is 1 then [0,arg[0]]  # zero is the default minimum
-    else if @isType(arg,'int')                      then [0,arg]
-    else if @isType(arg,'float')                    then [0,@toInt(arg)]
-    else
-      @info += "\n  Tester.toRange(arg) unable to convert #{@toString(arg)} to an 'int' Range"
-      [0,100,0]
+    type = @type(arg)
+    if      @isRange(arg)    then arg
+    else if type is "int"    then [0,arg]
+    else if type is "float"  then [0,@toInt(arg)]
+    else if @isArray(arg,'int') and arg.length is 1 then [0,arg[0]]  # zero is  the default minimum
+    else @toInfo( "toRange(arg)", arg, type, "range", [] )
 
   # Return a number with a fixed number of decimal places
   toFixed:( arg, dec=2 ) ->
