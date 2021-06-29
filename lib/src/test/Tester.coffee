@@ -82,7 +82,7 @@ class Tester
     return @ if arguments.length is 0 or not @testing
     @text   = text
     @code   = ""
-    @run( result, expect, "eq" ) # returns tester instance for chaining
+    @run( text, result, expect, "eq" ) # returns tester instance for chaining
 
   # Validate and diagnose a result that fits a schema both of type 'object' or 'array'
   #  Very usefull for a result originating from a'.json' file and parsed by JSON.parse(...)
@@ -93,29 +93,29 @@ class Tester
     @code   = ""
     # if @debug
     #  console.log( "Tester.fits(result,schema)", { type:@type(result), result:result, schema:schema, status:status } )
-    @run( result, schema, "schema" )  # returns tester for chaining  is expect = @toSchema( expect, op ) needed?
+    @run( text, result, schema, "schema" )  # returns tester for chaining  is expect = @toSchema( expect, op ) needed?
 
   eq:( result, expect ) =>
-    @run( result, expect, "eq" )
+    @run( @text, result, expect, "eq" )
+
+  inRange:( result, range ) =>
+    @run( @text, result, range, "range" )
+
+  # -- run() scenario is @initStatus(...) @assert(...) @report(...)
 
   run:( text, result, expect, op ) ->
     return @ not @testing
     console.log( "Tester.run()", { text:text, result:result, expect:expect, op:op } ) if  @debug
-    status = @initStatus( result, expect, op )
+    status = @initStatus( result, expect, op, text   )
     status = @assert(     result, expect, op, status )
     @report(              result, expect, op, status )
     @    # returns tester instance for chaining
 
-  describe:( description, suite=null ) ->
-    @description = description
-    @suite       = if suite? then suite else null
-    @
-
-  initStatus:( result, expect, op ) ->
+  initStatus:( result, expect, op, text ) ->
     module = text.split(".")[0]
     eType  = if op is "schema" then "schema" else @type(expect)
     {
-      assert:{ text:@text, pass:true, module:module, op:op, code:@code, info:"" }
+      assert:{ text:text, pass:true, module:module, op:op, code:@code, info:"" }
       result:{ text:"", type:@type(result), value:result }
       expect:{ text:"", type:eType,         value:expect }
     }
@@ -123,22 +123,22 @@ class Tester
   # Performs all assertions even a deep equal on objects and arrays
   #   Strong type checking with @type(arg) so asserions are only test when types match
   #   Skips over @type(arg) = "function"
-  assert:( result, expect, status, op, level=0, key=null, index=null ) ->
+  assert:( result, expect, op, status, level=0, key=null, index=null ) ->
 
     # Covert expect to a schema object if op is schema
     expect = @toSchema(expect,op)
 
     # Check values and types
-    status = @checkValuesTypes( result, expect, status, op, key, index )
+    status = @checkValuesTypes( result, expect, op, status, key, index )
 
     # Perform all comparisions
     if status.assert.pass
        status = switch @type(result)
-         when "string","int","float","boolean" then @valuesEq(   result, expect, status, op )
-         when "object"                         then @objectsEq(  result, expect, status, op, level )
-         when "array"                          then @arraysEq(   result, expect, status, op, level )
-         else                                       @unknownsEq( result, expect, status )  # just a fallback
-       @examine( status.assert.pass, result, expect, status, op, "", key, index )
+         when "string","int","float","boolean" then @valuesEq(   result, expect, op, status )
+         when "object"                         then @objectsEq(  result, expect, op, status, level )
+         when "array"                          then @arraysEq(   result, expect, op, status, level )
+         else                                       @unknownsEq( result, expect, op, status )  # just a fallback
+       @examine( status.assert.pass, result, expect, op, status, "", key, index )
 
     # Store status in @passed and @failed arrays
     if level is 0
@@ -147,128 +147,28 @@ class Tester
     status
 
   # Generates informative text in status
-  examine:( pass, result, expect, status, op, info, key, index ) ->
-    expect = if op is "schema" and not @isSchema(expect) then @toSchema(expect,op) else expect
-    value  = if op is "schema" then expect.value else expect
-    eType  = if op is "schema" then expect.type  else @type(expect)
+  examine:( pass, result, expect, op, status, info, key, index ) ->
+    rType  = @type(result)
+    eType  = @typeExpect(expect)
     prefix = if pass then "-- Passed -- " else "-- Failed -- "
     status.assert.text   = prefix + status.assert.text
     status.assert.pass   = pass and status.assert.pass # Asserts a previous status.assert.pass is false
     status.assert.info  += info
     status.assert.code   = if @isString(@code) then @code else ""
-    status.result.text  += @textValue( "Result", @type(result), result, key, index )
-    status.expect.text  += @textValue( "Expect", eType,         value,  key, index )
+    status.result.text  += @textValue( "Result", rType, result, key, index )
+    status.expect.text  += @textValue( "Expect", eType, expect, key, index )
     status
 
-  # Convert expect to a schema object if op is schema
-  isSchema:( v ) ->
-    v.cardinality? and v.type? and v.value? and v.range? and v.oper?
-
-  # Cardinality ? = optional 1 = required * = 0 to many + = 1 to many min:max is a range
-    Tester.cardinalityEnums = ["?","1","*","+","min:max"]
-
-  # Format "type:ranges or value:length:oper?"
-  # Examples:
-  #   "array:[[0,360],[0,100],[0,100]]:eq?"
-  #   { type:"array", ranges:[[0,360],[0,100],[0,100]], oper:"eq", opt="?" }
-  #   "array:[0,255]" } # Range is applies to all array values
-  #   { type:"array", ranges:[0,255]
-  #   "object:{r:[0,255],g:[0,255],b:[0,255]}
-  #   "string:James"
-  #   "number:[0,100]"
-  #   "boolean"
-
-
-
-  toSchema:( expect, op ) ->
-
-    expectType = @type(expect)
-    schema     = { cardinaly:"1", type:"any", range:["any"], value:"any", oper:"eq",  }
-
-    switch expectType
-      when "schema","stringRange","intRange","floatRange"
-        schema.cardinaly  = "1" # "1" implies key required
-        schema.type       = op  # ???
-        schema.value      = expect
-        schema.range      = if @isArray(  expect  ) then expect else ["any"] # ???
-        schema.oper       = op
-      when "string"
-        schema = @parseSchema( expect, schema )
-      when "object"
-        schema.cardinaly  = if expect.opt is "?"           then expect.opt    else  "1" # "1" implies key required
-        schema.type       = if @isString( expect.type   )  then expect.type   else  "any"
-        schema.value      = if expect.value?               then expect.value  else  "any"
-        schema.range      = if @isArray(   expect.range  ) then expect.ranges else ["any"]
-    schema
-
-  # parseSchemaStr
-  parseSchema:( expect, schema ) ->
-    schema.opt  = if @tail(expect,"?",true) is "?" then "?" else "1" # @tail() pops the '?'
-    splits      = expect.split(":")
-    length      = splits.length
-    schema.type = if length >= 1 then splits[0]
-    if length >= 1
-      if splits[1][0] is "["
-        schema.ranges = @toRanges( splits[1] )
-        schema.value  = "any"
-      else if splits[1].includes("|")
-        schema.ranges = @toEnums( splits[1] )
-        schema.value  = "any"
-      else
-        schema.ranges = "any"
-        schema.value  = @toType( splits[1], schema.type )
-      schema.length    = if length >= 2 then @toInt( splits[2] ) else "any"
-      schema.oper      = if length >= 3 then @toString( splits[3] ) else "eq"
-      schema
-
-  # Range parser for @toSchema(expect,op)
-  toRanges:( splits ) ->
-    ranges = []
-    for split in splits
-      switch @type(split)
-        when "string"
-          for split in splits
-            if @head(split,"[[",false) is "[[" and @tail(split,"]]",false) is "]]"
-              strs = @toArray(split)
-              for str in strs
-                ranges.push[@toArray(str)]
-              return ranges
-            else if @head(split) is "[" and @tail(split) is "]"
-              ranges.push[@toArray(split)]
-              return ranges
-        when "array"
-          if @isArray(split[0])
-            for array in split
-              ranges.push(array)
-            return ranges
-          else
-            ranges.push[split]
-            return ranges
-    ranges
-
-
-
-  checkValuesTypes:( result, expect, status, op, key, index ) ->
-    rType =                          @type(result)
-    eType = if op isnt "schema" then @type(expect) else expect.type
-    types = ["string","number","boolean","object","array"]
+  checkValuesTypes:( result, expect, op, status, key, index ) ->
+    rType =@type(result)
+    eType = @typeExpect(expect,op)
+    types = ["string","int","float","boolean","object","array","range","schema"]
     info  = switch
       when @isNot(result)
         " Result of #{rType} is not defined\nExpect is type '#{eType}'"
       when @isNot(expect)
         " Expect of #{eType} is not defined\nResult is type '#{rType}'"
-      when op is "schema"
-        if eType is "any"
-          ""
-        else if etype includes("|")
-          eTypes = eType.split("|")
-          if @inArray(rType,eTypes)
-            ""
-          else
-            " Result type is '#{rType}' that is not in\nExpect schema types '#{eType}'"
-        else if rType isnt eType
-          " Result type is '#{rType}'\nExpect type is '#{eType}' from schema"
-      when rType isnt eType
+      when rType isnt eType and eType isnt "range" and eType isnt "schema"
         " Types do not match\nResult type is '#{rType}'\nExpect type is '#{eType}'"
       when rType is "function"
         " Result type is 'function'\nExpect type is '#{eType}'"
@@ -281,36 +181,29 @@ class Tester
       else
         ""
     if @isString(info)
-      @examine( false, result, expect, status, op, info, key, index )
+      @examine( false, result, expect, op, status, info, key, index )
     else
       status
 
   # Equality check for Tester.opEnums[]
-  Tester.opEnums = ["schema","stringRange","intRange","floatRange","eq","le","lt","ge","gt","ne"]
-  valuesEq:( result, expect, status, op ) ->
-    value = expect
-    range = []
-    if @inArray( op, ["schema","stringRange","intRange","floatRange"] )
-      value = expect.value
-      range = expect.range
-    return true if value is "any"
-
+  Tester.opEnums = ["schema","range","eq","le","lt","ge","gt","ne"]
+  valuesEq:( result, expect, op, status ) ->
+    return true if expect is "any"
     pass = switch op
-      when "stringRange" then @inStringRange( result, range )
-      when "intRange"    then @inIntRange(    result, range )
-      when "floatRange"  then @inFloatRange(  result, range )
-      when "eq" then result is   value
-      when "le" then result <=   value
-      when "lt" then result <    value
-      when "ge" then result >=   value
-      when "gt" then result >    value
-      when "ne" then result isnt value
+      when "schema" then @inSchema( result, expect )  # expect is schema
+      when "range"  then @inRange(  result, expect )  # expect is range
+      when "eq" then result is   expect
+      when "le" then result <=   expect
+      when "lt" then result <    expect
+      when "ge" then result >=   expect
+      when "gt" then result >    expect
+      when "ne" then result isnt expect
       else           false
     status.assert.pass = pass
     status
 
   # Just a fallback when types are not fully  screened
-  unknownsEq:( result, expect, status ) ->
+  unknownsEq:( result, expect, op, status ) ->
     status.assert.pass  = false
     status.assert.info += "unknown types for comparision"
     status
@@ -322,23 +215,23 @@ class Tester
     "#{name}#{ref}where type is #{@type(value)} and value is #{@toString(value)}"
 
   # Deep object equality assertion where all matching keys are examined
-  objectsEq:( result, expect, status, op, level ) ->
+  objectsEq:( result, expect, op, status, level ) ->
 
     # Check that the expect object has all the keys that the result object has
     for own key, arg of result when  expect[key]?
-      status = @examine( false, arg, expect[key], status, op, "missing expect", key, null )
+      status = @examine( false, arg, expect[key], op, status, "missing expect", key, null )
 
     # Check that the result object has all the keys that the expect object has
     for own key, arg of expect when ( result[key]? or ( op is "schema" and arg.opt is "1" ) )
-      status = @examine( false, result[key], arg, status, op, "missing result", key, null )
+      status = @examine( false, result[key], arg, op, status, "missing result", key, null )
 
     # Assert each value for the set of keys that result and expect objects share in common
     for own key, obj of expect when result[key]? and expect[key]?
-      status = @assert( result[key], arg, status, op, ++level, key, null )
+      status = @assert( result[key], arg, op, status, ++level, key, null )
     status
 
   # Deep array equality assertion
-  arraysEq:( result, expect, status, op, level ) ->
+  arraysEq:( result, expect, op, status, level ) ->
     value = expect
 
     # Check against the schema when present
@@ -351,7 +244,7 @@ class Tester
          info   = " Result length exceeds the maximum size #{value.size}"
          info  += " Result length is #{result.length}"
          info  += " Size is #{value.size}"
-         return @examine( false, result, expect, status, op, info, null, null )
+         return @examine( false, result, expect, op, status, info, null, null )
       else if not @isArray(value)
          return status
 
@@ -360,26 +253,26 @@ class Tester
       info   = " different array lengths"
       info  += " Result length is #{result.length}"
       info  += " Expect length is #{value.length}"
-      status = @examine( false, result, expect, status, op, info, null, null )
+      status = @examine( false, result, expect, op, status, info, null, null )
 
     # Assert each value within the minimum length of the result and expect arrays
     length = Math.min( result.length, expect.length )
     for i in [0...length]
-      status = @assert( result[i], expect[i], status, op, ++level, null, i )
+      status = @assert( result[i], expect[i], op, status, ++level, null, i )
 
     status
 
   report:( result, expect, op, status ) ->
-    @noop( op )
-    eq = if status.assert.pass then "is" else "not"
+    pass = status.assert.pass
+    eq   = if pass then "is" else "not"
     @blockText   = "" if @blockClear
     @statusText  = """\n#{status.assert.text} """
     @statusText += """#{eq} #{@toString(expect)}""" if status.result.type isnt "function"
     @statusText += status.assert.info if @isString(status.assert.info)
-    @statusText += """\n   #{@textValue( "Result", @type(result), result )}""" if @verbose or not status.assert.pass
-    @statusText += """\n   #{@textValue( "Expect", @type(expect), expect )}""" if @verbose or not status.assert.pass
-    #statusText += "\n"+@code                           if @isString(@code) and ( @verbose or not status.assert.pass )
-    @blockText  += @statusText if not @statusClear
+    @statusText += """\n   #{@textValue( "Result", @type(result),       result )}""" if @verbose or not pass
+    @statusText += """\n   #{@textValue( "Expect", @typeExpect(expect), expect )}""" if @verbose or not pass
+    #statusText += "\n"+@code                                 if @isString(@code) and ( @verbose or not pass )
+    @blockText  += @statusText   # if not @statusClear # keep the status in the block for now
     @statusClear = false
     @blockClear  = false
 
@@ -388,13 +281,7 @@ class Tester
       @stream.publish( @stringSubject, status )
     return
 
-  status:() ->
-    @statusClear = true
-    @statusText
-
-  block:() ->
-    @blockClear = true
-    @blockText
+  # @runUnitTests(...) @describe(...) @summary(...)
 
   runUnitTests:( paths ) ->
     for path in paths
@@ -404,12 +291,10 @@ class Tester
     @summary()
     return
 
-  path:( path ) ->
-    dirs   = path.split("/")
-    module = @tail(dirs).split("-")[0]
-    @modules[module] = { name:module, path:path }
-    console.log( "Tester.path(path)", { path:path, dirs:dirs, module:module } ) if @debug
-    @modules[module]
+  describe:( description, suite=null ) =>
+    @description = description
+    @suite       = if suite? then suite else null
+    @
 
   summary:( module=null ) ->
     path = if module? and @modules[module]? then @modules[module].path else "?"
@@ -445,9 +330,118 @@ class Tester
       
     summaryText
 
+  # Returns a single text status fron the last test run when called in a unit test module like Tester-unit.coffee
+  # Example: console.log( unit().status() )
+  #   or      unit().log( unit().status() )
+  status:() ->
+    # @statusClear = true
+    @statusText
+
+  # Returns a block of text statuses when callrd in a unit test module like Tester-unit.coffee
+  # Example: console.log( unit().block() )
+  #   or      unit().log( unit().block() )
+  block:() ->
+    @blockClear = true
+    @blockText
+
+  # Add a unit test file path to the @modules object
+  path:( path ) ->
+    dirs   = path.split("/")
+    module = @tail(dirs).split("-")[0]
+    @modules[module] = { name:module, path:path }
+    console.log( "Tester.path(path)", { path:path, dirs:dirs, module:module } ) if @debug
+    @modules[module]
+
+  # Convert expect to a schema object if op is schema
+  isSchema:( v ) ->
+    v.cardinality? and v.type? and v.value? and v.range? and v.oper?
+
+    # Cardinality ? = optional 1 = required * = 0 to many + = 1 to many min:max is a range
+    Tester.cardinalityEnums = ["?","1","*","+","min:max"]
+
+  # Format "type:ranges or value:length:oper?"
+  # Examples:
+  #   "array:[[0,360],[0,100],[0,100]]:eq?"
+  #   { type:"array", ranges:[[0,360],[0,100],[0,100]], oper:"eq", opt="?" }
+  #   "array:[0,255]" } # Range is applies to all array values
+  #   { type:"array", ranges:[0,255]
+  #   "object:{r:[0,255],g:[0,255],b:[0,255]}
+  #   "string:James"
+  #   "number:[0,100]"
+  #   "boolean"
+
+  toSchema:( expect, op ) ->
+
+    typeExpect = @typeExpect(expect,op)
+    schema     = { cardinaly:"1", type:"any", range:["any"], value:"any", oper:"eq",  }
+
+    switch typeExpect
+      when "schema","stringRange","intRange","floatRange"
+        schema.cardinaly  = "1" # "1" implies key required
+        schema.type       = op  # ???
+        schema.value      = expect
+        schema.range      = if @isArray(  expect  ) then expect else ["any"] # ???
+        schema.oper       = op
+      when "string"
+        schema = @parseSchema( expect, schema )
+      when "object"
+        schema.cardinaly  = if expect.opt is "?"           then expect.opt    else  "1" # "1" implies key required
+        schema.type       = if @isString( expect.type   )  then expect.type   else  "any"
+        schema.value      = if expect.value?               then expect.value  else  "any"
+        schema.range      = if @isArray(   expect.range  ) then expect.ranges else ["any"]
+    schema
+
+  # IN progress
+  inSchema:( result, schema ) ->
+
+  # parseSchemaStr
+  parseSchema:( expect, schema ) ->
+    schema.opt  = if @tail(expect,"?",true) is "?" then "?" else "1" # @tail() pops the '?'
+    splits      = expect.split(":")
+    length      = splits.length
+    schema.type = if length >= 1 then splits[0]
+    if length >= 1
+      if splits[1][0] is "["
+        schema.ranges = @parseRange( splits[1] )
+        schema.value  = "any"
+      else if splits[1].includes("|")
+        schema.ranges = @toEnums( splits[1] )
+        schema.value  = "any"
+      else
+        schema.ranges = "any"
+        schema.value  = @toType( splits[1], schema.type )
+      schema.length    = if length >= 2 then @toInt( splits[2] ) else "any"
+      schema.oper      = if length >= 3 then @toString( splits[3] ) else "eq"
+      schema
+
+  # Range parser for @toSchema(expect,op)
+  parseRange:( splits ) ->
+    range = []
+    for split in splits
+      switch @type(split)
+        when "string"
+          for split in splits
+            if @head(split,"[[",false) is "[[" and @tail(split,"]]",false) is "]]"
+              strs = @toArray(split)
+              for str in strs
+                range.push[@toArray(str)]
+              return range
+            else if @head(split) is "[" and @tail(split) is "]"
+              range.push[@toArray(split)]
+              return range
+        when "array"
+          if @isArray(split[0])
+            for array in split
+              range.push(array)
+            return range
+          else
+            range.push[split]
+            return range
+    range
+
   # The 9 fundamental type Assertions that leverage @type(arg) the improved typeof(arg)
   # In addition isInt isFloat isBoolean isArray isObject can optionally chech strings
-  isString:(s)          ->   @isType(s,"string") and s.length > 0 and s isnt "None"
+  isString:(s)           ->   @isType(s,"string") and s.length > 0 and s isnt "None"
   isInt:(i,sc=false)     -> ( @isType(i,"int")   and not isNaN(i) ) or ( sc and @isStringInt(i)   )
   isFloat:(f,sc=false)   -> ( @isType(f,"float") and not isNaN(f) ) or ( sc and @isStringFloat(f) )
   isBoolean:(b,sc=false) ->   @isType(b,"boolean") or ( sc and @isStringBoolean(b) )
@@ -460,8 +454,36 @@ class Tester
   isSymbol:(s)           ->   typeof(s) is "symbol" # Will incorporate into type
 
   # Set type for asserting uniformly typed arrays and sc=true for determining if a string is an array
-  isArray:( a, type=null, sc=false ) ->  
-    ( @isType(a,"array") and a.length? and a.length > 0 and @isArrayTyped(a,type) ) or ( sc and @isStringArray(a) )  
+  # isArrayOfType called within @isArray(...) because it assumes array exists
+  #   and returns true for 'null' that signifies that the type assertions
+  #   on the elements should be skipped
+  isArray:( a, type=null, sc=false ) ->
+    return @isStringArray(a) if sc
+    # Internal function that assert that an viable is uniformly types
+    isArrayOfType = (a,t) =>
+      return true if t is 'null'
+      for e in a
+        return false if @type(e) isnt t
+      true
+
+    if @isType(a,"array") and a.length? and a.length > 0
+      type = @type( a[0] )
+      isArrayOfType(a,type)
+
+  # General purpose since if checks the array's existence and interate over all the elements
+  isArrayType:(a,t) ->
+    return false if not @isArray(a)
+    for e in a
+      return false if @type(e) isnt t
+    true
+
+  # General purpose since if checks the array's existence and interate over all the elements
+  isArrayMixed:(a) ->
+    return false if not @isArray(a)
+    type = @type(a[0])
+    for e in a
+      return false if @type(e) isnt type
+    false
 
   # Aggregate and special value assertions
   isType:(v,t)      ->   @type(v) is t
@@ -470,20 +492,6 @@ class Tester
 
   isNot:(d)         ->   not @isDef(d)
   isNaN:(n)         ->   Number.isNaN(n) # @isNumber(n) and
-  
-  isArrayTyped:(a,t) ->
-    return true  if     @isNull(t)
-    return false if not @isArray(a)
-    for e in a
-      return false if @type(e) isnt t
-    true
-
-  isArrayMixed:(a) ->
-    return false if not @isArray(a)
-    type = @type(a[0])
-    for e in a
-      return false if @type(e) isnt type
-    false
 
   # Containment assertions where args are always ( value, container )
   inString:(e,s)  ->  @isString(s) and s.includes(e)
@@ -656,104 +664,107 @@ class Tester
         @toInfo( "toObject(arg)", "unable to convert", arg, type, "object", "{}", {} )
     obj
 
-  # -- Assertion for range with type='int', tolerane with type='float' and 'between' with type='string'
-  isRange:(range,type)   ->
-    switch type
-      when 'string' then @isStringRamge(range)
-      when 'int'    then @isIntRange(range)
-      when 'float'  then @isFloatRange(range)   # Need to verify these args with @toInfo(args...)
-      else  @toInfo( "isRange(arg)", "unknown range type", range, type, "", "false", false )
-
-  isStringRamge:(r) ->
-    @isArray(r,"string") and r.length is 2 and r[0]      <= r[1]       # For 'string'
-  isIntRange:(r)    ->
-    @isArray(r,"int")    and r.length is 2 and r[0]      <= r[1]       # For 'int'
-  isFloatRange:(r)  ->
-    @isArray(r,"float")  and r.length is 3 and r[0]-r[2] <= r[1]+r[2]  # For 'float' r[2] is tol
-
-  toStringRange:(arg) ->
-    type = @type(arg)
-    zero = ""                  # is "" the monoid zero or the sortable for string?
-    if @isWithin(arg) then arg # the 2 strings [min,max] are present and even verified
-    else if type is "string" then [zero,arg]
-    else if @isArray(arg,'string') and arg.length is 1 then [zero,arg[0]]
-    else @toInfo( "toStringRamge(arg)", "unable to create range for", arg, type, "stringRamge", "[]", [] )
-
-  # unable to convert
+  # A gem of method that appends text along with retrStr to @info for detailed reporting of inconsistence
+  #  along with a vialble actual return specified by the caller
   toInfo:( method, text, arg, type, typeTo, retnStr, retn ) ->
     @info += "\n  Tester.#{method} #{text} #{@toString(arg)} of '#{type}' to'#{typeTo}' returning #{retnStr}"
     retn
 
-  ###
-    toStatus:( pass, text, method, result, type, range, retnStr, retn ) ->
-          prefix = if pass then "-- Passed -- " else "-- Failed -- "
-          @statusText += @textValue:( "Result", result, null, null )
-          @statusText += @textValue:( "Expect", range,  null, null )  # Get @textValue(...) to report on expect ranges
-          passEnum
-      retn
-    ###
-  toIntRange:(arg) ->
-    type = @type(arg)
-    zero = 0                  #  0 is the default minimum
-    if @isRange(arg) then arg # the 2 int [min,max] are present and even verified
-    else if type is "int"    then [zero,arg]
-    else if type is "float"  then [zero,@toInt(arg)]
-    else if @isArray(arg,'int') and arg.length is 1 then [zero,arg[0]]
-    else @toInfo( "toIntRange(arg)", "unable to create range for", arg, type, "intRange", "[]", [] )
+  rangeType:( range ) ->
+    type = if range.length > 0 then @type(range[0]) else "null"
+    if type is ( "string" or "int" or "float" )
+      if @isArray(range,type) then type else "mixed"
+    else if type is "array"
+      @rangeType(range[0])
 
-  toFloatRange:(arg) ->
-    type      = @type(arg)
-    zero      = 0.0        #  0.0   is the default minimum
-    tolerance = 0.001 #  0.001 is the default tokerance multiplier of the max value
-    flt       = @toFloat(arg)
-    if      @isBetween(arg)  then arg # the 3 floats [min,max,tol] are present and even verified
-    else if type is "int"    then [zero,flt,flt*tolerance]
-    else if type is "float"  then [zero,arg,arg*tolerance]
-    else if @isArray(arg,'float')
-      if      arg.length is 1 then [zero,  arg[0],flt*tolerance]
-      else if arg.length is 2 then [arg[0],arg[1],flt*tolerance]
-    else @toInfo( "toFloatRange(arg)", "unable to create range for", arg, type, "floatRange", "[]", [] )
+  # -- Range Methods --
 
-  inRange:(result,range) ->
-    type      = @type(result)
-    typeRange =  type+"Range"
-    pass = @isRange(range)
-    if not pass
-      return @toInfo( "inRamge()", result, type, type+"Range", "false", false )
+  # Asserts range with for types "string" or "int" or "float"
+  isRange:(range)  ->
+
+    # internal functions called after @rangeType(range) has verified that range
+    #   is an array of type "string" or "int" or "float"
+    isStringRamge = (r) -> r.length is 2 and r[0]      <= r[1]       # For 'string'
+    isIntRange    = (r) -> r.length is 2 and r[0]      <= r[1]       # For 'int'
+    isFloatRange  = (r) -> r.length is 3 and r[0]-r[2] <= r[1]+r[2]  # For 'float' r[2] is tol
+    isArrayRange  = (r) ->
+      pass = true
+      for e in r
+        pass = pass and @isRange(e)
+      pass
+
+    # @rangeType(...) checks array existence and asserts type with @isArray(range,type)
+    type = @rangeType(range)
 
     switch type
-      when "string" then @inStringRange( result, range )
-      when "int"    then @inIntRange(    result, range )
-      when "float"  then @inFloatRange(  result, range )
-      when "array"
-        pass   = true
-        if range.length is 1
-          for i in [0...result.length]
-            if @isArray(result[i])
-              pass = pass and @inRange( result[i], range )
-        else
-          len1 = result.length
-          len2 = range.length
-          if len1 > range.length
-            @toInfo( "inRange()", "not enough range tests #{len2} for result so only will be #{len1} tests on result",
-              result, type, typeRange, "false", false )
-          else if result.length < range.length
-            @toInfo( "inRange()", "OK, biet more range tests #{len2} than needed for result #{len1}",
-              result, type, typeRange, "false", false )
-          min = Math.min( len1, len2 )
-          for i in [0...min]
-            if @isArray(result[i]) and @isArray(range[i])
-              pass = pass and @inRange( result[i], range[i] )
-      else @toInfo( "inRamge()", "unknown range type", result, type, typeRange, "false", false )
+      when 'string' then isStringRamge(range)
+      when 'int'    then isIntRange(range)
+      when 'float'  then isFloatRange(range)
+      when 'array'  then isArrayRange(range)
+      else  @toInfo( "isRange(range)", "not a range type", range, type, "", "false", false )
+
+  toRange:( type, min=null, max=null, tol=null ) ->
+    minType = @type(min)
+    maxType = @type(max)
+    tolType = @type(tol)
+    switch type
+      when 'string'
+        min = if minType isnt "null" and minType is "string" then min else ""   # need to see if "" is a string min
+        max = if maxType isnt "null" and maxType is "string" then max else "z"  # not a good max string
+        [ min, max ]
+      when 'int'
+        min = if minType isnt "null" and minType is "int"    then min else   0
+        max = if maxType isnt "null" and maxType is "int"    then max else 100
+        [ min, max ]
+      when 'float'
+        min = if minType isnt "null" and minType is "float"   then min else   0.0
+        max = if maxType isnt "null" and maxType is "float"   then max else 100.0
+        max = if tolType isnt "null" and tolType is "float"   then tol else max*0.001
+        [ min, max, tol ]
+      else
+        allType  = "#{minType}|#{maxType}"
+        allType +="|#{tolType}" if type is "float"
+        range    = [min,max]
+        range.push(tol) if type is "float"
+        @toInfo( "toRange(arg)", "unable to create range for", type, range, allType, "[]", [] )
+
+  inMyRange:(result,range) ->
+    pass       = @isRange(range)
+    resultType = @type(result)
+    rangeType  = @type(result)
+    if not pass or resultType iant rangeType
+      return @toInfo( "inRange(result,range)", result, resultType, rangeType, "false", false )
+
+    inStringRange = ( string, range ) -> range[0]          <= string and string <= range[1]
+    inIntRange    = ( int,    range ) -> range[0]          <= int    and int    <= range[1]
+    inFloatRange  = ( float,  range ) -> range[0]-range[2] <= float  and float  <= range[1]+range[2]
+    switch resultType
+      when "string" then inStringRange(  result, range )
+      when "int"    then inIntRange(     result, range )
+      when "float"  then inFloatRange(   result, range )
+      when "array"  then @inArrayRange(  result, range )
+      else @toInfo( "inRamge()", "unknown range type", result, resultType, rangeType, "false", false )
+
+  inArrayRange:( result, range ) ->
+    pass    = true
+    type    = @type(result)
+    nResult = result.length
+    nRange  = range.length
+    if nRange  is 1
+      for i in [0...nResult] when @isArray(result[i])
+        pass = pass and @inMyRange( result[i], range )
+    else if nResult > nRange
+      text = "not enough range tests #{nRange} for result so only will be #{nRange} tests on result"
+      pass = @toInfo( "inRange()", text, result, type, type, "false", false )
+    else if nResult < nRange
+      text = "OK with more range bounds #{nRange} than needed for result #{nResult}"
+      pass = @toInfo( "inRange()", result, text, type, type, "true", true )
+      min = Math.min( nResult, nRange )
+      for i in [0...min] when @isArray(result[i]) and @isArray(range[i])
+        pass = pass and @inMyRange( result[i], range[i] )
     pass
 
-  # Here we assume that all value types and range type [string,int,float] have been veriiied
-  #   range[0] is min range[1] is max and range[2] is the +- tolerance for floats
-  inStringRange:( string, range )  -> range[0]          <= string and string <= range[1]
-  inIntRange:(    int,    range )  -> range[0]          <= int    and int    <= range[1]
-  inFloatRange:(  float,  range )  -> range[0]-range[2] <= float  and float  <= range[1]+range[2]
-
-# Return a number with a fixed number of decimal places
+  # Return a number with a fixed number of decimal places
   toFixed:( arg, dec=2 ) ->
     num = switch @type(arg)
       when "int","float" then arg
@@ -847,8 +858,12 @@ class Tester
       if Number.isInteger(arg) then "Int" else "Float"
     if lowerCase then typ.toLowerCase() else typ
 
-  scheme:( arg,op="eq" ) ->
-    if op is "schema" then "schema" else @type(arg)
+  # Adds 'range' and 'schema' based on 'op' to @type(arg)
+  typeExpect:( expect, op ) ->
+    switch op
+      when 'range'  then "range"
+      when 'schema' then "schema"
+      else @type(expect)
 
   # A more detail type that returns basic types, class, object and function name in upper case
   klass:(arg) ->
@@ -922,25 +937,15 @@ fits = tester.fits
 export { test, unit, fits }
 
 ###
-    isOrdered:(o)     -> ( @isNumber(o) and not isNaN(i) ) or @isString(o)
-    # if range.length = 3 min=range[0], max=range[1] and tol=range[2]
-  # if range.length = 2 min=range[0], max=range[1] and tol=0
-  # if range.length = 1 min=0,        max=range[0] and  tol=0
-  inRange:( result, range ) ->
-    pass  = true
-    rType = @type(result)
-    if @inArray(rType,["string","number"])
-      len = range.length
-      min = 0
-      max = range[0]
-      tol = 0
-      if len >= 2
-        min = range[0]
-        max = range[1]
-        tol = range[2] if len is 3
-      pass = pass and ( min-tol <= result and result <= max+tol )
-    else if rType is "array" and @inArray(@type(result[0]),["string","number"])
-      for arg in result
-        pass = pass and @inRange( arg, range )
-    pass
+        when op is "schema"
+        if eType is "any"
+          ""
+        else if etype includes("|")
+          eTypes = eType.split("|")
+          if @inArray(rType,eTypes)
+            ""
+          else
+            " Result type is '#{rType}' that is not in\nExpect schema types '#{eType}'"
+        else if rType isnt eType
+          " Result type is '#{rType}'\nExpect type is '#{eType}' from schema"
 ###
