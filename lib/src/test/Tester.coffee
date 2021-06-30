@@ -101,6 +101,25 @@ class Tester
   inRange:( result, range ) =>
     @run( @text, result, range, "range" )
 
+  # -- info reporting ---
+
+  # A gem methods that appends text along with retrStr to @info for detailed reporting of inconsistence
+  #  along with a vialble actual return specified by the caller
+  toInfo:( method, text, arg, type, typeTo, retnStr, retn ) ->
+    @info += "\n  Tester.#{method} #{text} #{@toString(arg)} of '#{type}' to'#{typeTo}' returning #{retnStr}"
+    retn
+
+  isInfo:( pass, text, type, types ) ->
+    return true if pass
+    @info += "\n  #{text} of type '#{type}' in'#{types}'"
+    false
+
+  inInfo:( pass, result, expect, oper, spec, text ) ->
+    prefix = if pass then "-- Passed --" else "-- Failed --"
+    condit = if pass then "matches "      else "no match"
+    @info += "\n  #{prefix} #{result} #{condit} #{expect} with oper #{oper} and spec #{spec} #{text}"
+    false
+
   # -- run() scenario is @initStatus(...) @assert(...) @report(...)
 
   run:( text, result, expect, op ) ->
@@ -125,8 +144,12 @@ class Tester
   #   Skips over @type(arg) = "function"
   assert:( result, expect, op, status, level=0, key=null, index=null ) ->
 
-    # Covert expect to a schema object if op is schema
-    expect = @toSchema(expect,op)
+    # Optionally convert expect to a schema or range or enums based on 'op'
+    expect = switch op
+      when 'schema' then @toSchema(expect, op )
+      when 'range'  then @toRange( expect, op )   # Need another version
+      when 'enums'  then @toEnums( expect )
+      else expect
 
     # Check values and types
     status = @checkValuesTypes( result, expect, op, status, key, index )
@@ -160,23 +183,24 @@ class Tester
     status
 
   checkValuesTypes:( result, expect, op, status, key, index ) ->
-    rType =@type(result)
-    eType = @typeExpect(expect,op)
-    types = ["string","int","float","boolean","object","array","range","schema"]
+    rType  = @type(result)
+    eType  = @typeExpect(expect,op)
+    rTypes = Tester.results
+    eTypes = Tester.expects
     info  = switch
       when @isNot(result)
         " Result of #{rType} is not defined\nExpect is type '#{eType}'"
       when @isNot(expect)
         " Expect of #{eType} is not defined\nResult is type '#{rType}'"
-      when rType isnt eType and eType isnt "range" and eType isnt "schema"
+      when rType isnt eType and eType isnt ( "schema" or "range" or "enums" )
         " Types do not match\nResult type is '#{rType}'\nExpect type is '#{eType}'"
       when rType is "function"
         " Result type is 'function'\nExpect type is '#{eType}'"
       when eType is "function"
         " Expect type is 'function'\nResult type is '#{rType}'"
-      when not @inArray(rType,types)
+      when not @inArray(rType,rTypes)
         " Result is type '#{rType}' an unknown type is type '#{eType}'"
-      when not @inArray(eType,types)
+      when not @inArray(eType,eTypes)
         " Result is type '#{rType}'\nExpect is type '#{eType}' an unknown type"
       else
         ""
@@ -185,8 +209,10 @@ class Tester
     else
       status
 
+
+
   # Equality check for Tester.opEnums[]
-  Tester.opEnums = ["schema","range","eq","le","lt","ge","gt","ne"]
+
   valuesEq:( result, expect, op, status ) ->
     return true if expect is "any"
     pass = switch op
@@ -222,7 +248,7 @@ class Tester
       status = @examine( false, arg, expect[key], op, status, "missing expect", key, null )
 
     # Check that the result object has all the keys that the expect object has
-    for own key, arg of expect when ( result[key]? or ( op is "schema" and arg.opt is "1" ) )
+    for own key, arg of expect when ( result[key]? or ( op is "schema" and arg.card is "1" ) )
       status = @examine( false, result[key], arg, op, status, "missing result", key, null )
 
     # Assert each value for the set of keys that result and expect objects share in common
@@ -352,92 +378,110 @@ class Tester
     console.log( "Tester.path(path)", { path:path, dirs:dirs, module:module } ) if @debug
     @modules[module]
 
-  # Convert expect to a schema object if op is schema
-  isSchema:( v ) ->
-    v.cardinality? and v.type? and v.value? and v.range? and v.oper?
+  isEnums:( arg, oper, type ) ->
+    oper is "enums" and @isArray(arg,type) and @isResultType(type)
 
-    # Cardinality ? = optional 1 = required * = 0 to many + = 1 to many min:max is a range
-    Tester.cardinalityEnums = ["?","1","*","+","min:max"]
+  # Check if an arg like expect is a 'schema'
+  isSchema:( arg ) ->
+    @conditions( @isObject(arg), @isResultType(arg.type), @isExpect(arg.expect,arg.oper), @isCard(arg.card) )
 
-  # Format "type:ranges or value:length:oper?"
+  isResultType:( type ) ->
+    pass = @isDef(type) and @inArray(type,Tester.results)
+    @isInfo( pass, "Not a Result", type, Tester.results )
+
+  isExpect:(expect,oper) ->
+    @isOper(oper)
+    @isDef(expect)
+    type = @type(expect)
+    pass = switch oper
+      when "range" then @isRange(expect)
+      when "enums" then @isEnums(expect,oper,type)
+      when "eq"    then @isResultType(type)
+      else @isInfo( false, "Not a Expect oper", oper, Tester.opers )
+    @isInfo( pass, "Not a Expect", type, Tester.expects )
+
+  isExpectType:( type ) ->
+    pass = @isDef(type) and @inArray( type, Tester.expects )
+    @isInfo( pass, "Not a Expect",     type, Tester.expects )
+
+  isOper:( oper ) ->
+    pass = @isDef(oper) and @inArray( oper, Tester.opers )
+    @isInfo( pass, "Not an 'oper'",    oper, Tester.opers )
+
+  isCard:( card ) ->
+    pass = @isDef(card) and @inArray( card, Tester.cards )
+    @isInfo( pass, "Not a 'card'",     card, Tester.cards )
+
+  # This approach insures that all conditions are checked and messages sent
+  #   then all arg returns are anded together to determine a final pass or fail
+  conditions:( args... ) ->
+    pass = true
+    pass = pass and arg for arg in args
+    pass
+
+  # Range is applies to all array values
+  # Format type:ranges or value:length:oper?
   # Examples:
-  #   "array:[[0,360],[0,100],[0,100]]:eq?"
-  #   { type:"array", ranges:[[0,360],[0,100],[0,100]], oper:"eq", opt="?" }
-  #   "array:[0,255]" } # Range is applies to all array values
-  #   { type:"array", ranges:[0,255]
+  #
+  #   "array:[0,255]" }      { type:"array",   oper:"range", check:[0,255],         card="1" }
+  #   "string:James"         { type:"string",  oper:"eq",    check:James,           card="1" }
+  #   "string:a|b|c"         { type:"string",  oper:"enums", check:"a|b|c",         card="1" }
+  #   "int:[0,100]"          { type:"int",     oper:"range", check:[0,100],         card="1" }
+  #   "float:[0.0,100.0,1.0] { type:"float",   oper:"range", check:[0.0,100.0,1.0], card="1" }
+  #   "string:["","zzz"]     { type:"string",  oper:"range", check:["","zzz"],      card="1" }
+  #   "boolean"              { type:"boolean", oper:"any",   check:"any",           card="1" }
   #   "object:{r:[0,255],g:[0,255],b:[0,255]}
-  #   "string:James"
-  #   "number:[0,100]"
-  #   "boolean"
+  #     { type:"object", oper:"range", range:{r:[0,255],g:[0,255],b:[0,255]}, card="1" }
+  #  "array:[[0,360],[0,100],[0,100]]:?"
+  #     { type:"array",  oper:"range", range:[[0,360],[0,100],[0,100]], card="?" }
 
-  toSchema:( expect, op ) ->
+  toSchema:( arg, op ) ->
 
     typeExpect = @typeExpect(expect,op)
-    schema     = { cardinaly:"1", type:"any", range:["any"], value:"any", oper:"eq",  }
+    schema     = { type:"any", oper:"any", expect:"any", card:"1", spec:""  }
 
-    switch typeExpect
-      when "schema","stringRange","intRange","floatRange"
-        schema.cardinaly  = "1" # "1" implies key required
-        schema.type       = op  # ???
-        schema.value      = expect
-        schema.range      = if @isArray(  expect  ) then expect else ["any"] # ???
-        schema.oper       = op
+    schema = switch typeExpect
       when "string"
-        schema = @parseSchema( expect, schema )
+        schema = @parseSchema( arg, schema )
       when "object"
-        schema.cardinaly  = if expect.opt is "?"           then expect.opt    else  "1" # "1" implies key required
-        schema.type       = if @isString( expect.type   )  then expect.type   else  "any"
-        schema.value      = if expect.value?               then expect.value  else  "any"
-        schema.range      = if @isArray(   expect.range  ) then expect.ranges else ["any"]
-    schema
+        schema.type   = if arg.type?   then arg.type  else "any"
+        schema.oper   = if arg.oper?   then arg.oper  else "any"
+        schema.expect = if arg.expect? then arg.expect else "any"
+        schema.card   = if arg.card?   then arg.card  else  "1"  # required
+        schema.spec   = if arg.spec?   then arg.spec  else  ""   # required
+      else @toInfo( "toSchema(expect,op)", "expect not 'string or object",
+        arg, typeExpect, "schema", @toString(schema), schema )
 
   # IN progress
-  inSchema:( result, schema ) ->
+  testSchema:( result, schema ) ->
+    switch schema.oper
+      when 'range' then  @inRange( result, schema.expect )
+      when 'enuns' then  @inEnums( result, schema.expect )
+      when 'eq'    then  @isEqual( result, schema.expect )
+      else @inInfo( false, result, schema, schema.oper, schema.spec, "unknown expect oper" )
 
-  # parseSchemaStr
   parseSchema:( expect, schema ) ->
-    schema.opt  = if @tail(expect,"?",true) is "?" then "?" else "1" # @tail() pops the '?'
     splits      = expect.split(":")
     length      = splits.length
-    schema.type = if length >= 1 then splits[0]
-    if length >= 1
-      if splits[1][0] is "["
-        schema.ranges = @parseRange( splits[1] )
-        schema.value  = "any"
-      else if splits[1].includes("|")
-        schema.ranges = @toEnums( splits[1] )
-        schema.value  = "any"
+    if length >= 1                                        # type
+        schema.type = splits[0]
+    if length >= 1                                        # expect
+       schema.spec splits[1]
+       if splits[1].includes("|")                         #   enum
+         schema.oper   = "range"
+         schema.expect = @toEnums( splits[1] )
+       else if @isStringEnclosed( "[", splits[1], "]" )  #    range array
+         schema.oper   = "range"
+         schema.expect = @toArray( splits[1] )
+      else if @isStringEnclosed( "{", splits[1], "}" )   #    range object
+         schema.oper   = "range"
+         schema.expect = @toObject( splits[1] )
       else
-        schema.ranges = "any"
-        schema.value  = @toType( splits[1], schema.type )
-      schema.length    = if length >= 2 then @toInt( splits[2] ) else "any"
-      schema.oper      = if length >= 3 then @toString( splits[3] ) else "eq"
-      schema
-
-  # Range parser for @toSchema(expect,op)
-  parseRange:( splits ) ->
-    range = []
-    for split in splits
-      switch @type(split)
-        when "string"
-          for split in splits
-            if @head(split,"[[",false) is "[[" and @tail(split,"]]",false) is "]]"
-              strs = @toArray(split)
-              for str in strs
-                range.push[@toArray(str)]
-              return range
-            else if @head(split) is "[" and @tail(split) is "]"
-              range.push[@toArray(split)]
-              return range
-        when "array"
-          if @isArray(split[0])
-            for array in split
-              range.push(array)
-            return range
-          else
-            range.push[split]
-            return range
-    range
+        schema.oper   = "any"
+        schema.expect = "any"
+    if length >= 2                                        # card i.e cardinaliry
+        schema.oper = splits[2]
+    schema
 
   # The 9 fundamental type Assertions that leverage @type(arg) the improved typeof(arg)
   # In addition isInt isFloat isBoolean isArray isObject can optionally chech strings
@@ -494,8 +538,8 @@ class Tester
   isNaN:(n)         ->   Number.isNaN(n) # @isNumber(n) and
 
   # Containment assertions where args are always ( value, container )
-  inString:(e,s)  ->  @isString(s) and s.includes(e)
-  inArray:( e,a)  ->  @isArray(a)  and a.includes(e)
+  inString:(e,s)  ->  @isString(s) and @isDef(e) and s.includes(e)
+  inArray:( e,a)  ->  @isArray(a)  and @isDef(e) and a.includes(e)
   inObject:(k,o)  ->  @isObject(o) and @isDef(o[k]) and o.hasOwnProperty(k)
 
   toKeys:(o)      ->  if @isObject(o) then Object.keys(o) else []
@@ -664,11 +708,21 @@ class Tester
         @toInfo( "toObject(arg)", "unable to convert", arg, type, "object", "{}", {} )
     obj
 
-  # A gem of method that appends text along with retrStr to @info for detailed reporting of inconsistence
-  #  along with a vialble actual return specified by the caller
-  toInfo:( method, text, arg, type, typeTo, retnStr, retn ) ->
-    @info += "\n  Tester.#{method} #{text} #{@toString(arg)} of '#{type}' to'#{typeTo}' returning #{retnStr}"
-    retn
+  toEnums:( arg ) ->
+    enums = []
+    type  = type = @type(arg)
+    switch type
+      when "string" and arg.includes("|")
+        splits = arg.split("|")
+        for split in splits
+          enums.push( split )
+      when "array"
+        enums = arg
+      else
+        enums = @toInfo( "toEnums(arg)", "unable to convert", arg, type, "enums", "[]", [] )
+    enums
+
+
 
   rangeType:( range ) ->
     type = if range.length > 0 then @type(range[0]) else "null"
@@ -728,21 +782,23 @@ class Tester
         range.push(tol) if type is "float"
         @toInfo( "toRange(arg)", "unable to create range for", type, range, allType, "[]", [] )
 
-  inMyRange:(result,range) ->
+  inMyRange:( result, range, op="range" ) ->
     pass       = @isRange(range)
     resultType = @type(result)
-    rangeType  = @type(result)
+    rangeType  = @typeExpect(result,op)
     if not pass or resultType iant rangeType
-      return @toInfo( "inRange(result,range)", result, resultType, rangeType, "false", false )
+      return @toInfo( "inRange(result,range,op)", result, resultType, rangeType, "false", false )
 
     inStringRange = ( string, range ) -> range[0]          <= string and string <= range[1]
     inIntRange    = ( int,    range ) -> range[0]          <= int    and int    <= range[1]
     inFloatRange  = ( float,  range ) -> range[0]-range[2] <= float  and float  <= range[1]+range[2]
     switch resultType
-      when "string" then inStringRange(  result, range )
-      when "int"    then inIntRange(     result, range )
-      when "float"  then inFloatRange(   result, range )
-      when "array"  then @inArrayRange(  result, range )
+      when "string" then inStringRange(   result, range )
+      when "int"    then inIntRange(      result, range )
+      when "float"  then inFloatRange(    result, range )
+      when "array"  then @inArrayRange(   result, range )
+      when "object" and @isObject(rangeType) then @inObjectRange(  result, range )
+      when "enums"  and @isEnums(rangeType)  then @inEnumsRange(   result, range )
       else @toInfo( "inRamge()", "unknown range type", result, resultType, rangeType, "false", false )
 
   inArrayRange:( result, range ) ->
@@ -848,8 +904,6 @@ class Tester
 
   # An improved typeof() that follows the convention by returning types in lower case by default.
   # The basic types similar to typeof() returned are:
-  Tester.typeEnums   = ["string","int","float","boolean","array","object","regex","date","function","bigint","symbol","null","undefined"]
-  Tester.typeofEnums = ["string",  "number",   "boolean",        "object",               "function","bigint","symbol","null","undefined"]
   type:(arg,lowerCase=true) ->
     str = Object::toString.call(arg)
     tok = str.split(" ")[1]
@@ -858,11 +912,12 @@ class Tester
       if Number.isInteger(arg) then "Int" else "Float"
     if lowerCase then typ.toLowerCase() else typ
 
-  # Adds 'range' and 'schema' based on 'op' to @type(arg)
+  # Adds 'range' 'enums' and 'schema' based on 'op' to @type(arg)
   typeExpect:( expect, op ) ->
     switch op
-      when 'range'  then "range"
-      when 'schema' then "schema"
+      when 'range'  and @isRange(expect)  then "range"
+      when 'enums'  and @isEnums(expect)  then "enums"
+      when 'schema' and @isSchema(expect) then "schema"
       else @type(expect)
 
   # A more detail type that returns basic types, class, object and function name in upper case
@@ -925,6 +980,21 @@ class Tester
         for passStatus in passStatuses
           console.log( passStatus ) if @logToConsole
     return
+
+Tester.remove( e, a ) ->
+  index = a.indexOf(e)
+  a.splice( index, 1 ) if index > -1
+  a
+
+Tester.results = ["string","int","float","boolean","object","array"]
+Tester.expects = Tester.results.concat(["schema","range","enums","amy"])
+Tester.typeofs = ["string","number","boolean","object","function","bigint","symbol","null","undefined"]
+Tester.types   = Tester.typeofs.concat(["int","float","array","regex","date"])
+Tester.types   = Tester.remove("number", Tester.types ) # number is now either 'int' or 'float'
+Tester.opers   = ["eq","schema","range","enums","le","lt","ge","gt","ne"]   # 'eq' default
+
+# Cardinality  1 = required ? = optional * = 0 to many + = 1 to many min:max is a range
+Tester.cards = ["n","?","*","+","min to max"]    # 'n' = 1 defaullt
 
 # -- ES6 exports for single tester instance and its test() and unit() methods
 #   tester is instanciates once on its first import subseqent imports
