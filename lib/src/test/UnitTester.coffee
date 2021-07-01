@@ -17,8 +17,8 @@ class UnitTester
     return
 
   UnitTester.init =   () ->
-    subjects        = ["TestStatus","TestString","TestSummary"]
-    streamLog       = { subscribe:false, publish:false, subjects:subjects }
+    subjects           = ["TestStatus","TestString","TestSummary"]
+    streamLog          = { subscribe:false, publish:false, subjects:subjects }
     UnitTester.stream  = new Stream( subjects, streamLog )
 
     # For illustration purposes, because we are just resseting the defaults
@@ -32,7 +32,8 @@ class UnitTester
       paths =       tester.toKeys( `import.meta.glob("/lib/**/*-unit.js")` )
       paths.concat( tester.toKeys( `import.meta.glob("/pub/**/*-unit.js")` ) )
     else
-      paths = ["/lib/pub/base/util/Stream-unit.js","/lib/pub/test/Tester-unit.js","/lib/pub/base/draw/Vis-unit.js"]
+      paths = ["/lib/pub/test/Type-unit.js",   "/lib/pub/base/util/Stream-unit.js",
+               "/lib/pub/test/Tester-unit.js", "/lib/pub/base/draw/Vis-unit.js"]
     tester.runUnitTests( paths )
     return
 

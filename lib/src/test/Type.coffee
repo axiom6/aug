@@ -2,20 +2,28 @@
 class Type
   
   comstructor:() ->
-    @info  = ""
-    @last  =
-    @logOn = true
-    @log   = console.log
-    @error = console.error
+    @warn    = ""
+    @last    =
+    @logging = true
+    @log     = console.log
+    @error   = console.error
+    @log( "I am a log")
 
   # An improved typeof() that follows the convention by returning types in lower case by default.
   # The basic types similar to typeof() returned are:
-  type:(arg,lowerCase=true) ->
+
+  type:(val,lowerCase=true) =>
+    str = Object::toString.call(val)
+    tok = str.split(' ')[1]
+    typ = tok.substring(0,tok.length-1)
+    if lowerCase then typ.toLowerCase() else typ
+
+  type2:(arg,lowerCase=true) ->
     str = Object::toString.call(arg)
     tok = str.split(" ")[1]
     typ = tok.substring(0,tok.length-1)
-    typ = if typ is "Number"
-      if Number.isInteger(arg) then "Int" else "Float"
+    console.log( "Type.type(arg)", typ, arg  )
+    typ = if typ is "Number" then if Number.isInteger(arg) then "Int" else "Float"
     if lowerCase then typ.toLowerCase() else typ
 
   # A more detail type that returns basic types, class, object and function name in upper case
@@ -76,7 +84,7 @@ class Type
 
   # Aggregate and special value assertions
   isType:(v,t)      ->   @type(v) is t
-  isDef:(d)         ->   @isIn( @type(d), "undefs"  )
+  isDef:(d)         ->   @type(d) isnt 'null' and @type(d) isnt 'undefined'
   isNumber:(n)      ->   @isIn( @type(n), "numbers" )
   isNot:(d)         ->   not @isDef(d)
   isNaN:(n)         ->   Number.isNaN(n) # @isNumber(n) and
@@ -134,7 +142,7 @@ class Type
   # Converters
   toType:( arg, type ) ->
     switch type
-      when "string"  then @toString(  arg )
+      when "string"  then @toStr(  arg )
       when "int"     then @toInt(     arg )
       when "float"   then @toFloat(   arg )
       when "boolean" then @toBoolean( arg )
@@ -144,7 +152,7 @@ class Type
         console.error( "Type.toType(type,arg) unknown type", { type:type, arg:arg } )
         null
 
-  # toEnclose a 'string'
+  # toEnclose a "string'
   # toEnclose("abc",   '"'  )       # returns "abc" - good for JSON keys and values
   # toEnclose("123",   "'"  )       # returns '123'
   # toEnclose("xyz",   "()" )       # returns (xyz)
@@ -155,7 +163,8 @@ class Type
     if enc.length is 1 then "#{enc.charAt(0)}#{str}#{enc.charAt(0)}"
     else str
 
-  toString:( arg, enc="" ) ->
+  # toStr( arg, enc="") is the name the avoid conflicts with arg.toString()
+  toStr:(  arg, enc="" ) ->
     str  = ""
     type = @type(arg)
     switch type
@@ -166,24 +175,24 @@ class Type
       when "object" # This combination of travesal and recursion is cleaner than JSON.stringify()
         str += "{ "
         for own key, val of arg
-          str += key+":"+@toEnclose(@toString(val),'"')+", "
+          str += key+":"+@toEnclose(@toStr(val),'"')+", "
         str = str.substring( 0, str.length-2 ) # remove trailing comma and space
         str += " }"
       when "array"  # This combination of travesal and recursion is cleaner than JSON.stringify()
         str += "[ "
         for arg in arg
-          str += @toString(arg)+", "
+          str += @toStr(arg)+", "
         str = str.substring( 0, str.length-2 ) # remove trailing comma  and space
         str += " ]"
-      when "function"   then @toInfo( "toString(arg)", "unable to convert", arg, "function",
+      when "function"   then @toInfo( "toStr(arg)", "unable to convert", arg, "function",
                                        "string", "?function?", "?function?", (t) -> t.log( t.info() ) )
       when "null"       then "null"
       when "undefined"  then "undefined"
       when "bigint"     then arg.toString()
       when "symbol"     then arg.toString()   # return of arg.toString() could be a hail mary
-      else  @toInfo( "toString(arg)", "unable to convert", arg, type,
+      else  @toInfo( "toStr(arg)", "unable to convert", arg, type,
                      "string", arg.toString(), arg.toString(), (t) -> t.log( t.info() ) )
-    if not @isIn( type "manys" ) and enc.length > 0 then @toEnclose(str,enc) else str
+    if not @isIn( type, "manys" ) and enc.length > 0 then @toEnclose(str,enc) else str
 
   toFloat:( arg ) ->
     type = @type(arg)
@@ -351,10 +360,10 @@ class Type
 
   # -- info reporting ---
 
-  # A gem methods that appends text along with retrStr to @info for detailed reporting of inconsistence
+  # A gem methods that appends text along with retrStr to @warn for detailed reporting of inconsistence
   #  along with a vialble actual return specified by the caller
   toInfo:( method, text, arg, type, typeTo, retnStr, retn, closure=null ) ->
-    info  = "\n  #{method} #{text} #{@toString(arg)} of '#{type}' to'#{typeTo}' returning #{retnStr}"
+    info  = "xxx" # \n  #{method} #{text} #{@toStr(arg)} of '#{type}' to'#{typeTo}' returning #{retnStr}"
     @doInfo( info, closure, retn )
 
   isInfo:( pass, text, type, types, closure=null ) ->
@@ -369,10 +378,12 @@ class Type
     @doInfo( info, closure, pass )
 
   # (t) -> t.log( t.info() )
-  doInfo:( info, closure, retn ) ->
+  doInfo:( info, closure, retn ) =>
+     console.log(@)
+     @log( "Type.doInfo()", "I an a logger" )
      @last  = info
-     @info += info
-     closure(@) if @["logOn"] and @isFunction(closure)
+     @warn += info
+     closure(@) if @["logging"] and @isFunction(closure)
      retn
 
   info:() =>
@@ -383,6 +394,11 @@ class Type
        Type[key].includes(type)
     else
       @isInfo( false, "key #{key} missing for", type, [] )
+
+Type.remove = ( e, a ) ->
+  index = a.indexOf(e)
+  a.splice( index, 1 ) if index > -1
+  a
 
 # All Type[key] arrays
 Type.undefs  = ["null","undefined"]
@@ -395,11 +411,6 @@ Type.expects = Type.results.concat(["schema","range","enums","amy"])
 Type.typeofs = ["string","number","boolean","object","function","bigint","symbol","null","undefined"]
 Type.types   = Type.typeofs.concat(["int","float","array","regex","date"])
 Type.types   = Type.remove("number", Type.types ) # number is now either 'int' or 'float'
-
-Type.remove( e, a ) ->
-  index = a.indexOf(e)
-  a.splice( index, 1 ) if index > -1
-  a
 
 export type = new Type() # Export a singleton instence of type
 export default Type

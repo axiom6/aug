@@ -5,12 +5,11 @@ class Tester extends Type
 
   constructor:() ->
     super()
-
     @stream = null # Optional streaming publisher module that is set by @injectStream( stream )
 
     # Key settings that can be reconfigured through setOptions( options )
     @testing        = true          # When false all testing is turned which allows tests to remain in code
-    @logToConsole   = true
+    #logging        = true          # @logging is in class Type
     @archive        = true          # When true archives test status object to localStorage TestsPassed and TestFail
     @verbose        = false         # Adds addition and sometimes mind numbing detail to testStatus objects
     @debug          = false         # Turns on debugs call to console.log(...)
@@ -22,8 +21,8 @@ class Tester extends Type
     # Short hand for logging in a chained call i.e test(...).log( test().status )
     #  it is important that @log and @error be called in the modules being tested
     #  for viewing the code being tested rather that viewing code in the Tester itself
-    # @log   = console.log
-    # @error = console.error
+    @log   = console.log
+    @error = console.error
 
     # Set by @describe( description, suite )
     @description = ""
@@ -31,7 +30,6 @@ class Tester extends Type
 
     # Accummulate test status state
     @text         = "" # set by test() that is passed inside eq() and sent to run()
-    @info         = ""
     @code         = ""
     @statusText   = ""
     @statusClear  = true
@@ -50,7 +48,7 @@ class Tester extends Type
 
   setOptions:( options ) ->
     @testing        = if options.testing?        then options.testing        else true
-    @logToConsole   = if options.logToConsole?   then options.logToConsole   else true
+    @logging        = if options.logging?        then options.logging        else true
     @archive        = if options.archive?        then options.archive        else true
     @verbose        = if options.verbose?        then options.verbose        else false
     @debug          = if options.debug?          then options.debug          else false
@@ -77,37 +75,33 @@ class Tester extends Type
     else if arguments.length is 2 and @isFunction(args[0])
       closure = args[0]
       @text   = text               # @text is latter referenced inside eq()
-      @code   = closure.toString() # @code is latter referenced inside eq()
       closure(@)                   # Call closure with an injected tester instand
     else if arguments.length is 3 and not @isFunction(args[0])
       result = args[0]
       expect = args[1]
       @text   = text
-      @code   = ""
       @run( text, result, expect ) # returns tester instance for chaining
     @  # returns tester instance for chaining
 
   eq:( result, expect ) =>
     @run( @text, result, expect )
 
-
-
   # -- run() scenario is @initStatus(...) @assert(...) @report(...)
   #     console.log( "Tester.run()", { text:text, result:result, expect:expect} ) if  @debug
   run:( text, result, expect ) ->
-    return @ not @testing
+    return @ if not @testing
     status = @initStatus( result, expect, text   )
     status = @assert(     result, expect, status )
     @report(              result, expect, status )
     @    # returns tester instance for chaining
 
   # Create a new status object for the current test
-  initStatus:( result, schema, text ) ->
+  initStatus:( result, expect, text ) ->
     module = text.split(".")[0]
     {
-      assert:{ text:text, pass:true, module:module, code:@code, info:"" }
+      assert:{ text:text, pass:true, module:module, info:"" }
       result:{ text:"", type:@type(result), value:result }
-      schema:{ text:"", type:schema.type,   value:schema.expect }  # Need to reconsider
+      expect:{ text:"", type:@type(expect), value:expect }
     }
 
   # Performs all assertions even a deep equal on objects and arrays
@@ -129,7 +123,7 @@ class Tester extends Type
 
     # Perform all comparisions
     type = @type( result )
-    isValue = (type) -> @isIn( type, "values" )
+    isValue = (type) => @isIn( type, "values" )
     status = switch type
       when  isValue( type ) then @valuesEq(   result, expect, status, "eq"  )  # op is not passed aroung
       when "object"         then @objectsEq(  result, expect, status, level )
@@ -229,23 +223,20 @@ class Tester extends Type
     status.assert.text   = prefix + status.assert.text
     status.assert.pass   = pass and status.assert.pass # Asserts a previous status.assert.pass is false
     status.assert.info  += info
-    status.assert.code   = if @isString(@code) then @code else ""
     status.result.text  += @textResult( result, key, index )
     status.expect.text  += @textExpect( expect, key, index )  if not isSchema
     status.expect.text  += @textSchema( expect, key, index )  if     isSchema
     status
-
 
   report:( result, expect, status ) ->
     pass = status.assert.pass
     eq   = if pass then "is" else "not"
     @blockText   = "" if @blockClear
     @statusText  = """\n#{@module}.#{status.assert.text} """
-    @statusText += """#{eq} #{@toString(expect)}""" if status.result.type isnt "function"
+    @statusText += """#{eq} #{@toStr(expect)}""" if status.result.type isnt "function"
     @statusText += status.assert.info if @isString(status.assert.info)
     @statusText += """\n   #{@textResult( result )}""" if @verbose or not pass
     @statusText += """\n   #{@textExpect( expect )}""" if @verbose or not pass
-    #statusText += "\n"+@code                                 if @isString(@code) and ( @verbose or not pass )
     @blockText  += @statusText   # if not @statusClear # keep the status in the block for now
     @statusClear = false
     @blockClear  = false
@@ -259,13 +250,13 @@ class Tester extends Type
     ref   = " "
     ref   " at key:#{key} "      if @isString(key)
     ref = " at index: #{index} " if @isInt(index)
-    "Result#{ref}where type is #{@type(result)} and value is #{@toString(result)}"
+    "Result#{ref}where type is #{@type(result)} and value is #{@toStr(result)}"
 
   textExpect:( expect, key=null, index=null ) ->
     ref   = " "
     ref   " at key:#{key} "      if @isString(key)
     ref = " at index: #{index} " if @isInt(index)
-    "Expect#{ref}where type is #{@type(expect)} and value is #{@toString(expect)}"
+    "Expect#{ref}where type is #{@type(expect)} and value is #{@toStr(expect)}"
 
   textSchema:( schema, key=null, index=null ) ->
     ref   = " "
@@ -278,7 +269,7 @@ class Tester extends Type
   runUnitTests:( paths ) ->
     for path in paths
       modulePath = @path( path )
-      console.log( "\n-- Started Unit Testing for: #{modulePath.name} in #{modulePath.path}" ) if @logToConsole
+      console.log( "\n-- Started Unit Testing for: #{modulePath.name} in #{modulePath.path}" ) if @logging
       await `import( path /* @vite-ignore */ )`
     @summary()
     return
@@ -396,7 +387,7 @@ class Tester extends Type
       when @isSchemaParse(  expect, type ) then @toSchemaParse(  schema, expect )
       when @isSchemaObject( expect, type ) then @toSchemaObject( schema, expect )
       else @toInfo( "toSchema(expect)", "expect not schema 'string' or 'object'",
-        expect, type, "schema", @toString(schema), schema, (t) -> t.log( t.info() ) )
+        expect, type, "schema", @toStr(schema), schema, (t) -> t.log( t.info() ) )
 
   isSchemaParse:  ( arg, type ) ->
     type is "string" and arg includes(":")
@@ -571,13 +562,13 @@ class Tester extends Type
       if failLocals?
         failStatuses = JSON.parse( failLocals )
         for failStatus in failStatuses
-          console.log( failStatus ) if @logToConsole
+          console.log( failStatus ) if @logging
     if reviewPassed
       passLocals = localStorage.getItem( "TestsPassed" )
       if passLocals?
         passStatuses = JSON.parse( passLocals )
         for passStatus in passStatuses
-          console.log( passStatus ) if @logToConsole
+          console.log( passStatus ) if @logging
     return
 
   # Override type.isIn() with addional Tester type arrays

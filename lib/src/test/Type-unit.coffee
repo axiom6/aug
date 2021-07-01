@@ -5,24 +5,38 @@ import { test } from "./Tester.js"
 func  = () ->
 undef = undefined
 
-test().describe( "Type" )
+# Prefix 'Type.' to the text output like "Type.type(true)"
 
-test( "type(true)",       type.type(true),          'boolean'   )
-test( "type(123)",        type.type(123),           'number'    )
-test( "type('123')",      type.type('123'),         'string'    )
-test( "type(func)",       type.type(func),          'function'  )
-test( "type({a:'a'})",    type.type({a:'a'}),       'object'    )
-test( "type([1,2,3]",     type.type([1,2,3]),       'array'     )
-test( "type(/x/)",        type.type(/x/),           'regexp'    )
-test( "type(new Date())", type.type(new Date()),    'date'      )
-test( "type(undef)",      type.type(undef),         'undefined' )
-test( "type(null)",       type.type(null),          'null'      )
-console.log( test().block() ) # Log the current block of tests
+test().describe( "Type", "All 13 types produced by type(...)" )
+
+test( "type('123')",        type.type('123'),         'string'    )
+test( "type(123)",          type.type(123),           'int'       )
+test( "type(123.0)",        type.type(123.0),         'float'     )
+test( "type(true)",         type.type(true),          'boolean'   )
+test( "type([1,2,3]",       type.type([1,2,3]),       'array'     )
+test( "type({a:'a'})",      type.type({a:'a'}),       'object'    )
+test( "type(/x/)",          type.type(/x/),           'regexp'    )
+test( "type(func)",         type.type( () => ),       'function'  )
+test( "type(null)",         type.type(null),          'null'      )
+test( "type(undef)",        type.type(undef),         'undefined' )
+test( "type(new Date())",   type.type(new Date()),    'date'      )
+test( "type(BigInt(123)))", type.type((BigInt(123))), 'bigint'    ) # 123n not working in CoffeeScript
+test( "type(123n)",         type.type(Symbol),        'symbol'    ) # Symbol not Symbol
+
+test().log( test().block() ) # Log the current block of tests
+
+test().describe( "Type", "String conversions with toStr(arg)" )
 
 # String conversions
 test( 'toStr({ a:"a", b:"b" })',  type.toStr({ a:"a", b:"b" }),  '{ a:"a", b:"b" }'   )
 test( 'toStr([ 1, 2, 3 ])',       type.toStr([ 1, 2, 3 ]),       '[ 1, 2, 3 ]'        )
 test( 'toStr([ "1", "2", "3" ])', type.toStr([ "1", "2", "3" ]), '[ "1", "2", "3" ]'  )
+
+test().log( test().block() )
+
+test().describe( "Type", "klass(arg) types" )
+
+test().describe( "Type", "String conversions with toStr(arg)" )
 
 test( "klass(true)",       type.klass(true),        'Boolean'   )
 test( "klass(123)",        type.klass(123),         'Number'    )
@@ -34,10 +48,11 @@ test( "klass(/x/)",        type.klass(/x/),         'RegExp'    )
 test( "klass(new Date())", type.klass(new Date()),  'Date'      )
 test( "klass(undef)",      type.klass(undef),       'Undefined' )
 test( "klass(null)",       type.klass(null),        'Null'      )
-console.log( test().block() ) # Log the current block of tests
 
+test().log( test().block() )
 
-# Positive true tests
+test().describe( "Type", "Positive true tests" )
+
 test( "isNull(null)",     type.isNull(null),     true  )
 test( "isUndef(xxxx)",    type.isUndef(undef),   true  )
 test( "isNot(null)",      type.isNot(null),      true  )
@@ -52,7 +67,8 @@ test( "isVal(false)",     type.isVal(false),     true  )
 test( "isArray([1,2,3])", type.isArray([1,2,3]), true  )
 console.log( test().block() ) # Log the current block of tests
 
-# Negative true tests
+test().describe( "Type", "Negative false test failuer" )
+
 test( "isNull('abc')",    type.isNull('abc'),    false )
 test( "isUndef(12345)",   type.isUndef(12345),   false )
 test( "isNot({a:'a'}",    type.isNot({a:'a'}),   false )
@@ -64,6 +80,9 @@ test( "isVal({a:'a'})",   type.isVal({a:'a'}),   false )
 test( "isVal([1,2,3])",   type.isVal([1,2,3]),   false )
 test( "isVal([1,2,3])",   type.isVal([1,2,3]),   true  )
 test( "isArray({a:'a'})", type.isArray({a:'a'}), true  )
+
+test().log( test().block() )
+
 ###  
   -- Type determination --
   type:(arg,lowerCase=true)
@@ -133,4 +152,63 @@ test( "isArray({a:'a'})", type.isArray({a:'a'}), true  )
   time:()
   types
   typeofs
+###
+
+###
+{
+  "stream": {
+    "subjectNames": [
+      "TestStatus",
+      "TestString",
+      "TestSummary"
+    ],
+    "info": {
+      "subscribe": false,
+      "publish": false,
+      "subjects": [
+        "TestStatus",
+        "TestString",
+        "TestSummary"
+      ]
+    },
+    "subjects": {
+      "TestStatus": {
+        "subscribers": {}
+      },
+      "TestString": {
+        "subscribers": {}
+      },
+      "TestSummary": {
+        "subscribers": {}
+      }
+    }
+  },
+  "testing": true,
+  "archive": true,
+  "verbose": false,
+  "debug": false,
+  "schemaKey": "schema",
+  "statusSubject": "TestStatus",
+  "stringSubject": "TestString",
+  "summarySubject": "TestSummary",
+  "description": null,
+  "suite": "unit tests",
+  "text": "five() = 5",
+  "code": "",
+  "statusText": "",
+  "statusClear": true,
+  "blockText": "",
+  "blockClear": true,
+  "module": "Tester",
+  "modules": {
+    "Tester": {
+      "name": "Tester",
+      "path": "/lib/pub/test/Tester-unit.js"
+    }
+  },
+  "passed": [],
+  "failed": [],
+  "logging": true
+}
+  
 ###

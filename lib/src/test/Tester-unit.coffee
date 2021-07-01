@@ -1,5 +1,5 @@
 
-import { test, tester } from './js'     # Only importing tester to unit test it
+import { test, tester } from './Tester.js'     # Only importing tester to unit test it
 import Stream from "../base/util/Stream.js"
 import Vis    from '../base/draw/Vis.js'
 
