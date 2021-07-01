@@ -6,7 +6,9 @@ subjects   = ["TestStream","TestStatus","TestString","TestSummary"]
 streamLog  = { subscribe:false, publish:false, subjects:subjects }
 stream     = new Stream( subjects, streamLog )
 
-test( "Stream.Simple Publish and Subscribe", (t) ->
+test().describe( "Stream" )
+
+test( "Simple Publish and Subscribe", (t) ->
   pubObj = { a:"a", b:"b" }
   subObj = {}
   onSubscribe = (obj) -> subObj = obj

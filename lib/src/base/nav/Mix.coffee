@@ -1,23 +1,14 @@
 
-import Util            from '../util/Util.js'
-import { tester as t } from '../../test/Tester.js'
-import Vis             from '../../base/draw/Vis.js'
+import Type  from "./Type.js"
+import Vis   from '../../base/draw/Vis.js'
 
-class Mix
+class Mix extends Type
 
   constructor:( Main ) ->
+    super()
     Mix.Main =  Main
     @debug = false
 
-  # A subset of tester assertions to be remove eventually
-  isDef: (d)         -> t.isDef(d)
-  isString: (s)      -> t.isString(s)
-  isFunction:(f)     -> t.isFunction(f)
-  isArray:(a)        -> t.isArray(a)
-  inArray: (e,a)     -> t.inArray(e,a)
-  inObject:(key,obj) -> t.inObject(key,obj)
-  isChild:(key)      -> t.isChild(key,obj)
-  keys: (obj) ->     -> t.keys(obj)
   hasElem: (elem)    -> elem? and elem['clientHeight']? and elem['clientHeight'] > 0
 
   getElem: ($refs, name) ->  # Not called
@@ -162,7 +153,7 @@ class Mix
     pracs = {}
     if @isBatch(compKey)
       compPracs = @pracs(compKey)
-      if t.isDef(inovKey) and inovKey isnt compKey and @isBatch(inovKey)
+      if @isDef(inovKey) and inovKey isnt compKey and @isBatch(inovKey)
         inovPracs = @pracs(inovKey)
         console.log( 'Mix.inovObject() inovPracs', { inovKey:inovKey, inovPracs:inovPracs } ) if @debug
         for key, prac of compPracs
@@ -191,7 +182,7 @@ class Mix
     talkObj = talkObjs[pracKey]
     console.log( 'Mix.sectObj()', { talkObj:talkObj, talkKey:pracKey, sectKey:dispKey } ) # , sectObj:sectObj
     sectObjs = @compObject(talkObj.comp)
-    talkObj.keys = if talkObj.keys?  then talkObj.keys else Util.childKeys(sectObjs)
+    talkObj.keys = if talkObj.keys?  then talkObj.keys else @childKeys(sectObjs)
     dispKey = if dispKey is 'None' or not @inArray(dispKey,talkObj.keys) then @keys(sectObjs)[0] else dispKey
     sectObj = sectObjs[dispKey]
     if not sectObj?
@@ -200,7 +191,7 @@ class Mix
     sectObj.src = talkObj.src
     sectObj.name = dispKey
     sectObj.peys = talkObj.keys
-    sectObj.keys = if sectObj.keys?  then sectObj.keys else Util.childKeys(sectObj)
+    sectObj.keys = if sectObj.keys?  then sectObj.keys else @childKeys(sectObj)
     sectObj = Object.assign( {}, sectObj ) if sectObj.imgsIdx isnt @nav().imgsIdx  # Trigger reactive render
     sectObj.imgsIdx = @nav().imgsIdx
     sectObj
@@ -213,7 +204,7 @@ class Mix
       pageObj.src = sectObj.src
       pageObj.name = presKey
       pageObj.peys = sectObj.keys
-      pageObj.keys = if pageObj.keys?  then pageObj.keys else Util.childKeys(pageObj)
+      pageObj.keys = if pageObj.keys?  then pageObj.keys else @childKeys(pageObj)
       console.log( 'Mix.pageObj()', { dispKey:sectObj.name, presKey:presKey, pageObj:pageObj } )
     pageObj
 
@@ -255,7 +246,7 @@ class Mix
     pageKey is 'Info' or pageKey is 'Data' # @app() is 'Muse' and
 
   removeElem:( elem ) ->
-    while t.isDef(elem) and t.isDef(elem.firstChild)
+    while @isDef(elem) and @isDef(elem.firstChild)
       elem.removeChild(elem.firstChild)
     return
 

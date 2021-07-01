@@ -1,5 +1,5 @@
 
-import { unit, test, tester } from './Tester.js'     # Only importing tester to unit test it
+import { unit, test, tester } from './js'     # Only importing tester to unit test it
 import Stream from "../base/util/Stream.js"
 import Vis    from '../base/draw/Vis.js'
 
@@ -14,7 +14,7 @@ import Vis    from '../base/draw/Vis.js'
 #   using a glob pattern like "/src/**/*-unitester.js"  or "/pub/**/*-unitester.js"
 
 # t = tester
-test().describe('Tester-unitester.js', 'unit tests' )
+test().describe('Tester', 'unit tests' )
 
 five = () ->
   5
@@ -22,20 +22,17 @@ five = () ->
 add  = ( a, b ) ->
   a + b
 
-test(  "Tester.five() = 5", (t) ->
+test(  "five() = 5", (t) ->
   t.eq( five(), 5 ) )
 
-test(  "Tester.add(2,3) = 5", (t) ->
+test(  "add(2,3) = 5", (t) ->
   t.eq( add(2,3), 5 ) )
 
-test(  "Tester.type(123)", (t) ->
+test(  "type(123)", (t) ->
   t.eq( tester.type(123), 'number' ) )
 
-test(  "Tester.type('123')", (t) ->
+test(  "type('123')", (t) ->
   t.eq( tester.type('123'), 'string' ) )
-
-func  = () ->
-undef = undefined
 
 class Main
   @init = () =>
@@ -44,84 +41,30 @@ subjects   = ["TestStatus","TestString","TestSummary"]
 streamLog  = { subscribe:false, publish:false, subjects:subjects }
 stream     = new Stream( subjects, streamLog )
 
-unit( "Tester.type(true)",       tester.type(true),          'boolean'   )
-unit( "Tester.type(123)",        tester.type(123),           'number'    )
-unit( "Tester.type('123')",      tester.type('123'),         'string'    )
-unit( "Tester.type(func)",       tester.type(func),          'function'  )
-unit( "Tester.type({a:'a'})",    tester.type({a:'a'}),       'object'    )
-unit( "Tester.type([1,2,3]",     tester.type([1,2,3]),       'array'     )
-unit( "Tester.type(/x/)",        tester.type(/x/),           'regexp'    )
-unit( "Tester.type(new Date())", tester.type(new Date()),    'date'      )
-unit( "Tester.type(undef)",      tester.type(undef),         'undefined' )
-unit( "Tester.type(null)",       tester.type(null),          'null'      )
+unit( "klass(stream)",     tester.klass(stream),      'Stream'     )
+unit( "klass(Stream)",     tester.klass(Stream),      'Stream'     )
+unit( "klass(tester)",     tester.klass(tester),      'Tester'     )
+unit( "klass(tester)",     tester.klass(type.type), 'bound type' )
+unit( "klass(Vis)",        tester.klass(Vis),         'Vis'        )
 console.log( unit().block() ) # Log the current block of tests
 
-unit( "Tester.type(stream)",     tester.type(stream),        'object'    )
-unit( "Tester.type(Stream)",     tester.type(Stream),        'function'  )
-unit( "Tester.type(tester)",     tester.type(tester),        'object'    )
-unit( "Tester.type(Vis)",        tester.type(Vis),           'function'  )
+
+test( 'eq( {a:"a"})', (t) -> t.eq(  {a:"a"}, {a:"a"} ) )
+test( 'eq( {a:"a"})', (t) -> t.eq(  {a:"a"}, {a:"b"} ) )
+test( 'eq( {a:"a"})', (t) -> t.eq(  {a:"a"}, {b:"a"} ) )
+
+test( "eq([1,2,3])",  (t) -> t.eq([1,2,3],[1,2,3]    ) )
+test( "eq([1,2,3])",  (t) -> t.eq([1,2,3],[1,2,3,4]  ) )
+
+test( 'eq( (x) ->, (y) -> ) )', (t) -> t.eq(  (x) ->, (y) -> ) )
+
+unit( "Type.type(stream)",     type.type(stream),        'object'    )
+unit( "Type.type(Stream)",     type.type(Stream),        'function'  )
+unit( "Type.type(tester)",     type.type(tester),        'object'    )
+unit( "Type.type(Vis)",        type.type(Vis),           'function'  )
 console.log( unit().block() ) # Log the current block of tests
 
-unit( "Tester.klass(true)",       tester.klass(true),        'Boolean'   )
-unit( "Tester.klass(123)",        tester.klass(123),         'Number'    )
-unit( "Tester.klass('123')",      tester.klass('123'),       'String'    )
-unit( "Tester.klass(func)",       tester.klass(func),        'func'      )
-unit( "Tester.klass({a:'a'})",    tester.klass({a:'a'}),     'Object'    )
-unit( "Tester.klass([1,2,3]",     tester.klass([1,2,3]),     'Array'     )
-unit( "Tester.klass(/x/)",        tester.klass(/x/),         'RegExp'    )
-unit( "Tester.klass(new Date())", tester.klass(new Date()),  'Date'      )
-unit( "Tester.klass(undef)",      tester.klass(undef),       'Undefined' )
-unit( "Tester.klass(null)",       tester.klass(null),        'Null'      )
-console.log( unit().block() ) # Log the current block of tests
 
-unit( "Tester.klass(stream)",     tester.klass(stream),      'Stream'     )
-unit( "Tester.klass(Stream)",     tester.klass(Stream),      'Stream'     )
-unit( "Tester.klass(tester)",     tester.klass(tester),      'Tester'     )
-unit( "Tester.klass(tester)",     tester.klass(tester.type), 'bound type' )
-unit( "Tester.klass(Vis)",        tester.klass(Vis),         'Vis'        )
-console.log( unit().block() ) # Log the current block of tests
-
-# Positive true tests
-unit( "Tester.isNull(null)",     tester.isNull(null),     true  )
-unit( "Tester.isUndef(xxxx)",    tester.isUndef(undef),   true  )
-unit( "Tester.isNot(null)",      tester.isNot(null),      true  )
-unit( "Tester.isStr('abc')",     tester.isStr('abc'),     true  )
-unit( "Tester.isNum(12345)",     tester.isNum(12345),     true  )
-unit( "Tester.isNaN(NaN)",       tester.isNaN(NaN),       true  )
-unit( "Tester.isObj({a:'a'})",   tester.isObj({a:'a'}),   true  )
-unit( "Tester.isVal( 123 )",     tester.isVal( 123 ),     true  )
-unit( "Tester.isVal('123')",     tester.isVal('123'),     true  )
-unit( "Tester.isVal(true)",      tester.isVal(true),      true  )
-unit( "Tester.isVal(false)",     tester.isVal(false),     true  )
-unit( "Tester.isArray([1,2,3])", tester.isArray([1,2,3]), true  )
-console.log( unit().block() ) # Log the current block of tests
-
-# Negative true tests
-unit( "Tester.isNull('abc')",    tester.isNull('abc'),    false )
-unit( "Tester.isUndef(12345)",   tester.isUndef(12345),   false )
-unit( "Tester.isNot({a:'a'}",    tester.isNot({a:'a'}),   false )
-unit( "Tester.isStr( 123 )",     tester.isStr( 123 ),     false )
-unit( "Tester.isNum('123')",     tester.isNum('123'),     false )
-unit( "Tester.isNaN( 123 )",     tester.isNaN( 123 ),     false )
-unit( "Tester.isObj(123)",       tester.isObj(123),       false )
-unit( "Tester.isVal({a:'a'})",   tester.isVal({a:'a'}),   false )
-unit( "Tester.isVal([1,2,3])",   tester.isVal([1,2,3]),   false )
-unit( "Tester.isVal([1,2,3])",   tester.isVal([1,2,3]),   true  )
-unit( "Tester.isArray({a:'a'})", tester.isArray({a:'a'}), true  )
-
-test( 'Tester.eq( {a:"a"})', (t) -> t.eq(  {a:"a"}, {a:"a"} ) )
-test( 'Tester.eq( {a:"a"})', (t) -> t.eq(  {a:"a"}, {a:"b"} ) )
-test( 'Tester.eq( {a:"a"})', (t) -> t.eq(  {a:"a"}, {b:"a"} ) )
-
-test( "Tester.eq([1,2,3])",  (t) -> t.eq([1,2,3],[1,2,3]    ) )
-test( "Tester.eq([1,2,3])",  (t) -> t.eq([1,2,3],[1,2,3,4]  ) )
-
-test( 'Tester.eq( (x) ->, (y) -> ) )', (t) -> t.eq(  (x) ->, (y) -> ) )
-
-# String conversions
-unit( 'Tester.toStr({ a:"a", b:"b" })',  tester.toStr({ a:"a", b:"b" }), '{ a:"a", b:"b" }' )
-unit( 'Tester.toStr([ 1, 2, 3 ])',       tester.toStr([ 1, 2, 3 ]),      '[ 1, 2, 3 ]'      )
-unit( 'Tester.toStr([ "1", "2", "3" ])', tester.toStr([ "1", "2", "3" ]),  '[ "1", "2", "3" ]'  )
 
 ###
   constructor:()
@@ -151,75 +94,12 @@ unit( 'Tester.toStr([ "1", "2", "3" ])', tester.toStr([ "1", "2", "3" ]),  '[ "1
   runUnitTests:( paths )
   path:( path )
   summary:( module=null )
-  isString:(s)
-  isInt:(i,sc=false)
-  isFloat:(f,sc=false)
-  isBoolean:(b,sc=false)
-  isObject:(o,sc=false)
-  isRegex:(r)
-  isFunction:(f)
-  isNull:(m)
-  isUndef:(u)
-  isBigInt:(b)
-  isSymbol:(s)
-  isArray:( a, type=null, sc=false )
-  isType:(v,t)
-  isDef:(d)
-  isNumber:(n)
-  isNot:(d)
-  isNaN:(n)
-  isArrayTyped:(a,t)
-  sArrayMixed:(a)
-  inString:(e,s)
-  inArray:( e,a)
-  inObject:(k,o)
-  inRange:(i,r)
-  inTolerance:(f,t)
-  inBetween:(s,b)
-  toKeys:(o)
-  time:()
-  isChild: (key)
-  isEmpty:(e)
-  isStringFloat:( str )
-  isStringInt:( str )
-  isStringBoolean:( str )
-  isStringArray:( str )
-  isStringObject:( str )
-  isStringEnclosed:( beg, str, end )
-  toType:( arg, type )
-  enclose:( str, enc="" )
-  toString:( arg, enc="" )
-  toFloat:( arg )
-  toInt:( arg )
-  toInfo:( method, arg, type, typeTo, retnStr, retn )
-  toArray:( arg, type, sep="," )
-  toObject:( arg )
-  isRange:(r)
-  isWithin:(w)
-  isBetween:(b)
-  toRange:(arg)
-  toWithin:(w)
-  toBetween:(b)
-  inRange:(arg,range)
-  inWithin:(w,within)
-  inBetween:(b,between)
-  toFixed:( arg, dec=2 )
-  toCap:( str )
-  unCap:( str )
-  head:(v,action=false,pop=false)
-  tail:(v,action=false)
-  slice:( v, beg, end=null, remove=false )
-  pad:( n, m )
-  noop:( ...args )
-  Tester.types
-  Tester.typeofs
-  scheme:( arg,op="eq" )
-  type:(arg,lowerCase=true)
-  klass:(arg)
-x mdnType:( obj, showFullClass )
   injectStream:( stream )
   archiveLocal:( failed, passed )
   reviewsLocal:( reviewFailed, reviewPassed )
+  isRange:(r)
+  toRange:(arg)
+  inRange:(arg,range)   
 ###
 
 # Log the current block of tests and then the summary for 't'
