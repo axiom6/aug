@@ -22,8 +22,8 @@ class Tester extends Type
     # Short hand for logging in a chained call i.e test(...).log( test().status )
     #  it is important that @log and @error be called in the modules being tested
     #  for viewing the code being tested rather that viewing code in the Tester itself
-    @log   = console.log
-    @error = console.error
+    # @log   = console.log
+    # @error = console.error
 
     # Set by @describe( description, suite )
     @description = ""
@@ -60,55 +60,37 @@ class Tester extends Type
     @summarySubject = if options.summarySubject? then options.summarySubject else "TestSummary"
     return
 
-  # -- test -- Pass a closeure in the form of  (t) -> { code... }
-  # Modeled like the Ava JavaScipt test framework
-  # Imports: import { test }     from "../test/Tester.js"
-  # Specify: test( text, (t) -> { code... }
-  # Example:
-  #   const add = ( a, b ) ->
-  #     a + b
-  #   test("2 + 3 = 5", (t) ->
-  #     t.eq( add(2,3), 5 ) )
-  test:( text, closure ) =>
-    return @ if arguments.length is 0 or not @testing
-    @text     = text               # @text is latter referenced inside eq()
-    @code     = closure.toString() # @code is latter referenced inside eq()
-    closure(@)
-    @  # returns tester instance for chaining
-
-  # -- unit -- For invoking the result argument immediately in a module-unit.js file
+  # -- test --
   #
-  # Imports: import { unit } from "../test/Tester.js"
-  #          import Vis      from "../draw/Vis.js"
-  # Specify: unit( text, result, expect )
-  # Example: unit( "can convert hex color to rgb object",  Vis.rgb(0xFFFFFF), {r:255,g:255,b:255} )
-  unit:( text, result, expect ) =>   # unit(...) is always @testing
-    return @ if arguments.length is 0 or not @testing
-    @text   = text
-    @code   = ""
-    @run( text, result, expect ) # returns tester instance for chaining
+  #   import { test } from "../test/Tester.js"
+  #   import Vis      from "../draw/Vis.js"
+
+  #   test(  "2 + 3 = 5", (t) ->                # closure form
+  #     t.eq( 2 + 3,  5 ) )
+  #
+  #   test(  "2 + 3 = 5", 2 + 3, 5 )            # Direct result and expect arguments
+  #
+  #   test( "Vis.rgb() converts hex color to rgb object",  Vis.rgb(0xFFFFFF), {r:255,g:255,b:255} )
+  test:( text, args... ) =>
+    if      arguments.length is 0 or not @testing
+      return @
+    else if arguments.length is 2 and @isFunction(args[0])
+      closure = args[0]
+      @text   = text               # @text is latter referenced inside eq()
+      @code   = closure.toString() # @code is latter referenced inside eq()
+      closure(@)                   # Call closure with an injected tester instand
+    else if arguments.length is 3 and not @isFunction(args[0])
+      result = args[0]
+      expect = args[1]
+      @text   = text
+      @code   = ""
+      @run( text, result, expect ) # returns tester instance for chaining
+    @  # returns tester instance for chaining
 
   eq:( result, expect ) =>
     @run( @text, result, expect )
 
-  # -- info reporting ---
 
-  # A gem methods that appends text along with retrStr to @info for detailed reporting of inconsistence
-  #  along with a vialble actual return specified by the caller
-  toInfo:( method, text, arg, type, typeTo, retnStr, retn ) ->
-    @info += "\n  Tester.#{method} #{text} #{@toString(arg)} of '#{type}' to'#{typeTo}' returning #{retnStr}"
-    retn
-
-  isInfo:( pass, text, type, types ) ->
-    return true if pass
-    @info += "\n  #{text} of type '#{type}' not in '#{types}'"
-    false
-
-  inInfo:( pass, result, expect, oper, spec, text ) ->
-    prefix = if pass then "-- Passed --" else "-- Failed --"
-    condit = if pass then "matches "      else "no match"
-    @info += "\n  #{prefix} #{result} #{condit} #{expect} with oper #{oper} and spec #{spec} #{text}"
-    pass
 
   # -- run() scenario is @initStatus(...) @assert(...) @report(...)
   #     console.log( "Tester.run()", { text:text, result:result, expect:expect} ) if  @debug
@@ -370,7 +352,7 @@ class Tester extends Type
 
   isResultType:( type ) ->
     pass = @isDef(type) and @isIn( type,    "results" )
-    @isInfo( pass, "Not a Result", type, Type.results )
+    @isInfo( pass, "Not a Result", type, Type.results, (t) -> t.log( t.info() ) )
 
   isExpect:(expect,oper) ->
     @isOper(oper)
@@ -380,20 +362,20 @@ class Tester extends Type
       when "range" then @isRange(expect)
       when "enums" then @isEnums(expect,oper,type)
       when "eq"    then @isResultType(type)
-      else @isInfo( false, "Not a Expect oper", oper, Type.opers )
+      else @isInfo( false, "Not a Expect oper", oper, Type.opers, (t) -> t.log( t.info() ) )
     @isInfo( pass, "Not a Expect", type, Type.expects )
 
   isExpectType:( type ) ->
     pass = @isDef(type) and @isIn( type, "expects"      )
-    @isInfo( pass, "Not a Expect", type, Tester.expects )
+    @isInfo( pass, "Not a Expect", type, Tester.expects, (t) -> t.log( t.info() ) )
 
   isOper:( oper ) ->
     pass = @isDef(oper) and  @isIn( oper, "opers" )
-    @isInfo( pass, "Not an 'oper'", oper, "opers" )
+    @isInfo( pass, "Not an 'oper'", oper, "opers", (t) -> t.log( t.info() ) )
 
   isCard:( card ) ->
     pass = @isDef(card) and @isIn( card, "cards" )
-    @isInfo( pass, "Not a 'card'", card, Type.cards )
+    @isInfo( pass, "Not a 'card'", card, Type.cards, (t) -> t.log( t.info() ) )
 
   # This approach insures that all conditions are checked and messages sent
   #   then all arg returns are anded together to determine a final pass or fail
@@ -414,7 +396,7 @@ class Tester extends Type
       when @isSchemaParse(  expect, type ) then @toSchemaParse(  schema, expect )
       when @isSchemaObject( expect, type ) then @toSchemaObject( schema, expect )
       else @toInfo( "toSchema(expect)", "expect not schema 'string' or 'object'",
-        expect, type, "schema", @toString(schema), schema )
+        expect, type, "schema", @toString(schema), schema, (t) -> t.log( t.info() ) )
 
   isSchemaParse:  ( arg, type ) ->
     type is "string" and arg includes(":")
@@ -498,7 +480,7 @@ class Tester extends Type
       when "float"  then inFloatRange(    result, range )
       when "array"  then @inArrayRange(   result, range )
       when "object" then @objectsEq(      result, range, status, level )
-      else @toInfo( "inRange()", "unknown range type", result, type, type, "false", false )
+      else @toInfo( "inRange()", "unknown range type", result, type, type, "false", false, (t) -> t.log( t.info() ) )
     @examine( pass, result, schema, status, "inRange(...)", key, index )
 
   # Camnot is @arraysEq(...) because a single ramge can be applied to all resuls in a result array
@@ -512,10 +494,10 @@ class Tester extends Type
         pass = pass and @inMyRange( result[i], range )
     else if nResult > nRange
       text = "not enough range tests #{nRange} for result so only will be #{nRange} tests on result"
-      pass = @toInfo( "inRange()", text, result, type, type, "false", false )
+      pass = @toInfo( "inRange()", text, result, type, type, "false", false, (t) -> t.log( t.info() ) )
     else if nResult < nRange
       text = "OK with more range bounds #{nRange} than needed for result #{nResult}"
-      pass = @toInfo( "inRange()", result, text, type, type, "true", true )
+      pass = @toInfo( "inRange()", result, text, type, type, "true", true, (t) -> t.log( t.info() ) )
       min = Math.min( nResult, nRange )
       for i in [0...min] when @isArray(result[i]) and @isArray(range[i])
         pass = pass and @inMyRange( result[i], range[i] )
@@ -532,7 +514,7 @@ class Tester extends Type
       when "array"
         enums = arg
       else
-        enums = @toInfo( "toEnums(arg)", "unable to convert", arg, type, "enums", "[]", [] )
+        enums = @toInfo( "toEnums(arg)", "unable to convert", arg, type, "enums", "[]", [], (t) -> t.log( t.info() ) )
     enums
 
   rangeType:( range ) ->
@@ -566,7 +548,7 @@ class Tester extends Type
       when 'int'    then isIntRange(range)
       when 'float'  then isFloatRange(range)
       when 'array'  then isArrayRange(range)
-      else  @toInfo( "isRange(range)", "not a range type", range, type, "", "false", false )
+      else  @toInfo( "isRange(range)", "not a range type", range, type, "", "false", false, (t) -> t.log( t.info() ) )
 
   # Stream is an optional libary for publising statusObject to UIs like RxJS
   injectStream:( stream ) ->
@@ -602,7 +584,7 @@ class Tester extends Type
   isIn:( type, key ) ->
     if        Type[key]? then   Type[key].includes(type)
     else if Tester[key]? then Tester[key].includes(type)
-    else @isInfo( false, "key #{key} missing for", type, [] )
+    else @isInfo( false, "key #{key} missing for", type, [], (t) -> t.log( t.info() ) )
 
 Tester.specs   = ["range","enums"]               # high level schema based comparision specs
 Tester.opers   = ["eq","le","lt","ge","gt","ne"] # low  level value  based comparison  ooers 'eq' default

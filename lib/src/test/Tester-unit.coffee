@@ -1,5 +1,5 @@
 
-import { unit, test, tester } from './js'     # Only importing tester to unit test it
+import { test, tester } from './js'     # Only importing tester to unit test it
 import Stream from "../base/util/Stream.js"
 import Vis    from '../base/draw/Vis.js'
 
@@ -41,12 +41,12 @@ subjects   = ["TestStatus","TestString","TestSummary"]
 streamLog  = { subscribe:false, publish:false, subjects:subjects }
 stream     = new Stream( subjects, streamLog )
 
-unit( "klass(stream)",     tester.klass(stream),      'Stream'     )
-unit( "klass(Stream)",     tester.klass(Stream),      'Stream'     )
-unit( "klass(tester)",     tester.klass(tester),      'Tester'     )
-unit( "klass(tester)",     tester.klass(type.type), 'bound type' )
-unit( "klass(Vis)",        tester.klass(Vis),         'Vis'        )
-console.log( unit().block() ) # Log the current block of tests
+test( "klass(stream)",     tester.klass(stream),      'Stream'     )
+test( "klass(Stream)",     tester.klass(Stream),      'Stream'     )
+test( "klass(tester)",     tester.klass(tester),      'Tester'     )
+test( "klass(tester)",     tester.klass(type.type), 'bound type' )
+test( "klass(Vis)",        tester.klass(Vis),         'Vis'        )
+console.log( test().block() ) # Log the current block of tests
 
 
 test( 'eq( {a:"a"})', (t) -> t.eq(  {a:"a"}, {a:"a"} ) )
@@ -58,11 +58,11 @@ test( "eq([1,2,3])",  (t) -> t.eq([1,2,3],[1,2,3,4]  ) )
 
 test( 'eq( (x) ->, (y) -> ) )', (t) -> t.eq(  (x) ->, (y) -> ) )
 
-unit( "Type.type(stream)",     type.type(stream),        'object'    )
-unit( "Type.type(Stream)",     type.type(Stream),        'function'  )
-unit( "Type.type(tester)",     type.type(tester),        'object'    )
-unit( "Type.type(Vis)",        type.type(Vis),           'function'  )
-console.log( unit().block() ) # Log the current block of tests
+test( "Type.type(stream)",     type.type(stream),        'object'    )
+test( "Type.type(Stream)",     type.type(Stream),        'function'  )
+test( "Type.type(tester)",     type.type(tester),        'object'    )
+test( "Type.type(Vis)",        type.type(Vis),           'function'  )
+console.log( test().block() ) # Log the current block of tests
 
 
 
@@ -103,7 +103,7 @@ console.log( unit().block() ) # Log the current block of tests
 ###
 
 # Log the current block of tests and then the summary for 't'
-console.log( unit().summary('Tester') )
+console.log( test().summary('Tester') )
 
 
 

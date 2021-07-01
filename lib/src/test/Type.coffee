@@ -2,6 +2,11 @@
 class Type
   
   comstructor:() ->
+    @info  = ""
+    @last  =
+    @logOn = true
+    @log   = console.log
+    @error = console.error
 
   # An improved typeof() that follows the convention by returning types in lower case by default.
   # The basic types similar to typeof() returned are:
@@ -81,9 +86,6 @@ class Type
   inArray:( e,a)  ->  @isArray(a)  and @isDef(e) and a.includes(e)
   inObject:(k,o)  ->  @isObject(o) and @isDef(o[k]) and o.hasOwnProperty(k)
 
-  toKeys:(o)      ->  if @isObject(o) then Object.keys(o) else []
-  time:()         ->  new Date().getTime()
-
   # -- More assertions --
 
   # Checks for offical child key which starts with capital letter and isnt an _ or $
@@ -142,13 +144,13 @@ class Type
         console.error( "Type.toType(type,arg) unknown type", { type:type, arg:arg } )
         null
 
-  # enclose a 'string'
-  # enclose("abc",   '"'  )       # returns "abc" - good for JSON keys and values
-  # enclose("123",   "'"  )       # returns '123'
-  # enclose("xyz",   "()" )       # returns (xyz)
-  # enclose("d,e,f", "[]" )       # returns [d,e,f]
-  # enclose("a:x,b:y,c:z", "[]" ) # returns {a:x,b:y,c:z}
-  enclose:( str, enc="" ) ->
+  # toEnclose a 'string'
+  # toEnclose("abc",   '"'  )       # returns "abc" - good for JSON keys and values
+  # toEnclose("123",   "'"  )       # returns '123'
+  # toEnclose("xyz",   "()" )       # returns (xyz)
+  # toEnclose("d,e,f", "[]" )       # returns [d,e,f]
+  # toEnclose("a:x,b:y,c:z", "[]" ) # returns {a:x,b:y,c:z}
+  toEnclose:( str, enc="" ) ->
     if enc.length is 2 then "#{enc.charAt(0)}#{str}#{enc.charAt(1)}"
     if enc.length is 1 then "#{enc.charAt(0)}#{str}#{enc.charAt(0)}"
     else str
@@ -164,7 +166,7 @@ class Type
       when "object" # This combination of travesal and recursion is cleaner than JSON.stringify()
         str += "{ "
         for own key, val of arg
-          str += key+":"+@enclose(@toString(val),'"')+", "
+          str += key+":"+@toEnclose(@toString(val),'"')+", "
         str = str.substring( 0, str.length-2 ) # remove trailing comma and space
         str += " }"
       when "array"  # This combination of travesal and recursion is cleaner than JSON.stringify()
@@ -173,13 +175,15 @@ class Type
           str += @toString(arg)+", "
         str = str.substring( 0, str.length-2 ) # remove trailing comma  and space
         str += " ]"
-      when "function"   then @toInfo( "toString(arg)", "unable to convert", arg, "function", "string", "?function?", "?function?" )
+      when "function"   then @toInfo( "toString(arg)", "unable to convert", arg, "function",
+                                       "string", "?function?", "?function?", (t) -> t.log( t.info() ) )
       when "null"       then "null"
       when "undefined"  then "undefined"
       when "bigint"     then arg.toString()
       when "symbol"     then arg.toString()   # return of arg.toString() could be a hail mary
-      else  @toInfo( "toString(arg)", "unable to convert", arg, type, "string", arg.toString(), arg.toString() )
-    if not @isIn( type "manys" ) and enc.length > 0 then @enclose(str,enc) else str
+      else  @toInfo( "toString(arg)", "unable to convert", arg, type,
+                     "string", arg.toString(), arg.toString(), (t) -> t.log( t.info() ) )
+    if not @isIn( type "manys" ) and enc.length > 0 then @toEnclose(str,enc) else str
 
   toFloat:( arg ) ->
     type = @type(arg)
@@ -188,8 +192,8 @@ class Type
       when "int"   then parseFloat(arg.toFixed(1)) # Coerces an 'int' like '1' to a 'float' like '1.0'
       when "string"
         if @isStringFloat(arg)  then parseFloat(arg)
-        else @toInfo( "toFloat(arg)", "unable to convert", arg, "string", "float", "NaN", NaN )
-      else   @toInfo( "toFloat(arg)", "unable to convert", arg,   type,   "float", "NaN", NaN )
+        else @toInfo( "toFloat(arg)", "unable to convert", arg, "string", "float", "NaN", NaN, (t) -> t.log( t.info() ) )
+      else   @toInfo( "toFloat(arg)", "unable to convert", arg,   type,   "float", "NaN", NaN, (t) -> t.log( t.info() ) )
 
   toInt:( arg ) ->
     type = @type(arg)
@@ -198,8 +202,8 @@ class Type
       when "float"  then Math.round(arg)
       when "string"
         if @isStringInt(arg)  then parseInt(arg)
-        else @toInfo( "toInt(arg)", "unable to convert", arg, "string", "int", "NaN", NaN )
-      else   @toInfo( "toInt(arg)", "unable to convert", arg,   type,   "int", "NaN", NaN )
+        else @toInfo( "toInt(arg)", "unable to convert", arg, "string", "int", "NaN", NaN, (t) -> t.log( t.info() ) )
+      else   @toInfo( "toInt(arg)", "unable to convert", arg,   type,   "int", "NaN", NaN, (t) -> t.log( t.info() ) )
 
   toBoolean:( arg ) ->
     type = @type(arg)
@@ -209,10 +213,10 @@ class Type
         switch arg 
           when "true"  then  true
           when "false" then false
-          else @toInfo( "toBoolean(arg)", "unable to convert", arg, type, "boolean", "false", false )
+          else @toInfo( "toBoolean(arg)", "unable to convert", arg, type, "boolean", "false", false, (t) -> t.log( t.info() ) )
       when "int"   then arg isnt 0   # check 0   false may not be a convention
       when "float" then arg isnt 0.0 # check 0.0 false may not be a convention
-      else     @toInfo( "toBoolean(arg)", "unable to convert", arg, type, "boolean", "false", false )
+      else     @toInfo( "toBoolean(arg)", "unable to convert", arg, type, "boolean", "false", false, (t) -> t.log( t.info() ) )
 
   toArray:( arg, type, sep="," ) ->
     type = @type(arg)
@@ -227,7 +231,7 @@ class Type
         for str in strs
           array.push( @toType( str, type ) )
         array
-      else @toInfo( "toArray(arg)", "unable to convert", arg, type, "array", "[]", [] )
+      else @toInfo( "toArray(arg)", "unable to convert", arg, type, "array", "[]", [], (t) -> t.log( t.info() ) )
 
   toObject:( arg ) ->
     obj  = {}
@@ -244,15 +248,18 @@ class Type
                  .map( (keyVal) => keyVal.split(":").map( (arg) => arg.trim() ) )
                  .reduce( (acc,cur) => acc[cur[0]] = cur[1]; acc {} )  # acc accumulator cur current
       else
-        @toInfo( "toObject(arg)", "unable to convert", arg, type, "object", "{}", {} )
+        @toInfo( "toObject(arg)", "unable to convert", arg, type, "object", "{}", {}, (t) -> t.log( t.info() ) )
     obj
+
+  toKeys:(o)      ->  if @isObject(o) then Object.keys(o) else []
+
 
   hasChild:( obj ) ->
     for own key, val of obj
       return true if @isChild(key)
     false
 
-  @childKeys:( obj ) ->
+  childKeys:( obj ) ->
     vals = []
     for own key, val of obj
       vals.push(key) if @isChild(key)
@@ -335,10 +342,41 @@ class Type
   numDigits:( n ) ->
     Math.max( Math.floor( Math.log10( Math.abs(n) ) ), 0 ) + 1
 
+  time:()  ->  new Date().getTime()
+
   # A deliberate do nothing consumer of arguments and variables
   noop:( ...args ) ->
     if args then false
     return
+
+  # -- info reporting ---
+
+  # A gem methods that appends text along with retrStr to @info for detailed reporting of inconsistence
+  #  along with a vialble actual return specified by the caller
+  toInfo:( method, text, arg, type, typeTo, retnStr, retn, closure=null ) ->
+    info  = "\n  #{method} #{text} #{@toString(arg)} of '#{type}' to'#{typeTo}' returning #{retnStr}"
+    @doInfo( info, closure, retn )
+
+  isInfo:( pass, text, type, types, closure=null ) ->
+    return true if pass
+    info = "\n  #{text} of type '#{type}' not in '#{types}'"
+    @doInfo( info, closure, pass )
+
+  inInfo:( pass, result, expect, oper, spec, text, closure=null ) ->
+    prefix = if pass then "-- Passed --" else "-- Failed --"
+    condit = if pass then "matches "      else "no match"
+    info   = "\n  #{prefix} #{result} #{condit} #{expect} with oper #{oper} and spec #{spec} #{text}"
+    @doInfo( info, closure, pass )
+
+  # (t) -> t.log( t.info() )
+  doInfo:( info, closure, retn ) ->
+     @last  = info
+     @info += info
+     closure(@) if @["logOn"] and @isFunction(closure)
+     retn
+
+  info:() =>
+    @last
 
   isIn:( type, key ) ->
     if Type[key]?
