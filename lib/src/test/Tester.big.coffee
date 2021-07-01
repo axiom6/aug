@@ -82,7 +82,18 @@ class Tester
     return @ if arguments.length is 0 or not @testing
     @text   = text
     @code   = ""
-    @run( text, result, expect ) # returns tester instance for chaining
+    @run( text, result, expect, "eq" ) # returns tester instance for chaining
+
+  # Validate and diagnose a result that fits a schema both of type 'object' or 'array'
+  #  Very usefull for a result originating from a'.json' file and parsed by JSON.parse(...)
+  #  Very usefull for a schema originating from a'.json' file and parsed by JSON.parse(...)
+  fits:( text, result, schema ) =>
+    return @ if arguments.length is 0 or not @testing
+    @text   = text
+    @code   = ""
+    # if @debug
+    #  console.log( "Tester.fits(result,schema)", { type:@type(result), result:result, schema:schema, status:status } )
+    @run( text, result, schema, "schema" )  # returns tester for chaining  is expect = @toSchema( expect, op ) needed?
 
   eq:( result, expect ) =>
     @run( @text, result, expect )
@@ -97,7 +108,7 @@ class Tester
 
   isInfo:( pass, text, type, types ) ->
     return true if pass
-    @info += "\n  #{text} of type '#{type}' not in '#{types}'"
+    @info += "\n  #{text} of type '#{type}' in'#{types}'"
     false
 
   inInfo:( pass, result, expect, oper, spec, text ) ->
@@ -138,12 +149,12 @@ class Tester
       status.assert.pass = switch schema.oper
         when 'enums' then @inEnums(  result, schema )
         when "range" then @inRange(  result, schema )
-        else @examine( false, result, schema.expect, status, "unknow schema.oper #{schema.oper}" )
+        else @info()
       return status.assert.pass
 
     # Perform all comparisions
     type = @type( result )
-    isValue = (type) -> @isIn( type, "values" )
+    isValue = (type) -> @inArray( type, ["string","int","float","boolean"] )
     status = switch type
       when  isValue( type ) then @valuesEq(   result, expect, status, "eq"  )  # op is not passed aroung
       when "object"         then @objectsEq(  result, expect, status, level )
@@ -161,20 +172,22 @@ class Tester
   checkValuesTypes:( result, expect, status, key, index ) ->
     rType  = @type(result)
     eType  = @type(expect)
+    rTypes = Tester.results
+    eTypes = Tester.expects
     info  = switch
       when @isNot(result)
         " Result of #{rType} is not defined\nExpect is type '#{eType}'"
       when @isNot(expect)
         " Expect of #{eType} is not defined\nResult is type '#{rType}'"
-      when rType isnt eType and not @isIn( eType, "specs" )
+      when rType isnt eType and eType isnt ( "range" or "enums" )
         " Types do not match\nResult type is '#{rType}'\nExpect type is '#{eType}'"
       when rType is "function"
         " Result type is 'function'\nExpect type is '#{eType}'"
       when eType is "function"
         " Expect type is 'function'\nResult type is '#{rType}'"
-      when not @isIn( rType, "results" )
+      when not @inArray(rType,rTypes)
         " Result is type '#{rType}' an unknown type is type '#{eType}'"
-      when not @isIn( eType, "expects" )
+      when not @inArray(eType,eTypes)
         " Result is type '#{rType}'\nExpect is type '#{eType}' an unknown type"
       else
         ""
@@ -330,7 +343,7 @@ class Tester
     if @archive
       @archiveLocal(  @failed,      @passed )
       @reviewsLocal( { failed:false, passed:false } )
-      
+
     summaryText
 
   # Returns a single text status fron the last test run when called in a unit test module like Tester-unit.coffee
@@ -363,7 +376,7 @@ class Tester
     @conditions( @isObject(arg), @isResultType(arg.type), @isExpect(arg.expect,arg.oper), @isCard(arg.card) )
 
   isResultType:( type ) ->
-    pass = @isDef(type) and @isIn( type,      "results" )
+    pass = @isDef(type) and @inArray(type,Tester.results)
     @isInfo( pass, "Not a Result", type, Tester.results )
 
   isExpect:(expect,oper) ->
@@ -378,16 +391,16 @@ class Tester
     @isInfo( pass, "Not a Expect", type, Tester.expects )
 
   isExpectType:( type ) ->
-    pass = @isDef(type) and @isIn( type, "expects"      )
-    @isInfo( pass, "Not a Expect", type, Tester.expects )
+    pass = @isDef(type) and @inArray( type, Tester.expects )
+    @isInfo( pass, "Not a Expect",     type, Tester.expects )
 
   isOper:( oper ) ->
-    pass = @isDef(oper) and  @isIn( oper, "opers" )
-    @isInfo( pass, "Not an 'oper'", oper, "opers" )
+    pass = @isDef(oper) and @inArray( oper, Tester.opers )
+    @isInfo( pass, "Not an 'oper'",    oper, Tester.opers )
 
   isCard:( card ) ->
-    pass = @isDef(card) and @isIn( card, "cards" )
-    @isInfo( pass, "Not a 'card'", card, Tester.cards )
+    pass = @isDef(card) and @inArray( card, Tester.cards )
+    @isInfo( pass, "Not a 'card'",     card, Tester.cards )
 
   # This approach insures that all conditions are checked and messages sent
   #   then all arg returns are anded together to determine a final pass or fail
@@ -426,6 +439,9 @@ class Tester
   #     { type:"object", oper:"range", range:{r:[0,255],g:[0,255],b:[0,255]}, card="1" }
   #  "array:[[0,360],[0,100],[0,100]]:?"
   #     { type:"array",  oper:"range", range:[[0,360],[0,100],[0,100]], card="?" }
+
+
+
   toSchemaParse:( schema, arg ) ->
     splits = arg.split(":")
     length = splits.length
@@ -461,7 +477,7 @@ class Tester
     schema
 
   isSchemaValue:  ( type )  ->
-    @isIn( type, "results" )
+    @inArray( type, Tester.results )
 
   # Holding off on this conversion. Instead we will just return an expect value
   toSchemaValue:( schema, arg, type ) ->
@@ -520,8 +536,9 @@ class Tester
 
   # Aggregate and special value assertions
   isType:(v,t)      ->   @type(v) is t
-  isDef:(d)         ->   @isIn( @type(d), "undefs"  )
-  isNumber:(n)      ->   @isIn( @type(n), "numbers" )
+  isDef:(d)         ->   @type(d) isnt ( "null" or "undefined" )
+  isNumber:(n)      ->   @type(n) is   ( "int"  or "float"     )
+
   isNot:(d)         ->   not @isDef(d)
   isNaN:(n)         ->   Number.isNaN(n) # @isNumber(n) and
 
@@ -563,7 +580,7 @@ class Tester
     else false
 
   isStringBoolean:( str ) ->
-    @isString(str) and ( str is "true" or str is "false" )
+    @isString(str) and ( str is "true" or str "false" )
 
   isStringArray:( str ) ->
     @isStringEnclosed( "[", str, "]" )
@@ -628,7 +645,7 @@ class Tester
       when "bigint"     then arg.toString()
       when "symbol"     then arg.toString()   # return of arg.toString() could be a hail mary
       else  @toInfo( "toString(arg)", "unable to convert", arg, type, "string", arg.toString(), arg.toString() )
-    if not @isIn( type "manys" ) and enc.length > 0 then @enclose(str,enc) else str
+    if type isnt ( "object" or "array" ) and enc.length > 0 then @enclose(str,enc) else str
 
   toFloat:( arg ) ->
     type = @type(arg)
@@ -655,7 +672,7 @@ class Tester
     switch type
       when "boolean" then arg
       when "string"
-        switch arg 
+        switch arg
           when "true"  then  true
           when "false" then false
           else @toInfo( "toBoolean(arg)", "unable to convert", arg, type, "boolean", "false", false )
@@ -715,7 +732,7 @@ class Tester
 
   rangeType:( range ) ->
     type = if range.length > 0 then @type(range[0]) else "null"
-    if @isIn( type, "ranges" )
+    if type is ( "string" or "int" or "float" )
       if @isArray(range,type) then type else "mixed"
     else if type is "array"
       @rangeType(range[0])
@@ -746,7 +763,30 @@ class Tester
       when 'array'  then isArrayRange(range)
       else  @toInfo( "isRange(range)", "not a range type", range, type, "", "false", false )
 
-  # toRange:( type, min=null, max=null, tol=null ) -> in Tester.big.coffee
+  toRange:( type, min=null, max=null, tol=null ) ->
+    minType = @type(min)
+    maxType = @type(max)
+    tolType = @type(tol)
+    switch type
+      when 'string'
+        min = if minType isnt "null" and minType is "string" then min else ""   # need to see if "" is a string min
+        max = if maxType isnt "null" and maxType is "string" then max else "z"  # not a good max string
+        [ min, max ]
+      when 'int'
+        min = if minType isnt "null" and minType is "int"    then min else   0
+        max = if maxType isnt "null" and maxType is "int"    then max else 100
+        [ min, max ]
+      when 'float'
+        min = if minType isnt "null" and minType is "float"   then min else   0.0
+        max = if maxType isnt "null" and maxType is "float"   then max else 100.0
+        max = if tolType isnt "null" and tolType is "float"   then tol else max*0.001
+        [ min, max, tol ]
+      else
+        allType  = "#{minType}|#{maxType}"
+        allType +="|#{tolType}" if type is "float"
+        range    = [min,max]
+        range.push(tol) if type is "float"
+        @toInfo( "toRange(arg)", "unable to create range for", type, range, allType, "[]", [] )
 
 
   # Adds 'range' 'enums' and 'schema' based on 'op' to @type(arg)
@@ -897,7 +937,26 @@ class Tester
       when "Object"    then arg.constructor.name
       else                  typ
 
-  # mdnType:( obj, showFullClass ) ->  in Tester.big.coffee
+  # mdnType from
+  mdnType:( obj, showFullClass ) ->
+
+    # get toPrototypeString() of obj (handles all types)
+    if showFullClass and typeof(obj) is "object"
+      return Object.prototype.toString.call(obj)
+
+    if obj is null then return (obj + '').toLowerCase()  # implicit toString() conversion
+
+    deepType = Object.prototype.toString.call(obj).slice(8,-1).toLowerCase()
+    if deepType is "generatorfunction" then return "function"
+
+    # Prevent overspecificity (for example, [object HTMLDivElement], etc).
+    # Account for functionish Regexp (Android <=2.3), functionish <object> element (Chrome <=57, Firefox <=52), etc.
+    # String.prototype.match is universally supported.
+
+    if deepType.match(/^(array|bigint|date|error|function|generator|regexp|symbol)$/)
+       deepType
+    else
+      if (typeof(obj) is 'object' or typeof(obj) is 'function') then 'object' else typeof(obj)
 
   # Stream is an optional libary for publising statusObject to UIs like RxJS
   injectStream:( stream ) ->
@@ -929,32 +988,20 @@ class Tester
           console.log( passStatus ) if @logToConsole
     return
 
-    isIn:( type, key ) ->
-      if Tester[key]?
-         Tester[key].includes(type)
-      else
-        @isInfo( false, "key #{key} missing for", type, [] )
+Tester.remove( e, a ) ->
+  index = a.indexOf(e)
+  a.splice( index, 1 ) if index > -1
+  a
 
-# All Tester[key] arrays
-Tester.undefs  = ["null","undefined"]
-Tester.numbers = ["int","float"]
-Tester.ranges  = ["string","int","float"]
-Tester.values  = ["string","int","float","boolean"]
-Tester.manys   = ["object","array"]
 Tester.results = ["string","int","float","boolean","object","array"]
 Tester.expects = Tester.results.concat(["schema","range","enums","amy"])
 Tester.typeofs = ["string","number","boolean","object","function","bigint","symbol","null","undefined"]
 Tester.types   = Tester.typeofs.concat(["int","float","array","regex","date"])
 Tester.types   = Tester.remove("number", Tester.types ) # number is now either 'int' or 'float'
-Tester.specs   = ["range","enums"]               # high level schema based comparision specs
-Tester.opers   = ["eq","le","lt","ge","gt","ne"] # low  level value  based comparison  ooers 'eq' default
-Tester.cards   = ["n","?","*","+","min to max"]
-     # cards  1 required, ? optional, * 0 to many, + 1 to many, min:max a range
+Tester.opers   = ["eq","schema","range","enums","le","lt","ge","gt","ne"]   # 'eq' default
 
-Tester.remove( e, a ) ->
-  index = a.indexOf(e)
-  a.splice( index, 1 ) if index > -1
-  a
+# Cardinality  1 = required ? = optional * = 0 to many + = 1 to many min:max is a range
+Tester.cards = ["n","?","*","+","min to max"]    # 'n' = 1 defaullt
 
 # -- ES6 exports for single tester instance and its test() and unit() methods
 #   tester is instanciates once on its first import subseqent imports
@@ -965,3 +1012,37 @@ test = tester.test
 unit = tester.unit
 fits = tester.fits
 export { test, unit, fits }
+
+###
+  # IN progress
+  testSchema:( result, schema ) ->
+    switch schema.oper
+      when 'range' then  @inRange( result, schema.expect )
+      when 'enuns' then  @inEnums( result, schema.expect )
+      when 'eq'    then  @isEqual( result, schema.expect )
+      else @inInfo( false, result, schema, schema.oper, schema.spec, "unknown expect oper" )
+
+     # Check against the schema when present
+    if schema.type is "any"
+       status.assert.pass = true
+       return status
+    else if value.size isnt "any" and result.length > value.size
+       info   = " Result length exceeds the maximum size #{value.size}"
+       info  += " Result length is #{result.length}"
+       info  += " Size is #{value.size}"
+       return @examine( false, result, expect, status, info, null, null )
+    else if not @isArray(expect)
+       return status
+
+        when op is "schema"
+        if eType is "any"
+          ""
+        else if etype includes("|")
+          eTypes = eType.split("|")
+          if @inArray(rType,eTypes)
+            ""
+          else
+            " Result type is '#{rType}' that is not in\nExpect schema types '#{eType}'"
+        else if rType isnt eType
+          " Result type is '#{rType}'\nExpect type is '#{eType}' from schema"
+###
