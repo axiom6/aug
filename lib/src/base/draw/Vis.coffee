@@ -20,7 +20,7 @@ class Vis
   #   When arg is an array with length === 3 then it is assumed values are hsv with hue in RYGB
   #     hue 360, saturation 100, v for intensity 100
   #     with hue as RYGB red=0deg, yellow=90deg green=180deg and blue=270deg
-  #   When arg is an array with length === 4 then it is assumed values are hsv
+  #   When arg is an array with length === 4 then it is assumed values  are hsv
   #     with hue as RGB red=0deg, green=120deg and blue=240deg
   #   When arg is a number the range expressed hex is 0x000000 to 0xFFFFFF
   @rgb:( arg ) ->
@@ -209,7 +209,7 @@ class Vis
   @isChild:( key )          -> tester.isChild( key )
   @isFunction:(  f   )      -> tester.isFunction( f )
   @toInt:(arg)              -> tester.toInt(arg)
-  @toFixed:(arg.dec)        -> tester.toInt(arg.dec)
+  @toFixed:(arg,dec)        -> tester.toInt(arg,dec)
   @noop:(args...)           -> tester.noop(args)
 
   @hasGlobal:( global, issue=true ) ->

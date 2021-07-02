@@ -44,7 +44,7 @@ stream     = new Stream( subjects, streamLog )
 test( "klass(stream)",     tester.klass(stream),      'Stream'     )
 test( "klass(Stream)",     tester.klass(Stream),      'Stream'     )
 test( "klass(tester)",     tester.klass(tester),      'Tester'     )
-test( "klass(tester)",     tester.klass(type.type), 'bound type' )
+test( "klass(tester)",     tester.klass(tester), 'bound type' )
 test( "klass(Vis)",        tester.klass(Vis),         'Vis'        )
 console.log( test().block() ) # Log the current block of tests
 
@@ -58,10 +58,10 @@ test( "eq([1,2,3])",  (t) -> t.eq([1,2,3],[1,2,3,4]  ) )
 
 test( 'eq( (x) ->, (y) -> ) )', (t) -> t.eq(  (x) ->, (y) -> ) )
 
-test( "Type.type(stream)",     type.type(stream),        'object'    )
-test( "Type.type(Stream)",     type.type(Stream),        'function'  )
-test( "Type.type(tester)",     type.type(tester),        'object'    )
-test( "Type.type(Vis)",        type.type(Vis),           'function'  )
+test( "Type.type(stream)",     tester.type(stream),        'object'    )
+test( "Type.type(Stream)",     tester.type(Stream),        'function'  )
+test( "Type.type(tester)",     tester.type(tester),        'object'    )
+test( "Type.type(Vis)",        tester.type(Vis),           'function'  )
 console.log( test().block() ) # Log the current block of tests
 
 

@@ -7,7 +7,7 @@ undef = undefined
 
 # Prefix 'Type.' to the text output like "Type.type(true)"
 
-test().describe( "Type", "All 13 types produced by type(...)" )
+test().describe( "type", "All 13 types", false )
 
 test( "type('123')",        type.type('123'),         'string'    )
 test( "type(123)",          type.type(123),           'int'       )
@@ -23,20 +23,18 @@ test( "type(new Date())",   type.type(new Date()),    'date'      )
 test( "type(BigInt(123)))", type.type((BigInt(123))), 'bigint'    ) # 123n not working in CoffeeScript
 test( "type(123n)",         type.type(Symbol),        'symbol'    ) # Symbol not Symbol
 
-test().log( test().block() ) # Log the current block of tests
+test().summary().log( test().block() ) # Log the current block of tests
 
-test().describe( "Type", "String conversions with toStr(arg)" )
+test().describe( "Type", "toStr", "String conversions with toStr(arg)" )
 
 # String conversions
-test( 'toStr({ a:"a", b:"b" })',  type.toStr({ a:"a", b:"b" }),  '{ a:"a", b:"b" }'   )
-test( 'toStr([ 1, 2, 3 ])',       type.toStr([ 1, 2, 3 ]),       '[ 1, 2, 3 ]'        )
-test( 'toStr([ "1", "2", "3" ])', type.toStr([ "1", "2", "3" ]), '[ "1", "2", "3" ]'  )
+test( 'toStr({ a:"a", b:"b" })',  type.toStr({ a:"a", b:"b" }),  '{a:"a" b:"b"}'  )
+test( 'toStr([ 1, 2, 3 ])',       type.toStr([ 1, 2, 3 ]),       '[1,2,3]'       )
+test( 'toStr([ "1", "2", "3" ])', type.toStr([ "1", "2", "3" ]), '["1","2","3"]'  )
 
-test().log( test().block() )
+test().summary().log( test().block() )
 
-test().describe( "Type", "klass(arg) types" )
-
-test().describe( "Type", "String conversions with toStr(arg)" )
+test().describe( "klass", "types", false )
 
 test( "klass(true)",       type.klass(true),        'Boolean'   )
 test( "klass(123)",        type.klass(123),         'Number'    )
@@ -53,18 +51,14 @@ test().log( test().block() )
 
 test().describe( "Type", "Positive true tests" )
 
-test( "isNull(null)",     type.isNull(null),     true  )
-test( "isUndef(xxxx)",    type.isUndef(undef),   true  )
-test( "isNot(null)",      type.isNot(null),      true  )
-test( "isStr('abc')",     type.isStr('abc'),     true  )
-test( "isNum(12345)",     type.isNum(12345),     true  )
-test( "isNaN(NaN)",       type.isNaN(NaN),       true  )
-test( "isObj({a:'a'})",   type.isObj({a:'a'}),   true  )
-test( "isVal( 123 )",     type.isVal( 123 ),     true  )
-test( "isVal('123')",     type.isVal('123'),     true  )
-test( "isVal(true)",      type.isVal(true),      true  )
-test( "isVal(false)",     type.isVal(false),     true  )
-test( "isArray([1,2,3])", type.isArray([1,2,3]), true  )
+test( "isNull(null)",      type.isNull(null),     true  )
+test( "isUndef(xxxx)",     type.isUndef(undef),   true  )
+test( "isNot(null)",       type.isNot(null),      true  )
+test( "isStr('abc')",      type.isStr('abc'),     true  )
+test( "isNum(12345)",      type.isNumber(12345),  true  )
+test( "isNaN(NaN)",        type.isNaN(NaN),       true  )
+test( "isObject({a:'a'})", type.isObject({a:'a'}),   true  )
+test( "isArray([1,2,3])",  type.isArray([1,2,3]), true  )
 console.log( test().block() ) # Log the current block of tests
 
 test().describe( "Type", "Negative false test failuer" )
@@ -73,12 +67,9 @@ test( "isNull('abc')",    type.isNull('abc'),    false )
 test( "isUndef(12345)",   type.isUndef(12345),   false )
 test( "isNot({a:'a'}",    type.isNot({a:'a'}),   false )
 test( "isStr( 123 )",     type.isStr( 123 ),     false )
-test( "isNum('123')",     type.isNum('123'),     false )
+test( "isNumber('123')",  type.isNumber('123'),  false )
 test( "isNaN( 123 )",     type.isNaN( 123 ),     false )
-test( "isObj(123)",       type.isObj(123),       false )
-test( "isVal({a:'a'})",   type.isVal({a:'a'}),   false )
-test( "isVal([1,2,3])",   type.isVal([1,2,3]),   false )
-test( "isVal([1,2,3])",   type.isVal([1,2,3]),   true  )
+test( "isObject(123)",    type.isObject(123),    false )
 test( "isArray({a:'a'})", type.isArray({a:'a'}), true  )
 
 test().log( test().block() )

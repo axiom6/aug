@@ -24,9 +24,16 @@ class Tester extends Type
     @log   = console.log
     @error = console.error
 
-    # Set by @describe( description, suite )
+    # Set by @module( module, method, description, moduleOn=true, methodOn=true )
+    @moduleId = ""
+    @moduleTx = ""
+    @moduleOn = true
+
+
+    # Set by @describe( methodId, description, moduleOn=true, methodOn=true )
+    @methodId    = ""
+    @methodOn    = true
     @description = ""
-    @suite       = ""
 
     # Accummulate test status state
     @text         = "" # set by test() that is passed inside eq() and sent to run()
@@ -37,7 +44,6 @@ class Tester extends Type
     @blockClear   = true
 
     # Accumulated status objects
-    @module  = ""
     @modules = {}
     @passed  = []
     @failed  = []
@@ -70,7 +76,7 @@ class Tester extends Type
   #
   #   test( "Vis.rgb() converts hex color to rgb object",  Vis.rgb(0xFFFFFF), {r:255,g:255,b:255} )
   test:( text, args... ) =>
-    if      arguments.length is 0 or not @testing
+    if      arguments.length is 0 or not ( @testing and @moduleOn and @methodOn )
       return @
     else if arguments.length is 2 and @isFunction(args[0])
       closure = args[0]
@@ -97,11 +103,10 @@ class Tester extends Type
 
   # Create a new status object for the current test
   initStatus:( result, expect, text ) ->
-    module = text.split(".")[0]
     {
-      assert:{ text:text, pass:true, module:module, info:"" }
-      result:{ text:"", type:@type(result), value:result }
-      expect:{ text:"", type:@type(expect), value:expect }
+      assert:{ text:text, pass:true, module:@module, method:@method, warn:"", keys:"" }
+      result:{ text:"",   type:@type(result), value:result }
+      expect:{ text:"",   type:@type(expect), value:expect }
     }
 
   # Performs all assertions even a deep equal on objects and arrays
@@ -123,12 +128,12 @@ class Tester extends Type
 
     # Perform all comparisions
     type = @type( result )
-    isValue = (type) => @isIn( type, "values" )
     status = switch type
-      when  isValue( type ) then @valuesEq(   result, expect, status, "eq"  )  # op is not passed aroung
-      when "object"         then @objectsEq(  result, expect, status, level )
-      when "array"          then @arraysEq(   result, expect, status, level )
-      else                       @unknownsEq( result, expect, status )         # just a fallback
+      when  "string", "int", "float", "boolean"
+                         @valuesEq(   result, expect, status, "eq"  )  # op is not passed aroung
+      when "object" then @objectsEq(  result, expect, status, level )
+      when "array"  then @arraysEq(   result, expect, status, level )
+      else               @unknownsEq( result, expect, status )         # just a fallback
     @examine( status.assert.pass, result, expect, status, "", key, index )
 
     # Store status in @passed and @failed arrays
@@ -158,7 +163,7 @@ class Tester extends Type
         " Result is type '#{rType}'\nExpect is type '#{eType}' an unknown type"
       else
         ""
-    if @isString(info)
+    if @isStr(info)
       @examine( false, result, expect, status, info, key, index )
     else
       status
@@ -182,28 +187,30 @@ class Tester extends Type
     status.assert.info += "unknown types for comparision"
     status
 
-  # Deep object equality assertion where all matching keys are examined
+  # Deep object equality assertion where all matching keys are   examined
   objectsEq:( result, expect, status, level ) ->
-
-    # Check that the expect object has all the keys that the result object has
-    for own key, arg of result when  expect[key]?
-      status = @examine( false, arg, expect[key], status, "missing expect", key, null )
 
     # Check that the result object has all the keys that the expect object has
     #   ? or ( op is "schema" and arg.card is "1" ) )
-    for own key, arg of expect when result[key]?
-      status = @examine( false, result[key], arg, status, "missing result", key, null )
+    for own key, arg of expect when not result[key]?
+      status.assert.pass  = false
+      status.assert.keys += "\n   missing result " + key
+
+    # Check that the expect object has all the keys that the result  object has
+    for own key, arg of result when not expect[key]?
+      status.assert.pass  = false
+      status.assert.keys += "\n   missing expect " + key
 
     # Assert each value for the set of keys that result and expect objects share in common
     for own key, obj of expect when result[key]? and expect[key]?
-      status = @assert( result[key], arg, status, ++level, key, null )
+      status = @assert( result[key], obj, status, ++level, key, null )
     status
 
   # Deep array equality assertion
   arraysEq:( result, expect, status, level ) ->
 
     # Examine the array lengths
-    if result.length isnt value.expect
+    if result.length isnt expect.length
       info   = " different array lengths"
       info  += " Result length is #{result.length}"
       info  += " Expect length is #{expect.length}"
@@ -213,14 +220,13 @@ class Tester extends Type
     length = Math.min( result.length, expect.length )
     for i in [0...length]
       status = @assert( result[i], expect[i], status, ++level, null, i )
-
     status
 
   # Generates informative text in status
   examine:( pass, result, expect, status, info, key, index ) ->
     isSchema = @isSchema( expect )
     prefix = if pass then "-- Passed -- " else "-- Failed -- "
-    status.assert.text   = prefix + status.assert.text
+    status.assert.text   = prefix + @module + "." + status.assert.text
     status.assert.pass   = pass and status.assert.pass # Asserts a previous status.assert.pass is false
     status.assert.info  += info
     status.result.text  += @textResult( result, key, index )
@@ -232,9 +238,9 @@ class Tester extends Type
     pass = status.assert.pass
     eq   = if pass then "is" else "not"
     @blockText   = "" if @blockClear
-    @statusText  = """\n#{@module}.#{status.assert.text} """
+    @statusText  = """\n#{status.assert.text} """
     @statusText += """#{eq} #{@toStr(expect)}""" if status.result.type isnt "function"
-    @statusText += status.assert.info if @isString(status.assert.info)
+    @statusText += status.assert.info if @isStr(status.assert.info)
     @statusText += """\n   #{@textResult( result )}""" if @verbose or not pass
     @statusText += """\n   #{@textExpect( expect )}""" if @verbose or not pass
     @blockText  += @statusText   # if not @statusClear # keep the status in the block for now
@@ -247,20 +253,20 @@ class Tester extends Type
     return
 
   textResult:( result, key=null, index=null ) ->
-    ref   = " "
-    ref   " at key:#{key} "      if @isString(key)
+    ref = " "
+    ref =  " at key:#{key} "      if @isStr(key)
     ref = " at index: #{index} " if @isInt(index)
     "Result#{ref}where type is #{@type(result)} and value is #{@toStr(result)}"
 
   textExpect:( expect, key=null, index=null ) ->
-    ref   = " "
-    ref   " at key:#{key} "      if @isString(key)
+    ref = " "
+    ref = " at key:#{key} "      if @isStr(key)
     ref = " at index: #{index} " if @isInt(index)
     "Expect#{ref}where type is #{@type(expect)} and value is #{@toStr(expect)}"
 
   textSchema:( schema, key=null, index=null ) ->
-    ref   = " "
-    ref   " at key:#{key} "      if @isString(key)
+    ref = " "
+    ref = " at key:#{key} "      if @isStr(key)
     ref = " at index: #{index} " if @isInt(index)
     "Schema#{ref}where type is #{schema.type} and spec is #{schema.spec} with oper #{schema.oper}"
 
@@ -274,18 +280,23 @@ class Tester extends Type
     @summary()
     return
 
-  describe:( module, suite=null, description=null ) =>
+  describe:( module, method, description, moduleOn=true, methodOn=true ) =>
     @module      = module
-    @suite       = if suite?       then suite       else null
-    @description = if description? then description else null
+    @moduleOn    = moduleOn
+    @method      = method
+    @methodOn    = methodOn
+    @description = description
     @
 
-  summary:( module=null ) ->
+  summary:( module, method ) ->
+    all = arguments.length is 0
+    @moduleOn = true
+    @methodOn = true
     path = if module? and @modules[module]? then @modules[module].path else "?"
     if @debug
       console.log( "Tester.summary(module)", { module:module, modules:@modules, key:@modules[module], path:path } )
     summaryText = ""
-    if module?
+    if not all  and module is @module # module method summary
       passCount = 0
       failCount = 0
       ++passCount for pass in @passed when pass.assert.module is module
@@ -295,7 +306,7 @@ class Tester extends Type
       summaryText += """\n   #{@pad(passCount,fullCount)} tests passed"""
       summaryText += """\n   #{@pad(failCount,fullCount)} tests failed"""
       summaryText += """\n   #{@pad(fullCount,fullCount)} tests total"""
-    else
+    else      # final summary implied when @summary() called with no arguements
       fullCount = @passed.length + @failed.length
       summaryText += """\n\n-- Summary - for all tests"""
       summaryText += """\n   #{@pad(@passed.length,fullCount)} tests passed"""
@@ -376,21 +387,24 @@ class Tester extends Type
     pass
 
   isSchema:( expect ) ->
-    type = @type(expect)
-    @isSchemaParse( expect, type ) or @isSchemaObject( expect, type )
+    type    = @type(expect)
+    isParse = @isSchemaParse(  expect, type )
+    isObj   = @isSchemaObject( expect, type )
+    console.log( "isSchema(expect)", { expect:expect, type:type, isParse:isParse, isObj:isObj }) if @debug
+    isParse or isObj
 
   # In the first t
   toSchema:( expect ) ->
     type   = @type(expect)
     schema = { type:"any", oper:"any", expect:"any", card:"1", spec:""  }
-    schema = switch type
+    schema = switch
       when @isSchemaParse(  expect, type ) then @toSchemaParse(  schema, expect )
       when @isSchemaObject( expect, type ) then @toSchemaObject( schema, expect )
       else @toInfo( "toSchema(expect)", "expect not schema 'string' or 'object'",
         expect, type, "schema", @toStr(schema), schema, (t) -> t.log( t.info() ) )
 
   isSchemaParse:  ( arg, type ) ->
-    type is "string" and arg includes(":")
+    type is "string" and arg.includes(":")
 
   # toSchemaParse:( schema, arg )
   # Examples
@@ -411,14 +425,14 @@ class Tester extends Type
     if length >= 1                                        # type
       schema.type = splits[0]
     if length >= 1                                        # expect
-      schema.spec splits[1]
+      schema.spec = splits[1]
       if splits[1].includes("|")                         #   enum
         schema.oper   = "enums"
         schema.expect = @toEnums( splits[1] )
-      else if @isStringEnclosed( "[", splits[1], "]" )  #    range array
+      else if @isStrEnclosed( "[", splits[1], "]" )  #    range array
         schema.oper   = "range"
         schema.expect = @toArray( splits[1] )
-    else if @isStringEnclosed( "{", splits[1], "}" )   #    range object
+    else if @isStrEnclosed( "{", splits[1], "}" )   #    range object
       schema.oper   = "range"
       schema.expect = @toObject( splits[1] )
     else
@@ -462,11 +476,11 @@ class Tester extends Type
     pass  = @isRange(range)
     type = @type(result)
 
-    inStringRange = ( string, range ) -> range[0]          <= string and string <= range[1]
+    inStrRange = ( string, range ) -> range[0]          <= string and string <= range[1]
     inIntRange    = ( int,    range ) -> range[0]          <= int    and int    <= range[1]
     inFloatRange  = ( float,  range ) -> range[0]-range[2] <= float  and float  <= range[1]+range[2]
     pass = switch type
-      when "string" then inStringRange(   result, range )
+      when "string" then inStrRange(   result, range )
       when "int"    then inIntRange(      result, range )
       when "float"  then inFloatRange(    result, range )
       when "array"  then @inArrayRange(   result, range )
@@ -522,7 +536,7 @@ class Tester extends Type
 
 # internal functions called after @rangeType(range) has verified that range
 #   is an array of type "string" or "int" or "float"
-    isStringRamge = (r) -> r.length is 2 and r[0]      <= r[1]       # For 'string'
+    isStrRamge = (r) -> r.length is 2 and r[0]      <= r[1]       # For 'string'
     isIntRange    = (r) -> r.length is 2 and r[0]      <= r[1]       # For 'int'
     isFloatRange  = (r) -> r.length is 3 and r[0]-r[2] <= r[1]+r[2]  # For 'float' r[2] is tol
     isArrayRange  = (r) ->
@@ -535,7 +549,7 @@ class Tester extends Type
     type = @rangeType(range)
 
     switch type
-      when 'string' then isStringRamge(range)
+      when 'string' then isStrRamge(range)
       when 'int'    then isIntRange(range)
       when 'float'  then isFloatRange(range)
       when 'array'  then isArrayRange(range)
