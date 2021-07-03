@@ -43,6 +43,18 @@ stream     = new Stream( subjects, streamLog )
 
 test().module( "Tester", "Tester Unit tests", false )
 
+test().describe( "test()", "Internal logic for turning tests off", false )
+test(  'not (  @testing and  @moduleOn and  @methodOn ) @method=false', (t) ->
+  isOff = not ( t.testing and t.moduleOn and t.methodOn )
+  t.eq( isOff, false ) )
+test().log( test().summary() )
+
+test().describe( "test()", "Internal logic for turning tests on ", true )
+test(  'not (  @testing and  @moduleOn and  @methodOn ) @method=true', (t) ->
+  isOff = not ( t.testing and t.moduleOn and t.methodOn )
+  t.eq( isOff, false ) )
+test().log( test().summary() )
+
 test().describe( "klass()", "klass type on classed", false )
 test( "stream", tester.klass(stream),  'Stream' )
 test( "Stream", tester.klass(Stream),  'Stream' )
@@ -103,9 +115,6 @@ test().log( test().summary() )
   toRange:(arg)
   inRange:(arg,range)   
 ###
-
-# Log the current block of tests and then the summary for 't'
-console.log( test().summary('Tester') )
 
 
 

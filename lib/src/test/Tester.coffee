@@ -223,8 +223,7 @@ class Tester extends Type
   # Generates informative text in status
   examine:( pass, result, expect, status, warn, key, index ) ->
     isSchema = @isSchema( expect )
-    prefix = if pass then "-- Passed -- " else "-- Failed -- "
-    status.assert.text   = prefix + @module + "." + status.assert.text
+    status.assert.text   = if pass then "-- Passed -- " else "-- Failed -- "
     status.assert.pass   = pass and status.assert.pass # Asserts a previous status.assert.pass is false
     status.warned.text  += warn
     status.result.text  += @textResult( result, key, index )
@@ -235,43 +234,38 @@ class Tester extends Type
   # test().describe( "toStr", "String conversions with toStr(arg)" )
   report:( result, expect, status ) ->
     pass = status.assert.pass
-    eq   = if pass then "is" else "not"
+    eq   = if pass then "eq" else "not"
     @summedText  = "" if @summedClear
-    @statusText  = @toStatusText()
-    @statusText += """#{eq} #{@toStr(expect)}""" if status.result.type isnt "function"
+    @statusText  = @toStatusText(status,result)
+    @statusText += """ #{eq} #{@toStr(expect)}""" if status.result.type isnt "function"
     @statusText += """\n   #{@textResult( result )}""" if @verbose or not pass
     @statusText += """\n   #{@textExpect( expect )}""" if @verbose or not pass
     @summedText += @statusText
     @summedClear = false
 
-    toStatusText:() ->
-      if @isStr(@methodId)
-        "\n" +  @methodId + @enclose(status.assert.text,"()") + " "
-      else
-        "\n" +  status.assert.text + " "
-
-    if @isDef(@stream)
-      @stream.publish( @statusSubject, status )
-      @stream.publish( @stringSubject, status )
-    return
+  toStatusText:(status,result) ->
+    if @isStr(@methodId)
+      "\n" + status.assert.text + @methodId + @toEnclose(result,"()")
+    else
+      "\n" + status.assert.text
 
   textResult:( result, key=null, index=null ) ->
-    ref = " "
+    ref = ""
     ref =  " at key:#{key} "      if @isStr(key)
     ref = " at index: #{index} " if @isInt(index)
-    "Result#{ref}where type is #{@type(result)} and value is #{@toStr(result)}"
+    "Result#{ref} type is '#{@type(result)}' with value #{@toStr(result)}"
 
   textExpect:( expect, key=null, index=null ) ->
-    ref = " "
+    ref = ""
     ref = " at key:#{key} "      if @isStr(key)
     ref = " at index: #{index} " if @isInt(index)
-    "Expect#{ref}where type is #{@type(expect)} and value is #{@toStr(expect)}"
+    "Expect#{ref} type is '#{@type(expect)}' with value #{@toStr(expect)}"
 
   textSchema:( schema, key=null, index=null ) ->
-    ref = " "
+    ref = ""
     ref = " at key:#{key} "      if @isStr(key)
     ref = " at index: #{index} " if @isInt(index)
-    "Schema#{ref}where type is #{schema.type} and spec is #{schema.spec} with oper #{schema.oper}"
+    "Schema#{ref} type is '#{schema.type}' with spec '#{schema.spec}' and oper '#{schema.oper}'"
 
   # @runUnitTests(...) @describe(...) @summary(...)
 
@@ -283,7 +277,7 @@ class Tester extends Type
     @complete()  # All tests complete so produce then log and publish the final summary
     return
 
-  @module:( moduleId, moduleTx, moduleOn=true ) =>
+  module:( moduleId, moduleTx, moduleOn=true ) =>
     @moduleId = moduleId
     @moduleTx = moduleTx
     @moduleOn = moduleOn
@@ -305,21 +299,26 @@ class Tester extends Type
     ++passCount for pass in @passed when pass.assert.module is @moduleId
     ++failCount for fail in @failed when fail.assert.module is @moduleId
     fullCount = passCount + failCount
-    summaryText  = @methodTx
+    summaryText  = """\nSummary for #{@methodId} #{@methodTx}"""
     summaryText += @summedText # Prepend #summedText from accumulated statuses
-    summaryText += """\n\n-- Summary - for #{@moduleId} in #{path}"""
+    summaryText += """\n-- Totals -- for #{@moduleId} in #{path}"""
     summaryText += """\n   #{@pad(passCount,fullCount)} tests passed"""
     summaryText += """\n   #{@pad(failCount,fullCount)} tests failed"""
     summaryText += """\n   #{@pad(fullCount,fullCount)} tests total"""
     @methodOn    = true
     @summedClear = true
-    @stream.publish( @summarySubject, summaryText ) if @isDef(@stream)
+
+    if @isDef(@stream)  # Need to consider the role of each subject
+      @stream.publish( @statusSubject, status )
+      @stream.publish( @stringSubject, status )
+      @stream.publish( @summarySubject, summaryText )
+
     # for log( test(). summary() ) i.e console.log( test(). summary() ) logging
     if methodOn then summaryText else "" # a blank string turns off logging
 
   complete:() =>
     fullCount    = @passed.length + @failed.length
-    summaryText  = @block() # Prepend any block statuses
+    summaryText  = @summedText # Prepend any block statuses
     summaryText += """\n\n-- Summary - for all tests"""
     summaryText += """\n   #{@pad(@passed.length,fullCount)} tests passed"""
     summaryText += """\n   #{@pad(@failed.length,fullCount)} tests failed"""

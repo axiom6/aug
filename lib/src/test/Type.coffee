@@ -175,7 +175,7 @@ class Type
       when "function"   then "?function?"
       when "regex","date","bigint","symbol" then arg.toString()  # hail marys
       else @toWarn( "toStr(arg)", "unable to convert", arg, "sting", "", (t) => t.log( t.warn() ) )
-    console.log( "toStr(arg)", { arg:arg, str:str, type:type } )
+    # console.log( "toStr(arg)", { arg:arg, str:str, type:type } )
     str
 
     # str = if not @isIn(type,"manys") and enc.length > 0 then @toEnclose(str,enc) else str
