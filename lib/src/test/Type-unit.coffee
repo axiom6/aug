@@ -5,52 +5,44 @@ import { test } from "./Tester.js"
 func  = () ->
 undef = undefined
 
-# Prefix 'Type.' to the text output like "Type.type(true)"
+test().module( "Type", "The type assertion and conversion class libary")
 
-test().describe( "type", "All 13 types", false )
+test().describe( "toStr", "String conversions with toStr(arg)" )
+test( '{ a:"a", b:"b" }',  type.toStr({ a:"a", b:"b" }),  '{a:"a" b:"b"}' ).log( test().status() )
+test( '[ 1, 2, 3 ]',       type.toStr([  1,   2,   3  ]),  '[1,2,3]'      ).log( test().status() )
+test( '[ "1", "2", "3" ]', type.toStr([ "1", "2", "3" ]), '["1","2","3"]' ).log( test().status() )
+test().log( test().summary() ) # Log the all the tests  that began with descripe(...)
 
-test( "type('123')",        type.type('123'),         'string'    )
-test( "type(123)",          type.type(123),           'int'       )
-test( "type(123.0)",        type.type(123.0),         'float'     )
-test( "type(true)",         type.type(true),          'boolean'   )
-test( "type([1,2,3]",       type.type([1,2,3]),       'array'     )
-test( "type({a:'a'})",      type.type({a:'a'}),       'object'    )
-test( "type(/x/)",          type.type(/x/),           'regexp'    )
-test( "type(func)",         type.type( () => ),       'function'  )
-test( "type(null)",         type.type(null),          'null'      )
-test( "type(undef)",        type.type(undef),         'undefined' )
-test( "type(new Date())",   type.type(new Date()),    'date'      )
-test( "type(BigInt(123)))", type.type((BigInt(123))), 'bigint'    ) # 123n not working in CoffeeScript
-test( "type(123n)",         type.type(Symbol),        'symbol'    ) # Symbol not Symbol
-
-test().summary().log( test().block() ) # Log the current block of tests
-
-test().describe( "Type", "toStr", "String conversions with toStr(arg)" )
-
-# String conversions
-test( 'toStr({ a:"a", b:"b" })',  type.toStr({ a:"a", b:"b" }),  '{a:"a" b:"b"}'  )
-test( 'toStr([ 1, 2, 3 ])',       type.toStr([ 1, 2, 3 ]),       '[1,2,3]'       )
-test( 'toStr([ "1", "2", "3" ])', type.toStr([ "1", "2", "3" ]), '["1","2","3"]'  )
-
-test().summary().log( test().block() )
+test().describe( "type", "All 13 types", false )  # false turns off this block of
+test( "'123'",        type.type('123'),         'string'    )
+test(  "123",         type.type(123),           'int'       )
+test( "123.0",        type.type(123.0),         'float'     )
+test( "true",         type.type(true),          'boolean'   )
+test( "[1,2,3]",      type.type([1,2,3]),       'array'     )
+test( "{a:'a'}",      type.type({a:'a'}),       'object'    )
+test( "/x/",          type.type(/x/),           'regexp'    )
+test( "func",         type.type( () => ),       'function'  )
+test( "null",         type.type(null),          'null'      )
+test( "undef",        type.type(undef),         'undefined' )
+test( "new Date()",   type.type(new Date()),    'date'      )
+test( "BigInt(123)",  type.type((BigInt(123))), 'bigint'    ) # 123n not working in CoffeeScript
+test( "Symbol",       type.type(Symbol),        'symbol'    ) # Symbol not not Symbol()
+test().log( test().summary() ) # Summary will shut off logging by returning a blank when @decribe( ..., false )
 
 test().describe( "klass", "types", false )
+test( "true",       type.klass(true),        'Boolean'   )
+test( "123",        type.klass(123),         'Number'    )
+test( "'123'",      type.klass('123'),       'String'    )
+test( "func",       type.klass(func),        'func'      )
+test( "{a:'a'}",    type.klass({a:'a'}),     'Object'    )
+test( "[1,2,3]",    type.klass([1,2,3]),     'Array'     )
+test( "/x/",        type.klass(/x/),         'RegExp'    )
+test( "new Date()", type.klass(new Date()),  'Date'      )
+test( "undef",      type.klass(undef),       'Undefined' )
+test( "null",       type.klass(null),        'Null'      )
+test().log( test().summary() )
 
-test( "klass(true)",       type.klass(true),        'Boolean'   )
-test( "klass(123)",        type.klass(123),         'Number'    )
-test( "klass('123')",      type.klass('123'),       'String'    )
-test( "klass(func)",       type.klass(func),        'func'      )
-test( "klass({a:'a'})",    type.klass({a:'a'}),     'Object'    )
-test( "klass([1,2,3]",     type.klass([1,2,3]),     'Array'     )
-test( "klass(/x/)",        type.klass(/x/),         'RegExp'    )
-test( "klass(new Date())", type.klass(new Date()),  'Date'      )
-test( "klass(undef)",      type.klass(undef),       'Undefined' )
-test( "klass(null)",       type.klass(null),        'Null'      )
-
-test().log( test().block() )
-
-test().describe( "Type", "Positive true tests" )
-
+test().describe( "", "Positive true tests", false )
 test( "isNull(null)",      type.isNull(null),     true  )
 test( "isUndef(xxxx)",     type.isUndef(undef),   true  )
 test( "isNot(null)",       type.isNot(null),      true  )
@@ -59,10 +51,9 @@ test( "isNum(12345)",      type.isNumber(12345),  true  )
 test( "isNaN(NaN)",        type.isNaN(NaN),       true  )
 test( "isObject({a:'a'})", type.isObject({a:'a'}),   true  )
 test( "isArray([1,2,3])",  type.isArray([1,2,3]), true  )
-console.log( test().block() ) # Log the current block of tests
+test().log( test().summary() )
 
-test().describe( "Type", "Negative false test failuer" )
-
+test().describe( "", "Negative false test failure" )
 test( "isNull('abc')",    type.isNull('abc'),    false )
 test( "isUndef(12345)",   type.isUndef(12345),   false )
 test( "isNot({a:'a'}",    type.isNot({a:'a'}),   false )
@@ -71,8 +62,7 @@ test( "isNumber('123')",  type.isNumber('123'),  false )
 test( "isNaN( 123 )",     type.isNaN( 123 ),     false )
 test( "isObject(123)",    type.isObject(123),    false )
 test( "isArray({a:'a'})", type.isArray({a:'a'}), true  )
-
-test().log( test().block() )
+test().log( test().summary() )
 
 ###  
   -- Type determination --

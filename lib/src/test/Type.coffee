@@ -2,12 +2,11 @@
 class Type
   
   comstructor:() ->
-    @warn    = ""
-    @last    =
+    @warned  = ""
+    @lasted  = ""
     @logging = true
     @log     = console.log
     @error   = console.error
-    @log( "I am a log")
 
   # An improved typeof() that follows the convention by returning types in lower case by default.
   # The basic types similar to typeof() returned are:
@@ -18,14 +17,6 @@ class Type
     typ = tok.substring(0,tok.length-1)
     typ = if typ is "Number" and     Number.isInteger(arg) then "Int"   else typ # Previous CoffeeScript issue
     typ = if typ is "Number" and not Number.isInteger(arg) then "Float" else typ  #  with return on nested if's
-    if lowerCase then typ.toLowerCase() else typ
-
-  type2:(arg,lowerCase=true) ->
-    str = Object::toString.call(arg)
-    tok = str.split(" ")[1]
-    typ = tok.substring(0,tok.length-1)
-    console.log( "Type.type(arg)", typ, arg  )
-    typ = if typ is "Number" then if Number.isInteger(arg) then "Int" else "Float"
     if lowerCase then typ.toLowerCase() else typ
 
   # A more detail type that returns basic types, class, object and function name in upper case
@@ -170,7 +161,7 @@ class Type
   # So far all vaild 13 Type.types a super set of Type.typeofs has been accounted for
   # Type.typeofs = ["string","number","boolean","object","function","bigint","symbol","null","undefined"]
   # Type.types   = Type.typeofs.concat(["int","float","array","regex","date"])
-  toStr:(  arg ) ->       # , enc=""
+  toStr:( arg ) ->       # , enc=""
     type = @type(arg)
     str = switch type
       when "string"     then arg
@@ -183,14 +174,14 @@ class Type
       when "undefined"  then "undefined"
       when "function"   then "?function?"
       when "regex","date","bigint","symbol" then arg.toString()  # hail marys
-      else                                       arg.toString()
-    console.log( "toStr(arg)", { str:str, type:type } )
+      else @toWarn( "toStr(arg)", "unable to convert", arg, "sting", "", (t) => t.log( t.warn() ) )
+    console.log( "toStr(arg)", { arg:arg, str:str, type:type } )
     str
 
     # str = if not @isIn(type,"manys") and enc.length > 0 then @toEnclose(str,enc) else str
     # else  console.log( "toStr(arg)", "unable to convert", arg, type, "string", arg.toString(), arg.toString() )
-    # else  @toInfo( "toStr(arg)", "unable to convert", arg, type,
-    #              "string", arg.toString(), arg.toString(), (t) => t.log( t.info() ) )
+    # else  @toWarn( "toStr(arg)", "unable to convert", arg, type,
+    #              "string", arg.toString(), arg.toString(), (t) => t.log( t.warn() ) )
     # str += key+":"+@toEnclose(@toStr(val),'"')+","
 
   toStrObject:( obj ) ->
@@ -215,8 +206,8 @@ class Type
       when "int"   then parseFloat(arg.toFixed(1)) # Coerces an 'int' like '1' to a 'float' like '1.0'
       when "string"
         if @isStrFloat(arg)  then parseFloat(arg)
-        else @toInfo( "toFloat(arg)", "unable to convert", arg, "string", "float", "NaN", NaN, (t) => t.log( t.info() ) )
-      else   @toInfo( "toFloat(arg)", "unable to convert", arg,   type,   "float", "NaN", NaN, (t) => t.log( t.info() ) )
+        else @toWarn( "toFloat(arg)", "unable to convert", arg, "float", NaN, (t) => t.log( t.warn() ) )
+      else   @toWarn( "toFloat(arg)", "unable to convert", arg, "float", NaN, (t) => t.log( t.warn() ) )
 
   toInt:( arg ) ->
     type = @type(arg)
@@ -224,9 +215,9 @@ class Type
       when "int"    then arg
       when "float"  then Math.round(arg)
       when "string"
-        if @isStrInt(arg)  then parseInt(arg)
-        else @toInfo( "toInt(arg)", "unable to convert", arg, "string", "int", "NaN", NaN, (t) => t.log( t.info() ) )
-      else   @toInfo( "toInt(arg)", "unable to convert", arg,   type,   "int", "NaN", NaN, (t) => t.log( t.info() ) )
+        if @isStrInt(arg) then parseInt(arg)
+        else @toWarn( "toInt(arg)", "unable to convert", arg, "int", NaN, (t) => t.log( t.warn() ) )
+      else   @toWarn( "toInt(arg)", "unable to convert", arg, "int", NaN, (t) => t.log( t.warn() ) )
 
   toBoolean:( arg ) ->
     type = @type(arg)
@@ -236,10 +227,10 @@ class Type
         switch arg 
           when "true"  then  true
           when "false" then false
-          else @toInfo( "toBoolean(arg)", "unable to convert", arg, type, "boolean", "false", false, (t) => t.log( t.info() ) )
+          else @toWarn( "toBoolean(arg)", "unable to convert", arg, "boolean", false, (t) => t.log( t.warn() ) )
       when "int"   then arg isnt 0   # check 0   false may not be a convention
       when "float" then arg isnt 0.0 # check 0.0 false may not be a convention
-      else     @toInfo( "toBoolean(arg)", "unable to convert", arg, type, "boolean", "false", false, (t) => t.log( t.info() ) )
+      else     @toWarn( "toBoolean(arg)", "unable to convert", arg, "boolean", false, (t) => t.log( t.warn() ) )
 
   toArray:( arg, type, sep="," ) ->
     type = @type(arg)
@@ -254,7 +245,7 @@ class Type
         for str in strs
           array.push( @toType( str, type ) )
         array
-      else @toInfo( "toArray(arg)", "unable to convert", arg, type, "array", "[]", [], (t) => t.log( t.info() ) )
+      else @toWarn( "toArray(arg)", "unable to convert", arg, "array", [], (t) => t.log( t.warn() ) )
 
   toObject:( arg ) ->
     obj  = {}
@@ -271,7 +262,7 @@ class Type
                  .map( (keyVal) => keyVal.split(":").map( (arg) => arg.trim() ) )
                  .reduce( (acc,cur) => acc[cur[0]] = cur[1]; acc {} )  # acc accumulator cur current
       else
-        @toInfo( "toObject(arg)", "unable to convert", arg, type, "object", "{}", {}, (t) => t.log( t.info() ) )
+        @toWarn( "toObject(arg)", "unable to convert", arg, "object", {}, (t) => t.log( t.warn() ) )
     obj
 
   toKeys:(o)      ->
@@ -372,42 +363,41 @@ class Type
     if args then false
     return
 
-  # -- info reporting ---
+  # -- Warnings ---
 
   # A gem methods that appends text along with retrStr to @warn for detailed reporting of inconsistence
   #  along with a vialble actual return specified by the caller
-  toInfo:( method, text, arg, type, typeTo, retnStr, retn, closure=null ) =>
-    info  = "" # \n  #{method} #{text} #{@toStr(arg)} of '#{type}' to'#{typeTo}' returning #{retnStr}"
-    @doInfo( info, closure, retn )
+  toWarn:( method, text, arg, typeTo, retn, closure=null ) =>
+    warn  = "#{method} #{text} #{@toStr(arg)} of '#{@type(arg)}' to'#{typeTo}' returning #{@toStr(arg)}"
+    @doWarn( warn, closure, retn )
 
-  isInfo:( pass, text, type, types, closure=null ) =>
+  isWarn:( pass, text, type, types, closure=null ) =>
     return true if pass
-    info = "" # "\n  #{text} of type '#{type}' not in '#{types}'"
-    @doInfo( info, closure, pass )
+    warn = "#{text} of type '#{type}' not in '#{types}'"
+    @doWarn( warn, closure, pass )
 
-  inInfo:( pass, result, expect, oper, spec, text, closure=null ) =>
-    # prefix = if pass then "-- Passed --" else "-- Failed --"
-    # condit = if pass then "matches "     else "no match"
-    info   = "" #"\n  #{prefix} #{result} #{condit} #{expect} with oper #{oper} and spec #{spec} #{text}"
-    @doInfo( info, closure, pass )
+  inWarn:( pass, result, expect, oper, spec, text, closure=null ) =>
+    prefix = if pass then "-- Passed --" else "-- Failed --"
+    condit = if pass then "matches "     else "no match"
+    warn   = "#{prefix} #{result} #{condit} #{expect} with oper #{oper} and spec #{spec} #{text}"
+    @doWarn( warn, closure, pass )
 
   # (t) => t.log( t.info() )
-  doInfo:( info, closure, retn ) =>
-     @last  = info
-     @warn += info
-     # @log( "Type.doInfo()", "I an a logger" )
-     closure(@) if @["logging"] and @isFunction(closure)
+  doWarn:( warn, closure, retn ) =>
+     @lasted  = warn
+     @warned += warn
+     closure(@) if @logging and @isFunction(closure)
      retn
 
-  info:() =>
-    @last
+  warn:() =>
+    @lasted
 
+  # console.log( "Type.isIn(type,key)", { type:type, key:key, isIn:Type[key].includes(type), types:Type[key] } )
   isIn:( type, key ) ->
     if Type[key]?
-       console.log( "Type.isIn(type,key)", { type:type, key:key, isIn:Type[key].includes(type), types:Type[key] } )
        Type[key].includes(type)
     else
-      @isInfo( false, "key #{key} missing for", type, [] )
+      @isWarn( false, "key #{key} missing for", type, [] )
       false
 
 Type.remove = ( e, a ) ->

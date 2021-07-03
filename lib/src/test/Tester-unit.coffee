@@ -41,28 +41,30 @@ subjects   = ["TestStatus","TestString","TestSummary"]
 streamLog  = { subscribe:false, publish:false, subjects:subjects }
 stream     = new Stream( subjects, streamLog )
 
-test( "klass(stream)",     tester.klass(stream),      'Stream'     )
-test( "klass(Stream)",     tester.klass(Stream),      'Stream'     )
-test( "klass(tester)",     tester.klass(tester),      'Tester'     )
-test( "klass(tester)",     tester.klass(tester), 'bound type' )
-test( "klass(Vis)",        tester.klass(Vis),         'Vis'        )
-console.log( test().block() ) # Log the current block of tests
+test().module( "Tester", "Tester Unit tests", false )
 
+test().describe( "klass()", "klass type on classed", false )
+test( "stream", tester.klass(stream),  'Stream' )
+test( "Stream", tester.klass(Stream),  'Stream' )
+test( "tester", tester.klass(tester),  'Tester' )
+test( "Vis",    tester.klass(Vis),     'Vis'    )
+test().log( test().summary() )
 
-test( 'eq( {a:"a"})', (t) -> t.eq(  {a:"a"}, {a:"a"} ) )
-test( 'eq( {a:"a"})', (t) -> t.eq(  {a:"a"}, {a:"b"} ) )
-test( 'eq( {a:"a"})', (t) -> t.eq(  {a:"a"}, {b:"a"} ) )
+test().describe( "eq()", "eq() assertion inside test( text, (t) -> ...", false )
+test( 'eq( {a:"a"})',     (t) -> t.eq(  {a:"a"}, {a:"a"} ) )
+test( 'eq( {a:"a"})',     (t) -> t.eq(  {a:"a"}, {a:"b"} ) )
+test( 'eq( {a:"a"})',     (t) -> t.eq(  {a:"a"}, {b:"a"} ) )
+test( "eq([1,2,3])",      (t) -> t.eq([1,2,3],[1,2,3]    ) )
+test( "eq([1,2,3])",      (t) -> t.eq([1,2,3],[1,2,3,4]  ) )
+test( 'eq((x)->,(y)->))', (t) -> t.eq( (x)->, (y)->      ) )
+test().log( test().summary() )
 
-test( "eq([1,2,3])",  (t) -> t.eq([1,2,3],[1,2,3]    ) )
-test( "eq([1,2,3])",  (t) -> t.eq([1,2,3],[1,2,3,4]  ) )
-
-test( 'eq( (x) ->, (y) -> ) )', (t) -> t.eq(  (x) ->, (y) -> ) )
-
-test( "Type.type(stream)",     tester.type(stream),        'object'    )
-test( "Type.type(Stream)",     tester.type(Stream),        'function'  )
-test( "Type.type(tester)",     tester.type(tester),        'object'    )
-test( "Type.type(Vis)",        tester.type(Vis),           'function'  )
-console.log( test().block() ) # Log the current block of tests
+test().describe( "type()", "Positive true type tests", false )
+test( "stream)", tester.type(stream),        'object'    )
+test( "Stream)", tester.type(Stream),        'function'  )
+test( "tester)", tester.type(tester),        'object'    )
+test( "Vis)",    tester.type(Vis),           'function'  )
+test().log( test().summary() )
 
 
 

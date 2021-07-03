@@ -24,24 +24,21 @@ class Tester extends Type
     @log   = console.log
     @error = console.error
 
-    # Set by @module( module, method, description, moduleOn=true, methodOn=true )
+    # Set by @module( moduleId, moduleTx, moduleOn=true )
     @moduleId = ""
     @moduleTx = ""
     @moduleOn = true
 
-
-    # Set by @describe( methodId, description, moduleOn=true, methodOn=true )
-    @methodId    = ""
-    @methodOn    = true
-    @description = ""
+    # Set by @describe( methodId, methodTx, methodOn=true )
+    @methodId = ""
+    @methodTx = ""
+    @methodOn = true
 
     # Accummulate test status state
     @text         = "" # set by test() that is passed inside eq() and sent to run()
-    @code         = ""
     @statusText   = ""
-    @statusClear  = true
-    @blockText    = ""
-    @blockClear   = true
+    @summedText   = ""
+    @summedClear  = true
 
     # Accumulated status objects
     @modules = {}
@@ -104,7 +101,8 @@ class Tester extends Type
   # Create a new status object for the current test
   initStatus:( result, expect, text ) ->
     {
-      assert:{ text:text, pass:true, module:@module, method:@method, warn:"", keys:"" }
+      assert:{ text:text, pass:true, module:@moduleId, method:@methodId, keys:"" }
+      warned:{ text:"", }
       result:{ text:"",   type:@type(result), value:result }
       expect:{ text:"",   type:@type(expect), value:expect }
     }
@@ -223,29 +221,34 @@ class Tester extends Type
     status
 
   # Generates informative text in status
-  examine:( pass, result, expect, status, info, key, index ) ->
+  examine:( pass, result, expect, status, warn, key, index ) ->
     isSchema = @isSchema( expect )
     prefix = if pass then "-- Passed -- " else "-- Failed -- "
     status.assert.text   = prefix + @module + "." + status.assert.text
     status.assert.pass   = pass and status.assert.pass # Asserts a previous status.assert.pass is false
-    status.assert.info  += info
+    status.warned.text  += warn
     status.result.text  += @textResult( result, key, index )
     status.expect.text  += @textExpect( expect, key, index )  if not isSchema
     status.expect.text  += @textSchema( expect, key, index )  if     isSchema
     status
 
+  # test().describe( "toStr", "String conversions with toStr(arg)" )
   report:( result, expect, status ) ->
     pass = status.assert.pass
     eq   = if pass then "is" else "not"
-    @blockText   = "" if @blockClear
-    @statusText  = """\n#{status.assert.text} """
+    @summedText  = "" if @summedClear
+    @statusText  = @toStatusText()
     @statusText += """#{eq} #{@toStr(expect)}""" if status.result.type isnt "function"
-    @statusText += status.assert.info if @isStr(status.assert.info)
     @statusText += """\n   #{@textResult( result )}""" if @verbose or not pass
     @statusText += """\n   #{@textExpect( expect )}""" if @verbose or not pass
-    @blockText  += @statusText   # if not @statusClear # keep the status in the block for now
-    @statusClear = false
-    @blockClear  = false
+    @summedText += @statusText
+    @summedClear = false
+
+    toStatusText:() ->
+      if @isStr(@methodId)
+        "\n" +  @methodId + @enclose(status.assert.text,"()") + " "
+      else
+        "\n" +  status.assert.text + " "
 
     if @isDef(@stream)
       @stream.publish( @statusSubject, status )
@@ -277,65 +280,66 @@ class Tester extends Type
       modulePath = @path( path )
       console.log( "\n-- Started Unit Testing for: #{modulePath.name} in #{modulePath.path}" ) if @logging
       await `import( path /* @vite-ignore */ )`
-    @summary()
+    @complete()  # All tests complete so produce then log and publish the final summary
     return
 
-  describe:( module, method, description, moduleOn=true, methodOn=true ) =>
-    @module      = module
-    @moduleOn    = moduleOn
-    @method      = method
-    @methodOn    = methodOn
-    @description = description
+  @module:( moduleId, moduleTx, moduleOn=true ) =>
+    @moduleId = moduleId
+    @moduleTx = moduleTx
+    @moduleOn = moduleOn
     @
 
-  summary:( module, method ) ->
-    all = arguments.length is 0
-    @moduleOn = true
-    @methodOn = true
+  describe:( methodId, methodTx, methodOn=true ) =>
+    @methodId = methodId
+    @methodTx = methodTx
+    @methodOn = methodOn
+    @
+
+  # Needs to become more of a method / test() block status summary
+  summary:() ->
+    methodOn  = @methodOn # Remember method on status
+    @methoOn  = true
     path = if module? and @modules[module]? then @modules[module].path else "?"
-    if @debug
-      console.log( "Tester.summary(module)", { module:module, modules:@modules, key:@modules[module], path:path } )
-    summaryText = ""
-    if not all  and module is @module # module method summary
-      passCount = 0
-      failCount = 0
-      ++passCount for pass in @passed when pass.assert.module is module
-      ++failCount for fail in @failed when fail.assert.module is module
-      fullCount = passCount + failCount
-      summaryText += """\n\n-- Summary - for #{module} in #{path}"""
-      summaryText += """\n   #{@pad(passCount,fullCount)} tests passed"""
-      summaryText += """\n   #{@pad(failCount,fullCount)} tests failed"""
-      summaryText += """\n   #{@pad(fullCount,fullCount)} tests total"""
-    else      # final summary implied when @summary() called with no arguements
-      fullCount = @passed.length + @failed.length
-      summaryText += """\n\n-- Summary - for all tests"""
-      summaryText += """\n   #{@pad(@passed.length,fullCount)} tests passed"""
-      summaryText += """\n   #{@pad(@failed.length,fullCount)} tests failed"""
-      summaryText += """\n   #{@pad(fullCount,     fullCount)} tests total"""
+    passCount = 0
+    failCount = 0
+    ++passCount for pass in @passed when pass.assert.module is @moduleId
+    ++failCount for fail in @failed when fail.assert.module is @moduleId
+    fullCount = passCount + failCount
+    summaryText  = @methodTx
+    summaryText += @summedText # Prepend #summedText from accumulated statuses
+    summaryText += """\n\n-- Summary - for #{@moduleId} in #{path}"""
+    summaryText += """\n   #{@pad(passCount,fullCount)} tests passed"""
+    summaryText += """\n   #{@pad(failCount,fullCount)} tests failed"""
+    summaryText += """\n   #{@pad(fullCount,fullCount)} tests total"""
+    @methodOn    = true
+    @summedClear = true
+    @stream.publish( @summarySubject, summaryText ) if @isDef(@stream)
+    # for log( test(). summary() ) i.e console.log( test(). summary() ) logging
+    if methodOn then summaryText else "" # a blank string turns off logging
 
-    if @isDef(@stream) and @stream.hasSubscribers( @summarySubject )
-      @stream.publish( @summarySubject, summaryText )
+  complete:() =>
+    fullCount    = @passed.length + @failed.length
+    summaryText  = @block() # Prepend any block statuses
+    summaryText += """\n\n-- Summary - for all tests"""
+    summaryText += """\n   #{@pad(@passed.length,fullCount)} tests passed"""
+    summaryText += """\n   #{@pad(@failed.length,fullCount)} tests failed"""
+    summaryText += """\n   #{@pad(fullCount,     fullCount)} tests total"""
+    @moduleOn    = true
+    @methodOn    = true
+    @stream.publish( @summarySubject, summaryText ) if @isDef(@stream)
+    @log( summaryText ) if @logging
 
-    summaryText = @block() + summaryText # Prepend any block statuses
     # Archive since all tests are complete
     if @archive
       @archiveLocal(  @failed,      @passed )
       @reviewsLocal( { failed:false, passed:false } )
-    summaryText
+    @  # for chaining
 
   # Returns a single text status fron the last test run when called in a unit test module like Tester-unit.coffee
-  # Example: console.log( unit().status() )
-  #   or      unit().log( unit().status() )
+  # Example: console.log( test().status() )
+  #   or      test().log( test().status() )
   status:() ->
-    # @statusClear = true
     @statusText
-
-  # Returns a block of text statuses when callrd in a unit test module like Tester-unit.coffee
-  # Example: console.log( unit().block() )
-  #   or      unit().log( unit().block() )
-  block:() ->
-    @blockClear = true
-    @blockText
 
   # Add a unit test file path to the @modules object
   path:( path ) ->
@@ -400,8 +404,8 @@ class Tester extends Type
     schema = switch
       when @isSchemaParse(  expect, type ) then @toSchemaParse(  schema, expect )
       when @isSchemaObject( expect, type ) then @toSchemaObject( schema, expect )
-      else @toInfo( "toSchema(expect)", "expect not schema 'string' or 'object'",
-        expect, type, "schema", @toStr(schema), schema, (t) -> t.log( t.info() ) )
+      else @toWarn( "toSchema(expect)", "expect not schema 'string' or 'object'"
+      , expect, type, "schema", schema, (t) -> t.log( t.info() ) )
 
   isSchemaParse:  ( arg, type ) ->
     type is "string" and arg.includes(":")
@@ -480,12 +484,12 @@ class Tester extends Type
     inIntRange    = ( int,    range ) -> range[0]          <= int    and int    <= range[1]
     inFloatRange  = ( float,  range ) -> range[0]-range[2] <= float  and float  <= range[1]+range[2]
     pass = switch type
-      when "string" then inStrRange(   result, range )
-      when "int"    then inIntRange(      result, range )
-      when "float"  then inFloatRange(    result, range )
-      when "array"  then @inArrayRange(   result, range )
-      when "object" then @objectsEq(      result, range, status, level )
-      else @toInfo( "inRange()", "unknown range type", result, type, type, "false", false, (t) -> t.log( t.info() ) )
+      when "string" then inStrRange(    result, range )
+      when "int"    then inIntRange(    result, range )
+      when "float"  then inFloatRange(  result, range )
+      when "array"  then @inArrayRange( result, range )
+      when "object" then @objectsEq(    result, range, status, level )
+      else @toWarn( "inRange()", "unknown range type", result, type, false, (t) -> t.log( t.info() ) )
     @examine( pass, result, schema, status, "inRange(...)", key, index )
 
   # Camnot is @arraysEq(...) because a single ramge can be applied to all resuls in a result array
@@ -499,10 +503,10 @@ class Tester extends Type
         pass = pass and @inMyRange( result[i], range )
     else if nResult > nRange
       text = "not enough range tests #{nRange} for result so only will be #{nRange} tests on result"
-      pass = @toInfo( "inRange()", text, result, type, type, "false", false, (t) -> t.log( t.info() ) )
+      pass = @toWarn( "inRange()", text, result, type, false, (t) -> t.log( t.info() ) )
     else if nResult < nRange
       text = "OK with more range bounds #{nRange} than needed for result #{nResult}"
-      pass = @toInfo( "inRange()", result, text, type, type, "true", true, (t) -> t.log( t.info() ) )
+      pass = @toWarn( "inRange()", result, text, type, true, (t) -> t.log( t.info() ) )
       min = Math.min( nResult, nRange )
       for i in [0...min] when @isArray(result[i]) and @isArray(range[i])
         pass = pass and @inMyRange( result[i], range[i] )
@@ -519,7 +523,7 @@ class Tester extends Type
       when "array"
         enums = arg
       else
-        enums = @toInfo( "toEnums(arg)", "unable to convert", arg, type, "enums", "[]", [], (t) -> t.log( t.info() ) )
+        enums = @toWarn( "toEnums(arg)", "unable to convert", arg, "enums", [], (t) -> t.log( t.info() ) )
     enums
 
   rangeType:( range ) ->
@@ -553,7 +557,7 @@ class Tester extends Type
       when 'int'    then isIntRange(range)
       when 'float'  then isFloatRange(range)
       when 'array'  then isArrayRange(range)
-      else  @toInfo( "isRange(range)", "not a range type", range, type, "", "false", false, (t) -> t.log( t.info() ) )
+      else  @toWarn( "isRange(range)", "not a range type", range, "", false, (t) -> t.log( t.info() ) )
 
   # Stream is an optional libary for publising statusObject to UIs like RxJS
   injectStream:( stream ) ->
