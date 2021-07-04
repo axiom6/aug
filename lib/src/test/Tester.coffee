@@ -236,7 +236,7 @@ class Tester extends Type
     @methodOn = methodOn
     @
 
-  statusAssertText:( pass, status, result ) ->
+  statusAssertText:( pass, result ) ->
     text = if pass then "\n-- Passed -- " else "\n-- Failed -- "
     if @isStr(@methodId) and @methodId.charAt(0) isnt "-"
       text += @methodId + "(" + @toStr(result) + ")"
@@ -248,15 +248,15 @@ class Tester extends Type
     ref = " at index: #{index}" if @isInt(index)
     if name is "Schema"
       schema = value
-      "\n  #{name}#{ref} type is '#{schema.type}' with spec '#{schema.spec}' and oper '#{schema.oper}'"
+      "\n   #{name}#{ref} type is '#{schema.type}' with spec '#{schema.spec}' and oper '#{schema.oper}'"
     else
-      "\n  #{name}#{ref} type is '#{@type(value)}' with value #{@toStr(value)}"
+      "\n   #{name}#{ref} type is '#{@type(value)}' with value #{@toStr(value)}"
 
   # Generates informative text in status
   examine:( pass, result, expect, status, warn, key, index ) ->
     isSchema = @isSchema( expect )
     eq                   = if pass then "eq" else "not"
-    status.assert.text   = @statusAssertText( pass, result, status )
+    status.assert.text   = @statusAssertText( pass, result )
     status.assert.text  += """ #{eq} #{@toStr(expect)}""" if status.result.type isnt "function"
     status.assert.pass   = pass and status.assert.pass # Asserts a previous status.assert.pass is false
     status.result.text  += @textValue( "Result", result, key, index )
@@ -307,16 +307,20 @@ class Tester extends Type
     text
 
   totals:( group ) ->
-    passCount    = 0
-    failCount    = 0
+    passCount    = @count( group, true  )
+    failCount    = @count( group, false )
     fullCount    = @statuses.length
-    ++passCount for status in @statuses when @isGroup(status,group,true )
-    ++failCount for status in @statuses when @isGroup(status,group,false)
     text  = @totalsTitle( group )
     text += """\n   #{@pad(passCount,fullCount)} tests passed"""
     text += """\n   #{@pad(failCount,fullCount)} tests failed"""
     text += """\n   #{@pad(fullCount,fullCount)} tests total"""
     text
+
+  count:( group, pass ) ->
+    n = 0
+    for status in tester.statuses when @isGroup(status,group,pass )
+      n++
+    n
 
   totalsTitle:( group ) ->
     path   = if group is "module" and @modules[group]? then @modules[group].path else ""

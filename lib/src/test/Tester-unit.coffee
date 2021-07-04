@@ -16,6 +16,8 @@ import Vis    from '../base/draw/Vis.js'
 # t = tester
 test().describe('Tester', 'unit tests' )
 
+
+
 five = () ->
   5
 
@@ -43,26 +45,25 @@ stream     = new Stream( subjects, streamLog )
 
 test().module( "Tester", "Tester Unit tests", false )
 
-test().describe( "test()", "Internal logic for turning tests off", false )
+test().describe( "test()", "Internal logic for turning tests on and off", true )
 test(  'not (  @testing and  @moduleOn and  @methodOn ) @method=false', (t) ->
   isOff = not ( t.testing and t.moduleOn and t.methodOn )
   t.eq( isOff, false ) )
-test().log( test().summary() )
-
-test().describe( "test()", "Internal logic for turning tests on ", true )
 test(  'not (  @testing and  @moduleOn and  @methodOn ) @method=true', (t) ->
   isOff = not ( t.testing and t.moduleOn and t.methodOn )
   t.eq( isOff, false ) )
 test().log( test().summary() )
+test( "test() method count is 3", tester.count("method") , 3 ).log( test().status() )
 
-test().describe( "klass()", "klass type on classed", false )
+test().describe( "klass()", "klass type on classed", true )
 test( "stream", tester.klass(stream),  'Stream' )
 test( "Stream", tester.klass(Stream),  'Stream' )
 test( "tester", tester.klass(tester),  'Tester' )
 test( "Vis",    tester.klass(Vis),     'Vis'    )
 test().log( test().summary() )
+test( "klass() method count is 4", tester.count("method") , 4 ).log( test().status() )
 
-test().describe( "eq()", "eq() assertion inside test( text, (t) -> ...", false )
+test().describe( "eq()", "eq() assertion inside test( text, (t) -> ...", true )
 test( 'eq( {a:"a"})',     (t) -> t.eq(  {a:"a"}, {a:"a"} ) )
 test( 'eq( {a:"a"})',     (t) -> t.eq(  {a:"a"}, {a:"b"} ) )
 test( 'eq( {a:"a"})',     (t) -> t.eq(  {a:"a"}, {b:"a"} ) )
@@ -70,6 +71,7 @@ test( "eq([1,2,3])",      (t) -> t.eq([1,2,3],[1,2,3]    ) )
 test( "eq([1,2,3])",      (t) -> t.eq([1,2,3],[1,2,3,4]  ) )
 test( 'eq((x)->,(y)->))', (t) -> t.eq( (x)->, (y)->      ) )
 test().log( test().summary() )
+test( "eq() method count is 6", tester.count("method") , 6 ).log( test().status() )
 
 test().describe( "type()", "Positive true type tests", false )
 test( "stream)", tester.type(stream),        'object'    )
@@ -77,6 +79,10 @@ test( "Stream)", tester.type(Stream),        'function'  )
 test( "tester)", tester.type(tester),        'object'    )
 test( "Vis)",    tester.type(Vis),           'function'  )
 test().log( test().summary() )
+test( "type() method count is 4", tester.count("method") , 4 ).log( test().status() )
+
+test().log( test().summary("Tester") )
+test( "Tester module count is 17", tester.count("method") , 17 ).log( test().status() )
 
 
 
