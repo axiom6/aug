@@ -40,12 +40,17 @@ class UnitTester
   UnitTester.onSummary = (summary) =>
     # console.log( "Initial.onSummary(summary)", summary )
     sum       = document.getElementById('summary')
+    sum.stype = ""
     lines     = summary.split( "\n" )
     for line in lines
       div = document.createElement( 'div' )
-      div.style = "font-size:3vmin;"
+      div.style = "font-size:3vmin; text-align:left; white-space:pre;"
       div.append( line )
       sum.append( div  )
+    div = document.createElement( 'div' )
+    div.append( "  "   )
+    div.style = "font-size:3vmin; text-align:left; white-space:pre;"
+    sum.append( div  )
     return
 
 export default UnitTester
