@@ -187,7 +187,7 @@ class Type
   toStrObject:( obj ) ->
     str = "{"
     for own key, val of obj
-      str += key+":"+@toStr(val)+","
+      str += key + ":" + @toStr(val) + ","
     str = str.substring(0,str.length-1) # remove trailing comma
     str += "}"
     str
@@ -263,6 +263,22 @@ class Type
                  .reduce( (acc,cur) => acc[cur[0]] = cur[1]; acc {} )  # acc accumulator cur current
       else
         @toWarn( "toObject(arg)", "unable to convert", arg, "object", {}, (t) => t.log( t.warn() ) )
+    obj
+
+  toJSOM:( key, arg ) ->
+    json = {}
+    type = @type(arg)
+    switch type
+      when "string"
+        '"' + arg + '"'
+      when "object"
+        for own key, val of arg
+          json[key] = @toJSON(key,val)
+      when "array"
+        for i in [0...arg.length]
+          json[i] = arg[i]
+      else
+        arg
     obj
 
   toKeys:(o)      ->

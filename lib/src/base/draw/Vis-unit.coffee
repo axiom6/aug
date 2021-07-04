@@ -2,13 +2,13 @@
 import { test } from '../../test/Tester.js'
 import   Vis    from './Vis.js'
 
-test().describe("Vis", "rgb")
+test().module(    "Vis", "Visualization Utility" )
+test().describe( "Vis", "Visualization Utility" )
 
 test( "rgb(0xFFFFFF)",            Vis.rgb(0xFFFFFF), {r:255,g:255,b:255, a:1.0 }   )
 test( "hex({r:255,g:255,b:255})", Vis.hex({r:255,g:255,b:255}),  0xFFFFFF  ) # Appears as 16777215 in decimal
 test( "str({r:255,g:255,b:255})", Vis.str({r:255,g:255,b:255}), "0xFFFFFF" )
 
-test().describe("Vis", "ysv")
 test( "strHex(255)", Vis.strHex(255), "FF" )
 
 test( "rgbHue(  0) red",    Vis.rgbHue(  0),   0 )

@@ -8,9 +8,9 @@ undef = undefined
 test().module( "Type", "The type assertion and conversion class libary")
 
 test().describe( "toStr", "String conversions with toStr(arg)" )
-test( '{ a:"a", b:"b" }',  type.toStr({ a:"a", b:"b" }),  '{a:"a" b:"b"}' ).log( test().status() )
-test( '[ 1, 2, 3 ]',       type.toStr([  1,   2,   3  ]),  '[1,2,3]'      ).log( test().status() )
-test( '[ "1", "2", "3" ]', type.toStr([ "1", "2", "3" ]), '["1","2","3"]' ).log( test().status() )
+test( '{ a:"a", b:"b" }',  type.toStr({ a:"a", b:"b" }),  '{a:"a" b:"b"}' ) # .log( test().status() )
+test( '[ 1, 2, 3 ]',       type.toStr([  1,   2,   3  ]),  '[1,2,3]'      ) # .log( test().status() )
+test( '[ "1", "2", "3" ]', type.toStr([ "1", "2", "3" ]), '["1","2","3"]' ) # .log( test().status() )
 test().log( test().summary() ) # Log the all the tests  that began with descripe(...)
 
 test().describe( "toEnclose", """Enclose strings with '"', '()', '[]' '{}'""" )
@@ -35,7 +35,7 @@ test( "undef",        type.type(undef),         'undefined' )
 test( "new Date()",   type.type(new Date()),    'date'      )
 test( "BigInt(123)",  type.type((BigInt(123))), 'bigint'    ) # 123n not working in CoffeeScript
 test( "Symbol",       type.type(Symbol),        'symbol'    ) # Symbol not not Symbol()
-test().log( test().summary() ) # Summary will shut off logging by returning a blank when @decribe( ..., false )
+test().log( test().summary() )
 
 test().describe( "klass", "types", false )
 test( "true",       type.klass(true),        'Boolean'   )
@@ -50,7 +50,7 @@ test( "undef",      type.klass(undef),       'Undefined' )
 test( "null",       type.klass(null),        'Null'      )
 test().log( test().summary() )
 
-test().describe( "", "Positive true tests", false )
+test().describe( "-Positive", "Positive true tests", false )
 test( "isNull(null)",      type.isNull(null),     true  )
 test( "isUndef(xxxx)",     type.isUndef(undef),   true  )
 test( "isNot(null)",       type.isNot(null),      true  )
@@ -61,7 +61,7 @@ test( "isObject({a:'a'})", type.isObject({a:'a'}),   true  )
 test( "isArray([1,2,3])",  type.isArray([1,2,3]), true  )
 test().log( test().summary() )
 
-test().describe( "", "Negative false test failure" )
+test().describe( "Negative", "Negative false test failure" )
 test( "isNull('abc')",    type.isNull('abc'),    false )
 test( "isUndef(12345)",   type.isUndef(12345),   false )
 test( "isNot({a:'a'}",    type.isNot({a:'a'}),   false )
@@ -71,6 +71,8 @@ test( "isNaN( 123 )",     type.isNaN( 123 ),     false )
 test( "isObject(123)",    type.isObject(123),    false )
 test( "isArray({a:'a'})", type.isArray({a:'a'}), true  )
 test().log( test().summary() )
+
+test().log( test().summary("Type") )
 
 ###  
   -- Type determination --
