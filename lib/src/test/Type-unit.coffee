@@ -7,21 +7,21 @@ undef = undefined
 
 test().module( "Type", "The type assertion and conversion class libary")
 
-test().describe( "toStr", "String conversions with toStr(arg)" )
+test().describe( "toStr()", "String conversions with toStr(arg)" )
 test( '{ a:"a", b:"b" }',  type.toStr({ a:"a", b:"b" }),  '{a:"a" b:"b"}' ) # .log( test().status() )
 test( '[ 1, 2, 3 ]',       type.toStr([  1,   2,   3  ]),  '[1,2,3]'      ) # .log( test().status() )
 test( '[ "1", "2", "3" ]', type.toStr([ "1", "2", "3" ]), '["1","2","3"]' ) # .log( test().status() )
 test().log( test().summary() ) # Log the all the tests  that began with descripe(...)
 
-test().describe( "toEnclose", """Enclose strings with '"', '()', '[]' '{}'""" )
-test( type.toEnclose( "abc",   '"'  ), '"abc"'   )           # returns "abc" - good for JSON keys and values
-test( type.toEnclose( "123",   "'"  ), "'abc'"   )           # returns '123'
-test( type.toEnclose( "xyz",   "()" ), "(xyz)"   )           # returns (xyz)
-test( type.toEnclose( "d,e,f", "[]" ), "[d,e,f]" )           # returns [d,e,f]
-test( type.toEnclose( "a:x,b:y,c:z", "{}" ), "{a:x,b:y,c:z}" ) # returns {a:x,b:y,c:z}
+test().describe( "toEnclose()", """Enclose strings with '"', '()', '[]' '{}'""" )
+test( "", type.toEnclose( "abc",   '"'  ), '"abc"'   )           # returns "abc" - good for JSON keys and values
+test( "", type.toEnclose( "123",   "'"  ), "'abc'"   )           # returns '123'
+test( "", type.toEnclose( "xyz",   "()" ), "(xyz)"   )           # returns (xyz)
+test( "", type.toEnclose( "d,e,f", "[]" ), "[d,e,f]" )           # returns [d,e,f]
+test( "", type.toEnclose( "a:x,b:y,c:z", "{}" ), "{a:x,b:y,c:z}" ) # returns {a:x,b:y,c:z}
 test().log( test().summary() )
 
-test().describe( "type", "All 13 types", false )  # false turns off this block of
+test().describe( "type()", "All 13 types", true )  # false turns off this block of
 test( "'123'",        type.type('123'),         'string'    )
 test(  "123",         type.type(123),           'int'       )
 test( "123.0",        type.type(123.0),         'float'     )
@@ -37,7 +37,7 @@ test( "BigInt(123)",  type.type((BigInt(123))), 'bigint'    ) # 123n not working
 test( "Symbol",       type.type(Symbol),        'symbol'    ) # Symbol not not Symbol()
 test().log( test().summary() )
 
-test().describe( "klass", "types", false )
+test().describe( "klass()", "types", true )
 test( "true",       type.klass(true),        'Boolean'   )
 test( "123",        type.klass(123),         'Number'    )
 test( "'123'",      type.klass('123'),       'String'    )
@@ -50,7 +50,7 @@ test( "undef",      type.klass(undef),       'Undefined' )
 test( "null",       type.klass(null),        'Null'      )
 test().log( test().summary() )
 
-test().describe( "-Positive", "Positive true tests", false )
+test().describe( "-Positive", "Positive true tests", true )
 test( "isNull(null)",      type.isNull(null),     true  )
 test( "isUndef(xxxx)",     type.isUndef(undef),   true  )
 test( "isNot(null)",       type.isNot(null),      true  )
@@ -61,7 +61,7 @@ test( "isObject({a:'a'})", type.isObject({a:'a'}),   true  )
 test( "isArray([1,2,3])",  type.isArray([1,2,3]), true  )
 test().log( test().summary() )
 
-test().describe( "Negative", "Negative false test failure" )
+test().describe( "-Negative", "Negative false test failure" )
 test( "isNull('abc')",    type.isNull('abc'),    false )
 test( "isUndef(12345)",   type.isUndef(12345),   false )
 test( "isNot({a:'a'}",    type.isNot({a:'a'}),   false )

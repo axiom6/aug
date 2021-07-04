@@ -7,7 +7,8 @@ class Tester extends Type
     super()
 
     # Key settings that can be reconfigured through setOptions( options )
-    @testing        = true          # When false all testing is turned which allows tests to remain in code
+    @testing        = true          # When false all testing is turned off which allows tests to remain in code
+    @always         = true          # When true  all testing is turned on  which overrides all other settings
     #logging        = true          # @logging is in class Type
     @archive        = true          # When true archives test status object to localStorage TestsPassed and TestFail
     @verbose        = false         # Adds addition and sometimes mind numbing detail to testStatus objects
@@ -46,6 +47,7 @@ class Tester extends Type
 
   setOptions:( options ) ->
     @testing        = if options.testing?        then options.testing        else true
+    @always         = if options.always?         then options.always         else true
     @logging        = if options.logging?        then options.logging        else true
     @archive        = if options.archive?        then options.archive        else true
     @verbose        = if options.verbose?        then options.verbose        else false
@@ -67,7 +69,7 @@ class Tester extends Type
   #
   #   test( "Vis.rgb() converts hex color to rgb object",  Vis.rgb(0xFFFFFF), {r:255,g:255,b:255} )
   test:( text, args... ) =>
-    if      arguments.length is 0 or not ( @testing and @moduleOn and @methodOn )
+    if      arguments.length is 0 or not @always or not ( @testing and @moduleOn and @methodOn )
       return @
     else if arguments.length is 2 and @isFunction(args[0])
       closure = args[0]
@@ -213,7 +215,6 @@ class Tester extends Type
       status = @assert( result[i], expect[i], status, ++level, null, i )
     status
 
-
   # @runUnitTests(...) @describe(...) @summary(...)
 
   runUnitTests:( paths ) ->
@@ -238,8 +239,10 @@ class Tester extends Type
 
   statusAssertText:( pass, result ) ->
     text = if pass then "\n-- Passed -- " else "\n-- Failed -- "
-    if @isStr(@methodId) and @methodId.charAt(0) isnt "-"
-      text += @methodId + "(" + @toStr(result) + ")"
+    if @isStr(@methodId) and @methodId.charAt(0) isnt "-" and @tail(@methodId) is ")"
+      text += @strip(@methodId,"","()") + "(" + @toStr(result) + ") " + @text
+    else
+      text += @text
     text
 
   textValue:( name, value, key=null, index=null ) ->
@@ -254,6 +257,7 @@ class Tester extends Type
 
   # Generates informative text in status
   examine:( pass, result, expect, status, warn, key, index ) ->
+    return status if not @verbose and ( key? or index? )
     isSchema = @isSchema( expect )
     eq                   = if pass then "eq" else "not"
     status.assert.text   = @statusAssertText( pass, result )
@@ -276,7 +280,8 @@ class Tester extends Type
   summary:( module=null ) ->
     return ""      if @summaryReturn( module )   # blank string turns off logging
     group        = if module? then "module" else "method"
-    summaryText  =  @summaryText( group  )
+    summaryText  = @title( group, "Summary" )
+    summaryText +=  @summaryText( group  )
     summaryText += @totals( group )
     @stream.publish( @summarySubject, summaryText ) if @isDef(@stream)
     summaryText  # for log( test().summary() )
@@ -301,16 +306,16 @@ class Tester extends Type
     status = if status? then status else @statusAs
     text = ""
     text += status.assert.text
-    text += status.result.text
-    text += status.expect.text
+    text += status.result.text  if @verbose or not status.assert.pass
+    text += status.expect.text  if @verbose or not status.assert.pass
     text += status.warned.text  if @verbose
     text
 
   totals:( group ) ->
     passCount    = @count( group, true  )
     failCount    = @count( group, false )
-    fullCount    = @statuses.length
-    text  = @totalsTitle( group )
+    fullCount    = passCount + failCount
+    text  = @title( group, "Totals" )
     text += """\n   #{@pad(passCount,fullCount)} tests passed"""
     text += """\n   #{@pad(failCount,fullCount)} tests failed"""
     text += """\n   #{@pad(fullCount,fullCount)} tests total"""
@@ -322,14 +327,14 @@ class Tester extends Type
       n++
     n
 
-  totalsTitle:( group ) ->
+  title:( group, name ) ->
     path   = if group is "module" and @modules[group]? then @modules[group].path else ""
-    title  = "\nTotals for "
-    title += switch group
+    text = if name is "Totals" then "\n-- Totals -- for " else "\n-- Summary - for "
+    text += switch group
       when "method" then """#{@methodId} #{@methodTx}"""
       when "module" then """#{@moduleId} #{@moduleTx}""" + path
       else               """for all tests"""
-    title
+    text
 
   complete:() =>
     summaryText  = @totals( "all" )

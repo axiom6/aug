@@ -172,7 +172,7 @@ class Type
       when "array"      then @toStrArray(arg)
       when "null"       then "null"
       when "undefined"  then "undefined"
-      when "function"   then "?function?"
+      when "function"   then "function"
       when "regex","date","bigint","symbol" then arg.toString()  # hail marys
       else @toWarn( "toStr(arg)", "unable to convert", arg, "sting", "", (t) => t.log( t.warn() ) )
     # console.log( "toStr(arg)", { arg:arg, str:str, type:type } )
@@ -326,6 +326,15 @@ class Type
             v   = v.substring(action.length) if pop
     pop
 
+  #
+  strip:( str, beg, end ) ->
+    if @isStr(beg) and str.startsWith(beg)
+       str = str.substring(beg.length)
+    if @isStr(end) and str.endsWith(end)
+      str = str.substring(0,str.length-end.length)
+    str
+
+  # Not working completely
   tail:(v,action=false) ->
     pop = null
     switch @type(v)
