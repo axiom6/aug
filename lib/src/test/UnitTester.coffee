@@ -55,19 +55,3 @@ class UnitTester
 
 export default UnitTester
 
-###
-    # This is vite.js dependent with import.meta.glob() and its dynamic await importer
-  # Can't pass glob patterns like "/pub/xx/x-unit.js"
-  Initial.runUnitTestsViteJS = ( modules ) ->
-    console.log( "Tester.runUnitTestsViteJS()", { modules:modules, glob:"/lib/xx/x-unit.js" } ) if @debug
-    for own path, importer of modules
-      modules[path]().then( (importer) =>
-        console.log( path,   importer ) if @debug
-        await importer
-        Initial.count++
-        if Initial.count is Initial.total and not Initial.summaryPublished
-           Initial.summaryPublished = true
-           Initial.stream.publish( "TestSummay", tester.summary() )
-           tester.log( tester.summary() )
-        return )
-###

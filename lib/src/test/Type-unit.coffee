@@ -8,16 +8,16 @@ undef = undefined
 test().module( "Type", "The type assertion and conversion class libary")
 
 test().describe( "toStr()", "String conversions with toStr(arg)" )
-test( '{ a:"a", b:"b" }',  type.toStr({ a:"a", b:"b" }),  '{a:"a" b:"b"}' ) # .log( test().status() )
-test( '[ 1, 2, 3 ]',       type.toStr([  1,   2,   3  ]),  '[1,2,3]'      ) # .log( test().status() )
-test( '[ "1", "2", "3" ]', type.toStr([ "1", "2", "3" ]), '["1","2","3"]' ) # .log( test().status() )
+test( '{a:"a",b:"b"}',  type.toStr({ a:"a", b:"b" }), '{a:"a" b:"b"}' ) # .log( test().status() )
+test( '[1,2,3]',        type.toStr([1,2,3]),          '[1,2,3]'       ) # .log( test().status() )
+test( '["1","2","3"]',  type.toStr(["1","2","3"]),    '["1","2","3"]' ) # .log( test().status() )
 test().log( test().summary() ) # Log the all the tests  that began with descripe(...)
 
 test().describe( "toEnclose()", """Enclose strings with '"', '()', '[]' '{}'""" )
-test( "", type.toEnclose( "abc",   '"'  ), '"abc"'   )           # returns "abc" - good for JSON keys and values
-test( "", type.toEnclose( "123",   "'"  ), "'abc'"   )           # returns '123'
-test( "", type.toEnclose( "xyz",   "()" ), "(xyz)"   )           # returns (xyz)
-test( "", type.toEnclose( "d,e,f", "[]" ), "[d,e,f]" )           # returns [d,e,f]
+test( "", type.toEnclose( "abc",   '"'  ), '"abc"'   )             # returns "abc" - good for JSON keys and values
+test( "", type.toEnclose( "123",   "'"  ), "'123'"   )             # returns '123'
+test( "", type.toEnclose( "xyz",   "()" ), "(xyz)"   )             # returns (xyz)
+test( "", type.toEnclose( "d,e,f", "[]" ), "[d,e,f]" )             # returns [d,e,f]
 test( "", type.toEnclose( "a:x,b:y,c:z", "{}" ), "{a:x,b:y,c:z}" ) # returns {a:x,b:y,c:z}
 test().log( test().summary() )
 

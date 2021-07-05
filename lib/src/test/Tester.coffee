@@ -8,7 +8,7 @@ class Tester extends Type
 
     # Key settings that can be reconfigured through setOptions( options )
     @testing        = true          # When false all testing is turned off which allows tests to remain in code
-    @always         = true          # When true  all testing is turned on  which overrides all other settings
+    @always         = false         # When true  all testing is turned on  which overrides all other settings
     #logging        = true          # @logging is in class Type
     @archive        = true          # When true archives test status object to localStorage TestsPassed and TestFail
     @verbose        = false         # Adds addition and sometimes mind numbing detail to testStatus objects
@@ -33,13 +33,11 @@ class Tester extends Type
     @methodTx = ""
     @methodOn = true
 
-    # set by test() that is passed inside eq() and sent to run()
-    @text  = ""
-
     # Accumulated status objects
-    @modules  = {}
-    @statusAs = {}  # Latest status from @assert(...)
-    @statuses = []
+    @text        = "" # set by test() that is passed inside eq() and sent to run()
+    @modulePaths = {}
+    @statusAs    = {}  # Latest status from @assert(...)
+    @statuses    = []
 
     # optional instance for publishing each test status object to to UIs that subscripe to stream
     # set by @injectStream(stream) which enforces that it have @klass 'Stream'
@@ -47,7 +45,7 @@ class Tester extends Type
 
   setOptions:( options ) ->
     @testing        = if options.testing?        then options.testing        else true
-    @always         = if options.always?         then options.always         else true
+    @always         = if options.always?         then options.always         else false
     @logging        = if options.logging?        then options.logging        else true
     @archive        = if options.archive?        then options.archive        else true
     @verbose        = if options.verbose?        then options.verbose        else false
@@ -69,7 +67,7 @@ class Tester extends Type
   #
   #   test( "Vis.rgb() converts hex color to rgb object",  Vis.rgb(0xFFFFFF), {r:255,g:255,b:255} )
   test:( text, args... ) =>
-    if      arguments.length is 0 or not @always or not ( @testing and @moduleOn and @methodOn )
+    if      arguments.length is 0 or not ( @always or ( @testing and @moduleOn and @methodOn ) )
       return @
     else if arguments.length is 2 and @isFunction(args[0])
       closure = args[0]
@@ -220,7 +218,9 @@ class Tester extends Type
   runUnitTests:( paths ) ->
     for path in paths
       modulePath = @toPath( path )
-      console.log( "\n-- Started Unit Testing for: #{modulePath.name} in #{modulePath.path}" ) if @logging
+      text = "\n-- Started Unit Testing for: #{modulePath.name} in #{modulePath.path}"
+      console.log( text )                      if @logging
+      @stream.publish( @summarySubject, text ) if @isDef(@stream)
       await `import( path /* @vite-ignore */ )`
     @complete()  # All tests complete so produce then log and publish the final summary
     return
@@ -240,9 +240,9 @@ class Tester extends Type
   statusAssertText:( pass, result ) ->
     text = if pass then "\n-- Passed -- " else "\n-- Failed -- "
     if @isStr(@methodId) and @methodId.charAt(0) isnt "-" and @tail(@methodId) is ")"
-      text += @strip(@methodId,"","()") + "(" + @toStr(result) + ") " + @text
+      text += @strip(@methodId,"","()") + "(" + @toStr(result) + ") "
     else
-      text += @text
+      text += @text + " "
     text
 
   textValue:( name, value, key=null, index=null ) ->
@@ -261,7 +261,8 @@ class Tester extends Type
     isSchema = @isSchema( expect )
     eq                   = if pass then "eq" else "not"
     status.assert.text   = @statusAssertText( pass, result )
-    status.assert.text  += """ #{eq} #{@toStr(expect)}""" if status.result.type isnt "function"
+    status.assert.text  += """#{eq} #{@toStr(expect)}""" if status.result.type isnt "function"
+    #tatus.assert.text  += " for " + @text
     status.assert.pass   = pass and status.assert.pass # Asserts a previous status.assert.pass is false
     status.result.text  += @textValue( "Result", result, key, index )
     status.expect.text  += @textValue( "Expect", expect, key, index )  if not isSchema
@@ -328,7 +329,7 @@ class Tester extends Type
     n
 
   title:( group, name ) ->
-    path   = if group is "module" and @modules[group]? then @modules[group].path else ""
+    path   = if group is "module" and @modulePaths[group]? then @modulePaths[group].path else ""
     text = if name is "Totals" then "\n-- Totals -- for " else "\n-- Summary - for "
     text += switch group
       when "method" then """#{@methodId} #{@methodTx}"""
@@ -349,13 +350,13 @@ class Tester extends Type
       @reviewsLocal()
     @  # for chaining
 
-  # Add a unit test file path to the @modules object  - not called
+  # Add a unit test file path to the @modulePaths object  - not called
   toPath:( path ) ->
     dirs   = path.split("/")
     module = @tail(dirs).split("-")[0]
-    @modules[module] = { name:module, path:path }
+    @modulePaths[module] = { name:module, path:path }
     console.log( "Tester.path(path)", { path:path, dirs:dirs, module:module } ) if  @debug
-    @modules[module]
+    @modulePaths[module]
 
   isEnums:( arg, oper, type ) ->
     oper is "enums" and @isArray(arg,type) and @isResultType(type)

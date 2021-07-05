@@ -1,4 +1,11 @@
 
+Tester Wrap Up
+  1. " for object values
+  2. Type.enclose test not making sense
+  3. Find the best way to express and capture Result arguments
+  4. Expression
+  5. Function
+
 Debug
   1. Bad pageJey in Nav
   2. Colors in Hues / Color / Polar / Vec / Sphere
@@ -12,12 +19,12 @@ Debug
   6. Multiple summaries published
 
 Features One
-  1. Logging status
-     a. One
-     b. Group
-     c. Summary
-  2. Incorporate Describe
-  3. Put Summary into Initial.html
+  1+ Logging status
+     a+ One
+     b+ Group
+     c+ Summary
+  2+ Incorporate Describe
+  3+ Put Summary into Initial.html
 
 Features Two
   1. Get Touch working again

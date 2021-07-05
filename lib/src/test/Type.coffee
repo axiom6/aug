@@ -135,7 +135,7 @@ class Type
   # Converters
   toType:( arg, type ) ->
     switch type
-      when "string"  then @toStr(  arg )
+      when "string"  then @toStr(     arg )
       when "int"     then @toInt(     arg )
       when "float"   then @toFloat(   arg )
       when "boolean" then @toBoolean( arg )
@@ -152,9 +152,12 @@ class Type
   # toEnclose("d,e,f", "[]" )       # returns [d,e,f]
   # toEnclose("a:x,b:y,c:z", "{}" ) # returns {a:x,b:y,c:z}
   toEnclose:( str, enc="" ) ->
-    if enc.length is 2 then "#{enc.charAt(0)}#{str}#{enc.charAt(1)}"
-    if enc.length is 1 then "#{enc.charAt(0)}#{str}#{enc.charAt(0)}"
-    else str
+    enclose = switch
+      when enc.length is 2 then """#{enc.charAt(0)}#{str}#{enc.charAt(1)}"""
+      when enc.length is 1 then """#{enc.charAt(0)}#{str}#{enc.charAt(0)}"""
+      else str
+    console.log( "Type.toEnclose()", { str:str, enclose:enclose } ) if @debug
+    enclose
 
   # toStr(arg) avoids conflicts with arg.toString()
   # This combination of travesal and recursion is cleaner than JSON.stringify()
@@ -174,7 +177,7 @@ class Type
       when "undefined"  then "undefined"
       when "function"   then "function"
       when "regex","date","bigint","symbol" then arg.toString()  # hail marys
-      else @toWarn( "toStr(arg)", "unable to convert", arg, "sting", "", (t) => t.log( t.warn() ) )
+      else @toWarn( "toStr(arg)", "unable to convert", arg, "string", "", (t) => t.log( t.warn() ) )
     # console.log( "toStr(arg)", { arg:arg, str:str, type:type } )
     str
 

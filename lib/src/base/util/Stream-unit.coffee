@@ -9,7 +9,7 @@ stream     = new Stream( subjects, streamLog )
 test().module( "Stream", "A mininal Publish and Subscribe class libary")
 
 test().describe( "Stream", "Simple Publish and Subscribe" )
-test( "Subscribe then Publish", (t) ->
+test( """Subscribe to {a:"a",b:"b"} then Publish""", (t) ->
   pubObj = { a:"a", b:"b" }
   subObj = {}
   onSubscribe = (obj) -> subObj = obj
