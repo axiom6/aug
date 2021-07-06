@@ -113,6 +113,7 @@ class Tester extends Spec
     if @isSpec( expect )
       spec = @toSpec(  expect )
       status = switch spec.oper
+        when 'regex' then @inRegex(  result, spec, status, level, key, index )
         when 'enums' then @inEnums(  result, spec, status, level, key, index )
         when "range" then @inRange(  result, spec, status, level, key, index )
         else @examine( false, result, spec, status, "unknown spec.oper #{spec.oper}", key, index )
@@ -214,6 +215,14 @@ class Tester extends Spec
     for i in [0...length]
       status = @assert( result[i], expect[i], status, ++level, null, i )
     status
+
+  # Determine if a result is enumerated.
+  # This method is here in Tester because it call @examine()
+  inRegex:(   result, spec, status, level=0, key=null, index=null ) ->
+    @noop( level )
+    regex = spec.expect
+    pass  = regex.test(result)
+    @examine( pass, result, spec, status, "inRegex(...)", key, index )
 
   # Determine if a result is enumerated.
   # This method is here in Tester because it call @examine()

@@ -54,4 +54,3 @@ class UnitTester
     return
 
 export default UnitTester
-

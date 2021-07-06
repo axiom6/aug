@@ -1,7 +1,5 @@
 
 import { test, tester } from './Tester.js'     # Only importing tester to unit test it
-import Stream from "../base/util/Stream.js"
-import Vis    from '../base/draw/Vis.js'
 
 # In this context all unit tests are executed immediately when this module is either
 #   dynaically  imported i.e module = import(path) - recommended
@@ -36,10 +34,6 @@ test(  "type('123')", (t) ->
 class Main
   @init = () =>
 
-subjects   = ["TestStatus","TestString","TestSummary"]
-streamLog  = { subscribe:false, publish:false, subjects:subjects }
-stream     = new Stream( subjects, streamLog )
-
 test().module( "Tester", "Tester Unit tests", true )
 
 test().describe( "test()", "Internal logic for turning tests on and off", true )
@@ -52,14 +46,6 @@ test(  'not (  @testing and  @moduleOn and  @methodOn ) @method=true', (t) ->
 test().log( test().summary() )
 #est( "test() method count is 3", tester.count("method") , 3 ).log( test().status() )
 
-test().describe( "klass()", "klass type on classed", true )
-test( "stream", tester.klass(stream),  'Stream' )
-test( "Stream", tester.klass(Stream),  'Stream' )
-test( "tester", tester.klass(tester),  'Tester' )
-test( "Vis",    tester.klass(Vis),     'Vis'    )
-test().log( test().summary() )
-#est( "klass() method count is 4", tester.count("method") , 4 ).log( test().status() )
-
 test().describe( "eq()", "eq() assertion inside test( text, (t) -> ...", true )
 test( 'eq( {a:"a"})',     (t) -> t.eq(  {a:"a"}, {a:"a"} ) )
 test( 'eq( {a:"a"})',     (t) -> t.eq(  {a:"a"}, {a:"b"} ) )
@@ -68,20 +54,6 @@ test( "eq([1,2,3])",      (t) -> t.eq([1,2,3],[1,2,3]    ) )
 test( "eq([1,2,3])",      (t) -> t.eq([1,2,3],[1,2,3,4]  ) )
 test( 'eq((x)->,(y)->))', (t) -> t.eq( (x)->, (y)->      ) )
 test().log( test().summary() )
-#est( "eq() method count is 6", tester.count("method") , 6 ).log( test().status() )
-
-test().describe( "type()", "Positive true type tests", true )
-test( "stream", tester.type(stream),        'object'    )
-test( "Stream", tester.type(Stream),        'function'  )
-test( "tester", tester.type(tester),        'object'    )
-test( "Vis",    tester.type(Vis),           'function'  )
-test().log( test().summary() )
-test( "type() method count is 4", tester.count("method") , 4 ).log( test().status() )
-
-test().log( test().summary("Tester") )
-#est( "Tester module count is 17", tester.count("method") , 17 ).log( test().status() )
-
-
 
 ###
   constructor:()

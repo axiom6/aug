@@ -9,6 +9,12 @@ class Spec extends Type
   isEnums:( arg, oper, type ) ->
     oper is "enums" and @isArray(arg,type) and @isResultType(type)
 
+  # let re = /ab+c/i; // literal notation
+  # let re = new RegExp('ab+c', 'i') // constructor with string pattern as first argument
+  # let re = new RegExp(/ab+c/, 'i') // constructor with regular express
+  isRegex:( arg, oper  ) ->
+    oper is "regex" and @isType(arg,"string")
+
   # Check if an arg like expect is a 'spec'
   verifySpec:( arg ) ->
     @conditions( @isObject(arg), @isResultType(arg.type), @isSpec(arg.expect,arg.oper), @isCard(arg.card) )
@@ -16,10 +22,6 @@ class Spec extends Type
   isResultType:( type ) ->
     pass = @isDef(type) and @isIn( type,    "results" )
     @isWarn( pass, "Not a Result", type, Type.results, (t) -> t.log( t.warn() ) )
-
-  isExpectType:( type ) ->
-    pass = @isDef(type) and @isIn( type, "expects"      )
-    @isWarn( pass, "Not a Expect", type, Spec.expects, (t) -> t.log( t.warn() ) )
 
   isOper:( oper ) ->
     pass = @isDef(oper) and  @isIn( oper, "opers" )
@@ -45,16 +47,16 @@ class Spec extends Type
 
   # In the first t
   toSpec:( expect ) ->
-    type   = @type(expect)
+    type = @type(expect)
     spec = { type:"any", oper:"any", expect:"any", card:"1", spec:""  }
     spec = switch
-      when @isSpecParse(  expect, type ) then @toSpecParse(  spec, expect )
-      when @isSpecObject( expect, type ) then @toSpecObject( spec, expect )
+      when @isSpecParse(  expect, type ) then @toSpecParse(  spec, type )
+      when @isSpecObject( expect, type ) then @toSpecObject( spec, type )
       else @toWarn( "toSpec(expect)", "expect not spec 'string' or 'object'"
       , expect, type, "spec", spec, (t) -> t.log( t.warn() ) )
 
   isSpecParse:  ( arg, type ) ->
-    type is "string" and arg.includes(":")
+    type is "regex" or ( type is "string" and arg.includes(":") )
 
   # toSpecParse:( spec, arg )
   # Examples
@@ -72,23 +74,26 @@ class Spec extends Type
   toSpecParse:( spec, arg ) ->
     splits = arg.split(":")
     length = splits.length
-    if length >= 1                                        # type
+    if length >= 1                               # type
       spec.type = splits[0]
-    if length >= 1                                        # expect
+    if length >= 1                               # expect
       spec.spec = splits[1]
-      if splits[1].includes("|")                         #   enum
+      if @isType( splits[1], "regex" )              # regex
+        spec.oper   = "regex"
+        spec.expect = splits[1]
+      else if splits[1].includes("|")               #   enum
         spec.oper   = "enums"
         spec.expect = @toEnums( splits[1] )
-      else if @isStrEnclosed( "[", splits[1], "]" )  #    range array
+      else if @isStrEnclosed( "[", splits[1], "]" )  # range array
         spec.oper   = "range"
         spec.expect = @toArray( splits[1] )
-    else if @isStrEnclosed( "{", splits[1], "}" )   #    range object
+    else if @isStrEnclosed( "{", splits[1], "}" )   # range object
       spec.oper   = "range"
       spec.expect = @toObject( splits[1] )
     else
       spec.oper   = "any"
       spec.expect = "any"
-    if length >= 2                                        # card i.e cardinaliry
+    if length >= 2                                   # card i.e cardinaliry
       spec.oper = splits[2]
     spec
 
@@ -114,7 +119,6 @@ class Spec extends Type
     spec.card   = "1"  # required
     spec.spec   = ""
     spec
-
 
   # Camnot is @arraysEq(...) because a single ramge can be applied to all resuls in a result array
   inArrayRange:( result, range ) ->
@@ -189,7 +193,7 @@ class Spec extends Type
     else if Spec[key]? then Spec[key].includes(type)
     else @isWarn( false, "key #{key} missing for", type, [], (t) -> t.log( t.warn() ) )
 
-Spec.specs   = ["range","enums"]               # high level spec   based comparision specs
+Spec.specs   = ["range","enums","regex"]               # high level spec   based comparision specs
 Spec.opers   = ["eq","le","lt","ge","gt","ne"] # low  level value  based comparison  ooers 'eq' default
 Spec.cards   = ["n","?","*","+","min to max"]  # cards  1 required, ? optional, * 0 to many, + 1 to many, m:m range
 

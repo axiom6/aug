@@ -31,17 +31,17 @@ class Type
     
   # The 9 fundamental type Assertions that leverage @type(arg) the improved typeof(arg)
   # In addition isInt isFloat isBoolean isArray isObject can optionally chech strings
-  isStr:(s)              ->   @isType(s,"string") and s.length > 0 and s isnt "None"
-  isInt:(i,sc=false)     -> ( @isType(i,"int")   and not isNaN(i) ) or ( sc and @isStrInt(i)   )
-  isFloat:(f,sc=false)   -> ( @isType(f,"float") and not isNaN(f) ) or ( sc and @isStrFloat(f) )
-  isBoolean:(b,sc=false) ->   @isType(b,"boolean") or ( sc and @isStrBoolean(b) )
-  isObject:(o,sc=false)  ->   @isType(o,"object")  or ( sc and @isStrObject(o) )
-  isRegex:(r)            ->   @isType(r,"regex")
-  isFunction:(f)         ->   @isType(f,"function")
-  isNull:(m)             ->   @isType(m,"null")
-  isUndef:(u)            ->   @isType(u,"undefined")
-  isBigInt:(b)           ->   typeof(b) is "bigint" # Will incorporate into type
-  isSymbol:(s)           ->   typeof(s) is "symbol" # Will incorporate into type
+  isStr:(s)      ->   @isType(s,"string") and s.length > 0 and s isnt "None"
+  isInt:(i)      -> ( @isType(i,"int")   and not isNaN(i) ) or ( @isType(i,"string") and @isStrInt(i)     )
+  isFloat:(f)    -> ( @isType(f,"float") and not isNaN(f) ) or ( @isType(i,"string") and @isStrFloat(f)   )
+  isBoolean:(b)  ->   @isType(b,"boolean")                  or ( @isType(i,"string") and @isStrBoolean(b) )
+  isObject:(o)   ->   @isType(o,"object")                   or ( @isType(i,"string") and @isStrObject(o)  )
+  isRegex:(r)    ->   @isType(r,"regex")
+  isFunction:(f) ->   @isType(f,"function")
+  isNull:(m)     ->   @isType(m,"null")
+  isUndef:(u)    ->   @isType(u,"undefined")
+  isBigInt:(b)   ->   typeof(b) is "bigint" # Will incorporate into type
+  isSymbol:(s)   ->   typeof(s) is "symbol" # Will incorporate into type
 
   # Set type for asserting uniformly typed arrays and sc=true for determining if a string is an array
   # isArrayOfType called within @isArray(...) because it assumes array exists
@@ -61,7 +61,7 @@ class Type
       isArrayOfType(a,type)
 
   # General purpose since if checks the array's existence and interate over all the elements
-  isArrayType:(a,t) ->
+  isArrayTyped:(a,t) ->
     return false if not @isArray(a)
     for e in a
       return false if @type(e) isnt t
