@@ -72,134 +72,76 @@ test( "isObject(123)",    type.isObject(123),    false )
 test( "isArray({a:'a'})", type.isArray({a:'a'}), true  )
 test().log( test().summary() )
 
-test().log( test().summary("Type") )
-
-###  
-  -- Type determination --
-  type:(arg,lowerCase=true)
-  klass:(arg)
-
-  -- is Assertions ---
-  isType:(v,t)
-  isString:(s)
-  isInt:(i,sc=false)
-  isFloat:(f,sc=false)
-  isBoolean:(b,sc=false)
-  isArray:( a, type=null, sc=false )
-  isObject:(o,sc=false)
-  isRegex:(r)
-  isFunction:(f)
-  isNull:(m)
-  isUndef:(u)
-  isBigInt:(b)
-  isSymbol:(s)
-
-  isDef:(d)
-  isNumber:(n)
-  isNot:(d)
-  isNaN:(n)
-  isArrayTyped:(a,t)
-  isArrayMixed:(a)
-  isChild: (key)
-  isEmpty:(e)
-  isStringFloat:( str )
-  isStringInt:( str )
-  isStringBoolean:( str )
-  isStringArray:( str )
-  isStringObject:( str )
-  isStringEnclosed:( beg, str, end )
-
-  -- to Conversions --
-  toType:( arg, type )
-  toString:( arg, enc="" )
-  toFloat:( arg )
-  toInt:( arg )
-
-  toArray:( arg, type, sep="," )
-  toObject:( arg )
-  toFixed:( arg, dec=2 )
-  toEnclose:( str, enc="" )
-  toKeys:(o)
-  toSlice:( v, beg, end=null, remove=false )
-  toCap:( str )
-  unCap:( str )
-
-  == in Containment --
-  inString:(e,s)
-  inArray:( e,a)
-  inObject:(k,o)
-
-  -- Info messaging --
-  isInfo:( pass, text, type, types )
-  toInfo:( method, arg, type, typeTo, retnStr, retn )
-  inInfo:( pass, result, expect, oper, spec, text ) ->
-
-  -- Utilities --
-  head:(v,action=false,pop=false)
-  tail:(v,action=false)
-
-  pad:( n, m )
-  noop:( ...args )
-  time:()
-  types
-  typeofs
+test().describe( "-is...", "Test all class Type is... assertions" )
 ###
+isType(v,t)
+isString(s)
+isInt(i,sc=false)
+isFloat(f,sc=false)
+isBoolean(b,sc=false)
+isArray( a, type=null, sc=false )
+isObject(o,sc=false)
+isRegex(r)
+isFunction(f)
+isNull(m)
+isUndef(u)
+isBigInt(b)
+isSymbol(s)
+isDef(d)
+isNumber(n)
+isNot(d)
+isNaN(n)
+isArrayTyped(a,t)
+isArrayMixed(a)
+isChild (key)
+isEmpty(e)
+isStringFloat( str )
+isStringInt( str )
+isStringBoolean( str )
+isStringArray( str )
+isStringObject( str )
+isStringEnclosed( beg, str, end )
+###
+test().log( test().summary() )
 
-###
-{
-  "stream": {
-    "subjectNames": [
-      "TestStatus",
-      "TestString",
-      "TestSummary"
-    ],
-    "info": {
-      "subscribe": false,
-      "publish": false,
-      "subjects": [
-        "TestStatus",
-        "TestString",
-        "TestSummary"
-      ]
-    },
-    "subjects": {
-      "TestStatus": {
-        "subscribers": {}
-      },
-      "TestString": {
-        "subscribers": {}
-      },
-      "TestSummary": {
-        "subscribers": {}
-      }
-    }
-  },
-  "testing": true,
-  "archive": true,
-  "verbose": false,
-  "debug": false,
-  "schemaKey": "schema",
-  "statusSubject": "TestStatus",
-  "stringSubject": "TestString",
-  "summarySubject": "TestSummary",
-  "description": null,
-  "suite": "unit tests",
-  "text": "five() = 5",
-  "code": "",
-  "statusText": "",
-  "statusClear": true,
-  "blockText": "",
-  "blockClear": true,
-  "module": "Tester",
-  "modules": {
-    "Tester": {
-      "name": "Tester",
-      "path": "/lib/pub/test/Tester-unit.js"
-    }
-  },
-  "passed": [],
-  "failed": [],
-  "logging": true
-}
-  
-###
+test().describe( "-to...", "Test all class Type to... assertions" )
+test( "toType( arg, type )", type.toType( "123", "int" ), 123 )
+test( "toStr( arg )", type.toStr( 123 ), "123" )
+test( "toFloat( arg )", type.toFloat( 1 ), 1.0 )
+test( "toInt( arg )", type.toInt( 1.0 ), 1 )
+test( "toArray( arg )", type.toArray( "[1,2,3]" ), [1,2,3] )
+test( "toObject( arg )", (t) ->
+  a = "1"
+  b = "2"
+  t.eq( type.toObject( '{a:"1",b:"2")', {a:"1",b:"2"} ) )
+  t.eq( type.toObject( '{a:a,b:b)',     {a:a,b:b}     ) ) )
+test( "toFixed( arg, dec=2 )", type.toFixed( 1.0 ), 1.00 )
+test( 'toEnclose( str, enc="" )', type.toEnclose('abc',""), "abc" )
+test( "toKeys(o)", type.toKeys({x:"1",y:"2"}), ["x","y"] )
+test( "toCap( str )", type.toCap("cap"), "Cap" )
+test( "unCap( str )", type.unCap("Cap"), "cap" )
+test( "toSlice( v, beg, end=null, remove=false )", type.toSlice( "123456", 3, 4 ), "34" )
+test().log( test().summary() )
+
+test().describe( "-in...", "Test all class Type in... containmentt" )
+test( "inString(e,s)", type.inString( b, "abc" ),         true )
+test( "inArray( e,a)", type.inArray(  2, [1,2,3] ),       true )
+test( "inObject(k,o)", type.inObject( b, {a:"1",b:"2"} ), true )
+test().log( test().summary() )
+
+test().describe( "-Utilities", "Test all class Type in... containmentt" )
+test( 'head(v,action=false,pop=false)', type.head("BEGabc", "BEG", true ), "BEG" )
+test( 'tail(v,action=false,pop=false)', type.tail("abcEND", "END", true ), "END" )
+test( 'pad(n,m)',                       type.pad( "1", 2 ),                "  1" )
+test( 'isIn( "string", "types"   )',    type.isIn( "string", "types"   ),   true )
+test( 'isIn( "string", "typeofs" )',    type.isIn( "string", "typeofs" ),   true )
+test().log( test().summary() )
+
+test().describe( "-Warnings", "methods @toWarn(...) @isWarn(...) @inWarn(...)" )
+test( "toWarn(method,text,arg,typeTo,retn, (t)=>t.log(@warn()) )",
+  type.toWarn("toStr()","bad arg", "undefined","string",'""', (t)=>t.log(@warn()) ), "" )
+test( "isWarn(fail,text,string,[array.object],(t)=>t.log(@warn()) )"
+  type.isWarn(fail,text,"string",["array","object"],(t)=>t.log(@warn()) ), true )
+test( "inWarn(pass,result,expect,oper,spec,text,(t)=>t.log(@warn()) )"
+  type.inWarn(fail,"4","1|2|3","eq","1|2|3","enums",(t)=>t.log(@warn()) ), true )
+test().log( test().summary() )

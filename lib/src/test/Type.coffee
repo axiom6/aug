@@ -235,7 +235,7 @@ class Type
       when "float" then arg isnt 0.0 # check 0.0 false may not be a convention
       else     @toWarn( "toBoolean(arg)", "unable to convert", arg, "boolean", false, (t) => t.log( t.warn() ) )
 
-  toArray:( arg, type, sep="," ) ->
+  toArray:( arg ) ->
     type = @type(arg)
     switch  type
       when "array" then arg
@@ -244,7 +244,7 @@ class Type
         if @head(arg) is "[" and @tail(arg) is "]" # Strip off brackets
           arg = @slice(arg,2,arg.length-1)
         array = []
-        strs  = @slice(arg,2,arg.length-1).split(sep)
+        strs  = @slice(arg,2,arg.length-1).split(",")
         for str in strs
           array.push( @toType( str, type ) )
         array

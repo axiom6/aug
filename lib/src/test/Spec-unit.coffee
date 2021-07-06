@@ -11,7 +11,6 @@ range  = ""
 enums  = ""
 card   = "?"
 args   = ""
-status = {}
 key    = null
 index  = null
 tkey   = ""
@@ -21,7 +20,6 @@ specStr = "string:[360.100,100]:1"
 
 enumStr   = "Embrace|Innovate|Encourage"
 enums     = ["Embrace","Innovate","Encourage"]
-status    = test().initStatus( result, expect, "Status from initStatus(...)" )
 specObj   = { type:"string", oper:"range", expect:"string:[360.100,100]:1", card:"1", spec:""  }
 rangeSpec = { type:"array",  oper:"range", expect:"string:[360.100,100]:1", card:"1", spec:""  }
 enumsSpec = { type:"string", oper:"enums", expect:"#{enums}:1",             card:"1", spec:""  }
@@ -48,4 +46,5 @@ test( "rangeType(range)",           spec.rangeType(range),               "range"
 test( "isRange(range)",             spec.isRange(range),                  true   )
 test( "isIn(type,tkey)",            spec.isIn("range","ranges"),          true   )
 test( "toSpecValue(spec,arg,type)", spec.toSpecValue(spec,arg,type),      true   )
-test().log( test().summary() )
+
+test().log( test().summary("Spec") )
