@@ -423,6 +423,28 @@
       "oAP" : "\/lib\/src\/test\/bdd.txt",
       "oF" : 0
     },
+    "\/lib\/src\/test\/Spec-unit.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/test\/Spec-unit.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/test\/Spec.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/test\/Spec.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/lib\/src\/test\/Tester-unit.coffee" : {
       "ft" : 32,
       "ma" : 1,

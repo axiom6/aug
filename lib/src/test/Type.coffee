@@ -268,22 +268,6 @@ class Type
         @toWarn( "toObject(arg)", "unable to convert", arg, "object", {}, (t) => t.log( t.warn() ) )
     obj
 
-  toJSOM:( key, arg ) ->
-    json = {}
-    type = @type(arg)
-    switch type
-      when "string"
-        '"' + arg + '"'
-      when "object"
-        for own key, val of arg
-          json[key] = @toJSON(key,val)
-      when "array"
-        for i in [0...arg.length]
-          json[i] = arg[i]
-      else
-        arg
-    obj
-
   toKeys:(o)      ->
     if @isObject(o) then Object.keys(o) else []
 
