@@ -215,6 +215,32 @@ class Tester extends Spec
       status = @assert( result[i], expect[i], status, ++level, null, i )
     status
 
+  # Determine if a result is enumerated.
+  # This method is here in Tester because it call @examine()
+  inEnums:(   result, spec, status, level=0, key=null, index=null ) ->
+    @noop( level )
+    enums = spec.expect
+    pass  = @inArray( result, enums )
+    @examine( pass, result, spec, status, "inEnums(...)", key, index )
+
+  # Determine if a result is bounded witnin a range.
+  # This method is here in Tester because it call @examine()
+  inRange:( result, spec, status, level, key, index ) ->
+    range = spec.expect
+    pass  = @isRange(range)
+    type = @type(result)
+    inStrRange    = ( string, range ) -> range[0]          <= string and string <= range[1]
+    inIntRange    = ( int,    range ) -> range[0]          <= int    and int    <= range[1]
+    inFloatRange  = ( float,  range ) -> range[0]-range[2] <= float  and float  <= range[1]+range[2]
+    pass = switch type
+      when "string" then inStrRange(    result, range )
+      when "int"    then inIntRange(    result, range )
+      when "float"  then inFloatRange(  result, range )
+      when "array"  then @inArrayRange( result, range )
+      when "object" then @objectsEq(    result, range, status, level )
+      else @toWarn( "inRange()", "unknown range type", result, type, false, (t) -> t.log( t.warn() ) )
+    @examine( pass, result, spec, status, "inRange(...)", key, index )
+
   # @runUnitTests(...) @describe(...) @summary(...)
 
   runUnitTests:( paths ) ->
