@@ -33,9 +33,9 @@ class Type
   # In addition isInt isFloat isBoolean isArray isObject can optionally chech strings
   isStr:(s)      ->   @isType(s,"string") and s.length > 0 and s isnt "None"
   isInt:(i)      -> ( @isType(i,"int")   and not isNaN(i) ) or ( @isType(i,"string") and @isStrInt(i)     )
-  isFloat:(f)    -> ( @isType(f,"float") and not isNaN(f) ) or ( @isType(i,"string") and @isStrFloat(f)   )
-  isBoolean:(b)  ->   @isType(b,"boolean")                  or ( @isType(i,"string") and @isStrBoolean(b) )
-  isObject:(o)   ->   @isType(o,"object")                   or ( @isType(i,"string") and @isStrObject(o)  )
+  isFloat:(f)    -> ( @isType(f,"float") and not isNaN(f) ) or ( @isType(f,"string") and @isStrFloat(f)   )
+  isBoolean:(b)  ->   @isType(b,"boolean")                  or ( @isType(b,"string") and @isStrBoolean(b) )
+  isObject:(o)   ->   @isType(o,"object")                   or ( @isType(o,"string") and @isStrObject(o)  )
   isRegex:(r)    ->   @isType(r,"regex")
   isFunction:(f) ->   @isType(f,"function")
   isNull:(m)     ->   @isType(m,"null")
@@ -263,7 +263,7 @@ class Type
       when "string"
         obj = arg.split(",")
                  .map( (keyVal) => keyVal.split(":").map( (arg) => arg.trim() ) )
-                 .reduce( (acc,cur) => acc[cur[0]] = cur[1]; acc {} )  # acc accumulator cur current
+                 .reduce( (acc,cur) => acc[cur[0]] = cur[1]; acc )  # {}  acc accumulator cur current
       else
         @toWarn( "toObject(arg)", "unable to convert", arg, "object", {}, (t) => t.log( t.warn() ) )
     obj
@@ -347,13 +347,13 @@ class Type
   #  a string slice( ["abc"],       2    ) returns   "b"
   # where with Array.slice() it is open
   slice:( v, beg, end=null, remove=false ) ->
-    end if @isDef(end) then end else beg
+    end = if @isDef(end) then end else beg
     pop = null
     switch @type(v)
       when "array"
         pop = if remove then v.splice(beg-1,end+1) else v.slice(beg-1,end+1)
       when "string"
-        pop = v.splice(beg-1,end+1)
+        pop = v.slice(beg-1,end+1)
         v   = v.substring(0,beg-1) + v.substring(end+1) if remove
     pop
 

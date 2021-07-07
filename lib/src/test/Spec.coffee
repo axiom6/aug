@@ -45,18 +45,21 @@ class Spec extends Type
     console.log( "isSpec(expect)", { expect:expect, type:type, isParse:isParse, isObj:isObj }) if @debug
     isParse or isObj
 
+  toInit:() ->
+    { type:"any", oper:"any", expect:"any", card:"1", spec:""  }
+
   # In the first t
   toSpec:( expect ) ->
-    type = @type(expect)
-    spec = { type:"any", oper:"any", expect:"any", card:"1", spec:""  }
     spec = switch
-      when @isSpecParse(  expect, type ) then @toSpecParse(  spec, type )
-      when @isSpecObject( expect, type ) then @toSpecObject( spec, type )
-      else @toWarn( "toSpec(expect)", "expect not spec 'string' or 'object'"
-      , expect, type, "spec", spec, (t) -> t.log( t.warn() ) )
+      when @isSpecParse(  expect ) then @toSpecParse(  expect )
+      when @isSpecObject( expect ) then @toSpecObject( expect )
+      else @toWarn( "toSpec(expect)", "expect not spec 'string' or 'object'",
+       expect, type, "spec", {}, (t) -> t.log( t.warn() ) )
+    spec
 
-  isSpecParse:  ( arg, type ) ->
-    type is "regex" or ( type is "string" and arg.includes(":") )
+  isSpecParse:(   arg ) ->
+    type = @type( arg )
+    @isDef(arg) and type isnt("object") and ( type is "regex" or ( type is "string" and arg.includes(":") ) )
 
   # toSpecParse:( spec, arg )
   # Examples
@@ -71,7 +74,8 @@ class Spec extends Type
   #     { type:"object", oper:"range", range:{r:[0,255],g:[0,255],b:[0,255]}, card="1" }
   #  "array:[[0,360],[0,100],[0,100]]:?"
   #     { type:"array",  oper:"range", range:[[0,360],[0,100],[0,100]], card="?" }
-  toSpecParse:( spec, arg ) ->
+  toSpecParse:( arg ) ->
+    spec        = @toInit()
     splits = arg.split(":")
     length = splits.length
     if length >= 1                               # type
@@ -97,10 +101,11 @@ class Spec extends Type
       spec.oper = splits[2]
     spec
 
-  isSpecObject: ( arg, type ) ->
-    type is "object" and arg.oper? and arg.expect? # and arg.type? and arg.card?
+  isSpecObject: ( arg ) ->
+    @type(arg) is "object" and arg.oper? and arg.expect? # and arg.type? and arg.card?
 
-  toSpecObject:( spec, arg ) ->
+  toSpecObject:( arg ) ->
+    spec        = @toInit()
     spec.type   = if arg.type?   then arg.type  else "any"
     spec.oper   = if arg.oper?   then arg.oper  else "any"
     spec.expect = if arg.expect? then arg.expect else "any"

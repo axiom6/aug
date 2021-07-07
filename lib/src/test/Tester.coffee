@@ -124,9 +124,9 @@ class Tester extends Spec
     status = switch type
       when  "string", "int", "float", "boolean"
                          @valuesEq(   result, expect, status, "eq"  )  # op is not passed aroung
-      when "object" then @objectsEq(  result, expect, status, level )
-      when "array"  then @arraysEq(   result, expect, status, level )
-      else               @unknownsEq( result, expect, status )         # just a fallback
+      when "object" then @objectsEq(  result, expect, status, level, key   )
+      when "array"  then @arraysEq(   result, expect, status, level, index )
+      else               @unknownsEq( result, expect, status, level ) # just a fallback
     @examine( status.assert.pass, result, expect, status, "", key, index )
 
     # Store status in @statuses array and publish
@@ -136,6 +136,7 @@ class Tester extends Spec
     status
 
   # Check and report on values and types
+  # Needs refactoring
   checkValuesTypes:( result, expect, status, key, index ) ->
     rType  = @type(result)
     eType  = @type(expect)
@@ -182,7 +183,14 @@ class Tester extends Spec
     status
 
   # Deep object equality assertion where all matching keys are examined
-  objectsEq:( result, expect, status, level ) ->
+  objectsEq:( result, expect, status, level, key ) ->
+
+    # Insure that result and expect are objects
+    if not @isObject(result) or not @isObject(expect)
+      info   = " either one or both result and expect are not objects"
+      info  += " Result type is #{@type(result)}"
+      info  += " Expect type is #{@type(expect)}"
+      return @examine( false, result, expect, status, info, key, null )
 
     # Check that the result object has all the keys that the expect object has
     #   ? or ( op is "spec" and arg.card is "1" ) )
@@ -201,14 +209,21 @@ class Tester extends Spec
     status
 
   # Deep array equality assertion
-  arraysEq:( result, expect, status, level ) ->
+  arraysEq:( result, expect, status, level, index ) ->
+
+    # Insure that result and expect are arrays
+    if not @isArray(result) or not @isArray(expect)
+      info   = " either one or both result and expect are not arrays"
+      info  += " Result type is #{@type(result)}"
+      info  += " Expect type is #{@type(expect)}"
+      return @examine( false, result, expect, status, info, null, index )
 
     # Examine the array lengths
     if result.length isnt expect.length
       info   = " different array lengths"
       info  += " Result length is #{result.length}"
       info  += " Expect length is #{expect.length}"
-      status = @examine( false, result, expect, status, info, null, null )
+      status = @examine( false, result, expect, status, info, null, index )
 
     # Assert each value within the minimum length of the result and expect arrays
     length = Math.min( result.length, expect.length )
