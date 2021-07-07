@@ -35,30 +35,14 @@ class Type
   isInt:(i)      -> ( @isType(i,"int")   and not isNaN(i) ) or ( @isType(i,"string") and @isStrInt(i)     )
   isFloat:(f)    -> ( @isType(f,"float") and not isNaN(f) ) or ( @isType(f,"string") and @isStrFloat(f)   )
   isBoolean:(b)  ->   @isType(b,"boolean")                  or ( @isType(b,"string") and @isStrBoolean(b) )
+  isArray:(a)    -> ( @isType(a,"array") and a.length > 0 ) or ( @isType(a,"string") and @isStrArray(a)   )
   isObject:(o)   ->   @isType(o,"object")                   or ( @isType(o,"string") and @isStrObject(o)  )
-  isRegex:(r)    ->   @isType(r,"regex")
+  isRegexp:(r)   ->   @isType(r,"regexp")
   isFunction:(f) ->   @isType(f,"function")
   isNull:(m)     ->   @isType(m,"null")
   isUndef:(u)    ->   @isType(u,"undefined")
   isBigInt:(b)   ->   typeof(b) is "bigint" # Will incorporate into type
   isSymbol:(s)   ->   typeof(s) is "symbol" # Will incorporate into type
-
-  # Set type for asserting uniformly typed arrays and sc=true for determining if a string is an array
-  # isArrayOfType called within @isArray(...) because it assumes array exists
-  #   and returns true for 'null' that signifies that the type assertions
-  #   on the elements should be skipped
-  isArray:( a, type=null, sc=false ) ->
-    return @isStrArray(a) if sc
-    # Internal function that assert that an viable is uniformly types
-    isArrayOfType = (a,t) =>
-      return true if t is 'null'
-      for e in a
-        return false if @type(e) isnt t
-      true
-
-    if @isType(a,"array") and a.length? and a.length > 0
-      type = @type( a[0] )
-      isArrayOfType(a,type)
 
   # General purpose since if checks the array's existence and interate over all the elements
   isArrayTyped:(a,t) ->
@@ -72,7 +56,7 @@ class Type
     return false if not @isArray(a)
     type = @type(a[0])
     for e in a
-      return false if @type(e) isnt type
+      return true if @type(e) isnt type
     false
 
   # Aggregate and special value assertions
@@ -106,14 +90,14 @@ class Type
 
   isStrFloat:( str ) ->
     if @isStr( str )
-       regex = /^-?\d+(?:[.,]\d*?)?$/
-       regex.test(str)
+       regexp = /^-?\d+(?:[.,]\d*?)?$/
+       regexp.test(str)
     else false
 
   isStrInt:( str ) ->
     if @isStr( str )
-       regex = /^-?\d+$/
-       regex.test(str)
+       regexp = /^-?\d+$/
+       regexp.test(str)
     else false
 
   isStrBoolean:( str ) ->
@@ -145,6 +129,14 @@ class Type
         console.error( "Type.toType(type,arg) unknown type", { type:type, arg:arg } )
         null
 
+  isEnclose:( str, enc="" ) ->
+    isEnc = switch
+      when enc.length is 2 then str.charAt(0) is enc.charAt(0) and str.charAt(str.length-1) is enc.charAt(0)
+      when enc.length is 1 then str.charAt(0) is enc.charAt(0) and str.charAt(str.length-1) is enc.charAt(1)
+      else false
+    console.log( "Type.isEnclose()", { str:str, isEnc:isEnc } ) if @debug
+    isEnc
+
   # toEnclose a "string'
   # toEnclose("abc",   '"'  )       # returns "abc" - good for JSON keys and values
   # toEnclose("123",   "'"  )       # returns '123'
@@ -163,11 +155,11 @@ class Type
   # This combination of travesal and recursion is cleaner than JSON.stringify()
   # So far all vaild 13 Type.types a super set of Type.typeofs has been accounted for
   # Type.typeofs = ["string","number","boolean","object","function","bigint","symbol","null","undefined"]
-  # Type.types   = Type.typeofs.concat(["int","float","array","regex","date"])
-  toStr:( arg ) ->       # , enc=""
+  # Type.types   = Type.typeofs.concat(["int","float","array","regexp","date"])
+  toStr:( arg,enc=false ) ->
     type = @type(arg)
     str = switch type
-      when "string"     then arg
+      when "string"     then if enc then @toEnclose(arg,'"')  else arg
       when "int"        then parseInt(arg)
       when "float"      then parseFloat(arg)
       when "boolean"    then if arg then "true" else "false"
@@ -176,7 +168,7 @@ class Type
       when "null"       then "null"
       when "undefined"  then "undefined"
       when "function"   then "function"
-      when "regex","date","bigint","symbol" then arg.toString()  # hail marys
+      when "regexp","date","bigint","symbol" then arg.toString()  # hail marys
       else @toWarn( "toStr(arg)", "unable to convert", arg, "string", "", (t) => t.log( t.warn() ) )
     # console.log( "toStr(arg)", { arg:arg, str:str, type:type } )
     str
@@ -197,8 +189,9 @@ class Type
 
   toStrArray:( array ) ->
     str = "["
-    for i in [0...array.length-1]
-      str += @toStr(array[i]) + if i < array.length-2 then "," else ""
+    for i in [0...array.length]
+      str += @toStr(array[i])
+      str += if i < array.length-1 then "," else ""
     str += "]"
     str
 
@@ -295,48 +288,24 @@ class Type
   unCap:( str ) ->
     str.charAt(0).toLowerCase() + str.substring(1)
 
-  head:(v,action=false,pop=false) ->
-    arg = null
-    switch @type(v)
-      when "array"
-        switch @type(action)
-          when "boolean"
-            arg = v[0]
-            v   = v.shift() if action
-      when "string"
-        switch @type(action)
-          when "boolean"
-            arg = v.charAt(0)
-            v   = v.substring(1) if action
-          when "string" and v.startsWith(action)
-            arg = action
-            v   = v.substring(action.length) if pop
-    pop
+  head:(arg) ->
+    switch @type(arg)
+      when "array"  then arg[0]
+      when "string" then arg.charAt(0)
+      else @toWarn( "head(arg)", "unable to get the first element of", arg, @type(arg), null, (t) => t.log( t.warn() ) )
 
-  #
+  tail:(arg) ->
+    switch @type(arg)
+      when "array"  then arg[arg.length-1]
+      when "string" then arg.charAt(arg.length-1)
+      else @toWarn( "tail(arg)", "unable to get the last element of", arg, @type(arg), null, (t) => t.log( t.warn() ) )
+
   strip:( str, beg, end ) ->
     if @isStr(beg) and str.startsWith(beg)
        str = str.substring(beg.length)
     if @isStr(end) and str.endsWith(end)
       str = str.substring(0,str.length-end.length)
     str
-
-  # Not working completely
-  tail:(v,action=false) ->
-    pop = null
-    switch @type(v)
-      when "array"
-        pop = v[v.length-1]
-        v   = v.pop() if @isType(action,"boolean") and action
-      when "string"
-        switch @type(action)
-          when "boolean"
-            pop = v.charAt(v.length-1)
-            v   = v.substring( 0, v.length-1 ) if action
-          when "string" and v.endsWith(action)
-            pop = action
-            v   = v.substring(0,v.length-action.length)
-    pop
 
   # Unlike the built in Array v.slice(beg,end) where beg is a zero-based index and end
 
@@ -351,10 +320,10 @@ class Type
     pop = null
     switch @type(v)
       when "array"
-        pop = if remove then v.splice(beg-1,end+1) else v.slice(beg-1,end+1)
+        pop = if remove then v.splice(beg-1,end) else v.slice(beg-1,end)
       when "string"
-        pop = v.slice(beg-1,end+1)
-        v   = v.substring(0,beg-1) + v.substring(end+1) if remove
+        pop = v.slice(beg-1,end)
+        v   = v.substring(0,beg-1) + v.substring(end) if remove
     pop
 
   pad:( n, m ) ->
@@ -404,10 +373,11 @@ class Type
   warn:() =>
     @lasted
 
-  # console.log( "Type.isIn(type,key)", { type:type, key:key, isIn:Type[key].includes(type), types:Type[key] } )
   isIn:( type, key ) ->
-    if Type[key]?
-       Type[key].includes(type)
+    if @isArray(key)
+       @inArray(type,key)
+    else if Type[key]?
+            Type[key].includes(type)
     else
       @isWarn( false, "key #{key} missing for", type, [] )
       false
@@ -426,7 +396,7 @@ Type.manys   = ["object","array"]
 Type.results = ["string","int","float","boolean","object","array"]
 Type.expects = Type.results.concat(["schema","range","enums","amy"])
 Type.typeofs = ["string","number","boolean","object","function","bigint","symbol","null","undefined"]
-Type.types   = Type.typeofs.concat(["int","float","array","regex","date"])
+Type.types   = Type.typeofs.concat(["int","float","array","regexp","date"])
 Type.types   = Type.remove("number", Type.types ) # number is now either 'int' or 'float'
 
 export type = new Type() # Export a singleton instence of type

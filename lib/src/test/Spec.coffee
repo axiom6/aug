@@ -9,11 +9,14 @@ class Spec extends Type
   isEnums:( arg, oper, type ) ->
     oper is "enums" and @isArray(arg,type) and @isResultType(type)
 
+  isEnumsArg:( arg ) ->
+    @isStr(arg) and arg.includes("|")   
+
   # let re = /ab+c/i; // literal notation
   # let re = new RegExp('ab+c', 'i') // constructor with string pattern as first argument
   # let re = new RegExp(/ab+c/, 'i') // constructor with regular express
-  isRegex:( arg, oper  ) ->
-    oper is "regex" and @isType(arg,"string")
+  isRegexp:( arg, oper  ) ->
+    oper is "regexp" and @isType(arg,"string")
 
   # Check if an arg like expect is a 'spec'
   verifySpec:( arg ) ->
@@ -59,7 +62,7 @@ class Spec extends Type
 
   isSpecParse:(   arg ) ->
     type = @type( arg )
-    @isDef(arg) and type isnt("object") and ( type is "regex" or ( type is "string" and arg.includes(":") ) )
+    @isDef(arg) and type isnt("object") and ( type is "regexp" or ( type is "string" and arg.includes(":") ) )
 
   # toSpecParse:( spec, arg )
   # Examples
@@ -82,8 +85,8 @@ class Spec extends Type
       spec.type = splits[0]
     if length >= 1                               # expect
       spec.spec = splits[1]
-      if @isType( splits[1], "regex" )              # regex
-        spec.oper   = "regex"
+      if @isType( splits[1], "regexp" )              # regex
+        spec.oper   = "regexp"
         spec.expect = splits[1]
       else if splits[1].includes("|")               #   enum
         spec.oper   = "enums"
@@ -198,7 +201,22 @@ class Spec extends Type
     else if Spec[key]? then Spec[key].includes(type)
     else @isWarn( false, "key #{key} missing for", type, [], (t) -> t.log( t.warn() ) )
 
-Spec.specs   = ["range","enums","regex"]               # high level spec   based comparision specs
+  isIn:( type, arg ) ->
+    if @isArray(arg)
+       @inArray( type, arg )
+    else if @isEnumsArg(arg)
+      @inArray( type, @toEnums(arg) )
+    else if @isStr(arg)
+      if Type[arg]?
+         Type[arg].includes(type)
+      else if Spec[arg]?
+              Spec[arg].includes(type)
+      else
+        @isWarn( false, "arg #{arg} missing for", type, false )
+    else
+      @isWarn(   false, "arg #{arg} not 'array', 'enums' or 'string'", type, false )
+
+Spec.specs   = ["range","enums","regexp"]               # high level spec   based comparision specs
 Spec.opers   = ["eq","le","lt","ge","gt","ne"] # low  level value  based comparison  ooers 'eq' default
 Spec.cards   = ["n","?","*","+","min to max"]  # cards  1 required, ? optional, * 0 to many, + 1 to many, m:m range
 

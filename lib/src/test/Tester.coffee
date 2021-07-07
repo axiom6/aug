@@ -113,9 +113,9 @@ class Tester extends Spec
     if @isSpec( expect )
       spec = @toSpec(  expect )
       status = switch spec.oper
-        when 'regex' then @inRegex(  result, spec, status, level, key, index )
-        when 'enums' then @inEnums(  result, spec, status, level, key, index )
-        when "range" then @inRange(  result, spec, status, level, key, index )
+        when 'regexp' then @inRegexp( result, spec, status, level, key, index )
+        when 'enums'  then @inEnums(  result, spec, status, level, key, index )
+        when "range"  then @inRange(  result, spec, status, level, key, index )
         else @examine( false, result, spec, status, "unknown spec.oper #{spec.oper}", key, index )
       return status.assert.pass
 
@@ -233,11 +233,11 @@ class Tester extends Spec
 
   # Determine if a result is enumerated.
   # This method is here in Tester because it call @examine()
-  inRegex:(   result, spec, status, level=0, key=null, index=null ) ->
+  inRegexp:(   result, spec, status, level=0, key=null, index=null ) ->
     @noop( level )
-    regex = spec.expect
-    pass  = regex.test(result)
-    @examine( pass, result, spec, status, "inRegex(...)", key, index )
+    regexp = spec.expect
+    pass  = regexp.test(result)
+    @examine( pass, result, spec, status, "inRegexp(...)", key, index )
 
   # Determine if a result is enumerated.
   # This method is here in Tester because it call @examine()
@@ -289,10 +289,12 @@ class Tester extends Spec
     @methodOn = methodOn
     @
 
+  # Improved buy still needs work
   statusAssertText:( pass, result ) ->
     text = if pass then "\n-- Passed -- " else "\n-- Failed -- "
-    if @isStr(@methodId) and @methodId.charAt(0) isnt "-" and @tail(@methodId) is ")"
+    if @isStr(@methodId) and @head(@methodId) isnt "-" and @tail(@methodId) is ")"
       text += @strip(@methodId,"","()") + "(" + @toStr(result) + ") "
+      text += @text + " " if not pass
     else
       text += @text + " "
     text
@@ -325,9 +327,9 @@ class Tester extends Spec
   isGroup:( status, group, pass=null ) ->
     passed = ( status, pass ) => if pass? then status.assert.pass is pass else true
     switch group
-      when "all"    then true
-      when "method" then status.assert.method is @methodId and passed( status, pass )
-      else               status.assert.module is @moduleId and passed( status, pass )
+      when "all"    then passed( status, pass )
+      when "method" then passed( status, pass ) and status.assert.method is @methodId
+      else               passed( status, pass ) and status.assert.module is @moduleId
 
   # Needs to become more of a method / test() block status summary
   summary:( module=null ) ->
