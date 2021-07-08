@@ -156,10 +156,10 @@ class Type
   # So far all vaild 13 Type.types a super set of Type.typeofs has been accounted for
   # Type.typeofs = ["string","number","boolean","object","function","bigint","symbol","null","undefined"]
   # Type.types   = Type.typeofs.concat(["int","float","array","regexp","date"])
-  toStr:( arg,enc=false ) ->
+  toStr:(arg) ->
     type = @type(arg)
     str = switch type
-      when "string"     then if enc then @toEnclose(arg,'"')  else arg
+      when "string"     then arg # if enc then @toEnclose(arg,'"')  else arg
       when "int"        then parseInt(arg)
       when "float"      then parseFloat(arg)
       when "boolean"    then if arg then "true" else "false"
@@ -373,14 +373,20 @@ class Type
   warn:() =>
     @lasted
 
-  isIn:( type, key ) ->
-    if @isArray(key)
-       @inArray(type,key)
-    else if Type[key]?
-            Type[key].includes(type)
-    else
-      @isWarn( false, "key #{key} missing for", type, [] )
-      false
+  # Can be overriden by Spec.isIn() with it additional Spec type arrays
+  isIn:( type, arg ) ->
+    switch
+      when @isArray(arg)    then @inArray( type, arg )
+      when @isEnumsArg(arg) then @inArray( type, @toEnums(arg) )
+      when @isStr(arg)      then @toIn(arg).includes(type)
+      else @isWarn( false, "arg #{arg} not 'array', 'enums' or 'string'", type, false )
+
+  # Can be overriden by Spec.toIn() with it additional Spec type arrays
+  toIn:( arg ) ->
+    switch
+      when  not  arg? then []
+      when Type[arg]? then Type[arg]
+      else []
 
 Type.remove = ( e, a ) ->
   index = a.indexOf(e)

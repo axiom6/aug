@@ -24,14 +24,15 @@ class Tester extends Spec
     @log   = console.log
     @error = console.error
 
-    # Set by @module( moduleId, moduleTx, moduleOn=true )
-    @moduleId = ""
+    # Set by @module( moduleTx. moduleId, moduleOn=true )
     @moduleTx = ""
+    @moduleId = ""
     @moduleOn = true
 
     # Set by @describe( methodId, methodTx, methodOn=true )
-    @methodId = ""
     @methodTx = ""
+    @methodId = ""
+    @methodOp = "eq"
     @methodOn = true
 
     # Accumulated status objects
@@ -68,7 +69,7 @@ class Tester extends Spec
   #
   #   test( "Vis.rgb() converts hex color to rgb object",  Vis.rgb(0xFFFFFF), {r:255,g:255,b:255} )
   test:( text, args... ) =>
-    if      arguments.length is 0 or not ( @always or ( @testing and @moduleOn and @methodOn ) )
+    if      arguments.length is 0 or @testingOff()
       return @
     else if arguments.length is 2 and @isFunction(args[0])
       closure = args[0]
@@ -81,6 +82,9 @@ class Tester extends Spec
       @run( text, result, expect ) # returns tester instance for chaining
     @  # returns tester instance for chaining
 
+  testingOff:( methodOn=@methodOn ) ->
+    not ( @always or ( @testing and @moduleOn and methodOn ) )
+
   eq:( result, expect ) =>
     @run( @text, result, expect )
 
@@ -89,16 +93,22 @@ class Tester extends Spec
   run:( text, result, expect ) ->
     return @ if not @testing
     @statusAs = @initStatus( result, expect, text      )
-    @statusAs = @assert(     result, expect, @statusAs )
+    @statusAs = switch @methodOp
+      when "to" then  @convert( result, expect, @statusAs )
+      else            @assert(  result, expect, @statusAs )
     @    # returns tester instance for chaining
 
   # Create a new status object for the current test
+  #   each test status is imprinted with the current module and method settings
   initStatus:( result, expect, text ) ->
     {
-      assert:{ text:text, pass:true, module:@moduleId, method:@methodId, keys:"" }
+      assert:{ text:text, pass:true, keys:"",
+      moduleTx:@moduleTx, moduleId:@moduleId, moduleOn:@moduleOn,
+      methodTx:@methodTx, methodId:@methodId, methodOn:@methodOn, methodOp:@methodOp }
       warned:{ text:"", }
       result:{ text:"",   type:@type(result), value:result }
       expect:{ text:"",   type:@type(expect), value:expect }
+      errors:""
     }
 
   # Performs all assertions even a deep equal on objects and arrays
@@ -107,7 +117,9 @@ class Tester extends Spec
   assert:( result, expect, status, level=0, key=null, index=null ) ->
 
     # Check values and types
-    status = @checkValuesTypes( result, expect, status, key, index )
+    status = @checkValuesTypes( result, expect, status )
+    if not status.assert.pass
+     return @examine( false, result, expect, status, key, index )
 
     # Perform all spec based assertions
     if @isSpec( expect )
@@ -116,8 +128,10 @@ class Tester extends Spec
         when 'regexp' then @inRegexp( result, spec, status, level, key, index )
         when 'enums'  then @inEnums(  result, spec, status, level, key, index )
         when "range"  then @inRange(  result, spec, status, level, key, index )
-        else @examine( false, result, spec, status, "unknown spec.oper #{spec.oper}", key, index )
-      return status.assert.pass
+        else
+          status.errors += "unknown spec.oper #{spec.oper}"
+          @examine( false, result, spec, status, key, index )
+      return status
 
     # Perform all comparisions
     type = @type( result )
@@ -127,7 +141,7 @@ class Tester extends Spec
       when "object" then @objectsEq(  result, expect, status, level, key   )
       when "array"  then @arraysEq(   result, expect, status, level, index )
       else               @unknownsEq( result, expect, status, level ) # just a fallback
-    @examine( status.assert.pass, result, expect, status, "", key, index )
+    @examine( status.assert.pass, result, expect, status, key, index )
 
     # Store status in @statuses array and publish
     if level is 0
@@ -135,32 +149,28 @@ class Tester extends Spec
       @stream.publish( @statusSubject, status )  if @isDef(@stream)
     status
 
+  convert:( result, expect, status ) ->
+    status = @checkValuesTypes(   result, expect, status )
+    @examine( status.assert.pass, result, expect, status )
+
   # Check and report on values and types
-  # Needs refactoring
-  checkValuesTypes:( result, expect, status, key, index ) ->
-    rType  = @type(result)
-    eType  = @type(expect)
-    info  = switch
-      when @isNot(result)
-        " Result of #{rType} is not defined\nExpect is type '#{eType}'"
-      when @isNot(expect)
-        " Expect of #{eType} is not defined\nResult is type '#{rType}'"
-      when rType isnt eType and not @isIn( eType, "specs" )
-        " Types do not match\nResult type is '#{rType}'\nExpect type is '#{eType}'"
-      when rType is "function"
-        " Result type is 'function'\nExpect type is '#{eType}'"
-      when eType is "function"
-        " Expect type is 'function'\nResult type is '#{rType}'"
-      when not @isIn( rType, "results" )
-        " Result is type '#{rType}' an unknown type is type '#{eType}'"
-      when not @isIn( eType, "expects" )
-        " Result is type '#{rType}'\nExpect is type '#{eType}' an unknown type"
-      else
-        ""
-    if @isStr(info)
-      @examine( false, result, expect, status, info, key, index )
-    else
-      status
+  #   refactored on Wed July 7, 2021
+  checkValuesTypes:( result, expect, status ) ->
+    op  = @methodOp
+    r   = @type(result)
+    e   = @type(expect)
+    rIs = () -> "\nResult is type '#{r}'"
+    eIs = () -> "\nExpect is type '#{e}'"
+    status.errors += switch
+      when @isNot(result)            then " Result of #{r} is not defined#{eIs()}"
+      when @isNot(expect)            then " Expect of #{e} is not defined#{rIs()}"
+      when not @isIn(r,"expects")    then "Expect of type '#{e}' not in #{@toIn('expects')}#{rIs()}"
+      when not @isIn(r,"results")    then "Result of type '#{r}' not in #{@toIn('results')}#{eIs()}"
+      when r is "function"           then " Result type is 'function#{rIs()}"
+      when e is "function"           then " Expect type is 'function#{eIs()}"
+      when r isnt e and op isnt "to" then " Types do not match#{rIs()}#{eIs()}"
+      else ""
+    status
 
   valuesEq:( result, expect, status, oper ) ->
     return true if expect is "any"
@@ -179,7 +189,7 @@ class Tester extends Spec
   unknownsEq:( result, expect, status ) ->
     @noop(     result, expect )
     status.assert.pass  = false
-    status.assert.warn += "unknown types for comparision"
+    status.assert.errors += "unknown types for comparision"
     status
 
   # Deep object equality assertion where all matching keys are examined
@@ -187,10 +197,10 @@ class Tester extends Spec
 
     # Insure that result and expect are objects
     if not @isObject(result) or not @isObject(expect)
-      info   = " either one or both result and expect are not objects"
-      info  += " Result type is #{@type(result)}"
-      info  += " Expect type is #{@type(expect)}"
-      return @examine( false, result, expect, status, info, key, null )
+      status.errors += " either one or both result and expect are not objects"
+      status.errors += " Result type is #{@type(result)}"
+      status.errors += " Expect type is #{@type(expect)}"
+      return @examine( false, result, expect, status, key, null )
 
     # Check that the result object has all the keys that the expect object has
     #   ? or ( op is "spec" and arg.card is "1" ) )
@@ -213,17 +223,17 @@ class Tester extends Spec
 
     # Insure that result and expect are arrays
     if not @isArray(result) or not @isArray(expect)
-      info   = " either one or both result and expect are not arrays"
-      info  += " Result type is #{@type(result)}"
-      info  += " Expect type is #{@type(expect)}"
-      return @examine( false, result, expect, status, info, null, index )
+      status.errors += " either one or both result and expect are not arrays"
+      status.errors += " Result type is #{@type(result)}"
+      status.errors += " Expect type is #{@type(expect)}"
+      return @examine( false, result, expect, status, null, index )
 
     # Examine the array lengths
     if result.length isnt expect.length
-      info   = " different array lengths"
-      info  += " Result length is #{result.length}"
-      info  += " Expect length is #{expect.length}"
-      status = @examine( false, result, expect, status, info, null, index )
+      status.errors += " different array lengths"
+      status.errors += " Result length is #{result.length}"
+      status.errors += " Expect length is #{expect.length}"
+      status = @examine( false, result, expect, status, null, index )
 
     # Assert each value within the minimum length of the result and expect arrays
     length = Math.min( result.length, expect.length )
@@ -233,19 +243,21 @@ class Tester extends Spec
 
   # Determine if a result is enumerated.
   # This method is here in Tester because it call @examine()
-  inRegexp:(   result, spec, status, level=0, key=null, index=null ) ->
+  inRegexp:( result, spec, status, level=0, key=null, index=null ) ->
     @noop( level )
     regexp = spec.expect
     pass  = regexp.test(result)
-    @examine( pass, result, spec, status, "inRegexp(...)", key, index )
+    status.assert.text +=  "inRegexp(...)"
+    @examine( pass, result, spec, status, key, index )
 
   # Determine if a result is enumerated.
   # This method is here in Tester because it call @examine()
-  inEnums:(   result, spec, status, level=0, key=null, index=null ) ->
+  inEnums:( result, spec, status, level=0, key=null, index=null ) ->
     @noop( level )
     enums = spec.expect
     pass  = @inArray( result, enums )
-    @examine( pass, result, spec, status, "inEnums(...)", key, index )
+    status.assert.text +=  "inEnums(...)"
+    @examine( pass, result, spec, status, key, index )
 
   # Determine if a result is bounded witnin a range.
   # This method is here in Tester because it call @examine()
@@ -253,9 +265,9 @@ class Tester extends Spec
     range = spec.expect
     pass  = @isRange(range)
     type = @type(result)
-    inStrRange    = ( string, range ) -> range[0]          <= string and string <= range[1]
-    inIntRange    = ( int,    range ) -> range[0]          <= int    and int    <= range[1]
-    inFloatRange  = ( float,  range ) -> range[0]-range[2] <= float  and float  <= range[1]+range[2]
+    inStrRange   = ( string, range ) -> range[0]          <= string and string <= range[1]
+    inIntRange   = ( int,    range ) -> range[0]          <= int    and int    <= range[1]
+    inFloatRange = ( float,  range ) -> range[0]-range[2] <= float  and float  <= range[1]+range[2]
     pass = switch type
       when "string" then inStrRange(    result, range )
       when "int"    then inIntRange(    result, range )
@@ -263,7 +275,8 @@ class Tester extends Spec
       when "array"  then @inArrayRange( result, range )
       when "object" then @objectsEq(    result, range, status, level )
       else @toWarn( "inRange()", "unknown range type", result, type, false, (t) -> t.log( t.warn() ) )
-    @examine( pass, result, spec, status, "inRange(...)", key, index )
+    status.assert.text += "inRange(...)"
+    @examine( pass, result, spec, status, key, index )
 
   # @runUnitTests(...) @describe(...) @summary(...)
 
@@ -274,27 +287,50 @@ class Tester extends Spec
       console.log( text )                      if @logging
       @stream.publish( @summarySubject, text ) if @isDef(@stream)
       await `import( path /* @vite-ignore */ )`
-    @complete()  # All tests complete so produce then log and publish the final summary
+      @complete()     # This where we know that the unit test module has finished so generate a module summary
+    @complete("all")  # All tests complete so produce then log and publish the final summary
     return
 
-  module:( moduleId, moduleTx, moduleOn=true ) =>
-    @moduleId = moduleId
+  # Add a unit test file path to the @modulePaths object
+  toPath:( path ) ->
+    dirs      = path.split("/")
+    @moduleId = @tail(dirs).split("-")[0]
+    @modulePaths[@moduleId] = { name:@moduleId, path:path }
+    console.log( "Tester.path(path)", { path:path, dirs:dirs, module:module } ) if  @debug
+    @modulePaths[@moduleId]
+
+  module:( moduleTx, moduleId="" ) =>
     @moduleTx = moduleTx
-    @moduleOn = moduleOn
+    @moduleId = if @isStr(moduleId)  then  moduleId
+    else        if @isStr(@moduleId) then @moduleId
+    else ""
     @
 
-  describe:( methodId, methodTx, methodOn=true ) =>
-    @methodId = methodId
+  onModule:( sw=true ) ->
+    @moduleOn = sw
+    @
+
+   # Specify methodOp="to" for conversions that turns off "eq" comparisions
+  describe:( methodTx, methodId="" ) =>
     @methodTx = methodTx
-    @methodOn = methodOn
+    @methodId = methodId
     @
 
-  # Improved buy still needs work
-  statusAssertText:( pass, result ) ->
-    text = if pass then "\n-- Passed -- " else "\n-- Failed -- "
-    if @isStr(@methodId) and @head(@methodId) isnt "-" and @tail(@methodId) is ")"
-      text += @strip(@methodId,"","()") + "(" + @toStr(result) + ") "
-      text += @text + " " if not pass
+  on:( sw=true ) ->
+    @methodOn = sw
+    @
+
+  op:( op="eq" ) ->
+    @methodOp = op
+    @
+
+  # Improved but still needs work
+  statusAssertText:( pass, result, status ) ->
+    methodId = status.assert.methodId
+    text     = if pass then "\n-- Passed -- " else "\n-- Failed -- "
+    if @isStr(methodId) and @head(methodId) isnt "-"
+      text += @strip(methodId,"","()") + "(" + @toStr(result) + ") "
+      text += @text + " " # if not pass
     else
       text += @text + " "
     text
@@ -310,42 +346,70 @@ class Tester extends Spec
       "\n   #{name}#{ref} type is '#{@type(value)}' with value #{@toStr(value)}"
 
   # Generates informative text in status
-  examine:( pass, result, expect, status, warn, key, index ) ->
+  examine:( pass, result, expect, status, key=null, index=null ) ->
     return status if not @verbose and ( key? or index? )
     isSpec = @isSpec( expect )
     eq                   = if pass then "eq" else "not"
-    status.assert.text   = @statusAssertText( pass, result )
+    status.assert.text   = @statusAssertText( pass, result, status )
     status.assert.text  += """#{eq} #{@toStr(expect)}""" if status.result.type isnt "function"
     #tatus.assert.text  += " for " + @text
     status.assert.pass   = pass and status.assert.pass # Asserts a previous status.assert.pass is false
     status.result.text  += @textValue( "Result", result, key, index )
     status.expect.text  += @textValue( "Expect", expect, key, index )  if not isSpec
     status.expect.text  += @textValue( "Spec",   expect, key, index )  if     isSpec
-    status.warned.text  += warn
+    #tatus.warned.text  += warn
     status
 
   isGroup:( status, group, pass=null ) ->
     passed = ( status, pass ) => if pass? then status.assert.pass is pass else true
     switch group
+      when "method" then passed( status, pass ) and @methodId is status.assert.methodId
+      when "module" then passed( status, pass ) and @moduleId is status.assert.moduleId
       when "all"    then passed( status, pass )
-      when "method" then passed( status, pass ) and status.assert.method is @methodId
-      else               passed( status, pass ) and status.assert.module is @moduleId
+      else               passed( status, pass )
 
-  # Needs to become more of a method / test() block status summary
-  summary:( module=null ) ->
-    return ""      if @summaryReturn( module )   # blank string turns off logging
-    group        = if module? then "module" else "method"
-    summaryText  = @title( group, "Summary" )
-    summaryText +=  @summaryText( group  )
-    summaryText += @totals( group )
+  # Aa method / test() block status summary
+  summary:() ->
+    return "" if @testingOff()  # blank string turns off logging
+    summaryText  = @title( "method", "Summary" )
+    summaryText += @summaryText("method")
+    summaryText += @totals( "method" )
     @stream.publish( @summarySubject, summaryText ) if @isDef(@stream)
+    @reset()     # reset all @method..  parameters
     summaryText  # for log( test().summary() )
 
-  summaryReturn:( module ) ->
-    isReturn =  ( module? and not @moduleOn ) or not @methodOn
-    @moduleOn = true if module?
+  # No arg implies generate a module summary while an arg of "all" is for all tests
+  #  for unit tests in @runUnitTests @xomplwte(arg) is called automaticly when modules
+  #  and all tests are completed.
+  # The true argument @testingOff(true) sets @methodOn to true in case @summaary()
+  #    was not called with @reset()
+  complete:( arg=null ) =>
+    return @ if @testingOff(true)
+    isAll       = @isDef(arg)
+    group       = if isAll then "all" else "module"
+    summaryText = @totals( group )
+    @stream.publish( @summarySubject, summaryText ) if @isDef(@stream)
+    @log( summaryText ) if @logging
+
+    # Archive since all tests are complete
+    if isAll and @archive
+      @archiveLocal(  @statuses )
+      @reviewsLocal()
+      
+    @reset( "module")  # reset all @method..  and @module.. parameters
+    @                  # return this for chaining
+
+  # reset all @method..  and if group is module the @module.. parameters
+  reset:( group ) ->
+    @methodTx = ""
+    @methodId = ""
+    @methodOp = "eq"
     @methodOn = true
-    isReturn
+    if group is "module"
+      @moduleTx = ""
+      @moduleId = ""
+      @moduleOn = true
+    return
 
   summaryText:( group ) =>
     text = ""
@@ -382,6 +446,7 @@ class Tester extends Spec
       n++
     n
 
+  # Relies on method and module instance variables
   title:( group, name ) ->
     path   = if group is "module" and @modulePaths[group]? then @modulePaths[group].path else ""
     text = if name is "Totals" then "\n-- Totals -- for " else "\n-- Summary - for "
@@ -390,27 +455,6 @@ class Tester extends Spec
       when "module" then """#{@moduleId} #{@moduleTx}""" + path
       else               """for all tests"""
     text
-
-  complete:() =>
-    summaryText  = @totals( "all" )
-    @moduleOn    = true
-    @methodOn    = true
-    @stream.publish( @summarySubject, summaryText ) if @isDef(@stream)
-    @log( summaryText ) if @logging
-
-    # Archive since all tests are complete
-    if @archive
-      @archiveLocal(  @statuses )
-      @reviewsLocal()
-    @  # for chaining
-
-  # Add a unit test file path to the @modulePaths object  - not called
-  toPath:( path ) ->
-    dirs   = path.split("/")
-    module = @tail(dirs).split("-")[0]
-    @modulePaths[module] = { name:module, path:path }
-    console.log( "Tester.path(path)", { path:path, dirs:dirs, module:module } ) if  @debug
-    @modulePaths[module]
 
   # Stream is an optional libary for publising statusObject to UIs like RxJS
   injectStream:( stream ) ->

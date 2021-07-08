@@ -13,30 +13,18 @@ import { test, tester } from './Tester.js'     # Only importing tester to unit t
 
 # t = tester
 
-five = () ->
-  5
+test().module( "Class Tester Unit tests", "Tester", true )
 
-add  = ( a, b ) ->
-  a + b
+test().describe( "Test closure demo", "", "eq", true )
+five = () -> 5
+add  = ( a, b ) -> a + b
+test(  "five() = 5", (t) -> t.eq( five(), 5 ) )
+test(  "add(2,3) = 5", (t) -> t.eq( add(2,3), 5 ) )
+test(  "type(123)", (t) -> t.eq( tester.type(123), 'number' ) )
+test(  "type('123')", (t) -> t.eq( tester.type('123'), 'string' ) )
+test().log( test().summary() )
 
-test(  "five() = 5", (t) ->
-  t.eq( five(), 5 ) )
-
-test(  "add(2,3) = 5", (t) ->
-  t.eq( add(2,3), 5 ) )
-
-test(  "type(123)", (t) ->
-  t.eq( tester.type(123), 'number' ) )
-
-test(  "type('123')", (t) ->
-  t.eq( tester.type('123'), 'string' ) )
-
-class Main
-  @init = () =>
-
-test().module( "Tester", "Tester Unit tests", true )
-
-test().describe( "test()", "Internal logic for turning tests on and off", true )
+test().describe( "Internal logic for turning tests on and off", "test()", "eq", true )
 test(  'not (  @testing and  @moduleOn and  @methodOn ) @method=false', (t) ->
   isOff = not ( t.testing and t.moduleOn and t.methodOn )
   t.eq( isOff, false ) )
@@ -44,9 +32,8 @@ test(  'not (  @testing and  @moduleOn and  @methodOn ) @method=true', (t) ->
   isOff = not ( t.testing and t.moduleOn and t.methodOn )
   t.eq( isOff, false ) )
 test().log( test().summary() )
-#est( "test() method count is 3", tester.count("method") , 3 ).log( test().status() )
 
-test().describe( "eq()", "eq() assertion inside test( text, (t) -> ...", true )
+test().describe( "test(text, (t) -> ...", "eq()", "eq", true )
 test( 'eq({a:"a"},{a:"a"})',  (t) -> t.eq(  {a:"a"}, {a:"a"} ) )
 #est( 'eq({a:"a"},{a:"b"})',  (t) -> t.eq(  {a:"a"}, {a:"b"} ) )  # Noed ne
 #est( 'eq({a:"a"},{b:"a"})',  (t) -> t.eq(  {a:"a"}, {b:"a"} ) )  # Noed ne

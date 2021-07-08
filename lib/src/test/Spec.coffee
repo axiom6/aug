@@ -195,30 +195,46 @@ class Spec extends Type
       when 'array'  then isArrayRange(range)
       else  @toWarn( "isRange(range)", "not a range type", range, "", false, (t) -> t.log( t.warn() ) )
 
-  # Override type.isIn() with addional Tester type arrays
-  isIn:( type, key ) ->
+  # Override Type.isIn() with addional Spec type arrays
+  isIn:( type, arg ) ->
+    switch
+     when @isArray(arg)    then @inArray( type, arg )
+     when @isEnumsArg(arg) then @inArray( type, @toEnums(arg) )
+     when @isStr(arg)      then @toIn(arg).includes(type)
+     else @isWarn( false, "arg #{arg} not 'array', 'enums' or 'string'", type, false )
+
+  # Override Type.isIn() with addional Spec type arrays
+  toIn:( arg ) ->
+    switch
+      when  not  arg? then []
+      when Type[arg]? then Type[arg]
+      when Spec[arg]? then Spec[arg]
+      else []
+
+Spec.specs   = ["range","enums","regexp"]               # high level spec   based comparision specs
+Spec.opers   = ["to","eq","le","lt","ge","gt","ne"] # low  level value  based comparison  ooers 'eq' default
+Spec.cards   = ["n","?","*","+","min to max"]  # cards  1 required, ? optional, * 0 to many, + 1 to many, m:m range
+
+export spec = new Spec() # Export a singleton instence of type
+export default Spec
+
+###
+    isIn:( type, key ) ->
     if      Type[key]? then Type[key].includes(type)     # Only reason for importing Type
     else if Spec[key]? then Spec[key].includes(type)
     else @isWarn( false, "key #{key} missing for", type, [], (t) -> t.log( t.warn() ) )
 
-  isIn:( type, arg ) ->
-    if @isArray(arg)
-       @inArray( type, arg )
-    else if @isEnumsArg(arg)
-      @inArray( type, @toEnums(arg) )
-    else if @isStr(arg)
-      if Type[arg]?
+        if Type[arg]?
          Type[arg].includes(type)
       else if Spec[arg]?
               Spec[arg].includes(type)
       else
         @isWarn( false, "arg #{arg} missing for", type, false )
-    else
-      @isWarn(   false, "arg #{arg} not 'array', 'enums' or 'string'", type, false )
 
-Spec.specs   = ["range","enums","regexp"]               # high level spec   based comparision specs
-Spec.opers   = ["eq","le","lt","ge","gt","ne"] # low  level value  based comparison  ooers 'eq' default
-Spec.cards   = ["n","?","*","+","min to max"]  # cards  1 required, ? optional, * 0 to many, + 1 to many, m:m range
-
-export spec = new Spec() # Export a singleton instence of type
-export default Spec
+    toIn:( arg ) ->
+    if @isStr(arg)
+      if      Type[arg]? then Type[arg]
+      else if Spec[arg]? then Spec[arg]
+      else []
+    else []
+###
