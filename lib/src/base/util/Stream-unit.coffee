@@ -6,10 +6,12 @@ subjects   = ["TestStream","TestStatus","TestString","TestSummary"]
 streamLog  = { subscribe:false, publish:false, subjects:subjects }
 stream     = new Stream( subjects, streamLog )
 
-test().module( "A mininal Publish and Subscribe class libary" ).onModule()
+test().module( "A mininal Publish and Subscribe class libary" ).on()
 
-test().describe( "Simple Publish and Subscribe" ).on()
-test( """Subscribe to {a:"a",b:"b"} then Publish""", (t) ->
+test().describe( "Publish and Subscribe" ).on()
+
+# This demonstates an elaborate setup before t.eq(pubObj,subObj)
+test( 'Subscribe to {a:"a",b:"b"} then Publish', (t) ->
   pubObj = { a:"a", b:"b" }
   subObj = {}
   onSubscribe = (obj) -> subObj = obj

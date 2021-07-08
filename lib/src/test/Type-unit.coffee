@@ -10,7 +10,7 @@ stream     = new Stream( subjects, streamLog )
 func       = () ->
 undef      = undefined
 
-test().module( "Class Type assertion and conversion" ).onModule()
+test().module( "Class Type assertion and conversion" ).on()
 
 test().describe( """Enclose strings with '"', '()', '[]' '{}'""", "toEnclose()" ).on()
 test( "", type.toEnclose( "abc",   '"'  ), '"abc"'   )             # returns "abc" - good for JSON keys and values
@@ -20,7 +20,7 @@ test( "", type.toEnclose( "d,e,f", "[]" ), "[d,e,f]" )             # returns [d,
 test( "", type.toEnclose( "a:x,b:y,c:z", "{}" ), "{a:x,b:y,c:z}" ) # returns {a:x,b:y,c:z}
 test().log( test().summary() )
 
-test().describe( "All 13 types", "type()" ).on()  # all type(arg) tests needs better reporting
+test().describe( "All 13 types" ).id("type()").on()  # all type(arg) tests needs better reporting
 test( "'123'",        type.type('123'),         'string'    )
 test(  "123",         type.type(123),           'int'       )
 test( "123.1",        type.type(123.1),         'float'     )
@@ -41,7 +41,7 @@ test( "tester",       type.type(tester),        'object'    )
 test( "Vis",          type.type(Vis),           'function'  )
 test().log( test().summary() )
 
-test().describe( "klass types", "klass()" ).on()
+test().describe( "klass types" ).id("klass()").on()
 test( "true",       type.klass(true),        'Boolean'   )
 test( "123",        type.klass(123),         'Int'       )
 test( "'123'",      type.klass('123'),       'String'    )

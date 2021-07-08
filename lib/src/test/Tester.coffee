@@ -25,9 +25,10 @@ class Tester extends Spec
     @error = console.error
 
     # Set by @module( moduleTx. moduleId, moduleOn=true )
-    @moduleTx = ""
-    @moduleId = ""
-    @moduleOn = true
+    @lastCalled = ""
+    @moduleTx   = ""
+    @moduleId   = ""
+    @moduleOn   = true
 
     # Set by @describe( methodId, methodTx, methodOn=true )
     @methodTx = ""
@@ -281,13 +282,13 @@ class Tester extends Spec
   # @runUnitTests(...) @describe(...) @summary(...)
 
   runUnitTests:( paths ) ->
-    for path in paths
-      modulePath = @toPath( path )
+    for path in  paths
+      modulePath = @toPath(path) # also sets the @moduleId
       text = "\n-- Started Unit Testing for: #{modulePath.name} in #{modulePath.path}"
       console.log( text )                      if @logging
       @stream.publish( @summarySubject, text ) if @isDef(@stream)
       await `import( path /* @vite-ignore */ )`
-      @complete()     # This where we know that the unit test module has finished so generate a module summary
+      @complete()     # This is where we know that the unit test module has finished so summarize
     @complete("all")  # All tests complete so produce then log and publish the final summary
     return
 
@@ -299,25 +300,28 @@ class Tester extends Spec
     console.log( "Tester.path(path)", { path:path, dirs:dirs, module:module } ) if  @debug
     @modulePaths[@moduleId]
 
-  module:( moduleTx, moduleId="" ) =>
+  module:( moduleTx ) =>
     @moduleTx = moduleTx
-    @moduleId = if @isStr(moduleId)  then  moduleId
-    else        if @isStr(@moduleId) then @moduleId
-    else ""
-    @
-
-  onModule:( sw=true ) ->
-    @moduleOn = sw
+    @lastCalled = "module"
     @
 
    # Specify methodOp="to" for conversions that turns off "eq" comparisions
-  describe:( methodTx, methodId="" ) =>
-    @methodTx = methodTx
-    @methodId = methodId
+  describe:( methodTx ) =>
+    @methodTx   = methodTx
+    @lastCalled = "describe"
+    @
+
+  # id(id) on(sw) and op(op) are designed to be chained to either
+  #  @describe( methodTx ) or @module( moduleTx ) to specify
+  #  additional parameters. The method that they are chained to
+  #
+
+  id:( id ) ->
+    if @lastCalled = "module" then @moduleId = id else @methodId = id
     @
 
   on:( sw=true ) ->
-    @methodOn = sw
+    if @lastCalled = "module" then @moduleOn = sw else @methodOn = sw
     @
 
   op:( op="eq" ) ->
