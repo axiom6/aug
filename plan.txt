@@ -1,9 +1,7 @@
 
 Tester Wrap Up
-  1. group subsets for @describeId and maybe @moduleId need to be verified
-  2. We may not be getting the failures
-  3. to... conversions with @convert(...) not being listed and maybe not being tested
-  4. @complete("all") not generating totals 
+  1. to... conversions with @convert(...) not being listed and maybe not being tested
+  2. Messed up messages from Spec
 
 Debug
   1. Bad pageJey in Nav

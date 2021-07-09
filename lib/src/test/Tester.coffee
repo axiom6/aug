@@ -94,8 +94,6 @@ class Tester extends Spec
       when "all"    then not ( @always or   @testing   )
       when "module" then not ( @always or ( @testing and @moduleOn ) )
       else               not ( @always or ( @testing and @moduleOn and @describeOn ) )
-    @log = @noop if toff and ( group is "module" or group is "describe" ) # This really shutdowns logging
-    #log = @noop if toff and   group is "module"                          # This really shutdowns logging
     toff
 
   eq:( result, expect ) =>
@@ -388,9 +386,9 @@ class Tester extends Spec
 
   # Aa describe / test() block status summary
   summary:() ->
-    return "" if @testingOff("describe")  # returning a blank summaryText string turns off logging
     summaryText  = ""
     summaryText += @titleReport( "module"   ) if not @summarized
+    return summaryText if @testingOff("describe")  # returning a blank summaryText string turns off logging
     summaryText += @titleReport( "describe" )
     summaryText += @summaryText( "describe" )
     summaryText += @totals(      "describe" )
@@ -432,7 +430,6 @@ class Tester extends Spec
     @describeOp   = "eq"
     @describeOn   = true
     @moduleUnit   = ""
-    @log          = console.log
     if group is "module"
       @moduleTx   = ""
       @moduleName = ""
@@ -478,7 +475,6 @@ class Tester extends Spec
     path = if group is "module" and @modulePaths[group]? then @modulePaths[group].path else ""
     switch group
       when "module"
-        @log = console.log
         "\n-- Module -- #{@moduleUnit}" +
         "\n-- Titled -- for #{@moduleName} #{@moduleTx}" + path + "\n"
       when "describe"

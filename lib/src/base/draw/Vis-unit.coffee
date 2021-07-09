@@ -2,7 +2,7 @@
 import { test } from '../../test/Tester.js'
 import   Vis    from './Vis.js'
 
-test().module(   "Visualization Utility" ).on(false)
+test().module(   "Visualization Utility" ).on()
 test().describe( "Visualization Utility" ).on()
 
 test( "rgb(0xFFFFFF)",            Vis.rgb(0xFFFFFF), {r:255,g:255,b:255, a:1.0 }   )
