@@ -24,7 +24,7 @@ specObj   = { type:"string", oper:"range", expect:"string:[360.100,100]:1", card
 rangeSpec = { type:"array",  oper:"range", expect:"string:[360.100,100]:1", card:"1", spec:""  }
 enumsSpec = { type:"string", oper:"enums", expect:"#{enums}:1",             card:"1", spec:""  }
 
-test().module( "The extended assertion and conversion class libary" ).on()
+test().module( "the extended assertion and conversion class libary" ).on(true)
 
 test().describe( "Initial run through" ).on()
 test( "isEnums(arg,oper,type)",     spec.isEnums(enumStr,oper,type),     true    )
@@ -45,4 +45,4 @@ test( "rangeType(range)",           spec.rangeType(range),               "range"
 test( "isRange(range)",             spec.isRange(range),                  true   )
 test( "isIn(type,tkey)",            spec.isIn("range","ranges"),          true   )
 test( "toSpecValue(spec,arg,type)", spec.toSpecValue(spec,arg,type),      true   )
-test().log( test().summary() )
+#est().log( test().summary() )  # Not needed because 

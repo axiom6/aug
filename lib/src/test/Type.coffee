@@ -373,12 +373,31 @@ class Type
   warn:() =>
     @lasted
 
-  # Can be overriden by Spec.isIn() with it additional Spec type arrays
+  # Moved from Spec.coffee
+  isEnums:( arg ) ->
+    @isStr(arg) and arg.includes("|")
+
+  # Moved from Spec.coffee
+  toEnums:( arg ) ->
+    enums = []
+    type  = type = @type(arg)
+    switch type
+      when "string" and arg.includes("|")
+        splits = arg.split("|")
+        for split in splits
+          enums.push( split )
+      when "array"
+        enums = arg
+      else
+        enums = @toWarn( "toEnums(arg)", "unable to convert", arg, "enums", [], (t) -> t.log( t.warn() ) )
+    enums
+
+# Can be overriden by Spec.isIn() with it additional Spec type arrays
   isIn:( type, arg ) ->
     switch
-      when @isArray(arg)    then @inArray( type, arg )
-      when @isEnumsArg(arg) then @inArray( type, @toEnums(arg) )
-      when @isStr(arg)      then @toIn(arg).includes(type)
+      when @isArray(arg) then @inArray( type, arg )
+      when @isEnums(arg) then @inArray( type, @toEnums(arg) )
+      when @isStr(arg)   then @toIn(arg).includes(type)
       else @isWarn( false, "arg #{arg} not 'array', 'enums' or 'string'", type, false )
 
   # Can be overriden by Spec.toIn() with it additional Spec type arrays

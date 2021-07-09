@@ -1,10 +1,9 @@
 
 Tester Wrap Up
-  1. " for object values
-  2. Type.enclose test not making sense
-  3. Find the best way to express and capture Result arguments
-  4. Expression
-  5. Function
+  1. group subsets for @describeId and maybe @moduleId need to be verified
+  2. We may not be getting the failures
+  3. to... conversions with @convert(...) not being listed and maybe not being tested
+  4. @complete("all") not generating totals 
 
 Debug
   1. Bad pageJey in Nav

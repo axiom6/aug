@@ -24,18 +24,22 @@ class Tester extends Spec
     @log   = console.log
     @error = console.error
 
-    # Set by @module( moduleTx. moduleId, moduleOn=true )
+    # Set by @module(moduleTx)
     @lastCalled = ""
+    @moduleUnit = ""
     @moduleTx   = ""
-    @moduleId   = ""
-    @moduleOn   = true
+    @moduleName = ""    # Set automaticall by @toPath()
+    @moduleId   = 0     # Incremented each time @module(text) is called
+    @moduleOn   = true  # Set by @on(sw=true) when chained to @module(moduleTx)
 
-    # Set by @describe( methodId, methodTx, methodOn=true )
-    @methodTx = ""
-    @methodId = ""
-    @methodOp = "eq"
-    @methodOn = true
-
+    # Set by @describe( methodTx )
+    @describeTx   = ""
+    @describeName = ""     # Set by @name(name) chained to @describe(...)
+    @describeId   = 0      # Incremented each time @describe(text) is called
+    @describeOp   = "eq"   #
+    @describeOn   = true   # Set by @on(sw=true) when chained to @describe(describeTx)
+    @summarized   = false  # Indicates that @summary() has been on the last @describe()
+                           #   and wether @complete() should genrate a summarized text
     # Accumulated status objects
     @text        = "" # set by test() that is passed inside eq() and sent to run()
     @modulePaths = {}
@@ -83,29 +87,36 @@ class Tester extends Spec
       @run( text, result, expect ) # returns tester instance for chaining
     @  # returns tester instance for chaining
 
-  testingOff:( methodOn=@methodOn ) ->
-    not ( @always or ( @testing and @moduleOn and methodOn ) )
+  # The strongest logic is the last where all 4 condition are checked where as
+  #  'module' and 'all' admit larger group of tests
+  testingOff:(group="test") ->
+    toff = switch group
+      when "all"    then not ( @always or   @testing   )
+      when "module" then not ( @always or ( @testing and @moduleOn ) )
+      else               not ( @always or ( @testing and @moduleOn and @describeOn ) )
+    @log = @noop if toff and ( group is "module" or group is "describe" ) # This really shutdowns logging
+    #log = @noop if toff and   group is "module"                          # This really shutdowns logging
+    toff
 
   eq:( result, expect ) =>
     @run( @text, result, expect )
 
-  # -- run() scenario is @initStatus(...) @assert(...) @report(...)
-  #     console.log( "Tester.run()", { text:text, result:result, expect:expect} ) if  @debug
+  # -- run() scenario is @initStatus(...) @assert(...)
   run:( text, result, expect ) ->
-    return @ if not @testing
     @statusAs = @initStatus( result, expect, text      )
-    @statusAs = switch @methodOp
+    @statusAs = switch @describeOp
       when "to" then  @convert( result, expect, @statusAs )
       else            @assert(  result, expect, @statusAs )
     @    # returns tester instance for chaining
 
   # Create a new status object for the current test
-  #   each test status is imprinted with the current module and method settings
+  #   each test status is imprinted with the current module and describe settings
   initStatus:( result, expect, text ) ->
     {
       assert:{ text:text, pass:true, keys:"",
-      moduleTx:@moduleTx, moduleId:@moduleId, moduleOn:@moduleOn,
-      methodTx:@methodTx, methodId:@methodId, methodOn:@methodOn, methodOp:@methodOp }
+      moduleTx:@moduleTx,       moduleName:  @moduleName,   moduleId:  @moduleId, moduleOn:    @moduleOn,
+      describeTx:@describeTx, describeName:@describeName, describeId:@describeId, describeOn:@describeOn,
+      describeOp:@describeOp }
       warned:{ text:"", }
       result:{ text:"",   type:@type(result), value:result }
       expect:{ text:"",   type:@type(expect), value:expect }
@@ -157,7 +168,7 @@ class Tester extends Spec
   # Check and report on values and types
   #   refactored on Wed July 7, 2021
   checkValuesTypes:( result, expect, status ) ->
-    op  = @methodOp
+    op  = @describeOp
     r   = @type(result)
     e   = @type(expect)
     rIs = () -> "\nResult is type '#{r}'"
@@ -283,10 +294,9 @@ class Tester extends Spec
 
   runUnitTests:( paths ) ->
     for path in  paths
-      modulePath = @toPath(path) # also sets the @moduleId
-      text = "\n-- Started Unit Testing for: #{modulePath.name} in #{modulePath.path}"
-      console.log( text )                      if @logging
-      @stream.publish( @summarySubject, text ) if @isDef(@stream)
+      modulePath  = @toPath(path) # also sets the @moduleName
+      @moduleUnit = "#{modulePath.path} unit test"
+      @summarized = false
       await `import( path /* @vite-ignore */ )`
       @complete()     # This is where we know that the unit test module has finished so summarize
     @complete("all")  # All tests complete so produce then log and publish the final summary
@@ -294,46 +304,46 @@ class Tester extends Spec
 
   # Add a unit test file path to the @modulePaths object
   toPath:( path ) ->
-    dirs      = path.split("/")
-    @moduleId = @tail(dirs).split("-")[0]
-    @modulePaths[@moduleId] = { name:@moduleId, path:path }
-    console.log( "Tester.path(path)", { path:path, dirs:dirs, module:module } ) if  @debug
-    @modulePaths[@moduleId]
+    dirs        = path.split("/")
+    @moduleName = @tail(dirs).split("-")[0]
+    @modulePaths[@moduleName] = { name:@moduleName, path:path }
+    # console.log( "Tester.path(path)", { path:path, dirs:dirs, module:@moduleName } ) if  @debug
+    @modulePaths[@moduleName]
 
   module:( moduleTx ) =>
-    @moduleTx = moduleTx
+    @moduleTx   = moduleTx
+    @moduleId  += @moduleId + 1 # ids are one based
+    @summarized = false         # set for functional tests when unit tests are not being run
     @lastCalled = "module"
     @
 
-   # Specify methodOp="to" for conversions that turns off "eq" comparisions
-  describe:( methodTx ) =>
-    @methodTx   = methodTx
-    @lastCalled = "describe"
+  describe:( describeTx ) =>
+    @describeTx  = describeTx
+    @describeId += @describeId + 1 # ids are one based
+    @lastCalled  = "describe"
     @
 
-  # id(id) on(sw) and op(op) are designed to be chained to either
-  #  @describe( methodTx ) or @module( moduleTx ) to specify
-  #  additional parameters. The method that they are chained to
-  #
-
-  id:( id ) ->
-    if @lastCalled = "module" then @moduleId = id else @methodId = id
+  # Only chain to @describe(describeTx)
+  name:( name ) ->
+    @describeName = name
     @
 
-  on:( sw=true ) ->
-    if @lastCalled = "module" then @moduleOn = sw else @methodOn = sw
-    @
-
+  # Only chain to @describe(describeTx)
   op:( op="eq" ) ->
-    @methodOp = op
+    @describeOp = op
+    @
+
+  # Can be chained to @describe(describeTx) and @module(moduleTx) to turn test blocks on and off
+  on:( sw=true ) ->
+    if @lastCalled is "module" then @moduleOn = sw else @describeOn = sw
     @
 
   # Improved but still needs work
   statusAssertText:( pass, result, status ) ->
-    methodId = status.assert.methodId
-    text     = if pass then "\n-- Passed -- " else "\n-- Failed -- "
-    if @isStr(methodId) and @head(methodId) isnt "-"
-      text += @strip(methodId,"","()") + "(" + @toStr(result) + ") "
+    describeName = status.assert.describeName
+    text       = if pass then "\n-- Passed -- " else "\n-- Failed -- "
+    if @isStr(describeName)
+      text += @strip(describeName,"","()") + "(" + @toStr(result) + ") "
       text += @text + " " # if not pass
     else
       text += @text + " "
@@ -364,34 +374,45 @@ class Tester extends Spec
     #tatus.warned.text  += warn
     status
 
-  isGroup:( status, group, pass=null ) ->
-    passed = ( status, pass ) => if pass? then status.assert.pass is pass else true
+  # Determine if a status is part of module set or part of a describe set
+  #  pass = null implies that that status.assert.pass of true or false is
+  #    to be ingored while pass = true or false signals that whether a
+  #    test passed or failed is to be considered
+  isGroup:( group, status, pass=null ) ->
+    inSet = ( status, pass ) => if pass? then status.assert.pass is pass else true
     switch group
-      when "method" then passed( status, pass ) and @methodId is status.assert.methodId
-      when "module" then passed( status, pass ) and @moduleId is status.assert.moduleId
-      when "all"    then passed( status, pass )
-      else               passed( status, pass )
+      when "describe" then inSet( status, pass ) and @describeId is status.assert.describeId
+      when "module"   then inSet( status, pass ) and @moduleId is status.assert.moduleId
+      when "all"      then inSet( status, pass )
+      else                 inSet( status, pass )
 
-  # Aa method / test() block status summary
+  # Aa describe / test() block status summary
   summary:() ->
-    return "" if @testingOff()  # blank string turns off logging
-    summaryText  = @title( "method", "Summary" )
-    summaryText += @summaryText("method")
-    summaryText += @totals( "method" )
+    return "" if @testingOff("describe")  # returning a blank summaryText string turns off logging
+    summaryText  = ""
+    summaryText += @titleReport( "module"   ) if not @summarized
+    summaryText += @titleReport( "describe" )
+    summaryText += @summaryText( "describe" )
+    summaryText += @totals(      "describe" )
+    @summarized  = true
     @stream.publish( @summarySubject, summaryText ) if @isDef(@stream)
-    @reset()     # reset all @method..  parameters
+    @reset()     # reset all @describe..  parameters
     summaryText  # for log( test().summary() )
 
   # No arg implies generate a module summary while an arg of "all" is for all tests
-  #  for unit tests in @runUnitTests @xomplwte(arg) is called automaticly when modules
-  #  and all tests are completed.
-  # The true argument @testingOff(true) sets @methodOn to true in case @summaary()
-  #    was not called with @reset()
+  #  for unit tests in @runUnitTests @complwte(arg) @complwte() is called automaticly
+  #  when modules or all tests are completed.
+  # @testingAllOff() or @testingModuleOff() determine if @complete(arg) should generate
+  # publish and/or log summaries for a module or all the tests
   complete:( arg=null ) =>
-    return @ if @testingOff(true)
-    isAll       = @isDef(arg)
-    group       = if isAll then "all" else "module"
-    summaryText = @totals( group )
+    isAll  = @isDef(arg)
+    group  = if isAll then "all" else "module"
+    return @ if @testingOff(group)
+    summaryText  = ""
+    summaryText += @titleReport( group )    if not @summarized
+    summaryText += @summaryText("describe") if not @summarized
+    summaryText += @totals(      group )
+    @summarized  = true
     @stream.publish( @summarySubject, summaryText ) if @isDef(@stream)
     @log( summaryText ) if @logging
 
@@ -400,24 +421,27 @@ class Tester extends Spec
       @archiveLocal(  @statuses )
       @reviewsLocal()
       
-    @reset( "module")  # reset all @method..  and @module.. parameters
+    @reset( "module")  # reset all @describe..  and @module.. parameters
     @                  # return this for chaining
 
-  # reset all @method..  and if group is module the @module.. parameters
+  # reset all @describe..  and if group is module the @module.. parameters
+  #  this does not reset ids which are incremented by @describe(...) and @module()
   reset:( group ) ->
-    @methodTx = ""
-    @methodId = ""
-    @methodOp = "eq"
-    @methodOn = true
+    @describeTx   = ""
+    @describeName = ""
+    @describeOp   = "eq"
+    @describeOn   = true
+    @moduleUnit   = ""
+    @log          = console.log
     if group is "module"
-      @moduleTx = ""
-      @moduleId = ""
-      @moduleOn = true
+      @moduleTx   = ""
+      @moduleName = ""
+      @moduleOn   = true
     return
 
   summaryText:( group ) =>
     text = ""
-    for status in @statuses when @isGroup(status,group)
+    for status in @statuses when @isGroup(group,status)
       text += @status( status )
     text
 
@@ -438,7 +462,7 @@ class Tester extends Spec
     passCount    = @count( group, true  )
     failCount    = @count( group, false )
     fullCount    = passCount + failCount
-    text  = @title( group, "Totals" )
+    text  = @titleTotals( group )
     text += """\n   #{@pad(passCount,fullCount)} tests passed"""
     text += """\n   #{@pad(failCount,fullCount)} tests failed"""
     text += """\n   #{@pad(fullCount,fullCount)} tests total"""
@@ -446,18 +470,37 @@ class Tester extends Spec
 
   count:( group, pass ) ->
     n = 0
-    for status in tester.statuses when @isGroup(status,group,pass )
+    for status in tester.statuses when @isGroup(group,status,pass)
       n++
     n
 
-  # Relies on method and module instance variables
-  title:( group, name ) ->
-    path   = if group is "module" and @modulePaths[group]? then @modulePaths[group].path else ""
-    text = if name is "Totals" then "\n-- Totals -- for " else "\n-- Summary - for "
+  titleReport:( group ) ->
+    path = if group is "module" and @modulePaths[group]? then @modulePaths[group].path else ""
+    switch group
+      when "module"
+        @log = console.log
+        "\n-- Module -- #{@moduleUnit}" +
+        "\n-- Titled -- for #{@moduleName} #{@moduleTx}" + path + "\n"
+      when "describe"
+        if @isStr(@describeName)
+          "\n-- Report -- for #{@describeName} #{@describeTx}"
+        else
+          "\n-- Report -- for #{@describeTx}"
+      else
+        ""
+
+  # Relies on describe and module instance variables
+  titleTotals:( group ) ->
+    path = if group is "module" and @modulePaths[group]? then @modulePaths[group].path else ""
+    text = "\n-- Totals -- "
     text += switch group
-      when "method" then """#{@methodId} #{@methodTx}"""
-      when "module" then """#{@moduleId} #{@moduleTx}""" + path
-      else               """for all tests"""
+      when "describe"
+        if @isStr(@describeName)
+          "for #{@describeName} #{@describeTx}"
+        else
+          "for #{@describeTx}"
+      when "module"   then "for #{@moduleName} #{@moduleTx}" + path
+      else                 "for all tests"
     text
 
   # Stream is an optional libary for publising statusObject to UIs like RxJS

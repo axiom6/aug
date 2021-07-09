@@ -20,7 +20,7 @@ test( "", type.toEnclose( "d,e,f", "[]" ), "[d,e,f]" )             # returns [d,
 test( "", type.toEnclose( "a:x,b:y,c:z", "{}" ), "{a:x,b:y,c:z}" ) # returns {a:x,b:y,c:z}
 test().log( test().summary() )
 
-test().describe( "All 13 types" ).id("type()").on()  # all type(arg) tests needs better reporting
+test().describe( "All 13 types" ).name("type()").on()  # all type(arg) tests needs better reporting
 test( "'123'",        type.type('123'),         'string'    )
 test(  "123",         type.type(123),           'int'       )
 test( "123.1",        type.type(123.1),         'float'     )
@@ -41,7 +41,7 @@ test( "tester",       type.type(tester),        'object'    )
 test( "Vis",          type.type(Vis),           'function'  )
 test().log( test().summary() )
 
-test().describe( "klass types" ).id("klass()").on()
+test().describe( "klass types" ).name("klass()").on()
 test( "true",       type.klass(true),        'Boolean'   )
 test( "123",        type.klass(123),         'Int'       )
 test( "'123'",      type.klass('123'),       'String'    )
@@ -58,7 +58,7 @@ test( "tester",     type.klass(tester),  'Tester' )
 test( "Vis",        type.klass(Vis),     'Vis'    )
 test().log( test().summary() )
 
-test().describe( "All class Type is... assertions" ).on()
+test().describe( "class Type is... assertions" ).on()
 test( "isType(v,t)",       type.isType("abc","string"),       true )
 test( "isStr('abc')",      type.isStr('abc'),                 true )
 test( "isInt(i)",          type.isInt(  123 ),                true )
@@ -145,8 +145,8 @@ test( '["1","2","3"] \'array[string]\'', type.toStr(["1","2","3"]),      '["1","
 test( "null",                            type.toStr(null),               "null"          )
 test( "undefined",                       type.toStr(undef),              "undefined"     )
 test( "function",                        type.toStr(func),               "function"      )
-test( "/x/ 'regexp'",                    type.toStr(/x/),                 "/x/"            )
-test( "BigInt(123) no 'n'",              type.toStr(BigInt(123)),         "123"         )
+test( "/x/ 'regexp'",                    type.toStr(/x/),                 "/x/"          )
+test( "BigInt(123) no 'n'",              type.toStr(BigInt(123)),         "123"          )
 test( 'Symbol("desc")',                  type.toStr(Symbol("desc")),     'Symbol(desc)'  )
 test(         'new Date("August 19, 1975 23:15:30")',
   type.toStr( `new Date("August 19, 1975 23:15:30")` ),

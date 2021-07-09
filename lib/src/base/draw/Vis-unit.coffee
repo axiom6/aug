@@ -2,7 +2,7 @@
 import { test } from '../../test/Tester.js'
 import   Vis    from './Vis.js'
 
-test().module(   "Visualization Utility" ).on()
+test().module(   "Visualization Utility" ).on(false)
 test().describe( "Visualization Utility" ).on()
 
 test( "rgb(0xFFFFFF)",            Vis.rgb(0xFFFFFF), {r:255,g:255,b:255, a:1.0 }   )
@@ -39,4 +39,4 @@ test( "str([270,100,100]) blue",    Vis.str([270,100,100]), "0x0000FF" )
 test( "str([315,100,100]) magenta", Vis.str([315,100,100]), "0xFF00FF" )
 
 # Log the current block of tests and then the summary for 'Vis'
-console.log( test().summary() )
+test().log( test().summary() )

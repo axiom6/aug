@@ -6,7 +6,7 @@ subjects   = ["TestStream","TestStatus","TestString","TestSummary"]
 streamLog  = { subscribe:false, publish:false, subjects:subjects }
 stream     = new Stream( subjects, streamLog )
 
-test().module( "A mininal Publish and Subscribe class libary" ).on()
+test().module( "A mininal Publish and Subscribe class libary" ).on(false)
 
 test().describe( "Publish and Subscribe" ).on()
 
@@ -17,5 +17,5 @@ test( 'Subscribe to {a:"a",b:"b"} then Publish', (t) ->
   onSubscribe = (obj) -> subObj = obj
   stream.subscribe( "TestStream", "Stream-unit", (obj) -> onSubscribe(obj) )
   stream.publish(   "TestStream", pubObj )
-  t.eq( pubObj, subObj ) )
-console.log( test().summary() )
+  t.eq( pubObj, subObj )  )
+test().log( test().summary() )

@@ -6,12 +6,6 @@ class Spec extends Type
   constructor:() ->
     super()
 
-  isEnums:( arg, oper, type ) ->
-    oper is "enums" and @isArray(arg,type) and @isResultType(type)
-
-  isEnumsArg:( arg ) ->
-    @isStr(arg) and arg.includes("|")   
-
   # let re = /ab+c/i; // literal notation
   # let re = new RegExp('ab+c', 'i') // constructor with string pattern as first argument
   # let re = new RegExp(/ab+c/, 'i') // constructor with regular express
@@ -148,19 +142,8 @@ class Spec extends Type
         pass = pass and @inMyRange( result[i], range[i] )
     pass
 
-  toEnums:( arg ) ->
-    enums = []
-    type  = type = @type(arg)
-    switch type
-      when "string" and arg.includes("|")
-        splits = arg.split("|")
-        for split in splits
-          enums.push( split )
-      when "array"
-        enums = arg
-      else
-        enums = @toWarn( "toEnums(arg)", "unable to convert", arg, "enums", [], (t) -> t.log( t.warn() ) )
-    enums
+  # Moved to Type.coffee
+  # toEnums:( arg ) ->
 
   rangeType:( range ) ->
     type = if range.length > 0 then @type(range[0]) else "null"
@@ -198,9 +181,9 @@ class Spec extends Type
   # Override Type.isIn() with addional Spec type arrays
   isIn:( type, arg ) ->
     switch
-     when @isArray(arg)    then @inArray( type, arg )
-     when @isEnumsArg(arg) then @inArray( type, @toEnums(arg) )
-     when @isStr(arg)      then @toIn(arg).includes(type)
+     when @isArray(arg) then @inArray( type, arg )
+     when @isEnums(arg) then @inArray( type, @toEnums(arg) )
+     when @isStr(arg)   then @toIn(arg).includes(type)
      else @isWarn( false, "arg #{arg} not 'array', 'enums' or 'string'", type, false )
 
   # Override Type.isIn() with addional Spec type arrays

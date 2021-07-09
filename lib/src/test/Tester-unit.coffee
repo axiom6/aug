@@ -13,7 +13,7 @@ import { test, tester } from './Tester.js'     # Only importing tester to unit t
 
 # t = tester
 
-test().module( "Class Tester Unit tests" ).on()
+test().module( "Class Tester Unit tests" ).on(false)
 
 test().describe( "Test closure demo" ).on()
 five = () -> 5
@@ -24,7 +24,7 @@ test(  "type(123)",    (t) -> t.eq( tester.type(123), 'number' ) )
 test(  "type('123')",  (t) -> t.eq( tester.type('123'), 'string' ) )
 test().log( test().summary() )
 
-test().describe( "Internal logic for turning tests on and off", ).id("test()").on()
+test().describe( "Internal logic for turning tests on and off", ).name("test()").on()
 test(  'not (  @testing and  @moduleOn and  @methodOn ) @method=false', (t) ->
   isOff = not ( t.testing and t.moduleOn and t.methodOn )
   t.eq( isOff, false ) )
@@ -33,7 +33,7 @@ test(  'not (  @testing and  @moduleOn and  @methodOn ) @method=true', (t) ->
   t.eq( isOff, false ) )
 test().log( test().summary() )
 
-test().describe( "test(text, (t) -> ..." ).id("eq()").on()
+test().describe( "test(text, (t) -> ..." ).name("eq()").on()
 test( 'eq({a:"a"},{a:"a"})',  (t) -> t.eq(  {a:"a"}, {a:"a"} ) )
 #est( 'eq({a:"a"},{a:"b"})',  (t) -> t.eq(  {a:"a"}, {a:"b"} ) )  # Noed ne
 #est( 'eq({a:"a"},{b:"a"})',  (t) -> t.eq(  {a:"a"}, {b:"a"} ) )  # Noed ne

@@ -11,7 +11,7 @@ class UnitTester
   UnitTester.debug   = false
 
   UnitTester.start = (href) ->
-    console.log( "Initial.start()", href )
+    console.log( "-- Start  --", href )
     UnitTester.href = href
     UnitTester.init()
     return
