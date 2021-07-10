@@ -31,7 +31,7 @@ class Type
     
   # The 9 fundamental type Assertions that leverage @type(arg) the improved typeof(arg)
   # In addition isInt isFloat isBoolean isArray isObject can optionally chech strings
-  isStr:(s)      ->   @isType(s,"string") and s.length > 0 and s isnt "None"
+  isStr:(s)      ->   @isType(s,"string") and s.length > 0 and s isnt "none"
   isInt:(i)      -> ( @isType(i,"int")   and not isNaN(i) ) or ( @isType(i,"string") and @isStrInt(i)     )
   isFloat:(f)    -> ( @isType(f,"float") and not isNaN(f) ) or ( @isType(f,"string") and @isStrFloat(f)   )
   isBoolean:(b)  ->   @isType(b,"boolean")                  or ( @isType(b,"string") and @isStrBoolean(b) )
@@ -88,15 +88,15 @@ class Type
       when "string" then e.length is 0
       else               false  # Look into
 
+  isStrInt:( str ) ->
+    if @isStr( str )
+      regexp = /^-?\d+$/
+      regexp.test(str)
+    else false
+
   isStrFloat:( str ) ->
     if @isStr( str )
        regexp = /^-?\d+(?:[.,]\d*?)?$/
-       regexp.test(str)
-    else false
-
-  isStrInt:( str ) ->
-    if @isStr( str )
-       regexp = /^-?\d+$/
        regexp.test(str)
     else false
 
@@ -116,8 +116,8 @@ class Type
       s.startsWith(beg) and s.endsWith(end)
     else false
 
-  # Converters
-  toType:( arg, type ) ->
+  # A coerced conversion that can return a value of 'none'
+  toConvert:( arg, type ) ->
     switch type
       when "string"  then @toStr(     arg )
       when "int"     then @toInt(     arg )
@@ -125,17 +125,24 @@ class Type
       when "boolean" then @toBoolean( arg )
       when "array"   then @toArray(   arg )
       when "object"  then @toObject(  arg )
-      else
-        console.error( "Type.toType(type,arg) unknown type", { type:type, arg:arg } )
-        null
+      else                "none"
+
+  # A value conversion from a 'string' that can return a value of 'none'
+  toValue:( str ) ->
+    return "none" if not @isStr(str)
+    switch
+      when @isStrInt(str)     then @toInt(str)
+      when @isStrFloat(str)   then @toFloat(str)
+      when @isStrBoolean(str) then @toBoolean(str)
+      when @isStrArray(str)   then @toArray(str)
+      when @isStrObject(str)  then @toObject(str)
+      else                         "none"
 
   isEnclose:( str, enc="" ) ->
-    isEnc = switch
+    switch
       when enc.length is 2 then str.charAt(0) is enc.charAt(0) and str.charAt(str.length-1) is enc.charAt(0)
       when enc.length is 1 then str.charAt(0) is enc.charAt(0) and str.charAt(str.length-1) is enc.charAt(1)
       else false
-    console.log( "Type.isEnclose()", { str:str, isEnc:isEnc } ) if @debug
-    isEnc
 
   # toEnclose a "string'
   # toEnclose("abc",   '"'  )       # returns "abc" - good for JSON keys and values
@@ -143,15 +150,14 @@ class Type
   # toEnclose("xyz",   "()" )       # returns (xyz)
   # toEnclose("d,e,f", "[]" )       # returns [d,e,f]
   # toEnclose("a:x,b:y,c:z", "{}" ) # returns {a:x,b:y,c:z}
-  toEnclose:( str, enc="" ) ->
-    enclose = switch
+  toEnclose:( str, enc ) ->
+    switch
       when enc.length is 2 then """#{enc.charAt(0)}#{str}#{enc.charAt(1)}"""
       when enc.length is 1 then """#{enc.charAt(0)}#{str}#{enc.charAt(0)}"""
-      else str
-    console.log( "Type.toEnclose()", { str:str, enclose:enclose } ) if @debug
-    enclose
+      else "\"#{str}\""
 
   # toStr(arg) avoids conflicts with arg.toString()
+  #  returns "none" if unsuccesful
   # This combination of travesal and recursion is cleaner than JSON.stringify()
   # So far all vaild 13 Type.types a super set of Type.typeofs has been accounted for
   # Type.typeofs = ["string","number","boolean","object","function","bigint","symbol","null","undefined"]
@@ -169,15 +175,14 @@ class Type
       when "undefined"  then "undefined"
       when "function"   then "function"
       when "regexp","date","bigint","symbol" then arg.toString()  # hail marys
-      else @toWarn( "toStr(arg)", "unable to convert", arg, "string", "", (t) => t.log( t.warn() ) )
-    # console.log( "toStr(arg)", { arg:arg, str:str, type:type } )
+      else "none"
     str
 
-    # str = if not @isIn(type,"manys") and enc.length > 0 then @toEnclose(str,enc) else str
-    # else  console.log( "toStr(arg)", "unable to convert", arg, type, "string", arg.toString(), arg.toString() )
-    # else  @toWarn( "toStr(arg)", "unable to convert", arg, type,
-    #              "string", arg.toString(), arg.toString(), (t) => t.log( t.warn() ) )
-    # str += key+":"+@toEnclose(@toStr(val),'"')+","
+  # str = if not @isIn(type,"manys") and enc.length > 0 then @toEnclose(str,enc) else str
+  # else  console.log( "toStr(arg)", "unable to convert", arg, type, "string", arg.toString(), arg.toString() )
+  # else  @toWarn( "toStr(arg)", "unable to convert", arg, type,
+  #              "string", arg.toString(), arg.toString(), (t) => t.log( t.warn() ) )
+  # str += key+":"+@toEnclose(@toStr(val),'"')+","
 
   toStrObject:( obj ) ->
     str = "{"
@@ -202,8 +207,10 @@ class Type
       when "int"   then parseFloat(arg.toFixed(1)) # Coerces an 'int' like '1' to a 'float' like '1.0'
       when "string"
         if @isStrFloat(arg)  then parseFloat(arg)
-        else @toWarn( "toFloat(arg)", "unable to convert", arg, "float", NaN, (t) => t.log( t.warn() ) )
-      else   @toWarn( "toFloat(arg)", "unable to convert", arg, "float", NaN, (t) => t.log( t.warn() ) )
+        #lse @toWarn( "toFloat(arg)", "unable to convert", arg, "float", NaN, (t) => t.log( t.warn() ) )
+        else NaN
+      #lse   @toWarn( "toFloat(arg)", "unable to convert", arg, "float", NaN, (t) => t.log( t.warn() ) )
+      else NaN
 
   toInt:( arg ) ->
     type = @type(arg)
@@ -212,8 +219,10 @@ class Type
       when "float"  then Math.round(arg)
       when "string"
         if @isStrInt(arg) then parseInt(arg)
-        else @toWarn( "toInt(arg)", "unable to convert", arg, "int", NaN, (t) => t.log( t.warn() ) )
-      else   @toWarn( "toInt(arg)", "unable to convert", arg, "int", NaN, (t) => t.log( t.warn() ) )
+        #lse @toWarn( "toInt(arg)", "unable to convert", arg, "int", NaN, (t) => t.log( t.warn() ) )
+        else NaN
+      #lse   @toWarn( "toInt(arg)", "unable to convert", arg, "int", NaN, (t) => t.log( t.warn() ) )
+      else NaN
 
   toBoolean:( arg ) ->
     type = @type(arg)
@@ -226,22 +235,21 @@ class Type
           else @toWarn( "toBoolean(arg)", "unable to convert", arg, "boolean", false, (t) => t.log( t.warn() ) )
       when "int"   then arg isnt 0   # check 0   false may not be a convention
       when "float" then arg isnt 0.0 # check 0.0 false may not be a convention
-      else     @toWarn( "toBoolean(arg)", "unable to convert", arg, "boolean", false, (t) => t.log( t.warn() ) )
+      #lse     @toWarn( "toBoolean(arg)", "unable to convert", arg, "boolean", false, (t) => t.log( t.warn() ) )
+      else false
 
   toArray:( arg ) ->
-    type = @type(arg)
-    switch  type
+    switch  @type(arg)
       when "array" then arg
       when "string"
-        str = arg.trim()
-        if @head(arg) is "[" and @tail(arg) is "]" # Strip off brackets
-          arg = @slice(arg,2,arg.length-1)
-        array = []
-        strs  = @slice(arg,2,arg.length-1).split(",")
-        for str in strs
-          array.push( @toType( str, type ) )
+        arg = @strip( arg, "[", "]" )
+        array  = []
+        splits = @arg.split(",")
+        for split in splits
+          array.push(  @toValue(split) )
         array
-      else @toWarn( "toArray(arg)", "unable to convert", arg, "array", [], (t) => t.log( t.warn() ) )
+      #lse @toWarn( "toArray(arg)", "unable to convert", arg, "array", [], (t) => t.log( t.warn() ) )
+      else []
 
   toObject:( arg ) ->
     obj  = {}
@@ -254,11 +262,12 @@ class Type
       when "int","float","boolean","function"
         obj[type] = arg
       when "string"
+        arg = @strip( arg, "{", "}" )
         obj = arg.split(",")
                  .map( (keyVal) => keyVal.split(":").map( (arg) => arg.trim() ) )
                  .reduce( (acc,cur) => acc[cur[0]] = cur[1]; acc )  # {}  acc accumulator cur current
-      else
-        @toWarn( "toObject(arg)", "unable to convert", arg, "object", {}, (t) => t.log( t.warn() ) )
+      #lse @toWarn( "toObject(arg)", "unable to convert", arg, "object", {}, (t) => t.log( t.warn() ) )
+      else {}
     obj
 
   toKeys:(o)      ->
@@ -292,15 +301,18 @@ class Type
     switch @type(arg)
       when "array"  then arg[0]
       when "string" then arg.charAt(0)
-      else @toWarn( "head(arg)", "unable to get the first element of", arg, @type(arg), null, (t) => t.log( t.warn() ) )
+      #lse @toWarn( "head(arg)", "unable to get the first element of", arg, @type(arg), null, (t) => t.log( t.warn() ) )
+      else "none"
 
   tail:(arg) ->
     switch @type(arg)
       when "array"  then arg[arg.length-1]
       when "string" then arg.charAt(arg.length-1)
-      else @toWarn( "tail(arg)", "unable to get the last element of", arg, @type(arg), null, (t) => t.log( t.warn() ) )
+      #lse @toWarn( "tail(arg)", "unable to get the last element of", arg, @type(arg), null, (t) => t.log( t.warn() ) )
+      else "none"
 
   strip:( str, beg, end ) ->
+    str = str.trim()
     if @isStr(beg) and str.startsWith(beg)
        str = str.substring(beg.length)
     if @isStr(end) and str.endsWith(end)
@@ -308,23 +320,18 @@ class Type
     str
 
   # Unlike the built in Array v.slice(beg,end) where beg is a zero-based index and end
-
-  # Here beg starts at 1 and end includes the last position or is set to beg if ommitted
+  #  here beg starts at 1 and end includes the last position or is set to beg if ommitted
   #  an array slice( ["a","b","c"], 1, 2 ) returns ["a","b"]
   #  an array slice( ["a","b","c"], 2    ) returns ["b"]
   #  a string slice( ["abc"],       1, 2 ) returns   "ab"
   #  a string slice( ["abc"],       2    ) returns   "b"
   # where with Array.slice() it is open
-  slice:( v, beg, end=null, remove=false ) ->
-    end = if @isDef(end) then end else beg
-    pop = null
-    switch @type(v)
-      when "array"
-        pop = if remove then v.splice(beg-1,end) else v.slice(beg-1,end)
-      when "string"
-        pop = v.slice(beg-1,end)
-        v   = v.substring(0,beg-1) + v.substring(end) if remove
-    pop
+  slice:( v, beg, end=null ) ->
+    end = if @isDef(end) and beg <= beg then end else beg
+    switch
+      when @isArray(v) then v.slice(beg-1,end)
+      when @isStr(v)   then v.slice(beg-1,end)
+      else ""
 
   pad:( n, m ) ->
     len = @numDigits( n )
@@ -337,7 +344,8 @@ class Type
   numDigits:( n ) ->
     Math.max( Math.floor( Math.log10( Math.abs(n) ) ), 0 ) + 1
 
-  time:()  ->  new Date().getTime()
+  time:()  ->
+    new Date().getTime()
 
   # A deliberate do nothing consumer of arguments and variables
   noop:( ...args ) ->
@@ -375,30 +383,34 @@ class Type
 
   # Moved from Spec.coffee
   isEnums:( arg ) ->
-    @isStr(arg) and arg.includes("|")
+    switch
+      when @isStr(arg) and arg.includes("|") then true
+      when @isArray(arg)                     then true
+      else false
 
-  # Moved from Spec.coffee
+  # Leverage the stronger assertions @isStr(arg) and @isArray(arg)
   toEnums:( arg ) ->
     enums = []
-    type  = type = @type(arg)
-    switch type
-      when "string" and arg.includes("|")
+    switch
+      when @isStr(arg) and arg.includes("|")
         splits = arg.split("|")
         for split in splits
           enums.push( split )
-      when "array"
+      when @isArray(arg)
         enums = arg
       else
-        enums = @toWarn( "toEnums(arg)", "unable to convert", arg, "enums", [], (t) -> t.log( t.warn() ) )
+        #nums = @toWarn( "toEnums(arg)", "unable to convert", arg, "enums", [], (t) -> t.log( t.warn() ) )
+        enums = []
     enums
 
-# Can be overriden by Spec.isIn() with it additional Spec type arrays
+  # Can be overriden by Spec.isIn() with it additional Spec type arrays
   isIn:( type, arg ) ->
     switch
       when @isArray(arg) then @inArray( type, arg )
       when @isEnums(arg) then @inArray( type, @toEnums(arg) )
       when @isStr(arg)   then @toIn(arg).includes(type)
-      else @isWarn( false, "arg #{arg} not 'array', 'enums' or 'string'", type, false )
+      #lse @isWarn( false, "arg #{arg} not 'array', 'enums' or 'string'", type, false )
+      else false
 
   # Can be overriden by Spec.toIn() with it additional Spec type arrays
   toIn:( arg ) ->
@@ -412,14 +424,14 @@ Type.remove = ( e, a ) ->
   a.splice( index, 1 ) if index > -1
   a
 
-# All Type[key] arrays
+# All Type[key] arrays. Considering if "none" belongs
 Type.undefs  = ["null","undefined"]
 Type.numbers = ["int","float"]
 Type.ranges  = ["string","int","float"]
 Type.values  = ["string","int","float","boolean"]
 Type.manys   = ["object","array"]
 Type.results = ["string","int","float","boolean","object","array"]
-Type.expects = Type.results.concat(["schema","range","enums","amy"])
+Type.expects = Type.results.concat(["regexp","range","enums","amy"])
 Type.typeofs = ["string","number","boolean","object","function","bigint","symbol","null","undefined"]
 Type.types   = Type.typeofs.concat(["int","float","array","regexp","date"])
 Type.types   = Type.remove("number", Type.types ) # number is now either 'int' or 'float'

@@ -129,19 +129,15 @@ class Tester extends Spec
     # Check values and types
     status = @checkValuesTypes( result, expect, status )
     if not status.assert.pass
-     return @examine( false, result, expect, status, key, index )
+      status = @examine( false, result, expect, status, key, index )
+      return @processStatus( status )
 
     # Perform all spec based assertions
     if @isSpec( expect )
-      spec = @toSpec(  expect )
-      status = switch spec.oper
-        when 'regexp' then @inRegexp( result, spec, status, level, key, index )
-        when 'enums'  then @inEnums(  result, spec, status, level, key, index )
-        when "range"  then @inRange(  result, spec, status, level, key, index )
-        else
-          status.errors += "unknown spec.oper #{spec.oper}"
-          @examine( false, result, spec, status, key, index )
-      return status
+      spec   = @toSpec( expect )
+      pass   = @inSpec( result, spec )
+      status = @examine( pass, result, spec, status, key, index )
+      return @processStatus( status )
 
     # Perform all comparisions
     type = @type( result )
@@ -151,9 +147,11 @@ class Tester extends Spec
       when "object" then @objectsEq(  result, expect, status, level, key   )
       when "array"  then @arraysEq(   result, expect, status, level, index )
       else               @unknownsEq( result, expect, status, level ) # just a fallback
-    @examine( status.assert.pass, result, expect, status, key, index )
+    status = @examine( status.assert.pass, result, expect, status, key, index )
+    @processStatus( status )
 
-    # Store status in @statuses array and publish
+  # Store status in @statuses array and publish
+  processStatus:( status ) ->
     if level is 0
       @statuses.push(status)
       @stream.publish( @statusSubject, status )  if @isDef(@stream)
@@ -251,45 +249,6 @@ class Tester extends Spec
       status = @assert( result[i], expect[i], status, ++level, null, i )
     status
 
-  # Determine if a result is enumerated.
-  # This method is here in Tester because it call @examine()
-  inRegexp:( result, spec, status, level=0, key=null, index=null ) ->
-    @noop( level )
-    regexp = spec.expect
-    pass  = regexp.test(result)
-    status.assert.text +=  "inRegexp(...)"
-    @examine( pass, result, spec, status, key, index )
-
-  # Determine if a result is enumerated.
-  # This method is here in Tester because it call @examine()
-  inEnums:( result, spec, status, level=0, key=null, index=null ) ->
-    @noop( level )
-    enums = spec.expect
-    pass  = @inArray( result, enums )
-    status.assert.text +=  "inEnums(...)"
-    @examine( pass, result, spec, status, key, index )
-
-  # Determine if a result is bounded witnin a range.
-  # This method is here in Tester because it call @examine()
-  inRange:( result, spec, status, level, key, index ) ->
-    range = spec.expect
-    pass  = @isRange(range)
-    type = @type(result)
-    inStrRange   = ( string, range ) -> range[0]          <= string and string <= range[1]
-    inIntRange   = ( int,    range ) -> range[0]          <= int    and int    <= range[1]
-    inFloatRange = ( float,  range ) -> range[0]-range[2] <= float  and float  <= range[1]+range[2]
-    pass = switch type
-      when "string" then inStrRange(    result, range )
-      when "int"    then inIntRange(    result, range )
-      when "float"  then inFloatRange(  result, range )
-      when "array"  then @inArrayRange( result, range )
-      when "object" then @objectsEq(    result, range, status, level )
-      else @toWarn( "inRange()", "unknown range type", result, type, false, (t) -> t.log( t.warn() ) )
-    status.assert.text += "inRange(...)"
-    @examine( pass, result, spec, status, key, index )
-
-  # @runUnitTests(...) @describe(...) @summary(...)
-
   runUnitTests:( paths ) ->
     for path in  paths
       modulePath  = @toPath(path) # also sets the @moduleName
@@ -353,14 +312,14 @@ class Tester extends Spec
     ref = " at index: #{index}" if @isInt(index)
     if name is "Spec"
       spec = value
-      "\n   #{name}#{ref} type is '#{spec.type}' with spec '#{spec.spec}' and oper '#{spec.oper}'"
+      "\n   #{name}#{ref} type is '#{spec.type}' with match '#{spec.match}' and card '#{spec.card}'"
     else
       "\n   #{name}#{ref} type is '#{@type(value)}' with value #{@toStr(value)}"
 
   # Generates informative text in status
   examine:( pass, result, expect, status, key=null, index=null ) ->
     return status if not @verbose and ( key? or index? )
-    isSpec = @isSpec( expect )
+    isSpec               = @isSpec( expect )
     eq                   = if pass then "eq" else "not"
     status.assert.text   = @statusAssertText( pass, result, status )
     status.assert.text  += """#{eq} #{@toStr(expect)}""" if status.result.type isnt "function"
@@ -526,3 +485,31 @@ class Tester extends Spec
 export tester = new Tester()
 test = tester.test
 export { test }
+
+###
+  # Determine if a result is bounded witnin a range.
+  # This method is here in Tester because it call @examine()
+  inRangeTester:( result, spec, status, level, key, index ) ->
+    range = spec.match
+    pass  = @inRange( result, range )
+    status.assert.text += "inRange(...)"
+    @examine( pass, result, spec, status, key, index )
+
+  # Determine if a result is enumerated.
+  # This method is here in Tester because it call @examine()
+  inEnumsTester:( result, spec, status, level=0, key=null, index=null ) ->
+    @noop( level )
+    enums = spec.expect
+    pass  = @inArray( result, enums )
+    status.assert.text +=  "inEnums(...)"
+    @examine( pass, result, spec, status, key, index )
+
+  # Determine if a result is enumerated.
+  # This method is here in Tester because it call @examine()
+  inRegexpTester:( result, spec, status, level=0, key=null, index=null ) ->
+    @noop( level )
+    regexp = spec.expect
+    pass  = regexp.test(result)
+    status.assert.text +=  "inRegexp(...)"
+    @examine( pass, result, spec, status, key, index )
+###
