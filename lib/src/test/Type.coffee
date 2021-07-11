@@ -10,13 +10,14 @@ class Type
 
   # An improved typeof() that follows the convention by returning types in lower case by default.
   # The basic types similar to typeof() returned are:
-
+  # @isEnclose(typ,"|") called for 'Enums to avoid an infinite recusion with @isStr(arg)
   type:(arg,lowerCase=true) =>
     str = Object::toString.call(arg)
     tok = str.split(' ')[1]
     typ = tok.substring(0,tok.length-1)
     typ = if typ is "Number" and     Number.isInteger(arg) then "Int"   else typ # Previous CoffeeScript issue
     typ = if typ is "Number" and not Number.isInteger(arg) then "Float" else typ  #  with return on nested if's
+    typ = if @isEnclose(typ,"|") then "Enums" else typ
     if lowerCase then typ.toLowerCase() else typ
 
   # A more detail type that returns basic types, class, object and function name in upper case
@@ -171,6 +172,7 @@ class Type
       when "boolean"    then if arg then "true" else "false"
       when "object"     then @toStrObject(arg)
       when "array"      then @toStrArray(arg)
+      when "enums"      then arg
       when "null"       then "null"
       when "undefined"  then "undefined"
       when "function"   then "function"
@@ -244,7 +246,7 @@ class Type
       when "string"
         arg = @strip( arg, "[", "]" )
         array  = []
-        splits = @arg.split(",")
+        splits = arg.split(",")
         for split in splits
           array.push(  @toValue(split) )
         array
@@ -383,25 +385,22 @@ class Type
 
   # Moved from Spec.coffee
   isEnums:( arg ) ->
-    switch
-      when @isStr(arg) and arg.includes("|") then true
-      when @isArray(arg)                     then true
-      else false
+    @isStrEnclosed( "|", arg, "|" )
 
   # Leverage the stronger assertions @isStr(arg) and @isArray(arg)
   toEnums:( arg ) ->
-    enums = []
     switch
       when @isStr(arg) and arg.includes("|")
-        splits = arg.split("|")
-        for split in splits
-          enums.push( split )
+        arg
       when @isArray(arg)
-        enums = arg
+        enums = "|"
+        for i in [0...arg.length]
+          enums += @toStr(arg[i]) + "|"
+        enums
       else
-        #nums = @toWarn( "toEnums(arg)", "unable to convert", arg, "enums", [], (t) -> t.log( t.warn() ) )
-        enums = []
-    enums
+        ""
+  inEnums:( result, enums ) ->
+    enums.includes(result)
 
   # Can be overriden by Spec.isIn() with it additional Spec type arrays
   isIn:( type, arg ) ->
@@ -418,61 +417,6 @@ class Type
       when  not  arg? then []
       when Type[arg]? then Type[arg]
       else []
-    Object.getOwnPropertyNames(Math)
-
-  # Useless
-  listFunctions:( obj ) ->
-    list = []
-    console.log( obj )
-    for own key, fun of obj when @isType(fun,"function")
-      par = fun.toString()
-      list.push(    { key:key, par:par } )
-      console.log(  { key:key, par:par } )
-    list
-
-  parseFunction:( par )  =>
-    (par + '')
-    .replace(/[/][/].*$/mg,'')                  # strip single-line comments
-    .replace(/\s+/g, '')                        # strip white space
-    .replace(/[/][*][^/*]*[*][/]/g, '')         # strip multi-line comments
-    .split('){', 1)[0].replace(/^[^(]*[(]/, '') # extract the parameters
-    .replace(/=[^,]+/g, '')                     # strip any ES6 defaults
-    .split(',').filter(Boolean);                # split & filter [""]
-
-  listFunctions1:( obj ) ->
-    list = []
-    for own key, fun of obj when @isType(fun,"function")
-      proto = Object.getPrototypeOf(fun)
-      str   = proto.name
-      list.push(    { str:str, proto:proto } )
-      console.log(  { str:str, proto:proto } )
-    list
-
-  listFunctions2:( obj ) ->
-    list = []
-    for own key, val of obj when @isType(val,"function")
-      fun = {}
-      #       par = fun.toString()
-      #      str = @parseFunction( par )
-      fun.proto = Object.getPrototypeOf(val)
-      fun.name  = fun.proto.name
-      fun.args  = fun.proto.arguments
-      fun.str   = fun.name + "("
-      for arg in fun.args
-        fun.str += arg + ","
-      fun.str  = @strip( fun.str, "", "," )
-      fun.str += ")"
-      list.push(   { str:fun.str, fun:fun } )
-      console.log( { str:fun.str, fun:fun } )
-    list
-
-  listFunctions3:( obj ) ->
-    list = []
-    props = Object.getOwnPropertyNames(obj)
-    for key in props when @isType(obj[key],"function")
-      list.push(    key )
-      console.log(  key )
-    list
 
 Type.remove = ( e, a ) ->
   index = a.indexOf(e)

@@ -51,7 +51,8 @@ class Spec extends Type
   # internal functions verify an array of type "string" or "int" or "float"
   #   is an array of type "string" or "int" or "float"
   isRange:(range)  ->
-    return false if not @isArray(range)
+    return false                if not  @isArray(range)
+    return @isRangeArray(range) if @isArrayTyped(range,'array')
     isStrRange    = (r) -> r.length is 2 and r[0]      <= r[1]       # For 'string'
     isIntRange    = (r) -> r.length is 2 and r[0]      <= r[1]       # For 'int'
     isFloatRange  = (r) -> r.length is 3 and r[0]-r[2] <= r[1]+r[2]  # For 'float' r[2] is tol
@@ -60,6 +61,11 @@ class Spec extends Type
       when 'int'    then isIntRange(range)
       when 'float'  then isFloatRange(range)
       else               false
+
+  isRangeArray:(ranges) ->
+    pass = true
+    pass = pass and @isRange(range) for range in ranges
+    pass
 
   # Moved to Type.coffee
   isEnums:( arg ) ->
@@ -112,7 +118,7 @@ class Spec extends Type
   #  "array:[[0,360],[0,100],[0,100]]:?"
   #     { type:"array",  oper:"range", match:[[0,360],[0,100],[0,100]], card="?" }
   toSpecParse:( arg ) ->
-    spec   = @toInit()
+    spec   = @toSpecInit()
     splits = arg.split(":")
     length = splits.length
     if length >= 1  then spec.type = splits[0]  # type
@@ -160,7 +166,7 @@ class Spec extends Type
 # -- in... Spec matches
 
   inSpec:( result, spec ) =>
-    return false if not ( @isSpec(spec) and @type(result) is spec.type and @inCard(spec.card) )
+    return false if not ( @isSpec(spec) and @type(result) is spec.type and @inCard(result,spec) )
     match = spec.match
     switch
       when  @isArray(result) and  @isArray(spec) then  @inSpecArray( result, spec  )
@@ -188,6 +194,7 @@ class Spec extends Type
   # This method is here in Tester because it call @examine()
   inRange:( result, range ) ->
     return false if not  @isRange(range)
+    return @inRangeArray(result,range) if @isArrayTyped(range,'array')
     range = @toRange(range) # Convers the 'string' represention of range if necessary
     inStrRange   = ( string, range ) -> range[0]          <= string and string <= range[1]
     inIntRange   = ( int,    range ) -> range[0]          <= int    and int    <= range[1]
@@ -198,14 +205,19 @@ class Spec extends Type
       when "float"  then inFloatRange(   result, range )
       else false
 
+  inRangeArray:( results, ranges ) ->
+    return false if not @isArrayTyped(results,'array')
+    pass = true
+    min  = Math.min( results.length, ranges.length )
+    pass = pass and @inRange(results[i],ranges[i]) for i in [0...min]
+    pass
+
   # Determine if a result is enumerated.
-  inEnums:( result, enums ) ->
-    return false if not @isEnums(enums)
-    enums = @toEnums( enums )  # Convers the 'string' represention of enums if necessary
-    @inArray( result, enums )
+  # inEnums:( result, enums ) ->
+  #   super.toEnums( result, enums )
 
   inRegexp:( result, regexp ) ->
-    return false if not @isRegexo(regexp)
+    return false if not @isRegexp(regexp)
     regexp = @toRegexp( regexp )
     regexp.test(result)
 

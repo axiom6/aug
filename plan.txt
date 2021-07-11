@@ -1,7 +1,6 @@
 
 Tester Wrap Up
-  1. to... conversions with @convert(...) not being listed and maybe not being tested
-  2. Messed up messages from Spec
+  1. -- for @decribeName and sometime  -- @moduleName
 
 Debug
   1. Bad pageJey in Nav
