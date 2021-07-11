@@ -41,7 +41,6 @@ class Spec extends Type
       when  @isRange(match) then true
       else  false
 
-
   # let re = /ab+c/i; // literal notation
   # let re = new RegExp('ab+c', 'i') // constructor with string pattern as first argument
   # let re = new RegExp(/ab+c/, 'i') // constructor with regular express
@@ -97,7 +96,7 @@ class Spec extends Type
         obj = {}
         obj[key] = @toSpec(val) for own key, val of arg
         obj
-      else @specInit()  # @specInit() creates a do nothing spec
+      else @toSpecInit()  # @toSpecInit() creates a do nothing spec
 
   # toSpecParse:( spec, arg )
   # Examples
@@ -132,13 +131,13 @@ class Spec extends Type
     spec
 
   toSpecObject:( arg ) ->
-    spec       = @specInit()
+    spec       = @toSpecInit()
     spec.type  = if arg.type?  then arg.type  else "any"
     spec.match = if arg.match? then arg.match else "any"
     spec.card  = if arg.card?  then arg.card  else  "1"  # required
     spec
 
-  specInit:() ->
+  toSpecInit:() ->
     { type:"any", match:"any", card:"1" }
 
   toRange:( arg ) ->
@@ -181,7 +180,7 @@ class Spec extends Type
   # Here only the keys common to both spec and result are checked
   inSpecObject:( result, spec ) ->
     pass = true
-    for own key, val of spec when result[key]         # Only travese the keys the
+    for own key, val of spec when result[key]?  
       pass = pass and @inSpec(result[key],spec[key])
     pass
 
@@ -218,7 +217,7 @@ class Spec extends Type
     card = spec.card
     switch
       when @isType(card,"int")     then true
-      when @isStr(card) and card.includes(":")
+      when @isStr(card) and card.includes("-")
         minMax = @toMinMax(card)
         num = minMax[0] # Dummy number
         minMax[0] <= num <= minMax[1]

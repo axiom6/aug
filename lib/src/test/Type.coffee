@@ -418,6 +418,61 @@ class Type
       when  not  arg? then []
       when Type[arg]? then Type[arg]
       else []
+    Object.getOwnPropertyNames(Math)
+
+  # Useless
+  listFunctions:( obj ) ->
+    list = []
+    console.log( obj )
+    for own key, fun of obj when @isType(fun,"function")
+      par = fun.toString()
+      list.push(    { key:key, par:par } )
+      console.log(  { key:key, par:par } )
+    list
+
+  parseFunction:( par )  =>
+    (par + '')
+    .replace(/[/][/].*$/mg,'')                  # strip single-line comments
+    .replace(/\s+/g, '')                        # strip white space
+    .replace(/[/][*][^/*]*[*][/]/g, '')         # strip multi-line comments
+    .split('){', 1)[0].replace(/^[^(]*[(]/, '') # extract the parameters
+    .replace(/=[^,]+/g, '')                     # strip any ES6 defaults
+    .split(',').filter(Boolean);                # split & filter [""]
+
+  listFunctions1:( obj ) ->
+    list = []
+    for own key, fun of obj when @isType(fun,"function")
+      proto = Object.getPrototypeOf(fun)
+      str   = proto.name
+      list.push(    { str:str, proto:proto } )
+      console.log(  { str:str, proto:proto } )
+    list
+
+  listFunctions2:( obj ) ->
+    list = []
+    for own key, val of obj when @isType(val,"function")
+      fun = {}
+      #       par = fun.toString()
+      #      str = @parseFunction( par )
+      fun.proto = Object.getPrototypeOf(val)
+      fun.name  = fun.proto.name
+      fun.args  = fun.proto.arguments
+      fun.str   = fun.name + "("
+      for arg in fun.args
+        fun.str += arg + ","
+      fun.str  = @strip( fun.str, "", "," )
+      fun.str += ")"
+      list.push(   { str:fun.str, fun:fun } )
+      console.log( { str:fun.str, fun:fun } )
+    list
+
+  listFunctions3:( obj ) ->
+    list = []
+    props = Object.getOwnPropertyNames(obj)
+    for key in props when @isType(obj[key],"function")
+      list.push(    key )
+      console.log(  key )
+    list
 
 Type.remove = ( e, a ) ->
   index = a.indexOf(e)

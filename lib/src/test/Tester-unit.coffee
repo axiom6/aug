@@ -13,6 +13,8 @@ import { test, tester } from './Tester.js'     # Only importing tester to unit t
 
 # t = tester
 
+test().listFunctions( tester )
+
 test().module( "Class Tester Unit tests" ).on(false)
 
 test().describe( "Test closure demo" ).on()
@@ -26,10 +28,10 @@ test().log( test().summary() )
 
 test().describe( "Internal logic for turning tests on and off", ).name("test()").on()
 test(  'not (  @testing and  @moduleOn and  @methodOn ) @method=false', (t) ->
-  isOff = not ( t.testing and t.moduleOn and t.methodOn )
+  isOff = not ( t.testing and t.moduleOn and t.describeOn )
   t.eq( isOff, false ) )
 test(  'not (  @testing and  @moduleOn and  @methodOn ) @method=true', (t) ->
-  isOff = not ( t.testing and t.moduleOn and t.methodOn )
+  isOff = not ( t.testing and t.moduleOn and t.describeOn )
   t.eq( isOff, false ) )
 test().log( test().summary() )
 
@@ -41,6 +43,8 @@ test( "eq([1,2,3],[1,2,3] )", (t) -> t.eq([1,2,3],[1,2,3]    ) )
 #est( "eq([1,2,3])",          (t) -> t.eq([1,2,3],[1,2,3,4]  ) )  # Noed ne
 #est( 'eq((x)->,(y)->))',     (t) -> t.eq( (x)->, (y)->      ) )  # Need better handling of function types?
 test().log( test().summary() )
+
+
 
 ###
   constructor:()

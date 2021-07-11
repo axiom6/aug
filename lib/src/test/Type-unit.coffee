@@ -10,6 +10,8 @@ stream     = new Stream( subjects, streamLog )
 func       = () ->
 undef      = undefined
 
+test().listFunctions( type )
+
 test().module( "Class Type assertion and conversion" ).on()
 
 test().describe( """Enclose strings with '"', '()', '[]' '{}'""", "toEnclose()" ).on()
@@ -165,3 +167,5 @@ test(         'new Date("August 19, 1975 23:15:30")',
   type.toStr( `new Date("August 19, 1975 23:15:30")` ),
   "Tue Aug 19 1975 23:15:30 GMT+0200 (CEST)"  )
 test().log( test().summary() ) # Log the all the tests  that began with descripe(...)
+
+

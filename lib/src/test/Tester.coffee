@@ -127,7 +127,7 @@ class Tester extends Spec
   assert:( result, expect, status, level=0, key=null, index=null ) ->
 
     # Check values and types
-    status = @checkValuesTypes( result, expect, status )
+    status = @verify( result, expect, status )
     if not status.assert.pass
       status = @examine( false, result, expect, status, key, index )
       return @processStatus( status )
@@ -158,12 +158,13 @@ class Tester extends Spec
     status
 
   convert:( result, expect, status ) ->
-    status = @checkValuesTypes(   result, expect, status )
-    @examine( status.assert.pass, result, expect, status )
+    status = @verify(                      result, expect, status )
+    status = @examine( status.assert.pass, result, expect, status )
+    @processStatus( status )
 
   # Check and report on values and types
   #   refactored on Wed July 7, 2021
-  checkValuesTypes:( result, expect, status ) ->
+  verify:( result, expect, status ) ->
     op  = @describeOp
     r   = @type(result)
     e   = @type(expect)
