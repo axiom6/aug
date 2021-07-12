@@ -285,7 +285,7 @@ class Type
         keyValues = arg.split(",")
         for keyValue in keyValues
           [key,value] = keyValue.split(":")
-          obj[key]    = @toValue(value)
+          obj[key]    = '"' + @toValue(value) + '"'
       else
         obj = {}
     obj

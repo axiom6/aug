@@ -1,7 +1,8 @@
 
 Tester Wrap Up
-  1. -- for @decribeName and sometime  -- @moduleName
-  2. @complete() for module and final did not run
+  1. Move Tester.verify(...) up into @run(...) to check args
+  2. Working on @toObject(arg) to detect vars for no "" and to put "" around values
+  2. -- for @decribeName and sometime  -- @moduleName
 
 Debug
   1. Bad pageJey in Nav
