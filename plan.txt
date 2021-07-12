@@ -1,6 +1,7 @@
 
 Tester Wrap Up
   1. -- for @decribeName and sometime  -- @moduleName
+  2. @complete() for module and final did not run
 
 Debug
   1. Bad pageJey in Nav

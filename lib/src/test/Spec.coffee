@@ -32,7 +32,7 @@ class Spec extends Type
     @isDef(arg) and type isnt("object") and ( type is "regexp" or ( type is "string" and arg.includes(":") ) )
 
   isSpecObject: ( arg ) ->
-    @conditions( @isObject(arg), @isIn(arg.type,"results"), @isMatch(arg.match), @isCard(arg.card) )
+    @isObject(arg) and @isIn(arg.type,"results") and arg.match? and @isMatch(arg.match) and arg.card? and @isCard(arg.card)
 
   isMatch:( match ) ->
     switch
@@ -82,13 +82,6 @@ class Spec extends Type
   isExpect:( expect ) ->
     type =  @toType(expect)
     @isDef(expect) and @isIn( type, "expects" )
-
-  # This approach insures that all conditions are checked and messages sent
-  #   then all arg returns are anded together to determine a final pass or fail
-  conditions:( args... ) ->
-    pass = true
-    pass = pass and arg for arg in args
-    pass
 
   # -- to... Spec conversions
 
@@ -197,7 +190,7 @@ class Spec extends Type
 # -- in... Spec matches
 
   inSpec:( result, spec ) =>
-    return false if not ( @isSpec(spec) and @toType(result) is spec.type and @inCard(result,spec) )
+    return false if @isNot(spec) or not ( @isSpec(spec) and @toType(result) is spec.type and @inCard(result,spec) )
     match = spec.match
     switch
       when  @isArray(result) and  @isArray(spec) then @inSpecArray(  result, spec  )

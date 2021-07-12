@@ -115,10 +115,10 @@ class Tester extends Spec
       moduleTx:@moduleTx,       moduleName:  @moduleName,   moduleId:  @moduleId, moduleOn:    @moduleOn,
       describeTx:@describeTx, describeName:@describeName, describeId:@describeId, describeOn:@describeOn,
       describeOp:@describeOp }
-      warned:{ text:"", }
-      result:{ text:"",   type:@toType(result), value:result }
-      expect:{ text:"",   type:@toType(expect), value:expect }
-      errors:""
+      result:{ text:"", def:true, type:@toType(result), value:result }
+      expect:{ text:"", def:true, type:@toType(expect), value:expect }
+      warned:{ text:"" }
+      errors:{ text:"" }
     }
 
   # Performs all assertions even a deep equal on objects and arrays
@@ -170,15 +170,27 @@ class Tester extends Spec
     e   = @toType(expect)
     rIs = () -> "\nResult is type '#{r}'"
     eIs = () -> "\nExpect is type '#{e}'"
-    status.errors += switch
-      when @isNot(result)            then " Result of #{r} is not defined#{eIs()}"
-      when @isNot(expect)            then " Expect of #{e} is not defined#{rIs()}"
+    status.errors.text += switch
+      when @isNot(result) and @isNot(expect)
+        status.result.def = false
+        status.expect.def = false
+        " Result of #{r} is not defined#{eIs()}" + "\n"
+        " Expect of #{e} is not defined#{rIs()}"
+      when @isNot(result)
+        status.result.def = false
+        " Result of #{r} is not defined#{eIs()}"
+      when @isNot(expect)
+        status.expect.def = false
+        " Expect of #{e} is not defined#{rIs()}"
       when not @isIn(r,"expects")    then "Expect of type '#{e}' not in #{@toIn('expects')}#{rIs()}"
       when not @isIn(r,"results")    then "Result of type '#{r}' not in #{@toIn('results')}#{eIs()}"
       when r is "function"           then " Result type is 'function#{rIs()}"
       when e is "function"           then " Expect type is 'function#{eIs()}"
       when r isnt e and op isnt "to" then " Types do not match#{rIs()}#{eIs()}"
       else ""
+    if @isStr(status.errors.text)
+      console.log( "Tester.verify(result,expect,status)", { errors:status.errors.text, result:result, expect:expect, status:status } )
+      status.assert.pass  = false
     status
 
   valuesEq:( result, expect, status, oper ) ->
@@ -198,7 +210,7 @@ class Tester extends Spec
   unknownsEq:( result, expect, status ) ->
     @noop(     result, expect )
     status.assert.pass  = false
-    status.assert.errors += "unknown types for comparision"
+    status.assert.errors.text += "unknown types for comparision"
     status
 
   # Deep object equality assertion where all matching keys are examined
@@ -206,9 +218,9 @@ class Tester extends Spec
 
     # Insure that result and expect are objects
     if not @isObject(result) or not @isObject(expect)
-      status.errors += " either one or both result and expect are not objects"
-      status.errors += " Result type is #{@toType(result)}"
-      status.errors += " Expect type is #{@toType(expect)}"
+      status.errors.text += " either one or both result and expect are not objects"
+      status.errors.text += " Result type is #{@toType(result)}"
+      status.errors.text += " Expect type is #{@toType(expect)}"
       return @examine( false, result, expect, status, key, null )
 
     # Check that the result object has all the keys that the expect object has
@@ -232,16 +244,16 @@ class Tester extends Spec
 
     # Insure that result and expect are arrays
     if not @isArray(result) or not @isArray(expect)
-      status.errors += " either one or both result and expect are not arrays"
-      status.errors += " Result type is #{@toType(result)}"
-      status.errors += " Expect type is #{@toType(expect)}"
+      status.errors.text += " either one or both result and expect are not arrays"
+      status.errors.text += " Result type is #{@toType(result)}"
+      status.errors.text += " Expect type is #{@toType(expect)}"
       return @examine( false, result, expect, status, null, index )
 
     # Examine the array lengths
     if result.length isnt expect.length
-      status.errors += " different array lengths"
-      status.errors += " Result length is #{result.length}"
-      status.errors += " Expect length is #{expect.length}"
+      status.errors.text += " different array lengths"
+      status.errors.text += " Result length is #{result.length}"
+      status.errors.text += " Expect length is #{expect.length}"
       status = @examine( false, result, expect, status, null, index )
 
     # Assert each value within the minimum length of the result and expect arrays
@@ -300,7 +312,9 @@ class Tester extends Spec
   statusAssertText:( pass, result, status ) ->
     describeName = status.assert.describeName
     text       = if pass then "\n-- Passed -- " else "\n-- Failed -- "
-    if @isStr(describeName)
+    if @isNot(result)
+      text += @textValue( "Result", result )
+    else if @isStr(describeName)
       text += @strip(describeName,"","()") + "(" + @toStr(result) + ") "
       text += @text + " " # if not pass
     else
@@ -319,7 +333,8 @@ class Tester extends Spec
 
   # Generates informative text in status
   examine:( pass, result, expect, status, key=null, index=null ) ->
-    return status if not @verbose and ( key? or index? )
+    #eturn status if not ( status.result.def and status.expect.def )
+    return status if not @verbose and ( key? or  index? )
     isSpec               = @isSpec( expect )
     eq                   = if pass then "eq" else "not"
     status.assert.text   = @statusAssertText( pass, result, status )
@@ -329,7 +344,6 @@ class Tester extends Spec
     status.result.text  += @textValue( "Result", result, key, index )
     status.expect.text  += @textValue( "Expect", expect, key, index )  if not isSpec
     status.expect.text  += @textValue( "Spec",   expect, key, index )  if     isSpec
-    #tatus.warned.text  += warn
     status
 
   # Determine if a status is part of module set or part of a describe set
@@ -412,7 +426,8 @@ class Tester extends Spec
     text += status.assert.text
     text += status.result.text  if @verbose or not status.assert.pass
     text += status.expect.text  if @verbose or not status.assert.pass
-    text += status.warned.text  if @verbose
+    text += status.warned.text  if @verbose # Need to look into this further
+    text += status.errors.text  if @verbose # Need to look into this further
     text
 
   totals:( group ) ->

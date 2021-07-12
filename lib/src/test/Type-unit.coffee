@@ -10,8 +10,6 @@ stream     = new Stream( subjects, streamLog )
 func       = () ->
 undef      = undefined
 
-test().listFunctions( type )
-
 test().module( "Class Type assertion and conversion" ).on()
 
 test().describe( """Enclose strings with '"', '()', '[]' '{}'""", "toEnclose()" ).on()
@@ -150,8 +148,8 @@ test( 'toArray("[1,2,3]")',  type.toArray("[1,2,3]"), [1,2,3] )
 test( "toObject( arg )", (t) ->
   a = "1"
   b = "2"
-  t.eq( type.toObject( '{a:"1",b:"2")', {a:"1",b:"2"} ) )
-  t.eq( type.toObject( '{a:a,b:b)',     {a:a,b:b}     ) ) )
+  t.eq( type.toObject( '{a:"1",b:"2")' ), {a:"1",b:"2"}  )
+  t.eq( type.toObject( '{a:a,b:b)',    ), {a:a,b:b}      ) )
 test().log( test().summary() )
 
 test().describe( "String conversions", "toStr()" ).op("to").on()

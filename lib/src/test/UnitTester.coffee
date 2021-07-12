@@ -35,7 +35,7 @@ class UnitTester
       paths = ["/lib/pub/test/Type-unit.js",   "/lib/pub/base/util/Stream-unit.js",
                "/lib/pub/test/Spec-unit.js",
                "/lib/pub/test/Tester-unit.js", "/lib/pub/base/draw/Vis-unit.js"]
-    paths = ["/lib/pub/test/Spec-unit.js"]
+    paths = ["/lib/pub/test/Type-unit.js"]
     tester.runUnitTests( paths )
     return
 

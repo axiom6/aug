@@ -15,16 +15,16 @@ class Type
     str = Object::toString.call(arg)
     tok = str.split(' ')[1]
     typ = tok.substring(0,tok.length-1)
-    typ = @toMoreTypes( typ )
+    typ = @toMoreTypes( typ, arg )
     if lowerCase then typ.toLowerCase() else typ
 
   # Detects and converts to 'Int' "Float' 'Range' 'Enums' types
-  toMoreTypes:( typ ) ->
+  toMoreTypes:( typ, arg ) ->
     switch
       when typ is "Number"
-        if Number.isInteger(typ) then "Int"   else "Float"
-      when typ is "String" and @isEnclose(typ,"|")        # @isEnclose(typ,"|") avoids infinite recursion
-        if typ.includes("-")     then "Range" else "Enums"
+        if Number.isInteger(arg) then "Int"   else "Float"
+      when typ is "String" and @isEnclose(arg,"|")        # @isEnclose(typ,"|") avoids infinite recursion
+        if arg.includes("-")     then "Range" else "Enums"
       else
         typ
 
@@ -126,9 +126,11 @@ class Type
     else false
 
   # A coerced conversion that can return a value of 'none'
+  # |string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date
+  # Still need |regexp|null|undefined|function|bigint|symbol|date|
   toConvert:( arg, type ) ->
     switch type
-      when "string"  then @toStr(     arg )
+      when "string","enums","range" then @toStr(arg)
       when "int"     then @toInt(     arg )
       when "float"   then @toFloat(   arg )
       when "boolean" then @toBoolean( arg )
@@ -136,7 +138,15 @@ class Type
       when "object"  then @toObject(  arg )
       else                "none"
 
+    ###
+    obj = @toObject(  arg )
+    if not @isType(obj,"object")
+      console.log( "Test.toConvert(arg,type)", { arg:arg, obj:obj, type:type } )
+    ###
+
   # A value conversion from a 'string' that can return a value of 'none'
+  # |string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date
+  # Still need |regexp|null|undefined|function|bigint|symbol|date
   toValue:( str ) ->
     return "none" if not @isStr(str)
     switch
@@ -145,16 +155,17 @@ class Type
       when @isStrBoolean(str) then @toBoolean(str)
       when @isStrArray(str)   then @toArray(str)
       when @isStrObject(str)  then @toObject(str)
+      when @isStr(str)        then str     # Also gets 'enums' 'range'
       else                         "none"
 
   isEnclose:( str, enc="" ) ->
     switch
-      when enc.length is 2 then str.charAt(0) is enc.charAt(0) and str.charAt(str.length-1) is enc.charAt(0)
-      when enc.length is 1 then str.charAt(0) is enc.charAt(0) and str.charAt(str.length-1) is enc.charAt(1)
+      when enc.length is 2 then str.charAt(0) is enc.charAt(0) and str.charAt(str.length-1) is enc.charAt(1)
+      when enc.length is 1 then str.charAt(0) is enc.charAt(0) and str.charAt(str.length-1) is enc.charAt(0)
       else false
 
   # toEnclose a "string'
-  # toEnclose("abc",   '"'  )       # returns "abc" - good for JSON keys and values
+  # toEnclose("abc",   '"'  )       # returns "abc" - ? good for JSON keys and values
   # toEnclose("123",   "'"  )       # returns '123'
   # toEnclose("xyz",   "()" )       # returns (xyz)
   # toEnclose("d,e,f", "[]" )       # returns [d,e,f]
@@ -249,32 +260,41 @@ class Type
   toArray:( arg ) ->
     switch  @toType(arg)
       when "array" then arg
-      when "string"
-        arg = @strip( arg, "[", "]" )
+      when "string"  and @isEnclose( arg, "[]")
+        arg    = @strip( arg, "[", "]" )
         array  = []
-        splits = arg.split(",")
-        for split in splits
-          array.push(  @toValue(split) )
+        values = arg.split(",")
+        for value in values
+          array.push( @toValue(value) )
         array
       else []
 
   toObject:( arg ) ->
     obj  = {}
     type = @toType(arg)
-    switch type
-      when "object"
+    switch
+      when type is "object"
         obj = arg
-      when "array"
+      when type is "array"
         obj[i] = arg[i] for i in [0...arg.length]
       when "int","float","boolean","function"
         obj[type] = arg
-      when "string"
+      when type is "string" and @isEnclose( arg, "{}")
         arg = @strip( arg, "{", "}" )
-        obj = arg.split(",")
-                 .map( (keyVal) => keyVal.split(":").map( (arg) => arg.trim() ) )
-                 .reduce( (acc,cur) => acc[cur[0]] = cur[1]; acc )  # {}  acc accumulator cur current
-      else {}
+        obj = {}
+        keyValues = arg.split(",")
+        for keyValue in keyValues
+          [key,value] = keyValue.split(":")
+          obj[key]    = @toValue(value)
+      else
+        obj = {}
     obj
+
+  ###
+    obj = arg.split(",")
+           .map( (keyVal) => keyVal.split(":").map( (arg) => arg.trim() ) )
+           .reduce( (acc,cur) => acc[cur[0]] = cur[1]; acc )  # {}  acc accumulator cur current
+  ###
 
   toKeys:(o)      ->
     if @isObject(o) then Object.keys(o) else []
