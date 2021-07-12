@@ -9,18 +9,26 @@ class Type
     @error   = console.error
 
   # An improved typeof() that follows the convention by returning types in lower case by default.
-  # The basic types similar to typeof() returned are:
-  # @isEnclose(typ,"|") called for 'Enums to avoid an infinite recusion with @isStr(arg)
+  # The 15 types similar to typeof() returned are:
+  # "|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date"
   type:(arg,lowerCase=true) =>
     str = Object::toString.call(arg)
     tok = str.split(' ')[1]
     typ = tok.substring(0,tok.length-1)
-    typ = if typ is "Number" and     Number.isInteger(arg) then "Int"   else typ # Previous CoffeeScript issue
-    typ = if typ is "Number" and not Number.isInteger(arg) then "Float" else typ  #  with return on nested if's
-    typ = if @isEnclose(typ,"|") then "Enums" else typ
+    typ = @toMoreTypes( typ )
     if lowerCase then typ.toLowerCase() else typ
 
-  # A more detail type that returns basic types, class, object and function name in upper case
+  # Detects and converts to 'Int' "Float' 'Range' 'Enums' types
+  toMoreTypes:( typ ) ->
+    switch
+      when typ is "Number"
+        if Number.isInteger(typ) then "Int"   else "Float"
+      when typ is "String" and @isEnclose(typ,"|")        # @isEnclose(typ,"|") avoids infinite recursion
+        if typ.includes("-")     then "Range" else "Enums"
+      else
+        typ
+
+# A more detail type that returns basic types, class, object and function name in upper case
   klass:(arg) ->
     typ = @type(arg,false) # Start with basic type to catch "Null" and "Undefined"
     switch typ
@@ -160,19 +168,17 @@ class Type
   # toStr(arg) avoids conflicts with arg.toString()
   #  returns "none" if unsuccesful
   # This combination of travesal and recursion is cleaner than JSON.stringify()
-  # So far all vaild 13 Type.types a super set of Type.typeofs has been accounted for
-  # Type.typeofs = ["string","number","boolean","object","function","bigint","symbol","null","undefined"]
-  # Type.types   = Type.typeofs.concat(["int","float","array","regexp","date"])
+  # A super set of typeof with far all vaild 15 types detected by @type() plus 'none' and 'any'
+  # "|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date|any|none|"
   toStr:(arg) ->
     type = @type(arg)
     str = switch type
-      when "string"     then arg # if enc then @toEnclose(arg,'"')  else arg
+      when "string","enums","range","any" then arg
       when "int"        then parseInt(arg)
       when "float"      then parseFloat(arg)
       when "boolean"    then if arg then "true" else "false"
-      when "object"     then @toStrObject(arg)
       when "array"      then @toStrArray(arg)
-      when "enums"      then arg
+      when "object"     then @toStrObject(arg)
       when "null"       then "null"
       when "undefined"  then "undefined"
       when "function"   then "function"
@@ -250,7 +256,6 @@ class Type
         for split in splits
           array.push(  @toValue(split) )
         array
-      #lse @toWarn( "toArray(arg)", "unable to convert", arg, "array", [], (t) => t.log( t.warn() ) )
       else []
 
   toObject:( arg ) ->
@@ -268,7 +273,6 @@ class Type
         obj = arg.split(",")
                  .map( (keyVal) => keyVal.split(":").map( (arg) => arg.trim() ) )
                  .reduce( (acc,cur) => acc[cur[0]] = cur[1]; acc )  # {}  acc accumulator cur current
-      #lse @toWarn( "toObject(arg)", "unable to convert", arg, "object", {}, (t) => t.log( t.warn() ) )
       else {}
     obj
 
@@ -323,10 +327,10 @@ class Type
 
   # Unlike the built in Array v.slice(beg,end) where beg is a zero-based index and end
   #  here beg starts at 1 and end includes the last position or is set to beg if ommitted
-  #  an array slice( ["a","b","c"], 1, 2 ) returns ["a","b"]
-  #  an array slice( ["a","b","c"], 2    ) returns ["b"]
-  #  a string slice( ["abc"],       1, 2 ) returns   "ab"
-  #  a string slice( ["abc"],       2    ) returns   "b"
+  #  an array slice( "[a","b","c"], 1, 2 ) returns "[a","b"]
+  #  an array slice( "[a","b","c"], 2    ) returns "[b"]
+  #  a string slice( "[abc"],       1, 2 ) returns   "ab"
+  #  a string slice( "[abc"],       2    ) returns   "b"
   # where with Array.slice() it is open
   slice:( v, beg, end=null ) ->
     end = if @isDef(end) and beg <= beg then end else beg
@@ -385,12 +389,12 @@ class Type
 
   # Moved from Spec.coffee
   isEnums:( arg ) ->
-    @isStrEnclosed( "|", arg, "|" )
+    @isType(arg,"enums")
 
   # Leverage the stronger assertions @isStr(arg) and @isArray(arg)
   toEnums:( arg ) ->
     switch
-      when @isStr(arg) and arg.includes("|")
+      when @isType(arg,"enums")
         arg
       when @isArray(arg)
         enums = "|"
@@ -398,11 +402,11 @@ class Type
           enums += @toStr(arg[i]) + "|"
         enums
       else
-        ""
-  inEnums:( result, enums ) ->
-    enums.includes(result)
+        "||"
 
-  # Can be overriden by Spec.isIn() with it additional Spec type arrays
+  inEnums:( result, enums ) ->
+    enums.includes("|"+result+"|")
+
   isIn:( type, arg ) ->
     switch
       when @isArray(arg) then @inArray( type, arg )
@@ -411,29 +415,26 @@ class Type
       #lse @isWarn( false, "arg #{arg} not 'array', 'enums' or 'string'", type, false )
       else false
 
-  # Can be overriden by Spec.toIn() with it additional Spec type arrays
   toIn:( arg ) ->
     switch
-      when  not  arg? then []
+      when  not  arg? then "||"
       when Type[arg]? then Type[arg]
-      else []
+      else "||"
 
-Type.remove = ( e, a ) ->
-  index = a.indexOf(e)
-  a.splice( index, 1 ) if index > -1
-  a
-
-# All Type[key] arrays. Considering if "none" belongs
-Type.undefs  = ["null","undefined"]
-Type.numbers = ["int","float"]
-Type.ranges  = ["string","int","float"]
-Type.values  = ["string","int","float","boolean"]
-Type.manys   = ["object","array"]
-Type.results = ["string","int","float","boolean","object","array"]
-Type.expects = Type.results.concat(["regexp","range","enums","amy"])
-Type.typeofs = ["string","number","boolean","object","function","bigint","symbol","null","undefined"]
-Type.types   = Type.typeofs.concat(["int","float","array","regexp","date"])
-Type.types   = Type.remove("number", Type.types ) # number is now either 'int' or 'float'
+# All Type[key] 'enums'. Considering if "none" belongs
+Type.undefs  = "|null|undefined|"
+Type.numbers = "|int|float|"
+Type.values  = "|string|int|float|boolean|"
+Type.manys   = "|object|array|"
+Type.ranges  = "|string|int|float|"
+Type.matches = "|regexp|range|enums|amy|"
+Type.results = "|string|int|float|boolean|object|array|"
+Type.expects = "|string|int|float|boolean|object|array|regexp|range|enums|amy|"
+Type.typeofs = "|number|string|boolean|object|function|bigint|symbol|null|undefined|"
+Type.types   = "|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|"
+Type.types  += "function|bigint|symbol|date|any|none|"
+Type.opers   = "|to|eq|le|lt|ge|gt|ne|" # low  level value  based comparison  ooers 'eq' default
+Type.cards   = "|1|?|*|+|"              # cards  1 required, ? optional, * 0 to many, + 1 to many
 
 export type = new Type() # Export a singleton instence of type
 export default Type

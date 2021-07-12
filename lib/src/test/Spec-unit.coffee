@@ -12,11 +12,10 @@ resultO = {a:"Innovate",b:"Embrace"}
 
 
 range     = [[0,360],[0,100],[0,100]]
-rangeInt    = "| a-z, 0-9, A-Z |"
-rangeInt    = "| 0-360, 0-100, 0-100 |"
-rangeFlt    = "| 0.0-360.0+0.001, 0.0-100.0+0.001, 0-100+0.001 |"
-rangeFlo    = "| 0-360+0.001, 0-100+0.001, 0-100+0.001 |"
-rangeFlo    = "| 0-360+0.001, 0-100+0.001, 0-100+0.001 |"
+rangeStr    = "| a-z, 0-9, A-Z |"
+rangeRgb    = "| 0-255 |"
+rangeHsv    = "| 0-360, 0-100, 0-100 |"
+rangeFlt    = "| 0-360+0.001, 0-100+0.001, 0-100+0.001 |"
 
 enums     = "|Embrace|Innovate|Encourage|"
 regexp    = /x/
@@ -79,7 +78,6 @@ test( "toRange(#{rangeTx})",            spec.toRange(rangeTx),         range    
 test( "toEnums(#{enumsTx})",            spec.toEnums(enums),           enums      )
 test( "toRegexp(#{regexpTx})",          spec.toRegexp(regexpTx),       regexp     )
 test( "toMinMax(#{'3-6'})",             spec.toMinMax('3-6'),          [3,6]      )
-test( "toIn(#{'expects'})",             spec.toIn('expects'),          expects    )
 test( "toSpecInit()",     spec.toSpecInit(), {type:"any",match:"any",card:"1"} )
 test().log( test().summary() )
 
