@@ -47,7 +47,7 @@ class Tester extends Spec
     @statuses    = []
 
     # optional instance for publishing each test status object to to UIs that subscripe to stream
-    # set by @injectStream(stream) which enforces that it have @klass 'Stream'
+    # set by @injectStream(stream) which enforces that it have @toKlass 'Stream'
     @stream  = null
 
   setOptions:( options ) ->
@@ -116,14 +116,14 @@ class Tester extends Spec
       describeTx:@describeTx, describeName:@describeName, describeId:@describeId, describeOn:@describeOn,
       describeOp:@describeOp }
       warned:{ text:"", }
-      result:{ text:"",   type:@type(result), value:result }
-      expect:{ text:"",   type:@type(expect), value:expect }
+      result:{ text:"",   type:@toType(result), value:result }
+      expect:{ text:"",   type:@toType(expect), value:expect }
       errors:""
     }
 
   # Performs all assertions even a deep equal on objects and arrays
-  #   Strong type checking with @type(arg) so asserions are only test when types match
-  #   Skips over @type(arg) = "function"
+  #   Strong type checking with @toType(arg) so asserions are only test when types match
+  #   Skips over @toType(arg) = "function"
   assert:( result, expect, status, level=0, key=null, index=null ) ->
 
     # Check values and types
@@ -140,7 +140,7 @@ class Tester extends Spec
       return @processStatus( status )
 
     # Perform all comparisions
-    type = @type( result )
+    type = @toType( result )
     status = switch type
       when  "string", "int", "float", "boolean"
                          @valuesEq(   result, expect, status, "eq"  )  # op is not passed aroung
@@ -166,8 +166,8 @@ class Tester extends Spec
   #   refactored on Wed July 7, 2021
   verify:( result, expect, status ) ->
     op  = @describeOp
-    r   = @type(result)
-    e   = @type(expect)
+    r   = @toType(result)
+    e   = @toType(expect)
     rIs = () -> "\nResult is type '#{r}'"
     eIs = () -> "\nExpect is type '#{e}'"
     status.errors += switch
@@ -207,8 +207,8 @@ class Tester extends Spec
     # Insure that result and expect are objects
     if not @isObject(result) or not @isObject(expect)
       status.errors += " either one or both result and expect are not objects"
-      status.errors += " Result type is #{@type(result)}"
-      status.errors += " Expect type is #{@type(expect)}"
+      status.errors += " Result type is #{@toType(result)}"
+      status.errors += " Expect type is #{@toType(expect)}"
       return @examine( false, result, expect, status, key, null )
 
     # Check that the result object has all the keys that the expect object has
@@ -233,8 +233,8 @@ class Tester extends Spec
     # Insure that result and expect are arrays
     if not @isArray(result) or not @isArray(expect)
       status.errors += " either one or both result and expect are not arrays"
-      status.errors += " Result type is #{@type(result)}"
-      status.errors += " Expect type is #{@type(expect)}"
+      status.errors += " Result type is #{@toType(result)}"
+      status.errors += " Expect type is #{@toType(expect)}"
       return @examine( false, result, expect, status, null, index )
 
     # Examine the array lengths
@@ -315,7 +315,7 @@ class Tester extends Spec
       spec = value
       "\n   #{name}#{ref} type is '#{spec.type}' with match '#{spec.match}' and card '#{spec.card}'"
     else
-      "\n   #{name}#{ref} type is '#{@type(value)}' with value #{@toStr(value)}"
+      "\n   #{name}#{ref} type is '#{@toType(value)}' with value #{@toStr(value)}"
 
   # Generates informative text in status
   examine:( pass, result, expect, status, key=null, index=null ) ->
@@ -461,7 +461,7 @@ class Tester extends Spec
 
   # Stream is an optional libary for publising statusObject to UIs like RxJS
   injectStream:( stream ) ->
-    type = @klass(stream)
+    type = @toKlass(stream)
     if type is "Stream"
       @stream  = stream
     else

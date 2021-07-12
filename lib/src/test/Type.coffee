@@ -11,7 +11,7 @@ class Type
   # An improved typeof() that follows the convention by returning types in lower case by default.
   # The 15 types similar to typeof() returned are:
   # "|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date"
-  type:(arg,lowerCase=true) =>
+  toType:(arg,lowerCase=true) =>
     str = Object::toString.call(arg)
     tok = str.split(' ')[1]
     typ = tok.substring(0,tok.length-1)
@@ -29,8 +29,8 @@ class Type
         typ
 
 # A more detail type that returns basic types, class, object and function name in upper case
-  klass:(arg) ->
-    typ = @type(arg,false) # Start with basic type to catch "Null" and "Undefined"
+  toKlass:(arg) ->
+    typ = @toType(arg,false) # Start with basic type to catch "Null" and "Undefined"
     switch typ
       when "Null"      then "Null"
       when "Undefined" then "Undefined"
@@ -38,7 +38,7 @@ class Type
       when "Object"    then arg.constructor.name
       else                  typ
     
-  # The 9 fundamental type Assertions that leverage @type(arg) the improved typeof(arg)
+  # The 9 fundamental type Assertions that leverage @toType(arg) the improved typeof(arg)
   # In addition isInt isFloat isBoolean isArray isObject can optionally chech strings
   isStr:(s)      ->   @isType(s,"string") and s.length > 0 and s isnt "none"
   isInt:(i)      -> ( @isType(i,"int")   and not isNaN(i) ) or ( @isType(i,"string") and @isStrInt(i)     )
@@ -57,21 +57,21 @@ class Type
   isArrayTyped:(a,t) ->
     return false if not @isArray(a)
     for e in a
-      return false if @type(e) isnt t
+      return false if @toType(e) isnt t
     true
 
   # General purpose since if checks the array's existence and interate over all the elements
   isArrayMixed:(a) ->
     return false if not @isArray(a)
-    type = @type(a[0])
+    type = @toType(a[0])
     for e in a
-      return true if @type(e) isnt type
+      return true if @toType(e) isnt type
     false
 
   # Aggregate and special value assertions
-  isType:(v,t)      ->   @type(v) is t
-  isDef:(d)         ->   @type(d) isnt 'null' and @type(d) isnt 'undefined'
-  isNumber:(n)      ->   @isIn( @type(n), "numbers" )
+  isType:(v,t)      ->   @toType(v) is t
+  isDef:(d)         ->   @toType(d) isnt 'null' and @toType(d) isnt 'undefined'
+  isNumber:(n)      ->   @isIn( @toType(n), "numbers" )
   isNot:(d)         ->   not @isDef(d)
   isNaN:(n)         ->   Number.isNaN(n) # @isNumber(n) and
 
@@ -168,10 +168,10 @@ class Type
   # toStr(arg) avoids conflicts with arg.toString()
   #  returns "none" if unsuccesful
   # This combination of travesal and recursion is cleaner than JSON.stringify()
-  # A super set of typeof with far all vaild 15 types detected by @type() plus 'none' and 'any'
+  # A super set of typeof with far all vaild 15 types detected by @toType() plus 'none' and 'any'
   # "|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date|any|none|"
   toStr:(arg) ->
-    type = @type(arg)
+    type = @toType(arg)
     str = switch type
       when "string","enums","range","any" then arg
       when "int"        then parseInt(arg)
@@ -209,7 +209,7 @@ class Type
     str
 
   toFloat:( arg ) ->
-    type = @type(arg)
+    type = @toType(arg)
     switch type
       when "float" then arg
       when "int"   then parseFloat(arg.toFixed(1)) # Coerces an 'int' like '1' to a 'float' like '1.0'
@@ -221,7 +221,7 @@ class Type
       else NaN
 
   toInt:( arg ) ->
-    type = @type(arg)
+    type = @toType(arg)
     switch type
       when "int"    then arg
       when "float"  then Math.round(arg)
@@ -233,7 +233,7 @@ class Type
       else NaN
 
   toBoolean:( arg ) ->
-    type = @type(arg)
+    type = @toType(arg)
     switch type
       when "boolean" then arg
       when "string"
@@ -247,7 +247,7 @@ class Type
       else false
 
   toArray:( arg ) ->
-    switch  @type(arg)
+    switch  @toType(arg)
       when "array" then arg
       when "string"
         arg = @strip( arg, "[", "]" )
@@ -260,7 +260,7 @@ class Type
 
   toObject:( arg ) ->
     obj  = {}
-    type = @type(arg)
+    type = @toType(arg)
     switch type
       when "object"
         obj = arg
@@ -292,7 +292,7 @@ class Type
 
   # Return a number with a fixed number of decimal places
   toFixed:( arg, dec=2 ) ->
-    num = switch @type(arg)
+    num = switch @toType(arg)
       when "int","float" then arg
       when "string"      then parseFloat(arg)
     num.toFixed(dec)
@@ -304,17 +304,17 @@ class Type
     str.charAt(0).toLowerCase() + str.substring(1)
 
   head:(arg) ->
-    switch @type(arg)
+    switch @toType(arg)
       when "array"  then arg[0]
       when "string" then arg.charAt(0)
-      #lse @toWarn( "head(arg)", "unable to get the first element of", arg, @type(arg), null, (t) => t.log( t.warn() ) )
+      #lse @toWarn( "head(arg)", "unable to get the first element of", arg, @toType(arg), null, (t) => t.log( t.warn() ) )
       else "none"
 
   tail:(arg) ->
-    switch @type(arg)
+    switch @toType(arg)
       when "array"  then arg[arg.length-1]
       when "string" then arg.charAt(arg.length-1)
-      #lse @toWarn( "tail(arg)", "unable to get the last element of", arg, @type(arg), null, (t) => t.log( t.warn() ) )
+      #lse @toWarn( "tail(arg)", "unable to get the last element of", arg, @toType(arg), null, (t) => t.log( t.warn() ) )
       else "none"
 
   strip:( str, beg, end ) ->
@@ -363,7 +363,7 @@ class Type
   # A gem methods that appends text along with retrStr to @warn for detailed reporting of inconsistence
   #  along with a vialble actual return specified by the caller
   toWarn:( method, text, arg, typeTo, retn, closure=null ) =>
-    warn  = "#{method} #{text} #{@toStr(arg)} of '#{@type(arg)}' to'#{typeTo}' returning #{@toStr(arg)}"
+    warn  = "#{method} #{text} #{@toStr(arg)} of '#{@toType(arg)}' to'#{typeTo}' returning #{@toStr(arg)}"
     @doWarn( warn, closure, retn )
 
   isWarn:( pass, text, type, types, closure=null ) =>

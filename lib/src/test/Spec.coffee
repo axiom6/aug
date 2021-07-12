@@ -9,7 +9,7 @@ class Spec extends Type
   # -- is... Spec assertions
 
   isSpec:( arg ) ->
-    type = @type(arg)
+    type = @toType(arg)
     switch type
       when "string"
         @isSpecParse(  arg )
@@ -28,7 +28,7 @@ class Spec extends Type
         false
 
   isSpecParse:(   arg ) ->
-    type = @type( arg )
+    type = @toType( arg )
     @isDef(arg) and type isnt("object") and ( type is "regexp" or ( type is "string" and arg.includes(":") ) )
 
   isSpecObject: ( arg ) ->
@@ -55,12 +55,12 @@ class Spec extends Type
   # rangeHsv    = "| 0-360, 0-100, 0-100 |"
   # rangeFlt    = "| 0-360+0.001, 0-100+0.001, 0-100+0.001 |"
   isRange:(range)  ->
-    return @isRanges(range) if range.includes(",")
+    return @isRanges(@toRanges(range)) if range.includes(",")
     a = @toRangeArray(range)
     isStrRange    = (a) -> a.length is 2 and a[0]      <= a[1]       # Foa 'staing'
     isIntRange    = (a) -> a.length is 2 and a[0]      <= a[1]       # Foa 'int'
     isFloatRange  = (a) -> a.length is 3 and a[0]-a[2] <= a[1]+a[2]  # Foa 'float' a[2] is tol
-    switch @type(a[0])
+    switch @toType(a[0])
       when 'string' then isStrRange(a)
       when 'int'    then isIntRange(a)
       when 'float'  then isFloatRange(a)
@@ -76,11 +76,11 @@ class Spec extends Type
     super.isEnums(arg)
 
   isResult:( result ) ->
-    type =  @type(result)
+    type =  @toType(result)
     @isDef(result) and @isIn( type, "results" )
 
   isExpect:( expect ) ->
-    type =  @type(expect)
+    type =  @toType(expect)
     @isDef(expect) and @isIn( type, "expects" )
 
   # This approach insures that all conditions are checked and messages sent
@@ -127,7 +127,7 @@ class Spec extends Type
     length = splits.length
     if length >= 1  then spec.type = splits[0]  # type
     if length >= 1                              # match
-      type = @type(splits[1])
+      type = @toType(splits[1])
       spec.match = switch type
         when "regexp"  then  "regexp"           # regex
         when "string"
@@ -154,20 +154,22 @@ class Spec extends Type
      if @isType(arg,"range") then arg else "any"
 
   toRanges:(range) ->
-    range  = @strip( range, "|", "|")
+    range = @strip( range, "|", "|")
+    range = range.replaceAll( " ", "" ) # remove white space
     range.split(",")
 
   # |a-z| |0-100|  |0-100+0.001|
   toRangeArray:( range ) ->
     a      = []
     range  = @strip( range, "|", "|")
+    range  = range.replaceAll( " ", "" )  # remove white space
     splits = range.split("-")
     # Append the optional 3rd parameter tolerance for 'float' ranges
     if splits.length is 2 and splits[1].includes("+")
       splits2   = splits[1].split("+")
       splits[1] = splits2[0]
       splits.push(splits2[1])
-    switch @type(splits[0])
+    switch @toType(splits[0])
       when "string" and splits.length is 2     # 'string'
         a.push(splits[0])
         a.push(splits[1])
@@ -187,7 +189,7 @@ class Spec extends Type
 
   # Arg types must be 'regexp' or 'string', otherwise returns 'any'
   toRegexp:( arg ) ->
-    switch @type(arg)
+    switch @toType(arg)
       when "regexp" then arg
       when "string" then new RegExp(arg)
       else "any"
@@ -195,10 +197,10 @@ class Spec extends Type
 # -- in... Spec matches
 
   inSpec:( result, spec ) =>
-    return false if not ( @isSpec(spec) and @type(result) is spec.type and @inCard(result,spec) )
+    return false if not ( @isSpec(spec) and @toType(result) is spec.type and @inCard(result,spec) )
     match = spec.match
     switch
-      when  @isArray(result) and  @isArray(spec) then  @inSpecArray( result, spec  )
+      when  @isArray(result) and  @isArray(spec) then @inSpecArray(  result, spec  )
       when @isObject(result) and @isObject(spec) then @inSpecObject( result, spec  )
       when @isRange(  match )                    then @isRange(      result, match )
       when @isEnums(  match )                    then @isEnums(      result, match )
@@ -222,26 +224,28 @@ class Spec extends Type
   # Determine if a result is bounded witnin a range.
   # This method is here in Tester because it call @examine()
   inRange:( result, range ) ->
-    return  @inRanges(result,range) if @isRanges(range)
-    return false if not  @isRange(range)
-    a = @toRangeArray(range) # Convers the 'string' represention of a if necessary
-    inStrRange   = ( string, a ) -> a[0]          <= string and string <= a[1]
-    inIntRange   = ( int,    a ) -> a[0]          <= int    and int    <= a[1]
+    return  @inRanges(result,@toRanges(range)) if range.includes(",")
+    return false if not @isType(range) # @isRange(range)
+    a = @toRangeArray(range) # Convers the range to an array
+    inStrRange   = ( string, a ) -> a[0]      <= string and string <= a[1]
+    inIntRange   = ( int,    a ) -> a[0]      <= int    and int    <= a[1]
     inFloatRange = ( float,  a ) -> a[0]-a[2] <= float  and float  <= a[1]+a[2]
-    switch @type(result)
-      when "string" then inStrRange(     result, a )
-      when "int"    then inIntRange(     result, a )
-      when "float"  then inFloatRange(   result, a )
+    switch @toType(result)
+      when "string" then inStrRange(   result, a )
+      when "int"    then inIntRange(   result, a )
+      when "float"  then inFloatRange( result, a )
       else false
 
+  # Ony apply the ranges we have are applied
+  # if ranges is just a single range applied then it is applied to each result
   inRanges:( results, ranges ) ->
     pass = true
     switch
       when  @isArray(results) and @isArray(ranges)
-        min  = Math.min( results.length, ranges.length )
+        min  = Math.min( results.length, ranges.length ) # Ony apply the ranges we ga
         pass = pass and @inRange(results[i],ranges[i]) for i in [0...min]
       when  @isArray(results)
-        pass = pass and @inRange(result,ranges) for result in results
+        pass = pass and @inRange(results,ranges) for result in results
       else
         pass = false
     pass
