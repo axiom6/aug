@@ -285,16 +285,15 @@ class Type
         keyValues = arg.split(",")
         for keyValue in keyValues
           [key,value] = keyValue.split(":")
-          obj[key]    = '"' + @toValue(value) + '"'
+          obj[key]    = value
       else
         obj = {}
     obj
 
-  ###
-    obj = arg.split(",")
-           .map( (keyVal) => keyVal.split(":").map( (arg) => arg.trim() ) )
-           .reduce( (acc,cur) => acc[cur[0]] = cur[1]; acc )  # {}  acc accumulator cur current
-  ###
+  # For extenal use where val is expossed to the outside environment so 'string'
+  #  is wrapped in "" and all other vals are converted by their type  ??? what does this mean ???
+  v:(val) ->
+    if @isType(val,'string') then '"' + @toStr(val) + '"' else @toValue(val)
 
   toKeys:(o)      ->
     if @isObject(o) then Object.keys(o) else []
@@ -458,3 +457,9 @@ Type.cards   = "|1|?|*|+|"              # cards  1 required, ? optional, * 0 to 
 
 export type = new Type() # Export a singleton instence of type
 export default Type
+
+###
+  obj = arg.split(",")
+         .map( (keyVal) => keyVal.split(":").map( (arg) => arg.trim() ) )
+         .reduce( (acc,cur) => acc[cur[0]] = cur[1]; acc )  # {}  acc accumulator cur current
+###

@@ -145,15 +145,19 @@ test( "toCap( str )",        type.toCap("cap"), "Cap" )
 test( "unCap( str )",        type.unCap("Cap"), "cap" )
 test( '"123456",3,4)',       type.slice( "123456",3,4), "34" )
 test( 'toArray("[1,2,3]")',  type.toArray("[1,2,3]"), [1,2,3] )
-test( 'type.toObject( {a:"x",b:"y")', type.toObject( '{a:"x",b:"y")' ), {a:'"x"',b:'"y"'} )
-e = "t"
-f = "u"
-a = e
-b = f
-test( 'type.toObject( {a:a,b:b) var', type.toObject( "{a:#{a},b:#{b})"), {a:a,b:b} )
-a = "1"
-b = "2"
-test( 'type.toObject( {a:a,b:b) val',     type.toObject( '{a:a,b:b)'    ), {a:a,b:b}          )
+
+t = tester
+a = "a"
+b = "b"
+test( "type.toObject( {a: a, b: b } enc", type.toObject( "{a:#{t.v(a)},b:#{t.v(b)})" ), {a:'"a"',b:'"b"'} )
+a = 3
+b = 4
+test( "type.toObject( {a: 3, b: 4 } var", type.toObject( "{a:#{t.v(a)},b:#{t.v(b)})" ), {a:  3,  b:  4  } )
+a = [5,6]
+b = {q:7,r:"8"}
+test( "type.toObject( {a:#{t.v(a)},b:#{t.v(b)}) mix", type.toObject( "{a:#{t.v(a)},b:#{t.v(b)})" ), {a: [5,6], b:{q:7,r:'"8"'}  } )
+test( 'type.toObject( {a:"x",b:"y") str', type.toObject( '{a:"x", b: "y")' ),           {a:'"x"',  b:'"y"'          } )
+test( "type.toObject( {a: 1, b: 2 } int", type.toObject( '{a: 1,  b:  2 }' ),           {a:  1,    b:  2            } )
 test().log( test().summary() )
 
 test().describe( "String conversions", "toStr()" ).op("to").on()
