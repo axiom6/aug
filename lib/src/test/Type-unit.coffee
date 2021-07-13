@@ -154,8 +154,9 @@ a = 3
 b = 4
 test( "type.toObject( {a: 3, b: 4 } var", type.toObject( "{a:#{t.v(a)},b:#{t.v(b)})" ), {a:  3,  b:  4  } )
 a = [5,6]
-b = {q:7,r:"8"}
-test( "type.toObject( {a:#{t.v(a)},b:#{t.v(b)}) mix", type.toObject( "{a:#{t.v(a)},b:#{t.v(b)})" ), {a: [5,6], b:{q:7,r:'"8"'}  } )
+o = {q:7,r:"8"}
+test( "type.toObject( {a:#{t.v(a)},b:#{t.v(b)}) qqq", type.toObject( "{a:#{t.v(a)},b:#{t.v(b)})" ), {a: [5,6], b:{q:7,r:'"8"'}  } )
+test( "type.toObject( {a:#{t.s(a)},b:#{t.s(o)}) mix", type.toObject( "{a:#{t.v(a)},b:#{t.v(o)})" ), {a: [5,6], b:{q:7,r:'"8"'}  } )
 test( 'type.toObject( {a:"x",b:"y") str', type.toObject( '{a:"x", b: "y")' ),           {a:'"x"',  b:'"y"'          } )
 test( "type.toObject( {a: 1, b: 2 } int", type.toObject( '{a: 1,  b:  2 }' ),           {a:  1,    b:  2            } )
 test().log( test().summary() )

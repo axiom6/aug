@@ -295,6 +295,12 @@ class Type
   v:(val) ->
     if @isType(val,'string') then '"' + @toStr(val) + '"' else @toValue(val)
 
+  s:(val) ->
+    str = if @isType(val,'string') then '"' + @toStr(val) + '"' else @toStr(val)
+    @log( { str:str, val:val, type:@toType(val) } )
+    str
+
+
   toKeys:(o)      ->
     if @isObject(o) then Object.keys(o) else []
 
