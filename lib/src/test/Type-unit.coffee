@@ -21,30 +21,22 @@ test( "a:x,b:y,c:z", type.toEnclose( "a:x,b:y,c:z", "{}" ), "{a:x,b:y,c:z}" ) # 
 test().log( test().summary() )
 
 # "|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date"
-test().describe( "16 types" ).obj(type).func(type.toType).name("type()").on()
+test().describe( " toType()" ).obj(type).func(type.toType).on()
 typeExpects = [["123",'string'],[123,'int'],[123.1,'float'],[123.0,'int'],[true,'boolean'],[[1,2,3],'array'],
-  [{a:'a'},'object'],["|a|b|c|",'enums'],["|0-100|",'enums'],[/x/,'regexp'],[null,'null'],[undef,'undefined' ],
-  [func,"function"],[BigInt(123),'bigint'],[Symbol(),'symbol'],[new Date(),'date']]
+  [{a:'a'},'object'],["|a|b|c|",'enums'],["|0-100|",'enums'],["|0-100|",'range'],[/x/,'regexp'],[null,'null'],
+  [undef,'undefined' ],[func,"function"],[BigInt(123),'bigint'],[Symbol(),'symbol'],[new Date(),'date']]
   # [stream,'object'], [Stream,'function'],[tester,'object'],[Vis,'function']]
 for args in typeExpects
   exam(args)
 test().log( test().summary() )
 
-test().describe( "klass types" ).name("toKlass()").on()
-test( true,       type.toKlass(true),        'Boolean'   )
-test( 123,        type.toKlass(123),         'Int'       )
-test('"123"',     type.toKlass('123'),       'String'    )
-test( func,       type.toKlass(func),        'func'      )
-test( {a:'a'},    type.toKlass({a:'a'}),     'Object'    )
-test( [1,2,3],   type.toKlass([1,2,3]),     'Array'     )
-test( /x/,        type.toKlass(/x/),         'RegExp'    )
-test( new Date(), type.toKlass(new Date()),  'Date'      )
-test( "undef",    type.toKlass(undef),       'Undefined' )
-test( "null",     type.toKlass(null),        'Null'      )
-#est( stream,     type.toKlass(stream),  'Stream' )
-#est( Stream,     type.toKlass(Stream),  'Stream' )
-#est( tester,     type.toKlass(tester),  'Tester' )
-#est( Vis,        type.toKlass(Vis),     'Vis'    )
+test().describe( " toKlass()" ).obj(type).func(type.toKlass).on()
+klassExpects = [[true,'Boolean'],[123,'Int'],['"123"','String'],[func,'func'],[{a:'a'},'Object'],[[1,2,3],'Array'],
+  [{a:'a'},'Object'],["|a|b|c|",'Enums'],["|0-100|",'Range'],[/x/,'RegExp'],[null,'Null'],
+  [undef,'Undefined' ],[null,"Null"]]
+  # [stream,'Stream'], [Stream,'Stream'],[tester,'Tester'],[Vis,'Vis']]
+for args in klassExpects
+  exam(args)
 test().log( test().summary() )
 
 test().describe( "class Type is... assertions" ).on()

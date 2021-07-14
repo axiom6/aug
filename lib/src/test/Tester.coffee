@@ -75,71 +75,58 @@ class Tester extends Spec
   #   test( "Vis.rgb() converts hex color to rgb object",  Vis.rgb(0xFFFFFF), {r:255,g:255,b:255} )
   test:( args... ) =>
     return @  if args.length is 0 or @testingOff()
-    @argums = if args.length >= 1 then @toArgums(args[0]) else { has:false, arg0:"none" }
+    @argums = @toArgums(args[0])
     if args.length is 2 and @isFunction(args[1])
       closure = args[1]
       closure(@)        # Call closure with an injected tester instance
     else if args.length is 2 and @argums.has and not @isFunction(args[1])
-      @log( "test()", {args:args, argums:@argums} ) # if @debug
       result  = @applyArgums(@argums)
       expect  = args[1]
       @run( @argums, result, expect )
     else if args.length is 3 and not @isFunction(args[1])
       result  = args[1]
       expect  = args[2]
-      @log( "test() 3 args", { argums:@argums , result:result, expect:expect } ) if @debug
       @run( @argums, result, expect ) # returns tester instance for chaining
     @  # returns tester instance for chaining
 
   exam:( args ) =>
     return @ if args.length is 0 or @testingOff()
     expect = args.pop()
-    @log( "exam()", { args:args, expect } )    #  if @debug
+    @log( "exam()", { args:args, expect } )  if @debug
     @test( args, expect )
 
   # typeof is used for the object instance becauses isType(...) provides class type names
   isArgums:( argums ) =>
-    @isArray(argums) or @isObject(argums) and
+    @isObject(argums) and
       argums.obj?  and @isType( argums.obj, "object"   ) and
-      argums.func? and @isType( argums.func,"function" ) and
-      argums.args? and @isType( argums.args,"array"    )
+      argums.func? and @isType( argums.func,"function" )
 
+  # Should only be called at the beginning of test(...)
+  #  to examine arg0
   toArgums:( arg0 ) =>
-    snap = {} # This is a snap shot of @argums
-    snap.arg0    = "none"
-    snap.obj     = if arg0.obj?  then arg0.obj  else @argums.obj
-    snap.func    = if arg0.func? then arg0.func else @argums.func
-    snap.args = switch
-      when  @isArray(arg0) then arg0
-      when @isObject(arg0) then arg0.args
-      else                      "none"
-    snap.arg0 = snap.args
-    snap.has  = @isArgums( snap )
-    if snap.has
-      @argums.obj  = snap.obj   # Remember the lastest verified arg0 settings
-      @argums.func = snap.func
-      @argums.args = snap.args
-      @argums.has  = snap.has
-    @log( "toArgums()", snap ) # if @debug
-    snap
+    @argums.args = arg0    # Default only overriden when arg0 has args
+    if @isArgums(  arg0 )
+      @argums.has  = true
+      @argums.obj  = arg0.obj
+      @argums.func = arg0.func
+      @argums.args = arg0.args if arg0.args? and @isType(arg0.args,"array")
+    else if @isArgums( @argums ) and arg0? and @isType(arg0,"array")
+      @argums.has  = true
+    else
+      @argums.has  = false
+    @log( "toArgums()", @argums ) if @debug
+    @argums
 
   # result = obj.func( args... )         or
   # result = func.apply( obj, args... )  with apply(()
   applyArgums:( argums ) ->
-    argums.obj    = if argums.obj?  then argums.obj  else @o
-    argums.func   = if argums.func? then argums.func else @f
-    argums.args   = if argums.args? then argums.args else []
-    result = argums.func.apply( argums.obj, argums.args )
-    @log( "apply", @toArgumsStr( result, argums ) )
+    result = "none"
+    if @isArgums( argums )
+      result = argums.func.apply( argums.obj, argums.args )
+      @log( "Tester.applyArgums() pass", @toArgumsStr( argums ) ) if @debug
+    else
+      @log( "Tester.applyArgums() fail", argums )
     result
-
-  # result = obj.func( args... )
-  toArgumsStr:( result, argums ) ->
-    resulStr = @toStr(result)
-    objStr   = argums.obj.constructor.name    # @toKlass(obj)
-    funcStr  = argums.func.name               # @toKlass(func)
-    argsStr  = @strip( @toStr(argums.args), "[", "]" )
-    "#{resulStr}=#{objStr}.#{funcStr}(#{argsStr})"
 
   # The strongest logic is the last where all 4 condition are checked where as
   #  'module' and 'all' admit larger group of tests
@@ -166,7 +153,7 @@ class Tester extends Spec
   initStatus:( result, expect, argums ) ->
     @log( "initStatus argums", argums )  if @debug
     status = {
-      argums: @toArgums(argums),
+      argums:argums # consider .clone()
       assert:{ text:"", pass:true, keys:"",
       moduleTx:@moduleTx,       moduleName:  @moduleName,   moduleId:  @moduleId, moduleOn:    @moduleOn,
       describeTx:@describeTx, describeName:@describeName, describeId:@describeId, describeOn:@describeOn,
@@ -247,7 +234,8 @@ class Tester extends Spec
       when r isnt e and op isnt "to" then " Types do not match#{rIs()}#{eIs()}"
       else ""
     if @isStr(status.errors.text)
-      @log( "Tester.verify(result,expect,status)", { errors:status.errors.text, result:result, expect:expect, status:status } )
+      @log( "Tester.verify(result,expect,status)",
+        { errors:status.errors.text, result:result, expect:expect, status:status } )
       status.assert.pass  = false
     status
 
@@ -335,7 +323,7 @@ class Tester extends Spec
     dirs        = path.split("/")
     @moduleName = @tail(dirs).split("-")[0]
     @modulePaths[@moduleName] = { name:@moduleName, path:path }
-    # @log( "Tester.path(path)", { path:path, dirs:dirs, module:@moduleName } ) if  @debug
+    @log( "Tester.path(path)", { path:path, dirs:dirs, module:@moduleName } ) if  @debug
     @modulePaths[@moduleName]
 
   module:( moduleTx ) =>
@@ -363,10 +351,12 @@ class Tester extends Spec
 
   obj:(  o ) =>
     @argums.obj = o
+    @log( "Tester.obj(o) set", @argums.obj )  if @debug
     @
 
   func:( f ) =>
     @argums.func = f
+    @log( "Tester.func(f) set", @argums.func ) if @debug
     @
 
   args:( a ) ->
@@ -379,22 +369,27 @@ class Tester extends Spec
 
   # Improved but still needs work
   statusAssertText:( pass, result, status ) ->
-    if status.argums.has
-      @log( "statusAssertText", status.argums ) # if @debug
-      return @toArgumsStr( result, status.argums )
-
-    arg0         = status.argums.arg0
+    args         = status.argums.args
     describeName = status.assert.describeName
-    @log( "Tester.statusAssertText()", { arg0:arg0 } )  if @debug
-
     text = if pass then "\n-- Passed -- " else "\n-- Failed -- "
-    if @isNot(result)
+    if status.argums.has
+      text += @toArgumsStr( status.argums )
+    else if @isNot(result)
       text += @textValue( "Result", result )
     else if @isStr(describeName)
-      text += @strip(describeName,"","()") + "(" + @toStr(arg0) + ") "
+      text += @strip(describeName,"","()") + "(" + @toStr(args) + ") "
     else
-      text += arg0 + " "
+      text += @toStr(args) + " "
     text
+
+  # result = obj.func( args... )
+  # @toKlass(obj)
+  # @toKlass(func)
+  toArgumsStr:( argums ) ->
+    objStr   = @unCap( argums.obj.constructor.name )
+    funcStr  = argums.func.name.replace( "bound ", "" )
+    argsStr  = @strip( @toStr(argums.args), "[", "]" )
+    "#{objStr}.#{funcStr}(#{argsStr}) "
 
   textValue:( name, value, key=null, index=null ) ->
     ref = ""
@@ -478,9 +473,7 @@ class Tester extends Spec
     @describeOp   = "eq"
     @describeOn   = true
     @moduleUnit   = ""
-    @o            = null
-    @f            = null
-    @a            = null
+    @argums.has   = false
     if group is "module"
       @moduleTx   = ""
       @moduleName = ""
