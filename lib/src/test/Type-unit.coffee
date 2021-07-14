@@ -1,6 +1,6 @@
 
 import { type }         from "./Type.js"
-import { test, exam, tester } from "./Tester.js"
+import { test, tester } from "./Tester.js"
 import Stream           from "../base/util/Stream.js"
 #mport Vis              from '../base/draw/Vis.js'
 
@@ -10,7 +10,7 @@ stream     = new Stream( subjects, streamLog )
 func       = () ->
 undef      = undefined
 
-test().module( "Class Type assertion and conversion" ).on()
+test().module( "Class Type assertion and conversion" ).obj(type).on()
 
 test().describe( """Enclose strings with '"', '()', '[]' '{}'""" ).name("toEnclose()").on()
 test( "abc",         type.toEnclose( "abc",   '"'  ), '"abc"'   )             # returns "abc"
@@ -21,22 +21,22 @@ test( "a:x,b:y,c:z", type.toEnclose( "a:x,b:y,c:z", "{}" ), "{a:x,b:y,c:z}" ) # 
 test().log( test().summary() )
 
 # "|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date"
-test().describe( " toType()" ).obj(type).func(type.toType).on()
-typeExpects = [["123",'string'],[123,'int'],[123.1,'float'],[123.0,'int'],[true,'boolean'],[[1,2,3],'array'],
+test().describe( " toType()" ).func(type.toType).on()
+toTypeArgs = [["123",'string'],[123,'int'],[123.1,'float'],[123.0,'int'],[true,'boolean'],[[1,2,3],'array'],
   [{a:'a'},'object'],["|a|b|c|",'enums'],["|0-100|",'enums'],["|0-100|",'range'],[/x/,'regexp'],[null,'null'],
   [undef,'undefined' ],[func,"function"],[BigInt(123),'bigint'],[Symbol(),'symbol'],[new Date(),'date']]
   # [stream,'object'], [Stream,'function'],[tester,'object'],[Vis,'function']]
-for args in typeExpects
-  exam(args)
+for args in toTypeArgs
+  test(args)
 test().log( test().summary() )
 
-test().describe( " toKlass()" ).obj(type).func(type.toKlass).on()
-klassExpects = [[true,'Boolean'],[123,'Int'],['"123"','String'],[func,'func'],[{a:'a'},'Object'],[[1,2,3],'Array'],
+test().describe( " toKlass()" ).func(type.toKlass).on()
+toKlassArgs = [[true,'Boolean'],[123,'Int'],['"123"','String'],[func,'func'],[{a:'a'},'Object'],[[1,2,3],'Array'],
   [{a:'a'},'Object'],["|a|b|c|",'Enums'],["|0-100|",'Range'],[/x/,'RegExp'],[null,'Null'],
   [undef,'Undefined' ],[null,"Null"]]
   # [stream,'Stream'], [Stream,'Stream'],[tester,'Tester'],[Vis,'Vis']]
-for args in klassExpects
-  exam(args)
+for args in toKlassArgs
+  test(args)
 test().log( test().summary() )
 
 test().describe( "class Type is... assertions" ).on()
@@ -101,20 +101,19 @@ test( "inWarn(pass,result,expect,oper,spec,text,(t)=>t.log(@warn()) )"
 test().log( test().summary() )
 
 test().describe( "Class Type to... conversions" ).op("to").on()
-test( 'toConvert(123,"string")',             type.toConvert(  123,            "string"  ), "123"         )
-test( 'toConvert("123","int")',              type.toConvert( "123",           "int"     ),  123          )
-test( 'toConvert("123.1","float")',          type.toConvert( "123.1",         "float"   ),  123.1        )
-test( 'toConvert("true","boolean")',         type.toConvert( "true",          "boolean" ), true          )
-test( 'toConvert("[1,2,3]","array")',        type.toConvert( "[1,2,3]",       "array"   ), [1,2,3]       )
-test( 'toConvert("{a:"1",b:"2"}","object")', type.toConvert( '{a:"1",b:"2"}', "object"  ), {a:"1",b:"2"} )
-test( 'toConvert("/x/","string")',           type.toConvert( "/x/",           "string"  ), "none"        )
-test( 'toValue(abc)',             type.toValue( "abc"           ), "abc"         )
-test( 'toValue("123")',           type.toValue( "123"           ),  123          )
-test( 'toValue("123.1")',         type.toValue( "123.1"         ),  123.1        )
-test( 'toValue("true")',          type.toValue( "true"          ), true          )
-test( 'toValue("[1,2,3]")',       type.toValue( "[1,2,3]"       ), [1,2,3]       )
-test( 'toValue("{a:"1",b:"2"}")', type.toValue( '{a:"1",b:"2"}' ), {a:"1",b:"2"} )
-test( 'toValue("/x/")',           type.toValue( "/x/"           ), /x/           )
+
+test().func(type.toConvert)
+toConvertArgs = [[123,"string","123"],["123","int",123],["123.1","float",123.1],["true","boolean",true],
+  ["[1,2,3]","array",[1,2,3]], ['{a:"1",b:"2"}', "object",{a:"1",b:"2"}],["/x/","string","none"] ]
+for args in toConvertArgs
+  test(args)
+
+test().func(type.toValue)
+toValueArgs = [["abc","abc"],["123",123],["123.1",123.1],["true",true],
+  ["[1,2,3]",[1,2,3]], ['{a:"1",b:"2"}',{a:"1",b:"2"}],["/x/", /x/ ]]
+for args in toValueArgs
+  test(args)
+
 test( "toFloat(1)",          type.toFloat( 1 ),           1.0    )
 test( "toInt(1.0)",          type.toInt( 1.0 ),           1      )
 test( "toFixed(1.0,2)",      type.toFixed( 1.0, 2 ),     "1.00" )
@@ -125,23 +124,15 @@ test( '"123456",3,4)',       type.slice( "123456",3,4), "34" )
 test( 'toArray("[1,2,3]")',  type.toArray("[1,2,3]"), [1,2,3] )
 test().log( test().summary() )
 
-test().describe( "String conversions" ).name("toStr()" ).op("to").on()
-test( "abc",            type.toStr("abc"),              "abc"           )
-test( 123,              type.toStr(123),                "123"           )
-test( 1.1,              type.toStr(1.1),                "1.1"           )
-test( true,             type.toStr(true),               "true"          )
-test( '{a:"a",b:"b"}',  type.toStr({a:"a",b:"b"}),     '{a:"a" b:"b"}' )
-test( "[1,2,3]",        type.toStr([1,2,3]),            '[1,2,3]'       )
-test( '["1","2","3"]',  type.toStr(["1","2","3"]),      '["1","2","3"]' )
-test( "null",           type.toStr(null),               "null"          )
-test( "undefined",      type.toStr(undef),              "undefined"     )
-test( func,             type.toStr(func),               "function"      )
-test( "/x/",            type.toStr(/x/),                 "/x/"          )
-test( BigInt(123),      type.toStr(BigInt(123)),         "123"          )
-test( 'Symbol("desc")', type.toStr(Symbol("desc")),     'Symbol(desc)'  )
-test(         'new Date("August 19, 1975 23:15:30")',
-  type.toStr( `new Date("August 19, 1975 23:15:30")` ),
-  "Tue Aug 19 1975 23:15:30 GMT+0200 (CEST)"  )
+test().describe( "String conversions" ).func(type.toStr).op("to").on()
+
+toStrArgs = [["abc","abc"],[123,"123"],[1.1,"1.1"],[true,"true"],
+  [[1,2,3],"[1,2,3]"], [{a:"1",b:"2"},'{a:"1",b:"2"}'],[/x/,"/x/" ],
+  [undef,"undefined"],[func,"function"],[BigInt(123),123],[Symbol("desc"),'Symbol(desc)'],
+  [`new Date("August 19, 1975 23:15:30")`,"Tue Aug 19 1975 23:15:30 GMT+0200 (CEST)"]  ]
+for args in toStrArgs
+  test(args)
+
 test().log( test().summary() )
 
 test().describe( "toObject(arg) conversions" ).name("toObject()").op("to").on()

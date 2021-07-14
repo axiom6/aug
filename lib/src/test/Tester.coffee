@@ -76,24 +76,19 @@ class Tester extends Spec
   test:( args... ) =>
     return @  if args.length is 0 or @testingOff()
     @argums = @toArgums(args[0])
-    if args.length is 2 and @isFunction(args[1])
+    if  args.length is 1 and @argums.has
+      expect = @argums.args.pop()
+      result = @applyArgums(@argums)
+      @log( "test()", { args:args, expect } )  if @debug
+      @run( @argums, result, expect )
+    else if args.length is 2 and @isFunction(args[1])
       closure = args[1]
       closure(@)        # Call closure with an injected tester instance
-    else if args.length is 2 and @argums.has and not @isFunction(args[1])
-      result  = @applyArgums(@argums)
-      expect  = args[1]
-      @run( @argums, result, expect )
     else if args.length is 3 and not @isFunction(args[1])
       result  = args[1]
       expect  = args[2]
       @run( @argums, result, expect ) # returns tester instance for chaining
     @  # returns tester instance for chaining
-
-  exam:( args ) =>
-    return @ if args.length is 0 or @testingOff()
-    expect = args.pop()
-    @log( "exam()", { args:args, expect } )  if @debug
-    @test( args, expect )
 
   # typeof is used for the object instance becauses isType(...) provides class type names
   isArgums:( argums ) =>
@@ -350,13 +345,17 @@ class Tester extends Spec
     @
 
   obj:(  o ) =>
-    @argums.obj = o
-    @log( "Tester.obj(o) set", @argums.obj )  if @debug
+    if @isObject(o)
+      @argums.obj = o
+    else
+      @error( "Tester.obj(o) o not an 'object'", { obj:o, type:@toType(o) } )
     @
 
   func:( f ) =>
-    @argums.func = f
-    @log( "Tester.func(f) set", @argums.func ) if @debug
+    if @isFunction(f)
+       @argums.func = f
+    else
+      @error( "Tester.func(f) f not a 'function'", { func:f, type:@toType(f) } )
     @
 
   args:( a ) ->
@@ -570,5 +569,4 @@ class Tester extends Spec
 #   get this single instance that holds all testing state
 export tester = new Tester()
 test = tester.test
-exam = tester.exam
-export { test, exam }
+export { test }

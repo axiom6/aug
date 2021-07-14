@@ -186,22 +186,6 @@ class Type
       when enc.length is 1 then """#{enc.charAt(0)}#{str}#{enc.charAt(0)}"""
       else "\"#{str}\""
 
-  toStr1:(arg) ->
-    type = @toType(arg)
-    str = switch type
-      when "string","enums","range","any" then arg
-      when "int"        then parseInt(arg)
-      when "float"      then parseFloat(arg)
-      when "boolean"    then if arg then "true" else "false"
-      when "array"      then @toStrArray(arg)
-      when "object"     then @toStrObject(arg)
-      when "null"       then "null"
-      when "undefined"  then "undefined"
-      when "function"   then "function"
-      when "regexp","date","bigint","symbol" then arg.toString()  # hail marys
-      else "none"
-    str
-
 # toStr(arg) avoids conflicts with arg.toString()
   #  returns "none" if unsuccesful
   # This combination of travesal and recursion is cleaner than JSON.stringify()

@@ -1,4 +1,22 @@
 
+Tester unique capabilies:
+  1. Dirt simple setup a single function test() with import { test } from "./Tester.js"
+  2. Spec for asserting 'enums' 'range' and 'regexp' matching
+  3. Power Type assertions with Type.js inherited by the Tester class
+  4. Ability to write "file-schema.json" schemas file for validation "file.json"
+  5. Acurate reporting by specifying:
+     a. Calling [arguments.., expect]
+     b. .obj(object) a 'this' pointer
+     c. .func(function) a method or function
+  6. Optional closure = (t) => t.eq( result, expect )
+  7. Simple setup for ...-unit.js module with glob("/src/**/*-unit.js") or pathnames
+  8. On off swithes
+     a. test().alwaysOn = true for CI( Continuous Integration )
+     b. test().testing  = false for production
+     c. describe.on(false) to turn off a block of tests
+     d.   module.on(false) to turn off a test module
+
+
 Tester Wrap Up
   1. Fix toStr() - @toStrObject() recursion
   2. Move Tester.verify(...) up into @run(...) to check args
