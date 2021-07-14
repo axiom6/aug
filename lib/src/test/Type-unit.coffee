@@ -2,7 +2,7 @@
 import { type }         from "./Type.js"
 import { test, exam, tester } from "./Tester.js"
 import Stream           from "../base/util/Stream.js"
-import Vis              from '../base/draw/Vis.js'
+#mport Vis              from '../base/draw/Vis.js'
 
 subjects   = ["TestStatus","TestString","TestSummary"]
 streamLog  = { subscribe:false, publish:false, subjects:subjects }
@@ -13,19 +13,19 @@ undef      = undefined
 test().module( "Class Type assertion and conversion" ).on()
 
 test().describe( """Enclose strings with '"', '()', '[]' '{}'""" ).name("toEnclose()").on()
-test( "", type.toEnclose( "abc",   '"'  ), '"abc"'   )             # returns "abc" - good for JSON keys and values
-test( "", type.toEnclose( "123",   "'"  ), "'123'"   )             # returns '123'
-test( "", type.toEnclose( "xyz",   "()" ), "(xyz)"   )             # returns (xyz)
-test( "", type.toEnclose( "d,e,f", "[]" ), "[d,e,f]" )             # returns [d,e,f]
-test( "", type.toEnclose( "a:x,b:y,c:z", "{}" ), "{a:x,b:y,c:z}" ) # returns {a:x,b:y,c:z}
+test( "abc",         type.toEnclose( "abc",   '"'  ), '"abc"'   )             # returns "abc"
+test( "123",         type.toEnclose( "123",   "'"  ), "'123'"   )             # returns '123'
+test( "xyz",         type.toEnclose( "xyz",   "()" ), "(xyz)"   )             # returns (xyz)
+test( "d,e,f",       type.toEnclose( "d,e,f", "[]" ), "[d,e,f]" )             # returns [d,e,f]
+test( "a:x,b:y,c:z", type.toEnclose( "a:x,b:y,c:z", "{}" ), "{a:x,b:y,c:z}" ) # returns {a:x,b:y,c:z}
 test().log( test().summary() )
 
 # "|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date"
-test().describe( "All 13 types" ).obj(type).func(type.toType).name("type()").on()
+test().describe( "16 types" ).obj(type).func(type.toType).name("type()").on()
 typeExpects = [["123",'string'],[123,'int'],[123.1,'float'],[123.0,'int'],[true,'boolean'],[[1,2,3],'array'],
   [{a:'a'},'object'],["|a|b|c|",'enums'],["|0-100|",'enums'],[/x/,'regexp'],[null,'null'],[undef,'undefined' ],
-  [func,"function"],[BigInt(123),'bigint'],[Symbol(),'symbol'],[new Date(),'date'],[stream,'object'],
-  [Stream,'function'],[tester,'object'],[Vis,'function'],]
+  [func,"function"],[BigInt(123),'bigint'],[Symbol(),'symbol'],[new Date(),'date']]
+  # [stream,'object'], [Stream,'function'],[tester,'object'],[Vis,'function']]
 for args in typeExpects
   exam(args)
 test().log( test().summary() )
@@ -33,14 +33,14 @@ test().log( test().summary() )
 test().describe( "klass types" ).name("toKlass()").on()
 test( true,       type.toKlass(true),        'Boolean'   )
 test( 123,        type.toKlass(123),         'Int'       )
-test( '123',      type.toKlass('123'),       'String'    )
+test('"123"',     type.toKlass('123'),       'String'    )
 test( func,       type.toKlass(func),        'func'      )
-#est( {a:'a'},    type.toKlass({a:'a'}),     'Object'    )
-#test( [1,2,3],    type.toKlass([1,2,3]),     'Array'     )
+test( {a:'a'},    type.toKlass({a:'a'}),     'Object'    )
+test( [1,2,3],   type.toKlass([1,2,3]),     'Array'     )
 test( /x/,        type.toKlass(/x/),         'RegExp'    )
 test( new Date(), type.toKlass(new Date()),  'Date'      )
-test( undef,      type.toKlass(undef),       'Undefined' )
-test( null,       type.toKlass(null),        'Null'      )
+test( "undef",    type.toKlass(undef),       'Undefined' )
+test( "null",     type.toKlass(null),        'Null'      )
 #est( stream,     type.toKlass(stream),  'Stream' )
 #est( Stream,     type.toKlass(Stream),  'Stream' )
 #est( tester,     type.toKlass(tester),  'Tester' )
@@ -48,29 +48,29 @@ test( null,       type.toKlass(null),        'Null'      )
 test().log( test().summary() )
 
 test().describe( "class Type is... assertions" ).on()
-test( "isType(v,t)",               type.isType("abc","string"),       true )
-test( "isStr('abc')",              type.isStr('abc'),                 true )
-test( "isInt(i)",                  type.isInt(  123 ),                true )
-test( "isInt(i)",                  type.isInt( "123"),                true )
-test( "isFloat(f)",                type.isFloat(123.2),               true )
-test( "isFloat(f)",                type.isFloat("123.2"),             true )
-test( "isBoolean(b)",              type.isBoolean( true ),            true )
-test( "isBoolean(b)",              type.isBoolean("true"),            true )
-test( "isObject({a:'a'})",         type.isObject({a:'a'}),            true )
-test( "isArray([1,2,3])",          type.isArray([1,2,3]),             true )
-test( "isArrayTyped(a,t)",         type.isArrayTyped([1,2,3],"int") , true )
-test( "isArrayMixed(a)",           type.isArrayMixed([1,"2",3]),      true )
-test( 'isEnums("|a|b|c|")',        type.isEnums("|a|b|c|"),           true )
-test( "isRegex(r)",                type.isRegexp(/^-?\d+$/),          true )
-test( "isFunction(f)",             type.isFunction(type.toStr),       true )
-test( "isNull(null)",              type.isNull(null),                 true )
-test( "isUndef(xxxx)",             type.isUndef(undef),               true )
-test( "isNot(null)",               type.isNot(null),                  true )
-test( "isNumber(12345)",           type.isNumber(12345),              true )
-test( "isBigInt(b)",               type.isBigInt(BigInt(123)),        true )
-test( "isSymbol(s)",               type.isSymbol(Symbol()),           true )
-test( "isNaN(NaN)",                type.isNaN(NaN),                   true )
-test( 'isType("|0-100|","range")', type.isType("|0-100|","range"), true )
+test( 'isType("abc","string")"',               type.isType("abc","string"),       true )
+test( "isStr('abc')",                type.isStr('abc'),                 true )
+test( "isInt(123)",                  type.isInt(  123 ),                true )
+test( 'isInt("123")',                type.isInt( "123"),                true )
+test( "isFloat(123.2)",              type.isFloat(123.2),               true )
+test( 'isFloat("123.2")',            type.isFloat("123.2"),             true )
+test( "isBoolean(true)",             type.isBoolean( true ),            true )
+test( 'isBoolean("true")',           type.isBoolean("true"),            true )
+test( "isObject({a:'a'})",           type.isObject({a:'a'}),            true )
+test( "isArray([1,2,3])",            type.isArray([1,2,3]),             true )
+test( 'isArrayTyped([1,2,3],"int")', type.isArrayTyped([1,2,3],"int") , true )
+test( 'isArrayMixed([1,"2",3])',     type.isArrayMixed([1,"2",3]),      true )
+test( 'isEnums("|a|b|c|")',          type.isEnums("|a|b|c|"),           true )
+test( "isRegex(/^-?\\d+$/)",         type.isRegexp(/^-?\d+$/),          true )
+test( "isFunction(type.toStr)",      type.isFunction(type.toStr),       true )
+test( "isNull(null)",                type.isNull(null),                 true )
+test( "isUndef(undef",               type.isUndef(undef),               true )
+test( "isNot(null)",                 type.isNot(null),                  true )
+test( "isNumber(12345)",             type.isNumber(12345),              true )
+test( "isBigInt((BigInt(123))",      type.isBigInt(BigInt(123)),        true )
+test( "isSymbol(Symbol())",          type.isSymbol(Symbol()),           true )
+test( "isNaN(NaN)",                  type.isNaN(NaN),                   true )
+test( 'isType("|0-100|","range")',   type.isType("|0-100|","range"), true )
 test().log( test().summary() )
 
 test().describe( "Negative type assertsions" ).on()
@@ -86,15 +86,15 @@ test( "isArray({a:'a'})", type.isArray({a:'a'}), false )
 test().log( test().summary() )
 
 test().describe( "Class Type in... containments" ).on()
-test( "inString(e,s)", type.inStr(    "b", "abc" ),         true )
-test( "inArray( e,a)", type.inArray(   2,  [1,2,3] ),       true )
-test( "inObject(k,o)", type.inObject( "b", {a:"1",b:"2"} ), true )
+test( 'inStr("b","abc")',              type.inStr(   "b", "abc" ),         true )
+test( 'inArray(2,[1,2,3])',            type.inArray(  2,  [1,2,3] ),       true )
+test( 'inObject("b",{a:"1",b:"2"} )', type.inObject( "b", {a:"1",b:"2"} ), true )
 test().log( test().summary() )
 
 test().describe( "Utilities" ).on()
 test( 'head([1,2,3])',               type.head([1,2,3]),  1  )
 test( 'tail("123")',                 type.tail("123", ), "3" )
-#est( 'pad(n,m)',                    type.pad( "1", 2 ),                "  1" )  # getting crunched
+#est( 'pad("1",2)',                  type.pad( "1", 2 ),                "  1" )  # getting crunched
 test( 'isIn( "string", "types"   )', type.isIn( "string", "types"   ),   true )
 test( 'isIn( "string", "typeofs" )', type.isIn( "string", "typeofs" ),   true )
 test().log( test().summary() )
@@ -116,7 +116,7 @@ test( 'toConvert("true","boolean")',         type.toConvert( "true",          "b
 test( 'toConvert("[1,2,3]","array")',        type.toConvert( "[1,2,3]",       "array"   ), [1,2,3]       )
 test( 'toConvert("{a:"1",b:"2"}","object")', type.toConvert( '{a:"1",b:"2"}', "object"  ), {a:"1",b:"2"} )
 test( 'toConvert("/x/","string")',           type.toConvert( "/x/",           "string"  ), "none"        )
-test( 'toValue(123)',             type.toValue( "abc"           ), "abc"         )
+test( 'toValue(abc)',             type.toValue( "abc"           ), "abc"         )
 test( 'toValue("123")',           type.toValue( "123"           ),  123          )
 test( 'toValue("123.1")',         type.toValue( "123.1"         ),  123.1        )
 test( 'toValue("true")',          type.toValue( "true"          ), true          )
@@ -134,19 +134,19 @@ test( 'toArray("[1,2,3]")',  type.toArray("[1,2,3]"), [1,2,3] )
 test().log( test().summary() )
 
 test().describe( "String conversions" ).name("toStr()" ).op("to").on()
-test( "abc",                    type.toStr("abc"),              "abc"           )
-test( 123,                       type.toStr(123),                "123"           )
-test( 1.1,                     type.toStr(1.1),                "1.1"           )
-test( true,                  type.toStr(true),               "true"          )
-test( '{a:"a",b:"b"}',        type.toStr({a:"a",b:"b"}),     '{a:"a" b:"b"}' )
-test( "[1,2,3]",            type.toStr([1,2,3]),            '[1,2,3]'       )
-test( '["1","2","3"]', type.toStr(["1","2","3"]),      '["1","2","3"]' )
-test( "null",                            type.toStr(null),               "null"          )
-test( "undefined",                       type.toStr(undef),              "undefined"     )
-test( "function",                        type.toStr(func),               "function"      )
-test( "/x/",                    type.toStr(/x/),                 "/x/"          )
-test( BigInt(123),              type.toStr(BigInt(123)),         "123"          )
-test( 'Symbol("desc")',                  type.toStr(Symbol("desc")),     'Symbol(desc)'  )
+test( "abc",            type.toStr("abc"),              "abc"           )
+test( 123,              type.toStr(123),                "123"           )
+test( 1.1,              type.toStr(1.1),                "1.1"           )
+test( true,             type.toStr(true),               "true"          )
+test( '{a:"a",b:"b"}',  type.toStr({a:"a",b:"b"}),     '{a:"a" b:"b"}' )
+test( "[1,2,3]",        type.toStr([1,2,3]),            '[1,2,3]'       )
+test( '["1","2","3"]',  type.toStr(["1","2","3"]),      '["1","2","3"]' )
+test( "null",           type.toStr(null),               "null"          )
+test( "undefined",      type.toStr(undef),              "undefined"     )
+test( func,             type.toStr(func),               "function"      )
+test( "/x/",            type.toStr(/x/),                 "/x/"          )
+test( BigInt(123),      type.toStr(BigInt(123)),         "123"          )
+test( 'Symbol("desc")', type.toStr(Symbol("desc")),     'Symbol(desc)'  )
 test(         'new Date("August 19, 1975 23:15:30")',
   type.toStr( `new Date("August 19, 1975 23:15:30")` ),
   "Tue Aug 19 1975 23:15:30 GMT+0200 (CEST)"  )

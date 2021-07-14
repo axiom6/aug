@@ -41,10 +41,7 @@ class Tester extends Spec
     @summarized   = false  # Indicates that @summary() has been on the last @describe()
                            #   and wether @complete() should genrate a summarized text
     # Accumulated status objects
-    @o           = null
-    @f           = null
-    @a           = null
-    @arg0        = "" # set by test() that is passed inside eq() and sent to run()
+    @argums      = { has:false } # set by test() that is passed inside eq() and sent to run()
     @modulePaths = {}
     @statusAs    = {}  # Latest status from @assert(...)
     @statuses    = []
@@ -77,49 +74,72 @@ class Tester extends Spec
   #
   #   test( "Vis.rgb() converts hex color to rgb object",  Vis.rgb(0xFFFFFF), {r:255,g:255,b:255} )
   test:( args... ) =>
-    return @ if args.length is 0 or @testingOff()
+    return @  if args.length is 0 or @testingOff()
+    @argums = if args.length >= 1 then @toArgums(args[0]) else { has:false, arg0:"none" }
     if args.length is 2 and @isFunction(args[1])
-      @arg0   = args[0] # @arg0 is latter referenced inside eq()
       closure = args[1]
       closure(@)        # Call closure with an injected tester instance
-    else if args.length is 2 and @isObjFuncArgs(args[0]) and not @isFunction(args[1])
-      # @log( "test()", {args:args, isArgs:@isObjFuncArgs(args[0]) } ) if @debug
-      @arg0  = args[0]
-      result = @applyFuncArgs(@arg0)
-      expect = args[1]
+    else if args.length is 2 and @argums.has and not @isFunction(args[1])
+      @log( "test()", {args:args, argums:@argums} ) # if @debug
+      result  = @applyArgums(@argums)
+      expect  = args[1]
+      @run( @argums, result, expect )
     else if args.length is 3 and not @isFunction(args[1])
-      @arg0  = args[0]
-      result = args[1]
-      expect = args[2]
-      @run( @arg0, result, expect ) # returns tester instance for chaining
+      result  = args[1]
+      expect  = args[2]
+      @log( "test() 3 args", { argums:@argums , result:result, expect:expect } ) if @debug
+      @run( @argums, result, expect ) # returns tester instance for chaining
     @  # returns tester instance for chaining
 
   exam:( args ) =>
-    @log( "args() one ", { o:@o, f:@f, args:args } )  if @debug
     return @ if args.length is 0 or @testingOff()
     expect = args.pop()
-    arg0   = {o:@o,f:@f,a:args}
-    @log( "args() two ", { arg0:arg0, expect } )      if @debug
-    @test( arg0, expect )
+    @log( "exam()", { args:args, expect } )    #  if @debug
+    @test( args, expect )
 
   # typeof is used for the object instance becauses isType(...) provides class type names
-  isObjFuncArgs:( arg0 ) =>
-    @isObject( arg0 ) and
-      arg0.o? and @isType(arg0.o,"object")   and
-      arg0.f? and @isType(arg0.f,"function") and
-      arg0.a? and @isType(arg0.a,"array")
+  isArgums:( argums ) =>
+    @isArray(argums) or @isObject(argums) and
+      argums.obj?  and @isType( argums.obj, "object"   ) and
+      argums.func? and @isType( argums.func,"function" ) and
+      argums.args? and @isType( argums.args,"array"    )
 
-  applyFuncArgs:( q ) ->
-    o  = if q.o? then q.o else @o
-    f  = if q.f? then q.f else @f
-    a  = if q.a? then q.a else []    
-    r  = af.apply( o, a )
-    rs = @toStr(r)
-    os = @toStr(o.constructor.name)
-    fs = f.name()
-    as = @toStr(a)
-    @log( "apply", "#{rs}=#{os}.#{fs}(#{as})")
-    r
+  toArgums:( arg0 ) =>
+    snap = {} # This is a snap shot of @argums
+    snap.arg0    = "none"
+    snap.obj     = if arg0.obj?  then arg0.obj  else @argums.obj
+    snap.func    = if arg0.func? then arg0.func else @argums.func
+    snap.args = switch
+      when  @isArray(arg0) then arg0
+      when @isObject(arg0) then arg0.args
+      else                      "none"
+    snap.arg0 = snap.args
+    snap.has  = @isArgums( snap )
+    if snap.has
+      @argums.obj  = snap.obj   # Remember the lastest verified arg0 settings
+      @argums.func = snap.func
+      @argums.args = snap.args
+      @argums.has  = snap.has
+    @log( "toArgums()", snap ) # if @debug
+    snap
+
+  # result = obj.func( args... )         or
+  # result = func.apply( obj, args... )  with apply(()
+  applyArgums:( argums ) ->
+    argums.obj    = if argums.obj?  then argums.obj  else @o
+    argums.func   = if argums.func? then argums.func else @f
+    argums.args   = if argums.args? then argums.args else []
+    result = argums.func.apply( argums.obj, argums.args )
+    @log( "apply", @toArgumsStr( result, argums ) )
+    result
+
+  # result = obj.func( args... )
+  toArgumsStr:( result, argums ) ->
+    resulStr = @toStr(result)
+    objStr   = argums.obj.constructor.name    # @toKlass(obj)
+    funcStr  = argums.func.name               # @toKlass(func)
+    argsStr  = @strip( @toStr(argums.args), "[", "]" )
+    "#{resulStr}=#{objStr}.#{funcStr}(#{argsStr})"
 
   # The strongest logic is the last where all 4 condition are checked where as
   #  'module' and 'all' admit larger group of tests
@@ -131,11 +151,11 @@ class Tester extends Spec
     toff
 
   eq:( result, expect ) =>
-    @run( @arg0, result, expect )
+    @run( @argums, result, expect )
 
   # -- run() scenario is @initStatus(...) @assert(...)
-  run:( arg0, result, expect ) ->
-    @statusAs = @initStatus( result, expect, arg0 )
+  run:( argums, result, expect ) ->
+    @statusAs = @initStatus( result, expect, argums )
     @statusAs = switch @describeOp
       when "to" then  @convert( result, expect, @statusAs )
       else            @assert(  result, expect, @statusAs )
@@ -143,9 +163,11 @@ class Tester extends Spec
 
   # Create a new status object for the current test
   #   each test status is imprinted with the current module and describe settings
-  initStatus:( result, expect, arg0 ) ->
-    {
-      assert:{ text:"", arg0:arg0, pass:true, keys:"",
+  initStatus:( result, expect, argums ) ->
+    @log( "initStatus argums", argums )  if @debug
+    status = {
+      argums: @toArgums(argums),
+      assert:{ text:"", pass:true, keys:"",
       moduleTx:@moduleTx,       moduleName:  @moduleName,   moduleId:  @moduleId, moduleOn:    @moduleOn,
       describeTx:@describeTx, describeName:@describeName, describeId:@describeId, describeOn:@describeOn,
       describeOp:@describeOp }
@@ -154,6 +176,8 @@ class Tester extends Spec
       warned:{ text:"" }
       errors:{ text:"" }
     }
+    @log( "initStatus status", status ) if @debug
+    status
 
   # Performs all assertions even a deep equal on objects and arrays
   #   Strong type checking with @toType(arg) so asserions are only test when types match
@@ -223,7 +247,7 @@ class Tester extends Spec
       when r isnt e and op isnt "to" then " Types do not match#{rIs()}#{eIs()}"
       else ""
     if @isStr(status.errors.text)
-      console.log( "Tester.verify(result,expect,status)", { errors:status.errors.text, result:result, expect:expect, status:status } )
+      @log( "Tester.verify(result,expect,status)", { errors:status.errors.text, result:result, expect:expect, status:status } )
       status.assert.pass  = false
     status
 
@@ -311,7 +335,7 @@ class Tester extends Spec
     dirs        = path.split("/")
     @moduleName = @tail(dirs).split("-")[0]
     @modulePaths[@moduleName] = { name:@moduleName, path:path }
-    # console.log( "Tester.path(path)", { path:path, dirs:dirs, module:@moduleName } ) if  @debug
+    # @log( "Tester.path(path)", { path:path, dirs:dirs, module:@moduleName } ) if  @debug
     @modulePaths[@moduleName]
 
   module:( moduleTx ) =>
@@ -338,12 +362,15 @@ class Tester extends Spec
     @
 
   obj:(  o ) =>
-    @o = o
+    @argums.obj = o
     @
 
   func:( f ) =>
-    @f = f
+    @argums.func = f
     @
+
+  args:( a ) ->
+    @argums.args = a
 
 # Can be chained to @describe(describeTx) and @module(moduleTx) to turn test blocks on and off
   on:( sw=true ) ->
@@ -352,15 +379,21 @@ class Tester extends Spec
 
   # Improved but still needs work
   statusAssertText:( pass, result, status ) ->
+    if status.argums.has
+      @log( "statusAssertText", status.argums ) # if @debug
+      return @toArgumsStr( result, status.argums )
+
+    arg0         = status.argums.arg0
     describeName = status.assert.describeName
-    text       = if pass then "\n-- Passed -- " else "\n-- Failed -- "
+    @log( "Tester.statusAssertText()", { arg0:arg0 } )  if @debug
+
+    text = if pass then "\n-- Passed -- " else "\n-- Failed -- "
     if @isNot(result)
       text += @textValue( "Result", result )
     else if @isStr(describeName)
-      console.log( "Tester.statusAssertText()", { arg0:@arg0 } ) if @debug
-      text += @strip(describeName,"","()") + "(" + @toStr(@arg0) + ") "
+      text += @strip(describeName,"","()") + "(" + @toStr(arg0) + ") "
     else
-      text += @arg0 + " "
+      text += arg0 + " "
     text
 
   textValue:( name, value, key=null, index=null ) ->
@@ -381,7 +414,6 @@ class Tester extends Spec
     eq                   = if pass then "eq" else "not"
     status.assert.text   = @statusAssertText( pass, result, status )
     status.assert.text  += """#{eq} #{@toStr(expect)}""" if status.result.type isnt "function"
-    #tatus.assert.text  += " " + @arg0
     status.assert.pass   = pass and status.assert.pass # Asserts a previous status.assert.pass is false
     status.result.text  += @textValue( "Result", result, key, index )
     status.expect.text  += @textValue( "Expect", expect, key, index )  if not isSpec
@@ -537,7 +569,7 @@ class Tester extends Spec
     locals   = localStorage.getItem( "Tester" )
     statuses = JSON.parse( locals )
     for status in statuses
-      console.log( status )
+      @log( status )
     return
 
 # -- ES6 exports for single tester instance and its test() and unit() methods
