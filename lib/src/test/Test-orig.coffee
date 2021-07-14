@@ -1,6 +1,6 @@
 
 import { type }         from "./Type.js"
-import { test, exam, tester } from "./Tester.js"
+import { test, tester } from "./Tester.js"
 import Stream           from "../base/util/Stream.js"
 import Vis              from '../base/draw/Vis.js'
 
@@ -21,13 +21,27 @@ test( "", type.toEnclose( "a:x,b:y,c:z", "{}" ), "{a:x,b:y,c:z}" ) # returns {a:
 test().log( test().summary() )
 
 # "|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date"
-test().describe( "All 13 types" ).obj(type).func(type.toType).name("type()").on()
-typeExpects = [["123",'string'],[123,'int'],[123.1,'float'],[123.0,'int'],[true,'boolean'],[[1,2,3],'array'],
-  [{a:'a'},'object'],["|a|b|c|",'enums'],["|0-100|",'enums'],[/x/,'regexp'],[null,'null'],[undef,'undefined' ],
-  [func,"function"],[BigInt(123),'bigint'],[Symbol(),'symbol'],[new Date(),'date'],[stream,'object'],
-  [Stream,'function'],[tester,'object'],[Vis,'function'],]
-for args in typeExpects
-  exam(args)
+test().describe( "All 13 types" ).name("type()").on()  # all type(arg) tests needs better reporting
+test( "123",        type.toType('123'),         'string'    )
+test(  123,         type.toType(123),           'int'       )
+test( 123.1,        type.toType(123.1),         'float'     )
+test( 123.0, type.toType(123.0),         'int'       )
+test( true,         type.toType(true),          'boolean'   )
+test( [1,2,3],      type.toType([1,2,3]),       'array'     )
+test( "{a:'a'}",      type.toType({a:'a'}),       'object'    )
+test( "|a|b|c|",      type.toType("|a|b|c|"),     'enums'     )
+test( "|0-100|",      type.toType("|0-100|"),     'range'     )
+test( /x/,          type.toType(/x/),           'regexp'    )
+test( null,         type.toType(null),          'null'      )
+test( undef,        type.toType(undef),         'undefined' )
+test( func,         type.toType( () => ),       'function'  )
+test( BigInt(123),  type.toType((BigInt(123))), 'bigint'    ) # 123n not working in CoffeeScript
+test( Symbol(),       type.toType(Symbol()),      'symbol'    ) # Symbol not not new Symbol()
+test( new Date(),   type.toType(new Date()),    'date'      )
+test( "stream",       type.toType(stream),        'object'    )
+test( "Stream",       type.toType(Stream),        'function'  )
+test( "tester",       type.toType(tester),        'object'    )
+test( "Vis",          type.toType(Vis),           'function'  )
 test().log( test().summary() )
 
 test().describe( "klass types" ).name("toKlass()").on()
@@ -167,5 +181,3 @@ test( "{a:#{t.v(a)},b:#{t.v(o)})", type.toObject( "{a:#{t.v(a)},b:#{t.v(o)})" ),
 test( '{a:"x",b:"y")', type.toObject( '{a:"x",b:"y")' ),  {a:'"x"',b:'"y"'} )
 test( "{a:1,b:2}", type.toObject( '{a:1,b:2 }' ), {a:1,b:2} )
 test().log( test().summary() )
-
-

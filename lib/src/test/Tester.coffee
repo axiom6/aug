@@ -11,9 +11,9 @@ class Tester extends Spec
     @testing        = true          # When false all testing is turned off which allows tests to remain in code
     @always         = false         # When true  all testing is turned on  which overrides all other settings
     #logging        = true          # @logging is in class Type
-    @archive        = true          # When true archives test status object to localStorage TestsPassed and TestFail
+    @archive        = false         # When true archives test status object to localStorage TestsPassed and TestFail
     @verbose        = false         # Adds addition and sometimes mind numbing detail to testStatus objects
-    @debug          = false         # Turns on debugs call to console.log(...)
+    #debug          = false         # Turns on debugs call to console.log(...)  in Type class
     @schemaKey      = "schema"      # Specifies the key in a JSON file to look up its argidating schema in JSON
     @statusSubject  = "TestStatus"  # Subject for publishing each test status object
     @summarySubject = "TestSummary" # Subject for publishing module and final summaries
@@ -41,7 +41,10 @@ class Tester extends Spec
     @summarized   = false  # Indicates that @summary() has been on the last @describe()
                            #   and wether @complete() should genrate a summarized text
     # Accumulated status objects
-    @text        = "" # set by test() that is passed inside eq() and sent to run()
+    @o           = null
+    @f           = null
+    @a           = null
+    @arg0        = "" # set by test() that is passed inside eq() and sent to run()
     @modulePaths = {}
     @statusAs    = {}  # Latest status from @assert(...)
     @statuses    = []
@@ -54,7 +57,7 @@ class Tester extends Spec
     @testing        = if options.testing?        then options.testing        else true
     @always         = if options.always?         then options.always         else false
     @logging        = if options.logging?        then options.logging        else true
-    @archive        = if options.archive?        then options.archive        else true
+    @archive        = if options.archive?        then options.archive        else false
     @verbose        = if options.verbose?        then options.verbose        else false
     @debug          = if options.debug?          then options.debug          else false
     @schemaKey      = if options.schemaKey?      then options.schemaKey      else "schema"
@@ -73,19 +76,50 @@ class Tester extends Spec
   #   test(  "2 + 3 = 5", 2 + 3, 5 )            # Direct result and expect arguments
   #
   #   test( "Vis.rgb() converts hex color to rgb object",  Vis.rgb(0xFFFFFF), {r:255,g:255,b:255} )
-  test:( text, args... ) =>
-    if      arguments.length is 0 or @testingOff()
-      return @
-    else if arguments.length is 2 and @isFunction(args[0])
-      closure = args[0]
-      @text   = text               # @text is latter referenced inside eq()
-      closure(@)                   # Call closure with an injected tester instand
-    else if arguments.length is 3 and not @isFunction(args[0])
-      result = args[0]
+  test:( args... ) =>
+    return @ if args.length is 0 or @testingOff()
+    if args.length is 2 and @isFunction(args[1])
+      @arg0   = args[0] # @arg0 is latter referenced inside eq()
+      closure = args[1]
+      closure(@)        # Call closure with an injected tester instance
+    else if args.length is 2 and @isObjFuncArgs(args[0]) and not @isFunction(args[1])
+      # @log( "test()", {args:args, isArgs:@isObjFuncArgs(args[0]) } ) if @debug
+      @arg0  = args[0]
+      result = @applyFuncArgs(@arg0)
       expect = args[1]
-      @text   = text
-      @run( text, result, expect ) # returns tester instance for chaining
+    else if args.length is 3 and not @isFunction(args[1])
+      @arg0  = args[0]
+      result = args[1]
+      expect = args[2]
+      @run( @arg0, result, expect ) # returns tester instance for chaining
     @  # returns tester instance for chaining
+
+  exam:( args ) =>
+    @log( "args() one ", { o:@o, f:@f, args:args } )  if @debug
+    return @ if args.length is 0 or @testingOff()
+    expect = args.pop()
+    arg0   = {o:@o,f:@f,a:args}
+    @log( "args() two ", { arg0:arg0, expect } )      if @debug
+    @test( arg0, expect )
+
+  # typeof is used for the object instance becauses isType(...) provides class type names
+  isObjFuncArgs:( arg0 ) =>
+    @isObject( arg0 ) and
+      arg0.o? and @isType(arg0.o,"object")   and
+      arg0.f? and @isType(arg0.f,"function") and
+      arg0.a? and @isType(arg0.a,"array")
+
+  applyFuncArgs:( q ) ->
+    o  = if q.o? then q.o else @o
+    f  = if q.f? then q.f else @f
+    a  = if q.a? then q.a else []    
+    r  = af.apply( o, a )
+    rs = @toStr(r)
+    os = @toStr(o.constructor.name)
+    fs = f.name()
+    as = @toStr(a)
+    @log( "apply", "#{rs}=#{os}.#{fs}(#{as})")
+    r
 
   # The strongest logic is the last where all 4 condition are checked where as
   #  'module' and 'all' admit larger group of tests
@@ -97,11 +131,11 @@ class Tester extends Spec
     toff
 
   eq:( result, expect ) =>
-    @run( @text, result, expect )
+    @run( @arg0, result, expect )
 
   # -- run() scenario is @initStatus(...) @assert(...)
-  run:( text, result, expect ) ->
-    @statusAs = @initStatus( result, expect, text      )
+  run:( arg0, result, expect ) ->
+    @statusAs = @initStatus( result, expect, arg0 )
     @statusAs = switch @describeOp
       when "to" then  @convert( result, expect, @statusAs )
       else            @assert(  result, expect, @statusAs )
@@ -109,9 +143,9 @@ class Tester extends Spec
 
   # Create a new status object for the current test
   #   each test status is imprinted with the current module and describe settings
-  initStatus:( result, expect, text ) ->
+  initStatus:( result, expect, arg0 ) ->
     {
-      assert:{ text:text, pass:true, keys:"",
+      assert:{ text:"", arg0:arg0, pass:true, keys:"",
       moduleTx:@moduleTx,       moduleName:  @moduleName,   moduleId:  @moduleId, moduleOn:    @moduleOn,
       describeTx:@describeTx, describeName:@describeName, describeId:@describeId, describeOn:@describeOn,
       describeOp:@describeOp }
@@ -294,16 +328,24 @@ class Tester extends Spec
     @
 
   # Only chain to @describe(describeTx)
-  name:( name ) ->
+  name:( name ) =>
     @describeName = name
     @
 
   # Only chain to @describe(describeTx)
-  op:( op="eq" ) ->
+  op:( op="eq" ) =>
     @describeOp = op
     @
 
-  # Can be chained to @describe(describeTx) and @module(moduleTx) to turn test blocks on and off
+  obj:(  o ) =>
+    @o = o
+    @
+
+  func:( f ) =>
+    @f = f
+    @
+
+# Can be chained to @describe(describeTx) and @module(moduleTx) to turn test blocks on and off
   on:( sw=true ) ->
     if @lastCalled is "module" then @moduleOn = sw else @describeOn = sw
     @
@@ -315,10 +357,10 @@ class Tester extends Spec
     if @isNot(result)
       text += @textValue( "Result", result )
     else if @isStr(describeName)
-      text += @strip(describeName,"","()") + "(" + @toStr(result) + ") "
-      text += @text + " " # if not pass
+      console.log( "Tester.statusAssertText()", { arg0:@arg0 } ) if @debug
+      text += @strip(describeName,"","()") + "(" + @toStr(@arg0) + ") "
     else
-      text += @text + " "
+      text += @arg0 + " "
     text
 
   textValue:( name, value, key=null, index=null ) ->
@@ -339,7 +381,7 @@ class Tester extends Spec
     eq                   = if pass then "eq" else "not"
     status.assert.text   = @statusAssertText( pass, result, status )
     status.assert.text  += """#{eq} #{@toStr(expect)}""" if status.result.type isnt "function"
-    #tatus.assert.text  += " " + @text
+    #tatus.assert.text  += " " + @arg0
     status.assert.pass   = pass and status.assert.pass # Asserts a previous status.assert.pass is false
     status.result.text  += @textValue( "Result", result, key, index )
     status.expect.text  += @textValue( "Expect", expect, key, index )  if not isSpec
@@ -404,6 +446,9 @@ class Tester extends Spec
     @describeOp   = "eq"
     @describeOn   = true
     @moduleUnit   = ""
+    @o            = null
+    @f            = null
+    @a            = null
     if group is "module"
       @moduleTx   = ""
       @moduleName = ""
@@ -500,4 +545,5 @@ class Tester extends Spec
 #   get this single instance that holds all testing state
 export tester = new Tester()
 test = tester.test
-export { test }
+exam = tester.exam
+export { test, exam }

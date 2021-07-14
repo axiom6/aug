@@ -445,6 +445,17 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/lib\/src\/test\/Test-orig.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/test\/Test-orig.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/lib\/src\/test\/Tester-unit.coffee" : {
       "ft" : 32,
       "ma" : 1,

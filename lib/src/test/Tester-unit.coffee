@@ -44,8 +44,6 @@ test( "eq([1,2,3],[1,2,3] )", (t) -> t.eq([1,2,3],[1,2,3]    ) )
 #est( 'eq((x)->,(y)->))',     (t) -> t.eq( (x)->, (y)->      ) )  # Need better handling of function types?
 test().log( test().summary() )
 
-
-
 ###
   constructor:()
   setOptions:( options )

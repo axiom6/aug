@@ -5,6 +5,7 @@ class Type
     @warned  = ""
     @lasted  = ""
     @logging = true
+    @dwgug   = false
     @log     = console.log
     @error   = console.error
 
@@ -149,10 +150,10 @@ class Type
   # A value conversion from a 'string' that can return a value of 'none'
   # |string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date
   # Still need |regexp|null|undefined|function|bigint|symbol|date
-  toValue:( str,keyValue="" ) ->
+  toValue:( str, encloseValue=false ) ->
     if not  @isStr(str)
-      val = @toStr(str,keyValue)
-      @log( "Type.toValue(str) nots", { str:str, val:val, type:@toType(str) } )
+      val = @toStr(str, encloseValue )
+      @log( "Type.toValue(str) nots", { str:str, val:val, type:@toType(str) } ) if @debug
       return val
     val = switch
       when @isStrInt(str)     then @toInt(str)
@@ -162,9 +163,9 @@ class Type
       when @isStrObject(str)  then @toObject(str)
       when @isStr(str)        then str     # Also gets 'enums' 'range'
       else
-        @log( "Type.toValue(str) else", { str:str, type:@toType(str) } )
+        @log( "Type.toValue(str) else", { str:str, type:@toType(str) } ) if @debug
         "none"
-    console.log( "Type.toValue(str) retn", { str:str, val:val, type:@toType(str) } )
+    console.log( "Type.toValue(str) retn", { str:str, val:val, type:@toType(str) } ) if @debug
     val
 
   isEnclose:( str, enc="" ) ->
@@ -206,16 +207,17 @@ class Type
   # This combination of travesal and recursion is cleaner than JSON.stringify()
   # A super set of typeof with far all vaild 15 types detected by @toType() plus 'none' and 'any'
   # "|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date|any|none|"
-  toStr:(arg,keyValue="") ->
+  # if @isEnclose(arg,'"') then arg else '"'+arg+'"'
+  toStr:( arg, encloseValue=false, encloseKey=false ) ->
     type = @toType(arg)
     str = switch type
       when "string","enums","range","any"
-        if @inEnums("value",keyValue) then '"'+arg +'"' else arg
+        if encloseValue then '"'+arg+'"' else arg
       when "int"        then parseInt(arg)
       when "float"      then parseFloat(arg)
       when "boolean"    then if arg then "true" else "false"
-      when "array"      then @toStrArray( arg,keyValue)
-      when "object"     then @toStrObject(arg,keyValue)
+      when "array"      then @toStrArray(  arg, encloseValue )
+      when "object"     then @toStrObject( arg, encloseValue, encloseKey )
       when "null"       then "null"
       when "undefined"  then "undefined"
       when "function"   then "function"
@@ -225,6 +227,8 @@ class Type
         "none"
     str
 
+  toStringify:( arg ) ->
+    @toStr( arg, true, true )
 
   # str = if not @isIn(type,"manys") and enc.length > 0 then @toEnclose(str,enc) else str
   # else  console.log( "toStr(arg)", "unable to convert", arg, type, "string", arg.toString(), arg.toString() )
@@ -232,19 +236,19 @@ class Type
   #              "string", arg.toString(), arg.toString(), (t) => t.log( t.warn() ) )
   # str += key+":"+@toEnclose(@toStr(val),'"')+","
 
-  toStrObject:( obj, keyValue="" ) ->
+  toStrObject:( obj, encloseValue=false, encloseKey=false ) ->
     str = "{"
     for own key, val of obj
-      okey = if @inEnums("key",keyValue) then '"'+key +'"' else key
-      str += okey + ":" + @toStr(val,keyValue) + ","
+      okey = if encloseKey then '"'+key +'"' else key
+      str += okey + ":" + @toStr(val,encloseValue,encloseKey) + ","
     str = str.substring(0,str.length-1) # remove trailing comma
     str += "}"
     str
 
-  toStrArray:( array, keyValue="" ) ->
+  toStrArray:( array, encloseValue=false ) ->
     str = "["
     for i in [0...array.length]
-      str += @toStr(array[i],keyValue)
+      str += @toStr(array[i], encloseValue )
       str += if i < array.length-1 then "," else ""
     str += "]"
     str
@@ -305,10 +309,6 @@ class Type
     switch
       when type is "object"
         obj = arg
-      when type is "array"
-        obj[i] = arg[i] for i in [0...arg.length]
-      when "int","float","boolean","function"
-        obj[type] = arg
       when type is "string" and @isEnclose( arg, "{}")
         arg = @strip( arg, "{", "}" )
         obj = {}
@@ -320,18 +320,14 @@ class Type
         obj = {}
     obj
 
-  # For extenal use where val is expossed to the outside environment so 'string'
-  #  is wrapped in "" and all other vals are converted by their type  ??? what does this mean ???
-  #  '"'+@toStr(val)+'"'
+  # For extenal use to insure val is expossed to the outside environment
+  #   to have all strings are wrapped in "".
+  #   This is accomplished by setting excloseValue true for:
+# #    @toStr(arg,excloseValue) and @toValue(arg,excloseValue)
   v:(val) ->
-    ret = if @isType(val,'string') then @toStr(val,"value") else @toValue(val)
-    @log( { v:"v", ret:ret, val:val, type:@toType(val) } )
+    ret = if @isType(val,'string') then @toStr(val,true) else @toValue(val,true)
+    @log( { v:"v", ret:ret, val:val, type:@toType(val) } ) if @debug
     ret
-
-  s:(val) ->
-    str = @toStr(val,"value")
-    @log( { s:"s", str:str, val:val, type:@toType(val) } )
-    str
 
   toKeys:(o)      ->
     if @isObject(o) then Object.keys(o) else []
@@ -497,6 +493,12 @@ export type = new Type() # Export a singleton instence of type
 export default Type
 
 ###
+
+  s:(val) ->
+    str = @toStr(val)
+    @log( { s:"s", str:str, val:val, type:@toType(val) } )
+    str
+
   obj = arg.split(",")
          .map( (keyVal) => keyVal.split(":").map( (arg) => arg.trim() ) )
          .reduce( (acc,cur) => acc[cur[0]] = cur[1]; acc )  # {}  acc accumulator cur current

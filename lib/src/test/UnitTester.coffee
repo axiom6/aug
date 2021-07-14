@@ -22,7 +22,7 @@ class UnitTester
     UnitTester.stream  = new Stream( subjects, streamLog )
 
     # For illustration purposes, because we are just resseting the defaults
-    tester.setOptions( { testing:true, archive:true, verbose:false, debug:false,
+    tester.setOptions( { testing:true, archive:false, verbose:false, debug:false,
     statusSubject:"TestStatus", stringSubject:"TestString", summarySubject:"TestSummary" } )
 
     tester.injectStream( UnitTester.stream )
