@@ -344,18 +344,26 @@ class Tester extends Spec
     @describeOp = op
     @
 
-  obj:(  o ) =>
-    if @isObject(o)
-      @argums.obj = o
+  object:( obj ) =>
+    if @isObject(obj)
+      @argums.obj = obj
     else
-      @error( "Tester.obj(o) o not an 'object'", { obj:o, type:@toType(o) } )
+      @error( "Tester.obj(o) o not an 'object'", { obj:obj, type:@toType(o) } )
     @
 
-  func:( f ) =>
-    if @isFunction(f)
-       @argums.func = f
+  # Name function could be a problem. ? # not working
+  function:( func ) =>
+    objName = @toObjectName( @argums.obj )
+    funName = @toFunctionName( func )
+    if not @isFunction(func)
+      @error( "Tester.function(func) arg not a 'function'", { arg:func, type:@toType(func) } )
+    else if @isObject(@argums.obj) and not Reflect.has(@argums.obj,funName)
+      @error( "Tester.function(func) function not attached to its object's 'this' pointer",
+        { object:objName, function:funName, type:@toType(func) } )
+      @argums.func = func
+
     else
-      @error( "Tester.func(f) f not a 'function'", { func:f, type:@toType(f) } )
+      @argums.func = func
     @
 
   args:( a ) ->
@@ -385,9 +393,9 @@ class Tester extends Spec
   # @toKlass(obj)
   # @toKlass(func)
   toArgumsStr:( argums ) ->
-    objStr   = @unCap( argums.obj.constructor.name )
-    funcStr  = argums.func.name.replace( "bound ", "" )
-    argsStr  = @strip( @toStr(argums.args), "[", "]" )
+    objStr   = @toObjectName(   argums.obj  )
+    funcStr  = @toFunctionName( argums.func )
+    argsStr  = @strip( @toStr(  argums.args ), "[", "]" )
     "#{objStr}.#{funcStr}(#{argsStr}) "
 
   textValue:( name, value, key=null, index=null ) ->
@@ -400,14 +408,15 @@ class Tester extends Spec
     else
       "\n   #{name}#{ref} type is '#{@toType(value)}' with value #{@toStr(value)}"
 
-  # Generates informative text in status
+  # Generates informative text in status.
+  #  expect enclosed inside "" when its a type 'string'
   examine:( pass, result, expect, status, key=null, index=null ) ->
     #eturn status if not ( status.result.def and status.expect.def )
     return status if not @verbose and ( key? or  index? )
     isSpec               = @isSpec( expect )
     eq                   = if pass then "eq" else "not"
     status.assert.text   = @statusAssertText( pass, result, status )
-    status.assert.text  += """#{eq} #{@toStr(expect)}""" if status.result.type isnt "function"
+    status.assert.text  += """#{eq} #{@toStr(expect,0,true)}""" if status.result.type isnt "function"
     status.assert.pass   = pass and status.assert.pass # Asserts a previous status.assert.pass is false
     status.result.text  += @textValue( "Result", result, key, index )
     status.expect.text  += @textValue( "Expect", expect, key, index )  if not isSpec

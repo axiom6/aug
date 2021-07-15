@@ -125,9 +125,9 @@ class Spec extends Type
         when "regexp"  then  "regexp"           # regex
         when "string"
           switch
-            when splits[1].includes("|")                then @toEnums(  splits[1] )  # enums
-            when @isStrEnclosed( "[", splits[1], "]" )  then @toArray(  splits[1] )  # range
-            when @isStrEnclosed( "{", splits[1], "}" )  then @toObject( splits[1] )  # object?
+            when splits[1].includes("|")             then @toEnums(  splits[1] )  # enums
+            when @isEnclosed( "[", splits[1], "]" )  then @toArray(  splits[1] )  # range
+            when @isEnclosed( "{", splits[1], "}" )  then @toObject( splits[1] )  # object?
             else  "any"
         else "any"
     if length >= 2 then spec.card = splits[2]  # card i.e cardinaliry

@@ -10,18 +10,18 @@ stream     = new Stream( subjects, streamLog )
 func       = () ->
 undef      = undefined
 
-test().module( "Class Type assertion and conversion" ).obj(type).on()
+test().module( "Class Type assertion and conversion" ).object(type).on()
 
 test().describe( """Enclose strings with '"', '()', '[]' '{}'""" ).name("toEnclose()").on()
-test( "abc",         type.toEnclose( "abc",   '"'  ), '"abc"'   )             # returns "abc"
-test( "123",         type.toEnclose( "123",   "'"  ), "'123'"   )             # returns '123'
-test( "xyz",         type.toEnclose( "xyz",   "()" ), "(xyz)"   )             # returns (xyz)
-test( "d,e,f",       type.toEnclose( "d,e,f", "[]" ), "[d,e,f]" )             # returns [d,e,f]
-test( "a:x,b:y,c:z", type.toEnclose( "a:x,b:y,c:z", "{}" ), "{a:x,b:y,c:z}" ) # returns {a:x,b:y,c:z}
+test( "abc",         type.toEnclose( '"', "abc",   '"' ), '"abc"'   ) # returns "abc"
+test( "123",         type.toEnclose( "'", "123",   "'" ), "'123'"   ) # returns '123'
+test( "xyz",         type.toEnclose( "(", "xyz",   ")" ), "(xyz)"   ) # returns (xyz)
+test( "d,e,f",       type.toEnclose( "[", "d,e,f", "]" ), "[d,e,f]" ) # returns [d,e,f]
+test( "a:x,b:y,c:z", type.toEnclose( "{", "a:x,b:y,c:z", "}" ), "{a:x,b:y,c:z}" ) # returns {a:x,b:y,c:z}
 test().log( test().summary() )
 
 # "|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date"
-test().describe( " toType()" ).func(type.toType).on()
+test().describe( " toType()" ).function(type.toType).on()
 toTypeArgs = [["123",'string'],[123,'int'],[123.1,'float'],[123.0,'int'],[true,'boolean'],[[1,2,3],'array'],
   [{a:'a'},'object'],["|a|b|c|",'enums'],["|0-100|",'enums'],["|0-100|",'range'],[/x/,'regexp'],[null,'null'],
   [undef,'undefined' ],[func,"function"],[BigInt(123),'bigint'],[Symbol(),'symbol'],[new Date(),'date']]
@@ -30,7 +30,7 @@ for args in toTypeArgs
   test(args)
 test().log( test().summary() )
 
-test().describe( " toKlass()" ).func(type.toKlass).on()
+test().describe( " toKlass()" ).function(type.toKlass).on()
 toKlassArgs = [[true,'Boolean'],[123,'Int'],['"123"','String'],[func,'func'],[{a:'a'},'Object'],[[1,2,3],'Array'],
   [{a:'a'},'Object'],["|a|b|c|",'Enums'],["|0-100|",'Range'],[/x/,'RegExp'],[null,'Null'],
   [undef,'Undefined' ],[null,"Null"]]
@@ -102,13 +102,13 @@ test().log( test().summary() )
 
 test().describe( "Class Type to... conversions" ).op("to").on()
 
-test().func(type.toConvert)
+test().function(type.toConvert)
 toConvertArgs = [[123,"string","123"],["123","int",123],["123.1","float",123.1],["true","boolean",true],
   ["[1,2,3]","array",[1,2,3]], ['{a:"1",b:"2"}', "object",{a:"1",b:"2"}],["/x/","string","none"] ]
 for args in toConvertArgs
   test(args)
 
-test().func(type.toValue)
+test().function(type.toValue)
 toValueArgs = [["abc","abc"],["123",123],["123.1",123.1],["true",true],
   ["[1,2,3]",[1,2,3]], ['{a:"1",b:"2"}',{a:"1",b:"2"}],["/x/", /x/ ]]
 for args in toValueArgs
@@ -124,12 +124,16 @@ test( '"123456",3,4)',       type.slice( "123456",3,4), "34" )
 test( 'toArray("[1,2,3]")',  type.toArray("[1,2,3]"), [1,2,3] )
 test().log( test().summary() )
 
-test().describe( "String conversions" ).func(type.toStr).op("to").on()
+test().describe( "String conversions" ).function(type.toStr).op("to").on()
 
-toStrArgs = [["abc","abc"],[123,"123"],[1.1,"1.1"],[true,"true"],
-  [[1,2,3],"[1,2,3]"], [{a:"1",b:"2"},'{a:"1",b:"2"}'],[/x/,"/x/" ],
-  [undef,"undefined"],[func,"function"],[BigInt(123),123],[Symbol("desc"),'Symbol(desc)'],
-  [`new Date("August 19, 1975 23:15:30")`,"Tue Aug 19 1975 23:15:30 GMT+0200 (CEST)"]  ]
+toStrArgs = [ ["abc","abc"],[123,"123"],[1.1,"1.1"],[true,"true"],[/x/,"/x/"],
+  [undef,"undefined"],[func,"function"],[Symbol("desc"),'Symbol(desc)'],
+  [`new Date("August 19, 1975 23:15:30")`,"Tue Aug 19 1975 23:15:30 GMT+0200 (CEST)"],
+  [{a:1,b:2},"{a:1,b:2}"],
+  [[1,2,3],"[1,2,3]"],
+  [["a","b","c"],'["a","b","c"]'],
+  [{a:"x",b:"y"},'{a:"x",b:"y"}'],
+  [BigInt(123),123] ]
 for args in toStrArgs
   test(args)
 

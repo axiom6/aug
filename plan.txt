@@ -1,16 +1,17 @@
 
 Tester unique capabilies:
-  1. Dirt simple setup a single function test() with import { test } from "./Tester.js"
-  2. Spec for asserting 'enums' 'range' and 'regexp' matching
-  3. Power Type assertions with Type.js inherited by the Tester class
-  4. Ability to write "file-schema.json" schemas file for validation "file.json"
-  5. Acurate reporting by specifying:
-     a. Calling [arguments.., expect]
-     b. .obj(object) a 'this' pointer
-     c. .func(function) a method or function
-  6. Optional closure = (t) => t.eq( result, expect )
-  7. Simple setup for ...-unit.js module with glob("/src/**/*-unit.js") or pathnames
-  8. On off swithes
+  Setup Spec Type Schema Closures Unit Apply Switches
+  1. Setup:    Dirt simple setup a single function test() with import { test } from "./Tester.js"
+  2. Spec:     For asserting 'enums' 'range' and 'regexp' matching
+  3. Type:     Assertions with Type.js inherited by the Tester class
+  4. Schema:   Ability to write "file-schema.json" schemas file for validation "file.json"
+  5. Closures: Optional closure = (t) => t.eq( result, expect )  good for setup and tear down
+  6. Unit:     Simple setup for ...-unit.js module with glob("/src/**/*-unit.js") or pathnames
+  7. Apply:    Acuraracy with apply() i.e. result = func.apply( object, args )
+     a. func(function)         a method or function
+     b, obj(object)            an 'object' 'this' pointer
+     c. [arguments.., expect]  calling argument array
+  8. Switches: On off switches at multiple avoids need to comment out tests
      a. test().alwaysOn = true for CI( Continuous Integration )
      b. test().testing  = false for production
      c. describe.on(false) to turn off a block of tests

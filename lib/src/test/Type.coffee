@@ -24,7 +24,7 @@ class Type
     switch
       when typ is "Number"
         if Number.isInteger(arg) then "Int"   else "Float"
-      when typ is "String" and @isEnclose(arg,"|")        # @isEnclose(typ,"|") avoids infinite recursion
+      when typ is "String" and @isEnclosed("|",arg,"|")        # @isEnclosed("|",arg,"|") avoids infinite recursion
         if arg.includes("-")     then "Range" else "Enums"
       else
         typ
@@ -114,17 +114,10 @@ class Type
     @isStr(str) and ( str is "true" or str is "false" )
 
   isStrArray:( str ) ->
-    @isStrEnclosed( "[", str, "]" )
+    @isEnclosed( "[", str, "]" )
 
   isStrObject:( str ) ->
-    @isStrEnclosed( "{", str, "}" )
-
-  # Tests if string is enclosed good for [array] and {object}
-  isStrEnclosed:( beg, str, end ) ->
-    if @isStr( str )
-      s = str.trim()
-      s.startsWith(beg) and s.endsWith(end)
-    else false
+    @isEnclosed( "{", str, "}" )
 
   # A coerced conversion that can return a value of 'none'
   # |string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date
@@ -152,7 +145,7 @@ class Type
   # Still need |regexp|null|undefined|function|bigint|symbol|date
   toValue:( str, encloseValue=false ) ->
     if not  @isStr(str)
-      val = @toStr(str, encloseValue )
+      val = @toStr(str, 0, encloseValue )
       @log( "Type.toValue(str) nots", { str:str, val:val, type:@toType(str) } ) if @debug
       return val
     val = switch
@@ -168,11 +161,12 @@ class Type
     console.log( "Type.toValue(str) retn", { str:str, val:val, type:@toType(str) } ) if @debug
     val
 
-  isEnclose:( str, enc="" ) ->
-    switch
-      when enc.length is 2 then str.charAt(0) is enc.charAt(0) and str.charAt(str.length-1) is enc.charAt(1)
-      when enc.length is 1 then str.charAt(0) is enc.charAt(0) and str.charAt(str.length-1) is enc.charAt(0)
-      else false
+  # Can't assert @isStr(str) because of possible infinite recursion
+  isEnclosed:( beg, str, end ) ->
+    str.charAt(0) is beg and str.charAt(str.length-1) is end
+
+  isQuotedWithin:( str, quote ) ->
+    ( @isStrArray(str) or @isStrObject(str) ) and @slice(str,2,str.length-1).includes(quote)
 
   # toEnclose a "string'
   # toEnclose("abc",   '"'  )       # returns "abc" - ? good for JSON keys and values
@@ -180,62 +174,62 @@ class Type
   # toEnclose("xyz",   "()" )       # returns (xyz)
   # toEnclose("d,e,f", "[]" )       # returns [d,e,f]
   # toEnclose("a:x,b:y,c:z", "{}" ) # returns {a:x,b:y,c:z}
-  toEnclose:( str, enc ) ->
+  toEnclose:( beg, str, end ) ->
     switch
-      when enc.length is 2 then """#{enc.charAt(0)}#{str}#{enc.charAt(1)}"""
-      when enc.length is 1 then """#{enc.charAt(0)}#{str}#{enc.charAt(0)}"""
-      else "\"#{str}\""
+      when @isEnclosed( beg, str, end ) then str   # avoids enclosing twice
+      else """#{beg}#{str}#{end}"""
 
 # toStr(arg) avoids conflicts with arg.toString()
   #  returns "none" if unsuccesful
   # This combination of travesal and recursion is cleaner than JSON.stringify()
   # A super set of typeof with far all vaild 15 types detected by @toType() plus 'none' and 'any'
   # "|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date|any|none|"
-  # if @isEnclose(arg,'"') then arg else '"'+arg+'"'
-  toStr:( arg, encloseValue=false, encloseKey=false ) ->
+  toStr:( arg, level=0, encloseValue=false, encloseKey=false ) ->
     type = @toType(arg)
     str = switch type
       when "string","enums","range","any"
-        if encloseValue then '"'+arg+'"' else arg
+        if encloseValue then @toEnclose('"',arg,'"') else arg # will not enclose more than once
       when "int"        then parseInt(arg)
       when "float"      then parseFloat(arg)
       when "boolean"    then if arg then "true" else "false"
-      when "array"      then @toStrArray(  arg, encloseValue )
-      when "object"     then @toStrObject( arg, encloseValue, encloseKey )
+      when "array"      then @toStrArray(  arg, level, encloseValue )
+      when "object"     then @toStrObject( arg, level, encloseValue, encloseKey )
       when "null"       then "null"
       when "undefined"  then "undefined"
       when "function"   then "function"
-      when "regexp","date","bigint","symbol" then arg.toString()  # hail marys
+      when "bigint"     then @toEnclose('"',arg.toString(),'"')  # Needs work
+      when "regexp","date","symbol" then arg.toString()  # hail marys
       else
         @log( "Type.toStr(arg?", { arg:arg, type:@toType(arg) } )
         "none"
     str
 
   toStringify:( arg ) ->
-    @toStr( arg, true, true )
+    @toStr( arg, 0, true, true )
 
   # str = if not @isIn(type,"manys") and enc.length > 0 then @toEnclose(str,enc) else str
   # else  console.log( "toStr(arg)", "unable to convert", arg, type, "string", arg.toString(), arg.toString() )
   # else  @toWarn( "toStr(arg)", "unable to convert", arg, type,
   #              "string", arg.toString(), arg.toString(), (t) => t.log( t.warn() ) )
   # str += key+":"+@toEnclose(@toStr(val),'"')+","
-
-  toStrObject:( obj, encloseValue=false, encloseKey=false ) ->
+  # Puts single quotes ' around string objects that have double quotes inside
+  toStrObject:( obj, level=0, encloseValue=false, encloseKey=false ) ->
     str = "{"
     for own key, val of obj
-      okey = if encloseKey then '"'+key +'"' else key
-      str += okey + ":" + @toStr(val,encloseValue,encloseKey) + ","
+      okey = if encloseKey then @toEnclose('"',key,'"') else key
+      str += okey + ":" + @toStr(val,++level,encloseValue,encloseKey) + ","
     str = str.substring(0,str.length-1) # remove trailing comma
     str += "}"
-    str
+    if level is 0 and @isQuotedWithin(str,'"') then @toEnclose("'",str,"'") else str
 
-  toStrArray:( array, encloseValue=false ) ->
+  # Puts single quotes ' around string objects that have double quotes inside
+  toStrArray:( array, level=0, encloseValue=false ) ->
     str = "["
     for i in [0...array.length]
-      str += @toStr(array[i], encloseValue )
+      str += @toStr(array[i],++level, encloseValue )
       str += if i < array.length-1 then "," else ""
     str += "]"
-    str
+    if level is 0 and @isQuotedWithin(str,'"') then @toEnclose("'",str,"'") else str
 
   toFloat:( arg ) ->
     type = @toType(arg)
@@ -278,7 +272,7 @@ class Type
   toArray:( arg ) ->
     switch  @toType(arg)
       when "array" then arg
-      when "string"  and @isEnclose( arg, "[]")
+      when "string"  and @isEnclosed( "[", arg, "]" )
         arg    = @strip( arg, "[", "]" )
         array  = []
         values = arg.split(",")
@@ -293,7 +287,7 @@ class Type
     switch
       when type is "object"
         obj = arg
-      when type is "string" and @isEnclose( arg, "{}")
+      when type is "string" and @isEnclosed( "{", arg, "}")
         arg = @strip( arg, "{", "}" )
         obj = {}
         keyValues = arg.split(",")
@@ -304,12 +298,21 @@ class Type
         obj = {}
     obj
 
+  toObjectName:( obj ) ->
+    if @isObject(obj) then obj.constructor.name else "none"
+
+  # Assert that func is a 'fuction' then returns name with the annoying 'bound ' removed
+  toFunctionName:(  func, unCap=true ) ->
+    name = if @isFunction( func ) then func.name.replace( "bound ", "" ) else "none"
+    name = if unCap then @unCap(name) else name
+    name
+
   # For extenal use to insure val is expossed to the outside environment
   #   to have all strings are wrapped in "".
   #   This is accomplished by setting excloseValue true for:
-# #    @toStr(arg,excloseValue) and @toValue(arg,excloseValue)
+  #    @toStr(arg,excloseValue) and @toValue(arg,excloseValue)
   v:(val) ->
-    ret = if @isType(val,'string') then @toStr(val,true) else @toValue(val,true)
+    ret = if @isType(val,'string') then @toStr(val,0,true) else @toValue(val,true)
     @log( { v:"v", ret:ret, val:val, type:@toType(val) } ) if @debug
     ret
 
@@ -477,6 +480,32 @@ export type = new Type() # Export a singleton instence of type
 export default Type
 
 ###
+
+  toEnclose2:( str, enc ) ->
+    switch
+      when @isEnclose( str, enc )
+        if enc is '"' and str.includes('"') and ( @isStrArray(str) or @isStrObject(str) )
+          "'"+@slice(str,2,str.length-1)+"'"
+        else
+          str
+      when enc.length is 2 then """#{enc.charAt(0)}#{str}#{enc.charAt(1)}"""
+      when enc.length is 1 then """#{enc.charAt(0)}#{str}#{enc.charAt(0)}"""
+      else "\"#{str}\""
+
+  isEnclose2:( str, enc="" ) ->
+    switch
+      when enc is '"' and str.includes('"') and ( @isStrArray(str) or @isStrObject(str) ) then true
+      when enc.length is 2 then str.charAt(0) is enc.charAt(0) and str.charAt(str.length-1) is enc.charAt(1)
+      when enc.length is 1 then str.charAt(0) is enc.charAt(0) and str.charAt(str.length-1) is enc.charAt(0)
+      else false
+
+    # Tests if string is enclosed good for [array] and {object}
+  isStrEnclosed:( beg, str, end ) ->
+    if @isStr( str )
+      s = str.trim()
+      ( s.startsWith(beg    ) and s.endsWith(end)   ) or
+      ( s.startsWith('"'+beg) and s.endsWith(end+'"')  )  # a check for '"[...]"' or '"{...}"'
+    else false
 
   s:(val) ->
     str = @toStr(val)
