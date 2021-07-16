@@ -27,7 +27,6 @@ test( '[1,2,"z"]',       type.isDoubleQuotedInside( '[1,2,"z"]' ),       true  )
 test( '{a:1,b:2,c:"z"}', type.isDoubleQuotedInside( '{a:1,b:2,c:"z"}' ), true  )
 test().log( test().summary() )
 
-
 test().describe(  ""  ).name("toSingleQuoteOutside()").on()  # The backquotes allow us to te what was generated
 test( "abc",             type.toSingleQuoteOutside( "abc" ),             "abc" )
 test( 'a"b"c',           type.toSingleQuoteOutside( 'a"b"c' ),           "\'a\"b\"c\'"     )

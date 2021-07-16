@@ -413,10 +413,11 @@ class Tester extends Spec
   examine:( pass, result, expect, status, key=null, index=null ) ->
     #eturn status if not ( status.result.def and status.expect.def )
     return status if not @verbose and ( key? or  index? )
-    isSpec               = @isSpec( expect )
-    eq                   = if pass then "eq" else "not"
+    isSpec    = @isSpec( expect )
+    eq        = if pass then "eq" else "not"
+    expectStr = if @isStr(expect) and @isEnclosed("'",expect,"'") then expect else @toStr(expect,0,true)
     status.assert.text   = @statusAssertText( pass, result, status )
-    status.assert.text  += """#{eq} #{@toStr(expect,0,true)}""" if status.result.type isnt "function"
+    status.assert.text  += """#{eq} #{expectStr}""" if status.result.type isnt "function"
     status.assert.pass   = pass and status.assert.pass # Asserts a previous status.assert.pass is false
     status.result.text  += @textValue( "Result", result, key, index )
     status.expect.text  += @textValue( "Expect", expect, key, index )  if not isSpec

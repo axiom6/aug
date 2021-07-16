@@ -161,8 +161,6 @@ class Type
     console.log( "Type.toValue(str) retn", { str:str, val:val, type:@toType(str) } ) if @debug
     val
 
-
-
   # ( @isStrArray(str) or @isStrObject(str) ) and @slice(str,2,str.length-1).includes(quote)
   isDoubleQuotedInside:( str ) ->
     @slice(str,2,str.length-1).includes('"')
