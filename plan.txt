@@ -1,4 +1,10 @@
 
+Tester
+  0. toSingleQuote() replacing ' with " has to be more precise
+  1. toStr(bigint)
+  2. Prevent toStr() - @toStrObject() recursion
+  3. Begin Docco documentation
+
 Tester unique capabilies:
   Setup Spec Type Schema Closures Unit Apply Switches
   1. Setup:    Dirt simple setup a single function test() with import { test } from "./Tester.js"
@@ -17,12 +23,6 @@ Tester unique capabilies:
      c. describe.on(false) to turn off a block of tests
      d.   module.on(false) to turn off a test module
 
-
-Tester Wrap Up
-  1. Fix toStr() - @toStrObject() recursion
-  2. Move Tester.verify(...) up into @run(...) to check args
-  3. Working on @toObject(arg) to detect vars for no "" and to put "" around values
-  4. -- for @decribeName and sometime  -- @moduleName
 
 Debug
   1. Bad pageJey in Nav

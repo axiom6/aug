@@ -39,7 +39,7 @@ class UnitTester
     tester.runUnitTests( paths )
     return
 
-  UnitTester.onSummary = (summary) =>
+  UnitTester.onSummary = (summary) ->
     # console.log( "Initial.onSummary(summary)", summary )
     sum       = document.getElementById('summary')
     sum.stype = ""

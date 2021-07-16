@@ -20,26 +20,39 @@ test( "d,e,f",       type.toEnclose( "[", "d,e,f", "]" ), "[d,e,f]" ) # returns 
 test( "a:x,b:y,c:z", type.toEnclose( "{", "a:x,b:y,c:z", "}" ), "{a:x,b:y,c:z}" ) # returns {a:x,b:y,c:z}
 test().log( test().summary() )
 
-test().describe(  ""  ).name("isDoubleQuotedInside()").on()
-test( "abc",             type.isDoubleQuotedInside( "abc" ),             false )
-test( 'a"b"c',           type.isDoubleQuotedInside( 'a"b"c' ),           true  )
-test( '[1,2,"z"]',       type.isDoubleQuotedInside( '[1,2,"z"]' ),       true  )
-test( '{a:1,b:2,c:"z"}', type.isDoubleQuotedInside( '{a:1,b:2,c:"z"}' ), true  )
+###
+test().describe(  ""  ).name("isEnclosed()").on()
+abc = "abc"
+a   = "a"
+b   = "b"
+c   = "c"
+test(  type.toStr(abc),            type.isEnclosed('"', type.toStr(abc), '"' ),              true )
+test( 'abc',                       type.isEnclosed("'",'abc',"'" ),                          true )
+test( "abc",                       type.isEnclosed('"',"abc",'"' ),                          true )
+test(  type.toStr([a,"b",c]),      type.isEnclosed('"',type.toStr([a,"b",c]),'"'),           true )
+test( '[a,"b",c]',                 type.isEnclosed("'",'[a,"b",c]',"'" ),                    true )
+test( "[a,'b',c]",                 type.isEnclosed('"',"[a,'b',c]",'"' ),                    true )
+test( type.toStr({a:1,b:2,c:"z"}), type.isEnclosed("'",  type.toStr({a:1,b:2,c:"z"}),"'"  ), true )
+test( '{a:1,b:2,c:"z"}',           type.isEnclosed("'",'{a:1,b:2,c:"z"}',"'" ),              true )
+test( "{a:1,b:2,c:'z'}",           type.isEnclosed('"',"{a:1,b:2,c:'z'}",'"' ),              true )
 test().log( test().summary() )
+###
 
-test().describe(  ""  ).name("toSingleQuoteOutside()").on()  # The backquotes allow us to te what was generated
-test( "abc",             type.toSingleQuoteOutside( "abc" ),             "abc" )
-test( 'a"b"c',           type.toSingleQuoteOutside( 'a"b"c' ),           "\'a\"b\"c\'"     )
-test( '[1,2,"z"]',       type.toSingleQuoteOutside( '[1,2,"z"]' ),       "\'[1,2,\"z\"]\'" )
-test().log( test().summary() )
+test().describe(  ""  ).name("toSingleQuote()").on()
+abc = "abc"
+a   = "a"
+b   = "b"
+c   = "c"
 
-test().describe(  ""  ).name("toSingleQuoteOutside() ? 2 tests skipped ?").on()
-test( '{a:1,b:2,c:"z"}', type.toSingleQuoteOutside( '{a:1,b:2,c:"z"}' ), "\'{a:1,b:2,c:\"z\"}\'"  ) # not in summary
-test( '{a:1,b:2,c:"z"}', type.toSingleQuoteOutside( '{a:1,b:2,c:"z"}' ), '{a:1,b:2,c:"z"}' )        # not in summary
-test().log( test().summary() )
-
-test().describe(  ""  ).name("isStr()").on()
-test( '{a:1,b:2,c:"z"}', type.isStr( "\'{a:1,b:2,c:\"z\"}\'" ), true  )
+test(  abc,              type.toSingleQuote(  abc  ),             "abc"                   )
+test( 'abc',             type.toSingleQuote( 'abc' ),           "\'abc\'"                 )
+test( "abc",             type.toSingleQuote( "abc" ),             "abc"                   )
+test(  [a,"b",c] ,       type.toSingleQuote(  [a,"b",c] ),        "\'[a,\"b\",c]\'"       )
+test( '[a,"b",c]',       type.toSingleQuote( '[a,"b",c]' ),       "\'[a,\"b\",c]\'"       )
+test( "[a,'b',c]",       type.toSingleQuote( "[a,'b',c]" ),       "\'[a,\"b\",c]\'"       )
+test(  {a:1,b:2,c:"z"} , type.toSingleQuote(  {a:1,b:2,c:"z"}  ), "\'{a:1,b:2,c:\"z\"}\'" )
+test( '{a:1,b:2,c:"z"}', type.toSingleQuote( '{a:1,b:2,c:"z"}' ), "\'{a:1,b:2,c:\"z\"}\'" )
+test( "{a:1,b:2,c:'z'}", type.toSingleQuote( "{a:1,b:2,c:'z'}" ), "\'{a:1,b:2,c:\"z\"}\'" )
 test().log( test().summary() )
 
 # "|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date"
@@ -84,7 +97,8 @@ test( "isNumber(12345)",             type.isNumber(12345),              true )
 test( "isBigInt((BigInt(123))",      type.isBigInt(BigInt(123)),        true )
 test( "isSymbol(Symbol())",          type.isSymbol(Symbol()),           true )
 test( "isNaN(NaN)",                  type.isNaN(NaN),                   true )
-test( 'isType("|0-100|","range")',   type.isType("|0-100|","range"), true )
+test( 'isType("|0-100|","range")',   type.isType("|0-100|","range"),    true )
+test( 'isStr({a:1,b:2,c:"z"})',      type.isStr( '{a:1,b:2,c:"z"}' ),   true )
 test().log( test().summary() )
 
 test().describe( "Negative type assertsions" ).on()

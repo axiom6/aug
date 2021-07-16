@@ -1,5 +1,7 @@
 
 class Type
+
+  # http://jashkenas.github.com/docco/
   
   comstructor:() ->
     @warned  = ""
@@ -12,7 +14,7 @@ class Type
   # An improved typeof() that follows the convention by returning types in lower case by default.
   # The 15 types similar to typeof() returned are:
   # "|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date"
-  toType:(arg,lowerCase=true) =>
+  toType:(arg,lowerCase=true) ->
     str = Object::toString.call(arg)
     tok = str.split(' ')[1]
     typ = tok.substring(0,tok.length-1)
@@ -161,22 +163,20 @@ class Type
     console.log( "Type.toValue(str) retn", { str:str, val:val, type:@toType(str) } ) if @debug
     val
 
-  # ( @isStrArray(str) or @isStrObject(str) ) and @slice(str,2,str.length-1).includes(quote)
-  isDoubleQuotedInside:( str ) ->
-    @slice(str,2,str.length-1).includes('"')
+  inside:(  str ) ->
+    @slice( str, 2, str.length-1 )
 
-  isSingleQuotedInside:( str ) ->
-    @slice(str,2,str.length-1).includes("'")
-
-  # Enclose a string in single quotes when double quotes are inside
-  toSingleQuoteOutside:( str ) ->
-    if @isDoubleQuotedInside(str) then @toEnclose("'",str,"'") else str
-
-  # Enclose a string in double quotes when single quotes are inside
-  toDoubleQuoteOutside:( str ) ->
-    if @isSingleQuotedInside(str) then @toEnclose('"',str,'"') else str
+  # First onvert \' to \" then cnclose an arg in single quotes when double quotes are inside
+  toSingleQuote:( arg ) ->
+    str = if not @isStr(arg) then @toStr(arg,0,true) else arg
+    str = if str.includes("'") then str.replaceAll("'",'"') else str  # Needs to be more precise
+    has = str.includes('"')
+    str = if has then @toEnclose( "'", str, "'" ) else str
+    console.log( "Type.toSingleQuote(arg)", { arg:arg, str:str, has:has } ) if @debug
+    str
 
   # Can't assert @isStr(str) because of possible infinite recursion
+  #  isEnclose can not determine if a final string has been wrapped with " or '
   isEnclosed:( beg, str, end ) ->
     str.charAt(0) is beg and str.charAt(str.length-1) is end
 
@@ -232,7 +232,7 @@ class Type
       str += okey + ":" + @toStr(val,++level,encloseValue,encloseKey) + ","
     str = str.substring(0,str.length-1) # remove trailing comma
     str += "}"
-    if level is 0 then @toSingleQuoteOutside(str) else str # Single quotes added nnly when double quotes inside
+    if level is 0 then @toSingleQuote(str) else str
 
   # Puts single quotes ' around string objects that have double quotes inside
   toStrArray:( array, level=0, encloseValue=false ) ->
@@ -241,7 +241,7 @@ class Type
       str += @toStr(array[i],++level, encloseValue )
       str += if i < array.length-1 then "," else ""
     str += "]"
-    if level is 0 then @toSingleQuoteOutside(str) else str # Single quotes added nnly when double quotes inside
+    if level is 0 then @toSingleQuote(str) else str # Single quotes added nnly when double quotes inside
 
   toFloat:( arg ) ->
     type = @toType(arg)
@@ -250,9 +250,9 @@ class Type
       when "int"   then parseFloat(arg.toFixed(1)) # Coerces an 'int' like '1' to a 'float' like '1.0'
       when "string"
         if @isStrFloat(arg)  then parseFloat(arg)
-        #lse @toWarn( "toFloat(arg)", "unable to convert", arg, "float", NaN, (t) => t.log( t.warn() ) )
+        #lse @toWarn( "toFloat(arg)", "unable to convert", arg, "float", NaN, (t) -> t.log( t.warn() ) )
         else NaN
-      #lse   @toWarn( "toFloat(arg)", "unable to convert", arg, "float", NaN, (t) => t.log( t.warn() ) )
+      #lse   @toWarn( "toFloat(arg)", "unable to convert", arg, "float", NaN, (t) -> t.log( t.warn() ) )
       else NaN
 
   toInt:( arg ) ->
@@ -262,9 +262,9 @@ class Type
       when "float"  then Math.round(arg)
       when "string"
         if @isStrInt(arg) then parseInt(arg)
-        #lse @toWarn( "toInt(arg)", "unable to convert", arg, "int", NaN, (t) => t.log( t.warn() ) )
+        #lse @toWarn( "toInt(arg)", "unable to convert", arg, "int", NaN, (t) -> t.log( t.warn() ) )
         else NaN
-      #lse   @toWarn( "toInt(arg)", "unable to convert", arg, "int", NaN, (t) => t.log( t.warn() ) )
+      #lse   @toWarn( "toInt(arg)", "unable to convert", arg, "int", NaN, (t) -> t.log( t.warn() ) )
       else NaN
 
   toBoolean:( arg ) ->
@@ -275,10 +275,10 @@ class Type
         switch arg 
           when "true"  then  true
           when "false" then false
-          else @toWarn( "toBoolean(arg)", "unable to convert", arg, "boolean", false, (t) => t.log( t.warn() ) )
+          else @toWarn( "toBoolean(arg)", "unable to convert", arg, "boolean", false, (t) -> t.log( t.warn() ) )
       when "int"   then arg isnt 0   # check 0   false may not be a convention
       when "float" then arg isnt 0.0 # check 0.0 false may not be a convention
-      #lse     @toWarn( "toBoolean(arg)", "unable to convert", arg, "boolean", false, (t) => t.log( t.warn() ) )
+      #lse     @toWarn( "toBoolean(arg)", "unable to convert", arg, "boolean", false, (t) -> t.log( t.warn() ) )
       else false
 
   toArray:( arg ) ->
@@ -359,14 +359,14 @@ class Type
     switch @toType(arg)
       when "array"  then arg[0]
       when "string" then arg.charAt(0)
-      #lse @toWarn( "head(arg)", "unable to get the first element of", arg, @toType(arg), null, (t) => t.log( t.warn() ) )
+      #lse @toWarn( "head(arg)", "unable to get the first element of", arg, @toType(arg), null, (t) -> t.log( t.warn() ) )
       else "none"
 
   tail:(arg) ->
     switch @toType(arg)
       when "array"  then arg[arg.length-1]
       when "string" then arg.charAt(arg.length-1)
-      #lse @toWarn( "tail(arg)", "unable to get the last element of", arg, @toType(arg), null, (t) => t.log( t.warn() ) )
+      #lse @toWarn( "tail(arg)", "unable to get the last element of", arg, @toType(arg), null, (t) -> t.log( t.warn() ) )
       else "none"
 
   strip:( str, beg, end ) ->
@@ -414,29 +414,29 @@ class Type
 
   # A gem methods that appends text along with retrStr to @warn for detailed reporting of inconsistence
   #  along with a vialble actual return specified by the caller
-  toWarn:( method, text, arg, typeTo, retn, closure=null ) =>
+  toWarn:( method, text, arg, typeTo, retn, closure=null ) ->
     warn  = "#{method} #{text} #{@toStr(arg)} of '#{@toType(arg)}' to'#{typeTo}' returning #{@toStr(arg)}"
     @doWarn( warn, closure, retn )
 
-  isWarn:( pass, text, type, types, closure=null ) =>
+  isWarn:( pass, text, type, types, closure=null ) ->
     return true if pass
     warn = "#{text} of type '#{type}' not in '#{types}'"
     @doWarn( warn, closure, pass )
 
-  inWarn:( pass, result, expect, oper, spec, text, closure=null ) =>
+  inWarn:( pass, result, expect, oper, spec, text, closure=null ) ->
     prefix = if pass then "-- Passed --" else "-- Failed --"
     condit = if pass then "matches "     else "no match"
     warn   = "#{prefix} #{result} #{condit} #{expect} with oper #{oper} and spec #{spec} #{text}"
     @doWarn( warn, closure, pass )
 
-  # (t) => t.log( t.info() )
-  doWarn:( warn, closure, retn ) =>
+  # (t) -> t.log( t.info() )
+  doWarn:( warn, closure, retn ) ->
      @lasted  = warn
      @warned += warn
      closure(@) if @logging and @isFunction(closure)
      retn
 
-  warn:() =>
+  warn:() ->
     @lasted
 
   # Moved from Spec.coffee
@@ -490,41 +490,3 @@ Type.cards   = "|1|?|*|+|"              # cards  1 required, ? optional, * 0 to 
 
 export type = new Type() # Export a singleton instence of type
 export default Type
-
-###
-
-  toEnclose2:( str, enc ) ->
-    switch
-      when @isEnclose( str, enc )
-        if enc is '"' and str.includes('"') and ( @isStrArray(str) or @isStrObject(str) )
-          "'"+@slice(str,2,str.length-1)+"'"
-        else
-          str
-      when enc.length is 2 then """#{enc.charAt(0)}#{str}#{enc.charAt(1)}"""
-      when enc.length is 1 then """#{enc.charAt(0)}#{str}#{enc.charAt(0)}"""
-      else "\"#{str}\""
-
-  isEnclose2:( str, enc="" ) ->
-    switch
-      when enc is '"' and str.includes('"') and ( @isStrArray(str) or @isStrObject(str) ) then true
-      when enc.length is 2 then str.charAt(0) is enc.charAt(0) and str.charAt(str.length-1) is enc.charAt(1)
-      when enc.length is 1 then str.charAt(0) is enc.charAt(0) and str.charAt(str.length-1) is enc.charAt(0)
-      else false
-
-    # Tests if string is enclosed good for [array] and {object}
-  isStrEnclosed:( beg, str, end ) ->
-    if @isStr( str )
-      s = str.trim()
-      ( s.startsWith(beg    ) and s.endsWith(end)   ) or
-      ( s.startsWith('"'+beg) and s.endsWith(end+'"')  )  # a check for '"[...]"' or '"{...}"'
-    else false
-
-  s:(val) ->
-    str = @toStr(val)
-    @log( { s:"s", str:str, val:val, type:@toType(val) } )
-    str
-
-  obj = arg.split(",")
-         .map( (keyVal) => keyVal.split(":").map( (arg) => arg.trim() ) )
-         .reduce( (acc,cur) => acc[cur[0]] = cur[1]; acc )  # {}  acc accumulator cur current
-###

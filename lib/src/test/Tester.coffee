@@ -91,14 +91,14 @@ class Tester extends Spec
     @  # returns tester instance for chaining
 
   # typeof is used for the object instance becauses isType(...) provides class type names
-  isArgums:( argums ) =>
+  isArgums:( argums ) ->
     @isObject(argums) and
       argums.obj?  and @isType( argums.obj, "object"   ) and
       argums.func? and @isType( argums.func,"function" )
 
   # Should only be called at the beginning of test(...)
   #  to examine arg0
-  toArgums:( arg0 ) =>
+  toArgums:( arg0 ) ->
     @argums.args = arg0    # Default only overriden when arg0 has args
     if @isArgums(  arg0 )
       @argums.has  = true
@@ -132,15 +132,17 @@ class Tester extends Spec
       else               not ( @always or ( @testing and @moduleOn and @describeOn ) )
     toff
 
-  eq:( result, expect ) =>
+  eq:( result, expect ) ->
     @run( @argums, result, expect )
 
   # -- run() scenario is @initStatus(...) @assert(...)
   run:( argums, result, expect ) ->
-    @statusAs = @initStatus( result, expect, argums )
-    @statusAs = switch @describeOp
-      when "to" then  @convert( result, expect, @statusAs )
+    @statusAs = @initStatus( result, expect, argums    )
+    @statusAs = @verify(     result, expect, @statusAs )
+    @statusAs = switch
+      when "to" then  @examine( result, expect, @statusAs, @statusAs.assert.pass )
       else            @assert(  result, expect, @statusAs )
+    @statusAs = @processStatus( @statusAs )
     @    # returns tester instance for chaining
 
   # Create a new status object for the current test
@@ -166,18 +168,11 @@ class Tester extends Spec
   #   Skips over @toType(arg) = "function"
   assert:( result, expect, status, level=0, key=null, index=null ) ->
 
-    # Check values and types
-    status = @verify( result, expect, status )
-    if not status.assert.pass
-      status = @examine( false, result, expect, status, key, index )
-      return @processStatus( status, level  )
-
     # Perform all spec based assertions
     if @isSpec( expect )
-      spec   = @toSpec( expect )
-      pass   = @inSpec( result, spec )
-      status = @examine( pass, result, spec, status, key, index )
-      return @processStatus( status )
+      spec   = @toSpec(  expect )
+      pass   = @inSpec(  result, spec )
+      return   @examine( result, spec, status, pass, key, index )
 
     # Perform all comparisions
     type = @toType( result )
@@ -187,19 +182,17 @@ class Tester extends Spec
       when "object" then @objectsEq(  result, expect, status, level, key   )
       when "array"  then @arraysEq(   result, expect, status, level, index )
       else               @unknownsEq( result, expect, status, level ) # just a fallback
-    status = @examine( status.assert.pass, result, expect, status, key, index )
-    @processStatus( status, level )
+    return   @examine( result, expect, status, status.assert.pass, key, index )
 
   # Store status in @statuses array and publish
-  processStatus:( status, level  ) ->
-    if level is 0
-      @statuses.push(status)
-      @stream.publish( @statusSubject, status )  if @isDef(@stream)
+  processStatus:( status  ) ->
+    @statuses.push(status)
+    @stream.publish( @statusSubject, status )  if @isDef(@stream)
     status
 
   convert:( result, expect, status ) ->
-    status = @verify(                      result, expect, status )
-    status = @examine( status.assert.pass, result, expect, status )
+    status = @verify(  result, expect, status )
+    status = @examine( result, expect, status, status.assert.pass )
     @processStatus( status, 0 )
 
   # Check and report on values and types
@@ -262,7 +255,7 @@ class Tester extends Spec
       status.errors.text += " either one or both result and expect are not objects"
       status.errors.text += " Result type is #{@toType(result)}"
       status.errors.text += " Expect type is #{@toType(expect)}"
-      return @examine( false, result, expect, status, key, null )
+      return @examine( result, expect, status, false, key, null )
 
     # Check that the result object has all the keys that the expect object has
     #   ? or ( op is "spec" and arg.card is "1" ) )
@@ -288,14 +281,14 @@ class Tester extends Spec
       status.errors.text += " either one or both result and expect are not arrays"
       status.errors.text += " Result type is #{@toType(result)}"
       status.errors.text += " Expect type is #{@toType(expect)}"
-      return @examine( false, result, expect, status, null, index )
+      return @examine( result, expect, status, false, null, index )
 
     # Examine the array lengths
     if result.length isnt expect.length
       status.errors.text += " different array lengths"
       status.errors.text += " Result length is #{result.length}"
       status.errors.text += " Expect length is #{expect.length}"
-      status = @examine( false, result, expect, status, null, index )
+      status = @examine( result, expect, status, false, null, index )
 
     # Assert each value within the minimum length of the result and expect arrays
     length = Math.min( result.length, expect.length )
@@ -321,30 +314,30 @@ class Tester extends Spec
     @log( "Tester.path(path)", { path:path, dirs:dirs, module:@moduleName } ) if  @debug
     @modulePaths[@moduleName]
 
-  module:( moduleTx ) =>
+  module:( moduleTx ) ->
     @moduleTx   = moduleTx
     @moduleId  += @moduleId + 1 # ids are one based
     @summarized = false         # set for functional tests when unit tests are not being run
     @lastCalled = "module"
     @
 
-  describe:( describeTx ) =>
+  describe:( describeTx ) ->
     @describeTx  = describeTx
     @describeId += @describeId + 1 # ids are one based
     @lastCalled  = "describe"
     @
 
   # Only chain to @describe(describeTx)
-  name:( name ) =>
+  name:( name ) ->
     @describeName = name
     @
 
   # Only chain to @describe(describeTx)
-  op:( op="eq" ) =>
+  op:( op="eq" ) ->
     @describeOp = op
     @
 
-  object:( obj ) =>
+  object:( obj ) ->
     if @isObject(obj)
       @argums.obj = obj
     else
@@ -352,7 +345,7 @@ class Tester extends Spec
     @
 
   # Name function could be a problem. ? # not working
-  function:( func ) =>
+  function:( func ) ->
     objName = @toObjectName( @argums.obj )
     funName = @toFunctionName( func )
     if not @isFunction(func)
@@ -368,6 +361,7 @@ class Tester extends Spec
 
   args:( a ) ->
     @argums.args = a
+    @
 
 # Can be chained to @describe(describeTx) and @module(moduleTx) to turn test blocks on and off
   on:( sw=true ) ->
@@ -410,7 +404,7 @@ class Tester extends Spec
 
   # Generates informative text in status.
   #  expect enclosed inside "" when its a type 'string'
-  examine:( pass, result, expect, status, key=null, index=null ) ->
+  examine:( result, expect, status, pass, key=null, index=null ) ->
     #eturn status if not ( status.result.def and status.expect.def )
     return status if not @verbose and ( key? or  index? )
     isSpec    = @isSpec( expect )
@@ -432,7 +426,7 @@ class Tester extends Spec
     inSet = ( status, pass ) => if pass? then status.assert.pass is pass else true
     switch group
       when "describe" then inSet( status, pass ) and @describeId is status.assert.describeId
-      when "module"   then inSet( status, pass ) and @moduleId is status.assert.moduleId
+      when "module"   then inSet( status, pass ) and @moduleId   is status.assert.moduleId
       when "all"      then inSet( status, pass )
       else                 inSet( status, pass )
 
@@ -454,7 +448,7 @@ class Tester extends Spec
   #  when modules or all tests are completed.
   # @testingAllOff() or @testingModuleOff() determine if @complete(arg) should generate
   # publish and/or log summaries for a module or all the tests
-  complete:( arg=null ) =>
+  complete:( arg=null ) ->
     isAll  = @isDef(arg)
     group  = if isAll then "all" else "module"
     return @ if @testingOff(group)
@@ -489,7 +483,7 @@ class Tester extends Spec
       @moduleOn   = true
     return
 
-  summaryText:( group ) =>
+  summaryText:( group ) ->
     text = ""
     for status in @statuses when @isGroup(group,status)
       text += @status( status )

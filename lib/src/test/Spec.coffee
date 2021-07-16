@@ -189,7 +189,7 @@ class Spec extends Type
 
 # -- in... Spec matches
 
-  inSpec:( result, spec ) =>
+  inSpec:( result, spec ) ->
     return false if @isNot(spec) or not ( @isSpec(spec) and @toType(result) is spec.type and @inCard(result,spec) )
     match = spec.match
     switch
