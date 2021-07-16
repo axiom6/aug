@@ -20,6 +20,29 @@ test( "d,e,f",       type.toEnclose( "[", "d,e,f", "]" ), "[d,e,f]" ) # returns 
 test( "a:x,b:y,c:z", type.toEnclose( "{", "a:x,b:y,c:z", "}" ), "{a:x,b:y,c:z}" ) # returns {a:x,b:y,c:z}
 test().log( test().summary() )
 
+test().describe(  ""  ).name("isDoubleQuotedInside()").on()
+test( "abc",             type.isDoubleQuotedInside( "abc" ),             false )
+test( 'a"b"c',           type.isDoubleQuotedInside( 'a"b"c' ),           true  )
+test( '[1,2,"z"]',       type.isDoubleQuotedInside( '[1,2,"z"]' ),       true  )
+test( '{a:1,b:2,c:"z"}', type.isDoubleQuotedInside( '{a:1,b:2,c:"z"}' ), true  )
+test().log( test().summary() )
+
+
+test().describe(  ""  ).name("toSingleQuoteOutside()").on()  # The backquotes allow us to te what was generated
+test( "abc",             type.toSingleQuoteOutside( "abc" ),             "abc" )
+test( 'a"b"c',           type.toSingleQuoteOutside( 'a"b"c' ),           "\'a\"b\"c\'"     )
+test( '[1,2,"z"]',       type.toSingleQuoteOutside( '[1,2,"z"]' ),       "\'[1,2,\"z\"]\'" )
+test().log( test().summary() )
+
+test().describe(  ""  ).name("toSingleQuoteOutside() ? 2 tests skipped ?").on()
+test( '{a:1,b:2,c:"z"}', type.toSingleQuoteOutside( '{a:1,b:2,c:"z"}' ), "\'{a:1,b:2,c:\"z\"}\'"  ) # not in summary
+test( '{a:1,b:2,c:"z"}', type.toSingleQuoteOutside( '{a:1,b:2,c:"z"}' ), '{a:1,b:2,c:"z"}' )        # not in summary
+test().log( test().summary() )
+
+test().describe(  ""  ).name("isStr()").on()
+test( '{a:1,b:2,c:"z"}', type.isStr( "\'{a:1,b:2,c:\"z\"}\'" ), true  )
+test().log( test().summary() )
+
 # "|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date"
 test().describe( " toType()" ).function(type.toType).on()
 toTypeArgs = [["123",'string'],[123,'int'],[123.1,'float'],[123.0,'int'],[true,'boolean'],[[1,2,3],'array'],
@@ -131,8 +154,8 @@ toStrArgs = [ ["abc","abc"],[123,"123"],[1.1,"1.1"],[true,"true"],[/x/,"/x/"],
   [`new Date("August 19, 1975 23:15:30")`,"Tue Aug 19 1975 23:15:30 GMT+0200 (CEST)"],
   [{a:1,b:2},"{a:1,b:2}"],
   [[1,2,3],"[1,2,3]"],
-  [["a","b","c"],'["a","b","c"]'],
-  [{a:"x",b:"y"},'{a:"x",b:"y"}'],
+  [["a","b","c"],"\'[\"a\",\"b\",\"c\"]\'"],   # Backslashes allow us to see what was generated
+  [{a:"x",b:"y"},"\'{a:\"x\",b:\"y\"}\'"],     # Backslashes allow us to see what was generated
   [BigInt(123),123] ]
 for args in toStrArgs
   test(args)

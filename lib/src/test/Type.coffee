@@ -161,12 +161,26 @@ class Type
     console.log( "Type.toValue(str) retn", { str:str, val:val, type:@toType(str) } ) if @debug
     val
 
+
+
+  # ( @isStrArray(str) or @isStrObject(str) ) and @slice(str,2,str.length-1).includes(quote)
+  isDoubleQuotedInside:( str ) ->
+    @slice(str,2,str.length-1).includes('"')
+
+  isSingleQuotedInside:( str ) ->
+    @slice(str,2,str.length-1).includes("'")
+
+  # Enclose a string in single quotes when double quotes are inside
+  toSingleQuoteOutside:( str ) ->
+    if @isDoubleQuotedInside(str) then @toEnclose("'",str,"'") else str
+
+  # Enclose a string in double quotes when single quotes are inside
+  toDoubleQuoteOutside:( str ) ->
+    if @isSingleQuotedInside(str) then @toEnclose('"',str,'"') else str
+
   # Can't assert @isStr(str) because of possible infinite recursion
   isEnclosed:( beg, str, end ) ->
     str.charAt(0) is beg and str.charAt(str.length-1) is end
-
-  isQuotedWithin:( str, quote ) ->
-    ( @isStrArray(str) or @isStrObject(str) ) and @slice(str,2,str.length-1).includes(quote)
 
   # toEnclose a "string'
   # toEnclose("abc",   '"'  )       # returns "abc" - ? good for JSON keys and values
@@ -220,7 +234,7 @@ class Type
       str += okey + ":" + @toStr(val,++level,encloseValue,encloseKey) + ","
     str = str.substring(0,str.length-1) # remove trailing comma
     str += "}"
-    if level is 0 and @isQuotedWithin(str,'"') then @toEnclose("'",str,"'") else str
+    if level is 0 then @toSingleQuoteOutside(str) else str # Single quotes added nnly when double quotes inside
 
   # Puts single quotes ' around string objects that have double quotes inside
   toStrArray:( array, level=0, encloseValue=false ) ->
@@ -229,7 +243,7 @@ class Type
       str += @toStr(array[i],++level, encloseValue )
       str += if i < array.length-1 then "," else ""
     str += "]"
-    if level is 0 and @isQuotedWithin(str,'"') then @toEnclose("'",str,"'") else str
+    if level is 0 then @toSingleQuoteOutside(str) else str # Single quotes added nnly when double quotes inside
 
   toFloat:( arg ) ->
     type = @toType(arg)
