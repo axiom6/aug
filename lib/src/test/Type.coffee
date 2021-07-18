@@ -1,13 +1,11 @@
 
 class Type
-
-  # http://jashkenas.github.com/docco/
   
   comstructor:() ->
     @warned  = ""
     @lasted  = ""
     @logging = true
-    @dwgug   = false
+    @debug   = false
     @log     = console.log
     @error   = console.error
 
@@ -31,7 +29,7 @@ class Type
       else
         typ
 
-# A more detail type that returns basic types, class, object and function name in upper case
+  # A more detailrf type that returns basic types, class, object and function name in upper case
   toKlass:(arg) ->
     typ = @toType(arg,false) # Start with basic type to catch "Null" and "Undefined"
     switch typ
