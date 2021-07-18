@@ -101,6 +101,179 @@
       "oAP" : "\/lib\/css",
       "oF" : 0
     },
+    "\/lib\/doc\/docco-hljs.css" : {
+      "aP" : 1,
+      "bl" : 0,
+      "ci" : 0,
+      "co" : 0,
+      "ft" : 16,
+      "ma" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/doc\/docco-hljs-min.css",
+      "oF" : 0,
+      "pg" : 0
+    },
+    "\/lib\/doc\/docco.css" : {
+      "aP" : 1,
+      "bl" : 0,
+      "ci" : 0,
+      "co" : 0,
+      "ft" : 16,
+      "ma" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/doc\/docco-min.css",
+      "oF" : 0,
+      "pg" : 0
+    },
+    "\/lib\/doc\/dracula.css" : {
+      "aP" : 1,
+      "bl" : 0,
+      "ci" : 0,
+      "co" : 0,
+      "ft" : 16,
+      "ma" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/doc\/dracula-min.css",
+      "oF" : 0,
+      "pg" : 0
+    },
+    "\/lib\/doc\/lib\/src\/test\/Type.html" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/doc\/lib\/src\/test\/Type.html",
+      "oF" : 0
+    },
+    "\/lib\/doc\/public\/fonts\/aller-bold.eot" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/doc\/public\/fonts\/aller-bold.eot",
+      "oF" : 0
+    },
+    "\/lib\/doc\/public\/fonts\/aller-bold.ttf" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/doc\/public\/fonts\/aller-bold.ttf",
+      "oF" : 0
+    },
+    "\/lib\/doc\/public\/fonts\/aller-bold.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/doc\/public\/fonts\/aller-bold.woff",
+      "oF" : 0
+    },
+    "\/lib\/doc\/public\/fonts\/aller-light.eot" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/doc\/public\/fonts\/aller-light.eot",
+      "oF" : 0
+    },
+    "\/lib\/doc\/public\/fonts\/aller-light.ttf" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/doc\/public\/fonts\/aller-light.ttf",
+      "oF" : 0
+    },
+    "\/lib\/doc\/public\/fonts\/aller-light.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/doc\/public\/fonts\/aller-light.woff",
+      "oF" : 0
+    },
+    "\/lib\/doc\/public\/fonts\/fleurons.eot" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/doc\/public\/fonts\/fleurons.eot",
+      "oF" : 0
+    },
+    "\/lib\/doc\/public\/fonts\/fleurons.ttf" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/doc\/public\/fonts\/fleurons.ttf",
+      "oF" : 0
+    },
+    "\/lib\/doc\/public\/fonts\/fleurons.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/doc\/public\/fonts\/fleurons.woff",
+      "oF" : 0
+    },
+    "\/lib\/doc\/public\/fonts\/roboto-black.eot" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/doc\/public\/fonts\/roboto-black.eot",
+      "oF" : 0
+    },
+    "\/lib\/doc\/public\/fonts\/roboto-black.ttf" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/doc\/public\/fonts\/roboto-black.ttf",
+      "oF" : 0
+    },
+    "\/lib\/doc\/public\/fonts\/roboto-black.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/doc\/public\/fonts\/roboto-black.woff",
+      "oF" : 0
+    },
+    "\/lib\/doc\/public\/images\/gray.png" : {
+      "ft" : 32768,
+      "iS" : 56529,
+      "oA" : 0,
+      "oAP" : "\/lib\/doc\/public\/images\/gray.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/lib\/doc\/public\/stylesheets\/normalize.css" : {
+      "aP" : 1,
+      "bl" : 0,
+      "ci" : 0,
+      "co" : 0,
+      "ft" : 16,
+      "ma" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/doc\/public\/stylesheets\/normalize-min.css",
+      "oF" : 0,
+      "pg" : 0
+    },
+    "\/lib\/doc\/Type.html" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/doc\/Type.html",
+      "oF" : 0
+    },
     "\/lib\/pub" : {
       "ft" : 65536,
       "oA" : 1,
