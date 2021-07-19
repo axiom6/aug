@@ -1,0 +1,70 @@
+
+--------------- AsciiDoc --------------------
+
+header          == ...
+paragraph       text seperated by blank lines
+bold            *...*     or **  enclosing text
+italic          _..._
+bold italic     *_..._*
+monospace       `...`
+superscript     ^...^
+subscript       -...-
+double quotes   "`...`"
+single quote    '`...`'
+links           url[...]
+inline anchor   [[...]]
+toc             :toc:
+include         include::example.adoc[]
+image           image::example.png[]
+video           video::video_file.mp4[]
+ordered lists   . ... ..indented
+unordered lists * ...  **indented
+line  comment   //
+block comment   ////...////
+line break      ...
+page break      <<<
+
+admonition      NOTE: TIP: IMPORTANT: WARNING: CAUTION:
+                or [NOTE]...[NOTE]
+sidebar         ****...****
+[source]        --...--
+
+|===
+|Column 1, Header Row |Column 2, Header Row
+
+|Cell in column 1, row 1
+|Cell in column 2, row 1
+
+|Cell in column 1, row 2
+|Cell in column 2, row 2
+|===
+
+[id="goals",role="incremental"]
+* Goal 1
+* Goal 2
+
+Bibliography
+
+Footnotes
+
+--------------- Markdown --------------------
+
+paragraph       text seperated by blank lines
+linebreak       end line with 2 or more spaces
+header          # ... or = ...
+
+bold italic     ___...___   or *** enclosing text
+bold            __...__     or **  enclosing text
+italic          _..._       or *   enclosing text
+ordered lists   1. ...
+unordered lists - ...  or + *indented
+list element          indent by 4 spaces
+blockquotes     > ...    in front of each paragraph
+                >> ...   or 4 space indent with lists
+code block      indent 4 spaces
+images          [[...]]
+backticks       ``
+horizontal      ---
+links           [...](...)
+link            <...>
+escape          \.

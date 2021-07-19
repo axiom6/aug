@@ -65,6 +65,22 @@
       "oAP" : "\/css\/brew",
       "oF" : 0
     },
+    "\/css\/docco\/ascii-to-html.txt" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/css\/docco\/ascii-to-html.txt",
+      "oF" : 0
+    },
+    "\/css\/docco\/codo.txt" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/css\/docco\/codo.txt",
+      "oF" : 0
+    },
     "\/css\/docco\/docco-hljs.css" : {
       "aP" : 1,
       "bl" : 0,
@@ -102,6 +118,17 @@
       "rwU" : 0,
       "sI" : 0,
       "sU" : 0
+    },
+    "\/css\/docco\/docco.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/css\/docco\/docco.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
     },
     "\/css\/docco\/docco.css" : {
       "aP" : 1,
@@ -141,6 +168,17 @@
       "sI" : 0,
       "sU" : 0
     },
+    "\/css\/docco\/docco.litcoffee" : {
+      "ft" : 262144,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/css\/docco\/docco.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/css\/docco\/dracula.css" : {
       "aP" : 1,
       "bl" : 0,
@@ -152,6 +190,22 @@
       "oAP" : "\/css\/docco\/dracula-min.css",
       "oF" : 0,
       "pg" : 0
+    },
+    "\/css\/docco\/jsdoc.txt" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/css\/docco\/jsdoc.txt",
+      "oF" : 0
+    },
+    "\/css\/docco\/syntax.txt" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/css\/docco\/syntax.txt",
+      "oF" : 0
     },
     "\/css\/docco\/Type.html" : {
       "cB" : 0,
@@ -542,6 +596,14 @@
       "q" : 100,
       "rq" : 75
     },
+    "\/lib\/doc\/public\/json\/languages.json" : {
+      "ft" : 524288,
+      "oA" : 1,
+      "oAP" : "\/lib\/doc\/public\/json\/languages-min.json",
+      "oF" : 0,
+      "oO" : 0,
+      "oS" : 1
+    },
     "\/lib\/doc\/public\/stylesheets\/normalize.css" : {
       "aP" : 1,
       "bl" : 0,
@@ -871,6 +933,17 @@
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/lib\/pub\/base\/util\/Worker.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/docs\/Docs.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/docs\/Docs.js",
       "oF" : 0,
       "oS" : 1,
       "sC" : 0,

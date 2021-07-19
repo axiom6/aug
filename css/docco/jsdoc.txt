@@ -1,0 +1,17 @@
+
+
+comment:      The text of the JSDoc comment, or an empty string if the symbol is undocumented.
+meta:         Object that describes how the doclet relates to the source file
+description:  A description of the symbol being documented.
+kind:         The kind of symbol being documented (for example, class or function).
+name:         The short name for the symbol (for example, myMethod).
+longname:     The fully qualified name, including memberof info (for example, MyClass#myMethod).
+memberof:     The module, namespace, or class that this symbol belongs to
+scope:        The scope of the symbol within its parent (for example, global, static, instance, or inner).
+undocumented: Set to true if the symbol did not have a JSDoc comment.
+defaultvalue: The default value for a symbol.
+type:         Object containing details about the symbol's type.
+params:       Object containing the list of parameters to a function.
+tags:         Object containing a list of tags that JSDoc did not recognize.
+
+Codo @return, @param, @option, @see, @author, @copyright, @note, @todo, @since, @version and @deprecated
