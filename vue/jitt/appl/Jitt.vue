@@ -19,11 +19,11 @@
 
 <script type="module">
 
-  import { inject, ref } from 'vue';
-  import Summ            from '../main/Summ.vue';
-  import Dash            from '../main/Dash.vue';
-  import Btns            from '../../../lib/vue/elem/Btns.vue';
-  import Navb            from '../../../lib/vue/elem/Navb.vue';
+  import { inject } from 'vue';
+  import Summ       from '../main/Summ.vue';
+  import Dash       from '../main/Dash.vue';
+  import Btns       from '../../../lib/vue/elem/Btns.vue';
+  import Navb       from '../../../lib/vue/elem/Navb.vue';
   
   let Home = {
 
@@ -32,7 +32,8 @@
     setup() {
       const nav     = inject('nav');
       const route   = function (comp) {
-        nav.doRoute({route: comp}); }
+        console.log( "Jitt.vue", comp )
+        nav.doRoute( { compKey:comp } ); }
       return { route }; }
   }
 

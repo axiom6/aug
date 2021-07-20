@@ -84,7 +84,7 @@ Exit = (function() {
       };
       Exit.stream = new Stream(subjects, infoSpec);
       Exit.mix = new Mix(Exit, Exit.routeNames);
-      Exit.nav = new Nav(Exit.stream, batch, Exit.komps, true); // Exit.routes, Exit.routeNames,
+      Exit.nav = new Nav(Exit.stream, Exit.mix, batch, Exit.komps, {}, true);
       Exit.touch = new Touch(Exit.stream, Exit.nav);
       //ata.build  = new Build( batch, Data.komps )
       Exit.cache = new Cache(Exit.stream);

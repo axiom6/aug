@@ -126,7 +126,7 @@ class Augm
     streamLog   = { subscribe:false, publish:false, subjects:subjects }
     Augm.stream = new Stream( subjects, streamLog )
     Augm.mix    = new Mix( Augm )
-    Augm.nav    = new Nav( Augm.stream, Augm.mix, batch, Augm.komps, Augm.pages )
+    Augm.nav    = new Nav( Augm.stream, Augm.mix, batch, Augm.komps, Augm.pages, false )
     #ugm.cache  = new Cache( Augm.stream )
     tester.setOptions( { testing:true, archive:false, verbose:false, debug:false } )
     try

@@ -10,8 +10,6 @@ import Stream from '../../../lib/pub/util/Stream.js';
 
 import Touch from '../../../lib/pub/navi/Touch.js';
 
-import Cache from '../../../lib/pub/util/Cache.js';
-
 import Mix from '../../../lib/pub/navi/Mix.js';
 
 import Nav from '../../../lib/pub/navi/Nav.js';
@@ -90,9 +88,9 @@ Jitter = (function() {
       };
       Jitter.stream = new Stream(subjects, streamLog);
       Jitter.mix = new Mix(Jitter, Jitter.routeNames);
-      Jitter.nav = new Nav(Jitter.stream, Jitter.mix, batch, Jitter.komps); // Jitter.routes, Jitter.routeNames,
+      Jitter.nav = new Nav(Jitter.stream, Jitter.mix, batch, Jitter.komps, {}, true);
       Jitter.touch = new Touch(Jitter.stream, Jitter.nav);
-      Jitter.cache = new Cache(Jitter.stream);
+      //itter.cache   = new Cache( Jitter.stream )
       tester.setOptions({
         testing: true,
         archive: true,
@@ -114,7 +112,7 @@ Jitter = (function() {
       Jitter.nav.router = router;
       Jitter.app.mount('j-jitter');
       Jitter.nav.doRoute({
-        route: 'Home'
+        compKey: 'Home'
       });
     }
 

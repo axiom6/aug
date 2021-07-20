@@ -11,13 +11,13 @@ import Fire from '../../../lib/pub/data/Fire.js';
 import Couch from '../../../lib/pub/data/Couch.js';
 
 Manager = class Manager {
-  constructor(mix1) {
+  constructor(mix) {
     this.subscribe = this.subscribe.bind(this);
-    this.mix = mix1;
+    this.mix = mix;
     this.dbName = 'test1';
     this.credsUrl = 'http://admin:athena@127.0.0.1:5984'; // Admin host to couchdb
     this.couchUrl = 'http://127.0.0.1:5984'; // Admin host to couchdb
-    this.stream = mix.stream();
+    this.stream = this.mix.stream();
     this.Prac = null;
     this.Hues = null;
     this.Kit = null;

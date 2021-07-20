@@ -89,8 +89,8 @@ Data = (function() {
         subjects: subjects
       };
       Data.stream = new Stream(subjects, infoSpec);
-      Data.mix = new Mix(Data, Data.routeNames);
-      Data.nav = new Nav(Data.stream, batch, Data.komps); // Data.routes, Data.routeNames,
+      Data.mix = new Mix(Data, Data.routeNames); // true for using route
+      Data.nav = new Nav(Data.stream, Data.mix, batch, Data.komps, {}, true);
       Data.touch = new Touch(Data.stream, Data.nav);
       //ata.build  = new Build( batch, Data.komps )
       Data.cache = new Cache(Data.stream);
@@ -127,7 +127,7 @@ Data = (function() {
       Data.nav.router = router;
       Data.app.mount('#muse');
       Data.nav.doRoute({
-        route: 'Home'
+        compKey: 'Home'
       });
     }
 

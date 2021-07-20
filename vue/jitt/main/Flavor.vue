@@ -2,7 +2,7 @@
 <template>
   <div   class="flavor-pane">
     <div class="choice-home">
-      <h-navb :title="'Home'" :route="'Home'"></h-navb>
+      <h-navb :title="'Home'" :compKey="'Home'"></h-navb>
     </div>
     <div class="flavor-summ">
       <h-summ :name="name" ></h-summ>
@@ -19,7 +19,7 @@
   import Summ    from './Summ.vue';
   import SvgMgr  from '../../../lib/pub/draw/SvgMgr.js';
   import Wheel   from '../../../pub/augm/show/Wheel.js';
-  const  homeBtn = inject('homeBtn');
+
 
   let Flavor = {
 
@@ -27,14 +27,15 @@
 
     setup( ) {
 
-      const nav     = inject('nav');
-      const mix     = inject('mix');
-      const name    = 'Flavor';
-      const elemf   = ref(null);
+      const nav      = inject('nav');
+      const mix      = inject('mix');
+      const name     = 'Flavor';
+      const elemf    = ref(null);
+    //const  homeBtn = inject('homeBtn');
       
       const onChoice = function ( choice, checked ) {
         mix.choose( name, choice, checked );
-        nav.pub( { source:'Flavor.vue', route:name, choice:choice, checked:checked } ); }
+        nav.pub( { source:'Flavor.vue', compKey:name, choice:choice, checked:checked } ); }
 
       onMounted( function () {
         nextTick( function() {

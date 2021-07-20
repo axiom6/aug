@@ -4,7 +4,7 @@ something = () ->
   console.error( 'Memory.something()')
   return
 
-something()
+# something()
 
 class Memory extends Store
 

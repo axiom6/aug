@@ -2,7 +2,7 @@
 <template>
   <div       class="choice-pane">
     <div     class="choice-home">
-      <h-navb :title="'Home'" :route="'Home'"></h-navb>
+      <h-navb :title="'Home'" :compKey="'Home'"></h-navb>
     </div>
     <div class="choice-summ">
       <h-summ :name="name" ></h-summ>

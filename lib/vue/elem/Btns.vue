@@ -39,7 +39,7 @@
           btn.checked.value = !btn.checked.value;
           checked = btn.checked.value;
           mix.choose( props.name, btn.name, btn.checked.value );
-          nav.pub( { source:'Btns.vue', route:props.name, choice:btn.name, checked:checked } ); }
+          nav.pub( { source:'Btns.vue', compKey:props.name, choice:btn.name, checked:checked } ); }
         else if( btn.type==='pub' ) {
              nav.pub( { pageKey:props.name } ); } // Need to determine what to publish on Nav here
         else {

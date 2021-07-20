@@ -51,6 +51,8 @@ class Mix extends Type
     Mix.Main.appName
   isApp: ( appName ) ->
     Mix.Main.appName is appName
+  routeNames:() ->
+    if Mix.Main.routeNames? then Mix.Main.routeNames else []
   subscribe: (subject, source, onMethod) ->
     Mix.Main['stream'].subscribe(subject, source, onMethod)
     return

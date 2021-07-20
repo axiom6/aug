@@ -11,7 +11,7 @@ class Manager
     @dbName     = 'test1'
     @credsUrl   = 'http://admin:athena@127.0.0.1:5984' # Admin host to couchdb
     @couchUrl   = 'http://127.0.0.1:5984'              # Admin host to couchdb
-    @stream     = mix.stream()
+    @stream     = @mix.stream()
     @Prac       = null
     @Hues       = null
     @Kit        = null

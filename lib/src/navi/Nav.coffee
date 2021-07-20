@@ -4,7 +4,8 @@ import Dir   from './Dir.js'
 
 class Nav
 
-  constructor:( @stream, @mix, @batch={}, @komps=null, @pages={} ) ->
+  constructor:( @stream, @mix, @batch={}, @komps=null, @pages={}, @isRoutes=false ) ->
+    console.log( "Nav() mix.app", @mix.app() )
     @dirs       = { west:true, east:true, north:true, south:true, prev:true, next:true }
     @navs       = if @komps then @addInovToNavs( @komps ) else null
     @touch      =  null
@@ -24,6 +25,8 @@ class Nav
     @pubs       = []
     @urls       = []
     @tabs       = {}
+    @router     =  null
+    @routeLast  = 'None'
     @museLevels = ['Comp','Prac','Disp']
     @museComps  = ['Home','Prin','Info','Know','Wise','Cube','Test']
     @museInovs  = ['Info','Know','Wise','Soft','Data','Scie','Math']
@@ -34,8 +37,9 @@ class Nav
     obj = @toObj( msg )
     url = @toUrl( obj )
     console.log('Nav.pub()', obj )
-    @pubs.push(obj) if not isReplay and obj.compKey isnt 'Test'
-    @urls.push(url) if not isReplay and obj.compKey isnt 'Test'
+    @doRoute(   obj ) if @isRoutes
+    @pubs.push( obj ) if not isReplay and obj.compKey isnt 'Test'
+    @urls.push( url ) if not isReplay and obj.compKey isnt 'Test'
     @stream.publish( 'View', obj ) if changeView
     @stream.publish( 'Nav',  obj )
     return
@@ -116,6 +120,20 @@ class Nav
       else                                 'Comp'
     console.log( 'Nav.toPub()', { url:href, obj,obj, paths:paths } ) if @debug
     obj
+
+  doRoute:( obj ) ->
+    route = obj.compKey
+    return if route is @routeLast or route is 'None' or @isInov(route)
+    # console.log( 'Nav.doRoute()', { routeNames:@routeNames } )
+    if route? and @komps? and @komps[route]?
+      if @router?
+         @router.push( name:route )
+      else
+         console.error( 'Nav.doRoute() router not set for', route )
+      @routeLast = obj.compKey
+    else
+      console.error( 'Nav.doRoute() undefined or unnamed route', route )
+    return
 
   getTabsKey:( obj ) ->
     tabsKey = 'None'

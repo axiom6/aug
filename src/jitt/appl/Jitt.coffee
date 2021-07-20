@@ -3,7 +3,7 @@ import { tester } from  '../../../lib/pub/test/Tester.js'
 import Access     from '../../../lib/pub/util/Access.js'
 import Stream     from '../../../lib/pub/util/Stream.js'
 import Touch      from '../../../lib/pub/navi/Touch.js'
-import Cache      from '../../../lib/pub/util/Cache.js'
+#mport Cache      from '../../../lib/pub/util/Cache.js'
 import Mix        from '../../../lib/pub/navi/Mix.js'
 import Nav        from '../../../lib/pub/navi/Nav.js'
 
@@ -101,9 +101,9 @@ class Jitter
     streamLog      = { subscribe:false, publish:false, subjects:subjects }
     Jitter.stream  = new Stream( subjects, streamLog )
     Jitter.mix     = new Mix(   Jitter, Jitter.routeNames )
-    Jitter.nav     = new Nav(   Jitter.stream, Jitter.mix, batch, Jitter.komps ) # Jitter.routes, Jitter.routeNames,
+    Jitter.nav     = new Nav(   Jitter.stream, Jitter.mix, batch, Jitter.komps, {}, true )
     Jitter.touch   = new Touch( Jitter.stream, Jitter.nav )
-    Jitter.cache   = new Cache( Jitter.stream )
+    #itter.cache   = new Cache( Jitter.stream )
     tester.setOptions( { testing:true, archive:true, verbose:false, debug:false } )
     Jitter.vue()
     return
@@ -119,7 +119,7 @@ class Jitter
     Jitter.app.use(        router )
     Jitter.nav.router    = router
     Jitter.app.mount('j-jitter')
-    Jitter.nav.doRoute( { route:'Home' } )
+    Jitter.nav.doRoute( { compKey:'Home' } )
     return
 
   # Lazy loader with dynamic import()
