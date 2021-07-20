@@ -81,7 +81,7 @@ class Build
 
   constructor:( @batch, @komps=null ) ->
     #@Spec   = @batch.Muse.data
-    @None    = { name:"None" }
+    @none    = { name:"none" }
     Util.noop( @toGroups, @setAdjacents )
 
   getPlane:( pracKey ) ->
@@ -89,7 +89,7 @@ class Build
       pracs = @batch[plane].data
       for own pkey, prac of pracs when Util.isChild(pkey)
         return plane if pracKey is pkey
-    'None'
+    'none'
 
   getSpecs:(  plane ) ->
     if @batch[plane]?
@@ -170,7 +170,7 @@ class Build
       when 'Wise' then 'Know'
       else           
         console.error( 'Build.prev() unknown plane', plane )
-        'None'
+        'none'
 
   next:(   plane ) ->
     switch plane
@@ -179,11 +179,11 @@ class Build
       when 'Wise' then 'Info'
       else
         console.error( 'Build.next() unknown plane', plane )
-        'None'
+        'none'
 
   adjacentPractice:( prac, dir ) ->
     # console.log( 'Build.adjacentPractice', { prac:prac, dir:dir } )
-    return @None if not prac? or not prac.name? or prac.name is 'None' or not prac.column?
+    return @none if not prac? or not prac.name? or prac.name is 'none' or not prac.column?
 
     col = ""
     row = ""
@@ -195,9 +195,9 @@ class Build
       when 'south'          then [prac.column, @south(prac.row), prac.plane  ]
       when 'prev'           then [prac.column, prac.row,   @prev(prac.plane) ]
       when 'next'           then [prac.column, prac.row,   @next(prac.plane) ]
-      else                       ["None","None","None"]
+      else                       ["none","none","none"]
 
-    return @None if [col,row,pln] is ["None","None","None"]
+    return @none if [col,row,pln] is ["none","none","none"]
 
     pracs = {}
     if @batch[pln]?
@@ -205,7 +205,7 @@ class Build
       # console.log( 'Build.adjacentPractice()', { plane:pln, pracs:pracs } )
     else
       console.error( 'Build.adjacentPractice() batch[] not found', [col,row,pln] )
-      return @None
+      return @none
 
     for own key, adj of pracs when Util.isChild(key)
       if adj.column is col and adj.row is row and adj.plane is pln
@@ -213,15 +213,15 @@ class Build
         return adj
 
     console.log( 'Build.adjacentPractice[col,row,pln]', [col,row,pln], 'adj not found' )
-    @None
+    @none
 
   adjacentStudies:( practice, dir ) ->
     adjPrac = @adjacentPractice( practice, dir )
-    if adjPrac.name isnt 'None' then @toStudies(adjPrac) else {}
+    if adjPrac.name isnt 'none' then @toStudies(adjPrac) else {}
 
   connectName:( practice, dir, reverse ) ->
     adjacent = @adjacentPractice( practice, dir )
-    if adjacent.name isnt 'None' then @centerBegEnd(practice.name,adjacent.name,reverse) else 'None'+'\n'+'None'
+    if adjacent.name isnt 'none' then @centerBegEnd(practice.name,adjacent.name,reverse) else 'none'+'\n'+'none'
 
   centerBegEnd:( beg, end, reverse ) ->
     b = if end.length > beg.length then Util.indent((end.length-beg.length)/2) + beg else beg
@@ -268,7 +268,7 @@ class Build
     for key, dim of col  when Util.isChild(key)
       # console.log( 'Build.getDim()', { key:key, dim:dim, col:col } )
       return dim if dim.dir is dir
-    @None
+    @none
 
   getCol:( cname ) ->
     @batch.Prin.data[cname]

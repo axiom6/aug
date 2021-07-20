@@ -1,9 +1,9 @@
 
 <template>
   <div>
-    <d-tabs :compKey="compKey" :pages="pages" defn="None"></d-tabs>
+    <d-tabs :compKey="compKey" :pages="pages" defn="none"></d-tabs>
     <div class="page">
-      <h1       v-if="isPageKey('None')">Pivots</h1>
+      <h1       v-if="isPageKey('none')">Pivots</h1>
       <p_pivot1 v-if="pages['Pivot1'].show"></p_pivot1>
       <p_pivot2 v-if="pages['Pivot2'].show"></p_pivot2>
     </div>
@@ -22,7 +22,7 @@
     components:{ 'd-tabs':Tabs, 'p_pivot1':Pivot1, 'p_pivot2':Pivot2 },
 
     data() {
-      return { compKey:'Pivots', pageKey:'None',
+      return { compKey:'Pivots', pageKey:'none',
         pages:{
           Table1: { title:'Pivot1', key:'Pivot1', created:false, show:false },
           Table2: { title:'Pivot2', key:'Pivot2', created:false, show:false } } } },
@@ -35,7 +35,7 @@
       onNav: function(obj) {
         if( this.nav.isMyNav(obj,'Prac',true) ) {
           this.pageKey = this.nav.getPageKey('Pivots');
-          if( this.pageKey !== 'None' ) {
+          if( this.pageKey !== 'none' ) {
               this.create( this.pageKey ); } } },
 
       create: function( pageKey ) {

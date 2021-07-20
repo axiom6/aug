@@ -1,22 +1,16 @@
 
 
 Debug One
-  1. Radar doQuads:( quads )
-  2. Spec.toParseStr
-  3. Muse colors off
-  4. Wise Texts Tab
-  5. Nav in Jitter needs to respond to routes
-  6. Nav in Data   needs to respond to routes
-  7. Nav in Data   needs to respond to routes
+  1. Muse colors off
+  2. Wise Texts Tab
+  3. Jitter choice
 
 Docs
   1. In progress
 
 Tester
-  0. toSingleQuote() replacing ' with " has to be more precise
   1. toStr(bigint)
   2. Prevent toStr() - @toStrObject() recursion
-  3. Begin Docco documentation
 
 Tester unique capabilies:
   Setup Spec Type Schema Closures Unit Apply Switches

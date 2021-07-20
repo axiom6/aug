@@ -27,7 +27,7 @@ import Port from './Port.vue'
       const compKey   = 'Hues';
       const pageIdx   = ref(0);
       const page      = ref(null);
-      let   pageKey   = 'None'
+      let   pageKey   = 'none'
       const debug     = false;
       const scriptSrc = "/assets/mathbox-bundle.js"
       mix.addScript( scriptSrc );

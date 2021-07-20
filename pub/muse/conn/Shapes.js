@@ -154,7 +154,7 @@ Shapes = class Shapes {
     this.wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize, level);
   }
 
-  wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize, level = 'None') {
+  wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize, level = 'none') {
     var as, at, path, rt, sc, th, x, y;
     Vis.noop(wedgeId);
     th = 14;

@@ -43,8 +43,8 @@
           onPrac(obj); } }
 
       const toPracKey = (pracKey) => {
-        if( pracKey==='None' ) {
-          console.log( 'Prac.setPrac() pracKey is None', { compKey:nav.compKey, inovKey:nav.inovKey } );
+        if( pracKey==='none' ) {
+          console.log( 'Prac.setPrac() pracKey is none', { compKey:nav.compKey, inovKey:nav.inovKey } );
           if(      nav.compKey==='Info') { return 'Team';    }
           else if( nav.compKey==='Know') { return 'Involve'; }
           else if( nav.compKey==='Wise') { return 'Trust';   } }

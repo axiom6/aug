@@ -92,18 +92,14 @@ test( "toSpec(#{objectSpecStr})",       spec.toSpec(objectSpecStr),    objectSpe
 test( "toSpecParse(#{rangeMat})",       spec.toSpecParse(rangeMat),    rangeSpec  )
 test( "toSpecParse(#{enumsMat})",       spec.toSpecParse(enumsMat),    enumsSpec  )
 test( "toSpecParse(#{regexpMat})",      spec.toSpecParse(regexpMat),   regexpSpec )
-#est( "toSpecParse(#{objectMat})",      spec.toSpecParse(objectMat),   regexpSpec )
+test( "toSpecParse(#{objectMat})",      spec.toSpecParse(objectMat),   spec.toSpecInit() )
+test( "toSpecParse(#{arrayMat})",       spec.toSpecParse(arrayMat),    spec.toSpecInit() )
 test( "toSpecObject(#{rangeSpecStr})",  spec.toSpecObject(rangeSpec),  rangeSpec  )
 test( "toSpecObject(#{enumsSpecStr})",  spec.toSpecObject(enumsSpec),  enumsSpec  )
 test( "toSpecObject(#{regexpSpecStr})", spec.toSpecObject(regexpSpec), regexpSpec )
 test( "toSpecObject(#{objectSpecStr})", spec.toSpecObject(objectSpec), objectSpec )
 
-test( "toRange(#{rangeStr})",  spec.toRange(rangeStr),         rangeStr )    # Trivial
-test( "toRange(#{rangeRgb})",  spec.toRange(rangeRgb),         rangeRgb )
-test( "toRange(#{rangeHsv})",  spec.toRange(rangeHsv),         rangeHsv )
-test( "toRange(#{rangeFlt})",  spec.toRange(rangeFlt),         rangeFlt )
-
-test( "toRanges(#{rangeStr})", spec.toRanges(rangeStr),        arrayStr )  # ???
+test( "toRanges(#{rangeStr})", spec.toRanges(rangeStr),        arrayStr )  # Working
 test( "toRanges(#{rangeRgb})", spec.toRanges(rangeRgb),        arrayRgb )
 test( "toRanges(#{rangeHsv})", spec.toRanges(rangeHsv),        arrayHsv )
 test( "toRanges(#{rangeFlt})", spec.toRanges(rangeFlt),        arrayFlt )
@@ -113,10 +109,16 @@ test( "toRangeArray(#{rangeRgb})", spec.toRangeArray(rangeRgb), arrayRgb )
 test( "toRangeArray(#{rangeHsv})", spec.toRangeArray(rangeHsv), arrayHsv )
 test( "toRangeArray(#{rangeFlt})", spec.toRangeArray(rangeFlt), arrayFlt )
 
-test( "toEnums(#{enums})",         spec.toEnums(enums),         enums      )
-test( "toRegexp(#{regexpTx})",     spec.toRegexp(regexpTx),     regexp     )
+
 test( "toMinMax(#{'3-6'})",        spec.toMinMax('3-6'),        [3,6]      )
 test( "toSpecInit()", spec.toSpecInit(), {type:"any",match:"any",card:"1"} )
+
+test( "toEnums(#{enums})",     spec.toEnums(enums),            enums    )  # 6 Failed Tests
+test( "toRegexp(#{regexpTx})", spec.toRegexp(regexpTx),        regexp   )
+test( "toRange(#{rangeStr})",  spec.toRange(rangeStr),         rangeStr )
+test( "toRange(#{rangeRgb})",  spec.toRange(rangeRgb),         rangeRgb )
+test( "toRange(#{rangeHsv})",  spec.toRange(rangeHsv),         rangeHsv )
+test( "toRange(#{rangeFlt})",  spec.toRange(rangeFlt),         rangeFlt )
 test().log( test().summary() )
 
 test().describe( "-- in... Spec verify" ).on()

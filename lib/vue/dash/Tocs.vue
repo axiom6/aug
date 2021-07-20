@@ -33,10 +33,10 @@
       const nav     = inject( 'nav' );
       let   komps   = mix.kompsTocs();
       const compKey = ref('Home');
-      const inovKey = ref('None');
-      const pracKey = ref('None');
-      const dispKey = ref('None');
-      const routNav = ref('None');
+      const inovKey = ref('none');
+      const pracKey = ref('none');
+      const dispKey = ref('none');
+      const routNav = ref('none');
 
       const myKomp = function(kompArg) {
         return kompArg===compKey.value && mix.isBatch(compKey.value) }

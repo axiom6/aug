@@ -28,7 +28,7 @@
 
       const pageIdx  = ref(0)
       const page     = ref(null);
-      let   pageKey  = 'None';
+      let   pageKey  = 'none';
       
       const show = (pageArg) => {
         return pageArg === pageKey; }

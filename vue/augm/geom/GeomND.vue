@@ -28,7 +28,7 @@
       const page    = ref(null);
       const pageIdx = ref(0)
       const debug   = false;
-      let   pageKey = 'None'
+      let   pageKey = 'none'
       const geomMgr = new GeomMgr();
 
       const toPages = function() {

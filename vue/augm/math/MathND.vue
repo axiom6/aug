@@ -26,7 +26,7 @@
       const mix     = inject('mix');
       const nav     = inject('nav');
       const page    = ref(null);
-      let   pageKey = 'None';
+      let   pageKey = 'none';
       let   pageIdx = 0;
       const mathMgr = new MathMgr();
     //const debug   = false;

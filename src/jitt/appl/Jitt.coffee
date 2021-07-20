@@ -59,9 +59,9 @@ class Jitter
     return
 
   Jitter.Batch = {
-    Choice: { url:'jitter/Choice.json', data:ChoiceJson, type:'None', plane:'None', refine:true }
-    Jitter: { url:'jitter/Jitter.json', data:JitterJson, type:'None', plane:'None', refine:true }
-    Flavor: { url:'jitter/Flavor.json', data:FlavorJson, type:'None', plane:'None', refine:true } }
+    Choice: { url:'jitter/Choice.json', data:ChoiceJson, type:'none', plane:'none', refine:true }
+    Jitter: { url:'jitter/Jitter.json', data:JitterJson, type:'none', plane:'none', refine:true }
+    Flavor: { url:'jitter/Flavor.json', data:FlavorJson, type:'none', plane:'none', refine:true } }
 
   # Vue Router Routes
   Jitter.routes = [

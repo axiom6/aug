@@ -35,7 +35,7 @@
       onNav: function(obj) {
         if( this.nav.isMyNav(obj,'Prac',[this.compKey]) ) {
           this.pageKey = this.nav.getPageKey('Tables');
-          if( this.pageKey !== 'None' ) {
+          if( this.pageKey !== 'none' ) {
               this.create( this.pageKey ); } } },
 
       create: function( pageKey ) {

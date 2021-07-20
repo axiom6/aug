@@ -185,7 +185,7 @@ class Mix extends Type
     console.log( 'Mix.sectObj()', { talkObj:talkObj, talkKey:pracKey, sectKey:dispKey } ) # , sectObj:sectObj
     sectObjs = @compObject(talkObj.comp)
     talkObj.keys = if talkObj.keys?  then talkObj.keys else @childKeys(sectObjs)
-    dispKey = if dispKey is 'None' or not @inArray(dispKey,talkObj.keys) then @keys(sectObjs)[0] else dispKey
+    dispKey = if dispKey is 'none' or not @inArray(dispKey,talkObj.keys) then @keys(sectObjs)[0] else dispKey
     sectObj = sectObjs[dispKey]
     if not sectObj?
       console.error( 'Nav.sectObject null', { pracKey:pracKey, dispKey:dispKey } )
@@ -199,9 +199,9 @@ class Mix extends Type
     sectObj
 
   presObject:( sectObj, presKey ) ->
-    presKey = if presKey is 'None' and sectObj.keys[0]? then sectObj.keys[0] else presKey
+    presKey = if presKey is 'none' and sectObj.keys[0]? then sectObj.keys[0] else presKey
     pageObj = null
-    if presKey isnt 'None' and sectObj[presKey]?
+    if presKey isnt 'none' and sectObj[presKey]?
       pageObj = sectObj[presKey]
       pageObj.src = sectObj.src
       pageObj.name = presKey
@@ -214,8 +214,8 @@ class Mix extends Type
     dataObj = null
     if sectObj.type is 'Prac'
       dataObj = @pracObject( sectObj.src, sectObj.name )
-    else if sectObj.type is 'Disp' and presKey isnt 'None'
-      dataObj = @dispObject(sectObj.src, 'None', sectObj.name, presKey  )
+    else if sectObj.type is 'Disp' and presKey isnt 'none'
+      dataObj = @dispObject(sectObj.src, 'none', sectObj.name, presKey  )
     dataObj
 
   dispObject:( compKey, inovKey, pracKey, dispKey ) ->

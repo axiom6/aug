@@ -47,7 +47,7 @@ class Dir
     msg.source = "#{'Nav.dirPrac'}(#{dir})"
     msg.compKey = @compKey
     adj = @adjPracObj( dir )
-    if adj.name isnt 'None'
+    if adj.name isnt 'none'
       if adj.name  isnt @nav.pracKey
         msg.pracKey = adj.name
       if adj.plane isnt @nav.compKey
@@ -65,7 +65,7 @@ class Dir
     adj = @adjPracObj(dir)
     ddr = dis.dir
     dis = @nav.getDispObj( adj, ddr )
-    if adj.name isnt 'None'
+    if adj.name isnt 'none'
       msg.compKey  = adj.plane
       msg.pracKey  = adj.name
       msg.dispKey  = dis.name
@@ -92,13 +92,13 @@ class Dir
       @nextKey( key, keys )
     else
       @dispKey = @nextKey( @dispKey, peys )
-      'None'
+      'none'
 
   dirPage:( dir ) ->
     msg = {}
     msg.source = "#{'Nav.dirPage'}(#{dir})"
-    pageKey = if @hasTabs(@route) then @movePage(@nav.pages[@route],dir) else 'None'
-    if pageKey isnt 'None'
+    pageKey = if @hasTabs(@route) then @movePage(@nav.pages[@route],dir) else 'none'
+    if pageKey isnt 'none'
       @nav.setPageKey( @route, pageKey )
   # @pub( msg )
     else
@@ -109,7 +109,7 @@ class Dir
   movePage:( page, dir  ) ->
     pageKey  = @getPageKey( @nav.compKey )
     len      = page.keys.length
-    if pageKey isnt 'None'
+    if pageKey isnt 'none'
       idx = page.keys.indexOf(pageKey)
       ndx = @range(idx+1,len) if dir is 'east'
       ndx = @range(idx-1,len) if dir is 'west'
@@ -133,7 +133,7 @@ class Dir
     if dir? and has then @navs[compKey][dir]? else has
 
   adjCompKey:(      compKey, dir ) ->
-    if @hasCompKey( compKey, dir ) an @navs? then  @navs[compKey][dir] else 'None'
+    if @hasCompKey( compKey, dir ) an @navs? then  @navs[compKey][dir] else 'none'
 
   adjPracObj:( dir ) ->
     pracObj = @nav.pracs(@compKey)[@pracKey]

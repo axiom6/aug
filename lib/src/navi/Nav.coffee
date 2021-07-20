@@ -11,22 +11,22 @@ class Nav
     @touch      =  null
     @build      =  new Build( @batch )
     @dir        =  new Dir( @ )
-    @source     = 'None'
-    @level      = 'None' # set to either Comp Prac or Disp by Tocs.vue
-    @compKey    = 'None'
-    @pracKey    = 'None'
-    @dispKey    = 'None'
-    @pageKey    = 'None'
-    @inovKey    = 'None' # Only used by Tabs to Tocs.vue and Comp.vue
-    @choice     = 'None'
+    @source     = 'none'
+    @level      = 'none' # set to either Comp Prac or Disp by Tocs.vue
+    @compKey    = 'none'
+    @pracKey    = 'none'
+    @dispKey    = 'none'
+    @pageKey    = 'none'
+    @inovKey    = 'none' # Only used by Tabs to Tocs.vue and Comp.vue
+    @choice     = 'none'
     @checked    = false
-    @warnMsg    = 'None'
+    @warnMsg    = 'none'
     @debug      =  false
     @pubs       = []
     @urls       = []
     @tabs       = {}
     @router     =  null
-    @routeLast  = 'None'
+    @routeLast  = 'none'
     @museLevels = ['Comp','Prac','Disp']
     @museComps  = ['Home','Prin','Info','Know','Wise','Cube','Test']
     @museInovs  = ['Info','Know','Wise','Soft','Data','Scie','Math']
@@ -55,15 +55,15 @@ class Nav
 
   toObj:( msg ) ->
     @set( msg )
-    @source   = 'None' if not msg.source?
-    @pracKey  = 'None' if @level is   'Comp'
-    @dispKey  = 'None' if @level isnt 'Disp'
+    @source   = 'none' if not msg.source?
+    @pracKey  = 'none' if @level is   'Comp'
+    @dispKey  = 'none' if @level isnt 'Disp'
     obj = { source:@source, level:@level, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey }
     obj.pageKey = @objPage( obj )
     obj.inovKey = @objInov( obj )
     obj.choice  = @choice  if @mix.isApp('Jitter')
     obj.checked = @checked if @mix.isApp('Jitter')
-    obj.warnMsg = @warnMsg if @warnMsg isnt 'None'
+    obj.warnMsg = @warnMsg if @warnMsg isnt 'none'
     @tab( obj ) # Publisn pageKey and inovKey to tabs
     obj
 
@@ -94,10 +94,10 @@ class Nav
     inov = @objInov( obj )
     url  = window.location.protocol + '//' + window.location.host
     url += if    obj.compKey is 'Home' then '' else '/' + obj.compKey
-    url += '/' + obj.pracKey if obj.pracKey isnt 'None'
-    url += '/' + obj.dispKey if obj.dispKey isnt 'None'
-    url += '?' + 'page='     + page  if page isnt 'None'
-    url += '&' + 'innovate=' + inov  if inov isnt 'None'
+    url += '/' + obj.pracKey if obj.pracKey isnt 'none'
+    url += '/' + obj.dispKey if obj.dispKey isnt 'none'
+    url += '?' + 'page='     + page  if page isnt 'none'
+    url += '&' + 'innovate=' + inov  if inov isnt 'none'
     # console.log( 'Nav.toUrl()', url ) if @debug
     window.history.pushState( {}, '', url )
     url
@@ -110,20 +110,20 @@ class Nav
     paths       = url.pathname.split('/')
     obj.source  = 'Url'
     obj.compKey = if @mix.isStr(paths[1]) then paths[1] else 'Home'
-    obj.pracKey = if @mix.isStr(paths[2]) then paths[2] else 'None'
-    obj.dispKey = if @mix.isStr(paths[3]) then paths[3] else 'None'
-    obj.pageKey = if page?                then page     else 'None'
-    obj.inovKey = if innovate?            then innovate else 'None'
+    obj.pracKey = if @mix.isStr(paths[2]) then paths[2] else 'none'
+    obj.dispKey = if @mix.isStr(paths[3]) then paths[3] else 'none'
+    obj.pageKey = if page?                then page     else 'none'
+    obj.inovKey = if innovate?            then innovate else 'none'
     obj.level =
-      if      obj.dispKey isnt 'None' then 'Disp'
-      else if obj.pracKey isnt 'None' then 'Prac'
+      if      obj.dispKey isnt 'none' then 'Disp'
+      else if obj.pracKey isnt 'none' then 'Prac'
       else                                 'Comp'
     console.log( 'Nav.toPub()', { url:href, obj,obj, paths:paths } ) if @debug
     obj
 
   doRoute:( obj ) ->
     route = obj.compKey
-    return if route is @routeLast or route is 'None' or @isInov(route)
+    return if route is @routeLast or route is 'none' or @isInov(route)
     # console.log( 'Nav.doRoute()', { routeNames:@routeNames } )
     if route? and @komps? and @komps[route]?
       if @router?
@@ -136,7 +136,7 @@ class Nav
     return
 
   getTabsKey:( obj ) ->
-    tabsKey = 'None'
+    tabsKey = 'none'
     if @mix.isApp('Muse')
       tabsKey = obj.level if @mix.inArray(obj.compKey,@musePlanes)
       tabsKey = 'Prin' if obj.compKey is 'Prin' and obj.level is 'Comp'
@@ -153,7 +153,7 @@ class Nav
     @getPageKey( @getTabsKey(obj), false )
 
   objInov:( obj ) ->
-    if @mix.inArray(obj.compKey,@musePlanes) then @getPageKey(obj.compKey) else 'None'
+    if @mix.inArray(obj.compKey,@musePlanes) then @getPageKey(obj.compKey) else 'none'
 
   isShow:( tabsKey, pageKey ) ->
     pageNav = @getPageKey( tabsKey, false )
@@ -169,27 +169,27 @@ class Nav
     if @hasTabs(tabsKey,true) then @pages[tabsKey] else {}
 
   setPageKey:( tabsKey, pageKey, propTabs ) ->
-    return if pageKey is 'None'
+    return if pageKey is 'none'
     for own key, page  of @pages[tabsKey]
       page.show           = key is pageKey  # Update nav pages
       propTabs[key].show = key is pageKey  if propTabs[key]? # Also update Tabs.vue propTabs because it is a copy
     return
 
   getPageKey:( tabsKey, log=false ) ->
-    return 'None' if not  @hasTabs(tabsKey,log)
+    return 'none' if not  @hasTabs(tabsKey,log)
     for own  key,   page  of @pages[tabsKey]
       return key if page.show
-    'None'
+    'none'
 
   hasPage:( tabsKey, pageKey, log=true ) ->
     if    @mix.isDef(tabsKey) and @hasTabs(tabsKey)
        if @mix.isDef(pageKey) and @pages[tabsKey][pageKey]?
          true
        else
-         console.log( 'Nav.hasPage() bad pageKey', { tabsKey:tabsKey, pageKey:pageKey, pages:getTabs:(tabsKey) } ) if log and pageKey isnt 'None'
+         console.log( 'Nav.hasPage() bad pageKey', { tabsKey:tabsKey, pageKey:pageKey, pages:getTabs:(tabsKey) } ) if log and pageKey isnt 'none'
          false
     else
-      console.log( 'Nav.hasPage() bad tabsKey',    { tabsKey:tabsKey, pageKey:pageKey } ) if log and pageKey isnt 'None'
+      console.log( 'Nav.hasPage() bad tabsKey',    { tabsKey:tabsKey, pageKey:pageKey } ) if log and pageKey isnt 'none'
       false
 
   getPage:( tabsKey, pageKey, log=false ) ->
@@ -197,10 +197,10 @@ class Nav
       @pages[tabsKey][pageKey]
     else
       console.error( 'Nav.getPage() bad page', { tabsKey:tabsKey, pageKey:pageKey } )
-      'None'
+      'none'
 
   getInovKey:( tabsKey ) ->
-    if @mix.inArray(tabsKey,@musePlanes) then @getPageKey(tabsKey) else 'None'
+    if @mix.inArray(tabsKey,@musePlanes) then @getPageKey(tabsKey) else 'none'
 
   hasTabs:( tabsKey, log=false ) ->
     has = @mix.isDef(tabsKey) and @mix.isDef(@pages[tabsKey])
@@ -248,12 +248,12 @@ export default Nav
 ###
   set:( msg, isReplay ) ->
     if isReplay
-       if msg.pageKey isnt 'None'
+       if msg.pageKey isnt 'none'
           tabsKey = @getTabsKey(msg)
           @setPageKey( tabsKey, msg.pageKey, {} ) # Short message on 'Tab' subject
           @stream.publish( 'Tab',           { compKey:tabsKey, pageKey:msg.pageKey } )
           console.log( 'Nav.set() pageKey', { compKey:tabsKey, pageKey:msg.pageKey } ) if @debug
-       if msg.inovKey isnt 'None'
+       if msg.inovKey isnt 'none'
          @setPageKey( msg.compKey, msg.inovKey, {} ) # Short message on 'Tab' subject
          @stream.publish( 'Tab',   { compKey:msg.compKey, pageKey:msg.inovKey } )
          console.log( 'Nav.set() inovKey', { compKey:msg.compKey, inovKey:msg.inovKey } ) if @debug

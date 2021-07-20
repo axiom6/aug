@@ -20,23 +20,6 @@ test( "d,e,f",       type.toEnclose( "[", "d,e,f", "]" ), "[d,e,f]" ) # returns 
 test( "a:x,b:y,c:z", type.toEnclose( "{", "a:x,b:y,c:z", "}" ), "{a:x,b:y,c:z}" ) # returns {a:x,b:y,c:z}
 test().log( test().summary() )
 
-###
-test().describe(  ""  ).name("isEnclosed()").on()
-abc = "abc"
-a   = "a"
-b   = "b"
-c   = "c"
-test(  type.toStr(abc),            type.isEnclosed('"', type.toStr(abc), '"' ),              true )
-test( 'abc',                       type.isEnclosed("'",'abc',"'" ),                          true )
-test( "abc",                       type.isEnclosed('"',"abc",'"' ),                          true )
-test(  type.toStr([a,"b",c]),      type.isEnclosed('"',type.toStr([a,"b",c]),'"'),           true )
-test( '[a,"b",c]',                 type.isEnclosed("'",'[a,"b",c]',"'" ),                    true )
-test( "[a,'b',c]",                 type.isEnclosed('"',"[a,'b',c]",'"' ),                    true )
-test( type.toStr({a:1,b:2,c:"z"}), type.isEnclosed("'",  type.toStr({a:1,b:2,c:"z"}),"'"  ), true )
-test( '{a:1,b:2,c:"z"}',           type.isEnclosed("'",'{a:1,b:2,c:"z"}',"'" ),              true )
-test( "{a:1,b:2,c:'z'}",           type.isEnclosed('"',"{a:1,b:2,c:'z'}",'"' ),              true )
-test().log( test().summary() )
-###
 
 test().describe(  ""  ).name("toSingleQuote()").on()
 abc = "abc"
@@ -99,6 +82,9 @@ test( "isSymbol(Symbol())",          type.isSymbol(Symbol()),           true )
 test( "isNaN(NaN)",                  type.isNaN(NaN),                   true )
 test( 'isType("|0-100|","range")',   type.isType("|0-100|","range"),    true )
 test( 'isStr({a:1,b:2,c:"z"})',      type.isStr( '{a:1,b:2,c:"z"}' ),   true )
+test( 'isDef(null)',                 type.isDef(null),                 false )
+test( 'isDef(undef)',                type.isDef(undef),                false )
+test( 'isDef(none)',                 type.isDef("none"),               false )
 test().log( test().summary() )
 
 test().describe( "Negative type assertsions" ).on()

@@ -197,6 +197,15 @@ class Tester extends Spec
 
   # Check and report on values and types
   #   refactored on Wed July 7, 2021
+  ###
+  Tester.verify(result,expect,status) {errors: "Result of type 'enums' not in |string|int|float|boolean|object|array|\nExpect is type 'enums'", result: "|Embrace|Innovate|Encourage|", expect: "|Embrace|Innovate|Encourage|", status: {…}}
+Tester.coffee:225 Tester.verify(result,expect,status) {errors: "Result of type 'regexp' not in |string|int|float|boolean|object|array|\nExpect is type 'regexp'", result: //x//, expect: /x/, status: {…}}
+Tester.coffee:225 Tester.verify(result,expect,status) {errors: "Result of type 'range' not in |string|int|float|boolean|object|array|\nExpect is type 'range'", result: "| a-z, 0-9, A-Z |", expect: "| a-z, 0-9, A-Z |", status: {…}}
+Tester.coffee:225 Tester.verify(result,expect,status) {errors: "Result of type 'range' not in |string|int|float|boolean|object|array|\nExpect is type 'range'", result: "| 0-255 |", expect: "| 0-255 |", status: {…}}
+Tester.coffee:225 Tester.verify(result,expect,status) {errors: "Result of type 'range' not in |string|int|float|boolean|object|array|\nExpect is type 'range'", result: "| 0-360, 0-100, 0-100 |", expect: "| 0-360, 0-100, 0-100 |", status: {…}}
+Tester.coffee:225 Tester.verify(result,expect,status) {errors: "Result of type 'range' not in |string|int|float|boolean|object|array|\nExpect is type 'range'", result: "| 0-360+0.001, 0-100+0.001, 0-100+0.001 |", expect: "| 0-360+0.001, 0-100+0.001, 0-100+0.001 |", status: {…}}
+Spec-unit.coffee:122
+###
   verify:( result, expect, status ) ->
     op  = @describeOp
     r   = @toType(result)

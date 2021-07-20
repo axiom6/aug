@@ -116,6 +116,7 @@ class Spec extends Type
   #     { type:"array",  oper:"range", match:[[0,360],[0,100],[0,100]], card="?" }
   toSpecParse:( arg ) ->
     spec   = @toSpecInit()
+    return spec if not @isSpecParse(arg)
     splits = arg.split(":")
     length = splits.length
     if length >= 1  then spec.type = splits[0]  # type
@@ -135,6 +136,7 @@ class Spec extends Type
 
   toSpecObject:( arg ) ->
     spec       = @toSpecInit()
+    return spec if not @isSpecObject(arg)
     spec.type  = if arg.type?  then arg.type  else "any"
     spec.match = if arg.match? then arg.match else "any"
     spec.card  = if arg.card?  then arg.card  else  "1"  # required

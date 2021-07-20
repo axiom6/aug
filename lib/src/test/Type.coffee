@@ -51,6 +51,7 @@ class Type
   isFunction:(f) ->   @isType(f,"function")
   isNull:(m)     ->   @isType(m,"null")
   isUndef:(u)    ->   @isType(u,"undefined")
+  isNone:(s)     ->   @isType(s,"string") and s is "none"
   isBigInt:(b)   ->   typeof(b) is "bigint" # Will incorporate into type
   isSymbol:(s)   ->   typeof(s) is "symbol" # Will incorporate into type
 
@@ -70,8 +71,9 @@ class Type
     false
 
   # Aggregate and special value assertions
+  #   For now ww treat 'none' as a defined type
   isType:(v,t)      ->   @toType(v) is t
-  isDef:(d)         ->   @toType(d) isnt 'null' and @toType(d) isnt 'undefined'
+  isDef:(d)         ->   not @isIn( @toType(d), "undefs"  )
   isNumber:(n)      ->   @isIn( @toType(n), "numbers" )
   isNot:(d)         ->   not @isDef(d)
   isNaN:(n)         ->   Number.isNaN(n) # @isNumber(n) and
@@ -472,14 +474,14 @@ class Type
       else "||"
 
 # All Type[key] 'enums'. Considering if "none" belongs
-Type.undefs  = "|null|undefined|"
+Type.undefs  = "|null|undefined|none|"
 Type.numbers = "|int|float|"
 Type.values  = "|string|int|float|boolean|"
 Type.manys   = "|object|array|"
 Type.ranges  = "|string|int|float|"
 Type.matches = "|regexp|range|enums|amy|"
-Type.results = "|string|int|float|boolean|object|array|"
-Type.expects = "|string|int|float|boolean|object|array|regexp|range|enums|amy|"
+Type.results = "|string|int|float|boolean|array|object|enums|range|regexp|"
+Type.expects = "|string|int|float|boolean|array|object|enums|range|regexp|any|"
 Type.typeofs = "|number|string|boolean|object|function|bigint|symbol|null|undefined|"
 Type.types   = "|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|"
 Type.types  += "function|bigint|symbol|date|any|none|"

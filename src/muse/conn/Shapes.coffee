@@ -112,7 +112,7 @@ class Shapes
     @wedgeText( g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize, level  )
     return
 
-  wedgeText:( g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize, level='None' ) ->
+  wedgeText:( g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize, level='none' ) ->
     Vis.noop( wedgeId )
     th = 14
     at = (a1+a2)/2

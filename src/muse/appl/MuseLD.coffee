@@ -137,6 +137,6 @@ class MuseLD
     else if comp is Info then 'Information'
     else if comp is Know then 'Knowledge'
     else if comp is Wise then 'Wisdom'
-    else                      'None'
+    else                      'none'
 
 export default MuseLD

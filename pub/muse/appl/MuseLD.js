@@ -194,7 +194,7 @@ MuseLD = class MuseLD {
     } else if (comp === Wise) {
       return 'Wisdom';
     } else {
-      return 'None';
+      return 'none';
     }
   }
 

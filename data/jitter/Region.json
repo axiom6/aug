@@ -61,5 +61,5 @@
     "Americas":{ "x":0, "y":0, "img":false,  "flavors":["Nutty","Spicy"], "acidity":"Mild" },
     "Africa":{   "x":0, "y":0, "img":false,  "flavors":["Fruit","Bright"],"body":"Medium", "acidity":"High" },
     "Asia":{     "x":0, "y":0, "img":false,  "flavors":["Earthy","Chocolate"],"body":"Heavy", "acidity":"High", "taste":"Sweet" },
-    "None":{     "x":0, "y":0, "img":false,  "flavors":[],"body":"None", "acidity":"None", "taste":"None" }
+    "none":{     "x":0, "y":0, "img":false,  "flavors":[],"body":"none", "acidity":"none", "taste":"none" }
 }

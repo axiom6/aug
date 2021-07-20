@@ -22,7 +22,7 @@
 
     components: { 'h-navb':Navb },
 
-    props: { name:String, compKey:{ type:String, default:'None' } },
+    props: { name:String, compKey:{ type:String, default:'none' } },
 
     setup( props ) {
 
@@ -47,7 +47,7 @@
         else if( idx===2 ) c2.value  = choice; }
 
       const isRouted = function() {
-        return props.compKey !== 'None'; }
+        return props.compKey !== 'none'; }
 
       onMounted( function () {
         mix.subscribe( 'Nav', 'Summ', (obj) => { onChoices(obj); } );

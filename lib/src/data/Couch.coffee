@@ -36,42 +36,42 @@ class Couch extends Store
   select:( table,  where, callback ) ->
     selector  = @findSelect( table )
     opts = { where:where, callback:callback, op2:"select" }
-    @rest( 'find', table, 'None', selector, opts )
+    @rest( 'find', table, 'none', selector, opts )
     return
 
   insert:( table, objs )  ->
     docs = @insertDocs( table, objs )
     opts = { objs:objs }
-    @rest( 'insert', table, 'None', { "docs":docs }, opts )
+    @rest( 'insert', table, 'none', { "docs":docs }, opts )
     return
 
   update:( table, objs )  ->
     docs = @insertDocs( table, objs )
     opts = { objs:objs }
-    @rest( 'update', table, 'None', { "docs":docs }, opts )
+    @rest( 'update', table, 'none', { "docs":docs }, opts )
     return
 
   remove:( table, where ) ->
     selector  = @findSelect( table )
     opts = { where:where, op2:'del' }
-    @rest( 'find', table, 'None', selector, opts )
+    @rest( 'find', table, 'none', selector, opts )
     return
 
   show:() ->
     @showTables()
-    # @rest( 'show', @dbName,'None', null, {} ) # Shows all docs in db
+    # @rest( 'show', @dbName,'none', null, {} ) # Shows all docs in db
     return
 
   # consider 412 status when opening an existing table
   open:( table ) ->
     @openTable( table )
-    @rest( 'open', table, 'None', null, {} )
+    @rest( 'open', table, 'none', null, {} )
     return
 
   # look at response obj: {ok: true}
   drop:( table ) ->
     @dropTable( table )
-    @rest( 'drop', table, 'None', null, {} )
+    @rest( 'drop', table, 'none', null, {} )
     return
 
   queryPrac:( ) ->
@@ -131,10 +131,10 @@ class Couch extends Store
     # console.log('Couch.findDocs()', { data:data, oDocs:oDocs, dObjs:dObjs } )
     if op is 'remove'
       opts = { where:((obj)->true), callback:callback, objs:dObjs }
-      @rest( op, table,'None', oDocs, opts )
+      @rest( op, table,'none', oDocs, opts )
     else if op is 'del'
       opts = { where:((obj)->true), callback:callback, objs:dObjs, op2:"del" }
-      @rest( 'remove', table,'None', oDocs, opts )
+      @rest( 'remove', table,'none', oDocs, opts )
     else if op is 'select'
       @results( table, 'select', oDocs )
     return

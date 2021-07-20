@@ -25,8 +25,8 @@
     methods: {
       
       doTalk: function(talkKey) {
-        this.nav.pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'None',
-          presKey:'None', imgsNum:0, imgsIdx:0 } ); }, // this.nav.dirsNavd('Init');
+        this.nav.pub( { source:'Talk.vue', pracKey:talkKey, dispKey:'none',
+          presKey:'none', imgsNum:0, imgsIdx:0 } ); }, // this.nav.dirsNavd('Init');
 
       onNav: function (obj) {
         if( this.nav.isMyNav(obj,'Prac') ) {

@@ -66,7 +66,7 @@ class Store
 
   drop:( table ) ->
 
-  change:( table, id='None' ) ->
+  change:( table, id='none' ) ->
 
   getTables:() ->
     str = localStorage.getItem( 'Tables' )

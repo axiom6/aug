@@ -185,7 +185,7 @@ class Util
 
   @isDef:(d)         ->  d isnt null and typeof(d) isnt 'undefined'
   @isNot:(d)         ->  not Util.isDef(d)
-  @isStr:(s)         ->  Util.isDef(s) and typeof(s)=="string" and s.length > 0 and s isnt 'None'
+  @isStr:(s)         ->  Util.isDef(s) and typeof(s)=="string" and s.length > 0 and s isnt 'none'
   @isntStr:(s)       ->  not Util.isStr(s)
   @isNum:(n)         ->  not isNaN(n)
   @isObj:(o)         ->  Util.isDef(o) and typeof(o) is "object"

@@ -152,22 +152,22 @@ Jitter = (function() {
     Choice: {
       url: 'jitter/Choice.json',
       data: ChoiceJson,
-      type: 'None',
-      plane: 'None',
+      type: 'none',
+      plane: 'none',
       refine: true
     },
     Jitter: {
       url: 'jitter/Jitter.json',
       data: JitterJson,
-      type: 'None',
-      plane: 'None',
+      type: 'none',
+      plane: 'none',
       refine: true
     },
     Flavor: {
       url: 'jitter/Flavor.json',
       data: FlavorJson,
-      type: 'None',
-      plane: 'None',
+      type: 'none',
+      plane: 'none',
       refine: true
     }
   };
