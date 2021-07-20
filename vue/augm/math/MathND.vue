@@ -12,7 +12,7 @@
 <script type="module">
 
   import { inject, ref, onMounted } from 'vue';
-  import Tabs     from '../../../lib/vue/base/elem/Tabs.vue';
+  import Tabs     from '../../../lib/vue/elem/Tabs.vue';
   import MathGrid from './MathGrid.vue';
   import MathMgr  from "../../../pub/augm/math/doc/MathMgr";
 

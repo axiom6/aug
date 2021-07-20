@@ -8,7 +8,7 @@
 
 <script type="module">
   
-  import Icon from "../../../lib/vue/base/elem/Icon.vue"
+  import Icon from "../../../lib/vue/elem/Icon.vue"
 
   let Desc = {
     

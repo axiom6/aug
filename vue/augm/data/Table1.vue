@@ -13,7 +13,7 @@
 <script type="module">
 
   // Table.js is gpne
-  import Table from '../../../../lib/pub/base/store/Table.js'
+  import Table from '../../../../lib/pub/store/Table.js'
   
   let Table1 = {
     

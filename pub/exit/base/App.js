@@ -6,13 +6,13 @@ import Util from '../util/Util.js';
 
 import Stream from '../util/Stream.js';
 
-import Rest from '../base/Rest.js';
+import Rest from '../Rest.js';
 
-import Data from '../base/Data.js';
+import Data from '../Data.js';
 
-import Model from '../base/Model.js';
+import Model from '../Model.js';
 
-import Simulate from '../base/Simulate.js';
+import Simulate from '../Simulate.js';
 
 import DestinationUI from '../ui/DestinationUI.js';
 

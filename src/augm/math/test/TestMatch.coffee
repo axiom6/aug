@@ -2,7 +2,7 @@
 # cd   pub/augm/math/test
 # node  node --experimental-modules -r esm TestMatch.js
 
-import {match,_} from '../../../lib/pub/base/util/Match.js'
+import {match,_} from '../../../lib/pub/util/Match.js'
 
 class TestMatch
 

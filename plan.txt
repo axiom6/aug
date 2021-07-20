@@ -1,4 +1,17 @@
 
+
+Debug One
+  1. Radar doQuads:( quads )
+  2. Spec.toParseStr
+  3. Muse colors off
+  4. Wise Texts Tab
+  5. Nav in Jitter needs to respond to routes
+  6. Nav in Data   needs to respond to routes
+  7. Nav in Data   needs to respond to routes
+
+Docs
+  1. In progress
+
 Tester
   0. toSingleQuote() replacing ' with " has to be more precise
   1. toStr(bigint)
@@ -24,7 +37,7 @@ Tester unique capabilies:
      d.   module.on(false) to turn off a test module
 
 
-Debug
+Debug Two
   1. Bad pageJey in Nav
   2. Colors in Hues / Color / Polar / Vec / Sphere
      Good   in Hues / Rgbs  / Regress

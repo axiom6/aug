@@ -4,17 +4,17 @@ import {
   tester
 } from '../../../lib/pub/test/Tester.js';
 
-import Access from '../../../lib/pub/base/util/Access.js';
+import Access from '../../../lib/pub/util/Access.js';
 
-import Build from '../../../lib/pub/base/util/Build.js';
+import Build from '../../../lib/pub/util/Build.js';
 
-import Stream from '../../../lib/pub/base/util/Stream.js';
+import Stream from '../../../lib/pub/util/Stream.js';
 
-import Nav from '../../../lib/pub/base/nav/Nav.js';
+import Nav from '../../../lib/pub/navi/Nav.js';
 
-import Touch from '../../../lib/pub/base/nav/Touch.js';
+import Touch from '../../../lib/pub/navi/Touch.js';
 
-import Mix from '../../../lib/pub/base/nav/Mix.js';
+import Mix from '../../../lib/pub/navi/Mix.js';
 
 import {
   createApp
@@ -130,6 +130,7 @@ Muse = (function() {
       Muse.app = createApp(Dash);
       Muse.app.provide('mix', Muse.mix);
       Muse.app.provide('nav', Muse.nav);
+      Muse.app.provide('tester', tester);
       Muse.app.mount('#muse');
       Muse.nav.pub(Muse.nav.toPub(Muse.href), true);
     }

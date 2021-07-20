@@ -4,7 +4,7 @@ import {
   test
 } from '../../../lib/pub/test/Tester.js';
 
-import Vis from '../../../lib/pub/base/draw/Vis.js';
+import Vis from '../../../lib/pub/draw/Vis.js';
 
 Color = class Color {
   constructor(mbox) {

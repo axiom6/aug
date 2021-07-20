@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "Stream-unit.js",
+  "sourceRoot": "../../src/util",
+  "sources": [
+    "Stream-unit.coffee"
+  ],
+  "names": [],
+  "mappings": "AACA,IAAA,MAAA,EAAA,SAAA,EAAA;;AAAA,OAAA;EAAS,IAAT;CAAA,MAAA;;AACA,OAAO,MAAP,MAAA;;AAEA,QAAA,GAAa,CAAC,YAAD,EAAc,YAAd,EAA2B,YAA3B,EAAwC,aAAxC;;AACb,SAAA,GAAa;EAAE,SAAA,EAAU,KAAZ;EAAmB,OAAA,EAAQ,KAA3B;EAAkC,QAAA,EAAS;AAA3C;;AACb,MAAA,GAAa,IAAI,MAAJ,CAAY,QAAZ,EAAsB,SAAtB;;AAEb,IAAA,CAAA,CAAM,CAAC,MAAP,CAAe,8CAAf,CAA+D,CAAC,EAAhE,CAAmE,KAAnE;;AAEA,IAAA,CAAA,CAAM,CAAC,QAAP,CAAiB,uBAAjB,CAA0C,CAAC,EAA3C,CAAA,EATA;;;AAYA,IAAA,CAAM,yCAAN,EAAiD,QAAA,CAAC,CAAD,CAAA;AACjD,MAAA,WAAA,EAAA,MAAA,EAAA;EAAE,MAAA,GAAS;IAAE,CAAA,EAAE,GAAJ;IAAS,CAAA,EAAE;EAAX;EACT,MAAA,GAAS,CAAA;EACT,WAAA,GAAc,QAAA,CAAC,GAAD,CAAA;WAAS,MAAA,GAAS;EAAlB;EACd,MAAM,CAAC,SAAP,CAAkB,YAAlB,EAAgC,aAAhC,EAA+C,QAAA,CAAC,GAAD,CAAA;WAAS,WAAA,CAAY,GAAZ;EAAT,CAA/C;EACA,MAAM,CAAC,OAAP,CAAkB,YAAlB,EAAgC,MAAhC;SACA,CAAC,CAAC,EAAF,CAAM,MAAN,EAAc,MAAd;AAN+C,CAAjD;;AAOA,IAAA,CAAA,CAAM,CAAC,GAAP,CAAY,IAAA,CAAA,CAAM,CAAC,OAAP,CAAA,CAAZ",
+  "sourcesContent": [
+    "\nimport { test } from \"../test/Tester.js\"\nimport Stream   from \"./Stream.js\"\n\nsubjects   = [\"TestStream\",\"TestStatus\",\"TestString\",\"TestSummary\"]\nstreamLog  = { subscribe:false, publish:false, subjects:subjects }\nstream     = new Stream( subjects, streamLog )\n\ntest().module( \"A mininal Publish and Subscribe class libary\" ).on(false)\n\ntest().describe( \"Publish and Subscribe\" ).on()\n\n# This demonstates an elaborate setup before t.eq(pubObj,subObj)\ntest( 'Subscribe to {a:\"a\",b:\"b\"} then Publish', (t) ->\n  pubObj = { a:\"a\", b:\"b\" }\n  subObj = {}\n  onSubscribe = (obj) -> subObj = obj\n  stream.subscribe( \"TestStream\", \"Stream-unit\", (obj) -> onSubscribe(obj) )\n  stream.publish(   \"TestStream\", pubObj )\n  t.eq( pubObj, subObj )  )\ntest().log( test().summary() )"
+  ]
+}

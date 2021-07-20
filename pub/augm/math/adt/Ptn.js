@@ -3,7 +3,7 @@ var Ptn;
 import {
   _,
   REST
-} from '../../../../lib/pub/base/util/Match.js';
+} from '../../../../lib/pub/util/Match.js';
 
 import Ascii from '../par/Ascii.esm.js';
 

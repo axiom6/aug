@@ -1,6 +1,6 @@
 var Coord;
 
-import Vis from '../../../lib/pub/base/draw/Vis.js';
+import Vis from '../../../lib/pub/draw/Vis.js';
 
 Coord = class Coord {
   constructor(mbox, width1, height, depth = 10) {

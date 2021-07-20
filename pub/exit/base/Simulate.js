@@ -2,7 +2,7 @@ var Simulate;
 
 import Util from '../util/Util.js';
 
-import Data from '../base/Data.js';
+import Data from '../Data.js';
 
 Simulate = class Simulate {
   constructor(stream) {

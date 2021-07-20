@@ -2,7 +2,7 @@ var AdvisoryUC;
 
 import $ from 'jquery';
 
-import Vis from '../../../lib/pub/base/draw/Vis.js';
+import Vis from '../../../lib/pub/draw/Vis.js';
 
 AdvisoryUC = class AdvisoryUC {
   constructor(stream, role, port, land) {

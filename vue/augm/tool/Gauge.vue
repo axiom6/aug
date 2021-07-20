@@ -4,7 +4,7 @@
 <script>
 
 import { ref, inject, onMounted, nextTick, onUnmounted } from "vue";
-import SvgMgr    from '../../../../lib/pub/base/draw/SvgMgr.js'
+import SvgMgr    from '../../../lib/pub/draw/SvgMgr.js'
 import drawGauge from './GaugeD3.js'
 
 let Gauge = {

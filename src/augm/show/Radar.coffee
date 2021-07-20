@@ -1,6 +1,5 @@
 
-import Vis    from '../../../lib/pub/base/draw/Vis.js'
-
+import Vis    from '../../../lib/pub/draw/Vis.js'
 
 class Radar
 
@@ -45,12 +44,12 @@ class Radar
     return
 
   doQuads:( quads ) =>
-    @quads( Util.toArray(quads), @r08, @r100 )
+    @quads( Vis.toArray(quads), @r08, @r100 )
     @circles( @criterias )
     return
 
   doTechs:( techs ) =>
-    @pts( Util.toArray(techs) )
+    @pts( Vis.toArray(techs) )
     return
 
   attrG:( g ) =>

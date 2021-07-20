@@ -1,6 +1,6 @@
 var Radar;
 
-import Vis from '../../../lib/pub/base/draw/Vis.js';
+import Vis from '../../../lib/pub/draw/Vis.js';
 
 Radar = class Radar {
   constructor(svgMgr, name2, mix) {
@@ -96,12 +96,12 @@ Radar = class Radar {
   }
 
   doQuads(quads) {
-    this.quads(Util.toArray(quads), this.r08, this.r100);
+    this.quads(Vis.toArray(quads), this.r08, this.r100);
     this.circles(this.criterias);
   }
 
   doTechs(techs) {
-    this.pts(Util.toArray(techs));
+    this.pts(Vis.toArray(techs));
   }
 
   attrG(g) {

@@ -1,6 +1,6 @@
 
 import Util  from '../util/Util.js'
-import Data  from '../base/Data.js'
+import Data  from '../Data.js'
 
 class Simulate
 

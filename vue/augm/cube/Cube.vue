@@ -10,7 +10,7 @@
   // is compiled by rollup.config.cube.js However the dynamic import of
   // this Cube.vue ends the warning messages. CoffeeScript import of original
   // CoffeeScript does not produce warning messages.
-  import Build  from '../../../lib/pub/base/util/Build.js'
+  import Build  from '../../../lib/pub/util/Build.js'
   import CubeTh from '../../../pub/augm/cube/CubeTh.js'
   import { inject, onMounted, onUnmounted, nextTick } from 'vue';
   

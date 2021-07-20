@@ -3,9 +3,9 @@ var Model,
 
 import Util from '../util/Util.js';
 
-import Data from '../base/Data.js';
+import Data from '../Data.js';
 
-import Trip from '../base/Trip.js';
+import Trip from '../Trip.js';
 
 Model = class Model {
   constructor(stream, rest, dataSource) {

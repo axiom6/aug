@@ -1,11 +1,11 @@
 
 import { tester } from  '../../../lib/pub/test/Tester.js'
-import Access     from '../../../lib/pub/base/util/Access.js'
-import Stream     from '../../../lib/pub/base/util/Stream.js'
-import Touch      from '../../../lib/pub/base/nav/Touch.js'
-import Cache      from '../../../lib/pub/base/util/Cache.js'
-import Mix        from '../../../lib/pub/base/nav/Mix.js'
-import Nav        from '../../../lib/pub/base/nav/Nav.js'
+import Access     from '../../../lib/pub/util/Access.js'
+import Stream     from '../../../lib/pub/util/Stream.js'
+import Touch      from '../../../lib/pub/navi/Touch.js'
+import Cache      from '../../../lib/pub/util/Cache.js'
+import Mix        from '../../../lib/pub/navi/Mix.js'
+import Nav        from '../../../lib/pub/navi/Nav.js'
 
 import { createApp } from 'vue'    #
 import { createRouter, createWebHistory } from 'vue-router'
@@ -101,7 +101,7 @@ class Jitter
     streamLog      = { subscribe:false, publish:false, subjects:subjects }
     Jitter.stream  = new Stream( subjects, streamLog )
     Jitter.mix     = new Mix(   Jitter, Jitter.routeNames )
-    Jitter.nav     = new Nav(   Jitter.stream, batch, Jitter.routes, Jitter.routeNames, Jitter.komps, true )
+    Jitter.nav     = new Nav(   Jitter.stream, Jitter.mix, batch, Jitter.komps ) # Jitter.routes, Jitter.routeNames,
     Jitter.touch   = new Touch( Jitter.stream, Jitter.nav )
     Jitter.cache   = new Cache( Jitter.stream )
     tester.setOptions( { testing:true, archive:true, verbose:false, debug:false } )

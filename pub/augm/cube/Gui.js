@@ -1,6 +1,6 @@
 var Gui;
 
-import Vis from '../../../lib/pub/base/draw/Vis.js';
+import Vis from '../../../lib/pub/draw/Vis.js';
 
 Gui = class Gui {
   constructor(act, elem, fun) {

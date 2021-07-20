@@ -1,7 +1,7 @@
 
 import Util          from '../util/Util.js'
-import Data          from '../base/Data.js'
-import Trip          from '../base/Trip.js'
+import Data          from '../Data.js'
+import Trip          from '../Trip.js'
 
 class Model
 

@@ -13,7 +13,7 @@ pre .hljs-winutils,
 pre .hljs-javascript .hljs-title,
 pre .hljs-lisp .hljs-title,
 pre .hljs-subst {
-  color: #9541F1; /* #954121 */
+  color: #954121;
 }
 pre .hljs-number,
 pre .hljs-hexcolor {
@@ -23,7 +23,7 @@ pre .hljs-string,
 pre .hljs-tag .hljs-value,
 pre .hljs-phpdoc,
 pre .hljs-tex .hljs-formula {
-  color: #888888;   /* #219161 */
+  color: #219161;
 }
 pre .hljs-title,
 pre .hljs-id {
@@ -106,8 +106,7 @@ html {
   height: 100%;
 }
 body {
-/*font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif; */
-  font-family: Menlo, Monaco, Consolas, "Lucida Console", monospace;
+  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, FreeSerif, serif;
   font-size: 14px;
   line-height: 16px;
   color: wheat;

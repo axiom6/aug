@@ -1,7 +1,7 @@
 
 import { tester } from './Tester.js'
 
-import Stream from '../base/util/Stream.js'
+import Stream from '../util/Stream.js'
 
 # git remote set-url origin 'https://axiom-muse:Axiom66#@github.com/axiom6-muse/viz.git'
 
@@ -32,10 +32,10 @@ class UnitTester
       paths =       tester.toKeys( `import.meta.glob("/lib/**/*-unit.js")` )
       paths.concat( tester.toKeys( `import.meta.glob("/pub/**/*-unit.js")` ) )
     else
-      paths = ["/lib/pub/test/Type-unit.js",   "/lib/pub/base/util/Stream-unit.js",
+      paths = ["/lib/pub/test/Type-unit.js",   "/lib/pub/util/Stream-unit.js",
                "/lib/pub/test/Spec-unit.js",
-               "/lib/pub/test/Tester-unit.js", "/lib/pub/base/draw/Vis-unit.js"]
-    paths = ["/lib/pub/test/Type-unit.js"]
+               "/lib/pub/test/Tester-unit.js", "/lib/pub/draw/Vis-unit.js"]
+    # paths = ["/lib/pub/test/Type-unit.js"]
     tester.runUnitTests( paths )
     return
 

@@ -1,6 +1,6 @@
 var D3D;
 
-import SvgMgr from '../../../lib/pub/base/draw/SvgMgr.js';
+import SvgMgr from '../../../lib/pub/draw/SvgMgr.js';
 
 import Wheel from './Wheel.js';
 

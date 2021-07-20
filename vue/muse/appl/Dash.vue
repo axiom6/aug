@@ -9,8 +9,8 @@
 
 <script type="module">
   
-  import Navd from '../../../lib/vue/base/dash/Navd.vue';
-  import Tocs from '../../../lib/vue/base/dash/Tocs.vue';
+  import Navd from '../../../lib/vue/dash/Navd.vue';
+  import Tocs from '../../../lib/vue/dash/Tocs.vue';
   import View from './View.vue';
   
   let Dash = {

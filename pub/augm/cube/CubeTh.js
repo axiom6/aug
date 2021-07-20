@@ -1,10 +1,10 @@
 var CubeTh;
 
-import Vis from '../../../lib/pub/base/draw/Vis.js';
+import Vis from '../../../lib/pub/draw/Vis.js';
 
-import Access from '../../../lib/pub/base/util/Access.js';
+import Access from '../../../lib/pub/util/Access.js';
 
-import Build from '../../../lib/pub/base/util/Build.js';
+import Build from '../../../lib/pub/util/Build.js';
 
 import Cube3D from './Cube3D.js';
 

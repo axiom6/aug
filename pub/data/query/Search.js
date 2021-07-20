@@ -1,6 +1,6 @@
 var Search;
 
-import Vis from '../../../lib/pub/base/draw/Vis.js';
+import Vis from '../../../lib/pub/draw/Vis.js';
 
 Search = class Search {
   constructor() {}

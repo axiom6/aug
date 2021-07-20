@@ -1,7 +1,7 @@
 
 import * as d3 from 'd3'
 import {sankey}  from 'd3-sankey';
-import Vis     from '../../../lib/pub/base/draw/Vis.js'
+import Vis     from '../../../lib/pub/draw/Vis.js'
 
 class Convey
 

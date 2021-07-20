@@ -1,7 +1,7 @@
 var Shapes,
   hasProp = {}.hasOwnProperty;
 
-import Vis from '../../../lib/pub/base/draw/Vis.js';
+import Vis from '../../../lib/pub/draw/Vis.js';
 
 import Convey from './Convey.js';
 

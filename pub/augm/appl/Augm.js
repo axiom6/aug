@@ -5,13 +5,13 @@ import {
   tester
 } from '../../../lib/pub/test/Tester.js';
 
-import Access from '../../../lib/pub/base/util/Access.js';
+import Access from '../../../lib/pub/util/Access.js';
 
-import Stream from '../../../lib/pub/base/util/Stream.js';
+import Stream from '../../../lib/pub/util/Stream.js';
 
-import Nav from '../../../lib/pub/base/nav/Nav.js';
+import Nav from '../../../lib/pub/navi/Nav.js';
 
-import Mix from '../../../lib/pub/base/nav/Mix.js';
+import Mix from '../../../lib/pub/navi/Mix.js';
 
 import Dash from '../../../vue/augm/appl/Dash.vue';
 

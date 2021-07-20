@@ -12,7 +12,7 @@
 
 <script type="module">
 
-  import Tabs from '../../../lib/vue/base/elem/Tabs.vue';
+  import Tabs from '../../../lib/vue/elem/Tabs.vue';
   import Dirs from './Dirs.vue';
   import Conn from '../comp/Conn.vue';
   import Desc from './Desc.vue';

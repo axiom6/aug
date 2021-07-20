@@ -1,6 +1,6 @@
 
 import Util  from '../util/Util.js'
-import Data  from '../base/Data.js'
+import Data  from '../Data.js'
 
 # Provides Spatial Geometry for Trip
 # Instanciated for each Trip for direct access to Trip data

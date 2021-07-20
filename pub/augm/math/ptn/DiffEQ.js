@@ -2,7 +2,7 @@ var DiffEQ;
 
 import {
   match
-} from '../../../../lib/pub/base/util/Match.js';
+} from '../../../../lib/pub/util/Match.js';
 
 import A from '../adt/Adt.js';
 

@@ -14,10 +14,10 @@
 <script type="module">
 
   import { inject, ref, onMounted, nextTick } from 'vue';
-  import Navb    from '../../../lib/vue/base/elem/Navb.vue';
-  import Btns    from '../../../lib/vue/base/elem/Btns.vue';
+  import Navb    from '../../../lib/vue/elem/Navb.vue';
+  import Btns    from '../../../lib/vue/elem/Btns.vue';
   import Summ    from './Summ.vue';
-  import SvgMgr  from '../../../../lib/pub/base/draw/SvgMgr.js';
+  import SvgMgr  from '../../../lib/pub/draw/SvgMgr.js';
   import Wheel   from '../../../pub/augm/show/Wheel.js';
   const  homeBtn = inject('homeBtn');
 

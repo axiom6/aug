@@ -1,6 +1,6 @@
 var Axes;
 
-import Vis from '../../../lib/pub/base/draw/Vis.js';
+import Vis from '../../../lib/pub/draw/Vis.js';
 
 Axes = class Axes {
   constructor(svgMgr) {

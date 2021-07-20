@@ -13,7 +13,7 @@
 <script type="module">
 
 import {inject, ref, onMounted, onUnmounted } from 'vue';
-import Tabs from '../../../lib/vue/base/elem/Tabs.vue';
+import Tabs from '../../../lib/vue/elem/Tabs.vue';
 import Port from './Port.vue'
 
  let Hues = {

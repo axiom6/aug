@@ -4,17 +4,17 @@ import {
   tester
 } from '../../../lib/pub/test/Tester.js';
 
-import Access from '../../../lib/pub/base/util/Access.js';
+import Access from '../../../lib/pub/util/Access.js';
 
-import Stream from '../../../lib/pub/base/util/Stream.js';
+import Stream from '../../../lib/pub/util/Stream.js';
 
-import Nav from '../../../lib/pub/base/nav/Nav.js';
+import Nav from '../../../lib/pub/navi/Nav.js';
 
-import Touch from '../../../lib/pub/base/nav/Touch.js';
+import Touch from '../../../lib/pub/navi/Touch.js';
 
-import Cache from '../../../lib/pub/base/util/Cache.js';
+import Cache from '../../../lib/pub/util/Cache.js';
 
-import Mix from '../../../lib/pub/base/nav/Mix.js';
+import Mix from '../../../lib/pub/navi/Mix.js';
 
 import {
   createApp
@@ -90,7 +90,7 @@ Data = (function() {
       };
       Data.stream = new Stream(subjects, infoSpec);
       Data.mix = new Mix(Data, Data.routeNames);
-      Data.nav = new Nav(Data.stream, batch, Data.routes, Data.routeNames, Data.komps);
+      Data.nav = new Nav(Data.stream, batch, Data.komps); // Data.routes, Data.routeNames,
       Data.touch = new Touch(Data.stream, Data.nav);
       //ata.build  = new Build( batch, Data.komps )
       Data.cache = new Cache(Data.stream);
@@ -121,6 +121,7 @@ Data = (function() {
       Data.app = createApp(Home.Dash);
       Data.app.provide('mix', Data.mix);
       Data.app.provide('nav', Data.nav);
+      Data.app.provide('tester', tester);
       router = Data.router(Data.routes);
       Data.app.use(router);
       Data.nav.router = router;

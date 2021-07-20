@@ -1,5 +1,5 @@
 
-import Vis   from '../../../lib/pub/base/draw/Vis.js'
+import Vis   from '../../../lib/pub/draw/Vis.js'
 import Coord from './Coord.js'
 
 class Regress

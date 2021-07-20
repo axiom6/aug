@@ -1,6 +1,6 @@
 
-import Vis      from '../../../lib/pub/base/draw/Vis.js'
-import Palettes from '../../../lib/pub/base/draw/Palettes.js'
+import Vis      from '../../../lib/pub/draw/Vis.js'
+import Palettes from '../../../lib/pub/draw/Palettes.js'
 import Radar    from './Radar.js'
 
 

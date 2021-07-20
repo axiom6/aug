@@ -23,8 +23,8 @@
 <script type="module">
 
   import { inject, onMounted } from 'vue';
-  import Btn  from '../../../lib/vue/base/elem/Btn.vue';
-//import Btns from '../../../lib/vue/base/elem/Btns.vue';
+  import Btn  from '../../../lib/vue/elem/Btn.vue';
+//import Btns from '../../../lib/vue/elem/Btns.vue';
   import Dash from './Dash.vue';
 
   

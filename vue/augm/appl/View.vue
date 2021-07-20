@@ -35,9 +35,9 @@
   import Wood     from '../wood/Wood.vue';
   import Geom     from '../geom/Geom.vue';
   import GeomND   from '../geom/GeomND.vue';
-  import Test     from '../../../lib/vue/base/test/Test.vue';
-  import Replay   from '../../../lib/vue/base/test/Replay.vue';
-  import Result   from '../../../lib/vue/base/test/Result.vue';
+  import Test     from '../../../lib/vue/test/Test.vue';
+  import Replay   from '../../../lib/vue/test/Replay.vue';
+  import Result   from '../../../lib/vue/test/Result.vue';
 
 
   let View = {

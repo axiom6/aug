@@ -28,7 +28,7 @@
         mix.publish( 'Tocs', 'Close' ); } ) }
   }
 
-  import Dash  from '../../../lib/vue/base/dash/Dash.vue';
+  import Dash  from '../../../lib/vue/dash/Dash.vue';
   import Store from '../store/Store.vue';
   import Table from '../table/Table.vue';
   import Query from '../query/Query.vue';

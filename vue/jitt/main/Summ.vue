@@ -16,7 +16,7 @@
 <script type="module">
 
   import { inject, ref, onMounted } from 'vue';
-  import Navb from '../../../lib/vue/base/elem/Navb.vue';
+  import Navb from '../../../lib/vue/elem/Navb.vue';
 
   let Summ = {
 

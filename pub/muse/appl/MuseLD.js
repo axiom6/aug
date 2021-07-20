@@ -2,7 +2,7 @@ var MuseLD;
 
 import {
   tester
-} from '../../../lib/pub/base/util/Util.js';
+} from '../../../lib/pub/util/Util.js';
 
 import Prin from '../../../data/muse/Prin.json';
 

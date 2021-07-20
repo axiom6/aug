@@ -13,17 +13,15 @@ import { test, tester } from './Tester.js'     # Only importing tester to unit t
 
 # t = tester
 
-test().listFunctions( tester )
-
-test().module( "Class Tester Unit tests" ).on(false)
+test().module( "Class Tester Unit tests" ).on()
 
 test().describe( "Test closure demo" ).on()
 five = () -> 5
 add  = ( a, b ) -> a + b
 test(  "five() = 5",   (t) -> t.eq( five(), 5 ) )
 test(  "add(2,3) = 5", (t) -> t.eq( add(2,3), 5 ) )
-test(  "type(123)",    (t) -> t.eq( tester.type(123), 'number' ) )
-test(  "type('123')",  (t) -> t.eq( tester.type('123'), 'string' ) )
+test(  "type(123)",    (t) -> t.eq( tester.toType(123), 'number' ) )
+test(  "type('123')",  (t) -> t.eq( tester.toType('123'), 'string' ) )
 test().log( test().summary() )
 
 test().describe( "Internal logic for turning tests on and off", ).name("test()").on()

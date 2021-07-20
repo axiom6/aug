@@ -1,6 +1,6 @@
 var Encourage;
 
-import Vis from "../../../lib/pub/base/draw/Vis.js";
+import Vis from "../../../lib/pub/draw/Vis.js";
 
 Encourage = class Encourage {
   constructor(spec, shapes, build) {

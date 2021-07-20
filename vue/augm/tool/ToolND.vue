@@ -11,7 +11,7 @@
 <script type="module">
 
   import { inject, ref, onMounted } from "vue";
-  import Tabs  from '../../../lib/vue/base/elem/Tabs.vue';
+  import Tabs  from '../../../lib/vue/elem/Tabs.vue';
   import Page  from './Page.vue';
 
   let ToolND = {

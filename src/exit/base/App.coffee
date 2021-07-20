@@ -2,10 +2,10 @@
 import $             from 'jquery'
 import Util          from '../util/Util.js'
 import Stream        from '../util/Stream.js'
-import Rest          from '../base/Rest.js'
-import Data          from '../base/Data.js'           # Static class with no need to instaciate
-import Model         from '../base/Model.js'
-import Simulate      from '../base/Simulate.js'
+import Rest          from '../Rest.js'
+import Data          from '../Data.js'           # Static class with no need to instaciate
+import Model         from '../Model.js'
+import Simulate      from '../Simulate.js'
 import DestinationUI from '../ui/DestinationUI.js'
 import GoUI          from '../ui/GoUI.js'
 import TripUI        from '../ui/TripUI.js'

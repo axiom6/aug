@@ -1,7 +1,7 @@
 
 import Util    from '../util/Util.js'
-import Data    from '../base/Data.js'
-import Spatial from '../base/Spatial.js'
+import Data    from '../Data.js'
+import Spatial from '../Spatial.js'
 
 class Trip
 

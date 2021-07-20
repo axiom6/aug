@@ -22,9 +22,9 @@
   import Prac   from '../../muse/prac/Prac.vue'
   import Disp   from '../../muse/disp/Disp.vue'
   import Defs   from './Defs.vue'
-  import Test   from '../../../lib/vue/base/test/Test.vue'
-  import Replay from '../../../lib/vue/base/test/Replay.vue';
-  import Result from '../../../lib/vue/base/test/Result.vue';
+  import Test   from '../../../lib/vue/test/Test.vue'
+  import Replay from '../../../lib/vue/test/Replay.vue';
+  import Result from '../../../lib/vue/test/Result.vue';
   
   let View = {
 

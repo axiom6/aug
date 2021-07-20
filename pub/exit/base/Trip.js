@@ -2,9 +2,9 @@ var Trip;
 
 import Util from '../util/Util.js';
 
-import Data from '../base/Data.js';
+import Data from '../Data.js';
 
-import Spatial from '../base/Spatial.js';
+import Spatial from '../Spatial.js';
 
 Trip = (function() {
   class Trip {

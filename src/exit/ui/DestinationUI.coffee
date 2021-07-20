@@ -1,7 +1,7 @@
 
 import $           from 'jquery'
 import Util        from '../util/Util.js'
-import Data        from '../base/Data.js'
+import Data        from '../Data.js'
 import ThresholdUC from '../uc/ThresholdUC.js'
 
 class DestinationUI

@@ -5,7 +5,7 @@ var TestMatch;
 import {
   match,
   _
-} from '../../../lib/pub/base/util/Match.js';
+} from '../../../lib/pub/util/Match.js';
 
 TestMatch = class TestMatch {
   static doExp() {

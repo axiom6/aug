@@ -30,7 +30,7 @@
 <script type="module">
   
   import Sign from '../comp/Sign.vue';
-  import Icon from '../../../lib/vue/base/elem/Icon.vue';
+  import Icon from '../../../lib/vue/elem/Icon.vue';
   import {ref, onBeforeMount, inject } from "vue";
   
   let Defs = {

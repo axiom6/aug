@@ -1,6 +1,6 @@
 var Link;
 
-import Vis from '../../../lib/pub/base/draw/Vis.js';
+import Vis from '../../../lib/pub/draw/Vis.js';
 
 Link = class Link {
   constructor(svgMgr) {
@@ -174,7 +174,7 @@ Link = class Link {
       }
       hue = 0;
       stroke = toHue;
-      if (Vis.isFunc(toHue)) {
+      if (Vis.isFunction(toHue)) {
         hue = toHue(ang);
         stroke = Vis.css([hue, 50, 80]);
       }

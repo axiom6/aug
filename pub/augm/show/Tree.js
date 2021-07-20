@@ -1,6 +1,6 @@
 var Tree;
 
-import Vis from '../../../lib/pub/base/draw/Vis.js';
+import Vis from '../../../lib/pub/draw/Vis.js';
 
 Tree = class Tree {
   constructor(svgMgr, mix) {

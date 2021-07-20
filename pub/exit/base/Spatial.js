@@ -2,7 +2,7 @@ var Spatial;
 
 import Util from '../util/Util.js';
 
-import Data from '../base/Data.js';
+import Data from '../Data.js';
 
 Spatial = (function() {
   // Provides Spatial Geometry for Trip

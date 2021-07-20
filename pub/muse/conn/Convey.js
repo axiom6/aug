@@ -6,7 +6,7 @@ import {
   sankey
 } from 'd3-sankey';
 
-import Vis from '../../../lib/pub/base/draw/Vis.js';
+import Vis from '../../../lib/pub/draw/Vis.js';
 
 Convey = class Convey {
   constructor(shapes, defs, g, x, y, w, h) {
