@@ -1,12 +1,12 @@
 
 <template>
   <div class="prac-dirs-pane">
-    <div class="cen" :style="style(pracObj,'prac')">
+    <div class="cen" :style="toStyle(pracObj)">
       <d-disp v-if="isDisc()" :dispObj="pracObj" :from="'Dirs'"></d-disp>
       <d-dims v-if="isDims()" :dispObj="pracObj" :from="'Dirs'"></d-dims>
     </div>
     <template  v-for="dispObj in pracObj.disps">
-      <div :class="dispObj.dir" :style="style(dispObj,'disp')">
+      <div :class="dispObj.dir" :style="toStyle(dispObj)">
         <d-disp v-if="isDisc()" :dispObj="dispObj" :from="'Dirs'"></d-disp>
         <d-dims v-if="isDims()" :dispObj="dispObj" :from="'Dirs'"></d-dims>
       </div>
@@ -39,16 +39,10 @@
         // console.log( 'Dirs.isDisp()', props.pracObj.row !== 'Dim', props.pracObj.row );
         return props.pracObj.row !== 'Dim'; }
 
-      const style = function( ikwObj, type ) {
-        /*
-        if( !mix.isDef(ikwObj) ) {
-          console.log('Dirs.style() ikwObj null', { type:type } ); }
-        else {
-          console.log('Dirs.style() ikwObj ok',   { type:type } ); }
-        */
-        return mix.styleObj(ikwObj); }
+      const toStyle = function( ikwObj ) {
+         return mix.styleObj( ikwObj ); }
     
-   return { dispObj, isDims, isDisc, style }; }
+   return { dispObj, isDims, isDisc, toStyle }; }
   
   }
 

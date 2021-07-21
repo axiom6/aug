@@ -1,6 +1,8 @@
 var Box;
 
-import Vis from '../../../lib/pub/draw/Vis.js';
+import {
+  vis
+} from '../../../lib/pub/draw/Vis.js';
 
 import MBox from './MBox.js';
 
@@ -49,8 +51,8 @@ Box = class Box {
     mbox = new MBox(elem);
     coord = new Coord(mbox, 8, 20, 20);
     view = coord.polar();
-    coord.cylVolume(view, Vis.rgba);
-    return coord.cylSurface(view, Vis.rgba, mbox.sin06F);
+    coord.cylVolume(view);
+    return coord.cylSurface(view, mbox.sin06F);
   }
 
   static doRegress(elem) {
@@ -65,7 +67,7 @@ Box = class Box {
     mbox = new MBox(elem);
     coord = new Coord(mbox, 12, 60, 10);
     view = coord.sphere();
-    return coord.sphVolume(view, Vis.sphere);
+    return coord.sphVolume(view, vis.sphere);
   }
 
   static doHcs(elem) {
@@ -75,7 +77,7 @@ Box = class Box {
     color = new Color(mbox);
     view = coord.polar();
     color.genWithHcs(coord, view);
-    return coord.cylSurface(view, Vis.rgba, mbox.sin06F);
+    return coord.cylSurface(view, mbox.sin06F);
   }
 
   static doVecs(elem, see) {
@@ -116,7 +118,7 @@ Box = class Box {
         hue: hue,
         c: c,
         s: s
-      }, Vis.rgba([hue, c, s]));
+      }, vis.css([hue, c, s]));
     }
     ref1 = [0, 60, 120, 180, 240, 300];
     results = [];
@@ -132,7 +134,7 @@ Box = class Box {
             hue: hue,
             c: c,
             s: s
-          }, Vis.rgba([hue, c, s])));
+          }, vis.css([hue, c, s])));
         }
         return results1;
       })());
@@ -144,7 +146,7 @@ Box = class Box {
 
 /*
 @init = () ->
-  Vis.ready ->
+  vis.ready ->
     elem = document.querySelector('#App')
     Box.doApp('Color', elem )
     return

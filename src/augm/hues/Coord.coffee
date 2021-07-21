@@ -1,5 +1,5 @@
 
-import Vis      from '../../../lib/pub/draw/Vis.js'
+import { vis } from '../../../lib/pub/draw/Vis.js'
 
 class Coord
 
@@ -60,7 +60,7 @@ class Coord
   angPolar:( ) ->
     obj = { id:"angPolar", axes:[1,2], width:13, height:1, items:2, channels:3 }
     obj.expr =  ( emit, a, r ) =>
-      Vis.noop( r )
+      vis.noop( r )
       emit( 0, 0, 1 )
       emit( a, 1, 1 )
       return
@@ -83,19 +83,19 @@ class Coord
       emit( x, y, z, 1 )
     obj
 
-  cartColors:( toRgb, id="cartColors") ->
+  cartColors:( id="cartColors") ->
     obj  =  { id:id, width:@width, height:@height, depth:@depth, channels:4 } #
     obj.expr  = ( emit, x, y, z ) =>
-      [r,g,b] = toRgb(x,y,z)
-      emit( r, g, b, 1 )
+      [r,g,b,a] = vis.rgba(x,y,z)
+      emit( r, g, b, a )
     obj
 
   point:( size=40, pid="points", cid="colors" ) ->
     { points:'#'+pid, colors:'#'+cid, color: 0xffffff, size:size }
 
-  cartVolume:( view, toRgb ) ->
+  cartVolume:( view ) ->
     view.volume( @cartPoints() )
-    view.volume( @cartColors( toRgb ) )
+    view.volume( @cartColors() )
     view.point(  @point(  40, "cartPoints", "cartColors" ) )
 
   cartArray:( view ) ->
@@ -108,16 +108,16 @@ class Coord
       emit( x, toZ(x,y), y )
     obj
 
-  cartSurfColors:( toRgb, id="cartSurfColors" ) ->
+  cartSurfColors:( id="cartSurfColors" ) ->
     obj  =  { id:id, width:@width,  height:@height, channels:4, axes:[1,2] } #
     obj.expr = ( emit, x, y ) =>
-      [r,g,b] = toRgb( x, y )
-      emit( r, g, b, 1 )
+      [r,g,b,a] = vis.rgba( x, y )
+      emit( r, g, b, a )
     obj
 
-  cartSurface:( view, toDep, toRgb ) ->
+  cartSurface:( view, toDep ) ->
     points = view.area( @cartSurfPoints( toDep ) )
-    colors = view.area( @cartSurfColors( toRgb ) )
+    colors = view.area( @cartSurfColors() )
     view.surface( { points:points, colors:colors, color: 0xffffff, shaded:false, opacity:1.0, lineX:true, lineY:true, width:5 } )
 
   cylData:( range=[[0,2*π],[0,100],[0,100]] ) ->
@@ -140,17 +140,17 @@ class Coord
     obj
 
   # Cylindrical ang, rad, dep  
-  cylColors:( toRgb, id="cylColors" ) ->
+  cylColors:( id="cylColors" ) ->
     obj  =  { id:id, width:@width, height:@height, depth:@depth, channels:4 } #
     obj.expr  = ( emit, ang, rad, dep, i ) =>
       hue     = @mbox.toHue( i, @width )
-      [r,g,b] = toRgb( hue, rad, dep ) # HCS
-      emit( r, g, b, 1 )
+      [r,g,b,a] = vis.rgba( hue, rad, dep ) # HCS
+      emit( r, g, b, a )
     obj
 
-  cylVolume:( view, toRgb ) ->
+  cylVolume:( view ) ->
     view.volume( @cylPoints() )
-    view.volume( @cylColors( toRgb ) )
+    view.volume( @cylColors() )
     view.point(  @point(  40, "cylPoints", "cylColors" ) )
 
   cylLookup:( view, hcss, rgbs ) =>
@@ -165,18 +165,18 @@ class Coord
       emit( radian, rad, 100*toDep(radian,rad) )
     obj
 
-  cylSurfColors:( toDep, toRgb, id="cylSurfColors" ) ->
+  cylSurfColors:( toDep, id="cylSurfColors" ) ->
     obj  =  { id:id, width:@npoints+1, height:@height, channels:4, axes:[1,2] } # Need @npoints+1 to complete rotation
     obj.expr = ( emit, ang, rad, i ) =>
       hue     = @mbox.toHue( i, @npoints )
       radian  = @mbox.toRad( i, @npoints )
-      [r,g,b] = toRgb( hue, rad, toDep(radian,rad)*100 )
-      emit( r, g, b, 1 )
+      [r,g,b,a] = vis.rgba( hue, rad, toDep(radian,rad)*100 )
+      emit( r, g, b, a )
     obj
 
-  cylSurface:( view, toRgb, toDep ) ->
+  cylSurface:( view, toDep ) ->
     points = view.area( @cylSurfPoints( toDep ) )
-    colors = view.area( @cylSurfColors( toDep, toRgb ) )
+    colors = view.area( @cylSurfColors( toDep ) )
     view.surface( { points:points, colors:colors, color: 0xffffff, shaded:false, opacity:1.0, lineX:true, lineY:true, width:5 } )
 
   # Spherical Points
@@ -186,23 +186,23 @@ class Coord
       emit( i*π*2/@width, j*π*2/@height, rad, 1 ) #if j*π*2/@height <= π
     obj
 
-  sphColors:( toRgb, id="sphColors" ) ->
+  sphColors:( id="sphColors" ) ->
     obj  =  { id:id, width:@width, height:@height, depth:@depth, channels:4 } #
     obj.expr  = ( emit, ang1, ang2, rad, i, j ) =>
-      [r,g,b] = toRgb( i*360/@width, j*360/@height, rad )
-      emit( r, g, b, 1 )
+      [r,g,b,a] = vis.rgba( i*360/@width, j*360/@height, rad )
+      emit( r, g, b, a )
     obj
 
-  sphVolume:( view, toRgb ) ->
+  sphVolume:( view ) ->
     view.volume( @sphPoints() )
-    view.volume( @sphColors( toRgb ) )
+    view.volume( @sphColors() )
     view.point(  @point(  40, "sphPoints", "sphColors" ) )
 
   domeColors:() ->
     obj =  { id:'domeColors', width:@width, height:@height, depth:@depth, channels:4 } #
     obj.expr  = ( emit, ang1, ang2, rad, i, j ) =>
       if j*360/@height <= 180
-        [r,g,b,a] = Vis.rgba( [i*360/@width, j*360/@height, rad ] )
+        [r,g,b,a] = vis.rgba( [i*360/@width, j*360/@height, rad ] )
         emit( r, g, b, 1 )
       else
         emit( 0, 0, 0, 0 )

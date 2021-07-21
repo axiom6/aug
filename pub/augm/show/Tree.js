@@ -1,6 +1,8 @@
 var Tree;
 
-import Vis from '../../../lib/pub/draw/Vis.js';
+import {
+  vis
+} from '../../../lib/pub/draw/Vis.js';
 
 Tree = class Tree {
   constructor(svgMgr, mix) {
@@ -140,7 +142,7 @@ Tree = class Tree {
   iconUnicode(d) {
     var icon;
     icon = d.data.icon != null ? d.data.icon : 'fas fa-circle';
-    return Vis.unicode(icon);
+    return vis.unicode(icon);
   }
 
 };

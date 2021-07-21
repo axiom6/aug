@@ -1,6 +1,8 @@
 var Cube3D;
 
-import Vis from '../../../lib/pub/draw/Vis.js';
+import {
+  vis
+} from '../../../lib/pub/draw/Vis.js';
 
 import * as THREE from 'three';
 
@@ -22,7 +24,7 @@ Cube3D = class Cube3D {
     box.applyMatrix(Cube3D.matrix);
     Cube3D.matrix.makeTranslation(this.xyz[0], this.xyz[1], this.xyz[2]);
     box.applyMatrix(Cube3D.matrix);
-    hex = Vis.hex(this.hsv);
+    hex = vis.hex(this.hsv);
     col = new THREE.Color(hex); // blemding:THREE
     mat = new THREE.MeshPhongMaterial({
       color: col,

@@ -1,6 +1,8 @@
 var Link;
 
-import Vis from '../../../lib/pub/draw/Vis.js';
+import {
+  vis
+} from '../../../lib/pub/draw/Vis.js';
 
 Link = class Link {
   constructor(svgMgr) {
@@ -28,8 +30,8 @@ Link = class Link {
   link(x1, y1, x2, y2, n, fill) {
     var a1, a2, r;
     r = Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1)) / 2;
-    a1 = Vis.angleSvg(x2 - x1, y2 - y1);
-    a2 = Vis.angleSvg(x1 - x2, y1 - y2);
+    a1 = vis.angleSvg(x2 - x1, y2 - y1);
+    a2 = vis.angleSvg(x1 - x2, y1 - y2);
     this.linkBeg(x1, y1, a1, r, n, fill);
     this.linkEnd(x2, y2, a2, r, n, fill);
   }
@@ -45,7 +47,7 @@ Link = class Link {
     if (a1 === 0) {
       e1 += 360;
     }
-    this.radiate(this.g, x1, y1, r1, b1, e1, this.da, false, Vis.css([fill, 90, 90], 'ysv'));
+    this.radiate(this.g, x1, y1, r1, b1, e1, this.da, false, vis.css([fill, 90, 90], 'ysv'));
   }
 
   linkEnd(x2, y2, a2, r2, n, fill) {
@@ -59,21 +61,21 @@ Link = class Link {
     if (a2 === 0) {
       e2 += 360;
     }
-    this.radiate(this.g, x2, y2, r2, b2, e2, this.da, false, Vis.css([fill, 90, 90], 'ysv'));
+    this.radiate(this.g, x2, y2, r2, b2, e2, this.da, false, vis.css([fill, 90, 90], 'ysv'));
   }
 
   link2(x1, y1, x2, y2, n, fill) {
     var a1, a2, b1, b2, e1, e2, n2, r;
     r = Math.sqrt((y2 - y1) * (y2 - y1) + (x2 - x1) * (x2 - x1)) / 2;
     n2 = Math.floor(n / 2);
-    a1 = Vis.angleSvg(x2 - x1, y2 - y1);
+    a1 = vis.angleSvg(x2 - x1, y2 - y1);
     b1 = a1 - this.da * n2;
     e1 = a1 + this.da * n2 + 1;
-    a2 = Vis.angleSvg(x1 - x2, y1 - y2);
+    a2 = vis.angleSvg(x1 - x2, y1 - y2);
     b2 = a2 - this.da * n2;
     e2 = a2 + this.da * n2 + 1;
-    this.radiate(this.g, x1, y1, r, b1, e1, this.da, false, Vis.css([fill, 90, 90], 'ysv'));
-    this.radiate(this.g, x2, y2, r, b2, e2, this.da, false, Vis.css([fill, 90, 90], 'ysv'));
+    this.radiate(this.g, x1, y1, r, b1, e1, this.da, false, vis.css([fill, 90, 90], 'ysv'));
+    this.radiate(this.g, x2, y2, r, b2, e2, this.da, false, vis.css([fill, 90, 90], 'ysv'));
   }
 
   strokeOpp(ang) {
@@ -82,7 +84,7 @@ Link = class Link {
     if (hue < 0) {
       hue = 360 + hue;
     }
-    return [Vis.css([hue, 50, 80]), hue];
+    return [vis.css([hue, 50, 80]), hue];
   }
 
   inEast(ang) {
@@ -174,9 +176,9 @@ Link = class Link {
       }
       hue = 0;
       stroke = toHue;
-      if (Vis.isFunction(toHue)) {
+      if (vis.isFunction(toHue)) {
         hue = toHue(ang);
-        stroke = Vis.css([hue, 50, 80]);
+        stroke = vis.css([hue, 50, 80]);
       }
       this.path(g, stroke, ang, hue, this.cubic(x0, y0, x1, y1, x2, y2, x, yy));
     }
@@ -184,8 +186,8 @@ Link = class Link {
 
   xy(ang, x0, y0, r) {
     var cos, sin, x, y;
-    cos = Vis.cosSvg(ang);
-    sin = Vis.sinSvg(ang);
+    cos = vis.cosSvg(ang);
+    sin = vis.sinSvg(ang);
     if (this.inEast(ang)) {
       cos = 1;
     }

@@ -65,14 +65,14 @@ class Tester extends Spec
   # -- test --
   #
   #   import { test } from "../test/Tester.js"
-  #   import Vis      from "../draw/Vis.js"
+  #   import { vis  } from '../draw//Vis.js'
 
   #   test(  "2 + 3 = 5", (t) ->                # closure form
   #     t.eq( 2 + 3,  5 ) )
   #
   #   test(  "2 + 3 = 5", 2 + 3, 5 )            # Direct result and expect arguments
   #
-  #   test( "Vis.rgb() converts hex color to rgb object",  Vis.rgb(0xFFFFFF), {r:255,g:255,b:255} )
+  #   test( "vis.rgb() converts hex color to rgb object",  vis.rgb(0xFFFFFF), {r:255,g:255,b:255} )
   test:( args... ) =>
     return @  if args.length is 0 or @testingOff()
     @argums = @toArgums(args[0])

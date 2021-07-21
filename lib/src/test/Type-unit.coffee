@@ -2,7 +2,7 @@
 import { type }         from "./Type.js"
 import { test, tester } from "./Tester.js"
 import Stream           from "../util/Stream.js"
-#mport Vis              from '../draw/Vis.js'
+import { vis  } from '../draw//Vis.js'
 
 subjects   = ["TestStatus","TestString","TestSummary"]
 streamLog  = { subscribe:false, publish:false, subjects:subjects }

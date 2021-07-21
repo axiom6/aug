@@ -1,6 +1,8 @@
 var Hue;
 
-import Vis from '../../../lib/pub/draw/Vis.js';
+import {
+  vis
+} from '../../../lib/pub/draw/Vis.js';
 
 import Palettes from '../../../lib/pub/draw/Palettes.js';
 
@@ -245,7 +247,7 @@ Hue = class Hue extends Radar {
     for (hue = i = 0, ref = dh; ref !== 0 && (ref > 0 ? i < 360 : i > 360); hue = i += ref) {
       for (r = j = ref1 = r1, ref2 = r2, ref3 = dr; ref3 !== 0 && (ref3 > 0 ? j < ref2 : j > ref2); r = j += ref3) {
         sat = 0.3 + (r - r1) / (r2 - r1) * 0.7;
-        this.wedge(Vis.hex([hue, sat * 100, 100]), g, r, r + dr, hue - dh / 2, hue + dh / 2);
+        this.wedge(vis.hex([hue, sat * 100, 100]), g, r, r + dr, hue - dh / 2, hue + dh / 2);
       }
     }
     this.grid(dh, dr, -dh / 2, 360 - dh / 2);
@@ -253,7 +255,7 @@ Hue = class Hue extends Radar {
 
   paletteWedges(dh, dr, r1, r2) {
     var c, g, i, j, len, len1, palette, r, ref, ref1;
-    Vis.noop(r2);
+    vis.noop(r2);
     g = this.g.selectAll("g").append("svg:g");
     ref = this.palettes;
     for (i = 0, len = ref.length; i < len; i++) {

@@ -1,5 +1,5 @@
 
-import Vis  from '../../../lib/pub/draw/Vis.js'
+import {vis} from '../../../lib/pub/draw/Vis.js'
 
 
 class Axes
@@ -97,8 +97,8 @@ class Axes
 
   xLines:( elem, xb, xe, dx, y1, y2, stroke, thick ) ->
     i  = 1
-    x1 = Vis.floor( xb, dx )
-    x2 = Vis.ceil(  xe, dx )
+    x1 = vis.floor( xb, dx )
+    x2 = vis.ceil(  xe, dx )
     x  = x1
     while( x <= x2 )
       @line( elem, x, y1, x, y2, stroke, thick )
@@ -106,8 +106,8 @@ class Axes
 
   yLines:( elem, yb, ye, dy, x1, x2, stroke, thick ) ->
     i  = 1
-    y1 = Vis.floor( yb, dy )
-    y2 = Vis.ceil(  ye, dy )
+    y1 = vis.floor( yb, dy )
+    y2 = vis.ceil(  ye, dy )
     y  = y1
     while( y <= y2 )
       @line( elem, x1, y, x2, y, stroke, thick )

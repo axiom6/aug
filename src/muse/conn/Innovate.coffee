@@ -1,6 +1,6 @@
 
 import * as d3 from 'd3'
-import Vis     from '../../../lib/pub/draw/Vis.js'
+import {vis}   from '../../../lib/pub/draw/Vis.js'
 
 class Innovate
 
@@ -14,7 +14,7 @@ class Innovate
     @stroke = 'black'
 
   drawSvg:( g, size, defs ) ->
-    Vis.noop( defs )
+    vis.noop( defs )
     @lay       = @shapes.layout( size, @spec.column, @shapes.size(@studies), @shapes.size(@studies) )
     @rings( g, size )
     switch @spec.row
@@ -35,9 +35,9 @@ class Innovate
     xi = if size.level is 'Comp' then  t*1.70 else t*2.5
     xt = xi + size.ringIcon * 0.8
     y  = if size.level is 'Comp' then  t*2.1  else 18*size.scaleFont
-    uc = Vis.unicode( @spec.icon )
+    uc = vis.unicode( @spec.icon )
     # console.log( 'Innovate.rings()', { t:t, wr:wr, hr:hr, xt:xt, yt:yt } )
-    colorRing = Vis.str( [70,55,70] )
+    colorRing = vis.css( [70,55,70] )
     colorBack = 'rgba(97, 56, 77, 1.0 )'
     h2 = Math.max(size.h-t*2,t)
     h5 = Math.max(size.h-t*5,t)
@@ -135,7 +135,7 @@ class Innovate
     yt     = if size.level is 'Comp' then y+10 else y+4.5*size.scaleFont
     yi     = if size.level is 'Comp' then y-2  else y-2.0*size.scaleFont
     fill  = @shapes.toFill(study)
-    uc    = Vis.unicode( study.icon )
+    uc    = vis.unicode( study.icon )
     # console.log( 'Innovate.hexStudy()', study.icon, uc )
     @hexPath( fill,       g, x, y,  @shapes.htmlId( study.name, 'HexPath' ) )
     @hexText( study.name, g, x, yt, @shapes.htmlId( study.name, 'HexText' ), size.dispSize )
@@ -158,12 +158,12 @@ class Innovate
 
   line:() =>
     d3.line()
-      .x( (ang) => @r * Vis.cosSvg(ang) + @xh )
-      .y( (ang) => @r * Vis.sinSvg(ang) + @yh )
+      .x( (ang) => @r * vis.cosSvg(ang) + @xh )
+      .y( (ang) => @r * vis.sinSvg(ang) + @yh )
 
   hexPath:( fill, g, x0, y0, pathId ) ->
-    xp = (ang) => @r * Vis.cosSvg(ang) + x0
-    yp = (ang) => @r * Vis.sinSvg(ang) + y0
+    xp = (ang) => @r * vis.cosSvg(ang) + x0
+    yp = (ang) => @r * vis.sinSvg(ang) + y0
     path = d3.path()
     path.moveTo( xp(0),   yp(0) )
     path.lineTo( xp(ang), yp(ang) ) for ang in [60,120,180,240,300,360]

@@ -1,5 +1,5 @@
 
-import Vis     from '../../../lib/pub/draw/Vis.js'
+import {vis}   from '../../../lib/pub/draw/Vis.js'
 import Convey  from './Convey.js'
 import * as d3 from 'd3' # '../../../pub/lib/d3/d3.5.9.0.esm.js';
 
@@ -7,7 +7,7 @@ class Shapes
 
   constructor: ( @stream ) ->
     @cos30  = 0.86602540378
-    #@cos15 = Vis.cos(15)
+    #@cos15 = vis.cos(15)
     @fontText = "Roboto"
 
   rectGrad:( g, defs, xc, yc, w, h, fill, stroke, text ) ->
@@ -16,7 +16,7 @@ class Shapes
     @rectCenter( g, xc, yc, w*1.3, h*1.3, fill, stroke, 0.3 )
     @rectCenter( g, xc, yc, w*1.2, h*1.2, fill, stroke, 0.4 )
     @rectCenter( g, xc, yc, w*1.1, h*1.1, fill, stroke, 0.5 )
-    @rectCenter( g, xc, yc,  w,        h,       fill, stroke, 0.6, text )
+    @rectCenter( g, xc, yc, w,     h,     fill, stroke, 0.6, text )
     return
 
   rectCenter:( g, xc, yc, w, h, fill, stroke, opacity, text='' ) ->
@@ -28,7 +28,7 @@ class Shapes
     hsv = if darken then [hsv[0],hsv[1],hsv[2]*0.75] else hsv # [hsv[0],60,30]
     # console.log( 'Shapes.toFill()', studyPrac.hsv, hsv ) if darken
     if studyPrac.hsv?  and studyPrac.hsv.length is 3
-      Vis.str( hsv )
+      vis.css( hsv )
     else
       console.error( 'Shapes.toFill() unknown fill code', { name:studyPrac.name, fill:studyPrac.fill, spec:studyPrac } )
       '#888888'
@@ -40,17 +40,17 @@ class Shapes
     studies
 
   key:( prac, dir ) ->
-    for key, study of prac when Vis.isChild(key) and study.dir is dir
+    for key, study of prac when vis.isChild(key) and study.dir is dir
       return key
     '???'
 
   obj:( prac, dir ) ->
-    for key, study of prac when Vis.isChild(key) and study.dir is dir
+    for key, study of prac when vis.isChild(key) and study.dir is dir
       return study
     {}
 
   htmlId:( pracName, contentName ) ->
-    Vis.getHtmlId( pracName, 'Info', contentName ) # @ui.plane.id
+    vis.getHtmlId( pracName, 'Info', contentName ) # @ui.plane.id
 
   size:( obj ) ->
     if obj? then Object.keys(obj).length else 0
@@ -108,12 +108,12 @@ class Shapes
     arc  = d3.arc().innerRadius(r1).outerRadius(r2).startAngle(@radD3(a1)).endAngle(@radD3(a2))
     #console.log( 'Shape.wedge()', { x0:x0, y0:y0 } )
     g.append("svg:path").attr("d",arc).attr("fill",fill).attr("stroke","none")
-      .attr("transform", Vis.translate(x0,y0) )
+      .attr("transform", vis.translate(x0,y0) )
     @wedgeText( g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize, level  )
     return
 
   wedgeText:( g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize, level='none' ) ->
-    Vis.noop( wedgeId )
+    vis.noop( wedgeId )
     th = 14
     at = (a1+a2)/2
     rt = (r1+r2)/2
@@ -130,7 +130,7 @@ class Shapes
       # console.log( 'Shapes.wedgeText() 2', text, level, sc, rt )
     x  = x0 + rt * @cos(at)
     y  = y0 + rt * @sin(at)
-    path = g.append("svg:text").text(text).attr("x",x).attr("y",y).attr("transform", Vis.rotate(as,x,y) )
+    path = g.append("svg:text").text(text).attr("x",x).attr("y",y).attr("transform", vis.rotate(as,x,y) )
             .attr("text-anchor","middle").attr("font-size",fontSize)
             .attr("font-family",@fontText).attr("font-weight","bold")
             .attr('fill','#000000' ) # @textFill(fill))
@@ -268,7 +268,7 @@ class Shapes
     h    = if size.level is 'Comp' then size.ringSize * 0.55 else size.ringSize * 1.3
     x0   = size.xc  -  w * 0.5
     y0   = if dir is 'south' then size.h  - h else 0
-    fill = Vis.str( hsv )
+    fill = vis.css( hsv )
     @rect( g, x0, y0, w, h, fill, 'none' )
     return
 
@@ -277,8 +277,8 @@ class Shapes
   #degSVG:( deg ) -> 360-deg
   radD3:( deg )  -> (450-deg) * Math.PI / 180.0
   #degD3:( rad )  -> -rad * 180.0 / Math.PI
-  cos:( deg )    -> Vis.cosSvg(deg)
-  sin:( deg )    -> Vis.sinSvg(deg)
+  cos:( deg )    -> vis.cosSvg(deg)
+  sin:( deg )    -> vis.sinSvg(deg)
 
   gradientDef:( defs, id, color1, color2, x1='0%', x2='100%', y1='0%', y2='100%' ) ->
     grad = defs.append("svg:linearGradient")

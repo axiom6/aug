@@ -2,7 +2,9 @@ var AdvisoryUC;
 
 import $ from 'jquery';
 
-import Vis from '../../../lib/pub/draw/Vis.js';
+import {
+  vis
+} from '../../../lib/pub/draw/Vis.js';
 
 AdvisoryUC = class AdvisoryUC {
   constructor(stream, role, port, land) {
@@ -31,15 +33,15 @@ AdvisoryUC = class AdvisoryUC {
   }
 
   onLocation(location) {
-    return Util.noop('AdvisoryUC.onLocation()', this.ext, location);
+    return vis.noop('AdvisoryUC.onLocation()', this.ext, location);
   }
 
   onScreen(screen) {
-    return Util.cssPosition(this.$, screen, this.port, this.land);
+    return vis.cssPosition(this.$, screen, this.port, this.land);
   }
 
   html() {
-    return `<div id="${Vis.htmlId('AdvisoryUC', this.role)}" class="${Vis.cssNameType('AdvisoryUC')}"></div>`;
+    return `<div id="${vis.htmlId('AdvisoryUC', this.role)}" class="${vis.cssNameType('AdvisoryUC')}"></div>`;
   }
 
 };

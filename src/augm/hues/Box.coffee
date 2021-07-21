@@ -1,5 +1,5 @@
 
-import Vis      from '../../../lib/pub/draw/Vis.js'
+import {vis}     from '../../../lib/pub/draw/Vis.js'
 import MBox     from './MBox.js'
 import Coord    from './Coord.js'
 import Color    from './Color.js'
@@ -28,8 +28,8 @@ class  Box
     mbox   = new MBox( elem )
     coord  = new Coord( mbox, 8, 20, 20 )
     view   = coord.polar()
-    coord.cylVolume(  view, Vis.rgba )
-    coord.cylSurface( view, Vis.rgba , mbox.sin06F )
+    coord.cylVolume(  view )
+    coord.cylSurface( view , mbox.sin06F )
 
   @doRegress:( elem ) ->
     mbox     = new MBox( elem )
@@ -40,7 +40,7 @@ class  Box
     mbox   = new MBox( elem )
     coord  = new Coord( mbox, 12, 60, 10 )
     view   = coord.sphere()
-    coord.sphVolume( view, Vis.sphere )
+    coord.sphVolume( view, vis.sphere )
 
   @doHcs:( elem ) ->
     mbox   = new MBox( elem )
@@ -48,7 +48,7 @@ class  Box
     color  = new Color( mbox )
     view   = coord.polar()
     color.genWithHcs( coord, view )
-    coord.cylSurface( view, Vis.rgba, mbox.sin06F )
+    coord.cylSurface( view, mbox.sin06F )
 
   @doVecs:( elem, see ) ->
     mbox   = new MBox(  elem )
@@ -75,14 +75,14 @@ class  Box
     s   = 100
     c   = 100
     for hue in [0,60,120,180,240,300]
-        console.log( 'RgbHsv', { hue:hue, c:c, s:s }, Vis.rgba( [hue, c, s] ) )
+        console.log( 'RgbHsv', { hue:hue, c:c, s:s }, vis.css( [hue, c, s] ) )
     for hue in [0,60,120,180,240,300]
       for c   in [0,20,40,60,80,100]
-        console.log( 'RgbHsv', { hue:hue, c:c, s:s }, Vis.rgba( [hue, c, s] ) )
+        console.log( 'RgbHsv', { hue:hue, c:c, s:s }, vis.css( [hue, c, s] ) )
 
   ###
   @init = () ->
-    Vis.ready ->
+    vis.ready ->
       elem = document.querySelector('#App')
       Box.doApp('Color', elem )
       return

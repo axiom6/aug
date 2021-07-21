@@ -1,6 +1,8 @@
 var Radar;
 
-import Vis from '../../../lib/pub/draw/Vis.js';
+import {
+  vis
+} from '../../../lib/pub/draw/Vis.js';
 
 Radar = class Radar {
   constructor(svgMgr, name2, mix) {
@@ -56,9 +58,9 @@ Radar = class Radar {
     this.r80 = this.outer * 0.8;
     this.r90 = this.outer * 0.9;
     this.r100 = this.outer * 1.0;
-    this.s2 = Math.sin(Vis.rad(60));
+    this.s2 = Math.sin(vis.rad(60));
     this.r2 = this.s2 * this.s2 * 60.0;
-    this.p60 = -Math.sin(Vis.rad(60));
+    this.p60 = -Math.sin(vis.rad(60));
     if (this.r20 === false && this.r30 === false && this.r50 === false && this.r90 === false) {
       ({});
     }
@@ -96,12 +98,12 @@ Radar = class Radar {
   }
 
   doQuads(quads) {
-    this.quads(Vis.toArray(quads), this.r08, this.r100);
+    this.quads(vis.toArray(quads), this.r08, this.r100);
     this.circles(this.criterias);
   }
 
   doTechs(techs) {
-    this.pts(Vis.toArray(techs));
+    this.pts(vis.toArray(techs));
   }
 
   attrG(g) {
@@ -366,7 +368,7 @@ Radar = class Radar {
   }
 
   angleQuad(ang) {
-    if (Vis.within(0, ang, 180)) {
+    if (vis.within(0, ang, 180)) {
       return -ang + 90;
     } else {
       return -ang - 90;

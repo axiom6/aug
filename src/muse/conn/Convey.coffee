@@ -1,7 +1,7 @@
 
 import * as d3 from 'd3'
 import {sankey}  from 'd3-sankey';
-import Vis     from '../../../lib/pub/draw/Vis.js'
+import {vis}    from '../../../lib/pub/draw/Vis.js'
 
 class Convey
 
@@ -61,7 +61,7 @@ class Convey
     node = @gc.append("g").selectAll(".node")
       .data(graph.nodes).enter()
       .append("g").attr("class", "node")
-      .attr("transform", (d) -> Vis.translate( d.x0,  d.y0 ) )
+      .attr("transform", (d) -> vis.translate( d.x0,  d.y0 ) )
     node.append("rect").attr("height", (d) ->  d.y1 - d.y0 )
       .attr("width", @sankeyc.nodeWidth())
       .attr("fill",   (d) => d.color )

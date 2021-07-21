@@ -1,11 +1,14 @@
 
-import Util       from '../util/Util.js'
-import { tester } from '../test/tester.js'
-import FontAwe    from './FontAwe.js'
+import Type     from '../test/Type.js'
+import FontAwe  from './FontAwe.js'
 
-class Vis
+class Vis extends Type
 
-  Vis.debug = false
+  constructor:() ->
+    super()
+    @skipReady   = false
+    @time        = 0
+    @uniqueIdExt = ''
   
   # --- Color Spaces  ---
   # RGB - that also works a RGBa with a:1.0 as a default or can be provided in objects or arrays
@@ -23,49 +26,56 @@ class Vis
   #   When arg is an array with length === 4 then it is assumed values  are hsv
   #     with hue as RGB red=0deg, green=120deg and blue=240deg
   #   When arg is a number the range expressed hex is 0x000000 to 0xFFFFFF
-  @rgb:( arg ) ->
+  rgb:( arg ) ->
     rgb = { r:255, g:255, b:255, a:1.0 } # default is white with alpha = 1.0 opaque
-    if tester.isObject(arg)
+    if @isObject(arg)
       rgb   = arg
       rgb.a = if arg.a? then arg.a else 1.0
-    else if tester.isArray(arg)
+    else if @isArray(arg)
       isRYGB = arg.length is 3  # 3 implies RYGB hue while 4 implies RGB hue
-      rgb   = Vis.rgbHsv( arg[0], arg[1], arg[2], isRYGB )
-      rgb.a = if arg.length is 4 then arg[3] else 1.0
+      rgb    = @rgbHsv( arg[0], arg[1], arg[2], isRYGB ) 
+      rgb.a  = arg[3] if arg.length is 4
       console.log( 'Vis.rgb()', { arg:arg, rgb:rgb, isRYGB:isRYGB } ) if @debug
-    else if tester.isNumber(arg)
+    else if @isNumber(arg)
       rgb = { r:(arg & 0xFF0000) >> 16,   g:(arg & 0x00FF00) >> 8,  b:arg & 0x0000FF }
       rgb.a = 1.0
-    Vis.round(rgb)
+    @round(rgb)
 
   # Returns an rgb array with an alpha or full opacity of 1
-  @rgba:( arg ) ->
-    rgb = Vis.rgb( arg )
-    [ rgb.r, rgb.g, rgb.b, rgb.a ]  # Vis.rgb( arg ) always returns an a: or alpha
+  rgba:( arg ) ->
+    rgb   = @rgb( arg )
+    rgb.a = 1.0 if not rgb.a?
+    [ rgb.r, rgb.g, rgb.b, rgb.a ]
 
   # Returns a number that is interpreted as hex like 0xFFFFFF
   #   Recommended for most libraries like Three.js
-  @hex:( arg ) ->
-    rgb = Vis.rgb( arg )
-    rgb.r * 65536 + rgb.g * 256 + rgb.b # 65536 is 16 to the fourth power and 256 is 16 squared
+  # 65536 is 16 to the fourth power and 256 is 16 squared
+  # Need to figure out how to generate an actual value not string in hex
+  hex:( arg ) ->
+    rgb = @rgb( arg )
+    rgb.r * 65536 + rgb.g * 256 + rgb.b
 
-  # Returns a number in hex format like '0xFFFFFF'. Go for debugging
-  @str:( arg ) ->
-    rgb  = Vis.rgb( arg )
+  # Returns a number in hex format like '0xFFFFFF'
+  # Good for debugging
+  # Only use for hex strings.
+  # Do not use for hex values in style
+  str:( arg ) ->
+    rgb  = @rgb( arg )
     str  = '0x'
-    str += if rgb.r is 0 then '00' else Vis.strHex(rgb.r)
-    str += if rgb.g is 0 then '00' else Vis.strHex(rgb.g)
-    str += if rgb.b is 0 then '00' else Vis.strHex(rgb.b)
+    str += @strHex(rgb.r)
+    str += @strHex(rgb.g)
+    str += @strHex(rgb.b)
     str
 
   # returns a css string in rgb format
-  @css:( arg  ) ->
-    rgb  = Vis.rgb( arg )
-    """rgba(#{rgb.r},#{rgb.g},#{rgb.b},#{rgb.a})"""
+  # Recommended for all style in Vue and Svg
+  css:( arg  ) ->
+    rgb  = @rgb( arg )
+    """rgb(#{rgb.r},#{rgb.g},#{rgb.b})"""
 
   # Returns hsv when toRYGB=false or ysv when toRYGB=true
-  @cyl:( arg, toRYGB=false ) ->
-    rgb  = Vis.rgb( arg )
+  cyl:( arg, toRYGB=false ) ->
+    rgb  = @rgb( arg )
     R = rgb.r
     G = rgb.g
     B = rgb.b
@@ -73,29 +83,29 @@ class Vis
     r = R/sum; g = G/sum; b = B/sum
     v = sum / 3
     s = if R is G and G is B then 0 else 1 - 3 * Math.min(r,g,b) # Center Grayscale
-    a = Vis.deg( Math.acos( ( r - 0.5*(g+b) ) / Math.sqrt((r-g)*(r-g)+(r-b)*(g-b)) ) )
+    a = @deg( Math.acos( ( r - 0.5*(g+b) ) / Math.sqrt((r-g)*(r-g)+(r-b)*(g-b)) ) )
     h = if b <= g then a else 360 - a
     h = 0 if s is 0
-    H = if toRYGB then Vis.rygbHue(h) else h
+    H = if toRYGB then @rygbHue(h) else h
     [ H, s*100, v/2.55 ]
 
-  @hsv:( arg ) ->
-    Vis.cyl( arg, false )
+  hsv:( arg ) ->
+    @cyl( arg, false )
 
   # Returns an  array with hue in rygb coords
   # RYGB red=0deg, yellow=90deg green=180deg and blue=270deg
-  @ysv:( arg ) ->
-    Vis.cyl( arg, true )
+  ysv:( arg ) ->
+    @cyl( arg, true )
 
   ###
-  @hcl:( arg ) ->
-    rgb  = Vis.rgb( arg )
+  hcl:( arg ) ->
+    rgb  = @rgb( arg )
     R = rgb.r
     G = rgb.g
     B = rgb.b
     a   = 3 * ( Math.min(R,G,B) / Math.max(R,G,B) ) / 100
     q    = Math.exp( a )
-    h180   = Vis.deg( Math.atan2( G - B, R - G ) )
+    h180   = @deg( Math.atan2( G - B, R - G ) )
     H   = if h180 < 0 then 360 + h180 else h180
     C   = q * ( Math.abs(R−G) + Math.abs(G−B) + Math.abs(B−R) ) / 3
     L   = q *Math.max(R,G,B) + (1-q) * Math.min(R, G,B)  / 2
@@ -103,21 +113,26 @@ class Vis
   ###
 
   # Need to chech output format
-  @sphere:( hue, phi, rad ) ->
-    Vis.rgba( [Vis.rot(hue,90), 100*Vis.sin(phi), 100*rad ] )
-    
-  @strHex:( num ) ->
-    `num.toString(16).toUpperCase()` # Uses ` ` to fake out CoffeeScript code inspector
+  sphere:( hue, phi, rad ) ->
+    @rgba( [@rot(hue,90), 100*@sin(phi), 100*rad ] )
+
+  # Uses ` ` to fake out CoffeeScript code inspector
+  strHex:( num ) ->
+    str = `num.toString(16).toUpperCase()`
+    switch
+      when num is  0 then '00'
+      when num <  16 then '0' + str
+      else                str
 
   # Rounds and scales rgb value to ints between 0 to 255
-  @round:( rgb, scale=1 ) ->
+  round:( rgb, scale=1 ) ->
     rgb.a = if rgb.a? then rgb.a else 1.0
     { r:Math.round(rgb.r*scale), g:Math.round(rgb.g*scale), b:Math.round(rgb.b*scale), a:rgb.a }
 
   # Converts hues in 'ysv' RYGB range to 'hsv' and 'hsl' rgb hue
   #   'rygb' has red=0deg, yellow=90deg green=180deg and blue=270deg
   #   'rgb'  has red=0deg,              green=120deg and blue=240deg
-  @rgbHue:( rygbHue ) ->
+  rgbHue:( rygbHue ) ->
     rgbHue = 0
     if        0 <= rygbHue and rygbHue <  90 then rgbHue =        rygbHue      *  60 / 90
     else if  90 <= rygbHue and rygbHue < 180 then rgbHue =  60 + (rygbHue- 90) *  60 / 90
@@ -128,7 +143,7 @@ class Vis
   # Converts hues in 'hsv' or 'hsl' RGB hue to 'tsv' RYGB range
   #   'rgb'  has red=0deg,              green=120deg and blue=240deg
   #   'rygb' has red=0deg, yellow=90deg green=180deg and blue=270deg
-  @rygbHue:( rgbHue ) ->
+  rygbHue:( rgbHue ) ->
     rygbHue = 0
     if        0 <= rgbHue and rgbHue < 120 then rygbHue =        rgbHue      *  90 /  60
     else if 120 <= rgbHue and rgbHue < 240 then rygbHue = 180 + (rgbHue-120) *  90 / 120
@@ -136,10 +151,10 @@ class Vis
     rygbHue
 
   # toRygb=true is 'ysc' while
-  @rgbHsv:( H, S, V, isRYGB ) ->
-    h = if isRYGB then Vis.rgbHue(H) else H
+  rgbHsv:( H, S, V, isRYGB ) ->
+    h = if isRYGB then @rgbHue(H) else H
     d = S * 0.01
-    c = d # 1.0 # Vis.sigmoidal( d, 2, 0.25 )
+    c = d # 1.0 # @sigmoidal( d, 2, 0.25 )
     i = Math.floor( h / 60 )
     f = h / 60 - i
     x = 1 - c
@@ -152,11 +167,11 @@ class Vis
       when 3 then { r:x, g:y, b:1 }
       when 4 then { r:z, g:x, b:1 }
       when 5 then { r:1, g:x, b:y }
-    Vis.round( rgb, 255 * V / 100 )
+    @round( rgb, 255 * V / 100 )
 
-  # Standalone since HSV is not detected by Vis.rgb( arg )
-  @rgbHsl:( H, s, l, isRYGB ) ->
-    h = if isRYGB then Vis.rgbHue(H) else H
+  # Standalone since HSV is not detected by @rgb( arg )
+  rgbHsl:( H, s, l, isRYGB ) ->
+    h = if isRYGB then @rgbHue(H) else H
     i = Math.floor( h / 60 )
     f = h / 60 - i
     p = l * (1 - s)
@@ -170,108 +185,109 @@ class Vis
       when 3 then { r:p, g:q, b:v }
       when 4 then { r:t, g:p, b:v }
       when 5 then { r:v, g:p, b:q }
-    Vis.round( rgb, 255 )
+    @round( rgb, 255 )
 
-  @sigmoidal:( x, k, x0=0.5, L=1 ) ->
+  sigmoidal:( x, k, x0=0.5, L=1 ) ->
     L / ( 1 + Math.exp(-k*(x-x0)) )
 
-  @interpolateRgb:( rgb1, r1, rgb2, r2 ) ->
+  interpolateRgb:( rgb1, r1, rgb2, r2 ) ->
     { r:rgb1.r * r1 + rgb2.r * r2, g:rgb1.g * r1 + rgb2.g * r2, b:rgb1.b * r1 + rgb2.b * r2 }
 
   # --- Degrees and Radians ---
   #  The svg functions deal with the svg convention where the y 90 degree axis points down
 
-  @rad:( deg ) -> deg * Math.PI / 180
-  @deg:( rad ) -> rad * 180 / Math.PI
-  @sin:( deg ) -> Math.sin(Vis.rad(deg))
-  @cos:( deg ) -> Math.cos(Vis.rad(deg))
+  rad:( deg ) -> deg * Math.PI / 180
+  deg:( rad ) -> rad * 180 / Math.PI
+  sin:( deg ) -> Math.sin(@rad(deg))
+  cos:( deg ) -> Math.cos(@rad(deg))
 
-  @rot:( deg, ang ) ->
+  rot:( deg, ang ) ->
     a = deg+ang
     a = a + 360 if a < 0
     a
 
-  @svgDeg:( deg ) -> 360-deg
-  @svgRad:( rad ) -> 2*Math.PI-rad
+  svgDeg:( deg ) -> 360-deg
+  svgRad:( rad ) -> 2*Math.PI-rad
 
-  @radSvg:( deg ) -> Vis.rad(360-deg)
-  @degSvg:( rad ) -> Vis.deg(2*Math.PI-rad)
-  @sinSvg:( deg ) -> Math.sin(Vis.radSvg(deg))
-  @cosSvg:( deg ) -> Math.cos(Vis.radSvg(deg))
+  radSvg:( deg ) -> @rad(360-deg)
+  degSvg:( rad ) -> @deg(2*Math.PI-rad)
+  sinSvg:( deg ) -> Math.sin(@radSvg(deg))
+  cosSvg:( deg ) -> Math.cos(@radSvg(deg))
 
   # --- Math Utilities ---
 
-  @floor:( x, dx )          ->  dr = Math.round(dx); Math.floor( x / dr ) * dr
-  @ceil:(  x, dx )          ->  dr = Math.round(dx); Math.ceil(  x / dr ) * dr
-  @within:( beg, deg, end ) -> beg   <= deg and deg <= end # Closed interval with <=
-  @isZero:( v )             -> -0.01 <  v   and v   <  0.01
-  @inStr:( s, e )           -> tester.inStr( s, e )
-  @isChild:( key )          -> tester.isChild( key )
-  @isFunction:(  f   )      -> tester.isFunction( f )
-  @toInt:(arg)              -> tester.toInt(arg)
-  @toFixed:(arg,dec)        -> tester.toInt(arg,dec)
-  @toArray:(arg)            -> tester.toArray(arg)
-  @noop:(args...)           -> tester.noop(args)
+  floor:( x, dx )          ->  dr = Math.round(dx); Math.floor( x / dr ) * dr
+  ceil:(  x, dx )          ->  dr = Math.round(dx); Math.ceil(  x / dr ) * dr
+  @ithin:( beg, deg, end ) -> beg   <= deg and deg <= end # Closed interval with <=
+  isZero:( v )             -> -0.01 <  v   and v   <  0.01
 
-  @hasGlobal:( global, issue=true ) ->
+
+  hasGlobal:( global, issue=true ) ->
     has = window[global]?
     console.error( "Vis.hasGlobal() #{global} not present" )  if not has and issue
     has
 
-  @getGlobal:( global, issue=true ) ->
-    if Vis.hasGlobal( global, issue ) then window[global] else null
+  getGlobal:( global, issue=true ) ->
+    if @hasGlobal( global, issue ) then window[global] else null
 
-  @ready:( fn ) ->
+  ready:( fn ) ->
     switch fn
      when  not @isFunction( fn )  then return               # Sanity check
-     when  Vis.skipReady            then fn()
+     when  @skipReady            then fn()
      when  document.readyState is 'complete' then fn() # If document is already loaded, run method
      else  document.addEventListener( 'DOMContentLoaded', fn, false )
     return
 
-  @getHtmlId:( name, type='', ext='' ) ->
-    id = name + type + ext + Vis['uniqueIdExt']
+  getHtmlId:( name, type='', ext='' ) ->
+    id = name + type + ext + @uniqueIdExt
     id.replace( /[ \.]/g, "" )
 
-  @cssNameType:( name, type='' ) -> name + type
+  cssNameType:( name, type='' ) -> name + type
 
   # --- Css Transforms ---  
 
-  @translate:( x0, y0 ) ->
-    Util.checkTypes('number',{x0:x0,y0:y0})
-    " translate( #{x0}, #{y0} )"
+  translate:( x0, y0 ) ->
+    if @isInTypeKeyArgs('number',x0,y0)
+      " translate( #{x0}, #{y0} )"
+    else
+      # toWarn(...)
+      " translate( #{0}, #{0} )"
 
-  @scale:( sx, sy )  ->
-    Util.checkTypes('number',{sx:sx,sy:sy})
-    " s( #{sx}, #{sy} )"
+  scale:( sx, sy )  ->
+    if @isInTypeKeyArgs('number',sx, sy)
+      " s( #{sx}, #{sy} )"
+    else
+      # toWarn(...)
+      " s( #{1}, #{1} )"
 
-  @rotate:( a, x, y ) ->
-    Util.checkTypes('number',{a:a,x:x,y:y})
-    " rotate(#{a} #{x} #{y} )"
+  rotate:( a, x, y ) ->
+    if @isInTypeKeyArgs('number',a, x, y )
+      " rotate(#{a} #{x} #{y} )"
+    else
+      # toWarn(...)
+      " rotate(#{0} #{0} #{0} )"
 
-  @translateScale:( x0, y0, sx, sy ) ->
-    Util.checkTypes('number',{x0:x0,y0:y0})
-    Util.checkTypes('number',{sx:sx,sy:sy})
-    " translate( #{x0}, #{y0} ) s( #{sx}, #{sy} )"
+  translateScale:( x0, y0, sx, sy ) ->
+    if @isInTypeKeyArgs('number',x0, y0, sx, sy)
+      " translate( #{x0}, #{y0} ) s( #{sx}, #{sy} )"
+    else
+      # toWarn(...)
+      " translate( #{0}, #{0} ) s( #{1}, #{1} )"
 
   # Font Awesome Unicode lookup
-  @unicode:( icon ) ->
+  unicode:( icon ) ->
     uc    = FontAwe.icons[icon]
     if not uc?
       console.error( 'Vis.unicode() missing icon in Vis.FontAwesomeUnicodes for', icon )
       uc = "\uf111" # Circle
     uc
 
-Vis.skipReady     =  false
-Vis.time          =  0
-Util.uniqueIdExt  = ''
-
-export default Vis
+export vis = new Vis()
 
 ###  HCL
   a   = 3 * ( Min(R,G,B) / Max(R,G,B) ) / 100
   q    = Math.exp( a )
-  h180   = Vis.deg( Math.atan2( G − B, R - G ) )
+  h180   = @deg( Math.atan2( G − B, R - G ) )
   H   = if h180 < 0 then 360 + h180 else h180
   C   = q * ( Math.abs(R−G) + Math.abs(G−B) + Math.abs(B−R) ) / 3
   L   = q*Math.max(R,G,B) + (1 − q)*Math.mim(R, G,B)  / 2

@@ -467,6 +467,15 @@ class Type
       #lse @isWarn( false, "arg #{arg} not 'array', 'enums' or 'string'", type, false )
       else false
 
+  isInTypeKey:( key, arg ) ->
+    type = @toType(arg)
+    if Type[key]? then Type[key].includes(type) else false
+
+  isInTypeKeyArgs:( key, args ) ->
+    isn = true
+    isn = isn and @isInTypeEnum(key,arg) for arg in args
+    isn
+
   toIn:( arg ) ->
     switch
       when  not  arg? then "||"
@@ -478,6 +487,7 @@ Type.undefs  = "|null|undefined|none|"
 Type.numbers = "|int|float|"
 Type.values  = "|string|int|float|boolean|"
 Type.manys   = "|object|array|"
+Type.basics  = "|string|int|float|boolean|object|array|"
 Type.ranges  = "|string|int|float|"
 Type.matches = "|regexp|range|enums|amy|"
 Type.results = "|string|int|float|boolean|array|object|enums|range|regexp|"

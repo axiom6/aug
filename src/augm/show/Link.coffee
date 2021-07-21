@@ -1,6 +1,6 @@
 
 
-import Vis  from '../../../lib/pub/draw/Vis.js'
+import {vis}  from '../../../lib/pub/draw/Vis.js'
 
 class Link
 
@@ -23,8 +23,8 @@ class Link
 
   link:( x1, y1, x2, y2, n, fill ) ->
     r  = Math.sqrt( (y2-y1)*(y2-y1) + (x2-x1)*(x2-x1) ) / 2
-    a1 = Vis.angleSvg( x2-x1, y2-y1 )
-    a2 = Vis.angleSvg( x1-x2, y1-y2 )
+    a1 = vis.angleSvg( x2-x1, y2-y1 )
+    a2 = vis.angleSvg( x1-x2, y1-y2 )
     @linkBeg( x1, y1, a1, r, n, fill )
     @linkEnd( x2, y2, a2, r, n, fill )
     return
@@ -35,7 +35,7 @@ class Link
     e1  = a1 + @da * n2 + 1
     b1 += 360 if a1 is 0
     e1 += 360 if a1 is 0
-    @radiate( @g, x1, y1, r1, b1, e1, @da, false, Vis.css([fill,90,90],'ysv') )
+    @radiate( @g, x1, y1, r1, b1, e1, @da, false, vis.css([fill,90,90],'ysv') )
     return
 
   linkEnd:( x2, y2, a2, r2, n, fill ) ->
@@ -44,27 +44,27 @@ class Link
     e2 = a2 + @da * n2 + 1
     b2 += 360 if a2 is 0
     e2 += 360 if a2 is 0
-    @radiate( @g, x2, y2, r2, b2, e2, @da, false, Vis.css([fill,90,90],'ysv') )
+    @radiate( @g, x2, y2, r2, b2, e2, @da, false, vis.css([fill,90,90],'ysv') )
     return
 
   link2:( x1, y1, x2, y2, n, fill ) ->
     r  = Math.sqrt( (y2-y1)*(y2-y1) + (x2-x1)*(x2-x1) ) / 2
     n2 = Math.floor( n/2 )
-    a1 = Vis.angleSvg( x2-x1, y2-y1 )
+    a1 = vis.angleSvg( x2-x1, y2-y1 )
     b1 = a1 - @da * n2
     e1 = a1 + @da * n2 + 1
-    a2 = Vis.angleSvg( x1-x2, y1-y2 )
+    a2 = vis.angleSvg( x1-x2, y1-y2 )
     b2 = a2 - @da * n2
     e2 = a2 + @da * n2 + 1
-    @radiate( @g, x1, y1, r, b1, e1, @da, false, Vis.css([fill,90,90],'ysv') )
-    @radiate( @g, x2, y2, r, b2, e2, @da, false, Vis.css([fill,90,90],'ysv') )
+    @radiate( @g, x1, y1, r, b1, e1, @da, false, vis.css([fill,90,90],'ysv') )
+    @radiate( @g, x2, y2, r, b2, e2, @da, false, vis.css([fill,90,90],'ysv') )
     return
 
 
   strokeOpp:( ang ) =>
     hue = 180-ang
     hue = 360+hue if hue < 0
-    [Vis.css( [hue,50,80] ), hue ]
+    [vis.css( [hue,50,80] ), hue ]
 
   inEast:(  ang ) -> (  0 <= ang and ang <=  45 ) or ( 315 <= ang and ang <= 360 )
   inNorth:( ang ) ->   45 <  ang and ang <  134
@@ -118,15 +118,15 @@ class Link
         y2  = (y0*pc+yy*(1-pc))
       hue    = 0
       stroke = toHue
-      if Vis.isFunction(toHue)
+      if vis.isFunction(toHue)
         hue    = toHue(ang)
-        stroke = Vis.css( [hue, 50, 80 ] )
+        stroke = vis.css( [hue, 50, 80 ] )
       @path( g, stroke, ang, hue, @cubic( x0, y0, x1, y1, x2, y2, x, yy ) )
     return
 
   xy:( ang, x0, y0, r ) ->
-    cos =  Vis.cosSvg(ang)
-    sin =  Vis.sinSvg(ang)
+    cos =  vis.cosSvg(ang)
+    sin =  vis.sinSvg(ang)
     cos =  1 if @inEast(  ang )
     cos = -1 if @inWest(  ang )
     sin = -1 if @inNorth( ang )

@@ -1,6 +1,8 @@
 var Axes;
 
-import Vis from '../../../lib/pub/draw/Vis.js';
+import {
+  vis
+} from '../../../lib/pub/draw/Vis.js';
 
 Axes = class Axes {
   constructor(svgMgr) {
@@ -115,8 +117,8 @@ Axes = class Axes {
   xLines(elem, xb, xe, dx, y1, y2, stroke, thick) {
     var i, results, x, x1, x2;
     i = 1;
-    x1 = Vis.floor(xb, dx);
-    x2 = Vis.ceil(xe, dx);
+    x1 = vis.floor(xb, dx);
+    x2 = vis.ceil(xe, dx);
     x = x1;
     results = [];
     while (x <= x2) {
@@ -129,8 +131,8 @@ Axes = class Axes {
   yLines(elem, yb, ye, dy, x1, x2, stroke, thick) {
     var i, results, y, y1, y2;
     i = 1;
-    y1 = Vis.floor(yb, dy);
-    y2 = Vis.ceil(ye, dy);
+    y1 = vis.floor(yb, dy);
+    y2 = vis.ceil(ye, dy);
     y = y1;
     results = [];
     while (y <= y2) {

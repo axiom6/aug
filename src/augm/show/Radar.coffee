@@ -1,5 +1,5 @@
 
-import Vis    from '../../../lib/pub/draw/Vis.js'
+import {vis}   from '../../../lib/pub/draw/Vis.js'
 
 class Radar
 
@@ -24,9 +24,9 @@ class Radar
     @r10    = @outer*0.1;  @r20 = @outer*0.2;  @r30 = @outer*0.3
     @r40    = @outer*0.4;  @r50 = @outer*0.5;  @r60 = @outer*0.6
     @r80    = @outer*0.8;  @r90 = @outer*0.9;  @r100= @outer*1.0
-    @s2     = Math.sin(  Vis.rad(60) )
+    @s2     = Math.sin(  vis.rad(60) )
     @r2     = @s2*@s2*60.0
-    @p60    = -Math.sin( Vis.rad(60) )
+    @p60    = -Math.sin( vis.rad(60) )
     if @r20 is false and @r30 is false and @r50 is false and @r90 is false then {}
     if @p60 is false and @r04 is false and @r10 is false then {}
     @attrG( @g )
@@ -44,12 +44,12 @@ class Radar
     return
 
   doQuads:( quads ) =>
-    @quads( Vis.toArray(quads), @r08, @r100 )
+    @quads( vis.toArray(quads), @r08, @r100 )
     @circles( @criterias )
     return
 
   doTechs:( techs ) =>
-    @pts( Vis.toArray(techs) )
+    @pts( vis.toArray(techs) )
     return
 
   attrG:( g ) =>
@@ -259,7 +259,7 @@ class Radar
   techTx:( tech ) -> @techId(tech) + "_tx"
 
   angleQuad:( ang ) ->
-    if Vis.within(0,ang,180) then -ang+90 else -ang-90
+    if vis.within(0,ang,180) then -ang+90 else -ang-90
 
   quadLine:( x1, y1, x2, y2, stroke ) ->
     @g.append("svg:line")

@@ -1,5 +1,5 @@
 
-import Vis from './Vis.js'
+import { vis  } from './Vis.js'
 
 class Palettes
   
@@ -7,7 +7,7 @@ class Palettes
 
     for group in Palettes.groupRgbs
       for color in group
-        color.rgb = Vis.rgb(color.hex)
+        color.rgb = vis.rgb(color.hex)
     return
 
   @findColor:( name ) ->
@@ -47,7 +47,7 @@ class Palettes
     array = []
     for group in Palettes.groups
       for color in group
-        hsv = Vis.hsv( color.hex )
+        hsv = vis.hsv( color.hex )
         str = """[#{hsv[0]},#{hsv[1]},#{hsv[2]}],"#{color.code}","#{color.hex}"\n """
         array.push(str)
     console.log(array)

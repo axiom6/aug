@@ -1,6 +1,6 @@
 
 import * as d3  from 'd3'
-import Vis      from './Vis.js'
+import { vis  } from '../draw//Vis.js'
 
 class SvgMgr
 
@@ -68,7 +68,7 @@ class SvgMgr
     return
 
   toFill:( hsv ) ->
-    Vis.str( hsv, 'ysv' )
+    vis.str( hsv, 'ysv' )
 
   clearSvg:() ->
     @svg.selectAll("*").remove()

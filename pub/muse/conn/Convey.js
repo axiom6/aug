@@ -6,7 +6,9 @@ import {
   sankey
 } from 'd3-sankey';
 
-import Vis from '../../../lib/pub/draw/Vis.js';
+import {
+  vis
+} from '../../../lib/pub/draw/Vis.js';
 
 Convey = class Convey {
   constructor(shapes, defs, g, x, y, w, h) {
@@ -82,7 +84,7 @@ Convey = class Convey {
   doNodes(graph) {
     var node;
     node = this.gc.append("g").selectAll(".node").data(graph.nodes).enter().append("g").attr("class", "node").attr("transform", function(d) {
-      return Vis.translate(d.x0, d.y0);
+      return vis.translate(d.x0, d.y0);
     });
     node.append("rect").attr("height", function(d) {
       return d.y1 - d.y0;

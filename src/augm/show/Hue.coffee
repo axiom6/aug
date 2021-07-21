@@ -1,5 +1,5 @@
 
-import Vis      from '../../../lib/pub/draw/Vis.js'
+import {vis}     from '../../../lib/pub/draw/Vis.js'
 import Palettes from '../../../lib/pub/draw/Palettes.js'
 import Radar    from './Radar.js'
 
@@ -74,12 +74,12 @@ class Hue extends Radar
     for hue in [0...360] by dh
       for r in [r1...r2] by dr
         sat = 0.3 + (r-r1) / (r2-r1) * 0.7
-        @wedge( Vis.hex( [hue,sat*100,100] ), g, r, r+dr, hue-dh/2, hue+dh/2 )
+        @wedge( vis.hex( [hue,sat*100,100] ), g, r, r+dr, hue-dh/2, hue+dh/2 )
     @grid( dh, dr, -dh/2, 360-dh/2 )
     return
 
   paletteWedges:( dh, dr, r1, r2 ) ->
-    Vis.noop(r2)
+    vis.noop(r2)
     g = @g.selectAll("g").append("svg:g")
     for palette in @palettes
       r = r1

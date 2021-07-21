@@ -2,7 +2,9 @@ var Innovate;
 
 import * as d3 from 'd3';
 
-import Vis from '../../../lib/pub/draw/Vis.js';
+import {
+  vis
+} from '../../../lib/pub/draw/Vis.js';
 
 Innovate = class Innovate {
   constructor(spec, shapes, build) {
@@ -22,7 +24,7 @@ Innovate = class Innovate {
 
   drawSvg(g, size, defs) {
     var key, ref, study;
-    Vis.noop(defs);
+    vis.noop(defs);
     this.lay = this.shapes.layout(size, this.spec.column, this.shapes.size(this.studies), this.shapes.size(this.studies));
     this.rings(g, size);
     switch (this.spec.row) {
@@ -57,9 +59,9 @@ Innovate = class Innovate {
     xi = size.level === 'Comp' ? t * 1.70 : t * 2.5;
     xt = xi + size.ringIcon * 0.8;
     y = size.level === 'Comp' ? t * 2.1 : 18 * size.scaleFont;
-    uc = Vis.unicode(this.spec.icon);
+    uc = vis.unicode(this.spec.icon);
     // console.log( 'Innovate.rings()', { t:t, wr:wr, hr:hr, xt:xt, yt:yt } )
-    colorRing = Vis.str([70, 55, 70]);
+    colorRing = vis.css([70, 55, 70]);
     colorBack = 'rgba(97, 56, 77, 1.0 )';
     h2 = Math.max(size.h - t * 2, t);
     h5 = Math.max(size.h - t * 5, t);
@@ -179,7 +181,7 @@ Innovate = class Innovate {
     yt = size.level === 'Comp' ? y + 10 : y + 4.5 * size.scaleFont;
     yi = size.level === 'Comp' ? y - 2 : y - 2.0 * size.scaleFont;
     fill = this.shapes.toFill(study);
-    uc = Vis.unicode(study.icon);
+    uc = vis.unicode(study.icon);
     // console.log( 'Innovate.hexStudy()', study.icon, uc )
     this.hexPath(fill, g, x, y, this.shapes.htmlId(study.name, 'HexPath'));
     this.hexText(study.name, g, x, yt, this.shapes.htmlId(study.name, 'HexText'), size.dispSize);
@@ -220,19 +222,19 @@ Innovate = class Innovate {
 
   line() {
     return d3.line().x((ang) => {
-      return this.r * Vis.cosSvg(ang) + this.xh;
+      return this.r * vis.cosSvg(ang) + this.xh;
     }).y((ang) => {
-      return this.r * Vis.sinSvg(ang) + this.yh;
+      return this.r * vis.sinSvg(ang) + this.yh;
     });
   }
 
   hexPath(fill, g, x0, y0, pathId) {
     var ang, k, len, path, ref, xp, yp;
     xp = (ang) => {
-      return this.r * Vis.cosSvg(ang) + x0;
+      return this.r * vis.cosSvg(ang) + x0;
     };
     yp = (ang) => {
-      return this.r * Vis.sinSvg(ang) + y0;
+      return this.r * vis.sinSvg(ang) + y0;
     };
     path = d3.path();
     path.moveTo(xp(0), yp(0));

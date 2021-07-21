@@ -4,7 +4,9 @@ import {
   test
 } from '../../../lib/pub/test/Tester.js';
 
-import Vis from '../../../lib/pub/draw/Vis.js';
+import {
+  vis
+} from '../../../lib/pub/draw/Vis.js';
 
 Color = class Color {
   constructor(mbox) {
@@ -46,8 +48,8 @@ Color = class Color {
 
   toRygbFromHue(hue) {
     var b, cos, g, r, rygb, sin, y;
-    cos = Math.abs(Vis.cos(hue));
-    sin = Math.abs(Vis.sin(hue));
+    cos = Math.abs(vis.cos(hue));
+    sin = Math.abs(vis.sin(hue));
     [r, y, g, b] = [cos, sin, cos, sin];
     rygb = [0, 0, 0, 0];
     if (0 <= hue && hue < 90) {
@@ -65,7 +67,7 @@ Color = class Color {
   toRgbFromHue(hue) {
     var B, G, R, cos, rgb;
     cos = function(h) {
-      return Math.abs(Vis.cos(h * 90 / 120));
+      return Math.abs(vis.cos(h * 90 / 120));
     };
     R = 0;
     G = 0;
@@ -179,8 +181,8 @@ Color = class Color {
     pts = [];
     for (key in colors) {
       color = colors[key];
-      pts.push([Vis.rad(color.hue - 2), color.c, 100 - color.s, 1]);
-      pts.push([Vis.rad(color.hue + 2), color.c, 100 - color.s, 1]);
+      pts.push([vis.rad(color.hue - 2), color.c, 100 - color.s, 1]);
+      pts.push([vis.rad(color.hue + 2), color.c, 100 - color.s, 1]);
     }
     return pts;
   }
@@ -208,12 +210,12 @@ Color = class Color {
         ref1 = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
         for (l = 0, len1 = ref1.length; l < len1; l++) {
           s = ref1[l];
-          hcss.push([Vis.rad(hue - 3), c, s, 1]);
-          hcss.push([Vis.rad(hue), c, s, 1]);
-          hcss.push([Vis.rad(hue + 3), c, s, 1]);
-          rgbs.push(Vis.rgba([hue, c, s]));
-          rgbs.push(Vis.rgba([hue, c, s]));
-          rgbs.push(Vis.rgba([hue, c, s]));
+          hcss.push([vis.rad(hue - 3), c, s, 1]);
+          hcss.push([vis.rad(hue), c, s, 1]);
+          hcss.push([vis.rad(hue + 3), c, s, 1]);
+          rgbs.push(vis.css([hue, c, s]));
+          rgbs.push(vis.css([hue, c, s]));
+          rgbs.push(vis.css([hue, c, s]));
         }
       }
     }
@@ -231,8 +233,8 @@ Color = class Color {
         ref1 = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
         for (l = 0, len1 = ref1.length; l < len1; l++) {
           s = ref1[l];
-          hcss.push([Vis.rad(hue), c, s, 1]);
-          rgbs.push(Vis.rgba([hue, c, s]));
+          hcss.push([vis.rad(hue), c, s, 1]);
+          rgbs.push(vis.rgba([hue, c, s]));
         }
       }
     }
@@ -250,14 +252,14 @@ Color = class Color {
       for (r = j = 0, ref = max, ref1 = inc; ref1 !== 0 && (ref1 > 0 ? j <= ref : j >= ref); r = j += ref1) {
         for (g = k = 0, ref2 = max, ref3 = inc; ref3 !== 0 && (ref3 > 0 ? k <= ref2 : k >= ref2); g = k += ref3) {
           for (b = l = 0, ref4 = max, ref5 = inc; ref5 !== 0 && (ref5 > 0 ? l <= ref4 : l >= ref4); b = l += ref5) {
-            [h, s, v] = Vis.ysv({
+            [h, s, v] = vis.ysv({
               r: r,
               g: g,
               b: b
             });
             if (h % 15 <= 2 || h % 15 >= 13) {
               vv = this.sScale(h, s, v);
-              hcss.push([Vis.rad(h - 2), s, vv, 1]);
+              hcss.push([vis.rad(h - 2), s, vv, 1]);
               rgbs.push([r * sf, g * sf, b * sf, 1]);
             }
           }
@@ -272,20 +274,20 @@ Color = class Color {
           ref7 = [0, 16, 32, 48, 64, 80, 100];
           for (p = 0, len1 = ref7.length; p < len1; p++) {
             v = ref7[p];
-            hcss.push([Vis.rad(hue), s, v, 1]);
-            rgbs.push(Vis.rgba([hue, s, v]));
+            hcss.push([vis.rad(hue), s, v, 1]);
+            rgbs.push(vis.css([hue, s, v]));
           }
         }
       }
     }
     // console.log( 'Color.genVecsRgb() hcss', see, { hue:hue, s:s , v:v } )
-    test("Color.genVecsRgb()", function(t) {
-      var rgb1, rgb2;
-      rgb1 = Vis.rgba(hcss[0]);
-      rgb2 = rgbs[0];
-      return t.eq(rgb1, rgb2);
-    });
-    console.log(test().summary('Color'));
+    /*
+    test( "Color.genVecsRgb()", (t) ->
+      rgb1 = vis.rgba(hcss[0])
+      rgb2 = rgbs[0]
+      t.eq( rgb1, rgb2 ) )
+    console.log( test().summary( 'Color') )
+    */
     return [hcss, rgbs];
   }
 
@@ -302,9 +304,9 @@ Color = class Color {
           h = 0;
           s = 0;
           v = 0;
-          [h, s, v] = Vis.ysv(r, g, b); // hsv or ysv a special color system
+          [h, s, v] = vis.ysv(r, g, b); // hsv or ysv a special color system
           vv = scale ? this.sScale(h, s, v) : v;
-          hcss.push([Vis.rad(h), s, vv, 1]);
+          hcss.push([vis.rad(h), s, vv, 1]);
           rgbs.push([r * sf, g * sf, b * sf, 1]);
         }
       }
@@ -317,8 +319,8 @@ Color = class Color {
     var c, s, v1, v2, y;
     v1 = [1, 1, 1];
     v2 = [1, 1, 1];
-    c = Math.abs(Vis.cos(hue));
-    s = Math.abs(Vis.sin(hue));
+    c = Math.abs(vis.cos(hue));
+    s = Math.abs(vis.sin(hue));
     y = Math.max(c, s);
     if (0 <= hue && hue < 90) {
       v2 = [y, s, 0];
@@ -346,7 +348,7 @@ Color = class Color {
   rgbPc(r, g, b, R, G, B) {
     var bd, gd, pc, rd;
     pc = function(f) {
-      return Vis.toInt(f * 100);
+      return vis.toInt(f * 100);
     };
     rd = r !== 0 ? r : -R;
     gd = g !== 0 ? g : -G;
@@ -370,8 +372,8 @@ Color = class Color {
     ss = this.sScale(hue, c, s);
     m60 = hue % 60;
     m120 = hue % 120;
-    cosu = (1 - Vis.cos(m60)) * 100.00;
-    cosd = (1 - Vis.cos(60 - m60)) * 100.00;
+    cosu = (1 - vis.cos(m60)) * 100.00;
+    cosd = (1 - vis.cos(60 - m60)) * 100.00;
     cf = m120 < 60 ? cosu : cosd;
     return ss - cf;
   }

@@ -1,21 +1,21 @@
 
-import Vis from '../../../lib/pub/draw/Vis.js'
+import {vis} from '../../../lib/pub/draw/Vis.js'
 
 class Gui
 
   constructor:( @act, @elem, @fun ) ->
-    @dat = Vis.getGlobal('dat')
+    @dat = vis.getGlobal('dat')
     @gui = new @dat.GUI( { autoPlace: false })
     @elem.appendChild( @gui.domElement )
     @gui.remember(@act)
-    @fun.slide  = () -> Vis.noop()
-    @fun.select = () -> Vis.noop()
-    @fun.num    = () -> Vis.noop()
-    @fun.str    = () -> Vis.noop()
-    @fun.color0 = () -> Vis.noop()
-    @fun.color1 = () -> Vis.noop()
-    @fun.color2 = () -> Vis.noop()
-    @fun.color3 = () -> Vis.noop()
+    @fun.slide  = () -> vis.noop()
+    @fun.select = () -> vis.noop()
+    @fun.num    = () -> vis.noop()
+    @fun.str    = () -> vis.noop()
+    @fun.color0 = () -> vis.noop()
+    @fun.color1 = () -> vis.noop()
+    @fun.color2 = () -> vis.noop()
+    @fun.color3 = () -> vis.noop()
     @planes()
     @rows()
     @prin()

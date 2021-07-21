@@ -1,6 +1,8 @@
 var Coord;
 
-import Vis from '../../../lib/pub/draw/Vis.js';
+import {
+  vis
+} from '../../../lib/pub/draw/Vis.js';
 
 Coord = class Coord {
   constructor(mbox, width1, height, depth = 10) {
@@ -170,7 +172,7 @@ Coord = class Coord {
       channels: 3
     };
     obj.expr = (emit, a, r) => {
-      Vis.noop(r);
+      vis.noop(r);
       emit(0, 0, 1);
       emit(a, 1, 1);
     };
@@ -216,7 +218,7 @@ Coord = class Coord {
     return obj;
   }
 
-  cartColors(toRgb, id = "cartColors") {
+  cartColors(id = "cartColors") {
     var obj;
     obj = {
       id: id,
@@ -226,9 +228,9 @@ Coord = class Coord {
       channels: 4 
     };
     obj.expr = (emit, x, y, z) => {
-      var b, g, r;
-      [r, g, b] = toRgb(x, y, z);
-      return emit(r, g, b, 1);
+      var a, b, g, r;
+      [r, g, b, a] = vis.rgba(x, y, z);
+      return emit(r, g, b, a);
     };
     return obj;
   }
@@ -242,9 +244,9 @@ Coord = class Coord {
     };
   }
 
-  cartVolume(view, toRgb) {
+  cartVolume(view) {
     view.volume(this.cartPoints());
-    view.volume(this.cartColors(toRgb));
+    view.volume(this.cartColors());
     return view.point(this.point(40, "cartPoints", "cartColors"));
   }
 
@@ -268,7 +270,7 @@ Coord = class Coord {
     return obj;
   }
 
-  cartSurfColors(toRgb, id = "cartSurfColors") {
+  cartSurfColors(id = "cartSurfColors") {
     var obj;
     obj = {
       id: id,
@@ -281,17 +283,17 @@ Coord = class Coord {
       ]
     };
     obj.expr = (emit, x, y) => {
-      var b, g, r;
-      [r, g, b] = toRgb(x, y);
-      return emit(r, g, b, 1);
+      var a, b, g, r;
+      [r, g, b, a] = vis.rgba(x, y);
+      return emit(r, g, b, a);
     };
     return obj;
   }
 
-  cartSurface(view, toDep, toRgb) {
+  cartSurface(view, toDep) {
     var colors, points;
     points = view.area(this.cartSurfPoints(toDep));
-    colors = view.area(this.cartSurfColors(toRgb));
+    colors = view.area(this.cartSurfColors());
     return view.surface({
       points: points,
       colors: colors,
@@ -347,7 +349,7 @@ Coord = class Coord {
   }
 
   // Cylindrical ang, rad, dep  
-  cylColors(toRgb, id = "cylColors") {
+  cylColors(id = "cylColors") {
     var obj;
     obj = {
       id: id,
@@ -357,17 +359,17 @@ Coord = class Coord {
       channels: 4 
     };
     obj.expr = (emit, ang, rad, dep, i) => {
-      var b, g, hue, r;
+      var a, b, g, hue, r;
       hue = this.mbox.toHue(i, this.width);
-      [r, g, b] = toRgb(hue, rad, dep); // HCS
-      return emit(r, g, b, 1);
+      [r, g, b, a] = vis.rgba(hue, rad, dep); // HCS
+      return emit(r, g, b, a);
     };
     return obj;
   }
 
-  cylVolume(view, toRgb) {
+  cylVolume(view) {
     view.volume(this.cylPoints());
-    view.volume(this.cylColors(toRgb));
+    view.volume(this.cylColors());
     return view.point(this.point(40, "cylPoints", "cylColors"));
   }
 
@@ -413,7 +415,7 @@ Coord = class Coord {
     return obj;
   }
 
-  cylSurfColors(toDep, toRgb, id = "cylSurfColors") {
+  cylSurfColors(toDep, id = "cylSurfColors") {
     var obj;
     obj = {
       id: id,
@@ -426,19 +428,19 @@ Coord = class Coord {
       ]
     };
     obj.expr = (emit, ang, rad, i) => {
-      var b, g, hue, r, radian;
+      var a, b, g, hue, r, radian;
       hue = this.mbox.toHue(i, this.npoints);
       radian = this.mbox.toRad(i, this.npoints);
-      [r, g, b] = toRgb(hue, rad, toDep(radian, rad) * 100);
-      return emit(r, g, b, 1);
+      [r, g, b, a] = vis.rgba(hue, rad, toDep(radian, rad) * 100);
+      return emit(r, g, b, a);
     };
     return obj;
   }
 
-  cylSurface(view, toRgb, toDep) {
+  cylSurface(view, toDep) {
     var colors, points;
     points = view.area(this.cylSurfPoints(toDep));
-    colors = view.area(this.cylSurfColors(toDep, toRgb));
+    colors = view.area(this.cylSurfColors(toDep));
     return view.surface({
       points: points,
       colors: colors,
@@ -468,7 +470,7 @@ Coord = class Coord {
     return obj;
   }
 
-  sphColors(toRgb, id = "sphColors") {
+  sphColors(id = "sphColors") {
     var obj;
     obj = {
       id: id,
@@ -478,16 +480,16 @@ Coord = class Coord {
       channels: 4 
     };
     obj.expr = (emit, ang1, ang2, rad, i, j) => {
-      var b, g, r;
-      [r, g, b] = toRgb(i * 360 / this.width, j * 360 / this.height, rad);
-      return emit(r, g, b, 1);
+      var a, b, g, r;
+      [r, g, b, a] = vis.rgba(i * 360 / this.width, j * 360 / this.height, rad);
+      return emit(r, g, b, a);
     };
     return obj;
   }
 
-  sphVolume(view, toRgb) {
+  sphVolume(view) {
     view.volume(this.sphPoints());
-    view.volume(this.sphColors(toRgb));
+    view.volume(this.sphColors());
     return view.point(this.point(40, "sphPoints", "sphColors"));
   }
 
@@ -503,7 +505,7 @@ Coord = class Coord {
     obj.expr = (emit, ang1, ang2, rad, i, j) => {
       var a, b, g, r;
       if (j * 360 / this.height <= 180) {
-        [r, g, b, a] = Vis.rgba([i * 360 / this.width, j * 360 / this.height, rad]);
+        [r, g, b, a] = vis.rgba([i * 360 / this.width, j * 360 / this.height, rad]);
         return emit(r, g, b, 1);
       } else {
         return emit(0, 0, 0, 0);

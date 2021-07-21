@@ -1,5 +1,5 @@
 
-import Vis from "../../../lib/pub/draw/Vis.js"
+import {vis} from "../../../lib/pub/draw/Vis.js"
 
 class Encourage
 
@@ -34,7 +34,7 @@ class Encourage
     yt = size.yc * 0.5 + size.bannDy
     yi = size.yc       + size.iconDy
     @shapes.conveySankey( "Encourage", defs, g, @studies, @innovs, x, y, w, h )
-    @shapes.icon( g, size.xc, yi, @spec.name, @shapes.htmlId(@spec.name,'IconSvg'), 'black', size.iconSize, Vis.unicode(@spec.icon) )
+    @shapes.icon( g, size.xc, yi, @spec.name, @shapes.htmlId(@spec.name,'IconSvg'), 'black', size.iconSize, vis.unicode(@spec.icon) )
     @shapes.text( g, xt,      yt, @spec.name, @shapes.htmlId(@spec.name,'TextSvg'), 'black', size.bannSize )
     @shapes.practiceFlow( g, size, @spec )
     return

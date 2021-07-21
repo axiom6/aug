@@ -1,6 +1,8 @@
 var Regress;
 
-import Vis from '../../../lib/pub/draw/Vis.js';
+import {
+  vis
+} from '../../../lib/pub/draw/Vis.js';
 
 import Coord from './Coord.js';
 
@@ -42,7 +44,7 @@ Regress = class Regress {
       channels: 3
     };
     obj.expr = (emit, slope, yInter, i, j) => {
-      Vis.noop(i, j);
+      vis.noop(i, j);
       return emit(slope, this.rss(n, x, y, slope, yInter), yInter);
     };
     return obj;
@@ -55,7 +57,7 @@ Regress = class Regress {
       term = y[i] - yInter - slope * x[i];
       sum = sum + term * term;
     }
-    //console.log( Vis.toFixed(sum,1), Vis.toFixed(slope,1), Vis.toFixed(yInter,1) )
+    //console.log( vis.toFixed(sum,1), vis.toFixed(slope,1), vis.toFixed(yInter,1) )
     return sum;
   }
 

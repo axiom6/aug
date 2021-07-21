@@ -1,6 +1,6 @@
 
 import { test } from '../../../lib/pub/test/Tester.js'
-import Vis      from '../../../lib/pub/draw/Vis.js'
+import { vis }     from '../../../lib/pub/draw/Vis.js'
 
 class Color
 
@@ -19,8 +19,8 @@ class Color
     rygb3
 
   toRygbFromHue:( hue ) =>
-    cos = Math.abs(Vis.cos(hue))
-    sin = Math.abs(Vis.sin(hue))
+    cos = Math.abs(vis.cos(hue))
+    sin = Math.abs(vis.sin(hue))
     [r,y,g,b] = [cos,sin,cos,sin]
     rygb      = [  0,  0,  0,  0]
     if        0 <= hue and hue <  90 then rygb = [ r, y, 0, 0 ]
@@ -30,7 +30,7 @@ class Color
     rygb
 
   toRgbFromHue:( hue ) =>
-    cos = (h) -> Math.abs(Vis.cos(h*90/120))
+    cos = (h) -> Math.abs(vis.cos(h*90/120))
     R=0; G=0; B=0
     [R,G,B] = [cos(hue),cos(hue-120),cos(hue-240),1]
     rgb = [0,0,0]
@@ -85,8 +85,8 @@ class Color
   scsPts:( colors ) ->
     pts = []
     for key, color of colors
-      pts.push( [ Vis.rad(color.hue-2), color.c, 100-color.s, 1 ] )
-      pts.push( [ Vis.rad(color.hue+2), color.c, 100-color.s, 1 ] )
+      pts.push( [ vis.rad(color.hue-2), color.c, 100-color.s, 1 ] )
+      pts.push( [ vis.rad(color.hue+2), color.c, 100-color.s, 1 ] )
     pts
 
   scsRgbs:( colors ) ->
@@ -103,12 +103,12 @@ class Color
     for hue   in [0...360] by 15
       for c   in [0,10,20,30,40,50,60,70,80,90,100]
         for s in [0,10,20,30,40,50,60,70,80,90,100]
-          hcss.push( [ Vis.rad(hue-3), c, s, 1 ] )
-          hcss.push( [ Vis.rad(hue  ), c, s, 1 ] )
-          hcss.push( [ Vis.rad(hue+3), c, s, 1 ] )
-          rgbs.push(   Vis.rgba( [hue, c, s ] ) )
-          rgbs.push(   Vis.rgba( [hue, c, s ] ) )
-          rgbs.push(   Vis.rgba( [hue, c, s ] ) )
+          hcss.push( [ vis.rad(hue-3), c, s, 1 ] )
+          hcss.push( [ vis.rad(hue  ), c, s, 1 ] )
+          hcss.push( [ vis.rad(hue+3), c, s, 1 ] )
+          rgbs.push(   vis.css( [hue, c, s ] ) )
+          rgbs.push(   vis.css( [hue, c, s ] ) )
+          rgbs.push(   vis.css( [hue, c, s ] ) )
     [hcss,rgbs]
 
   genVecs:() ->
@@ -117,8 +117,8 @@ class Color
     for hue   in [0...360] by 15
       for c   in [0,10,20,30,40,50,60,70,80,90,100]
         for s in [0,10,20,30,40,50,60,70,80,90,100]
-          hcss.push(  [Vis.rad( hue), c, s, 1 ] )
-          rgbs.push(  Vis.rgba([hue,  c, s    ] ) )
+          hcss.push(  [vis.rad( hue), c, s, 1 ] )
+          rgbs.push(  vis.rgba([hue,  c, s    ] ) )
     [hcss,rgbs]
 
   genVecsRgb:( see ) ->
@@ -131,23 +131,25 @@ class Color
       for r     in [0..max] by inc
         for g   in [0..max] by inc
           for b in [0..max] by inc
-            [h, s, v ] = Vis.ysv( { r:r, g:g, b:b } )
+            [h, s, v ] = vis.ysv( { r:r, g:g, b:b } )
             if h%15 <= 2 or h%15 >= 13
               vv         = @sScale( h, s, v )
-              hcss.push( [ Vis.rad(h-2), s, vv, 1 ] )
+              hcss.push( [ vis.rad(h-2), s, vv, 1 ] )
               rgbs.push( [ r*sf, g*sf, b*sf, 1 ] )
     if see is 'two' or see is 'hsv'
       for hue   in [0...360] by 15
         for s   in [0,16,32,48,64,80,100]
           for v in [0,16,32,48,64,80,100]
-            hcss.push( [ Vis.rad(hue), s, v, 1 ] )
-            rgbs.push(   Vis.rgba( [hue, s, v    ] ) )
+            hcss.push( [ vis.rad(hue), s, v, 1 ] )
+            rgbs.push(   vis.css( [hue, s, v    ] ) )
             # console.log( 'Color.genVecsRgb() hcss', see, { hue:hue, s:s , v:v } )
+    ###
     test( "Color.genVecsRgb()", (t) ->
-      rgb1 = Vis.rgba(hcss[0])
+      rgb1 = vis.rgba(hcss[0])
       rgb2 = rgbs[0]
       t.eq( rgb1, rgb2 ) )
     console.log( test().summary( 'Color') )
+    ###
     [hcss,rgbs]
 
   # console.log( 'gpr', { r:r, g:g, b:b, hue:hue, c:Math.round(c), s:Math.round(s) } ) if c is 0
@@ -160,9 +162,9 @@ class Color
       for g   in [0..255] by 15
         for b in [0..255] by 15
           h = 0; s = 0; v = 0;
-          [h, s, v ] = Vis.ysv( r, g, b ) # hsv or ysv a special color system
+          [h, s, v ] = vis.ysv( r, g, b ) # hsv or ysv a special color system
           vv         = if scale then @sScale( h, s, v ) else v
-          hcss.push( [ Vis.rad(h), s, vv, 1 ] )
+          hcss.push( [ vis.rad(h), s, vv, 1 ] )
           rgbs.push( [ r*sf, g*sf, b*sf, 1 ] )
     [hcss,rgbs]
 
@@ -170,8 +172,8 @@ class Color
   vecs:( hue ) ->
     v1 = [1,1,1]
     v2 = [1,1,1]
-    c  = Math.abs(Vis.cos(hue))
-    s  = Math.abs(Vis.sin(hue))
+    c  = Math.abs(vis.cos(hue))
+    s  = Math.abs(vis.sin(hue))
     y  = Math.max(c,s)
     if        0 <= hue and hue <  90 then v2 = [y,s,0]
     else if  90 <= hue and hue < 180 then v2 = [c,y,0]
@@ -188,7 +190,7 @@ class Color
     v3
 
   rgbPc:( r, g, b, R, G, B ) ->
-    pc  = (f) -> Vis.toInt(f * 100)
+    pc  = (f) -> vis.toInt(f * 100)
     rd = if r isnt 0 then r else -R
     gd = if g isnt 0 then g else -G
     bd = if b isnt 0 then b else -B
@@ -207,8 +209,8 @@ class Color
     ss   = @sScale( hue, c, s )
     m60  = hue %  60
     m120 = hue % 120
-    cosu = (1-Vis.cos(   m60))*100.00
-    cosd = (1-Vis.cos(60-m60))*100.00
+    cosu = (1-vis.cos(   m60))*100.00
+    cosd = (1-vis.cos(60-m60))*100.00
     cf = if m120 < 60 then cosu else cosd
     ss - cf
 

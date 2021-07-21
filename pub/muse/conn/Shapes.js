@@ -1,7 +1,9 @@
 var Shapes,
   hasProp = {}.hasOwnProperty;
 
-import Vis from '../../../lib/pub/draw/Vis.js';
+import {
+  vis
+} from '../../../lib/pub/draw/Vis.js';
 
 import Convey from './Convey.js';
 
@@ -11,7 +13,7 @@ Shapes = class Shapes {
   constructor(stream) {
     this.stream = stream;
     this.cos30 = 0.86602540378;
-    //@cos15 = Vis.cos(15)
+    //@cos15 = vis.cos(15)
     this.fontText = "Roboto";
   }
 
@@ -34,7 +36,7 @@ Shapes = class Shapes {
     hsv = darken ? [hsv[0], hsv[1], hsv[2] * 0.75] : hsv; // [hsv[0],60,30]
     // console.log( 'Shapes.toFill()', studyPrac.hsv, hsv ) if darken
     if ((studyPrac.hsv != null) && studyPrac.hsv.length === 3) {
-      return Vis.str(hsv);
+      return vis.css(hsv);
     } else {
       console.error('Shapes.toFill() unknown fill code', {
         name: studyPrac.name,
@@ -60,7 +62,7 @@ Shapes = class Shapes {
     var key, study;
     for (key in prac) {
       study = prac[key];
-      if (Vis.isChild(key) && study.dir === dir) {
+      if (vis.isChild(key) && study.dir === dir) {
         return key;
       }
     }
@@ -71,7 +73,7 @@ Shapes = class Shapes {
     var key, study;
     for (key in prac) {
       study = prac[key];
-      if (Vis.isChild(key) && study.dir === dir) {
+      if (vis.isChild(key) && study.dir === dir) {
         return study;
       }
     }
@@ -79,7 +81,7 @@ Shapes = class Shapes {
   }
 
   htmlId(pracName, contentName) {
-    return Vis.getHtmlId(pracName, 'Info', contentName); // @ui.plane.id
+    return vis.getHtmlId(pracName, 'Info', contentName); // @ui.plane.id
   }
 
   size(obj) {
@@ -150,13 +152,13 @@ Shapes = class Shapes {
     var arc;
     arc = d3.arc().innerRadius(r1).outerRadius(r2).startAngle(this.radD3(a1)).endAngle(this.radD3(a2));
     //console.log( 'Shape.wedge()', { x0:x0, y0:y0 } )
-    g.append("svg:path").attr("d", arc).attr("fill", fill).attr("stroke", "none").attr("transform", Vis.translate(x0, y0));
+    g.append("svg:path").attr("d", arc).attr("fill", fill).attr("stroke", "none").attr("transform", vis.translate(x0, y0));
     this.wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize, level);
   }
 
   wedgeText(g, r1, r2, a1, a2, x0, y0, fill, text, wedgeId, fontSize, level = 'none') {
     var as, at, path, rt, sc, th, x, y;
-    Vis.noop(wedgeId);
+    vis.noop(wedgeId);
     th = 14;
     at = (a1 + a2) / 2;
     rt = (r1 + r2) / 2;
@@ -174,7 +176,7 @@ Shapes = class Shapes {
     // console.log( 'Shapes.wedgeText() 2', text, level, sc, rt )
     x = x0 + rt * this.cos(at);
     y = y0 + rt * this.sin(at);
-    path = g.append("svg:text").text(text).attr("x", x).attr("y", y).attr("transform", Vis.rotate(as, x, y)).attr("text-anchor", "middle").attr("font-size", fontSize).attr("font-family", this.fontText).attr("font-weight", "bold").attr('fill', '#000000'); // @textFill(fill))
+    path = g.append("svg:text").text(text).attr("x", x).attr("y", y).attr("transform", vis.rotate(as, x, y)).attr("text-anchor", "middle").attr("font-size", fontSize).attr("font-family", this.fontText).attr("font-weight", "bold").attr('fill', '#000000'); // @textFill(fill))
     this.click(path, text);
   }
 
@@ -343,7 +345,7 @@ Shapes = class Shapes {
     h = size.level === 'Comp' ? size.ringSize * 0.55 : size.ringSize * 1.3;
     x0 = size.xc - w * 0.5;
     y0 = dir === 'south' ? size.h - h : 0;
-    fill = Vis.str(hsv);
+    fill = vis.css(hsv);
     this.rect(g, x0, y0, w, h, fill, 'none');
   }
 
@@ -359,11 +361,11 @@ Shapes = class Shapes {
 
   //degD3:( rad )  -> -rad * 180.0 / Math.PI
   cos(deg) {
-    return Vis.cosSvg(deg);
+    return vis.cosSvg(deg);
   }
 
   sin(deg) {
-    return Vis.sinSvg(deg);
+    return vis.sinSvg(deg);
   }
 
   gradientDef(defs, id, color1, color2, x1 = '0%', x2 = '100%', y1 = '0%', y2 = '100%') {

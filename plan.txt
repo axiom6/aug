@@ -1,9 +1,9 @@
 
 
 Debug One
-  1. Muse colors off
-  2. Wise Texts Tab
-  3. Jitter choice
+  1. Augm Hues
+  2. Jitter choice
+  3. MathML
 
 Docs
   1. In progress

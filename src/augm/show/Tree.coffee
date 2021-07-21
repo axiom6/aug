@@ -1,5 +1,5 @@
 
-import Vis    from '../../../lib/pub/draw/Vis.js'
+import {vis}  from '../../../lib/pub/draw/Vis.js'
 
 class Tree
 
@@ -97,6 +97,6 @@ class Tree
 
   iconUnicode:( d ) =>
     icon = if d.data.icon? then d.data.icon else 'fas fa-circle'
-    Vis.unicode( icon )
+    vis.unicode( icon )
 
 export default Tree

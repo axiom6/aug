@@ -1,6 +1,8 @@
 var Encourage;
 
-import Vis from "../../../lib/pub/draw/Vis.js";
+import {
+  vis
+} from "../../../lib/pub/draw/Vis.js";
 
 Encourage = class Encourage {
   constructor(spec, shapes, build) {
@@ -43,7 +45,7 @@ Encourage = class Encourage {
     yt = size.yc * 0.5 + size.bannDy;
     yi = size.yc + size.iconDy;
     this.shapes.conveySankey("Encourage", defs, g, this.studies, this.innovs, x, y, w, h);
-    this.shapes.icon(g, size.xc, yi, this.spec.name, this.shapes.htmlId(this.spec.name, 'IconSvg'), 'black', size.iconSize, Vis.unicode(this.spec.icon));
+    this.shapes.icon(g, size.xc, yi, this.spec.name, this.shapes.htmlId(this.spec.name, 'IconSvg'), 'black', size.iconSize, vis.unicode(this.spec.icon));
     this.shapes.text(g, xt, yt, this.spec.name, this.shapes.htmlId(this.spec.name, 'TextSvg'), 'black', size.bannSize);
     this.shapes.practiceFlow(g, size, this.spec);
   }

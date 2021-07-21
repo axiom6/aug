@@ -1,5 +1,5 @@
 
-import Vis        from '../../../lib/pub/draw/Vis.js'
+import {vis}      from '../../../lib/pub/draw/Vis.js'
 import * as THREE from 'three'
 
 class Rect
@@ -8,7 +8,7 @@ class Rect
     rec = new THREE.PlaneGeometry( @wh[0], @wh[1] )
     rec.translate(      @xyz[0], @xyz[1], @xyz[2] )
 
-    col   = Vis.hex( @hsv )
+    col   = vis.hex( @hsv )
     mat   = new THREE.MeshBasicMaterial( { color:col, opacity:@opacity, transparent:true, side:THREE.DoubleSide } )
     @mesh = new THREE.Mesh( rec, mat )
     @mesh.name  = @title
@@ -24,7 +24,7 @@ class Rect
     side = new THREE.MeshBasicMaterial( { color: @fontColor } )
 
     mats = [face,side]
-    offsetY = not Vis.inStr( @title, '\n' )
+    offsetY = not vis.inStr( @title, '\n' )
     dx   = 0.5 * ( text.boundingBox.max.x - text.boundingBox.min.x )
     dy   = if offsetY then 0.5 * ( text.boundingBox.max.y - text.boundingBox.min.y ) else 0
     Rect.matrix.makeTranslation( @xyz[0]-dx, @xyz[1]-dy, @xyz[2]   )

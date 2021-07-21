@@ -1,6 +1,8 @@
 var Rect;
 
-import Vis from '../../../lib/pub/draw/Vis.js';
+import {
+  vis
+} from '../../../lib/pub/draw/Vis.js';
 
 import * as THREE from 'three';
 
@@ -19,7 +21,7 @@ Rect = class Rect {
     this.fontColor = fontColor;
     rec = new THREE.PlaneGeometry(this.wh[0], this.wh[1]);
     rec.translate(this.xyz[0], this.xyz[1], this.xyz[2]);
-    col = Vis.hex(this.hsv);
+    col = vis.hex(this.hsv);
     mat = new THREE.MeshBasicMaterial({
       color: col,
       opacity: this.opacity,
@@ -47,7 +49,7 @@ Rect = class Rect {
       color: this.fontColor
     });
     mats = [face, side];
-    offsetY = !Vis.inStr(this.title, '\n');
+    offsetY = !vis.inStr(this.title, '\n');
     dx = 0.5 * (text.boundingBox.max.x - text.boundingBox.min.x);
     dy = offsetY ? 0.5 * (text.boundingBox.max.y - text.boundingBox.min.y) : 0;
     Rect.matrix.makeTranslation(this.xyz[0] - dx, this.xyz[1] - dy, this.xyz[2]);

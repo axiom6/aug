@@ -1,6 +1,6 @@
 
-import Type  from "../test/Type.js"
-import Vis   from '../draw/Vis.js'
+import Type     from "../test/Type.js"
+import { vis  } from '../draw/Vis.js'
 
 class Mix extends Type
 
@@ -26,7 +26,7 @@ class Mix extends Type
       elem = null
     elem
 
-  styleObj: (ikwObj, fontSize = undefined) ->
+  styleObj: (ikwObj, fontSize = null) ->
     hsv = [30, 90, 90]
     if   @isDef(ikwObj)
       if @isDef(ikwObj.hsv)
@@ -34,17 +34,18 @@ class Mix extends Type
       else if @isDef(ikwObj.dir)
         hsv = switch ikwObj.dir
           when 'west'  then [195, 90, 70]
-          when 'north' then [90, 90, 90]
-          when 'east'  then [30, 60, 90]
-          when 'south' then [60, 90, 90]
+          when 'north' then [ 90, 90, 90]
+          when 'east'  then [ 30, 60, 90]
+          when 'south' then [ 60, 90, 90]
           else
             [30, 90, 90]
-    style = {backgroundColor: Vis.hex(hsv)}
-    style['fontSize'] = fontSize + 'rem' if fontSize
+    style = { backgroundColor:vis.css(hsv)}
+    style['fontSize'] = fontSize + 'rem' if fontSize?
+    console.log( "Mix.styleObj()", { ikwObj:ikwObj, style:style, hsv:hsv } ) if @debug
     style
 
   toRgbaHsv: (hsv) ->
-    Vis.rgb(hsv)
+    vis.rgb(hsv)
 
   # Main
   app: () ->
