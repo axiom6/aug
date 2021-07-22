@@ -19,6 +19,15 @@ import {
 } from 'three/examples/jsm/controls/OrbitControls.js';
 
 CubeTh = class CubeTh {
+  static init(batch) {
+    return vis.ready(function() {
+      var build, th;
+      build = new Build(batch);
+      th = new CubeTh(build, 'CubeTh', false);
+      th.animate();
+    });
+  }
+
   static load() {
     Access.local = "http://localhost:63342/aug/app/data/";
     Access.hosted = "https://ui-48413.firebaseapp.com/";
@@ -45,19 +54,11 @@ CubeTh = class CubeTh {
         type: 'Spec'
       }
     };
-    Access.batchRead(CubeTh.Batch, CubeTh.init);
-  }
-
-  static init(batch) {
-    return vis.ready(function() {
-      var build, th;
-      build = new Build(batch);
-      th = new CubeTh(build, 'CubeTh', false);
-      th.animate();
-    });
+    Access.batchRead(CubeTh.Batch, CubeTh["init"]);
   }
 
   constructor(build1, parId, guiFlag1) {
+    var elems;
     this.onSelect = this.onSelect.bind(this);
     this.resizeScreen = this.resizeScreen.bind(this);
     this.traverse = this.traverse.bind(this);
@@ -65,10 +66,11 @@ CubeTh = class CubeTh {
     this.build = build1;
     this.parId = parId;
     this.guiFlag = guiFlag1;
-    // console.trace()
     this.stream = null; // Set by subscribe()
     this.parElem = document.getElementById(this.parId);
-    [this.ikwElem, this.guiElem] = this.createElems(this.parElem, this.guiFlag);
+    elems = this.createElems(this.parElem, this.guiFlag);
+    this.ikwElem = elems[0];
+    this.guiElem = elems[1];
     this.scene = new THREE.Scene();
     this.renderer = new THREE.WebGLRenderer({
       antialias: true
@@ -366,7 +368,7 @@ CubeTh = class CubeTh {
         pracGroup.add(studyCube.mesh);
         for (key in practice) {
           study = practice[key];
-          if (!(vVs.isChild(key))) {
+          if (!(vis.isChild(key))) {
             continue;
           }
           x = col.x + sp.cx[study.dir];

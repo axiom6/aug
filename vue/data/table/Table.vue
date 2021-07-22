@@ -15,7 +15,7 @@ let Table = {
 
   props: { compKey:String, inovKey:String },
   
-  setup(props) {
+  setup() {
 
     const mix   = inject('mix');
     //nst demo  = new Demo();
@@ -29,13 +29,14 @@ let Table = {
 
     onMounted( function () {
       nextTick( function() {
-        const pracs  = mix.inovObject( compKey, inovKey );
-        table        = new Tabulator( elem['value'], tabu.opts(pracs) );
-     // let pageSize = table.getPageSize();
-     // console.log( 'Grid.vue.onMounted()', { pageSize:pageSize } );
-        table.setPageSize(13);
-
-      } ); } );
+        if( mix.isDef(elem['value']) ) {
+          const pracs  = mix.inovObject( compKey, inovKey );
+          table        = new Tabulator( elem['value'], tabu.opts(pracs) );
+          // let pageSize = table.getPageSize();
+          // console.log( 'Grid.vue.onMounted()', { pageSize:pageSize } );
+          table.setPageSize(13); }
+        else {
+          console.error( "Table.onMounted() elem null" ); } } ) } );
 
     return { elem }; }
 

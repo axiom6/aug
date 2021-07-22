@@ -9,9 +9,9 @@ class Cube3D
     box = new THREE.BoxBufferGeometry()
     box.name = @title
     Cube3D.matrix.makeScale(       @whd[0], @whd[1], @whd[2] )
-    box.applyMatrix( Cube3D.matrix )
+    box.applyMatrix4( Cube3D.matrix )
     Cube3D.matrix.makeTranslation( @xyz[0], @xyz[1], @xyz[2] )
-    box.applyMatrix( Cube3D.matrix )
+    box.applyMatrix4( Cube3D.matrix )
     hex = vis.hex(  @hsv )
     col = new THREE.Color( hex )                    # blemding:THREE
     mat = new THREE.MeshPhongMaterial( { color:col, opacity:@opacity, transparent:true, side:THREE.BackSide } )
@@ -33,7 +33,7 @@ class Cube3D
     dx   = 0.5 * ( text.boundingBox.max.x - text.boundingBox.min.x )
     dy   = 0.5 * ( text.boundingBox.max.y - text.boundingBox.min.y )
     Cube3D.matrix.makeTranslation( @xyz[0]-dx, @xyz[1]-dy, @xyz[2]   )
-    text.applyMatrix( Cube3D.matrix )
+    text.applyMatrix4( Cube3D.matrix )
     @tmesh       = new THREE.Mesh( text, mats )
     @tmesh.name  = @title
     @tmesh.geom  = "Text"

@@ -19,11 +19,13 @@ let Pane = {
 
     const create = () => {
       nextTick( function() {
-          props.page.obj = D3D.create( props.page.key, elem['value'], mix ); } ) }
+        if( mix.isDef(elem['value']) ) {
+          props.page.obj = D3D.create( props.page.key, elem['value'], mix ); }
+        else {
+          console.error( "draw/Pane.create() elem null" ); } } ) }
 
     onMounted( () => {
-      if( props.page.show ) {
-        create(); } } )
+        create(); } )
 
     onUnmounted( () => {
       mix.removeElem( elem['value'], nextTick ) ; } )

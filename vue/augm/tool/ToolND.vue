@@ -2,8 +2,8 @@
 <template>
   <div class="tools-pane">
     <d-tabs :compKey="pracKey" :pages="toPages()"></d-tabs>
-    <template v-for="page in toPages()" :key="pageIdx">
-      <t-page v-if="show(page.key)" :page="page" class="tools-page"></t-page>
+    <template v-for="page in toPages()" :key="nav.keyIdx(page.key,pageIdx)">
+      <t-page v-if="nav.show(page.key)" :page="page" class="tools-page"></t-page>
     </template>
   </div>
 </template>
@@ -28,10 +28,6 @@
 
       const pageIdx  = ref(0)
       const page     = ref(null);
-      let   pageKey  = 'none';
-      
-      const show = (pageArg) => {
-        return pageArg === pageKey; }
 
       const toPages = function() {
         return nav.getTabs(props.pracKey); }
@@ -39,15 +35,13 @@
       const onNav = function(obj) {
         if( props.pracKey===obj.pracKey && nav.hasPage(props.pracKey,obj.pageKey) ) {
           if(debug) { console.log( 'Tools.onNav()', { pracKey:props.pracKey, pageKey:obj.pageKey } ); }
-          pageKey = obj.pageKey;
           pageIdx.value++; } }
 
       onMounted( function () { // Follow up with the last Nav.pub(obj) that mounted this vue component
-        onNav( { pracKey:props.pracKey, pageKey:nav.getPageKey(props.pracKey) } );
         mix.subscribe(  'Nav', 'ToolND', (obj) => {
           onNav(obj); } ) } )
 
-      return { pageIdx, page, toPages, show }; }
+      return { pageIdx, nav, page, toPages }; }
   }
   export default ToolND;
 

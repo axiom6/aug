@@ -21,9 +21,9 @@ Cube3D = class Cube3D {
     box = new THREE.BoxBufferGeometry();
     box.name = this.title;
     Cube3D.matrix.makeScale(this.whd[0], this.whd[1], this.whd[2]);
-    box.applyMatrix(Cube3D.matrix);
+    box.applyMatrix4(Cube3D.matrix);
     Cube3D.matrix.makeTranslation(this.xyz[0], this.xyz[1], this.xyz[2]);
-    box.applyMatrix(Cube3D.matrix);
+    box.applyMatrix4(Cube3D.matrix);
     hex = vis.hex(this.hsv);
     col = new THREE.Color(hex); // blemding:THREE
     mat = new THREE.MeshPhongMaterial({
@@ -57,7 +57,7 @@ Cube3D = class Cube3D {
     dx = 0.5 * (text.boundingBox.max.x - text.boundingBox.min.x);
     dy = 0.5 * (text.boundingBox.max.y - text.boundingBox.min.y);
     Cube3D.matrix.makeTranslation(this.xyz[0] - dx, this.xyz[1] - dy, this.xyz[2]);
-    text.applyMatrix(Cube3D.matrix);
+    text.applyMatrix4(Cube3D.matrix);
     this.tmesh = new THREE.Mesh(text, mats);
     this.tmesh.name = this.title;
     this.tmesh.geom = "Text";

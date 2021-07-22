@@ -4,7 +4,7 @@
     <b-tabs :compKey="compKey" :pages="tabPages('Comp')"  position="left"  :isComp="soTrue()"></b-tabs>
     <b-tabs :compKey="compKey" :pages="tabPages(compKey)" position="right" :isInov="soTrue()" v-if="hasInov()"></b-tabs>
     <div   class="comp-comp">
-      <template   v-for="pracObj in compObj" :key="pracKeyIdx(pracObj)">
+      <template   v-for="pracObj in compObj" :key="nav.keyIdx(pracObj[name],pracIdx)">
         <div :class="pracObj['dir']">
           <p-sign   v-if="isShow('Icons')"  :pracObj="pracObj"></p-sign>
           <p-dirs   v-if="isShow('Topics')" :pracObj="pracObj"></p-dirs>
@@ -46,7 +46,7 @@ let Comp = {
     const inovKey   = ref('Info');
     let   compObj   = ref({}    );
     let   pracObj   = ref({}    );
-    let   pracIdx   = 0;
+    let   pracIdx   = ref(0);
     const debug     = false;
     const inovComps = ['Info','Know','Wise'];
     const myRows    = ref( nav.getTabs('Rows') );
@@ -57,9 +57,6 @@ let Comp = {
 
     const soTrue = () => {
       return true; }
-
-    const pracKeyIdx = ( pracObj ) => {
-      return pracObj.name + pracIdx; }
 
     const isShow = ( pageArg ) => {
       if( debug ) { console.log( 'Comp.isShow()',
@@ -72,7 +69,7 @@ let Comp = {
       inovKey.value = obj.inovKey;
       onRows();
       compObj.value = mix.inovObject( compKey.value, inovKey.value );
-      pracIdx++;
+      pracIdx.value++;
       if( debug ) { console.log( 'Comp.onComp()',
           { obj:obj, pageKey:pageKey.value, pageObj:obj.pageKey, compObj:compObj.value } ); } }
 
@@ -107,7 +104,7 @@ let Comp = {
       mix.subscribe('Nav', 'Comp', (obj) => { onNav(obj); } ); } )
 
 
-    return { compKey,compObj,pracKeyIdx,pracObj,tabPages,hasInov,isDim,isRows,myRows,isShow, soTrue }; }
+    return { compKey,compObj,pracIdx,nav,pracObj,tabPages,hasInov,isDim,isRows,myRows,isShow, soTrue }; }
 }
 
 export default Comp;

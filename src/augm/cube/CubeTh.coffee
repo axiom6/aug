@@ -8,6 +8,13 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 class CubeTh
 
+  @init:( batch ) ->
+    vis.ready ->
+      build = new Build( batch )
+      th    = new CubeTh( build, 'CubeTh', false )
+      th.animate()
+      return
+
   @load:() ->
     Access.local   = "http://localhost:63342/aug/app/data/"
     Access.hosted  = "https://ui-48413.firebaseapp.com/"
@@ -18,23 +25,16 @@ class CubeTh
       Wise: { url:'muse/Wise.json', data:null, type:'Pack' }
       Font: { url:CubeTh.FontUrl,   data:null, type:'Spec' }
 
-    Access.batchRead( CubeTh.Batch, CubeTh.init )
+    Access.batchRead( CubeTh.Batch, CubeTh["init"] )
     return
 
-  @init:( batch ) ->
-    vis.ready ->
-      build = new Build( batch )
-      th    = new CubeTh( build, 'CubeTh', false )
-      th.animate()
-      return
 
   constructor:( @build, @parId, @guiFlag ) ->
-
-    # console.trace()
-    @stream  = null # Set by subscribe()
-    @parElem = document.getElementById(@parId)
-    [@ikwElem,@guiElem] = @createElems( @parElem, @guiFlag )
-
+    @stream   = null # Set by subscribe()
+    @parElem  = document.getElementById(@parId)
+    elems     = @createElems( @parElem, @guiFlag )
+    @ikwElem  = elems[0]
+    @guiElem  = elems[1]
     @scene    = new THREE.Scene()
     @renderer = new THREE.WebGLRenderer( { antialias:true } )
     @ikwElem.appendChild( @renderer.domElement )
@@ -183,7 +183,7 @@ class CubeTh
         z = plane.z
         studyCube = new Rect( plane, 'Dim', col.name, col.name, [x,y,z], [sp.cw,sp.ch], [0,0,0], 0.0, @fontPrac, 0xFFFFFF )
         pracGroup.add( studyCube.mesh  )
-        for key, study of practice when vVs.isChild(key)
+        for key, study of practice when vis.isChild(key)
           x = col.x + sp.cx[study.dir]
           y = sp.yc + sp.cy[study.dir]
           z = plane.z

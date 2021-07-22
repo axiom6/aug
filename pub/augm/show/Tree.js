@@ -66,7 +66,7 @@ Tree = class Tree {
     //node.append("svg:circle").attr("r",4.5)
     //iconNode( node ) # Clutters up overview
     this.textNode(node);
-    Util.noop(link);
+    vis.noop(link);
   }
 
   doLinks(root, g) {

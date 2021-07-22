@@ -2,7 +2,7 @@
 <template>
   <div :class="'tool-page-pane'" >
     <t-gauge v-if="show('Gauge')"></t-gauge>
-    <t-dnd   v-if="show('DnD')"  ></t-dnd>
+    <t-dnd   v-if="show('DnD')"></t-dnd>
   </div>
 </template>
 

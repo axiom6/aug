@@ -6,7 +6,8 @@
 <script type="module">
 
 import {ref, inject, nextTick, onMounted, onUnmounted} from "vue"; // , inject
-import Style from "../../../pub/augm/geom/lib/Style.js";
+import Style   from "../../../pub/augm/geom/lib/Style.js";
+import GeomMgr from "../../../pub/augm/geom/lib/GeomMgr.js";
 
 let PageND = {
 
@@ -14,16 +15,21 @@ let PageND = {
 
   setup( props ) {
 
-    const mix   = inject('mix');
-    const elem  = ref(null);
+    const mix     = inject('mix');
+    const elem    = ref(null);
+    const geomMgr = new GeomMgr();
 
     const create = () => {
        nextTick( () => {
-         window['Geom'][props.page.key] = new Style( elem['value'] );
-         props.page.obj.ga(); } ) }
+         if( mix.isDef(elem['value']) ) {
+           window['Geom'][props.page.key] = new Style( elem['value'] );
+           props.page.obj = geomMgr.createPageObj(props.page);
+           props.page.obj.ga(); }
+         else {
+           console.error( "PageND.create() elem null" ); } } ) }
 
     onMounted( () => {
-      create(); } )
+        create(); } )
 
     onUnmounted( () => {
       mix.removeElem( elem['value'], nextTick ) ; } )

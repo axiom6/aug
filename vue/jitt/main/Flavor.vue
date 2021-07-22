@@ -39,10 +39,12 @@
 
       onMounted( function () {
         nextTick( function() {
-          // console.log( 'Flavor.vue.mounted() wheel created' );
-          let elem     = elemf.value;
-          let svgMgr   = new SvgMgr( name, elem, 'Flavor' );
-          new Wheel(  svgMgr, onChoice, mix, true ); } ) } )
+          if( mix.isDef(elem['value']) ) {
+            let elem   = elemf['value'];
+            let svgMgr = new SvgMgr( name, elem, 'Flavor' );
+            new Wheel( svgMgr, onChoice, mix, true ); }
+          else {
+            console.error( "Flavor.vue.onMounted() elem null" ); } } ) } )
 
     return { name, elemf }; }
   }

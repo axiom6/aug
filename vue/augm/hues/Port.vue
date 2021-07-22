@@ -16,13 +16,14 @@ let Port = {
 
     const mix   = inject('mix');
     const elem  = ref(null);
-    const debug = false;
 
     onMounted( () => {
       if( props.page.show ) {
         nextTick( () => {
-          if(debug) { console.log( 'Port.onMounted', props.page ); }
-          Box.doApp( props.page.key, elem['value'] ); } ) } } )
+          if( mix.isDef(elem['value']) ) {
+            Box.doApp( props.page.key, elem['value'] ); }
+          else {
+            console.error( "Port.onMounted() elem null" ); } } ) } } )
 
     onUnmounted( () => {
       mix.removeElem( elem['value'], nextTick ) ; } )

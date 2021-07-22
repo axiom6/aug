@@ -86,7 +86,7 @@ class Coord
   cartColors:( id="cartColors") ->
     obj  =  { id:id, width:@width, height:@height, depth:@depth, channels:4 } #
     obj.expr  = ( emit, x, y, z ) =>
-      [r,g,b,a] = vis.rgba(x,y,z)
+      [r,g,b,a] = vis.rgba([x,y,z])
       emit( r, g, b, a )
     obj
 
@@ -108,10 +108,11 @@ class Coord
       emit( x, toZ(x,y), y )
     obj
 
+  # added z ?
   cartSurfColors:( id="cartSurfColors" ) ->
     obj  =  { id:id, width:@width,  height:@height, channels:4, axes:[1,2] } #
-    obj.expr = ( emit, x, y ) =>
-      [r,g,b,a] = vis.rgba( x, y )
+    obj.expr = ( emit, x, y, z ) =>
+      [r,g,b,a] = vis.rgba( x, y, z )
       emit( r, g, b, a )
     obj
 
@@ -144,7 +145,7 @@ class Coord
     obj  =  { id:id, width:@width, height:@height, depth:@depth, channels:4 } #
     obj.expr  = ( emit, ang, rad, dep, i ) =>
       hue     = @mbox.toHue( i, @width )
-      [r,g,b,a] = vis.rgba( hue, rad, dep ) # HCS
+      [r,g,b,a] = vis.rgba( [hue, rad, dep] ) # HCS
       emit( r, g, b, a )
     obj
 
@@ -170,7 +171,8 @@ class Coord
     obj.expr = ( emit, ang, rad, i ) =>
       hue     = @mbox.toHue( i, @npoints )
       radian  = @mbox.toRad( i, @npoints )
-      [r,g,b,a] = vis.rgba( hue, rad, toDep(radian,rad)*100 )
+      console.log( "cylSurfColors", hue, rad, toDep(radian,rad)*100 )
+      [r,g,b,a] = vis.rgba( [hue, rad, toDep(radian,rad)*100] )
       emit( r, g, b, a )
     obj
 
@@ -189,7 +191,7 @@ class Coord
   sphColors:( id="sphColors" ) ->
     obj  =  { id:id, width:@width, height:@height, depth:@depth, channels:4 } #
     obj.expr  = ( emit, ang1, ang2, rad, i, j ) =>
-      [r,g,b,a] = vis.rgba( i*360/@width, j*360/@height, rad )
+      [r,g,b,a] = vis.rgba( [i*360/@width, j*360/@height, rad] )
       emit( r, g, b, a )
     obj
 

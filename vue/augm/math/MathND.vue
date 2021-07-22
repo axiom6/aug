@@ -1,10 +1,10 @@
 
 
 <template>
-  <div class="math-tabs-pane">
+  <div class="math-nd-pane">
     <d-tabs :compKey="pracKey" :pages="toPages()"></d-tabs>
-      <template v-for="page in toPages()" :key="pageKeyIdx(page.key)">
-        <m-math-grid v-if="show(page.key)" :exps="page.obj" class="math-tabs-comp"></m-math-grid>
+      <template v-for="page in toPages()" :key="nav.keyIdx(page.key,pageIdx)">
+        <m-math-grid v-if="nav.show(page.key)" :exps="page.obj" class="math-nd-comp"></m-math-grid>
       </template>
   </div>
 </template>
@@ -26,26 +26,18 @@
       const mix     = inject('mix');
       const nav     = inject('nav');
       const page    = ref(null);
-      let   pageKey = 'none';
-      let   pageIdx = 0;
+      let   pageIdx = ref(0);
       const mathMgr = new MathMgr();
     //const debug   = false;
 
       const toPages = () => {
         return nav.pages[props.pracKey]; }
 
-      const show = ( pageArg ) => {
-        return pageKey === pageArg; }
-
-      const pageKeyIdx = ( pageArg ) => {
-        return pageArg + pageIdx; }
-
       const onNav = (obj) => {
         if( props.pracKey===obj.pracKey && nav.hasPage(props.pracKey,obj.pageKey) ) {
-          pageKey        = obj.pageKey;
           page.value     = nav.getPage(props.pracKey,obj.pageKey);
           page.value.obj = mathMgr.createExps(page.value);
-          pageIdx++; } }
+          pageIdx.value++; } }
 
 
     onMounted( () => { // Follow up with the last Nav.pub(obj) that mounted this vue component
@@ -53,7 +45,7 @@
       mix.subscribe( 'Nav', 'MathND', (obj) => {
           onNav( obj ); } ); } )
 
-      return { show, pageKeyIdx, toPages }; }
+      return { nav, pageIdx, toPages }; }
   }
   
 export default MathND;
@@ -66,8 +58,8 @@ export default MathND;
   
   @mathFS:@themeFS;
 
-  .math-tabs-pane   { position:absolute; left:0; top:0; width:100%; height:100%;
-    .math-tabs-comp { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;
+  .math-nd-pane   { position:absolute; left:0; top:0; width:100%; height:100%;
+    .math-nd-comp { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;
         background-color:@theme-back;font-size:2*@mathFS; } }
 
 </style>

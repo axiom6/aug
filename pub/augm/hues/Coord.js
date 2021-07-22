@@ -229,7 +229,7 @@ Coord = class Coord {
     };
     obj.expr = (emit, x, y, z) => {
       var a, b, g, r;
-      [r, g, b, a] = vis.rgba(x, y, z);
+      [r, g, b, a] = vis.rgba([x, y, z]);
       return emit(r, g, b, a);
     };
     return obj;
@@ -270,6 +270,7 @@ Coord = class Coord {
     return obj;
   }
 
+  // added z ?
   cartSurfColors(id = "cartSurfColors") {
     var obj;
     obj = {
@@ -282,9 +283,9 @@ Coord = class Coord {
         2 
       ]
     };
-    obj.expr = (emit, x, y) => {
+    obj.expr = (emit, x, y, z) => {
       var a, b, g, r;
-      [r, g, b, a] = vis.rgba(x, y);
+      [r, g, b, a] = vis.rgba(x, y, z);
       return emit(r, g, b, a);
     };
     return obj;
@@ -361,7 +362,11 @@ Coord = class Coord {
     obj.expr = (emit, ang, rad, dep, i) => {
       var a, b, g, hue, r;
       hue = this.mbox.toHue(i, this.width);
-      [r, g, b, a] = vis.rgba(hue, rad, dep); // HCS
+      [r, g, b, a] = vis.rgba([
+        hue,
+        rad,
+        dep // HCS
+      ]);
       return emit(r, g, b, a);
     };
     return obj;
@@ -431,7 +436,8 @@ Coord = class Coord {
       var a, b, g, hue, r, radian;
       hue = this.mbox.toHue(i, this.npoints);
       radian = this.mbox.toRad(i, this.npoints);
-      [r, g, b, a] = vis.rgba(hue, rad, toDep(radian, rad) * 100);
+      console.log("cylSurfColors", hue, rad, toDep(radian, rad) * 100);
+      [r, g, b, a] = vis.rgba([hue, rad, toDep(radian, rad) * 100]);
       return emit(r, g, b, a);
     };
     return obj;
@@ -481,7 +487,7 @@ Coord = class Coord {
     };
     obj.expr = (emit, ang1, ang2, rad, i, j) => {
       var a, b, g, r;
-      [r, g, b, a] = vis.rgba(i * 360 / this.width, j * 360 / this.height, rad);
+      [r, g, b, a] = vis.rgba([i * 360 / this.width, j * 360 / this.height, rad]);
       return emit(r, g, b, a);
     };
     return obj;

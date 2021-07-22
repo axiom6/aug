@@ -1,9 +1,12 @@
 
 
 Debug One
-  1. Augm Hues
-  2. Jitter choice
-  3. MathML
+  1. Jitter choice
+  2. Augm Hues maybe a lost cause. Need Three.js implementation
+  3. [Violation] Added non-passive event listener to a scroll-blocking 'wheel' event.
+     Consider marking event handler as 'passive' to make the page more responsive.
+     See https://www.chromestatus.com/feature/5745543795965952
+  4. [Violation] 'requestAnimationFrame' handler took 60ms
 
 Docs
   1. In progress
@@ -13,7 +16,7 @@ Tester
   2. Prevent toStr() - @toStrObject() recursion
 
 Tester unique capabilies:
-  Setup Spec Type Schema Closures Unit Apply Switches
+  Setup Spec Type Schema Closures Unit Apply Switches Publish
   1. Setup:    Dirt simple setup a single function test() with import { test } from "./Tester.js"
   2. Spec:     For asserting 'enums' 'range' and 'regexp' matching
   3. Type:     Assertions with Type.js inherited by the Tester class
@@ -29,6 +32,7 @@ Tester unique capabilies:
      b. test().testing  = false for production
      c. describe.on(false) to turn off a block of tests
      d.   module.on(false) to turn off a test module
+  9. Publish:  Test status and text to UI
 
 
 Debug Two

@@ -4,8 +4,8 @@
   <div class="draw-pane">
     <d-tabs :compKey="compKey" :pages="toPages()"></d-tabs>
     <!--h1 v-if="showH1">Drawings in D3</h1-->
-    <template v-for="page in toPages()" :key="pageKeyIdx(page.key,pageIdx)">
-      <d-pane  v-if="page.show" :page="page" class="pane-pane"></d-pane>
+    <template v-for="page in toPages()" :key="nav.keyIdx(page.key,pageIdx)">
+      <d-pane  v-if="nav.show(page.key)" :page="page" class="pane-pane"></d-pane>
     </template>
     </div>
 </template>
@@ -28,11 +28,6 @@
       let   showH1  = ref(true);
       let   pageIdx = ref(0);
       const page    = ref(null);
-      const debug   = false;
-
-      const pageKeyIdx = ( pageArg, pageNum ) => {
-        if( debug ) { console.log( 'Draw.vue.pageKeyIdx()', pageArg + pageNum ); }
-        return pageArg + pageNum; }
 
       const toPages = () => {
         return nav.getTabs('Draw'); }
@@ -47,7 +42,7 @@
         mix.subscribe(  'Nav', 'Draw', (obj) => {
           onNav(obj); } ); } )
 
-    return { compKey, toPages, page, pageKeyIdx, pageIdx, showH1 }; }
+    return { compKey, toPages, page, nav, pageIdx, showH1 }; }
   }
   export default Draw;
   

@@ -53,6 +53,12 @@
       "oAP" : "\/aug.iml",
       "oF" : 1
     },
+    "\/build" : {
+      "ft" : 65536,
+      "oA" : 1,
+      "oAP" : "\/build",
+      "oF" : 0
+    },
     "\/css\/base" : {
       "ft" : 65536,
       "oA" : 1,

@@ -53,7 +53,7 @@ Rect = class Rect {
     dx = 0.5 * (text.boundingBox.max.x - text.boundingBox.min.x);
     dy = offsetY ? 0.5 * (text.boundingBox.max.y - text.boundingBox.min.y) : 0;
     Rect.matrix.makeTranslation(this.xyz[0] - dx, this.xyz[1] - dy, this.xyz[2]);
-    text.applyMatrix(Rect.matrix);
+    text.applyMatrix4(Rect.matrix);
     this.tmesh = new THREE.Mesh(text, mats);
     this.tmesh.name = this.title;
     this.tmesh.geom = "Text";

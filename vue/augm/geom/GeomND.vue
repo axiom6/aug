@@ -2,8 +2,8 @@
 <template>
   <div class="geom-nd-pane">
     <d-tabs :compKey="pracKey" :pages="toPages()"></d-tabs>
-    <template v-for="page in toPages()" :key="pageIdx">
-      <g-page v-if="show(page.key)" :page="page" class="geom-nd-page"></g-page>
+    <template v-for="page in toPages()" :key="nav.keyIdx(page.key,pageIdx)">
+      <g-page v-if="nav.show(page.key)" :page="page" class="geom-nd-page"></g-page>
     </template>
   </div>
 </template>
@@ -13,7 +13,6 @@
   import { inject, ref, onMounted } from "vue";
   import Tabs    from '../../../lib/vue/elem/Tabs.vue';
   import PageND  from './PageND.vue'
-  import GeomMgr from '../../../pub/augm/geom/lib/GeomMgr.js'
 
   let GeomND = {
 
@@ -28,29 +27,23 @@
       const page    = ref(null);
       const pageIdx = ref(0)
       const debug   = false;
-      let   pageKey = 'none'
-      const geomMgr = new GeomMgr();
+
 
       const toPages = function() {
         return nav.getTabs(props.pracKey); }
 
-      const show = ( pageArg ) => {
-        return pageKey === pageArg; }
-
       const onNav = (obj) => {
         if( props.pracKey===obj.pracKey && nav.hasPage(props.pracKey,obj.pageKey) ) {
-          pageKey        = obj.pageKey
           page.value     = nav.getPage(props.pracKey,obj.pageKey);
-          page.value.obj = geomMgr.createPageObj(page.value);
+          // page.value.obj = geomMgr.createPageObj(page.value);
           if( debug ) { console.log( 'GeomND.onNav()', { obj:obj, page:page, pages:nav.getTabs(props.pracKey) } ); }
           pageIdx.value++; } }
 
       onMounted( () => { // Follow up with the last Nav.pub(obj) that mounted this vue component
-        onNav( { pracKey:props.pracKey, pageKey:nav.getPageKey(props.pracKey) } );
         mix.subscribe(  'Nav', 'GeomND', (obj) => {        //   also onNav() chacks for valid tabs and pages
           onNav(obj); } ) } )
 
-      return { show, page, pageIdx, toPages }; }
+      return { page, pageIdx, nav, toPages }; }
   }
   export default GeomND;
 

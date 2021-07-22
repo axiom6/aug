@@ -24,7 +24,7 @@ import { ref } from 'vue';
 
   let DnD = {
 
-    setup() {
+    setup(props) {
 
       const DnDStart  = ref(null);
       let   childDrag = null;

@@ -37,7 +37,7 @@ class Tree
     #node.append("svg:circle").attr("r",4.5)
     #iconNode( node ) # Clutters up overview
     @textNode( node )
-    Util.noop( link )
+    vis.noop(  link )
     return
 
   doLinks:( root, g ) =>

@@ -218,9 +218,8 @@ class Vis extends Type
 
   floor:( x, dx )          ->  dr = Math.round(dx); Math.floor( x / dr ) * dr
   ceil:(  x, dx )          ->  dr = Math.round(dx); Math.ceil(  x / dr ) * dr
-  @ithin:( beg, deg, end ) -> beg   <= deg and deg <= end # Closed interval with <=
-  isZero:( v )             -> -0.01 <  v   and v   <  0.01
-
+  isZero:( v )             -> -0.01 <  v    and v  <  0.01
+  within:(min,val,max)     -> min   <= val  and val <= max  # Closed interval with <=
 
   hasGlobal:( global, issue=true ) ->
     has = window[global]?

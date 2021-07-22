@@ -15,15 +15,15 @@ let MathExp = {
 
     const mix   = inject('mix')
     const elem  = ref(null);
-    const debug = false;
 
     const mathML = () => {
       nextTick( () =>  {
-        if( debug ) { console.log( 'PageExp.mathMl()'   ); } // , props.exp.mathML
-        elem['value'].innerHTML = props.exp.mathML; } ) }
+        if( mix.isDef(elem['value']) ) {
+          elem['value'].innerHTML = props.exp.mathML; }
+        else {
+          console.error( "MathExp.mathML() elem null" ); } } ) }
 
      onMounted( () =>  {
-       if( debug ) { console.log( 'PageExp.onMounted()' ); }  // , props.exp.mathML
        mathML(); } )
 
     onUnmounted( () => {

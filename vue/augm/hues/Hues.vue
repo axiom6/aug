@@ -4,8 +4,8 @@
   <div class="hues-pane">
     <d-tabs :compKey="compKey" :pages="toPages()"></d-tabs>
     <h1 v-if="compKey==='Draw'">Mathbox Colors</h1>
-    <template v-for="page in toPages()" :key="keyIdx(page.key,pageIdx)">
-      <d-port v-if="show(page.key)" :page="page" class="port-pane"></d-port>
+    <template v-for="page in toPages()" :key="nav.keyIdx(page.key,pageIdx)">
+      <d-port v-if="nav.show(page.key)" :page="page" class="port-pane"></d-port>
     </template>
     </div>
 </template>
@@ -27,35 +27,26 @@ import Port from './Port.vue'
       const compKey   = 'Hues';
       const pageIdx   = ref(0);
       const page      = ref(null);
-      let   pageKey   = 'none'
       const debug     = false;
       const scriptSrc = "/assets/mathbox-bundle.js"
       mix.addScript( scriptSrc );
 
-      const keyIdx = ( key, idx ) => {
-         return key + idx; }
-
       const toPages = () => {
         return nav.getTabs(compKey); }
-
-      const show = ( pageArg ) => {
-        return pageKey === pageArg; }
 
       const onNav = (obj) => {
         if( obj.compKey===compKey && mix.isDef(obj.pageKey) && nav.hasPage(compKey,obj.pageKey) ) {
             if(debug) { console.log( 'Hues.onNav()', obj ); }
-            pageKey = obj.pageKey;
             pageIdx.value++; } }
 
       onMounted( () => { // Follow up with the last Nav.pub(obj) that mounted this vue component
-        onNav( { compKey:compKey, pageKey:nav.getPageKey(compKey) } );
         mix.subscribe(  'Nav', 'Hues', (obj) => {
           onNav(obj); } ); } )
 
       onUnmounted( () => {
         mix.delScript( scriptSrc ); } )
 
-    return { compKey, toPages, page, pageIdx, keyIdx, show }; }
+    return { compKey, toPages, page, pageIdx, nav }; }
   }
   export default Hues;
   

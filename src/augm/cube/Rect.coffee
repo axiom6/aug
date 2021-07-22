@@ -28,7 +28,7 @@ class Rect
     dx   = 0.5 * ( text.boundingBox.max.x - text.boundingBox.min.x )
     dy   = if offsetY then 0.5 * ( text.boundingBox.max.y - text.boundingBox.min.y ) else 0
     Rect.matrix.makeTranslation( @xyz[0]-dx, @xyz[1]-dy, @xyz[2]   )
-    text.applyMatrix( Rect.matrix )
+    text.applyMatrix4( Rect.matrix )
     @tmesh       = new THREE.Mesh( text, mats )
     @tmesh.name  = @title
     @tmesh.geom  = "Text"

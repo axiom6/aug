@@ -2,7 +2,7 @@
 <template>
   <div class="disp-pane">
     <d-tabs :compKey="'Disp'" :pages="pages"></d-tabs>
-    <div :key="dispIdx">
+    <div :key="nav.keyIdx(dispObj.name,dispIdx)">
       <d-dims v-if="nav.isShow('Disp','Topics')" :dispObj="dispObj" :from="'Disp'"></d-dims>
       <d-desc v-if="nav.isShow('Disp','Texts')"  :dispObj="dispObj" :from="'Disp'"></d-desc>
     </div>

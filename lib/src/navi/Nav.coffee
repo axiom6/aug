@@ -156,8 +156,22 @@ class Nav
     if @mix.inArray(obj.compKey,@musePlanes) then @getPageKey(obj.compKey) else 'none'
 
   isShow:( tabsKey, pageKey ) ->
-    pageNav = @getPageKey( tabsKey, false )
+    pageNav = @getPageKey( tabsKey )
     pageKey is pageNav
+
+  # When @page matches return
+  #  otherwise look for when the page is true at eech level
+  #  this supports setting show true in pages
+  show:( pageArg ) ->
+    switch
+      when pageArg is @pageKey then true
+      when @level is "Disp"    then pageArg is @getPageKey( @dispKey )
+      when @level is "Prac"    then pageArg is @getPageKey( @pracKey )
+      when @level is "Comp"    then pageArg is @getPageKey( @compKey )
+      else                          false
+
+  keyIdx:( key, idx ) ->
+    key + idx
 
   # An important indicator of when Comps and Tabs are instanciated
   setTabs:( tabsKey, pages ) ->

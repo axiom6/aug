@@ -14,7 +14,7 @@ let Query = {
 
   props: { compKey:String, inovKey:String },
   
-  setup(props) {
+  setup() {
 
     const mix   = inject('mix');
     const search = new Search();
@@ -25,13 +25,14 @@ let Query = {
 
     onMounted( function () {
       nextTick( function() {
-        const pracs  = mix.inovObject( compKey, inovKey );
-        table        = new Tabulator( elem['value'], search.opts(pracs) );
-     // let pageSize = table.getPageSize();
-     // console.log( 'Grid.vue.onMounted()', { pageSize:pageSize } );
-        table.setPageSize(13);
-
-      } ); } );
+        if( mix.isDef(elem['value']) ) {
+          const pracs  = mix.inovObject( compKey, inovKey );
+          table        = new Tabulator( elem['value'], search.opts(pracs) );
+          // let pageSize = table.getPageSize();
+          // console.log( 'Grid.vue.onMounted()', { pageSize:pageSize } );
+          table.setPageSize(13); }
+        else {
+          console.error( "Query.onMounted() elem null" ); } } ) } )
 
     return { elem }; }
 
