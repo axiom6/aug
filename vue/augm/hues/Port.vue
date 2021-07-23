@@ -17,13 +17,13 @@ let Port = {
     const nav   = inject('nav');
     const elem  = ref(null);
 
+    const create = () => {
+      nav.createElem( "hues/Port.create()", elem['value'], nextTick, () => {
+        Box.doApp( props.page.key, elem['value'] ); } ); }
+
     onMounted( () => {
       if( props.page.show ) {
-        nextTick( () => {
-          if( nav.isDef(elem['value']) ) {
-            Box.doApp( props.page.key, elem['value'] ); }
-          else {
-            console.error( "Port.onMounted() elem null" ); } } ) } } )
+        create(); } } )
 
     onUnmounted( () => {
       nav.removeElem( elem['value'], nextTick ) ; } )

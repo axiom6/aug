@@ -34,7 +34,7 @@
       const style = function() {
         return nav.fontSizeCss(props.size); }
 
-    return { area, doClick, style, mix }; }
+    return { area, doClick, style, nav }; }
 
   }
 

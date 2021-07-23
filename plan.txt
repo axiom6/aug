@@ -1,13 +1,11 @@
 
 Debug One
-  1. Test all Mix to Nav and Visu refactoring
-  2. createElem closure in Nav lik removeElem
-  3. Jitter choice
-  4. Colors in Hues / Color / Polar / Vec / Sphere
+  1. Test  Visu refactoring
+  2. Jitter choice
+  3. Colors in Hues / Color / Polar / Vec / Sphere
      Good   in Hues / Rgbs  / Regress
-  5. Remove some of the junk added to Vis
-  6. @choice() in Mix.chosen
-  7. nav.batch() in Cube.vue
+  4. Remove some of the junk added to Vis
+  5. @choice() in Mix.chosen  and Flavor
 
 Debug Two
   1. Look into cicular JSON bug in Tester.reviewsLocal()

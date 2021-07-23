@@ -261,6 +261,13 @@ class Mix extends Type
       @removeElem(elem) )
     return
 
+  createElem:( msg, elem, nextTick, closure ) ->
+    nextTick( () =>
+      if @isDef(elem)
+        closure()
+      else
+        console.error( msg, "elem undefined" ) )
+    return
 
 # Choice
   choice: () ->

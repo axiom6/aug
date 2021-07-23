@@ -3,7 +3,6 @@
   <div class="view-pane">
     <v-home     v-if="show('Home')"   :key="viewIdx"></v-home>
     <v-main     v-if="show('Main')"   :key="viewIdx"></v-main>
-    <v-cube     v-if="show('Cube')"   :key="viewIdx"></v-cube>
     <v-spot     v-if="show('Spot')"   :key="viewIdx"></v-spot>
     <v-test     v-if="show('Test')"   :key="viewIdx"></v-test>
     <v-replay   v-if="show('Replay')" :key="viewIdx"></v-replay>
@@ -16,7 +15,6 @@
   import { inject, ref, onMounted } from 'vue';
   import Home     from './Home.vue'
   import Main     from '../main/Main.vue';
-  import Cube     from '../comp/Cube.vue';
   import Spot     from '../comp/Spot.vue';
   import Test     from '../../../lib/vue/test/Test.vue';
   import Replay   from '../../../lib/vue/test/Replay.vue';

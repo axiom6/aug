@@ -25,7 +25,7 @@
       const onPrac = function() {
         if( nav.isDef(connect) ) {
             connect.clearSvg(); }
-        createConnect( nav.stream(), props.pracObj ); }
+        createConnect( nav.stream, props.pracObj ); }
 
       const doPrac = function (pracKey) {
         nav.pub( { pracKey:pracKey } ); }
@@ -37,7 +37,7 @@
         nextTick( function() {
           let elem = pracElem.value;
           if( nav.hasElem(elem) ) {
-            connect = new Connect( stream, nav.batch(), pracObj, elem, props.level );
+            connect = new Connect( stream, nav.batch, pracObj, elem, props.level );
             if( props.level==='Prac') {
               window.addEventListener( 'resize', resize ) } }
           else {

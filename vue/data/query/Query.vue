@@ -7,7 +7,7 @@
 <script type="module">
 
   import Tabulator from 'tabulator-tables'
-  import {nextTick, onMounted, ref, inject } from "vue";
+  import {nextTick, onMounted, ref, inject, onUnmounted } from "vue";
   import Search from '../../../pub/data/query/Search.js'
 
 let Query = {
@@ -23,16 +23,19 @@ let Query = {
     const compKey   = 'Info';
     const inovKey   = 'Info';
 
-    onMounted( function () {
-      nextTick( function() {
-        if( nav.isDef(elem['value']) ) {
-          const pracs  = nav.inovObject( compKey, inovKey );
-          table        = new Tabulator( elem['value'], search.opts(pracs) );
-          // let pageSize = table.getPageSize();
-          // console.log( 'Grid.vue.onMounted()', { pageSize:pageSize } );
-          table.setPageSize(13); }
-        else {
-          console.error( "Query.onMounted() elem null" ); } } ) } )
+    const create = () => {
+      nav.createElem( "Query.create()", elem['value'], nextTick, () => {
+        const pracs  = nav.inovObject( compKey, inovKey );
+        table        = new Tabulator( elem['value'], search.opts(pracs) );
+        // let pageSize = table.getPageSize();
+        // console.log( 'Grid.vue.onMounted()', { pageSize:pageSize } );
+        table.setPageSize(13); } ); }
+
+    onMounted( () =>  {
+      create(); } )
+
+    onUnmounted( () => {
+      nav.removeElem( elem['value'], nextTick ) ; } )
 
     return { elem }; }
 

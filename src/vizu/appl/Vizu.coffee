@@ -39,8 +39,6 @@ class Vizu
     west:"Test", north:"Test", east:"Main", south:"Main", next:"Main", prev:"Hues" }
     Main:{ title:'Main', key:'Main', route:'Main', pracs:{}, ikw:false, icon:"fas fa-bezier-curve",
     west:"Home", north:"Home", east:"Cube", south:"Cube", next:"Cube", prev:"Home" }
-    Cube:{ title:'Cube', key:'Cube', route:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes",
-    west:"Main", north:"Main", east:"Spot", south:"Spot", next:"Spot", prev:"Main" }
     Spot:{ title:'Spot', key:'Spot', route:'Spot', pracs:{}, ikw:false, icon:"fas fa-lightbulb",
     west:"Cube", north:"Cube", east:"Test", south:"Test", next:"Test", prev:"Cube" }
     Test:{ title:'Test', key:'Test', pracs:{}, ikw:false, icon:"fas fa-stethoscope",
@@ -114,14 +112,7 @@ class Vizu
   # This does not make sense
   Vizu.pages = {
     Main:   {
-      Muse:    { title:'Muse',    key:'Muse',    show:false },
       Grids:   { title:'Grids',   key:'Grids',   show:false },
-      Rgbs:    { title:'Rgbs',    key:'Rgbs',    show:false },
-      Color:   { title:'Color',   key:'Color',   show:false }, # No default
-      Polar:   { title:'Polar',   key:'Polar',   show:false },
-      Vecs:    { title:'Vecs',    key:'Vecs',    show:false },
-      Sphere:  { title:'Sphere',  key:'Sphere',  show:false },
-      Regress: { title:'Regress', key:'Regress', show:false } }
-  }
+      Rgbs:    { title:'Rgbs',    key:'Rgbs',    show:false } } }
 
 export default Vizu

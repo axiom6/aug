@@ -16,15 +16,12 @@ let MathExp = {
     const nav   = inject('nav')
     const elem  = ref(null);
 
-    const mathML = () => {
-      nextTick( () =>  {
-        if( nav.isDef(elem['value']) ) {
-          elem['value'].innerHTML = props.exp.mathML; }
-        else {
-          console.error( "MathExp.mathML() elem null" ); } } ) }
+    const create = () => {
+      nav.createElem( "MathExo.create()", elem['value'], nextTick, () => {
+        elem['value'].innerHTML = props.exp.mathML; } ); }
 
      onMounted( () =>  {
-       mathML(); } )
+       create(); } )
 
     onUnmounted( () => {
       nav.removeElem( elem['value'], nextTick ) ; } )

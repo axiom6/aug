@@ -4,7 +4,7 @@
     <b-tabs :compKey="compKey" :pages="tabPages('Comp')"  position="left"  :isComp="soTrue()"></b-tabs>
     <b-tabs :compKey="compKey" :pages="tabPages(compKey)" position="right" :isInov="soTrue()" v-if="hasInov()"></b-tabs>
     <div   class="comp-comp">
-      <template   v-for="pracObj in compObj" :key="nav.keyIdx(pracObj[name],pracIdx)">
+      <template   v-for="pracObj in compObj" :key="nav.keyIdx(pracObj['name'],pracIdx)">
         <div :class="pracObj['dir']">
           <p-sign   v-if="isShow('Icons')"  :pracObj="pracObj"></p-sign>
           <p-dirs   v-if="isShow('Topics')" :pracObj="pracObj"></p-dirs>

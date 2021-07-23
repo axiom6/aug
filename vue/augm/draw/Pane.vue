@@ -18,14 +18,11 @@ let Pane = {
     const elem = ref(null);
 
     const create = () => {
-      nextTick( function() {
-        if( nav.isDef(elem['value']) ) {
-          props.page.obj = D3D.create( props.page.key, elem['value'], nav ); }
-        else {
-          console.error( "draw/Pane.create() elem null" ); } } ) }
+      nav.createElem( "draw/Pane.create()", elem['value'], nextTick, () => {
+          props.page.obj = D3D.create( props.page.key, elem['value'], nav ); } ); }
 
     onMounted( () => {
-        create(); } )
+       create();  } )
 
     onUnmounted( () => {
       nav.removeElem( elem['value'], nextTick ) ; } )
@@ -36,3 +33,12 @@ let Pane = {
 export default Pane;
 
 </script>
+
+<!--
+    const create2 = () => {
+      nextTick( function() {
+        if( nav.isDef(elem['value']) ) {
+          props.page.obj = D3D.create( props.page.key, elem['value'], nav ); }
+        else {
+          console.error( "draw/Pane.create() elem null" ); } } ) }
+-->

@@ -193,20 +193,6 @@ Vizu = (function() {
       next: "Cube",
       prev: "Home"
     },
-    Cube: {
-      title: 'Cube',
-      key: 'Cube',
-      route: 'Cube',
-      pracs: {},
-      ikw: false,
-      icon: "fas fa-cubes",
-      west: "Main",
-      north: "Main",
-      east: "Spot",
-      south: "Spot",
-      next: "Spot",
-      prev: "Main"
-    },
     Spot: {
       title: 'Spot',
       key: 'Spot',
@@ -239,11 +225,6 @@ Vizu = (function() {
   // This does not make sense
   Vizu.pages = {
     Main: {
-      Muse: {
-        title: 'Muse',
-        key: 'Muse',
-        show: false
-      },
       Grids: {
         title: 'Grids',
         key: 'Grids',
@@ -252,31 +233,6 @@ Vizu = (function() {
       Rgbs: {
         title: 'Rgbs',
         key: 'Rgbs',
-        show: false
-      },
-      Color: {
-        title: 'Color',
-        key: 'Color',
-        show: false // No default
-      },
-      Polar: {
-        title: 'Polar',
-        key: 'Polar',
-        show: false
-      },
-      Vecs: {
-        title: 'Vecs',
-        key: 'Vecs',
-        show: false
-      },
-      Sphere: {
-        title: 'Sphere',
-        key: 'Sphere',
-        show: false
-      },
-      Regress: {
-        title: 'Regress',
-        key: 'Regress',
         show: false
       }
     }

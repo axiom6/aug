@@ -7,7 +7,7 @@
 <script type="module">
 
   import Tabulator from 'tabulator-tables'
-  import {nextTick, onMounted, ref, inject } from "vue";
+  import {nextTick, onMounted, ref, inject, onUnmounted} from "vue";
   //port Demo from '../../../pub/data/table/Demo.js'
   import Tabu from '../../../pub/data/table/Tabu.js'
 
@@ -25,18 +25,19 @@ let Table = {
     const compKey   = 'Info';
     const inovKey   = 'Info';
 
-    // console.log( 'Grid.vue.setup()', { compKey:props.compKey, inovKey:props.inovKey, props:props } );
+    const create = () => {
+      nav.createElem( "Table.create()", elem['value'], nextTick, () => {
+        const pracs  = nav.inovObject( compKey, inovKey );
+        table        = new Tabulator( elem['value'], tabu.opts(pracs) );
+        // let pageSize = table.getPageSize();
+        // console.log( 'Grid.vue.onMounted()', { pageSize:pageSize } );
+        table.setPageSize(13); } ); }
 
-    onMounted( function () {
-      nextTick( function() {
-        if( nav.isDef(elem['value']) ) {
-          const pracs  = nav.inovObject( compKey, inovKey );
-          table        = new Tabulator( elem['value'], tabu.opts(pracs) );
-          // let pageSize = table.getPageSize();
-          // console.log( 'Grid.vue.onMounted()', { pageSize:pageSize } );
-          table.setPageSize(13); }
-        else {
-          console.error( "Table.onMounted() elem null" ); } } ) } );
+    onMounted( () =>  {
+      create(); } )
+
+    onUnmounted( () => {
+      nav.removeElem( elem['value'], nextTick ) ; } )
 
     return { elem }; }
 

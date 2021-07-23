@@ -2,7 +2,7 @@ var Cube3D;
 
 import {
   vis
-} from '../../../lib/pub/draw/Vis.js';
+} from '../../lib/pub/base/draw/Vis.js';
 
 import {
   BoxBufferGeometry,

@@ -3,7 +3,7 @@
   <div class="prin-pane">
     <b-tabs :compKey="compKey" :pages="pages"></b-tabs>
     <div class="prin-comp">
-        <template v-for="pracObj in compObj" :key="nav.keyIdx(pracObj[name],pracIdx)">
+        <template v-for="pracObj in compObj" :key="nav.keyIdx(pracObj['name'],pracIdx)">
           <div   :class="pracObj['dir']" :ref="pracObj['name']">
             <p-sign v-show="nav.isShow('Prin','Icons')"  :pracObj="pracObj"></p-sign>
             <p-dirs v-show="nav.isShow('Prin','Topics')" :pracObj="pracObj"></p-dirs>

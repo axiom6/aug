@@ -2,7 +2,7 @@
 <template>
   <div   class="prac-pane">
     <b-tabs :compKey="'Prac'" :pages="pages"></b-tabs>
-    <div class="prac-prac" :key="nav.keyIdx(pracObj.name,pracIdx)">
+    <div class="prac-prac" :key="nav.keyIdx(pracObj['name'],pracIdx)">
       <p-dirs v-show="nav.isShow('Prac','Topics')" :pracObj="pracObj"></p-dirs>
       <p-conn   v-if="nav.isShow('Prac','Graphs')" :pracObj="pracObj" level="Prac"></p-conn>
       <p-desc v-show="nav.isShow('Prac','Texts')"  :pracObj="pracObj"></p-desc>

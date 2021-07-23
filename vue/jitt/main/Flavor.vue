@@ -13,7 +13,7 @@
 
 <script type="module">
 
-  import { inject, ref, onMounted, nextTick } from 'vue';
+import {inject, ref, onMounted, nextTick, onUnmounted} from 'vue';
   import Navb    from '../../../lib/vue/elem/Navb.vue';
   import Btns    from '../../../lib/vue/elem/Btns.vue';
   import Summ    from './Summ.vue';
@@ -36,14 +36,16 @@
         nav.choose( name, choice, checked );
         nav.pub( { source:'Flavor.vue', compKey:name, choice:choice, checked:checked } ); }
 
-      onMounted( function () {
-        nextTick( function() {
-          if( nav.isDef(elem['value']) ) {
-            let elem   = elemf['value'];
-            let svgMgr = new SvgMgr( name, elem, 'Flavor' );
-            new Wheel( svgMgr, onChoice, nav, true ); }
-          else {
-            console.error( "Flavor.vue.onMounted() elem null" ); } } ) } )
+      const create = () => {
+        nav.createElem( "Flavor.create()", elem['value'], nextTick, () => {
+          let svgMgr = new SvgMgr( name, elemf['value'], 'Flavor' );
+          new Wheel( svgMgr, onChoice, nav, true ); } ) }
+
+      onMounted( () =>  {
+        create(); } )
+
+      onUnmounted( () => {
+        nav.removeElem( elem['value'], nextTick ) ; } )
 
     return { name, elemf }; }
   }

@@ -19,14 +19,12 @@ let Gauge = {
       outerEdgeCol:'wheat', unitsLabelCol:'wheat', tickLabelCol:'wheat', needleCol:'wheat' };
     let svgMgr = null;
 
+
     const create = () => {
-      nextTick( () => {
-        if( nav.isDef(elem['value']) ) {
-          svgMgr = new SvgMgr( 'Gauge', elem['value'], "Comp" )
-          opts.gaugeRadius = 0.5 * Math.min( svgMgr.size.w, svgMgr.size.h );
-          drawGauge( opts, svgMgr.g ); }
-        else {
-          console.error( "Gauge.create() elem null" ); } } ) }
+      nav.createElem( "Gauge.create()", elem['value'], nextTick, () => {
+        svgMgr = new SvgMgr( 'Gauge', elem['value'], "Comp" )
+        opts.gaugeRadius = 0.5 * Math.min( svgMgr.size.w, svgMgr.size.h );
+        drawGauge( opts, svgMgr.g ); } ); }
     
   onMounted(  () => {
       create(); } )

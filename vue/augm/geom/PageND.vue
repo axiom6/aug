@@ -20,13 +20,10 @@ let PageND = {
     const geomMgr = new GeomMgr();
 
     const create = () => {
-       nextTick( () => {
-         if( nav.isDef(elem['value']) ) {
-           window['Geom'][props.page.key] = new Style( elem['value'] );
-           props.page.obj = geomMgr.createPageObj(props.page);
-           props.page.obj.ga(); }
-         else {
-           console.error( "PageND.create() elem null" ); } } ) }
+      nav.createElem( "geom/PageND.create()", elem['value'], nextTick, () => {
+        window['Geom'][props.page.key] = new Style( elem['value'] );
+        props.page.obj = geomMgr.createPageObj(props.page);
+        props.page.obj.ga(); } ); }
 
     onMounted( () => {
         create(); } )
