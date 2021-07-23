@@ -17,7 +17,7 @@ let Table = {
   
   setup() {
 
-    const mix   = inject('mix');
+    const nav   = inject('nav');
     //nst demo  = new Demo();
     const tabu  = new Tabu();
     const elem  = ref(null);
@@ -29,8 +29,8 @@ let Table = {
 
     onMounted( function () {
       nextTick( function() {
-        if( mix.isDef(elem['value']) ) {
-          const pracs  = mix.inovObject( compKey, inovKey );
+        if( nav.isDef(elem['value']) ) {
+          const pracs  = nav.inovObject( compKey, inovKey );
           table        = new Tabulator( elem['value'], tabu.opts(pracs) );
           // let pageSize = table.getPageSize();
           // console.log( 'Grid.vue.onMounted()', { pageSize:pageSize } );

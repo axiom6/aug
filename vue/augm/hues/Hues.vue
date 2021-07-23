@@ -22,29 +22,28 @@ import Port from './Port.vue'
 
     setup() {
 
-      const mix       = inject('mix');
       const nav       = inject('nav');
       const compKey   = 'Hues';
       const pageIdx   = ref(0);
       const page      = ref(null);
       const debug     = false;
       const scriptSrc = "/assets/mathbox-bundle.js"
-      mix.addScript( scriptSrc );
+      nav.addScript( scriptSrc );
 
       const toPages = () => {
         return nav.getTabs(compKey); }
 
       const onNav = (obj) => {
-        if( obj.compKey===compKey && mix.isDef(obj.pageKey) && nav.hasPage(compKey,obj.pageKey) ) {
+        if( obj.compKey===compKey && nav.isDef(obj.pageKey) && nav.hasPage(compKey,obj.pageKey) ) {
             if(debug) { console.log( 'Hues.onNav()', obj ); }
             pageIdx.value++; } }
 
       onMounted( () => { // Follow up with the last Nav.pub(obj) that mounted this vue component
-        mix.subscribe(  'Nav', 'Hues', (obj) => {
+        nav.subscribe(  'Nav', 'Hues', (obj) => {
           onNav(obj); } ); } )
 
       onUnmounted( () => {
-        mix.delScript( scriptSrc ); } )
+        nav.delScript( scriptSrc ); } )
 
     return { compKey, toPages, page, pageIdx, nav }; }
   }

@@ -32,7 +32,6 @@
 
     setup( props ) {
 
-      const mix = inject( 'mix' );
       const nav = inject( 'nav' );
 
       const pracIdx = ref(0   );
@@ -50,9 +49,9 @@
         let obj = { level:"Disp", compObj:nav.compKey, pracKey:props.pracObj.name, dispKey:dispKey };
         nav.pub( obj ); }
       const style = function( ikwObj ) {
-        return mix.styleObj(ikwObj); }
+        return nav.styleObj(ikwObj); }
       const tsSumm = function(summ) {
-        return mix.isStr(summ) ? summ : "This is a test description"; }
+        return nav.isStr(summ) ? summ : "This is a test description"; }
 
     return { pracIdx, dispObj, doPrac, doDisp, style, tsSumm }; }
 

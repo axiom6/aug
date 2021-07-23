@@ -16,7 +16,7 @@ let Query = {
   
   setup() {
 
-    const mix   = inject('mix');
+    const nav   = inject('nav');
     const search = new Search();
     const elem  = ref(null);
     let   table = null;
@@ -25,8 +25,8 @@ let Query = {
 
     onMounted( function () {
       nextTick( function() {
-        if( mix.isDef(elem['value']) ) {
-          const pracs  = mix.inovObject( compKey, inovKey );
+        if( nav.isDef(elem['value']) ) {
+          const pracs  = nav.inovObject( compKey, inovKey );
           table        = new Tabulator( elem['value'], search.opts(pracs) );
           // let pageSize = table.getPageSize();
           // console.log( 'Grid.vue.onMounted()', { pageSize:pageSize } );

@@ -77,9 +77,8 @@ Augm = (function() {
       head.appendChild(siteElem);
     }
 
-    static init(batch) {
+    static init() {
       var error, streamLog, subjects;
-      Augm.Batch = batch; // Not necessary here, but assigned for compatibilitry
       window['Geom'] = {};
       subjects = ["Nav", "Tab", "View"];
       streamLog = {
@@ -89,7 +88,7 @@ Augm = (function() {
       };
       Augm.stream = new Stream(subjects, streamLog);
       Augm.mix = new Mix(Augm);
-      Augm.nav = new Nav(Augm.stream, Augm.mix, batch, Augm.komps, Augm.pages, false);
+      Augm.nav = new Nav(Augm, Augm.stream, Augm.komps, Augm.pages, false);
       //ugm.cache  = new Cache( Augm.stream )
       tester.setOptions({
         testing: true,
@@ -351,7 +350,7 @@ Augm = (function() {
         val.data = Access.refine(val.data);
       }
     }
-    Augm.init(Augm.Batch);
+    Augm.init();
   };
 
   //ead.appendChild(jsonLD)

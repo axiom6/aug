@@ -15,13 +15,13 @@ let PageND = {
 
   setup( props ) {
 
-    const mix     = inject('mix');
+    const nav     = inject('nav');
     const elem    = ref(null);
     const geomMgr = new GeomMgr();
 
     const create = () => {
        nextTick( () => {
-         if( mix.isDef(elem['value']) ) {
+         if( nav.isDef(elem['value']) ) {
            window['Geom'][props.page.key] = new Style( elem['value'] );
            props.page.obj = geomMgr.createPageObj(props.page);
            props.page.obj.ga(); }
@@ -32,7 +32,7 @@ let PageND = {
         create(); } )
 
     onUnmounted( () => {
-      mix.removeElem( elem['value'], nextTick ) ; } )
+      nav.removeElem( elem['value'], nextTick ) ; } )
 
     return { elem }; }
 }
@@ -54,10 +54,10 @@ export default PageND;
 
 <!--
     const remove = () => {
-      if( mix.isDef(props.page.obj) ) {
+      if( nav.isDef(props.page.obj) ) {
         nextTick( () => {
           let dom = elem['value'];
-          while( mix.isDef(dom) && mix.isDef(dom.firstChild) ) {
+          while( nav.isDef(dom) && nav.isDef(dom.firstChild) ) {
             dom.removeChild(dom.firstChild); } } ) } }
 
 

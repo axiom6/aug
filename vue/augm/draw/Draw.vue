@@ -22,7 +22,6 @@
 
     setup() {
 
-      const mix     = inject('mix');
       const nav     = inject('nav');
       const compKey = 'Draw';
       let   showH1  = ref(true);
@@ -39,7 +38,7 @@
 
       onMounted( () => {
         showH1.value  = true;
-        mix.subscribe(  'Nav', 'Draw', (obj) => {
+        nav.subscribe(  'Nav', 'Draw', (obj) => {
           onNav(obj); } ); } )
 
     return { compKey, toPages, page, nav, pageIdx, showH1 }; }

@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "Cylindrical.js",
+  "sourceRoot": "../../../src/vizu/coords",
+  "sources": [
+    "Cylindrical.coffee"
+  ],
+  "names": [],
+  "mappings": "AAEA,IAAA;;AAAM,cAAN,MAAA,YAAA;EAEE,WAAY,KAAA,CAAA;IAAE,IAAC,CAAA;IACb,IAAC,CAAA,KAAD,GAAS,IAAC,CAAA,WAAW,CAAC;IACtB,IAAC,CAAA,IAAD,GAAa,IAAC,CAAA,IAAI,CAAC;IACnB,IAAC,CAAA,SAAD,GAAa,IAAC,CAAA,IAAI,CAAC;IACnB,IAAC,CAAA,MAAD,GAAa,wBAAH,GAAsB,wBAAtB,GAAyC,IAAC,CAAA,SAAS,CAAC;IAC9D,IAAC,CAAA,MAAD,GAAa,wBAAH,GAAsB,wBAAtB,GAAyC,IAAC,CAAA,SAAS,CAAC;IAC9D,IAAC,CAAA,MAAD,GAAa,wBAAH,GAAsB,wBAAtB,GAA0C,GALxD;IAMI,IAAC,CAAA,MAAD,GAAa,wBAAH,GAAsB,wBAAtB,GAA0C,GANxD;IAOI,IAAC,CAAA,MAAD,GAAa,wBAAH,GAAsB,wBAAtB,GAAyC,IAAC,CAAA,MAAD,GAAU;IAC7D,IAAC,CAAA,MAAD,GAAa,wBAAH,GAAsB,wBAAtB,GAAyC,IAAC,CAAA,MAAD,GAAU;IAC7D,IAAC,CAAA,MAAD,GAAa,wBAAH,GAAsB,wBAAtB,GAAyC,IAAC,CAAA,MAAD,GAAU;IAC7D,IAAC,CAAA,MAAD,GAAa,wBAAH,GAAsB,wBAAtB,GAAyC,IAAC,CAAA,MAAD,GAAU;IAC7D,IAAC,CAAA,IAAI,CAAC,GAAN,CAAW,IAAC,CAAA,KAAD,GAAO,IAAlB,EAAwB,IAAxB;EAZU;;AAFd;;AAgBA,OAAA,QAAe",
+  "sourcesContent": [
+    "\n\nclass Cylindrical\n\n  constructor:( @main ) ->\n    @klass = @constructor.name\n    @opts      = @main.opts\n    @cartesian = @main.cartesian\n    @radius = if @opts.radius? then @opts.radius? else @cartesian.xmax\n    @height = if @opts.height? then @opts.height? else @cartesian.ymax\n    @dtick1 = if @opts.dtick1? then @opts.dtick1? else  90              # Degrees\n    @dtick2 = if @opts.dtick2? then @opts.dtick2? else  30              # Degrees\n    @rtick1 = if @opts.rtick1? then @opts.rtick1? else @radius * 0.10\n    @rtick2 = if @opts.rtick2? then @opts.rtick2? else @radius * 0.01\n    @htick1 = if @opts.htick1? then @opts.htick1? else @height * 0.10\n    @htick2 = if @opts.htick2? then @opts.htick2? else @height * 0.01\n    @main.log( @klass+'()', @ )\n\nexport default Cylindrical"
+  ]
+}

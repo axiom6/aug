@@ -32,7 +32,6 @@
       'v-defs':Defs, 'v-test':Test, 'v-replay':Replay, 'v-result':Result },
 
     setup() {
-      const mix     = inject('mix');
       const nav     = inject('nav');
       const viewIdx = ref(0);
       let   level   = 'Comp'
@@ -48,14 +47,14 @@
       const onNav = (obj) => {
         level  = obj.level;
         module = obj.compKey;
-        if( mix.inArray(obj.compKey,nav.musePlanes) ) { module = level;       }
+        if( nav.inArray(obj.compKey,nav.musePlanes) ) { module = level;       }
         else if( obj.compKey==='Prin'               ) { module = level==='Comp' ? 'Prin' : 'Prac'; }
         else if( level==='Prac'                     ) { module = obj.pracKey; }
         viewIdx.value++;
         if( debug ) { console.log( 'View.onNav()', { level:level, module:module, obj:obj } ); } }
 
       onMounted( () => {
-        mix.subscribe('View', 'View', (obj) => { onNav(obj); } ); } )
+        nav.subscribe('View', 'View', (obj) => { onNav(obj); } ); } )
 
       return { show, viewIdx }; }
     }

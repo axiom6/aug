@@ -26,7 +26,7 @@
 
     setup( props ) {
 
-      const mix   = inject('mix');
+      const nav   = inject('nav');
       const c0    = ref('-');
       const c1    = ref('-');
       const c2    = ref('-');
@@ -34,7 +34,7 @@
 
       const onChoices = function( obj ) {
         if( obj.compKey === props.compKey ) {
-          let choices = mix.choices( props.name )
+          let choices = nav.choices( props.name )
           if( debug ) {
             console.log( 'Summ.onChoices()', choices, obj ); }
           for( let i = 0; i < 3; i++ ) {
@@ -50,7 +50,7 @@
         return props.compKey !== 'none'; }
 
       onMounted( function () {
-        mix.subscribe( 'Nav', 'Summ', (obj) => { onChoices(obj); } );
+        nav.subscribe( 'Nav', 'Summ', (obj) => { onChoices(obj); } );
           onChoices( { route:props.name, choice:'init', checked:false } ); } )
 
         return { c0, c1, c2, isRouted }; },

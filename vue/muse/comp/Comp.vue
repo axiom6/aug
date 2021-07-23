@@ -39,7 +39,6 @@ let Comp = {
 
   setup( {} ) {
 
-    const mix       = inject('mix');
     const nav       = inject('nav');
     const compKey   = ref('Info');
     const pageKey   = ref(nav.getPageKey('Comp'));
@@ -68,7 +67,7 @@ let Comp = {
       pageKey.value = obj.pageKey;
       inovKey.value = obj.inovKey;
       onRows();
-      compObj.value = mix.inovObject( compKey.value, inovKey.value );
+      compObj.value = nav.inovObject( compKey.value, inovKey.value );
       pracIdx.value++;
       if( debug ) { console.log( 'Comp.onComp()',
           { obj:obj, pageKey:pageKey.value, pageObj:obj.pageKey, compObj:compObj.value } ); } }
@@ -84,7 +83,7 @@ let Comp = {
       let                   page = nav.getTabs('Info');
       if( myKey==='Know') { page = nav.getTabs('Know'); }
       if( myKey==='Wise') { page = nav.getTabs('Wise'); }
-      if( mix.inArray( myKey, inovComps ) ) {
+      if( nav.inArray( myKey, inovComps ) ) {
         myRows['value']['Plane'].name = myKey;
         myRows['value']['Plane'].icon = page['Core'].icon; }  }
 
@@ -93,7 +92,7 @@ let Comp = {
         onComp(obj); } }
 
     const hasInov = () => {
-      let has = mix.inArray( compKey.value, inovComps );
+      let has = nav.inArray( compKey.value, inovComps );
       if( debug ) { console.log( 'Comp.hasInov()', { has:has, compKey:compKey.value, inovComps:inovComps } ); }
       return has; }
 
@@ -101,7 +100,7 @@ let Comp = {
     onComp({ compKey:nav.compKey, pageKey:nav.getPageKey('Comp'), inovKey:nav.inovKey } );
 
     onMounted( () => {
-      mix.subscribe('Nav', 'Comp', (obj) => { onNav(obj); } ); } )
+      nav.subscribe('Nav', 'Comp', (obj) => { onNav(obj); } ); } )
 
 
     return { compKey,compObj,pracIdx,nav,pracObj,tabPages,hasInov,isDim,isRows,myRows,isShow, soTrue }; }

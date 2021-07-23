@@ -94,14 +94,13 @@ class Jitter
   Jitter.routeNames = Jitter.createRouteNames( Jitter.routes )
 
   # 2. Initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
-  Jitter.init =   ( batch ) ->
-    Jitter.Batch   = batch # Not necessary here, but assigned for compatibilitry
+  Jitter.init =   () ->
     Jitter.app     = 'Jitter'
     subjects       = ["Dir","Nav"]
     streamLog      = { subscribe:false, publish:false, subjects:subjects }
     Jitter.stream  = new Stream( subjects, streamLog )
     Jitter.mix     = new Mix(   Jitter, Jitter.routeNames )
-    Jitter.nav     = new Nav(   Jitter.stream, Jitter.mix, batch, Jitter.komps, {}, true )
+    Jitter.nav     = new Nav(   Jitter, Jitter.stream, Jitter.komps, {}, true )
     Jitter.touch   = new Touch( Jitter.stream, Jitter.nav )
     #itter.cache   = new Cache( Jitter.stream )
     tester.setOptions( { testing:true, archive:true, verbose:false, debug:false } )

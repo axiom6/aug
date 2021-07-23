@@ -93,7 +93,7 @@ class Augm
     Augm.addToHead()
     for key, val of Augm.Batch when val.refine? and val.refine
       val.data = Access.refine(val.data)
-    Augm.init( Augm.Batch )
+    Augm.init()
     return
 
   # Add these <link> tags to <head> because vite build makes a mess of them
@@ -119,14 +119,13 @@ class Augm
   Augm.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json"
 
   # 2. Initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
-  Augm.init =   ( batch ) ->
-    Augm.Batch  = batch # Not necessary here, but assigned for compatibilitry
+  Augm.init =   () ->
     window['Geom'] = {} # May still be needed by Ganjs
     subjects    = ["Nav","Tab","View"]
     streamLog   = { subscribe:false, publish:false, subjects:subjects }
     Augm.stream = new Stream( subjects, streamLog )
     Augm.mix    = new Mix( Augm )
-    Augm.nav    = new Nav( Augm.stream, Augm.mix, batch, Augm.komps, Augm.pages, false )
+    Augm.nav    = new Nav( Augm, Augm.stream, Augm.komps, Augm.pages, false )
     #ugm.cache  = new Cache( Augm.stream )
     tester.setOptions( { testing:true, archive:false, verbose:false, debug:false } )
     try

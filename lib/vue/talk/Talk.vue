@@ -33,23 +33,22 @@
             this.onSect( obj.pracKey, obj.dispKey, obj.presKey, obj.imgsIdx ); } },
 
       onSect: function( talkKey, sectKey, presKey, imgsIdx ) {
-        let  dispObj = this.mix.sectObject( talkKey, sectKey );
-        this.sectObj = this.mix.isDef(presKey) ? this.mix.presObject(dispObj,presKey) : dispObj;
-     // if( !this.mix.isDef(this.sectObj) ) {
+        let  dispObj = this.nav.sectObject( talkKey, sectKey );
+        this.sectObj = this.nav.isDef(presKey) ? this.nav.presObject(dispObj,presKey) : dispObj;
+     // if( !this.nav.isDef(this.sectObj) ) {
         console.log( 'Talk.vue.onSect()',
           { dispObj:dispObj, sectObj:this.sectObj, talkKey:talkKey, sectKey:sectKey, presKey:presKey } );
         this.sectObj.imgsIdx = imgsIdx;
-        this.imgsObj = this.mix.compObject( 'Imgs' );
+        this.imgsObj = this.nav.compObject( 'Imgs' );
         
       } },
 
     beforeMount: function() {
-      this.mix = inject('mix');
       this.nav = inject('nav');
-      this.talkObjs = this.mix.compObject('Talk'); },
+      this.talkObjs = this.nav.compObject('Talk'); },
 
     mounted: function () {
-      this.mix.subscribe(  "Nav", 'Talk', (obj) => {
+      this.nav.subscribe(  "Nav", 'Talk', (obj) => {
         this.onNav( obj ); } ); }
     
   }

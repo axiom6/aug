@@ -18,7 +18,6 @@ import { inject, ref, onMounted } from 'vue';
 
     setup(props) {
 
-      const mix     = inject('mix');
       const nav     = inject('nav');
       let   tabsIdx = 0;
       const pageObj = ref(null);
@@ -59,7 +58,7 @@ import { inject, ref, onMounted } from 'vue';
         return pageKey.value === pageArg ? 'tabs-tab-active' : 'tabs-tab'; }
 
       onMounted( () => {  // obj is tab obj and not a complete pub obj
-        mix.subscribe('Tab', 'Tabs', (obj) => {
+        nav.subscribe('Tab', 'Tabs', (obj) => {
           if( compKey===obj.compKey ) {
             onPage(obj.pageKey); } } ); } )
 

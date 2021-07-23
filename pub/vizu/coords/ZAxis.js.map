@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "ZAxis.js",
+  "sourceRoot": "../../../src/vizu/coords",
+  "sources": [
+    "ZAxis.coffee"
+  ],
+  "names": [],
+  "mappings": "AAEA,IAAA;;AAAA,OAAA;EAAS,KAAT;CAAA,MAAA;;AACA,OAAO,IAAP,MAAA;;AAEM,QAAN,MAAA,MAAA;EAEE,WAAY,KAAA,SAAA,CAAA;AACd,QAAA;IADgB,IAAC,CAAA;IAAM,IAAC,CAAA;IACpB,IAAC,CAAA,KAAD,GAAS,IAAC,CAAA,WAAW,CAAC;IACtB,EAAA,GAAS,IAAC,CAAA,IAAI,CAAC;IACf,IAAC,CAAA,KAAD,GAAS,IAAI,KAAJ,CAAA;IACT,IAAC,CAAA,OAAO,CAAC,QAAT,CAAmB,EAAE,CAAC,IAAtB,EAA4B,EAAE,CAAC,IAA/B,EAAqC,EAAE,CAAC,IAAxC,EAA8C,EAAE,CAAC,IAAjD,EAAuD,EAAE,CAAC,IAA1D,EAAgE,EAAE,CAAC,IAAnE,EAAyE,MAAzE,EAAiF,IAAC,CAAA,KAAlF;IACA,IAAC,CAAA,QAAD,CAAY,EAAZ,EAAkB,IAAC,CAAA,KAAnB;IACA,IAAC,CAAA,IAAI,CAAC,UAAN,CAAkB,IAAC,CAAA,KAAnB;IACA,IAAC,CAAA,IAAI,CAAC,GAAN,CAAW,IAAC,CAAA,KAAD,GAAO,IAAlB,EAAwB,IAAxB;EAPU;;EASZ,QAAS,CAAE,EAAF,EAAM,KAAN,CAAA;AACX,QAAA,EAAA,EAAA,OAAA,EAAA,GAAA,EAAA,IAAA,EAAA,IAAA,EAAA;IAAI,IAAA,GAAO,IAAI,IAAJ,CAAU,IAAC,CAAA,IAAX;IACP,CAAA,GAAO,EAAE,CAAC,IAAH,GAAU,EAAE,CAAC;IACpB,EAAA,GAAO,CAAC,EAAE,CAAC,IAAH,GAAQ,EAAE,CAAC,IAAZ,CAAA,GAAoB;IAC3B,IAAA,GAAO,EAAA,GAAK;IACZ,GAAA,GAAO,IAAI,CAAC,EAAL,GAAU;AACjB;WAAM,CAAA,IAAK,EAAE,CAAC,IAAd;MACE,IAAC,CAAA,OAAO,CAAC,QAAT,CAAmB,EAAE,CAAC,IAAtB,EAA4B,EAAE,CAAC,IAA/B,EAAqC,CAArC,EAAwC,EAAE,CAAC,IAA3C,EAAiD,EAAE,CAAC,IAAH,GAAQ,EAAzD,EAA6D,CAA7D,EAAgE,QAAhE,EAA0E,KAA1E;MACA,IAAI,CAAC,QAAL,CAAe,CAAC,CAAC,QAAF,CAAA,CAAf,EAA6B,IAA7B,EAAmC,CAAC,EAAE,CAAC,IAAJ,EAAS,EAAE,CAAC,IAAH,GAAQ,EAAjB,EAAoB,CAApB,CAAnC,EAA2D,CAAC,GAAD,EAAK,GAAL,EAAS,GAAT,CAA3D,EAA0E,QAA1E,EAAoF,KAApF;mBACA,CAAA,IAAK,EAAE,CAAC;IAHV,CAAA;;EANO;;AAXX;;AAsBA,OAAA,QAAe",
+  "sourcesContent": [
+    "\n\nimport { Group } from 'three'\nimport Text from './Text.js'\n\nclass ZAxis\n\n  constructor:( @main, @content ) ->\n    @klass = @constructor.name\n    cc     = @main.cartesian\n    @group = new Group()\n    @content.drawLine( cc.xmin, cc.ymin, cc.zmin, cc.xmin, cc.ymin, cc.zmax, 'blue', @group )\n    @annotate(  cc,   @group )\n    @main.addToScene( @group )\n    @main.log( @klass+'()', @ )\n\n  annotate:( cc, group ) ->\n    text = new Text( @main )\n    z    = cc.zmin + cc.ztick1\n    dy   = (cc.ymax-cc.ymin) * 0.05\n    size = dy * 0.5\n    rot  = Math.PI / 6\n    while z <= cc.zmax\n      @content.drawLine( cc.xmin, cc.ymax, z, cc.xmin, cc.ymax+dy, z, 0xAAAAAA, group )\n      text.drawText( z.toString(), size, [cc.xmin,cc.ymax+dy,z], [rot,rot,rot], 0xAAAAAA, group )\n      z += cc.ztick1\n\nexport default ZAxis"
+  ]
+}

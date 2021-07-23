@@ -34,7 +34,6 @@
 
     setup() {
 
-      const mix = inject( 'mix' );
       const nav = inject( 'nav' );
 
       const dispObj = ref(null);
@@ -49,7 +48,7 @@
         nav.pub( obj ); }
 
       const style = function( ikwObj ) {
-        return mix.styleObj(ikwObj); }
+        return nav.styleObj(ikwObj); }
 
     return { dispObj, ddObj, doPrac, doDisp, style }; }
   }

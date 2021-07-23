@@ -28,19 +28,18 @@
 
     setup( props ) {
 
-      const mix     = inject( 'mix' );
       const nav     = inject( 'nav' );
       const ddObj   = ref(null );
 
       const hasDispObj = function() {
-        let has = mix.isDef(props.dispObj);
+        let has = nav.isDef(props.dispObj);
         if( !has) {
           console.error( 'Dims.hasDispObj() dispObj null', {from:props.from} ); }
         return has; }
 
       const doClick = function (name) {
         // console.log( 'Dims.doClick()', { name:name, dispObj:props.dispObj } );
-        if( mix.isDef(props.dispObj.column) ) { doPrac(name) }
+        if( nav.isDef(props.dispObj.column) ) { doPrac(name) }
         else                                  { doDisp(name) } }
 
       const gridClass = function() {
@@ -59,13 +58,13 @@
 
       const style = function( ikwObj ) {
         /*
-        if( !mix.isDef(ikwObj) ) {
+        if( !nav.isDef(ikwObj) ) {
           console.log('Dims.style() ikwObj null' ); }
         else {
           console.log('Dims.style() ikwObj ok',  ); }
         */
         let fontSize = props.from==='Disp' ? 2.0 : 1.0;
-        return mix.styleObj(ikwObj,fontSize); }
+        return nav.styleObj(ikwObj,fontSize); }
         
       return { ddObj, doClick, gridClass, doDisp, doPrac, dispClass, style, hasDispObj }; },
   }

@@ -23,7 +23,7 @@
     props: { pracKey:String },
     
     setup( props ) {
-      const mix     = inject('mix');
+
       const nav     = inject('nav');
       const page    = ref(null);
       let   pageIdx = ref(0);
@@ -42,7 +42,7 @@
 
     onMounted( () => { // Follow up with the last Nav.pub(obj) that mounted this vue component
       onNav( { pracKey:props.pracKey, pageKey:nav.getPageKey(props.pracKey) } );
-      mix.subscribe( 'Nav', 'MathND', (obj) => {
+      nav.subscribe( 'Nav', 'MathND', (obj) => {
           onNav( obj ); } ); } )
 
       return { nav, pageIdx, toPages }; }

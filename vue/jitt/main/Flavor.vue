@@ -28,21 +28,20 @@
     setup( ) {
 
       const nav      = inject('nav');
-      const mix      = inject('mix');
       const name     = 'Flavor';
       const elemf    = ref(null);
     //const  homeBtn = inject('homeBtn');
       
       const onChoice = function ( choice, checked ) {
-        mix.choose( name, choice, checked );
+        nav.choose( name, choice, checked );
         nav.pub( { source:'Flavor.vue', compKey:name, choice:choice, checked:checked } ); }
 
       onMounted( function () {
         nextTick( function() {
-          if( mix.isDef(elem['value']) ) {
+          if( nav.isDef(elem['value']) ) {
             let elem   = elemf['value'];
             let svgMgr = new SvgMgr( name, elem, 'Flavor' );
-            new Wheel( svgMgr, onChoice, mix, true ); }
+            new Wheel( svgMgr, onChoice, nav, true ); }
           else {
             console.error( "Flavor.vue.onMounted() elem null" ); } } ) } )
 

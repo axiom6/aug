@@ -94,20 +94,19 @@ class Data
   }
 
   # 2. Initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
-  Data.init =   ( batch ) ->
-    Data.Batch  = batch # Not necessary here, but assigned for compatibilitry
+  Data.init =   () ->
     Data.myName = 'Muse'
     subjects    = ["Nav"]
     infoSpec    = { subscribe:false, publish:false, subjects:subjects}
     Data.stream = new Stream( subjects, infoSpec )
     Data.mix    = new Mix(   Data, Data.routeNames )           # true for using route
-    Data.nav    = new Nav(   Data.stream, Data.mix, batch, Data.komps, {}, true )
+    Data.nav    = new Nav(   Data, Data.stream, Data.komps, {}, true )
     Data.touch  = new Touch( Data.stream, Data.nav )
     #ata.build  = new Build( batch, Data.komps )
     Data.cache  = new Cache( Data.stream )
     tester.setOptions( { testing:true, archive:false, verbose:false, debug:false } )
-    Access.buildInnov( batch, 'Data',   'Info' )
-    Access.mergePracs( batch, 'Prin', ['Info','Know','Wise'] ) # 'Data'
+    Access.buildInnov( Data.Batch, 'Data',   'Info' )
+    Access.mergePracs( Data.Batch, 'Prin', ['Info','Know','Wise'] ) # 'Data'
     #ata.mergeCols()
     try            # A lot can go wrong with vue3 initialization so trap errors
       Data.vue3()

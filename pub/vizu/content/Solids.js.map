@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "Solids.js",
+  "sourceRoot": "../../../src/vizu/content",
+  "sources": [
+    "Solids.coffee"
+  ],
+  "names": [],
+  "mappings": "AACA,IAAA;;AAAM,SAAN,MAAA,OAAA;EAEE,WAAY,KAAA,CAAA;IAAE,IAAC,CAAA;IACb,IAAC,CAAA,KAAD,GAAS,IAAC,CAAA,WAAW,CAAC;IACtB,IAAC,CAAA,IAAI,CAAC,GAAN,CAAW,IAAC,CAAA,KAAD,GAAO,IAAlB,EAAwB,IAAxB;EAFU;;AAFd;;AAMA,OAAA,QAAe",
+  "sourcesContent": [
+    "\nclass Solids\n\n  constructor:( @main ) ->\n    @klass = @constructor.name\n    @main.log( @klass+'()', @ )\n\nexport default Solids"
+  ]
+}

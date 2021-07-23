@@ -18,8 +18,8 @@
 
     setup() {
 
-      const mix    = inject('mix');
-      const build  = new Build(  mix.batch() );
+      const nav    = inject('nav');
+      const build  = new Build(  nav.batch );
       let   cubeTh = {}
 
       onMounted( () => {
@@ -27,7 +27,7 @@
         cubeTh.animate(); } )
 
       onUnmounted( () => {
-        mix.removeElem( cubeTh.parElem, nextTick ) ; } )
+        nav.removeElem( cubeTh.parElem, nextTick ) ; } )
       
     return {}; }
   }

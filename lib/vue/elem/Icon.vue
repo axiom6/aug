@@ -18,17 +18,17 @@
 
     setup( props ) {
 
-      const mix = inject( 'mix' );
+      const nav = inject( 'nav' );
 
       const hasSumm = function() {
-        return mix.isDef(props.summ); }
+        return nav.isDef(props.summ); }
 
       const doClick = function() {
-        if( mix.isDef(props.fnClick) ) {
+        if( nav.isDef(props.fnClick) ) {
           props.fnClick(props.name); } }
 
       const style = function() {
-        return mix.fontSizeCss(props.size); }
+        return nav.fontSizeCss(props.size); }
         
     return { doClick, style, hasSumm }; }
   }

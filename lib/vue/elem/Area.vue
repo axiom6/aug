@@ -4,7 +4,7 @@
       <tbody>
         <template v-for="area in areat">
           <tr >
-            <td v-if="mix.isDef(area.icon)" class="area-icon"><i :class="area.icon"></i></td>
+            <td v-if="nav.isDef(area.icon)" class="area-icon"><i :class="area.icon"></i></td>
             <td class="area-name" @click="doClick(area.name)">{{area.name}}</td>
             <td class="area-desc">{{area.desc}}</td>
           </tr>
@@ -23,16 +23,16 @@
 
     setup( props ) {
 
-      const mix = inject( 'mix' );
+      const nav = inject( 'nav' );
 
       const area = ref(null);
 
       const doClick = function(name) {
-        if( mix.isDef(props.fnClick) ) {
+        if( nav.isDef(props.fnClick) ) {
           props.fnClick(name); } }
 
       const style = function() {
-        return mix.fontSizeCss(props.size); }
+        return nav.fontSizeCss(props.size); }
 
     return { area, doClick, style, mix }; }
 

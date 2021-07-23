@@ -21,7 +21,7 @@
 
     setup() {
 
-      const mix    = inject('mix');
+      const nav    = inject('nav');
       const orient = ref('portrait');
 
       const classOrient = function() {
@@ -31,7 +31,7 @@
         orient.value = orient; }
 
       onMounted( function () {
-        mix.publish( 'Nav', 'Dash' ); } )
+        nav.publish( 'Nav', 'Dash' ); } )
 
     return { classOrient, onOrient }; }
     

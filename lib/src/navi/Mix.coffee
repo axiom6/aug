@@ -7,6 +7,7 @@ class Mix extends Type
   constructor:( Main ) ->
     super()
     Mix.Main =  Main
+    @batch   = Main.Batch
     @debug = false
 
   hasElem: (elem)    -> elem? and elem['clientHeight']? and elem['clientHeight'] > 0
@@ -60,10 +61,6 @@ class Mix extends Type
   publish: (subject, object) ->
     Mix.Main['stream'].publish(subject, object)
     return
-  stream: () ->
-    Mix.Main.stream
-  batch: () ->
-    Mix.Main.Batch
   fontSize: (scale) ->  # JavaScript font-size the matches themeFS in theme.less
     fs = if Mix.Main.fontSize? then Mix.Main.fontSize else 2
     sc = if scale?               then scale else 1
@@ -119,6 +116,12 @@ class Mix extends Type
     else
       console.error( 'Mix.data() unknown data name', name )
       {}
+  opts:( key ) ->
+    console.log( "Mix.opts",  key, Mix.Main.Batch['Main'].data[key] )
+    Mix.Main.Batch['Main'].data[key]
+  opts2:( key ) ->
+    console.log( "Mix.opts2", key, Mix.Main.Batch['Main'].data[key] )
+    Mix.Main.Batch['Main'].data[key]
   prin: ()  ->
     Mix.Main.Batch['Prin'].data.pracs
   comps: (compk) ->

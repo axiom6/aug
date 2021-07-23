@@ -26,7 +26,6 @@
 
     setup( props ) {
 
-      const mix     = inject( 'mix' );
       const nav     = inject( 'nav' );
       let   btn     = ref({} );
       const btnElem = ref(null);
@@ -34,11 +33,11 @@
       let   asp     = 0;
 
       const pubBtn = function (btn) {
-        let checked = mix.isDef(btn.checked) ? btn.checked : false;
+        let checked = nav.isDef(btn.checked) ? btn.checked : false;
         if( btn.type==='choice' ) {
           btn.checked.value = !btn.checked.value;
           checked = btn.checked.value;
-          mix.choose( props.name, btn.name, btn.checked.value );
+          nav.choose( props.name, btn.name, btn.checked.value );
           nav.pub( { source:'Btns.vue', compKey:props.name, choice:btn.name, checked:checked } ); }
         else if( btn.type==='pub' ) {
              nav.pub( { pageKey:props.name } ); } // Need to determine what to publish on Nav here
@@ -57,7 +56,7 @@
         return { position:'absolute', left:sy*p[0]+'%', top:sy*p[1]+'%', width:sy*p2+'%', height:sy*p[3]+'%',
           fontSize:fs, 'z-index':2 } }
       const styleBtn = function (btn) {
-        let back = mix.toRgbaHsv( btn.hsv );
+        let back = nav.toRgbaHsv( btn.hsv );
         return { color:'black', backgroundColor:back }; }
       const classCheck = function (btn) {
         // console.log( 'Btns.classCheck()', { checked:btn.checked.value, name:props.name, choice:btn.name } );

@@ -45,26 +45,26 @@
               this.nav.imgsNum = pics.length;
               let src  = "../../data/imgs/" + this.imgsObj[imgs]['dir'] + pics[idx].src;
               let elem = this.$refs[refn];
-              this.mix.appendImgsHW( src, elem ); } ) },
+              this.nav.appendImgsHW( src, elem ); } ) },
           
             //console.log( 'sect.htmlImgs', {$refs:this.$refs,refn:refn,elem:elem,
             //    pics:pics,pic:pics[idx],src:src,idx:idx,num:pics.length,sectObj:this.sectObj} ); } )
 
           hasSect: function() {
-            this.mix = inject('mix')
-            let has = this.mix.isDef(this.sectObj);
+            this.nav = inject('nav')
+            let has = this.nav.isDef(this.sectObj);
             console.log( 'Sect.hasSect()', { has:has, sectObj:this.sectObj } );
-            return this.mix.isDef(this.sectObj); },
+            return this.nav.isDef(this.sectObj); },
           
           hasProp: function(prop) {
-            return this.mix.isDef(this.sectObj[prop]) }
+            return this.nav.isDef(this.sectObj[prop]) }
 
           mounted: function () {
-            this.mix = inject('mix');
-            this.nav = inject('nav'); }
+            this.nav = inject('nav');
+
           
         }
-      }
+      },
     
       export default Sect;
     

@@ -23,9 +23,9 @@
   let Home = {
 
     setup( {} ) {
-      const mix = inject( 'mix' );
+      const nav = inject( 'nav' );
       onMounted( function () {
-        mix.publish( 'Tocs', 'Close' ); } ) }
+        nav.publish( 'Tocs', 'Close' ); } ) }
   }
   
   export default Home;

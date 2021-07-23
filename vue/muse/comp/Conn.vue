@@ -14,7 +14,6 @@
 
     setup( props ) {
 
-      const mix = inject( 'mix' );
       const nav = inject( 'nav' );
 
       let   connect  = null;
@@ -24,9 +23,9 @@
         onPrac(); } )
 
       const onPrac = function() {
-        if( mix.isDef(connect) ) {
+        if( nav.isDef(connect) ) {
             connect.clearSvg(); }
-        createConnect( mix.stream(), props.pracObj ); }
+        createConnect( nav.stream(), props.pracObj ); }
 
       const doPrac = function (pracKey) {
         nav.pub( { pracKey:pracKey } ); }
@@ -37,17 +36,17 @@
       const createConnect = function( stream, pracObj ) {
         nextTick( function() {
           let elem = pracElem.value;
-          if( mix.hasElem(elem) ) {
-            connect = new Connect( stream, mix.batch(), pracObj, elem, props.level );
+          if( nav.hasElem(elem) ) {
+            connect = new Connect( stream, nav.batch(), pracObj, elem, props.level );
             if( props.level==='Prac') {
               window.addEventListener( 'resize', resize ) } }
           else {
             console.log( 'Conn.createConnect()',
-              { name:pracObj.name, has:mix.hasElem(elem), elem:elem } ); } } ) }
+              { name:pracObj.name, has:nav.hasElem(elem), elem:elem } ); } } ) }
 
       const resize = function() {
         nextTick( function() {
-          if( mix.isDef(connect) ) {
+          if( nav.isDef(connect) ) {
               connect.resize();  } } ); }
 
 

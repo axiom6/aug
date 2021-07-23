@@ -105,7 +105,7 @@ Color = class Color {
     hcss = 0;
     rgbs = 0;
     [hcss, rgbs] = this.genPolarRgb(scale);
-    console.log('genPolarRgbs', hcss.length, rgbs.length);
+    // console.log( 'genPolarRgbs', hcss.length, rgbs.length )
     return coord.cylLookup(view, hcss, rgbs);
   }
 

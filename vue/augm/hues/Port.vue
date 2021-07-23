@@ -14,19 +14,19 @@ let Port = {
 
   setup( props ) {
 
-    const mix   = inject('mix');
+    const nav   = inject('nav');
     const elem  = ref(null);
 
     onMounted( () => {
       if( props.page.show ) {
         nextTick( () => {
-          if( mix.isDef(elem['value']) ) {
+          if( nav.isDef(elem['value']) ) {
             Box.doApp( props.page.key, elem['value'] ); }
           else {
             console.error( "Port.onMounted() elem null" ); } } ) } } )
 
     onUnmounted( () => {
-      mix.removeElem( elem['value'], nextTick ) ; } )
+      nav.removeElem( elem['value'], nextTick ) ; } )
 
     return { elem } }
 }

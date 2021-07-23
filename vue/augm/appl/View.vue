@@ -48,7 +48,7 @@
                  'v-result':Result },
 
     setup() {
-      const mix     = inject('mix');
+      const nav     = inject('nav');
       const viewIdx = ref(0);
       let   module  = 'Home'
       let   debug   = false
@@ -65,7 +65,7 @@
         if( debug ) { console.log( 'View.onNav()', { module:module, obj:obj } ); } }
 
       onMounted( () => {
-        mix.subscribe('View', 'View', (obj) => { onNav(obj); } ); } )
+        nav.subscribe('View', 'View', (obj) => { onNav(obj); } ); } )
 
       return { show, viewIdx }; }
     }

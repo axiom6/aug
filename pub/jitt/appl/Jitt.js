@@ -76,9 +76,8 @@ Jitter = (function() {
       head.appendChild(siteElem);
     }
 
-    static init(batch) {
+    static init() {
       var streamLog, subjects;
-      Jitter.Batch = batch; // Not necessary here, but assigned for compatibilitry
       Jitter.app = 'Jitter';
       subjects = ["Dir", "Nav"];
       streamLog = {
@@ -88,7 +87,7 @@ Jitter = (function() {
       };
       Jitter.stream = new Stream(subjects, streamLog);
       Jitter.mix = new Mix(Jitter, Jitter.routeNames);
-      Jitter.nav = new Nav(Jitter.stream, Jitter.mix, batch, Jitter.komps, {}, true);
+      Jitter.nav = new Nav(Jitter, Jitter.stream, Jitter.komps, {}, true);
       Jitter.touch = new Touch(Jitter.stream, Jitter.nav);
       //itter.cache   = new Cache( Jitter.stream )
       tester.setOptions({

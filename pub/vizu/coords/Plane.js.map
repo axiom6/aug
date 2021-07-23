@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "Plane.js",
+  "sourceRoot": "../../../src/vizu/coords",
+  "sources": [
+    "Plane.coffee"
+  ],
+  "names": [],
+  "mappings": "AACA,IAAA;;AAAA,OAAA;EAAS,aAAT;EAAwB,iBAAxB;EAA2C,UAA3C;EAAuD,IAAvD;CAAA,MAAA;;AAEM,QAAN,MAAA,MAAA;EAEE,WAAY,KAAA,OAAA,EAAiB,MAAjB,CAAA;AACd,QAAA,EAAA,EAAA,QAAA,EAAA;IADgB,IAAC,CAAA;IAAM,IAAC,CAAA;IACpB,IAAC,CAAA,KAAD,GAAY,IAAC,CAAA,WAAW,CAAC;IACzB,EAAA,GAAY,IAAC,CAAA,IAAI,CAAC;IAClB,QAAA,GAAY,IAAI,aAAJ,CAAmB,EAAE,CAAC,EAAtB,EAA0B,EAAE,CAAC,EAA7B;IACZ,QAAA,GAAY,IAAI,iBAAJ,CAAuB;MAAE,IAAA,EAAK,UAAP;MAAmB,KAAA,EAAM,EAAE,CAAC,GAAH,CAAO,MAAP;IAAzB,CAAvB;IACZ,IAAC,CAAA,IAAD,GAAY,IAAI,IAAJ,CAAU,QAAV,EAAoB,QAApB;IACZ,IAAoD,MAAA,KAAU,IAA9D;MAAA,IAAC,CAAA,IAAI,CAAC,QAAQ,CAAC,GAAf,CAAoB,EAAE,CAAC,GAAH,CAAO,EAAP,CAApB,EAAgC,CAAhC,EAA4C,CAA5C,EAAA;;IACA,IAAoD,MAAA,KAAU,IAA9D;MAAA,IAAC,CAAA,IAAI,CAAC,QAAQ,CAAC,GAAf,CAAoB,CAApB,EAAgC,EAAE,CAAC,GAAH,CAAO,EAAP,CAAhC,EAA4C,CAA5C,EAAA;;IACA,IAAoD,MAAA,KAAU,IAA9D;MAAA,IAAC,CAAA,IAAI,CAAC,QAAQ,CAAC,GAAf,CAAqB,EAAE,CAAC,EAAxB,EAA8B,EAAE,CAAC,EAAjC,EAAuC,EAAE,CAAC,IAA1C,EAAA;;IACA,IAAoD,MAAA,KAAU,IAA9D;MAAA,IAAC,CAAA,IAAI,CAAC,QAAQ,CAAC,GAAf,CAAqB,EAAE,CAAC,EAAxB,EAA8B,EAAE,CAAC,IAAjC,EAAuC,EAAE,CAAC,EAA1C,EAAA;;IACA,IAAoD,MAAA,KAAU,IAA9D;MAAA,IAAC,CAAA,IAAI,CAAC,QAAQ,CAAC,GAAf,CAAqB,EAAE,CAAC,IAAxB,EAA8B,EAAE,CAAC,EAAjC,EAAuC,EAAE,CAAC,EAA1C,EAAA;;IACA,IAAC,CAAA,KAAK,CAAC,GAAP,CAAW,IAAC,CAAA,IAAZ;IACA,IAAC,CAAA,IAAI,CAAC,GAAN,CAAW,IAAC,CAAA,KAAD,GAAO,IAAlB,EAAwB,IAAxB;EAZU;;AAFd;;AAgBA,OAAA,QAAe",
+  "sourcesContent": [
+    "\nimport { PlaneGeometry, MeshPhongMaterial, DoubleSide, Mesh } from 'three'\n\nclass Plane\n\n  constructor:( @main, @group, orient ) ->\n    @klass    = @constructor.name\n    cc        = @main.cartesian\n    planeGeo  = new PlaneGeometry( cc.xd, cc.yd )\n    planeMat  = new MeshPhongMaterial( { side:DoubleSide, color:cc.hex(orient) } )\n    @mesh     = new Mesh( planeGeo, planeMat )\n    @mesh.rotation.set( cc.rad(90), 0,          0  ) if orient is 'XZ'\n    @mesh.rotation.set( 0,          cc.rad(90), 0  ) if orient is 'YZ'\n    @mesh.position.set(  cc.xc,   cc.yc,   cc.zmin ) if orient is 'XY'\n    @mesh.position.set(  cc.xc,   cc.ymin, cc.zc   ) if orient is 'XZ'\n    @mesh.position.set(  cc.xmin, cc.yc,   cc.zc   ) if orient is 'YZ'\n    @group.add(@mesh)\n    @main.log( @klass+'()', @ )\n\nexport default Plane\n"
+  ]
+}

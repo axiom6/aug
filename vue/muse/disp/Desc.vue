@@ -21,15 +21,15 @@
 
     setup() {
 
-      const mix = inject( 'mix' );
+      const nav = inject( 'nav' );
 
       const areaObj = ref(null);
 
       const style = function (ikwObj) {
-        return mix.styleObj(ikwObj); }
+        return nav.styleObj(ikwObj); }
 
       const toDesc = function(desc) {
-        return mix.isStr(desc) ? desc : "This is a test description"; }
+        return nav.isStr(desc) ? desc : "This is a test description"; }
         
     return { areaObj, style, toDesc }; }
   }

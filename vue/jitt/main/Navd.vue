@@ -22,7 +22,6 @@
 
     setup() {
 
-      const mix = inject( 'mix' );
       const nav = inject( 'nav' );
 
       const dirs = { west:true, east:true, north:true, south:true, prev:true, next:true };
@@ -38,7 +37,7 @@
             dirs[keyn] = dirsa[keyn]; } }
 
       onMounted( function () {
-        mix.subscribe(  "Navd", 'Navd', (dirs) => {
+        nav.subscribe(  "Navd", 'Navd', (dirs) => {
           onDirs( dirs ); } ); } )
 
     return{ doDir, style }; }

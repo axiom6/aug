@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "Data.js",
+  "sourceRoot": "../../../src/vizu/main",
+  "sources": [
+    "Data.coffee"
+  ],
+  "names": [],
+  "mappings": "AAEA,IAAA;;AAAM,OAAN,MAAA,KAAA;EAEE,WAAY,KAAA,CAAA;IAAE,IAAC,CAAA;IACb,IAAC,CAAA,KAAD,GAAS,IAAC,CAAA,WAAW,CAAC;IACtB,IAAC,CAAA,IAAI,CAAC,GAAN,CAAW,IAAC,CAAA,KAAD,GAAO,IAAlB,EAAwB,IAAxB;EAFU;;AAFd;;AAMA,OAAA,QAAe",
+  "sourcesContent": [
+    "\n\nclass Data\n\n  constructor:( @main ) ->\n    @klass = @constructor.name\n    @main.log( @klass+'()', @ )\n\nexport default Data"
+  ]
+}

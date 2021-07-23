@@ -11,7 +11,7 @@ let Gauge = {
   
   setup() {
 
-    const mix   = inject('mix');
+    const nav   = inject('nav');
     const elem  = ref(null);
     let   opts = { gaugeRadius:160, minVal:0, maxVal:100, needleVal:Math.round(30),
       tickSpaceMinVal:1, tickSpaceMajVal:10, divID:"gaugeBox", gaugeUnits:"%",
@@ -21,7 +21,7 @@ let Gauge = {
 
     const create = () => {
       nextTick( () => {
-        if( mix.isDef(elem['value']) ) {
+        if( nav.isDef(elem['value']) ) {
           svgMgr = new SvgMgr( 'Gauge', elem['value'], "Comp" )
           opts.gaugeRadius = 0.5 * Math.min( svgMgr.size.w, svgMgr.size.h );
           drawGauge( opts, svgMgr.g ); }
@@ -32,7 +32,7 @@ let Gauge = {
       create(); } )
 
   onUnmounted( () => {
-    mix.removeElem( elem['value'], nextTick ) ; } )
+    nav.removeElem( elem['value'], nextTick ) ; } )
 
   return { elem } }
 

@@ -14,13 +14,13 @@ let Pane = {
 
   setup( props ) {
 
-    const mix  = inject('mix');
+    const nav  = inject('nav');
     const elem = ref(null);
 
     const create = () => {
       nextTick( function() {
-        if( mix.isDef(elem['value']) ) {
-          props.page.obj = D3D.create( props.page.key, elem['value'], mix ); }
+        if( nav.isDef(elem['value']) ) {
+          props.page.obj = D3D.create( props.page.key, elem['value'], nav ); }
         else {
           console.error( "draw/Pane.create() elem null" ); } } ) }
 
@@ -28,7 +28,7 @@ let Pane = {
         create(); } )
 
     onUnmounted( () => {
-      mix.removeElem( elem['value'], nextTick ) ; } )
+      nav.removeElem( elem['value'], nextTick ) ; } )
 
     return { elem } }
 }

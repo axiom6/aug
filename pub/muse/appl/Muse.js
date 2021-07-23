@@ -89,9 +89,8 @@ Muse = (function() {
       head.appendChild(jsonLD);
     }
 
-    static init(batch) {
+    static init() {
       var error, infoSpec, subjects;
-      Muse.Batch = batch; // Not necessary here, but assigned for compatibilitry
       Muse.myName = 'Muse';
       subjects = ["Nav", "Tab", "View"];
       infoSpec = {
@@ -101,9 +100,9 @@ Muse = (function() {
       };
       Muse.stream = new Stream(subjects, infoSpec);
       Muse.mix = new Mix(Muse);
-      Muse.nav = new Nav(Muse.stream, Muse.mix, batch, Muse.komps, Muse.pages, false);
+      Muse.nav = new Nav(Muse, Muse.stream, Muse.komps, Muse.pages, false);
       Muse.touch = new Touch(Muse.stream, Muse.nav);
-      Muse.build = new Build(batch, Muse.komps);
+      Muse.build = new Build(Muse.Batch, Muse.komps);
       //use.cache  = new Cache( Muse.stream )
       tester.setOptions({
         testing: true,
@@ -111,8 +110,8 @@ Muse = (function() {
         verbose: false,
         debug: false
       });
-      Access.buildInnov(batch, 'Data', 'Info');
-      Access.mergePracs(batch, 'Prin', [
+      Access.buildInnov(Muse.Batch, 'Data', 'Info');
+      Access.mergePracs(Muse.Batch, 'Prin', [
         'Info',
         'Know',
         'Wise' // 'Data'

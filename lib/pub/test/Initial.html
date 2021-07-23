@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Unit Tester</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="Description" content="Augments your Daily Life">
+  <meta name="theme-color" content="#f00">
+  <meta name="apple-mobile-web-app-capable"          content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title"            content="Augm">
+  <meta name="msapplication-TileImage"               content="msapplication-icon-144x144.png"><!--check on this -->
+  <meta name="msapplication-TileColor"               content="#000">
+  <link  href="/assets/apple-touch-icon.png"  rel="apple-touch-icon">
+  <link  href="/assets/favicon.ico"           rel="icon">
+</head>
+<body style="background:black; padding:0; margin:0; font-family:monospace;">
+<div id="tester" style="background:black; position:absolute; left:3%; width:97%; top:0; height:100%; display:grid;
+overflow:auto;">
+    <div id="summary" style="color:wheat; font-size:6vmin; justify-self:start; align-self:center; text-align:left;">
+      Unit Tests:
+    </div>
+</div>
+<script type="module">
+  import UnitTester from './lib/pub/test/UnitTester.js'
+  UnitTester.start(window.location.href);
+</script>
+</body>
+</html>

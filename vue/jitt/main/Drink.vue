@@ -10,7 +10,7 @@
 
     setup() {
 
-      const mix  = inject( 'mix' );
+      const nav  = inject( 'nav' );
       const name = 'Drink';
       const btns = {
         Black:  { title:'Black',  name:'Black',                   pos:[2, 5,96,13], hsv:[34,44,69],
@@ -26,7 +26,7 @@
         Alternative:  { title:'Alternative',  name:'Alternative', pos:[2,80,96,13], hsv:[34,44,69],
           type:'choice', check:true, checked:ref(false), icon:"fas fa-coffee" } };
 
-      mix.refreshBtns( name, btns );
+      nav.refreshBtns( name, btns );
 
       return { name, btns }; }
   }

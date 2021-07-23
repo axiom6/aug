@@ -24,7 +24,6 @@
 
     setup() {
 
-      const mix     = inject('mix');
       const nav     = inject('nav');
       const debug   = false;
       const pracObj = ref(null);
@@ -33,7 +32,7 @@
       const pages = nav.pages['Prac']
 
       const onPrac = (obj) => {
-        pracObj.value = mix.pracObject( obj.compKey, obj.inovKey, obj.pracKey );
+        pracObj.value = nav.pracObject( obj.compKey, obj.inovKey, obj.pracKey );
         pracIdx.value++;
         if( debug ) {
           console.log( 'Prac.onPrac()', { pracIdx:pracIdx.value, pracObj:pracObj.value, pracKey:obj.pracKey } ); } }
@@ -62,7 +61,7 @@
 
       onMounted( () => {
         // console.log( 'Prac.onMounted()')
-        mix.subscribe(  "Nav", 'Prac', (obj) => {
+        nav.subscribe(  "Nav", 'Prac', (obj) => {
           onNav(obj); } ); } )
       
     return { pracObj, pracIdx, pages, nav }; }
@@ -88,6 +87,6 @@
 <!--
 
 
-if( !mix.isDef(pracObj.value) || pracObj.value.name !== obj.pracKey ) {
+if( !nav.isDef(pracObj.value) || pracObj.value.name !== obj.pracKey ) {
 -->
 

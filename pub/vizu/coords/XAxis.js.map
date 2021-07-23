@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "XAxis.js",
+  "sourceRoot": "../../../src/vizu/coords",
+  "sources": [
+    "XAxis.coffee"
+  ],
+  "names": [],
+  "mappings": "AACA,IAAA;;AAAA,OAAA;EAAS,KAAT;CAAA,MAAA;;AAEA,OAAO,IAAP,MAAA;;AAEM,QAAN,MAAA,MAAA;EAEE,WAAY,KAAA,SAAA,CAAA;AACd,QAAA;IADgB,IAAC,CAAA;IAAM,IAAC,CAAA;IACpB,IAAC,CAAA,KAAD,GAAS,IAAC,CAAA,WAAW,CAAC;IACtB,EAAA,GAAS,IAAC,CAAA,IAAI,CAAC;IACf,IAAC,CAAA,KAAD,GAAS,IAAI,KAAJ,CAAA;IACT,IAAC,CAAA,OAAO,CAAC,QAAT,CAAmB,EAAE,CAAC,IAAtB,EAA4B,EAAE,CAAC,IAA/B,EAAqC,EAAE,CAAC,IAAxC,EAA8C,EAAE,CAAC,IAAjD,EAAuD,EAAE,CAAC,IAA1D,EAAgE,EAAE,CAAC,IAAnE,EAAyE,MAAzE,EAAiF,IAAC,CAAA,KAAlF;IACA,IAAC,CAAA,QAAD,CAAW,EAAX,EAAkB,IAAC,CAAA,KAAnB;IACA,IAAC,CAAA,IAAI,CAAC,UAAN,CAAkB,IAAC,CAAA,KAAnB;IACA,IAAC,CAAA,IAAI,CAAC,GAAN,CAAW,IAAC,CAAA,KAAD,GAAO,IAAlB,EAAwB,IAAxB;EAPU;;EASZ,QAAS,CAAE,EAAF,EAAM,KAAN,CAAA;AACX,QAAA,EAAA,EAAA,GAAA,EAAA,IAAA,EAAA,IAAA,EAAA;IAAI,IAAA,GAAO,IAAI,IAAJ,CAAU,IAAC,CAAA,IAAX;IACP,CAAA,GAAO,EAAE,CAAC;IACV,EAAA,GAAO,CAAC,EAAE,CAAC,IAAH,GAAQ,EAAE,CAAC,IAAZ,CAAA,GAAoB;IAC3B,IAAA,GAAO,EAAA,GAAK;IACZ,GAAA,GAAO,IAAI,CAAC,EAAL,GAAU;AACjB,WAAM,CAAA,IAAK,EAAE,CAAC,IAAd;MACE,IAAC,CAAA,OAAO,CAAC,QAAT,CAAmB,CAAnB,EAAsB,EAAE,CAAC,IAAzB,EAA+B,EAAE,CAAC,IAAlC,EAAwC,CAAxC,EAA2C,EAAE,CAAC,IAAH,GAAQ,EAAnD,EAAuD,EAAE,CAAC,IAA1D,EAAgE,QAAhE,EAA0E,KAA1E;MACA,IAAI,CAAC,QAAL,CAAe,CAAC,CAAC,QAAF,CAAA,CAAf,EAA6B,IAA7B,EAAmC,CAAC,CAAD,EAAG,EAAE,CAAC,IAAH,GAAQ,EAAX,EAAc,EAAE,CAAC,IAAjB,CAAnC,EAA2D,CAAC,GAAD,EAAK,GAAL,EAAS,CAAT,CAA3D,EAAwE,QAAxE,EAAkF,KAAlF;MACA,CAAA,IAAK,EAAE,CAAC;IAHV;EANO;;AAXX;;AAuBA,OAAA,QAAe",
+  "sourcesContent": [
+    "\nimport { Group } from 'three'\n\nimport Text from './Text.js'\n\nclass XAxis\n\n  constructor:( @main, @content ) ->\n    @klass = @constructor.name\n    cc     = @main.cartesian\n    @group = new Group()\n    @content.drawLine( cc.xmin, cc.ymin, cc.zmin, cc.xmax, cc.ymin, cc.zmin, 'blue', @group )\n    @annotate( cc,    @group )\n    @main.addToScene( @group )\n    @main.log( @klass+'()', @ )\n\n  annotate:( cc, group ) ->\n    text = new Text( @main )\n    x    = cc.xmin\n    dy   = (cc.xmax-cc.xmin) * 0.05\n    size = dy * 0.5\n    rot  = Math.PI / 6\n    while x <= cc.xmax\n      @content.drawLine( x, cc.ymax, cc.zmin, x, cc.ymax+dy, cc.zmin, 0xAAAAAA, group )\n      text.drawText( x.toString(), size, [x,cc.ymax+dy,cc.zmin], [rot,rot,0], 0xAAAAAA, group )\n      x += cc.xtick1\n    return\n\nexport default XAxis\n"
+  ]
+}

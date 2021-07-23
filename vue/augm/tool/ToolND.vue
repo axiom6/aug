@@ -22,7 +22,6 @@
 
     setup( props ) {
 
-      const mix      = inject('mix');
       const nav      = inject('nav');
       const debug    = false
 
@@ -38,7 +37,7 @@
           pageIdx.value++; } }
 
       onMounted( function () { // Follow up with the last Nav.pub(obj) that mounted this vue component
-        mix.subscribe(  'Nav', 'ToolND', (obj) => {
+        nav.subscribe(  'Nav', 'ToolND', (obj) => {
           onNav(obj); } ) } )
 
       return { pageIdx, nav, page, toPages }; }

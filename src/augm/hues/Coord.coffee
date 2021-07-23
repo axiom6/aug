@@ -171,7 +171,7 @@ class Coord
     obj.expr = ( emit, ang, rad, i ) =>
       hue     = @mbox.toHue( i, @npoints )
       radian  = @mbox.toRad( i, @npoints )
-      console.log( "cylSurfColors", hue, rad, toDep(radian,rad)*100 )
+      # console.log( "cylSurfColors", hue, rad, toDep(radian,rad)*100 )
       [r,g,b,a] = vis.rgba( [hue, rad, toDep(radian,rad)*100] )
       emit( r, g, b, a )
     obj

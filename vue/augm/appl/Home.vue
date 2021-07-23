@@ -34,11 +34,11 @@
 
     setup() {
 
-      const mix = inject('mix');
+      const nav = inject('nav');
       const pos = [45,45,10,10];
 
     onMounted( function () {
-      mix.publish( 'Tocs', 'Close' ); } )
+      nav.publish( 'Tocs', 'Close' ); } )
 
     return { pos }; }
   }

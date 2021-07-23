@@ -20,8 +20,8 @@ let Store = {
   
   setup() {
 
-    const mix     = inject('mix');
-    const manager = new Manager( mix );
+    const nav     = inject('nav');
+    const manager = new Manager( nav );
 
     const doTest = function( name ) {
       manager.test( name );

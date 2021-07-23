@@ -19,17 +19,17 @@
 
     setup( props ) {
 
-      const mix = inject( 'mix' );
+      const nav = inject( 'nav' );
 
       const hasProp = function(name) {
-        return mix.isDef(props[name]); }
+        return nav.isDef(props[name]); }
 
       const doClick = function() {
-        if( mix.isDef(this.fnClick) ) {
+        if( nav.isDef(this.fnClick) ) {
           this.fnClick(this.name); } }
 
       const style = function() {
-        return mix.fontSizeCss(this.size); }
+        return nav.fontSizeCss(this.size); }
 
     return { hasProp, doClick, style }; }
     

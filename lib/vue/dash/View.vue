@@ -11,8 +11,8 @@ import { inject } from 'vue';
 
 let View = {
   setup() {
-    const mix    = inject('mix');
-    const rviews = mix.routeNames();
+    const nav    = inject('nav');
+    const rviews = nav.routeNames();
     // console.log( 'View.setuo()', rviews );
     return { rviews }; }
 }

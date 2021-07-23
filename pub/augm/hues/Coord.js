@@ -436,7 +436,7 @@ Coord = class Coord {
       var a, b, g, hue, r, radian;
       hue = this.mbox.toHue(i, this.npoints);
       radian = this.mbox.toRad(i, this.npoints);
-      console.log("cylSurfColors", hue, rad, toDep(radian, rad) * 100);
+      // console.log( "cylSurfColors", hue, rad, toDep(radian,rad)*100 )
       [r, g, b, a] = vis.rgba([hue, rad, toDep(radian, rad) * 100]);
       return emit(r, g, b, a);
     };

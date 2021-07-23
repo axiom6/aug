@@ -26,7 +26,6 @@
 
     setup() {
 
-      const mix     = inject( 'mix' );
       const nav     = inject( 'nav' );
       const compKey = 'Prin'
       const compObj = ref(null );
@@ -36,7 +35,7 @@
 
       const onComp = function( compKey ) {
         // nav.setPages( compKey, pages );
-        compObj.value = mix.compObject(compKey);
+        compObj.value = nav.compObject(compKey);
         pracIdx.value++; }
 
       const onNav = (obj) => {
@@ -47,7 +46,7 @@
         onComp('Prin'); } )
 
       onMounted( function () {
-        mix.subscribe( 'Nav', 'Prin', (obj) => {
+        nav.subscribe( 'Nav', 'Prin', (obj) => {
           onNav(obj); } ); } )
 
     return { compKey, pages, pracObj, compObj, pracIdx, nav }; }

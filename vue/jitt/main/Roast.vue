@@ -19,7 +19,6 @@
 
     setup() {
 
-      const mix  = inject( 'mix' );
       const nav  = inject( 'nav' );
       const name = 'Roast';
       const btns = {
@@ -42,7 +41,7 @@
         Black:    { title:'Black',   name:'Black',    pos:[7,85,86,9], hsv:[34,44,69],
           type:'choice', check:true, checked:ref(false), img:BlackImg } };
 
-      mix.refreshBtns( name, btns );
+      nav.refreshBtns( name, btns );
 
       return { name, btns }; }
 

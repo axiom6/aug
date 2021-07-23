@@ -1,0 +1,40 @@
+{
+  "Grids": {
+    "main": {
+      "debug":true, "verify":false },
+    "coords": {
+      "xmin":0, "xmax":100, "ymin":0, "ymax":100,"zmin":0, "zmax":100 },
+    "cameras": {
+       "camera": "Orthographic", "controls":"Orbit", "helper":true, "left":-100, "right":100, "top":100, "bottom":-100,
+       "near":-500, "far":500, "position":{ "x":20, "y":20, "z":20 } },
+    "lights":{
+      "light":"Ambient" },
+    "content": {
+      "plane":false, "grids":true, "axes":true, "axeshelper":false, "cube":{ "x":50, "y":50, "z":50, "s":20 } },
+     "animate": { "rotate":{ "theta":0, "radius":100 } } },
+  "Rgbs": {
+    "main": {
+      "debug":true, "verify":false },
+    "coords": {
+      "xmin":0, "xmax":256, "xtick1":32, "ymin":0, "ymax":256, "ytick1":32, "zmin":0, "zmax":256, "ztick1":32 },
+    "cameras": {
+      "camera": "Orthographic", "controls":"Orbit", "helper":true },
+    "lights":{
+      "light":"Directional" },
+    "content": {
+      "plane":true, "grids":false, "axes":false, "axeshelper":true, "cube":false, "rgbs":true },
+    "animate": {} },
+  "Muse": {
+    "main": {
+      "debug":false, "verify":false },
+    "coords": {
+      "xmin":0, "xmax":144, "ymin":0, "ymax":144, "zmin":0, "zmax":144 },
+    "cameras": {
+      "camera": "Muse", "controls":"Orbit", "helper":true, "fov":45, "near":1, "far":10000,
+      "position":{ "x":0, "y":6, "z":1600 } },
+    "lights":{
+      "light":"Muse" },
+    "content": {
+      "plane":true, "grids":false, "axes":false, "axeshelper":true, "cube":false, "rgbs":false, "muse":true },
+    "animate": {}  }
+}

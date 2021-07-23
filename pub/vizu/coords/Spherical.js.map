@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "Spherical.js",
+  "sourceRoot": "../../../src/vizu/coords",
+  "sources": [
+    "Spherical.coffee"
+  ],
+  "names": [],
+  "mappings": "AACA,IAAA;;AAAM,YAAN,MAAA,UAAA,CAAA;;;EAIE,WAAY,KAAA,CAAA;IAAE,IAAC,CAAA;IACb,IAAC,CAAA,KAAD,GAAa,IAAC,CAAA,WAAW,CAAC;IAC1B,IAAC,CAAA,IAAD,GAAa,IAAC,CAAA,IAAI,CAAC;IACnB,IAAC,CAAA,SAAD,GAAa,IAAC,CAAA,IAAI,CAAC;IACnB,IAAC,CAAA,MAAD,GAAgB,wBAAH,GAAsB,wBAAtB,GAAyC,IAAC,CAAA,SAAS,CAAC;IACjE,IAAC,CAAA,KAAD,GAAgB,uBAAH,GAAsB,uBAAtB,GAA0C,GAJ3D;IAKI,IAAC,CAAA,KAAD,GAAgB,uBAAH,GAAsB,uBAAtB,GAA0C,GAL3D;IAMI,IAAC,CAAA,IAAD,GAAgB,sBAAH,GAAsB,sBAAtB,GAA0C,GAN3D;IAOI,IAAC,CAAA,IAAD,GAAgB,sBAAH,GAAsB,sBAAtB,GAA0C,GAP3D;IAQI,IAAC,CAAA,IAAI,CAAC,GAAN,CAAW,IAAC,CAAA,KAAD,GAAO,IAAlB,EAAwB,IAAxB;EATU;;AAJd;;AAeA,OAAA,QAAe",
+  "sourcesContent": [
+    "\nclass Spherical\n  \n  # radius, long = longitude, lat = latitude\n\n  constructor:( @main ) ->\n    @klass     = @constructor.name\n    @opts      = @main.opts\n    @cartesian = @main.cartesian\n    @radius    = if @opts.radius? then @opts.radius? else @cartesian.xmax\n    @long1     = if @opts.long1?  then @opts.long1?  else  90 # Degrees\n    @long2     = if @opts.long2?  then @opts.long2?  else  30 # Degrees\n    @lat1      = if @opts.lat1?   then @opts.lat1?   else  90 # Degrees\n    @lat2      = if @opts.lat2?   then @opts.lat2?   else  30 # Degrees\n    @main.log( @klass+'()', @ )\n\nexport default Spherical"
+  ]
+}

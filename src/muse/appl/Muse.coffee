@@ -100,20 +100,19 @@ class Muse
     north:"Defs", prev:"Defs", south:"Home",  next:"Home"  } }
 
   # 2. Initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
-  Muse.init =   ( batch ) ->
-    Muse.Batch  = batch # Not necessary here, but assigned for compatibilitry
+  Muse.init =   () ->
     Muse.myName = 'Muse'
     subjects    = ["Nav","Tab","View"]
     infoSpec    = { subscribe:false, publish:false, subjects:subjects}
     Muse.stream = new Stream( subjects, infoSpec )
     Muse.mix    = new Mix(   Muse )
-    Muse.nav    = new Nav(   Muse.stream, Muse.mix, batch, Muse.komps, Muse.pages, false )
+    Muse.nav    = new Nav(   Muse, Muse.stream, Muse.komps, Muse.pages, false )
     Muse.touch  = new Touch( Muse.stream, Muse.nav )
-    Muse.build  = new Build( batch, Muse.komps )
+    Muse.build  = new Build( Muse.Batch, Muse.komps )
     #use.cache  = new Cache( Muse.stream )
     tester.setOptions( { testing:true, archive:true, verbose:false, debug:false } )
-    Access.buildInnov( batch, 'Data',   'Info' )
-    Access.mergePracs( batch, 'Prin', ['Info','Know','Wise'] ) # 'Data'
+    Access.buildInnov( Muse.Batch, 'Data',   'Info' )
+    Access.mergePracs( Muse.Batch, 'Prin', ['Info','Know','Wise'] ) # 'Data'
     Muse.mergeCols()
     try            # A lot can go wrong with vue3 initialization so trap errors
       Muse.vue3()

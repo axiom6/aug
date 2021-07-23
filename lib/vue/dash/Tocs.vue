@@ -29,9 +29,8 @@
     
     setup() {
 
-      const mix     = inject( 'mix' );
       const nav     = inject( 'nav' );
-      let   komps   = mix.kompsTocs();
+      let   komps   = nav.kompsTocs();
       const compKey = ref('Home');
       const inovKey = ref('none');
       const pracKey = ref('none');
@@ -39,7 +38,7 @@
       const routNav = ref('none');
 
       const myKomp = function(kompArg) {
-        return kompArg===compKey.value && mix.isBatch(compKey.value) }
+        return kompArg===compKey.value && nav.isBatch(compKey.value) }
       const doComp = function(kompKey) {
         compKey.value = kompKey;
         inovKey.value = nav.inovKey;
@@ -62,14 +61,14 @@
           if( keyEq(inovKey.value,obj.inovKey ) ) { inovKey.value = obj.inovKey; }
           if( keyEq(routNav.value,obj.route   ) ) { routNav.value = obj.route;   } } }
       const keyEq = function( tkey, okey ) {
-         return mix.isDef(okey) && tkey !== okey; }
+         return nav.isDef(okey) && tkey !== okey; }
       const styleComp = function( kompArg ) {
         return myKomp(kompArg) ? { backgroundColor:'wheat', color:'black', borderRadius:'0 24px 24px 0' }
                                : { backgroundColor:'#333',  color:'wheat', borderRadius:'0 24px 24px 0' }; }
       const style = function( ikwObj ) {
-        return mix.styleObj(ikwObj); }
+        return nav.styleObj(ikwObj); }
       const tocPracs = function(compArg,inovArg) {
-        let pracs = compArg !== 'Cube' ? mix.inovObject(compArg,inovArg) : {};
+        let pracs = compArg !== 'Cube' ? nav.inovObject(compArg,inovArg) : {};
         // console.log( 'Tocs.tocPracs()', { compArg:compArg, inovArg:inovArg, pracs:pracs } );
         let filts = {}
         for( let keyn in pracs ) {
@@ -80,7 +79,7 @@
         return filts; }
     
     onMounted( function () {
-      mix.subscribe( 'Nav', 'Tocs.vue', (obj) => {
+      nav.subscribe( 'Nav', 'Tocs.vue', (obj) => {
         onNav(obj); } ); } )
         
   return { komps, myKomp, doComp, compKey, pracKey, inovKey, style, styleComp, doPrac, doDisp, tocPracs }; }

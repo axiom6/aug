@@ -1,19 +1,28 @@
 
-
 Debug One
-  1. Jitter choice
-  2. Augm Hues maybe a lost cause. Need Three.js implementation
-  3. [Violation] Added non-passive event listener to a scroll-blocking 'wheel' event.
+  1. Test all Mix to Nav and Visu refactoring
+  2. createElem closure in Nav lik removeElem
+  3. Jitter choice
+  4. Colors in Hues / Color / Polar / Vec / Sphere
+     Good   in Hues / Rgbs  / Regress
+  5. Remove some of the junk added to Vis
+  6. @choice() in Mix.chosen
+  7. nav.batch() in Cube.vue
+
+Debug Two
+  1. Look into cicular JSON bug in Tester.reviewsLocal()
+  2. Look into preventing Type.toStr() to Type.toStrObject() infinite recursions
+  3. toStr(bigint)
+
+Warnings
+  1. [Violation] Added non-passive event listener to a scroll-blocking 'wheel' event.
      Consider marking event handler as 'passive' to make the page more responsive.
      See https://www.chromestatus.com/feature/5745543795965952
-  4. [Violation] 'requestAnimationFrame' handler took 60ms
+  2. [Violation] 'requestAnimationFrame' handler took 60ms
+  3. [Violation] 'click' handler took 1090ms
 
 Docs
   1. In progress
-
-Tester
-  1. toStr(bigint)
-  2. Prevent toStr() - @toStrObject() recursion
 
 Tester unique capabilies:
   Setup Spec Type Schema Closures Unit Apply Switches Publish
@@ -34,32 +43,12 @@ Tester unique capabilies:
      d.   module.on(false) to turn off a test module
   9. Publish:  Test status and text to UI
 
-
-Debug Two
-  1. Bad pageJey in Nav
-  2. Colors in Hues / Color / Polar / Vec / Sphere
-     Good   in Hues / Rgbs  / Regress
-  3. Warnings from MathBox
-     mathbox-bundle.js:45971 [Violation] Added non-passive event listener to a scroll-blocking 'mousewheel' event.
-     Consider marking event handler as 'passive' to make the page more responsive.
-     [Violation] 'requestAnimationFrame' handler took 55ms
-  4. Remove some of the junk added to Vis
-  5. Look into cicular JSON bug in Tester.reviewsLocal()
-  6. Multiple summaries published
-
-Features One
-  1+ Logging status
-     a+ One
-     b+ Group
-     c+ Summary
-  2+ Incorporate Describe
-  3+ Put Summary into Initial.html
-
-Features Two
+Features
   1. Get Touch working again
   2. Work on Directions
   3. Scroll Tocs   on Mobile
   4. Refine orient on Mobile
+  5. Sect.vue and Talk.vue out of date
 
 JsonLD
   1. Standardize Schema

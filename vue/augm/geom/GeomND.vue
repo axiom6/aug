@@ -22,12 +22,10 @@
 
     setup( props ) {
 
-      const mix     = inject('mix');
       const nav     = inject('nav');
       const page    = ref(null);
       const pageIdx = ref(0)
       const debug   = false;
-
 
       const toPages = function() {
         return nav.getTabs(props.pracKey); }
@@ -40,7 +38,7 @@
           pageIdx.value++; } }
 
       onMounted( () => { // Follow up with the last Nav.pub(obj) that mounted this vue component
-        mix.subscribe(  'Nav', 'GeomND', (obj) => {        //   also onNav() chacks for valid tabs and pages
+        nav.subscribe(  'Nav', 'GeomND', (obj) => {        //   also onNav() chacks for valid tabs and pages
           onNav(obj); } ) } )
 
       return { page, pageIdx, nav, toPages }; }

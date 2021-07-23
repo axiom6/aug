@@ -22,7 +22,6 @@
 
     setup() {
 
-      const mix     = inject( 'mix' );
       const nav     = inject( 'nav' );
       const dispObj = ref(null);
       const dispIdx = ref(0);
@@ -30,9 +29,9 @@
       const pages   = nav.getTabs('Disp')
 
       const onDisp = function( obj ) {
-        dispObj.value = mix.dispObject( obj.compKey, obj.inovKey, obj.pracKey, obj.dispKey );
+        dispObj.value = nav.dispObject( obj.compKey, obj.inovKey, obj.pracKey, obj.dispKey );
         dispIdx.value++;
-        if( mix.isDef(dispObj.value) ) {
+        if( nav.isDef(dispObj.value) ) {
           if( debug ) {
             console.log('Disp.onDisp()', { pageKey:obj.pageKey, dims:pages['Topics'].show, desc:pages['Texts'].show } );
             console.log('Disp.onDisp()',
@@ -57,7 +56,7 @@
         onDisp( obj );  } )
 
       onMounted( function () {
-        mix.subscribe(  "Nav", 'Disp', (obj) => {
+        nav.subscribe(  "Nav", 'Disp', (obj) => {
           onNav(obj); } ); } )
 
     return { pages, dispObj, dispIdx, nav } }

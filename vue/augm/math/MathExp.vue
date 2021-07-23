@@ -13,12 +13,12 @@ let MathExp = {
 
   setup( props ) {
 
-    const mix   = inject('mix')
+    const nav   = inject('nav')
     const elem  = ref(null);
 
     const mathML = () => {
       nextTick( () =>  {
-        if( mix.isDef(elem['value']) ) {
+        if( nav.isDef(elem['value']) ) {
           elem['value'].innerHTML = props.exp.mathML; }
         else {
           console.error( "MathExp.mathML() elem null" ); } } ) }
@@ -27,7 +27,7 @@ let MathExp = {
        mathML(); } )
 
     onUnmounted( () => {
-      mix.removeElem( elem['value'], nextTick ) ; } )
+      nav.removeElem( elem['value'], nextTick ) ; } )
 
   return { elem } }
 }

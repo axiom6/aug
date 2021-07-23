@@ -28,7 +28,7 @@
 
     setup( props ) {
 
-      const mix = inject( 'mix' );
+      const nav = inject( 'nav' );
       const dispObj = ref(null );
 
       const isDims = function () {
@@ -40,7 +40,7 @@
         return props.pracObj.row !== 'Dim'; }
 
       const toStyle = function( ikwObj ) {
-         return mix.styleObj( ikwObj ); }
+         return nav.styleObj( ikwObj ); }
     
    return { dispObj, isDims, isDisc, toStyle }; }
   
@@ -72,8 +72,8 @@
 
 <!--
       const onDisp = function( obj ) {
-        dispObj.value = mix.dispObject( obj.compKey, obj.inovKey, obj.pracKey, obj.dispKey );
+        dispObj.value = nav.dispObject( obj.compKey, obj.inovKey, obj.pracKey, obj.dispKey );
         console.log('Dirs.onDisp()',{ comp:obj.compKey, prac:obj.pracKey, disp:obj.dispKey, dispObj:dispObj.value } );
-        if( !mix.isDef(dispObj.value) ) {
+        if( !nav.isDef(dispObj.value) ) {
           console.error('Dims.onDisp() disp null',{comp:obj.compKey, prac:obj.pracKey, disp:obj.dispKey } ) } }
 -->

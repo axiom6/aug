@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "Lines.js",
+  "sourceRoot": "../../../src/vizu/content",
+  "sources": [
+    "Lines.coffee"
+  ],
+  "names": [],
+  "mappings": "AACA,IAAA;;AAAM,QAAN,MAAA,MAAA;EAEE,WAAY,KAAA,CAAA;IAAE,IAAC,CAAA;IACb,IAAC,CAAA,KAAD,GAAS,IAAC,CAAA,WAAW,CAAC;IACtB,IAAC,CAAA,IAAI,CAAC,GAAN,CAAW,IAAC,CAAA,KAAD,GAAO,IAAlB,EAAwB,IAAxB;EAFU;;AAFd;;AAMA,OAAA,QAAe",
+  "sourcesContent": [
+    "\nclass Lines\n\n  constructor:( @main ) ->\n    @klass = @constructor.name\n    @main.log( @klass+'()', @ )\n\nexport default Lines"
+  ]
+}

@@ -52,7 +52,7 @@ class Color
   genPolarRgbs:( coord, view, scale ) =>
     hcss = 0; rgbs = 0;
     [hcss,rgbs] = @genPolarRgb( scale )
-    console.log( 'genPolarRgbs', hcss.length, rgbs.length )
+    # console.log( 'genPolarRgbs', hcss.length, rgbs.length )
     coord.cylLookup( view, hcss, rgbs )
     #genPolarSurf(   view, hcss, rgbs )
 

@@ -78,9 +78,8 @@ Data = (function() {
       document.getElementsByTagName("head")[0].appendChild(siteElem);
     }
 
-    static init(batch) {
+    static init() {
       var error, infoSpec, subjects;
-      Data.Batch = batch; // Not necessary here, but assigned for compatibilitry
       Data.myName = 'Muse';
       subjects = ["Nav"];
       infoSpec = {
@@ -90,7 +89,7 @@ Data = (function() {
       };
       Data.stream = new Stream(subjects, infoSpec);
       Data.mix = new Mix(Data, Data.routeNames); // true for using route
-      Data.nav = new Nav(Data.stream, Data.mix, batch, Data.komps, {}, true);
+      Data.nav = new Nav(Data, Data.stream, Data.komps, {}, true);
       Data.touch = new Touch(Data.stream, Data.nav);
       //ata.build  = new Build( batch, Data.komps )
       Data.cache = new Cache(Data.stream);
@@ -100,8 +99,8 @@ Data = (function() {
         verbose: false,
         debug: false
       });
-      Access.buildInnov(batch, 'Data', 'Info');
-      Access.mergePracs(batch, 'Prin', [
+      Access.buildInnov(Data.Batch, 'Data', 'Info');
+      Access.mergePracs(Data.Batch, 'Prin', [
         'Info',
         'Know',
         'Wise' // 'Data'

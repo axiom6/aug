@@ -16,7 +16,7 @@ let Btn = {
 
   setup( props ) {
 
-    const mix  = inject( 'mix' );
+    const nav  = inject( 'nav' );
     const elem = ref(null);
 
     const styleBtn = function () {
@@ -25,10 +25,10 @@ let Btn = {
        background:props.background } }
 
     const pubBtn = function () {
-      if( mix.isFunction(props.doPub) ) {
+      if( nav.isFunction(props.doPub) ) {
         props.doPub(); }
       else {
-        mix.publish( { pageKey:props.name } ); } }
+        nav.publish( { pageKey:props.name } ); } }
 
     onMounted( function () {
       } )

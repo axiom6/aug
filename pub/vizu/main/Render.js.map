@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "Render.js",
+  "sourceRoot": "../../../src/vizu/main",
+  "sources": [
+    "Render.coffee"
+  ],
+  "names": [],
+  "mappings": "AACA,IAAA;;AAAA,OAAA;EAAS,aAAT;EAAwB,gBAAxB;EAA0C,YAA1C;CAAA,MAAA;;AAEM,SAAN,MAAA,OAAA;EAEE,WAAY,KAAA,CAAA;QAgBZ,CAAA,eAAA,CAAA;IAhBc,IAAC,CAAA;IACb,IAAC,CAAA,KAAD,GAAS,IAAC,CAAA,WAAW,CAAC;IACtB,IAAC,CAAA,IAAD,GAAS,IAAC,CAAA,IAAI,CAAC;IACf,IAAC,CAAA,UAAD,GAAiB,4BAAH,GAA0B,IAAC,CAAA,IAAI,CAAC,UAAhC,GAAgD,SAFlE;IAGI,IAAC,CAAA,QAAD,GAAY,IAAI,aAAJ,CAAmB;MAAE,SAAA,EAAU;IAAZ,CAAnB;IACZ,IAAC,CAAA,IAAI,CAAC,IAAI,CAAC,WAAX,CAAwB,IAAC,CAAA,QAAQ,CAAC,UAAlC;IACA,IAAC,CAAA,QAAQ,CAAC,OAAV,CAAmB,IAAC,CAAA,IAAI,CAAC,WAAzB,EAAsC,IAAC,CAAA,IAAI,CAAC,YAA5C;IACA,IAAC,CAAA,QAAQ,CAAC,aAAV,CAAyB,IAAC,CAAA,UAA1B,EAAsC,CAAtC;IACA,IAAC,CAAA,QAAQ,CAAC,aAAV,CAAyB,MAAM,CAAC,gBAAhC;IACA,IAAC,CAAA,QAAQ,CAAC,SAAS,CAAC,OAApB,GAA8B;IAC9B,IAAC,CAAA,QAAQ,CAAC,SAAS,CAAC,IAApB,GAA8B;IAC9B,IAAC,CAAA,QAAQ,CAAC,aAAV,GAA8B;IAC9B,IAAC,CAAA,QAAQ,CAAC,cAAV,GAA8B;IAC9B,IAAC,CAAA,IAAI,CAAC,MAAM,CAAC,SAAb,CAAwB,QAAxB,EAAkC,IAAC,CAAA,KAAnC,EAA0C,CAAC,GAAD,CAAA,GAAA;aAAS,IAAC,CAAA,QAAD,CAAU,GAAV;IAAT,CAA1C;IACA,IAAC,CAAA,IAAI,CAAC,GAAN,CAAW,IAAC,CAAA,KAAD,GAAO,IAAlB,EAAwB,IAAxB;EAdU;;EAgBZ,QAAS,CAAE,GAAF,CAAA;IACP,IAAC,CAAA,IAAI,CAAC,GAAN,CAAW,IAAC,CAAA,KAAD,GAAO,aAAlB,EAAiC,GAAjC;IACA,IAAC,CAAA,QAAQ,CAAC,OAAV,CAAmB,GAAG,CAAC,WAAvB,EAAoC,GAAG,CAAC,YAAxC;EAFO;;AAlBX;;AAuBA,OAAA,QAAe;;AAzBf",
+  "sourcesContent": [
+    "\nimport { WebGLRenderer, PCFSoftShadowMap, sRGBEncoding } from 'three'\n\nclass Render\n\n  constructor:( @main ) ->\n    @klass = @constructor.name\n    @opts  = @main.opts\n    @clearColor = if @opts.clearColor? then @opts.clearColor else 0x000000 # 0x333F47, 1\n    @renderer = new WebGLRenderer( { antialias:true } )\n    @main.elem.appendChild( @renderer.domElement )\n    @renderer.setSize( @main.screenWidth, @main.screenHeight )\n    @renderer.setClearColor( @clearColor, 1 )\n    @renderer.setPixelRatio( window.devicePixelRatio )\n    @renderer.shadowMap.enabled = true\n    @renderer.shadowMap.type    = PCFSoftShadowMap\n    @renderer.shadowMapSoft     = true\n    @renderer.outputEncoding    = sRGBEncoding\n    @main.stream.subscribe( 'Resize', @klass, (obj) => @onResize(obj) )\n    @main.log( @klass+'()', @ )\n\n  onResize:( obj ) =>\n    @main.log( @klass+'.onResize()', obj )\n    @renderer.setSize( obj.screenWidth, obj.screenHeight )\n    return\n\nexport default Render\n\n###\n  @renderer.shadowMap.enabled = true\n  @renderer.shadowMap.type    = THREE.PCFSoftShadowMap\n  @renderer.outputEncoding    = THREE.sRGBEncoding\n###"
+  ]
+}

@@ -39,7 +39,7 @@
 
     setup() {
 
-      const mix = inject( 'mix' );
+      const nav = inject( 'nav' );
 
       let   pracObj = ref({} );
 
@@ -63,9 +63,9 @@
     onBeforeMount(  function() {
       for( let ckey in planes ) {
         let plane   =  planes[ckey];
-        let compObj =  mix.compObject(ckey,false);
+        let compObj =  nav.compObject(ckey,false);
         for( let pkey in compObj ) {
-          if( mix.isChild(pkey) && !mix.isDef(cols[pkey] ) ) {
+          if( nav.isChild(pkey) && !nav.isDef(cols[pkey] ) ) {
             plane.compObj[pkey] = compObj[pkey]; } } } } )
 
     return { pracObj, planes, stylePlane, stylePract } }

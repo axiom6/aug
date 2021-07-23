@@ -1,11 +1,16 @@
 
+import Mix   from './Mix.js'
 import Build from '../util/Build.js'
 import Dir   from './Dir.js'
 
-class Nav
+class Nav extends Mix
 
-  constructor:( @stream, @mix, @batch={}, @komps=null, @pages={}, @isRoutes=false ) ->
-    console.log( "Nav() mix.app", @mix.app() )
+  constructor:( Main, stream, komps=null, pages={}, isRoutes=false ) ->
+    super( Main )
+    @stream     = stream
+    @komps      = komps
+    @pages      = pages
+    @isRoutes   = isRoutes
     @dirs       = { west:true, east:true, north:true, south:true, prev:true, next:true }
     @navs       = if @komps then @addInovToNavs( @komps ) else null
     @touch      =  null
@@ -45,9 +50,9 @@ class Nav
     return
 
   viewChange:( obj ) ->
-    obj.compKey = @compKey if not @mix.isDef(obj.compKey)
-    obj.pracKey = @pracKey if not @mix.isDef(obj.pracKey)
-    obj.dispKey = @dispKey if not @mix.isDef(obj.dispKey)
+    obj.compKey = @compKey if not @isDef(obj.compKey)
+    obj.pracKey = @pracKey if not @isDef(obj.pracKey)
+    obj.dispKey = @dispKey if not @isDef(obj.dispKey)
     change = not ( obj.compKey is @compKey and obj.pracKey is @pracKey and obj.dispKey is @dispKey )
     console.log( 'Nav.viewChange()', { change:change, compObj:obj.compKey, compNav:@compKey,
     pracObj:obj.pracKey, pracNav:@pracKey, dispObj:obj.dispKey, dispNav:@dispKey, } ) if @debug and change
@@ -61,8 +66,8 @@ class Nav
     obj = { source:@source, level:@level, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey }
     obj.pageKey = @objPage( obj )
     obj.inovKey = @objInov( obj )
-    obj.choice  = @choice  if @mix.isApp('Jitter')
-    obj.checked = @checked if @mix.isApp('Jitter')
+    obj.choice  = @choice  if @isApp('Jitter')
+    obj.checked = @checked if @isApp('Jitter')
     obj.warnMsg = @warnMsg if @warnMsg isnt 'none'
     @tab( obj ) # Publisn pageKey and inovKey to tabs
     obj
@@ -74,14 +79,14 @@ class Nav
 
   tab:( obj ) ->
 
-    if @mix.isDef(obj.pageKey)
+    if @isDef(obj.pageKey)
       @pageKye  = obj.pageKey
       tabsKey   = @getTabsKey(obj)
       @setPageKey( tabsKey, obj.pageKey, {} ) # Short message on 'Tab' subject
       @stream.publish( 'Tab',           { compKey:tabsKey, pageKey:obj.pageKey } )
       console.log( 'Nav.set() pageKey', { compKey:tabsKey, pageKey:obj.pageKey } ) if @debug
 
-    if @mix.isDef(obj.inovKey)
+    if @isDef(obj.inovKey)
       @inovKey  = obj.inovKey
       @setPageKey( obj.compKey, obj.inovKey, {} ) # Short message on 'Tab' subject
       @stream.publish( 'Tab',   { compKey:obj.compKey, pageKey:obj.inovKey } )
@@ -109,9 +114,9 @@ class Nav
     innovate    = url.searchParams.get("innovate")
     paths       = url.pathname.split('/')
     obj.source  = 'Url'
-    obj.compKey = if @mix.isStr(paths[1]) then paths[1] else 'Home'
-    obj.pracKey = if @mix.isStr(paths[2]) then paths[2] else 'none'
-    obj.dispKey = if @mix.isStr(paths[3]) then paths[3] else 'none'
+    obj.compKey = if @isStr(paths[1]) then paths[1] else 'Home'
+    obj.pracKey = if @isStr(paths[2]) then paths[2] else 'none'
+    obj.dispKey = if @isStr(paths[3]) then paths[3] else 'none'
     obj.pageKey = if page?                then page     else 'none'
     obj.inovKey = if innovate?            then innovate else 'none'
     obj.level =
@@ -137,8 +142,8 @@ class Nav
 
   getTabsKey:( obj ) ->
     tabsKey = 'none'
-    if @mix.isApp('Muse')
-      tabsKey = obj.level if @mix.inArray(obj.compKey,@musePlanes)
+    if @isApp('Muse')
+      tabsKey = obj.level if @inArray(obj.compKey,@musePlanes)
       tabsKey = 'Prin' if obj.compKey is 'Prin' and obj.level is 'Comp'
       tabsKey = 'Prac' if obj.compKey is 'Prin' and obj.level is 'Prac'
     else
@@ -153,7 +158,7 @@ class Nav
     @getPageKey( @getTabsKey(obj), false )
 
   objInov:( obj ) ->
-    if @mix.inArray(obj.compKey,@musePlanes) then @getPageKey(obj.compKey) else 'none'
+    if @inArray(obj.compKey,@musePlanes) then @getPageKey(obj.compKey) else 'none'
 
   isShow:( tabsKey, pageKey ) ->
     pageNav = @getPageKey( tabsKey )
@@ -196,8 +201,8 @@ class Nav
     'none'
 
   hasPage:( tabsKey, pageKey, log=true ) ->
-    if    @mix.isDef(tabsKey) and @hasTabs(tabsKey)
-       if @mix.isDef(pageKey) and @pages[tabsKey][pageKey]?
+    if    @isDef(tabsKey) and @hasTabs(tabsKey)
+       if @isDef(pageKey) and @pages[tabsKey][pageKey]?
          true
        else
          console.log( 'Nav.hasPage() bad pageKey', { tabsKey:tabsKey, pageKey:pageKey, pages:getTabs:(tabsKey) } ) if log and pageKey isnt 'none'
@@ -214,10 +219,10 @@ class Nav
       'none'
 
   getInovKey:( tabsKey ) ->
-    if @mix.inArray(tabsKey,@musePlanes) then @getPageKey(tabsKey) else 'none'
+    if @inArray(tabsKey,@musePlanes) then @getPageKey(tabsKey) else 'none'
 
   hasTabs:( tabsKey, log=false ) ->
-    has = @mix.isDef(tabsKey) and @mix.isDef(@pages[tabsKey])
+    has = @isDef(tabsKey) and @isDef(@pages[tabsKey])
     console.log( 'Nav.hasTabs()', { tabsKey:tabsKey, has:has, pages:@pages } ) if not has and log
     has
 
@@ -241,10 +246,10 @@ class Nav
 
   # Across the board Inov detector for compKey pageKey and route
   isInov:( compKey ) ->
-    @mix.inArray( compKey, @museInovs )
+    @inArray( compKey, @museInovs )
 
   addInovToNavs:( komps ) ->
-    return komps? if not @mix.isApp('Muse')
+    return komps? if not @isApp('Muse')
     navs = Object.assign( {}, komps )
     #avs = @insInov( navs, @museInovs )
     navs
