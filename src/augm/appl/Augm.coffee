@@ -57,28 +57,16 @@ class Augm
     Choice: { url:'jitter/Choice.json', data:ChoiceJson }
     Font:   { url: '',                  data:FontJson   } }
 
-  Augm.komps = {
-    Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
-    west:"Wood", north:"Wood", east:"Math", south:"Math", next:"Math", prev:"Wood" }
-    Math:{ title:'Math', key:'Math', route:'Math', pracs:{}, ikw:true,  icon:"fas fa-bezier-curve",
-    west:"Home", north:"Home", east:"Geom", south:"Geom", next:"Geom", prev:"Home" }
-    Draw:{ title:'Draw', key:'Draw', route:'Draw', pracs:{}, ikw:false, icon:"fas fa-draw-polygon",
-    west:"Math", north:"Math", east:"Hues", south:"Hues", next:"Hues", prev:"Math" }
-    Hues:{ title:'Hues', key:'Hues', route:'Hues', pracs:{}, ikw:false, icon:"fas fa-palette",
-    west:"Draw", north:"Draw", east:"Tool", south:"Tool", next:"Tool", prev:"Draw" }
-    Tool:{ title:'Tool', key:'Tool', route:'Tool', pracs:{}, ikw:false, icon:"fas fa-wrench",
-    west:"Hues", north:"Hues", east:"Cube", south:"Cube", next:"Cube", prev:"Hues" }
-    Cube:{ title:'Cube', key:'Cube', route:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes",
-    west:"Hues", north:"Hues", east:"Wood", south:"Wood", next:"Wood", prev:"Hues" }
-    Wood:{ title:'Wood', key:'Wood', route:'Wood', pracs:{}, ikw:false, icon:"fas fa-tree",
-    west:"Cube", north:"Cube", east:"Geom", south:"Geom", next:"Geom", prev:"Cube" }
-    Geom:{ title:'Geom', key:'Geom', route:'Geom', pracs:{}, ikw:true,  icon:"fas fa-shapes",
-    west:"Wood", north:"Wood", east:"Wood", south:"Test", next:"Test", prev:"Geom" }
-    Test:{ title:'Test', key:'Test', pracs:{}, ikw:false, icon:"fas fa-stethoscope",
-    north:"Geom", prev:"Geom", south:"Home",  next:"Home"  } }
-
-  Augm.geomKomp =
-
+  Augm.komps = Access.kompsDir( {
+    Home:{ title:'Home', key:'Home', pracs:{}, ikw:false, icon:"fas fa-home" }
+    Math:{ title:'Math', key:'Math', pracs:{}, ikw:true,  icon:"fas fa-bezier-curve" }
+    Draw:{ title:'Draw', key:'Draw', pracs:{}, ikw:false, icon:"fas fa-draw-polygon" }
+    Hues:{ title:'Hues', key:'Hues', pracs:{}, ikw:false, icon:"fas fa-palette" }
+    Tool:{ title:'Tool', key:'Tool', pracs:{}, ikw:false, icon:"fas fa-wrench" }
+    Cube:{ title:'Cube', key:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes" }
+    Wood:{ title:'Wood', key:'Wood', pracs:{}, ikw:false, icon:"fas fa-tree" }
+    Geom:{ title:'Geom', key:'Geom', pracs:{}, ikw:true,  icon:"fas fa-shapes" }
+    Test:{ title:'Test', key:'Test', pracs:{}, ikw:false, icon:"fas fa-stethoscope"} } )
 
   # Initialization is accomplished in 3 steps:
   # 1. Read in all the JSON config files in Augm.Batch. Call Augm.init() when complete.

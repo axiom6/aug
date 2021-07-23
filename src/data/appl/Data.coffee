@@ -82,16 +82,11 @@ class Data
   Data.routeNames = Data.createRouteNames( Data.routes )
 
   # Toc.vue components and routes with no west or east directions
-  Data.komps = {
-    Home:{ title:'Home',   key:'Home',  route:'Home',  pracs:{}, ikw:false, icon:"fas fa-home",
-    north:"Query", prev:"Query", south:"Store",  next:"Store"  }
-    Store:{ title:'Store', key:'Store', route:'Store', pracs:{}, ikw:true,  icon:"fas fa-cubes",
-    north:"Home", prev:"Home", south:"Table",  next:"Table" }
-    Table:{ title:'Table', key:'Table', route:'Table', pracs:{}, ikw:true,  icon:"fas fa-table",
-    north:"Store", prev:"Store", south:"Query",  next:"Query" }
-    Query:{ title:'Query', key:'Query', route:'Query', pracs:{}, ikw:true,  icon:"fas fa-question-circle",
-    north:"Table", prev:"Table", south:"Home",  next:"Home" }
-  }
+  Data.komps = Access.kompsDirs( {
+    Home:{ title:'Home',   key:'Home',  route:'Home',  pracs:{}, ikw:false, icon:"fas fa-home" }
+    Store:{ title:'Store', key:'Store', route:'Store', pracs:{}, ikw:true,  icon:"fas fa-cubes" }
+    Table:{ title:'Table', key:'Table', route:'Table', pracs:{}, ikw:true,  icon:"fas fa-table" }
+    Query:{ title:'Query', key:'Query', route:'Query', pracs:{}, ikw:true,  icon:"fas fa-question-circle" } } )
 
   # 2. Initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
   Data.init =   () ->

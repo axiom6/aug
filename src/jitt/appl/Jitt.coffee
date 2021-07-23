@@ -74,22 +74,14 @@ class Jitter
     { path: '/Done',   name:'Done',   components:{ Done:   Done    } } ]
 
   # Toc.vue components and route Nav() directions
-  Jitter.komps = {
-    Home:{   name:'Home',   route:'Home',   icon:"fas fa-draw-polygon",
-    west:"Flavor", north:"Flavor",  east:"Flavor", south:"Flavor",  next:"Home", prev:"Home" }
-    Flavor:{ name:'Flavor', route:'Flavor', icon:"fas fa-bezier-curve",
-    west:"Roast",  north:"Roast",   east:"Roast",  south:"Roast",   next:"Home", prev:"Home" }
-    Roast:{  name:'Roast',  route:'Roast',  icon:"fas fa-bezier-curve",
-    west:"Brew",   north:"Brew",  east:"Brew",   south:"Brew",   next:"Home", prev:"Home" }
-    Brew:{   name:'Brew',   route:'Brew',   icon:"fas fa-bezier-curve",
-    west:"Drink",   north:"Drink",   east:"Drink",  south:"Drink", next:"Home", prev:"Home" }
-    Drink:{  name:'Drink',  route:'Drink',  icon:"fas fa-bezier-curve" ,
-    west:"Body", north:"Body",   east:"Body",   south:"Body",  next:"Home", prev:"Home" }
-    Body:{   name:'Body',   route:'Body',   icon:"fas fa-bezier-curve",
-    west:"Flavor",  north:"Flavor", east:"Flavor",   south:"Flavor",   next:"Home", prev:"Home" }
-    Done:{   name:'Done',   route:'Done',   icon:"fas fa-bezier-curve",
-    west:"Home",  north:"Home", east:"Home",   south:"Home",   next:"Home", prev:"Home" } }
-
+  Jitter.komps = Access.kompsDirs( {
+    Home:{   name:'Home',   route:'Home',   icon:"fas fa-draw-polygon" }
+    Flavor:{ name:'Flavor', route:'Flavor', icon:"fas fa-bezier-curve" }
+    Roast:{  name:'Roast',  route:'Roast',  icon:"fas fa-bezier-curve" }
+    Brew:{   name:'Brew',   route:'Brew',   icon:"fas fa-bezier-curve" }
+    Drink:{  name:'Drink',  route:'Drink',  icon:"fas fa-bezier-curve" }
+    Body:{   name:'Body',   route:'Body',   icon:"fas fa-bezier-curve" }
+    Done:{   name:'Done',   route:'Done',   icon:"fas fa-bezier-curve" } } )
 
   Jitter.routeNames = Jitter.createRouteNames( Jitter.routes )
 

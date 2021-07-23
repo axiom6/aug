@@ -1,6 +1,6 @@
 
 
-import {vis}        from '../../lib/pub/base/draw/Vis.js'
+import {vis}        from '../../lib/pub/draw/Vis.js'
 import { BoxBufferGeometry, Color, MeshPhongMaterial, Mesh, TextBufferGeometry,
          MeshBasicMaterial, Matrix4, BackSide } from 'three'
 

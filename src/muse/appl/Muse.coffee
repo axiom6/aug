@@ -83,21 +83,14 @@ class Muse
     Test:    { url:'muse/Test.json', data:TestJson, refine:true } }
 
   # Toc.vue components and routes with no west or east directions
-  Muse.komps = {
-    Home:{ title:'Home', key:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
-    north:"Test", prev:"Test", south:"Prin",  next:"Prin"  }
-    Prin:{ title:'Prin', key:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale",
-    north:"Home", prev:"Home", south:"Info",  next:"Info" }
-    Info:{ title:'Info', key:'Info', pracs:{}, ikw:true,  icon:"fas fa-th",
-    north:"Prin", prev:"Prin", south:"Know",  next:"Know" }
-    Know:{ title:'Know', key:'Know', pracs:{}, ikw:true,  icon:"fas fa-university",
-    north:"Info", prev:"Info", south:"Wise",  next:"Wise" }
-    Wise:{ title:'Wise', key:'Wise', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor",
-    north:"Know", prev:"Know", south:"Defs",  next:"Defs" }
-    Defs:{ title:'Defs', key:'Defs', pracs:{}, ikw:false, icon:"fas fa-cubes",
-    north:"Wise", prev:"Wise", south:"Test",  next:"Test"  }
-    Test:{ title:'Test', key:'Test', pracs:{}, ikw:false, icon:"fas fa-stethoscope",
-    north:"Defs", prev:"Defs", south:"Home",  next:"Home"  } }
+  Muse.komps = Access.kompsDirs( {
+    Home:{ title:'Home', key:'Home', pracs:{}, ikw:false, icon:"fas fa-home"  }
+    Prin:{ title:'Prin', key:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale" }
+    Info:{ title:'Info', key:'Info', pracs:{}, ikw:true,  icon:"fas fa-th" }
+    Know:{ title:'Know', key:'Know', pracs:{}, ikw:true,  icon:"fas fa-university" }
+    Wise:{ title:'Wise', key:'Wise', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor" }
+    Defs:{ title:'Defs', key:'Defs', pracs:{}, ikw:false, icon:"fas fa-cubes" }
+    Test:{ title:'Test', key:'Test', pracs:{}, ikw:false, icon:"fas fa-stethoscope" } } )
 
   # 2. Initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
   Muse.init =   () ->

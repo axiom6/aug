@@ -4,6 +4,27 @@ import Util from './Util.js'
 
 class Access
 
+  @kompsDirs:( kompsObj ) ->
+    komps = []
+    for own key,komp of kompsObj
+      komps.push(komp)
+    for i in [0...komps.length]
+      Access.kompDir( komps, i )
+    for own key,komp of kompsObj
+      console.log( "Access.kompsDirs", komp )
+    kompsObj
+
+  @kompDir:( komps, i ) ->
+    prev = if i is 0              then komps[komps.length-1] else komps[i-1]
+    next = if i is komps.length-1 then komps[0]              else komps[i+1]
+    komps[i].west  = prev.key
+    komps[i].north = prev.key
+    komps[i].prev  = prev.key
+    komps[i].east  = next.key
+    komps[i].south = next.key
+    komps[i].next  = next.key
+    return
+
   @refine:( data ) ->
     data.pracs = {}
     for pkey, prac of data when Util.isChild(pkey)

@@ -34,15 +34,12 @@ class Vizu
     Cube:   { url:'muse/Cube.json',     data:CubeJson, refine:true  }
     Font:   { url: '',                  data:FontJson, refine:false } }
 
-  Vizu.komps = {
-    Home:{ title:'Home', key:'Home', route:'Home', pracs:{}, ikw:false, icon:"fas fa-home",
-    west:"Test", north:"Test", east:"Main", south:"Main", next:"Main", prev:"Hues" }
-    Main:{ title:'Main', key:'Main', route:'Main', pracs:{}, ikw:false, icon:"fas fa-bezier-curve",
-    west:"Home", north:"Home", east:"Cube", south:"Cube", next:"Cube", prev:"Home" }
-    Spot:{ title:'Spot', key:'Spot', route:'Spot', pracs:{}, ikw:false, icon:"fas fa-lightbulb",
-    west:"Cube", north:"Cube", east:"Test", south:"Test", next:"Test", prev:"Cube" }
-    Test:{ title:'Test', key:'Test', pracs:{}, ikw:false, icon:"fas fa-stethoscope",
-    north:"Geom", prev:"Geom", south:"Home",  next:"Home"  } }
+  Vizu.komps = Access.kompsDirs( {
+    Home:{ title:'Home', key:'Home', pracs:{}, ikw:false, icon:"fas fa-home" }
+    Main:{ title:'Main', key:'Main', pracs:{}, ikw:false, icon:"fas fa-bezier-curve" }
+    Cube:{ title:'Cube', key:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes" }
+    Spot:{ title:'Spot', key:'Spot', pracs:{}, ikw:false, icon:"fas fa-lightbulb" }
+    Test:{ title:'Test', key:'Test', pracs:{}, ikw:false, icon:"fas fa-stethoscope" } } )
 
   # Initialization is accomplished in 3 steps:
   # 1. Read in all the JSON config files in Viz.Batch. Call Viz.init() when complete.
@@ -86,7 +83,7 @@ class Vizu
     Vizu.mix      = new Mix( Vizu )
     Vizu.nav      = new Nav( Vizu, Vizu.stream, Vizu.komps, Vizu.pages )
     Vizu.tester   = tester
-    Vizu.mix.opts = Vizu.Batch.Main.data # JSON.parse( batch.Main.data )
+    #izu.mix.opts = Vizu.Batch.Main.data # JSON.parse( batch.Main.data )
     #Viz.cache  = new Cache( Viz.stream )
     try
       Vizu.vue3()
