@@ -31,10 +31,11 @@
   import Hues     from '../hues/Hues.vue';
   import Tool     from '../tool/Tool.vue';
   import ToolND   from '../tool/ToolND.vue';
-  import Cube     from '../cube/Cube.vue';
+
   import Wood     from '../wood/Wood.vue';
   import Geom     from '../geom/Geom.vue';
   import GeomND   from '../geom/GeomND.vue';
+  import Cube     from '../../../lib/vue/cube/Cube.vue';
   import Test     from '../../../lib/vue/test/Test.vue';
   import Replay   from '../../../lib/vue/test/Replay.vue';
   import Result   from '../../../lib/vue/test/Result.vue';

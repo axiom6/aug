@@ -45,7 +45,7 @@ import {inject, ref, onMounted, nextTick, onUnmounted} from 'vue';
         create(); } )
 
       onUnmounted( () => {
-        nav.removeElem( elem['value'], nextTick ) ; } )
+        nav.removeElem( "Flavor.vue", elem['value'], nextTick ); } )
 
     return { name, elemf }; }
   }

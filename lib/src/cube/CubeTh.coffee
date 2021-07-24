@@ -1,6 +1,7 @@
-import {vis}           from '../../../lib/pub/draw/Vis.js'
-import Access        from '../../../lib/pub/util/Access.js'
-import Build         from '../../../lib/pub/util/Build.js'
+
+import {vis}         from '../draw/Vis.js'
+import Access        from '../util/Access.js'
+import Build         from '../util/Build.js'
 import Cube3D        from './Cube3D.js'
 import Rect          from './Rect.js'
 import * as THREE    from 'three'
@@ -29,9 +30,8 @@ class CubeTh
     return
 
 
-  constructor:( @build, @parId, @guiFlag ) ->
+  constructor:( @build, @parElem, @guiFlag ) ->
     @stream   = null # Set by subscribe()
-    @parElem  = document.getElementById(@parId)
     elems     = @createElems( @parElem, @guiFlag )
     @ikwElem  = elems[0]
     @guiElem  = elems[1]

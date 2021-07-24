@@ -8,7 +8,7 @@
   import SpotJS   from '../../../pub/vizu/spot/Spot.js'
   import { inject, ref, onMounted, onUnmounted, nextTick } from 'vue';
   
-  let Cube = {
+  let Spot = {
 
     setup() {
 
@@ -16,19 +16,21 @@
       const elem   = ref(null)
       let   spotJS = null
 
+      const create = () => {
+        nav.createElem( "Spot.create()", elem['value'], nextTick, () => {
+          spotJS = new SpotJS( elem['value'], nav ); } ) }
+
       onMounted( () => {
-        nextTick( () => {
-          spotJS = new SpotJS( elem['value'], nav ); } ) } )
+        create(); } )
 
       onUnmounted( () => {
-        nextTick(  () => {
-          spotJS.dispose();
-          nav.removeElem( elem['value'] ); } ) } )
-      
+        nav.removeElem( "main/Port.vue", elem['value'], nextTick, () => {
+          /* spotJS.dispose(); */ } ) } )
+
     return { elem }; }
   }
 
-  export default Cube;
+  export default Spot;
 </script>
 
 

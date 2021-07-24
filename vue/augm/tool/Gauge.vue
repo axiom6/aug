@@ -30,7 +30,7 @@ let Gauge = {
       create(); } )
 
   onUnmounted( () => {
-    nav.removeElem( elem['value'], nextTick ) ; } )
+    nav.removeElem( "Guage.vue", elem['value'], nextTick ) ; } )
 
   return { elem } }
 

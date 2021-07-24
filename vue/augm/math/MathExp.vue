@@ -24,7 +24,7 @@ let MathExp = {
        create(); } )
 
     onUnmounted( () => {
-      nav.removeElem( elem['value'], nextTick ) ; } )
+      nav.removeElem( "Math.vue", elem['value'], nextTick ) ; } )
 
   return { elem } }
 }

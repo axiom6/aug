@@ -11,7 +11,7 @@ import {
 } from 'three/examples/jsm/controls/OrbitControls.js';
 
 Spot = class Spot {
-  constructor(elem, mix) {
+  constructor(elem, nav) {
     // Third arg useCapture must match addEventLIstenter()
     // window.removeEventListener( 'resize', @onWindowResize, false )
     this.onWindowResize = this.onWindowResize.bind(this);
@@ -19,7 +19,7 @@ Spot = class Spot {
     this.render = this.render.bind(this);
     this.tween = this.tween.bind(this);
     this.elem = elem;
-    this.mix = mix;
+    this.nav = nav;
     this.debug = true;
     this.doSpot();
     this.init();
@@ -76,6 +76,7 @@ Spot = class Spot {
     this.controls.target.set(0, 7, 0);
     this.controls.maxPolarAngle = Math.PI / 2;
     this.controls.update();
+    console.log("Spot.TWEEN", TWEEN);
   }
 
   addToScene(...args) {

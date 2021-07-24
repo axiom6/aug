@@ -37,7 +37,7 @@ let Table = {
       create(); } )
 
     onUnmounted( () => {
-      nav.removeElem( elem['value'], nextTick ) ; } )
+      nav.removeElem( "Table.vue", elem['value'], nextTick ) ; } )
 
     return { elem }; }
 

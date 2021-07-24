@@ -29,7 +29,7 @@ let PageND = {
         create(); } )
 
     onUnmounted( () => {
-      nav.removeElem( elem['value'], nextTick ) ; } )
+      nav.removeElem( "geom/PageND.vue", elem['value'], nextTick ) ; } )
 
     return { elem }; }
 }

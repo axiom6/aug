@@ -220,7 +220,7 @@ Augm = (function() {
     }
   };
 
-  Augm.komps = Access.kompsDir({
+  Augm.komps = Access.kompsDirs({
     Home: {
       title: 'Home',
       key: 'Home',

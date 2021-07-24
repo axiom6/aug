@@ -35,7 +35,7 @@ let Query = {
       create(); } )
 
     onUnmounted( () => {
-      nav.removeElem( elem['value'], nextTick ) ; } )
+      nav.removeElem( "Query.vue", elem['value'], nextTick ) ; } )
 
     return { elem }; }
 

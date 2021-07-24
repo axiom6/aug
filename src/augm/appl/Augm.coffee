@@ -57,7 +57,7 @@ class Augm
     Choice: { url:'jitter/Choice.json', data:ChoiceJson }
     Font:   { url: '',                  data:FontJson   } }
 
-  Augm.komps = Access.kompsDir( {
+  Augm.komps = Access.kompsDirs( {
     Home:{ title:'Home', key:'Home', pracs:{}, ikw:false, icon:"fas fa-home" }
     Math:{ title:'Math', key:'Math', pracs:{}, ikw:true,  icon:"fas fa-bezier-curve" }
     Draw:{ title:'Draw', key:'Draw', pracs:{}, ikw:false, icon:"fas fa-draw-polygon" }

@@ -190,13 +190,7 @@ Vizu = (function() {
       ikw: false,
       icon: "fas fa-cubes"
     },
-    Spot: {
-      title: 'Spot',
-      key: 'Spot',
-      pracs: {},
-      ikw: false,
-      icon: "fas fa-lightbulb"
-    },
+    //pot:{ title:'Spot', key:'Spot', pracs:{}, ikw:false, icon:"fas fa-lightbulb" }
     Test: {
       title: 'Test',
       key: 'Test',

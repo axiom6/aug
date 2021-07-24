@@ -248,14 +248,18 @@ class Mix extends Type
   isPageKeyComp: (pageKey) ->
     pageKey is 'Info' or pageKey is 'Data' # @app() is 'Muse' and
 
-  removeElem:( elem ) ->
+  removeElemNextTick:( msg, elem, nextTick, closure=null ) ->
+    nextTick( () =>
+      if @isDef(elem)
+        closure() if closure?
+        @removeElems(elem)
+      else
+        console.error( msg, "Mix.removeElem() elem undefined" ) )
+  return
+
+  removeElems:( elem ) ->
     while @isDef(elem) and @isDef(elem.firstChild)
       elem.removeChild(elem.firstChild)
-    return
-
-  removeElemNextTick:( elem, nextTick ) ->
-    nextTick( () =>
-      @removeElem(elem) )
     return
 
   createElem:( msg, elem, nextTick, closure ) ->
@@ -263,7 +267,7 @@ class Mix extends Type
       if @isDef(elem)
         closure()
       else
-        console.error( msg, "elem undefined" ) )
+        console.error( msg, "Mix.createElem() elem undefined" ) )
     return
 
 # Choice

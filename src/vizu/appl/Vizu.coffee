@@ -40,7 +40,7 @@ class Vizu
     Home:{ title:'Home', key:'Home', pracs:{}, ikw:false, icon:"fas fa-home" }
     Main:{ title:'Main', key:'Main', pracs:{}, ikw:false, icon:"fas fa-bezier-curve" }
     Cube:{ title:'Cube', key:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes" }
-    Spot:{ title:'Spot', key:'Spot', pracs:{}, ikw:false, icon:"fas fa-lightbulb" }
+    #pot:{ title:'Spot', key:'Spot', pracs:{}, ikw:false, icon:"fas fa-lightbulb" }
     Test:{ title:'Test', key:'Test', pracs:{}, ikw:false, icon:"fas fa-stethoscope" } } )
 
   # Initialization is accomplished in 3 steps:

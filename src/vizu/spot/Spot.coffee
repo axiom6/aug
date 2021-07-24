@@ -1,11 +1,11 @@
 
 import * as THREE        from 'three'
-import { TWEEN }         from 'three/examples/jsm/libs/tween.module.min.js';
+import { TWEEN }         from 'three/examples/jsm/libs/tween.module.min.js'; # Not importing correctlly
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
 class Spot
   
-  constructor:( @elem, @mix ) ->
+  constructor:( @elem, @nav ) ->
     @debug = true
     @doSpot()
     @init()
@@ -80,6 +80,8 @@ class Spot
     @controls.target.set( 0, 7, 0 )
     @controls.maxPolarAngle = Math.PI / 2
     @controls.update()
+
+    console.log( "Spot.TWEEN", TWEEN )
 
     return
 

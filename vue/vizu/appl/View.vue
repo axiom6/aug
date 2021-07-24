@@ -16,8 +16,8 @@
   import { inject, ref, onMounted } from 'vue';
   import Home     from './Home.vue'
   import Main     from '../main/Main.vue';
-  import Cube     from '../comp/Cube.vue';
-  import Spot     from '../comp/Spot.vue';
+  import Spot     from '../main/Spot.vue';
+  import Cube     from '../../../lib/vue/cube/Cube.vue';
   import Test     from '../../../lib/vue/test/Test.vue';
   import Replay   from '../../../lib/vue/test/Replay.vue';
   import Result   from '../../../lib/vue/test/Result.vue';
@@ -60,11 +60,6 @@
   
 </style>
 
-<!--
-
-if( debug ) { console.log( 'View.show()', { level:level, module:module } ); }
-
--->
 
 
 

@@ -429,14 +429,6 @@
       "oAP" : "\/dist",
       "oF" : 0
     },
-    "\/firebase-debug.log" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/firebase-debug.log",
-      "oF" : 0
-    },
     "\/firebase.json" : {
       "ft" : 524288,
       "oA" : 1,
@@ -645,6 +637,50 @@
       "oA" : 1,
       "oAP" : "\/lib\/pub",
       "oF" : 0
+    },
+    "\/lib\/src\/cube\/Cube3D.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/cube\/Cube3D.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/cube\/CubeTh.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/cube\/CubeTh.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/cube\/Gui.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/cube\/Gui.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/cube\/Rect.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/cube\/Rect.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
     },
     "\/lib\/src\/data\/Couch.coffee" : {
       "ft" : 32,
@@ -2518,50 +2554,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/src\/augm\/cube\/Cube3D.coffee" : {
-      "ft" : 32,
-      "ma" : 1,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/augm\/cube\/Cube3D.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/augm\/cube\/CubeTh.coffee" : {
-      "ft" : 32,
-      "ma" : 1,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/augm\/cube\/CubeTh.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/augm\/cube\/Gui.coffee" : {
-      "ft" : 32,
-      "ma" : 1,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/augm\/cube\/Gui.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/augm\/cube\/Rect.coffee" : {
-      "ft" : 32,
-      "ma" : 1,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/augm\/cube\/Rect.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
     "\/src\/augm\/geom\/2D\/Basics.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -3951,45 +3943,6 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/src\/vizu\/spot\/DirectionalLightShadow.html" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/vizu\/spot\/DirectionalLightShadow.html",
-      "oF" : 0
-    },
-    "\/src\/vizu\/spot\/index.html" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/vizu\/spot\/index.html",
-      "oF" : 0
-    },
-    "\/src\/vizu\/spot\/ShadowMapViewer.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/vizu\/spot\/ShadowMapViewer-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/vizu\/spot\/spot-min.css" : {
-      "aP" : 1,
-      "bl" : 0,
-      "ci" : 0,
-      "co" : 0,
-      "ft" : 16,
-      "ma" : 0,
-      "oA" : 2,
-      "oAP" : "\/src\/vizu\/spot\/spot-min-min.css",
-      "oF" : 0,
-      "pg" : 0
-    },
     "\/src\/vizu\/spot\/Spot.coffee" : {
       "ft" : 32,
       "ma" : 1,
@@ -3998,67 +3951,6 @@
       "oAP" : "\/pub\/vizu\/spot\/Spot.js",
       "oF" : 0,
       "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/vizu\/spot\/spot.config.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/vizu\/spot\/spot.config-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/vizu\/spot\/spot.css" : {
-      "aP" : 1,
-      "bl" : 0,
-      "ci" : 0,
-      "co" : 0,
-      "ft" : 16,
-      "ma" : 0,
-      "oA" : 2,
-      "oAP" : "\/src\/vizu\/spot\/spot-min.css",
-      "oF" : 0,
-      "pg" : 0
-    },
-    "\/src\/vizu\/spot\/spot.html" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/vizu\/spot\/spot.html",
-      "oF" : 0
-    },
-    "\/src\/vizu\/spot\/spotExa.html" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/vizu\/spot\/spotExa.html",
-      "oF" : 0
-    },
-    "\/src\/vizu\/spot\/SpotExa.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/vizu\/spot\/SpotExa-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/vizu\/spot\/UnpackDepthRGBAShader.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/src\/vizu\/spot\/UnpackDepthRGBAShader-min.js",
-      "oF" : 0,
       "sC" : 0,
       "tS" : 0
     },

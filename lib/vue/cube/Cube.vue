@@ -1,6 +1,6 @@
 
 <template>
-  <div id="CubeTh" class="cube-pane"></div>
+  <div ref="elem" class="cube-pane"></div>
 </template>
 
 <script type="module">
@@ -10,26 +10,31 @@
   // is compiled by rollup.config.cube.js However the dynamic import of
   // this Cube.vue ends the warning messages. CoffeeScript import of original
   // CoffeeScript does not produce warning messages.
-  import Build  from '../../../lib/pub/util/Build.js'
-  import CubeTh from '../../../pub/augm/cube/CubeTh.js'
-  import { inject, onMounted, onUnmounted, nextTick } from 'vue';
+  import Build  from '../../pub/util/Build.js'
+  import CubeTh from '../../pub/cube/CubeTh.js'
+  import { inject, ref, onMounted, onUnmounted, nextTick } from 'vue';
   
   let Cube = {
 
     setup() {
 
       const nav    = inject('nav');
+      const elem   = ref(null);
       const build  = new Build(  nav.batch );
       let   cubeTh = {}
 
+      const create = () => {
+        nav.createElem( "Cube.create()", elem['value'], nextTick, () => {
+          cubeTh = new CubeTh( build, elem['value'], false );
+          cubeTh.animate(); } ) }
+
       onMounted( () => {
-        cubeTh = new CubeTh( build, "CubeTh", false );
-        cubeTh.animate(); } )
+        create(); } )
 
       onUnmounted( () => {
-        nav.removeElem( cubeTh.parElem, nextTick ) ; } )
+        nav.removeElem( "Cube.onUnmounted()", elem['value'], nextTick ) ; } )
       
-    return {}; }
+    return { elem }; }
   }
 
   export default Cube;
