@@ -16,7 +16,6 @@
     "vizu": "node src/vizu/appl/vizu.config.js",
     "jitt": "node src/jitt/appl/jitt.config.js && firebase use jitt",
     "data": "node src/data/appl/data.config.js && firebase use data",
-    "exit": "node src/exit/appl/exit.config.js && firebase use exit",
     "host": "firebase deploy",
     "gram": "src/augm/math/par/gram.sh"
   },

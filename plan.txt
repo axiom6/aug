@@ -1,16 +1,16 @@
 
 Debug One
-  1. Test  Visu refactoring
-  2. Jitter choice
-  3. Colors in Hues / Color / Polar / Vec / Sphere
+
+  1. Jitter choice and testing and mix.choice() in Mix.chosen and Flavor
+  2. Colors in Hues / Color / Polar / Vec / Sphere
      Good   in Hues / Rgbs  / Regress
-  4. Remove some of the junk added to Vis
-  5. @choice() in Mix.chosen  and Flavor
 
 Debug Two
-  1. Look into cicular JSON bug in Tester.reviewsLocal()
-  2. Look into preventing Type.toStr() to Type.toStrObject() infinite recursions
-  3. toStr(bigint)
+  1. Create Trip.vue with Trip.coffee
+  2, Remove some of the junk added to Vis
+  3. Look into cicular JSON bug in Tester.reviewsLocal()
+  4. Look into preventing Type.toStr() to Type.toStrObject() infinite recursions
+  5. toStr(bigint)
 
 Warnings
   1. [Violation] Added non-passive event listener to a scroll-blocking 'wheel' event.
