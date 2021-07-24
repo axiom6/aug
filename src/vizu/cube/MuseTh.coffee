@@ -1,6 +1,6 @@
 
-import Util   from '../../lib/pub/base/util/Util.js'
-import Build  from '../../lib/pub/base/util/Build.js'
+import Util   from '../../../lib/pub/util/Util.js'
+import Build  from '../../../lib/pub/util/Build.js'
 import Cube3D from './Cube3D.js'
 import Rect3D from './Rect3D.js'
 import {  AxesHelper, Font, Group, MeshLambertMaterial, DoubleSide, BoxGeometry, Mesh } from 'three'
@@ -9,11 +9,11 @@ class MuseTh
 
   constructor:( @main ) ->
     @debug = @main.debug
-    @build = new Build( @main.mix.batch() )
+    @build = new Build( @main.nav.batch )
     @axes  = new AxesHelper( 2 )
     @main.addToScene( @axes )
-    console.log( 'MuseTh() batch', @main.mix.batch()  ) if @debug
-    @fontPrac = new Font( @main.mix.batch().Font.data )
+    console.log( 'MuseTh() batch', @main.nav.batch  ) if @debug
+    @fontPrac = new Font( @main.nav.batch.Font.data )
     @aspectRatio = @main.aspectRatio
     @group = @ikw()
 

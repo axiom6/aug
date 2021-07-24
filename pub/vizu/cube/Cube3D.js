@@ -1,8 +1,19 @@
 var Cube3D;
 
-import Vis from '../../lib/pub/base/draw/Vis.js';
+import {
+  vis
+} from '../../../lib/pub/draw/Vis.js';
 
-import * as THREE from 'three';
+import {
+  BoxBufferGeometry,
+  Color,
+  MeshPhongMaterial,
+  Mesh,
+  TextBufferGeometry,
+  MeshBasicMaterial,
+  Matrix4,
+  BackSide
+} from 'three';
 
 Cube3D = class Cube3D {
   constructor(plane, row, col1, title, xyz, whd, hsv, opacity, font) {
@@ -16,21 +27,21 @@ Cube3D = class Cube3D {
     this.hsv = hsv;
     this.opacity = opacity;
     this.font = font;
-    box = new THREE.BoxBufferGeometry();
+    box = new BoxBufferGeometry();
     box.name = this.title;
     Cube3D.matrix.makeScale(this.whd[0], this.whd[1], this.whd[2]);
     box.applyMatrix4(Cube3D.matrix);
     Cube3D.matrix.makeTranslation(this.xyz[0], this.xyz[1], this.xyz[2]);
     box.applyMatrix4(Cube3D.matrix);
-    hex = Vis.hex(this.hsv, 'ysv');
-    col = new THREE.Color(hex); // blemding:THREE
-    mat = new THREE.MeshPhongMaterial({
+    hex = vis.hex(this.hsv, 'ysv');
+    col = new Color(hex); // blemding:THREE
+    mat = new MeshPhongMaterial({
       color: col,
       opacity: this.opacity,
       transparent: true,
-      side: THREE.BackSide
+      side: BackSide
     });
-    this.mesh = new THREE.Mesh(box, mat);
+    this.mesh = new Mesh(box, mat);
     this.mesh.name = this.title;
     this.mesh.geom = "Cube";
     this.mesh.plane = this.plane;
@@ -43,12 +54,12 @@ Cube3D = class Cube3D {
       curveSegments: 2
     };
     name = this.plane === 'Cols' ? "" : this.title;
-    text = new THREE.TextBufferGeometry(name, obj);
+    text = new TextBufferGeometry(name, obj);
     text.computeBoundingBox();
-    face = new THREE.MeshBasicMaterial({
+    face = new MeshBasicMaterial({
       color: 0xffffff
     });
-    side = new THREE.MeshBasicMaterial({
+    side = new MeshBasicMaterial({
       color: 0xffffff
     });
     mats = [face, side];
@@ -56,7 +67,7 @@ Cube3D = class Cube3D {
     dy = 0.5 * (text.boundingBox.max.y - text.boundingBox.min.y);
     Cube3D.matrix.makeTranslation(this.xyz[0] - dx, this.xyz[1] - dy, this.xyz[2]);
     text.applyMatrix4(Cube3D.matrix);
-    this.tmesh = new THREE.Mesh(text, mats);
+    this.tmesh = new Mesh(text, mats);
     this.tmesh.name = this.title;
     this.tmesh.geom = "Text";
     this.tmesh.plane = this.plane;
@@ -67,9 +78,9 @@ Cube3D = class Cube3D {
 
 };
 
-//mat = new THREE.MeshPhongMaterial( { color:col, opacity:@opacity, transparent:true, side:THREE.BackSide, blemding:THREE.AdditiveBlending } )
-//mat = new THREE.MeshBasicMaterial( { color:col, opacity:@opacity, transparent:true } ) # blemding:THREE.AdditiveBlending
-Cube3D.matrix = new THREE.Matrix4();
+//mat = new MeshPhongMaterial( { color:col, opacity:@opacity, transparent:true, side:BackSide, blemding:AdditiveBlending } )
+//mat = new MeshBasicMaterial( { color:col, opacity:@opacity, transparent:true } ) # blemding:AdditiveBlending
+Cube3D.matrix = new Matrix4();
 
 export default Cube3D;
 

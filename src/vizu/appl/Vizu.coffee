@@ -3,7 +3,9 @@ import Access     from '../../../lib/pub/util/Access.js'
 import Stream     from '../../../lib/pub/util/Stream.js'
 import Nav        from '../../../lib/pub/navi/Nav.js'
 import Mix        from '../../../lib/pub/navi/Mix.js'
+
 import { tester } from '../../../lib/pub/test/tester.js'
+import Main       from '../main/Main.js'
 import Dash       from '../../../vue/vizu/appl/Dash.vue'
 
 import { createApp }    from 'vue'
@@ -80,8 +82,9 @@ class Vizu
     subjects     = ["Nav","Tab","View"]
     streamLog    = { subscribe:false, publish:false, subjects:subjects }
     Vizu.stream   = new Stream( subjects, streamLog )
-    Vizu.mix      = new Mix( Vizu )
-    Vizu.nav      = new Nav( Vizu, Vizu.stream, Vizu.komps, Vizu.pages )
+    Vizu.mix      = new Mix(  Vizu )
+    Vizu.nav      = new Nav(  Vizu, Vizu.stream, Vizu.komps, Vizu.pages )
+    Vizu.main     = new Main( Vizu.stream, Vizu.nav )
     Vizu.tester   = tester
     #izu.mix.opts = Vizu.Batch.Main.data # JSON.parse( batch.Main.data )
     #Viz.cache  = new Cache( Viz.stream )
@@ -94,8 +97,9 @@ class Vizu
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Vizu.vue3 = () ->
     Vizu.app = createApp( Dash  )
-    Vizu.app.provide('mix', Vizu.mix )
-    Vizu.app.provide('nav', Vizu.nav )
+    Vizu.app.provide('mix',  Vizu.mix  )
+    Vizu.app.provide('nav',  Vizu.nav  )
+    Vizu.app.provide('main', Vizu.main )
     Vizu.app.mount('#vizu')
     Vizu.nav.pub( Vizu.nav.toPub(Vizu.href), true )
     return

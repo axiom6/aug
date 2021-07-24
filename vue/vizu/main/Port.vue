@@ -6,7 +6,6 @@
 <script type="module">
 
 import { ref, inject, nextTick, onMounted, onUnmounted} from "vue";
-import Main from "../../../pub/vizu/main/Main.js";
 
 let Port = {
 
@@ -15,8 +14,8 @@ let Port = {
   setup( props ) {
 
     const nav   = inject('nav');
+    const main  = inject('main');
     const elem  = ref(null);
-    const main  = new Main( nav.stream, nav )
     const debug = true;
     if( debug ) { console.log('Port.setup()', { main:main } ); }
 
@@ -25,8 +24,8 @@ let Port = {
         nextTick( () => {
           let pageKey = props.page.key;
           if( debug ) { console.log('Port.onMounted()', { pageKey:pageKey, opts:nav.opts2(pageKey) } ); }
-          if( nav.isDef(nav.opts2(pageKey)) ) {
-            main.doApp( elem['value'], nav.opts2(pageKey), pageKey ); }
+          if( nav.isDef(nav.opts(pageKey)) ) {
+            main.doApp( elem['value'], nav.opts(pageKey), pageKey ); }
            else {
              console.log( 'Port.onMounted() Main app not implemented', pageKey ); } } ) } } )
 

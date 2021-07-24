@@ -1,14 +1,15 @@
-import Util       from '../../lib/pub/base/util/Util.js'
-import Vis        from '../../lib/pub/base/draw/Vis.js'
+
+import Util       from '../../../lib/pub/util/Util.js'
+import {vis}      from '../../../lib/pub/draw/Vis.js'
 import { PlaneGeometry, Color, MeshBasicMaterial, Mesh, TextBufferGeometry, Matrix4, DoubleSide } from 'three'
 
 class Rect3D
 
   constructor:( @plane, @row, @col, @title, @xyz, @wh, @hsv, @opacity, @font, @fontColor ) ->
     rec = new PlaneGeometry( @wh[0], @wh[1] )
-    rec.translate(      @xyz[0], @xyz[1], @xyz[2] )
+    rec.translate( @xyz[0], @xyz[1], @xyz[2] )
 
-    hex  = Vis.hex( @hsv, 'ysv' )
+    hex   = vis.hex( @hsv, 'ysv' )
     col   = new Color( hex )
     mat   = new MeshBasicMaterial( { color:col, opacity:@opacity, transparent:true, side:DoubleSide } )
     @mesh = new Mesh( rec, mat )

@@ -251,18 +251,14 @@ Data = (function() {
   Data.routeNames = Data.createRouteNames(Data.routes);
 
   // Toc.vue components and routes with no west or east directions
-  Data.komps = {
+  Data.komps = Access.kompsDirs({
     Home: {
       title: 'Home',
       key: 'Home',
       route: 'Home',
       pracs: {},
       ikw: false,
-      icon: "fas fa-home",
-      north: "Query",
-      prev: "Query",
-      south: "Store",
-      next: "Store"
+      icon: "fas fa-home"
     },
     Store: {
       title: 'Store',
@@ -270,11 +266,7 @@ Data = (function() {
       route: 'Store',
       pracs: {},
       ikw: true,
-      icon: "fas fa-cubes",
-      north: "Home",
-      prev: "Home",
-      south: "Table",
-      next: "Table"
+      icon: "fas fa-cubes"
     },
     Table: {
       title: 'Table',
@@ -282,11 +274,7 @@ Data = (function() {
       route: 'Table',
       pracs: {},
       ikw: true,
-      icon: "fas fa-table",
-      north: "Store",
-      prev: "Store",
-      south: "Query",
-      next: "Query"
+      icon: "fas fa-table"
     },
     Query: {
       title: 'Query',
@@ -294,13 +282,9 @@ Data = (function() {
       route: 'Query',
       pracs: {},
       ikw: true,
-      icon: "fas fa-question-circle",
-      north: "Table",
-      prev: "Table",
-      south: "Home",
-      next: "Home"
+      icon: "fas fa-question-circle"
     }
-  };
+  });
 
   return Data;
 

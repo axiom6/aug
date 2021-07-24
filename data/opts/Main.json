@@ -24,7 +24,7 @@
     "content": {
       "plane":true, "grids":false, "axes":false, "axeshelper":true, "cube":false, "rgbs":true },
     "animate": {} },
-  "Muse": {
+  "Cube": {
     "main": {
       "debug":false, "verify":false },
     "coords": {

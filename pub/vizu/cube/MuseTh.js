@@ -23,13 +23,13 @@ MuseTh = class MuseTh {
     this.traverse = this.traverse.bind(this);
     this.main = main;
     this.debug = this.main.debug;
-    this.build = new Build(this.main.mix.batch);
+    this.build = new Build(this.main.nav.batch);
     this.axes = new AxesHelper(2);
     this.main.addToScene(this.axes);
     if (this.debug) {
-      console.log('MuseTh() batch', this.main.mix.batch);
+      console.log('MuseTh() batch', this.main.nav.batch);
     }
-    this.fontPrac = new Font(this.main.mix.batch.Font.data);
+    this.fontPrac = new Font(this.main.nav.batch.Font.data);
     this.aspectRatio = this.main.aspectRatio;
     this.group = this.ikw();
   }

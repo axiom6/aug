@@ -25,11 +25,11 @@ import Animate from './Animate.js';
 import Verify from './Verify.js';
 
 Main = class Main {
-  constructor(stream, mix) {
+  constructor(stream, nav) {
     this.doApp = this.doApp.bind(this);
     this.resizeScreen = this.resizeScreen.bind(this);
     this.stream = stream;
-    this.mix = mix;
+    this.nav = nav;
     this.elem = null;
     this.opts = {};
     this.app = "";
@@ -68,7 +68,7 @@ Main = class Main {
   }
 
   runApp(elem, opts, app) {
-    if (this.mix.inArray(app, ['Grids', 'Rgbs', 'Muse'])) {
+    if (this.nav.inArray(app, ['Grids', 'Rgbs', 'Cube'])) {
       this.screen(elem);
       this.setup();
       this.animate.animate();
@@ -99,7 +99,7 @@ Main = class Main {
     var i, len, object3D;
     for (i = 0, len = object3Ds.length; i < len; i++) {
       object3D = object3Ds[i];
-      if (!this.mix.inArray(object3D.type, ['Line', 'Points', 'Mesh'])) {
+      if (!this.nav.inArray(object3D.type, ['Line', 'Points', 'Mesh'])) {
         this.log("Main.addToScene(object3D)", object3D);
       }
       if (this.verifyFlag) {
@@ -133,7 +133,7 @@ Main = class Main {
     logPtr = {};
     hides = ['main', 'klass', 'opts', '__proto__'];
     filter = (key) => {
-      return key !== this.mix.inArray(key, hides);
+      return key !== this.nav.inArray(key, hides);
     };
     for (key in ptr) {
       if (!hasProp.call(ptr, key)) continue;

@@ -50,9 +50,9 @@ class Spot
 
     @camera.position.set( 46, 22, - 21 )
 
-    @spotLight1.position.set( 15, 40, 45 )
-    @spotLight2.position.set( 0, 40, 35 )
-    @spotLight3.position.set( - 15, 40, 45 )
+    @spotLight1.position.set(  15, 40, 45 )
+    @spotLight2.position.set(   0, 40, 35 )
+    @spotLight3.position.set( -15, 40, 45 )
 
     @lightHelper1 = new THREE.SpotLightHelper( @spotLight1 )
     @lightHelper2 = new THREE.SpotLightHelper( @spotLight2 )
@@ -100,7 +100,7 @@ class Spot
 
   dispose:() ->
     # Third arg useCapture must match addEventLIstenter()
-    window.removeEventListener( 'resize', @onWindowResize, false )
+    # window.removeEventListener( 'resize', @onWindowResize, false )
     return
 
   onWindowResize:() =>

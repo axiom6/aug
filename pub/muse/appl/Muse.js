@@ -220,85 +220,57 @@ Muse = (function() {
   };
 
   // Toc.vue components and routes with no west or east directions
-  Muse.komps = {
+  Muse.komps = Access.kompsDirs({
     Home: {
       title: 'Home',
       key: 'Home',
       pracs: {},
       ikw: false,
-      icon: "fas fa-home",
-      north: "Test",
-      prev: "Test",
-      south: "Prin",
-      next: "Prin"
+      icon: "fas fa-home"
     },
     Prin: {
       title: 'Prin',
       key: 'Prin',
       pracs: {},
       ikw: true,
-      icon: "fas fa-balance-scale",
-      north: "Home",
-      prev: "Home",
-      south: "Info",
-      next: "Info"
+      icon: "fas fa-balance-scale"
     },
     Info: {
       title: 'Info',
       key: 'Info',
       pracs: {},
       ikw: true,
-      icon: "fas fa-th",
-      north: "Prin",
-      prev: "Prin",
-      south: "Know",
-      next: "Know"
+      icon: "fas fa-th"
     },
     Know: {
       title: 'Know',
       key: 'Know',
       pracs: {},
       ikw: true,
-      icon: "fas fa-university",
-      north: "Info",
-      prev: "Info",
-      south: "Wise",
-      next: "Wise"
+      icon: "fas fa-university"
     },
     Wise: {
       title: 'Wise',
       key: 'Wise',
       pracs: {},
       ikw: true,
-      icon: "fab fa-tripadvisor",
-      north: "Know",
-      prev: "Know",
-      south: "Defs",
-      next: "Defs"
+      icon: "fab fa-tripadvisor"
     },
     Defs: {
       title: 'Defs',
       key: 'Defs',
       pracs: {},
       ikw: false,
-      icon: "fas fa-cubes",
-      north: "Wise",
-      prev: "Wise",
-      south: "Test",
-      next: "Test"
+      icon: "fas fa-cubes"
     },
     Test: {
       title: 'Test',
       key: 'Test',
       pracs: {},
       ikw: false,
-      icon: "fas fa-stethoscope",
-      north: "Defs",
-      prev: "Defs",
-      south: "Home",
-      next: "Home"
+      icon: "fas fa-stethoscope"
     }
-  };
+  });
 
   Muse.pages = {
     Comp: {

@@ -1,12 +1,13 @@
 
 <template>
   <div class="view-pane">
-    <v-home     v-if="show('Home')"   :key="viewIdx"></v-home>
-    <v-main     v-if="show('Main')"   :key="viewIdx"></v-main>
-    <v-spot     v-if="show('Spot')"   :key="viewIdx"></v-spot>
-    <v-test     v-if="show('Test')"   :key="viewIdx"></v-test>
-    <v-replay   v-if="show('Replay')" :key="viewIdx"></v-replay>
-    <v-result   v-if="show('Result')" :key="viewIdx"></v-result>
+    <v-home     v-if="show('Home')"   :key="nav.keyIdx(  'Home',viewIdx)"></v-home>
+    <v-main     v-if="show('Main')"   :key="nav.keyIdx(  'Main',viewIdx)"></v-main>
+    <v-cube     v-if="show('Cube')"   :key="nav.keyIdx(  'Cube',viewIdx)"></v-cube>
+    <v-spot     v-if="show('Spot')"   :key="nav.keyIdx(  'Spot',viewIdx)"></v-spot>
+    <v-test     v-if="show('Test')"   :key="nav.keyIdx(  'Test',viewIdx)"></v-test>
+    <v-replay   v-if="show('Replay')" :key="nav.keyIdx('Replay',viewIdx)"></v-replay>
+    <v-result   v-if="show('Result')" :key="nav.keyIdx('Result',viewIdx)"></v-result>
   </div>
 </template>
 
@@ -15,12 +16,12 @@
   import { inject, ref, onMounted } from 'vue';
   import Home     from './Home.vue'
   import Main     from '../main/Main.vue';
+  import Cube     from '../comp/Cube.vue';
   import Spot     from '../comp/Spot.vue';
   import Test     from '../../../lib/vue/test/Test.vue';
   import Replay   from '../../../lib/vue/test/Replay.vue';
   import Result   from '../../../lib/vue/test/Result.vue';
-
-
+  
   let View = {
 
     components:{ 'v-home':Home, 'v-cube':Cube, 'v-spot':Spot, 'v-main':Main, 'v-test':Test, 'v-replay':Replay,
@@ -46,7 +47,7 @@
       onMounted( () => {
         nav.subscribe('View', 'View', (obj) => { onNav(obj); } ); } )
 
-      return { show, viewIdx }; }
+      return { show, viewIdx, nav }; }
     }
 
   export default View

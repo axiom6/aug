@@ -12,6 +12,8 @@ import {
   tester
 } from '../../../lib/pub/test/tester.js';
 
+import Main from '../main/Main.js';
+
 import Dash from '../../../vue/vizu/appl/Dash.vue';
 
 import {
@@ -80,9 +82,10 @@ Vizu = (function() {
       Vizu.stream = new Stream(subjects, streamLog);
       Vizu.mix = new Mix(Vizu);
       Vizu.nav = new Nav(Vizu, Vizu.stream, Vizu.komps, Vizu.pages);
+      Vizu.main = new Main(Vizu.stream, Vizu.nav);
       Vizu.tester = tester;
-      Vizu.mix.opts = Vizu.Batch.Main.data; // JSON.parse( batch.Main.data )
       try {
+        //izu.mix.opts = Vizu.Batch.Main.data # JSON.parse( batch.Main.data )
         //Viz.cache  = new Cache( Viz.stream )
         Vizu.vue3();
       } catch (error1) {
@@ -95,6 +98,7 @@ Vizu = (function() {
       Vizu.app = createApp(Dash);
       Vizu.app.provide('mix', Vizu.mix);
       Vizu.app.provide('nav', Vizu.nav);
+      Vizu.app.provide('main', Vizu.main);
       Vizu.app.mount('#vizu');
       Vizu.nav.pub(Vizu.nav.toPub(Vizu.href), true);
     }
@@ -164,61 +168,43 @@ Vizu = (function() {
     }
   };
 
-  Vizu.komps = {
+  Vizu.komps = Access.kompsDirs({
     Home: {
       title: 'Home',
       key: 'Home',
-      route: 'Home',
       pracs: {},
       ikw: false,
-      icon: "fas fa-home",
-      west: "Test",
-      north: "Test",
-      east: "Main",
-      south: "Main",
-      next: "Main",
-      prev: "Hues"
+      icon: "fas fa-home"
     },
     Main: {
       title: 'Main',
       key: 'Main',
-      route: 'Main',
       pracs: {},
       ikw: false,
-      icon: "fas fa-bezier-curve",
-      west: "Home",
-      north: "Home",
-      east: "Cube",
-      south: "Cube",
-      next: "Cube",
-      prev: "Home"
+      icon: "fas fa-bezier-curve"
+    },
+    Cube: {
+      title: 'Cube',
+      key: 'Cube',
+      pracs: {},
+      ikw: false,
+      icon: "fas fa-cubes"
     },
     Spot: {
       title: 'Spot',
       key: 'Spot',
-      route: 'Spot',
       pracs: {},
       ikw: false,
-      icon: "fas fa-lightbulb",
-      west: "Cube",
-      north: "Cube",
-      east: "Test",
-      south: "Test",
-      next: "Test",
-      prev: "Cube"
+      icon: "fas fa-lightbulb"
     },
     Test: {
       title: 'Test',
       key: 'Test',
       pracs: {},
       ikw: false,
-      icon: "fas fa-stethoscope",
-      north: "Geom",
-      prev: "Geom",
-      south: "Home",
-      next: "Home"
+      icon: "fas fa-stethoscope"
     }
-  };
+  });
 
   Vizu.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json";
 

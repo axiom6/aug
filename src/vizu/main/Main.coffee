@@ -12,7 +12,7 @@ import Verify      from './Verify.js'
 
 class Main
 
-  constructor:( @stream, @mix ) ->
+  constructor:( @stream, @nav ) ->
     @elem       = null
     @opts       = {}
     @app        = ""
@@ -46,7 +46,7 @@ class Main
     return
 
   runApp:( elem, opts, app ) ->
-    if @mix.inArray( app, ['Grids','Rgbs','Muse'] )
+    if @nav.inArray( app, ['Grids','Rgbs','Cube'] )
       @screen( elem )
       @setup()
       @animate.animate()
@@ -66,7 +66,7 @@ class Main
   # object3Ds must be args... not an array
   addToScene:( object3Ds... ) ->
     for object3D in object3Ds
-      @log( "Main.addToScene(object3D)", object3D ) if not @mix.inArray( object3D.type, ['Line','Points','Mesh'] )
+      @log( "Main.addToScene(object3D)", object3D ) if not @nav.inArray( object3D.type, ['Line','Points','Mesh'] )
       @verify.verify( object3D ) if @verifyFlag
       @scene.add(     object3D )
     return
@@ -85,7 +85,7 @@ class Main
     return if not @debug
     logPtr = {}
     hides  = ['main','klass','opts','__proto__']
-    filter = (key) => key isnt @mix.inArray(key,hides)
+    filter = (key) => key isnt @nav.inArray(key,hides)
     for own key, obj of ptr when filter(key)
       logPtr[key] = obj
     console.log( klass, logPtr )

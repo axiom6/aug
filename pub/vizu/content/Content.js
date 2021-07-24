@@ -32,8 +32,6 @@ import XZGrid from '../coords/XZGrid.js';
 
 import YZGrid from '../coords/YZGrid.js';
 
-import MuseTh from '../muse/MuseTh.js';
-
 Content = class Content {
   constructor(main) {
     this.main = main;
@@ -54,9 +52,6 @@ Content = class Content {
       }
       if (this.opts.cube != null) {
         this.cube = this.drawCube(this.opts.cube);
-      }
-      if ((this.opts.muse != null) && this.opts.muse) {
-        this.museTh = this.drawMuse();
       }
       if ((this.opts['rgbs'] != null) && this.opts['rgbs']) {
         this.drawRgbs();
@@ -146,12 +141,6 @@ Content = class Content {
       positions: positions.length,
       colors: colors.length
     });
-  }
-
-  drawMuse() {
-    var museTh;
-    museTh = new MuseTh(this.main);
-    return museTh;
   }
 
   drawPoints(positions, colors, radius, group) {

@@ -119,9 +119,6 @@ class Mix extends Type
   opts:( key ) ->
     console.log( "Mix.opts",  key, Mix.Main.Batch['Main'].data[key] )
     Mix.Main.Batch['Main'].data[key]
-  opts2:( key ) ->
-    console.log( "Mix.opts2", key, Mix.Main.Batch['Main'].data[key] )
-    Mix.Main.Batch['Main'].data[key]
   prin: ()  ->
     Mix.Main.Batch['Prin'].data.pracs
   comps: (compk) ->

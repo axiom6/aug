@@ -10,8 +10,8 @@ class Access
       komps.push(komp)
     for i in [0...komps.length]
       Access.kompDir( komps, i )
-    for own key,komp of kompsObj
-      console.log( "Access.kompsDirs", komp )
+    # for own key,komp of kompsObj
+    #   console.log( "Access.kompsDirs", komp )
     kompsObj
 
   @kompDir:( komps, i ) ->

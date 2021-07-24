@@ -58,6 +58,21 @@ Augm = (function() {
   //mport ScieJson from   '../../../data/inno/Scie.json'
   //mport SoftInov from   '../../../data/inno/Soft.json'
   class Augm {
+    static start(href) {
+      var key, ref, val;
+      console.log("Augm.start()", href);
+      Augm.href = href;
+      Augm.addToHead();
+      ref = Augm.Batch;
+      for (key in ref) {
+        val = ref[key];
+        if ((val.refine != null) && val.refine) {
+          val.data = Access.refine(val.data);
+        }
+      }
+      Augm.init();
+    }
+
     static addToHead() {
       var head, maniElem, siteElem;
       // manifest   = """<link href="manifest.json"  rel="manifest" crossorigin="use-credentials">"""
@@ -205,153 +220,71 @@ Augm = (function() {
     }
   };
 
-  Augm.komps = {
+  Augm.komps = Access.kompsDir({
     Home: {
       title: 'Home',
       key: 'Home',
-      route: 'Home',
       pracs: {},
       ikw: false,
-      icon: "fas fa-home",
-      west: "Wood",
-      north: "Wood",
-      east: "Math",
-      south: "Math",
-      next: "Math",
-      prev: "Wood"
+      icon: "fas fa-home"
     },
     Math: {
       title: 'Math',
       key: 'Math',
-      route: 'Math',
       pracs: {},
       ikw: true,
-      icon: "fas fa-bezier-curve",
-      west: "Home",
-      north: "Home",
-      east: "Geom",
-      south: "Geom",
-      next: "Geom",
-      prev: "Home"
+      icon: "fas fa-bezier-curve"
     },
     Draw: {
       title: 'Draw',
       key: 'Draw',
-      route: 'Draw',
       pracs: {},
       ikw: false,
-      icon: "fas fa-draw-polygon",
-      west: "Math",
-      north: "Math",
-      east: "Hues",
-      south: "Hues",
-      next: "Hues",
-      prev: "Math"
+      icon: "fas fa-draw-polygon"
     },
     Hues: {
       title: 'Hues',
       key: 'Hues',
-      route: 'Hues',
       pracs: {},
       ikw: false,
-      icon: "fas fa-palette",
-      west: "Draw",
-      north: "Draw",
-      east: "Tool",
-      south: "Tool",
-      next: "Tool",
-      prev: "Draw"
+      icon: "fas fa-palette"
     },
     Tool: {
       title: 'Tool',
       key: 'Tool',
-      route: 'Tool',
       pracs: {},
       ikw: false,
-      icon: "fas fa-wrench",
-      west: "Hues",
-      north: "Hues",
-      east: "Cube",
-      south: "Cube",
-      next: "Cube",
-      prev: "Hues"
+      icon: "fas fa-wrench"
     },
     Cube: {
       title: 'Cube',
       key: 'Cube',
-      route: 'Cube',
       pracs: {},
       ikw: false,
-      icon: "fas fa-cubes",
-      west: "Hues",
-      north: "Hues",
-      east: "Wood",
-      south: "Wood",
-      next: "Wood",
-      prev: "Hues"
+      icon: "fas fa-cubes"
     },
     Wood: {
       title: 'Wood',
       key: 'Wood',
-      route: 'Wood',
       pracs: {},
       ikw: false,
-      icon: "fas fa-tree",
-      west: "Cube",
-      north: "Cube",
-      east: "Geom",
-      south: "Geom",
-      next: "Geom",
-      prev: "Cube"
+      icon: "fas fa-tree"
     },
     Geom: {
       title: 'Geom',
       key: 'Geom',
-      route: 'Geom',
       pracs: {},
       ikw: true,
-      icon: "fas fa-shapes",
-      west: "Wood",
-      north: "Wood",
-      east: "Wood",
-      south: "Test",
-      next: "Test",
-      prev: "Geom"
+      icon: "fas fa-shapes"
     },
     Test: {
       title: 'Test',
       key: 'Test',
       pracs: {},
       ikw: false,
-      icon: "fas fa-stethoscope",
-      north: "Geom",
-      prev: "Geom",
-      south: "Home",
-      next: "Home"
+      icon: "fas fa-stethoscope"
     }
-  };
-
-  // Initialization is accomplished in 3 steps:
-  // 1. Read in all the JSON config files in Augm.Batch. Call Augm.init() when complete.
-  // 2. Augm.init() initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
-  // 3. Augm.vue() launches Vue with Home page and a Toc for Prin Info Know and Wise practices
-
-  // Called by muse.html to kick things off
-  // 1. Read in all the JSON config files in Augm.Batch. Call Augm.init() when complete.
-  Augm.geomKomp = Augm.start = function(href) {
-    var key, ref, val;
-    console.log("Augm.start()", href);
-    Augm.href = href;
-    Augm.addToHead();
-    ref = Augm.Batch;
-    for (key in ref) {
-      val = ref[key];
-      if ((val.refine != null) && val.refine) {
-        val.data = Access.refine(val.data);
-      }
-    }
-    Augm.init();
-  };
+  });
 
   //ead.appendChild(jsonLD)
   Augm.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json";

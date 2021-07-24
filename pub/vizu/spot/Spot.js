@@ -12,6 +12,8 @@ import {
 
 Spot = class Spot {
   constructor(elem, mix) {
+    // Third arg useCapture must match addEventLIstenter()
+    // window.removeEventListener( 'resize', @onWindowResize, false )
     this.onWindowResize = this.onWindowResize.bind(this);
     this.animate = this.animate.bind(this);
     this.render = this.render.bind(this);
@@ -98,10 +100,7 @@ Spot = class Spot {
     return newObj;
   }
 
-  dispose() {
-    // Third arg useCapture must match addEventLIstenter()
-    window.removeEventListener('resize', this.onWindowResize, false);
-  }
+  dispose() {}
 
   onWindowResize() {
     this.camera.aspect = window.innerWidth / window.innerHeight;

@@ -10,7 +10,6 @@ import Plane  from '../coords/Plane.js'
 import XYGrid from '../coords/XYGrid.js'
 import XZGrid from '../coords/XZGrid.js'
 import YZGrid from '../coords/YZGrid.js'
-import MuseTh from '../muse/MuseTh.js'
 
 class Content
 
@@ -23,7 +22,6 @@ class Content
       @axes       = @drawAxes()             if @opts.axes?          and @opts.axes
       @axesHelper = @drawHelper()           if @opts['axeshelper']? and @opts['axeshelper']
       @cube       = @drawCube( @opts.cube ) if @opts.cube?
-      @museTh     = @drawMuse()             if @opts.muse?          and @opts.muse
       @drawRgbs()                           if @opts['rgbs']?       and @opts['rgbs']
     else
       @grids      = @drawGrids()
@@ -88,10 +86,6 @@ class Content
     @main.log( 'Content.drawRgbs()', { count:count, positions:positions.length, colors:colors.length } )
     return
 
-  drawMuse:() ->
-    museTh = new MuseTh( @main )
-    museTh
-
   drawPoints:( positions, colors, radius, group ) ->
     geometry = new BufferGeometry()
     geometry.setAttribute( 'position', new Float32BufferAttribute( positions, 3 ) )
@@ -113,7 +107,6 @@ class Content
     point    = new Points( geometry, material )
     @main.addToScene( point )
     point
-
 
   drawLine:( x1, y1, z1, x2, y2, z2, color, group ) ->
     points = [];
