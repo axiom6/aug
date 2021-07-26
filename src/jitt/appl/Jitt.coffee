@@ -6,11 +6,11 @@ import Touch      from '../../../lib/pub/navi/Touch.js'
 #mport Cache      from '../../../lib/pub/util/Cache.js'
 import Mix        from '../../../lib/pub/navi/Mix.js'
 import Nav        from '../../../lib/pub/navi/Nav.js'
+import Choice     from '../../../lib/pub/navi/Choice.js'
 
 import { createApp } from 'vue'    #
 import { createRouter, createWebHistory } from 'vue-router'
 
-import ChoiceJson from '../../../data/jitter/Choice.json'
 import JitterJson from '../../../data/jitter/Jitter.json'
 import FlavorJson from '../../../data/jitter/Flavor.json'
 
@@ -59,7 +59,6 @@ class Jitter
     return
 
   Jitter.Batch = {
-    Choice: { url:'jitter/Choice.json', data:ChoiceJson, type:'none', plane:'none', refine:true }
     Jitter: { url:'jitter/Jitter.json', data:JitterJson, type:'none', plane:'none', refine:true }
     Flavor: { url:'jitter/Flavor.json', data:FlavorJson, type:'none', plane:'none', refine:true } }
 
@@ -91,10 +90,11 @@ class Jitter
     subjects       = ["Dir","Nav"]
     streamLog      = { subscribe:false, publish:false, subjects:subjects }
     Jitter.stream  = new Stream( subjects, streamLog )
-    Jitter.mix     = new Mix(   Jitter, Jitter.routeNames )
-    Jitter.nav     = new Nav(   Jitter, Jitter.stream, Jitter.komps, {}, true )
-    Jitter.touch   = new Touch( Jitter.stream, Jitter.nav )
-    #itter.cache   = new Cache( Jitter.stream )
+    Jitter.mix     = new Mix(    Jitter, Jitter.routeNames )
+    Jitter.nav     = new Nav(    Jitter, Jitter.stream, Jitter.komps, {}, true )
+    Jitter.choice  = new Choice( Jitter.stream, Jitter.nav )
+    Jitter.touch   = new Touch(  Jitter.stream, Jitter.nav )
+    #itter.cache   = new Cache(  Jitter.stream )
     tester.setOptions( { testing:true, archive:true, verbose:false, debug:false } )
     Jitter.vue()
     return
@@ -105,6 +105,7 @@ class Jitter
     Jitter.app.provide('app',    Jitter.app )
     Jitter.app.provide('mix',    Jitter.mix )
     Jitter.app.provide('nav',    Jitter.nav )
+    Jitter.app.provide('choice', Jitter.choice )
     Jitter.app.provide('tester', tester     )
     router = Jitter.router( Jitter.routes )
     Jitter.app.use(        router )

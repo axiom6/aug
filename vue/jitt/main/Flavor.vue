@@ -7,7 +7,7 @@
     <div class="flavor-summ">
       <h-summ :name="name" ></h-summ>
     </div>
-    <div class="flavor-wheel" ref="elemf"></div>
+    <div class="flavor-wheel" ref="elem"></div>
   </div>
 </template>
 
@@ -27,18 +27,17 @@ import {inject, ref, onMounted, nextTick, onUnmounted} from 'vue';
 
     setup( ) {
 
-      const nav      = inject('nav');
-      const name     = 'Flavor';
-      const elemf    = ref(null);
-    //const  homeBtn = inject('homeBtn');
+      const nav     = inject('nav');
+      const name    = 'Flavor';
+      const elem    = ref(null);
+    //const homeBtn = inject('homeBtn');
       
       const onChoice = function ( choice, checked ) {
-        nav.choose( name, choice, checked );
         nav.pub( { source:'Flavor.vue', compKey:name, choice:choice, checked:checked } ); }
 
       const create = () => {
         nav.createElem( "Flavor.create()", elem['value'], nextTick, () => {
-          let svgMgr = new SvgMgr( name, elemf['value'], 'Flavor' );
+          let svgMgr = new SvgMgr( name, elem['value'], 'Flavor' );
           new Wheel( svgMgr, onChoice, nav, true ); } ) }
 
       onMounted( () =>  {
@@ -47,7 +46,7 @@ import {inject, ref, onMounted, nextTick, onUnmounted} from 'vue';
       onUnmounted( () => {
         nav.removeElem( "Flavor.vue", elem['value'], nextTick ); } )
 
-    return { name, elemf }; }
+    return { name, elem }; }
   }
   
   export default Flavor;

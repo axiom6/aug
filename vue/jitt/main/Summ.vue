@@ -26,34 +26,35 @@
 
     setup( props ) {
 
-      const nav   = inject('nav');
-      const c0    = ref('-');
-      const c1    = ref('-');
-      const c2    = ref('-');
-      const debug = false;
+      const nav    = inject('nav');
+      const choice = inject('choice')
+      const c0     = ref('-');
+      const c1     = ref('-');
+      const c2     = ref('-');
+      const debug  = true;
 
       const onChoices = function( obj ) {
-        if( obj.compKey === props.compKey ) {
-          let choices = nav.choices( props.name )
-          if( debug ) {
-            console.log( 'Summ.onChoices()', choices, obj ); }
-          for( let i = 0; i < 3; i++ ) {
-            let choice = i < choices.length ? choices[i] : '-';
-            setChoice( i, choice ) } } }
+        if( debug ) { console.log( 'Summ.onChoices() One', obj.compKey, key, props.compKey ); }
+        if( obj.compKey !== props.compKey ) { return } // || !nav.isStr(obj.choice) )
+        choice.choose( obj )
+        let choices = choice.choices( obj.compKey )
+        if( debug ) { console.log( 'Summ.onChoices() Two', obj, choices ); }
+        for( let i = 0; i < 3; i++ ) {
+          let select = i < choices.length ? choices[i].name : '-';
+          setChoice( i, select ) } }
 
-      const setChoice = function( idx, choice ) {
-        if(      idx===0 ) c0.value  = choice;
-        else if( idx===1 ) c1.value  = choice;
-        else if( idx===2 ) c2.value  = choice; }
+      const setChoice = function( idx, select ) {
+        if(      idx===0 ) c0.value  = select;
+        else if( idx===1 ) c1.value  = select;
+        else if( idx===2 ) c2.value  = select; }
 
       const isRouted = function() {
         return props.compKey !== 'none'; }
 
-      onMounted( function () {
-        nav.subscribe( 'Nav', 'Summ', (obj) => { onChoices(obj); } );
-          onChoices( { route:props.name, choice:'init', checked:false } ); } )
+      onMounted( function () {   // onChoices( { compKey:props.name, choice:'init', checked:false } );
+        nav.subscribe( 'Nav', 'Summ', (obj) => { onChoices(obj); } ); } )
 
-        return { c0, c1, c2, isRouted }; },
+      return { c0, c1, c2, isRouted }; },
   }
 
   export default Summ;
@@ -83,3 +84,7 @@
   }
 
 </style>
+
+<!--
+
+            -->

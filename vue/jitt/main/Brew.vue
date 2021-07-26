@@ -17,8 +17,8 @@
 
     setup() {
 
-      const nav  = inject( 'nav' );
-      const name = 'Brew';
+      const choice = inject( 'choice' );
+      const name   = 'Brew';
       const btns = {
       ColdBrew:    { title:'Cold Brew',    name:'ColdBrew',    pos:[2, 5,96,13], hsv:[34,44,69],
         type:'choice', check:true, checked:ref(false), img:ColdBrewImg },
@@ -33,7 +33,7 @@
       Expresso:    { title:'Expresso',     name:'Expresso',    pos:[2,80,96,13], hsv:[34,44,69],
         type:'choice', check:true, checked:ref(false), img:ExpressoImg }  };
 
-      nav.refreshBtns( name, btns );
+      choice.refreshBtns( name, btns );
 
       return { name, btns }; }
 

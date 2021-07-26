@@ -10,8 +10,8 @@
 
     setup() {
 
-      const nav  = inject( 'nav' );
-      const name = 'Drink';
+      const choice = inject( 'choice' );
+      const name   = 'Drink';
       const btns = {
         Black:  { title:'Black',  name:'Black',                   pos:[2, 5,96,13], hsv:[34,44,69],
           type:'choice', check:true, checked:ref(false), icon:"fas fa-mug-hot" },
@@ -26,7 +26,7 @@
         Alternative:  { title:'Alternative',  name:'Alternative', pos:[2,80,96,13], hsv:[34,44,69],
           type:'choice', check:true, checked:ref(false), icon:"fas fa-coffee" } };
 
-      nav.refreshBtns( name, btns );
+      choice.refreshBtns( name, btns );
 
       return { name, btns }; }
   }

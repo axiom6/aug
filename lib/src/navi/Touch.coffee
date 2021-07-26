@@ -23,7 +23,7 @@ class Touch
 
   start:(  event ) =>
     # event.preventDefault()
-    inTouch = @nav.mix.inArray( event.target.className, @touchClasses )
+    inTouch = @nav.inArray( event.target.className, @touchClasses )
     return if not inTouch
     if not ( event.touches? and event.touches.length > 1 )
       @elem.setPointerCapture( event.pointerId )

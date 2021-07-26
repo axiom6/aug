@@ -19,6 +19,7 @@
 <script type="module">
 
   import { inject, ref, onMounted } from 'vue';
+  import { vis } from "../../pub/draw/Vis.js"
 
   let Btns = {
 
@@ -37,14 +38,13 @@
         if( btn.type==='choice' ) {
           btn.checked.value = !btn.checked.value;
           checked = btn.checked.value;
-          nav.choose( props.name, btn.name, btn.checked.value );
           nav.pub( { source:'Btns.vue', compKey:props.name, choice:btn.name, checked:checked } ); }
         else if( btn.type==='pub' ) {
-             nav.pub( { pageKey:props.name } ); } // Need to determine what to publish on Nav here
+          nav.pub( { pageKey:props.name } ); } // Need to determine what to publish on Nav here
         else {
           console.log( 'Btn.pubBtn() unknown btn.type', btn.type ) } }
       const aspect = function() {  // Only call in mounted
-        let elem = btnElem.value;
+        let elem = btnElem['value'];
         let w    = elem['clientWidth' ];
         let h    = elem['clientHeight'];
         return h/w; }
@@ -56,7 +56,7 @@
         return { position:'absolute', left:sy*p[0]+'%', top:sy*p[1]+'%', width:sy*p2+'%', height:sy*p[3]+'%',
           fontSize:fs, 'z-index':2 } }
       const styleBtn = function (btn) {
-        let back = nav.toRgbaHsv( btn.hsv );
+        let back = vis.css( btn.hsv );
         return { color:'black', backgroundColor:back }; }
       const classCheck = function (btn) {
         // console.log( 'Btns.classCheck()', { checked:btn.checked.value, name:props.name, choice:btn.name } );
@@ -72,8 +72,8 @@
          for( let name of names ) {
            let btn = props.btns[name];
            if( btn.pos[2]===0 ) {
-             btn.elem   = btnElem.value;
-             let wt     = titElem.value['clientWidth'];
+             btn.elem   = btnElem['value'];
+             let wt     = titElem['value']['clientWidth'];
              let wb     = btn.elem['clientWidth'];
              btn.pos[2] = btn.pos[3]*2.4*wt/wb
              // console.log( 'Adj', { wt:wt, wb:wb, w:btn.pos[2], h:btn.pos[3] } ) }

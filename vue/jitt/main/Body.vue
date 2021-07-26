@@ -10,8 +10,8 @@
 
     setup() {
 
-    const mix  = inject( 'mix' );
-    const name = 'Body';
+    const choice = inject( 'choice' );
+    const name   = 'Body';
     const btns = {
       Thick:  { title:'Thick',  name:'Thick',  pos:[20, 5,60,14], hsv:[34,44,69],
         type:'choice', check:true, checked:ref(false), icon:"fas fa-mug-hot" },
@@ -24,7 +24,7 @@
       Silky:  { title:'Silky',  name:'Silky',  pos:[20,81,60,14], hsv:[34,44,69],
         type:'choice', check:true, checked:ref(false), icon:"fas fa-coffee" } };
 
-      mix.refreshBtns( name, btns );
+      choice.refreshBtns( name, btns );
 
     return { name, btns }; }
     

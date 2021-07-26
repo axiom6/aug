@@ -19,8 +19,8 @@
 
     setup() {
 
-      const nav  = inject( 'nav' );
-      const name = 'Roast';
+      const choice = inject('choice')
+      const name   = 'Roast';
       const btns = {
         Blonde:    { title:'Blonde', name:'Blonde',   pos:[7, 5,86,9], hsv:[34,44,69],
           type:'choice', check:true, checked:ref(false), img:BlondImg },
@@ -41,10 +41,9 @@
         Black:    { title:'Black',   name:'Black',    pos:[7,85,86,9], hsv:[34,44,69],
           type:'choice', check:true, checked:ref(false), img:BlackImg } };
 
-      nav.refreshBtns( name, btns );
+      choice.refreshBtns( name, btns );
 
       return { name, btns }; }
-
   }
 
   export default Roast;

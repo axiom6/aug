@@ -14,6 +14,8 @@ import Mix from '../../../lib/pub/navi/Mix.js';
 
 import Nav from '../../../lib/pub/navi/Nav.js';
 
+import Choice from '../../../lib/pub/navi/Choice.js';
+
 import {
   createApp
 } from 'vue';
@@ -22,8 +24,6 @@ import {
   createRouter,
   createWebHistory
 } from 'vue-router';
-
-import ChoiceJson from '../../../data/jitter/Choice.json';
 
 import JitterJson from '../../../data/jitter/Jitter.json';
 
@@ -88,8 +88,9 @@ Jitter = (function() {
       Jitter.stream = new Stream(subjects, streamLog);
       Jitter.mix = new Mix(Jitter, Jitter.routeNames);
       Jitter.nav = new Nav(Jitter, Jitter.stream, Jitter.komps, {}, true);
+      Jitter.choice = new Choice(Jitter.stream, Jitter.nav);
       Jitter.touch = new Touch(Jitter.stream, Jitter.nav);
-      //itter.cache   = new Cache( Jitter.stream )
+      //itter.cache   = new Cache(  Jitter.stream )
       tester.setOptions({
         testing: true,
         archive: true,
@@ -105,6 +106,7 @@ Jitter = (function() {
       Jitter.app.provide('app', Jitter.app);
       Jitter.app.provide('mix', Jitter.mix);
       Jitter.app.provide('nav', Jitter.nav);
+      Jitter.app.provide('choice', Jitter.choice);
       Jitter.app.provide('tester', tester);
       router = Jitter.router(Jitter.routes);
       Jitter.app.use(router);
@@ -148,13 +150,6 @@ Jitter = (function() {
   Jitter.appName = 'Jitter';
 
   Jitter.Batch = {
-    Choice: {
-      url: 'jitter/Choice.json',
-      data: ChoiceJson,
-      type: 'none',
-      plane: 'none',
-      refine: true
-    },
     Jitter: {
       url: 'jitter/Jitter.json',
       data: JitterJson,

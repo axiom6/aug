@@ -248,14 +248,14 @@ class Mix extends Type
   isPageKeyComp: (pageKey) ->
     pageKey is 'Info' or pageKey is 'Data' # @app() is 'Muse' and
 
-  removeElemNextTick:( msg, elem, nextTick, closure=null ) ->
+  removeElem:( msg, elem, nextTick, closure=null ) ->
     nextTick( () =>
       if @isDef(elem)
         closure() if closure?
         @removeElems(elem)
       else
         console.error( msg, "Mix.removeElem() elem undefined" ) )
-  return
+    return
 
   removeElems:( elem ) ->
     while @isDef(elem) and @isDef(elem.firstChild)
@@ -270,44 +270,6 @@ class Mix extends Type
         console.error( msg, "Mix.createElem() elem undefined" ) )
     return
 
-# Choice
-  choice: () ->
-    Mix.Main.Batch['Choice'].data
-  choices: (name) ->
-    obj = @choice()[name]
-    if obj?
-      obj.choices
-    else
-      console.error('Mix.choices() bad choice name', {name:name})
-      []
-  choose:( name, choice, checked ) ->
-    obj = @choice()[name]
-    if obj? and checked
-      obj.choices.push( choice )
-    else if obj? and not checked
-      obj.choices = obj.choices.filter( (elem) -> elem isnt choice );
-    else if not obj?
-      console.error('Mix.choose() bad choice', {name: name, choice: choice})
-    return
-  choosen: (name, choice) ->
-    has = @choice()[name]? and @inArray( choice, @choices(name) )
-    # console.log( 'Mix.choosen()', { name:name, choice:choice, has:has, choices:@choices(name) } )
-    has
-  choiceIndex: (name, choice) ->
-    obj = @choice()[name]
-    idx = 0
-    if obj?
-      idx = obj.choices.indexOf(choice)
-      idx = if idx is -1 then 0 else idx
-    else
-      console.error('Mix.choiceIndex() bad choice name', {name: name, idx: idx})
-    # console.log( 'Mix.choiceIndex()', { name:name, choice:choice, idx:idx, obj:obj } )
-    idx
-
-  refreshBtns:( name, btns ) ->
-    for own key,btn of btns
-      btn.checked.value = @choosen( name, btn.name )
-    return
 
   appendImgsHW:( src, elem ) ->
     hw  = {}
