@@ -24,7 +24,7 @@
       Silky:  { title:'Silky',  name:'Silky',  pos:[20,81,60,14], hsv:[34,44,69],
         type:'choice', check:true, checked:ref(false), icon:"fas fa-coffee" } };
 
-      choice.refreshBtns( name, btns );
+    choice.refreshBtns( name, btns );
 
     return { name, btns }; }
     

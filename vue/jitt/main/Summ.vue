@@ -22,7 +22,7 @@
 
     components: { 'h-navb':Navb },
 
-    props: { name:String, compKey:{ type:String, default:'none' } },
+    props: { name:{ type:String, default:'none' } },
 
     setup( props ) {
 
@@ -31,27 +31,30 @@
       const c0     = ref('-');
       const c1     = ref('-');
       const c2     = ref('-');
-      const debug  = true;
+      const debug  = false;
 
       const onChoices = function( obj ) {
-        if( debug ) { console.log( 'Summ.onChoices() One', obj.compKey, key, props.compKey ); }
-        if( obj.compKey !== props.compKey ) { return } // || !nav.isStr(obj.choice) )
+        if( obj.compKey !== props.name ) { return } // || !nav.isStr(obj.choice) )
         choice.choose( obj )
-        let choices = choice.choices( obj.compKey )
-        if( debug ) { console.log( 'Summ.onChoices() Two', obj, choices ); }
+        setChoices() }
+
+      const setChoices = () => {
+        let choices = choice.choices( props.name )
+        if( debug ) { console.log( 'Summ.onChoices()', obj, choices ); }
         for( let i = 0; i < 3; i++ ) {
-          let select = i < choices.length ? choices[i].name : '-';
+          let select = i < choices.length ? choices[i] : '-';
           setChoice( i, select ) } }
 
       const setChoice = function( idx, select ) {
         if(      idx===0 ) c0.value  = select;
         else if( idx===1 ) c1.value  = select;
         else if( idx===2 ) c2.value  = select; }
-
+      
       const isRouted = function() {
-        return props.compKey !== 'none'; }
+        return props.name !== 'none'; }
 
-      onMounted( function () {   // onChoices( { compKey:props.name, choice:'init', checked:false } );
+      onMounted( function () {
+        setChoices()
         nav.subscribe( 'Nav', 'Summ', (obj) => { onChoices(obj); } ); } )
 
       return { c0, c1, c2, isRouted }; },

@@ -28,21 +28,19 @@ import {inject, ref, onMounted, nextTick, onUnmounted} from 'vue';
     setup( ) {
 
       const nav     = inject('nav');
+      const choice  = inject('choice')
       const name    = 'Flavor';
       const elem    = ref(null);
-    //const homeBtn = inject('homeBtn');
-      
-      const onChoice = function ( choice, checked ) {
-        nav.pub( { source:'Flavor.vue', compKey:name, choice:choice, checked:checked } ); }
 
       const create = () => {
         nav.createElem( "Flavor.create()", elem['value'], nextTick, () => {
           let svgMgr = new SvgMgr( name, elem['value'], 'Flavor' );
-          new Wheel( svgMgr, onChoice, nav, true ); } ) }
+          new Wheel( svgMgr, choice, true ); } ) }
 
       onMounted( () =>  {
         create(); } )
 
+      // Not sure why we are getting elem undefined
       onUnmounted( () => {
         nav.removeElem( "Flavor.vue", elem['value'], nextTick ); } )
 

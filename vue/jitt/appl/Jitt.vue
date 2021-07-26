@@ -32,7 +32,6 @@
     setup() {
       const nav     = inject('nav');
       const route   = function (comp) {
-        console.log( "Jitt.vue", comp )
         nav.doRoute( { compKey:comp } ); }
       return { route }; }
   }

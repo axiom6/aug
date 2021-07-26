@@ -1,7 +1,7 @@
 var Wheel;
 
 Wheel = class Wheel {
-  constructor(svgMgr, onChoice, mix, oneLevel) {
+  constructor(svgMgr, choice, oneLevel) {
     this.setChoosen = this.setChoosen.bind(this);
     this.xc = this.xc.bind(this);
     this.yc = this.yc.bind(this);
@@ -22,8 +22,7 @@ Wheel = class Wheel {
     this.textTransform = this.textTransform.bind(this);
     this.displayAllLeaves = this.displayAllLeaves.bind(this);
     this.svgMgr = svgMgr;
-    this.onChoice = onChoice;
-    this.mix = mix;
+    this.choice = choice;
     this.oneLevel = oneLevel;
     this.svg = this.svgMgr.svg;
     this.g = this.svgMgr.g;
@@ -44,7 +43,7 @@ Wheel = class Wheel {
   setChoosen(d) {
     if (d.data == null) {
       console.log('Wheel.setChoosen() missing d.data'.d);
-    } else if (this.mix.choosen('Flavor', d.data.name)) {
+    } else if (this.choice.choosen('Flavor', d.data.name)) {
       // console.log( 'Wheel.setChoosen()', d.data.name, @mix.choosen('Flavor',d.data.name) )
       this.callPub = false;
       this.onEvent({}, d, 'click');
@@ -98,7 +97,7 @@ Wheel = class Wheel {
 
   ready() {
     var xc, yc;
-    this.json = this.mix.flavorJson();
+    this.json = this.choice.flavorJson();
     this.radius = Math.min(this.width, this.height) * this.scale / 2;
     this.xx = this.d3.scaleLinear().domain([0, 1]).range([0, 2 * Math.PI]);
     this.yy = this.d3.scalePow().exponent(1.4).domain([0, 1]).range([0, this.radius]);
@@ -433,7 +432,7 @@ Wheel = class Wheel {
       d.chosen = !d.chosen; // @mix.choosen( 'Flavor', d.data.name )
       this.resizeElem(d, d.chosen, x0, y0, x1, y1);
       if (this.callPub) {
-        this.onChoice(d.data.name, d.chosen);
+        this.choice.onChoice("Flavor", d.data.name, d.chosen);
       }
       resize = d.chosen;
     } else if (!d.chosen && (eventType === 'mouseover' || eventType === 'mouseout')) {

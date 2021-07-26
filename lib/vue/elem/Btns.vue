@@ -95,7 +95,7 @@
 
   @import '../../../css/themes/theme.less';
 
-  @btnsFS:2.0*@themeFS;
+  @btnsFS:3.0*@themeFS;
 
   .image-radius { border-radius:8px; border:solid @theme-back 1px; }
 

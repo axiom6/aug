@@ -31,8 +31,10 @@ export default Navb;
 
   @import '../../../css/themes/theme.less';
 
+  @navbFS:2.25*@themeFS;
+
   .navb-rect { justify-self:center; align-self:center; width:85%; height:85%;
     border-radius:16px; font-family:@theme-font-family; .theme-btns; display:grid; }
-  .navb-name { justify-self:center; align-self:center; font-size:195%; }
+  .navb-name { justify-self:center; align-self:center; font-size:@navbFS; }
 
 </style>

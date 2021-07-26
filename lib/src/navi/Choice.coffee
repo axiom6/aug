@@ -1,30 +1,40 @@
 
 import ChoiceObj from '../../../data/jitter/Choice.json'
+import FlavorObj from '../../../data/jitter/Flavor.json'
 
 class Choice
 
-  constructor:( @stream, @nav ) ->
+  constructor:( @nav ) ->
+    @debug = false
 
-  choices:(key) ->
-    ChoiceObj[key].choices
+  flavorJson: () ->
+    FlavorObj
+
+  # Helper method called by Wheel.coffee
+  onChoice: ( compKey, choice, checked ) =>
+    @nav.pub( { source:"Choice.coffee", compKey:compKey, choice:choice, checked:checked } )
+
+  choices:(name) ->
+    ChoiceObj[name].choices
 
   choose:( obj ) ->
     choices = @choices(obj.compKey)
-    console.log( "Choice.choose()", { compKey:obj.compKey, choices:choices, obj:obj })
     if obj.checked
       choices.push( obj.choice )
     else
-      choices = choices.filter( (elem) -> elem isnt choice )
+      choices = choices.filter( (elem) -> elem isnt obj.choice )
+      ChoiceObj[obj.compKey].choices = choices
+    console.log( "Choice.choose()", { choice:obj.choice, checked:obj.checked, choices:choices, compKey:obj.compKey }) if @debug
     return
 
   choosen:( name, choice ) ->
-    @nav.inArray( choice, @choices(key) )
+    @nav.inArray( choice, @choices(name) )
 
   choiceIndex:( name, choice ) ->
-    @choices(key).indexOf(choice)
+    @choices(name).indexOf(choice)
 
-  init:( name, btns ) ->
-    for own key, btn of btns
+  refreshBtns:( name, btns ) ->
+    for own key,btn of btns
       btn.checked.value = @choosen( name, btn.name )
     return
 

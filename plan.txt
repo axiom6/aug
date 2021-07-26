@@ -1,11 +1,22 @@
 
 Debug One
+  1.
 
-  1. Jitter choice and testing and mix.choice() in Mix.chosen and Flavor
-  2. Colors in Hues / Color / Polar / Vec / Sphere
-     Good   in Hues / Rgbs  / Regress
+Features One
+  1. Test
+     a. Functional Test
+     b. Push buttons in Replay to Test swithes to filter Test output
+     c. Ability to run a complete CI test suite
+     d. Archiving
+     e. All test types
+  2. Recreate Color / Polar / Vec / Sphere in Vizu. Retire mathbox
+     a. Colors in Hues / Color / Polar / Vec / Sphere
+     b. Good   in Hues / Rgbs  / Regress
+  3. Doc
+  4. Conside a Main template for Augm Muse Visu Jitt Data
 
 Debug Two
+  0. elem undefined from mix.removeElem(...) called in Flavor.vue
   1. Create Trip.vue with Trip.coffee
   2, Remove some of the junk added to Vis
   3. Look into cicular JSON bug in Tester.reviewsLocal()
@@ -41,7 +52,7 @@ Tester unique capabilies:
      d.   module.on(false) to turn off a test module
   9. Publish:  Test status and text to UI
 
-Features
+Features Two
   1. Get Touch working again
   2. Work on Directions
   3. Scroll Tocs   on Mobile

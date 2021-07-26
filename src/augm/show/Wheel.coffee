@@ -1,7 +1,7 @@
 
 class Wheel
 
-  constructor:( @svgMgr, @onChoice, @mix, @oneLevel ) ->
+  constructor:( @svgMgr, @choice, @oneLevel ) ->
     @svg                = @svgMgr.svg
     @g                  = @svgMgr.g
     @d3                 = @svgMgr.d3
@@ -20,7 +20,7 @@ class Wheel
   setChoosen:( d ) =>
     if not d.data?
       console.log( 'Wheel.setChoosen() missing d.data'. d )
-    else if @mix.choosen('Flavor',d.data.name)
+    else if @choice.choosen('Flavor',d.data.name)
       # console.log( 'Wheel.setChoosen()', d.data.name, @mix.choosen('Flavor',d.data.name) )
       @callPub = false
       @onEvent({}, d, 'click')
@@ -43,7 +43,7 @@ class Wheel
       .style("font-size", "3vmin" )
 
   ready:( ) ->
-    @json     = @mix.flavorJson()
+    @json     = @choice.flavorJson()
     @radius   = Math.min( @width, @height ) * @scale / 2
     @xx       = @d3.scaleLinear().domain([0,1]).range([0,2*Math.PI])
     @yy       = @d3.scalePow().exponent(1.4).domain([0,1]).range([0,@radius])
@@ -260,7 +260,7 @@ class Wheel
     if eventType is 'click'
       d.chosen = !d.chosen # @mix.choosen( 'Flavor', d.data.name )
       @resizeElem( d, d.chosen, x0, y0, x1, y1 )
-      @onChoice( d.data.name, d.chosen ) if @callPub
+      @choice.onChoice( "Flavor", d.data.name, d.chosen ) if @callPub
       resize = d.chosen
     else if not d.chosen and ( eventType is 'mouseover' or eventType is 'mouseout' )
       resize = eventType is 'mouseover'

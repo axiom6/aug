@@ -1,5 +1,7 @@
 var D3D;
 
+import Choice from '../../../lib/pub/nave/Choice.js';
+
 import SvgMgr from '../../../lib/pub/draw/SvgMgr.js';
 
 import Wheel from './Wheel.js';
@@ -17,19 +19,13 @@ import Tree from './Tree.js';
 import Hue from './Hue.js';
 
 D3D = class D3D {
-  static onChoice(choice, checked) {
-    console.log('D3D.onChoice()', {
-      choice: choice,
-      checked: checked
-    });
-  }
-
-  static create(name, elem, mix) {
-    var svgMgr;
+  static create(name, elem, nav) {
+    var choice, svgMgr;
+    choice = new Choice(nav);
     svgMgr = new SvgMgr(name, elem, 'Comp');
     switch (name) {
       case 'Flavor':
-        return new Wheel(svgMgr, D3D.onChoice, mix, false);
+        return new Wheel(svgMgr, choice, false);
       case 'Axes':
         return new Axes(svgMgr);
       case 'Chord':
@@ -37,9 +33,9 @@ D3D = class D3D {
       case 'Link':
         return new Link(svgMgr);
       case 'Radar':
-        return new Radar(svgMgr, 'Radar', mix);
+        return new Radar(svgMgr, 'Radar', nav);
       case 'Tree':
-        return new Tree(svgMgr, mix);
+        return new Tree(svgMgr, nav);
       case 'Hue':
         return new Hue(svgMgr, 'Hue');
       default:
