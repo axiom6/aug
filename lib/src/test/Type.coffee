@@ -291,6 +291,12 @@ class Type
         for value in values
           array.push( @toValue(value) )
         array
+      when "object"
+        array = []
+        for own key, obj of arg
+          obj['name'] = key
+          array.push(obj)
+        array
       else []
 
   toObject:( arg ) ->

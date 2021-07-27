@@ -737,6 +737,17 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/lib\/src\/data\/Mongo.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/data\/Mongo.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/lib\/src\/data\/Store.coffee" : {
       "ft" : 32,
       "ma" : 1,

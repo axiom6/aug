@@ -8,12 +8,13 @@ Features One
      b. Push buttons in Replay to Test swithes to filter Test output
      c. Ability to run a complete CI test suite
      d. Archiving
-     e. All test types
+        a. Test Mongo.coffee
+     e. Test types
   2. Recreate Color / Polar / Vec / Sphere in Vizu. Retire mathbox
      a. Colors in Hues / Color / Polar / Vec / Sphere
      b. Good   in Hues / Rgbs  / Regress
   3. Doc
-  4. Conside a Main template for Augm Muse Visu Jitt Data
+  4. Consider a Main template for Augm Muse Visu Jitt Data
 
 Debug Two
   0. elem undefined from mix.removeElem(...) called in Flavor.vue

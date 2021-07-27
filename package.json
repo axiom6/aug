@@ -28,6 +28,7 @@
     "firebase": "^8.4.2",
     "ganja.js": "^1.0.194",
     "jquery": "^3.6.0",
+    "mongodb": "^4.0.1",
     "pegjs": "^0.10.0",
     "pegjs-backtrace": "^0.2.0",
     "tabulator-tables": "^4.9.3",

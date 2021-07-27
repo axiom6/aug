@@ -31,8 +31,6 @@ class Couch extends Store
     @rest( 'find', table, id, selector, opts )
     return
 
-
-
   select:( table,  where, callback ) ->
     selector  = @findSelect( table )
     opts = { where:where, callback:callback, op2:"select" }
