@@ -4,8 +4,9 @@ import {
   BoxGeometry,
   Mesh,
   BufferGeometry,
+  SphereGeometry,
   Material,
-  AxesHelper, // MeshBasicMaterial,
+  AxesHelper,
   Vector3,
   Line,
   LineBasicMaterial,
@@ -13,9 +14,12 @@ import {
   Color,
   Float32BufferAttribute,
   PointsMaterial,
-  Group,
   MeshStandardMaterial,
-  DoubleSide
+  Group,
+  DoubleSide,
+  InstancedMesh,
+  MeshPhongMaterial,
+  Matrix4
 } from 'three';
 
 import XAxis from '../coords/XAxis.js';
@@ -60,7 +64,7 @@ Content = class Content {
       this.grids = this.drawGrids();
       this.axes = this.drawAxes();
     }
-    console.log(this.klass + '()', this);
+    this.main.log(this.klass + '()', this);
   }
 
   drawHelper() {
@@ -114,32 +118,36 @@ Content = class Content {
   }
 
   drawRgbs() {
-    var b, color, colors, count, g, group, i, inc, j, k, max, positions, r, radius, ref, ref1, ref2, ref3, ref4, ref5;
-    group = new Group();
-    positions = [];
-    colors = [];
-    color = new Color();
+    var b, color, count, g, geometry, group, i, inMesh, inc, j, k, l, material, matrix, max, r, radius, ref, ref1, ref2, ref3, ref4, ref5, s;
     radius = 8;
-    count = 0;
+    i = 0;
     max = 256;
-    inc = 16;
-    for (r = i = 0, ref = max, ref1 = inc; ref1 !== 0 && (ref1 > 0 ? i <= ref : i >= ref); r = i += ref1) {
-      for (g = j = 0, ref2 = max, ref3 = inc; ref3 !== 0 && (ref3 > 0 ? j <= ref2 : j >= ref2); g = j += ref3) {
-        for (b = k = 0, ref4 = max, ref5 = inc; ref5 !== 0 && (ref5 > 0 ? k <= ref4 : k >= ref4); b = k += ref5) {
-          //ositions.push( max-b, max-g, max-r )     # Axis switched
-          positions.push(b, g, r); // Axis switched
-          color.setRGB(r / 255, g / 255, b / 255);
-          colors.push(color.r, color.g, color.b);
-          this.drawPoints(positions, colors, radius, group);
-          count++;
+    inc = 32;
+    s = 1.0 / 255.0;
+    count = Math.pow(max / inc + 1, 3);
+    geometry = new SphereGeometry(radius, 16, 16);
+    material = new MeshPhongMaterial();
+    inMesh = new InstancedMesh(geometry, material, count);
+    matrix = new Matrix4();
+    color = new Color();
+    group = new Group();
+    for (r = j = 0, ref = max, ref1 = inc; ref1 !== 0 && (ref1 > 0 ? j <= ref : j >= ref); r = j += ref1) {
+      for (g = k = 0, ref2 = max, ref3 = inc; ref3 !== 0 && (ref3 > 0 ? k <= ref2 : k >= ref2); g = k += ref3) {
+        for (b = l = 0, ref4 = max, ref5 = inc; ref5 !== 0 && (ref5 > 0 ? l <= ref4 : l >= ref4); b = l += ref5) {
+          matrix.setPosition(r, g, b);
+          color.setRGB(r * s, g * s, b * s);
+          //olor.setStyle( vis.css({r:r,g:g,b:b}))
+          inMesh.setMatrixAt(i, matrix);
+          inMesh.setColorAt(i, color);
+          i++;
         }
       }
     }
+    group.add(inMesh);
     this.main.addToScene(group);
     this.main.log('Content.drawRgbs()', {
-      count: count,
-      positions: positions.length,
-      colors: colors.length
+      i: i,
+      count: count
     });
   }
 

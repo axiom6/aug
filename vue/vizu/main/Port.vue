@@ -16,7 +16,7 @@ let Port = {
     const nav   = inject('nav');
     const main  = inject('main');
     const elem  = ref(null);
-    const debug = true;
+    const debug = false;
     if( debug ) { console.log('Port.setup()', { main:main } ); }
 
     // Still too complicated even with nav.createElem(...)

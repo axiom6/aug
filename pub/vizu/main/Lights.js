@@ -17,7 +17,7 @@ Lights = class Lights {
     this.cc = this.main.cartesian;
     this.lightHelpers = []; // Light Helpers are pushed into this array for animate updates
     this.lights = this.selectLight(this.opts, this.cc); // An array
-    console.log(this.klass + '()', this);
+    this.main.log(this.klass + '()', this);
   }
 
   selectLight(opts, cc) {

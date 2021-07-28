@@ -117,7 +117,7 @@ class Mix extends Type
       console.error( 'Mix.data() unknown data name', name )
       {}
   opts:( key ) ->
-    console.log( "Mix.opts",  key, Mix.Main.Batch['Main'].data[key] )
+    # console.log( "Mix.opts",  key, Mix.Main.Batch['Main'].data[key] )
     Mix.Main.Batch['Main'].data[key]
   prin: ()  ->
     Mix.Main.Batch['Prin'].data.pracs

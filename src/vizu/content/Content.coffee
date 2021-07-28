@@ -1,8 +1,10 @@
 
-import { BoxGeometry, Mesh, BufferGeometry, Material, AxesHelper, # MeshBasicMaterial,
+import { BoxGeometry, Mesh, BufferGeometry, SphereGeometry, Material, AxesHelper,
          Vector3, Line, LineBasicMaterial, Points, Color, Float32BufferAttribute,
-         PointsMaterial, Group, MeshStandardMaterial, DoubleSide } from 'three'
+         PointsMaterial, MeshStandardMaterial, Group, DoubleSide, InstancedMesh,
+         MeshPhongMaterial, Matrix4 } from 'three'
 
+#mport {vis}  from '../../../lib/pub/draw/Vis.js'
 import XAxis  from '../coords/XAxis.js'
 import YAxis  from '../coords/YAxis.js'
 import ZAxis  from '../coords/ZAxis.js'
@@ -26,7 +28,7 @@ class Content
     else
       @grids      = @drawGrids()
       @axes       = @drawAxes()
-    console.log( @klass+'()', @ )
+    @main.log( @klass+'()', @ )
 
   drawHelper:() ->
     axesHelper = new AxesHelper( 20 );
@@ -65,25 +67,30 @@ class Content
     boxCube
 
   drawRgbs:() ->
-    group     = new Group()
-    positions = []
-    colors    = []
-    color     = new Color()
-    radius    =   8
-    count     =   0
-    max       = 256
-    inc       =  16
+    radius   = 8
+    i        = 0
+    max      = 256
+    inc      =  32
+    s        = 1.0 / 255.0
+    count    = Math.pow((max/inc+1),3)
+    geometry = new SphereGeometry( radius, 16, 16 )
+    material = new MeshPhongMaterial()
+    inMesh   = new InstancedMesh( geometry, material, count )
+    matrix   = new Matrix4()
+    color    = new Color()
+    group    = new Group()
     for     r in [0..max] by inc
       for   g in [0..max] by inc
         for b in [0..max] by inc
-          #ositions.push( max-b, max-g, max-r )     # Axis switched
-          positions.push( b,     g,     r )     # Axis switched
-          color.setRGB(   r/255, g/255, b/255 )
-          colors.push( color.r, color.g, color.b )
-          @drawPoints( positions, colors, radius, group )
-          count++
+          matrix.setPosition( r, g, b );
+          color.setRGB( r*s, g*s, b*s )
+          #olor.setStyle( vis.css({r:r,g:g,b:b}))
+          inMesh.setMatrixAt( i, matrix )
+          inMesh.setColorAt(  i, color  )
+          i++
+    group.add( inMesh )
     @main.addToScene( group )
-    @main.log( 'Content.drawRgbs()', { count:count, positions:positions.length, colors:colors.length } )
+    @main.log( 'Content.drawRgbs()', { i:i, count:count } )
     return
 
   drawPoints:( positions, colors, radius, group ) ->

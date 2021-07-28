@@ -67,7 +67,7 @@ Cameras = class Cameras {
   }
 
   orthographic(opts, cc) { // Uses world coordinates
-    var aspect, bottom, camera, dist, far, helper, left, near, position, r, right, scale, scenePos, top;
+    var aspect, bottom, camera, dist, far, helper, left, near, position, right, s, scale, scenePos, top;
     aspect = this.main.aspectRatio;
     dist = cc.dist;
     left = opts.left != null ? opts.left : -dist * aspect;
@@ -81,11 +81,11 @@ Cameras = class Cameras {
       "y": dist * 0.2,
       "z": dist * 0.2
     };
-    r = 0.90;
+    s = 1.25;
     scale = {
-      "x": r * aspect,
-      "y": r,
-      "z": r * aspect // { "x":0.5*aspect, "y":0.375, "z":0.5*aspect }
+      "x": s * aspect,
+      "y": s * aspect,
+      "z": s * aspect
     };
     scenePos = this.main.scene.position;
     camera = new OrthographicCamera(left, right, top, bottom, near, far);
@@ -195,26 +195,5 @@ Cameras = class Cameras {
 // @isometric.dispose()   if @isometric?
 // @perspective.dispose() if @@perspective?
 export default Cameras;
-
-/*
-  perspective:( opts, cc ) ->
-
-    @camera.position.set( 0, 6, 1500 )
-
-    h    = (cc.ymax-cc.ymin)
-    near =    1 # 0.01 * h
-    far  = 1000
-    pos  = h * 5
-    if h and pos and cc then false
-    camera = new PerspectiveCamera( 75, @main.aspectRatio, near, far ) # ( 45, @aspectRatio, 1, 10000 )
-    #amera.position.set( pos, pos, pos )
-    camera.lookAt( @main.scene.position ) # ( 0, 0, 0 )
- * @main.addToScene( camera )
-    if opts.helper? and opts.helper
-      helper = new CameraHelper( camera )
-      @main.addToScene( helper )
-    camera
-
- */
 
 //# sourceMappingURL=Cameras.js.map

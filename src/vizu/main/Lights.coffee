@@ -10,7 +10,7 @@ class Lights
     @cc           = @main.cartesian
     @lightHelpers = [] # Light Helpers are pushed into this array for animate updates
     @lights       = @selectLight( @opts, @cc ) # An array
-    console.log( @klass+'()', @ )
+    @main.log( @klass+'()', @ )
 
   selectLight:( opts, cc ) ->
     return @ambient( opts ) if not opts? and not opts.light?
