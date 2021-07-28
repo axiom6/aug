@@ -46,7 +46,7 @@ class Main
     return
 
   runApp:( elem, opts, app ) ->
-    if @nav.inArray( app, ['Grids','Rgbs','Cube'] )
+    if @nav.inArray( app, ['Grids','Rgb','Ysv','Hsv','Cube'] )
       @screen( elem )
       @setup()
       @animate.animate()

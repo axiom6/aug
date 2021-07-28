@@ -22,6 +22,10 @@ import {
   Matrix4
 } from 'three';
 
+import {
+  vis
+} from '../../../lib/pub/draw/Vis.js';
+
 import XAxis from '../coords/XAxis.js';
 
 import YAxis from '../coords/YAxis.js';
@@ -57,8 +61,14 @@ Content = class Content {
       if (this.opts.cube != null) {
         this.cube = this.drawCube(this.opts.cube);
       }
-      if ((this.opts['rgbs'] != null) && this.opts['rgbs']) {
-        this.drawRgbs();
+      if ((this.opts['rgb'] != null) && this.opts['rgb']) {
+        this.drawRgb();
+      }
+      if ((this.opts['ysv'] != null) && this.opts['ysv']) {
+        this.drawHsv(true);
+      }
+      if ((this.opts['hsv'] != null) && this.opts['hsv']) {
+        this.drawHsv(false);
       }
     } else {
       this.grids = this.drawGrids();
@@ -117,13 +127,13 @@ Content = class Content {
     return boxCube;
   }
 
-  drawRgbs() {
-    var b, color, count, g, geometry, group, i, inMesh, inc, j, k, l, material, matrix, max, r, radius, ref, ref1, ref2, ref3, ref4, ref5, s;
+  drawRgb() {
+    var b, color, count, g, geometry, group, i, inMesh, inc, j, k, l, material, matrix, max, r, radius, ref, ref1, ref2, ref3, ref4, ref5, sc;
     radius = 8;
     i = 0;
     max = 256;
     inc = 32;
-    s = 1.0 / 255.0;
+    sc = 1.0 / 255.0;
     count = Math.pow(max / inc + 1, 3);
     geometry = new SphereGeometry(radius, 16, 16);
     material = new MeshPhongMaterial();
@@ -135,10 +145,10 @@ Content = class Content {
       for (g = k = 0, ref2 = max, ref3 = inc; ref3 !== 0 && (ref3 > 0 ? k <= ref2 : k >= ref2); g = k += ref3) {
         for (b = l = 0, ref4 = max, ref5 = inc; ref5 !== 0 && (ref5 > 0 ? l <= ref4 : l >= ref4); b = l += ref5) {
           matrix.setPosition(r, g, b);
-          color.setRGB(r * s, g * s, b * s);
-          //olor.setStyle( vis.css({r:r,g:g,b:b}))
+          color.setRGB(r * sc, g * sc, b * sc);
           inMesh.setMatrixAt(i, matrix);
           inMesh.setColorAt(i, color);
+          // console.log( 'Content.drawYsv()', { r:r, g:g, b:b, rgb:color.getStyle() } )
           i++;
         }
       }
@@ -146,6 +156,44 @@ Content = class Content {
     group.add(inMesh);
     this.main.addToScene(group);
     this.main.log('Content.drawRgbs()', {
+      i: i,
+      count: count
+    });
+  }
+
+  drawHsv(ysv = true) {
+    var color, count, geometry, group, h, hsv, hueInc, i, inMesh, j, k, l, material, matrix, radius, ref, rgb, s, sc, v, x, y, z;
+    radius = 8;
+    i = 0;
+    sc = 1.0 / 255.0;
+    hueInc = ysv ? 45 : 60;
+    count = (360 / hueInc) * (100 / 10 + 1) * (100 / 10 + 1);
+    geometry = new SphereGeometry(radius, 16, 16);
+    material = new MeshPhongMaterial();
+    inMesh = new InstancedMesh(geometry, material, count);
+    matrix = new Matrix4();
+    color = new Color();
+    group = new Group();
+    for (h = j = 0, ref = hueInc; ref !== 0 && (ref > 0 ? j < 360 : j > 360); h = j += ref) {
+      for (s = k = 0; k <= 100; s = k += 10) {
+        for (v = l = 0; l <= 100; v = l += 10) {
+          x = vis.cos(h) * s;
+          y = vis.sin(h) * s;
+          z = v;
+          matrix.setPosition(x, y, z);
+          hsv = ysv ? [h, s, v] : [h, s, v, 1];
+          rgb = vis.rgb(hsv);
+          color.setRGB(rgb.r * sc, rgb.g * sc, rgb.b * sc);
+          inMesh.setMatrixAt(i, matrix);
+          inMesh.setColorAt(i, color);
+          // console.log( 'Content.drawYsv()', { h:h, s:s, v:v, rgb:rgb } )
+          i++;
+        }
+      }
+    }
+    group.add(inMesh);
+    this.main.addToScene(group);
+    this.main.log('Content.drawYsv()', {
       i: i,
       count: count
     });

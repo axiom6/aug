@@ -68,7 +68,7 @@ Main = class Main {
   }
 
   runApp(elem, opts, app) {
-    if (this.nav.inArray(app, ['Grids', 'Rgbs', 'Cube'])) {
+    if (this.nav.inArray(app, ['Grids', 'Rgb', 'Ysv', 'Hsv', 'Cube'])) {
       this.screen(elem);
       this.setup();
       this.animate.animate();

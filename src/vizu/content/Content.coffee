@@ -4,7 +4,7 @@ import { BoxGeometry, Mesh, BufferGeometry, SphereGeometry, Material, AxesHelper
          PointsMaterial, MeshStandardMaterial, Group, DoubleSide, InstancedMesh,
          MeshPhongMaterial, Matrix4 } from 'three'
 
-#mport {vis}  from '../../../lib/pub/draw/Vis.js'
+import {vis}  from '../../../lib/pub/draw/Vis.js'
 import XAxis  from '../coords/XAxis.js'
 import YAxis  from '../coords/YAxis.js'
 import ZAxis  from '../coords/ZAxis.js'
@@ -24,7 +24,9 @@ class Content
       @axes       = @drawAxes()             if @opts.axes?          and @opts.axes
       @axesHelper = @drawHelper()           if @opts['axeshelper']? and @opts['axeshelper']
       @cube       = @drawCube( @opts.cube ) if @opts.cube?
-      @drawRgbs()                           if @opts['rgbs']?       and @opts['rgbs']
+      @drawRgb()                            if @opts['rgb']?        and @opts['rgb']
+      @drawHsv( true  )                     if @opts['ysv']?        and @opts['ysv']
+      @drawHsv( false )                     if @opts['hsv']?        and @opts['hsv']
     else
       @grids      = @drawGrids()
       @axes       = @drawAxes()
@@ -66,12 +68,12 @@ class Content
     @main.addToScene( boxCube )
     boxCube
 
-  drawRgbs:() ->
+  drawRgb:() ->
     radius   = 8
     i        = 0
     max      = 256
     inc      =  32
-    s        = 1.0 / 255.0
+    sc       = 1.0 / 255.0
     count    = Math.pow((max/inc+1),3)
     geometry = new SphereGeometry( radius, 16, 16 )
     material = new MeshPhongMaterial()
@@ -83,14 +85,45 @@ class Content
       for   g in [0..max] by inc
         for b in [0..max] by inc
           matrix.setPosition( r, g, b );
-          color.setRGB( r*s, g*s, b*s )
-          #olor.setStyle( vis.css({r:r,g:g,b:b}))
+          color.setRGB( r*sc, g*sc, b*sc )
           inMesh.setMatrixAt( i, matrix )
           inMesh.setColorAt(  i, color  )
+          # console.log( 'Content.drawYsv()', { r:r, g:g, b:b, rgb:color.getStyle() } )
           i++
     group.add( inMesh )
     @main.addToScene( group )
     @main.log( 'Content.drawRgbs()', { i:i, count:count } )
+    return
+
+  drawHsv:( ysv=true ) ->
+    radius   = 8
+    i        = 0
+    sc       = 1.0 / 255.0
+    hueInc   = if ysv then 45 else 60
+    count    = (360/hueInc)*(100/10+1)*(100/10+1)
+    geometry = new SphereGeometry( radius, 16, 16 )
+    material = new MeshPhongMaterial()
+    inMesh   = new InstancedMesh( geometry, material, count )
+    matrix   = new Matrix4()
+    color    = new Color()
+    group    = new Group()
+    for     h in [0...360] by hueInc
+      for   s in [0..100]  by 10
+        for v in [0..100]  by 10
+          x = vis.cos(h) * s
+          y = vis.sin(h) * s
+          z = v
+          matrix.setPosition( x, y, z )
+          hsv = if ysv then [h,s,v] else [h,s,v,1]
+          rgb = vis.rgb( hsv )
+          color.setRGB( rgb.r*sc, rgb.g*sc, rgb.b*sc )
+          inMesh.setMatrixAt( i, matrix )
+          inMesh.setColorAt(  i, color  )
+          # console.log( 'Content.drawYsv()', { h:h, s:s, v:v, rgb:rgb } )
+          i++
+    group.add( inMesh )
+    @main.addToScene( group )
+    @main.log( 'Content.drawYsv()', { i:i, count:count } )
     return
 
   drawPoints:( positions, colors, radius, group ) ->

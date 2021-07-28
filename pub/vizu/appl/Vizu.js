@@ -210,9 +210,19 @@ Vizu = (function() {
         key: 'Grids',
         show: false
       },
-      Rgbs: {
-        title: 'Rgbs',
-        key: 'Rgbs',
+      Rgb: {
+        title: 'Rgb',
+        key: 'Rgb',
+        show: false
+      },
+      Ysv: {
+        title: 'Ysv',
+        key: 'Ysv',
+        show: false
+      },
+      Hsv: {
+        title: 'Hsv',
+        key: 'Hsv',
         show: false
       }
     }
