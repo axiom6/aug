@@ -172,6 +172,12 @@ Lights = class Lights {
   }
 
   directColor(opts, cc) {
+    var xy;
+    xy = this.directPlane(opts, cc, 'XY', false);
+    return [xy];
+  }
+
+  directColor2(opts, cc) {
     var xy, xz;
     xy = this.directPlane(opts, cc, 'XY', false);
     xz = this.directPlane(opts, cc, 'XZ', false);

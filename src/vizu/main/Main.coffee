@@ -15,7 +15,8 @@ class Main
   constructor:( @stream, @nav ) ->
     @elem       = null
     @opts       = {}
-    @app        = ""
+    @compKey    = ""
+    @pageKey    = ""
     @debug      = false
     @verifyFlag = false
 
@@ -34,24 +35,22 @@ class Main
 
     window.addEventListener( 'resize', @resizeScreen, false )
 
-  doApp:( elem, opts, app ) =>
-    @elem          = elem
-    @opts          = opts
-    @app           = app
-    @opts.main     = if @opts.main? then @opts.main else {}
-    @debug         = @opts.main.debug?  and @opts.main.debug
-    @verifyFlag   = @opts.main.verify? and @opts.main.verify
+  doApp:( elem, opts, compKey, pageKey ) =>
+    @elem       = elem
+    @opts       = opts
+    @compKey    = compKey
+    @pageKey    = pageKey
+    @opts.main  = if @opts.main? then @opts.main else {}
+    @debug      = @opts.main.debug?  and @opts.main.debug
+    @verifyFlag = @opts.main.verify? and @opts.main.verify
     @log( "Main.doApp()", { opts:opts, debug:@debug, verify:@verifyFlag } )
-    @runApp( elem, @opts.main, app )
+    @runApp( elem )
     return
 
-  runApp:( elem, opts, app ) ->
-    if @nav.inArray( app, ['Grids','Rgb','Ysv','Hsv','Cube'] )
-      @screen( elem )
-      @setup()
-      @animate.animate()
-    else
-      console.log( 'Main.runApp() only app not supported', app )
+  runApp:( elem ) ->
+    @screen( elem )
+    @setup()
+    @animate.animate()
     return
 
   screen:( elem ) ->

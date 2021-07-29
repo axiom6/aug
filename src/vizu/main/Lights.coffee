@@ -138,7 +138,12 @@ class Lights
 
   directColor:( opts, cc ) ->
     xy = @directPlane( opts, cc, 'XY', false )
+    [ xy ]
+
+  directColor2:( opts, cc ) ->
+    xy = @directPlane( opts, cc, 'XY', false )
     xz = @directPlane( opts, cc, 'XZ', false )
     [ xy, xz ]
+
 
 export default Lights

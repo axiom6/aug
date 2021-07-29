@@ -32,7 +32,8 @@ Main = class Main {
     this.nav = nav;
     this.elem = null;
     this.opts = {};
-    this.app = "";
+    this.compKey = "";
+    this.pageKey = "";
     this.debug = false;
     this.verifyFlag = false;
   }
@@ -52,10 +53,11 @@ Main = class Main {
     return window.addEventListener('resize', this.resizeScreen, false);
   }
 
-  doApp(elem, opts, app) {
+  doApp(elem, opts, compKey, pageKey) {
     this.elem = elem;
     this.opts = opts;
-    this.app = app;
+    this.compKey = compKey;
+    this.pageKey = pageKey;
     this.opts.main = this.opts.main != null ? this.opts.main : {};
     this.debug = (this.opts.main.debug != null) && this.opts.main.debug;
     this.verifyFlag = (this.opts.main.verify != null) && this.opts.main.verify;
@@ -64,17 +66,13 @@ Main = class Main {
       debug: this.debug,
       verify: this.verifyFlag
     });
-    this.runApp(elem, this.opts.main, app);
+    this.runApp(elem);
   }
 
-  runApp(elem, opts, app) {
-    if (this.nav.inArray(app, ['Grids', 'Rgb', 'Ysv', 'Hsv', 'Cube'])) {
-      this.screen(elem);
-      this.setup();
-      this.animate.animate();
-    } else {
-      console.log('Main.runApp() only app not supported', app);
-    }
+  runApp(elem) {
+    this.screen(elem);
+    this.setup();
+    this.animate.animate();
   }
 
   screen(elem) {

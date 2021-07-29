@@ -1,8 +1,8 @@
 
 import { BoxGeometry, Mesh, BufferGeometry, SphereGeometry, Material, AxesHelper,
          Vector3, Line, LineBasicMaterial, Points, Color, Float32BufferAttribute,
-         PointsMaterial, MeshStandardMaterial, Group, DoubleSide, InstancedMesh,
-         MeshLambertMaterial, Matrix4 } from 'three'  # MeshLambertMaterial,
+         PointsMaterial, MeshStandardMaterial, Group, DoubleSide, FrontSide, InstancedMesh,
+         MeshBasicMaterial,  Matrix4 } from 'three'  # MeshLambertMaterial,
 
 import {vis}  from '../../../lib/pub/draw/Vis.js'
 import XAxis  from '../coords/XAxis.js'
@@ -25,8 +25,10 @@ class Content
       @axesHelper = @drawHelper()           if @opts['axeshelper']? and @opts['axeshelper']
       @cube       = @drawCube( @opts.cube ) if @opts.cube?
       @drawRgb()                            if @opts['rgb']?        and @opts['rgb']
+      @drawRbgFaces()                       if @opts['face']?       and @opts['face']
       @drawHsv( true  )                     if @opts['ysv']?        and @opts['ysv']
       @drawHsv( false )                     if @opts['hsv']?        and @opts['hsv']
+      @drawHues( @main.pageKey, true  )     if @opts['hues']?       and @opts['hues']
     else
       @grids      = @drawGrids()
       @axes       = @drawAxes()
@@ -73,10 +75,9 @@ class Content
     i        = 0
     max      = 256
     inc      =  32
-    sc       = 1.0 / 255.0
     count    = Math.pow((max/inc+1),3)
     geometry = new SphereGeometry( radius, 16, 16 )
-    material = new MeshStandardMaterial()
+    material = new MeshBasicMaterial( { transparent:false, side:FrontSide } )
     inMesh   = new InstancedMesh( geometry, material, count )
     matrix   = new Matrix4()
     color    = new Color()
@@ -84,16 +85,62 @@ class Content
     for     r in [0..max] by inc
       for   g in [0..max] by inc
         for b in [0..max] by inc
-          matrix.setPosition( r, g, b );
-          color.setRGB( r*sc, g*sc, b*sc )
-          inMesh.setMatrixAt( i, matrix )
-          inMesh.setColorAt(  i, color  )
-          # console.log( 'Content.drawYsv()', { r:r, g:g, b:b, rgb:color.getStyle() } )
-          i++
+          i = @rgbSet( r, g, b, matrix, color, inMesh, i )
     group.add( inMesh )
     @main.addToScene( group )
-    @main.log( 'Content.drawRgbs()', { i:i, count:count } )
+    console.log( 'Content.drawRgbs()', { i:i, count:count } )
     return
+
+  rgbSet:( r,g,b, matrix, color, inMesh, i ) ->
+    sc = 1.0 / 255.0
+    matrix.setPosition( r, g, b );
+    color.setRGB( r*sc, g*sc, b*sc )
+    inMesh.setMatrixAt( i, matrix )
+    inMesh.setColorAt(  i, color  )
+    # console.log( 'Content.drawYsv()', { r:r, g:g, b:b, rgb:color.getStyle() } )
+    i++
+    i
+
+  drawRbgFaces:() ->
+    radius   = 8
+    i        = 0
+    max      = 256
+    inc      =  32
+    count    = Math.pow((max/inc+1),2)*6
+    geometry = new SphereGeometry( radius, 16, 16 )
+    material = new MeshBasicMaterial( { transparent:false, side:FrontSide } )
+    inMesh   = new InstancedMesh( geometry, material, count )
+    matrix   = new Matrix4()
+    color    = new Color()
+    group    = new Group()
+    i = @rgbRG( matrix, color, inMesh, i, max, inc )
+    i = @rgbRB( matrix, color, inMesh, i, max, inc )
+    i = @rgbGB( matrix, color, inMesh, i, max, inc )
+    group.add( inMesh )
+    @main.addToScene( group )
+    console.log( 'Content.drawRbgFaces()', { i:i, count:count } )
+    return
+
+  rgbRG:( matrix, color, inMesh, i, max, inc ) ->
+    for     r in [0..max] by inc
+      for   g in [0..max] by inc
+        for b in [0, max]
+          i = @rgbSet( r, g, b, matrix, color, inMesh, i )
+    i
+
+  rgbRB:( matrix, color, inMesh, i, max, inc ) ->
+    for     r in [0..max] by inc
+      for   g in [0, max]
+        for b in [0..max] by inc
+          i = @rgbSet( r, g, b, matrix, color, inMesh, i )
+    i
+
+  rgbGB:( matrix, color, inMesh, i, max, inc ) ->
+    for     r in [0, max]
+      for   g in [0..max] by inc
+        for b in [0..max] by inc
+          i = @rgbSet( r, g, b, matrix, color, inMesh, i )
+    i
 
   # alphaMap:0xFFFFFF } material.alphaMap = 0xFFFFFF Opaque
   drawHsv:( ysv=true ) ->
@@ -103,7 +150,7 @@ class Content
     hueInc   = if ysv then 45 else 60
     count    = (360/hueInc)*(100/10+1)*(100/10+1)
     geometry = new SphereGeometry( radius, 16, 16 )
-    material = new MeshLambertMaterial( { transparent:false } ) # {
+    material = new MeshBasicMaterial( { transparent:false, side:FrontSide } )
     inMesh   = new InstancedMesh( geometry, material, count )
     matrix   = new Matrix4()
     color    = new Color()
@@ -126,6 +173,52 @@ class Content
     @main.addToScene( group )
     @main.log( 'Content.drawYsv()', { i:i, count:count } )
     return
+
+  drawHues:( pageKey, ysv=true ) ->
+    hue      = @hue( pageKey )
+    radius   = 8
+    i        = 0
+    sc       = 1.0 / 255.0
+    count    = (100/10+1)*(100/10+1)
+    geometry = new SphereGeometry( radius, 16, 16 )
+    material = new MeshBasicMaterial( { transparent:false, side:FrontSide } )
+    inMesh   = new InstancedMesh( geometry, material, count )
+    matrix   = new Matrix4()
+    color    = new Color()
+    group    = new Group()
+    cos30    = vis.cos(30)
+    sin30    = vis.sin(30)
+    for   s in [0..100]  by 10
+      for v in [0..100]  by 10
+        x = s * 2.0 * cos30
+        y = v * 2.0 * sin30
+        z = 0
+        matrix.setPosition( x, y, z )
+        hsv = if ysv then [hue,s,v] else [hue,s,v,1]
+        rgb = vis.rgb( hsv )
+        color.setRGB( rgb.r*sc, rgb.g*sc, rgb.b*sc )
+        inMesh.setMatrixAt( i, matrix )
+        inMesh.setColorAt(  i, color  )
+        # console.log( 'Content.drawYsv()', { hue:hue, s:s, v:v, rgb:rgb } )
+        i++
+    group.add( inMesh )
+    @main.addToScene( group )
+    @main.log( 'Content.drawHues()', { i:i, count:count } )
+    return
+
+  hue:( pageKey ) ->
+    switch pageKey
+      when 'Red'     then   0
+      when 'Orange'  then  45
+      when 'Yellow'  then  90
+      when 'Lime'    then 135
+      when 'Green'   then 180
+      when 'Cyan'    then 225
+      when 'Blue'    then 270
+      when 'Magenta' then 315
+      else
+        console.log( 'Content.hue() unknown pageKey', pageKey )
+        0
 
   drawPoints:( positions, colors, radius, group ) ->
     geometry = new BufferGeometry()

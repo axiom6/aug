@@ -11,7 +11,7 @@ Render = class Render {
     this.onResize = this.onResize.bind(this);
     this.main = main;
     this.klass = this.constructor.name;
-    this.opts = this.main.opts;
+    this.opts = this.main.opts.render != null ? this.main.opts.render : {};
     this.clearColor = this.opts.clearColor != null ? this.opts.clearColor : 0x000000; // 0x333F47, 1
     this.renderer = new WebGLRenderer({
       antialias: true
@@ -20,10 +20,12 @@ Render = class Render {
     this.renderer.setSize(this.main.screenWidth, this.main.screenHeight);
     this.renderer.setClearColor(this.clearColor, 1);
     this.renderer.setPixelRatio(window.devicePixelRatio);
-    this.renderer.shadowMap.enabled = true;
-    this.renderer.shadowMap.type = PCFSoftShadowMap;
-    this.renderer.shadowMapSoft = true;
-    this.renderer.outputEncoding = sRGBEncoding;
+    if ((this.opts.shadowMap != null) && this.opts.shadowMap) {
+      this.renderer.shadowMap.enabled = true;
+      this.renderer.shadowMap.type = PCFSoftShadowMap;
+      this.renderer.shadowMapSoft = true;
+      this.renderer.outputEncoding = sRGBEncoding;
+    }
     this.main.stream.subscribe('Resize', this.klass, (obj) => {
       return this.onResize(obj);
     });
@@ -38,11 +40,5 @@ Render = class Render {
 };
 
 export default Render;
-
-/*
-  @renderer.shadowMap.enabled = true
-  @renderer.shadowMap.type    = THREE.PCFSoftShadowMap
-  @renderer.outputEncoding    = THREE.sRGBEncoding
-*/
 
 //# sourceMappingURL=Render.js.map

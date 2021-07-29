@@ -39,6 +39,7 @@ class Vizu
   Vizu.komps = Access.kompsDirs( {
     Home:{ title:'Home', key:'Home', pracs:{}, ikw:false, icon:"fas fa-home" }
     Main:{ title:'Main', key:'Main', pracs:{}, ikw:false, icon:"fas fa-bezier-curve" }
+    Hues:{ title:'Hues', key:'Hues', pracs:{}, ikw:false, icon:"fas fa-palette" }
     Cube:{ title:'Cube', key:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes" }
     #pot:{ title:'Spot', key:'Spot', pracs:{}, ikw:false, icon:"fas fa-lightbulb" }
     Test:{ title:'Test', key:'Test', pracs:{}, ikw:false, icon:"fas fa-stethoscope" } } )
@@ -112,10 +113,21 @@ class Vizu
 
   # This does not make sense
   Vizu.pages = {
-    Main:   {
+    Main: {
       Grids: { title:'Grids',  key:'Grids',  show:false },
       Rgb:   { title:'Rgb',    key:'Rgb',    show:false },
+      Face:  { title:'Face',   key:'Face',   show:false },
       Ysv:   { title:'Ysv',    key:'Ysv',    show:false },
-      Hsv:   { title:'Hsv',    key:'Hsv',    show:false } } }
+      Hsv:   { title:'Hsv',    key:'Hsv',    show:false } },
+    Hues: {
+      Red:     { title:'Red',     key:'Red',     show:false },
+      Orange:  { title:'Orange',  key:'Orange',  show:false },
+      Yellow:  { title:'Yellow',  key:'Yellow',  show:false },
+      Lime:    { title:'Lime',    key:'Lime',    show:false },
+      Green:   { title:'Green',   key:'Green',   show:false },
+      Cyan:    { title:'Cyan',    key:'Cyan',    show:false },
+      Blue:    { title:'Blue',    key:'Blue',    show:false },
+      Magenta: { title:'Magenta', key:'Magenta', show:false } } }
+
 
 export default Vizu

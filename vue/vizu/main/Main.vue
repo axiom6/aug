@@ -5,7 +5,7 @@
     <d-tabs :compKey="compKey" :pages="toPages()"></d-tabs>
     <h1 v-if="compKey==='Draw'">Mathbox Colors</h1>
     <template v-for="page in toPages()" :key="pageKeyIdx(page.key)">
-      <d-port v-if="show(page.key)" :page="page" class="port-pane"></d-port>
+      <d-port v-if="show(page.key)" :compKey="compKey" :page="page" class="port-pane"></d-port>
     </template>
     </div>
 </template>
@@ -46,7 +46,7 @@
 
       onMounted( () => { // Follow up with the last Nav.pub(obj) that mounted this vue component
         onNav( { compKey:compKey, pageKey:nav.getPageKey(compKey) } );
-        nav.subscribe(  'Nav', 'Hues', (obj) => {
+        nav.subscribe(  'Nav', 'Main.vue', (obj) => {
           onNav(obj); } ); } )
 
     return { compKey, toPages, page, pageKeyIdx, show }; }

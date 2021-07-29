@@ -3,6 +3,7 @@
   <div class="view-pane">
     <v-home     v-if="show('Home')"   :key="nav.keyIdx(  'Home',viewIdx)"></v-home>
     <v-main     v-if="show('Main')"   :key="nav.keyIdx(  'Main',viewIdx)"></v-main>
+    <v-hues     v-if="show('Hues')"   :key="nav.keyIdx(  'Hues',viewIdx)"></v-hues>
     <v-cube     v-if="show('Cube')"   :key="nav.keyIdx(  'Cube',viewIdx)"></v-cube>
     <v-spot     v-if="show('Spot')"   :key="nav.keyIdx(  'Spot',viewIdx)"></v-spot>
     <v-test     v-if="show('Test')"   :key="nav.keyIdx(  'Test',viewIdx)"></v-test>
@@ -16,6 +17,7 @@
   import { inject, ref, onMounted } from 'vue';
   import Home     from './Home.vue'
   import Main     from '../main/Main.vue';
+  import Hues     from '../main/Hues.vue';
   import Spot     from '../main/Spot.vue';
   import Cube     from '../../../lib/vue/cube/Cube.vue';
   import Test     from '../../../lib/vue/test/Test.vue';
@@ -24,8 +26,8 @@
   
   let View = {
 
-    components:{ 'v-home':Home, 'v-cube':Cube, 'v-spot':Spot, 'v-main':Main, 'v-test':Test, 'v-replay':Replay,
-      'v-result':Result },
+    components:{ 'v-home':Home, 'v-cube':Cube, 'v-spot':Spot, 'v-main':Main, 'v-hues':Hues,
+      'v-test':Test, 'v-replay':Replay, 'v-result':Result },
 
     setup() {
       const nav     = inject('nav');

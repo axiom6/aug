@@ -5,11 +5,11 @@
 
 <script type="module">
 
-import { ref, inject, nextTick, onMounted, onUnmounted} from "vue";
+import { ref, inject, nextTick, onMounted } from "vue";
 
 let Port = {
 
-  props: { page:Object },
+  props: { compKey:String, page:Object },
 
   setup( props ) {
 
@@ -24,18 +24,15 @@ let Port = {
       nav.createElem( "main/Port.create()", elem['value'], nextTick, () => {
         let pageKey = props.page.key;
         if( debug ) { console.log('Port.onMounted()', { pageKey:pageKey, opts:nav.opts(pageKey) } ); }
-        if( nav.isDef(nav.opts(pageKey)) ) {
-          main.doApp( elem['value'], nav.opts(pageKey), pageKey ); }
+        if( props.compKey === "Hues" ) {
+          main.doApp( elem['value'], nav.opts(props.compKey), props.compKey, pageKey ); }
+        else if( nav.isDef(nav.opts(pageKey)) ) {
+          main.doApp( elem['value'], nav.opts(pageKey),       props.compKey, pageKey ); }
         else {
-          console.log( 'Port.create() Main app not implemented', pageKey ); } } ) }
+          console.log( 'Port.create() not implemented',       props.compKey, pageKey ); } } ) }
 
     onMounted(  () => {
       create(); } )
-
-    onUnmounted( () => {
-      nav.removeElem( "main/Port.vue", elem['value'], nextTick, () => {
-        /* main.dispose(); */ } ) } )
-
 
     return { elem } }
 }
@@ -43,3 +40,9 @@ let Port = {
 export default Port;
 
 </script>
+
+<!--
+    onUnmounted( () => {
+      nav.removeElem( "main/Port.vue", elem['value'], nextTick, () => {
+         main.dispose();  } ) } )
+-->

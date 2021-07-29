@@ -17,8 +17,9 @@ import {
   MeshStandardMaterial,
   Group,
   DoubleSide,
+  FrontSide,
   InstancedMesh,
-  MeshLambertMaterial,
+  MeshBasicMaterial,
   Matrix4
 } from 'three';
 
@@ -64,11 +65,17 @@ Content = class Content {
       if ((this.opts['rgb'] != null) && this.opts['rgb']) {
         this.drawRgb();
       }
+      if ((this.opts['face'] != null) && this.opts['face']) {
+        this.drawRbgFaces();
+      }
       if ((this.opts['ysv'] != null) && this.opts['ysv']) {
         this.drawHsv(true);
       }
       if ((this.opts['hsv'] != null) && this.opts['hsv']) {
         this.drawHsv(false);
+      }
+      if ((this.opts['hues'] != null) && this.opts['hues']) {
+        this.drawHues(this.main.pageKey, true);
       }
     } else {
       this.grids = this.drawGrids();
@@ -128,15 +135,17 @@ Content = class Content {
   }
 
   drawRgb() {
-    var b, color, count, g, geometry, group, i, inMesh, inc, j, k, l, material, matrix, max, r, radius, ref, ref1, ref2, ref3, ref4, ref5, sc;
+    var b, color, count, g, geometry, group, i, inMesh, inc, j, k, l, material, matrix, max, r, radius, ref, ref1, ref2, ref3, ref4, ref5;
     radius = 8;
     i = 0;
     max = 256;
     inc = 32;
-    sc = 1.0 / 255.0;
     count = Math.pow(max / inc + 1, 3);
     geometry = new SphereGeometry(radius, 16, 16);
-    material = new MeshStandardMaterial();
+    material = new MeshBasicMaterial({
+      transparent: false,
+      side: FrontSide
+    });
     inMesh = new InstancedMesh(geometry, material, count);
     matrix = new Matrix4();
     color = new Color();
@@ -144,21 +153,97 @@ Content = class Content {
     for (r = j = 0, ref = max, ref1 = inc; ref1 !== 0 && (ref1 > 0 ? j <= ref : j >= ref); r = j += ref1) {
       for (g = k = 0, ref2 = max, ref3 = inc; ref3 !== 0 && (ref3 > 0 ? k <= ref2 : k >= ref2); g = k += ref3) {
         for (b = l = 0, ref4 = max, ref5 = inc; ref5 !== 0 && (ref5 > 0 ? l <= ref4 : l >= ref4); b = l += ref5) {
-          matrix.setPosition(r, g, b);
-          color.setRGB(r * sc, g * sc, b * sc);
-          inMesh.setMatrixAt(i, matrix);
-          inMesh.setColorAt(i, color);
-          // console.log( 'Content.drawYsv()', { r:r, g:g, b:b, rgb:color.getStyle() } )
-          i++;
+          i = this.rgbSet(r, g, b, matrix, color, inMesh, i);
         }
       }
     }
     group.add(inMesh);
     this.main.addToScene(group);
-    this.main.log('Content.drawRgbs()', {
+    console.log('Content.drawRgbs()', {
       i: i,
       count: count
     });
+  }
+
+  rgbSet(r, g, b, matrix, color, inMesh, i) {
+    var sc;
+    sc = 1.0 / 255.0;
+    matrix.setPosition(r, g, b);
+    color.setRGB(r * sc, g * sc, b * sc);
+    inMesh.setMatrixAt(i, matrix);
+    inMesh.setColorAt(i, color);
+    // console.log( 'Content.drawYsv()', { r:r, g:g, b:b, rgb:color.getStyle() } )
+    i++;
+    return i;
+  }
+
+  drawRbgFaces() {
+    var color, count, geometry, group, i, inMesh, inc, material, matrix, max, radius;
+    radius = 8;
+    i = 0;
+    max = 256;
+    inc = 32;
+    count = Math.pow(max / inc + 1, 2) * 6;
+    geometry = new SphereGeometry(radius, 16, 16);
+    material = new MeshBasicMaterial({
+      transparent: false,
+      side: FrontSide
+    });
+    inMesh = new InstancedMesh(geometry, material, count);
+    matrix = new Matrix4();
+    color = new Color();
+    group = new Group();
+    i = this.rgbRG(matrix, color, inMesh, i, max, inc);
+    i = this.rgbRB(matrix, color, inMesh, i, max, inc);
+    i = this.rgbGB(matrix, color, inMesh, i, max, inc);
+    group.add(inMesh);
+    this.main.addToScene(group);
+    console.log('Content.drawRbgFaces()', {
+      i: i,
+      count: count
+    });
+  }
+
+  rgbRG(matrix, color, inMesh, i, max, inc) {
+    var b, g, j, k, l, len, r, ref, ref1, ref2, ref3, ref4;
+    for (r = j = 0, ref = max, ref1 = inc; ref1 !== 0 && (ref1 > 0 ? j <= ref : j >= ref); r = j += ref1) {
+      for (g = k = 0, ref2 = max, ref3 = inc; ref3 !== 0 && (ref3 > 0 ? k <= ref2 : k >= ref2); g = k += ref3) {
+        ref4 = [0, max];
+        for (l = 0, len = ref4.length; l < len; l++) {
+          b = ref4[l];
+          i = this.rgbSet(r, g, b, matrix, color, inMesh, i);
+        }
+      }
+    }
+    return i;
+  }
+
+  rgbRB(matrix, color, inMesh, i, max, inc) {
+    var b, g, j, k, l, len, r, ref, ref1, ref2, ref3, ref4;
+    for (r = j = 0, ref = max, ref1 = inc; ref1 !== 0 && (ref1 > 0 ? j <= ref : j >= ref); r = j += ref1) {
+      ref2 = [0, max];
+      for (k = 0, len = ref2.length; k < len; k++) {
+        g = ref2[k];
+        for (b = l = 0, ref3 = max, ref4 = inc; ref4 !== 0 && (ref4 > 0 ? l <= ref3 : l >= ref3); b = l += ref4) {
+          i = this.rgbSet(r, g, b, matrix, color, inMesh, i);
+        }
+      }
+    }
+    return i;
+  }
+
+  rgbGB(matrix, color, inMesh, i, max, inc) {
+    var b, g, j, k, l, len, r, ref, ref1, ref2, ref3, ref4;
+    ref = [0, max];
+    for (j = 0, len = ref.length; j < len; j++) {
+      r = ref[j];
+      for (g = k = 0, ref1 = max, ref2 = inc; ref2 !== 0 && (ref2 > 0 ? k <= ref1 : k >= ref1); g = k += ref2) {
+        for (b = l = 0, ref3 = max, ref4 = inc; ref4 !== 0 && (ref4 > 0 ? l <= ref3 : l >= ref3); b = l += ref4) {
+          i = this.rgbSet(r, g, b, matrix, color, inMesh, i);
+        }
+      }
+    }
+    return i;
   }
 
   // alphaMap:0xFFFFFF } material.alphaMap = 0xFFFFFF Opaque
@@ -170,8 +255,9 @@ Content = class Content {
     hueInc = ysv ? 45 : 60;
     count = (360 / hueInc) * (100 / 10 + 1) * (100 / 10 + 1);
     geometry = new SphereGeometry(radius, 16, 16);
-    material = new MeshLambertMaterial({
-      transparent: false // {
+    material = new MeshBasicMaterial({
+      transparent: false,
+      side: FrontSide
     });
     inMesh = new InstancedMesh(geometry, material, count);
     matrix = new Matrix4();
@@ -200,6 +286,71 @@ Content = class Content {
       i: i,
       count: count
     });
+  }
+
+  drawHues(pageKey, ysv = true) {
+    var color, cos30, count, geometry, group, hsv, hue, i, inMesh, j, k, material, matrix, radius, rgb, s, sc, sin30, v, x, y, z;
+    hue = this.hue(pageKey);
+    radius = 8;
+    i = 0;
+    sc = 1.0 / 255.0;
+    count = (100 / 10 + 1) * (100 / 10 + 1);
+    geometry = new SphereGeometry(radius, 16, 16);
+    material = new MeshBasicMaterial({
+      transparent: false,
+      side: FrontSide
+    });
+    inMesh = new InstancedMesh(geometry, material, count);
+    matrix = new Matrix4();
+    color = new Color();
+    group = new Group();
+    cos30 = vis.cos(30);
+    sin30 = vis.sin(30);
+    for (s = j = 0; j <= 100; s = j += 10) {
+      for (v = k = 0; k <= 100; v = k += 10) {
+        x = s * 2.0 * cos30;
+        y = v * 2.0 * sin30;
+        z = 0;
+        matrix.setPosition(x, y, z);
+        hsv = ysv ? [hue, s, v] : [hue, s, v, 1];
+        rgb = vis.rgb(hsv);
+        color.setRGB(rgb.r * sc, rgb.g * sc, rgb.b * sc);
+        inMesh.setMatrixAt(i, matrix);
+        inMesh.setColorAt(i, color);
+        // console.log( 'Content.drawYsv()', { hue:hue, s:s, v:v, rgb:rgb } )
+        i++;
+      }
+    }
+    group.add(inMesh);
+    this.main.addToScene(group);
+    this.main.log('Content.drawHues()', {
+      i: i,
+      count: count
+    });
+  }
+
+  hue(pageKey) {
+    switch (pageKey) {
+      case 'Red':
+        return 0;
+      case 'Orange':
+        return 45;
+      case 'Yellow':
+        return 90;
+      case 'Lime':
+        return 135;
+      case 'Green':
+        return 180;
+      case 'Cyan':
+        return 225;
+      case 'Blue':
+        return 270;
+      case 'Magenta':
+        return 315;
+      default:
+        console.log('Content.hue() unknown pageKey', pageKey);
+        return 0;
+    }
   }
 
   drawPoints(positions, colors, radius, group) {
