@@ -172,90 +172,14 @@ Lights = class Lights {
   }
 
   directColor(opts, cc) {
-    var xy;
+    var xy, xz;
     xy = this.directPlane(opts, cc, 'XY', false);
-    return [xy];
+    xz = this.directPlane(opts, cc, 'XZ', false);
+    return [xy, xz];
   }
 
 };
 
 export default Lights;
-
-/*
-      left     = if opts.left?      then opts.left      else -dist * aspect
-    right    = if opts.right?     then opts.right     else  dist * aspect
-    top      = if opts.top?       then opts.top       else  dist
-    bottom   = if opts.bottom?    then opts.bottom    else -dist
-    near     = if opts.near?      then opts.near      else -dist * 5.0
-    far      = if opts.far?       then opts.far       else  dist * 5.0
-
-    #irectionalXY.shadow.mapSize.width  = 256
-    #irectionalXY.shadow.mapSize.height = 256
-    #irectionalXY.shadow.camera.near    = cc.zmax
-    #irectionalXY.shadow.camera.far     = cc.zmin
-
-    targetXY     = content.createPoint( { x:cc.xc, y:cc.yc, z:cc.zmin }, 0xFF0000, cc.xr*0.1 )
-    targetXZ     = content.createPoint( { x:cc.xc, y:cc.yc, z:cc.zmin }, 0x00FF00, cc.yr*0.1 )
-    targetYZ     = content.createPoint( { x:cc.xc, y:cc.yc, z:cc.zmin }, 0x0000FF, cc.zr*0.1 )
-
-  createSpotlight:( color ) ->
-    newObj = new THREE.SpotLight( color, 2 )
-    newObj.castShadow = true
-    newObj.angle = 0.3
-    newObj.penumbra = 0.2
-    newObj.decay = 2
-    newObj.distance = 50
-    newObj
-
-  const spotLight = new THREE.SpotLight( 0xffffff );
-  spotLight.position.set( 100, 1000, 100 );
-
-  spotLight.castShadow = true;
-
-  spotLight.shadow.mapSize.width = 1024;
-  spotLight.shadow.mapSize.height = 1024;
-
-  spotLight.shadow.camera.near = 500;
-  spotLight.shadow.camera.far = 4000;
-  spotLight.shadow.camera.fov = 30;
-
-  distance - Maximum range of the light. Default is 0 (no limit).
-  angle - Maximum angle of light dispersion from its direction whose upper bound is Math.PI/2.
-  penumbra - Percent of the spotlight cone that is attenuated due to penumbra. Takes values between zero and 1. Default is zero.
-  decay - The amount the light dims along the distance of the light.   
-
-  orthographic3:( opts, cc ) ->
-    content = @main.content # Content is instanciated before Lights
-    spotLightXY = new SpotLight( 0xFF7F00, 2 )
-    spotLightXZ = new SpotLight( 0x00FF7F, 2 )
-    spotLightYZ = new SpotLight( 0x7F00FF, 2 )
-    spotLightXY.position.set( cc.xc, cc.yc, cc.zd )
-    spotLightXZ.position.set( cc.xc, cc.yd, cc.zc )
-    spotLightYZ.position.set( cc.xd, cc.yc, cc.zc )
-    spotLightXY.castShadow = true
-    spotLightXZ.castShadow = true
-    spotLightYZ.castShadow = true
-
-  targetXY     = content.createPoint( [ cc.xc,   cc.yc,   cc.zmin ], 0xFF0000, cc.xd*0.1 )
-  targetXZ     = content.createPoint( [ cc.xc,   cc.ymin, cc.zc   ], 0x00FF00, cc.yd*0.1 )
-  targetYZ     = content.createPoint( [ cc.xmin, cc.yc,   cc.zc   ], 0x0000FF, cc.zd*0.1 )
-
-  grids = content.grids
-  spotLightXY.target = grids.xyGrid.group
-  spotLightXZ.target = grids.xzGrid.group
-  spotLightYZ.target = grids.yzGrid.group
-
-  spotHelperXY = new SpotLightHelper( spotLightXY )
-  spotHelperXZ = new SpotLightHelper( spotLightXZ )
-  spotHelperYZ = new SpotLightHelper( spotLightYZ )
-  @lightHelpers.push( spotHelperXY )  # We do this for updates in @animate
-  @lightHelpers.push( spotHelperXZ )
-  @lightHelpers.push( spotHelperYZ )
-  @main.addToScene(  spotLightXY,         spotLightXZ,        spotLightYZ )
-  @main.addToScene(  spotLightXY.target,  spotLightXZ.target, spotLightYZ.target )
-  @main.addToScene( spotHelperXY,        spotHelperXZ,       spotHelperYZ )
-  @main.addToScene(  spotHelperXY )
-  [ spotLightXY, spotLightXZ, spotLightYZ ]  
- */
 
 //# sourceMappingURL=Lights.js.map

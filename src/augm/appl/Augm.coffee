@@ -61,7 +61,6 @@ class Augm
     Home:{ title:'Home', key:'Home', pracs:{}, ikw:false, icon:"fas fa-home" }
     Math:{ title:'Math', key:'Math', pracs:{}, ikw:true,  icon:"fas fa-bezier-curve" }
     Draw:{ title:'Draw', key:'Draw', pracs:{}, ikw:false, icon:"fas fa-draw-polygon" }
-    Hues:{ title:'Hues', key:'Hues', pracs:{}, ikw:false, icon:"fas fa-palette" }
     Tool:{ title:'Tool', key:'Tool', pracs:{}, ikw:false, icon:"fas fa-wrench" }
     Cube:{ title:'Cube', key:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes" }
     Wood:{ title:'Wood', key:'Wood', pracs:{}, ikw:false, icon:"fas fa-tree" }
@@ -152,13 +151,6 @@ class Augm
       Radar:  { title:'Radar',  key:'Radar',  obj:null, show:false },
       Hue:    { title:'Hue',    key:'Hue',    obj:null, show:false },
       Tree:   { title:'Tree',   key:'Tree',   obj:null, show:false } }
-    Hues:   {
-      Color:   { title:'Color',   key:'Color',   show:false }, # No default because Hues needs
-      Rgbs:    { title:'Rgbs',    key:'Rgbs',    show:false }, #   time to load MathBox script
-      Polar:   { title:'Polar',   key:'Polar',   show:false },
-      Vecs:    { title:'Vecs',    key:'Vecs',    show:false },
-      Sphere:  { title:'Sphere',  key:'Sphere',  show:false },
-      Regress: { title:'Regress', key:'Regress', show:false } }
     Gauges: {
       Gauge:   { title:'Gauge', key:'Gauge', show:true } }
     Widget: {
@@ -184,30 +176,3 @@ class Augm
 
 export default Augm
 
-###
-    # console.log( 'Augm.start() env', process.env.NODE_ENV )
-    if process.env.NODE_ENV is 'development'
-      Augm.routes.push( Augm.geomRoute )
-      Augm.komps.Geom = Augm.geomKomp
-    Augm.routeNames = Augm.createRouteNames( Augm.routes )
-
-    loader = new Load()
-
-  Augm.routes = [
-    { path: '/',       name:'Home',   components:{ Home:   Home } },
-    { path: '/math',   name:'Math',   components:{ Math:   Home.Math }, children: [
-      { path:'ML',     name:'MathML', components:{ MathML: loader.load('MathND') } },
-      { path:'EQ',     name:'MathEQ', components:{ MathEQ: loader.load('MathND') } } ] },
-    { path: '/draw',   name:'Draw',   components:{ Draw:   loader.load('Draw') } },
-    { path: '/hues',   name:'Hues',   components:{ Hues:   loader.load('Hues') } },
-    { path: '/tool',   name:'Tool',   components:{ Tool:   Home.Tool }, children: [
-      { path:'Gauges', name:'Gauges', components:{ Gauges: loader.load('Tools') } },
-      { path:'Widget', name:'Widget', components:{ Widget: loader.load('Tools') } } ] },
-    { path: '/cube',   name:'Cube',   components:{ Cube:   loader.load('Cube') } },
-    { path: '/wood',   name:'Wood',   components:{ Wood:   loader.load('Wood') } } ]
-
-  Augm.geomRoute =
-    { path: '/geom', name:'Geom',   components:{ Geom:   Home.Geom }, children: [
-      { path:'2D',   name:'Geom2D', components:{ Geom2D: loader.load('GeomND') } },
-      { path:'3D',   name:'Geom3D', components:{ Geom3D: loader.load('GeomND') } } ] }
-###

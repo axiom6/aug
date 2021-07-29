@@ -20,7 +20,7 @@
     "cameras": {
       "camera": "Orthographic", "controls":"Orbit", "helper":false },
     "lights":{
-      "light":"Directional" },
+      "light":"DirectColor" },
     "content": {
       "plane":false, "grids":false, "axes":false, "axeshelper":false, "cube":false, "rgb":true },
     "animate": {} },
