@@ -18,7 +18,7 @@ import {
   Group,
   DoubleSide,
   InstancedMesh,
-  MeshPhongMaterial,
+  MeshLambertMaterial,
   Matrix4
 } from 'three';
 
@@ -136,7 +136,7 @@ Content = class Content {
     sc = 1.0 / 255.0;
     count = Math.pow(max / inc + 1, 3);
     geometry = new SphereGeometry(radius, 16, 16);
-    material = new MeshPhongMaterial();
+    material = new MeshStandardMaterial();
     inMesh = new InstancedMesh(geometry, material, count);
     matrix = new Matrix4();
     color = new Color();
@@ -161,6 +161,7 @@ Content = class Content {
     });
   }
 
+  // alphaMap:0xFFFFFF } material.alphaMap = 0xFFFFFF Opaque
   drawHsv(ysv = true) {
     var color, count, geometry, group, h, hsv, hueInc, i, inMesh, j, k, l, material, matrix, radius, ref, rgb, s, sc, v, x, y, z;
     radius = 8;
@@ -169,7 +170,9 @@ Content = class Content {
     hueInc = ysv ? 45 : 60;
     count = (360 / hueInc) * (100 / 10 + 1) * (100 / 10 + 1);
     geometry = new SphereGeometry(radius, 16, 16);
-    material = new MeshPhongMaterial();
+    material = new MeshLambertMaterial({
+      transparent: false // {
+    });
     inMesh = new InstancedMesh(geometry, material, count);
     matrix = new Matrix4();
     color = new Color();
@@ -177,9 +180,9 @@ Content = class Content {
     for (h = j = 0, ref = hueInc; ref !== 0 && (ref > 0 ? j < 360 : j > 360); h = j += ref) {
       for (s = k = 0; k <= 100; s = k += 10) {
         for (v = l = 0; l <= 100; v = l += 10) {
-          x = vis.cos(h) * s;
-          y = vis.sin(h) * s;
-          z = v;
+          x = vis.cos(h) * s * 2.0;
+          y = vis.sin(h) * s * 2.0;
+          z = v * 2.0;
           matrix.setPosition(x, y, z);
           hsv = ysv ? [h, s, v] : [h, s, v, 1];
           rgb = vis.rgb(hsv);

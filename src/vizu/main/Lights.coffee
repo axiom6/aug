@@ -1,6 +1,6 @@
 
 import { AmbientLight, DirectionalLight, DirectionalLightHelper,
-  SpotLight, SpotLightHelper, Object3D } from 'three'
+  SpotLight, SpotLightHelper, Object3D, HemisphereLight } from 'three'
 
 class Lights
 
@@ -15,10 +15,12 @@ class Lights
   selectLight:( opts, cc ) ->
     return @ambient( opts ) if not opts? and not opts.light?
     switch opts.light
-      when 'Ambient'      then @ambient(      opts )
-      when 'SpotLight'    then @spotLight(    opts )
+      when 'Ambient'      then @ambient(      opts     )
+      when 'SpotLight'    then @spotLight(    opts     )
       when 'Directional'  then @directional(  opts, cc )
-      when 'Muse'         then @muse(         opts )
+      when 'Hemisphere'   then @hemisphere(            )
+      when 'DirectColor'  then @directColor(  opts, cc )
+      when 'Muse'         then @muse(         opts     )
       when 'Orthographic' then @orthographic( opts, cc )
       else
         console.log( 'Lights.selectLight() unknown light', opts.light )
@@ -47,6 +49,13 @@ class Lights
       @main.addToScene( helper )
     [light]
 
+  hemisphere:(  ) ->
+    light1 = new HemisphereLight( 0xffffff, 0x000088 )
+    light2 = new HemisphereLight( 0xffffff, 0x880000, 0.5 )
+    light1.position.set( -1,  1.5,  1 )
+    light2.position.set( -1, -1.5, -1 )
+    @main.addToScene( light1, light2 )
+    [ light1, light2 ]
 
   muse:( opts ) ->
 
@@ -98,7 +107,7 @@ class Lights
     yz = @directPlane( opts, cc, 'YZ' )
     [ xy, xz, yz ]
 
-  directPlane:( opts, cc, plane ) ->
+  directPlane:( opts, cc, plane, castShadow=true ) ->
     direct = new DirectionalLight( cc.hex(plane), 2 )  # [60,90,90] 0xFF7F00
     target = new Object3D()
     dist = switch plane
@@ -114,7 +123,7 @@ class Lights
         direct.position.set( cc.xd*2.0, cc.yc, cc.zc )
         target.position.set( cc.xmin,   cc.yc, cc.zc )
         cc.xd
-    direct.castShadow            = true
+    direct.castShadow            =  castShadow
     direct.shadow.camera.left    = -dist * cc.aspect
     direct.shadow.camera.right   =  dist * cc.aspect
     direct.shadow.camera.top     = -dist
@@ -126,6 +135,10 @@ class Lights
     @lightHelpers.push( helper )  # We do this for updates in @animate
     @main.addToScene(   direct, direct.target, helper )
     [ direct ]
+
+  directColor:( opts, cc ) ->
+    xy = @directPlane( opts, cc, 'XY', false )
+    [ xy ]
 
 export default Lights
 

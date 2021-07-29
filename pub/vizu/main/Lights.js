@@ -6,7 +6,8 @@ import {
   DirectionalLightHelper,
   SpotLight,
   SpotLightHelper,
-  Object3D
+  Object3D,
+  HemisphereLight
 } from 'three';
 
 Lights = class Lights {
@@ -31,6 +32,10 @@ Lights = class Lights {
         return this.spotLight(opts);
       case 'Directional':
         return this.directional(opts, cc);
+      case 'Hemisphere':
+        return this.hemisphere();
+      case 'DirectColor':
+        return this.directColor(opts, cc);
       case 'Muse':
         return this.muse(opts);
       case 'Orthographic':
@@ -67,6 +72,16 @@ Lights = class Lights {
       this.main.addToScene(helper);
     }
     return [light];
+  }
+
+  hemisphere() {
+    var light1, light2;
+    light1 = new HemisphereLight(0xffffff, 0x000088);
+    light2 = new HemisphereLight(0xffffff, 0x880000, 0.5);
+    light1.position.set(-1, 1.5, 1);
+    light2.position.set(-1, -1.5, -1);
+    this.main.addToScene(light1, light2);
+    return [light1, light2];
   }
 
   muse(opts) {
@@ -122,7 +137,7 @@ Lights = class Lights {
     return [xy, xz, yz];
   }
 
-  directPlane(opts, cc, plane) {
+  directPlane(opts, cc, plane, castShadow = true) {
     var direct, dist, helper, target;
     direct = new DirectionalLight(cc.hex(plane), 2); // [60,90,90] 0xFF7F00
     target = new Object3D();
@@ -142,7 +157,7 @@ Lights = class Lights {
           return cc.xd;
       }
     })();
-    direct.castShadow = true;
+    direct.castShadow = castShadow;
     direct.shadow.camera.left = -dist * cc.aspect;
     direct.shadow.camera.right = dist * cc.aspect;
     direct.shadow.camera.top = -dist;
@@ -154,6 +169,12 @@ Lights = class Lights {
     this.lightHelpers.push(helper); // We do this for updates in @animate
     this.main.addToScene(direct, direct.target, helper);
     return [direct];
+  }
+
+  directColor(opts, cc) {
+    var xy;
+    xy = this.directPlane(opts, cc, 'XY', false);
+    return [xy];
   }
 
 };

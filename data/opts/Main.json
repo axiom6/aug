@@ -20,7 +20,7 @@
     "cameras": {
       "camera": "Orthographic", "controls":"Orbit", "helper":false },
     "lights":{
-      "light":"Ambient" },
+      "light":"Directional" },
     "content": {
       "plane":false, "grids":false, "axes":false, "axeshelper":false, "cube":false, "rgb":true },
     "animate": {} },
@@ -28,11 +28,11 @@
     "main": {
       "debug":false, "verify":false },
     "coords": {
-      "xmin":0, "xmax":256, "xtick1":32, "ymin":0, "ymax":256, "ytick1":32, "zmin":0, "zmax":256, "ztick1":32 },
+      "xmin":0, "xmax":400, "xtick1":40, "ymin":0, "ymax":400, "ytick1":40, "zmin":0, "zmax":400, "ztick1":40 },
     "cameras": {
       "camera": "Orthographic", "controls":"Orbit", "helper":false },
     "lights":{
-      "light":"Ambient" },
+      "light":"DirectColor" },
     "content": {
       "plane":false, "grids":false, "axes":false, "axeshelper":false, "cube":false, "ysv":true },
     "animate": {} },
@@ -44,7 +44,7 @@
     "cameras": {
       "camera": "Orthographic", "controls":"Orbit", "helper":false },
     "lights":{
-      "light":"Ambient" },
+      "light":"Directional" },
     "content": {
       "plane":false, "grids":false, "axes":false, "axeshelper":false, "cube":false, "hsv":true },
     "animate": {} },

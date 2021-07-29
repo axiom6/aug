@@ -2,7 +2,7 @@
 import { BoxGeometry, Mesh, BufferGeometry, SphereGeometry, Material, AxesHelper,
          Vector3, Line, LineBasicMaterial, Points, Color, Float32BufferAttribute,
          PointsMaterial, MeshStandardMaterial, Group, DoubleSide, InstancedMesh,
-         MeshPhongMaterial, Matrix4 } from 'three'
+         MeshLambertMaterial, Matrix4 } from 'three'  # MeshLambertMaterial,
 
 import {vis}  from '../../../lib/pub/draw/Vis.js'
 import XAxis  from '../coords/XAxis.js'
@@ -76,7 +76,7 @@ class Content
     sc       = 1.0 / 255.0
     count    = Math.pow((max/inc+1),3)
     geometry = new SphereGeometry( radius, 16, 16 )
-    material = new MeshPhongMaterial()
+    material = new MeshStandardMaterial()
     inMesh   = new InstancedMesh( geometry, material, count )
     matrix   = new Matrix4()
     color    = new Color()
@@ -95,6 +95,7 @@ class Content
     @main.log( 'Content.drawRgbs()', { i:i, count:count } )
     return
 
+  # alphaMap:0xFFFFFF } material.alphaMap = 0xFFFFFF Opaque
   drawHsv:( ysv=true ) ->
     radius   = 8
     i        = 0
@@ -102,7 +103,7 @@ class Content
     hueInc   = if ysv then 45 else 60
     count    = (360/hueInc)*(100/10+1)*(100/10+1)
     geometry = new SphereGeometry( radius, 16, 16 )
-    material = new MeshPhongMaterial()
+    material = new MeshLambertMaterial( { transparent:false } ) # {
     inMesh   = new InstancedMesh( geometry, material, count )
     matrix   = new Matrix4()
     color    = new Color()
@@ -110,9 +111,9 @@ class Content
     for     h in [0...360] by hueInc
       for   s in [0..100]  by 10
         for v in [0..100]  by 10
-          x = vis.cos(h) * s
-          y = vis.sin(h) * s
-          z = v
+          x = vis.cos(h) * s * 2.0
+          y = vis.sin(h) * s * 2.0
+          z = v              * 2.0
           matrix.setPosition( x, y, z )
           hsv = if ysv then [h,s,v] else [h,s,v,1]
           rgb = vis.rgb( hsv )
