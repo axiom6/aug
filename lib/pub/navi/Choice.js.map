@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "Choice.js",
+  "sourceRoot": "../../src/navi",
+  "sources": [
+    "Choice.coffee"
+  ],
+  "names": [],
+  "mappings": "AACA,IAAA,MAAA;EAAA;;AAAA,OAAO,SAAP,MAAA;;AACA,OAAO,SAAP,MAAA;;AAEM,SAAN,MAAA,OAAA;EAEE,WAAY,IAAA,CAAA,EAAA;;QAOZ,CAAA,eAAA,CAAA;IAPc,IAAC,CAAA;IACb,IAAC,CAAA,KAAD,GAAS;EADC;;EAGZ,UAAY,CAAA,CAAA;WACV;EADU;;EAIZ,QAAU,CAAE,OAAF,EAAW,MAAX,EAAmB,OAAnB,CAAA;WACR,IAAC,CAAA,GAAG,CAAC,GAAL,CAAU;MAAE,MAAA,EAAO,eAAT;MAA0B,OAAA,EAAQ,OAAlC;MAA2C,MAAA,EAAO,MAAlD;MAA0D,OAAA,EAAQ;IAAlE,CAAV;EADQ;;EAGV,OAAQ,CAAC,IAAD,CAAA;WACN,SAAS,CAAC,IAAD,CAAM,CAAC;EADV;;EAGR,MAAO,CAAE,GAAF,CAAA;AACT,QAAA;IAAI,OAAA,GAAU,IAAC,CAAA,OAAD,CAAS,GAAG,CAAC,OAAb;IACV,IAAG,GAAG,CAAC,OAAP;MACE,OAAO,CAAC,IAAR,CAAc,GAAG,CAAC,MAAlB,EADF;KAAA,MAAA;MAGE,OAAA,GAAU,OAAO,CAAC,MAAR,CAAgB,QAAA,CAAC,IAAD,CAAA;eAAU,IAAA,KAAU,GAAG,CAAC;MAAxB,CAAhB;MACV,SAAS,CAAC,GAAG,CAAC,OAAL,CAAa,CAAC,OAAvB,GAAiC,QAJnC;;IAKA,IAAqH,IAAC,CAAA,KAAtH;MAAA,OAAO,CAAC,GAAR,CAAa,iBAAb,EAAgC;QAAE,MAAA,EAAO,GAAG,CAAC,MAAb;QAAqB,OAAA,EAAQ,GAAG,CAAC,OAAjC;QAA0C,OAAA,EAAQ,OAAlD;QAA2D,OAAA,EAAQ,GAAG,CAAC;MAAvE,CAAhC,EAAA;;EAPK;;EAUP,OAAQ,CAAE,IAAF,EAAQ,MAAR,CAAA;WACN,IAAC,CAAA,GAAG,CAAC,OAAL,CAAc,MAAd,EAAsB,IAAC,CAAA,OAAD,CAAS,IAAT,CAAtB;EADM;;EAGR,WAAY,CAAE,IAAF,EAAQ,MAAR,CAAA;WACV,IAAC,CAAA,OAAD,CAAS,IAAT,CAAc,CAAC,OAAf,CAAuB,MAAvB;EADU;;EAGZ,WAAY,CAAE,IAAF,EAAQ,IAAR,CAAA;AACd,QAAA,GAAA,EAAA;IAAI,KAAA,WAAA;;;MACE,GAAG,CAAC,OAAO,CAAC,KAAZ,GAAoB,IAAC,CAAA,OAAD,CAAU,IAAV,EAAgB,GAAG,CAAC,IAApB;IADtB;EADU;;AA/Bd;;AAqCA,OAAA,QAAgB",
+  "sourcesContent": [
+    "\nimport ChoiceObj from '../../../data/jitter/Choice.json'\nimport FlavorObj from '../../../data/jitter/Flavor.json'\n\nclass Choice\n\n  constructor:( @nav ) ->\n    @debug = false\n\n  flavorJson: () ->\n    FlavorObj\n\n  # Helper method called by Wheel.coffee\n  onChoice: ( compKey, choice, checked ) =>\n    @nav.pub( { source:\"Choice.coffee\", compKey:compKey, choice:choice, checked:checked } )\n\n  choices:(name) ->\n    ChoiceObj[name].choices\n\n  choose:( obj ) ->\n    choices = @choices(obj.compKey)\n    if obj.checked\n      choices.push( obj.choice )\n    else\n      choices = choices.filter( (elem) -> elem isnt obj.choice )\n      ChoiceObj[obj.compKey].choices = choices\n    console.log( \"Choice.choose()\", { choice:obj.choice, checked:obj.checked, choices:choices, compKey:obj.compKey }) if @debug\n    return\n\n  choosen:( name, choice ) ->\n    @nav.inArray( choice, @choices(name) )\n\n  choiceIndex:( name, choice ) ->\n    @choices(name).indexOf(choice)\n\n  refreshBtns:( name, btns ) ->\n    for own key,btn of btns\n      btn.checked.value = @choosen( name, btn.name )\n    return\n\n\nexport default  Choice\n"
+  ]
+}

@@ -168,7 +168,7 @@ class Vis extends Type
       when 3 then { r:0, g:x, b:c }  # 180 - 240  blue
       when 4 then { r:x, g:0, b:c }  # 240 - 300  blue
       when 5 then { r:c, g:0, b:x }  # 300 - 360  red
-    @round( rgb, 255, add )
+    @round( rgb, 100, add )
 
 
   # toRygb=true is 'ysc'
