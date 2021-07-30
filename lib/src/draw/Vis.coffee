@@ -150,11 +150,47 @@ class Vis extends Type
     else if 240 <= rgbHue and rgbHue < 360 then rygbHue = 270 + (rgbHue-240) *  90 / 120
     rygbHue
 
+  # toRygb=true is 'ysc'
+  # hue is red=0deg, green=120deg and blue=240deg
+  rgbHsv:( Hue, Sat, Val, isRYGB ) ->
+    hue   = if isRYGB then @rgbHue(Hue) else Hue
+    sat   = 0.01 * Sat
+    val   = 2.55 * Val
+    rad   = sat  * val
+    cos60 = @cos(60)
+    sin60 = @sin(60)
+    x     = rad * Math.abs(@cos(hue))
+    y     = rad * Math.abs(@sin(hue))
+    z     = rad * Math.sqrt( x*x*cos60 + y*y*sin60 )
+    i     = Math.floor( hue / 60 )
+    switch i % 6
+      when 0 then { r:x,   g:0, b:0 }  #   0 -  60  red
+      when 1 then { r:x,   g:z, b:0 }  #  60 - 120  green
+      when 2 then { r:0,   g:z, b:z }  # 120 - 180  green
+      when 3 then { r:0,   g:z, b:z }  # 180 - 240  blue
+      when 4 then { r:x,   g:z, b:z }  # 240 - 300  blue
+      when 5 then { r:x,   g:0, b:y }  # 300 - 360  red
+
+  # toRygb=true is 'ysc'
+  # hue is red=0deg, green=120deg and blue=240deg
+  rgbHsv1:( Hue, Sat, Val, isRYGB ) ->
+    hue   = if isRYGB then @rgbHue(Hue) else Hue
+    sat   = 0.01 * Sat
+    val   = 2.55 * Val
+    prj   = (ang) =>
+      cos = Math.abs(@cos(hue)*@cos(ang))
+      sin = Math.abs(@sin(hue)*@sin(ang))
+      Math.sqrt( cos*cos + sin*sin ) * sat * val  # ???
+    if Sat = 0
+      { r:val, g:val, b:val }
+    else
+      { r:prj(  0), g:prj(120), b:prj(240) }
+
   # toRygb=true is 'ysc' while
-  rgbHsv:( H, S, V, isRYGB ) ->
+  rgbHsv2:( H, S, V, isRYGB ) ->
     h = if isRYGB then @rgbHue(H) else H
     d = S * 0.01
-    c = d # 1.0 # @sigmoidal( d, 2, 0.25 )
+    c = @sigmoidal( d, 2, 0.25 ) # d
     i = Math.floor( h / 60 )
     f = h / 60 - i
     x = 1 - c
