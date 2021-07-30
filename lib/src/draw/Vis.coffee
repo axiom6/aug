@@ -125,9 +125,9 @@ class Vis extends Type
       else                str
 
   # Rounds and scales rgb value to ints between 0 to 255
-  round:( rgb, scale=1 ) ->
+  round:( rgb, scale=1, add=0 ) ->
     rgb.a = if rgb.a? then rgb.a else 1.0
-    { r:Math.round(rgb.r*scale), g:Math.round(rgb.g*scale), b:Math.round(rgb.b*scale), a:rgb.a }
+    { r:Math.round((rgb.r+add)*scale), g:Math.round((rgb.g+add)*scale), b:Math.round((rgb.b+add)*scale), a:rgb.a }
 
   # Converts hues in 'ysv' RYGB range to 'hsv' and 'hsl' rgb hue
   #   'rygb' has red=0deg, yellow=90deg green=180deg and blue=270deg
@@ -152,7 +152,28 @@ class Vis extends Type
 
   # toRygb=true is 'ysc'
   # hue is red=0deg, green=120deg and blue=240deg
-  rgbHsv:( Hue, Sat, Val, isRYGB ) ->
+  rgbHsv:( Hue, Rad, Val, isRYGB ) ->
+    hue  = if isRYGB then @rgbHue(Hue) else Hue
+    rad  = 0.01 * Rad
+    val  = 0.02 * Val
+    hq   = Math.floor( hue / 60 )
+    z    = 1 - Math.abs( hq % 2 -1 )
+    c    = ( 3 * val * rad ) / ( 1 + z )
+    x    = c * z
+    add  = val * ( 1 - rad )
+    rgb  = switch hq % 6
+      when 0 then { r:c, g:x, b:0 }  #   0 -  60  red
+      when 1 then { r:x, g:c, b:0 }  #  60 - 120  green
+      when 2 then { r:0, g:c, b:x }  # 120 - 180  green
+      when 3 then { r:0, g:x, b:c }  # 180 - 240  blue
+      when 4 then { r:x, g:0, b:c }  # 240 - 300  blue
+      when 5 then { r:c, g:0, b:x }  # 300 - 360  red
+    @round( rgb, 255, add )
+
+
+  # toRygb=true is 'ysc'
+  # hue is red=0deg, green=120deg and blue=240deg
+  rgbHsv0:( Hue, Sat, Val, isRYGB ) ->
     hue   = if isRYGB then @rgbHue(Hue) else Hue
     sat   = 0.01 * Sat
     val   = 2.55 * Val
@@ -170,6 +191,7 @@ class Vis extends Type
       when 3 then { r:0,   g:z, b:z }  # 180 - 240  blue
       when 4 then { r:x,   g:z, b:z }  # 240 - 300  blue
       when 5 then { r:x,   g:0, b:y }  # 300 - 360  red
+    
 
   # toRygb=true is 'ysc'
   # hue is red=0deg, green=120deg and blue=240deg
