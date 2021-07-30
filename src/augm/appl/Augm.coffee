@@ -61,6 +61,7 @@ class Augm
     Home:{ title:'Home', key:'Home', pracs:{}, ikw:false, icon:"fas fa-home" }
     Math:{ title:'Math', key:'Math', pracs:{}, ikw:true,  icon:"fas fa-bezier-curve" }
     Draw:{ title:'Draw', key:'Draw', pracs:{}, ikw:false, icon:"fas fa-draw-polygon" }
+    Hues:{ title:'Hues', key:'Hues', pracs:{}, ikw:false, icon:"fas fa-palette" }
     Tool:{ title:'Tool', key:'Tool', pracs:{}, ikw:false, icon:"fas fa-wrench" }
     Cube:{ title:'Cube', key:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes" }
     Wood:{ title:'Wood', key:'Wood', pracs:{}, ikw:false, icon:"fas fa-tree" }
@@ -150,7 +151,16 @@ class Augm
       Link:   { title:'Link',   key:'Link',   obj:null, show:false },
       Radar:  { title:'Radar',  key:'Radar',  obj:null, show:false },
       Hue:    { title:'Hue',    key:'Hue',    obj:null, show:false },
-      Tree:   { title:'Tree',   key:'Tree',   obj:null, show:false } }
+      Tree:   { title:'Tree',   key:'Tree',   obj:null, show:false } },
+    Hues: {
+      Red:     { title:'Red',     key:'Red',     show:true  },
+      Orange:  { title:'Orange',  key:'Orange',  show:false },
+      Yellow:  { title:'Yellow',  key:'Yellow',  show:false },
+      Lime:    { title:'Lime',    key:'Lime',    show:false },
+      Green:   { title:'Green',   key:'Green',   show:false },
+      Cyan:    { title:'Cyan',    key:'Cyan',    show:false },
+      Blue:    { title:'Blue',    key:'Blue',    show:false },
+      Magenta: { title:'Magenta', key:'Magenta', show:false } },
     Gauges: {
       Gauge:   { title:'Gauge', key:'Gauge', show:true } }
     Widget: {
@@ -170,9 +180,7 @@ class Augm
       Table2: { title:'Table2', key:'Table2', created:false, show:false } }
     Pivots: {
       Table1: { title:'Pivot1', key:'Pivot1', created:false, show:false },
-      Table2: { title:'Pivot2', key:'Pivot2', created:false, show:false } }
-
-  }
+      Table2: { title:'Pivot2', key:'Pivot2', created:false, show:false } } }
 
 export default Augm
 

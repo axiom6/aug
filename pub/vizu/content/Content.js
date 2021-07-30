@@ -289,8 +289,8 @@ Content = class Content {
   }
 
   drawHues(pageKey, ysv = true) {
-    var color, cos30, count, geometry, group, hsv, hue, i, inMesh, j, k, material, matrix, radius, rgb, s, sc, sin30, v, x, y, z;
-    hue = this.hue(pageKey);
+    var color, count, geometry, group, hsv, hue, i, inMesh, j, k, material, matrix, radius, rgb, s, sc, v, x, y, z;
+    hue = vis.hue(pageKey);
     radius = 8;
     i = 0;
     sc = 1.0 / 255.0;
@@ -304,12 +304,10 @@ Content = class Content {
     matrix = new Matrix4();
     color = new Color();
     group = new Group();
-    cos30 = vis.cos(30);
-    sin30 = vis.sin(30);
     for (s = j = 0; j <= 100; s = j += 10) {
       for (v = k = 0; k <= 100; v = k += 10) {
-        x = s * 2.0 * cos30;
-        y = v * 2.0 * sin30;
+        x = s * 2.0;
+        y = v * 2.0;
         z = 0;
         matrix.setPosition(x, y, z);
         hsv = ysv ? [hue, s, v] : [hue, s, v, 1];
@@ -327,30 +325,6 @@ Content = class Content {
       i: i,
       count: count
     });
-  }
-
-  hue(pageKey) {
-    switch (pageKey) {
-      case 'Red':
-        return 0;
-      case 'Orange':
-        return 45;
-      case 'Yellow':
-        return 90;
-      case 'Lime':
-        return 135;
-      case 'Green':
-        return 180;
-      case 'Cyan':
-        return 225;
-      case 'Blue':
-        return 270;
-      case 'Magenta':
-        return 315;
-      default:
-        console.log('Content.hue() unknown pageKey', pageKey);
-        return 0;
-    }
   }
 
   drawPoints(positions, colors, radius, group) {

@@ -175,7 +175,7 @@ class Content
     return
 
   drawHues:( pageKey, ysv=true ) ->
-    hue      = @hue( pageKey )
+    hue      = vis.hue( pageKey )
     radius   = 8
     i        = 0
     sc       = 1.0 / 255.0
@@ -186,12 +186,10 @@ class Content
     matrix   = new Matrix4()
     color    = new Color()
     group    = new Group()
-    cos30    = vis.cos(30)
-    sin30    = vis.sin(30)
     for   s in [0..100]  by 10
       for v in [0..100]  by 10
-        x = s * 2.0 * cos30
-        y = v * 2.0 * sin30
+        x = s * 2.0
+        y = v * 2.0
         z = 0
         matrix.setPosition( x, y, z )
         hsv = if ysv then [hue,s,v] else [hue,s,v,1]
@@ -206,19 +204,6 @@ class Content
     @main.log( 'Content.drawHues()', { i:i, count:count } )
     return
 
-  hue:( pageKey ) ->
-    switch pageKey
-      when 'Red'     then   0
-      when 'Orange'  then  45
-      when 'Yellow'  then  90
-      when 'Lime'    then 135
-      when 'Green'   then 180
-      when 'Cyan'    then 225
-      when 'Blue'    then 270
-      when 'Magenta' then 315
-      else
-        console.log( 'Content.hue() unknown pageKey', pageKey )
-        0
 
   drawPoints:( positions, colors, radius, group ) ->
     geometry = new BufferGeometry()

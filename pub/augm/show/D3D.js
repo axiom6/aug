@@ -1,6 +1,6 @@
 var D3D;
 
-import Choice from '../../../lib/pub/nave/Choice.js';
+import Choice from '../../../lib/pub/navi/Choice.js';
 
 import SvgMgr from '../../../lib/pub/draw/SvgMgr.js';
 

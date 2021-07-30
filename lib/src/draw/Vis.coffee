@@ -193,6 +193,20 @@ class Vis extends Type
   interpolateRgb:( rgb1, r1, rgb2, r2 ) ->
     { r:rgb1.r * r1 + rgb2.r * r2, g:rgb1.g * r1 + rgb2.g * r2, b:rgb1.b * r1 + rgb2.b * r2 }
 
+  hue:( pageKey ) ->
+    switch pageKey
+      when 'Red'     then   0
+      when 'Orange'  then  45
+      when 'Yellow'  then  90
+      when 'Lime'    then 135
+      when 'Green'   then 180
+      when 'Cyan'    then 225
+      when 'Blue'    then 270
+      when 'Magenta' then 315
+      else
+        console.log( 'Vis.hue() unknown pageKey', pageKey )
+        0
+
   # --- Degrees and Radians ---
   #  The svg functions deal with the svg convention where the y 90 degree axis points down
 

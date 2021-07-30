@@ -5,32 +5,33 @@
 
 <script type="module">
 
-import {ref, nextTick, onMounted, inject, onUnmounted} from "vue";
-import D3D  from '../../../pub/augm/show/D3D.js'
+  import { ref, nextTick, onMounted, inject } from "vue";
+  import D3D from "../../../pub/augm/show/D3D.js"
 
-let Pane = {
 
-  props: { page:Object },
+  let Pane = {
+  
+    props: { page:Object },
 
-  setup( props ) {
+    setup( props ) {
 
-    const nav  = inject('nav');
-    const elem = ref(null);
+      const nav  = inject('nav');
+      const elem = ref(null);
 
-    const create = () => {
-      nav.createElem( "draw/Pane.create()", elem['value'], nextTick, () => {
-          props.page.obj = D3D.create( props.page.key, elem['value'], nav ); } ); }
+      const create = () => {
+        nav.createElem( "draw/Pane.create()", elem['value'], nextTick, () => {
+            props.page.obj = D3D.create( props.page.key, elem['value'], nav ); } ); }
 
-    onMounted( () => {
-       create();  } )
+      onMounted( () => {
+         create();  } )
 
-    onUnmounted( () => {
-      nav.removeElem( elem['value'], nextTick ) ; } )
+      // onUnmounted( () => {
+      //  nav.removeElem( elem['value'], nextTick ) ; } )
 
-    return { elem } }
-}
+      return { elem } }
+  }
 
-export default Pane;
+  export default Pane;
 
 </script>
 

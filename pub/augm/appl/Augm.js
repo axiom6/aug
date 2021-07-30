@@ -242,6 +242,13 @@ Augm = (function() {
       ikw: false,
       icon: "fas fa-draw-polygon"
     },
+    Hues: {
+      title: 'Hues',
+      key: 'Hues',
+      pracs: {},
+      ikw: false,
+      icon: "fas fa-palette"
+    },
     Tool: {
       title: 'Tool',
       key: 'Tool',
@@ -346,6 +353,48 @@ Augm = (function() {
         title: 'Tree',
         key: 'Tree',
         obj: null,
+        show: false
+      }
+    },
+    Hues: {
+      Red: {
+        title: 'Red',
+        key: 'Red',
+        show: true
+      },
+      Orange: {
+        title: 'Orange',
+        key: 'Orange',
+        show: false
+      },
+      Yellow: {
+        title: 'Yellow',
+        key: 'Yellow',
+        show: false
+      },
+      Lime: {
+        title: 'Lime',
+        key: 'Lime',
+        show: false
+      },
+      Green: {
+        title: 'Green',
+        key: 'Green',
+        show: false
+      },
+      Cyan: {
+        title: 'Cyan',
+        key: 'Cyan',
+        show: false
+      },
+      Blue: {
+        title: 'Blue',
+        key: 'Blue',
+        show: false
+      },
+      Magenta: {
+        title: 'Magenta',
+        key: 'Magenta',
         show: false
       }
     },
