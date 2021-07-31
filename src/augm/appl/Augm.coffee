@@ -28,7 +28,7 @@ import CubeJson from '../../../data/muse/Cube.json'
 
 import FlavorJson from '../../../data/jitter/Flavor.json'
 import ChoiceJson from '../../../data/jitter/Choice.json'
-import FontJson   from "../../../css/font/three/helvetiker_regular.typeface.json"
+import FontJson   from "../../../LIB/css/font/three/helvetiker_regular.typeface.json"
 #mport DataInov from   '../../../data/inno/Data.json'
 #mport MachInov from   '../../../data/inno/Mach.json'
 #mport MathInov from   '../../../data/inno/Math.json'

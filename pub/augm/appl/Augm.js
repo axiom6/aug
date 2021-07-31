@@ -49,7 +49,7 @@ import FlavorJson from '../../../data/jitter/Flavor.json';
 
 import ChoiceJson from '../../../data/jitter/Choice.json';
 
-import FontJson from "../../../css/font/three/helvetiker_regular.typeface.json";
+import FontJson from "../../../LIB/css/font/three/helvetiker_regular.typeface.json";
 
 Augm = (function() {
   //mport DataInov from   '../../../data/inno/Data.json'

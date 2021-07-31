@@ -36,7 +36,7 @@ import CubeJson from '../../../data/muse/Cube.json';
 
 import TestJson from '../../../data/muse/Test.json';
 
-import FontJson from '../../../css/font/three/helvetiker_regular.typeface.json';
+import FontJson from '../../../LIB/css/font/three/helvetiker_regular.typeface.json';
 
 Vizu = (function() {
   class Vizu {

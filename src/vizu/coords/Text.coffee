@@ -1,5 +1,5 @@
 
-import FontJSON from "../../../css/font/three/helvetiker_regular.typeface.json"
+import FontJSON from "../../../lib/css/font/three/helvetiker_regular.typeface.json"
 import { TextBufferGeometry, MeshBasicMaterial, Mesh, Font } from 'three' # TextGeometry,
 
 class Text

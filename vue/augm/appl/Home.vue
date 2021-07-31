@@ -25,7 +25,7 @@
   import { inject, onMounted } from 'vue';
   import Btn  from '../../../lib/vue/elem/Btn.vue';
 //import Btns from '../../../lib/vue/elem/Btns.vue';
-  import Dash from './Dash.vue';
+//import Dash from './Dash.vue';
 
   
   let Home = {
@@ -49,7 +49,7 @@
 
 <style lang="less">
 
-  @import '../../../css/font/roboto/Roboto.css';
+  @import '../../../../lib/css/font/roboto/Roboto.css';
   @import '../../../node_modules/@fortawesome/fontawesome-free/css/all.css';
   @import '../../../css/themes/theme.less';
   

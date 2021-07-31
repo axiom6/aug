@@ -1,6 +1,7 @@
 
 import Type     from '../test/Type.js'
 import FontAwe  from './FontAwe.js'
+import chroma   from 'chroma-js'
 
 class Vis extends Type
 
@@ -9,6 +10,8 @@ class Vis extends Type
     @skipReady   = false
     @time        = 0
     @uniqueIdExt = ''
+    @chroma      = chroma
+    @debug       = false
   
   # --- Color Spaces  ---
   # RGB - that also works a RGBa with a:1.0 as a default or can be provided in objects or arrays
@@ -150,65 +153,34 @@ class Vis extends Type
     else if 240 <= rgbHue and rgbHue < 360 then rygbHue = 270 + (rgbHue-240) *  90 / 120
     rygbHue
 
-  # toRygb=true is 'ysc'
-  # hue is red=0deg, green=120deg and blue=240deg
-  rgbHsv:( Hue, Rad, Val, isRYGB ) ->
-    hue  = if isRYGB then @rgbHue(Hue) else Hue
-    rad  = 0.01 * Rad
-    val  = 0.02 * Val
-    hq   = Math.floor( hue / 60 )
-    z    = 1 - Math.abs( hq % 2 -1 )
-    c    = ( 3 * val * rad ) / ( 1 + z )
-    x    = c * z
-    add  = val * ( 1 - rad )
-    rgb  = switch hq % 6
-      when 0 then { r:c, g:x, b:0 }  #   0 -  60  red
-      when 1 then { r:x, g:c, b:0 }  #  60 - 120  green
-      when 2 then { r:0, g:c, b:x }  # 120 - 180  green
-      when 3 then { r:0, g:x, b:c }  # 180 - 240  blue
-      when 4 then { r:x, g:0, b:c }  # 240 - 300  blue
-      when 5 then { r:c, g:0, b:x }  # 300 - 360  red
-    @round( rgb, 100, add )
-
-
-  # toRygb=true is 'ysc'
-  # hue is red=0deg, green=120deg and blue=240deg
-  rgbHsv0:( Hue, Sat, Val, isRYGB ) ->
-    hue   = if isRYGB then @rgbHue(Hue) else Hue
-    sat   = 0.01 * Sat
-    val   = 2.55 * Val
-    rad   = sat  * val
-    cos60 = @cos(60)
-    sin60 = @sin(60)
-    x     = rad * Math.abs(@cos(hue))
-    y     = rad * Math.abs(@sin(hue))
-    z     = rad * Math.sqrt( x*x*cos60 + y*y*sin60 )
-    i     = Math.floor( hue / 60 )
-    switch i % 6
-      when 0 then { r:x,   g:0, b:0 }  #   0 -  60  red
-      when 1 then { r:x,   g:z, b:0 }  #  60 - 120  green
-      when 2 then { r:0,   g:z, b:z }  # 120 - 180  green
-      when 3 then { r:0,   g:z, b:z }  # 180 - 240  blue
-      when 4 then { r:x,   g:z, b:z }  # 240 - 300  blue
-      when 5 then { r:x,   g:0, b:y }  # 300 - 360  red
-    
-
-  # toRygb=true is 'ysc'
-  # hue is red=0deg, green=120deg and blue=240deg
-  rgbHsv1:( Hue, Sat, Val, isRYGB ) ->
-    hue   = if isRYGB then @rgbHue(Hue) else Hue
-    sat   = 0.01 * Sat
-    val   = 2.55 * Val
-    prj   = (ang) =>
-      cos = Math.abs(@cos(hue)*@cos(ang))
-      sin = Math.abs(@sin(hue)*@sin(ang))
-      Math.sqrt( cos*cos + sin*sin ) * sat * val  # ???
-    if Sat = 0
-      { r:val, g:val, b:val }
-    else
-      { r:prj(  0), g:prj(120), b:prj(240) }
+  ###
+  black:      { in: [0,0,0],     out: [0,0,0,1]},
+  white:      { in: [0,0,1],     out: [255,255,255,1]},
+  gray:       { in: [0,0,0.5],   out: [127.5,127.5,127.5,1]},
+  red:        { in: [0,1,0.5],   out: [255,0,0,1]},
+  yellow:     { in: [60,1,0.5],  out: [255,255,0,1]},
+  green:      { in: [120,1,0.5], out: [0,255,0,1]},
+  cyan:       { in: [180,1,0.5], out: [0,255,255,1]},
+  blue:       { in: [240,1,0.5], out: [0,0,255,1]},
+  magenta:    { in: [300,1,0.5], out: [255,0,255,1]},
+  ###
+  rgbHsv:( H, S, V, isRYGB ) ->
+    h = if isRYGB then @rgbHue(H) else H
+    c = chroma.hsv( h, S*0.01, V*0.01 )
+    a = c._rgb
+    rgb = { r:a[0], g:a[1], b:a[2], a:a[3] }
+    rgb = @round( rgb, 1.0 )
+    console.log( "Vis.rgbHsv()", rgb, h, S, V ) if @debug
+    rgb
 
   # toRygb=true is 'ysc' while
+  ###
+    var i = floor$1(h);
+    var f = h - i;
+    var p = v * (1 - s);
+    var q = v * (1 - s * f);
+    var t = v * (1 - s * (1 - f));
+  ###
   rgbHsv2:( H, S, V, isRYGB ) ->
     h = if isRYGB then @rgbHue(H) else H
     d = S * 0.01
@@ -226,6 +198,26 @@ class Vis extends Type
       when 4 then { r:z, g:x, b:1 }
       when 5 then { r:1, g:x, b:y }
     @round( rgb, 255 * V / 100 )
+
+  # toRygb=true is 'ysc'
+  # hue is converted to red=0deg, green=120deg and blue=240deg
+  rgbHsi:( Hue, Rad, Val, isRYGB ) ->
+    hue  = if isRYGB then @rgbHue(Hue) else Hue
+    rad  = 0.01 * Rad
+    val  = 0.02 * Val
+    hq   = Math.floor( hue+1 / 60 )
+    z    = 1 - Math.abs( hq % 2 -1 )
+    c    = ( 3 * val * rad ) / ( 1 + z )
+    x    = c * z
+    add  = val * ( 1 - rad )
+    rgb  = switch hq % 6
+      when 0 then { r:c, g:x, b:0 }  #   0 -  60  red
+      when 1 then { r:x, g:c, b:0 }  #  60 - 120  green
+      when 2 then { r:0, g:c, b:x }  # 120 - 180  green
+      when 3 then { r:0, g:x, b:c }  # 180 - 240  blue
+      when 4 then { r:x, g:0, b:c }  # 240 - 300  blue
+      when 5 then { r:c, g:0, b:x }  # 300 - 360  red
+    @round( rgb, 100, add )
 
   # Standalone since HSV is not detected by @rgb( arg )
   rgbHsl:( H, s, l, isRYGB ) ->

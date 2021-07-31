@@ -6,7 +6,7 @@
       <template v-for="page in toPages()" :key="nav.keyIdx(page.key,pageIdx)">
         <template   v-for="sat in percents()">
           <template v-for="val in percents()">
-            <d-rect  v-if="nav.show(page.key)" :page="page" :sat=sat :val=val></d-rect>
+            <d-rect  v-if="nav.show(page.key)" :pageKey="page.key" :pageIdx=pageIdx :sat=sat :val=val></d-rect>
           </template>
         </template>
       </template>
@@ -29,7 +29,6 @@ let Hues = {
     const nav     = inject('nav');
     const compKey = 'Hues';
     let   pageIdx = ref(0);
-    const page    = ref(null);
 
     const toPages = () => {
       return nav.getTabs('Hues'); }
@@ -45,7 +44,7 @@ let Hues = {
       nav.subscribe(  'Nav', 'Hues', (obj) => {
         onNav(obj); } ); } )
 
-    return { compKey, toPages, percents, page, nav, pageIdx }; }
+    return { compKey, toPages, percents, nav, pageIdx }; }
 }
 export default Hues;
 
