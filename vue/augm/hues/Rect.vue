@@ -19,30 +19,33 @@ let Rect = {
 
     const nav     = inject('nav');
     const debug   = false;
+    const p       = 100
+    const type    = "HMIR"
+    const isRYGB  = false
 
     const style = (pageKey) => {
-      let hue = vis.hue( pageKey );
-      let css = vis.css( [ hue, props.sat, props.val ] );
+      let hue = vis.hue( pageKey, isRYGB );
+      let css = vis.css( [ hue, props.sat, props.val, type ] );
       let str = `position:absolute; left:${props.sat*0.9}%; top:${(100-props.val)*0.9}%; width:9%; height:9%; ` +
                 `background:${css}`
       if( debug ) { console.log( "Rect.style()",
-          { css:css, pageKey:pageKey, hue:hue, sat:props.sat, val:props.val } ); }
+          { css:css, pageKey:pageKey, hue:hue, sat:props.sat, val:props.val, type:type } ); }
       return str; }
 
     const hsvs = () => {
-      let hue = vis.hue( props.pageKey );
-      return `${vis.pad(hue,1000)} ${vis.pad(props.sat,1000)} ${vis.pad(props.val,1000)}` }
+      let hue = vis.hue( props.pageKey, isRYGB );
+      return `${vis.pad(hue,p)} ${vis.pad(props.sat,p)} ${vis.pad(props.val,p)}` }
 
     // Chroma name only finds primary colors
     // vis.chroma( [ rgb.r, rgb.g, rgb.b ] ).name(); }
     const name = () => {
-      let hue = vis.hue( props.pageKey );
-      return vis.str( [ hue, props.sat, props.val ] ); }
+      let hue = vis.hue( props.pageKey, isRYGB );
+      return vis.str( [ hue, props.sat, props.val, type ] ); }
 
     const rgbs = () => {
-      let hue = vis.hue( props.pageKey );
-      let rgb = vis.rgb( [ hue, props.sat, props.val ] );
-      return `${vis.pad(rgb.r,1000)} ${vis.pad(rgb.g,1000)} ${vis.pad(rgb.b,1000)}` }
+      let hue = vis.hue( props.pageKey, isRYGB );
+      let rgb = vis.rgb( [ hue, props.sat, props.val, type ] );
+      return `${vis.pad(rgb.r,p)} ${vis.pad(rgb.g,p)} ${vis.pad(rgb.b,p)}` }
 
     return { style, hsvs, name, rgbs, nav } }
 }

@@ -162,7 +162,7 @@ class Content
           y = vis.sin(h) * s * 2.0
           z = v              * 2.0
           matrix.setPosition( x, y, z )
-          hsv = if ysv then [h,s,v] else [h,s,v,1]
+          hsv = if ysv then [h,s,v,"HCI"] else [h,s,v,"HCIR"]
           rgb = vis.rgb( hsv )
           color.setRGB( rgb.r*sc, rgb.g*sc, rgb.b*sc )
           inMesh.setMatrixAt( i, matrix )
@@ -175,7 +175,7 @@ class Content
     return
 
   drawHues:( pageKey, ysv=true ) ->
-    hue      = vis.hue( pageKey )
+    hue      = vis.hue( pageKey, ysv )
     radius   = 8
     i        = 0
     sc       = 1.0 / 255.0
@@ -192,7 +192,7 @@ class Content
         y = v * 2.0
         z = 0
         matrix.setPosition( x, y, z )
-        hsv = if ysv then [hue,s,v] else [hue,s,v,1]
+        hsv = if ysv then [hue,s,v,"HSV"] else [hue,s,v,"HSVR"]
         rgb = vis.rgb( hsv )
         color.setRGB( rgb.r*sc, rgb.g*sc, rgb.b*sc )
         inMesh.setMatrixAt( i, matrix )

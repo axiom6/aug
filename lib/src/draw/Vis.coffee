@@ -29,16 +29,16 @@ class Vis extends Type
   #   When arg is an array with length === 4 then it is assumed values  are hsv
   #     with hue as RGB red=0deg, green=120deg and blue=240deg
   #   When arg is a number the range expressed hex is 0x000000 to 0xFFFFFF
+  # console.log( 'Vis.rgb()', { arg:arg, rgb:rgb, isRYGB:isRYGB } ) if @debug
   rgb:( arg ) ->
     rgb = { r:255, g:255, b:255, a:1.0 } # default is white with alpha = 1.0 opaque
     if @isObject(arg)
       rgb   = arg
       rgb.a = if arg.a? then arg.a else 1.0
     else if @isArray(arg)
-      isRYGB = arg.length is 3  # 3 implies RYGB hue while 4 implies RGB hue
-      rgb    = @rgbHsv( arg[0], arg[1], arg[2], isRYGB ) 
-      rgb.a  = arg[3] if arg.length is 4
-      console.log( 'Vis.rgb()', { arg:arg, rgb:rgb, isRYGB:isRYGB } ) if @debug
+      type  = if arg.length is 4 then arg[3] else "HSV"
+      rgb   = @rgbCyl( arg, type )
+      rgb.a = 1
     else if @isNumber(arg)
       rgb = { r:(arg & 0xFF0000) >> 16,   g:(arg & 0x00FF00) >> 8,  b:arg & 0x0000FF }
       rgb.a = 1.0
@@ -100,21 +100,6 @@ class Vis extends Type
   ysv:( arg ) ->
     @cyl( arg, true )
 
-  ###
-  hcl:( arg ) ->
-    rgb  = @rgb( arg )
-    R = rgb.r
-    G = rgb.g
-    B = rgb.b
-    a   = 3 * ( Math.min(R,G,B) / Math.max(R,G,B) ) / 100
-    q    = Math.exp( a )
-    h180   = @deg( Math.atan2( G - B, R - G ) )
-    H   = if h180 < 0 then 360 + h180 else h180
-    C   = q * ( Math.abs(R−G) + Math.abs(G−B) + Math.abs(B−R) ) / 3
-    L   = q *Math.max(R,G,B) + (1-q) * Math.min(R, G,B)  / 2
-    [ H. C, L ]
-  ###
-
   # Need to chech output format
   sphere:( hue, phi, rad ) ->
     @rgba( [@rot(hue,90), 100*@sin(phi), 100*rad ] )
@@ -127,10 +112,17 @@ class Vis extends Type
       when num <  16 then '0' + str
       else                str
 
-  # Rounds and scales rgb value to ints between 0 to 255
+  # Adjust rgb values to stay in range
+  adj:( v ) ->
+    a = Math.round(v)
+    a = if a <   0 then   0 else a
+    a = if a > 255 then 255 else a
+    a
+
+  # Rounds and scales rgb value amd limits ints between 0 to 255
   round:( rgb, scale=1, add=0 ) ->
     rgb.a = if rgb.a? then rgb.a else 1.0
-    { r:Math.round((rgb.r+add)*scale), g:Math.round((rgb.g+add)*scale), b:Math.round((rgb.b+add)*scale), a:rgb.a }
+    { r:@adj((rgb.r+add)*scale), g:@adj((rgb.g+add)*scale), b:@adj((rgb.b+add)*scale), a:rgb.a }
 
   # Converts hues in 'ysv' RYGB range to 'hsv' and 'hsl' rgb hue
   #   'rygb' has red=0deg, yellow=90deg green=180deg and blue=270deg
@@ -163,14 +155,34 @@ class Vis extends Type
   cyan:       { in: [180,1,0.5], out: [0,255,255,1]},
   blue:       { in: [240,1,0.5], out: [0,0,255,1]},
   magenta:    { in: [300,1,0.5], out: [255,0,255,1]},
+  chorma.hsv()
   ###
-  rgbHsv:( H, S, V, isRYGB ) ->
-    h = if isRYGB then @rgbHue(H) else H
+
+  rgbCyl:( a, type ) ->
+    isRYGB = not ( type.length is 4 and type.charAt(3) is 'R' )
+    h = if isRYGB then @rgbHue(a[0]) else a[0]
+    s = a[1]
+    v = a[2]
+    console.log( "Vis.rgbCyl()", h, a[0] )
+    switch type
+      when 'HSV', 'HSVR' then @rgbHsv( h, s, v )
+      when 'HMI', 'HMIR' then @rgbHmi( h, s, v )
+      when 'HWV', 'HWVR' then @rgbHwv( h, s, v )
+      when 'HSC', 'HSCR' then @rgbHsc( h, s, v ) # HSC means use chroma for HSV
+      when 'HSI', 'HSIR' then @rgbHsi( h, s, v )
+      when 'HCI', 'HCIR' then @rgbHci( h, s, v ) # HCI is a more saturated HSI
+      when 'HSL', 'HSLR' then @rgbHsl( h, s, v )
+      else
+        console.log( "Vis.rgbCyl() #{type} unknown" )
+        @rbgHsv( h, s, v )
+
+  rgbHsc:( H, S, V ) ->
+    h = H
     c = chroma.hsv( h, S*0.01, V*0.01 )
     a = c._rgb
-    rgb = { r:a[0], g:a[1], b:a[2], a:a[3] }
+    rgb = { r:a[0], g:a[1], b:a[2], a:1 }
     rgb = @round( rgb, 1.0 )
-    console.log( "Vis.rgbHsv()", rgb, h, S, V ) if @debug
+    console.log( "Vis.rgbHsc()", rgb, h, S, V ) if @debug
     rgb
 
   # toRygb=true is 'ysc' while
@@ -181,10 +193,10 @@ class Vis extends Type
     var q = v * (1 - s * f);
     var t = v * (1 - s * (1 - f));
   ###
-  rgbHsv2:( H, S, V, isRYGB ) ->
-    h = if isRYGB then @rgbHue(H) else H
+  rgbHsv:( H, S, V ) ->
+    h = H
     d = S * 0.01
-    c = @sigmoidal( d, 2, 0.25 ) # d
+    c = d # @sigmoidal( d, 2, 0.25 )
     i = Math.floor( h / 60 )
     f = h / 60 - i
     x = 1 - c
@@ -199,14 +211,83 @@ class Vis extends Type
       when 5 then { r:1, g:x, b:y }
     @round( rgb, 255 * V / 100 )
 
+
+  rgbHwv:( h, S, V ) ->
+    s = S * 0.01
+    v = V * 0.01
+    f = (n) =>
+      k = ( n + h / 60 ) % 6
+      v = v - v * s * Math.max( 0, Math.min( k, 4-k, 1 ) )
+    rgb = { r:f(5), g:f(3), b:f(1) }
+    rgb = @round( rgb, 255 )
+    console.log( "Vis.rgbHwv()", rgb, h, S, V ) # if @debug
+    rgb
+
+  rgbHmi:( h, S, I ) ->
+    s = S * 0.01
+    i = I * 0.01
+    r = 0
+    g = 0
+    b = 0
+    rem = ( q, n ) =>
+      q/n - Math.floor(q/n)
+    fwd = rem(h,120)
+    bak = 1 - fwd
+    des = 1 - s
+    if        0 <= h and h < 120
+      r = bak
+      g = fwd
+      b = des
+      m = Math.max( r, g )
+    else if 120 <= h and h < 240
+      r = des
+      g = bak
+      b = fwd
+      m = Math.max( g, b )
+    else if  240 <= h and h < 360
+      b = bak
+      g = des
+      r = fwd
+      m = Math.max( b, r )
+    else
+      r = 0.5
+      g = 0.5
+      b = 0.5
+
+    rgb = @round( { r:r, g:g, b:b }, 255 * i / ( 1 - m ) )
+    console.log( "Vis.rgbHmi()", { rgb:rgb, h:h, S:S, I:I } ) # if @debug
+    rgb
+
+  # From chroma.js
+  rgbHsi:( Hue, Rad, Val ) ->
+    hue  = Hue
+    h = hue / 360
+    s = Rad * 0.01
+    i = Val * 0.01
+    if h < 1/3
+      b = (1-s)/3
+      r = (1+s*@cos(hue)/@cos(120-hue))/3
+      g = 1 - (b+r)
+    else if h < 2/3
+      h -= 1/3;
+      r = (1-s)/3;
+      g = (1+s*@cos(hue)/@cos(120-hue))/3;
+      b = 1 - (r+g);
+    else
+      h -= 2/3
+      g = (1-s)/3
+      b = (1+s*@cos(hue)/@cos(120-hue))/3
+      r = 1 - (g+b)
+    @round( { r:r, g:g, b:b }, 255 * i * 3 ) # * 3
+
   # toRygb=true is 'ysc'
   # hue is converted to red=0deg, green=120deg and blue=240deg
-  rgbHsi:( Hue, Rad, Val, isRYGB ) ->
-    hue  = if isRYGB then @rgbHue(Hue) else Hue
+  rgbHci:( Hue, Rad, Val ) ->
+    hue  = Hue
     rad  = 0.01 * Rad
-    val  = 0.02 * Val
-    hq   = Math.floor( hue+1 / 60 )
-    z    = 1 - Math.abs( hq % 2 -1 )
+    val  = 0.01 * Val
+    hq   = Math.floor( hue-1 / 60 )
+    z    = 1 - Math.abs( hq % 2 )
     c    = ( 3 * val * rad ) / ( 1 + z )
     x    = c * z
     add  = val * ( 1 - rad )
@@ -220,8 +301,8 @@ class Vis extends Type
     @round( rgb, 100, add )
 
   # Standalone since HSV is not detected by @rgb( arg )
-  rgbHsl:( H, s, l, isRYGB ) ->
-    h = if isRYGB then @rgbHue(H) else H
+  rgbHsl:( H, s, l ) ->
+    h = H
     i = Math.floor( h / 60 )
     f = h / 60 - i
     p = l * (1 - s)
@@ -243,16 +324,19 @@ class Vis extends Type
   interpolateRgb:( rgb1, r1, rgb2, r2 ) ->
     { r:rgb1.r * r1 + rgb2.r * r2, g:rgb1.g * r1 + rgb2.g * r2, b:rgb1.b * r1 + rgb2.b * r2 }
 
-  hue:( pageKey ) ->
+  hue:( pageKey, isRYGB ) ->
+    toRYGB = ( rygb, rgb ) ->
+      if isRYGB then rygb else rgb
     switch pageKey
-      when 'Red'     then   0
-      when 'Orange'  then  45
-      when 'Yellow'  then  90
-      when 'Lime'    then 135
-      when 'Green'   then 180
-      when 'Cyan'    then 225
-      when 'Blue'    then 270
-      when 'Magenta' then 315
+      when 'Red'     then 0
+      when 'Orange'  then toRYGB(  45,  30 )
+      when 'Yellow'  then toRYGB(  90,  60 )
+      when 'Lime'    then toRYGB( 135,  90 )
+      when 'Green'   then toRYGB( 180, 120 )
+      when 'Teal'    then toRYGB( 203, 150 )
+      when 'Cyan'    then toRYGB( 225, 180 )
+      when 'Blue'    then toRYGB( 270, 240 )
+      when 'Magenta' then toRYGB( 315, 300 )
       else
         console.log( 'Vis.hue() unknown pageKey', pageKey )
         0
@@ -260,10 +344,13 @@ class Vis extends Type
   # --- Degrees and Radians ---
   #  The svg functions deal with the svg convention where the y 90 degree axis points down
 
-  rad:( deg ) -> deg * Math.PI / 180
-  deg:( rad ) -> rad * 180 / Math.PI
-  sin:( deg ) -> Math.sin(@rad(deg))
-  cos:( deg ) -> Math.cos(@rad(deg))
+  rad:( deg )     -> deg * Math.PI / 180
+  deg:( rad )     -> rad * 180 / Math.PI
+  sin:( deg )     -> Math.sin(@rad(deg))
+  cos:( deg )     -> Math.cos(@rad(deg))
+  abs:( val )     -> Math.abs( val  )
+  max:( args... ) -> Math.max( args )
+  min:( args... ) -> Math.min( args )
 
   rot:( deg, ang ) ->
     a = deg+ang
@@ -347,7 +434,21 @@ class Vis extends Type
 
 export vis = new Vis()
 
-###  HCL
+###
+  hcl:( arg ) ->
+    rgb  = @rgb( arg )
+    R = rgb.r
+    G = rgb.g
+    B = rgb.b
+    a   = 3 * ( Math.min(R,G,B) / Math.max(R,G,B) ) / 100
+    q    = Math.exp( a )
+    h180   = @deg( Math.atan2( G - B, R - G ) )
+    H   = if h180 < 0 then 360 + h180 else h180
+    C   = q * ( Math.abs(R−G) + Math.abs(G−B) + Math.abs(B−R) ) / 3
+    L   = q *Math.max(R,G,B) + (1-q) * Math.min(R, G,B)  / 2
+    [ H. C, L ]
+
+HCL
   a   = 3 * ( Min(R,G,B) / Max(R,G,B) ) / 100
   q    = Math.exp( a )
   h180   = @deg( Math.atan2( G − B, R - G ) )

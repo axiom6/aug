@@ -20,7 +20,7 @@ class Dir
 
   dir:( direct ) =>
     @source = direct
-    if @nav.mix.isApp('Muse')
+    if @nav.isApp('Muse')
       switch @route
         when 'Comp' then @dirComp( direct )
         when 'Prac' then @dirPrac( direct )
