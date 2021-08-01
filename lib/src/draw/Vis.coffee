@@ -163,7 +163,6 @@ class Vis extends Type
     h = if isRYGB then @rgbHue(a[0]) else a[0]
     s = a[1]
     v = a[2]
-    console.log( "Vis.rgbCyl()", h, a[0] )
     switch type
       when 'HSV', 'HSVR' then @rgbHsv( h, s, v )
       when 'HMI', 'HMIR' then @rgbHmi( h, s, v )
@@ -211,7 +210,6 @@ class Vis extends Type
       when 5 then { r:1, g:x, b:y }
     @round( rgb, 255 * V / 100 )
 
-
   rgbHwv:( h, S, V ) ->
     s = S * 0.01
     v = V * 0.01
@@ -224,38 +222,47 @@ class Vis extends Type
     rgb
 
   rgbHmi:( h, S, I ) ->
-    s = S * 0.01
-    i = I * 0.01
+    sat    = S * 0.01
+    desat  = 1 - sat
+    bright = I * 0.01
     r = 0
     g = 0
     b = 0
+    boost = true
+    pri = ( val, max ) ->
+      if boost then val / max else val
+    sec = ( val, max ) ->
+      if boost then desat + ( sat * val / max ) else desat + sat * val
     rem = ( q, n ) =>
       q/n - Math.floor(q/n)
     fwd = rem(h,120)
     bak = 1 - fwd
-    des = 1 - s
-    if        0 <= h and h < 120
-      r = bak
-      g = fwd
-      b = des
-      m = Math.max( r, g )
-    else if 120 <= h and h < 240
-      r = des
-      g = bak
-      b = fwd
-      m = Math.max( g, b )
-    else if  240 <= h and h < 360
-      b = bak
-      g = des
-      r = fwd
-      m = Math.max( b, r )
-    else
-      r = 0.5
-      g = 0.5
-      b = 0.5
-
-    rgb = @round( { r:r, g:g, b:b }, 255 * i / ( 1 - m ) )
-    console.log( "Vis.rgbHmi()", { rgb:rgb, h:h, S:S, I:I } ) # if @debug
+    if        0 <= h and h <  60  # red   pri green sec
+      r = pri( bak, bak )
+      g = sec( fwd, bak )
+      b = desat
+    else if  60 <= h and h < 120  # green pri red   sec
+      g = pri( fwd, fwd )
+      r = sec( bak, fwd )
+      b = desat
+    else if 120 <= h and h < 180  # green pri blue  sec
+      g = pri( bak, bak )
+      b = sec( fwd, bak )
+      r = desat
+    else if 180 <= h and h < 240  # blue   pri green sec
+      b = pri( fwd, fwd )
+      g = sec( bak, fwd )
+      r = desat
+    else if  240 <= h and h < 300 # blue  pri red   sec
+      b = pri( bak, bak )
+      r = sec( fwd, bak )
+      g = desat
+    else if  300 <= h and h < 360 # red   pri blue  sec
+      r = pri( fwd, fwd )
+      b = sec( bak, fwd )
+      g = desat
+    rgb = @round( { r:r, g:g, b:b }, 255 * bright )
+    console.log( "Vis.rgbHmi()", { rgb:rgb, h:h, S:S, I:I } ) if @debug
     rgb
 
   # From chroma.js
