@@ -162,7 +162,7 @@ class Content
           y = vis.sin(h) * s * 2.0
           z = v              * 2.0
           matrix.setPosition( x, y, z )
-          hsv = if ysv then [h,s,v,"HCI"] else [h,s,v,"HCIR"]
+          hsv = if ysv then [h,s,v,"HMI"] else [h,s,v,"HMIR"]
           rgb = vis.rgb( hsv )
           color.setRGB( rgb.r*sc, rgb.g*sc, rgb.b*sc )
           inMesh.setMatrixAt( i, matrix )
@@ -192,7 +192,7 @@ class Content
         y = v * 2.0
         z = 0
         matrix.setPosition( x, y, z )
-        hsv = if ysv then [hue,s,v,"HSV"] else [hue,s,v,"HSVR"]
+        hsv = if ysv then [hue,s,v,"HMI"] else [hue,s,v,"HMIR"]
         rgb = vis.rgb( hsv )
         color.setRGB( rgb.r*sc, rgb.g*sc, rgb.b*sc )
         inMesh.setMatrixAt( i, matrix )

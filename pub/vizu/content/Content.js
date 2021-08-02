@@ -270,7 +270,7 @@ Content = class Content {
           y = vis.sin(h) * s * 2.0;
           z = v * 2.0;
           matrix.setPosition(x, y, z);
-          hsv = ysv ? [h, s, v] : [h, s, v, 1];
+          hsv = ysv ? [h, s, v, "HMI"] : [h, s, v, "HMIR"];
           rgb = vis.rgb(hsv);
           color.setRGB(rgb.r * sc, rgb.g * sc, rgb.b * sc);
           inMesh.setMatrixAt(i, matrix);
@@ -290,7 +290,7 @@ Content = class Content {
 
   drawHues(pageKey, ysv = true) {
     var color, count, geometry, group, hsv, hue, i, inMesh, j, k, material, matrix, radius, rgb, s, sc, v, x, y, z;
-    hue = vis.hue(pageKey);
+    hue = vis.hue(pageKey, ysv);
     radius = 8;
     i = 0;
     sc = 1.0 / 255.0;
@@ -310,7 +310,7 @@ Content = class Content {
         y = v * 2.0;
         z = 0;
         matrix.setPosition(x, y, z);
-        hsv = ysv ? [hue, s, v] : [hue, s, v, 1];
+        hsv = ysv ? [hue, s, v, "HMI"] : [hue, s, v, "HMIR"];
         rgb = vis.rgb(hsv);
         color.setRGB(rgb.r * sc, rgb.g * sc, rgb.b * sc);
         inMesh.setMatrixAt(i, matrix);

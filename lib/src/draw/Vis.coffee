@@ -13,7 +13,7 @@ class Vis extends Type
     @chroma      = chroma
     @debug       =
     @distribution10s = [0,10,20,30,40,50,60,70,80,90,100]
-    @distributionPri = [0,30,60,65,70,75,80,85,90,95,100]
+    @distributionPri = [0,30,45,60,70,75,80,85,90,95,100]
     @distributionSec = [0,30,60,65,70,75,80,85,90,95,100]
   
   # --- Color Spaces  ---
@@ -356,7 +356,7 @@ class Vis extends Type
     len = @distribution10s.length
     idx = @distribution10s.indexOf(sat)
     val = if 0 <= idx and idx < len then @distributionPri[idx] else 100
-    console.log( "Vis.lookUpSat(sat)", { sat:sat, idx:idx, val:val } )
+    console.log( "Vis.lookUpSat(sat)", { sat:sat, idx:idx, val:val } ) if @debug
     val
 
   even:( val ) =>
