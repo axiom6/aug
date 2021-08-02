@@ -4,8 +4,8 @@
     <d-tabs :compKey="compKey" :pages="toPages()"></d-tabs>
     <div class="hues-rect">
       <template v-for="page in toPages()" :key="nav.keyIdx(page.key,pageIdx)">
-        <template   v-for="sat in percents()">
-          <template v-for="val in percents()">
+        <template   v-for="sat in saturates()">
+          <template v-for="val in brights()">
             <d-rect  v-if="nav.show(page.key)" :pageKey="page.key" :pageIdx=pageIdx :sat=sat :val=val></d-rect>
           </template>
         </template>
@@ -17,8 +17,9 @@
 <script type="module">
 
 import { inject, ref, onMounted } from 'vue';
-import Tabs from '../../../lib/vue/elem/Tabs.vue';
-import Rect from './Rect.vue'
+import  Tabs   from '../../../lib/vue/elem/Tabs.vue';
+import  Rect   from './Rect.vue'
+import { vis } from '../../../lib/pub/draw/Vis.js'
 
 let Hues = {
 
@@ -33,8 +34,11 @@ let Hues = {
     const toPages = () => {
       return nav.getTabs('Hues'); }
 
-    const percents = () => {
-      return [0,10,20,30,40,50,60,70,80,90,100]; }
+    const brights = () => {
+      return vis.distribution(); }
+
+    const saturates = () =>  {
+      return vis.distribution(); }
 
     const onNav = (obj) => {
       if( obj.compKey==='Hues' ) {
@@ -44,7 +48,7 @@ let Hues = {
       nav.subscribe(  'Nav', 'Hues', (obj) => {
         onNav(obj); } ); } )
 
-    return { compKey, toPages, percents, nav, pageIdx }; }
+    return { compKey, toPages, brights, saturates, nav, pageIdx }; }
 }
 export default Hues;
 

@@ -34,7 +34,7 @@ let Rect = {
 
     const hsvs = () => {
       let hue = vis.hue( props.pageKey, isRYGB );
-      return `${vis.pad(hue,p)} ${vis.pad(props.sat,p)} ${vis.pad(props.val,p)}` }
+      return `${vis.pad(hue,p)} ${vis.pad(vis.lookUpSat(props.sat),p)} ${vis.pad(props.val,p)}` }
 
     // Chroma name only finds primary colors
     // vis.chroma( [ rgb.r, rgb.g, rgb.b ] ).name(); }

@@ -11,7 +11,10 @@ class Vis extends Type
     @time        = 0
     @uniqueIdExt = ''
     @chroma      = chroma
-    @debug       = false
+    @debug       =
+    @distribution10s = [0,10,20,30,40,50,60,70,80,90,100]
+    @distributionPri = [0,30,60,65,70,75,80,85,90,95,100]
+    @distributionSec = [0,30,60,65,70,75,80,85,90,95,100]
   
   # --- Color Spaces  ---
   # RGB - that also works a RGBa with a:1.0 as a default or can be provided in objects or arrays
@@ -222,7 +225,8 @@ class Vis extends Type
     rgb
 
   rgbHmi:( h, S, I ) ->
-    sat    = S * 0.01
+    look   = @lookUpSat( S )
+    sat    = look * 0.01
     desat  = 1 - sat
     bright = I * 0.01
     r = 0
@@ -262,7 +266,7 @@ class Vis extends Type
       b = sec( bak, fwd )
       g = desat
     rgb = @round( { r:r, g:g, b:b }, 255 * bright )
-    console.log( "Vis.rgbHmi()", { rgb:rgb, h:h, S:S, I:I } ) if @debug
+    console.log( "Vis.rgbHmi()", { rgb:rgb, h:h, S:look, I:I } ) if @debug
     rgb
 
   # From chroma.js
@@ -347,6 +351,23 @@ class Vis extends Type
       else
         console.log( 'Vis.hue() unknown pageKey', pageKey )
         0
+        
+  lookUpSat:( sat ) =>
+    len = @distribution10s.length
+    idx = @distribution10s.indexOf(sat)
+    val = if 0 <= idx and idx < len then @distributionPri[idx] else 100
+    console.log( "Vis.lookUpSat(sat)", { sat:sat, idx:idx, val:val } )
+    val
+
+  even:( val ) =>
+    val
+
+# Create a distributed array of values
+  #  by default it returns [0,10,20,30,40,50,60,70,80,90,100] a closed range of 11 values
+  distribution:( func=@even, interval=10, min=0, max=100 ) =>
+    array = []
+    array.push( func(val) ) for val in [min..max] by interval
+    array
 
   # --- Degrees and Radians ---
   #  The svg functions deal with the svg convention where the y 90 degree axis points down
