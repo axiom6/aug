@@ -41,10 +41,13 @@ import XZGrid from '../coords/XZGrid.js';
 
 import YZGrid from '../coords/YZGrid.js';
 
+import Surface from './Surface.js';
+
 Content = class Content {
   constructor(main) {
     this.main = main;
     this.klass = this.constructor.name;
+    this.surface = new Surface(this.main);
     if (this.main.opts.content != null) {
       this.opts = this.main.opts.content;
       if ((this.opts.plane != null) && this.opts.plane) {
@@ -76,6 +79,9 @@ Content = class Content {
       }
       if ((this.opts['hues'] != null) && this.opts['hues']) {
         this.drawHues(this.main.pageKey, true);
+      }
+      if ((this.opts['surface'] != null) && this.opts['surface']) {
+        this.surface.parametric();
       }
     } else {
       this.grids = this.drawGrids();

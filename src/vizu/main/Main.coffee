@@ -70,6 +70,11 @@ class Main
       @scene.add(     object3D )
     return
 
+  removeFromScene:( object3Ds... ) ->
+    for object3D in object3Ds
+      @scene.remove(  object3D )
+    return
+
   resizeScreen:() =>
     @screenWidth  = @elem['clientWidth']
     @screenHeight = @elem['clientHeight']

@@ -212,6 +212,11 @@ Vizu = (function() {
   // This does not make sense
   Vizu.pages = {
     Main: {
+      Surface: {
+        title: 'Surface',
+        key: 'Surface',
+        show: false
+      },
       Grids: {
         title: 'Grids',
         key: 'Grids',

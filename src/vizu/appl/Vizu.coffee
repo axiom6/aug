@@ -114,11 +114,12 @@ class Vizu
   # This does not make sense
   Vizu.pages = {
     Main: {
-      Grids: { title:'Grids',  key:'Grids',  show:false },
-      Rgb:   { title:'Rgb',    key:'Rgb',    show:false },
-      Face:  { title:'Face',   key:'Face',   show:false },
-      Ysv:   { title:'Ysv',    key:'Ysv',    show:false },
-      Hsv:   { title:'Hsv',    key:'Hsv',    show:false } },
+      Surface: { title:'Surface',  key:'Surface',  show:false },
+      Grids:   { title:'Grids',    key:'Grids',    show:false },
+      Rgb:     { title:'Rgb',      key:'Rgb',      show:false },
+      Face:    { title:'Face',     key:'Face',     show:false },
+      Ysv:     { title:'Ysv',      key:'Ysv',      show:false },
+      Hsv:     { title:'Hsv',      key:'Hsv',      show:false } },
     Hues: {
       Red:     { title:'Red',     key:'Red',     show:false },
       Orange:  { title:'Orange',  key:'Orange',  show:false },

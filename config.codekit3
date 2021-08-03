@@ -53,12 +53,6 @@
       "oAP" : "\/aug.iml",
       "oF" : 1
     },
-    "\/build" : {
-      "ft" : 65536,
-      "oA" : 1,
-      "oAP" : "\/build",
-      "oF" : 0
-    },
     "\/css\/base" : {
       "ft" : 65536,
       "oA" : 1,
@@ -427,14 +421,6 @@
       "ft" : 65536,
       "oA" : 1,
       "oAP" : "\/dist",
-      "oF" : 0
-    },
-    "\/firebase-debug.log" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/firebase-debug.log",
       "oF" : 0
     },
     "\/firebase.json" : {
@@ -4668,12 +4654,12 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/src\/vizu\/content\/Surfaces.coffee" : {
+    "\/src\/vizu\/content\/Surface.coffee" : {
       "ft" : 32,
       "ma" : 1,
       "mi" : 0,
       "oA" : 0,
-      "oAP" : "\/pub\/vizu\/content\/Surfaces.js",
+      "oAP" : "\/pub\/vizu\/content\/Surface.js",
       "oF" : 0,
       "oS" : 1,
       "sC" : 0,

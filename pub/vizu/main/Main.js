@@ -107,6 +107,14 @@ Main = class Main {
     }
   }
 
+  removeFromScene(...object3Ds) {
+    var i, len, object3D;
+    for (i = 0, len = object3Ds.length; i < len; i++) {
+      object3D = object3Ds[i];
+      this.scene.remove(object3D);
+    }
+  }
+
   resizeScreen() {
     var obj;
     this.screenWidth = this.elem['clientWidth'];

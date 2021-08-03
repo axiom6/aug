@@ -4,19 +4,21 @@ import { BoxGeometry, Mesh, BufferGeometry, SphereGeometry, Material, AxesHelper
          PointsMaterial, MeshStandardMaterial, Group, DoubleSide, FrontSide, InstancedMesh,
          MeshBasicMaterial,  Matrix4 } from 'three'  # MeshLambertMaterial,
 
-import {vis}  from '../../../lib/pub/draw/Vis.js'
-import XAxis  from '../coords/XAxis.js'
-import YAxis  from '../coords/YAxis.js'
-import ZAxis  from '../coords/ZAxis.js'
-import Plane  from '../coords/Plane.js'
-import XYGrid from '../coords/XYGrid.js'
-import XZGrid from '../coords/XZGrid.js'
-import YZGrid from '../coords/YZGrid.js'
+import {vis}   from '../../../lib/pub/draw/Vis.js'
+import XAxis   from '../coords/XAxis.js'
+import YAxis   from '../coords/YAxis.js'
+import ZAxis   from '../coords/ZAxis.js'
+import Plane   from '../coords/Plane.js'
+import XYGrid  from '../coords/XYGrid.js'
+import XZGrid  from '../coords/XZGrid.js'
+import YZGrid  from '../coords/YZGrid.js'
+import Surface from './Surface.js'
 
 class Content
 
   constructor:( @main ) ->
     @klass        = @constructor.name
+    @surface      = new Surface( @main )
     if @main.opts.content?
       @opts       = @main.opts.content
       @plane      = @drawPlane()            if @opts.plane?         and @opts.plane
@@ -29,6 +31,7 @@ class Content
       @drawHsv( true  )                     if @opts['ysv']?        and @opts['ysv']
       @drawHsv( false )                     if @opts['hsv']?        and @opts['hsv']
       @drawHues( @main.pageKey, true  )     if @opts['hues']?       and @opts['hues']
+      @surface.parametric()                 if @opts['surface']?    and @opts['surface']
     else
       @grids      = @drawGrids()
       @axes       = @drawAxes()
@@ -203,7 +206,6 @@ class Content
     @main.addToScene( group )
     @main.log( 'Content.drawHues()', { i:i, count:count } )
     return
-
 
   drawPoints:( positions, colors, radius, group ) ->
     geometry = new BufferGeometry()
