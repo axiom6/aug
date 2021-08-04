@@ -29,7 +29,7 @@ Lights = class Lights {
       case 'Ambient':
         return this.ambient(opts);
       case 'SpotLight':
-        return this.spotLight(opts);
+        return this.spotlight(opts);
       case 'Directional':
         return this.directional(opts, cc);
       case 'Hemisphere':

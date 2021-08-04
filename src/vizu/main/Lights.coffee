@@ -16,7 +16,7 @@ class Lights
     return @ambient( opts ) if not opts? and not opts.light?
     switch opts.light
       when 'Ambient'      then @ambient(      opts     )
-      when 'SpotLight'    then @spotLight(    opts     )
+      when 'SpotLight'    then @spotlight(    opts     )
       when 'Directional'  then @directional(  opts, cc )
       when 'Hemisphere'   then @hemisphere(            )
       when 'DirectColor'  then @directColor(  opts, cc )
