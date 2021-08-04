@@ -41,52 +41,103 @@ Surface = class Surface {
     });
   }
 
+  drawHsv() {
+    var color, count, geometry, group, hue, hueInc, i, inMesh, j, k, material, matrix, radius, ref, ref1, rgb, sat, satInc, sc, val, x, y, z;
+    radius = 8;
+    i = 0;
+    sc = 1.0 / 255.0;
+    hueInc = 30;
+    satInc = 10;
+    count = (360 / hueInc) * (1 + 100 / satInc);
+    geometry = new THREE.SphereGeometry(radius, 16, 16);
+    material = new THREE.MeshBasicMaterial({
+      transparent: false,
+      side: THREE.DoubleSide
+    });
+    inMesh = new THREE.InstancedMesh(geometry, material, count);
+    matrix = new THREE.Matrix4();
+    color = new THREE.Color();
+    group = new THREE.Group();
+    val = 100;
+    sc = 1.0 / 255.0;
+    for (hue = j = 0, ref = hueInc; ref !== 0 && (ref > 0 ? j < 360 : j > 360); hue = j += ref) {
+      for (sat = k = 0, ref1 = satInc; ref1 !== 0 && (ref1 > 0 ? k <= 100 : k >= 100); sat = k += ref1) {
+        x = 2.5 * vis.cos(hue) * sat;
+        z = 2.5 * vis.sin(-hue) * sat;
+        y = 125 + 125 * vis.sin(4 * hue);
+        matrix.setPosition(x, y, z);
+        rgb = vis.rgb([hue, sat, val, "HMIR"]);
+        color.setRGB(rgb.r * sc, rgb.g * sc, rgb.b * sc);
+        inMesh.setMatrixAt(i, matrix);
+        inMesh.setColorAt(i, color);
+        // console.log( 'Content.drawYsv()', { h:h, s:s, v:v, rgb:rgb } )
+        i++;
+      }
+    }
+    group.add(inMesh);
+    this.main.addToScene(group);
+    this.main.log('Surface.drawHsv()', {
+      i: i,
+      count: count
+    });
+  }
+
+  genHsvsDisc(hueInc, satInc) {
+    var hsvs, hue, j, k, ref, ref1, sat, xyzs;
+    hsvs = [];
+    xyzs = [];
+    for (hue = j = 0, ref = hueInc; ref !== 0 && (ref > 0 ? j < 360 : j > 360); hue = j += ref) {
+      for (sat = k = 0, ref1 = satInc; ref1 !== 0 && (ref1 > 0 ? k <= 100 : k >= 100); sat = k += ref1) {
+        hsvs.push([hue, sat, 0, "HMIR"]);
+        xyzs.push(vis.cos(hue) * sat, vis.sin(hue) * sat, 0);
+      }
+    }
+    return hsvs;
+  }
+
   applyColor(geometry) {
-    var color, face, faceIndices, faces, hue, i, j, k, l, m, numberOfSides, point, ref, ref1, ref2, vertexIndex, vertices, zMax, zMin, zRange;
+    var color, colors, hsv, i, j, ref, rgb, sc, vertObj, vertices;
     geometry.computeBoundingBox();
-    zMin = geometry.boundingBox.min.z;
-    zMax = geometry.boundingBox.max.z;
-    vertices = geometry.getAttribute("position");
-    faces = geometry.getAttribute("normal");
+    vertObj = geometry.getAttribute("position");
+    // faceObj  = geometry.getAttribute("normal")
+    vertices = vertObj.array;
+    // faces  = faceObj.array
+    // colorObj = geometry.getAttribute("color")
+    // colors   = colorObj.array
+    colors = [];
     console.log("Surface.applyColor()", {
-      vlen: vertices.count,
-      flen: faces.count,
+      vlen: vertObj.count,
       vertices: vertices
     });
-    zRange = zMax - zMin;
-    faceIndices = [
-      'a',
-      'b',
-      'c',
-      'd' // faces are indexed using characters
-    ];
+    // faceIndices = ['a','b','c','d']                   # faces are indexed using characters
+    sc = 1.0 / 255.0;
 // first, assign colors to vertices as desired
-    for (i = k = 0, ref = vertices.length; (0 <= ref ? k < ref : k > ref); i = 0 <= ref ? ++k : --k) {
-      point = vertices[i];
-      color = new THREE.Color(0x0000ff);
-      hue = 0.7 * (zMax - point.z) / zRange;
-      color.setHSL(hue, 1, 0.5);
-      geometry.colors[i] = color; // use this array for convenience
-    }
-
-    // copy the colors as necessary to the face's vertexColors array.
-    for (i = l = 0, ref1 = faces.length; (0 <= ref1 ? l < ref1 : l > ref1); i = 0 <= ref1 ? ++l : --l) {
-      face = faces[i];
-      numberOfSides = 3; // ( face instanceof THREE.Face ) ? 3 : 4
-      for (j = m = 0, ref2 = numberOfSides; (0 <= ref2 ? m < ref2 : m > ref2); j = 0 <= ref2 ? ++m : --m) {
-        vertexIndex = face[faceIndices[j]];
-        face.vertexColors[j] = geometry.colors[vertexIndex];
-      }
+    for (i = j = 0, ref = vertices.length; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
+      hsv = vertices[i].slice();
+      hsv.push("HMIR");
+      rgb = vis.rgb(hsv);
+      color.setRGB(rgb.r * sc, rgb.g * sc, rgb.b * sc);
+      color = new THREE.Color(rgb.r, rgb.g, rgb.b);
+      colors.push(color);
     }
   }
 
+  // copy the colors as necessary to the face's vertexColors array.
+  /*
+  for i in [0...faces.length]
+    face = faces[i]
+    numberOfSides = 3                  # ( face instanceof THREE.Face ) ? 3 : 4
+    for j in [0...numberOfSides]
+      vertexIndex = face[ faceIndices[j] ]
+      face.vertexColors[j] = colors[vertexIndex]  # Not right yet
+  */
   rgbs(inMesh, nx, ny, inc) {
-    var color, i, k, l, matrix, ref, ref1, ref2, ref3, x, y, z;
+    var color, i, j, k, matrix, ref, ref1, ref2, ref3, x, y, z;
     i = 0;
     matrix = new THREE.Matrix4();
     color = new THREE.Color();
-    for (x = k = 0, ref = nx, ref1 = inc; ref1 !== 0 && (ref1 > 0 ? k <= ref : k >= ref); x = k += ref1) {
-      for (y = l = 0, ref2 = ny, ref3 = inc; ref3 !== 0 && (ref3 > 0 ? l <= ref2 : l >= ref2); y = l += ref3) {
+    for (x = j = 0, ref = nx, ref1 = inc; ref1 !== 0 && (ref1 > 0 ? j <= ref : j >= ref); x = j += ref1) {
+      for (y = k = 0, ref2 = ny, ref3 = inc; ref3 !== 0 && (ref3 > 0 ? k <= ref2 : k >= ref2); y = k += ref3) {
         z = (x + y) * 0.5;
         matrix.setPosition(x, y, z);
         color.setRGB(x, y, z); // Just a place holder

@@ -81,7 +81,7 @@ Content = class Content {
         this.drawHues(this.main.pageKey, true);
       }
       if ((this.opts['surface'] != null) && this.opts['surface']) {
-        this.surface.parametric();
+        this.surface.drawHsv();
       }
     } else {
       this.grids = this.drawGrids();

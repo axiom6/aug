@@ -29,29 +29,76 @@ class Surface
     @main.log( 'Surface.parametric()', { i:i, count:count } )
     return
 
+  drawHsv:() ->
+    radius   = 8
+    i        = 0
+    sc       = 1.0 / 255.0
+    hueInc   = 30
+    satInc   = 10
+    count    = (360/hueInc)*(1+100/satInc)
+    geometry = new THREE.SphereGeometry( radius, 16, 16 )
+    material = new THREE.MeshBasicMaterial( { transparent:false, side:THREE.DoubleSide } )
+    inMesh   = new THREE.InstancedMesh( geometry, material, count )
+    matrix   = new THREE.Matrix4()
+    color    = new THREE.Color()
+    group    = new THREE.Group()
+    val      = 100
+    sc       = 1.0 / 255.0
+    for   hue in [0...360] by hueInc
+      for sat in [0..100]  by satInc
+        x = 2.5 * vis.cos( hue) * sat
+        z = 2.5 * vis.sin(-hue) * sat
+        y = 125 + 125*vis.sin(4*hue)
+        matrix.setPosition( x, y, z )
+        rgb = vis.rgb( [hue,sat,val,"HMIR"] )
+        color.setRGB( rgb.r*sc, rgb.g*sc, rgb.b*sc )
+        inMesh.setMatrixAt( i, matrix )
+        inMesh.setColorAt(  i, color  )
+        # console.log( 'Content.drawYsv()', { h:h, s:s, v:v, rgb:rgb } )
+        i++
+    group.add( inMesh )
+    @main.addToScene( group )
+    @main.log( 'Surface.drawHsv()', { i:i, count:count } )
+    return
+
+  genHsvsDisc:( hueInc, satInc ) ->
+    hsvs = []
+    xyzs = []
+    for     hue in [0...360] by hueInc
+      for   sat in [0..100]  by satInc
+        hsvs.push([hue,sat,0,"HMIR"])
+        xyzs.push(vis.cos(hue)*sat,vis.sin(hue)*sat,0)
+    hsvs
+
   applyColor:( geometry ) ->
     geometry.computeBoundingBox()
-    zMin     = geometry.boundingBox.min.z
-    zMax     = geometry.boundingBox.max.z
-    vertices = geometry.getAttribute("position")
-    faces    = geometry.getAttribute("normal")
-    console.log( "Surface.applyColor()", { vlen:vertices.count, flen:faces.count, vertices:vertices } )
-    zRange = zMax - zMin
-    faceIndices = ['a','b','c','d']                   # faces are indexed using characters
+    vertObj  = geometry.getAttribute("position")
+    # faceObj  = geometry.getAttribute("normal")
+    vertices = vertObj.array
+    # faces  = faceObj.array
+    # colorObj = geometry.getAttribute("color")
+    # colors   = colorObj.array
+    colors     = []
+    console.log( "Surface.applyColor()", { vlen:vertObj.count, vertices:vertices } )
+    # faceIndices = ['a','b','c','d']                   # faces are indexed using characters
+    sc = 1.0 / 255.0
     for i in [0...vertices.length]           # first, assign colors to vertices as desired
-      point = vertices[i]
-      color = new THREE.Color( 0x0000ff )
-      hue   = 0.7 * ( zMax - point.z ) / zRange
-      color.setHSL( hue, 1, 0.5 )
-      geometry.colors[i] = color                      # use this array for convenience
+      hsv  = vertices[i].slice()
+      hsv.push("HMIR")
+      rgb = vis.rgb( hsv )
+      color.setRGB( rgb.r*sc, rgb.g*sc, rgb.b*sc )
+      color = new THREE.Color(  rgb.r,  rgb.g,  rgb.b )
+      colors.push( color )
 
   	# copy the colors as necessary to the face's vertexColors array.
+    ###
     for i in [0...faces.length]
       face = faces[i]
       numberOfSides = 3                  # ( face instanceof THREE.Face ) ? 3 : 4
       for j in [0...numberOfSides]
         vertexIndex = face[ faceIndices[j] ]
-        face.vertexColors[j] = geometry.colors[vertexIndex]
+        face.vertexColors[j] = colors[vertexIndex]  # Not right yet
+    ###
     return
 
   rgbs:( inMesh, nx, ny, inc ) ->
