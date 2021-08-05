@@ -31,7 +31,7 @@ class Content
       @drawHsv( true  )                     if @opts['ysv']?        and @opts['ysv']
       @drawHsv( false )                     if @opts['hsv']?        and @opts['hsv']
       @drawHues( @main.pageKey, true  )     if @opts['hues']?       and @opts['hues']
-      @surface.drawHsv()                 if @opts['surface']?    and @opts['surface']
+      @surface.drawHsv()                    if @opts['surface']?    and @opts['surface']
     else
       @grids      = @drawGrids()
       @axes       = @drawAxes()

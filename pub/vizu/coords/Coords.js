@@ -70,7 +70,7 @@ Coords = class Coords {
 
   drawHelper() {
     var axesHelper;
-    axesHelper = new AxesHelper(20);
+    axesHelper = new AxesHelper(250);
     this.main.addToScene(axesHelper);
     return axesHelper;
   }

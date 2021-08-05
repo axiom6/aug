@@ -30,44 +30,149 @@ class Surface
     return
 
   drawHsv:() ->
-    radius   = 8
-    i        = 0
+    group    = new THREE.Group()
+    valFun   = ( hue, sat ) -> 100
+    @toGeom( valFun, group )
+    @main.addToScene( group )
+    @main.log( 'Surface.drawHsv()', {} )
+    return
+
+  toGeom:( valFun, group ) ->
+    colors   = []
+    vertices = []
+    normals  = []
+    # indices  = []
     sc       = 1.0 / 255.0
+    hueIdx   = 0
+    vertices.push( 0, 0, 0 )
+    for     hueIdx in [0...12]
+      # for   satIdx in [0..10]
+        satIdx = 10
+        hue = hueIdx * 30
+        sat = satIdx * 10
+        val = valFun(hue,sat)
+        rgb = vis.rgb( [ hue, sat, val, "HMIR" ] )
+        colors.push( rgb.r*sc, rgb.g*sc, rgb.b*sc )
+        vertices.push( sat*vis.cos(hue)*2.5, 0, sat*vis.sin(hue)*2.5 )
+        normals.push( 0, 1, 0 ) # Good only for a flat surface
+    console.log( "Surface vertices", vertices )
+    indices = @createIndices()
+
+    geom = new THREE.BufferGeometry()
+    geom.setIndex( indices )
+    geom.setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) )
+    geom.setAttribute( 'normal',   new THREE.Float32BufferAttribute( normals,  3 ) )
+    geom.setAttribute( 'color',    new THREE.Float32BufferAttribute( colors,   3 ) )
+    mats = new THREE.MeshBasicMaterial( { side:THREE.DoubleSide, vertexColors:true } )
+    mesh = new THREE.Mesh( geom, mats )
+    group.add( mesh )
+    return
+
+  createIndices:() ->
+    indices = []
+    a = 0
+    for   hueIdx in [0...10]
+      b = hueIdx+1
+      c = if hueIdx < 11 then hueIdx+2 else 1
+      indices.push( a, b, c )
+    console.log( "Surface.addIndices()", indices )
+    indices
+
+  addIndices1:( i, j, n, indices ) ->
+    a = i * ( n + 1 ) + ( j + 1 )
+    b = i * ( n + 1 ) + j
+    c = ( i + 1 ) * ( n + 1 ) + j
+    d = ( i + 1 ) * ( n + 1 ) + ( j + 1 )
+
+    # generate two faces (triangles) per iteration
+    indices.push( a, b, d ); # face one
+    indices.push( b, c, d ); # face two
+    return
+
+  toFace:( indice, color, group ) ->
+    console.log( "Surface.toFace()", indice )
+    sc   = 1.0 / 255.0
+    rgb  = vis.rgb( [0,100,100,"HMIR"] )
+    color.setRGB( rgb.r*sc, rgb.g*sc, rgb.b*sc )
+    face = new THREE.BufferGeometry().setFromPoints( indice )
+    mat  = new THREE.MeshBasicMaterial( { color:color, transparent:false, side:THREE.FrontSide } )
+    mesh = new THREE.Mesh( face, mat )
+    group.add( mesh )
+    return
+    
+  ###
+  console.log( "Surface.toGeom()", vertices )
+  toFace:( v1, v2, v3, color, group ) ->
+    console.log( "Surface.toFace()", { v1:v1, v2:v2, v3:v3 } )
+    sc   = 1.0 / 255.0
+    rgb  = vis.rgb( [0,100,100,"HMIR"] )
+    color.setRGB( rgb.r*sc, rgb.g*sc, rgb.b*sc )
+    face = new THREE.BufferGeometry().setFromPoints( [v1,v2,v3] )
+    mat  = new THREE.MeshBasicMaterial( { color:color, transparent:false, side:THREE.FrontSide } )
+    mesh = new THREE.Mesh( face, mat )
+    group.add( mesh )
+    return
+
+    positions = geometry.getAttribute("position")
+    vertices  = []
+    for i in [0...positions.count]
+      vertex = new THREE.Vector3()
+      vertex.fromBufferAttribute( positions, i );
+      vertices.push( vertex )
+    pointg = new THREE.BufferGeometry().setFromPoints( vertices )
+    pointm = new THREE.PointsMaterial( { color:0x0000FF, size:10 } )
+    points = new THREE.Points( pointg, pointm )
+
+      for   hue in [0...360] by hueInc
+      for sat in [0..100]  by satInc
+        rgb = vis.rgb( [hue,sat,100,"HMIR"] )
+        color.setRGB( rgb.r*sc, rgb.g*sc, rgb.b*sc )
+        hsv.setColor( color )
+  hueInc   = 30
+  satInc   = 10
+  valFunc  = ( hue, sat ) ->
+  vis.noop(  hue )
+  sat
+  hsvs     = @genHsvs( hueInc, satInc, valFunc )
+  color    = new THREE.Color()
+  color.setRGB( 0.5, 0.5, 0.5 )
+  geometry.setColor( color )
+  sc       = 1.0 / 255.0
+  # faces    = geometry['convexHull'].faces
+  for hsv in hsvs
+    rgb = vis.rgb( [hsv[0],hsv[1],hsv[2],"HMIR"] )
+    color.setRGB( rgb.r*sc, rgb.g*sc, rgb.b*sc )
+    hsv.setColor( color )
+  ###
+
+  drawHsv2:() ->
     hueInc   = 30
+    hunNum   = 360 / hueInc
     satInc   = 10
-    count    = (360/hueInc)*(1+100/satInc)
-    geometry = new THREE.SphereGeometry( radius, 16, 16 )
-    material = new THREE.MeshBasicMaterial( { transparent:false, side:THREE.DoubleSide } )
+    satNum   = 100 / satInc + 1
+
+    geometry = new THREE.ParametricGeometry( @hmiWave, hunNum, satNum )
+    material = new THREE.MeshBasicMaterial( { color:0x808080, transparent:false, side:THREE.DoubleSide } )
     inMesh   = new THREE.InstancedMesh( geometry, material, count )
     matrix   = new THREE.Matrix4()
-    color    = new THREE.Color()
     group    = new THREE.Group()
-    val      = 100
-    sc       = 1.0 / 255.0
-    for   hue in [0...360] by hueInc
-      for sat in [0..100]  by satInc
-        x = 2.5 * vis.cos( hue) * sat
-        z = 2.5 * vis.sin(-hue) * sat
-        y = 125 + 125*vis.sin(4*hue)
-        matrix.setPosition( x, y, z )
-        rgb = vis.rgb( [hue,sat,val,"HMIR"] )
-        color.setRGB( rgb.r*sc, rgb.g*sc, rgb.b*sc )
-        inMesh.setMatrixAt( i, matrix )
-        inMesh.setColorAt(  i, color  )
-        # console.log( 'Content.drawYsv()', { h:h, s:s, v:v, rgb:rgb } )
-        i++
+    matrix.setPosition( 0, 0, 0 )
+    inMesh.setMatrixAt( 0, matrix )
+    indices = geometry.getIndex()
+    console.log( "Surface.drawHsv()", indices )
+    # for i in [0...indices.length]
+    #  @toFace( indices[i], color, group )
     group.add( inMesh )
     @main.addToScene( group )
     @main.log( 'Surface.drawHsv()', { i:i, count:count } )
     return
 
-  genHsvsDisc:( hueInc, satInc ) ->
+  # xyzs.push(vis.cos(hue)*sat,vis.sin(hue)*sat,0)
+  genHsvs:( hueInc, satInc, valFunc ) ->
     hsvs = []
-    xyzs = []
     for     hue in [0...360] by hueInc
       for   sat in [0..100]  by satInc
-        hsvs.push([hue,sat,0,"HMIR"])
-        xyzs.push(vis.cos(hue)*sat,vis.sin(hue)*sat,0)
+        hsvs.push(new THREE.Vector3(hue,sat,valFunc(hue,sat)))
     hsvs
 
   applyColor:( geometry ) ->
@@ -143,11 +248,13 @@ class Surface
 
   # val 0.25*Math.sin( 12*x + vis.time*0.3 ) + 0.25*Math.sin( 12*y + vis.time*0.3 )
   hmiWave:( u, v, pt ) ->
-    hue  = u * 30
-    sat  = v * 10
+    hue  = u * 360
+    sat  = v * 100
+    val  = 50
     x    = vis.cos(hue) * sat
-    y    = vis.sin(hue) * sat
-    z    = 50 * 25*vis.sin( 12*x ) * 25*vis.sin( 12*y )
+    z    = vis.sin(hue) * sat
+    y    = val # * ( 1.0 + vis.sin(16*hue) )
+    # console.log( "Surface.hmiWave()", { uv:[u,v], hsv:[hue,sat,val], xyz:[x,y,z] } )
     pt.set( x, y, z )
 
 export default Surface

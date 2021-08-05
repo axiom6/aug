@@ -31,7 +31,7 @@ class Coords
     console.log( @klass+'()', @ )
 
   drawHelper:() ->
-    axesHelper = new AxesHelper( 20 );
+    axesHelper = new AxesHelper( 250 );
     @main.addToScene( axesHelper )
     axesHelper
 
@@ -109,7 +109,6 @@ class Coords
     point    = new Points( geometry, material )
     @main.addToScene( point )
     point
-
 
   drawLine:( x1, y1, z1, x2, y2, z2, color, group ) ->
     points = [];
