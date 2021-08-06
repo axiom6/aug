@@ -43,20 +43,17 @@ class Surface
     normals  = []
     # indices  = []
     sc       = 1.0 / 255.0
-    hueIdx   = 0
-    vertices.push( 0, 0, 0 )
-    for     hueIdx in [0...12]
-      # for   satIdx in [0..10]
-        satIdx = 10
-        hue = hueIdx * 30
-        sat = satIdx * 10
+    nHue = 24
+    nSat = 11
+    for   hue in [0...360] by 15
+      for sat in [0..100]  by 10
         val = valFun(hue,sat)
         rgb = vis.rgb( [ hue, sat, val, "HMIR" ] )
         colors.push( rgb.r*sc, rgb.g*sc, rgb.b*sc )
-        vertices.push( sat*vis.cos(hue)*2.5, 0, sat*vis.sin(hue)*2.5 )
+        vertices.push( sat*vis.cos(-hue-90)*2.5, 0, sat*vis.sin(-hue-90)*2.5 )
         normals.push( 0, 1, 0 ) # Good only for a flat surface
     console.log( "Surface vertices", vertices )
-    indices = @createIndices()
+    indices = @createIndices( nHue, nSat, valFun, colors, vertices, normals )
 
     geom = new THREE.BufferGeometry()
     geom.setIndex( indices )
@@ -68,13 +65,52 @@ class Surface
     group.add( mesh )
     return
 
-  createIndices:() ->
+  createIndices:( nHue, nSat, valFun, colors, vertices, normals ) ->
+    sc      = 1.0 / 255.0
     indices = []
-    a = 0
-    for   hueIdx in [0...10]
-      b = hueIdx+1
-      c = if hueIdx < 11 then hueIdx+2 else 1
-      indices.push( a, b, c )
+    vidx = vertices.length / 3
+    vertices.push( 1, 1, 1 )   # White
+    vertices.push( 0, 0, 0 )
+    normals. push( 0, 1, 0 )
+    for   ii in [0...nHue]
+      i = if ii < nHue-1 then ii else 0
+      indices.push( vidx, i*nSat, i*(nSat+1) )
+      for j in [1...nSat-1]
+        ce =      vidx
+        sw = i *  nSat    + j
+        se = i *  nSat    + j + 1
+        nw = i * (nSat+1) + j
+        ne = i * (nSat+1) + j + 1
+        indices.push( ce, sw, nw )
+        indices.push( ce, nw, ne )
+        indices.push( ce, ne, se )
+        indices.push( ce, se, sw )
+        val = valFun(hue,sat)
+        hue = 7.5 * ( i + (i+1) )
+        sat = 5.0 * ( j + (j+1) )
+        val = valFun( sat )
+        rgb = vis.rgb( [ hue, sat, val, "HMIR" ] )
+        colors.push( rgb.r*sc, rgb.g*sc, rgb.b*sc )
+        vertices = @ave( sw, nw, ne, se, vertices )
+        normals.push( 0, 1, 0 )
+        vidx++
+        console.log( "Surface.addIndices One()",
+          { i:i, j:j, ce:ce, sw:sw, nw:nw, ne:ne, se:se, vidx:vidx, Hue:hue, sat:sat, val:val } )
+    console.log( "Surface.addIndices() Teo", indices )
+    indices
+
+  ave:( sw, nw, ne, se, vertices ) ->
+    cc = ( i ) ->
+      0.25 * ( vertices[3*sw+i] + vertices[3*nw+i] + vertices[3*ne+i] + vertices[3*se+i] )
+    vertices.push( cc(0), cc(1), cc(2) )
+    vertices
+
+  createIndices1:( nHue ) ->
+    indices = []
+    for   hueIdx in [0...nHue]
+      a = hueIdx
+      b = if hueIdx < nHue-1 then hueIdx+1  else 0
+      indices.push( 0, a+1, b+1 )
     console.log( "Surface.addIndices()", indices )
     indices
 

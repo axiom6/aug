@@ -53,27 +53,25 @@ Surface = class Surface {
   }
 
   toGeom(valFun, group) {
-    var colors, geom, hue, hueIdx, indices, k, mats, mesh, normals, rgb, sat, satIdx, sc, val, vertices;
+    var colors, geom, hue, indices, k, l, mats, mesh, nHue, nSat, normals, rgb, sat, sc, val, vertices;
     colors = [];
     vertices = [];
     normals = [];
     // indices  = []
     sc = 1.0 / 255.0;
-    hueIdx = 0;
-    vertices.push(0, 0, 0);
-    for (hueIdx = k = 0; k < 12; hueIdx = ++k) {
-      // for   satIdx in [0..10]
-      satIdx = 10;
-      hue = hueIdx * 30;
-      sat = satIdx * 10;
-      val = valFun(hue, sat);
-      rgb = vis.rgb([hue, sat, val, "HMIR"]);
-      colors.push(rgb.r * sc, rgb.g * sc, rgb.b * sc);
-      vertices.push(sat * vis.cos(hue) * 2.5, 0, sat * vis.sin(hue) * 2.5);
-      normals.push(0, 1, 0); // Good only for a flat surface
+    nHue = 24;
+    nSat = 11;
+    for (hue = k = 0; k < 360; hue = k += 15) {
+      for (sat = l = 0; l <= 100; sat = l += 10) {
+        val = valFun(hue, sat);
+        rgb = vis.rgb([hue, sat, val, "HMIR"]);
+        colors.push(rgb.r * sc, rgb.g * sc, rgb.b * sc);
+        vertices.push(sat * vis.cos(-hue - 90) * 2.5, 0, sat * vis.sin(-hue - 90) * 2.5);
+        normals.push(0, 1, 0); // Good only for a flat surface
+      }
     }
     console.log("Surface vertices", vertices);
-    indices = this.createIndices();
+    indices = this.createIndices(nHue, nSat, valFun, colors, vertices, normals);
     geom = new THREE.BufferGeometry();
     geom.setIndex(indices);
     geom.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
@@ -87,14 +85,71 @@ Surface = class Surface {
     group.add(mesh);
   }
 
-  createIndices() {
-    var a, b, c, hueIdx, indices, k;
+  createIndices(nHue, nSat, valFun, colors, vertices, normals) {
+    var ce, hue, i, ii, indices, j, k, l, ne, nw, ref, ref1, rgb, sat, sc, se, sw, val, vidx;
+    sc = 1.0 / 255.0;
     indices = [];
-    a = 0;
-    for (hueIdx = k = 0; k < 10; hueIdx = ++k) {
-      b = hueIdx + 1;
-      c = hueIdx < 11 ? hueIdx + 2 : 1;
-      indices.push(a, b, c);
+    vidx = vertices.length / 3;
+    vertices.push(1, 1, 1); // White
+    vertices.push(0, 0, 0);
+    normals.push(0, 1, 0);
+    for (ii = k = 0, ref = nHue; (0 <= ref ? k < ref : k > ref); ii = 0 <= ref ? ++k : --k) {
+      i = ii < nHue - 1 ? ii : 0;
+      indices.push(vidx, i * nSat, i * (nSat + 1));
+      for (j = l = 1, ref1 = nSat - 1; (1 <= ref1 ? l < ref1 : l > ref1); j = 1 <= ref1 ? ++l : --l) {
+        ce = vidx;
+        sw = i * nSat + j;
+        se = i * nSat + j + 1;
+        nw = i * (nSat + 1) + j;
+        ne = i * (nSat + 1) + j + 1;
+        indices.push(ce, sw, nw);
+        indices.push(ce, nw, ne);
+        indices.push(ce, ne, se);
+        indices.push(ce, se, sw);
+        val = valFun(hue, sat);
+        hue = 7.5 * (i + (i + 1));
+        sat = 5.0 * (j + (j + 1));
+        val = valFun(sat);
+        rgb = vis.rgb([hue, sat, val, "HMIR"]);
+        colors.push(rgb.r * sc, rgb.g * sc, rgb.b * sc);
+        vertices = this.ave(sw, nw, ne, se, vertices);
+        normals.push(0, 1, 0);
+        vidx++;
+        console.log("Surface.addIndices One()", {
+          i: i,
+          j: j,
+          ce: ce,
+          sw: sw,
+          nw: nw,
+          ne: ne,
+          se: se,
+          vidx: vidx,
+          Hue: hue,
+          sat: sat,
+          val: val
+        });
+      }
+    }
+    console.log("Surface.addIndices() Teo", indices);
+    return indices;
+  }
+
+  ave(sw, nw, ne, se, vertices) {
+    var cc;
+    cc = function(i) {
+      return 0.25 * (vertices[3 * sw + i] + vertices[3 * nw + i] + vertices[3 * ne + i] + vertices[3 * se + i]);
+    };
+    vertices.push(cc(0), cc(1), cc(2));
+    return vertices;
+  }
+
+  createIndices1(nHue) {
+    var a, b, hueIdx, indices, k, ref;
+    indices = [];
+    for (hueIdx = k = 0, ref = nHue; (0 <= ref ? k < ref : k > ref); hueIdx = 0 <= ref ? ++k : --k) {
+      a = hueIdx;
+      b = hueIdx < nHue - 1 ? hueIdx + 1 : 0;
+      indices.push(0, a + 1, b + 1);
     }
     console.log("Surface.addIndices()", indices);
     return indices;
