@@ -1,15 +1,15 @@
 
-Debug One
-  1. Colors
-     x. Rect and Hues reactivity is a freak show
-     a. Rgb can exceed 255
-     b. Balance Muse colors. Reds too strong. Orange not shown
+Debug
+  1. Hsl Surface
+     a, Test
+     b. valFun range 0:100, sin funct time and ocillate
+     c. Fix coord sys for vertexs
+  2. Grid surface
+  3. Vis
      c. Vis.str hex output wrong
-     d. Test vis.rgbHsv()
      e. Fix padded and move for and text color
-     f. Adjust distrbutions with secondary along with primary
-     g. Ready for surface osiliations
-  1. Cube in Aug
+  4. Cube in Aug
+  5. Clean up zzz
 
 Features One
   1. Test

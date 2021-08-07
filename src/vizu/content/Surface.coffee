@@ -41,6 +41,7 @@ class Surface
     obj.colors.push( rgb.r*obj.sc, rgb.g*obj.sc, rgb.b*obj.sc )
     obj.vertices.push( x, y, z )
     obj.normals.push(  0, 1, 0 ) # Good only for a flat surface
+    console.log( "Surface.addVertex()", { hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
     return
 
   createBufferGeometry:( obj ) ->
@@ -49,6 +50,7 @@ class Surface
     geom.setAttribute( 'position', new THREE.Float32BufferAttribute( obj.vertices, 3 ) )
     geom.setAttribute( 'normal',   new THREE.Float32BufferAttribute( obj.normals,  3 ) )
     geom.setAttribute( 'color',    new THREE.Float32BufferAttribute( obj.colors,   3 ) )
+    #ire = new THREE.WireframeGeometry( geom )
     mats = new THREE.MeshBasicMaterial( { side:THREE.DoubleSide, vertexColors:true } )
     mesh = new THREE.Mesh( geom, mats )
     obj.group.add( mesh )
@@ -58,20 +60,21 @@ class Surface
   createIndices:( obj ) ->
     n0 = obj.satNum
     n1 = n0 + 1
-    n2 = n1 + 1
-    for hi in [0...obj.hueNum]
-      i = if hi < obj.hueNum-1 then hi else 0
+    for i in [0...obj.hueNum] by 2
+      n2 = if i < obj.hueNum-2 then n0 + 2 else 0
       oo = i * n0                       # Case where sat is zero
       se = i * n0 + 1
-      ce = i + n1 + 1
+      ce = i * n1 + 1
       ne = i * n2 + 1
       obj.indices.push( oo, ce, se )    # We only create 3 face indices
       obj.indices.push( oo, ce, ne )
       obj.indices.push( ce, se, ne )
+      console.log( "Surface.addIndices One()",
+        { i:i, j:1, oo:oo, se:se, ce:ce, ne:ne } )
       for j in [1...obj.satNum]
         sw = i * n0 + j
         se = i * n0 + j + 1
-        ce = i + n1
+        ce = i * n1
         nw = i * n2 + j
         ne = i * n2 + j + 1
         obj.indices.push( ce, sw, nw )
@@ -80,7 +83,7 @@ class Surface
         obj.indices.push( ce, se, sw )
         console.log( "Surface.addIndices One()",
           { i:i, j:j, ce:ce, sw:sw, nw:nw, ne:ne, se:se } )
-    console.log( "Surface.addIndices() Teo", obj.indices )
+    console.log( "Surface.addIndices() Two", obj.satNum*obj.hueNum/2 )
     return
 
   # xyzs.push(vis.cos(hue)*sat,vis.sin(hue)*sat,0)
