@@ -11,7 +11,7 @@ class Surface
   drawHsv:() ->
     obj         = {}
     obj.group   = new THREE.Group()
-    obj.valFun = ( hue, sat ) -> 100
+    obj.valFun = ( hue, sat ) -> 50
     @toGeom( obj )
     @main.addToScene( obj.group )
     @main.addToScene( obj.sphereGroup )
@@ -31,7 +31,7 @@ class Surface
     obj.huePri   = obj.hueInc * 2
     obj.satInc   = 100 / obj.satNum  # scount is actually obj.satInc + 1
     @initSpheres( obj )
-    @initFaces(   obj )
+    # @initFaces( obj )
     for   hue in [0...360] by obj.hueInc
       for rad in [0..100]  by obj.satInc
         sat = if hue % obj.huePri is 0 then rad else rad - obj.satInc / 2
@@ -71,7 +71,7 @@ class Surface
     obj.vertices.push( x, y, z )
     obj.normals.push(  0, 1, 0 ) # Good only for a flat surface
     @addSphere( obj, rgb, x, y, z )
-    console.log( "Surface.addVertex()", { hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
+    @main.log( "Surface.addVertex()", { hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
     return
 
   addSphere:( obj, rgb, x, y, z ) ->
@@ -88,10 +88,12 @@ class Surface
     geom.setAttribute( 'position', new THREE.Float32BufferAttribute( obj.vertices, 3 ) )
     geom.setAttribute( 'normal',   new THREE.Float32BufferAttribute( obj.normals,  3 ) )
     geom.setAttribute( 'color',    new THREE.Float32BufferAttribute( obj.colors,   3 ) )
-    #ire = new THREE.WireframeGeometry( geom )
-    mats = new THREE.MeshBasicMaterial( { side:THREE.DoubleSide, vertexColors:true } )
-    mesh = new THREE.Mesh( geom, mats )
-    obj.group.add( mesh )
+    vertMat  = new THREE.MeshBasicMaterial( { side:THREE.DoubleSide, vertexColors:true } )
+    wireMat  = new THREE.MeshBasicMaterial( { wireframe:true, color:0xFFFFFF } )
+    geomMesh = new THREE.Mesh( geom, vertMat )
+    wireMesh = new THREE.Mesh( geom, wireMat )
+    geomMesh.add( wireMesh )
+    obj.group.add( geomMesh )
     return
 
   # Assign vertex indexes to create all the triangular face indices
@@ -107,8 +109,7 @@ class Surface
       @addIndice( obj, oo, ce, se )    # We only create 3 face indices
       @addIndice( obj, oo, ce, ne )
       @addIndice( obj, ce, se, ne )
-      console.log( "Surface.addIndices One()",
-        { i0:i0, j:1, oo:oo, se:se, ce:ce, ne:ne } )
+      @main.log( "Surface.addIndices One()", { i0:i0, j:1, oo:oo, se:se, ce:ce, ne:ne } )
       for j in [1..obj.satNum]
         sw = i0 * n + j
         se = i0 * n + j + 1
@@ -119,8 +120,7 @@ class Surface
         @addIndice( obj, ce, nw, ne )
         @addIndice( obj, ce, ne, se )
         @addIndice( obj, ce, se, sw )
-        console.log( "Surface.addIndices One()",
-          { i0:i0, j:j, ce:ce, sw:sw, nw:nw, ne:ne, se:se } )
+        @main.log( "Surface.addIndices One()", { i0:i0, j:j, ce:ce, sw:sw, nw:nw, ne:ne, se:se } )
     console.log( "Surface.addIndices() Two", { numIndices:obj.indices.length } )
     return
 

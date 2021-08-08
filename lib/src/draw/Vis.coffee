@@ -12,9 +12,9 @@ class Vis extends Type
     @uniqueIdExt = ''
     @chroma      = chroma
     @debug       = false
-    @distribution10s = [0,10,20,30,40,50,60,70,80,90,100]
-    @distributionPri = [0,30,45,60,70,75,80,85,90,95,100]
-    @distributionSec = [0,30,60,65,70,75,80,85,90,95,100]
+    @distribution10s = [0, 5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100]
+    @distributionPri = [0,20,30,40,50,54,58,62,65,68,71,74,75,76,82,88,88,91,94,97,100]
+    @distributionSec = [0,20,30,40,50,54,58,62,65,68,71,74,75,76,82,88,88,91,94,97,100]
   
   # --- Color Spaces  ---
   # RGB - that also works a RGBa with a:1.0 as a default or can be provided in objects or arrays

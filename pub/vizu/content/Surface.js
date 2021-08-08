@@ -18,7 +18,7 @@ Surface = class Surface {
     obj = {};
     obj.group = new THREE.Group();
     obj.valFun = function(hue, sat) {
-      return 100;
+      return 50;
     };
     this.toGeom(obj);
     this.main.addToScene(obj.group);
@@ -40,7 +40,7 @@ Surface = class Surface {
     obj.huePri = obj.hueInc * 2;
     obj.satInc = 100 / obj.satNum; // scount is actually obj.satInc + 1
     this.initSpheres(obj);
-    this.initFaces(obj);
+// @initFaces( obj )
     for (hue = k = 0, ref = obj.hueInc; ref !== 0 && (ref > 0 ? k < 360 : k > 360); hue = k += ref) {
       for (rad = l = 0, ref1 = obj.satInc; ref1 !== 0 && (ref1 > 0 ? l <= 100 : l >= 100); rad = l += ref1) {
         sat = hue % obj.huePri === 0 ? rad : rad - obj.satInc / 2;
@@ -91,7 +91,7 @@ Surface = class Surface {
     obj.vertices.push(x, y, z);
     obj.normals.push(0, 1, 0); // Good only for a flat surface
     this.addSphere(obj, rgb, x, y, z);
-    console.log("Surface.addVertex()", {
+    this.main.log("Surface.addVertex()", {
       hue: hue,
       sat: sat,
       val: val,
@@ -110,19 +110,24 @@ Surface = class Surface {
   }
 
   createBufferGeometry(obj) {
-    var geom, mats, mesh;
+    var geom, geomMesh, vertMat, wireMat, wireMesh;
     geom = new THREE.BufferGeometry();
     geom.setIndex(obj.indices);
     geom.setAttribute('position', new THREE.Float32BufferAttribute(obj.vertices, 3));
     geom.setAttribute('normal', new THREE.Float32BufferAttribute(obj.normals, 3));
     geom.setAttribute('color', new THREE.Float32BufferAttribute(obj.colors, 3));
-    //ire = new THREE.WireframeGeometry( geom )
-    mats = new THREE.MeshBasicMaterial({
+    vertMat = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
       vertexColors: true
     });
-    mesh = new THREE.Mesh(geom, mats);
-    obj.group.add(mesh);
+    wireMat = new THREE.MeshBasicMaterial({
+      wireframe: true,
+      color: 0xFFFFFF
+    });
+    geomMesh = new THREE.Mesh(geom, vertMat);
+    wireMesh = new THREE.Mesh(geom, wireMat);
+    geomMesh.add(wireMesh);
+    obj.group.add(geomMesh);
   }
 
   // Assign vertex indexes to create all the triangular face indices
@@ -139,7 +144,7 @@ Surface = class Surface {
       this.addIndice(obj, oo, ce, se); // We only create 3 face indices
       this.addIndice(obj, oo, ce, ne);
       this.addIndice(obj, ce, se, ne);
-      console.log("Surface.addIndices One()", {
+      this.main.log("Surface.addIndices One()", {
         i0: i0,
         j: 1,
         oo: oo,
@@ -157,7 +162,7 @@ Surface = class Surface {
         this.addIndice(obj, ce, nw, ne);
         this.addIndice(obj, ce, ne, se);
         this.addIndice(obj, ce, se, sw);
-        console.log("Surface.addIndices One()", {
+        this.main.log("Surface.addIndices One()", {
           i0: i0,
           j: j,
           ce: ce,
