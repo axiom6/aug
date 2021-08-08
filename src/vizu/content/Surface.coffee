@@ -23,7 +23,11 @@ class Surface
     obj.colors   = []
     obj.vertices = []
     obj.normals  = []
+    obj.uvs      = []
     obj.indices  = []
+    obj.vertex   = new THREE.Vector3()
+    obj.normal   = new THREE.Vector3()
+    obj.uv       = new THREE.Vector2()
     obj.sc       = 1.0 / 255.0
     obj.hueNum   = 24
     obj.satNum   = 10
@@ -69,7 +73,14 @@ class Surface
     rgb = vis.rgb( [ hue, sat, val, "HMIR" ] )
     obj.colors.push( rgb.r*obj.sc, rgb.g*obj.sc, rgb.b*obj.sc )
     obj.vertices.push( x, y, z )
-    obj.normals.push(  0, 1, 0 ) # Good only for a flat surface
+    obj.vertex.x = x
+    obj.vertex.y = y
+    obj.vertex.z = z
+    obj.normal.copy(  obj.vertex ).normalize();
+    obj.normals.push( obj.normal.x, obj.normal.y, obj.normal.z )
+    obj.uv.x = hue / obj.hueInc / obj.hueNum
+    obj.uv.y = sat / obj.satInc / obj.satNum
+    obj.uvs.push( obj.uv.x, obj.uv.y )
     @addSphere( obj, rgb, x, y, z )
     @main.log( "Surface.addVertex()", { hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
     return
@@ -87,13 +98,23 @@ class Surface
     geom.setIndex( obj.indices )
     geom.setAttribute( 'position', new THREE.Float32BufferAttribute( obj.vertices, 3 ) )
     geom.setAttribute( 'normal',   new THREE.Float32BufferAttribute( obj.normals,  3 ) )
+    geom.setAttribute( 'uv',       new THREE.Float32BufferAttribute( obj.uvs,      2 ) )
     geom.setAttribute( 'color',    new THREE.Float32BufferAttribute( obj.colors,   3 ) )
-    vertMat  = new THREE.MeshBasicMaterial( { side:THREE.DoubleSide, vertexColors:true } )
+    vertMat  = new THREE.MeshBasicMaterial( { side:THREE.DoubleSide, vertexColors:THREE.FaceColors } )
     wireMat  = new THREE.MeshBasicMaterial( { wireframe:true, color:0xFFFFFF } )
     geomMesh = new THREE.Mesh( geom, vertMat )
     wireMesh = new THREE.Mesh( geom, wireMat )
-    geomMesh.add( wireMesh )
+    @colorFaces( geom )
+    geomMesh.add(  wireMesh )
     obj.group.add( geomMesh )
+    return
+
+  colorFaces:( geom ) ->
+    console.log( 'Surface.colorFaces()', geom.faces )
+    return if not geom.faces
+    for i in [0...geom.faces.length]
+      face = geom.faces[i]
+      face.color.setRGB( Math.random(), Math.random(), Math.random() )
     return
 
   # Assign vertex indexes to create all the triangular face indices
