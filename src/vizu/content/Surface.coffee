@@ -25,6 +25,7 @@ class Surface
     obj.normals  = []
     obj.uvs      = []
     obj.indices  = []
+    obj.faces    = []
     obj.vertex   = new THREE.Vector3()
     obj.normal   = new THREE.Vector3()
     obj.uv       = new THREE.Vector2()
@@ -35,7 +36,7 @@ class Surface
     obj.huePri   = obj.hueInc * 2
     obj.satInc   = 100 / obj.satNum  # scount is actually obj.satInc + 1
     @initSpheres( obj )
-    # @initFaces( obj )
+    @initFaces(   obj )
     for   hue in [0...360] by obj.hueInc
       for rad in [0..100]  by obj.satInc
         sat = if hue % obj.huePri is 0 then rad else rad - obj.satInc / 2
@@ -59,12 +60,12 @@ class Surface
     return
 
   initFaces:( obj ) ->
-    radius             = 8
-    count              = obj.hueNum * ( obj.satNum + 1 )
+    count            = 3 * obj.hueNum/2 + 4 * obj.satNum * obj.hueNum/2
     obj.faceIndex    = 0
-    obj.faceGeometry = new THREE.SphereGeometry( radius, 16, 16 )
+    obj.faceGeometry = new THREE.BufferGeometry()
     obj.faceMaterial = new THREE.MeshBasicMaterial( { transparent:false, side:THREE.FrontSide } )
     obj.faceMesh     = new THREE.InstancedMesh( obj.faceGeometry, obj.faceMaterial, count )
+    obj.faceColor    = new THREE.Color()
     obj.faceGroup    = new THREE.Group()
     obj.faceGroup.add( obj.faceMesh )
     return
@@ -100,21 +101,13 @@ class Surface
     geom.setAttribute( 'normal',   new THREE.Float32BufferAttribute( obj.normals,  3 ) )
     geom.setAttribute( 'uv',       new THREE.Float32BufferAttribute( obj.uvs,      2 ) )
     geom.setAttribute( 'color',    new THREE.Float32BufferAttribute( obj.colors,   3 ) )
+    geom.setAttribute( 'face',     new THREE.Float32BufferAttribute( obj.faces ,   3 ) )
     vertMat  = new THREE.MeshBasicMaterial( { side:THREE.DoubleSide, vertexColors:THREE.FaceColors } )
     wireMat  = new THREE.MeshBasicMaterial( { wireframe:true, color:0xFFFFFF } )
     geomMesh = new THREE.Mesh( geom, vertMat )
     wireMesh = new THREE.Mesh( geom, wireMat )
-    @colorFaces( geom )
     geomMesh.add(  wireMesh )
     obj.group.add( geomMesh )
-    return
-
-  colorFaces:( geom ) ->
-    console.log( 'Surface.colorFaces()', geom.faces )
-    return if not geom.faces
-    for i in [0...geom.faces.length]
-      face = geom.faces[i]
-      face.color.setRGB( Math.random(), Math.random(), Math.random() )
     return
 
   # Assign vertex indexes to create all the triangular face indices
@@ -147,7 +140,7 @@ class Surface
 
   addIndice:(    obj, i1, i2, i3 ) ->
     obj.indices.push( i1, i2, i3 )
-    # @addFace(  obj, i1, i2, i3 )
+    @addFace(    obj, i1, i2, i3 )
     return
 
   addFace:( obj, i1, i2, i3 ) ->
@@ -155,7 +148,8 @@ class Surface
     v1 = new THREE.Vector3( vc(i1,0), vc(i1,1), vc(i1,2) )
     v2 = new THREE.Vector3( vc(i2,0), vc(i2,1), vc(i2,2) )
     v3 = new THREE.Vector3( vc(i3,0), vc(i3,1), vc(i3,2) )
-    obj.faceTriangle = THREE.Triangle( v1, v2, v3 )
+    obj.faceGeometry = THREE.Triangle( v1, v2, v3 )
+    obj.faces.push( obj.faceGeometry )
     obj.faceIndex++
 
 # xyzs.push(vis.cos(hue)*sat,vis.sin(hue)*sat,0)
