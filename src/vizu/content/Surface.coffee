@@ -14,36 +14,40 @@ class Surface
     obj.valFun = ( hue, sat ) -> 50
     @toGeom( obj )
     @main.addToScene( obj.group )
-    @main.addToScene( obj.sphereGroup )
-    #main.addToScene( obj.faceGroup   )
+    #main.addToScene( obj.sphereGroup )
+    @main.addToScene( obj.lineGroup   )
     @main.log( 'Surface.drawHsv()', {} )
     return
 
   toGeom:( obj ) ->
-    obj.colors   = []
-    obj.vertices = []
-    obj.normals  = []
-    obj.uvs      = []
-    obj.indices  = []
-    obj.faces    = []
-    obj.vertex   = new THREE.Vector3()
-    obj.normal   = new THREE.Vector3()
-    obj.uv       = new THREE.Vector2()
-    obj.sc       = 1.0 / 255.0
-    obj.hueNum   = 24
-    obj.satNum   = 10
-    obj.hueInc   = 360 / obj.hueNum
-    obj.huePri   = obj.hueInc * 2
-    obj.satInc   = 100 / obj.satNum  # scount is actually obj.satInc + 1
+    obj.colors    = []
+    obj.vertices  = []
+    obj.normals   = []
+    obj.uvs       = []
+    obj.indices   = []
+    obj.lineGroup = new THREE.Group()
+    obj.vertex    = new THREE.Vector3()
+    obj.normal    = new THREE.Vector3()
+    obj.uv        = new THREE.Vector2()
+    obj.sc        = 1.0 / 255.0
+    obj.hueNum    = 24
+    obj.satNum    = 10
+    obj.hueInc    = 360 / obj.hueNum
+    obj.huePri    = obj.hueInc * 2
+    obj.satInc    = 100 / obj.satNum
     @initSpheres( obj )
-    @initFaces(   obj )
     for   hue in [0...360] by obj.hueInc
       for rad in [0..100]  by obj.satInc
-        sat = if hue % obj.huePri is 0 then rad else rad - obj.satInc / 2
-        @addVertex( obj, hue, sat, obj.valFun(hue,sat), sat*vis.cos(-hue-90)*2.5, 0, sat*vis.sin(-hue-90)*2.5 )
+        sat = if hue % obj.huePri is 0  then rad else rad + obj.satInc / 2
+        console.log( "Surface.toGeom One()", { hue:hue, rad:rad, sat:sat } )
+        val = obj.valFun(hue,sat)
+        @addVertex( obj, hue, sat, val, sat*vis.cos(-hue-90)*2.5, 0, sat*vis.sin(hue-90)*2.5 )
     @main.log( "Surface vertices", obj.vertices )
     @createIndices( obj )
     @createBufferGeometry( obj )
+    numIndices = 3 * obj.hueNum/2 + 4 * obj.satNum * obj.hueNum/2
+    console.log( "Surface.toGeom Two()",
+      { numVertex:obj.vertices.length/3, numIndices:obj.indices.length/3, calcIndices:numIndices } )
     return
 
   initSpheres:( obj ) ->
@@ -59,26 +63,14 @@ class Surface
     obj.sphereGroup.add( obj.sphereMesh )
     return
 
-  initFaces:( obj ) ->
-    count            = 3 * obj.hueNum/2 + 4 * obj.satNum * obj.hueNum/2
-    obj.faceIndex    = 0
-    obj.faceTriangle = new THREE.BufferGeometry()
-    obj.faceGeometry = new THREE.BufferGeometry()
-    obj.faceMaterial = new THREE.MeshBasicMaterial( { transparent:false, side:THREE.FrontSide } )
-    obj.faceMesh     = new THREE.InstancedMesh( obj.faceGeometry, obj.faceMaterial, count )
-    obj.faceColor    = new THREE.Color()
-    obj.faceGroup    = new THREE.Group()
-    obj.faceGroup.add( obj.faceMesh )
-    return
-
   addVertex:( obj, hue, sat, val, x, y, z ) ->
     rgb = vis.rgb( [ hue, sat, val, "HMIR" ] )
     obj.colors.push( rgb.r*obj.sc, rgb.g*obj.sc, rgb.b*obj.sc )
-    obj.vertices.push( x, y, z )
     obj.vertex.x = x
     obj.vertex.y = y
     obj.vertex.z = z
-    obj.normal.copy(  obj.vertex ).normalize();
+    obj.vertices.push( obj.vertex.x, obj.vertex.y, obj.vertex.z )
+    obj.normal.copy(   obj.vertex ).normalize();
     obj.normals.push( obj.normal.x, obj.normal.y, obj.normal.z )
     obj.uv.x = hue / obj.hueInc / obj.hueNum
     obj.uv.y = sat / obj.satInc / obj.satNum
@@ -102,7 +94,6 @@ class Surface
     geom.setAttribute( 'normal',   new THREE.Float32BufferAttribute( obj.normals,  3 ) )
     geom.setAttribute( 'uv',       new THREE.Float32BufferAttribute( obj.uvs,      2 ) )
     geom.setAttribute( 'color',    new THREE.Float32BufferAttribute( obj.colors,   3 ) )
-    geom.setAttribute( 'face',     new THREE.Float32BufferAttribute( obj.faces ,   3 ) )
     vertMat   = new THREE.MeshBasicMaterial( { side:THREE.DoubleSide, vertexColors:THREE.FaceColors } )
     geomMesh  = new THREE.Mesh( geom, vertMat )
     obj.group.add( geomMesh )
@@ -113,45 +104,56 @@ class Surface
 
   # Assign vertex indexes to create all the triangular face indices
   createIndices:( obj ) ->
-    n = obj.satNum+1
+    n = obj.satNum + 1
     for i0 in [0...obj.hueNum] by 2
       i1 = i0 + 1
       i2 = if i0 < obj.hueNum-2 then i0 + 2 else 0
-      oo = i0 * n                      # Case where sat is zero
-      se = i0 * n + 1
-      ce = i1 * n + 1
-      ne = i2 * n + 1
-      @addIndice( obj, oo, ce, se )    # We only create 3 face indices
-      @addIndice( obj, oo, ce, ne )
-      @addIndice( obj, ce, se, ne )
-      @main.log( "Surface.addIndices One()", { i0:i0, j:1, oo:oo, se:se, ce:ce, ne:ne } )
-      for j in [1..obj.satNum]
-        sw = i0 * n + j
-        se = i0 * n + j + 1
-        ce = i1 * n
-        nw = i2 * n + j
-        ne = i2 * n + j + 1
-        @addIndice( obj, ce, sw, nw )
-        @addIndice( obj, ce, nw, ne )
-        @addIndice( obj, ce, ne, se )
-        @addIndice( obj, ce, se, sw )
-        @main.log( "Surface.addIndices One()", { i0:i0, j:j, ce:ce, sw:sw, nw:nw, ne:ne, se:se } )
-    console.log( "Surface.addIndices() Two", { numIndices:obj.indices.length, numFaces:obj.faces.length } )
+      @add3Indices(   obj, n, i0, i1, i2 )
+      for j in [0...obj.satNum]
+        @add4Indices( obj, n, i0, i1, i2, j )
     return
 
   addIndice:(    obj, i1, i2, i3 ) ->
     obj.indices.push( i1, i2, i3 )
-    @addFace(    obj, i1, i2, i3 )
+    @addLine(    obj, i1, i2, i3 )
     return
 
-  addFace:( obj, i1, i2, i3 ) ->
-    vc = ( i, j ) -> obj.vertices[i*3] + j
-    v1 = new THREE.Vector3( vc(i1,0), vc(i1,1), vc(i1,2) )
-    v2 = new THREE.Vector3( vc(i2,0), vc(i2,1), vc(i2,2) )
-    v3 = new THREE.Vector3( vc(i3,0), vc(i3,1), vc(i3,2) )
-    obj.faceTriangle = new THREE.Triangle( v1, v2, v3 )
-    obj.faces.push( obj.faceTriangle )
-    obj.faceIndex++
+  add3Indices:( obj, n, i0, i1, i2 ) ->
+    oo = i0 * n                      # Case where sat is zero
+    se = i0 * n                      # Why is oo and se the same?
+    ce = i1 * n
+    ne = i2 * n
+    @addIndice( obj, oo, ce, se )    # We only create 3 face indices
+    @addIndice( obj, oo, ce, ne )
+    @addIndice( obj, ce, se, ne )
+    console.log( "Surface.add3Indices()", { i0:i0, oo:oo, ce:ce, se:se, ne:ne } )
+    return
+
+  add4Indices:( obj, n, i0, i1, i2, j ) ->
+    sw = i0 * n + j
+    se = i0 * n + j + 1
+    ce = i1 * n + j
+    nw = i2 * n + j
+    ne = i2 * n + j + 1
+    @addIndice( obj, ce, sw, se )
+    @addIndice( obj, ce, se, ne )
+    @addIndice( obj, ce, ne, nw )
+    @addIndice( obj, ce, nw, sw )
+    console.log( "Surface.add4Indices()", { i0:i0, j:j, ce:ce, sw:sw, nw:nw, ne:ne, se:se } )
+    return
+
+  addLine:( obj, i1, i2, i3 ) ->
+    vc = ( i, j ) -> obj.vertices[i*3+j]
+    points = []
+    v1      = new THREE.Vector3( vc(i1,0), vc(i1,1), vc(i1,2) )
+    v2      = new THREE.Vector3( vc(i2,0), vc(i2,1), vc(i2,2) )
+    v3      = new THREE.Vector3( vc(i3,0), vc(i3,1), vc(i3,2) )
+    points.push( v1, v2, v3 )
+    geom  = new THREE.BufferGeometry().setFromPoints( points )
+    mat   = new THREE.LineBasicMaterial({ color: 0x000000 } )
+    line  = new THREE.LineLoop( geom, mat )
+    obj.lineGroup.add( line )
+    return
 
 # xyzs.push(vis.cos(hue)*sat,vis.sin(hue)*sat,0)
   genHsvs:( hueInc, satInc, valFunc ) ->

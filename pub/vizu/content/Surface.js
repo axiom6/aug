@@ -22,19 +22,19 @@ Surface = class Surface {
     };
     this.toGeom(obj);
     this.main.addToScene(obj.group);
-    this.main.addToScene(obj.sphereGroup);
-    //main.addToScene( obj.faceGroup   )
+    //main.addToScene( obj.sphereGroup )
+    this.main.addToScene(obj.lineGroup);
     this.main.log('Surface.drawHsv()', {});
   }
 
   toGeom(obj) {
-    var hue, k, l, rad, ref, ref1, sat;
+    var hue, k, l, numIndices, rad, ref, ref1, sat, val;
     obj.colors = [];
     obj.vertices = [];
     obj.normals = [];
     obj.uvs = [];
     obj.indices = [];
-    obj.faces = [];
+    obj.lineGroup = new THREE.Group();
     obj.vertex = new THREE.Vector3();
     obj.normal = new THREE.Vector3();
     obj.uv = new THREE.Vector2();
@@ -43,18 +43,29 @@ Surface = class Surface {
     obj.satNum = 10;
     obj.hueInc = 360 / obj.hueNum;
     obj.huePri = obj.hueInc * 2;
-    obj.satInc = 100 / obj.satNum; // scount is actually obj.satInc + 1
+    obj.satInc = 100 / obj.satNum;
     this.initSpheres(obj);
-    this.initFaces(obj);
     for (hue = k = 0, ref = obj.hueInc; ref !== 0 && (ref > 0 ? k < 360 : k > 360); hue = k += ref) {
       for (rad = l = 0, ref1 = obj.satInc; ref1 !== 0 && (ref1 > 0 ? l <= 100 : l >= 100); rad = l += ref1) {
-        sat = hue % obj.huePri === 0 ? rad : rad - obj.satInc / 2;
-        this.addVertex(obj, hue, sat, obj.valFun(hue, sat), sat * vis.cos(-hue - 90) * 2.5, 0, sat * vis.sin(-hue - 90) * 2.5);
+        sat = hue % obj.huePri === 0 ? rad : rad + obj.satInc / 2;
+        console.log("Surface.toGeom One()", {
+          hue: hue,
+          rad: rad,
+          sat: sat
+        });
+        val = obj.valFun(hue, sat);
+        this.addVertex(obj, hue, sat, val, sat * vis.cos(-hue - 90) * 2.5, 0, sat * vis.sin(hue - 90) * 2.5);
       }
     }
     this.main.log("Surface vertices", obj.vertices);
     this.createIndices(obj);
     this.createBufferGeometry(obj);
+    numIndices = 3 * obj.hueNum / 2 + 4 * obj.satNum * obj.hueNum / 2;
+    console.log("Surface.toGeom Two()", {
+      numVertex: obj.vertices.length / 3,
+      numIndices: obj.indices.length / 3,
+      calcIndices: numIndices
+    });
   }
 
   initSpheres(obj) {
@@ -74,30 +85,14 @@ Surface = class Surface {
     obj.sphereGroup.add(obj.sphereMesh);
   }
 
-  initFaces(obj) {
-    var count;
-    count = 3 * obj.hueNum / 2 + 4 * obj.satNum * obj.hueNum / 2;
-    obj.faceIndex = 0;
-    obj.faceTriangle = new THREE.BufferGeometry();
-    obj.faceGeometry = new THREE.BufferGeometry();
-    obj.faceMaterial = new THREE.MeshBasicMaterial({
-      transparent: false,
-      side: THREE.FrontSide
-    });
-    obj.faceMesh = new THREE.InstancedMesh(obj.faceGeometry, obj.faceMaterial, count);
-    obj.faceColor = new THREE.Color();
-    obj.faceGroup = new THREE.Group();
-    obj.faceGroup.add(obj.faceMesh);
-  }
-
   addVertex(obj, hue, sat, val, x, y, z) {
     var rgb;
     rgb = vis.rgb([hue, sat, val, "HMIR"]);
     obj.colors.push(rgb.r * obj.sc, rgb.g * obj.sc, rgb.b * obj.sc);
-    obj.vertices.push(x, y, z);
     obj.vertex.x = x;
     obj.vertex.y = y;
     obj.vertex.z = z;
+    obj.vertices.push(obj.vertex.x, obj.vertex.y, obj.vertex.z);
     obj.normal.copy(obj.vertex).normalize();
     obj.normals.push(obj.normal.x, obj.normal.y, obj.normal.z);
     obj.uv.x = hue / obj.hueInc / obj.hueNum;
@@ -130,7 +125,6 @@ Surface = class Surface {
     geom.setAttribute('normal', new THREE.Float32BufferAttribute(obj.normals, 3));
     geom.setAttribute('uv', new THREE.Float32BufferAttribute(obj.uvs, 2));
     geom.setAttribute('color', new THREE.Float32BufferAttribute(obj.colors, 3));
-    geom.setAttribute('face', new THREE.Float32BufferAttribute(obj.faces, 3));
     vertMat = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
       vertexColors: THREE.FaceColors
@@ -144,69 +138,79 @@ Surface = class Surface {
   // wireMesh = new THREE.Mesh( geom, wireMat )
   // geomMesh.add(  wireMesh )
   createIndices(obj) {
-    var ce, i0, i1, i2, j, k, l, n, ne, nw, oo, ref, ref1, se, sw;
+    var i0, i1, i2, j, k, l, n, ref, ref1;
     n = obj.satNum + 1;
     for (i0 = k = 0, ref = obj.hueNum; k < ref; i0 = k += 2) {
       i1 = i0 + 1;
       i2 = i0 < obj.hueNum - 2 ? i0 + 2 : 0;
-      oo = i0 * n; // Case where sat is zero
-      se = i0 * n + 1;
-      ce = i1 * n + 1;
-      ne = i2 * n + 1;
-      this.addIndice(obj, oo, ce, se); // We only create 3 face indices
-      this.addIndice(obj, oo, ce, ne);
-      this.addIndice(obj, ce, se, ne);
-      this.main.log("Surface.addIndices One()", {
-        i0: i0,
-        j: 1,
-        oo: oo,
-        se: se,
-        ce: ce,
-        ne: ne
-      });
-      for (j = l = 1, ref1 = obj.satNum; (1 <= ref1 ? l <= ref1 : l >= ref1); j = 1 <= ref1 ? ++l : --l) {
-        sw = i0 * n + j;
-        se = i0 * n + j + 1;
-        ce = i1 * n;
-        nw = i2 * n + j;
-        ne = i2 * n + j + 1;
-        this.addIndice(obj, ce, sw, nw);
-        this.addIndice(obj, ce, nw, ne);
-        this.addIndice(obj, ce, ne, se);
-        this.addIndice(obj, ce, se, sw);
-        this.main.log("Surface.addIndices One()", {
-          i0: i0,
-          j: j,
-          ce: ce,
-          sw: sw,
-          nw: nw,
-          ne: ne,
-          se: se
-        });
+      this.add3Indices(obj, n, i0, i1, i2);
+      for (j = l = 0, ref1 = obj.satNum; (0 <= ref1 ? l < ref1 : l > ref1); j = 0 <= ref1 ? ++l : --l) {
+        this.add4Indices(obj, n, i0, i1, i2, j);
       }
     }
-    console.log("Surface.addIndices() Two", {
-      numIndices: obj.indices.length,
-      numFaces: obj.faces.length
-    });
   }
 
   addIndice(obj, i1, i2, i3) {
     obj.indices.push(i1, i2, i3);
-    this.addFace(obj, i1, i2, i3);
+    this.addLine(obj, i1, i2, i3);
   }
 
-  addFace(obj, i1, i2, i3) {
-    var v1, v2, v3, vc;
+  add3Indices(obj, n, i0, i1, i2) {
+    var ce, ne, oo, se;
+    oo = i0 * n; // Case where sat is zero
+    se = i0 * n; // Why is oo and se the same?
+    ce = i1 * n;
+    ne = i2 * n;
+    this.addIndice(obj, oo, ce, se); // We only create 3 face indices
+    this.addIndice(obj, oo, ce, ne);
+    this.addIndice(obj, ce, se, ne);
+    console.log("Surface.add3Indices()", {
+      i0: i0,
+      oo: oo,
+      ce: ce,
+      se: se,
+      ne: ne
+    });
+  }
+
+  add4Indices(obj, n, i0, i1, i2, j) {
+    var ce, ne, nw, se, sw;
+    sw = i0 * n + j;
+    se = i0 * n + j + 1;
+    ce = i1 * n + j;
+    nw = i2 * n + j;
+    ne = i2 * n + j + 1;
+    this.addIndice(obj, ce, sw, se);
+    this.addIndice(obj, ce, se, ne);
+    this.addIndice(obj, ce, ne, nw);
+    this.addIndice(obj, ce, nw, sw);
+    console.log("Surface.add4Indices()", {
+      i0: i0,
+      j: j,
+      ce: ce,
+      sw: sw,
+      nw: nw,
+      ne: ne,
+      se: se
+    });
+  }
+
+  addLine(obj, i1, i2, i3) {
+    var geom, line, mat, points, v1, v2, v3, vc;
     vc = function(i, j) {
-      return obj.vertices[i * 3] + j;
+      return obj.vertices[i * 3 + j];
     };
+    points = [];
     v1 = new THREE.Vector3(vc(i1, 0), vc(i1, 1), vc(i1, 2));
     v2 = new THREE.Vector3(vc(i2, 0), vc(i2, 1), vc(i2, 2));
     v3 = new THREE.Vector3(vc(i3, 0), vc(i3, 1), vc(i3, 2));
-    obj.faceTriangle = new THREE.Triangle(v1, v2, v3);
-    obj.faces.push(obj.faceTriangle);
-    return obj.faceIndex++;
+    points.push(v1, v2, v3);
+    geom = new THREE.BufferGeometry().setFromPoints(points);
+    mat = new THREE.LineBasicMaterial({
+      color: 0x000000
+    });
+    line = new THREE.LineLoop(geom, mat);
+    obj.lineGroup.add(line);
   }
 
   // xyzs.push(vis.cos(hue)*sat,vis.sin(hue)*sat,0)
