@@ -34,6 +34,7 @@ Surface = class Surface {
     obj.normals = [];
     obj.uvs = [];
     obj.indices = [];
+    obj.faces = [];
     obj.vertex = new THREE.Vector3();
     obj.normal = new THREE.Vector3();
     obj.uv = new THREE.Vector2();
@@ -44,7 +45,7 @@ Surface = class Surface {
     obj.huePri = obj.hueInc * 2;
     obj.satInc = 100 / obj.satNum; // scount is actually obj.satInc + 1
     this.initSpheres(obj);
-// @initFaces( obj )
+    this.initFaces(obj);
     for (hue = k = 0, ref = obj.hueInc; ref !== 0 && (ref > 0 ? k < 360 : k > 360); hue = k += ref) {
       for (rad = l = 0, ref1 = obj.satInc; ref1 !== 0 && (ref1 > 0 ? l <= 100 : l >= 100); rad = l += ref1) {
         sat = hue % obj.huePri === 0 ? rad : rad - obj.satInc / 2;
@@ -74,16 +75,17 @@ Surface = class Surface {
   }
 
   initFaces(obj) {
-    var count, radius;
-    radius = 8;
-    count = obj.hueNum * (obj.satNum + 1);
+    var count;
+    count = 3 * obj.hueNum / 2 + 4 * obj.satNum * obj.hueNum / 2;
     obj.faceIndex = 0;
-    obj.faceGeometry = new THREE.SphereGeometry(radius, 16, 16);
+    obj.faceTriangle = new THREE.BufferGeometry();
+    obj.faceGeometry = new THREE.BufferGeometry();
     obj.faceMaterial = new THREE.MeshBasicMaterial({
       transparent: false,
       side: THREE.FrontSide
     });
     obj.faceMesh = new THREE.InstancedMesh(obj.faceGeometry, obj.faceMaterial, count);
+    obj.faceColor = new THREE.Color();
     obj.faceGroup = new THREE.Group();
     obj.faceGroup.add(obj.faceMesh);
   }
@@ -121,41 +123,26 @@ Surface = class Surface {
   }
 
   createBufferGeometry(obj) {
-    var geom, geomMesh, vertMat, wireMat, wireMesh;
+    var geom, geomMesh, vertMat;
     geom = new THREE.BufferGeometry();
     geom.setIndex(obj.indices);
     geom.setAttribute('position', new THREE.Float32BufferAttribute(obj.vertices, 3));
     geom.setAttribute('normal', new THREE.Float32BufferAttribute(obj.normals, 3));
     geom.setAttribute('uv', new THREE.Float32BufferAttribute(obj.uvs, 2));
     geom.setAttribute('color', new THREE.Float32BufferAttribute(obj.colors, 3));
+    geom.setAttribute('face', new THREE.Float32BufferAttribute(obj.faces, 3));
     vertMat = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
       vertexColors: THREE.FaceColors
     });
-    wireMat = new THREE.MeshBasicMaterial({
-      wireframe: true,
-      color: 0xFFFFFF
-    });
     geomMesh = new THREE.Mesh(geom, vertMat);
-    wireMesh = new THREE.Mesh(geom, wireMat);
-    this.colorFaces(geom);
-    geomMesh.add(wireMesh);
     obj.group.add(geomMesh);
   }
 
-  colorFaces(geom) {
-    var face, i, k, ref;
-    console.log('Surface.colorFaces()', geom.faces);
-    if (!geom.faces) {
-      return;
-    }
-    for (i = k = 0, ref = geom.faces.length; (0 <= ref ? k < ref : k > ref); i = 0 <= ref ? ++k : --k) {
-      face = geom.faces[i];
-      face.color.setRGB(Math.random(), Math.random(), Math.random());
-    }
-  }
-
   // Assign vertex indexes to create all the triangular face indices
+  // wireMat = new THREE.MeshBasicMaterial( { wireframe:true, color:0xFFFFFF } )
+  // wireMesh = new THREE.Mesh( geom, wireMat )
+  // geomMesh.add(  wireMesh )
   createIndices(obj) {
     var ce, i0, i1, i2, j, k, l, n, ne, nw, oo, ref, ref1, se, sw;
     n = obj.satNum + 1;
@@ -199,15 +186,16 @@ Surface = class Surface {
       }
     }
     console.log("Surface.addIndices() Two", {
-      numIndices: obj.indices.length
+      numIndices: obj.indices.length,
+      numFaces: obj.faces.length
     });
   }
 
   addIndice(obj, i1, i2, i3) {
     obj.indices.push(i1, i2, i3);
+    this.addFace(obj, i1, i2, i3);
   }
 
-  // @addFace(  obj, i1, i2, i3 )
   addFace(obj, i1, i2, i3) {
     var v1, v2, v3, vc;
     vc = function(i, j) {
@@ -216,7 +204,8 @@ Surface = class Surface {
     v1 = new THREE.Vector3(vc(i1, 0), vc(i1, 1), vc(i1, 2));
     v2 = new THREE.Vector3(vc(i2, 0), vc(i2, 1), vc(i2, 2));
     v3 = new THREE.Vector3(vc(i3, 0), vc(i3, 1), vc(i3, 2));
-    obj.faceTriangle = THREE.Triangle(v1, v2, v3);
+    obj.faceTriangle = new THREE.Triangle(v1, v2, v3);
+    obj.faces.push(obj.faceTriangle);
     return obj.faceIndex++;
   }
 

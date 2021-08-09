@@ -62,6 +62,7 @@ class Surface
   initFaces:( obj ) ->
     count            = 3 * obj.hueNum/2 + 4 * obj.satNum * obj.hueNum/2
     obj.faceIndex    = 0
+    obj.faceTriangle = new THREE.BufferGeometry()
     obj.faceGeometry = new THREE.BufferGeometry()
     obj.faceMaterial = new THREE.MeshBasicMaterial( { transparent:false, side:THREE.FrontSide } )
     obj.faceMesh     = new THREE.InstancedMesh( obj.faceGeometry, obj.faceMaterial, count )
@@ -102,12 +103,12 @@ class Surface
     geom.setAttribute( 'uv',       new THREE.Float32BufferAttribute( obj.uvs,      2 ) )
     geom.setAttribute( 'color',    new THREE.Float32BufferAttribute( obj.colors,   3 ) )
     geom.setAttribute( 'face',     new THREE.Float32BufferAttribute( obj.faces ,   3 ) )
-    vertMat  = new THREE.MeshBasicMaterial( { side:THREE.DoubleSide, vertexColors:THREE.FaceColors } )
-    wireMat  = new THREE.MeshBasicMaterial( { wireframe:true, color:0xFFFFFF } )
-    geomMesh = new THREE.Mesh( geom, vertMat )
-    wireMesh = new THREE.Mesh( geom, wireMat )
-    geomMesh.add(  wireMesh )
+    vertMat   = new THREE.MeshBasicMaterial( { side:THREE.DoubleSide, vertexColors:THREE.FaceColors } )
+    geomMesh  = new THREE.Mesh( geom, vertMat )
     obj.group.add( geomMesh )
+    # wireMat = new THREE.MeshBasicMaterial( { wireframe:true, color:0xFFFFFF } )
+    # wireMesh = new THREE.Mesh( geom, wireMat )
+    # geomMesh.add(  wireMesh )
     return
 
   # Assign vertex indexes to create all the triangular face indices
@@ -135,7 +136,7 @@ class Surface
         @addIndice( obj, ce, ne, se )
         @addIndice( obj, ce, se, sw )
         @main.log( "Surface.addIndices One()", { i0:i0, j:j, ce:ce, sw:sw, nw:nw, ne:ne, se:se } )
-    console.log( "Surface.addIndices() Two", { numIndices:obj.indices.length } )
+    console.log( "Surface.addIndices() Two", { numIndices:obj.indices.length, numFaces:obj.faces.length } )
     return
 
   addIndice:(    obj, i1, i2, i3 ) ->
@@ -148,8 +149,8 @@ class Surface
     v1 = new THREE.Vector3( vc(i1,0), vc(i1,1), vc(i1,2) )
     v2 = new THREE.Vector3( vc(i2,0), vc(i2,1), vc(i2,2) )
     v3 = new THREE.Vector3( vc(i3,0), vc(i3,1), vc(i3,2) )
-    obj.faceGeometry = THREE.Triangle( v1, v2, v3 )
-    obj.faces.push( obj.faceGeometry )
+    obj.faceTriangle = new THREE.Triangle( v1, v2, v3 )
+    obj.faces.push( obj.faceTriangle )
     obj.faceIndex++
 
 # xyzs.push(vis.cos(hue)*sat,vis.sin(hue)*sat,0)
