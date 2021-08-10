@@ -4621,6 +4621,17 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/src\/vizu\/content\/Hexagon.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/vizu\/content\/Hexagon.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/src\/vizu\/content\/Lines.coffee" : {
       "ft" : 32,
       "ma" : 1,
@@ -4660,17 +4671,6 @@
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/vizu\/content\/Surface.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/vizu\/content\/Triangle.coffee" : {
-      "ft" : 32,
-      "ma" : 1,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/vizu\/content\/Triangle.js",
       "oF" : 0,
       "oS" : 1,
       "sC" : 0,

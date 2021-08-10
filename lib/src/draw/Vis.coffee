@@ -376,9 +376,13 @@ class Vis extends Type
   deg:( rad )     -> rad * 180 / Math.PI
   sin:( deg )     -> Math.sin(@rad(deg))
   cos:( deg )     -> Math.cos(@rad(deg))
+  tan:( deg )     -> Math.tan(@rad(deg))
+  asin:( y )      -> @deg(Math.asin(y))
+  acos:( x )      -> @deg(Math.acos(x))
+  atan:( r )      -> @deg(Math.atan(r))
   abs:( val )     -> Math.abs( val  )
-  max:( args... ) -> Math.max( args )
-  min:( args... ) -> Math.min( args )
+  max:( args... ) -> Math.max( args )    # May not want args...
+  min:( args... ) -> Math.min( args )    # May not want args...
 
   rot:( deg, ang ) ->
     a = deg+ang

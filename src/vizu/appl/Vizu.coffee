@@ -114,6 +114,7 @@ class Vizu
   # This does not make sense
   Vizu.pages = {
     Main: {
+      Hexagon: { title:'Hexagon',  key:'Hexagon',  show:false },
       Surface: { title:'Surface',  key:'Surface',  show:false },
       Grids:   { title:'Grids',    key:'Grids',    show:false },
       Rgb:     { title:'Rgb',      key:'Rgb',      show:false },

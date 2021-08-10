@@ -11,10 +11,10 @@ class Surface
   drawHsv:() ->
     obj         = {}
     obj.group   = new THREE.Group()
-    obj.valFun = ( hue, sat ) -> 50
+    obj.valFun = ( hue, sat ) -> 25
     @toGeom( obj )
     @main.addToScene( obj.group )
-    #main.addToScene( obj.sphereGroup )
+    @main.addToScene( obj.sphereGroup )
     @main.log( 'Surface.drawHsv()', obj )
     return
 
@@ -50,7 +50,7 @@ class Surface
     return
 
   initSpheres:( obj ) ->
-    radius             = 8
+    radius             = 2
     count              = 3 * obj.hueNum + 4 * obj.hueNum * obj.satNum
     obj.sphereIndex    = 0
     obj.sphereGeometry = new THREE.SphereGeometry( radius, 16, 16 )
@@ -75,7 +75,7 @@ class Surface
     obj.uv.y = sat / obj.satInc / obj.satNum
     obj.uvs.push( obj.uv.x, obj.uv.y )
     @addSphere( obj, rgb, x, y, z )
-    @main.log( "Surface.addVertex()", { hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
+    console.log( "Surface.addVertex()", { hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
     return
 
   addSphere:( obj, rgb, x, y, z ) ->

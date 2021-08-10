@@ -18,11 +18,11 @@ Surface = class Surface {
     obj = {};
     obj.group = new THREE.Group();
     obj.valFun = function(hue, sat) {
-      return 50;
+      return 25;
     };
     this.toGeom(obj);
     this.main.addToScene(obj.group);
-    //main.addToScene( obj.sphereGroup )
+    this.main.addToScene(obj.sphereGroup);
     this.main.log('Surface.drawHsv()', obj);
   }
 
@@ -69,7 +69,7 @@ Surface = class Surface {
 
   initSpheres(obj) {
     var count, radius;
-    radius = 8;
+    radius = 2;
     count = 3 * obj.hueNum + 4 * obj.hueNum * obj.satNum;
     obj.sphereIndex = 0;
     obj.sphereGeometry = new THREE.SphereGeometry(radius, 16, 16);
@@ -98,7 +98,7 @@ Surface = class Surface {
     obj.uv.y = sat / obj.satInc / obj.satNum;
     obj.uvs.push(obj.uv.x, obj.uv.y);
     this.addSphere(obj, rgb, x, y, z);
-    this.main.log("Surface.addVertex()", {
+    console.log("Surface.addVertex()", {
       hue: hue,
       sat: sat,
       val: val,

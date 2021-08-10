@@ -13,12 +13,15 @@ import XYGrid  from '../coords/XYGrid.js'
 import XZGrid  from '../coords/XZGrid.js'
 import YZGrid  from '../coords/YZGrid.js'
 import Surface from './Surface.js'
+import Hexagon from './Hexagon.js'
+
 
 class Content
 
   constructor:( @main ) ->
     @klass        = @constructor.name
     @surface      = new Surface( @main )
+    @hexagon      = new Hexagon( @main )
     if @main.opts.content?
       @opts       = @main.opts.content
       @plane      = @drawPlane()            if @opts.plane?         and @opts.plane
@@ -32,6 +35,7 @@ class Content
       @drawHsv( false )                     if @opts['hsv']?        and @opts['hsv']
       @drawHues( @main.pageKey, true  )     if @opts['hues']?       and @opts['hues']
       @surface.drawHsv()                    if @opts['surface']?    and @opts['surface']
+      @hexagon.drawHsv()                    if @opts['hexagon']?    and @opts['hexagon']
     else
       @grids      = @drawGrids()
       @axes       = @drawAxes()

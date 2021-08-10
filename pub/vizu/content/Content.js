@@ -43,11 +43,14 @@ import YZGrid from '../coords/YZGrid.js';
 
 import Surface from './Surface.js';
 
+import Hexagon from './Hexagon.js';
+
 Content = class Content {
   constructor(main) {
     this.main = main;
     this.klass = this.constructor.name;
     this.surface = new Surface(this.main);
+    this.hexagon = new Hexagon(this.main);
     if (this.main.opts.content != null) {
       this.opts = this.main.opts.content;
       if ((this.opts.plane != null) && this.opts.plane) {
@@ -82,6 +85,9 @@ Content = class Content {
       }
       if ((this.opts['surface'] != null) && this.opts['surface']) {
         this.surface.drawHsv();
+      }
+      if ((this.opts['hexagon'] != null) && this.opts['hexagon']) {
+        this.hexagon.drawHsv();
       }
     } else {
       this.grids = this.drawGrids();
