@@ -15,8 +15,7 @@ class Surface
     @toGeom( obj )
     @main.addToScene( obj.group )
     #main.addToScene( obj.sphereGroup )
-    @main.addToScene( obj.lineGroup   )
-    @main.log( 'Surface.drawHsv()', {} )
+    @main.log( 'Surface.drawHsv()', obj )
     return
 
   toGeom:( obj ) ->
@@ -25,7 +24,6 @@ class Surface
     obj.normals   = []
     obj.uvs       = []
     obj.indices   = []
-    obj.lineGroup = new THREE.Group()
     obj.vertex    = new THREE.Vector3()
     obj.normal    = new THREE.Vector3()
     obj.uv        = new THREE.Vector2()
@@ -38,10 +36,11 @@ class Surface
     @initSpheres( obj )
     for   hue in [0...360] by obj.hueInc
       for rad in [0..100]  by obj.satInc
-        sat = if hue % obj.huePri is 0  then rad else rad + obj.satInc / 2
-        console.log( "Surface.toGeom One()", { hue:hue, rad:rad, sat:sat } )
+        sat = if hue % obj.huePri is 0  then rad else rad + obj.satInc/2
+        fac = if hue % obj.huePri is 0  then 1.0 else 1.0 - rad/2000  # 2000 has been determined empiriaclly
+        @main.log( "Surface.toGeom", { hue:hue, rad:rad, sat:sat } )
         val = obj.valFun(hue,sat)
-        @addVertex( obj, hue, sat, val, sat*vis.cos(-hue-90)*2.5, 0, sat*vis.sin(hue-90)*2.5 )
+        @addVertex( obj, hue, sat, val, sat*fac*vis.cos(-hue-90), 0, sat*fac*vis.sin(hue-90) ) # -90 needs adjust
     @main.log( "Surface vertices", obj.vertices )
     @createIndices( obj )
     @createBufferGeometry( obj )
@@ -94,12 +93,12 @@ class Surface
     geom.setAttribute( 'normal',   new THREE.Float32BufferAttribute( obj.normals,  3 ) )
     geom.setAttribute( 'uv',       new THREE.Float32BufferAttribute( obj.uvs,      2 ) )
     geom.setAttribute( 'color',    new THREE.Float32BufferAttribute( obj.colors,   3 ) )
-    vertMat   = new THREE.MeshBasicMaterial( { side:THREE.DoubleSide, vertexColors:THREE.FaceColors } )
-    geomMesh  = new THREE.Mesh( geom, vertMat )
+    vertMat  = new THREE.MeshBasicMaterial( { side:THREE.DoubleSide, vertexColors:THREE.FaceColors } )
+    geomMesh = new THREE.Mesh( geom, vertMat )
+    wireMat  = new THREE.MeshBasicMaterial( { wireframe:true, color:0x000000 } )
+    wireMesh = new THREE.Mesh( geom, wireMat )
+    geomMesh.add(  wireMesh )
     obj.group.add( geomMesh )
-    # wireMat = new THREE.MeshBasicMaterial( { wireframe:true, color:0xFFFFFF } )
-    # wireMesh = new THREE.Mesh( geom, wireMat )
-    # geomMesh.add(  wireMesh )
     return
 
   # Assign vertex indexes to create all the triangular face indices
@@ -115,18 +114,18 @@ class Surface
 
   addIndice:(    obj, i1, i2, i3 ) ->
     obj.indices.push( i1, i2, i3 )
-    @addLine(    obj, i1, i2, i3 )
+    # @addLine(  obj, i1, i2, i3 )
     return
 
   add3Indices:( obj, n, i0, i1, i2 ) ->
-    oo = i0 * n                      # Case where sat is zero
-    se = i0 * n                      # Why is oo and se the same?
+    oo = i0 * n                     
+    se = i0 * n + 1
     ce = i1 * n
-    ne = i2 * n
+    ne = i2 * n + 1
     @addIndice( obj, oo, ce, se )    # We only create 3 face indices
     @addIndice( obj, oo, ce, ne )
     @addIndice( obj, ce, se, ne )
-    console.log( "Surface.add3Indices()", { i0:i0, oo:oo, ce:ce, se:se, ne:ne } )
+    @main.log( "Surface.add3Indices()", { i0:i0, oo:oo, ce:ce, se:se, ne:ne } )
     return
 
   add4Indices:( obj, n, i0, i1, i2, j ) ->
@@ -139,20 +138,7 @@ class Surface
     @addIndice( obj, ce, se, ne )
     @addIndice( obj, ce, ne, nw )
     @addIndice( obj, ce, nw, sw )
-    console.log( "Surface.add4Indices()", { i0:i0, j:j, ce:ce, sw:sw, nw:nw, ne:ne, se:se } )
-    return
-
-  addLine:( obj, i1, i2, i3 ) ->
-    vc = ( i, j ) -> obj.vertices[i*3+j]
-    points = []
-    v1      = new THREE.Vector3( vc(i1,0), vc(i1,1), vc(i1,2) )
-    v2      = new THREE.Vector3( vc(i2,0), vc(i2,1), vc(i2,2) )
-    v3      = new THREE.Vector3( vc(i3,0), vc(i3,1), vc(i3,2) )
-    points.push( v1, v2, v3 )
-    geom  = new THREE.BufferGeometry().setFromPoints( points )
-    mat   = new THREE.LineBasicMaterial({ color: 0x000000 } )
-    line  = new THREE.LineLoop( geom, mat )
-    obj.lineGroup.add( line )
+    @main.log( "Surface.add4Indices()", { i0:i0, j:j, ce:ce, sw:sw, nw:nw, ne:ne, se:se } )
     return
 
 # xyzs.push(vis.cos(hue)*sat,vis.sin(hue)*sat,0)
@@ -228,5 +214,20 @@ class Surface
       color.setRGB( rgb.r*sc, rgb.g*sc, rgb.b*sc )
       color = new THREE.Color(  rgb.r,  rgb.g,  rgb.b )
       colors.push( color )
+
+  # Not called. Kept as a reference
+  addLine:( obj, i1, i2, i3 ) ->
+    vc = ( i, j ) -> obj.vertices[i*3+j]
+    points = []
+    v1      = new THREE.Vector3( vc(i1,0), vc(i1,1), vc(i1,2) )
+    v2      = new THREE.Vector3( vc(i2,0), vc(i2,1), vc(i2,2) )
+    v3      = new THREE.Vector3( vc(i3,0), vc(i3,1), vc(i3,2) )
+    points.push( v1, v2, v3 )
+    geom  = new THREE.BufferGeometry().setFromPoints( points )
+    mat   = new THREE.LineBasicMaterial({ color: 0x000000 } )
+    line  = new THREE.LineLoop( geom, mat )
+    vis.noop( line )
+    # obj.lineGroup.add( line )
+    return
 
 export default Surface

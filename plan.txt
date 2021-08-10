@@ -1,14 +1,15 @@
 
 Debug
   1. Hsl Surface
-     a, Test
-     b. valFun range 0:100, sin funct time and ocillate
-     c. Fix coord sys for vertexs
-  2. Grid surface
+     a. valFun range 0:100, sin funct time and ocillate
+     b. Adjust tesselations. Inner triangles too long, Outer too shor
+  2. Grids yaxis scale off too short by 50%
   3. Vis
-     c. Vis.str hex output wrong
-     e. Fix padded and move for and text color
-  4. Cube in Aug
+     a. Vis.str hex output wrong
+     b. Fix padded and move for and text color
+  4. Fully move Cube in Aug to Visu
+     a. Consider having Cube initialized by Main
+  5. Reorganize Visu menus
   5. Clean up zzz
 
 Features One

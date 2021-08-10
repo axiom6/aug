@@ -23,18 +23,16 @@ Surface = class Surface {
     this.toGeom(obj);
     this.main.addToScene(obj.group);
     //main.addToScene( obj.sphereGroup )
-    this.main.addToScene(obj.lineGroup);
-    this.main.log('Surface.drawHsv()', {});
+    this.main.log('Surface.drawHsv()', obj);
   }
 
   toGeom(obj) {
-    var hue, k, l, numIndices, rad, ref, ref1, sat, val;
+    var fac, hue, k, l, numIndices, rad, ref, ref1, sat, val;
     obj.colors = [];
     obj.vertices = [];
     obj.normals = [];
     obj.uvs = [];
     obj.indices = [];
-    obj.lineGroup = new THREE.Group();
     obj.vertex = new THREE.Vector3();
     obj.normal = new THREE.Vector3();
     obj.uv = new THREE.Vector2();
@@ -48,13 +46,14 @@ Surface = class Surface {
     for (hue = k = 0, ref = obj.hueInc; ref !== 0 && (ref > 0 ? k < 360 : k > 360); hue = k += ref) {
       for (rad = l = 0, ref1 = obj.satInc; ref1 !== 0 && (ref1 > 0 ? l <= 100 : l >= 100); rad = l += ref1) {
         sat = hue % obj.huePri === 0 ? rad : rad + obj.satInc / 2;
-        console.log("Surface.toGeom One()", {
+        fac = hue % obj.huePri === 0 ? 1.0 : 1.0 - rad / 2000; // 2000 has been determined empiriaclly
+        this.main.log("Surface.toGeom", {
           hue: hue,
           rad: rad,
           sat: sat
         });
         val = obj.valFun(hue, sat);
-        this.addVertex(obj, hue, sat, val, sat * vis.cos(-hue - 90) * 2.5, 0, sat * vis.sin(hue - 90) * 2.5);
+        this.addVertex(obj, hue, sat, val, sat * fac * vis.cos(-hue - 90), 0, sat * fac * vis.sin(hue - 90)); // -90 needs adjust
       }
     }
     this.main.log("Surface vertices", obj.vertices);
@@ -118,7 +117,7 @@ Surface = class Surface {
   }
 
   createBufferGeometry(obj) {
-    var geom, geomMesh, vertMat;
+    var geom, geomMesh, vertMat, wireMat, wireMesh;
     geom = new THREE.BufferGeometry();
     geom.setIndex(obj.indices);
     geom.setAttribute('position', new THREE.Float32BufferAttribute(obj.vertices, 3));
@@ -130,13 +129,16 @@ Surface = class Surface {
       vertexColors: THREE.FaceColors
     });
     geomMesh = new THREE.Mesh(geom, vertMat);
+    wireMat = new THREE.MeshBasicMaterial({
+      wireframe: true,
+      color: 0x000000
+    });
+    wireMesh = new THREE.Mesh(geom, wireMat);
+    geomMesh.add(wireMesh);
     obj.group.add(geomMesh);
   }
 
   // Assign vertex indexes to create all the triangular face indices
-  // wireMat = new THREE.MeshBasicMaterial( { wireframe:true, color:0xFFFFFF } )
-  // wireMesh = new THREE.Mesh( geom, wireMat )
-  // geomMesh.add(  wireMesh )
   createIndices(obj) {
     var i0, i1, i2, j, k, l, n, ref, ref1;
     n = obj.satNum + 1;
@@ -152,19 +154,19 @@ Surface = class Surface {
 
   addIndice(obj, i1, i2, i3) {
     obj.indices.push(i1, i2, i3);
-    this.addLine(obj, i1, i2, i3);
   }
 
+  // @addLine(  obj, i1, i2, i3 )
   add3Indices(obj, n, i0, i1, i2) {
     var ce, ne, oo, se;
-    oo = i0 * n; // Case where sat is zero
-    se = i0 * n; // Why is oo and se the same?
+    oo = i0 * n;
+    se = i0 * n + 1;
     ce = i1 * n;
-    ne = i2 * n;
+    ne = i2 * n + 1;
     this.addIndice(obj, oo, ce, se); // We only create 3 face indices
     this.addIndice(obj, oo, ce, ne);
     this.addIndice(obj, ce, se, ne);
-    console.log("Surface.add3Indices()", {
+    this.main.log("Surface.add3Indices()", {
       i0: i0,
       oo: oo,
       ce: ce,
@@ -184,7 +186,7 @@ Surface = class Surface {
     this.addIndice(obj, ce, se, ne);
     this.addIndice(obj, ce, ne, nw);
     this.addIndice(obj, ce, nw, sw);
-    console.log("Surface.add4Indices()", {
+    this.main.log("Surface.add4Indices()", {
       i0: i0,
       j: j,
       ce: ce,
@@ -193,24 +195,6 @@ Surface = class Surface {
       ne: ne,
       se: se
     });
-  }
-
-  addLine(obj, i1, i2, i3) {
-    var geom, line, mat, points, v1, v2, v3, vc;
-    vc = function(i, j) {
-      return obj.vertices[i * 3 + j];
-    };
-    points = [];
-    v1 = new THREE.Vector3(vc(i1, 0), vc(i1, 1), vc(i1, 2));
-    v2 = new THREE.Vector3(vc(i2, 0), vc(i2, 1), vc(i2, 2));
-    v3 = new THREE.Vector3(vc(i3, 0), vc(i3, 1), vc(i3, 2));
-    points.push(v1, v2, v3);
-    geom = new THREE.BufferGeometry().setFromPoints(points);
-    mat = new THREE.LineBasicMaterial({
-      color: 0x000000
-    });
-    line = new THREE.LineLoop(geom, mat);
-    obj.lineGroup.add(line);
   }
 
   // xyzs.push(vis.cos(hue)*sat,vis.sin(hue)*sat,0)
@@ -313,8 +297,28 @@ Surface = class Surface {
     return results;
   }
 
+  // Not called. Kept as a reference
+  addLine(obj, i1, i2, i3) {
+    var geom, line, mat, points, v1, v2, v3, vc;
+    vc = function(i, j) {
+      return obj.vertices[i * 3 + j];
+    };
+    points = [];
+    v1 = new THREE.Vector3(vc(i1, 0), vc(i1, 1), vc(i1, 2));
+    v2 = new THREE.Vector3(vc(i2, 0), vc(i2, 1), vc(i2, 2));
+    v3 = new THREE.Vector3(vc(i3, 0), vc(i3, 1), vc(i3, 2));
+    points.push(v1, v2, v3);
+    geom = new THREE.BufferGeometry().setFromPoints(points);
+    mat = new THREE.LineBasicMaterial({
+      color: 0x000000
+    });
+    line = new THREE.LineLoop(geom, mat);
+    vis.noop(line);
+  }
+
 };
 
+// obj.lineGroup.add( line )
 export default Surface;
 
 //# sourceMappingURL=Surface.js.map

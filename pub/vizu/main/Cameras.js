@@ -67,9 +67,10 @@ Cameras = class Cameras {
   }
 
   orthographic(opts, cc) { // Uses world coordinates
-    var aspect, bottom, camera, dist, far, helper, left, near, position, right, s, scale, scenePos, top;
+    var aspect, bottom, camera, dist, far, helper, left, near, position, right, scale, scaleXYZ, scenePos, top;
     aspect = this.main.aspectRatio;
     dist = cc.dist;
+    scale = opts.scale != null ? opts.scale : 1.0;
     left = opts.left != null ? opts.left : -dist * aspect;
     right = opts.right != null ? opts.right : dist * aspect;
     top = opts.top != null ? opts.top : dist;
@@ -81,15 +82,14 @@ Cameras = class Cameras {
       "y": dist * 0.2,
       "z": dist * 0.2
     };
-    s = 1.25;
-    scale = {
-      "x": s * aspect,
-      "y": s * aspect,
-      "z": s * aspect
+    scaleXYZ = {
+      x: aspect / scale,
+      y: aspect / scale,
+      z: aspect / scale
     };
     scenePos = this.main.scene.position;
     camera = new OrthographicCamera(left, right, top, bottom, near, far);
-    camera.scale.set(scale.x, scale.y, scale.z);
+    camera.scale.set(scaleXYZ.x, scaleXYZ.y, scaleXYZ.z);
     camera.position.set(position.x, position.y, position.z);
     camera.lookAt(scenePos.x, scenePos.y, scenePos.z);
     if ((opts.helper != null) && opts.helper) {

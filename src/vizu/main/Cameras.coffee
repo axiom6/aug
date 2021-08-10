@@ -37,6 +37,7 @@ class Cameras
   orthographic:( opts, cc ) ->  # Uses world coordinates
     aspect   = @main.aspectRatio
     dist     = cc.dist
+    scale    = if opts.scale?     then opts.scale     else 1.0
     left     = if opts.left?      then opts.left      else -dist * aspect
     right    = if opts.right?     then opts.right     else  dist * aspect
     top      = if opts.top?       then opts.top       else  dist
@@ -44,12 +45,11 @@ class Cameras
     near     = if opts.near?      then opts.near      else -dist * 5.0
     far      = if opts.far?       then opts.far       else  dist * 5.0
     position = if opts.position?  then opts.position  else { "x":dist*0.2, "y":dist*0.2, "z":dist*0.2 }
-    s        = 1.25
-    scale    = { "x":s*aspect, "y":s*aspect, "z":s*aspect }
+    scaleXYZ = { x:aspect/scale, y:aspect/scale, z:aspect/scale }
     scenePos = @main.scene.position
 
     camera = new OrthographicCamera( left, right, top, bottom, near, far )
-    camera.scale.set(    scale.x,    scale.y,    scale.z    )
+    camera.scale.set(    scaleXYZ.x, scaleXYZ.y, scaleXYZ.z )
     camera.position.set( position.x, position.y, position.z )
     camera.lookAt(       scenePos.x, scenePos.y, scenePos.z )
 
