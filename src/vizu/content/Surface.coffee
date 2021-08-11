@@ -11,7 +11,7 @@ class Surface
   drawHsv:() ->
     obj         = {}
     obj.group   = new THREE.Group()
-    obj.valFun = ( hue, sat ) -> 25
+    obj.valFun = ( hue, sat ) -> 50
     @toGeom( obj )
     @main.addToScene( obj.group )
     @main.addToScene( obj.sphereGroup )

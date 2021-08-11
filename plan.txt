@@ -1,9 +1,14 @@
 
 Debug
   1. Hexagon.coffee
+     a. Add more hex rings
+     a. Sat scaling and consider an angle driven adjustment
+     c. Add feature for an 30 deg angle shift
   2. Hsl Surface
      a. valFun range 0:100, sin funct time and ocillate
-  3. Grids yaxis scale off too short by 50%
+  3. Orthographic camera
+     b. Reorient axis with straight xy
+     a Grids yaxis scale off too short by 50%
      a. Look into Orthographic camera
   4. Vis
      a. Vis.str hex output wrong

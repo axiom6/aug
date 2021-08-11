@@ -393,7 +393,7 @@ class Vis extends Type
   asin:( y )       -> @deg360(Math.asin(y))     # Returns 270 to  90
   acos:( x )       -> @deg360(Math.acos(x))     # Returns 0   to 180
   sqrt:( val )     -> Math.sqrt(val)
-  hypoth:(x,y)     -> @sqrt(x*x,y*y)
+  hypoth:(x,y)     -> @sqrt(x*x+y*y)
   abs:(  val )     -> Math.abs( val  )
   max:(  args... ) -> Math.max( args )    # May not want args...
   min:(  args... ) -> Math.min( args )    # May not want args...

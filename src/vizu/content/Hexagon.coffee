@@ -23,9 +23,9 @@ class Hexagon extends Surface
     obj.hueInc    = 360 / obj.hueNum
     obj.huePri    = obj.hueInc * 2
     obj.satInc    = 100 / obj.satNum
-    obj.hexRadius = 10
-    obj.hexShort  = obj.hexRadius * vis.cos(30)
-    obj.satScale  = 1.0 # Scaling factor for convert coords to sat
+    obj.priRadius = 10
+    obj.secRadius = obj.priRadius * vis.cos(30)
+    obj.satScale  = 4.0 # Scaling factor for convert coords to sat
     obj.originIdx = 0
     obj.x0        = 0
     obj.y0        = 0
@@ -34,18 +34,26 @@ class Hexagon extends Surface
     @addVertex(   obj, 0, 0, obj.valFun(0,0), obj.x0, obj.z0, obj.z0 )  # Origin
     hexOrigin = @initHex( obj.originIdx )
     @hexVertices( obj, hexOrigin )
-    for hue in [0,60,120,180,240,300]
-      sat = 100
-      x = obj.x0 + obj.hexShort * vis.cos(hue) * 2.0
-      y = obj.y0
-      z = obj.z0 + obj.hexShort * vis.sin(hue) * 2.0
-      vcen = @vertexIndex(obj)
-      @addVertex( obj, hue, sat, obj.valFun(hue,sat), x, y, z )
-      @hexVertices( obj, @initHex(vcen) )
+    @sixHexes( obj, 60, obj.secRadius*2.0 )
+    @sixHexes( obj, 30, obj.priRadius*3.0 )
+    @sixHexes( obj, 60, obj.secRadius*4.0 )
     console.log( "Hexagon vertices", obj.vertices )
     @createBufferGeometry( obj )
     console.log( "Surface.toGeom Two()",
       { lenVertices:obj.vertices.length, lenIndices:obj.indices.length } )
+    return
+
+  sixHexes:( obj, orient, radius ) ->
+    angs = if orient is 60 then [0,60,120,180,240,300] else [330,30,90,150,210,270]
+    for ang in angs
+      x = obj.x0 + radius * vis.cos(ang)
+      y = obj.y0
+      z = obj.z0 + radius * vis.sin(ang)
+      hue = vis.hueZX( z, x )
+      sat = vis.round( vis.hypoth( x, z ) ) * obj.satScale
+      vcen = @vertexIndex(obj)
+      @addVertex(   obj, hue, sat, obj.valFun(hue,sat), x, y, z )
+      @hexVertices( obj, @initHex(vcen) )
     return
 
   vertexIndex:( obj ) ->
@@ -58,9 +66,9 @@ class Hexagon extends Surface
   hexVertices:( obj, hex ) ->
     for own key, idx of hex when key isnt "vcen" and idx is -1
       deg = @degKey( key )
-      x = obj.x0 + obj.hexRadius * vis.cos(deg)
-      y = obj.y0
-      z = obj.z0 + obj.hexRadius * vis.sin(deg)
+      x = obj.vertices[hex.vcen*3  ] + obj.priRadius * vis.cos(deg)
+      y = obj.vertices[hex.vcen*3+1]
+      z = obj.vertices[hex.vcen*3+2] + obj.priRadius * vis.sin(deg)
       hex[key] = @vertexIndex(obj)
       hue = vis.hueZX( z, x )
       sat = vis.round( vis.hypoth( x, z ) ) * obj.satScale

@@ -18,7 +18,7 @@ Surface = class Surface {
     obj = {};
     obj.group = new THREE.Group();
     obj.valFun = function(hue, sat) {
-      return 25;
+      return 50;
     };
     this.toGeom(obj);
     this.main.addToScene(obj.group);
