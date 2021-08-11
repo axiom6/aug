@@ -12,6 +12,7 @@ class Vis extends Type
     @uniqueIdExt = ''
     @chroma      = chroma
     @debug       = false
+    @smooth      = true
     @distribution10s = [0, 5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100]
     @distributionPri = [0,20,30,40,50,54,58,62,65,68,71,74,75,76,82,88,88,91,94,97,100]
     @distributionSec = [0,20,30,40,50,54,58,62,65,68,71,74,75,76,82,88,88,91,94,97,100]
@@ -225,8 +226,8 @@ class Vis extends Type
     rgb
 
   rgbHmi:( h, S, I ) ->
-    look   = @lookUpSat( S )
-    sat    = look * 0.01
+    smooth = if @smooth then @hillEq( S ) else S
+    sat    = smooth * 0.01
     desat  = 1 - sat
     bright = I * 0.01
     r = 0
@@ -266,7 +267,7 @@ class Vis extends Type
       b = sec( bak, fwd )
       g = desat
     rgb = @round( { r:r, g:g, b:b }, 255 * bright )
-    console.log( "Vis.rgbHmi()", { rgb:rgb, h:h, S:look, I:I } ) if @debug
+    console.log( "Vis.rgbHmi()", { rgb:rgb, h:h, S:smooth, I:I } ) if @debug
     rgb
 
   # From chroma.js
@@ -329,9 +330,6 @@ class Vis extends Type
       when 5 then { r:v, g:p, b:q }
     @round( rgb, 255 )
 
-  sigmoidal:( x, k, x0=0.5, L=1 ) ->
-    L / ( 1 + Math.exp(-k*(x-x0)) )
-
   interpolateRgb:( rgb1, r1, rgb2, r2 ) ->
     { r:rgb1.r * r1 + rgb2.r * r2, g:rgb1.g * r1 + rgb2.g * r2, b:rgb1.b * r1 + rgb2.b * r2 }
 
@@ -359,6 +357,20 @@ class Vis extends Type
     console.log( "Vis.lookUpSat(sat)", { sat:sat, idx:idx, val:val } ) if @debug
     val
 
+  sigmoidal:( x, k, x0=0.5, L=1 ) ->
+    L / ( 1 + Math.exp(-k*(x-x0)) )
+
+  sigmoidalUni:( x ) ->
+    1 / ( 1 + Math.exp(-x) )
+
+  # Hill Equation
+  hillEq:( x, vmax=120.0, vmid=50.0, n=1.2 ) ->
+    xn = Math.pow( x, n )
+    vmax * xn / ( vmid + xn )
+
+  smoothSat:( sat ) ->
+    sat * @sigmoidalUni( sat )
+
   even:( val ) =>
     val
 
@@ -372,17 +384,20 @@ class Vis extends Type
   # --- Degrees and Radians ---
   #  The svg functions deal with the svg convention where the y 90 degree axis points down
 
-  rad:( deg )     -> deg * Math.PI / 180
-  deg:( rad )     -> rad * 180 / Math.PI
-  sin:( deg )     -> Math.sin(@rad(deg))
-  cos:( deg )     -> Math.cos(@rad(deg))
-  tan:( deg )     -> Math.tan(@rad(deg))
-  asin:( y )      -> @deg(Math.asin(y))
-  acos:( x )      -> @deg(Math.acos(x))
-  atan:( r )      -> @deg(Math.atan(r))
-  abs:( val )     -> Math.abs( val  )
-  max:( args... ) -> Math.max( args )    # May not want args...
-  min:( args... ) -> Math.min( args )    # May not want args...
+  rad:( deg )      -> deg * Math.PI / 180
+  deg:( rad )      -> rad * 180 / Math.PI
+  deg360:(rad)     -> if rad >= Math.PI then @deg(rad) else 360 + @deg(rad)
+  sin:( deg )      -> Math.sin(@rad(deg))
+  cos:( deg )      -> Math.cos(@rad(deg))
+  tan:( deg )      -> Math.tan(@rad(deg))
+  asin:( y )       -> @deg360(Math.asin(y))     # Returns 270 to  90
+  acos:( x )       -> @deg360(Math.acos(x))     # Returns 0   to 180
+  atan2:(y,x)      -> @deg360(Math.atan2(y,x))
+  sqrt:( val )     -> Math.sqrt(val)
+  hypoth:(x,y)     -> @sqrt(x*x,y*y)
+  abs:(  val )     -> Math.abs( val  )
+  max:(  args... ) -> Math.max( args )    # May not want args...
+  min:(  args... ) -> Math.min( args )    # May not want args...
 
   rot:( deg, ang ) ->
     a = deg+ang
@@ -466,26 +481,3 @@ class Vis extends Type
 
 export vis = new Vis()
 
-###
-  hcl:( arg ) ->
-    rgb  = @rgb( arg )
-    R = rgb.r
-    G = rgb.g
-    B = rgb.b
-    a   = 3 * ( Math.min(R,G,B) / Math.max(R,G,B) ) / 100
-    q    = Math.exp( a )
-    h180   = @deg( Math.atan2( G - B, R - G ) )
-    H   = if h180 < 0 then 360 + h180 else h180
-    C   = q * ( Math.abs(R−G) + Math.abs(G−B) + Math.abs(B−R) ) / 3
-    L   = q *Math.max(R,G,B) + (1-q) * Math.min(R, G,B)  / 2
-    [ H. C, L ]
-
-HCL
-  a   = 3 * ( Min(R,G,B) / Max(R,G,B) ) / 100
-  q    = Math.exp( a )
-  h180   = @deg( Math.atan2( G − B, R - G ) )
-  H   = if h180 < 0 then 360 + h180 else h180
-  C   = q * ( Math.abs(R−G) + Math.abs(G−B) + Math.abs(B−R) ) / 3
-  L   = q*Math.max(R,G,B) + (1 − q)*Math.mim(R, G,B)  / 2
-
-###

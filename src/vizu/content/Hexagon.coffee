@@ -14,7 +14,7 @@ class Hexagon extends Surface
     obj.normals   = []
     obj.uvs       = []
     obj.indices   = []
-    obj.originIdx = 0   # Will be reset
+    obj.originIdx = 0
     obj.vertex    = new THREE.Vector3()
     obj.normal    = new THREE.Vector3()
     obj.uv        = new THREE.Vector2()
@@ -24,25 +24,12 @@ class Hexagon extends Surface
     obj.hueInc    = 360 / obj.hueNum
     obj.huePri    = obj.hueInc * 2
     obj.satInc    = 100 / obj.satNum
-    cos30         = vis.cos(30)
-    angTan        = vis.atan(1.0/6.0)
-    facSec        = 1.0 / vis.cos(angTan)
+    obj.hexRad    = 10
+
     @initSpheres( obj )
-    for hue in [330,30,90,150,210,270]
-        sat = 50
-        rad = 20
-        fac = 1.0
-        val = obj.valFun(hue,sat)
-        @addVertex( obj, hue, sat, val, rad*fac*vis.cos(-hue-90), 0, rad*fac*vis.sin(hue-90) )
-    for hue in [330,0,30,60,90,120,150,180,210,240,270,300]
-      sat = 100
-      rad = 40
-      fac = if hue % 60 is 0  then facSec else 1.0
-      val = obj.valFun(hue,sat)
-      vis.noop( rad, fac, val, cos30 )
-      # @addVertex( obj, hue, sat, val, rad*fac*vis.cos(-hue-90), 0, rad*fac*vis.sin(hue-90) )
-    obj.originIdx = obj.vertices.length/3
-    @addVertex( obj, 0, 0, 0, 0, 0, 0 )  # Origin
+    @addVertex(   obj, 0, 0, 0, 0, 0, 0 )  # Origin
+    hexOrigin = @initHex( obj.originIdx )
+    @hexVerticea( obj, hexOrigin )
     console.log( "Hexagon vertices", obj.vertices )
     @createIndices( obj )
     @createBufferGeometry( obj )
@@ -51,7 +38,45 @@ class Hexagon extends Surface
       { numVertex:obj.vertices.length/3, numIndices:obj.indices.length/3, calcIndices:calcIndices } )
     return
 
-  # Assign vertex indexes to create all the triangular face indices
+  # Vertex indices set the @hexIndices
+  initHex:( vcen ) ->
+    {  vcen:vcen, v330:-1, v030:-1, v090:-1, v150:-1, v210:-1, v270:-1 }
+
+  hexVerticea:( obj, hex ) ->
+    for own key, idx of hex when key isnt "vcen" and idx is -1
+      deg = @degKey( key )
+      x   = obj.vertices[hex.vcen  ] + obj.hexRad * vis.cos(deg)
+      y   = obj.vertices[hex.vcen+1]
+      z   = obj.vertices[hex.vcen+2] + obj.hexRad * vis.sin(deg)
+      hex[key]  = obj.vertices.length
+      console.log( "Hexagon.hexVerticea", { key:key, idx:hex[key], hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
+      hue = @vis.atan2(  z, x )
+      sat = @vis.hypoth( x, x )
+      val = @vis.valFun( hue, sat )
+      @addVertex( obj, hue, sat, val, x, y, z )
+    @hexIndices(  obj, hex )
+    return
+      
+  hexIndices:(  obj, hex ) ->
+    @addIndice( obj, hex.vcen, hex.v330, hex.v030 )
+    @addIndice( obj, hex.vcen, hex.v030, hex.v090 )
+    @addIndice( obj, hex.vcen, hex.v090, hex.v150 )
+    @addIndice( obj, hex.vcen, hex.v150, hex.v210 )
+    @addIndice( obj, hex.vcen, hex.v210, hex.v270 )
+    @addIndice( obj, hex.vcen, hex.v270, hex.v330 )
+    return
+
+  degKey:( key ) ->
+    switch key
+      when "v330" then 330
+      when "v030" then  30
+      when "v090" then  90
+      when "v150" then 150
+      when "v210" then 210
+      when "v270" then 270
+      else               0
+
+# Assign vertex indexes to create all the triangular face indices
   createIndices:( obj ) ->
     n = 0
     @add6Indices( obj, n, 0, 0 )
