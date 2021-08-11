@@ -33,27 +33,26 @@ class Hexagon extends Surface
     console.log( "Hexagon vertices", obj.vertices )
     @createIndices( obj )
     @createBufferGeometry( obj )
-    calcIndices = 6
     console.log( "Surface.toGeom Two()",
-      { numVertex:obj.vertices.length/3, numIndices:obj.indices.length/3, calcIndices:calcIndices } )
+      { lenVertices:obj.vertices.length, lenIndices:obj.indices.length } )
     return
 
   # Vertex indices set the @hexIndices
   initHex:( vcen ) ->
-    {  vcen:vcen, v330:-1, v030:-1, v090:-1, v150:-1, v210:-1, v270:-1 }
+    { vcen:vcen, v330:-1, v030:-1, v090:-1, v150:-1, v210:-1, v270:-1 }
 
   hexVerticea:( obj, hex ) ->
     for own key, idx of hex when key isnt "vcen" and idx is -1
       deg = @degKey( key )
-      x   = obj.vertices[hex.vcen  ] + obj.hexRad * vis.cos(deg)
-      y   = obj.vertices[hex.vcen+1]
-      z   = obj.vertices[hex.vcen+2] + obj.hexRad * vis.sin(deg)
-      hex[key]  = obj.vertices.length
-      console.log( "Hexagon.hexVerticea", { key:key, idx:hex[key], hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
-      hue = @vis.atan2(  z, x )
-      sat = @vis.hypoth( x, x )
-      val = @vis.valFun( hue, sat )
+      x = obj.vertices[hex.vcen  ] + obj.hexRad * vis.cos(deg)
+      y = obj.vertices[hex.vcen+1]
+      z = obj.vertices[hex.vcen+2] + obj.hexRad * vis.sin(deg)
+      hex[key] = obj.vertices.length
+      hue = vis.round( vis.atan2(  z, x ) )
+      sat = vis.round( vis.hypoth( x, x ) )
+      val = obj.valFun( hue, sat )
       @addVertex( obj, hue, sat, val, x, y, z )
+      console.log( "Hexagon.hexVerticea", { key:key, idx:hex[key], hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
     @hexIndices(  obj, hex )
     return
       

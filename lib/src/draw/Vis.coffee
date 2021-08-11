@@ -46,7 +46,7 @@ class Vis extends Type
     else if @isNumber(arg)
       rgb = { r:(arg & 0xFF0000) >> 16,   g:(arg & 0x00FF00) >> 8,  b:arg & 0x0000FF }
       rgb.a = 1.0
-    @round(rgb)
+    @roundRGB(rgb)
 
   # Returns an rgb array with an alpha or full opacity of 1
   rgba:( arg ) ->
@@ -124,7 +124,7 @@ class Vis extends Type
     a
 
   # Rounds and scales rgb value amd limits ints between 0 to 255
-  round:( rgb, scale=1, add=0 ) ->
+  roundRGB:( rgb, scale=1, add=0 ) ->
     rgb.a = if rgb.a? then rgb.a else 1.0
     { r:@adj((rgb.r+add)*scale), g:@adj((rgb.g+add)*scale), b:@adj((rgb.b+add)*scale), a:rgb.a }
 
@@ -184,7 +184,7 @@ class Vis extends Type
     c = chroma.hsv( h, S*0.01, V*0.01 )
     a = c._rgb
     rgb = { r:a[0], g:a[1], b:a[2], a:1 }
-    rgb = @round( rgb, 1.0 )
+    rgb = @roundRGB( rgb, 1.0 )
     console.log( "Vis.rgbHsc()", rgb, h, S, V ) if @debug
     rgb
 
@@ -212,7 +212,7 @@ class Vis extends Type
       when 3 then { r:x, g:y, b:1 }
       when 4 then { r:z, g:x, b:1 }
       when 5 then { r:1, g:x, b:y }
-    @round( rgb, 255 * V / 100 )
+    @roundRGB( rgb, 255 * V / 100 )
 
   rgbHwv:( h, S, V ) ->
     s = S * 0.01
@@ -221,7 +221,7 @@ class Vis extends Type
       k = ( n + h / 60 ) % 6
       v = v - v * s * Math.max( 0, Math.min( k, 4-k, 1 ) )
     rgb = { r:f(5), g:f(3), b:f(1) }
-    rgb = @round( rgb, 255 )
+    rgb = @roundRGB( rgb, 255 )
     console.log( "Vis.rgbHwv()", rgb, h, S, V ) # if @debug
     rgb
 
@@ -266,7 +266,7 @@ class Vis extends Type
       r = pri( fwd, fwd )
       b = sec( bak, fwd )
       g = desat
-    rgb = @round( { r:r, g:g, b:b }, 255 * bright )
+    rgb = @roundRGB( { r:r, g:g, b:b }, 255 * bright )
     console.log( "Vis.rgbHmi()", { rgb:rgb, h:h, S:smooth, I:I } ) if @debug
     rgb
 
@@ -290,7 +290,7 @@ class Vis extends Type
       g = (1-s)/3
       b = (1+s*@cos(hue)/@cos(120-hue))/3
       r = 1 - (g+b)
-    @round( { r:r, g:g, b:b }, 255 * i * 3 ) # * 3
+    @roundRGB( { r:r, g:g, b:b }, 255 * i * 3 ) # * 3
 
   # toRygb=true is 'ysc'
   # hue is converted to red=0deg, green=120deg and blue=240deg
@@ -310,7 +310,7 @@ class Vis extends Type
       when 3 then { r:0, g:x, b:c }  # 180 - 240  blue
       when 4 then { r:x, g:0, b:c }  # 240 - 300  blue
       when 5 then { r:c, g:0, b:x }  # 300 - 360  red
-    @round( rgb, 100, add )
+    @roundRGB( rgb, 100, add )
 
   # Standalone since HSV is not detected by @rgb( arg )
   rgbHsl:( H, s, l ) ->
@@ -328,7 +328,7 @@ class Vis extends Type
       when 3 then { r:p, g:q, b:v }
       when 4 then { r:t, g:p, b:v }
       when 5 then { r:v, g:p, b:q }
-    @round( rgb, 255 )
+    @roundRGB( rgb, 255 )
 
   interpolateRgb:( rgb1, r1, rgb2, r2 ) ->
     { r:rgb1.r * r1 + rgb2.r * r2, g:rgb1.g * r1 + rgb2.g * r2, b:rgb1.b * r1 + rgb2.b * r2 }
@@ -398,6 +398,7 @@ class Vis extends Type
   abs:(  val )     -> Math.abs( val  )
   max:(  args... ) -> Math.max( args )    # May not want args...
   min:(  args... ) -> Math.min( args )    # May not want args...
+  round:( val )    -> Math.round( val )
 
   rot:( deg, ang ) ->
     a = deg+ang

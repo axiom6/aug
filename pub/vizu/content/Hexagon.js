@@ -15,7 +15,7 @@ Hexagon = class Hexagon extends Surface {
   }
 
   toGeom(obj) {
-    var calcIndices, hexOrigin;
+    var hexOrigin;
     obj.colors = [];
     obj.vertices = [];
     obj.normals = [];
@@ -39,11 +39,9 @@ Hexagon = class Hexagon extends Surface {
     console.log("Hexagon vertices", obj.vertices);
     this.createIndices(obj);
     this.createBufferGeometry(obj);
-    calcIndices = 6;
     console.log("Surface.toGeom Two()", {
-      numVertex: obj.vertices.length / 3,
-      numIndices: obj.indices.length / 3,
-      calcIndices: calcIndices
+      lenVertices: obj.vertices.length,
+      lenIndices: obj.indices.length
     });
   }
 
@@ -73,6 +71,10 @@ Hexagon = class Hexagon extends Surface {
       y = obj.vertices[hex.vcen + 1];
       z = obj.vertices[hex.vcen + 2] + obj.hexRad * vis.sin(deg);
       hex[key] = obj.vertices.length;
+      hue = vis.round(vis.atan2(z, x));
+      sat = vis.round(vis.hypoth(x, x));
+      val = obj.valFun(hue, sat);
+      this.addVertex(obj, hue, sat, val, x, y, z);
       console.log("Hexagon.hexVerticea", {
         key: key,
         idx: hex[key],
@@ -83,10 +85,6 @@ Hexagon = class Hexagon extends Surface {
         y: y,
         z: z
       });
-      hue = this.vis.atan2(z, x);
-      sat = this.vis.hypoth(x, x);
-      val = this.vis.valFun(hue, sat);
-      this.addVertex(obj, hue, sat, val, x, y, z);
     }
     this.hexIndices(obj, hex);
   }
