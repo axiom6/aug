@@ -14,7 +14,6 @@ class Hexagon extends Surface
     obj.normals   = []
     obj.uvs       = []
     obj.indices   = []
-    obj.originIdx = 0
     obj.vertex    = new THREE.Vector3()
     obj.normal    = new THREE.Vector3()
     obj.uv        = new THREE.Vector2()
@@ -24,34 +23,49 @@ class Hexagon extends Surface
     obj.hueInc    = 360 / obj.hueNum
     obj.huePri    = obj.hueInc * 2
     obj.satInc    = 100 / obj.satNum
-    obj.hexRad    = 10
-
+    obj.hexRadius = 10
+    obj.hexShort  = obj.hexRadius * vis.cos(30)
+    obj.satScale  = 1.0 # Scaling factor for convert coords to sat
+    obj.originIdx = 0
+    obj.x0        = 0
+    obj.y0        = 0
+    obj.z0        = 0
     @initSpheres( obj )
-    @addVertex(   obj, 0, 0, 0, 0, 0, 0 )  # Origin
+    @addVertex(   obj, 0, 0, obj.valFun(0,0), obj.x0, obj.z0, obj.z0 )  # Origin
     hexOrigin = @initHex( obj.originIdx )
-    @hexVerticea( obj, hexOrigin )
+    @hexVertices( obj, hexOrigin )
+    for hue in [0,60,120,180,240,300]
+      sat = 100
+      x = obj.x0 + obj.hexShort * vis.cos(hue) * 2.0
+      y = obj.y0
+      z = obj.z0 + obj.hexShort * vis.sin(hue) * 2.0
+      vcen = @vertexIndex(obj)
+      @addVertex( obj, hue, sat, obj.valFun(hue,sat), x, y, z )
+      @hexVertices( obj, @initHex(vcen) )
     console.log( "Hexagon vertices", obj.vertices )
-    @createIndices( obj )
     @createBufferGeometry( obj )
     console.log( "Surface.toGeom Two()",
       { lenVertices:obj.vertices.length, lenIndices:obj.indices.length } )
     return
 
+  vertexIndex:( obj ) ->
+    obj.vertices.length / 3
+
   # Vertex indices set the @hexIndices
   initHex:( vcen ) ->
     { vcen:vcen, v330:-1, v030:-1, v090:-1, v150:-1, v210:-1, v270:-1 }
 
-  hexVerticea:( obj, hex ) ->
+  hexVertices:( obj, hex ) ->
     for own key, idx of hex when key isnt "vcen" and idx is -1
       deg = @degKey( key )
-      x = obj.vertices[hex.vcen  ] + obj.hexRad * vis.cos(deg)
-      y = obj.vertices[hex.vcen+1]
-      z = obj.vertices[hex.vcen+2] + obj.hexRad * vis.sin(deg)
-      hex[key] = obj.vertices.length
-      hue = vis.round( vis.atan2(  z, x ) )
-      sat = vis.round( vis.hypoth( x, x ) )
+      x = obj.x0 + obj.hexRadius * vis.cos(deg)
+      y = obj.y0
+      z = obj.z0 + obj.hexRadius * vis.sin(deg)
+      hex[key] = @vertexIndex(obj)
+      hue = vis.hueZX( z, x )
+      sat = vis.round( vis.hypoth( x, z ) ) * obj.satScale
       val = obj.valFun( hue, sat )
-      @addVertex( obj, hue, sat, val, x, y, z )
+      @addVertex(  obj, hue, sat, val, x, y, z )
       console.log( "Hexagon.hexVerticea", { key:key, idx:hex[key], hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
     @hexIndices(  obj, hex )
     return
@@ -75,48 +89,8 @@ class Hexagon extends Surface
       when "v270" then 270
       else               0
 
-# Assign vertex indexes to create all the triangular face indices
-  createIndices:( obj ) ->
-    n = 0
-    @add6Indices( obj, n, 0, 0 )
-    console.log( "Hexagon Indices", obj.indices )
-    return
-
   addIndice:(    obj, i1, i2, i3 ) ->
     obj.indices.push( i1, i2, i3 )
-    return
-
-  add6Indices:( obj, n, i, j ) ->
-    vis.noop( n, i, j )
-    pcen = obj.originIdx
-    p330 = 0
-    p030 = 1
-    p090 = 2
-    p150 = 3
-    p210 = 4
-    p270 = 5
-    @addIndice( obj, pcen, p330, p030 )
-    @addIndice( obj, pcen, p030, p090 )
-    @addIndice( obj, pcen, p090, p150 )
-    @addIndice( obj, pcen, p150, p210 )
-    @addIndice( obj, pcen, p210, p270 )
-    @addIndice( obj, pcen, p270, p330 )
-    return
-
-  add60Indices:( obj, n, i, j ) ->
-    pcen = n*i      + j
-    p330 = n*(i+11) + j + 1
-    p030 = n*(i+ 1) + j + 1
-    p090 = n*(i+ 2) + j + 1
-    p150 = n*(i+ 3) + j + 1
-    p210 = n*(i+ 4) + j + 1
-    p270 = n*(i+ 5) + j + 1
-    @addIndice( obj, pcen, p330, p030 )
-    @addIndice( obj, pcen, p030, p090 )
-    @addIndice( obj, pcen, p090, p150 )
-    @addIndice( obj, pcen, p150, p210 )
-    @addIndice( obj, pcen, p210, p270 )
-    @addIndice( obj, pcen, p270, p330 )
     return
 
 export default Hexagon

@@ -75,7 +75,7 @@ class Surface
     obj.uv.y = sat / obj.satInc / obj.satNum
     obj.uvs.push( obj.uv.x, obj.uv.y )
     @addSphere( obj, rgb, x, y, z )
-    console.log( "Surface.addVertex()", { hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
+    @main.log( "Surface.addVertex()", { hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
     return
 
   addSphere:( obj, rgb, x, y, z ) ->

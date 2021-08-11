@@ -15,13 +15,12 @@ Hexagon = class Hexagon extends Surface {
   }
 
   toGeom(obj) {
-    var hexOrigin;
+    var hexOrigin, hue, i, len, ref, sat, vcen, x, y, z;
     obj.colors = [];
     obj.vertices = [];
     obj.normals = [];
     obj.uvs = [];
     obj.indices = [];
-    obj.originIdx = 0;
     obj.vertex = new THREE.Vector3();
     obj.normal = new THREE.Vector3();
     obj.uv = new THREE.Vector2();
@@ -31,18 +30,38 @@ Hexagon = class Hexagon extends Surface {
     obj.hueInc = 360 / obj.hueNum;
     obj.huePri = obj.hueInc * 2;
     obj.satInc = 100 / obj.satNum;
-    obj.hexRad = 10;
+    obj.hexRadius = 10;
+    obj.hexShort = obj.hexRadius * vis.cos(30);
+    obj.satScale = 1.0; // Scaling factor for convert coords to sat
+    obj.originIdx = 0;
+    obj.x0 = 0;
+    obj.y0 = 0;
+    obj.z0 = 0;
     this.initSpheres(obj);
-    this.addVertex(obj, 0, 0, 0, 0, 0, 0); // Origin
+    this.addVertex(obj, 0, 0, obj.valFun(0, 0), obj.x0, obj.z0, obj.z0); // Origin
     hexOrigin = this.initHex(obj.originIdx);
-    this.hexVerticea(obj, hexOrigin);
+    this.hexVertices(obj, hexOrigin);
+    ref = [0, 60, 120, 180, 240, 300];
+    for (i = 0, len = ref.length; i < len; i++) {
+      hue = ref[i];
+      sat = 100;
+      x = obj.x0 + obj.hexShort * vis.cos(hue) * 2.0;
+      y = obj.y0;
+      z = obj.z0 + obj.hexShort * vis.sin(hue) * 2.0;
+      vcen = this.vertexIndex(obj);
+      this.addVertex(obj, hue, sat, obj.valFun(hue, sat), x, y, z);
+      this.hexVertices(obj, this.initHex(vcen));
+    }
     console.log("Hexagon vertices", obj.vertices);
-    this.createIndices(obj);
     this.createBufferGeometry(obj);
     console.log("Surface.toGeom Two()", {
       lenVertices: obj.vertices.length,
       lenIndices: obj.indices.length
     });
+  }
+
+  vertexIndex(obj) {
+    return obj.vertices.length / 3;
   }
 
   // Vertex indices set the @hexIndices
@@ -58,7 +77,7 @@ Hexagon = class Hexagon extends Surface {
     };
   }
 
-  hexVerticea(obj, hex) {
+  hexVertices(obj, hex) {
     var deg, hue, idx, key, sat, val, x, y, z;
     for (key in hex) {
       if (!hasProp.call(hex, key)) continue;
@@ -67,12 +86,12 @@ Hexagon = class Hexagon extends Surface {
         continue;
       }
       deg = this.degKey(key);
-      x = obj.vertices[hex.vcen] + obj.hexRad * vis.cos(deg);
-      y = obj.vertices[hex.vcen + 1];
-      z = obj.vertices[hex.vcen + 2] + obj.hexRad * vis.sin(deg);
-      hex[key] = obj.vertices.length;
-      hue = vis.round(vis.atan2(z, x));
-      sat = vis.round(vis.hypoth(x, x));
+      x = obj.x0 + obj.hexRadius * vis.cos(deg);
+      y = obj.y0;
+      z = obj.z0 + obj.hexRadius * vis.sin(deg);
+      hex[key] = this.vertexIndex(obj);
+      hue = vis.hueZX(z, x);
+      sat = vis.round(vis.hypoth(x, z)) * obj.satScale;
       val = obj.valFun(hue, sat);
       this.addVertex(obj, hue, sat, val, x, y, z);
       console.log("Hexagon.hexVerticea", {
@@ -117,51 +136,8 @@ Hexagon = class Hexagon extends Surface {
     }
   }
 
-  // Assign vertex indexes to create all the triangular face indices
-  createIndices(obj) {
-    var n;
-    n = 0;
-    this.add6Indices(obj, n, 0, 0);
-    console.log("Hexagon Indices", obj.indices);
-  }
-
   addIndice(obj, i1, i2, i3) {
     obj.indices.push(i1, i2, i3);
-  }
-
-  add6Indices(obj, n, i, j) {
-    var p030, p090, p150, p210, p270, p330, pcen;
-    vis.noop(n, i, j);
-    pcen = obj.originIdx;
-    p330 = 0;
-    p030 = 1;
-    p090 = 2;
-    p150 = 3;
-    p210 = 4;
-    p270 = 5;
-    this.addIndice(obj, pcen, p330, p030);
-    this.addIndice(obj, pcen, p030, p090);
-    this.addIndice(obj, pcen, p090, p150);
-    this.addIndice(obj, pcen, p150, p210);
-    this.addIndice(obj, pcen, p210, p270);
-    this.addIndice(obj, pcen, p270, p330);
-  }
-
-  add60Indices(obj, n, i, j) {
-    var p030, p090, p150, p210, p270, p330, pcen;
-    pcen = n * i + j;
-    p330 = n * (i + 11) + j + 1;
-    p030 = n * (i + 1) + j + 1;
-    p090 = n * (i + 2) + j + 1;
-    p150 = n * (i + 3) + j + 1;
-    p210 = n * (i + 4) + j + 1;
-    p270 = n * (i + 5) + j + 1;
-    this.addIndice(obj, pcen, p330, p030);
-    this.addIndice(obj, pcen, p030, p090);
-    this.addIndice(obj, pcen, p090, p150);
-    this.addIndice(obj, pcen, p150, p210);
-    this.addIndice(obj, pcen, p210, p270);
-    this.addIndice(obj, pcen, p270, p330);
   }
 
 };

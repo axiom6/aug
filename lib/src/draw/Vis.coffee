@@ -386,19 +386,22 @@ class Vis extends Type
 
   rad:( deg )      -> deg * Math.PI / 180
   deg:( rad )      -> rad * 180 / Math.PI
-  deg360:(rad)     -> if rad >= Math.PI then @deg(rad) else 360 + @deg(rad)
+
   sin:( deg )      -> Math.sin(@rad(deg))
   cos:( deg )      -> Math.cos(@rad(deg))
   tan:( deg )      -> Math.tan(@rad(deg))
   asin:( y )       -> @deg360(Math.asin(y))     # Returns 270 to  90
   acos:( x )       -> @deg360(Math.acos(x))     # Returns 0   to 180
-  atan2:(y,x)      -> @deg360(Math.atan2(y,x))
   sqrt:( val )     -> Math.sqrt(val)
   hypoth:(x,y)     -> @sqrt(x*x,y*y)
   abs:(  val )     -> Math.abs( val  )
   max:(  args... ) -> Math.max( args )    # May not want args...
   min:(  args... ) -> Math.min( args )    # May not want args...
   round:( val )    -> Math.round( val )
+
+  deg360:(rad)     -> if rad < 0 then 360 + @deg(rad) else @deg(rad)
+  atan2:(y,x)      -> @deg360(Math.atan2(y,x))
+  hueZX:(z,x)      -> @round(@deg360(Math.atan2(-z,x)))
 
   rot:( deg, ang ) ->
     a = deg+ang

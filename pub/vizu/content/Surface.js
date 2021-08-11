@@ -98,7 +98,7 @@ Surface = class Surface {
     obj.uv.y = sat / obj.satInc / obj.satNum;
     obj.uvs.push(obj.uv.x, obj.uv.y);
     this.addSphere(obj, rgb, x, y, z);
-    console.log("Surface.addVertex()", {
+    this.main.log("Surface.addVertex()", {
       hue: hue,
       sat: sat,
       val: val,
