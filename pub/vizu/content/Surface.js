@@ -13,9 +13,10 @@ Surface = class Surface {
     this.main.log(this.klass + '()', this);
   }
 
-  drawHsv() {
+  drawHsv(orient) {
     var obj;
     obj = {};
+    obj.orient = orient;
     obj.group = new THREE.Group();
     obj.valFun = function(hue, sat) {
       return 50;
@@ -84,21 +85,41 @@ Surface = class Surface {
     obj.sphereGroup.add(obj.sphereMesh);
   }
 
+  vertexIndexXYZ(obj, x, y, z) {
+    var i, k, ref, vs;
+    vs = obj.vertices;
+    for (i = k = 0, ref = vs.length; k < ref; i = k += 3) {
+      if (vis.isCoord(x, vs[i], y, vs[i + 1], z, vs[i + 2])) {
+        return i / 3;
+      }
+    }
+    return -1;
+  }
+
+  vertexIndex(obj) {
+    return obj.vertices.length / 3;
+  }
+
   addVertex(obj, hue, sat, val, x, y, z) {
-    var rgb;
-    rgb = vis.rgb([hue, sat, val, "HMIR"]);
-    obj.colors.push(rgb.r * obj.sc, rgb.g * obj.sc, rgb.b * obj.sc);
-    obj.vertex.x = x;
-    obj.vertex.y = y;
-    obj.vertex.z = z;
-    obj.vertices.push(obj.vertex.x, obj.vertex.y, obj.vertex.z);
-    obj.normal.copy(obj.vertex).normalize();
-    obj.normals.push(obj.normal.x, obj.normal.y, obj.normal.z);
-    obj.uv.x = hue / obj.hueInc / obj.hueNum;
-    obj.uv.y = sat / obj.satInc / obj.satNum;
-    obj.uvs.push(obj.uv.x, obj.uv.y);
-    this.addSphere(obj, rgb, x, y, z);
+    var index, rgb;
+    index = this.vertexIndexXYZ(obj, x, y, z);
+    if (index === -1) {
+      index = this.vertexIndex(obj);
+      rgb = vis.rgb([hue, sat, val, "HMIR"]);
+      obj.colors.push(rgb.r * obj.sc, rgb.g * obj.sc, rgb.b * obj.sc);
+      obj.vertex.x = x;
+      obj.vertex.y = y;
+      obj.vertex.z = z;
+      obj.vertices.push(obj.vertex.x, obj.vertex.y, obj.vertex.z);
+      obj.normal.copy(obj.vertex).normalize();
+      obj.normals.push(obj.normal.x, obj.normal.y, obj.normal.z);
+      obj.uv.x = hue / obj.hueInc / obj.hueNum;
+      obj.uv.y = sat / obj.satInc / obj.satNum;
+      obj.uvs.push(obj.uv.x, obj.uv.y);
+      this.addSphere(obj, rgb, x, y, z);
+    }
     this.main.log("Surface.addVertex()", {
+      index: index,
       hue: hue,
       sat: sat,
       val: val,
@@ -106,6 +127,7 @@ Surface = class Surface {
       y: y,
       z: z
     });
+    return index;
   }
 
   addSphere(obj, rgb, x, y, z) {

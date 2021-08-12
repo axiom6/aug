@@ -149,19 +149,6 @@ class Vis extends Type
     else if 240 <= rgbHue and rgbHue < 360 then rygbHue = 270 + (rgbHue-240) *  90 / 120
     rygbHue
 
-  ###
-  black:      { in: [0,0,0],     out: [0,0,0,1]},
-  white:      { in: [0,0,1],     out: [255,255,255,1]},
-  gray:       { in: [0,0,0.5],   out: [127.5,127.5,127.5,1]},
-  red:        { in: [0,1,0.5],   out: [255,0,0,1]},
-  yellow:     { in: [60,1,0.5],  out: [255,255,0,1]},
-  green:      { in: [120,1,0.5], out: [0,255,0,1]},
-  cyan:       { in: [180,1,0.5], out: [0,255,255,1]},
-  blue:       { in: [240,1,0.5], out: [0,0,255,1]},
-  magenta:    { in: [300,1,0.5], out: [255,0,255,1]},
-  chorma.hsv()
-  ###
-
   rgbCyl:( a, type ) ->
     isRYGB = not ( type.length is 4 and type.charAt(3) is 'R' )
     h = if isRYGB then @rgbHue(a[0]) else a[0]
@@ -387,8 +374,8 @@ class Vis extends Type
   rad:( deg )      -> deg * Math.PI / 180
   deg:( rad )      -> rad * 180 / Math.PI
 
-  sin:( deg )      -> Math.sin(@rad(deg))
-  cos:( deg )      -> Math.cos(@rad(deg))
+  sin:( deg )      -> @toZero(Math.sin(@rad(deg)))
+  cos:( deg )      -> @toZero(Math.cos(@rad(deg)))
   tan:( deg )      -> Math.tan(@rad(deg))
   asin:( y )       -> @deg360(Math.asin(y))     # Returns 270 to  90
   acos:( x )       -> @deg360(Math.acos(x))     # Returns 0   to 180
@@ -420,7 +407,10 @@ class Vis extends Type
 
   floor:( x, dx )          ->  dr = Math.round(dx); Math.floor( x / dr ) * dr
   ceil:(  x, dx )          ->  dr = Math.round(dx); Math.ceil(  x / dr ) * dr
-  isZero:( v )             -> -0.01 <  v    and v  <  0.01
+  isZero:( v )             ->  -0.01 < v and v <   0.01
+  toZero:( v )             -> if @isZero(v) then 0.0 else v
+  isEqual:( x, y )         -> x-0.01 < y and y < x+0.01
+  isCoord:(x1,x2,y1,y2,z1,z2) -> @isEqual(x1,x2) and @isEqual(y1,y2) and @isEqual(z1,z2)
   within:(min,val,max)     -> min   <= val  and val <= max  # Closed interval with <=
 
   hasGlobal:( global, issue=true ) ->

@@ -4,19 +4,22 @@ Debug
      a. Add more hex rings
      a. Sat scaling and consider an angle driven adjustment
      c. Add feature for an 30 deg angle shift
-  2. Hsl Surface
+     d. Vertice index lookup
+  2. Organize Main.json and Main.coof
+  3. Hsl Surface
      a. valFun range 0:100, sin funct time and ocillate
-  3. Orthographic camera
+  4. Orthographic camera
      b. Reorient axis with straight xy
      a Grids yaxis scale off too short by 50%
      a. Look into Orthographic camera
-  4. Vis
-     a. Vis.str hex output wrong
-     b. Fix padded and move for and text color
-  5. Fully move Cube in Aug to Visu
+  5. Vis
+     a. Cleanup
+     b. Vis.str hex output wrong
+     c. Fix padded and move for and text color
+  7. Fully move Cube in Aug to Visu
      a. Consider having Cube initialized by Main
-  6. Reorganize Visu menus
-  7. Clean up zzz
+  8. Reorganize Visu menus
+  9. Clean up zzz
 
 Features One
   1. Test

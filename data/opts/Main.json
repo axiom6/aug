@@ -1,5 +1,5 @@
 {
-  "Hexagon": {
+  "Hex30": {
     "main": {
       "debug":false, "verify":false },
     "coords": {
@@ -10,7 +10,22 @@
       "light":"Ambient" },
     "content": {
       "plane":false, "grids":false, "axes":false, "axeshelper":true, "cube":false,
-      "hsv":false, "hues": false, "surface":false, "hexagon":true },
+      "hsv":false, "hues": false, "surface":false, "hex30":true, "hex60":false },
+    "render": {
+      "shadowMap":true },
+    "animate": {} },
+  "Hex60": {
+    "main": {
+      "debug":false, "verify":false },
+    "coords": {
+      "xmin":0, "xmax":100, "xtick1":10, "ymin":0, "ymax":100, "ytick1":10, "zmin":0, "zmax":100, "ztick1":10 },
+    "cameras": {
+      "camera": "Orthographic", "controls":"Orbit", "helper":false, "scale":2.5 },
+    "lights":{
+      "light":"Ambient" },
+    "content": {
+      "plane":false, "grids":false, "axes":false, "axeshelper":true, "cube":false,
+      "hsv":false, "hues": false, "surface":false, "hex30":false, "hex60":true },
     "render": {
       "shadowMap":true },
     "animate": {} },

@@ -212,9 +212,14 @@ Vizu = (function() {
   // This does not make sense
   Vizu.pages = {
     Main: {
-      Hexagon: {
-        title: 'Hexagon',
-        key: 'Hexagon',
+      Hex30: {
+        title: 'Hex30',
+        key: 'Hex30',
+        show: false
+      },
+      Hex60: {
+        title: 'Hex60',
+        key: 'Hex60',
         show: false
       },
       Surface: {

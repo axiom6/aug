@@ -84,10 +84,13 @@ Content = class Content {
         this.drawHues(this.main.pageKey, true);
       }
       if ((this.opts['surface'] != null) && this.opts['surface']) {
-        this.surface.drawHsv();
+        this.surface.drawHsv(60);
       }
-      if ((this.opts['hexagon'] != null) && this.opts['hexagon']) {
-        this.hexagon.drawHsv();
+      if ((this.opts['hex30'] != null) && this.opts['hex30']) {
+        this.hexagon.drawHsv(30);
+      }
+      if ((this.opts['hex60'] != null) && this.opts['hex60']) {
+        this.hexagon.drawHsv(60);
       }
     } else {
       this.grids = this.drawGrids();

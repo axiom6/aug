@@ -8,8 +8,9 @@ class Surface
     @klass   = @constructor.name
     @main.log( @klass+'()', @ )
 
-  drawHsv:() ->
+  drawHsv:( orient ) ->
     obj         = {}
+    obj.orient  = orient
     obj.group   = new THREE.Group()
     obj.valFun = ( hue, sat ) -> 50
     @toGeom( obj )
@@ -62,21 +63,33 @@ class Surface
     obj.sphereGroup.add( obj.sphereMesh )
     return
 
+  vertexIndexXYZ:( obj, x, y, z ) ->
+    vs = obj.vertices
+    for i in [0...vs.length] by 3
+      return i/3 if vis.isCoord( x, vs[i], y, vs[i+1], z, vs[i+2] )
+    -1
+
+  vertexIndex:( obj ) ->
+    obj.vertices.length / 3
+
   addVertex:( obj, hue, sat, val, x, y, z ) ->
-    rgb = vis.rgb( [ hue, sat, val, "HMIR" ] )
-    obj.colors.push( rgb.r*obj.sc, rgb.g*obj.sc, rgb.b*obj.sc )
-    obj.vertex.x = x
-    obj.vertex.y = y
-    obj.vertex.z = z
-    obj.vertices.push( obj.vertex.x, obj.vertex.y, obj.vertex.z )
-    obj.normal.copy(   obj.vertex ).normalize();
-    obj.normals.push( obj.normal.x, obj.normal.y, obj.normal.z )
-    obj.uv.x = hue / obj.hueInc / obj.hueNum
-    obj.uv.y = sat / obj.satInc / obj.satNum
-    obj.uvs.push( obj.uv.x, obj.uv.y )
-    @addSphere( obj, rgb, x, y, z )
-    @main.log( "Surface.addVertex()", { hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
-    return
+    index = @vertexIndexXYZ( obj, x, y, z )
+    if index is -1
+      index = @vertexIndex( obj )
+      rgb = vis.rgb( [ hue, sat, val, "HMIR" ] )
+      obj.colors.push( rgb.r*obj.sc, rgb.g*obj.sc, rgb.b*obj.sc )
+      obj.vertex.x = x
+      obj.vertex.y = y
+      obj.vertex.z = z
+      obj.vertices.push( obj.vertex.x, obj.vertex.y, obj.vertex.z )
+      obj.normal.copy(   obj.vertex ).normalize();
+      obj.normals.push(  obj.normal.x, obj.normal.y, obj.normal.z )
+      obj.uv.x = hue / obj.hueInc / obj.hueNum
+      obj.uv.y = sat / obj.satInc / obj.satNum
+      obj.uvs.push( obj.uv.x, obj.uv.y )
+      @addSphere( obj, rgb, x, y, z )
+    @main.log( "Surface.addVertex()", { index:index, hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
+    index
 
   addSphere:( obj, rgb, x, y, z ) ->
     obj.sphereMatrix.setPosition( x, y, z );

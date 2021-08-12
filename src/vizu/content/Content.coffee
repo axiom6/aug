@@ -34,8 +34,9 @@ class Content
       @drawHsv( true  )                     if @opts['ysv']?        and @opts['ysv']
       @drawHsv( false )                     if @opts['hsv']?        and @opts['hsv']
       @drawHues( @main.pageKey, true  )     if @opts['hues']?       and @opts['hues']
-      @surface.drawHsv()                    if @opts['surface']?    and @opts['surface']
-      @hexagon.drawHsv()                    if @opts['hexagon']?    and @opts['hexagon']
+      @surface.drawHsv(60)                  if @opts['surface']?    and @opts['surface']  # arg 60 not used in @surface
+      @hexagon.drawHsv(30)                  if @opts['hex30']?      and @opts['hex30']
+      @hexagon.drawHsv(60)                  if @opts['hex60']?      and @opts['hex60']
     else
       @grids      = @drawGrids()
       @axes       = @drawAxes()

@@ -1,5 +1,4 @@
-var Hexagon,
-  hasProp = {}.hasOwnProperty;
+var Hexagon;
 
 import * as THREE from "three";
 
@@ -15,12 +14,13 @@ Hexagon = class Hexagon extends Surface {
   }
 
   toGeom(obj) {
-    var hexOrigin;
     obj.colors = [];
     obj.vertices = [];
     obj.normals = [];
     obj.uvs = [];
     obj.indices = [];
+    obj.hexIndices = new Array(7);
+    obj.hexOrient = 60;
     obj.vertex = new THREE.Vector3();
     obj.normal = new THREE.Vector3();
     obj.uv = new THREE.Vector2();
@@ -32,79 +32,84 @@ Hexagon = class Hexagon extends Surface {
     obj.satInc = 100 / obj.satNum;
     obj.priRadius = 10;
     obj.secRadius = obj.priRadius * vis.cos(30);
-    obj.satScale = 4.0; // Scaling factor for convert coords to sat
-    obj.originIdx = 0;
+    obj.idxOrigin = 0;
     obj.x0 = 0;
     obj.y0 = 0;
     obj.z0 = 0;
     this.initSpheres(obj);
-    this.addVertex(obj, 0, 0, obj.valFun(0, 0), obj.x0, obj.z0, obj.z0); // Origin
-    hexOrigin = this.initHex(obj.originIdx);
-    this.hexVertices(obj, hexOrigin);
-    this.sixHexes(obj, 60, obj.secRadius * 2.0);
-    this.sixHexes(obj, 30, obj.priRadius * 3.0);
-    this.sixHexes(obj, 60, obj.secRadius * 4.0);
-    console.log("Hexagon vertices", obj.vertices);
+    obj.idxOrigin = this.addVertex(obj, 0, 0, obj.valFun(0, 0), obj.x0, obj.z0, obj.z0); // Origin
+    if (obj.hexOrient === 30) {
+      this.hexVertices(obj, 30, obj.idxOrigin);
+      this.sixHexes(obj, 60, obj.secRadius * 2.0);
+      this.sixHexes(obj, 30, obj.priRadius * 3.0);
+      this.sixHexes(obj, 60, obj.secRadius * 4.0);
+    } else if (obj.hexOrient === 60) {
+      this.hexVertices(obj, 60, obj.idxOrigin);
+      this.sixHexes(obj, 30, obj.secRadius * 2.0);
+      this.sixHexes(obj, 60, obj.priRadius * 3.0);
+      this.sixHexes(obj, 30, obj.secRadius * 4.0);
+    }
     this.createBufferGeometry(obj);
-    console.log("Surface.toGeom Two()", {
+    console.log("Hexagon.toGeom()", {
       lenVertices: obj.vertices.length,
-      lenIndices: obj.indices.length
+      lenIndices: obj.indices.length,
+      vertices: obj.vertices,
+      indices: obj.indices
     });
   }
 
+  hexAngles(orient) {
+    if (orient === 60) {
+      return [0, 60, 120, 180, 240, 300];
+    } else {
+      return [330, 30, 90, 150, 210, 270];
+    }
+  }
+
   sixHexes(obj, orient, radius) {
-    var ang, angs, hue, i, len, sat, vcen, x, y, z;
-    angs = orient === 60 ? [0, 60, 120, 180, 240, 300] : [330, 30, 90, 150, 210, 270];
-    for (i = 0, len = angs.length; i < len; i++) {
-      ang = angs[i];
+    var ang, hue, hyp, i, idx, j, len, ref, sat, x, y, z;
+    i = 1;
+    ref = this.hexAngles(orient);
+    for (j = 0, len = ref.length; j < len; j++) {
+      ang = ref[j];
       x = obj.x0 + radius * vis.cos(ang);
       y = obj.y0;
       z = obj.z0 + radius * vis.sin(ang);
       hue = vis.hueZX(z, x);
-      sat = vis.round(vis.hypoth(x, z)) * obj.satScale;
-      vcen = this.vertexIndex(obj);
-      this.addVertex(obj, hue, sat, obj.valFun(hue, sat), x, y, z);
-      this.hexVertices(obj, this.initHex(vcen));
+      hyp = vis.hypoth(z, x);
+      sat = this.adjSat(obj, hue, hyp);
+      idx = this.addVertex(obj, hue, sat, obj.valFun(hue, sat), x, y, z);
+      this.hexVertices(obj, obj.hexOrient, idx);
+      i++;
     }
   }
 
-  vertexIndex(obj) {
-    return obj.vertices.length / 3;
+  hexVertices(obj, orient, idxCen) {
+    this.calcVertices(obj, orient, idxCen, obj.priRadius);
+    this.hexIndices(obj);
   }
 
-  // Vertex indices set the @hexIndices
-  initHex(vcen) {
-    return {
-      vcen: vcen,
-      v330: -1,
-      v030: -1,
-      v090: -1,
-      v150: -1,
-      v210: -1,
-      v270: -1
-    };
-  }
-
-  hexVertices(obj, hex) {
-    var deg, hue, idx, key, sat, val, x, y, z;
-    for (key in hex) {
-      if (!hasProp.call(hex, key)) continue;
-      idx = hex[key];
-      if (!(key !== "vcen" && idx === -1)) {
-        continue;
-      }
-      deg = this.degKey(key);
-      x = obj.vertices[hex.vcen * 3] + obj.priRadius * vis.cos(deg);
-      y = obj.vertices[hex.vcen * 3 + 1];
-      z = obj.vertices[hex.vcen * 3 + 2] + obj.priRadius * vis.sin(deg);
-      hex[key] = this.vertexIndex(obj);
+  calcVertices(obj, orient, idxCen, radius) {
+    var ang, hue, hyp, i, j, len, ref, results, sat, val, vs, x, y, z;
+    i = 1;
+    vs = obj.vertices;
+    obj.hexIndices[0] = idxCen;
+    ref = this.hexAngles(orient);
+    results = [];
+    for (j = 0, len = ref.length; j < len; j++) {
+      ang = ref[j];
+      x = vs[3 * idxCen] + radius * vis.cos(ang);
+      y = vs[3 * idxCen + 1];
+      z = vs[3 * idxCen + 2] + radius * vis.sin(ang);
       hue = vis.hueZX(z, x);
-      sat = vis.round(vis.hypoth(x, z)) * obj.satScale;
+      hyp = vis.hypoth(z, x);
+      sat = this.adjSat(obj, hue, hyp);
       val = obj.valFun(hue, sat);
-      this.addVertex(obj, hue, sat, val, x, y, z);
-      console.log("Hexagon.hexVerticea", {
-        key: key,
-        idx: hex[key],
+      obj.hexIndices[i] = this.addVertex(obj, hue, sat, val, x, y, z);
+      console.log("Hexagon.calcVertices", {
+        idx: obj.hexIndices[i],
+        ang: ang,
+        hyp: hyp,
         hue: hue,
         sat: sat,
         val: val,
@@ -112,36 +117,24 @@ Hexagon = class Hexagon extends Surface {
         y: y,
         z: z
       });
+      results.push(i++);
     }
-    this.hexIndices(obj, hex);
+    return results;
   }
 
-  hexIndices(obj, hex) {
-    this.addIndice(obj, hex.vcen, hex.v330, hex.v030);
-    this.addIndice(obj, hex.vcen, hex.v030, hex.v090);
-    this.addIndice(obj, hex.vcen, hex.v090, hex.v150);
-    this.addIndice(obj, hex.vcen, hex.v150, hex.v210);
-    this.addIndice(obj, hex.vcen, hex.v210, hex.v270);
-    this.addIndice(obj, hex.vcen, hex.v270, hex.v330);
+  adjSat(obj, hue, hyp) {
+    return vis.round(hyp * 2.5);
   }
 
-  degKey(key) {
-    switch (key) {
-      case "v330":
-        return 330;
-      case "v030":
-        return 30;
-      case "v090":
-        return 90;
-      case "v150":
-        return 150;
-      case "v210":
-        return 210;
-      case "v270":
-        return 270;
-      default:
-        return 0;
-    }
+  hexIndices(obj) {
+    var a;
+    a = obj.hexIndices;
+    this.addIndice(obj, a[0], a[1], a[2]);
+    this.addIndice(obj, a[0], a[2], a[3]);
+    this.addIndice(obj, a[0], a[3], a[4]);
+    this.addIndice(obj, a[0], a[4], a[5]);
+    this.addIndice(obj, a[0], a[5], a[6]);
+    this.addIndice(obj, a[0], a[6], a[1]);
   }
 
   addIndice(obj, i1, i2, i3) {
