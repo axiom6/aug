@@ -14,6 +14,7 @@ Hexagon = class Hexagon extends Surface {
   }
 
   toGeom(obj) {
+    var angle, radius;
     vis.smooth = true;
     obj.colors = [];
     obj.vertices = [];
@@ -39,19 +40,26 @@ Hexagon = class Hexagon extends Surface {
     obj.z0 = 0;
     this.initSpheres(obj);
     obj.idxOrigin = this.addVertex(obj, 0, 0, obj.valFun(0, 0), obj.x0, obj.z0, obj.z0); // Origin
+    radius = obj.priRadius * 4.5;
+    angle = vis.atan2(obj.secRadius, radius);
+    radius = obj.priRadius * 5.0;
     if (obj.hexOrient === 30) {
       this.hexVertices(obj, 30, obj.idxOrigin);
-      this.sixHexes(obj, 60, obj.secRadius * 2.0);
-      this.sixHexes(obj, 30, obj.priRadius * 3.0);
-      this.sixHexes(obj, 60, obj.secRadius * 4.0);
+      this.sixHexes(obj, 60, obj.secRadius * 2.0, 0);
+      this.sixHexes(obj, 30, obj.priRadius * 3.0, 0);
+      this.sixHexes(obj, 60, obj.secRadius * 4.0, 0);
+      this.sixHexes(obj, 30, radius, -angle);
+      this.sixHexes(obj, 30, radius, angle);
     } else if (obj.hexOrient === 60) {
       this.hexVertices(obj, 60, obj.idxOrigin);
-      this.sixHexes(obj, 30, obj.secRadius * 2.0);
-      this.sixHexes(obj, 60, obj.priRadius * 3.0);
-      this.sixHexes(obj, 30, obj.secRadius * 4.0);
+      this.sixHexes(obj, 30, obj.secRadius * 2.0, 0);
+      this.sixHexes(obj, 60, obj.priRadius * 3.0, 0);
+      this.sixHexes(obj, 30, obj.secRadius * 4.0, 0);
     }
+    //sixHexes(    obj, 30, radius, -angle )
+    //sixHexes(    obj, 30, radius,  angle )
     this.createBufferGeometry(obj);
-    this.drawCircle(obj.priRadius * 4.0);
+    this.drawCircle(obj.priRadius * 5.0);
     console.log("Hexagon.toGeom()", {
       lenVertices: obj.vertices.length,
       lenIndices: obj.indices.length,
@@ -68,38 +76,25 @@ Hexagon = class Hexagon extends Surface {
     }
   }
 
-  sixHexes(obj, orient, radius) {
-    var ang, hue, hyp, i, idx, j, len, ref, sat, x, y, z;
-    i = 1;
-    ref = this.hexAngles(orient);
-    for (j = 0, len = ref.length; j < len; j++) {
-      ang = ref[j];
-      x = obj.x0 + radius * vis.cos(ang);
-      y = obj.y0;
-      z = obj.z0 + radius * vis.sin(ang);
-      hue = vis.hueZX(z, x);
-      hyp = vis.hypoth(z, x);
-      sat = this.adjSat(obj, hue, hyp);
-      idx = this.addVertex(obj, hue, sat, obj.valFun(hue, sat), x, y, z);
-      this.hexVertices(obj, obj.hexOrient, idx);
-      i++;
-    }
+  sixHexes(obj, orient, radius, angOffset) {
+    this.calcVertices(obj, orient, 0, radius, angOffset, true);
   }
 
   hexVertices(obj, orient, idxCen) {
-    this.calcVertices(obj, orient, idxCen, obj.priRadius);
+    this.calcVertices(obj, orient, idxCen, obj.priRadius, false);
     this.hexIndices(obj);
   }
 
-  calcVertices(obj, orient, idxCen, radius) {
-    var ang, hue, hyp, i, j, len, ref, results, sat, val, vs, x, y, z;
+  calcVertices(obj, orient, idxCen, radius, angOffset, callHexVertices) {
+    var ang, ang1, hue, hyp, i, j, len, ref, results, sat, val, vs, x, y, z;
     i = 1;
     vs = obj.vertices;
     obj.hexIndices[0] = idxCen;
     ref = this.hexAngles(orient);
     results = [];
     for (j = 0, len = ref.length; j < len; j++) {
-      ang = ref[j];
+      ang1 = ref[j];
+      ang = ang1 + angOffset;
       x = vs[3 * idxCen] + radius * vis.cos(ang);
       y = vs[3 * idxCen + 1];
       z = vs[3 * idxCen + 2] + radius * vis.sin(ang);
@@ -108,7 +103,10 @@ Hexagon = class Hexagon extends Surface {
       sat = this.adjSat(obj, hue, hyp);
       val = obj.valFun(hue, sat);
       obj.hexIndices[i] = this.addVertex(obj, hue, sat, val, x, y, z);
-      console.log("Hexagon.calcVertices", {
+      if (callHexVertices) {
+        this.hexVertices(obj, obj.hexOrient, obj.hexIndices[i]);
+      }
+      this.main.log("Hexagon.calcVertices", {
         idx: obj.hexIndices[i],
         ang: ang,
         hyp: hyp,
@@ -125,7 +123,7 @@ Hexagon = class Hexagon extends Surface {
   }
 
   adjSat(obj, hue, hyp) {
-    return vis.round(hyp * 2.5);
+    return vis.round(hyp * 2.0);
   }
 
   hexIndices(obj) {

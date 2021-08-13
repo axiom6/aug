@@ -34,18 +34,25 @@ class Hexagon extends Surface
     obj.z0         = 0
     @initSpheres( obj )
     obj.idxOrigin = @addVertex( obj, 0, 0, obj.valFun(0,0), obj.x0, obj.z0, obj.z0 )  # Origin
+    radius = obj.priRadius*4.5
+    angle  = vis.atan2( obj.secRadius, radius )
+    radius = obj.priRadius*5.0
     if obj.hexOrient is  30
       @hexVertices( obj, 30, obj.idxOrigin )
-      @sixHexes(    obj, 60, obj.secRadius*2.0 )
-      @sixHexes(    obj, 30, obj.priRadius*3.0 )
-      @sixHexes(    obj, 60, obj.secRadius*4.0 )
+      @sixHexes(    obj, 60, obj.secRadius*2.0, 0 )
+      @sixHexes(    obj, 30, obj.priRadius*3.0, 0 )
+      @sixHexes(    obj, 60, obj.secRadius*4.0, 0 )
+      @sixHexes(    obj, 30, radius, -angle )
+      @sixHexes(    obj, 30, radius,  angle )
     else if obj.hexOrient is  60
       @hexVertices( obj, 60, obj.idxOrigin )
-      @sixHexes(    obj, 30, obj.secRadius*2.0 )
-      @sixHexes(    obj, 60, obj.priRadius*3.0 )
-      @sixHexes(    obj, 30, obj.secRadius*4.0 )
+      @sixHexes(    obj, 30, obj.secRadius*2.0, 0 )
+      @sixHexes(    obj, 60, obj.priRadius*3.0, 0 )
+      @sixHexes(    obj, 30, obj.secRadius*4.0, 0 )
+      #sixHexes(    obj, 30, radius, -angle )
+      #sixHexes(    obj, 30, radius,  angle )
     @createBufferGeometry( obj )
-    @drawCircle( obj.priRadius*4.0 )
+    @drawCircle( obj.priRadius*5.0 )
     console.log( "Hexagon.toGeom()",
       { lenVertices:obj.vertices.length, lenIndices:obj.indices.length, vertices:obj.vertices, indices:obj.indices } )
     return
@@ -53,30 +60,21 @@ class Hexagon extends Surface
   hexAngles:( orient ) ->
     if orient is 60 then [0,60,120,180,240,300] else [330,30,90,150,210,270]
 
-  sixHexes:( obj, orient, radius ) ->
-    i = 1
-    for ang in @hexAngles( orient )
-      x = obj.x0 + radius * vis.cos(ang)
-      y = obj.y0
-      z = obj.z0 + radius * vis.sin(ang)
-      hue = vis.hueZX(  z, x )
-      hyp = vis.hypoth( z, x )
-      sat = @adjSat( obj, hue, hyp )
-      idx = @addVertex( obj, hue, sat, obj.valFun(hue,sat), x, y, z )
-      @hexVertices( obj, obj.hexOrient, idx )
-      i++
+  sixHexes:(       obj, orient,    radius, angOffset ) ->
+    @calcVertices( obj, orient, 0, radius, angOffset, true )
     return
 
   hexVertices:(    obj, orient, idxCen ) ->
-    @calcVertices( obj, orient, idxCen, obj.priRadius )
+    @calcVertices( obj, orient, idxCen, obj.priRadius, false )
     @hexIndices(   obj )
     return
 
-  calcVertices:( obj, orient, idxCen, radius ) ->
+  calcVertices:( obj, orient, idxCen, radius, angOffset, callHexVertices ) ->
     i  = 1
     vs = obj.vertices
     obj.hexIndices[0] = idxCen
-    for ang in @hexAngles( orient )
+    for ang1 in @hexAngles( orient )
+      ang = ang1 + angOffset
       x = vs[3*idxCen  ] + radius * vis.cos(ang)
       y = vs[3*idxCen+1]
       z = vs[3*idxCen+2] + radius * vis.sin(ang)
@@ -85,12 +83,14 @@ class Hexagon extends Surface
       sat = @adjSat( obj, hue, hyp )
       val = obj.valFun( hue, sat )
       obj.hexIndices[i] = @addVertex( obj, hue, sat, val, x, y, z )
-      console.log( "Hexagon.calcVertices",
+      if callHexVertices
+        @hexVertices( obj, obj.hexOrient, obj.hexIndices[i] )
+      @main.log( "Hexagon.calcVertices",
         { idx:obj.hexIndices[i], ang:ang, hyp:hyp, hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
       i++
 
   adjSat:( obj, hue, hyp ) ->
-    vis.round( hyp * 2.5 )
+    vis.round( hyp * 2.0 )
       
   hexIndices:(  obj ) ->
     a = obj.hexIndices
