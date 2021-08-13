@@ -9,6 +9,7 @@ class Hexagon extends Surface
      super( main )
 
   toGeom:( obj ) ->
+    vis.smooth     = true
     obj.colors     = []
     obj.vertices   = []
     obj.normals    = []
@@ -44,6 +45,7 @@ class Hexagon extends Surface
       @sixHexes(    obj, 60, obj.priRadius*3.0 )
       @sixHexes(    obj, 30, obj.secRadius*4.0 )
     @createBufferGeometry( obj )
+    @drawCircle( obj.priRadius*4.0 )
     console.log( "Hexagon.toGeom()",
       { lenVertices:obj.vertices.length, lenIndices:obj.indices.length, vertices:obj.vertices, indices:obj.indices } )
     return
@@ -102,6 +104,15 @@ class Hexagon extends Surface
 
   addIndice:(    obj, i1, i2, i3 ) ->
     obj.indices.push( i1, i2, i3 )
+    return
+
+  drawCircle:( radius ) ->
+    geometry = new THREE.CircleGeometry( radius, 24 )
+    geometry.rotateX( Math.PI / 2 )
+    geometry.translate( 0, 5, 0 )
+    material = new THREE.MeshBasicMaterial( { color:0xffff00, transparent:true, opacity:1.0, wireframe:true } )
+    circle   = new THREE.Mesh( geometry, material )
+    @main.addToScene( circle )
     return
 
 export default Hexagon

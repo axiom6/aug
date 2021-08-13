@@ -3,6 +3,7 @@ import Access     from '../../../lib/pub/util/Access.js'
 import Stream     from '../../../lib/pub/util/Stream.js'
 import Nav        from '../../../lib/pub/navi/Nav.js'
 import Mix        from '../../../lib/pub/navi/Mix.js'
+import { vis }    from '../../../lib/pub/draw/Vis.js'
 
 import { tester } from '../../../lib/pub/test/tester.js'
 import Main       from '../main/Main.js'
@@ -85,6 +86,7 @@ class Vizu
     Vizu.stream   = new Stream( subjects, streamLog )
     Vizu.mix      = new Mix(  Vizu )
     Vizu.nav      = new Nav(  Vizu, Vizu.stream, Vizu.komps, Vizu.pages )
+    Vizu.vis      = vis
     Vizu.main     = new Main( Vizu.stream, Vizu.nav )
     Vizu.tester   = tester
     #izu.mix.opts = Vizu.Batch.Main.data # JSON.parse( batch.Main.data )
@@ -100,6 +102,7 @@ class Vizu
     Vizu.app = createApp( Dash  )
     Vizu.app.provide('mix',  Vizu.mix  )
     Vizu.app.provide('nav',  Vizu.nav  )
+    Vizu.app.provide('vis',  Vizu.vis )
     Vizu.app.provide('main', Vizu.main )
     Vizu.app.mount('#vizu')
     Vizu.nav.pub( Vizu.nav.toPub(Vizu.href), true )

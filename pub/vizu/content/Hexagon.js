@@ -14,6 +14,7 @@ Hexagon = class Hexagon extends Surface {
   }
 
   toGeom(obj) {
+    vis.smooth = true;
     obj.colors = [];
     obj.vertices = [];
     obj.normals = [];
@@ -50,6 +51,7 @@ Hexagon = class Hexagon extends Surface {
       this.sixHexes(obj, 30, obj.secRadius * 4.0);
     }
     this.createBufferGeometry(obj);
+    this.drawCircle(obj.priRadius * 4.0);
     console.log("Hexagon.toGeom()", {
       lenVertices: obj.vertices.length,
       lenIndices: obj.indices.length,
@@ -139,6 +141,21 @@ Hexagon = class Hexagon extends Surface {
 
   addIndice(obj, i1, i2, i3) {
     obj.indices.push(i1, i2, i3);
+  }
+
+  drawCircle(radius) {
+    var circle, geometry, material;
+    geometry = new THREE.CircleGeometry(radius, 24);
+    geometry.rotateX(Math.PI / 2);
+    geometry.translate(0, 5, 0);
+    material = new THREE.MeshBasicMaterial({
+      color: 0xffff00,
+      transparent: true,
+      opacity: 1.0,
+      wireframe: true
+    });
+    circle = new THREE.Mesh(geometry, material);
+    this.main.addToScene(circle);
   }
 
 };

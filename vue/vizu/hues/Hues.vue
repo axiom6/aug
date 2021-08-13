@@ -28,6 +28,8 @@ let Hues = {
   setup() {
 
     const nav     = inject('nav');
+    const vis     = inject('vis');
+    vis.smooth    = true;
     const compKey = 'Hues';
     let   pageIdx = ref(0);
 

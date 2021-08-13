@@ -8,6 +8,7 @@ Debug
   2. Organize Main.json and Main.coof
   3. Hsl Surface
      a. valFun range 0:100, sin funct time and ocillate
+     b. Fix indices
   4. Orthographic camera
      b. Reorient axis with straight xy
      a Grids yaxis scale off too short by 50%

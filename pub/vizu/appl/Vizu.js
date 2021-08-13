@@ -9,6 +9,10 @@ import Nav from '../../../lib/pub/navi/Nav.js';
 import Mix from '../../../lib/pub/navi/Mix.js';
 
 import {
+  vis
+} from '../../../lib/pub/draw/Vis.js';
+
+import {
   tester
 } from '../../../lib/pub/test/tester.js';
 
@@ -82,6 +86,7 @@ Vizu = (function() {
       Vizu.stream = new Stream(subjects, streamLog);
       Vizu.mix = new Mix(Vizu);
       Vizu.nav = new Nav(Vizu, Vizu.stream, Vizu.komps, Vizu.pages);
+      Vizu.vis = vis;
       Vizu.main = new Main(Vizu.stream, Vizu.nav);
       Vizu.tester = tester;
       try {
@@ -98,6 +103,7 @@ Vizu = (function() {
       Vizu.app = createApp(Dash);
       Vizu.app.provide('mix', Vizu.mix);
       Vizu.app.provide('nav', Vizu.nav);
+      Vizu.app.provide('vis', Vizu.vis);
       Vizu.app.provide('main', Vizu.main);
       Vizu.app.mount('#vizu');
       Vizu.nav.pub(Vizu.nav.toPub(Vizu.href), true);
