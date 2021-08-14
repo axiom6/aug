@@ -5,7 +5,7 @@
     "coords": {
       "xmin":0, "xmax":100, "xtick1":10, "ymin":0, "ymax":100, "ytick1":10, "zmin":0, "zmax":100, "ztick1":10 },
     "cameras": {
-      "camera": "Perspective", "controls":"Orbit", "helper":false, "scale":0.5 },
+      "camera": "Orthographic", "controls":"Orbit", "helper":false, "scale":2.5 },
     "lights":{
       "light":"Ambient" },
     "content": {

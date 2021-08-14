@@ -18,7 +18,8 @@
     "coords": {
       "xmin":0, "xmax":256, "xtick1":32, "ymin":0, "ymax":256, "ytick1":32, "zmin":0, "zmax":256, "ztick1":32 },
     "cameras": {
-      "camera": "Orthographic", "controls":"Orbit", "helper":true },
+      "camera": "Orthographic", "controls":"Orbit", "helper":true,
+      "left": 0, "top": 0, "bottom": 150, "near": -1, "far":1 },
     "lights":{
       "light":"Directional" },
     "content": {

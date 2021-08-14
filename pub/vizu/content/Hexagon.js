@@ -14,7 +14,7 @@ Hexagon = class Hexagon extends Surface {
   }
 
   toGeom(obj) {
-    var angle, radius;
+    var angle, radius, x, y;
     vis.smooth = true;
     obj.colors = [];
     obj.vertices = [];
@@ -40,9 +40,10 @@ Hexagon = class Hexagon extends Surface {
     obj.z0 = 0;
     this.initSpheres(obj);
     obj.idxOrigin = this.addVertex(obj, 0, 0, obj.valFun(0, 0), obj.x0, obj.z0, obj.z0); // Origin
-    radius = obj.priRadius * 4.5;
-    angle = vis.atan2(obj.secRadius, radius);
-    radius = obj.priRadius * 5.0;
+    x = obj.priRadius * 4.5;
+    y = obj.secRadius;
+    angle = vis.atan2(y, x);
+    radius = vis.hypoth(y, x);
     if (obj.hexOrient === 30) {
       this.hexVertices(obj, 30, obj.idxOrigin);
       this.sixHexes(obj, 60, obj.secRadius * 2.0, 0);
@@ -50,14 +51,16 @@ Hexagon = class Hexagon extends Surface {
       this.sixHexes(obj, 60, obj.secRadius * 4.0, 0);
       this.sixHexes(obj, 30, radius, -angle);
       this.sixHexes(obj, 30, radius, angle);
+      this.sixHexes(obj, 60, obj.secRadius * 6.0, 0);
     } else if (obj.hexOrient === 60) {
       this.hexVertices(obj, 60, obj.idxOrigin);
       this.sixHexes(obj, 30, obj.secRadius * 2.0, 0);
       this.sixHexes(obj, 60, obj.priRadius * 3.0, 0);
       this.sixHexes(obj, 30, obj.secRadius * 4.0, 0);
+      this.sixHexes(obj, 60, radius, -angle);
+      this.sixHexes(obj, 60, radius, angle);
+      this.sixHexes(obj, 30, obj.secRadius * 6.0, 0);
     }
-    //sixHexes(    obj, 30, radius, -angle )
-    //sixHexes(    obj, 30, radius,  angle )
     this.createBufferGeometry(obj);
     this.drawCircle(obj.priRadius * 5.0);
     console.log("Hexagon.toGeom()", {
@@ -145,7 +148,7 @@ Hexagon = class Hexagon extends Surface {
     var circle, geometry, material;
     geometry = new THREE.CircleGeometry(radius, 24);
     //eometry.rotateX( Math.PI / 2 )
-    geometry.translate(0, 5, 0);
+    geometry.translate(0, 0, 0);
     material = new THREE.MeshBasicMaterial({
       color: 0xffff00,
       transparent: true,
