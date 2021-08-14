@@ -100,8 +100,10 @@ Cameras = class Cameras {
   }
 
   perspective(opts, cc) {
-    var camera, dist, far, fov, helper, near, position, scenePos;
+    var aspect, camera, dist, far, fov, helper, near, position, scale, scaleXYZ, scenePos;
+    aspect = this.main.aspectRatio;
     dist = cc.dist;
+    scale = opts.scale != null ? opts.scale : 1.0;
     fov = opts.fov != null ? opts.fov : 75;
     near = opts.near != null ? opts.near : 0.01 * dist;
     far = opts.far != null ? opts.far : 100 * dist;
@@ -111,9 +113,15 @@ Cameras = class Cameras {
       "z": 16 * dist
     };
     scenePos = this.main.scene.position;
+    scaleXYZ = {
+      x: aspect / scale,
+      y: aspect / scale,
+      z: aspect / scale
+    };
     camera = new PerspectiveCamera(fov, this.main.aspectRatio, near, far);
     camera.position.set(position.x, position.y, position.z);
     camera.lookAt(scenePos.x, scenePos.y, scenePos.z);
+    camera.scale.set(scaleXYZ.x, scaleXYZ.y, scaleXYZ.z);
     if ((opts.helper != null) && opts.helper) {
       helper = new CameraHelper(camera);
       this.main.addToScene(helper);

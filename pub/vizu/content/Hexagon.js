@@ -96,10 +96,10 @@ Hexagon = class Hexagon extends Surface {
       ang1 = ref[j];
       ang = ang1 + angOffset;
       x = vs[3 * idxCen] + radius * vis.cos(ang);
-      y = vs[3 * idxCen + 1];
-      z = vs[3 * idxCen + 2] + radius * vis.sin(ang);
-      hue = vis.hueZX(z, x);
-      hyp = vis.hypoth(z, x);
+      y = vs[3 * idxCen + 1] + radius * vis.sin(ang);
+      z = vs[3 * idxCen + 2];
+      hue = vis.hueZX(y, x);
+      hyp = vis.hypoth(y, x);
       sat = this.adjSat(obj, hue, hyp);
       val = obj.valFun(hue, sat);
       obj.hexIndices[i] = this.addVertex(obj, hue, sat, val, x, y, z);
@@ -144,7 +144,7 @@ Hexagon = class Hexagon extends Surface {
   drawCircle(radius) {
     var circle, geometry, material;
     geometry = new THREE.CircleGeometry(radius, 24);
-    geometry.rotateX(Math.PI / 2);
+    //eometry.rotateX( Math.PI / 2 )
     geometry.translate(0, 5, 0);
     material = new THREE.MeshBasicMaterial({
       color: 0xffff00,

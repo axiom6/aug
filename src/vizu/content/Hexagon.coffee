@@ -76,10 +76,10 @@ class Hexagon extends Surface
     for ang1 in @hexAngles( orient )
       ang = ang1 + angOffset
       x = vs[3*idxCen  ] + radius * vis.cos(ang)
-      y = vs[3*idxCen+1]
-      z = vs[3*idxCen+2] + radius * vis.sin(ang)
-      hue = vis.hueZX(  z, x )
-      hyp = vis.hypoth( z, x )
+      y = vs[3*idxCen+1] + radius * vis.sin(ang)
+      z = vs[3*idxCen+2]
+      hue = vis.hueZX(  y, x )
+      hyp = vis.hypoth( y, x )
       sat = @adjSat( obj, hue, hyp )
       val = obj.valFun( hue, sat )
       obj.hexIndices[i] = @addVertex( obj, hue, sat, val, x, y, z )
@@ -108,7 +108,7 @@ class Hexagon extends Surface
 
   drawCircle:( radius ) ->
     geometry = new THREE.CircleGeometry( radius, 24 )
-    geometry.rotateX( Math.PI / 2 )
+    #eometry.rotateX( Math.PI / 2 )
     geometry.translate( 0, 5, 0 )
     material = new THREE.MeshBasicMaterial( { color:0xffff00, transparent:true, opacity:1.0, wireframe:true } )
     circle   = new THREE.Mesh( geometry, material )

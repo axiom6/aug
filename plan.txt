@@ -5,22 +5,25 @@ Debug
      a. Sat scaling and consider an angle driven adjustment
      c. Add feature for an 30 deg angle shift
      d. Vertice index lookup
-  2. Organize Main.json and Main.coof
-  3. Hsl Surface
+  2. Fix and the generalize coordinate system and Orthographic camera
+     a. Reorient axis with straight xy
+     b Grids yaxis scale off too short by 50%
+     c. Look into Orthographic camera
+  3, Implement troika text
+  4. Organize Main.json and Main.coof
+  5. Hsl Surface
      a. valFun range 0:100, sin funct time and ocillate
      b. Fix indices
-  4. Orthographic camera
-     b. Reorient axis with straight xy
-     a Grids yaxis scale off too short by 50%
-     a. Look into Orthographic camera
-  5. Vis
+  6. Fully move Cube in Aug to Visu
+     a. Consider having Cube initialized by Main
+  7. Reorganize Visu menus
+  
+Clean Up
+  1. Vis
      a. Cleanup
      b. Vis.str hex output wrong
      c. Fix padded and move for and text color
-  7. Fully move Cube in Aug to Visu
-     a. Consider having Cube initialized by Main
-  8. Reorganize Visu menus
-  9. Clean up zzz
+  2. Clean up zzz
 
 Features One
   1. Test

@@ -59,15 +59,19 @@ class Cameras
     camera
 
   perspective:( opts, cc ) ->
+    aspect   = @main.aspectRatio
     dist     = cc.dist
+    scale    = if opts.scale?     then opts.scale     else 1.0
     fov      = if opts.fov?       then opts.fov       else  75
     near     = if opts.near?      then opts.near      else   0.01 * dist
     far      = if opts.far?       then opts.far       else 100    * dist
     position = if opts.position?  then opts.position  else { "x":0, "y":0.6*dist, "z":16*dist }
     scenePos = @main.scene.position
+    scaleXYZ = { x:aspect/scale, y:aspect/scale, z:aspect/scale }
     camera   = new PerspectiveCamera( fov, @main.aspectRatio, near, far )
     camera.position.set( position.x, position.y, position.z )
     camera.lookAt(       scenePos.x, scenePos.y, scenePos.z )
+    camera.scale.set(    scaleXYZ.x, scaleXYZ.y, scaleXYZ.z )
     if opts.helper? and opts.helper
       helper = new CameraHelper( camera )
       @main.addToScene( helper )
