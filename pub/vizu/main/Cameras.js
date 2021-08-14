@@ -21,77 +21,163 @@ Cameras = class Cameras {
     this.onDispose = this.onDispose.bind(this);
     this.main = main;
     this.klass = this.constructor.name;
-    this.opts = this.main.opts.cameras;
     cc = this.main.cartesian;
-    this.camera = this.selectCamera(this.opts, cc);
-    this.controls = this.selectControls(this.opts, cc, this.camera);
+    this.optsCam = this.main.opts.cameras;
+    this.camera = this.selectCamera(this.optsCam, cc);
+    this.controls = this.selectControls(this.optsCam, cc, this.camera);
     this.main.stream.subscribe('Resize', this.klass, (obj) => {
       return this.onResize(obj);
     });
     this.main.stream.subscribe('Dispose', this.klass, (obj) => {
       return this.onDispose(obj);
     });
-    this.main.log(this.klass + '()', this, this.opts);
+    this.main.log(this.klass + '()', this, this.optsCam);
   }
 
-  selectCamera(opts, cc) {
-    if ((opts == null) && (opts.camera == null)) {
-      return this.orthographic(opts, cc);
+  initDefs(cc) {
+    var defs;
+    defs = {};
+    defs.aspect = this.main.aspectRatio;
+    defs.dist = cc.dist;
+    defs.scale = 1.0;
+    defs.position = {
+      x: 0,
+      y: 0,
+      z: 0
+    };
+    return defs;
+  }
+
+  processOpts(optsCamera, cc, defs) {
+    var opts;
+    opts = Object.assign({}, optsCamera);
+    opts.aspect = this.main.aspectRatio;
+    opts.dist = cc.dist;
+    opts.scale = opts.scale != null ? opts.scale : defs.scale;
+    opts.scaleXYZ = {
+      x: opts.aspect / opts.scale,
+      y: opts.aspect / opts.scale,
+      z: opts.aspect / opts.scale
+    };
+    opts.scenePos = this.main.scene.position;
+    opts.position = opts.position != null ? opts.position : defs.position;
+    opts.fov = opts.fov != null ? opts.fov : defs.fov;
+    opts.left = opts.left != null ? opts.left : defs.left;
+    opts.right = opts.right != null ? opts.right : defs.right;
+    opts.top = opts.top != null ? opts.top : defs.top;
+    opts.bottom = opts.bottom != null ? opts.bottom : defs.bottom;
+    opts.near = opts.near != null ? opts.near : defs.near;
+    opts.far = opts.far != null ? opts.far : defs.far;
+    return opts;
+  }
+
+  selectCamera(optsCam, cc) {
+    if ((optsCam == null) && (optsCam.camera == null)) {
+      return this.orthographic(optsCam, cc);
     }
-    switch (opts.camera) {
+    switch (optsCam.camera) {
+      case 'OrthoXYZ':
+        return this.orthoXYZ(optsCam, cc);
+      case 'OrthoISO':
+        return this.orthoISO(optsCam, cc);
       case 'Orthographic':
-        return this.orthographic(opts, cc);
+        return this.orthographic(optsCam, cc);
       case 'Perspective':
-        return this.perspective(opts, cc);
+        return this.perspective(optsCam, cc);
       case 'Muse':
-        return this.muse(opts, cc);
+        return this.muse(optsCam, cc);
       default:
-        console.error('Cameras.selectCamera() unknown camera', opts.camera);
-        return this.orthographic(opts, cc);
+        console.error('Cameras.selectCamera() unknown camera', optsCam);
+        return this.orthographic(optsCam, cc);
     }
   }
 
-  selectControls(opts, cc, camera) {
-    if ((opts == null) && (opts.controls != null)) {
-      return this.orbit(opts, cc);
+  selectControls(optsCam, cc, camera) {
+    console.log("Camera.selectControls()", optsCam, cc);
+    if ((optsCam == null) && (optsCam.controls != null)) {
+      return this.orbit(optsCam, cc);
     }
-    switch (opts.controls) {
+    switch (optsCam.controls) {
       case 'Orbit':
         return this.orbit(camera, cc);
       case 'Trackball':
         return this.trackball(camera, cc);
       default:
-        console.error('Cameras.selectControls() unknown controls', opts.controls);
-        return this.orbit(opts, cc);
+        console.error('Cameras.selectControls() unknown controls', optsCam.controls);
+        return this.orbit(optsCam, cc);
     }
   }
 
-  orthographic(opts, cc) { // Uses world coordinates
-    var aspect, bottom, camera, dist, far, helper, left, near, position, right, scale, scaleXYZ, scenePos, top;
-    aspect = this.main.aspectRatio;
-    dist = cc.dist;
-    scale = opts.scale != null ? opts.scale : 1.0;
-    left = opts.left != null ? opts.left : -dist * aspect;
-    right = opts.right != null ? opts.right : dist * aspect;
-    top = opts.top != null ? opts.top : dist;
-    bottom = opts.bottom != null ? opts.bottom : -dist;
-    near = opts.near != null ? opts.near : -dist * 5.0;
-    far = opts.far != null ? opts.far : dist * 5.0;
-    position = opts.position != null ? opts.position : {
-      "x": dist * 0.2,
-      "y": dist * 0.2,
-      "z": dist * 0.2
+  orthoXYZ(camOpts, cc) {
+    var camera, defs, opts;
+    defs = this.initDefs(cc);
+    defs.near = -defs.dist * 5.0;
+    defs.far = defs.dist * 5.0;
+    defs.left = -defs.dist * defs.aspect;
+    defs.right = defs.dist * defs.aspect;
+    defs.top = defs.dist;
+    defs.bottom = -defs.dist;
+    opts = this.processOpts(camOpts, cc, defs);
+    camera = this.ortho(opts);
+    this.projectionMatrix(camera.projectionMatrix, opts);
+    return camera;
+  }
+
+  projectionMatrix(matrix, opts) {
+    var s, xAxis, yAxis, zAxis;
+    s = opts.scaleXYZ;
+    xAxis = {
+      x: s.x,
+      y: 1,
+      z: 1
     };
-    scaleXYZ = {
-      x: aspect / scale,
-      y: aspect / scale,
-      z: aspect / scale
+    yAxis = {
+      x: 1,
+      y: s.y,
+      z: 1
     };
-    scenePos = this.main.scene.position;
-    camera = new OrthographicCamera(left, right, top, bottom, near, far);
-    camera.scale.set(scaleXYZ.x, scaleXYZ.y, scaleXYZ.z);
-    camera.position.set(position.x, position.y, position.z);
-    camera.lookAt(scenePos.x, scenePos.y, scenePos.z);
+    zAxis = {
+      x: 1,
+      y: 1,
+      z: s.z
+    };
+    matrix.makeBasis(xAxis, yAxis, zAxis);
+  }
+
+  orthoISO(camOpts, cc) {
+    var defs, opts;
+    defs = this.initDefs(cc);
+    defs.fov = 75;
+    defs.near = -defs.dist * 5.0;
+    defs.far = defs.dist * 5.0;
+    defs.left = -defs.dist * defs.aspect; // Orthographic
+    defs.right = defs.dist * defs.aspect;
+    defs.top = defs.dist;
+    defs.bottom = -defs.dist;
+    opts = this.processOpts(camOpts, cc, defs);
+    return this.ortho(opts);
+  }
+
+  orthographic(camOpts, cc) { // Uses world coordinates
+    var defs, opts;
+    defs = this.initDefs(cc);
+    defs.fov = 75;
+    defs.near = -defs.dist * 5.0;
+    defs.far = defs.dist * 5.0;
+    defs.left = -defs.dist * defs.aspect; // Orthographic
+    defs.right = defs.dist * defs.aspect;
+    defs.top = defs.dist;
+    defs.bottom = -defs.dist;
+    opts = this.processOpts(camOpts, cc, defs);
+    return this.ortho(opts);
+  }
+
+  ortho(opts) { // Uses world coordinates
+    var camera, helper;
+    camera = new OrthographicCamera(opts.left, opts.right, opts.top, opts.bottom, opts.near, opts.far);
+    camera.scale.set(opts.scaleXYZ.x, opts.scaleXYZ.y, opts.scaleXYZ.z);
+    camera.position.set(opts.position.x, opts.position.y, opts.position.z);
+    camera.lookAt(opts.scenePos.x, opts.scenePos.y, opts.scenePos.z);
     if ((opts.helper != null) && opts.helper) {
       helper = new CameraHelper(camera);
       this.main.addToScene(helper);
@@ -99,29 +185,17 @@ Cameras = class Cameras {
     return camera;
   }
 
-  perspective(opts, cc) {
-    var aspect, camera, dist, far, fov, helper, near, position, scale, scaleXYZ, scenePos;
-    aspect = this.main.aspectRatio;
-    dist = cc.dist;
-    scale = opts.scale != null ? opts.scale : 1.0;
-    fov = opts.fov != null ? opts.fov : 75;
-    near = opts.near != null ? opts.near : 0.01 * dist;
-    far = opts.far != null ? opts.far : 100 * dist;
-    position = opts.position != null ? opts.position : {
-      "x": 0,
-      "y": 0.6 * dist,
-      "z": 16 * dist
-    };
-    scenePos = this.main.scene.position;
-    scaleXYZ = {
-      x: aspect / scale,
-      y: aspect / scale,
-      z: aspect / scale
-    };
-    camera = new PerspectiveCamera(fov, this.main.aspectRatio, near, far);
-    camera.position.set(position.x, position.y, position.z);
-    camera.lookAt(scenePos.x, scenePos.y, scenePos.z);
-    camera.scale.set(scaleXYZ.x, scaleXYZ.y, scaleXYZ.z);
+  perspective(camOpts, cc) {
+    var camera, defs, helper, opts;
+    defs = this.initDefs(cc);
+    defs.fov = 75;
+    defs.near = defs.dist * 0.01;
+    defs.far = defs.dist * 100;
+    opts = this.processOpts(camOpts, cc, defs);
+    camera = new PerspectiveCamera(opts.fov, this.main.aspectRatio, opts.near, opts.far);
+    camera.scale.set(opts.scaleXYZ.x, opts.scaleXYZ.y, opts.scaleXYZ.z);
+    camera.position.set(opts.position.x, opts.position.y, opts.position.z);
+    camera.lookAt(opts.scenePos.x, opts.scenePos.y, opts.scenePos.z);
     if ((opts.helper != null) && opts.helper) {
       helper = new CameraHelper(camera);
       this.main.addToScene(helper);
@@ -129,28 +203,19 @@ Cameras = class Cameras {
     return camera;
   }
 
-  muse(opts, cc) {
-    var camera, far, fov, helper, near, position, scenePos;
-    if (cc) {
-      false;
-    }
-    fov = opts.fov != null ? opts.fov : 45;
-    near = opts.near != null ? opts.near : 1;
-    far = opts.far != null ? opts.far : 10000;
-    position = opts.position != null ? opts.position : {
+  muse(camOpts, cc) {
+    var defs, opts;
+    defs = this.initDefs(cc);
+    defs.fov = 45;
+    defs.near = 1;
+    defs.far = 10000;
+    defs.position = {
       "x": 0,
       "y": 6,
       "z": 1600
     };
-    scenePos = this.main.scene.position;
-    camera = new PerspectiveCamera(fov, this.main.aspectRatio, near, far);
-    camera.position.set(position.x, position.y, position.z);
-    camera.lookAt(scenePos.x, scenePos.y, scenePos.z);
-    if ((opts.helper != null) && opts.helper) {
-      helper = new CameraHelper(camera);
-      this.main.addToScene(helper);
-    }
-    return camera;
+    opts = this.processOpts(camOpts, cc, defs);
+    return this.perspective(opts);
   }
 
   orbit(camera, cc) {

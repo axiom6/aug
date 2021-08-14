@@ -7,90 +7,141 @@ class Cameras
 
   constructor:( @main ) ->
     @klass    = @constructor.name
-    @opts     = @main.opts.cameras
     cc        = @main.cartesian
-    @camera   = @selectCamera(   @opts, cc )
-    @controls = @selectControls( @opts, cc, @camera )
+    @optsCam  = @main.opts.cameras
+    @camera   = @selectCamera(   @optsCam, cc )
+    @controls = @selectControls( @optsCam, cc, @camera )
     @main.stream.subscribe( 'Resize',  @klass, (obj) => @onResize( obj) )
     @main.stream.subscribe( 'Dispose', @klass, (obj) => @onDispose(obj) )
-    @main.log( @klass+'()', @, @opts )
+    @main.log( @klass+'()', @, @optsCam )
 
-  selectCamera:( opts, cc ) ->
-    return @orthographic( opts, cc ) if not opts? and not opts.camera?
-    switch opts.camera
-      when 'Orthographic' then @orthographic( opts, cc )
-      when 'Perspective'  then @perspective(  opts, cc )
-      when 'Muse'         then @muse(         opts, cc )
+  initDefs:( cc ) ->
+    defs = {}
+    defs.aspect   = @main.aspectRatio
+    defs.dist     = cc.dist
+    defs.scale    = 1.0
+    defs.position = { x:0, y:0, z:0 }
+    defs
+
+  processOpts:( optsCamera, cc, defs ) ->
+    opts          = Object.assign( {}, optsCamera )
+    opts.aspect   = @main.aspectRatio
+    opts.dist     = cc.dist
+    opts.scale    = if opts.scale?     then opts.scale     else defs.scale
+    opts.scaleXYZ = { x:opts.aspect/opts.scale, y:opts.aspect/opts.scale, z:opts.aspect/opts.scale }
+    opts.scenePos = @main.scene.position
+    opts.position = if opts.position?  then opts.position  else defs.position
+    opts.fov      = if opts.fov?       then opts.fov       else defs.fov
+    opts.left     = if opts.left?      then opts.left      else defs.left
+    opts.right    = if opts.right?     then opts.right     else defs.right
+    opts.top      = if opts.top?       then opts.top       else defs.top
+    opts.bottom   = if opts.bottom?    then opts.bottom    else defs.bottom
+    opts.near     = if opts.near?      then opts.near      else defs.near
+    opts.far      = if opts.far?       then opts.far       else defs.far
+    return opts
+
+  selectCamera:( optsCam, cc ) ->
+    return @orthographic( optsCam, cc ) if not optsCam? and not optsCam.camera?
+    switch optsCam.camera
+      when 'OrthoXYZ'     then @orthoXYZ(     optsCam, cc )
+      when 'OrthoISO'     then @orthoISO(     optsCam, cc )
+      when 'Orthographic' then @orthographic( optsCam, cc )
+      when 'Perspective'  then @perspective(  optsCam, cc )
+      when 'Muse'         then @muse(         optsCam, cc )
       else
-        console.error( 'Cameras.selectCamera() unknown camera', opts.camera )
-        @orthographic( opts, cc )
+        console.error( 'Cameras.selectCamera() unknown camera', optsCam )
+        @orthographic( optsCam, cc )
 
-  selectControls:( opts, cc, camera ) ->
-    return @orbit( opts, cc ) if not opts? and opts.controls?
-    switch opts.controls
+  selectControls:( optsCam, cc, camera ) ->
+    console.log( "Camera.selectControls()", optsCam, cc )
+    return @orbit( optsCam, cc ) if not optsCam? and optsCam.controls?
+    switch optsCam.controls
       when 'Orbit'     then @orbit(     camera, cc  )
       when 'Trackball' then @trackball( camera, cc  )
       else
-        console.error( 'Cameras.selectControls() unknown controls', opts.controls )
-        @orbit( opts, cc )
+        console.error( 'Cameras.selectControls() unknown controls', optsCam.controls )
+        @orbit( optsCam, cc )
 
-  orthographic:( opts, cc ) ->  # Uses world coordinates
-    aspect   = @main.aspectRatio
-    dist     = cc.dist
-    scale    = if opts.scale?     then opts.scale     else 1.0
-    left     = if opts.left?      then opts.left      else -dist * aspect
-    right    = if opts.right?     then opts.right     else  dist * aspect
-    top      = if opts.top?       then opts.top       else  dist
-    bottom   = if opts.bottom?    then opts.bottom    else -dist
-    near     = if opts.near?      then opts.near      else -dist * 5.0
-    far      = if opts.far?       then opts.far       else  dist * 5.0
-    position = if opts.position?  then opts.position  else { "x":dist*0.2, "y":dist*0.2, "z":dist*0.2 }
-    scaleXYZ = { x:aspect/scale, y:aspect/scale, z:aspect/scale }
-    scenePos = @main.scene.position
+  orthoXYZ:( camOpts, cc ) ->
+    defs        = @initDefs( cc )
+    defs.near   = -defs.dist * 5.0
+    defs.far    =  defs.dist * 5.0
+    defs.left   = -defs.dist * defs.aspect 
+    defs.right  =  defs.dist * defs.aspect
+    defs.top    =  defs.dist
+    defs.bottom = -defs.dist
+    opts        = @processOpts( camOpts, cc, defs )
+    camera      = @ortho( opts )
+    @projectionMatrix( camera.projectionMatrix, opts )
+    camera
 
-    camera = new OrthographicCamera( left, right, top, bottom, near, far )
-    camera.scale.set(    scaleXYZ.x, scaleXYZ.y, scaleXYZ.z )
-    camera.position.set( position.x, position.y, position.z )
-    camera.lookAt(       scenePos.x, scenePos.y, scenePos.z )
+  projectionMatrix:( matrix, opts ) ->
+    s     = opts.scaleXYZ
+    xAxis = { x:s.x, y:1,   z:1   }
+    yAxis = { x:1,   y:s.y, z:1   }
+    zAxis = { x:1,   y:1,   z:s.z }
+    matrix.makeBasis( xAxis, yAxis, zAxis )
+    return
+
+  orthoISO:( camOpts, cc ) ->
+    defs        = @initDefs( cc )
+    defs.fov    = 75
+    defs.near   = -defs.dist * 5.0
+    defs.far    =  defs.dist * 5.0
+    defs.left   = -defs.dist * defs.aspect   # Orthographic
+    defs.right  =  defs.dist * defs.aspect
+    defs.top    =  defs.dist
+    defs.bottom = -defs.dist
+    opts      = @processOpts( camOpts, cc, defs )
+    @ortho( opts )
+
+  orthographic:( camOpts, cc ) ->  # Uses world coordinates
+    defs        = @initDefs( cc )
+    defs.fov    = 75
+    defs.near   = -defs.dist * 5.0
+    defs.far    =  defs.dist * 5.0
+    defs.left   = -defs.dist * defs.aspect   # Orthographic
+    defs.right  =  defs.dist * defs.aspect
+    defs.top    =  defs.dist
+    defs.bottom = -defs.dist
+    opts        = @processOpts( camOpts, cc, defs )
+    @ortho( opts )
+
+  ortho:( opts ) ->  # Uses world coordinates
+    camera = new OrthographicCamera( opts.left, opts.right, opts.top, opts.bottom, opts.near, opts.far )
+    camera.scale.set(    opts.scaleXYZ.x, opts.scaleXYZ.y, opts.scaleXYZ.z )
+    camera.position.set( opts.position.x, opts.position.y, opts.position.z )
+    camera.lookAt(       opts.scenePos.x, opts.scenePos.y, opts.scenePos.z )
 
     if opts.helper? and opts.helper
       helper = new CameraHelper( camera )
       @main.addToScene( helper )
     camera
 
-  perspective:( opts, cc ) ->
-    aspect   = @main.aspectRatio
-    dist     = cc.dist
-    scale    = if opts.scale?     then opts.scale     else 1.0
-    fov      = if opts.fov?       then opts.fov       else  75
-    near     = if opts.near?      then opts.near      else   0.01 * dist
-    far      = if opts.far?       then opts.far       else 100    * dist
-    position = if opts.position?  then opts.position  else { "x":0, "y":0.6*dist, "z":16*dist }
-    scenePos = @main.scene.position
-    scaleXYZ = { x:aspect/scale, y:aspect/scale, z:aspect/scale }
-    camera   = new PerspectiveCamera( fov, @main.aspectRatio, near, far )
-    camera.position.set( position.x, position.y, position.z )
-    camera.lookAt(       scenePos.x, scenePos.y, scenePos.z )
-    camera.scale.set(    scaleXYZ.x, scaleXYZ.y, scaleXYZ.z )
+  perspective:( camOpts, cc ) ->
+    defs      = @initDefs( cc )
+    defs.fov  = 75
+    defs.near = defs.dist * 0.01
+    defs.far  = defs.dist * 100
+    opts      = @processOpts( camOpts, cc, defs )
+    camera    = new PerspectiveCamera( opts.fov, @main.aspectRatio, opts.near, opts.far )
+    camera.scale.set(    opts.scaleXYZ.x, opts.scaleXYZ.y, opts.scaleXYZ.z )
+    camera.position.set( opts.position.x, opts.position.y, opts.position.z )
+    camera.lookAt(       opts.scenePos.x, opts.scenePos.y, opts.scenePos.z )
+
     if opts.helper? and opts.helper
       helper = new CameraHelper( camera )
       @main.addToScene( helper )
     camera
 
-  muse:( opts, cc ) ->
-    if cc then false
-    fov      = if opts.fov?       then opts.fov       else    45
-    near     = if opts.near?      then opts.near      else     1
-    far      = if opts.far?       then opts.far       else 10000
-    position = if opts.position?  then opts.position  else { "x":0, "y":6, "z":1600 }
-    scenePos = @main.scene.position
-    camera   = new PerspectiveCamera( fov, @main.aspectRatio, near, far )
-    camera.position.set( position.x, position.y, position.z )
-    camera.lookAt(       scenePos.x, scenePos.y, scenePos.z )
-    if opts.helper? and opts.helper
-      helper = new CameraHelper( camera )
-      @main.addToScene( helper )
-    camera
+  muse:( camOpts, cc ) ->
+    defs          = @initDefs( cc )
+    defs.fov      = 45
+    defs.near     = 1
+    defs.far      = 10000
+    defs.position = { "x":0, "y":6, "z":1600 }
+    opts          = @processOpts( camOpts, cc, defs )
+    @perspective( opts )
 
   orbit:( camera, cc ) ->
     if cc then false
@@ -125,4 +176,3 @@ class Cameras
     # @perspective.dispose() if @@perspective?
 
 export default Cameras
-

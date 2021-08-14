@@ -1,22 +1,17 @@
 
 Debug
   1. Hexagon.coffee
-     a. Add more hex rings
-     a. Sat scaling and consider an angle driven adjustment
-     c. Add feature for an 30 deg angle shift
-     d. Vertice index lookup
+     a. Fix Hex30
+     b. Oscillate with val sin function
   2. Fix and the generalize coordinate system and Orthographic camera
-     a. Reorient axis with straight xy
+     a. Get OrthoXYZ and OrthoISO working with projectionMatrix()
+     b. Orbit control rotation not working
      b Grids yaxis scale off too short by 50%
-     c. Look into Orthographic camera
   3, Implement troika text
   4. Organize Main.json and Main.coof
-  5. Hsl Surface
-     a. valFun range 0:100, sin funct time and ocillate
-     b. Fix indices
-  6. Fully move Cube in Aug to Visu
+  5. Fully move Cube in Aug to Visu
      a. Consider having Cube initialized by Main
-  7. Reorganize Visu menus
+  6. Reorganize Visu menus
   
 Clean Up
   1. Vis

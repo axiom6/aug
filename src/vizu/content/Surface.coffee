@@ -12,7 +12,7 @@ class Surface
     obj         = {}
     obj.orient  = orient
     obj.group   = new THREE.Group()
-    obj.valFun = ( hue, sat ) -> 50
+    obj.valFun = ( hue, sat ) -> 35
     @toGeom( obj )
     @main.addToScene( obj.group )
     @main.addToScene( obj.sphereGroup )

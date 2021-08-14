@@ -386,9 +386,11 @@ class Vis extends Type
   min:(  args... ) -> Math.min( args )    # May not want args...
   round:( val )    -> Math.round( val )
 
-  deg360:(rad)     -> if rad < 0 then 360 + @deg(rad) else @deg(rad)
+  deg360:(r) ->
+    rad = @toZero(r)
+    if rad < 0 then 360 + @deg(rad) else @deg(rad)
   atan2:(y,x)      -> @deg360(Math.atan2(y,x))
-  hueZX:(z,x)      -> @round(@deg360(Math.atan2(-z,x)))
+  hueZX:(z,x)      -> @round(@deg360(Math.atan2(z,x)))
 
   rot:( deg, ang ) ->
     a = deg+ang
