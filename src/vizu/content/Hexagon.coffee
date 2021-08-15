@@ -7,16 +7,18 @@ class Hexagon extends Surface
 
   constructor:( main ) ->
      super( main )
+     @main.hexagon = @
 
   toGeom:( obj ) ->
-    vis.smooth     = true
+    @obj          = obj
+    vis.smooth    = true
+    obj.valFun    = ( hue, sat ) -> 100
     obj.colors     = []
     obj.vertices   = []
     obj.normals    = []
     obj.uvs        = []
     obj.indices    = []
     obj.hexIndices = new Array(7)
-    obj.hexOrient  = 60
     obj.vertex     = new THREE.Vector3()
     obj.normal     = new THREE.Vector3()
     obj.uv         = new THREE.Vector2()
@@ -56,7 +58,8 @@ class Hexagon extends Surface
       @sixHexes(    obj, 30, obj.secRadius*6.0, 0 )
     @createBufferGeometry( obj )
     @drawCircle( obj.priRadius*5.0 )
-    console.log( "Hexagon.toGeom()",
+    @pallettes(  obj, false )
+    @main.log( "Hexagon.toGeom()",
       { lenVertices:obj.vertices.length, lenIndices:obj.indices.length, vertices:obj.vertices, indices:obj.indices } )
     return
 
@@ -68,7 +71,7 @@ class Hexagon extends Surface
     return
 
   hexVertices:(    obj, orient, idxCen ) ->
-    @calcVertices( obj, orient, idxCen, obj.priRadius, false )
+    @calcVertices( obj, orient, idxCen, obj.priRadius, 0, false )
     @hexIndices(   obj )
     return
 
@@ -88,8 +91,9 @@ class Hexagon extends Surface
       obj.hexIndices[i] = @addVertex( obj, hue, sat, val, x, y, z )
       if callHexVertices
         @hexVertices( obj, obj.hexOrient, obj.hexIndices[i] )
-      @main.log( "Hexagon.calcVertices",
-        { idx:obj.hexIndices[i], ang:ang, hyp:hyp, hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
+      @main.log( "Hexagon.calcVertices", { idx:obj.hexIndices[i],
+      ang1:ang1, ang:ang, angOffset:angOffset, radius:radius,
+      hyp:hyp, hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
       i++
 
   adjSat:( obj, hue, hyp ) ->
@@ -116,6 +120,70 @@ class Hexagon extends Surface
     material = new THREE.MeshBasicMaterial( { color:0xffff00, transparent:true, opacity:1.0, wireframe:true } )
     circle   = new THREE.Mesh( geometry, material )
     @main.addToScene( circle )
+    return
+
+  pallettes:( obj, ysv=false ) ->
+    p          = {}
+    p.ysv      = ysv
+    p.i        = 0
+    p.sc       = 1.0 / 255.0
+    p.hueInc   = if p.ysv then 45 else 60
+    p.satInc   = if obj.hexOrient is 30 then 100/6              else 20
+    p.satNum   = if obj.hexOrient is 30 then   7                else  6
+    p.radius   = if obj.hexOrient is 30 then obj.secRadius*0.06 else obj.priRadius*0.05
+    p.count    = (360/p.hueInc)*p.satNum*(100/10+1)
+    @main.log( "Hexagon.pallettes()",
+      { orient:obj.hexOrient, satInc:p.satInc, satNum:p.satNum, radius:p.radius, count:p.count } )
+    p.geometry = new THREE.SphereGeometry( 2, 16, 16 )
+    p.material = new THREE.MeshBasicMaterial( { transparent:false, side:THREE.FrontSide } )
+    p.inMesh   = new THREE.InstancedMesh( p.geometry, p.material, p.count )
+    p.matrix   = new THREE.Matrix4()
+    p.color    = new THREE.Color()
+    p.group    = new THREE.Group()
+    @pallettePoints( p )
+    p.group.add( p.inMesh )
+    @main.addToScene( p.group )
+    @main.log( 'Hexagon.pallettes()', { i:p.i, count:p.count } )
+    return
+
+  pallettePoints:( p ) ->
+    for     h in [0...360] by p.hueInc
+      for   s in [0..101]  by p.satInc
+        for v in [0...100]  by 10
+          x = vis.cos(h) * s * p.radius
+          y = vis.sin(h) * s * p.radius
+          z = v              * p.radius
+          p.matrix.setPosition( x, y, z )
+          hsv = if p.ysv then [h,s,100-v,"HMI"] else [h,s,100-v,"HMIR"]
+          rgb = vis.rgb( hsv )
+          p.color.setRGB( rgb.r*p.sc, rgb.g*p.sc, rgb.b*p.sc )
+          p.inMesh.setMatrixAt( p.i, p.matrix )
+          p.inMesh.setColorAt(  p.i, p.color  )
+          @main.log( 'Hexagon.pallettes()', { h:h, s:s, v:v, rgb:rgb } )
+          p.i++
+
+  animateSpheres:( timer ) =>
+    obj   = @obj
+    count = 0
+    for i in [0...obj.sphereIndex]
+      obj.sphereMesh.getMatrixAt( i, obj.sphereMatrix )
+      obj.sphereMesh.getColorAt(  i, obj.sphereColor  )
+
+      position = new THREE.Vector3()
+      position.setFromMatrixPosition( obj.sphereMatrix )
+      rgb = obj.sphereColor.toArray()
+
+      pc = 0.5 - 0.5 * vis.sin( 12 * ( position.x + position.y + timer ) )
+
+      obj.sphereMatrix.setPosition( position.x, position.y, position.z*pc )
+      obj.sphereColor.setRGB( rgb[0]*pc, rgb[1]*pc, rgb[2]*pc )
+
+      count++
+      if count % 100 is 0
+        rrgb = vis.roundRGB( rgb, 255 )
+        console.log( "Hexagon.animateSpheres()", { pc:pc, position:position, rgb:rrgb } )
+
+    # console.log( "Hexagon.animateSpheres()" )
     return
 
 export default Hexagon

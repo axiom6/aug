@@ -16,7 +16,7 @@ Surface = class Surface {
   drawHsv(orient) {
     var obj;
     obj = {};
-    obj.orient = orient;
+    obj.hexOrient = orient;
     obj.group = new THREE.Group();
     obj.valFun = function(hue, sat) {
       return 35;

@@ -20,7 +20,8 @@ class Cameras
     defs.aspect   = @main.aspectRatio
     defs.dist     = cc.dist
     defs.scale    = 1.0
-    defs.position = { x:0, y:0, z:0 }
+    defs.position = { x:defs.dist*0.2, y:defs.dist*0.2, z:defs.dist*0.20 }
+    defs.fov      = 75
     defs
 
   processOpts:( optsCamera, cc, defs ) ->
@@ -53,7 +54,7 @@ class Cameras
         @orthographic( optsCam, cc )
 
   selectControls:( optsCam, cc, camera ) ->
-    console.log( "Camera.selectControls()", optsCam, cc )
+    @main.log( "Camera.selectControls()", optsCam, cc )
     return @orbit( optsCam, cc ) if not optsCam? and optsCam.controls?
     switch optsCam.controls
       when 'Orbit'     then @orbit(     camera, cc  )
@@ -75,6 +76,19 @@ class Cameras
     @projectionMatrix( camera.projectionMatrix, opts )
     camera
 
+  orthoISO:( camOpts, cc ) ->
+    defs        = @initDefs( cc )
+    defs.near   = -defs.dist * 5.0
+    defs.far    =  defs.dist * 5.0
+    defs.left   = -defs.dist * defs.aspect   # Orthographic
+    defs.right  =  defs.dist * defs.aspect
+    defs.top    =  defs.dist
+    defs.bottom = -defs.dist
+    opts        = @processOpts( camOpts, cc, defs )
+    camera      = @ortho( opts )
+    @projectionMatrix( camera.projectionMatrix, opts )
+    camera
+
   projectionMatrix:( matrix, opts ) ->
     s     = opts.scaleXYZ
     xAxis = { x:s.x, y:1,   z:1   }
@@ -83,21 +97,8 @@ class Cameras
     matrix.makeBasis( xAxis, yAxis, zAxis )
     return
 
-  orthoISO:( camOpts, cc ) ->
-    defs        = @initDefs( cc )
-    defs.fov    = 75
-    defs.near   = -defs.dist * 5.0
-    defs.far    =  defs.dist * 5.0
-    defs.left   = -defs.dist * defs.aspect   # Orthographic
-    defs.right  =  defs.dist * defs.aspect
-    defs.top    =  defs.dist
-    defs.bottom = -defs.dist
-    opts      = @processOpts( camOpts, cc, defs )
-    @ortho( opts )
-
   orthographic:( camOpts, cc ) ->  # Uses world coordinates
     defs        = @initDefs( cc )
-    defs.fov    = 75
     defs.near   = -defs.dist * 5.0
     defs.far    =  defs.dist * 5.0
     defs.left   = -defs.dist * defs.aspect   # Orthographic

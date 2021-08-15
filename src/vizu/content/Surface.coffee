@@ -9,10 +9,10 @@ class Surface
     @main.log( @klass+'()', @ )
 
   drawHsv:( orient ) ->
-    obj         = {}
-    obj.orient  = orient
-    obj.group   = new THREE.Group()
-    obj.valFun = ( hue, sat ) -> 35
+    obj           = {}
+    obj.hexOrient = orient
+    obj.group     = new THREE.Group()
+    obj.valFun    = ( hue, sat ) -> 35
     @toGeom( obj )
     @main.addToScene( obj.group )
     @main.addToScene( obj.sphereGroup )
@@ -92,12 +92,14 @@ class Surface
     index
 
   addSphere:( obj, rgb, x, y, z ) ->
-    obj.sphereMatrix.setPosition( x, y, z );
+    obj.sphereMatrix.setPosition( x, y, z )
     obj.sphereColor.setRGB( rgb.r*obj.sc, rgb.g*obj.sc, rgb.b*obj.sc )
     obj.sphereMesh.setMatrixAt( obj.sphereIndex, obj.sphereMatrix )
     obj.sphereMesh.setColorAt(  obj.sphereIndex, obj.sphereColor  )
     obj.sphereIndex++
     return
+
+
 
   createBufferGeometry:( obj ) ->
     geom = new THREE.BufferGeometry()

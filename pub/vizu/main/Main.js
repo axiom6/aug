@@ -36,6 +36,7 @@ Main = class Main {
     this.pageKey = "";
     this.debug = false;
     this.verifyFlag = false;
+    this.hexagon = null;
   }
 
   setup() {

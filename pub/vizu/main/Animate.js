@@ -9,6 +9,7 @@ Animate = class Animate {
     // Call before animate to insure an initial rendering
     this.render = this.render.bind(this);
     this.animate = this.animate.bind(this);
+    this.doAnimations = this.doAnimations.bind(this);
     this.controls = this.controls.bind(this);
     this.rotate = this.rotate.bind(this);
     this.main = main;
@@ -44,8 +45,17 @@ Animate = class Animate {
     if (this.needsRender && (this.camControls != null)) {
       this.controls();
     }
+    this.doAnimations();
     this.render();
     requestAnimationFrame(this.animate);
+  }
+
+  doAnimations() {
+    var timer;
+    if (this.main.hexagon != null) {
+      timer = 0.0001 * Date.now();
+      this.main.hexagon.animateSpheres(timer);
+    }
   }
 
   controls() {

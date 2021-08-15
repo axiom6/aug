@@ -17,16 +17,23 @@ class Animate
   # Call before animate to insure an initial rendering
   render:() =>
     if @needsRender # Significant step. Not called when scene is static
-       @main.render.renderer.render( @main.scene, @main.cameras.camera )
-       @needsRender = false
+      @main.render.renderer.render( @main.scene, @main.cameras.camera )
+      @needsRender = false
     return
 
   animate:() =>
     @rotate()       if @opts.rotate?
     @lightHelpers() if @needsRender and @main.lights.lightHelpers.length > 0
     @controls()     if @needsRender and @camControls?
+    @doAnimations()
     @render()
     requestAnimationFrame( @animate )
+    return
+
+  doAnimations:() =>
+    if @main.hexagon?
+       timer = 0.0001 * Date.now()
+       @main.hexagon.animateSpheres( timer )
     return
 
   controls:() =>

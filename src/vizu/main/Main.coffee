@@ -19,6 +19,7 @@ class Main
     @pageKey    = ""
     @debug      = false
     @verifyFlag = false
+    @hexagon    = null
 
   setup:() ->
     @scene        = new Scene()

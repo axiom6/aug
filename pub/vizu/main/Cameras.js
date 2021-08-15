@@ -41,10 +41,11 @@ Cameras = class Cameras {
     defs.dist = cc.dist;
     defs.scale = 1.0;
     defs.position = {
-      x: 0,
-      y: 0,
-      z: 0
+      x: defs.dist * 0.2,
+      y: defs.dist * 0.2,
+      z: defs.dist * 0.20
     };
+    defs.fov = 75;
     return defs;
   }
 
@@ -93,7 +94,7 @@ Cameras = class Cameras {
   }
 
   selectControls(optsCam, cc, camera) {
-    console.log("Camera.selectControls()", optsCam, cc);
+    this.main.log("Camera.selectControls()", optsCam, cc);
     if ((optsCam == null) && (optsCam.controls != null)) {
       return this.orbit(optsCam, cc);
     }
@@ -114,6 +115,21 @@ Cameras = class Cameras {
     defs.near = -defs.dist * 5.0;
     defs.far = defs.dist * 5.0;
     defs.left = -defs.dist * defs.aspect;
+    defs.right = defs.dist * defs.aspect;
+    defs.top = defs.dist;
+    defs.bottom = -defs.dist;
+    opts = this.processOpts(camOpts, cc, defs);
+    camera = this.ortho(opts);
+    this.projectionMatrix(camera.projectionMatrix, opts);
+    return camera;
+  }
+
+  orthoISO(camOpts, cc) {
+    var camera, defs, opts;
+    defs = this.initDefs(cc);
+    defs.near = -defs.dist * 5.0;
+    defs.far = defs.dist * 5.0;
+    defs.left = -defs.dist * defs.aspect; // Orthographic
     defs.right = defs.dist * defs.aspect;
     defs.top = defs.dist;
     defs.bottom = -defs.dist;
@@ -144,24 +160,9 @@ Cameras = class Cameras {
     matrix.makeBasis(xAxis, yAxis, zAxis);
   }
 
-  orthoISO(camOpts, cc) {
-    var defs, opts;
-    defs = this.initDefs(cc);
-    defs.fov = 75;
-    defs.near = -defs.dist * 5.0;
-    defs.far = defs.dist * 5.0;
-    defs.left = -defs.dist * defs.aspect; // Orthographic
-    defs.right = defs.dist * defs.aspect;
-    defs.top = defs.dist;
-    defs.bottom = -defs.dist;
-    opts = this.processOpts(camOpts, cc, defs);
-    return this.ortho(opts);
-  }
-
   orthographic(camOpts, cc) { // Uses world coordinates
     var defs, opts;
     defs = this.initDefs(cc);
-    defs.fov = 75;
     defs.near = -defs.dist * 5.0;
     defs.far = defs.dist * 5.0;
     defs.left = -defs.dist * defs.aspect; // Orthographic

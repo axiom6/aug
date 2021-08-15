@@ -1,4 +1,5 @@
-var Hexagon;
+var Hexagon,
+  boundMethodCheck = function(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new Error('Bound instance method accessed before binding'); } };
 
 import * as THREE from "three";
 
@@ -11,18 +12,23 @@ import {
 Hexagon = class Hexagon extends Surface {
   constructor(main) {
     super(main);
+    this.animateSpheres = this.animateSpheres.bind(this);
+    this.main.hexagon = this;
   }
 
   toGeom(obj) {
     var angle, radius, x, y;
+    this.obj = obj;
     vis.smooth = true;
+    obj.valFun = function(hue, sat) {
+      return 100;
+    };
     obj.colors = [];
     obj.vertices = [];
     obj.normals = [];
     obj.uvs = [];
     obj.indices = [];
     obj.hexIndices = new Array(7);
-    obj.hexOrient = 60;
     obj.vertex = new THREE.Vector3();
     obj.normal = new THREE.Vector3();
     obj.uv = new THREE.Vector2();
@@ -63,7 +69,8 @@ Hexagon = class Hexagon extends Surface {
     }
     this.createBufferGeometry(obj);
     this.drawCircle(obj.priRadius * 5.0);
-    console.log("Hexagon.toGeom()", {
+    this.pallettes(obj, false);
+    this.main.log("Hexagon.toGeom()", {
       lenVertices: obj.vertices.length,
       lenIndices: obj.indices.length,
       vertices: obj.vertices,
@@ -84,7 +91,7 @@ Hexagon = class Hexagon extends Surface {
   }
 
   hexVertices(obj, orient, idxCen) {
-    this.calcVertices(obj, orient, idxCen, obj.priRadius, false);
+    this.calcVertices(obj, orient, idxCen, obj.priRadius, 0, false);
     this.hexIndices(obj);
   }
 
@@ -111,7 +118,10 @@ Hexagon = class Hexagon extends Surface {
       }
       this.main.log("Hexagon.calcVertices", {
         idx: obj.hexIndices[i],
+        ang1: ang1,
         ang: ang,
+        angOffset: angOffset,
+        radius: radius,
         hyp: hyp,
         hue: hue,
         sat: sat,
@@ -159,8 +169,109 @@ Hexagon = class Hexagon extends Surface {
     this.main.addToScene(circle);
   }
 
+  pallettes(obj, ysv = false) {
+    var p;
+    p = {};
+    p.ysv = ysv;
+    p.i = 0;
+    p.sc = 1.0 / 255.0;
+    p.hueInc = p.ysv ? 45 : 60;
+    p.satInc = obj.hexOrient === 30 ? 100 / 6 : 20;
+    p.satNum = obj.hexOrient === 30 ? 7 : 6;
+    p.radius = obj.hexOrient === 30 ? obj.secRadius * 0.06 : obj.priRadius * 0.05;
+    p.count = (360 / p.hueInc) * p.satNum * (100 / 10 + 1);
+    this.main.log("Hexagon.pallettes()", {
+      orient: obj.hexOrient,
+      satInc: p.satInc,
+      satNum: p.satNum,
+      radius: p.radius,
+      count: p.count
+    });
+    p.geometry = new THREE.SphereGeometry(2, 16, 16);
+    p.material = new THREE.MeshBasicMaterial({
+      transparent: false,
+      side: THREE.FrontSide
+    });
+    p.inMesh = new THREE.InstancedMesh(p.geometry, p.material, p.count);
+    p.matrix = new THREE.Matrix4();
+    p.color = new THREE.Color();
+    p.group = new THREE.Group();
+    this.pallettePoints(p);
+    p.group.add(p.inMesh);
+    this.main.addToScene(p.group);
+    this.main.log('Hexagon.pallettes()', {
+      i: p.i,
+      count: p.count
+    });
+  }
+
+  pallettePoints(p) {
+    var h, hsv, j, ref, results, rgb, s, v, x, y, z;
+    results = [];
+    for (h = j = 0, ref = p.hueInc; ref !== 0 && (ref > 0 ? j < 360 : j > 360); h = j += ref) {
+      results.push((function() {
+        var k, ref1, results1;
+        results1 = [];
+        for (s = k = 0, ref1 = p.satInc; ref1 !== 0 && (ref1 > 0 ? k <= 101 : k >= 101); s = k += ref1) {
+          results1.push((function() {
+            var l, results2;
+            results2 = [];
+            for (v = l = 0; l < 100; v = l += 10) {
+              x = vis.cos(h) * s * p.radius;
+              y = vis.sin(h) * s * p.radius;
+              z = v * p.radius;
+              p.matrix.setPosition(x, y, z);
+              hsv = p.ysv ? [h, s, 100 - v, "HMI"] : [h, s, 100 - v, "HMIR"];
+              rgb = vis.rgb(hsv);
+              p.color.setRGB(rgb.r * p.sc, rgb.g * p.sc, rgb.b * p.sc);
+              p.inMesh.setMatrixAt(p.i, p.matrix);
+              p.inMesh.setColorAt(p.i, p.color);
+              this.main.log('Hexagon.pallettes()', {
+                h: h,
+                s: s,
+                v: v,
+                rgb: rgb
+              });
+              results2.push(p.i++);
+            }
+            return results2;
+          }).call(this));
+        }
+        return results1;
+      }).call(this));
+    }
+    return results;
+  }
+
+  animateSpheres(timer) {
+    var count, i, j, obj, pc, position, ref, rgb, rrgb;
+    boundMethodCheck(this, Hexagon);
+    obj = this.obj;
+    count = 0;
+    for (i = j = 0, ref = obj.sphereIndex; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
+      obj.sphereMesh.getMatrixAt(i, obj.sphereMatrix);
+      obj.sphereMesh.getColorAt(i, obj.sphereColor);
+      position = new THREE.Vector3();
+      position.setFromMatrixPosition(obj.sphereMatrix);
+      rgb = obj.sphereColor.toArray();
+      pc = 0.5 - 0.5 * vis.sin(12 * (position.x + position.y + timer));
+      obj.sphereMatrix.setPosition(position.x, position.y, position.z * pc);
+      obj.sphereColor.setRGB(rgb[0] * pc, rgb[1] * pc, rgb[2] * pc);
+      count++;
+      if (count % 100 === 0) {
+        rrgb = vis.roundRGB(rgb, 255);
+        console.log("Hexagon.animateSpheres()", {
+          pc: pc,
+          position: position,
+          rgb: rrgb
+        });
+      }
+    }
+  }
+
 };
 
+// console.log( "Hexagon.animateSpheres()" )
 export default Hexagon;
 
 //# sourceMappingURL=Hexagon.js.map
