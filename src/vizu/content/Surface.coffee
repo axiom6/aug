@@ -63,11 +63,31 @@ class Surface
     obj.sphereGroup.add( obj.sphereMesh )
     return
 
-  vertexIndexXYZ:( obj, x, y, z ) ->
-    vs = obj.vertices
-    for i in [0...vs.length] by 3
-      return i/3 if vis.isCoord( x, vs[i], y, vs[i+1], z, vs[i+2] )
-    -1
+  # Assign vertex indexes to create all the triangular face indices
+  createIndices:( obj ) ->
+    n = obj.satNum + 1
+    for i0 in [0...obj.hueNum] by 2
+      i1 = i0 + 1
+      i2 = if i0 < obj.hueNum-2 then i0 + 2 else 0
+      @add3Indices(   obj, n, i0, i1, i2 )
+      for j in [0...obj.satNum]
+        @add4Indices( obj, n, i0, i1, i2, j )
+    return
+
+  createBufferGeometry:( obj ) ->
+    geom = new THREE.BufferGeometry()
+    geom.setIndex( obj.indices )
+    geom.setAttribute( 'position', new THREE.Float32BufferAttribute( obj.vertices, 3 ) )
+    geom.setAttribute( 'normal',   new THREE.Float32BufferAttribute( obj.normals,  3 ) )
+    geom.setAttribute( 'uv',       new THREE.Float32BufferAttribute( obj.uvs,      2 ) )
+    geom.setAttribute( 'color',    new THREE.Float32BufferAttribute( obj.colors,   3 ) )
+    vertMat  = new THREE.MeshBasicMaterial( { side:THREE.DoubleSide, vertexColors:THREE.FaceColors } )
+    geomMesh = new THREE.Mesh( geom, vertMat )
+    wireMat  = new THREE.MeshBasicMaterial( { wireframe:true, color:0x000000 } )
+    wireMesh = new THREE.Mesh( geom, wireMat )
+    geomMesh.add(  wireMesh )
+    obj.group.add( geomMesh )
+    return
 
   vertexIndex:( obj ) ->
     obj.vertices.length / 3
@@ -91,45 +111,18 @@ class Surface
     @main.log( "Surface.addVertex()", { index:index, hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
     index
 
+  vertexIndexXYZ:( obj, x, y, z ) ->
+    vs = obj.vertices
+    for i in [0...vs.length] by 3
+      return i/3 if vis.isCoord( x, vs[i], y, vs[i+1], z, vs[i+2] )
+    -1
+
   addSphere:( obj, rgb, x, y, z ) ->
     obj.sphereMatrix.setPosition( x, y, z )
     obj.sphereColor.setRGB( rgb.r*obj.sc, rgb.g*obj.sc, rgb.b*obj.sc )
     obj.sphereMesh.setMatrixAt( obj.sphereIndex, obj.sphereMatrix )
     obj.sphereMesh.setColorAt(  obj.sphereIndex, obj.sphereColor  )
     obj.sphereIndex++
-    return
-
-
-
-  createBufferGeometry:( obj ) ->
-    geom = new THREE.BufferGeometry()
-    geom.setIndex( obj.indices )
-    geom.setAttribute( 'position', new THREE.Float32BufferAttribute( obj.vertices, 3 ) )
-    geom.setAttribute( 'normal',   new THREE.Float32BufferAttribute( obj.normals,  3 ) )
-    geom.setAttribute( 'uv',       new THREE.Float32BufferAttribute( obj.uvs,      2 ) )
-    geom.setAttribute( 'color',    new THREE.Float32BufferAttribute( obj.colors,   3 ) )
-    vertMat  = new THREE.MeshBasicMaterial( { side:THREE.DoubleSide, vertexColors:THREE.FaceColors } )
-    geomMesh = new THREE.Mesh( geom, vertMat )
-    wireMat  = new THREE.MeshBasicMaterial( { wireframe:true, color:0x000000 } )
-    wireMesh = new THREE.Mesh( geom, wireMat )
-    geomMesh.add(  wireMesh )
-    obj.group.add( geomMesh )
-    return
-
-  # Assign vertex indexes to create all the triangular face indices
-  createIndices:( obj ) ->
-    n = obj.satNum + 1
-    for i0 in [0...obj.hueNum] by 2
-      i1 = i0 + 1
-      i2 = if i0 < obj.hueNum-2 then i0 + 2 else 0
-      @add3Indices(   obj, n, i0, i1, i2 )
-      for j in [0...obj.satNum]
-        @add4Indices( obj, n, i0, i1, i2, j )
-    return
-
-  addIndice:(    obj, i1, i2, i3 ) ->
-    obj.indices.push( i1, i2, i3 )
-    # @addLine(  obj, i1, i2, i3 )
     return
 
   add3Indices:( obj, n, i0, i1, i2 ) ->
@@ -156,13 +149,11 @@ class Surface
     @main.log( "Surface.add4Indices()", { i0:i0, j:j, ce:ce, sw:sw, nw:nw, ne:ne, se:se } )
     return
 
-# xyzs.push(vis.cos(hue)*sat,vis.sin(hue)*sat,0)
-  genHsvs:( hueInc, satInc, valFunc ) ->
-    hsvs = []
-    for     hue in [0...360] by hueInc
-      for   sat in [0..100]  by satInc
-        hsvs.push(new THREE.Vector3(hue,sat,valFunc(hue,sat)))
-    hsvs
+  addIndice:(    obj, i1, i2, i3 ) ->
+    obj.indices.push( i1, i2, i3 )
+    # @addLine(  obj, i1, i2, i3 )
+    return
+
 
   rgbs:( inMesh, nx, ny, inc ) ->
     i      = 0
@@ -244,5 +235,13 @@ class Surface
     vis.noop( line )
     # obj.lineGroup.add( line )
     return
+
+  # xyzs.push(vis.cos(hue)*sat,vis.sin(hue)*sat,0)
+  genHsvs:( hueInc, satInc, valFunc ) ->
+    hsvs = []
+    for     hue in [0...360] by hueInc
+      for   sat in [0..100]  by satInc
+        hsvs.push(new THREE.Vector3(hue,sat,valFunc(hue,sat)))
+    hsvs
 
 export default Surface

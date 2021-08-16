@@ -1,19 +1,27 @@
-var Hexagon,
-  boundMethodCheck = function(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new Error('Bound instance method accessed before binding'); } };
+var Hexagon;
 
 import * as THREE from "three";
-
-import Surface from "./Surface.js";
 
 import {
   vis
 } from "../../../lib/pub/draw/Vis.js";
 
-Hexagon = class Hexagon extends Surface {
+Hexagon = class Hexagon {
   constructor(main) {
-    super(main);
-    this.animateSpheres = this.animateSpheres.bind(this);
+    this.animate = this.animate.bind(this);
+    this.main = main;
     this.main.hexagon = this;
+  }
+
+  drawHsv(orient) {
+    var obj;
+    obj = {};
+    obj.hexOrient = orient;
+    obj.group = new THREE.Group();
+    this.toGeom(obj);
+    this.main.addToScene(obj.group);
+    this.main.addToScene(obj.sphereGroup);
+    this.main.log('Heagon.drawHsv()', obj);
   }
 
   toGeom(obj) {
@@ -21,13 +29,17 @@ Hexagon = class Hexagon extends Surface {
     this.obj = obj;
     vis.smooth = true;
     obj.valFun = function(hue, sat) {
-      return 100;
+      return 100 * vis.sin(90 * (1.0 - sat * 0.01));
     };
+    obj.valBase = 100;
+    obj.animateOn = false;
     obj.colors = [];
     obj.vertices = [];
     obj.normals = [];
     obj.uvs = [];
     obj.indices = [];
+    obj.vertexCount = 0;
+    obj.indiceCount = 0;
     obj.hexIndices = new Array(7);
     obj.vertex = new THREE.Vector3();
     obj.normal = new THREE.Vector3();
@@ -70,11 +82,14 @@ Hexagon = class Hexagon extends Surface {
     this.createBufferGeometry(obj);
     this.drawCircle(obj.priRadius * 5.0);
     this.pallettes(obj, false);
-    this.main.log("Hexagon.toGeom()", {
-      lenVertices: obj.vertices.length,
-      lenIndices: obj.indices.length,
-      vertices: obj.vertices,
-      indices: obj.indices
+    this.applyValues(obj);
+    console.log("Hexagon.toGeom()", {
+      vertexLength: obj.vertices.length,
+      vertexCount: obj.vertexCount,
+      indiceKength: obj.indices.length,
+      indiceCount: obj.indiceCount,
+      sphereCountCalc: obj.sphereCountCalc,
+      vertices: obj.vertices
     });
   }
 
@@ -95,6 +110,7 @@ Hexagon = class Hexagon extends Surface {
     this.hexIndices(obj);
   }
 
+  // valRadius from @pallettePoints()
   calcVertices(obj, orient, idxCen, radius, angOffset, callHexVertices) {
     var ang, ang1, hue, hyp, i, j, len, ref, results, sat, val, vs, x, y, z;
     i = 1;
@@ -107,11 +123,11 @@ Hexagon = class Hexagon extends Surface {
       ang = ang1 + angOffset;
       x = vs[3 * idxCen] + radius * vis.cos(ang);
       y = vs[3 * idxCen + 1] + radius * vis.sin(ang);
-      z = vs[3 * idxCen + 2];
       hue = vis.hueZX(y, x);
       hyp = vis.hypoth(y, x);
       sat = this.adjSat(obj, hue, hyp);
-      val = obj.valFun(hue, sat);
+      val = obj.valBase;
+      z = vs[3 * idxCen + 2];
       obj.hexIndices[i] = this.addVertex(obj, hue, sat, val, x, y, z);
       if (callHexVertices) {
         this.hexVertices(obj, obj.hexOrient, obj.hexIndices[i]);
@@ -152,6 +168,98 @@ Hexagon = class Hexagon extends Surface {
 
   addIndice(obj, i1, i2, i3) {
     obj.indices.push(i1, i2, i3);
+    obj.indiceCount++;
+  }
+
+  addVertex(obj, hue, sat, val, x, y, z) {
+    var index, rgb;
+    index = this.vertexIndexXYZ(obj, x, y, z);
+    if (index === -1) {
+      index = this.vertexIndex(obj);
+      rgb = vis.rgb([hue, sat, val, "HMIR"]);
+      obj.colors.push(rgb.r * obj.sc, rgb.g * obj.sc, rgb.b * obj.sc);
+      obj.vertex.x = x;
+      obj.vertex.y = y;
+      obj.vertex.z = z;
+      obj.vertices.push(obj.vertex.x, obj.vertex.y, obj.vertex.z);
+      obj.normal.copy(obj.vertex).normalize();
+      obj.normals.push(obj.normal.x, obj.normal.y, obj.normal.z);
+      obj.uv.x = hue / obj.hueInc / obj.hueNum;
+      obj.uv.y = sat / obj.satInc / obj.satNum;
+      obj.uvs.push(obj.uv.x, obj.uv.y);
+      this.addSphere(obj, rgb, x, y, z);
+      obj.vertexCount++;
+    }
+    this.main.log("Surface.addVertex()", {
+      index: index,
+      hue: hue,
+      sat: sat,
+      val: val,
+      x: x,
+      y: y,
+      z: z
+    });
+    return index;
+  }
+
+  vertexIndex(obj) {
+    return obj.vertices.length / 3;
+  }
+
+  vertexIndexXYZ(obj, x, y, z) {
+    var i, j, ref, vs;
+    vs = obj.vertices;
+    for (i = j = 0, ref = vs.length; j < ref; i = j += 3) {
+      if (vis.isCoord(x, vs[i], y, vs[i + 1], z, vs[i + 2])) {
+        return i / 3;
+      }
+    }
+    return -1;
+  }
+
+  addSphere(obj, rgb, x, y, z) {
+    obj.sphereMatrix.setPosition(x, y, z);
+    obj.sphereColor.setRGB(rgb.r * obj.sc, rgb.g * obj.sc, rgb.b * obj.sc);
+    obj.sphereMesh.setMatrixAt(this.vertexIndex(obj), obj.sphereMatrix);
+    obj.sphereMesh.setColorAt(this.vertexIndex(obj), obj.sphereColor);
+  }
+
+  createBufferGeometry(obj) {
+    var geom, geomMesh, vertMat, wireMat, wireMesh;
+    geom = new THREE.BufferGeometry();
+    geom.setIndex(obj.indices);
+    geom.setAttribute('position', new THREE.Float32BufferAttribute(obj.vertices, 3));
+    geom.setAttribute('normal', new THREE.Float32BufferAttribute(obj.normals, 3));
+    geom.setAttribute('uv', new THREE.Float32BufferAttribute(obj.uvs, 2));
+    geom.setAttribute('color', new THREE.Float32BufferAttribute(obj.colors, 3));
+    vertMat = new THREE.MeshBasicMaterial({
+      side: THREE.DoubleSide,
+      vertexColors: THREE.FaceColors
+    });
+    geomMesh = new THREE.Mesh(geom, vertMat);
+    wireMat = new THREE.MeshBasicMaterial({
+      wireframe: true,
+      color: 0x000000
+    });
+    wireMesh = new THREE.Mesh(geom, wireMat);
+    geomMesh.add(wireMesh);
+    obj.group.add(geomMesh);
+  }
+
+  initSpheres(obj) {
+    var radius;
+    radius = 2;
+    obj.sphereCountCalc = obj.hueNum * (obj.satNum + 1) + 1; // Look into
+    obj.sphereGeometry = new THREE.SphereGeometry(radius, 16, 16);
+    obj.sphereMaterial = new THREE.MeshBasicMaterial({
+      transparent: false,
+      side: THREE.FrontSide
+    });
+    obj.sphereMesh = new THREE.InstancedMesh(obj.sphereGeometry, obj.sphereMaterial, obj.sphereCountCalc);
+    obj.sphereMatrix = new THREE.Matrix4();
+    obj.sphereColor = new THREE.Color();
+    obj.sphereGroup = new THREE.Group();
+    obj.sphereGroup.add(obj.sphereMesh);
   }
 
   drawCircle(radius) {
@@ -243,12 +351,21 @@ Hexagon = class Hexagon extends Surface {
     return results;
   }
 
-  animateSpheres(timer) {
+  applyValues(obj) {
+    var fac, i, j, ref, val, vs;
+    val = 50;
+    vs = obj.vertices;
+    fac = obj.hexOrient === 30 ? obj.secRadius * 0.03 : obj.priRadius * 0.025;
+    for (i = j = 0, ref = obj.vertexCount; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
+      vs[3 * i + 2] = val * fac;
+    }
+  }
+
+  animate(timer) {
     var count, i, j, obj, pc, position, ref, rgb, rrgb;
-    boundMethodCheck(this, Hexagon);
     obj = this.obj;
     count = 0;
-    for (i = j = 0, ref = obj.sphereIndex; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
+    for (i = j = 0, ref = obj.vertexCount; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
       obj.sphereMesh.getMatrixAt(i, obj.sphereMatrix);
       obj.sphereMesh.getColorAt(i, obj.sphereColor);
       position = new THREE.Vector3();

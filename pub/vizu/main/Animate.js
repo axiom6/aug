@@ -52,9 +52,9 @@ Animate = class Animate {
 
   doAnimations() {
     var timer;
-    if (this.main.hexagon != null) {
+    if ((this.main.hexagon != null) && this.main.hexagon.obj.animateOn) {
       timer = 0.0001 * Date.now();
-      this.main.hexagon.animateSpheres(timer);
+      this.main.hexagon.animate(timer);
     }
   }
 

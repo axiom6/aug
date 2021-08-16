@@ -85,15 +85,40 @@ Surface = class Surface {
     obj.sphereGroup.add(obj.sphereMesh);
   }
 
-  vertexIndexXYZ(obj, x, y, z) {
-    var i, k, ref, vs;
-    vs = obj.vertices;
-    for (i = k = 0, ref = vs.length; k < ref; i = k += 3) {
-      if (vis.isCoord(x, vs[i], y, vs[i + 1], z, vs[i + 2])) {
-        return i / 3;
+  // Assign vertex indexes to create all the triangular face indices
+  createIndices(obj) {
+    var i0, i1, i2, j, k, l, n, ref, ref1;
+    n = obj.satNum + 1;
+    for (i0 = k = 0, ref = obj.hueNum; k < ref; i0 = k += 2) {
+      i1 = i0 + 1;
+      i2 = i0 < obj.hueNum - 2 ? i0 + 2 : 0;
+      this.add3Indices(obj, n, i0, i1, i2);
+      for (j = l = 0, ref1 = obj.satNum; (0 <= ref1 ? l < ref1 : l > ref1); j = 0 <= ref1 ? ++l : --l) {
+        this.add4Indices(obj, n, i0, i1, i2, j);
       }
     }
-    return -1;
+  }
+
+  createBufferGeometry(obj) {
+    var geom, geomMesh, vertMat, wireMat, wireMesh;
+    geom = new THREE.BufferGeometry();
+    geom.setIndex(obj.indices);
+    geom.setAttribute('position', new THREE.Float32BufferAttribute(obj.vertices, 3));
+    geom.setAttribute('normal', new THREE.Float32BufferAttribute(obj.normals, 3));
+    geom.setAttribute('uv', new THREE.Float32BufferAttribute(obj.uvs, 2));
+    geom.setAttribute('color', new THREE.Float32BufferAttribute(obj.colors, 3));
+    vertMat = new THREE.MeshBasicMaterial({
+      side: THREE.DoubleSide,
+      vertexColors: THREE.FaceColors
+    });
+    geomMesh = new THREE.Mesh(geom, vertMat);
+    wireMat = new THREE.MeshBasicMaterial({
+      wireframe: true,
+      color: 0x000000
+    });
+    wireMesh = new THREE.Mesh(geom, wireMat);
+    geomMesh.add(wireMesh);
+    obj.group.add(geomMesh);
   }
 
   vertexIndex(obj) {
@@ -130,6 +155,17 @@ Surface = class Surface {
     return index;
   }
 
+  vertexIndexXYZ(obj, x, y, z) {
+    var i, k, ref, vs;
+    vs = obj.vertices;
+    for (i = k = 0, ref = vs.length; k < ref; i = k += 3) {
+      if (vis.isCoord(x, vs[i], y, vs[i + 1], z, vs[i + 2])) {
+        return i / 3;
+      }
+    }
+    return -1;
+  }
+
   addSphere(obj, rgb, x, y, z) {
     obj.sphereMatrix.setPosition(x, y, z);
     obj.sphereColor.setRGB(rgb.r * obj.sc, rgb.g * obj.sc, rgb.b * obj.sc);
@@ -138,47 +174,6 @@ Surface = class Surface {
     obj.sphereIndex++;
   }
 
-  createBufferGeometry(obj) {
-    var geom, geomMesh, vertMat, wireMat, wireMesh;
-    geom = new THREE.BufferGeometry();
-    geom.setIndex(obj.indices);
-    geom.setAttribute('position', new THREE.Float32BufferAttribute(obj.vertices, 3));
-    geom.setAttribute('normal', new THREE.Float32BufferAttribute(obj.normals, 3));
-    geom.setAttribute('uv', new THREE.Float32BufferAttribute(obj.uvs, 2));
-    geom.setAttribute('color', new THREE.Float32BufferAttribute(obj.colors, 3));
-    vertMat = new THREE.MeshBasicMaterial({
-      side: THREE.DoubleSide,
-      vertexColors: THREE.FaceColors
-    });
-    geomMesh = new THREE.Mesh(geom, vertMat);
-    wireMat = new THREE.MeshBasicMaterial({
-      wireframe: true,
-      color: 0x000000
-    });
-    wireMesh = new THREE.Mesh(geom, wireMat);
-    geomMesh.add(wireMesh);
-    obj.group.add(geomMesh);
-  }
-
-  // Assign vertex indexes to create all the triangular face indices
-  createIndices(obj) {
-    var i0, i1, i2, j, k, l, n, ref, ref1;
-    n = obj.satNum + 1;
-    for (i0 = k = 0, ref = obj.hueNum; k < ref; i0 = k += 2) {
-      i1 = i0 + 1;
-      i2 = i0 < obj.hueNum - 2 ? i0 + 2 : 0;
-      this.add3Indices(obj, n, i0, i1, i2);
-      for (j = l = 0, ref1 = obj.satNum; (0 <= ref1 ? l < ref1 : l > ref1); j = 0 <= ref1 ? ++l : --l) {
-        this.add4Indices(obj, n, i0, i1, i2, j);
-      }
-    }
-  }
-
-  addIndice(obj, i1, i2, i3) {
-    obj.indices.push(i1, i2, i3);
-  }
-
-  // @addLine(  obj, i1, i2, i3 )
   add3Indices(obj, n, i0, i1, i2) {
     var ce, ne, oo, se;
     oo = i0 * n;
@@ -219,18 +214,11 @@ Surface = class Surface {
     });
   }
 
-  // xyzs.push(vis.cos(hue)*sat,vis.sin(hue)*sat,0)
-  genHsvs(hueInc, satInc, valFunc) {
-    var hsvs, hue, k, l, ref, ref1, sat;
-    hsvs = [];
-    for (hue = k = 0, ref = hueInc; ref !== 0 && (ref > 0 ? k < 360 : k > 360); hue = k += ref) {
-      for (sat = l = 0, ref1 = satInc; ref1 !== 0 && (ref1 > 0 ? l <= 100 : l >= 100); sat = l += ref1) {
-        hsvs.push(new THREE.Vector3(hue, sat, valFunc(hue, sat)));
-      }
-    }
-    return hsvs;
+  addIndice(obj, i1, i2, i3) {
+    obj.indices.push(i1, i2, i3);
   }
 
+  // @addLine(  obj, i1, i2, i3 )
   rgbs(inMesh, nx, ny, inc) {
     var color, i, k, l, matrix, ref, ref1, ref2, ref3, x, y, z;
     i = 0;
@@ -338,9 +326,21 @@ Surface = class Surface {
     vis.noop(line);
   }
 
+  // xyzs.push(vis.cos(hue)*sat,vis.sin(hue)*sat,0)
+  // obj.lineGroup.add( line )
+  genHsvs(hueInc, satInc, valFunc) {
+    var hsvs, hue, k, l, ref, ref1, sat;
+    hsvs = [];
+    for (hue = k = 0, ref = hueInc; ref !== 0 && (ref > 0 ? k < 360 : k > 360); hue = k += ref) {
+      for (sat = l = 0, ref1 = satInc; ref1 !== 0 && (ref1 > 0 ? l <= 100 : l >= 100); sat = l += ref1) {
+        hsvs.push(new THREE.Vector3(hue, sat, valFunc(hue, sat)));
+      }
+    }
+    return hsvs;
+  }
+
 };
 
-// obj.lineGroup.add( line )
 export default Surface;
 
 //# sourceMappingURL=Surface.js.map
