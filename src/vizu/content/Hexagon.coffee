@@ -18,35 +18,37 @@ class Hexagon
     return
 
   toGeom:( obj ) ->
-    @obj            = obj
-    vis.smooth      = true
-    obj.valFun      = ( hue, sat ) ->
-      100 * vis.sin( 90 * (1.0-sat*0.01) )
-    obj.valBase     = 100
-    obj.animateOn   = false
-    obj.colors      = []
-    obj.vertices    = []
-    obj.normals     = []
-    obj.uvs         = []
-    obj.indices     = []
-    obj.vertexCount = 0
-    obj.indiceCount = 0
-    obj.hexIndices  = new Array(7)
-    obj.vertex      = new THREE.Vector3()
-    obj.normal      = new THREE.Vector3()
-    obj.uv          = new THREE.Vector2()
-    obj.sc          = 1.0 / 255.0
-    obj.hueNum      = 12
-    obj.satNum      = 10
-    obj.hueInc      = 360 / obj.hueNum
-    obj.huePri      = obj.hueInc * 2
-    obj.satInc      = 100 / obj.satNum
-    obj.priRadius   = 10
-    obj.secRadius   = obj.priRadius * vis.cos(30)
-    obj.idxOrigin   = 0
-    obj.x0          = 0
-    obj.y0          = 0
-    obj.z0          = 0
+    @obj             = obj
+    vis.smooth       = true
+    obj.valFun       = ( hue, sat ) -> 100 * vis.sin( 90 * (1.0-sat*0.01) )
+    obj.valBase      = 100
+    obj.val          = obj.valBase
+    obj.animateOn    = true
+    obj.animateCount = 0
+    obj.colors       = []
+    obj.vertices     = []
+    obj.normals      = []
+    obj.uvs          = []
+    obj.indices      = []
+    obj.vertexCount  = 0
+    obj.indiceCount  = 0
+    obj.vertexGeom   = null
+    obj.hexIndices   = new Array(7)
+    obj.vertex       = new THREE.Vector3()
+    obj.normal       = new THREE.Vector3()
+    obj.uv           = new THREE.Vector2()
+    obj.sc           = 1.0 / 255.0
+    obj.hueNum       = 12
+    obj.satNum       = 10
+    obj.hueInc       = 360 / obj.hueNum
+    obj.huePri       = obj.hueInc * 2
+    obj.satInc       = 100 / obj.satNum
+    obj.priRadius    = 10
+    obj.secRadius    = obj.priRadius * vis.cos(30)
+    obj.idxOrigin    = 0
+    obj.x0           = 0
+    obj.y0           = 0
+    obj.z0           = 0
     @initSpheres( obj )
     obj.idxOrigin = @addVertex( obj, 0, 0, obj.valFun(0,0), obj.x0, obj.z0, obj.z0 )  # Origin
     x = obj.priRadius*4.5
@@ -179,6 +181,7 @@ class Hexagon
     geomMesh = new THREE.Mesh( geom, vertMat )
     wireMat  = new THREE.MeshBasicMaterial( { wireframe:true, color:0x000000 } )
     wireMesh = new THREE.Mesh( geom, wireMat )
+    obj.vertexGeometry = geom
     geomMesh.add(  wireMesh )
     obj.group.add( geomMesh )
     return
@@ -244,36 +247,44 @@ class Hexagon
           @main.log( 'Hexagon.pallettes()', { h:h, s:s, v:v, rgb:rgb } )
           p.i++
 
-  applyValues:( obj ) ->
-    val = 50
+  applyValues:( obj, val ) ->
     vs  = obj.vertices
     fac = if obj.hexOrient is 30 then obj.secRadius*0.03 else obj.priRadius*0.025
     for i in [0...obj.vertexCount]
-      vs[3*i+2] = val * fac
+      valPercent = (100.0-val) * 0.01
+      z          = val * fac
+      vs[3*i+2]  = z
+      @applySphere( obj, i, z, valPercent )
+    return
+
+  applySphere:( obj, i, z, valPercent ) ->
+    obj.sphereMesh.getMatrixAt( i, obj.sphereMatrix )
+    obj.sphereMesh.getColorAt(  i, obj.sphereColor  )
+    position = new THREE.Vector3()
+    position.setFromMatrixPosition( obj.sphereMatrix )
+    rgb = obj.sphereColor.toArray()
+    obj.sphereMatrix.setPosition( position.x, position.y, z )
+    obj.sphereColor.setRGB( rgb[0]*valPercent, rgb[1]*valPercent, rgb[2]*valPercent )
     return
 
   animate:( timer ) =>
-    obj   = @obj
-    count = 0
-    for i in [0...obj.vertexCount]
-      obj.sphereMesh.getMatrixAt( i, obj.sphereMatrix )
-      obj.sphereMesh.getColorAt(  i, obj.sphereColor  )
+    vis.noop( timer )
+    obj      = @obj
+    obj.val -= 10
+    obj.val  = if obj.val < 0 then obj.valBase else obj.val
+    @applyValues( obj, obj.val )
+    obj.vertexGeometry.attributes.position.needsUpdate = true
+    obj.sphereGeometry.attributes.position.needsUpdate = true
+    obj.vertexGeometry.attributes.color.needsUpdate = true
+    #bj.sphereGeometry.attributes.color.needsUpdate = true
+    obj.vertexGeometry.computeVertexNormals()
+    obj.sphereGeometry.computeVertexNormals()
 
-      position = new THREE.Vector3()
-      position.setFromMatrixPosition( obj.sphereMatrix )
-      rgb = obj.sphereColor.toArray()
+    if obj.animateCount % 100 is 0
+      valPercent = obj.val * 0.01
+      console.log( "Hexagon.animate()", { val:obj.val, valPercent:valPercent } )
+    obj.animateCount++
 
-      pc = 0.5 - 0.5 * vis.sin( 12 * ( position.x + position.y + timer ) )
-
-      obj.sphereMatrix.setPosition( position.x, position.y, position.z*pc )
-      obj.sphereColor.setRGB( rgb[0]*pc, rgb[1]*pc, rgb[2]*pc )
-
-      count++
-      if count % 100 is 0
-        rrgb = vis.roundRGB( rgb, 255 )
-        console.log( "Hexagon.animateSpheres()", { pc:pc, position:position, rgb:rrgb } )
-
-    # console.log( "Hexagon.animateSpheres()" )
     return
 
 export default Hexagon
