@@ -23,7 +23,7 @@ class Hexagon
     obj.valFun       = ( hue, sat ) -> 100 * vis.sin( 90 * (1.0-sat*0.01) )
     obj.valBase      = 100
     obj.val          = obj.valBase
-    obj.animateOn    = true
+    obj.animateOn    = false
     obj.animateDebug = false
     obj.animateCount = 0
     obj.colors       = []
@@ -50,7 +50,7 @@ class Hexagon
     obj.x0           = 0
     obj.y0           = 0
     obj.z0           = 0
-    @initSpheres( obj )
+    # @initSpheres( obj )
     obj.idxOrigin = @addVertex( obj, 0, 0, obj.valFun(0,0), obj.x0, obj.z0, obj.z0 )  # Origin
     x = obj.priRadius*4.5
     y = obj.secRadius
@@ -73,6 +73,7 @@ class Hexagon
       @sixHexes(    obj, 60, radius,  angle )
       @sixHexes(    obj, 30, obj.secRadius*6.0, 0 )
     @createBufferGeometry( obj )
+    @initSpheres( obj )
     @drawCircle(    obj.priRadius*5.0 )
     @pallettes(     obj, false )
     @applyValues(   obj )
@@ -150,7 +151,7 @@ class Hexagon
       obj.uv.x = hue / obj.hueInc / obj.hueNum
       obj.uv.y = sat / obj.satInc / obj.satNum
       obj.uvs.push( obj.uv.x, obj.uv.y )
-      @addSphere( obj, rgb, x, y, z )
+      # @addSphere( obj, rgb, x, y, z )
       obj.vertexCount++
     @main.log( "Surface.addVertex()", { index:index, hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
     index
@@ -163,6 +164,31 @@ class Hexagon
     for i in [0...vs.length] by 3
       return i/3 if vis.isCoord( x, vs[i], y, vs[i+1], z, vs[i+2] )
     -1
+
+  initSpheres:( obj ) ->
+    radius              = 2
+    obj.sphereCountCalc = obj.hueNum * (obj.satNum+1) + 1 # Look into
+    obj.sphereBaseGeom  = new THREE.SphereGeometry( radius, 16, 16 )
+    obj.sphereGeometry  = new THREE.InstancedBufferGeometry().copy( obj.sphereBaseGeom )
+    obj.sphereGeometry.maxInstancedCount = obj.vertexCount
+    obj.sphereMaterial  = new THREE.MeshBasicMaterial( { transparent:false, side:THREE.FrontSide } )
+    obj.sphereMesh      = new THREE.Mesh( obj.sphereGeometry, obj.sphereMaterial )
+    @updateSphereGeometry( obj )
+    obj.sphereGroup     = new THREE.Group()
+    obj.sphereGroup.add( obj.sphereMesh )
+    return
+
+  initSpheres1:( obj ) ->
+    radius              = 2
+    obj.sphereCountCalc = obj.hueNum * (obj.satNum+1) + 1 # Look into
+    obj.sphereGeometry  = new THREE.SphereGeometry( radius, 16, 16 )
+    obj.sphereMaterial  = new THREE.MeshBasicMaterial( { transparent:false, side:THREE.FrontSide } )
+    obj.sphereMesh      = new THREE.InstancedMesh( obj.sphereGeometry, obj.sphereMaterial, obj.sphereCountCalc )
+    obj.sphereMatrix    = new THREE.Matrix4()
+    obj.sphereColor     = new THREE.Color()
+    obj.sphereGroup     = new THREE.Group()
+    obj.sphereGroup.add( obj.sphereMesh )
+    return
 
   addSphere:( obj, rgb, x, y, z ) ->
     obj.sphereMatrix.setPosition( x, y, z )
@@ -190,18 +216,16 @@ class Hexagon
     obj.vertexGeometry.setAttribute( 'color',    new THREE.Float32BufferAttribute( obj.colors,   3 ) )
     return
 
-  initSpheres:( obj ) ->
-    radius              = 2
-    obj.sphereCountCalc = obj.hueNum * (obj.satNum+1) + 1 # Look into
-    obj.sphereGeometry  = new THREE.SphereGeometry( radius, 16, 16 )
-    obj.sphereMaterial  = new THREE.MeshBasicMaterial( { transparent:false, side:THREE.FrontSide } )
-    obj.sphereMesh      = new THREE.InstancedMesh( obj.sphereGeometry, obj.sphereMaterial, obj.sphereCountCalc )
-    obj.sphereMatrix    = new THREE.Matrix4()
-    obj.sphereColor     = new THREE.Color()
-    obj.sphereGroup     = new THREE.Group()
-    obj.sphereGroup.add( obj.sphereMesh )
+  updateSphereGeometry:( obj ) ->
+    obj.sphereGeometry.setAttribute( 'position', new THREE.Float32BufferAttribute( obj.vertices, 3 ) )
+    obj.sphereGeometry.setAttribute( 'color',    new THREE.Float32BufferAttribute( obj.colors,   3 ) )
     return
 
+  updateSphereGeometry2:( obj ) ->
+    obj.sphereGeometry.setAttribute( new THREE.InstancedBufferAttribute( 'position', new THREE.Float32BufferAttribute( obj.vertices, 3, false ) ) )
+    obj.sphereGeometry.setAttribute( new THREE.InstancedBufferAttribute( 'color',    new THREE.Float32BufferAttribute( obj.colors,   3, false ) ) )
+    return
+    
   drawCircle:( radius ) ->
     geometry = new THREE.CircleGeometry( radius, 24 )
     #eometry.rotateX( Math.PI / 2 )
@@ -255,12 +279,13 @@ class Hexagon
     vs  = obj.vertices
     fac = if obj.hexOrient is 30 then obj.secRadius*0.03 else obj.priRadius*0.025
     for i in [0...obj.vertexCount]
-      valPercent = (100.0-val) * 0.01
+      #valPercent = (100.0-val) * 0.01
       z          = val * fac
       vs[3*i+2]  = z
-      @applySphere( obj, i, z, valPercent )
+      # @applySphere( obj, i, z, valPercent )
     return
 
+  # Not called
   applySphere:( obj, i, z, valPercent ) ->
     obj.sphereMesh.getMatrixAt( i, obj.sphereMatrix )
     obj.sphereMesh.getColorAt(  i, obj.sphereColor  )
@@ -271,19 +296,25 @@ class Hexagon
     obj.sphereColor.setRGB( rgb[0]*valPercent, rgb[1]*valPercent, rgb[2]*valPercent )
     return
 
+    # Not called
     needsUpdate:( obj ) =>
       obj.vertexGeometry.attributes.position.needsUpdate = true
-      obj.sphereGeometry.attributes.position.needsUpdate = true
       obj.vertexGeometry.attributes.color.needsUpdate = true
-      #bj.sphereGeometry.attributes.color.needsUpdate = true
       obj.vertexGeometry.computeVertexNormals()
-      obj.sphereGeometry.computeVertexNormals()
 
   animateLog:( obj ) ->
     if obj.animateDebug and obj.animateCount % 100 is 0
       valPercent = obj.val * 0.01
       console.log( "Hexagon.animate()", { val:obj.val, valPercent:valPercent } )
       obj.animateCount++
+    return
+
+  updateSpheres:( obj ) ->
+    obj.sphereGeometry.attributes.position.needsUpdate = true
+    #bj.sphereGeometry.attributes.color.needsUpdate    = true
+    obj.sphereMesh.instanceMatrix.needsUpdate          = true
+    obj.sphereMesh.instanceColor.needsUpdate           = true
+    obj.sphereGeometry.computeVertexNormals()
     return
 
   animate:( timer ) =>
@@ -293,12 +324,13 @@ class Hexagon
     obj.val  = if obj.val < 0 then obj.valBase else obj.val
     @applyValues( obj, obj.val )
     @updateVertexGeometry( obj )
+    @updateSphereGeometry( obj )
     @animateLog( obj )
     return
 
-
-
-
-    return
-
 export default Hexagon
+
+#bj.sphereGeometry.addAttribute( new THREE.InstancedBufferAttribute( 'normal',   new
+# THREE.Float32BufferAttribute( obj.normals,  3, false ) ) )
+#bj.sphereGeometry.addAttribute( new THREE.InstancedBufferAttribute( 'uv',       new
+# THREE.Float32BufferAttribute( obj.uvs,      2, false ) ) )

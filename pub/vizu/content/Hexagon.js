@@ -33,7 +33,7 @@ Hexagon = class Hexagon {
     };
     obj.valBase = 100;
     obj.val = obj.valBase;
-    obj.animateOn = true;
+    obj.animateOn = false;
     obj.animateDebug = false;
     obj.animateCount = 0;
     obj.colors = [];
@@ -60,7 +60,7 @@ Hexagon = class Hexagon {
     obj.x0 = 0;
     obj.y0 = 0;
     obj.z0 = 0;
-    this.initSpheres(obj);
+    // @initSpheres( obj )
     obj.idxOrigin = this.addVertex(obj, 0, 0, obj.valFun(0, 0), obj.x0, obj.z0, obj.z0); // Origin
     x = obj.priRadius * 4.5;
     y = obj.secRadius;
@@ -84,6 +84,7 @@ Hexagon = class Hexagon {
       this.sixHexes(obj, 30, obj.secRadius * 6.0, 0);
     }
     this.createBufferGeometry(obj);
+    this.initSpheres(obj);
     this.drawCircle(obj.priRadius * 5.0);
     this.pallettes(obj, false);
     this.applyValues(obj);
@@ -191,7 +192,7 @@ Hexagon = class Hexagon {
       obj.uv.x = hue / obj.hueInc / obj.hueNum;
       obj.uv.y = sat / obj.satInc / obj.satNum;
       obj.uvs.push(obj.uv.x, obj.uv.y);
-      this.addSphere(obj, rgb, x, y, z);
+      // @addSphere( obj, rgb, x, y, z )
       obj.vertexCount++;
     }
     this.main.log("Surface.addVertex()", {
@@ -219,6 +220,39 @@ Hexagon = class Hexagon {
       }
     }
     return -1;
+  }
+
+  initSpheres(obj) {
+    var radius;
+    radius = 2;
+    obj.sphereCountCalc = obj.hueNum * (obj.satNum + 1) + 1; // Look into
+    obj.sphereBaseGeom = new THREE.SphereGeometry(radius, 16, 16);
+    obj.sphereGeometry = new THREE.InstancedBufferGeometry().copy(obj.sphereBaseGeom);
+    obj.sphereGeometry.maxInstancedCount = obj.vertexCount;
+    obj.sphereMaterial = new THREE.MeshBasicMaterial({
+      transparent: false,
+      side: THREE.FrontSide
+    });
+    obj.sphereMesh = new THREE.Mesh(obj.sphereGeometry, obj.sphereMaterial);
+    this.updateSphereGeometry(obj);
+    obj.sphereGroup = new THREE.Group();
+    obj.sphereGroup.add(obj.sphereMesh);
+  }
+
+  initSpheres1(obj) {
+    var radius;
+    radius = 2;
+    obj.sphereCountCalc = obj.hueNum * (obj.satNum + 1) + 1; // Look into
+    obj.sphereGeometry = new THREE.SphereGeometry(radius, 16, 16);
+    obj.sphereMaterial = new THREE.MeshBasicMaterial({
+      transparent: false,
+      side: THREE.FrontSide
+    });
+    obj.sphereMesh = new THREE.InstancedMesh(obj.sphereGeometry, obj.sphereMaterial, obj.sphereCountCalc);
+    obj.sphereMatrix = new THREE.Matrix4();
+    obj.sphereColor = new THREE.Color();
+    obj.sphereGroup = new THREE.Group();
+    obj.sphereGroup.add(obj.sphereMesh);
   }
 
   addSphere(obj, rgb, x, y, z) {
@@ -254,20 +288,14 @@ Hexagon = class Hexagon {
     obj.vertexGeometry.setAttribute('color', new THREE.Float32BufferAttribute(obj.colors, 3));
   }
 
-  initSpheres(obj) {
-    var radius;
-    radius = 2;
-    obj.sphereCountCalc = obj.hueNum * (obj.satNum + 1) + 1; // Look into
-    obj.sphereGeometry = new THREE.SphereGeometry(radius, 16, 16);
-    obj.sphereMaterial = new THREE.MeshBasicMaterial({
-      transparent: false,
-      side: THREE.FrontSide
-    });
-    obj.sphereMesh = new THREE.InstancedMesh(obj.sphereGeometry, obj.sphereMaterial, obj.sphereCountCalc);
-    obj.sphereMatrix = new THREE.Matrix4();
-    obj.sphereColor = new THREE.Color();
-    obj.sphereGroup = new THREE.Group();
-    obj.sphereGroup.add(obj.sphereMesh);
+  updateSphereGeometry(obj) {
+    obj.sphereGeometry.setAttribute('position', new THREE.Float32BufferAttribute(obj.vertices, 3));
+    obj.sphereGeometry.setAttribute('color', new THREE.Float32BufferAttribute(obj.colors, 3));
+  }
+
+  updateSphereGeometry2(obj) {
+    obj.sphereGeometry.setAttribute(new THREE.InstancedBufferAttribute('position', new THREE.Float32BufferAttribute(obj.vertices, 3, false)));
+    obj.sphereGeometry.setAttribute(new THREE.InstancedBufferAttribute('color', new THREE.Float32BufferAttribute(obj.colors, 3, false)));
   }
 
   drawCircle(radius) {
@@ -360,17 +388,18 @@ Hexagon = class Hexagon {
   }
 
   applyValues(obj, val) {
-    var fac, i, j, ref, valPercent, vs, z;
+    var fac, i, j, ref, vs, z;
     vs = obj.vertices;
     fac = obj.hexOrient === 30 ? obj.secRadius * 0.03 : obj.priRadius * 0.025;
     for (i = j = 0, ref = obj.vertexCount; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
-      valPercent = (100.0 - val) * 0.01;
+      //valPercent = (100.0-val) * 0.01
       z = val * fac;
       vs[3 * i + 2] = z;
-      this.applySphere(obj, i, z, valPercent);
     }
   }
 
+  // Not called
+  // @applySphere( obj, i, z, valPercent )
   applySphere(obj, i, z, valPercent) {
     var position, rgb;
     obj.sphereMesh.getMatrixAt(i, obj.sphereMatrix);
@@ -382,13 +411,11 @@ Hexagon = class Hexagon {
     obj.sphereColor.setRGB(rgb[0] * valPercent, rgb[1] * valPercent, rgb[2] * valPercent);
     return;
     return {
+      // Not called
       needsUpdate: (obj) => {
         obj.vertexGeometry.attributes.position.needsUpdate = true;
-        obj.sphereGeometry.attributes.position.needsUpdate = true;
         obj.vertexGeometry.attributes.color.needsUpdate = true;
-        //bj.sphereGeometry.attributes.color.needsUpdate = true
-        obj.vertexGeometry.computeVertexNormals();
-        return obj.sphereGeometry.computeVertexNormals();
+        return obj.vertexGeometry.computeVertexNormals();
       }
     };
   }
@@ -405,6 +432,14 @@ Hexagon = class Hexagon {
     }
   }
 
+  updateSpheres(obj) {
+    obj.sphereGeometry.attributes.position.needsUpdate = true;
+    //bj.sphereGeometry.attributes.color.needsUpdate    = true
+    obj.sphereMesh.instanceMatrix.needsUpdate = true;
+    obj.sphereMesh.instanceColor.needsUpdate = true;
+    obj.sphereGeometry.computeVertexNormals();
+  }
+
   animate(timer) {
     var obj;
     vis.noop(timer);
@@ -413,12 +448,17 @@ Hexagon = class Hexagon {
     obj.val = obj.val < 0 ? obj.valBase : obj.val;
     this.applyValues(obj, obj.val);
     this.updateVertexGeometry(obj);
+    this.updateSphereGeometry(obj);
     this.animateLog(obj);
-    return;
   }
 
 };
 
 export default Hexagon;
+
+//bj.sphereGeometry.addAttribute( new THREE.InstancedBufferAttribute( 'normal',   new
+// THREE.Float32BufferAttribute( obj.normals,  3, false ) ) )
+//bj.sphereGeometry.addAttribute( new THREE.InstancedBufferAttribute( 'uv',       new
+// THREE.Float32BufferAttribute( obj.uvs,      2, false ) ) )
 
 //# sourceMappingURL=Hexagon.js.map
