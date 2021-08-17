@@ -24,6 +24,7 @@ class Hexagon
     obj.valBase      = 100
     obj.val          = obj.valBase
     obj.animateOn    = true
+    obj.animateDebug = false
     obj.animateCount = 0
     obj.colors       = []
     obj.vertices     = []
@@ -171,19 +172,22 @@ class Hexagon
     return
 
   createBufferGeometry:( obj ) ->
-    geom = new THREE.BufferGeometry()
-    geom.setIndex( obj.indices )
-    geom.setAttribute( 'position', new THREE.Float32BufferAttribute( obj.vertices, 3 ) )
-    geom.setAttribute( 'normal',   new THREE.Float32BufferAttribute( obj.normals,  3 ) )
-    geom.setAttribute( 'uv',       new THREE.Float32BufferAttribute( obj.uvs,      2 ) )
-    geom.setAttribute( 'color',    new THREE.Float32BufferAttribute( obj.colors,   3 ) )
+    obj.vertexGeometry = new THREE.BufferGeometry()
+    obj.vertexGeometry.setIndex( obj.indices )
+    @updateVertexGeometry( obj )
     vertMat  = new THREE.MeshBasicMaterial( { side:THREE.DoubleSide, vertexColors:THREE.FaceColors } )
-    geomMesh = new THREE.Mesh( geom, vertMat )
+    geomMesh = new THREE.Mesh( obj.vertexGeometry, vertMat )
     wireMat  = new THREE.MeshBasicMaterial( { wireframe:true, color:0x000000 } )
-    wireMesh = new THREE.Mesh( geom, wireMat )
-    obj.vertexGeometry = geom
+    wireMesh = new THREE.Mesh( obj.vertexGeometry, wireMat )
     geomMesh.add(  wireMesh )
     obj.group.add( geomMesh )
+    return
+
+  updateVertexGeometry:( obj ) ->
+    obj.vertexGeometry.setAttribute( 'position', new THREE.Float32BufferAttribute( obj.vertices, 3 ) )
+    obj.vertexGeometry.setAttribute( 'normal',   new THREE.Float32BufferAttribute( obj.normals,  3 ) )
+    obj.vertexGeometry.setAttribute( 'uv',       new THREE.Float32BufferAttribute( obj.uvs,      2 ) )
+    obj.vertexGeometry.setAttribute( 'color',    new THREE.Float32BufferAttribute( obj.colors,   3 ) )
     return
 
   initSpheres:( obj ) ->
@@ -267,23 +271,33 @@ class Hexagon
     obj.sphereColor.setRGB( rgb[0]*valPercent, rgb[1]*valPercent, rgb[2]*valPercent )
     return
 
+    needsUpdate:( obj ) =>
+      obj.vertexGeometry.attributes.position.needsUpdate = true
+      obj.sphereGeometry.attributes.position.needsUpdate = true
+      obj.vertexGeometry.attributes.color.needsUpdate = true
+      #bj.sphereGeometry.attributes.color.needsUpdate = true
+      obj.vertexGeometry.computeVertexNormals()
+      obj.sphereGeometry.computeVertexNormals()
+
+  animateLog:( obj ) ->
+    if obj.animateDebug and obj.animateCount % 100 is 0
+      valPercent = obj.val * 0.01
+      console.log( "Hexagon.animate()", { val:obj.val, valPercent:valPercent } )
+      obj.animateCount++
+    return
+
   animate:( timer ) =>
     vis.noop( timer )
     obj      = @obj
     obj.val -= 10
     obj.val  = if obj.val < 0 then obj.valBase else obj.val
     @applyValues( obj, obj.val )
-    obj.vertexGeometry.attributes.position.needsUpdate = true
-    obj.sphereGeometry.attributes.position.needsUpdate = true
-    obj.vertexGeometry.attributes.color.needsUpdate = true
-    #bj.sphereGeometry.attributes.color.needsUpdate = true
-    obj.vertexGeometry.computeVertexNormals()
-    obj.sphereGeometry.computeVertexNormals()
+    @updateVertexGeometry( obj )
+    @animateLog( obj )
+    return
 
-    if obj.animateCount % 100 is 0
-      valPercent = obj.val * 0.01
-      console.log( "Hexagon.animate()", { val:obj.val, valPercent:valPercent } )
-    obj.animateCount++
+
+
 
     return
 

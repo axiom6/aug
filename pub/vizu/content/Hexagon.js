@@ -34,6 +34,7 @@ Hexagon = class Hexagon {
     obj.valBase = 100;
     obj.val = obj.valBase;
     obj.animateOn = true;
+    obj.animateDebug = false;
     obj.animateCount = 0;
     obj.colors = [];
     obj.vertices = [];
@@ -228,26 +229,29 @@ Hexagon = class Hexagon {
   }
 
   createBufferGeometry(obj) {
-    var geom, geomMesh, vertMat, wireMat, wireMesh;
-    geom = new THREE.BufferGeometry();
-    geom.setIndex(obj.indices);
-    geom.setAttribute('position', new THREE.Float32BufferAttribute(obj.vertices, 3));
-    geom.setAttribute('normal', new THREE.Float32BufferAttribute(obj.normals, 3));
-    geom.setAttribute('uv', new THREE.Float32BufferAttribute(obj.uvs, 2));
-    geom.setAttribute('color', new THREE.Float32BufferAttribute(obj.colors, 3));
+    var geomMesh, vertMat, wireMat, wireMesh;
+    obj.vertexGeometry = new THREE.BufferGeometry();
+    obj.vertexGeometry.setIndex(obj.indices);
+    this.updateVertexGeometry(obj);
     vertMat = new THREE.MeshBasicMaterial({
       side: THREE.DoubleSide,
       vertexColors: THREE.FaceColors
     });
-    geomMesh = new THREE.Mesh(geom, vertMat);
+    geomMesh = new THREE.Mesh(obj.vertexGeometry, vertMat);
     wireMat = new THREE.MeshBasicMaterial({
       wireframe: true,
       color: 0x000000
     });
-    wireMesh = new THREE.Mesh(geom, wireMat);
-    obj.vertexGeometry = geom;
+    wireMesh = new THREE.Mesh(obj.vertexGeometry, wireMat);
     geomMesh.add(wireMesh);
     obj.group.add(geomMesh);
+  }
+
+  updateVertexGeometry(obj) {
+    obj.vertexGeometry.setAttribute('position', new THREE.Float32BufferAttribute(obj.vertices, 3));
+    obj.vertexGeometry.setAttribute('normal', new THREE.Float32BufferAttribute(obj.normals, 3));
+    obj.vertexGeometry.setAttribute('uv', new THREE.Float32BufferAttribute(obj.uvs, 2));
+    obj.vertexGeometry.setAttribute('color', new THREE.Float32BufferAttribute(obj.colors, 3));
   }
 
   initSpheres(obj) {
@@ -376,29 +380,41 @@ Hexagon = class Hexagon {
     rgb = obj.sphereColor.toArray();
     obj.sphereMatrix.setPosition(position.x, position.y, z);
     obj.sphereColor.setRGB(rgb[0] * valPercent, rgb[1] * valPercent, rgb[2] * valPercent);
+    return;
+    return {
+      needsUpdate: (obj) => {
+        obj.vertexGeometry.attributes.position.needsUpdate = true;
+        obj.sphereGeometry.attributes.position.needsUpdate = true;
+        obj.vertexGeometry.attributes.color.needsUpdate = true;
+        //bj.sphereGeometry.attributes.color.needsUpdate = true
+        obj.vertexGeometry.computeVertexNormals();
+        return obj.sphereGeometry.computeVertexNormals();
+      }
+    };
   }
 
-  animate(timer) {
-    var obj, valPercent;
-    vis.noop(timer);
-    obj = this.obj;
-    obj.val -= 10;
-    obj.val = obj.val < 0 ? obj.valBase : obj.val;
-    this.applyValues(obj, obj.val);
-    obj.vertexGeometry.attributes.position.needsUpdate = true;
-    obj.sphereGeometry.attributes.position.needsUpdate = true;
-    obj.vertexGeometry.attributes.color.needsUpdate = true;
-    //bj.sphereGeometry.attributes.color.needsUpdate = true
-    obj.vertexGeometry.computeVertexNormals();
-    obj.sphereGeometry.computeVertexNormals();
-    if (obj.animateCount % 100 === 0) {
+  animateLog(obj) {
+    var valPercent;
+    if (obj.animateDebug && obj.animateCount % 100 === 0) {
       valPercent = obj.val * 0.01;
       console.log("Hexagon.animate()", {
         val: obj.val,
         valPercent: valPercent
       });
+      obj.animateCount++;
     }
-    obj.animateCount++;
+  }
+
+  animate(timer) {
+    var obj;
+    vis.noop(timer);
+    obj = this.obj;
+    obj.val -= 10;
+    obj.val = obj.val < 0 ? obj.valBase : obj.val;
+    this.applyValues(obj, obj.val);
+    this.updateVertexGeometry(obj);
+    this.animateLog(obj);
+    return;
   }
 
 };
