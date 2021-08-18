@@ -31,7 +31,8 @@ class Animate
     return
 
   doAnimations:() =>
-    if @main.hexagon? and @main.hexagon.obj.animateOn
+    return if not @main.animateOn
+    if @main.hexagon?
        timer = 0.0001 * Date.now()
        @main.hexagon.animate( timer )
     return

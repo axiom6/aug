@@ -4,7 +4,6 @@ import Stream     from '../../../lib/pub/util/Stream.js'
 import Nav        from '../../../lib/pub/navi/Nav.js'
 import Mix        from '../../../lib/pub/navi/Mix.js'
 import { vis }    from '../../../lib/pub/draw/Vis.js'
-
 import { tester } from '../../../lib/pub/test/tester.js'
 import Main       from '../main/Main.js'
 import Dash       from '../../../vue/vizu/appl/Dash.vue'
@@ -23,7 +22,7 @@ import FontJson from '../../../LIB/css/font/three/helvetiker_regular.typeface.js
 
 class Vizu
 
-  Vizu.appName = 'Viz'
+  Vizu.appName = 'Vizu'
   Vizu.debug   = true
 
   Vizu.Batch = {
@@ -99,7 +98,7 @@ class Vizu
 
   # 3. Launches Vue with Home page and a Toc for Prin Info Know and Wise practices
   Vizu.vue3 = () ->
-    Vizu.app = createApp( Dash  )
+    Vizu.app = createApp( Dash )
     Vizu.app.provide('mix',  Vizu.mix  )
     Vizu.app.provide('nav',  Vizu.nav  )
     Vizu.app.provide('vis',  Vizu.vis )

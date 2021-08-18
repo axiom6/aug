@@ -8,23 +8,28 @@
 </template>
 
 <script type="module">
-  
+
   import Navd from '../../../lib/vue/dash/Navd.vue';
   import Tocs from '../../../lib/vue/dash/Tocs.vue';
-  import View from './View.vue';
-  
+  import View from './View.vue'
+
   let Dash = {
-      name: 'dash',
-      components: { 'd-navd':Navd, 'd-tocs':Tocs, 'd-view':View } };
-  
+
+    components: {'d-navd':Navd, 'd-tocs':Tocs, 'd-view':View },
+
+    setup() {
+      // const name = 'dash'
+      return {}; }
+  }
+
   export default Dash;
-  
+
 </script>
 
 <style lang="less">
-  
+
   @import '../../../css/themes/theme.less';
-  
+
   html { font-size:calc(1em + 1vmin); }
   body { background-color:@theme-back; margin:0; }
 
@@ -33,6 +38,6 @@
     #navd { position:absolute; left:0; top:0;                  width:@theme-navd-width; height:@theme-navd-height; }
     #tocs { position:absolute; left:0; top:@theme-navd-height; width:@theme-navd-width; height:@theme-view-height; }
     #view { position:absolute; left:@theme-navd-width; top:0;  width:@theme-view-width; height:100%; } }
-  
+
 </style>
 

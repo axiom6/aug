@@ -52,7 +52,10 @@ Animate = class Animate {
 
   doAnimations() {
     var timer;
-    if ((this.main.hexagon != null) && this.main.hexagon.obj.animateOn) {
+    if (!this.main.animateOn) {
+      return;
+    }
+    if (this.main.hexagon != null) {
       timer = 0.0001 * Date.now();
       this.main.hexagon.animate(timer);
     }

@@ -37,6 +37,7 @@ Main = class Main {
     this.debug = false;
     this.verifyFlag = false;
     this.hexagon = null;
+    this.animateOn = false;
   }
 
   setup() {

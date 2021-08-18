@@ -8,15 +8,27 @@
 </template>
 
 <script type="module">
+
+  // Dash.vue should only be used as a template because different View files are imported
   
-  import Navd from '../dash/Navd.vue';
-  import Tocs from '../dash/Tocs.vue';
-  import View from '../dash/View.vue';
-  
+  import Navd from './Navd.vue';
+  import Tocs from './Tocs.vue';
+  const  View  = Navd['View'];
+
+  if( typeof(View) === "undefined" ) {
+    console.error( "Dash.vue View undefined" ); }
+  else {
+    console.log(   "Dash.vue View ok",  { View:View } ); }
+
   let Dash = {
-      name: 'dash',
-      components: { 'd-navd':Navd, 'd-tocs':Tocs, 'd-view':View } };
-  
+
+    components: {'d-navd':Navd, 'd-tocs':Tocs, 'd-view':View },
+
+    setup() {
+      // const name = 'dash'
+      return {}; }
+  }
+
   export default Dash;
   
 </script>

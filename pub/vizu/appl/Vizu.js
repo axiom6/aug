@@ -122,7 +122,7 @@ Vizu = (function() {
 
   };
 
-  Vizu.appName = 'Viz';
+  Vizu.appName = 'Vizu';
 
   Vizu.debug = true;
 

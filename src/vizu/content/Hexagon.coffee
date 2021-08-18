@@ -5,7 +5,8 @@ import { vis }    from "../../../lib/pub/draw/Vis.js"
 class Hexagon
 
   constructor:( @main ) ->
-     @main.hexagon = @
+     @main.hexagon   = @
+     @main.animateOn = false
 
   drawHsv:( orient ) ->
     obj           = {}

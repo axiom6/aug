@@ -11,6 +11,7 @@ Hexagon = class Hexagon {
     this.animate = this.animate.bind(this);
     this.main = main;
     this.main.hexagon = this;
+    this.main.animateOn = false;
   }
 
   drawHsv(orient) {

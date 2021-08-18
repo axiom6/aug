@@ -1,17 +1,18 @@
 
 Debug
   1. Hexagon.coffee
-     a. Fix Hex30
+     a. Get animation working
+     b. On/Off
      b. Oscillate with val sin function
   2. Fix and the generalize coordinate system and Orthographic camera
      a. Get OrthoXYZ and OrthoISO working with projectionMatrix()
-     b. Orbit control rotation not working
      b Grids yaxis scale off too short by 50%
   3, Implement troika text
-  4. Organize Main.json and Main.coof
+  4. Organize Main.json and Main.coffee
   5. Fully move Cube in Aug to Visu
      a. Consider having Cube initialized by Main
   6. Reorganize Visu menus
+  7. Visu side bar for Opts.json and Animate
   
 Clean Up
   1. Vis
@@ -28,11 +29,8 @@ Features One
      d. Archiving
         a. Test Mongo.coffee
      e. Test types
-  2. Recreate Color / Polar / Vec / Sphere in Vizu. Retire mathbox
-     a. Colors in Hues / Color / Polar / Vec / Sphere
-     b. Good   in Hues / Rgbs  / Regress
-  3. Doc
-  4. Consider a Main template for Augm Muse Visu Jitt Data
+  2. Doc
+  3. Consider a Main Base class for Augm Muse Visu Jitt Data
 
 Debug Two
   0. elem undefined from mix.removeElem(...) called in Flavor.vue

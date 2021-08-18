@@ -15,6 +15,8 @@ import Mix from '../../../lib/pub/navi/Mix.js';
 
 import Dash from '../../../vue/augm/appl/Dash.vue';
 
+import Navd from '../../../vue/augm/appl/Navd.vue';
+
 import {
   createApp
 } from 'vue';

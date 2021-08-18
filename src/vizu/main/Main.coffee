@@ -20,6 +20,7 @@ class Main
     @debug      = false
     @verifyFlag = false
     @hexagon    = null
+    @animateOn  = false
 
   setup:() ->
     @scene        = new Scene()
