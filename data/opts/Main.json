@@ -44,7 +44,7 @@
     "render": {
       "shadowMap":true },
     "animate": {} },
-  "Grids": {
+  "Grid": {
     "main": {
       "debug":false, "verify":false },
     "coords": {

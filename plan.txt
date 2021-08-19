@@ -4,15 +4,12 @@ Debug
      a. Get animation working
      b. On/Off
      b. Oscillate with val sin function
-  2. Fix and the generalize coordinate system and Orthographic camera
+  2. Visu side bar for Opts.json and Animate
+     a. Organize Main.json and Main.coffee
+  3. Fix and the generalize coordinate system and Orthographic camera
      a. Get OrthoXYZ and OrthoISO working with projectionMatrix()
      b Grids yaxis scale off too short by 50%
-  3, Implement troika text
-  4. Organize Main.json and Main.coffee
-  5. Fully move Cube in Aug to Visu
-     a. Consider having Cube initialized by Main
-  6. Reorganize Visu menus
-  7. Visu side bar for Opts.json and Animate
+  4, Implement troika text
   
 Clean Up
   1. Vis
@@ -31,6 +28,7 @@ Features One
      e. Test types
   2. Doc
   3. Consider a Main Base class for Augm Muse Visu Jitt Data
+  4. Consider having Cube initialized by Main
 
 Debug Two
   0. elem undefined from mix.removeElem(...) called in Flavor.vue
@@ -89,10 +87,7 @@ DnD
   5. Wide deployment
 
 Augm Modules
-  1. Replace MathBox
-  2. Replace Ganja
-  3. Three.js plot interface
-  4. Three.js geom interface
+  1. Replace Ganja
   5. d3 interface
   6. Slim down Roboto font css
 

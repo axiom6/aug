@@ -23,7 +23,7 @@
     setup() {
 
       const nav       = inject('nav');
-      const compKey   = 'Main';
+      let   compKey   = nav.compKey;
       const pageIdx   = ref(0);
       const page      = ref(null);
       let   pageKey   = 'None'
@@ -40,12 +40,13 @@
 
       const onNav = (obj) => {
         pageIdx.value++;
-        if( obj.compKey===compKey && nav.isDef(obj.pageKey) && nav.hasPage(compKey,obj.pageKey) ) {
+        if( nav.isDef(obj.pageKey) && nav.hasPage(compKey,obj.pageKey) ) {
             if(debug) { console.log( 'Main.onNav()', obj ); }
+            compKey = obj.compKey;
             pageKey = obj.pageKey; } }
 
       onMounted( () => { // Follow up with the last Nav.pub(obj) that mounted this vue component
-        onNav( { compKey:compKey, pageKey:nav.getPageKey(compKey) } );
+        // onNav( { compKey:compKey, pageKey:nav.getPageKey(compKey) } );
         nav.subscribe(  'Nav', 'Main.vue', (obj) => {
           onNav(obj); } ); } )
 

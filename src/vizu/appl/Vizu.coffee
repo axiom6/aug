@@ -38,10 +38,11 @@ class Vizu
 
   Vizu.komps = Access.kompsDirs( {
     Home:{ title:'Home', key:'Home', pracs:{}, ikw:false, icon:"fas fa-home" }
-    Main:{ title:'Main', key:'Main', pracs:{}, ikw:false, icon:"fas fa-bezier-curve" }
+    Hexa:{ title:'Hexa', key:'Hexa', pracs:{}, ikw:false, icon:"fas fa-snowflake" }
     Hues:{ title:'Hues', key:'Hues', pracs:{}, ikw:false, icon:"fas fa-palette" }
+    Rgbs:{ title:'Rgbs', key:'Rgbs', pracs:{}, ikw:false, icon:"fas fa-cube" }
+    Grid:{ title:'Grid', key:'Grid', pracs:{}, ikw:false, icon:"fas fa-border-none" }
     Cube:{ title:'Cube', key:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes" }
-    #pot:{ title:'Spot', key:'Spot', pracs:{}, ikw:false, icon:"fas fa-lightbulb" }
     Test:{ title:'Test', key:'Test', pracs:{}, ikw:false, icon:"fas fa-stethoscope" } } )
 
   # Initialization is accomplished in 3 steps:
@@ -115,15 +116,15 @@ class Vizu
 
   # This does not make sense
   Vizu.pages = {
-    Main: {
+    Hexa:{
       Hex30:   { title:'Hex30',    key:'Hex30',    show:false },
       Hex60:   { title:'Hex60',    key:'Hex60',    show:false },
-      Surface: { title:'Surface',  key:'Surface',  show:false },
-      Grids:   { title:'Grids',    key:'Grids',    show:false },
-      Rgb:     { title:'Rgb',      key:'Rgb',      show:false },
-      Face:    { title:'Face',     key:'Face',     show:false },
       Ysv:     { title:'Ysv',      key:'Ysv',      show:false },
-      Hsv:     { title:'Hsv',      key:'Hsv',      show:false } },
+      Hsv:     { title:'Hsv',      key:'Hsv',      show:false },
+      Surface: { title:'Surface',  key:'Surface',  show:false } },
+    Rgbs: {
+      Rgb:     { title:'Rgb',      key:'Rgb',      show:false },
+      Face:    { title:'Face',     key:'Face',     show:false } },
     Hues: {
       Red:     { title:'Red',     key:'Red',     show:false },
       Orange:  { title:'Orange',  key:'Orange',  show:false },
@@ -132,7 +133,8 @@ class Vizu
       Green:   { title:'Green',   key:'Green',   show:false },
       Cyan:    { title:'Cyan',    key:'Cyan',    show:false },
       Blue:    { title:'Blue',    key:'Blue',    show:false },
-      Magenta: { title:'Magenta', key:'Magenta', show:false } } }
-
+      Magenta: { title:'Magenta', key:'Magenta', show:false } },
+    Grid: {
+      Grid:    { title:'Grid',   key:'Grid',      show:false } } }
 
 export default Vizu

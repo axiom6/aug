@@ -5,7 +5,6 @@
     <v-main     v-if="show('Main')"   :key="nav.keyIdx(  'Main',viewIdx)"></v-main>
     <v-hues     v-if="show('Hues')"   :key="nav.keyIdx(  'Hues',viewIdx)"></v-hues>
     <v-cube     v-if="show('Cube')"   :key="nav.keyIdx(  'Cube',viewIdx)"></v-cube>
-    <v-spot     v-if="show('Spot')"   :key="nav.keyIdx(  'Spot',viewIdx)"></v-spot>
     <v-test     v-if="show('Test')"   :key="nav.keyIdx(  'Test',viewIdx)"></v-test>
     <v-replay   v-if="show('Replay')" :key="nav.keyIdx('Replay',viewIdx)"></v-replay>
     <v-result   v-if="show('Result')" :key="nav.keyIdx('Result',viewIdx)"></v-result>
@@ -17,8 +16,7 @@
   import { inject, ref, onMounted } from 'vue';
   import Home     from './Home.vue'
   import Main     from '../main/Main.vue';
-  import Hues     from '../main/Hues.vue';
-  import Spot     from '../main/Spot.vue';
+  import Hues     from '../hues/Hues.vue';
   import Cube     from '../../../lib/vue/cube/Cube.vue';
   import Test     from '../../../lib/vue/test/Test.vue';
   import Replay   from '../../../lib/vue/test/Replay.vue';
@@ -26,12 +24,13 @@
   
   let View = {
 
-    components:{ 'v-home':Home, 'v-cube':Cube, 'v-spot':Spot, 'v-main':Main, 'v-hues':Hues,
+    components:{ 'v-home':Home, 'v-main':Main, 'v-hues':Hues, 'v-cube':Cube,
       'v-test':Test, 'v-replay':Replay, 'v-result':Result },
 
     setup() {
       const nav     = inject('nav');
       const viewIdx = ref(0);
+      const mains   = ["Hexa","Rgbs","Grid"]
       let   module  = 'Home'
       let   debug   = false
 
@@ -42,7 +41,8 @@
         return isShow; }
 
       const onNav = (obj) => {
-        module = obj.level==='Comp' ? obj.compKey : obj.pracKey;
+        module = obj.level==='Comp'        ? obj.compKey : obj.pracKey;
+        module = nav.inArray(module,mains) ? "Main"      : module;
         viewIdx.value++;
         if( debug ) { console.log( 'View.onNav()', { module:module, obj:obj } ); } }
 
