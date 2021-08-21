@@ -81,7 +81,7 @@ class Vizu
 
   # 2. Initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
   Vizu.init =   () ->
-    subjects     = ["Nav","Tab","View"]
+    subjects     = ["Nav","Tab","Navd","View","Vizu"]
     streamLog    = { subscribe:false, publish:false, subjects:subjects }
     Vizu.stream   = new Stream( subjects, streamLog )
     Vizu.mix      = new Mix(  Vizu )

@@ -77,7 +77,7 @@ Vizu = (function() {
 
     static init() {
       var error, streamLog, subjects;
-      subjects = ["Nav", "Tab", "View"];
+      subjects = ["Nav", "Tab", "Navd", "View", "Vizu"];
       streamLog = {
         subscribe: false,
         publish: false,

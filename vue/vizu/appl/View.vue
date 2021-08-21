@@ -15,30 +15,33 @@
 
   import { inject, ref, onMounted } from 'vue';
   import Home     from './Home.vue'
+
   import Main     from '../main/Main.vue';
   import Hues     from '../hues/Hues.vue';
   import Cube     from '../../../lib/vue/cube/Cube.vue';
   import Test     from '../../../lib/vue/test/Test.vue';
   import Replay   from '../../../lib/vue/test/Replay.vue';
   import Result   from '../../../lib/vue/test/Result.vue';
-  
+
   let View = {
 
     components:{ 'v-home':Home, 'v-main':Main, 'v-hues':Hues, 'v-cube':Cube,
       'v-test':Test, 'v-replay':Replay, 'v-result':Result },
 
     setup() {
-      const nav     = inject('nav');
-      const viewIdx = ref(0);
-      const mains   = ["Hexa","Rgbs","Grid"]
-      let   module  = 'Home'
-      let   debug   = false
+      const nav      = inject('nav');
+      const viewIdx  = ref(0);
+
+      const mains    = ["Hexa","Rgbs","Grid"];
+      let   module   = 'Home';
+      let   debug    = false;
 
       const show = ( moduleArg ) => {
         let isShow = module===moduleArg;
         if( debug ) { console.log( 'View.show()',
             { isShow:isShow, module:module, moduleArg:moduleArg } ); }
         return isShow; }
+
 
       const onNav = (obj) => {
         module = obj.level==='Comp'        ? obj.compKey : obj.pracKey;
@@ -58,7 +61,9 @@
 
 <style lang="less">
 
-      .view-pane {}
+  @import '../../../css/themes/theme.less';
+
+  .view-pane { position:absolute; left: 0;  top:0;  width:100%; height:100%; display:grid; color:@theme-fore; }
   
 </style>
 

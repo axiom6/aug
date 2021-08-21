@@ -37,6 +37,12 @@ class Nav extends Mix
     @museInovs  = ['Info','Know','Wise','Soft','Data','Scie','Math']
     @musePlanes = ['Info','Know','Wise']
 
+  # Special publsher for Vizu side bar
+  pubVizu:( obj ) ->
+    console.log('Nav.pubVizu()', obj )
+    @stream.publish( 'Vizu',     obj )
+    return
+
   pub:( msg, isReplay=false ) ->
     changeView = @viewChange( msg )
     obj = @toObj( msg )
