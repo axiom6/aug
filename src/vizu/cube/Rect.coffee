@@ -1,5 +1,5 @@
 
-import {vis}      from '../../pub/draw/Vis.js'
+import {vis}      from '../../../lib/pub/draw/Vis.js'
 import * as THREE from 'three'
 
 class Rect

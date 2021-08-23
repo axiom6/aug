@@ -7,7 +7,7 @@
 <script type="module">
 
   import Tabulator from 'tabulator-tables'
-  import {nextTick, onMounted, ref, inject, onUnmounted} from "vue";
+  import {nextTick, onMounted, ref, inject, onBeforeUnmount } from "vue";
   //port Demo from '../../../pub/data/table/Demo.js'
   import Tabu from '../../../pub/data/table/Tabu.js'
 
@@ -36,7 +36,7 @@ let Table = {
     onMounted( () =>  {
       create(); } )
 
-    onUnmounted( () => {
+    onBeforeUnmount( () => {
       nav.removeElem( "Table.vue", elem['value'], nextTick ) ; } )
 
     return { elem }; }

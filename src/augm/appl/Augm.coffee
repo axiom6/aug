@@ -12,28 +12,16 @@ import { createApp }    from 'vue'
 
 #mport Cache   from '../../../lib/pub/util/Cache.js'
 
-import MathJson from '../../../data/augm/Math.json'
-import GeomJson from '../../../data/augm/Geom.json'
-import DataJson from '../../../data/augm/Data.json'
-import ToolJson from '../../../data/augm/Tool.json'
-import PrinJson from '../../../data/muse/Prin.json'
-import RowsJson from '../../../data/muse/Rows.json'
-import InfoJson from '../../../data/muse/Info.json'
-import KnowJson from '../../../data/muse/Know.json'
-import WiseJson from '../../../data/muse/Wise.json'
-import QuadJson from '../../../data/draw/Quad.json'
-import TechJson from '../../../data/draw/Tech.json'
-import TreeJson from '../../../data/draw/Tree.json'
-import CubeJson from '../../../data/muse/Cube.json'
-
+import MathJson   from '../../../data/augm/Math.json'
+import GeomJson   from '../../../data/augm/Geom.json'
+import DataJson   from '../../../data/augm/Data.json'
+import ToolJson   from '../../../data/augm/Tool.json'
+import QuadJson   from '../../../data/draw/Quad.json'
+import TechJson   from '../../../data/draw/Tech.json'
+import TreeJson   from '../../../data/draw/Tree.json'
 import FlavorJson from '../../../data/jitter/Flavor.json'
 import ChoiceJson from '../../../data/jitter/Choice.json'
-import FontJson   from "../../../LIB/css/font/three/helvetiker_regular.typeface.json"
-#mport DataInov from   '../../../data/inno/Data.json'
-#mport MachInov from   '../../../data/inno/Mach.json'
-#mport MathInov from   '../../../data/inno/Math.json'
-#mport ScieJson from   '../../../data/inno/Scie.json'
-#mport SoftInov from   '../../../data/inno/Soft.json'
+
 
 class Augm
 
@@ -43,27 +31,18 @@ class Augm
     Math:   { url:'augm/Math.json',     data:MathJson, refine:true }
     Geom:   { url:'augm/Geom.json',     data:GeomJson, refine:true }
     Data:   { url:'augm/Data.json',     data:DataJson, refine:true }
-    Prin:   { url:'muse/Prin.json',     data:PrinJson, refine:true }
     Tool:   { url:'augm/Tool.json',     data:ToolJson, refine:true }
-    Rows:   { url:'muse/Rows.json',     data:RowsJson, refine:true }
-    Info:   { url:'muse/Info.json',     data:InfoJson, refine:true }
-    Know:   { url:'muse/Know.json',     data:KnowJson, refine:true }
-    Wise:   { url:'muse/Wise.json',     data:WiseJson, refine:true }
-    Cube:   { url:'muse/Cube.json',     data:CubeJson, refine:true }
     Quad:   { url:'draw/Quad.json',     data:QuadJson   }
     Tech:   { url:'draw/Tech.json',     data:TechJson   }
     Tree:   { url:'draw/Tree.json',     data:TreeJson   }
     Flavor: { url:'jitter/Flavor.json', data:FlavorJson }
-    Choice: { url:'jitter/Choice.json', data:ChoiceJson }
-    Font:   { url: '',                  data:FontJson   } }
+    Choice: { url:'jitter/Choice.json', data:ChoiceJson } }
 
   Augm.komps = Access.kompsDirs( {
     Home:{ title:'Home', key:'Home', pracs:{}, ikw:false, icon:"fas fa-home" }
     Math:{ title:'Math', key:'Math', pracs:{}, ikw:true,  icon:"fas fa-bezier-curve" }
     Draw:{ title:'Draw', key:'Draw', pracs:{}, ikw:false, icon:"fas fa-draw-polygon" }
-    Hues:{ title:'Hues', key:'Hues', pracs:{}, ikw:false, icon:"fas fa-palette" }
     Tool:{ title:'Tool', key:'Tool', pracs:{}, ikw:false, icon:"fas fa-wrench" }
-    Cube:{ title:'Cube', key:'Cube', pracs:{}, ikw:false, icon:"fas fa-cubes" }
     Wood:{ title:'Wood', key:'Wood', pracs:{}, ikw:false, icon:"fas fa-tree" }
     Geom:{ title:'Geom', key:'Geom', pracs:{}, ikw:true,  icon:"fas fa-shapes" }
     Test:{ title:'Test', key:'Test', pracs:{}, ikw:false, icon:"fas fa-stethoscope"} } )

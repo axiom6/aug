@@ -3,7 +3,7 @@
 </template>
 <script>
 
-import { ref, inject, onMounted, nextTick, onUnmounted } from "vue";
+import {ref, inject, onMounted, nextTick, onBeforeUnmount } from "vue";
 import SvgMgr    from '../../../lib/pub/draw/SvgMgr.js'
 import drawGauge from './GaugeD3.js'
 
@@ -29,7 +29,7 @@ let Gauge = {
   onMounted(  () => {
       create(); } )
 
-  onUnmounted( () => {
+  onBeforeUnmount( () => {
     nav.removeElem( "Guage.vue", elem['value'], nextTick ) ; } )
 
   return { elem } }

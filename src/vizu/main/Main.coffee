@@ -60,7 +60,6 @@ class Main
   onVizu:( obj ) =>
     if obj.animate?
       @animateOn   = not @animateOn
-      @needsRender = @animateOn
     console.log( "Main.onVizu()", obj, @animateOn )
     return
 

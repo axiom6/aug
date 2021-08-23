@@ -7,7 +7,7 @@
 <script type="module">
 
   import Tabulator from 'tabulator-tables'
-  import {nextTick, onMounted, ref, inject, onUnmounted } from "vue";
+  import {nextTick, onMounted, ref, inject, onBeforeUnmount } from "vue";
   import Search from '../../../pub/data/query/Search.js'
 
 let Query = {
@@ -34,7 +34,7 @@ let Query = {
     onMounted( () =>  {
       create(); } )
 
-    onUnmounted( () => {
+    onBeforeUnmount( () => {
       nav.removeElem( "Query.vue", elem['value'], nextTick ) ; } )
 
     return { elem }; }

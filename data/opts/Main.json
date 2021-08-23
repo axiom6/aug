@@ -50,8 +50,7 @@
     "coords": {
       "xmin":0, "xmax":100, "ymin":0, "ymax":100,"zmin":0, "zmax":100 },
     "cameras": {
-       "camera": "Orthographic", "controls":"Orbit", "helper":false, "left":-100, "right":100, "top":100, "bottom":-100,
-       "near":-500, "far":500, "position":{ "x":20, "y":20, "z":20 } },
+       "camera": "Orthographic", "controls":"Orbit", "helper":false },
     "lights":{
       "light":"Directional" },
     "content": {

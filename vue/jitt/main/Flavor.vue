@@ -13,7 +13,7 @@
 
 <script type="module">
 
-import {inject, ref, onMounted, nextTick, onUnmounted} from 'vue';
+import {inject, ref, onMounted, nextTick, onBeforeUnmount } from 'vue';
   import Navb    from '../../../lib/vue/elem/Navb.vue';
   import Btns    from '../../../lib/vue/elem/Btns.vue';
   import Summ    from './Summ.vue';
@@ -41,7 +41,7 @@ import {inject, ref, onMounted, nextTick, onUnmounted} from 'vue';
         create(); } )
 
       // Not sure why we are getting elem undefined
-      onUnmounted( () => {
+      onBeforeUnmount( () => {
         nav.removeElem( "Flavor.vue", elem['value'], nextTick ); } )
 
     return { name, elem }; }

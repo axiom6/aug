@@ -1,13 +1,11 @@
 
 Debug
-  1. Hexagon.coffee
-     a. Improve sin wave functions
-  2. Grid and coordinate system
+  1. Grid and coordinate system
      a. Get OrthoXYZ and OrthoISO working with projectionMatrix()
      b. Grids yaxis scale off too short by 50%
      c. Put Grids into an instance mesh
-  4. Integrate Side.vue, Main.json and Main.coffee
-  5. Implement troika text
+  2. Integrate Side.vue, Main.json and Main.coffee
+  3. Implement troika text
   
 Clean Up
   1. Vis
@@ -15,7 +13,9 @@ Clean Up
      b. Vis.str hex output wrong
      c. Fix padded and move for and text color
   2, Hexagon
-  2. Clean up zzz
+     a. Keep Improve sin wave functions
+  3. Clean up zzz
+  4. Determine if onBeforeUnmount / mix.removeElem() are needed
 
 Features One
   1. Test

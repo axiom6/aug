@@ -86,7 +86,6 @@ Main = class Main {
   onVizu(obj) {
     if (obj.animate != null) {
       this.animateOn = !this.animateOn;
-      this.needsRender = this.animateOn;
     }
     console.log("Main.onVizu()", obj, this.animateOn);
   }

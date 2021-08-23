@@ -1,7 +1,7 @@
 {
   "version": 3,
   "file": "Gui.js",
-  "sourceRoot": "../../src/cube",
+  "sourceRoot": "../../../src/vizu/cube",
   "sources": [
     "Gui.coffee"
   ],

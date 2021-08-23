@@ -10,9 +10,9 @@
   // is compiled by rollup.config.cube.js However the dynamic import of
   // this Cube.vue ends the warning messages. CoffeeScript import of original
   // CoffeeScript does not produce warning messages.
-  import Build  from '../../pub/util/Build.js'
-  import CubeTh from '../../pub/cube/CubeTh.js'
-  import { inject, ref, onMounted, onUnmounted, nextTick } from 'vue';
+  import Build  from '../../../lib/pub/util/Build.js'
+  import CubeTh from '../../../pub/vizu/cube/CubeTh.js'
+  import { inject, ref, onMounted,  onBeforeUnmount, nextTick } from 'vue';
   
   let Cube = {
 
@@ -31,8 +31,9 @@
       onMounted( () => {
         create(); } )
 
-      onUnmounted( () => {
-        nav.removeElem( "Cube.onUnmounted()", elem['value'], nextTick ) ; } )
+      // May not be needed
+      onBeforeUnmount( () => {
+        nav.removeElem( "Cube.onUnmounted()", elem['value'], nextTick ); } )
       
     return { elem }; }
   }

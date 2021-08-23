@@ -1,7 +1,7 @@
 
-import {vis}         from '../draw/Vis.js'
-import Access        from '../util/Access.js'
-import Build         from '../util/Build.js'
+import {vis}         from '../../../lib/pub/draw/Vis.js'
+import Access        from '../../../lib/pub/util/Access.js'
+import Build         from '../../../lib/pub/util/Build.js'
 import Cube3D        from './Cube3D.js'
 import Rect          from './Rect.js'
 import * as THREE    from 'three'

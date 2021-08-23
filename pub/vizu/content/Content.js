@@ -142,7 +142,7 @@ Content = class Content {
       side: DoubleSide // 0xaffe00
     });
     boxCube = new Mesh(boxGeometry, boxMaterial);
-    boxCube.position.set(opts.x, opts.y, opts.y);
+    boxCube.position.set(opts.x, opts.y, opts.z);
     boxCube.castShadow = true;
     boxCube.receiveShadow = false;
     this.main.addToScene(boxCube);

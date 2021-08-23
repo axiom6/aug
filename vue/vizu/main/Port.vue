@@ -5,7 +5,7 @@
 
 <script type="module">
 
-import { ref, inject, nextTick, onMounted } from "vue";
+import { ref, inject, nextTick, onMounted, onBeforeUnmount } from "vue";
 
 let Port = {
 
@@ -34,6 +34,11 @@ let Port = {
     onMounted(  () => {
       create(); } )
 
+    onBeforeUnmount( () => {
+      nav.removeElem( "main/Port.vue", elem['value'], nextTick  );
+      // main.dispose();
+      } )
+
     return { elem } }
 }
 
@@ -41,8 +46,3 @@ export default Port;
 
 </script>
 
-<!--
-    onUnmounted( () => {
-      nav.removeElem( "main/Port.vue", elem['value'], nextTick, () => {
-         main.dispose();  } ) } )
--->

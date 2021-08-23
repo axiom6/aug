@@ -19,7 +19,7 @@ class Cameras
     defs = {}
     defs.aspect   = @main.aspectRatio
     defs.dist     = cc.dist
-    defs.scale    = 1.0
+    defs.scale    = 2.0
     defs.position = { x:defs.dist*0.2, y:defs.dist*0.2, z:defs.dist*0.20 }
     defs.fov      = 75
     defs

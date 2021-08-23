@@ -2,7 +2,7 @@ var Cube3D;
 
 import {
   vis
-} from '../draw/Vis.js';
+} from '../../../lib/pub/draw/Vis.js';
 
 import * as THREE from 'three';
 

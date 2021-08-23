@@ -6,11 +6,9 @@
     <v-mathEQ   v-if="show('MathEQ')" :key="viewIdx" :pracKey="'MathEQ'"></v-mathEQ>
     <v-mathML   v-if="show('MathML')" :key="viewIdx" :pracKey="'MathML'"></v-mathML>
     <v-draw     v-if="show('Draw')"   :key="viewIdx"></v-draw>
-    <v-hues     v-if="show('Hues')"   :key="viewIdx"></v-hues>
     <v-tool     v-if="show('Tool')"   :key="viewIdx"></v-tool>
     <v-toolND   v-if="show('Gauges')" :key="viewIdx" :pracKey="'Gauges'"></v-toolND>
     <v-toolND   v-if="show('Widget')" :key="viewIdx" :pracKey="'Widget'"></v-toolND>
-    <v-cube     v-if="show('Cube')"   :key="viewIdx"></v-cube>
     <v-wood     v-if="show('Wood')"   :key="viewIdx"></v-wood>
     <v-geom     v-if="show('Geom')"   :key="viewIdx"></v-geom>
     <v-geom2D   v-if="show('Geom2D')" :key="viewIdx" :pracKey="'Geom2D'"></v-geom2D>
@@ -28,14 +26,11 @@
   import Math     from '../math/Math.vue';
   import MathND   from '../math/MathND.vue';
   import Draw     from '../draw/Draw.vue';
-  import Hues     from '../hues/Hues.vue';
   import Tool     from '../tool/Tool.vue';
   import ToolND   from '../tool/ToolND.vue';
-
   import Wood     from '../wood/Wood.vue';
   import Geom     from '../geom/Geom.vue';
   import GeomND   from '../geom/GeomND.vue';
-  import Cube     from '../../../lib/vue/cube/Cube.vue';
   import Test     from '../../../lib/vue/test/Test.vue';
   import Replay   from '../../../lib/vue/test/Replay.vue';
   import Result   from '../../../lib/vue/test/Result.vue';
@@ -44,9 +39,8 @@
   let View = {
 
     components:{ 'v-home':Home, 'v-math':Math,     'v-mathEQ':MathND, 'v-mathML':MathND, 'v-draw':Draw,
-                 'v-hues':Hues, 'v-tool':Tool,     'v-toolND':ToolND, 'v-cube':Cube,     'v-wood':Wood,
-                 'v-geom':Geom, 'v-geom2D':GeomND, 'v-geom3D':GeomND, 'v-test':Test,   'v-replay':Replay,
-                 'v-result':Result },
+                 'v-tool':Tool, 'v-toolND':ToolND, 'v-wood':Wood,     'v-geom':Geom,      'v-geom2D':GeomND,
+                 'v-geom3D':GeomND, 'v-test':Test, 'v-replay':Replay, 'v-result':Result },
 
     setup() {
       const nav     = inject('nav');

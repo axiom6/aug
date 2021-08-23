@@ -18,7 +18,7 @@
 
   import Main     from '../main/Main.vue';
   import Hues     from '../hues/Hues.vue';
-  import Cube     from '../../../lib/vue/cube/Cube.vue';
+  import Cube     from '../cube/Cube.vue';
   import Test     from '../../../lib/vue/test/Test.vue';
   import Replay   from '../../../lib/vue/test/Replay.vue';
   import Result   from '../../../lib/vue/test/Result.vue';

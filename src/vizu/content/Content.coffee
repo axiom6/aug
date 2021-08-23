@@ -72,7 +72,7 @@ class Content
     boxGeometry = new BoxGeometry( opts.s, opts.s, opts.s )
     boxMaterial = new MeshStandardMaterial( { color:0x0000FF, emissive:0x0a0a0a, side:DoubleSide } )  # 0xaffe00
     boxCube     = new Mesh( boxGeometry, boxMaterial )
-    boxCube.position.set( opts.x, opts.y, opts.y )
+    boxCube.position.set( opts.x, opts.y, opts.z )
     boxCube.castShadow    = true
     boxCube.receiveShadow = false
     @main.addToScene( boxCube )

@@ -5,7 +5,7 @@
 
 <script type="module">
 
-  import { ref, nextTick, onMounted, inject } from "vue";
+  import { ref, nextTick, onMounted, inject, onBeforeUnmount } from "vue";
   import D3D from "../../../pub/augm/show/D3D.js"
 
 
@@ -25,8 +25,8 @@
       onMounted( () => {
          create();  } )
 
-      // onUnmounted( () => {
-      //  nav.removeElem( elem['value'], nextTick ) ; } )
+      onBeforeUnmount( () => {
+        nav.removeElem( elem['value'], nextTick ) ; } )
 
       return { elem } }
   }

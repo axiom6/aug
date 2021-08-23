@@ -5,7 +5,7 @@
 
 <script type="module">
 
-import { ref, inject, nextTick, onMounted, onUnmounted} from "vue";
+import {ref, inject, nextTick, onMounted, onBeforeUnmount } from "vue";
 
 let MathExp = {
 
@@ -23,7 +23,7 @@ let MathExp = {
      onMounted( () =>  {
        create(); } )
 
-    onUnmounted( () => {
+    onBeforeUnmount( () => {
       nav.removeElem( "Math.vue", elem['value'], nextTick ) ; } )
 
   return { elem } }

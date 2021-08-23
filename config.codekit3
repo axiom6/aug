@@ -423,6 +423,14 @@
       "oAP" : "\/dist",
       "oF" : 0
     },
+    "\/firebase-debug.log" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/firebase-debug.log",
+      "oF" : 0
+    },
     "\/firebase.json" : {
       "ft" : 524288,
       "oA" : 1,
@@ -1088,82 +1096,6 @@
       "hM" : 0,
       "oA" : 1,
       "oAP" : "\/lib\/doc\/Type.html",
-      "oF" : 0
-    },
-    "\/lib\/pub\/cube\/Cube3D.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/lib\/pub\/cube\/Cube3D-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/lib\/pub\/cube\/Cube3D.js.map" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/lib\/pub\/cube\/Cube3D.js.map",
-      "oF" : 0
-    },
-    "\/lib\/pub\/cube\/CubeTh.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/lib\/pub\/cube\/CubeTh-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/lib\/pub\/cube\/CubeTh.js.map" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/lib\/pub\/cube\/CubeTh.js.map",
-      "oF" : 0
-    },
-    "\/lib\/pub\/cube\/Gui.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/lib\/pub\/cube\/Gui-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/lib\/pub\/cube\/Gui.js.map" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/lib\/pub\/cube\/Gui.js.map",
-      "oF" : 0
-    },
-    "\/lib\/pub\/cube\/Rect.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/lib\/pub\/cube\/Rect-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/lib\/pub\/cube\/Rect.js.map" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/lib\/pub\/cube\/Rect.js.map",
       "oF" : 0
     },
     "\/lib\/pub\/data\/Couch.js" : {
@@ -1917,50 +1849,6 @@
       "oA" : 0,
       "oAP" : "\/lib\/pub\/util\/Worker.js.map",
       "oF" : 0
-    },
-    "\/lib\/src\/cube\/Cube3D.coffee" : {
-      "ft" : 32,
-      "ma" : 1,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/lib\/pub\/cube\/Cube3D.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/lib\/src\/cube\/CubeTh.coffee" : {
-      "ft" : 32,
-      "ma" : 1,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/lib\/pub\/cube\/CubeTh.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/lib\/src\/cube\/Gui.coffee" : {
-      "ft" : 32,
-      "ma" : 1,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/lib\/pub\/cube\/Gui.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/lib\/src\/cube\/Rect.coffee" : {
-      "ft" : 32,
-      "ma" : 1,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/lib\/pub\/cube\/Rect.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
     },
     "\/lib\/src\/data\/Couch.coffee" : {
       "ft" : 32,
@@ -4808,6 +4696,50 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/src\/vizu\/cube\/Cube3D.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/vizu\/cube\/Cube3D.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/src\/vizu\/cube\/CubeTh.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/vizu\/cube\/CubeTh.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/src\/vizu\/cube\/Gui.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/vizu\/cube\/Gui.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/src\/vizu\/cube\/Rect.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/vizu\/cube\/Rect.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/src\/vizu\/main\/Animate.coffee" : {
       "ft" : 32,
       "ma" : 1,
@@ -4880,17 +4812,6 @@
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/vizu\/main\/Verify.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/vizu\/spot\/Spot.coffee" : {
-      "ft" : 32,
-      "ma" : 1,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/vizu\/spot\/Spot.js",
       "oF" : 0,
       "oS" : 1,
       "sC" : 0,

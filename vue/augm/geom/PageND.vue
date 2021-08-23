@@ -5,7 +5,7 @@
 
 <script type="module">
 
-import {ref, inject, nextTick, onMounted, onUnmounted} from "vue"; // , inject
+import {ref, inject, nextTick, onMounted, onBeforeUnmount } from "vue"; // , inject
 import Style   from "../../../pub/augm/geom/lib/Style.js";
 import GeomMgr from "../../../pub/augm/geom/lib/GeomMgr.js";
 
@@ -28,7 +28,7 @@ let PageND = {
     onMounted( () => {
         create(); } )
 
-    onUnmounted( () => {
+    onBeforeUnmount( () => {
       nav.removeElem( "geom/PageND.vue", elem['value'], nextTick ) ; } )
 
     return { elem }; }

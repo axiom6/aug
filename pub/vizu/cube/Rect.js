@@ -2,7 +2,7 @@ var Rect;
 
 import {
   vis
-} from '../../pub/draw/Vis.js';
+} from '../../../lib/pub/draw/Vis.js';
 
 import * as THREE from 'three';
 
