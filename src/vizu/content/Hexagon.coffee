@@ -19,15 +19,16 @@ class Hexagon
     return
 
   toGeom:( obj ) ->
-    @obj             = obj
-    vis.smooth       = true
-    obj.animateOn    = false
-    obj.animateDebug = true
-    obj.animateCount = 0
+    @obj              = obj
+    vis.smooth        = true
+    obj.animateOn     = false
+    obj.animateDebug  = true
+    obj.animateCount  = 0
+    obj.animateFactor = 0.01
+    obj.oscilate      = 12
     obj.valFun       = ( hue, sat ) ->
-      vis.noop( hue, sat )
-      ang = 90 * sat * hue * 0.0000003 * obj.animateCount
-      50 + 50 * vis.sin(ang)
+      anim = obj.animateCount * obj.animateFactor
+      50 + 25*Math.sin( obj.oscilate*hue + anim ) + 25*Math.sin( obj.oscilate*sat + anim )
     obj.valBeg       = 100
     obj.val          = obj.valBeg
     obj.colors100    = []
@@ -81,7 +82,6 @@ class Hexagon
     @createBufferGeometry( obj )
     @drawCircle(    obj.priRadius*5.0 )
     @pallettes(     obj, false )
-    # @applyValues(   obj )
     console.log( "Hexagon.toGeom()",
       { vertexLength:obj.vertices.length, vertexCount:obj.vertexCount,
       indiceKength:obj.indices.length,    indiceCount:obj.indiceCount,

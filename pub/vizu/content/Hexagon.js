@@ -32,11 +32,12 @@ Hexagon = class Hexagon {
     obj.animateOn = false;
     obj.animateDebug = true;
     obj.animateCount = 0;
+    obj.animateFactor = 0.01;
+    obj.oscilate = 12;
     obj.valFun = function(hue, sat) {
-      var ang;
-      vis.noop(hue, sat);
-      ang = 90 * sat * hue * 0.0000003 * obj.animateCount;
-      return 50 + 50 * vis.sin(ang);
+      var anim;
+      anim = obj.animateCount * obj.animateFactor;
+      return 50 + 25 * Math.sin(obj.oscilate * hue + anim) + 25 * Math.sin(obj.oscilate * sat + anim);
     };
     obj.valBeg = 100;
     obj.val = obj.valBeg;
@@ -92,7 +93,6 @@ Hexagon = class Hexagon {
     this.createBufferGeometry(obj);
     this.drawCircle(obj.priRadius * 5.0);
     this.pallettes(obj, false);
-    // @applyValues(   obj )
     console.log("Hexagon.toGeom()", {
       vertexLength: obj.vertices.length,
       vertexCount: obj.vertexCount,

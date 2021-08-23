@@ -53,6 +53,7 @@ class Main
   runApp:( elem ) ->
     @screen( elem )
     @setup()
+    @needsRender = true
     @animate.animate()
     return
 

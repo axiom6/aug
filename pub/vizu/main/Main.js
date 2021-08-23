@@ -79,6 +79,7 @@ Main = class Main {
   runApp(elem) {
     this.screen(elem);
     this.setup();
+    this.needsRender = true;
     this.animate.animate();
   }
 

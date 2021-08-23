@@ -1,20 +1,20 @@
 
 Debug
   1. Hexagon.coffee
-     a. Get animation working
-     b. On/Off
-     c. Oscillate with val sin function
-     d. Organize Main.json and Main.coffee
-  2. Fix and the generalize coordinate system and Orthographic camera
+     a. Improve sin wave functions
+  2. Grid and coordinate system
      a. Get OrthoXYZ and OrthoISO working with projectionMatrix()
-     b Grids yaxis scale off too short by 50%
-  3, Implement troika text
+     b. Grids yaxis scale off too short by 50%
+     c. Put Grids into an instance mesh
+  4. Integrate Side.vue, Main.json and Main.coffee
+  5. Implement troika text
   
 Clean Up
   1. Vis
      a. Cleanup
      b. Vis.str hex output wrong
      c. Fix padded and move for and text color
+  2, Hexagon
   2. Clean up zzz
 
 Features One

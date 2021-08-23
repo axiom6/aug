@@ -7,6 +7,7 @@ import {
 Animate = class Animate {
   constructor(main) {
     // Call before animate to insure an initial rendering
+    // Significant step. Not called when scene is static
     this.render = this.render.bind(this);
     this.animate = this.animate.bind(this);
     this.doAnimations = this.doAnimations.bind(this);
@@ -28,8 +29,9 @@ Animate = class Animate {
   }
 
   render() {
-    if (this.main.needsRender) { // Significant step. Not called when scene is static
+    if (this.main.needsRender || this.main.animateOn) {
       this.main.render.renderer.render(this.main.scene, this.main.cameras.camera);
+      this.main.needsRender = false;
     }
   }
 

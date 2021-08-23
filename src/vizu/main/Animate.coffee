@@ -14,9 +14,11 @@ class Animate
     @main.log( @klass+'()', @ )
 
   # Call before animate to insure an initial rendering
+  # Significant step. Not called when scene is static
   render:() =>
-    if @main.needsRender # Significant step. Not called when scene is static
+    if @main.needsRender or @main.animateOn
        @main.render.renderer.render( @main.scene, @main.cameras.camera )
+       @main.needsRender = false
     return
 
   animate:() =>
