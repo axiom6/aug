@@ -164,7 +164,7 @@ class Cameras
     @main.log( @klass+'.onResize()', obj )
     @camera.aspect = obj.aspectRatio
     r              = obj.aspectRatio / obj.aspectLast
-    if @opts.camera is 'Orthographic'
+    if @optsCam.camera is 'Orthographic'
       cscale    = @camera.scale
       nscale    = {  "x":cscale.x*r, "y":cscale.y*r, "z":cscale.y*r }
       @camera.scale.set( nscale.x,       nscale.y,       nscale.z   )

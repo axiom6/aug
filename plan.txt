@@ -3,7 +3,6 @@ Debug
   1. Grid and coordinate system
      a. Put Grids into an instance mesh
   2. Integrate Side.vue, Main.json and Main.coffee
-  3. Implement troika text
   
 Clean Up
   1. Vis
@@ -13,7 +12,8 @@ Clean Up
   2, Hexagon
      a. Keep Improve sin wave functions
   3. Clean up zzz
-  4. Determine if onBeforeUnmount / mix.removeElem() are needed
+  4. Improve dsipose()
+     a. Determine if onBeforeUnmount / mix.removeElem() are needed
 
 Features One
   1. Test

@@ -248,7 +248,7 @@ Cameras = class Cameras {
     this.main.log(this.klass + '.onResize()', obj);
     this.camera.aspect = obj.aspectRatio;
     r = obj.aspectRatio / obj.aspectLast;
-    if (this.opts.camera === 'Orthographic') {
+    if (this.optsCam.camera === 'Orthographic') {
       cscale = this.camera.scale;
       nscale = {
         "x": cscale.x * r,

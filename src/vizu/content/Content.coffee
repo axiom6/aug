@@ -250,4 +250,6 @@ class Content
     BufferGeometry.dispose()
     Material.dispose()
 
+
+
 export default Content

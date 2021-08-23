@@ -57,7 +57,7 @@ class Animate
 
   delayNeedsRender:() ->
     callback = () => @main.needsRender = true
-    @main.nav.delayCallback( 2000, callback )
+    @main.nav.delayCallback( 1000, callback )
     return
 
 export default Animate

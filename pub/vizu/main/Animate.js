@@ -88,7 +88,7 @@ Animate = class Animate {
     callback = () => {
       return this.main.needsRender = true;
     };
-    this.main.nav.delayCallback(2000, callback);
+    this.main.nav.delayCallback(1000, callback);
   }
 
 };

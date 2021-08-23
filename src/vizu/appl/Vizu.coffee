@@ -8,7 +8,8 @@ import { tester } from '../../../lib/pub/test/tester.js'
 import Main       from '../main/Main.js'
 import Dash       from '../../../vue/vizu/appl/Dash.vue'
 
-import { createApp }    from 'vue'
+import { preloadFont } from 'troika-three-text'
+import { createApp   } from 'vue'
 
 import MainJson from '../../../data/opts/Main.json'
 import PrinJson from '../../../data/muse/Prin.json'
@@ -81,6 +82,7 @@ class Vizu
 
   # 2. Initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
   Vizu.init =   () ->
+
     subjects     = ["Nav","Tab","Navd","View","Vizu"]
     streamLog    = { subscribe:false, publish:false, subjects:subjects }
     Vizu.stream   = new Stream( subjects, streamLog )
@@ -89,6 +91,7 @@ class Vizu
     Vizu.vis      = vis
     Vizu.main     = new Main( Vizu.stream, Vizu.nav )
     Vizu.tester   = tester
+    Vizu.preloadTroikaFont()
     #izu.mix.opts = Vizu.Batch.Main.data # JSON.parse( batch.Main.data )
     #Viz.cache  = new Cache( Viz.stream )
     try
@@ -113,6 +116,12 @@ class Vizu
     path = "../../#{name}.vue"
     if path is false then {}
     return `import( /* @vite-ignore */ path )`
+
+  Vizu.preloadTroikaFont = () ->
+    preloadFont( {
+      font: "../../../lib/css/font/roboto/Roboto-Regular.ttf"
+      characters: "abcdefghijklmnopqrstuvwxyz0123456789" },
+      () => console.log("Roboto loaded for Troika") )
 
   # This does not make sense
   Vizu.pages = {

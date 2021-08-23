@@ -21,6 +21,10 @@ import Main from '../main/Main.js';
 import Dash from '../../../vue/vizu/appl/Dash.vue';
 
 import {
+  preloadFont
+} from 'troika-three-text';
+
+import {
   createApp
 } from 'vue';
 
@@ -89,6 +93,7 @@ Vizu = (function() {
       Vizu.vis = vis;
       Vizu.main = new Main(Vizu.stream, Vizu.nav);
       Vizu.tester = tester;
+      Vizu.preloadTroikaFont();
       try {
         //izu.mix.opts = Vizu.Batch.Main.data # JSON.parse( batch.Main.data )
         //Viz.cache  = new Cache( Viz.stream )
@@ -118,6 +123,15 @@ Vizu = (function() {
         }
         return import( /* @vite-ignore */ path );
       };
+    }
+
+    static preloadTroikaFont() {
+      return preloadFont({
+        font: "../../../lib/css/font/roboto/Roboto-Regular.ttf",
+        characters: "abcdefghijklmnopqrstuvwxyz0123456789"
+      }, () => {
+        return console.log("Roboto loaded for Troika");
+      });
     }
 
   };
