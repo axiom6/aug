@@ -248,7 +248,11 @@ class Nav extends Mix
   sleep:(ms) ->
     new Promise( (resolve) => setTimeout( resolve, ms ) )
 
-  # --- Innovate --- Inov in one place
+  delayCallback:( ms, callback ) ->
+    setTimeout( callback, ms )
+    return
+
+# --- Innovate --- Inov in one place
 
   # Across the board Inov detector for compKey pageKey and route
   isInov:( compKey ) ->

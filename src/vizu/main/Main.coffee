@@ -55,6 +55,7 @@ class Main
     @setup()
     @needsRender = true
     @animate.animate()
+    @animate.delayNeedsRender()  # Provide a render cycle for slow software like Troika
     return
 
   onVizu:( obj ) =>

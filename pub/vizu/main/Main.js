@@ -81,6 +81,7 @@ Main = class Main {
     this.setup();
     this.needsRender = true;
     this.animate.animate();
+    this.animate.delayNeedsRender(); // Provide a render cycle for slow software like Troika
   }
 
   onVizu(obj) {

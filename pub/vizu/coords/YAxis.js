@@ -1,6 +1,8 @@
 var YAxis;
 
-import Text from './Text.js';
+import {
+  Text
+} from 'troika-three-text';
 
 import {
   Group
@@ -21,17 +23,33 @@ YAxis = class YAxis {
   }
 
   annotate(cc, group) {
-    var dy, rot, size, text, y;
-    text = new Text(this.main);
+    var dy, rot, size, y;
     y = cc.ymin;
     dy = (cc.ymax - cc.ymin) * 0.05;
-    size = dy * 0.5;
+    size = dy * 0.7;
     rot = Math.PI / 6;
     while (y <= cc.xmax) {
-      this.content.drawLine(cc.xmin, y, cc.zmax, cc.xmin, y, cc.zmax + dy, 0xAAAAAA, group);
-      text.drawText(y.toString(), size, [cc.xmin, y, cc.zmax + dy], [rot, rot, rot], 0xAAAAAA, group);
+      this.content.drawLine(cc.xmin, y, cc.zmax, cc.xmin, y, cc.zmax + dy, 0xFFFFFF, group);
+      this.drawText(y.toString(), size, [cc.xmin, y + dy * 0.5, cc.zmax + dy * 2.2], [rot, rot, rot], 0xFFFFFF, group);
       y += cc.ytick1;
     }
+  }
+
+  drawText(str, size, [x, y, z], [rx, ry, rz], color, group) {
+    var text;
+    text = new Text();
+    text.text = str;
+    text.fontSize = size;
+    text.align = "center";
+    text.position.x = x;
+    text.position.y = y;
+    text.position.z = z;
+    text.rotateX(rx);
+    text.rotateY(ry);
+    text.rotateZ(rz);
+    text.color = color;
+    text.sync();
+    group.add(text);
   }
 
 };

@@ -4,7 +4,9 @@ import {
   Group
 } from 'three';
 
-import Text from './Text.js';
+import {
+  Text
+} from 'troika-three-text';
 
 XAxis = class XAxis {
   constructor(main, content) {
@@ -21,17 +23,33 @@ XAxis = class XAxis {
   }
 
   annotate(cc, group) {
-    var dy, rot, size, text, x;
-    text = new Text(this.main);
+    var dy, rot, size, x;
     x = cc.xmin;
-    dy = (cc.xmax - cc.xmin) * 0.05;
-    size = dy * 0.5;
+    dy = (cc.xmax - cc.xmin) * 0.03;
+    size = dy * 0.75;
     rot = Math.PI / 6;
     while (x <= cc.xmax) {
-      this.content.drawLine(x, cc.ymax, cc.zmin, x, cc.ymax + dy, cc.zmin, 0xAAAAAA, group);
-      text.drawText(x.toString(), size, [x, cc.ymax + dy, cc.zmin], [rot, rot, 0], 0xAAAAAA, group);
+      this.content.drawLine(x, cc.ymax, cc.zmin, x, cc.ymax + dy, cc.zmin, 0xFFFFFF, group);
+      this.drawText(x.toString(), size, [x - dy * 0.5, cc.ymax + dy * 1.75, cc.zmin], [0, rot, 0], 0xFFFFFF, group);
       x += cc.xtick1;
     }
+  }
+
+  drawText(str, size, [x, y, z], [rx, ry, rz], color, group) {
+    var text;
+    text = new Text();
+    text.text = str;
+    text.fontSize = size;
+    text.align = "center";
+    text.position.x = x;
+    text.position.y = y;
+    text.position.z = z;
+    text.rotateX(rx);
+    text.rotateY(ry);
+    text.rotateZ(rz);
+    text.color = color;
+    text.sync();
+    group.add(text);
   }
 
 };

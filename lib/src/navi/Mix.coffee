@@ -263,7 +263,6 @@ class Mix extends Type
         console.error( msg, "Mix.createElem() elem undefined" ) )
     return
 
-
   appendImgsHW:( src, elem ) ->
     hw  = {}
     img = new Image();

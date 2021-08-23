@@ -83,6 +83,14 @@ Animate = class Animate {
     this.main.needsRender = true;
   }
 
+  delayNeedsRender() {
+    var callback;
+    callback = () => {
+      return this.main.needsRender = true;
+    };
+    this.main.nav.delayCallback(2000, callback);
+  }
+
 };
 
 export default Animate;

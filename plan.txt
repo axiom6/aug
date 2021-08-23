@@ -1,9 +1,7 @@
 
 Debug
   1. Grid and coordinate system
-     a. Get OrthoXYZ and OrthoISO working with projectionMatrix()
-     b. Grids yaxis scale off too short by 50%
-     c. Put Grids into an instance mesh
+     a. Put Grids into an instance mesh
   2. Integrate Side.vue, Main.json and Main.coffee
   3. Implement troika text
   
