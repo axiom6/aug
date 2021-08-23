@@ -27,6 +27,7 @@ import Verify from './Verify.js';
 Main = class Main {
   constructor(stream, nav) {
     this.doApp = this.doApp.bind(this);
+    this.onVizu = this.onVizu.bind(this);
     this.resizeScreen = this.resizeScreen.bind(this);
     this.stream = stream;
     this.nav = nav;
@@ -38,6 +39,7 @@ Main = class Main {
     this.verifyFlag = false;
     this.hexagon = null;
     this.animateOn = false;
+    this.needsRender = true;
   }
 
   setup() {
@@ -52,6 +54,9 @@ Main = class Main {
     this.lights = new Lights(this);
     this.animate = new Animate(this);
     this.verify = new Verify(this);
+    this.nav.subscribe('Vizu', 'Main', (obj) => {
+      return this.onVizu(obj);
+    });
     return window.addEventListener('resize', this.resizeScreen, false);
   }
 
@@ -75,6 +80,14 @@ Main = class Main {
     this.screen(elem);
     this.setup();
     this.animate.animate();
+  }
+
+  onVizu(obj) {
+    if (obj.animate != null) {
+      this.animateOn = !this.animateOn;
+      this.needsRender = this.animateOn;
+    }
+    console.log("Main.onVizu()", obj, this.animateOn);
   }
 
   screen(elem) {

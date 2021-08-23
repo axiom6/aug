@@ -18,20 +18,18 @@ Animate = class Animate {
     this.cc = this.main.cartesian;
     this.theta = (this.opts.rotate != null) && (this.opts.rotate.theta != null) ? this.opts.rotate.theta : 0;
     this.radius = (this.opts.rotate != null) && (this.opts.rotate.radius != null) ? this.opts.rotate.radius : this.cc.dist;
-    this.needsRender = true;
     this.camControls = this.main.cameras.controls;
     if (this.camControls != null) {
       this.camControls.addEventListener('change', () => {
-        return this.needsRender = true;
+        return this.main.needsRender = true;
       });
     }
     this.main.log(this.klass + '()', this);
   }
 
   render() {
-    if (this.needsRender) { // Significant step. Not called when scene is static
+    if (this.main.needsRender) { // Significant step. Not called when scene is static
       this.main.render.renderer.render(this.main.scene, this.main.cameras.camera);
-      this.needsRender = false;
     }
   }
 
@@ -39,10 +37,10 @@ Animate = class Animate {
     if (this.opts.rotate != null) {
       this.rotate();
     }
-    if (this.needsRender && this.main.lights.lightHelpers.length > 0) {
+    if (this.main.needsRender && this.main.lights.lightHelpers.length > 0) {
       this.lightHelpers();
     }
-    if (this.needsRender && (this.camControls != null)) {
+    if (this.main.needsRender && (this.camControls != null)) {
       this.controls();
     }
     this.doAnimations();
@@ -83,7 +81,7 @@ Animate = class Animate {
     camera.position.z = this.radius * Math.cos(MathUtils.degToRad(this.theta));
     camera.lookAt(this.main.scene.position);
     camera.updateMatrixWorld();
-    this.needsRender = true;
+    this.main.needsRender = true;
   }
 
 };

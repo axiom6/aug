@@ -2,7 +2,7 @@
     <div     class="side-pane">
       <div   class="side-sect">
         <div class="side-name">Animate</div>
-        <div class="side-btns" @click="animateOn">Start</div>
+        <div class="side-btns" @click="pub({animate:'start'})">Start</div>
       </div>
       <div   class="side-sect">
         <div class="side-name">Main</div>
@@ -24,18 +24,25 @@
 
 <script type="module">
 
-  import { inject } from 'vue';
+import {inject, onMounted } from 'vue';
 
   let Side = {
 
   setup() {
 
-    const nav = inject('nav');
+    const nav   = inject('nav');
+    const debug = false
 
-    const animateOn = () => {
-      nav.pubVizu({ animate:"on" } ); }
+    const pub  =  (obj) => {
+      nav.pubVizu( obj ); }
 
-    return{ nav, animateOn };}
+    const onVizu =  (obj) => {
+      if(debug) { console.log( "Side.onVisu()", obj ); } }
+
+    onMounted( () => {
+      nav.subscribe('Vizu', 'Dash', (obj) => { onVizu(obj); } ); } )
+
+    return{ nav, pub };}
   }
 
 export default Side;

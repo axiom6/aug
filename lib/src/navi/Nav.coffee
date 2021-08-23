@@ -39,7 +39,7 @@ class Nav extends Mix
 
   # Special publsher for Vizu side bar
   pubVizu:( obj ) ->
-    console.log('Nav.pubVizu()', obj )
+    # console.log('Nav.pubVizu()', obj )
     @stream.publish( 'Vizu',     obj )
     return
 

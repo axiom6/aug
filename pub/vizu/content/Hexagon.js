@@ -32,11 +32,12 @@ Hexagon = class Hexagon {
     obj.valFun = function(hue, sat) {
       return 100 * vis.sin(90 * (1.0 - sat * 0.01));
     };
-    obj.valBase = 100;
+    obj.valBase = 0;
     obj.val = obj.valBase;
-    obj.animateOn = true;
+    obj.animateOn = false;
     obj.animateDebug = true;
     obj.animateCount = 0;
+    obj.colors100 = [];
     obj.colors = [];
     obj.vertices = [];
     obj.normals = [];
@@ -178,12 +179,14 @@ Hexagon = class Hexagon {
   }
 
   addVertex(obj, hue, sat, val, x, y, z) {
-    var index, rgb;
+    var index, rgb, rgq;
     index = this.vertexIndexXYZ(obj, x, y, z);
     if (index === -1) {
       index = this.vertexIndex(obj);
       rgb = vis.rgb([hue, sat, val, "HMIR"]);
+      rgq = vis.rgb([hue, sat, 100, "HMIR"]);
       obj.colors.push(rgb.r * obj.sc, rgb.g * obj.sc, rgb.b * obj.sc);
+      obj.colors100.push(rgq.r * obj.sc, rgq.g * obj.sc, rgq.b * obj.sc);
       obj.vertex.x = x;
       obj.vertex.y = y;
       obj.vertex.z = z;
@@ -222,6 +225,7 @@ Hexagon = class Hexagon {
     obj.sphereColor = new THREE.Color();
     obj.sphereGroup = new THREE.Group();
     obj.sphereGroup.add(obj.sphereMesh);
+    obj.sphereMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
   }
 
   updateSphere(obj, i, x, y, z) {
@@ -230,6 +234,8 @@ Hexagon = class Hexagon {
     j = i * 3;
     obj.sphereMatrix.setPosition(x, y, z);
     obj.sphereColor.setRGB(cs[j], cs[j + 1], cs[j + 2]);
+    obj.sphereMatrix.needsUpdate = true;
+    obj.sphereColor.needsUpdate = true;
     obj.sphereMesh.setMatrixAt(i, obj.sphereMatrix);
     obj.sphereMesh.setColorAt(i, obj.sphereColor);
   }
@@ -264,15 +270,39 @@ Hexagon = class Hexagon {
       color: 0x000000
     });
     wireMesh = new THREE.Mesh(obj.vertexGeometry, wireMat);
+    vertMat.needsUpdate = true;
     geomMesh.add(wireMesh);
     obj.group.add(geomMesh);
   }
 
   updateVertexGeometry(obj) {
+    this.normals(obj);
     obj.vertexGeometry.setAttribute('position', new THREE.Float32BufferAttribute(obj.vertices, 3));
     obj.vertexGeometry.setAttribute('normal', new THREE.Float32BufferAttribute(obj.normals, 3));
     obj.vertexGeometry.setAttribute('uv', new THREE.Float32BufferAttribute(obj.uvs, 2));
     obj.vertexGeometry.setAttribute('color', new THREE.Float32BufferAttribute(obj.colors, 3));
+    obj.vertexGeometry.attributes.position.needsUpdate = true;
+    obj.vertexGeometry.attributes.normal.needsUpdate = true;
+    obj.vertexGeometry.attributes.uv.needsUpdate = true;
+    obj.vertexGeometry.attributes.color.needsUpdate = true;
+    obj.sphereMesh.instanceMatrix.needsUpdate = true;
+    obj.sphereMesh.instanceColor.needsUpdate = true;
+  }
+
+  normals(obj) {
+    var i, j, k, ns, ref, vs;
+    vs = obj.vertices;
+    ns = obj.normals;
+    for (i = k = 0, ref = obj.vertexCount; (0 <= ref ? k < ref : k > ref); i = 0 <= ref ? ++k : --k) {
+      j = i * 3;
+      obj.vertex.x = vs[j];
+      obj.vertex.y = vs[j + 1];
+      obj.vertex.z = vs[j + 2];
+      obj.normal.copy(obj.vertex).normalize();
+      ns[j] = obj.normal.x;
+      ns[j + 1] = obj.normal.y;
+      ns[j + 2] = obj.normal.z;
+    }
   }
 
   drawCircle(radius) {
@@ -337,12 +367,12 @@ Hexagon = class Hexagon {
           results1.push((function() {
             var m, results2;
             results2 = [];
-            for (v = m = 0; m < 100; v = m += 10) {
+            for (v = m = 0; m <= 100; v = m += 10) {
               x = vis.cos(h) * s * p.radius;
               y = vis.sin(h) * s * p.radius;
               z = v * p.radius;
               p.matrix.setPosition(x, y, z);
-              hsv = p.ysv ? [h, s, 100 - v, "HMI"] : [h, s, 100 - v, "HMIR"];
+              hsv = p.ysv ? [h, s, v, "HMI"] : [h, s, v, "HMIR"];
               rgb = vis.rgb(hsv);
               p.color.setRGB(rgb.r * p.sc, rgb.g * p.sc, rgb.b * p.sc);
               p.inMesh.setMatrixAt(p.i, p.matrix);
@@ -364,32 +394,37 @@ Hexagon = class Hexagon {
     return results;
   }
 
-  updateValue(obj, val) {
-    var i, j, k, radius, ref, vs, z;
+  updateValues(obj, val) {
+    var i, j, k, radius, ref, vs;
     vs = obj.vertices;
     radius = obj.hexOrient === 30 ? obj.secRadius * 0.06 : obj.priRadius * 0.05;
     for (i = k = 0, ref = obj.vertexCount; (0 <= ref ? k < ref : k > ref); i = 0 <= ref ? ++k : --k) {
-      j = 3 * i;
-      z = val * radius;
-      vs[j + 2] = z;
+      j = i * 3;
+      this.main.log("Hexagon.updateValues()", {
+        val: val,
+        v1: vs[j + 2],
+        v2: val * radius
+      });
+      vs[j + 2] = val * radius;
       this.updateColor(obj, i, val);
-      this.updateSphere(obj, i, vs[j], vs[j + 1], z);
+      this.updateSphere(obj, i, vs[j], vs[j + 1], vs[j + 2]);
     }
   }
 
   updateColor(obj, i, val) {
-    var cs, j, percent;
+    var cs, j, os, percent;
+    os = obj.colors100;
     cs = obj.colors;
     j = 3 * i;
     percent = val * 0.01;
-    cs[j] = cs[j] * percent;
-    cs[j + 1] = cs[j + 1] * percent;
-    cs[j + 2] = cs[j + 2] * percent;
+    cs[j] = os[j] * percent;
+    cs[j + 1] = os[j + 1] * percent;
+    cs[j + 2] = os[j + 2] * percent;
   }
 
   animateLog(obj) {
-    if (obj.animateDebug) { // and obj.animateCount % 100 is 0
-      console.log("Hexagon.animate()", {
+    if (obj.animateDebug) {
+      this.main.log("Hexagon.animate()", {
         val: obj.val
       });
     }
@@ -403,9 +438,9 @@ Hexagon = class Hexagon {
     if (obj.animateCount % 100 !== 0) {
       return;
     }
-    obj.val -= 10;
-    obj.val = obj.val < 0 ? obj.valBase : obj.val;
-    this.updateValue(obj, obj.val);
+    obj.val += 10;
+    obj.val = obj.val > 100 ? obj.valBase : obj.val;
+    this.updateValues(obj, obj.val);
     this.updateVertexGeometry(obj);
     this.animateLog(obj);
   }

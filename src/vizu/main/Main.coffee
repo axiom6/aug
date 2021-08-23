@@ -20,7 +20,8 @@ class Main
     @debug      = false
     @verifyFlag = false
     @hexagon    = null
-    @animateOn  = false
+    @animateOn   = false
+    @needsRender = true
 
   setup:() ->
     @scene        = new Scene()
@@ -34,7 +35,7 @@ class Main
     @lights       = new Lights(      @ )
     @animate      = new Animate(     @ )
     @verify       = new Verify(      @ )
-
+    @nav.subscribe( 'Vizu', 'Main', (obj) => @onVizu(obj) )
     window.addEventListener( 'resize', @resizeScreen, false )
 
   doApp:( elem, opts, compKey, pageKey ) =>
@@ -53,6 +54,13 @@ class Main
     @screen( elem )
     @setup()
     @animate.animate()
+    return
+
+  onVizu:( obj ) =>
+    if obj.animate?
+      @animateOn   = not @animateOn
+      @needsRender = @animateOn
+    console.log( "Main.onVizu()", obj, @animateOn )
     return
 
   screen:( elem ) ->

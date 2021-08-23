@@ -1,15 +1,14 @@
 
 Debug
-  1. Visu side bar for Opts.json and Animate
-     a. Organize Main.json and Main.coffee
-  2. Hexagon.coffee
+  1. Hexagon.coffee
      a. Get animation working
      b. On/Off
-     b. Oscillate with val sin function
-  3. Fix and the generalize coordinate system and Orthographic camera
+     c. Oscillate with val sin function
+     d. Organize Main.json and Main.coffee
+  2. Fix and the generalize coordinate system and Orthographic camera
      a. Get OrthoXYZ and OrthoISO working with projectionMatrix()
      b Grids yaxis scale off too short by 50%
-  4, Implement troika text
+  3, Implement troika text
   
 Clean Up
   1. Vis
