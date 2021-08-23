@@ -29,14 +29,17 @@ Hexagon = class Hexagon {
     var angle, radius, x, y;
     this.obj = obj;
     vis.smooth = true;
-    obj.valFun = function(hue, sat) {
-      return 100 * vis.sin(90 * (1.0 - sat * 0.01));
-    };
-    obj.valBase = 0;
-    obj.val = obj.valBase;
     obj.animateOn = false;
     obj.animateDebug = true;
     obj.animateCount = 0;
+    obj.valFun = function(hue, sat) {
+      var ang;
+      vis.noop(hue, sat);
+      ang = 90 * sat * hue * 0.0000003 * obj.animateCount;
+      return 50 + 50 * vis.sin(ang);
+    };
+    obj.valBeg = 100;
+    obj.val = obj.valBeg;
     obj.colors100 = [];
     obj.colors = [];
     obj.vertices = [];
@@ -62,9 +65,9 @@ Hexagon = class Hexagon {
     obj.idxOrigin = 0;
     obj.x0 = 0;
     obj.y0 = 0;
-    obj.z0 = 0;
+    obj.z0 = obj.hexOrient === 30 ? obj.secRadius * 6 : obj.priRadius * 5;
     this.initSpheres(obj);
-    obj.idxOrigin = this.addVertex(obj, 0, 0, obj.valFun(0, 0), obj.x0, obj.z0, obj.z0); // Origin
+    obj.idxOrigin = this.addVertex(obj, 0, 0, obj.valBeg, obj.x0, obj.y0, obj.z0); // Origin
     x = obj.priRadius * 4.5;
     y = obj.secRadius;
     angle = vis.atan2(y, x);
@@ -119,7 +122,7 @@ Hexagon = class Hexagon {
 
   // valRadius from @pallettePoints()
   calcVertices(obj, orient, idxCen, radius, angOffset, callHexVertices) {
-    var ang, ang1, hue, hyp, i, k, len, ref, results, sat, val, vs, x, y, z;
+    var ang, ang1, hueSat, i, k, len, ref, results, val, vs, x, y, z;
     i = 1;
     vs = obj.vertices;
     obj.hexIndices[0] = idxCen;
@@ -130,12 +133,10 @@ Hexagon = class Hexagon {
       ang = ang1 + angOffset;
       x = vs[3 * idxCen] + radius * vis.cos(ang);
       y = vs[3 * idxCen + 1] + radius * vis.sin(ang);
-      hue = vis.hueZX(y, x);
-      hyp = vis.hypoth(y, x);
-      sat = this.adjSat(obj, hue, hyp);
-      val = obj.valBase;
       z = vs[3 * idxCen + 2];
-      obj.hexIndices[i] = this.addVertex(obj, hue, sat, val, x, y, z);
+      hueSat = this.hueSat(x, y);
+      val = obj.valBeg;
+      obj.hexIndices[i] = this.addVertex(obj, hueSat.hue, hueSat.sat, val, x, y, z);
       if (callHexVertices) {
         this.hexVertices(obj, obj.hexOrient, obj.hexIndices[i]);
       }
@@ -145,9 +146,8 @@ Hexagon = class Hexagon {
         ang: ang,
         angOffset: angOffset,
         radius: radius,
-        hyp: hyp,
-        hue: hue,
-        sat: sat,
+        hue: hueSat.hue,
+        sat: hueSat.sat,
         val: val,
         x: x,
         y: y,
@@ -158,8 +158,19 @@ Hexagon = class Hexagon {
     return results;
   }
 
-  adjSat(obj, hue, hyp) {
+  adjSat(hue, hyp) {
     return vis.round(hyp * 2.0);
+  }
+
+  hueSat(x, y) {
+    var hue, hyp, sat;
+    hue = vis.hueZX(y, x);
+    hyp = vis.hypoth(y, x);
+    sat = this.adjSat(hue, hyp);
+    return {
+      hue: hue,
+      sat: sat
+    };
   }
 
   hexIndices(obj) {
@@ -394,17 +405,14 @@ Hexagon = class Hexagon {
     return results;
   }
 
-  updateValues(obj, val) {
-    var i, j, k, radius, ref, vs;
+  updateValues(obj) {
+    var hueSat, i, j, k, radius, ref, val, vs;
     vs = obj.vertices;
     radius = obj.hexOrient === 30 ? obj.secRadius * 0.06 : obj.priRadius * 0.05;
     for (i = k = 0, ref = obj.vertexCount; (0 <= ref ? k < ref : k > ref); i = 0 <= ref ? ++k : --k) {
       j = i * 3;
-      this.main.log("Hexagon.updateValues()", {
-        val: val,
-        v1: vs[j + 2],
-        v2: val * radius
-      });
+      hueSat = this.hueSat(vs[j], vs[j + 1]);
+      val = obj.valFun(hueSat.hue, hueSat.sat);
       vs[j + 2] = val * radius;
       this.updateColor(obj, i, val);
       this.updateSphere(obj, i, vs[j], vs[j + 1], vs[j + 2]);
@@ -423,24 +431,19 @@ Hexagon = class Hexagon {
   }
 
   animateLog(obj) {
-    if (obj.animateDebug) {
+    if (obj.animateDebug && obj.animateCount % 100 === 0) {
       this.main.log("Hexagon.animate()", {
-        val: obj.val
+        timer: obj.animateCount
       });
     }
   }
 
-  animate(timer) {
+  animate() {
     var obj;
-    vis.noop(timer);
     obj = this.obj;
     obj.animateCount++;
-    if (obj.animateCount % 100 !== 0) {
-      return;
-    }
-    obj.val += 10;
-    obj.val = obj.val > 100 ? obj.valBase : obj.val;
-    this.updateValues(obj, obj.val);
+    // return if obj.animateCount % 100 isnt 0
+    this.updateValues(obj);
     this.updateVertexGeometry(obj);
     this.animateLog(obj);
   }

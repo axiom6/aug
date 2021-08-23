@@ -43,19 +43,16 @@ Animate = class Animate {
     if (this.main.needsRender && (this.camControls != null)) {
       this.controls();
     }
-    this.doAnimations();
+    if (this.main.animateOn) {
+      this.doAnimations();
+    }
     this.render();
     requestAnimationFrame(this.animate);
   }
 
   doAnimations() {
-    var timer;
-    if (!this.main.animateOn) {
-      return;
-    }
     if (this.main.hexagon != null) {
-      timer = 0.0001 * Date.now();
-      this.main.hexagon.animate(timer);
+      this.main.hexagon.animate();
     }
   }
 

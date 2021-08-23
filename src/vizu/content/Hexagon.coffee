@@ -21,12 +21,15 @@ class Hexagon
   toGeom:( obj ) ->
     @obj             = obj
     vis.smooth       = true
-    obj.valFun       = ( hue, sat ) -> 100 * vis.sin( 90 * (1.0-sat*0.01) )
-    obj.valBase      = 0
-    obj.val          = obj.valBase
     obj.animateOn    = false
     obj.animateDebug = true
     obj.animateCount = 0
+    obj.valFun       = ( hue, sat ) ->
+      vis.noop( hue, sat )
+      ang = 90 * sat * hue * 0.0000003 * obj.animateCount
+      50 + 50 * vis.sin(ang)
+    obj.valBeg       = 100
+    obj.val          = obj.valBeg
     obj.colors100    = []
     obj.colors       = []
     obj.vertices     = []
@@ -52,9 +55,9 @@ class Hexagon
     obj.idxOrigin    = 0
     obj.x0           = 0
     obj.y0           = 0
-    obj.z0           = 0
+    obj.z0           = if obj.hexOrient is 30 then obj.secRadius*6 else obj.priRadius*5
     @initSpheres( obj )
-    obj.idxOrigin = @addVertex( obj, 0, 0, obj.valFun(0,0), obj.x0, obj.z0, obj.z0 )  # Origin
+    obj.idxOrigin = @addVertex( obj, 0, 0, obj.valBeg, obj.x0, obj.y0, obj.z0 )  # Origin
     x = obj.priRadius*4.5
     y = obj.secRadius
     angle  = vis.atan2(  y, x )
@@ -107,21 +110,25 @@ class Hexagon
       ang = ang1 + angOffset
       x   = vs[3*idxCen  ] + radius * vis.cos(ang)
       y   = vs[3*idxCen+1] + radius * vis.sin(ang)
-      hue = vis.hueZX(  y, x )
-      hyp = vis.hypoth( y, x )
-      sat = @adjSat( obj, hue, hyp )
-      val = obj.valBase
-      z   = vs[3*idxCen+2] 
-      obj.hexIndices[i] = @addVertex( obj, hue, sat, val, x, y, z )
+      z   = vs[3*idxCen+2]
+      hueSat = @hueSat( x, y )
+      val = obj.valBeg
+      obj.hexIndices[i] = @addVertex( obj, hueSat.hue, hueSat.sat, val, x, y, z )
       if callHexVertices
         @hexVertices( obj, obj.hexOrient, obj.hexIndices[i] )
       @main.log( "Hexagon.calcVertices", { idx:obj.hexIndices[i],
       ang1:ang1, ang:ang, angOffset:angOffset, radius:radius,
-      hyp:hyp, hue:hue, sat:sat, val:val, x:x, y:y, z:z } )
+      hue:hueSat.hue, sat:hueSat.sat, val:val, x:x, y:y, z:z } )
       i++
 
-  adjSat:( obj, hue, hyp ) ->
+  adjSat:( hue, hyp ) ->
     vis.round( hyp * 2.0 )
+
+  hueSat:( x, y ) ->
+    hue = vis.hueZX(  y, x )
+    hyp = vis.hypoth( y, x )
+    sat = @adjSat( hue, hyp )
+    { hue:hue, sat:sat }
       
   hexIndices:(  obj ) ->
     a = obj.hexIndices
@@ -216,8 +223,8 @@ class Hexagon
     obj.vertexGeometry.attributes.normal.needsUpdate   = true
     obj.vertexGeometry.attributes.uv.needsUpdate       = true
     obj.vertexGeometry.attributes.color.needsUpdate    = true
-    obj.sphereMesh.instanceMatrix.needsUpdate           = true
-    obj.sphereMesh.instanceColor.needsUpdate            = true
+    obj.sphereMesh.instanceMatrix.needsUpdate          = true
+    obj.sphereMesh.instanceColor.needsUpdate           = true
     return
 
   normals:( obj ) ->
@@ -283,12 +290,13 @@ class Hexagon
           @main.log( 'Hexagon.pallettes()', { h:h, s:s, v:v, rgb:rgb } )
           p.i++
 
-  updateValues:( obj, val ) ->
+  updateValues:( obj ) ->
     vs     = obj.vertices
     radius = if obj.hexOrient is 30 then obj.secRadius*0.06 else obj.priRadius*0.05
     for i in [0...obj.vertexCount]
       j = i * 3
-      @main.log( "Hexagon.updateValues()", { val:val, v1:vs[j+2], v2:val*radius } )
+      hueSat  = @hueSat( vs[j], vs[j+1] )
+      val     = obj.valFun( hueSat.hue, hueSat.sat )
       vs[j+2] = val * radius
       @updateColor(  obj, i, val )
       @updateSphere( obj, i, vs[j], vs[j+1], vs[j+2] )
@@ -305,21 +313,17 @@ class Hexagon
     return
 
   animateLog:( obj ) ->
-    if obj.animateDebug 
-      @main.log( "Hexagon.animate()", { val:obj.val } )
+    if obj.animateDebug and obj.animateCount % 100 is 0
+      @main.log( "Hexagon.animate()", { timer:obj.animateCount } )
     return
 
-  animate:( timer ) =>
-    vis.noop( timer )
-    obj      = @obj
+  animate:() =>
+    obj   = @obj
     obj.animateCount++
-    return if obj.animateCount % 100 isnt 0
-    obj.val += 10
-    obj.val  = if obj.val > 100 then obj.valBase else obj.val
-    @updateValues( obj, obj.val )
+    # return if obj.animateCount % 100 isnt 0
+    @updateValues( obj )
     @updateVertexGeometry( obj )
     @animateLog( obj )
-
     return
 
 export default Hexagon
