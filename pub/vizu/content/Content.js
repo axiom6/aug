@@ -373,6 +373,21 @@ Content = class Content {
     return point;
   }
 
+  addLine(x1, y1, z1, x2, y2, z2, color, group, geometry, inMesh) {
+    var line, material, points;
+    points = [];
+    points.push(new Vector3(x1, y1, z1));
+    points.push(new Vector3(x2, y2, z2));
+    geometry = new BufferGeometry().setFromPoints(points);
+    material = new LineBasicMaterial({
+      color: color
+    });
+    //aterial = new MeshStandardMaterial( { color:color, emissive:0x0a0a0a, side:DoubleSide } )
+    line = new Line(geometry, material);
+    line.receiveShadow = true;
+    group.add(line);
+  }
+
   drawLine(x1, y1, z1, x2, y2, z2, color, group) {
     var geometry, line, material, points;
     points = [];

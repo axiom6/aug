@@ -234,6 +234,18 @@ class Content
     @main.addToScene( point )
     point
 
+  addLine:( x1, y1, z1, x2, y2, z2, color, group, geometry, inMesh ) ->
+    points = [];
+    points.push( new Vector3( x1, y1, z1 ) )
+    points.push( new Vector3( x2, y2, z2 ) )
+    geometry = new BufferGeometry().setFromPoints( points )
+    material = new LineBasicMaterial(    { color:color } )
+    #aterial = new MeshStandardMaterial( { color:color, emissive:0x0a0a0a, side:DoubleSide } )
+    line     = new Line( geometry, material )
+    line.receiveShadow = true
+    group.add( line )
+    return
+
   drawLine:( x1, y1, z1, x2, y2, z2, color, group ) ->
     points = [];
     points.push( new Vector3( x1, y1, z1 ) )
@@ -249,7 +261,5 @@ class Content
   dispose:() ->
     BufferGeometry.dispose()
     Material.dispose()
-
-
 
 export default Content

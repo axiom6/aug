@@ -423,14 +423,6 @@
       "oAP" : "\/dist",
       "oF" : 0
     },
-    "\/firebase-debug.log" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/firebase-debug.log",
-      "oF" : 0
-    },
     "\/firebase.json" : {
       "ft" : 524288,
       "oA" : 1,
@@ -4647,6 +4639,17 @@
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/vizu\/coords\/XYGrid.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/src\/vizu\/coords\/XYGridInstance.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/vizu\/coords\/XYGridInstance.js",
       "oF" : 0,
       "oS" : 1,
       "sC" : 0,

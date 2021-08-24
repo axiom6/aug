@@ -1,7 +1,8 @@
 
 Debug
-  1. Grid and coordinate system
-     a. Put Grids into an instance mesh
+
+  1. Put Grids into an instance mesh
+  2. Put Troika into Cube and Cube into Main
   2. Integrate Side.vue, Main.json and Main.coffee
   
 Clean Up
@@ -14,6 +15,7 @@ Clean Up
   3. Clean up zzz
   4. Improve dsipose()
      a. Determine if onBeforeUnmount / mix.removeElem() are needed
+  5. Grid and coordinate system almost there
 
 Features One
   1. Test
