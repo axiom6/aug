@@ -13,7 +13,7 @@
     "docs": "docco lib/src/test/Type.coffee -o lib/doc -l classic -c lib/doc/rdark.css",
     "augm": "node src/augm/appl/augm.config.js && firebase use augm",
     "muse": "node src/muse/appl/muse.config.js && firebase use muse",
-    "vizu": "node src/vizu/appl/vizu.config.js",
+    "vizu": "node src/vizu/appl/vizu.config.js && firebase use vizu",
     "jitt": "node src/jitt/appl/jitt.config.js && firebase use jitt",
     "data": "node src/data/appl/data.config.js && firebase use data",
     "host": "firebase deploy",

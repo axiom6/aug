@@ -1,8 +1,7 @@
 
 Debug
-  1. Cube into Main
-  2. Integrate Side.vue, Main.json and Main.coffee
-  3. Dirs with Navd.vue
+  1. Integrate Side.vue, Main.json and Main.coffee
+  2. Dirs with Navd.vue
 
 Clean Up
   1. Vis

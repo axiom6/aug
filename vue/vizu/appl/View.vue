@@ -34,7 +34,7 @@
 
       const mains    = ["Hexa","Rgbs","Grid"];
       let   module   = 'Home';
-      let   debug    = true;
+      let   debug    = false;
 
       const show = ( moduleArg ) => {
         let isShow = module===moduleArg;

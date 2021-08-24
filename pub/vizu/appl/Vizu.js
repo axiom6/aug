@@ -127,7 +127,7 @@ Vizu = (function() {
 
     static preloadTroikaFont() {
       return preloadFont({
-        font: "../../../lib/css/font/roboto/Roboto-Regular.ttf",
+        font: "assets/Roboto-Regular.ttf",
         characters: "abcdefghijklmnopqrstuvwxyz0123456789"
       }, () => {
         return console.log("Roboto loaded for Troika");

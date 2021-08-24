@@ -66,6 +66,7 @@ CubeTh = class CubeTh {
     this.build = build1;
     this.parElem = parElem1;
     this.guiFlag = guiFlag1;
+    this.needsRender = true;
     this.stream = null; // Set by subscribe()
     elems = this.createElems(this.parElem, this.guiFlag);
     this.ikwElem = elems[0];
@@ -93,6 +94,9 @@ CubeTh = class CubeTh {
       [this.gui, this.act] = this.ui(this.group, this.guiElem);
     }
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls.addEventListener('change', () => {
+      return this.needsRender = true;
+    });
     window.addEventListener('resize', this.resizeScreen, false);
   }
 
@@ -752,7 +756,10 @@ CubeTh = class CubeTh {
   }
 
   renderScene() {
-    this.renderer.render(this.scene, this.camera);
+    if (this.needsRender) {
+      this.renderer.render(this.scene, this.camera);
+      this.needsRender = false;
+    }
   }
 
   geom() {

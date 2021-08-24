@@ -31,6 +31,7 @@ class CubeTh
 
 
   constructor:( @build, @parElem, @guiFlag ) ->
+    @needsRender = true
     @stream   = null # Set by subscribe()
     elems     = @createElems( @parElem, @guiFlag )
     @ikwElem  = elems[0]
@@ -59,6 +60,7 @@ class CubeTh
     [@gui,@act] = @ui( @group, @guiElem ) if @guiFlag
 
     @controls = new OrbitControls( @camera, @renderer.domElement )
+    @controls.addEventListener( 'change', () => @needsRender = true )
     window.addEventListener( 'resize', @resizeScreen, false )
 
   subscribe:( stream ) ->
@@ -369,7 +371,9 @@ class CubeTh
     return
 
   renderScene:() ->
-    @renderer.render( @scene, @camera )
+    if @needsRender
+       @renderer.render( @scene, @camera )
+       @needsRender = false
     return
 
   geom:() ->

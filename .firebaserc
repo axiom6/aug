@@ -1,6 +1,7 @@
 {
   "projects": {
-    "default": "muse-ad352",
+    "default": "augm-visual",
+    "vizu": "vizu-muse",
     "jitt": "jitter-48413",
     "muse": "muse-ad352",
     "augm": "augm-visual",

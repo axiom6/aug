@@ -117,9 +117,10 @@ class Vizu
     if path is false then {}
     return `import( /* @vite-ignore */ path )`
 
+  # font: "../../../lib/css/font/roboto/Roboto-Regular.ttf"
   Vizu.preloadTroikaFont = () ->
     preloadFont( {
-      font: "../../../lib/css/font/roboto/Roboto-Regular.ttf"
+      font: "assets/Roboto-Regular.ttf"
       characters: "abcdefghijklmnopqrstuvwxyz0123456789" },
       () => console.log("Roboto loaded for Troika") )
 
