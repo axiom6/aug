@@ -38,7 +38,7 @@
 
 <style lang="less">
   
-  @import '../../../css/themes/theme.less';
+  @import '../../css/themes/theme.less';
   
   @menuFS:@themeFS;
   @menu-back:#222;

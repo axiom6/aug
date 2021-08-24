@@ -26,7 +26,7 @@
          create();  } )
 
       onBeforeUnmount( () => {
-        nav.removeElem( elem['value'], nextTick ) ; } )
+        nav.removeElem( "draw/Pane.vue", elem['value'], nextTick ) ; } )
 
       return { elem } }
   }

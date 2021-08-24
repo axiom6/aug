@@ -19,7 +19,7 @@ export default Result;
 
 <style lang="less">
 
-@import '../../../css/themes/theme.less';
+@import '../../css/themes/theme.less';
 
 @resultFS:@themeFS;
 

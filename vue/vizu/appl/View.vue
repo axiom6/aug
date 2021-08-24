@@ -34,7 +34,7 @@
 
       const mains    = ["Hexa","Rgbs","Grid"];
       let   module   = 'Home';
-      let   debug    = false;
+      let   debug    = true;
 
       const show = ( moduleArg ) => {
         let isShow = module===moduleArg;
@@ -61,7 +61,7 @@
 
 <style lang="less">
 
-  @import '../../../css/themes/theme.less';
+  @import '../../../lib/css/themes/theme.less';
 
   .view-pane { position:absolute; left: 0;  top:0;  width:100%; height:100%; display:grid; color:@theme-fore; }
   

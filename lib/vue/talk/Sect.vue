@@ -72,7 +72,7 @@
     
     <style lang="less">
       
-      @import '../../../css/themes/theme.less';
+      @import '../../css/themes/theme.less';
       
       @sectFS:2.0*@themeFS;  //  border-radius:0.5*@sectFS;
       

@@ -59,7 +59,7 @@
 
 <style lang="less">
   
-  @import '../../../css/themes/theme.less';
+  @import '../../../lib/css/themes/theme.less';
   
   .page { position:absolute; left:0; top:@theme-tabs-height; width:100%; height:100%-@theme-tabs-height;
           background-color:@theme-back; display:grid;

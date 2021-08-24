@@ -43,7 +43,7 @@
 
 <style lang="less">
   
-  @import '../../../css/themes/theme.less';
+  @import '../../../lib/css/themes/theme.less';
   
   @portrait: "../../assets/portrait.png";
   @landscape:"../../assets/landscape.png";

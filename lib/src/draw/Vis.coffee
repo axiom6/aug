@@ -1,7 +1,6 @@
 
 import Type     from '../test/Type.js'
 import FontAwe  from './FontAwe.js'
-import chroma   from 'chroma-js'
 
 class Vis extends Type
 
@@ -10,7 +9,6 @@ class Vis extends Type
     @skipReady   = false
     @time        = 0
     @uniqueIdExt = ''
-    @chroma      = chroma
     @debug       = false
     @smooth      = true
     @distribution10s = [0, 5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100]
@@ -158,22 +156,12 @@ class Vis extends Type
       when 'HSV', 'HSVR' then @rgbHsv( h, s, v )
       when 'HMI', 'HMIR' then @rgbHmi( h, s, v )
       when 'HWV', 'HWVR' then @rgbHwv( h, s, v )
-      when 'HSC', 'HSCR' then @rgbHsc( h, s, v ) # HSC means use chroma for HSV
       when 'HSI', 'HSIR' then @rgbHsi( h, s, v )
       when 'HCI', 'HCIR' then @rgbHci( h, s, v ) # HCI is a more saturated HSI
       when 'HSL', 'HSLR' then @rgbHsl( h, s, v )
       else
         console.log( "Vis.rgbCyl() #{type} unknown" )
         @rbgHsv( h, s, v )
-
-  rgbHsc:( H, S, V ) ->
-    h = H
-    c = chroma.hsv( h, S*0.01, V*0.01 )
-    a = c._rgb
-    rgb = { r:a[0], g:a[1], b:a[2], a:1 }
-    rgb = @roundRGB( rgb, 1.0 )
-    console.log( "Vis.rgbHsc()", rgb, h, S, V ) if @debug
-    rgb
 
   # toRygb=true is 'ysc' while
   ###

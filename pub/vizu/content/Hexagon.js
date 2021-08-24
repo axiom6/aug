@@ -33,12 +33,16 @@ Hexagon = class Hexagon {
     obj.animateDebug = true;
     obj.animateCount = 0;
     obj.animateFactor = 0.01;
-    obj.oscilate = 12;
-    obj.valFun = function(hue, sat) {
+    obj.oscilate = 4;
+    obj.valSin = function(hue, sat) {
+      return 50 + 50 * Math.sin(obj.oscilate * sat + obj.animateCount * obj.animateFactor);
+    };
+    obj.valSinCos = function(hue, sat) {
       var anim;
       anim = obj.animateCount * obj.animateFactor;
       return 50 + 25 * Math.sin(obj.oscilate * hue + anim) + 25 * Math.sin(obj.oscilate * sat + anim);
     };
+    obj.valFun = obj.valSin;
     obj.valBeg = 100;
     obj.val = obj.valBeg;
     obj.colors100 = [];

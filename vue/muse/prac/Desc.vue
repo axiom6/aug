@@ -62,7 +62,7 @@
 
 <style lang="less">
   
-  @import '../../../css/themes/theme.less';
+  @import '../../../lib/css/themes/theme.less';
   
   @descFS:@themeFS;
   

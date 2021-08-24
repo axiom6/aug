@@ -47,7 +47,7 @@ import { ref } from 'vue';
 </script>
 
 <style lang="less">
-@import '../../../css/themes/theme.less';
+@import '../../../lib/css/themes/theme.less';
 @dndFS:@themeFS*2.0;
 .dnd-pane { position:absolute; left:0; top:0; width:100%; height:100%;
   color:@theme-fore; background-color:@theme-back; font-size:@dndFS;

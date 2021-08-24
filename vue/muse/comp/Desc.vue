@@ -27,7 +27,7 @@
 
 <style lang="less">
   
-  @import '../../../css/themes/theme.less';
+  @import '../../../lib/css/themes/theme.less';
   
   @descFS:@themeFS;
   @summFS:1.4*@descFS;

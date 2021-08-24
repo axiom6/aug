@@ -112,7 +112,7 @@ export default Comp;
 
 <style lang="less">
 
-@import '../../../css/themes/theme.less';
+@import '../../../lib/css/themes/theme.less';
 
 .comp-grid3x3() { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:1fr 1fr 1fr;
   grid-template-areas: "nw north ne" "west cen east" "sw south se"; }

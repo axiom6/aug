@@ -21,7 +21,7 @@ export default Test;
 
 <style lang="less">
 
-@import '../../../css/themes/theme.less';
+@import '../../css/themes/theme.less';
 
 @testFS:@themeFS;
 

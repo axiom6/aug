@@ -92,7 +92,7 @@
 
 <style lang="less">
   
-  @import '../../../css/themes/theme.less';
+  @import '../../css/themes/theme.less';
 
   @tocsFS:2.2*@themeFS;
   @tocs-back-comp:#333;

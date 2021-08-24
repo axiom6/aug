@@ -54,7 +54,7 @@ export default MathND;
 
 <style lang="less">
   
-  @import '../../../css/themes/theme.less';
+  @import '../../../lib/css/themes/theme.less';
   
   @mathFS:@themeFS;
 

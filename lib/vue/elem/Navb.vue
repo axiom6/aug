@@ -29,7 +29,7 @@ export default Navb;
 
 <style lang="less">
 
-  @import '../../../css/themes/theme.less';
+  @import '../../css/themes/theme.less';
 
   @navbFS:2.25*@themeFS;
 

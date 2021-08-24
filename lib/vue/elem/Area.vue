@@ -44,7 +44,7 @@
 
 <style scoped lang="less">
   
-  @import '../../../css/themes/theme.less';
+  @import '../../css/themes/theme.less';
 
   @itemFS:1.0*@themeFS;
   

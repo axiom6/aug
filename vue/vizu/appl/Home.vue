@@ -46,7 +46,7 @@
 
   @import '../../../lib/css/font/roboto/Roboto.css';
   @import '../../../node_modules/@fortawesome/fontawesome-free/css/all.css';
-  @import '../../../css/themes/theme.less';
+  @import '../../../lib/css/themes/theme.less';
   
   @homeFS:@themeFS;
   

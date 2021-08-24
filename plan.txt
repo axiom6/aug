@@ -1,21 +1,19 @@
 
 Debug
-
-  1. Put Grids into an instance mesh
-  2. Put Troika into Cube and Cube into Main
+  1. Cube into Main
   2. Integrate Side.vue, Main.json and Main.coffee
-  
+  3. Dirs with Navd.vue
+
 Clean Up
   1. Vis
-     a. Cleanup
-     b. Vis.str hex output wrong
-     c. Fix padded and move for and text color
+     a. Vis.str hex output wrong
+     b. Fix padded and move for and text color
   2, Hexagon
-     a. Keep Improve sin wave functions
-  3. Clean up zzz
-  4. Improve dsipose()
+     a. Experiment more with sin wave functions
+  3. Improve dispose()
      a. Determine if onBeforeUnmount / mix.removeElem() are needed
-  5. Grid and coordinate system almost there
+  4. Grid and coordinate system almost there
+  5. Learn how to instance Grids Lines
 
 Features One
   1. Test

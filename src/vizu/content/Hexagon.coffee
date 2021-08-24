@@ -25,10 +25,13 @@ class Hexagon
     obj.animateDebug  = true
     obj.animateCount  = 0
     obj.animateFactor = 0.01
-    obj.oscilate      = 12
-    obj.valFun       = ( hue, sat ) ->
+    obj.oscilate      = 4
+    obj.valSin        = ( hue, sat ) ->
+      50 + 50*Math.sin( obj.oscilate*sat + obj.animateCount * obj.animateFactor )
+    obj.valSinCos     = ( hue, sat ) ->
       anim = obj.animateCount * obj.animateFactor
       50 + 25*Math.sin( obj.oscilate*hue + anim ) + 25*Math.sin( obj.oscilate*sat + anim )
+    obj.valFun       = obj.valSin
     obj.valBeg       = 100
     obj.val          = obj.valBeg
     obj.colors100    = []

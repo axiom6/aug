@@ -78,7 +78,7 @@
 
 <style lang="less">
   
-  @import '../../../css/themes/theme.less';
+  @import '../../../lib/css/themes/theme.less';
   
   @ikwFS:1.3*@themeFS;
   @defFS:1.7*@themeFS;

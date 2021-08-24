@@ -53,7 +53,7 @@ import {inject, ref, onMounted, nextTick, onBeforeUnmount } from 'vue';
 
 <style lang="less">
   
-  @import '../../../css/themes/theme.less';
+  @import '../../../lib/css/themes/theme.less';
 
   .flavor-pane { position:absolute; left:0; top:0; width:100%; height:100%;
     background-color:@theme-back; color:@theme-fore;

@@ -23,7 +23,7 @@
 
 <style lang="less">
   
-  @import '../../../css/themes/theme.less';
+  @import '../../../lib/css/themes/theme.less';
   
   html { font-size:calc(1em + 1vmin); }
   body { background-color:@theme-back; margin:0; }

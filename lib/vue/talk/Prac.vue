@@ -35,7 +35,7 @@
 
 <style lang="less">
   
-  @import '../../../css/themes/theme.less';
+  @import '../../css/themes/theme.less';
 
   @pracFS:2.0*@themeFS;
   
