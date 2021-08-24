@@ -201,10 +201,11 @@ class Vis extends Type
     rgb
 
   rgbHmi:( h, S, I ) ->
-    smooth = if @smooth then @hillEq( S ) else S
-    sat    = smooth * 0.01
-    desat  = 1 - sat
-    bright = I * 0.01
+    smoothSat = if @smooth then @hillEq( S ) else S
+    smoothVal = if @smooth then @hillEr( I ) else I
+    sat       = smoothSat * 0.01
+    val       = smoothVal * 0.01
+    desat     = 1 - sat
     r = 0
     g = 0
     b = 0
@@ -241,7 +242,7 @@ class Vis extends Type
       r = pri( fwd, fwd )
       b = sec( bak, fwd )
       g = desat
-    rgb = @roundRGB( { r:r, g:g, b:b }, 255 * bright )
+    rgb = @roundRGB( { r:r, g:g, b:b }, 255 * val )
     console.log( "Vis.rgbHmi()", { rgb:rgb, h:h, S:smooth, I:I } ) if @debug
     rgb
 
@@ -342,6 +343,10 @@ class Vis extends Type
   hillEq:( x, vmax=120.0, vmid=50.0, n=1.2 ) ->
     xn = Math.pow( x, n )
     vmax * xn / ( vmid + xn )
+
+  hillEr:( x, vmax=120.0, vmid=50.0, n=1.2 ) ->
+    xn = Math.pow( 100-x, n )
+    100-vmax * xn / ( vmid + xn )
 
   smoothSat:( sat ) ->
     sat * @sigmoidalUni( sat )

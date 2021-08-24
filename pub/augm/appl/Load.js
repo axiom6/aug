@@ -1,65 +1,37 @@
 var Load;
 
-import GeomND from '../../../vue/augm/geom/GeomND.vue';
-
-import MathND from '../../../vue/augm/math/MathND.vue';
-
-import Draw from '../../../vue/augm/draw/Draw.vue';
-
-import Hues from '../../../vue/augm/mbox/Hues.vue';
-
-import Tools from '../../../vue/augm/tool/Tools.vue';
-
-import Cube from '../../../vue/augm/cube/Cube.vue';
-
-import Wood from '../../../vue/augm/wood/Wood.vue';
-
-import Home from '../../../vue/augm/appl/Augm.vue';
-
 Load = class Load {
-  constructor() {
-    this.addScript("/assets/mathbox-bundle.js");
-  }
+  constructor() {}
 
   load(name) {
     switch (name) {
       case 'GeomND':
-        return GeomND;
+        return this.lazy('../../../vue/augm/geom/GeomND.vue');
       case 'MathND':
-        return MathND;
+        return this.lazy('../../../vue/augm/math/MathND.vue');
       case 'Draw':
-        return Draw;
+        return this.lazy('../../../vue/augm/draw/Draw.vue');
       case 'Hues':
-        return Hues;
+        return this.lazy('../../../vue/augm/mbox/Hues.vue');
       case 'Tools':
-        return Tools;
+        return this.lazy('../../../vue/augm/tool/Tools.vue');
       case 'Cube':
-        return Cube;
+        return this.lazy('../../../vue/augm/cube/Cube.vue');
       case 'Wood':
-        return Wood;
+        return this.lazy('../../../vue/augm/wood/Wood.vue');
       default:
-        return Home;
+        return this.lazy('../../../vue/augm/appl/Augm.vue');
     }
   }
 
-  addScript(src) {
-    var i, len, script, scripts, scriptx;
-    scripts = document.getElementsByTagName('script');
-    for (i = 0, len = scripts.length; i < len; i++) {
-      scriptx = scripts[i];
-      // console.log( 'Mods.addScript() scriptx src', scriptx.src )
-      if (scriptx.src.includes(src)) {
-        return;
-      }
-    }
-    // console.log( 'Mods.addScript() adding', src )
-    script = document.createElement('script');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
+  lazy(path) {
+    return function() {
+      return import( /* @vite-ignore */ path );
+    };
   }
 
 };
 
 export default Load;
 
-//# sourceMappingURL=Mods.js.map
+//# sourceMappingURL=Lazy.js.map

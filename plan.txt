@@ -1,38 +1,32 @@
 
 Debug
-  1. Integrate Side.vue, Main.json and Main.coffee
-  2. Dirs with Navd.vue
 
-Clean Up
-  1. Vis
-     a. Vis.str hex output wrong
-     b. Fix padded and move for and text color
-  2, Hexagon
+Features
+  1, Hexagon / Vis
      a. Experiment more with sin wave functions
-  3. Improve dispose()
+     b. Vis red and blue color palattes need to be brighter
+     c. Vis.str hex output wrong
+     d. Fix padded and move for and text color
+  2. Improve dispose()
      a. Determine if onBeforeUnmount / mix.removeElem() are needed
-  4. Grid and coordinate system almost there
-  5. Learn how to instance Grids Lines
-
-Features One
-  1. Test
+  3. Grid and coordinate system almost there
+  4. Learn how to instance Grids Lines
+  5. Integrate Side.vue, Main.json and Main.coffee
+  6, Dirs with Navd.vue
+  7. Test
      a. Functional Test
      b. Push buttons in Replay to Test swithes to filter Test output
      c. Ability to run a complete CI test suite
      d. Archiving
-        a. Test Mongo.coffee
-     e. Test types
-  2. Doc
-  3. Consider a Main Base class for Augm Muse Visu Jitt Data
-  4. Consider having Cube initialized by Main
+     e. Test Mongo.coffee
+     f. Test types
+  8. Doc
+  9. Create Trip.vue with Trip.coffee
 
 Debug Two
-  0. elem undefined from mix.removeElem(...) called in Flavor.vue
-  1. Create Trip.vue with Trip.coffee
-  2, Remove some of the junk added to Vis
-  3. Look into cicular JSON bug in Tester.reviewsLocal()
-  4. Look into preventing Type.toStr() to Type.toStrObject() infinite recursions
-  5. toStr(bigint)
+  1. Look into cicular JSON bug in Tester.reviewsLocal()
+  2. Look into preventing Type.toStr() to Type.toStrObject() infinite recursions
+  3. toStr(bigint)
 
 Warnings
   1. [Violation] Added non-passive event listener to a scroll-blocking 'wheel' event.
