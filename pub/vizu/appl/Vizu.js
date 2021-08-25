@@ -4,6 +4,8 @@ import Access from '../../../lib/pub/util/Access.js';
 
 import Stream from '../../../lib/pub/util/Stream.js';
 
+import Cache from '../../../lib/pub/util/Cache.js';
+
 import Nav from '../../../lib/pub/navi/Nav.js';
 
 import Mix from '../../../lib/pub/navi/Mix.js';
@@ -50,7 +52,7 @@ Vizu = (function() {
   class Vizu {
     static start(href) {
       var key, ref, val;
-      console.log("Viz.start()", href);
+      console.log("Viz.start()", href, Vizu.mode);
       Vizu.href = href;
       Vizu.addToHead();
       ref = Vizu.Batch;
@@ -93,10 +95,11 @@ Vizu = (function() {
       Vizu.vis = vis;
       Vizu.main = new Main(Vizu.stream, Vizu.nav);
       Vizu.tester = tester;
+      if (Vizu.mode === 'production') {
+        Vizu.cache = new Cache(Vizu.stream);
+      }
       Vizu.preloadTroikaFont();
       try {
-        //izu.mix.opts = Vizu.Batch.Main.data # JSON.parse( batch.Main.data )
-        //Viz.cache  = new Cache( Viz.stream )
         Vizu.vue3();
       } catch (error1) {
         error = error1;
@@ -139,6 +142,8 @@ Vizu = (function() {
   Vizu.appName = 'Vizu';
 
   Vizu.debug = true;
+
+  Vizu.mode = import.meta.env.MODE;
 
   Vizu.Batch = {
     Main: {

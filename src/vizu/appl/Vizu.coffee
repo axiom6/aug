@@ -1,6 +1,7 @@
 
 import Access     from '../../../lib/pub/util/Access.js'
 import Stream     from '../../../lib/pub/util/Stream.js'
+import Cache      from '../../../lib/pub/util/Cache.js'
 import Nav        from '../../../lib/pub/navi/Nav.js'
 import Mix        from '../../../lib/pub/navi/Mix.js'
 import { vis }    from '../../../lib/pub/draw/Vis.js'
@@ -25,6 +26,7 @@ class Vizu
 
   Vizu.appName = 'Vizu'
   Vizu.debug   = true
+  Vizu.mode    = `import.meta.env.MODE`
 
   Vizu.Batch = {
     Main:   { url:'opts/Main.json',     data:MainJson, refine:false }
@@ -54,7 +56,7 @@ class Vizu
   # Called by muse.html to kick things off
   # 1. Read in all the JSON config files in Viz.Batch. Call Viz.init() when complete.
   Vizu.start = (href) ->
-    console.log( "Viz.start()", href )
+    console.log( "Viz.start()", href, Vizu.mode )
     Vizu.href = href
     Vizu.addToHead()
     for key, val of Vizu.Batch when val.refine? and val.refine
@@ -91,9 +93,8 @@ class Vizu
     Vizu.vis      = vis
     Vizu.main     = new Main( Vizu.stream, Vizu.nav )
     Vizu.tester   = tester
+    Vizu.cache    = new Cache( Vizu.stream )  if Vizu.mode is 'production'
     Vizu.preloadTroikaFont()
-    #izu.mix.opts = Vizu.Batch.Main.data # JSON.parse( batch.Main.data )
-    #Viz.cache  = new Cache( Viz.stream )
     try
       Vizu.vue3()
     catch error

@@ -5,7 +5,7 @@ import Build      from '../../../lib/pub/util/Build.js'
 import Stream     from '../../../lib/pub/util/Stream.js'
 import Nav        from '../../../lib/pub/navi/Nav.js'
 import Touch      from '../../../lib/pub/navi/Touch.js'
-#mport Cache      from '../../../lib/pub/util/Cache.js'
+import Cache      from '../../../lib/pub/util/Cache.js'
 import Mix        from '../../../lib/pub/navi/Mix.js'
 
 import { createApp }    from 'vue'    #
@@ -28,6 +28,7 @@ import TestJson from '../../../data/muse/Test.json'
 class Muse
 
   Muse.appName = 'Muse'
+  Muse.mode    = `import.meta.env.MODE`
 
   # Initialization is accomplished in 3 steps:
   # 1. Read in all the JSON config files in Muse.Batch. Call Muse.init() when complete.
@@ -39,7 +40,7 @@ class Muse
   # 1. Read in all the JSON config files in Muse.Batch. Call Muse.init() when complete.
   Muse.debug = false
   Muse.start = (href) ->
-    console.log( "Muse.start()", href )
+    console.log( "Muse.start()", href, Muse.mode )
     Muse.href = href
     Muse.addToHead()
     for key, val of Muse.Batch when val.refine? and val.refine
@@ -102,7 +103,7 @@ class Muse
     Muse.nav    = new Nav(   Muse, Muse.stream, Muse.komps, Muse.pages, false )
     Muse.touch  = new Touch( Muse.stream, Muse.nav )
     Muse.build  = new Build( Muse.Batch, Muse.komps )
-    #use.cache  = new Cache( Muse.stream )
+    Muse.cache  = new Cache( Muse.stream ) if Muse.mode is 'production'
     tester.setOptions( { testing:true, archive:true, verbose:false, debug:false } )
     Access.buildInnov( Muse.Batch, 'Data',   'Info' )
     Access.mergePracs( Muse.Batch, 'Prin', ['Info','Know','Wise'] ) # 'Data'

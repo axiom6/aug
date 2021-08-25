@@ -4729,6 +4729,14 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/Worker.js.map" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/Worker.js.map",
+      "oF" : 0
+    },
     "\/zzz" : {
       "ft" : 65536,
       "oA" : 1,

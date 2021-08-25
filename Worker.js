@@ -85,7 +85,7 @@ Worker = class Worker {
   }
 
   cacheUrlNotNeeded(cacheUrl) {
-    return cacheUrl === '/pub/app/muse/roll.js';
+    return true;
   }
 
   onActivate(event) {
@@ -139,13 +139,13 @@ Worker = class Worker {
       networked = fetch(event.request).then((response) => {
         var cacheCopy;
         cacheCopy = response.clone();
-        caches.open(cacheName).then((cache) => {
+        caches.open(Worker.cacheName).then((cache) => {
           cache.put(event.request, cacheCopy);
           return this.publish('Get', 'Success');
         });
         return response;
       }).catch((error) => {
-        caches.match(offlinePage);
+        caches.match(Worker.offlinePage);
         return this.onCatch('Get', 'Error', error);
       });
       return cached || networked;
@@ -153,15 +153,15 @@ Worker = class Worker {
   }
 
   onPush(event) {
-    if (event.data.text() !== this.pushTag) {
+    if (event.data.text() !== Worker.pushTag) {
       return;
     }
-    event.waitUntil(caches.open(cacheName)).then((cache) => {
-      return fetch(pushUrl).then((response) => {
+    event.waitUntil(caches.open(Worker.cacheName)).then((cache) => {
+      return fetch(Worker.pushUrl).then((response) => {
         var json;
-        cache.put(pushUrl, response.clone());
+        cache.put(Worker.pushUrl, response.clone());
         json = response.json();
-        this.publish('Push', pushTag, {
+        this.publish('Push', Worker.pushTag, {
           json: json
         });
         return json;
@@ -170,11 +170,11 @@ Worker = class Worker {
   }
 
   onSync(event) {
-    if (event.tag !== this.syncTag) {
+    if (event.tag !== Worker.syncTag) {
       return;
     }
-    event.waitUntil(caches.open(cacheSync).then((cache) => {
-      return cache.add(syncUrl);
+    event.waitUntil(caches.open(Worker.cacheSync).then((cache) => {
+      return cache.add(Worker.syncUrl);
     }));
   }
 
@@ -191,248 +191,19 @@ Worker = class Worker {
 //elf.addEventListener('sync',     @onSync     )
 Worker.cacheName = 'Axiom';
 
+Worker.pushTag = 'xxx';
+
+Worker.pushUrl = 'xxx';
+
+Worker.offlinePage = 'xxx';
+
+Worker.syncTag = 'xxx';
+
+Worker.cacheSync = 'xxx';
+
+Worker.syncUrl = 'xxx';
+
 Worker.cacheObjs = {};
-
-Worker.cacheObjs2 = {
-  IndexHtml: {
-    name: 'IndexHtml',
-    status: 0,
-    url: '/index.html'
-  },
-  Favicon: {
-    name: 'Favicon',
-    status: 0,
-    url: '/favicon.icon'
-  },
-  IndexJS: {
-    name: 'IndexJS',
-    status: 0,
-    url: '/index.js'
-  }
-};
-
-Worker.cacheObjsMuse = {
-  MainHtml: {
-    name: 'MainHtml',
-    status: 0,
-    url: '/pub/app/main/main.html'
-  },
-  MuseHtml: {
-    name: 'MuseHtml',
-    status: 0,
-    url: '/pub/app/muse/muse.html'
-  },
-  MuseJS: {
-    name: 'MuseJS',
-    status: 0,
-    url: '/pub/app/muse/Muse.js'
-  },
-  MuseHome: {
-    name: 'MuseHome',
-    status: 0,
-    url: '/pub/app/muse/Home.js'
-  },
-  MuseMani: {
-    name: 'MuseMani',
-    status: 0,
-    url: '/pub/app/muse/manifest.webmanifest'
-  },
-  AugmHtml: {
-    name: 'AugmHtml',
-    status: 0,
-    url: '/pub/app/augm/augm.html'
-  },
-  AugmJS: {
-    name: 'AugmJS',
-    status: 0,
-    url: '/pub/app/augm/augm.js'
-  },
-  AugmHome: {
-    name: 'AugmHome',
-    status: 0,
-    url: '/pub/app/augm/home.js'
-  },
-  AugmMani: {
-    name: 'AugmMani',
-    status: 0,
-    url: '/pub/app/augm/manifest.webmanifest'
-  },
-  JitterHtml: {
-    name: 'JitterHtml',
-    status: 0,
-    url: '/pub/app/jitter/jitter.html'
-  },
-  JitterJS: {
-    name: 'JitterJS',
-    status: 0,
-    url: '/pub/app/jitter/jitter.js'
-  },
-  JitterMani: {
-    name: 'JitterMani',
-    status: 0,
-    url: '/pub/app/jitter/manifest.webmanifest'
-  },
-  JitterHome: {
-    name: 'JitterHome',
-    status: 0,
-    url: '/pub/vue/jitter/home.js'
-  },
-  JitterBody: {
-    name: 'JitterBody',
-    status: 0,
-    url: '/pub/vue/jitter/body.js'
-  },
-  JitterBrew: {
-    name: 'JitterBrew',
-    status: 0,
-    url: '/pub/vue/jitter/brew.js'
-  },
-  JitterChoice: {
-    name: 'JitterChoice',
-    status: 0,
-    url: '/pub/vue/jitter/choice.js'
-  },
-  JitterDrink: {
-    name: 'JitterDrink',
-    status: 0,
-    url: '/pub/vue/jitter/drink.js'
-  },
-  JitterFlavor: {
-    name: 'JitterFlavor',
-    status: 0,
-    url: '/pub/vue/jitter/flavor.js'
-  },
-  JitterRoast: {
-    name: 'JitterRoast',
-    status: 0,
-    url: '/pub/vue/jitter/roast.js'
-  },
-  MBoxHtml: {
-    name: 'MBoxHtml',
-    status: 0,
-    url: '/pub/app/mbox/mbox.html'
-  },
-  Vue: {
-    name: 'Vue',
-    status: 0,
-    url: '/pub/lib/vue/vue.esm.browser.js'
-  },
-  VueRouter: {
-    name: 'VueRouter',
-    status: 0,
-    url: '/pub/lib/vue/vue-router.esm.js'
-  },
-  ChromeIcon: {
-    name: 'ChromeIcon',
-    status: 0,
-    url: '/pub/css/icons/android-chrome-512x512.png'
-  },
-  Roboto: {
-    name: 'Roboto',
-    status: 0,
-    url: '/pub/css/font/roboto/Roboto.css'
-  },
-  RobotoTTF: {
-    name: 'RobotoTTF',
-    status: 0,
-    url: '/pub/css/font/roboto/Roboto-Regular.ttf'
-  },
-  FaSolidWoff2: {
-    name: 'FaSolidWoff2',
-    status: 0,
-    url: '/pub/css/font/fontawesome/fa-solid-900.woff2'
-  },
-  FaBrandWoff2: {
-    name: 'FaBrandWoff2',
-    status: 0,
-    url: '/pub/css/font/fontawesome/fa-brans-400.woff2'
-  },
-  FaInit: {
-    name: 'FaInit',
-    status: 0,
-    url: '/pub/css/font/fontawesome/init.css'
-  },
-  FontAweJS: {
-    name: 'FontAweJS',
-    status: 0,
-    url: '/pub/base/draw/FontAwe.js'
-  },
-  Mixin: {
-    name: 'Mixin',
-    status: 0,
-    url: '/pub/base/vue/Mixin.js'
-  },
-  Stream: {
-    name: 'Stream',
-    status: 0,
-    url: '/pub/base/util/Stream.js'
-  },
-  Cache: {
-    name: 'Cache',
-    status: 0,
-    url: '/pub/base/util/Cache.js'
-  },
-  UtilJS: {
-    name: 'UtilJS',
-    status: 0,
-    url: '/pub/base/util/Util.js'
-  },
-  AccessJS: {
-    name: 'AccessJS',
-    status: 0,
-    url: '/pub/base/util/Access.js'
-  },
-  VisJS: {
-    name: 'VisJS',
-    status: 0,
-    url: '/pub/base/draw/Vis.js'
-  },
-  NavJS: {
-    name: 'NavJS',
-    status: 0,
-    url: '/pub/base/nav/Nav.js'
-  },
-  BuildJS: {
-    name: 'BuildJS',
-    status: 0,
-    url: '/pub/muse/conn/Build.js'
-  },
-  RollJS: {
-    name: 'RollJS',
-    status: 0,
-    url: '/pub/app/muse/roll.js'
-  },
-  PrinJson: {
-    name: 'PrinJson',
-    status: 0,
-    url: '/pub/data/muse/Prin.json'
-  },
-  RowsJson: {
-    name: 'RowsJson',
-    status: 0,
-    url: '/pub/data/muse/Rows.json'
-  },
-  InfoJson: {
-    name: 'InfoJson',
-    status: 0,
-    url: '/pub/data/muse/Info.json'
-  },
-  KnowJson: {
-    name: 'KnowJson',
-    status: 0,
-    url: '/pub/data/muse/Know.json'
-  },
-  WiseJson: {
-    name: 'WiseJson',
-    status: 0,
-    url: '/pub/data/muse/Wise.json'
-  },
-  DataJson: {
-    name: 'DataJson',
-    status: 0,
-    url: '/pub/data/muse/Data.json'
-  }
-};
 
 Worker.create = function(cacheName, cacheObjs, logPub) {
   var worker;
@@ -446,3 +217,5 @@ Worker.create = function(cacheName, cacheObjs, logPub) {
 Worker.create(Worker.cacheName, Worker.cacheObjs, true);
 
 // export default Worker
+
+//# sourceMappingURL=Worker.js.map

@@ -19,6 +19,8 @@ import {
   createApp
 } from 'vue';
 
+import Cache from '../../../lib/pub/util/Cache.js';
+
 import MathJson from '../../../data/augm/Math.json';
 
 import GeomJson from '../../../data/augm/Geom.json';
@@ -41,7 +43,7 @@ Augm = (function() {
   class Augm {
     static start(href) {
       var key, ref, val;
-      console.log("Augm.start()", href);
+      console.log("Augm.start()", href, Augm.mode);
       Augm.href = href;
       Augm.addToHead();
       ref = Augm.Batch;
@@ -85,7 +87,9 @@ Augm = (function() {
       Augm.stream = new Stream(subjects, streamLog);
       Augm.mix = new Mix(Augm);
       Augm.nav = new Nav(Augm, Augm.stream, Augm.komps, Augm.pages, false);
-      //ugm.cache  = new Cache( Augm.stream )
+      if (Augm.mode === 'production') {
+        Augm.cache = new Cache(Augm.stream);
+      }
       tester.setOptions({
         testing: true,
         archive: false,
@@ -123,6 +127,8 @@ Augm = (function() {
   };
 
   Augm.appName = 'Augm';
+
+  Augm.mode = import.meta.env.MODE;
 
   Augm.Batch = {
     Math: {
@@ -203,13 +209,6 @@ Augm = (function() {
       ikw: false,
       icon: "fas fa-tree"
     },
-    Geom: {
-      title: 'Geom',
-      key: 'Geom',
-      pracs: {},
-      ikw: true,
-      icon: "fas fa-shapes"
-    },
     Test: {
       title: 'Test',
       key: 'Test',
@@ -218,6 +217,16 @@ Augm = (function() {
       icon: "fas fa-stethoscope"
     }
   });
+
+  if (Augm.mode === 'development') {
+    Augm.komps['Geom'] = {
+      title: 'Geom',
+      key: 'Geom',
+      pracs: {},
+      ikw: true,
+      icon: "fas fa-shapes"
+    };
+  }
 
   //ead.appendChild(jsonLD)
   Augm.FontUrl = "../../css/font/three/helvetiker_regular.typeface.json";

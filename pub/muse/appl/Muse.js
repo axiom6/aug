@@ -14,6 +14,8 @@ import Nav from '../../../lib/pub/navi/Nav.js';
 
 import Touch from '../../../lib/pub/navi/Touch.js';
 
+import Cache from '../../../lib/pub/util/Cache.js';
+
 import Mix from '../../../lib/pub/navi/Mix.js';
 
 import {
@@ -50,7 +52,7 @@ Muse = (function() {
   class Muse {
     static start(href) {
       var key, ref, val;
-      console.log("Muse.start()", href);
+      console.log("Muse.start()", href, Muse.mode);
       Muse.href = href;
       Muse.addToHead();
       ref = Muse.Batch;
@@ -103,7 +105,9 @@ Muse = (function() {
       Muse.nav = new Nav(Muse, Muse.stream, Muse.komps, Muse.pages, false);
       Muse.touch = new Touch(Muse.stream, Muse.nav);
       Muse.build = new Build(Muse.Batch, Muse.komps);
-      //use.cache  = new Cache( Muse.stream )
+      if (Muse.mode === 'production') {
+        Muse.cache = new Cache(Muse.stream);
+      }
       tester.setOptions({
         testing: true,
         archive: true,
@@ -155,6 +159,8 @@ Muse = (function() {
   };
 
   Muse.appName = 'Muse';
+
+  Muse.mode = import.meta.env.MODE;
 
   // Initialization is accomplished in 3 steps:
   // 1. Read in all the JSON config files in Muse.Batch. Call Muse.init() when complete.

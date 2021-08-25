@@ -50,8 +50,7 @@ class Worker
           @onCatch( 'InstallAll', 'Error', error ); return ) )
     return
   
-  cacheUrlNotNeeded:( cacheUrl ) =>
-    cacheUrl is '/pub/app/muse/roll.js'
+  cacheUrlNotNeeded:( cacheUrl ) => true
   
   onActivate:( event ) =>
     event.waitUntil(
@@ -93,13 +92,13 @@ class Worker
         networked = fetch(event.request)
          .then((response) =>
            cacheCopy = response.clone()
-           caches.open(cacheName)
+           caches.open(Worker.cacheName)
             .then( (cache) =>
                cache.put( event.request, cacheCopy )
                @publish( 'Get', 'Success' ) )
            return response )
         .catch((error) =>
-           caches.match(offlinePage)
+           caches.match(Worker.offlinePage)
            @onCatch( 'Get', 'Error', error  ) )
         return cached or networked ) )
     return
@@ -107,22 +106,22 @@ class Worker
   # For now this is just an example
   # Needs to be registered
   onPush:( event ) =>
-    return if event.data.text() isnt @pushTag
-    event.waitUntil( caches.open( cacheName ) )
+    return if event.data.text() isnt Worker.pushTag
+    event.waitUntil( caches.open( Worker.cacheName ) )
       .then( (cache) =>
-        return fetch( pushUrl ).then( (response) =>
-          cache.put(  pushUrl, response.clone() )
+        return fetch( Worker.pushUrl ).then( (response) =>
+          cache.put(  Worker.pushUrl, response.clone() )
           json = response.json()
-          @publish( 'Push', pushTag, { json:json } )
+          @publish( 'Push', Worker.pushTag, { json:json } )
           return json ) )
     return
    
   # MDN says that sync may not progress to W3C standard
   # Needs to be registered
   onSync:( event ) =>
-    return if event.tag isnt @syncTag
-    event.waitUntil( caches.open(cacheSync).then( (cache) =>
-      return cache.add(syncUrl) ) )
+    return if event.tag isnt Worker.syncTag
+    event.waitUntil( caches.open(Worker.cacheSync).then( (cache) =>
+      return cache.add(Worker.syncUrl) ) )
     return
   
   addEventListeners:() -> 
@@ -134,63 +133,16 @@ class Worker
     #elf.addEventListener('sync',     @onSync     )
     return
 
-Worker.cacheName = 'Axiom'
+Worker.cacheName   = 'Axiom'
+Worker.pushTag     = 'xxx'
+Worker.pushUrl     = 'xxx'
+Worker.offlinePage = 'xxx'
+Worker.syncTag     = 'xxx'
+Worker.cacheSync   = 'xxx'
+Worker.syncUrl     = 'xxx'
+Worker.cacheObjs   = {}
 
-Worker.cacheObjs = {}
-
-Worker.cacheObjs2 = {
-  IndexHtml: { name:'IndexHtml', status:0, url:'/index.html'}
-  Favicon:   { name:'Favicon',    status:0, url:'/favicon.icon'},
-  IndexJS:   { name:'IndexJS',   status:0, url:'/index.js'  }
-}
-
-Worker.cacheObjsMuse = {
-  MainHtml:     { name:'MainHtml',     status:0, url:'/pub/app/main/main.html'     }
-  MuseHtml:     { name:'MuseHtml',     status:0, url:'/pub/app/muse/muse.html'     }
-  MuseJS:       { name:'MuseJS',       status:0, url:'/pub/app/muse/Muse.js'       }
-  MuseHome:     { name:'MuseHome',     status:0, url:'/pub/app/muse/Home.js'       }
-  MuseMani:     { name:'MuseMani',     status:0, url:'/pub/app/muse/manifest.webmanifest' }
-  AugmHtml:     { name:'AugmHtml',     status:0, url:'/pub/app/augm/augm.html'     }
-  AugmJS:       { name:'AugmJS',       status:0, url:'/pub/app/augm/augm.js'       }
-  AugmHome:     { name:'AugmHome',     status:0, url:'/pub/app/augm/home.js'       }
-  AugmMani:     { name:'AugmMani',     status:0, url:'/pub/app/augm/manifest.webmanifest' }
-  JitterHtml:   { name:'JitterHtml',   status:0, url:'/pub/app/jitter/jitter.html' }
-  JitterJS:     { name:'JitterJS',     status:0, url:'/pub/app/jitter/jitter.js'   }
-  JitterMani:   { name:'JitterMani',   status:0, url:'/pub/app/jitter/manifest.webmanifest' }
-  JitterHome:   { name:'JitterHome',   status:0, url:'/pub/vue/jitter/home.js'     }
-  JitterBody:   { name:'JitterBody',   status:0, url:'/pub/vue/jitter/body.js'     }
-  JitterBrew:   { name:'JitterBrew',   status:0, url:'/pub/vue/jitter/brew.js'     }
-  JitterChoice: { name:'JitterChoice', status:0, url:'/pub/vue/jitter/choice.js'   }
-  JitterDrink:  { name:'JitterDrink',  status:0, url:'/pub/vue/jitter/drink.js'    }
-  JitterFlavor: { name:'JitterFlavor', status:0, url:'/pub/vue/jitter/flavor.js'   }
-  JitterRoast:  { name:'JitterRoast',  status:0, url:'/pub/vue/jitter/roast.js'    }
-  MBoxHtml:     { name:'MBoxHtml',     status:0, url:'/pub/app/mbox/mbox.html'     }
-  ChromeIcon:   { name:'ChromeIcon',   status:0, url:'/pub/css/icons/android-chrome-512x512.png' }
-  Roboto:       { name:'Roboto',       status:0, url:'/pub/css/font/roboto/Roboto.css' }
-  RobotoTTF:    { name:'RobotoTTF',    status:0, url:'/pub/css/font/roboto/Roboto-Regular.ttf'      }
-  FaSolidWoff2: { name:'FaSolidWoff2', status:0, url:'/pub/css/font/fontawesome/fa-solid-900.woff2' }
-  FaBrandWoff2: { name:'FaBrandWoff2', status:0, url:'/pub/css/font/fontawesome/fa-brans-400.woff2' }
-  FaInit:       { name:'FaInit',       status:0, url:'/pub/css/font/fontawesome/init.css' }
-  FontAweJS:    { name:'FontAweJS',    status:0, url:'/pub/draw/FontAwe.js' }
-  Mixin:        { name:'Mixin',        status:0, url:'/pub/vue/Mixin.js'    }
-  Stream:       { name:'Stream',       status:0, url:'/pub/util/Stream.js'  }
-  Cache:        { name:'Cache',        status:0, url:'/pub/util/Cache.js'   }
-  UtilJS:       { name:'UtilJS',       status:0, url:'/pub/util/Util.js'    }
-  AccessJS:     { name:'AccessJS',     status:0, url:'/pub/util/Access.js'  }
-  VisJS:        { name:'VisJS',        status:0, url:'/pub/draw/Vis.js'     }
-  NavJS:        { name:'NavJS',        status:0, url:'/pub/navi/Nav.js'      }
-  BuildJS:      { name:'BuildJS',      status:0, url:'/pub/muse/conn/Build.js'   }
-  RollJS:       { name:'RollJS',       status:0, url:'/pub/app/muse/roll.js'     }
-  PrinJson:     { name:'PrinJson',     status:0, url:'/pub/data/muse/Prin.json'  }
-  RowsJson:     { name:'RowsJson',     status:0, url:'/pub/data/muse/Rows.json'  }
-  InfoJson:     { name:'InfoJson',     status:0, url:'/pub/data/muse/Info.json'  }
-  KnowJson:     { name:'KnowJson',     status:0, url:'/pub/data/muse/Know.json'  }
-  WiseJson:     { name:'WiseJson',     status:0, url:'/pub/data/muse/Wise.json'  }
-  DataJson:     { name:'DataJson',     status:0, url:'/pub/data/muse/Data.json'  }
-}
-
-
-Worker.create = ( cacheName, cacheObjs, logPub ) ->
+Worker.create = (      cacheName, cacheObjs, logPub ) ->
   worker = new Worker( cacheName, cacheObjs, logPub )
   if worker is false then {}
   # console.log( "Worker.create()", cacheName )

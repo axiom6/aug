@@ -10,7 +10,7 @@ import Dash       from '../../../vue/augm/appl/Dash.vue'
 
 import { createApp }    from 'vue'
 
-#mport Cache   from '../../../lib/pub/util/Cache.js'
+import Cache   from '../../../lib/pub/util/Cache.js'
 
 import MathJson   from '../../../data/augm/Math.json'
 import GeomJson   from '../../../data/augm/Geom.json'
@@ -22,10 +22,10 @@ import TreeJson   from '../../../data/draw/Tree.json'
 import FlavorJson from '../../../data/jitter/Flavor.json'
 import ChoiceJson from '../../../data/jitter/Choice.json'
 
-
 class Augm
 
   Augm.appName = 'Augm'
+  Augm.mode    = `import.meta.env.MODE`
 
   Augm.Batch = {
     Math:   { url:'augm/Math.json',     data:MathJson, refine:true }
@@ -44,8 +44,10 @@ class Augm
     Draw:{ title:'Draw', key:'Draw', pracs:{}, ikw:false, icon:"fas fa-draw-polygon" }
     Tool:{ title:'Tool', key:'Tool', pracs:{}, ikw:false, icon:"fas fa-wrench" }
     Wood:{ title:'Wood', key:'Wood', pracs:{}, ikw:false, icon:"fas fa-tree" }
-    Geom:{ title:'Geom', key:'Geom', pracs:{}, ikw:true,  icon:"fas fa-shapes" }
     Test:{ title:'Test', key:'Test', pracs:{}, ikw:false, icon:"fas fa-stethoscope"} } )
+
+  if Augm.mode is 'development'
+     Augm.komps['Geom'] = { title:'Geom', key:'Geom', pracs:{}, ikw:true,  icon:"fas fa-shapes" }
 
   # Initialization is accomplished in 3 steps:
   # 1. Read in all the JSON config files in Augm.Batch. Call Augm.init() when complete.
@@ -55,7 +57,7 @@ class Augm
   # Called by muse.html to kick things off
   # 1. Read in all the JSON config files in Augm.Batch. Call Augm.init() when complete.
   Augm.start = (href) ->
-    console.log( "Augm.start()", href )
+    console.log( "Augm.start()", href, Augm.mode )
     Augm.href = href
     Augm.addToHead()
     for key, val of Augm.Batch when val.refine? and val.refine
@@ -65,8 +67,8 @@ class Augm
 
   # Add these <link> tags to <head> because vite build makes a mess of them
   Augm.addToHead = () ->
-  # manifest   = """<link href="manifest.json"  rel="manifest" crossorigin="use-credentials">"""
-  # siteLink   = """<link href="https://vit-muse.web.app/" rel="canonical">"""
+    # manifest   = """<link href="manifest.json"  rel="manifest" crossorigin="use-credentials">"""
+    # siteLink   = """<link href="https://vit-muse.web.app/" rel="canonical">"""
     maniElem       = document.createElement('link')
     maniElem.href  = "manifest.json"
     maniElem.rel   = "manifest"
@@ -93,7 +95,7 @@ class Augm
     Augm.stream = new Stream( subjects, streamLog )
     Augm.mix    = new Mix( Augm )
     Augm.nav    = new Nav( Augm, Augm.stream, Augm.komps, Augm.pages, false )
-    #ugm.cache  = new Cache( Augm.stream )
+    Augm.cache  = new Cache( Augm.stream ) if Augm.mode is 'production'
     tester.setOptions( { testing:true, archive:false, verbose:false, debug:false } )
     try
       Augm.vue3()
