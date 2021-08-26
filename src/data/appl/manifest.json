@@ -1,6 +1,6 @@
 {
-  "name":             "Jitter",
-  "short_name":       "Jitter",
+  "name":             "Data",
+  "short_name":       "Data",
   "start_url":        "/index.html?source=pwa",
   "display":          "standalone",
   "orientation":      "landscape",

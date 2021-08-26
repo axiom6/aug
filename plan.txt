@@ -10,8 +10,8 @@ Features One
      b. Push buttons in Replay to Test swithes to filter Test output
      c. Ability to run a complete CI test suite
      d. Archiving
-     e. Test Mongo.coffee
-     f. Test types
+     e. Test types
+     f. Test on Android
   3. Data
      a. Get Mongo working
      b. Upgrade - consider removing Vue router
@@ -19,7 +19,7 @@ Features One
   4. Jitt
 
 Features Two
-  1. Improve dispose()
+  1. Vizu Improve dispose()
      a. Determine if onBeforeUnmount / mix.removeElem() are needed
   2. Grid and coordinate system almost there
   3. Learn how to instance Grids Lines

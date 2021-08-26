@@ -1,6 +1,6 @@
 {
-  "name":             "Jitter",
-  "short_name":       "Jitter",
+  "name":             "Muse",
+  "short_name":       "Muse",
   "start_url":        "/index.html?source=pwa",
   "display":          "standalone",
   "orientation":      "landscape",

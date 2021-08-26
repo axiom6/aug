@@ -53,4 +53,3 @@
 
 </style>
 
-<!--h-btns :name="'Home'" :btns="homeBtn"></h-btns-->

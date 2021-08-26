@@ -285,6 +285,14 @@
       "oAP" : "\/dist",
       "oF" : 0
     },
+    "\/firebase-debug.log" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/firebase-debug.log",
+      "oF" : 0
+    },
     "\/firebase.json" : {
       "ft" : 524288,
       "oA" : 1,
@@ -3584,6 +3592,14 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/src\/augm\/appl\/manifest.json" : {
+      "ft" : 524288,
+      "oA" : 1,
+      "oAP" : "\/src\/augm\/appl\/manifest-min.json",
+      "oF" : 0,
+      "oO" : 0,
+      "oS" : 1
+    },
     "\/src\/augm\/appl\/Mods.coffee" : {
       "ft" : 32,
       "ma" : 1,
@@ -4111,6 +4127,14 @@
       "oAP" : "\/src\/data\/appl\/index.html",
       "oF" : 0
     },
+    "\/src\/data\/appl\/manifest.json" : {
+      "ft" : 524288,
+      "oA" : 1,
+      "oAP" : "\/src\/data\/appl\/manifest-min.json",
+      "oF" : 0,
+      "oO" : 0,
+      "oS" : 1
+    },
     "\/src\/data\/query\/Search.coffee" : {
       "ft" : 32,
       "ma" : 1,
@@ -4185,6 +4209,14 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/src\/jitt\/appl\/manifest.json" : {
+      "ft" : 524288,
+      "oA" : 1,
+      "oAP" : "\/src\/jitt\/appl\/manifest-min.json",
+      "oF" : 0,
+      "oO" : 0,
+      "oS" : 1
+    },
     "\/src\/muse\/appl\/Crawl.coffee" : {
       "ft" : 32,
       "ma" : 1,
@@ -4203,6 +4235,14 @@
       "oA" : 1,
       "oAP" : "\/src\/muse\/appl\/index.html",
       "oF" : 0
+    },
+    "\/src\/muse\/appl\/manifest.json" : {
+      "ft" : 524288,
+      "oA" : 1,
+      "oAP" : "\/src\/muse\/appl\/manifest-min.json",
+      "oF" : 0,
+      "oO" : 0,
+      "oS" : 1
     },
     "\/src\/muse\/appl\/Muse.coffee" : {
       "ft" : 32,
@@ -4337,6 +4377,14 @@
       "oA" : 1,
       "oAP" : "\/src\/vizu\/appl\/index.html",
       "oF" : 0
+    },
+    "\/src\/vizu\/appl\/manifest.json" : {
+      "ft" : 524288,
+      "oA" : 1,
+      "oAP" : "\/src\/vizu\/appl\/manifest-min.json",
+      "oF" : 0,
+      "oO" : 0,
+      "oS" : 1
     },
     "\/src\/vizu\/appl\/Vizu.coffee" : {
       "ft" : 32,
@@ -4509,17 +4557,6 @@
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/pub\/vizu\/coords\/XYGrid.js",
-      "oF" : 0,
-      "oS" : 1,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/src\/vizu\/coords\/XYGridInstance.coffee" : {
-      "ft" : 32,
-      "ma" : 1,
-      "mi" : 0,
-      "oA" : 0,
-      "oAP" : "\/pub\/vizu\/coords\/XYGridInstance.js",
       "oF" : 0,
       "oS" : 1,
       "sC" : 0,
