@@ -3,7 +3,7 @@ import { tester } from  '../../../lib/pub/test/Tester.js'
 import Access     from '../../../lib/pub/util/Access.js'
 import Stream     from '../../../lib/pub/util/Stream.js'
 import Touch      from '../../../lib/pub/navi/Touch.js'
-#mport Cache      from '../../../lib/pub/util/Cache.js'
+import Cache      from '../../../lib/pub/util/Cache.js'
 import Mix        from '../../../lib/pub/navi/Mix.js'
 import Nav        from '../../../lib/pub/navi/Nav.js'
 import Choice     from '../../../lib/pub/navi/Choice.js'
@@ -27,6 +27,7 @@ import Done    from '../../../vue/jitt/main/Done.vue'
 class Jitter
 
   Jitter.appName = 'Jitter'
+  Jitter.mode    = `import.meta.env.MODE`
 
   # Initialization is accomplished in 3 steps:
   # 1. Read in all the JSON config files in Jitter.Batch. Call Jitter.init() when complete.
@@ -94,7 +95,7 @@ class Jitter
     Jitter.nav     = new Nav(    Jitter, Jitter.stream, Jitter.komps, {}, true )
     Jitter.choice  = new Choice( Jitter.nav )
     Jitter.touch   = new Touch(  Jitter.stream, Jitter.nav )
-    #itter.cache   = new Cache(  Jitter.stream )
+    Jitter.cache   = new Cache(  Jitter.stream ) if Jitter.mode is 'production'
     tester.setOptions( { testing:true, archive:true, verbose:false, debug:false } )
     Jitter.vue()
     return

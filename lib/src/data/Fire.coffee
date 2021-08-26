@@ -1,13 +1,12 @@
 
 import Store    from './Store.js'
-import firebase from 'firebase'      # Firebase core (required)
+import firebase from 'firebase'
 
 class Fire extends Store
 
   constructor:( stream, dbName ) ->
     super(      stream, dbName )
     @init( @config() )
-    #@auth() # Anonomous logins have to be enabled
     @fd = firebase.database()
 
   # https://console.firebase.google.com/project/data-muse/overview
@@ -129,7 +128,25 @@ Fire.EventType  = { get:"value", add:"child_added", put:"child_changed", del:"ch
 export default Fire
 
 ###
-  console.log( 'Fire.firemsg(snaps)', { table:table, op:op, snaps:snaps.val() } ) if op is 'select'
-  console.log( 'Fire.firemsg(objs )', { table:table, op:op, objs:objs         } ) if op is 'select'
+import firebase from 'firebase'
+
+class Fire extends Store
+
+  constructor:( stream, dbName ) ->
+    super(      stream, dbName )
+    @init( @config() )
+    @fd = firebase.database()
+
+  =====
+
+  import { initializeApp } from 'firebase/app'
+  import { Database      } from 'firebase/database'
+
+  class Fire extends Store
+
+  constructor:( stream, dbName ) ->
+    super(      stream, dbName )
+    @fireApp = initializeApp( @config() )
+    @fd = Database( @fireApp )
 ###
 

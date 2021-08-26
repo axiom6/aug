@@ -8,16 +8,16 @@ import Index from '../../../lib/pub/data/Index.js';
 
 import Fire from '../../../lib/pub/data/Fire.js';
 
-import Couch from '../../../lib/pub/data/Couch.js';
-
+//mport Couch  from '../../../lib/pub/data/Couch.js'
+//mport Mongo  from '../../../lib/pub/data/Mongo.js'
 Manager = class Manager {
-  constructor(mix) {
+  constructor(nav) {
     this.subscribe = this.subscribe.bind(this);
-    this.mix = mix;
+    this.nav = nav;
     this.dbName = 'test1';
     this.credsUrl = 'http://admin:athena@127.0.0.1:5984'; // Admin host to couchdb
     this.couchUrl = 'http://127.0.0.1:5984'; // Admin host to couchdb
-    this.stream = this.mix.stream();
+    this.stream = this.nav.stream;
     this.Prac = null;
     this.Hues = null;
     this.Kit = null;
@@ -34,8 +34,10 @@ Manager = class Manager {
         case 'Fire':
           return new Fire(this.stream, this.dbName);
         case 'Couch':
-          return new Couch(this.stream, this.dbName, this.couchUrl);
+          return new Memory(this.stream, this.dbName, this.couchUrl);
         case 'Memory':
+          return new Memory(this.stream, this.dbName);
+        case 'Mongo':
           return new Memory(this.stream, this.dbName);
         default:
           console.error('Manager.test() unknown name', name);
@@ -137,8 +139,8 @@ Manager = class Manager {
       "dir": "nw",
       "neg": "Greed"
     };
-    this.Hues = this.mix.data('Hues');
-    // console.log( 'Manager.data(@Pracs)', @mix, @Hues )
+    this.Hues = this.nav.data('Hues');
+    // console.log( 'Manager.data(@Pracs)', @nav, @Hues )
     return this.Kit = {
       "_id": "mittens",
       "name": "Mittens",

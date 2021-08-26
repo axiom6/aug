@@ -33,13 +33,11 @@
   import Table from '../table/Table.vue';
   import Query from '../query/Query.vue';
 
-  
   Home.Dash  = Dash;
   Home.Store = Store;
   Home.Table = Table;
   Home.Query = Query;
 
-  
   export default Home;
   
 </script>

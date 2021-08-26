@@ -3,15 +3,16 @@ import Memory from '../../../lib/pub/data/Memory.js'
 import Local  from '../../../lib/pub/data/Local.js'
 import Index  from '../../../lib/pub/data/Index.js'
 import Fire   from '../../../lib/pub/data/Fire.js'
-import Couch  from '../../../lib/pub/data/Couch.js'
+#mport Couch  from '../../../lib/pub/data/Couch.js'
+#mport Mongo  from '../../../lib/pub/data/Mongo.js'
 
 class Manager
 
-  constructor:( @mix ) ->
+  constructor:( @nav ) ->
     @dbName     = 'test1'
     @credsUrl   = 'http://admin:athena@127.0.0.1:5984' # Admin host to couchdb
     @couchUrl   = 'http://127.0.0.1:5984'              # Admin host to couchdb
-    @stream     = @mix.stream()
+    @stream     = @nav.stream
     @Prac       = null
     @Hues       = null
     @Kit        = null
@@ -23,8 +24,9 @@ class Manager
       when 'Local'  then new Local(  @stream, @dbName )
       when 'Index'  then new Index(  @stream, @dbName )
       when 'Fire'   then new Fire(   @stream, @dbName )
-      when 'Couch'  then new Couch(  @stream, @dbName, @couchUrl )
+      when 'Couch'  then new Memory( @stream, @dbName, @couchUrl )
       when 'Memory' then new Memory( @stream, @dbName )
+      when 'Mongo'  then new Memory( @stream, @dbName )
       else
         console.error( 'Manager.test() unknown name', name )
         null
@@ -108,8 +110,8 @@ class Manager
     "row":"Learn","plane":"Know","icon":"fas fa-users",
     "cells":[5,12,7,12], "dir":"nw", "neg":"Greed" }
 
-    @Hues  = @mix.data( 'Hues' )
-    # console.log( 'Manager.data(@Pracs)', @mix, @Hues )
+    @Hues  = @nav.data( 'Hues' )
+    # console.log( 'Manager.data(@Pracs)', @nav, @Hues )
 
     @Kit = { "_id":"mittens", "name": "Mittens", "occupation": "kitten", "age": 3,
     "hobbies": [ "playing with balls of yarn", "chasing laser pointers", "lookin' hella cute" ] }

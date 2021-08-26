@@ -10,6 +10,8 @@ import Stream from '../../../lib/pub/util/Stream.js';
 
 import Touch from '../../../lib/pub/navi/Touch.js';
 
+import Cache from '../../../lib/pub/util/Cache.js';
+
 import Mix from '../../../lib/pub/navi/Mix.js';
 
 import Nav from '../../../lib/pub/navi/Nav.js';
@@ -90,7 +92,9 @@ Jitter = (function() {
       Jitter.nav = new Nav(Jitter, Jitter.stream, Jitter.komps, {}, true);
       Jitter.choice = new Choice(Jitter.nav);
       Jitter.touch = new Touch(Jitter.stream, Jitter.nav);
-      //itter.cache   = new Cache(  Jitter.stream )
+      if (Jitter.mode === 'production') {
+        Jitter.cache = new Cache(Jitter.stream);
+      }
       tester.setOptions({
         testing: true,
         archive: true,
@@ -148,6 +152,8 @@ Jitter = (function() {
   };
 
   Jitter.appName = 'Jitter';
+
+  Jitter.mode = import.meta.env.MODE;
 
   Jitter.Batch = {
     Jitter: {

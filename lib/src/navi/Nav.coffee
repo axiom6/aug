@@ -135,7 +135,6 @@ class Nav extends Mix
   doRoute:( obj ) ->
     route = obj.compKey
     return if route is @routeLast or route is 'none' or @isInov(route)
-    # console.log( 'Nav.doRoute()', { routeNames:@routeNames } )
     if route? and @komps? and @komps[route]?
       if @router?
          @router.push( name:route )

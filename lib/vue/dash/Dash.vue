@@ -13,12 +13,7 @@
   
   import Navd from './Navd.vue';
   import Tocs from './Tocs.vue';
-  const  View  = Navd['View'];
-
-  if( typeof(View) === "undefined" ) {
-    console.error( "Dash.vue View undefined" ); }
-  else {
-    console.log(   "Dash.vue View ok",  { View:View } ); }
+  import View from './View.vue';
 
   let Dash = {
 

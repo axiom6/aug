@@ -88,11 +88,12 @@ Data = (function() {
         subjects: subjects
       };
       Data.stream = new Stream(subjects, infoSpec);
-      Data.mix = new Mix(Data, Data.routeNames); // true for using route
+      Data.mix = new Mix(Data);
       Data.nav = new Nav(Data, Data.stream, Data.komps, {}, true);
       Data.touch = new Touch(Data.stream, Data.nav);
-      //ata.build  = new Build( batch, Data.komps )
-      Data.cache = new Cache(Data.stream);
+      if (Data.mode === 'production') {
+        Data.cache = new Cache(Data.stream);
+      }
       tester.setOptions({
         testing: true,
         archive: false,
@@ -163,6 +164,8 @@ Data = (function() {
   };
 
   Data.appName = 'Data';
+
+  Data.mode = import.meta.env.MODE;
 
   Data.Batch = {
     Prin: {

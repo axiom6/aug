@@ -1,7 +1,6 @@
 
 import { tester } from  '../../../lib/pub/test/Tester.js'
 import Access from      '../../../lib/pub/util/Access.js'
-#mport Build  from      '../../../lib/pub/util/Build.js'
 import Stream from      '../../../lib/pub/util/Stream.js'
 import Nav    from      '../../../lib/pub/navi/Nav.js'
 import Touch  from      '../../../lib/pub/navi/Touch.js'
@@ -27,6 +26,7 @@ import HuesJson from '../../../data/draw/Hues.json'
 class Data
 
   Data.appName = 'Data'
+  Data.mode    = `import.meta.env.MODE`
 
   # Initialization is accomplished in 3 steps:
   # 1. Read in all the JSON config files in Muse.Batch. Call Muse.init() when complete.
@@ -94,11 +94,10 @@ class Data
     subjects    = ["Nav"]
     infoSpec    = { subscribe:false, publish:false, subjects:subjects}
     Data.stream = new Stream( subjects, infoSpec )
-    Data.mix    = new Mix(   Data, Data.routeNames )           # true for using route
+    Data.mix    = new Mix(   Data )
     Data.nav    = new Nav(   Data, Data.stream, Data.komps, {}, true )
     Data.touch  = new Touch( Data.stream, Data.nav )
-    #ata.build  = new Build( batch, Data.komps )
-    Data.cache  = new Cache( Data.stream )
+    Data.cache  = new Cache( Data.stream ) if Data.mode is 'production'
     tester.setOptions( { testing:true, archive:false, verbose:false, debug:false } )
     Access.buildInnov( Data.Batch, 'Data',   'Info' )
     Access.mergePracs( Data.Batch, 'Prin', ['Info','Know','Wise'] ) # 'Data'

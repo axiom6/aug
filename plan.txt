@@ -1,32 +1,34 @@
 
 Features One
-  1. Hexagon / Vis
-     a. Experiment more with sin wave functions
-     b. Vis red and blue color palattes need to be brighter
-     c. Vis.str hex output wrong
-     d. Fix padded and move for and text color
-  2. Test
+  1. Test
      a. Functional Test
      b. Push buttons in Replay to Test swithes to filter Test output
      c. Ability to run a complete CI test suite
      d. Archiving
      e. Test types
      f. Test on Android
-  3. Data
-     a. Get Mongo working
-     b. Upgrade - consider removing Vue router
-     c. Improve test suite
-  4. Jitt
+  2. Vizu Improve dispose()
 
 Features Two
-  1. Vizu Improve dispose()
-     a. Determine if onBeforeUnmount / mix.removeElem() are needed
+
+  1. Data
+     a. Get Mongo working - right now Mongo imports are a problem
+     b. Learn how to minimize Firebase import
+     b. Upgrade - consider removing Vue router
+     c. Improve test suite
   2. Grid and coordinate system almost there
   3. Learn how to instance Grids Lines
   4. Integrate Side.vue, Main.json and Main.coffee
   5, Dirs with Navd.vue
   6. Doc
   7. Create Trip.vue with Trip.coffee
+  8. Hexagon / Vis
+     a. Experiment more with sin wave functions
+     b. Vis red and blue color palattes need to be brighter
+     c. Vis.str hex output wrong
+     d. Fix padded and move for and text color
+  9. Jitt
+     a. Screen size and font size off on Android
 
 Debug
   1. Look into cicular JSON bug in Tester.reviewsLocal()
