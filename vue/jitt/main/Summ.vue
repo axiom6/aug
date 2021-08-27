@@ -5,7 +5,7 @@
       <h-navb :title="name" :compKey="name"></h-navb>
     </div>
     <div v-if="!isRouted()" class="summ-name">{{name}}</div>
-    <div class="summ-choices">
+    <div :class="sumChoicesClass()">
       <div class="c1">{{c0}}</div>
       <div class="c2">{{c1}}</div>
       <div class="c3">{{c2}}</div>
@@ -53,11 +53,15 @@
       const isRouted = function() {
         return props.name !== 'none'; }
 
+      const sumChoicesClass = () => {
+        return nav.isMobile() ? "summ-choices-mobile" : "summ-choices-desktop";
+      }
+
       onMounted( function () {
         setChoices()
         nav.subscribe( 'Nav', 'Summ', (obj) => { onChoices(obj); } ); } )
 
-      return { c0, c1, c2, isRouted }; },
+      return { c0, c1, c2, isRouted, sumChoicesClass }; },
   }
 
   export default Summ;
@@ -68,7 +72,7 @@
   
 @import '../../../lib/css/themes/theme.less';
 
-@summFS:@themeFS;
+@summFS:@themeFS*0.7;
 
 .summ-pane { position:absolute; left:0; top:0; width:100%; height:100%;
         background-color:@theme-back; color:@theme-fore; border:1px solid @theme-fore;
@@ -82,12 +86,11 @@
   .summ-name { position:absolute; left:0; top:0;   width:100%; height:50%; font-size:2.5*@summFS;
     .themeCenterItems(); }
   
-  .summ-choices { position:absolute; left:0; top:50%; width:100%; height:50%; .summ-choices(); font-size:1.5*@summFS;
-    .c1 { grid-area:c1; } .c2 { grid-area:c2; } .c3 { grid-area:c3; } }
+  .summ-choices-desktop { position:absolute; left:0; top:50%; width:100%; height:50%; .summ-choices();
+    font-size:1.5*@summFS; .c1 { grid-area:c1; } .c2 { grid-area:c2; } .c3 { grid-area:c3; } }
+
+  .summ-choices-mobile { position:absolute; left:0; top:50%; width:100%; height:50%; .summ-choices();
+    font-size:2.5*@summFS; .c1 { grid-area:c1; } .c2 { grid-area:c2; } .c3 { grid-area:c3; } }
   }
 
 </style>
-
-<!--
-
-            -->

@@ -1,5 +1,6 @@
 
 class Worker
+
   
   constructor:() ->
     @logPub    = false
@@ -133,6 +134,7 @@ class Worker
     #elf.addEventListener('sync',     @onSync     )
     return
 
+Worker.version     = 2          # Incrementing this should cause PWAs to updated
 Worker.cacheName   = 'Axiom'
 Worker.pushTag     = 'xxx'
 Worker.pushUrl     = 'xxx'

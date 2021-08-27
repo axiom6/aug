@@ -1,7 +1,7 @@
 
 <template>
-  <div   class="navb-rect" @click="doComp()">
-    <div class="navb-name">{{title}}</div>
+  <div    class="navb-rect" @click="doComp()">
+    <div :class="navbNameClass()">{{title}}</div>
   </div>
 </template>
 
@@ -17,10 +17,13 @@
 
       const nav     = inject('nav');
 
+      const navbNameClass = () => {
+        return nav.isMobile() ? "navb-name-mobile" : "navb-name-desktop"; }
+
       const doComp = function () {
         nav.pub( { compKey:props.compKey } ); }
 
-    return { doComp }; }
+    return { doComp, navbNameClass }; }
   }
 
 export default Navb;
@@ -35,6 +38,7 @@ export default Navb;
 
   .navb-rect { justify-self:center; align-self:center; width:85%; height:85%;
     border-radius:16px; font-family:@theme-font-family; .theme-btns; display:grid; }
-  .navb-name { justify-self:center; align-self:center; font-size:@navbFS; }
+  .navb-name-desktop { justify-self:center; align-self:center; font-size:@navbFS*0.7; }
+  .navb-name-mobile  { justify-self:center; align-self:center; font-size:@navbFS; }
 
 </style>

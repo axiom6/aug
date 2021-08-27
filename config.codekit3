@@ -1685,25 +1685,6 @@
       "oAP" : "\/lib\/pub\/util\/Util.js.map",
       "oF" : 0
     },
-    "\/lib\/pub\/util\/Worker.js" : {
-      "bF" : 0,
-      "ft" : 64,
-      "ma" : 0,
-      "mi" : 0,
-      "oA" : 1,
-      "oAP" : "\/lib\/pub\/util\/Worker-min.js",
-      "oF" : 0,
-      "sC" : 0,
-      "tS" : 0
-    },
-    "\/lib\/pub\/util\/Worker.js.map" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/lib\/pub\/util\/Worker.js.map",
-      "oF" : 0
-    },
     "\/lib\/src\/data\/Couch.coffee" : {
       "ft" : 32,
       "ma" : 1,
@@ -2154,8 +2135,8 @@
       "ma" : 1,
       "mi" : 0,
       "oA" : 0,
-      "oAP" : "\/lib\/pub\/util\/Worker.js",
-      "oF" : 0,
+      "oAP" : "\/dist\/Worker.js",
+      "oF" : 2,
       "oS" : 1,
       "sC" : 0,
       "tS" : 0

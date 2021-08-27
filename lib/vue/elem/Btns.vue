@@ -49,10 +49,12 @@
         let h    = elem['clientHeight'];
         return h/w; }
       const styleBlock = function(btn) {
-        let p  = btn.pos;
-        let sy = 1.0;
-        let p2 = p[2]===0 ? p[3] : p[2];
-        let fs = btn.type==='choice' ? (p[3]*0.06)+'em' : (p[3]*0.07)+'em';
+        let p   = btn.pos;
+        let sy  = 1.0;
+        let p2  = p[2]===0 ? p[3] : p[2];
+        let fsn = btn.type==='choice' ? (p[3]*0.24) : (p[3]*0.28);
+            fsn = nav.isMobile() ? fsn * 1.2 : fsn;
+        let fs = fsn + 'vmin'
         return { position:'absolute', left:sy*p[0]+'%', top:sy*p[1]+'%', width:sy*p2+'%', height:sy*p[3]+'%',
           fontSize:fs, 'z-index':2 } }
       const styleBtn = function (btn) {

@@ -26,8 +26,8 @@ import Done    from '../../../vue/jitt/main/Done.vue'
 
 class Jitter
 
-  Jitter.appName = 'Jitter'
-  Jitter.mode    = `import.meta.env.MODE`
+  Jitter.appName   = 'Jitter'
+  Jitter.mode      = `import.meta.env.MODE`
 
   # Initialization is accomplished in 3 steps:
   # 1. Read in all the JSON config files in Jitter.Batch. Call Jitter.init() when complete.
@@ -48,7 +48,7 @@ class Jitter
     # manifest = """<link href="manifest.json"  rel="manifest" crossorigin="use-credentials">"""
     # siteLink = """<link href="https://vit-muse.web.app/" rel="canonical">"""
     maniElem                = document.createElement('link')
-    maniElem.href           = "manifest.json"
+    maniElem.href           = "manifest.json?v=2"
     maniElem.rel            = "manifest"
     maniElem['crossorigin'] = "use-credentials"
     siteElem      = document.createElement('link')

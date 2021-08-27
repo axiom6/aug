@@ -271,6 +271,18 @@ class Nav extends Mix
     navs[next].prev  = inov
     navs
 
+  userAgent:() ->
+    navigator.userAgent.toLowerCase()
+
+  # Looks up lower case strings in navigator userAngent
+  #   like 'android' 'mac' 'iphone' 'firefox'
+  #   not 100% certain but usefull
+  inUserAgent:( str ) ->
+    @userAgent().indexOf(str) > -1
+
+  isMobile:() ->
+    @inUserAgent('android') or @inUserAgent('iphone')
+
 export default Nav
 
 ###

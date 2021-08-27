@@ -67,7 +67,7 @@ Jitter = (function() {
       // manifest = """<link href="manifest.json"  rel="manifest" crossorigin="use-credentials">"""
       // siteLink = """<link href="https://vit-muse.web.app/" rel="canonical">"""
       maniElem = document.createElement('link');
-      maniElem.href = "manifest.json";
+      maniElem.href = "manifest.json?v=2";
       maniElem.rel = "manifest";
       maniElem['crossorigin'] = "use-credentials";
       siteElem = document.createElement('link');
