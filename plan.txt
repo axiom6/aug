@@ -1,6 +1,6 @@
 
 Features One
-
+  1. Improve Worker.coffee
   2. Test
      a. Functional Test
      b. Push buttons in Replay to Test swithes to filter Test output
@@ -9,6 +9,8 @@ Features One
      e. Test types
      f. Test on Android
   3. Vizu Improve dispose()
+  4. Font Size management with Mobile
+  5. Muse innovate boxes need to be smaller
 
 Features Two
   1. Android Install PWA
@@ -25,14 +27,12 @@ Features Two
   4. Learn how to instance Grids Lines
   5. Integrate Side.vue, Main.json and Main.coffee
   6. Dirs with Navd.vue
-  7. Doc
-  8. Create Trip.vue with Trip.coffee
-  9. Hexagon / Vis
+  7. Create Trip.vue with Trip.coffee
+  8. Hexagon / Vis
      a. Experiment more with sin wave functions
      b. Vis red and blue color palattes need to be brighter
      c. Vis.str hex output wrong
      d. Fix padded and move for and text color
-
 
 Debug
   1. Look into cicular JSON bug in Tester.reviewsLocal()

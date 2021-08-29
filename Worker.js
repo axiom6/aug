@@ -1,33 +1,111 @@
+  /*
+    Lifecycle
+    1, Registered by Cache
+    2. Install
+       a. Open a cache.
+       b. Cache our files.
+       c. Confirm whether all the required assets are cached or not.
+    3. Fetch
+       a. Add a callback to .then() on the fetch request.
+       b.Once we get a response, we perform the following checks:
+         - Ensure the response is valid.
+         - Check the status is 200 on the response.
+         - Make sure the response type is basic,
+           - which indicates that it's a request from our origin.
+           - This means that requests to third party assets aren't cached as well.
+        c. Clone response
+  */
 var Worker,
   hasProp = {}.hasOwnProperty;
 
 Worker = class Worker {
-  constructor() {
-    this.publish = this.publish.bind(this);
-    this.onCatch = this.onCatch.bind(this);
+  constructor(cacheName1, cacheObjs1, logPub1) {
     this.onInstall = this.onInstall.bind(this);
-    this.onInstallAll = this.onInstallAll.bind(this);
-    this.cacheUrlNotNeeded = this.cacheUrlNotNeeded.bind(this);
-    this.onActivate = this.onActivate.bind(this);
     this.onFetch = this.onFetch.bind(this);
-    this.onGet = this.onGet.bind(this);
-    
-    // For now this is just an example
-    // Needs to be registered
-    this.onPush = this.onPush.bind(this);
-    
-    // MDN says that sync may not progress to W3C standard
-    // Needs to be registered
-    this.onSync = this.onSync.bind(this);
-    this.logPub = false;
-    this.cacheUrls = this.toCacheUrls(Worker.cacheObjs); //    1200 = 20 min
+    this.onActivate = this.onActivate.bind(this);
+    this.onCatch = this.onCatch.bind(this);
+    this.cacheName = cacheName1;
+    this.cacheObjs = cacheObjs1;
+    this.logPub = logPub1;
+    this.cacheUrls = this.toCacheUrls(this.cacheObjs); //    1200 = 20 min
     this.cacheOpts = {
       headers: {
         'Cache-Control': 'public, max-age=1200' // 2592000 = 30 days
       }
     };
-    // console.log( 'Worker.self', self )
+    // @log( 'Worker this', @  )
     this.addEventListeners();
+  }
+
+  addEventListeners() {
+    self.addEventListener('install', this.onInstall);
+    self.addEventListener('fetch', this.onFetch);
+    self.addEventListener('activate', this.onActivate);
+  }
+
+  onInstall(event) {
+    event.waitUntil(caches.open(this.cacheName).then((cache) => {
+      var key, obj, ref;
+      this.log('Install', '------ Open ------');
+      ref = this.cacheObjs;
+      for (key in ref) {
+        if (!hasProp.call(ref, key)) continue;
+        obj = ref[key];
+        fetch(obj.url, this.cacheOpts).then((response) => {
+          this.log('  Install', response.url);
+          return cache.put(response.url, response);
+        });
+      }
+    }).catch((error) => {
+      this.onCatch('Install', 'Error', error);
+    }));
+  }
+
+  onFetch(event) {
+    var url;
+    url = event.request.url;
+    console.log('Worker.onFetch()', url);
+    if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
+      return;
+    }
+    if (url === 'http://localhost:3000/index.html?source=pwa') {
+      return;
+    }
+    event.respondWith(caches.open(Worker.cacheName).then((cache) => {
+      return cache.match(event.request, {
+        ignoreSearch: true
+      }).then((response) => {
+        return response || fetch(event.request, this.cacheOpts).then((response) => {
+          cache.put(event.request, response.clone());
+          this.log('Fetch', url);
+          if (!this.cacheUrls.includes(url)) {
+            //  @cacheUrls = [] if not @cacheUrls?
+            this.cacheUrls.push(url);
+          }
+          return response;
+        });
+      });
+    }).catch((error) => {
+      return this.onCatch('Fetch', event.request.url, error);
+    }));
+  }
+
+  onActivate(event) {
+    event.waitUntil(caches.keys().then((cacheUrls) => {
+      this.cacheUrls = cacheUrls;
+      return this.cacheUrls.filter((cacheUrl) => {
+        return this.cacheUrlNeedsUpdate(cacheUrl);
+      });
+    }).then((cachesToDelete) => {
+      return Promise.all(cachesToDelete.map((cacheToDelete) => {
+        return caches.delete(cacheToDelete);
+      }));
+    }).then(() => {
+      self.clients.claim();
+      return this.log('Activate', 'Called');
+    }).catch((error) => {
+      this.onCatch('Activate', 'Error', error);
+    }));
   }
 
   toCacheUrls(objs) {
@@ -41,7 +119,7 @@ Worker = class Worker {
     return urls;
   }
 
-  publish(name, status, obj = null) {
+  log(name, status, obj = null) {
     if (this.logPub) {
       if (obj != null) {
         console.log(name, status, obj);
@@ -52,156 +130,18 @@ Worker = class Worker {
   }
 
   onCatch(name, status, error) {
-    console.log(name, status, error);
+    console.error(name, status, error);
   }
 
-  onInstall(event) {
-    event.waitUntil(caches.open(Worker.cacheName).then((cache) => {
-      var key, obj, ref;
-      this.publish('Install', '------ Open ------');
-      ref = Worker.cacheObjs;
-      for (key in ref) {
-        if (!hasProp.call(ref, key)) continue;
-        obj = ref[key];
-        fetch(obj.url, this.cacheOpts).then((response) => {
-          this.publish('  Install', response.url);
-          return cache.put(response.url, response);
-        });
-      }
-    }).catch((error) => {
-      this.onCatch('Install', 'Error', error);
-    }));
-  }
-
-  onInstallAll(event) {
-    event.waitUntil(caches.open(Worker.cacheName).then((cache) => {
-      this.publish('InstallAll', 'Success', {
-        cacheName: Worker.cacheName
-      });
-      return cache.addAll(this.cacheUrls);
-    }).catch((error) => {
-      this.onCatch('InstallAll', 'Error', error);
-    }));
-  }
-
-  cacheUrlNotNeeded(cacheUrl) {
+  cacheUrlNeedsUpdate(cacheUrl) {
     return true;
-  }
-
-  onActivate(event) {
-    event.waitUntil(caches.keys().then((cacheUrls) => {
-      this.cacheUrls = cacheUrls;
-      return this.cacheUrls.filter((cacheUrl) => {
-        return this.cacheUrlNotNeeded(cacheUrl);
-      });
-    }).then((cachesToDelete) => {
-      return Promise.all(cachesToDelete.map((cacheToDelete) => {
-        return caches.delete(cacheToDelete);
-      }));
-    }).then(() => {
-      self.clients.claim();
-      return this.publish('Activate', 'Called');
-    }).catch((error) => {
-      this.onCatch('Activate', 'Error', error);
-    }));
-  }
-
-  onFetch(event) {
-    console.log('Worker.onFetch()', event.request.url);
-    if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin') {
-      return;
-    }
-    if (event.request.url === 'http://localhost:3000/index.html?source=pwa') {
-      return;
-    }
-    event.respondWith(caches.open(Worker.cacheName).then((cache) => {
-      return cache.match(event.request, {
-        ignoreSearch: true
-      }).then((response) => {
-        return response || fetch(event.request, this.cacheOpts).then((response) => {
-          cache.put(event.request, response.clone());
-          this.publish('Fetch', event.request.url);
-          return response;
-        });
-      });
-    }).catch((error) => {
-      return this.onCatch('Fetch', event.request.url, error);
-    }));
-  }
-
-  onGet(event) {
-    if (event.request.method !== 'GET') {
-      return;
-    }
-    console.log('Worker.onGet()', event.request);
-    event.respondWith(caches.match(event.request).then((cached) => {
-      var networked;
-      networked = fetch(event.request).then((response) => {
-        var cacheCopy;
-        cacheCopy = response.clone();
-        caches.open(Worker.cacheName).then((cache) => {
-          cache.put(event.request, cacheCopy);
-          return this.publish('Get', 'Success');
-        });
-        return response;
-      }).catch((error) => {
-        caches.match(Worker.offlinePage);
-        return this.onCatch('Get', 'Error', error);
-      });
-      return cached || networked;
-    }));
-  }
-
-  onPush(event) {
-    if (event.data.text() !== Worker.pushTag) {
-      return;
-    }
-    event.waitUntil(caches.open(Worker.cacheName)).then((cache) => {
-      return fetch(Worker.pushUrl).then((response) => {
-        var json;
-        cache.put(Worker.pushUrl, response.clone());
-        json = response.json();
-        this.publish('Push', Worker.pushTag, {
-          json: json
-        });
-        return json;
-      });
-    });
-  }
-
-  onSync(event) {
-    if (event.tag !== Worker.syncTag) {
-      return;
-    }
-    event.waitUntil(caches.open(Worker.cacheSync).then((cache) => {
-      return cache.add(Worker.syncUrl);
-    }));
-  }
-
-  addEventListeners() {
-    self.addEventListener('install', this.onInstall);
-    self.addEventListener('activate', this.onActivate);
-    self.addEventListener('fetch', this.onFetch);
   }
 
 };
 
-//elf.addEventListener('fetch',    @onGet      )
-//elf.addEventListener('push',     @onPush     )
-//elf.addEventListener('sync',     @onSync     )
+Worker.version = "2.1"; // Incrementing this should cause PWAs to updated
+
 Worker.cacheName = 'Axiom';
-
-Worker.pushTag = 'xxx';
-
-Worker.pushUrl = 'xxx';
-
-Worker.offlinePage = 'xxx';
-
-Worker.syncTag = 'xxx';
-
-Worker.cacheSync = 'xxx';
-
-Worker.syncUrl = 'xxx';
 
 Worker.cacheObjs = {};
 
@@ -211,11 +151,9 @@ Worker.create = function(cacheName, cacheObjs, logPub) {
   if (worker === false) {
     ({});
   }
+  worker.log("Worker.create()", cacheName);
 };
 
-// console.log( "Worker.create()", cacheName )
-Worker.create(Worker.cacheName, Worker.cacheObjs, true);
-
-// export default Worker
+Worker.create(Worker.cacheName, Worker.cacheObjs, false);
 
 //# sourceMappingURL=Worker.js.map

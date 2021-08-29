@@ -1,10 +1,8 @@
 
-# import WorkerJS from '/Worker.js'
 
 class Cache
 
   constructor:( @stream ) ->
-    # WorkerJS.cacheName = 'Axiom'
     @register('./Worker.js' )
 
   register:( swUrl ) ->
