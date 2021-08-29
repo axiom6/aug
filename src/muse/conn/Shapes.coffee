@@ -264,8 +264,8 @@ class Shapes
     return
 
   flow:( g, size, hsv, dir, h ) ->
-    w    = if size.level is 'Comp' then size.ringSize * 0.75 else size.ringSize * 0.8
-    h    = if size.level is 'Comp' then size.ringSize * 0.55 else size.ringSize * 1.3
+    w    = size.w / 23
+    h    = size.h / 12
     x0   = size.xc  -  w * 0.5
     y0   = if dir is 'south' then size.h  - h else 0
     fill = vis.css( hsv )

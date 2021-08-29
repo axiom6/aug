@@ -341,8 +341,8 @@ Shapes = class Shapes {
 
   flow(g, size, hsv, dir, h) {
     var fill, w, x0, y0;
-    w = size.level === 'Comp' ? size.ringSize * 0.75 : size.ringSize * 0.8;
-    h = size.level === 'Comp' ? size.ringSize * 0.55 : size.ringSize * 1.3;
+    w = size.w / 23;
+    h = size.h / 12;
     x0 = size.xc - w * 0.5;
     y0 = dir === 'south' ? size.h - h : 0;
     fill = vis.css(hsv);

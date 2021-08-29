@@ -52,13 +52,13 @@ Innovate = class Innovate {
 
   // getComputedTextLength()
   rings(g, size) {
-    var colorBack, colorRing, h2, h5, hr, t, uc, wr, xi, xt, y;
-    t = size.ringSize;
+    var colorBack, colorRing, h2, h5, hr, t, uc, wr, xi, xt, yt;
+    t = size.w / 13;
     wr = size.level === 'Comp' ? t : 75 * size.scaleFont;
     hr = size.level === 'Comp' ? t : 18 * size.scaleFont;
-    xi = size.level === 'Comp' ? t * 1.70 : t * 2.5;
+    xi = size.level === 'Comp' ? t * 1.70 : t * 1.5;
     xt = xi + size.ringIcon * 0.8;
-    y = size.level === 'Comp' ? t * 2.1 : 18 * size.scaleFont;
+    yt = size.level === 'Comp' ? t * 1.9 : size.h / 4.0;
     uc = vis.unicode(this.spec.icon);
     // console.log( 'Innovate.rings()', { t:t, wr:wr, hr:hr, xt:xt, yt:yt } )
     colorRing = vis.css([70, 55, 70]);
@@ -68,8 +68,8 @@ Innovate = class Innovate {
     this.shapes.round(g, t, t, size.w - t * 2, h2, t, t, colorRing, 'none');
     this.shapes.round(g, t * 2.5, t * 2.5, size.w - t * 5.0, h5, t, t, colorBack, 'none');
     this.shapes.rect(g, t, t, wr, hr, colorRing, 'none');
-    this.shapes.icon(g, xi, y, this.spec.name, this.spec.name + 'Icon', 'black', size.bannSize, uc);
-    return this.shapes.text(g, xt, y, this.spec.name, this.spec.name + 'Text', 'black', size.bannSize, "start");
+    this.shapes.icon(g, xi, yt, this.spec.name, this.spec.name + 'Icon', 'black', size.bannSize, uc);
+    return this.shapes.text(g, xt, yt, this.spec.name, this.spec.name + 'Text', 'black', size.bannSize, "start");
   }
 
   principle(g, size) {
@@ -106,7 +106,7 @@ Innovate = class Innovate {
   westInovate(g, size) {
     var fill, h, key, ref, study, w, x0, y0;
     w = size.ringSize;
-    h = size.ringSize * 0.67; // if size.level is 'Comp' then size.ringSize * 0.5 else size.ringSize
+    h = size.h / 15;
     x0 = size.w - w;
     y0 = size.yc - h * 2; // 4 studies
     ref = this.studies;
@@ -121,7 +121,7 @@ Innovate = class Innovate {
   eastInovate(g, size) {
     var fill, h, key, ref, study, w, x0, y0;
     w = size.ringSize;
-    h = size.ringSize * 0.67; // if size.level is 'Comp' then size.ringSize * 0.5 else size.ringSize
+    h = size.h / 15;
     x0 = 0;
     y0 = size.yc - h * 2; // 4 studies
     ref = this.studies;
@@ -135,8 +135,8 @@ Innovate = class Innovate {
 
   northInovate(g, size) {
     var dx, fill, h, key, ordered, study, w, x0, y0;
-    w = size.level === 'Comp' ? size.ringSize * 0.75 : size.ringSize * 1.25;
-    h = size.ringSize;
+    w = size.w / 23;
+    h = size.level === 'Comp' ? size.h / 6 : size.h / 7.3;
     dx = size.r * 1.5;
     x0 = size.xc - dx - w / 2;
     y0 = 0;
@@ -151,8 +151,8 @@ Innovate = class Innovate {
 
   southInovate(g, size) {
     var dx, fill, h, key, ordered, study, w, x0, y0;
-    w = size.level === 'Comp' ? size.ringSize * 0.75 : size.ringSize * 1.25;
-    h = size.ringSize;
+    w = size.w / 23;
+    h = size.h / 6;
     dx = size.r * 1.5;
     x0 = size.xc - dx - w / 2;
     y0 = size.h - h;

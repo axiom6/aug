@@ -46,7 +46,7 @@ class Convey
   doLinks:( graph ) ->
     gLinks = @gc.append("svg:g")
     for d in graph.links
-      #console.log( 'Convey.doLinks() d', d )
+      # console.log( 'Convey.doLinks() d', d )
       id = d.source.name+d.target.name
       @shapes.gradientDef( @defs, id, d.source.color, d.target.color )
       gLink = gLinks.append("svg:g").attr( "stroke", "url(##{id})" ).attr( "fill","none")
@@ -62,7 +62,8 @@ class Convey
       .data(graph.nodes).enter()
       .append("g").attr("class", "node")
       .attr("transform", (d) -> vis.translate( d.x0,  d.y0 ) )
-    node.append("rect").attr("height", (d) ->  d.y1 - d.y0 )
+    node.append("rect")
+      .attr("height", (d) ->  d.y1 - d.y0 )
       .attr("width", @sankeyc.nodeWidth())
       .attr("fill",   (d) => d.color )
       .append("title").text( (d) => d.name )  #  + "\n" + d.value

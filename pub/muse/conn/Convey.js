@@ -71,7 +71,7 @@ Convey = class Convey {
     ref = graph.links;
     for (i = 0, len = ref.length; i < len; i++) {
       d = ref[i];
-      //console.log( 'Convey.doLinks() d', d )
+      // console.log( 'Convey.doLinks() d', d )
       id = d.source.name + d.target.name;
       this.shapes.gradientDef(this.defs, id, d.source.color, d.target.color);
       gLink = gLinks.append("svg:g").attr("stroke", `url(#${id})`).attr("fill", "none");

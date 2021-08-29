@@ -38,10 +38,10 @@ class SvgMgr
     sz.r          = Math.min( sz.w,  sz.h ) * 0.2  # Used for hexagons
     sz.level      = level
     sz.scaleFont  = sz.h / 100
-    sz.ringSize   = if sz.level is 'Comp' then 24 else 6*sz.scaleFont
+    sz.ringSize   = sz.w / 13 # if sz.level is 'Comp' then 24 else 6*sz.scaleFont
     sz.ringIcon   = 12.0*sz.scaleFont
     sz.iconSize   = 20.0*sz.scaleFont+'px'
-    sz.bannSize   = if sz.level is 'Comp' then 15.0*sz.scaleFont+'px' else 12.0*sz.scaleFont+'px'
+    sz.bannSize   = if sz.level is 'Comp' then 11.0*sz.scaleFont+'px' else 9.0*sz.scaleFont+'px'
     sz.pracSize   = 10.0*sz.scaleFont+'px'
     sz.dispSize   =  7.0*sz.scaleFont+'px'
     sz.iconDy     = if sz.level is 'Comp' then  7.5*sz.scaleFont else 7.5*sz.scaleFont
