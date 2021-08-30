@@ -52,24 +52,25 @@ Innovate = class Innovate {
 
   // getComputedTextLength()
   rings(g, size) {
-    var colorBack, colorRing, h2, h5, hr, t, uc, wr, xi, xt, yt;
-    t = size.w / 13;
-    wr = size.level === 'Comp' ? t : 75 * size.scaleFont;
-    hr = size.level === 'Comp' ? t : 18 * size.scaleFont;
-    xi = size.level === 'Comp' ? t * 1.70 : t * 1.5;
-    xt = xi + size.ringIcon * 0.8;
-    yt = size.level === 'Comp' ? t * 1.9 : size.h / 4.0;
+    var colorBack, colorRing, h2, h5, hr, ht, uc, wr, wt, xi, xt, yt;
+    wt = size.w / 13;
+    ht = size.h / 6;
+    wr = size.level === 'Comp' ? wt : size.w * 0.75;
+    hr = size.level === 'Comp' ? ht : size.h * 0.50;
+    xi = size.level === 'Comp' ? wt * 1.6 : wt * 1.5;
+    xt = xi + size.w * 0.04;
+    yt = size.level === 'Comp' ? ht * 1.7 : size.h / 4.2;
     uc = vis.unicode(this.spec.icon);
-    // console.log( 'Innovate.rings()', { t:t, wr:wr, hr:hr, xt:xt, yt:yt } )
+    // console.log( 'Innovate.rings()', { wt:wt, wr:wr, hr:hr, xt:xt, yt:yt } )
     colorRing = vis.css([70, 55, 70]);
     colorBack = 'rgba(97, 56, 77, 1.0 )';
-    h2 = Math.max(size.h - t * 2, t);
-    h5 = Math.max(size.h - t * 5, t);
-    this.shapes.round(g, t, t, size.w - t * 2, h2, t, t, colorRing, 'none');
-    this.shapes.round(g, t * 2.5, t * 2.5, size.w - t * 5.0, h5, t, t, colorBack, 'none');
-    this.shapes.rect(g, t, t, wr, hr, colorRing, 'none');
+    h2 = Math.max(size.h - wt * 2, wt);
+    h5 = Math.max(size.h - wt * 5, wt);
+    this.shapes.round(g, wt, wt, size.w - wt * 2, h2, wt, wt, colorRing, 'none');
+    //shapes.round( g, wt*2.5,  wt*2.5, size.w-wt*5.0, h5, wt, wt, colorBack, 'none' )
+    this.shapes.rect(g, wt, wt, wr, hr, colorRing, 'none');
     this.shapes.icon(g, xi, yt, this.spec.name, this.spec.name + 'Icon', 'black', size.bannSize, uc);
-    return this.shapes.text(g, xt, yt, this.spec.name, this.spec.name + 'Text', 'black', size.bannSize, "start");
+    this.shapes.text(g, xt, yt, this.spec.name, this.spec.name + 'Text', 'black', size.bannSize, "start");
   }
 
   principle(g, size) {

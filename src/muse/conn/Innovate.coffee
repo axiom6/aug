@@ -29,23 +29,25 @@ class Innovate
 
   # getComputedTextLength()
   rings:( g, size ) ->
-    t  = size.w / 13 
-    wr = if size.level is 'Comp' then  t      else 75*size.scaleFont
-    hr = if size.level is 'Comp' then  t      else 18*size.scaleFont
-    xi = if size.level is 'Comp' then  t*1.70 else t*1.5
-    xt = xi + size.ringIcon * 0.8
-    yt  = if size.level is 'Comp' then  t*1.9  else size.h / 4.0
+    wt = size.w / 13
+    ht = size.h /  6
+    wr = if size.level is 'Comp' then  wt     else size.w * 0.75
+    hr = if size.level is 'Comp' then  ht     else size.h * 0.50
+    xi = if size.level is 'Comp' then  wt*1.6 else wt*1.5
+    xt = xi + size.w * 0.04
+    yt = if size.level is 'Comp' then  ht*1.7  else size.h / 4.2
     uc = vis.unicode( @spec.icon )
-    # console.log( 'Innovate.rings()', { t:t, wr:wr, hr:hr, xt:xt, yt:yt } )
+    # console.log( 'Innovate.rings()', { wt:wt, wr:wr, hr:hr, xt:xt, yt:yt } )
     colorRing = vis.css( [70,55,70] )
     colorBack = 'rgba(97, 56, 77, 1.0 )'
-    h2 = Math.max(size.h-t*2,t)
-    h5 = Math.max(size.h-t*5,t)
-    @shapes.round( g, t,      t,     size.w-t*2,   h2, t, t, colorRing, 'none' )
-    @shapes.round( g, t*2.5,  t*2.5, size.w-t*5.0, h5, t, t, colorBack, 'none' )
-    @shapes.rect(  g, t,      t,     wr,           hr,                 colorRing, 'none' )
+    h2 = Math.max(size.h-wt*2,wt)
+    h5 = Math.max(size.h-wt*5,wt)
+    @shapes.round( g, wt,      wt,     size.w-wt*2,   h2, wt, wt, colorRing, 'none' )
+    #shapes.round( g, wt*2.5,  wt*2.5, size.w-wt*5.0, h5, wt, wt, colorBack, 'none' )
+    @shapes.rect(  g, wt,      wt,     wr,            hr,         colorRing, 'none' )
     @shapes.icon(  g, xi, yt, @spec.name, @spec.name+'Icon', 'black', size.bannSize,  uc )
     @shapes.text(  g, xt, yt, @spec.name, @spec.name+'Text', 'black', size.bannSize , "start" )
+    return
 
   principle:( g, size ) ->
     @eastInovate(  g, size )
