@@ -28,7 +28,7 @@
       const dirs = { west:true, east:true, north:true, south:true, prev:true, next:true };
 
       const doDir = function(  dir )  {
-          nav.dir( dir ); }
+          nav.doDir( dir ); }
 
       const style =  function(dir) {
           return dirs[dir] ? { color:'wheat' } : { color:'#333' } }

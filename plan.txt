@@ -1,9 +1,9 @@
 
 Features One
-  1. Muse innovate boxes need to be smaller
-  2. Dirs with Navd.vue
-  3. Font Size management with Mobile
-  4. Vizu Improve dispose()
+  1. Dirs with Navd.vue
+  2. Font Size management with Mobile
+  3. Vizu Improve dispose()
+  4. PWA caching has undefined problems
 
 Features Two
    1. Test

@@ -80,9 +80,7 @@ class Build
   # Build instance
 
   constructor:( @batch, @komps=null ) ->
-    #@Spec   = @batch.Muse.data
-    @none    = { name:"none" }
-    Util.noop( @toGroups, @setAdjacents )
+    @none    = 'none'
 
   getPlane:( pracKey ) ->
     for plane in Build.planes
@@ -239,7 +237,6 @@ class Build
     return
 
   getPractices:( plane ) ->
-
     if @batch[plane]? and @batch[plane].data?
        @batch[plane].data
     else
@@ -262,6 +259,23 @@ class Build
     for own skey, study of practice when Util.isChild(skey)
       return study if study.dir is dir
     null
+
+
+  getDisps:( compKey, pracKey ) ->
+    pracs = @getPractices( compKey )
+    for own pkey, prac of pracs when Util.isChild(pkey)
+      return prac.studies if pkey is pracKey
+    {}
+
+  getDispKey:( prevCompKey, nextCompKey, prevPracKey, nextPracKey, prevDispKey ) ->
+    prevDisps = @getDisps( prevCompKey, prevPracKey )
+    nextDisps = @getDisps( nextCompKey, nextPracKey )
+    dispDir   = @none
+    for  own dkey, disp of prevDisps when Util.isChild(dkey) and dkey is prevDispKey
+      dispDir = disp.dir
+    for  own dkey, disp of nextDisps when Util.isChild(dkey)
+      return dkey if disp.dir is dispDir
+    return @none
 
   getDim:( cname, dir ) ->
     col = @getCol(cname)

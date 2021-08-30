@@ -11,7 +11,6 @@ class Nav extends Mix
     @komps      = komps
     @pages      = pages
     @isRoutes   = isRoutes
-    @dirs       = { west:true, east:true, north:true, south:true, prev:true, next:true }
     @navs       = if @komps then @addInovToNavs( @komps ) else null
     @touch      =  null
     @build      =  new Build( @batch )
@@ -131,6 +130,10 @@ class Nav extends Mix
       else                                 'Comp'
     console.log( 'Nav.toPub()', { url:href, obj,obj, paths:paths } ) if @debug
     obj
+
+  doDir:( direct ) ->
+    @dir.dir( direct )
+    return
 
   doRoute:( obj ) ->
     route = obj.compKey
