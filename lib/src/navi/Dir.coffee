@@ -26,7 +26,7 @@ class Dir
         when 'Prac' then @dirPrac( direct )
         when 'Disp' then @dirDisp( direct )
         else             @dirComp( direct )
-    else if direct is 'west' or direct is 'east'
+    else if @nav.pageKey isnt 'none' and ( direct is 'west' or direct is 'east' )
       @dirPage( direct )
     else
       @dirComp( direct )
@@ -36,7 +36,7 @@ class Dir
     return if not @komps? or @nav.compKey is 'none'
     compDir = @komps[@nav.compKey][dir]
     msg         = {}
-    msg.source  = "#{'Nav.dirComp'}(#{dir})"
+    msg.source  = "#{'Dir.dirComp'}(#{dir})"
     msg.compKey = compDir
     @nav.pub( msg )
     return
@@ -44,28 +44,37 @@ class Dir
   dirPrac:( dir ) ->
     return if @nav.compKey is 'none' or @nav.pracKey is 'none'
     pracs = @build.getPractices( @nav.compKey )
-    prac  =  @build.adjacentPractice( pracs[@nav.pracKey], dir )
+    prac  = @build.adjacentPractice( pracs[@nav.pracKey], dir )
     msg         = {}
-    msg.source  = "#{'Nav.dirPrac'}(#{dir})"
+    msg.source  = "#{'Dir.dirPrac'}(#{dir})"
     msg.pracKey = prac.name
     msg.compKey = @build.getPlane( msg.pracKey )
     if @debug
-      console.log( "Dir.dirPrac()",  { dir:dir, nextPrac:msg.pracKey, prevPrac:@nav.pracKey,
+      console.log( "Dir.dirPrac()",  { dir:dir,
+      nextPrac:msg.pracKey, prevPrac:@nav.pracKey,
       nextComp:msg.compKey, prevComp:@nav.compKey, prac:prac } )
     @nav.pub( msg )
     return
 
   dirDisp:( dir ) ->
-    return if @nav.compKey is 'none' or @nav.pracKey is 'none'  or @nav.dispKey is 'none'
+    return if @nav.compKey is 'none' or @nav.pracKey is 'none' or @nav.dispKey is 'none'
+    pracs = @build.getPractices( @nav.compKey )
+    prac  = @build.adjacentPractice( pracs[@nav.pracKey], dir )
     msg         = {}
-    msg.source  = "#{'Nav.dirDisp'}(#{dir})"
-    msg.pracKey = @build.adjacentPractice( @nav.pracKey, dir )
+    msg.source  = "#{'Dir.dirDisp'}(#{dir})"
+    msg.pracKey = prac.name
     msg.compKey = @build.getPlane( msg.pracKey )
-    msg.dispKey = @build.getDispKey( @nav.compKey, msg.compKey, @nav.pracKey, msg.pracKey, @nav.dispKey )
+    msg.dispKey = @build.getNextDispKey( @nav.compKey, msg.compKey, @nav.pracKey, msg.pracKey, @nav.dispKey )
+    if @debug
+      console.log( "Dir.dirDisp()",  { dir:dir,
+      nextDisp:msg.dispKey, prevDisp:@nav.dispKey,
+      nextPrac:msg.pracKey, prevPrac:@nav.pracKey, prac:prac,
+      nextComp:msg.compKey, prevComp:@nav.compKey } )
     @nav.pub( msg ) if msg.dispKey isnt 'none'
     return
 
   dirPage:( dir ) ->
+    console.log( "Dir.dirPage()", { dir:dir, pageKey:@nav.pageKey }  )
     return if @nav.compKey is 'none' or @nav.pageKey is 'none'
     pages   = @nav.toKeys( @nav.pages[@nav.compKey] )
     return if pages.length <= 1

@@ -81,6 +81,7 @@ class Build
 
   constructor:( @batch, @komps=null ) ->
     @none    = 'none'
+    @debug   = true
 
   getPlane:( pracKey ) ->
     for plane in Build.planes
@@ -260,22 +261,25 @@ class Build
       return study if study.dir is dir
     null
 
-
   getDisps:( compKey, pracKey ) ->
     pracs = @getPractices( compKey )
     for own pkey, prac of pracs when Util.isChild(pkey)
-      return prac.studies if pkey is pracKey
+      return prac.disps if pkey is pracKey
     {}
 
-  getDispKey:( prevCompKey, nextCompKey, prevPracKey, nextPracKey, prevDispKey ) ->
-    prevDisps = @getDisps( prevCompKey, prevPracKey )
-    nextDisps = @getDisps( nextCompKey, nextPracKey )
-    dispDir   = @none
+  getNextDispKey:( prevCompKey, nextCompKey, prevPracKey, nextPracKey, prevDispKey ) ->
+    prevDisps   = @getDisps(  prevCompKey, prevPracKey )
+    nextDisps   = @getDisps(  nextCompKey, nextPracKey )
+    dispDir     = @none
+    nextDispKey = @none
     for  own dkey, disp of prevDisps when Util.isChild(dkey) and dkey is prevDispKey
       dispDir = disp.dir
-    for  own dkey, disp of nextDisps when Util.isChild(dkey)
-      return dkey if disp.dir is dispDir
-    return @none
+    for  own dkey, disp of nextDisps when Util.isChild(dkey) and disp.dir is dispDir
+      nextDispKey = dkey
+    if @debug
+      console.log( "Build.getNextDispKey()", { nextDispKey:nextDispKey, prevDispKey:prevDispKey, dispDir:dispDir
+      prevDisps:prevDisps, nextDisps:nextDisps } )
+    nextDispKey
 
   getDim:( cname, dir ) ->
     col = @getCol(cname)
