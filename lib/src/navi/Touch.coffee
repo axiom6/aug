@@ -6,30 +6,36 @@ class Touch
     @elem         = null
     @debug        = true
     @reset()          # "tabs-tab","disp-comp","west","east","south","north","cen"
-    @touchClasses = []
+    @touchClasses    = []
+    @touchOutClasses = []
 
   reset:() ->
     @beg = null
     @pnt = null
 
-  listen:( elem, touchClasses ) ->
+  listen:( elem, touchClasses, touchOutClasses=[]  ) ->
     if @debug
-      console.log( 'Touch.listen()', touchClasses )
-    @elem         = elem
-    @touchClasses = touchClasses
+      console.log( 'Touch.listen()', touchOutClasses )
+    @elem            = elem
+    @touchClasses    = touchClasses
+    @touchOutClasses = touchOutClasses
     @elem.addEventListener( 'pointerdown',   @start,  false )
     @elem.addEventListener( 'pointerup',     @up,     false )
     @elem.addEventListener( 'pointerleave',  @leave,  false )
     @elem.addEventListener( 'pointercancel', @cancel, false )
+    @elem.addEventListener( 'dblclick',      @double, false )
     #elem.addEventListener( 'pointerout',    @out,    false )
     return
 
   start:(  event ) =>
     # event.preventDefault()
-    inTouch = @nav.inArray( event.target.className, @touchClasses )
+    inTouch  = @nav.inArray( event.target.className, @touchClasses    )
+    outTouch = @nav.inArray( event.target.className, @touchOutClasses )
     if @debug
-       console.log( 'Touch.start()', { target:event.target.className, inTouch:inTouch, classes:@touchClasses } )
-    return if not inTouch
+       console.log( 'Touch.start()',
+       { target:event.target.className, inTouch:inTouch, outTouch:outTouch, outs:@touchOutClasses } )
+    # return if not inTouch
+    return   if outTouch
     if not ( event.touches? and event.touches.length > 1 )
       @elem.setPointerCapture( event.pointerId )
     @beg = event
@@ -85,6 +91,9 @@ class Touch
     @elem.removeEventListener( 'pointermove', @movit, false )
     @reset()
     return
+
+  double:() =>
+    @nav.doDir( "next" )
 
   swipeDir:( begX, begY, endX, endY ) ->
     dir = "none"

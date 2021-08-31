@@ -14,7 +14,7 @@
 
 <script type="module">
 
-import {inject, ref, onMounted, nextTick } from "vue";
+import {inject, ref, onMounted } from "vue";  // , nextTick
 
   let Navd = {
     
@@ -38,8 +38,8 @@ import {inject, ref, onMounted, nextTick } from "vue";
             dirs[keyn] = dirsa[keyn]; } }
 
       onMounted( function () {
-        nav.subscribe(  "Navd", 'Navd', (dirs) => { onDirs( dirs ); } );
-        nav.mountTouch( "Navd", navdElem['value'], nextTick, ['navd-navd'] ); } )
+      //nav.mountTouch( "Navd", navdElem['value'], nextTick, ['navd-navd'] );
+        nav.subscribe(  "Navd", 'Navd', (dirs) => { onDirs( dirs ); } ); } )
 
     return{ doDir, style, navdElem }; }
   }

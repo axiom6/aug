@@ -134,10 +134,10 @@ class Nav extends Mix
     @dir.dir( direct )
     return
     
-  mountTouch:( msg, elem, nextTick, klasses ) ->
+  mountTouch:( msg, elem, nextTick, incKlasses, excKlasses=[] ) ->
     nextTick( () =>
       if @isDef(elem) and @touch?
-        @touch.listen( elem, klasses )
+        @touch.listen( elem, incKlasses, excKlasses )
       else
         console.error( msg, "Nav.mountTouch() elem or touch undefined" ) )
     return

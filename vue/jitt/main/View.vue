@@ -29,7 +29,8 @@
          return nav.route === null; }
 
       onMounted( () => {
-        nav.mountTouch( "View", viewElem['value'], nextTick, ['view-pane'] ); } )
+        let outTouch = ['navb-name-desktop','navb-name-mobile','btns-btn','title']
+        nav.mountTouch( "View", viewElem['value'], nextTick, ['view-pane'], outTouch ); } )
 
     return { show, viewElem }; }
   }

@@ -1,9 +1,9 @@
 {
-  "name":             "Muse",
-  "short_name":       "Muse",
+  "name":             "Jitter",
+  "short_name":       "Jitter",
   "start_url":        "/index.html?source=pwa",
   "display":          "standalone",
-  "orientation":      "landscape",
+  "orientation":      "portrait",
   "theme_color":      "#888888",
   "background_color": "#000000",
   "icons": [

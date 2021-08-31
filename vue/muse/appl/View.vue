@@ -58,7 +58,7 @@ import {inject, ref, onMounted, nextTick } from 'vue';
         if( debug ) { console.log( 'View.onNav()', { level:level, module:module, obj:obj } ); } }
 
       onMounted( () => {
-      //nav.mountTouch( "View", viewElem['value'], nextTick, ['view-pane'] );
+        nav.mountTouch( "View", viewElem['value'], nextTick, ['view-pane'] );
         nav.subscribe(  'View', 'View', (obj) => { onNav(obj); } ); } )
 
       return { show, viewIdx, viewElem, nav }; }
