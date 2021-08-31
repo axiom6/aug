@@ -2,8 +2,9 @@
 import Access     from '../../../lib/pub/util/Access.js'
 import Stream     from '../../../lib/pub/util/Stream.js'
 import Cache      from '../../../lib/pub/util/Cache.js'
-import Nav        from '../../../lib/pub/navi/Nav.js'
 import Mix        from '../../../lib/pub/navi/Mix.js'
+import Nav        from '../../../lib/pub/navi/Nav.js'
+import Touch      from '../../../lib/pub/navi/Touch.js'
 import { vis }    from '../../../lib/pub/draw/Vis.js'
 import { tester } from '../../../lib/pub/test/tester.js'
 import Main       from '../main/Main.js'
@@ -85,11 +86,12 @@ class Vizu
   # 2. Initializes publish, subscribe and navigation with Stream and refines Practices with Build and merge.
   Vizu.init =   () ->
 
-    subjects     = ["Nav","Tab","Navd","View","Vizu"]
-    streamLog    = { subscribe:false, publish:false, subjects:subjects }
+    subjects      = ["Nav","Tab","Navd","View","Vizu"]
+    streamLog     = { subscribe:false, publish:false, subjects:subjects }
     Vizu.stream   = new Stream( subjects, streamLog )
     Vizu.mix      = new Mix(  Vizu )
     Vizu.nav      = new Nav(  Vizu, Vizu.stream, Vizu.komps, Vizu.pages )
+    Vizu.touch    = new Touch( Vizu.stream, Vizu.nav )
     Vizu.vis      = vis
     Vizu.main     = new Main( Vizu.stream, Vizu.nav )
     Vizu.tester   = tester

@@ -90,8 +90,8 @@ Jitter = (function() {
       Jitter.stream = new Stream(subjects, streamLog);
       Jitter.mix = new Mix(Jitter, Jitter.routeNames);
       Jitter.nav = new Nav(Jitter, Jitter.stream, Jitter.komps, {}, true);
-      Jitter.choice = new Choice(Jitter.nav);
       Jitter.touch = new Touch(Jitter.stream, Jitter.nav);
+      Jitter.choice = new Choice(Jitter.nav);
       if (Jitter.mode === 'production') {
         Jitter.cache = new Cache(Jitter.stream);
       }

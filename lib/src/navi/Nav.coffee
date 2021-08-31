@@ -133,6 +133,14 @@ class Nav extends Mix
   doDir:( direct ) ->
     @dir.dir( direct )
     return
+    
+  mountTouch:( msg, elem, nextTick, klasses ) ->
+    nextTick( () =>
+      if @isDef(elem) and @touch?
+        @touch.listen( elem, klasses )
+      else
+        console.error( msg, "Nav.mountTouch() elem or touch undefined" ) )
+    return
 
   doRoute:( obj ) ->
     route = obj.compKey

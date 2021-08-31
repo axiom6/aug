@@ -1,6 +1,6 @@
 
 <template>
-  <div class="view-pane">
+  <div ref="viewElem" class="view-pane">
     <v-home     v-if="show('Home')"   :key="nav.keyIdx(  'Home',viewIdx)"></v-home>
     <v-main     v-if="show('Main')"   :key="nav.keyIdx(  'Main',viewIdx)"></v-main>
     <v-hues     v-if="show('Hues')"   :key="nav.keyIdx(  'Hues',viewIdx)"></v-hues>
@@ -13,7 +13,7 @@
 
 <script type="module">
 
-  import { inject, ref, onMounted } from 'vue';
+import {inject, ref, onMounted, nextTick} from 'vue';
   import Home     from './Home.vue'
 
   import Main     from '../main/Main.vue';
@@ -31,6 +31,7 @@
     setup() {
       const nav      = inject('nav');
       const viewIdx  = ref(0);
+      const viewElem = ref(null);
 
       const mains    = ["Hexa","Rgbs","Grid"];
       let   module   = 'Home';
@@ -50,9 +51,10 @@
         if( debug ) { console.log( 'View.onNav()', { module:module, obj:obj } ); } }
 
       onMounted( () => {
-        nav.subscribe('View', 'View', (obj) => { onNav(obj); } ); } )
+        nav.subscribe(  'View', 'View', (obj) => { onNav(obj); } );
+        nav.mountTouch( "View", viewElem['value'], nextTick, ['view-pane'] ); } )
 
-      return { show, viewIdx, nav }; }
+      return { show, viewIdx, viewElem, nav }; }
     }
 
   export default View

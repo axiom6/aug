@@ -4,6 +4,7 @@ class Touch
   constructor:( @stream, @nav ) ->
     @nav.touch    = @
     @elem         = null
+    @debug        = true
     @reset()          # "tabs-tab","disp-comp","west","east","south","north","cen"
     @touchClasses = []
 
@@ -11,7 +12,9 @@ class Touch
     @beg = null
     @pnt = null
 
-  listen:(  elem, touchClasses ) ->
+  listen:( elem, touchClasses ) ->
+    if @debug
+      console.log( 'Touch.listen()', touchClasses )
     @elem         = elem
     @touchClasses = touchClasses
     @elem.addEventListener( 'pointerdown',   @start,  false )
@@ -24,13 +27,16 @@ class Touch
   start:(  event ) =>
     # event.preventDefault()
     inTouch = @nav.inArray( event.target.className, @touchClasses )
+    if @debug
+       console.log( 'Touch.start()', { target:event.target.className, inTouch:inTouch, classes:@touchClasses } )
     return if not inTouch
     if not ( event.touches? and event.touches.length > 1 )
       @elem.setPointerCapture( event.pointerId )
     @beg = event
     @pnt = @coord( event, {} )
-    @elem.addEventListener( 'pointermove',   @movit, false )
-    console.log( 'Touch.start()', { target:event.target.className, inTouch:inTouch } )
+    @elem.addEventListener( 'pointermove', @movit, false )
+    if @debug
+      console.log( 'Touch.start()', { target:event.target.className, inTouch:inTouch } )
     return
 
   movit:( event ) =>
@@ -46,7 +52,8 @@ class Touch
     else                                      # Either Mouse event or Pointer Event
        pnt.x = event.clientX
        pnt.y = event.clientY
-    # console.log( 'Touch.movit()', { x:pnt.x, y:pnt.y, touches:event.targetTouches? } )
+    if @debug
+      console.log( 'Touch.movit()', { x:pnt.x, y:pnt.y, touches:event.targetTouches? } )
     return pnt
 
   leave:( event ) =>
@@ -72,8 +79,9 @@ class Touch
     if @beg? and @pnt?
        event.target.releasePointerCapture(event.pointerId)
        dir = @swipeDir( @beg.clientX, @beg.clientY, @pnt.x, @pnt.y )
-       @nav.dir( dir ) if dir isnt 'none'
-       console.log( 'Touch.endit()', { type:type, x1:@beg.clientX, y1:@beg.clientY, x2:@pnt.x, y2:@pnt.y, dir:dir } )
+       @nav.doDir( dir ) if dir isnt 'none'
+       if @debug
+         console.log( 'Touch.endit()', { type:type, x1:@beg.clientX, y1:@beg.clientY, x2:@pnt.x, y2:@pnt.y, dir:dir } )
     @elem.removeEventListener( 'pointermove', @movit, false )
     @reset()
     return

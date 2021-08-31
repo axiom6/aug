@@ -2,10 +2,15 @@
 Features One
   1. Dirs with Navd.vue
      a. Clean up Nav pageKey handling
+     b. Get Touch working
   2. Font Size management with Mobile
   3. Vizu Improve dispose()
   4. PWA caching has undefined problems
-
+  4. Comment
+     a. Data.json for Explore    Model   Simulate
+     b. Math.json for Conjecture Derive  Represent
+     c. Scie.json for Research   Develop Apply
+     
 Features Two
    1. Test
       a. Functional Test

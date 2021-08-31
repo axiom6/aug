@@ -6,9 +6,11 @@ import Stream from '../../../lib/pub/util/Stream.js';
 
 import Cache from '../../../lib/pub/util/Cache.js';
 
+import Mix from '../../../lib/pub/navi/Mix.js';
+
 import Nav from '../../../lib/pub/navi/Nav.js';
 
-import Mix from '../../../lib/pub/navi/Mix.js';
+import Touch from '../../../lib/pub/navi/Touch.js';
 
 import {
   vis
@@ -92,6 +94,7 @@ Vizu = (function() {
       Vizu.stream = new Stream(subjects, streamLog);
       Vizu.mix = new Mix(Vizu);
       Vizu.nav = new Nav(Vizu, Vizu.stream, Vizu.komps, Vizu.pages);
+      Vizu.touch = new Touch(Vizu.stream, Vizu.nav);
       Vizu.vis = vis;
       Vizu.main = new Main(Vizu.stream, Vizu.nav);
       Vizu.tester = tester;

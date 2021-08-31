@@ -1,6 +1,6 @@
 
 <template>
-  <div class="view-pane">
+  <div ref="viewElem" class="view-pane">
     <v-home     v-if="show('Home')"   :key="viewIdx"></v-home>
     <v-math     v-if="show('Math')"   :key="viewIdx"></v-math>
     <v-mathEQ   v-if="show('MathEQ')" :key="viewIdx" :pracKey="'MathEQ'"></v-mathEQ>
@@ -21,7 +21,7 @@
 
 <script type="module">
 
-  import { inject, ref, onMounted } from 'vue';
+import {inject, ref, onMounted, nextTick} from 'vue';
   import Home     from './Home.vue'
   import Math     from '../math/Math.vue';
   import MathND   from '../math/MathND.vue';
@@ -43,10 +43,11 @@
                  'v-geom3D':GeomND, 'v-test':Test, 'v-replay':Replay, 'v-result':Result },
 
     setup() {
-      const nav     = inject('nav');
-      const viewIdx = ref(0);
-      let   module  = 'Home'
-      let   debug   = false
+      const nav      = inject('nav');
+      const viewIdx  = ref(0);
+      const viewElem = ref(null);
+      let   module   = 'Home'
+      let   debug    = false
 
       const show = ( moduleArg ) => {
         let isShow = module===moduleArg;
@@ -60,9 +61,10 @@
         if( debug ) { console.log( 'View.onNav()', { module:module, obj:obj } ); } }
 
       onMounted( () => {
-        nav.subscribe('View', 'View', (obj) => { onNav(obj); } ); } )
+        nav.subscribe(  'View', 'View', (obj) => { onNav(obj); } );
+        nav.mountTouch( "View", viewElem['value'], nextTick, ['view-pane'] ); } )
 
-      return { show, viewIdx }; }
+      return { show, viewIdx, viewElem }; }
     }
 
   export default View

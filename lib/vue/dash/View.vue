@@ -1,5 +1,5 @@
 <template>
-  <div class="view-pane">
+  <div ref="viewElem" class="view-pane">
     <template v-for="view in rviews">
       <router-view :name="view"></router-view>
     </template>
@@ -7,19 +7,24 @@
 </template>
 
 <script type="module">
-import { inject } from 'vue';
+import { inject, ref } from 'vue'; // , nextTick, onMounted
 
 let View = {
   setup() {
     const nav    = inject('nav');
     const rviews = nav.routeNames();
-    // console.log( 'View.setuo()', rviews );
-    return { rviews }; }
+    const viewElem = ref(null);
+
+  //onMounted( () => {
+  //  nav.mountTouch( "View", viewElem['value'], nextTick, ['view-pane'] ); } )
+
+    return { rviews, viewElem }; }
 }
 export default View
 </script>
 
 <style lang="less">
-.view-pane {}
+
+  .view-pane {}
 
 </style>

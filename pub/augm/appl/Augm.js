@@ -9,9 +9,11 @@ import Access from '../../../lib/pub/util/Access.js';
 
 import Stream from '../../../lib/pub/util/Stream.js';
 
+import Mix from '../../../lib/pub/navi/Mix.js';
+
 import Nav from '../../../lib/pub/navi/Nav.js';
 
-import Mix from '../../../lib/pub/navi/Mix.js';
+import Touch from '../../../lib/pub/navi/Touch.js';
 
 import Dash from '../../../vue/augm/appl/Dash.vue';
 
@@ -87,6 +89,7 @@ Augm = (function() {
       Augm.stream = new Stream(subjects, streamLog);
       Augm.mix = new Mix(Augm);
       Augm.nav = new Nav(Augm, Augm.stream, Augm.komps, Augm.pages, false);
+      Augm.touch = new Touch(Augm.stream, Augm.nav);
       if (Augm.mode === 'production') {
         Augm.cache = new Cache(Augm.stream);
       }

@@ -4,8 +4,9 @@
 import { tester } from  '../../../lib/pub/test/Tester.js'
 import Access     from  '../../../lib/pub/util/Access.js'
 import Stream     from '../../../lib/pub/util/Stream.js'
-import Nav        from '../../../lib/pub/navi/Nav.js'
 import Mix        from '../../../lib/pub/navi/Mix.js'
+import Nav        from '../../../lib/pub/navi/Nav.js'
+import Touch      from '../../../lib/pub/navi/Touch.js'
 import Dash       from '../../../vue/augm/appl/Dash.vue'
 
 import { createApp }    from 'vue'
@@ -95,6 +96,7 @@ class Augm
     Augm.stream = new Stream( subjects, streamLog )
     Augm.mix    = new Mix( Augm )
     Augm.nav    = new Nav( Augm, Augm.stream, Augm.komps, Augm.pages, false )
+    Augm.touch  = new Touch( Augm.stream, Augm.nav )
     Augm.cache  = new Cache( Augm.stream ) if Augm.mode is 'production'
     tester.setOptions( { testing:true, archive:false, verbose:false, debug:false } )
     try

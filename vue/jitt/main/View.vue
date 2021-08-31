@@ -25,14 +25,11 @@
       const nav      = inject('nav');
       const viewElem = ref(null);
 
-      const show = function () {
+      const show = () => {
          return nav.route === null; }
 
-      onMounted( function () {
-         nextTick(function () {
-          let elem = viewElem.value;
-          let touchClasses = ['view-pane'];
-          nav.touch.listen( elem, touchClasses ); } ) } )
+      onMounted( () => {
+        nav.mountTouch( "View", viewElem['value'], nextTick, ['view-pane'] ); } )
 
     return { show, viewElem }; }
   }

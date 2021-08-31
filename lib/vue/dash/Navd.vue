@@ -1,6 +1,6 @@
 
 <template>
-  <div   class="navd-pane">
+  <div ref="navdElem"  class="navd-pane">
     <div   class="navd-navd">
       <div class="navd-west"  :style="style('west')"  @click="doDir('west' )"><i class="fas fa-angle-left"  ></i></div>
       <div class="navd-north" :style="style('north')" @click="doDir('north')"><i class="fas fa-angle-up"    ></i></div>
@@ -13,8 +13,8 @@
 </template>
 
 <script type="module">
-  
-  import { inject, onMounted } from "vue";
+
+import {inject, ref, onMounted, nextTick } from "vue";
 
   let Navd = {
     
@@ -22,8 +22,8 @@
 
     setup() {
 
-      const mix = inject( 'mix' );
-      const nav = inject( 'nav' );
+      const nav      = inject( 'nav' );
+      const navdElem = ref(null);
 
       const dirs = { west:true, east:true, north:true, south:true, prev:true, next:true };
 
@@ -38,10 +38,10 @@
             dirs[keyn] = dirsa[keyn]; } }
 
       onMounted( function () {
-        mix.subscribe(  "Navd", 'Navd', (dirs) => {
-          onDirs( dirs ); } ); } )
+        nav.subscribe(  "Navd", 'Navd', (dirs) => { onDirs( dirs ); } );
+        nav.mountTouch( "Navd", navdElem['value'], nextTick, ['navd-navd'] ); } )
 
-    return{ doDir, style }; }
+    return{ doDir, style, navdElem }; }
   }
 
   export default Navd;

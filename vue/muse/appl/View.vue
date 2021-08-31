@@ -1,6 +1,6 @@
 
 <template>
-  <div class="view-pane">
+  <div ref="viewElem" class="view-pane">
     <v-home   v-if="show('Comp','Home')"   :key="nav.keyIdx(  'Home',viewIdx)"></v-home>
     <v-prin   v-if="show('Comp','Prin')"   :key="nav.keyIdx(  'Prin',viewIdx)"></v-prin>
     <v-comp   v-if="show('Comp','Comp')"   :key="nav.keyIdx(  'Comp',viewIdx)"></v-comp>
@@ -15,7 +15,7 @@
 
 <script type="module">
 
-  import { inject, ref, onMounted } from 'vue';
+import {inject, ref, onMounted, nextTick } from 'vue';
   import Home   from '../../muse/appl/Home.vue'
   import Prin   from '../../muse/prin/Prin.vue'
   import Comp   from '../../muse/comp/Comp.vue'
@@ -34,6 +34,7 @@
     setup() {
       const nav       = inject('nav');
       const viewIdx   = ref(0);
+      const viewElem  = ref(null);
       const compEnums = "|Home|Prin|Defs|Test|"
       const pracEnums = "|Replay|Result|"
       let   level     = 'Comp'
@@ -57,9 +58,10 @@
         if( debug ) { console.log( 'View.onNav()', { level:level, module:module, obj:obj } ); } }
 
       onMounted( () => {
-        nav.subscribe('View', 'View', (obj) => { onNav(obj); } ); } )
+      //nav.mountTouch( "View", viewElem['value'], nextTick, ['view-pane'] );
+        nav.subscribe(  'View', 'View', (obj) => { onNav(obj); } ); } )
 
-      return { show, viewIdx, nav }; }
+      return { show, viewIdx, viewElem, nav }; }
     }
 
   export default View
