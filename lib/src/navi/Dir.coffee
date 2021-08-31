@@ -4,7 +4,7 @@ class Dir
   constructor:( @nav ) ->
     @komps = @nav.komps
     @build = @nav.build
-    @debug = true
+    @debug = false
     @keyEvents()
 
   keyEvents:() ->
@@ -20,6 +20,8 @@ class Dir
     return
 
   dir:( direct ) =>
+    if @debug
+        console.log( "Dir.dir()", { dir:direct, pageKey:@nav.pageKey }  )
     if @nav.isApp('Muse')
       switch @nav.level
         when 'Comp' then @dirComp( direct )
@@ -74,21 +76,25 @@ class Dir
     return
 
   dirPage:( dir ) ->
-    console.log( "Dir.dirPage()", { dir:dir, pageKey:@nav.pageKey }  )
+
     return if @nav.compKey is 'none' or @nav.pageKey is 'none'
     pages   = @nav.toKeys( @nav.pages[@nav.compKey] )
     return if pages.length <= 1
     pageIdx = -1
     i       =  0
-    for i in [0...pages.length] when pages[i].name is @nav.pageKey
+    for i in [0...pages.length] when pages[i] is @nav.pageKey
       pageIdx = i
-    if      dir is "next"
+    if @debug
+      console.log( "Dir.dirPage() One", { dir:dir, pageKey:@nav.pageKey, pages:pages, pageIdx:pageIdx }  )
+    if      dir is "east"
       pageIdx = if pageIdx < pages.length-1 then pageIdx + 1 else 0
-    else if dir is "prev"
+    else if dir is "west"
       pageIdx = if pageIdx is 0 then pages.length-1 else pageIdx - 1
     msg        = {}
     msg.source  = "#{'Nav.dirPage'}(#{dir})"
-    msg.pageKey = pages[pageIdx].key
+    msg.pageKey = pages[pageIdx]
+    if @debug
+      console.log( "Dir.dirPage() Two", { dir:dir, pageKey:msg.pageKey, pages:pages, pageIdx:pageIdx }  )
     @nav.pub( msg )
     return
 

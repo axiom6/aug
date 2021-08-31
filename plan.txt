@@ -1,6 +1,7 @@
 
 Features One
   1. Dirs with Navd.vue
+     a. Clean up Nav pageKey handling
   2. Font Size management with Mobile
   3. Vizu Improve dispose()
   4. PWA caching has undefined problems

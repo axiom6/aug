@@ -25,7 +25,7 @@ class Nav extends Mix
     @choice     = 'none'
     @checked    = false
     @warnMsg    = 'none'
-    @debug      =  false
+    @debug      = false
     @pubs       = []
     @urls       = []
     @tabs       = {}
@@ -68,7 +68,7 @@ class Nav extends Mix
     @source   = 'none' if not msg.source?
     @pracKey  = 'none' if @level is   'Comp'
     @dispKey  = 'none' if @level isnt 'Disp'
-    obj = { source:@source, level:@level, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey }
+    obj = { source:@source, level:@level, compKey:@compKey, pracKey:@pracKey, dispKey:@dispKey, pageKey:@pageKey }
     obj.pageKey = @objPage( obj )
     obj.inovKey = @objInov( obj )
     obj.choice  = @choice  if @isApp('Jitter')
@@ -83,9 +83,8 @@ class Nav extends Mix
     return
 
   tab:( obj ) ->
-
     if @isDef(obj.pageKey)
-      @pageKye  = obj.pageKey
+      @pageKey  = obj.pageKey
       tabsKey   = @getTabsKey(obj)
       @setPageKey( tabsKey, obj.pageKey, {} ) # Short message on 'Tab' subject
       @stream.publish( 'Tab',           { compKey:tabsKey, pageKey:obj.pageKey } )
@@ -108,7 +107,7 @@ class Nav extends Mix
     url += '/' + obj.dispKey if obj.dispKey isnt 'none'
     url += '?' + 'page='     + page  if page isnt 'none'
     url += '&' + 'innovate=' + inov  if inov isnt 'none'
-    # console.log( 'Nav.toUrl()', url ) if @debug
+    console.log( 'Nav.toUrl()', url ) if @debug
     window.history.pushState( {}, '', url )
     url
 
@@ -128,7 +127,7 @@ class Nav extends Mix
       if      obj.dispKey isnt 'none' then 'Disp'
       else if obj.pracKey isnt 'none' then 'Prac'
       else                                 'Comp'
-    console.log( 'Nav.toPub()', { url:href, obj,obj, paths:paths } ) if @debug
+    console.log( 'Nav.toPub()', { url:href, obj:obj, paths:paths } ) if @debug
     obj
 
   doDir:( direct ) ->
@@ -163,7 +162,7 @@ class Nav extends Mix
     tabsKey
 
   objPage:( obj ) ->
-    @getPageKey( @getTabsKey(obj), false )
+    if obj.page is 'none' then @getPageKey( @getTabsKey(obj), false ) else obj.pageKey
 
   objInov:( obj ) ->
     if @inArray(obj.compKey,@musePlanes) then @getPageKey(obj.compKey) else 'none'
