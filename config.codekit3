@@ -285,14 +285,6 @@
       "oAP" : "\/dist",
       "oF" : 0
     },
-    "\/firebase-debug.log" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/firebase-debug.log",
-      "oF" : 0
-    },
     "\/firebase.json" : {
       "ft" : 524288,
       "oA" : 1,
@@ -1359,6 +1351,25 @@
       "oAP" : "\/lib\/pub\/navi\/Touch.js.map",
       "oF" : 0
     },
+    "\/lib\/pub\/navi\/Zing.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/lib\/pub\/navi\/Zing-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/pub\/navi\/Zing.js.map" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/navi\/Zing.js.map",
+      "oF" : 0
+    },
     "\/lib\/pub\/test\/Config.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -1919,6 +1930,17 @@
       "mi" : 0,
       "oA" : 0,
       "oAP" : "\/lib\/pub\/navi\/Touch.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/lib\/src\/navi\/Zing.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/lib\/pub\/navi\/Zing.js",
       "oF" : 0,
       "oS" : 1,
       "sC" : 0,

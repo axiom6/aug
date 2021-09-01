@@ -1,16 +1,13 @@
 
 Features One
-  1. Dirs with Navd.vue
-     a. Clean up Nav pageKey handling
-     b. Get Touch working
-  2. Font Size management with Mobile
-  3. Vizu Improve dispose()
-  4. PWA caching has undefined problems
-  4. Comment
+  1. Comment
      a. Data.json for Explore    Model   Simulate
      b. Math.json for Conjecture Derive  Represent
      c. Scie.json for Research   Develop Apply
-     
+  2. Font Size management with Mobile
+  3. Vizu Improve dispose()
+  4. PWA caching has undefined problems
+
 Features Two
    1. Test
       a. Functional Test
@@ -34,6 +31,9 @@ Features Two
      c. Vis.str hex output wrong
      d. Fix padded and move for and text color
   8. Get Worker.coffee to do more caching
+  9. Dirs with Navd.vue
+     a. Clean up Nav pageKey handling
+     b. Touch Flavor has not area
 
 Debug
   1. Look into cicular JSON bug in Tester.reviewsLocal()

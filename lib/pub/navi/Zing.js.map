@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "Zing.js",
+  "sourceRoot": "../../src/navi",
+  "sources": [
+    "Zing.coffee"
+  ],
+  "names": [],
+  "mappings": "AACA,IAAA;;AAAA,OAAA;EAAS,SAAA,MAAT;CAAA,MAAA;;AAGM,OAAN,MAAA,KAAA;EAEE,WAAY,OAAA,KAAA,CAAA;IAAE,IAAC,CAAA;IAAQ,IAAC,CAAA;IACtB,IAAC,CAAA,GAAG,CAAC,IAAL,GAAY;EADF;;EAGZ,KAAM,CAAE,IAAF,CAAA;AACR,QAAA;IAAI,MAAA,GAAS,EAAE,CAAC,MAAH,CAAW,IAAX;WACT,MAAM,CAAC,IAAP,CAAa,IAAb,EAAmB,OAAnB,EAA4B,IAAC,CAAA,OAA7B;EAFI;;EAIN,OAAQ,CAAE,KAAF,CAAA,EAAA;;AATV",
+  "sourcesContent": [
+    "\nimport { ZingTouch as ZT } from \"zingtouch\"\n\n\nclass Zing\n\n  constructor:( @stream, @nav ) ->\n    @nav.zing = @\n\n  swipe:( elem ) ->\n    region = ZT.Region( elem )\n    region.bind( elem, \"swipe\", @onSwipe )\n\n  onSwipe:( event ) ->"
+  ]
+}
