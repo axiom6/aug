@@ -4,7 +4,7 @@
     <div   class="home-head">
       <div class="home-name">Coffee</div>
       <div class="home-done">
-        <h-navb :title="'Done'" :route="'Done'"></h-navb>
+        <h-navb :title="'Done'" @click="route('Done')"></h-navb>
       </div>
     </div>
     <div   class="home-summ">
@@ -31,7 +31,7 @@
 
     setup() {
       const nav     = inject('nav');
-      const route   = function (comp) {
+      const route   = (comp) => {
         nav.doRoute( { compKey:comp } ); }
       return { route }; }
   }

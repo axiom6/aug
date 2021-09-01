@@ -229,37 +229,37 @@ Jitter = (function() {
   Jitter.komps = Access.kompsDirs({
     Home: {
       name: 'Home',
-      route: 'Home',
+      key: 'Home',
       icon: "fas fa-draw-polygon"
     },
     Flavor: {
       name: 'Flavor',
-      route: 'Flavor',
+      key: 'Flavor',
       icon: "fas fa-bezier-curve"
     },
     Roast: {
       name: 'Roast',
-      route: 'Roast',
+      key: 'Roast',
       icon: "fas fa-bezier-curve"
     },
     Brew: {
       name: 'Brew',
-      route: 'Brew',
+      key: 'Brew',
       icon: "fas fa-bezier-curve"
     },
     Drink: {
       name: 'Drink',
-      route: 'Drink',
+      key: 'Drink',
       icon: "fas fa-bezier-curve"
     },
     Body: {
       name: 'Body',
-      route: 'Body',
+      key: 'Body',
       icon: "fas fa-bezier-curve"
     },
     Done: {
       name: 'Done',
-      route: 'Done',
+      key: 'Done',
       icon: "fas fa-bezier-curve"
     }
   });

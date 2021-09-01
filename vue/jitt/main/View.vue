@@ -29,7 +29,7 @@
          return nav.route === null; }
 
       onMounted( () => {
-        let outTouch = ['navb-name-desktop','navb-name-mobile','btns-btn','title']
+        let outTouch = ['navb-name-desktop','navb-name-mobile','btns-btn','title','SVGAnimatedString']
         nav.mountTouch( "View", viewElem['value'], nextTick, ['view-pane'], outTouch ); } )
 
     return { show, viewElem }; }

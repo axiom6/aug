@@ -145,14 +145,11 @@ class Nav extends Mix
   doRoute:( obj ) ->
     route = obj.compKey
     return if route is @routeLast or route is 'none' or @isInov(route)
-    if route? and @komps? and @komps[route]?
-      if @router?
-         @router.push( name:route )
-      else
-         console.error( 'Nav.doRoute() router not set for', route )
-      @routeLast = obj.compKey
+    if @router?
+       @router.push( name:route )
     else
-      console.error( 'Nav.doRoute() undefined or unnamed route', route )
+       console.error( 'Nav.doRoute() router not set for', route )
+    @routeLast = route
     return
 
   getTabsKey:( obj ) ->

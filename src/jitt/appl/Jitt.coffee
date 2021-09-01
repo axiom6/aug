@@ -75,13 +75,13 @@ class Jitter
 
   # Toc.vue components and route Nav() directions
   Jitter.komps = Access.kompsDirs( {
-    Home:{   name:'Home',   route:'Home',   icon:"fas fa-draw-polygon" }
-    Flavor:{ name:'Flavor', route:'Flavor', icon:"fas fa-bezier-curve" }
-    Roast:{  name:'Roast',  route:'Roast',  icon:"fas fa-bezier-curve" }
-    Brew:{   name:'Brew',   route:'Brew',   icon:"fas fa-bezier-curve" }
-    Drink:{  name:'Drink',  route:'Drink',  icon:"fas fa-bezier-curve" }
-    Body:{   name:'Body',   route:'Body',   icon:"fas fa-bezier-curve" }
-    Done:{   name:'Done',   route:'Done',   icon:"fas fa-bezier-curve" } } )
+    Home:{   name:'Home',   key:'Home',   icon:"fas fa-draw-polygon" }
+    Flavor:{ name:'Flavor', key:'Flavor', icon:"fas fa-bezier-curve" }
+    Roast:{  name:'Roast',  key:'Roast',  icon:"fas fa-bezier-curve" }
+    Brew:{   name:'Brew',   key:'Brew',   icon:"fas fa-bezier-curve" }
+    Drink:{  name:'Drink',  key:'Drink',  icon:"fas fa-bezier-curve" }
+    Body:{   name:'Body',   key:'Body',   icon:"fas fa-bezier-curve" }
+    Done:{   name:'Done',   key:'Done',   icon:"fas fa-bezier-curve" } } )
 
   Jitter.routeNames = Jitter.createRouteNames( Jitter.routes )
 

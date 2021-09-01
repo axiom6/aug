@@ -212,7 +212,7 @@ class Type
       when "bigint"     then @toEnclose('"',arg.toString(),'"')  # Needs work
       when "regexp","date","symbol" then arg.toString()  # hail marys
       else
-        @log( "Type.toStr(arg?", { arg:arg, type:@toType(arg) } )
+        console.log( "Type.toStr(arg?", { arg:arg, type:@toType(arg) } )
         "none"
     str
 

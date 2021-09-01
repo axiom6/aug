@@ -4,7 +4,8 @@ class Touch
   constructor:( @stream, @nav ) ->
     @nav.touch    = @
     @elem         = null
-    @debug        = true
+    @debug        = false
+    @debug2       = false
     @reset()          # "tabs-tab","disp-comp","west","east","south","north","cen"
     @touchClasses    = []
     @touchOutClasses = []
@@ -29,11 +30,12 @@ class Touch
 
   start:(  event ) =>
     # event.preventDefault()
-    inTouch  = @nav.inArray( event.target.className, @touchClasses    )
-    outTouch = @nav.inArray( event.target.className, @touchOutClasses )
+    className = if @nav.toKlass(event.target.className) is "SVGAnimatedString" then "SVGAnimatedString" else event.target.className
+    inTouch  = @nav.inArray( className, @touchClasses    )
+    outTouch = @nav.inArray( className, @touchOutClasses )
     if @debug
        console.log( 'Touch.start()',
-       { target:event.target.className, inTouch:inTouch, outTouch:outTouch, outs:@touchOutClasses } )
+       { target:className, inTouch:inTouch, outTouch:outTouch, outs:@touchOutClasses } )
     # return if not inTouch
     return   if outTouch
     if not ( event.touches? and event.touches.length > 1 )
@@ -41,7 +43,7 @@ class Touch
     @beg = event
     @pnt = @coord( event, {} )
     @elem.addEventListener( 'pointermove', @movit, false )
-    if @debug
+    if @debug2
       console.log( 'Touch.start()', { target:event.target.className, inTouch:inTouch } )
     return
 
@@ -58,8 +60,8 @@ class Touch
     else                                      # Either Mouse event or Pointer Event
        pnt.x = event.clientX
        pnt.y = event.clientY
-    if @debug
-      console.log( 'Touch.movit()', { x:pnt.x, y:pnt.y, touches:event.targetTouches? } )
+    if @debug2
+      console.log( 'Touch.coord()', { x:pnt.x, y:pnt.y, touches:event.targetTouches? } )
     return pnt
 
   leave:( event ) =>
@@ -86,7 +88,7 @@ class Touch
        event.target.releasePointerCapture(event.pointerId)
        dir = @swipeDir( @beg.clientX, @beg.clientY, @pnt.x, @pnt.y )
        @nav.doDir( dir ) if dir isnt 'none'
-       if @debug
+       if @debug2
          console.log( 'Touch.endit()', { type:type, x1:@beg.clientX, y1:@beg.clientY, x2:@pnt.x, y2:@pnt.y, dir:dir } )
     @elem.removeEventListener( 'pointermove', @movit, false )
     @reset()
