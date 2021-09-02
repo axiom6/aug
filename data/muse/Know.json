@@ -47,7 +47,7 @@
       "Engineer":    { "icon":"fas fa-procedures", "desc":"" },
       "Medical":    { "icon":"fas fa-user-md", "desc":"" } }
   },
-  "Understand":{ "type":"pane", "hsv":[20,50,90],"column":"Encourage","row":"Learn","plane":"Know","icon":"fab fa-tripadvisor",
+  "Understand":{ "type":"pane", "hsv":[20,50,90],"column":"Encourage","row":"Learn","plane":"Know","icon":"fas fa-pen-nib",
     "cells":[29,12,7,12], "dir":"ne", "neg":"Disregard",
     "desc":"The ability to make and explain inferences based on experience and contemplation",
     "Paradigm":    { "dir":"west", "icon":"fas fa-balance-scale",  "hsv":[195,90,70],

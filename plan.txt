@@ -1,12 +1,13 @@
 
 Features One
-  1. Comment
+  1. Constrain aspect ratio on comp-port in Comp.vue not showing up in Comp.wue
+  2. Comment
      a. Data.json for Explore    Model   Simulate
      b. Math.json for Conjecture Derive  Represent
      c. Scie.json for Research   Develop Apply
-  2. Font Size management with Mobile
-  3. Vizu Improve dispose()
-  4. PWA caching has undefined problems
+  3. Font Size management with Mobile
+  4. Vizu Improve dispose()
+  5. Improve PWA caching
 
 Features Two
    1. Test
@@ -30,10 +31,11 @@ Features Two
      b. Vis red and blue color palattes need to be brighter
      c. Vis.str hex output wrong
      d. Fix padded and move for and text color
-  8. Get Worker.coffee to do more caching
+  8. Consider ZingTouch if region elems can be worked out
   9. Dirs with Navd.vue
      a. Clean up Nav pageKey handling
      b. Touch Flavor has not area
+     c. Streamline Nav
 
 Debug
   1. Look into cicular JSON bug in Tester.reviewsLocal()

@@ -2,7 +2,7 @@
   "Planes":{   "name":"Planes",      "type":"menu",   "icon":"fas fa-layer-group", "cells":[1,48,1,42],
     "Info":    { "name":"Information", "type":"item", "icon":"fas fa-th"          },
     "Know":    { "name":"Knowledge",   "type":"item", "icon":"fas fa-university"  },
-    "Wise":    { "name":"Wisdom",      "type":"item", "icon":"fab fa-tripadvisor" } },
+    "Wise":    { "name":"Wisdom",      "type":"item", "icon":"fas fa-yin-yang" } },
   "Cols":{ "name":"Principles",     "type":"menu",    "icon":"fas fa-bars fa-rotate-90",  "cells":[1,48,1,42],
     "Embrace":   { "name":"Embrace",   "type":"item", "icon":"fas fa-hands"      },
     "Innovate":  { "name":"Innovate",  "type":"item", "icon":"fas fa-snowflake"  },

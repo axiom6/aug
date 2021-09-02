@@ -260,7 +260,7 @@ Muse = (function() {
       key: 'Wise',
       pracs: {},
       ikw: true,
-      icon: "fab fa-tripadvisor"
+      icon: "fas fa-yin-yang"
     },
     Defs: {
       title: 'Defs',
@@ -375,7 +375,7 @@ Muse = (function() {
         title: 'Core',
         key: "Core",
         show: true,
-        icon: "fas fa-tripadvisor"
+        icon: "fas fa-yin-yang"
       }
     },
     Rows: {

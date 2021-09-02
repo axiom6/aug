@@ -7,13 +7,12 @@ class SvgMgr
   constructor:( @name, @elem, @level ) ->
     @d3    = d3
     @size  = @sizeElem( @elem, @level )
-    @origWidth  = @size.w
-    @origHeight = @size.h
     @svgId = @htmlId( @name, 'Svg',  '' )
     @gId   = @htmlId( @name, 'SvgG', '' )
     @svg   = @d3.select(@elem).append("svg:svg")
     @svg.attr("id",@svgId)
-        .attr("width",@size.w).attr("height",@size.h)
+        .attr("width",@size.w)
+        .attr("height",@size.h)
         .attr("xmlns","http://www.w3.org/2000/svg")
     @defs = @svg.append("svg:defs")
     @g    = @svg.append("svg:g").attr("id",@gId) # All transforms are applied to g
@@ -24,14 +23,15 @@ class SvgMgr
 
   sizeElem:( elem, level ) ->
     sz = {}
-    sz.w          =   elem['clientWidth' ]
-    sz.h          =   elem['clientHeight']
-    sz.windWidth  = window['innerWidth' ]
-    sz.windHeight = window['innerHeight']
+    sz.w          = elem['clientWidth' ]
+    sz.h          = elem['clientHeight']
+    sz.aspect     = sz.w / sz.h
+    #sz.w          = if sz.aspect > 2.0 then sz.h else sz.w
+    #sz.h          = if sz.aspect < 0.5 then sz.w else sz.h
     sz.xc         = sz.w * 0.5
     sz.yc         = sz.h * 0.5
-    sz.sx         = if @origWidth  then sz.w / @origWidth  else 1.0
-    sz.sy         = if @origHeight then sz.h / @origHeight else 1.0
+    sz.sx         = 1.0
+    sz.sy         = 1.0
     sz.smin       = Math.min( sz.sx, sz.sy )
     sz.smax       = Math.max( sz.sx, sz.sy )
     sz.s          = sz.smin

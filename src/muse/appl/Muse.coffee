@@ -89,7 +89,7 @@ class Muse
     Prin:{ title:'Prin', key:'Prin', pracs:{}, ikw:true,  icon:"fas fa-balance-scale" }
     Info:{ title:'Info', key:'Info', pracs:{}, ikw:true,  icon:"fas fa-th" }
     Know:{ title:'Know', key:'Know', pracs:{}, ikw:true,  icon:"fas fa-university" }
-    Wise:{ title:'Wise', key:'Wise', pracs:{}, ikw:true,  icon:"fab fa-tripadvisor" }
+    Wise:{ title:'Wise', key:'Wise', pracs:{}, ikw:true,  icon:"fas fa-yin-yang" }
     Defs:{ title:'Defs', key:'Defs', pracs:{}, ikw:false, icon:"fas fa-cubes" }
     Test:{ title:'Test', key:'Test', pracs:{}, ikw:false, icon:"fas fa-stethoscope" } } )
 
@@ -162,7 +162,7 @@ class Muse
       Science:{ title:'Science', key:"Science", show:false, icon:"fas fa-flask" },
       Math:{    title:'Math',    key:"Math",    show:false, icon:"fas fa-calculator"} }
     Wise: {
-      Core:{ title:'Core', key:"Core", show:true, icon:"fas fa-tripadvisor"} }
+      Core:{ title:'Core', key:"Core", show:true, icon:"fas fa-yin-yang"} }
     Rows: {
       Plane:{ name:'Info',  dir:'cm', icon:"fas fa-th" },
       Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap"},
