@@ -1,7 +1,7 @@
 
 <template>
   <div   class="comp-pane" ref="compElem">
-    <div class="comp-port" :style="compStyle()">
+    <div class="comp-port" :style="compStyle()" :key="nav.keyIdx('CompPort',compIdx)">
       <b-tabs :compKey="compKey" :pages="tabPages('Comp')"  position="left"  :isComp="soTrue()"></b-tabs>
       <b-tabs :compKey="compKey" :pages="tabPages(compKey)" position="right" :isInov="soTrue()" v-if="hasInov()"></b-tabs>
       <div   class="comp-comp">
@@ -46,10 +46,13 @@ let Comp = {
     const pageKey   = ref(nav.getPageKey('Comp'));
     const inovKey   = ref('Info');
     const compElem  = ref(null);
+    const compIdx   = ref(0);
+    const pracIdx   = ref(0);
     let   compObj   = ref({});
     let   pracObj   = ref({});
-    let   pracIdx   = ref(0);
-    const debug     = true;
+    let   width     = 0;
+    let   height    = 0;
+    const debug     = false;
     const inovComps = ['Info','Know','Wise'];
     const myRows    = ref( nav.getTabs('Rows') );
     if( debug ) { console.log( 'Comp.setup()', { pageKey:pageKey.value } ); }
@@ -75,20 +78,24 @@ let Comp = {
       if( debug ) { console.log( 'Comp.onComp()',
           { obj:obj, pageKey:pageKey.value, pageObj:obj.pageKey, compObj:compObj.value } ); } }
 
-    // At a loss as to why this is not showing up in elem style
+    const heightWidth = () => {
+        nextTick( () => {
+          compIdx.value++;
+          let elem = compElem['value'];
+          width    = elem['clientWidth' ];
+          height   = elem['clientHeight']; } ) }
+
     const compStyle = () => {
-      nextTick( () => {
-        if( debug ) { console.log( 'Comp.compStyle() One', { compElem:compElem } ); }
-        let wPane  = compElem['value']['clientWidth' ];
-        let hPane  = compElem['value']['clientHeight'];
-        let aspect = wPane / hPane;
-        let width  = aspect > 2.0 ? 100/aspect : 100;
-        let height = aspect < 0.5 ? 100*aspect : 100;
-      //let css    = `position:absolute; left:0; top:0; width:${width}%; height:${height}%;`;
-        let css    =  { position:'absolute', left:0, top:0, width:width+'%', height:height+'%' };
+      let css = `position:absolute; left:0; top:0; width:100%; height:100%;`;
+      if( debug ) { console.log( 'Comp.compStyle() One', { width:width, height:height } ); }
+      if( width > 0 && height > 0 ) {
+        let aspect = width / height;
+        let w = aspect > 2.0 ? 100/aspect : 100;
+        let h = aspect < 0.5 ? 100*aspect : 100;
+        css   = `position:absolute; left:0; top:0; width:${w}%; height:${h}%;`;
         if( debug ) { console.log( 'Comp.compStyle() Two',
-            { css:css, compElem:compElem, wPane:wPane, hPane:hPane, aspect:aspect, width:width, height:height } ); }
-        return css;  } ) }
+          { css:css, width:width, height:height, aspect:aspect, w:w, h:h } ); } }
+        return css;  }
 
     const isDim = (pracArg) => {
       return pracArg.row === "Dim"; }
@@ -118,9 +125,10 @@ let Comp = {
     onComp({ compKey:nav.compKey, pageKey:nav.getPageKey('Comp'), inovKey:nav.inovKey } );
 
     onMounted( () => {
+      heightWidth();
       nav.subscribe('Nav', 'Comp', (obj) => { onNav(obj); } ); } )
 
-    return { compKey, compObj, compStyle, compElem, pracIdx, nav, pracObj, tabPages,
+    return { compKey, compObj, compStyle, compElem, compIdx, pracIdx, nav, pracObj, tabPages,
       hasInov, isDim, isRows, myRows, isShow, soTrue }; }
 }
 

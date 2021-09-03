@@ -1,8 +1,8 @@
 
 <template>
-  <div   class="prac-pane">
+  <div class="prac-pane"  ref="pracElem" :style="pracStyle()" :key="nav.keyIdx(pracObj['name'],pracIdx)">
     <b-tabs :compKey="'Prac'" :pages="pages"></b-tabs>
-    <div class="prac-prac" :key="nav.keyIdx(pracObj['name'],pracIdx)">
+    <div class="prac-prac">
       <p-dirs v-show="nav.isShow('Prac','Topics')" :pracObj="pracObj"></p-dirs>
       <p-conn   v-if="nav.isShow('Prac','Graphs')" :pracObj="pracObj" level="Prac"></p-conn>
       <p-desc v-show="nav.isShow('Prac','Texts')"  :pracObj="pracObj"></p-desc>
@@ -16,7 +16,7 @@
   import Dirs from './Dirs.vue';
   import Conn from '../comp/Conn.vue';
   import Desc from './Desc.vue';
-  import { inject, ref, onBeforeMount, onMounted } from 'vue';
+  import {inject, ref, onBeforeMount, onMounted, nextTick} from 'vue';
   
   let Prac = {
 
@@ -24,12 +24,34 @@
 
     setup() {
 
-      const nav     = inject('nav');
-      const debug   = false;
-      const pracObj = ref(null);
-      const pracIdx = ref(0   );
+      const nav      = inject('nav');
+      const debug    = false;
+      const pracObj  = ref(null);
+      const pracElem = ref(null);
+      const pracIdx  = ref(0);
+      let   width    = 0;
+      let   height   = 0;
       
       const pages = nav.pages['Prac']
+
+      const heightWidth = () => {
+        nextTick( () => {
+          pracIdx.value++;
+          let elem = pracElem['value'];
+          width    = elem['clientWidth' ];
+          height   = elem['clientHeight']; } ) }
+
+      const pracStyle = () => {
+        let css = `position:absolute; left:0; top:0; width:100%; height:100%;`;
+        if( debug ) { console.log( 'Comp.compStyle() One', { width:width, height:height } ); }
+        if( width > 0 && height > 0 ) {
+          let aspect = width / height;
+          let w = aspect > 2.0 ? 100/aspect : 100;
+          let h = aspect < 0.5 ? 100*aspect : 100;
+          css   = `position:absolute; left:0; top:0; width:${w}%; height:${h}%;`;
+          if( debug ) { console.log( 'Comp.compStyle() Two',
+              { css:css, width:width, height:height, aspect:aspect, w:w, h:h } ); } }
+        return css;  }
 
       const onPrac = (obj) => {
         pracObj.value = nav.pracObject( obj.compKey, obj.inovKey, obj.pracKey );
@@ -60,11 +82,11 @@
         onPrac( obj );  } )
 
       onMounted( () => {
-        // console.log( 'Prac.onMounted()')
+        heightWidth();
         nav.subscribe(  "Nav", 'Prac', (obj) => {
           onNav(obj); } ); } )
       
-    return { pracObj, pracIdx, pages, nav }; }
+    return { pracObj, pracIdx, pracElem, pracStyle, pages, nav }; }
   }
   
   export default Prac;
@@ -83,10 +105,4 @@
       background-color:@theme-back; font-size:@pracFS; border-radius:0.5*@pracFS; } }
   
 </style>
-
-<!--
-
-
-if( !nav.isDef(pracObj.value) || pracObj.value.name !== obj.pracKey ) {
--->
 

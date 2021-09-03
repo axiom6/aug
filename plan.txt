@@ -1,13 +1,13 @@
 
 Features One
-  1. Constrain aspect ratio on comp-port in Comp.vue not showing up in Comp.wue
-  2. Comment
+  1. Comment
      a. Data.json for Explore    Model   Simulate
      b. Math.json for Conjecture Derive  Represent
      c. Scie.json for Research   Develop Apply
-  3. Font Size management with Mobile
-  4. Vizu Improve dispose()
-  5. Improve PWA caching
+  2. Font Size management with Mobile
+  3. Vizu Improve dispose()
+  4. Improve PWA caching
+  5. Fine tune Aspect ratio on comp-port in Comp.vue
 
 Features Two
    1. Test
