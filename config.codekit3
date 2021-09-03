@@ -285,14 +285,6 @@
       "oAP" : "\/dist",
       "oF" : 0
     },
-    "\/firebase-debug.log" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
-      "oAP" : "\/firebase-debug.log",
-      "oF" : 0
-    },
     "\/firebase.json" : {
       "ft" : 524288,
       "oA" : 1,
@@ -4064,45 +4056,56 @@
       "sC" : 0,
       "tS" : 0
     },
-    "\/src\/augm\/trip\/AdvisoryUC.coffee" : {
+    "\/src\/augm\/tool\/AdvisoryUC.coffee" : {
       "ft" : 32,
       "ma" : 1,
       "mi" : 0,
       "oA" : 0,
-      "oAP" : "\/pub\/augm\/trip\/AdvisoryUC.js",
+      "oAP" : "\/pub\/augm\/tool\/AdvisoryUC.js",
       "oF" : 0,
       "oS" : 1,
       "sC" : 0,
       "tS" : 0
     },
-    "\/src\/augm\/trip\/DriveBarUC.coffee" : {
+    "\/src\/augm\/tool\/DriveBarUC.coffee" : {
       "ft" : 32,
       "ma" : 1,
       "mi" : 0,
       "oA" : 0,
-      "oAP" : "\/pub\/augm\/trip\/DriveBarUC.js",
+      "oAP" : "\/pub\/augm\/tool\/DriveBarUC.js",
       "oF" : 0,
       "oS" : 1,
       "sC" : 0,
       "tS" : 0
     },
-    "\/src\/augm\/trip\/TripUI.coffee" : {
+    "\/src\/augm\/tool\/TripD3.coffee" : {
       "ft" : 32,
       "ma" : 1,
       "mi" : 0,
       "oA" : 0,
-      "oAP" : "\/pub\/augm\/trip\/TripUI.js",
+      "oAP" : "\/pub\/augm\/tool\/TripD3.js",
       "oF" : 0,
       "oS" : 1,
       "sC" : 0,
       "tS" : 0
     },
-    "\/src\/augm\/trip\/WeatherUC.coffee" : {
+    "\/src\/augm\/tool\/TripUI.coffee" : {
       "ft" : 32,
       "ma" : 1,
       "mi" : 0,
       "oA" : 0,
-      "oAP" : "\/pub\/augm\/trip\/WeatherUC.js",
+      "oAP" : "\/pub\/augm\/tool\/TripUI.js",
+      "oF" : 0,
+      "oS" : 1,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/src\/augm\/tool\/WeatherUC.coffee" : {
+      "ft" : 32,
+      "ma" : 1,
+      "mi" : 0,
+      "oA" : 0,
+      "oAP" : "\/pub\/augm\/tool\/WeatherUC.js",
       "oF" : 0,
       "oS" : 1,
       "sC" : 0,

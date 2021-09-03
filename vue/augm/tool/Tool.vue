@@ -1,7 +1,7 @@
 
 <template>
   <div class="tool-pane" ref="Tool">
-    <h1>Gauges and Widges</h1>
+    <h1>Gauges, Trip and DnD</h1>
   </div>
 </template>
 

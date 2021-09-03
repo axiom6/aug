@@ -146,6 +146,8 @@ class Augm
       Magenta: { title:'Magenta', key:'Magenta', show:false } },
     Gauges: {
       Gauge:   { title:'Gauge', key:'Gauge', show:true } }
+    Trips: {
+      Trip:    { title:'Trip',   key:'Trip',  show:true   } }
     Widget: {
       DnD:     { title:'DnD',   key:'DnD',  show:true   } }
     Geom2D: {

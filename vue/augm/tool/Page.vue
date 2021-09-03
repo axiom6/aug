@@ -2,20 +2,22 @@
 <template>
   <div :class="'tool-page-pane'" >
     <t-gauge v-if="show('Gauge')"></t-gauge>
+    <t-trip  v-if="show('Trip')"></t-trip>
     <t-dnd   v-if="show('DnD')"></t-dnd>
   </div>
 </template>
 
 <script type="module">
 
-import Gauge      from './Gauge.vue';
-import DnD        from './DnD.vue';
+import Gauge from './Gauge.vue';
+import Trip  from './Trip.vue';
+import DnD   from './DnD.vue';
 
 let Page = {
 
   props: { page:Object },
 
-  components: { 't-gauge':Gauge, 't-dnd':DnD },
+  components: { 't-gauge':Gauge, 't-trip':Trip, 't-dnd':DnD },
 
   setup( props ) {
 

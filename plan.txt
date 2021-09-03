@@ -1,38 +1,40 @@
 
 Features One
-  1. Comment
+
+  1. Font Size management with Mobile
+  2. Improve PWA caching
+  3. Fine tune Aspect ratio on comp-port in Comp.vue
+  4. Comment
      a. Data.json for Explore    Model   Simulate
      b. Math.json for Conjecture Derive  Represent
      c. Scie.json for Research   Develop Apply
-  2. Font Size management with Mobile
-  3. Vizu Improve dispose()
-  4. Improve PWA caching
-  5. Fine tune Aspect ratio on comp-port in Comp.vue
 
 Features Two
-   1. Test
-      a. Functional Test
-      b. Push buttons in Replay to Test swithes to filter Test output
-      c. Ability to run a complete CI test suite
-      d. Archiving
-      e. Test types
-      f. Test on Android
+  1. Test
+     a. Functional Test
+     b. Push buttons in Replay to Test swithes to filter Test output
+     c. Ability to run a complete CI test suite
+     d. Archiving
+     e. Test types
+     f. Test on Android
   2. Data
      a. Get Mongo working - right now Mongo imports are a problem
      b. Learn how to minimize Firebase import
      b. Upgrade - consider removing Vue router
      c. Improve test suite
-  3. Grid and coordinate system almost there
-  4. Learn how to instance Grids Lines
-  5. Integrate Side.vue, Main.json and Main.coffee
-  6. Create Trip.vue with Trip.coffee
-  7. Hexagon / Vis
-     a. Experiment more with sin wave functions
-     b. Vis red and blue color palattes need to be brighter
-     c. Vis.str hex output wrong
-     d. Fix padded and move for and text color
-  8. Consider ZingTouch if region elems can be worked out
-  9. Dirs with Navd.vue
+  3. Vizu
+     a. Grid and coordinate system almost there
+     b. Learn how to instance Grids Lines
+     c. Integrate Side.vue, Main.json and Main.coffee
+     d. Vizu Improve dispose()
+     e. Hexagon / Vis
+        - Experiment more with sin wave functions
+        - Vis red and blue color palattes need to be brighter
+        - Vis.str hex output wrong
+        - Fix padded and move for and text color
+  4. Create Trip.vue with Trip.coffee
+  5. Consider ZingTouch if region elems can be worked out
+  6. Dirs with Navd.vue
      a. Clean up Nav pageKey handling
      b. Touch Flavor has not area
      c. Streamline Nav
