@@ -193,7 +193,7 @@ Data = (function() {
       data: WiseJson,
       refine: true
     },
-    Soft: {
+    Software: {
       url: 'inno/Soft.json',
       data: SoftJson,
       refine: true

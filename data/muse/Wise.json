@@ -71,7 +71,7 @@
       "Uniform":     { "icon":"fas fa-bars", "desc":"" },
       "Symbolic":    { "icon":"fas fa-draw-polygon", "desc":"" } }
   },
-  "Aware":{ "type":"pane", "hsv":[195,90,60],"column":"Embrace","row":"Do","plane":"Wise","icon":"fas fa-blind",
+  "Percieve":{ "type":"pane", "hsv":[195,90,60],"column":"Embrace","row":"Do","plane":"Wise","icon":"fas fa-blind",
     "cells":[5,12,19,12], "dir":"west", "neg":"Isolate",
     "desc":"Ongoing perception of facts, situationa and scenarios",
     "Sense":    { "dir":"west", "icon":"fas fa-user-friends","hsv":[195,90,80],

@@ -65,7 +65,7 @@ class Data
     Info:     { url:'muse/Info.json', data:InfoJson, refine:true }
     Know:     { url:'muse/Know.json', data:KnowJson, refine:true }
     Wise:     { url:'muse/Wise.json', data:WiseJson, refine:true }
-    Soft:     { url:'inno/Soft.json', data:SoftJson, refine:true }
+    Software: { url:'inno/Soft.json', data:SoftJson, refine:true }
     Data:     { url:'inno/Data.json', data:DataJson, refine:true }
     Science:  { url:'inno/Scie.json', data:ScieJson, refine:true }
     Math:     { url:'inno/Math.json', data:MathJson, refine:true }

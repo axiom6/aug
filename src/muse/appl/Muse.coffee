@@ -77,7 +77,7 @@ class Muse
     Info:    { url:'muse/Info.json', data:InfoJson, refine:true }
     Know:    { url:'muse/Know.json', data:KnowJson, refine:true }
     Wise:    { url:'muse/Wise.json', data:WiseJson, refine:true }
-    Soft:    { url:'inno/Soft.json', data:SoftJson, refine:true }
+    Software:{ url:'inno/Soft.json', data:SoftJson, refine:true }
     Data:    { url:'inno/Data.json', data:DataJson, refine:true }
     Science: { url:'inno/Scie.json', data:ScieJson, refine:true }
     Math:    { url:'inno/Math.json', data:MathJson, refine:true }
@@ -154,15 +154,15 @@ class Muse
       Topics: { title:'Topics', key:'Topics', show:true  },
       Texts:  { title:'Texts',  key:'Texts',  show:false } }
     Info: {
-      Core:{ title:'Core', key:"Core", show:true,  icon:"fas fa-th"},
-      Soft:{ title:'Soft', key:"Soft", show:false, icon:"fas fa-codepen"},
-      Data:{ title:'Data', key:"Data", show:false, icon:"fas fa-table"} }
+      Engineer:  { title:'Engineer',     key:"Engineer", show:true,  icon:"fas fa-th"      },
+      Software:  { title:'Software',     key:"Software", show:false, icon:"fas fa-codepen" },
+      Data:      { title:'Data Science', key:"Data",     show:false, icon:"fas fa-table"   } }
     Know: {
-      Core:{    title:'Core',    key:"Core",    show:true,  icon:"fas fa-university"},
+      Design:{  title:'Design',  key:"Design",  show:true,  icon:"fas fa-university"},
       Science:{ title:'Science', key:"Science", show:false, icon:"fas fa-flask" },
       Math:{    title:'Math',    key:"Math",    show:false, icon:"fas fa-calculator"} }
     Wise: {
-      Core:{ title:'Core', key:"Core", show:true, icon:"fas fa-yin-yang"} }
+      Conceive:{ title:'Conceive', key:"Conceive", show:true, icon:"fas fa-yin-yang"} }
     Rows: {
       Plane:{ name:'Info',  dir:'cm', icon:"fas fa-th" },
       Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap"},

@@ -198,7 +198,7 @@ Muse = (function() {
       data: WiseJson,
       refine: true
     },
-    Soft: {
+    Software: {
       url: 'inno/Soft.json',
       data: SoftJson,
       refine: true
@@ -331,29 +331,29 @@ Muse = (function() {
       }
     },
     Info: {
-      Core: {
-        title: 'Core',
-        key: "Core",
+      Engineer: {
+        title: 'Engineer',
+        key: "Engineer",
         show: true,
         icon: "fas fa-th"
       },
-      Soft: {
-        title: 'Soft',
-        key: "Soft",
+      Software: {
+        title: 'Software',
+        key: "Software",
         show: false,
         icon: "fas fa-codepen"
       },
       Data: {
-        title: 'Data',
+        title: 'Data Science',
         key: "Data",
         show: false,
         icon: "fas fa-table"
       }
     },
     Know: {
-      Core: {
-        title: 'Core',
-        key: "Core",
+      Design: {
+        title: 'Design',
+        key: "Design",
         show: true,
         icon: "fas fa-university"
       },
@@ -371,9 +371,9 @@ Muse = (function() {
       }
     },
     Wise: {
-      Core: {
-        title: 'Core',
-        key: "Core",
+      Conceive: {
+        title: 'Conceive',
+        key: "Conceive",
         show: true,
         icon: "fas fa-yin-yang"
       }

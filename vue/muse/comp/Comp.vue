@@ -106,11 +106,12 @@ let Comp = {
     const onRows = () => {
       const myKey = compKey.value;
       let                   page = nav.getTabs('Info');
-      if( myKey==='Know') { page = nav.getTabs('Know'); }
-      if( myKey==='Wise') { page = nav.getTabs('Wise'); }
+      let                   inov = 'Engineer'
+      if( myKey==='Know') { page = nav.getTabs('Know'); inov = 'Design';   }
+      if( myKey==='Wise') { page = nav.getTabs('Wise'); inov = 'Conceive'; }
       if( nav.inArray( myKey, inovComps ) ) {
         myRows['value']['Plane'].name = myKey;
-        myRows['value']['Plane'].icon = page['Core'].icon; }  }
+        myRows['value']['Plane'].icon = page[inov].icon; }  }
 
     const onNav = (obj) => {
       if( nav.isMyNav(obj,'Comp') ) {

@@ -1,9 +1,9 @@
 {
-  "Involve":{ "type":"pane", "hsv":[195,90,60],"column":"Embrace","row":"Learn","plane":"Know","icon":"fas fa-users",
+  "Art":{ "type":"pane", "hsv":[195,90,60],"column":"Embrace","row":"Learn","plane":"Know","icon":"fas fa-palette",
     "cells":[5,12,7,12], "dir":"nw", "neg":"Greed",
     "desc":"Living and working in communities",
-    "Art":       { "dir":"west", "icon":"fas fa-palette","hsv":[195,90,70],
-      "desc":"",
+    "Involve":       { "dir":"west", "icon":"fas fa-users","hsv":[195,90,70],
+      "desc":"Living and working in communities",
       "Visual":     { "icon":"fas fa-paint-brush", "desc":"" },
       "Designer":   { "icon":"fas fa-drafting-compass", "desc":"" },
       "Craft":      { "icon":"fas fa-tools", "desc":"" } },
