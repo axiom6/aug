@@ -1,0 +1,15 @@
+
+My Product Requirement Documents follow this structure:
+
+- Executive Summary
+- Context
+- Scope
+- Customer demand and feedback
+- Target Audience
+- Critical User Journeys
+- Feature Requirements
+- Milestones
+- Pricing
+- Revenue
+- Success metrics
+- Competitive Analysis

@@ -14,9 +14,9 @@ import Know from '../../../data/muse/Know.json';
 
 import Wise from '../../../data/muse/Wise.json';
 
-//mport Soft from '../../../data/inno/Soft.json'
+//mport Software from '../../../data/inno/Software.json'
 //mport Data from '../../../data/inno/Data.json'
-//mport Scie from '../../../data/inno/Scie.json'
+//mport Science from '../../../data/inno/Science.json'
 //mport Math from '../../../data/inno/Math.json'
 MuseLD = class MuseLD {
   constructor(Home) {

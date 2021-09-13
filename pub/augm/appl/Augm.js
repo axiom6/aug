@@ -27,7 +27,7 @@ import MathJson from '../../../data/augm/Math.json';
 
 import GeomJson from '../../../data/augm/Geom.json';
 
-import DataJson from '../../../data/augm/Data.json';
+import DataScienceJson from '../../../data/inov/DataScience.json';
 
 import ToolJson from '../../../data/augm/Tool.json';
 
@@ -144,9 +144,9 @@ Augm = (function() {
       data: GeomJson,
       refine: true
     },
-    Data: {
-      url: 'augm/Data.json',
-      data: DataJson,
+    DataScience: {
+      url: 'inov/DataScience.json',
+      data: DataScienceJson,
       refine: true
     },
     Tool: {
@@ -347,6 +347,13 @@ Augm = (function() {
       Gauge: {
         title: 'Gauge',
         key: 'Gauge',
+        show: true
+      }
+    },
+    Trips: {
+      Trip: {
+        title: 'Trip',
+        key: 'Trip',
         show: true
       }
     },

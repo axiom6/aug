@@ -10,7 +10,7 @@ Emitter = require('events');
 
 host = 'http://localhost:3000/'; // 'https://muse-ad352.web.app/'  #
 
-paths = ["Prin?page=Icons", "Prin?page=Topics", "Prin/Embrace?page=Topics", "Prin/Embrace?page=Graphs", "Prin/Embrace?page=Texts", "Info?page=Icons&innovate=Engineer", "Info?page=Topics&innovate=Engineer", "Info?page=Graphs&innovate=Engineer", "Info?page=Texts&innovate=Engineer", "Info?page=Texts&innovate=Software", "Info?page=Texts&innovate=Data", "Know?page=Texts&innovate=Design", "Know?page=Graphs&innovate=Design", "Know?page=Topics&innovate=Design", "Know?page=Icons&innovate=Design", "Know?page=Icons&innovate=Science", "Know?page=Icons&innovate=Math", "Wise?page=Icons&innovate=Conceive", "Wise?page=Topics&innovate=Conceive", "Wise?page=Graphs&innovate=Conceive", "Wise?page=Texts&innovate=Conceive", "Defs"];
+paths = ["Prin?page=Icons", "Prin?page=Topics", "Prin/Embrace?page=Topics", "Prin/Embrace?page=Graphs", "Prin/Embrace?page=Texts", "Info?page=Icons&innovate=Purpose", "Info?page=Topics&innovate=Purpose", "Info?page=Graphs&innovate=Purpose", "Info?page=Texts&innovate=Purpose", "Info?page=Texts&innovate=Software", "Info?page=Texts&innovate=DataScience", "Know?page=Texts&innovate=Product", "Know?page=Graphs&innovate=Product", "Know?page=Topics&innovate=Product", "Know?page=Icons&innovate=Product", "Know?page=Icons&innovate=Science", "Know?page=Icons&innovate=Math", "Wise?page=Icons&innovate=Conceive", "Wise?page=Topics&innovate=Conceive", "Wise?page=Graphs&innovate=Conceive", "Wise?page=Texts&innovate=Conceive", "Defs"];
 
 doCrawl = async function(paths) {
   var $, j, len, path, resp, text, url;

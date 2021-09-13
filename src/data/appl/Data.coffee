@@ -16,9 +16,9 @@ import RowsJson from '../../../data/muse/Rows.json'
 import InfoJson from '../../../data/muse/Info.json'
 import KnowJson from '../../../data/muse/Know.json'
 import WiseJson from '../../../data/muse/Wise.json'
-import SoftJson from '../../../data/inno/Soft.json'
-import DataJson from '../../../data/inno/Data.json'
-import ScieJson from '../../../data/inno/Scie.json'
+import SoftwareJson from '../../../data/inno/Software.json'
+import DataScienceJson from '../../../data/inno/DataScience.json'
+import ScienceJson from '../../../data/inno/Science.json'
 import MathJson from '../../../data/inno/Math.json'
 import HuesJson from '../../../data/draw/Hues.json'
 
@@ -65,9 +65,9 @@ class Data
     Info:     { url:'muse/Info.json', data:InfoJson, refine:true }
     Know:     { url:'muse/Know.json', data:KnowJson, refine:true }
     Wise:     { url:'muse/Wise.json', data:WiseJson, refine:true }
-    Software: { url:'inno/Soft.json', data:SoftJson, refine:true }
-    Data:     { url:'inno/Data.json', data:DataJson, refine:true }
-    Science:  { url:'inno/Scie.json', data:ScieJson, refine:true }
+    Software: { url:'inno/Software.json', data:SoftwareJson, refine:true }
+    DataScience:     { url:'inno/DataScience.json', data:DataScienceJson, refine:true }
+    Science:  { url:'inno/Science.json', data:ScienceJson, refine:true }
     Math:     { url:'inno/Math.json', data:MathJson, refine:true }
     Hues:     { url:'draw/Hues.json', data:HuesJson, refine:false }
   }
@@ -99,7 +99,7 @@ class Data
     Data.touch  = new Touch( Data.stream, Data.nav )
     Data.cache  = new Cache( Data.stream ) if Data.mode is 'production'
     tester.setOptions( { testing:true, archive:false, verbose:false, debug:false } )
-    Access.buildInnov( Data.Batch, 'Data',   'Info' )
+    Access.buildInnov( Data.Batch, 'DataScience',   'Info' )
     Access.mergePracs( Data.Batch, 'Prin', ['Info','Know','Wise'] ) # 'Data'
     #ata.mergeCols()
     try            # A lot can go wrong with vue3 initialization so trap errors

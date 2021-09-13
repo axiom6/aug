@@ -26,7 +26,7 @@
   "Innovate":{ "type":"pane", "hsv":[50,90,90],"column":"Innovate","row":"Dim","plane":"Prin","icon":"fas fa-snowflake",
     "cells":[17,12,1,6], "dir":"in", "pcells":[13,12,1,36], "css":"ui-dims", "neg":"Neglect",
     "desc":"The space for adjacent connections where ideas flow, interact, evolve, grow and converge in novel ways.",
-      "Engage":  { "dir":"west", "name":"Engage", "icon":"fas fa-child", "hsv":[195,90,70], "dim":true,
+      "Attract":  { "dir":"west", "name":"Attract", "icon":"fas fa-child", "hsv":[195,90,70], "dim":true,
         "desc":"Our innovations engage at every level",
         "Touch":     { "desc":"High Tech, High Touch" },
         "Space":     { "desc":"We create the space and entitle everyone for 'Good Ideas' to emerge." },

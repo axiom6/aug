@@ -38,11 +38,11 @@ import KnowJson from '../../../data/muse/Know.json';
 
 import WiseJson from '../../../data/muse/Wise.json';
 
-import SoftJson from '../../../data/inno/Soft.json';
+import SoftwareJson from '../../../data/inno/Software.json';
 
-import DataJson from '../../../data/inno/Data.json';
+import DataScienceJson from '../../../data/inno/DataScience.json';
 
-import ScieJson from '../../../data/inno/Scie.json';
+import ScienceJson from '../../../data/inno/Science.json';
 
 import MathJson from '../../../data/inno/Math.json';
 
@@ -114,7 +114,7 @@ Muse = (function() {
         verbose: false,
         debug: false
       });
-      Access.buildInnov(Muse.Batch, 'Data', 'Info');
+      Access.buildInnov(Muse.Batch, 'DataScience', 'Info');
       Access.mergePracs(Muse.Batch, 'Prin', [
         'Info',
         'Know',
@@ -199,18 +199,18 @@ Muse = (function() {
       refine: true
     },
     Software: {
-      url: 'inno/Soft.json',
-      data: SoftJson,
+      url: 'inno/Software.json',
+      data: SoftwareJson,
       refine: true
     },
-    Data: {
-      url: 'inno/Data.json',
-      data: DataJson,
+    DataScience: {
+      url: 'inno/DataScience.json',
+      data: DataScienceJson,
       refine: true
     },
     Science: {
-      url: 'inno/Scie.json',
-      data: ScieJson,
+      url: 'inno/Science.json',
+      data: ScienceJson,
       refine: true
     },
     Math: {
@@ -331,9 +331,9 @@ Muse = (function() {
       }
     },
     Info: {
-      Engineer: {
-        title: 'Engineer',
-        key: "Engineer",
+      Product: {
+        title: 'Product',
+        key: "Product",
         show: true,
         icon: "fas fa-th"
       },
@@ -343,17 +343,17 @@ Muse = (function() {
         show: false,
         icon: "fas fa-codepen"
       },
-      Data: {
+      DataScience: {
         title: 'Data Science',
-        key: "Data",
+        key: "DataScience",
         show: false,
         icon: "fas fa-table"
       }
     },
     Know: {
-      Design: {
-        title: 'Design',
-        key: "Design",
+      Purpose: {
+        title: 'Purpose',
+        key: "Purpose",
         show: true,
         icon: "fas fa-university"
       },

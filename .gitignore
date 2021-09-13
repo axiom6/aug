@@ -22,7 +22,7 @@ firebase-debug.log*
 .idea
 dist
 node_modules
-zzz
+
 
 # Runtime data
 pids
@@ -70,6 +70,4 @@ build/Release
 
 # dotenv environment variables file
 .env
-/zzz/
 
-/zzz/

@@ -1,5 +1,4 @@
-var TripD3,
-  hasProp = {}.hasOwnProperty;
+var TripD3;
 
 import {
   vis
@@ -13,37 +12,20 @@ TripD3 = class TripD3 {
     this.d3 = this.svgMgr.d3;
     this.svg = this.svgMgr.svg;
     this.g = this.svgMgr.g;
-    this.segs = this.createSeqs();
     this.debug = true;
   }
 
-  createSeqs() {
-    var i, key, obj, segs;
-    segs = [];
-    i = 1;
-    for (key in Mileposts) {
-      if (!hasProp.call(Mileposts, key)) continue;
-      obj = Mileposts[key];
-      if (i === 1) {
-        segs[0] = obj.Beg;
-      }
-      segs[i] = obj.End;
-      i++;
-    }
-    return seqs;
-  }
-
   draw() {
-    var beg, end, fill, h, i, j, ref, thick, w, x, y;
-    d3.select('#' + this.gId).selectAll("*").remove();
-    this.mileBeg = this.segs[0];
-    this.mileEnd = this.segs[this.segs.length - 1];
-    this.distance = Math.abs(this.mileBeg - this.mileEnd);
+    var beg, distance, end, fill, h, i, j, mileBeg, mileEnd, ref, thick, w, x, y;
+    this.d3.select('#' + this.gId).selectAll("*").remove();
+    mileBeg = MilePosts[0].mile;
+    mileEnd = MilePosts[MilePosts.length - 1].mile;
+    distance = Math.abs(mileBeg - mileEnd);
     if (this.debug) {
       console.log('TripD3.draw() 1', {
-        mileBeg: this.mileBeg,
-        mileEnd: this.mileEnd,
-        distance: this.distance
+        mileBeg: mileBeg,
+        mileEnd: mileEnd,
+        distance: distance
       });
     }
     thick = 1;
@@ -53,9 +35,10 @@ TripD3 = class TripD3 {
     h = this.barHeight();
     this.createTravelTime(trip, this.g, x, y, w, h);
     this.rect(trip, this.g, trip.segments[0], this.role + 'Border', x, y, w, h, 'transparent', 'white', thick * 4, '');
-    for (i = j = 0, ref = this.segs.lenght - 1; (0 <= ref ? j < ref : j > ref); i = 0 <= ref ? ++j : --j) {
-      beg = w * Math.abs(this.segs[i] - this.mileBeg) / this.distance;
-      end = w * Math.abs(this.segs[i + 1] - this.mileBeg) / this.distance;
+    beg = w * Math.abs(MilePosts[0].mile - mileBeg) / distance;
+    end = 0;
+    for (i = j = 1, ref = MilePosts.lenght; (1 <= ref ? j < ref : j > ref); i = 1 <= ref ? ++j : --j) {
+      end = w * Math.abs(MilePosts[i].milw - mileBeg) / distance;
       fill = this.fillCondition(seg.segId, trip.conditions);
       if (this.debug) {
         console.log('TripD3.draw() 2', {
@@ -66,6 +49,7 @@ TripD3 = class TripD3 {
         });
       }
       this.rect(trip, this.g, seg, seg.segId, beg, y, Math.abs(end - beg), h, fill, 'black', thick, '');
+      beg = end;
     }
     this.created = true;
   }

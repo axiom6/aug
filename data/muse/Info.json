@@ -23,7 +23,7 @@
     "Activity": { "type":"disp", "dir":"south", "icon":"fas fa-tasks", "hsv":[60,90,90],
       "desc":"We value anticipation",  "ref":"",
       "Charter":  { "type":"area", "icon":"fas fa-object-group",  "desc":"We assign serious goals"  },
-      "Purpose":  { "type":"area", "icon":"fas fa-hands-helping", "desc":"Our work has meaning that matters"  },
+      "Meaning":  { "type":"area", "icon":"fas fa-hands-helping", "desc":"Our work has meaning that matters"  },
       "Kanban":   { "type":"area", "icon":"fas fa-tasks",         "desc":"A queue for pulling activities"  } }
   },
   "Domain":{ "type":"prac", "hsv":[50,90,90],"column":"Innovate","row":"Learn","plane":"Info","icon":"fab fa-empire" ,

@@ -1,0 +1,55 @@
+
+1. Scene + Coordinates + Renderer + Lights + Cameras with Controls
+
+  # Scene( elem )
+    scene = new THREE.Scene()
+    color =  0x404040 # soft white light
+
+  # Coordinates on the Scene Object3D base class
+    # Position: cart-Cartesion cyl-Cylindrical sphere-Scherical
+    # Rotation
+    # Scale
+    # We extablish coordinates here as central point of reference
+
+  # Renderer( elem )
+    renderer = new THREE.WebGLRenderer()
+    renderer.setSize( elem['clientWidth'], elem['clientHeight'] );
+    elem.appendChild( renderer.domElement );
+
+  # Lights
+    light = new THREE.AmbientLight( color )
+    scene.add( light )
+
+  # Cameras( renderer ) with Coordinates + Controls
+    camera = new THREE.PerspectiveCamera ( fieldOfVueDeg, aspectRatio, nearClip, farClip )
+    camera.position.set(0, 0, 10) # Just an examole
+
+  # Consrols( camera, renderer ) # for moving camera
+    controls new OrbitControls( camera, renderer.domElement )
+
+2. Content( scene )  Data + Geometry + Color + Material + Transform with Coordinates
+
+  # Data
+
+  # Box Geometry
+  geometry = new THREE.BoxGeometry()
+
+  # Color
+
+  # Material
+  material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+  cube     = new THREE.Mesh( geometry, material );
+  scene.add( cube )
+
+  # Transform( geometry )
+  geometry.matrix.setRotationFromQuaternion( quaternion )
+  geometry.matrix.setPosition( start_position )
+  geometry.rotation.x += 0.01
+  geometry.rotation.y += 0.01
+
+3. Animate( scene, camera, renderer, geometry )
+   animate = () ->
+     requestAnimationFrame( animate )
+     geometry.transform(     params  ) # animate parameters
+     renderer.render( scene, camera ) # renderer can be an effect
+   animate()

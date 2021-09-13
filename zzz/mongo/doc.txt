@@ -1,0 +1,8 @@
+
+
+brew services start mongodb-community
+brew services stop  mongodb-community
+
+    a configuration file: /usr/local/etc/mongod.conf
+    a log directory path: /usr/local/var/log/mongodb
+    a data directory path: /usr/local/var/mongodb

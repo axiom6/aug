@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Type.coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" media="all" href="css/docco/docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>Type.coffee</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-1">&#x00a7;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Type</span></span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-2">&#x00a7;</a>
+              </div>
+              <p><a href="http://jashkenas.github.com/docco/">http://jashkenas.github.com/docco/</a></p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  
+  comstructor:<span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span>
+    @warned  = <span class="hljs-string">&quot;&quot;</span>
+    @lasted  = <span class="hljs-string">&quot;&quot;</span>
+    @logging = <span class="hljs-literal">true</span>
+    @dwgug   = <span class="hljs-literal">false</span>
+    @log     = console.log
+    @error   = console.error</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-3">&#x00a7;</a>
+              </div>
+              <p>An improved typeof() that follows the convention by returning types in lower case by default.
+The 15 types similar to typeof() returned are:
+“|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date”</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  toType:<span class="hljs-function"><span class="hljs-params">(arg,lowerCase=<span class="hljs-literal">true</span>)</span> -&gt;</span>
+    str = Object::toString.call(arg)
+    tok = str.split(<span class="hljs-string">&#x27; &#x27;</span>)[<span class="hljs-number">1</span>]
+    typ = tok.substring(<span class="hljs-number">0</span>,tok.length<span class="hljs-number">-1</span>)
+    typ = @toMoreTypes( typ, arg )
+    <span class="hljs-keyword">if</span> lowerCase <span class="hljs-keyword">then</span> typ.toLowerCase() <span class="hljs-keyword">else</span> typ</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-4">&#x00a7;</a>
+              </div>
+              <p>Detects and converts to ‘Int’ “Float’ ‘Range’ ‘Enums’ types</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  toMoreTypes:<span class="hljs-function"><span class="hljs-params">( typ, arg )</span> -&gt;</span>
+    <span class="hljs-keyword">switch</span>
+      <span class="hljs-keyword">when</span> typ <span class="hljs-keyword">is</span> <span class="hljs-string">&quot;Number&quot;</span>
+        <span class="hljs-keyword">if</span> <span class="hljs-built_in">Number</span>.isInteger(arg) <span class="hljs-keyword">then</span> <span class="hljs-string">&quot;Int&quot;</span>   <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;Float&quot;</span>
+      <span class="hljs-keyword">when</span> typ <span class="hljs-keyword">is</span> <span class="hljs-string">&quot;String&quot;</span> <span class="hljs-keyword">and</span> @isEnclosed(<span class="hljs-string">&quot;|&quot;</span>,arg,<span class="hljs-string">&quot;|&quot;</span>)        <span class="hljs-comment"># @isEnclosed(&quot;|&quot;,arg,&quot;|&quot;) avoids infinite recursion</span>
+        <span class="hljs-keyword">if</span> arg.includes(<span class="hljs-string">&quot;-&quot;</span>)     <span class="hljs-keyword">then</span> <span class="hljs-string">&quot;Range&quot;</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;Enums&quot;</span>
+      <span class="hljs-keyword">else</span>
+        typ</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-5">&#x00a7;</a>
+              </div>
+              <p>A more detail type that returns basic types, class, object and function name in upper case</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  toKlass:<span class="hljs-function"><span class="hljs-params">(arg)</span> -&gt;</span>
+    typ = @toType(arg,<span class="hljs-literal">false</span>) <span class="hljs-comment"># Start with basic type to catch &quot;Null&quot; and &quot;Undefined&quot;</span>
+    <span class="hljs-keyword">switch</span> typ
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;Null&quot;</span>      <span class="hljs-keyword">then</span> <span class="hljs-string">&quot;Null&quot;</span>
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;Undefined&quot;</span> <span class="hljs-keyword">then</span> <span class="hljs-string">&quot;Undefined&quot;</span>
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;Function&quot;</span>  <span class="hljs-keyword">then</span> arg.name
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;Object&quot;</span>    <span class="hljs-keyword">then</span> arg.constructor.name
+      <span class="hljs-keyword">else</span>                  typ</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-6">&#x00a7;</a>
+              </div>
+              <p>The 9 fundamental type Assertions that leverage @toType(arg) the improved typeof(arg)
+In addition isInt isFloat isBoolean isArray isObject can optionally chech strings</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  isStr:<span class="hljs-function"><span class="hljs-params">(s)</span>      -&gt;</span>   @isType(s,<span class="hljs-string">&quot;string&quot;</span>) <span class="hljs-keyword">and</span> s.length &gt; <span class="hljs-number">0</span> <span class="hljs-keyword">and</span> s <span class="hljs-keyword">isnt</span> <span class="hljs-string">&quot;none&quot;</span>
+  isInt:<span class="hljs-function"><span class="hljs-params">(i)</span>      -&gt;</span> ( @isType(i,<span class="hljs-string">&quot;int&quot;</span>)   <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">isNaN</span>(i) ) <span class="hljs-keyword">or</span> ( @isType(i,<span class="hljs-string">&quot;string&quot;</span>) <span class="hljs-keyword">and</span> @isStrInt(i)     )
+  isFloat:<span class="hljs-function"><span class="hljs-params">(f)</span>    -&gt;</span> ( @isType(f,<span class="hljs-string">&quot;float&quot;</span>) <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">isNaN</span>(f) ) <span class="hljs-keyword">or</span> ( @isType(f,<span class="hljs-string">&quot;string&quot;</span>) <span class="hljs-keyword">and</span> @isStrFloat(f)   )
+  isBoolean:<span class="hljs-function"><span class="hljs-params">(b)</span>  -&gt;</span>   @isType(b,<span class="hljs-string">&quot;boolean&quot;</span>)                  <span class="hljs-keyword">or</span> ( @isType(b,<span class="hljs-string">&quot;string&quot;</span>) <span class="hljs-keyword">and</span> @isStrBoolean(b) )
+  isArray:<span class="hljs-function"><span class="hljs-params">(a)</span>    -&gt;</span> ( @isType(a,<span class="hljs-string">&quot;array&quot;</span>) <span class="hljs-keyword">and</span> a.length &gt; <span class="hljs-number">0</span> ) <span class="hljs-keyword">or</span> ( @isType(a,<span class="hljs-string">&quot;string&quot;</span>) <span class="hljs-keyword">and</span> @isStrArray(a)   )
+  isObject:<span class="hljs-function"><span class="hljs-params">(o)</span>   -&gt;</span>   @isType(o,<span class="hljs-string">&quot;object&quot;</span>)                   <span class="hljs-keyword">or</span> ( @isType(o,<span class="hljs-string">&quot;string&quot;</span>) <span class="hljs-keyword">and</span> @isStrObject(o)  )
+  isRegexp:<span class="hljs-function"><span class="hljs-params">(r)</span>   -&gt;</span>   @isType(r,<span class="hljs-string">&quot;regexp&quot;</span>)
+  isFunction:<span class="hljs-function"><span class="hljs-params">(f)</span> -&gt;</span>   @isType(f,<span class="hljs-string">&quot;function&quot;</span>)
+  isNull:<span class="hljs-function"><span class="hljs-params">(m)</span>     -&gt;</span>   @isType(m,<span class="hljs-string">&quot;null&quot;</span>)
+  isUndef:<span class="hljs-function"><span class="hljs-params">(u)</span>    -&gt;</span>   @isType(u,<span class="hljs-string">&quot;undefined&quot;</span>)
+  isBigInt:<span class="hljs-function"><span class="hljs-params">(b)</span>   -&gt;</span>   <span class="hljs-keyword">typeof</span>(b) <span class="hljs-keyword">is</span> <span class="hljs-string">&quot;bigint&quot;</span> <span class="hljs-comment"># Will incorporate into type</span>
+  isSymbol:<span class="hljs-function"><span class="hljs-params">(s)</span>   -&gt;</span>   <span class="hljs-keyword">typeof</span>(s) <span class="hljs-keyword">is</span> <span class="hljs-string">&quot;symbol&quot;</span> <span class="hljs-comment"># Will incorporate into type</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-7">&#x00a7;</a>
+              </div>
+              <p>General purpose since if checks the array’s existence and interate over all the elements</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  isArrayTyped:<span class="hljs-function"><span class="hljs-params">(a,t)</span> -&gt;</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> @isArray(a)
+    <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> a
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span> <span class="hljs-keyword">if</span> @toType(e) <span class="hljs-keyword">isnt</span> t
+    <span class="hljs-literal">true</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-8">&#x00a7;</a>
+              </div>
+              <p>General purpose since if checks the array’s existence and interate over all the elements</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  isArrayMixed:<span class="hljs-function"><span class="hljs-params">(a)</span> -&gt;</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> @isArray(a)
+    type = @toType(a[<span class="hljs-number">0</span>])
+    <span class="hljs-keyword">for</span> e <span class="hljs-keyword">in</span> a
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @toType(e) <span class="hljs-keyword">isnt</span> type
+    <span class="hljs-literal">false</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-9">&#x00a7;</a>
+              </div>
+              <p>Aggregate and special value assertions</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  isType:<span class="hljs-function"><span class="hljs-params">(v,t)</span>      -&gt;</span>   @toType(v) <span class="hljs-keyword">is</span> t
+  isDef:<span class="hljs-function"><span class="hljs-params">(d)</span>         -&gt;</span>   @toType(d) <span class="hljs-keyword">isnt</span> <span class="hljs-string">&#x27;null&#x27;</span> <span class="hljs-keyword">and</span> @toType(d) <span class="hljs-keyword">isnt</span> <span class="hljs-string">&#x27;undefined&#x27;</span>
+  isNumber:<span class="hljs-function"><span class="hljs-params">(n)</span>      -&gt;</span>   @isIn( @toType(n), <span class="hljs-string">&quot;numbers&quot;</span> )
+  isNot:<span class="hljs-function"><span class="hljs-params">(d)</span>         -&gt;</span>   <span class="hljs-keyword">not</span> @isDef(d)
+  isNaN:<span class="hljs-function"><span class="hljs-params">(n)</span>         -&gt;</span>   <span class="hljs-built_in">Number</span>.<span class="hljs-built_in">isNaN</span>(n) <span class="hljs-comment"># @isNumber(n) and</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-10">&#x00a7;</a>
+              </div>
+              <p>Containment assertions where args are always ( value, container )</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  inStr:<span class="hljs-function"><span class="hljs-params">(e,s)</span>     -&gt;</span>  @isStr(s)    <span class="hljs-keyword">and</span> @isDef(e) <span class="hljs-keyword">and</span> s.includes(e)
+  inArray:<span class="hljs-function"><span class="hljs-params">( e,a)</span>  -&gt;</span>  @isArray(a)  <span class="hljs-keyword">and</span> @isDef(e) <span class="hljs-keyword">and</span> a.includes(e)
+  inObject:<span class="hljs-function"><span class="hljs-params">(k,o)</span>  -&gt;</span>  @isObject(o) <span class="hljs-keyword">and</span> @isDef(o[k]) <span class="hljs-keyword">and</span> o.hasOwnProperty(k)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-11">&#x00a7;</a>
+              </div>
+              <p>– More assertions –</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-12">&#x00a7;</a>
+              </div>
+              <p>Checks for offical child key which starts with capital letter and isnt an _ or $</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  isChild: <span class="hljs-function"><span class="hljs-params">(key)</span> -&gt;</span>
+    a = key.charAt(<span class="hljs-number">0</span>)
+    b = key.charAt(key.length - <span class="hljs-number">1</span>)
+    a <span class="hljs-keyword">is</span> a.toUpperCase() <span class="hljs-keyword">and</span> a <span class="hljs-keyword">isnt</span> <span class="hljs-string">&quot;$&quot;</span> <span class="hljs-keyword">and</span> b <span class="hljs-keyword">isnt</span> <span class="hljs-string">&quot;_&quot;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-13">&#x00a7;</a>
+              </div>
+              <p>Check if an object or array or string is empty</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  isEmpty:<span class="hljs-function"><span class="hljs-params">(e)</span> -&gt;</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span> <span class="hljs-keyword">if</span> @isNot(e)
+    <span class="hljs-keyword">switch</span> @isType(e)
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;object&quot;</span> <span class="hljs-keyword">then</span> <span class="hljs-built_in">Object</span>.getOwnPropertyNames(e).length <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;array&quot;</span>  <span class="hljs-keyword">then</span> e.length <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;string&quot;</span> <span class="hljs-keyword">then</span> e.length <span class="hljs-keyword">is</span> <span class="hljs-number">0</span>
+      <span class="hljs-keyword">else</span>               <span class="hljs-literal">false</span>  <span class="hljs-comment"># Look into</span>
+
+  isStrInt:<span class="hljs-function"><span class="hljs-params">( str )</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> @isStr( str )
+      regexp = <span class="hljs-regexp">/^-?\d+$/</span>
+      regexp.test(str)
+    <span class="hljs-keyword">else</span> <span class="hljs-literal">false</span>
+
+  isStrFloat:<span class="hljs-function"><span class="hljs-params">( str )</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> @isStr( str )
+       regexp = <span class="hljs-regexp">/^-?\d+(?:[.,]\d*?)?$/</span>
+       regexp.test(str)
+    <span class="hljs-keyword">else</span> <span class="hljs-literal">false</span>
+
+  isStrBoolean:<span class="hljs-function"><span class="hljs-params">( str )</span> -&gt;</span>
+    @isStr(str) <span class="hljs-keyword">and</span> ( str <span class="hljs-keyword">is</span> <span class="hljs-string">&quot;true&quot;</span> <span class="hljs-keyword">or</span> str <span class="hljs-keyword">is</span> <span class="hljs-string">&quot;false&quot;</span> )
+
+  isStrArray:<span class="hljs-function"><span class="hljs-params">( str )</span> -&gt;</span>
+    @isEnclosed( <span class="hljs-string">&quot;[&quot;</span>, str, <span class="hljs-string">&quot;]&quot;</span> )
+
+  isStrObject:<span class="hljs-function"><span class="hljs-params">( str )</span> -&gt;</span>
+    @isEnclosed( <span class="hljs-string">&quot;{&quot;</span>, str, <span class="hljs-string">&quot;}&quot;</span> )</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-14">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-14">&#x00a7;</a>
+              </div>
+              <p>A coerced conversion that can return a value of ‘none’
+|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date
+Still need |regexp|null|undefined|function|bigint|symbol|date|</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  toConvert:<span class="hljs-function"><span class="hljs-params">( arg, type )</span> -&gt;</span>
+    <span class="hljs-keyword">switch</span> type
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;string&quot;</span>,<span class="hljs-string">&quot;enums&quot;</span>,<span class="hljs-string">&quot;range&quot;</span> <span class="hljs-keyword">then</span> @toStr(arg)
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;int&quot;</span>     <span class="hljs-keyword">then</span> @toInt(     arg )
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;float&quot;</span>   <span class="hljs-keyword">then</span> @toFloat(   arg )
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;boolean&quot;</span> <span class="hljs-keyword">then</span> @toBoolean( arg )
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;array&quot;</span>   <span class="hljs-keyword">then</span> @toArray(   arg )
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;object&quot;</span>  <span class="hljs-keyword">then</span> @toObject(  arg )
+      <span class="hljs-keyword">else</span>
+        @log( <span class="hljs-string">&quot;Type.toConvert(arg,type)&quot;</span>, { arg:arg, type:type } )
+        <span class="hljs-string">&quot;none&quot;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-15">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-15">&#x00a7;</a>
+              </div>
+              <h2 id="h2"></h2>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    obj = @toObject(  arg )
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> @isType(obj,<span class="hljs-string">&quot;object&quot;</span>)
+      console.log( <span class="hljs-string">&quot;Test.toConvert(arg,type)&quot;</span>, { arg:arg, obj:obj, type:type } )</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-16">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-16">&#x00a7;</a>
+              </div>
+              <h2 id=""></h2>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-17">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-17">&#x00a7;</a>
+              </div>
+              <p>A value conversion from a ‘string’ that can return a value of ‘none’
+|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date
+Still need |regexp|null|undefined|function|bigint|symbol|date</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  toValue:<span class="hljs-function"><span class="hljs-params">( str, encloseValue=<span class="hljs-literal">false</span> )</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span>  @isStr(str)
+      val = @toStr(str, <span class="hljs-number">0</span>, encloseValue )
+      @log( <span class="hljs-string">&quot;Type.toValue(str) nots&quot;</span>, { str:str, val:val, type:@toType(str) } ) <span class="hljs-keyword">if</span> @debug
+      <span class="hljs-keyword">return</span> val
+    val = <span class="hljs-keyword">switch</span>
+      <span class="hljs-keyword">when</span> @isStrInt(str)     <span class="hljs-keyword">then</span> @toInt(str)
+      <span class="hljs-keyword">when</span> @isStrFloat(str)   <span class="hljs-keyword">then</span> @toFloat(str)
+      <span class="hljs-keyword">when</span> @isStrBoolean(str) <span class="hljs-keyword">then</span> @toBoolean(str)
+      <span class="hljs-keyword">when</span> @isStrArray(str)   <span class="hljs-keyword">then</span> @toArray(str)
+      <span class="hljs-keyword">when</span> @isStrObject(str)  <span class="hljs-keyword">then</span> @toObject(str)
+      <span class="hljs-keyword">when</span> @isStr(str)        <span class="hljs-keyword">then</span> str     <span class="hljs-comment"># Also gets &#x27;enums&#x27; &#x27;range&#x27;</span>
+      <span class="hljs-keyword">else</span>
+        @log( <span class="hljs-string">&quot;Type.toValue(str) else&quot;</span>, { str:str, type:@toType(str) } ) <span class="hljs-keyword">if</span> @debug
+        <span class="hljs-string">&quot;none&quot;</span>
+    console.log( <span class="hljs-string">&quot;Type.toValue(str) retn&quot;</span>, { str:str, val:val, type:@toType(str) } ) <span class="hljs-keyword">if</span> @debug
+    val
+
+  inside:<span class="hljs-function"><span class="hljs-params">(  str )</span> -&gt;</span>
+    @slice( str, <span class="hljs-number">2</span>, str.length<span class="hljs-number">-1</span> )</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-18">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-18">&#x00a7;</a>
+              </div>
+              <p>First onvert &#39; to &quot; then cnclose an arg in single quotes when double quotes are inside</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  toSingleQuote:<span class="hljs-function"><span class="hljs-params">( arg )</span> -&gt;</span>
+    str = <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> @isStr(arg) <span class="hljs-keyword">then</span> @toStr(arg,<span class="hljs-number">0</span>,<span class="hljs-literal">true</span>) <span class="hljs-keyword">else</span> arg
+    str = <span class="hljs-keyword">if</span> str.includes(<span class="hljs-string">&quot;&#x27;&quot;</span>) <span class="hljs-keyword">then</span> str.replaceAll(<span class="hljs-string">&quot;&#x27;&quot;</span>,<span class="hljs-string">&#x27;&quot;&#x27;</span>) <span class="hljs-keyword">else</span> str  <span class="hljs-comment"># Needs to be more precise</span>
+    has = str.includes(<span class="hljs-string">&#x27;&quot;&#x27;</span>)
+    str = <span class="hljs-keyword">if</span> has <span class="hljs-keyword">then</span> @toEnclose( <span class="hljs-string">&quot;&#x27;&quot;</span>, str, <span class="hljs-string">&quot;&#x27;&quot;</span> ) <span class="hljs-keyword">else</span> str
+    console.log( <span class="hljs-string">&quot;Type.toSingleQuote(arg)&quot;</span>, { arg:arg, str:str, has:has } ) <span class="hljs-keyword">if</span> @debug
+    str</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-19">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-19">&#x00a7;</a>
+              </div>
+              <p>Can’t assert @isStr(str) because of possible infinite recursion
+ isEnclose can not determine if a final string has been wrapped with “ or ‘</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  isEnclosed:<span class="hljs-function"><span class="hljs-params">( beg, str, end )</span> -&gt;</span>
+    str.charAt(<span class="hljs-number">0</span>) <span class="hljs-keyword">is</span> beg <span class="hljs-keyword">and</span> str.charAt(str.length<span class="hljs-number">-1</span>) <span class="hljs-keyword">is</span> end</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-20">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-20">&#x00a7;</a>
+              </div>
+              <p>toEnclose a “string’
+toEnclose(“abc”,   ‘“‘  )       # returns “abc” - ? good for JSON keys and values
+toEnclose(“123”,   “‘“  )       # returns ‘123’
+toEnclose(“xyz”,   “()” )       # returns (xyz)
+toEnclose(“d,e,f”, “[]” )       # returns [d,e,f]
+toEnclose(“a:x,b:y,c:z”, “{}” ) # returns {a:x,b:y,c:z}</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  toEnclose:<span class="hljs-function"><span class="hljs-params">( beg, str, end )</span> -&gt;</span>
+    <span class="hljs-keyword">switch</span>
+      <span class="hljs-keyword">when</span> @isEnclosed( beg, str, end ) <span class="hljs-keyword">then</span> str   <span class="hljs-comment"># avoids enclosing twice</span>
+      <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;&quot;&quot;<span class="hljs-subst">#{beg}</span><span class="hljs-subst">#{str}</span><span class="hljs-subst">#{end}</span>&quot;&quot;&quot;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-21">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-21">&#x00a7;</a>
+              </div>
+              <p>toStr(arg) avoids conflicts with arg.toString()
+ returns “none” if unsuccesful
+This combination of travesal and recursion is cleaner than JSON.stringify()
+A super set of typeof with far all vaild 15 types detected by @toType() plus ‘none’ and ‘any’
+“|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|function|bigint|symbol|date|any|none|”</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  toStr:<span class="hljs-function"><span class="hljs-params">( arg, level=<span class="hljs-number">0</span>, encloseValue=<span class="hljs-literal">false</span>, encloseKey=<span class="hljs-literal">false</span> )</span> -&gt;</span>
+    type = @toType(arg)
+    str = <span class="hljs-keyword">switch</span> type
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;string&quot;</span>,<span class="hljs-string">&quot;enums&quot;</span>,<span class="hljs-string">&quot;range&quot;</span>,<span class="hljs-string">&quot;any&quot;</span>
+        <span class="hljs-keyword">if</span> encloseValue <span class="hljs-keyword">then</span> @toEnclose(<span class="hljs-string">&#x27;&quot;&#x27;</span>,arg,<span class="hljs-string">&#x27;&quot;&#x27;</span>) <span class="hljs-keyword">else</span> arg <span class="hljs-comment"># will not enclose more than once</span>
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;int&quot;</span>        <span class="hljs-keyword">then</span> <span class="hljs-built_in">parseInt</span>(arg)
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;float&quot;</span>      <span class="hljs-keyword">then</span> <span class="hljs-built_in">parseFloat</span>(arg)
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;boolean&quot;</span>    <span class="hljs-keyword">then</span> <span class="hljs-keyword">if</span> arg <span class="hljs-keyword">then</span> <span class="hljs-string">&quot;true&quot;</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;false&quot;</span>
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;array&quot;</span>      <span class="hljs-keyword">then</span> @toStrArray(  arg, level, encloseValue )
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;object&quot;</span>     <span class="hljs-keyword">then</span> @toStrObject( arg, level, encloseValue, encloseKey )
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;null&quot;</span>       <span class="hljs-keyword">then</span> <span class="hljs-string">&quot;null&quot;</span>
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;undefined&quot;</span>  <span class="hljs-keyword">then</span> <span class="hljs-string">&quot;undefined&quot;</span>
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;function&quot;</span>   <span class="hljs-keyword">then</span> <span class="hljs-string">&quot;function&quot;</span>
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;bigint&quot;</span>     <span class="hljs-keyword">then</span> @toEnclose(<span class="hljs-string">&#x27;&quot;&#x27;</span>,arg.toString(),<span class="hljs-string">&#x27;&quot;&#x27;</span>)  <span class="hljs-comment"># Needs work</span>
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;regexp&quot;</span>,<span class="hljs-string">&quot;date&quot;</span>,<span class="hljs-string">&quot;symbol&quot;</span> <span class="hljs-keyword">then</span> arg.toString()  <span class="hljs-comment"># hail marys</span>
+      <span class="hljs-keyword">else</span>
+        @log( <span class="hljs-string">&quot;Type.toStr(arg?&quot;</span>, { arg:arg, type:@toType(arg) } )
+        <span class="hljs-string">&quot;none&quot;</span>
+    str
+
+  toStringify:<span class="hljs-function"><span class="hljs-params">( arg )</span> -&gt;</span>
+    @toStr( arg, <span class="hljs-number">0</span>, <span class="hljs-literal">true</span>, <span class="hljs-literal">true</span> )</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-22">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-22">&#x00a7;</a>
+              </div>
+              <p>str = if not @isIn(type,”manys”) and enc.length &gt; 0 then @toEnclose(str,enc) else str
+else  console.log( “toStr(arg)”, “unable to convert”, arg, type, “string”, arg.toString(), arg.toString() )
+else  @toWarn( “toStr(arg)”, “unable to convert”, arg, type,
+             “string”, arg.toString(), arg.toString(), (t) =&gt; t.log( t.warn() ) )
+str += key+”:”+@toEnclose(@toStr(val),’”‘)+”,”
+Puts single quotes ‘ around string objects that have double quotes inside</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  toStrObject:<span class="hljs-function"><span class="hljs-params">( obj, level=<span class="hljs-number">0</span>, encloseValue=<span class="hljs-literal">false</span>, encloseKey=<span class="hljs-literal">false</span> )</span> -&gt;</span>
+    str = <span class="hljs-string">&quot;{&quot;</span>
+    <span class="hljs-keyword">for</span> own key, val <span class="hljs-keyword">of</span> obj
+      okey = <span class="hljs-keyword">if</span> encloseKey <span class="hljs-keyword">then</span> @toEnclose(<span class="hljs-string">&#x27;&quot;&#x27;</span>,key,<span class="hljs-string">&#x27;&quot;&#x27;</span>) <span class="hljs-keyword">else</span> key
+      str += okey + <span class="hljs-string">&quot;:&quot;</span> + @toStr(val,++level,encloseValue,encloseKey) + <span class="hljs-string">&quot;,&quot;</span>
+    str = str.substring(<span class="hljs-number">0</span>,str.length<span class="hljs-number">-1</span>) <span class="hljs-comment"># remove trailing comma</span>
+    str += <span class="hljs-string">&quot;}&quot;</span>
+    <span class="hljs-keyword">if</span> level <span class="hljs-keyword">is</span> <span class="hljs-number">0</span> <span class="hljs-keyword">then</span> @toSingleQuote(str) <span class="hljs-keyword">else</span> str</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-23">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-23">&#x00a7;</a>
+              </div>
+              <p>Puts single quotes ‘ around string objects that have double quotes inside</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  toStrArray:<span class="hljs-function"><span class="hljs-params">( array, level=<span class="hljs-number">0</span>, encloseValue=<span class="hljs-literal">false</span> )</span> -&gt;</span>
+    str = <span class="hljs-string">&quot;[&quot;</span>
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> [<span class="hljs-number">0.</span>..array.length]
+      str += @toStr(array[i],++level, encloseValue )
+      str += <span class="hljs-keyword">if</span> i &lt; array.length<span class="hljs-number">-1</span> <span class="hljs-keyword">then</span> <span class="hljs-string">&quot;,&quot;</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;&quot;</span>
+    str += <span class="hljs-string">&quot;]&quot;</span>
+    <span class="hljs-keyword">if</span> level <span class="hljs-keyword">is</span> <span class="hljs-number">0</span> <span class="hljs-keyword">then</span> @toSingleQuote(str) <span class="hljs-keyword">else</span> str <span class="hljs-comment"># Single quotes added nnly when double quotes inside</span>
+
+  toFloat:<span class="hljs-function"><span class="hljs-params">( arg )</span> -&gt;</span>
+    type = @toType(arg)
+    <span class="hljs-keyword">switch</span> type
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;float&quot;</span> <span class="hljs-keyword">then</span> arg
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;int&quot;</span>   <span class="hljs-keyword">then</span> <span class="hljs-built_in">parseFloat</span>(arg.toFixed(<span class="hljs-number">1</span>)) <span class="hljs-comment"># Coerces an &#x27;int&#x27; like &#x27;1&#x27; to a &#x27;float&#x27; like &#x27;1.0&#x27;</span>
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;string&quot;</span>
+        <span class="hljs-keyword">if</span> @isStrFloat(arg)  <span class="hljs-keyword">then</span> <span class="hljs-built_in">parseFloat</span>(arg)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-24">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-24">&#x00a7;</a>
+              </div>
+              <p>lse @toWarn( “toFloat(arg)”, “unable to convert”, arg, “float”, NaN, (t) -&gt; t.log( t.warn() ) )</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">else</span> <span class="hljs-literal">NaN</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-25">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-25">&#x00a7;</a>
+              </div>
+              <p>lse   @toWarn( “toFloat(arg)”, “unable to convert”, arg, “float”, NaN, (t) -&gt; t.log( t.warn() ) )</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">else</span> <span class="hljs-literal">NaN</span>
+
+  toInt:<span class="hljs-function"><span class="hljs-params">( arg )</span> -&gt;</span>
+    type = @toType(arg)
+    <span class="hljs-keyword">switch</span> type
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;int&quot;</span>    <span class="hljs-keyword">then</span> arg
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;float&quot;</span>  <span class="hljs-keyword">then</span> <span class="hljs-built_in">Math</span>.round(arg)
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;string&quot;</span>
+        <span class="hljs-keyword">if</span> @isStrInt(arg) <span class="hljs-keyword">then</span> <span class="hljs-built_in">parseInt</span>(arg)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-26">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-26">&#x00a7;</a>
+              </div>
+              <p>lse @toWarn( “toInt(arg)”, “unable to convert”, arg, “int”, NaN, (t) -&gt; t.log( t.warn() ) )</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">else</span> <span class="hljs-literal">NaN</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-27">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-27">&#x00a7;</a>
+              </div>
+              <p>lse   @toWarn( “toInt(arg)”, “unable to convert”, arg, “int”, NaN, (t) -&gt; t.log( t.warn() ) )</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">else</span> <span class="hljs-literal">NaN</span>
+
+  toBoolean:<span class="hljs-function"><span class="hljs-params">( arg )</span> -&gt;</span>
+    type = @toType(arg)
+    <span class="hljs-keyword">switch</span> type
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;boolean&quot;</span> <span class="hljs-keyword">then</span> arg
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;string&quot;</span>
+        <span class="hljs-keyword">switch</span> arg 
+          <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;true&quot;</span>  <span class="hljs-keyword">then</span>  <span class="hljs-literal">true</span>
+          <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;false&quot;</span> <span class="hljs-keyword">then</span> <span class="hljs-literal">false</span>
+          <span class="hljs-keyword">else</span> @toWarn( <span class="hljs-string">&quot;toBoolean(arg)&quot;</span>, <span class="hljs-string">&quot;unable to convert&quot;</span>, arg, <span class="hljs-string">&quot;boolean&quot;</span>, <span class="hljs-literal">false</span>, <span class="hljs-function"><span class="hljs-params">(t)</span> -&gt;</span> t.log( t.warn() ) )
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;int&quot;</span>   <span class="hljs-keyword">then</span> arg <span class="hljs-keyword">isnt</span> <span class="hljs-number">0</span>   <span class="hljs-comment"># check 0   false may not be a convention</span>
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;float&quot;</span> <span class="hljs-keyword">then</span> arg <span class="hljs-keyword">isnt</span> <span class="hljs-number">0.0</span> <span class="hljs-comment"># check 0.0 false may not be a convention</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-28">&#x00a7;</a>
+              </div>
+              <p>lse     @toWarn( “toBoolean(arg)”, “unable to convert”, arg, “boolean”, false, (t) -&gt; t.log( t.warn() ) )</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">else</span> <span class="hljs-literal">false</span>
+
+  toArray:<span class="hljs-function"><span class="hljs-params">( arg )</span> -&gt;</span>
+    <span class="hljs-keyword">switch</span>  @toType(arg)
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;array&quot;</span> <span class="hljs-keyword">then</span> arg
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;string&quot;</span>  <span class="hljs-keyword">and</span> @isEnclosed( <span class="hljs-string">&quot;[&quot;</span>, arg, <span class="hljs-string">&quot;]&quot;</span> )
+        arg    = @strip( arg, <span class="hljs-string">&quot;[&quot;</span>, <span class="hljs-string">&quot;]&quot;</span> )
+        array  = []
+        values = arg.split(<span class="hljs-string">&quot;,&quot;</span>)
+        <span class="hljs-keyword">for</span> value <span class="hljs-keyword">in</span> values
+          array.push( @toValue(value) )
+        array
+      <span class="hljs-keyword">else</span> []
+
+  toObject:<span class="hljs-function"><span class="hljs-params">( arg )</span> -&gt;</span>
+    obj  = {}
+    type = @toType(arg)
+    <span class="hljs-keyword">switch</span>
+      <span class="hljs-keyword">when</span> type <span class="hljs-keyword">is</span> <span class="hljs-string">&quot;object&quot;</span>
+        obj = arg
+      <span class="hljs-keyword">when</span> type <span class="hljs-keyword">is</span> <span class="hljs-string">&quot;string&quot;</span> <span class="hljs-keyword">and</span> @isEnclosed( <span class="hljs-string">&quot;{&quot;</span>, arg, <span class="hljs-string">&quot;}&quot;</span>)
+        arg = @strip( arg, <span class="hljs-string">&quot;{&quot;</span>, <span class="hljs-string">&quot;}&quot;</span> )
+        obj = {}
+        keyValues = arg.split(<span class="hljs-string">&quot;,&quot;</span>)
+        <span class="hljs-keyword">for</span> keyValue <span class="hljs-keyword">in</span> keyValues
+          [key,value] = keyValue.split(<span class="hljs-string">&quot;:&quot;</span>)
+          obj[key]    = value
+      <span class="hljs-keyword">else</span>
+        obj = {}
+    obj
+
+  toObjectName:<span class="hljs-function"><span class="hljs-params">( obj )</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> @isObject(obj) <span class="hljs-keyword">then</span> obj.constructor.name <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;none&quot;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-29">&#x00a7;</a>
+              </div>
+              <p>Assert that func is a ‘fuction’ then returns name with the annoying ‘bound ‘ removed</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  toFunctionName:<span class="hljs-function"><span class="hljs-params">(  func, unCap=<span class="hljs-literal">true</span> )</span> -&gt;</span>
+    name = <span class="hljs-keyword">if</span> @isFunction( func ) <span class="hljs-keyword">then</span> func.name.replace( <span class="hljs-string">&quot;bound &quot;</span>, <span class="hljs-string">&quot;&quot;</span> ) <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;none&quot;</span>
+    name = <span class="hljs-keyword">if</span> unCap <span class="hljs-keyword">then</span> @unCap(name) <span class="hljs-keyword">else</span> name
+    name</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-30">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-30">&#x00a7;</a>
+              </div>
+              <p>For extenal use to insure val is expossed to the outside environment
+  to have all strings are wrapped in “”.
+  This is accomplished by setting excloseValue true for:
+   @toStr(arg,excloseValue) and @toValue(arg,excloseValue)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  v:<span class="hljs-function"><span class="hljs-params">(val)</span> -&gt;</span>
+    ret = <span class="hljs-keyword">if</span> @isType(val,<span class="hljs-string">&#x27;string&#x27;</span>) <span class="hljs-keyword">then</span> @toStr(val,<span class="hljs-number">0</span>,<span class="hljs-literal">true</span>) <span class="hljs-keyword">else</span> @toValue(val,<span class="hljs-literal">true</span>)
+    @log( { v:<span class="hljs-string">&quot;v&quot;</span>, ret:ret, val:val, type:@toType(val) } ) <span class="hljs-keyword">if</span> @debug
+    ret
+
+  toKeys:<span class="hljs-function"><span class="hljs-params">(o)</span>      -&gt;</span>
+    <span class="hljs-keyword">if</span> @isObject(o) <span class="hljs-keyword">then</span> <span class="hljs-built_in">Object</span>.keys(o) <span class="hljs-keyword">else</span> []
+
+  hasChild:<span class="hljs-function"><span class="hljs-params">( obj )</span> -&gt;</span>
+    <span class="hljs-keyword">for</span> own key, val <span class="hljs-keyword">of</span> obj
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> @isChild(key)
+    <span class="hljs-literal">false</span>
+
+  childKeys:<span class="hljs-function"><span class="hljs-params">( obj )</span> -&gt;</span>
+    vals = []
+    <span class="hljs-keyword">for</span> own key, val <span class="hljs-keyword">of</span> obj
+      vals.push(key) <span class="hljs-keyword">if</span> @isChild(key)
+    vals</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-31">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-31">&#x00a7;</a>
+              </div>
+              <p>Return a number with a fixed number of decimal places</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  toFixed:<span class="hljs-function"><span class="hljs-params">( arg, dec=<span class="hljs-number">2</span> )</span> -&gt;</span>
+    num = <span class="hljs-keyword">switch</span> @toType(arg)
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;int&quot;</span>,<span class="hljs-string">&quot;float&quot;</span> <span class="hljs-keyword">then</span> arg
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;string&quot;</span>      <span class="hljs-keyword">then</span> <span class="hljs-built_in">parseFloat</span>(arg)
+    num.toFixed(dec)
+
+  toCap:<span class="hljs-function"><span class="hljs-params">( str )</span> -&gt;</span>
+    str.charAt(<span class="hljs-number">0</span>).toUpperCase() + str.substring(<span class="hljs-number">1</span>)
+
+  unCap:<span class="hljs-function"><span class="hljs-params">( str )</span> -&gt;</span>
+    str.charAt(<span class="hljs-number">0</span>).toLowerCase() + str.substring(<span class="hljs-number">1</span>)
+
+  head:<span class="hljs-function"><span class="hljs-params">(arg)</span> -&gt;</span>
+    <span class="hljs-keyword">switch</span> @toType(arg)
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;array&quot;</span>  <span class="hljs-keyword">then</span> arg[<span class="hljs-number">0</span>]
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;string&quot;</span> <span class="hljs-keyword">then</span> arg.charAt(<span class="hljs-number">0</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-32">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-32">&#x00a7;</a>
+              </div>
+              <p>lse @toWarn( “head(arg)”, “unable to get the first element of”, arg, @toType(arg), null, (t) -&gt; t.log( t.warn() ) )</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;none&quot;</span>
+
+  tail:<span class="hljs-function"><span class="hljs-params">(arg)</span> -&gt;</span>
+    <span class="hljs-keyword">switch</span> @toType(arg)
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;array&quot;</span>  <span class="hljs-keyword">then</span> arg[arg.length<span class="hljs-number">-1</span>]
+      <span class="hljs-keyword">when</span> <span class="hljs-string">&quot;string&quot;</span> <span class="hljs-keyword">then</span> arg.charAt(arg.length<span class="hljs-number">-1</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-33">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-33">&#x00a7;</a>
+              </div>
+              <p>lse @toWarn( “tail(arg)”, “unable to get the last element of”, arg, @toType(arg), null, (t) -&gt; t.log( t.warn() ) )</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;none&quot;</span>
+
+  strip:<span class="hljs-function"><span class="hljs-params">( str, beg, end )</span> -&gt;</span>
+    str = str.trim()
+    <span class="hljs-keyword">if</span> @isStr(beg) <span class="hljs-keyword">and</span> str.startsWith(beg)
+       str = str.substring(beg.length)
+    <span class="hljs-keyword">if</span> @isStr(end) <span class="hljs-keyword">and</span> str.endsWith(end)
+      str = str.substring(<span class="hljs-number">0</span>,str.length-end.length)
+    str</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-34">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-34">&#x00a7;</a>
+              </div>
+              <p>Unlike the built in Array v.slice(beg,end) where beg is a zero-based index and end
+ here beg starts at 1 and end includes the last position or is set to beg if ommitted
+ an array slice( “[a”,”b”,”c”], 1, 2 ) returns “[a”,”b”]
+ an array slice( “[a”,”b”,”c”], 2    ) returns “[b”]
+ a string slice( “[abc”],       1, 2 ) returns   “ab”
+ a string slice( “[abc”],       2    ) returns   “b”
+where with Array.slice() it is open</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  slice:<span class="hljs-function"><span class="hljs-params">( v, beg, end=<span class="hljs-literal">null</span> )</span> -&gt;</span>
+    end = <span class="hljs-keyword">if</span> @isDef(end) <span class="hljs-keyword">and</span> beg &lt;= beg <span class="hljs-keyword">then</span> end <span class="hljs-keyword">else</span> beg
+    <span class="hljs-keyword">switch</span>
+      <span class="hljs-keyword">when</span> @isArray(v) <span class="hljs-keyword">then</span> v.slice(beg<span class="hljs-number">-1</span>,end)
+      <span class="hljs-keyword">when</span> @isStr(v)   <span class="hljs-keyword">then</span> v.slice(beg<span class="hljs-number">-1</span>,end)
+      <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;&quot;</span>
+
+  pad:<span class="hljs-function"><span class="hljs-params">( n, m )</span> -&gt;</span>
+    len = @numDigits( n )
+    tot = @numDigits( m )
+    str = n.toString()
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> [len...tot]
+      str = <span class="hljs-string">&quot; &quot;</span> + str
+    str
+
+  numDigits:<span class="hljs-function"><span class="hljs-params">( n )</span> -&gt;</span>
+    <span class="hljs-built_in">Math</span>.max( <span class="hljs-built_in">Math</span>.floor( <span class="hljs-built_in">Math</span>.log10( <span class="hljs-built_in">Math</span>.abs(n) ) ), <span class="hljs-number">0</span> ) + <span class="hljs-number">1</span>
+
+  time:<span class="hljs-function"><span class="hljs-params">()</span>  -&gt;</span>
+    <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getTime()</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-35">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-35">&#x00a7;</a>
+              </div>
+              <p>A deliberate do nothing consumer of arguments and variables</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  noop:<span class="hljs-function"><span class="hljs-params">( ...args )</span> -&gt;</span>
+    <span class="hljs-keyword">if</span> args <span class="hljs-keyword">then</span> <span class="hljs-literal">false</span>
+    <span class="hljs-keyword">return</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-36">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-36">&#x00a7;</a>
+              </div>
+              <p>– Warnings —</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-37">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-37">&#x00a7;</a>
+              </div>
+              <p>A gem methods that appends text along with retrStr to @warn for detailed reporting of inconsistence
+ along with a vialble actual return specified by the caller</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  toWarn:<span class="hljs-function"><span class="hljs-params">( method, text, arg, typeTo, retn, closure=<span class="hljs-literal">null</span> )</span> -&gt;</span>
+    warn  = <span class="hljs-string">&quot;<span class="hljs-subst">#{method}</span> <span class="hljs-subst">#{text}</span> <span class="hljs-subst">#{@toStr(arg)}</span> of &#x27;<span class="hljs-subst">#{@toType(arg)}</span>&#x27; to&#x27;<span class="hljs-subst">#{typeTo}</span>&#x27; returning <span class="hljs-subst">#{@toStr(arg)}</span>&quot;</span>
+    @doWarn( warn, closure, retn )
+
+  isWarn:<span class="hljs-function"><span class="hljs-params">( pass, text, type, types, closure=<span class="hljs-literal">null</span> )</span> -&gt;</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span> <span class="hljs-keyword">if</span> pass
+    warn = <span class="hljs-string">&quot;<span class="hljs-subst">#{text}</span> of type &#x27;<span class="hljs-subst">#{type}</span>&#x27; not in &#x27;<span class="hljs-subst">#{types}</span>&#x27;&quot;</span>
+    @doWarn( warn, closure, pass )
+
+  inWarn:<span class="hljs-function"><span class="hljs-params">( pass, result, expect, oper, spec, text, closure=<span class="hljs-literal">null</span> )</span> -&gt;</span>
+    prefix = <span class="hljs-keyword">if</span> pass <span class="hljs-keyword">then</span> <span class="hljs-string">&quot;-- Passed --&quot;</span> <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;-- Failed --&quot;</span>
+    condit = <span class="hljs-keyword">if</span> pass <span class="hljs-keyword">then</span> <span class="hljs-string">&quot;matches &quot;</span>     <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;no match&quot;</span>
+    warn   = <span class="hljs-string">&quot;<span class="hljs-subst">#{prefix}</span> <span class="hljs-subst">#{result}</span> <span class="hljs-subst">#{condit}</span> <span class="hljs-subst">#{expect}</span> with oper <span class="hljs-subst">#{oper}</span> and spec <span class="hljs-subst">#{spec}</span> <span class="hljs-subst">#{text}</span>&quot;</span>
+    @doWarn( warn, closure, pass )</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-38">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-38">&#x00a7;</a>
+              </div>
+              <p>(t) -&gt; t.log( t.info() )</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  doWarn:<span class="hljs-function"><span class="hljs-params">( warn, closure, retn )</span> -&gt;</span>
+     @lasted  = warn
+     @warned += warn
+     closure(@) <span class="hljs-keyword">if</span> @logging <span class="hljs-keyword">and</span> @isFunction(closure)
+     retn
+
+  warn:<span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span>
+    @lasted</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-39">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-39">&#x00a7;</a>
+              </div>
+              <p>Moved from Spec.coffee</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  isEnums:<span class="hljs-function"><span class="hljs-params">( arg )</span> -&gt;</span>
+    @isType(arg,<span class="hljs-string">&quot;enums&quot;</span>)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-40">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-40">&#x00a7;</a>
+              </div>
+              <p>Leverage the stronger assertions @isStr(arg) and @isArray(arg)</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  toEnums:<span class="hljs-function"><span class="hljs-params">( arg )</span> -&gt;</span>
+    <span class="hljs-keyword">switch</span>
+      <span class="hljs-keyword">when</span> @isType(arg,<span class="hljs-string">&quot;enums&quot;</span>)
+        arg
+      <span class="hljs-keyword">when</span> @isArray(arg)
+        enums = <span class="hljs-string">&quot;|&quot;</span>
+        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> [<span class="hljs-number">0.</span>..arg.length]
+          enums += @toStr(arg[i]) + <span class="hljs-string">&quot;|&quot;</span>
+        enums
+      <span class="hljs-keyword">else</span>
+        <span class="hljs-string">&quot;||&quot;</span>
+
+  inEnums:<span class="hljs-function"><span class="hljs-params">( result, enums )</span> -&gt;</span>
+    enums.includes(<span class="hljs-string">&quot;|&quot;</span>+result+<span class="hljs-string">&quot;|&quot;</span>)
+
+  isIn:<span class="hljs-function"><span class="hljs-params">( type, arg )</span> -&gt;</span>
+    <span class="hljs-keyword">switch</span>
+      <span class="hljs-keyword">when</span> @isArray(arg) <span class="hljs-keyword">then</span> @inArray( type, arg )
+      <span class="hljs-keyword">when</span> @isEnums(arg) <span class="hljs-keyword">then</span> @inArray( type, @toEnums(arg) )
+      <span class="hljs-keyword">when</span> @isStr(arg)   <span class="hljs-keyword">then</span> @toIn(arg).includes(type)</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-41">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-41">&#x00a7;</a>
+              </div>
+              <p>lse @isWarn( false, “arg #{arg} not ‘array’, ‘enums’ or ‘string’”, type, false )</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">else</span> <span class="hljs-literal">false</span>
+
+  toIn:<span class="hljs-function"><span class="hljs-params">( arg )</span> -&gt;</span>
+    <span class="hljs-keyword">switch</span>
+      <span class="hljs-keyword">when</span>  <span class="hljs-keyword">not</span>  arg? <span class="hljs-keyword">then</span> <span class="hljs-string">&quot;||&quot;</span>
+      <span class="hljs-keyword">when</span> Type[arg]? <span class="hljs-keyword">then</span> Type[arg]
+      <span class="hljs-keyword">else</span> <span class="hljs-string">&quot;||&quot;</span></pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-42">
+            <div class="annotation">
+              
+              <div class="sswrap ">
+                <a class="ss" href="#section-42">&#x00a7;</a>
+              </div>
+              <p>All Type[key] ‘enums’. Considering if “none” belongs</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>Type.undefs  = <span class="hljs-string">&quot;|null|undefined|&quot;</span>
+Type.numbers = <span class="hljs-string">&quot;|int|float|&quot;</span>
+Type.values  = <span class="hljs-string">&quot;|string|int|float|boolean|&quot;</span>
+Type.manys   = <span class="hljs-string">&quot;|object|array|&quot;</span>
+Type.ranges  = <span class="hljs-string">&quot;|string|int|float|&quot;</span>
+Type.matches = <span class="hljs-string">&quot;|regexp|range|enums|amy|&quot;</span>
+Type.results = <span class="hljs-string">&quot;|string|int|float|boolean|object|array|&quot;</span>
+Type.expects = <span class="hljs-string">&quot;|string|int|float|boolean|object|array|regexp|range|enums|amy|&quot;</span>
+Type.typeofs = <span class="hljs-string">&quot;|number|string|boolean|object|function|bigint|symbol|null|undefined|&quot;</span>
+Type.types   = <span class="hljs-string">&quot;|string|int|float|boolean|array|object|enums|range|regexp|null|undefined|&quot;</span>
+Type.types  += <span class="hljs-string">&quot;function|bigint|symbol|date|any|none|&quot;</span>
+Type.opers   = <span class="hljs-string">&quot;|to|eq|le|lt|ge|gt|ne|&quot;</span> <span class="hljs-comment"># low  level value  based comparison  ooers &#x27;eq&#x27; default</span>
+Type.cards   = <span class="hljs-string">&quot;|1|?|*|+|&quot;</span>              <span class="hljs-comment"># cards  1 required, ? optional, * 0 to many, + 1 to many</span>
+
+<span class="hljs-keyword">export</span> type = <span class="hljs-keyword">new</span> Type() <span class="hljs-comment"># Export a singleton instence of type</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Type</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

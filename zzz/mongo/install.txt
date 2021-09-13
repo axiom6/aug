@@ -1,0 +1,19 @@
+
+
+==> Downloading https://ghcr.io/v2/homebrew/core/yarn/manifests/1.22.10
+######################################################################## 100.0%
+==> Downloading https://ghcr.io/v2/homebrew/core/yarn/blobs/sha256:5c8f50922a573a4fc2f15b2b5b0fb457d93312474f85b1a23dd3af7d3e072650
+==> Downloading from https://pkg-containers.githubusercontent.com/ghcr1/blobs/sha256:5c8f50922a573a4fc2f15b2b5b0fb457d93312474f85b1a23dd3af7d3e072650?se=2021-07
+######################################################################## 100.0%
+==> Pouring yarn--1.22.10.all.bottle.tar.gz
+🍺  /usr/local/Cellar/yarn/1.22.10: 15 files, 5MB
+Removing: /usr/local/Cellar/yarn/1.16.0... (14 files, 4.7MB)
+==> Checking for dependents of upgraded formulae...
+==> No broken dependents to reinstall!
+==> Caveats
+==> mongodb-community
+To have launchd start mongodb/brew/mongodb-community now and restart at login:
+  brew services start mongodb/brew/mongodb-community
+Or, if you don't want/need a background service you can just run:
+  mongod --config /usr/local/etc/mongod.conf
+~/Documents/prj/aug:

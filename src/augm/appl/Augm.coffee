@@ -15,7 +15,7 @@ import Cache   from '../../../lib/pub/util/Cache.js'
 
 import MathJson   from '../../../data/augm/Math.json'
 import GeomJson   from '../../../data/augm/Geom.json'
-import DataJson   from '../../../data/augm/Data.json'
+import DataScienceJson   from '../../../data/inov/DataScience.json'
 import ToolJson   from '../../../data/augm/Tool.json'
 import QuadJson   from '../../../data/draw/Quad.json'
 import TechJson   from '../../../data/draw/Tech.json'
@@ -31,7 +31,7 @@ class Augm
   Augm.Batch = {
     Math:   { url:'augm/Math.json',     data:MathJson, refine:true }
     Geom:   { url:'augm/Geom.json',     data:GeomJson, refine:true }
-    Data:   { url:'augm/Data.json',     data:DataJson, refine:true }
+    DataScience:   { url:'inov/DataScience.json',     data:DataScienceJson, refine:true }
     Tool:   { url:'augm/Tool.json',     data:ToolJson, refine:true }
     Quad:   { url:'draw/Quad.json',     data:QuadJson   }
     Tech:   { url:'draw/Tech.json',     data:TechJson   }
