@@ -1,0 +1,149 @@
+
+Lesson 1: Evolution and innovation usually happen in the realm of the adjacent possible.
+
+Four billion years ago, carbon atoms mulled around the primordial soup. But as life began, those atoms did not spontaneously arrange themselves into complex life forms like sunflowers or squirrels.
+
+First, they had to form simpler structures like molecules, polymers, proteins, cells, primitive organisms and so forth. Each step along the way opened up possibilities for new combinations, expanding the realm of what was possible, until finally a carbon atom could reside in a sunflower.
+
+Similarly, eBay could not be created in the 1950s. First, someone had to invent computers, then a way to connect those computers, then a World Wide Web for people to browse and then a platform which supported online payments.
+
+Both evolution and innovation tend to happen within the bounds of the adjacent possible, in other words the realm of possibilities available at any given moment.
+
+Great leaps beyond the adjacent possible are rare and doomed to be short-term failures. The environment is simply not ready for them yet. Had YouTube been launched in the 1990s, it would have flopped, since neither the fast internet connections nor the software required to view videos was available then.
+
+The predominance of multiples in innovation highlights how the adjacent possible is constrained by existing parts and knowledge. A multiple occurs when several people independently make the same discovery almost simultaneously.
+
+Joseph Priestley and Carl Wilhelm Scheele isolated oxygen in 1772-1774, unaware of the other’s advancement. But they did share the same starting point, because their search for oxygen could not begin until the gaseous nature of air was first understood. Thus it was inevitable some scientists would reach their discoveries at around the same time.
+
+------------------------------------------------------------------
+
+Lesson 2: World-changing ideas generally evolve over time as slow hunches rather than sudden breakthroughs.
+
+Although in retrospect great discoveries may seem like single, definable eureka-moments, in reality they tend to fade into view slowly. They are like gradually maturing slow hunches, which demand time and cultivation to bloom.
+
+According to Darwin, the theory of natural selection simply popped into his head when he was contemplating Malthus’ writings on population growth. But Darwin’s notebooks reveal that far before this so-called epiphany, he had already described a very nearly complete theory of natural selection. This slow hunch only matured into a fully-formed theory over time.
+
+Only in retrospect does the idea seem so obvious that it must have come in a flash of insight. Upon hearing of the theory for the first time, a supporter of Darwin even exclaimed “How incredibly stupid not to think of that.”
+
+Another slow hunch led to a revolution in the way we share information today.
+
+As a child, Tim Berners-Lee read a Victorian-era how-to book and was fascinated by the “portal of information” he had found. Well over a decade later, working as a consultant at the Swiss CERN laboratory and partially inspired by the book, he tinkered with a side-project which allow him to store and connect chunks of information, like nodes in a network. Another decade later, CERN officially authorized him to work on the project, which finally matured into a network where documents on different computers could be connected through hypertext links. After decades of Berners-Lee’s slow hunch maturing and developing, the World Wide Web was born.
+
+------------------------------------------------------------------
+
+Lesson 3: Platforms are like springboards for innovations.
+
+Ecologists use the term keystone species to describe organisms which are disproportionately important to the welfare of the ecosystem. On a small island with no other predators, a pack of wolves keeps the population of sheep under control, thus stopping them from eating the island bare and collapsing the entire ecosystem.
+
+But around two decades ago, ecologists understood that a very specific and important type of keystone species warranted its own term entirely. Ecosystem engineers actually create habitats for other organisms, building platforms from which several others benefit. Consider for example the beavers that dam rivers turning forests into wetlands, or the coral that builds thriving reefs into the middle of the ocean.
+
+Such platforms exist in the sphere if innovation as well, and they are used as springboards to leap into the adjacent possible. The Global Positioning System (GPS) is a good example of such a platform. Originally developed for military use, it has now spurned countless innovations from GPS trackers to location-based services and advertising.
+
+Platforms often stack on top of each other, meaning that one platform provides the foundation for even more platforms, which again produce countless new innovations.
+
+Beavers fell trees that rot and attract woodpeckers to drill nesting holes in them. But once the woodpeckers have left, these holes are occupied by songbirds. The woodpecker has also created a platform.
+
+The story of Twitter is similar: the Web was based on existing protocols, Twitter was built on the Web and now countless apps have been designed on the Twitter platform, the adjacent possible being expanded at every step.
+
+    “Ideas rise in crowds, as Poincaré said. They rise in liquid networks, where connection is valued more than protection.”
+
+------------------------------------------------------------------
+
+Lesson 4: Innovation and evolution thrive in large networks.
+
+The basis of all life on earth (and likely any extraterrestrial life out there) is carbon, because it is fundamentally good at connecting with other atoms, and can thus construct complex chains of molecules. These connections allow new structures like proteins to emerge. Without carbon, the earth would have likely remained a dead soup of chemicals.
+
+Connections also facilitate ideas. When humans first began to organize themselves into settlements, towns and cities, they became members of networks, which exposed them to new ideas and allowed them to spread their own discoveries. Before this happened, a novel idea by one person could well die with her, since she had no network to spread it to. Great ideas rise in crowds.
+
+To better understand the roots of scientific breakthroughs, in the 1990s psychologists decided to record everything that went on in four molecular biology laboratories. One imagines that in a field like molecular biology, great discoveries are made by peering through a microscope. Strikingly, it turned out the most important ideas arose during regular lab meetings, where the scientists informally discussed their work.
+
+Other studies have shown that the most creative individuals have broad social networks that extend outside their own organization, and hence get new ideas from many different contexts.
+
+Cities facilitate such large networks which allow ideas to be diffused and combined in novel ways. This is one of the reasons why cities are disproportionately more creative than smaller towns. Today though the greatest such creative network is not a city at all, but the World Wide Web, creating, connecting and diffusing ideas more effectively than any network before it.
+
+------------------------------------------------------------------
+
+Lesson 5: Collaboration is at least as important a driver of innovation as competition.
+
+The ability of inventors and entrepreneurs to capitalize on their discoveries is often cited as a fundamental driver of innovation. But while the commercialization potential of inventions indeed spurs innovation, it also generates patents and other restrictions, thus hindering the circulation and further development of ideas.
+
+Thus with regard to innovation, the very markets which are supposed to guarantee efficiency by rewarding inventors are in fact structurally inefficient, because they artificially prevent ideas from propagating and combining with others.
+
+Over the past 600 years, the way that great inventions and discoveries are made seems to have gravitated increasingly away from individual inventors and toward networks of people. And even as the age of capitalism dawned and bloomed, most great discoveries have gone unrewarded by the markets. The World Wide Web, the theory of relativity, computers, x-rays, pacemakers and penicillin are but a few examples where the inventor has not profited.
+
+Certainly market-spurred innovation has been far more effective than innovation achieved in command economies like the Soviet Union, but that still does not mean it is the optimal way forward. Yes, inventors may well deserve to be rewarded, but the real question should be how to increase innovation in general.
+
+In the Origin of Species, Darwin himself placed equal emphasis on the wonder of complex collaboration between species as on the natural selection that comes from competition for resources. Similarly open networks of connections among innovations can be just as generative as vigorous competition. Free markets have greatly spurred innovation, but so has the collaborative, open way of sharing knowledge in networks.
+
+------------------------------------------------------------------
+
+Lesson 6: Lucky connections between ideas drive innovation.
+
+The ability of carbon to connect with other atoms was vital for the evolution of life, but a second, randomizing, force was also necessary: water.
+
+Water moves and churns, dissolving and eroding everything in its path, thus fostering new kinds of connections between atoms in the primordial soup. Just as importantly, the strong hydrogen bonds of water molecules helped maintain those new connections.
+
+This mix of turbulence and stability is why liquid networks are optimal both for the evolution of life and for creativity. Innovative networks too must teeter on the brink of chaos, in the fruitful realm between order and anarchy, just like water.
+
+Random connections drive serendipitous discoveries. Dreams for example are the primordial soup of innovation, where ideas connect seemingly at random. In fact, neuroscientists have confirmed that “sleeping on a problem” greatly helps solve it. Centuries ago, the German chemist Kekulé dreamt of a mythological serpent devouring its own tail, and subsequently realized how carbon atoms in a ring formed the molecule benzene.
+
+But it seems chaos and creativity are linked even on a neurological level.
+
+Ideas are in fact manifestations of a complex network of neurons firing in the brain, and new ideas are only possible when new connections are formed.
+
+For some reason, neurons in the brain alternate between states of chaos, where they fire completely out of sync with each other, and more organized phase-lock states where large clusters of neurons fire at exactly the same frequency.
+
+The period of time spent in either state differs from brain to brain. Somewhat counter-intuitively, studies have shown that the longer the spells of chaos a person’s brain tends to experience, the smarter the person usually is.
+
+------------------------------------------------------------------
+
+Lesson 7: Serendipitous discoveries can be facilitated by a shared intellectual or physical space.
+
+When ideas converge in a shared physical or intellectual space, through for example people from different disciplines meeting, creative collisions happen. Consider the modernist cultural innovations of the 1920s. Many of them were largely a result of artists, poets and writers meeting at the same Parisian cafés. Shared interactions allow ideas to diffuse, circulate and be combined randomly with others.
+
+On an individual level, facilitating such serendipitous connections is simply a matter of simultaneously introducing ideas from different disciplines into your consciousness. Innovators like Benjamin Franklin and Charles Darwin favored working on multiple projects simultaneously, in a kind of slow multitasking mode. One project would take center stage for days at a time, but linger at the back of the mind afterwards too, so connections between projects could be drawn.
+
+The philosopher John Locke understood the importance of cross-referencing as early on as 1652, when he began developing an elaborate system for indexing the content of his commonplace book, essentially a scrapbook of interesting thoughts and findings. Such books formed his repository of ideas and hunches, maturing and waiting to be connected to new ideas.
+
+On an organizational level, the key to innovation and inspiration is a network which allows hunches to mature, scatter and combine with others openly.
+
+The greatest such network in existence is, of course, the World Wide Web, where a wealth of ideas is not only available, but hyper-linked for easy connections between several disciplines.
+
+    “Some studies suggest as much as 95 percent of medical technology donated to developing countries breaks within the first five years of use.”
+
+------------------------------------------------------------------
+
+Lesson 8: Great innovations emerge from environments that are partly contaminated by error.
+
+Error is present in both the evolution of life and the innovation of great ideas, and it is not always a bad thing.
+
+Consider natural reproduction: genes are passed on from parent to offspring, providing “building instructions” for how the offspring should develop. Without occasional mutations, meaning random errors in those instructions, evolution would have long ago come to a virtual standstill. The elephant’s tusks or peacock’s feathers would have never emerged if only perfect copies of existing genes would have propagated. Mutations endow creatures with new traits. While most of them fail fantastically, these errors also produce a few winners, thus driving evolution.
+
+Similarly, Alexander Fleming only discovered penicillin because of an error: he mistakenly allowed a bacteria sample to be contaminated by mold and began to wonder what had killed the bacteria. In fact, major new scientific theories often begin as pesky little errors in the data which keep demonstrating that something in the dominant theory is wrong.
+
+Unexplained errors force us to adopt new strategies and to abandon our old assumptions.
+
+In a study, psychologist Charlan Nemeth showed two groups of people slides with various colors on them, and asked the subjects to free-associate words after seeing each slide. Here’s the twist: into the second group, Nemeth inserted actors who occasionally claimed to see different colors than the actual one shown, e.g. “green” when the slide was in fact blue.
+
+The first group came up only with the most predictable associations, e.g. “sky” for a blue slide, but the second group was far more creative. The “error” introduced into the group forced them to consider more possibilities than just the obvious ones.
+
+------------------------------------------------------------------
+
+Lesson 9: Innovation thrives on reinventing and reusing the old.
+
+Evolutionary biologists use the term expatiation to describe the phenomenon where a trait originally developed for a specific purpose is eventually used in a completely different way. Feathers, for example originally evolved as a method for temperature regulation, but today their airfoil-shape helps birds fly.
+
+Ideas are often similarly repurposed along the way. Tim Berners-Lee created the World Wide Web as a tool for scholars, but in the course of time it became a network for shopping, social networking and pornography, among other things. Johannes Gutenberg, on the other hand found an innovative use for a 1000 year-old invention: the wine screw press used to squeeze juice out of grapes. Using this ancient technology and his knowledge of metallurgy, Gutenberg created the world’s first printing press.
+
+Unconventional uses for old, even discarded items and ideas spur innovation. Nairobian cobblers make rubber sandals out of car tires, and Gustave Flaubert wrote Sentimental Education as a contortion of the bildungsroman genre. The old is reshaped into the new.
+
+Discarded spaces are also transformed through innovation. Just like the skeletal structure left behind by dead coral forms the basis of the rich and thriving ecosystem of the reef, abandoned buildings and rundown neighborhoods are often the first homes of innovative urban subcultures. Their unconventional thinking and experimentation often has no place in glitzy mainstream malls and shopping streets initially. Old buildings allow subcultures to interact and generate ideas that then diffuse and spill over into the mainstream.
+The main message of the book in two sentences:
+
+    Both evolution and innovation thrive in collaborative networks where opportunities for serendipitous connections exist. Great discoveries often evolve as slow hunches, maturing and connecting to other ideas over time.
+
+
+
+
+
+

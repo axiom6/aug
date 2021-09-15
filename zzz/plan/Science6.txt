@@ -1,0 +1,146 @@
+
+ Prin
+   Engage
+   Invent
+   Distill
+   Connect
+
+
+
+
+   "Engage":   "The space for adjacent connections where ideas flow, interact, evolve, grow and converge in novel ways."
+     "Touch":     { "desc":"High Tech, High Touch" },
+     "Space":     { "desc":"We create the space and entitle everyone for 'Good Ideas' to emerge." },
+     "Converge":  { "desc":"Ideas converge in a shared physical or intellectual space." } },
+   "Invent": "Combine concepts to create something new by seeing beyond",
+     "Hunches":   { "desc":"Ideas evolve over time as slow hunches rather than sudden breakthroughs." },
+     "Extend":    { "desc":"Technologies engineered for one purpose are extended to other purposes." },
+     "Improve":   { "desc":"We improve by learning from errors and refining at multiple levels" } },
+   "Distill": "To get to the essential meaning or ideas from information, thoughts,  and conscience experience",
+     "Accurate":  { "desc":"Insure accuracy." },
+     "Analyze":   { "desc":"Analyze change to adopt new strategies." },
+     "Exchange":      { "desc":"We share information openly with everyone." } },
+   "Connect": "Chance favors the connected mind with serendipitous inventions.",
+     "Ecosystem": { "desc":"Allows ideas to be diffused and be reconnected in novel ways." },
+     "Adjacent":  { "desc":"Possibilities emerge and become close waiting to be connected." },
+     "Effortless":   { "desc":"Ideas are allowed to move freely." } }
+
+
+          Purpose       Science          Math          Data          Machine
+
+          Discover      Research         Reflect         Explore          Learning
+
+Engage     Inquire      Observe          Conjecture      Acquire        Unsupervised
+  Touch                   Classify         Signal          Sample        Associate
+  Space                                                    Collect       Cluster
+  Converge                                                 Refine        Dimension
+                                                                         Semi
+Invent     Theory       Hypothesis       Theorum         Approach      Supervised
+  Hunches                 Inference                        Algorithms    Regress
+  Extend                  Relate                           Process       Classify
+  Improve                                                                Active
+                                                                         Simularity
+Distill    Study         Experiment      Strategy         Refine       Deep
+  Accurate                 Controls                                      Convolution
+  Analyze                  Measure                          Refine       Recurrent
+  Exchange                                                  Schema       Generative
+                                                                         Autoencoders
+
+Connect   Relevance      Analyze         Statistics        Describe     Reinforcement
+  Ecosystem                Fit             Uncertainty       Cluster      Ensemble
+  Adjacent                 Params                            Dimension    Markov
+  Effortless               Predict                           Relevance
+
+
+
+ Cognition    Develop             Model              Derive
+   Express      Review             Learning            Estimate
+   Transform    Transform           Technique          Transform
+   Compose      Compose             Predict            Proof
+   Cohesion     Repeat              Evaluate           Visual?
+
+ Educate      Apply              Simulate           Solution
+   Teach        Teach              Reinforce          Communicate
+   Course       Course             Generate           Represent
+   Impart       Impart             Context            Reasoning
+   Commune      Commune            Conclude           Connecting
+
+
+Acquire
+  Collect
+  Refine
+  Schema
+ Science Process Skills
+   Observe
+   Classify
+   Measure
+   Commune
+   Infer
+   Predict
+
+ Math Topics
+   Number Theory - Quantity
+   Algebra       - Structure
+   Geometry      - Space
+   Analysis      - Change
+
+ Math Types
+   Logicist
+     Principia
+     Peirce
+     Symbolic Logic
+   Intuitionist
+     Must Construct
+   Formalist
+     Axiom
+   Scientific
+     Exploration of the logical consequences
+
+
+   Pure
+
+       symbolic logic
+          Proof theory and constructive mathematics
+          Model theory
+          Set theory :
+
+       2.1.1.1 History and biography
+       2.1.1.2 Recreational
+       2.1.2 Number theory
+       2.1.3 Algebra
+       2.1.4 Combinatorics
+       2.1.5 Geometry
+       2.1.6 Topology
+       2.1.7 Analysis
+
+   Applied
+
+       2.2.1 Probability and statistics
+       2.2.2 Computational sciences
+       2.2.3 Mathematical physics
+       2.2.4 Other applied mathematics
+
+
+
+
+Experiment Design
+Acquisition
+Region of Interest
+Analysis
+Parameterization
+Model
+Statistics
+Visualization
+Archival and Study Comparision
+
+   Adjacent
+   Hunches
+   Ecosystem
+   Connect
+   Engage
+   Effortless
+   Exchange
+   Improve
+   Extend
+
+Machine Learning Uses:

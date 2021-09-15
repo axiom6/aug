@@ -1,0 +1,96 @@
+
+Learning
+  Feature
+  Autoencoder
+  Manifold
+  Deep
+  Sparse dictionary
+  Anomaly detection
+  Robot learning
+  Association rules
+  Inductive logic programming
+
+Decision trees
+Support-vector machines
+Regression analysis
+Bayesian networks
+Genetic
+Federated learning
+
+Neural
+
+
+
+Problems
+
+    Classification Clustering Regression Anomaly detection Data Cleaning AutoML Association rules Reinforcement learning Structured prediction Feature engineering Feature learning Online learning Semi-supervised learning Unsupervised learning Learning to rank Grammar induction
+
+Supervised learning   (classification • regression)
+
+  Decision trees Ensembles Bagging Boosting Random forest k-NN Linear regression
+  Naive Bayes Artificial neural networks  Logistic regression Perceptron
+  Relevance vector machine (RVM) Support vector machine (SVM)
+
+Clustering
+
+    BIRCH CURE Hierarchical k-means Expectation–maximization (EM)
+    DBSCAN OPTICS Mean shift
+
+Dimensionality reduction
+
+    Factor analysis CCA ICA LDA NMF PCA PGD t-SNE
+
+Structured prediction
+
+    Graphical models Bayes net Conditional random field Hidden Markov
+
+Anomaly detection
+
+    k-NN Local outlier factor
+
+Artificial neural network
+
+    Autoencoder Cognitive computing Deep learning DeepDream Multilayer perceptron
+    RNN LSTM GRU ESN Restricted Boltzmann machine GAN SOM
+    Convolutional neural network U-Net Transformer Spiking neural network
+    Memtransistor Electrochemical RAM (ECRAM)
+
+Reinforcement learning
+
+    Q-learning SARSA Temporal difference (TD)
+
+Theory
+
+    Bias–variance tradeoff Computational learning theory Empirical risk minimization Occam learning PAC learning Statistical learning VC theor
+
+
+ Approaches
+
+    4.1 Supervised learning
+    4.2 Unsupervised learning
+    4.3 Semi-supervised learning
+    4.4 Reinforcement learning
+    4.5 Dimensionality reduction
+    4.6 Other types
+    4.7 Models
+    4.8 Training models
+
+ History and relationships to other fields
+
+    2.1 Artificial intelligence
+    2.2 Data mining
+    2.3 Optimization
+    2.4 Generalization
+    2.5 Statistics
+
+ Application
+
+    Self-driving autonomous cars
+    Speech translation
+    Face recognition
+    Sentiment analysis
+    Social media analysis
+    Financial trading
+    Fraud detection
+    Product recommendation
+    Medical diagnosis and predictions

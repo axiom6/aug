@@ -40,7 +40,7 @@
         "desc":"To get to the essential meaning or ideas from information, thoughts,  and conscience experience",
         "Accurate":  { "desc":"Insure accuracy." },
         "Analyze":   { "desc":"Analyze change to adopt new strategies." },
-        "Open":      { "desc":"We share information openly with everyone." } },
+        "Exchange":  { "desc":"We share information openly with everyone." } },
       "Connect": { "dir":"south", "name":"Connect","icon":"fab fa-connectdevelop",    "hsv":[ 60,90,90], "dim":true,
         "desc":"Chance favors the connected mind with serendipitous inventions.",
         "Ecosystem": { "desc":"Allows ideas to be diffused and be reconnected in novel ways." },

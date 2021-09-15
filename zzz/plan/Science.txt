@@ -19,6 +19,14 @@
    Impart       Impart             Context            Reasoning
    Commune      Commune            Conclude           Connecting
 
+ Science Process Skills
+   Observe
+   Classify
+   Measure
+   Commune
+   Infer
+   Predict
+
  Math Topics
    Number Theory - Quantity
    Algebra       - Structure

@@ -7,7 +7,7 @@
       "Signal":       { "icon":"fas fa-signal",     "desc":""  },
       "Train":       { "icon":"fa-balance-scale",  "desc":""  },
       "Uncertainty":  { "icon":"fas fa-low-vision", "desc":""  } },
-    "Method":   { "dir":"north","icon":"fas fa-sliders-h",   "hsv":[90,90,90],
+    "Approach":   { "dir":"north","icon":"fas fa-sliders-h",   "hsv":[90,90,90],
       "desc":"Plan an approach",
       "Applications": { "icon":"fas fa-wrench", "desc":""  },
       "Inventory":   { "icon":"fas fa-warehouse", "desc":""  },
