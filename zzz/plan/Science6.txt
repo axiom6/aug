@@ -40,7 +40,7 @@ Invent     Theory       Hypothesis       Theorum         Approach      Supervise
   Extend                  Relate                           Process       Classify
   Improve                                                                Active
                                                                          Simularity
-Distill    Study         Experiment      Strategy         Refine       Deep
+Distill    Study         Experiment      Strategy         Refine       Neural
   Accurate                 Controls                                      Convolution
   Analyze                  Measure                          Refine       Recurrent
   Exchange                                                  Schema       Generative
