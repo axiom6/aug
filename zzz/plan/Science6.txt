@@ -1,55 +1,73 @@
 
- Prin
-   Engage
-   Invent
-   Distill
-   Connect
+     Profile
+       Estimate
+         Supervised Versus Unsupervised Learning
+         Regression Versus Classification Problems
+       Assess
+         Fit
+         Bias Variance
+         Classify
+       Methods
+         linear / NonLinear
+
+     Select
+       Parameters
+         Bias/Variance
+         Bayesian
+       Validation
+         Cross
+       Graphs
+         Markov
+         Structore
+         Hidden Nodes
+
+     Methods
+       Regress
+         Kernal
+       Classify
+       Additive
+         Resample
+         Basis
+         Kernel
+         Trees
+           Decision
+           Bagging
+           Random Forests
+           Boosting
+           Ensemble
+       Support Vector Machines
+       Prototype
+       Feature
+
+     Unsupervised
+       Dimension
+       Cluster
 
 
 
+          Purpose       Science          Statistics      Data
 
-   "Engage":   "The space for adjacent connections where ideas flow, interact, evolve, grow and converge in novel ways."
-     "Touch":     { "desc":"High Tech, High Touch" },
-     "Space":     { "desc":"We create the space and entitle everyone for 'Good Ideas' to emerge." },
-     "Converge":  { "desc":"Ideas converge in a shared physical or intellectual space." } },
-   "Invent": "Combine concepts to create something new by seeing beyond",
-     "Hunches":   { "desc":"Ideas evolve over time as slow hunches rather than sudden breakthroughs." },
-     "Extend":    { "desc":"Technologies engineered for one purpose are extended to other purposes." },
-     "Improve":   { "desc":"We improve by learning from errors and refining at multiple levels" } },
-   "Distill": "To get to the essential meaning or ideas from information, thoughts,  and conscience experience",
-     "Accurate":  { "desc":"Insure accuracy." },
-     "Analyze":   { "desc":"Analyze change to adopt new strategies." },
-     "Exchange":      { "desc":"We share information openly with everyone." } },
-   "Connect": "Chance favors the connected mind with serendipitous inventions.",
-     "Ecosystem": { "desc":"Allows ideas to be diffused and be reconnected in novel ways." },
-     "Adjacent":  { "desc":"Possibilities emerge and become close waiting to be connected." },
-     "Effortless":   { "desc":"Ideas are allowed to move freely." } }
+          Discover      Research         Reflect         Explore
 
+Engage     Inquire      Observe          Profile         Acquire
+  Touch                   Question         Estimate        Sample
+  Space                   Assign           Assess          Collect
+  Converge                Instrument       Methods         Refine
 
-          Purpose       Science          Math          Data          Machine
+Invent     Theory       Hypothesis       Select           Neural
+  Hunches                 Conceptual       Parameters       Train
+  Extend                  Inference        Validation       Tune
+  Improve                 Relate           Topology         Consider
 
-          Discover      Research         Reflect         Explore          Learning
+Distill    Study         Experiment      Method           Unsupervised
+  Accurate                 Controls        Regress          Association
+  Analyze                  Measure         Classify         Cluster
+  Exchange                 Outcome         Additive         Dimension
 
-Engage     Inquire      Observe          Conjecture      Acquire        Unsupervised
-  Touch                   Classify         Signal          Sample        Associate
-  Space                                                    Collect       Cluster
-  Converge                                                 Refine        Dimension
-                                                                         Semi
-Invent     Theory       Hypothesis       Theorum         Approach      Supervised
-  Hunches                 Inference                        Algorithms    Regress
-  Extend                  Relate                           Process       Classify
-  Improve                                                                Active
-                                                                         Simularity
-Distill    Study         Experiment      Strategy         Refine       Neural
-  Accurate                 Controls                                      Convolution
-  Analyze                  Measure                          Refine       Recurrent
-  Exchange                                                  Schema       Generative
-                                                                         Autoencoders
-
-Connect   Relevance      Analyze         Statistics        Describe     Reinforcement
-  Ecosystem                Fit             Uncertainty       Cluster      Ensemble
-  Adjacent                 Params                            Dimension    Markov
-  Effortless               Predict                           Relevance
+Connect   Relevance      Analysis         Summary         Describe
+  Ecosystem                Fit              Uncertainty     Feature
+  Adjacent                 Params           Eigenvalue      Schema
+  Effortless               Graphs           Evaluate        Metadata
 
 
 
@@ -66,10 +84,6 @@ Connect   Relevance      Analyze         Statistics        Describe     Reinforc
    Commune      Commune            Conclude           Connecting
 
 
-Acquire
-  Collect
-  Refine
-  Schema
  Science Process Skills
    Observe
    Classify
@@ -144,3 +158,24 @@ Archival and Study Comparision
    Extend
 
 Machine Learning Uses:
+
+Engage     Inquire      Observe          Conjecture      Acquire        Unsupervised
+  Touch                   Classify         Signal          Sample        Associate
+  Space                   Instrument                       Collect
+  Converge                                                 Refine
+                                                                         Semi
+Invent     Theory       Hypothesis       Theorum         Approach      Supervised
+  Hunches                 Inference                        Algorithms    Regress
+  Extend                  Relate                           Process       Classify
+  Improve                                                                Active
+                                                                         Simularity
+Distill    Study         Experiment      Strategy         Refine       Neural
+  Accurate                 Controls                                      Convolution
+  Analyze                  Measure                          Refine       Recurrent
+  Exchange                                                  Schema       Generative
+                                                                         Autoencoders
+
+Connect   Relevance      Analysis         Statistics        Describe     Reinforcement
+  Ecosystem                Fit              Uncertainty      Cluster      Ensemble
+  Adjacent                 Params           Eigenvalues      Dimension    Markov
+  Effortless               Predict                           Relevance

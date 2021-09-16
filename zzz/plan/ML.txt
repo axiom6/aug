@@ -18,6 +18,51 @@ Genetic
 Federated learning
 
 Neural
+  Feed Forward FFNN
+    Radial Basis Function RBF
+      FFNNs with radial basis
+    Extreme Learning Machines ELM
+      basically FFNNs with random connections
+    Deep residual networks DRN
+      very deep FFNNs
+    Recurrent Neural Networks  RNN
+      FFNNs with a time twist
+      Echo State Networks ESN
+        are yet another different type of RNN
+  Long / Short Term Memory  LSTM
+    Neural Turing machines NTM
+      an abstraction of LSTMs
+      Differentiable Neural Computers DNC
+        enhanced NTM with scalable memory
+    Gated Recurrent Units GRU
+      a slight variation on LSTM
+  Bidirectional
+    Recurrent                BiRNN
+    Long / Short Term Memorn BiLSTM
+    Gated Recurrent Units    BiGRU
+  Auto Encoders              AE
+    somewhat similar to FFNNs
+    Variational              VAE
+    Denoising                DAE
+    Sparse                   SAE
+  Markov Chains              MC
+    Discrete Time            DTMC
+  Hopfield Network           HN
+  Boltzmann Machines         BM
+    Restricted               RBN
+    Deep Belief Networks     DBN
+      stacked architectures of mostly RBMs or VAE
+  Convolutional Neural Networks CNN
+    Deep                        DCNN
+    Deconvolutional Networks      DN
+      combine with FFNN
+    Deep convolutional inverse graphics networks DCIGN
+  Generative Adversarial Networks GAN
+  Liquid State Machines LSM
+  Capsule Networks CapsNet
+  Kohonen networks KN
+    also self organising (feature) map, SOM, SOFM)
+  Attention networks AN
 
 
 
