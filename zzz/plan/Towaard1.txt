@@ -1,0 +1,125 @@
+In the first article of this series, I had touched upon key concepts and processes of Data Science. In this article, I will dive in a bit deeper. First, I will define what is Statistical learning. Then, we will dive into key concepts in Statistical learning. Believe me; it is simple.
+What is Statistical Learning?
+
+As per Wikipedia, Statistical learning theory is a framework for machine learning drawing from the fields of statistics and functional analysis.
+
+Machine learning is a manifestation of statistical learning techniques implemented through software applications.
+
+What does this mean in practice? Statistical learning refers to tools and techniques that enable us to understand data better. Let’s take a step back here. What do we mean by understanding the data?
+
+In the context of Statistical learning, there are two types of data:
+
+    Data that can be controlled directly a.k.a independent variables.
+    Data that cannot be controlled directly a.k.a dependent variables.
+
+The data that can’t be controlled i.e. dependent variables need to predicted or estimated.
+
+Understanding the data better is to figure out more about the dependent variable in terms of independent variables. Let me illustrate it with an example:
+
+Say that I want to measure sales based on the advertising budget I allocate for TV, Radio, and Print. I can control the budget that I can assign to TV, Radio, and Print. What I can’t control is how they will impact the sales. I want to express data that I can’t control (sales) as a function of data that I can control (advertising budget). I want to uncover this hidden relationship.
+
+Statistical learning reveals hidden data relationships. Relationships between the dependent and the independent data.
+Parameters and Models
+
+One of the famous business models in operations management is the ITO model. It stands for Input-Transformation-Output model. It is simple. There are inputs. These inputs undergo some transformations. An output is created.
+
+Statistical learning also applies a similar concept. There are input data. Input data is transformed. The output, something that needs to be predicted or estimated, is generated.
+
+The transformation engine is called as a Model. These are functions that estimate the output.
+
+The transformation is mathematical. Mathematical ingredients are added to the input data to estimate the output. These ingredients are called as the Parameters.
+
+Let’s walk through an example:
+
+What determines someone’s income? Say that income is a determined by one’s year’s education and years of experience. A model that estimate’s the income can be something like this:
+
+income = c + β0 x education + β1 x experience
+
+β0 and β1 are parameters that express income as a function of education and experience.
+
+Education and experience are controllable variables. These controllable variables have different synonyms. They are called as independent variables. They are also called as features.
+
+Income is uncontrollable variable. They are called as targets.
+Training and Testing
+
+What do we do when we have to prepare for an examination? Study. Learn. Imbibe. Take notes. Practice mock papers. These are the tools to learn and to prepare for the unseen test.
+
+Machine Learning also uses a similar concept for learning. Data is finite. The available data needs to be used prudently. The model built needs to be validated. The way to validate it is the following:
+
+    Split the data into two parts.
+    Use one part for training. Let the model learn from it. Let the model see the data. This dataset is called as the Training Data.
+    Use the other part for testing the model. Give the model “a test” on the unseen data. This dataset is called as the Testing Data.
+
+In a competitive examination, if the preparation is adequate, if the learning is sound then the performance on the test is expected to be satisfactory as well. Similarly, in a machine learning, if the model has learned well from the training data, it will perform well on the test data.
+
+Similarly, in machine learning, once the model is tested on the test dataset, the performance of the model is evaluated. It is assessed based on how close it has estimated the output to the actual value.
+Variance and Bias
+
+George Box, a famous British statistician, once quoted:
+
+    “All models are wrong; some are useful.”
+
+No model is 100% accurate. All models have errors. These errors emanate from two sources:
+
+    Bias
+    Variance
+
+Let me attempt to explain this using an analogy.
+
+Raj, a seven-year-old kid, was just introduced to the concept of multiplication. He had mastered the tables of 1 and 2. His next challenge was to learn the table of 3. He was very excited and started to practice the multiplication table of 3. His table is something like this:
+
+    3 x 1 = 4
+    3 x 2 = 7
+    3 x 3 = 10
+    3 x 4 = 13
+    3 x 5 = 16
+
+Bob, Raj’s classmate, was on the same boat. His table looked something like this:
+
+    3 x 1 = 5
+    3 x 2 = 9
+    3 x 3 = 18
+    3 x 4 = 24
+    3 x 5 = 30
+
+Let us examine the multiplication models created by Bob and Raj from a machine learning perspective.
+
+    Raj’s model has an invalid assumption. It assumes that the operation of multiplication implies to add one after the result. This assumption introduces the bias error. The assumption is consistent i.e. add 1 to the output. This means that Raj’s model has a low bias.
+    Raj’s model results in output that is consistently 1 number away from the actual. This means that his model has a low variance.
+    Bob’s model’s output is all over the place. His model outputs deviates a lot from the actual value. There is no consistent pattern for deviation. Bob’s model has high bias and high variation.
+
+The above example is a crude explanation of the important concept of variance and bias.
+
+    Bias is the model’s tendency to consistently learn the wrong thing by not taking into account all the information in the data.
+    Variance is the model’s tendency to acquire random things irrespective of the real signal.
+
+Bias-Variance Trade-Off
+
+I have a school friend who was an amazing student. He was relatively weaker in Mathematics. The way he used to study Mathematics was through rote learning. He learned and memorized the Mathematical problems. He could “recite” them very well.
+
+The challenge was the following: The examination problems were not the same problem that he memorized. The problems were a generalized application of the Mathematical concept. Obviously, he had a tough time clearing the exams.
+
+Machine learning problems follow the same pattern. If the model learns too much about a particular data set and tries to apply the same model to the unseen data, it will have a high error. Learning too much from a given dataset is called as overfitting. It has not generalized the learning to be usefully applied to unseen data. On the other end of the spectrum, learning too little results in underfitting. The model is so poor that it can’t even learn from the given data.
+
+Albert Einstein summarizes this concept succinctly. He said:
+
+    “Everything should be made as simple as possible, but no simpler.”
+
+A constant endeavor in Machine learning problem is to strike a right balance. Create a model that is not too complex and not too simple. Create a generalized model. Create a model that is relatively inaccurate but useful.
+
+    A model that overfits is complex. It performs very well on training data. It performs poorly on testing data.
+    A model that underfits is too simplistic. It doesn’t perform will on both training and testing data.
+    A good model balances underfitting and overfitting. It generalizes well. It is as simple as possible but no simpler.
+
+This balancing act is called bias-variance trade-off.
+Conclusion
+
+Statistical learning is the building block of complex machine learning applications. This article introduces some of the fundamental and essential concepts of Statistical learning. Top 5 takeaways from this article are:
+
+    Statistical learning reveals hidden data relationships. Relationships between the dependent and the independent data.
+    Model is the transformation engine. Parameters are the ingredients that enable the transformation.
+    A model uses the training data to learn. A model uses the testing data to evaluate.
+    All models are wrong; some are useful.
+    Bias-variance trade-off is a balancing act. Balance to find optimal model. Balance to find the sweet spot.
+
+We will delve deeper into specifics of machine learning models in subsequent articles of this series.

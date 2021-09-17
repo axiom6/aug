@@ -8,7 +8,11 @@
          Bias Variance
          Classify
        Methods
-         linear / NonLinear
+         Objective Function
+         Loss Function
+
+         linear
+         NonLinear
 
      Select
        Parameters
@@ -16,12 +20,14 @@
          Bayesian
        Validation
          Cross
+         Regularization
+         Gradient
        Graphs
          Markov
          Structore
          Hidden Nodes
 
-     Methods
+     Supervised
        Regress
          Kernal
        Classify
@@ -35,9 +41,10 @@
            Random Forests
            Boosting
            Ensemble
-       Support Vector Machines
-       Prototype
-       Feature
+         Support Vector Machines
+         Anomily
+         Prototype
+         Feature
 
      Unsupervised
        Dimension
@@ -55,19 +62,20 @@ Engage     Inquire      Observe          Profile         Acquire
   Converge                Instrument       Methods         Refine
 
 Invent     Theory       Hypothesis       Select           Neural
-  Hunches                 Conceptual       Parameters       Train
-  Extend                  Inference        Validation       Tune
-  Improve                 Relate           Topology         Consider
+  Hunches                 Conceptual       Parameters       Notebook
+  Extend                  Inference        Validation       Train
+  Improve                 Relate           Graph            Tune
 
-Distill    Study         Experiment      Method           Unsupervised
-  Accurate                 Controls        Regress          Association
-  Analyze                  Measure         Classify         Cluster
-  Exchange                 Outcome         Additive         Dimension
+Distill    Study         Experiment      Describe          Supervised
+  Accurate                 Controls        Feature           Regress
+  Analyze                  Measure         Schema            Classify
+  Exchange                 Outcome         Metadata          Additive
 
-Connect   Relevance      Analysis         Summary         Describe
-  Ecosystem                Fit              Uncertainty     Feature
-  Adjacent                 Params           Eigenvalue      Schema
-  Effortless               Graphs           Evaluate        Metadata
+Connect   Relevance      Analysis         Summary          Unsupervised
+  Ecosystem                Fit              Uncertainty      Association
+  Adjacent                 Params           Eigenvalue       Cluster
+  Effortless               Visual           Evaluate         Dimension
+
 
 
 
