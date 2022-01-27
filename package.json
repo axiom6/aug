@@ -33,7 +33,7 @@
     "pegjs": "^0.10.0",
     "pegjs-backtrace": "^0.2.0",
     "tabulator-tables": "^4.9.3",
-    "three": "^0.132.2",
+    "three": "^0.137.0",
     "troika-three-text": "^0.42.0",
     "vue": "^3.2.6",
     "vue-router": "^4.0.11",
