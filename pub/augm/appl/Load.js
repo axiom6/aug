@@ -20,7 +20,7 @@ Load = class Load {
       case 'Wood':
         return this.lazy('../../../vue/augm/wood/Wood.vue');
       default:
-        return this.lazy('../../../vue/augm/appl/Appl.vue');
+        return this.lazy('../../../vue/augm/appl/Augm.vue');
     }
   }
 
@@ -34,4 +34,4 @@ Load = class Load {
 
 export default Load;
 
-//# sourceMappingURL=Load.js.map
+//# sourceMappingURL=Lazy.js.map

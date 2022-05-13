@@ -54,7 +54,7 @@ let Comp = {
     let   height    = 0;
     const debug     = false;
     const inovComps = ['Info','Know','Wise'];
-    const myRows    = ref( nav.getTabs('Rows') );
+    let   myRows    = nav.getTabs('Rows');
     if( debug ) { console.log( 'Comp.setup()', { pageKey:pageKey.value } ); }
 
     const tabPages = (compArg) => {
@@ -106,12 +106,13 @@ let Comp = {
     const onRows = () => {
       const myKey = compKey.value;
       let                   page = nav.getTabs('Info');
-      let                   inov = 'Engineer'
-      if( myKey==='Know') { page = nav.getTabs('Know'); inov = 'Design';   }
+      let                   inov = 'Software'
+      if( myKey==='Know') { page = nav.getTabs('Know'); inov = 'Purpose';   }
       if( myKey==='Wise') { page = nav.getTabs('Wise'); inov = 'Conceive'; }
       if( nav.inArray( myKey, inovComps ) ) {
-        myRows['value']['Plane'].name = myKey;
-        myRows['value']['Plane'].icon = page[inov].icon; }  }
+        console.log( { mykey:myKey, page:page, inov:inov,  myRows:myRows } )
+        myRows['Plane'].name = myKey;
+        myRows['Plane'].icon = page[inov].icon; }  }
 
     const onNav = (obj) => {
       if( nav.isMyNav(obj,'Comp') ) {

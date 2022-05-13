@@ -22,6 +22,7 @@ import WiseJson from '../../../data/muse/Wise.json'
 import SoftwareJson from '../../../data/inno/Software.json'
 import DataScienceJson from '../../../data/inno/DataScience.json'
 import ScienceJson from '../../../data/inno/Science.json'
+import RuleJson from '../../../data/inno/Rule.json'
 import MathJson from '../../../data/inno/Math.json'
 import TestJson from '../../../data/muse/Test.json'
 
@@ -81,6 +82,7 @@ class Muse
     DataScience: { url:'inno/DataScience.json', data:DataScienceJson, refine:true }
     Science:     { url:'inno/Science.json',     data:ScienceJson,     refine:true }
     Math:        { url:'inno/Math.json',        data:MathJson,        refine:true }
+    Rule:        { url:'inno/Rule.json',        data:RuleJson,        refine:true }
     Test:        { url:'muse/Test.json',        data:TestJson,        refine:true } }
 
   # Toc.vue components and routes with no west or east directions
@@ -156,6 +158,7 @@ class Muse
     Info: {
       Product:     { title:'Product',      key:"Product",     show:true,  icon:"fas fa-th"      },
       Software:    { title:'Software',     key:"Software",    show:false, icon:"fas fa-codepen" },
+      Rule    :    { title:'Rule',         key:"Rule",        show:false, icon:"fas fa-compass" },
       DataScience: { title:'Data Science', key:"DataScience", show:false, icon:"fas fa-table"   } }
     Know: {
       Purpose:{ title:'Purpose', key:"Purpose", show:true,  icon:"fas fa-university"},

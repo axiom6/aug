@@ -44,6 +44,8 @@ import DataScienceJson from '../../../data/inno/DataScience.json';
 
 import ScienceJson from '../../../data/inno/Science.json';
 
+import RuleJson from '../../../data/inno/Rule.json';
+
 import MathJson from '../../../data/inno/Math.json';
 
 import TestJson from '../../../data/muse/Test.json';
@@ -218,6 +220,11 @@ Muse = (function() {
       data: MathJson,
       refine: true
     },
+    Rule: {
+      url: 'inno/Rule.json',
+      data: RuleJson,
+      refine: true
+    },
     Test: {
       url: 'muse/Test.json',
       data: TestJson,
@@ -342,6 +349,12 @@ Muse = (function() {
         key: "Software",
         show: false,
         icon: "fas fa-codepen"
+      },
+      Rule: {
+        title: 'Rule',
+        key: "Rule",
+        show: false,
+        icon: "fas fa-compass"
       },
       DataScience: {
         title: 'Data Science',
