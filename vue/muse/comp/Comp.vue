@@ -106,9 +106,9 @@ let Comp = {
     const onRows = () => {
       const myKey = compKey.value;
       let                   page = nav.getTabs('Info');
-      let                   inov = 'Software'
-      if( myKey==='Know') { page = nav.getTabs('Know'); inov = 'Purpose';   }
-      if( myKey==='Wise') { page = nav.getTabs('Wise'); inov = 'Conceive'; }
+      let                   inov = 'Info'
+      if( myKey==='Know') { page = nav.getTabs('Know'); inov = 'Know'; }
+      if( myKey==='Wise') { page = nav.getTabs('Wise'); inov = 'Wise'; }
       if( nav.inArray( myKey, inovComps ) ) {
         console.log( { mykey:myKey, page:page, inov:inov,  myRows:myRows } )
         myRows['Plane'].name = myKey;

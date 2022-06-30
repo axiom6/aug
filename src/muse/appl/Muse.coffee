@@ -20,9 +20,8 @@ import InfoJson from '../../../data/muse/Info.json'
 import KnowJson from '../../../data/muse/Know.json'
 import WiseJson from '../../../data/muse/Wise.json'
 import SoftwareJson from '../../../data/inno/Software.json'
-import DataScienceJson from '../../../data/inno/DataScience.json'
+import DataJson     from '../../../data/inno/Data.json'
 import ScienceJson from '../../../data/inno/Science.json'
-import RuleJson from '../../../data/inno/Rule.json'
 import MathJson from '../../../data/inno/Math.json'
 import TestJson from '../../../data/muse/Test.json'
 
@@ -79,10 +78,9 @@ class Muse
     Know:        { url:'muse/Know.json',        data:KnowJson,        refine:true }
     Wise:        { url:'muse/Wise.json',        data:WiseJson,        refine:true }
     Software:    { url:'inno/Software.json',    data:SoftwareJson,    refine:true }
-    DataScience: { url:'inno/DataScience.json', data:DataScienceJson, refine:true }
+    Data:        { url:'inno/Data.json',        data:DataJson,        refine:true }
     Science:     { url:'inno/Science.json',     data:ScienceJson,     refine:true }
     Math:        { url:'inno/Math.json',        data:MathJson,        refine:true }
-    Rule:        { url:'inno/Rule.json',        data:RuleJson,        refine:true }
     Test:        { url:'muse/Test.json',        data:TestJson,        refine:true } }
 
   # Toc.vue components and routes with no west or east directions
@@ -107,7 +105,7 @@ class Muse
     Muse.build  = new Build( Muse.Batch, Muse.komps )
     Muse.cache  = new Cache( Muse.stream ) if Muse.mode is 'production'
     tester.setOptions( { testing:true, archive:true, verbose:false, debug:false } )
-    Access.buildInnov( Muse.Batch, 'DataScience',   'Info' )
+    Access.buildInnov( Muse.Batch, 'Data',   'Info' )
     Access.mergePracs( Muse.Batch, 'Prin', ['Info','Know','Wise'] ) # 'Data'
     Muse.mergeCols()
     try            # A lot can go wrong with vue3 initialization so trap errors
@@ -156,16 +154,15 @@ class Muse
       Topics: { title:'Topics', key:'Topics', show:true  },
       Texts:  { title:'Texts',  key:'Texts',  show:false } }
     Info: {
-      Product:     { title:'Product',      key:"Product",     show:true,  icon:"fas fa-th"      },
+      Info:     { title:'Info',      key:"Info",     show:true,  icon:"fas fa-th"      },
       Software:    { title:'Software',     key:"Software",    show:false, icon:"fas fa-codepen" },
-      Rule    :    { title:'Rule',         key:"Rule",        show:false, icon:"fas fa-compass" },
-      DataScience: { title:'Data Science', key:"DataScience", show:false, icon:"fas fa-table"   } }
+      Data:        { title:'Data',         key:"Data",        show:false, icon:"fas fa-table"   } }
     Know: {
-      Purpose:{ title:'Purpose', key:"Purpose", show:true,  icon:"fas fa-university"},
+      Know:{ title:'Know', key:"Know", show:true,  icon:"fas fa-university"},
       Science:{ title:'Science', key:"Science", show:false, icon:"fas fa-flask" },
       Math:{    title:'Math',    key:"Math",    show:false, icon:"fas fa-calculator"} }
     Wise: {
-      Conceive:{ title:'Conceive', key:"Conceive", show:true, icon:"fas fa-yin-yang"} }
+      Wise:{ title:'Wise', key:"Wise", show:true, icon:"fas fa-yin-yang"} }
     Rows: {
       Plane:{ name:'Info',  dir:'cm', icon:"fas fa-th" },
       Learn:{ name:'Learn', dir:'le', icon:"fas fa-graduation-cap"},

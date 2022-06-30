@@ -2240,6 +2240,50 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/node_modules\/@vue\/reactivity\/dist\/reactivity.esm-bundler.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/node_modules\/@vue\/reactivity\/dist\/reactivity.esm-bundler-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/node_modules\/@vue\/runtime-core\/dist\/runtime-core.esm-bundler.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/node_modules\/@vue\/runtime-core\/dist\/runtime-core.esm-bundler-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/node_modules\/@vue\/runtime-dom\/dist\/runtime-dom.esm-bundler.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/node_modules\/@vue\/runtime-dom\/dist\/runtime-dom.esm-bundler-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/node_modules\/@vue\/shared\/dist\/shared.esm-bundler.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/node_modules\/@vue\/shared\/dist\/shared.esm-bundler-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/node_modules\/d3-color\/src\/color.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -3494,6 +3538,25 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/node_modules\/vue\/dist\/vue.runtime.esm-bundler.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 0,
+      "oA" : 1,
+      "oAP" : "\/node_modules\/vue\/dist\/vue.runtime.esm-bundler-min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/package copy.json" : {
+      "ft" : 524288,
+      "oA" : 1,
+      "oAP" : "\/package copy-min.json",
+      "oF" : 0,
+      "oO" : 0,
+      "oS" : 1
+    },
     "\/package-lock.json" : {
       "ft" : 524288,
       "oA" : 1,
@@ -3931,6 +3994,20 @@
       "oA" : 0,
       "oAP" : "\/src\/augm\/math\/par\/gram.sh",
       "oF" : 0
+    },
+    "\/src\/augm\/math\/ptn\/Array.ts" : {
+      "cDF" : 0,
+      "ft" : 128,
+      "jxM" : 0,
+      "ma" : 0,
+      "mi" : 0,
+      "moR" : 0,
+      "moT" : 2,
+      "oA" : 0,
+      "oAP" : "\/pub\/augm\/math\/ptn\/Array.js",
+      "oF" : 0,
+      "rC" : 0,
+      "tEC" : 0
     },
     "\/src\/augm\/math\/ptn\/DiffEQ.coffee" : {
       "ft" : 32,
@@ -6842,9 +6919,9 @@
       "autoOutputAction" : 0,
       "autoOutputPathFilenamePattern" : "*.js",
       "autoOutputPathRelativePath" : "\/js",
-      "autoOutputPathReplace1" : "",
-      "autoOutputPathReplace2" : "",
-      "autoOutputPathStyle" : 0,
+      "autoOutputPathReplace1" : "src",
+      "autoOutputPathReplace2" : "pub",
+      "autoOutputPathStyle" : 3,
       "createDeclarationFile" : 0,
       "jsxMode" : 0,
       "minifierStyle" : 0,

@@ -33,7 +33,7 @@ class Nav extends Mix
     @routeLast  = 'none'
     @museLevels = ['Comp','Prac','Disp']
     @museComps  = ['Home','Prin','Info','Know','Wise','Cube','Test']
-    @museInovs  = ['Info','Know','Wise','Soft','Data','Scie','Math']
+    @museInovs  = ['Info','Know','Wise','Software','Data','Science','Math']
     @musePlanes = ['Info','Know','Wise']
 
   # Special publsher for Vizu side bar

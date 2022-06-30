@@ -40,11 +40,9 @@ import WiseJson from '../../../data/muse/Wise.json';
 
 import SoftwareJson from '../../../data/inno/Software.json';
 
-import DataScienceJson from '../../../data/inno/DataScience.json';
+import DataJson from '../../../data/inno/Data.json';
 
 import ScienceJson from '../../../data/inno/Science.json';
-
-import RuleJson from '../../../data/inno/Rule.json';
 
 import MathJson from '../../../data/inno/Math.json';
 
@@ -116,7 +114,7 @@ Muse = (function() {
         verbose: false,
         debug: false
       });
-      Access.buildInnov(Muse.Batch, 'DataScience', 'Info');
+      Access.buildInnov(Muse.Batch, 'Data', 'Info');
       Access.mergePracs(Muse.Batch, 'Prin', [
         'Info',
         'Know',
@@ -205,9 +203,9 @@ Muse = (function() {
       data: SoftwareJson,
       refine: true
     },
-    DataScience: {
-      url: 'inno/DataScience.json',
-      data: DataScienceJson,
+    Data: {
+      url: 'inno/Data.json',
+      data: DataJson,
       refine: true
     },
     Science: {
@@ -218,11 +216,6 @@ Muse = (function() {
     Math: {
       url: 'inno/Math.json',
       data: MathJson,
-      refine: true
-    },
-    Rule: {
-      url: 'inno/Rule.json',
-      data: RuleJson,
       refine: true
     },
     Test: {
@@ -338,9 +331,9 @@ Muse = (function() {
       }
     },
     Info: {
-      Product: {
-        title: 'Product',
-        key: "Product",
+      Info: {
+        title: 'Info',
+        key: "Info",
         show: true,
         icon: "fas fa-th"
       },
@@ -350,23 +343,17 @@ Muse = (function() {
         show: false,
         icon: "fas fa-codepen"
       },
-      Rule: {
-        title: 'Rule',
-        key: "Rule",
-        show: false,
-        icon: "fas fa-compass"
-      },
-      DataScience: {
-        title: 'Data Science',
-        key: "DataScience",
+      Data: {
+        title: 'Data',
+        key: "Data",
         show: false,
         icon: "fas fa-table"
       }
     },
     Know: {
-      Purpose: {
-        title: 'Purpose',
-        key: "Purpose",
+      Know: {
+        title: 'Know',
+        key: "Know",
         show: true,
         icon: "fas fa-university"
       },
@@ -384,9 +371,9 @@ Muse = (function() {
       }
     },
     Wise: {
-      Conceive: {
-        title: 'Conceive',
-        key: "Conceive",
+      Wise: {
+        title: 'Wise',
+        key: "Wise",
         show: true,
         icon: "fas fa-yin-yang"
       }
